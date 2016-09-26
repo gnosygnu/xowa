@@ -28,9 +28,9 @@ public class Xowd_category_itm {
 	public int Count_pages()	{return count_pages;} private int count_pages;
 	public int Count_by_tid(byte tid) {
 		switch (tid) {
-			case Xoa_ctg_mgr.Tid_subc: return count_subcs;
-			case Xoa_ctg_mgr.Tid_page: return count_pages;
-			case Xoa_ctg_mgr.Tid_file: return count_files;
+			case Xoa_ctg_mgr.Tid__subc: return count_subcs;
+			case Xoa_ctg_mgr.Tid__page: return count_pages;
+			case Xoa_ctg_mgr.Tid__file: return count_files;
 			default: throw Err_.new_unhandled(tid);
 		}		
 	} 

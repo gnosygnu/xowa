@@ -21,6 +21,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.files.commons.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.apps.wms.apis.*;
+import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_lib_title implements Scrib_lib {
 	public Scrib_lib_title(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;

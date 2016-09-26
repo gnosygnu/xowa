@@ -28,6 +28,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 	private final    Xomp_prog_mgr prog_mgr;
 	private final    Xomp_page_pool page_pool;
 	private final    Xof_orig_wkr file_orig_wkr;
+	private final    Xomp_ns_ord_mgr ns_ord_mgr;
 
 	// cfg vars
 	private final    Xomp_parse_mgr_cfg cfg;
@@ -42,10 +43,11 @@ public class Xomp_parse_wkr implements Gfo_invk {
 
 	private final    List_adp list = List_adp_.New(); private int list_idx = 0, list_len = 0;		
 	private int done_count; private long done_time;
-	public Xomp_parse_wkr(Xomp_parse_mgr mgr, Xomp_parse_mgr_cfg cfg, Xomp_mgr_db mgr_db, Xomp_page_pool page_pool, Xomp_prog_mgr prog_mgr, Xof_orig_wkr file_orig_wkr, Xowe_wiki wiki, int uid) {
+	public Xomp_parse_wkr(Xomp_parse_mgr mgr, Xomp_parse_mgr_cfg cfg, Xomp_mgr_db mgr_db, Xomp_page_pool page_pool, Xomp_prog_mgr prog_mgr, Xof_orig_wkr file_orig_wkr, Xomp_ns_ord_mgr ns_ord_mgr, Xowe_wiki wiki, int uid) {
 		// mgr vars
 		this.mgr = mgr; this.mgr_db = mgr_db;
 		this.page_pool = page_pool; this.prog_mgr = prog_mgr; this.file_orig_wkr = file_orig_wkr;
+		this.ns_ord_mgr = ns_ord_mgr;
 
 		// cfg vars
 		this.cfg = cfg;
@@ -67,7 +69,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 		wiki.File__orig_mgr().Wkrs__set(file_orig_wkr);
 		wiki.File_mgr().Fsdb_mode().Tid__v2__mp__y_();
 
-		// disable categories b/c categories will be retrieved at run-time
+		// enable disable categories according to flag
 		wiki.Html_mgr().Page_wtr_mgr().Wkr(gplx.xowa.wikis.pages.Xopg_page_.Tid_read).Ctgs_enabled_(cfg.Hdump_catboxs());
 
 		// enable lnki_temp
@@ -84,14 +86,15 @@ public class Xomp_parse_wkr implements Gfo_invk {
 		wkr_db.Conn().Txn_bgn("xomp");
 
 		// set status to running
-		mgr_db.Wkr_tbl().Update_status(uid, Xomp_wkr_tbl.Status__running);
+		mgr_db.Tbl__wkr().Update_status(uid, Xomp_wkr_tbl.Status__running);
 
 		// main loop
+		int prv_ns = -1;
 		while (true) {
 			// get page from page pool
 			Xomp_page_itm ppg = Get_next();
 			if (ppg == Xomp_page_itm.Null) {
-				mgr_db.Wkr_tbl().Update_status(uid, Xomp_wkr_tbl.Status__sleeping);
+				mgr_db.Tbl__wkr().Update_status(uid, Xomp_wkr_tbl.Status__sleeping);
 				break;	// no more pages
 			}
 			if (ppg.Text() == null) continue; // some pages have no text; ignore them else null ref; PAGE: it.d:miercuri DATE:2015-12-05
@@ -99,8 +102,16 @@ public class Xomp_parse_wkr implements Gfo_invk {
 			try {
 				// init page
 				long done_bgn = gplx.core.envs.System_.Ticks();
-				Xoa_ttl ttl = wiki.Ttl_parse(ppg.Ns_id(), ppg.Ttl_bry());
+				int cur_ns = ppg.Ns_id();
+				Xoa_ttl ttl = wiki.Ttl_parse(cur_ns, ppg.Ttl_bry());
+				// if ns changed and prv_ns is main
+				if (cur_ns != prv_ns) {
+					if (prv_ns == gplx.xowa.wikis.nss.Xow_ns_.Tid__main)
+						wiki.Cache_mgr().Free_mem_all(Bool_.Y);	// NOTE: this clears all caches, include imglinks
+					prv_ns = cur_ns;
+				}
 				Xoae_page wpg = Xoae_page.New(wiki, ttl);
+				wpg.Bldr__ns_ord_(ns_ord_mgr.Get_ord_by_ns_id(cur_ns));	// NOTE: must set ns_id for tier_id in lnki_temp; DATE:2016-09-19
 				wpg.Db().Text().Text_bry_(ppg.Text());
 				wpg.Db().Page().Id_(ppg.Id());
 
@@ -153,7 +164,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 	}
 	private Xomp_page_itm Get_next() {
 		if (list_idx == list_len) {
-			mgr_db.Wkr_tbl().Update_exec(uid, done_count, done_time);
+			mgr_db.Tbl__wkr().Update_exec(uid, done_count, done_time);
 			list.Clear();
 			page_pool.Get_next(mgr_db, cfg.Wkr_machine_name(), list);
 			list_len = list.Len();
@@ -168,4 +179,5 @@ public class Xomp_parse_wkr implements Gfo_invk {
 		return this;
 	}
 	public static final String Invk__exec = "exec";
+	public static final String Cfg__ns_ids = "xomp.ns_ids";
 }

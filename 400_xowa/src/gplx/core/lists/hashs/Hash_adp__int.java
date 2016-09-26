@@ -22,7 +22,7 @@ public class Hash_adp__int {
 	private final    Int_obj_ref tmp_key = Int_obj_ref.New_neg1();
 	public void Clear()								{hash.Clear();}
 	public int Len()								{return hash.Count();}
-	public Object Get_by(int key)					{return hash.Get_by_or_fail(tmp_key.Val_(key));}
+	public Object Get_by_or_fail(int key)			{return hash.Get_by_or_fail(tmp_key.Val_(key));}
 	public Object Get_by_or_null(int key)			{return hash.Get_by(tmp_key.Val_(key));}
 	public void Add(int key, Object obj)			{hash.Add(Int_obj_ref.New(key), obj);}
 	public void Add(Int_obj_ref key, Object obj)	{hash.Add(key, obj);}

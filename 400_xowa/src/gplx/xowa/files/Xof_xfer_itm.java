@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
-import gplx.xowa.guis.cbks.js.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.guis.cbks.js.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 import gplx.xowa.parsers.utils.*;
 public class Xof_xfer_itm implements Xof_file_itm {
@@ -181,8 +181,8 @@ public class Xof_xfer_itm implements Xof_file_itm {
 			file_is_orig = img_size.File_is_orig();
 		}
 	}
-	private Io_url		Trg_view_url(byte mode_id, int width)	{return tmp_url_bldr.Init_for_trg_file(mode_id, trg_repo_itm, lnki_ttl, orig_ttl_md5, orig_ext, width, lnki_time, lnki_page).Xto_url();}
-	public Io_url		Trg_orig_url(byte mode_id, int width)	{return tmp_url_bldr.Init_for_trg_file(mode_id, trg_repo_itm, lnki_ttl, orig_ttl_md5, orig_ext, width, lnki_time, lnki_page).Xto_url();}
+	private Io_url		Trg_view_url(byte mode_id, int width)	{return tmp_url_bldr.Init_for_trg_file(trg_repo_itm, mode_id, lnki_ttl, orig_ttl_md5, orig_ext, width, lnki_time, lnki_page).Xto_url();}
+	public Io_url		Trg_orig_url(byte mode_id, int width)	{return tmp_url_bldr.Init_for_trg_file(trg_repo_itm, mode_id, lnki_ttl, orig_ttl_md5, orig_ext, width, lnki_time, lnki_page).Xto_url();}
 	public boolean			Calc_by_meta() {return Calc_by_meta(false);}
 	public boolean			Calc_by_meta(boolean caller_is_file_page) {
 		file_exists = false;
@@ -198,19 +198,19 @@ public class Xof_xfer_itm implements Xof_file_itm {
 			html_w = Xof_img_size.Thumb_width_ogv;	
 		if (!file_is_orig) {				// file is thumb
 			if (orig_ext.Id_is_video()) {		// video is a special case; src is thumb_w but html_w / html_h is based on calc
-				html_orig_url = Trg_view_url(Xof_repo_itm_.Mode_orig, Xof_img_size.Size__neg1);
+				html_orig_url = Trg_view_url(Xof_img_mode_.Tid__orig, Xof_img_size.Size__neg1);
 				if (meta_itm.Thumbs_indicates_oga() && orig_ext.Id_is_ogv()) {orig_ext = Xof_ext_.new_by_ext_(Xof_ext_.Bry_oga); return true;}	// if audio, do not thumb; NOTE: must happen after html_orig_bry, b/c html must still be generated to auto-download files; NOTE: must change ext to oga b/c ogg may trigger video code elsewhere
 				Xof_meta_thumb thumb = meta_itm.Thumbs_get_vid(Xof_lnki_time.X_int(lnki_time));
 				if (thumb != null) {
 					Xof_xfer_itm_.Calc_xfer_size(calc_size, lnki_type, thumb_w_img, thumb.Width(), thumb.Height(), html_w, html_h, !file_is_orig, lnki_upright);
 					html_w = calc_size.Val_0(); html_h = calc_size.Val_1(); 
-					html_view_url = Trg_view_url(Xof_repo_itm_.Mode_thumb, thumb.Width());	// NOTE: must pass thumb.Width() not html_w b/c only one thumb generated for a video file
+					html_view_url = Trg_view_url(Xof_img_mode_.Tid__thumb, thumb.Width());	// NOTE: must pass thumb.Width() not html_w b/c only one thumb generated for a video file
 					file_exists = true;
 					return true;
 				}
 			}
 			else {							// regular thumb
-				html_orig_url = Trg_view_url(Xof_repo_itm_.Mode_orig, Xof_img_size.Size__neg1);
+				html_orig_url = Trg_view_url(Xof_img_mode_.Tid__orig, Xof_img_size.Size__neg1);
 				if (orig_ext.Id_is_audio()) return true;	// if audio, do not thumb; even if user requests thumb;
 				Xof_meta_thumb[] thumbs = meta_itm.Thumbs(); int thumbs_len = thumbs.length; Xof_meta_thumb thumb = null;
 				if (lnki_h > 0 && orig_w < 1 && thumbs_len > 0) {		// if height is specified and no orig, then iterate over thumbs to find similar height; NOTE: this is a fallback case; orig_w/h is optimal; EX: c:Jacques-Louis David and <gallery>
@@ -230,7 +230,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 				Xof_xfer_itm_.Calc_xfer_size(calc_size, lnki_type, thumb_w_img, meta_itm.Orig_w(), meta_itm.Orig_h(), html_w, html_h, !file_is_orig, lnki_upright, limit_size); // calc html_h and html_w; can differ from lnki_w, lnki_h; note that -1 width is handled by thumb_w_img
 				html_w = calc_size.Val_0();
 				if (html_h != -1) html_h = calc_size.Val_1(); 	// NOTE: if -1 (no height specified) do not set height; EX:Tokage_2011-07-15.jpg; DATE:2013-06-03
-				html_view_url = Trg_view_url(Xof_repo_itm_.Mode_thumb, this.File_w());
+				html_view_url = Trg_view_url(Xof_img_mode_.Tid__thumb, this.File_w());
 				thumb = meta_itm.Thumbs_get_img(html_w, 0);
 				if (thumb == null) {						// exact thumb not found
 					if (html_w == meta_itm.Orig_w()			// html_w matches orig_w; occurs when thumb,upright requested, but upright size is larger than orig; PAGE:en.w:St. Petersburg
@@ -238,7 +238,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 						&& meta_itm.Orig_exists() == Xof_meta_itm.Exists_y
 						) {	
 						html_h = meta_itm.Orig_h();
-						html_view_url = Trg_view_url(Xof_repo_itm_.Mode_orig, -1);
+						html_view_url = Trg_view_url(Xof_img_mode_.Tid__orig, -1);
 						file_exists = true;
 						return true;
 					}
@@ -255,7 +255,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 			}
 		}
 		else {								// file is orig
-			byte mode_id = orig_ext.Id_is_svg() ? Xof_repo_itm_.Mode_thumb : Xof_repo_itm_.Mode_orig;	// svgs will always return thumb; EX:[[A.svg]] -> A.svg.png
+			byte mode_id = orig_ext.Id_is_svg() ? Xof_img_mode_.Tid__thumb : Xof_img_mode_.Tid__orig;	// svgs will always return thumb; EX:[[A.svg]] -> A.svg.png
 			html_view_url = html_orig_url = Trg_view_url(mode_id, this.File_w());
 			if (meta_itm.Thumbs_indicates_oga() && orig_ext.Id_is_ogv()) {orig_ext = Xof_ext_.new_by_ext_(Xof_ext_.Bry_oga); return true;}	// if audio, do not thumb; NOTE: must happen after html_orig_bry, b/c html must still be generated to auto-download files; NOTE: must change ext to oga b/c ogg may trigger video code elsewhere
 			if		(orig_ext.Id_is_audio()) return true;	// if audio, return true; SEE:NOTE_2
@@ -263,7 +263,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 				Xof_meta_thumb thumb = meta_itm.Thumbs_get_vid(Xof_lnki_time.X_int(lnki_time));	// get thumb at lnki_time; NOTE: in most cases this will just be the 1st thumb; note that orig video files don't have an official thumb
 				if (thumb != null) {
 					html_w = thumb.Width(); html_h = thumb.Height();	// NOTE: take thumb_size; do not rescale to html_w, html_h b/c html_w will default to 220; native width of thumbnail should be used; DATE:2013-04-11
-					html_view_url = Trg_view_url(Xof_repo_itm_.Mode_thumb, thumb.Width());	// NOTE: must pass thumb.Width() not html_w b/c only one thumb generated for a video file
+					html_view_url = Trg_view_url(Xof_img_mode_.Tid__thumb, thumb.Width());	// NOTE: must pass thumb.Width() not html_w b/c only one thumb generated for a video file
 					file_exists = true;
 					return true;
 				}
@@ -283,7 +283,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	private boolean		Calc_by_meta_found(byte lnki_type, int model_w, int model_h) {
 		Xof_xfer_itm_.Calc_xfer_size(calc_size, lnki_type, thumb_w_img, model_w, model_h, html_w, html_h, !file_is_orig, lnki_upright, false);	// recalc html_w, html_h; note that false passed b/c truncation is not needed
 		html_w = calc_size.Val_0(); html_h = calc_size.Val_1();
-		html_view_url = Trg_view_url(Xof_repo_itm_.Mode_thumb, model_w);	// note that thumb.Width is used (the actual file width), not html_w
+		html_view_url = Trg_view_url(Xof_img_mode_.Tid__thumb, model_w);	// note that thumb.Width is used (the actual file width), not html_w
 		file_exists = true;
 		return true;
 	}

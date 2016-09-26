@@ -34,14 +34,6 @@ public class Xosync_hdoc_parser__tst {
 		, "</h2>"
 		));
 	}
-	@Test   public void File() {
-		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/12px-Commons-logo.svg.png'>"))
-			.Test__html(Gfh_utl.Replace_apos("<img src='xowa:/file/commons.wikimedia.org/thumb/4/a/6/9/Commons-logo.svg/12px.png'>"))
-			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.N, "Commons-logo.svg", 12, -1, -1));
-		// https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Papilio_dardanus_emerging.ogg/320px--Papilio_dardanus_emerging.ogg.jpg
-		// https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Clip_from_My_Man_Godfrey.ogg/240px-seek%3D67-Clip_from_My_Man_Godfrey.ogg.jpg
-		// https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/PL_Henryk_Sienkiewicz-Pisma_zapomniane_i_niewydane.djvu/page6-250px-PL_Henryk_Sienkiewicz-Pisma_zapomniane_i_niewydane.djvu.jpg
-	}
 //		@Test   public void Smoke() {
 //			fxt.Exec__parse(Io_mgr.Instance.LoadFilStr("C:\\xowa\\dev\\wm.updater.src.html"));
 //			Io_mgr.Instance.SaveFilBry("C:\\xowa\\dev\\wm.updater.trg.html", fxt.Hdoc().Converted());

@@ -30,7 +30,7 @@ class Xomp_make_lnki {
 		lnki_temp_tbl.Insert_bgn();
 
 		// create ary; add index
-		int wkr_count = xomp_db.Wkr_tbl().Select_count();
+		int wkr_count = xomp_db.Tbl__wkr().Select_count();
 		Xomp_wkr_db[] db_ary = new Xomp_wkr_db[wkr_count];
 		for (int i = 0; i < wkr_count; ++i) {
 			Xomp_wkr_db wkr_db = Xomp_wkr_db.New(xomp_db.Dir(), i);

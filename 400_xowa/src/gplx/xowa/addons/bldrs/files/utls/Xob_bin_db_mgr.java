@@ -41,7 +41,8 @@ public class Xob_bin_db_mgr {
 			Xob_bin_db_itm itm = schema_is_1 ? Xob_bin_db_itm.new_v1(fil) : Xob_bin_db_itm.new_v2(fil);
 			int ns_id = itm.Ns_id();
 			Xob_bin_db_itm nth = (Xob_bin_db_itm)nth_hash.Get_by(tier_key.Val_(ns_id));
-			if (itm.Pt_id() > nth.Pt_id())	// update max pt_id
+			if (	nth != null					// occurs when existing fsdb_dbb has "file-ns.014-db.001", but 14 no longer specified in fsdb_make; DATE:2016-09-23
+				&&	itm.Pt_id() > nth.Pt_id())	// update max pt_id
 				nth.Set(itm.Id(), itm.Pt_id(), itm.Db_url()); // note that ns_id is same
 		}
 		len = nth_hash.Count();

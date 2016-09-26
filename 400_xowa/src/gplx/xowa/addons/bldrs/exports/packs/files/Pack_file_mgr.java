@@ -27,7 +27,7 @@ class Pack_file_mgr {
 		Io_url pack_dir = wiki_dir.GenSubDir_nest("tmp", "pack");
 		Io_mgr.Instance.DeleteDirDeep(pack_dir); Io_mgr.Instance.CreateDirIfAbsent(pack_dir);
 		String wiki_date = wiki.Props().Modified_latest().XtoStr_fmt("yyyy.MM");
-		Pack_hash hash = Pack_hash_bldr.Bld(wiki, wiki_dir, pack_dir, wiki_date, cfg.Pack_html(), cfg.Pack_file(), cfg.Pack_file_cutoff());
+		Pack_hash hash = Pack_hash_bldr.Bld(wiki, wiki_dir, pack_dir, wiki_date, cfg.Pack_html(), cfg.Pack_file(), cfg.Pack_file_cutoff(), cfg.Pack_fsdb_delete());
 
 		// get import_tbl
 		byte[] wiki_abrv = wiki.Domain_itm().Abrv_xo();
@@ -51,9 +51,9 @@ class Pack_file_mgr {
 
 		// build tasks
 		if (cfg.Pack_html())
-			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, "html", Xobc_import_type.Tid__wiki__core, Xobc_import_type.Tid__wiki__srch, Xobc_import_type.Tid__wiki__html);
+			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, "html", Xobc_import_type.Tid__wiki__core, Xobc_import_type.Tid__wiki__srch, Xobc_import_type.Tid__wiki__html, Xobc_import_type.Tid__wiki__ctg);
 		if (cfg.Pack_file())
-			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, "file", Xobc_import_type.Tid__file__core, Xobc_import_type.Tid__file__data);
+			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, "file", Xobc_import_type.Tid__file__core, Xobc_import_type.Tid__file__data);	// , Xobc_import_type.Tid__fsdb__delete
 		bc_conn.Txn_end();
 
 		// deploy
@@ -163,7 +163,7 @@ class Pack_file_mgr {
 	}
 }
 class Pack_hash_bldr {
-	public static Pack_hash Bld(Xow_wiki wiki, Io_url wiki_dir, Io_url pack_dir, String wiki_date, boolean pack_html, boolean pack_file, DateAdp pack_file_cutoff) {
+	public static Pack_hash Bld(Xow_wiki wiki, Io_url wiki_dir, Io_url pack_dir, String wiki_date, boolean pack_html, boolean pack_file, DateAdp pack_file_cutoff, boolean pack_fsdb_delete) {
 		Pack_hash rv = new Pack_hash();
 		Pack_zip_name_bldr zip_name_bldr = new Pack_zip_name_bldr(pack_dir, wiki.Domain_str(), String_.new_a7(wiki.Domain_itm().Abrv_wm()), wiki_date);
 		Xow_db_mgr db_mgr = wiki.Data__core_mgr();
@@ -200,6 +200,13 @@ class Pack_hash_bldr {
 				}
 			}
 		}
+
+		// bld pack_fsdb_delete
+		if (pack_fsdb_delete) {
+			gplx.xowa.bldrs.Xob_db_file fsdb_deletion_db = gplx.xowa.bldrs.Xob_db_file.New__deletion_db(wiki);
+			if (!Io_mgr.Instance.ExistsFil(fsdb_deletion_db.Url())) throw Err_.new_wo_type("deletion db does not exists: url=" + fsdb_deletion_db.Url().Raw());
+			rv.Add(zip_name_bldr, Xobc_import_type.Tid__fsdb__delete, fsdb_deletion_db.Url());
+		}
 		return rv;
 	}
 	private static int Get_pack_tid(byte db_file_tid) {
@@ -209,27 +216,13 @@ class Pack_hash_bldr {
 			case Xow_db_file_.Tid__search_link:	return Xobc_import_type.Tid__wiki__srch;
 			case Xow_db_file_.Tid__html_solo:
 			case Xow_db_file_.Tid__html_data:	return Xobc_import_type.Tid__wiki__html;
+			case Xow_db_file_.Tid__cat:
+			case Xow_db_file_.Tid__cat_core:
+			case Xow_db_file_.Tid__cat_link:	return Xobc_import_type.Tid__wiki__ctg;
 			case Xow_db_file_.Tid__file_core:	return Xobc_import_type.Tid__file__core;
 			case Xow_db_file_.Tid__file_solo:
 			case Xow_db_file_.Tid__file_data:	return Xobc_import_type.Tid__file__data;
 			default:							return Xobc_import_type.Tid__ignore;
 		}
-	}
-}
-class Pack_zip_name_bldr {	// en.wikipedia.org-file-ns.000-db.001.xowa -> Xowa_enwiki_2016-05_file_ns.000_db.001.zip
-	private final    Io_url pack_dir;
-	private final    byte[] wiki_domain, zip_name_prefix;
-
-	public Pack_zip_name_bldr(Io_url pack_dir, String wiki_domain_str, String wiki_abrv, String wiki_date) {
-		this.pack_dir = pack_dir;
-		this.wiki_domain = Bry_.new_u8(wiki_domain_str);
-		this.zip_name_prefix = Bry_.new_u8("Xowa_" + wiki_abrv + "_" + String_.Replace(wiki_date, ".", "-"));
-	}
-	public Io_url Bld(Io_url orig_url) {
-		String orig_str = String_.Replace(orig_url.NameAndExt(), ".xowa", ".zip");
-		byte[] orig_bry = Bry_.new_u8(orig_str);
-		orig_bry = Bry_.Replace(orig_bry, Byte_ascii.Dash, Byte_ascii.Underline);
-		orig_bry = Bry_.Replace(orig_bry, wiki_domain, zip_name_prefix);
-		return pack_dir.GenSubFil(String_.new_u8(orig_bry));
 	}
 }

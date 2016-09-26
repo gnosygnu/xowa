@@ -22,10 +22,13 @@ public abstract class Http_download_wkr__base implements Http_download_wkr {
 	private Io_url tmp_url, checkpoint_url;
 	private long downloaded;
 	private long checkpoint_interval = 1024 * 1024, checkpoint_nxt = 0;
+	protected Io_url Checkpoint_url() {return checkpoint_url;}
+	protected Io_url Trg_url() {return trg_url;} private Io_url trg_url;
 	public Io_url Tmp_url() {return tmp_url;}
 	public String Fail_msg() {return fail_msg;} private String fail_msg;
 	public abstract Http_download_wkr Make_new();
 	public byte Exec(gplx.core.progs.Gfo_prog_ui prog_ui, String src_str, Io_url trg_url, long expd_size_val) {
+		this.trg_url = trg_url;
 		this.downloaded = this.Checkpoint__load_by_trg_fil(trg_url);
 		this.checkpoint_nxt = downloaded + checkpoint_interval;
 		this.expd_size = expd_size_val;

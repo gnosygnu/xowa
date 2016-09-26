@@ -41,7 +41,7 @@ public class Xoax_addon_mgr {
 		, new gplx.xowa.addons.bldrs.wmdumps.imglinks	.Imglnk_addon()
 		, new gplx.xowa.addons.bldrs.utils_rankings		.Xoax_builds_utils_rankings_addon()
 		, new gplx.xowa.addons.wikis.searchs			.Xoax_builds_search_addon()
-		, new gplx.xowa.addons.bldrs.updates.files		.Xoax_updates_files_addon()
+		, new gplx.xowa.addons.bldrs.updates.files		.Xodel_addon()
 		, new gplx.xowa.addons.bldrs.htmls				.Html__dump_to_fsys__addon()
 		, new gplx.xowa.addons.bldrs.exports			.Export_addon()
 		, new gplx.xowa.addons.wikis.pages.randoms		.Rndm_addon()

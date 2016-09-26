@@ -37,7 +37,8 @@ class Xob_catlink_mgr {
 	}
 	public void On_cmd_row(int page_id, byte[] ctg_ttl, byte[] sortkey_orig, byte[] timestamp_bry, byte[] sortkey_prefix, byte[] collation_bry, byte[] type_bry) {
 		// convert strings to numbers
-		long timestamp = DateAdp_.parse_fmt(String_.new_u8(timestamp_bry), "YYYY-MM-dd HH:mm:ss").Timestamp_unix();
+		String timestamp_str = String_.new_u8(timestamp_bry);
+		long timestamp = String_.Len_eq_0(timestamp_str) ? 0 : DateAdp_.parse_fmt(timestamp_str, "YYYY-MM-dd HH:mm:ss").Timestamp_unix();
 		byte collation_id = collation_enum.To_tid_or_fail(collation_bry);
 		byte type_id = type_enum.To_tid_or_fail(type_bry);
 
@@ -64,11 +65,17 @@ class Xob_catlink_mgr {
 	public void On_cmd_end() {
 		tmp_link_tbl.Insert_end();
 
-		// create cat_sort
+		// get cat_core conn
 		tmp_link_tbl.Create_idx__sortkey();	// index should make SELECT DISTINCT faster
-		Db_conn cat_core_conn = wiki.Data__core_mgr().Props().Layout_text().Tid_is_lot()
-			? wiki.Data__core_mgr().Dbs__make_by_tid(Xow_db_file_.Tid__cat_core).Conn()
-			: wiki.Data__core_mgr().Db__core().Conn();
+		Db_conn cat_core_conn = wiki.Data__core_mgr().Db__core().Conn();
+		if (wiki.Data__core_mgr().Props().Layout_text().Tid_is_lot()) {
+			Xow_db_file cat_core_db = wiki.Data__core_mgr().Dbs__get_by_tid_or_null(Xow_db_file_.Tid__cat_core);
+			if (cat_core_db == null)
+				cat_core_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xow_db_file_.Tid__cat_core);
+			cat_core_conn = cat_core_db.Conn();
+		}
+
+		// create tbl
 		Xodb_cat_sort_tbl cat_sort_tbl = new Xodb_cat_sort_tbl(cat_core_conn);
 		cat_core_conn.Meta_tbl_remake(cat_sort_tbl);
 		cat_sort_tbl.Insert_by_select(tmp_conn);

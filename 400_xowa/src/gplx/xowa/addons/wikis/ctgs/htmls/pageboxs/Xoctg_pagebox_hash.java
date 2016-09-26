@@ -23,7 +23,7 @@ class Xoctg_pagebox_hash {
 	public int Len() {return hash_by_ttl.Len();}
 	public Xoctg_pagebox_itm Get_at(int i) {return (Xoctg_pagebox_itm)hash_by_ttl.Get_at(i);}
 	public Xoctg_pagebox_itm Get_by_ttl(byte[] full_db) {return (Xoctg_pagebox_itm)hash_by_ttl.Get_by(full_db);}
-	public Xoctg_pagebox_itm Get_by_id(int page_id) {return (Xoctg_pagebox_itm)hash_by_id.Get_by(page_id);}
+	public Xoctg_pagebox_itm Get_by_id(int page_id) {return (Xoctg_pagebox_itm)hash_by_id.Get_by_or_fail(page_id);}
 	public Xoctg_pagebox_itm[] To_ary_and_clear() {
 		hash_by_id.Clear();
 		return (Xoctg_pagebox_itm[])hash_by_ttl.To_ary_and_clear(Xoctg_pagebox_itm.class);

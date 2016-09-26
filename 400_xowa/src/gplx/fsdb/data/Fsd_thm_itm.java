@@ -22,21 +22,21 @@ public class Fsd_thm_itm {
 		this.w = w; this.h = h; this.time = time; this.page = page;
 		this.size = size; this.modified = modified; this.hash = hash;
 	}
-	public int		Mnt_id() {return mnt_id;} private int mnt_id;
-	public int		Dir_id() {return dir_id;} private int dir_id;
-	public int		Fil_id() {return fil_id;} private int fil_id;
-	public int		Thm_id() {return thm_id;} private int thm_id;
-	public int		Bin_db_id() {return bin_db_id;} private int bin_db_id;
-	public int		W() {return w;} private int w;
-	public int		H() {return h;} private int h;
-	public double	Time() {return time;} private double time;
-	public int		Page() {return page;} private int page;
-	public long		Size() {return size;} private long size;
-	public String	Modified() {return modified;} private String modified;
-	public String	Hash() {return hash;} private String hash;
-	public int		Req_w() {return req_w;} private int req_w;
-	public double	Req_time() {return req_time;} private double req_time;
-	public int		Req_page() {return req_page;} private int req_page;
+	public int		Mnt_id() {return mnt_id;}			private int mnt_id;
+	public int		Dir_id() {return dir_id;}			private int dir_id;
+	public int		Fil_id() {return fil_id;}			private int fil_id;
+	public int		Thm_id() {return thm_id;}			private int thm_id;
+	public int		Bin_db_id() {return bin_db_id;}		private int bin_db_id;
+	public int		W() {return w;}						private int w;
+	public int		H() {return h;}						private int h;
+	public double	Time() {return time;}				private double time;
+	public int		Page() {return page;}				private int page;
+	public long		Size() {return size;}				private long size;
+	public String	Modified() {return modified;}		private String modified;
+	public String	Hash() {return hash;}				private String hash;
+	public int		Req_w() {return req_w;}				private int req_w;
+	public double	Req_time() {return req_time;}		private double req_time;
+	public int		Req_page() {return req_page;}		private int req_page;
 	public void Init_by_req(int w, double time, int page) {this.w = w; this.time = time; this.page = page;}
 	public void Init_by_match(Fsd_thm_itm comp) {
 		this.req_w = w; this.req_time = time; this.req_page = page;

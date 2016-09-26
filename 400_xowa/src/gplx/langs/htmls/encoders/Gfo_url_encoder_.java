@@ -85,6 +85,13 @@ public class Gfo_url_encoder_ {
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
 			.Init__same__many(Byte_ascii.Paren_bgn, Byte_ascii.Paren_end, Byte_ascii.Apos, Byte_ascii.Semic);
 	}
+	public static Gfo_url_encoder_mkr New__mw_ttl() {
+		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent)
+			.Init__same__rng(0, 255)
+			.Init__diff__many(Byte_ascii.Percent, Byte_ascii.Amp, Byte_ascii.Apos, Byte_ascii.Eq, Byte_ascii.Plus)
+			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline)
+			;
+	}
 	public static final    Gfo_url_encoder
 	  Id				= Gfo_url_encoder_.New__html_id().Make()
 	, Href				= Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make()
@@ -95,5 +102,6 @@ public class Gfo_url_encoder_ {
 	, Xourl				= Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Init__same__many(Byte_ascii.Underline).Make()
 	, Http_url			= Gfo_url_encoder_.New__http_url().Make()
 	, Http_url_ttl		= Gfo_url_encoder_.New__http_url_ttl().Make()
+	, Mw_ttl			= Gfo_url_encoder_.New__mw_ttl().Make()
 	;
 }

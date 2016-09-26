@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.tdbs.hives; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.core.ios.zips.*;
 import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.bldrs.sqls.*;
+import gplx.xowa.bldrs.sql_dumps.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.specials.*; import gplx.xowa.specials.allPages.*;
 import gplx.xowa.wikis.tdbs.xdats.*;

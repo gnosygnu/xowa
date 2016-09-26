@@ -19,7 +19,7 @@ package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gp
 import gplx.core.envs.*; import gplx.core.caches.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_filepath extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
@@ -39,7 +39,7 @@ public class Pfunc_filepath extends Pf_func_base {
 		Xof_repo_itm trg_repo = wiki.File_mgr().Repo_mgr().Repos_get_at(tmp_rslt.Repo_idx()).Trg();
 		Xof_xfer_itm xfer_itm = ctx.Tmp_mgr().Xfer_itm();
 		xfer_itm.Orig_ttl_and_redirect_(ttl_bry, Bry_.Empty);	// redirect is empty b/c Get_page does all redirect lookups
-		byte[] url = wiki.Parser_mgr().Url_bldr().Init_for_trg_html(Xof_repo_itm_.Mode_orig, trg_repo, ttl_bry, xfer_itm.Orig_ttl_md5(), xfer_itm.Orig_ext(), Xof_img_size.Size__neg1, Xof_lnki_time.Null, Xof_lnki_page.Null).Xto_bry();
+		byte[] url = wiki.Parser_mgr().Url_bldr().Init_for_trg_html(trg_repo, Xof_img_mode_.Tid__orig, ttl_bry, xfer_itm.Orig_ttl_md5(), xfer_itm.Orig_ext(), Xof_img_size.Size__neg1, Xof_lnki_time.Null, Xof_lnki_page.Null).Xto_bry();
 		bfr.Add(url);
 	}
 	public static Pfunc_filepath_itm Load_page(Xowe_wiki wiki, Xoa_ttl ttl) {

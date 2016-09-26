@@ -68,6 +68,7 @@ public class Db_conn {
 	}
 	public String Meta_fld_append_if_missing(String tbl_name, Dbmeta_fld_list flds, Dbmeta_fld_itm fld) {
 		String fld_name = fld.Name();
+		// if fld doesn't exist, add it; NOTE: need to check if tbl exists first else meta_fld not available
 		if (	this.Meta_tbl_exists(tbl_name)
 			&& !this.Meta_fld_exists(tbl_name, fld_name)) {
 			try {this.Meta_fld_append(tbl_name, fld);}
@@ -76,8 +77,11 @@ public class Db_conn {
 				fld_name = Dbmeta_fld_itm.Key_null;
 			}
 		}
-		else
-			fld_name = flds.Add(fld);
+		// if fld does exist, or tbl doesn't exist, just add fld to collection
+		else {
+			if (!flds.Has(fld.Name()))	// NOTE: need to check if it already exists; DATE:2016-09-22
+				fld_name = flds.Add(fld);
+		}
 		return fld_name;
 	}
 	public Dbmeta_tbl_mgr		Meta_mgr()																		{return engine.Meta_mgr();}

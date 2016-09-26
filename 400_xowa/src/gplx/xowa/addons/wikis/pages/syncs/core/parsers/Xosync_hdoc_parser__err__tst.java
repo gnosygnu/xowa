@@ -22,7 +22,7 @@ public class Xosync_hdoc_parser__err__tst {
 	@Before public void init() {fxt.Clear();} private final    Xosync_hdoc_parser__fxt fxt = new Xosync_hdoc_parser__fxt();
 	@Test   public void Url_does_not_start_with_upload_wikimedia_org() {
 		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//fail/wikipedia/commons/thumb/7/70/A.png/220px-A.png'>"))
-			.Test__html(Gfh_utl.Replace_apos("<!--wm.parse:url does not start with //upload.wikimedia.org--><img src='//fail/wikipedia/commons/thumb/7/70/A.png/220px-A.png'>"));
+			.Test__html(Gfh_utl.Replace_apos("<!--wm.parse:img src does not start with known sequence--><img src='//fail/wikipedia/commons/thumb/7/70/A.png/220px-A.png'>"));
 	}
 	@Test   public void Unknown_repo() {
 		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//upload.wikimedia.org/wiktionary/fr/thumb/7/70/A.png/220px-A.png'>"))

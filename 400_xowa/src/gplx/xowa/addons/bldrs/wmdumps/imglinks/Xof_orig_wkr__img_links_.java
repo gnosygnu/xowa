@@ -23,8 +23,8 @@ public class Xof_orig_wkr__img_links_ {
 	public static void Load_all(Xof_orig_wkr__img_links wkr) {
 		Xowe_wiki wiki = wkr.Wiki();
 		Db_conn conn = Xob_db_file.New__img_link(wiki).Conn();
-		Load_all_by_wiki(wkr, conn, Xof_repo_itm_.Repo_local , wiki);
-		Load_all_by_wiki(wkr, conn, Xof_repo_itm_.Repo_remote, wiki.Appe().Wiki_mgr().Wiki_commons());
+		Load_all_by_wiki(wkr, conn, Xof_repo_tid_.Tid__local , wiki);
+		Load_all_by_wiki(wkr, conn, Xof_repo_tid_.Tid__remote, wiki.Appe().Wiki_mgr().Wiki_commons());
 	}
 	public static Xof_orig_itm Load_itm(Xof_orig_wkr__img_links wkr, Db_conn conn, Xowe_wiki wiki, byte[] ttl) {
 		Imglnk_reg_tbl imglnk_reg_tbl = wkr.Tbl__imglnk_reg();
@@ -39,7 +39,7 @@ public class Xof_orig_wkr__img_links_ {
 			else	// ttl missing; EX:</*_File:Chehov_v_serpuhove11.JPG; DATE:2016-08-10
 				return Xof_orig_itm.Null;
 		} finally {rdr.Rls();}
-		Xowe_wiki image_wiki = img_repo == Xof_repo_itm_.Repo_local ? wiki : wiki.Appe().Wiki_mgr().Wiki_commons();
+		Xowe_wiki image_wiki = img_repo == Xof_repo_tid_.Tid__local ? wiki : wiki.Appe().Wiki_mgr().Wiki_commons();
 		return Load_itm_by_wiki(wkr, conn, image_wiki, img_repo, ttl, img_trg);
 	}
 	private static Xof_orig_itm Load_itm_by_wiki(Xof_orig_wkr__img_links wkr, Db_conn conn, Xowe_wiki wiki, byte repo_id, byte[] img_src, byte[] img_trg) {

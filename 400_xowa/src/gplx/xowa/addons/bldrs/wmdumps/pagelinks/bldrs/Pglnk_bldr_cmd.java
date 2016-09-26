@@ -16,18 +16,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.bldrs.wmdumps.pagelinks.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.wmdumps.*; import gplx.xowa.addons.bldrs.wmdumps.pagelinks.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.sqls.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.sql_dumps.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.data.*; import gplx.xowa.addons.bldrs.wmdumps.pagelinks.dbs.*;
-public class Pglnk_bldr_cmd extends Xob_sql_dump_base implements Sql_file_parser_cmd {
+public class Pglnk_bldr_cmd extends Xob_sql_dump_base implements Xosql_dump_cbk {
 	private Db_conn conn;
 	private Pglnk_page_link_temp_tbl temp_tbl;
 	private int tmp_src_id, tmp_trg_ns;
 	private int rows = 0;
 	public Pglnk_bldr_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb;}
 	@Override public String Sql_file_name() {return Dump_type_key;} public static final String Dump_type_key = "pagelinks";
-	@Override public void Cmd_bgn_hook(Xob_bldr bldr, Sql_file_parser parser) {
+	@Override protected Xosql_dump_parser New_parser() {return new Xosql_dump_parser(this, "pl_from", "pl_namespace", "pl_title");}
+	@Override public void Cmd_bgn_hook(Xob_bldr bldr, Xosql_dump_parser parser) {
 		wiki.Init_assert();
-		parser.Fld_cmd_(this).Flds_req_idx_(4, 0, 1, 2);
 		Xob_db_file page_link_db = Xob_db_file.New__page_link(wiki);
 		this.conn = page_link_db.Conn();
 		this.temp_tbl = new Pglnk_page_link_temp_tbl(conn);
@@ -49,12 +49,12 @@ public class Pglnk_bldr_cmd extends Xob_sql_dump_base implements Sql_file_parser
 		actl_tbl.Create_idx__trg_src();
 		conn.Env_vacuum();
 	}
-	public void Exec(byte[] src, byte[] fld_key, int fld_idx, int fld_bgn, int fld_end, Bry_bfr file_bfr, Sql_file_parser_data data) {
+	public void On_fld_done(int fld_idx, byte[] src, int val_bgn, int val_end) {
 		switch (fld_idx) {
-			case Fld__pl_from:			this.tmp_src_id = Bry_.To_int_or(src, fld_bgn, fld_end, -1); break;
-			case Fld__pl_namespace:		this.tmp_trg_ns = Bry_.To_int_or(src, fld_bgn, fld_end, -1); break;
+			case Fld__pl_from:			this.tmp_src_id = Bry_.To_int_or(src, val_bgn, val_end, -1); break;
+			case Fld__pl_namespace:		this.tmp_trg_ns = Bry_.To_int_or(src, val_bgn, val_end, -1); break;
 			case Fld__pl_title:
-				byte[] tmp_trg_ttl = Bry_.Mid(src, fld_bgn, fld_end);
+				byte[] tmp_trg_ttl = Bry_.Mid(src, val_bgn, val_end);
 				temp_tbl.Insert(tmp_src_id, tmp_trg_ns, tmp_trg_ttl);
 				if (++rows % 100000 == 0) usr_dlg.Prog_many("", "", "reading row ~{0}", Int_.To_str_fmt(rows, "#,##0"));
 				break;

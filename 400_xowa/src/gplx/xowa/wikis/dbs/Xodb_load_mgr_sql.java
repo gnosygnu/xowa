@@ -21,7 +21,7 @@ import gplx.xowa.apps.gfs.*; import gplx.xowa.addons.wikis.ctgs.bldrs.*; import 
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.addons.wikis.searchs.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*;
 public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	private Xodb_mgr_sql db_mgr; Xow_db_mgr fsys_mgr;
 	public Xodb_load_mgr_sql(Xow_wiki wiki, Xodb_mgr_sql db_mgr, Xow_db_mgr fsys_mgr) {this.db_mgr = db_mgr; this.fsys_mgr = fsys_mgr;}
@@ -63,88 +63,17 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		Xowd_category_itm ctg = fsys_mgr.Db__cat_core().Tbl__cat_core().Select(cat_page_id); if (ctg == Xowd_category_itm.Null) return false;
 		return Ctg_select_v1(db_mgr.Wiki(), db_mgr.Core_data_mgr(), rv, ctg.File_idx(), ctg);
 	}
-	public void Load_ctg_v2a(Xoctg_catpage_ctg rv, Xoctg_catpage_url ctg_url, byte[] ctg_ttl, int load_max, boolean app_is_cmd) {
-		int cat_page_id = db_mgr.Core_data_mgr().Tbl__page().Select_id(Xow_ns_.Tid__category, ctg_ttl); if (cat_page_id == Xowd_page_itm.Id_null) return;
-		Xowd_category_itm ctg = fsys_mgr.Db__cat_core().Tbl__cat_core().Select(cat_page_id); if (ctg == Xowd_category_itm.Null) return;
-		List_adp list = List_adp_.New();
-		Load_ctg_v2a_db_retrieve(rv, ctg_url, cat_page_id, load_max, ctg.File_idx(), list, app_is_cmd);
-		Load_ctg_v2a_ui_sift(rv, ctg, list);
-	}
-	private void Load_ctg_v2a_db_retrieve(Xoctg_catpage_ctg rv, Xoctg_catpage_url ctg_url, int cat_page_id, int load_max, int cat_link_db_idx, List_adp list, boolean app_is_cmd) {
-		int len = Xoa_ctg_mgr.Tid__max;
-		for (byte i = Xoa_ctg_mgr.Tid_subc; i < len; i++) {
-			boolean arg_is_from = ctg_url.Grp_fwds()[i] == Bool_.N_byte;
-			byte[] arg_sortkey = ctg_url.Grp_idxs()[i];
-			Xowd_cat_link_tbl cat_link_tbl = db_mgr.Core_data_mgr().Dbs__get_by_id_or_fail(cat_link_db_idx).Tbl__cat_link();
-			int found = cat_link_tbl.Select_by_type(list, cat_page_id, i, arg_sortkey, arg_is_from, load_max);
-			if (found > 0 && found == load_max + 1) {
-				Xowd_page_itm last_page = (Xowd_page_itm)List_adp_.Pop(list);
-				Xoctg_page_xtn last_ctg = (Xoctg_page_xtn)last_page.Xtn();
-				rv.Grp_by_tid(i).Itms__nth_sortkey_(last_ctg.Sortkey());
-			}
-		}
-		db_mgr.Core_data_mgr().Tbl__page().Select_in__id(Cancelable_.Never, !app_is_cmd, list);
-	}
-	private void Load_ctg_v2a_ui_sift(Xoctg_catpage_ctg rv, Xowd_category_itm ctg, List_adp list) {
-		int len = list.Count();
-		Xowe_wiki wiki = this.db_mgr.Wiki();
-		byte prv_tid = Byte_.Max_value_127;
-		Xoctg_catpage_grp view_grp = null;
-		for (int i = 0; i < len; i++) {
-			Xowd_page_itm db_page = (Xowd_page_itm)list.Get_at(i);
-			if (db_page.Ns_id() == Int_.Min_value) continue;	// HACK: page not found; ignore
-			Xoctg_page_xtn db_ctg = (Xoctg_page_xtn)db_page.Xtn();
-			byte cur_tid = db_ctg.Tid();
-			if (prv_tid != cur_tid) {
-				view_grp = rv.Grp_by_tid(cur_tid);
-				prv_tid = cur_tid; 
-			}
-			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, db_page.Ns_id(), db_page.Ttl_page_db());
-			Xoctg_catpage_itm view_itm = new Xoctg_catpage_itm(db_page.Id(), ttl, db_ctg.Sortkey());
-			view_grp.Itms__add(view_itm);
-		}
-		rv.Make_itms();
-	}
 	public void Load_ttls_for_all_pages(Cancelable cancelable, List_adp rslt_list, Xowd_page_itm rslt_nxt, Xowd_page_itm rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
 		db_mgr.Core_data_mgr().Tbl__page().Select_for_special_all_pages(cancelable, rslt_list, rslt_nxt, rslt_prv, rslt_count, ns, key, max_results, min_page_len, browse_len, include_redirects, fetch_prv_item);
 	}
 	public void Load_ttls_for_search_suggest(Cancelable cancelable, List_adp rslt_list, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
 		db_mgr.Core_data_mgr().Tbl__page().Select_for_search_suggest(cancelable, rslt_list, ns, key, max_results, min_page_len, browse_len, include_redirects, fetch_prv_item);
 	}
-	public int Load_ctg_count(byte[] ttl) {
-		if (db_mgr.Core_data_mgr().Db__cat_core() == null) return 0;
-		int page_id = db_mgr.Core_data_mgr().Tbl__page().Select_id(Xow_ns_.Tid__category, ttl);
-		if (page_id == Xowd_page_itm.Id_null) return 0;	// title not found; return 0;
-		return db_mgr.Core_data_mgr().Db__cat_core().Tbl__cat_core().Select(page_id).Count_all();
-	}
 	public byte[] Load_qid(byte[] wiki_alias, byte[] ns_num, byte[] ttl)	{return db_mgr.Core_data_mgr().Db__wbase().Tbl__wbase_qid().Select_qid(wiki_alias, ns_num, ttl);}
 	public int Load_pid(byte[] lang_key, byte[] pid_name)					{return db_mgr.Core_data_mgr().Db__wbase().Tbl__wbase_pid().Select_pid(lang_key, pid_name);}
 	public byte[] Find_random_ttl(Xow_ns ns) {return db_mgr.Core_data_mgr().Tbl__page().Select_random(ns);}
 	public Xodb_page_rdr Get_page_rdr(Xowe_wiki wiki) {return new Xodb_page_rdr__sql(wiki);}
 	public void Clear() {}
-	public Xowd_page_itm[] Load_ctg_list(byte[][] ctg_ttls) {
-		if (db_mgr.Core_data_mgr().Db__cat_core() == null) return Xowd_page_itm.Ary_empty;
-		int len = ctg_ttls.length;
-		Ordered_hash hash = Ordered_hash_.New_bry();
-		for (int i = 0; i < len; i++) {
-			Xowd_page_itm page = new Xowd_page_itm();
-			byte[] ttl = Xoa_ttl.Replace_spaces(ctg_ttls[i]);	// NOTE: ctg_ttls has spaces since v1 rendered it literally;
-			page.Ttl_page_db_(ttl);
-			if (!hash.Has(ttl))
-				hash.Add(ttl, page);
-		}
-		len = hash.Count();	// must update len (!hash.Has() may have skipped titles)
-		db_mgr.Core_data_mgr().Tbl__page().Select_in__ttl(Cancelable_.Never, hash, Xow_ns_.Tid__category, 0, len);
-		Ordered_hash hash2 = Ordered_hash_.New();
-		for (int i = 0; i < len; i++) {
-			Xowd_page_itm page = (Xowd_page_itm)hash.Get_at(i);
-			if (!hash2.Has(page.Id_val()))
-				hash2.Add(page.Id_val(), page);
-		}
-		len = hash2.Count();	// must update len (!hash2.Has() may have skipped titles)
-		db_mgr.Core_data_mgr().Db__cat_core().Tbl__cat_core().Select_by_cat_id_in(Cancelable_.Never, hash2, 0, len);
-		return (Xowd_page_itm[])hash.To_ary(Xowd_page_itm.class);
-	}
 	private static boolean Ctg_select_v1(Xowe_wiki wiki, Xow_db_mgr core_data_mgr, Xoctg_catpage_ctg view_ctg, int link_db_id, Xowd_category_itm ctg) {
 		List_adp link_list = List_adp_.New();
 		core_data_mgr.Dbs__get_by_id_or_fail(link_db_id).Tbl__cat_link().Select_in(link_list, ctg.Id());
@@ -167,9 +96,9 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	}
 	public static byte Load_ctg_v1_tid(int ns_id) {
 		switch (ns_id) {
-			case Xow_ns_.Tid__category: return Xoa_ctg_mgr.Tid_subc;
-			case Xow_ns_.Tid__file:		return Xoa_ctg_mgr.Tid_file;
-			default: 					return Xoa_ctg_mgr.Tid_page;
+			case Xow_ns_.Tid__category: return Xoa_ctg_mgr.Tid__subc;
+			case Xow_ns_.Tid__file:		return Xoa_ctg_mgr.Tid__file;
+			default: 					return Xoa_ctg_mgr.Tid__page;
 		}		
 	}
 }

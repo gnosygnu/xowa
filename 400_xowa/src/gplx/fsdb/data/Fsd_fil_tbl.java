@@ -87,7 +87,7 @@ public class Fsd_fil_tbl implements Rls_able {
 				.Crt_bry_as_str(fld_name, fil_name)
 				.Exec_select__rls_manual();
 		try {
-			return rdr.Move_next() ? Load_by_rdr(mnt_id, rdr) : Fsd_fil_itm.Null;
+			return rdr.Move_next() ? New_by_rdr(mnt_id, rdr) : Fsd_fil_itm.Null;
 		}
 		finally {rdr.Rls();}
 	}
@@ -95,28 +95,25 @@ public class Fsd_fil_tbl implements Rls_able {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
-				Fsd_fil_itm fil = Load_by_rdr(mnt_id, rdr);
+				Fsd_fil_itm fil = New_by_rdr(mnt_id, rdr);
 				byte[] cache_key = Fsd_fil_itm.Gen_cache_key(key_bfr, fil.Dir_id(), fil.Name());
 				cache.Add(cache_key, fil);
 			}
 		}
 		finally {rdr.Rls();}
 	}
-	public Fsd_fil_itm Load_by_rdr(int mnt_id, Db_rdr rdr) {
-		return new Fsd_fil_itm().Ctor(mnt_id, rdr.Read_int(fld_owner_id), rdr.Read_int(fld_id), rdr.Read_int(fld_bin_db_id), rdr.Read_bry_by_str(fld_name), rdr.Read_int(fld_ext_id));
-	}
-	public Fsd_fil_itm Load_by_rdr__full(int mnt_id, Db_rdr rdr) {
-		return new Fsd_fil_itm()
-			.Load_by_rdr__full(mnt_id
-			, rdr.Read_int(fld_owner_id)
-			, rdr.Read_int(fld_id)
-			, rdr.Read_int(fld_xtn_id)
-			, rdr.Read_int(fld_ext_id)
-			, rdr.Read_bry_by_str(fld_name)
-			, rdr.Read_long(fld_size)
-			, rdr.Read_str(fld_modified)
-			, rdr.Read_str(fld_hash)
-			, rdr.Read_int(fld_bin_db_id)
-			);
+	public Fsd_fil_itm New_by_rdr(int mnt_id, Db_rdr rdr) {
+		return new Fsd_fil_itm
+		( mnt_id
+		, rdr.Read_int(fld_owner_id)
+		, rdr.Read_int(fld_id)
+		, rdr.Read_int(fld_xtn_id)
+		, rdr.Read_int(fld_ext_id)
+		, rdr.Read_bry_by_str(fld_name)
+		, rdr.Read_long(fld_size)
+		, rdr.Read_str(fld_modified)
+		, rdr.Read_str(fld_hash)
+		, rdr.Read_int(fld_bin_db_id)
+		);
 	}
 }

@@ -514,7 +514,7 @@ case Xol_msg_itm_.Id_xowa_wikidata_links_special: return new_(Xol_msg_itm_.Id_xo
 	}
 	public static byte[] eval_(Bry_bfr bfr, Xol_msg_itm tmp_msg_itm, byte[] val, Object... args) {
 		synchronized (tmp_fmtr) {	// LOCK:static-objs; DATE:2016-07-07
-			val = gplx.xowa.apps.gfs.Xoa_gfs_php_mgr.Xto_gfs(bfr, val);
+			val = gplx.xowa.apps.gfs.Gfs_php_converter.To_gfs(bfr, val);
 			update_val_(tmp_msg_itm, val);
 			return tmp_fmtr.Bld_bry_many(bfr, args);
 		}

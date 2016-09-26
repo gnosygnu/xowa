@@ -44,7 +44,7 @@ public class Xof_fsdb_itm_fxt {
 		this.lnki_h = Xof_img_size.Size__neg1;
 		this.lnki_time = Xof_lnki_time.Null;
 		this.lnki_page = Xof_lnki_page.Null;
-		this.orig_repo_id = Xof_repo_itm_.Repo_null;
+		this.orig_repo_id = Xof_repo_tid_.Tid__null;
 		this.orig_repo_name = orig_ttl = orig_redirect = null;
 		this.orig_ext = null;
 	}
@@ -55,7 +55,7 @@ public class Xof_fsdb_itm_fxt {
 	}
 	public Xof_fsdb_itm_fxt Orig__commons__lnki() {
 		this.orig_repo_name = Xow_domain_itm_.Bry__commons;
-		this.orig_repo_id = Xof_repo_itm_.Repo_remote;
+		this.orig_repo_id = Xof_repo_tid_.Tid__remote;
 		this.orig_ttl = lnki_ttl;
 		this.orig_ext = Xof_ext_.new_by_ttl_(orig_ttl);
 		this.orig_w = 880;
@@ -64,7 +64,7 @@ public class Xof_fsdb_itm_fxt {
 	}
 	public Xof_fsdb_itm_fxt Orig__enwiki__lnki() {
 		this.orig_repo_name = Xow_domain_itm_.Bry__enwiki;
-		this.orig_repo_id = Xof_repo_itm_.Repo_local;
+		this.orig_repo_id = Xof_repo_tid_.Tid__local;
 		this.orig_ttl = lnki_ttl;
 		this.orig_ext = Xof_ext_.new_by_ttl_(orig_ttl);
 		this.orig_w = 880;
@@ -77,5 +77,5 @@ public class Xof_fsdb_itm_fxt {
 		rv.Init_at_orig(orig_repo_id, orig_repo_name, orig_ttl, orig_ext, orig_w, orig_h, orig_redirect);
 		return rv;
 	}
-	private final static byte[] Abrv__en_w = Bry_.new_a7("en.w");
+	private final    static byte[] Abrv__en_w = Bry_.new_a7("en.w");
 }

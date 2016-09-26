@@ -185,7 +185,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 			tier_id_val = fsdb.Lnki_tier_id();
 			page_id_val = fsdb.Lnki_page_id();
 			lnki_id_val = fsdb.Lnki_id();
-			fsdb.Orig_repo_name_(fsdb.Orig_repo_id() == Xof_repo_itm_.Repo_local ? wiki.Domain_bry() : Xow_domain_itm_.Bry__commons);
+			fsdb.Orig_repo_name_(fsdb.Orig_repo_id() == Xof_repo_tid_.Tid__local ? wiki.Domain_bry() : Xow_domain_itm_.Bry__commons);
 			Download_exec(fsdb);
 			++exec_count;
 			if (exec_count % progress_interval	== 0) Print_progress(fsdb);

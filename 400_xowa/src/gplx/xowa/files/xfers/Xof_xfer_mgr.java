@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*; import gplx.gfui.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.downloads.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.downloads.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.bldrs.wms.*; import gplx.xowa.apps.wms.apis.*; import gplx.xowa.apps.wms.apis.origs.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 public class Xof_xfer_mgr {
@@ -74,8 +74,8 @@ public class Xof_xfer_mgr {
 		}
 
 		// BLOCK: orig; get orig for convert; note that Img_download will not download file again if src exists
-		src_str = this.Src_url(src_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size__neg1);
-		trg_url = this.Trg_url(trg_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size__neg1);
+		src_str = this.Src_url(src_repo, Xof_img_mode_.Tid__orig, Xof_img_size.Size__neg1);
+		trg_url = this.Trg_url(trg_repo, Xof_img_mode_.Tid__orig, Xof_img_size.Size__neg1);
 		if (!Img_download(src_str, trg_url, false)) return false;
 		trg_url = rslt.Trg();
 
@@ -84,7 +84,7 @@ public class Xof_xfer_mgr {
 			rslt.Clear();	// clear error from failed thumb
 			Io_url src_url = trg_url;
 			if (orig_ext.Id_is_djvu()) {	// NOTE: this block converts djvu -> tiff b/c vanilla imageMagick cannot do djvu -> jpeg
-				trg_url = this.Trg_url(trg_repo, Xof_repo_itm_.Mode_thumb, lnki_w).GenNewExt(".tiff");	// NOTE: manually change orig_ext to tiff; note that djvu has view type of jpeg
+				trg_url = this.Trg_url(trg_repo, Xof_img_mode_.Tid__thumb, lnki_w).GenNewExt(".tiff");	// NOTE: manually change orig_ext to tiff; note that djvu has view type of jpeg
 				wiki.Appe().File_mgr().Img_mgr().Wkr_convert_djvu_to_tiff().Exec(src_url, trg_url);
 				if (!Cmd_query_size(trg_url)) return false;
 //						meta_itm.Update_orig_size(file_w, file_h);	// NOTE that thumb size is always orig size
@@ -93,7 +93,7 @@ public class Xof_xfer_mgr {
 			boolean limit = !orig_ext.Id_is_svg();	// do not limit if svg
 			Xof_xfer_itm_.Calc_xfer_size(calc_size, xfer_itm.Lnki_type(), wiki.Html_mgr().Img_thumb_width(), file_w, file_h, lnki_w, lnki_h, lnki_thumbable, xfer_itm.Lnki_upright(), limit);	// NOTE: always recalc w/h; needed for (a) when width < 1 and (b) when w/h are wrong; xfer=160,160, lnki=65,50, actl should be 50,50; PAGE:en.w:[[Image:Gnome-mime-audio-openclipart.svg|65x50px|center|link=|alt=]]
 			lnki_w = calc_size.Val_0(); lnki_h = calc_size.Val_1();
-			trg_url = this.Trg_url(trg_repo, Xof_repo_itm_.Mode_thumb, lnki_w);
+			trg_url = this.Trg_url(trg_repo, Xof_img_mode_.Tid__thumb, lnki_w);
 			if (!Img_convert(src_url, trg_url)) return false;	// convert failed; exit
 			if (orig_ext.Id_is_djvu()) Io_mgr.Instance.DeleteFil(src_url);	// convert passed; if djvu, delete intermediary .tiff file;
 		}
@@ -110,7 +110,7 @@ public class Xof_xfer_mgr {
 					xfer_itm.Orig_repo_id_(Xof_meta_itm.Repo_same);	// set repo to "same"
 				else {												// wmf returned other wiki (which is 99% likely to be commons)
 					Xof_repo_pair trg_repo_pair = wiki.File_mgr().Repo_mgr().Repos_get_by_wiki(rslts.Orig_wiki());	// need to do this b/c commons is not always first; see wikinews; DATE:2013-12-04					
-					int trg_repo_idx = trg_repo_pair == null ? 0 : (int)trg_repo_pair.Repo_idx();	// 0=commons
+					int trg_repo_idx = trg_repo_pair == null ? 0 : (int)trg_repo_pair.Id();	// 0=commons
 					xfer_itm.Orig_repo_id_(trg_repo_idx);
 				}
 				if (!Bry_.Eq(rslts.Orig_page(), orig_ttl)) {
@@ -139,7 +139,7 @@ public class Xof_xfer_mgr {
 				if (!wmf_api_found) return false;	// not found in wmf_api; exit now
 			}
 			else if (src_repo.Tarball()) {
-				String src_str = this.Src_url(src_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size__neg1);
+				String src_str = this.Src_url(src_repo, Xof_img_mode_.Tid__orig, Xof_img_size.Size__neg1);
 				meta_itm.Orig_exists_(Xof_meta_itm.Exists_unknown);	// mark exists unknown; note need to assertively mark unknown b/c it may have been marked n in previous pass through multiple repos; DATE:20121227
 				meta_itm.Vrtl_repo_(Xof_meta_itm.Repo_unknown);		// mark repo unknown;
 				if (!Cmd_query_size(Io_url_.new_fil_(src_str))) {
@@ -163,8 +163,8 @@ public class Xof_xfer_mgr {
 				lnki_w = calc_size.Val_0(); 
 				if (lnki_h != -1) lnki_h = calc_size.Val_1(); // NOTE: if -1 (no height specified) do not set height; EX:Tokage_2011-07-15.jpg; DATE:2013-06-03
 
-				src_str = src_repo.Tarball() ? this.Src_url(src_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size_null) : this.Src_url(src_repo, Xof_repo_itm_.Mode_thumb, lnki_w);
-				trg_url = this.Trg_url(trg_repo, Xof_repo_itm_.Mode_thumb, lnki_w);
+				src_str = src_repo.Tarball() ? this.Src_url(src_repo, Xof_img_mode_.Tid__orig, Xof_img_size.Size_null) : this.Src_url(src_repo, Xof_img_mode_.Tid__thumb, lnki_w);
+				trg_url = this.Trg_url(trg_repo, Xof_img_mode_.Tid__thumb, lnki_w);
 				if (Make_img_exec(src_str, trg_url)) {		// download passed
 					trg_url = rslt.Trg();
 					if (lnki_w > 0 && lnki_h > 0) {			// lnki specified width and height; check against xfer; needed when w/h are wrong; lnki=65,50 but xfer=160,160; actl should be 50,50; PAGE:en.w:[[Image:Gnome-mime-audio-openclipart.svg|65x50px|center|link=|alt=]]; SEE:NOTE_1
@@ -191,23 +191,23 @@ public class Xof_xfer_mgr {
 				Xof_xfer_itm_.Calc_xfer_size(calc_size, xfer_itm.Lnki_type(), wiki.Html_mgr().Img_thumb_width(), meta_itm.Orig_w(), meta_itm.Orig_h(), lnki_w, lnki_h, lnki_thumbable, lnki_upright, limit);
 				lnki_w = calc_size.Val_0(); lnki_h = calc_size.Val_1();
 
-				src_str = src_repo.Tarball() ? this.Src_url(src_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size_null) : this.Src_url(src_repo, Xof_repo_itm_.Mode_thumb, lnki_w);
-				trg_url = this.Trg_url(trg_repo, Xof_repo_itm_.Mode_thumb, lnki_w);
+				src_str = src_repo.Tarball() ? this.Src_url(src_repo, Xof_img_mode_.Tid__orig, Xof_img_size.Size_null) : this.Src_url(src_repo, Xof_img_mode_.Tid__thumb, lnki_w);
+				trg_url = this.Trg_url(trg_repo, Xof_img_mode_.Tid__thumb, lnki_w);
 				return Make_img_exec(src_str, trg_url);
 			}
 			else {	// no orig dimensions; do download
 				if (lnki_w == Xof_img_size.Null)
 					lnki_w = wiki.Html_mgr().Img_thumb_width();	// set lnki_w to default thumb_width (220)
-				src_str = src_repo.Tarball() ? this.Src_url(src_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size_null) : this.Src_url(src_repo, Xof_repo_itm_.Mode_thumb, lnki_w);
-				trg_url = this.Trg_url(trg_repo, Xof_repo_itm_.Mode_thumb, lnki_w);
+				src_str = src_repo.Tarball() ? this.Src_url(src_repo, Xof_img_mode_.Tid__orig, Xof_img_size.Size_null) : this.Src_url(src_repo, Xof_img_mode_.Tid__thumb, lnki_w);
+				trg_url = this.Trg_url(trg_repo, Xof_img_mode_.Tid__thumb, lnki_w);
 				if (Make_img_exec(src_str, trg_url)) {		// download
 					if (src_repo.Tarball()) return true;	// convert worked; no need to download again;
 					int old_lnki_w = lnki_w;
 					lnki_w = (file_w * lnki_h) / file_h;	// calculate correct width for specified height;
 					lnki_w = Xof_xfer_itm_.Calc_w(file_w, file_h, lnki_h);
 					if (lnki_w == old_lnki_w) return true;	// download at 220 actually worked; this will probably occur very infrequently, but if so, exit
-					src_str = this.Src_url(src_repo, Xof_repo_itm_.Mode_thumb, lnki_w);
-					trg_url = this.Trg_url(trg_repo, Xof_repo_itm_.Mode_thumb, lnki_w);
+					src_str = this.Src_url(src_repo, Xof_img_mode_.Tid__thumb, lnki_w);
+					trg_url = this.Trg_url(trg_repo, Xof_img_mode_.Tid__thumb, lnki_w);
 					if (Make_img_exec(src_str, trg_url)) {	// download again
 						trg_url = rslt.Trg();
 						Xof_xfer_itm_.Calc_xfer_size(calc_size, xfer_itm.Lnki_type(), wiki.Html_mgr().Img_thumb_width(), file_w, file_h, lnki_w, lnki_h, lnki_thumbable, lnki_upright);// calculate again using width and height
@@ -235,8 +235,8 @@ public class Xof_xfer_mgr {
 		boolean thumb_pass = false;
 		Make_other();													// NOTE: must go before thumb b/c rslt.Pass() is modified by both
 		if (src_repo_is_wmf) {											// src is wmf >>> copy down thumb; NOTE: thumb not available in tar
-			String src_str = this.Src_url(src_repo, Xof_repo_itm_.Mode_thumb, lnki_w);
-			Io_url trg_url = this.Trg_url(trg_repo, Xof_repo_itm_.Mode_thumb, lnki_w);
+			String src_str = this.Src_url(src_repo, Xof_img_mode_.Tid__thumb, lnki_w);
+			Io_url trg_url = this.Trg_url(trg_repo, Xof_img_mode_.Tid__thumb, lnki_w);
 			thumb_pass = Cmd_download(src_str, trg_url, false);			// NOTE: ogg audios may sometimes have thumb, but 0 size; thumb_pass will be true, but will fail on thumb_rename; PAGE:en.w:Beethoven; [[File:Ludwig van Beethoven - Symphonie 5 c-moll - 1. Allegro con brio.ogg]]
 			if (thumb_pass) {
 				thumb_pass = Img_rename_by_size(trg_url);					// NOTE: lnki cites view_w which will rarely match file_w; PAGE:en.w:Earth;Northwest coast of United States to Central South America at Night.ogv|250px; which is atually 640
@@ -257,8 +257,8 @@ public class Xof_xfer_mgr {
 	}
 	boolean Make_other() {
 		if (!Orig_max_download() && !force_orig) return false;
-		String src_str = this.Src_url(src_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size__neg1);
-		Io_url trg_url = this.Trg_url(trg_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size__neg1);
+		String src_str = this.Src_url(src_repo, Xof_img_mode_.Tid__orig, Xof_img_size.Size__neg1);
+		Io_url trg_url = this.Trg_url(trg_repo, Xof_img_mode_.Tid__orig, Xof_img_size.Size__neg1);
 		return Cmd_download(src_str, trg_url, true);
 	}
 	boolean Orig_max_download() {
@@ -353,8 +353,8 @@ public class Xof_xfer_mgr {
 		file_w = file_size.Width(); file_h = file_size.Height();
 		return true;
 	}
-	String Src_url(Xof_repo_itm repo, byte mode, int lnki_w)	{return url_bldr.Init_for_src_file(mode, repo, orig_ttl, orig_ttl_md5, orig_ext, lnki_w, lnki_thumbtime, lnki_page).Xto_str();}
-	Io_url Trg_url(Xof_repo_itm repo, byte mode, int lnki_w)	{return url_bldr.Init_for_trg_file(mode, repo, orig_ttl, orig_ttl_md5, orig_ext, lnki_w, lnki_thumbtime, lnki_page).Xto_url();}
+	String Src_url(Xof_repo_itm repo, byte mode, int lnki_w)	{return url_bldr.Init_for_src_file(repo, mode, orig_ttl, orig_ttl_md5, orig_ext, lnki_w, lnki_thumbtime, lnki_page).Xto_str();}
+	Io_url Trg_url(Xof_repo_itm repo, byte mode, int lnki_w)	{return url_bldr.Init_for_trg_file(repo, mode, orig_ttl, orig_ttl_md5, orig_ext, lnki_w, lnki_thumbtime, lnki_page).Xto_url();}
 	private Xof_url_bldr url_bldr = new Xof_url_bldr();
 }
 /*

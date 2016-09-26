@@ -21,7 +21,7 @@ import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htm
 import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.htmls.core.wkrs.bfr_args.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.xtns.pagebanners.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
 public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
 	private final    Xoh_img_xoimg_hzip xoimg = new Xoh_img_xoimg_hzip();
@@ -272,13 +272,16 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 
 		// set url_bldr
 		Xof_url_bldr url_bldr = hctx.File__url_bldr();
-		url_bldr.Init_by_root(file__repo_is_local ? hctx.Fsys__file__wiki() : hctx.Fsys__file__comm(), hctx.Fsys__is_wnt(), Byte_ascii.Slash, false, false, Md5_depth);
+		byte repo_tid = file__repo_is_local ? Xof_repo_tid_.Tid__local : Xof_repo_tid_.Tid__remote;
+		byte[] fsys_root = file__repo_is_local ? hctx.Fsys__file__wiki() : hctx.Fsys__file__comm();
+
+		url_bldr.Init_by_repo(repo_tid, fsys_root, hctx.Fsys__is_wnt(), Byte_ascii.Slash, false, false, Md5_depth);
 		// NOTE: set md5 / ext now b/c src_page will be changed for gui mode
 		byte[] md5 = Xof_file_wkr_.Md5(src_page);
 		Xof_ext ext = Xof_ext_.new_by_ttl_(src_page);
 		if (!hpg.Wiki().File__fsdb_mode().Tid__bld())	// if gui, do not url-encode; else "View HTML" will not work, since fsys uses non-url-decoded form; note needs to be url-encoded else hdiff will return different values
 			src_page = Xoa_ttl.Replace_spaces(Gfo_url_encoder_.Href.Decode(src_page));
-		url_bldr.Init_for_trg_html(file__is_orig ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb, hctx.Fsys__repo(file__repo_is_local), src_page, md5, ext, file_w, file_time, file_page);
+		url_bldr.Init_for_trg_html(hctx.Fsys__repo(file__repo_is_local), file__is_orig ? Xof_img_mode_.Tid__orig : Xof_img_mode_.Tid__thumb, src_page, md5, ext, file_w, file_time, file_page);
 
 		// set data vars for wtr
 		data.Init_by_decode(anch_rel_is_nofollow, anch_title_bgn, anch_title_end, img__wo_anch, img__is_vid, img_w, img_h, img_alt_bgn, img_alt_end, img_imap_idx);

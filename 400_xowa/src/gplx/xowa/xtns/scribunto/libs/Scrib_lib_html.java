@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_lib_html implements Scrib_lib {
 	public Scrib_lib_html(Scrib_core core) {}
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;

@@ -106,7 +106,7 @@ public class Xoh_page_wtr_wkr {
 		, portal_mgr.Div_ns_bry(wiki.Utl__bfr_mkr(), page_ttl, wiki.Ns_mgr())
 		, portal_mgr.Div_view_bry(wiki.Utl__bfr_mkr(), html_gen_tid, page.Html_data().Xtn_search_text())
 		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar)
-		, portal_mgr.Div_sync_bry(tmp_bfr, wiki, page)
+		, portal_mgr.Div_sync_bry(tmp_bfr, app.Api_root().Addon().Bldr().Sync().Manual_enabled(), wiki, page)
 		, portal_mgr.Div_wikis_bry(wiki.Utl__bfr_mkr())
 		, portal_mgr.Sidebar_mgr().Html_bry()
 		, mgr.Edit_rename_div_bry(page_ttl), page.Html_data().Edit_preview_w_dbg(), js_edit_toolbar_bry			
@@ -132,9 +132,10 @@ public class Xoh_page_wtr_wkr {
 				Write_body_edit(bfr, data_raw, page_ns_id, page_tid);
 			else {
 				switch (page_tid) {
+					case Xow_page_tid.Tid_msg:
 					case Xow_page_tid.Tid_js:
 					case Xow_page_tid.Tid_css:
-					case Xow_page_tid.Tid_lua:		Write_body_pre			(bfr, app, wiki, data_raw, tmp_bfr); page_tid_uses_pre = true; break;
+					case Xow_page_tid.Tid_lua:		Write_body_pre			(bfr, app, wiki, hctx, data_raw, tmp_bfr); page_tid_uses_pre = true; break;
 					case Xow_page_tid.Tid_json:		app.Wiki_mgr().Wdata_mgr().Write_json_as_html(bfr, page_ttl.Full_db(), data_raw); break;
 					case Xow_page_tid.Tid_wikitext: Write_body_wikitext		(bfr, app, wiki, data_raw, ctx, hctx, page, page_tid, page_ns_id); break;
 				}
@@ -154,7 +155,7 @@ public class Xoh_page_wtr_wkr {
 		}
 		// dump and exit if MediaWiki message;
 		if	(ns_id == Xow_ns_.Tid__mediawiki) {	// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
-			bfr.Add(Xoa_gfs_php_mgr.Xto_php(tmp_bfr, Bool_.N, data_raw));
+			bfr.Add(Gfs_php_converter.Xto_php(tmp_bfr, Bool_.N, data_raw));
 			return;
 		}
 		// if [[File]], add boilerplate header; note that html is XOWA-generated so does not need to be tidied
@@ -175,7 +176,7 @@ public class Xoh_page_wtr_wkr {
 		}
 		
 		// if [[Category]], render rest of html (Subcategories; Pages; Files); note that a category may have other html which requires wikitext processing
-		if (ns_id == Xow_ns_.Tid__category) wiki.Html_mgr().Ns_ctg().Write_catpage(tidy_bfr, wiki, page, hctx);
+		if (ns_id == Xow_ns_.Tid__category) wiki.Html_mgr().Catpage_mgr().Write_catpage(tidy_bfr, wiki, page, hctx);
 
 		// tidy html
 		wiki.Html_mgr().Tidy_mgr().Exec_tidy(tidy_bfr, !hctx.Mode_is_hdump(), page.Url_bry_safe());
@@ -199,16 +200,19 @@ public class Xoh_page_wtr_wkr {
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
 		if (vnt_mgr.Enabled()) bfr.Add(vnt_mgr.Convert_lang().Parse_page(vnt_mgr.Cur_itm(), page.Db().Page().Id(), bfr.To_bry_and_clear()));
 	}
-	private void Write_body_pre(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, byte[] data_raw, Bry_bfr tmp_bfr) {
+	private void Write_body_pre(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, Xoh_wtr_ctx hctx, byte[] data_raw, Bry_bfr tmp_bfr) {
 		Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, data_raw, 0, data_raw.length, false, false);
-		app.Html_mgr().Page_mgr().Content_code_fmtr().Bld_bfr_many(bfr, tmp_bfr);
+		if (hctx.Mode_is_hdump())
+			bfr.Add(data_raw);
+		else
+			app.Html_mgr().Page_mgr().Content_code_fmtr().Bld_bfr_many(bfr, tmp_bfr);
 		tmp_bfr.Clear();
 	}
 	private void Write_body_edit(Bry_bfr bfr, byte[] data_raw, int ns_id, byte page_tid) {
 		if	(	ns_id == Xow_ns_.Tid__mediawiki			// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
 			&&	page_tid == Xow_page_tid.Tid_wikitext
 			)
-			data_raw = Xoa_gfs_php_mgr.Xto_php(tmp_bfr, Bool_.N, data_raw);
+			data_raw = Gfs_php_converter.Xto_php(tmp_bfr, Bool_.N, data_raw);
 		int data_raw_len = data_raw.length;
 		if (mgr.Html_capable())
 			Xoh_html_wtr_escaper.Escape(page.Wikie().Appe().Parser_amp_mgr(), bfr, data_raw, 0, data_raw_len, false, false);	// NOTE: must escape; assume that browser will automatically escape (&lt;) (which Mozilla does)

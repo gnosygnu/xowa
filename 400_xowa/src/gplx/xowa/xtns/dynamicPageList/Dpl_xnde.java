@@ -89,12 +89,12 @@ class Dpl_page_finder {
 		List_adp del_list = List_adp_.New();
 		int ns_filter = itm.Ns_filter();
 		Ordered_hash exclude_pages = Ordered_hash_.New();
-		Find_excludes(exclude_pages, load_mgr, tmp_page, tmp_id, itm.Ctg_excludes());
+		Find_excludes(exclude_pages, wiki, load_mgr, tmp_page, tmp_id, itm.Ctg_excludes());
 
 		for (int i = 0; i < includes_len; i++) {	// loop over includes
 			byte[] include = (byte[])includes.Get_at(i);
 			cur_regy.Clear(); del_list.Clear();
-			Find_pages_in_ctg(cur_regy, load_mgr, tmp_page, tmp_id, include);
+			Find_pages_in_ctg(cur_regy, wiki, load_mgr, tmp_page, tmp_id, include);
 			Del_old_pages_not_in_cur(i, tmp_id, old_regy, cur_regy, del_list);
 			Add_cur_pages_also_in_old(i, tmp_id, old_regy, cur_regy, new_regy, exclude_pages, ns_filter);
 			old_regy = new_regy;
@@ -108,30 +108,35 @@ class Dpl_page_finder {
 		wiki.Db_mgr().Load_mgr().Load_by_ids(Cancelable_.Never, rv, 0, pages_len);
 		rv.Sort_by(Xowd_page_itm_sorter.IdAsc);
 	}
-	private static void Find_excludes(Ordered_hash exclude_pages, Xodb_load_mgr load_mgr, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, List_adp exclude_ctgs) {
+	private static void Find_excludes(Ordered_hash exclude_pages, Xowe_wiki wiki, Xodb_load_mgr load_mgr, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, List_adp exclude_ctgs) {
 		if (exclude_ctgs == null) return;
 		int exclude_ctgs_len = exclude_ctgs.Count();
 		for (int i = 0; i < exclude_ctgs_len; i++) {
 			byte[] exclude_ctg = (byte[])exclude_ctgs.Get_at(i);
-			Find_pages_in_ctg(exclude_pages, load_mgr, tmp_page, tmp_id, exclude_ctg);
+			Find_pages_in_ctg(exclude_pages, wiki, load_mgr, tmp_page, tmp_id, exclude_ctg);
 		}
 	}
-	private static void Find_pages_in_ctg(Ordered_hash list, Xodb_load_mgr load_mgr, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, byte[] ctg_ttl) {
-		Xoctg_catpage_ctg ctg = new Xoctg_catpage_ctg(ctg_ttl);
-		load_mgr.Load_ctg_v1(ctg, ctg_ttl);
+	private static void Find_pages_in_ctg(Ordered_hash rv, Xowe_wiki wiki, Xodb_load_mgr load_mgr, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, byte[] ctg_ttl) {
+		Xoctg_catpage_ctg ctg = wiki.Html_mgr().Catpage_mgr().Get_or_load_or_null(wiki, wiki.Ttl_parse(gplx.xowa.wikis.nss.Xow_ns_.Tid__category, ctg_ttl));
+		if (ctg == null) return;
 
-		for (byte ctg_tid = 0; ctg_tid < Xoa_ctg_mgr.Tid__max; ctg_tid++) {
-			Xoctg_catpage_grp ctg_mgr = ctg.Grp_by_tid(ctg_tid); if (ctg_mgr == null) continue;
-			int itms_len = ctg_mgr.Total();
-			for (int i = 0; i < itms_len; i++) {
-				Xoctg_catpage_itm ctg_itm = ctg_mgr.Itms()[i];					
-				int ctg_itm_id = ctg_itm.Page_id();
-				if (list.Has(tmp_id.Val_(ctg_itm_id))) continue;
-				list.Add(Int_obj_ref.New(ctg_itm_id), ctg_itm);
-//					if (ctg_tid == Xoa_ctg_mgr.Tid_subc) {	// recurse subcategories
-//						load_mgr.Load_by_id(tmp_page, ctg_itm_id);
-//						Find_pages_in_ctg(list, load_mgr, tmp_page, tmp_id, tmp_page.Ttl_wo_ns());
-//					}
+		// loop grps to get grp
+		for (byte ctg_tid = 0; ctg_tid < Xoa_ctg_mgr.Tid___max; ++ctg_tid) {
+			Xoctg_catpage_grp ctg_grp = ctg.Grp_by_tid(ctg_tid);
+			int itms_len = ctg_grp.Itms__len();
+
+			// loop itms in grp and add to hash
+			for (int i = 0; i < itms_len; ++i) {
+				Xoctg_catpage_itm ctg_itm = ctg_grp.Itms__get_at(i);					
+				int itm_page_id = ctg_itm.Page_id();
+				if (rv.Has(tmp_id.Val_(itm_page_id))) continue;
+				rv.Add(Int_obj_ref.New(itm_page_id), ctg_itm);
+
+				// DELETE: recurse subcategories; PAGE:en.b:XML DATE:2016-09-18
+				// if (ctg_tid == Xoa_ctg_mgr.Tid__subc) {
+				//	load_mgr.Load_by_id(tmp_page, itm_page_id);
+				//	Find_pages_in_ctg(rv, wiki, load_mgr, tmp_page, tmp_id, tmp_page.Ttl_page_db());
+				// }
 			}
 		}
 	}

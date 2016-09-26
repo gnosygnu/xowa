@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.core.threads.*; import gplx.core.ios.*; import gplx.core.ios.streams.*;
-import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.fsdb.*;
+import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*; import gplx.xowa.guis.cbks.js.*;
 public class Xof_file_wkr implements Gfo_thread_wkr {
 	private final    Xof_orig_mgr orig_mgr; private final    Xof_bin_mgr bin_mgr; private final    Fsm_mnt_mgr mnt_mgr; private final    Xou_cache_mgr cache_mgr;
@@ -97,7 +97,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 			try {
 				if (file_rdr != Io_stream_rdr_.Noop) {
 					Xof_repo_itm repo = repo_mgr.Get_trg_by_id_or_null(fsdb.Orig_repo_id(), fsdb.Lnki_ttl(), page.Url_bry_safe());
-					Io_url file_url = url_bldr.Init_for_trg_file(Xof_repo_itm_.Mode_by_bool(!fsdb.File_is_orig()), repo, fsdb.Orig_ttl(), fsdb.Orig_ttl_md5(), fsdb.Orig_ext(), fsdb.File_w(), fsdb.Lnki_time(), fsdb.Lnki_page()).Xto_url();
+					Io_url file_url = url_bldr.Init_for_trg_file(repo, Xof_img_mode_.By_bool(!fsdb.File_is_orig()), fsdb.Orig_ttl(), fsdb.Orig_ttl_md5(), fsdb.Orig_ext(), fsdb.File_w(), fsdb.Lnki_time(), fsdb.Lnki_page()).Xto_url();
 					Io_stream_wtr_.Save_rdr(file_url, file_rdr, Io_download_fmt.Null);
 					fsdb.File_size_(file_rdr.Len());			// must update file size for cache
 					fsdb.Init_at_lnki_by_near(fsdb.File_w());	// change lnki to be file_w,-1

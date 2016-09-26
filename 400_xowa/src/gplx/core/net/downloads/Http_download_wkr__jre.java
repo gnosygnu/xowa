@@ -32,7 +32,7 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
         File trg_fil = new File(trg_url.Xto_api());
         FileOutputStream trg_stream = null;
         try     {trg_stream = new FileOutputStream(trg_fil.getPath(), prog_resumed);}	// pass true for append
-        catch   (FileNotFoundException e) {throw Err_.new_("download_file", "write failed; permission error?", "trg", trg_url, "err", e.toString());}
+        catch   (FileNotFoundException e) {throw Err_.new_wo_type("write failed; permission error?", "trg", trg_url, "err", e.toString());}
          
         // open src stream
         InputStream src_stream = null;
@@ -41,7 +41,7 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
         catch   (MalformedURLException e) {
 			try {if (trg_stream != null) trg_stream.close();}
 			catch (IOException e1) {}
-        	throw Err_.new_("download_file", "bad url", "src", src_url, "err" + e.toString());
+        	throw Err_.new_wo_type("bad url", "src", src_url, "err" + e.toString());
         }
         HttpURLConnection src_conn = null;
         try {
@@ -58,21 +58,25 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
 	            if (response_code != HttpURLConnection.HTTP_PARTIAL) {
 	    			try {if (trg_stream != null) trg_stream.close();}
 	    			catch (IOException e1) {}
-	                throw Err_.new_("download_file", "server returned non-partial response code", "src", src_url, "code", src_conn.getResponseCode(), "msg", src_conn.getResponseMessage());
+                    if (response_code == 416 && prog_data_cur > 0) {	// 416=Requested Range not satisfiable; if resuming at position > max_len, assume critical failure; delete files to start over from scratch; DATE:2016-09-24
+                        Io_mgr.Instance.DeleteFil(this.Trg_url());
+                        Io_mgr.Instance.DeleteFil(this.Checkpoint_url());
+                    }
+	                throw Err_.new_wo_type("server returned non-partial response code", "src", src_url, "code", src_conn.getResponseCode(), "msg", src_conn.getResponseMessage());
 	            }
             }
             else {
 	            if (response_code != HttpURLConnection.HTTP_OK) {
 	    			try {if (trg_stream != null) trg_stream.close();}
 	    			catch (IOException e1) {}
-	                throw Err_.new_("download_file", "server returned non-OK response code", "src", src_url, "code", src_conn.getResponseCode(), "msg", src_conn.getResponseMessage());
+	                throw Err_.new_wo_type("server returned non-OK response code", "src", src_url, "code", src_conn.getResponseCode(), "msg", src_conn.getResponseMessage());
 	            }
             }
             src_stream = src_conn.getInputStream();
         } catch (Exception e) {
 			try {if (trg_stream != null) trg_stream.close();}
 			catch (IOException e1) {}
-            throw Err_.new_("download_file", "src connection failed", "src", src_url, "err",e.toString());
+            throw Err_.new_wo_type(Err__server_connection_failed, "src", src_url, "err", e.toString());
         }
 
         // do downloading
@@ -89,7 +93,7 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
                 if (prog_ui.Prog_notify_and_chk_if_suspended(prog_data_cur, prog_data_end)) return Gfo_prog_ui_.Status__suspended;
             }
         } catch (Exception e) {
-            throw Err_.new_("download_file", "downloading failed", "src", src_url, "trg_url", trg_url, "err", e.toString());
+            throw Err_.new_wo_type(Err__server_download_failed, "src", src_url, "trg_url", trg_url, "err", e.toString());
         }
         finally {
             try {
@@ -100,4 +104,8 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
         }
         return Gfo_prog_ui_.Status__done;
 	}
-	}
+		public static final String
+	  Err__server_connection_failed = "server connection failed"
+	, Err__server_download_failed   = "server download failed"
+	;
+}

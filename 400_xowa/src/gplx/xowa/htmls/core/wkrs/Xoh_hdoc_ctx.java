@@ -26,6 +26,7 @@ public class Xoh_hdoc_ctx {
 	public byte[]					Fsys__root()		{return fsys__root;} private byte[] fsys__root;
 	public byte[]					Fsys__file__comm()	{return fsys__file__comm;} private byte[] fsys__file__comm;
 	public byte[]					Fsys__file__wiki()	{return fsys__file__wiki;} private byte[] fsys__file__wiki;
+	public byte[]					Fsys__file__math()	{return fsys__file__math;} private byte[] fsys__file__math;
 	public Xof_repo_itm				Fsys__repo(boolean local)	{return local ? repo_local : repo_remote;} private Xof_repo_itm repo_remote, repo_local;
 	public boolean						Fsys__is_wnt()		{return fsys__is_wnt;} private boolean fsys__is_wnt;
 	public Xoa_app					App()				{return app;} private Xoa_app app;
@@ -53,6 +54,7 @@ public class Xoh_hdoc_ctx {
 		this.fsys__root = fsys_mgr.Root_dir().To_http_file_bry();
 		this.fsys__file = fsys_mgr.File_dir().To_http_file_bry();
 		this.fsys__file__comm = Bry_.Add(fsys__file, Xow_domain_itm_.Bry__commons, Byte_ascii.Slash_bry);
+		this.fsys__file__math = Bry_.Add(fsys__file, Bry_.new_a7("math"), Byte_ascii.Slash_bry);
 		this.fsys__res = gplx.core.envs.Op_sys.Cur().Tid_is_drd() ? Fsys__res__drd : fsys__root;
 		this.fsys__is_wnt = gplx.core.envs.Op_sys.Cur().Tid_is_wnt();
 		Xou_cache_mgr usr_cache_mgr = app.User().User_db_mgr().Cache_mgr();

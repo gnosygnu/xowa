@@ -35,7 +35,7 @@ public class Xob_db_file {
 	public static Xob_db_file New__img_link(Xow_wiki wiki)			{return New(wiki.Fsys_mgr().Root_dir(), "xowa.wiki.imglinks.sqlite3");}
 	public static Xob_db_file New__page_file_map(Xow_wiki wiki)		{return New(wiki.Fsys_mgr().Root_dir(), wiki.Domain_str() + "-file-page_map.xowa");}
 	public static Xob_db_file New__deletion_db(Xow_wiki wiki)		{
-		String name = String_.Format("{0}-file-core-deletion_db-{1}.xowa", wiki.Domain_str(), Datetime_now.Get().XtoStr_fmt("yyyy.MM"));
+		String name = String_.Format("{0}-file-deletion-{1}.xowa", wiki.Domain_str(), Datetime_now.Get().XtoStr_fmt("yyyy.MM"));
 		return New(wiki.Fsys_mgr().Root_dir(), name);
 	}
 	public static Xob_db_file New(Io_url dir, String name) {

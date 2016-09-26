@@ -27,6 +27,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	private final    Xoae_app app;
 	private final    Wdata_prop_val_visitor prop_val_visitor;
 	private final    Wdata_doc_parser wdoc_parser_v1 = new Wdata_doc_parser_v1(), wdoc_parser_v2 = new Wdata_doc_parser_v2();
+	private final    Object thread_lock =new Object();
 	private Wdata_hwtr_mgr hwtr_mgr;
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
 	public Wdata_wiki_mgr(Xoae_app app) {
@@ -50,7 +51,16 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		Doc_mgr.Enabled_(v);
 	}
 	public byte[] Domain() {return domain;} public void Domain_(byte[] v) {domain = v;} private byte[] domain = Bry_.new_a7("www.wikidata.org");
-	public Xowe_wiki Wdata_wiki() {if (wdata_wiki == null) wdata_wiki = app.Wiki_mgr().Get_by_or_make(domain).Init_assert(); return wdata_wiki;} private Xowe_wiki wdata_wiki;
+	public Xowe_wiki Wdata_wiki() {
+		if (wdata_wiki == null) {
+			synchronized (thread_lock) {	// LOCK:must synchronized b/c multiple threads may init wdata_mgr at same time;
+				Xowe_wiki tmp_wdata_wiki = app.Wiki_mgr().Get_by_or_make(domain).Init_assert();
+				if (wdata_wiki == null)	// synchronized is not around "if (wdata_wiki == null)", so multiple threads may try to set; only set if null; DATE:2016-09-12
+					wdata_wiki = tmp_wdata_wiki;
+			}
+		}
+		return wdata_wiki;
+	}	private Xowe_wiki wdata_wiki;
 	public Json_parser Jdoc_parser() {return jdoc_parser;} private Json_parser jdoc_parser = new Json_parser();
 	public void Init_by_app() {}
 	public Wdata_doc_parser Wdoc_parser(Json_doc jdoc) {
@@ -61,7 +71,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	}
 	public Xop_log_property_wkr Property_wkr() {return property_wkr;} private Xop_log_property_wkr property_wkr;
 	public void Clear() {
-		synchronized (wdoc_parser_v2) {	// LOCK:app-level
+		synchronized (thread_lock) {	// LOCK:app-level
 			Qid_mgr.Clear();
 			Pid_mgr.Clear();
 			Doc_mgr.Clear();
@@ -72,14 +82,14 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		Wdata_doc wdoc = Doc_mgr.Get_by_bry_or_null(qid); if (wdoc == null) return or;
 		Wbase_claim_grp claim_grp = wdoc.Claim_list_get(pid); if (claim_grp == null || claim_grp.Len() == 0) return or;
 		Wbase_claim_base claim_itm = claim_grp.Get_at(0);
-		synchronized (tmp_bfr) {	// LOCK:must synchronized b/c prop_val_visitor has member bfr which can get overwritten; DATE:2016-07-06
+		synchronized (thread_lock) {	// LOCK:must synchronized b/c prop_val_visitor has member bfr which can get overwritten; DATE:2016-07-06
 			prop_val_visitor.Init(tmp_bfr, hwtr_mgr.Msgs(), domain.Lang_orig_key());
 			claim_itm.Welcome(prop_val_visitor);
 			return tmp_bfr.To_bry_and_clear();
 		}
 	}
 	public void Resolve_to_bfr(Bry_bfr bfr, Wbase_claim_grp prop_grp, byte[] lang_key) {
-		synchronized (this) {	// LOCK:must synchronized b/c prop_val_visitor has member bfr which can get overwritten; DATE:2016-07-06
+		synchronized (thread_lock) {	// LOCK:must synchronized b/c prop_val_visitor has member bfr which can get overwritten; DATE:2016-07-06
 			Hwtr_mgr_assert();
 			int len = prop_grp.Len();
 			Wbase_claim_base selected = null;

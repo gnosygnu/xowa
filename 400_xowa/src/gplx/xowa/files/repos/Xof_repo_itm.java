@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.btries.*; import gplx.core.consoles.*;
-import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*;	
+import gplx.core.consoles.*;
+import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xof_repo_itm implements Gfo_invk {
 	private final    Xoa_fsys_mgr app_fsys; private final    Xof_rule_mgr ext_rule_mgr;
@@ -25,23 +25,33 @@ public class Xof_repo_itm implements Gfo_invk {
 		this.key = key; this.app_fsys = app_fsys; this.ext_rule_mgr = ext_rule_mgr;
 		Wiki_domain_(wiki_domain);
 	}
-	public byte[]			Key()				{return key;} private final    byte[] key;
-	public byte[]			Wiki_domain()		{return wiki_domain;} private byte[] wiki_domain;
-	public byte[]			Wiki_abrv_xo()		{return wiki_abrv_xo;} private byte[] wiki_abrv_xo;
-	public byte[]			Root_bry()			{return root_bry;} private byte[] root_bry;
-	public byte[]			Root_http()			{return root_http;} private byte[] root_http = Bry_.Empty;
-	public String			Root_str()			{return root_str;} private String root_str;
-	public byte				Dir_spr()			{return dir_spr;} private byte dir_spr;
-	public boolean				Fsys_is_wnt() {return fsys_is_wnt;} public Xof_repo_itm Fsys_is_wnt_(boolean v) {fsys_is_wnt = v; return this;} private boolean fsys_is_wnt;
-	public boolean				Shorten_ttl() {return shorten_ttl;} public Xof_repo_itm Shorten_ttl_(boolean v) {shorten_ttl = v; return this;} private boolean shorten_ttl = true;
-	public boolean				Wmf_fsys() {return wmf_fsys;} public Xof_repo_itm Wmf_fsys_(boolean v) {wmf_fsys = v; return this;} private boolean wmf_fsys;
-	public boolean				Wmf_api() {return wmf_api;} public Xof_repo_itm Wmf_api_(boolean v) {wmf_api = v; return this;} private boolean wmf_api;
-	public boolean				Tarball() {return tarball;} public Xof_repo_itm Tarball_(boolean v) {tarball = v; return this;} private boolean tarball;
-	public byte[][]			Mode_names() {return mode_names;} private byte[][] mode_names = new byte[][] {Xof_repo_itm_.Mode_names_key[0], Xof_repo_itm_.Mode_names_key[1]};
-	public int				Dir_depth() {return dir_depth;} public Xof_repo_itm Dir_depth_(int v) {dir_depth = v; return this;} private int dir_depth = 4;
-	public Xof_rule_grp		Ext_rules() {return ext_rules;} private Xof_rule_grp ext_rules;
+	public byte[]			Key()				{return key;}			private final    byte[] key;			// EX: "src_http_commons"
+	public byte				Tid()				{return tid;}			private byte tid;						// EX: Xof_repo_tid_.Tid__remote
+	public byte[]			Wiki_domain()		{return wiki_domain;}	private byte[] wiki_domain;				// EX: "commons.wikimedia.org"
+	public byte[]			Wiki_abrv_xo()		{return wiki_abrv_xo;}	private byte[] wiki_abrv_xo;			// EX: "c"
+	public byte				Dir_spr()			{return dir_spr;}		private byte dir_spr;					// EX: "/"
+	public int				Dir_depth()			{return dir_depth;}		private int dir_depth = 4;				// EX: "/1/2/3/4" vs "/1/2"
+	public byte[]			Root_bry()			{return root_bry;}		private byte[] root_bry;				// EX:
+	public byte[]			Root_http()			{return root_http;}		private byte[] root_http = Bry_.Empty;	// EX: 
+	public String			Root_str()			{return root_str;}		private String root_str;
+	public boolean			Fsys_is_wnt()		{return fsys_is_wnt;}	private boolean fsys_is_wnt;
+	public boolean			Shorten_ttl()		{return shorten_ttl;}	private boolean shorten_ttl = true;
+	public boolean			Wmf_fsys()			{return wmf_fsys;}		private boolean wmf_fsys;
+	public boolean			Wmf_api()			{return wmf_api;}		private boolean wmf_api;
+	public boolean			Tarball()			{return tarball;}		private boolean tarball;
+	public byte[][]			Mode_names()		{return mode_names;}	private byte[][] mode_names = new byte[][] {Xof_img_mode_.Names_ary[0], Xof_img_mode_.Names_ary[1]};
+	public Xof_rule_grp		Ext_rules()			{return ext_rules;}		private Xof_rule_grp ext_rules;
+	public boolean			Primary()			{return primary;}		private boolean primary;
+
+	public Xof_repo_itm		Fsys_is_wnt_(boolean v) {fsys_is_wnt = v; return this;} 
+	public Xof_repo_itm		Shorten_ttl_(boolean v) {shorten_ttl = v; return this;} 
+	public Xof_repo_itm		Wmf_fsys_(boolean v) {wmf_fsys = v; return this;} 
+	public Xof_repo_itm		Wmf_api_(boolean v) {wmf_api = v; return this;}
+	public Xof_repo_itm		Tarball_(boolean v) {tarball = v; return this;} 
 	public Xof_repo_itm		Ext_rules_(byte[] ext_rules_key) {ext_rules = ext_rule_mgr.Get_or_new(ext_rules_key); return this;}
-	public boolean				Primary() {return primary;} public Xof_repo_itm Primary_(boolean v) {primary = v; return this;} private boolean primary;
+	public Xof_repo_itm		Dir_depth_(int v) {dir_depth = v; return this;} 
+	public Xof_repo_itm		Primary_(boolean v) {primary = v; return this;} 
+
 	public void				Wiki_domain_(byte[] v) {
 		this.wiki_domain = v;
 		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(v);
@@ -70,11 +80,11 @@ public class Xof_repo_itm implements Gfo_invk {
 	}
 	public byte[] Gen_name_src(Bry_bfr tmp_bfr, byte[] name) {
 		if (!fsys_is_wnt || wmf_fsys) return name;
-		return Xof_repo_itm_.Ttl_invalid_fsys_chars(tmp_bfr, name);
+		return Xof_itm_ttl_.Remove_invalid(tmp_bfr, name);
 	}
 	public byte[] Gen_name_trg(Bry_bfr tmp_bfr, byte[] bry, byte[] md5, Xof_ext ext) {
 		byte[] rv = Gen_name_src(tmp_bfr, bry);
-		return shorten_ttl ? Xof_repo_itm_.Ttl_shorten_ttl(tmp_bfr, rv, Ttl__max_len, md5, ext.Ext()) : rv;
+		return shorten_ttl ? Xof_itm_ttl_.Shorten(tmp_bfr, rv, Ttl__max_len, md5, ext.Ext()) : rv;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_owner))				throw Err_.new_unimplemented_w_msg("deprecated repo_itm.owner");
@@ -83,9 +93,10 @@ public class Xof_repo_itm implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_ext_rules_))			Ext_rules_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_wmf_api_))			wmf_api = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_tarball_))			tarball = m.ReadYn("v");
+		else if	(ctx.Match(k, Invk_tid_))				tid = Xof_repo_tid_.By_str(m.ReadStr("v"));
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final String Invk_owner = "owner", Invk_fsys_ = "fsys_", Invk_ext_rules_ = "ext_rules_", Invk_primary_ = "primary_", Invk_wmf_api_ = "wmf_api_", Invk_tarball_ = "tarball_";
+	private static final String Invk_owner = "owner", Invk_fsys_ = "fsys_", Invk_ext_rules_ = "ext_rules_", Invk_primary_ = "primary_", Invk_wmf_api_ = "wmf_api_", Invk_tarball_ = "tarball_", Invk_tid_ = "tid_";
 	public static final int Ttl__max_len = 180;
 }

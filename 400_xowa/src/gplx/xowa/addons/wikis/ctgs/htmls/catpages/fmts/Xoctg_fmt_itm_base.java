@@ -29,7 +29,7 @@ public abstract class Xoctg_fmt_itm_base implements gplx.core.brys.Bfr_arg {
 	public int		Loop_end_idx() {return loop_end_idx;} private int loop_end_idx;
 	public boolean		Loop_ends_at_col() {return loop_ends_at_col;} private boolean loop_ends_at_col;
 	public void		Col_end_(int col_bgn, int col_idx) {
-		this.col_end = col_bgn + Calc_col_len(grp.Len(), col_idx, Cols_max);
+		this.col_end = col_bgn + Calc_col_len(grp.Count_by_page(), col_idx, Cols_max);
 	}
 	public void Init_from_ltr(Xow_wiki wiki, Xoctg_catpage_grp grp) {this.wiki = wiki; this.grp = grp;}
 	public void Set_ltr_and_bgn(byte[] ltr_cur, int loop_bgn) {this.ltr_cur = ltr_cur; this.loop_bgn = loop_bgn;}
@@ -37,10 +37,10 @@ public abstract class Xoctg_fmt_itm_base implements gplx.core.brys.Bfr_arg {
 		// init vars
 		Xoh_href_parser href_parser = wiki.App().Html__href_parser();
 		Xou_history_mgr history_mgr = wiki.App().User().History_mgr(); 
-		int len = grp.Len();
+		int grp_end = grp.End();
 
 		// loop over itms; 
-		for (int i = loop_bgn; i < len; i++) {
+		for (int i = loop_bgn; i < grp_end; i++) {
 			// reached end of col; exit
 			if (i == col_end) {
 				loop_end_idx = i;
@@ -49,7 +49,7 @@ public abstract class Xoctg_fmt_itm_base implements gplx.core.brys.Bfr_arg {
 			}
 
 			// get sortkey
-			Xoctg_catpage_itm itm = grp.Itms()[i];
+			Xoctg_catpage_itm itm = grp.Itms__get_at(i);
 			byte[] itm_sortkey = itm.Sort_key();
 
 			// reached end of ltr; exit
@@ -61,7 +61,7 @@ public abstract class Xoctg_fmt_itm_base implements gplx.core.brys.Bfr_arg {
 
 			Bld_html(bfr, wiki, history_mgr, href_parser, itm, itm.Page_ttl());
 		}
-		loop_end_idx = len;
+		loop_end_idx = grp_end;
 		loop_ends_at_col = true;
 	}
 	@gplx.Virtual public void Bld_html(Bry_bfr bfr, Xow_wiki wiki, Xou_history_mgr history_mgr, Xoh_href_parser href_parser, Xoctg_catpage_itm itm, Xoa_ttl ttl) {

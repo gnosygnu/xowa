@@ -19,6 +19,7 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import gplx.core.primitives.*; import gplx.core.envs.*; import gplx.core.errs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.funcs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_lib_mw implements Scrib_lib {
 	private Scrib_core core; private Scrib_fsys_mgr fsys_mgr;
 	public Scrib_lib_mw(Scrib_core core) {this.core = core; this.fsys_mgr = core.Fsys_mgr();}

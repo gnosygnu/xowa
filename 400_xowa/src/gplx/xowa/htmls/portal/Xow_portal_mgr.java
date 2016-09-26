@@ -106,15 +106,14 @@ public class Xow_portal_mgr implements Gfo_invk {
 	}	public static final    byte[] Cls_selected_y = Bry_.new_a7("selected"), Cls_new = Bry_.new_a7("new"), Cls_display_none = Bry_.new_a7("xowa_display_none");
 	public byte[] Div_logo_bry() {return div_logo_bry;} private byte[] div_logo_bry = Bry_.Empty;
 	public byte[] Div_home_bry() {return api_skin != null && api_skin.Sidebar_home_enabled() ? div_home_bry : Bry_.Empty;} private byte[] div_home_bry = Bry_.Empty;
-	public byte[] Div_sync_bry(Bry_bfr tmp_bfr, Xow_wiki wiki, Xoa_page page) {
+	public byte[] Div_sync_bry(Bry_bfr tmp_bfr, boolean manual_enabled, Xow_wiki wiki, Xoa_page page) {
 		// only show update_html if wmf; DATE:2016-08-31
-		switch (wiki.Domain_itm().Domain_type().Src()) {
-			case Xow_domain_tid.Src__wmf:
-				div_sync_fmtr.Bld_bfr_many(tmp_bfr, page.Ttl().Full_url());
-				return tmp_bfr.To_bry_and_clear();
-			default:
-				return Bry_.Empty;
+		if (	wiki.Domain_itm().Domain_type().Src() == Xow_domain_tid.Src__wmf
+			&&	manual_enabled) {
+			div_sync_fmtr.Bld_bfr_many(tmp_bfr, page.Ttl().Full_url());
+			return tmp_bfr.To_bry_and_clear();
 		}
+		return Bry_.Empty;
 	}
 	public byte[] Div_wikis_bry(Bry_bfr_mkr bfr_mkr) {
 		if (toggle_itm == null)	// TEST:lazy-new b/c Init_by_wiki

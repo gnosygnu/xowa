@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.cmds.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.bldrs.cmds.*;
 public class Xob_ns_to_db_mgr {
 	private final    Xob_ns_to_db_wkr wkr; private final    Xow_db_mgr db_mgr; private final    long db_max; private boolean one_file_conn_init = true;
 	private final    Ordered_hash db_list = Ordered_hash_.New();

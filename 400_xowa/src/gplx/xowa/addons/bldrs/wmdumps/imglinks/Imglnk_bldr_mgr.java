@@ -41,8 +41,8 @@ class Imglnk_bldr_mgr {
 		Imglnk_reg_tbl reg_tbl = new Imglnk_reg_tbl(conn);
 		conn.Meta_tbl_remake(reg_tbl);
 		reg_tbl.Create_idx__src_ttl();
-		reg_tbl.Insert(conn, Xof_repo_itm_.Repo_local , wiki);
-		reg_tbl.Insert(conn, Xof_repo_itm_.Repo_remote, wiki.Appe().Wiki_mgr().Wiki_commons());
+		reg_tbl.Insert(conn, Xof_repo_tid_.Tid__local , wiki);
+		reg_tbl.Insert(conn, Xof_repo_tid_.Tid__remote, wiki.Appe().Wiki_mgr().Wiki_commons());
 		reg_tbl.Create_idx__trg_ttl();
 
 //			Imglnk_bulk_cmd__img_id.Bulk_exec(conn, Bool_.Y, wiki);

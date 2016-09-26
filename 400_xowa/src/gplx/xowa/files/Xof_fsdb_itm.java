@@ -31,7 +31,7 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	public double				Lnki_time()					{return lnki_time;} private double lnki_time = Xof_lnki_time.Null;
 	public int					Lnki_page()					{return lnki_page;} private int lnki_page = Xof_lnki_page.Null;
 	public int					User_thumb_w()				{return user_thumb_w;} private int user_thumb_w = Xof_img_size.Thumb_width_img;
-	public byte					Orig_repo_id()				{return orig_repo_id;} private byte orig_repo_id = Xof_repo_itm_.Repo_null;
+	public byte					Orig_repo_id()				{return orig_repo_id;} private byte orig_repo_id = Xof_repo_tid_.Tid__null;
 	public byte[]				Orig_repo_name()			{return orig_repo_name;} private byte[] orig_repo_name;
 	public byte[]				Orig_ttl()					{return orig_ttl;} private byte[] orig_ttl;
 	public byte[]				Orig_ttl_md5()				{return orig_ttl_md5;} private byte[] orig_ttl_md5;
@@ -123,7 +123,7 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 		this.file_exists_in_cache = file_exists_in_cache;
 		this.html_w = w; this.html_h = h; this.html_view_url = view_url;
 	}
-	public void Init_by_wm_parse(byte[] lnki_wiki_abrv, boolean repo_is_commons, boolean file_is_orig, byte[] file_ttl_bry, int file_w, double file_time, int file_page) {
+	public void Init_by_wm_parse(byte[] lnki_wiki_abrv, boolean repo_is_commons, boolean file_is_orig, byte[] file_ttl_bry, Xof_ext orig_ext, int file_w, double file_time, int file_page) {
 		this.hdump_mode = Hdump_mode__v2;
 
 		// lnki
@@ -134,12 +134,13 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 		this.lnki_wiki_abrv = lnki_wiki_abrv;
 		this.lnki_time = file_time;
 		this.lnki_page = file_page;
+		this.lnki_exec_tid = Xof_exec_tid.Tid_wiki_page;
 
 		// orig
-		this.orig_repo_id = repo_is_commons ? Xof_repo_itm_.Repo_remote : Xof_repo_itm_.Repo_local;
+		this.orig_repo_id = repo_is_commons ? Xof_repo_tid_.Tid__remote : Xof_repo_tid_.Tid__local;
 		this.file_is_orig = file_is_orig;
 		this.Orig_ttl_(file_ttl_bry);
-		this.orig_ext = Xof_ext_.new_by_ttl_(file_ttl_bry);
+		this.orig_ext = orig_ext;
 
 		// html
 		this.file_w = this.html_w = file_w;

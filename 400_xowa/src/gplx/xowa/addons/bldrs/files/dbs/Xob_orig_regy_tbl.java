@@ -29,7 +29,7 @@ public class Xob_orig_regy_tbl {
 		Sqlite_engine_.Idx_create(usr_dlg, p, "orig_regy", Idx_ttl_local);
 		Sqlite_engine_.Db_attach(p, "page_db", file_registry_db.Url().Raw());
 		Io_url repo_0_dir = repo_0_wiki.Fsys_mgr().Root_dir(), repo_1_dir = repo_1_wiki.Fsys_mgr().Root_dir();
-		byte repo_0_tid = Xof_repo_itm_.Repo_local, repo_1_tid = Xof_repo_itm_.Repo_remote;
+		byte repo_0_tid = Xof_repo_tid_.Tid__local, repo_1_tid = Xof_repo_tid_.Tid__remote;
 		boolean local_is_remote = Bry_.Eq(repo_0_wiki.Domain_bry(), repo_1_wiki.Domain_bry());
 		Xowe_wiki local_wiki = repo_0_wiki;
 		if (	repo_0_is_remote														// .gfs manually marked specifes repo_0 as remote
@@ -37,8 +37,8 @@ public class Xob_orig_regy_tbl {
 				&&	local_is_remote														// repo_0 = repo_1
 				)
 			) {
-			repo_0_tid = Xof_repo_itm_.Repo_remote;
-			repo_1_tid = Xof_repo_itm_.Repo_local;
+			repo_0_tid = Xof_repo_tid_.Tid__remote;
+			repo_1_tid = Xof_repo_tid_.Tid__local;
 			local_wiki = repo_1_wiki;
 		}
 		Create_data_for_repo(usr_dlg, p, local_wiki, Byte_.By_int(repo_0_tid), repo_0_dir.GenSubFil(Xob_db_file.Name__wiki_image));
@@ -54,18 +54,18 @@ public class Xob_orig_regy_tbl {
 	}
 	private static void Create_data_for_repo(Gfo_usr_dlg usr_dlg, Db_conn conn, Xowe_wiki local_wiki, byte repo_tid, Io_url join) {
 		usr_dlg.Note_many("", "", "inserting page for xowa.wiki.image: ~{0}", join.OwnerDir().NameOnly());
-		boolean wiki_has_cs_file = repo_tid == Xof_repo_itm_.Repo_remote && local_wiki.Ns_mgr().Ns_file().Case_match() == Xow_ns_case_.Tid__all;
+		boolean wiki_has_cs_file = repo_tid == Xof_repo_tid_.Tid__remote && local_wiki.Ns_mgr().Ns_file().Case_match() == Xow_ns_case_.Tid__all;
 		String lnki_ttl_fld = wiki_has_cs_file ? "Coalesce(o.lnki_commons_ttl, o.lnki_ttl)" : "o.lnki_ttl";	// NOTE: use lnki_commons_ttl if [[File]] is cs PAGE:en.d:water EX:[[image:wikiquote-logo.png|50px|none|alt=]]; DATE:2014-09-05
 		if (wiki_has_cs_file)
 			Sqlite_engine_.Idx_create(usr_dlg, conn, "orig_regy", Idx_ttl_remote);
 		new Db_attach_mgr(conn, new Db_attach_itm("image_db", join))
-			.Exec_sql_w_msg("orig_regy:updating page"		, Sql_update_repo_page, repo_tid, lnki_ttl_fld)
-			.Exec_sql_w_msg("orig_regy:updating redirect"	, Sql_update_repo_redirect, repo_tid, lnki_ttl_fld);
+			.Exec_sql_w_msg("orig_regy:updating page"		, Sql_update_repo_page		, repo_tid, lnki_ttl_fld)
+			.Exec_sql_w_msg("orig_regy:updating redirect"	, Sql_update_repo_redirect	, repo_tid, lnki_ttl_fld);
 	}
 	private static void Create_data_for_cs(Gfo_usr_dlg usr_dlg, Db_conn p, Xowe_wiki local_wiki, Io_url repo_remote_dir) {
 		p.Exec_sql(Xob_orig_regy_tbl.Sql_cs_mark_dupes);	// orig_regy: find dupes; see note in SQL
 		p.Exec_sql(Xob_orig_regy_tbl.Sql_cs_update_ttls);	// orig_regy: update lnki_ttl with lnki_commons_ttl
-		Create_data_for_repo(usr_dlg, p, local_wiki, Xof_repo_itm_.Repo_remote, repo_remote_dir.GenSubFil(Xob_db_file.Name__wiki_image));
+		Create_data_for_repo(usr_dlg, p, local_wiki, Xof_repo_tid_.Tid__remote, repo_remote_dir.GenSubFil(Xob_db_file.Name__wiki_image));
 		p.Exec_sql(Xob_lnki_regy_tbl.Sql_cs_mark_changed);	// lnki_regy: update lnki_commons_flag
 		p.Exec_sql(Xob_lnki_regy_tbl.Sql_cs_update_ttls);	// lnki_regy: update cs
 	}

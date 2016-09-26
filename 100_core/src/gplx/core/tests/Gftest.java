@@ -19,6 +19,7 @@ package gplx.core.tests; import gplx.*; import gplx.core.*;
 import gplx.core.brys.*;
 public class Gftest {
 	private static final    Bry_bfr bfr = Bry_bfr_.New();
+	public static void Eq__ary(boolean[] expd, boolean[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_adp_.Tid__bool, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary(int[] expd, int[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_adp_.Tid__int, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary(long[] expd, long[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_adp_.Tid__long, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary__lines(String expd, byte[] actl, String msg_fmt, Object... msg_args)	{Eq__ary__lines(expd, String_.new_u8(actl), msg_fmt, msg_args);}
@@ -150,10 +151,11 @@ public class Gftest {
 	private static void Write__itm(Bry_bfr bfr, int type_id, Object ary, int len, int idx) {
 		if (idx < len) {
 			switch (type_id) {
-				case Type_adp_.Tid__bry: bfr.Add((byte[])Array_.Get_at(ary, idx)); break;
-				case Type_adp_.Tid__long: bfr.Add_long_variable(Long_.cast(Array_.Get_at(ary, idx))); break;
-				case Type_adp_.Tid__int: bfr.Add_int_variable(Int_.cast(Array_.Get_at(ary, idx))); break;
-				default: throw Err_.new_unhandled_default(type_id);
+				case Type_adp_.Tid__bool:	bfr.Add_yn(Bool_.cast(Array_.Get_at(ary, idx))); break;
+				case Type_adp_.Tid__bry:	bfr.Add((byte[])Array_.Get_at(ary, idx)); break;
+				case Type_adp_.Tid__long:	bfr.Add_long_variable(Long_.cast(Array_.Get_at(ary, idx))); break;
+				case Type_adp_.Tid__int:	bfr.Add_int_variable(Int_.cast(Array_.Get_at(ary, idx))); break;
+				default:					throw Err_.new_unhandled_default(type_id);
 			}
 		}
 		else
@@ -173,6 +175,7 @@ public class Gftest {
 			else if (expd_obj == null || actl_obj == null)	eq = false;
 			else {
 				switch (tid) {
+					case Type_adp_.Tid__bool:		eq = Bool_.cast(expd_obj) == Bool_.cast(actl_obj); break;
 					case Type_adp_.Tid__bry:		eq = Bry_.Eq((byte[])expd_obj, (byte[])actl_obj); break;
 					case Type_adp_.Tid__long:		eq = Long_.cast(expd_obj) == Long_.cast(actl_obj); break;
 					case Type_adp_.Tid__int:		eq = Int_.cast(expd_obj) == Int_.cast(actl_obj); break;

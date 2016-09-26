@@ -55,7 +55,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 		int len = repos.Count();
 		for (int i = 0; i < len; i++) {
 			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
-			if (pair.Repo_idx() == id) return pair;
+			if (pair.Id() == id) return pair;
 		}
 		return null;
 	}

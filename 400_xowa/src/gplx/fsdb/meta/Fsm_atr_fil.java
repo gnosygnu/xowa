@@ -39,17 +39,15 @@ public class Fsm_atr_fil {
 	public boolean				Select_thm(boolean exact, Fsd_thm_itm rv, int dir_id, int fil_id) {
 		return exact ? tbl_thm.Select_itm_by_w_exact(dir_id, fil_id, rv) : tbl_thm.Select_itm_by_w_near(dir_id, fil_id, rv);
 	}
-	public int				Insert_fil(Fsd_fil_itm rv, byte[] dir, byte[] fil, int ext_id, int bin_db_id, long bin_len, Io_stream_rdr bin_rdr) {
+	public Fsd_fil_itm		Insert_fil(byte[] dir, byte[] fil, int ext_id, int bin_db_id, long bin_len, Io_stream_rdr bin_rdr) {
 		int dir_id = Get_dir_id_or_make(dir);
 		int fil_id = Get_fil_id_or_make(Tid_none, dir_id, fil, ext_id, bin_db_id, bin_len);
-		rv.Ctor(mnt_id, fil_id, dir_id, bin_db_id, fil, ext_id);
-		return fil_id;
+		return new Fsd_fil_itm(mnt_id, dir_id, fil_id, 0, ext_id, fil, bin_len, null, null, bin_db_id);
 	}
-	public int				Insert_img(Fsd_img_itm rv, byte[] dir, byte[] fil, int ext_id, int img_w, int img_h, int bin_db_id, long bin_len, Io_stream_rdr bin_rdr) {
+	public Fsd_img_itm		Insert_img(byte[] dir, byte[] fil, int ext_id, int img_w, int img_h, int bin_db_id, long bin_len, Io_stream_rdr bin_rdr) {
 		int dir_id = Get_dir_id_or_make(dir);
 		int fil_id = Get_fil_id_or_make(Tid_img, dir_id, fil, ext_id, bin_db_id, bin_len);
-		rv.Ctor(mnt_id, dir_id, fil_id, bin_db_id);
-		return fil_id;
+		return new Fsd_img_itm(mnt_id, dir_id, fil_id, bin_db_id);
 	}
 	public int				Insert_thm(Fsd_thm_itm rv, byte[] dir, byte[] fil, int ext_id, int w, int h, double time, int page, int bin_db_id, long bin_len, Io_stream_rdr bin_rdr) {
 		int dir_id = Get_dir_id_or_make(dir);

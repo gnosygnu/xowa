@@ -26,7 +26,7 @@ public class Xob_page_regy_tbl {
 		Create_data__insert_redirect(usr_dlg, p, repo_tid, wiki.Fsys_mgr().Root_dir().GenSubFil(Xob_db_file.Name__wiki_redirect));
 	}
 	public static void Delete_local(Db_conn p) {
-		p.Exec_sql("DELETE FROM page_regy WHERE repo_id = " + Xof_repo_itm_.Repo_local);
+		p.Exec_sql("DELETE FROM page_regy WHERE repo_id = " + Xof_repo_tid_.Tid__local);
 	}
 	private static void Create_data__insert_page(Gfo_usr_dlg usr_dlg, Db_conn cur, byte repo_tid, Io_url join) {
 		usr_dlg.Note_many("", "", "inserting page: ~{0}", join.NameOnly());

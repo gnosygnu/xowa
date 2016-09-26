@@ -171,7 +171,6 @@ public class Xop_fxt {
 	}
 	public void		Init_defn_clear() {wiki.Cache_mgr().Defn_cache().Free_mem_all();}
 	public Xop_fxt	Init_id_create(int id, int fil_idx, int row_idx, boolean type_redirect, int itm_len, int ns_id, String ttl) {Xow_hive_mgr_fxt.Create_id(app, wiki.Hive_mgr(), id, fil_idx, row_idx, type_redirect, itm_len, ns_id, ttl); return this;}
-	public Xop_fxt	Init_ctg_create(String ctg, int... pages) {Xow_hive_mgr_fxt.Create_ctg(app, wiki.Hive_mgr(), ctg, pages); return this;}
 	public Xop_fxt	Init_page_create(String ttl) {return Init_page_create(wiki, ttl, "");}
 	public Xop_fxt	Init_page_create(String ttl, String txt) {return Init_page_create(wiki, ttl, txt);}
 	public Xop_fxt	Init_page_create(Xowe_wiki wiki, String ttl, String txt) {Init_page_create_static(wiki, ttl, txt);return this;}

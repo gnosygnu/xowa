@@ -28,7 +28,7 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 		if (i != 0) bfr.Add_byte_nl();
 		byte[] iw_key = nde.Get_bry_or_null("prefix");	if (iw_key == null) throw Err_.new_("site_meta", "invalid interwiki", "key", iw_key);
 		byte[] iw_url = nde.Get_bry_or_null("url");		if (iw_url == null) throw Err_.new_("site_meta", "invalid interwiki", "url", iw_key);
-		bfr.Add(iw_key).Add_byte_pipe().Add(Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, iw_url));
+		bfr.Add(iw_key).Add_byte_pipe().Add(Gfs_php_converter.To_gfs(tmp_bfr, iw_url));
 	}
 	@Override public void Exec_csv(Xow_wiki wiki, int loader_tid, byte[] dsv_bry) {
 		if (loader_tid == Xoa_site_cfg_loader_.Tid__fallback)

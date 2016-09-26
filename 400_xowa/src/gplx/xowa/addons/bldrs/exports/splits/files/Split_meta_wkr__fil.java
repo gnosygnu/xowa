@@ -47,7 +47,7 @@ class Split_meta_wkr__fil extends Split_meta_wkr_base {
 		);
 	}
 	@Override protected Object Load_itm(Db_rdr rdr) {
-		return tbl.Load_by_rdr__full(Fsm_mnt_mgr.Mnt_idx_main, rdr);
+		return tbl.New_by_rdr(Fsm_mnt_mgr.Mnt_idx_main, rdr);
 	}
 	@Override protected void Save_itm(Split_ctx ctx, Split_rslt_mgr rslt_mgr, Object itm_obj) {
 		Fsd_fil_itm itm = (Fsd_fil_itm)itm_obj;

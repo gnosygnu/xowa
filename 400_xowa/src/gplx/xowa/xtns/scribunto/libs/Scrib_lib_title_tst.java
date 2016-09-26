@@ -114,7 +114,7 @@ public class Scrib_lib_title_tst {
 	}
 	private static void Wiki_orig_tbl__insert(Xowe_wiki wiki, String ttl_str, int w, int h) {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
-		wiki.File__orig_mgr().Insert(gplx.xowa.files.repos.Xof_repo_itm_.Repo_remote, ttl_bry, gplx.xowa.files.Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
+		wiki.File__orig_mgr().Insert(gplx.xowa.files.repos.Xof_repo_tid_.Tid__remote, ttl_bry, gplx.xowa.files.Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
 	}
 	private static String ttl_fast(int ns_id, String ns_str, String ttl) {return ttl_fast(ns_id, ns_str, ttl, "", "", ttl);}
 	private static String ttl_fast(int ns_id, String ns_str, String ttl, String anchor) {return ttl_fast(ns_id, ns_str, ttl, anchor, "", ttl);}

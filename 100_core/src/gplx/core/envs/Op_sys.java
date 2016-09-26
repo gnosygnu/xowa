@@ -37,7 +37,7 @@ public class Op_sys {
 	public boolean Tid_is_drd() {return tid == Tid_drd;}
 	public String To_str() {return os_name + Bitness_str();}
 
-	public static final byte Tid_nil = 0, Tid_wnt = 1, Tid_lnx = 2, Tid_osx = 3, Tid_drd = 4;
+	public static final byte Tid_nil = 0, Tid_wnt = 1, Tid_lnx = 2, Tid_osx = 3, Tid_drd = 4, Tid_arm = 5;
 	public static final byte Sub_tid_unknown = 0, Sub_tid_win_xp = 1, Sub_tid_win_7 = 2, Sub_tid_win_8 = 3;
 	public static final byte Bitness_32 = 1, Bitness_64 = 2;
 	public static final    char Nl_char_lnx = '\n';
@@ -77,6 +77,8 @@ public class Op_sys {
 		else 											throw Err_.new_wo_type("unknown bitness; expecting 32 or 64; System.getProperty(\"bit.level\")", "val", bitness_str);
 		
 		os_name = System.getProperty("os.name").toLowerCase();
+		String os_arch = System.getProperty("os.arch").toLowerCase();
+		if (String_.Eq(os_arch, "arm"))	return new_unx_flavor_(Tid_arm, os_name, bitness_byte);	// EX:arm; DATE:2016-09-23;"arm" and "32"		
 		if 		(String_.Has_at_bgn(os_name, "win")) {
 			String os_version = System.getProperty("os.version").toLowerCase();//  "Windows 7".equals(osName) && "6.1".equals(osVersion);
 			byte sub_tid = Sub_tid_unknown;
@@ -86,7 +88,7 @@ public class Op_sys {
 			return new_wnt_(bitness_byte, sub_tid);
 		}
 		else if	(String_.Eq(os_name, "linux")) 			return new_unx_flavor_(Tid_lnx, os_name, bitness_byte);
-		else if	(String_.Has_at_bgn(os_name, "mac")) 		return new_unx_flavor_(Tid_osx, os_name, bitness_byte);	// EX:Mac OS X
+		else if	(String_.Has_at_bgn(os_name, "mac")) 	return new_unx_flavor_(Tid_osx, os_name, bitness_byte);	// EX:Mac OS X
 		else											throw Err_.new_wo_type("unknown os_name; expecting windows, linux, mac; System.getProperty(\"os.name\")", "val", os_name);
 		} catch (Exception exc) {Drd.os_name = os_name; return Drd;}
 	}

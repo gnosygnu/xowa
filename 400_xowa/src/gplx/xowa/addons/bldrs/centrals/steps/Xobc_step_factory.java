@@ -20,6 +20,9 @@ import gplx.core.brys.evals.*; import gplx.core.primitives.*;
 import gplx.xowa.addons.bldrs.centrals.tasks.*; import gplx.xowa.addons.bldrs.centrals.cmds.*; import gplx.xowa.addons.bldrs.centrals.steps.*; import gplx.xowa.addons.bldrs.centrals.utils.*;
 import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.hosts.*;
 import gplx.xowa.addons.bldrs.exports.merges.*;
+import gplx.xowa.addons.bldrs.updates.files.*;
+import gplx.xowa.addons.bldrs.exports.packs.files.*;
+import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xobc_step_factory {
 	private final    Xobc_task_mgr task_mgr;
@@ -60,16 +63,24 @@ public class Xobc_step_factory {
 		Io_url zip_file_url  = Eval_url(Bry_eval_wkr__builder_central.Make_str(Bry_eval_wkr__builder_central.Type__download_fil, wiki_domain, file_name));
 		Io_url unzip_dir_url = Eval_url(Bry_eval_wkr__builder_central.Make_str(Bry_eval_wkr__builder_central.Type__unzip_dir, wiki_domain, file_name));
 		Io_url wiki_dir_url  = Eval_url(Bry_eval_wkr__builder_central.Make_str(Bry_eval_wkr__builder_central.Type__wiki_dir, wiki_domain, file_name));
-		list.Add(new Xobc_cmd__download			(task_mgr, task_id, step_id, 0, src_http_url, zip_file_url, import_itm.Import_size_zip));
-		list.Add(new Xobc_cmd__verify_fil		(task_mgr, task_id, step_id, 1, zip_file_url, import_itm.Import_md5, import_itm.Import_size_zip));
-		list.Add(new Xobc_cmd__unzip			(task_mgr, task_id, step_id, 2, zip_file_url, unzip_dir_url, import_itm.Import_size_raw));
-		list.Add(new Xobc_cmd__verify_dir		(task_mgr, task_id, step_id, 3, unzip_dir_url, String_.Replace(file_name, ".zip", ".md5"), zip_file_url));
-		// list.Add(new Xobc_cmd__wiki_merge	(task_mgr, task_id, step_id, 4, merge_mgr, wiki_domain, unzip_dir_url, import_itm.Import_prog_data_max, import_itm.Import_prog_row_max, step_seqn));
-		list.Add(new Xobc_cmd__move_fils		(task_mgr, task_id, step_id, 4, unzip_dir_url, wiki_dir_url));
-		if (import_itm.Import_type == Xobc_import_type.Tid__wiki__core) {
-			list.Add(new Xobc_cmd__wiki_reg		(task_mgr, task_id, step_id, 5, wiki_dir_url, wiki_domain));
+		Io_url checksum_url	 = unzip_dir_url.GenSubFil(file_name + ".md5");
+		int cmd_idx = 0;
+		list.Add(new Xobc_cmd__download			(task_mgr, task_id, step_id, cmd_idx++, src_http_url, zip_file_url, import_itm.Import_size_zip));
+		list.Add(new Xobc_cmd__verify_fil		(task_mgr, task_id, step_id, cmd_idx++, zip_file_url, import_itm.Import_md5, import_itm.Import_size_zip));
+		list.Add(new Xobc_cmd__unzip			(task_mgr, task_id, step_id, cmd_idx++, zip_file_url, unzip_dir_url, import_itm.Import_size_raw));
+		list.Add(new Xobc_cmd__verify_dir		(task_mgr, task_id, step_id, cmd_idx++, checksum_url, zip_file_url));
+		// list.Add(new Xobc_cmd__wiki_merge	(task_mgr, task_id, step_id, cmd_idx++, merge_mgr, wiki_domain, unzip_dir_url, import_itm.Import_prog_data_max, import_itm.Import_prog_row_max, step_seqn));
+		list.Add(new Xobc_cmd__move_fils		(task_mgr, task_id, step_id, cmd_idx++, unzip_dir_url, wiki_dir_url));
+		
+		switch (import_itm.Import_type) {
+			case Xobc_import_type.Tid__wiki__core:		list.Add(new Xobc_cmd__wiki_reg		(task_mgr, task_id, step_id, cmd_idx++, wiki_dir_url, wiki_domain)); break;
+			case Xobc_import_type.Tid__fsdb__delete:	list.Add(new Xobc_cmd__fsdb_delete	(task_mgr, task_id, step_id, cmd_idx++, Pack_zip_name_bldr.To_wiki_url(wiki_dir_url, zip_file_url.OwnerDir()))); break;
 		}
 		return (Xobc_cmd_itm[])list.To_ary_and_clear(Xobc_cmd_itm.class);
 	}
 	private Io_url Eval_url(String src) {return Io_url_.new_any_(String_.new_u8(eval_mgr.Eval(Bry_.new_u8(src))));}
+	public static Xow_wiki Get_wiki_by_abrv(Xoa_app app, byte[] wiki_abrv) {
+		Xow_domain_itm domain_itm = Xow_abrv_xo_.To_itm(wiki_abrv);
+		return app.Wiki_mgri().Get_by_or_make_init_y(domain_itm.Domain_bry());
+	}
 }

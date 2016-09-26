@@ -39,9 +39,15 @@ public class Xosync_hdoc_parser__fxt {
 		Gftest.Eq__ary__lines(expd, hpg.Db().Html().Html_bry(), "converted html");
 		return this;
 	}
-	public Xof_fsdb_itm Make__fsdb(boolean repo_is_commons, boolean file_is_thumb, String file_ttl, int file_w, double file_time, int file_page) {
+	public Xof_fsdb_itm Make__fsdb(boolean repo_is_commons, boolean file_is_orig, String file_ttl, int file_w, double file_time, int file_page) {
+		return Make__fsdb(repo_is_commons, file_is_orig, file_ttl, Xof_ext_.new_by_ttl_(Bry_.new_u8(file_ttl)), file_w, file_time, file_page);
+	}
+	public Xof_fsdb_itm Make__fsdb(boolean repo_is_commons, boolean file_is_orig, String file_ttl, String file_ext, int file_w, double file_time, int file_page) {
+		return Make__fsdb(repo_is_commons, file_is_orig, file_ttl, Xof_ext_.new_by_ext_(Bry_.new_u8(file_ext)), file_w, file_time, file_page);
+	}
+	public Xof_fsdb_itm Make__fsdb(boolean repo_is_commons, boolean file_is_orig, String file_ttl, Xof_ext file_ext, int file_w, double file_time, int file_page) {
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();
-		itm.Init_by_wm_parse(wiki.Domain_itm().Abrv_xo(), repo_is_commons, file_is_thumb, Bry_.new_u8(file_ttl), file_w, file_time, file_page);
+		itm.Init_by_wm_parse(wiki.Domain_itm().Abrv_xo(), repo_is_commons, file_is_orig, Bry_.new_u8(file_ttl), file_ext, file_w, file_time, file_page);
 		return itm;
 	}
 	public Xosync_hdoc_parser__fxt Test__fsdb(Xof_fsdb_itm expd) {
@@ -54,9 +60,10 @@ public class Xosync_hdoc_parser__fxt {
 		return tmp_bfr.To_str_and_clear();
 	}
 	private static void To_bfr(Bry_bfr bfr, Xof_fsdb_itm itm) {
-		bfr.Add_str_a7(itm.Orig_repo_id() == Xof_repo_itm_.Repo_remote ? "remote" : "local").Add_byte_pipe();
+		bfr.Add_str_a7(itm.Orig_repo_id() == Xof_repo_tid_.Tid__remote ? "remote" : "local").Add_byte_pipe();
 		bfr.Add_str_a7(itm.File_is_orig() ? "orig" : "thumb").Add_byte_pipe();
 		bfr.Add(itm.Orig_ttl()).Add_byte_pipe();
+		bfr.Add(itm.Orig_ext().Ext()).Add_byte_pipe();
 		bfr.Add_int_variable(itm.File_w()).Add_byte_pipe();
 		bfr.Add_double(itm.Lnki_time()).Add_byte_pipe();
 		bfr.Add_int_variable(itm.Lnki_page()).Add_byte_pipe();

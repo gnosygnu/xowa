@@ -173,6 +173,10 @@ public class Bry_rdr {
 		Object rv = trie.Match_at(trv, src, pos, src_end); if (rv == null) err_wkr.Fail("failed trie check", "mid", String_.new_u8(Bry_.Mid_by_len_safe(src, pos, 16)));
 		return rv;
 	}
+	public byte Chk_or(Btrie_rv trv, Btrie_slim_mgr trie, byte or)	{
+		Object rv_obj = trie.Match_at(trv, src, pos, src_end);
+		return rv_obj == null ? or : ((gplx.core.primitives.Byte_obj_val)rv_obj).Val();
+	}
 	public byte Chk_or(Btrie_slim_mgr trie, byte or)	{return Chk_or(trie, pos, src_end, or);}
 	public byte Chk(Btrie_slim_mgr trie, int itm_bgn, int itm_end) {
 		byte rv = Chk_or(trie, itm_bgn, itm_end, Byte_.Max_value_127);

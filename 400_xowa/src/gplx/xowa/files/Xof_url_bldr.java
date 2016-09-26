@@ -18,50 +18,54 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.core.envs.*;
 import gplx.langs.htmls.encoders.*;
-import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*;
+import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.imgs.*;
 public class Xof_url_bldr {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(400);
 	private final    Gfo_url_encoder encoder_src_http = Gfo_url_encoder_.New__http_url().Make(); // NOTE: changed from new_html_href_mw_ to new_url_ on 2012-11-19; issues with A%2Cb becoming A%252Cb
 	private byte[] ttl; private byte[] md5; private Xof_ext ext; private boolean file_is_thumb; private int file_w;
 	private double time = Xof_lnki_time.Null; private int page = Xof_lnki_page.Null; private byte time_dlm = Byte_ascii.At;
+	private byte repo_tid;
 	private byte[] root; private byte dir_spr; private boolean fsys_is_wnt; private boolean wmf_dir_hive; private boolean wmf_protocol_is_file; private int md5_dir_depth; private byte[] area;
 	public Xof_url_bldr Root_(byte[] v) {root = v; return this;}
-	public Xof_url_bldr Init_by_root(byte[] root, boolean fsys_is_wnt, byte dir_spr, boolean wmf_dir_hive, boolean wmf_protocol_is_file, int md5_dir_depth) {
+	public Xof_url_bldr Init_by_repo(byte repo_tid, byte[] root, boolean fsys_is_wnt, byte dir_spr, boolean wmf_dir_hive, boolean wmf_protocol_is_file, int md5_dir_depth) {
+		this.repo_tid = repo_tid;
 		this.root = root; this.dir_spr = dir_spr; this.wmf_dir_hive = wmf_dir_hive; this.wmf_protocol_is_file = wmf_protocol_is_file; this.md5_dir_depth = md5_dir_depth;
 		this.fsys_is_wnt = fsys_is_wnt;
 		return this;
 	}
 	public Xof_url_bldr Init_by_itm(byte mode, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
 		this.ttl = ttl; this.md5 = md5;	this.ext = ext; this.file_w = file_w; this.time = time; this.page = page;
-		if (wmf_protocol_is_file && fsys_is_wnt) this.ttl = Xof_repo_itm_.Ttl_invalid_fsys_chars(tmp_bfr, ttl); // NOTE: changed ttl does not change md5
-		this.file_is_thumb = mode == Xof_repo_itm_.Mode_thumb;
-		this.area = Xof_repo_itm_.Mode_names_key[mode];
+		if (wmf_protocol_is_file && fsys_is_wnt) this.ttl = Xof_itm_ttl_.Remove_invalid(tmp_bfr, ttl); // NOTE: changed ttl does not change md5
+		this.file_is_thumb = mode == Xof_img_mode_.Tid__thumb;
+		this.area = Xof_img_mode_.Names_ary[mode];
 		return this;
 	}
-	public Xof_url_bldr Init_for_src_file(byte mode, Xof_repo_itm repo, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
+	public Xof_url_bldr Init_for_src_file(Xof_repo_itm repo, byte mode, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
+		this.repo_tid = repo.Tid();
 		this.wmf_dir_hive = Bool_.Y; this.wmf_protocol_is_file = repo.Tarball();
 		this.dir_spr = repo.Dir_spr(); this.root = repo.Root_bry(); this.area = repo.Mode_names()[mode];
 		this.ttl = repo.Gen_name_src(tmp_bfr, ttl); this.md5 = md5; this.ext = ext;
-		this.file_is_thumb = mode == Xof_repo_itm_.Mode_thumb; this.file_w = file_w; this.time = time; this.page = page;
+		this.file_is_thumb = mode == Xof_img_mode_.Tid__thumb; this.file_w = file_w; this.time = time; this.page = page;
 		return this;
 	}
-	public Xof_url_bldr Init_for_trg_file(byte mode, Xof_repo_itm repo, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
-		return Init(Bool_.N, Bool_.N, repo.Dir_spr(), repo.Root_bry()
+	public Xof_url_bldr Init_for_trg_file(Xof_repo_itm repo, byte mode, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
+		return Init(repo.Tid(), Bool_.N, Bool_.N, repo.Dir_spr(), repo.Root_bry()
 			, repo.Mode_names()[mode], repo.Dir_depth(), repo.Gen_name_trg(tmp_bfr, ttl, md5, ext), md5, ext, mode, file_w, time, page);
 	}
-	public Xof_url_bldr Init_for_trg_html(byte mode, Xof_repo_itm repo, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
-		return Init(Bool_.N, Bool_.N, Byte_ascii.Slash, repo.Root_http()
+	public Xof_url_bldr Init_for_trg_html(Xof_repo_itm repo, byte mode, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
+		return Init(repo.Tid(), Bool_.N, Bool_.N, Byte_ascii.Slash, repo.Root_http()
 			, repo.Mode_names()[mode], repo.Dir_depth(), repo.Gen_name_trg(tmp_bfr, ttl, md5, ext), md5, ext, mode, file_w, time, page);
 	}
-	private Xof_url_bldr Init(boolean wmf_dir_hive, boolean wmf_protocol_is_file, byte dir_spr
+	private Xof_url_bldr Init(byte repo_tid, boolean wmf_dir_hive, boolean wmf_protocol_is_file, byte dir_spr
 		, byte[] root, byte[] area, int md5_dir_depth
 		, byte[] ttl, byte[] md5, Xof_ext ext
 		, byte file_mode, int file_w, double time, int page
 		) {
+		this.repo_tid = repo_tid;
 		this.wmf_dir_hive = wmf_dir_hive; this.wmf_protocol_is_file = wmf_protocol_is_file; this.dir_spr = dir_spr;
 		this.root = root;  this.area = area; this.md5_dir_depth = md5_dir_depth;
 		this.ttl = ttl; this.md5 = md5; this.ext = ext;
-		this.file_is_thumb = file_mode == Xof_repo_itm_.Mode_thumb; this.file_w = file_w; this.time = time; this.page = page;			
+		this.file_is_thumb = file_mode == Xof_img_mode_.Tid__thumb; this.file_w = file_w; this.time = time; this.page = page;
 		return this;
 	}
 	public byte[] Xto_bry() {Bld(); byte[] rv = tmp_bfr.To_bry_and_clear(); Clear(); return rv;}
@@ -69,27 +73,38 @@ public class Xof_url_bldr {
 	public Io_url Xto_url() {Bld(); Io_url rv = Io_url_.new_fil_(tmp_bfr.To_str()); Clear(); return rv;}
 	public Io_url Xto_url_by_http() {Bld(); Io_url rv = Io_url_.New__http_or_fail(tmp_bfr.To_str()); Clear(); return rv;}
 	public Io_url To_url_trg(Xof_repo_itm repo_itm, Xof_fsdb_itm itm, boolean orig) {
-		byte mode = orig ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb;
-		return this.Init_for_trg_file(mode, repo_itm, itm.Orig_ttl(), itm.Orig_ttl_md5(), itm.Orig_ext(), itm.File_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
+		byte mode = orig ? Xof_img_mode_.Tid__orig : Xof_img_mode_.Tid__thumb;
+		return this.Init_for_trg_file(repo_itm, mode, itm.Orig_ttl(), itm.Orig_ttl_md5(), itm.Orig_ext(), itm.File_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
 	}
 	public Io_url To_url_trg(Xof_repo_itm repo_itm, Xof_file_itm itm, boolean orig) {
-		byte mode = orig ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb;
-		return this.Init_for_trg_file(mode, repo_itm, itm.Orig_ttl(), itm.Orig_ttl_md5(), itm.Orig_ext(), itm.File_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
+		byte mode = orig ? Xof_img_mode_.Tid__orig : Xof_img_mode_.Tid__thumb;
+		return this.Init_for_trg_file(repo_itm, mode, itm.Orig_ttl(), itm.Orig_ttl_md5(), itm.Orig_ext(), itm.File_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
 	}
 	public Io_url To_url_trg(Xof_repo_itm repo_itm, gplx.xowa.files.caches.Xou_cache_itm itm, boolean orig) {
-		byte mode = orig ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb;
-		return this.Init_for_trg_file(mode, repo_itm, itm.Orig_ttl(), itm.Orig_ttl_md5(), itm.Orig_ext_itm(), itm.File_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
+		byte mode = orig ? Xof_img_mode_.Tid__orig : Xof_img_mode_.Tid__thumb;
+		return this.Init_for_trg_file(repo_itm, mode, itm.Orig_ttl(), itm.Orig_ttl_md5(), itm.Orig_ext_itm(), itm.File_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
 	}
+	private static final    byte[] Bry__http = Bry_.new_a7("http");
 	private void Bld() {
-		Add_core();
-		if (file_is_thumb) {
-			if (wmf_dir_hive)	Add_thumb_wmf();
-			else				Add_thumb_xowa();
+		if (repo_tid == Xof_repo_tid_.Tid__math) {
+			tmp_bfr.Add(root);																// add root;				EX: "C:\xowa\file\"; assume trailing dir_spr
+			boolean root_is_http = Bry_.Has_at_bgn(root, Bry__http);
+			if (root_is_http)
+				tmp_bfr.Add_mid(ttl, 0, ttl.length - 4);	// -4 to remove ".svg". note that XO stores ".svg", but WM doesn't; EX: "596f8baf206a81478afd4194b44138715dc1a05c.svg"
+			else
+				tmp_bfr.Add(ttl);
+		}
+		else {
+			Add_core();
+			if (file_is_thumb) {
+				if (wmf_dir_hive)	Add_thumb_wmf();
+				else				Add_thumb_xowa();
+			}
 		}
 	}
 	private Xof_url_bldr Add_core() {
 		tmp_bfr.Add(root);																	// add root;				EX: "C:\xowa\file\"; assume trailing dir_spr
-		if (area != null && !(wmf_dir_hive && !file_is_thumb))							// !(wmf_dir_hive && !thumb) means never add if wmf_dir_hive and orig
+		if (area != null && !(wmf_dir_hive && !file_is_thumb))								// !(wmf_dir_hive && !thumb) means never add if wmf_dir_hive and orig
 			tmp_bfr.Add(area).Add_byte(dir_spr);											// add area;				EX: "thumb\"
 		byte b0 = md5[0];
 		if (wmf_dir_hive) {
@@ -101,9 +116,9 @@ public class Xof_url_bldr {
 				tmp_bfr.Add_byte(md5[i]).Add_byte(dir_spr);									// add md5_0123				EX: "0/1/2/3"
 		}
 		if (wmf_dir_hive) {
-			if (wmf_protocol_is_file)													// sitting on local file system (as opposed to http)
+			if (wmf_protocol_is_file)														// sitting on local file system (as opposed to http)
 				tmp_bfr.Add(ttl);															// NOTE: file_names are not url-encoded; this includes symbols (') and foreign characters (ö)
-			else																		// wmf_http
+			else																			// wmf_http
 				tmp_bfr.Add(encoder_src_http.Encode(ttl));									// NOTE: file_names must be url-encoded; JAVA will default to native charset which on Windows will be 1252; foreign character urls will fail due to conversion mismatch (1252 on windows; UTF-8 on WMF); PAGE:en.w:Möbius strip
 		}
 		else
@@ -156,7 +171,7 @@ public class Xof_url_bldr {
 				break;
 		}
 		int ttl_len = ttl.length;
-		if (ttl_len > 160) {															// long file name
+		if (ttl_len > 160) {																// long file name
 			tmp_bfr.Add(Bry_thumnbail_w_dot);
 			tmp_bfr.Add(ext.Ext());
 		}
@@ -169,7 +184,7 @@ public class Xof_url_bldr {
 				tmp_bfr.Add_byte(Byte_ascii.Dot).Add(Xof_ext_.Bry_png);						// add .png;				EX: "A.svg" -> "A.svg.png"		NOTE: MediaWiki always adds as lowercase
 				break;
 			case Xof_ext_.Id_pdf:
-			case Xof_ext_.Id_tif:														// add .jpg					EX: "A.tif" -> "A.tif.jpg"		NOTE: MediaWiki always adds as lowercase
+			case Xof_ext_.Id_tif:															// add .jpg					EX: "A.tif" -> "A.tif.jpg"		NOTE: MediaWiki always adds as lowercase
 			case Xof_ext_.Id_tiff:
 			case Xof_ext_.Id_ogg:
 			case Xof_ext_.Id_ogv:						
@@ -195,6 +210,7 @@ public class Xof_url_bldr {
 		time = Xof_lnki_time.Null;
 		ext = null;
 		tmp_bfr.Clear();
+		repo_tid = Xof_repo_tid_.Tid__null;
 		return this;
 	}
 	public static final    byte[]

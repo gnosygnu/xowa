@@ -45,5 +45,10 @@ public class Db_conn_bldr {
 			else throw Err_.new_("dbs", "db does not exist", "url", url.Raw());
 		}
 	}
+	public Db_conn Get_or_fail(Io_url url) {
+		Db_conn rv = Get(url);
+		if (rv == Db_conn_.Noop) throw Err_.new_wo_type("connection is null; file does not exist: file={0}", "file", url.Raw());
+		return rv;
+	}
         public static final    Db_conn_bldr Instance = new Db_conn_bldr(); Db_conn_bldr() {}
 }

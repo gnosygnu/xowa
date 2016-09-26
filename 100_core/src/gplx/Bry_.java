@@ -603,9 +603,10 @@ public class Bry_ {
 		}
 	}
 	public static byte To_int_as_byte(byte[] ary, int bgn, int end, byte or)	{return (byte)To_int_or(ary, bgn, end, or);}
-	public static int To_int(byte[] ary) {
-		int rv = To_int_or(ary, 0, ary.length, Int_.Min_value, Bool_.Y, null);
-		if (rv == Int_.Min_value) throw Err_.new_wo_type("could not parse to int", "val", String_.new_u8(ary));
+	public static int To_int(byte[] ary) {return To_int_or_fail(ary, 0, ary.length);}
+	public static int To_int_or_fail(byte[] ary, int bgn, int end)		{
+		int rv = To_int_or(ary, bgn, end, Int_.Min_value, Bool_.Y, null);
+		if (rv == Int_.Min_value) throw Err_.new_wo_type("could not parse to int", "val", String_.new_u8(ary, bgn, end));
 		return rv;
 	}
 	public static int To_int_or_neg1(byte[] ary)								{return To_int_or(ary, 0	, ary.length, -1, Bool_.Y, null);}

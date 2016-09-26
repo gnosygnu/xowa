@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
-import gplx.dbs.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.addons.bldrs.mass_parses.parses.pools.*; import gplx.xowa.addons.bldrs.mass_parses.parses.locks.*;
 public class Xomp_mgr_db {
 	public Xomp_mgr_db(Io_url url) {
@@ -24,18 +24,20 @@ public class Xomp_mgr_db {
 		this.conn = Db_conn_bldr.Instance.Get_or_autocreate(true, url);
 		this.page_tbl = new Xomp_page_tbl(conn);
 		this.wkr_tbl = new Xomp_wkr_tbl(conn);
+		this.cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");
 		// this.lock_mgr = new Xomp_lock_mgr__db(conn, 5000);
 		this.lock_mgr = new Xomp_lock_mgr__fsys(5000, this.Dir());
 	}
-	public Db_conn Conn() {return conn;} private final    Db_conn conn;
-	public Io_url Url() {return url;}  private final    Io_url url;
-	public Io_url Dir() {return url.OwnerDir();}
-	public Xomp_page_tbl Page_tbl() {return page_tbl;} private final    Xomp_page_tbl page_tbl;
-	public Xomp_wkr_tbl Wkr_tbl() {return wkr_tbl;} private final    Xomp_wkr_tbl wkr_tbl;
-	public Xomp_lock_mgr Lock_mgr() {return lock_mgr;} private final    Xomp_lock_mgr lock_mgr;
+	public Db_conn			Conn() {return conn;} private final    Db_conn conn;
+	public Io_url			Url() {return url;}  private final    Io_url url;
+	public Io_url			Dir() {return url.OwnerDir();}
+	public Xomp_page_tbl	Tbl__page() {return page_tbl;} private final    Xomp_page_tbl page_tbl;
+	public Xomp_wkr_tbl		Tbl__wkr() {return wkr_tbl;} private final    Xomp_wkr_tbl wkr_tbl;
+	public Db_cfg_tbl		Tbl__cfg() {return cfg_tbl;} private final    Db_cfg_tbl cfg_tbl;
+	public Xomp_lock_mgr	Lock_mgr() {return lock_mgr;} private final    Xomp_lock_mgr lock_mgr;
 
 	public void Remake() {
-		conn.Meta_tbl_remake_many(page_tbl, wkr_tbl);
+		conn.Meta_tbl_remake_many(page_tbl, wkr_tbl, cfg_tbl);
 		lock_mgr.Remake();
 	}
 

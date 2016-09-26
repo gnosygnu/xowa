@@ -35,8 +35,14 @@ public class Xoa_cfg_db_txt implements Xoa_cfg_db {
 		bfr.ClearAndReset();
 	} 	private Bry_bfr bfr = Bry_bfr_.New();
 	public void Cfg_save_end(Xoa_cfg_mgr cfg_mgr) {
-		Xoa_app_.Usr_dlg().Log_many("", "", "shutting down app; saving cfg: len=~{0}", bfr.Len());
-		Io_mgr.Instance.SaveFilBfr(Cfg_url(cfg_mgr), bfr);
+		Io_url cfg_url = Cfg_url(cfg_mgr);
+		if (Io_mgr.Instance.QueryFil(cfg_url).ReadOnly()) {
+			Xoa_app_.Usr_dlg().Log_many("", "", "shutting down app; skipping cfg b/c file is marked read-only; src=~{0}", cfg_url);
+		}
+		else {
+			Xoa_app_.Usr_dlg().Log_many("", "", "shutting down app; saving cfg: len=~{0}", bfr.Len());
+			Io_mgr.Instance.SaveFilBfr(Cfg_url(cfg_mgr), bfr);
+		}
 	}
 	public void Cfg_save_run(Xoa_cfg_mgr cfg_mgr, Xoa_cfg_grp cfg_grp, Xoa_cfg_itm cfg_itm) {
 		fmtr.Bld_bfr_many(bfr, Xoa_gfs_wtr_.Escape(cfg_grp.Key_bry()), Xoa_gfs_wtr_.Escape(cfg_itm.Key()), Xoa_gfs_wtr_.Escape(cfg_itm.Val()));

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.nss; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.xowa.bldrs.cmds.*; import gplx.xowa.apps.urls.*;
+import gplx.xowa.bldrs.cmds.*; import gplx.xowa.apps.utls.*;
 public class Xow_ns implements Gfo_invk {
 	public Xow_ns(int id, byte case_match, byte[] name, boolean is_alias) {
 		this.id = id; this.case_match = case_match; this.is_alias = is_alias;

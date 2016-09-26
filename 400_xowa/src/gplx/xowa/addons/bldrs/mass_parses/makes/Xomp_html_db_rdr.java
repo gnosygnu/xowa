@@ -23,7 +23,7 @@ class Xomp_html_db_rdr {
 	private final    Xomp_mgr_db mgr_db;
 	public Xomp_html_db_rdr(Xowe_wiki wiki) {
 		this.mgr_db = Xomp_mgr_db.New__load(wiki);
-		this.src_tbls = new Xowd_html_tbl[mgr_db.Wkr_tbl().Select_count()];
+		this.src_tbls = new Xowd_html_tbl[mgr_db.Tbl__wkr().Select_count()];
 	}
 	public void Rows__get(Xowd_html_row rv, int wkr_uid, int page_id) {
 		Xowd_html_tbl src_tbl = src_tbls[wkr_uid];

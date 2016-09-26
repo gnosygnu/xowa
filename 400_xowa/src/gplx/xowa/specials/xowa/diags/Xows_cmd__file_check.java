@@ -94,7 +94,7 @@ class Xows_cmd__file_check {
 			Object[] row = rows[i];
 			int owner_id = Int_.cast(row[owner_id_ordinal]);
 			byte[] bin_data = (byte[])row[bin_data_ordinal];
-			file_bry = gplx.xowa.files.repos.Xof_repo_itm_.Ttl_invalid_fsys_chars(tmp_bfr, file_bry);
+			file_bry = gplx.xowa.files.repos.Xof_itm_ttl_.Remove_invalid(tmp_bfr, file_bry);
 			Io_url bin_url = tmp_dir.GenSubFil(String_.new_u8(file_bry));
 			bin_url = tmp_dir.GenSubFil(bin_url.NameOnly() + "_" + Int_.To_str(owner_id) + bin_url.Ext());
 			Write_kv(bfr, "fsdb.bin.export", bin_url.Raw());

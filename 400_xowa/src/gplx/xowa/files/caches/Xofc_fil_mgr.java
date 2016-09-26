@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*;
-import gplx.dbs.*; import gplx.fsdb.*; import gplx.xowa.wikis.*; import gplx.xowa.files.repos.*;
+import gplx.dbs.*; import gplx.fsdb.*; import gplx.xowa.wikis.*;
+import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
 class Xofc_fil_mgr {
 	private Xof_cache_mgr cache_mgr;		
 	private final    Xofc_fil_tbl tbl = new Xofc_fil_tbl(); private final    Ordered_hash hash = Ordered_hash_.New_bry(); private final    Bry_bfr key_bldr = Bry_bfr_.Reset(255);
@@ -118,7 +119,7 @@ class Xofc_fil_mgr {
 		finally {tbl.Conn().Txn_end();}
 	}
 	private void Fsys_delete(Xof_url_bldr url_bldr, Xoae_wiki_mgr wiki_mgr, Xoa_repo_mgr repo_mgr, Xofc_dir_mgr dir_mgr, Xofc_fil_itm itm) {
-		byte mode_id = itm.Is_orig() ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb;
+		byte mode_id = itm.Is_orig() ? Xof_img_mode_.Tid__orig : Xof_img_mode_.Tid__thumb;
 		byte[] wiki_domain = dir_mgr.Get_by_id(itm.Dir_id()).Name();
 		Xowe_wiki wiki = wiki_mgr.Get_by_or_make(wiki_domain);
 		wiki.Init_assert();
@@ -126,7 +127,7 @@ class Xofc_fil_mgr {
 		byte[] ttl = itm.Name();			
 		byte[] md5 = Xof_file_wkr_.Md5(ttl);
 		int itm_ext_id = itm.Ext().Id();
-		Io_url fil_url = url_bldr.Init_for_trg_file(mode_id, trg_repo, ttl, md5, itm.Ext(), itm.W()
+		Io_url fil_url = url_bldr.Init_for_trg_file(trg_repo, mode_id, ttl, md5, itm.Ext(), itm.W()
 			, Xof_lnki_time.Convert_to_xowa_thumbtime	(itm_ext_id, itm.Time())
 			, Xof_lnki_time.Convert_to_xowa_page		(itm_ext_id, itm.Time())
 			).Xto_url();

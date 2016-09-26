@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.engines.mocks; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
 import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.xtns.scribunto.procs.*;
 public class Mock_scrib_fxt {		 
 	private final    Mock_engine engine = new Mock_engine();
 	private final    Mock_server server = new Mock_server();		

@@ -43,13 +43,15 @@ public class Fsm_mnt_itm {
 		Fsd_fil_itm fil_itm = atr_mgr.Select_fil_or_null(dir, fil);
 		return fil_itm == Fsd_fil_itm.Null ? Bool_.N : atr_mgr.Select_thm(exact, rv, fil_itm.Dir_id(), fil_itm.Fil_id());
 	}
-	public void				Insert_img(Fsd_img_itm rv, Fsm_atr_fil atr_fil, Fsm_bin_fil bin_fil, byte[] dir, byte[] fil, int ext_id, int img_w, int img_h, long bin_len, Io_stream_rdr bin_rdr) {
-		int fil_id = atr_fil.Insert_img(rv, dir, fil, ext_id, img_w, img_h, bin_fil.Id(), bin_len, bin_rdr);
-		bin_fil.Insert(fil_id, Fsd_bin_tbl.Owner_tid_fil, bin_len, bin_rdr);
+	public Fsd_img_itm		Insert_img(Fsm_atr_fil atr_fil, Fsm_bin_fil bin_fil, byte[] dir, byte[] fil, int ext_id, int img_w, int img_h, long bin_len, Io_stream_rdr bin_rdr) {
+		Fsd_img_itm rv = atr_fil.Insert_img(dir, fil, ext_id, img_w, img_h, bin_fil.Id(), bin_len, bin_rdr);
+		bin_fil.Insert(rv.Fil_id(), Fsd_bin_tbl.Owner_tid_fil, bin_len, bin_rdr);
+		return rv;
 	}
-	public void				Insert_fil(Fsd_fil_itm rv, Fsm_atr_fil atr_fil, Fsm_bin_fil bin_fil, byte[] dir, byte[] fil, int ext_id, long bin_len, gplx.core.ios.streams.Io_stream_rdr bin_rdr) {
-		int fil_id = atr_fil.Insert_fil(rv, dir, fil, ext_id, bin_fil.Id(), bin_len, bin_rdr);
-		bin_fil.Insert(fil_id, Fsd_bin_tbl.Owner_tid_fil, bin_len, bin_rdr);
+	public Fsd_fil_itm		Insert_fil(Fsm_atr_fil atr_fil, Fsm_bin_fil bin_fil, byte[] dir, byte[] fil, int ext_id, long bin_len, gplx.core.ios.streams.Io_stream_rdr bin_rdr) {
+		Fsd_fil_itm rv = atr_fil.Insert_fil(dir, fil, ext_id, bin_fil.Id(), bin_len, bin_rdr);
+		bin_fil.Insert(rv.Fil_id(), Fsd_bin_tbl.Owner_tid_fil, bin_len, bin_rdr);
+		return rv;
 	}
 	public void				Insert_thm(Fsd_thm_itm rv, Fsm_atr_fil atr_fil, Fsm_bin_fil bin_fil, byte[] dir, byte[] fil, int ext_id, int w, int h, double time, int page, long bin_len, Io_stream_rdr bin_rdr) {
 		int thm_id = atr_fil.Insert_thm(rv, dir, fil, ext_id, w, h, time, page, bin_fil.Id(), bin_len, bin_rdr);

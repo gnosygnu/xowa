@@ -34,11 +34,12 @@ public class Xow_hdump_mgr__save {
 			Bld_hdump(page);
 			tmp_hpg.Ctor_by_hdiff(tmp_bfr, page, page.Wikie().Msg_mgr().Val_by_id(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc));
 			Xow_db_file html_db = Get_html_db(wiki, page, html_db_is_new.Val_n_());
-			return Save(tmp_hpg, html_db.Tbl__html(), html_db_is_new.Val());
+			return Save(tmp_hpg, html_db.Tbl__html(), html_db_is_new.Val(), true);
 		}
 	}
-	public int Save(Xoh_page hpg, Xowd_html_tbl html_tbl, boolean insert) {
-		byte[] db_body = Write(tmp_bfr, wiki, hpg, hzip_mgr, zip_mgr, dflt_zip_tid, dflt_hzip_tid, hpg.Db().Html().Html_bry());
+	public int Save(Xoh_page hpg, Xowd_html_tbl html_tbl, boolean insert, boolean use_hzip_dflt) {
+		int hzip_tid = use_hzip_dflt ? dflt_hzip_tid : Xoh_hzip_dict_.Hzip__none;
+		byte[] db_body = Write(tmp_bfr, wiki, hpg, hzip_mgr, zip_mgr, dflt_zip_tid, hzip_tid, hpg.Db().Html().Html_bry());
 		if (insert)		html_tbl.Insert(hpg, dflt_zip_tid, dflt_hzip_tid, db_body);
 		else			html_tbl.Update(hpg, dflt_zip_tid, dflt_hzip_tid, db_body);
 		return db_body.length;

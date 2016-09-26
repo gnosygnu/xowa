@@ -76,6 +76,7 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Id__blockquote	= 52
 	, Id__map			= 53
 	, Id__bdo			= 54
+	, Id__time			= 55
 	;
 //		private static final int Id__ary_max = 54;
 	public static final    byte[]
@@ -156,6 +157,7 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	.Add_str_int("blockquote"	, Id__blockquote)
 	.Add_str_int("map"			, Id__map)
 	.Add_str_int("bdo"			, Id__bdo)
+	.Add_str_int("time"			, Id__time)
 	;
 	public static String To_str(int tid) {
 		switch (tid) {
@@ -217,6 +219,7 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 			case Id__blockquote:	return "blockquote";
 			case Id__map:			return "map";
 			case Id__bdo:			return "bdo";
+			case Id__time:			return "time";
 			default:				throw Err_.new_unhandled(tid);
 		}
 	}

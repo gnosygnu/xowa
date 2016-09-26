@@ -51,9 +51,12 @@ public class Xomp_parse_mgr {
  
 		// assert wkr_tbl
 		int wkr_len = cfg.Num_wkrs();
-		int wkr_uid_bgn = mgr_db.Wkr_tbl().Init_wkrs(cfg.Wkr_machine_name(), wkr_len);
+		int wkr_uid_bgn = mgr_db.Tbl__wkr().Init_wkrs(cfg.Wkr_machine_name(), wkr_len);
 		latch = new Gfo_countdown_latch(wkr_len);
 		Xomp_parse_wkr[] wkrs = new Xomp_parse_wkr[wkr_len];
+
+		// init ns_ord_mgr
+		Xomp_ns_ord_mgr ns_ord_mgr = new Xomp_ns_ord_mgr(Int_.Ary_parse(mgr_db.Tbl__cfg().Select_str("", Xomp_parse_wkr.Cfg__ns_ids), "|"));
 
 		// init parse_wkrs
 		for (int i = 0; i < wkr_len; ++i) {
@@ -62,7 +65,7 @@ public class Xomp_parse_mgr {
 			wkr_wiki.Cache_mgr().Page_cache_(page_cache).Commons_cache_(commons_cache).Ifexist_cache_(ifexist_cache);				
 
 			// make wkr
-			Xomp_parse_wkr wkr = new Xomp_parse_wkr(this, cfg, mgr_db, page_pool, prog_mgr, file_orig_wkr, wkr_wiki, i + wkr_uid_bgn);
+			Xomp_parse_wkr wkr = new Xomp_parse_wkr(this, cfg, mgr_db, page_pool, prog_mgr, file_orig_wkr, ns_ord_mgr, wkr_wiki, i + wkr_uid_bgn);
 			wkrs[i] = wkr;
 		}
 

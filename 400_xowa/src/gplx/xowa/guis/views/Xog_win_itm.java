@@ -62,7 +62,6 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_link_click))								Win__link_click();
 		else if	(ctx.Match(k, Invk_link_print))								Xog_win_itm__prog_href_mgr.Print(this);
-		else if	(ctx.Match(k, Gfui_html.Evt_link_hover))					Xog_win_itm__prog_href_mgr.Hover(app, this.Active_tab().Wiki(), this.Active_page(), Xoh_href_gui_utl.Standardize_xowa_link(m.ReadStr("v")));
 		else if	(ctx.Match(k, Gfui_html.Evt_location_changed))				Win__link_clicked(m.ReadStr("v"));
 		else if	(ctx.Match(k, Gfui_html.Evt_location_changing))				Page__navigate_by_href(tab_mgr.Active_tab(), Xoh_href_gui_utl.Standardize_xowa_link(m.ReadStr("v")));
 		else if (ctx.Match(k, Gfui_html.Evt_win_resized))					Refresh_win_size();
@@ -92,6 +91,10 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		else if	(ctx.Match(k, Invk_page))									return this.Active_page();
 		else if	(ctx.Match(k, Invk_wiki))									return this.Active_tab().Wiki();
 		else if	(ctx.Match(k, Invk_exit))									App__exit();
+		else if	(ctx.Match(k, Gfui_html.Evt_link_hover)) {
+			if (this.Active_tab() != null)	// NOTE: this.Active_tab() should not be null, but is null when running on raspberry pi; DATE:2016-09-23
+				Xog_win_itm__prog_href_mgr.Hover(app, this.Active_tab().Wiki(), this.Active_page(), Xoh_href_gui_utl.Standardize_xowa_link(m.ReadStr("v")));
+		}
 		else																return Gfo_invk_.Rv_unhandled;
 		return this;
 	}

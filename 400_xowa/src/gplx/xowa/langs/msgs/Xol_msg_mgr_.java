@@ -22,10 +22,6 @@ import gplx.xowa.apps.gfs.*;
 import gplx.xowa.htmls.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.dbs.*;	
 public class Xol_msg_mgr_ {
-//		public static String Get_msg_val_gui_or_null(Xol_lang_itm lang, byte[] pre, byte[] key, byte[] suf) {
-//			String rv = Get_msg_val_gui_or_null(lang, pre, key, suf);
-//			return rv == null ? "<" + String_.new_u8(Bry_.Add(pre, key, suf)) + ">" : rv;
-//		}
 	public static String Get_msg_val_gui_or_empty(Xoa_lang_mgr lang_mgr, Xol_lang_itm lang, byte[] pre, byte[] key, byte[] suf) {	// get from lang, else get from en; does not use get_msg_val to skip db lookups; should only be used for gui; DATE:2014-05-28
 		String rv = Get_msg_val_gui_or_null(lang_mgr, lang, pre, key, suf);
 		return rv == null ? "" : rv;
@@ -102,45 +98,12 @@ public class Xol_msg_mgr_ {
 			}
 		}
 		else {																				// page found; dump entire contents
-			msg_val = Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, msg_db);	// note that MediaWiki msg's use php arg format ($1); xowa.gfs msgs are already converted
+			msg_val = Gfs_php_converter.To_gfs(tmp_bfr, msg_db);	// note that MediaWiki msg's use php arg format ($1); xowa.gfs msgs are already converted
 			msg_in_wiki.Defined_in_(Xol_msg_itm.Defined_in__wiki);
 		}
-//			Xoa_page msg_page = Get_msg_itm_from_db(wiki, lang, msg_key, msg_key_sub_root);
-//			byte[] msg_val = Bry_.Empty;
-//			if (msg_page.Db().Page().Exists_n()) {															// [[MediaWiki:key/fallback]] still not found; search "lang.gfs";
-//				Xol_msg_itm msg_in_lang = Get_msg_itm_from_gfs(wiki, lang, msg_key_sub_root);
-//				if (msg_in_lang == null) {
-//					msg_val = tmp_bfr.Add_byte(Byte_ascii.Lt).Add(msg_key).Add_byte(Byte_ascii.Gt).To_bry_and_clear();	// set val to <msg_key>
-//					msg_in_wiki.Defined_in_(Xol_msg_itm.Defined_in__none);
-//				}
-//				else {
-//					msg_val = msg_in_lang.Val();
-//					msg_in_wiki.Defined_in_(Xol_msg_itm.Defined_in__lang);
-//				}
-//			}
-//			else {																				// page found; dump entire contents
-//				msg_val = Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, msg_page.Db().Text().Text_bry());	// note that MediaWiki msg's use php arg format ($1); xowa.gfs msgs are already converted
-//				msg_in_wiki.Defined_in_(Xol_msg_itm.Defined_in__wiki);
-//			}
 		Xol_msg_itm_.update_val_(msg_in_wiki, msg_val);
 		return msg_in_wiki;
 	}
-//		private static Xoa_page Get_msg_itm_from_db(Xowe_wiki wiki, Xol_lang_itm lang, byte[] msg_key, byte[] msg_key_sub_root) {
-//			byte[] ns_bry = wiki.Ns_mgr().Ns_mediawiki().Name_db_w_colon();
-//			Xoa_ttl ttl = wiki.Ttl_parse(Bry_.Add(ns_bry, msg_key)); // ttl="MediaWiki:msg_key"; note that there may be "/lang"; EX:pl.d:Wikislownik:Bar/Archiwum_6 and newarticletext/pl
-//			Xoae_page rv = ttl == null ? Xoae_page.Empty : wiki.Data_mgr().Load_page_by_ttl_for_msg(ttl);
-//			if (rv.Db().Page().Exists_n()) {	// [[MediaWiki:key]] not found; search for [[MediaWiki:key/fallback]]
-//				byte[][] fallback_ary = lang.Fallback_bry_ary();
-//				int fallback_ary_len = fallback_ary.length;
-//				for (int i = 0; i < fallback_ary_len; i++) {
-//					byte[] fallback = fallback_ary[i];
-//					ttl = wiki.Ttl_parse(Bry_.Add(ns_bry, msg_key_sub_root, Slash_bry, fallback));	// ttl="MediaWiki:msg_key/fallback"
-//					rv = ttl == null ? Xoae_page.Empty : wiki.Data_mgr().Load_page_by_ttl_for_msg(ttl);
-//					if (rv.Db().Page().Exists()) break;
-//				}
-//			}
-//			return rv;
-//		}
 	private static byte[] Get_msg_from_db_or_null(Xow_wiki wiki, Xol_lang_itm lang, byte[] msg_key, byte[] msg_key_sub_root) {
 		byte[] ns_bry = wiki.Ns_mgr().Ns_mediawiki().Name_db_w_colon();
 		Xoa_ttl ttl = wiki.Ttl_parse(Bry_.Add(ns_bry, msg_key)); // ttl="MediaWiki:msg_key"; note that there may be "/lang"; EX:pl.d:Wikislownik:Bar/Archiwum_6 and newarticletext/pl
@@ -162,14 +125,20 @@ public class Xol_msg_mgr_ {
 	}
 	private static byte[] Load_msg_from_db_or_null(Xow_wiki wiki, Xoa_ttl ttl) {
 		Xoa_page pg = null;
-		if (wiki.Type_is_edit()) {
+		if (wiki.Type_is_edit())	// NOTE: this check only works when loading pages directly (EX:en.wikipedia.org/wiki/MediaWiki:Sidebar); however, due to way msgs load, wiki is always edit, even if html_dump; DATE:2016-09-17
 			pg = ((Xowe_wiki)wiki).Data_mgr().Load_page_by_ttl_for_msg(ttl);
-		}
-		else {
+
+		// HACK: handle htmp_dump wikis when loading messages such as sidebar; DATE:2016-09-17
+		if (	!wiki.Type_is_edit()							// app is drd; DATE:2016-09-23
+			||	(	pg.Db().Page().Exists()						// page exists
+				&&	Bry_.Len_eq_0(pg.Db().Text().Text_bry())	// but text is empty -> check html_dump
+				)
+			) {
 			Xoh_page hpg = new Xoh_page();
 			pg = hpg;				
 			hpg.Ctor_by_hview(wiki, Xoa_url.New(wiki, ttl), ttl, -1);
-			((Xowv_wiki)wiki).Pages_get(hpg, gplx.core.net.Gfo_url.Empty, ttl);	// NOTE: url is only for "Special:" pages
+			wiki.Html__hdump_mgr().Load_mgr().Load(hpg, ttl);
+			pg.Db().Text().Text_bry_(pg.Db().Html().Html_bry());
 		}
 		return pg.Db().Page().Exists() ? pg.Db().Text().Text_bry() : null;
 	}

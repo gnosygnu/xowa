@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
-import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.users.data.*;
 public class Xou_cache_mgr {
 	private final    Xoa_wiki_mgr wiki_mgr; private final    Xou_cache_tbl cache_tbl; private final    Db_cfg_tbl cfg_tbl; private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(512);
@@ -169,8 +169,8 @@ public class Xou_cache_mgr {
 		byte[] orig_md5 = cache.Orig_ttl_md5();
 		Xof_ext orig_ext = cache.Orig_ext_itm();
 		orig_ttl = trg_repo.Gen_name_trg(tmp_bfr, orig_ttl, orig_md5, orig_ext);
-		byte mode_id = cache.File_is_orig() ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb;
-		return url_bldr.Init_for_trg_file(mode_id, trg_repo, orig_ttl, orig_md5, orig_ext, cache.File_w()
+		byte mode_id = cache.File_is_orig() ? Xof_img_mode_.Tid__orig : Xof_img_mode_.Tid__thumb;
+		return url_bldr.Init_for_trg_file(trg_repo, mode_id, orig_ttl, orig_md5, orig_ext, cache.File_w()
 			, Xof_lnki_time.Convert_to_xowa_thumbtime	(orig_ext.Id(), cache.File_time())
 			, Xof_lnki_time.Convert_to_xowa_page		(orig_ext.Id(), cache.File_page())
 			).Xto_url();

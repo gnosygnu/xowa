@@ -24,7 +24,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.lnkis.*;
 class Xof_file_fxt {		
 	private Xoae_app app; private Xof_fsdb_mgr__sql fsdb_mgr; private Xowe_wiki wiki; private Xof_orig_mgr orig_mgr;
-	private final    Fsd_thm_itm tmp_thm = Fsd_thm_itm.new_(); private final    Fsd_img_itm tmp_img = new Fsd_img_itm();
+	private final    Fsd_thm_itm tmp_thm = Fsd_thm_itm.new_();
 	public void Rls() {}
 	public void Reset() {
 		Io_mgr.Instance.InitEngine_mem();	// NOTE: files are downloaded to mem_engine, regardless of Db being mem or sqlite; always reset
@@ -61,7 +61,7 @@ class Xof_file_fxt {
 		if (arg.Is_thumb())
 			mnt_itm.Insert_thm(tmp_thm, atr_fil, bin_fil, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Time(), arg.Page(), arg.Bin().length, gplx.core.ios.streams.Io_stream_rdr_.mem_(arg.Bin()));
 		else
-			mnt_itm.Insert_img(tmp_img, atr_fil, bin_fil, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Bin().length, gplx.core.ios.streams.Io_stream_rdr_.mem_(arg.Bin()));
+			mnt_itm.Insert_img(atr_fil, bin_fil, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Bin().length, gplx.core.ios.streams.Io_stream_rdr_.mem_(arg.Bin()));
 	}
 	public void Exec_get(Xof_exec_arg arg) {
 		byte[] ttl_bry = arg.Ttl();
@@ -119,7 +119,7 @@ class Xof_orig_arg {
 	public static Xof_orig_arg new_comm_redirect(String src, String trg)				{return new_(Bool_.Y, src, 440, 400, trg);}
 	private static Xof_orig_arg new_(boolean repo_is_commons, String page, int w, int h)	{return new_(repo_is_commons, page, w, h, null);}
 	public static Xof_orig_arg new_(boolean repo_is_commons, String page, int w, int h, String redirect_str) {
-		byte repo = repo_is_commons ? Xof_repo_itm_.Repo_remote : Xof_repo_itm_.Repo_local;
+		byte repo = repo_is_commons ? Xof_repo_tid_.Tid__remote : Xof_repo_tid_.Tid__local;
 		byte[] redirect = redirect_str == null ? Bry_.Empty : Bry_.new_u8(redirect_str);
 		return new Xof_orig_arg(repo, Bry_.new_u8(page), w, h, redirect);
 	}

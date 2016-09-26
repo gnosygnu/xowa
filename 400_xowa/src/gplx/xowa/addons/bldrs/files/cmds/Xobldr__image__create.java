@@ -17,16 +17,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
 import gplx.dbs.*; import gplx.core.ios.*; import gplx.xowa.files.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.sqls.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.sql_dumps.*;
 import gplx.xowa.addons.bldrs.files.dbs.*;
-public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd, Gfo_invk, Sql_file_parser_cmd {
+public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd, Gfo_invk, Xosql_dump_cbk {
+	private Xosql_dump_parser parser;
 	private Db_conn conn = null; private Db_stmt stmt = null;
 	private Xob_image_tbl tbl_image = new Xob_image_tbl();
 	private byte[] cur_ttl, cur_media_type, cur_minor_mime, cur_timestamp; private int cur_size, cur_width, cur_height, cur_bits, cur_ext_id;
 	private int commit_count = 10000;
-	public Xobldr__image__create(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xobldr__image__create(Xob_bldr bldr, Xowe_wiki wiki) {
+		this.parser = new Xosql_dump_parser(this, "img_name", "img_size", "img_width", "img_height", "img_bits", "img_media_type", "img_minor_mime", "img_timestamp");
+		this.Cmd_ctor(bldr, wiki);
+	}
 	public Io_url Src_fil() {return src_fil;} public Xobldr__image__create Src_fil_(Io_url v) {src_fil = v; return this;} private Io_url src_fil;
-	public Sql_file_parser Parser() {return parser;} private Sql_file_parser parser = new Sql_file_parser();
+	public Xosql_dump_parser Parser() {return parser;}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
 		wiki.Init_assert();	// NOTE: must init wiki for db_mgr_as_sql
@@ -35,7 +39,7 @@ public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd,
 			src_fil = Xob_page_wkr_cmd.Find_fil_by(wiki.Fsys_mgr().Root_dir(), "*-image.sql");
 			if (src_fil == null) throw Err_.new_wo_type(".sql file not found in dir", "dir", wiki.Fsys_mgr().Root_dir());
 		}
-		parser.Src_fil_(src_fil).Trg_fil_gen_(dump_url_gen).Fld_cmd_(this).Flds_req_idx_(20, Fld_img_name, Fld_img_size, Fld_img_width, Fld_img_height, Fld_img_bits, Fld_img_media_type, Fld_img_minor_mime, Fld_img_timestamp);
+		parser.Src_fil_(src_fil);
 		this.conn = Xob_db_file.New__wiki_image(wiki.Fsys_mgr().Root_dir()).Conn();
 		conn.Txn_bgn("bldr__image");
 		this.tbl_image = new Xob_image_tbl();
@@ -47,16 +51,16 @@ public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd,
 		tbl_image.Create_index(conn);
 		conn.Txn_end();
 	}
-	public void Exec(byte[] src, byte[] fld_key, int fld_idx, int fld_bgn, int fld_end, Bry_bfr file_bfr, Sql_file_parser_data data) {
+	public void On_fld_done(int fld_idx, byte[] src, int val_bgn, int val_end) {
 		switch (fld_idx) {
-			case Fld_img_name: 			cur_ttl = Bry_.Mid(src, fld_bgn, fld_end); break;
-			case Fld_img_size: 			cur_size = Bry_.To_int_or(src, fld_bgn, fld_end, -1); break;
-			case Fld_img_width:			cur_width = Bry_.To_int_or(src, fld_bgn, fld_end, -1); break;
-			case Fld_img_height:		cur_height = Bry_.To_int_or(src, fld_bgn, fld_end, -1); break;
-			case Fld_img_bits: 			cur_bits = Bry_.To_int_or(src, fld_bgn, fld_end, -1); break;
-			case Fld_img_media_type:	cur_media_type = Bry_.Mid(src, fld_bgn, fld_end); break;
-			case Fld_img_minor_mime:	cur_minor_mime = Bry_.Mid(src, fld_bgn, fld_end); break;
-			case Fld_img_timestamp:	cur_timestamp = Bry_.Mid(src, fld_bgn, fld_end);
+			case Fld_img_name: 			cur_ttl			= Bry_.Mid(src, val_bgn, val_end); break;
+			case Fld_img_size: 			cur_size		= Bry_.To_int_or(src, val_bgn, val_end, -1); break;
+			case Fld_img_width:			cur_width		= Bry_.To_int_or(src, val_bgn, val_end, -1); break;
+			case Fld_img_height:		cur_height		= Bry_.To_int_or(src, val_bgn, val_end, -1); break;
+			case Fld_img_bits: 			cur_bits		= Bry_.To_int_or(src, val_bgn, val_end, -1); break;
+			case Fld_img_media_type:	cur_media_type	= Bry_.Mid(src, val_bgn, val_end); break;
+			case Fld_img_minor_mime:	cur_minor_mime	= Bry_.Mid(src, val_bgn, val_end); break;
+			case Fld_img_timestamp:		cur_timestamp	= Bry_.Mid(src, val_bgn, val_end);
 				cur_ext_id = Calc_ext_id(show_issues ? app.Usr_dlg() : Gfo_usr_dlg_.Noop, cur_ttl, cur_media_type, cur_minor_mime, cur_width, cur_height);
 				tbl_image.Insert(stmt, cur_ttl, cur_media_type, cur_minor_mime, cur_size, cur_width, cur_height, cur_bits, cur_ext_id, cur_timestamp);
 				++commit_count;
@@ -70,7 +74,8 @@ public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd,
 	public void Cmd_end() {}
 	public void Cmd_term() {}
 	private boolean show_issues = true;
-	private static final int Fld_img_name = 0, Fld_img_size = 1, Fld_img_width = 2, Fld_img_height = 3, Fld_img_bits = 5, Fld_img_media_type = 6, Fld_img_minor_mime = 8, Fld_img_timestamp = 12;
+	private static final int Fld_img_name = 0, Fld_img_size = 1, Fld_img_width = 2, Fld_img_height = 3, Fld_img_bits = 4, Fld_img_media_type = 5, Fld_img_minor_mime = 6, Fld_img_timestamp = 7;
+	// Fld_img_name = 0, Fld_img_size = 1, Fld_img_width = 2, Fld_img_height = 3, Fld_img_bits = 5, Fld_img_media_type = 6, Fld_img_minor_mime = 8, Fld_img_timestamp = 12;
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_src_fil_))			src_fil = m.ReadIoUrl("v");
 		else if	(ctx.Match(k, Invk_show_issues_))		show_issues = m.ReadYn("v");

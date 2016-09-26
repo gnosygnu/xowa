@@ -20,6 +20,7 @@ import gplx.core.primitives.*; import gplx.langs.htmls.*;
 import gplx.xowa.apps.gfs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.*;
+import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_lib_message implements Scrib_lib {
 	public Scrib_lib_message(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -105,7 +106,7 @@ class Scrib_lib_message_data {
 		if (raw_msg_key != null) {
 			Xol_msg_itm raw_msg_itm = new Xol_msg_itm(-1, Bry_.Empty);
 			Bry_bfr tmp_bfr = Bry_bfr_.New(); // wiki.Utl__bfr_mkr().Get_b512();
-			byte[] raw_msg_val = Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, raw_msg_key);
+			byte[] raw_msg_val = Gfs_php_converter.To_gfs(tmp_bfr, raw_msg_key);
 			Xol_msg_itm_.update_val_(raw_msg_itm, raw_msg_val);
 			byte[] raw_msg_rv = wiki.Msg_mgr().Val_by_itm(tmp_bfr, raw_msg_itm, args);
 			tmp_bfr.Mkr_rls();

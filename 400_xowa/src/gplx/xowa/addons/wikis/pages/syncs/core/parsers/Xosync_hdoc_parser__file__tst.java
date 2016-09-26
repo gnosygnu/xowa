@@ -21,14 +21,14 @@ import gplx.langs.htmls.*;
 public class Xosync_hdoc_parser__file__tst {
 	@Before public void init() {fxt.Clear();} private final    Xosync_hdoc_parser__fxt fxt = new Xosync_hdoc_parser__fxt();
 	@Test   public void Commons__thumb() {
-		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//upload.wikimedia.org/wikipedia/commons/thumb/7/70/A.png/220px-A.png'>"))
-			.Test__html(Gfh_utl.Replace_apos("<img src='xowa:/file/commons.wikimedia.org/thumb/7/0/1/c/A.png/220px.png'>"))
-			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.N, "A.png", 220, -1, -1));
+		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//upload.wikimedia.org/wikipedia/commons/thumb/7/70/A.png/320px-A.png'>"))
+			.Test__html(Gfh_utl.Replace_apos("<img src='xowa:/file/commons.wikimedia.org/thumb/7/0/1/c/A.png/320px.png'>"))
+			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.N, "A.png", 320, -1, -1));
 	}
 	@Test   public void Url_encoded() {
-		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//upload.wikimedia.org/wikipedia/commons/thumb/9/91/A%2CB.png/220px-A%2CB.png'>"))
-			.Test__html(Gfh_utl.Replace_apos("<img src='xowa:/file/commons.wikimedia.org/thumb/9/1/0/8/A%2CB.png/220px.png'>"))
-			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.N, "A,B.png", 220, -1, -1));
+		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//upload.wikimedia.org/wikipedia/commons/thumb/9/91/A%2CB.png/320px-A%2CB.png'>"))
+			.Test__html(Gfh_utl.Replace_apos("<img src='xowa:/file/commons.wikimedia.org/thumb/9/1/0/8/A%2CB.png/320px.png'>"))
+			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.N, "A,B.png", 320, -1, -1));
 	}
 	@Test   public void Local__orig() {
 		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//upload.wikimedia.org/wikipedia/en/7/70/A.png'>"))
@@ -36,11 +36,23 @@ public class Xosync_hdoc_parser__file__tst {
 			.Test__fsdb(fxt.Make__fsdb(Bool_.N, Bool_.Y, "A.png", -1, -1, -1));
 	}
 	@Test   public void Svg() {
-		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/12px-Commons-logo.svg.png'>"))
-			.Test__html(Gfh_utl.Replace_apos("<img src='xowa:/file/commons.wikimedia.org/thumb/4/a/6/9/Commons-logo.svg/12px.png'>"))
-			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.N, "Commons-logo.svg", 12, -1, -1));
-		// https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Papilio_dardanus_emerging.ogg/320px--Papilio_dardanus_emerging.ogg.jpg
-		// https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Clip_from_My_Man_Godfrey.ogg/240px-seek%3D67-Clip_from_My_Man_Godfrey.ogg.jpg
-		// https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/PL_Henryk_Sienkiewicz-Pisma_zapomniane_i_niewydane.djvu/page6-250px-PL_Henryk_Sienkiewicz-Pisma_zapomniane_i_niewydane.djvu.jpg
+		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//upload.wikimedia.org/wikipedia/commons/thumb/7/75/A.svg/12px-A.svg.png'>"))
+			.Test__html(Gfh_utl.Replace_apos("<img src='xowa:/file/commons.wikimedia.org/thumb/7/5/9/a/A.svg/12px.png'>"))
+			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.N, "A.svg", 12, -1, -1));
+	}
+	@Test   public void Ogg() {
+		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//upload.wikimedia.org/wikipedia/commons/thumb/4/42/A.ogg/320px--A.ogg.jpg'>"))
+			.Test__html(Gfh_utl.Replace_apos("<img src='xowa:/file/commons.wikimedia.org/thumb/4/2/7/e/A.ogg/320px.jpg'>"))
+			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.N, "A.ogg", "ogv", 320, -1, -1));
+	}
+	@Test   public void Ogg__time() {
+		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//upload.wikimedia.org/wikipedia/commons/thumb/4/42/A.ogg/320px-seek%3D1.2-A.ogg.jpg'>"))
+			.Test__html(Gfh_utl.Replace_apos("<img src='xowa:/file/commons.wikimedia.org/thumb/4/2/7/e/A.ogg/320px-1.2.jpg'>"))
+			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.N, "A.ogg", "ogv", 320, 1.2, -1));
+	}
+	@Test   public void Pdf__page() {
+		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//upload.wikimedia.org/wikipedia/commons/thumb/7/76/A.djvu/page1-320px-A.djvu.jpg'>"))
+			.Test__html(Gfh_utl.Replace_apos("<img src='xowa:/file/commons.wikimedia.org/thumb/7/6/9/a/A.djvu/320px-1.jpg'>"))
+			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.N, "A.djvu", 320, -1, 1));
 	}
 }

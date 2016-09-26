@@ -20,6 +20,7 @@ public class Err_ {
 	private static String Type__gplx = "gplx"; @gplx.Internal protected static String Trace_null = null;
 	public static void Noop(Exception e) {}
 	public static Err as_(Object obj) {return obj instanceof Err ? (Err)obj : null;}
+	public static Err New(String msg, Object... args)							{return new Err(Bool_.Y, Trace_null, "", String_.Format(msg, args));}
 	public static Err new_(String type, String msg, Object... args)			{return new Err(Bool_.Y, Trace_null, type, msg, args);}
 	public static Err new_wo_type(String msg, Object... args)					{return new Err(Bool_.Y, Trace_null, Type__gplx, msg, args);}
 	public static Err new_exc(Exception e, String type, String msg, Object... args) {
@@ -71,5 +72,5 @@ public class Err_ {
 	public static String Message_gplx_full(Exception e)	{return cast_or_make(e).To_str__full();}
 	public static String Message_gplx_log(Exception e)	{return cast_or_make(e).To_str__log();}
 	public static Err cast_or_make(Throwable e) {return Type_adp_.Eq_typeSafe(e, Err.class) ? (Err)e : new Err(Bool_.N, Err_.Trace_lang(e), Type_adp_.NameOf_obj(e), Err_.Message_lang(e));}
-	public static final String Type__op_canceled = "gplx.op_canceled";
+	public static final    String Type__op_canceled = "gplx.op_canceled";
 }

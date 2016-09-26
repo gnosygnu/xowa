@@ -20,9 +20,9 @@ import gplx.core.progs.*;
 import gplx.core.security.*; import gplx.core.security.files.*;
 public class Xobc_cmd__verify_dir extends Xobc_cmd__base {
 	private final    Io_url delete_fil, checksum_fil;
-	public Xobc_cmd__verify_dir(Xobc_task_mgr task_mgr, int task_id, int step_id, int cmd_idx, Io_url dir_url, String checksum_fil_name, Io_url delete_fil) {super(task_mgr, task_id, step_id, cmd_idx);
+	public Xobc_cmd__verify_dir(Xobc_task_mgr task_mgr, int task_id, int step_id, int cmd_idx, Io_url checksum_fil, Io_url delete_fil) {super(task_mgr, task_id, step_id, cmd_idx);
+		this.checksum_fil = checksum_fil;
 		this.delete_fil = delete_fil;
-		this.checksum_fil = dir_url.GenSubFil(checksum_fil_name);
 	}
 	@Override public String Cmd_type() {return CMD_TYPE;} public static final    String CMD_TYPE = "xowa.core.hash_dir";
 	@Override public String Cmd_name() {return "verify";}

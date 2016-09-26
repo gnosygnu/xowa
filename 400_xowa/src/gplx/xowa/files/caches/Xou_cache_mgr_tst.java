@@ -78,7 +78,7 @@ class Xou_cache_mgr_fxt {
 		byte[] wiki_domain = Bry_.new_a7(wiki);
 		byte[] file_ttl = Bry_.new_a7(file);
 		rv.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, wiki_domain, file_ttl, Byte_.Zero, 1, 1, 1 ,1, 1, 1);
-		rv.Init_at_orig(Xof_repo_itm_.Repo_local, wiki_domain, file_ttl, Xof_ext_.new_by_id_(Xof_ext_.Id_png), 120, 120, Bry_.Empty);
+		rv.Init_at_orig(Xof_repo_tid_.Tid__local, wiki_domain, file_ttl, Xof_ext_.new_by_id_(Xof_ext_.Id_png), 120, 120, Bry_.Empty);
 		rv.File_size_(size);
 		return rv;
 	}

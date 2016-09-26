@@ -20,6 +20,7 @@ import gplx.core.envs.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.xtns.scribunto.libs.*; import gplx.xowa.xtns.scribunto.engines.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_core {
 	private Hash_adp_bry mods = Hash_adp_bry.cs();
 	private int expensive_function_count;

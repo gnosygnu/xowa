@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.bldrs.mass_parses.inits; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
-import gplx.dbs.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.addons.bldrs.mass_parses.parses.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 class Xomp_init_mgr {
@@ -27,8 +27,11 @@ class Xomp_init_mgr {
 		Xomp_mgr_db mgr_db = Xomp_mgr_db.New__make(wiki);
 		Db_conn mgr_conn = mgr_db.Conn();
 
-		// remake all
+		// remake all tbls
 		mgr_db.Remake();
+
+		// insert ns into cfg; need for lnki_temp.tier in xomp.make
+		mgr_db.Tbl__cfg().Insert_str("", gplx.xowa.addons.bldrs.mass_parses.parses.wkrs.Xomp_parse_wkr.Cfg__ns_ids, Int_.Ary_concat("|", cfg.Ns_ids()));
 
 		// fill page tbl
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(mgr_conn, new Db_attach_itm("page_db", wiki.Data__core_mgr().Db__core().Conn()));

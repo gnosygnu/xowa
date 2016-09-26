@@ -24,7 +24,7 @@ import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.
 import gplx.xowa.wikis.pages.*;
 import gplx.xowa.addons.wikis.searchs.specials.*;
 import gplx.xowa.guis.views.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*;
 public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	private final    Xob_xdat_file tmp_xdat_file = new Xob_xdat_file(); private final    Xob_xdat_itm tmp_xdat_itm = new Xob_xdat_itm(); 
 	private final    Xowd_page_itm tmp_page = new Xowd_page_itm();
@@ -439,7 +439,6 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		Xob_xdat_itm pid_itm = Load_xdat_itm_by_dir(pids_root.GenSubDir(String_.new_u8(lang_key)), pid_name); if (pid_itm == null) return gplx.xowa.xtns.wbases.Wdata_wiki_mgr.Pid_null;
 		return Bry_.To_int_or(pid_itm.Src(), pid_itm.Itm_bgn() + pid_name.length + 1 + 1, pid_itm.Itm_end(), gplx.xowa.xtns.wbases.Wdata_wiki_mgr.Pid_null);	// extract pid; note that all itms have format of "ttl|pid"; +1=skip pipe; +1 skip p
 	}	Io_url pids_root;
-	public int Load_ctg_count(byte[] ttl) {throw Err_.new_deprecated("XOWA no longer supports categories for text databases");}
 	Xob_xdat_itm Load_xdat_itm_by_dir(Io_url dir, byte[] ttl) {
 		Xoa_hive_mgr hive_mgr = wiki.Appe().Hive_mgr();
 		int fil_idx = hive_mgr.Find_fil(dir, ttl); if (fil_idx == Xowd_regy_mgr.Regy_null) return null; // sub_dir not found; EX: commonswiki if qid; fr if pid;
@@ -447,8 +446,6 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		rdr.Find(tmp_xdat_itm, ttl, 0, Byte_ascii.Pipe, true);
 		return tmp_xdat_itm.Found_exact() ? tmp_xdat_itm : null;
 	}
-	public void Load_ctg_v2a(Xoctg_catpage_ctg rv, Xoctg_catpage_url url_ctg, byte[] ttl_bry, int limit, boolean app_is_cmd) {throw Err_.new_deprecated("XOWA no longer supports categories for text databases");}
-	public Xowd_page_itm[] Load_ctg_list(byte[][] ttls) {throw Err_.new_deprecated("XOWA no longer supports categories for text databases");}
 	public Xodb_page_rdr Get_page_rdr(Xowe_wiki wiki) {return new Xodb_page_rdr__tdb(wiki);}
 	static final String GRP_KEY = "xowa.wiki.db.load";
 }

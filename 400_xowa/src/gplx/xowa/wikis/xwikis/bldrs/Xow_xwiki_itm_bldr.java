@@ -23,7 +23,7 @@ import gplx.xowa.wikis.domains.*;
 public class Xow_xwiki_itm_bldr {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private final    Gfo_url_parser url_parser = new Gfo_url_parser(); private final    Gfo_url url = new Gfo_url();
-	public Xow_xwiki_itm Bld_mw(Xow_domain_itm cur_domain, byte[] key, byte[] mw_url, byte[] domain_name) {return Bld_xo(cur_domain, key, Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, mw_url), domain_name);} // EX: "//commons.wikimedia.org/wiki/Category:$1" -> "//commons.wikimedia.org/wiki/Category:~{0}"
+	public Xow_xwiki_itm Bld_mw(Xow_domain_itm cur_domain, byte[] key, byte[] mw_url, byte[] domain_name) {return Bld_xo(cur_domain, key, Gfs_php_converter.To_gfs(tmp_bfr, mw_url), domain_name);} // EX: "//commons.wikimedia.org/wiki/Category:$1" -> "//commons.wikimedia.org/wiki/Category:~{0}"
 	public Xow_xwiki_itm Bld_xo(Xow_domain_itm cur_domain, byte[] key, byte[] xo_url, byte[] domain_name) {
 		byte[] domain_bry = Xow_xwiki_mgr.Get_domain_from_url(url_parser, url, xo_url);
 		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(domain_bry);

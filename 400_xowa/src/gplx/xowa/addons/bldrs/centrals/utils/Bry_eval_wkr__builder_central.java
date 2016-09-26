@@ -22,7 +22,7 @@ public class Bry_eval_wkr__builder_central implements Bry_eval_wkr {
 	public Bry_eval_wkr__builder_central(Io_url wiki_dir) {this.wiki_dir = wiki_dir.RawBry();}
 	public String Key() {return "builder_central";}
 	public void Resolve(Bry_bfr rv, byte[] src, int args_bgn, int args_end) {
-		// EX: "~{builder_central|download_fil|en.wikipedia.org|en.wikipedia.org-2016.05-html-ns.000-db.001.zip}" -> "/xowa/wiki/en.wikipedia.org/tmp/bldr/en.wikipedia.org-2016.05-html-ns.000-db.001.zip/download.zip"
+		// EX: "~{builder_central|download_fil|en.wikipedia.org|Xowa_enwiki_2016-05_html_ns.000_db.001.zip}" -> "/xowa/wiki/en.wikipedia.org/tmp/bldr/Xowa_enwiki_2016-05_html_ns.000_db.001.zip/download.zip"
 		byte[][] args = Bry_split_.Split(src, args_bgn, args_end, Byte_ascii.Pipe, Bool_.N);
 		int type = hash.Get_as_byte_or(args[0], Byte_.Max_value_127);
 		if (type == Byte_.Max_value_127) throw Err_.new_wo_type("unknown eval type", "src", src);
@@ -32,7 +32,7 @@ public class Bry_eval_wkr__builder_central implements Bry_eval_wkr {
 		if (type == Type__wiki_dir) return;
 		rv.Add_str_a7("tmp").Add_byte(dir_spr);			// "tmp/"
 		rv.Add_str_a7("bldr").Add_byte(dir_spr);		// "bldr/"
-		rv.Add(args[2]).Add_byte(dir_spr);				// "en.wikipedia.org-2016.05-html-ns.000-db.001.zip/"
+		rv.Add(args[2]).Add_byte(dir_spr);				// "Xowa_enwiki_2016-05_html_ns.000_db.001.zip/"
 		switch (type) {
 			case Type__download_fil:	rv.Add_str_a7("download.zip"); break;
 			case Type__unzip_dir:		rv.Add_str_a7("unzip").Add_byte(dir_spr); break;

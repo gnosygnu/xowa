@@ -87,6 +87,10 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 		Object rv_obj = Match_at(trv, src, bgn, end);
 		return rv_obj == null ? or : ((Byte_obj_val)rv_obj).Val();
 	}
+	public byte Match_byte_or(Btrie_rv trv, byte[] src, byte or) {
+		Object rv_obj = Match_at(trv, src, 0, src.length);
+		return rv_obj == null ? or : ((Byte_obj_val)rv_obj).Val();
+	}
 	public Btrie_slim_mgr Add_bry_tid(byte[] bry, byte tid)			{return (Btrie_slim_mgr)Add_obj(bry, Byte_obj_val.new_(tid));}
 	public Btrie_slim_mgr Add_bry_int(byte[] key, int val)			{return (Btrie_slim_mgr)Add_obj(key, new Int_obj_val(val));}
 	public Btrie_slim_mgr Add_str_byte(String key, byte val)		{return (Btrie_slim_mgr)Add_obj(Bry_.new_u8(key), Byte_obj_val.new_(val));}

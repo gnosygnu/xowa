@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
 import gplx.core.brys.*; import gplx.core.btries.*;
-import gplx.xowa.files.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
@@ -29,6 +29,7 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 	public int Repo_bgn() {return repo_bgn;} private int repo_bgn;
 	public int Repo_end() {return repo_end;} private int repo_end;
 	public boolean Repo_is_commons() {return repo_is_commons;} private boolean repo_is_commons;
+	public byte Repo_tid() {return repo_tid;} private byte repo_tid;
 	public int File_ttl_bgn() {return file_ttl_bgn;} private int file_ttl_bgn;
 	public int File_ttl_end() {return file_ttl_end;} private int file_ttl_end;
 	public boolean File_ttl_exists() {return file_ttl_end > file_ttl_bgn;}
@@ -44,6 +45,7 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 		src_bgn = src_end = repo_bgn = repo_end = file_ttl_bgn = file_ttl_end = file_w = file_page = -1;
 		file_time = -1;
 		repo_is_commons = file_is_orig = false;
+		repo_tid = Xof_repo_tid_.Tid__null;
 		file_ttl_bry = null;
 	}
 	public boolean Parse(Bry_err_wkr err_wkr, Xoh_hdoc_ctx hctx, byte[] domain_bry, Gfh_tag tag) {
@@ -59,14 +61,23 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 
 		// get repo_bgn; note that some <img> may be hiero / enlarge / magnify and should exit
 		rdr.Init_by_wkr(err_wkr, "img.src.xowa", src_bgn, src_end).Fail_throws_err_(Bool_.N);
-		repo_bgn = rdr.Find_fwd_rr(Bry__file);						// skip past /file/; EX: "file:///J:/xowa/file/commons.wikimedia.org/"
-		if (repo_bgn == -1) return false;
+		repo_bgn = rdr.Find_fwd_rr(Bry__file);						
+		if (repo_bgn == -1) {
+			repo_bgn = rdr.Find_fwd_rr(Bry__math);
+			if (repo_bgn == Bry_find_.Not_found) return false;
+            this.file_ttl_bry = Bry_.Mid(rdr.Src(), repo_bgn, src_end);
+			this.repo_is_commons = true;
+			this.repo_tid = Xof_repo_tid_.Tid__math;
+			this.file_is_orig = true;
+			return true;
+		}
 
 		rdr.Fail_throws_err_(Bool_.Y);
 
 		// get repo
 		repo_end = rdr.Find_fwd_lr();
 		repo_is_commons = Bry_.Match(rdr.Src(), repo_bgn, repo_end, Xow_domain_itm_.Bry__commons);
+		repo_tid = repo_is_commons ? Xof_repo_tid_.Tid__remote : Xof_repo_tid_.Tid__local;
 		if (!repo_is_commons) {
 			if (!Bry_.Match(rdr.Src(), repo_bgn, repo_end, domain_bry)) rdr.Err_wkr().Fail("repo must be commons or self", "repo", Bry_.Mid(rdr.Src(), repo_bgn, repo_end));
 		}
@@ -120,7 +131,7 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 		}
 		return rdr.Move_to(pos);
 	}
-	private static final    byte[] Bry__file = Bry_.new_a7("/file/"), Bry__orig = Bry_.new_a7("orig/"), Bry__thumb = Bry_.new_a7("thumb/");
+	private static final    byte[] Bry__file = Bry_.new_a7("/file/"), Bry__math = Bry_.new_a7("/math/"), Bry__orig = Bry_.new_a7("orig/"), Bry__thumb = Bry_.new_a7("thumb/");
 	private static final byte Tid__orig = 1, Tid__thumb = 2;
 	private static final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs().Add_bry_byte(Bry__orig, Tid__orig).Add_bry_byte(Bry__thumb, Tid__thumb);
 }

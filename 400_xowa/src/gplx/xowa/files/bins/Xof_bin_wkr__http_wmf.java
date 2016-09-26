@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.threads.*;
 import gplx.xowa.apps.*;
-import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xof_bin_wkr__http_wmf implements Xof_bin_wkr {
 	private final    Xow_repo_mgr repo_mgr; private final    IoEngine_xrg_downloadFil download_wkr; 
@@ -37,12 +37,12 @@ public class Xof_bin_wkr__http_wmf implements Xof_bin_wkr {
 		boolean rv = rdr.Exists();	// NOTE: use Exists which detects for response_code 200, not content length > 0; DATE:2015-05-20
 		if (!rv) {
 			Handle_error();
-			if (!rv && fsdb.Orig_repo_id() == Xof_repo_itm_.Repo_local) {	// image is not found in local; check commons; occurs with bldr which relies on inaccurate data in image dumps; PAGE:en.w:Apollo_13; DATE:2015-08-05
+			if (!rv && fsdb.Orig_repo_id() == Xof_repo_tid_.Tid__local) {	// image is not found in local; check commons; occurs with bldr which relies on inaccurate data in image dumps; PAGE:en.w:Apollo_13; DATE:2015-08-05
 				src = Make_src(Xow_domain_itm_.Bry__commons, fsdb.Orig_ttl(), fsdb.Orig_ttl_md5(), fsdb.Orig_ext(), is_thumb, w, fsdb.Lnki_time(), fsdb.Lnki_page(), Io_url_.Empty);
 				rdr = download_mgr.Download_as_rdr(src);
 				rv = rdr.Exists();
 				if (rv)
-					fsdb.Change_repo(Xof_repo_itm_.Repo_remote, Xow_domain_itm_.Bry__commons);	// set commons.wikimedia.org; DATE:2015-08-05
+					fsdb.Change_repo(Xof_repo_tid_.Tid__remote, Xow_domain_itm_.Bry__commons);	// set commons.wikimedia.org; DATE:2015-08-05
 				else
 					Handle_error();
 			}
@@ -66,15 +66,15 @@ public class Xof_bin_wkr__http_wmf implements Xof_bin_wkr {
 			Thread_adp_.Sleep(fail_timeout);	// as per WMF policy, pause 1 second for every cache miss; http://lists.wikimedia.org/pipermail/wikitech-l/2013-September/071948.html
 	}
 	private void Init_download(byte[] orig_repo, byte[] orig_ttl, byte[] orig_md5, Xof_ext orig_ext, boolean lnki_is_thumb, int file_w, double lnki_time, int lnki_page, Io_url file_url) {
-		byte mode = lnki_is_thumb ? Xof_repo_itm_.Mode_thumb : Xof_repo_itm_.Mode_orig;
+		byte mode = lnki_is_thumb ? Xof_img_mode_.Tid__thumb : Xof_img_mode_.Tid__orig;
 		Xof_repo_pair repo_itm = repo_mgr.Repos_get_by_wiki(orig_repo);
-		String src = url_bldr.Init_for_src_file(mode, repo_itm.Src(), orig_ttl, orig_md5, orig_ext, file_w, lnki_time, lnki_page).Xto_str();
+		String src = url_bldr.Init_for_src_file(repo_itm.Src(), mode, orig_ttl, orig_md5, orig_ext, file_w, lnki_time, lnki_page).Xto_str();
 		download_wkr.Init(src, file_url);
 	}
 	private String Make_src(byte[] orig_repo, byte[] orig_ttl, byte[] orig_md5, Xof_ext orig_ext, boolean lnki_is_thumb, int file_w, double lnki_time, int lnki_page, Io_url file_url) {
-		byte mode = lnki_is_thumb ? Xof_repo_itm_.Mode_thumb : Xof_repo_itm_.Mode_orig;
+		byte mode = lnki_is_thumb ? Xof_img_mode_.Tid__thumb : Xof_img_mode_.Tid__orig;
 		Xof_repo_pair repo_itm = repo_mgr.Repos_get_by_wiki(orig_repo);
-		return url_bldr.Init_for_src_file(mode, repo_itm.Src(), orig_ttl, orig_md5, orig_ext, file_w, lnki_time, lnki_page).Xto_str();
+		return url_bldr.Init_for_src_file(repo_itm.Src(), mode, orig_ttl, orig_md5, orig_ext, file_w, lnki_time, lnki_page).Xto_str();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_fail_timeout_))		fail_timeout = m.ReadInt("v");

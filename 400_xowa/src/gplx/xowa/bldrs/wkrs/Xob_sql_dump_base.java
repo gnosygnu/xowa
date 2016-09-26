@@ -17,13 +17,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.flds.*; import gplx.core.ios.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.xowa.bldrs.sqls.*; import gplx.xowa.wikis.tdbs.bldrs.*;
+import gplx.xowa.bldrs.sql_dumps.*; import gplx.xowa.wikis.tdbs.bldrs.*;
 public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob_cmd, Gfo_invk {
-	private final    Sql_file_parser parser = new Sql_file_parser(); protected boolean fail = false;
+	private final    Xosql_dump_parser parser; protected boolean fail = false;
 	public abstract String Cmd_key();
+	public Xob_sql_dump_base() {
+		this.parser = New_parser();
+	}
 	public Io_url Src_fil() {return src_fil;} private Io_url src_fil;
 	public Io_url_gen Make_url_gen() {return make_url_gen;} private Io_url_gen make_url_gen;
 	public abstract String Sql_file_name();
+	protected abstract Xosql_dump_parser New_parser();
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
 		this.Init_dump(this.Cmd_key());
@@ -38,10 +42,10 @@ public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob
 				return;
 			}
 		}
-		parser.Src_fil_(src_fil).Trg_fil_gen_(dump_url_gen);
+		parser.Src_fil_(src_fil);
 		Cmd_bgn_hook(bldr, parser);
 	}	protected Gfo_fld_wtr fld_wtr = Gfo_fld_wtr.xowa_();
-	public abstract void Cmd_bgn_hook(Xob_bldr bldr, Sql_file_parser parser);
+	public abstract void Cmd_bgn_hook(Xob_bldr bldr, Xosql_dump_parser parser);
 	public void Cmd_run() {
 		if (fail) return;
 		parser.Parse(bldr.Usr_dlg());

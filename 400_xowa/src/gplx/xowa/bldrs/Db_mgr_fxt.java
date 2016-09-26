@@ -76,26 +76,6 @@ public class Db_mgr_fxt {
 		}
 		return rv;
 	}
-	public void Test_category_v1(String ctg_name_str, int... expd) {
-		Xowe_wiki wiki = bldr_fxt.Wiki();
-		byte[] ctg_name_bry = Bry_.new_a7(ctg_name_str);
-		Xoctg_catpage_ctg ctg = new Xoctg_catpage_ctg(ctg_name_bry);
-		wiki.Db_mgr_as_sql().Load_mgr().Load_ctg_v1(ctg, ctg_name_bry);
-		Tfds.Eq_ary(expd, Xto_int_ary(ctg));
-	}
-	int[] Xto_int_ary(Xoctg_catpage_ctg ctg) {
-		List_adp list = List_adp_.New();
-		byte tid_max = Xoa_ctg_mgr.Tid__max;
-		for (byte tid = 0; tid < tid_max; tid++) {
-			Xoctg_catpage_grp grp = ctg.Grp_by_tid(tid); if (grp == null) continue;
-			int len = grp.Itms_list().Count();
-			for (int i = 0; i < len; i++) {
-				Xoctg_catpage_itm itm = (Xoctg_catpage_itm)grp.Itms_list().Get_at(i);
-				list.Add(itm.Page_id());
-			}
-		}
-		return (int[])list.To_ary_and_clear(int.class);
-	}
 	public void Test_file(String url, String expd) {
 		String actl = Io_mgr.Instance.LoadFilStr(url);
 		Tfds.Eq_str_lines(expd, actl);

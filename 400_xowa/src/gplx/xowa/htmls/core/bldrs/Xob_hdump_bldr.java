@@ -19,7 +19,7 @@ package gplx.xowa.htmls.core.bldrs; import gplx.*; import gplx.xowa.*; import gp
 import gplx.core.brys.*; import gplx.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.apps.apis.xowa.bldrs.imports.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.dbs.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.data.*;	
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.parsers.*;
 public class Xob_hdump_bldr implements Gfo_invk {
 	private boolean enabled, hzip_enabled, hzip_diff, hzip_b256; private byte zip_tid = Byte_.Max_value_127;
@@ -52,17 +52,25 @@ public class Xob_hdump_bldr implements Gfo_invk {
 		wpg.File_queue().Clear();	// need to reset uid to 0, else xowa_file_# will resume from last
 
 		// write to html
-		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_hdump(tmp_bfr, ctx, Xoh_wtr_ctx.Hdump, wpg);
-		byte[] orig_bry = tmp_bfr.To_bry_and_clear();
-		wpg.Db().Html().Html_bry_(orig_bry);
+		Xoa_ttl ttl = wpg.Ttl();
+		boolean is_wikitext = Xow_page_tid.Identify(wpg.Wiki().Domain_tid(), ttl.Ns().Id(), ttl.Page_db()) == Xow_page_tid.Tid_wikitext;
+		byte[] orig_bry = Bry_.Empty;
+		if (is_wikitext) {
+			wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_hdump(tmp_bfr, ctx, Xoh_wtr_ctx.Hdump, wpg);
+			orig_bry = tmp_bfr.To_bry_and_clear();
+			wpg.Db().Html().Html_bry_(orig_bry);
+		}
+		else {	// not wikitext; EX: pages in MediaWiki: ns; DATE:2016-09-12
+			wpg.Db().Html().Html_bry_(wpg.Db().Text().Text_bry());
+		}
 
 		// save to db
 		Xowd_html_tbl html_tbl = html_tbl_retriever.Get_html_tbl(wpg.Ttl().Ns(), prv_row_len);	// get html_tbl
-		this.prv_row_len = hdump_mgr.Save_mgr().Save(tmp_hpg.Ctor_by_hdiff(tmp_bfr, wpg, toc_label), html_tbl, true);	// save to db
+		this.prv_row_len = hdump_mgr.Save_mgr().Save(tmp_hpg.Ctor_by_hdiff(tmp_bfr, wpg, toc_label), html_tbl, true, is_wikitext);	// save to db
 		stat_tbl.Insert(tmp_hpg, stat_itm, wpg.Root().Root_src().length, tmp_hpg.Db().Html().Html_bry().length, prv_row_len); // save stats
 
 		// run hzip diff if enabled
-		if (hzip_diff) {
+		if (hzip_diff && is_wikitext) {
 			byte[] expd_bry = op_sys_is_wnt ? Bry_.Replace(tmp_bfr, orig_bry, Byte_ascii.Cr_lf_bry, Byte_ascii.Nl_bry) : orig_bry;	// tidy adds crlf if wnt
 			byte[] actl_bry = hdump_mgr.Load_mgr().Decode_as_bry(tmp_bfr, tmp_hpg, hdump_mgr.Save_mgr().Src_as_hzip(), Bool_.Y);
 			byte[][] diff = Bry_diff_.Diff_1st_line(expd_bry, actl_bry);

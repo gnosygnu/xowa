@@ -44,6 +44,7 @@ public class Xof_file_fxt {
 		return this;
 	}
 	public void Exec_orig_add(boolean repo_is_commons, String orig_ttl, int orig_ext_id, int orig_w, int orig_h, String orig_redirect) {
-		wiki.File_mgr().Orig_mgr().Insert(Xof_repo_itm_.Repo_by_bool(repo_is_commons), Bry_.new_u8(orig_ttl), orig_ext_id, orig_w, orig_h, Bry_.new_u8(orig_redirect));
+		byte repo_tid = repo_is_commons ? Xof_repo_tid_.Tid__remote : Xof_repo_tid_.Tid__local;
+		wiki.File_mgr().Orig_mgr().Insert(repo_tid, Bry_.new_u8(orig_ttl), orig_ext_id, orig_w, orig_h, Bry_.new_u8(orig_redirect));
 	}
 }

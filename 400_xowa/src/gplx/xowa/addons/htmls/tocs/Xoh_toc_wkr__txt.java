@@ -140,7 +140,7 @@ class Xoh_toc_wkr__txt {
 			int rhs_bgn = -1, rhs_end = -1, new_pos = lhs_end;
 			if (lhs_is_pair) {			// get rhs unless inline
 				if (tag_id == Gfh_tag_.Id__any) {
-                        Gfo_usr_dlg_.Instance.Warn_many("", "", "unknown tag: page=~{0} tag=~{1}", page_name, lhs_bry);
+					Gfo_usr_dlg_.Instance.Warn_many("", "", "unknown tag: page=~{0} tag=~{1}", page_name, lhs_bry);
 					Gfh_tag rhs = tag_rdr.Tag__peek_fwd_tail(lhs_bry);
 					if (rhs.Name_id() == Gfh_tag_.Id__eos) return false;
 					rhs_bgn = rhs.Src_bgn(); rhs_end = rhs.Src_end();

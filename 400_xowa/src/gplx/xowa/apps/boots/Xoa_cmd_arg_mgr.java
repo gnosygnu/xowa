@@ -94,6 +94,7 @@ public class Xoa_cmd_arg_mgr {
 			case Op_sys.Tid_lnx: rv = "linux"; break;
 			case Op_sys.Tid_wnt: rv = "windows"; break;
 			case Op_sys.Tid_osx: rv = "macosx"; break;
+			case Op_sys.Tid_arm: rv = "arm"; break;
 			default: throw Err_.new_unhandled("unknown platform " + Op_sys.Cur());
 		}
 		if (op_sys.Bitness() == Op_sys.Bitness_64) rv += "_64";

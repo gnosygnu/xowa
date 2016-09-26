@@ -32,16 +32,17 @@ public class Xoctg_fmt_ltr implements gplx.core.brys.Bfr_arg {	// "A", "B", "C c
 		itm_fmt.Init_from_ltr(wiki, grp);
 	}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		int itms_len = grp.Len(); if (itms_len == 0) return;	// no items; exit
-
 		int itm_idx = grp.Bgn();	// itm idx; EX: idx=201 in len=500
+		int itm_end = grp.End();
+		int itms_len = itm_end - itm_idx; if (itms_len == 0) return;	// no items; exit
+
 		int col_idx = 0;			// col idx; EX: 3 cols; idx = 0, 1, 2
 		boolean start_new_col = true;
 		byte[] ltr_prv = Bry_.Empty;
 
 		// loop itms until no more itms
-		while (itm_idx < itms_len) {
-			Xoctg_catpage_itm itm = grp.Itms()[itm_idx];
+		while (itm_idx < itm_end) {
+			Xoctg_catpage_itm itm = grp.Itms__get_at(itm_idx);
 
 			// get ltr_head; EX: "C" or "C cont."
 			byte[] itm_sortkey = itm.Sort_key();

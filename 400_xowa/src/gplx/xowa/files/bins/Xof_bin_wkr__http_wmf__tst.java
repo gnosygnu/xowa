@@ -31,7 +31,7 @@ public class Xof_bin_wkr__http_wmf__tst {
 		fxt.Exec__Get_as_rdr(fsdb_itm, Bool_.Y, 220);														// look in enwiki
 		fxt.Test__Get_as_rdr__rdr("test_data");																// test that enwiki tries commons again
 		Tfds.Eq_str("commons.wikimedia.org", fsdb_itm.Orig_repo_name(), "repo_name");						// test that it's now commons
-		Tfds.Eq_byte(Xof_repo_itm_.Repo_remote, fsdb_itm.Orig_repo_id(), "repo_tid");						// test that it's now commons
+		Tfds.Eq_byte(Xof_repo_tid_.Tid__remote, fsdb_itm.Orig_repo_id(), "repo_tid");						// test that it's now commons
 	}
 	@Test   public void Long_filename_becomes_thumbnail() {
 		String filename = String_.Repeat("A", 200) + ".png";

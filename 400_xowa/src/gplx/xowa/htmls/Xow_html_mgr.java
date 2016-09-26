@@ -53,24 +53,19 @@ public class Xow_html_mgr implements Gfo_invk {
 	public Xop_xatr_whitelist_mgr	Whitelist_mgr() {return whitelist_mgr;} private final    Xop_xatr_whitelist_mgr whitelist_mgr = new Xop_xatr_whitelist_mgr().Ini();
 	public Xow_portal_mgr			Portal_mgr() {return portal_mgr;} private Xow_portal_mgr portal_mgr;
 	public Xow_module_mgr			Head_mgr() {return module_mgr;} private Xow_module_mgr module_mgr;
+	public Xoctg_catpage_mgr		Catpage_mgr() {return catpage_mgr;} private final    Xoctg_catpage_mgr catpage_mgr = new Xoctg_catpage_mgr();
 	public boolean Importing_ctgs() {return importing_ctgs;} public void Importing_ctgs_(boolean v) {importing_ctgs = v;} private boolean importing_ctgs;
 	public int Img_thumb_width() {return img_thumb_width;} private int img_thumb_width = 220;
 	public byte[] Img_xowa_protocol() {return img_xowa_protocol;} private byte[] img_xowa_protocol;
 	public boolean Img_suppress_missing_src() {return img_suppress_missing_src;} public Xow_html_mgr Img_suppress_missing_src_(boolean v) {img_suppress_missing_src = v; return this;} private boolean img_suppress_missing_src = true;
-	public Xoctg_catpage_mgr Ns_ctg() {return ns_ctg;} private final    Xoctg_catpage_mgr ns_ctg = new Xoctg_catpage_mgr();
 	public Xoh_imgs_mgr Imgs_mgr() {return imgs_mgr;} private Xoh_imgs_mgr imgs_mgr;
 	public void Copy_cfg(Xow_html_mgr html_mgr) {imgs_mgr.Copy_cfg(html_mgr.Imgs_mgr());}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_article))							return page_wtr_mgr;
 		else if	(ctx.Match(k, Invk_portal))								return portal_mgr;
 		else if	(ctx.Match(k, Invk_imgs))								return imgs_mgr;
-		else if	(ctx.Match(k, Invk_ns_ctg))								return ns_ctg;
 		else if	(ctx.Match(k, Invk_modules))							return module_mgr;
 		else	return Gfo_invk_.Rv_unhandled;
 	}
-	public static final String 
-	  Invk_article = "article"
-	, Invk_portal = "portal", Invk_imgs = "imgs", Invk_ns_ctg = "ns_ctg"
-	, Invk_modules = "modules"
-	;
+	public static final String Invk_article = "article", Invk_portal = "portal", Invk_imgs = "imgs", Invk_modules = "modules";
 }

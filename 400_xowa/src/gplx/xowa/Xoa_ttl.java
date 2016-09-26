@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.langs.htmls.entitys.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.xwikis.*; 
 import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.miscs.*;
-import gplx.xowa.apps.urls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.langs.cases.*;	
+import gplx.xowa.apps.utls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.langs.cases.*;	
 public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.MW: Ttl.php|secureAndSplit;
 	private int wik_bgn = -1, ns_bgn = -1, page_bgn = 0, leaf_bgn = -1, anch_bgn = -1, root_bgn = -1;
 	private byte[] tors_txt;

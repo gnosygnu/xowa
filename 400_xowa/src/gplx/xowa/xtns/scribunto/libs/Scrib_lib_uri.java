@@ -19,6 +19,7 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import gplx.xowa.xtns.pfuncs.ttls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*;
+import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_lib_uri implements Scrib_lib {
 	public Scrib_lib_uri(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;

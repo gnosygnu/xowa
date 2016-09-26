@@ -26,10 +26,10 @@ class Xomp_make_html {
 		Db_conn mgr_conn = mgr_db.Conn();
 
 		// update wkr_uid; note that this cannot be done in parse_wkr, b/c multiple-writer-errors for xomp.db|page
-		int wkrs_len = mgr_db.Wkr_tbl().Select_count();
+		int wkrs_len = mgr_db.Tbl__wkr().Select_count();
 		for (int i = 0; i < wkrs_len; ++i) {
 			Xomp_wkr_db wkr_db = Xomp_wkr_db.New(mgr_db.Dir(), i);
-			mgr_db.Page_tbl().Update_wkr_uid(i, wkr_db.Conn());
+			mgr_db.Tbl__page().Update_wkr_uid(i, wkr_db.Conn());
 		}
 
 		// init more

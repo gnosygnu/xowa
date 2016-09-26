@@ -32,6 +32,8 @@ public class Gfo_url_encoder_tst {
 		fxt.Encoder_id().Encoder().Decode(tmp_bfr, Bool_.N, raw, 0, raw.length);
 		Tfds.Eq("0%.jpg", tmp_bfr.To_str_and_clear()); 
 	}
+	@Test  public void Ttl__syms__diff() 	{fxt.Encoder_ttl().Test__encode(" &'=+", "_%26%27%3D%2B");}
+	@Test  public void Ttl__syms__same() 	{fxt.Encoder_ttl().Test__encode("!\"#$%()*,-./:;<>?@[\\]^_`{|}~", "!\"#$%()*,-./:;<>?@[\\]^_`{|}~");}
 	@Test  public void Url__syms() 			{fxt.Encoder_url().Test__bicode("!?^~", "%21%3F%5E%7E");}
 	@Test  public void Url__foreign() 		{fxt.Encoder_url().Test__bicode("aéb", "a%C3%A9b");}
 	@Test  public void Url__space() 		{fxt.Encoder_url().Test__bicode("a b", "a+b");}
@@ -54,6 +56,7 @@ class Gfo_url_encoder_fxt {
 	public Gfo_url_encoder_fxt Encoder_id()			{encoder = Gfo_url_encoder_.Id; return this;}
 	public Gfo_url_encoder_fxt Encoder_href()		{encoder = Gfo_url_encoder_.Href; return this;}
 	public Gfo_url_encoder_fxt Encoder_url()		{encoder = Gfo_url_encoder_.Http_url; return this;}
+	public Gfo_url_encoder_fxt Encoder_ttl()		{encoder = Gfo_url_encoder_.Mw_ttl; return this;}
 	public Gfo_url_encoder_fxt Encoder_fsys_safe()	{encoder = Gfo_url_encoder_.New__fsys_wnt().Make(); return this;}
 	public void Test__bicode(String raw, String encoded) {
 		Test__encode(raw, encoded);

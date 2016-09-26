@@ -79,8 +79,8 @@ public class Xobc_task_regy__work extends Xobc_task_regy__base {
 		thread_mgr.Halt(cmd_uid, Thread_halt_cbk_.Noop);
 	}
 	private void Redo_task(Xobc_task_itm task, Xobc_step_itm step, Xobc_cmd_itm cmd) {
-		cmd.Cmd_clear();
 		cmd = step.Step_fallback_to(cmd.Cmd_fallback());
+		cmd.Cmd_clear();
 		task.Task_status_(gplx.core.progs.Gfo_prog_ui_.Status__working);
 		task_mgr.Send_json("xo.bldr.work.prog__start__recv", task.Save_to(Gfobj_nde.New()));
 		thread_mgr.Add(cmd.Cmd_uid(), Thread_adp_.Start_by_val("xobc: " + cmd.Cmd_name(), cmd, cmd, Xobc_cmd__base.Invk__exec, ctx));

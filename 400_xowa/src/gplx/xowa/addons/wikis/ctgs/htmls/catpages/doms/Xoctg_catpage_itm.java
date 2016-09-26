@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
-public class Xoctg_catpage_itm implements gplx.CompareAble {
+public class Xoctg_catpage_itm {
 	public Xoctg_catpage_itm(int page_id, Xoa_ttl page_ttl, byte[] sort_key) {
 		this.page_id = page_id;
 		this.page_ttl = page_ttl;
@@ -28,6 +28,5 @@ public class Xoctg_catpage_itm implements gplx.CompareAble {
 	public boolean				Missing() {return missing;} private boolean missing;	// not used; remove?;
 	public void					Missing_y_() {missing = true;}
 
-	public int compareTo(Object obj) {Xoctg_catpage_itm comp = (Xoctg_catpage_itm)obj; return Int_.Compare(page_id, comp.Page_id());}
 	public static final    Xoctg_catpage_itm[] Ary_empty = new Xoctg_catpage_itm[0];
 }

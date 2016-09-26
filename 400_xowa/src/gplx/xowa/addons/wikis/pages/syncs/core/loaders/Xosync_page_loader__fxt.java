@@ -38,9 +38,10 @@ public class Xosync_page_loader__fxt {
 		Gftest.Eq__ary__lines(expd, hpg.Db().Html().Html_bry(), "converted html");
 		return this;
 	}
-	public Xof_fsdb_itm Make__fsdb(boolean repo_is_commons, boolean file_is_thumb, String file_ttl, int file_w, double file_time, int file_page) {
+	public Xof_fsdb_itm Make__fsdb(boolean repo_is_commons, boolean file_is_orig, String file_ttl, String orig_ext_str, int file_w, double file_time, int file_page) {
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();
-		itm.Init_by_wm_parse(wiki.Domain_itm().Abrv_xo(), repo_is_commons, file_is_thumb, Bry_.new_u8(file_ttl), file_w, file_time, file_page);
+		Xof_ext orig_ext = Xof_ext_.new_by_ext_(Bry_.new_u8(orig_ext_str));
+		itm.Init_by_wm_parse(wiki.Domain_itm().Abrv_xo(), repo_is_commons, file_is_orig, Bry_.new_u8(file_ttl), orig_ext, file_w, file_time, file_page);
 		return itm;
 	}
 	public Xosync_page_loader__fxt Test__fsdb(Xof_fsdb_itm expd) {
