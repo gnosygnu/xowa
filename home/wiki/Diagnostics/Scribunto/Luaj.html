@@ -25,7 +25,7 @@
         Applies to the Luaj engine (as opposed to the Lua engine)
       </li>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj.html" id="xolnki_2" title="Module:Diagnostics/Luaj">Module:Diagnostics/Luaj</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj.html" id="xolnki_2" title="Module:Diagnostics/Luaj" class="xowa-visited">Module:Diagnostics/Luaj</a>
       </li>
       <li>
         Tests changes to the luaj_xowa.jar
@@ -653,6 +653,20 @@
         </td>
         <td>
           255
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          string.gsub does not match $ at end of string
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_gsub|ab|e?$|1}}
+        </td>
+        <td>
+          abe
         </td>
         <td>
           <span style='color: green;'>pass</span>
