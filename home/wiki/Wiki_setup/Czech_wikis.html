@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Wiki setup/Czech wikis - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Wiki setup/Czech wikis</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <h2>
+      <span class="mw-headline" id="Overview">Overview</span>
+    </h2>
+    <p>
+      This page describes how to set up Czech wikis on your machine. The following two options are available:
+    </p>
+    <h3>
+      <span class="mw-headline" id="Download_pre-built_wikis_from_archive.org">Download pre-built wikis from archive.org</span>
+    </h3>
+    <ul>
+      <li>
+        <b>Faster</b>: The build process is skipped completely. All you have to do is download the wikis
+      </li>
+      <li>
+        <b>Simpler</b>: The wikis are pre-compiled HTML, so you don't have to set-up Wikidata or other pre-requisites. Since the wiki is just being downloaded, not built, there are less things that can go wrong
+      </li>
+      <li>
+        <b>Less recent</b>: The wikis need to be manually generated and uploaded by me. If you find that the wikis below are out of date, you can create an issue at github.org or try building them yourself.
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Build_wikis_using_the_Wikimedia_database_dumps_at_wikimedia.org">Build wikis using the Wikimedia database dumps at wikimedia.org</span>
+    </h3>
+    <ul>
+      <li>
+        <b>Slower</b>: It takes an extra few hours to build the wiki
+      </li>
+      <li>
+        <b>Slightly harder</b>: These wikis work best with Wikidata on your machine. See <a href="http://xowa.org/home/wiki/App/Wiki_types/Wikidata.html" id="xolnki_2" title="App/Wiki types/Wikidata">App/Wiki types/Wikidata</a>. In additon, the build process may not work on certain low-end machines like Raspberry Pi
+      </li>
+      <li>
+        <b>Always recent</b>: The wikis will be built using the latest dump from Wikimedia at <a href="https://dumps.wikimedia.org/backup-index.html" rel="nofollow" class="external free">https://dumps.wikimedia.org/backup-index.html</a>
+      </li>
+    </ul>
+    <p>
+      In addition, both options have an <b>automatic</b> and a <b>manual</b> route. More detail is provided below.
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-2">
+              <a href="#Download_pre-built_wikis_from_archive.org"><span class="tocnumber">1.1</span> <span class="toctext">Download pre-built wikis from archive.org</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-3">
+              <a href="#Build_wikis_using_the_Wikimedia_database_dumps_at_wikimedia.org"><span class="tocnumber">1.2</span> <span class="toctext">Build wikis using the Wikimedia database dumps at wikimedia.org</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#Download_pre-built_wikis_from_archive.org_2"><span class="tocnumber">2</span> <span class="toctext">Download pre-built wikis from archive.org</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#Automatic"><span class="tocnumber">2.1</span> <span class="toctext">Automatic</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#Manual"><span class="tocnumber">2.2</span> <span class="toctext">Manual</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-7">
+          <a href="#Build_wikis_using_the_Wikimedia_database_dumps_at_wikimedia.org_2"><span class="tocnumber">3</span> <span class="toctext">Build wikis using the Wikimedia database dumps at wikimedia.org</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-8">
+              <a href="#Automatic_2"><span class="tocnumber">3.1</span> <span class="toctext">Automatic</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-9">
+              <a href="#Manual_2"><span class="tocnumber">3.2</span> <span class="toctext">Manual</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-10">
+          <a href="#URLS"><span class="tocnumber">4</span> <span class="toctext">URLS</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-11">
+              <a href="#cs.wikipedia.org"><span class="tocnumber">4.1</span> <span class="toctext">cs.wikipedia.org</span></a> 
+              <ul>
+                <li class="toclevel-3 tocsection-12">
+                  <a href="#cs.wikipedia.org_Articles_.282016-09.29"><span class="tocnumber">4.1.1</span> <span class="toctext">cs.wikipedia.org Articles (2016-09)</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-13">
+                  <a href="#cs.wikipedia.org_Images_.282016-09.29"><span class="tocnumber">4.1.2</span> <span class="toctext">cs.wikipedia.org Images (2016-09)</span></a>
+                </li>
+              </ul>
+            </li>
+            <li class="toclevel-2 tocsection-14">
+              <a href="#cs.wiktionary.org"><span class="tocnumber">4.2</span> <span class="toctext">cs.wiktionary.org</span></a> 
+              <ul>
+                <li class="toclevel-3 tocsection-15">
+                  <a href="#cs.wiktionary.org_Articles_.282016-09.29"><span class="tocnumber">4.2.1</span> <span class="toctext">cs.wiktionary.org Articles (2016-09)</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-16">
+                  <a href="#cs.wiktionary.org_Images_.282016-09.29"><span class="tocnumber">4.2.2</span> <span class="toctext">cs.wiktionary.org Images (2016-09)</span></a>
+                </li>
+              </ul>
+            </li>
+            <li class="toclevel-2 tocsection-17">
+              <a href="#cs.wikisource.org"><span class="tocnumber">4.3</span> <span class="toctext">cs.wikisource.org</span></a> 
+              <ul>
+                <li class="toclevel-3 tocsection-18">
+                  <a href="#cs.wikisource.org_Articles_.282016-09.29"><span class="tocnumber">4.3.1</span> <span class="toctext">cs.wikisource.org Articles (2016-09)</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-19">
+                  <a href="#cs.wikisource.org_Images_.282016-09.29"><span class="tocnumber">4.3.2</span> <span class="toctext">cs.wikisource.org Images (2016-09)</span></a>
+                </li>
+              </ul>
+            </li>
+            <li class="toclevel-2 tocsection-20">
+              <a href="#cs.wikiquote.org"><span class="tocnumber">4.4</span> <span class="toctext">cs.wikiquote.org</span></a> 
+              <ul>
+                <li class="toclevel-3 tocsection-21">
+                  <a href="#cs.wikiquote.org_Articles_.282016-08.29"><span class="tocnumber">4.4.1</span> <span class="toctext">cs.wikiquote.org Articles (2016-08)</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-22">
+                  <a href="#cs.wikiquote.org_Images_.282016-08.29"><span class="tocnumber">4.4.2</span> <span class="toctext">cs.wikiquote.org Images (2016-08)</span></a>
+                </li>
+              </ul>
+            </li>
+            <li class="toclevel-2 tocsection-23">
+              <a href="#cs.wikibooks.org"><span class="tocnumber">4.5</span> <span class="toctext">cs.wikibooks.org</span></a> 
+              <ul>
+                <li class="toclevel-3 tocsection-24">
+                  <a href="#cs.wikibooks.org_Articles_.282016-08.29"><span class="tocnumber">4.5.1</span> <span class="toctext">cs.wikibooks.org Articles (2016-08)</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-25">
+                  <a href="#cs.wikibooks.org_Images_.282016-08.29"><span class="tocnumber">4.5.2</span> <span class="toctext">cs.wikibooks.org Images (2016-08)</span></a>
+                </li>
+              </ul>
+            </li>
+            <li class="toclevel-2 tocsection-26">
+              <a href="#cs.wikiversity.org"><span class="tocnumber">4.6</span> <span class="toctext">cs.wikiversity.org</span></a> 
+              <ul>
+                <li class="toclevel-3 tocsection-27">
+                  <a href="#cs.wikiversity.org_Articles_.282016-08.29"><span class="tocnumber">4.6.1</span> <span class="toctext">cs.wikiversity.org Articles (2016-08)</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-28">
+                  <a href="#cs.wikiversity.org_Images_.282016-08.29"><span class="tocnumber">4.6.2</span> <span class="toctext">cs.wikiversity.org Images (2016-08)</span></a>
+                </li>
+              </ul>
+            </li>
+            <li class="toclevel-2 tocsection-29">
+              <a href="#cs.wikinews.org"><span class="tocnumber">4.7</span> <span class="toctext">cs.wikinews.org</span></a> 
+              <ul>
+                <li class="toclevel-3 tocsection-30">
+                  <a href="#cs.wikinews.org_Articles_.282016-09.29"><span class="tocnumber">4.7.1</span> <span class="toctext">cs.wikinews.org Articles (2016-09)</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-31">
+                  <a href="#cs.wikinews.org_Images_.282016-09.29"><span class="tocnumber">4.7.2</span> <span class="toctext">cs.wikinews.org Images (2016-09)</span></a>
+                </li>
+              </ul>
+            </li>
+            <li class="toclevel-2 tocsection-32">
+              <a href="#All_links"><span class="tocnumber">4.8</span> <span class="toctext">All links</span></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Download_pre-built_wikis_from_archive.org_2">Download pre-built wikis from archive.org</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Automatic">Automatic</span>
+    </h3>
+    <ul>
+      <li>
+        Go to <a href="http://xowa.org/home/wiki/Special:XowaDownloadCentral.html" id="xolnki_3" title="Special:XowaDownloadCentral" class="xowa-visited">Special:XowaDownloadCentral</a>
+      </li>
+      <li>
+        In the <b>Available</b> table, add any of the following task names
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Česky Wikipedia - Articles (2016-09) [1.71 GB]
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Česky Wikipedia - Images (2016-09) [7.78 GB]
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Česky Wiktionary - Articles (2016-09) [92.48 MB]
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Česky Wiktionary - Images (2016-09) [5.82 MB]
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Česky Wikisource - Articles (2016-09) [134.87 MB]
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Česky Wikisource - Images (2016-09) [46.61 MB]
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Česky Wikiquote - Articles (2016-08) [13.41 MB]
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Česky Wikiquote - Images (2016-08) [92.47 MB]
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Česky Wikibooks - Articles (2016-08) [6.17 MB]
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Česky Wikibooks - Images (2016-08) [48.46 MB]
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Česky Wikiversity - Articles (2016-08) [14.29 MB]
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Česky Wikiversity - Images (2016-08) [51.21 MB]
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Česky Wikinews - Articles (2016-09) [10.48 MB]
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Česky Wikinews - Images (2016-09) [37.21 MB]
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        In the <b>Queue</b> table, click the Play button
+      </li>
+      <li>
+        Wait for the Queue to process. When it is done, enter the wiki URL in the bar. For example, <code>cs.wikipedia.org</code>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Manual">Manual</span>
+    </h3>
+    <ul>
+      <li>
+        Download the urls below. Note that they are listed in two formats: 
+        <ul>
+          <li>
+            Urls by wiki / type: In case you want only one wiki (wiktionary) or one type (articles)
+          </li>
+          <li>
+            All urls (for copying into a download manager)
+          </li>
+        </ul>
+      </li>
+      <li>
+        Unzip them and move the .xowa file to the proper wiki directory. For example, for cs.wikipedia.org, move the files to <code>C:\xowa\wiki\cs.wikipedia.org</code>
+      </li>
+      <li>
+        Start XOWA and enter the wiki URL in the bar. For example, <code>cs.wikipedia.org</code>
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Build_wikis_using_the_Wikimedia_database_dumps_at_wikimedia.org_2">Build wikis using the Wikimedia database dumps at wikimedia.org</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Automatic_2">Automatic</span>
+    </h3>
+    <ul>
+      <li>
+        Go to <a href="http://xowa.org/home/wiki/Dashboard/Import/Online.html" id="xolnki_4" title="Dashboard/Import/Online" class="xowa-visited">Dashboard/Import/Online</a>
+      </li>
+      <li>
+        Find your wiki in the list
+      </li>
+      <li>
+        Click the "download" link.
+      </li>
+      <li>
+        Wait a few hours for the wiki to build
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Manual_2">Manual</span>
+    </h3>
+    <ul>
+      <li>
+        Download your dump from <a href="https://dumps.wikimedia.org/backup-index.html" rel="nofollow" class="external free">https://dumps.wikimedia.org/backup-index.html</a>
+      </li>
+      <li>
+        Go to <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline.html" id="xolnki_5" title="Dashboard/Import/Offline" class="xowa-visited">Dashboard/Import/Offline</a>
+      </li>
+      <li>
+        Select the dump and import it
+      </li>
+    </ul>
+    <hr>
+    <h2>
+      <span class="mw-headline" id="URLS">URLS</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="cs.wikipedia.org">cs.wikipedia.org</span>
+    </h3>
+    <h4>
+      <span class="mw-headline" id="cs.wikipedia.org_Articles_.282016-09.29">cs.wikipedia.org Articles (2016-09)</span>
+    </h4>
+    <div style="margin-left: 2em">
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_xtn.search.core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_xtn.search.core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_html.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_html.zip</a>
+        </li>
+      </ul>
+    </div>
+    <h4>
+      <span class="mw-headline" id="cs.wikipedia.org_Images_.282016-09.29">cs.wikipedia.org Images (2016-09)</span>
+    </h4>
+    <div style="margin-left: 2em">
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.001.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.001.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.002.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.002.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.003.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.003.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.004.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.004.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.005.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.005.zip</a>
+        </li>
+      </ul>
+    </div>
+    <h3>
+      <span class="mw-headline" id="cs.wiktionary.org">cs.wiktionary.org</span>
+    </h3>
+    <h4>
+      <span class="mw-headline" id="cs.wiktionary.org_Articles_.282016-09.29">cs.wiktionary.org Articles (2016-09)</span>
+    </h4>
+    <div style="margin-left: 2em">
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_xtn.search.core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_xtn.search.core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_html.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_html.zip</a>
+        </li>
+      </ul>
+    </div>
+    <h4>
+      <span class="mw-headline" id="cs.wiktionary.org_Images_.282016-09.29">cs.wiktionary.org Images (2016-09)</span>
+    </h4>
+    <div style="margin-left: 2em">
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_file_core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_file_core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_file_ns.000_db.001.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_file_ns.000_db.001.zip</a>
+        </li>
+      </ul>
+    </div>
+    <h3>
+      <span class="mw-headline" id="cs.wikisource.org">cs.wikisource.org</span>
+    </h3>
+    <h4>
+      <span class="mw-headline" id="cs.wikisource.org_Articles_.282016-09.29">cs.wikisource.org Articles (2016-09)</span>
+    </h4>
+    <div style="margin-left: 2em">
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_xtn.search.core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_xtn.search.core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_html.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_html.zip</a>
+        </li>
+      </ul>
+    </div>
+    <h4>
+      <span class="mw-headline" id="cs.wikisource.org_Images_.282016-09.29">cs.wikisource.org Images (2016-09)</span>
+    </h4>
+    <div style="margin-left: 2em">
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_file_core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_file_core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_file_ns.000_db.001.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_file_ns.000_db.001.zip</a>
+        </li>
+      </ul>
+    </div>
+    <h3>
+      <span class="mw-headline" id="cs.wikiquote.org">cs.wikiquote.org</span>
+    </h3>
+    <h4>
+      <span class="mw-headline" id="cs.wikiquote.org_Articles_.282016-08.29">cs.wikiquote.org Articles (2016-08)</span>
+    </h4>
+    <div style="margin-left: 2em">
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_xtn.search.core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_xtn.search.core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_html.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_html.zip</a>
+        </li>
+      </ul>
+    </div>
+    <h4>
+      <span class="mw-headline" id="cs.wikiquote.org_Images_.282016-08.29">cs.wikiquote.org Images (2016-08)</span>
+    </h4>
+    <div style="margin-left: 2em">
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_file_core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_file_core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_file_ns.000_db.001.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_file_ns.000_db.001.zip</a>
+        </li>
+      </ul>
+    </div>
+    <h3>
+      <span class="mw-headline" id="cs.wikibooks.org">cs.wikibooks.org</span>
+    </h3>
+    <h4>
+      <span class="mw-headline" id="cs.wikibooks.org_Articles_.282016-08.29">cs.wikibooks.org Articles (2016-08)</span>
+    </h4>
+    <div style="margin-left: 2em">
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_xtn.search.core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_xtn.search.core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_html.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_html.zip</a>
+        </li>
+      </ul>
+    </div>
+    <h4>
+      <span class="mw-headline" id="cs.wikibooks.org_Images_.282016-08.29">cs.wikibooks.org Images (2016-08)</span>
+    </h4>
+    <div style="margin-left: 2em">
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_file_core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_file_core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_file_ns.000_db.001.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_file_ns.000_db.001.zip</a>
+        </li>
+      </ul>
+    </div>
+    <h3>
+      <span class="mw-headline" id="cs.wikiversity.org">cs.wikiversity.org</span>
+    </h3>
+    <h4>
+      <span class="mw-headline" id="cs.wikiversity.org_Articles_.282016-08.29">cs.wikiversity.org Articles (2016-08)</span>
+    </h4>
+    <div style="margin-left: 2em">
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_xtn.search.core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_xtn.search.core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_html.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_html.zip</a>
+        </li>
+      </ul>
+    </div>
+    <h4>
+      <span class="mw-headline" id="cs.wikiversity.org_Images_.282016-08.29">cs.wikiversity.org Images (2016-08)</span>
+    </h4>
+    <div style="margin-left: 2em">
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_file_core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_file_core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_file_ns.000_db.001.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_file_ns.000_db.001.zip</a>
+        </li>
+      </ul>
+    </div>
+    <h3>
+      <span class="mw-headline" id="cs.wikinews.org">cs.wikinews.org</span>
+    </h3>
+    <h4>
+      <span class="mw-headline" id="cs.wikinews.org_Articles_.282016-09.29">cs.wikinews.org Articles (2016-09)</span>
+    </h4>
+    <div style="margin-left: 2em">
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_xtn.search.core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_xtn.search.core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_html.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_html.zip</a>
+        </li>
+      </ul>
+    </div>
+    <h4>
+      <span class="mw-headline" id="cs.wikinews.org_Images_.282016-09.29">cs.wikinews.org Images (2016-09)</span>
+    </h4>
+    <div style="margin-left: 2em">
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_file_core.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_file_core.zip</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_file_ns.000_db.001.zip" rel="nofollow" class="external free">http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_file_ns.000_db.001.zip</a>
+        </li>
+      </ul>
+    </div>
+    <h3>
+      <span class="mw-headline" id="All_links">All links</span>
+    </h3>
+<pre style='height: 10pc; overflow-y: scroll;'>
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_xtn.search.core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_html.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.001.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.002.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.003.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.004.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiki_2016-09_file_ns.000_db.005.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_xtn.search.core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_html.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_file_core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswiktionary_2016-09_file_ns.000_db.001.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_xtn.search.core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_html.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_file_core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikisource_2016-09_file_ns.000_db.001.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_xtn.search.core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_html.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_file_core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiquote_2016-08_file_ns.000_db.001.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_xtn.search.core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_html.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_file_core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikibooks_2016-08_file_ns.000_db.001.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_xtn.search.core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_html.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_file_core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikiversity_2016-08_file_ns.000_db.001.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_xtn.search.core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_html.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_file_core.zip
+http://archive.org/download/Xowa_cswiki_latest/Xowa_cswikinews_2016-09_file_ns.000_db.001.zip
+
+</pre>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://www.youtube.com/watch?v=q0qbXYXEH6M" title="See a video of XOWA Desktop in action">Video</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+        <li><a href="https://www.youtube.com/watch?v=jsMTBxGweUw" title="See a video of XOWA Android in action">Video</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
