@@ -159,30 +159,34 @@ app.bldr.cmds {
   // download page_props file; contains information on hidden categories
   add     ('simple.wikipedia.org' , 'util.download')         {dump_type = 'page_props';}
 
+  // download pagelinks file; contains links for generating search index
+  add     ('simple.wikipedia.org' , 'util.download')         {dump_type = 'pagelinks';}
+
   // start wiki import
   add     ('simple.wikipedia.org' , 'text.init');
   
   // import articles
-  add     ('simple.wikipedia.org' , 'text.page');
-  
-  // generate search data
-  add     ('simple.wikipedia.org' , 'text.search');
+  add     ('simple.wikipedia.org' , 'text.page')             {redirect_id_enabled = 'y';}
 
-  // generate main category data
-  add     ('simple.wikipedia.org' , 'text.cat.core');
-  
-  // import category links
-  add     ('simple.wikipedia.org' , 'text.cat.link');
-  
-  // apply hidden categories
-  add     ('simple.wikipedia.org' , 'text.cat.hidden');
-  
-  // end import
-  add     ('simple.wikipedia.org' , 'text.term');
+  // build search index
+  add     ('simple.wikipedia.org' , 'text.search');
   
   // import css into wiki
   add     ('simple.wikipedia.org' , 'text.css');
-  
+
+  // end import
+  add     ('simple.wikipedia.org' , 'text.term');
+
+  // build categories
+  add     ('simple.wikipedia.org' , 'wiki.page_props');
+  add     ('simple.wikipedia.org' , 'wiki.categorylinks');
+
+  // build search index
+  add     ('simple.wikipedia.org' , 'wiki.page_link');
+  add     ('simple.wikipedia.org' , 'search.page__page_score') {iteration_max = 100;}
+  add     ('simple.wikipedia.org' , 'search.link__link_score') {page_rank_enabled = 'y';}
+  add     ('simple.wikipedia.org' , 'search.word__link_count');
+
   // cleanup temp files; delete xml and bz2
   add     ('simple.wikipedia.org' , 'util.cleanup')          {delete_tmp = 'y'; delete_by_match('*.xml|*.sql|*.bz2|*.gz');}
 }
