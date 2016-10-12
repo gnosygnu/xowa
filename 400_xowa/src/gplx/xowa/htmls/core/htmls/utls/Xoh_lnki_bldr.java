@@ -39,6 +39,10 @@ public class Xoh_lnki_bldr {
 		this.href = tmp_bfr.To_bry_and_clear();
 		return this;
 	}
+	public Xoh_lnki_bldr Href_wo_escape_(byte[] domain_bry, byte[] v) {
+		this.href = Bry_.Add(Xoh_href_.Bry__site, domain_bry, Xoh_href_.Bry__wiki, v);
+		return this;
+	}
 	public Xoh_lnki_bldr Title_(byte[] title) {
 		this.title = Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, title);
 		return this;

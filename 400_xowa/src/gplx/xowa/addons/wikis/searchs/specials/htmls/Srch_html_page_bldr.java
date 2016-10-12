@@ -68,7 +68,7 @@ public class Srch_html_page_bldr {
 			img_path = Xoh_img_path.Img_go_bwd;
 			title = Bry_paging_bwd;
 		}
-		return lnki_bldr.Title_(title).Href_(wiki, self_lnkr.Add_int(Srch_qarg_mgr.Bry__slab_idx, qarg_slab_idx).Bld_to_bry()).Img_16x16(img_path).Img_pos_is_left_(img_pos_is_left).Caption_(title).Bld_to_bry();
+		return lnki_bldr.Title_(title).Href_wo_escape_(wiki.Domain_bry(), self_lnkr.Add_int(Srch_qarg_mgr.Bry__slab_idx, qarg_slab_idx).Bld_to_bry()).Img_16x16(img_path).Img_pos_is_left_(img_pos_is_left).Caption_(title).Bld_to_bry();
 	}
 	private static final    Bry_fmtr fmtr_page = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "~{rslts_hdr}<span style='margin-left:10px'>~{option_link}</span>"
