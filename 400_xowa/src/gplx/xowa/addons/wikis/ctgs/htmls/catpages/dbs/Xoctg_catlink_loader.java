@@ -158,9 +158,11 @@ class Xoctg_catlink_loader {
 		Xowd_page_itm tmp_pg = new Xowd_page_itm();
 		wiki.Data__core_mgr().Tbl__page().Select_by_id(tmp_pg, zth_itm.Page_id());
 
-		// set ttl
-		Xoa_ttl zth_ttl = wiki.Ttl_parse(tmp_pg.Ns_id(), tmp_pg.Ttl_page_db());
-		zth_itm.Page_ttl_(zth_ttl);
+		// set ttl; skip if page is missing (Talk: ns) else null-ref; PAGE:en.wCategory:Disambig-Class_Comics_articles_of_NA-importance DATE:2016-10-12
+		if (tmp_pg.Exists()) {
+			Xoa_ttl zth_ttl = wiki.Ttl_parse(tmp_pg.Ns_id(), tmp_pg.Ttl_page_db());
+			zth_itm.Page_ttl_(zth_ttl);
+		}
 
 		// make sortkey
 		byte[] prv_sortkey = grp.Itms__len() == 0 ? Bry_.Empty : grp.Itms__get_at(grp.Itms__len() - 1).Sortkey_handle();
