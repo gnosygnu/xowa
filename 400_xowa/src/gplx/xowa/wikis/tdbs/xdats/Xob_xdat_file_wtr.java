@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.tdbs.xdats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.encoders.*; import gplx.xowa.wikis.tdbs.*;
 public class Xob_xdat_file_wtr {
-	public static Xob_xdat_file_wtr new_file_(int fil_max, Io_url root_dir)				{return new Xob_xdat_file_wtr(fil_max, root_dir, Io_stream_.Tid_raw);}
+	public static Xob_xdat_file_wtr new_file_(int fil_max, Io_url root_dir)				{return new Xob_xdat_file_wtr(fil_max, root_dir, Io_stream_tid_.Tid__raw);}
 	public static Xob_xdat_file_wtr new_by_tid_(int fil_max, Io_url root_dir, byte dir_tid, byte tid) {return new Xob_xdat_file_wtr(fil_max, root_dir.GenSubDir(Xotdb_dir_info_.Tid_name(dir_tid) + Xotdb_dir_info.Wtr_dir(tid)), tid);}
 	Xob_xdat_file_wtr(int fil_max, Io_url root_dir, byte wtr_tid) {
 		this.fil_max = fil_max; 
@@ -27,7 +27,7 @@ public class Xob_xdat_file_wtr {
 		bfr = Bry_bfr_.New_w_size(fil_max);
 		idx = new int[fil_max / 8];	// ASSUME: any given row must at least be 8 bytes long
 		Url_gen(fil_idx);	// set 1st url
-		wtr = Io_stream_wtr_.new_by_tid_(wtr_tid);
+		wtr = Io_stream_wtr_.New_by_tid(wtr_tid);
 	}	int fil_max; Io_stream_wtr wtr; byte[] fil_ext;
 	public int Fil_idx() {return fil_idx;} public Xob_xdat_file_wtr Fil_idx_(int v) {fil_idx = v; return this;} private int fil_idx;
 	public int Ns_ord_idx() {return ns_ord_idx;} public Xob_xdat_file_wtr Ns_ord_idx_(int v) {ns_ord_idx = v; return this;} private int ns_ord_idx;	// NOTE: optional; needed for page cmd which will flush all wtrs, but needs ns_idx for stats

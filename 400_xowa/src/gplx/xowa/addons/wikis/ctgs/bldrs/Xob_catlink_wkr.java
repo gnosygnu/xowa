@@ -26,16 +26,16 @@ class Xob_catlink_wkr {
 		( "SELECT  tcl.cl_from"
 		, ",       p.page_id"
 		, ",       tcl.cl_type_id"
-		, ",       cs.cs_id"
 		, ",       tcl.cl_timestamp"
+		, ",       tcl.cl_sortkey"
+		, ",       tcl.cl_sortkey_prefix"
 		, "FROM    <temp_db>tmp_cat_link tcl"
-		, "        JOIN <cat_db>cat_sort cs ON tcl.cl_sortkey = cs.cs_key"
-		, "            JOIN page p ON p.page_namespace = 14 AND tcl.cl_to_ttl = p.page_title"
+		, "        JOIN page p ON p.page_namespace = 14 AND tcl.cl_to_ttl = p.page_title"
 		, "ORDER BY 1"	// NOTE: must sort by page_id to keep all cats for page in one db
 		));
 		attach_mgr.Attach();
 
-		// select from tmp_db and insert insert into cat_link
+		// select from tmp_db and insert into cat_link
 		Xodb_cat_link_tbl cat_link_tbl = Make_cat_link_tbl(wiki, null);
 		Db_rdr rdr = attach_mgr.Conn_main().Stmt_sql(sql).Exec_select__rls_auto();
 		try {
@@ -46,7 +46,9 @@ class Xob_catlink_wkr {
 			while (rdr.Move_next()) {
 				// check if row can fit in db; else update db_size
 				int page_id_cur = rdr.Read_int("cl_from");
-				long db_size_new = db_size_cur + 46;// 46 = 3 ints (12) + 1 long (8) + 1 byte (2?) + 2 index (24?) + 9 fudge factor (?); DATE:2016-09-06
+				byte[] sortkey = rdr.Read_bry("cl_sortkey");
+				byte[] sortkey_prefix = rdr.Read_bry_by_str("cl_sortkey_prefix");
+				long db_size_new = db_size_cur + 48 + (sortkey.length * 2) + sortkey_prefix.length;// 46 = 3 ints (12) + 1 long (8) + 1 byte (2?) + 2 index (24?) + 11 fudge factor (?); DATE:2016-09-06
 				if (	db_size_cur > db_size_max		// size exceeded
 					&&	page_id_cur != page_id_prv) {	// and page_id is diff; keeps all page_ids in one db
 					cat_link_tbl = Make_cat_link_tbl(wiki, cat_link_tbl);
@@ -56,7 +58,7 @@ class Xob_catlink_wkr {
 				page_id_prv = page_id_cur;
 
 				// insert; notify;
-				cat_link_tbl.Insert_cmd_by_batch(page_id_prv, rdr.Read_int("page_id"), rdr.Read_byte("cl_type_id"), rdr.Read_int("cs_id"), rdr.Read_long("cl_timestamp"));
+				cat_link_tbl.Insert_cmd_by_batch(page_id_prv, rdr.Read_int("page_id"), rdr.Read_byte("cl_type_id"), rdr.Read_long("cl_timestamp"), sortkey, sortkey_prefix);
 				if (++rows % 100000 == 0)
 					Gfo_usr_dlg_.Instance.Prog_many("", "", "inserting cat_link row: ~{0}", Int_.To_str_fmt(rows, "#,##0"));
 			}
@@ -82,8 +84,8 @@ class Xob_catlink_wkr {
 	private static void Term_cat_link_tbl(Xodb_cat_link_tbl cat_link_tbl) {
 		if (cat_link_tbl == null) return;
 		cat_link_tbl.Insert_end();
-		cat_link_tbl.Create_idx__from();
-		cat_link_tbl.Create_idx__to_id();
+		cat_link_tbl.Create_idx__catbox();
+		cat_link_tbl.Create_idx__catpage();
 	}
 	public void Make_catcore_tbl(Xowe_wiki wiki, Db_conn tmp_conn, Db_conn page_conn, Db_conn cat_core_conn) {
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(cat_core_conn, new Db_attach_itm("temp_db", tmp_conn), new Db_attach_itm("page_db", page_conn));

@@ -54,4 +54,8 @@ public class Xobc_data_db {
 			tbl__import_step.Delete(step_id);
 		}
 	}
+
+	public static Xobc_data_db New(gplx.xowa.apps.fsys.Xoa_fsys_mgr fsys_mgr) {
+		return new Xobc_data_db(fsys_mgr.Bin_addon_dir().GenSubFil_nest("bldr", "central", "bldr_central.data_db.xowa"));
+	}
 }

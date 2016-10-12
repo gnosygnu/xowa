@@ -31,7 +31,7 @@ public class Xomp_parse_mgr_cfg implements Gfo_invk {
 	public boolean Log_file_lnkis() {return log_file_lnkis;} private boolean log_file_lnkis = true;
 	public boolean Load_all_templates() {return load_all_templates;} private boolean load_all_templates = true;
 	public boolean Load_all_imglnks() {return load_all_imglnks;} private boolean load_all_imglnks = true;
-	public byte Zip_tid() {return zip_tid;} private byte zip_tid = Io_stream_.Tid_gzip;
+	public byte Zip_tid() {return zip_tid;} private byte zip_tid = Io_stream_tid_.Tid__gzip;
 	public Io_url Mgr_url()				{return mgr_url;} private Io_url mgr_url;
 	public String Wkr_machine_name()	{return wkr_machine_name;} private String wkr_machine_name;
 	public boolean Show_msg__fetched_pool() {return show_msg__fetched_pool;} private boolean show_msg__fetched_pool;

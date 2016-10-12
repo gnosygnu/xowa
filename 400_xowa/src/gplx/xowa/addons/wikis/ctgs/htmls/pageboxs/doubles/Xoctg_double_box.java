@@ -35,9 +35,9 @@ public class Xoctg_double_box implements Bfr_arg {
 
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
-			Xoctg_pagebox_itm ctg = ary[i];
-			Xoctg_double_grp list = ctg.Hidden() ? grp_hidden : grp_normal; 
-			list.Itms().Itms__add(ctg);
+			Xoctg_pagebox_itm itm = ary[i];
+			Xoctg_double_grp list = itm.Hidden() ? grp_hidden : grp_normal; 
+			list.Itms().Itms__add(itm);
 		}
 		this.Bfr_arg__add(bfr);
 	}

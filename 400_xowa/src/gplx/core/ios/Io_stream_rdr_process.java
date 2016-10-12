@@ -23,7 +23,7 @@ public class Io_stream_rdr_process implements Io_stream_rdr {
     private InputStream stream_read;
 		private String[] process_args;
 	Io_stream_rdr_process(Io_url process_exe, Io_url stream_url, String[] process_args) {this.process_exe = process_exe; this.url = stream_url; this.process_args = process_args;}
-	public byte Tid() {return Io_stream_.Tid_bzip2;}	// for now, classify as bzip2; not sure if separate tid is necessary
+	public byte Tid() {return Io_stream_tid_.Tid__bzip2;}	// for now, classify as bzip2; not sure if separate tid is necessary
 	public boolean Exists() {return this.Len() > 0;}
 	public Io_url Url() {return url;} public Io_stream_rdr Url_(Io_url v) {url = v; return this;} private Io_url url;
 	public long Len() {return len;} public Io_stream_rdr Len_(long v) {len = v; return this;} private long len;

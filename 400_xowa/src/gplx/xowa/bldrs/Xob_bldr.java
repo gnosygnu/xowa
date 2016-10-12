@@ -17,9 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.consoles.*; import gplx.core.envs.*;
-import gplx.xowa.apps.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.cfgs.*; import gplx.xowa.langs.bldrs.*;
+import gplx.xowa.apps.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.langs.bldrs.*;
 import gplx.xowa.bldrs.wkrs.*;
 import gplx.langs.jsons.*;
+import gplx.xowa.addons.bldrs.app_cfgs.*;
 public class Xob_bldr implements Gfo_invk {
 	private boolean pause_at_end = false; private long prv_prog_time; private Xob_xml_parser dump_parser;
 	public Xob_bldr(Xoae_app app) {

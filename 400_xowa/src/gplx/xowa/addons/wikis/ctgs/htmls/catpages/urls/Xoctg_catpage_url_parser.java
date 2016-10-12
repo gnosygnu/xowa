@@ -21,15 +21,20 @@ import gplx.langs.htmls.encoders.*;
 public class Xoctg_catpage_url_parser {
 	public static Xoctg_catpage_url Parse(Xoa_url url) {
 		Gfo_qarg_itm[] args = url.Qargs_ary();
-		if (args == null) return null;
+		if (args == null) return Xoctg_catpage_url.New__blank();
+		int len = args.length;
+		if (len == 0) return Xoctg_catpage_url.New__blank();
 
 		// init caturl structs
 		byte[][] keys = new byte[Xoa_ctg_mgr.Tid___max][];
 		boolean[] fwds = new boolean[Xoa_ctg_mgr.Tid___max];
+		for (int i = 0; i < Xoa_ctg_mgr.Tid___max; ++i) {
+			fwds[i] = Bool_.Y;
+			keys[i] = Bry_.Empty;
+		}
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
 
 		// loop qargs; EX: "?subcatfrom=B&filefrom=C&pagefrom=D"
-		int len = args.length;
 		for (int i = 0; i < len; ++i) {
 			Gfo_qarg_itm arg = args[i];
 

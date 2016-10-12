@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*;
 public interface Select_in_cbk {
+	int Hash_max();
 	void Write_sql(Bry_bfr bfr, int idx);
 	void Read_data(Db_rdr rdr);
-	int Hash_max();
 }
 class Select_in_wkr {
 	private final    byte[] sql_bgn;

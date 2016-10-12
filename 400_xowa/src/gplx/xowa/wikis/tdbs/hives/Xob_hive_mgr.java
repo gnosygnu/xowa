@@ -37,7 +37,7 @@ public class Xob_hive_mgr {
 	}
 	Xob_xdat_file xdat_load_(Xob_xdat_file xdat, byte dir_tid, Xow_ns ns, int fil_idx) {
 		Io_url xdat_url = fsys_mgr.Url_ns_fil(dir_tid, ns.Id(), fil_idx);
-		byte[] xdat_bry = gplx.core.ios.streams.Io_stream_rdr_.Load_all(xdat_url);
+		byte[] xdat_bry = Io_mgr.Instance.LoadFilBry(xdat_url);
 		xdat.Parse(xdat_bry, xdat_bry.length, xdat_url);
 		return xdat;
 	}
@@ -115,7 +115,7 @@ public class Xob_hive_mgr {
 		byte dir_tid = Xotdb_dir_info_.Tid_ttl;
 		int xdat_idx = Regy__find_file_ns(key, dir_tid, ns.Num_str());
 		Io_url xdat_url = fsys_mgr.Url_ns_fil(dir_tid, ns.Id(), xdat_idx);
-		byte[] xdat_bry = gplx.core.ios.streams.Io_stream_rdr_.Load_all(xdat_url);
+		byte[] xdat_bry = Io_mgr.Instance.LoadFilBry(xdat_url);
 		xdat.Parse(xdat_bry, xdat_bry.length, xdat_url);
 		xdat.Find(xdat_itm, key, Xotdb_page_itm_.Txt_ttl_pos, Byte_ascii.Tab, false);
 		Find_nearby_add_fwd(list, dir_tid, ns, include_redirects, count, xdat_idx, xdat_itm.Itm_idx());
@@ -132,7 +132,7 @@ public class Xob_hive_mgr {
 //			while (loop) {
 //				if (fil_idx == -1) break;
 //				Io_url xdat_url = fsys_mgr.Url_ns_fil(dir_tid, ns.Id(), fil_idx);
-//				byte[] xdat_bry = gplx.core.ios.streams.Io_stream_rdr_.Load_all(xdat_url);
+//				byte[] xdat_bry = Io_mgr.Instance.LoadFilBry(xdat_url);
 //				xdat.Parse(xdat_bry, xdat_bry.length, xdat_url);
 //				int row_idx = first && row_bgn != -1 ? row_bgn : xdat.Count() - 1;
 //				first = false;
@@ -155,7 +155,7 @@ public class Xob_hive_mgr {
 		while (loop) {
 			if (fil_idx == regy_len) break;
 			Io_url xdat_url = fsys_mgr.Url_ns_fil(dir_tid, ns.Id(), fil_idx);
-			byte[] xdat_bry = gplx.core.ios.streams.Io_stream_rdr_.Load_all(xdat_url);
+			byte[] xdat_bry = Io_mgr.Instance.LoadFilBry(xdat_url);
 			xdat.Parse(xdat_bry, xdat_bry.length, xdat_url);
 			int row_idx = first ? row_bgn : 0;
 			int rows_len = xdat.Count();
@@ -186,7 +186,7 @@ public class Xob_hive_mgr {
 	int Regy__find_file_by_url(byte[] key, Io_url regy_url) {regy.Init(regy_url); return regy.Files_find(key);} private Xowd_regy_mgr regy = new Xowd_regy_mgr();
 	private void Xdat__create_row(byte dir_tid, byte[] key, byte[] row, int xdat_idx) {
 		Io_url xdat_url = fsys_mgr.Url_site_fil(dir_tid, xdat_idx);
-		byte[] xdat_bry = gplx.core.ios.streams.Io_stream_rdr_.Load_all(xdat_url);
+		byte[] xdat_bry = Io_mgr.Instance.LoadFilBry(xdat_url);
 		Xob_xdat_file xdat_fil = new Xob_xdat_file();
 		if (xdat_bry.length > 0)	// if file is not empty, load it and parse it
 			xdat_fil.Parse(xdat_bry, xdat_bry.length, xdat_url);

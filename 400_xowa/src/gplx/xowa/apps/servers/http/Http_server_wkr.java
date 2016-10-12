@@ -89,7 +89,7 @@ class Http_server_wkr implements Gfo_invk {
 		// 	client_wtr.Write_str("Expires: Sun, 17-Jan-2038 19:14:07 GMT\n");
 		String mime_type = String_.new_u8(Http_file_utl.To_mime_type_by_path_as_bry(path));
 		client_wtr.Write_str("Content-Type: " + mime_type + "\n\n");
-		Io_stream_rdr file_stream = Io_stream_rdr_.new_by_url_(Io_url_.new_fil_(String_.new_u8(path))).Open();
+		Io_stream_rdr file_stream = Io_stream_rdr_.New_by_url(Io_url_.new_fil_(String_.new_u8(path))).Open();
 		client_wtr.Write_stream(file_stream);
 		file_stream.Rls(); client_rdr.Rls(); socket.Rls();
 	}

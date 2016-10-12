@@ -33,7 +33,7 @@ class Pack_mgr {
 
 		// get import_tbl
 		byte[] wiki_abrv = wiki.Domain_itm().Abrv_xo();
-		Xobc_data_db bc_db = new Xobc_data_db(wiki.App().Fsys_mgr().Bin_addon_dir().GenSubFil_nest("bldr", "central", "bldr_central.data_db.xowa"));
+		Xobc_data_db bc_db = Xobc_data_db.New(wiki.App().Fsys_mgr());
 		Db_conn bc_conn = bc_db.Conn();
 		bc_db.Delete_by_import(wiki_abrv, wiki_date);
 		bc_conn.Txn_bgn("xobc_import_insert");

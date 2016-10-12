@@ -25,12 +25,12 @@ public class Xow_url_parser {
 	private final    Object thread_lock = new Object();
 	private final    Gfo_url_encoder encoder;
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
-	private final    Gfo_url_parser url_parser = new Gfo_url_parser(); private final    Gfo_url gfo_url = new Gfo_url();
+	private final    Gfo_url_parser url_parser = new Gfo_url_parser();
 	private final    Gfo_url_encoder gfs_encoder = Gfo_url_encoder_.New__gfs().Make();
 	private final    Xoa_app app; private final    Xow_wiki wiki; private final    byte[] domain_bry;
 	private byte tmp_protocol_tid;
 	private int tmp_tid;
-	private byte[] tmp_raw, tmp_wiki, tmp_page, tmp_anch, tmp_protocol_bry; private Gfo_qarg_itm[] tmp_qargs;
+	private byte[] tmp_raw, tmp_orig, tmp_wiki, tmp_page, tmp_anch, tmp_protocol_bry; private Gfo_qarg_itm[] tmp_qargs;
 	private byte[][] tmp_segs; private int tmp_segs_len;
 	private boolean tmp_protocol_is_relative, tmp_page_is_main, tmp_wiki_is_missing;
 	private byte[] tmp_vnt;
@@ -69,9 +69,10 @@ public class Xow_url_parser {
 	public boolean Parse(Xoa_url rv, byte[] src, int bgn, int end) {
 		synchronized (thread_lock) {
 			if (end - bgn == 0) {Init_tmp_vars(Gfo_url.Empty); Make(rv); return false;}
-			src = encoder.Decode(src, bgn, end);					// NOTE: must decode any url-encoded parameters
-			int src_len = src.length;
-			url_parser.Parse(gfo_url, src, 0, src_len);	// parse to plain gfo_url
+			tmp_orig = (bgn == 0 && end == src.length) ? src : Bry_.Mid(src, bgn, end);
+			// src = encoder.Decode(src, bgn, end);		// NOTE: must decode any url-encoded parameters; TOMBSTONE:do not auto-decode DATE:2016-10-10
+			int src_len = end - bgn;
+			Gfo_url gfo_url = url_parser.Parse(src, bgn, end);	// parse to plain gfo_url
 			Init_tmp_vars(gfo_url);
 			if (src[0] == Byte_ascii.Hash)				// src is anch; EX: #A
 				Bld_anch();
@@ -134,7 +135,7 @@ public class Xow_url_parser {
 	}
 	private Xoa_url Make(Xoa_url rv) {
 		rv.Ctor
-		( tmp_tid, tmp_raw, tmp_protocol_tid, tmp_protocol_bry, tmp_protocol_is_relative
+		( tmp_tid, tmp_orig, tmp_raw, tmp_protocol_tid, tmp_protocol_bry, tmp_protocol_is_relative
 		, tmp_wiki, tmp_page, tmp_qargs, tmp_anch
 		, tmp_segs, tmp_vnt, tmp_wiki_is_missing, Bry_.Eq(tmp_wiki, wiki.Domain_bry()), tmp_page_is_main);
 		return rv;
@@ -264,9 +265,7 @@ public class Xow_url_parser {
 		int qargs_len = tmp_qargs.length;
 		for (int i = 0; i < qargs_len; ++i) {
 			Gfo_qarg_itm qarg = tmp_qargs[i];
-			if (	Bry_.Eq(qarg.Key_bry(), Qarg__title)
-				&&	qarg.Val_bry() != null					// HACK: handle "bad-urls" from xml-encoded entities where page is null b/c = is encoded as &#61;; http://en.wikipedia.org/w/index.php?action&#61;edit&preload&#61;Template:Afd2+starter&editintro&#61;Template:Afd3+starter&title&#61;Wikipedia:Articles+for+deletion/Template standardisation/demometa DATE:2015-08-02
-				)	
+			if (Bry_.Eq(qarg.Key_bry(), Qarg__title))
 				tmp_page = qarg.Val_bry();					// handle /w/index.php?title=Earth
 		}
 	}

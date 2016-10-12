@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.htmls.core.htmls.*; import gplx.langs.htmls.encoders.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.htmls.core.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.core.intls.ucas.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*;
 public class Xoctg_fmt_grp {	// subc|page|file
@@ -32,47 +32,43 @@ public class Xoctg_fmt_grp {	// subc|page|file
 		this.url_arg_bgn = url_arg_bgn; this.url_arg_end = url_arg_end; this.div_id = div_id;
 	}
 	public Xoctg_fmt_itm_base Itm_fmt() {return itm_fmt;} private final    Xoctg_fmt_itm_base itm_fmt;
-	public void Write_catpage_grp(Bry_bfr bfr, Xow_wiki wiki, Xol_lang_itm lang, Xoctg_catpage_ctg dom_ctg, int grp_max) {	// TEST:
+	public void Write_catpage_grp(Bry_bfr bfr, Xow_wiki wiki, Xol_lang_itm lang, Uca_ltr_extractor ltr_extractor, Xoctg_catpage_ctg dom_ctg, int grp_max) {	// TEST:
 		Xoctg_catpage_grp dom_grp = dom_ctg.Grp_by_tid(tid);
-		if (dom_grp.Itms__len() == 0) return;	// no items in grp; EX: 0 items in File
+		if (dom_grp.Count_all() == 0) return;	// no items in grp; EX: 0 items in File
 
 		// get msgs
 		Xow_msg_mgr msg_mgr = wiki.Msg_mgr();
 		byte[] msg_label_bry = msg_mgr.Val_by_id_args(msg_label_id, dom_ctg.Name());
-		byte[] msg_stats_bry = msg_mgr.Val_by_id_args(msg_stats_id, dom_grp.Count_by_page(), dom_grp.Itms__len());
+		byte[] msg_stats_bry = msg_mgr.Val_by_id_args(msg_stats_id, dom_grp.Itms__len(), dom_grp.Count_all());
 
 		// get nav html; next / previous 200
 		Xoa_ttl ctg_ttl = wiki.Ttl_parse(Xow_ns_.Tid__category, dom_ctg.Name());
 		byte[] nav_html = this.Bld_bwd_fwd(wiki, ctg_ttl, dom_grp, grp_max);
 
 		// init grp; write
-		itms_fmt.Init_from_grp(wiki, dom_grp);
+		itms_fmt.Init_from_grp(wiki, dom_grp, ltr_extractor);
 		Fmt__ctg.Bld_many(bfr, div_id, msg_label_bry, msg_stats_bry, nav_html, lang.Key_bry(), lang.Dir_ltr_bry(), itms_fmt);
 	}
 	public byte[] Bld_bwd_fwd(Xow_wiki wiki, Xoa_ttl ttl, Xoctg_catpage_grp view_grp, int grp_max) {	// TEST:
-		if (view_grp.Itms__len() < grp_max) return Bry_.Empty;	// < 200; never show;
+		if (view_grp.Count_all() < grp_max) return Bry_.Empty;	// < 200; never show;
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_k004();
 		Html_nav_bry(bfr, wiki, ttl, view_grp, grp_max, Bool_.N);
 		Html_nav_bry(bfr, wiki, ttl, view_grp, grp_max, Bool_.Y);
 		return bfr.To_bry_and_rls();
 	}
-	private void Html_nav_bry(Bry_bfr bfr, Xow_wiki wiki, Xoa_ttl ttl, Xoctg_catpage_grp grp, int grp_max, boolean type_is_next) {
+	private void Html_nav_bry(Bry_bfr bfr, Xow_wiki wiki, Xoa_ttl ttl, Xoctg_catpage_grp grp, int grp_max, boolean url_is_from) {
 		Bry_bfr href_bfr = wiki.Utl__bfr_mkr().Get_b512();
 
 		// get nav_href; EX:href="/wiki/Category:Ctg_1?pageuntil=A1#mw-pages"
 		wiki.Html__href_wtr().Build_to_bfr(href_bfr, wiki.App(), Xoh_wtr_ctx.Basic, wiki.Domain_bry(), ttl);
 		byte[] arg_idx_lbl = null; byte[] arg_sortkey = null;
-		if (type_is_next) {
+		if (url_is_from) {
 			arg_idx_lbl = url_arg_bgn;
-
-			// get next category after last one on page; needed for "Next 200 (href=Cat_201)" 
-			int nxt_idx = grp.End();
-			if (nxt_idx == grp.Itms__len()) --nxt_idx; // if last item, then grp.End() does not exist; just use last one
-			arg_sortkey = grp.Itms__get_at(nxt_idx).Sort_key();
+			arg_sortkey = grp.Next_sortkey();
 		}
 		else {
 			arg_idx_lbl = url_arg_end;
-			arg_sortkey = grp.Itms__get_at(grp.Bgn()).Sort_key();	// use 1st item as sortkey for "until" args
+			arg_sortkey = grp.Itms__get_at(0).Sortkey_handle();	// use 1st item as sortkey for "until" args
 		}
 		href_bfr.Add_byte(Byte_ascii.Question).Add(arg_idx_lbl).Add_byte(Byte_ascii.Eq);		// filefrom=
 		Gfo_url_encoder_.Http_url.Encode(href_bfr, arg_sortkey);								// Abc
@@ -80,12 +76,12 @@ public class Xoctg_fmt_grp {	// subc|page|file
 		byte[] nav_href = href_bfr.To_bry_and_rls();
 
 		// get nav_text
-		int nav_text_id = type_is_next ? Xol_msg_itm_.Id_next_results : Xol_msg_itm_.Id_prev_results;
+		int nav_text_id = url_is_from ? Xol_msg_itm_.Id_next_results : Xol_msg_itm_.Id_prev_results;
 		byte[] nav_text = wiki.Msg_mgr().Val_by_id_args(nav_text_id, grp_max);					// next 200 / previous 200
 
 		// print text if 1st / zth page; else, print html
-		if (	( type_is_next && grp.Bgn() + grp_max > grp.Itms__len())
-			||	(!type_is_next && grp.Bgn() - grp_max < 0)
+		if (	( url_is_from && Bry_.Len_eq_0(grp.Next_sortkey()))
+			||	(!url_is_from && grp.Prev_disable())
 			)
 			Fmt__nav__text.Bld_many(bfr, nav_text);
 		else

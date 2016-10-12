@@ -20,22 +20,22 @@ import org.junit.*;
 public class Xow_url_parser__wiki_tst {
 	private final    Xow_url_parser_fxt tstr = new Xow_url_parser_fxt();
 	@Test  public void Basic() {
-		tstr.Run_parse("en.wikipedia.org/wiki/A").Chk_tid(Xoa_url_.Tid_page).Chk_wiki("en.wikipedia.org").Chk_page("A");
+		tstr.Exec__parse("en.wikipedia.org/wiki/A").Test__tid(Xoa_url_.Tid_page).Test__wiki("en.wikipedia.org").Test__page("A");
 	}
 	@Test  public void No_wiki() {	// PURPOSE: no "/wiki/"
-		tstr.Run_parse("en.wikipedia.org/A").Chk_wiki("en.wikipedia.org").Chk_page("A");
+		tstr.Exec__parse("en.wikipedia.org/A").Test__wiki("en.wikipedia.org").Test__page("A");
 	}
 	@Test  public void Nested() {
-		tstr.Run_parse("en.wikipedia.org/wiki/A/b").Chk_wiki("en.wikipedia.org").Chk_page("A/b");
+		tstr.Exec__parse("en.wikipedia.org/wiki/A/b").Test__wiki("en.wikipedia.org").Test__page("A/b");
 	}
 	@Test  public void Slash() {
-		tstr.Run_parse("en.wikipedia.org/wiki//A").Chk_wiki("en.wikipedia.org").Chk_page("/A");
-		tstr.Run_parse("en.wikipedia.org/wiki/A//b").Chk_wiki("en.wikipedia.org").Chk_page("A//b");
-		tstr.Run_parse("en.wikipedia.org/wiki///A").Chk_wiki("en.wikipedia.org").Chk_page("//A");
+		tstr.Exec__parse("en.wikipedia.org/wiki//A").Test__wiki("en.wikipedia.org").Test__page("/A");
+		tstr.Exec__parse("en.wikipedia.org/wiki/A//b").Test__wiki("en.wikipedia.org").Test__page("A//b");
+		tstr.Exec__parse("en.wikipedia.org/wiki///A").Test__wiki("en.wikipedia.org").Test__page("//A");
 	}
 	@Test  public void Vnt() {
 		Xowe_wiki wiki = tstr.Wiki();
 		gplx.xowa.langs.vnts.Xol_vnt_regy_fxt.Init__vnt_mgr(wiki.Lang().Vnt_mgr(), 0, String_.Ary("zh-hans", "zh-hant"));
-		tstr.Run_parse("en.wikipedia.org/zh-hans/A").Chk_wiki("en.wikipedia.org").Chk_page("A").Chk_vnt("zh-hans");
+		tstr.Exec__parse("en.wikipedia.org/zh-hans/A").Test__wiki("en.wikipedia.org").Test__page("A").Test__vnt("zh-hans");
 	}
 }

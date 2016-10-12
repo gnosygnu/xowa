@@ -54,7 +54,7 @@ public class Db_data_rdr extends DataRdr_base implements DataRdr {
 	@Override public gplx.core.ios.streams.Io_stream_rdr ReadRdr(String key) {
 		try {
 			java.io.InputStream input_stream = rdr.getBinaryStream(key);			
-			return gplx.core.ios.streams.Io_stream_rdr_.file_(input_stream);
+			return gplx.core.ios.streams.Io_stream_rdr_.New__raw(input_stream);
 		}
 		catch (SQLException e) {return gplx.core.ios.streams.Io_stream_rdr_.Noop;}
 	}

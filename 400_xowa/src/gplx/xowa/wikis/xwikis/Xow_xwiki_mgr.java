@@ -83,8 +83,8 @@ public class Xow_xwiki_mgr {
 			default:	return tid;
 		}
 	}
-	public static byte[] Get_domain_from_url(Gfo_url_parser url_parser, Gfo_url url, byte[] url_fmt) { // extract "commons.wikimedia.org" from "http://commons.wikimedia.org/wiki/Category:~{0}"
-		url_parser.Parse(url, url_fmt, 0, url_fmt.length);
+	public static byte[] Get_domain_from_url(Gfo_url_parser url_parser, byte[] url_fmt) { // extract "commons.wikimedia.org" from "http://commons.wikimedia.org/wiki/Category:~{0}"
+		Gfo_url url = url_parser.Parse(url_fmt, 0, url_fmt.length);
 		return url.Segs__get_at_1st();
 	}
 	public static byte[] Bld_url_fmt(byte[] domain_bry) {return Bry_.Add(gplx.core.net.Gfo_protocol_itm.Itm_https.Text_bry(), domain_bry, Bry__url_fmt_end);}

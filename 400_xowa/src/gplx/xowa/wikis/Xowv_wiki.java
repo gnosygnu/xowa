@@ -29,7 +29,7 @@ import gplx.xowa.parsers.*;
 import gplx.xowa.apps.urls.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*;
 import gplx.xowa.specials.mgrs.*;
-import gplx.xowa.addons.wikis.htmls.css.bldrs.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
+import gplx.xowa.addons.wikis.htmls.css.bldrs.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
 public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	private final    Xof_fsdb_mgr__sql fsdb_mgr; private Fsdb_db_mgr db_core_mgr;
 	private boolean init_needed = true;
@@ -50,6 +50,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		this.xwiki_mgr = new Xow_xwiki_mgr(this);
 		this.stats = new Xow_site_stats_mgr(this);
 		this.lnki_bldr = new Xoh_lnki_bldr(app, href_wtr);
+		this.ctg_catpage_mgr = new Xoctg_catpage_mgr(this);
 	}
 	public Xoa_app						App() {return app;}
 	public boolean							Type_is_edit() {return Bool_.N;}
@@ -73,7 +74,8 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	public Xow_hdump_mgr				Html__hdump_mgr() {return html__hdump_mgr;} private final    Xow_hdump_mgr html__hdump_mgr;
 	public boolean							Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;
 	public Xoh_page_wtr_mgr				Html__wtr_mgr() {return html__wtr_mgr;} private final    Xoh_page_wtr_mgr html__wtr_mgr = new Xoh_page_wtr_mgr(Bool_.Y);
-	public Xoctg_pagebox_wtr			Html__ctg_pagebox_wtr() {return ctg_pagebox_wtr;} private final    Xoctg_pagebox_wtr ctg_pagebox_wtr = new Xoctg_pagebox_wtr();
+	public Xoctg_pagebox_wtr			Ctg__pagebox_wtr() {return ctg_pagebox_wtr;} private final    Xoctg_pagebox_wtr ctg_pagebox_wtr = new Xoctg_pagebox_wtr();
+	public Xoctg_catpage_mgr			Ctg__catpage_mgr() {return ctg_catpage_mgr;} private final    Xoctg_catpage_mgr ctg_catpage_mgr;
 	public Xow_msg_mgr					Msg_mgr() {return msg_mgr;} private final    Xow_msg_mgr msg_mgr;
 	public byte[]						Wtxt__expand_tmpl(byte[] src) {return src;}
 	public Xow_mw_parser_mgr			Mw_parser_mgr() {return mw_parser_mgr;} private final    Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();

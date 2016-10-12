@@ -20,32 +20,34 @@ import gplx.dbs.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 public class Xodb_cat_link_tbl implements Db_tbl {
 	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_from, fld_to_id, fld_type_id, fld_sortkey_id, fld_timestamp_unix;
+	private final    String fld__from, fld__to_id, fld__type_id, fld__timestamp_unix, fld__sortkey, fld__sortkey_prefix;
 	private Db_stmt stmt_insert;
 	public Xodb_cat_link_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name = "cat_link";
-		this.fld_from			= flds.Add_int	("cl_from");
-		this.fld_to_id			= flds.Add_int	("cl_to_id");
-		this.fld_type_id		= flds.Add_byte	("cl_type_id");
-		this.fld_sortkey_id		= flds.Add_int	("cl_sortkey_id");
-		this.fld_timestamp_unix	= flds.Add_long	("cl_timestamp_unix");
+		this.fld__from				= flds.Add_int	("cl_from");
+		this.fld__to_id				= flds.Add_int	("cl_to_id");
+		this.fld__type_id			= flds.Add_byte	("cl_type_id");
+		this.fld__timestamp_unix	= flds.Add_long	("cl_timestamp_unix");
+		this.fld__sortkey			= flds.Add_bry	("cl_sortkey");
+		this.fld__sortkey_prefix	= flds.Add_str	("cl_sortkey_prefix", 255);
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final    Db_conn conn; 
 	public String Tbl_name() {return tbl_name;} private final    String tbl_name; 
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
-	public void Create_idx__from()	{conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, fld_from, fld_from));}
-	public void Create_idx__to_id() {conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, fld_to_id, fld_to_id));}
+	public void Create_idx__catbox()	{conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "catbox", fld__from));}
+	public void Create_idx__catpage()	{conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "catpage", fld__to_id, fld__type_id, fld__sortkey));}
 	public void Insert_bgn() {conn.Txn_bgn("cl__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
-	public void Insert_cmd_by_batch(int from, int to_id, byte type_id, int sortkey_id, long timestamp_unix) {
+	public void Insert_cmd_by_batch(int from, int to_id, byte type_id, long timestamp_unix, byte[] sortkey, byte[] sortkey_prefix) {
 		stmt_insert.Clear()
-			.Val_int(fld_from					, from)
-			.Val_int(fld_to_id					, to_id)
-			.Val_byte(fld_type_id				, type_id)
-			.Val_int(fld_sortkey_id				, sortkey_id)
-			.Val_long(fld_timestamp_unix		, timestamp_unix)
+			.Val_int(fld__from					, from)
+			.Val_int(fld__to_id					, to_id)
+			.Val_byte(fld__type_id				, type_id)
+			.Val_long(fld__timestamp_unix		, timestamp_unix)
+			.Val_bry(fld__sortkey				, sortkey)
+			.Val_bry_as_str(fld__sortkey_prefix	, sortkey_prefix)
 			.Exec_insert();
 	}
 	public void Rls() {

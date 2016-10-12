@@ -23,6 +23,6 @@ public class Io_download_mgr__memory implements Io_download_mgr {
 	public void Upload_data(String url, byte[] data) {hash.Add(url, data);}
 	public Io_stream_rdr Download_as_rdr(String url) {
 		byte[] data = (byte[])hash.Get_by(url); if (data == null) return Io_stream_rdr_.Noop;
-		return Io_stream_rdr_.mem_(data);
+		return Io_stream_rdr_.New__mem(data);
 	}
 }

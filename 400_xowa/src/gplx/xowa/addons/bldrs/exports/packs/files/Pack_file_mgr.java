@@ -19,7 +19,7 @@ package gplx.xowa.addons.bldrs.exports.packs.files; import gplx.*; import gplx.x
 import gplx.core.progs.*; import gplx.core.ios.zips.*; import gplx.core.ios.streams.*; import gplx.core.security.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.fsdb.*; import gplx.fsdb.meta.*;
 import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.steps.*; import gplx.xowa.addons.bldrs.centrals.hosts.*;
-class Pack_file_mgr {
+public class Pack_file_mgr {
 	public void Exec(Xowe_wiki wiki, Pack_file_bldr_cfg cfg) {
 		// init
 		wiki.Init_assert();
@@ -31,7 +31,7 @@ class Pack_file_mgr {
 
 		// get import_tbl
 		byte[] wiki_abrv = wiki.Domain_itm().Abrv_xo();
-		Xobc_data_db bc_db = new Xobc_data_db(wiki.App().Fsys_mgr().Bin_addon_dir().GenSubFil_nest("bldr", "central", "bldr_central.data_db.xowa"));
+		Xobc_data_db bc_db = Xobc_data_db.New(wiki.App().Fsys_mgr());
 		Db_conn bc_conn = bc_db.Conn();
 		bc_db.Delete_by_import(wiki_abrv, wiki_date);
 		bc_conn.Txn_bgn("xobc_import_insert");
@@ -93,7 +93,7 @@ class Pack_file_mgr {
 		int pack_list_len = pack_list.Len();
 
 		// create task
-		String task_key = wiki.Domain_str() + "|" + wiki_date + "|" + task_type;
+		String task_key = Task_key__build(wiki.Domain_str(), wiki_date, task_type);
 		String task_name = Build_task_name(tmp_bfr, wiki, wiki_date, task_type, raw_len);
 		Xobc_task_regy_tbl task_regy_tbl = bc_db.Tbl__task_regy();
 		int task_id = bc_db.Conn().Sys_mgr().Autonum_next("task_regy.task_id");
@@ -160,6 +160,12 @@ class Pack_file_mgr {
 		itm.Step_id_(step_id);
 		bc_db.Tbl__step_regy().Insert(step_id, Xobc_step_itm.Type__wiki_import);
 		bc_db.Tbl__import_step().Insert(step_id, gplx.xowa.addons.bldrs.centrals.dbs.datas.Xobc_host_regy_tbl.Host_id__archive_org, wiki_abrv, wiki_date, zip_url.NameAndExt(), itm.Tid(), Xobc_zip_type.Type__zip, zip_md5, zip_len, raw_size, 0, 0);
+	}
+	private static String Task_key__build(String wiki_domain, String wiki_date, String task_type) {
+		return String_.Concat(wiki_domain, "|", wiki_date, "|", task_type);
+	}
+	public static String[] Task_key__parse(String task_key) {
+		return String_.Split(task_key, "|");
 	}
 }
 class Pack_hash_bldr {

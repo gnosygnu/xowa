@@ -169,11 +169,14 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 			&& 	Bry_.Match(src, site_bgn, site_end, xwiki.Domain_bry())		// only consider full domains, not alliases; EX: [http://w/b] should not match alias of w for en.wikipedia.org
 			) {	
 			Xowe_wiki wiki = ctx.Wiki();
-			xo_url_parser_url = wiki.Utl__url_parser().Parse(src, lnke_bgn, lnke_end);
+
+			// HACK: this is not correct; "&#61;" or "&amp;" is not handled by Gfo_url_parser which assumes that all "&" separates qargs; DATE:2016-10-10
+			byte[] decoded_src = gplx.xowa.parsers.amps.Xop_amp_mgr.Instance.Decode_as_bry(Bry_.Mid(src, lnke_bgn, lnke_end));
+			xo_url_parser_url = wiki.Utl__url_parser().Parse(decoded_src, 0, decoded_src.length);
+
 			byte[] xwiki_wiki = xo_url_parser_url.Wiki_bry();
 			byte[] xwiki_page = xo_url_parser_url.Page_bry();
-			byte[] ttl_bry = xo_url_parser_url.Page_bry();
-			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
+			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, xwiki_page);
 			if (ttl != null && ttl.Wik_itm() != null) {
 				xwiki_wiki = ttl.Wik_itm().Domain_bry();
 				xwiki_page = ttl.Page_url();

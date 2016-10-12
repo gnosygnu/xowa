@@ -57,10 +57,11 @@ public class Xow_hdump_mgr__load {
 			byte[] src = Parse(hpg, hpg.Db().Html().Zip_tid(), hpg.Db().Html().Hzip_tid(), hpg.Db().Html().Html_bry());
 
 			// write ctgs
-			Xoctg_pagebox_itm[] pagebox_itms = wiki.Html__ctg_pagebox_wtr().Get_catlinks_by_page(wiki, hpg);
+			Xoctg_pagebox_itm[] pagebox_itms = wiki.Ctg__pagebox_wtr().Get_catlinks_by_page(wiki, hpg);
 			if (pagebox_itms.length > 0) {
-				tmp_bfr.Add(src);
-				wiki.Html__ctg_pagebox_wtr().Write_pagebox(Bool_.Y, tmp_bfr, wiki, hpg, pagebox_itms);
+				tmp_bfr.Add(src);					
+				boolean hidden_enabled = wiki.App().Api_root().Addon().Wikis__ctgs__hidden_enabled();
+				wiki.Ctg__pagebox_wtr().Write_pagebox(hidden_enabled, tmp_bfr, wiki, hpg, pagebox_itms);
 				src = tmp_bfr.To_bry_and_clear();
 			}
 
@@ -70,7 +71,7 @@ public class Xow_hdump_mgr__load {
 	}
 	public byte[] Decode_as_bry(Bry_bfr bfr, Xoh_page hpg, byte[] src, boolean mode_is_diff) {hzip_mgr.Hctx().Mode_is_diff_(mode_is_diff); hzip_mgr.Decode(bfr, wiki, hpg, src); return bfr.To_bry_and_clear();}
 	private byte[] Parse(Xoh_page hpg, int zip_tid, int hzip_tid, byte[] src) {
-		if (zip_tid > gplx.core.ios.streams.Io_stream_.Tid_raw)
+		if (zip_tid > gplx.core.ios.streams.Io_stream_tid_.Tid__raw)
 			src = zip_mgr.Unzip((byte)zip_tid, src);
 		switch (hzip_tid) {
 			case Xoh_hzip_dict_.Hzip__none:

@@ -58,11 +58,6 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	}
 	public boolean Load_by_id	(Xowd_page_itm rv, int id) {return db_mgr.Core_data_mgr().Tbl__page().Select_by_id(rv, id);}
 	public void Load_by_ids(Cancelable cancelable, List_adp rv, int bgn, int end) {db_mgr.Core_data_mgr().Tbl__page().Select_in__id(cancelable, false, true, rv, bgn, end);}
-	public boolean Load_ctg_v1(Xoctg_catpage_ctg rv, byte[] ctg_bry) {
-		int cat_page_id = db_mgr.Core_data_mgr().Tbl__page().Select_id(Xow_ns_.Tid__category, ctg_bry); if (cat_page_id == Xowd_page_itm.Id_null) return false;			
-		Xowd_category_itm ctg = fsys_mgr.Db__cat_core().Tbl__cat_core().Select(cat_page_id); if (ctg == Xowd_category_itm.Null) return false;
-		return Ctg_select_v1(db_mgr.Wiki(), db_mgr.Core_data_mgr(), rv, ctg.File_idx(), ctg);
-	}
 	public void Load_ttls_for_all_pages(Cancelable cancelable, List_adp rslt_list, Xowd_page_itm rslt_nxt, Xowd_page_itm rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
 		db_mgr.Core_data_mgr().Tbl__page().Select_for_special_all_pages(cancelable, rslt_list, rslt_nxt, rslt_prv, rslt_count, ns, key, max_results, min_page_len, browse_len, include_redirects, fetch_prv_item);
 	}
@@ -74,31 +69,4 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	public byte[] Find_random_ttl(Xow_ns ns) {return db_mgr.Core_data_mgr().Tbl__page().Select_random(ns);}
 	public Xodb_page_rdr Get_page_rdr(Xowe_wiki wiki) {return new Xodb_page_rdr__sql(wiki);}
 	public void Clear() {}
-	private static boolean Ctg_select_v1(Xowe_wiki wiki, Xow_db_mgr core_data_mgr, Xoctg_catpage_ctg view_ctg, int link_db_id, Xowd_category_itm ctg) {
-		List_adp link_list = List_adp_.New();
-		core_data_mgr.Dbs__get_by_id_or_fail(link_db_id).Tbl__cat_link().Select_in(link_list, ctg.Id());
-		int link_list_len = link_list.Count();
-		link_list.Sort_by(Xowd_page_itm_sorter.IdAsc);
-		core_data_mgr.Tbl__page().Select_in__id(Cancelable_.Never, false, true, link_list, 0, link_list_len);
-		link_list.Sort_by(Xowd_page_itm_sorter.Ns_id_TtlAsc);
-		boolean rv = false;
-		for (int i = 0; i < link_list.Count(); i++) {
-			Xowd_page_itm page = (Xowd_page_itm)link_list.Get_at(i);
-			if (page.Ns_id() == Int_.Min_value) continue;	// HACK: page not found; ignore
-			byte ctg_tid = Load_ctg_v1_tid(page.Ns_id());
-			Xoctg_catpage_grp ctg_grp = view_ctg.Grp_by_tid(ctg_tid);
-			Xoctg_catpage_itm ctg_itm = new Xoctg_catpage_itm(page.Id(), Xoa_ttl.Parse(wiki, page.Ns_id(), page.Ttl_page_db()), page.Ttl_page_db());
-			ctg_grp.Itms__add(ctg_itm);
-			rv = true;
-		}
-		view_ctg.Make_itms();
-		return rv;
-	}
-	public static byte Load_ctg_v1_tid(int ns_id) {
-		switch (ns_id) {
-			case Xow_ns_.Tid__category: return Xoa_ctg_mgr.Tid__subc;
-			case Xow_ns_.Tid__file:		return Xoa_ctg_mgr.Tid__file;
-			default: 					return Xoa_ctg_mgr.Tid__page;
-		}		
-	}
 }

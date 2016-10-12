@@ -21,43 +21,39 @@ import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addon
 public class Xoctg_catpage_mgr__navlink__tst {
 	@Before public void init() {fxt.Clear();} private Xoctg_catpage_mgr_fxt fxt = new Xoctg_catpage_mgr_fxt();
 	@Test  public void Navlink__basic() {
-		fxt	.Init_itms__pages("A1", "A2", "A3").Init_grp_max(1).Init_grp__pages(1, 2)
-			.Test__navlink(Bool_.Y, "Category:Ctg_1", String_.Concat_lines_nl
+		fxt.Init_itms__pages("A2", "A3", "A4");
+		fxt.Init__next_sortkey_(Xoa_ctg_mgr.Tid__page, "A5");
+		fxt.Test__navlink(Bool_.Y, "Category:Ctg_1", String_.Concat_lines_nl
 		( ""
-		, "(<a href=\"/wiki/Category:Ctg_1?pageuntil=A2#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">previous 1</a>)"
-		, "(<a href=\"/wiki/Category:Ctg_1?pagefrom=A3#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">next 1</a>)"
+		, "(<a href=\"/wiki/Category:Ctg_1?pageuntil=A2%0AA2#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">previous 3</a>)"
+		, "(<a href=\"/wiki/Category:Ctg_1?pagefrom=A5#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">next 3</a>)"
 		));
 	}
 	@Test  public void Navlink__encoded() {	// escape quotes and spaces; DATE:2016-01-11
-		fxt	.Init_itms__pages("A\" 1", "A\" 2", "A\" 3").Init_grp_max(1).Init_grp__pages(1, 2)
-			.Test__navlink(Bool_.Y, "Category:Ctg_1", String_.Concat_lines_nl
+		fxt.Init_itms__pages("A\" 2", "A\" 3", "A\" 4");
+		fxt.Init__next_sortkey_(Xoa_ctg_mgr.Tid__page, "A\" 5");
+		fxt.Test__navlink(Bool_.Y, "Category:Ctg_1", String_.Concat_lines_nl
 		( ""
-		, "(<a href=\"/wiki/Category:Ctg_1?pageuntil=A%22+2#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">previous 1</a>)"
-		, "(<a href=\"/wiki/Category:Ctg_1?pagefrom=A%22+3#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">next 1</a>)"
+		, "(<a href=\"/wiki/Category:Ctg_1?pageuntil=A%22+2%0AA%22+2#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">previous 3</a>)"
+		, "(<a href=\"/wiki/Category:Ctg_1?pagefrom=A%22+5#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">next 3</a>)"
 		));
 	}
 	@Test  public void Navlink__bos() {
-		fxt	.Init_itms__pages("A1", "A2", "A3").Init_grp_max(1).Init_grp__pages(0, 1)
-			.Test__navlink(Bool_.Y, "Category:Ctg_1", String_.Concat_lines_nl
+		fxt.Init_itms__pages("A2", "A3", "A4");
+		fxt.Init__prev_hide_y_(Xoa_ctg_mgr.Tid__page);
+		fxt.Init__next_sortkey_(Xoa_ctg_mgr.Tid__page, "A5");
+		fxt.Test__navlink(Bool_.Y, "Category:Ctg_1", String_.Concat_lines_nl
 		( ""
-		, "(previous 1)"
-		, "(<a href=\"/wiki/Category:Ctg_1?pagefrom=A2#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">next 1</a>)"
+		, "(previous 3)"
+		, "(<a href=\"/wiki/Category:Ctg_1?pagefrom=A5#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">next 3</a>)"
 		));
 	}
 	@Test  public void Navlink__eos() {
-		fxt	.Init_itms__pages("A1", "A2", "A3").Init_grp_max(2).Init_grp__pages(2, 3)
-			.Test__navlink(Bool_.Y, "Category:Ctg_1", String_.Concat_lines_nl
+		fxt.Init_itms__pages("A2", "A3", "A4");
+		fxt.Test__navlink(Bool_.Y, "Category:Ctg_1", String_.Concat_lines_nl
 		( ""
-		, "(<a href=\"/wiki/Category:Ctg_1?pageuntil=A3#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">previous 2</a>)"
-		, "(next 2)"
-		));
-	}
-	@Test  public void Navlink__eos__2() {	// PURPOSE.fix: do not suppress next page on penultimate page; DATE:2016-09-25
-		fxt	.Init_itms__pages("A1", "A2", "A3", "A4").Init_grp_max(2).Init_grp__pages(2, 3)
-			.Test__navlink(Bool_.Y, "Category:Ctg_1", String_.Concat_lines_nl
-		( ""
-		, "(<a href=\"/wiki/Category:Ctg_1?pageuntil=A3#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">previous 2</a>)"
-		, "(<a href=\"/wiki/Category:Ctg_1?pagefrom=A4#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">next 2</a>)"
+		, "(<a href=\"/wiki/Category:Ctg_1?pageuntil=A2%0AA2#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">previous 3</a>)"
+		, "(next 3)"
 		));
 	}
 }

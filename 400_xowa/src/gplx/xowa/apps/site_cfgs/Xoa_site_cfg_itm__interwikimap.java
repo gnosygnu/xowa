@@ -21,7 +21,7 @@ import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*;
 class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final    Gfo_url_parser url_parser = new Gfo_url_parser(); private final    Gfo_url url = new Gfo_url();
+	private final    Gfo_url_parser url_parser = new Gfo_url_parser();
 	public Xoa_site_cfg_itm__interwikimap() {this.Ctor(Xoa_site_cfg_loader__inet.Qarg__interwikimap);}
 	@Override public void Parse_json_ary_itm(Bry_bfr bfr, Xow_wiki wiki, int i, Json_itm itm) {
 		Json_nde nde = Json_nde.cast(itm);
@@ -40,7 +40,7 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 				byte[] line = lines[i]; if (Bry_.Len_eq_0(line)) continue;	// ignore blank lines
 				byte[][] flds = Bry_split_.Split(line, Byte_ascii.Pipe);
 				byte[] url_fmt = flds[1];
-				byte[] domain_bry = Xow_xwiki_mgr.Get_domain_from_url(url_parser, url, url_fmt);
+				byte[] domain_bry = Xow_xwiki_mgr.Get_domain_from_url(url_parser, url_fmt);
 				wiki.Xwiki_mgr().Add_by_atrs(flds[0], domain_bry, url_fmt);
 			}
 		}

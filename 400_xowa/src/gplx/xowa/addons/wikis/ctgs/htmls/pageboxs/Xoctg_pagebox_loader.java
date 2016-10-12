@@ -31,7 +31,7 @@ class Xoctg_pagebox_loader implements Select_in_cbk {
 		int cat_id = rdr.Read_int("cat_id");
 		Xoctg_pagebox_itm page = (Xoctg_pagebox_itm)hash.Get_by_id(cat_id);
 		if (page == null) {// unlikely, but possible for itms to exist in cat_links, but not in cat_core; log and return;
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "cat_id in cat_link but not in cat_core; page=~{0} cat_id=~{0}", page_url, cat_id);
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "cat_id in cat_link but not in cat_core; page=~{0} cat_id=~{1}", page_url, cat_id);
 		}
 		page.Load_by_cat_core(rdr.Read_bool_by_byte("cat_hidden"), rdr.Read_int("cat_pages"), rdr.Read_int("cat_subcats"), rdr.Read_int("cat_files"));
 	}

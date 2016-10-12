@@ -348,6 +348,7 @@ public class Xoh_html_wtr {
 			case Xop_xnde_tag_.Tid__math:
 			case Xop_xnde_tag_.Tid__indicator:
 			case Xop_xnde_tag_.Tid__xowa_html:
+			case Xop_xnde_tag_.Tid__xowa_wiki_setup:
 			case Xop_xnde_tag_.Tid__graph:
 			case Xop_xnde_tag_.Tid__random_selection:
 			case Xop_xnde_tag_.Tid__tabber:
@@ -360,7 +361,7 @@ public class Xoh_html_wtr {
 				break;
 			default:	// unknown tag
 				if (tag.Restricted()) {	// a; img; script; etc..
-					if (	!page.Html_data().Html_restricted()							// page is not marked restricted (only [[Special:]])
+					if (	!page.Html_data().Html_restricted()								// page is not marked restricted (only [[Special:]])
 						||	page.Wiki().Domain_tid() == Xow_domain_tid_.Tid__home) {		// page is in home wiki
 						bfr.Add_mid(src, xnde.Src_bgn(), xnde.Src_end());
 						return;

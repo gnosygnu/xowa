@@ -23,7 +23,7 @@ import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.bldrs.*;
 public class Xow_xwiki_itm_parser extends Dsv_wkr_base {
 	private Xow_domain_itm owner_domain_itm;
 	private int cur_tid = -1; private byte[] cur_fld1, cur_fld2, cur_fld3;
-	private final    Gfo_url_parser url_parser = new Gfo_url_parser(); private final    Gfo_url url = new Gfo_url();
+	private final    Gfo_url_parser url_parser = new Gfo_url_parser();
 	public Ordered_hash Xwiki_list() {return xwiki_list;} private final    Ordered_hash xwiki_list = Ordered_hash_.New();
 	@Override public Dsv_fld_parser[] Fld_parsers() {return new Dsv_fld_parser[] {Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser};}
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
@@ -46,7 +46,7 @@ public class Xow_xwiki_itm_parser extends Dsv_wkr_base {
 			case Tid__manual:			// EX: "0|domz|http://www.dmoz.org/~{0}|DMOZ"
 				xwiki_is_mw = false;
 				url_fmt = cur_fld2;
-				domain_bry = Xow_xwiki_mgr.Get_domain_from_url(url_parser, url, url_fmt);
+				domain_bry = Xow_xwiki_mgr.Get_domain_from_url(url_parser, url_fmt);
 				break;
 			case Tid__mw_domain:		// EX: "1|w|en.wikipedia.org"
 				domain_bry = cur_fld2;

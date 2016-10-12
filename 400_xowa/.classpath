@@ -7,6 +7,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="lib/jtidy_xowa.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/luaj_xowa.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/icu4j-4_8.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

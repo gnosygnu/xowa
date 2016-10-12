@@ -20,12 +20,12 @@ import org.junit.*;
 public class Xow_url_parser__xcmd_tst {
 	private final    Xow_url_parser_fxt tstr = new Xow_url_parser_fxt();
 	@Test  public void Basic() {
-		tstr.Run_parse("xowa-cmd:xowa.app.version").Chk_tid(Xoa_url_.Tid_xcmd).Chk_page("xowa.app.version");
+		tstr.Exec__parse("xowa-cmd:xowa.app.version").Test__tid(Xoa_url_.Tid_xcmd).Test__page("xowa.app.version");
 	}
 	@Test  public void Encoded() {
-		tstr.Run_parse("xowa-cmd:a%22b*c").Chk_tid(Xoa_url_.Tid_xcmd).Chk_page("a\"b*c");
+		tstr.Exec__parse("xowa-cmd:a%22b*c").Test__tid(Xoa_url_.Tid_xcmd).Test__page("a\"b*c");
 	}
 	@Test  public void Ignore_anchor_and_qargs() {
-		tstr.Run_parse("xowa-cmd:a/b/c?d=e#f").Chk_tid(Xoa_url_.Tid_xcmd).Chk_page("a/b/c?d=e#f");
+		tstr.Exec__parse("xowa-cmd:a/b/c?d=e#f").Test__tid(Xoa_url_.Tid_xcmd).Test__page("a/b/c?d=e#f");
 	}
 }

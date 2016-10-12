@@ -38,7 +38,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	public void Load_page(Xowd_page_itm rv, Xow_ns ns) {Load_page(rv, rv.Text_db_id(), rv.Tdb_row_idx(), ns, false, tmp_xdat_file, tmp_xdat_itm);}
 	public void Load_page(Xowd_page_itm rv, int txt_fil_idx, int txt_row_idx, Xow_ns ns, boolean timestamp_enabled, Xob_xdat_file xdat_file, Xob_xdat_itm xdat_itm) {
 		Io_url file = fsys_mgr.Url_ns_fil(Xotdb_dir_info_.Tid_page, ns.Id(), txt_fil_idx);
-		byte[] bry = gplx.core.ios.streams.Io_stream_rdr_.Load_all(file); int bry_len = bry.length;
+		byte[] bry = Io_mgr.Instance.LoadFilBry(file); int bry_len = bry.length;
 		xdat_file.Clear().Parse(bry, bry_len, file).GetAt(xdat_itm, txt_row_idx);
 		Load_page_parse(rv, bry, bry_len, xdat_itm.Itm_bgn(), xdat_itm.Itm_end(), timestamp_enabled);
 	}
@@ -235,59 +235,6 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		}
 		count.Val_(tmp_count);
 		return rv;
-	}
-	public boolean Load_ctg_v1(Xoctg_catpage_ctg view_ctg, byte[] ctg_ttl) {return Load_ctg_v1_wkr(view_ctg, ctg_ttl, null);}
-	private boolean Load_ctg_v1_wkr(Xoctg_catpage_ctg view_ctg, byte[] ctg_ttl, Int_obj_ref count_only) {
-		Xowd_regy_mgr ctg_regy = Get_regy_by_site(Xotdb_dir_info_.Tid_category);
-		int fil_idx = ctg_regy.Files_find(ctg_ttl);
-		if (fil_idx == Xowd_regy_mgr.Regy_null) return false;	// NOTE: must check for -1, not 0; else defect in which entries in file 0 are ignored; DATE:2013-04-11
-		Io_url fil = fsys_mgr.Url_site_fil(Xotdb_dir_info_.Tid_category, fil_idx);
-		Load_xdat_file(Cancelable_.Never, tmp_xdat_file, fil);
-		tmp_xdat_file.Find(tmp_xdat_itm, ctg_ttl, 0, Byte_ascii.Pipe, true);
-		if (tmp_xdat_itm.Missing()) return false;
-		List_adp ctgs = List_adp_.New();
-		Load_ctg_v1_parse(ctgs, wiki.Appe().Usr_dlg(), tmp_xdat_itm.Itm_bry());
-		ctgs.Sort_by(Xowd_page_itm_sorter.IdAsc);
-		this.Load_by_ids(Cancelable_.Never, ctgs, 0, ctgs.Count());
-		ctgs.Sort_by(Xowd_page_itm_sorter.Ns_id_TtlAsc);
-
-		int ctgs_len = ctgs.Count(); if (ctgs_len == 0) return false;
-		if (count_only != null) {	// Ctg_count specificed
-			count_only.Val_(ctgs_len);
-			return true;
-		}
-		for (int i = 0; i < ctgs_len; i++) {
-			Xowd_page_itm itm = (Xowd_page_itm)ctgs.Get_at(i);
-			byte itm_tid = Xodb_load_mgr_sql.Load_ctg_v1_tid(itm.Ns_id());
-			Xoctg_catpage_itm sub = new Xoctg_catpage_itm(itm.Id(), Xoa_ttl.Parse(wiki, itm.Ns_id(), itm.Ttl_page_db()), itm.Ttl_page_db());
-			view_ctg.Grp_by_tid(itm_tid).Itms__add(sub);				
-		}
-		view_ctg.Make_itms();
-		return true;
-	}
-	private static void Load_ctg_v1_parse(List_adp rv, Gfo_usr_dlg usr_dlg, byte[] ary) {
-		int aryLen = ary.length;
-		int pos = Bry_find_.Find_fwd(ary, Byte_ascii.Pipe, 0, aryLen);
-		int rowCount = (aryLen - pos + 1) / (Base85_.Len_int + gplx.xowa.apps.progs.Xoa_prog_mgr.Len_dlm_fld);
-		rv.Clear();
-		boolean garbage = false;
-		for (int i = 0; i < rowCount; i++) {
-			Xowd_page_itm row = new Xowd_page_itm();
-			rv.Add(row);
-			if (garbage) continue;
-			int bgn = pos + 1 + (i * (Base85_.Len_int + gplx.xowa.apps.progs.Xoa_prog_mgr.Len_dlm_fld));
-			try {
-				int id = Base85_.To_int_by_bry(ary, bgn, bgn + Base85_.Len_int - 1);
-				if (id < 0) throw Err_.new_wo_type("invalid id", "id", id);
-				row.Id_(id);
-			}
-			catch (Exception e) {
-				row.Id_(0);
-				usr_dlg.Warn_many("xowa.ttl_request", "parse", "failed to parse row: row=~{0} err=~{1}", String_.new_u8(ary), Err_.Message_lang(e));
-				garbage = true;
-				continue;	// NOTE: must break b/c rest of ids are garbage
-			}
-		}
 	}
 	public static boolean Load_page_or_false(Xowd_page_itm page, Xob_xdat_itm xdat, int ns_id) {
 		byte[] src = xdat.Src(); int itm_end = xdat.Itm_end();

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.wiki_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import org.junit.*; import gplx.core.strings.*;
 import gplx.langs.xmls.*;
-import gplx.xowa.bldrs.cfgs.*;
+import gplx.xowa.addons.bldrs.app_cfgs.*;
 public class Xoi_wiki_props_api_tst {
 	private Xoi_wiki_props_fxt fxt = new Xoi_wiki_props_fxt();
 	@Before public void init() {} // private Xob_subpage_tst_fxt fxt = new] Xob_subpage_tst_fxt();

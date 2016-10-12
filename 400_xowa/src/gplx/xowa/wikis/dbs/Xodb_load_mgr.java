@@ -27,7 +27,6 @@ public interface Xodb_load_mgr {
 	void Load_by_ids				(Cancelable cancelable, List_adp rv, int bgn, int end);
 	boolean Load_by_ttl				(Xowd_page_itm rv, Xow_ns ns, byte[] ttl);
 	void Load_by_ttls				(Cancelable cancelable, Ordered_hash rv, boolean fill_idx_fields_only, int bgn, int end);
-	boolean Load_ctg_v1				(Xoctg_catpage_ctg rv, byte[] ttl);
 	void Load_ttls_for_all_pages	(Cancelable cancelable, List_adp rslt_list, Xowd_page_itm rslt_nxt, Xowd_page_itm rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item);
 	void Load_ttls_for_search_suggest(Cancelable cancelable, List_adp rslt_list, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item);
 	byte[] Find_random_ttl			(Xow_ns ns);

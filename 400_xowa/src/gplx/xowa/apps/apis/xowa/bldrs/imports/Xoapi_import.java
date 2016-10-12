@@ -29,8 +29,8 @@ public class Xoapi_import implements Gfo_invk {
 	public long		Html_db_max()			{return html_db_max;}			private long html_db_max			= Io_size_.To_long_by_int_mb(1500);		// 3.0 GB; v2; use same as text
 	public long		File_db_max()			{return file_db_max;}			private long file_db_max			= Io_size_.To_long_by_int_mb(1500);		// 3.2 GB; v2
 	public byte[]	Ns_file_map()			{return ns_file_map;}			private byte[] ns_file_map			= Ns_file_map__each;
-	public byte		Zip_tid_text()			{return zip_tid_text;}			private byte zip_tid_text			= Io_stream_.Tid_gzip;
-	public byte		Zip_tid_html()			{return zip_tid_html;}			private byte zip_tid_html			= Io_stream_.Tid_gzip;
+	public byte		Zip_tid_text()			{return zip_tid_text;}			private byte zip_tid_text			= Io_stream_tid_.Tid__gzip;
+	public byte		Zip_tid_html()			{return zip_tid_html;}			private byte zip_tid_html			= Io_stream_tid_.Tid__gzip;
 	public boolean		Hzip_enabled()			{return hzip_enabled;}			private boolean hzip_enabled			= Bool_.Y;
 	public boolean		Hzip_mode_is_b256()		{return hzip_mode_is_b256;}		private boolean hzip_mode_is_b256		= Bool_.Y;
 	public String	User_name()				{return user_name;}				private String user_name			= "anonymous";
@@ -51,7 +51,7 @@ public class Xoapi_import implements Gfo_invk {
 			: gplx.xowa.bldrs.cmds.Xob_ns_file_itm_parser.Ns_file_map__each; // DB.FEW: DATE:2016-06-07
 		// return dump_file_size < layout_text_max ? Bry_.Empty : Ns_file_map__each;
 	}
-	public void		Zip_tid_text_raw_() {zip_tid_text = Io_stream_.Tid_raw;}	// TEST:
+	public void		Zip_tid_text_raw_() {zip_tid_text = Io_stream_tid_.Tid__raw;}	// TEST:
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_layout_all_max))						return Io_size_.To_str_mb(layout_all_max);
 		else if	(ctx.Match(k, Invk_layout_all_max_))	 				layout_all_max = Io_size_.To_long_by_msg_mb(m, layout_all_max);
@@ -71,11 +71,11 @@ public class Xoapi_import implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_file_db_max_)) 						file_db_max = Io_size_.To_long_by_msg_mb(m, file_db_max);
 		else if	(ctx.Match(k, Invk_ns_file_map)) 						return String_.new_u8(ns_file_map);
 		else if	(ctx.Match(k, Invk_ns_file_map_)) 						ns_file_map = m.ReadBry("v");
-		else if	(ctx.Match(k, Invk_zip_tid_text)) 						return Io_stream_.To_str(zip_tid_text);
-		else if	(ctx.Match(k, Invk_zip_tid_text_)) 						zip_tid_text = Io_stream_.To_tid(m.ReadStr("v"));
+		else if	(ctx.Match(k, Invk_zip_tid_text)) 						return Io_stream_tid_.To_key(zip_tid_text);
+		else if	(ctx.Match(k, Invk_zip_tid_text_)) 						zip_tid_text = Io_stream_tid_.To_tid(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_zip_tid_list)) 						return Options_zip_tid__list;
-		else if	(ctx.Match(k, Invk_zip_tid_html)) 						return Io_stream_.To_str(zip_tid_html);
-		else if	(ctx.Match(k, Invk_zip_tid_html_)) 						zip_tid_html = Io_stream_.To_tid(m.ReadStr("v"));
+		else if	(ctx.Match(k, Invk_zip_tid_html)) 						return Io_stream_tid_.To_key(zip_tid_html);
+		else if	(ctx.Match(k, Invk_zip_tid_html_)) 						zip_tid_html = Io_stream_tid_.To_tid(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_hzip_enabled)) 						return Yn.To_str(hzip_enabled);
 		else if	(ctx.Match(k, Invk_hzip_enabled_)) 						hzip_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_hzip_mode_is_b256)) 					return Yn.To_str(hzip_mode_is_b256);
@@ -86,7 +86,7 @@ public class Xoapi_import implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final    Keyval[] Options_zip_tid__list = Keyval_.Ary(Keyval_.new_("raw", "text"), Keyval_.new_("gzip"), Keyval_.new_("bzip2"));
+	private static final    Keyval[] Options_zip_tid__list = Keyval_.Ary(Keyval_.new_("raw", "text"), Keyval_.new_("gzip"), Keyval_.new_("bzip2"), Keyval_.new_("xz"));
 	private static final String
 	  Invk_layout_all_max		= "layout_all_max"		, Invk_layout_all_max_		= "layout_all_max_"
 	, Invk_layout_text_max		= "layout_text_max"		, Invk_layout_text_max_		= "layout_text_max_"

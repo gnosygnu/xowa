@@ -26,7 +26,7 @@ public class Xodb_tmp_cat_link_tbl implements Db_tbl {
 		this.tbl_name = "tmp_cat_link";
 		this.fld_from			= flds.Add_int	("cl_from");
 		this.fld_to_ttl			= flds.Add_str	("cl_to_ttl", 255);
-		this.fld_sortkey		= flds.Add_str	("cl_sortkey", 230);
+		this.fld_sortkey		= flds.Add_bry	("cl_sortkey");
 		this.fld_timestamp		= flds.Add_long	("cl_timestamp");
 		this.fld_sortkey_prefix	= flds.Add_str	("cl_sortkey_prefix", 230);
 		this.fld_collation_id	= flds.Add_byte	("cl_collation_id");
@@ -43,7 +43,7 @@ public class Xodb_tmp_cat_link_tbl implements Db_tbl {
 		stmt_insert.Clear()
 			.Val_int(fld_from					, page_id)
 			.Val_bry_as_str(fld_to_ttl			, ctg_ttl)
-			.Val_bry_as_str(fld_sortkey			, sortkey)
+			.Val_bry(fld_sortkey				, sortkey)
 			.Val_long(fld_timestamp				, timestamp)
 			.Val_bry_as_str(fld_sortkey_prefix	, sortkey_prefix)
 			.Val_byte(fld_collation_id			, collation_id)

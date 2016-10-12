@@ -107,7 +107,7 @@ public class Xob_make_cmd_site implements Io_make_cmd {
 		fil_wtr.Add_idx_direct(itm_len, Byte_.Zero);
 		Io_stream_wtr wtr = null;
 		try {
-			wtr = Io_stream_wtr_.file_(fil_wtr.Fil_url());
+			wtr = Io_stream_wtr_.New__raw(fil_wtr.Fil_url());
 			wtr.Open();
 			fil_wtr.FlushIdx(wtr);
 			wtr.Write(bry, itm_bgn, itm_end);

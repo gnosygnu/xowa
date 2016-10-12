@@ -44,20 +44,7 @@ public class Xobc_import_step_tbl implements Db_tbl {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_step_id).Crt_int(fld_step_id, step_id).Exec_select__rls_auto();
 		try {
 			return (rdr.Move_next())
-				? new Xobc_import_step_itm
-				( rdr.Read_int(fld_step_id)
-				, rdr.Read_int(fld_host_id)
-				, rdr.Read_bry_by_str(fld_wiki_abrv)
-				, rdr.Read_str(fld_wiki_date)
-				, rdr.Read_str(fld_import_name)
-				, rdr.Read_int(fld_import_type)
-				, rdr.Read_byte(fld_import_zip)
-				, rdr.Read_long(fld_import_size_zip)
-				, rdr.Read_long(fld_import_size_raw)
-				, rdr.Read_str(fld_import_md5)
-				, rdr.Read_long(fld_prog_size_end)
-				, rdr.Read_int(fld_prog_count_end)
-				)
+				? New_itm(rdr)
 				: Xobc_import_step_itm.Null;
 		}
 		finally {rdr.Rls();}
@@ -95,7 +82,39 @@ public class Xobc_import_step_tbl implements Db_tbl {
 			}
 		} finally {rdr.Rls();}
 	}
+	public Xobc_import_step_itm[] Select_by_task_id(int task_id) {
+		List_adp list = List_adp_.New();
+		Db_rdr rdr = conn.Stmt_sql(Db_sql_.Make_by_fmt(String_.Ary
+		( "SELECT  s.*"
+		, "FROM    import_step s"
+		, "        JOIN step_map sm ON s.step_id = sm.step_id"
+		, "WHERE   sm.task_id = {0}"
+		), task_id))
+		.Exec_select__rls_auto();
+		try {
+			while (rdr.Move_next()) {
+				list.Add(New_itm(rdr));
+			}
+		} finally {rdr.Rls();}
+		return (Xobc_import_step_itm[])list.To_ary_and_clear(Xobc_import_step_itm.class);
+	}
 	public void Rls() {
 		insert_stmt = Db_stmt_.Rls(insert_stmt);
+	}
+	private Xobc_import_step_itm New_itm(Db_rdr rdr) {
+		return new Xobc_import_step_itm
+		( rdr.Read_int(fld_step_id)
+		, rdr.Read_int(fld_host_id)
+		, rdr.Read_bry_by_str(fld_wiki_abrv)
+		, rdr.Read_str(fld_wiki_date)
+		, rdr.Read_str(fld_import_name)
+		, rdr.Read_int(fld_import_type)
+		, rdr.Read_byte(fld_import_zip)
+		, rdr.Read_long(fld_import_size_zip)
+		, rdr.Read_long(fld_import_size_raw)
+		, rdr.Read_str(fld_import_md5)
+		, rdr.Read_long(fld_prog_size_end)
+		, rdr.Read_int(fld_prog_count_end)
+		);
 	}
 }

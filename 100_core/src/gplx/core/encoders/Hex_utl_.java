@@ -49,6 +49,12 @@ public class Hex_utl_ {
 		}
 		return rv;
 	}
+	public static byte[] Encode_bry(byte[] src) {
+		int src_len = src.length;
+		byte[] trg = new byte[src_len * 2];
+		Encode_bry(src, trg);
+		return trg;
+	}
 	public static void Encode_bry(byte[] src, byte[] trg) {
 		int src_len = src.length, trg_len = trg.length;
 		if (trg_len != src_len * 2) throw Err_.new_("hex", "trg.len must be src.len * 2", "src_len", src_len, "trg_len", trg_len);
@@ -57,6 +63,14 @@ public class Hex_utl_ {
 			byte src_byte = src[src_idx];
 			trg[++trg_idx] = To_byte_lcase(0xf & src_byte >>> 4);	
 			trg[++trg_idx] = To_byte_lcase(0xf & src_byte);
+		}
+	}
+	public static void Encode_bfr(Bry_bfr bfr, byte[] src) {
+		int src_len = src.length;
+		for (int src_idx = 0; src_idx < src_len; ++src_idx) {
+			byte src_byte = src[src_idx];
+			bfr.Add_byte(To_byte_lcase(0xf & src_byte >>> 4));	
+			bfr.Add_byte(To_byte_lcase(0xf & src_byte));
 		}
 	}
 	public static String To_str(int val, int pad) {

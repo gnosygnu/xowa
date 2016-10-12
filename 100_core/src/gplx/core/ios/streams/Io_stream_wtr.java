@@ -17,12 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios.streams; import gplx.*; import gplx.core.*; import gplx.core.ios.*;
 public interface Io_stream_wtr extends Rls_able {
-	byte Tid();
-	Io_url Url(); Io_stream_wtr Url_(Io_url v);
-	void Trg_bfr_(Bry_bfr v);
-	Io_stream_wtr Open();
-	byte[] To_ary_and_clear();
+	byte			Tid();
+	Io_url			Url(); Io_stream_wtr Url_(Io_url v);
+	void			Trg_bfr_(Bry_bfr v);
+	Io_stream_wtr	Open();
+	byte[]			To_ary_and_clear();
 
-	void Write(byte[] bry, int bgn, int len);
-	void Flush();
+	void			Write(byte[] bry, int bgn, int len);
+	void			Flush();
 }

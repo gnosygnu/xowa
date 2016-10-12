@@ -67,6 +67,28 @@ public class Xobc_task_regy_tbl implements Db_tbl {
 			.Val_str(fld_task_key, task_key).Val_str(fld_task_name, task_name)
 			.Exec_insert();
 	}
+	public Xobc_task_regy_itm[] Select_by_wiki(byte[] wiki_domain) {
+		String sql = Db_sql_.Make_by_fmt(String_.Ary
+		( "SELECT  *"
+		, "FROM    task_regy"
+		, "WHERE   task_key LIKE '{0}%'"
+		, "AND     task_seqn != 999999"
+		), wiki_domain);
+		List_adp list = List_adp_.New();
+		Db_rdr rdr = conn.Stmt_sql(sql).Exec_select__rls_auto();
+		try {
+			while (rdr.Move_next()) {
+				list.Add(new Xobc_task_regy_itm
+				( rdr.Read_int("task_id")
+				, rdr.Read_int("task_seqn")
+				, rdr.Read_bry_by_str("task_key")
+				, rdr.Read_bry_by_str("task_name")
+				, rdr.Read_int("step_count")
+				));
+			}
+		} finally {rdr.Rls();}
+		return (Xobc_task_regy_itm[])list.To_ary_and_clear(Xobc_task_regy_itm.class);
+	}
 	public void Delete(int task_id) {
 		conn.Stmt_delete(tbl_name, fld_task_id).Crt_int(fld_task_id, task_id).Exec_delete();
 	}

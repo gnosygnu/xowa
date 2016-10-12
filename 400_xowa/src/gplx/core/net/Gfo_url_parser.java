@@ -16,20 +16,21 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.net; import gplx.*; import gplx.core.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.core.btries.*;
 import gplx.core.net.qargs.*;
+import gplx.langs.htmls.encoders.*;
 public class Gfo_url_parser {
 	private final    Btrie_slim_mgr protocols = Btrie_slim_mgr.ci_a7();	// ASCII:url_protocol; EX:"http:", "ftp:", etc
-	private final    Bry_ary segs_ary = new Bry_ary(4), qargs = new Bry_ary(4);
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(500);
 	private final    Btrie_rv trv = new Btrie_rv();
-	public byte[] Relative_url_protocol_bry() {return Gfo_protocol_itm.Itm_https.Key_w_colon_bry();}	// NOTE: https b/c any WMF wiki will now default to WMF; DATE:2015-07-26
+	private final    List_adp segs_list = List_adp_.New(), qargs_list = List_adp_.New();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(500);
 	public Gfo_url_parser() {
 		Init_protocols(Gfo_protocol_itm.Ary());
 		Init_protocol_itm(Gfo_protocol_itm.Bry_relative, Gfo_protocol_itm.Tid_relative_1);
 		Init_protocol_itm(Gfo_protocol_itm.Bry_file, Gfo_protocol_itm.Tid_file);
 		Init_protocol_itm(gplx.xowa.parsers.lnkes.Xop_lnke_wkr.Bry_xowa_protocol, Gfo_protocol_itm.Tid_xowa);
 	}
+	public byte[] Relative_url_protocol_bry() {return Gfo_protocol_itm.Itm_https.Key_w_colon_bry();}	// NOTE: https b/c any WMF wiki will now default to WMF; DATE:2015-07-26
 	private void Init_protocols(Gfo_protocol_itm... itms) {
 		int len = itms.length;
 		for (int i = 0; i < len; i++) {
@@ -37,9 +38,7 @@ public class Gfo_url_parser {
 			Init_protocol_itm(itm.Key_w_colon_bry(), itm.Tid());
 		}
 	}
-	public void Init_protocol_itm(byte[] key, byte protocol_tid) {
-		protocols.Add_bry_byte(key, protocol_tid);
-	}
+	public void Init_protocol_itm(byte[] key, byte protocol_tid) {protocols.Add_bry_byte(key, protocol_tid);}
 	public void Parse_site_fast(Gfo_url_site_data site_data, byte[] src, int src_bgn, int src_end) {
 		int pos = src_bgn; boolean rel = false;
 		if (pos + 1 < src_end && src[pos] == Byte_ascii.Slash && src[pos + 1] == Byte_ascii.Slash) {	// starts with "//"
@@ -62,199 +61,126 @@ public class Gfo_url_parser {
 		slash_pos = Bry_.Trim_end_pos(src, slash_pos);
 		site_data.Atrs_set(rel, pos, slash_pos);
 	}
-	private static final int Area__path = 1, Area__qarg_key_1st = 2, Area__qarg_key_nth = 3, Area__qarg_val = 4, Area__anch = 5;
-	private byte[] src; int src_bgn, src_end;
-	private int area;
-	private boolean encoded;
-	private byte protocol_tid; private byte[] protocol_bry, anch;
-	private int path_bgn, qarg_key_bgn, qarg_val_bgn, anch_bgn, anch_nth_bgn;
-	public Gfo_url Parse(byte[] src) {return Parse(new Gfo_url(), src, 0, src.length);}
-	public Gfo_url Parse(Gfo_url rv, byte[] src, int src_bgn, int src_end) {
-		this.src = src; this.src_bgn = src_bgn; this.src_end = src_end;
-		encoded = false;
-		protocol_tid = Gfo_protocol_itm.Tid_null;
-		protocol_bry = anch = null;
-		path_bgn = qarg_key_bgn = qarg_val_bgn = anch_bgn = anch_nth_bgn = -1;
-		segs_ary.Clear(); qargs.Clear();
-		int pos = src_bgn;
-		Object protocol_obj = protocols.Match_at(trv, src, src_bgn, src_end);
-		pos = trv.Pos();
-		pos = Bry_find_.Find_fwd_while(src, pos, src_end, Byte_ascii.Slash);
-		if (protocol_obj == null) {
-			this.protocol_tid = Gfo_protocol_itm.Tid_unknown;
-		}
-		else {
-			this.protocol_tid = ((Byte_obj_val)protocol_obj).Val();
-			this.protocol_bry = Make_bry(src_bgn, pos);
-		}
-		area = Area__path;
-		path_bgn = pos;
-		while (true) {
-			if (pos == src_end) break;
-			byte b = src[pos];
+	public Gfo_url Parse(byte[] src) {return Parse(src, 0, src.length);}
+	public Gfo_url Parse(byte[] src, int src_bgn, int src_end) {
+		// protocol
+		byte protocol_tid = protocols.Match_byte_or(trv, src, src_bgn, src_end, Gfo_protocol_itm.Tid_unknown);
+		int pos = Bry_find_.Find_fwd_while(src, trv.Pos(), src_end, Byte_ascii.Slash);	// set pos after last slash; EX: "https://A" -> position before "A"
+		byte[] protocol_bry = protocol_tid == Gfo_protocol_itm.Tid_unknown
+			? null
+			: Make_bry(false, src, src_bgn, pos);
+
+		// loop chars and handle "/", "#", "?", and "%"
+		boolean encoded = false;
+		int src_zth = src_end - 1;
+		int anch_bgn = -1, qarg_bgn = -1, seg_bgn = pos;
+		for (int i = pos; i < src_end; ++i) {
+			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Slash:		pos = Parse_slash(pos, b); break;
-				case Byte_ascii.Question:	pos = Parse_qarg_key_1st(pos, b); break;
-				case Byte_ascii.Amp:		pos = Parse_qarg_key_nth(pos, b); break;
-				case Byte_ascii.Eq:			pos = Parse_qarg_val(pos, b); break;
-				case Byte_ascii.Hash:		if (anch_bgn == -1) pos = Parse_anch(pos, b); else ++pos; break;	// anchor begins at 1st #, not last #; EX:A#B#C has anchor of "B#C" not "C" PAGE:en.w:Grand_Central_Terminal; DATE:2015-12-31
-				case Byte_ascii.Percent:	encoded = true; ++pos; break;
-				default:
-					++pos;
+				case Byte_ascii.Slash:
+					if (qarg_bgn == -1) {		// ignore slash in qargs
+						segs_list.Add(Make_bry(encoded, src, seg_bgn, i));
+						encoded = false;
+						seg_bgn = i + 1;		// +1 to skip "/"
+					}
+					break;
+				case Byte_ascii.Hash:			// set qarg to first #; also, ignore rest of String; EX: A#B#C -> B#C
+					if (i == src_zth) continue;	// ignore # at EOS; EX: "A#"
+					anch_bgn = i;
+					i = src_end;
+					break;
+				case Byte_ascii.Question:		// set qarg to last "?"; EX: A?B?C -> C
+					if (i == src_zth) continue;	// ignore ? at EOS; EX: "A?"
+					qarg_bgn = i;
+					break;
+				case Byte_ascii.Percent:
+					encoded = true;
 					break;
 			}
 		}
-		End_area(pos, Byte_ascii.Null);
-		rv.Ctor(src, protocol_tid, protocol_bry, segs_ary.To_ary(0), Make_qargs(), anch);
-		return rv;
-	}
-	private int Parse_slash(int pos, byte b) {
-		switch (area) {
-			case Area__path:		return End_area(pos, b);
-			default:				return pos + 1;
+		
+		int seg_end = src_end;	// set seg_end to src_end; EX: "https://site/A" -> "A"; seg_end may be overriden if "#" or "?" exists
+
+		// set anch
+		byte[] anch = null;
+		if (anch_bgn != -1) {
+			seg_end = anch_bgn;	// set seg_end to anch_bgn; EX: "https://site/A#B" -> "A" x> "A#B"
+			anch = Make_bry(encoded, src, anch_bgn + 1, src_end);	// +1 to skip "#"
 		}
-	}
-	private int Parse_anch(int pos, byte b) {
-		switch (area) {
-			case Area__path:
-				End_area(pos, b);
-				area = Area__anch;
-				anch_bgn = pos + 1;
-				break;
-			case Area__anch:	// handle double; A#B#C -> "A#B", "C"
-				Append_to_last_path(Byte_ascii.Hash, Make_bry(anch_bgn, pos));
-				anch_bgn = pos + 1;
-				break;
-			case Area__qarg_val:
-			case Area__qarg_key_1st:
-			case Area__qarg_key_nth:
-				if (anch_nth_bgn == -1)
-					anch_nth_bgn = Bry_find_.Find_bwd(src, Byte_ascii.Hash, src_end);
-				if (pos == anch_nth_bgn) {
-					End_area(pos, b);
-					area = Area__anch;
-					anch_bgn = pos + 1;
-				}
-				break;
-			default:
-				break;
+
+		// set qargs
+		Gfo_qarg_itm[] qarg_ary = Gfo_qarg_itm.Ary_empty;
+		if (qarg_bgn != -1) {
+			int qarg_end = anch_bgn == -1 
+				? src_end	// # missing; set to src_end; EX: "A?B=C" -> EOS
+				: anch_bgn;	// # exists; set to anch_bgn; EX: "A?B=C#D" -> #
+			qarg_ary = Make_qarg_ary(src, qarg_bgn, qarg_end);
+			seg_end = qarg_ary.length == 0
+				? src_end	// set seg_end to src_end if pseudo qarg; EX: "https://site/A?B" -> "A?B" x> "A"
+				: qarg_bgn;	// set seg_end to qarg_bgn; EX: "https://site/A?B=C" -> "A" x> "A#B"; NOTE: overrides anch;  "A?B=C#D" -> "A"
 		}
-		return pos + 1;
+
+		// extract seg_end; note that there will always be a seg_end; if src ends with slash, then it will be ""; EX: "A/" -> "A", ""
+		segs_list.Add(Make_bry(encoded, src, seg_bgn, seg_end));
+
+		// build url and return it
+		return new Gfo_url(src, protocol_tid, protocol_bry, (byte[][])segs_list.To_ary_and_clear(byte[].class), qarg_ary, anch);
 	}
-	private int Parse_qarg_key_1st(int pos, byte b) {
-		switch (area) {
-			case Area__path:			// only valid way to start qarg; EX: A?B=C
-				End_area(pos, b);
-				area = Area__qarg_key_1st;
-				qarg_key_bgn = pos + 1;
-				break;
-			case Area__qarg_key_1st:	// handle dupe; EX: A?B?C
-			case Area__qarg_key_nth:	// handle dupe; EX: A?B=C&D?
-			case Area__qarg_val:		// handle dupe; EX: A?B=?
-				End_area(pos, b);
-				Append_to_last_path__qargs();
-				area = Area__qarg_key_1st;
-				qarg_key_bgn = pos + 1;
-				break;
+	private Gfo_qarg_itm[] Make_qarg_ary(byte[] src, int qarg_bgn, int qarg_end) {
+		// init
+		int key_bgn = qarg_bgn + 1;	// +1 to skip "?"
+		byte[] key_bry = null;
+		int val_bgn = -1;
+		boolean encoded = false;
+
+		// loop qarg for "&", "=", "%"
+		int qarg_pos = qarg_bgn;
+		while (true) {
+			boolean b_is_last = qarg_pos == qarg_end;
+			byte b = b_is_last ? Byte_ascii.Null : src[qarg_pos];
+			boolean make_qarg = false;
+			switch (b) {
+				case Byte_ascii.Amp:	// "&" always makes qarg
+					make_qarg = true;
+					break;
+				case Byte_ascii.Null:	// "EOS" makes qarg as long as "=" seen or at least one qarg; specifically, "A?B" shouldn't make qarg
+					if (	val_bgn != -1				// "=" seen; EX: "?A=B"
+						||	qargs_list.Count() > 0)		// at least one qarg exists; EX: "?A=B&C"
+						make_qarg = true;
+					break;
+				case Byte_ascii.Eq:
+					key_bry = Make_bry(encoded, src, key_bgn, qarg_pos);
+					encoded = false;
+					val_bgn = qarg_pos + 1;
+					break;
+				case Byte_ascii.Percent:
+					encoded = true;
+					break;
+			}
+
+			// make qarg
+			if (make_qarg) {
+				byte[] val_bry = null;
+				if (key_bry == null)	// key missing; EX: "&A" -> "A,null"
+					key_bry = Make_bry(encoded, src, key_bgn, qarg_pos);
+				else					// key exists; EX: "&A=B" -> "A,B"
+					val_bry = Make_bry(encoded, src, val_bgn, qarg_pos);
+				encoded = false;
+				qargs_list.Add(new Gfo_qarg_itm(key_bry, val_bry));
+
+				// reset vars
+				key_bry = null;
+				key_bgn = qarg_pos + 1;
+				val_bgn = -1;
+			}
+			if (b_is_last) break;
+			++qarg_pos;
 		}
-		return pos + 1;
+		return (Gfo_qarg_itm[])qargs_list.To_ary_and_clear(Gfo_qarg_itm.class);
+	} 
+	private byte[] Make_bry(boolean encoded, byte[] src, int bgn, int end) {
+		return encoded ? Gfo_url_encoder_.Xourl.Decode(tmp_bfr, Bool_.N, src, bgn, end).To_bry_and_clear() : Bry_.Mid(src, bgn, end);
 	}
-	private int Parse_qarg_key_nth(int pos, byte b) {
-		switch (area) {
-			case Area__path:			// ignore if qarg not started; EX: A&B
-				break;
-			case Area__qarg_key_1st:	// handle invalid; A?B&C
-			case Area__qarg_key_nth:	// handle invalid; A?B=C&D&E=F
-				End_area(pos, b);
-				qargs.Add(null);
-				area = Area__qarg_key_nth;
-				qarg_key_bgn = pos + 1;
-				break;
-			case Area__qarg_val:
-				End_area(pos, b);
-				area = Area__qarg_key_nth;
-				qarg_key_bgn = pos + 1;
-				break;
-		}
-		return pos + 1;
-	}
-	private int Parse_qarg_val(int pos, byte b) {
-		switch (area) {
-			case Area__qarg_key_1st:
-			case Area__qarg_key_nth:
-				End_area(pos, b); break;
-			default: break;
-		}
-		return pos + 1;
-	}
-	private int End_area(int pos, byte b) {
-		switch (area) {
-			case Area__path:
-				segs_ary.Add(Make_bry(path_bgn, pos));
-				path_bgn = pos + 1;
-				break;
-			case Area__qarg_key_1st:
-			case Area__qarg_key_nth:
-				if (b == Byte_ascii.Null && qargs.Len() == 0) // handle A?b but not A?b=c&d
-					Append_to_last_path(Byte_ascii.Question, Make_bry(qarg_key_bgn, src_end));
-				else {
-					qargs.Add(Make_bry(qarg_key_bgn, pos));
-					qarg_val_bgn = pos + 1;
-					area = Area__qarg_val;
-				}
-				break;
-			case Area__qarg_val:
-				qargs.Add(Make_bry(qarg_val_bgn, pos));
-				qarg_key_bgn = pos + 1;
-				qarg_val_bgn = -1;
-				area = Area__qarg_key_nth;
-				break;
-			case Area__anch:
-				if (b == Byte_ascii.Null && anch_bgn == src_end) //  handle A# but not "A#B"
-					Append_to_last_path(Byte_ascii.Hash, Make_bry(anch_bgn, src_end));
-				else
-					anch = Make_bry(anch_bgn, pos);
-				break;
-			default:
-				break;
-		}
-		encoded = false;
-		return pos + 1;
-	}
-	private byte[] Make_bry(int bgn, int end) {
-		return encoded ? gplx.langs.htmls.encoders.Gfo_url_encoder_.Xourl.Decode(tmp_bfr, Bool_.N, src, bgn, end).To_bry_and_clear() : Bry_.Mid(src, bgn, end);
-	}
-	private Gfo_qarg_itm[] Make_qargs() {
-		int qargs_len = qargs.Len(); if (qargs_len == 0) return Gfo_qarg_itm.Ary_empty;
-		if (qargs_len % 2 == 1) ++qargs_len;	// handle odd qargs; EX: ?A=B&C&D=E
-		Gfo_qarg_itm[] rv = new Gfo_qarg_itm[qargs_len / 2];
-		for (int i = 0; i < qargs_len; i += 2) {
-			byte[] key = qargs.Get_at(i);
-			int val_idx = i + 1;				
-			byte[] val = val_idx < qargs_len ? qargs.Get_at(val_idx) : null;
-			rv[i / 2] = new Gfo_qarg_itm(key, val);
-		}
-		return rv;
-	}
-	private void Append_to_last_path(byte b, byte[] append) {
-		byte[] last_path = segs_ary.Get_at_last(); if (last_path == null) return;
-		last_path = Bry_.Add_w_dlm(b, last_path, append);
-		segs_ary.Set_at_last(last_path);
-	}
-	private void Append_to_last_path__qargs() {
-		byte[] last_path = segs_ary.Get_at_last(); if (last_path == null) return;
-		tmp_bfr.Add(last_path);
-		int len = qargs.Len();
-		if (len % 2 == 1) qargs.Add(null);	// handle odd qargs
-		for (int i = 0; i < len; i += 2) {
-			tmp_bfr.Add_byte(i == 0 ? Byte_ascii.Question : Byte_ascii.Amp);
-			tmp_bfr.Add(qargs.Get_at(i));
-			byte[] qarg_val = qargs.Get_at(i + 1);
-			if (qarg_val != null)	// handle "null" added above
-				tmp_bfr.Add_byte_eq().Add(qarg_val);
-		}
-		qargs.Clear();
-		segs_ary.Set_at_last(tmp_bfr.To_bry_and_clear());
-	}
+
 	public static final    byte[] Bry_double_slash = new byte[] {Byte_ascii.Slash, Byte_ascii.Slash};
 }

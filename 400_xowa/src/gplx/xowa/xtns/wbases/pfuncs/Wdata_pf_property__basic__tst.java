@@ -53,20 +53,33 @@ public class Wdata_pf_property__basic__tst {
 		fxt.Init__docs__add(fxt.doc_("q1", fxt.Make_claim_geo(1, "6.789", "1.2345")));
 		fxt.Test_parse("{{#property:p1}}", "1.2345, 6.789");
 	}
-	@Test   public void Quantity() {
+	@Test   public void Quantity__plus_minus__y() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init__docs__add(fxt.doc_("q1", fxt.Make_claim_quantity(1, "+1234", "2", "+1236", "+1232")));
-		fxt.Test_parse("{{#property:p1}}", "1,234±2");
+		fxt.Init__docs__add(fxt.doc_("q1", fxt.Make_claim_quantity(1, "+1234", "meter", "+1236", "+1232")));
+		fxt.Test_parse("{{#property:p1}}", "1,234±2 meter");
 	}
-	@Test   public void Quantity__no_plus_minus() {	// PURPOSE:do not output ± if lbound == val == ubound; PAGE:en.w:Tintinan DATE:2015-08-02
+	@Test   public void Quantity__plus_minus__n() {	// PURPOSE:do not output ± if lbound == val == ubound; PAGE:en.w:Tintinan DATE:2015-08-02
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init__docs__add(fxt.doc_("q1", fxt.Make_claim_quantity(1, "+1234", "1", "+1234", "+1234")));
-		fxt.Test_parse("{{#property:p1}}", "1,234");
+		fxt.Init__docs__add(fxt.doc_("q1", fxt.Make_claim_quantity(1, "+1234", "meter", "+1234", "+1234")));
+		fxt.Test_parse("{{#property:p1}}", "1,234 meter");
+	}
+	@Test   public void Quantity__range() {	// PURPOSE:do not output ± if lbound == val == ubound; PAGE:en.w:Tintinan DATE:2015-08-02
+		fxt.Init_links_add("enwiki", "Test_page", "q1");
+		fxt.Init__docs__add(fxt.doc_("q1", fxt.Make_claim_quantity(1, "+1234", "meter", "+1236", "+1233")));
+		fxt.Test_parse("{{#property:p1}}", "1,233-1,236 meter");
 	}
 	@Test   public void Quantity__long() {	// PURPOSE: must cast to long for large numbers; EX:{{#property:P1082}} PAGE:en.w:Earth; DATE:2015-08-02
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init__docs__add(fxt.doc_("q1", fxt.Make_claim_quantity(1, "+4321000000", "1", "4321000000", "4321000000")));
-		fxt.Test_parse("{{#property:p1}}", "4,321,000,000");
+		fxt.Init__docs__add(fxt.doc_("q1", fxt.Make_claim_quantity(1, "+4321000000", "meter", "4321000000", "4321000000")));
+		fxt.Test_parse("{{#property:p1}}", "4,321,000,000 meter");
+	}
+	@Test   public void Quantity__unit__entity() {// PURPOSE: get entity name; EX:{{#invoke:Wikidata|getUnits|P2386|FETCH_WIKIDATA}} PAGE:en.w:Arecibo_Observatory; DATE:2016-10-11
+		fxt.Init_links_add("enwiki", "Test_page", "q1");
+		fxt.Init__docs__add(fxt.doc_("q1", fxt.Make_claim_quantity(1, "+1234", "http://www.wikidata.org/entity/q2", "+1236", "+1232")));
+		Wdata_doc wdoc = fxt.doc_("q2", fxt.Make_claim_string(2, "a"));
+		wdoc.Label_list().Add(Bry_.new_a7("en"), new gplx.xowa.xtns.wbases.core.Wdata_langtext_itm(Bry_.new_a7("en"), Bry_.new_a7("meter")));
+		fxt.Init__docs__add(wdoc);
+		fxt.Test_parse("{{#property:p1}}", "1,234±2 meter");
 	}
 	@Test   public void Monolingualtext() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");

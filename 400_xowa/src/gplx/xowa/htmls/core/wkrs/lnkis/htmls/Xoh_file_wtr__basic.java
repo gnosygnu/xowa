@@ -212,7 +212,7 @@ public class Xoh_file_wtr__basic {
 				boolean a_href_is_file = true;
 				if (xowa_title_bry == null) {xowa_title_bry = lnki_ttl; a_href_is_file = false;}
 				link_arg = link_arg_html == null ? lnki_href : link_arg_html;		// if parse fails, then assign to lnki_href; EX:link={{{1}}}
-				link_arg = Gfo_url_encoder_.Href_qarg.Encode(link_arg);				// must encode quotes; PAGE:en.w:List_of_cultural_heritage_sites_in_Punjab,_Pakistan; DATE:2014-07-16
+				link_arg = Gfo_url_encoder_.Href_quotes_v2.Encode(link_arg);		// must encode quotes; PAGE:en.w:List_of_cultural_heritage_sites_in_Punjab,_Pakistan; DATE:2014-07-16; changed to use "v2" so not to double encode "%" values; DATE:2016-10-10
 				// if (Bry_.Len_gt_0(tmp_link_parser.Html_xowa_ttl())) lnki_ttl = tmp_link_parser.Html_xowa_ttl(); // DELETE: not sure why this is here; breaks test; DATE:2015-11-28
 				img_fmtr.Add_full_img(bfr, hctx, page, src, xfer_itm, uid, link_arg, a_href_is_file, tmp_link_parser.Html_anchor_cls(), tmp_link_parser.Html_anchor_rel(), anch_ttl, Xoh_file_fmtr__basic.Escape_xowa_title(xowa_title_bry), xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, img_cls_tid, img_cls_other);
 			}

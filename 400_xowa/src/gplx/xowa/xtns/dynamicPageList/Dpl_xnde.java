@@ -20,7 +20,7 @@ import gplx.core.primitives.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.dbs.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.amps.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*;
 public class Dpl_xnde implements Xox_xnde {
 	private Dpl_itm itm = new Dpl_itm(); private List_adp pages = List_adp_.New();
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {} // NOTE: <dynamicPageList> has no attributes
@@ -117,7 +117,7 @@ class Dpl_page_finder {
 		}
 	}
 	private static void Find_pages_in_ctg(Ordered_hash rv, Xowe_wiki wiki, Xodb_load_mgr load_mgr, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, byte[] ctg_ttl) {
-		Xoctg_catpage_ctg ctg = wiki.Html_mgr().Catpage_mgr().Get_or_load_or_null(wiki, wiki.Ttl_parse(gplx.xowa.wikis.nss.Xow_ns_.Tid__category, ctg_ttl));
+		Xoctg_catpage_ctg ctg = wiki.Ctg__catpage_mgr().Get_or_load_or_null(Xoctg_catpage_url.New__blank(), wiki.Ttl_parse(gplx.xowa.wikis.nss.Xow_ns_.Tid__category, ctg_ttl), -1);
 		if (ctg == null) return;
 
 		// loop grps to get grp
@@ -158,7 +158,8 @@ class Dpl_page_finder {
 		int found_len = cur_regy.Count();
 		for (int j = 0; j < found_len; j++) {			// if new_page is in cur, add it
 			Xoctg_catpage_itm cur_itm = (Xoctg_catpage_itm)cur_regy.Get_at(j);
-			if (ns_filter != Dpl_itm.Ns_filter_null && ns_filter != cur_itm.Page_ttl().Ns().Id()) continue;
+			Xoa_ttl cur_ttl = cur_itm.Page_ttl(); if (cur_ttl == null) continue;
+			if (ns_filter != Dpl_itm.Ns_filter_null && ns_filter != cur_ttl.Ns().Id()) continue;
 			tmp_id.Val_(cur_itm.Page_id());				// set tmp_id, since it will be used at least once
 			if (exclude_pages.Has(tmp_id)) continue;	// ignore excluded pages
 			if (i != 0) {								// skip logic for first ctg (which doesn't have a predecessor)

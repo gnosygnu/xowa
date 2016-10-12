@@ -157,6 +157,20 @@ public class Xowd_page_tbl implements Rls_able {
 			return rdr.Move_next() ? rdr.Read_int(fld_id) : Xowd_page_itm.Id_null;
 		}	finally {rdr.Rls();}
 	}
+	public void Select_in__id(Select_in_cbk cbk) {
+		int pos = 0;
+		Bry_bfr bfr = Bry_bfr_.New();
+		Select_in_wkr wkr = Select_in_wkr.New(bfr, tbl_name, Flds_select_all(), fld_id);
+		while (true) {
+			pos = wkr.Make_sql_or_null(bfr, cbk, pos);
+			if (pos == -1) break;
+			Db_rdr rdr = conn.Stmt_sql(bfr.To_str_and_clear()).Exec_select__rls_auto();
+			try {
+				while (rdr.Move_next())
+					cbk.Read_data(rdr);
+			} finally {rdr.Rls();}
+		}
+	}
 	public void Select_in__ttl(Cancelable cancelable, Ordered_hash rv, int ns_id, int bgn, int end) {
 		Xowd_page_tbl__ttl wkr = new Xowd_page_tbl__ttl();
 		wkr.Ctor(this, tbl_name, fld_title);

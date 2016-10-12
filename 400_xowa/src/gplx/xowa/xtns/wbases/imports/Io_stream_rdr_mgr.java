@@ -32,7 +32,7 @@ class Io_stream_rdr_mgr {
 		Io_url src_itm_url = src_itm.Url();
 		Io_stream_rdr rv = unzip_mgr.Handles(src_itm_url)
 			? unzip_mgr.New_rdr(src_itm_url)
-			: Io_stream_rdr_.file_(src_itm_url);
+			: Io_stream_rdr_.New__raw(src_itm_url);
 		rv.Len_(src_itm.Size());
 		return rv;
 	}
@@ -67,7 +67,7 @@ class Io_stream_unzip_mgr {
 	public Io_stream_rdr New_rdr(Io_url url) {
 		return stdout_enabled
 			? Io_stream_rdr_process.new_(stdout_process.Exe_url(), url, stdout_process.Xto_process_bldr_args(url.Raw()))
-			: Io_stream_rdr_.bzip2_(url)
+			: Io_stream_rdr_.New__bzip2(url)
 			;
 	}
 }

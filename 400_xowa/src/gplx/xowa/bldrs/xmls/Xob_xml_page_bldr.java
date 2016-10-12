@@ -23,7 +23,7 @@ public class Xob_xml_page_bldr {
 	public Io_buffer_rdr XtoByteStreamRdr(int bfr_len) {
 		Io_url url = Io_url_.mem_fil_("mem/byteStreamRdr.txt");
 		Io_mgr.Instance.SaveFilBry(url, bfr.To_bry_and_clear());
-		return Io_buffer_rdr.new_(gplx.core.ios.streams.Io_stream_rdr_.file_(url), bfr_len);
+		return Io_buffer_rdr.new_(gplx.core.ios.streams.Io_stream_rdr_.New__raw(url), bfr_len);
 	}
 	public Bry_bfr Bfr() {return bfr;} Bry_bfr bfr = Bry_bfr_.New();
 	public Xob_xml_page_bldr Upd(String find, String repl) {

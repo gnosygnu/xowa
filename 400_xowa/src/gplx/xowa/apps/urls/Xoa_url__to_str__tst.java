@@ -50,7 +50,7 @@ class Xoa_url__to_str__fxt extends Xow_url_parser_fxt { 	private final    Xoh_hr
 	public void Chk_to_str_href(boolean full, String raw, String expd) {Chk_to_str_href(cur_wiki, full, raw, expd);}
 	public void Chk_to_str_href(Xowe_wiki wiki, boolean full, String raw, String expd) {
 		href_parser.Parse_as_url(actl_url, Bry_.new_u8(raw), wiki, Bry__page);
-		this.Chk_to_str(full, expd);
+		this.Test__to_str(full, expd);
 	}
 	private static final    byte[] Bry__page = Bry_.new_a7("Page_1");
 }

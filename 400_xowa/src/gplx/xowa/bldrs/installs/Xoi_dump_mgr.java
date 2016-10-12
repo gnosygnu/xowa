@@ -21,7 +21,7 @@ import gplx.xowa.bldrs.wms.dumps.*;
 public class Xoi_dump_mgr implements Gfo_invk {
 	public String[] Server_urls() {return server_urls;} private String[] server_urls = String_.Ary(Xowm_dump_file_.Server_your_org, Xowm_dump_file_.Server_wmf_https, Xowm_dump_file_.Server_c3sl, Xowm_dump_file_.Server_masaryk);	// promote your.org to primary url; DATE:2016-08-07
 	public String[] Custom_cmds() {return custom_cmds;} private String[] custom_cmds = String_.Ary(Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_import.KEY);
-	public byte Data_storage_format()	{return data_storage_format;} public Xoi_dump_mgr Data_storage_format_(byte v) {data_storage_format = v; return this;} private byte data_storage_format = gplx.core.ios.streams.Io_stream_.Tid_gzip;
+	public byte Data_storage_format()	{return data_storage_format;} public Xoi_dump_mgr Data_storage_format_(byte v) {data_storage_format = v; return this;} private byte data_storage_format = gplx.core.ios.streams.Io_stream_tid_.Tid__gzip;
 	public long Db_text_max()			{return db_text_max;}			private long db_text_max			= (long)3000 * Io_mgr.Len_mb;
 	public long Db_categorylinks_max()	{return db_categorylinks_max;}	private long db_categorylinks_max	= (long)3600 * Io_mgr.Len_mb;
 	public long Db_wikidata_max()		{return db_wikidata_max;}		private long db_wikidata_max		= (long)3600 * Io_mgr.Len_mb;
@@ -38,8 +38,8 @@ public class Xoi_dump_mgr implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_server_urls_))						server_urls = m.ReadStrAryIgnore("v", ",", "\n");
 		else if (ctx.Match(k, Invk_custom_cmds))						return String_.Concat_with_str(",", custom_cmds);
 		else if	(ctx.Match(k, Invk_custom_cmds_))						custom_cmds = String_.Ary_filter(m.ReadStrAry("v", ","), Xoi_cmd_mgr.Wiki_cmds_valid);
-		else if (ctx.Match(k, Invk_data_storage_format))				return Io_stream_.Obsolete_to_str(data_storage_format);
-		else if	(ctx.Match(k, Invk_data_storage_format_))				data_storage_format = Io_stream_.Obsolete_to_tid(m.ReadStr("v"));
+		else if (ctx.Match(k, Invk_data_storage_format))				return Io_stream_tid_.Obsolete_to_str(data_storage_format);
+		else if	(ctx.Match(k, Invk_data_storage_format_))				data_storage_format = Io_stream_tid_.Obsolete_to_tid(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_data_storage_format_list))			return Options_data_storage_format_list;
 		else if	(ctx.Match(k, Invk_db_text_max))						return db_text_max / Io_mgr.Len_mb;
 		else if	(ctx.Match(k, Invk_db_text_max_))						db_text_max = m.ReadLong("v") * Io_mgr.Len_mb;

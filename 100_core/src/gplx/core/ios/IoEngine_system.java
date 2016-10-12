@@ -638,7 +638,7 @@ class Io_stream_rdr_http implements Io_stream_rdr {
 	public Io_stream_rdr_http(IoEngine_xrg_downloadFil xrg) {
 		this.xrg = xrg;
 	}	private IoEngine_xrg_downloadFil xrg;
-	public byte Tid() {return Io_stream_.Tid_raw;}
+	public byte Tid() {return Io_stream_tid_.Tid__raw;}
 	public boolean Exists() {return exists;} private boolean exists = false;
 	public Io_url Url() {return url;} public Io_stream_rdr Url_(Io_url v) {url = v; return this;} private Io_url url;
 	public long Len() {return len;} public Io_stream_rdr Len_(long v) {len = v; return this;} private long len = IoItmFil.Size_invalid;	// NOTE: must default size to -1; DATE:2014-06-21	

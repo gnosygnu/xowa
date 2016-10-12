@@ -20,23 +20,23 @@ import org.junit.*;
 public class Xow_url_parser__proto_tst {
 	private final    Xow_url_parser_fxt tstr = new Xow_url_parser_fxt();
 	@Test  public void Relative() {
-		tstr.Run_parse("//en.wikipedia.org/wiki/A").Chk_wiki("en.wikipedia.org").Chk_page("A");
+		tstr.Exec__parse("//en.wikipedia.org/wiki/A").Test__wiki("en.wikipedia.org").Test__page("A");
 	}
 	@Test  public void Http__basic() {
-		tstr.Run_parse("http://en.wikipedia.org/wiki/A").Chk_wiki("en.wikipedia.org").Chk_page("A");
+		tstr.Exec__parse("http://en.wikipedia.org/wiki/A").Test__wiki("en.wikipedia.org").Test__page("A");
 	}
 	@Test  public void Upload__basic() { 
 		tstr.Prep_add_xwiki_to_user("commons.wikimedia.org");	// NOTE: need to add xwiki to be able to resolve "/commons/"
-		tstr.Run_parse("http://upload.wikimedia.org/wikipedia/commons/a/ab/C.svg").Chk_wiki("commons.wikimedia.org").Chk_page("File:C.svg");	// orig
-		tstr.Run_parse("http://upload.wikimedia.org/wikipedia/commons/thumb/7/70/A.png/220px-A.png").Chk_wiki("commons.wikimedia.org").Chk_page("File:A.png"); // thum
+		tstr.Exec__parse("http://upload.wikimedia.org/wikipedia/commons/a/ab/C.svg").Test__wiki("commons.wikimedia.org").Test__page("File:C.svg");	// orig
+		tstr.Exec__parse("http://upload.wikimedia.org/wikipedia/commons/thumb/7/70/A.png/220px-A.png").Test__wiki("commons.wikimedia.org").Test__page("File:A.png"); // thum
 	}
 	@Test  public void File__basic() {
-		tstr.Run_parse("file:///C:/a/b/c").Chk_tid(Xoa_url_.Tid_file);
+		tstr.Exec__parse("file:///C:/a/b/c").Test__tid(Xoa_url_.Tid_file);
 	}
 	@Test  public void Ftp__basic() {
-		tstr.Run_parse("ftp://en.wikipedia.org/wiki/A").Chk_tid(Xoa_url_.Tid_inet);
+		tstr.Exec__parse("ftp://en.wikipedia.org/wiki/A").Test__tid(Xoa_url_.Tid_inet);
 	}
 	@Test  public void Extended() {
-		tstr.Run_parse("http://en.wikipedia.org/w/index.php?A=B").Chk_wiki("en.wikipedia.org").Chk_page("index.php").Chk_qargs("?A=B").Chk_anch(null);
+		tstr.Exec__parse("http://en.wikipedia.org/w/index.php?A=B").Test__wiki("en.wikipedia.org").Test__page("index.php").Test__qargs("?A=B").Test__anch(null);
 	}
 }

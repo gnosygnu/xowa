@@ -110,7 +110,7 @@ public class Xof_bin_mgr {
 				boolean resized = Resize(exec_tid, fsdb, file_is_orig, orig, trg);
 				if (!resized) continue;
 				fsdb.File_exists_y_();
-				rv = Io_stream_rdr_.file_(trg);									// return stream of resized url; (result of imageMagick / inkscape)
+				rv = Io_stream_rdr_.New__raw(trg);									// return stream of resized url; (result of imageMagick / inkscape)
 				rv.Open();
 				return rv;
 			}
@@ -151,7 +151,7 @@ public class Xof_bin_mgr {
 				if (save_to_fsys) {	// noop; already saved to trg
 				}
 				else {
-					Io_stream_rdr rdr = Io_stream_rdr_.file_(trg);				// return stream of resized url; (result of imageMagick / inkscape)
+					Io_stream_rdr rdr = Io_stream_rdr_.New__raw(trg);				// return stream of resized url; (result of imageMagick / inkscape)
 					rdr.Open();
 					rdr_wrapper.Rdr_(rdr);
 				}

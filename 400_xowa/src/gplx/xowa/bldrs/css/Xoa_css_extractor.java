@@ -240,7 +240,6 @@ public class Xoa_css_extractor {
 		int prv_pos = 0; 
 		int css_find_bgn_len = Css_find_bgn.length;
 		byte[] protocol_prefix_bry = Bry_.new_u8(protocol_prefix);
-		Gfo_url gfo_url = new Gfo_url();
 		while (true) {
 			int url_bgn = Bry_find_.Find_fwd(raw, Css_find_bgn, prv_pos);	 				if (url_bgn == Bry_find_.Not_found) break;	// nothing left; stop
 			url_bgn += css_find_bgn_len;
@@ -249,7 +248,7 @@ public class Xoa_css_extractor {
 			css_url_bry = Bry_.Replace(css_url_bry, Css_amp_find, Css_amp_repl);		// &amp; -> &
 			css_url_bry = url_encoder.Decode(css_url_bry);								// %2C ->		%7C -> |
 			css_url_bry = Xoa_css_extractor.Url_root_fix(wiki_domain, css_url_bry);
-			url_parser.Parse(gfo_url, css_url_bry, 0, css_url_bry.length);
+			Gfo_url gfo_url = url_parser.Parse(css_url_bry, 0, css_url_bry.length);
 			if (	gfo_url.Protocol_tid() == Gfo_protocol_itm.Tid_relative_1			// if rel url, add protocol_prefix DATE:2015-08-01
 				||	(Env_.Mode_testing() && gfo_url.Protocol_tid() == Gfo_protocol_itm.Tid_unknown))	// TEST:
 				css_url_bry = Bry_.Add(protocol_prefix_bry, css_url_bry);

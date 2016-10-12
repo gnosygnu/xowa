@@ -48,8 +48,7 @@ public class Fsd_bin_tbl implements Rls_able {
 			stmt_insert = conn.Stmt_insert(tbl_name, flds);
 			tmp_bfr = Bry_bfr_.Reset(Io_mgr.Len_kb);
 		}
-		byte[] bin_ary = null;
-		bin_ary = Io_stream_rdr_.Load_all_as_bry(tmp_bfr, bin_rdr);
+		byte[] bin_ary = Io_stream_rdr_.Load_all_as_bry(tmp_bfr, bin_rdr);
 		stmt_insert.Clear()
 		.Val_int(fld_owner_id, id)
 		.Val_byte(fld_owner_tid, tid)
@@ -62,7 +61,7 @@ public class Fsd_bin_tbl implements Rls_able {
 		byte[] rv = Select(owner_id, null);
 		return rv == null
 			? Io_stream_rdr_.Noop
-			: Io_stream_rdr_.mem_(rv);
+			: Io_stream_rdr_.New__mem(rv);
 	}
 	public boolean Select_to_url(int owner_id, Io_url url) {
 		saved_in_parts.Val_n();

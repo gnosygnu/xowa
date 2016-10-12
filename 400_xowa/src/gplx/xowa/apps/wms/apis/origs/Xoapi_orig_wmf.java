@@ -46,7 +46,8 @@ public class Xoapi_orig_wmf extends Xoapi_orig_base {
 
 			if (Parse_xml_val(tmp_rng, usr_dlg, xml, xml_len, pos, Bry_xml_descriptionurl)) {
 				byte[] file_url = Bry_.Mid(xml, tmp_rng.Val_0(), tmp_rng.Val_1());
-				orig_wiki = gplx.xowa.wikis.xwikis.Xow_xwiki_mgr.Get_domain_from_url(url_parser, url, file_url);
+				Gfo_url url = url_parser.Parse(file_url, 0, file_url.length);
+				orig_wiki = url.Segs__get_at_1st();
 				byte[] page = Xoa_ttl.Replace_spaces(url.Segs__get_at_nth());
 				int colon_pos = Bry_find_.Find_fwd(page, Byte_ascii.Colon, 0, page.length);
 				if (colon_pos != Bry_find_.Not_found)
@@ -58,7 +59,7 @@ public class Xoapi_orig_wmf extends Xoapi_orig_base {
 		}
 	}
 	private static Int_2_ref tmp_rng = new Int_2_ref();
-	private static Gfo_url_parser url_parser = new Gfo_url_parser(); private static Gfo_url url = new Gfo_url();
+	private static Gfo_url_parser url_parser = new Gfo_url_parser();
 	private static boolean Parse_xml_val(Int_2_ref rv, Gfo_usr_dlg usr_dlg, byte[] xml, int xml_len, int pos, byte[] key) {
 		int bgn = 0, end = 0;
 		bgn = Bry_find_.Find_fwd(xml, key, pos, xml_len); if (bgn == Bry_find_.Not_found) return false;

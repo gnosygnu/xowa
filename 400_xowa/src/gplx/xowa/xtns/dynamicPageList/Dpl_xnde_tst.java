@@ -307,9 +307,10 @@ class Dpl_xnde_fxt {
 			ary[i] = Dpl_page_mok.new_(++next_id, ttls[i]);
 		Init__create_ctg_pages(ctg, ary);
 	}
-	public void Init__create_ctg_pages(String ctg, Dpl_page_mok... pages) {
-		Xoctg_catpage_ctg captage_ctg = new Xoctg_catpage_ctg(Bry_.new_u8(ctg));
+	public void Init__create_ctg_pages(String ctg_ttl, Dpl_page_mok... pages) {
+		Xoctg_catpage_ctg ctg = new Xoctg_catpage_ctg(1, Bry_.new_u8(ctg_ttl));
 		int pages_len = pages.length;
+		Xoctg_catpage_tmp tmp = new Xoctg_catpage_tmp();
 		for (int i = 0; i < pages_len; i++) {
 			Dpl_page_mok page = pages[i];
 			int id = page.Id();
@@ -320,12 +321,13 @@ class Dpl_xnde_fxt {
 				fxt.Init_page_create(ttl_str, ttl_str);
 				fxt.Init_id_create (id, 0, 0, false, 5, Xow_ns_.Tid__main, ttl_str);
 			}
-			Xoctg_catpage_itm captage_itm = new Xoctg_catpage_itm(page.Id(), ttl, ttl.Page_db());
-			captage_ctg.Pages().Itms__add(captage_itm);
+			byte tid = gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr.Tid__page;
+			Xoctg_catpage_itm catpage_itm = Xoctg_catpage_itm.New_by_ttl(tid, page.Id(), ttl);
+			tmp.Add(catpage_itm);
 		}
-		captage_ctg.Make_itms();
-		Xoctg_catpage_mgr catpage_mgr = fxt.Wiki().Html_mgr().Catpage_mgr();
-		catpage_mgr.Cache__add(Bry_.new_u8("Category:" + ctg), captage_ctg);
+		tmp.Make_by_ctg(ctg);
+		Xoctg_catpage_mgr catpage_mgr = fxt.Wiki().Ctg__catpage_mgr();
+		catpage_mgr.Cache__add(Bry_.new_u8("Category:" + ctg_ttl), ctg);
 	}
 	public String Make__html__itms__null(String... pages) {return this.Make__html(null, pages);}
 	public String Make__html(String itm_html, String... pages) {

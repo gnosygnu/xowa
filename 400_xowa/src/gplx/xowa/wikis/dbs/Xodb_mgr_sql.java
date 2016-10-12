@@ -45,7 +45,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, Gfo_invk {
 		core_data_mgr.Tbl__cfg().Insert_byte(grp, key, category_version);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_data_storage_format))				return Io_stream_.Obsolete_to_str(core_data_mgr.Props().Zip_tid_text());
+		if		(ctx.Match(k, Invk_data_storage_format))				return Io_stream_tid_.Obsolete_to_str(core_data_mgr.Props().Zip_tid_text());
 		else if	(ctx.Match(k, Invk_data_storage_format_))				{}	// SERIALIZED:000.sqlite3|xowa_cfg; ignore; read from Xow_db_props
 		else if	(ctx.Match(k, Invk_category_version))					return category_version;
 		else if	(ctx.Match(k, Invk_category_version_))					category_version = m.ReadByte("v");

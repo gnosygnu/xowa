@@ -32,7 +32,7 @@ class Xodel_make_mgr {
 		, "FROM    xfer_regy xr"
 		, "WHERE   xr.lnki_ttl     = fsdb_regy.fsdb_name"
 		, "AND     xr.file_is_orig = fsdb_regy.fsdb_is_orig"
-		, "AND     xr.orig_repo    = fsdb_regy.fsdb_repo"
+		// , "AND     xr.orig_repo    = fsdb_regy.fsdb_repo"	// TOMBSTONE: do no reinstate; some images exist in both repos, and this will delete images from one repo; DATE:2016-09-28
 		, "AND     xr.file_w       = fsdb_regy.fsdb_w"
 		, "AND     xr.lnki_time    = fsdb_regy.fsdb_time"
 		, "AND     xr.lnki_page    = fsdb_regy.fsdb_page"

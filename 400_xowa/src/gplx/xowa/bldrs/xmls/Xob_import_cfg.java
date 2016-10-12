@@ -49,12 +49,12 @@ public class Xob_import_cfg {
 				return Io_stream_rdr_process.new_(process.Exe_url(), src_fil_bz2, process.Xto_process_bldr_args(src_fil_bz2.Raw()));
 			}
 			else
-				return Io_stream_rdr_.bzip2_(src_fil_bz2);
+				return Io_stream_rdr_.New__bzip2(src_fil_bz2);
 		}
 		else {
 			Chk_file_ext(wiki.Appe(), src_fil_xml, ".xml", "bz2");
 			src_fil = src_fil_xml; src_rdr_len = Io_mgr.Instance.QueryFil(src_fil_xml).Size();
-			return Io_stream_rdr_.file_(src_fil_xml);
+			return Io_stream_rdr_.New__raw(src_fil_xml);
 		}
 	}
 	private static void Chk_file_ext(Xoae_app app, Io_url fil, String expd_ext, String alt_ext) {

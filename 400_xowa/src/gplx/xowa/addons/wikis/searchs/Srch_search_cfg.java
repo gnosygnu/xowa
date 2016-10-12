@@ -38,8 +38,7 @@ public class Srch_search_cfg implements Gfo_invk {
 	public void Args_default_str_(String v) {
 		this.args_default_str = v;
 		byte[] bry = Bry_.new_a7("http://x.org/a?" + v);
-		Gfo_url tmp_url = new Gfo_url();
-		app.User().Wikii().Utl__url_parser().Url_parser().Parse(tmp_url, bry, 0, bry.length);
+		Gfo_url tmp_url = app.User().Wikii().Utl__url_parser().Url_parser().Parse(bry, 0, bry.length);
 		args_default = tmp_url.Qargs();
 	}
 	private Srch_search_addon addon;

@@ -32,7 +32,7 @@ public class Xosql_dump_parser {
 		try {
 			// init bfrs, rdr
 			Bry_bfr val_bfr = Bry_bfr_.New();
-			rdr = Io_buffer_rdr.new_(Io_stream_rdr_.new_by_url_(src_fil), src_rdr_bfr_len);
+			rdr = Io_buffer_rdr.new_(Io_stream_rdr_.New_by_url(src_fil), src_rdr_bfr_len);
 			byte[] bfr = rdr.Bfr(); int bfr_len = rdr.Bfr_len(), fld_idx = 0, cur_pos = 0;
 
 			this.tbl_flds = Identify_flds(cbk_flds, bfr);

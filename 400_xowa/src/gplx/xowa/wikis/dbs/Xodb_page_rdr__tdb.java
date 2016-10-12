@@ -49,7 +49,7 @@ public class Xodb_page_rdr__tdb implements Xodb_page_rdr {
 					continue;
 				}
 				this.cur_file = cur_file_ary[cur_file_idx];
-				byte[] bry = Io_stream_rdr_.Load_all(cur_file);
+				byte[] bry = Io_mgr.Instance.LoadFilBry(cur_file);
 				cur_xdat_file.Clear().Parse(bry, bry.length, cur_file);
 				this.cur_xdat_len = cur_xdat_file.Count();
 				this.cur_xdat_idx = -1;

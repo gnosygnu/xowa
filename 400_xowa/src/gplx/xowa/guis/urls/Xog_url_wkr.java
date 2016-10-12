@@ -26,24 +26,27 @@ public class Xog_url_wkr {
 	private Xoae_app app; private Xog_win_itm win; private Xowe_wiki wiki; private Xoae_page page;
 	private final    Xof_img_size img_size = new Xof_img_size(); private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	private final    Gfo_url_encoder fsys_lnx_encoder = Gfo_url_encoder_.New__fsys_lnx().Make();
-	public Xog_url_wkr Parse(Xog_win_itm win, String href_str) {
-		if (href_str == null) return this;	// text is not link; return;
+	public Xoa_url Parse(Xog_win_itm win, String href_str) {
+		if (href_str == null) return tmp_url;	// text is not link; return;
 		byte[] href_bry = Bry_.new_u8(href_str);
 		this.win = win; this.app = win.App(); 
 		this.page = win.Active_page();
 		this.wiki = win.Active_tab().Wiki();
 		app.Html__href_parser().Parse_as_url(tmp_url, href_bry, wiki, page.Ttl().Page_url());
-		return this;
+		return tmp_url;
 	}
-	public Xoa_url Exec() {
-		switch (tmp_url.Tid()) {
+	public void Init(Xowe_wiki wiki) {	// TEST:
+		this.wiki = wiki;
+	}
+	public Xoa_url Exec(Xoa_url url) {
+		switch (url.Tid()) {
 			case Xoa_url_.Tid_unknown:		return Xoa_url.Null;										// unknown; return null which will become a noop
 			case Xoa_url_.Tid_inet:			return Exec_url_http(app);									// http://site.org
 			case Xoa_url_.Tid_anch:			return Exec_url_anchor(win);								// #anchor
 			case Xoa_url_.Tid_xcmd:			return Exec_url_xowa(app);									// xowa:app.version or /xcmd/app.version
-			case Xoa_url_.Tid_file:			return Exec_url_file(app, wiki, page, win, tmp_url.Raw());	// file:///xowa/A.png
-			case Xoa_url_.Tid_page:			return Exec_url_page(app, wiki, page, win, tmp_url.Raw());	// Page /wiki/Page
-			default:						throw Err_.new_unhandled(tmp_url.Tid());
+			case Xoa_url_.Tid_file:			return Exec_url_file(app, wiki, page, win, url.Raw());		// file:///xowa/A.png
+			case Xoa_url_.Tid_page:			return Exec_url_page(wiki, url.Orig());						// /wiki/Page
+			default:						throw Err_.new_unhandled(url.Tid());
 		}
 	}
 	private Xoa_url Exec_url_xowa(Xoae_app app) {		// EX: xowa:app.version
@@ -90,24 +93,13 @@ public class Xog_url_wkr {
 		}
 		return Rslt_handled;
 	}
-	private Xoa_url Exec_url_page(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xog_win_itm win, byte[] href_bry) {	// EX: "Page"; "/wiki/Page"; // rewritten; DATE:2014-01-19
-		Xoa_url rv = wiki.Utl__url_parser().Parse(href_bry);// needed for query_args
-		Gfo_qarg_itm[] qargs = rv.Qargs_ary();
-		int qargs_len = qargs.length;
-		if (qargs_len > 0) {	// remove anchors from qargs; EX: "to=B#mw_pages"
-			for (int i = 0; i < qargs_len; i++) {
-				Gfo_qarg_itm arg = qargs[i];
-				int anch_pos = Bry_find_.Find_bwd(arg.Val_bry(), Byte_ascii.Hash);	// NOTE: must .FindBwd to handle Category args like de.wikipedia.org/wiki/Kategorie:Begriffskl%C3%A4rung?pagefrom=#::12%20PANZERDIVISION#mw-pages; DATE:2013-06-18
-				if (anch_pos != Bry_find_.Not_found)
-					arg.Val_bry_(Bry_.Mid(arg.Val_bry(), 0, anch_pos));
-			}				
-		}
-		return rv;
+	private Xoa_url Exec_url_page(Xowe_wiki wiki, byte[] href_bry) {	// EX: "Page"; "/wiki/Page"; // rewritten; DATE:2014-01-19
+		return wiki.Utl__url_parser().Parse(href_bry);
 	}
 	public static Xoa_url Rslt_handled = null;
 	public static Xoa_url Exec_url(Xog_win_itm win, String href_str) {
 		Xog_url_wkr url_wkr = new Xog_url_wkr();
-		url_wkr.Parse(win, href_str);
-		return url_wkr.Exec();
+		Xoa_url url = url_wkr.Parse(win, href_str);
+		return url_wkr.Exec(url);
 	}
 }

@@ -190,7 +190,7 @@ public class IoEngine_memory extends IoEngine_base {
 			return Io_stream_rdr_.Noop;
 		}
 		byte[] bry = Bry_.new_u8(FetchFil(Io_url_.mem_fil_(xrg.Src())).Text());
-		return Io_stream_rdr_.mem_(bry);
+		return Io_stream_rdr_.New__mem(bry);
 	}
 
 	IoItmHash dirs = IoItmHash.new_();

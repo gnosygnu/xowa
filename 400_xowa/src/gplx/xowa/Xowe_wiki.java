@@ -29,7 +29,7 @@ import gplx.xowa.addons.wikis.ctgs.*;
 import gplx.xowa.guis.cbks.*; import gplx.xowa.guis.views.*;
 import gplx.xowa.xtns.gallery.*; import gplx.xowa.xtns.pfuncs.*; 
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*;
-import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
+import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
 public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	private boolean init_in_process = false;
 	public Xowe_wiki(Xoae_app app, Xol_lang_itm lang, Xow_ns_mgr ns_mgr, Xow_domain_itm domain_itm, Io_url wiki_dir) {
@@ -78,6 +78,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		cache_mgr = new Xow_cache_mgr(this);
 		/*if (Bry_.Eq(domain_bry, Xow_domain_itm_.Bry__home))*/ xwiki_mgr.Add_by_atrs(domain_bry, domain_bry);	// add full name to xwiki_mgr; needed for lookup in home ns; EX: [[home:Help/Contents]]
 		this.lnki_bldr = new Xoh_lnki_bldr(app, href_wtr);
+		this.ctg_catpage_mgr = new Xoctg_catpage_mgr(this);
 	}
 	public Gfo_evt_mgr				Evt_mgr() {return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;
 	public Xow_ns_mgr				Ns_mgr() {return ns_mgr;} private final    Xow_ns_mgr ns_mgr;
@@ -105,7 +106,8 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xoh_page_wtr_mgr			Html__wtr_mgr() {return html_mgr.Page_wtr_mgr();}
 	public Xoh_lnki_bldr			Html__lnki_bldr() {return lnki_bldr;}  private final    Xoh_lnki_bldr lnki_bldr;
 	public Xoh_href_wtr				Html__href_wtr() {return href_wtr;} private final    Xoh_href_wtr href_wtr = new Xoh_href_wtr();
-	public Xoctg_pagebox_wtr		Html__ctg_pagebox_wtr() {return ctg_pagebox_wtr;} private final    Xoctg_pagebox_wtr ctg_pagebox_wtr = new Xoctg_pagebox_wtr();
+	public Xoctg_pagebox_wtr		Ctg__pagebox_wtr() {return ctg_pagebox_wtr;} private final    Xoctg_pagebox_wtr ctg_pagebox_wtr = new Xoctg_pagebox_wtr();
+	public Xoctg_catpage_mgr		Ctg__catpage_mgr() {return ctg_catpage_mgr;} private final    Xoctg_catpage_mgr ctg_catpage_mgr;
 	public boolean						Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;
 	public Xow_url_parser			Utl__url_parser() {return url__parser;} private final    Xow_url_parser url__parser;
 	public Xow_mw_parser_mgr		Mw_parser_mgr() {return mw_parser_mgr;} private final    Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
@@ -266,6 +268,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		else if	(ctx.Match(k, Invk_maint))				return maint_mgr;
 		else if	(ctx.Match(k, Invk_domain))				return domain_str;
 		else if	(ctx.Match(k, Invk_xtns))				return xtn_mgr;
+		else if	(ctx.Match(k, Invk_catpage_mgr))		return ctg_catpage_mgr;
 		else if	(ctx.Match(k, Invk_hdump_enabled_))		this.html_mgr__hdump_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, gplx.xowa.apps.apis.xowa.wikis.langs.Xoap_lang_variants.Evt_current_changed))	lang.Vnt_mgr().Cur_itm_(m.ReadBry("v"));
 		else	return Gfo_invk_.Rv_unhandled;
@@ -280,6 +283,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	, Invk_xtns = "xtns", Invk_import_mgr = "import"
 	, Invk_db_mgr_to_sql_ = "db_mgr_to_sql_"
 	, Invk_domain = "domain", Invk_maint = "maint", Invk_hdump_enabled_ = "hdump_enabled_"
+	, Invk_catpage_mgr = "catpage_mgr"
 	;
 	public static final String	Invk_db_mgr = "db_mgr";	// SERIALIZED:000.sqlite3|xowa_cfg
 	public static final String Invk_lang_ = "lang_";

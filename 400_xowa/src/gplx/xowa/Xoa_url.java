@@ -21,6 +21,7 @@ import gplx.xowa.htmls.hrefs.*;
 public class Xoa_url {
 	public int				Tid() {return tid;} private int tid;
 	public byte[]			Raw() {return raw;} private byte[] raw = Bry_.Empty;
+	public byte[]			Orig() {return orig;} private byte[] orig;
 	public byte[]			Wiki_bry() {return wiki_bry;} public Xoa_url Wiki_bry_(byte[] v) {wiki_bry = v; return this;} private byte[] wiki_bry;
 	public byte[]			Page_bry() {return page_bry;} public Xoa_url Page_bry_(byte[] v) {page_bry = v; return this;} private byte[] page_bry;
 	public byte[]			Anch_bry() {return anch_bry;} public Xoa_url Anch_bry_(byte[] v) {anch_bry = v; return this;} private byte[] anch_bry;
@@ -35,10 +36,10 @@ public class Xoa_url {
 	public boolean				Wiki_is_missing() {return wiki_is_missing;} private boolean wiki_is_missing;
 	public boolean				Wiki_is_same() {return wiki_is_same;} private boolean wiki_is_same;
 	public boolean				Page_is_main() {return page_is_main;} private boolean page_is_main;
-	public Xoa_url Ctor(int tid, byte[] raw, byte protocol_tid, byte[] protocol_bry, boolean protocol_is_relative
+	public Xoa_url Ctor(int tid, byte[] orig, byte[] raw, byte protocol_tid, byte[] protocol_bry, boolean protocol_is_relative
 		, byte[] wiki, byte[] page, Gfo_qarg_itm[] qargs,  byte[] anch
 		, byte[][] segs_ary, byte[] vnt_bry, boolean wiki_is_missing, boolean wiki_is_same, boolean page_is_main) {
-		this.tid = tid; this.raw = raw;
+		this.tid = tid; this.orig = orig; this.raw = raw;
 		this.protocol_tid = protocol_tid; this.protocol_bry = protocol_bry; this.protocol_is_relative = protocol_is_relative;
 		this.wiki_bry = wiki; this.page_bry = page; this.qargs_ary = qargs; this.anch_bry = anch;
 		this.segs_ary = segs_ary; this.vnt_bry = vnt_bry;
@@ -92,21 +93,16 @@ public class Xoa_url {
 			if (tid_is_anch)
 				page = null;
 		}
-		byte[] rv = Bry_.Add
-		( wiki, wiki_spr												// add wiki_key;	EX: "en.wikipedia.org", "/wiki/"
-		, page															// add page;		EX: "A"
-		, anch_spr, anch												// add anch			EX: "#", "B"
-		);
+
+		Bry_bfr bfr = Bry_bfr_.New();
+		bfr.Add_safe(wiki).Add_safe(wiki_spr);							// add wiki_key;	EX: "en.wikipedia.org", "/wiki/"
+		bfr.Add_safe(page);												// add page;		EX: "A"
 		if (show_qargs || qargs_ary.length > 0) {
-			Bry_bfr bfr = Bry_bfr_.New();
-			try {
-				bfr.Add(rv);
-				Gfo_qarg_mgr_old.Concat_bfr(bfr, gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, qargs_ary);
-				return bfr.To_bry_and_clear();
-			} finally {bfr.Mkr_rls();}
+			Gfo_qarg_mgr_old.Concat_bfr(bfr, gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, qargs_ary);
 		}
-		else
-			return rv;
+		if (anch != null)												// NOTE: anch must go last (after qargs); DATE:2016-10-08
+			bfr.Add(anch_spr).Add(anch);								// add anch			EX: "#", "B"
+		return bfr.To_bry_and_clear();
 	}
 	public static final    Xoa_url Null = null;
 	public static Xoa_url blank() {return new Xoa_url();}

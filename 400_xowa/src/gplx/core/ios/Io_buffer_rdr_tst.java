@@ -22,7 +22,7 @@ public class Io_buffer_rdr_tst {
 		Io_mgr.Instance.InitEngine_mem();
 		fil = Io_url_.mem_fil_("mem/byteStreamRdr.txt");
 		ini_Write("0123456789");
-		rdr = Io_buffer_rdr.new_(Io_stream_rdr_.file_(fil), 4);
+		rdr = Io_buffer_rdr.new_(Io_stream_rdr_.New__raw(fil), 4);
 	}	Io_buffer_rdr rdr; Io_url fil;
 	@After public void teardown() {rdr.Rls();}
 	@Test  public void Bfr_load_all() {

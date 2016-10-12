@@ -44,15 +44,45 @@ class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 			bfr.Add(label);
 	}
 	public void Visit_quantity(Wbase_claim_quantity itm) {
-		byte[] amount_bry = itm.Amount();
-		long val = Bry_.To_long_or(amount_bry, Byte_ascii.Comma_bry, 0, amount_bry.length, 0);	// NOTE: must cast to long for large numbers; EX:{{#property:P1082}} PAGE:en.w:Earth; DATE:2015-08-02
+		// get val
+		byte[] val_bry = itm.Amount();
+		long val = Bry_.To_long_or(val_bry, Byte_ascii.Comma_bry, 0, val_bry.length, 0);	// NOTE: must cast to long for large numbers; EX:{{#property:P1082}} PAGE:en.w:Earth; DATE:2015-08-02
+
+		// get lo, hi
+		long lo = itm.Lbound_as_num().To_long();
+		long hi = itm.Ubound_as_num().To_long();
+
+		// fmt val
 		Xol_lang_itm lang = app.Lang_mgr().Get_by(lang_key);
-		bfr.Add(lang.Num_mgr().Format_num_by_long(val));	// amount; EX: 1,234
-		if (itm.Lbound_as_num().To_long() != val && itm.Ubound_as_num().To_long() != val) {	// NOTE: do not output ± if lbound == val == ubound; PAGE:en.w:Tintinan DATE:2015-08-02
-			bfr.Add(Bry__quantity_margin_of_error);			// symbol: EX: ±
+		if (lo == val && hi == val)	// lo, hi, val are same; print val only;
+			bfr.Add(lang.Num_mgr().Format_num_by_long(val));		// amount; EX: 1,234
+		else {
+			long lo_dif = val - lo;
+			long hi_dif = hi - val;
+			if (lo_dif == hi_dif) {	// lo_dif, hi_dif are same; print val±dif
+				bfr.Add(lang.Num_mgr().Format_num_by_long(val));	// amount;	EX: 1,234
+				bfr.Add(Bry__quantity_margin_of_error);				// symbol:	EX: ±
+				bfr.Add(lang.Num_mgr().Format_num_by_long(lo_dif));	// amount;	EX: 4
+			}
+			else {					// lo_dif, hi_dif are diff; print lo - hi; this may not be what MW does
+				bfr.Add(lang.Num_mgr().Format_num_by_long(lo));		// lo;		EX: 1,230
+				bfr.Add_byte(Byte_ascii.Dash);						// dash:	EX: -
+				bfr.Add(lang.Num_mgr().Format_num_by_long(hi));		// hi;		EX: 1,238
+			}
+		}
+
+		// output unit
+		bfr.Add_byte_space();
+		int unit_qid_bgn = Bry_find_.Find_fwd(itm.Unit(), Wikidata_url);
+		if (unit_qid_bgn == Bry_find_.Not_found)			// entity missing; just output unit literally
 			bfr.Add(itm.Unit());							// unit;   EX: 1
+		else {												// entity exists; EX:"http://www.wikidata.org/entity/Q11573" (meter)
+			byte[] xid = Bry_.Mid(itm.Unit(), Wikidata_url.length);
+			Wdata_doc entity_doc = wdata_mgr.Doc_mgr.Get_by_xid_or_null(xid);
+			bfr.Add(entity_doc.Label_list__get_or_fallback(lang));
 		}
 	}
+	private static final    byte[] Wikidata_url = Bry_.new_a7("http://www.wikidata.org/entity/");
 	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {
 		Wdata_prop_val_visitor_.Render__geo(bfr, itm.Lat(), itm.Lng());
 	}

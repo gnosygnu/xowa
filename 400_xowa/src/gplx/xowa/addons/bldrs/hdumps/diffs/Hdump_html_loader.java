@@ -39,7 +39,7 @@ class Hdump_html_loader {
 		html_db.Tbl__html().Select_by_page(tmp_hpg);
 
 		// unzip it
-		byte[] html_hzip = stream_zip_mgr.Unzip(Io_stream_.Tid_gzip, tmp_hpg.Db().Html().Html_bry());
+		byte[] html_hzip = stream_zip_mgr.Unzip(Io_stream_tid_.Tid__gzip, tmp_hpg.Db().Html().Html_bry());
 		return wiki.Html__hdump_mgr().Load_mgr().Decode_as_bry(tmp_bfr, tmp_hpg, html_hzip, true);
 	}
 }

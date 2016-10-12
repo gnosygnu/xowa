@@ -52,7 +52,7 @@ public class Xowd_core_db_props {
 		return cfg_tbl.Select_int_or(Cfg_grp, Cfg_key__schema_version, 1) == 1
 			? new Xowd_core_db_props
 			( 1, Xow_db_layout.Itm_lot, Xow_db_layout.Itm_lot, Xow_db_layout.Itm_lot, cfg_tbl.Select_byte_or(Xowe_wiki.Invk_db_mgr, Xodb_mgr_sql.Invk_data_storage_format
-			, Io_stream_.Tid_gzip), Io_stream_.Tid_gzip, Bool_.Y, Bool_.N)
+			, Io_stream_tid_.Tid__gzip), Io_stream_tid_.Tid__gzip, Bool_.Y, Bool_.N)
 			: Cfg_load(cfg_tbl);
 	}
 	private static Xowd_core_db_props Cfg_load(Db_cfg_tbl tbl) {
@@ -78,5 +78,5 @@ public class Xowd_core_db_props {
 	, Cfg_key__hzip_enabled			= "hzip_enabled"
 	, Cfg_key__hzip_mode_is_b256	= "hzip_mode_is_b256"
 	;
-	public static final    Xowd_core_db_props Test = new Xowd_core_db_props(2, Xow_db_layout.Itm_few, Xow_db_layout.Itm_few, Xow_db_layout.Itm_few, Io_stream_.Tid_raw, Io_stream_.Tid_raw, Bool_.Y, Bool_.Y);
+	public static final    Xowd_core_db_props Test = new Xowd_core_db_props(2, Xow_db_layout.Itm_few, Xow_db_layout.Itm_few, Xow_db_layout.Itm_few, Io_stream_tid_.Tid__raw, Io_stream_tid_.Tid__raw, Bool_.Y, Bool_.Y);
 }

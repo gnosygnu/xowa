@@ -17,23 +17,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
 import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.core.intls.ucas.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;	
 public class Xoctg_fmt_ltr implements gplx.core.brys.Bfr_arg {	// "A", "B", "C cont."
 	private final    Xoctg_fmt_itm_base itm_fmt;
 	private Xoctg_catpage_grp grp;
 	private byte[] msg__list_continues;
+	private Uca_ltr_extractor ltr_extractor;
 	public Xoctg_fmt_ltr(Xoctg_fmt_itm_base itm_fmt) {
 		this.itm_fmt = itm_fmt;
 	}
-	public void Init_from_grp(Xow_wiki wiki, Xoctg_catpage_grp grp) {
+	public void Init_from_grp(Xow_wiki wiki, Xoctg_catpage_grp grp, Uca_ltr_extractor ltr_extractor) {
 		this.grp = grp;
 		this.msg__list_continues = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_list_continues);
-		itm_fmt.Init_from_ltr(wiki, grp);
+		this.ltr_extractor = ltr_extractor;
+		itm_fmt.Init_from_ltr(wiki, grp, ltr_extractor);
 	}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		int itm_idx = grp.Bgn();	// itm idx; EX: idx=201 in len=500
-		int itm_end = grp.End();
+		int itm_idx = 0;
+		int itm_end = grp.Itms__len();
 		int itms_len = itm_end - itm_idx; if (itms_len == 0) return;	// no items; exit
 
 		int col_idx = 0;			// col idx; EX: 3 cols; idx = 0, 1, 2
@@ -45,8 +47,9 @@ public class Xoctg_fmt_ltr implements gplx.core.brys.Bfr_arg {	// "A", "B", "C c
 			Xoctg_catpage_itm itm = grp.Itms__get_at(itm_idx);
 
 			// get ltr_head; EX: "C" or "C cont."
-			byte[] itm_sortkey = itm.Sort_key();
-			byte[] ltr_cur = gplx.core.intls.Utf8_.Get_char_at_pos_as_bry(itm_sortkey, 0);
+			byte[] itm_sortkey = itm.Sortkey_handle();
+			// byte[] ltr_cur = gplx.core.intls.Utf8_.Get_char_at_pos_as_bry(itm_sortkey, 0);
+			byte[] ltr_cur = ltr_extractor.Get_1st_ltr(itm_sortkey);
 			byte[] ltr_head = Bry_.Eq(ltr_prv, ltr_cur)
 				? Bry_.Add(ltr_prv, Byte_ascii.Space_bry, msg__list_continues)	// new col uses same ltr as last itm in old col; add "cont."; EX: "C cont."
 				: ltr_cur;	// else, just use ltr; EX: "C"				

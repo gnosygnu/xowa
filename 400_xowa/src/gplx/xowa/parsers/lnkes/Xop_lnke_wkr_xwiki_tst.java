@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_lnke_wkr_xwiki_tst {
-	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Xwiki() {
 		fxt.App().Usere().Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_a7("en.wikipedia.org"), Bry_.new_a7("en.wikipedia.org"));
 		fxt.Test__parse__wtxt_to_html("[http://en.wikipedia.org/wiki/A a]", "<a href='/site/en.wikipedia.org/wiki/A'>a</a>");
@@ -49,7 +49,11 @@ public class Xop_lnke_wkr_xwiki_tst {
 	}
 	@Test  public void Xwiki__qargs() {	// PURPOSE: fix null ref error; PAGE:en.w:Wikipedia:Template_standardisation/demometa DATE:2015-08-02
 		fxt.Init_xwiki_add_user_("en.wikipedia.org");
-		fxt.Test__parse__wtxt_to_html("[http://en.wikipedia.org/w/index.php?action&#61;edit&preload&#61;Template:Afd2+starter&editintro&#61;Template:Afd3+starter&title&#61;Wikipedia:Articles+for+deletion/Template_standardisation/demometa]"
-			, "<a href='/site/en.wikipedia.org/wiki/index.php?action=&#61;edit=&preload=&#61;Template:Afd2+starter=&editintro=&#61;Template:Afd3+starter=&title=&='>[1]</a>");
+		fxt.Test__parse__wtxt_to_html
+		( "[http://en.wikipedia.org/w/index.php?action&#61;edit&preload&#61;Template:Afd2+starter&editintro&#61;Template:Afd3+starter&title&#61;Wikipedia:Articles+for+deletion/Template_standardisation/demometa]"
+		// CHANGED: lnke_now decodes html_entities; DATE:2016-10-10
+		//, "<a href='/site/en.wikipedia.org/wiki/index.php?action=&#61;edit=&preload=&#61;Template:Afd2+starter=&editintro=&#61;Template:Afd3+starter=&title=&='>[1]</a>"
+		, "<a href='/site/en.wikipedia.org/wiki/Wikipedia:Articles+for+deletion/Template_standardisation/demometa?action=edit&preload=Template:Afd2+starter&editintro=Template:Afd3+starter&title=Wikipedia:Articles+for+deletion/Template_standardisation/demometa'>[1]</a>"
+		);
 	}
 }

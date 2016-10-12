@@ -103,7 +103,7 @@ public class Xob_xdat_file {
 	public void Save(Io_url url) {
 		Bry_bfr bfr = Bry_bfr_.New();
 		Srl_save_bry(bfr);
-		Io_stream_wtr wtr = Io_stream_wtr_.new_by_url_(url);
+		Io_stream_wtr wtr = Io_stream_wtr_.New_by_url(url);
 		try {
 			wtr.Open();
 			wtr.Write(bfr.Bfr(), 0, bfr.Len());

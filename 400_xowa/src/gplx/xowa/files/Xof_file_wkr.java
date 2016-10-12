@@ -120,7 +120,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 	}
 	public static void Save_bin(Xof_fsdb_itm itm, Fsm_mnt_mgr mnt_mgr, Io_url html_url) {
 		long rdr_len = Io_mgr.Instance.QueryFil(html_url).Size();
-		Io_stream_rdr rdr = gplx.core.ios.streams.Io_stream_rdr_.file_(html_url);
+		Io_stream_rdr rdr = gplx.core.ios.streams.Io_stream_rdr_.New__raw(html_url);
 		try {
 			rdr.Open();
 			Fsm_mnt_itm mnt_itm = mnt_mgr.Mnts__get_insert();

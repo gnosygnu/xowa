@@ -18,102 +18,102 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.net; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Gfo_url_parser_tst {
-	private final Gfo_url_parser_fxt tstr = new Gfo_url_parser_fxt();
+	private final    Gfo_url_parser_fxt tstr = new Gfo_url_parser_fxt();
 	@Test  public void Protocol__relative() {
-		tstr.Run_parse("//en.wikipedia.org").Chk_protocol_tid(Gfo_protocol_itm.Tid_relative_1).Chk_protocol_bry("//").Chk_site("en.wikipedia.org");
+		tstr.Exec__parse("//en.wikipedia.org").Test__protocol_tid(Gfo_protocol_itm.Tid_relative_1).Test__protocol_bry("//").Test__site("en.wikipedia.org");
 	}
 	@Test  public void Protocol__none() {
-		tstr.Run_parse("en.wikipedia.org/wiki/A").Chk_protocol_tid(Gfo_protocol_itm.Tid_unknown).Chk_segs("en.wikipedia.org", "wiki", "A");
+		tstr.Exec__parse("en.wikipedia.org/wiki/A").Test__protocol_tid(Gfo_protocol_itm.Tid_unknown).Test__segs("en.wikipedia.org", "wiki", "A");
 	}
 	@Test  public void Site__parts__3() {
-		tstr.Run_parse("https://en.wikipedia.org").Chk_protocol_tid(Gfo_protocol_itm.Tid_https).Chk_protocol_bry("https://").Chk_segs("en.wikipedia.org");
+		tstr.Exec__parse("https://en.wikipedia.org").Test__protocol_tid(Gfo_protocol_itm.Tid_https).Test__protocol_bry("https://").Test__segs("en.wikipedia.org");
 	}
 	@Test  public void Site__parts__2() {
-		tstr.Run_parse("https://wikipedia.org").Chk_protocol_tid(Gfo_protocol_itm.Tid_https).Chk_segs("wikipedia.org");
+		tstr.Exec__parse("https://wikipedia.org").Test__protocol_tid(Gfo_protocol_itm.Tid_https).Test__segs("wikipedia.org");
 	}
 	@Test  public void Site__parts__1() {
-		tstr.Run_parse("https://wikipedia").Chk_protocol_tid(Gfo_protocol_itm.Tid_https).Chk_segs("wikipedia");
+		tstr.Exec__parse("https://wikipedia").Test__protocol_tid(Gfo_protocol_itm.Tid_https).Test__segs("wikipedia");
 	}
 	@Test   public void Site__slash__none() {
-		tstr.Run_parse("https:site").Chk_protocol_tid(Gfo_protocol_itm.Tid_https).Chk_site("site");
+		tstr.Exec__parse("https:site").Test__protocol_tid(Gfo_protocol_itm.Tid_https).Test__site("site");
+	}
+	@Test   public void Site__slash__eos() {
+		tstr.Exec__parse("https://en.wikipedia.org/").Test__protocol_tid(Gfo_protocol_itm.Tid_https).Test__site("en.wikipedia.org");
 	}
 	@Test  public void Paths__1() {
-		tstr.Run_parse("https://site/A").Chk_segs("site", "A");
+		tstr.Exec__parse("https://site/A").Test__segs("site", "A");
 	}
 	@Test  public void Paths__2() {
-		tstr.Run_parse("https://site/wiki/A").Chk_segs("site", "wiki", "A");
+		tstr.Exec__parse("https://site/wiki/A").Test__segs("site", "wiki", "A");
 	}
 	@Test  public void Paths__n() {
-		tstr.Run_parse("https://site/wiki/A/B/C/D").Chk_segs("site", "wiki", "A", "B", "C", "D");
+		tstr.Exec__parse("https://site/wiki/A/B/C/D").Test__segs("site", "wiki", "A", "B", "C", "D");
 	}
 	@Test  public void Qargs__1() {
-		tstr.Run_parse("https://site/A?B=C").Chk_page("A").Chk_qargs("B", "C");
+		tstr.Exec__parse("https://site/A?B=C").Test__page("A").Test__qargs("B", "C");
 	}
 	@Test  public void Qargs__2() {
-		tstr.Run_parse("https://site/A?B=C&D=E").Chk_page("A").Chk_qargs("B", "C", "D", "E");
+		tstr.Exec__parse("https://site/A?B=C&D=E").Test__page("A").Test__qargs("B", "C", "D", "E");
 	}
 	@Test  public void Qargs__3() {
-		tstr.Run_parse("https://site/A?B=C&D=E&F=G").Chk_page("A").Chk_qargs("B", "C", "D", "E", "F", "G");
+		tstr.Exec__parse("https://site/A?B=C&D=E&F=G").Test__page("A").Test__qargs("B", "C", "D", "E", "F", "G");
 	}
 	@Test  public void Qargs__ques__dupe__ques() {
-		tstr.Run_parse("https://site/A?B?Y=Z").Chk_page("A?B").Chk_qargs("Y", "Z");
+		tstr.Exec__parse("https://site/A?B?Y=Z").Test__page("A?B").Test__qargs("Y", "Z");
 	}
 	@Test  public void Qargs__ques__dupe__amp() {
-		tstr.Run_parse("https://site/A?B=C&D?Y=Z").Chk_page("A?B=C&D").Chk_qargs("Y", "Z");
+		tstr.Exec__parse("https://site/A?B=C&D?Y=Z").Test__page("A?B=C&D").Test__qargs("Y", "Z");
 	}
 	@Test  public void Qargs__ques__dupe__eq() {
-		tstr.Run_parse("https://site/A?B=C?Y=Z").Chk_page("A?B=C").Chk_qargs("Y", "Z");
+		tstr.Exec__parse("https://site/A?B=C?Y=Z").Test__page("A?B=C").Test__qargs("Y", "Z");
 	}
 	@Test  public void Qargs__amp__dupe__ques() {
-		tstr.Run_parse("https://site/A?B&Y=Z").Chk_page("A").Chk_qargs("B", null, "Y", "Z");
+		tstr.Exec__parse("https://site/A?B&Y=Z").Test__page("A").Test__qargs("B", null, "Y", "Z");
 	}
 	@Test  public void Qargs__amp__dupe__amp() {
-		tstr.Run_parse("https://site/A?B=C&D&Y=Z").Chk_page("A").Chk_qargs("B", "C", "D", null, "Y", "Z");
+		tstr.Exec__parse("https://site/A?B=C&D&Y=Z").Test__page("A").Test__qargs("B", "C", "D", null, "Y", "Z");
 	}
 	@Test  public void Qargs__missing_val__0() {
-		tstr.Run_parse("https://site/A?").Chk_page("A?").Chk_qargs();
+		tstr.Exec__parse("https://site/A?").Test__page("A?").Test__qargs();
 	}
 	@Test  public void Qargs__missing_val__2() {
-		tstr.Run_parse("https://site/A?B=C&D&F=G").Chk_page("A").Chk_qargs("B", "C", "D", null, "F", "G");
+		tstr.Exec__parse("https://site/A?B=C&D&F=G").Test__page("A").Test__qargs("B", "C", "D", null, "F", "G");
 	}
 	@Test  public void Qargs__missing_val__n() {
-		tstr.Run_parse("https://site/A?B=C&D=E&F").Chk_page("A").Chk_qargs("B", "C", "D", "E", "F", null);
+		tstr.Exec__parse("https://site/A?B=C&D=E&F").Test__page("A").Test__qargs("B", "C", "D", "E", "F", null);
 	}
 	@Test  public void Qargs__site_less__missing__0() {
-		tstr.Run_parse("A?B").Chk_segs("A?B").Chk_qargs();
+		tstr.Exec__parse("A?B").Test__segs("A?B").Test__qargs();
 	}
 	@Test  public void Qargs__site_less() {
-		tstr.Run_parse("A?B=C&D=E").Chk_site("A").Chk_qargs("B", "C", "D", "E");
+		tstr.Exec__parse("A?B=C&D=E").Test__site("A").Test__qargs("B", "C", "D", "E");
 	}
 	@Test  public void Anch__basic() {
-		tstr.Run_parse("https://site/A#B").Chk_page("A").Chk_anch("B");
+		tstr.Exec__parse("https://site/A#B").Test__page("A").Test__anch("B");
 	}
 	@Test  public void Anch__repeat__2() {
-		tstr.Run_parse("https://site/A#B#C").Chk_page("A").Chk_anch("B#C");
+		tstr.Exec__parse("https://site/A#B#C").Test__page("A").Test__anch("B#C");
 	}
 	@Test  public void Anch__repeat__3() {
-		tstr.Run_parse("https://site/A#B#C#D").Chk_page("A").Chk_anch("B#C#D");
+		tstr.Exec__parse("https://site/A#B#C#D").Test__page("A").Test__anch("B#C#D");
 	}
 	@Test  public void Anch__missing() {
-		tstr.Run_parse("https://site/A#").Chk_page("A#").Chk_anch(null);
+		tstr.Exec__parse("https://site/A#").Test__page("A#").Test__anch(null);
 	}
 	@Test  public void Anch__missing__eos() {
-		tstr.Run_parse("https://site/A#B#").Chk_page("A").Chk_anch("B#");
+		tstr.Exec__parse("https://site/A#B#").Test__page("A").Test__anch("B#");
 	}
 	@Test  public void Anch__qargs__basic() {
-		tstr.Run_parse("https://site/A?B=C&D=E#F").Chk_page("A").Chk_qargs("B", "C", "D", "E").Chk_anch("F");
-	}
-	@Test  public void Anch__qargs__repeat() {
-		tstr.Run_parse("https://site/A?B=C#&D=E#F").Chk_page("A").Chk_qargs("B", "C#", "D", "E").Chk_anch("F");
+		tstr.Exec__parse("https://site/A?B=C&D=E#F").Test__page("A").Test__qargs("B", "C", "D", "E").Test__anch("F");
 	}
 	@Test  public void Anch__site_less() {
-		tstr.Run_parse("A#B").Chk_site("A").Chk_anch("B");
+		tstr.Exec__parse("A#B").Test__site("A").Test__anch("B");
 	}
 	@Test  public void Encode__page() {
-		tstr.Run_parse("http://site/A%27s").Chk_site("site").Chk_page("A's");
+		tstr.Exec__parse("http://site/A%27s").Test__site("site").Test__page("A's");
 	}
 	@Test  public void Protocol_less__qargs() {
-		tstr.Run_parse("Special:Search/Earth?fulltext=yes").Chk_segs("Special:Search", "Earth").Chk_page("Earth").Chk_qargs("fulltext", "yes");
+		tstr.Exec__parse("Special:Search/Earth?fulltext=yes").Test__segs("Special:Search", "Earth").Test__page("Earth").Test__qargs("fulltext", "yes");
 	}
 	@Test  public void Parse_site_fast() {
 		tstr.Test_Parse_site_fast("http://a.org/B"		, "a.org");
@@ -121,4 +121,8 @@ public class Gfo_url_parser_tst {
 		tstr.Test_Parse_site_fast("//a.org/B"			, "a.org");
 		tstr.Test_Parse_site_fast("//a.org/B:C"			, "a.org");
 	}
+	// DELETED: logic isn't right; anch is first # not last; EX: https://en.wikipedia.org/w/index.php?title=Category:2001_albums&pagefrom=Beautiful+#View#mw-pages; DATE:2016-10-10
+	// @Test  public void Anch__qargs__repeat() {
+	//	tstr.Exec__parse("https://site/A?B=C#&D=E#F").Test__page("A").Test__qargs("B", "C#", "D", "E").Test__anch("F");
+	// }
 }

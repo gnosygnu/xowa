@@ -35,7 +35,7 @@ public class Xowd_data_tstr {
 		Xoh_page hpg = new Xoh_page();
 		hpg.Db().Html().Html_bry_(html_bry);
 		byte[] data = html_bry;
-		html_db.Tbl__html().Insert(page_id, 0, gplx.core.ios.streams.Io_stream_.Tid_raw, gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_.Hzip__none, Bry_.Empty, Bry_.Empty, Bry_.Empty, data);
+		html_db.Tbl__html().Insert(page_id, 0, gplx.core.ios.streams.Io_stream_tid_.Tid__raw, gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_.Hzip__none, Bry_.Empty, Bry_.Empty, Bry_.Empty, data);
 	}
 	public void Text__insert(int page_id, String text) {
 		Xow_db_file db = wiki.Data__core_mgr().Db__text();

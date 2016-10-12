@@ -60,6 +60,10 @@ public class Xoh_page_wtr_wkr {
 					if (page_mode == Xopg_page_.Tid_html)	// if html, write page again, but wrap it in html skin this time
 						Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(rv.To_bry_and_clear()));
 					wdata_lang_wtr.Page_(null);
+
+					if (page_mode == Xopg_page_.Tid_read) { // EXPERIMENTAL
+						new gplx.xowa.addons.htmls.includes.Xoh_include_mgr().Write(wiki, page);
+					}
 				}
 			}
 			else
@@ -176,7 +180,7 @@ public class Xoh_page_wtr_wkr {
 		}
 		
 		// if [[Category]], render rest of html (Subcategories; Pages; Files); note that a category may have other html which requires wikitext processing
-		if (ns_id == Xow_ns_.Tid__category) wiki.Html_mgr().Catpage_mgr().Write_catpage(tidy_bfr, wiki, page, hctx);
+		if (ns_id == Xow_ns_.Tid__category) wiki.Ctg__catpage_mgr().Write_catpage(tidy_bfr, page, hctx);
 
 		// tidy html
 		wiki.Html_mgr().Tidy_mgr().Exec_tidy(tidy_bfr, !hctx.Mode_is_hdump(), page.Url_bry_safe());
@@ -192,8 +196,9 @@ public class Xoh_page_wtr_wkr {
 			&&	!wiki.Html_mgr().Importing_ctgs()	// do not show categories if importing categories, page will wait for category import to be done; DATE:2014-10-15
 			) {
 			if (app.Mode().Tid_is_gui()) app.Usr_dlg().Prog_many("", "", "loading categories: count=~{0}", ctgs_len);
-			Xoctg_pagebox_itm[] pagebox_itms = wiki.Html__ctg_pagebox_wtr().Get_catlinks_by_page(wiki, page);
-			wiki.Html__ctg_pagebox_wtr().Write_pagebox(app.Ctg_mgr().Pagecats_grouping_enabled(), bfr, wiki, page, pagebox_itms);
+			Xoctg_pagebox_itm[] pagebox_itms = wiki.Ctg__pagebox_wtr().Get_catlinks_by_page(wiki, page);
+			boolean hidden_enabled = wiki.App().Api_root().Addon().Wikis__ctgs__hidden_enabled();
+			wiki.Ctg__pagebox_wtr().Write_pagebox(hidden_enabled, bfr, wiki, page, pagebox_itms);
 		}
 
 		// translate if variants are enabled

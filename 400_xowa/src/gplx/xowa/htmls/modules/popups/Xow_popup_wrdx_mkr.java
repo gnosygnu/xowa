@@ -57,6 +57,7 @@ public class Xow_popup_wrdx_mkr {
 					case Xop_xnde_tag_.Tid__table: case Xop_xnde_tag_.Tid__tr: case Xop_xnde_tag_.Tid__td: case Xop_xnde_tag_.Tid__th: 
 					case Xop_xnde_tag_.Tid__caption: case Xop_xnde_tag_.Tid__thead: case Xop_xnde_tag_.Tid__tfoot: case Xop_xnde_tag_.Tid__tbody:
 					case Xop_xnde_tag_.Tid__ref: case Xop_xnde_tag_.Tid__gallery: case Xop_xnde_tag_.Tid__imageMap: case Xop_xnde_tag_.Tid__timeline:
+					case Xop_xnde_tag_.Tid__xowa_wiki_setup:
 					case Xop_xnde_tag_.Tid__xowa_html:	// needed for Help:Options, else \n at top of doc; DATE:2014-06-22
 						add_tkn = add_subs = false;		// skip tblxs
 						xnde = null;

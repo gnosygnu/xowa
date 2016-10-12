@@ -58,7 +58,7 @@ public class Xow_cache_mgr {
 			ifexist_cache.Clear();
 			wiki.Appe().Wiki_mgr().Wdata_mgr().Clear();	// moved from ctx.Clear(); DATE:2016-07-21
 		}
-		wiki.Html_mgr().Catpage_mgr().Free_mem_all();
+		wiki.Ctg__catpage_mgr().Free_mem_all();
 		tmpl_result_cache.Clear();
 		defn_cache.Free_mem_all();
 		misc_cache.Clear();

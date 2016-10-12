@@ -25,7 +25,7 @@ public abstract class Xof_bin_wkr__fsys_base implements Xof_bin_wkr, Gfo_invk {
 	public boolean Resize_allowed() {return resize_allowed;} public void Resize_allowed_(boolean v) {resize_allowed = v;} private boolean resize_allowed = false;
 	public Io_stream_rdr Get_as_rdr(Xof_fsdb_itm itm, boolean is_thumb, int w) {
 		Io_url src_url = this.Get_src_url(Xof_img_mode_.By_bool(is_thumb), String_.new_u8(itm.Orig_repo_name()), itm.Orig_ttl(), itm.Orig_ttl_md5(), itm.Orig_ext(), w, itm.Lnki_time(), itm.Lnki_page());
-		return (src_url == Io_url_.Empty) ? gplx.core.ios.streams.Io_stream_rdr_.Noop : gplx.core.ios.streams.Io_stream_rdr_.file_(src_url);
+		return (src_url == Io_url_.Empty) ? gplx.core.ios.streams.Io_stream_rdr_.Noop : gplx.core.ios.streams.Io_stream_rdr_.New__raw(src_url);
 	}
 	public boolean Get_to_fsys(Xof_fsdb_itm itm, boolean is_thumb, int w, Io_url bin_url) {
 		return Get_to_fsys(itm.Orig_repo_name(), itm.Orig_ttl(), itm.Orig_ttl_md5(), itm.Orig_ext(), is_thumb, w, itm.Lnki_time(), itm.Lnki_page(), bin_url);
