@@ -20,6 +20,12 @@ import gplx.core.primitives.*;
 public class Xou_history_itm {
 	private Xou_history_itm() {}
 	public Xou_history_itm(byte[] wiki, byte[] page) {
+		// remove "\n" from page for Category b/c it breaks the csv_parser; DATE:2016-10-12
+		int nl_pos = Bry_find_.Find_fwd(page, Byte_ascii.Nl);
+		if (nl_pos != Bry_find_.Not_found) {
+			page = Bry_.Mid(page, 0, nl_pos);
+		}
+
 		this.wiki = wiki;
 		this.page = page;
 		this.key = key_(wiki, page);

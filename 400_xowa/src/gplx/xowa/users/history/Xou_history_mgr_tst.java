@@ -42,6 +42,11 @@ public class Xou_history_mgr_tst {
 		fxt.Add_one("Special:AllPages", "?from=A");
 		fxt.List_tst("Special:AllPages?from=A");
 	}
+	@Test   public void Remove_nl() {
+		fxt.Clear();
+		fxt.Add_many("Category:A?pagefrom=B\nB");
+		fxt.List_tst("Category:A?pagefrom=B");
+	}
 }
 class Xou_history_mgr_fxt {
 	Xoae_app app; Xowe_wiki wiki;
