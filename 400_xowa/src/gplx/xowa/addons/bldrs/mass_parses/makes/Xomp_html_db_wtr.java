@@ -39,7 +39,9 @@ class Xomp_html_db_wtr {
 		boolean not_inited = html_tbl == null, out_of_space = len_new > len_max;
 		boolean is_all_or_few = db_mgr.Props().Layout_html().Tid_is_all_or_few();
 		boolean ns_changed = ns_id != prv_ns_id;
-		if (not_inited || out_of_space || ns_changed) {
+		if (not_inited || out_of_space 
+			|| (ns_changed && !is_all_or_few)	// only make new html_db if lot and ns_changed
+			) {
 			Commit();
 			if (	is_all_or_few		// is not "lot"
 				&&	not_inited			// not_inited; set html_db
