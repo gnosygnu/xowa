@@ -19,6 +19,7 @@ package gplx.xowa.wikis.pages; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.xowa.guis.views.*;
 public class Xowe_page_mgr {
 	private final    Xowe_wiki wiki;
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Xowe_page_mgr(Xowe_wiki wiki) {this.wiki = wiki;}
 	public Xoae_page Load_page(Xoa_url url, Xoa_ttl ttl, Xog_tab_itm tab) {
 		Xoa_app_.Usr_dlg().Log_many("", "", "page.load: url=~{0}", url.To_str());			
@@ -43,6 +44,16 @@ public class Xowe_page_mgr {
 		}
 		if (parse)
 			wiki.Parser_mgr().Parse(page, false);
+
+		// if [[Category]], generate catlinks (subc; page; file)
+		if (ttl.Ns().Id_is_ctg()) {
+			wiki.Ctg__catpage_mgr().Write_catpage(tmp_bfr, page);
+			if (parse)
+				page.Html_data().Catpage_data_(tmp_bfr.To_bry_and_clear());
+			else
+				page.Db().Html().Html_bry_(Bry_.Add(page.Db().Html().Html_bry(), tmp_bfr.To_bry_and_clear()));
+		}
+
 		return page;
 	}
 	private static void Wait_for_popups(Xoa_app app) {// HACK: wait for popups to finish, else thread errors due to popups and loader mutating cached items

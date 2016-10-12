@@ -54,7 +54,7 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 		}
 		return ctg;
 	}
-	public void Write_catpage(Bry_bfr bfr, Xoa_page page, Xoh_wtr_ctx hctx) {
+	public void Write_catpage(Bry_bfr bfr, Xoa_page page) {
 		try	{
 			// get catpage_url
 			Xoctg_catpage_url catpage_url = Xoctg_catpage_url_parser.Parse(page.Url());

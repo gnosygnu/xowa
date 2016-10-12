@@ -46,6 +46,7 @@ public class Xopg_html_data {
 	public int					Sect_uid() {return sect_uid;} private int sect_uid = -1; public int Sect_uid_next() {return ++sect_uid;}
 	public boolean					Cbk_enabled() {return cbk_enabled;} private boolean cbk_enabled; public void Cbk_enabled_(boolean v) {this.cbk_enabled = v;}
 	public boolean				Hdump_exists() {return hdump_exists;} private boolean hdump_exists; public void Hdump_exists_(boolean v) {this.hdump_exists = v;}
+	public byte[]				Catpage_data() {return catpage_data;} private byte[] catpage_data; public void Catpage_data_(byte[] v) {this.catpage_data = v;}
 
 	public boolean				Writing_hdr_for_toc() {return writing_hdr_for_toc;} private boolean writing_hdr_for_toc; public void Writing_hdr_for_toc_y_() {writing_hdr_for_toc = Bool_.Y;} public void Writing_hdr_for_toc_n_() {writing_hdr_for_toc = Bool_.N;}
 	public Xoh_toc_mgr			Toc_mgr()	{return toc_mgr;}	private final    Xoh_toc_mgr toc_mgr = new Xoh_toc_mgr(); 

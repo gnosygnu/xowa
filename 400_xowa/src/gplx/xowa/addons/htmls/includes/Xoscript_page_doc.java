@@ -18,6 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.htmls.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
 public class Xoscript_page_doc {
 	public void Test() {
-            Tfds.Write("hi");
+            // Tfds.Write("hi");
 	}
 }

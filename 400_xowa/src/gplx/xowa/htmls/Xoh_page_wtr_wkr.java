@@ -157,15 +157,19 @@ public class Xoh_page_wtr_wkr {
 			bfr.Add(hdump_data);
 			return;
 		}
+
 		// dump and exit if MediaWiki message;
 		if	(ns_id == Xow_ns_.Tid__mediawiki) {	// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
 			bfr.Add(Gfs_php_converter.Xto_php(tmp_bfr, Bool_.N, data_raw));
 			return;
 		}
+
 		// if [[File]], add boilerplate header; note that html is XOWA-generated so does not need to be tidied
 		if (ns_id == Xow_ns_.Tid__file) app.Ns_file_page_mgr().Bld_html(wiki, ctx, page, bfr, page.Ttl(), wiki.Cfg_file_page(), page.File_queue());
+
 		// get separate bfr; note that bfr already has <html> and <head> written to it, so this can't be passed to tidy; DATE:2014-06-11
 		Bry_bfr tidy_bfr = wiki.Utl__bfr_mkr().Get_m001();
+
 		// write wikitext
 		if (page.Html_data().Skip_parse()) {
 			tidy_bfr.Add(page.Html_data().Custom_body());
@@ -179,8 +183,9 @@ public class Xoh_page_wtr_wkr {
 			}
 		}
 		
-		// if [[Category]], render rest of html (Subcategories; Pages; Files); note that a category may have other html which requires wikitext processing
-		if (ns_id == Xow_ns_.Tid__category) wiki.Ctg__catpage_mgr().Write_catpage(tidy_bfr, page, hctx);
+		// if [[Category]], add catpage data
+		if (ns_id == Xow_ns_.Tid__category) tidy_bfr.Add_safe(page.Html_data().Catpage_data());
+		// if (ns_id == Xow_ns_.Tid__category) wiki.Ctg__catpage_mgr().Write_catpage(tidy_bfr, page, hctx);
 
 		// tidy html
 		wiki.Html_mgr().Tidy_mgr().Exec_tidy(tidy_bfr, !hctx.Mode_is_hdump(), page.Url_bry_safe());
@@ -194,6 +199,7 @@ public class Xoh_page_wtr_wkr {
 		if (	ctgs_enabled
 			&&	ctgs_len > 0						// skip if no categories found while parsing wikitext
 			&&	!wiki.Html_mgr().Importing_ctgs()	// do not show categories if importing categories, page will wait for category import to be done; DATE:2014-10-15
+			&&	!hctx.Mode_is_hdump()				// do not dump categories during hdump; DATE:2016-10-12
 			) {
 			if (app.Mode().Tid_is_gui()) app.Usr_dlg().Prog_many("", "", "loading categories: count=~{0}", ctgs_len);
 			Xoctg_pagebox_itm[] pagebox_itms = wiki.Ctg__pagebox_wtr().Get_catlinks_by_page(wiki, page);
