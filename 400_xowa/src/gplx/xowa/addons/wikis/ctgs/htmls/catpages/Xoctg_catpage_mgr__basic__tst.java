@@ -29,7 +29,7 @@ public class Xoctg_catpage_mgr__basic__tst {
 		Xoctg_catpage_itm itm = fxt.Ctg().Grp_by_tid(Xoa_ctg_mgr.Tid__page).Itms__get_at(0);
 		itm.Page_ttl_(Xoa_ttl.Null);
 		itm.Sortkey_handle_make(Bry_bfr_.New(), Bry_.Empty);
-		fxt.Test__html__page(Xoa_ctg_mgr.Tid__page, Byte_ascii.Ltr_A, "\n            <li class=\"xowa-missing-category-entry\"><span title=\"id not found: #0 might be talk/user page\">A1 (missing)</li>");
+		fxt.Test__html__page(Xoa_ctg_mgr.Tid__page, Byte_ascii.Ltr_A, "\n            <li class=\"xowa-missing-category-entry\"><span title=\"id not found: #0 might be talk/user page\">missing page (0)</li>");
 	}
 	@Test   public void Visited_doesnt_work_for_space() {// PURPOSE: xowa-visited not inserted for pages with space
 		byte[] page_bry = Bry_.new_a7("A 1");

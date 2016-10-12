@@ -23,10 +23,6 @@ import gplx.xowa.users.history.*;
 class Xoctg_fmt_itm_subc extends Xoctg_fmt_itm_base {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	@Override public void Bld_html(Bry_bfr bfr, Xow_wiki wiki, Xou_history_mgr history_mgr, Xoh_href_parser href_parser, Xoctg_catpage_itm itm, Xoa_ttl ttl) {
-		if (ttl == Xoa_ttl.Null) {
-			Fmt__missing.Bld_many(bfr, itm.Page_id());
-			return;
-		}
 		byte[] itm_href = wiki.Html__href_wtr().Build_to_bry(wiki, ttl);
 		int count_subcs = 0;
 		int count_pages = 0;
