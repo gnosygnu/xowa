@@ -292,7 +292,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		int fnc_name_len = fnc_name.length;
 		int fnc_name_colon_pos = Bry_find_.Find_fwd(fnc_name, Byte_ascii.Colon, 0, fnc_name_len);
 		if (fnc_name_colon_pos == Bry_find_.Not_found) {
-			if (rv.Len() > 0) {
+			if (rv.Len() > 0) {	// some parser_functions can pass 0 args; PAGE:en.w:Paris EX:{{#coordinates}} DATE:2016-10-12
 				Keyval arg_argx = (Keyval)rv.Get_at(0);
 				argx_ref.Val_(arg_argx.Val_to_bry());
 				rv.Del_at(0);

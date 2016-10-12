@@ -80,6 +80,10 @@ public class Scrib_lib_mw__invoke_tst {
 		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");
 		fxt.Test_lib_proc_kv(lib, Scrib_lib_mw.Invk_callParserFunction, Scrib_kv_utl_.flat_many_(1, "current", 2, "#tag", 3, Scrib_kv_utl_.flat_many_("3", "id=1", "2", "text", "1", "pre")), "<pre 3=\"id=1\">2=text</pre>");// named: sort args; NOTE: keys should probably be stripped
 	}
+	@Test  public void CallParserFunction__no_args() {	// PURPOSE.fix: 0 args should not fail
+		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");
+		fxt.Test_lib_proc_kv(lib, Scrib_lib_mw.Invk_callParserFunction, Scrib_kv_utl_.flat_many_(1, "current", 2, "#tag", 3, Keyval_.Ary_empty), "");// failed with "Script error: index is out of bounds"
+	}
 	@Test  public void CallParserFunction_displayTitle() {	// PURPOSE: DISPLAYTITLE not being set when called through CallParserFunction; DATE:2013-08-05
 		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");
 		fxt.Test_lib_proc_kv(lib, Scrib_lib_mw.Invk_callParserFunction, Scrib_kv_utl_.base1_many_ary_("current", "DISPLAYTITLE", "''a''"), "");
