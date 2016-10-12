@@ -110,6 +110,9 @@
         <li class="toclevel-1 tocsection-15">
           <a href="#Script:_gnosygnu.27s_actual_English_Wikipedia_script_.28dirty.3B_provided_for_reference_only.29"><span class="tocnumber">6</span> <span class="toctext">Script: gnosygnu's actual English Wikipedia script (dirty; provided for reference only)</span></a>
         </li>
+        <li class="toclevel-1 tocsection-16">
+          <a href="#Change_log"><span class="tocnumber">7</span> <span class="toctext">Change log</span></a>
+        </li>
       </ul>
     </div>
     <h2>
@@ -489,7 +492,7 @@ app.bldr.run;
 <pre class='code'>
 app.bldr.pause_at_end_('n');
 app.scripts.run_file_by_type('xowa_cfg_app');
-app.cfgs.get('app.user.cfg.security.web_access_enabled', 'app').val = 'n';
+app.cfgs.get('app.user.cfg.security.web_access_enabled', 'app').val = 'y';
 app.bldr.cmds {
 /*
   add     ('www.wikidata.org' , 'util.cleanup')          {delete_all = 'y';}
@@ -604,6 +607,14 @@ app.bldr.cmds {
 }
 app.bldr.run;
 </pre>
+    <h2>
+      <span class="mw-headline" id="Change_log">Change log</span>
+    </h2>
+    <ul>
+      <li>
+        2016-10-12: explicitly set web_access_enabled to y
+      </li>
+    </ul>
   
     </div>
   </div>
