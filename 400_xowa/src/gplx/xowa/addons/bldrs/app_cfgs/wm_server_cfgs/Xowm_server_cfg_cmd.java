@@ -20,8 +20,7 @@ import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public class Xowm_server_cfg_cmd extends Xob_cmd__base {
 	public Xowm_server_cfg_cmd(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
 	@Override public void Cmd_run() {
-//			wiki.Init_assert();
-//			mgr.Exec(wiki);
+		new Xowm_server_cfg_mgr().Exec(bldr.App());
 	}
 
 	public static final String BLDR_CMD_KEY = "cfg.wikis.wm_server_cfg";

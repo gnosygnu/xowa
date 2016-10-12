@@ -47,7 +47,7 @@ public class Xoctg_catpage_itm {
 	public byte[] Sortkey_handle_make(Bry_bfr tmp_bfr, byte[] prv_sortkey_handle) {
 		// page.tbl missing even though in cat_link.tbl; happens for "User:" namespace pages;
 		if (page_ttl == Xoa_ttl.Null) {
-			// sortkey_prefix exists; happens for [[Category:A]] as opposed to [[Category:A|some_sortkey_prefix]]
+			// sortkey_prefix exists; happens for [[Category:A]] as opposed to [[Category:A|some_sortkey_prefix]]; also, {{DEFAULTSORTKEY:some_sortkey_prefix}}
 			if (Bry_.Len_gt_0(sortkey_prefix)) {
 				sortkey_handle = sortkey_prefix;
 				return sortkey_handle;				// set sortkey_prefix as new prv_sortkey_handle;
