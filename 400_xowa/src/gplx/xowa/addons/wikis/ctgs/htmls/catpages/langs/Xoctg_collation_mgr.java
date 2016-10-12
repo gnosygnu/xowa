@@ -19,23 +19,15 @@ package gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs; import gplx.*; import 
 import gplx.core.intls.ucas.*;
 public class Xoctg_collation_mgr {
 	private final    Xow_wiki wiki;
-	private Uca_collator collator;
-	private String collation_name = "uppercase";	// REF:https://noc.wikimedia.org/conf/InitialiseSettings.php.txt|wgCategoryCollation|default
+	private Xoctg_collation_wkr wkr;
 	public Xoctg_collation_mgr(Xow_wiki wiki) {
 		this.wiki = wiki;
-		if (String_.Eq(wiki.Domain_str(), "en.wikipedia.org"))
-			collation_name = "uca-default-kn";
+		this.wkr = new Xoctg_collation_wkr__uppercase(wiki);	// REF:https://noc.wikimedia.org/conf/InitialiseSettings.php.txt|wgCategoryCollation|default
 	}
 	public void Collation_name_(String v) {
-		this.collation_name = v;
+		this.wkr = Xoctg_collation_wkr_.Make(wiki, v);
 	}
 	public byte[] Get_sortkey(byte[] src) {
-		if (String_.Eq(collation_name, "uppercase")) {
-			return wiki.Lang().Case_mgr().Case_build_upper(src);
-		}
-		else {
-			if (collator == null) collator = Uca_collator_.New(collation_name, true);
-			return collator.Get_sortkey(String_.new_u8(src));
-		}
+		return wkr.Get_sortkey(src);
 	}
 }
