@@ -88,7 +88,7 @@ public abstract class Xoctg_fmt_itm_base implements gplx.core.brys.Bfr_arg {
 	)
 	, fmt_exists = Bry_fmt.Auto_nl_skip_last
 	( ""
-	, "            <li><a href=\"~{itm_href}\"~{itm_atr_cls} title=\"~{itm_title}\">~{itm_text}</a><!--~{itm_sortkey}--></li>"
+	, "            <li><a href=\"~{itm_href}\"~{itm_atr_cls} title=\"~{itm_title}\">~{itm_text}</a></li>"	// <!--~{itm_sortkey}-->
 	)
 	;
 	public static final int Cols_max = 3;
