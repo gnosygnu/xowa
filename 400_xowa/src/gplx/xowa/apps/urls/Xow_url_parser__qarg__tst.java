@@ -57,10 +57,6 @@ public class Xow_url_parser__qarg__tst {
 		fxt.Test__qargs("?k1=v1");
 		fxt.Test__to_str("en.wikipedia.org/wiki/A?k1=v1#anch");
 	}
-	// DELETED: search should not depend on url-decoded entities; should be "Special:Search/Moon?fulltext=y&xowa_page_index=1" DATE:2016-10-10
-	// @Test  public void Search() {
-	// 	fxt.Exec__parse("Special:Search/Moon%3Ffulltext%3Dy%26xowa_page_index%3D1").Test__page("Special:Search/Moon").Test__qargs("?fulltext=y&xowa_page_index=1");
-	//}
 	// DELETED: this is wrong as url should not handle html_entities like &#61; instead # should strictly designate anch_href; DATE:2016-10-10
 	// @Test  public void Encoded() {
 	//	fxt.Exec__parse("en.wikipedia.org/wiki/A?action&#61;edit&preload&#61;B").Test__wiki("en.wikipedia.org").Test__page("A").Test__qargs("?action=&#61;edit=&preload=&=").Test__anch("61.3BB");	// NOTE: this is wrong; fix later

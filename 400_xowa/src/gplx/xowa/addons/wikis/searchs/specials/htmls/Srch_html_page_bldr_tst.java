@@ -23,9 +23,9 @@ import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis
 public class Srch_html_page_bldr_tst {
 	@Before public void init() {fxt.Clear();} private Srch_html_page_bldr_fxt fxt = new Srch_html_page_bldr_fxt();
 	@Test   public void Paging() {
-		fxt.Test_paging(Bool_.Y, 1, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A%3Ffulltext%3Dy%26xowa_page_index%3D2' title='Next'>Next<img src='file:///mem/xowa/bin/any/xowa/file/app.general/go_fwd.png' width='16' height='16'/></a>");
-		fxt.Test_paging(Bool_.N, 1, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A%3Ffulltext%3Dy%26xowa_page_index%3D0' title='Previous'><img src='file:///mem/xowa/bin/any/xowa/file/app.general/go_bwd.png' width='16' height='16'/>Previous</a>");
-		fxt.Test_paging(Bool_.Y, 2, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A%3Ffulltext%3Dy%26xowa_page_index%3D3' title='Next'>Next<img src='file:///mem/xowa/bin/any/xowa/file/app.general/go_fwd.png' width='16' height='16'/></a>");
+		fxt.Test_paging(Bool_.Y, 1, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A?fulltext=y&xowa_page_index=2' title='Next'>Next<img src='file:///mem/xowa/bin/any/xowa/file/app.general/go_fwd.png' width='16' height='16'/></a>");
+		fxt.Test_paging(Bool_.N, 1, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A?fulltext=y&xowa_page_index=0' title='Previous'><img src='file:///mem/xowa/bin/any/xowa/file/app.general/go_bwd.png' width='16' height='16'/>Previous</a>");
+		fxt.Test_paging(Bool_.Y, 2, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A?fulltext=y&xowa_page_index=3' title='Next'>Next<img src='file:///mem/xowa/bin/any/xowa/file/app.general/go_fwd.png' width='16' height='16'/></a>");
 		fxt.Test_paging(Bool_.N, 0, "&#160;");
 	}
 	@Test   public void Rows() {
