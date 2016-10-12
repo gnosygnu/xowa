@@ -116,7 +116,7 @@ class Xoctg_catlink_loader {
 		sql = attach_mgr.Resolve_sql(sql);
 
 		// run sql and create itms based on cat_link
-		Xoctg_catpage_itm itm_zth = null;
+		Xoctg_catpage_itm zth_itm = null;
 		Db_rdr rdr = Db_rdr_.Empty;
 		int row_idx = 0;
 		try {
@@ -128,7 +128,7 @@ class Xoctg_catlink_loader {
 					hash.Add(itm.Page_id(), itm);
 				else {					// last row; EX: 201
 					if (url_is_from)	// from=some_key; 201st row is sort_key for "(Next 200)"
-						itm_zth = itm;
+						zth_itm = itm;
 					else				// until=some_key; 201st row means that 200th row is not 1st row; show prev link
 						grp.Prev_disable_(false);
 				}
@@ -144,18 +144,27 @@ class Xoctg_catlink_loader {
 		grp.Itms_((Xoctg_catpage_itm[])hash.To_ary_and_clear(Xoctg_catpage_itm.class));
 
 		// set data for Next 200 / Previous 200
-		if (itm_zth != null) {
+		if (zth_itm != null) {
 			if (version == 4) {
-				Xowd_page_itm tmp_pg = new Xowd_page_itm();
-				page_tbl.Select_by_id(tmp_pg, itm_zth.Page_id());
-				Xoa_ttl zth_ttl = wiki.Ttl_parse(tmp_pg.Ns_id(), tmp_pg.Ttl_page_db());
-				itm_zth.Page_ttl_(zth_ttl);
-				itm_zth.Sortkey_handle_make(Bry_bfr_.New(), grp.Itms__get_at(grp.Itms__len() - 1).Sortkey_handle());
-				grp.Next_sortkey_(itm_zth.Sortkey_handle());
+				Load_sortkey(wiki, grp, zth_itm);
+				grp.Next_sortkey_(zth_itm.Sortkey_handle());
 			}
 			else
-				grp.Next_sortkey_(itm_zth.Sortkey_handle());
+				grp.Next_sortkey_(zth_itm.Sortkey_handle());
 		}
+	}
+	private static void Load_sortkey(Xow_wiki wiki, Xoctg_catpage_grp grp, Xoctg_catpage_itm zth_itm) {
+		// load page_ttl from db
+		Xowd_page_itm tmp_pg = new Xowd_page_itm();
+		wiki.Data__core_mgr().Tbl__page().Select_by_id(tmp_pg, zth_itm.Page_id());
+
+		// set ttl
+		Xoa_ttl zth_ttl = wiki.Ttl_parse(tmp_pg.Ns_id(), tmp_pg.Ttl_page_db());
+		zth_itm.Page_ttl_(zth_ttl);
+
+		// make sortkey
+		byte[] prv_sortkey = grp.Itms__len() == 0 ? Bry_.Empty : grp.Itms__get_at(grp.Itms__len() - 1).Sortkey_handle();
+		zth_itm.Sortkey_handle_make(Bry_bfr_.New(), prv_sortkey);
 	}
 	public static byte[] Build_sortkey_val(Bry_bfr sortkey_val_bfr, byte version, Xoctg_collation_mgr collation_mgr, byte[] url_sortkey) {
 		// find \n and ignore everything after it; needed else "< 'A\nA'" will pull up "A"; NOTE: can't find logic in MediaWiki CategoryViewer.php; DATE:2016-10-11
