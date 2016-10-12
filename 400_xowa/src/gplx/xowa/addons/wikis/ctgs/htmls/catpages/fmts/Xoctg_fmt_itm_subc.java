@@ -23,6 +23,10 @@ import gplx.xowa.users.history.*;
 class Xoctg_fmt_itm_subc extends Xoctg_fmt_itm_base {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	@Override public void Bld_html(Bry_bfr bfr, Xow_wiki wiki, Xou_history_mgr history_mgr, Xoh_href_parser href_parser, Xoctg_catpage_itm itm, Xoa_ttl ttl) {
+		if (ttl == Xoa_ttl.Null) {
+			Fmt__missing.Bld_many(bfr, itm.Page_id(), itm.Sortkey_handle());
+			return;
+		}
 		byte[] itm_href = wiki.Html__href_wtr().Build_to_bry(wiki, ttl);
 		int count_subcs = 0;
 		int count_pages = 0;
@@ -31,7 +35,7 @@ class Xoctg_fmt_itm_subc extends Xoctg_fmt_itm_base {
 		byte[] contains_title = wiki.Msg_mgr().Val_by_id_args(Xol_msg_itm_.Id_ctgtree_subc_counts, count_subcs, count_pages, count_files);
 		byte[] contains_text = Bld_contains_text(msg_mgr, count_subcs, count_pages, count_files);
 		byte[] ttl_page = ttl.Page_txt();
-		fmt_exists.Bld_many(bfr, ttl.Page_db(), ttl_page, itm_href, ttl_page, contains_title, contains_text);
+		Fmt__exists__subc.Bld_many(bfr, ttl.Page_db(), ttl_page, itm_href, ttl_page, contains_title, contains_text);
 	}
 	private byte[] Bld_contains_text(Xow_msg_mgr msg_mgr, int count_subcs, int count_pages, int count_files) {
 		if (count_subcs == 0 && count_pages == 0 && count_files == 0) return Bry_.Empty;
@@ -48,7 +52,7 @@ class Xoctg_fmt_itm_subc extends Xoctg_fmt_itm_base {
 		bfr.Add(msg_mgr.Val_by_id_args(msg_id, val));
 	}	private static final    byte[] Bld_contains_text_itm_dlm = Bry_.new_a7(", "); 		
 	private static final    Bry_fmt
-	  fmt_exists = Bry_fmt.Auto_nl_skip_last
+	  Fmt__exists__subc = Bry_fmt.Auto_nl_skip_last
 	( ""
 	, "            <li>"
 	, "              <div class=\"CategoryTreeSection\">"

@@ -73,20 +73,20 @@ public abstract class Xoctg_fmt_itm_base implements gplx.core.brys.Bfr_arg {
 	}
 	@gplx.Virtual public void Bld_html(Bry_bfr bfr, Xow_wiki wiki, Xou_history_mgr history_mgr, Xoh_href_parser href_parser, Xoctg_catpage_itm itm, Xoa_ttl ttl) {
 		if (ttl == Xoa_ttl.Null)
-			fmt_missing.Bld_many(bfr, itm.Page_id(), itm.Sortkey_handle());
+			Fmt__missing.Bld_many(bfr, itm.Page_id());
 		else {
 			byte[] itm_full_ttl = Gfh_utl.Escape_html_as_bry(tmp_bfr, ttl.Full_txt_w_ttl_case());// NOTE: ttl.Full_txt() to get full ns; EX: Template:A instead of just "A"
 			byte[] itm_href = wiki.Html__href_wtr().Build_to_bry(wiki, ttl);
 			byte[] itm_atr_cls = Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
-			fmt_exists.Bld_many(bfr, itm_href, itm_atr_cls, itm_full_ttl, itm_full_ttl, gplx.core.encoders.Hex_utl_.Encode_bry(itm.Sortkey_binary()));
+			Fmt__exists.Bld_many(bfr, itm_href, itm_atr_cls, itm_full_ttl, itm_full_ttl, gplx.core.encoders.Hex_utl_.Encode_bry(itm.Sortkey_binary()));
 		}
 	}
-	private static final    Bry_fmt
-	 fmt_missing = Bry_fmt.Auto_nl_skip_last
+	protected static final    Bry_fmt
+	  Fmt__missing = Bry_fmt.Auto_nl_skip_last
 	( ""
 	, "            <li class=\"xowa-missing-category-entry\"><span title=\"id not found: #~{itm_id} might be talk/user page\">~{itm_text} (missing)</li>"
 	)
-	, fmt_exists = Bry_fmt.Auto_nl_skip_last
+	, Fmt__exists = Bry_fmt.Auto_nl_skip_last
 	( ""
 	, "            <li><a href=\"~{itm_href}\"~{itm_atr_cls} title=\"~{itm_title}\">~{itm_text}</a></li>"	// <!--~{itm_sortkey}-->
 	)
