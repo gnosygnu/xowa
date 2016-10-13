@@ -131,9 +131,9 @@ public class Xobldr__page_file_map__create extends Xob_cmd__base {
 		);
 	}
 	private void Create__page_file_map() {
-		Xob_db_file map_db = Xob_db_file.New(wiki.Fsys_mgr().Root_dir(), wiki.Domain_str() + "-file-page_map.xowa");
+		Xob_db_file map_db = Xob_db_file.New__page_file_map(wiki);
 		Db_conn map_conn = map_db.Conn();
-		Page_file_map_tbl map_tbl = new Page_file_map_tbl(map_conn);
+		Page_file_map_tbl map_tbl = new Page_file_map_tbl(map_conn, "page_file_map");
 		map_conn.Meta_tbl_remake(map_tbl.Meta());
 		map_conn.Env_db_attach("make_db", conn);
 		map_conn.Exec_sql_concat_w_msg
