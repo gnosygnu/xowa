@@ -28,23 +28,40 @@ public class Xow_db_file__core_ {
 		return rv == null ? Find_core_fil__sqlite3(wiki_root_dir, ary, ary_len, domain_str) : rv;
 	}
 	private static Io_url Find_core_fil__xowa(Io_url[] ary, int ary_len, String domain_str) {
+		// search for ALL ("en.wikipedia.org") or FEW / LOT ("en.wikipedia.org-core")
 		for (int i = 0; i < ary_len; i++) {
 			Io_url itm = ary[i];
 			if (!String_.Eq(itm.Ext(), ".xowa")) continue;
 			if	(	String_.Eq(itm.NameOnly(), domain_str)				// EX: "en.wikipedia.org"
 				||	String_.Eq(itm.NameOnly(), domain_str + "-core")	// EX: "en.wikipedia.org-core"
 				) {
-				Xoa_app_.Usr_dlg().Log_many("", "", "wiki.db_core.v2: url=~{0}", itm.Raw());
+				Xoa_app_.Usr_dlg().Log_many("", "", "wiki.db_core.v2.standard: url=~{0}", itm.Raw());
 				return itm;
 			}
 		}
-		for (int i = 0; i < ary_len; i++) {	// DB.FEW: DATE:2016-06-07
+
+		// handle old "FEW" layout where "-text" existed, but not "-core"; DB.FEW: DATE:2016-06-07
+		for (int i = 0; i < ary_len; i++) {
 			Io_url itm = ary[i];
 			if (!String_.Eq(itm.Ext(), ".xowa")) continue;
-			if	(	String_.Eq(itm.NameOnly(), domain_str + "-text")	// EX: "en.wikipedia.org-text"
-				) {
-				Xoa_app_.Usr_dlg().Log_many("", "", "wiki.db_core.v2: url=~{0}", itm.Raw());
+			if	(String_.Eq(itm.NameOnly(), domain_str + "-text")) {	// EX: "en.wikipedia.org-text"
+				Xoa_app_.Usr_dlg().Log_many("", "", "wiki.db_core.v2.old_few: url=~{0}", itm.Raw());
 				return itm;
+			}
+		}
+
+		// handle renamed directories; EX: "en.wikipedia.org" -> "en.wikipedia.org-201609"; DATE:2016-10-13
+		for (int i = 0; i < ary_len; i++) {
+			Io_url itm = ary[i];
+			if (!String_.Eq(itm.Ext(), ".xowa")) continue;
+			if	(String_.Has_at_end(itm.NameOnly(), "-core")){	// only check "-core" databases. note that this can also include "en.wikipedia.org-file-core.xowa"
+				Db_conn core_conn = Db_conn_bldr.Instance.Get_or_fail(itm);
+
+				// if db has "xowa_db" then assume that it is the core
+				if (core_conn.Meta_tbl_exists(gplx.xowa.wikis.data.tbls.Xowd_xowa_db_tbl.Tbl_name)) {
+					Xoa_app_.Usr_dlg().Log_many("", "", "wiki.db_core.v2.renamed: url=~{0}", itm.Raw());
+					return itm;
+				}
 			}
 		}
 		return null;
