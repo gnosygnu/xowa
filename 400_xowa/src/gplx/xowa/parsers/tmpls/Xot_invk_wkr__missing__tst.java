@@ -31,6 +31,12 @@ public class Xot_invk_wkr__missing__tst {
 		fxt.Test_parse_tmpl_str("{{test_template}}", "{{{{{1}}}| a | b }}");	// NOTE: this should include spaces (" {{{1}}} "), but for now, ignore
 		fxt.Init_defn_clear();
 	}
+	@Test  public void Missing__evaluate_optional() {	// PURPOSE: missing title should still evaulate optional args; "{{{a|}}}" -> ""; PAGE:en.w:Europe; en.w:Template:Country_data_Guernsey DATE:2016-10-13
+		fxt.Init_defn_clear();
+		fxt.Init_defn_add("test_template", "{{ {{{1}}} | {{{a|}}} | b }}");
+		fxt.Test_parse_tmpl_str("{{test_template}}", "{{{{{1}}}|  | b }}");	// NOTE: "|  |" not "| {{{a|}}} |"
+		fxt.Init_defn_clear();
+	}
 	@Test  public void Missing_foreign() {
 		Xow_ns ns = fxt.Wiki().Ns_mgr().Ns_template();
 		byte[] old_ns = ns.Name_db();

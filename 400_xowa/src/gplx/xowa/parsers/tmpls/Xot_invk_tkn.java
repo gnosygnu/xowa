@@ -154,9 +154,9 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				case Xot_defn_.Tid_raw:
 				case Xot_defn_.Tid_msg:
 					int raw_colon_pos = Bry_find_.Find_fwd(name_ary, Byte_ascii.Colon);
-					if (raw_colon_pos == Bry_find_.Not_found) {}												// colon missing; EX: {{raw}}; noop and assume template name; DATE:2014-02-11
+					if (raw_colon_pos == Bry_find_.Not_found) {}										// colon missing; EX: {{raw}}; noop and assume template name; DATE:2014-02-11
 					else {																				// colon present;
-						name_ary = Bry_.Mid(name_ary, finder_subst_end + 1, name_ary_len);			// chop off "raw"; +1 is for ":"; note that +1 is in bounds b/c raw_colon was found
+						name_ary = Bry_.Mid(name_ary, finder_subst_end + 1, name_ary_len);				// chop off "raw"; +1 is for ":"; note that +1 is in bounds b/c raw_colon was found
 						name_ary_len = name_ary.length;
 						Object ns_eval2 = wiki.Ns_mgr().Names_get_w_colon(name_ary, 0, name_ary_len);	// match {{:Portal or {{:Wikipedia
 						if (ns_eval2 != null) {
@@ -198,14 +198,16 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 							if (subst_found || template_prefix_found) {	// if "subst:" or "Template:" found, use orig name; DATE:2014-03-31
 								bfr.Add(Xop_curly_bgn_lxr.Hook).Add(name_ary_orig).Add(Xop_curly_end_lxr.Hook);
 								return false;
-							}
-							else {	// output entire tmpl_src WITH args; used to output name only which broke pages; PAGE:en.w:Flag_of_Greenland; DATE:2016-06-21
+							}								
+							else {// output entire tmpl_src WITH args; used to output name only which broke pages; PAGE:en.w:Flag_of_Greenland; DATE:2016-06-21
 								bfr.Add(Xop_curly_bgn_lxr.Hook);
 								bfr.Add(name_ary);
 								for (int i = 0; i < args_len; ++i) {
 									Arg_nde_tkn nde = this.Args_get_by_idx(i);
 									bfr.Add_byte(Byte_ascii.Pipe);
-									bfr.Add_mid(src, nde.Src_bgn(), nde.Src_end());
+									// must evaluate args; "size={{{size|}}}" must become "size="; PAGE:en.w:Europe; en.w:Template:Country_data_Guernsey DATE:2016-10-13
+									nde.Tmpl_compile(ctx, src, Xot_compile_data.Noop);
+									nde.Tmpl_evaluate(ctx, src, caller, bfr);
 								}
 								bfr.Add(Xop_curly_end_lxr.Hook);
 								return false;
