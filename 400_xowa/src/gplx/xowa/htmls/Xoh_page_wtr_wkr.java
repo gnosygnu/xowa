@@ -62,7 +62,7 @@ public class Xoh_page_wtr_wkr {
 					wdata_lang_wtr.Page_(null);
 
 					if (page_mode == Xopg_page_.Tid_read) { // EXPERIMENTAL
-						new gplx.xowa.addons.htmls.includes.Xoh_include_mgr().Write(wiki, page);
+						new gplx.xowa.addons.htmls.scripts.Xoscript_mgr().Write(rv, wiki, page);
 					}
 				}
 			}

@@ -26,8 +26,8 @@ public class Xoax_addon_mgr {
 	public void				Itms__add(Xoax_addon_itm itm) {
 		synchronized (hash) {
 			String addon_key = itm.Addon__key();
-			Xoa_app_.Usr_dlg().Log_many("", "", "addons.init: ~{0}", addon_key);
 			hash.Add(addon_key, itm);
+			// Xoa_app_.Usr_dlg().Log_many("", "", "addons.init: ~{0}", addon_key);
 		}
 	}
 	public Xoax_addon_mgr Add_dflts_by_app(Xoa_app app) {

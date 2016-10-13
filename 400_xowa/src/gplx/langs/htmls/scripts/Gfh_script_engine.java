@@ -15,14 +15,14 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.htmls.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
-interface Script_engine {
+package gplx.langs.htmls.scripts; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
+public interface Gfh_script_engine {
 	void Load_script(Io_url url);
 	Object Get_object(String obj_name);
 	void Put_object(String name, Object obj);
 	Object Invoke_method(Object obj, String func, Object... args);
 }
-class Script_engine__noop implements Script_engine {
+class Gfh_script_engine__noop implements Gfh_script_engine {
 	public void Load_script(Io_url url) {}
 	public Object Get_object(String obj_name) {return null;}
 	public void Put_object(String name, Object obj) {}

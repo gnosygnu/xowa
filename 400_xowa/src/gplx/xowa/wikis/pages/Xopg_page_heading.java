@@ -30,5 +30,5 @@ public class Xopg_page_heading implements Bfr_arg {
 		if (html_data.Xtn_pgbnr() != null) return;	// pgbnr exists; don't add title
 		fmtr.Bld_many(bfr, display_title);
 	}
-	private final    Bry_fmt fmtr = Bry_fmt.New(Bry_.New_u8_nl_apos("<h1 id='firstHeading' class='firstHeading'><span>~{page_title}</span></h1>"), "page_title");
+	private final    Bry_fmt fmtr = Bry_fmt.New(Bry_.New_u8_nl_apos("<h1 id='firstHeading' class='firstHeading'>~{page_title}</h1>"), "page_title");	// <span>~{page_title}</span>
 }

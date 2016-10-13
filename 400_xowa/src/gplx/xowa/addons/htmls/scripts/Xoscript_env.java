@@ -15,10 +15,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.htmls.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
-public class Xoscript_page {
-	private Xoscript_page_doc doc = new Xoscript_page_doc();
-	public Xoscript_page_doc Doc() {
-		return doc;
-	}
+package gplx.xowa.addons.htmls.scripts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
+public class Xoscript_env {
+	public Xoscript_env(Io_url root_dir) {this.root_dir = root_dir;}
+	public Io_url Root_dir() {return root_dir;} private final    Io_url root_dir;
 }

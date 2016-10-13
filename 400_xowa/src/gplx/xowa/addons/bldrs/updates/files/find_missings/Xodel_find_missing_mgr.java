@@ -20,7 +20,7 @@ import gplx.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.addons.bldrs.files.dbs.*;
 class Xodel_find_missing_mgr {
 	public void Exec(Xow_wiki wiki) {
-		// get page_file_map; note that it must have fsdb_deleted
+		// get page_file_map; note that it must have fsdb_regy
 		Db_conn pfm_conn = Xob_db_file.New__page_file_map(wiki).Conn();
 		
 		// attach page_db
@@ -71,7 +71,7 @@ class Xodel_find_missing_mgr {
 		deletion_conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(delete_regy_tbl.tbl_name, "main", delete_regy_tbl.fld_fil_id, delete_regy_tbl.fld_thm_id));
 	}
 /*
---create in pfm_db
+--create fsdb_regy in pfm_db
 CREATE TABLE fsdb_regy 
 ( fsdb_id               integer             NOT NULL       PRIMARY KEY        AUTOINCREMENT
 , fsdb_name             varchar(255)        NOT NULL
@@ -88,7 +88,7 @@ CREATE TABLE fsdb_regy
 , fsdb_deleted          tinyint             NOT NULL
 );		
 
---run in file.make
+--export fsdb_regy from file.make
 ATTACH 'simple.wikipedia.org-file-page_map.xowa' AS pfm_db;
 INSERT INTO pfm_db.fsdb_regy SELECT * FROM fsdb_regy;
 CREATE INDEX fsdb_regy__main ON fsdb_regy (fsdb_fil_id, fsdb_thm_id);

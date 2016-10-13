@@ -15,26 +15,35 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.htmls.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
+package gplx.langs.htmls.scripts; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
 import java.io.FileReader;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-class Script_engine__java implements Script_engine {
+public class Gfh_script_engine__java implements Gfh_script_engine {
 	private final ScriptEngine engine;
 	private final Invocable invk;
-	public Script_engine__java() {
+	public Gfh_script_engine__java() {
 	    ScriptEngineManager manager = new ScriptEngineManager();
 	    this.engine = manager.getEngineByName("JavaScript");
 	    this.invk = (Invocable)engine;
 	}
 	public void Load_script(Io_url url) {
+		FileReader rdr = null; 
 		try {
-			engine.eval(new FileReader(url.Xto_api()));
+			rdr = new FileReader(url.Xto_api());
+			engine.eval(rdr);
 //			return engine.eval(script);
 		} catch (Exception e) {
 			System.out.println(e);
+		}
+		finally {
+			try {
+				rdr.close();
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 		}
 	}
 	public void Put_object(String key, Object val) {

@@ -160,12 +160,12 @@ public class Xog_tab_itm implements Gfo_invk {
 				else {
 					wkr.Page().Tab_data().Tab().Page_(page);	// NOTE: must set tab's page to current page, so that switching to it will update url bar; EX:pt.b:A"MANUAL_DE_PROCEDURI_.Sectiunea:""CONTABILITATE_SI_MANAGEMENT_FINANCIAR""" DATE:2015-09-17
 					if (page.Redirect_trail().Itms__len() > 0)
-						usr_dlg.Prog_many("", "", "could not find: ~{0} (redirected from ~{1})", String_.new_u8(page.Url().Page_bry()), page.Redirect_trail().Itms__get_at_0th_or_null());
+						usr_dlg.Prog_many("", "", "could not find page in wiki: ~{0} (redirected from ~{1})", String_.new_u8(page.Url().Page_bry()), page.Redirect_trail().Itms__get_at_0th_or_null());
 					else {
 						if (ttl.Ns().Id_is_file())
 							usr_dlg.Prog_one("", "", "commons.wikimedia.org must be installed in order to view the file. See [[App/Wiki_types/Commons]]: ~{0}", String_.new_u8(url.Raw()));// HOME
 						else
-							usr_dlg.Prog_one("", "", "could not find: ~{0}", String_.new_u8(url.Raw()));
+							usr_dlg.Prog_one("", "", "could not find page in wiki: ~{0}", String_.new_u8(url.Raw()));
 					}
 				}
 				app.Log_wtr().Queue_enabled_(false);
