@@ -15,12 +15,15 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.langs.htmls.scripts; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
-public interface Gfh_script_engine {
-	void Load_script(Io_url url);
-	Object Get_object(String obj_name);
-	void Put_object(String name, Object obj);
-	Object Eval_script(String script);
-	Object Invoke_method(Object obj, String func, Object... args);
-	Object Invoke_function(String func, Object... args);
+package gplx.xowa.addons.htmls.scripts.xtns; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*; import gplx.xowa.addons.htmls.scripts.*;
+import gplx.langs.htmls.scripts.*;
+public class Xoscript_xtn_itm {
+	public Xoscript_xtn_itm(String key, Io_url url, Gfh_script_engine engine) {
+		this.key = key;
+		this.url = url;
+		this.engine = engine;
+	}
+	public String Key() {return key;} private final    String key;
+	public Io_url Url() {return url;} private final    Io_url url;
+	public Gfh_script_engine Engine() {return engine;} private final    Gfh_script_engine engine;
 }

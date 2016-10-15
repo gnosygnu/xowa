@@ -16,7 +16,35 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.htmls.scripts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
+import gplx.core.envs.*;
+import gplx.langs.htmls.scripts.*;
 public class Xoscript_env {
-	public Xoscript_env(Io_url root_dir) {this.root_dir = root_dir;}
+	private final    Gfh_script_engine engine;
+	public Xoscript_env(Gfh_script_engine engine, Io_url root_dir) {
+		this.root_dir = root_dir;
+		this.engine = engine;
+	}
 	public Io_url Root_dir() {return root_dir;} private final    Io_url root_dir;
+	public void load_script(String file) {
+		engine.Load_script(Io_url_.new_fil_(Xoscript_env.Resolve_file(Bool_.N, root_dir, file)));
+	}
+	public static String Resolve_file(boolean use_file_protocol, Io_url root_dir, String file) {
+		String rv = file;
+
+		// resolve relative urls; EX: "./a.js" -> "/xowa/wiki/simple.wikipedia.org/bin/script/a.js"
+		if (String_.Has_at_bgn(rv, "./")) {
+			// remove "./"
+			rv = String_.Mid(rv, 2);
+
+			if (use_file_protocol)
+				rv = root_dir.To_http_file_str() + rv;
+			else {
+				// if fsys_url && wnt, replace "\" with "/"
+				if (Op_sys.Cur().Tid_is_wnt())
+					rv = String_.Replace(rv, Op_sys.Lnx.Fsys_dir_spr_str(), Op_sys.Wnt.Fsys_dir_spr_str());
+				rv = root_dir.Xto_api() + Op_sys.Cur().Fsys_dir_spr_str() + rv;
+			}
+		}
+		return rv;
+	}
 }

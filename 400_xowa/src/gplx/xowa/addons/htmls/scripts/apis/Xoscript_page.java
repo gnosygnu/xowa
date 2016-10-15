@@ -17,12 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.htmls.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*; import gplx.xowa.addons.htmls.scripts.*;
 public class Xoscript_page {		
-	public Xoscript_page(Bry_bfr rv, Xoscript_env env, Xoscript_url url) {
-		this.env = env;
-		this.url = url;
-		this.doc = new Xoscript_doc(rv, this);
+	public Xoscript_page(Bry_bfr rv, Xoscript_env env_var, Xoscript_url url_var) {
+		this.env_var = env_var;
+		this.url_var = url_var;
+		this.doc_var = new Xoscript_doc(rv, this);
 	}
-	public Xoscript_env Env() {return env;} private final    Xoscript_env env;
-	public Xoscript_url Url() {return url;} private final    Xoscript_url url;
-	public Xoscript_doc Doc() {return doc;} private final    Xoscript_doc doc;
+	public Xoscript_env env() {return env_var;} private final    Xoscript_env env_var;
+	public Xoscript_url url() {return url_var;} private final    Xoscript_url url_var;
+	public Xoscript_doc doc() {return doc_var;} private final    Xoscript_doc doc_var;
 }

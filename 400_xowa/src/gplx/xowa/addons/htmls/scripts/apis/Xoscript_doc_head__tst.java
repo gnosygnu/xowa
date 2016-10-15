@@ -52,23 +52,23 @@ class Xoscript_doc_head__fxt {
 	private Xoscript_doc_sect_base sect;
 	public Xoscript_doc_head__fxt() {
 		Bry_bfr rv = Bry_bfr_.New();
-		Xoscript_env env = new Xoscript_env(Io_url_.new_any_("mem/wiki/test_wiki/bin/script/"));
+		Xoscript_env env = new Xoscript_env(new gplx.langs.htmls.scripts.Gfh_script_engine__noop(), Io_url_.new_any_("mem/wiki/test_wiki/bin/script/"));
 		Xoscript_url url = new Xoscript_url("test_wiki", "test_page");
 		spg = new Xoscript_page(rv, env, url);
 	}
 	public void Init__sect(String sect_name) {
 		if		(String_.Eq(sect_name, "head"))
-			sect = spg.Doc().Head();
+			sect = spg.doc().head();
 		else if (String_.Eq(sect_name, "tail"))
-			sect = spg.Doc().Tail();
+			sect = spg.doc().tail();
 	}
-	public void Exec__doc__html(String html) {spg.Doc().Html_(html);}
-	public void Exec__reg_marker(String marker, String... pos_ary) {sect.Reg_marker(marker, pos_ary);}
-	public void Exec__add_js_file(String pos, String file) {sect.Add_js_file(pos, file);}
-	public void Exec__add_html(String html)				{sect.Add_html(html);}
-	public void Exec__add_html(String pos, String html) {sect.Add_html(pos, html);}
-	public void Exec__add_tag(String pos, String tag, String body, String... head_atrs) {sect.Add_tag(pos, tag, body, head_atrs);}
+	public void Exec__doc__html(String html) {spg.doc().html(html);}
+	public void Exec__reg_marker(String marker, String... pos_ary) {sect.reg_marker(marker, pos_ary);}
+	public void Exec__add_js_file(String pos, String file) {sect.add_js_file(pos, file);}
+	public void Exec__add_html(String html)				{sect.add_html(html);}
+	public void Exec__add_html(String pos, String html) {sect.add_html(pos, html);}
+	public void Exec__add_tag(String pos, String tag, String body, String... head_atrs) {sect.add_tag(pos, tag, body, head_atrs);}
 	public void Test__html(String... expd) {
-		Gftest.Eq__ary__lines(String_.Concat_lines_nl_skip_last(expd), spg.Doc().Html(), "html");
+		Gftest.Eq__ary__lines(String_.Concat_lines_nl_skip_last(expd), spg.doc().html(), "html");
 	}
 }

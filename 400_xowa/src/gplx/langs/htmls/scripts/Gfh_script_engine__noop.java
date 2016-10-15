@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.htmls.scripts; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
-public interface Gfh_script_engine {
-	void Load_script(Io_url url);
-	Object Get_object(String obj_name);
-	void Put_object(String name, Object obj);
-	Object Eval_script(String script);
-	Object Invoke_method(Object obj, String func, Object... args);
-	Object Invoke_function(String func, Object... args);
+public class Gfh_script_engine__noop implements Gfh_script_engine {
+	public void Load_script(Io_url url) {}
+	public Object Get_object(String obj_name) {return null;}
+	public void Put_object(String name, Object obj) {}
+	public Object Eval_script(String script) {return null;}
+	public Object Invoke_method(Object obj, String func, Object... args) {return null;}
+	public Object Invoke_function(String func, Object... args) {return null;}
 }

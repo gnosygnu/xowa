@@ -16,11 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.htmls.scripts; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
-public interface Gfh_script_engine {
-	void Load_script(Io_url url);
-	Object Get_object(String obj_name);
-	void Put_object(String name, Object obj);
-	Object Eval_script(String script);
-	Object Invoke_method(Object obj, String func, Object... args);
-	Object Invoke_function(String func, Object... args);
+public class Gfh_script_engine_ {
+	public static Gfh_script_engine New_by_key(String key) {
+		if		(String_.Eq(key, "javascript.java"))	return new Gfh_script_engine__javascript();
+		else if	(String_.Eq(key, "lua.luaj"))			return new Gfh_script_engine__luaj();
+		else if	(String_.Eq(key, "noop"))				return new Gfh_script_engine__noop();
+		else													throw Err_.new_unhandled(key);
+	}
+	public static Gfh_script_engine New_by_ext(String ext) {
+		if		(String_.Eq(ext, ".js"))				return new Gfh_script_engine__javascript();
+		else if	(String_.Eq(ext, ".lua"))				return new Gfh_script_engine__luaj();
+		else											throw Err_.new_unhandled(ext);
+	}
 }
