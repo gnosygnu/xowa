@@ -15,7 +15,9 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.htmls.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*; import gplx.xowa.addons.htmls.scripts.*;
-public class Xoscript_doc_head extends Xoscript_doc_sect_base {
-	public Xoscript_doc_head(Xoscript_doc doc) {super(doc);}
+package gplx.xowa.addons.apps.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.scripts.*;
+public class Xoscript_log {
+	public void log(String... v) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", String_.Concat_with_str(" ", v));
+	}
 }

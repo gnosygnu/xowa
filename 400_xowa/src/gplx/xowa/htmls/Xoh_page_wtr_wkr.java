@@ -57,7 +57,7 @@ public class Xoh_page_wtr_wkr {
 					hctx = Xoh_wtr_ctx.Basic;
 					Write_body(page_bfr, ctx, hctx, page);
 					Write_page_by_tid(ctx, hctx, view_mode, rv, fmtr, page_bfr.To_bry_and_rls());
-					new gplx.xowa.addons.htmls.scripts.Xoscript_mgr().Write(rv, wiki, page);
+					new gplx.xowa.addons.apps.scripts.Xoscript_mgr().Write(rv, wiki, page);
 					if (page_mode == Xopg_page_.Tid_html)	// if html, write page again, but wrap it in html skin this time
 						Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(rv.To_bry_and_clear()));
 					wdata_lang_wtr.Page_(null);

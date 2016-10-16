@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.htmls.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*; import gplx.xowa.addons.htmls.scripts.*;
+package gplx.xowa.addons.apps.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.scripts.*;
 public abstract class Xoscript_doc_sect_base {
 	protected final    Xoscript_doc doc;
 	private final    Hash_adp_bry marker_hash = Hash_adp_bry.cs();
@@ -79,5 +79,5 @@ public abstract class Xoscript_doc_sect_base {
 	public void add_css_code(String pos_str, String code_str) {	
 		add_tag(pos_str, "style", code_str, "type", "text/css");
 	}
-	public static final String Pos__default = "default", Body__empty = "";
+	public static final String Pos__default = "", Body__empty = "";
 }

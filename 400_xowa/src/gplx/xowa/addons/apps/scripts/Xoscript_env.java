@@ -15,12 +15,12 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.htmls.scripts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
+package gplx.xowa.addons.apps.scripts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
 import gplx.core.envs.*;
-import gplx.langs.htmls.scripts.*;
+import gplx.core.scripts.*;
 public class Xoscript_env {
-	private final    Gfh_script_engine engine;
-	public Xoscript_env(Gfh_script_engine engine, Io_url root_dir) {
+	private final    Gfo_script_engine engine;
+	public Xoscript_env(Gfo_script_engine engine, Io_url root_dir) {
 		this.root_dir = root_dir;
 		this.engine = engine;
 	}

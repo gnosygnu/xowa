@@ -15,15 +15,15 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.htmls.scripts.xtns; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*; import gplx.xowa.addons.htmls.scripts.*;
-import gplx.langs.htmls.scripts.*;
+package gplx.xowa.addons.apps.scripts.xtns; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.scripts.*;
+import gplx.core.scripts.*;
 public class Xoscript_xtn_itm {
-	public Xoscript_xtn_itm(String key, Io_url url, Gfh_script_engine engine) {
+	public Xoscript_xtn_itm(String key, Io_url url, Gfo_script_engine engine) {
 		this.key = key;
 		this.url = url;
 		this.engine = engine;
 	}
 	public String Key() {return key;} private final    String key;
 	public Io_url Url() {return url;} private final    Io_url url;
-	public Gfh_script_engine Engine() {return engine;} private final    Gfh_script_engine engine;
+	public Gfo_script_engine Engine() {return engine;} private final    Gfo_script_engine engine;
 }

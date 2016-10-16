@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.htmls.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*; import gplx.xowa.addons.htmls.scripts.*;
+package gplx.xowa.addons.apps.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.scripts.*;
 public class Xoscript_doc {
 	private final    Bry_bfr bfr;
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
@@ -25,8 +25,8 @@ public class Xoscript_doc {
 		this.head_var = new Xoscript_doc_head(this);
 		this.tail_var = new Xoscript_doc_tail(this);
 
-		head_var.reg_marker("<!--XOWA.SCRIPT.HEAD.TOP-->", "top", Xoscript_doc_sect_base.Pos__default);
-		head_var.reg_marker("<!--XOWA.SCRIPT.HEAD.BOT-->", "bot");
+		head_var.reg_marker("<!--XOWA.SCRIPT.HEAD.TOP-->", "top");
+		head_var.reg_marker("<!--XOWA.SCRIPT.HEAD.BOT-->", "bot", Xoscript_doc_sect_base.Pos__default);
 		tail_var.reg_marker("<!--XOWA.SCRIPT.TAIL.TOP-->", "top", Xoscript_doc_sect_base.Pos__default);
 	}
 	public Xoscript_page page() {return page_var;} private final    Xoscript_page page_var;

@@ -15,14 +15,14 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.langs.htmls.scripts; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
+package gplx.core.scripts; import gplx.*; import gplx.core.*;
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-public class Gfh_script_engine__javascript implements Gfh_script_engine {
+public class Gfo_script_engine__javascript implements Gfo_script_engine {
 	private final ScriptEngine engine;
 	private final Invocable invk;
-	public Gfh_script_engine__javascript() {
+	public Gfo_script_engine__javascript() {
 	    ScriptEngineManager manager = new ScriptEngineManager();
 	    this.engine = manager.getEngineByName("JavaScript");
 	    this.invk = (Invocable)engine;

@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.htmls.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*; import gplx.xowa.addons.htmls.scripts.*;
+package gplx.xowa.addons.apps.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.scripts.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xoscript_doc_head__tst {
 	private final    Xoscript_doc_head__fxt fxt = new Xoscript_doc_head__fxt();
@@ -52,7 +52,7 @@ class Xoscript_doc_head__fxt {
 	private Xoscript_doc_sect_base sect;
 	public Xoscript_doc_head__fxt() {
 		Bry_bfr rv = Bry_bfr_.New();
-		Xoscript_env env = new Xoscript_env(new gplx.langs.htmls.scripts.Gfh_script_engine__noop(), Io_url_.new_any_("mem/wiki/test_wiki/bin/script/"));
+		Xoscript_env env = new Xoscript_env(new gplx.core.scripts.Gfo_script_engine__noop(), Io_url_.new_any_("mem/wiki/test_wiki/bin/script/"));
 		Xoscript_url url = new Xoscript_url("test_wiki", "test_page");
 		spg = new Xoscript_page(rv, env, url);
 	}
@@ -67,7 +67,7 @@ class Xoscript_doc_head__fxt {
 	public void Exec__add_js_file(String pos, String file) {sect.add_js_file(pos, file);}
 	public void Exec__add_html(String html)				{sect.add_html(html);}
 	public void Exec__add_html(String pos, String html) {sect.add_html(pos, html);}
-	public void Exec__add_tag(String pos, String tag, String body, String... head_atrs) {sect.add_tag(pos, tag, body, head_atrs);}
+	public void Exec__add_tag(String pos, String tag, String body, Object... head_atrs) {sect.add_tag(pos, tag, body, head_atrs);}
 	public void Test__html(String... expd) {
 		Gftest.Eq__ary__lines(String_.Concat_lines_nl_skip_last(expd), spg.doc().html(), "html");
 	}
