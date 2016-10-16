@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Xtn/Scripting - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  <style data-source="xowa" type="text/css">
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+<style data-source="xowa" type="text/css">
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Xtn/Scripting</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      XOWA allows custom scripts to run on XOWA pages
+    </p>
+    <table class="metadata plainlinks ambox ambox-delete" style="">
+      <tr>
+        <td class="mbox-empty-cell">
+        </td>
+        <td class="mbox-text" style="">
+          <p>
+            <span class="mbox-text-span">Please note that this feature is still a work in progress. For the latest updates / usage notes, please check <a href="https://github.com/gnosygnu/xowa/issues/88" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/88</a></span>
+          </p>
+        </td>
+      </tr>
+    </table>
+    <p>
+      <br>
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Options"><span class="tocnumber">1</span> <span class="toctext">Options</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Background"><span class="tocnumber">2</span> <span class="toctext">Background</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Overview"><span class="tocnumber">3</span> <span class="toctext">Overview</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#Javascript"><span class="tocnumber">4</span> <span class="toctext">Javascript</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#xowa.script.main.js"><span class="tocnumber">4.1</span> <span class="toctext">xowa.script.main.js</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#example.main.js"><span class="tocnumber">4.2</span> <span class="toctext">example.main.js</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#example.util.js"><span class="tocnumber">4.3</span> <span class="toctext">example.util.js</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-8">
+              <a href="#example.include.js"><span class="tocnumber">4.4</span> <span class="toctext">example.include.js</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-9">
+          <a href="#Lua"><span class="tocnumber">5</span> <span class="toctext">Lua</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-10">
+              <a href="#example.xowa.lua"><span class="tocnumber">5.1</span> <span class="toctext">example.xowa.lua</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-11">
+              <a href="#example.util.lua"><span class="tocnumber">5.2</span> <span class="toctext">example.util.lua</span></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Options">Options</span>
+    </h2>
+    <p>
+      The options page is at <a href="http://xowa.org/home/wiki/Options/Scripting.html" id="xolnki_2" title="Options/Scripting" class="xowa-visited">Options/Scripting</a>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Background">Background</span>
+    </h2>
+    <ul>
+      <li>
+        MediaWiki supports custom functions through an extension system. These extensions are generally written in PHP.
+      </li>
+      <li>
+        XOWA supports the most important extensions used on Wikimedia wikis. In addition it also supports some extensions used on Wikia wikis. These XOWA extensions convert the PHP counterparts to Java.
+      </li>
+      <li>
+        However, there are many extensions which are unsupported by XOWA
+      </li>
+    </ul>
+    <p>
+      If you would like to have an extension supported directly by XOWA, please contact the developer through <a href="http://xowa.org/home/wiki/Help/Feedback.html" id="xolnki_3" title="Help/Feedback">Help/Feedback</a>. You can also hack the XOWA source to add your own extension in Java.
+    </p>
+    <p>
+      However, if you want a simpler approach, XOWA does allow an extension system by adding javascript / lua files
+    </p>
+    <h2>
+      <span class="mw-headline" id="Overview">Overview</span>
+    </h2>
+    <p>
+      The following process is involved:
+    </p>
+    <ul>
+      <li>
+        Enable Scripting globally at home/wiki/Options/Scripting
+      </li>
+      <li>
+        Place a main script file at <code>/xowa/wiki/simple.wikipedia.org/bin/any/script/xowa.script.main.js</code>. See below for the contents of a main script file
+      </li>
+      <li>
+        Place an extension script file at <code>/xowa/wiki/simple.wikipedia.org/bin/any/script/example.js/example.main.js</code>. See below for the contents of an extension script file
+      </li>
+      <li>
+        Launch a page in the wiki and observe the effects
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Javascript">Javascript</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="xowa.script.main.js">xowa.script.main.js</span>
+    </h3>
+<pre>
+/*
+  "xoscript__main" loads extensions
+  
+  XOWA always looks for a file called "/xowa/wiki/wiki_name/bin/any/script/xowa.script.main.js"
+  * If it finds a file, it runs "xoscript__main"
+  * lua can also be used. For example, "/xowa/wiki/wiki_name/bin/any/script/xowa.script.main.lua"
+  * If both a .js and a .lua file exists, the behavior is non-deterministic. Currently, it will run both files, but this may change in the future
+*/
+function xoscript__main(xo) {
+  /*
+    "reg_xtn" registers an extension. It takes 2 arguments:
+    * "key": a string key that is used internally for differentiating extensions. It may be exposed externally later
+    * "file": a file path to the extension's "main" file. See the "example.main.js" for what should go in a "main" file"    
+  */
+  xo.reg_xtn("example.js" , "./example.js/example.main.js");
+  xo.reg_xtn("example.lua", "./example.lua/example.xowa.lua");
+}
+</pre>
+    <h3>
+      <span class="mw-headline" id="example.main.js">example.main.js</span>
+    </h3>
+<pre>
+/*
+  "xoscript__init" can load utility functions for later use in *this* script
+  
+  "xoscript__init" should always be present; if not used, leave it empty. for example:
+
+  function xoscript__init(env) {}
+*/
+function xoscript__init(env) {
+    // load a utility script called "example.util.js"
+    // This will add a function called "xo_uppercase" which will be used below in "xoscript__page_write_end"
+    env.load_script("./example.util.js");
+}
+
+/*
+  "xoscript__page_write_end" can change the page html before it is rendered  
+*/
+function xoscript__page_write_end(page)
+{
+  /*
+    add a &lt;script&gt; tag to the "tail" of the html document
+    * "tail" is defined as the area between "&lt;/body&gt;" and "&lt;/html&gt;"
+    * Specifically: '&lt;/body&gt;&lt;script src="file:///xowa/wiki/simple.wikipedia.org/wiki/bin/any/script/example.js/example.include.js" type="text/javascript"&gt;&lt;/script&gt;&lt;/html&gt;'
+    
+    Note that a &lt;script&gt; tag can be added to the "head" of the html document at the "bot" position
+    * EX: 'page.doc().head().add_js_file("./example.include.js")'
+    
+    In this case, there are a few more details
+    * "head" is defined as the area between "&lt;head&gt;" and "&lt;/head&gt;"
+    * the following positions can be specified within "&lt;head&gt;":
+    ** "top": defined as "before" all XOWA scripts
+    *** EX: 'page.doc().head().add_js_file("top", "./example.include.js")'
+    ** "bot": defined as "after" all XOWA scripts. note that "bot" is the default when position is omitted
+    *** EX: 'page.doc().head().add_js_file("bot", "./example.include.js")'
+    ** "": defined as "default" which is the same as "bot"
+  */
+  page.doc().tail().add_js_file("./example.include.js");
+
+  /*
+    adds a &lt;meta&gt; tag to the &lt;head&gt; area.
+    * Specifically: '&lt;meta name="some_name" content="some_content"&gt;&lt;/meta&gt;'
+    
+    For parameters:
+    * the 1nd argument is the position; EX: "top", "bot", ""
+    * the 2nd argument is the tag_name; EX: "meta" -&gt; "&lt;meta&gt;&lt;/meta&gt;"
+    * the 3rd argument is the innerText; EX: "some_text" -&gt; "&lt;meta&gt;some_text&lt;/meta&gt;"
+    * the rest of the arguments are key-value pairs for the opening tag; EX: "k1", "v1", "k2", "v2" -&gt; '&lt;meta k1="v1" k2="v2"&gt;&lt;/meta&gt;'
+    
+    Note that like "add_js_file"...
+    * positions can be specified with "head" / "tail"
+    * "top" / "bot" are also supported
+  */
+  page.doc().head().add_tag("", "meta", "", "name", "some_name", "content", "some_content");
+  
+  /*
+    adds arbitrary html to the tail document
+    * Specifically: '&lt;I&gt;USING A FUNCTION FROM  EXAMPLE.UTIL.JS&lt;/I&gt;'
+    
+    Note that this line also demonstrates calling utility scripts:
+    * in this case "xo_uppercase" exists in "./example.util.js" 
+    * "./example.util.js" was loaded by "xoscript_init" above
+  */
+  page.doc().tail().add_html(xo_uppercase("&lt;i&gt;using a function from example.util.js&lt;/i&gt;&lt;br/&gt;"));
+  
+  /*
+    Some other functions;
+
+    // log a message to the XOWA log. The XOWA log is visible at home/wiki/Special:XowaSystemData?type=log_session
+    xolog.log('some log message');
+    
+    // get the current wiki_name
+    var wiki_name = page.url().wiki_name();   // returns "simple.wikipedia.org"
+    
+    // get the current page_name
+    var page_name = page.url().page_name();   // returns the name of the current page; EX: "Earth"
+
+    // get the current html    
+    var html = page.doc().html();
+    
+    // set the current html
+    page.doc().html("some_html");
+    
+    // add js script
+    page.doc().head().add_js_code("alert('some_alert')");
+
+    // add a css_file
+    page.doc().head().add_css_file("./example.include.css");
+
+    // add css code
+    page.doc().head().add_js_code("my_style {display:none;}"); 
+    */
+}
+</pre>
+    <h3>
+      <span class="mw-headline" id="example.util.js">example.util.js</span>
+    </h3>
+<pre>
+function xo_uppercase(s) {
+  return s.toUpperCase();
+}
+</pre>
+    <h3>
+      <span class="mw-headline" id="example.include.js">example.include.js</span>
+    </h3>
+<pre>
+var content = document.getElementById("content");
+var h1Elements = content.getElementsByTagName("h1");
+if ( h1Elements.length != 0 ) {
+  var current =  h1Elements[0].innerHTML;
+  h1Elements[0].innerHTML = current[0] + ' from include.js';
+}
+</pre>
+    <h2>
+      <span class="mw-headline" id="Lua">Lua</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="example.xowa.lua">example.xowa.lua</span>
+    </h3>
+<pre>
+function xoscript__init(env)
+  env:load_script("./example.util.lua");
+end
+
+function xoscript__page_write_end(page)
+  page:doc():tail():add_html("top", xo_uppercase("from lua"));
+end
+</pre>
+    <h3>
+      <span class="mw-headline" id="example.util.lua">example.util.lua</span>
+    </h3>
+<pre>
+function xo_uppercase(s)
+  return s:upper()
+end
+</pre>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://www.youtube.com/watch?v=q0qbXYXEH6M" title="See a video of XOWA Desktop in action">Video</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+        <li><a href="https://www.youtube.com/watch?v=jsMTBxGweUw" title="See a video of XOWA Android in action">Video</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
