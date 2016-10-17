@@ -85,7 +85,7 @@
           <a href="#Lua"><span class="tocnumber">5</span> <span class="toctext">Lua</span></a> 
           <ul>
             <li class="toclevel-2 tocsection-10">
-              <a href="#example.xowa.lua"><span class="tocnumber">5.1</span> <span class="toctext">example.xowa.lua</span></a>
+              <a href="#example.main.lua"><span class="tocnumber">5.1</span> <span class="toctext">example.main.lua</span></a>
             </li>
             <li class="toclevel-2 tocsection-11">
               <a href="#example.util.lua"><span class="tocnumber">5.2</span> <span class="toctext">example.util.lua</span></a>
@@ -162,7 +162,7 @@ function xoscript__main(xo) {
     * "file": a file path to the extension's "main" file. See the "example.main.js" for what should go in a "main" file"    
   */
   xo.reg_xtn("example.js" , "./example.js/example.main.js");
-  xo.reg_xtn("example.lua", "./example.lua/example.xowa.lua");
+  xo.reg_xtn("example.lua", "./example.lua/example.main.lua");
 }
 </pre>
     <h3>
@@ -224,7 +224,7 @@ function xoscript__page_write_end(page)
   
   /*
     adds arbitrary html to the tail document
-    * Specifically: '&lt;I&gt;USING A FUNCTION FROM  EXAMPLE.UTIL.JS&lt;/I&gt;'
+    * Specifically: '&lt;I&gt;USING A FUNCTION FROM EXAMPLE.UTIL.JS&lt;/I&gt;'
     
     Note that this line also demonstrates calling utility scripts:
     * in this case "xo_uppercase" exists in "./example.util.js" 
@@ -284,7 +284,7 @@ if ( h1Elements.length != 0 ) {
       <span class="mw-headline" id="Lua">Lua</span>
     </h2>
     <h3>
-      <span class="mw-headline" id="example.xowa.lua">example.xowa.lua</span>
+      <span class="mw-headline" id="example.main.lua">example.main.lua</span>
     </h3>
 <pre>
 function xoscript__init(env)
