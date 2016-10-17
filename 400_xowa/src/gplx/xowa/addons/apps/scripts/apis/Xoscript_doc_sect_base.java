@@ -36,7 +36,6 @@ public abstract class Xoscript_doc_sect_base {
 	public void add_html(String pos_str, byte[] html) {
 		doc.html_by_marker(get_marker_by_pos(Bry_.new_u8(pos_str)), html);
 	}
-//		public void add_tag_by_objs(String pos_str, String tag_str, String body, params String[] head_atrs) {
 	public void add_tag(String pos_str, String tag_str, String body, Object... head_atrs) {
 		// build tag.bgn; EX: '<tag k1="v1">'
 		tmp_bfr.Add_byte(Byte_ascii.Angle_bgn);

@@ -21,7 +21,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.files.*;
-public class Gallery_parser {		
+public class Gallery_parser {
 	private Xowe_wiki wiki; private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_u8();
 	private Gallery_itm cur_itm;
 	private byte[] src; private int end_pos;
@@ -47,13 +47,14 @@ public class Gallery_parser {
 		this.src = src;
 		this.cur_pos = content_bgn; this.end_pos = content_end;
 		cur_itm = new Gallery_itm();
+
 		while (cur_pos < end_pos) {
 			cur_itm.Reset();
 			caption_bfr.Clear();
 			byte cur_mode = Parse_itm();
 			if (cur_itm.Ttl() != null) {
 				if (caption_bfr.Len() > 0)
-					cur_itm.Caption_bry_(caption_bfr.To_bry_and_clear_and_trim());
+					cur_itm.Caption_bry_(Make_caption_bry(caption_bfr, wiki, ctx, caption_bfr.To_bry_and_clear()));
 				Make_lnki_tkn(mgr, xnde, src);
 				rv.Add(cur_itm);
 				cur_itm = new Gallery_itm();
@@ -237,6 +238,24 @@ public class Gallery_parser {
 			byte[] itm_bry = Xol_kwd_parse_data.Strip(caption_bfr, itm.Val(), tmp_bref);	// strip off =$1 for "alt=$1"
 			trie.Add_obj(itm_bry, trie_ref);
 		}
+	}
+	// MW changed behavior from chaining multiple args to keeping last one; EX: "File:A.png|a|b" -> "b" x> "a|b" PAGE:fr.w:Belgique DATE:2016-10-17 REF: https://github.com/wikimedia/mediawiki/commit/63aeabeff1e098e872cc46f3698c61457e44ba15
+	private static byte[] Make_caption_bry(Bry_bfr tmp_bfr, Xowe_wiki wiki, Xop_ctx ctx, byte[] src) {			
+		// parse caption to tkns
+		Xop_root_tkn root = wiki.Parser_mgr().Main().Parse_text_to_wdom(Xop_ctx.New__top(wiki), src, false);
+
+		// loop tkns
+		int subs_len = root.Subs_len();
+		for (int i = 0; i < subs_len; ++i) {
+			Xop_tkn_itm sub = root.Subs_get(i);
+			// pipe resets caption; EX: "a|b" -> "b"
+			if (sub.Tkn_tid() == Xop_tkn_itm_.Tid_pipe)
+				tmp_bfr.Clear();
+			// else, add tkn to caption; note that loop does not recurse through tkn's subtkns; EX: "a|[[b|c]]" -> "text_tkn,lnki_tkn" -> "[[b|c]]"
+			else
+				tmp_bfr.Add_mid(root.Data_mid(), sub.Src_bgn(), sub.Src_end());
+		}
+		return tmp_bfr.To_bry_and_clear_and_trim();
 	}
 }
 /*

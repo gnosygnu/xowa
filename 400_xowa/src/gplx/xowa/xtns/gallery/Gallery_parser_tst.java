@@ -23,7 +23,9 @@ public class Gallery_parser_tst {
 	@Test   public void Ttl_only()			{fxt.Test_parse("File:A.png"					, fxt.Expd("File:A.png", null, null, null));}
 	@Test   public void Ttl_url_encoded()	{fxt.Test_parse("File:A%28b%29.png"				, fxt.Expd("File:A(b).png"));}			// PURPOSE: handle url-encoded sequences; DATE:2014-01-01
 	@Test   public void Caption_only()		{fxt.Test_parse("File:A.png|a"					, fxt.Expd("File:A.png", "a" , null, null));}
-	@Test   public void Caption_many()		{fxt.Test_parse("File:A.png|a|b"				, fxt.Expd("File:A.png", "a|b"));}		// NOTE: pipe becomes part of caption (i.e.: doesn't separate into caption / alt)
+	@Test   public void Caption_many()		{fxt.Test_parse("File:A.png|a|b"				, fxt.Expd("File:A.png", "b"));}			// NOTE: keep last pipe
+	@Test   public void Caption_many_lnki1(){fxt.Test_parse("File:A.png|a|[[b|c]]"			, fxt.Expd("File:A.png", "[[b|c]]"));}		// NOTE: ignore pipe in lnki
+	@Test   public void Caption_many_lnki2(){fxt.Test_parse("File:A.png|[[b|c]]|d"			, fxt.Expd("File:A.png", "d"));}			// NOTE: ignore pipe in lnki
 	@Test   public void Alt_only()			{fxt.Test_parse("File:A.png|alt=a"				, fxt.Expd("File:A.png", null, "a" , null));}
 	@Test   public void Link_only()			{fxt.Test_parse("File:A.png|link=a"				, fxt.Expd("File:A.png", null, null, "a"));}
 	@Test   public void Caption_alt()		{fxt.Test_parse("File:A.png|a|alt=b"			, fxt.Expd("File:A.png", "a" , "b"));}
@@ -31,7 +33,7 @@ public class Gallery_parser_tst {
 	@Test   public void Alt_blank()			{fxt.Test_parse("File:A.png|alt=|b"				, fxt.Expd("File:A.png", "b" , ""));}
 	@Test   public void Alt_invalid()		{fxt.Test_parse("File:A.png|alta=b"				, fxt.Expd("File:A.png", "alta=b"));}	// NOTE: invalid alt becomes caption
 	@Test   public void Ws()				{fxt.Test_parse("File:A.png| alt = b | c"		, fxt.Expd("File:A.png", "c" , "b"));}
-	@Test   public void Ws_caption_many()	{fxt.Test_parse("File:A.png| a | b | c "		, fxt.Expd("File:A.png", "a | b | c"));}
+	@Test   public void Ws_caption_many()	{fxt.Test_parse("File:A.png| a | b | c "		, fxt.Expd("File:A.png", "c"));}
 	@Test   public void Page_pdf()			{fxt.Test_parse("File:A.pdf|page=1 "			, fxt.Expd("File:A.pdf", null, null, null, 1));}	// pdf parses page=1
 	@Test   public void Page_png()			{fxt.Test_parse("File:A.png|page=1 "			, fxt.Expd("File:A.png", "page=1", null, null));}	// non-pdf treats page=1 as caption
 	@Test   public void Page_invalid()		{fxt.Test_parse("|page=1");}	// check that null title doesn't fail; DATE:2014-03-21
