@@ -81,6 +81,7 @@ public class Pgbnr_itm implements Mustache_doc_itm {
 			this.img_id_atr = Bry_.Empty;
 			this.img_xottl_atr = Gfh_atr_.Add_to_bry(tmp_bfr, Xoh_img_xoimg_data.Bry__data_xowa_title, file_ttl);
 			this.img_xoimg_atr = Gfh_atr_.Add_to_bry(tmp_bfr, Xoh_img_xoimg_data.Bry__data_xowa_image, Xoh_img_xoimg_data.Bry__data_xowa_image__full);
+			this.banner_img_src = Bry_.Empty;	// do not write img_src else hzip_diff will complain for every image; DATE:2016-10-18
 		}
 		else {
 			this.img_id_atr = tmp_bfr.Add(Bry__anch_atr_id).Add_int_variable(banner_file_itm.Html_uid()).Add_byte_quote().To_bry_and_clear();
