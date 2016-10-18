@@ -61,7 +61,7 @@ public class Wdata_prop_val_visitor_ {
 
 		// render val_obj based on tid
 		switch (tid) {
-			case Wbase_claim_type_.Tid__entity:				throw Err_.new_unimplemented();
+			case Wbase_claim_type_.Tid__entity:				Render__entity		(bfr, wiki, lang, page_url, (Keyval[])val_obj); break;
 			case Wbase_claim_type_.Tid__string:				bfr.Add_str_u8((String)val_obj); break;
 			case Wbase_claim_type_.Tid__time:				Render__time		(bfr, wiki, page_url, (Keyval[])val_obj); break;
 			case Wbase_claim_type_.Tid__globecoordinate:	Render__geo			(bfr, lang, page_url, (Keyval[])val_obj); break;
@@ -69,6 +69,37 @@ public class Wdata_prop_val_visitor_ {
 			case Wbase_claim_type_.Tid__monolingualtext:	Render__langtext	(bfr, lang, (Keyval[])val_obj); break;
 		}
 		lang.Comma_wkr().Comma__itm(bfr, sub_idx, sub_len);
+	}
+	private static void Render__entity(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, byte[] page_url, Keyval[] kvs) {
+		byte entity_tid = Byte_.Max_value_127;
+		byte[] entity_id_bry = null;
+
+		// get p/q and number; PAGE:en.v:Mongolia; EX: [numeric-id=6498663, entity-type=item]; DATE:2016-10-18
+		int len = kvs.length;
+		for (int i = 0; i < len; ++i) {
+			Keyval kv = kvs[i];
+			byte tid = Wbase_claim_entity_.Reg.Get_tid_or_max_and_log(page_url, kv.Key()); if (tid == Byte_.Max_value_127) continue;
+			switch (tid) {
+				case Wbase_claim_entity_.Tid__entity_type:		entity_tid = Wbase_claim_entity_type_.Reg.Get_tid_or_fail(kv.Val_to_bry()); break;
+				case Wbase_claim_entity_.Tid__numeric_id:		entity_id_bry = kv.Val_to_bry(); break;
+				case Wbase_claim_entity_.Tid__id:				break;	// ignore
+			}
+		}
+
+		// convert p/q, number to xid; "p123", "q123"
+		if (entity_id_bry == null) throw Err_.new_wo_type("xid is invalid entity", "xid", page_url);
+		byte xid_pre = entity_tid == Wbase_claim_entity_type_.Tid__item ? Byte_ascii.Ltr_Q : Byte_ascii.Ltr_P;
+		entity_id_bry = Bry_.Add(xid_pre, entity_id_bry);
+
+		// get doc
+		Wdata_doc wdoc = wiki.Appe().Wiki_mgr().Wdata_mgr().Doc_mgr.Get_by_xid_or_null(entity_id_bry); // NOTE: by_xid b/c Module passes just "p1" not "Property:P1"
+		if (wdoc == null) {
+			Gfo_usr_dlg_.Instance.Log_many("", "", "qid not found in wikidata for renderSnak; page=~{0} qid=~{1}", page_url, entity_id_bry);
+			return;
+		}
+
+		// add label
+		bfr.Add(wdoc.Label_list__get(lang.Key_bry()));
 	}
 	private static void Render__time(Bry_bfr bfr, Xowe_wiki wiki, byte[] page_url, Keyval[] kvs) {
 		Wbase_date date = null;

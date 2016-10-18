@@ -92,6 +92,11 @@ public class Scrib_lib_wikibase_tst {
 		Keyval[] args = Wbase_snak_utl_.Get_snaks_ary(wdata_fxt, wdata_fxt.Make_claim_monolingual(3, "en", "P3_en"), wdata_fxt.Make_claim_monolingual(3, "de", "P3_de"));
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnaks, args, "P3_en, P3_de");
 	}
+	@Test  public void RenderSnak__entity() {
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("Q3").Add_label("zh-hans", "test_label").Xto_wdoc());
+		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, wdata_fxt.Make_claim_entity_qid(2, 3));
+		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "test_label");
+	}
 	@Test  public void RenderSnak__str() {
 		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, wdata_fxt.Make_claim_string(3, "test_str"));
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "test_str");
