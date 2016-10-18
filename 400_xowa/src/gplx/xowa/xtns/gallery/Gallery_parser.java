@@ -242,7 +242,7 @@ public class Gallery_parser {
 	// MW changed behavior from chaining multiple args to keeping last one; EX: "File:A.png|a|b" -> "b" x> "a|b" PAGE:fr.w:Belgique DATE:2016-10-17 REF: https://github.com/wikimedia/mediawiki/commit/63aeabeff1e098e872cc46f3698c61457e44ba15
 	private static byte[] Make_caption_bry(Bry_bfr tmp_bfr, Xowe_wiki wiki, Xop_ctx ctx, byte[] src) {			
 		// parse caption to tkns
-		Xop_root_tkn root = wiki.Parser_mgr().Main().Parse_text_to_wdom(Xop_ctx.New__top(wiki), src, false);
+		Xop_root_tkn root = wiki.Parser_mgr().Main().Parse_text_to_wdom(Xop_ctx.New__top(wiki), src, false);	// NOTE: ctx must be top, else <ref> will get double-counted
 
 		// loop tkns
 		int subs_len = root.Subs_len();

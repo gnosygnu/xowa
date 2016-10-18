@@ -86,6 +86,23 @@ public class Int_ implements Gfo_invk {
 	}
 	public static int BoundEnd(int v, int end) {return v >= end ? end - 1 : v;}
 	public static int Min(int lhs, int rhs) {return lhs < rhs ? lhs : rhs;}
+	public static int Min_many(int... ary) {
+		int len = ary.length; if (len == 0) throw Err_.new_wo_type("Min_many requires at least 1 value");
+		boolean init = true;
+		int min = Int_.Min_value;
+		for (int i = 0; i < len; ++i) {
+			int val = ary[i];
+			if (init) {
+				min = val;
+				init = false;
+			}
+			else {
+				if (val < min)
+					min = val;
+			}
+		}
+		return min;
+	}
 	public static int Max(int lhs, int rhs) {return lhs > rhs ? lhs : rhs;}
 	public static int ModIfNeg1(int v, int or) {return v == -1 ? or : v;}
 	public static boolean RangeCheck(int v, int max) {return v >= 0 && v < max;}

@@ -29,6 +29,10 @@ public class Bry_find_ {
 		int rv = Find_fwd(src, lkp, cur, end);
 		return rv == Bry_find_.Not_found ? or : rv;
 	}
+	public static int Find_fwd_or(byte[] src, byte[] lkp, int cur, int end, int or) {
+		int rv = Find_fwd(src, lkp, cur, end);
+		return rv == Bry_find_.Not_found ? or : rv;
+	}
 	public static int Find_bwd(byte[] src, byte lkp)								{return Find_bwd(src, lkp, src.length, 0);}
 	public static int Find_bwd(byte[] src, byte lkp, int cur)						{return Find_bwd(src, lkp, cur		 , 0);}
 	public static int Find_bwd(byte[] src, byte lkp, int cur, int end) {

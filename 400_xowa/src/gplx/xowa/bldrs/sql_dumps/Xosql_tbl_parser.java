@@ -20,21 +20,7 @@ import gplx.core.ios.*;
 class Xosql_tbl_parser {
 	public Ordered_hash Parse(byte[] raw) {
 		Ordered_hash rv = Ordered_hash_.New_bry();
-		// get bgn of fields def; assume after "CREATE TABLE"
-		int bgn = Bry_find_.Find_fwd(raw, Tkn__create_table);	if (bgn == Bry_find_.Not_found) throw Err_.new_wo_type("could not find 'CREATE TABLE'");
-		bgn = Bry_find_.Find_fwd(raw, Byte_ascii.Nl, bgn);		if (bgn == Bry_find_.Not_found) throw Err_.new_wo_type("could not find new line after 'CREATE TABLE'");
-		bgn += 1;	// position after character
-
-		// get end of fields def; assume before "UNIQUE KEY" or "PRIMARY KEY"
-		int end = Bry_find_.Find_fwd(raw, Tkn__primary_key);
-		if (end == Bry_find_.Not_found) {	// as of 2016-07, en.w:categorylinks no longer has UNIQUE KEY; try PRIMARY KEY; DATE:2016-07-08
-			end = Bry_find_.Find_fwd(raw, Tkn__unique_index);
-			if (end == Bry_find_.Not_found) throw Err_.new_wo_type("could not find 'UNIQUE KEY' or 'PRIMARY KEY'");
-		}
-		end = Bry_find_.Find_bwd(raw, Byte_ascii.Nl, end); if (bgn == Bry_find_.Not_found) throw Err_.new_wo_type("could not find new line before 'UNIQUE KEY'");
-
-		// do parse
-		Parse_flds(rv, Bry_.Mid(raw, bgn, end));
+		Parse_flds(rv, Extract_flds(raw));
 		return rv;
 	}
 	private void Parse_flds(Ordered_hash rv, byte[] raw) {
@@ -53,9 +39,31 @@ class Xosql_tbl_parser {
 			rv.Add(key, new Xosql_fld_itm(Int_.Max_value, key, fld_idx++));
 		}
 	}
-	private static final    byte[] 
+	public byte[] Extract_flds(byte[] raw) {	// NOTE: very dependent on MySQL dump formatter
+		// get bgn of flds; assume after "CREATE TABLE"
+		int bgn = Bry_find_.Find_fwd(raw, Tkn__create_table);	if (bgn == Bry_find_.Not_found) throw Err_.new_wo_type("could not find 'CREATE TABLE'");
+		bgn = Bry_find_.Find_fwd(raw, Byte_ascii.Nl, bgn);		if (bgn == Bry_find_.Not_found) throw Err_.new_wo_type("could not find new line after 'CREATE TABLE'");
+		bgn += 1;	// position after \n
+
+		// get end of flds; more involved, as need to find last field before indexes
+		// first, get absolute end; don't want to pick up "PRIMARY KEY" in data; EX:en.b:categorylinks.sql DATE:2016-10-17
+		int end = Bry_find_.Find_fwd(raw, Tkn__engine);			if (end == Bry_find_.Not_found) throw Err_.new_wo_type("could not find ') ENGINE'");
+
+		// now look for "UNIQUE KEY", "KEY", "PRIMARY KEY"
+		int key_idx  = Bry_find_.Find_fwd_or(raw, Tkn__key , bgn, end, Int_.Max_value__31);
+		int pkey_idx = Bry_find_.Find_fwd_or(raw, Tkn__pkey, bgn, end, Int_.Max_value__31);
+		int ukey_idx = Bry_find_.Find_fwd_or(raw, Tkn__ukey, bgn, end, Int_.Max_value__31);
+
+		// get min; fail if none found
+		int rv = Int_.Min_many(key_idx, pkey_idx, ukey_idx);
+		if (rv == Int_.Max_value__31) throw Err_.new_wo_type("could not find 'PRIMARY KEY', 'UNIQUE KEY', or 'KEY' in SQL", "raw", Bry_.Mid(raw, bgn, end));
+		return Bry_.Mid(raw, bgn, rv);
+	}
+	private final    byte[] 
 	  Tkn__create_table	= Bry_.new_a7("CREATE TABLE")
-	, Tkn__unique_index	= Bry_.new_a7("UNIQUE KEY")
-	, Tkn__primary_key	= Bry_.new_a7("PRIMARY KEY")
+	, Tkn__ukey			= Bry_.new_a7("\n  UNIQUE KEY")
+	, Tkn__pkey			= Bry_.new_a7("\n  PRIMARY KEY")
+	, Tkn__key			= Bry_.new_a7("\n  KEY ")
+	, Tkn__engine		= Bry_.new_a7("\n) ENGINE")
 	;
 }
