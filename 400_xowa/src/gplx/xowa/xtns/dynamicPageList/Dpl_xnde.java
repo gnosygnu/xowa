@@ -117,7 +117,15 @@ class Dpl_page_finder {
 		}
 	}
 	private static void Find_pages_in_ctg(Ordered_hash rv, Xowe_wiki wiki, Xodb_load_mgr load_mgr, byte[] page_ttl, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, byte[] ctg_ttl) {
-		Xoctg_catpage_ctg ctg = wiki.Ctg__catpage_mgr().Get_or_load_or_null(page_ttl, Xoctg_catpage_url.New__blank(), wiki.Ttl_parse(gplx.xowa.wikis.nss.Xow_ns_.Tid__category, ctg_ttl), -1);
+		Xoa_ttl cat_ttl = wiki.Ttl_parse(gplx.xowa.wikis.nss.Xow_ns_.Tid__category, ctg_ttl);
+
+		// pages in en.n will pass "{{{2}}}" as category title; DATE:2016-10-18
+		if (cat_ttl == null) {
+			Gfo_usr_dlg_.Instance.Log_many("", "", "category title is invalid; wiki=~{0} page=~{1} ttl=~{2}", wiki.Domain_str(), page_ttl, ctg_ttl);
+			return;
+		}
+
+		Xoctg_catpage_ctg ctg = wiki.Ctg__catpage_mgr().Get_or_load_or_null(page_ttl, Xoctg_catpage_url.New__blank(), cat_ttl, -1);
 		if (ctg == null) return;
 
 		// loop grps to get grp
