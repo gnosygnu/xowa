@@ -48,6 +48,16 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html("No pages meet these criteria.");
 	}
+	@Test   public void Ctg_multiple_ignore_invalid() {	// PURPOSE: ignore invalid category titles; PAGE:en.n:Category:Egypt DATE:2016-10-18
+		fxt.Init__create_ctg_pages("Ctg_0", Dpl_page_mok.new_(101, "A"));
+		fxt.Exec__parse
+		( "<DynamicPageList>"
+		, "category=Ctg_0"
+		, "category={{{2}}}"	// ignore invalid titles
+		, "</DynamicPageList>"
+		);
+		fxt.Test__html(fxt.Make__html__itms__null("A"));	// should not return nothing
+	}
 	@Test   public void Notcategory() {
 		fxt.Init__create_ctg_pages("Ctg_0", Dpl_page_mok.new_(101, "A"), Dpl_page_mok.new_(102, "B"));
 		fxt.Init__create_ctg_pages("Ctg_1", Dpl_page_mok.new_(101, "A"));
