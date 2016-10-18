@@ -50,7 +50,8 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 				ctg = loader.Load_ctg_or_null(wiki, page_ttl, this, catpage_url, cat_ttl, limit);
 			}
 			if (ctg == null) return null;	// not in cache or db; exit
-			// cache.Add(cat_ttl.Full_db(), ctg);
+			if (limit == Int_.Max_value)	// only add to cache if Max_val (DynamicPageList); for regular catpages, always retrieve on demand
+				cache.Add(cat_ttl.Full_db(), ctg);
 		}
 		return ctg;
 	}
