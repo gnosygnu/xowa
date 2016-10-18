@@ -82,10 +82,14 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		Wdata_doc wdoc = Doc_mgr.Get_by_bry_or_null(qid); if (wdoc == null) return or;
 		Wbase_claim_grp claim_grp = wdoc.Claim_list_get(pid); if (claim_grp == null || claim_grp.Len() == 0) return or;
 		Wbase_claim_base claim_itm = claim_grp.Get_at(0);
+		Resolve_claim(tmp_bfr, domain, claim_itm);
+		return tmp_bfr.To_bry_and_clear();
+	}
+	public void Resolve_claim(Bry_bfr rv, Xow_domain_itm domain, Wbase_claim_base claim_itm) {
 		synchronized (thread_lock) {	// LOCK:must synchronized b/c prop_val_visitor has member bfr which can get overwritten; DATE:2016-07-06
-			prop_val_visitor.Init(tmp_bfr, hwtr_mgr.Msgs(), domain.Lang_orig_key());
+			Hwtr_mgr_assert();
+			prop_val_visitor.Init(rv, hwtr_mgr.Msgs(), domain.Lang_orig_key());
 			claim_itm.Welcome(prop_val_visitor);
-			return tmp_bfr.To_bry_and_clear();
 		}
 	}
 	public void Resolve_to_bfr(Bry_bfr bfr, Wbase_claim_grp prop_grp, byte[] lang_key) {

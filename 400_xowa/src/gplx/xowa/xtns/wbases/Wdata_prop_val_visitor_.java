@@ -45,18 +45,35 @@ public class Wdata_prop_val_visitor_ {
 		return rv;
 	}
 	private static void Render_snak(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, byte[] page_url, Keyval[] props, int sub_idx, int sub_len) {
-		Keyval[] datavalue_ary = (Keyval[])Scrib_kv_utl_.Get_sub_by_key_or_null(props, Wdata_dict_mainsnak.Itm__datavalue.Key_str());
+		// [snaktype=value, property=P1082, datavalue=[Lgplx.Keyval;@44a11b76, datatype=quantity]
+		// loop props to get (a) snaktype; (b) property; (c) datavalue
+		byte snak_tid = Byte_.Max_value_127;
+		int pid = -1;
+		Keyval[] datavalue_ary = null;
+		int len = props.length;
+		for (int i = 0; i < len; ++i) {
+			Keyval prop = props[i];
+			byte prop_tid = Wdata_dict_mainsnak.Reg.Get_tid_or_max_and_log(page_url, prop.Key()); if (prop_tid == Byte_.Max_value_127) continue;
+			switch (prop_tid) {
+				case Wdata_dict_mainsnak.Tid__snaktype:		snak_tid = Wbase_claim_value_type_.Reg.Get_tid_or_fail(prop.Val_to_bry()); break;
+				case Wdata_dict_mainsnak.Tid__datavalue:	datavalue_ary = (Keyval[])prop.Val(); break;
+				case Wdata_dict_mainsnak.Tid__datatype:		break;		// ignore: has values like "wikibase-property"; EX: www.wikidata.org/wiki/Property:P397; DATE:2015-06-12
+				case Wdata_dict_mainsnak.Tid__property:		pid = To_pid_int(prop.Val_to_bry()); break;
+				case Wdata_dict_mainsnak.Tid__hash:			break;		// ignore: "84487fc3f93b4f74ab1cc5a47d78f596f0b49390"
+			}
+		}
 
 		// loop datavalue_ary to get tid, val_obj
 		byte tid = Byte_.Max_value_127;
 		Object val_obj = null; 
-		int len = datavalue_ary.length;
+		len = datavalue_ary.length;
 		for (int i = 0; i < len; ++i) {
-			String key = datavalue_ary[i].Key();
+			Keyval datavalue_itm = datavalue_ary[i];
+			String key = datavalue_itm.Key();
 			if		(String_.Eq(key, Wdata_dict_datavalue.Itm__type.Key_str()))
-				tid = Wbase_claim_type_.Get_tid_or_unknown((String)datavalue_ary[i].Val());
+				tid = Wbase_claim_type_.Get_tid_or_unknown((String)datavalue_itm.Val());
 			else if (String_.Eq(key, Wdata_dict_datavalue.Itm__value.Key_str()))
-				val_obj = datavalue_ary[i].Val();
+				val_obj = datavalue_itm.Val();
 		}
 
 		// render val_obj based on tid
@@ -65,7 +82,7 @@ public class Wdata_prop_val_visitor_ {
 			case Wbase_claim_type_.Tid__string:				bfr.Add_str_u8((String)val_obj); break;
 			case Wbase_claim_type_.Tid__time:				Render__time		(bfr, wiki, page_url, (Keyval[])val_obj); break;
 			case Wbase_claim_type_.Tid__globecoordinate:	Render__geo			(bfr, lang, page_url, (Keyval[])val_obj); break;
-			case Wbase_claim_type_.Tid__quantity:			Render__quantity	(bfr, lang, page_url, (Keyval[])val_obj); break;
+			case Wbase_claim_type_.Tid__quantity:			Render__quantity	(bfr, wiki, lang, page_url, pid, snak_tid, (Keyval[])val_obj); break;
 			case Wbase_claim_type_.Tid__monolingualtext:	Render__langtext	(bfr, lang, (Keyval[])val_obj); break;
 		}
 		lang.Comma_wkr().Comma__itm(bfr, sub_idx, sub_len);
@@ -125,7 +142,7 @@ public class Wdata_prop_val_visitor_ {
 			, parser_mgr.Wbase__time__msgs(), page_url, Bry_.Empty, date, calendar_is_julian
 			);
 	}
-	private static void Render__quantity(Bry_bfr bfr, Xol_lang_itm lang, byte[] page_url, Keyval[] kvs) {
+	private static void Render__quantity(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, byte[] page_url, int pid, byte snak_tid, Keyval[] kvs) {
 		byte[] amount_bry = null, lbound_bry = null, ubound_bry = null, unit_bry = null;
 		int len = kvs.length;
 		for (int i = 0; i < len; ++i) {
@@ -139,18 +156,19 @@ public class Wdata_prop_val_visitor_ {
 				case Wbase_claim_quantity_.Tid__upperbound:	ubound_bry	= val_bry; break;
 			}
 		}
-		Render__quantity(bfr, lang, amount_bry, lbound_bry, ubound_bry, unit_bry);
+		Wbase_claim_quantity quantity = new Wbase_claim_quantity(pid, snak_tid, amount_bry, unit_bry, ubound_bry, lbound_bry);
+		wiki.Appe().Wiki_mgr().Wdata_mgr().Resolve_claim(bfr, wiki.Domain_itm(), quantity);
 	}
-	private static void Render__quantity(Bry_bfr bfr, Xol_lang_itm lang, byte[] amount_bry, byte[] lbound_bry, byte[] ubound_bry, byte[] unit_bry) {
-		long val = Bry_.To_long_or(amount_bry, Byte_ascii.Comma_bry, 0, amount_bry.length, 0);	// NOTE: must cast to long for large numbers; EX:{{#property:P1082}} PAGE:en.w:Earth; DATE:2015-08-02
-		bfr.Add(lang.Num_mgr().Format_num_by_long(val));// amount; EX: 1,234
-		long lbound = Bry_.To_long_or(lbound_bry, val);
-		long ubound = Bry_.To_long_or(lbound_bry, val);
-		if (lbound != val && ubound != val) {	// NOTE: do not output � if lbound == val == ubound; PAGE:en.w:Tintinan DATE:2015-08-02
-			bfr.Add(Wdata_prop_val_visitor.Bry__quantity_margin_of_error);	// symbol: EX: �
-			bfr.Add(unit_bry); // unit; EX: 1
-		}
-	}
+//		private static void Render__quantity(Bry_bfr bfr, Xol_lang_itm lang, byte[] amount_bry, byte[] lbound_bry, byte[] ubound_bry, byte[] unit_bry) {
+//			long val = Bry_.To_long_or(amount_bry, Byte_ascii.Comma_bry, 0, amount_bry.length, 0);	// NOTE: must cast to long for large numbers; EX:{{#property:P1082}} PAGE:en.w:Earth; DATE:2015-08-02
+//			bfr.Add(lang.Num_mgr().Format_num_by_long(val));// amount; EX: 1,234
+//			long lbound = Bry_.To_long_or(lbound_bry, val);
+//			long ubound = Bry_.To_long_or(lbound_bry, val);
+//			if (lbound != val && ubound != val) {	// NOTE: do not output � if lbound == val == ubound; PAGE:en.w:Tintinan DATE:2015-08-02
+//				bfr.Add(Wdata_prop_val_visitor.Bry__quantity_margin_of_error);	// symbol: EX: �
+//				bfr.Add(unit_bry); // unit; EX: 1
+//			}
+//		}
 	private static void Render__geo(Bry_bfr bfr, Xol_lang_itm lang, byte[] page_url, Keyval[] kvs) {
 		double lat = 0, lng = 0;
 		int len = kvs.length;
@@ -177,5 +195,6 @@ public class Wdata_prop_val_visitor_ {
 	private static void Render__langtext(Bry_bfr bfr, Xol_lang_itm lang, Keyval[] kvs) {
 		bfr.Add_str_u8((String)Scrib_kv_utl_.Get_sub_by_key_or_null(kvs, Wbase_claim_monolingualtext_.Itm__text.Key_str()));
 	}
+	private static int To_pid_int(byte[] pid) {return Bry_.To_int_or(pid, 1, pid.length, -1);}	// skip "P" at bgn; EX: "p123" -> 123
 	private static final    byte[] Bry__geo_dlm = Bry_.new_a7(", ");
 }
