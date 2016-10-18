@@ -21,6 +21,7 @@ import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 import gplx.xowa.wikis.nss.*;
 class Dpl_itm {
+	public byte[] Page_ttl() {return page_ttl;} private byte[] page_ttl;
 	public List_adp Ctg_includes() {return ctg_includes;} private List_adp ctg_includes;
 	public List_adp Ctg_excludes() {return ctg_excludes;} private List_adp ctg_excludes;
 	public int Count() {return count;} private int count = Int_.Min_value;
@@ -42,6 +43,7 @@ class Dpl_itm {
 	public byte Stable_pages() {return stable_pages;} private byte stable_pages;
 	private Xop_ctx sub_ctx; private Xop_tkn_mkr sub_tkn_mkr; private Xop_root_tkn sub_root;
 	public void Parse(Xowe_wiki wiki, Xop_ctx ctx, byte[] page_ttl, byte[] src, Xop_xnde_tkn xnde) {	// parse kvps in xnde; EX:<dpl>category=abc\nredirects=y\n</dpl>
+		this.page_ttl = page_ttl;
 		sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
 		sub_tkn_mkr = sub_ctx.Tkn_mkr();
 		sub_root = sub_tkn_mkr.Root(Bry_.Empty);

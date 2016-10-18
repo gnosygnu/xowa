@@ -19,13 +19,13 @@ package gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs; import gplx.*; import gp
 import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.ctgs.dbs.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs.*;
 public class Xoctg_catpage_loader {
-	public Xoctg_catpage_ctg Load_ctg_or_null(Xow_wiki wiki, Xoctg_catpage_mgr catpage_mgr, Xoctg_catpage_url cat_url, Xoa_ttl cat_ttl, int limit) {
+	public Xoctg_catpage_ctg Load_ctg_or_null(Xow_wiki wiki, byte[] page_ttl_bry, Xoctg_catpage_mgr catpage_mgr, Xoctg_catpage_url cat_url, Xoa_ttl cat_ttl, int limit) {
 		// get cat_id from page_tbl
 		Xow_db_mgr db_mgr = wiki.Data__core_mgr();
 		Xowd_page_tbl page_tbl = db_mgr.Db__core().Tbl__page();
 		Xowd_page_itm page_itm = page_tbl.Select_by_ttl_as_itm_or_null(cat_ttl);
 		if (page_itm == null) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "category does not exist in page table; ttl=~{0}", cat_ttl.Full_db());
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "category does not exist in page table; page=~{0} ttl=~{1}", page_ttl_bry, cat_ttl.Full_db());
 			return null;
 		}
 		int cat_id = page_itm.Id();

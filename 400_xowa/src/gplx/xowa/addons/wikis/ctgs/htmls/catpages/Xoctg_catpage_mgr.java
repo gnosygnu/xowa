@@ -41,13 +41,13 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 		}
 	}
 	public void Free_mem_all() {cache.Clear();}
-	public Xoctg_catpage_ctg Get_or_load_or_null(Xoctg_catpage_url catpage_url, Xoa_ttl cat_ttl, int limit) {
+	public Xoctg_catpage_ctg Get_or_load_or_null(byte[] page_ttl, Xoctg_catpage_url catpage_url, Xoa_ttl cat_ttl, int limit) {
 		// load categories from cat dbs; exit if not found
 		Xoctg_catpage_ctg ctg = (Xoctg_catpage_ctg)cache.Get_by(cat_ttl.Full_db());
 		if (ctg == null) {
 			if (gplx.core.envs.Env_.Mode_testing()) return null;	// needed for dpl test
 			synchronized (thread_lock) {	// LOCK:used by multiple wrks; DATE:2016-09-12
-				ctg = loader.Load_ctg_or_null(wiki, this, catpage_url, cat_ttl, limit);
+				ctg = loader.Load_ctg_or_null(wiki, page_ttl, this, catpage_url, cat_ttl, limit);
 			}
 			if (ctg == null) return null;	// not in cache or db; exit
 			// cache.Add(cat_ttl.Full_db(), ctg);
@@ -60,7 +60,7 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 			Xoctg_catpage_url catpage_url = Xoctg_catpage_url_parser.Parse(page.Url());
 
 			// load categories from cat dbs; exit if not found
-			Xoctg_catpage_ctg ctg = Get_or_load_or_null(catpage_url, page.Ttl(), grp_max);
+			Xoctg_catpage_ctg ctg = Get_or_load_or_null(page.Ttl().Page_db(), catpage_url, page.Ttl(), grp_max);
 			if (ctg == null) return;
 
 			// write html

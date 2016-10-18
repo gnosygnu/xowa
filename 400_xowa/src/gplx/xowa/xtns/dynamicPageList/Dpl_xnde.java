@@ -89,12 +89,12 @@ class Dpl_page_finder {
 		List_adp del_list = List_adp_.New();
 		int ns_filter = itm.Ns_filter();
 		Ordered_hash exclude_pages = Ordered_hash_.New();
-		Find_excludes(exclude_pages, wiki, load_mgr, tmp_page, tmp_id, itm.Ctg_excludes());
+		Find_excludes(exclude_pages, wiki, load_mgr, itm.Page_ttl(), tmp_page, tmp_id, itm.Ctg_excludes());
 
 		for (int i = 0; i < includes_len; i++) {	// loop over includes
 			byte[] include = (byte[])includes.Get_at(i);
 			cur_regy.Clear(); del_list.Clear();
-			Find_pages_in_ctg(cur_regy, wiki, load_mgr, tmp_page, tmp_id, include);
+			Find_pages_in_ctg(cur_regy, wiki, load_mgr, itm.Page_ttl(), tmp_page, tmp_id, include);
 			Del_old_pages_not_in_cur(i, tmp_id, old_regy, cur_regy, del_list);
 			Add_cur_pages_also_in_old(i, tmp_id, old_regy, cur_regy, new_regy, exclude_pages, ns_filter);
 			old_regy = new_regy;
@@ -108,16 +108,16 @@ class Dpl_page_finder {
 		wiki.Db_mgr().Load_mgr().Load_by_ids(Cancelable_.Never, rv, 0, pages_len);
 		rv.Sort_by(Xowd_page_itm_sorter.IdAsc);
 	}
-	private static void Find_excludes(Ordered_hash exclude_pages, Xowe_wiki wiki, Xodb_load_mgr load_mgr, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, List_adp exclude_ctgs) {
+	private static void Find_excludes(Ordered_hash exclude_pages, Xowe_wiki wiki, Xodb_load_mgr load_mgr, byte[] page_ttl, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, List_adp exclude_ctgs) {
 		if (exclude_ctgs == null) return;
 		int exclude_ctgs_len = exclude_ctgs.Count();
 		for (int i = 0; i < exclude_ctgs_len; i++) {
 			byte[] exclude_ctg = (byte[])exclude_ctgs.Get_at(i);
-			Find_pages_in_ctg(exclude_pages, wiki, load_mgr, tmp_page, tmp_id, exclude_ctg);
+			Find_pages_in_ctg(exclude_pages, wiki, load_mgr, page_ttl, tmp_page, tmp_id, exclude_ctg);
 		}
 	}
-	private static void Find_pages_in_ctg(Ordered_hash rv, Xowe_wiki wiki, Xodb_load_mgr load_mgr, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, byte[] ctg_ttl) {
-		Xoctg_catpage_ctg ctg = wiki.Ctg__catpage_mgr().Get_or_load_or_null(Xoctg_catpage_url.New__blank(), wiki.Ttl_parse(gplx.xowa.wikis.nss.Xow_ns_.Tid__category, ctg_ttl), -1);
+	private static void Find_pages_in_ctg(Ordered_hash rv, Xowe_wiki wiki, Xodb_load_mgr load_mgr, byte[] page_ttl, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, byte[] ctg_ttl) {
+		Xoctg_catpage_ctg ctg = wiki.Ctg__catpage_mgr().Get_or_load_or_null(page_ttl, Xoctg_catpage_url.New__blank(), wiki.Ttl_parse(gplx.xowa.wikis.nss.Xow_ns_.Tid__category, ctg_ttl), -1);
 		if (ctg == null) return;
 
 		// loop grps to get grp
