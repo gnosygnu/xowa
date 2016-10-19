@@ -17,12 +17,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.bldrs.exports.packs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.packs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
-public class Pack_file_bldr_cfg implements Gfo_invk {
+public class Pack_file_cfg implements Gfo_invk {
 	public Io_url Deploy_dir() {return deploy_dir;} private Io_url deploy_dir;
 	public boolean Pack_text() {return pack_text;} private boolean pack_text = false;
 	public boolean Pack_html() {return pack_html;} private boolean pack_html = true;
 	public boolean Pack_file() {return pack_file;} private boolean pack_file = true;
 	public boolean Pack_fsdb_delete() {return pack_fsdb_delete;} private boolean pack_fsdb_delete;
+	public boolean Pack_custom() {return pack_custom_files != null;}
+	public String Pack_custom_files() {return pack_custom_files;} private String pack_custom_files;
+	public String Pack_custom_types() {return pack_custom_types;} private String pack_custom_types;
+	public String Pack_custom_name() {return pack_custom_name;} private String pack_custom_name;
 	public DateAdp Pack_file_cutoff() {return pack_file_cutoff;} private DateAdp pack_file_cutoff = null;
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -32,11 +36,15 @@ public class Pack_file_bldr_cfg implements Gfo_invk {
 		else if	(ctx.Match(k, Invk__pack_file_))			pack_file = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk__pack_file_cutoff_))		pack_file_cutoff = m.ReadDate("v");
 		else if	(ctx.Match(k, Invk__pack_fsdb_delete_))		pack_fsdb_delete = m.ReadYn("v");
+		else if	(ctx.Match(k, Invk__pack_custom_name_))		pack_custom_name = m.ReadStr("v");
+		else if	(ctx.Match(k, Invk__pack_custom_files_))	pack_custom_files = m.ReadStr("v");	// pack_custom {files='en.wikipedia.org-core.xowa|en.wikipedia.org-html-ns.008.xowa'}}
+		else if	(ctx.Match(k, Invk__pack_custom_types_))	pack_custom_types = m.ReadStr("v");	// pack_custom {types='core|srch|html';}
 		else												return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk__deploy_dir_ = "deploy_dir_"
 	, Invk__pack_text_ = "pack_text_", Invk__pack_html_ = "pack_html_", Invk__pack_file_ = "pack_file_", Invk__pack_file_cutoff_ = "pack_file_cutoff_"
 	, Invk__pack_fsdb_delete_ = "pack_fsdb_delete_"
+	, Invk__pack_custom_name_ = "pack_custom_name_", Invk__pack_custom_files_ = "pack_custom_files_", Invk__pack_custom_types_ = "pack_custom_types_"
 	;
 }

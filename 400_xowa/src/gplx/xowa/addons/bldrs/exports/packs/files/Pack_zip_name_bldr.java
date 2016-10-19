@@ -20,10 +20,12 @@ public class Pack_zip_name_bldr {	// en.wikipedia.org-file-ns.000-db.001.xowa ->
 	private final    Io_url pack_dir;
 	private final    byte[] wiki_domain, zip_name_prefix;
 
-	public Pack_zip_name_bldr(Io_url pack_dir, String wiki_domain_str, String wiki_abrv, String wiki_date) {
+	public Pack_zip_name_bldr(Io_url pack_dir, String wiki_domain_str, String wiki_abrv, String wiki_date, String custom_name) {
 		this.pack_dir = pack_dir;
 		this.wiki_domain = Bry_.new_u8(wiki_domain_str);
-		this.zip_name_prefix = Bry_.new_u8("Xowa_" + wiki_abrv + "_" + String_.Replace(wiki_date, ".", "-"));
+		
+		String zip_name_suffix = custom_name == null ? String_.Replace(wiki_date, ".", "-") : custom_name;	// "Xowa_enwiki_2016-10_core.zip" vs "Xowa_enwiki_custom_core.zip"
+		this.zip_name_prefix = Bry_.new_u8("Xowa_" + wiki_abrv + "_" + zip_name_suffix);
 	}
 	public Io_url Bld(Io_url orig_url) {
 		String orig_str = orig_url.NameOnly() + ".zip";

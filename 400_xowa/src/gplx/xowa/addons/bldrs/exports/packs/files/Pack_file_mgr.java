@@ -20,20 +20,21 @@ import gplx.core.progs.*; import gplx.core.ios.zips.*; import gplx.core.ios.stre
 import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.fsdb.*; import gplx.fsdb.meta.*;
 import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.steps.*; import gplx.xowa.addons.bldrs.centrals.hosts.*;
 public class Pack_file_mgr {
-	public void Exec(Xowe_wiki wiki, Pack_file_bldr_cfg cfg) {
+	public void Exec(Xowe_wiki wiki, Pack_file_cfg cfg) {
 		// init
 		wiki.Init_assert();
 		Io_url wiki_dir = wiki.Fsys_mgr().Root_dir();
 		Io_url pack_dir = wiki_dir.GenSubDir_nest("tmp", "pack");
 		Io_mgr.Instance.DeleteDirDeep(pack_dir); Io_mgr.Instance.CreateDirIfAbsent(pack_dir);
 		String wiki_date = wiki.Props().Modified_latest().XtoStr_fmt("yyyy.MM");
-		Pack_hash hash = Pack_hash_bldr.Bld(wiki, wiki_dir, pack_dir, wiki_date, cfg.Pack_text(), cfg.Pack_html(), cfg.Pack_file(), cfg.Pack_file_cutoff(), cfg.Pack_fsdb_delete());
+		Pack_hash hash = Pack_hash_bldr.Bld(wiki, wiki_dir, pack_dir, wiki_date, cfg);
 
 		// get import_tbl
 		byte[] wiki_abrv = wiki.Domain_itm().Abrv_xo();
 		Xobc_data_db bc_db = Xobc_data_db.New(wiki.App().Fsys_mgr());
 		Db_conn bc_conn = bc_db.Conn();
-		bc_db.Delete_by_import(wiki_abrv, wiki_date);
+		if (!cfg.Pack_custom())	// only delete files if not custom
+			bc_db.Delete_by_import(wiki_abrv, wiki_date);
 		bc_conn.Txn_bgn("xobc_import_insert");
 
 		// build zip packs
@@ -54,6 +55,8 @@ public class Pack_file_mgr {
 			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, "html", Xobc_import_type.Tid__wiki__core, Xobc_import_type.Tid__wiki__srch, Xobc_import_type.Tid__wiki__html, Xobc_import_type.Tid__wiki__ctg);
 		if (cfg.Pack_file())
 			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, "file", Xobc_import_type.Tid__file__core, Xobc_import_type.Tid__file__data);	// , Xobc_import_type.Tid__fsdb__delete
+		if (cfg.Pack_custom())
+			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, cfg.Pack_custom_name(), Xobc_import_type.Tid__misc);
 		bc_conn.Txn_end();
 
 		// deploy
@@ -166,81 +169,5 @@ public class Pack_file_mgr {
 	}
 	public static String[] Task_key__parse(String task_key) {
 		return String_.Split(task_key, "|");
-	}
-}
-class Pack_hash_bldr {
-	public static Pack_hash Bld(Xow_wiki wiki, Io_url wiki_dir, Io_url pack_dir, String wiki_date, boolean pack_text, boolean pack_html, boolean pack_file, DateAdp pack_file_cutoff, boolean pack_fsdb_delete) {
-		Pack_hash rv = new Pack_hash();
-		Pack_zip_name_bldr zip_name_bldr = new Pack_zip_name_bldr(pack_dir, wiki.Domain_str(), String_.new_a7(wiki.Domain_itm().Abrv_wm()), wiki_date);
-		Xow_db_mgr db_mgr = wiki.Data__core_mgr();
-
-		// bld html pack
-		if (pack_html) {
-			int len = db_mgr.Dbs__len();
-			for (int i = 0; i < len; ++i) {
-				Xow_db_file file = db_mgr.Dbs__get_at(i);
-				int pack_tid = Get_pack_tid(file.Tid());
-				if (pack_tid == Xobc_import_type.Tid__ignore) continue;
-				rv.Add(zip_name_bldr, pack_tid, file.Url());
-			}
-			rv.Consolidate(Xobc_import_type.Tid__wiki__srch);
-		}
-
-		// bld text pack
-		if (pack_text) {
-			int len = db_mgr.Dbs__len();
-			for (int i = 0; i < len; ++i) {
-				Xow_db_file file = db_mgr.Dbs__get_at(i);
-				int pack_tid = Get_pack_tid(file.Tid());
-				if (pack_tid == Xobc_import_type.Tid__ignore) continue;
-				rv.Add(zip_name_bldr, pack_tid, file.Url());
-			}
-		}
-
-		// bld file pack
-		if (pack_file) {
-			Fsm_mnt_itm mnt_itm = wiki.File__mnt_mgr().Mnts__get_at(Fsm_mnt_mgr.Mnt_idx_main);
-			rv.Add(zip_name_bldr, Xobc_import_type.Tid__file__core, wiki_dir.GenSubFil(mnt_itm.Atr_mgr().Db__core().Url_rel()));
-			if (db_mgr.Props().Layout_file().Tid_is_lot()) {
-				Fsm_bin_mgr bin_mgr = mnt_itm.Bin_mgr();
-				int bin_len = bin_mgr.Dbs__len();
-				for (int i = 0; i < bin_len; ++i) {
-					Fsm_bin_fil bin_fil = bin_mgr.Dbs__get_at(i);
-					Io_url bin_fil_url = bin_fil.Url();
-
-					// ignore if bin_fil is earlier than cutoff
-					if (pack_file_cutoff != null) {
-						DateAdp bin_fil_date = Io_mgr.Instance.QueryFil(bin_fil_url).ModifiedTime();
-						if (bin_fil_date.Timestamp_unix() < pack_file_cutoff.Timestamp_unix()) continue;
-					}
-					rv.Add(zip_name_bldr, Xobc_import_type.Tid__file__data, bin_fil_url);
-				}
-			}
-		}
-
-		// bld pack_fsdb_delete
-		if (pack_fsdb_delete) {
-			gplx.xowa.bldrs.Xob_db_file fsdb_deletion_db = gplx.xowa.bldrs.Xob_db_file.New__deletion_db(wiki);
-			if (!Io_mgr.Instance.ExistsFil(fsdb_deletion_db.Url())) throw Err_.new_wo_type("deletion db does not exists: url=" + fsdb_deletion_db.Url().Raw());
-			rv.Add(zip_name_bldr, Xobc_import_type.Tid__fsdb__delete, fsdb_deletion_db.Url());
-		}
-		return rv;
-	}
-	private static int Get_pack_tid(byte db_file_tid) {
-		switch (db_file_tid) {
-			case Xow_db_file_.Tid__core:		return Xobc_import_type.Tid__wiki__core;
-			case Xow_db_file_.Tid__search_core:	
-			case Xow_db_file_.Tid__search_link:	return Xobc_import_type.Tid__wiki__srch;
-			case Xow_db_file_.Tid__html_solo:
-			case Xow_db_file_.Tid__html_data:	return Xobc_import_type.Tid__wiki__html;
-			case Xow_db_file_.Tid__cat:
-			case Xow_db_file_.Tid__cat_core:
-			case Xow_db_file_.Tid__cat_link:	return Xobc_import_type.Tid__wiki__ctg;
-			case Xow_db_file_.Tid__file_core:	return Xobc_import_type.Tid__file__core;
-			case Xow_db_file_.Tid__file_solo:
-			case Xow_db_file_.Tid__file_data:	return Xobc_import_type.Tid__file__data;
-			case Xow_db_file_.Tid__text:		return Xobc_import_type.Tid__wiki__text;
-			default:							return Xobc_import_type.Tid__ignore;
-		}
 	}
 }
