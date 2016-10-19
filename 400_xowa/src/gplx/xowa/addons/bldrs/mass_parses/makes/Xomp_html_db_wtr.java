@@ -25,13 +25,9 @@ class Xomp_html_db_wtr {
 	private int prv_ns_id = -1;
 	private Xow_db_file html_db; private Xowd_html_tbl html_tbl;
 	private Xob_ns_file_itm ns_itm;
-	public Xomp_html_db_wtr(Xowe_wiki wiki, boolean reset_html_dbs) {
+	public Xomp_html_db_wtr(Xowe_wiki wiki) {
 		this.wiki = wiki; this.db_mgr = wiki.Data__core_mgr();
 		this.len_max = wiki.Appe().Api_root().Bldr().Wiki().Import().Html_db_max();
-
-		// delete all existing tbls
-		if (!db_mgr.Props().Layout_html().Tid_is_all())
-			wiki.Data__core_mgr().Dbs__delete_by_tid(Xow_db_file_.Tid__html_data);
 	}
 	public int Cur_db_id() {return html_db.Id();}
 	public Xowd_html_tbl Tbls__get_or_new(int ns_id, long html_len) {
@@ -87,5 +83,21 @@ class Xomp_html_db_wtr {
 		), html_db.Id());
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(db_mgr.Db__core().Conn(), new Db_attach_itm("html_db", html_db.Conn()));
 		attach_mgr.Exec_sql_w_msg("updating page_ids: " + Int_.To_str(html_db.Id()), sql);
+	}
+	public static void Delete_html_dbs(Xowe_wiki wiki) {
+		// run only for few /lot
+		Xow_db_mgr db_mgr = wiki.Data__core_mgr();
+		if (db_mgr.Props().Layout_html().Tid_is_all()) return;
+
+		// loop thru dbs and delete files
+		int len = db_mgr.Dbs__len();
+		for (int i = 0; i < len; ++i) {
+			Xow_db_file db_file = db_mgr.Dbs__get_at(i);
+			if (db_file.Tid() == Xow_db_file_.Tid__html_data)
+				Io_mgr.Instance.DeleteFil(db_file.Url());
+		}
+
+		// remove from xowa_db
+		db_mgr.Dbs__delete_by_tid(Xow_db_file_.Tid__html_data);
 	}
 }

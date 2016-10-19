@@ -20,7 +20,7 @@ import gplx.core.brys.*;
 import gplx.dbs.*; import gplx.xowa.htmls.core.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 class Xomp_make_html {
 	private final    Int_flag_bldr src_body_flag_bldr = Xowd_html_tbl.Make_body_flag_bldr();
-	public void Exec(Xowe_wiki wiki) {
+	public void Exec(Xowe_wiki wiki, Xomp_make_cmd_cfg cfg) {
 		// init
 		Xomp_mgr_db mgr_db = Xomp_mgr_db.New__load(wiki);
 		Db_conn mgr_conn = mgr_db.Conn();
@@ -34,7 +34,8 @@ class Xomp_make_html {
 
 		// init more
 		Xomp_html_db_rdr html_db_rdr = new Xomp_html_db_rdr(wiki);
-		Xomp_html_db_wtr html_db_wtr = new Xomp_html_db_wtr(wiki, true);
+		Xomp_html_db_wtr html_db_wtr = new Xomp_html_db_wtr(wiki);
+		if (cfg.Delete_html_dbs()) Xomp_html_db_wtr.Delete_html_dbs(wiki);
 		Xowd_html_row src_row = new Xowd_html_row();
 
 		// loop xomp|page and generate html dbs
