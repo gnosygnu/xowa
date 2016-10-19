@@ -52,6 +52,8 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 		, "AND     ptr.page_redirect_id = -1"
 		, ";"
 		));
+		
+		String db_file_cur = "";
 		try {
 			Xow_db_file[] db_file_ary = core_db.Tbl__db().Select_all(wiki.Data__core_mgr().Props(), wiki.Fsys_mgr().Root_dir());
 			int len = db_file_ary.length;
@@ -66,16 +68,17 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 						break;
 					case Xow_db_file_.Tid__text:		db_file_is_text = Bool_.Y; break;
 					case Xow_db_file_.Tid__cat:			db_file_is_cat = Bool_.Y; break;
-					case Xow_db_file_.Tid__search_core:	db_file_is_search = Bool_.Y; break;
+					case Xow_db_file_.Tid__search_link:	db_file_is_search = Bool_.Y; break;		// changed from search_data to search_link; DATE:2016-10-19
 				}
+				db_file_cur = db_file.Url().Raw();
 				int db_id = db_file.Id();
 				if	(db_file_is_text)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting text: "  + db_id, "DELETE FROM <data_db>text WHERE page_id IN (SELECT page_id FROM page_filter WHERE page_text_db_id = {0});");
 				if	(db_file_is_cat)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting cat: "   + db_id, "DELETE FROM <data_db>cat_link WHERE cl_from IN (SELECT page_id FROM page_filter);");
 				if	(db_file_is_search)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting search:" + db_id, "DELETE FROM <data_db>search_link WHERE page_id IN (SELECT page_id FROM page_filter);");
-				if (db_file_is_text || db_file_is_cat || db_file_is_search)
+				if	(db_file_is_text || db_file_is_cat || db_file_is_search)
 					db_file.Conn().Env_vacuum();
 			}
-		} catch (Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal error during page deletion: err=~{0}", Err_.Message_gplx_log(e));}
+		} catch (Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal error during page deletion: cur=~{0} err=~{1}", db_file_cur, Err_.Message_gplx_log(e));}
 		core_db_conn.Exec_sql_plog_ntx("deleting from table: page", "DELETE FROM page WHERE page_id IN (SELECT page_id FROM page_filter);");
 		// core_db_conn.Meta_tbl_delete("page_filter");
 		core_db_conn.Env_vacuum();
