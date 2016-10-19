@@ -244,6 +244,7 @@ public class Pf_func_ {
 	, Xol_kwd_grp_.Id_pagebanner
 	, Xol_kwd_grp_.Id_rev_protectionexpiry
 	, Xol_kwd_grp_.Id_categorytree
+	, Xol_kwd_grp_.Id_assessment
 	};
 	public static Xot_defn Get_prototype(int id) {
 		switch (id) {
@@ -422,6 +423,7 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_cascadingSources:
 																return new Pf_func_noop(id);
 			case Xol_kwd_grp_.Id_bang:							return Pf_func_bang.Instance;
+			case Xol_kwd_grp_.Id_assessment:					return gplx.xowa.xtns.assessments.Assessment_func.Instance;
 			default:											throw Err_.new_unhandled(id);
 		}
 	}

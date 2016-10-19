@@ -234,8 +234,9 @@ public static final int
 , Id_new_window_link = 212
 , Id_categorytree = 213
 , Id_lsth = 214
+, Id_assessment = 215
 ;
-public static final int Id__max = 215;
+public static final int Id__max = 216;
 
 	private static byte[] ary_itm_(int id) {
 		switch (id) {
@@ -454,6 +455,7 @@ case Xol_kwd_grp_.Id_pagebanner: return Bry_.new_u8("pagebanner");
 case Xol_kwd_grp_.Id_rev_protectionexpiry: return Bry_.new_u8("protectionexpiry");
 case Xol_kwd_grp_.Id_new_window_link: return Bry_.new_u8("newwindowlink");
 case Xol_kwd_grp_.Id_categorytree: return Bry_.new_u8("categorytree");
+case Xol_kwd_grp_.Id_assessment: return Bry_.new_u8("assessment");
 default: throw Err_.new_unhandled(id);
 		}
 	}

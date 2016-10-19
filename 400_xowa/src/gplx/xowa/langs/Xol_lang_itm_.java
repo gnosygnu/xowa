@@ -272,5 +272,6 @@ kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_pagebanner, "PAGEBANNER");	// NOTE: must be
 kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_rev_protectionexpiry, "PROTECTIONEXPIRY");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_new_window_link, "#NewWindowLink");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_categorytree, "#categorytree");
+kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_assessment, "#assessment");
 	}
 }

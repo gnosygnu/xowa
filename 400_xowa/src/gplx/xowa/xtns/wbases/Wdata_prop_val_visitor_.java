@@ -45,7 +45,6 @@ public class Wdata_prop_val_visitor_ {
 		return rv;
 	}
 	private static void Render_snak(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, byte[] page_url, Keyval[] props, int sub_idx, int sub_len) {
-		// [snaktype=value, property=P1082, datavalue=[Lgplx.Keyval;@44a11b76, datatype=quantity]
 		// loop props to get (a) snaktype; (b) property; (c) datavalue
 		byte snak_tid = Byte_.Max_value_127;
 		int pid = -1;
