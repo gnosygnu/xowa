@@ -51,6 +51,8 @@ public class Pack_file_mgr {
 		}
 
 		// build tasks
+		if (cfg.Pack_text())	// right now, only for wikidata
+			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, "text", Xobc_import_type.Tid__file__core, Xobc_import_type.Tid__wiki__text, Xobc_import_type.Tid__wiki__ctg, Xobc_import_type.Tid__wiki__wbase);
 		if (cfg.Pack_html())
 			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, "html", Xobc_import_type.Tid__wiki__core, Xobc_import_type.Tid__wiki__srch, Xobc_import_type.Tid__wiki__html, Xobc_import_type.Tid__wiki__ctg);
 		if (cfg.Pack_file())

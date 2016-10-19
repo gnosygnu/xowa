@@ -29,5 +29,6 @@ public class Xobc_import_type {
 	, Tid__fsdb__delete			=  8
 	, Tid__wiki__ctg			=  9
 	, Tid__misc					= 10
+	, Tid__wiki__wbase			= 11
 	;	
 }

@@ -105,6 +105,7 @@ class Pack_hash_bldr {
 			case Xow_db_file_.Tid__file_solo:
 			case Xow_db_file_.Tid__file_data:	return Xobc_import_type.Tid__file__data;
 			case Xow_db_file_.Tid__text:		return Xobc_import_type.Tid__wiki__text;
+			case Xow_db_file_.Tid__wbase:		return Xobc_import_type.Tid__wiki__wbase;
 			default:							return Xobc_import_type.Tid__ignore;
 		}
 	}
