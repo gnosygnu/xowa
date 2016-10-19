@@ -29,4 +29,6 @@ public class Xobc_task_regy_itm {
 	public byte[] Key() {return key;} private final    byte[] key;
 	public byte[] Name() {return name;} private final    byte[] name;
 	public int Step_count() {return step_count;} private final    int step_count;
+
+	public static final String Type__text = "text", Type__html = "html", Type__file = "file";
 }

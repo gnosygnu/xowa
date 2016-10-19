@@ -52,11 +52,11 @@ public class Pack_file_mgr {
 
 		// build tasks
 		if (cfg.Pack_text())	// right now, only for wikidata
-			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, "text", Xobc_import_type.Tid__file__core, Xobc_import_type.Tid__wiki__text, Xobc_import_type.Tid__wiki__ctg, Xobc_import_type.Tid__wiki__wbase);
+			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, Xobc_task_regy_itm.Type__text, Xobc_import_type.Tid__file__core, Xobc_import_type.Tid__wiki__text, Xobc_import_type.Tid__wiki__ctg, Xobc_import_type.Tid__wiki__wbase);
 		if (cfg.Pack_html())
-			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, "html", Xobc_import_type.Tid__wiki__core, Xobc_import_type.Tid__wiki__srch, Xobc_import_type.Tid__wiki__html, Xobc_import_type.Tid__wiki__ctg);
+			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, Xobc_task_regy_itm.Type__html, Xobc_import_type.Tid__wiki__core, Xobc_import_type.Tid__wiki__srch, Xobc_import_type.Tid__wiki__html, Xobc_import_type.Tid__wiki__ctg);
 		if (cfg.Pack_file())
-			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, "file", Xobc_import_type.Tid__file__core, Xobc_import_type.Tid__file__data);	// , Xobc_import_type.Tid__fsdb__delete
+			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, Xobc_task_regy_itm.Type__file, Xobc_import_type.Tid__file__core, Xobc_import_type.Tid__file__data);	// , Xobc_import_type.Tid__fsdb__delete
 		if (cfg.Pack_custom())
 			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, cfg.Pack_custom_name(), Xobc_import_type.Tid__misc);
 		bc_conn.Txn_end();
@@ -117,10 +117,16 @@ public class Pack_file_mgr {
 			? Bry_.Empty
 			: Bry_.Add(gplx.xowa.langs.Xol_lang_stub_.Get_by_key_or_null(lang_key).Canonical_name(), Byte_ascii.Space);		// EX: "Deutsch "
 		byte[] wiki_name = wiki.Domain_itm().Domain_type().Display_bry();													// EX: Wikipedia
-		String type_name = String_.Eq(task_type, "html") ? "Articles" : "Images";
+		String type_name = Get_task_name_by_task_type(task_type);
 		wiki_date = String_.Replace(wiki_date, ".", "-");
 		String file_size = gplx.core.ios.Io_size_.To_str_new(tmp_bfr, raw_len, 2);
 		return String_.Format("{0}{1} - {2} ({3}) [{4}]", lang_name, wiki_name, type_name, wiki_date, file_size);
+	}
+	private static String Get_task_name_by_task_type(String task_type) {
+		if		(String_.Eq(task_type, Xobc_task_regy_itm.Type__html))		return "Articles";
+		else if	(String_.Eq(task_type, Xobc_task_regy_itm.Type__file))		return "Images";
+		else if	(String_.Eq(task_type, Xobc_task_regy_itm.Type__text))		return "Wikitext";
+		else																return task_type;
 	}
 	private static void Make_pack(Xowe_wiki wiki, Io_url wiki_dir, byte[] wiki_abrv, String wiki_date, Xobc_data_db bc_db, Hash_algo hash_algo, Bry_bfr tmp_bfr, Pack_itm itm, int task_id) {
 		// hash raws			
