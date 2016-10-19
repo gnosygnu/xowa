@@ -22,8 +22,8 @@ public class Hash_adp__int {
 	private final    Int_obj_ref tmp_key = Int_obj_ref.New_neg1();
 	public void Clear()								{hash.Clear();}
 	public int Len()								{return hash.Count();}
-	public Object Get_by_or_fail(int key)			{return hash.Get_by_or_fail(tmp_key.Val_(key));}
-	public Object Get_by_or_null(int key)			{return hash.Get_by(tmp_key.Val_(key));}
+	public Object Get_by_or_fail(int key)			{synchronized (tmp_key) {return hash.Get_by_or_fail(tmp_key.Val_(key));}}	// LOCK:used by Xomp_ns_ord_mgr in xomp; DATE:2016-10-18
+	public Object Get_by_or_null(int key)			{synchronized (tmp_key) {return hash.Get_by(tmp_key.Val_(key));}}	// LOCK:used by Xomp_ns_ord_mgr in xomp; DATE:2016-10-18
 	public void Add(int key, Object obj)			{hash.Add(Int_obj_ref.New(key), obj);}
 	public void Add(Int_obj_ref key, Object obj)	{hash.Add(key, obj);}
 	public void Add_if_dupe_use_1st(int key, Object obj)			{hash.Add_if_dupe_use_1st(Int_obj_ref.New(key), obj);}

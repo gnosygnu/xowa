@@ -18,12 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
 import gplx.core.gfo_regys.*;
 public class Gfs_msg_bldr implements GfoMsgParser {
+	private final    Object thread_lock = new Object();
 	private final    Gfs_parser parser = new Gfs_parser();
 	public GfoMsg ParseToMsg(String s) {return Bld(s);}
 	public GfoMsg Bld(String src) {return Bld(Bry_.new_u8(src));}
 	public GfoMsg Bld(byte[] src) {
-		Gfs_nde nde = parser.Parse(src);
-		return Bld_msg(src, nde);
+		synchronized (thread_lock) {	// LOCK:Gfs_parser called when converting messages in Xow_msg_mgr; DATE:2016-10-18
+			Gfs_nde nde = parser.Parse(src);
+			return Bld_msg(src, nde);
+		}
 	}
 	private GfoMsg Bld_msg(byte[] src, Gfs_nde nde) {
 		boolean op_is_assign = (nde.Op_tid() == Gfs_nde.Op_tid_assign);
