@@ -27,7 +27,7 @@ public class Pack_file_mgr {
 		Io_url pack_dir = wiki_dir.GenSubDir_nest("tmp", "pack");
 		Io_mgr.Instance.DeleteDirDeep(pack_dir); Io_mgr.Instance.CreateDirIfAbsent(pack_dir);
 		String wiki_date = wiki.Props().Modified_latest().XtoStr_fmt("yyyy.MM");
-		Pack_hash hash = Pack_hash_bldr.Bld(wiki, wiki_dir, pack_dir, wiki_date, cfg.Pack_html(), cfg.Pack_file(), cfg.Pack_file_cutoff(), cfg.Pack_fsdb_delete());
+		Pack_hash hash = Pack_hash_bldr.Bld(wiki, wiki_dir, pack_dir, wiki_date, cfg.Pack_text(), cfg.Pack_html(), cfg.Pack_file(), cfg.Pack_file_cutoff(), cfg.Pack_fsdb_delete());
 
 		// get import_tbl
 		byte[] wiki_abrv = wiki.Domain_itm().Abrv_xo();
@@ -169,7 +169,7 @@ public class Pack_file_mgr {
 	}
 }
 class Pack_hash_bldr {
-	public static Pack_hash Bld(Xow_wiki wiki, Io_url wiki_dir, Io_url pack_dir, String wiki_date, boolean pack_html, boolean pack_file, DateAdp pack_file_cutoff, boolean pack_fsdb_delete) {
+	public static Pack_hash Bld(Xow_wiki wiki, Io_url wiki_dir, Io_url pack_dir, String wiki_date, boolean pack_text, boolean pack_html, boolean pack_file, DateAdp pack_file_cutoff, boolean pack_fsdb_delete) {
 		Pack_hash rv = new Pack_hash();
 		Pack_zip_name_bldr zip_name_bldr = new Pack_zip_name_bldr(pack_dir, wiki.Domain_str(), String_.new_a7(wiki.Domain_itm().Abrv_wm()), wiki_date);
 		Xow_db_mgr db_mgr = wiki.Data__core_mgr();
@@ -184,6 +184,17 @@ class Pack_hash_bldr {
 				rv.Add(zip_name_bldr, pack_tid, file.Url());
 			}
 			rv.Consolidate(Xobc_import_type.Tid__wiki__srch);
+		}
+
+		// bld text pack
+		if (pack_text) {
+			int len = db_mgr.Dbs__len();
+			for (int i = 0; i < len; ++i) {
+				Xow_db_file file = db_mgr.Dbs__get_at(i);
+				int pack_tid = Get_pack_tid(file.Tid());
+				if (pack_tid == Xobc_import_type.Tid__ignore) continue;
+				rv.Add(zip_name_bldr, pack_tid, file.Url());
+			}
 		}
 
 		// bld file pack
@@ -228,6 +239,7 @@ class Pack_hash_bldr {
 			case Xow_db_file_.Tid__file_core:	return Xobc_import_type.Tid__file__core;
 			case Xow_db_file_.Tid__file_solo:
 			case Xow_db_file_.Tid__file_data:	return Xobc_import_type.Tid__file__data;
+			case Xow_db_file_.Tid__text:		return Xobc_import_type.Tid__wiki__text;
 			default:							return Xobc_import_type.Tid__ignore;
 		}
 	}

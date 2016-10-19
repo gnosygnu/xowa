@@ -60,8 +60,10 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 				Xow_db_file db_file = db_file_ary[i];
 				switch (db_file.Tid()) {
 					case Xow_db_file_.Tid__core: case Xow_db_file_.Tid__wiki_solo: case Xow_db_file_.Tid__text_solo:
-						if (wiki.Data__core_mgr().Props().Layout_text().Tid_is_lot()) continue;	// if mode is lot, then "core" db does not have text, cat, search; skip; DATE:2016-01-31
-														db_file_is_text = db_file_is_cat = db_file_is_search = Bool_.Y; break;
+						// if mode is lot, then "core" db does not have cat, search; skip; DATE:2016-01-31
+						if (wiki.Data__core_mgr().Props().Layout_text().Tid_is_lot()) continue;
+						db_file_is_cat = db_file_is_search = Bool_.Y;	// do not set db_file_is_text to true; DATE:2016-10-18
+						break;
 					case Xow_db_file_.Tid__text:		db_file_is_text = Bool_.Y; break;
 					case Xow_db_file_.Tid__cat:			db_file_is_cat = Bool_.Y; break;
 					case Xow_db_file_.Tid__search_core:	db_file_is_search = Bool_.Y; break;

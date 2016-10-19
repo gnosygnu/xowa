@@ -25,7 +25,7 @@ class Xomp_html_db_wtr {
 	private int prv_ns_id = -1;
 	private Xow_db_file html_db; private Xowd_html_tbl html_tbl;
 	private Xob_ns_file_itm ns_itm;
-	public Xomp_html_db_wtr(Xowe_wiki wiki) {
+	public Xomp_html_db_wtr(Xowe_wiki wiki, boolean reset_html_dbs) {
 		this.wiki = wiki; this.db_mgr = wiki.Data__core_mgr();
 		this.len_max = wiki.Appe().Api_root().Bldr().Wiki().Import().Html_db_max();
 

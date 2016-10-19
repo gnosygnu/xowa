@@ -89,7 +89,7 @@ CREATE TABLE fsdb_regy
 );		
 
 --export fsdb_regy from file.make
-ATTACH 'simple.wikipedia.org-file-page_map.xowa' AS pfm_db;
+ATTACH 'en.wikipedia.org-file-page_map.xowa' AS pfm_db;
 INSERT INTO pfm_db.fsdb_regy SELECT * FROM fsdb_regy;
 CREATE INDEX fsdb_regy__main ON fsdb_regy (fsdb_fil_id, fsdb_thm_id);
 */

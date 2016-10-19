@@ -49,11 +49,11 @@ public class Xof_orig_wkr__img_links_ {
 			return rdr.Move_next()
 				? new Xof_orig_itm
 				( repo_id
-				, img_trg
+				, img_src	// NOTE: was originally (incorrectly) img_trg; PAGE:en.v:Ani; DATE:2016-10-18
 				, rdr.Read_int("img_ext_id")
 				, rdr.Read_int("img_width")
 				, rdr.Read_int("img_height")
-				, img_src
+				, img_trg	// NOTE: was originally (incorrectly) img_src; PAGE:en.v:Ani; DATE:2016-10-18
 				)
 				: Xof_orig_itm.Null;
 		} finally {rdr.Rls();}

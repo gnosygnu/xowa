@@ -34,7 +34,7 @@ class Xomp_make_html {
 
 		// init more
 		Xomp_html_db_rdr html_db_rdr = new Xomp_html_db_rdr(wiki);
-		Xomp_html_db_wtr html_db_wtr = new Xomp_html_db_wtr(wiki);
+		Xomp_html_db_wtr html_db_wtr = new Xomp_html_db_wtr(wiki, true);
 		Xowd_html_row src_row = new Xowd_html_row();
 
 		// loop xomp|page and generate html dbs
