@@ -39,16 +39,18 @@ public class Wbase_claim_quantity extends Wbase_claim_base {
 		if (lbound_as_num == null) lbound_as_num = To_decimal("lower", lbound);
 		return lbound_as_num;
 	}	private Decimal_adp lbound_as_num;
-	private Decimal_adp To_decimal(String type, byte[] v) {
-		if (v == null) throw Err_.new_("wbase", "value is null", "type", type);
-		int len = v.length; if (len == 0) throw Err_.new_("wbase", "value is empty", "type", type);
-		if (v[0] == Byte_ascii.Plus) v = Bry_.Mid(v, 1);
-		return Decimal_adp_.parse(String_.new_a7(v));
-	}
 
 	@Override public void Welcome(Wbase_claim_visitor visitor) {visitor.Visit_quantity(this);}
 	@Override public String toString() {// TEST:
 		return String_.Concat_with_str("|", Wbase_claim_value_type_.Reg.Get_str_or_fail(this.Snak_tid()), Wbase_claim_type_.Reg.Get_str_or_fail(this.Val_tid()), String_.new_u8(amount), String_.new_u8(unit), String_.new_u8(ubound), String_.new_u8(lbound));
 	}
+
 	public static final    byte[] Unit_1 = Bry_.new_a7("1");
+	public static Decimal_adp To_decimal(String name, byte[] bry) {
+		if (bry == null) throw Err_.new_wo_type("wbase.claim: value is null", "name", name);
+		int len = bry.length;
+		if (len == 0) throw Err_.new_wo_type("wbase.claim: value is empty", "name", name);
+		if (bry[0] == Byte_ascii.Plus) bry = Bry_.Mid(bry, 1);
+		return Decimal_adp_.parse(String_.new_a7(bry));
+	}
 }

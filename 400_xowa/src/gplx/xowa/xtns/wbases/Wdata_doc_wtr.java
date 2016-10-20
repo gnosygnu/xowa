@@ -97,7 +97,7 @@ public class Wdata_doc_wtr {
 					case Wbase_claim_type_.Tid__string:
 						Wbase_claim_string claim_str = (Wbase_claim_string)prop;
 						wtr.Val(Bool_.Y, Wbase_claim_type_.Itm__string.Key_bry());
-						wtr.Val(Bool_.Y, claim_str.Val_str());
+						wtr.Val(Bool_.Y, claim_str.Val_bry());
 						break;
 					case Wbase_claim_type_.Tid__entity:
 						Wbase_claim_entity claim_entity = (Wbase_claim_entity)prop;

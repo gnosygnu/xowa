@@ -34,7 +34,7 @@ public class Wbase_claim_time extends Wbase_claim_base {
 	public void Calendar_ttl_(byte[] v) {calendar_ttl = v;} 
 
 	public Wbase_date Time_as_date() {
-		if (time_as_date == null) time_as_date = Wbase_date.Parse(time, this.Precision_int(), this.Before_int(), this.After_int(), this.Calendar_is_julian());
+		if (time_as_date == null) time_as_date = Wbase_date_.Parse(time, this.Precision_int(), this.Before_int(), this.After_int(), this.Calendar_is_julian());
 		return time_as_date;
 	}	private Wbase_date time_as_date;
 	public int Precision_int() {
@@ -74,10 +74,10 @@ public class Wbase_claim_time extends Wbase_claim_base {
 			boolean calendar_is_julian = this.Calendar_is_julian();
 			byte[] calendar_display = null;
 			if (calendar_is_julian) {
-				date = Wbase_date.Xto_julian(date);
+				date = Wbase_date_.To_julian(date);
 				calendar_display = msgs.Time_julian();
 			}
-			Wbase_date.Xto_str(bfr, tmp_time_fmtr, tmp_time_bfr, msgs, date);
+			Wbase_date_.To_bfr(bfr, tmp_time_fmtr, tmp_time_bfr, msgs, date);
 			if (calendar_display != null)
 				bfr.Add_byte_space().Add(calendar_display);
 		} catch (Exception e) {
@@ -89,10 +89,10 @@ public class Wbase_claim_time extends Wbase_claim_base {
 		try {
 			byte[] calendar_display = null;
 			if (calendar_is_julian) {
-				date = Wbase_date.Xto_julian(date);
+				date = Wbase_date_.To_julian(date);
 				calendar_display = msgs.Time_julian();
 			}
-			Wbase_date.Xto_str(bfr, tmp_time_fmtr, tmp_time_bfr, msgs, date);
+			Wbase_date_.To_bfr(bfr, tmp_time_fmtr, tmp_time_bfr, msgs, date);
 			if (calendar_display != null)
 				bfr.Add_byte_space().Add(calendar_display);
 		} catch (Exception e) {

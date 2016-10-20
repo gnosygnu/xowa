@@ -411,7 +411,7 @@ class Xob_wdata_db_visitor implements Wbase_claim_visitor {
 	public Xob_wdata_db_visitor(Wdata_wiki_mgr wdata_mgr) {this.wdata_mgr = wdata_mgr;}
 	public void Init(byte[] lang_key) {this.lang_key = lang_key;}
 	public byte[] Rv() {return rv;} private byte[] rv;
-	public void Visit_str(Wbase_claim_string itm)							{rv = itm.Val_str();}
+	public void Visit_str(Wbase_claim_string itm)						{rv = itm.Val_bry();}
 	public void Visit_monolingualtext(Wbase_claim_monolingualtext itm)	{rv = Bry_.Add_w_dlm(Byte_ascii.Pipe, itm.Lang(), itm.Text());}
 	public void Visit_quantity(Wbase_claim_quantity itm)				{rv = itm.Amount();}
 	public void Visit_time(Wbase_claim_time itm)						{rv = itm.Time();}

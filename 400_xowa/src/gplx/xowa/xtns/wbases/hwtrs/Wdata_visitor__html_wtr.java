@@ -26,7 +26,7 @@ class Wdata_visitor__html_wtr implements Wbase_claim_visitor {
 		return this;
 	}
 	public void Visit_str(Wbase_claim_string itm) {
-		tmp_bfr.Add(itm.Val_str());
+		tmp_bfr.Add(itm.Val_bry());
 	}
 	public void Visit_entity(Wbase_claim_entity itm) {
 		int entity_id = itm.Entity_id();

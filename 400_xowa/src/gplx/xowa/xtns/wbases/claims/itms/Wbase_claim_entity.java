@@ -31,12 +31,7 @@ public class Wbase_claim_entity extends Wbase_claim_base {
 	public String			Entity_tid_str()	{return Wbase_claim_entity_type_.Reg.Get_str_or_fail(entity_tid);}
 	public byte[]			Entity_tid_bry()	{return Wbase_claim_entity_type_.Reg.Get_bry_or_fail(entity_tid);}
 
-	public byte[] Page_ttl_db() {
-		return entity_tid == Wbase_claim_entity_type_.Tid__item
-			? Bry_.Add(Wdata_wiki_mgr.Ttl_prefix_qid_bry_db, entity_id_bry)
-			: Bry_.Add(Wdata_wiki_mgr.Ttl_prefix_pid_bry, entity_id_bry)
-			;
-	}
+	public byte[] Page_ttl_db() {return To_xid__db(entity_tid, entity_id_bry);}
 	public byte[] Page_ttl_gui() {
 		return entity_tid == Wbase_claim_entity_type_.Tid__item
 			? Bry_.Add(Wdata_wiki_mgr.Ttl_prefix_qid_bry_gui, entity_id_bry)
@@ -46,5 +41,12 @@ public class Wbase_claim_entity extends Wbase_claim_base {
 	@Override public void Welcome(Wbase_claim_visitor visitor) {visitor.Visit_entity(this);}
 	@Override public String toString() {// TEST:
 		return String_.Concat_with_str("|", Wbase_claim_value_type_.Reg.Get_str_or_fail(this.Snak_tid()), Wbase_claim_type_.Reg.Get_str_or_fail(this.Val_tid()), this.Entity_tid_str(), Int_.To_str(entity_id));
+	}
+
+	public static byte[] To_xid__db(byte tid, byte[] bry) {	// EX: 'item,2' -> q2; 'property,2' -> Property:P2
+		return tid == Wbase_claim_entity_type_.Tid__item
+			? Bry_.Add(Wdata_wiki_mgr.Ttl_prefix_qid_bry_db, bry)
+			: Bry_.Add(Wdata_wiki_mgr.Ttl_prefix_pid_bry, bry)
+			;
 	}
 }
