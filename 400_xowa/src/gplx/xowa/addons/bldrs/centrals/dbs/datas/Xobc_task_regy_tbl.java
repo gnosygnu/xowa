@@ -44,6 +44,7 @@ public class Xobc_task_regy_tbl implements Db_tbl {
 			while (rdr.Move_next()) {
 				int task_id = rdr.Read_int(fld_task_id);
 				int task_seqn = rdr.Read_int(fld_task_seqn);
+				if (task_seqn == 999999) continue;
 				int step_count = rdr.Read_int(fld_step_count);
 				String task_key = rdr.Read_str(fld_task_name);
 				String task_name = rdr.Read_str(fld_task_name);
