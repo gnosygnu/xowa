@@ -1374,7 +1374,7 @@
         Applies to the Luaj engine (as opposed to the Lua engine)
       </li>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj.html" id="xolnki_15" title="Module:Diagnostics/Luaj">Module:Diagnostics/Luaj</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj.html" id="xolnki_15" title="Module:Diagnostics/Luaj" class="xowa-visited">Module:Diagnostics/Luaj</a>
       </li>
       <li>
         Tests changes to the luaj_xowa.jar
@@ -1862,6 +1862,20 @@
         </td>
         <td>
           {{#invoke:Diagnostics/Luaj|table_concat_nil_sep}}
+        </td>
+        <td>
+          ab
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          table.concat fails if 1st argument is nil; fails with "bad argument: string expected, got nil"
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|table_remove_nil_arg_at_pos_1}}
         </td>
         <td>
           ab
