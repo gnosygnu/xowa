@@ -74,7 +74,9 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	public boolean GetEntityUrl(Scrib_proc_args args, Scrib_proc_rslt rslt)		{throw Err_.new_("wbase", "getEntityUrl not implemented", "url", core.Page().Url().To_str());}
 	public boolean GetSetting(Scrib_proc_args args, Scrib_proc_rslt rslt)			{throw Err_.new_("wbase", "getSetting not implemented", "url", core.Page().Url().To_str());}
 	public boolean RenderSnak(Scrib_proc_args args, Scrib_proc_rslt rslt)	{
-		String rv = Wdata_prop_val_visitor_.Render_snak(core.Wiki(), core.Page().Url_bry_safe(), args.Pull_kv_ary_safe(0));
+		Xowe_wiki wiki = core.Wiki();
+		Wdata_wiki_mgr wdata_mgr = wiki.Appe().Wiki_mgr().Wdata_mgr();
+		String rv = Wdata_prop_val_visitor_.Render_snak(wdata_mgr, wiki, core.Page().Url_bry_safe(), args.Pull_kv_ary_safe(0));
 		return rslt.Init_obj(rv);
 	}
 	public boolean RenderSnaks(Scrib_proc_args args, Scrib_proc_rslt rslt) {

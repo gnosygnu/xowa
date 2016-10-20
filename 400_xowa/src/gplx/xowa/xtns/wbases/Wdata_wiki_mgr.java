@@ -87,14 +87,14 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	}
 	public void Resolve_claim(Bry_bfr rv, Xow_domain_itm domain, Wbase_claim_base claim_itm) {
 		synchronized (thread_lock) {	// LOCK:must synchronized b/c prop_val_visitor has member bfr which can get overwritten; DATE:2016-07-06
-			Hwtr_mgr_assert();
+			if (hwtr_mgr == null) Hwtr_mgr_assert();
 			prop_val_visitor.Init(rv, hwtr_mgr.Msgs(), domain.Lang_orig_key());
 			claim_itm.Welcome(prop_val_visitor);
 		}
 	}
 	public void Resolve_to_bfr(Bry_bfr bfr, Wbase_claim_grp prop_grp, byte[] lang_key) {
 		synchronized (thread_lock) {	// LOCK:must synchronized b/c prop_val_visitor has member bfr which can get overwritten; DATE:2016-07-06
-			Hwtr_mgr_assert();
+			if (hwtr_mgr == null) Hwtr_mgr_assert();
 			int len = prop_grp.Len();
 			Wbase_claim_base selected = null;
 			for (int i = 0; i < len; i++) {								// NOTE: multiple props possible; EX: {{#property:P1082}}; PAGE:en.w:Earth DATE:2015-08-02
@@ -137,7 +137,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		Gfo_evt_mgr_.Sub_same_many(app.Usere(), this, Xoue_user.Evt_lang_changed);
 	}
 	private void Hwtr_msgs_make() {
-		if (!app.Wiki_mgr().Wiki_regy().Has(Xow_domain_itm_.Bry__wikidata)) return;
+		// if (!app.Wiki_mgr().Wiki_regy().Has(Xow_domain_itm_.Bry__wikidata)) return; // DELETE: don't know why guard is needed; breaks test; DATE:2016-10-20
 		Xol_lang_itm new_lang = app.Usere().Lang();
 		Xowe_wiki cur_wiki = this.Wdata_wiki();			
 		cur_wiki.Xtn_mgr().Xtn_wikibase().Load_msgs(cur_wiki, new_lang);

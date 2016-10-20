@@ -82,10 +82,13 @@ class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 			bfr.Add(entity_doc.Label_list__get_or_fallback(lang));
 		}
 	}
-	private static final    byte[] Wikidata_url = Bry_.new_a7("http://www.wikidata.org/entity/");
 	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {
-		Wdata_prop_val_visitor_.Render__geo(bfr, itm.Lat(), itm.Lng());
+		bfr.Add(itm.Lat());
+		bfr.Add(Bry__geo_dlm);
+		bfr.Add(itm.Lng());
 	}
+	private static final    byte[] Wikidata_url = Bry_.new_a7("http://www.wikidata.org/entity/");
+	private static final    byte[] Bry__geo_dlm = Bry_.new_a7(", ");
 	public void Visit_system(Wbase_claim_value itm) {}
 	public static final    byte[] Bry__quantity_margin_of_error = Bry_.new_u8("±");
 }
