@@ -42,11 +42,12 @@ public class Xobc_task_regy_tbl implements Db_tbl {
 		Db_rdr rdr = conn.Stmt_select_order(tbl_name, flds, String_.Ary_empty, fld_task_seqn).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
-				int task_id = rdr.Read_int(fld_task_id);
 				int task_seqn = rdr.Read_int(fld_task_seqn);
-				if (task_seqn == 999999) continue;
+				if (task_seqn == 999999) continue;	// WORKAROUND: do not show old tasks; should add a status column, but don't want to change schema yet; DATE:2016-10-20
+
+				int task_id = rdr.Read_int(fld_task_id);
 				int step_count = rdr.Read_int(fld_step_count);
-				String task_key = rdr.Read_str(fld_task_name);
+				String task_key = rdr.Read_str(fld_task_key);
 				String task_name = rdr.Read_str(fld_task_name);
 				todo_regy.Add(new Xobc_task_itm(task_id, task_seqn, step_count, task_key, task_name));
 			}
