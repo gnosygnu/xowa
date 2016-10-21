@@ -30,24 +30,13 @@ public abstract class Xobc_task_regy__base {
 	public void						Del_by(int i)			{hash.Del(i);}
 	public void						Sort()					{hash.Sort();}
 
-	public void Save_to(Gfobj_ary ary, String lang_key) {
-		List_adp list = List_adp_.New();
-		int len = hash.Len();
-		for (int i = 0; i < len; ++i) {
-			Xobc_task_itm sub_task = (Xobc_task_itm)hash.Get_at(i);
-			if (!String_.Eq(lang_key, Xobc_task_mgr.Lang_key__all)) {
-				String task_key = sub_task.Task_key();
-				if (!String_.Has_at_bgn(task_key, lang_key + ".")) continue;
-			}
-			list.Add(sub_task);
-		}
-
-		len = list.Len();
+	public void Save_to(Gfobj_ary ary) {Save_to(ary, (Xobc_task_itm[])hash.To_ary(Xobc_task_itm.class));}
+	public void Save_to(Gfobj_ary ary, Xobc_task_itm[] itms) {
+		int len = itms.length;
 		Gfobj_nde[] sub_ndes = new Gfobj_nde[len];
 		for (int i = 0; i < len; ++i) {
 			Gfobj_nde sub_nde = sub_ndes[i] = Gfobj_nde.New();
-			Xobc_task_itm sub_task = (Xobc_task_itm)list.Get_at(i);
-			sub_task.Save_to(sub_nde);
+			itms[i].Save_to(sub_nde);
 		}
 		ary.Ary_(sub_ndes);
 	}

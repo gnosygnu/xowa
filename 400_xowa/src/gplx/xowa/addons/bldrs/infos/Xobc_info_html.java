@@ -62,10 +62,8 @@ class Xobc_info_html extends Xow_special_wtr__base {
 		String torrent_fil = null;
 		String key = data_db.Tbl__task_regy().Select_key_by_id_or_null(task_id);
 		if (key == null) torrent_fil = "failed to get torrent for " + Int_.To_str(task_id);
-		else {// convert task_key to name; en.wikipedia.org|2016.06|html
+		else {
 			String src_dir = host_eval.Eval_src_dir(data_db, host_id, wiki_domain);
-			String[] ary = String_.Split(key, "|");
-			ary[0] = String_.new_u8(wiki_domain.Abrv_wm());
 			torrent_fil = String_.Format("{0}Xowa_{1}wiki_latest_archive.torrent", src_dir, wiki_domain.Lang_orig_key()); // EX: https://archive.org/download/Xowa_dewiki_latest/Xowa_dewiki_latest_archive.torrent
 		}
 		

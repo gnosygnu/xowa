@@ -51,21 +51,20 @@ public class Xobc_task_mgr implements Xog_json_wkr {
 		user_db.Done_task_tbl().Select_all(todo_mgr, done_mgr);
 		return this;
 	}
-	public static final String Lang_key__all = "all";
 	public void Reload() {
 		Gfo_log_.Instance.Info("task_mgr.reload.bgn");
 		Gfobj_nde root = Gfobj_nde.New();
 		Gfobj_nde lists_nde = root.New_nde("lists");
-		work_mgr.Save_to(lists_nde.New_ary("work"), Lang_key__all);
-		todo_mgr.Save_to(lists_nde.New_ary("todo"), Lang_key__all);
-		done_mgr.Save_to(lists_nde.New_ary("done"), Lang_key__all);
+		work_mgr.Save_to(lists_nde.New_ary("work"));
+		todo_mgr.Save_to(lists_nde.New_ary("todo"));
+		done_mgr.Save_to(lists_nde.New_ary("done"));
 		cbk_mgr.Send_json(cbk_trg, "xo.bldr.core.reload__recv", root);
 	}
 	public void Filter_by_lang(String lang_key) {
-		Gfo_log_.Instance.Info("task_mgr.reload.bgn");
+		Gfo_log_.Instance.Info("task_mgr.filter_by_lang.bgn");
 		Gfobj_nde root = Gfobj_nde.New();
 		Gfobj_nde lists_nde = root.New_nde("lists").Add_str("list_name", "todo");
-		todo_mgr.Save_to(lists_nde.New_ary("todo"), lang_key);
+		todo_mgr.Save_to(lists_nde.New_ary("todo"), Xobc_filter_mgr.Filter_by_lang(todo_mgr, lang_key));
 		cbk_mgr.Send_json(cbk_trg, "xo.bldr.core.reload_list__recv", root);
 	}
 	public void Transfer(Xobc_task_regy__base src, Xobc_task_regy__base trg, Xobc_task_itm task) {

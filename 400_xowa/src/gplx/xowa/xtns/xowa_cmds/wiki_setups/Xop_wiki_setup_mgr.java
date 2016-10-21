@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.xowa_cmds.wiki_setups; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.xowa_cmds.*;
 import gplx.langs.mustaches.*;
 import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.hosts.*;
-import gplx.xowa.addons.bldrs.exports.packs.files.*;
+import gplx.xowa.addons.bldrs.exports.packs.files.*; import gplx.xowa.addons.bldrs.centrals.tasks.*;
 import gplx.xowa.parsers.*;
 class Xop_wiki_setup_mgr {
 	private final    Mustache_tkn_parser parser = new Mustache_tkn_parser();
@@ -51,13 +51,10 @@ class Xop_wiki_setup_mgr {
 		Xows_task_itm[] rv = new Xows_task_itm[len];
 		for (int i = 0; i < len; ++i) {
 			Xobc_task_regy_itm task_row = task_rows[i];
-			String[] task_key_parts = Pack_file_mgr.Task_key__parse(String_.new_u8(task_row.Key()));
-			String task_key_type = task_key_parts[2];
-			if		(String_.Eq(task_key_type, "html"))	task_key_type = "Articles";
-			else if	(String_.Eq(task_key_type, "file")) task_key_type = "Images";
-
+			Xobc_task_key task_key = Xobc_task_key.To_itm(String_.new_u8(task_row.Key()));
+			String task_key_type = task_key.Task_type_ui();
 			Xows_file_itm[] files = Make_file_ary(url_list_bfr, wiki_domain, task_row.Id());
-			rv[i] = new Xows_task_itm(task_row.Seqn(), wiki_domain, task_row.Name(), Bry_.new_u8(task_key_type), Bry_.Replace(Bry_.new_u8(task_key_parts[1]), Byte_ascii.Dot, Byte_ascii.Dash), files);
+			rv[i] = new Xows_task_itm(task_row.Seqn(), wiki_domain, task_row.Name(), Bry_.new_u8(task_key_type), Bry_.new_u8(task_key.Wiki_date_ui()), files);
 		}
 		Array_.Sort(rv, new Xows_task_itm_sorter());
 		return rv;

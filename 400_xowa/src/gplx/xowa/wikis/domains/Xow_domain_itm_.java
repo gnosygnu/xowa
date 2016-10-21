@@ -73,6 +73,25 @@ public class Xow_domain_itm_ {
 				return new_other(raw);
 		}
 	}
+	public static boolean Match_lang(Xow_domain_itm domain, String match) {
+		// exit early if "*"
+		if (String_.Eq(match, Lang_key__all)) return true;
+
+		// get lang
+		String cur = String_.new_u8(domain.Lang_actl_key());
+
+		// return true if direct match; EX: "en" <-> "en"; "de" <-> "de"
+		if (String_.Eq(cur, match)) return true;
+
+		// handle special cases
+		if		(String_.Eq(match, "en"))
+			return String_.In(domain.Domain_str(), "simple.wikipedia.org", "species.wikimedia.org", "www.wikidata.org", "commons.wikimedia.org");
+		else if (String_.Eq(match, "zh"))
+			return String_.Eq(cur, "lzh");
+		return false;
+	}
+	public static final    String Lang_key__all = "*";
+
 	private static Xow_domain_itm new_other(byte[] raw) {return Xow_domain_itm.new_(raw, Xow_domain_tid_.Tid__other, Xol_lang_stub_.Key__unknown);}
 	private static byte[] Get_lang_code_for_mw_messages_file(byte[] v) {
 		Object o = alt_domain__lang_by_subdomain.Get_by_bry(v);

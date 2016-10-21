@@ -73,7 +73,7 @@ public class Xobc_task_regy_tbl implements Db_tbl {
 		String sql = Db_sql_.Make_by_fmt(String_.Ary
 		( "SELECT  *"
 		, "FROM    task_regy"
-		, "WHERE   task_key LIKE '{0}%'"
+		, "WHERE   task_key LIKE '{0}%'"	// DEPENDENCY:Xobc_task_key
 		, "AND     task_seqn != 999999"
 		), wiki_domain);
 		List_adp list = List_adp_.New();
