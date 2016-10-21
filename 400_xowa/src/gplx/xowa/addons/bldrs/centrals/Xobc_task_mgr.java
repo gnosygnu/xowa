@@ -60,11 +60,11 @@ public class Xobc_task_mgr implements Xog_json_wkr {
 		done_mgr.Save_to(lists_nde.New_ary("done"));
 		cbk_mgr.Send_json(cbk_trg, "xo.bldr.core.reload__recv", root);
 	}
-	public void Filter_by_lang(String lang_key) {
+	public void Filter_todo(String lang_key, String type_key) {
 		Gfo_log_.Instance.Info("task_mgr.filter_by_lang.bgn");
 		Gfobj_nde root = Gfobj_nde.New();
 		Gfobj_nde lists_nde = root.New_nde("lists").Add_str("list_name", "todo");
-		todo_mgr.Save_to(lists_nde.New_ary("todo"), Xobc_filter_mgr.Filter_by_lang(todo_mgr, lang_key));
+		todo_mgr.Save_to(lists_nde.New_ary("todo"), Xobc_filter_mgr.Filter(todo_mgr, lang_key, type_key));
 		cbk_mgr.Send_json(cbk_trg, "xo.bldr.core.reload_list__recv", root);
 	}
 	public void Transfer(Xobc_task_regy__base src, Xobc_task_regy__base trg, Xobc_task_itm task) {

@@ -36,7 +36,7 @@ class Pack_hash_bldr {
 			for (int i = 0; i < len; ++i) {
 				Xow_db_file file = db_mgr.Dbs__get_at(i);
 				int pack_tid = Get_pack_tid(file.Tid());
-				if (pack_tid == Xobc_import_type.Tid__ignore) continue;
+				if (Int_.In(pack_tid, Xobc_import_type.Tid__ignore, Xobc_import_type.Tid__wiki__text)) continue;
 				rv.Add(zip_name_bldr, pack_tid, file.Url());
 			}
 			rv.Consolidate(Xobc_import_type.Tid__wiki__srch);

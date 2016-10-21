@@ -90,7 +90,22 @@ public class Xow_domain_itm_ {
 			return String_.Eq(cur, "lzh");
 		return false;
 	}
-	public static final    String Lang_key__all = "*";
+	public static boolean Match_type(Xow_domain_itm domain, String match) {
+		// exit early if "*"
+		if (String_.Eq(match, Type_key__all)) return true;
+
+		// get lang
+		String cur = domain.Domain_type().Key_str();
+
+		// return true if direct match; EX: "wiki" <-> "wiki"; "wiktionary" <-> "wiktionary"
+		if (String_.Eq(cur, match)) return true;
+
+		// handle special cases
+		if		(String_.Eq(match, "wikimisc"))
+			return String_.In(domain.Domain_str(), "species.wikimedia.org", "www.wikidata.org", "commons.wikimedia.org");
+		return false;
+	}
+	public static final    String Lang_key__all = "*", Type_key__all = "*";
 
 	private static Xow_domain_itm new_other(byte[] raw) {return Xow_domain_itm.new_(raw, Xow_domain_tid_.Tid__other, Xol_lang_stub_.Key__unknown);}
 	private static byte[] Get_lang_code_for_mw_messages_file(byte[] v) {

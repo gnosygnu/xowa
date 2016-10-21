@@ -20,7 +20,7 @@ import gplx.xowa.addons.bldrs.centrals.tasks.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.langs.*;
 public class Xobc_filter_mgr {
-	public static Xobc_task_itm[] Filter_by_lang(Xobc_task_regy__base task_list, String lang_key_str) {
+	public static Xobc_task_itm[] Filter(Xobc_task_regy__base task_list, String lang_key_str, String type_key_str) {
 		List_adp tmp = List_adp_.New();
 
 		// loop tasks and find matches
@@ -28,7 +28,11 @@ public class Xobc_filter_mgr {
 		for (int i = 0; i < len; ++i) {
 			Xobc_task_itm task = (Xobc_task_itm)task_list.Get_at(i);
 			Xobc_task_key task_key_itm = Xobc_task_key.To_itm(task.Task_key());
-			if (Xow_domain_itm_.Match_lang(task_key_itm.Wiki_domain_itm(), lang_key_str))
+			Xow_domain_itm task_domain = task_key_itm.Wiki_domain_itm();
+			if (	Xow_domain_itm_.Match_lang(task_domain, lang_key_str)
+				&&	Xow_domain_itm_.Match_type(task_domain, type_key_str)
+				)
+
 				tmp.Add(task);
 		}
 
