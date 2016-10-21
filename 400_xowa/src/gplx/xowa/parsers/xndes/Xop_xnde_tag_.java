@@ -143,8 +143,10 @@ public class Xop_xnde_tag_ {
 , Tid__tabber = 116
 , Tid__tabview = 117
 , Tid__xowa_wiki_setup = 118
+, Tid__mapframe = 119
+, Tid__maplink = 120
 	;
-	public static final int Tid__len = 119;
+	public static final int Tid__len = 121;
 	public static final    Xop_xnde_tag[] Ary = new Xop_xnde_tag[Tid__len];
 	private static Xop_xnde_tag New(int id, String name) {
 		Xop_xnde_tag rv = new Xop_xnde_tag(id, name);
@@ -271,5 +273,7 @@ public class Xop_xnde_tag_ {
 , Tag__tabber = New(Tid__tabber, "tabber").Xtn_mw_()
 , Tag__tabview = New(Tid__tabview, "tabview").Xtn_mw_()
 , Tag__xowa_wiki_setup = New(Tid__xowa_wiki_setup, "xowa_Wiki_setup").Xtn_()
+, Tag__mapframe = New(Tid__mapframe, "mapframe").Xtn_mw_()
+, Tag__maplink = New(Tid__maplink, "maplink").Xtn_mw_()
 	;
 }

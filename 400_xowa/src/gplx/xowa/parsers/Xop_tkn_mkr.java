@@ -72,6 +72,8 @@ public class Xop_tkn_mkr {
 	public gplx.xowa.xtns.imaps.Imap_xnde Xnde__imageMap()									{return new gplx.xowa.xtns.imaps.Imap_xnde();}
 	public gplx.xowa.xtns.hieros.Hiero_xnde Xnde__hiero()									{return new gplx.xowa.xtns.hieros.Hiero_xnde();}
 	public gplx.xowa.xtns.graphs.Graph_xnde Xnde__graph()									{return new gplx.xowa.xtns.graphs.Graph_xnde();}
+	public gplx.xowa.xtns.kartographers.Mapframe_xnde Xnde__mapframe()						{return new gplx.xowa.xtns.kartographers.Mapframe_xnde();}
+	public gplx.xowa.xtns.kartographers.Maplink_xnde Xnde__maplink()						{return new gplx.xowa.xtns.kartographers.Maplink_xnde();}
 	public gplx.xowa.xtns.proofreadPage.Pp_pages_nde Xnde__pages()							{return new gplx.xowa.xtns.proofreadPage.Pp_pages_nde();}
 	public gplx.xowa.xtns.proofreadPage.Pp_pagelist_nde Xnde__pagelist()					{return new gplx.xowa.xtns.proofreadPage.Pp_pagelist_nde();}
 	public gplx.xowa.xtns.proofreadPage.Pp_pagequality_nde Xnde__pagequality()				{return new gplx.xowa.xtns.proofreadPage.Pp_pagequality_nde();}

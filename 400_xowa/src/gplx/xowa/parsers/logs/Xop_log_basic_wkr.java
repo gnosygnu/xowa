@@ -72,5 +72,7 @@ public class Xop_log_basic_wkr implements Gfo_invk {
 	, Tid_hiero			= 5
 	, Tid_math			= 6
 	, Tid_graph			= 7
+	, Tid_mapframe		= 8
+	, Tid_maplink		= 9
 	;
 }
