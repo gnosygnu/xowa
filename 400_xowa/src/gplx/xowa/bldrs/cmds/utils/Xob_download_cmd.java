@@ -38,6 +38,7 @@ public class Xob_download_cmd extends Xob_cmd__base implements Xob_cmd {
 			dump_trg_zip = wiki.Fsys_mgr().Root_dir().GenSubFil(dump_file.File_name());
 		if (dump_trg_bin == null && unzip)
 			dump_trg_bin = dump_trg_zip.GenNewNameAndExt(dump_trg_zip.NameOnly());	// convert a.sql.gz -> a.sql
+
 		// download
 		usr_dlg.Note_many("", "", "downloading file: now=~{0} src=~{1} trg=~{2}", Datetime_now.Get().XtoStr_fmt_yyyyMMdd_HHmmss(), dump_src, dump_trg_zip.OwnerDir());
 		IoEngine_xrg_downloadFil download_wkr = app.Wmf_mgr().Download_wkr().Download_xrg();

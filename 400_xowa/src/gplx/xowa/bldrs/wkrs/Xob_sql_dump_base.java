@@ -26,6 +26,7 @@ public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob
 	}
 	public Io_url Src_fil() {return src_fil;} private Io_url src_fil;
 	public Io_url_gen Make_url_gen() {return make_url_gen;} private Io_url_gen make_url_gen;
+	public Xob_sql_dump_base Src_dir_manual_(Io_url v) {src_dir_manual = v; return this;} private Io_url src_dir_manual;
 	public abstract String Sql_file_name();
 	protected abstract Xosql_dump_parser New_parser();
 	public void Cmd_init(Xob_bldr bldr) {}
@@ -33,7 +34,8 @@ public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob
 		this.Init_dump(this.Cmd_key());
 		make_url_gen = Io_url_gen_.dir_(temp_dir.GenSubDir("make"));
 		if (src_fil == null) {
-			src_fil = Xob_io_utl_.Find_nth_by_wildcard_or_null(wiki.Fsys_mgr().Root_dir(), Sql_file_name() + ".sql", ".gz", ".sql");
+			Io_url src_dir = src_dir_manual == null ? wiki.Fsys_mgr().Root_dir() : src_dir_manual;
+			src_fil = Xob_io_utl_.Find_nth_by_wildcard_or_null(src_dir, Sql_file_name() + ".sql", ".gz", ".sql");
 			if (src_fil == null) {
 				String msg = String_.Format(".sql file not found in dir.\nPlease download the file for your wiki from dumps.wikimedia.org.\nfile={0} dir={1}", Sql_file_name(), wiki.Fsys_mgr().Root_dir());
 				app.Usr_dlg().Warn_many("", "", msg);

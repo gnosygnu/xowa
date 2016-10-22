@@ -21,6 +21,7 @@ import gplx.xowa.wikis.domains.*;
 import gplx.xowa.htmls.hrefs.*;
 class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 	private boolean running;
+	private Xowe_wiki wiki;
 	public Xoi_cmd_wiki_import(Xoi_setup_mgr install_mgr, String wiki_key, String wiki_date, String dump_type) {this.install_mgr = install_mgr; this.Owner_(install_mgr); this.wiki_key = wiki_key; this.wiki_date = wiki_date; this.dump_type = dump_type;} private Xoi_setup_mgr install_mgr; String wiki_key, wiki_date, dump_type;
 	public static final String KEY = "wiki.import";
 	public void Cmd_ctor() {}
@@ -44,29 +45,6 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		return running;
 	}
 	public boolean Import_move_bz2_to_done() {return import_move_bz2_to_done;} public Xoi_cmd_wiki_import Import_move_bz2_to_done_(boolean v) {import_move_bz2_to_done = v; return this;} private boolean import_move_bz2_to_done = true;
-	private void Process_txt(Xob_bldr bldr) {
-		((Xob_cleanup_cmd)bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_util_cleanup)).Delete_tdb_(true).Delete_sqlite3_(true);
-		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_text_init);
-		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_make_page);
-		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_make_id);
-		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_calc_stats);
-		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_core_term);
-	}	
-	private void Process_sql(Xob_bldr bldr) {
-		((Xob_cleanup_cmd)bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_util_cleanup)).Delete_tdb_(true).Delete_sqlite3_(true);
-		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_init);
-		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_page);
-		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_css);	
-		if (wiki.Appe().Setup_mgr().Dump_mgr().Search_version() == gplx.xowa.addons.wikis.searchs.specials.Srch_special_page.Version_2)
-			gplx.xowa.addons.wikis.searchs.bldrs.Srch_bldr_mgr_.Setup(wiki);
-		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_term);	
-
-		if (wiki.Domain_itm().Domain_type_id() != Xow_domain_tid_.Tid__other) {	// do not add category if not wmf; particularly, wikia wikis will not have category dumps; DATE:2016-10-22
-			bldr.Cmd_mgr().Add(new gplx.xowa.bldrs.cmds.utils.Xob_download_cmd(bldr, wiki).Dump_type_(gplx.xowa.addons.wikis.ctgs.bldrs.Xob_catlink_cmd.Dump_file_name));
-			bldr.Cmd_mgr().Add(new gplx.xowa.bldrs.cmds.utils.Xob_download_cmd(bldr, wiki).Dump_type_(gplx.xowa.addons.wikis.ctgs.bldrs.Xob_pageprop_cmd.Dump_file_name));
-			bldr.Cmd_mgr().Add_many(wiki, gplx.xowa.addons.wikis.ctgs.bldrs.Xob_pageprop_cmd.BLDR_CMD_KEY, gplx.xowa.addons.wikis.ctgs.bldrs.Xob_catlink_cmd.BLDR_CMD_KEY);
-		}
-	}	
 	private void Process_async() {
 		Xoae_app app = install_mgr.App();
 		app.Usr_dlg().Prog_one("", "", "preparing import: ~{0}", wiki_key);
@@ -76,10 +54,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		bldr.Cmd_mgr().Clear();
 		bldr.Pause_at_end_(false);
 		Io_url src_url = wiki.Import_cfg().Src_rdr().Url();
-		if (install_mgr.Dump_mgr().Wiki_storage_type_is_sql())
-			Process_sql(bldr);
-		else
-			Process_txt(bldr);
+		Process_sql(bldr, src_url);
 		bldr.Run();
 		app.Usr_dlg().Prog_none(GRP_KEY, "clear", ""); app.Usr_dlg().Note_none(GRP_KEY, "clear", "");
 		app.Usere().Available_from_fsys();
@@ -98,7 +73,25 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		running = false;
 		wiki.Import_cfg().Src_fil_xml_(null).Src_fil_bz2_(null);	// reset file else error when going from Import/Script to Import/List
 		app.Gui_mgr().Kit().New_cmd_sync(this).Invk(GfsCtx.new_(), 0, Invk_open_wiki, GfoMsg_.Null);
-	}	private Xowe_wiki wiki;
+	}
+	private void Process_sql(Xob_bldr bldr, Io_url dump_url) {
+		// setup wiki
+		((Xob_cleanup_cmd)bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_util_cleanup)).Delete_tdb_(true).Delete_sqlite3_(true);
+		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_init);
+		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_page);
+		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_css);	
+		if (wiki.Appe().Setup_mgr().Dump_mgr().Search_version() == gplx.xowa.addons.wikis.searchs.specials.Srch_special_page.Version_2)
+			gplx.xowa.addons.wikis.searchs.bldrs.Srch_bldr_mgr_.Setup(wiki);
+		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_term);	
+
+		// setup category
+		if (wiki.Domain_itm().Domain_type_id() != Xow_domain_tid_.Tid__other) {	// do not add category if not wmf; note that wikia wikis will not have category dumps; DATE:2016-10-22
+			bldr.Cmd_mgr().Add(new gplx.xowa.bldrs.cmds.utils.Xob_download_cmd(bldr, wiki).Dump_type_(gplx.xowa.addons.wikis.ctgs.bldrs.Xob_catlink_cmd.Dump_file_name));
+			bldr.Cmd_mgr().Add(new gplx.xowa.bldrs.cmds.utils.Xob_download_cmd(bldr, wiki).Dump_type_(gplx.xowa.addons.wikis.ctgs.bldrs.Xob_pageprop_cmd.Dump_file_name));
+			bldr.Cmd_mgr().Add(new gplx.xowa.addons.wikis.ctgs.bldrs.Xob_pageprop_cmd(bldr, wiki).Src_dir_manual_(dump_url.OwnerDir()));
+			bldr.Cmd_mgr().Add(new gplx.xowa.addons.wikis.ctgs.bldrs.Xob_catlink_cmd(bldr, wiki).Src_dir_manual_(dump_url.OwnerDir()));
+		}
+	}
 	private void Open_wiki(String wiki_key) {
 		Xog_win_itm main_win = install_mgr.App().Gui_mgr().Browser_win();
 		if (main_win.Active_page() == null) return; // will be null when invoked through cmd-line
