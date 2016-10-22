@@ -35,6 +35,7 @@ public class Xob_pageprop_cmd extends Xob_sql_dump_base implements Xosql_dump_cb
 		tbl.Insert_bgn();
 	}
 	@Override public void Cmd_end() {
+		if (fail) return;
 		tbl.Insert_end();
 		this.Cmd_cleanup_sql();
 	}

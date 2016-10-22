@@ -31,6 +31,7 @@ public class Xob_catlink_cmd extends Xob_sql_dump_base implements Xosql_dump_cbk
 		mgr.On_cmd_bgn(wiki);
 	}
 	@Override public void Cmd_end() {
+		if (fail) return;
 		mgr.On_cmd_end();
 		this.Cmd_cleanup_sql();
 	}
