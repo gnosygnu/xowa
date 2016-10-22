@@ -42,14 +42,14 @@ public class Xob_pageprop_cmd extends Xob_sql_dump_base implements Xosql_dump_cb
 		switch (fld_idx) {
 			case Fld__pp_page:					this.tmp_id					= Bry_.To_int_or(src, val_bgn, val_end, -1); break;
 			case Fld__pp_propname:				this.tmp_key_is_hiddencat	= Bry_.Eq(src, val_bgn, val_end, Key_hiddencat); break;
-			case Fld__pp_value:
-				if (tmp_key_is_hiddencat)
-					tbl.Insert_cmd_by_batch(tmp_id);
-				if (++rows % 10000 == 0) usr_dlg.Prog_many("", "", "parsing pageprops sql: row=~{0}", Int_.To_str_fmt(rows, "#,##0"));
-				break;
 		}
 	}
-	private static final byte Fld__pp_page = 0, Fld__pp_propname = 1, Fld__pp_value = 2;
+	public void On_row_done() {
+		if (tmp_key_is_hiddencat)
+			tbl.Insert_cmd_by_batch(tmp_id);
+		if (++rows % 10000 == 0) usr_dlg.Prog_many("", "", "parsing pageprops sql: row=~{0}", Int_.To_str_fmt(rows, "#,##0"));
+	}
+	private static final byte Fld__pp_page = 0, Fld__pp_propname = 1;
 
 	public static final String BLDR_CMD_KEY = "wiki.page_props";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;}

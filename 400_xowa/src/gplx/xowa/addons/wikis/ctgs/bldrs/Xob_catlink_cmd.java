@@ -42,10 +42,11 @@ public class Xob_catlink_cmd extends Xob_sql_dump_base implements Xosql_dump_cbk
 			case Fld__cl_timestamp:			this.tmp_timestamp			= Bry_.Mid(src, val_bgn, val_end); break;
 			case Fld__cl_sortkey_prefix:	this.tmp_sortkey_prefix		= Bry_.Mid(src, val_bgn, val_end); break;
 			case Fld__cl_collation:			this.tmp_collation			= Bry_.Mid(src, val_bgn, val_end); break;
-			case Fld__cl_type:				this.tmp_type				= Bry_.Mid(src, val_bgn, val_end);
-				mgr.On_cmd_row(tmp_page_id, tmp_ctg_ttl, tmp_sortkey, tmp_timestamp, tmp_sortkey_prefix, tmp_collation, tmp_type);
-				break;
+			case Fld__cl_type:				this.tmp_type				= Bry_.Mid(src, val_bgn, val_end); break;
 		}
+	}
+	public void On_row_done() {
+		mgr.On_cmd_row(tmp_page_id, tmp_ctg_ttl, tmp_sortkey, tmp_timestamp, tmp_sortkey_prefix, tmp_collation, tmp_type);
 	}
 	private static final byte Fld__cl_from = 0, Fld__cl_to = 1, Fld__cl_sortkey = 2, Fld__cl_timestamp = 3, Fld__cl_sortkey_prefix = 4, Fld__cl_collation = 5, Fld__cl_type = 6;
 

@@ -95,6 +95,7 @@ public class Xosql_dump_parser {
 								break;
 							case Byte_ascii.Paren_end:		// paren_end: end fld and row
 								Commit_fld(fld_idx++, val_bfr);
+								cbk.On_row_done();
 								fld_idx = 0;
 								mode = Mode__row_end;
 								break;

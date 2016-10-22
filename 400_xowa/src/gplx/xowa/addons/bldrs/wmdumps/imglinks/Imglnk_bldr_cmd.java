@@ -20,7 +20,7 @@ import gplx.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.sql_dumps.*;
 public class Imglnk_bldr_cmd extends Xob_sql_dump_base implements Xosql_dump_cbk {
 	private Imglnk_bldr_mgr mgr;
-	private int tmp_page_id;
+	private int tmp_page_id; private byte[] tmp_il_to;
 	private int rows = 0;
 
 	public Imglnk_bldr_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb;}
@@ -33,12 +33,13 @@ public class Imglnk_bldr_cmd extends Xob_sql_dump_base implements Xosql_dump_cbk
 	public void On_fld_done(int fld_idx, byte[] src, int val_bgn, int val_end) {
 		switch (fld_idx) {
 			case Fld__il_from:			this.tmp_page_id = Bry_.To_int_or(src, val_bgn, val_end, -1); break;
-			case Fld__il_to:
-				mgr.Tmp_tbl().Insert_by_batch(tmp_page_id, Bry_.Mid(src, val_bgn, val_end));
-				if (++rows % 100000 == 0) usr_dlg.Prog_many("", "", "reading row ~{0}", Int_.To_str_fmt(rows, "#,##0"));
-				break;
+			case Fld__il_to:			this.tmp_il_to = Bry_.Mid(src, val_bgn, val_end); break;
 		}
 	}	private static final byte Fld__il_from = 0, Fld__il_to = 1;
+	public void On_row_done() {
+		mgr.Tmp_tbl().Insert_by_batch(tmp_page_id, tmp_il_to);
+		if (++rows % 100000 == 0) usr_dlg.Prog_many("", "", "reading row ~{0}", Int_.To_str_fmt(rows, "#,##0"));
+	}
 	@Override public void Cmd_end() {
 		if (fail) return;
 		mgr.On_cmd_end();

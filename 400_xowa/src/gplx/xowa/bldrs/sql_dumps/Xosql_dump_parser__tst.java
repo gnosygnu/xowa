@@ -85,5 +85,6 @@ class Xosql_dump_cbk__test implements Xosql_dump_cbk {
 		bfr.Add_mid(src, val_bgn, val_end).Add_byte_pipe();
 		prv_idx = fld_idx;
 	}
+	public void On_row_done() {}
 	public byte[] To_bry_and_clear() {return bfr.To_bry_and_clear();}
 }

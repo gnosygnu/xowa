@@ -21,7 +21,7 @@ import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.data.*; import
 public class Pglnk_bldr_cmd extends Xob_sql_dump_base implements Xosql_dump_cbk {
 	private Db_conn conn;
 	private Pglnk_page_link_temp_tbl temp_tbl;
-	private int tmp_src_id, tmp_trg_ns;
+	private int tmp_src_id, tmp_trg_ns; private byte[] tmp_trg_ttl;
 	private int rows = 0;
 	public Pglnk_bldr_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb;}
 	@Override public String Sql_file_name() {return Dump_type_key;} public static final String Dump_type_key = "pagelinks";
@@ -53,12 +53,12 @@ public class Pglnk_bldr_cmd extends Xob_sql_dump_base implements Xosql_dump_cbk 
 		switch (fld_idx) {
 			case Fld__pl_from:			this.tmp_src_id = Bry_.To_int_or(src, val_bgn, val_end, -1); break;
 			case Fld__pl_namespace:		this.tmp_trg_ns = Bry_.To_int_or(src, val_bgn, val_end, -1); break;
-			case Fld__pl_title:
-				byte[] tmp_trg_ttl = Bry_.Mid(src, val_bgn, val_end);
-				temp_tbl.Insert(tmp_src_id, tmp_trg_ns, tmp_trg_ttl);
-				if (++rows % 100000 == 0) usr_dlg.Prog_many("", "", "reading row ~{0}", Int_.To_str_fmt(rows, "#,##0"));
-				break;
+			case Fld__pl_title:			this.tmp_trg_ttl = Bry_.Mid(src, val_bgn, val_end); break;
 		}
+	}
+	public void On_row_done() {
+		temp_tbl.Insert(tmp_src_id, tmp_trg_ns, tmp_trg_ttl);
+		if (++rows % 100000 == 0) usr_dlg.Prog_many("", "", "reading row ~{0}", Int_.To_str_fmt(rows, "#,##0"));
 	}
 	private static final byte Fld__pl_from = 0, Fld__pl_namespace = 1, Fld__pl_title = 2;
 	private static final    String Sql__page_link__make = String_.Concat_lines_nl_skip_last

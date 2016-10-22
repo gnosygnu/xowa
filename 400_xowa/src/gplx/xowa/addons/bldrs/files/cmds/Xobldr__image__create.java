@@ -60,15 +60,16 @@ public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd,
 			case Fld_img_bits: 			cur_bits		= Bry_.To_int_or(src, val_bgn, val_end, -1); break;
 			case Fld_img_media_type:	cur_media_type	= Bry_.Mid(src, val_bgn, val_end); break;
 			case Fld_img_minor_mime:	cur_minor_mime	= Bry_.Mid(src, val_bgn, val_end); break;
-			case Fld_img_timestamp:		cur_timestamp	= Bry_.Mid(src, val_bgn, val_end);
-				cur_ext_id = Calc_ext_id(show_issues ? app.Usr_dlg() : Gfo_usr_dlg_.Noop, cur_ttl, cur_media_type, cur_minor_mime, cur_width, cur_height);
-				tbl_image.Insert(stmt, cur_ttl, cur_media_type, cur_minor_mime, cur_size, cur_width, cur_height, cur_bits, cur_ext_id, cur_timestamp);
-				++commit_count;
-				if ((commit_count % 10000) == 0) {
-					usr_dlg.Prog_many("", "", "committing: count=~{0} last=~{1}", commit_count, String_.new_u8(cur_ttl));
-					conn.Txn_sav();
-				}
-				break;
+			case Fld_img_timestamp:		cur_timestamp	= Bry_.Mid(src, val_bgn, val_end); break;
+		}
+	}
+	public void On_row_done() {
+		cur_ext_id = Calc_ext_id(show_issues ? app.Usr_dlg() : Gfo_usr_dlg_.Noop, cur_ttl, cur_media_type, cur_minor_mime, cur_width, cur_height);
+		tbl_image.Insert(stmt, cur_ttl, cur_media_type, cur_minor_mime, cur_size, cur_width, cur_height, cur_bits, cur_ext_id, cur_timestamp);
+		++commit_count;
+		if ((commit_count % 10000) == 0) {
+			usr_dlg.Prog_many("", "", "committing: count=~{0} last=~{1}", commit_count, String_.new_u8(cur_ttl));
+			conn.Txn_sav();
 		}
 	}
 	public void Cmd_end() {}
