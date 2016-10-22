@@ -25,7 +25,7 @@ public class Xoctg_catpage_loader {
 		Xowd_page_tbl page_tbl = db_mgr.Db__core().Tbl__page();
 		Xowd_page_itm page_itm = page_tbl.Select_by_ttl_as_itm_or_null(cat_ttl);
 		if (page_itm == null) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "category does not exist in page table; page=~{0} ttl=~{1}", page_ttl_bry, cat_ttl.Full_db());
+			Gfo_usr_dlg_.Instance.Log_many("", "", "category does not exist in page table; wiki=~{0} page=~{1} ttl=~{2}", wiki.Domain_str(), page_ttl_bry, cat_ttl.Full_db());	// Log instead of Warn b/c happens many times in en.d, en.b, en.u; DATE:2016-10-22
 			return null;
 		}
 		int cat_id = page_itm.Id();
