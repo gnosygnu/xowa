@@ -77,8 +77,12 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Id__map			= 53
 	, Id__bdo			= 54
 	, Id__time			= 55
+	, Id__ruby			= 56
+	, Id__rb			= 57
+	, Id__rp			= 58
+	, Id__rt			= 59
 	;
-//		private static final int Id__ary_max = 54;
+//		private static final int Id__ary_max = 60;
 	public static final    byte[]
 	  Bry__a			= Bry_.new_a7("a")
 	, Bry__ul			= Bry_.new_a7("ul")
@@ -101,7 +105,6 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 //			tags_by_bry.Add_bry_int(rv.Key_bry(), id);
 //			return rv;
 //		}
-
 	public static final    Hash_adp_bry Hash = Hash_adp_bry.ci_a7()
 	.Add_bry_int(Bry__a			, Id__a)
 	.Add_str_int("h1"			, Id__h1)
@@ -158,6 +161,10 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	.Add_str_int("map"			, Id__map)
 	.Add_str_int("bdo"			, Id__bdo)
 	.Add_str_int("time"			, Id__time)
+	.Add_str_int("ruby"			, Id__ruby)
+	.Add_str_int("rb"			, Id__rb)
+	.Add_str_int("rp"			, Id__rp)
+	.Add_str_int("rt"			, Id__rt)
 	;
 	public static String To_str(int tid) {
 		switch (tid) {
@@ -220,6 +227,10 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 			case Id__map:			return "map";
 			case Id__bdo:			return "bdo";
 			case Id__time:			return "time";
+			case Id__ruby:			return "ruby";
+			case Id__rb:			return "rb";
+			case Id__rp:			return "rp";
+			case Id__rt:			return "rt";
 			default:				throw Err_.new_unhandled(tid);
 		}
 	}

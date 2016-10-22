@@ -28,9 +28,7 @@ public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob
 	public Io_url_gen Make_url_gen() {return make_url_gen;} private Io_url_gen make_url_gen;
 	public abstract String Sql_file_name();
 	protected abstract Xosql_dump_parser New_parser();
-	public void Cmd_init(Xob_bldr bldr) {
-		
-	}
+	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
 		this.Init_dump(this.Cmd_key());
 		make_url_gen = Io_url_gen_.dir_(temp_dir.GenSubDir("make"));
