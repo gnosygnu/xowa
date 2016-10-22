@@ -201,7 +201,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		Xog_tab_itm tab = tab_mgr.Active_tab();
 		Xoae_page page = tab.History_mgr().Cur_page(tab.Wiki());	// NOTE: must set to CurPage() else changes will be lost when going Bwd,Fwd
 		tab.Page_(page);
-		page.Wikie().Parser_mgr().Parse(page, true);		// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
+		page = page.Wikie().Page_mgr().Load_page(page.Url(), page.Ttl(), tab);	// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 		Page__refresh();
 	}
 	public void Page__refresh() {
