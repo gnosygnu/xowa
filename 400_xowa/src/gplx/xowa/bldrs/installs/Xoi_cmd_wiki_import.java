@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.threads.*; import gplx.xowa.bldrs.*; import gplx.xowa.guis.views.*; import gplx.xowa.bldrs.cmds.utils.*;
+import gplx.xowa.wikis.domains.*;
 import gplx.xowa.htmls.hrefs.*;
 class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 	private boolean running;
@@ -60,9 +61,11 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 			gplx.xowa.addons.wikis.searchs.bldrs.Srch_bldr_mgr_.Setup(wiki);
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_term);	
 
-		bldr.Cmd_mgr().Add(new gplx.xowa.bldrs.cmds.utils.Xob_download_cmd(bldr, wiki).Dump_type_(gplx.xowa.addons.wikis.ctgs.bldrs.Xob_catlink_cmd.Dump_file_name));
-		bldr.Cmd_mgr().Add(new gplx.xowa.bldrs.cmds.utils.Xob_download_cmd(bldr, wiki).Dump_type_(gplx.xowa.addons.wikis.ctgs.bldrs.Xob_pageprop_cmd.Dump_file_name));
-		bldr.Cmd_mgr().Add_many(wiki, gplx.xowa.addons.wikis.ctgs.bldrs.Xob_pageprop_cmd.BLDR_CMD_KEY, gplx.xowa.addons.wikis.ctgs.bldrs.Xob_catlink_cmd.BLDR_CMD_KEY);
+		if (wiki.Domain_itm().Domain_type_id() != Xow_domain_tid_.Tid__other) {	// do not add category if not wmf; particularly, wikia wikis will not have category dumps; DATE:2016-10-22
+			bldr.Cmd_mgr().Add(new gplx.xowa.bldrs.cmds.utils.Xob_download_cmd(bldr, wiki).Dump_type_(gplx.xowa.addons.wikis.ctgs.bldrs.Xob_catlink_cmd.Dump_file_name));
+			bldr.Cmd_mgr().Add(new gplx.xowa.bldrs.cmds.utils.Xob_download_cmd(bldr, wiki).Dump_type_(gplx.xowa.addons.wikis.ctgs.bldrs.Xob_pageprop_cmd.Dump_file_name));
+			bldr.Cmd_mgr().Add_many(wiki, gplx.xowa.addons.wikis.ctgs.bldrs.Xob_pageprop_cmd.BLDR_CMD_KEY, gplx.xowa.addons.wikis.ctgs.bldrs.Xob_catlink_cmd.BLDR_CMD_KEY);
+		}
 	}	
 	private void Process_async() {
 		Xoae_app app = install_mgr.App();
