@@ -48,10 +48,10 @@ public class System_ {
 
 	// *** environment variables: getenv
 	public static String Env__machine_name() {
-		String rv = "UNKNOWN_MACHINE_NAME";
+		String rv = "";
 		rv = Env__get(Env_key__computername);	if (String_.Len_gt_0(rv)) return rv;
 		rv = Env__get(Env_key__hostname);		if (String_.Len_gt_0(rv)) return rv;
-		return rv;
+		return "UNKNOWN_MACHINE_NAME";
 	}
 	private static String Env__get(String key) {
 				return System.getenv(key);
