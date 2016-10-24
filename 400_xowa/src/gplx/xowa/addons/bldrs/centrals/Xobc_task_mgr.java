@@ -43,6 +43,7 @@ public class Xobc_task_mgr implements Xog_json_wkr {
 	public Xobc_user_db					User_db()   {return user_db;}	private final    Xobc_user_db user_db;
 	public Gfo_rate_mgr					Rate_mgr()	{return rate_mgr;}	private final    Gfo_rate_mgr rate_mgr;
 	public Xobc_step_factory			Step_mgr()	{return step_mgr;}	private final    Xobc_step_factory step_mgr;
+	public Xobc_filter_mgr				Filter_mgr() {return filter_mgr;} private final    Xobc_filter_mgr filter_mgr = new Xobc_filter_mgr();
 	public void Send_json(String func, Gfobj_nde data) {cbk_mgr.Send_json(cbk_trg, func, data);}
 	public Xobc_task_mgr Load_or_init() {
 		Gfo_log_.Instance.Info("task_mgr.load_or_init.bgn");
@@ -56,15 +57,16 @@ public class Xobc_task_mgr implements Xog_json_wkr {
 		Gfobj_nde root = Gfobj_nde.New();
 		Gfobj_nde lists_nde = root.New_nde("lists");
 		work_mgr.Save_to(lists_nde.New_ary("work"));
-		todo_mgr.Save_to(lists_nde.New_ary("todo"));
+		todo_mgr.Save_to(lists_nde.New_ary("todo"), filter_mgr.Filter(todo_mgr));
 		done_mgr.Save_to(lists_nde.New_ary("done"));
+		root.Add_nde("filters", filter_mgr.Make_init_msg());
 		cbk_mgr.Send_json(cbk_trg, "xo.bldr.core.reload__recv", root);
 	}
 	public void Filter_todo(String lang_key, String type_key) {
 		Gfo_log_.Instance.Info("task_mgr.filter_by_lang.bgn");
 		Gfobj_nde root = Gfobj_nde.New();
 		Gfobj_nde lists_nde = root.New_nde("lists").Add_str("list_name", "todo");
-		todo_mgr.Save_to(lists_nde.New_ary("todo"), Xobc_filter_mgr.Filter(todo_mgr, lang_key, type_key));
+		todo_mgr.Save_to(lists_nde.New_ary("todo"), filter_mgr.Filter(todo_mgr, lang_key, type_key));
 		cbk_mgr.Send_json(cbk_trg, "xo.bldr.core.reload_list__recv", root);
 	}
 	public void Transfer(Xobc_task_regy__base src, Xobc_task_regy__base trg, Xobc_task_itm task) {
