@@ -159,6 +159,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		api_root.Init_by_app(this);
 		wmf_mgr.Init_by_app(this);
 		gplx.core.net.emails.Gfo_email_mgr_.Instance = gplx.core.net.emails.Gfo_email_mgr_.New_jre();
+		gplx.xowa.addons.users.wikis.regys.Xou_regy_addon.Init(this);
 	}
 	public boolean Launch_done() {return stage == Xoa_stage_.Tid_launch;}
 	public void Launch() {

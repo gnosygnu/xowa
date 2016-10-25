@@ -23,7 +23,7 @@ public class Xou_wiki_tbl implements Db_tbl {
 	private final    Db_conn conn;
 	public Xou_wiki_tbl(Db_conn conn) {
 		this.conn = conn;
-		this.tbl_name				= "user_wiki";
+		this.tbl_name				= Tbl_name_dflt;
 		this.fld__wiki_id			= flds.Add_int_pkey("wiki_id");
 		this.fld__wiki_type			= flds.Add_int("wiki_type");				// enum: 0=user; 1=wmf; 2=wikia;
 		this.fld__wiki_domain		= flds.Add_str("wiki_domain", 255);			// EX: "en.wikipedia.org"
@@ -45,6 +45,24 @@ public class Xou_wiki_tbl implements Db_tbl {
 			.Exec_insert()
 			;
 	}
+	public Xou_wiki_itm[] Select_all() {
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Exec_select__rls_auto();
+		try {
+			List_adp list = List_adp_.New();
+			while (rdr.Move_next()) {
+				list.Add(Make(rdr));
+			}
+			return (Xou_wiki_itm[])list.To_ary_and_clear(Xou_wiki_itm.class);
+		}
+		finally {rdr.Rls();}
+	}
+	private Xou_wiki_itm Make(Db_rdr rdr) {
+		return new Xou_wiki_itm(rdr.Read_int(fld__wiki_id), rdr.Read_int(fld__wiki_type)
+			, rdr.Read_str(fld__wiki_domain), rdr.Read_str(fld__wiki_name), Io_url_.new_fil_(rdr.Read_str(fld__wiki_core_url)), rdr.Read_str(fld__wiki_data)
+		);
+	}
 
 	public void Rls() {}
+
+	public static final String Tbl_name_dflt = "user_wiki";
 }
