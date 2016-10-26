@@ -16,17 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.users.wikis.regys; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.users.*; import gplx.xowa.addons.users.wikis.*;
+import gplx.xowa.addons.users.wikis.regys.dbs.*; import gplx.xowa.addons.users.wikis.regys.specials.itms.*;
+import gplx.xowa.htmls.bridges.*;
 import gplx.dbs.*;
 import gplx.xowa.specials.*;
-import gplx.xowa.addons.users.wikis.regys.dbs.*; import gplx.xowa.addons.users.wikis.regys.specials.registers.*;
-public class Xou_regy_addon implements Xoax_addon_itm, Xoax_addon_itm__special {
-	public Xou_regy_addon(Db_conn conn) {
-		db_mgr = new Xouw_db_mgr(conn);
-	}
-	public Xouw_db_mgr Db_mgr() {return db_mgr;} private final    Xouw_db_mgr db_mgr;
+public class Xou_regy_addon implements Xoax_addon_itm, Xoax_addon_itm__special, Xoax_addon_itm__json {
 	public Xow_special_page[] Special_pages() {
 		return new Xow_special_page[]
-		{ Xouw_register_special.Prototype
+		{ Xouw_itm_special.Prototype
+		};
+	}
+	public Bridge_cmd_itm[] Json_cmds() {
+		return new Bridge_cmd_itm[]
+		{ Xouw_itm_bridge.Prototype
 		};
 	}
 
@@ -45,8 +47,9 @@ public class Xou_regy_addon implements Xoax_addon_itm, Xoax_addon_itm__special {
 		if (!conn.Meta_tbl_exists(Xou_wiki_tbl.Tbl_name_dflt)) return;
 
 		// register
-		Xou_regy_addon addon = new Xou_regy_addon(conn);
-		Xou_wiki_itm[] itms = addon.Db_mgr().Tbl__wiki().Select_all();
+		// Xou_regy_addon addon = new Xou_regy_addon();
+		Xouw_db_mgr db_mgr = new Xouw_db_mgr(conn);
+		Xou_wiki_itm[] itms = db_mgr.Tbl__wiki().Select_all();
 		int len = itms.length;
 		for (int i = 0; i < len; ++i) {
 			Xou_wiki_itm itm = itms[i];
@@ -56,8 +59,9 @@ public class Xou_regy_addon implements Xoax_addon_itm, Xoax_addon_itm__special {
 			, gplx.xowa.wikis.nss.Xow_ns_mgr_.default_(gplx.xowa.langs.cases.Xol_case_mgr_.A7())
 			, gplx.xowa.wikis.domains.Xow_domain_itm_.parse(Bry_.new_u8(itm.Domain()))
 			, itm.Url().OwnerDir());
-			wiki.Init_assert();
 			wiki.Appe().Wiki_mgr().Add(wiki);
+			wiki.Init_by_wiki__force_and_mark_inited();
+			wiki.Db_mgr_as_sql().Save_mgr().Create_enabled_(true);
 			app.User().Wikii().Xwiki_mgr().Add_by_atrs(itm.Domain(), itm.Domain());
 		}
 	}

@@ -15,17 +15,16 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.users.wikis.regys.specials.registers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.users.*; import gplx.xowa.addons.users.wikis.*; import gplx.xowa.addons.users.wikis.regys.*; import gplx.xowa.addons.users.wikis.regys.specials.*;
-import gplx.xowa.specials.*;
-public class Xouw_register_special implements Xow_special_page {
+package gplx.xowa.addons.users.wikis.regys.specials.itms; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.users.*; import gplx.xowa.addons.users.wikis.*; import gplx.xowa.addons.users.wikis.regys.*; import gplx.xowa.addons.users.wikis.regys.specials.*;
+import gplx.xowa.specials.*; import gplx.core.net.qargs.*;
+public class Xouw_itm_special implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
-		// Special:XowaWikiRegister
-//			Gfo_qarg_mgr url_args = new Gfo_qarg_mgr().Init(url.Qargs_ary());
-//
-//			new Xow_import_html(Io_url_.new_dir_(owner_str), dir_cmd).Bld_page_by_mustache(wiki.App(), page, this);
+		// Gfo_qarg_mgr url_args = new Gfo_qarg_mgr().Init(url.Qargs_ary());
+
+		new Xouw_itm_html().Bld_page_by_mustache(wiki.App(), page, this);
 	}
-	Xouw_register_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
+	Xouw_itm_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
 	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;
 	public Xow_special_page Special__clone()	{return this;}
-	public static final    Xow_special_page Prototype = new Xouw_register_special(Xow_special_meta.New_xo("XowaWikiRegister", "Register Wiki"));
+	public static final    Xow_special_page Prototype = new Xouw_itm_special(Xow_special_meta.New_xo("XowaWikiRegister", "Register Wiki"));
 }

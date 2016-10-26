@@ -159,7 +159,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		api_root.Init_by_app(this);
 		wmf_mgr.Init_by_app(this);
 		gplx.core.net.emails.Gfo_email_mgr_.Instance = gplx.core.net.emails.Gfo_email_mgr_.New_jre();
-		gplx.xowa.addons.users.wikis.regys.Xou_regy_addon.Init(this);
 	}
 	public boolean Launch_done() {return stage == Xoa_stage_.Tid_launch;}
 	public void Launch() {
@@ -169,6 +168,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		user.Cfg_mgr().Setup_mgr().Setup_run_check(this); log_bfr.Add("app.upgrade.done");
 		gplx.xowa.users.prefs.Prefs_converter.Instance.Check(this);
 		user.Wiki().Init_assert();	// NOTE: must assert wiki and load langs first, else will be asserted during Portal_mgr().Init(), which will cause IndexOutOfBounds; DATE:2014-10-04
+		gplx.xowa.addons.users.wikis.regys.Xou_regy_addon.Init(this);
 	}
 	public byte Stage() {return stage;} public Xoae_app Stage_(byte v) {stage = v; return this;} private byte stage = Xoa_stage_.Tid_ctor;
 	public boolean Term_cbk() {

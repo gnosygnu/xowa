@@ -170,6 +170,11 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	}
 	public Xodb_mgr_sql				Db_mgr_create_as_sql() {Xodb_mgr_sql rv = new Xodb_mgr_sql(this); db_mgr = rv; return rv;}
 	public void	Init_by_wiki__force() {init_needed = true; Init_by_wiki();}
+	public void	Init_by_wiki__force_and_mark_inited() {
+		init_needed = true;
+		Init_by_wiki();
+		init_needed = false;
+	}
 	public void Init_by_wiki()		{Init_assert();}
 	public Xowe_wiki Init_assert()	{if (init_needed) Init_wiki(app.Usere()); return this;}
 	public void Init_db_mgr() {
