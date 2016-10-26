@@ -29,13 +29,10 @@ class Xouw_itm_html extends Xow_special_wtr__base {
 		Xopg_tag_mgr head_tags = page_data.Head_tags();
 		Xopg_tag_wtr_.Add__xocss	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__xohelp	(head_tags, app.Fsys_mgr().Http_root());
+		Xopg_tag_wtr_.Add__xolog	(head_tags, app.Fsys_mgr().Http_root());
+		Xopg_tag_wtr_.Add__xoajax	(head_tags, app.Fsys_mgr().Http_root(), app);
+
 		head_tags.Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "xouw_itm.css")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("bin", "xouw_itm.js")));
-		head_tags.Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "xo.log.css")));
-		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("bin", "xo.log.js")));
-		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("bin", "xo.app.js")));
-		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("bin", "xo.app.http_server.js")));
-		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("bin", "xo.app.swt.js")));
-		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("bin", "xo.server.js")));
 	}
 }

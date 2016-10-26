@@ -31,22 +31,15 @@ class Xobc_task_html extends Xow_special_wtr__base {
 		Xopg_tag_wtr_.Add__mustache	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__jquery	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__notifyjs	(head_tags, app.Fsys_mgr().Http_root());
+		Xopg_tag_wtr_.Add__xolog	(head_tags, app.Fsys_mgr().Http_root());
+		Xopg_tag_wtr_.Add__xoajax	(head_tags, app.Fsys_mgr().Http_root(), app);
 
-		head_tags.Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("js", "xo.log.css")));
 		head_tags.Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "xobc.css")));
 		head_tags.Add(Xopg_tag_itm.New_htm_frag(addon_dir.GenSubFil_nest("bin", "xobc.row.mustache.html"), "xobc.row"));
-		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xo.log.js")));
-		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xo.app.js")));
-		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", Get_app_js_file(app))));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xo.elem.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xo.tmpl.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xo.notify.js")));
-		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xo.server.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xobc.util.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xobc.js")));
-	}
-	private static String Get_app_js_file(Xoa_app app) {
-		if (app.Mode().Tid_is_http()) return "xo.app.http_server.js";
-		return gplx.core.envs.Op_sys.Cur().Tid_is_drd() ? "xo.app.drd.js" : "xo.app.swt.js";
 	}
 }
