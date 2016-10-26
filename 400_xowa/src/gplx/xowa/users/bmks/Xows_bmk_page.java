@@ -33,6 +33,5 @@ public class Xows_bmk_page implements Xow_special_page {
 		Xopage_html_data page_data = new Xopage_html_data(this.Special__meta().Display_ttl(), bfr.To_bry_and_rls());
 		page_data.Apply(page);
 	}
-
 	public Xow_special_page Special__clone() {return this;}
 }
