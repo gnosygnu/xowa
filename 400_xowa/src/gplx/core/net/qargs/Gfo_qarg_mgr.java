@@ -38,9 +38,11 @@ public class Gfo_qarg_mgr {
 	}
 	public String Read_str_or_fail(String key) {String rv = Read_str_or_null(Bry_.new_u8(key)); if (rv == null) Fail_when_missing(key); return rv;}
 	public String Read_str_or_null(String key) {return Read_str_or_null(Bry_.new_u8(key));}
-	public String Read_str_or_null(byte[] key) {
+	public String Read_str_or_null(byte[] key) {return Read_str_or(key, null);}
+	public String Read_str_or(String key, String or) {return Read_str_or(Bry_.new_u8(key), or);}
+	public String Read_str_or(byte[] key, String or) {
 		Gfo_qarg_itm arg = (Gfo_qarg_itm)hash.Get_by_bry(key);
-		return arg == null ? null : String_.new_u8(arg.Val_bry());
+		return arg == null ? or : String_.new_u8(arg.Val_bry());
 	}
 	public int Read_int_or(String key, int or) {return Read_int_or(Bry_.new_u8(key), or);}
 	public int Read_int_or(byte[] key, int or) {

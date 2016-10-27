@@ -47,7 +47,6 @@ public class Xou_regy_addon implements Xoax_addon_itm, Xoax_addon_itm__special, 
 		if (!conn.Meta_tbl_exists(Xou_wiki_tbl.Tbl_name_dflt)) return;
 
 		// register
-		// Xou_regy_addon addon = new Xou_regy_addon();
 		Xouw_db_mgr db_mgr = new Xouw_db_mgr(conn);
 		Xou_wiki_itm[] itms = db_mgr.Tbl__wiki().Select_all();
 		int len = itms.length;

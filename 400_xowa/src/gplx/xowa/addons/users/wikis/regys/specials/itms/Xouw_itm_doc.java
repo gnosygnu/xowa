@@ -20,8 +20,8 @@ import gplx.core.ios.*;
 import gplx.langs.mustaches.*;
 class Xouw_itm_doc implements Mustache_doc_itm {
 	private final    int id;
-	private final    byte[] domain, name, file;
-	public Xouw_itm_doc(int id, byte[] domain, byte[] name, byte[] file) {
+	private final    String domain, name, file;
+	public Xouw_itm_doc(int id, String domain, String name, String file) {
 		this.id = id;
 		this.domain = domain;
 		this.name = name;
@@ -29,9 +29,9 @@ class Xouw_itm_doc implements Mustache_doc_itm {
 	}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
 		if		(String_.Eq(key, "id"))				bfr.Add_int(id);
-		else if	(String_.Eq(key, "domain"))			bfr.Add_bry(domain);
-		else if	(String_.Eq(key, "name"))			bfr.Add_bry(name);
-		else if	(String_.Eq(key, "file"))			bfr.Add_bry(file);
+		else if	(String_.Eq(key, "domain"))			bfr.Add_str_u8(domain);
+		else if	(String_.Eq(key, "name"))			bfr.Add_str_u8(name);
+		else if	(String_.Eq(key, "file"))			bfr.Add_str_u8(file);
 		else										return false;
 		return true;
 	}

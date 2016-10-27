@@ -45,6 +45,18 @@ public class Xou_wiki_tbl implements Db_tbl {
 			.Exec_insert()
 			;
 	}
+	public void Upsert(int id, String key, String name, String file) {
+		if (id == -1) {
+		}
+		else {
+			conn.Stmt_update_exclude(tbl_name, flds, fld__wiki_id)
+				.Val_int(fld__wiki_type, 0).Val_str(fld__wiki_domain, key).Val_str(fld__wiki_name, name)
+				.Val_str(fld__wiki_data_date, "").Val_str(fld__wiki_core_url, file).Val_str(fld__wiki_data, "")
+				.Crt_int(fld__wiki_id, id)
+				.Exec_update()
+				;
+		}
+	}
 	public Xou_wiki_itm[] Select_all() {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Exec_select__rls_auto();
 		try {
@@ -53,6 +65,15 @@ public class Xou_wiki_tbl implements Db_tbl {
 				list.Add(Make(rdr));
 			}
 			return (Xou_wiki_itm[])list.To_ary_and_clear(Xou_wiki_itm.class);
+		}
+		finally {rdr.Rls();}
+	}
+	public Xou_wiki_itm Select_by_key_or_null(String key) {
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__wiki_domain).Clear().Crt_str(fld__wiki_domain, key).Exec_select__rls_auto();
+		try {
+			return rdr.Move_next()
+				? Make(rdr)
+				: null;
 		}
 		finally {rdr.Rls();}
 	}

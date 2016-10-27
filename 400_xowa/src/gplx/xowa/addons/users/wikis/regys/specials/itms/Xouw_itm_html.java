@@ -17,13 +17,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.users.wikis.regys.specials.itms; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.users.*; import gplx.xowa.addons.users.wikis.*; import gplx.xowa.addons.users.wikis.regys.*; import gplx.xowa.addons.users.wikis.regys.specials.*;
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
+import gplx.dbs.*; import gplx.xowa.addons.users.wikis.regys.dbs.*;
 class Xouw_itm_html extends Xow_special_wtr__base {
-	public Xouw_itm_html() {
+	private final    String key;
+	public Xouw_itm_html(String key) {
+		this.key = key;
 	}
 	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return app.Fsys_mgr().Http_root().GenSubDir_nest("bin", "any", "xowa", "addon", "user", "wiki", "itm");}
 	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xouw_itm.mustache.html");}
 	@Override protected Mustache_doc_itm Bld_mustache_root(Xoa_app app) {
-		return new Xouw_itm_doc(1, Bry_.new_a7("domain"), Bry_.new_a7("name"), Bry_.new_a7("file"));
+		Db_conn conn = app.User().User_db_mgr().Conn();
+		Xouw_db_mgr db_mgr = new Xouw_db_mgr(conn);
+		Xou_wiki_itm itm = db_mgr.Tbl__wiki().Select_by_key_or_null(key);
+		if (itm == null)
+			itm = new Xou_wiki_itm(-1, 0, "", "", Io_url_.Empty, "");
+		return new Xouw_itm_doc(itm.Id(), itm.Domain(), itm.Name(), itm.Url().Xto_api());
 	}
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {
 		Xopg_tag_mgr head_tags = page_data.Head_tags();
