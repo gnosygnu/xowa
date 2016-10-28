@@ -71,7 +71,7 @@ class Scrib_lib_wikibase_srl_visitor implements Wbase_claim_visitor {
 		rv[1] = Keyval_.new_(Wbase_claim_time_.Itm__precision.Key_str()			, itm.Precision_int());		// NOTE: must return int, not str; DATE:2014-02-18
 		rv[2] = Keyval_.new_(Wbase_claim_time_.Itm__before.Key_str()			, itm.Before_int());
 		rv[3] = Keyval_.new_(Wbase_claim_time_.Itm__after.Key_str()				, itm.After_int());
-		rv[4] = Keyval_.new_(Wbase_claim_time_.Itm__timezone.Key_str()			, Wbase_claim_time_.Dflt__timezone.Val_str());	// ASSUME: always 0 b/c UTF?; DATE:2015-09-21
+		rv[4] = Keyval_.new_(Wbase_claim_time_.Itm__timezone.Key_str()			, Wbase_claim_time_.Dflt__timezone.Val_int());	// ASSUME: always 0 b/c UTC?; DATE:2015-09-21
 		rv[5] = Keyval_.new_(Wbase_claim_time_.Itm__calendarmodel.Key_str()		, Wbase_claim_time_.Dflt__calendarmodel.Val_str());
 		return rv;
 	}

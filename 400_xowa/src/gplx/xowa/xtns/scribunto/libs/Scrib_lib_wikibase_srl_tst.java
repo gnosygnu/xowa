@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.tests.*;
 import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.parsers.*;	
 public class Scrib_lib_wikibase_srl_tst {
 	@Before public void init() {fxt.Clear();} private Scrib_lib_wikibase_srl_fxt fxt = new Scrib_lib_wikibase_srl_fxt();
@@ -359,6 +359,14 @@ public class Scrib_lib_wikibase_srl_tst {
 		,	"            datatype:'time'"
 		,	""
 		);
+	}
+	@Test   public void Claims_time_typed() {
+		Wbase_claim_time claim = (Wbase_claim_time)fxt.Wdata_fxt().Make_claim_time(2, "2001-02-03 04:05:06", 9);
+		Scrib_lib_wikibase_srl_visitor visitor = new Scrib_lib_wikibase_srl_visitor();
+		visitor.Visit_time(claim);
+		Keyval keyval = Keyval_find_.Find(true, visitor.Rv(), "value", "timezone");
+		Gftest.Eq__str("timezone", keyval.Key());
+		Gftest.Eq__int(0, (int)keyval.Val());	// fails when keyval.Val() is String; DATE:2016-10-28
 	}
 }	
 class Scrib_lib_wikibase_srl_fxt {
