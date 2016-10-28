@@ -35,52 +35,53 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Id__ul			= 11
 	, Id__ol			= 12
 	, Id__li			= 13
-	, Id__dd			= 14
-	, Id__dt			= 15
-	, Id__p				= 16
-	, Id__br			= 17
-	, Id__hr			= 18
-	, Id__table			= 19
-	, Id__tr			= 20
-	, Id__td			= 21
-	, Id__th			= 22
-	, Id__thead			= 23
-	, Id__tbody			= 24
-	, Id__caption		= 25
-	, Id__pre			= 26
-	, Id__small			= 27
-	, Id__i				= 28
-	, Id__b				= 29
-	, Id__sup			= 30
-	, Id__sub			= 31
-	, Id__bdi			= 32
-	, Id__font			= 33
-	, Id__strong		= 34
-	, Id__s				= 35
-	, Id__abbr			= 36
-	, Id__cite			= 37
-	, Id__var			= 38
-	, Id__u				= 39
-	, Id__big			= 40
-	, Id__del			= 41
-	, Id__strike		= 42
-	, Id__tt			= 43
-	, Id__code			= 44
-	, Id__wbr			= 45
-	, Id__center		= 46	// not HTML5, but used by en.v:Vandalism_in_progress
-	, Id__dfn			= 47
-	, Id__kbd			= 48
-	, Id__samp			= 49
-	, Id__ins			= 50
-	, Id__em			= 51
-	, Id__blockquote	= 52
-	, Id__map			= 53
-	, Id__bdo			= 54
-	, Id__time			= 55
-	, Id__ruby			= 56
-	, Id__rb			= 57
-	, Id__rp			= 58
-	, Id__rt			= 59
+	, Id__dl			= 14
+	, Id__dd			= 15
+	, Id__dt			= 16
+	, Id__p				= 17
+	, Id__br			= 18
+	, Id__hr			= 19
+	, Id__table			= 20
+	, Id__tr			= 21
+	, Id__td			= 22
+	, Id__th			= 23
+	, Id__thead			= 24
+	, Id__tbody			= 25
+	, Id__caption		= 26
+	, Id__pre			= 27
+	, Id__small			= 28
+	, Id__i				= 29
+	, Id__b				= 30
+	, Id__sup			= 31
+	, Id__sub			= 32
+	, Id__bdi			= 33
+	, Id__font			= 34
+	, Id__strong		= 35
+	, Id__s				= 36
+	, Id__abbr			= 37
+	, Id__cite			= 38
+	, Id__var			= 39
+	, Id__u				= 40
+	, Id__big			= 41
+	, Id__del			= 42
+	, Id__strike		= 43
+	, Id__tt			= 44
+	, Id__code			= 45
+	, Id__wbr			= 46
+	, Id__center		= 47	// not HTML5, but used by en.v:Vandalism_in_progress
+	, Id__dfn			= 48
+	, Id__kbd			= 49
+	, Id__samp			= 50
+	, Id__ins			= 51
+	, Id__em			= 52
+	, Id__blockquote	= 53
+	, Id__map			= 54
+	, Id__bdo			= 55
+	, Id__time			= 56
+	, Id__ruby			= 57
+	, Id__rb			= 58
+	, Id__rp			= 59
+	, Id__rt			= 60
 	;
 //		private static final int Id__ary_max = 60;
 	public static final    byte[]
@@ -121,6 +122,7 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	.Add_str_int("ul"			, Id__ul)
 	.Add_str_int("ol"			, Id__ol)
 	.Add_str_int("li"			, Id__li)
+	.Add_str_int("dl"			, Id__dl)
 	.Add_str_int("dd"			, Id__dd)
 	.Add_str_int("dt"			, Id__dt)
 	.Add_str_int("table"		, Id__table)
@@ -188,6 +190,7 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 			case Id__ul:			return "ul";
 			case Id__ol:			return "ol";
 			case Id__li:			return "li";
+			case Id__dl:			return "dl";
 			case Id__dd:			return "dd";
 			case Id__dt:			return "dt";
 			case Id__table:			return "table";
