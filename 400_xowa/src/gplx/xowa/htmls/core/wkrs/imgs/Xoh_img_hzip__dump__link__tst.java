@@ -108,4 +108,12 @@ public class Xoh_img_hzip__dump__link__tst {
 		, "</a>"
 		));
 	}
+	@Test   public void Link__xwiki_foreign() {	// PURPOSE:ns in linked wikis should use canonical name, not current wiki's name PAGE:pl.w:Terytoria_Północno-Zachodnie DATE:2016-10-28
+		fxt.Wiki().Ns_mgr().Ids_get_or_null(gplx.xowa.wikis.nss.Xow_ns_.Tid__help).Name_bry_(Bry_.new_a7("Aide"));	// simulate non-English wiki with non-english names
+		fxt.Test__bicode	// fails if "Aide:" instead of "Help:"
+		( "~%.qen.wiktionary.org|~A.png~/Help~)#Sabc~"
+		, "<a href='/site/en.wiktionary.org/wiki/Help:' class='image' title='abc' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' alt='abc'></a>"
+		);
+		fxt.Wiki().Ns_mgr().Ids_get_or_null(gplx.xowa.wikis.nss.Xow_ns_.Tid__help).Name_bry_(Bry_.new_a7("Help"));	// revert
+	}
 }

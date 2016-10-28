@@ -244,7 +244,11 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 					||	href_ns_id != Xow_ns_.Tid__main) {				// or if site and !main_ns; handles /site/en.wiktionary.org/wiki/Special:Search but not /site/creativecommons.org/wiki/by/2.5; DATE:2015-12-28
 					if (href_page.length == 0) {						// handle invalid titles in link arg; EX:[[File:A.png|link=wikt:]]; PAGE:en.w:List_of_Saint_Petersburg_Metro_stations; DATE:2016-01-04
 						Xow_ns href_ns = hctx.Wiki__ttl_parser().Ns_mgr().Ids_get_or_null(href_ns_id);
-						ttl_full = href_ns.Name_db_w_colon();		// ASSUME:use db_name not ui_name; EX: "Category_talk" vs "Category talk"
+
+						// 2 notes:
+						// (1) use db_name not ui_name; EX: "Category_talk" vs "Category talk"
+						// (2) use canonical name, not local name; EX: "Help:A" not "Aide:A"; DATE:2016-10-28
+						ttl_full = Xow_ns_canonical_.To_canonical_or_local_as_bry_w_colon(href_ns);
 					}
 					else {
 						if (anch__ns_is_custom)	// handle ns aliases; EX: "Image:Page"; EX:WP; PAGE:en.w:Wikipedia:WikiProject_Molecular_and_Cell_Biology; DATE:2016-01-11

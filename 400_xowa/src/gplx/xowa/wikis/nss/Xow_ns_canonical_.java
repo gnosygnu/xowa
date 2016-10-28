@@ -101,4 +101,30 @@ public class Xow_ns_canonical_ {
 			default:									return ns.Name_ui();
 		}
 	}
+	public static byte[] To_canonical_or_local_as_bry_w_colon(Xow_ns ns) {
+		byte[] rv = null;
+		switch (ns.Id()) {
+			case Xow_ns_.Tid__media:					rv = Xow_ns_.Bry__media; break;
+			case Xow_ns_.Tid__special:					rv = Xow_ns_.Bry__special; break;
+			case Xow_ns_.Tid__talk:						rv = Xow_ns_.Bry__talk; break;
+			case Xow_ns_.Tid__user:						rv = Xow_ns_.Bry__user; break;
+			case Xow_ns_.Tid__user_talk:				rv = Xow_ns_.Bry__user_talk; break;
+			case Xow_ns_.Tid__project:					rv = Xow_ns_.Bry__project; break;
+			case Xow_ns_.Tid__project_talk:				rv = Xow_ns_.Bry__project_talk; break;
+			case Xow_ns_.Tid__file:						rv = Xow_ns_.Bry__file; break;
+			case Xow_ns_.Tid__file_talk:				rv = Xow_ns_.Bry__file_talk; break;
+			case Xow_ns_.Tid__mediawiki:				rv = Xow_ns_.Bry__mediawiki; break;
+			case Xow_ns_.Tid__mediawiki_talk:			rv = Xow_ns_.Bry__mediawiki_talk; break;
+			case Xow_ns_.Tid__template:					rv = Xow_ns_.Bry__template; break;
+			case Xow_ns_.Tid__template_talk:			rv = Xow_ns_.Bry__template_talk; break;
+			case Xow_ns_.Tid__help:						rv = Xow_ns_.Bry__help; break;
+			case Xow_ns_.Tid__help_talk:				rv = Xow_ns_.Bry__help_talk; break;
+			case Xow_ns_.Tid__category:					rv = Xow_ns_.Bry__category; break;
+			case Xow_ns_.Tid__category_talk:			rv = Xow_ns_.Bry__category_talk; break;
+			case Xow_ns_.Tid__module:					rv = Xow_ns_.Bry__module; break;
+			case Xow_ns_.Tid__module_talk:				rv = Xow_ns_.Bry__module_talk; break;
+			default:									return ns.Name_db_w_colon();
+		}
+		return Bry_.Add(rv, Byte_ascii.Colon_bry);
+	}
 }

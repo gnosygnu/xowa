@@ -27,9 +27,11 @@ public class Host_eval_wkr implements Bry_eval_wkr {
 		int type = hash.Get_as_byte_or(src, args_bgn, args_end, Byte_.Max_value_127);
 		switch (type) {
 			case Type__wiki_abrv:
-				// handle wikidata separately; DATE:2016-10-19
-				if (String_.Eq(domain_itm.Domain_str(), "www.wikidata.org")) 
+				// handle wikidata, commonswiki separately; DATE:2016-10-20
+				if		(String_.Eq(domain_itm.Domain_str(), "www.wikidata.org")) 
 					rv.Add_str_a7("wikidatawiki");
+				else if (String_.Eq(domain_itm.Domain_str(), "commons.wikimedia.org")) 
+					rv.Add_str_a7("commonswiki");
 				// do not use Abrv_mw(); all other wikis will be "generalized" to their language url; EX:"en.wiktionary.org" -> "enwiki" x> "enwiktionary"
 				else {
 					byte[] lang_key = domain_itm.Lang_orig_key();
