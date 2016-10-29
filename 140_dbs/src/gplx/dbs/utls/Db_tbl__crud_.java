@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
 import gplx.dbs.stmts.*;
 public class Db_tbl__crud_ {
-	public static void Upsert(Db_conn conn, String tbl_name, Dbmeta_fld_list flds, String[] crt_cols, Object... objs) {
+	public static boolean Upsert(Db_conn conn, String tbl_name, Dbmeta_fld_list flds, String[] crt_cols, Object... objs) {
 		// init
 		int crt_cols_len = crt_cols.length;
 		String[] val_cols = Find_excepts(flds, crt_cols);
@@ -38,6 +38,7 @@ public class Db_tbl__crud_ {
 			Add_arg(update_stmt, flds, val_cols, objs, Bool_.N, crt_cols_len);
 			update_stmt.Exec_update();
 			update_stmt.Rls();
+			return false;
 		}
 		// insert
 		else {
@@ -46,6 +47,7 @@ public class Db_tbl__crud_ {
 			Add_arg(insert_stmt, flds, val_cols, objs, Bool_.N, crt_cols_len);
 			insert_stmt.Exec_insert();
 			insert_stmt.Rls();
+			return true;
 		}
 	}
 	private static String[] Find_excepts(Dbmeta_fld_list flds, String[] cols) {

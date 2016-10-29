@@ -38,7 +38,7 @@ public class Fsdb_db_mgr__v2_bldr {
 		return new Fsdb_db_mgr__v2(layout, wiki_dir, main_core_file, user_core_file);
 	}
 	private static Fsdb_db_file Load_core_file(Io_url url) {return new Fsdb_db_file(url, Db_conn_bldr.Instance.Get(url));}
-	private static Fsdb_db_file Make_core_file_main(Xow_wiki wiki, Io_url main_core_url, String main_core_name, Xow_db_layout layout) {
+	public static Fsdb_db_file Make_core_file_main(Xow_wiki wiki, Io_url main_core_url, String main_core_name, Xow_db_layout layout) {
 		Db_conn conn = layout.Tid_is_all() ? Db_conn_bldr.Instance.Get(main_core_url) : Db_conn_bldr.Instance.New(main_core_url);	// if all, use existing (assumes same file name); else, create new
 		conn.Txn_bgn("fsdb__core_file");
 		Fsdb_db_file rv = Make_core_file(main_core_url, conn, schema_is_1, Fsm_mnt_mgr.Mnt_idx_main);

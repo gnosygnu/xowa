@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.users.wikis.regys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.users.*; import gplx.xowa.addons.users.wikis.*; import gplx.xowa.addons.users.wikis.regys.*;
-import gplx.dbs.*;
+import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xou_wiki_tbl implements Db_tbl {
 	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld__wiki_id, fld__wiki_type, fld__wiki_domain, fld__wiki_name, fld__wiki_data_date, fld__wiki_core_url, fld__wiki_data;
@@ -28,8 +28,8 @@ public class Xou_wiki_tbl implements Db_tbl {
 		this.fld__wiki_type			= flds.Add_int("wiki_type");				// enum: 0=user; 1=wmf; 2=wikia;
 		this.fld__wiki_domain		= flds.Add_str("wiki_domain", 255);			// EX: "en.wikipedia.org"
 		this.fld__wiki_name			= flds.Add_str("wiki_name", 255);			// EX: "English Wikipedia"
-		this.fld__wiki_data_date	= flds.Add_str("wiki_data_date", 16);		// EX: "20161001"
 		this.fld__wiki_core_url		= flds.Add_str("wiki_core_url", 255);		// EX: "/xowa/wiki/en.wikipedia.org/en.wikipedia.org-core.xowa"
+		this.fld__wiki_data_date	= flds.Add_str("wiki_data_date", 16);		// EX: "20161001"
 		this.fld__wiki_data			= flds.Add_text("wiki_data");				// EX: '{category_level="1",search_level="2", ...}'
 		conn.Rls_reg(this);
 	}
@@ -45,17 +45,8 @@ public class Xou_wiki_tbl implements Db_tbl {
 			.Exec_insert()
 			;
 	}
-	public void Upsert(int id, String key, String name, String file) {
-		if (id == -1) {
-		}
-		else {
-			conn.Stmt_update_exclude(tbl_name, flds, fld__wiki_id)
-				.Val_int(fld__wiki_type, 0).Val_str(fld__wiki_domain, key).Val_str(fld__wiki_name, name)
-				.Val_str(fld__wiki_data_date, "").Val_str(fld__wiki_core_url, file).Val_str(fld__wiki_data, "")
-				.Crt_int(fld__wiki_id, id)
-				.Exec_update()
-				;
-		}
+	public boolean Upsert(int id, String domain, String name, String file) {
+		return Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__wiki_id), id, 0, domain, name, file, "", "");
 	}
 	public Xou_wiki_itm[] Select_all() {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Exec_select__rls_auto();

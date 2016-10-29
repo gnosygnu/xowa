@@ -45,6 +45,7 @@ public class Db_stmt_arg_list {
 			case Dbmeta_fld_tid.Tid__float:			stmt.Crt_float			(key, Float_.cast(val)); break;
 			case Dbmeta_fld_tid.Tid__double:		stmt.Crt_double			(key, Double_.cast(val)); break;
 			case Dbmeta_fld_tid.Tid__str:			stmt.Crt_str			(key, String_.cast(val)); break;
+			case Dbmeta_fld_tid.Tid__text:			stmt.Crt_text			(key, String_.cast(val)); break;
 			case Dbmeta_fld_tid.Tid__bry:			stmt.Crt_bry			(key, Bry_.cast(val)); break;
 			default:								throw Err_.new_unhandled_default(tid);
 		}
@@ -58,6 +59,7 @@ public class Db_stmt_arg_list {
 			case Dbmeta_fld_tid.Tid__float:			stmt.Val_float			(key, Float_.cast(val)); break;
 			case Dbmeta_fld_tid.Tid__double:		stmt.Val_double			(key, Double_.cast(val)); break;
 			case Dbmeta_fld_tid.Tid__str:			stmt.Val_str			(key, String_.cast(val)); break;
+			case Dbmeta_fld_tid.Tid__text:			stmt.Val_text			(key, String_.cast(val)); break;
 			case Dbmeta_fld_tid.Tid__bry:			stmt.Val_bry			(key, Bry_.cast(val)); break;
 			default:								throw Err_.new_unhandled_default(tid);
 		}

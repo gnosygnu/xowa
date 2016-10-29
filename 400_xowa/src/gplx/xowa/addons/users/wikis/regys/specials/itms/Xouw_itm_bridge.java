@@ -24,14 +24,33 @@ public class Xouw_itm_bridge implements gplx.xowa.htmls.bridges.Bridge_cmd_itm {
 		this.app = app;
 	}
 	public String Exec(Json_nde data) {
-		Xouw_db_mgr db_mgr = new Xouw_db_mgr(app.User().User_db_mgr().Conn());
 		byte proc_id = proc_hash.Get_as_byte_or(data.Get_as_bry_or(Msg__proc, null), Byte_ascii.Max_7_bit);
 		Json_nde args = data.Get_kv(Msg__args).Val_as_nde();
 		switch (proc_id) {
-			case Proc__save:					db_mgr.Tbl__wiki().Upsert(args.Get_as_int("id"), args.Get_as_str("key"), args.Get_as_str("name"), args.Get_as_str("file")); break;
+			case Proc__save:					Save(args); break;
 			default: throw Err_.new_unhandled_default(proc_id);
 		}
 		return "";
+	}
+	private void Save(Json_nde args) {
+		Xouw_db_mgr db_mgr = new Xouw_db_mgr(app.User().User_db_mgr().Conn());
+		int id = args.Get_as_int("id");
+		if (id == -1) {
+			id = 2;
+		}
+		String domain = args.Get_as_str("key");
+		String url = args.Get_as_str("file");
+		if (db_mgr.Tbl__wiki().Upsert(id, domain, args.Get_as_str("name"), url)) {
+			gplx.xowa.wikis.nss.Xow_ns_mgr ns_mgr = gplx.xowa.wikis.nss.Xow_ns_mgr_.default_(gplx.xowa.langs.cases.Xol_case_mgr_.U8());
+			Xow_wiki_.Create(app, ns_mgr, domain, Io_url_.new_fil_(url).OwnerDir());
+			Xowe_wiki wiki = new Xowe_wiki((Xoae_app)app, app.Lang_mgr().Get_by_or_en(Bry_.Empty), ns_mgr, gplx.xowa.wikis.domains.Xow_domain_itm_.parse(Bry_.new_u8(domain)), Io_url_.new_fil_(url).OwnerDir());
+			gplx.fsdb.Fsdb_db_mgr__v2_bldr.Make_core_file_main(wiki, Io_url_.new_fil_(url), domain, gplx.xowa.wikis.data.Xow_db_layout.Itm_all);
+			wiki.Init_db_mgr();
+			wiki.Init_by_wiki__force_and_mark_inited();
+			wiki.Data__core_mgr().Dbs__make_by_id(1, gplx.xowa.wikis.data.Xow_db_file_.Tid__core, "", 0, ".xowa");
+			wiki.Data__core_mgr().Db__core().Tbl__db().Commit_all(wiki.Data__core_mgr());
+			wiki.Db_mgr().Save_mgr().Data_create(Xoa_ttl.Parse(wiki, Bry_.new_a7("Main_Page")), Bry_.new_a7("Main page created"));
+		}
 	}
 	private static final    byte[] Msg__proc = Bry_.new_a7("proc"), Msg__args = Bry_.new_a7("args");
 	private static final byte Proc__save = 0;

@@ -19,9 +19,11 @@ package gplx.xowa.addons.users.wikis.regys.specials.itms; import gplx.*; import 
 import gplx.core.ios.*;
 import gplx.langs.mustaches.*;
 class Xouw_itm_doc implements Mustache_doc_itm {
+	private final    boolean mode_is_new;
 	private final    int id;
 	private final    String domain, name, file;
 	public Xouw_itm_doc(int id, String domain, String name, String file) {
+		this.mode_is_new = id == -1;
 		this.id = id;
 		this.domain = domain;
 		this.name = name;
@@ -36,6 +38,7 @@ class Xouw_itm_doc implements Mustache_doc_itm {
 		return true;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
+		if		(String_.Eq(key, "mode_is_new"))		return Mustache_doc_itm_.Ary__bool(mode_is_new);
 		return Mustache_doc_itm_.Ary__empty;
 	}
 	public static final    Xouw_itm_doc[] Ary_empty = new Xouw_itm_doc[0];

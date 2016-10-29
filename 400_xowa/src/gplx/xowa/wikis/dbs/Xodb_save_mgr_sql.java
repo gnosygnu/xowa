@@ -43,6 +43,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		}
 		Xow_db_mgr fsys_mgr = db_mgr.Core_data_mgr();
 		Xow_db_file page_text_db = fsys_mgr.Db__text();
+		if (page_text_db == null) page_text_db = fsys_mgr.Db__core();	// HACK: needed for create new wiki DATE:2016-10-29
 		Xowd_text_tbl page_text_tbl = page_text_db.Tbl__text();
 		byte[] text_zip = page_text_tbl.Zip(text_raw);
 		boolean redirect = db_mgr.Wiki().Redirect_mgr().Is_redirect(text_raw, text_raw.length);
