@@ -168,21 +168,18 @@ app.bldr.cmds {
   // generate search data
   add     ('simple.wikipedia.org' , 'text.search');
 
-  // generate main category data
-  add     ('simple.wikipedia.org' , 'text.cat.core');
-  
-  // import category links
-  add     ('simple.wikipedia.org' , 'text.cat.link');
-  
-  // apply hidden categories
-  add     ('simple.wikipedia.org' , 'text.cat.hidden');
-  
   // end import
   add     ('simple.wikipedia.org' , 'text.term');
   
   // import css into wiki
   add     ('simple.wikipedia.org' , 'text.css');
   
+  // create main category table (also mark hidden categories)
+  add     ('simple.wikipedia.org' , 'wiki.page_props');
+
+  // create category links
+  add     ('simple.wikipedia.org' , 'wiki.categorylinks');
+
   // cleanup temp files; delete xml and bz2
   add     ('simple.wikipedia.org' , 'util.cleanup')          {delete_tmp = 'y'; delete_by_match('*.xml|*.sql|*.bz2|*.gz');}
 }
