@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.bldrs.centrals; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
 import gplx.core.brys.evals.*; import gplx.core.gfobjs.*; import gplx.core.progs.rates.*; import gplx.core.threads.*;
-import gplx.xowa.addons.bldrs.centrals.tasks.*; import gplx.xowa.addons.bldrs.centrals.steps.*; import gplx.xowa.addons.bldrs.centrals.cmds.*; import gplx.xowa.addons.bldrs.centrals.dbs.*;
+import gplx.xowa.addons.bldrs.centrals.tasks.*; import gplx.xowa.addons.bldrs.centrals.steps.*; import gplx.xowa.addons.bldrs.centrals.cmds.*; import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.mgrs.*;
 import gplx.xowa.guis.cbks.*;
 public class Xobc_task_mgr implements Xog_json_wkr {
 	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New(Xobc_task_special.Prototype.Special__meta().Ttl_bry());
@@ -44,6 +44,7 @@ public class Xobc_task_mgr implements Xog_json_wkr {
 	public Gfo_rate_mgr					Rate_mgr()	{return rate_mgr;}	private final    Gfo_rate_mgr rate_mgr;
 	public Xobc_step_factory			Step_mgr()	{return step_mgr;}	private final    Xobc_step_factory step_mgr;
 	public Xobc_filter_mgr				Filter_mgr() {return filter_mgr;} private final    Xobc_filter_mgr filter_mgr = new Xobc_filter_mgr();
+	public Xobc_lang_mgr				Lang_mgr() {return lang_mgr;} private final    Xobc_lang_mgr lang_mgr = new Xobc_lang_mgr();
 	public void Send_json(String func, Gfobj_nde data) {cbk_mgr.Send_json(cbk_trg, func, data);}
 	public Xobc_task_mgr Load_or_init() {
 		Gfo_log_.Instance.Info("task_mgr.load_or_init.bgn");
@@ -60,6 +61,7 @@ public class Xobc_task_mgr implements Xog_json_wkr {
 		todo_mgr.Save_to(lists_nde.New_ary("todo"), filter_mgr.Filter(todo_mgr));
 		done_mgr.Save_to(lists_nde.New_ary("done"));
 		root.Add_nde("filters", filter_mgr.Make_init_msg());
+		root.Add_ary("langs", lang_mgr.Make_init_msg(data_db.Tbl__lang_regy().Select_all()));
 		cbk_mgr.Send_json(cbk_trg, "xo.bldr.core.reload__recv", root);
 	}
 	public void Filter_todo(String lang_key, String type_key) {
