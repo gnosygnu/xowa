@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*;
-public class Fsd_dir_tbl implements Rls_able {
-	private final    String tbl_name = "fsdb_dir"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+public class Fsd_dir_tbl implements Db_tbl {
+	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld_id, fld_owner_id, fld_name;		
 	private final    Db_conn conn; private Db_stmt stmt_select_by_name;		
 	public Fsd_dir_tbl(Db_conn conn, boolean schema_is_1) {
@@ -28,9 +28,7 @@ public class Fsd_dir_tbl implements Rls_able {
 		this.fld_name			= flds.Add_str		("dir_name", 255);
 		conn.Rls_reg(this);
 	}
-	public void Rls() {
-		stmt_select_by_name = Db_stmt_.Rls(stmt_select_by_name);
-	}
+	public String Tbl_name() {return tbl_name;} private final    String tbl_name = "fsdb_dir";
 	public void Create_tbl() {
 		conn.Meta_tbl_create
 		( Dbmeta_tbl_itm.New(tbl_name, flds
@@ -64,5 +62,8 @@ public class Fsd_dir_tbl implements Rls_able {
 			;
 		}
 		finally {rdr.Rls();}
+	}
+	public void Rls() {
+		stmt_select_by_name = Db_stmt_.Rls(stmt_select_by_name);
 	}
 }

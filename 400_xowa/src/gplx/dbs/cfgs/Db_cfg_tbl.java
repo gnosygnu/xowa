@@ -134,4 +134,6 @@ public class Db_cfg_tbl implements Db_tbl {
 	private DateAdp		Parse_date		(String grp, String key, String val)	{try {return DateAdp_.parse_gplx(val)	;} catch (Exception e) {throw err_parse(e, grp, key, val, DateAdp_.Cls_ref_name);}}
 	private Guid_adp	Parse_guid		(String grp, String key, String val)	{try {return Guid_adp_.Parse(val)		;} catch (Exception e) {throw err_parse(e, grp, key, val, Guid_adp_.Cls_ref_name);}}
 	private Err			err_parse(Exception e, String grp, String key, String val, String type) {return Err_.new_exc(e, "db", "cfg.val is not parseable", "grp", grp, "key", key, "val", val, "type", type);}
+
+	public static Db_cfg_tbl Get_by_key(Db_tbl_owner owner, String key) {return (Db_cfg_tbl)owner.Tbls__get_by_key(key);}
 }

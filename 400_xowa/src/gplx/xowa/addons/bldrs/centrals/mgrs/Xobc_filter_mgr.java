@@ -38,7 +38,6 @@ public class Xobc_filter_mgr {
 			if (	Xow_domain_itm_.Match_lang(task_domain, lang_key_str)
 				&&	Xow_domain_itm_.Match_type(task_domain, type_key_str)
 				)
-
 				tmp.Add(task);
 		}
 

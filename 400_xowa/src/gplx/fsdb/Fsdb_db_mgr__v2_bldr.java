@@ -93,7 +93,7 @@ public class Fsdb_db_mgr__v2_bldr {
 		switch (layout.Tid()) {
 			case Xow_db_layout.Tid__all:	return Xow_db_file_.Tid__core;
 			case Xow_db_layout.Tid__few:	return Xow_db_file_.Tid__file_solo;
-			case Xow_db_layout.Tid__lot:  return Xow_db_file_.Tid__file_core;
+			case Xow_db_layout.Tid__lot:	return Xow_db_file_.Tid__file_core;
 			default:						throw Err_.new_unimplemented();
 		}
 	}

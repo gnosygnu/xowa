@@ -18,14 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.data.*;
-public class Xowd_xowa_db_tbl {
-	public static final    String Tbl_name = "xowa_db", Fld_id = "db_id", Fld_type = "db_type", Fld_url = "db_url";
-	private final    String tbl_name; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+public class Xowd_xowa_db_tbl implements Db_tbl {
+	public static final    String Fld_id = "db_id", Fld_type = "db_type", Fld_url = "db_url";
+	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld_id, fld_type, fld_url, fld_ns_ids, fld_part_id, fld_guid; private boolean schema_is_1;
 	private final    Db_conn conn; private final    Db_stmt_bldr stmt_bldr = new Db_stmt_bldr();
 	public Xowd_xowa_db_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn; this.schema_is_1 = schema_is_1;
-		this.tbl_name = Tbl_name;
+		this.tbl_name = TBL_NAME;
 		fld_id				= flds.Add_int_pkey	(Fld_id);
 		fld_type			= flds.Add_byte		(Fld_type);
 		fld_url				= flds.Add_str		(Fld_url, 512);
@@ -39,6 +39,7 @@ public class Xowd_xowa_db_tbl {
 		}
 		stmt_bldr.Conn_(conn, tbl_name, flds, fld_id);
 	}
+	public String Tbl_name() {return tbl_name;} private final    String tbl_name; public static final String TBL_NAME = "xowa_db";
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public Xow_db_file[] Select_all(Xowd_core_db_props props, Io_url wiki_root_dir) {
 		List_adp list = List_adp_.New();
@@ -52,7 +53,7 @@ public class Xowd_xowa_db_tbl {
 					guid = Guid_adp_.Parse(rdr.Read_str(fld_guid));
 				}
 				int db_id = rdr.Read_int(fld_id);
-				Xow_db_file db_file = Xow_db_file.load_(props, db_id, rdr.Read_byte(fld_type), wiki_root_dir.GenSubFil(rdr.Read_str(fld_url)), ns_ids, part_id, guid);
+				Xow_db_file db_file = Xow_db_file.Load(props, db_id, rdr.Read_byte(fld_type), wiki_root_dir.GenSubFil(rdr.Read_str(fld_url)), ns_ids, part_id, guid);
 				list.Add(db_file);
 			}
 		}	finally {rdr.Rls();}
@@ -66,6 +67,9 @@ public class Xowd_xowa_db_tbl {
 			for (int i = 0; i < len; i++)
 				Commit_itm(core_data_mgr.Dbs__get_at(i));
 		}	finally {stmt_bldr.Batch_end();}
+	}
+	public void Upsert(int id, byte tid, String url, String ns_ids, int part_id, String guid) {
+		gplx.dbs.utls.Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld_id), id, tid, url, ns_ids, part_id, guid);
 	}
 	private void Commit_itm(Xow_db_file itm) {
 		Db_stmt stmt = stmt_bldr.Get(itm.Cmd_mode());
@@ -81,6 +85,9 @@ public class Xowd_xowa_db_tbl {
 	private void Commit_itm_vals(Db_stmt stmt, Xow_db_file itm) {
 		stmt.Val_byte(fld_type, itm.Tid()).Val_str(fld_url, itm.Url_rel()).Val_str(fld_ns_ids, itm.Ns_ids()).Val_int(fld_part_id, itm.Part_id()).Val_str(fld_guid, itm.Guid().To_str());
 	}
+	public void Rls() {}
+
+	public static Xowd_xowa_db_tbl Get_by_key(Db_tbl_owner owner) {return (Xowd_xowa_db_tbl)owner.Tbls__get_by_key(TBL_NAME);}
 }
 class Xow_db_file_sorter__id implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {

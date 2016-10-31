@@ -146,8 +146,8 @@ class Reindex_html_dbs_cmd {
 		// delete old dbs
 		wiki.Data__core_mgr().Rls();
 		String repack_suffix = Xoh_trg_tbl_mgr.Repack_suffix;
-		Db_stmt delete_stmt = core_conn.Stmt_delete(Xowd_xowa_db_tbl.Tbl_name, Xowd_xowa_db_tbl.Fld_id);
-		Db_rdr rdr = core_conn.Stmt_select(Xowd_xowa_db_tbl.Tbl_name, String_.Ary(Xowd_xowa_db_tbl.Fld_id, Xowd_xowa_db_tbl.Fld_type, Xowd_xowa_db_tbl.Fld_url)).Exec_select__rls_auto();
+		Db_stmt delete_stmt = core_conn.Stmt_delete(Xowd_xowa_db_tbl.TBL_NAME, Xowd_xowa_db_tbl.Fld_id);
+		Db_rdr rdr = core_conn.Stmt_select(Xowd_xowa_db_tbl.TBL_NAME, String_.Ary(Xowd_xowa_db_tbl.Fld_id, Xowd_xowa_db_tbl.Fld_type, Xowd_xowa_db_tbl.Fld_url)).Exec_select__rls_auto();
 		while (rdr.Move_next()) {
 			byte file_tid = rdr.Read_byte(Xowd_xowa_db_tbl.Fld_type);
 			if (file_tid != Xow_db_file_.Tid__html_data) continue;
@@ -160,8 +160,8 @@ class Reindex_html_dbs_cmd {
 		delete_stmt.Rls();
 
 		// update new dbs
-		Db_stmt update_stmt = core_conn.Stmt_update(Xowd_xowa_db_tbl.Tbl_name, String_.Ary(Xowd_xowa_db_tbl.Fld_id), Xowd_xowa_db_tbl.Fld_url);
-		rdr = core_conn.Stmt_select(Xowd_xowa_db_tbl.Tbl_name, String_.Ary(Xowd_xowa_db_tbl.Fld_id, Xowd_xowa_db_tbl.Fld_type, Xowd_xowa_db_tbl.Fld_url)).Exec_select__rls_auto();
+		Db_stmt update_stmt = core_conn.Stmt_update(Xowd_xowa_db_tbl.TBL_NAME, String_.Ary(Xowd_xowa_db_tbl.Fld_id), Xowd_xowa_db_tbl.Fld_url);
+		rdr = core_conn.Stmt_select(Xowd_xowa_db_tbl.TBL_NAME, String_.Ary(Xowd_xowa_db_tbl.Fld_id, Xowd_xowa_db_tbl.Fld_type, Xowd_xowa_db_tbl.Fld_url)).Exec_select__rls_auto();
 		while (rdr.Move_next()) {
 			byte file_tid = rdr.Read_byte(Xowd_xowa_db_tbl.Fld_type);
 			if (file_tid != Xow_db_file_.Tid__html_data) continue;

@@ -58,7 +58,7 @@ public class Xow_db_file__core_ {
 				Db_conn core_conn = Db_conn_bldr.Instance.Get_or_fail(itm);
 
 				// if db has "xowa_db" then assume that it is the core
-				if (core_conn.Meta_tbl_exists(gplx.xowa.wikis.data.tbls.Xowd_xowa_db_tbl.Tbl_name)) {
+				if (core_conn.Meta_tbl_exists(gplx.xowa.wikis.data.tbls.Xowd_xowa_db_tbl.TBL_NAME)) {
 					Xoa_app_.Usr_dlg().Log_many("", "", "wiki.db_core.v2.renamed: url=~{0}", itm.Raw());
 					return itm;
 				}
@@ -104,7 +104,7 @@ public class Xow_db_file__core_ {
 		Db_conn core_conn = Db_conn_bldr.Instance.New(core_db_url);
 
 		// make tbls
-		Xow_db_file rv = Xow_db_file.make_(info_session, props, Xow_db_file_.Uid__core, core_db_tid, core_db_url, Xob_info_file.Ns_ids_empty, Xob_info_file.Part_id_1st, core_file_name, core_conn);
+		Xow_db_file rv = Xow_db_file.Make(info_session, props, Xow_db_file_.Uid__core, core_db_tid, core_db_url, Xob_info_file.Ns_ids_empty, Xob_info_file.Part_id_1st, core_file_name, core_conn);
 		rv.Tbl__db().Create_tbl();
 		rv.Tbl__ns().Create_tbl();
 		rv.Tbl__site_stats().Create_tbl();

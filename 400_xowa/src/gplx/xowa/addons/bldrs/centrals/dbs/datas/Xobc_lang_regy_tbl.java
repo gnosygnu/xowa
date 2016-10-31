@@ -30,9 +30,7 @@ public class Xobc_lang_regy_tbl implements Db_tbl {
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
-	public void Create_tbl() {
-		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));
-		}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public Xobc_lang_regy_itm[] Select_all() {
 		List_adp list = List_adp_.New();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Exec_select__rls_auto();

@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*;
-public class Fsm_mnt_tbl implements Rls_able {
-	private final    String tbl_name = "fsdb_mnt"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+public class Fsm_mnt_tbl implements Db_tbl {
+	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld_id, fld_name, fld_url;		
 	private final    Db_conn conn;
 	public Fsm_mnt_tbl(Db_conn conn, boolean schema_is_1) {
@@ -28,6 +28,7 @@ public class Fsm_mnt_tbl implements Rls_able {
 		fld_url				= flds.Add_str		("mnt_url", 255);
 		conn.Rls_reg(this);
 	}
+	public String Tbl_name() {return tbl_name;} private final    String tbl_name = "fsdb_mnt";
 	public void Create_tbl() {
 		Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds);
 		conn.Meta_tbl_create(meta);

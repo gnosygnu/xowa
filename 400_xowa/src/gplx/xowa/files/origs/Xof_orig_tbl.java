@@ -19,8 +19,8 @@ package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.primitives.*;
 import gplx.dbs.*; import gplx.dbs.utls.*; 
 import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
-public class Xof_orig_tbl implements Rls_able {
-	public final    String tbl_name; public final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+public class Xof_orig_tbl implements Db_tbl {
+	public final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	public final    String fld_repo, fld_ttl, fld_status, fld_ext, fld_w, fld_h, fld_redirect;
 	public final    Db_conn conn; private final    Xof_orig_tbl__in_wkr select_in_wkr = new Xof_orig_tbl__in_wkr();
 	public Db_conn Conn() {return conn;}
@@ -39,7 +39,7 @@ public class Xof_orig_tbl implements Rls_able {
 		select_in_wkr.Ctor(this, tbl_name, flds, fld_ttl);
 		conn.Rls_reg(this);
 	}
-	public void Rls() {}
+	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "main", fld_ttl)));}
 	public void Select_by_list(Ordered_hash rv, List_adp itms) {select_in_wkr.Init(rv, itms).Select_in(Cancelable_.Never, conn, 0, itms.Count());}
 	public Xof_orig_itm Select_itm(byte[] ttl) {
@@ -88,6 +88,7 @@ public class Xof_orig_tbl implements Rls_able {
 		return rv.W() == Xof_img_size.Null ? Xof_orig_itm.Null : rv;
 	}
 	private static final byte Status_found = 1;
+	public void Rls() {}
 }
 class Xof_orig_tbl__in_wkr extends Db_in_wkr__base {
 	private Xof_orig_tbl tbl; private String tbl_name; private Dbmeta_fld_list flds; private String fld_ttl;

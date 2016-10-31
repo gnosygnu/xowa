@@ -17,8 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.site_stats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.site_stats.*;
-public class Xow_site_stats_tbl {
-	private final    String tbl_name = "site_stats";
+public class Xow_site_stats_tbl implements Db_tbl {		
 	private final    String fld_row_id, fld_good_articles, fld_total_pages, fld_images;
 	private final    Db_conn conn; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	public Xow_site_stats_tbl(Db_conn conn, boolean schema_is_1) {
@@ -28,6 +27,7 @@ public class Xow_site_stats_tbl {
 		fld_total_pages		= flds.Add_long("ss_total_pages");
 		fld_images			= flds.Add_int("ss_images");
 	}
+	public String Tbl_name() {return tbl_name;} private final    String tbl_name = TBL_NAME;
 	public void Create_tbl() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));
 		conn.Stmt_insert(tbl_name, flds).Val_int(fld_row_id, Site_stats_row_id).Val_long(fld_good_articles, 0).Val_long(fld_total_pages, 0).Val_int(fld_images, 0).Exec_insert();
@@ -50,5 +50,9 @@ public class Xow_site_stats_tbl {
 			}
 		} finally {rdr.Rls();}
 	}
+	public void Rls() {}
 	private static final int Site_stats_row_id = 1;
+
+	public static final String TBL_NAME = "site_stats";
+	public static Xow_site_stats_tbl Get_by_key(Db_tbl_owner owner) {return (Xow_site_stats_tbl)owner.Tbls__get_by_key(TBL_NAME);}
 }

@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.fsdb.meta.*; import gplx.xowa.files.*;
-public class Fsd_thm_tbl implements Rls_able {
-	public final    String tbl_name; public final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+public class Fsd_thm_tbl implements Db_tbl {
+	public final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	public final    String fld_id, fld_owner_id, fld_w, fld_h, fld_time, fld_page, fld_bin_db_id, fld_size, fld_modified, fld_hash;
 	public final    Db_conn conn; private Db_stmt stmt_insert, stmt_select_by_fil_exact, stmt_select_by_fil_near; private int mnt_id; private boolean schema_thm_page;
 	public Fsd_thm_tbl(Db_conn conn, boolean schema_is_1, int mnt_id, boolean schema_thm_page) {
@@ -42,11 +42,7 @@ public class Fsd_thm_tbl implements Rls_able {
 		this.fld_hash			= flds.Add_str		("thm_hash", 40);
 		conn.Rls_reg(this);
 	}
-	public void Rls() {
-		stmt_insert = Db_stmt_.Rls(stmt_insert);
-		stmt_select_by_fil_exact = Db_stmt_.Rls(stmt_select_by_fil_exact);
-		stmt_select_by_fil_near = Db_stmt_.Rls(stmt_select_by_fil_near);
-	}
+	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
 	public void Create_tbl() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
 		, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "owner", fld_owner_id, fld_id, fld_w, fld_time, fld_page)
@@ -154,5 +150,10 @@ public class Fsd_thm_tbl implements Rls_able {
 		if (max == null) return Bool_.N;
 		thm.Init_by_match(max);
 		return Bool_.Y;
+	}
+	public void Rls() {
+		stmt_insert = Db_stmt_.Rls(stmt_insert);
+		stmt_select_by_fil_exact = Db_stmt_.Rls(stmt_select_by_fil_exact);
+		stmt_select_by_fil_near = Db_stmt_.Rls(stmt_select_by_fil_near);
 	}
 }

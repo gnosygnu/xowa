@@ -22,9 +22,9 @@ import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.
 import gplx.xowa.bldrs.infos.*;
 import gplx.xowa.langs.*;
 public class Xow_wiki_ {
-	public static void Create(Xoa_app app, Xow_ns_mgr ns_mgr, String domain, Io_url core_url) {
-		Xowd_core_db_props props = new Xowd_core_db_props( 1, Xow_db_layout.Itm_all, Xow_db_layout.Itm_all, Xow_db_layout.Itm_all, Io_stream_tid_.Tid__raw, Io_stream_tid_.Tid__raw, Bool_.N, Bool_.N);
-		Xow_db_file core_db = Xow_db_file__core_.Make_core_db(props, Xob_info_session.new_(app.User().Key(), domain, domain), core_url, domain);
+	public static void Create(String user_key, Xow_ns_mgr ns_mgr, String domain, Io_url core_url) {
+		Xowd_core_db_props props = new Xowd_core_db_props(1, Xow_db_layout.Itm_all, Xow_db_layout.Itm_all, Xow_db_layout.Itm_all, Io_stream_tid_.Tid__raw, Io_stream_tid_.Tid__raw, Bool_.N, Bool_.N);
+		Xow_db_file core_db = Xow_db_file__core_.Make_core_db(props, Xob_info_session.new_(user_key, domain, domain), core_url, domain);
 		core_db.Tbl__text().Create_tbl();
 		core_db.Tbl__site_stats().Update(0, 0, 0);	// save page stats
 		core_db.Tbl__ns().Insert(ns_mgr); // save ns

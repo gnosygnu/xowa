@@ -30,7 +30,7 @@ class Xouw_itm_html extends Xow_special_wtr__base {
 		Xouw_db_mgr db_mgr = new Xouw_db_mgr(conn);
 		Xou_wiki_itm itm = db_mgr.Tbl__wiki().Select_by_key_or_null(key);
 		if (itm == null)
-			itm = new Xou_wiki_itm(-1, 0, "", "", Io_url_.Empty, "");
+			itm = new Xou_wiki_itm(-1, 0, "test4", "test4", Io_url_.new_fil_("C:\\xowa\\test\\test4.xowa"), "");
 		return new Xouw_itm_doc(itm.Id(), itm.Domain(), itm.Name(), itm.Url().Xto_api());
 	}
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {

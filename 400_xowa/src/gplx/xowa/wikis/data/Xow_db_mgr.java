@@ -44,7 +44,7 @@ public class Xow_db_mgr {
 		// create core_conn / core_db
 		Db_conn core_conn = Db_conn_bldr.Instance.Get(core_url);
 		props = Xowd_core_db_props.Cfg_load(core_conn);	// load props to get layout_text
-		Dbs__set_by_tid(Xow_db_file.load_(props, Xow_db_file_.Uid__core, Xow_db_file__core_.Core_db_tid(props.Layout_text()), core_url, Xob_info_file.Ns_ids_empty, Xob_info_file.Part_id_1st, Guid_adp_.Empty));
+		Dbs__set_by_tid(Xow_db_file.Load(props, Xow_db_file_.Uid__core, Xow_db_file__core_.Core_db_tid(props.Layout_text()), core_url, Xob_info_file.Ns_ids_empty, Xob_info_file.Part_id_1st, Guid_adp_.Empty));
 		wiki.Props().Init_by_load(wiki.App(), Tbl__cfg());	// load Main_page
 
 		// load dbs from "xowa_db" tbl
@@ -108,7 +108,7 @@ public class Xow_db_mgr {
 	}
 	public Xow_db_file Dbs__make_by_id(int id, byte tid, String ns_ids, int part_id, String file_name_suffix) {
 		Io_url url = wiki_root_dir.GenSubFil(domain_str + file_name_suffix);
-		Xow_db_file rv = Xow_db_file.make_(db__core.Info_session(), props, id, tid, url, ns_ids, part_id, db__core.Url().NameAndExt(), Db_conn_bldr.Instance.New(url));
+		Xow_db_file rv = Xow_db_file.Make(db__core.Info_session(), props, id, tid, url, ns_ids, part_id, db__core.Url().NameAndExt(), Db_conn_bldr.Instance.New(url));
 		Dbs__add_and_save(rv);
 		Dbs__set_by_tid(rv);
 		return rv;

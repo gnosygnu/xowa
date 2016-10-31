@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
-public class Fsm_bin_tbl {
-	private final    String tbl_name; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+public class Fsm_bin_tbl implements Db_tbl {
+	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld_uid, fld_url, fld_bin_len, fld_bin_max;
 	private final    Db_conn conn; private int mnt_id;
 	public Fsm_bin_tbl(Db_conn conn, boolean schema_is_1, int mnt_id) {
@@ -37,6 +37,7 @@ public class Fsm_bin_tbl {
 			fld_bin_max = Dbmeta_fld_itm.Key_null;
 		}
 	}
+	public String Tbl_name() {return tbl_name;} private final    String tbl_name; 
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert(int id, String url_rel) {
 		conn.Stmt_insert(tbl_name, flds).Crt_int(fld_uid, id).Val_str(fld_url, url_rel).Val_long(fld_bin_len, 0).Val_long(fld_bin_max, 0).Exec_insert();
@@ -55,4 +56,5 @@ public class Fsm_bin_tbl {
 		}	finally {rdr.Rls();}
 		return (Fsm_bin_fil[])rv.To_ary(Fsm_bin_fil.class);
 	}
+	public void Rls() {}
 }

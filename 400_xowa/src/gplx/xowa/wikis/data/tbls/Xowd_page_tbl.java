@@ -19,9 +19,8 @@ package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.core.primitives.*; import gplx.core.criterias.*;
 import gplx.dbs.*; import gplx.xowa.*; import gplx.xowa.wikis.dbs.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.nss.*;
-public class Xowd_page_tbl implements Rls_able {
-	private final    Object thread_lock = new Object();
-	private final    String tbl_name = "page";
+public class Xowd_page_tbl implements Db_tbl {
+	private final    Object thread_lock = new Object();		
 	public final    boolean schema_is_1;
 	private String fld_id, fld_ns, fld_title, fld_is_redirect, fld_touched, fld_len, fld_random_int, fld_score, fld_text_db_id, fld_html_db_id, fld_redirect_id, fld_cat_db_id;
 	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
@@ -55,7 +54,7 @@ public class Xowd_page_tbl implements Rls_able {
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn()						{return conn;} private final    Db_conn conn; 
-	public String Tbl_name()					{return tbl_name;}
+	public String Tbl_name()					{return tbl_name;} private final    String tbl_name = TBL_NAME;
 	public Dbmeta_fld_list Flds__all()			{return flds;}
 	public String Fld_page_id()					{return fld_id;}
 	public String Fld_page_ns()					{return fld_ns;}
@@ -377,4 +376,6 @@ public class Xowd_page_tbl implements Rls_able {
 		}
 	}
 	public static final    String Page_touched_fmt = "yyyyMMddHHmmss";
+	public static final String TBL_NAME = "page";
+	public static Xowd_page_tbl Get_by_key(Db_tbl_owner owner) {return (Xowd_page_tbl)owner.Tbls__get_by_key(TBL_NAME);}
 }

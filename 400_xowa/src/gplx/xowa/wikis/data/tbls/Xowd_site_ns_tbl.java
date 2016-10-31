@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.nss.*;
-public class Xowd_site_ns_tbl {
-	private final    String tbl_name; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+public class Xowd_site_ns_tbl implements Db_tbl {
+	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld_id, fld_name, fld_case, fld_count, fld_is_alias;		
 	private final    Db_conn conn;
 	public Xowd_site_ns_tbl(Db_conn conn, boolean schema_is_1) {
@@ -31,6 +31,7 @@ public class Xowd_site_ns_tbl {
 		fld_is_alias		= flds.Add_bool		("ns_is_alias");
 		fld_count			= flds.Add_int		("ns_count");
 	}
+	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert(Xow_ns_mgr ns_mgr) {
 		Db_stmt stmt = conn.Stmt_insert(tbl_name, flds);
@@ -81,4 +82,8 @@ public class Xowd_site_ns_tbl {
 			.Crt_int(fld_id, ns_id)
 			.Exec_update();
 	}
+	public void Rls() {}
+
+	public static final String TBL_NAME = "site_ns";
+	public static Xowd_site_ns_tbl Get_by_key(Db_tbl_owner owner) {return (Xowd_site_ns_tbl)owner.Tbls__get_by_key(TBL_NAME);}
 }

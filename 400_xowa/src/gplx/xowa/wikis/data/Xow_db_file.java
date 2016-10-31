@@ -92,7 +92,7 @@ public class Xow_db_file {
 	}
 
 	public static final    Xow_db_file Null = null;
-	public static Xow_db_file make_(Xob_info_session info_session, Xowd_core_db_props props, int id, byte tid, Io_url url, String ns_ids, int part_id, String core_file_name, Db_conn conn) {
+	public static Xow_db_file Make(Xob_info_session info_session, Xowd_core_db_props props, int id, byte tid, Io_url url, String ns_ids, int part_id, String core_file_name, Db_conn conn) {
 		Guid_adp guid = Guid_adp_.New();
 		Xob_info_file info_file = new Xob_info_file(id, Xow_db_file_.To_key(tid), ns_ids, part_id, guid, props.Schema(), core_file_name, url.NameAndExt());
 		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
@@ -100,7 +100,7 @@ public class Xow_db_file {
 		cfg_tbl.Create_tbl();	// always create cfg in each db
 		return rv;
 	}
-	public static Xow_db_file load_(Xowd_core_db_props props, int id, byte tid, Io_url url, String ns_ids, int part_id, Guid_adp guid) {
+	public static Xow_db_file Load(Xowd_core_db_props props, int id, byte tid, Io_url url, String ns_ids, int part_id, Guid_adp guid) {
 		Db_conn conn = Db_conn_bldr.Instance.Get(url);
 		if (conn == null) {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "wiki.db:missing db; tid=~{0} url=~{1}", Xow_db_file_.To_key(tid), url.Raw());

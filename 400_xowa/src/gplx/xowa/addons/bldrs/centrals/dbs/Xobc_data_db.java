@@ -29,7 +29,7 @@ public class Xobc_data_db {
 		this.tbl__host_regy = new Xobc_host_regy_tbl(conn);
 		this.tbl__version_regy = new Xobc_version_regy_tbl(conn);
 		this.tbl__lang_regy = new Xobc_lang_regy_tbl(conn);
-		conn.Meta_tbl_assert(tbl__task_regy, tbl__step_regy, tbl__step_map, tbl__import_step, tbl__host_regy, tbl__version_regy);
+		conn.Meta_tbl_assert(tbl__task_regy, tbl__step_regy, tbl__step_map, tbl__import_step, tbl__host_regy, tbl__version_regy, tbl__lang_regy);
 	}
 	public Db_conn					Conn() {return conn;} private final    Db_conn conn;
 	public Io_url					Url() {return url;} private final    Io_url url;

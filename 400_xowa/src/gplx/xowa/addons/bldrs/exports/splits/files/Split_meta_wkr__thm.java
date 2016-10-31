@@ -31,7 +31,7 @@ class Split_meta_wkr__thm extends Split_meta_wkr_base {
 	@Override public void On_nth_new(Split_ctx ctx, Db_conn trg_conn) {
 		this.tbl = new Fsd_thm_tbl(trg_conn, Bool_.N, Fsm_mnt_mgr.Mnt_idx_main, Bool_.Y);
 		tbl.Create_tbl();
-		this.stmt = trg_conn.Stmt_insert(tbl.tbl_name, tbl.flds);
+		this.stmt = trg_conn.Stmt_insert(tbl.Tbl_name(), tbl.flds);
 	}
 	@Override public void On_nth_rls(Split_ctx ctx, Db_conn trg_conn) {this.stmt = Db_stmt_.Rls(stmt);}
 	@Override protected String Load_sql(Db_attach_mgr attach_mgr, int ns_id, int score_bgn, int score_end) {
