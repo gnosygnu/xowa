@@ -199,7 +199,7 @@ public class Scrib_lib_site implements Scrib_lib {
 		return rv;
 	}
 	private Keyval[] Bld_stats(Xowe_wiki wiki) {
-		Xow_site_stats_mgr stats = wiki.Stats();
+		Xowd_site_stats_mgr stats = wiki.Stats();
 		Keyval[] rv = new Keyval[8];
 		rv[0] = Keyval_.new_("pages"		, stats.Num_pages());			// SiteStats::pages(),
 		rv[1] = Keyval_.new_("articles"		, stats.Num_articles());		// SiteStats::articles(),

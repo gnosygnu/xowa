@@ -20,6 +20,7 @@ import gplx.dbs.*;
 public class Xouw_db_mgr {
 	public Xouw_db_mgr(Db_conn conn) {
 		tbl__wiki = new Xou_wiki_tbl(conn);
+		conn.Meta_tbl_assert(tbl__wiki);
 	}
 	public Xou_wiki_tbl Tbl__wiki() {return tbl__wiki;} private final    Xou_wiki_tbl tbl__wiki;
 }

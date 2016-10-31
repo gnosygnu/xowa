@@ -30,17 +30,17 @@ class Xouw_itm_mgr {
 	}
 	public void Save(int id, String domain, String name, String url_str) {
 		boolean itm_is_new = false;
-		// get next id if new
+		// get next id if none provided
 		if (id == -1) {
 			itm_is_new = true;
 			Db_sys_mgr sys_mgr = new Db_sys_mgr(app.User().User_db_mgr().Conn());
 			id = sys_mgr.Autonum_next("user.wikis.id");
 		}
 
-		// insert into user_wiki
+		// insert into user_db.user_wiki
 		Xouw_db_mgr db_mgr = new Xouw_db_mgr(app.User().User_db_mgr().Conn());
 		db_mgr.Tbl__wiki().Upsert(id, domain, name, url_str);
-		// if (itm_is_new) Xow_db_mkr.Create_wiki(app, domain, url_str);
-		if (itm_is_new) Xow_db_mkr.Create_wiki2(new Xodb_wiki_data(domain, Io_url_.new_fil_(url_str)));
+		if (itm_is_new)
+			Xow_db_mkr.Create_wiki(new Xodb_wiki_data(domain, Io_url_.new_fil_(url_str)));
 	}
 }

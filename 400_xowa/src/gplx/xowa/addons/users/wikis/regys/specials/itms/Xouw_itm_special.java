@@ -21,9 +21,9 @@ public class Xouw_itm_special implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
 		Gfo_qarg_mgr url_args = new Gfo_qarg_mgr().Init(url.Qargs_ary());
 		
-		String key = url_args.Read_str_or("key", "");
+		String domain = url_args.Read_str_or("domain", "");
 
-		new Xouw_itm_html(key).Bld_page_by_mustache(wiki.App(), page, this);
+		new Xouw_itm_html(domain).Bld_page_by_mustache(wiki.App(), page, this);
 	}
 	Xouw_itm_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
 	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;

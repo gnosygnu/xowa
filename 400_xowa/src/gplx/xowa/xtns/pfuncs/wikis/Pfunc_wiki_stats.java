@@ -27,7 +27,7 @@ public class Pfunc_wiki_stats extends Pf_func_base {
 			byte argx_0 = argx[0];
 			switch (argx_0) {case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_r: raw = true; break;}
 		}
-		Xow_site_stats_mgr stats = ctx.Wiki().Stats();
+		Xowd_site_stats_mgr stats = ctx.Wiki().Stats();
 		long v = 0;
 	    switch (id) {
 			case Xol_kwd_grp_.Id_num_pages:		v = stats.Num_pages(); break;
@@ -48,5 +48,5 @@ public class Pfunc_wiki_stats extends Pf_func_base {
 	public Pfunc_wiki_stats(int id) {this.id = id;}
 	@Override public int Id() {return id;} private int id;
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_wiki_stats(id).Name_(name);}
-	public static final Pfunc_wiki_stats Instance = new Pfunc_wiki_stats(-1);
+	public static final    Pfunc_wiki_stats Instance = new Pfunc_wiki_stats(-1);
 }

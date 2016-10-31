@@ -19,18 +19,18 @@ package gplx.xowa.addons.users.wikis.regys.specials.itms; import gplx.*; import 
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.dbs.*; import gplx.xowa.addons.users.wikis.regys.dbs.*;
 class Xouw_itm_html extends Xow_special_wtr__base {
-	private final    String key;
-	public Xouw_itm_html(String key) {
-		this.key = key;
+	private final    String domain;
+	public Xouw_itm_html(String domain) {
+		this.domain = domain;
 	}
 	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return app.Fsys_mgr().Http_root().GenSubDir_nest("bin", "any", "xowa", "addon", "user", "wiki", "itm");}
 	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xouw_itm.mustache.html");}
 	@Override protected Mustache_doc_itm Bld_mustache_root(Xoa_app app) {
 		Db_conn conn = app.User().User_db_mgr().Conn();
 		Xouw_db_mgr db_mgr = new Xouw_db_mgr(conn);
-		Xou_wiki_itm itm = db_mgr.Tbl__wiki().Select_by_key_or_null(key);
+		Xou_wiki_itm itm = db_mgr.Tbl__wiki().Select_by_key_or_null(domain);
 		if (itm == null)
-			itm = new Xou_wiki_itm(-1, 0, "test4", "test4", Io_url_.new_fil_("C:\\xowa\\test\\test4.xowa"), "");
+			itm = new Xou_wiki_itm(-1, "", "", Io_url_.Empty, "");
 		return new Xouw_itm_doc(itm.Id(), itm.Domain(), itm.Name(), itm.Url().Xto_api());
 	}
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {

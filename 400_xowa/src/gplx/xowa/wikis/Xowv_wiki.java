@@ -48,7 +48,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		this.fsdb_mgr = new Xof_fsdb_mgr__sql();
 		this.url__parser = new Xow_url_parser(this);
 		this.xwiki_mgr = new Xow_xwiki_mgr(this);
-		this.stats = new Xow_site_stats_mgr(this);
+		this.stats = new Xowd_site_stats_mgr(this);
 		this.lnki_bldr = new Xoh_lnki_bldr(app, href_wtr);
 		this.ctg_catpage_mgr = new Xoctg_catpage_mgr(this);
 	}
@@ -82,7 +82,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	public Xow_wiki_props				Props() {return props;} private final    Xow_wiki_props props = new Xow_wiki_props();
 	public Xol_lang_itm					Lang() {return lang;} private final    Xol_lang_itm lang;
 	public Xol_case_mgr					Case_mgr() {if (case_mgr == null) case_mgr = Xol_case_mgr_.U8(); return case_mgr;} private Xol_case_mgr case_mgr;
-	public Xow_site_stats_mgr			Stats() {return stats;} private final    Xow_site_stats_mgr stats;
+	public Xowd_site_stats_mgr			Stats() {return stats;} private final    Xowd_site_stats_mgr stats;
 	public Bry_bfr_mkr					Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private final    Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
 	public Io_stream_zip_mgr			Utl__zip_mgr()		{return utl__zip_mgr;}		private final    Io_stream_zip_mgr utl__zip_mgr = new Io_stream_zip_mgr();
 	public Xow_url_parser				Utl__url_parser()	{return url__parser;}		private final    Xow_url_parser url__parser;

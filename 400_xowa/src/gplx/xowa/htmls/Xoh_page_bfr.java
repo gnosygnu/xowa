@@ -26,7 +26,8 @@ public class Xoh_page_bfr {
 		body_bfr.Clear();
 	}
 	public Bry_bfr Split_by_toc(byte toc_mode) {
-		this.toc_mode = toc_mode;
+		if (this.toc_mode != Xoh_toc_data.Toc_mode__pgbnr)
+			this.toc_mode = toc_mode;
 		return body_bfr;
 	}
 	public void Commit(Xoa_page pg) {

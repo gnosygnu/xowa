@@ -54,7 +54,7 @@ public interface Xow_wiki extends Xow_ttl_parser, Gfo_invk {
 	Xow_mw_parser_mgr			Mw_parser_mgr();
 	Xow_xwiki_mgr				Xwiki_mgr();
 	Xow_wiki_props				Props();
-	Xow_site_stats_mgr			Stats();
+	Xowd_site_stats_mgr			Stats();
 	void						Init_by_wiki();
 	void						Init_by_wiki__force();	// HACK: force init for drd wiki
 	Bry_bfr_mkr					Utl__bfr_mkr();

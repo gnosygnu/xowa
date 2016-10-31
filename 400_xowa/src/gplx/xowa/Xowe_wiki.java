@@ -52,7 +52,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		cfg_parser = new Xowc_parser(this);
 		props.Init_props(domain_tid, domain_bry);
 		props.ContentLanguage_(lang.Key_bry());
-		stats = new Xow_site_stats_mgr(this);
+		stats = new Xowd_site_stats_mgr(this);
 		Pf_func_.Reg(domain_itm, lang.Func_regy(), lang);
 		special_mgr = new Xow_special_mgr(this, lang);
 		sys_cfg = new Xow_sys_cfg(this);
@@ -113,7 +113,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xow_mw_parser_mgr		Mw_parser_mgr() {return mw_parser_mgr;} private final    Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
 	public Xow_xwiki_mgr			Xwiki_mgr() {return xwiki_mgr;} private final    Xow_xwiki_mgr xwiki_mgr;
 	public Xow_wiki_props			Props() {return props;} private final    Xow_wiki_props props = new Xow_wiki_props();
-	public Xow_site_stats_mgr		Stats() {return stats;} private final    Xow_site_stats_mgr stats;
+	public Xowd_site_stats_mgr		Stats() {return stats;} private final    Xowd_site_stats_mgr stats;
 	public Xow_parser_mgr			Parser_mgr() {return parser_mgr;} private final    Xow_parser_mgr parser_mgr;
 	public Xoax_addon_mgr			Addon_mgr() {return addon_mgr;} private final    Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
 	public Xog_cbk_mgr				Gui__cbk_mgr() {return gui__cbk_mgr;} private final    Xog_cbk_mgr gui__cbk_mgr = new Xog_cbk_mgr();
@@ -178,6 +178,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public void Init_by_wiki()		{Init_assert();}
 	public Xowe_wiki Init_assert()	{if (init_needed) Init_wiki(app.Usere()); return this;}
 	public void Init_db_mgr() {
+		int j = 1;
 		Io_url core_db_url = gplx.xowa.wikis.data.Xow_db_file__core_.Find_core_fil(this);
 		if (core_db_url == null) {
 			tdb_fsys_mgr.Scan_dirs();

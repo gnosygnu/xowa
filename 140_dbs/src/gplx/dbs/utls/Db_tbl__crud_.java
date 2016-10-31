@@ -33,9 +33,9 @@ public class Db_tbl__crud_ {
 		// do update / insert; NOTE: 0-index and crt_cols_len assumes that objs starts with crts; EX: (id) -> (1, 'abc') x> ('abc', 1)
 		// update
 		if (exists) {
-			Db_stmt update_stmt = conn.Stmt_update(tbl_name, crt_cols, crt_cols);
-			Add_arg(update_stmt, flds, crt_cols, objs, Bool_.Y, 0);
+			Db_stmt update_stmt = conn.Stmt_update(tbl_name, crt_cols, val_cols);
 			Add_arg(update_stmt, flds, val_cols, objs, Bool_.N, crt_cols_len);
+			Add_arg(update_stmt, flds, crt_cols, objs, Bool_.Y, 0);
 			update_stmt.Exec_update();
 			update_stmt.Rls();
 			return false;

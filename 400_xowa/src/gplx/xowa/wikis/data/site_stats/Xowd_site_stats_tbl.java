@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.site_stats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.site_stats.*;
-public class Xow_site_stats_tbl implements Db_tbl {		
+public class Xowd_site_stats_tbl implements Db_tbl {		
 	private final    String fld_row_id, fld_good_articles, fld_total_pages, fld_images;
 	private final    Db_conn conn; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	public Xow_site_stats_tbl(Db_conn conn, boolean schema_is_1) {
+	public Xowd_site_stats_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		fld_row_id			= flds.Add_int_pkey("ss_row_id");
 		fld_good_articles	= flds.Add_long("ss_good_articles");
@@ -38,7 +38,7 @@ public class Xow_site_stats_tbl implements Db_tbl {
 			.Crt_int(fld_row_id, Site_stats_row_id)
 			.Exec_update();
 	}
-	public void Select(Xow_site_stats_mgr stats) {
+	public void Select(Xowd_site_stats_mgr stats) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_row_id).Crt_int(fld_row_id, Site_stats_row_id).Exec_select__rls_auto();
 		try {
 			if (rdr.Move_next()) {
@@ -54,5 +54,5 @@ public class Xow_site_stats_tbl implements Db_tbl {
 	private static final int Site_stats_row_id = 1;
 
 	public static final String TBL_NAME = "site_stats";
-	public static Xow_site_stats_tbl Get_by_key(Db_tbl_owner owner) {return (Xow_site_stats_tbl)owner.Tbls__get_by_key(TBL_NAME);}
+	public static Xowd_site_stats_tbl Get_by_key(Db_tbl_owner owner) {return (Xowd_site_stats_tbl)owner.Tbls__get_by_key(TBL_NAME);}
 }
