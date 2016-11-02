@@ -29,15 +29,17 @@ public class Xouw_itm_bridge implements gplx.xowa.htmls.bridges.Bridge_cmd_itm {
 		Json_nde args = data.Get_kv(Msg__args).Val_as_nde();
 		switch (proc_id) {
 			case Proc__save:					itm_mgr.Save(args); break;
+			case Proc__delete:					itm_mgr.Delete(args); break;
 			default: throw Err_.new_unhandled_default(proc_id);
 		}
 		return "";
 	}
 
 	private static final    byte[] Msg__proc = Bry_.new_a7("proc"), Msg__args = Bry_.new_a7("args");
-	private static final byte Proc__save = 0;
+	private static final byte Proc__save = 0, Proc__delete = 1;
 	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("save"						, Proc__save)
+	.Add_str_byte("delete"						, Proc__delete)
 	;
 
 	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("user.wiki.itm.exec");

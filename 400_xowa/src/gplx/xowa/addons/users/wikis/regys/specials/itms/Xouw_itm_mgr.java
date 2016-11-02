@@ -25,9 +25,7 @@ class Xouw_itm_mgr {
 	public Xouw_itm_mgr(Xoa_app app) {
 		this.app = app;
 	}
-	public void Save(Json_nde args) {
-		Save(args.Get_as_int("id"), args.Get_as_str("domain"), args.Get_as_str("name"), args.Get_as_str("dir"));
-	}
+	public void Save(Json_nde args) {Save(args.Get_as_int("id"), args.Get_as_str("domain"), args.Get_as_str("name"), args.Get_as_str("dir"));}
 	public void Save(int id, String domain, String name, String dir_str) {
 		boolean itm_is_new = false;
 		// get next id if none provided
@@ -44,5 +42,12 @@ class Xouw_itm_mgr {
 		db_mgr.Tbl__wiki().Upsert(id, domain, name, fil_url);
 		if (itm_is_new)
 			Xow_db_mkr.Create_wiki(new Xodb_wiki_data(domain, fil_url));
+	}
+	public void Delete(Json_nde args) {Delete(args.Get_as_int("id"));}
+	public void Delete(int id) {
+		Xouw_db_mgr db_mgr = new Xouw_db_mgr(app.User().User_db_mgr().Conn());
+		Xou_wiki_itm itm = db_mgr.Tbl__wiki().Select_by_id_or_null(id);
+		if (itm == null) throw Err_.new_wo_type("wiki does not exist", "id", id);
+		db_mgr.Tbl__wiki().Delete_by_id(id);
 	}
 }

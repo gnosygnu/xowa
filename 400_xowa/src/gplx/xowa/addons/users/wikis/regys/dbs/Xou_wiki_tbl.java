@@ -57,13 +57,17 @@ public class Xou_wiki_tbl implements Db_tbl {
 		finally {rdr.Rls();}
 	}
 	public Xou_wiki_itm Select_by_key_or_null(String key) {
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__wiki_domain).Clear().Crt_str(fld__wiki_domain, key).Exec_select__rls_auto();
-		try {
-			return rdr.Move_next()
-				? Make(rdr)
-				: null;
-		}
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__wiki_domain).Crt_str(fld__wiki_domain, key).Exec_select__rls_auto();
+		try {return rdr.Move_next() ? Make(rdr) : null;}
 		finally {rdr.Rls();}
+	}
+	public Xou_wiki_itm Select_by_id_or_null(int id) {
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__wiki_id).Crt_int(fld__wiki_id, id).Exec_select__rls_auto();
+		try {return rdr.Move_next() ? Make(rdr) : null;}
+		finally {rdr.Rls();}
+	}
+	public void Delete_by_id(int id) {
+		conn.Stmt_delete(tbl_name, fld__wiki_id).Crt_int(fld__wiki_id, id).Exec_delete();
 	}
 	private Xou_wiki_itm Make(Db_rdr rdr) {
 		return new Xou_wiki_itm(rdr.Read_int(fld__wiki_id), rdr.Read_str(fld__wiki_domain), rdr.Read_str(fld__wiki_name), Io_url_.new_fil_(rdr.Read_str(fld__wiki_core_url)), rdr.Read_str(fld__wiki_data));
