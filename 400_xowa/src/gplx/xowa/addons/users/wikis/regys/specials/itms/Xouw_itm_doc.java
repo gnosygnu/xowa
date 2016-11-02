@@ -21,19 +21,19 @@ import gplx.langs.mustaches.*;
 class Xouw_itm_doc implements Mustache_doc_itm {
 	private final    boolean mode_is_new;
 	private final    int id;
-	private final    String domain, name, file;
-	public Xouw_itm_doc(int id, String domain, String name, String file) {
+	private final    String domain, name, dir;
+	public Xouw_itm_doc(int id, String domain, String name, String dir) {
 		this.mode_is_new = id == -1;
 		this.id = id;
 		this.domain = domain;
 		this.name = name;
-		this.file = file;
+		this.dir = dir;
 	}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
 		if		(String_.Eq(key, "id"))				bfr.Add_int(id);
 		else if	(String_.Eq(key, "domain"))			bfr.Add_str_u8(domain);
 		else if	(String_.Eq(key, "name"))			bfr.Add_str_u8(name);
-		else if	(String_.Eq(key, "file"))			bfr.Add_str_u8(file);
+		else if	(String_.Eq(key, "dir"))			bfr.Add_str_u8(dir);
 		else										return false;
 		return true;
 	}

@@ -47,6 +47,7 @@ public class Io_url_ {
 	public static Io_url lnx_dir_(String raw) {return new_inf_(EndsWith_or_add(raw, Op_sys.Lnx.Fsys_dir_spr_str()), IoUrlInfo_.Lnx);}
 	public static Io_url new_fil_(String raw) {return new_any_(raw);}
 	public static Io_url new_dir_(String raw) {return new_any_(raw);}	// NOTE: for now, same as new_fil; stack overflow when doing new_dir
+	public static Io_url new_dir_infer(String raw) {return Op_sys.Cur().Tid_is_wnt() ? wnt_dir_(raw) : lnx_dir_(raw);}
 	public static Io_url new_any_(String raw) {return new_inf_(raw, IoUrlInfoRegy.Instance.Match(raw));}
 	public static Io_url new_inf_(String raw, IoUrlInfo info) {return String_.Eq(raw, "") ? Io_url_.Empty : new Io_url(raw, info);}
 	public static Io_url New__http_or_fail(String raw) {return New__http_or_fail(Bry_.new_u8(raw));}

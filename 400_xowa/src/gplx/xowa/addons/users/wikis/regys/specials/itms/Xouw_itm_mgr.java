@@ -26,9 +26,9 @@ class Xouw_itm_mgr {
 		this.app = app;
 	}
 	public void Save(Json_nde args) {
-		Save(args.Get_as_int("id"), args.Get_as_str("domain"), args.Get_as_str("name"), args.Get_as_str("file"));
+		Save(args.Get_as_int("id"), args.Get_as_str("domain"), args.Get_as_str("name"), args.Get_as_str("dir"));
 	}
-	public void Save(int id, String domain, String name, String url_str) {
+	public void Save(int id, String domain, String name, String dir_str) {
 		boolean itm_is_new = false;
 		// get next id if none provided
 		if (id == -1) {
@@ -39,8 +39,10 @@ class Xouw_itm_mgr {
 
 		// insert into user_db.user_wiki
 		Xouw_db_mgr db_mgr = new Xouw_db_mgr(app.User().User_db_mgr().Conn());
-		db_mgr.Tbl__wiki().Upsert(id, domain, name, url_str);
+		Io_url dir_url = Io_url_.new_dir_infer(dir_str);
+		Io_url fil_url = dir_url.GenSubFil(domain + ".xowa");
+		db_mgr.Tbl__wiki().Upsert(id, domain, name, fil_url);
 		if (itm_is_new)
-			Xow_db_mkr.Create_wiki(new Xodb_wiki_data(domain, Io_url_.new_fil_(url_str)));
+			Xow_db_mkr.Create_wiki(new Xodb_wiki_data(domain, fil_url));
 	}
 }

@@ -42,8 +42,8 @@ public class Xou_wiki_tbl implements Db_tbl {
 			.Exec_insert()
 			;
 	}
-	public boolean Upsert(int id, String domain, String name, String file) {
-		return Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__wiki_id), id, domain, name, file, "");
+	public boolean Upsert(int id, String domain, String name, Io_url core_url) {
+		return Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__wiki_id), id, domain, name, core_url.Xto_api(), "");
 	}
 	public Xou_wiki_itm[] Select_all() {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Exec_select__rls_auto();
