@@ -31,4 +31,5 @@ public class Xobc_task_regy_itm {
 	public int Step_count() {return step_count;} private final    int step_count;
 
 	public static final String Type__text = "text", Type__html = "html", Type__file = "file";
+	public static final int Seqn__obsolete = 999999;
 }

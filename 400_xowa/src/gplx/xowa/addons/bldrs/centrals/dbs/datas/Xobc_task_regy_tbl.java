@@ -43,7 +43,7 @@ public class Xobc_task_regy_tbl implements Db_tbl {
 		try {
 			while (rdr.Move_next()) {
 				int task_seqn = rdr.Read_int(fld_task_seqn);
-				if (task_seqn == 999999) continue;	// WORKAROUND: do not show old tasks; should add a status column, but don't want to change schema yet; DATE:2016-10-20
+				if (task_seqn == Xobc_task_regy_itm.Seqn__obsolete) continue;	// WORKAROUND: do not show old tasks; should add a status column, but don't want to change schema yet; DATE:2016-10-20
 
 				int task_id = rdr.Read_int(fld_task_id);
 				int step_count = rdr.Read_int(fld_step_count);

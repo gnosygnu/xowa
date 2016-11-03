@@ -48,6 +48,7 @@ public class Xobc_done_task_tbl implements Db_tbl {
 			while (rdr.Move_next()) {
 				int task_id = rdr.Read_int(fld_task_id);
 				int task_seqn = rdr.Read_int(fld_task_seqn);
+				if (task_seqn == gplx.xowa.addons.bldrs.centrals.dbs.datas.Xobc_task_regy_itm.Seqn__obsolete) continue;	// WORKAROUND: do not show old tasks; should add a status column, but don't want to change schema yet; DATE:2016-11-03
 				Xobc_task_itm itm = (Xobc_task_itm)todo_regy.Get_by(task_id);
 				if (itm == null) {
 					Gfo_log_.Instance.Warn("task exists in done, but not in todo", "task_id", task_id);
