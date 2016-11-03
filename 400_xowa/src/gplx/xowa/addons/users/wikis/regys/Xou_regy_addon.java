@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.users.wikis.regys; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.users.*; import gplx.xowa.addons.users.wikis.*;
-import gplx.xowa.addons.users.wikis.regys.dbs.*; import gplx.xowa.addons.users.wikis.regys.specials.itms.*;
+import gplx.xowa.addons.users.wikis.regys.dbs.*;
+import gplx.xowa.addons.users.wikis.regys.specials.itms.*; import gplx.xowa.addons.users.wikis.regys.specials.lists.*;
 import gplx.xowa.htmls.bridges.*;
 import gplx.dbs.*;
 import gplx.xowa.specials.*;
@@ -24,6 +25,7 @@ public class Xou_regy_addon implements Xoax_addon_itm, Xoax_addon_itm__special, 
 	public Xow_special_page[] Special_pages() {
 		return new Xow_special_page[]
 		{ Xouw_itm_special.Prototype
+		, Xouw_list_special.Prototype
 		};
 	}
 	public Bridge_cmd_itm[] Json_cmds() {
