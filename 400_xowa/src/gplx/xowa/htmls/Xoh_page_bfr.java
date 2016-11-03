@@ -26,7 +26,7 @@ public class Xoh_page_bfr {
 		body_bfr.Clear();
 	}
 	public Bry_bfr Split_by_toc(byte toc_mode) {
-		if (this.toc_mode != Xoh_toc_data.Toc_mode__pgbnr)
+		if (this.toc_mode != Xoh_toc_data.Toc_mode__pgbnr)// NOTE: "none" and "pgbnr" can exist on same page (especially in en.v); must make sure that "none" does not overwrite "pgbnr" else wide images; PAGE:en.v:UNESCO_World_Heritage_List DATE:2016-11-03
 			this.toc_mode = toc_mode;
 		return body_bfr;
 	}
