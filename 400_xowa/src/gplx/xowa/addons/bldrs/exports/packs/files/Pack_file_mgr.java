@@ -26,7 +26,7 @@ public class Pack_file_mgr {
 		Io_url wiki_dir = wiki.Fsys_mgr().Root_dir();
 		Io_url pack_dir = wiki_dir.GenSubDir_nest("tmp", "pack");
 		Io_mgr.Instance.DeleteDirDeep(pack_dir); Io_mgr.Instance.CreateDirIfAbsent(pack_dir);
-		String wiki_date = wiki.Props().Modified_latest().XtoStr_fmt("yyyy.MM");
+		String wiki_date = cfg.Wiki_date(wiki.Props().Modified_latest());
 		Pack_hash hash = Pack_hash_bldr.Bld(wiki, wiki_dir, pack_dir, wiki_date, cfg);
 
 		// get import_tbl

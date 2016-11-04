@@ -27,6 +27,9 @@ public class Pack_file_cfg implements Gfo_invk {
 	public String Pack_custom_files() {return pack_custom_files;} private String pack_custom_files;
 	public String Pack_custom_name() {return pack_custom_name;} private String pack_custom_name;
 	public DateAdp Pack_file_cutoff() {return pack_file_cutoff;} private DateAdp pack_file_cutoff = null;
+	public String Wiki_date(DateAdp wiki_last_modified) {
+		return wiki_date == null ? wiki_last_modified.XtoStr_fmt("yyyy.MM") : wiki_date;
+	}	private String wiki_date = null;
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__deploy_dir_))			deploy_dir = m.ReadIoUrl("v");
@@ -37,6 +40,7 @@ public class Pack_file_cfg implements Gfo_invk {
 		else if	(ctx.Match(k, Invk__pack_fsdb_delete_))		pack_fsdb_delete = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk__pack_custom_name_))		pack_custom_name = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk__pack_custom_files_))	pack_custom_files = m.ReadStr("v");	// pack_custom {files='en.wikipedia.org-core.xowa|en.wikipedia.org-html-ns.008.xowa'}}
+		else if	(ctx.Match(k, Invk__wiki_date_))			wiki_date = m.ReadStr("v");
 		else												return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -44,5 +48,6 @@ public class Pack_file_cfg implements Gfo_invk {
 	, Invk__pack_text_ = "pack_text_", Invk__pack_html_ = "pack_html_", Invk__pack_file_ = "pack_file_", Invk__pack_file_cutoff_ = "pack_file_cutoff_"
 	, Invk__pack_fsdb_delete_ = "pack_fsdb_delete_"
 	, Invk__pack_custom_name_ = "pack_custom_name_", Invk__pack_custom_files_ = "pack_custom_files_"
+	, Invk__wiki_date_ = "wiki_date_"
 	;
 }
