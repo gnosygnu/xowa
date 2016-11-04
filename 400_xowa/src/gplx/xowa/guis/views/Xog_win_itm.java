@@ -196,7 +196,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 			// WORKAROUND: if wikinews, then reload page; DATE:2016-11-03
 			// fixes bug wherein dump_html points images to wrong repo and causes images to be blank when going backwards / forwards
 			// note that this workaround will cause Wikitext Wikinews pages to reload page when going bwd / fwd, but this should be a smalldifference
-			if (cur_wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__wikinews)
+			if (new_page.Wiki().Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__wikinews)
 				new_page = new_page.Wikie().Page_mgr().Load_page(new_page.Url(), new_page.Ttl(), tab);
 		}
 		byte history_nav_type = fwd ? Xog_history_stack.Nav_fwd : Xog_history_stack.Nav_bwd;
