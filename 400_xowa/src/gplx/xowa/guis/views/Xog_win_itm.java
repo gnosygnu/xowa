@@ -192,6 +192,13 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		if (new_page.Db().Page().Exists_n()) return;
 		if (new_page.Ttl().Ns().Id_is_special())		// if Special, reload page; needed for Special:Search (DATE:2015-04-19; async loading) and Special:XowaBookmarks DATE:2015-10-05
 			new_page = new_page.Wikie().Data_mgr().Load_page_and_parse(new_page.Url(), new_page.Ttl());	// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
+		else {
+			// WORKAROUND: if wikinews, then reload page; DATE:2016-11-03
+			// fixes bug wherein dump_html points images to wrong repo and causes images to be blank when going backwards / forwards
+			// note that this workaround will cause Wikitext Wikinews pages to reload page when going bwd / fwd, but this should be a smalldifference
+			if (cur_wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__wikinews)
+				new_page = new_page.Wikie().Page_mgr().Load_page(new_page.Url(), new_page.Ttl(), tab);
+		}
 		byte history_nav_type = fwd ? Xog_history_stack.Nav_fwd : Xog_history_stack.Nav_bwd;
 		boolean new_page_is_same = Bry_.Eq(cur_page.Ttl().Full_txt_by_orig(), new_page.Ttl().Full_txt_by_orig());
 		Xog_tab_itm_read_mgr.Show_page(tab, new_page, true, new_page_is_same, false, history_nav_type);

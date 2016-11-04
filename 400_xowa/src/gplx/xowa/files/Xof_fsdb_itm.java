@@ -82,6 +82,7 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 		this.lnki_w = file_w; this.lnki_h = Xof_img_size.Size__neg1;
 	}
 	public void	Init_at_html(int exec_tid, Xof_img_size img_size, Xof_repo_itm repo, Xof_url_bldr url_bldr) {
+		int j = 1;
 		Calc_html_size(exec_tid, img_size);
 		this.html_view_url = url_bldr.To_url_trg(repo, this, file_is_orig);
 		this.html_orig_url = url_bldr.To_url_trg(repo, this, Bool_.Y);
@@ -148,7 +149,9 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	public void Change_repo(byte orig_repo_id, byte[] orig_repo_name) {
 		this.orig_repo_id = orig_repo_id; this.orig_repo_name = orig_repo_name;
 	}
-	public void File_is_orig_(boolean v) {this.file_is_orig = v;}
+	public void File_is_orig_(boolean v) {
+		this.file_is_orig = v;
+		}
 	public void Orig_repo_name_(byte[] v) {orig_repo_name = v;}
 	public void Html_elem_tid_(byte v) {this.html_elem_tid = v;}
 	public void Html_size_(int w, int h) {html_w = w; html_h = h;}
