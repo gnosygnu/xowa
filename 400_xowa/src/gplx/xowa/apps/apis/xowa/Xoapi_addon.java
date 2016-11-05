@@ -30,6 +30,8 @@ public class Xoapi_addon implements Gfo_invk {
 		else if	(ctx.Match(k, Invk__wikis__ctgs__hidden_enabled_)) 			wikis__ctgs__hidden_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk__app__scripting__enabled)) 				return Yn.To_str(app__scripting__enabled);
 		else if	(ctx.Match(k, Invk__app__scripting__enabled_)) 				app__scripting__enabled = m.ReadYn("v");
+		else if	(ctx.Match(k, Invk__app__page_history__log_all)) 			return Yn.To_str(app__page_history__log_all);
+		else if	(ctx.Match(k, Invk__app__page_history__log_all_)) 			app__page_history__log_all = m.ReadYn("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -38,5 +40,8 @@ public class Xoapi_addon implements Gfo_invk {
 	, Invk__wikis__ctgs__hidden_enabled_	= "wikis__ctgs__hidden_enabled_"
 	, Invk__app__scripting__enabled			= "app__scripting__enabled"
 	, Invk__app__scripting__enabled_		= "app__scripting__enabled_"
+	, Invk__app__page_history__log_all		= "app__page_history__log_all"
+	, Invk__app__page_history__log_all_		= "app__page_history__log_all_"
 	;
+	public static boolean app__page_history__log_all;
 }

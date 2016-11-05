@@ -65,6 +65,8 @@ public class Xou_history_mgr implements Gfo_invk {
 			itm = new Xou_history_itm(url.Wiki_bry(), To_full_db_w_qargs(url, ttl));
 			itms.Add(key, itm);
 		}
+		if (gplx.xowa.apps.apis.xowa.Xoapi_addon.app__page_history__log_all)
+			Io_mgr.Instance.AppendFilStr(history_fil.GenNewNameAndExt("log_all.csv"), String_.Format("{0}|{1}|{2}\n", Datetime_now.Get().XtoStr_fmt_iso_8561_w_tz(), itm.Wiki(), itm.Page()));
 		itm.Tally();
 	}
 	private byte[] To_full_db_w_qargs(Xoa_url url, Xoa_ttl ttl) {
