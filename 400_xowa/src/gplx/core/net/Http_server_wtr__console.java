@@ -20,3 +20,8 @@ import gplx.core.consoles.*;
 class Http_server_wtr__console implements Http_server_wtr {
 	public void Write_str_w_nl(String s) {Console_adp__sys.Instance.Write_str_w_nl(s);}
 }
+class Http_server_wtr__mock implements Http_server_wtr {
+	public void Write_str_w_nl(String s) {data = s;}
+	public String Data() {return data;} private String data;
+	public void Clear() {data = null;}
+}

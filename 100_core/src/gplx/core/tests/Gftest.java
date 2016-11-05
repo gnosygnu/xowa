@@ -64,8 +64,8 @@ public class Gftest {
 	public static void Eq__str(String expd, String actl, String msg_fmt, Object... msg_args) {
 		if (String_.Eq(expd, actl)) return;
 		Write_fail_head(bfr, msg_fmt, msg_args);
-		bfr.Add_str_a7("expd: ").Add_str_u8(expd).Add_byte_nl();
-		bfr.Add_str_a7("actl: ").Add_str_u8(actl).Add_byte_nl();
+		bfr.Add_str_a7("expd: ").Add_str_u8_null(expd).Add_byte_nl();
+		bfr.Add_str_a7("actl: ").Add_str_u8_null(actl).Add_byte_nl();
 		bfr.Add(Bry__line_end);
 		throw Err_.new_wo_type(bfr.To_str_and_clear());
 	}

@@ -48,7 +48,7 @@ public class Http_server_mgr implements Gfo_invk {
 		this.request_parser = new Http_request_parser(server_wtr, false);
 	}
 	public Xoae_app App() {return app;} private final    Xoae_app app;
-	public Http_server_wtr Server_wtr() {return server_wtr;} private final    Http_server_wtr server_wtr = Http_server_wtr_.new_console();
+	public Http_server_wtr Server_wtr() {return server_wtr;} private final    Http_server_wtr server_wtr = Http_server_wtr_.New__console();
 	public Http_request_parser Request_parser() {return request_parser;} private final    Http_request_parser request_parser;
 	public Gfo_url_encoder Encoder() {return encoder;} private final    Gfo_url_encoder encoder = Gfo_url_encoder_.New__http_url().Make();
 	public int Port() {return port;} public Http_server_mgr Port_(int v) {port = v; return this;} private int port = 8080;
