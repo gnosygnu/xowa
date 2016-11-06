@@ -87,7 +87,7 @@ public class Xoa_cmd_arg_mgr {
 		return new Xoa_cmd_arg_mgr(arg_mgr);
 	}
 	private static final    String User_name_default = gplx.xowa.users.Xoue_user.Key_xowa_user;
-	private static String Bin_dir_name() {
+	public static String Bin_dir_name() {
 		String rv = "";
 		Op_sys op_sys = Op_sys.Cur();
 		switch (op_sys.Tid()) {
