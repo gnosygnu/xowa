@@ -19,16 +19,28 @@ package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; impor
 import gplx.dbs.*;
 public class Xocfg_db_mgr {
 	public Xocfg_db_mgr(Db_conn conn) {
-		this.tbl__grp_meta = new Xocfg_grp_meta(conn);
-		this.tbl__grp_map  = new Xocfg_grp_map(conn);
-		this.tbl__itm_meta = new Xocfg_itm_meta(conn);
-		this.tbl__itm_data = new Xocfg_itm_data(conn);
-		this.tbl__nde_i18n = new Xocfg_nde_i18n(conn);
+		this.tbl__grp_meta = new Xogrp_meta_tbl(conn);
+		this.tbl__grp_map  = new Xogrp_map_tbl(conn);
+		this.tbl__itm_meta = new Xoitm_meta_tbl(conn);
+		this.tbl__itm_data = new Xoitm_data_tbl(conn);
+		this.tbl__nde_i18n = new Xonde_i18n_tbl(conn);
 		conn.Meta_tbl_assert(tbl__grp_meta, tbl__grp_map, tbl__itm_meta, tbl__itm_data, tbl__nde_i18n);
 	}
-	public Xocfg_grp_meta Tbl__grp_meta() {return tbl__grp_meta;} private final    Xocfg_grp_meta tbl__grp_meta;
-	public Xocfg_grp_map  Tbl__grp_map()  {return tbl__grp_map ;} private final    Xocfg_grp_map  tbl__grp_map;
-	public Xocfg_itm_meta Tbl__itm_meta() {return tbl__itm_meta;} private final    Xocfg_itm_meta tbl__itm_meta;
-	public Xocfg_itm_data Tbl__itm_data() {return tbl__itm_data;} private final    Xocfg_itm_data tbl__itm_data;
-	public Xocfg_nde_i18n Tbl__nde_i18n() {return tbl__nde_i18n;} private final    Xocfg_nde_i18n tbl__nde_i18n;
+	public Xogrp_meta_tbl Tbl__grp_meta() {return tbl__grp_meta;} private final    Xogrp_meta_tbl tbl__grp_meta;
+	public Xogrp_map_tbl  Tbl__grp_map()  {return tbl__grp_map ;} private final    Xogrp_map_tbl  tbl__grp_map;
+	public Xoitm_meta_tbl Tbl__itm_meta() {return tbl__itm_meta;} private final    Xoitm_meta_tbl tbl__itm_meta;
+	public Xoitm_data_tbl Tbl__itm_data() {return tbl__itm_data;} private final    Xoitm_data_tbl tbl__itm_data;
+	public Xonde_i18n_tbl Tbl__nde_i18n() {return tbl__nde_i18n;} private final    Xonde_i18n_tbl tbl__nde_i18n;
+
+	public String Get_str(String ctx, String key) {
+		Xoitm_meta_itm meta_itm = tbl__itm_meta.Select_by_key_or_null(key);
+		if (meta_itm == null) throw Err_.new_wo_type("cfg not defined", "ctx", ctx, "key", key);
+		Xoitm_data_itm data_itm = tbl__itm_data.Select_by_id_or_null(meta_itm.Id());
+		return data_itm == null ? meta_itm.Dflt() : data_itm.Val();
+	}
+	public void Set_str(String ctx, String key, String val) {
+		Xoitm_meta_itm meta_itm = tbl__itm_meta.Select_by_key_or_null(key);
+		if (meta_itm == null) throw Err_.new_wo_type("cfg not defined", "ctx", ctx, "key", key);
+		tbl__itm_data.Update(meta_itm.Id(), ctx, val, Datetime_now.Get().XtoUtc().XtoStr_fmt_iso_8561());
+	}
 }

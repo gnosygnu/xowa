@@ -40,5 +40,5 @@ public class Xoh_head_itm__graph extends Xoh_head_itm__base {
 	}
 	private static final int Url__ary_len = 6;
 	private static byte[][] Url__ary;
-	private static final byte[] Js__graph_exec = Bry_.new_a7("xtn__graph__exec();");
+	private static final    byte[] Js__graph_exec = Bry_.new_a7("xtn__graph__exec();");
 }

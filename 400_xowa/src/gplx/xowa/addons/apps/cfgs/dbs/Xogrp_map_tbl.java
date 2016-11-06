@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
-public class Xocfg_grp_map implements Db_tbl {
+public class Xogrp_map_tbl implements Db_tbl {
 	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld__map_src, fld__map_trg, fld__map_sort;
 	private final    Db_conn conn;
-	public Xocfg_grp_map(Db_conn conn) {
+	public Xogrp_map_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "cfg_grp_map";
 		this.fld__map_src			= flds.Add_int("map_src");
