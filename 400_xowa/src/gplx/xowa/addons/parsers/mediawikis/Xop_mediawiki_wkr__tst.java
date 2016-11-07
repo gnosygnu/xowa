@@ -28,7 +28,7 @@ public class Xop_mediawiki_wkr__tst {
 	}
 }
 class Xop_mediawiki_wkr__fxt {
-	private final    Xop_mediawiki_mgr mgr = new Xop_mediawiki_mgr(Io_url_.new_dir_("mem/xowa/wiki/en.wikipedia.org"));
+	private final    Xop_mediawiki_mgr mgr = new Xop_mediawiki_mgr("mem/xowa/wiki/en.wikipedia.org/");
 	private Xop_mediawiki_wkr wkr;
 	public void Init__wkr(String wiki) {
 		this.wkr = mgr.Make(wiki);

@@ -18,9 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.parsers.mediawikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.parsers.*;
 public class Xop_mediawiki_mgr {
 	private final    Xoae_app app;
-	public Xop_mediawiki_mgr(Io_url root_dir) {
+	public Xop_mediawiki_mgr(String root_str) {
 		Gfo_usr_dlg usr_dlg = Xoa_app_.New__usr_dlg__console();
 		Gfo_usr_dlg_.Instance = usr_dlg;
+		Io_url root_dir = Io_url_.new_dir_(root_str);
 
 		this.app = new Xoae_app(usr_dlg, gplx.xowa.apps.Xoa_app_mode.Itm_cmd
 		, root_dir
