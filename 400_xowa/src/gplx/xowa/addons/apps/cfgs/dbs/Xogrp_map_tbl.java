@@ -34,11 +34,17 @@ public class Xogrp_map_tbl implements Db_tbl {
 	public void Upsert(int map_src, int map_trg, int map_sort) {
 		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__map_src), map_src, map_trg, map_sort);
 	}
-	public void Select_stub() {
-		Db_rdr rdr = Db_rdr_.Empty;
-		rdr.Read_int(fld__map_src);
-		rdr.Read_int(fld__map_trg);
-		rdr.Read_int(fld__map_sort);
+	public int Select_next_sort(int owner_id) {
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__map_src).Crt_int(fld__map_src, owner_id).Exec_select__rls_auto();
+		try {
+			return rdr.Move_next()
+				? rdr.Read_int(fld__map_sort) + 1
+				: 0;
+		}
+		finally {rdr.Rls();}
+	}
+	public void Delete(int src_id, int trg_id) {
+		conn.Stmt_delete(tbl_name, fld__map_src, fld__map_trg).Crt_int(fld__map_src, src_id).Crt_int(fld__map_trg, trg_id).Exec_delete();
 	}
 	public void Rls() {}
 }

@@ -16,17 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-public class Xoitm_meta_itm {
-	public Xoitm_meta_itm(int id, int scope_id, int type_id, String key, String dflt) {
+public class Xogrp_meta_itm {
+	public Xogrp_meta_itm(int id, String key) {
 		this.id = id;
-		this.scope_id = scope_id;
-		this.type_id = type_id;
 		this.key = key;
-		this.dflt = dflt;
 	}
 	public int Id() {return id;} private final    int id;
-	public int Scope_id() {return scope_id;} private final    int scope_id;
-	public int Type_id() {return type_id;} private final    int type_id;
 	public String Key() {return key;} private final    String key;
-	public String Dflt() {return dflt;} private final    String dflt;
+
+	public static final int Id__root = -1;
 }
