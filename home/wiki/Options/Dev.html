@@ -273,7 +273,10 @@ li.active a, li.active a:hover
               <a href="#Messages"><span class="tocnumber">1</span> <span class="toctext">Messages</span></a>
             </li>
             <li class="toclevel-1 tocsection-2">
-              <a href="#Notes"><span class="tocnumber">2</span> <span class="toctext">Notes</span></a>
+              <a href="#Miscellaneous"><span class="tocnumber">2</span> <span class="toctext">Miscellaneous</span></a>
+            </li>
+            <li class="toclevel-1 tocsection-3">
+              <a href="#Notes"><span class="tocnumber">3</span> <span class="toctext">Notes</span></a>
             </li>
           </ul>
         </div>
@@ -308,6 +311,19 @@ li.active a, li.active a:hover
           </tr>
         </table>
         <h2>
+          <span class="mw-headline" id="Miscellaneous">Miscellaneous</span>
+        </h2>
+        <table class='options_table'>
+          <tr>
+            <td class='options_row_label'>
+              Log all page history: <sup id="cite_ref-page_history__log_all_2-0" class="reference"><a href="#cite_note-page_history__log_all-2">[3]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="xowa.api.addon.app__page_history__log_all" type="checkbox" class="options_checkbox" id='xowa_prop_2'>
+            </td>
+          </tr>
+        </table>
+        <h2>
           <span class="mw-headline" id="Notes">Notes</span>
         </h2>
         <ol class="references">
@@ -332,6 +348,17 @@ li.active a, li.active a:hover
                 <span class="reference-text"><b>unchecked</b> to not show notes in the info box in lower right hand corner</span>
               </li>
             </ul><span class="reference-text">Notes are messages that are informational, but more permanent than status messages. For example, import messages generate notes for each started stage ("deleting directory").</span>
+          </li>
+          <li id="cite_note-page_history__log_all-2">
+            <span class="mw-cite-backlink"><a href="#cite_ref-page_history__log_all_2-0">^</a></span> <span class="reference-text">Log every page visit in a separate log file (default is <code>unchecked</code>)</span>
+            <ul>
+              <li>
+                <span class="reference-text"><b>checked</b>: Logs every page visit in a separate log file: C:\xowa\user\anonymous\app\data\history\log_all.csv</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>unchecked</b> Does not log every page visit to a separate log file.</span>
+              </li>
+            </ul><span class="reference-text">XOWA currently consolidates visits to the same page as one entry. For example, 3 visits to en.wikipedia.org/wiki/Earth would show up only once with the <code>date</code> being the most recent one. The <code>date</code> for the previous two entries would be lost. This option retains dates for all 3 entries by logging each visit to a separate file.</span>
           </li>
         </ol>
       </div>
