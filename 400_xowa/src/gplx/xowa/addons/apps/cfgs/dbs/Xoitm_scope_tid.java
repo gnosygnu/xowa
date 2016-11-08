@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-public class Xoitm_meta_scope_tid {
+public class Xoitm_scope_tid {	// SERIALIZED
 	public static final int Tid__app = 1, Tid__wiki = 2;
 	public static int To_int(String raw) {
 		if		(String_.Eq(raw, "app"))	return Tid__app;

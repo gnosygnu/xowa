@@ -35,13 +35,13 @@ public class Xocfg_itm_bldr {
 		// insert nde_i18n
 		db_mgr.Tbl__nde_i18n().Upsert(Xonde_i18n_nde_tid.Tid__grp, grp_id, Lang__dflt, grp_name, grp_help);
 	}
-	public void Create_itm(String grp_key, String itm_key, String scope_id_str, String type_id_str, String itm_dflt, String itm_name, String help) {
+	public void Create_itm(String grp_key, String itm_key, String scope_id_str, String gui_type, String gui_args, String itm_dflt, String itm_name, String help) {
 		// insert itm_meta
 		int grp_id = db_mgr.Tbl__grp_meta().Select_id_by_key_or_fail(grp_key);
 		int itm_id = db_mgr.Conn().Sys_mgr().Autonum_next("cfg_itm_meta.itm_id");
-		int scope_id = Xoitm_meta_scope_tid.To_int(scope_id_str);
-		int type_id = 1;		// boolean,int:40,list:a|b|c,String:40,note:50,70;file;button?;label?
-		db_mgr.Tbl__itm_meta().Upsert(itm_id, scope_id, type_id, itm_key, itm_dflt);
+		int scope_id = Xoitm_scope_tid.To_int(scope_id_str);
+		int gui_type_id = Xoitm_gui_tid.To_tid(gui_type);
+		db_mgr.Tbl__itm_meta().Upsert(itm_id, scope_id, gui_type_id, gui_args, itm_key, itm_dflt);
 
 		// insert grp_map
 		int itm_sort = db_mgr.Tbl__grp_map().Select_next_sort(grp_id);

@@ -19,22 +19,23 @@ package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; impor
 import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xoitm_meta_tbl implements Db_tbl {
 	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld__itm_id, fld__itm_key, fld__itm_scope_id, fld__itm_type_id, fld__itm_dflt;
+	private final    String fld__itm_id, fld__itm_key, fld__itm_scope_id, fld__itm_gui_type, fld__itm_gui_args, fld__itm_dflt;
 	private final    Db_conn conn;
 	public Xoitm_meta_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "cfg_itm_meta";
 		this.fld__itm_id			= flds.Add_int("itm_id");					// EX: '2'
-		this.fld__itm_scope_id		= flds.Add_int("itm_scope_id");				// EX: '1'; REF: cfg_scope_regy; ENUM: app-only, wiki-only, ...
-		this.fld__itm_type_id		= flds.Add_int("itm_type_id");				// EX: '1'; REF: cfg_type_regy; ENUM: int, String, ...
+		this.fld__itm_scope_id		= flds.Add_int("itm_scope_id");				// EX: '1'; ENUM: Xoitm_scope_tid
+		this.fld__itm_gui_type		= flds.Add_int("itm_gui_type");				// EX: '1'; ENUM: Xoitm_gui_tid
+		this.fld__itm_gui_args		= flds.Add_int("itm_gui_args");				// EX: '1,40' (numeric); '255' (textbox); 'enum_name' (combo); etc..
 		this.fld__itm_key			= flds.Add_str("itm_key", 255);				// EX: 'cfg_1'
 		this.fld__itm_dflt			= flds.Add_str("itm_dflt", 4096);			// EX: 'abc'
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
-	public void Upsert(int itm_id, int scope_id, int type_id, String itm_key, String itm_dflt) {
-		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__itm_id), itm_id, scope_id, type_id, itm_key, itm_dflt);
+	public void Upsert(int itm_id, int scope_id, int gui_type, String gui_args, String itm_key, String itm_dflt) {
+		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__itm_id), itm_id, scope_id, gui_type, gui_args, itm_key, itm_dflt);
 	}
 	public Xoitm_meta_itm Select_by_key_or_null(String key) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__itm_key).Exec_select__rls_auto();
@@ -45,7 +46,8 @@ public class Xoitm_meta_tbl implements Db_tbl {
 		return new Xoitm_meta_itm
 		( rdr.Read_int(fld__itm_id)
 		, rdr.Read_int(fld__itm_scope_id)
-		, rdr.Read_int(fld__itm_type_id)
+		, rdr.Read_int(fld__itm_gui_type)
+		, rdr.Read_str(fld__itm_gui_args)
 		, rdr.Read_str(fld__itm_key)
 		, rdr.Read_str(fld__itm_dflt)
 		);

@@ -16,19 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-public class Xoitm_meta_itm {
-	public Xoitm_meta_itm(int id, int scope_id, int gui_type, String gui_args, String key, String dflt) {
-		this.id = id;
-		this.scope_id = scope_id;
-		this.gui_type = gui_type;
-		this.gui_args = gui_args;
-		this.key = key;
-		this.dflt = dflt;
+public class Xoitm_gui_tid {	// SERIALIZED
+	public static final int Tid__checkbox = 1, Tid__numeric = 2, Tid__select = 3, Tid__textbox = 4, Tid__fs_file = 5, Tid__fs_dir = 6, Tid__memo = 7, Tid__button = 8, Tid__label = 9;
+
+	public static int To_tid(String str) {
+		if		(String_.Eq(str, "checkbox"))		return Tid__checkbox;
+		else if	(String_.Eq(str, "numeric"))		return Tid__numeric;
+		else if	(String_.Eq(str, "select"))			return Tid__select;
+		else if	(String_.Eq(str, "textbox"))		return Tid__textbox;
+		else if	(String_.Eq(str, "fs_file"))		return Tid__fs_file;
+		else if	(String_.Eq(str, "fs_dir"))			return Tid__fs_dir;
+		else if	(String_.Eq(str, "memo"))			return Tid__memo;
+		else if	(String_.Eq(str, "button"))			return Tid__button;
+		else if	(String_.Eq(str, "label"))			return Tid__label;
+		else										throw Err_.new_unhandled_default(str);
 	}
-	public int Id() {return id;} private final    int id;
-	public int Scope_id() {return scope_id;} private final    int scope_id;
-	public int Gui_type() {return gui_type;} private final    int gui_type;
-	public String Gui_args() {return gui_args;} private final    String gui_args;
-	public String Key() {return key;} private final    String key;
-	public String Dflt() {return dflt;} private final    String dflt;
 }
