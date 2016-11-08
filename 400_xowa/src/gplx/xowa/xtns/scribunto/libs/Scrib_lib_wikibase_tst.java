@@ -102,8 +102,8 @@ public class Scrib_lib_wikibase_tst {
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "test_str");
 	}
 	@Test  public void RenderSnak__quantity() {
-		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, wdata_fxt.Make_claim_quantity(3, "123", "units", "125", "121"));
-		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "123±2 units");
+		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, wdata_fxt.Make_claim_quantity(3, "123", "1", "125", "121"));	// NOTE: entity-less units output "1"; EX:wd:Q493409 DATE:2016-11-08
+		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "123±2");
 	}
 	@Test  public void RenderSnak__time() {
 		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, wdata_fxt.Make_claim_time(3, "2012-01-02 03:04:05"));

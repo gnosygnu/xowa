@@ -57,8 +57,8 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 	}
 	public void Visit_quantity(Wbase_claim_quantity itm) {Write_quantity(bfr, wdata_mgr, lang, itm.Amount(), itm.Lbound(), itm.Ubound(), itm.Unit());}
 	public static void Write_quantity(Bry_bfr bfr, Wdata_wiki_mgr wdata_mgr, Xol_lang_itm lang, byte[] val_bry, byte[] lo_bry, byte[] hi_bry, byte[] unit) {
-		// get val, lo, hi
-		Decimal_adp val = Decimal_adp_.parse(String_.new_u8(Normalize_for_decimal(val_bry))); // NOTE: must cast to long for large numbers; EX:{{#property:P1082}} PAGE:en.w:Earth; DATE:2015-08-02
+		// get val, lo, hi; NOTE: must handle large numbers; EX:{{#property:P1082}} PAGE:en.w:Earth; DATE:2015-08-02; NOTE: must handle decimals; PAGE:en.w:Malinao,_Aklan; DATE:2016-11-08
+		Decimal_adp val = Decimal_adp_.parse(String_.new_u8(Normalize_for_decimal(val_bry)));
 		Decimal_adp lo = Decimal_adp_.parse(String_.new_u8(Normalize_for_decimal(lo_bry)));
 		Decimal_adp hi = Decimal_adp_.parse(String_.new_u8(Normalize_for_decimal(hi_bry)));
 
@@ -81,11 +81,10 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 		}
 
 		// output unit
-		bfr.Add_byte_space();
 		int unit_qid_bgn = Bry_find_.Find_fwd(unit, Wikidata_url);
-		if (unit_qid_bgn == Bry_find_.Not_found)			// entity missing; just output unit literally
-			bfr.Add(unit);									// unit; EX: "meter"
+		if (unit_qid_bgn == Bry_find_.Not_found) {}			// entity missing; just output unit literally; EX:"unit":"1"; PAGE:en.w:Malinao,_Aklan DATE:2016-11-08																
 		else {												// entity exists; EX:"http://www.wikidata.org/entity/Q11573" (meter)
+			bfr.Add_byte_space();
 			byte[] xid = Bry_.Mid(unit, Wikidata_url.length);
 			Wdata_doc entity_doc = wdata_mgr.Doc_mgr.Get_by_xid_or_null(xid);
 			bfr.Add(entity_doc.Label_list__get_or_fallback(lang));
