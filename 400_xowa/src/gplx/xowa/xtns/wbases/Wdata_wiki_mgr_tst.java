@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.xowa.xtns.wbases.imports.*;
+import org.junit.*; import gplx.core.tests.*; import gplx.xowa.xtns.wbases.imports.*;
 public class Wdata_wiki_mgr_tst {
+	private final    Wdata_prop_val_visitor__fxt fxt = new Wdata_prop_val_visitor__fxt();
 	@Test  public void Basic() {
 		Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt().Init();
 		fxt.Init_links_add("enwiki", "Q1", "Q1_en");
@@ -53,5 +54,16 @@ public class Wdata_wiki_mgr_tst {
 		,	"}"
 		,	"</span>"
 		));
+	}
+	@Test  public void normalize_for_decimal() {
+		fxt.Test__normalize_for_decimal("1234"		, "1234");	// basic
+		fxt.Test__normalize_for_decimal("+1234"		, "1234");	// plus
+		fxt.Test__normalize_for_decimal("1,234"		, "1234");	// comma
+		fxt.Test__normalize_for_decimal("+1,234"	, "1234");	// both
+	}
+}
+class Wdata_prop_val_visitor__fxt {
+	public void Test__normalize_for_decimal(String raw, String expd) {
+		Gftest.Eq__str(expd, Wdata_prop_val_visitor.Normalize_for_decimal(Bry_.new_u8(raw)), raw);
 	}
 }

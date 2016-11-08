@@ -58,25 +58,25 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 	public void Visit_quantity(Wbase_claim_quantity itm) {Write_quantity(bfr, wdata_mgr, lang, itm.Amount(), itm.Lbound(), itm.Ubound(), itm.Unit());}
 	public static void Write_quantity(Bry_bfr bfr, Wdata_wiki_mgr wdata_mgr, Xol_lang_itm lang, byte[] val_bry, byte[] lo_bry, byte[] hi_bry, byte[] unit) {
 		// get val, lo, hi
-		long val = Bry_.To_long_or(val_bry, Byte_ascii.Comma_bry, 0, val_bry.length, 0); // NOTE: must cast to long for large numbers; EX:{{#property:P1082}} PAGE:en.w:Earth; DATE:2015-08-02
-		long lo = Bry_.To_long_or(lo_bry, Byte_ascii.Comma_bry, 0, lo_bry.length, 0);
-		long hi = Bry_.To_long_or(hi_bry, Byte_ascii.Comma_bry, 0, hi_bry.length, 0);
+		Decimal_adp val = Decimal_adp_.parse(String_.new_u8(Normalize_for_decimal(val_bry))); // NOTE: must cast to long for large numbers; EX:{{#property:P1082}} PAGE:en.w:Earth; DATE:2015-08-02
+		Decimal_adp lo = Decimal_adp_.parse(String_.new_u8(Normalize_for_decimal(lo_bry)));
+		Decimal_adp hi = Decimal_adp_.parse(String_.new_u8(Normalize_for_decimal(hi_bry)));
 
 		// fmt val
-		if (lo == val && hi == val)	// lo, hi, val are same; print val only;
-			bfr.Add(lang.Num_mgr().Format_num_by_long(val));		// amount; EX: 1,234
+		if (lo.Eq(hi) && hi.Eq(val))// lo, hi, val are same; print val only;
+			bfr.Add(lang.Num_mgr().Format_num_by_decimal(val));			// amount; EX: 1,234
 		else {
-			long lo_dif = val - lo;
-			long hi_dif = hi - val;
-			if (lo_dif == hi_dif) {	// lo_dif, hi_dif are same; print val±dif
-				bfr.Add(lang.Num_mgr().Format_num_by_long(val));	// amount;	EX: 1,234
-				bfr.Add(Bry__quantity_margin_of_error);				// symbol:	EX: ±
-				bfr.Add(lang.Num_mgr().Format_num_by_long(lo_dif));	// amount;	EX: 4
+			Decimal_adp lo_dif = val.Subtract(lo);
+			Decimal_adp hi_dif = hi.Subtract(val);
+			if (lo_dif.Eq(hi_dif)) {	// lo_dif, hi_dif are same; print val±dif
+				bfr.Add(lang.Num_mgr().Format_num_by_decimal(val));		// amount;	EX: 1,234
+				bfr.Add(Bry__quantity_margin_of_error);					// symbol:	EX: ±
+				bfr.Add(lang.Num_mgr().Format_num_by_decimal(lo_dif));	// amount;	EX: 4
 			}
 			else {					// lo_dif, hi_dif are diff; print lo - hi; this may not be what MW does
-				bfr.Add(lang.Num_mgr().Format_num_by_long(lo));		// lo;		EX: 1,230
-				bfr.Add_byte(Byte_ascii.Dash);						// dash:	EX: -
-				bfr.Add(lang.Num_mgr().Format_num_by_long(hi));		// hi;		EX: 1,238
+				bfr.Add(lang.Num_mgr().Format_num_by_decimal(lo));		// lo;		EX: 1,230
+				bfr.Add_byte(Byte_ascii.Dash);							// dash:	EX: -
+				bfr.Add(lang.Num_mgr().Format_num_by_decimal(hi));		// hi;		EX: 1,238
 			}
 		}
 
@@ -90,6 +90,34 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 			Wdata_doc entity_doc = wdata_mgr.Doc_mgr.Get_by_xid_or_null(xid);
 			bfr.Add(entity_doc.Label_list__get_or_fallback(lang));
 		}
+	}
+	public static byte[] Normalize_for_decimal(byte[] bry) { // remove leading "+" and any commas; was Bry_.To_long_or(val_bry, Byte_ascii.Comma_bry, 0, val_bry.length, 0)
+		Bry_bfr bfr = null;
+		int len = bry.length;
+		for (int i = 0; i < len; i++) {
+			byte b = bry[i];
+			switch (b) {
+				case Byte_ascii.Plus:
+					if (i == 0) {
+						if (bfr == null) bfr = Bry_bfr_.New();
+					}
+					else {
+						throw Err_.new_wo_type("invalid decimal format; plus must be at start of String", "raw", bry);
+					}
+					break;
+				case Byte_ascii.Comma:
+					if (bfr == null) {
+						bfr = Bry_bfr_.New();
+						bfr.Add_mid(bry, 0, i);
+					}
+					break;
+				default:
+					if (bfr != null)
+						bfr.Add_byte(b);
+					break;
+			}
+		}
+		return bfr == null ? bry : bfr.To_bry_and_clear();
 	}
 	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {Write_geo(bfr, wdata_mgr, lang, itm.Lat(), itm.Lng());}
 	public static void Write_geo(Bry_bfr bfr, Wdata_wiki_mgr wdata_mgr, Xol_lang_itm lang, byte[] lat, byte[] lng) {

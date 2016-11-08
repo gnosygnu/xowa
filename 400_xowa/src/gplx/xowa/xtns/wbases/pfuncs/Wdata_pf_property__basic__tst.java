@@ -81,6 +81,11 @@ public class Wdata_pf_property__basic__tst {
 		fxt.Init__docs__add(wdoc);
 		fxt.Test_parse("{{#property:p1}}", "1,234±2 meter");
 	}
+	@Test   public void Quantity__decimal() {
+		fxt.Init_links_add("enwiki", "Test_page", "q1");
+		fxt.Init__docs__add(fxt.doc_("q1", fxt.Make_claim_quantity(1, "+1234.50", "meter", "+1236.75", "+1232.25")));
+		fxt.Test_parse("{{#property:p1}}", "1,234.5±2.25 meter");
+	}
 	@Test   public void Monolingualtext() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
 		fxt.Init__docs__add(fxt.doc_("q1", fxt.Make_claim_monolingual(1, "la", "Lorem ipsum dolor sit amet")));
