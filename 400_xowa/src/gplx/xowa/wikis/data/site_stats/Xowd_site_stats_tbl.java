@@ -43,8 +43,8 @@ public class Xowd_site_stats_tbl implements Db_tbl {
 		try {
 			if (rdr.Move_next()) {
 				stats.Load_by_db
-				( rdr.Read_long(fld_good_articles)
-				, rdr.Read_long(fld_total_pages)
+				( rdr.Read_long(fld_total_pages)
+				, rdr.Read_long(fld_good_articles)
 				, rdr.Read_int(fld_images)
 				, 0, 0, 0, 0, 0);
 			}

@@ -82,7 +82,7 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 
 		// output unit
 		int unit_qid_bgn = Bry_find_.Find_fwd(unit, Wikidata_url);
-		if (unit_qid_bgn == Bry_find_.Not_found) {}			// entity missing; just output unit literally; EX:"unit":"1"; PAGE:en.w:Malinao,_Aklan DATE:2016-11-08																
+		if (unit_qid_bgn == Bry_find_.Not_found) {}			// entity missing; output nothing; EX:"unit":"1"; PAGE:en.w:Malinao,_Aklan DATE:2016-11-08																
 		else {												// entity exists; EX:"http://www.wikidata.org/entity/Q11573" (meter)
 			bfr.Add_byte_space();
 			byte[] xid = Bry_.Mid(unit, Wikidata_url.length);
