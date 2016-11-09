@@ -51,7 +51,7 @@ public class Wdata_pf_property__basic__tst {
 	@Test   public void Geodata() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
 		fxt.Init__docs__add(fxt.doc_("q1", fxt.Make_claim_geo(1, "6.789", "1.2345")));
-		fxt.Test_parse("{{#property:p1}}", "1.2345, 6.789");
+		fxt.Test_parse("{{#property:p1}}", "1° 14' 4.2&quot; E, 6° 47' 20.4&quot; N");
 	}
 	@Test   public void Quantity__plus_minus__y() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");

@@ -76,14 +76,14 @@ public class Wdata_visitor__html_wtr_tst {
 		.Init_resolved_qid(2, "Earth")
 		.Test_claim_val
 		( fxt.Wdata_fxt().Make_claim_geo(1, "51.5072222", "-0.1275", ".000027777", "123", "http://www.wikidata.org/entity/Q2")
-		, "51° 30' 26&quot; N, 0° 7' 39&quot; W (<a href='/wiki/Q2'>Earth</a>)"
+		, "0° 7' 39&quot; W, 51° 30' 26&quot; N (<a href='/wiki/Q2'>Earth</a>)"
 		);
 	}
 	@Test   public void Globecoordinate_null() {
 		fxt
 		.Test_claim_val
 		( fxt.Wdata_fxt().Make_claim_geo(1, "51.5072222", "-0.1275", ".000027777", "null", "")
-		, "51° 30' 26&quot; N, 0° 7' 39&quot; W"
+		, "0° 7' 39&quot; W, 51° 30' 26&quot; N"
 		);
 	}
 }

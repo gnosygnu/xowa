@@ -118,14 +118,30 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 		}
 		return bfr == null ? bry : bfr.To_bry_and_clear();
 	}
-	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {Write_geo(bfr, wdata_mgr, lang, itm.Lat(), itm.Lng());}
-	public static void Write_geo(Bry_bfr bfr, Wdata_wiki_mgr wdata_mgr, Xol_lang_itm lang, byte[] lat, byte[] lng) {
-		bfr.Add(lat);
-		bfr.Add(Bry__geo_dlm);
-		bfr.Add(lng);
+	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {Write_geo(Bool_.N, bfr, wdata_mgr.Hwtr_mgr().Lbl_mgr(), itm.Lat(), itm.Lng(), itm.Alt(), itm.Prc(), itm.Glb());}
+	public static void Write_geo(boolean wikidata_page, Bry_bfr bfr, Wdata_lbl_mgr lbl_mgr, byte[] lat, byte[] lng, byte[] alt, byte[] prc, byte[] glb) {
+		// get precision
+		Decimal_adp precision_frac = Bry_.Eq(prc, Object_.Bry__null) ? Decimal_adp_.One : Decimal_adp_.parse(String_.new_a7(prc));
+		int precision_int = Math_.Log10(Decimal_adp_.One.Divide(precision_frac).To_int());		// convert precision to log10 integer; EX: .00027777 -> 3600 -> 3
+
+		// build String
+		gplx.xowa.xtns.mapSources.Map_dd2dms_func.Deg_to_dms(bfr, Bool_.N, lat, precision_int);
+		bfr.Add_byte_comma().Add_byte_space();
+		gplx.xowa.xtns.mapSources.Map_dd2dms_func.Deg_to_dms(bfr, Bool_.Y, lng, precision_int);
+
+		// write globe if any
+		if (wikidata_page) {
+			byte[] glb_ttl = Wdata_lbl_itm.Extract_ttl(glb);
+			if (glb_ttl != null) {
+				byte[] glb_lbl = lbl_mgr.Get_text__ttl(glb_ttl, glb);
+				bfr.Add_byte_space().Add_byte(Byte_ascii.Paren_bgn);
+				Wdata_hwtr_mgr.Write_link_wikidata(bfr, glb_ttl, glb_lbl);
+				bfr.Add_byte(Byte_ascii.Paren_end);
+			}
+		}
 	}
+
 	private static final    byte[] Wikidata_url = Bry_.new_a7("http://www.wikidata.org/entity/");
-	private static final    byte[] Bry__geo_dlm = Bry_.new_a7(", ");
 	public void Visit_system(Wbase_claim_value itm) {}
 	public static final    byte[] Bry__quantity_margin_of_error = Bry_.new_u8("±");
 }

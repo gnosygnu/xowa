@@ -111,7 +111,7 @@ public class Scrib_lib_wikibase_tst {
 	}
 	@Test  public void RenderSnak__geo() {
 		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, wdata_fxt.Make_claim_geo(3, "3.4", "1.2"));
-		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "1.2, 3.4");
+		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "1° 12' 0&quot; E, 3° 24' 0&quot; N (<a href='/wiki/Q2'>http://www.wikidata.org/entity/Q2</a>)");
 	}
 	@Test  public void RenderSnak__monolingual() {
 		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, wdata_fxt.Make_claim_monolingual(3, "en", "abc_en"));

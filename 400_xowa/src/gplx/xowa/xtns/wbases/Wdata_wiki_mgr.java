@@ -27,8 +27,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	private final    Xoae_app app;
 	private final    Wdata_prop_val_visitor prop_val_visitor;
 	private final    Wdata_doc_parser wdoc_parser_v1 = new Wdata_doc_parser_v1(), wdoc_parser_v2 = new Wdata_doc_parser_v2();
-	private final    Object thread_lock = new Object();
-	private Wdata_hwtr_mgr hwtr_mgr;
+	private final    Object thread_lock = new Object();		
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
 	public Wdata_wiki_mgr(Xoae_app app) {
 		this.app = app;
@@ -51,6 +50,11 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		Doc_mgr.Enabled_(v);
 	}
 	public byte[] Domain() {return domain;} public void Domain_(byte[] v) {domain = v;} private byte[] domain = Bry_.new_a7("www.wikidata.org");
+	public Wdata_hwtr_mgr Hwtr_mgr() {
+		if (hwtr_mgr == null)
+			Hwtr_mgr_assert();
+		return hwtr_mgr;
+	}	private Wdata_hwtr_mgr hwtr_mgr;
 	public Xowe_wiki Wdata_wiki() {
 		if (wdata_wiki == null) {
 			synchronized (thread_lock) {	// LOCK:must synchronized b/c multiple threads may init wdata_mgr at same time;

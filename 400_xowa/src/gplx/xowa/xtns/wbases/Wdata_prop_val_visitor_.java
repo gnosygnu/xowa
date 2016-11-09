@@ -143,7 +143,7 @@ public class Wdata_prop_val_visitor_ {
 		Wdata_prop_val_visitor.Write_quantity(bfr, wdata_mgr, lang, amount, lbound, ubound, unit);
 	}
 	private static void Write_geo(Bry_bfr bfr, Wdata_wiki_mgr wdata_mgr, Xol_lang_itm lang, byte[] page_url, Keyval[] kvs) {
-		byte[] lat = null, lng = null;
+		byte[] lat = null, lng = null, alt = null, prc = null, glb = null;
 		int len = kvs.length;
 		for (int i = 0; i < len; ++i) {
 			Keyval kv = kvs[i];
@@ -151,12 +151,12 @@ public class Wdata_prop_val_visitor_ {
 			switch (val_tid) {
 				case Wbase_claim_globecoordinate_.Tid__latitude:		lat = To_bry_by_double(kv.Val()); break;
 				case Wbase_claim_globecoordinate_.Tid__longitude:		lng = To_bry_by_double(kv.Val()); break;
-				case Wbase_claim_globecoordinate_.Tid__altitude:		break;
-				case Wbase_claim_globecoordinate_.Tid__precision:		break;
-				case Wbase_claim_globecoordinate_.Tid__globe:			break;
+				case Wbase_claim_globecoordinate_.Tid__altitude:		alt = To_bry_by_str(kv.Val()); break;
+				case Wbase_claim_globecoordinate_.Tid__precision:		prc = To_bry_by_double(kv.Val()); break;
+				case Wbase_claim_globecoordinate_.Tid__globe:			glb = To_bry_by_str(kv.Val()); break;
 			}
 		}
-		Wdata_prop_val_visitor.Write_geo(bfr, wdata_mgr, lang, lat, lng);
+		Wdata_prop_val_visitor.Write_geo(Bool_.Y, bfr, wdata_mgr.Hwtr_mgr().Lbl_mgr(), lat, lng, alt, prc, glb);
 	}
 	private static void Write_langtext(Bry_bfr bfr, byte[] page_url, Keyval[] kvs) {
 		byte[] text = null;

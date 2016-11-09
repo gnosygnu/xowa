@@ -72,22 +72,7 @@ class Wdata_visitor__html_wtr implements Wbase_claim_visitor {
 	}	private static final    byte[] Time_plus_minus_spr = Bry_.new_a7(" / ");
 	public void Visit_time(Wbase_claim_time itm) {itm.Write_to_bfr(tmp_bfr, tmp_time_bfr, tmp_time_fmtr, msgs, ttl);}
 	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {
-		try {
-			Decimal_adp precision_frac = itm.Prc_as_num();						// precision is a decimal; EX: .00027777
-			int precision_int = Math_.Log10(Decimal_adp_.One.Divide(precision_frac).To_int());		// convert precision to log10 integer; EX: .00027777 -> 3600 -> 3
-			gplx.xowa.xtns.mapSources.Map_dd2dms_func.Deg_to_dms(tmp_bfr, Bool_.Y, itm.Lng(), precision_int);
-			tmp_bfr.Add_byte_comma().Add_byte_space();
-			gplx.xowa.xtns.mapSources.Map_dd2dms_func.Deg_to_dms(tmp_bfr, Bool_.N, itm.Lat(), precision_int);
-			byte[] glb_ttl = itm.Glb_ttl();
-			if (glb_ttl != null) {
-				byte[] glb_lbl = lbl_mgr.Get_text__ttl(glb_ttl, itm.Glb());
-				tmp_bfr.Add_byte_space().Add_byte(Byte_ascii.Paren_bgn);
-				Wdata_hwtr_mgr.Write_link_wikidata(tmp_bfr, glb_ttl, glb_lbl);
-				tmp_bfr.Add_byte(Byte_ascii.Paren_end);
-			}
-		} catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write globecoordinate; ttl=~{0} pid=~{1} err=~{2}", ttl, itm.Pid(), Err_.Message_gplx_full(e));
-		}
+		Wdata_prop_val_visitor.Write_geo(Bool_.Y, tmp_bfr, lbl_mgr, itm.Lat(), itm.Lng(), itm.Alt(), itm.Prc(), itm.Glb());
 	}
 	public void Visit_system(Wbase_claim_value itm) {
 		switch (itm.Snak_tid()) {
