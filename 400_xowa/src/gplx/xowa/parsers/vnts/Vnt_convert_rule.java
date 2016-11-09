@@ -27,6 +27,7 @@ class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRu
 	private Xol_vnt_regy vnt_regy; private byte[] vnt_key;
 	private Vnt_log_mgr log_mgr;
 	private byte[] rule_raw;
+	private boolean rule_parser_init = true;
 	public byte[] Display() {return display;} private byte[] display;
 	public byte[] Title() {return title;} private byte[] title;
 	public byte Action() {return action;} private byte action;
@@ -38,6 +39,10 @@ class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRu
 		rule_parser.Init(log_mgr, vnt_regy);
 	}
 	public void Parse(Xol_vnt_itm vnt_itm, byte[] src, int src_bgn, int src_end) {
+		if (rule_parser_init) {	// WORKAROUND: initialized vnt_regy on first parse; initializing during constructor doesn't work b/c vnt_regy == 0 due to load order of gfs script; DATE:2016-11-09
+			rule_parser_init = false;
+			rule_parser.Init(log_mgr, vnt_regy);
+		}
 		this.vnt_key = vnt_itm.Key();
 		this.display = this.title = null;
 		this.action = Byte_ascii.Null;
