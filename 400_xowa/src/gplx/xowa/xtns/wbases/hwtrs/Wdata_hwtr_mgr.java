@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.wbases.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apps.apis.xowa.xtns.*;
 public class Wdata_hwtr_mgr {
 	private final    Bry_bfr bfr = Bry_bfr_.Reset(Io_mgr.Len_mb);
@@ -33,10 +34,10 @@ public class Wdata_hwtr_mgr {
 	public Bry_fmtr Fmtr_main() {return fmtr_main;} private final    Bry_fmtr fmtr_main = Bry_fmtr.new_("~{oview}~{toc}~{claims}~{links}~{labels}~{descriptions}~{aliases}~{json}", "oview", "toc", "claims", "links", "labels", "descriptions", "aliases", "json");
 	public Wdata_hwtr_msgs Msgs() {return msgs;} private Wdata_hwtr_msgs msgs;
 	public Wdata_lbl_mgr Lbl_mgr() {return lbl_mgr;} private final    Wdata_lbl_mgr lbl_mgr = new Wdata_lbl_mgr();
-	public void Init_by_ctor(Xoapi_wikibase wikibase_api, Wdata_lbl_wkr lbl_wkr, Gfo_url_encoder href_encoder, Xoapi_toggle_mgr toggle_mgr, Xow_xwiki_mgr xwiki_mgr) {
+	public void Init_by_ctor(Xoapi_wikibase wikibase_api, Wdata_wiki_mgr wdata_mgr, Wdata_lbl_wkr lbl_wkr, Gfo_url_encoder href_encoder, Xoapi_toggle_mgr toggle_mgr, Xow_xwiki_mgr xwiki_mgr) {
 		lbl_mgr.Wkr_(lbl_wkr);
 		fmtr_oview.Init_by_ctor(wikibase_api, href_encoder);
-		fmtr_claim.Init_by_ctor(new Wdata_toc_data(fmtr_toc, href_encoder), toggle_mgr, lbl_mgr);
+		fmtr_claim.Init_by_ctor(wdata_mgr, new Wdata_toc_data(fmtr_toc, href_encoder), toggle_mgr, lbl_mgr);
 		fmtr_slink.Init_by_ctor(lang_sorter, toggle_mgr, lbl_mgr, href_encoder, fmtr_toc, xwiki_mgr);
 		fmtr_label.Init_by_ctor(new Wdata_toc_data(fmtr_toc, href_encoder), lang_sorter, toggle_mgr, "wikidatawiki-label", new Wdata_fmtr__langtext_row_base());
 		fmtr_descr.Init_by_ctor(new Wdata_toc_data(fmtr_toc, href_encoder), lang_sorter, toggle_mgr, "wikidatawiki-descr", new Wdata_fmtr__langtext_row_base());
@@ -45,11 +46,11 @@ public class Wdata_hwtr_mgr {
 		lang_sorter.Langs_(wikibase_api.Sort_langs());
 		Gfo_evt_mgr_.Sub_same_many(wikibase_api, lang_sorter, Xoapi_wikibase.Evt_sort_langs_changed);
 	}
-	public void Init_by_lang(Wdata_hwtr_msgs msgs) {
+	public void Init_by_lang(Xol_lang_itm lang, Wdata_hwtr_msgs msgs) {
 		this.msgs = msgs;
 		fmtr_toc.Init_by_lang(msgs);
 		fmtr_oview.Init_by_lang(lang_sorter.Langs()[0], msgs);
-		fmtr_claim.Init_by_lang(msgs);
+		fmtr_claim.Init_by_lang(lang, msgs);
 		fmtr_slink.Init_by_lang(msgs);
 		fmtr_label.Init_by_lang(msgs, msgs.Label_tbl_hdr(), msgs.Label_col_hdr());
 		fmtr_descr.Init_by_lang(msgs, msgs.Descr_tbl_hdr(), msgs.Descr_col_hdr());

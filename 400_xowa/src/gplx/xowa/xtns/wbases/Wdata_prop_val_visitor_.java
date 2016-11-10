@@ -156,7 +156,7 @@ public class Wdata_prop_val_visitor_ {
 				case Wbase_claim_globecoordinate_.Tid__globe:			glb = To_bry_by_str(kv.Val()); break;
 			}
 		}
-		Wdata_prop_val_visitor.Write_geo(Bool_.Y, bfr, wdata_mgr.Hwtr_mgr().Lbl_mgr(), lat, lng, alt, prc, glb);
+		Wdata_prop_val_visitor.Write_geo(Bool_.Y, bfr, wdata_mgr.Hwtr_mgr().Lbl_mgr(), wdata_mgr.Hwtr_mgr().Msgs(), lat, lng, alt, prc, glb);
 	}
 	private static void Write_langtext(Bry_bfr bfr, byte[] page_url, Keyval[] kvs) {
 		byte[] text = null;

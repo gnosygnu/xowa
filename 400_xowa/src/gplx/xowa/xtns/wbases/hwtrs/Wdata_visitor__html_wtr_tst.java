@@ -37,22 +37,22 @@ public class Wdata_visitor__html_wtr_tst {
 	@Test   public void Quantity_ubound_lbound() {
 		fxt
 		.Test_claim_val
-		( fxt.Wdata_fxt().Make_claim_quantity(1, "50", "units", "60", "30")
-		, "50 +10 / -20 units"
+		( fxt.Wdata_fxt().Make_claim_quantity(1, "50", "", "60", "30")
+		, "30-60"
 		);
 	}
 	@Test   public void Quantity_same() {
 		fxt
 		.Test_claim_val
-		( fxt.Wdata_fxt().Make_claim_quantity(1, "50", "units", "60", "40")
-		, "50 ±10 units"
+		( fxt.Wdata_fxt().Make_claim_quantity(1, "50", "1", "60", "40")
+		, "50±10"
 		);
 	}
 	@Test   public void Quantity_frac() {
 		fxt
 		.Test_claim_val
-		( fxt.Wdata_fxt().Make_claim_quantity(1, "+0.1234", "units", "+0.1235", "+0.1233")
-		, "+0.1234 ±0.0001 units"
+		( fxt.Wdata_fxt().Make_claim_quantity(1, "+0.1234", "1", "+0.1235", "+0.1233")
+		, "0.1234±0.0001"
 		);
 	}
 	@Test   public void Entity_qid() {

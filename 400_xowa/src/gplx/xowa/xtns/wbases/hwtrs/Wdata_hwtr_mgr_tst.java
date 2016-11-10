@@ -291,8 +291,8 @@ class Wdata_hwtr_mgr_fxt {
 			Xoapi_toggle_mgr toggle_mgr = new Xoapi_toggle_mgr();
 			wdata_fxt.Init();
 			toggle_mgr.Ctor_by_app(wdata_fxt.App());	// must init, else null error
-			doc_hwtr.Init_by_ctor(new Xoapi_wikibase(), new Wdata_lbl_wkr__test(resolved_ttls), Gfo_url_encoder_.Href, toggle_mgr, new Xow_xwiki_mgr(wdata_fxt.Wiki()));
-			doc_hwtr.Init_by_lang(msgs);				
+			doc_hwtr.Init_by_ctor(new Xoapi_wikibase(), wdata_fxt.Wdata_mgr(), new Wdata_lbl_wkr__test(resolved_ttls), Gfo_url_encoder_.Href, toggle_mgr, new Xow_xwiki_mgr(wdata_fxt.Wiki()));
+			doc_hwtr.Init_by_lang(wdata_fxt.Wiki().Lang(), msgs);				
 		}
 		resolved_ttls.Clear();
 		doc_hwtr.Lbl_mgr().Clear();
@@ -308,7 +308,7 @@ class Wdata_hwtr_mgr_fxt {
 	public void Test_claim_val(Wbase_claim_base claim, String expd) {			
 		doc_hwtr.Init_by_wdoc(wdoc_bldr.Add_claims(claim).Xto_wdoc());
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
-		Wdata_visitor__html_wtr html_wtr = new Wdata_visitor__html_wtr().Init(Bry_.Empty, tmp_bfr, doc_hwtr.Msgs(), doc_hwtr.Lbl_mgr());
+		Wdata_visitor__html_wtr html_wtr = new Wdata_visitor__html_wtr().Init(tmp_bfr, wdata_fxt.Wdata_mgr(), doc_hwtr.Msgs(), doc_hwtr.Lbl_mgr(), wdata_fxt.Wiki().Lang(), Bry_.Empty);
 		claim.Welcome(html_wtr);
 		byte[] actl = tmp_bfr.To_bry_and_clear();
 		Tfds.Eq(expd, String_.new_u8(actl));

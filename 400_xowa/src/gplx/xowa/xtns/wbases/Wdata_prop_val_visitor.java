@@ -66,11 +66,12 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 		if (lo.Eq(hi) && hi.Eq(val))// lo, hi, val are same; print val only;
 			bfr.Add(lang.Num_mgr().Format_num_by_decimal(val));			// amount; EX: 1,234
 		else {
+			Wdata_hwtr_msgs msgs = wdata_mgr.Hwtr_mgr().Msgs();
 			Decimal_adp lo_dif = val.Subtract(lo);
 			Decimal_adp hi_dif = hi.Subtract(val);
 			if (lo_dif.Eq(hi_dif)) {	// lo_dif, hi_dif are same; print val±dif
 				bfr.Add(lang.Num_mgr().Format_num_by_decimal(val));		// amount;	EX: 1,234
-				bfr.Add(Bry__quantity_margin_of_error);					// symbol:	EX: ±
+				bfr.Add(msgs.Sym_plusminus());							// symbol:	EX: ±
 				bfr.Add(lang.Num_mgr().Format_num_by_decimal(lo_dif));	// amount;	EX: 4
 			}
 			else {					// lo_dif, hi_dif are diff; print lo - hi; this may not be what MW does
@@ -118,8 +119,8 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 		}
 		return bfr == null ? bry : bfr.To_bry_and_clear();
 	}
-	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {Write_geo(Bool_.N, bfr, wdata_mgr.Hwtr_mgr().Lbl_mgr(), itm.Lat(), itm.Lng(), itm.Alt(), itm.Prc(), itm.Glb());}
-	public static void Write_geo(boolean wikidata_page, Bry_bfr bfr, Wdata_lbl_mgr lbl_mgr, byte[] lat, byte[] lng, byte[] alt, byte[] prc, byte[] glb) {
+	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {Write_geo(Bool_.N, bfr, wdata_mgr.Hwtr_mgr().Lbl_mgr(), msgs, itm.Lat(), itm.Lng(), itm.Alt(), itm.Prc(), itm.Glb());}
+	public static void Write_geo(boolean wikidata_page, Bry_bfr bfr, Wdata_lbl_mgr lbl_mgr, Wdata_hwtr_msgs msgs, byte[] lat, byte[] lng, byte[] alt, byte[] prc, byte[] glb) {
 		// get precision
 		Decimal_adp precision_frac = Bry_.Eq(prc, Object_.Bry__null) ? Decimal_adp_.One : Decimal_adp_.parse(String_.new_a7(prc));
 		int precision_int = Math_.Log10(Decimal_adp_.One.Divide(precision_frac).To_int());		// convert precision to log10 integer; EX: .00027777 -> 3600 -> 3
@@ -143,5 +144,4 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 
 	private static final    byte[] Wikidata_url = Bry_.new_a7("http://www.wikidata.org/entity/");
 	public void Visit_system(Wbase_claim_value itm) {}
-	public static final    byte[] Bry__quantity_margin_of_error = Bry_.new_u8("±");
 }

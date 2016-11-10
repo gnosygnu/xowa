@@ -17,12 +17,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wbases.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
 import gplx.core.brys.fmtrs.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 class Wdata_visitor__html_wtr implements Wbase_claim_visitor {
-	private byte[] ttl; private Bry_bfr tmp_bfr; private Wdata_hwtr_msgs msgs; private Wdata_lbl_mgr lbl_mgr;
+	private Wdata_wiki_mgr wdata_mgr; private Wdata_hwtr_msgs msgs; private Wdata_lbl_mgr lbl_mgr;
+	private Xol_lang_itm lang;
+	private byte[] ttl; private Bry_bfr tmp_bfr;
 	private final    Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_(); private final    Bry_bfr tmp_time_bfr = Bry_bfr_.New_w_size(32);
-	public Wdata_visitor__html_wtr Init(byte[] ttl, Bry_bfr tmp_bfr, Wdata_hwtr_msgs msgs, Wdata_lbl_mgr lbl_mgr) {
-		this.ttl = ttl; this.tmp_bfr = tmp_bfr; this.msgs = msgs; this.lbl_mgr = lbl_mgr;
+	public Wdata_visitor__html_wtr Init(Bry_bfr tmp_bfr, Wdata_wiki_mgr wdata_mgr, Wdata_hwtr_msgs msgs, Wdata_lbl_mgr lbl_mgr, Xol_lang_itm lang, byte[] ttl) {
+		this.wdata_mgr = wdata_mgr; this.msgs = msgs; this.lbl_mgr = lbl_mgr; this.lang = lang;
+		this.tmp_bfr = tmp_bfr; this.ttl = ttl;
 		return this;
 	}
 	public void Visit_str(Wbase_claim_string itm) {
@@ -42,41 +46,17 @@ class Wdata_visitor__html_wtr implements Wbase_claim_visitor {
 		tmp_bfr.Add_byte(Byte_ascii.Space).Add_byte(Byte_ascii.Brack_bgn).Add(itm.Lang()).Add_byte(Byte_ascii.Brack_end);
 	}
 	public void Visit_quantity(Wbase_claim_quantity itm) {
-		try {
-			Decimal_adp val = itm.Amount_as_num();
-			Decimal_adp hi = itm.Ubound_as_num();
-			Decimal_adp lo = itm.Lbound_as_num();
-			Decimal_adp hi_diff = hi.Subtract(val);
-			Decimal_adp lo_diff = val.Subtract(lo);
-			float hi_diff_val = (float)hi_diff.To_double();
-			float lo_diff_val = (float)lo_diff.To_double();
-			tmp_bfr.Add(itm.Amount()).Add_byte_space();
-			if (hi_diff.Eq(lo_diff)) {		// delta is same in both directions; EX: val=50 hi=60 lo=40 -> hi_diff == lo_diff == 10
-				if (hi_diff_val != 0)		// skip if 0
-					tmp_bfr.Add(msgs.Sym_plusminus()).Add_str_a7(hi_diff.To_str());
-			}
-			else {							// delta is diff in both directions; EX: val=50 hi=60 lo=30 -> hi_diff == 10, lo_diff == 20
-				if (hi_diff_val != 0)		// skip if 0
-					tmp_bfr.Add(msgs.Sym_plus()).Add_str_a7(hi_diff.To_str());
-				if (lo_diff_val != 0) {		// skip if 0
-					if (hi_diff_val != 0) tmp_bfr.Add(Time_plus_minus_spr);
-					tmp_bfr.Add(msgs.Sym_minus()).Add_str_a7(lo_diff.To_str());
-				}
-			}
-			byte[] unit = itm.Unit();
-			if (!Bry_.Eq(unit, Wbase_claim_quantity.Unit_1))
-				tmp_bfr.Add_byte_space().Add(unit);				
-		} catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write quantity; ttl=~{0} pid=~{1} err=~{2}", ttl, itm.Pid(), Err_.Message_gplx_full(e));
-		}
-	}	private static final    byte[] Time_plus_minus_spr = Bry_.new_a7(" / ");
-	public void Visit_time(Wbase_claim_time itm) {itm.Write_to_bfr(tmp_bfr, tmp_time_bfr, tmp_time_fmtr, msgs, ttl);}
+		Wdata_prop_val_visitor.Write_quantity(tmp_bfr, wdata_mgr, lang, itm.Amount(), itm.Lbound(), itm.Ubound(), itm.Unit());
+	}
 	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {
-		Wdata_prop_val_visitor.Write_geo(Bool_.Y, tmp_bfr, lbl_mgr, itm.Lat(), itm.Lng(), itm.Alt(), itm.Prc(), itm.Glb());
+		Wdata_prop_val_visitor.Write_geo(Bool_.Y, tmp_bfr, lbl_mgr, msgs, itm.Lat(), itm.Lng(), itm.Alt(), itm.Prc(), itm.Glb());
+	}
+	public void Visit_time(Wbase_claim_time itm) {
+		itm.Write_to_bfr(tmp_bfr, tmp_time_bfr, tmp_time_fmtr, msgs, ttl);
 	}
 	public void Visit_system(Wbase_claim_value itm) {
 		switch (itm.Snak_tid()) {
-			case Wbase_claim_value_type_.Tid__somevalue:		tmp_bfr.Add(msgs.Val_tid_somevalue()); break;
+			case Wbase_claim_value_type_.Tid__somevalue:	tmp_bfr.Add(msgs.Val_tid_somevalue()); break;
 			case Wbase_claim_value_type_.Tid__novalue:		tmp_bfr.Add(msgs.Val_tid_novalue());   break;
 		}
 	}

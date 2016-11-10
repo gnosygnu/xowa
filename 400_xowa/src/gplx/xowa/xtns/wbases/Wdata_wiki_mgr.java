@@ -136,7 +136,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		Xoapi_toggle_mgr toggle_mgr = app.Api_root().Html().Page().Toggle_mgr();
 		Xoapi_wikibase wikibase_api = app.Api_root().Xtns().Wikibase();
 		hwtr_mgr = new Wdata_hwtr_mgr();
-		hwtr_mgr.Init_by_ctor(wikibase_api, new Wdata_lbl_wkr_wiki(wikibase_api, this), gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, toggle_mgr, app.Usere().Wiki().Xwiki_mgr());
+		hwtr_mgr.Init_by_ctor(wikibase_api, this, new Wdata_lbl_wkr_wiki(wikibase_api, this), gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, toggle_mgr, app.Usere().Wiki().Xwiki_mgr());
 		this.Hwtr_msgs_make();
 		Gfo_evt_mgr_.Sub_same_many(app.Usere(), this, Xoue_user.Evt_lang_changed);
 	}
@@ -146,7 +146,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		Xowe_wiki cur_wiki = this.Wdata_wiki();			
 		cur_wiki.Xtn_mgr().Xtn_wikibase().Load_msgs(cur_wiki, new_lang);
 		Wdata_hwtr_msgs hwtr_msgs = Wdata_hwtr_msgs.new_(cur_wiki.Msg_mgr());
-		hwtr_mgr.Init_by_lang(hwtr_msgs);
+		hwtr_mgr.Init_by_lang(new_lang, hwtr_msgs);
 	}
 	public static void Write_json_as_html(Json_parser jdoc_parser, Bry_bfr bfr, byte[] data_raw) {
 		bfr.Add(Xoh_consts.Span_bgn_open).Add(Xoh_consts.Id_atr).Add(Html_json_id).Add(Xoh_consts.__end_quote);	// <span id="xowa-wikidata-json">

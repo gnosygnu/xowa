@@ -40,8 +40,9 @@ public class Wdata_wiki_mgr_fxt {
 			parser_fxt.Reset();
 		}
 		return this;
-	}	private Xoae_app app; private Xowe_wiki wiki; private Wdata_wiki_mgr wdata_mgr; private Wdata_doc_bldr wdoc_bldr;
+	}	private Xoae_app app; private Xowe_wiki wiki; private Wdata_doc_bldr wdoc_bldr;
 	public Xoae_app App() {return app;}
+	public Wdata_wiki_mgr Wdata_mgr() {return wdata_mgr;} private Wdata_wiki_mgr wdata_mgr; 
 	public Xop_fxt Parser_fxt() {return parser_fxt;} private Xop_fxt parser_fxt;
 	public void Init_lang_fallbacks(String... fallbacks) {
 		wiki.Lang().Fallback_bry_(Bry_.new_a7(String_.Concat_with_str(",", fallbacks)));
