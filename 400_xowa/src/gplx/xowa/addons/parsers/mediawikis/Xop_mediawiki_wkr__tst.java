@@ -20,9 +20,16 @@ import org.junit.*; import gplx.core.tests.*;
 public class Xop_mediawiki_wkr__tst {
 	private final    Xop_mediawiki_wkr__fxt fxt = new Xop_mediawiki_wkr__fxt();
 	@Test 	public void Basic()	{
-		fxt.Init__wkr("en.wikipedia.org");
+		fxt.Init__wkr("en.wikipedia.org", null);
 		fxt.Test__parse("Page_1", "''{{PAGENAME}}''"
 		, "<p><i>Page 1</i>"
+		, "</p>"
+		);
+	}
+	@Test 	public void Template()	{
+		fxt.Init__wkr("en.wikipedia.org", new Xop_mediawiki_loader__mock());
+		fxt.Test__parse("Page_1", "{{bold}}"
+		, "<p><b>bold</b>"
 		, "</p>"
 		);
 	}
@@ -30,10 +37,16 @@ public class Xop_mediawiki_wkr__tst {
 class Xop_mediawiki_wkr__fxt {
 	private final    Xop_mediawiki_mgr mgr = new Xop_mediawiki_mgr("mem/xowa/wiki/en.wikipedia.org/");
 	private Xop_mediawiki_wkr wkr;
-	public void Init__wkr(String wiki) {
-		this.wkr = mgr.Make(wiki);
+	public void Init__wkr(String wiki, Xop_mediawiki_loader cbk) {
+		this.wkr = mgr.Make(wiki, cbk);
 	}
 	public void Test__parse(String page, String wtxt, String... expd) {
 		Gftest.Eq__ary__lines(String_.Concat_lines_nl_skip_last(expd), wkr.Parse(page, wtxt), "parse failed; wtxt={0}", wtxt);
+	}
+}
+class Xop_mediawiki_loader__mock implements Xop_mediawiki_loader {
+	public String LoadWikitext(String page) {
+		if (String_.Eq(page, "Template:Bold"))	return "'''bold'''";
+		else									return "text";
 	}
 }

@@ -19,7 +19,10 @@ package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.x
 public class Xow_page_cache {
 	private final    Xowe_wiki wiki;
 	private final    Hash_adp_bry cache = Hash_adp_bry.cs();	// NOTE: wiki titles are not case-sensitive when ns is "1st-letter" (EX: w:earth an w:Earth); in these cases, two entries will be stored
+	private Xow_page_cache_wkr load_wkr;
 	public Xow_page_cache(Xowe_wiki wiki) {this.wiki = wiki;}
+	public Xow_page_cache_wkr Load_wkr() {return load_wkr;}
+	public void Load_wkr_(Xow_page_cache_wkr v) {this.load_wkr = v;}
 	public byte[] Get_or_load_as_src(Xoa_ttl ttl) {
 		Xow_page_cache_itm rv = Get_or_load_as_itm(ttl);
 		return rv == null ? null : rv.Wtxt__direct();
@@ -30,20 +33,41 @@ public class Xow_page_cache {
 	public Xow_page_cache_itm Get_or_load_as_itm(Xoa_ttl ttl) {
 		byte[] ttl_full_db = ttl.Full_db();
 		Xow_page_cache_itm rv = (Xow_page_cache_itm)cache.Get_by_bry(ttl_full_db);
-		if		(rv == Xow_page_cache_itm.Missing) return null;
+		if		(rv == Xow_page_cache_itm.Missing) {
+			return null;
+		}
 		else if (rv == null) {
+			return Load_page(ttl, ttl_full_db);
+		}
+		return rv;
+	}
+	private Xow_page_cache_itm Load_page(Xoa_ttl ttl, byte[] ttl_full_db) {
+		Xow_page_cache_itm rv = null;
+		Xoa_ttl page_ttl = ttl;
+		boolean page_exists = false;
+		byte[] page_text = null;
+		byte[] page_redirect_from = null;
+		if (load_wkr != null) {
+			page_text = load_wkr.Get_page_or_null(ttl_full_db);
+			page_exists = page_text != null;
+		}
+		if (page_text == null) {
 			Xoae_page page = wiki.Data_mgr().Load_page_by_ttl(ttl);	// NOTE: do not call Db_mgr.Load_page; need to handle redirects
-			if (page.Db().Page().Exists()) {
-				rv = new Xow_page_cache_itm(page.Ttl(), page.Db().Text().Text_bry(), page.Redirect_trail().Itms__get_wtxt_at_0th_or_null());
-				synchronized (this) {	// LOCK:high-usage;DATE:2016-07-14
-					cache.Add_bry_obj(ttl_full_db, rv);
-				}
+			page_ttl = page.Ttl();
+			page_text = page.Db().Text().Text_bry();
+			page_exists = page.Db().Page().Exists();
+			page_redirect_from = page.Redirect_trail().Itms__get_wtxt_at_0th_or_null();
+		}
+		if (page_exists) {
+			rv = new Xow_page_cache_itm(page_ttl, page_text, page_redirect_from);
+			synchronized (this) {	// LOCK:high-usage;DATE:2016-07-14
+				cache.Add_bry_obj(ttl_full_db, rv);
 			}
-			else {
-				synchronized (this) {	// LOCK:high-usage;DATE:2016-07-14
-					cache.Add_bry_obj(ttl_full_db, Xow_page_cache_itm.Missing);
-					rv = null;
-				}
+		}
+		else {
+			synchronized (this) {	// LOCK:high-usage;DATE:2016-07-14
+				cache.Add_bry_obj(ttl_full_db, Xow_page_cache_itm.Missing);
+				rv = null;
 			}
 		}
 		return rv;

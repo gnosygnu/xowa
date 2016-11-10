@@ -17,11 +17,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.parsers.mediawikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.parsers.*;
 import gplx.xowa.wikis.*; import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.xowa.wikis.caches.*;
 public class Xop_mediawiki_wkr {
 	private final    Xowe_wiki wiki;
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	public Xop_mediawiki_wkr(Xowe_wiki wiki) {
+	public Xop_mediawiki_wkr(Xowe_wiki wiki, Xop_mediawiki_loader loader) {
 		this.wiki = wiki;
+		this.Loader_(loader);
+	}
+	public void Loader_(Xop_mediawiki_loader loader) {
+		if (loader != null)
+			wiki.Cache_mgr().Page_cache().Load_wkr_(new Xow_page_cache_wkr__embeddable(loader));
 	}
 	public String Parse(String page, String wikitext) {
 		Xoa_ttl ttl = wiki.Ttl_parse(Bry_.new_u8(page));
@@ -36,7 +42,6 @@ public class Xop_mediawiki_wkr {
 		Xop_ctx pctx = parser_mgr.Ctx();
 		pctx.Clear_all();
 		parser_mgr.Parse(wpg, true);
-
 
 		// write to html
 		boolean is_wikitext = Xow_page_tid.Identify(wpg.Wiki().Domain_tid(), ttl.Ns().Id(), ttl.Page_db()) == Xow_page_tid.Tid_wikitext;

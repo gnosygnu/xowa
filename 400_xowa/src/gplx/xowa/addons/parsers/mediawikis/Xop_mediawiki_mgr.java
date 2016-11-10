@@ -32,8 +32,9 @@ public class Xop_mediawiki_mgr {
 		, gplx.xowa.apps.boots.Xoa_cmd_arg_mgr.Bin_dir_name()
 		);
 	}
-	public Xop_mediawiki_wkr Make(String domain_str) {
+	public Xop_mediawiki_wkr Make(String domain_str) {return Make(domain_str, null);}
+	public Xop_mediawiki_wkr Make(String domain_str, Xop_mediawiki_loader loader) {
 		Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Make(Bry_.new_u8(domain_str), app.Fsys_mgr().Wiki_dir());
-		return new Xop_mediawiki_wkr(wiki);
+		return new Xop_mediawiki_wkr(wiki, loader);
 	}
 }
