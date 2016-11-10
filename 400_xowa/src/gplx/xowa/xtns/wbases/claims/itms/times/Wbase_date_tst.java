@@ -45,7 +45,7 @@ public class Wbase_date_tst {
 		fxt.Test_xto_str("+00000123456-01-01T00:00:00Z",  4, "in 100,000 years");
 	}
 	@Test   public void Xto_str_julian() {
-		fxt.Init_calendar_is_julian_(Bool_.Y).Test_xto_str("+00000001600-01-02T00:00:00Z", Wbase_date.Fmt_ymd, "18 Jan 1600<sup>jul</sup>");
+		fxt.Init_calendar_is_julian_(Bool_.Y).Test_xto_str("+00000001600-01-02T00:00:00Z", Wbase_date.Fmt_ymd, "2 Jan 1600");
 	}
 	@Test   public void Xto_str_before_after() {
 		String date = "+00000002001-02-03T04:05:06Z";

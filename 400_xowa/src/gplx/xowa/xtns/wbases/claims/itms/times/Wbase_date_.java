@@ -36,22 +36,23 @@ public class Wbase_date_ {
 		return new Wbase_date(year * year_sign, month, day, hour, minute, second, precision, before, after, calendar_is_julian);
 	}
 	public static Wbase_date To_julian(Wbase_date date) {
-		int a = (int)Math_.Floor((14 - date.Month() / 12));
-		int y = (int)date.Year() + 4800 - a;
-		int m = date.Month() + 12 * a - 3;
-		int julian = date.Day() + (int)Math_.Floor((153 * m + 2) / 5) + 365 * y + (int)Math_.Floor(y / 4) - (int)Math_.Floor(y / 100) + (int)Math_.Floor(y / 400) - 32045;
-		int c = julian + 32082;
-		int d = (int)Math_.Floor((4 * c + 3) / 1461);
-		int e = c - (int)Math_.Floor((1461 * d) / 4);
-		int n = (int)Math_.Floor((5 * e + 2) / 153);
-		int new_y = d - 4800 + (int)Math_.Floor(n / 10);
-		int new_m = n + 3 - 12 * (int)Math_.Floor(n / 10);
-		int new_d = e - (int)Math_.Floor((153 * n + 2) / 5) + 1;
+		long a = (long)Math_.Floor((14 - date.Month() / 12));
+		long y = date.Year() + 4800 - a;
+		long m = date.Month() + 12 * a - 3;
+		long julian = date.Day() + (long)Math_.Floor((153 * m + 2) / 5) + 365 * y + (long)Math_.Floor(y / 4) - (long)Math_.Floor(y / 100) + (long)Math_.Floor(y / 400) - 32045;
+		long c = julian + 32082;
+		long d = (long)Math_.Floor((4 * c + 3) / 1461);
+		long e = c - (long)Math_.Floor((1461 * d) / 4);
+		long n = (long)Math_.Floor((5 * e + 2) / 153);
+		long new_y = d - 4800 + (long)Math_.Floor(n / 10);
+		int new_m = (int)(n + 3 - 12 * (long)Math_.Floor(n / 10));
+		int new_d = (int)(e - (long)Math_.Floor((153 * n + 2) / 5) + 1);
 		return new Wbase_date(new_y, new_m, new_d, date.Hour(), date.Minute(), date.Second(), date.Precision(), date.Before(), date.After(), date.Calendar_is_julian());
 	}
 	public static void To_bfr(Bry_bfr bfr, Bry_fmtr tmp_fmtr, Bry_bfr tmp_bfr, Wdata_hwtr_msgs msgs, Wbase_date date) {
-		boolean calendar_is_julian = date.Calendar_is_julian();
-		if (calendar_is_julian) date = To_julian(date);
+		// TOMBSTONE: use "actual" date; do not do conversion to julian; DATE:2016-11-10
+		// boolean calendar_is_julian = date.Calendar_is_julian();
+		// if (calendar_is_julian) date = To_julian(date);
 		long year = date.Year();
 		int months_bgn = msgs.Month_bgn_idx();
 		byte[][] months = msgs.Ary();
@@ -110,8 +111,9 @@ public class Wbase_date_ {
 				}
 				break;
 		}
-		if (calendar_is_julian)
-			bfr.Add(msgs.Time_julian());
+		// TOMBSTONE: use "actual" date; do not do conversion to julian; DATE:2016-11-10
+		// if (calendar_is_julian)
+		// 	bfr.Add(msgs.Time_julian());
 		Xto_str_beforeafter(bfr, tmp_fmtr, tmp_bfr, msgs, date);
 	}
 	private static void Xto_str_beforeafter(Bry_bfr bfr, Bry_fmtr tmp_fmtr, Bry_bfr tmp_bfr, Wdata_hwtr_msgs msgs, Wbase_date date) {

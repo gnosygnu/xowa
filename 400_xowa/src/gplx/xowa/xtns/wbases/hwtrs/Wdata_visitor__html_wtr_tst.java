@@ -38,7 +38,7 @@ public class Wdata_visitor__html_wtr_tst {
 		fxt
 		.Test_claim_val
 		( fxt.Wdata_fxt().Make_claim_time(1, "2001-02-03 04:05:06", Bry_.Empty, Bry_.new_a7("http://www.wikidata.org/entity/Q1985786"))
-		, "4:05:06 25 Feb 2001<sup>jul</sup>"	// NOTE: "Feb 3" is "Feb 25" in julian time
+		, "4:05:06 3 Feb 2001"
 		);
 	}
 	@Test   public void Quantity_ubound_lbound() {
