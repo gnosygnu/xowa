@@ -29,7 +29,7 @@ public class Wbase_claim_time extends Wbase_claim_base {
 	public byte[]			Precision() {return precision;} private final    byte[] precision;
 	public byte[]			Calendar() {return calendar;} private final    byte[] calendar;
 	public byte[]			Calendar_ttl() {return calendar_ttl;} private byte[] calendar_ttl;
-	public boolean				Calendar_is_julian() {return Bry_.Eq(calendar, Calendar_julian);}
+	public boolean			Calendar_is_julian() {return Bry_.Eq(calendar, Calendar_julian);}
 
 	public void Calendar_ttl_(byte[] v) {calendar_ttl = v;} 
 
@@ -71,15 +71,8 @@ public class Wbase_claim_time extends Wbase_claim_base {
 	public void Write_to_bfr(Bry_bfr bfr, Bry_bfr tmp_time_bfr, Bry_fmtr tmp_time_fmtr, Wdata_hwtr_msgs msgs, byte[] ttl) {
 		try {
 			Wbase_date date = this.Time_as_date();
-			boolean calendar_is_julian = this.Calendar_is_julian();
-			byte[] calendar_display = null;
-			if (calendar_is_julian) {
-				date = Wbase_date_.To_julian(date);
-				calendar_display = msgs.Time_julian();
-			}
+			if (this.Calendar_is_julian()) date = Wbase_date_.To_julian(date);
 			Wbase_date_.To_bfr(bfr, tmp_time_fmtr, tmp_time_bfr, msgs, date);
-			if (calendar_display != null)
-				bfr.Add_byte_space().Add(calendar_display);
 		} catch (Exception e) {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to write time; ttl=~{0} pid=~{1} err=~{2}", ttl, this.Pid(), Err_.Message_gplx_log(e));
 		}
@@ -87,14 +80,8 @@ public class Wbase_claim_time extends Wbase_claim_base {
 	public static void Write_to_bfr(Bry_bfr bfr, Bry_bfr tmp_time_bfr, Bry_fmtr tmp_time_fmtr, Wdata_hwtr_msgs msgs
 		, byte[] ttl, byte[] pid, Wbase_date date, boolean calendar_is_julian) {
 		try {
-			byte[] calendar_display = null;
-			if (calendar_is_julian) {
-				date = Wbase_date_.To_julian(date);
-				calendar_display = msgs.Time_julian();
-			}
+			if (calendar_is_julian) date = Wbase_date_.To_julian(date);
 			Wbase_date_.To_bfr(bfr, tmp_time_fmtr, tmp_time_bfr, msgs, date);
-			if (calendar_display != null)
-				bfr.Add_byte_space().Add(calendar_display);
 		} catch (Exception e) {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to write time; ttl=~{0} pid=~{1} err=~{2}", ttl, pid, Err_.Message_gplx_log(e));
 		}
