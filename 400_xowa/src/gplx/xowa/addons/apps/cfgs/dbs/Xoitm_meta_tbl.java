@@ -25,10 +25,10 @@ public class Xoitm_meta_tbl implements Db_tbl {
 		this.conn = conn;
 		this.tbl_name				= "cfg_itm_meta";
 		this.fld__itm_id			= flds.Add_int("itm_id");					// EX: '2'
+		this.fld__itm_key			= flds.Add_str("itm_key", 255);				// EX: 'cfg_1'
 		this.fld__itm_scope_id		= flds.Add_int("itm_scope_id");				// EX: '1'; ENUM: Xoitm_scope_tid
 		this.fld__itm_gui_type		= flds.Add_int("itm_gui_type");				// EX: '1'; ENUM: Xoitm_gui_tid
-		this.fld__itm_gui_args		= flds.Add_int("itm_gui_args");				// EX: '1,40' (numeric); '255' (textbox); 'enum_name' (combo); etc..
-		this.fld__itm_key			= flds.Add_str("itm_key", 255);				// EX: 'cfg_1'
+		this.fld__itm_gui_args		= flds.Add_str("itm_gui_args", 255);		// EX: '1,40' (numeric); '255' (textbox); 'enum_name' (combo); etc..
 		this.fld__itm_dflt			= flds.Add_str("itm_dflt", 4096);			// EX: 'abc'
 		conn.Rls_reg(this);
 	}

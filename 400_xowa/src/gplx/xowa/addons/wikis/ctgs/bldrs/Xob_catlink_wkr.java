@@ -59,8 +59,9 @@ class Xob_catlink_wkr {
 
 				// insert; notify;
 				cat_link_tbl.Insert_cmd_by_batch(page_id_prv, rdr.Read_int("page_id"), rdr.Read_byte("cl_type_id"), rdr.Read_long("cl_timestamp"), sortkey, sortkey_prefix);
-				if (++rows % 100000 == 0)
-					Gfo_usr_dlg_.Instance.Prog_many("", "", "inserting cat_link row: ~{0}", Int_.To_str_fmt(rows, "#,##0"));
+				if (++rows % 100000 == 0) {
+					Gfo_usr_dlg_.Instance.Plog_many("", "", "inserting cat_link row: ~{0}", Int_.To_str_fmt(rows, "#,##0"));
+				}
 			}
 		}
 		finally {rdr.Rls();}

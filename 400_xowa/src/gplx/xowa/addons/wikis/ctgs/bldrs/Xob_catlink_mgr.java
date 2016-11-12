@@ -79,7 +79,12 @@ class Xob_catlink_mgr {
 		tmp_link_tbl.Create_idx__to_ttl();	// index will be needed for join
 		Db_conn page_conn = wiki.Data__core_mgr().Db__core().Conn();
 		Xob_catlink_wkr wkr = new Xob_catlink_wkr();
-		wkr.Make_catlink_dbs(wiki, tmp_conn, page_conn, cat_core_conn);
+		try {
+			wkr.Make_catlink_dbs(wiki, tmp_conn, page_conn, cat_core_conn);
+		} catch (Exception e) {
+			Gfo_usr_dlg_.Instance.Log_many("", "", "error while generating catlink dbs; ~{0}", Err_.Message_gplx_log(e));
+			throw Err_.new_wo_type("error while generating catlink dbs", "err", Err_.Message_gplx_log(e));
+		}
 
 		// make catcore_tbl; update page!cat_db_id
 		wkr.Make_catcore_tbl(wiki, tmp_conn, page_conn, cat_core_conn);
