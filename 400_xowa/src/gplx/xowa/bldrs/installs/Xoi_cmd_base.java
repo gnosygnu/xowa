@@ -67,11 +67,11 @@ abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 	}	private static final String Invk_process_async = "run_async", Invk_owner = "owner";
 }
 class Xoi_cmd_category2_page_props extends Xoi_cmd_wiki_download {	public Xoi_cmd_category2_page_props(Xoi_setup_mgr install_mgr, String wiki_key, String dump_date) {this.Ctor_download_(install_mgr, wiki_key, dump_date, Xowm_dump_type_.Str__page_props);}
-	@Override public String Download_file_ext() {return ".sql.gz2";}
+	@Override public String Download_file_ext() {return ".sql.gz";}
 	public static final String KEY_category2 = "wiki.category2.download.page_props";
 }
 class Xoi_cmd_category2_categorylinks extends Xoi_cmd_wiki_download {	public Xoi_cmd_category2_categorylinks(Xoi_setup_mgr install_mgr, String wiki_key, String dump_date) {this.Ctor_download_(install_mgr, wiki_key, dump_date, Xowm_dump_type_.Str__categorylinks);}
-	@Override public String Download_file_ext() {return ".sql.gz2";}
+	@Override public String Download_file_ext() {return ".sql.gz";}
 	public static final String KEY_category2 = "wiki.category2.download.categorylinks";
 }
 class Xoi_cmd_category2_build extends Xoi_cmd_base {
