@@ -150,7 +150,8 @@ public class Xog_tab_itm implements Gfo_invk {
 		try {
 			if (page.Tab_data().Cancel_show()) return;	// Special:Search canceled show; NOTE: must be inside try b/c finally handles thread
 			wiki.Parser_mgr().Ctx().Page_(page);
-			if (page.Db().Page().Exists_n()) {
+			if (	page.Db().Page().Exists_n() 
+				&& !page.Commons_mgr().Xowa_mockup()) {	// do not enter "missing" section if File_mockup; EX:en.wikipedia.org/wiki/File:Protoplanetary-disk.jpg DATE:2016-11-13
 				if (wiki.Db_mgr().Save_mgr().Create_enabled()) {
 					page = Xoae_page.New_edit(wiki, ttl);
 					view_mode = Xopg_page_.Tid_edit;

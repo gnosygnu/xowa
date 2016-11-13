@@ -103,29 +103,29 @@ class Xoh_ns_file_page_mgr_fxt {
 		wkr.Bld_html(wiki, bfr, file, ttl, opt, Bry_.To_a7_bry(html_file_size, 0));	// TEST: must pass in elem_val b/c test only uses 2nd Bld_html while app uses 1st
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
 	}
-	public static final    String Hdr = String_.Concat_lines_nl_skip_last
-		(	"<ul id=\"filetoc\">"
-		,	"  <li>"
-		,	"    <a href=\"#file\">"
-		,	"      File"
-		,	"    </a>"
-		,	"  </li>"
-		,	"  <li>"
-		,	"    <a href=\"#filehistory\">"
-		,	"      File history"
-		,	"    </a>"
-		,	"  </li>"
-		,	"  <li>"
-		,	"    <a href=\"#filelinks\">"
-		,	"      File usage on Commons"
-		,	"    </a>"
-		,	"  </li>"
-		,	"  <li>"
-		,	"    <a href=\"#globalusage\">"
-		,	"      File usage on other wikis"
-		,	"    </a>"
-		,	"  </li>"
-		,	"</ul>"
-	);
+	public static final    String Hdr = String_.Concat_lines_nl_skip_last("<br/>");
+//		(	"<ul id=\"filetoc\">"
+//		,	"  <li>"
+//		,	"    <a href=\"#file\">"
+//		,	"      File"
+//		,	"    </a>"
+//		,	"  </li>"
+//		,	"  <li>"
+//		,	"    <a href=\"#filehistory\">"
+//		,	"      File history"
+//		,	"    </a>"
+//		,	"  </li>"
+//		,	"  <li>"
+//		,	"    <a href=\"#filelinks\">"
+//		,	"      File usage on Commons"
+//		,	"    </a>"
+//		,	"  </li>"
+//		,	"  <li>"
+//		,	"    <a href=\"#globalusage\">"
+//		,	"      File usage on other wikis"
+//		,	"    </a>"
+//		,	"  </li>"
+//		,	"</ul>"
+//		);
 }
 
