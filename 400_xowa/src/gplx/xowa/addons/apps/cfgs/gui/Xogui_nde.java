@@ -16,28 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-public class Xogui_grp implements Xogui_nde {
-	public Xogui_grp(int id, int sort, String key) {
-		this.id = id;
-		this.sort = sort;
-		this.key = key;
-	}
-	public int Id() {return id;} private final    int id;
-	public int Sort() {return sort;} private final    int sort;
-
-	public String Key() {return key;} private String key;
-	
-	public String Lang() {return lang;} private String lang;
-	public String Name() {return name;} private String name;
-	public String Help() {return help;} private String help;
-	public void Load_by_i18n(String lang, String name, String help) {
-		this.lang = lang;
-		this.name = name;
-		this.help = help;
-	}
-
-	public void Grps__add(Xogui_grp grp) {
-	}
-	public void Itms__add(Xogui_itm itm) {
-	}
+public interface Xogui_nde {
+	int Id();
+	void Load_by_i18n(String lang, String name, String help);
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-public class Xogui_itm {
+public class Xogui_itm implements Xogui_nde {
 	public Xogui_itm(int id, int sort) {
 		this.id = id;
 		this.sort = sort;
@@ -53,5 +53,10 @@ public class Xogui_itm {
 		this.ctx = ctx;
 		this.val = val;
 		this.date = date;
+	}
+	public void Set_data_by_dflt() {
+		this.ctx = String_.Empty;
+		this.val = dflt;
+		this.date = String_.Empty;
 	}
 }

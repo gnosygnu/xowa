@@ -23,11 +23,11 @@ public class Xogui_mgr {
 	public Xogui_mgr(Xocfg_db_mgr db_mgr) {
 		this.db_mgr = db_mgr;
 	}
-	public Xogui_grp Get_by_grp(String grp_key, String lang) {
+	public Xogui_grp Get_by_grp(String grp_key, String ctx, String lang) {
 		// create hashes
 		Ordered_hash owner_hash = Ordered_hash_.New();
-		Ordered_hash grp_regy = Ordered_hash_.New();
-		Ordered_hash itm_regy = Ordered_hash_.New();
+		Xogui_nde_hash grp_regy = new Xogui_nde_hash();
+		Xogui_nde_hash itm_regy = new Xogui_nde_hash();
 
 		// get root_itm
 		Xogrp_meta_itm grp_meta = db_mgr.Tbl__grp_meta().Select_by_key_or_null(grp_key);
@@ -35,18 +35,20 @@ public class Xogui_mgr {
 		Xogui_grp owner = new Xogui_grp(grp_meta.Id(), 0, grp_meta.Key());
 		owner_hash.Add(grp_meta.Id(), owner);
 
-		// keep selecting subs until no more owners
+		// load tree by selecting subs until no more owners
 		while (owner_hash.Count() > 0) {
 			owner = (Xogui_grp)owner_hash.Get_at(0);
 			owner_hash.Del(owner.Id());
 			Load_subs(grp_regy, itm_regy, owner_hash, owner);
 		}
 
-		Load_itms(itm_regy);
+		// load itms and i18n
+		Load_itm_meta(itm_regy);
+		Load_itm_data(itm_regy, ctx);
 		Load_i18n(grp_regy, itm_regy, lang);
 		return owner;
 	}
-	private void Load_subs(Ordered_hash grp_regy, Ordered_hash itm_regy, Ordered_hash owner_hash, Xogui_grp owner) {
+	private void Load_subs(Xogui_nde_hash grp_regy, Xogui_nde_hash itm_regy, Ordered_hash owner_hash, Xogui_grp owner) {
 		String sql = Db_sql_.Make_by_fmt(String_.Ary
 		( "SELECT  m.trg_id"
 		, ",       m.sort_id"
@@ -59,56 +61,113 @@ public class Xogui_mgr {
 		Db_rdr rdr = db_mgr.Conn().Stmt_sql(sql).Exec_select__rls_auto();
 		while (rdr.Move_next()) {
 			String grp_key = rdr.Read_str("grp_key");
+			// nde is grp
 			if (grp_key == null) {
-				Xogui_grp gui_grp = new Xogui_grp(rdr.Read_int("trg_id"), rdr.Read_int("sort_id"), grp_key);
-				owner.Grps__add(gui_grp);
-				grp_regy.Add(gui_grp.Id(), gui_grp);
-				owner_hash.Add(gui_grp.Id(), gui_grp);
-			}
-			else {
 				Xogui_itm gui_itm = new Xogui_itm(rdr.Read_int("trg_id"), rdr.Read_int("sort_id"));
 				owner.Itms__add(gui_itm);
-				itm_regy.Add(gui_itm.Id(), gui_itm);
+				itm_regy.Add(gui_itm);
+			}
+			// nde is grp
+			else {
+				Xogui_grp gui_grp = new Xogui_grp(rdr.Read_int("trg_id"), rdr.Read_int("sort_id"), grp_key);
+				owner.Grps__add(gui_grp);
+				grp_regy.Add(gui_grp);
+				owner_hash.Add(gui_grp.Id(), gui_grp);
 			}
 		}
 	}
-	private void Load_itms(Ordered_hash itm_regy) {
-		String sql = Db_sql_.Make_by_fmt(String_.Ary
-		( "SELECT  t.itm_id"
-		, ",       t.itm_key"
-		, ",       t.itm_scope_id"
-		, ",       t.itm_gui_type"
-		, ",       t.itm_gui_args"
-		, ",       t.itm_dflt"
-		, "FROM    cfg_itm_meta t"
-		, "WHERE   t.itm_id IN ({0})"
-		), 0 // itm_regy.Ids_as_in_string()
-		);
+	private void Load_itm_meta(Xogui_nde_hash itm_regy) {
+		Xogui_nde_iter iter = Xogui_nde_iter.New_sql(itm_regy);
+		while (iter.Move_next()) {
+			String sql = Db_sql_.Make_by_fmt(String_.Ary
+			( "SELECT  t.itm_id"
+			, ",       t.itm_key"
+			, ",       t.itm_scope_id"
+			, ",       t.itm_gui_type"
+			, ",       t.itm_gui_args"
+			, ",       t.itm_dflt"
+			, "FROM    cfg_itm_meta t"
+			, "WHERE   t.itm_id IN ({0})"
+			), iter.To_sql_in()
+			);
 
-		Db_rdr rdr = db_mgr.Conn().Stmt_sql(sql).Exec_select__rls_auto();
-		while (rdr.Move_next()) {
-			Xogui_itm gui_itm = (Xogui_itm)itm_regy.Get_at(rdr.Read_int("itm_id"));
-			gui_itm.Load_by_meta(rdr.Read_str("itm_key"), rdr.Read_int("itm_scope_id"), rdr.Read_int("itm_gui_type"), rdr.Read_str("itm_gui_args"), rdr.Read_str("itm_dflt"));
+			Db_rdr rdr = db_mgr.Conn().Stmt_sql(sql).Exec_select__rls_auto();
+			while (rdr.Move_next()) {
+				Xogui_itm gui_itm = (Xogui_itm)itm_regy.Get_by_or_fail(rdr.Read_int("itm_id"));
+				gui_itm.Load_by_meta(rdr.Read_str("itm_key"), rdr.Read_int("itm_scope_id"), rdr.Read_int("itm_gui_type"), rdr.Read_str("itm_gui_args"), rdr.Read_str("itm_dflt"));
+			}
 		}
 	}
-	private void Load_i18n(Ordered_hash grp_regy, Ordered_hash itm_regy, String lang) {
-		// while itms_w_no_i18n.Count > 0)
-		String sql = Db_sql_.Make_by_fmt(String_.Ary
-		( "SELECT  h.nde_id"
-		, ",       h.nde_name"
-		, ",       h.nde_help"
-		, ",       h.nde_lang"
-		, "FROM    cfg_itm_meta t"
-		, "WHERE   h.nde_id IN ({0})"
-		, "AND     h.nde_lang = '{1}'"
-		), 0	// itm_regy.Ids_as_in_string()
-		, "en"
-		);
+	private void Load_itm_data(Xogui_nde_hash itm_regy, String... ctxs) {
+		Xogui_nde_hash cur_regy = new Xogui_nde_hash().Merge(itm_regy);
 
-		Db_rdr rdr = db_mgr.Conn().Stmt_sql(sql).Exec_select__rls_auto();
-		while (rdr.Move_next()) {
-			Xogui_itm gui_itm = (Xogui_itm)itm_regy.Get_at(rdr.Read_int("nde_id"));
-			gui_itm.Load_by_i18n(rdr.Read_str("nde_lang"), rdr.Read_str("nde_name"), rdr.Read_str("nde_help"));
+		// loop ctxs where later ctxs are more general defaults; EX: ["en.w", "en.*", "*.w", "app"]
+		int ctxs_len = ctxs.length;
+		for (int i = 0; i < ctxs_len; i++) {
+			// create iter for cur_regy; note that iter will be reduced as items are found below
+			Xogui_nde_iter cur_iter = Xogui_nde_iter.New_sql(cur_regy);
+			while (cur_iter.Move_next()) {
+				// get all data by ids and ctx
+				String sql = Db_sql_.Make_by_fmt(String_.Ary
+				( "SELECT  d.itm_id"
+				, ",       d.itm_ctx"
+				, ",       d.itm_val"
+				, ",       d.itm_date"
+				, "FROM    cfg_itm_data d"
+				, "WHERE   d.itm_id IN ({0})"
+				, "AND     d.itm_ctx = '{1}'"
+				), cur_iter.To_sql_in(), ctxs[i]
+				);
+
+				// read and set data
+				Db_rdr rdr = db_mgr.Conn().Stmt_sql(sql).Exec_select__rls_auto();
+				while (rdr.Move_next()) {
+					Xogui_itm gui_itm = (Xogui_itm)cur_regy.Get_by_or_fail(rdr.Read_int("itm_id"));
+					gui_itm.Load_by_data(rdr.Read_str("itm_ctx"), rdr.Read_str("itm_val"), rdr.Read_str("itm_date"));
+					cur_regy.Deleted__add(gui_itm);
+				}
+			}
+			cur_regy.Deleted__commit();
+		}
+
+		// loop over remaining items and set to dflts
+		int cur_len = cur_regy.Len();
+		for (int i = 0; i < cur_len; i++) {
+			Xogui_itm itm = (Xogui_itm)cur_regy.Get_at(i);
+			itm.Set_data_by_dflt();
+		}
+	}
+	private void Load_i18n(Xogui_nde_hash grp_regy, Xogui_nde_hash itm_regy, String... langs) {
+		Xogui_nde_hash cur_regy = new Xogui_nde_hash().Merge(grp_regy).Merge(itm_regy);
+
+		// loop langs where later langs are fallbacks; EX: ["de", "en"]
+		int langs_len = langs.length;
+		for (int i = 0; i < langs_len; i++) {
+			// create iter for cur_regy; note that iter will be reduced as items are found below
+			Xogui_nde_iter cur_iter = Xogui_nde_iter.New_sql(cur_regy);
+			while (cur_iter.Move_next()) {
+				// get all i18n for itms and lang
+				String sql = Db_sql_.Make_by_fmt(String_.Ary
+				( "SELECT  h.nde_id"
+				, ",       h.nde_name"
+				, ",       h.nde_help"
+				, ",       h.nde_lang"
+				, "FROM    cfg_itm_meta t"
+				, "WHERE   h.nde_id IN ({0})"
+				, "AND     h.nde_lang = '{1}'"
+				), cur_iter.To_sql_in()
+				, langs[i]
+				);
+
+				// read and set i18n
+				Db_rdr rdr = db_mgr.Conn().Stmt_sql(sql).Exec_select__rls_auto();
+				while (rdr.Move_next()) {
+					Xogui_nde gui_itm = (Xogui_itm)cur_regy.Get_at(rdr.Read_int("nde_id"));
+					gui_itm.Load_by_i18n(rdr.Read_str("nde_lang"), rdr.Read_str("nde_name"), rdr.Read_str("nde_help"));
+					cur_regy.Deleted__add(gui_itm);
+				}
+			}
+			cur_regy.Deleted__commit();
 		}
 	}
 }
