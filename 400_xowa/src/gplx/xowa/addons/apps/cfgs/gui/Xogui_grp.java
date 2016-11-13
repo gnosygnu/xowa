@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-public class Xogui_grp implements Xogui_nde {
+import gplx.langs.mustaches.*;
+public class Xogui_grp implements Xogui_nde, Mustache_doc_itm {
 	public Xogui_grp(int id, int sort, String key) {
 		this.id = id;
 		this.sort = sort;
@@ -39,5 +40,11 @@ public class Xogui_grp implements Xogui_nde {
 	public void Grps__add(Xogui_grp grp) {
 	}
 	public void Itms__add(Xogui_itm itm) {
+	}
+	public boolean Mustache__write(String key, Mustache_bfr bfr) {
+		return true;
+	}
+	public Mustache_doc_itm[] Mustache__subs(String key) {
+		return Mustache_doc_itm_.Ary__empty;
 	}
 }
