@@ -63,5 +63,5 @@ public class Console_adp__sys implements Console_adp {
 		catch (java.io.UnsupportedEncodingException e) {throw Err_.new_wo_type("unsupported exception");}
 	    ps.println(s);
 	    	}
-	public static final Console_adp__sys Instance = new Console_adp__sys();
+	public static final    Console_adp__sys Instance = new Console_adp__sys();
 }

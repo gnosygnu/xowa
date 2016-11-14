@@ -19,6 +19,7 @@ package gplx.xowa.addons.parsers.mediawikis; import gplx.*; import gplx.xowa.*; 
 import org.junit.*; import gplx.core.tests.*;
 public class Xop_mediawiki_wkr__tst {
 	private final    Xop_mediawiki_wkr__fxt fxt = new Xop_mediawiki_wkr__fxt();
+	@After public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
 	@Test 	public void Basic()	{
 		fxt.Init__wkr("en.wikipedia.org", null);
 		fxt.Test__parse("Page_1", "''{{PAGENAME}}''"
