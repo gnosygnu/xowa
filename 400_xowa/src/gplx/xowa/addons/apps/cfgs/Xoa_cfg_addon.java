@@ -17,16 +17,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
 import gplx.xowa.specials.*; import gplx.xowa.htmls.bridges.*;
-import gplx.xowa.addons.apps.cfgs.specials.lists.*;
+import gplx.xowa.addons.apps.cfgs.specials.lists.*; import gplx.xowa.addons.apps.cfgs.specials.items.*;
 public class Xoa_cfg_addon implements Xoax_addon_itm, Xoax_addon_itm__special, Xoax_addon_itm__json {
 	public Xow_special_page[] Special_pages() {
 		return new Xow_special_page[]
 		{ Xocfg_list_special.Prototype
+		, Xocfg_item_special.Prototype
 		};
 	}
 	public Bridge_cmd_itm[] Json_cmds() {
 		return new Bridge_cmd_itm[]
-		{ 
+		{ Xocfg_item_bridge.Prototype
 		};
 	}
 

@@ -42,7 +42,9 @@ public class Xogui_grp implements Xogui_nde, Mustache_doc_itm {
 	public void Itms__add(Xogui_itm itm) {
 	}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
-		return true;
+		if		(String_.Eq(key, "id"))			bfr.Add_int(id);
+		else if	(String_.Eq(key, "key"))		bfr.Add_str_u8(key);
+		return false;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
 		return Mustache_doc_itm_.Ary__empty;

@@ -170,4 +170,8 @@ public class Xogui_mgr {
 			cur_regy.Deleted__commit();
 		}
 	}
+	public static Xogui_mgr New(Xoa_app app) {
+		Xocfg_db_mgr db_mgr = new Xocfg_db_mgr(app.User().User_db_mgr().Conn());
+		return new Xogui_mgr(db_mgr);
+	}
 }

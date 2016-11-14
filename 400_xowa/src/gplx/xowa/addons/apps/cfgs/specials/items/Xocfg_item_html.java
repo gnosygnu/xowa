@@ -15,21 +15,15 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.specials.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*;
+package gplx.xowa.addons.apps.cfgs.specials.items; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*;
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.xowa.addons.apps.cfgs.gui.*;
-class Xocfg_list_html extends Xow_special_wtr__base {
-	private final    String grp_key, ctx, lang;
-	public Xocfg_list_html(String grp_key, String ctx, String lang) {
-		this.grp_key = grp_key;
-		this.ctx = ctx;
-		this.lang = lang;
-	}
-	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return app.Fsys_mgr().Http_root().GenSubDir_nest("bin", "any", "xowa", "addon", "app", "cfg", "list");}
-	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xocfg_list.mustache.html");}
+class Xocfg_item_html extends Xow_special_wtr__base {
+	public Xocfg_item_html() {}
+	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return app.Fsys_mgr().Http_root().GenSubDir_nest("bin", "any", "xowa", "addon", "app", "cfg", "item");}
+	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xocfg_item.mustache.html");}
 	@Override protected Mustache_doc_itm Bld_mustache_root(Xoa_app app) {
-		Xogui_mgr mgr = Xogui_mgr.New(app);
-		return mgr.Get_by_grp(grp_key, ctx, lang);
+		return new Xogui_grp(0, 1, "test");
 	}
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {
 		Xopg_tag_mgr head_tags = page_data.Head_tags();
@@ -38,7 +32,7 @@ class Xocfg_list_html extends Xow_special_wtr__base {
 		Xopg_tag_wtr_.Add__xolog	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__xoajax	(head_tags, app.Fsys_mgr().Http_root(), app);
 
-		head_tags.Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "xocfg_list.css")));
-		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("bin", "xocfg_list.js")));
+		head_tags.Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "xocfg_item.css")));
+		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("bin", "xocfg_item.js")));
 	}
 }
