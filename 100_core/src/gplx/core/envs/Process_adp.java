@@ -52,6 +52,7 @@ public class Process_adp implements Gfo_invk, Rls_able {
 	public Io_url Exe_url() {return exe_url;} public Process_adp Exe_url_(Io_url val) {exe_url = val; exe_exists = Bool_.__byte; return this;} Io_url exe_url;
 	public String Args_str() {return args_str;} public Process_adp Args_str_(String val) {args_str = val; return this;} private String args_str = "";
 	public Bry_fmtr Args_fmtr() {return args_fmtr;} Bry_fmtr args_fmtr = Bry_fmtr.new_("");
+	public boolean Args__include_quotes() {return args__include_quotes;} public void Args__include_quotes_(boolean v) {args__include_quotes = v;} private boolean args__include_quotes;
 	public byte Run_mode() {return run_mode;} public Process_adp Run_mode_(byte v) {run_mode = v; return this;} private byte run_mode = Run_mode_sync_block;
 	public static final byte Run_mode_async = 0, Run_mode_sync_block = 1, Run_mode_sync_timeout = 2;
 	public int Exit_code() {return exit_code;} int exit_code;
@@ -95,7 +96,7 @@ public class Process_adp implements Gfo_invk, Rls_able {
 	}
 	public String[] Xto_process_bldr_args(String... args) {
 		String args_str = args_fmtr.Bld_str_many(args);
-		return Xto_process_bldr_args_utl(exe_url, args_str);
+		return To_process_bldr_args_utl(exe_url, args_str, false);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled))					return enabled;
@@ -231,7 +232,7 @@ public class Process_adp implements Gfo_invk, Rls_able {
 		exit_code = Exit_init;
 		rslt_out = "";
 		WhenBgn_run();
-		pb = new ProcessBuilder(Xto_process_bldr_args_utl(exe_url, args_str));
+		pb = new ProcessBuilder(To_process_bldr_args_utl(exe_url, args_str, args__include_quotes));
 		pb.redirectErrorStream(true);								// NOTE: need to redirectErrorStream or rdr.readLine() will hang; see inkscape and Ostfriesland Verkehr-de.svg
 		if (working_dir != null)
 			pb.directory(new File(working_dir.Xto_api()));
@@ -286,7 +287,7 @@ public class Process_adp implements Gfo_invk, Rls_able {
 	}
 	private static final String GRP_KEY = "gplx.process";
 	public static final int Exit_pass = 0, Exit_init = -1;
-	public static String[] Xto_process_bldr_args_utl(Io_url exe_url, String args_str) {		
+	public static String[] To_process_bldr_args_utl(Io_url exe_url, String args_str, boolean include_quotes) {
 		List_adp list = List_adp_.New();
 		list.Add(exe_url.Xto_api());
 		String_bldr sb = String_bldr_.new_();
@@ -298,8 +299,11 @@ public class Process_adp implements Gfo_invk, Rls_able {
 				list.Add(sb.To_str());
 				sb.Clear();
 			}
-			else if (c == '"')				// NOTE: ProcessBuilder seems to have issues with quotes; do not call sb.Add()
+			else if (c == '"') {			// NOTE: ProcessBuilder seems to have issues with quotes; do not call sb.Add()
 				in_quotes = !in_quotes;
+				if (include_quotes)
+					sb.Add(c);
+			}
 			else
 				sb.Add(c);
 		}
