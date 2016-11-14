@@ -35,5 +35,6 @@ public class Xof_orig_wkr_ {
 	, Tid_wmf_api			= 2
 	, Tid_xowa_meta			= 3
 	, Tid_xowa_img_links	= 4
+	, Tid_mock				= 5
 	;
 }

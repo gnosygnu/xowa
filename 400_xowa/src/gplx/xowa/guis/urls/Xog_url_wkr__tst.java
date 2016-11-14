@@ -40,7 +40,7 @@ class Xog_url_wkr__fxt {
 	}
 	public void Exec__parse(String href) {
 		this.url = wiki.Utl__url_parser().Parse(Bry_.new_u8(href));
-		this.url = wkr.Exec(url);
+		this.url = wkr.Exec_url(url);
 	}
 	public void Test__raw(String expd)	{Gftest.Eq__str(expd, String_.new_u8(url.Raw()));}
 	public void Test__qarg(String expd) {Gftest.Eq__str(expd, String_.new_u8(url.Qargs_mgr().To_bry()));}

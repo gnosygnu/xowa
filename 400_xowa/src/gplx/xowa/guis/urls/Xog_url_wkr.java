@@ -24,8 +24,6 @@ import gplx.xowa.guis.views.*;
 public class Xog_url_wkr {
 	private final    Xoa_url tmp_url = Xoa_url.blank();
 	private Xoae_app app; private Xog_win_itm win; private Xowe_wiki wiki; private Xoae_page page;
-	private final    Xof_img_size img_size = new Xof_img_size(); private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
-	private final    Gfo_url_encoder fsys_lnx_encoder = Gfo_url_encoder_.New__fsys_lnx().Make();
 	public Xoa_url Parse(Xog_win_itm win, String href_str) {
 		if (href_str == null) return tmp_url;	// text is not link; return;
 		byte[] href_bry = Bry_.new_u8(href_str);
@@ -38,7 +36,7 @@ public class Xog_url_wkr {
 	public void Init(Xowe_wiki wiki) {	// TEST:
 		this.wiki = wiki;
 	}
-	public Xoa_url Exec(Xoa_url url) {
+	public Xoa_url Exec_url(Xoa_url url) {
 		switch (url.Tid()) {
 			case Xoa_url_.Tid_unknown:		return Xoa_url.Null;										// unknown; return null which will become a noop
 			case Xoa_url_.Tid_inet:			return Exec_url_http(app);									// http://site.org
@@ -64,33 +62,9 @@ public class Xog_url_wkr {
 		return Rslt_handled;
 	}
 	private Xoa_url Exec_url_file(Xoae_app app, Xowe_wiki cur_wiki, Xoae_page page, Xog_win_itm win, byte[] href_bry) {	// EX: file:///xowa/A.png
-		Xowe_wiki wiki = (Xowe_wiki)page.Commons_mgr().Source_wiki_or(cur_wiki);
-		Io_url href_url = Io_url_.New__http_or_fail(String_.new_u8(Gfo_url_encoder_.Http_url.Decode(href_bry)));
-		Gfui_html html_box = win.Active_html_box();
-		byte[] href_bry_encoded = fsys_lnx_encoder.Encode(href_bry);	// encode to href_bry; note must encode to same href_bry as Xof_url_bldr, which uses Gfo_url_encoder_.Fsys_lnx; PAGE:en.w:File:Volc�n_Chimborazo,_"El_Taita_Chimborazo".jpg DATE:2015-12-06
-		String xowa_ttl = wiki.Gui_mgr().Cfg_browser().Content_editable()
-			? html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_active_for_editable_mode, gplx.xowa.htmls.Xoh_consts.Atr_xowa_title_str, null)
-			: Xoh_dom_.Title_by_href(href_bry_encoded, Bry_.new_u8(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__root_html_get)));
-		if (xowa_ttl == null) {
-			app.Gui_mgr().Kit().Ask_ok("", "", "could not find anchor with href in html: href=~{0}", href_bry);
-			return Rslt_handled;
-		}
-		byte[] lnki_ttl = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode(Xoa_ttl.Replace_spaces(Bry_.new_u8(xowa_ttl)));
-		Xof_fsdb_itm fsdb = Xof_orig_file_downloader.Make_fsdb(wiki, lnki_ttl, img_size, url_bldr);
-		if (!Io_mgr.Instance.ExistsFil(href_url)) {
-//				if (!Xof_orig_file_downloader.Get_to_url(fsdb, href_url, wiki, lnki_ttl, url_bldr))
-			if (!Xof_file_wkr.Show_img(fsdb, Xoa_app_.Usr_dlg(), wiki.File__bin_mgr(), wiki.File__mnt_mgr(), wiki.App().User().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), gplx.xowa.guis.cbks.js.Xog_js_wkr_.Noop, img_size, url_bldr, page))
-				return Rslt_handled;
-		}
-		gplx.core.ios.IoItmFil fil = Io_mgr.Instance.QueryFil(href_url);
-		if (fil.Exists()) {
-			Process_adp media_player = app.Prog_mgr().App_by_ext(href_url.Ext());
-			media_player.Run(href_url);
-			fsdb.File_size_(fil.Size());
-			gplx.xowa.files.caches.Xou_cache_mgr cache_mgr = wiki.Appe().User().User_db_mgr().Cache_mgr();
-			cache_mgr.Update(fsdb);
-			cache_mgr.Db_save();
-		}
+		Xog_url_wkr__file wkr = new Xog_url_wkr__file(app, cur_wiki, page);
+		wkr.Extract_data(win.Active_html_box().Html_js_eval_proc_as_str(Xog_js_procs.Doc__root_html_get), href_bry);
+		wkr.Download_and_run();
 		return Rslt_handled;
 	}
 	private Xoa_url Exec_url_page(Xowe_wiki wiki, byte[] href_bry) {	// EX: "Page"; "/wiki/Page"; // rewritten; DATE:2014-01-19
@@ -100,6 +74,8 @@ public class Xog_url_wkr {
 	public static Xoa_url Exec_url(Xog_win_itm win, String href_str) {
 		Xog_url_wkr url_wkr = new Xog_url_wkr();
 		Xoa_url url = url_wkr.Parse(win, href_str);
-		return url_wkr.Exec(url);
+		return url_wkr.Exec_url(url);
+	}
+	public static void Get_href_url() {
 	}
 }
