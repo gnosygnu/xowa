@@ -859,30 +859,11 @@
         <td>
           <p>
             <select id='xowa_category_list' class='options_select'>
-              <option value="skip">
-                skip
+              <option value="generate_category">
+                generate while importing
               </option>
-              <option value="update_version2">
-                only update to version 2
-              </option>
-            </select>
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <th>
-          <p>
-            Search system:
-          </p>
-        </th>
-        <td>
-          <p>
-            <select id='xowa_search_list' class='options_select'>
-              <option value="default_version">
-                use default version specified on Help:Options/Import
-              </option>
-              <option value="update_version2">
-                only update to version 2 (for old wikis imported pre-v0.9.3)
+              <option value="rebuild_category">
+                rebuild without importing
               </option>
             </select>
           </p>
@@ -941,17 +922,6 @@
           </ul>
         </li>
         <li>
-          Choose a version of the category system: 
-          <ul>
-            <li>
-              version 1: imports faster; uses less disk space; has less functionality than MediaWiki
-            </li>
-            <li>
-              version 2: imports slower; uses more disk space; has same functionality as MediaWiki.
-            </li>
-          </ul>
-        </li>
-        <li>
           Click "Import now". A message box will pop up when the wiki is installed.
         </li>
       </ul>
@@ -1001,16 +971,24 @@
           Go to <a href="http://dumps.wikimedia.org/" rel="nofollow" class="external free">http://dumps.wikimedia.org/</a> and search for your wiki's directory. For example, Simple Wikipedia is <a href="http://dumps.wikimedia.org/simplewiki/" rel="nofollow" class="external free">http://dumps.wikimedia.org/simplewiki/</a> 
           <ul>
             <li>
-              Download the file named <code><i>wiki</i>-<i>date</i>-pages-articles.xml.bz2</code>.
+              Download the main wikitext file: the file will be named <code><i>wiki</i>-<i>date</i>-pages-articles.xml.bz2</code>.
             </li>
             <li>
-              (version 2 category system) Download two additional files 
+              Download two additional files for the category system: 
               <ul>
                 <li>
                   <code><i>wiki</i>-<i>date</i>-categorylinks.sql.gz</code>
                 </li>
                 <li>
                   <code><i>wiki</i>-<i>date</i>-page_props.sql.gz</code>.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Download an additional file for sorting search results by PageRank 
+              <ul>
+                <li>
+                  <code><i>wiki</i>-<i>date</i>-pagelinks.sql.gz</code>.
                 </li>
               </ul>
             </li>
@@ -1034,7 +1012,7 @@
                   If you don't have enough disk space on the disk where XOWA is installed, you can place the dump file in a directory on any other disk. You will need to select the file during the import process.
                 </li>
                 <li>
-                  Note that only the wiki dump file can be placed anywhere. The category files must be in <code>/xowa/wiki/<i>wiki_domain</i>/</code>
+                  Note that only the wiki dump file can be placed anywhere. The category and pagelinks files must be in <code>/xowa/wiki/<i>wiki_domain</i>/</code>
                 </li>
               </ul>
             </li>
@@ -1064,17 +1042,6 @@
           <ul>
             <li>
               Note that this option will be ignored when you already decompressed the files manually.
-            </li>
-          </ul>
-        </li>
-        <li>
-          Choose a version of the category system: 
-          <ul>
-            <li>
-              version 1: imports faster; uses less disk space; has less functionality than MediaWiki
-            </li>
-            <li>
-              version 2: imports slower; uses more disk space; has same functionality as MediaWiki.
             </li>
           </ul>
         </li>
@@ -1180,12 +1147,7 @@
           Repeat as necessary to combine other wikis / commands into the script
         </li>
         <li>
-          Run the script by clicking "Run script" 
-          <ul>
-            <li>
-              Alternatively, you can also copy it to <code>/xowa/xowa_build.gfs</code> and execute <code>java -Xmx256m -jar xowa_windows.jar --cmd_file xowa_build.gfs --app_mode cmd</code>. (Note that xowa_windows.jar is listed as the example. Linux users should substitute xowa_linux.jar while Mac users should substitute xowa_macosx.jar)
-            </li>
-          </ul>
+          Run the script by clicking "Run script"
         </li>
       </ul>
     </div>

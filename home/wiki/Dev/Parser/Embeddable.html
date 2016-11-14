@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Dev/Parser/Embeddable - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Dev/Parser/Embeddable</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Features"><span class="tocnumber">2</span> <span class="toctext">Features</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Issues"><span class="tocnumber">3</span> <span class="toctext">Issues</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#Example"><span class="tocnumber">4</span> <span class="toctext">Example</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Overview">Overview</span>
+    </h2>
+    <p>
+      XOWA can be embedded in other apps as a standalone parser.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Features">Features</span>
+    </h2>
+    <p>
+      The XOWA parser has a number of features:
+    </p>
+    <ul>
+      <li>
+        <b>Comprehenisive</b>: The parser handles virtually all aspects of MediaWiki wikitext, including: 
+        <ul>
+          <li>
+            <b>Standard markup</b>: 
+            <ul>
+              <li>
+                ''italic''
+              </li>
+              <li>
+                '''bold'''
+              </li>
+              <li>
+                [[internal links]]
+              </li>
+              <li>
+                [external links]
+              </li>
+              <li>
+                == section heading ==
+              </li>
+              <li>
+                preformatted text through a leading space: <code>&nbsp;&nbsp;preformatted text</code>
+              </li>
+              <li>
+                lists with 
+                <ul>
+                  <li>
+                    * unordered list item
+                  </li>
+                  <li>
+                    # ordered list item
+                  </li>
+                  <li>
+                    ; term : definition
+                  </li>
+                </ul>
+              </li>
+              <li>
+                tables through {| |}, |- and |
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Templates</b>: {{some_template}} as well as {{{some_argument|some_default}}}
+          </li>
+          <li>
+            <b>Parser functions</b>: Over 100 functions including: 
+            <ul>
+              <li>
+                {{PAGENAME}}
+              </li>
+              <li>
+                {{#if}}, {{#ifeq}} and {{#switch}}
+              </li>
+              <li>
+                {{formatnum}}
+              </li>
+              <li>
+                {{#formatdate}} and {{#time}}
+              </li>
+              <li>
+                {{#expr}}
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Extensions</b>: Over 20 extensions including: 
+            <ul>
+              <li>
+                &lt;gallery&gt;
+              </li>
+              <li>
+                &lt;imagemap&gt;
+              </li>
+              <li>
+                &lt;ref&gt;
+              </li>
+              <li>
+                &lt;poem&gt;
+              </li>
+              <li>
+                &lt;hiero&gt;
+              </li>
+              <li>
+                &lt;syntaxhighlight&gt;
+              </li>
+              <li>
+                &lt;math&gt;
+              </li>
+              <li>
+                &lt;dynamicpagelist&gt;
+              </li>
+              <li>
+                &lt;listing&gt;
+              </li>
+              <li>
+                &lt;score&gt;
+              </li>
+              <li>
+                {{pagebanner}}
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Scribunto</b>: {{#invoke:module_name|lua_function|args}}
+          </li>
+          <li>
+            <b>Wikibase</b>: {{#property:qid}}
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b>Fast</b>: The parser can process 5+ million articles of English Wikipedia in 24 hours on a relatively high-end machine.
+      </li>
+      <li>
+        <b>Multi-language</b>: The parser can process wikitext in other non-English languages. This ranges from magic word translations (<code>NOMPAGE</code>) to numeric format (<code>1.123,56</code>) to variant support (<code>-{variant:term}-</code>).
+      </li>
+      <li>
+        <b>Well-tested</b>: The parser has close to 1000 automated tests. In addition, it has been run on over 100 different wikis, including English Wikipedia, Wiktionary, Wikisource, Wikivoyage, Wikiquote, Wikibooks, Wikiversity, and Wikinews as well as the non-English counterparts such as German, French, Russian, Arabic, Chinese, etc.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Issues">Issues</span>
+    </h2>
+    <p>
+      The XOWA parser is constantly changing as it needs to accomodate live changes to MediaWiki parser. Moreover, the embeddable feature is a work in progress. The following is a list of known limitations:
+    </p>
+    <ul>
+      <li>
+        <b>Resources are not embedded</b>: Many features require standalone data (language translations; lua code; hiero images). These are not embedded into the XOWA jar, but are distributed separately with the XOWA app (somewhere under the <code>/xowa/bin/any/xowa</code> hive).
+      </li>
+      <li>
+        <b>Non-lightweight memory requirements</b>: The XOWA parser was built with an eye towards performance. As such, there is a good deal of caching that may impact memory adversely. A typical XOWA parser will require between 1 MB and 2 MB of memory
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Example">Example</span>
+    </h2>
+    <p>
+      The follow example demonstrates usage.
+    </p>
+    <div class="mw-highlight">
+<pre style="overflow:auto">
+package sample_namespace;
+import gplx.xowa.addons.parsers.mediawikis.*;
+
+public class Test_class {
+    public static void main(String[] args) {
+        // create a new manager instance with the root directory of your XOWA installation
+        // note that a full XOWA installation is needed, because it needs to load some standalone files (EX: Scribunto .lua files)
+        // also note that the directory must end in a "\" if Windows or a "/" if Linux / Mac OS X; EX: "/home/me/xowa/" not "/home/me/xowa"
+        Xop_mediawiki_mgr mgr = new Xop_mediawiki_mgr("C:\\xowa\\");
+
+        // create a new worker instance
+        // note that workers are not thread-safe. however, you can have each thread handle one worker.
+        // also note that each worker can only parse pages from one wiki.
+        // if you are parsing pages from two different wikis then you'll need two different workers
+        Xop_mediawiki_wkr wkr = mgr.Make("en.wikipedia.org", new Xop_mediawiki_loader__custom());
+
+        // parse some wikitext.
+        // the below will print out "&lt;p&gt;&lt;i&gt;My page&lt;/i&gt;\n&lt;/p&gt;"
+        System.out.println(wkr.Parse("My_page", "''{{PAGENAME}}''"));
+
+        // templates will be retrieved by the custom loader
+        // the below will print out "&lt;p&gt;wikitext retrieved from your database for Template:Convert\n&lt;/p&gt;"
+        System.out.println(wkr.Parse("My_page", "{{Convert}}"));
+    }
+}
+class Xop_mediawiki_loader__custom implements Xop_mediawiki_loader {
+    // load page text by page title
+    public String LoadWikitext(String page) {
+        return "wikitext retrieved from your database for " + page;
+
+    }
+}
+</pre>
+    </div>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://www.youtube.com/watch?v=q0qbXYXEH6M" title="See a video of XOWA Desktop in action">Video</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+        <li><a href="https://www.youtube.com/watch?v=jsMTBxGweUw" title="See a video of XOWA Android in action">Video</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
