@@ -18,29 +18,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
 import gplx.xowa.addons.apps.cfgs.dbs.*;
 public class Xogui_itm_html {
-	public void Build_html(Bry_bfr bfr, String name, int gui_type, String gui_args, String data) {
+	public void Build_html(Bry_bfr bfr, String key, String name, int gui_type, String gui_args, String data) {
 		switch (gui_type) {
 			case Xoitm_gui_tid.Tid__checkbox:
-				bfr.Add_str_u8_fmt("<input type='checkbox' class='xocfg_checkbox'{0}></input>", String_.Eq(data, "true") ? " checked='checked'" : "");
+				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='checkbox' class='xocfg_checkbox'{1}></input>", key, String_.Eq(data, "true") ? " checked='checked'" : "");
 				break;
 			case Xoitm_gui_tid.Tid__numeric:
-				bfr.Add_str_u8_fmt("<input type='text' class='xocfg_numeric' value='{0}'></input>", data);
+				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='text' class='xocfg_numeric' value='{1}'></input>", key, data);
 				break;
 			case Xoitm_gui_tid.Tid__textbox:
-				bfr.Add_str_u8_fmt("<input type='text' class='xocfg_textbox' value='{0}'></input>", data);
+				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='text' class='xocfg_textbox' value='{1}'></input>", key, data);
 				break;
 			case Xoitm_gui_tid.Tid__memo:
-				bfr.Add_str_u8_fmt("<textarea type='text' class='xocfg_memo'>{0}</textarea>", data);
+				bfr.Add_str_u8_fmt("<textarea id='{0}' data-xocfg='0' type='text' class='xocfg_memo'>{1}</textarea>", key, data);
 				break;
 			case Xoitm_gui_tid.Tid__select:
-				bfr.Add_str_u8_fmt("<select type='text' class='xocfg_select' size='3'>");
+				bfr.Add_str_u8_fmt("<select id='{0}' data-xocfg='0' type='text' class='xocfg_select' size='3'>", key);
 				for (int i = 0; i < 3; i++) {
 					bfr.Add_str_u8_fmt("<option value='{0}'{2}>{1}</option>", i, i, i == 2 ? " selected='selected'" : "");
 				}
 				bfr.Add_str_u8_fmt("</select>");
 				break;
 			case Xoitm_gui_tid.Tid__fs_file:
-				bfr.Add_str_u8_fmt("<input type='text' class='xocfg_fs_file' value='{0}'></input>", data);
+				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='text' class='xocfg_fs_file' value='{1}'></input>", key, data);
 				break;
 		}
 	}

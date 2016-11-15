@@ -60,9 +60,9 @@ public class Xogui_itm implements Xogui_nde, Mustache_doc_itm {
 		this.val = dflt;
 		this.date = String_.Empty;
 	}
-	public boolean Mustache__write(String key, Mustache_bfr bfr) {
-		if		(String_.Eq(key, "name"))		bfr.Add_str_u8(name);
-		else if	(String_.Eq(key, "html"))		new Xogui_itm_html().Build_html(bfr.Bfr(), name, gui_type, gui_args, val);
+	public boolean Mustache__write(String k, Mustache_bfr bfr) {
+		if		(String_.Eq(k, "name"))		bfr.Add_str_u8(name);
+		else if	(String_.Eq(k, "html"))		new Xogui_itm_html().Build_html(bfr.Bfr(), key, name, gui_type, gui_args, val);
 		return true;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
