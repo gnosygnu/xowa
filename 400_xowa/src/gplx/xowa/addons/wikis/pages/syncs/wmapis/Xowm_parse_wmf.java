@@ -43,6 +43,7 @@ public class Xowm_parse_wmf {
 
 		// get data
 		Json_nde parse_nde = jdoc.Root_nde().Get_as_nde("parse");
+		if (parse_nde == null) return null;	// handle pages that don't exist such as s.w:File:AnyFile.png; DATE:2016-11-15
 		int page_id = parse_nde.Get_as_int("pageid");
 		int revn_id = parse_nde.Get_as_int("revid");
 		byte[] page_ttl = Xoa_ttl.Replace_spaces(parse_nde.Get_as_bry("title"));
