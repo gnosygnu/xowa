@@ -25,6 +25,7 @@ public class Mustache_bfr {
 	public void Add_long		(long v)	{bfr.Add_long_variable(v);}
 	public void Add_double		(double v)	{bfr.Add_double(v);}
 	public void Add_str_u8		(String v)	{bfr.Add_str_u8(v);}
+	public void Add_str_u8_safe	(String v)	{if (v != null) bfr.Add_str_u8(v);}
 	public void Add_mid			(byte[] src, int bgn, int end) {bfr.Add_mid(src, bgn, end);}
 	public void Add_bry			(byte[] v) {
 		if (v == null) return;	// allow items to have null props

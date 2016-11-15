@@ -35,12 +35,16 @@ public class Xocfg_item_bridge implements gplx.xowa.htmls.bridges.Bridge_cmd_itm
 	private void Save(Json_nde args) {
 		String data = args.Get_as_str("data");
 		gplx.xowa.addons.apps.cfgs.dbs.Xocfg_itm_bldr itm_bldr = new gplx.xowa.addons.apps.cfgs.dbs.Xocfg_itm_bldr(new gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_mgr(app.User().User_db_mgr().Conn()));
-		String[] ary = String_.Split(data, "|");
-		if (String_.Eq(ary[0], "grp")) {
-			itm_bldr.Create_grp(ary[1], ary[2], ary[3], ary[4]);
-		}
-		else {
-			itm_bldr.Create_itm(ary[1], ary[2], ary[3], ary[4], ary[5], ary[6], ary[7], ary[8]);
+		String[] lines = String_.Split(data, "\n");
+		for (String line : lines) {
+			String[] ary = String_.Split(line, "|");
+			if (ary.length < 4) continue;
+			if (String_.Eq(ary[0], "grp")) {
+				itm_bldr.Create_grp(ary[1], ary[2], ary[3], ary[4]);
+			}
+			else {
+				itm_bldr.Create_itm(ary[1], ary[2], ary[3], ary[4], ary[5], ary[6], ary[7], ary[8]);
+			}
 		}
 	}
 

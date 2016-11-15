@@ -34,6 +34,7 @@ public class Xogui_mgr {
 		if (grp_meta == null) throw Err_.new_wo_type("cfg:grp not found", "grp", grp_key);
 		Xogui_grp owner = new Xogui_grp(grp_meta.Id(), 0, grp_meta.Key());
 		owner_hash.Add(grp_meta.Id(), owner);
+		grp_regy.Add(owner);
 
 		// load tree by selecting subs until no more owners
 		while (owner_hash.Count() > 0) {
@@ -50,31 +51,33 @@ public class Xogui_mgr {
 	}
 	private void Load_subs(Xogui_nde_hash grp_regy, Xogui_nde_hash itm_regy, Ordered_hash owner_hash, Xogui_grp owner) {
 		String sql = Db_sql_.Make_by_fmt(String_.Ary
-		( "SELECT  m.trg_id"
-		, ",       m.sort_id"
+		( "SELECT  m.map_trg"
+		, ",       m.map_sort"
 		, ",       t.grp_key"
 		, "FROM    cfg_grp_map m"
-		, "        LEFT JOIN cfg_grp_meta t ON m.trg_id = t.grp_id"
-		, "WHERE   m.src_id = {0}"
+		, "        LEFT JOIN cfg_grp_meta t ON m.map_trg = t.grp_id"
+		, "WHERE   m.map_src = {0}"
 		), owner.Id()
 		);
 		Db_rdr rdr = db_mgr.Conn().Stmt_sql(sql).Exec_select__rls_auto();
+		List_adp itms_list = List_adp_.New();
 		while (rdr.Move_next()) {
 			String grp_key = rdr.Read_str("grp_key");
 			// nde is grp
 			if (grp_key == null) {
-				Xogui_itm gui_itm = new Xogui_itm(rdr.Read_int("trg_id"), rdr.Read_int("sort_id"));
-				owner.Itms__add(gui_itm);
+				Xogui_itm gui_itm = new Xogui_itm(rdr.Read_int("map_trg"), rdr.Read_int("map_sort"));
+				itms_list.Add(gui_itm);
 				itm_regy.Add(gui_itm);
 			}
 			// nde is grp
 			else {
-				Xogui_grp gui_grp = new Xogui_grp(rdr.Read_int("trg_id"), rdr.Read_int("sort_id"), grp_key);
+				Xogui_grp gui_grp = new Xogui_grp(rdr.Read_int("map_trg"), rdr.Read_int("map_sort"), grp_key);
 				owner.Grps__add(gui_grp);
 				grp_regy.Add(gui_grp);
 				owner_hash.Add(gui_grp.Id(), gui_grp);
 			}
 		}
+		owner.Itms_((Xogui_itm[])itms_list.To_ary_and_clear(Xogui_itm.class));
 	}
 	private void Load_itm_meta(Xogui_nde_hash itm_regy) {
 		Xogui_nde_iter iter = Xogui_nde_iter.New_sql(itm_regy);
@@ -152,7 +155,7 @@ public class Xogui_mgr {
 				, ",       h.nde_name"
 				, ",       h.nde_help"
 				, ",       h.nde_lang"
-				, "FROM    cfg_itm_meta t"
+				, "FROM    cfg_nde_i18n h"
 				, "WHERE   h.nde_id IN ({0})"
 				, "AND     h.nde_lang = '{1}'"
 				), cur_iter.To_sql_in()
@@ -162,7 +165,7 @@ public class Xogui_mgr {
 				// read and set i18n
 				Db_rdr rdr = db_mgr.Conn().Stmt_sql(sql).Exec_select__rls_auto();
 				while (rdr.Move_next()) {
-					Xogui_nde gui_itm = (Xogui_itm)cur_regy.Get_at(rdr.Read_int("nde_id"));
+					Xogui_nde gui_itm = (Xogui_nde)cur_regy.Get_by_or_fail(rdr.Read_int("nde_id"));
 					gui_itm.Load_by_i18n(rdr.Read_str("nde_lang"), rdr.Read_str("nde_name"), rdr.Read_str("nde_help"));
 					cur_regy.Deleted__add(gui_itm);
 				}

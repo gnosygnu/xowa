@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
 import gplx.langs.mustaches.*;
 public class Xogui_grp implements Xogui_nde, Mustache_doc_itm {
+	private Xogui_itm[] itms = new Xogui_itm[0];
 	public Xogui_grp(int id, int sort, String key) {
 		this.id = id;
 		this.sort = sort;
@@ -39,14 +40,17 @@ public class Xogui_grp implements Xogui_nde, Mustache_doc_itm {
 
 	public void Grps__add(Xogui_grp grp) {
 	}
-	public void Itms__add(Xogui_itm itm) {
+	public void Itms_(Xogui_itm[] v) {
+		this.itms = v;
 	}
-	public boolean Mustache__write(String key, Mustache_bfr bfr) {
-		if		(String_.Eq(key, "id"))			bfr.Add_int(id);
-		else if	(String_.Eq(key, "key"))		bfr.Add_str_u8(key);
+	public boolean Mustache__write(String k, Mustache_bfr bfr) {
+		if		(String_.Eq(k, "id"))		bfr.Add_int(id);
+		else if	(String_.Eq(k, "key"))		bfr.Add_str_u8(key);
+		else if	(String_.Eq(k, "name"))		bfr.Add_str_u8_safe(name);
 		return false;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
+		if		(String_.Eq(key, "itms"))		return itms;
 		return Mustache_doc_itm_.Ary__empty;
 	}
 }

@@ -62,6 +62,7 @@ class Xogui_nde_iter {
 	public String To_sql_in() {
 		Bry_bfr bfr = Bry_bfr_.New();
 		int end = bgn + max;
+		if (end > hash.Len()) end = hash.Len();
 		for (int i = bgn; i < end; i++) {
 			Xogui_nde nde = hash.Get_at(i);
 			if (i != bgn) bfr.Add_byte_comma();

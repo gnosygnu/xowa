@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-public class Xogui_itm implements Xogui_nde {
+import gplx.langs.mustaches.*;
+public class Xogui_itm implements Xogui_nde, Mustache_doc_itm {
 	public Xogui_itm(int id, int sort) {
 		this.id = id;
 		this.sort = sort;
@@ -58,5 +59,13 @@ public class Xogui_itm implements Xogui_nde {
 		this.ctx = String_.Empty;
 		this.val = dflt;
 		this.date = String_.Empty;
+	}
+	public boolean Mustache__write(String key, Mustache_bfr bfr) {
+		if		(String_.Eq(key, "name"))		bfr.Add_str_u8(name);
+		else if	(String_.Eq(key, "html"))		new Xogui_itm_html().Build_html(bfr.Bfr(), name, gui_type, gui_args, val);
+		return true;
+	}
+	public Mustache_doc_itm[] Mustache__subs(String key) {
+		return Mustache_doc_itm_.Ary__empty;
 	}
 }

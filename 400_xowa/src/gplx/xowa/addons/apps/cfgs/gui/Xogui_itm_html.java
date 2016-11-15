@@ -1,0 +1,47 @@
+/*
+XOWA: the XOWA Offline Wiki Application
+Copyright (C) 2012 gnosygnu@gmail.com
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+package gplx.xowa.addons.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
+import gplx.xowa.addons.apps.cfgs.dbs.*;
+public class Xogui_itm_html {
+	public void Build_html(Bry_bfr bfr, String name, int gui_type, String gui_args, String data) {
+		switch (gui_type) {
+			case Xoitm_gui_tid.Tid__checkbox:
+				bfr.Add_str_u8_fmt("<input type='checkbox' class='xocfg_checkbox'{0}></input>", String_.Eq(data, "true") ? " checked='checked'" : "");
+				break;
+			case Xoitm_gui_tid.Tid__numeric:
+				bfr.Add_str_u8_fmt("<input type='text' class='xocfg_numeric' value='{0}'></input>", data);
+				break;
+			case Xoitm_gui_tid.Tid__textbox:
+				bfr.Add_str_u8_fmt("<input type='text' class='xocfg_textbox' value='{0}'></input>", data);
+				break;
+			case Xoitm_gui_tid.Tid__memo:
+				bfr.Add_str_u8_fmt("<textarea type='text' class='xocfg_memo'>{0}</textarea>", data);
+				break;
+			case Xoitm_gui_tid.Tid__select:
+				bfr.Add_str_u8_fmt("<select type='text' class='xocfg_select' size='3'>");
+				for (int i = 0; i < 3; i++) {
+					bfr.Add_str_u8_fmt("<option value='{0}'{2}>{1}</option>", i, i, i == 2 ? " selected='selected'" : "");
+				}
+				bfr.Add_str_u8_fmt("</select>");
+				break;
+			case Xoitm_gui_tid.Tid__fs_file:
+				bfr.Add_str_u8_fmt("<input type='text' class='xocfg_fs_file' value='{0}'></input>", data);
+				break;
+		}
+	}
+}
