@@ -21,26 +21,26 @@ public class Xogui_itm_html {
 	public void Build_html(Bry_bfr bfr, String key, String name, int gui_type, String gui_args, String data) {
 		switch (gui_type) {
 			case Xoitm_gui_tid.Tid__checkbox:
-				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='checkbox' class='xocfg_checkbox'{1}></input>", key, String_.Eq(data, "true") ? " checked='checked'" : "");
+				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='checkbox' accesskey='d' class='xocfg_checkbox'{1}></input>", key, String_.Eq(data, "true") ? " checked='checked'" : "");
 				break;
 			case Xoitm_gui_tid.Tid__numeric:
-				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='text' class='xocfg_numeric' value='{1}'></input>", key, data);
+				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='text' accesskey='d' class='xocfg_numeric' value='{1}'></input>", key, data);
 				break;
 			case Xoitm_gui_tid.Tid__textbox:
-				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='text' class='xocfg_textbox' value='{1}'></input>", key, data);
+				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='text' accesskey='d' class='xocfg_textbox' value='{1}'></input>", key, data);
 				break;
 			case Xoitm_gui_tid.Tid__memo:
-				bfr.Add_str_u8_fmt("<textarea id='{0}' data-xocfg='0' type='text' class='xocfg_memo'>{1}</textarea>", key, data);
+				bfr.Add_str_u8_fmt("<textarea id='{0}' data-xocfg='0' type='text' accesskey='d' class='xocfg_memo'>{1}</textarea>", key, data);
 				break;
 			case Xoitm_gui_tid.Tid__select:
-				bfr.Add_str_u8_fmt("<select id='{0}' data-xocfg='0' type='text' class='xocfg_select' size='3'>", key);
+				bfr.Add_str_u8_fmt("<select id='{0}' data-xocfg='0' type='text' accesskey='d' class='xocfg_select' size='3'>", key);
 				for (int i = 0; i < 3; i++) {
 					bfr.Add_str_u8_fmt("<option value='{0}'{2}>{1}</option>", i, i, i == 2 ? " selected='selected'" : "");
 				}
 				bfr.Add_str_u8_fmt("</select>");
 				break;
 			case Xoitm_gui_tid.Tid__fs_file:
-				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='text' class='xocfg_fs_file' value='{1}'></input>", key, data);
+				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='text' accesskey='d' class='xocfg_fs_file' value='{1}'></input>", key, data);
 				break;
 		}
 	}

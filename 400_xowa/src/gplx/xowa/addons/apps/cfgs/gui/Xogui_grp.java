@@ -46,7 +46,9 @@ public class Xogui_grp implements Xogui_nde, Mustache_doc_itm {
 	public boolean Mustache__write(String k, Mustache_bfr bfr) {
 		if		(String_.Eq(k, "id"))		bfr.Add_int(id);
 		else if	(String_.Eq(k, "key"))		bfr.Add_str_u8(key);
-		else if	(String_.Eq(k, "name"))		bfr.Add_str_u8_safe(name);
+		else if	(String_.Eq(k, "lang"))		bfr.Add_str_u8(name);
+		else if	(String_.Eq(k, "name"))		bfr.Add_str_u8(name);
+		else if	(String_.Eq(k, "help"))		bfr.Add_str_u8(help);
 		return false;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {

@@ -32,8 +32,11 @@ public class Xoitm_data_tbl implements Db_tbl {
 	}
 	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
-	public void Update(int itm_id, String ctx, String itm_val, String itm_date) {
-		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__itm_id), itm_id, itm_date, itm_val);
+	public void Upsert(int itm_id, String ctx, String itm_val, String itm_date) {
+		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__itm_id), itm_id, ctx, itm_val, itm_date);
+	}
+	public void Delete(int id, String ctx) {
+		conn.Stmt_delete(tbl_name, fld__itm_id, fld__itm_ctx).Crt_int(fld__itm_id, id).Crt_str(fld__itm_ctx, ctx).Exec_delete();
 	}
 	public Xoitm_data_itm Select_by_id_or_null(int id) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__itm_id).Exec_select__rls_auto();

@@ -21,13 +21,14 @@ import gplx.xowa.addons.apps.cfgs.specials.lists.*; import gplx.xowa.addons.apps
 public class Xoa_cfg_addon implements Xoax_addon_itm, Xoax_addon_itm__special, Xoax_addon_itm__json {
 	public Xow_special_page[] Special_pages() {
 		return new Xow_special_page[]
-		{ Xocfg_list_special.Prototype
-		, Xocfg_item_special.Prototype
+		{ Xocfg_item_special.Prototype
+		, Xocfg_list_special.Prototype
 		};
 	}
 	public Bridge_cmd_itm[] Json_cmds() {
 		return new Bridge_cmd_itm[]
 		{ Xocfg_item_bridge.Prototype
+		, Xocfg_list_bridge.Prototype
 		};
 	}
 

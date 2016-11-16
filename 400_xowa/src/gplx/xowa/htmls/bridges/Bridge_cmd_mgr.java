@@ -40,4 +40,6 @@ public class Bridge_cmd_mgr {
 		}
 	}
 	private static final    byte[] Key_cmd = Bry_.new_a7("cmd"), Key_data = Bry_.new_a7("data");
+	public static final    byte[] Msg__proc = Bry_.new_a7("proc"), Msg__args = Bry_.new_a7("args");
+	public static String Msg__ok = String_.Empty;
 }

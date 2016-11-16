@@ -43,6 +43,11 @@ public class Xocfg_db_mgr {
 	public void Set_str(String ctx, String key, String val) {
 		Xoitm_meta_itm meta_itm = tbl__itm_meta.Select_by_key_or_null(key);
 		if (meta_itm == null) throw Err_.new_wo_type("cfg not defined", "ctx", ctx, "key", key);
-		tbl__itm_data.Update(meta_itm.Id(), ctx, val, Datetime_now.Get().XtoUtc().XtoStr_fmt_iso_8561());
+		tbl__itm_data.Upsert(meta_itm.Id(), ctx, val, Datetime_now.Get().XtoUtc().XtoStr_fmt_iso_8561());
+	}
+	public void Del(String ctx, String key) {
+		Xoitm_meta_itm meta_itm = tbl__itm_meta.Select_by_key_or_null(key);
+		if (meta_itm == null) throw Err_.new_wo_type("cfg not defined", "ctx", ctx, "key", key);
+		tbl__itm_data.Delete(meta_itm.Id(), ctx);
 	}
 }

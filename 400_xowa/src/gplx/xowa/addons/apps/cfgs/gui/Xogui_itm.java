@@ -56,15 +56,24 @@ public class Xogui_itm implements Xogui_nde, Mustache_doc_itm {
 		this.date = date;
 	}
 	public void Set_data_by_dflt() {
-		this.ctx = String_.Empty;
+		this.ctx = Ctx__app;
 		this.val = dflt;
 		this.date = String_.Empty;
 	}
 	public boolean Mustache__write(String k, Mustache_bfr bfr) {
-		if		(String_.Eq(k, "name"))		bfr.Add_str_u8(name);
+		if		(String_.Eq(k, "id"))		bfr.Add_int(id);
+		else if	(String_.Eq(k, "key"))		bfr.Add_str_u8(key);
+		else if	(String_.Eq(k, "dflt"))		bfr.Add_str_u8(dflt);
+		else if	(String_.Eq(k, "lang"))		bfr.Add_str_u8(name);
+		else if	(String_.Eq(k, "name"))		bfr.Add_str_u8(name);
+		else if	(String_.Eq(k, "help"))		bfr.Add_str_u8(help);
+		else if	(String_.Eq(k, "ctx"))		bfr.Add_str_u8(ctx);
+		else if	(String_.Eq(k, "val"))		bfr.Add_str_u8(val);
+		else if	(String_.Eq(k, "date"))		bfr.Add_str_u8(date);
 		else if	(String_.Eq(k, "html"))		new Xogui_itm_html().Build_html(bfr.Bfr(), key, name, gui_type, gui_args, val);
 		return true;
 	}
+	public static String Ctx__app = "app";
 	public Mustache_doc_itm[] Mustache__subs(String key) {
 		return Mustache_doc_itm_.Ary__empty;
 	}

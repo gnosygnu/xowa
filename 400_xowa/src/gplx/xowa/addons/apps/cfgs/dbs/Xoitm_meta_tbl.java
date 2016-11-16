@@ -38,7 +38,7 @@ public class Xoitm_meta_tbl implements Db_tbl {
 		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__itm_id), itm_id, itm_key, scope_id, gui_type, gui_args, itm_dflt);
 	}
 	public Xoitm_meta_itm Select_by_key_or_null(String key) {
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__itm_key).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__itm_key).Crt_str(fld__itm_key, key).Exec_select__rls_auto();
 		try {return rdr.Move_next() ? Load(rdr) : null;}
 		finally {rdr.Rls();}
 	}

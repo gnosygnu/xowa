@@ -16,16 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.specials.items; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*;
-import gplx.dbs.sys.*;
 import gplx.langs.jsons.*;
-public class Xocfg_item_bridge implements gplx.xowa.htmls.bridges.Bridge_cmd_itm {
+import gplx.xowa.htmls.bridges.*;
+public class Xocfg_item_bridge implements Bridge_cmd_itm {
 	private Xoa_app app;
 	public void Init_by_app(Xoa_app app) {
 		this.app = app;
 	}
 	public String Exec(Json_nde data) {
-		byte proc_id = proc_hash.Get_as_byte_or(data.Get_as_bry_or(Msg__proc, null), Byte_ascii.Max_7_bit);
-		Json_nde args = data.Get_kv(Msg__args).Val_as_nde();
+		byte proc_id = proc_hash.Get_as_byte_or(data.Get_as_bry_or(Bridge_cmd_mgr.Msg__proc, null), Byte_ascii.Max_7_bit);
+		Json_nde args = data.Get_kv(Bridge_cmd_mgr.Msg__args).Val_as_nde();
 		switch (proc_id) {
 			case Proc__upsert:					Save(args); break;
 			default: throw Err_.new_unhandled_default(proc_id);
@@ -48,7 +48,6 @@ public class Xocfg_item_bridge implements gplx.xowa.htmls.bridges.Bridge_cmd_itm
 		}
 	}
 
-	private static final    byte[] Msg__proc = Bry_.new_a7("proc"), Msg__args = Bry_.new_a7("args");
 	private static final byte Proc__upsert = 0;
 	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("upsert"						, Proc__upsert)
