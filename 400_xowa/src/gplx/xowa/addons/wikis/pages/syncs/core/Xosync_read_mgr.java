@@ -31,7 +31,7 @@ public class Xosync_read_mgr {
 
 		Xoapi_sync_api sync_api = wiki.App().Api_root().Addon().Bldr().Sync();
 		if (!sync_api.Auto_enabled()) return;
-		if (!sync_api.Auto_page_matcher().Match(page_ttl.Full_db())) return;
+		if (!sync_api.Auto_page_matcher().Match(wiki, page_ttl.Full_db())) return;
 
 		wiki.Data__core_mgr().Db__core().Tbl__page().Select_by_ttl(tmp_dbpg, page_ttl.Ns(), page_ttl.Page_db());
 

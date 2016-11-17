@@ -17,11 +17,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.addons.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.addons.*;
 public class Xoapi_sync_api implements Gfo_invk {
+	private final    Xopg_match_mgr auto_page_matcher = new Xopg_match_mgr();
+	public Xoapi_sync_api() {
+		this.Auto_scope_("*:Main_Page");
+	}
 	public boolean				Manual_enabled()		{return manual_enabled;}		private boolean manual_enabled = false;
 	public boolean				Auto_enabled()			{return auto_enabled;}			private boolean auto_enabled = false;
 	public int				Auto_interval()			{return auto_interval;}			private int auto_interval = 60 * 24;	// in minutes
-	public String			Auto_scope()			{return auto_scope;}			private String auto_scope = "Main_Page";
-	public Xopg_match_mgr	Auto_page_matcher() {return auto_page_matcher;} private final    Xopg_match_mgr auto_page_matcher = new Xopg_match_mgr();
+	public String			Auto_scope()			{return auto_scope;}			private String auto_scope;
+	private void Auto_scope_(String v) {
+		this.auto_scope = v;
+		auto_page_matcher.Set(v);
+	}
+	public Xopg_match_mgr	Auto_page_matcher() {return auto_page_matcher;}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__manual_enabled)) 						return Yn.To_str(manual_enabled);
 		else if	(ctx.Match(k, Invk__manual_enabled_)) 						manual_enabled = m.ReadBool("v");
@@ -30,7 +38,7 @@ public class Xoapi_sync_api implements Gfo_invk {
 		else if	(ctx.Match(k, Invk__auto_interval)) 						return Int_.To_str(auto_interval);
 		else if	(ctx.Match(k, Invk__auto_interval_)) 						auto_interval = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk__auto_scope)) 							return auto_scope;
-		else if	(ctx.Match(k, Invk__auto_scope_)) 							auto_scope = m.ReadStr("v");
+		else if	(ctx.Match(k, Invk__auto_scope_)) 							Auto_scope_(m.ReadStr("v"));
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
