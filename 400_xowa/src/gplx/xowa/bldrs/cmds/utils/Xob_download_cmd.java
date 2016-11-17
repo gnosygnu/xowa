@@ -64,4 +64,24 @@ public class Xob_download_cmd extends Xob_cmd__base implements Xob_cmd {
 	private static final String
 	  Invk_dump_date_ = "dump_date_", Invk_dump_type_ = "dump_type_", Invk_unzip_ = "unzip_"
 	, Invk_dump_src_ = "dump_src_", Invk_dump_trg_zip_ = "dump_trg_zip_", Invk_dump_trg_bin_ = "dump_trg_bin_";
+
+	public static void Add_if_not_found_many(Xob_bldr bldr, Xowe_wiki wiki, String... dump_types) {
+		IoItmHash itm_hash = Io_mgr.Instance.QueryDir_args(wiki.Fsys_mgr().Root_dir()).ExecAsItmHash();
+		for (String dump_type : dump_types)
+			Add_if_not_found(bldr, wiki, itm_hash, dump_type);
+	}
+	private static void Add_if_not_found(Xob_bldr bldr, Xowe_wiki wiki, IoItmHash itm_hash, String dump_type) {
+		if (!Found(itm_hash, dump_type))
+			bldr.Cmd_mgr().Add(new Xob_download_cmd(bldr, wiki).Dump_type_(dump_type));
+	}
+	private static boolean Found(IoItmHash hash, String dump_type) {
+		String match = String_.Format("{0}.sql", dump_type); // EX: "page_props.sql"
+		int len = hash.Count();
+		for (int i = 0; i < len; i++) {
+			IoItm_base fil = (IoItm_base)hash.Get_at(i);
+			if (String_.Has(fil.Url().NameAndExt(), match))
+				return true;
+		}
+		return false;
+	}
 }

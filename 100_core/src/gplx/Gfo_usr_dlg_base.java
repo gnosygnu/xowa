@@ -51,6 +51,7 @@ public class Gfo_usr_dlg_base implements Gfo_usr_dlg {
 				return tmp_bfr.To_str_and_clear();
 			}
 			catch (Exception e) {	// NOTE: can fail if fmt has ~{}; callers should proactively remove, but for now, just return fmt if fails; EX:Page_sync and en.w:Web_crawler; DATE:2016-11-17
+				Err_.Noop(e);
 				return fmt;
 			}
 		}

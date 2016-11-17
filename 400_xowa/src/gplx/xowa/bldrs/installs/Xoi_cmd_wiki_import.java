@@ -16,9 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.threads.*; import gplx.xowa.bldrs.*; import gplx.xowa.guis.views.*; import gplx.xowa.bldrs.cmds.utils.*;
+import gplx.core.threads.*; 
+import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.utils.*;
+import gplx.xowa.guis.views.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.htmls.hrefs.*;
+import gplx.xowa.addons.wikis.ctgs.bldrs.*;
 class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 	private boolean running;
 	private Xowe_wiki wiki;
@@ -86,8 +89,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 
 		// setup category
 		if (wiki.Domain_itm().Domain_type_id() != Xow_domain_tid_.Tid__other) {	// do not add category if not wmf; note that wikia wikis will not have category dumps; DATE:2016-10-22
-			bldr.Cmd_mgr().Add(new gplx.xowa.bldrs.cmds.utils.Xob_download_cmd(bldr, wiki).Dump_type_(gplx.xowa.addons.wikis.ctgs.bldrs.Xob_catlink_cmd.Dump_file_name));
-			bldr.Cmd_mgr().Add(new gplx.xowa.bldrs.cmds.utils.Xob_download_cmd(bldr, wiki).Dump_type_(gplx.xowa.addons.wikis.ctgs.bldrs.Xob_pageprop_cmd.Dump_file_name));
+			Xob_download_cmd.Add_if_not_found_many(bldr, wiki, Xob_catlink_cmd.Dump_file_name, Xob_pageprop_cmd.Dump_file_name);
 			bldr.Cmd_mgr().Add(new gplx.xowa.addons.wikis.ctgs.bldrs.Xob_pageprop_cmd(bldr, wiki).Src_dir_manual_(dump_url.OwnerDir()));
 			bldr.Cmd_mgr().Add(new gplx.xowa.addons.wikis.ctgs.bldrs.Xob_catlink_cmd(bldr, wiki).Src_dir_manual_(dump_url.OwnerDir()));
 		}
