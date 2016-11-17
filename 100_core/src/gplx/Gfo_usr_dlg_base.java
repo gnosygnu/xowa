@@ -46,8 +46,13 @@ public class Gfo_usr_dlg_base implements Gfo_usr_dlg {
 	}
 	private String Bld_msg_many(String grp_key, String msg_key, String fmt, Object[] args) {
 		synchronized (tmp_fmtr) {
-			tmp_fmtr.Fmt_(fmt).Bld_bfr_many(tmp_bfr, args);
-			return tmp_bfr.To_str_and_clear();
+			try {
+				tmp_fmtr.Fmt_(fmt).Bld_bfr_many(tmp_bfr, args);
+				return tmp_bfr.To_str_and_clear();
+			}
+			catch (Exception e) {	// NOTE: can fail if fmt has ~{}; callers should proactively remove, but for now, just return fmt if fails; EX:Page_sync and en.w:Web_crawler; DATE:2016-11-17
+				return fmt;
+			}
 		}
 	}
 	private String Bld_msg_one(String grp_key, String msg_key, String fmt, Object val) {

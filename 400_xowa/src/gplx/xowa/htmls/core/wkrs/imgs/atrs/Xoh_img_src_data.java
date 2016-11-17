@@ -22,7 +22,7 @@ import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 	private final    Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
-	public void Fail_throws_err_(boolean v) {rdr.Fail_throws_err_(v);}// TEST
+	private boolean fail_throws_err;
 	public byte[] Src_bry() {return src_bry;} private byte[] src_bry;
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;
@@ -60,8 +60,8 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 		if (src_end == src_bgn) return true;						// empty src; just return true;
 
 		// get repo_bgn; note that some <img> may be hiero / enlarge / magnify and should exit
-		rdr.Init_by_wkr(err_wkr, "img.src.xowa", src_bgn, src_end).Fail_throws_err_(Bool_.N);
-		repo_bgn = rdr.Find_fwd_rr(Bry__file);						
+		rdr.Init_by_wkr(err_wkr, "img.src.xowa", src_bgn, src_end).Fail_throws_err_(fail_throws_err);
+		repo_bgn = rdr.Find_fwd_rr_or(Bry__file, -1);
 		if (repo_bgn == -1) {
 			repo_bgn = rdr.Find_fwd_rr(Bry__math);
 			if (repo_bgn == Bry_find_.Not_found) return false;
@@ -131,6 +131,11 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 		}
 		return rdr.Move_to(pos);
 	}
+	public void Fail_throws_err_(boolean v) {// TEST
+		this.fail_throws_err = v;
+		rdr.Fail_throws_err_(v);
+	}
+
 	private static final    byte[] Bry__file = Bry_.new_a7("/file/"), Bry__math = Bry_.new_a7("/math/"), Bry__orig = Bry_.new_a7("orig/"), Bry__thumb = Bry_.new_a7("thumb/");
 	private static final byte Tid__orig = 1, Tid__thumb = 2;
 	private static final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs().Add_bry_byte(Bry__orig, Tid__orig).Add_bry_byte(Bry__thumb, Tid__thumb);

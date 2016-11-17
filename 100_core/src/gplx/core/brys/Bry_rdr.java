@@ -47,6 +47,8 @@ public class Bry_rdr {
 	public int Find_fwd_rr()			{return Find_fwd(dflt_dlm	, Bool_.N, Bool_.N, Fail_if_missing);}
 	public int Find_fwd_rr(byte find)	{return Find_fwd(find		, Bool_.N, Bool_.N, Fail_if_missing);}
 	public int Find_fwd_rr(byte[] find) {return Find_fwd(find		, Bool_.N, Bool_.N, Fail_if_missing);}
+	public int Find_fwd_rr_or(byte[] find, int or)
+										{return Find_fwd(find		, Bool_.N, Bool_.N, or);}
 	private int Find_fwd(byte find, boolean ret_lhs, boolean pos_lhs, int or) {
 		int find_pos = Bry_find_.Find_fwd(src, find, pos, src_end);
 		if (find_pos == Bry_find_.Not_found) {
