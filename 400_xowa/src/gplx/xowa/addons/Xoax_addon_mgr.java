@@ -57,6 +57,7 @@ public class Xoax_addon_mgr {
 		, new gplx.xowa.addons.wikis.pages.syncs		.Xosync_addon()
 		, new gplx.xowa.addons.users.wikis.regys		.Xou_regy_addon()
 		, new gplx.xowa.addons.apps.cfgs				.Xoa_cfg_addon()
+		, new gplx.xowa.addons.apps.updates				.Xoa_update_addon()
 
 		// jsons
 		);

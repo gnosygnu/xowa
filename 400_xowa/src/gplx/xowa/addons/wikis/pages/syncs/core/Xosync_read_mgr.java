@@ -42,7 +42,7 @@ public class Xosync_read_mgr {
 			sync_conn.Meta_tbl_assert(sync_tbl);
 		}
 		DateAdp sync_date = sync_tbl.Select_sync_date_or_min(tmp_dbpg.Id());
-		if (Datetime_now.Get().Diff(sync_date).Total_mins().To_int() < sync_api.Auto_interval()) return;
+		if (Datetime_now.Get().Diff(sync_date).Total_mins().To_int() <= sync_api.Auto_interval()) return;
 		
 		Xoa_app app = wiki.App();
 		Xoh_page hpg = new Xoh_page();

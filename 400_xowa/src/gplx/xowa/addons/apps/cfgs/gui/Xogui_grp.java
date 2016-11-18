@@ -49,7 +49,7 @@ public class Xogui_grp implements Xogui_nde, Mustache_doc_itm {
 		else if	(String_.Eq(k, "lang"))		bfr.Add_str_u8(name);
 		else if	(String_.Eq(k, "name"))		bfr.Add_str_u8(name);
 		else if	(String_.Eq(k, "help"))		bfr.Add_str_u8(help);
-		return false;
+		return true;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
 		if		(String_.Eq(key, "itms"))		return itms;
