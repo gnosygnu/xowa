@@ -326,7 +326,7 @@ li.active a, li.active a:hover
               Enable automatic syncs: <sup id="cite_ref-auto_enabled_1-0" class="reference"><a href="#cite_note-auto_enabled-1">[2]</a></sup>
             </td>
             <td>
-              <input xowa_prop="xowa.api.addon.bldr.sync.auto_enabled" type="checkbox" class="options_checkbox" id='xowa_prop_1'>
+              <input xowa_prop="xowa.api.addon.bldr.sync.auto_enabled" type="checkbox" class="options_checkbox" id='xowa_prop_1' checked='checked'>
             </td>
           </tr>
           <tr>
@@ -343,7 +343,7 @@ li.active a, li.active a:hover
             </td>
             <td>
 <textarea xowa_prop="xowa.api.addon.bldr.sync.auto_scope" class="options_textarea" style="width: 400px; height:72px;" id='xowa_prop_3'>
-Main_Page
+*
 </textarea>
             </td>
           </tr>
@@ -400,10 +400,10 @@ Main_Page
             <span class="mw-cite-backlink"><a href="#cite_ref-auto_scope_3-0">^</a></span> <span class="reference-text">Specify specific page titles to sync: (default is <code>Main_Page</code>)</span>
             <ul>
               <li>
-                <span class="reference-text"><b>Main_Page</b> means sync all Main_Pages in all wikis</span>
+                <span class="reference-text"><b>*:Main_Page</b>: means sync all Main_Pages in all wikis</span>
               </li>
               <li>
-                <span class="reference-text"><b>*</b> is a wildcard and means sync all pages in all wikis</span>
+                <span class="reference-text"><b>*</b>: is a wildcard and means sync all pages in all wikis</span>
               </li>
               <li>
                 <span class="reference-text">Individual pages can be specified on each line.</span>
