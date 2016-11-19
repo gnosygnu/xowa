@@ -99,10 +99,10 @@ public class Scrib_lib_mw implements Scrib_lib {
 			return rslt.Init_obj(core.Interpreter().LoadString("@" + mod_name + ".lua", mod_code));
 		Xoa_ttl ttl = Xoa_ttl.Parse(cur_wiki, Bry_.new_u8(mod_name));// NOTE: should have Module: prefix
 		if (ttl == null) return rslt.Init_ary_empty();
-		Xoae_page page = cur_wiki.Data_mgr().Load_page_by_ttl(ttl);
-		if (page.Db().Page().Exists_n()) return rslt.Init_ary_empty();
+		byte[] page_db = cur_wiki.Cache_mgr().Page_cache().Get_or_load_as_src(ttl);
+		if (page_db == null) return rslt.Init_ary_empty();
 		Scrib_lua_mod mod = new Scrib_lua_mod(core, mod_name);
-		return rslt.Init_obj(mod.LoadString(String_.new_u8(page.Db().Text().Text_bry())));
+		return rslt.Init_obj(mod.LoadString(String_.new_u8(page_db)));
 	}
 	public boolean LoadPHPLibrary(Scrib_proc_args args, Scrib_proc_rslt rslt) { // NOTE: noop; Scribunto uses this to load the Scribunto_*Library classses (EX: Scribunto_TitleLibrary); DATE:2015-01-21
 		return rslt.Init_obj(null);

@@ -36,8 +36,11 @@ public class Xop_mediawiki_wkr__tst {
 	}
 }
 class Xop_mediawiki_wkr__fxt {
-	private final    Xop_mediawiki_mgr mgr = new Xop_mediawiki_mgr("mem/xowa/wiki/en.wikipedia.org/");
+	private final    Xop_mediawiki_mgr mgr = new Xop_mediawiki_mgr("mem/xowa/wiki/en.wikipedia.org/", false);
 	private Xop_mediawiki_wkr wkr;
+	public Xop_mediawiki_wkr__fxt() {
+		gplx.dbs.Db_conn_bldr.Instance.Reg_default_mem();
+	}
 	public void Init__wkr(String wiki, Xop_mediawiki_loader cbk) {
 		this.wkr = mgr.Make(wiki, cbk);
 	}
