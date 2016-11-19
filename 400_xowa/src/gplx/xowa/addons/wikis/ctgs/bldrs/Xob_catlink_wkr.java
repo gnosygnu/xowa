@@ -47,6 +47,7 @@ class Xob_catlink_wkr {
 				// check if row can fit in db; else update db_size
 				int page_id_cur = rdr.Read_int("cl_from");
 				byte[] sortkey = rdr.Read_bry("cl_sortkey");
+				if (sortkey == null) sortkey = Bry_.Empty;	// WORKAROUND: sortkey should never be null; however, sqlite.jdbc sometimes returns as null; EX:ru.s and cl_from = 1324; DATE:2016-11-19
 				byte[] sortkey_prefix = rdr.Read_bry_by_str("cl_sortkey_prefix");
 				long db_size_new = db_size_cur + 48 + (sortkey.length * 2) + sortkey_prefix.length;// 46 = 3 ints (12) + 1 long (8) + 1 byte (2?) + 2 index (24?) + 11 fudge factor (?); DATE:2016-09-06
 				if (	db_size_cur > db_size_max		// size exceeded
