@@ -27,6 +27,7 @@ public class Xosync_read_mgr {
 	private final    Xosync_update_mgr update_mgr = new Xosync_update_mgr();
 	public void Auto_update(Xow_wiki wiki, Xoa_page page, Xoa_ttl page_ttl) {
 		if (wiki.Domain_itm().Domain_type_id() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__home) return;
+		if (wiki.Domain_itm().Domain_type_id() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__other) return;
 		if (page_ttl.Ns().Id_is_special()) return;
 
 		Xoapi_sync_api sync_api = wiki.App().Api_root().Addon().Bldr().Sync();
