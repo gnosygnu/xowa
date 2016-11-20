@@ -213,6 +213,9 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	}
 	public void Page__refresh() {
 		Xog_tab_itm tab = tab_mgr.Active_tab(); Xoae_page page = tab.Page(); Xog_html_itm html_itm = tab.Html_itm();
+		if (page.Ttl().Ns().Id_is_special()) {
+			page = page.Wikie().Page_mgr().Load_page(page.Url(), page.Ttl(), tab);	// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
+		}
 		page.Html_data().Bmk_pos_(html_itm.Html_box().Html_js_eval_proc_as_str(Xog_js_procs.Win__vpos_get));
 		html_itm.Show(page);
 		if (page.Url().Anch_str() == null)

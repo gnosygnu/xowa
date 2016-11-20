@@ -22,7 +22,7 @@ class Xoa_update_html extends Xow_special_wtr__base {
 	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return app.Fsys_mgr().Http_root().GenSubDir_nest("bin", "any", "xowa", "addon", "app", "update");}
 	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xoa_update.mustache.html");}
 	@Override protected Mustache_doc_itm Bld_mustache_root(Xoa_app app) {
-		Io_url update_db_url = Get_addon_dir(app).GenSubFil("xowa_update_info.sqlite3");
+		Io_url update_db_url = Get_addon_dir(app).GenSubFil("xoa_update.sqlite3");
 		Xoa_update_db_mgr db_mgr = new Xoa_update_db_mgr(update_db_url);
 		return Load(db_mgr);
 	}
@@ -30,18 +30,19 @@ class Xoa_update_html extends Xow_special_wtr__base {
 		// get from internet
 		if (gplx.core.ios.IoEngine_system.Web_access_enabled) {
 			Io_url trg_url = db_mgr.Url();
-			String src_url = "http://xowa.org/admin/app_update/xowa_update_info.sqlite3";
+			String src_url = "http://xowa.org/admin/app_update/xoa_update.sqlite3";
 			Io_mgr.Instance.DownloadFil(src_url, trg_url);
 		}
 
 		// load from db
 		Xoa_app_version_itm[] db_itms = db_mgr.Tbl__app_version().Select_by_date(Xoa_app_.Build_date);
-		if (db_itms.length == 0) return new Xoa_update_itm("up-to-date", "", "", "", "", "");
+		if (db_itms.length == 0) return new Xoa_update_itm__root(Xoa_app_.Version, Xoa_app_.Build_date, "", "up-to-date", "", "", "", "");
 
 		// convert to gui itm
-		Xoa_update_itm head = To_gui_itm(db_itms[0], Find_major(db_itms));
-		head.Itms_(To_gui_itm(db_itms));
-		return head;
+		Xoa_app_version_itm db_itm = db_itms[0];
+		Xoa_update_itm__root root = new Xoa_update_itm__root(Xoa_app_.Version, Xoa_app_.Build_date, Find_major(db_itms), db_itm.Id(), db_itm.Date(), db_itm.Priority_str(), db_itm.Summary(), db_itm.Details());
+		root.Itms_(To_gui_itm(db_itms));
+		return root;
 	}
 	private static String Find_major(Xoa_app_version_itm[] db_itms) {
 		int len = db_itms.length;
@@ -51,18 +52,18 @@ class Xoa_update_html extends Xow_special_wtr__base {
 			if (db_itm.Priority() >= Xoa_app_version_itm.Priority__major)
 				major = db_itm;
 		}
-		return major == null ? "" : String_.Format("({0}) {1}", major.Priority_str(), major.Id());
+		return major == null ? "" : String_.Format("({0}) {1}: {2}", major.Priority_str(), major.Id(), major.Summary());
 	}
-	private static Xoa_update_itm[] To_gui_itm(Xoa_app_version_itm[] db_itms) {
+	private static Xoa_update_itm__leaf[] To_gui_itm(Xoa_app_version_itm[] db_itms) {
 		int len = db_itms.length;
-		Xoa_update_itm[] rv = new Xoa_update_itm[len];
+		Xoa_update_itm__leaf[] rv = new Xoa_update_itm__leaf[len];
 		for (int i = 0; i < len; i++) {
-			rv[i] = To_gui_itm(db_itms[i], "");
+			rv[i] = To_gui_itm(db_itms[i]);
 		}
 		return rv;
 	}
-	private static Xoa_update_itm To_gui_itm(Xoa_app_version_itm db_itm, String major) {
-		return new Xoa_update_itm(db_itm.Id(), db_itm.Date(), db_itm.Priority_str(), db_itm.Summary(), db_itm.Details(), major);
+	private static Xoa_update_itm__leaf To_gui_itm(Xoa_app_version_itm db_itm) {
+		return new Xoa_update_itm__leaf(db_itm.Id(), db_itm.Date(), db_itm.Priority_str(), db_itm.Summary(), db_itm.Details());
 	}
 
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {

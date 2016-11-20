@@ -40,7 +40,7 @@ public class Xoa_app_version_tbl implements Db_tbl {
 		, "ORDER BY version_date"
 		), date);
 
-		Db_rdr rdr = conn.Stmt_sql(sql).Crt_str(fld__version_date, date).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_sql(sql).Exec_select__rls_auto();
 		try {
 			List_adp list = List_adp_.New();
 			while (rdr.Move_next()) {
