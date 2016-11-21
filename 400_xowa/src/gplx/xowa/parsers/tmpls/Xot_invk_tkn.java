@@ -344,7 +344,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			}
 		}
 		if (transclude_src !=  null) {
-			Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), page_ttl.Ns(), page_ttl.Page_db(), transclude_src);
+			Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn_obj(Xop_ctx.New__sub(wiki, ctx, Xoae_page.New(wiki, page_ttl)), ctx.Tkn_mkr(), page_ttl.Ns(), page_ttl.Page_db(), transclude_src);
 			return Eval_sub(ctx, transclude_tmpl, caller, src, bfr);
 		}
 		else {				

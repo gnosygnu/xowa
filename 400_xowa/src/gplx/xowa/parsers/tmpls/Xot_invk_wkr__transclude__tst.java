@@ -48,4 +48,9 @@ public class Xot_invk_wkr__transclude__tst {
 		fxt.Init_defn_add("Test_3", "{{:Template:{{{1}}}}}");
 		fxt.Test_parse_tmpl_str("{{Test 3|b}}", "[[:Template:b]]");
 	}
+	@Test  public void Toc() {	// PURPOSE: __TOC__ in transcluded page should be ignored; PAGE:de.w:Game_of_Thrones DATE:2016-11-21
+		fxt.Init_page_create("TranscludedToc", "__TOC__\na");
+		fxt.Parser().Expand_tmpl(Bry_.new_u8("{{:TranscludedToc}}"));
+		Tfds.Eq(false, fxt.Page().Wtxt().Toc().Flag__toc());	// transcluded page is true, but current page should still be false
+	}
 }
