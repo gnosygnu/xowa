@@ -17,16 +17,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.updates.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
 public class Xoa_app_version_itm {
-	public Xoa_app_version_itm(String id, String date, int priority, String summary, String details) {
+	public Xoa_app_version_itm(int id, String name, String date, int priority, String url, String summary, String details) {
 		this.id = id;
+		this.name = name;
 		this.date = date;
 		this.priority = priority;
+		this.url = url;
 		this.summary = summary;
 		this.details = details;
 	}
-	public String Id() {return id;} private final    String id;
+	public int Id() {return id;} private final    int id;
+	public String Name() {return name;} private final    String name;
 	public String Date() {return date;} private final    String date;
 	public int Priority() {return priority;} private final    int priority;
+	public String Url() {return url;} private final    String url;
 	public String Summary() {return summary;} private final    String summary;
 	public String Details() {return details;} private final    String details;
 

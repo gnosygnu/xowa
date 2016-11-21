@@ -19,20 +19,26 @@ package gplx.xowa.addons.apps.updates.dbs; import gplx.*; import gplx.xowa.*; im
 import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xoa_app_version_tbl implements Db_tbl {
 	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld__version_id, fld__version_date, fld__version_priority, fld__version_summary, fld__version_details;
+	private final    String fld__version_id, fld__version_name, fld__version_date, fld__version_priority, fld__version_url, fld__version_summary, fld__version_details;
 	private final    Db_conn conn;
 	public Xoa_app_version_tbl(Db_conn conn) {
 		this.conn = conn;
-		this.fld__version_id		= flds.Add_str("version_id", 32);
+		this.fld__version_id		= flds.Add_int_pkey("version_id");
+		this.fld__version_name		= flds.Add_str("version_name", 32);
 		this.fld__version_date		= flds.Add_str("version_date", 32);
 		this.fld__version_priority	= flds.Add_int("version_priority");		// 3:trivial; 5:minor; 7:major;
+		this.fld__version_url		= flds.Add_str("version_url", 255);
 		this.fld__version_summary	= flds.Add_str("version_summary", 255);
 		this.fld__version_details	= flds.Add_text("version_details");
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final    String tbl_name = TBL_NAME;
-	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, fld__version_date, fld__version_date)));}
-	public Xoa_app_version_itm[] Select_by_date(String date) {	// NOTE: version_ids are not easy to sort; using version_date instead
+	public void Create_tbl() {
+		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
+			, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, fld__version_date, fld__version_date))
+			);
+	}
+	public Xoa_app_version_itm[] Select_by_date(String date) {	// NOTE: use version_date b/c (a) version_id is not available; (b) version_name is not easy to sort;
 		String sql = Db_sql_.Make_by_fmt(String_.Ary
 		( "SELECT  *"
 		, "FROM    app_version"
@@ -51,9 +57,11 @@ public class Xoa_app_version_tbl implements Db_tbl {
 	}
 	private Xoa_app_version_itm Load(Db_rdr rdr) {
 		return new Xoa_app_version_itm
-		( rdr.Read_str(fld__version_id)
+		( rdr.Read_int(fld__version_id)
+		, rdr.Read_str(fld__version_name)
 		, rdr.Read_str(fld__version_date)
 		, rdr.Read_int(fld__version_priority)
+		, rdr.Read_str(fld__version_url)
 		, rdr.Read_str(fld__version_summary)
 		, rdr.Read_str(fld__version_details)
 		);

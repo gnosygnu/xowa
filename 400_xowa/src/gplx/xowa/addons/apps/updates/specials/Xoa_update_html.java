@@ -42,7 +42,7 @@ class Xoa_update_html extends Xow_special_wtr__base {
 
 		// convert to gui itm
 		Xoa_app_version_itm db_itm = db_itms[0];
-		Xoa_update_itm__root root = new Xoa_update_itm__root(Xoa_app_.Version, build_date, check_date, db_itm.Id(), db_itm.Date(), db_itm.Priority(), db_itm.Summary(), db_itm.Details());
+		Xoa_update_itm__root root = new Xoa_update_itm__root(Xoa_app_.Version, build_date, check_date, db_itm.Name(), db_itm.Date(), db_itm.Priority(), db_itm.Summary(), db_itm.Details());
 		root.Itms_(To_gui_itm(db_itms));
 		return root;
 	}
@@ -55,7 +55,7 @@ class Xoa_update_html extends Xow_special_wtr__base {
 		return rv;
 	}
 	private static Xoa_update_itm__leaf To_gui_itm(Xoa_app_version_itm db_itm) {
-		return new Xoa_update_itm__leaf(db_itm.Id(), db_itm.Date(), db_itm.Priority(), db_itm.Summary(), db_itm.Details());
+		return new Xoa_update_itm__leaf(db_itm.Name(), db_itm.Date(), db_itm.Priority(), db_itm.Summary(), db_itm.Details());
 	}
 
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {
