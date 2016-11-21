@@ -29,13 +29,14 @@ public class Xoa_app_version_itm {
 	public int Priority() {return priority;} private final    int priority;
 	public String Summary() {return summary;} private final    String summary;
 	public String Details() {return details;} private final    String details;
-	public String Priority_str() {
-		switch (priority) {
-			case 3: return "trivial";
-			case 5: return "minor";
+
+	public static final int Priority__major = 7, Priority__minor = 5, Priority__trivial = 3;
+	public static String Priority__to_name(int v) {
+		switch (v) {
+			case Priority__trivial: return "trivial";
+			case Priority__minor: return "minor";
 			case Priority__major: return "major";
-			default: throw Err_.new_unhandled_default(priority);
+			default: throw Err_.new_unhandled_default(v);
 		}
 	}
-	public static final int Priority__major = 7;
 }

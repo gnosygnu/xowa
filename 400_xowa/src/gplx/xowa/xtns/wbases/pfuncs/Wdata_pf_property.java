@@ -69,9 +69,9 @@ public class Wdata_pf_property extends Pf_func_base {
 		num_parser.Parse(bry, 1, bry_len);
 		return num_parser.Has_err() ? Wdata_wiki_mgr.Pid_null : num_parser.Rv_as_int();
 	}
-	public static void Print_self(Gfo_usr_dlg usr_dlg, Bry_bfr bfr, byte[] src, Xot_invk self, String warn_cls, String warn_fmt, Object... args) {
+	private static void Print_self(Gfo_usr_dlg usr_dlg, Bry_bfr bfr, byte[] src, Xot_invk self, String warn_cls, String warn_fmt, Object... args) {
 		bfr.Add_mid(src, self.Src_bgn(), self.Src_end());
-		usr_dlg.Warn_many(GRP_KEY, warn_cls, warn_fmt, args);
+		usr_dlg.Log_many(GRP_KEY, warn_cls, warn_fmt, args);
 	}
 	public static void Print_empty(Gfo_usr_dlg usr_dlg, String warn_cls, String warn_fmt, Object... args) {
 		usr_dlg.Warn_many(GRP_KEY, warn_cls, warn_fmt, args);

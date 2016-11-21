@@ -150,6 +150,8 @@ public class Pf_func_ {
 	, Xol_kwd_grp_.Id_ttl_subj_txt
 	, Xol_kwd_grp_.Id_ttl_subj_url
 	, Xol_kwd_grp_.Id_ttl_talk_txt
+	, Xol_kwd_grp_.Id_ttl_root_url
+	, Xol_kwd_grp_.Id_ttl_root_txt
 	, Xol_kwd_grp_.Id_ttl_talk_url
 	, Xol_kwd_grp_.Id_site_sitename
 	, Xol_kwd_grp_.Id_site_servername
@@ -302,6 +304,8 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_ttl_leaf_url:
 			case Xol_kwd_grp_.Id_ttl_subj_txt:
 			case Xol_kwd_grp_.Id_ttl_subj_url:
+			case Xol_kwd_grp_.Id_ttl_root_txt:
+			case Xol_kwd_grp_.Id_ttl_root_url:
 			case Xol_kwd_grp_.Id_ttl_talk_txt:
 			case Xol_kwd_grp_.Id_ttl_talk_url:					return Pfunc_ttl.Instance;
 

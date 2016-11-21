@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pfunc_ttl_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()					{fxt.Reset();}
 	@Test   public void Ttl_page_txt()			{fxt.Page_ttl_("a b"); fxt.Test_parse_tmpl_str_test("{{PAGENAME}}"								, "{{test}}", "A b");}
 	@Test   public void Ttl_page_txt_empty()	{fxt.Page_ttl_("a b"); fxt.Test_parse_tmpl_str_test("{{PAGENAME:}}"								, "{{test}}", "");}
@@ -32,6 +32,8 @@ public class Pfunc_ttl_tst {
 	@Test   public void Ttl_leaf_url()			{fxt.Page_ttl_("a b/c/d e"); fxt.Test_parse_tmpl_str_test("{{SUBPAGENAMEE}}"					, "{{test}}", "d_e");}
 	@Test   public void Ttl_base_txt()			{fxt.Page_ttl_("a b/c/d e"); fxt.Test_parse_tmpl_str_test("{{BASEPAGENAME}}"					, "{{test}}", "A b/c");}
 	@Test   public void Ttl_base_url()			{fxt.Page_ttl_("a b/c/d e"); fxt.Test_parse_tmpl_str_test("{{BASEPAGENAMEE}}"					, "{{test}}", "A_b/c");}
+	@Test   public void Rootpagename()			{fxt.Page_ttl_("a b/c/d e"); fxt.Test_parse_tmpl_str_test("{{ROOTPAGENAME}}"					, "{{test}}", "A b");}
+	@Test   public void Rootpagenamee()			{fxt.Page_ttl_("a b/c/d e"); fxt.Test_parse_tmpl_str_test("{{ROOTPAGENAMEE}}"					, "{{test}}", "A_b");}
 	@Test   public void Ttl_subj_txt()			{fxt.Page_ttl_("Help talk:a b"); fxt.Test_parse_tmpl_str_test("{{SUBJECTPAGENAME}}"				, "{{test}}", "Help:A b");}
 	@Test   public void Ttl_subj_url()			{fxt.Page_ttl_("Help talk:a b"); fxt.Test_parse_tmpl_str_test("{{SUBJECTPAGENAMEE}}"			, "{{test}}", "Help:A_b");}
 	@Test   public void Ttl_talk_txt()			{fxt.Page_ttl_("Help:a b"); fxt.Test_parse_tmpl_str_test("{{TALKPAGENAME}}"						, "{{test}}", "Help talk:A b");}

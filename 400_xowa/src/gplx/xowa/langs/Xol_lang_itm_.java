@@ -111,6 +111,8 @@ kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_ttl_talk_txt, "TALKPAGENAME");
 kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_ttl_talk_url, "TALKPAGENAMEE");
 kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_ttl_subj_txt, "SUBJECTPAGENAME", "ARTICLEPAGENAME");
 kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_ttl_subj_url, "SUBJECTPAGENAMEE", "ARTICLEPAGENAMEE");
+kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_ttl_root_txt, "ROOTPAGENAME");
+kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_ttl_root_url, "ROOTPAGENAMEE");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_msg, "msg");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_subst, "subst:");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_safesubst, "safesubst:");

@@ -235,8 +235,10 @@ public static final int
 , Id_categorytree = 213
 , Id_lsth = 214
 , Id_assessment = 215
+, Id_ttl_root_txt = 216
+, Id_ttl_root_url = 217
 ;
-public static final int Id__max = 216;
+public static final int Id__max = 218;
 
 	private static byte[] ary_itm_(int id) {
 		switch (id) {
@@ -294,6 +296,8 @@ case Xol_kwd_grp_.Id_ttl_talk_txt: return Bry_.new_a7("talkpagename");
 case Xol_kwd_grp_.Id_ttl_talk_url: return Bry_.new_a7("talkpagenamee");
 case Xol_kwd_grp_.Id_ttl_subj_txt: return Bry_.new_a7("subjectpagename");
 case Xol_kwd_grp_.Id_ttl_subj_url: return Bry_.new_a7("subjectpagenamee");
+case Xol_kwd_grp_.Id_ttl_root_txt: return Bry_.new_u8("rootpagename");
+case Xol_kwd_grp_.Id_ttl_root_url: return Bry_.new_u8("rootpagenamee");
 case Xol_kwd_grp_.Id_msg: return Bry_.new_a7("msg");
 case Xol_kwd_grp_.Id_subst: return Bry_.new_a7("subst");
 case Xol_kwd_grp_.Id_safesubst: return Bry_.new_a7("safesubst");

@@ -33,6 +33,8 @@ public class Pfunc_ttl extends Pf_func_base {
 			case Xol_kwd_grp_.Id_ttl_leaf_url: bfr.Add(ttl.Leaf_url()); break;
 			case Xol_kwd_grp_.Id_ttl_base_txt: bfr.Add(ttl.Base_txt()); break;
 			case Xol_kwd_grp_.Id_ttl_base_url: bfr.Add(ttl.Base_url()); break;
+			case Xol_kwd_grp_.Id_ttl_root_txt: bfr.Add(ttl.Root_txt()); break;
+			case Xol_kwd_grp_.Id_ttl_root_url: bfr.Add(Xoa_ttl.Replace_spaces(ttl.Root_txt())); break;
 			case Xol_kwd_grp_.Id_ttl_subj_txt: bfr.Add(ttl.Subj_txt()); break;
 			case Xol_kwd_grp_.Id_ttl_subj_url: bfr.Add(ttl.Subj_url()); break;
 			case Xol_kwd_grp_.Id_ttl_talk_txt: bfr.Add(ttl.Talk_txt()); break;

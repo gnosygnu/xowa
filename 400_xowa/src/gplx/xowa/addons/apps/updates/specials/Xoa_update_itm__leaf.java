@@ -17,9 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.updates.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
 import gplx.langs.mustaches.*;
+import gplx.xowa.addons.apps.updates.dbs.*;
 class Xoa_update_itm__leaf implements Mustache_doc_itm {
-	private final    String version, date, priority, summary, details;
-	public Xoa_update_itm__leaf(String version, String date, String priority, String summary, String details) {
+	private final    String version, date, summary, details;
+	private final    int priority;
+	public Xoa_update_itm__leaf(String version, String date, int priority, String summary, String details) {
 		this.version = version;
 		this.date = date;
 		this.priority = priority;
@@ -29,12 +31,13 @@ class Xoa_update_itm__leaf implements Mustache_doc_itm {
 	@gplx.Virtual public boolean Mustache__write(String k, Mustache_bfr bfr) {
 		if		(String_.Eq(k, "version"))			bfr.Add_str_u8(version);
 		else if	(String_.Eq(k, "date"))				bfr.Add_str_u8(date);
-		else if	(String_.Eq(k, "priority"))			bfr.Add_str_u8(priority);
+		else if	(String_.Eq(k, "priority"))			bfr.Add_str_u8(Xoa_app_version_itm.Priority__to_name(priority));
 		else if	(String_.Eq(k, "summary"))			bfr.Add_str_u8(summary);
 		else if	(String_.Eq(k, "details"))			bfr.Add_str_u8(details);
 		return true;
 	}
 	@gplx.Virtual public Mustache_doc_itm[] Mustache__subs(String key) {
+		if		(String_.Eq(key, "priority_is_major"))		return Mustache_doc_itm_.Ary__bool(priority >= Xoa_app_version_itm.Priority__major);
 		return Mustache_doc_itm_.Ary__empty;
 	}
 	
