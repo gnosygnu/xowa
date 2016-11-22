@@ -121,7 +121,7 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_m
 		bfr.Add_byte(Byte_ascii.Paren_end).Add_byte(Byte_ascii.Semic);
 		return Eval_script(bfr.To_str_and_clear());
 	}
-	private static String Escape_quote(String v) {
+	public static String Escape_quote(String v) {
 		String rv = v;
 		rv = String_.Replace(rv, "'", "\\'");
 		rv = String_.Replace(rv, "\"", "\\\"");
@@ -182,9 +182,11 @@ class Swt_html_lnr_title implements TitleListener {
 	}
 }
 class Swt_html_func extends BrowserFunction {    
-	private Gfo_invk invk;
+	private final Gfo_invk invk;
+	private final Browser browser;
     public Swt_html_func(Browser browser, String name, Gfo_invk invk) {
         super (browser, name);
+        this.browser = browser;
         this.invk = invk;
     }
     public Object function (Object[] args) {
@@ -192,7 +194,9 @@ class Swt_html_func extends BrowserFunction {
     		return gplx.gfui.controls.standards.Gfui_html.Js_args_exec(invk, args);
     	}
     	catch (Exception e) {
-    		return Err_.Message_gplx_full(e);
+    		String rv = Err_.Message_gplx_full(e);
+    		browser.execute("alert('" + Swt_html.Escape_quote(rv) + "')");
+    		return rv;
     	}
     }
 }

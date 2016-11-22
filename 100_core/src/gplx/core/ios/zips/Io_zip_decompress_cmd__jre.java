@@ -54,7 +54,7 @@ class Io_zip_decompress_cmd__jre extends Io_zip_decompress_cmd__base {
 				// create file
 				Io_url trg_fil_url = Io_url_.new_any_(trg_dir.GenSubFil(entry_name).Raw());
 				Io_url trg_tmp_url = trg_fil_url.GenNewNameAndExt(trg_fil_url.NameAndExt() + ".tmp");
-				if (trg_tmp_url.Type_fil()) {
+				if (trg_fil_url.Type_fil()) {
 					// handle resume
 					long item_in_raw = 0;					
 					if (resume_item > 0) {
@@ -79,9 +79,12 @@ class Io_zip_decompress_cmd__jre extends Io_zip_decompress_cmd__base {
 					}
 					trg_fil_stream.close();
 					if (!loop) return Gfo_prog_ui_.Status__suspended;	// manually canceled
+					Io_mgr.Instance.MoveFil_args(trg_tmp_url, trg_fil_url, true).Exec();
+					trg_fils.Add(trg_fil_url);
 				}
-				Io_mgr.Instance.MoveFil_args(trg_tmp_url, trg_fil_url, true).Exec();
-				trg_fils.Add(trg_fil_url);
+				else {
+					Io_mgr.Instance.CreateDir(trg_fil_url);
+				}
 			}
 			Gfo_evt_mgr_.Pub_val(Io_mgr.Instance, Io_mgr.Evt__fil_created, trg_fils.To_ary(Io_url.class));
 		}

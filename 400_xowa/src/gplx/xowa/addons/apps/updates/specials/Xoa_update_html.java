@@ -24,9 +24,9 @@ class Xoa_update_html extends Xow_special_wtr__base {
 	@Override protected Mustache_doc_itm Bld_mustache_root(Xoa_app app) {
 		Io_url update_db_url = Get_addon_dir(app).GenSubFil("xoa_update.sqlite3");
 		Xoa_update_db_mgr db_mgr = new Xoa_update_db_mgr(update_db_url);
-		return Load(db_mgr);
+		return Load(app, db_mgr);
 	}
-	private static Mustache_doc_itm Load(Xoa_update_db_mgr db_mgr) {
+	private static Mustache_doc_itm Load(Xoa_app app, Xoa_update_db_mgr db_mgr) {
 		// get from internet
 		if (gplx.core.ios.IoEngine_system.Web_access_enabled) {
 			Io_url trg_url = db_mgr.Url();
@@ -35,16 +35,24 @@ class Xoa_update_html extends Xow_special_wtr__base {
 		}
 
 		// load from db
-		String check_date = "2016-11-01 02:03:04";
+		String check_date = app.User().User_db_mgr().Cfg().Get_app_str_or("app.updater.last_check", null);
+		if (check_date == null) check_date = Datetime_now.Get().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss();
 		Xoa_app_version_itm[] db_itms = db_mgr.Tbl__app_version().Select_by_date(Xoa_app_.Build_date);
 		String build_date = String_.Mid(Xoa_app_.Build_date, 0, String_.FindFwd(Xoa_app_.Build_date, " "));
-		if (db_itms.length == 0) return new Xoa_update_itm__root(Xoa_app_.Version, build_date, check_date, "", "", Xoa_app_version_itm.Priority__trivial, "", "");
+		if (db_itms.length == 0) return new Xoa_update_itm__root(Xoa_app_.Version, build_date, check_date, "", "", "", Xoa_app_version_itm.Priority__trivial, "", "");
 
 		// convert to gui itm
 		Xoa_app_version_itm db_itm = db_itms[0];
-		Xoa_update_itm__root root = new Xoa_update_itm__root(Xoa_app_.Version, build_date, check_date, db_itm.Name(), db_itm.Date(), db_itm.Priority(), db_itm.Summary(), db_itm.Details());
+		String download_url = Gen_download_url(db_itm.Url(), db_itm.Name());
+		Xoa_update_itm__root root = new Xoa_update_itm__root(Xoa_app_.Version, build_date, download_url, check_date, db_itm.Name(), db_itm.Date(), db_itm.Priority(), db_itm.Summary(), db_itm.Details());
 		root.Itms_(To_gui_itm(db_itms));
 		return root;
+	}
+	private static String Gen_download_url(String version_url, String version_name) {
+		String folder = version_url;
+		if (String_.Len_eq_0(folder)) 
+			folder = "https://github.com/gnosygnu/xowa/releases/download/v"; // + 3.11.2.1/xowa_app_windows_64_v3.11.2.1.zip";
+		return String_.Format("{0}{1}/xowa_app_{2}_v{2}.zip", folder, version_name, Xoa_app_.Op_sys_str);
 	}
 	private static Xoa_update_itm__leaf[] To_gui_itm(Xoa_app_version_itm[] db_itms) {
 		int len = db_itms.length;
@@ -65,8 +73,10 @@ class Xoa_update_html extends Xow_special_wtr__base {
 		Xopg_tag_wtr_.Add__xolog	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__xoajax	(head_tags, app.Fsys_mgr().Http_root(), app);
 		Xopg_alertify_.Add_tags		(head_tags, app.Fsys_mgr().Http_root());
+		Xopg_tag_wtr_.Add__xoajax	(head_tags, app.Fsys_mgr().Http_root(), app);
 
 		head_tags.Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "xoa_update.css")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("bin", "xoa_update.js")));
+		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("bin", "xobc.util.js")));
 	}
 }
