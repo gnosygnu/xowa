@@ -20,7 +20,7 @@ import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xoa_update_db_mgr {
 	public Xoa_update_db_mgr(Io_url url) {
 		this.url = url;
-		this.conn = Db_conn_bldr.Instance.Get_or_fail(url);
+		this.conn = Db_conn_bldr.Instance.Get_or_autocreate(true, url);
 		this.tbl__app_version = new Xoa_app_version_tbl(conn);
 		conn.Meta_tbl_assert(tbl__app_version);
 	}

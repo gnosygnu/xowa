@@ -19,19 +19,19 @@ package gplx.xowa.addons.apps.updates.js; import gplx.*; import gplx.xowa.*; imp
 import gplx.core.gfobjs.*; import gplx.core.progs.*; import gplx.core.progs.rates.*;
 import gplx.xowa.guis.cbks.*;
 public class Xojs_wkr__base implements Gfo_prog_ui, Gfo_invk {
-	private long time_prv;
-	private double rate_cur;
+	private final    Gfo_invk_cmd done_cbk;
 	private final    Gfo_rate_list rate_list = new Gfo_rate_list(32);
 	private final    long notify_delay = 1000; 
 	private final    double delta_threshold = .25d;	// allow variance of up to 25% before updating rate
-	private final    String js_cbk;
-
-	private final    Gfo_invk_cmd done_cbk;
-	public Xojs_wkr__base(Xog_cbk_mgr cbk_mgr, Xog_cbk_trg cbk_trg, String js_cbk, Gfo_invk_cmd done_cbk) {
+	private final    String js_cbk, task_type;
+	private long time_prv;
+	private double rate_cur;
+	public Xojs_wkr__base(Xog_cbk_mgr cbk_mgr, Xog_cbk_trg cbk_trg, String js_cbk, Gfo_invk_cmd done_cbk, String task_type) {
 		this.cbk_mgr = cbk_mgr;
 		this.cbk_trg = cbk_trg;
 		this.js_cbk = js_cbk;
 		this.done_cbk = done_cbk;
+		this.task_type = task_type;
 		rate_list.Add(1024 * 1024, 1);	// add default rate of 1 MB per second;
 	}
 	public void Exec() {
@@ -79,7 +79,8 @@ public class Xojs_wkr__base implements Gfo_prog_ui, Gfo_invk {
 		this.data_cur = new_data_cur;
 		this.data_end = new_data_end;
 
-		cbk_mgr.Send_json(cbk_trg, js_cbk, Gfobj_nde.New().Add_long("prog_data_cur", data_cur).Add_long("prog_data_end", data_end).Add_int("prog_rate", (int)rate_cur));
+		cbk_mgr.Send_json(cbk_trg, js_cbk
+		, Gfobj_nde.New().Add_str("task_type", task_type).Add_long("prog_data_cur", data_cur).Add_long("prog_data_end", data_end).Add_int("prog_rate", (int)rate_cur));
 		return false;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

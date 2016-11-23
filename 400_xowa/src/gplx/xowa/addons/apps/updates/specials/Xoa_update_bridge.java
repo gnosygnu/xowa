@@ -28,7 +28,7 @@ public class Xoa_update_bridge implements Bridge_cmd_itm {
 		switch (proc_id) {
 			case Proc__download:
 				Xoa_update_controller controller = new Xoa_update_controller();
-				controller.Update_app(app, args.Get_as_str("src"), args.Get_as_str("trg"), args.Get_as_long("src_len"));
+				controller.Update_app(app, args.Get_as_str("version"));
 				break;
 			default: throw Err_.new_unhandled_default(proc_id);
 		}

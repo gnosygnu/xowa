@@ -32,6 +32,12 @@ class Io_zip_decompress_cmd__jre extends Io_zip_decompress_cmd__base {
 		boolean resumed = resume_name != null;
 		long file_cur_in_raw = resumed ? resume_file : 0;
 		long file_max_in_raw = prog_ui.Prog_data_end();
+		
+		// if no size provided, guess length as 5x orig
+		if (file_max_in_raw == -1) {
+			file_max_in_raw = 4 * Io_mgr.Instance.QueryFil(src_fil).Size();
+		}
+		
 		ZipEntry entry = null;
 		byte[] buffer = new byte[4096];		
 		Io_mgr.Instance.CreateDirIfAbsent(trg_dir); // NOTE: assert that trg_dir exists

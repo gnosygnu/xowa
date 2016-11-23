@@ -55,6 +55,12 @@ public class Xoa_app_version_tbl implements Db_tbl {
 			return (Xoa_app_version_itm[])list.To_ary_and_clear(Xoa_app_version_itm.class);
 		} finally {rdr.Rls();}
 	}
+	public Xoa_app_version_itm Select_by_version_or_null(String name) {
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__version_name).Crt_str(fld__version_name, name).Exec_select__rls_auto();
+		try {
+			return rdr.Move_next() ? Load(rdr) : null;
+		} finally {rdr.Rls();}
+	}
 	private Xoa_app_version_itm Load(Db_rdr rdr) {
 		return new Xoa_app_version_itm
 		( rdr.Read_int(fld__version_id)

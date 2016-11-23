@@ -33,6 +33,12 @@ public class Xoa_app_version_itm {
 	public String Url() {return url;} private final    String url;
 	public String Summary() {return summary;} private final    String summary;
 	public String Details() {return details;} private final    String details;
+	public String Package_url() {
+		String folder = url;
+		if (String_.Len_eq_0(folder)) 
+			folder = "https://github.com/gnosygnu/xowa/releases/releases/tag";
+		return String_.Format("{0}/v{1}/xowa_app_{2}_v{1}.zip", folder, name, Xoa_app_.Op_sys_str);
+	}
 
 	public static final int Priority__major = 7, Priority__minor = 5, Priority__trivial = 3;
 	public static String Priority__to_name(int v) {

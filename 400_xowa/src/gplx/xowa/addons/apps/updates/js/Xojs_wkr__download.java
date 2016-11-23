@@ -19,7 +19,7 @@ package gplx.xowa.addons.apps.updates.js; import gplx.*; import gplx.xowa.*; imp
 import gplx.xowa.guis.cbks.*;
 import gplx.core.net.downloads.*;
 public class Xojs_wkr__download extends Xojs_wkr__base {
-	public Xojs_wkr__download(Xog_cbk_mgr cbk_mgr, Xog_cbk_trg cbk_trg, String js_cbk, Gfo_invk_cmd done_cbk, String src, Io_url trg, long src_len) {super(cbk_mgr, cbk_trg, js_cbk, done_cbk);
+	public Xojs_wkr__download(Xog_cbk_mgr cbk_mgr, Xog_cbk_trg cbk_trg, String js_cbk, Gfo_invk_cmd done_cbk, String src, Io_url trg, long src_len) {super(cbk_mgr, cbk_trg, js_cbk, done_cbk, "downloading");
 		this.src = src;
 		this.src_len = src_len;
 		this.trg = trg;
