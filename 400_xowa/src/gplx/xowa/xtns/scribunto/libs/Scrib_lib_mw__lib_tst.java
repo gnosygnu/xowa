@@ -38,6 +38,10 @@ public class Scrib_lib_mw__lib_tst {
 		fxt.Init_frame_parent("test", Keyval_.new_("1", "a1"), Keyval_.new_("2", "a2"));
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_mw.Invk_getAllExpandedArguments, Object_.Ary("parent"), "1=\n  1=a1\n  2=a2");
 	}
+	@Test  public void GetAllExpandedArguments__zero_padded_number() {	// PURPOSE:  DATE:2016-11-23
+		fxt.Init_frame_current(Keyval_.new_("01", "v1"));
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_mw.Invk_getAllExpandedArguments, Object_.Ary("current"), "1=\n  01=v1");
+	}
 	@Test  public void GetExpandedArgument() {
 		fxt.Init_frame_current(Keyval_.int_(1, "val_1"), Keyval_.new_("key_2", "val_2"), Keyval_.int_(3, "val_3"));
 		fxt.Test_scrib_proc_str		(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "1")		, "val_1");		// get 1st by idx

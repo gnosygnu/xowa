@@ -191,7 +191,8 @@ public class Scrib_lib_mw implements Scrib_lib {
 			if (key_missing)	// key missing; EX: {{a|val}}
 				key_as_int = ++arg_idx;// NOTE: MW requires a key; if none, then default to int index; NOTE: must be int, not String; NOTE: must be indexed to keyless args; EX: in "key1=val1,val2", "val2" must be "1" (1st keyless arg) not "2" (2nd arg); DATE:2013-11-09
 			else {				// key exists; EX:{{a|key=val}}
-				key_as_int = Bry_.To_int_or(tmp_bfr.Bfr(), 0, tmp_bfr.Len(), Int_.Min_value);
+				if (key_len > 0 && tmp_bfr.Bfr()[0] != Byte_ascii.Num_0)	// do not convert zero-padded numbers to int; EX: "01" -> "01" x> 1; PAGE:ru.w:Красноказарменный_проезд; DATE:2016-11-23
+					key_as_int = Bry_.To_int_or(tmp_bfr.Bfr(), 0, tmp_bfr.Len(), Int_.Min_value);
 				if (key_as_int == Int_.Min_value) {		// key is not int; create str
 					key_as_str = tmp_bfr.To_str_and_clear();
 					key_is_str = true;
