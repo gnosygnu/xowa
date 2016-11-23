@@ -29,6 +29,12 @@ public class Xop_mediawiki_wkr {
 		if (loader != null)
 			wiki.Cache_mgr().Page_cache().Load_wkr_(new Xow_page_cache_wkr__embeddable(loader));
 	}
+	public void Free_memory() {
+		wiki.Cache_mgr().Tmpl_result_cache().Clear();
+		wiki.Cache_mgr().Free_mem_all(Bool_.N);
+		wiki.Parser_mgr().Scrib().Core_term();
+		wiki.Appe().Wiki_mgr().Wdata_mgr().Clear();
+	}
 	public String Parse(String page, String wikitext) {
 		Xoa_ttl ttl = wiki.Ttl_parse(Bry_.new_u8(page));
 
