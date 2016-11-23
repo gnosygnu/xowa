@@ -33,9 +33,9 @@ public class Scrib_lib_title_tst {
 	@Test  public void NewTitle_int() {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary(1234)					, ttl_fast(0	, "", "1234", "", "", "1234"));
 	}
-	@Test  public void NewTitle__foreign() {// PURPOSE: always return English name b/c some modules expect English "Template"; PAGE:sh.w:Koprno DATE:2015-11-08
+	@Test  public void NewTitle__foreign() {// PURPOSE: must be local language's version; Russian "Шаблон" not English "Template"; PAGE:ru.w:Королевство_Нидерландов DATE:2016-11-23
 		fxt.Core().Wiki().Ns_mgr().Ns_template().Name_bry_(Bry_.new_a7("Template_in_nonenglish_name"));
-		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("A", "Template")			, ttl_fast(10	, "Template", "A"));	// "Template" not "Template_in_nonenglish_name"
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("A", "Template")			, ttl_fast(10	, "Template_in_nonenglish_name", "A"));	// "Template_in_nonenglish_name" not "Template"
 	}
 	@Test   public void GetUrl() {
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "fullUrl")						, "//en.wikipedia.org/wiki/Main_Page");
@@ -44,7 +44,7 @@ public class Scrib_lib_title_tst {
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "canonicalUrl")					, "https://en.wikipedia.org/wiki/Main_Page");
 		// fxt.Test_scrib_proc_str(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "fullUrl", "", "http")			, "http://en.wikipedia.org/wiki/Main_Page");	// TODO_OLD
 	}
-	@Test  public void GetUrl__args_many() {	// PUPROSE: GetUrl sometimes passes in kvs for qry_args; fr.w:Wikip�dia:Image_du_jour/Date; DATE:2013-12-24
+	@Test  public void GetUrl__args_many() {	// PUPROSE: GetUrl sometimes passes in kvs for qry_args; fr.w:Wikipédia:Image_du_jour/Date; DATE:2013-12-24
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "canonicalUrl", Keyval_.Ary(Keyval_.new_("action", "edit"), Keyval_.new_("preload", "b"))), "https://en.wikipedia.org/wiki/Main_Page?action=edit&preload=b");
 	}
 	@Test   public void MakeTitle() {

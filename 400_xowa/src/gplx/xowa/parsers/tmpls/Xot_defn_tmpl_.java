@@ -24,7 +24,7 @@ public class Xot_defn_tmpl_ {
 		Xowe_wiki wiki = ctx.Wiki();
 		Xot_invk_temp rv = new Xot_invk_temp(orig.Defn_tid(), orig_src, orig.Name_tkn(), caller.Src_bgn(), caller.Src_end());
 		frame_ttl = wiki.Lang().Case_mgr().Case_reuse_1st_upper(frame_ttl);	// NOTE: always uppercase 1st; EX:{{navbox -> "Template:Navbox"; PAGE:en.w:Achilles DATE:2014-06-21
-		rv.Frame_ttl_(Bry_.Add(Xow_ns_.Bry__template_w_colon, Xoa_ttl.Replace_unders(frame_ttl)));		// NOTE: always prepend "Template:" to frame_ttl; DATE:2014-06-13; always use spaces; DATE:2014-08-14; always use English "Template"; DATE:2015-11-09
+		rv.Frame_ttl_(Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), Xoa_ttl.Replace_unders(frame_ttl)));		// NOTE: always prepend "Template:" to frame_ttl; DATE:2014-06-13; always use spaces; DATE:2014-08-14; must be local language; Russian "Шаблон" not English "Template"; PAGE:ru.w:Королевство_Нидерландов DATE:2016-11-23
 		int orig_args_len = orig.Args_len();
 		boolean tmpl_args_parsing_orig = ctx.Tmpl_args_parsing();
 		ctx.Tmpl_args_parsing_(true);

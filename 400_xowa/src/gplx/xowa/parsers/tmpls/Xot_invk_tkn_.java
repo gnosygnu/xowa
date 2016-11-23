@@ -59,7 +59,7 @@ public class Xot_invk_tkn_ {
 			Xow_ns ns_tmpl = wiki.Ns_mgr().Ns_template();
 			rv = wiki.Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ns_tmpl, name_ary, tmpl_page_bry);
 			Xoa_ttl tmpl_page_ttl = tmpl_page_itm.Ttl();
-			byte[] frame_ttl = Bry_.Add(Xow_ns_canonical_.To_canonical_or_local_as_bry(tmpl_page_ttl.Ns()), Byte_ascii.Colon_bry, tmpl_page_ttl.Page_txt());	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-08-22; (3) must be canonical; DATE:2015-11-09
+			byte[] frame_ttl = Bry_.Add(tmpl_page_ttl.Ns().Name_db(), Byte_ascii.Colon_bry, tmpl_page_ttl.Page_txt());	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-08-22; (3) must be local language; Russian "Шаблон" not English "Template"; PAGE:ru.w:Королевство_Нидерландов DATE:2016-11-23
 			rv.Frame_ttl_(frame_ttl);								// set defn's frame_ttl; needed for redirect_trg; PAGE:en.w:Statutory_city; DATE:2014-08-22
 			ctx.Parse_tid_(old_parse_tid);
 			wiki.Cache_mgr().Defn_cache().Add(rv, ns_tmpl.Case_match());
