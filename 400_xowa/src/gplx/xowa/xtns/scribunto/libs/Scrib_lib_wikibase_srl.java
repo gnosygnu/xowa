@@ -22,8 +22,10 @@ class Scrib_lib_wikibase_srl {
 		int base_adj = legacy_style ? 0 : 1;
 		List_adp rv = List_adp_.New();
 		if (header_enabled) {
-			rv.Add(Keyval_.new_("id", wdoc.Qid()));
-			rv.Add(Keyval_.new_("type", Wbase_claim_entity_type_.Itm__item.Key_str()));
+			byte[] qid = wdoc.Qid();
+			boolean doc_is_qid = Bry_.Has_at_bgn(qid, Byte_ascii.Ltr_q) || Bry_.Has_at_bgn(qid, Byte_ascii.Ltr_Q);
+			rv.Add(Keyval_.new_("id", qid));
+			rv.Add(Keyval_.new_("type", doc_is_qid ? Wbase_claim_entity_type_.Itm__item.Key_str() : Wbase_claim_entity_type_.Itm__property.Key_str()));	// type should be "property"; PAGE:ru.w:Викитека:Проект:Викиданные DATE:2016-11-23
 			rv.Add(Keyval_.new_("schemaVersion", base_adj + 1));	// NOTE: needed by mw.wikibase.lua
 		}
 		Srl_root(rv, Wdata_doc_parser_v2.Str_labels			, Srl_langtexts	(Wdata_dict_langtext.Itm__language.Key_str(), Wdata_dict_langtext.Itm__value.Key_str(), wdoc.Label_list()));

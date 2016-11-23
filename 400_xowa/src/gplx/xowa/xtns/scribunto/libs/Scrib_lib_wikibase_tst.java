@@ -76,7 +76,7 @@ public class Scrib_lib_wikibase_tst {
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntity, Object_.Ary("p2", false), String_.Concat_lines_nl_skip_last
 		( "1="
 		, "  id=Property:p2"	// only difference from above
-		, "  type=item"
+		, "  type=property"		// also, type should be "property"; PAGE:ru.w:Викитека:Проект:Викиданные DATE:2016-11-23
 		, "  schemaVersion=2"
 		, "  labels="
 		, "    en="

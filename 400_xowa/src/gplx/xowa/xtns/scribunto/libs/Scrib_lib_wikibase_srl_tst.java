@@ -368,6 +368,26 @@ public class Scrib_lib_wikibase_srl_tst {
 		Gftest.Eq__str("timezone", keyval.Key());
 		Gftest.Eq__int(0, (int)keyval.Val());	// fails when keyval.Val() is String; DATE:2016-10-28
 	}
+	@Test   public void Type_is_property() {	// PURPOSE: type should be "property"; PAGE:ru.w:Викитека:Проект:Викиданные DATE:2016-11-23
+		fxt.Init_header_enabled_y_();
+		fxt.Wdata_fxt().doc_("Property:P1", fxt.Wdata_fxt().Make_claim_string(123, "abc"));
+		fxt.Test
+		( "id:'Property:P1'"
+		, "type:'property'"
+		, "schemaVersion:'2'"
+		, ""
+		);
+	}
+	@Test   public void Type_is_item() {	// PURPOSE: type should be "item"; PAGE:ru.w:Викитека:Проект:Викиданные DATE:2016-11-23
+		fxt.Init_header_enabled_y_();
+		fxt.Wdata_fxt().doc_("Q2", fxt.Wdata_fxt().Make_claim_string(123, "abc"));
+		fxt.Test
+		( "id:'Q2'"
+		, "type:'item'"
+		, "schemaVersion:'2'"
+		, ""
+		);
+	}
 }	
 class Scrib_lib_wikibase_srl_fxt {
 	private Wdata_doc_bldr wdoc_bldr;
