@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="tst"/>
+	<classpathentry kind="src" path="src_100_tkn"/>
+	<classpathentry kind="src" path="src_200_type"/>
+	<classpathentry kind="src" path="src_300_gdoc"/>
+	<classpathentry kind="src" path="src_400_pragma"/>
+	<classpathentry kind="src" path="src_500_build"/>
+	<classpathentry kind="src" path="src_600_rdrWtr"/>
+	<classpathentry kind="src" path="/100_core"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
