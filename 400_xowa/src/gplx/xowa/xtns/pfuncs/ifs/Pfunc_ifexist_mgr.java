@@ -38,14 +38,14 @@ public class Pfunc_ifexist_mgr {
 		boolean rv = false;
 		switch (ttl_ns.Id()) {
 			case Xow_ns_.Tid__special:	rv = true; break; // NOTE: some pages call for [[Special]]; always return true for now; DATE:2014-07-17
-			case Xow_ns_.Tid__media:	rv = Find_ttl_for_media_ns(cache_itm, wiki, ttl_ns, ttl_bry); break;
-			default:					rv = Find_ttl_in_db(cache_itm, wiki, ttl_ns, ttl_bry); break;
+			case Xow_ns_.Tid__media:	rv = Find_ttl_for_media_ns(cache_itm, wiki, ttl, ttl_ns, ttl_bry); break;
+			default:					rv = Find_ttl_in_db(cache_itm, wiki, ttl, ttl_ns, ttl_bry); break;
 		}
 		cache_itm.Exists_(rv);
 		return rv;
 	}
-	private boolean Find_ttl_in_db(Pfunc_ifexist_itm itm, Xowe_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
-		boolean rv = wiki.Db_mgr().Load_mgr().Load_by_ttl(db_page, ns, ttl_bry);
+	private boolean Find_ttl_in_db(Pfunc_ifexist_itm itm, Xowe_wiki wiki, Xoa_ttl ttl, Xow_ns ns, byte[] ttl_bry) {
+		boolean rv = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(ttl) != null;
 		if (	!rv
 			&&	wiki.Lang().Vnt_mgr().Enabled()) {
 			Xowd_page_itm page = wiki.Lang().Vnt_mgr().Convert_mgr().Convert_ttl(wiki, ns, ttl_bry);
@@ -55,9 +55,9 @@ public class Pfunc_ifexist_mgr {
 		itm.Exists_(rv);
 		return rv;
 	}
-	private boolean Find_ttl_for_media_ns(Pfunc_ifexist_itm itm, Xowe_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
+	private boolean Find_ttl_for_media_ns(Pfunc_ifexist_itm itm, Xowe_wiki wiki, Xoa_ttl ttl, Xow_ns ns, byte[] ttl_bry) {
 		Xow_ns file_ns = wiki.Ns_mgr().Ns_file();
-		boolean rv = Find_ttl_in_db(itm, wiki, file_ns, ttl_bry); if (rv) return true;		// rarely true, but check local wiki's [[File:]] table anyway
+		boolean rv = Find_ttl_in_db(itm, wiki, ttl, file_ns, ttl_bry); if (rv) return true;	// rarely true, but check local wiki's [[File:]] table anyway
 		Xowe_wiki commons_wiki = wiki.Appe().Wiki_mgr().Wiki_commons();
 		boolean env_is_testing = Env_.Mode_testing();
 		if (	commons_wiki != null														// null check
@@ -66,7 +66,7 @@ public class Pfunc_ifexist_mgr {
 				)
 			) {
 			file_ns = commons_wiki.Ns_mgr().Ns_file();
-			return Find_ttl_in_db(itm, commons_wiki, file_ns, ttl_bry);						// accurate test using page table in commons wiki (provided commons is up to date)
+			return Find_ttl_in_db(itm, commons_wiki, ttl, file_ns, ttl_bry);				// accurate test using page table in commons wiki (provided commons is up to date)
 		}
 		else {
 			if (!env_is_testing)
