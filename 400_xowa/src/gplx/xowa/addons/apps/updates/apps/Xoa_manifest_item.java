@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.updates.apps; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
-class Xoa_manifest_item {
+public class Xoa_manifest_item {
 	public Xoa_manifest_item(Io_url src, Io_url trg) {
 		this.src = src;
 		this.trg = trg;

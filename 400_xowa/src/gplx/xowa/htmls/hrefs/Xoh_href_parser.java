@@ -70,7 +70,7 @@ public class Xoh_href_parser {
 					}
 				}
 				rv.Page_bry_(tmp_page);
-				if (tmp_page == null) {	// handle xwiki lnke's to history page else null ref; EX:[http://ru.wikipedia.org/w/index.php?title&diff=19103464&oldid=18910980 ???????]; PAGE:ru.w:Project:??????_??_??????_??????/?????/?????????????/2009 DATE:2016-11-24
+				if (tmp_page == null) {	// handle xwiki lnke's to history page else null ref; EX:[http://ru.wikipedia.org/w/index.php?title&diff=19103464&oldid=18910980 извещен]; PAGE:ru.w:Project:Заявки_на_снятие_флагов/Архив/Патрулирующие/2009 DATE:2016-11-24
 					rv.Tid_(Xoa_url_.Tid_inet);
 				}
 				break;

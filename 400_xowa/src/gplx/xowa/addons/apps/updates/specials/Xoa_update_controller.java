@@ -18,11 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.apps.updates.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
 import gplx.xowa.guis.cbks.*;
 import gplx.core.gfobjs.*;
-import gplx.xowa.addons.apps.updates.dbs.*; import gplx.xowa.addons.apps.updates.js.*;	
+import gplx.xowa.addons.apps.updates.dbs.*; import gplx.xowa.addons.apps.updates.js.*;
+import gplx.xowa.addons.apps.updates.apps.*;
 class Xoa_update_controller implements Gfo_invk {
+	private Io_url app_root_dir, update_dir;
 	public void Update_app(Xoa_app app, String version_name) {
 		// get app_version from db
-		Io_url update_dir = app.Fsys_mgr().Root_dir().GenSubDir_nest("user", "app", "update");
+		this.app_root_dir = app.Fsys_mgr().Root_dir();
+		this.update_dir = app_root_dir.GenSubDir_nest("user", "app", "update");
 		Io_url update_db_fil = update_dir.GenSubFil_nest("xoa_update.sqlite3");
 		Xoa_update_db_mgr db_mgr = new Xoa_update_db_mgr(update_db_fil);
 		Xoa_app_version_itm version_itm = db_mgr.Tbl__app_version().Select_by_version_or_null(version_name);
@@ -50,12 +53,38 @@ class Xoa_update_controller implements Gfo_invk {
 		Xojs_wkr__unzip unzip_wkr = (Xojs_wkr__unzip)m.ReadObj("v");
 		Io_url src = unzip_wkr.Trg();
 		Io_url trg = Io_url_.new_dir_("D:\\xowa_temp\\");
+
+		// copy update_jar
+		Io_url src_jar_fil = app_root_dir.GenSubFil_nest("bin", "any", "xowa", "addon", "app", "update", "xoa_update.jar");
+		Io_url trg_jar_fil = update_dir.GenSubFil_nest("xoa_update.jar");
+		Io_mgr.Instance.MoveFil_args(src_jar_fil, trg_jar_fil, true).MissingFails_off().Exec();
+
 		Xojs_wkr__replace replace_wkr = new Xojs_wkr__replace(unzip_wkr.Cbk_mgr(), unzip_wkr.Cbk_trg(), "xo.app_updater.download__prog", Gfo_invk_cmd.New_by_key(this, Invk__replace_done), src, trg);
 		replace_wkr.Exec_async("app_updater");
 	}
 	private void On_replace_done(GfoMsg m) {
 		Xojs_wkr__replace replace_wkr = (Xojs_wkr__replace)m.ReadObj("v");
+
+		// get failed
+		Xoa_manifest_list list = new Xoa_manifest_list();
+		Keyval[] failed_ary = replace_wkr.Failed();
+		int len = failed_ary.length;
+		for (int i = 0; i < len; i++) {
+			Keyval failed = failed_ary[i];
+			list.Add(Io_url_.new_fil_(failed.Key()), Io_url_.new_fil_(failed.Val_to_str_or_empty()));
+		}
+
+		// write failed
+		Bry_bfr bfr = Bry_bfr_.New();
+		Write_restart(bfr);
+		list.Save(bfr);
+		Io_mgr.Instance.SaveFilBfr(update_dir.GenSubFil("xoa_update.txt"), bfr);
+
 		replace_wkr.Cbk_mgr().Send_json(replace_wkr.Cbk_trg(), "xo.app_updater.download__prog", Gfobj_nde.New().Add_bool("done", true));
+	}
+	private void Write_restart(Bry_bfr bfr) {
+		String restart = String_.Format("D:\\xowa_temp\\xowa_64.exe\n");
+		bfr.Add_str_u8(restart);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__download_done))		On_download_done(m);

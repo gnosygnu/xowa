@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.updates.apps; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
-class Xoa_manifest_list {
+public class Xoa_manifest_list {
 	private final    Ordered_hash hash = Ordered_hash_.New();
 	public int Len() {return hash.Len();}
 	public Xoa_manifest_item Get_at(int i) {return (Xoa_manifest_item)hash.Get_at(i);}

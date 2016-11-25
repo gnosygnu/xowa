@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.updates.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
-import gplx.xowa.guis.cbks.*;	
+import gplx.xowa.guis.cbks.*;
 public class Xojs_wkr__replace extends Xojs_wkr__base {
 	private final    Io_url src_dir, trg_dir;
 	private final    Io_url[] src_fils;
@@ -26,20 +26,30 @@ public class Xojs_wkr__replace extends Xojs_wkr__base {
 		this.src_fils = Io_mgr.Instance.QueryDir_args(src_dir).Recur_().ExecAsUrlAry();
 		this.Prog_data_end_(src_fils.length);
 	}
+	public Keyval[] Failed() {return failed;} private Keyval[] failed = Keyval_.Ary_empty;
 	@Override protected void Exec_run() {
+		List_adp failed_list = List_adp_.New();
+
 		int len = src_fils.length;
 		for (int i = 0; i < len; i++) {
+			if (this.Prog_notify_and_chk_if_suspended(i, len)) return;	// stop if canceled
+
 			Io_url src_fil = src_fils[i];
 			Io_url trg_fil = trg_dir.GenSubFil(src_fil.GenRelUrl_orEmpty(src_dir));
-			// Io_url trg_fil_del = trg_fil.GenNewNameAndExt(trg_fil.NameAndExt() + ".del");
 			try {
-//					Io_mgr.Instance.DeleteFil(trg_fil);
-//					Io_mgr.Instance.MoveFil_args(src_fil, trg_fil, true).Exec();
-				
-				Io_mgr.Instance.CopyFil(src_fil, trg_fil, true);
+				Io_mgr.Instance.DeleteFil(trg_fil);	// delete first; will fail if file is in use
+				Io_mgr.Instance.MoveFil_args(src_fil, trg_fil, true).Exec(); // replace with src file
 			} catch (Exception exc) {
-				Tfds.Write(src_fil, Err_.Message_lang(exc));
+				Gfo_usr_dlg_.Instance.Log_many("failed to delete and move file; file=~{0} msg=~{1}", trg_fil.Raw(), Err_.Message_gplx_log(exc));
+				failed_list.Add(Keyval_.new_(src_fil.Raw(), trg_fil.Raw()));
+				try {
+					Io_mgr.Instance.CopyFil(src_fil, trg_fil, true);	// try to copy file anyway
+				} catch (Exception exc2) {
+					Gfo_usr_dlg_.Instance.Log_many("failed to fopy file; file=~{0} msg=~{1}", trg_fil.Raw(), Err_.Message_gplx_log(exc2));
+				}
 			}
 		}
+
+		this.failed = (Keyval[])failed_list.To_ary_and_clear(Keyval.class);
 	}
 }

@@ -16,24 +16,25 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.updates.apps; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
+import gplx.core.envs.*;
 class Xoa_manifest_wkr {
 	private final    Xoa_manifest_view view;
 	private final    Xoa_manifest_list list = new Xoa_manifest_list();
 	private Io_url manifest_url;
-	private byte[] run_xowa_cmd;
+	private String run_xowa_cmd;
 	public Xoa_manifest_wkr(Xoa_manifest_view view) {
 		this.view = view;
 	}
-	public void Init(String manifest_url_str) {
+	public void Init(Io_url manifest_url) {
 		// load manifest
-		view.Append("loading manifest from: " + manifest_url_str);
-		this.manifest_url = Io_url_.new_any_(manifest_url_str);
+		this.manifest_url = manifest_url;
+		view.Append("loading manifest from: " + manifest_url.Raw());
 		byte[] src = Io_mgr.Instance.LoadFilBry(manifest_url);
 
 		// parse manifest
 		int nl_pos = Bry_find_.Find_fwd(src, Byte_ascii.Nl);
-		if (nl_pos == Bry_find_.Not_found) throw Err_.new_wo_type("could not find nl in manifest", "manifest_url", manifest_url_str);
-		this.run_xowa_cmd = Bry_.Mid(src, 0, nl_pos);
+		if (nl_pos == Bry_find_.Not_found) throw Err_.new_wo_type("could not find nl in manifest", "manifest_url", manifest_url.Raw());
+		this.run_xowa_cmd = String_.new_u8(src, 0, nl_pos);
 		list.Load(src, nl_pos + 1, src.length);
 		
 		this.Wait();
@@ -53,12 +54,11 @@ class Xoa_manifest_wkr {
 				view.Append("waiting for XOWA to release file: " + topmost);
 			}
 		}
+		this.On_exit();
 	}
 	public void On_exit() {
 		Io_mgr.Instance.DeleteFil(manifest_url);
-		if (run_xowa_cmd != null)
-		// gplx.core.envs.Process_adp.run_wait_arg_;
-			gplx.core.envs.System_.Exit();
+		view.Mark_done(run_xowa_cmd);
 	}
 	private boolean Copy_files() {
 		// loop list and copy items
@@ -69,9 +69,10 @@ class Xoa_manifest_wkr {
 			try {
 				Io_mgr.Instance.DeleteFil_args(item.Trg()).MissingFails_off().Exec();
 				Io_mgr.Instance.CopyFil(item.Src(), item.Trg(), true);
+				view.Append(String_.Format("copied file: src={0} trg={1}", item.Src().Raw(), item.Trg().Raw()));
 			}
 			catch (Exception exc) {
-				view.Append(String_.Format("failed to copy file: src={0} trg ={1} err={2}", item.Src().Raw(), item.Trg().Raw(), Err_.Message_lang(exc)));
+				view.Append(String_.Format("failed to copy file: src={0} trg={1} err={2}", item.Src().Raw(), item.Trg().Raw(), Err_.Message_lang(exc)));
 				return false;
 			}
 		}
