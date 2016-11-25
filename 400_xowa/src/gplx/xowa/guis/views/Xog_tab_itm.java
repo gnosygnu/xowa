@@ -74,7 +74,7 @@ public class Xog_tab_itm implements Gfo_invk {
 	public int					Tab_idx() {return tab_data.Idx();} public void Tab_idx_(int v) {tab_data.Idx_(v);}
 	public Xog_tab_mgr			Tab_mgr() {return tab_mgr;} private Xog_tab_mgr tab_mgr;
 	public Gfui_tab_itm			Tab_box() {return tab_box;} private Gfui_tab_itm tab_box;
-	public boolean					Tab_is_loading() {return tab_is_loading;} private boolean tab_is_loading;
+	public boolean				Tab_is_loading() {return tab_is_loading;} private boolean tab_is_loading;
 	public Xog_html_itm			Html_itm() {return html_itm;} private Xog_html_itm html_itm;
 	public Gfui_html			Html_box() {return html_itm.Html_box();}
 	public Xoae_page			Page() {return page;}

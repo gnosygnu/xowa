@@ -31,7 +31,12 @@ public class Xoae_page implements Xoa_page {
 		Ttl_(ttl);
 	}	Xoae_page() {}	// called by Empty
 	public Xow_wiki					Wiki()				{return wiki;}
-	public Xoa_ttl					Ttl()				{return ttl;} public Xoae_page Ttl_(Xoa_ttl v) {ttl = v; url.Wiki_bry_(wiki.Domain_bry()).Page_bry_(v.Full_url()); return this;} private Xoa_ttl ttl;
+	public Xoa_ttl					Ttl()				{return ttl;} private Xoa_ttl ttl;
+	public Xoae_page				Ttl_(Xoa_ttl v) {
+		ttl = v;
+		url.Wiki_bry_(wiki.Domain_bry()).Page_bry_(v.Full_db());	// NOTE:was Full_url, but caused url_bar to have url-decoded chars; DATE:2016-11-25
+		return this;
+	}
 	public Xoa_url					Url()				{return url;} public Xoae_page Url_(Xoa_url v) {url = v; return this;} private Xoa_url url = Xoa_url.blank();
 	public byte[]					Url_bry_safe()		{return Xoa_page_.Url_bry_safe(url, wiki, ttl);}
 	public Xopg_db_data				Db()				{return db;}				private final    Xopg_db_data db = new Xopg_db_data();
