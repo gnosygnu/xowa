@@ -176,12 +176,17 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 
 			byte[] xwiki_wiki = xo_url_parser_url.Wiki_bry();
 			byte[] xwiki_page = xo_url_parser_url.Page_bry();
-			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, xwiki_page);
-			if (ttl != null && ttl.Wik_itm() != null) {
-				xwiki_wiki = ttl.Wik_itm().Domain_bry();
-				xwiki_page = ttl.Page_url();
+			if (xwiki_page == null) {		// handle xwiki lnke's to history page else null ref; EX:[http://ru.wikipedia.org/w/index.php?title&diff=19103464&oldid=18910980 извещен]; PAGE:ru.w:Project:Заявки_на_снятие_флагов/Архив/Патрулирующие/2009 DATE:2016-11-24
+				xwiki_page = decoded_src;
 			}
-			tkn.Lnke_xwiki_(xwiki_wiki, xwiki_page, xo_url_parser_url.Qargs_ary());
+			else {
+				Xoa_ttl ttl = Xoa_ttl.Parse(wiki, xwiki_page);
+				if (ttl != null && ttl.Wik_itm() != null) {
+					xwiki_wiki = ttl.Wik_itm().Domain_bry();
+					xwiki_page = ttl.Page_url();
+				}
+				tkn.Lnke_xwiki_(xwiki_wiki, xwiki_page, xo_url_parser_url.Qargs_ary());
+			}
 		}			
 		ctx.Subs_add(root, tkn);
 		if (lnke_type == Xop_lnke_tkn.Lnke_typ_brack) {

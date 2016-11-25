@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.xowa.apps.urls.*;
 import gplx.xowa.htmls.hrefs.*;
 public class Xoa_url {
-	public int				Tid() {return tid;} private int tid;
+	public int				Tid() {return tid;} public void Tid_(int v) {this.tid = v;} private int tid;
 	public byte[]			Raw() {return raw;} private byte[] raw = Bry_.Empty;
 	public byte[]			Orig() {return orig;} private byte[] orig;
 	public byte[]			Wiki_bry() {return wiki_bry;} public Xoa_url Wiki_bry_(byte[] v) {wiki_bry = v; return this;} private byte[] wiki_bry;

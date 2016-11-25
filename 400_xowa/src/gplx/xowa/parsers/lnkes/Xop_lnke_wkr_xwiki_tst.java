@@ -40,6 +40,10 @@ public class Xop_lnke_wkr_xwiki_tst {
 		fxt.App().Usere().Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_a7("en.wikipedia.org"), Bry_.new_a7("en.wikipedia.org"));
 		fxt.Test__parse__wtxt_to_html("[http://en.wikipedia.org/wiki/A?action=edit a]", "<a href='/site/en.wikipedia.org/wiki/A?action=edit'>a</a>");
 	}
+	@Test  public void Xwiki__history() {	// PURPOSE: handle xwiki lnke's to history page else null ref; EX:[http://ru.wikipedia.org/w/index.php?title&diff=19103464&oldid=18910980 извещен]; PAGE:ru.w:Project:Заявки_на_снятие_флагов/Архив/Патрулирующие/2009 DATE:2016-11-24
+		fxt.App().Usere().Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_a7("en.wikipedia.org"), Bry_.new_a7("en.wikipedia.org"));
+		fxt.Test__parse__wtxt_to_html("[http://en.wikipedia.org/w/index.php?title&diff=1&oldid=2 abc]", "<a href='http://en.wikipedia.org/w/index.php?title&diff=1&oldid=2' rel='nofollow' class='external text'>abc</a>");
+	}
 	@Test  public void Ignore_proto() {	// PURPOSE: handle other protocols; PAGE:uk.w:Маскалі; DATE:2015-07-28
 		fxt.Test__parse__wtxt_to_html("[mailto:a b]", "<a href='mailto:a' rel='nofollow' class='external text'>b</a>");// should be /w/, not /en.wikipedia.org
 	}
