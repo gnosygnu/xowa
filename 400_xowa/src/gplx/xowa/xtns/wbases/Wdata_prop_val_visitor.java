@@ -122,8 +122,13 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {Write_geo(Bool_.N, bfr, wdata_mgr.Hwtr_mgr().Lbl_mgr(), msgs, itm.Lat(), itm.Lng(), itm.Alt(), itm.Prc(), itm.Glb());}
 	public static void Write_geo(boolean wikidata_page, Bry_bfr bfr, Wdata_lbl_mgr lbl_mgr, Wdata_hwtr_msgs msgs, byte[] lat, byte[] lng, byte[] alt, byte[] prc, byte[] glb) {
 		// get precision
-		Decimal_adp precision_frac = Bry_.Eq(prc, Object_.Bry__null) ? Decimal_adp_.One : Decimal_adp_.parse(String_.new_a7(prc));
-		int precision_int = Math_.Log10(Decimal_adp_.One.Divide(precision_frac).To_int());		// convert precision to log10 integer; EX: .00027777 -> 3600 -> 3
+		int precision_int = -1;
+		if (Bry_.Eq(prc, Object_.Bry__null) || Bry_.Eq(prc, Byte_ascii.Num_0_bry))	// "null" or "0" should be 1; PAGE:ru.w:Лысково_(Калужская_область) DATE:2016-11-24
+			precision_int = 1;
+		else {
+			Decimal_adp precision_frac = Decimal_adp_.parse(String_.new_a7(prc));
+			precision_int = Math_.Log10(Decimal_adp_.One.Divide(precision_frac).To_int());		// convert precision to log10 integer; EX: .00027777 -> 3600 -> 3
+		}
 
 		// build String
 		gplx.xowa.xtns.mapSources.Map_dd2dms_func.Deg_to_dms(bfr, Bool_.N, lat, precision_int);

@@ -86,11 +86,18 @@ public class Wdata_visitor__html_wtr_tst {
 		, "0° 7' 39&quot; W, 51° 30' 26&quot; N (<a href='/wiki/Q2'>Earth</a>)"
 		);
 	}
-	@Test   public void Globecoordinate_null() {
+	@Test   public void Globecoordinate__globe__null() {
 		fxt
 		.Test_claim_val
 		( fxt.Wdata_fxt().Make_claim_geo(1, "51.5072222", "-0.1275", ".000027777", "null", "")
 		, "0° 7' 39&quot; W, 51° 30' 26&quot; N"
+		);
+	}
+	@Test   public void Globecoordinate__precision__0() {	// PURPOSE: 0 precision was causing divide by 0 error; PAGE:ru.w:Лысково_(Калужская_область) DATE:2016-11-24
+		fxt
+		.Test_claim_val
+		( fxt.Wdata_fxt().Make_claim_geo(1, "51.5072222", "-0.1275", "0", "null", "")
+		, "0° 6' W, 51° 30' N"
 		);
 	}
 }
