@@ -20,9 +20,12 @@ import gplx.xowa.guis.cbks.*;
 import gplx.core.gfobjs.*;
 import gplx.xowa.addons.apps.updates.dbs.*; import gplx.xowa.addons.apps.updates.js.*;
 import gplx.xowa.addons.apps.updates.apps.*;
+import gplx.core.envs.*;
 class Xoa_update_controller implements Gfo_invk {
-	private Io_url app_root_dir, update_dir;
+	private Xoa_app app;
+	private Io_url app_root_dir, update_dir, update_jar_fil;
 	public void Update_app(Xoa_app app, String version_name) {
+		this.app = app;
 		// get app_version from db
 		this.app_root_dir = app.Fsys_mgr().Root_dir();
 		this.update_dir = app_root_dir.GenSubDir_nest("user", "app", "update");
@@ -52,12 +55,12 @@ class Xoa_update_controller implements Gfo_invk {
 	private void On_unzip_done(GfoMsg m) {
 		Xojs_wkr__unzip unzip_wkr = (Xojs_wkr__unzip)m.ReadObj("v");
 		Io_url src = unzip_wkr.Trg();
-		Io_url trg = Io_url_.new_dir_("D:\\xowa_temp\\");
+		Io_url trg = app_root_dir;
 
 		// copy update_jar
-		Io_url src_jar_fil = app_root_dir.GenSubFil_nest("bin", "any", "xowa", "addon", "app", "update", "xoa_update.jar");
-		Io_url trg_jar_fil = update_dir.GenSubFil_nest("xoa_update.jar");
-		Io_mgr.Instance.MoveFil_args(src_jar_fil, trg_jar_fil, true).MissingFails_off().Exec();
+		Io_url src_jar_fil = src.GenSubFil_nest("bin", "any", "xowa", "addon", "app", "update", "xoa_update.jar");
+		this.update_jar_fil = app_root_dir.GenSubFil_nest("user", "app", "update", "xoa_update.jar");
+		Io_mgr.Instance.MoveFil_args(src_jar_fil, update_jar_fil, true).Exec();
 
 		Xojs_wkr__replace replace_wkr = new Xojs_wkr__replace(unzip_wkr.Cbk_mgr(), unzip_wkr.Cbk_trg(), "xo.app_updater.download__prog", Gfo_invk_cmd.New_by_key(this, Invk__replace_done), src, trg);
 		replace_wkr.Exec_async("app_updater");
@@ -76,15 +79,13 @@ class Xoa_update_controller implements Gfo_invk {
 
 		// write failed
 		Bry_bfr bfr = Bry_bfr_.New();
-		Write_restart(bfr);
+		bfr.Add_str_u8(App__update__restart_cmd(app.Api_root().Addon().App__update__restart_cmd(), Env_.AppUrl(), Op_sys.Cur().Tid(), Op_sys.Cur().Bitness()) + "\n");
 		list.Save(bfr);
 		Io_mgr.Instance.SaveFilBfr(update_dir.GenSubFil("xoa_update.txt"), bfr);
 
 		replace_wkr.Cbk_mgr().Send_json(replace_wkr.Cbk_trg(), "xo.app_updater.download__prog", Gfobj_nde.New().Add_bool("done", true));
-	}
-	private void Write_restart(Bry_bfr bfr) {
-		String restart = String_.Format("D:\\xowa_temp\\xowa_64.exe\n");
-		bfr.Add_str_u8(restart);
+		Runtime_.Exec("java -jar " + update_jar_fil.Raw());
+		System_.Exit();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__download_done))		On_download_done(m);
@@ -93,4 +94,27 @@ class Xoa_update_controller implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk__download_done = "download_done", Invk__unzip_done = "unzip_done", Invk__replace_done = "replace_done";
+	public static String App__update__restart_cmd(String current, Io_url app_url, byte op_sys_tid, byte bitness) {
+		String rv = current;
+		if (!String_.Eq(rv, String_.Empty)) return rv; // something specified; return it
+		String bitness_str = bitness == Op_sys.Bitness_32 ? "" : "_64";
+		Io_url root_dir = app_url.OwnerDir();
+
+		String prepend_sh = op_sys_tid == Op_sys.Tid_wnt ? "" : "sh ";
+		String file_fmt = "";
+		switch (op_sys_tid) {
+			case Op_sys.Tid_lnx:
+				file_fmt = "xowa_linux{0}.sh";
+				break;
+			case Op_sys.Tid_osx:
+				file_fmt = "xowa_macosx{0}";
+				break;
+			case Op_sys.Tid_wnt:
+				file_fmt = "xowa{0}.exe";
+				break;
+			default:
+				throw Err_.new_unhandled_default(op_sys_tid);
+		}
+		return prepend_sh + root_dir.GenSubFil(String_.Format(file_fmt, bitness_str)).Raw();
+	}
 }

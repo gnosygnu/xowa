@@ -32,9 +32,8 @@ class Xoa_update_html extends Xow_special_wtr__base {
 		if (web_access_enabled) {
 			// check text file to see if version changed
 			Io_url trg_summary_fil = update_db_url.OwnerDir().GenSubFil("xoa_update.txt");
-			int trg_summary_version = Int_.parse_or(Io_mgr.Instance.LoadFilStr(trg_summary_fil), -1);
-			// String src_summary_server = "http://xowa.org";
-			String src_summary_server = "http://localhost/xowa.org";
+			int trg_summary_version = Bry_.To_int_or(Io_mgr.Instance.LoadFilBryOr(trg_summary_fil, Bry_.new_a7("-1")), -1);
+			String src_summary_server = app.Api_root().Addon().App__update__update_db_src();	// "http://xowa.org";
 			int src_summary_version = Bry_.To_int(Io_mgr.Instance.DownloadFil_args("", Io_url_.Empty).Exec_as_bry(src_summary_server + "/admin/app_update/xoa_update.txt"));
 
 			// download database

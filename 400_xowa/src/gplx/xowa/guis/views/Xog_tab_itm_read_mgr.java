@@ -22,8 +22,11 @@ import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.wikis.pages.*;
 public class Xog_tab_itm_read_mgr {
 	public static void Show_page(Xog_tab_itm tab, Xoae_page new_page, boolean reset_to_read) {Show_page(tab, new_page, reset_to_read, false, false, Xog_history_stack.Nav_fwd);}
 	public static void Show_page(Xog_tab_itm tab, Xoae_page new_page, boolean reset_to_read, boolean new_page_is_same, boolean show_is_err, byte history_nav_type) {
-		if (reset_to_read) tab.View_mode_(Xopg_page_.Tid_read);
-		if (new_page.Url().Qargs_mgr().Match(Xoa_url_.Qarg__action, Xoa_url_.Qarg__action__edit)) tab.View_mode_(Xopg_page_.Tid_edit);
+		if (reset_to_read)
+			tab.View_mode_(Xopg_page_.Tid_read);
+		if (new_page.Url().Qargs_mgr().Match(Xoa_url_.Qarg__action, Xoa_url_.Qarg__action__edit)) 
+			tab.View_mode_(Xopg_page_.Tid_edit);
+
 		Xoae_page cur_page = tab.Page(); Xog_html_itm html_itm = tab.Html_itm(); Gfui_html html_box = html_itm.Html_box();
 		Xog_win_itm win = tab.Tab_mgr().Win();
 		if (cur_page != null && !new_page_is_same) {	// if new_page_is_same, don't update DocPos; will "lose" current position

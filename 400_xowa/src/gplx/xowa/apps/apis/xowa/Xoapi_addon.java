@@ -23,6 +23,8 @@ public class Xoapi_addon implements Gfo_invk {
 	public Xoapi_addon_bldr			Bldr()		{return bldr;}		private final    Xoapi_addon_bldr bldr = new Xoapi_addon_bldr();
 	public boolean						Wikis__ctgs__hidden_enabled() {return wikis__ctgs__hidden_enabled;} private boolean wikis__ctgs__hidden_enabled = false;
 	public boolean						App__scripting__enabled() {return app__scripting__enabled;} private boolean app__scripting__enabled = false;
+	public String					App__update__restart_cmd()		{return app__update__restart_cmd;} private String app__update__restart_cmd = "";
+	public String					App__update__update_db_src()	{return app__update__update_db_src;} private String app__update__update_db_src = "http://xowa.org";
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__search)) 								return search;
 		else if	(ctx.Match(k, Invk__bldr)) 									return bldr;
@@ -32,6 +34,10 @@ public class Xoapi_addon implements Gfo_invk {
 		else if	(ctx.Match(k, Invk__app__scripting__enabled_)) 				app__scripting__enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk__app__page_history__log_all)) 			return Yn.To_str(app__page_history__log_all);
 		else if	(ctx.Match(k, Invk__app__page_history__log_all_)) 			app__page_history__log_all = m.ReadYn("v");
+		else if	(ctx.Match(k, Invk__app__update__restart_cmd)) 				return app__update__restart_cmd;
+		else if	(ctx.Match(k, Invk__app__update__restart_cmd_)) 			app__update__restart_cmd = m.ReadStr("v");
+		else if	(ctx.Match(k, Invk__app__update__update_db_src)) 			return app__update__update_db_src;
+		else if	(ctx.Match(k, Invk__app__update__update_db_src_)) 			app__update__update_db_src = m.ReadStr("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -42,6 +48,10 @@ public class Xoapi_addon implements Gfo_invk {
 	, Invk__app__scripting__enabled_		= "app__scripting__enabled_"
 	, Invk__app__page_history__log_all		= "app__page_history__log_all"
 	, Invk__app__page_history__log_all_		= "app__page_history__log_all_"
+	, Invk__app__update__restart_cmd		= "app__update__restart_cmd"
+	, Invk__app__update__restart_cmd_		= "app__update__restart_cmd_"
+	, Invk__app__update__update_db_src		= "app__update__update_db_src"
+	, Invk__app__update__update_db_src_		= "app__update__update_db_src_"
 	;
 	public static boolean app__page_history__log_all;
 }
