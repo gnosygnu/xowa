@@ -76,7 +76,7 @@ class Xob_catlink_mgr {
 
 		// make catlink_dbs
 		// cat_sort_tbl.Create_idx__key();		// index will be needed for join
-		tmp_link_tbl.Create_idx__to_ttl();	// index will be needed for join
+		tmp_link_tbl.Create_idx();	// index will be needed for join
 		Db_conn page_conn = wiki.Data__core_mgr().Db__core().Conn();
 		Xob_catlink_wkr wkr = new Xob_catlink_wkr();
 		try {

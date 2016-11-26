@@ -30,7 +30,7 @@ class Xob_catlink_wkr {
 		, ",       tcl.cl_sortkey"
 		, ",       tcl.cl_sortkey_prefix"
 		, "FROM    <temp_db>tmp_cat_link tcl"
-		, "        JOIN page p ON p.page_namespace = 14 AND tcl.cl_to_ttl = p.page_title"
+		, "        JOIN page p ON tcl.cl_to_ttl = p.page_title AND p.page_namespace = 14"
 		, "ORDER BY 1"	// NOTE: must sort by page_id to keep all cats for page in one db
 		));
 		attach_mgr.Attach();
