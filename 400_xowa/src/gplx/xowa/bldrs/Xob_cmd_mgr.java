@@ -50,7 +50,6 @@ public class Xob_cmd_mgr implements Gfo_invk {
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_util_delete))					return Add(new Xob_delete_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_util_download))				return Add(new Xob_download_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_util_xml_dump))				return Add(new Xob_xml_dumper_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_json_dump))				return Add(new Xob_wbase_json_dump_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_qid))					return Xml_rdr_direct_add(wiki, new Xob_wdata_qid_sql().Ctor(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_pid))					return Xml_rdr_direct_add(wiki, new Xob_wdata_pid_sql().Ctor(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_db))					return Add(new Xob_wdata_db_cmd(bldr, wiki));
