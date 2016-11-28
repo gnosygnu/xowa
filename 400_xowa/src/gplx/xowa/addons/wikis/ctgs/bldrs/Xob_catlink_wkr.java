@@ -101,9 +101,10 @@ class Xob_catlink_wkr {
 		, ",       Sum(CASE WHEN tcl.cl_type_id = 1 THEN 1 ELSE 0 END)"
 		, ",       CASE WHEN h.cat_id IS NULL THEN 0 ELSE 1 END"
 		, ",       -1"
-		, "FROM    <temp_db>tmp_cat_link tcl"
-		, "        JOIN <page_db>page p ON p.page_namespace = 14 AND tcl.cl_to_ttl = p.page_title"
-		, "            LEFT JOIN <temp_db>tmp_cat_hidden h ON h.cat_id = p.page_id"
+		, "FROM    <page_db>page p"
+		, "        JOIN <temp_db>tmp_cat_link tcl ON tcl.cl_to_ttl = p.page_title"
+		, "        LEFT JOIN <temp_db>tmp_cat_hidden h ON h.cat_id = p.page_id"
+		, "WHERE   p.page_namespace = 14"
 		, "GROUP BY p.page_id"
 		);
 		attach_mgr.Exec_sql(sql);

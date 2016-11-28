@@ -53,7 +53,7 @@ public class Xodb_tmp_cat_link_tbl implements Db_tbl {
 	public void Create_idx__sortkey()	{conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, fld_sortkey, fld_sortkey));}
 	public void Create_idx()	{
 		conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, fld_from, fld_from));
-		conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, fld_to_ttl, fld_to_ttl));
+		conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, fld_to_ttl + "__" + fld_type_id, fld_to_ttl, fld_type_id));
 	}
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);

@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.errs.*;
 public class Err extends RuntimeException {
-	private final boolean is_gplx;
-	private final String trace;
+	private final    boolean is_gplx;
+	private final    String trace;
 	private Err_msg[] msgs_ary = new Err_msg[8]; private int msgs_len = 8, msgs_idx = 0;
 	public Err(boolean is_gplx, String trace, String type, String msg, Object... args) {
 		this.is_gplx = is_gplx;

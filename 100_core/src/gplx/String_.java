@@ -19,6 +19,17 @@ package gplx;
 import java.lang.*;
 import gplx.core.strings.*; import gplx.langs.gfs.*; import gplx.core.envs.*;
 public class String_ implements Gfo_invk {
+	public static int Len(String s)					{return s.length();}	
+	public static char CharAt(String s, int i)		{return s.charAt(i);}		
+	public static String new_u8(byte[] v, int bgn, int end) {
+		try {
+			return v == null
+				? null
+				: new String(v, bgn, end - bgn, "UTF-8");		
+		}
+		catch (Exception e) {Err_.Noop(e); throw Err_.new_("core", "unsupported encoding", "bgn", bgn, "end", end);}
+	}
+
 	public static final    Class<?> Cls_ref_type = String.class;
 	public static final String Cls_val_name = "str" + "ing";
 	public static final int Find_none = -1, Pos_neg1 = -1;
@@ -35,14 +46,6 @@ public class String_ implements Gfo_invk {
 		catch (Exception e) {throw Err_.new_exc(e, "core", "unsupported encoding");}
 	}	
 	public static String new_u8(byte[] v) {return v == null ? null : new_u8(v, 0, v.length);}
-	public static String new_u8(byte[] v, int bgn, int end) {
-		try {
-			return v == null
-				? null
-				: new String(v, bgn, end - bgn, "UTF-8");		
-		}
-		catch (Exception e) {Err_.Noop(e); throw Err_.new_("core", "unsupported encoding", "bgn", bgn, "end", end);}
-	}
 	public static String new_u8__by_len(byte[] v, int bgn, int len)	{
 		int v_len = v.length;
 		if (bgn + len > v_len) len = v_len - bgn;
@@ -68,7 +71,6 @@ public class String_ implements Gfo_invk {
 	}
 	public static boolean Len_gt_0(String s)									{return s != null && s.length() >  0;}	
 	public static boolean Len_eq_0(String s)									{return s == null || s.length() == 0;}	
-	public static int Len(String s)											{return s.length();}						
 	public static String Lower(String s)									{return s.toLowerCase();}					
 	public static String Upper(String s)									{return s.toUpperCase();}					
 	public static String CaseNormalize(boolean caseSensitive, String s)		{return caseSensitive ? s : String_.Lower(s);}
@@ -76,7 +78,6 @@ public class String_ implements Gfo_invk {
 	public static String Mid(String s, int bgn)								{return s.substring(bgn);}				
 	public static String Replace(String s, String find, String replace)		{return s.replace(find, replace);}		
 	public static char[] XtoCharAry(String s)								{return s.toCharArray();}				
-	public static char CharAt(String s, int i)								{return s.charAt(i);}							
 	public static int CodePointAt(String s, int i)							{return s.codePointAt(i);}
 	public static boolean Has(String s, String find)							{return s.indexOf(find) != String_.Find_none;}	
 	public static boolean Has_at_bgn(String s, String v)						{return s.startsWith(v);}				
