@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class Object_ {
 	public static final String Cls_val_name = "Object";
-	public static final Object[] Ary_empty = new Object[0];
+	public static final    Object[] Ary_empty = new Object[0];
 	public static Object[] Ary(Object... ary) {return ary;}
 	public static Object[] Ary_add(Object[] lhs, Object[] rhs) {
 		int lhs_len = lhs.length, rhs_len = rhs.length;
@@ -30,13 +30,6 @@ public class Object_ {
 			rv[i] = lhs[i];
 		for (int i = lhs_len; i < rv_len; ++i)
 			rv[i] = rhs[i - lhs_len];
-		return rv;
-	}
-	public static String[] Ary__to_str_ary(Object[]... ary) {
-		int len = ary.length;
-		String[] rv = new String[len];
-		for (int i = 0; i < len; ++i)
-			rv[i] = String_.Concat_with_obj("|", (Object[])ary[i]);
 		return rv;
 	}
 	public static boolean Eq(Object lhs, Object rhs) {
@@ -59,10 +52,10 @@ public class Object_ {
 		Class<?> c = Type_adp_.ClassOf_obj(v);
 		if		(Type_adp_.Eq(c, String_.Cls_ref_type))		return (String)v;
 		else if	(Type_adp_.Eq(c, Bry_.Cls_ref_type))		return String_.new_u8((byte[])v);
-		else if (Type_adp_.Eq(c, Bool_.Cls_ref_type))		return Bool_.cast(v) ? Bool_.True_str : Bool_.False_str;	// always return "true" / "false"
+		else if (Type_adp_.Eq(c, Bool_.Cls_ref_type))		return Bool_.Cast(v) ? Bool_.True_str : Bool_.False_str;	// always return "true" / "false"
 		else if	(Type_adp_.Eq(c, Double_.Cls_ref_type))		return Double_.To_str_loose(Double_.cast(v));
 		else												return v.toString();	
 	}
-	public static final Object Null = null;
-	public static final byte[] Bry__null = Bry_.new_a7("null");
+	public static final    Object Null = null;
+	public static final    byte[] Bry__null = Bry_.new_a7("null");
 }

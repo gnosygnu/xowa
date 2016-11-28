@@ -59,7 +59,7 @@ class GfmlScopeList {
 		GfmlScopeItm rv = null;
 		for (Object itemObj : list) {
 			GfmlScopeItm itm = (GfmlScopeItm)itemObj;
-			if (CompareAble_.Is_moreOrSame(pos, itm.DocPos()))
+			if (CompareAble_.Is(CompareAble_.More_or_same, pos, itm.DocPos()))
 				rv = itm;
 			else
 				break;	// ASSUME: insertion is done in order; first lessThan means rest will also be lessThan

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class Long_ {
 	public static final String Cls_val_name = "long";
-	public static final Class<?> Cls_ref_type = Long.class; 
+	public static final    Class<?> Cls_ref_type = Long.class; 
 	public static final int Log10Ary_len = 21;
 	public static long[] Log10Ary = new long[] 
   			{ 1, 10, 100, 1000, 10000
@@ -55,7 +55,7 @@ public class Long_ {
 		else if (lhs < rhs)		return CompareAble_.Less;
 		else 					return CompareAble_.More;
 	}
- 		public static int FindIdx(long[] ary, long find_val) {
+ 		private static int FindIdx(long[] ary, long find_val) {
 		int ary_len = ary.length;
 		int adj = 1;
 		int prv_pos = 0;

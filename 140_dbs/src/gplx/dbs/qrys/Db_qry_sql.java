@@ -60,7 +60,7 @@ public class Db_qry_sql implements Db_qry {
 		if		(Type_adp_.Eq(val_type, Int_.Cls_ref_type))
 			bfr.Add_int_variable(Int_.cast(val));
 		else if	(Type_adp_.Eq(val_type, Bool_.Cls_ref_type))
-			bfr.Add_int_fixed(1, Bool_.To_int(Bool_.cast(val)));	// NOTE: save boolean to 0 or 1, b/c (a) db may not support bit datatype (sqllite) and (b) avoid i18n issues with "true"/"false"
+			bfr.Add_int_fixed(1, Bool_.To_int(Bool_.Cast(val)));	// NOTE: save boolean to 0 or 1, b/c (a) db may not support bit datatype (sqllite) and (b) avoid i18n issues with "true"/"false"
 		else if (Type_adp_.Eq(val_type, Double_.Cls_ref_type))
 			bfr.Add_double(Double_.cast(val));
 		else if (Type_adp_.Eq(val_type, Long_.Cls_ref_type))

@@ -28,7 +28,7 @@ public class Json_kv_ary_srl {
 	}
 	private static Object Val_by_itm(Json_itm itm) {
 		switch (itm.Tid()) {
-			case Json_itm_.Tid__bool:		return Bool_.To_str_lower(Bool_.cast(itm.Data()));
+			case Json_itm_.Tid__bool:		return Bool_.To_str_lower(Bool_.Cast(itm.Data()));
 			case Json_itm_.Tid__int:
 			case Json_itm_.Tid__null:
 			case Json_itm_.Tid__str:

@@ -52,7 +52,7 @@ public class Scrib_proc_args {
 	public int		Len() {return ary_len;}
 	public Keyval[] Ary() {return ary;}
 	public Object	Pull_obj(int i)					{return Get_or_fail(i);}
-	public boolean	Pull_bool(int i)				{return Bool_.cast(Get_or_fail(i));}
+	public boolean	Pull_bool(int i)				{return Bool_.Cast(Get_or_fail(i));}
 	public String	Pull_str(int i)					{return String_.cast(Get_or_fail(i));}
 	public byte[]	Pull_bry(int i)					{return Bry_.new_u8(String_.cast(Get_or_fail(i)));}
 	public int		Pull_int(int i)					{
@@ -118,8 +118,8 @@ public class Scrib_proc_args {
 	public byte[]	Cast_bry_or_empty(int i)		{Object rv = Get_or_null(i); return rv == null ? Bry_.Empty : Bry_.new_u8(String_.cast	(rv));}
 	public byte[]	Cast_bry_or(int i, byte[] or)	{Object rv = Get_or_null(i); return rv == null ? or				: Bry_.new_u8(String_.cast	(rv));}
 	public Object	Cast_obj_or_null(int i)			{return Get_or_null(i);}
-	public boolean	Cast_bool_or_y(int i)			{Object rv = Get_or_null(i); return rv == null ? Bool_.Y		: Bool_.cast(rv);}
-	public boolean	Cast_bool_or_n(int i)			{Object rv = Get_or_null(i); return rv == null ? Bool_.N		: Bool_.cast(rv);}
+	public boolean	Cast_bool_or_y(int i)			{Object rv = Get_or_null(i); return rv == null ? Bool_.Y		: Bool_.Cast(rv);}
+	public boolean	Cast_bool_or_n(int i)			{Object rv = Get_or_null(i); return rv == null ? Bool_.N		: Bool_.Cast(rv);}
 	public int		Cast_int_or(int i, int or)		{Object rv = Get_or_null(i); return rv == null ? or				: Int_.coerce_(rv);}	// coerce to handle "1" and 1;
 	public Keyval[] Cast_kv_ary_or_null(int i)		{Object rv = Get_or_null(i); return rv == null ? null			: (Keyval[])rv;}
 	public byte[][]	Cast_params_as_bry_ary_or_rest_of_ary(int params_idx)	{	// PAGE:ru.w:Ленин,_Владимир_Ильич; DATE:2014-07-01 MW:LanguageLibrary.php|ConvertPlural: if (is_array($args[0])) $args = $args[0];  $forms = array_values(array_map('strval', $args));

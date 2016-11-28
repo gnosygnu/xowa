@@ -67,7 +67,7 @@ public class Xog_mnu_bldr {
 		Gfui_mnu_itm mnu_itm = owner_gui.Itms_add_chk_msg(sub.Gui_text(), img, app, app.Gfs_mgr(), msg_n, msg_y);
 		sub.Evt_mgr().Sub(mnu_itm);
 		Xog_cmd_itm cmd = app.Gui_mgr().Cmd_mgr().Get_or_null(sub.Key());
-		boolean v = Bool_.cast(app.Gfs_mgr().Run_str_for(app, cmd.Cmd()));
+		boolean v = Bool_.Cast(app.Gfs_mgr().Run_str_for(app, cmd.Cmd()));
 		mnu_itm.Selected_(v);
 		return mnu_itm;
 	}

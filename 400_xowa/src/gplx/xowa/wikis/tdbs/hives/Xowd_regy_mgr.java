@@ -27,7 +27,7 @@ public class Xowd_regy_mgr {
 	public void Clear() {files_ary = Xowd_hive_regy_itm.Ary_empty;}
 	public int Files_find(byte[] key) {
 		if (files_ary.length == 0) return Xowd_regy_mgr.Regy_null;	// NOTE: FindSlot does not accept empty ary; returning 0, b/c Find returns likely file_idx; EX: regy of 0|B|D and 1|F|H; A returns 0; Z returns 1
-		return CompareAble_.FindSlot(comparer, files_ary, comparer_itm.End_(key));
+		return Xowd_regy_mgr_.FindSlot(comparer, files_ary, comparer_itm.End_(key));
 	}	ComparerAble comparer = Xowd_ttl_file_comparer_end.Instance; Xowd_hive_regy_itm comparer_itm = Xowd_hive_regy_itm.tmp_().Count_(1);
 	public Xowd_hive_regy_itm Create(byte[] key) {
 		int itm_idx = files_ary.length;

@@ -29,12 +29,6 @@ public class Err extends RuntimeException {
 	public boolean Logged() {return logged;} public Err Logged_y_() {logged = true; return this;} private boolean logged;
 	public int Trace_ignore() {return trace_ignore;} public Err Trace_ignore_add_1_() {++trace_ignore; return this;} private int trace_ignore = 0;
 	public Err Args_add(Object... args) {msgs_ary[msgs_idx - 1].Args_add(args); return this;}	// i - 1 to get current
-	@gplx.Internal protected boolean Type_match(String type) {
-		for (int i = 0; i < msgs_len; ++i) {
-			if (String_.Eq(type, msgs_ary[i].Type())) return true;
-		}
-		return false;
-	}
 	@gplx.Internal protected void Msgs_add(String type, String msg, Object[] args) {
 		if (msgs_idx == msgs_len) {
 			int new_len = msgs_len * 2;
@@ -56,7 +50,7 @@ public class Err extends RuntimeException {
 	}
 	private String To_str(boolean called_by_log, boolean include_trace) {
 		String nl_str = called_by_log ? "\t" : "\n";
-		String rv = ""; //nl_str + "----------------------------------------------------------------------" + nl_str;
+		String rv = "";
 		for (int i = 0; i < msgs_idx; ++i) {
 			rv += "[err " + Int_.To_str(i) + "] " + String_.Replace(msgs_ary[i].To_str(), "\n", nl_str) + nl_str;
 		}

@@ -17,14 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Err_ {
-	private static String Type__gplx = "gplx"; @gplx.Internal protected static String Trace_null = null;
+	private static String Type__gplx = "gplx", Trace_null = null;
 	public static void Noop(Exception e) {}
-	public static Err as_(Object obj) {return obj instanceof Err ? (Err)obj : null;}
 	public static Err New(String msg, Object... args)							{return new Err(Bool_.Y, Trace_null, "", String_.Format(msg, args));}
+
 	public static Err new_(String type, String msg, Object... args)			{return new Err(Bool_.Y, Trace_null, type, msg, args);}
 	public static Err new_wo_type(String msg, Object... args)					{return new Err(Bool_.Y, Trace_null, Type__gplx, msg, args);}
 	public static Err new_exc(Exception e, String type, String msg, Object... args) {
-		Err rv = cast_or_make(e);
+		Err rv = Cast_or_make(e);
 		rv.Msgs_add(type, msg, args);
 		return rv;
 	}
@@ -54,7 +54,8 @@ public class Err_ {
 	}
 
 	public static String Message_lang(Throwable e) {return e.getMessage();} 
-	public static String To_str(Exception e) {return e.toString();}	// e.getMessage() is sometimes null?
+	public static String Message_gplx_full(Exception e)	{return Cast_or_make(e).To_str__full();}
+	public static String Message_gplx_log(Exception e)	{return Cast_or_make(e).To_str__log();}
 		public static String Trace_lang(Throwable e) 	{return Trace_lang_exec(e.getStackTrace());}
 	private static String Trace_lang_exec(StackTraceElement[] ary) {
 		String rv = "";
@@ -65,12 +66,8 @@ public class Err_ {
 		}
 		return rv;
 	}
-		public static boolean Type_match(Exception e, String type) {
-		Err exc = Err_.as_(e);
-		return exc == null ? false : exc.Type_match(type);
-	}
-	public static String Message_gplx_full(Exception e)	{return cast_or_make(e).To_str__full();}
-	public static String Message_gplx_log(Exception e)	{return cast_or_make(e).To_str__log();}
-	public static Err cast_or_make(Throwable e) {return Type_adp_.Eq_typeSafe(e, Err.class) ? (Err)e : new Err(Bool_.N, Err_.Trace_lang(e), Type_adp_.NameOf_obj(e), Err_.Message_lang(e));}
+	
+	public static Err Cast_or_null(Exception e) {return Type_adp_.Eq_typeSafe(e, Err.class) ? (Err)e : null;}
+	public static Err Cast_or_make(Throwable e) {return Type_adp_.Eq_typeSafe(e, Err.class) ? (Err)e : new Err(Bool_.N, Err_.Trace_lang(e), Type_adp_.NameOf_obj(e), Err_.Message_lang(e));}
 	public static final    String Type__op_canceled = "gplx.op_canceled";
 }

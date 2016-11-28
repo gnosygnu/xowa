@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.criterias; import gplx.*; import gplx.core.*;
 import gplx.core.texts.*; /*RegxPatn_cls_like*/
 public class Criteria_ {
-	public static final Criteria All		= new Criteria_const(true);
-	public static final Criteria None	= new Criteria_const(false);
+	public static final    Criteria All		= new Criteria_const(true);
+	public static final    Criteria None	= new Criteria_const(false);
 	public static Criteria Not(Criteria arg) {return new Criteria_not(arg);}
 	public static Criteria And(Criteria lhs, Criteria rhs) {return new Criteria_and(lhs, rhs);}
 	public static Criteria And_many(Criteria... ary) {
@@ -42,9 +42,9 @@ public class Criteria_ {
 	public static Criteria in_(Object... array) {return new Criteria_in(false, array);}
 	public static Criteria inn_(Object... array) {return new Criteria_in(true, array);}
 	public static Criteria lt_(Comparable val) {return new Criteria_comp(CompareAble_.Less, val);}
-	public static Criteria lte_(Comparable val) {return new Criteria_comp(CompareAble_.LessOrSame, val);}
+	public static Criteria lte_(Comparable val) {return new Criteria_comp(CompareAble_.Less_or_same, val);}
 	public static Criteria mt_(Comparable val) {return new Criteria_comp(CompareAble_.More, val);}
-	public static Criteria mte_(Comparable val) {return new Criteria_comp(CompareAble_.MoreOrSame, val);}
+	public static Criteria mte_(Comparable val) {return new Criteria_comp(CompareAble_.More_or_same, val);}
 	public static Criteria between_(Comparable lhs, Comparable rhs) {return new Criteria_between(false, lhs, rhs);}
 	public static Criteria between_(boolean negated, Comparable lhs, Comparable rhs) {return new Criteria_between(negated, lhs, rhs);}
 	public static Criteria like_(String pattern) {return new Criteria_like(false, RegxPatn_cls_like_.parse(pattern, RegxPatn_cls_like.EscapeDefault));}

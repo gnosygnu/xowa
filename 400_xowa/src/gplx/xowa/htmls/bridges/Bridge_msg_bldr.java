@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.bridges; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.langs.jsons.*;
 public class Bridge_msg_bldr {
-	private final Json_wtr wtr = new Json_wtr();
+	private final    Json_wtr wtr = new Json_wtr();
 	private boolean rslt_pass; private String rslt_msg;
 	private String notify_text; private String notify_status;
-	private final Gfo_tree_list data_root = new Gfo_tree_list("data");
+	private final    Gfo_tree_list data_root = new Gfo_tree_list("data");
 	public Bridge_msg_bldr() {
 		wtr.Opt_ws_(Bool_.N);
 		this.Clear();
@@ -83,7 +83,7 @@ public class Bridge_msg_bldr {
 				Gfo_tree_data sub_kv = (Gfo_tree_data)itm;
 				String key = sub_kv.Key(); Object val = sub_kv.Val();
 				switch (sub_kv.Val_tid()) {
-					case Type_adp_.Tid__bool:	wtr.Kv_bool(key, Bool_.cast(val)); break;
+					case Type_adp_.Tid__bool:	wtr.Kv_bool(key, Bool_.Cast(val)); break;
 					case Type_adp_.Tid__int:		wtr.Kv_int(key, Int_.cast(val)); break;
 					case Type_adp_.Tid__bry:		wtr.Kv_bry(key, (byte[])val); break;
 					default:					wtr.Kv_str(key, Object_.Xto_str_strict_or_null_mark(val)); break;
@@ -96,7 +96,7 @@ public class Bridge_msg_bldr {
 		}
 		wtr.Nde_end();
 	}
-	private static final byte[]
+	private static final    byte[]
 	  Key_rslt = Bry_.new_a7("rslt"), Key_rslt_pass = Bry_.new_a7("pass"), Key_rslt_msg = Bry_.new_a7("msg")
 	, Key_notify = Bry_.new_a7("notify"), Key_notify_text = Bry_.new_a7("text"), Key_notify_status = Bry_.new_a7("status"), Key_notify_hint = Bry_.new_a7("hint")
 	;

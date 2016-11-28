@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import gplx.core.strings.*; import gplx.langs.gfs.*;
-public class Int_ implements Gfo_invk {
+public class Int_ {
 	public static final String Cls_val_name = "int";
 	public static final    Class<?> Cls_ref_type = Integer.class; 
 	public static final int Base1 = 1;
@@ -151,10 +151,6 @@ public class Int_ implements Gfo_invk {
 		}
 		return rv * sign;
 	}	public static int[] Log10Ary = new int[] {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, Int_.Max_value}; public static int Log10AryLen = 11;
-	public Int_ FailIfNeg1(String key, int val) {
-		if (val < 0) throw Err_.new_wo_type("key must be >= 0", "key", key, "val", val);
-		return this;
-	}
 	public static String To_str_pad_bgn_space(int v, int reqdPlaces)	{return To_str_pad_bgn_zero(v, reqdPlaces, Byte_ascii.Space, true);}	// EX: 1, 3 returns "  1"
 	public static String To_str_pad_bgn_zero(int v, int reqdPlaces)	{return To_str_pad_bgn_zero(v, reqdPlaces, Byte_ascii.Num_0, true);}	// EX: 1, 3 returns "001"
 	static String To_str_pad_bgn_zero(int val, int places, byte pad_chr, boolean bgn) {
@@ -183,18 +179,6 @@ public class Int_ implements Gfo_invk {
 	public static String To_str(int v) {return new Integer(v).toString();}
 	public static String To_str_fmt(int v, String fmt) {return new java.text.DecimalFormat(fmt).format(v);}
 	public static boolean TypeMatch(Class<?> type) {return type == int.class || type == Integer.class;}
-	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_XtoStr_PadBgn))			{
-			int v = m.ReadInt(GfsCore_.Arg_primitive), pad = m.ReadInt("pad");
-			return ctx.Deny() ? (Object)this : To_str_pad_bgn_zero(v, pad);
-		}
-		else if	(ctx.Match(k, "Add")) {
-			int v = m.ReadInt(GfsCore_.Arg_primitive), operand = m.ReadInt("operand");
-			return ctx.Deny() ? (Object)this : v + operand;
-		}
-		else												return Gfo_invk_.Rv_unhandled;			
-	}	public static final    String Invk_XtoStr_PadBgn = "XtoStr_PadBgn";
-        public static final    Int_ Gfs = new Int_();
 	public static int To_int_hex(byte[] src) {return To_int_hex(src, 0, src.length);}
 	public static int To_int_hex(byte[] src, int bgn, int end) {
 		int rv = 0; int factor = 1;

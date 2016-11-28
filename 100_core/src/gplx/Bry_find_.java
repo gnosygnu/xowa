@@ -54,16 +54,17 @@ public class Bry_find_ {
 	public static int Find_fwd(byte[] src, byte[] lkp)								{return Find(src, lkp, 0	, src.length, true);}
 	public static int Find_fwd(byte[] src, byte[] lkp, int cur)						{return Find(src, lkp, cur  , src.length, true);}
 	public static int Find_fwd(byte[] src, byte[] lkp, int cur, int end)			{return Find(src, lkp, cur	,        end, true);}
+	private static final int OffsetCompare = 1;// handle srcPos >= 1 -> srcPosChk > 0
 	public static int Find(byte[] src, byte[] lkp, int src_bgn, int src_end, boolean fwd) {
 		if (src_bgn < 0 || src.length == 0) return Bry_find_.Not_found;
 		int dif, lkp_len = lkp.length, lkp_bgn, lkp_end, src_end_chk; 
 		if (fwd) {
 			if (src_bgn > src_end) return Bry_find_.Not_found; 
-			dif =  1; lkp_bgn = 0;				lkp_end = lkp_len;	src_end_chk = src_end - CompareAble_.OffsetCompare;
+			dif =  1; lkp_bgn = 0;				lkp_end = lkp_len;	src_end_chk = src_end - OffsetCompare;
 		}
 		else {
 			if (src_bgn < src_end) return Bry_find_.Not_found; 
-			dif = -1; lkp_bgn = lkp_len - 1;	lkp_end = -1;		src_end_chk = src.length - CompareAble_.OffsetCompare;	// src_end_chk needed when going bwd, b/c lkp_len may be > 1
+			dif = -1; lkp_bgn = lkp_len - 1;	lkp_end = -1;		src_end_chk = src.length - OffsetCompare;	// src_end_chk needed when going bwd, b/c lkp_len may be > 1
 		}
 		while (src_bgn != src_end) {									// while src is not done;
 			int lkp_cur = lkp_bgn;

@@ -81,7 +81,7 @@ class Scrib_lib_message_data {
 					break; 
 				case Key_tid_rawMessage:	raw_msg_key = kv.Val_to_bry(); break;
 				case Key_tid_lang:			lang_key = kv.Val_to_bry(); break;
-				case Key_tid_useDB:			use_db = Bool_.cast(kv.Val()); break;
+				case Key_tid_useDB:			use_db = Bool_.Cast(kv.Val()); break;
 				case Key_tid_title:			title_bry = kv.Val_to_bry(); break;
 				case Key_tid_params:
 					Keyval[] args_ary = (Keyval[])kv.Val();

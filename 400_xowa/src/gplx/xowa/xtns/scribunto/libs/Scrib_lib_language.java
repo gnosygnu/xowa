@@ -174,7 +174,7 @@ public class Scrib_lib_language implements Scrib_lib {
 			if (kv_ary != null) {
 				Object skip_commafy_obj = Keyval_.Ary_get_by_key_or_null(kv_ary, "noCommafy");
 				if (skip_commafy_obj != null)
-					skip_commafy = Bool_.cast(skip_commafy_obj);
+					skip_commafy = Bool_.Cast(skip_commafy_obj);
 			}
 		}
 		byte[] rv = lang.Num_mgr().Format_num(num, skip_commafy);

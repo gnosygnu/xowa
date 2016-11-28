@@ -75,7 +75,7 @@ public class Site_core_tbl implements Db_tbl {
 		try {
 			while (rdr.Move_next()) {
 				Site_core_itm itm = new_itm(rdr);
-				if (itm.Json_date().compareTo(cutoff) == CompareAble_.MoreOrSame) continue;	// ignore those downloaded after cutoff date
+				if (itm.Json_date().compareTo(cutoff) == CompareAble_.More_or_same) continue;	// ignore those downloaded after cutoff date
 				itm.Json_text_null_();
 				list.Add(itm);
 			}

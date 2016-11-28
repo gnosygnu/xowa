@@ -63,7 +63,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 				invoke_wkr.Eval_end(ctx.Page(), mod_name, fnc_name, log_time_bgn);
 		}
 		catch (Throwable e) {
-			Err err = Err_.cast_or_make(e);
+			Err err = Err_.Cast_or_make(e);
 			Error(bfr, wiki.Msg_mgr(), err);
 			Scrib_err_filter_mgr err_filter_mgr = invoke_wkr == null ? null : invoke_wkr.Err_filter_mgr();
 			if (	err_filter_mgr == null																				// no err_filter_mgr defined;
@@ -73,7 +73,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 			wiki.Parser_mgr().Scrib().Terminate_when_page_changes_y_();	// NOTE: terminate core when page changes; not terminating now, else page with many errors will be very slow due to multiple remakes of core; PAGE:th.d:all; DATE:2014-10-03
 		}
 	}
-	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, Err err) {Error(bfr, msg_mgr, Err_.cast_or_make(err).To_str__top_wo_args());}// NOTE: must use "short" error message to show in wikitext; DATE:2015-07-27
+	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, Err err) {Error(bfr, msg_mgr, Err_.Cast_or_make(err).To_str__top_wo_args());}// NOTE: must use "short" error message to show in wikitext; DATE:2015-07-27
 	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, String error) {
 		// for Luaj, msg combines both err; split out traceback else error message will be very long; note that Warn_many will still log traceback; DATE:2016-09-09
 		String error_visible = error;

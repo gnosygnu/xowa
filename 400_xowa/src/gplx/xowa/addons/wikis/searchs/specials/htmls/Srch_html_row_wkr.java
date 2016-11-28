@@ -33,7 +33,7 @@ public class Srch_html_row_wkr {
 	public void On_rslt_found(Srch_rslt_row new_row) {
 		Srch_rslt_row last_row = rows[rows_len - 1];
 		if (last_row != null) {
-			if (Compare(new_row, last_row) == CompareAble_.MoreOrSame) return;	// new_row is < last_row; exit
+			if (Compare(new_row, last_row) == CompareAble_.More_or_same) return;	// new_row is < last_row; exit
 		}
 		int new_row_slot = Find_insert_slot(new_row); if (new_row_slot == -1) return;
 		Srch_rslt_row insert_row = rows[new_row_slot];

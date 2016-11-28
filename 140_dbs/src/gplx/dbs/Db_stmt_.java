@@ -58,7 +58,7 @@ public class Db_stmt_ {
 	public static void Val_by_obj(Db_stmt stmt, String key, Object val) {
 		int tid = Type_adp_.To_tid_obj(val);
 		switch (tid) {
-			case Type_adp_.Tid__bool:			stmt.Val_bool_as_byte	(key, Bool_.cast(val)); break;
+			case Type_adp_.Tid__bool:			stmt.Val_bool_as_byte	(key, Bool_.Cast(val)); break;
 			case Type_adp_.Tid__byte:			stmt.Val_byte			(key, Byte_.cast(val)); break;
 			case Type_adp_.Tid__int:			stmt.Val_int			(key, Int_.cast(val)); break;
 			case Type_adp_.Tid__long:			stmt.Val_long			(key, Long_.cast(val)); break;

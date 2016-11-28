@@ -44,12 +44,7 @@ public class GfsCore_ {
 			Gfo_invk invk = Gfo_invk_.as_(rv);
 			Object primitive = null;
 			if (invk == null) {								// rv is primitive; find appropriate mgr
-				Class<?> type = rv.getClass();
-				if		(type == String.class)					invk = String_.Gfs;
-				else if (Int_.TypeMatch(type))						invk = Int_.Gfs;
-				else if (Type_adp_.Eq(type, Bool_.Cls_ref_type))	invk = Bool_.Gfs;
-				else throw Err_.new_wo_type("unknown primitive", "type", Type_adp_.NameOf_type(type), "obj", Object_.Xto_str_strict_or_null_mark(rv));
-				primitive = rv;
+				throw Err_.new_wo_type("unknown primitive", "type", Type_adp_.NameOf_type(rv.getClass()), "obj", Object_.Xto_str_strict_or_null_mark(rv));
 			}
 			Object exec_rv = null;
 			int len = owner_msg.Subs_count();

@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.consoles; import gplx.*; import gplx.core.*;
 public class Gfo_cmd_arg_itm {
 	public Gfo_cmd_arg_itm(int tid, boolean reqd, String key, int val_tid) {this.tid = tid; this.reqd = reqd; this.key = key; this.val_tid = val_tid;}
-	public int		Tid()		{return tid;} private final int tid;
-	public boolean		Reqd()		{return reqd;} private final boolean reqd;
-	public String	Key()		{return key;} private final String key;
+	public int		Tid()		{return tid;} private final    int tid;
+	public boolean		Reqd()		{return reqd;} private final    boolean reqd;
+	public String	Key()		{return key;} private final    String key;
 	public int		Val_tid()	{return val_tid;} private int val_tid;
 	public Object	Val()		{return val;} public Gfo_cmd_arg_itm Val_(Object v) {this.val = v; dirty = true; return this;} private Object val;
 	public String	Note()		{return note;} public Gfo_cmd_arg_itm Note_(String v) {note = v; return this;} private String note = "";
@@ -45,7 +45,7 @@ public class Gfo_cmd_arg_itm {
 			default:									return "unknown";
 		}
 	}
-	public boolean			Val_as_bool()				{return Bool_.cast(val);}
+	public boolean			Val_as_bool()				{return Bool_.Cast(val);}
 	public String		Val_as_str_or(String or)	{return val == null ? or : (String)val;}
 	public String		Val_as_str()				{return (String)val;}
 	public int			Val_as_int_or(int or)		{return val == null ? or : Int_.parse_or((String)val, or);}

@@ -70,7 +70,7 @@ public class Xot_invk_mock implements Xot_invk {
 			if		(Type_adp_.Eq_typeSafe(kv_key_obj, Int_.Cls_ref_type))					// key is int; EX: 1 => val
 				nde_tkn = new Arg_nde_tkn_mock(null, kv.Val_to_str_or_empty());			// add w/o key
 			else if	(Type_adp_.Eq_typeSafe(kv.Val(), Bool_.Cls_ref_type)) {					// val is boolean; EX: key => true || key => false
-				boolean kv_val_bool = Bool_.cast(kv.Val());
+				boolean kv_val_bool = Bool_.Cast(kv.Val());
 				if (kv_val_bool)
 					nde_tkn = new Arg_nde_tkn_mock(kv_key_str, "1");					// true => 1 (PHP behavior)
 				else
@@ -82,7 +82,7 @@ public class Xot_invk_mock implements Xot_invk {
 		}
 		return rv;
 	}
-	public static final Xot_invk_mock Null = new Xot_invk_mock(Xot_defn_.Tid_null, 1, Bry_.Empty);
+	public static final    Xot_invk_mock Null = new Xot_invk_mock(Xot_defn_.Tid_null, 1, Bry_.Empty);
 }
 /*
 NOTE_1: Xot_invk_mock is being used as a container for two functions

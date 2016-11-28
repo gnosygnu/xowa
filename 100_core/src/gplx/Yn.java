@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.stores.*;
 public class Yn {
-	public static final String Y = "y", N = "n";
+	public static final    String Y = "y", N = "n";
 	public static boolean parse_by_char_or(String v, boolean or) {
 		if		(String_.Eq(v, Y))	return true;
 		else if	(String_.Eq(v, N))	return false;
@@ -69,7 +69,7 @@ public class Yn {
 		String v = mgr.SrlStrOr(key, "");
 		return mgr.Type_rdr() ? parse_or(v, or) : or;
 	}
-	public static boolean coerce_(Object o) {String s = String_.as_(o); return s != null ? parse_or(s, false) : Bool_.cast(o);}
+	public static boolean coerce_(Object o) {String s = String_.as_(o); return s != null ? parse_or(s, false) : Bool_.Cast(o);}
 	public static boolean readOrFalse_(DataRdr rdr, String key) {return read_(rdr, key, false);}
 	public static boolean readOrTrue_(DataRdr rdr, String key) {return read_(rdr, key, true);}
 	static boolean read_(DataRdr rdr, String key, boolean or) {

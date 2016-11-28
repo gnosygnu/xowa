@@ -15,10 +15,9 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx;
-import org.junit.*;
-import gplx.core.lists.*;
-public class CompareAble_tst implements ComparerAble {
+package gplx.xowa.wikis.tdbs.hives; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+import org.junit.*; import gplx.core.lists.*;
+public class Xowd_regy_mgr__tst implements ComparerAble {
 	@Test  public void Basic() {
 		String[] slotAry = new String[] {"b", "e", "h"};  // 0=b 1=e 2=h
 		tst_FindSlot(slotAry, "f", "h");	// f ->  1 2 -> 2
@@ -34,5 +33,5 @@ public class CompareAble_tst implements ComparerAble {
 		tst_FindSlot(slotAry, "w", null);
 	}
 	public int compare(Object lhsObj, Object rhsObj) {return CompareAble_.Compare_obj(lhsObj, rhsObj);}
-	void tst_FindSlot(String[] slotAry, String s, String expd) {Tfds.Eq(expd, slotAry[CompareAble_.FindSlot(this, slotAry, s)]);}
+	void tst_FindSlot(String[] slotAry, String s, String expd) {Tfds.Eq(expd, slotAry[gplx.xowa.wikis.tdbs.hives.Xowd_regy_mgr_.FindSlot(this, slotAry, s)]);}
 }

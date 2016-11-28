@@ -203,8 +203,8 @@ public class Gfh_utl {// TS:Gfo_url_encoder is TS
 		return bfr.To_str_and_clear();
 	}
 	public static void Log(Exception e, String head, byte[] page_url, byte[] src, int pos) {
-		Err err = Err_.cast_or_make(e); if (err.Logged()) return;
-		String msg = String_.Format("{0}; page={1} err={2} mid={3} trace={4}", head, page_url, Err_.To_str(e), Bry_.Escape_ws(Bry_.Mid_by_len_safe(src, pos, 255)), err.To_str__log());
+		Err err = Err_.Cast_or_make(e); if (err.Logged()) return;
+		String msg = String_.Format("{0}; page={1} err={2} mid={3} trace={4}", head, page_url, Err_.Message_lang(e), Bry_.Escape_ws(Bry_.Mid_by_len_safe(src, pos, 255)), err.To_str__log());
 		Gfo_usr_dlg_.Instance.Warn_many("", "", msg);
 	}
 }

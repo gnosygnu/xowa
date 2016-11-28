@@ -86,7 +86,7 @@ public class Keyval_ {
 					continue;														// don't add \n below
 				}
 				else if (Type_adp_.Eq(val_type, Bool_.Cls_ref_type)) {					// val is boolean
-					boolean val_as_bool = Bool_.cast(val);
+					boolean val_as_bool = Bool_.Cast(val);
 					bfr.Add(val_as_bool ? Bool_.True_bry : Bool_.False_bry);		// add "true" or "false"; don't call toString
 				}
 				else

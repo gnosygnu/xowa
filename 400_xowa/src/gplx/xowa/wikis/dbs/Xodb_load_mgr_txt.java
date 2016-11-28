@@ -214,7 +214,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		Int_obj_ref count = Int_obj_ref.New_zero();
 		Xob_random_itm[] files = Build_random_itms(regy_mgr, count);
 		int random_idx = RandomAdp_.new_().Next(count.Val() - 1);	// get a random idx; -1 since count is super 1 (EX: count of 1 mil; random_idx of 0 - 999,999)
-		int file_idx = CompareAble_.FindSlot(Xob_random_itm_comparer.Instance, files, new Xob_random_itm(-1, random_idx, -1));
+		int file_idx = Xowd_regy_mgr_.FindSlot(Xob_random_itm_comparer.Instance, files, new Xob_random_itm(-1, random_idx, -1));
 		Io_url file_url = fsys_mgr.Url_ns_fil(Xotdb_dir_info_.Tid_ttl, ns.Id(), file_idx);
 		Load_xdat_file(Cancelable_.Never, tmp_xdat_file, file_url);
 		Xob_random_itm file = files[file_idx];

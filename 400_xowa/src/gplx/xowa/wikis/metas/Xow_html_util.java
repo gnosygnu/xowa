@@ -25,7 +25,7 @@ public class Xow_html_util implements Gfo_invk {
 	}	private static final String Invk_if_bool = "if_bool", Invk_if_yn = "if_yn";
 	String If_bool(String expr, String true_val, String false_val) {
 		Object o = wiki.Appe().Gfs_mgr().Run_str(expr);
-		try {return Bool_.cast(o) ? true_val : false_val;}
+		try {return Bool_.Cast(o) ? true_val : false_val;}
 		catch (Exception e) {Err_.Noop(e); return "expr failed: " + expr;}
 	}
 	String If_yn(String expr, String true_val, String false_val) {

@@ -179,6 +179,6 @@ class Gfui_html_mok extends Xog_html_itm {	private Hash_adp elem_atrs = Hash_adp
 		return (String)elem_atrs.Get_by(id + "." + atr_key);
 	}
 	@Override public boolean		Html_elem_atr_get_bool(String id, String atr_key) {
-		return Bool_.parse((String)elem_atrs.Get_by(id + "." + atr_key));
+		return Bool_.Parse((String)elem_atrs.Get_by(id + "." + atr_key));
 	}
 }

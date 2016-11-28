@@ -88,7 +88,7 @@ public class Scrib_invoke_func_fxt {
 		fxt.Test_parse_page_tmpl_str(raw, tmp_bfr.To_str_and_clear());
 	}
 	public void Test_error(Exception e, String expd) {
-		Scrib_invoke_func.Error(tmp_bfr, fxt.Wiki().Msg_mgr(), Err_.cast_or_make(e));
+		Scrib_invoke_func.Error(tmp_bfr, fxt.Wiki().Msg_mgr(), Err_.Cast_or_make(e));
 		Tfds.Eq_str(expd, tmp_bfr.To_str_and_clear(), "error");
 	}
 	public void Test_lib_proc(Scrib_lib lib, String func_name, Object[] args, String expd) {Test_lib_proc_kv(lib, func_name, Scrib_kv_utl_.base1_many_(args), expd);}
@@ -214,7 +214,7 @@ class Scrib_lua_rsp_bldr {
 		Class<?> v_type = v.getClass();
 		if		(Object_.Eq(v_type, Int_.Cls_ref_type))			Bld_int(bfr, Int_.cast(v));
 		else if	(Object_.Eq(v_type, String_.Cls_ref_type))		Bld_str(bfr, String_.cast(v));
-		else if	(Object_.Eq(v_type, Bool_.Cls_ref_type))		Bld_bool(bfr, Bool_.cast(v));
+		else if	(Object_.Eq(v_type, Bool_.Cls_ref_type))		Bld_bool(bfr, Bool_.Cast(v));
 		else if	(Object_.Eq(v_type, Double_.Cls_ref_type))		Bld_double(bfr, Double_.cast(v));
 		else if	(Object_.Eq(v_type, Keyval[].class))			Bld_kv_ary(bfr, (Keyval[])v);
 		else if	(Object_.Eq(v_type, Scrib_lua_proc.class))	Bld_fnc(bfr, (Scrib_lua_proc)v);

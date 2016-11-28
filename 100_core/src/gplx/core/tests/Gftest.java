@@ -151,7 +151,7 @@ public class Gftest {
 	private static void Write__itm(Bry_bfr bfr, int type_id, Object ary, int len, int idx) {
 		if (idx < len) {
 			switch (type_id) {
-				case Type_adp_.Tid__bool:	bfr.Add_yn(Bool_.cast(Array_.Get_at(ary, idx))); break;
+				case Type_adp_.Tid__bool:	bfr.Add_yn(Bool_.Cast(Array_.Get_at(ary, idx))); break;
 				case Type_adp_.Tid__bry:	bfr.Add((byte[])Array_.Get_at(ary, idx)); break;
 				case Type_adp_.Tid__long:	bfr.Add_long_variable(Long_.cast(Array_.Get_at(ary, idx))); break;
 				case Type_adp_.Tid__int:	bfr.Add_int_variable(Int_.cast(Array_.Get_at(ary, idx))); break;
@@ -175,7 +175,7 @@ public class Gftest {
 			else if (expd_obj == null || actl_obj == null)	eq = false;
 			else {
 				switch (tid) {
-					case Type_adp_.Tid__bool:		eq = Bool_.cast(expd_obj) == Bool_.cast(actl_obj); break;
+					case Type_adp_.Tid__bool:		eq = Bool_.Cast(expd_obj) == Bool_.Cast(actl_obj); break;
 					case Type_adp_.Tid__bry:		eq = Bry_.Eq((byte[])expd_obj, (byte[])actl_obj); break;
 					case Type_adp_.Tid__long:		eq = Long_.cast(expd_obj) == Long_.cast(actl_obj); break;
 					case Type_adp_.Tid__int:		eq = Int_.cast(expd_obj) == Int_.cast(actl_obj); break;

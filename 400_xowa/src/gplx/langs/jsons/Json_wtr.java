@@ -165,7 +165,7 @@ public class Json_wtr {
 	private void Write_val_obj(boolean called_by_ary, int type_tid, Object obj) {
 		switch (type_tid) {
 			case Type_adp_.Tid__null:				bfr.Add(Object_.Bry__null); break;
-			case Type_adp_.Tid__bool:				bfr.Add_bool(Bool_.cast(obj)); break;
+			case Type_adp_.Tid__bool:				bfr.Add_bool(Bool_.Cast(obj)); break;
 			case Type_adp_.Tid__byte:				bfr.Add_byte(Byte_.cast(obj)); break;
 			case Type_adp_.Tid__int:				bfr.Add_int_variable(Int_.cast(obj)); break;
 			case Type_adp_.Tid__long:				bfr.Add_long_variable(Long_.cast(obj)); break;

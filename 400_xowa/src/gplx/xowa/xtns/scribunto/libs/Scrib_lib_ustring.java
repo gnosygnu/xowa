@@ -166,7 +166,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 			for (int j = 0; j < grps_len; j++) {
 				Regx_group grp = grps[j];
 				if (	j < capts_len				// bounds check	b/c null can be passed
-					&&	Bool_.cast(capts[j].Val())	// check if true; indicates that group is "()" or "anypos" see regex converter; DATE:2014-04-23
+					&&	Bool_.Cast(capts[j].Val())	// check if true; indicates that group is "()" or "anypos" see regex converter; DATE:2014-04-23
 					)
 					tmp_list.Add(grp.Bgn() + Scrib_lib_ustring.Base1);	// return index only for "()"; NOTE: do not return as String; callers expect int and will fail typed comparisons; DATE:2016-01-21
 				else

@@ -40,7 +40,7 @@ public class Xoi_mirror_parser {
 		int len = ary.length;
 		for (int i = len - 1; i > -1; i--) {
 			String itm = ary[i];			
-			if (CompareAble_.Is_lessOrSame(itm, comp)) return itm;
+			if (CompareAble_.Is(CompareAble_.Less_or_same, itm, comp)) return itm;
 		}
 		return "";
 	}

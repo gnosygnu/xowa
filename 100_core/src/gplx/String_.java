@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import java.lang.*;
 import gplx.core.strings.*; import gplx.langs.gfs.*; import gplx.core.envs.*;
-public class String_ implements Gfo_invk {
+public class String_ {
 	public static int Len(String s)					{return s.length();}	
 	public static char CharAt(String s, int i)		{return s.charAt(i);}		
 	public static String new_u8(byte[] v, int bgn, int end) {
@@ -470,25 +470,6 @@ public class String_ implements Gfo_invk {
 		return (String[])list.To_ary(String.class);
 	}
 	static String Mid_lang(String s, int bgn, int len) {return s.substring(bgn, bgn + len);}
-	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_Replace)) {
-			String s = m.ReadStr(GfsCore_.Arg_primitive), find = m.ReadStr("find"), replace = m.ReadStr("replace");
-			if (ctx.Deny()) return this;
-			return Replace(s, find, replace);
-		}
-		else if	(ctx.Match(k, Invk_Len)) {
-			String s = m.ReadStr(GfsCore_.Arg_primitive);
-			if (ctx.Deny()) return this;
-			return Len(s);
-		}
-		else if (ctx.Match(k, Invk_PadBgn)) {
-			String s = m.ReadStr(GfsCore_.Arg_primitive); int totalLen = m.ReadInt("totalLen"); String pad = m.ReadStr("pad"); 
-			if (ctx.Deny()) return this;
-			return PadBgn(s, totalLen, pad);
-		}
-		else return Gfo_invk_.Rv_unhandled;
-	}	public static final    String Invk_Replace = "Replace", Invk_Len = "Len", Invk_PadBgn = "PadBgn";
-        public static final    String_ Gfs = new String_();
 	public static String Extract_after_bwd(String src, String dlm) {
 		int dlm_pos = String_.FindBwd(src, dlm); if (dlm_pos == String_.Find_none) return String_.Empty;
 		int src_len = String_.Len(src); if (dlm_pos == src_len - 1) return String_.Empty;

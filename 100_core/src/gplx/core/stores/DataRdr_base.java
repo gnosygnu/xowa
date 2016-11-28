@@ -79,12 +79,12 @@ public abstract class DataRdr_base implements SrlMgr {
 	}
 	@gplx.Virtual public boolean ReadBool(String key) {
 		Object val = Read(key);
-		try {return (parse) ? Bool_.cast(BoolClassXtn.Instance.ParseOrNull(String_.as_(val))) : Bool_.cast(val);} 
+		try {return (parse) ? Bool_.Cast(BoolClassXtn.Instance.ParseOrNull(String_.as_(val))) : Bool_.Cast(val);} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(boolean.class, key, val, exc);}
 	}
 	@gplx.Virtual public boolean ReadBoolOr(String key, boolean or) {
 		Object val = Read(key); if (val == null) return or;
-		try {return (parse) ? Bool_.parse(String_.as_(val)) : Bool_.cast(val);} 
+		try {return (parse) ? Bool_.Parse(String_.as_(val)) : Bool_.Cast(val);} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, boolean.class, key, val, or); return or;}
 	}
 	public long ReadLong(String key) {

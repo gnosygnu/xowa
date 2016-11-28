@@ -431,7 +431,7 @@ public class Bry_bfr {
 		else if	(o_type == Bry_bfr.class)			Add_bfr_and_preserve((Bry_bfr)o);
 		else if	(o_type == DateAdp.class)         Add_dte((DateAdp)o);
 		else if	(o_type == Io_url.class)			Add(((Io_url)o).RawBry());
-		else if	(o_type == Boolean.class)			Add_yn(Bool_.cast(o));				
+		else if	(o_type == Boolean.class)			Add_yn(Bool_.Cast(o));				
 		else if	(o_type == Double.class)			Add_double(Double_.cast(o));		
 		else if	(o_type == Float.class)			Add_float(Float_.cast(o));			
 		else										((Bfr_arg)o).Bfr_arg__add(this);
@@ -448,7 +448,7 @@ public class Bry_bfr {
 		else if	(o_type == Bry_bfr.class)			Add_bfr_and_preserve((Bry_bfr)o);
 		else if	(o_type == DateAdp.class)         Add_dte((DateAdp)o);
 		else if	(o_type == Io_url.class)			Add(((Io_url)o).RawBry());
-		else if	(o_type == Boolean.class)			Add_bool(Bool_.cast(o));			
+		else if	(o_type == Boolean.class)			Add_bool(Bool_.Cast(o));			
 		else if	(o_type == Double.class)			Add_double(Double_.cast(o));		
 		else if	(o_type == Float.class)			Add_float(Float_.cast(o));			
 		else										((Bfr_arg)o).Bfr_arg__add(this);

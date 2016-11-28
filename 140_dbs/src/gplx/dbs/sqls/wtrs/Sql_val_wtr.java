@@ -30,7 +30,7 @@ public class Sql_val_wtr {
 		}
 		int tid_type = Type_adp_.To_tid_type(val.getClass());
 		switch (tid_type) {
-			case Type_adp_.Tid__bool:			Bld_val__bool		(bfr, Bool_.cast(val)); break;
+			case Type_adp_.Tid__bool:			Bld_val__bool		(bfr, Bool_.Cast(val)); break;
 			case Type_adp_.Tid__byte:			Bld_val__byte		(bfr, Byte_.cast(val)); break;
 			case Type_adp_.Tid__short:			Bld_val__short		(bfr, Short_.cast(val)); break;
 			case Type_adp_.Tid__int:			Bld_val__int		(bfr, Int_.cast(val)); break;

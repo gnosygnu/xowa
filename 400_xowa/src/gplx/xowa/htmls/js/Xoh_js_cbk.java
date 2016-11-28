@@ -49,7 +49,7 @@ public class Xoh_js_cbk implements Gfo_invk {
 		Xop_ctx ctx = wiki.Parser_mgr().Ctx();
 		boolean old_para_enabled = ctx.Para().Enabled();
 		byte[] raw = Bry_.new_u8(m.Args_getAt(0).Val_to_str_or_empty());
-		boolean para_enabled = m.Args_count() < 2 ? false : Bool_.parse(m.Args_getAt(1).Val_to_str_or_empty());
+		boolean para_enabled = m.Args_count() < 2 ? false : Bool_.Parse(m.Args_getAt(1).Val_to_str_or_empty());
 		try {
 			ctx.Para().Enabled_(para_enabled);
 			wiki.Parser_mgr().Main().Parse_text_to_wdom(root, ctx, ctx.Tkn_mkr(), raw, 0);

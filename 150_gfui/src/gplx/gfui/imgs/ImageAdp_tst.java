@@ -38,7 +38,7 @@ public class ImageAdp_tst {
 		DateAdp beforeModifiedTime = Io_mgr.Instance.QueryFil(save).ModifiedTime();
 		img.SaveAsBmp(save);
 		DateAdp afterModifiedTime = Io_mgr.Instance.QueryFil(save).ModifiedTime();
-		Tfds.Eq_true(CompareAble_.Is_more(afterModifiedTime, beforeModifiedTime));
+		Tfds.Eq_true(CompareAble_.Is(CompareAble_.More, afterModifiedTime, beforeModifiedTime));
 
 		Hash_algo algo = Hash_algo_.New__md5();
 		String loadHash = algo.Hash_stream_as_str(Console_adp_.Noop, Io_mgr.Instance.OpenStreamRead(load));
