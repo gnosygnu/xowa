@@ -25,6 +25,7 @@ public class Wbase_enum_hash {
 		this.ary_len = ary_len;
 	}
 	public String Name() {return name;} private final    String name;
+	public int Len() {return ary_len;}
 	public Wbase_enum_itm Add(byte tid, String key)	{return Add(new Wbase_enum_itm(tid, key));}
 	public Wbase_enum_itm Add(Wbase_enum_itm rv) {
 		hash_by_bry.Add(rv.Key_bry(), rv);

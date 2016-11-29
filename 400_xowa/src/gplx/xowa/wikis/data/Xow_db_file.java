@@ -20,6 +20,7 @@ import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*; i
 import gplx.xowa.wikis.data.site_stats.*;
 import gplx.xowa.htmls.core.dbs.*; import gplx.xowa.addons.wikis.searchs.dbs.*;
 import gplx.xowa.addons.wikis.htmls.css.dbs.*;
+import gplx.xowa.xtns.wbases.dbs.*;
 public class Xow_db_file {
 	protected Xow_db_file(Db_cfg_tbl cfg_tbl, Xowd_core_db_props props, Xob_info_session info_session, Xob_info_file info_file, Xow_db_file_schema_props schema_props, int id, byte tid, Io_url url, String ns_ids, int part_id, Guid_adp guid, Db_conn conn, byte cmd_mode) {
 		this.id = id; this.tid = tid; this.url = url; this.ns_ids = ns_ids; this.part_id = part_id; this.guid = guid; this.db_props = props;
@@ -39,6 +40,7 @@ public class Xow_db_file {
 		this.tbl__cat_link = new Xowd_cat_link_tbl(conn, schema_is_1);
 		this.tbl__wbase_qid = new Xowd_wbase_qid_tbl(conn, schema_is_1, schema_props == null ? Bool_.N : schema_props.Wbase__qid__src_ttl_has_spaces());
 		this.tbl__wbase_pid = new Xowd_wbase_pid_tbl(conn, schema_is_1);
+		this.tbl__wbase_prop = new Xowb_prop_tbl(conn);
 		this.info_session = info_session;
 		this.info_file = info_file;
 		this.schema_props = schema_props;
@@ -69,6 +71,7 @@ public class Xow_db_file {
 	public Xowd_site_stats_tbl			Tbl__site_stats()	{return tbl__site_stats;}	private final    Xowd_site_stats_tbl tbl__site_stats;
 	public Xowd_wbase_qid_tbl			Tbl__wbase_qid()	{return tbl__wbase_qid;}	private final    Xowd_wbase_qid_tbl tbl__wbase_qid;
 	public Xowd_wbase_pid_tbl			Tbl__wbase_pid()	{return tbl__wbase_pid;}	private final    Xowd_wbase_pid_tbl tbl__wbase_pid;
+	public Xowb_prop_tbl				Tbl__wbase_prop()	{return tbl__wbase_prop;}	private final    Xowb_prop_tbl tbl__wbase_prop;
 	public Xob_info_session				Info_session() {
 		if (info_session == null)	// NOTE: null when load; !null when make
 			info_session = Xob_info_session.Load(tbl__cfg);

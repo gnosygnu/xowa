@@ -59,6 +59,7 @@ public class Xob_wdata_pid_base_tst {
 	public static String json_(String entity_id, String grp_key, String[] grp_vals) {
 		Bry_bfr bfr = Bry_bfr_.New();
 		bfr.Add_str_a7("{ 'entity':'").Add_str_u8(entity_id).Add_byte(Byte_ascii.Apos).Add_byte_nl();
+		bfr.Add_str_a7(", 'datatype':'commonsMedia'\n");
 		bfr.Add_str_a7(", '").Add_str_u8(grp_key).Add_str_a7("':").Add_byte_nl();
 		int len = grp_vals.length;
 		for (int i = 0; i < len; i += 2) {
