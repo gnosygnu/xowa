@@ -44,9 +44,10 @@ public class Xob_wdata_pid_sql extends Xob_wdata_pid_base {
 		tbl__prop.Create_tbl();
 		tbl__prop.Insert_bgn();
 	}
-	@Override public void Pid_add(byte[] lang_key, byte[] ttl, byte[] pid, byte[] datatype_bry) {
+	@Override public void Pid_add(byte[] lang_key, byte[] ttl, byte[] pid) {
 		tbl__pid.Insert_cmd_by_batch(lang_key, ttl, pid);
-
+	}
+	@Override public void Pid_datatype(byte[] pid, byte[] datatype_bry) {
 		Wbase_claim_type claim_type = (Wbase_claim_type)datatype_hash.Get_by_or_fail(datatype_bry);
 		tbl__prop.Insert_cmd_by_batch(pid, claim_type.Tid());
 	}

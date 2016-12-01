@@ -22,9 +22,10 @@ public class Xob_wdata_pid_txt extends Xob_wdata_pid_base {
 	@Override public void Pid_bgn() {
 		pid_bldr = new Wdata_idx_bldr_pid(this, bldr, wiki, dump_fil_len);
 	}	Wdata_idx_bldr_pid pid_bldr;
-	@Override public void Pid_add(byte[] lang_key, byte[] prop_key, byte[] qid, byte[] datatype) {
+	@Override public void Pid_add(byte[] lang_key, byte[] prop_key, byte[] qid) {
 		pid_bldr.Add(lang_key, prop_key, qid);
 	}
+	@Override public void Pid_datatype(byte[] pid, byte[] datatype_bry) {}
 	@Override public void Pid_end() {
 		pid_bldr.Flush();
 		pid_bldr.Make();

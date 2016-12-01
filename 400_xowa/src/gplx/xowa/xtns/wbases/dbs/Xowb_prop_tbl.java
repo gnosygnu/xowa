@@ -26,7 +26,7 @@ public class Xowb_prop_tbl implements Db_tbl {
 	public Xowb_prop_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "wbase_prop";
-		this.fld__wbp_pid			= flds.Add_str("wbp_pid", 16);				// EX: "p1"; NOTE: String, not int to conform to wbase_pid
+		this.fld__wbp_pid			= flds.Add_str_pkey("wbp_pid", 16);			// EX: "p1"; NOTE: String, not int to conform to wbase_pid
 		this.fld__wbp_datatype		= flds.Add_int("wbp_datatype");				// EX: 12=commonsMedia; SEE:Wbase_claim_type_
 		conn.Rls_reg(this);
 	}
@@ -56,7 +56,7 @@ public class Xowb_prop_tbl implements Db_tbl {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "wbase:invalid prop datatype_id; pid=~{0} datatype=~{1}", pid, datatype_id);
 			datatype_itm = Wbase_claim_type_.Itm__string;
 		}
-		hash.Add_if_dupe_use_1st(pid, datatype_itm.Key_str());
+		hash.Add(pid, datatype_itm.Key_str());
 	}
 	public void Rls() {}
 }
