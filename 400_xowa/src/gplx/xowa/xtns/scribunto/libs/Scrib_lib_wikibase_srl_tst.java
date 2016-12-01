@@ -368,6 +368,26 @@ public class Scrib_lib_wikibase_srl_tst {
 		Gftest.Eq__str("timezone", keyval.Key());
 		Gftest.Eq__int(0, (int)keyval.Val());	// fails when keyval.Val() is String; DATE:2016-10-28
 	}
+	@Test   public void Claims__commonsMedia() {
+		fxt.Wdata_fxt().Wdata_mgr().Prop_mgr().Loader_(Wbase_prop_mgr_loader_.New_mock(Keyval_.new_("P2", "commonsMedia")));
+		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_string(2, "abc"));
+		fxt.Test
+		(	"claims:"
+		,	"  P2:"
+		,	"    1:"
+		,	"      id:'P2'"
+		,	"      mainsnak:"
+		,	"        datavalue:"
+		,	"          type:'string'"
+		,	"          value:'abc'"
+		,	"        property:'P2'"
+		,	"        snaktype:'value'"
+		,	"        datatype:'commonsMedia'"
+		,	"      rank:'normal'"
+		,	"      type:'statement'"        
+		,	""
+		);
+	}
 	@Test   public void Type_is_property() {	// PURPOSE: type should be "property"; PAGE:ru.w:Викитека:Проект:Викиданные DATE:2016-11-23
 		fxt.Init_header_enabled_y_();
 		fxt.Wdata_fxt().doc_("Property:P1", fxt.Wdata_fxt().Make_claim_string(123, "abc"));
@@ -391,11 +411,13 @@ public class Scrib_lib_wikibase_srl_tst {
 }	
 class Scrib_lib_wikibase_srl_fxt {
 	private Wdata_doc_bldr wdoc_bldr;
+	private Wbase_prop_mgr prop_mgr;
 	public void Clear() {
 		wdata_fxt = new Wdata_wiki_mgr_fxt();
 		wdata_fxt.Init();
 		wdoc_bldr = wdata_fxt.Wdoc_bldr("q2");
 		header_enabled = false;
+		this.prop_mgr = wdata_fxt.App().Wiki_mgr().Wdata_mgr().Prop_mgr();
 	}
 	public Wdata_wiki_mgr_fxt Wdata_fxt() {return wdata_fxt;} private Wdata_wiki_mgr_fxt wdata_fxt;
 	private boolean header_enabled;
@@ -419,13 +441,13 @@ class Scrib_lib_wikibase_srl_fxt {
 	public Scrib_lib_wikibase_srl_fxt Init_prop(Wbase_claim_base prop) {wdoc_bldr.Add_claims(prop); return this;}
 	public Scrib_lib_wikibase_srl_fxt Test(String... expd) {return Test(false, expd);}
 	public Scrib_lib_wikibase_srl_fxt Test(boolean base0, String... expd) {
-		Keyval[] actl = Scrib_lib_wikibase_srl.Srl(wdoc_bldr.Xto_wdoc(), header_enabled, base0);
+		Keyval[] actl = Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc_bldr.Xto_wdoc(), header_enabled, base0);
 		Tfds.Eq_ary_str(expd, String_.SplitLines_nl(Xto_str(actl)));
 		return this;
 	}
 	public Scrib_lib_wikibase_srl_fxt Test(Wdata_doc wdoc, String... expd) {return Test(false, wdoc, expd);}
 	public Scrib_lib_wikibase_srl_fxt Test(boolean base0, Wdata_doc wdoc, String... expd) {
-		Keyval[] actl = Scrib_lib_wikibase_srl.Srl(wdoc, header_enabled, base0);
+		Keyval[] actl = Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc, header_enabled, base0);
 		Tfds.Eq_ary_str(expd, String_.SplitLines_nl(Xto_str(actl)));
 		return this;
 	}

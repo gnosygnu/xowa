@@ -34,6 +34,7 @@ public class Wdata_wiki_mgr_fxt {
 		app.Xwiki_mgr__sitelink_mgr().Init_by_app();
 		wdoc_bldr = new Wdata_doc_bldr();
 		wdata_mgr = app.Wiki_mgr().Wdata_mgr();
+		wdata_mgr.Prop_mgr().Loader_(Wbase_prop_mgr_loader_.New_mock());
 		wdata_mgr.Clear();
 		if (reset) {
 			Io_mgr.Instance.InitEngine_mem();

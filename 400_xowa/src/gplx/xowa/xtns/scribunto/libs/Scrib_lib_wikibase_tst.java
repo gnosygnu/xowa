@@ -121,15 +121,15 @@ public class Scrib_lib_wikibase_tst {
 class Wbase_snak_utl_ {
 	public static Keyval[] Get_snaks_ary(Wdata_wiki_mgr_fxt wdata_fxt, Wbase_claim_base... ary) {
 		Wdata_doc wdoc = wdata_fxt.Wdoc_bldr("q2").Add_claims(ary).Xto_wdoc();
-		return Keyval_.Ary(Keyval_.int_(1, Get_snaks(wdoc)));
+		return Keyval_.Ary(Keyval_.int_(1, Get_snaks(wdata_fxt, wdoc)));
 	}
 	public static Keyval[] Get_snak(Wdata_wiki_mgr_fxt wdata_fxt, Wbase_claim_base itm) {
 		Wdata_doc wdoc = wdata_fxt.Wdoc_bldr("q2").Add_claims(itm).Xto_wdoc();
-		Keyval[] snak_props = Get_subs_by_path(Get_snaks(wdoc), 0);
+		Keyval[] snak_props = Get_subs_by_path(Get_snaks(wdata_fxt, wdoc), 0);
 		return Keyval_.Ary(Keyval_.int_(1, snak_props));
 	}
-	private static Keyval[] Get_snaks(Wdata_doc wdoc) {
-		Keyval[] wdoc_root = Scrib_lib_wikibase_srl.Srl(wdoc, false, false);
+	private static Keyval[] Get_snaks(Wdata_wiki_mgr_fxt wdata_fxt, Wdata_doc wdoc) {
+		Keyval[] wdoc_root = Scrib_lib_wikibase_srl.Srl(wdata_fxt.Wdata_mgr().Prop_mgr(), wdoc, false, false);
 		Keyval[] snaks = Get_subs_by_path(wdoc_root, 0, 0);
 		int snaks_len = snaks.length;
 		Keyval[] rv = new Keyval[snaks_len];

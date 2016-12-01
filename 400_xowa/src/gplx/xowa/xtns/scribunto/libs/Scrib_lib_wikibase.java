@@ -69,7 +69,8 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	}
 	public boolean GetEntity(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Wdata_doc wdoc = Get_wdoc_or_null(args, core); if (wdoc == null) return rslt.Init_ary_empty();
-		return rslt.Init_obj(Scrib_lib_wikibase_srl.Srl(wdoc, true, false));	// "false": wbase now always uses v2; PAGE:ja.w:東京競馬場; DATE:2015-07-28
+		Wbase_prop_mgr prop_mgr = core.Wiki().Appe().Wiki_mgr().Wdata_mgr().Prop_mgr();
+		return rslt.Init_obj(Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc, true, false));	// "false": wbase now always uses v2; PAGE:ja.w:東京競馬場; DATE:2015-07-28
 	}
 	public boolean GetEntityUrl(Scrib_proc_args args, Scrib_proc_rslt rslt)		{throw Err_.new_("wbase", "getEntityUrl not implemented", "url", core.Page().Url().To_str());}
 	public boolean GetSetting(Scrib_proc_args args, Scrib_proc_rslt rslt)			{throw Err_.new_("wbase", "getSetting not implemented", "url", core.Page().Url().To_str());}

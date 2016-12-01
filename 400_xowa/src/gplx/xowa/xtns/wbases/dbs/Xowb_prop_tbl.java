@@ -49,14 +49,14 @@ public class Xowb_prop_tbl implements Db_tbl {
 		return rv;
 	}
 	private void Select_all__add(Ordered_hash hash, Db_rdr rdr) {
-		byte[] pid = rdr.Read_bry_by_str(fld__wbp_pid);
+		String pid = rdr.Read_str(fld__wbp_pid);
 		byte datatype_id = (byte)rdr.Read_int(fld__wbp_datatype);
 		Wbase_enum_itm datatype_itm = Wbase_claim_type_.Reg.Get_itm_or((byte)datatype_id, null);
 		if (datatype_itm == null) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "wbase:invalid prop datatype_id; pid=~{0} datatype=~{1}", pid, datatype_id);
 			datatype_itm = Wbase_claim_type_.Itm__string;
 		}
-		hash.Add(pid, datatype_itm);
+		hash.Add_if_dupe_use_1st(pid, datatype_itm.Key_str());
 	}
 	public void Rls() {}
 }
