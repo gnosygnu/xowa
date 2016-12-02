@@ -30,4 +30,18 @@ public class Xoh_page_wtr_mgr_tst {
 		page_wtr_mgr.Gen(wiki.Parser_mgr().Ctx().Page(), Xopg_page_.Tid_read);
 		Tfds.Eq(String_.new_a7(portal_mgr.Div_logo_bry()), "/site/en.wikipedia.org/wiki/");
 	}
+	@Test   public void Skip__math__basic() {
+		Xop_fxt fxt = Xop_fxt.New_app_html();
+		fxt.Init_lang_vnts("zh-hans", "zh-hant");
+
+		fxt.Test__parse_to_html_mgr(String_.Concat_lines_nl_skip_last
+		( "<math>x_{1}-1</math>"
+		, "<math>x-{1+2}-1</math>"
+		, "-{zh-hans:A;zh-hant:B;}-"
+		), String_.Concat_lines_nl_skip_last
+		( "<span id='xowa_math_txt_0'>x_{1}-1</span>"		// not converted
+		, "<span id='xowa_math_txt_0'>x-{1+2}-1</span>"		// not converted
+		, "A" // converted
+		));
+	}
 }

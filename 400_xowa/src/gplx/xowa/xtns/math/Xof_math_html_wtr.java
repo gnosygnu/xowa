@@ -20,6 +20,7 @@ import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.*; import gplx.langs.htmls.entitys.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.vnts.*;
 public class Xof_math_html_wtr {
+	public static final    byte[] Bry__id_prefix = Bry_.new_a7("xowa_math_txt_");
 	private final    Bry_fmtr math_fmtr_latex		= Bry_fmtr.new_("<img id='xowa_math_img_~{math_idx}' src='' width='' height=''/><span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>", "math_idx", "math_text");
 	private final    Bry_fmtr math_fmtr_mathjax		= Bry_fmtr.new_("<span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>", "math_idx", "math_text");
 	public void Write(Xoh_html_wtr wtr, Xop_ctx ctx, Xoh_wtr_ctx opts, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
@@ -45,12 +46,16 @@ public class Xof_math_html_wtr {
 	private void Write_for_mathjax(Bry_bfr bfr, Xoae_page page, boolean enabled, boolean renderer_is_latex, byte[] math_bry, Bry_bfr tmp_bfr, Xof_math_itm math_itm) {
 		int id = page.File_math().Count();
 		Xof_math_itm new_math_itm = math_itm.Clone().Id_(id);
+
+//			boolean armor_math = page.Lang().Vnt_mgr().Enabled() && !renderer_is_latex;	// REF.MW:LangConverter.php|armourMath
+//			if (armor_math) bfr.Add(Vnt_convert_lang.Bry__armor_bgn);
+//			bfr.Add_bfr_and_clear(tmp_bfr);
+//			if (armor_math) bfr.Add(Vnt_convert_lang.Bry__armor_end);
+		byte[] unique_bry = page.Wikie().Parser_mgr().Uniq_mgr().Add(math_bry);
 		Bry_fmtr math_fmtr = renderer_is_latex ? math_fmtr_latex : math_fmtr_mathjax;
-		boolean armor_math = page.Lang().Vnt_mgr().Enabled() && !renderer_is_latex;	// REF.MW:LangConverter.php|armourMath
-		if (armor_math) bfr.Add(Vnt_convert_lang.Bry__armor_bgn);
-		math_fmtr.Bld_bfr_many(tmp_bfr, id, math_bry);
+		math_fmtr.Bld_bfr_many(tmp_bfr, id, unique_bry);
 		bfr.Add_bfr_and_clear(tmp_bfr);
-		if (armor_math) bfr.Add(Vnt_convert_lang.Bry__armor_end);
+
 		if (enabled && renderer_is_latex)	// NOTE: only generate images if math is enabled; otherwise "downloading" prints at bottom of screen, but no action (also a lot of file IO)
 			page.File_math().Add(new_math_itm);
 	}

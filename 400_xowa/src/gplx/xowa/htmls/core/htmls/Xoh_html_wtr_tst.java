@@ -320,13 +320,6 @@ public class Xoh_html_wtr_tst {
 		fxt.Test_parse_page_wiki_str("<div id='a*'></div>", "<div id='a.2A'></div>");
 		fxt.Test_parse_page_wiki_str("<div id='a b'></div>", "<div id='a_b'></div>");
 	}
-	@Test  public void Math() {
-		fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax_(false);
-		fxt.Test_parse_page_all_str("<math>x + y</math>", "<img id='xowa_math_img_0' src='' width='' height=''/><span id='xowa_math_txt_0'>x + y</span>");	// latex has img
-		fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax_(true);
-		fxt.Test_parse_page_all_str("<math>x + y</math>", "<span id='xowa_math_txt_0'>x + y</span>");	// mathjax has no img
-		fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax_(false);
-	}
 	@Test  public void Timeline() {// PURPOSE: embed timeline contents in pre; DATE:2014-05-22
 		fxt.Test_parse_page_wiki_str("<timeline>a</timeline>", "<pre class='xowa-timeline'>a</pre>");
 	}

@@ -128,6 +128,7 @@ public class Xow_popup_parser {
 		parser.Parse_to_src_end(wtxt_root, wtxt_ctx, tkn_mkr, wrdx_bry, wtxt_trie, Xop_parser_.Doc_bgn_bos, wrdx_bry.length);
 		wtxt_ctx.Parser__page_term(wtxt_root, wrdx_bry, wrdx_bry.length);
 		wiki.Html_mgr().Html_wtr().Write_doc(wrdx_bfr, wtxt_ctx, hctx, wrdx_bry, wtxt_root);
+		wiki.Parser_mgr().Uniq_mgr().Parse(wrdx_bfr);
 	}
 	private void Adjust_wrdx_end(Xow_popup_itm popup_itm, Bry_bfr wrdx_bfr) {
 		popup_itm.Words_found_(data.Words_found());

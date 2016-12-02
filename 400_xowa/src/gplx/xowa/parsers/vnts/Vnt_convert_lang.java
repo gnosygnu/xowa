@@ -184,6 +184,5 @@ public class Vnt_convert_lang {
 	private static final    Btrie_fast_mgr trie = Btrie_fast_mgr.cs()
 	.Add_bry_byte(Bry__curly_bgn, Tid__curly_bgn)
 	.Add_bry_byte(Bry__curly_end, Tid__curly_end);
-	public static final    byte[] Bry__armor_bgn = Bry_.new_a7("-{R|"), Bry__armor_end = Bry_.new_a7("}-");
 	private static final int max_depth = 32; 
 }

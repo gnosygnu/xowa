@@ -417,6 +417,18 @@ public class Xop_fxt {
 		Xol_kwd_grp kwd_grp = kwd_mgr.Get_or_new(kwd_id);
 		kwd_grp.Srl_load(case_match, Bry_.Ary(kwds));
 	}
+	public void Init_lang_vnts(String... vnts) {
+		wiki.Lang().Vnt_mgr().Enabled_(true);
+		gplx.xowa.langs.vnts.Xol_vnt_regy vnt_regy = wiki.Lang().Vnt_mgr().Regy();
+		for (int i = 0; i < vnts.length; i++) {
+			byte[] vnt = Bry_.new_u8(vnts[i]);
+			vnt_regy.Add(vnt, vnt);
+			if (i == 0) {
+				wiki.Lang().Vnt_mgr().Cur_itm_(vnt);
+			}
+		}
+		wiki.Lang().Vnt_mgr().Init_end();
+	}
 	public void Init_xtn_pages() {
 		Io_mgr.Instance.InitEngine_mem();
 		wiki.Xtn_mgr().Xtn_proofread().Enabled_y_();
@@ -439,5 +451,18 @@ public class Xop_fxt {
 		html_wtr.Write_doc(tmp_bfr, ctx, hctx, src_bry, root);
             // Tfds.Dbg(tmp_bfr.To_str());
 		return tmp_bfr.To_str_and_clear();
+	}
+	public void Test__parse_to_html_mgr(String src_str, String expd) {
+		byte[] src_bry = Bry_.new_u8(src_str);
+		Xop_root_tkn root = Exec_parse_page_all_as_root(src_bry);
+		Xoae_page page = this.Page();
+		page.Root_(root);
+		byte[] actl = wiki.Html_mgr().Page_wtr_mgr().Gen(page, gplx.xowa.wikis.pages.Xopg_page_.Tid_read);
+		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
+	}
+	public static Xop_fxt New_app_html() {
+		Xop_fxt fxt = new Xop_fxt();
+		fxt.Wiki().Html_mgr().Page_wtr_mgr().Page_read_fmtr().Fmt_("~{page_data}");
+		return fxt;
 	}
 }

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xop_xnde_wkr__basic_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Escape_lt() {	// PURPOSE: some templates have unknown tags; PAGE:en.w:PHP
 		fxt.Init_para_y_();
@@ -103,9 +103,9 @@ public class Xop_xnde_wkr__basic_tst {
 	}
 	@Test   public void CaseSensitivity_xtn_3() {// PURPOSE: xtn xnde must do case-insensitive match DATE:2013-12-02
 		fxt.Test_parse_page_all_str
-			(	"<matH>a</math> b <math>c</matH>"	// <matH> should match </math> not </matH>
-			,	"<span id='xowa_math_txt_0'>a</span> b <span id='xowa_math_txt_0'>c</span>"
-			);
+		( "<translatE>a</translate> b <translate>c</translatE>"	// <translatE> should match </translate> not </translatE>
+		, "a b c"
+		);
 	}
 	@Test  public void Whitelist() {
 		fxt.Test_parse_page_all_str("<span onload='alert()'></span>", "<span></span>");
@@ -121,11 +121,6 @@ public class Xop_xnde_wkr__basic_tst {
 	}
 	@Test   public void Script_in_syntaxhighlight() {
 		fxt.Test_parse_page_all_str("<syntaxhighlight><script>alert('fail');</script></syntaxhighlight>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\">&lt;script&gt;alert('fail');&lt;/script&gt;</pre></div>");
-	}
-	@Test   public void Script_in_math() {
-		fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax_(false);
-		fxt.Test_parse_page_all_str("<math><script>alert('fail');</script></math>", "<img id='xowa_math_img_0' src='' width='' height=''/><span id='xowa_math_txt_0'>&lt;script>alert('fail');</script></span>");
-		fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax_(true);
 	}
 	@Test  public void Html5_time() {// PURPOSE: HTML5; should output self (i.e.: must be whitelisted)
 		fxt.Test_parse_page_wiki_str("<time class=\"dtstart\" datetime=\"2010-10-10\">10 October 2010</time>", "<time class=\"dtstart\" datetime=\"2010-10-10\">10 October 2010</time>");

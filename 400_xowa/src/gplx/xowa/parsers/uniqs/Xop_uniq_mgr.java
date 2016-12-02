@@ -31,6 +31,11 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 		return key;
 	}
 	public byte[] Get(byte[] key) {return (byte[])general_trie.Match_exact(key, 0, key.length);}
+	public void Parse(Bry_bfr bfr) {
+		if (general_trie.Count() == 0) return;
+		byte[] rv = Parse(key_bfr, general_trie, bfr.To_bry_and_clear());
+		bfr.Add(rv);
+	}
 	public byte[] Parse(byte[] src) {return Parse(key_bfr, general_trie, src);}
 	private byte[] Parse(Bry_bfr bfr, Btrie_slim_mgr trie, byte[] src) {
 		int src_len = src.length;
