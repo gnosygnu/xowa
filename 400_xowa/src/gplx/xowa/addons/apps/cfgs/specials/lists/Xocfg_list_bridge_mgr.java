@@ -23,7 +23,7 @@ public class Xocfg_list_bridge_mgr {
 	public Xocfg_list_bridge_mgr(Xoa_app app) {
 		this.db_mgr = new Xocfg_db_mgr(app.User().User_db_mgr().Conn());
 	}
-	public void Save(Json_nde args) {
+	public void Upsert(Json_nde args) {
 		String ctx = args.Get_as_str("ctx");
 		String key = args.Get_as_str("key");
 		String val = args.Get_as_str("val");

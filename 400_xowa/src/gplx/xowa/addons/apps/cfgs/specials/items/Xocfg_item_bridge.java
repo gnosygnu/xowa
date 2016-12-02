@@ -53,6 +53,6 @@ public class Xocfg_item_bridge implements Bridge_cmd_itm {
 	.Add_str_byte("upsert"						, Proc__upsert)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("cfg.item.exec");
+	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("cfg.maint");
         public static final    Xocfg_item_bridge Prototype = new Xocfg_item_bridge(); Xocfg_item_bridge() {}
 }

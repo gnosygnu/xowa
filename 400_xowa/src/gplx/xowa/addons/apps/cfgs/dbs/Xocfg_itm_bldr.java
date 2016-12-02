@@ -33,7 +33,7 @@ public class Xocfg_itm_bldr {
 		db_mgr.Tbl__grp_map().Upsert(owner_id, grp_id, map_sort);
 
 		// insert nde_i18n
-		db_mgr.Tbl__nde_i18n().Upsert(Xonde_i18n_nde_tid.Tid__grp, grp_id, Lang__dflt, grp_name, grp_help);
+		db_mgr.Tbl__nde_i18n().Upsert(grp_id, Lang__dflt, grp_name, grp_help);
 	}
 	public void Create_itm(String grp_key, String itm_key, String scope_id_str, String gui_type, String gui_args, String itm_dflt, String itm_name, String help) {
 		// insert itm_meta
@@ -48,6 +48,6 @@ public class Xocfg_itm_bldr {
 		db_mgr.Tbl__grp_map().Upsert(grp_id, itm_id, itm_sort);
 
 		// insert nde_i18n
-		db_mgr.Tbl__nde_i18n().Upsert(Xonde_i18n_nde_tid.Tid__itm, itm_id, Lang__dflt, itm_name, help);
+		db_mgr.Tbl__nde_i18n().Upsert(itm_id, Lang__dflt, itm_name, help);
 	}
 }

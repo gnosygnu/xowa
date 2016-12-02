@@ -17,15 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
 public class Xonde_i18n_itm {
-	public Xonde_i18n_itm(int id, int tid, String lang, String name, String help) {
+	public Xonde_i18n_itm(int id, String lang, String name, String help) {
 		this.id = id;
-		this.tid = tid;
 		this.lang = lang;
 		this.name = name;
 		this.help = help;
 	}
 	public int Id() {return id;} private final    int id;
-	public int Tid() {return tid;} private final    int tid;
 	public String Lang() {return lang;} private final    String lang;
 	public String Name() {return name;} private final    String name;
 	public String Help() {return help;} private final    String help;
