@@ -16,12 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
+import gplx.core.brys.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.addons.htmls.tocs.*;
 public class Xoh_hdr_html {
 	private final    Bry_bfr hdr_text_bfr = Bry_bfr_.New();
 	private final    Xoh_toc_itm invalid_toc_itm = new Xoh_toc_itm().Set__txt(Bry_.Empty, Bry_.Empty);
+	private final    Bry_fmt section_editable_fmt = Bry_fmt.Auto_nl_apos
+	( "<span class='mw-editsection'><span class='mw-editsection-bracket'>[</span><a href='/wiki/~{page_ttl}&action=edit&section=~{section_idx}' title='Edit section: ~{section_name}'>edit</a><span class='mw-editsection-bracket'>]</span></span>"
+	);
 
 	public void Write_html(Bry_bfr bfr, Xoh_html_wtr wtr, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoh_html_wtr_cfg cfg, Xop_tkn_grp grp, int sub_idx, byte[] src, Xop_hdr_tkn hdr) {
 		// init
@@ -48,7 +52,7 @@ public class Xoh_hdr_html {
 			bfr.Add_byte(Byte_ascii.Angle_end);								// '>'
 			if (cfg.Toc__show()) {
 				bfr.Add(Bry__span_lhs_bgn);									// "<span class='mw-headline' id='"
-				bfr.Add(toc_itm.Anch());									// '1'
+				bfr.Add(toc_itm.Anch());									// 'Name_and_Etymology'
 				bfr.Add(Bry__span_lhs_end);									// "'>"
 			}
 		}	
@@ -64,6 +68,11 @@ public class Xoh_hdr_html {
 				bfr.Add(Gfh_tag_.Span_rhs);									// '</span>'
 			bfr.Add(Bry__hdr_rhs_bgn).Add_int(hdr_num, 1, 1);				// '</h', '2'
 			bfr.Add(Bry__hdr_rhs_end);										// '>\n'
+
+			// write section editable
+			if (cfg.Section_editable()) {
+				section_editable_fmt.Bld_many(bfr, hdr.Section_editable_page(), hdr.Section_editable_idx(), toc_itm.Anch());
+			}
 		}
 	}
 

@@ -22,6 +22,7 @@ import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
 public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-write state
 	private final    Xowe_wiki wiki;
 	private final    Btrie_fast_mgr tmpl_trie, wtxt_trie;
+	private Xot_compile_data tmpl_props = new Xot_compile_data();	// NOTE: probably should not be a member variable, but leave for now; DATE:2016-12-02
 	Xop_parser(Xowe_wiki wiki, Xop_lxr_mgr tmpl_lxr_mgr, Xop_lxr_mgr wtxt_lxr_mgr) {
 		this.wiki = wiki;
 		this.tmpl_lxr_mgr = tmpl_lxr_mgr; this.tmpl_trie = tmpl_lxr_mgr.Trie();
@@ -82,7 +83,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		boolean only_include_chk = Bry_find_.Find_fwd(src, Xop_xnde_tag_.Bry__onlyinclude, 0, src.length) != Bry_find_.Not_found;
 		if (only_include_chk) tmpl_props.OnlyInclude_exists = true;
 		tmpl.Init_by_new(ns, name, src, root, tmpl_props.OnlyInclude_exists);
-	}	private Xot_compile_data tmpl_props = new Xot_compile_data();
+	}
 	public void Parse_page_all_clear(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src) {
 		ctx.Page().Clear_all(); ctx.App().Msg_log().Clear();
 		Parse_text_to_wdom(root, ctx, tkn_mkr, src, Xop_parser_.Doc_bgn_bos);

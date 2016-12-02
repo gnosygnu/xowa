@@ -40,7 +40,8 @@ public class Xoh_html_wtr {
 	public Ref_html_wtr			Ref_wtr() {return ref_wtr;} private final    Ref_html_wtr ref_wtr;
 
 	public void Init_by_wiki(Xowe_wiki wiki) {
-		cfg.Toc__show_(Bool_.Y).Lnki__title_(true).Lnki_visited_y_().Lnki__id_(Bool_.Y);	// NOTE: set during Init_by_wiki, b/c all tests assume these are false
+		cfg.Toc__show_(Bool_.Y).Lnki__title_(true).Lnki__visited_y_().Lnki__id_(Bool_.Y);	// NOTE: set during Init_by_wiki, b/c all tests assume these are false
+		cfg.Section_editable_(wiki.Appe().Api_root().Addon().Parser__hdr__section_editable());
 		ref_wtr.Init_by_wiki(wiki);
 	}
 	public void Init_by_page(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xoae_page page) {

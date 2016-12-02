@@ -48,8 +48,12 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 	}
 	public int Make_tkn_end(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, int stackPos, int end_hdr_len) {// REF.MW: Parser|doHeadings
 		if (ctx.Cur_tkn_tid() == Xop_tkn_itm_.Tid_tmpl_curly_bgn) return ctx.Lxr_make_txt_(cur_pos);
+
+		// end frame
 		Xop_hdr_tkn hdr = (Xop_hdr_tkn)ctx.Stack_pop_til(root, src, stackPos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_hdr);
 		ctx.Apos().End_frame(ctx, root, src, bgn_pos, false);	// end any apos; EX: ==''a==
+
+		// handle asymmetrical "="; EX: "== A ==="
 		int hdr_len = hdr.Num(), bgn_manual = 0, end_manual = 0;
 		boolean dirty = false;
 		if		(end_hdr_len < hdr_len) {	// mismatch: end has more; adjust hdr
@@ -71,8 +75,12 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 		}
 		if (dirty)
 			hdr.Init_by_parse(hdr_len, bgn_manual, end_manual);
-		cur_pos = Find_fwd_while_ws_hdr_version(src, cur_pos, src_len); // NOTE: hdr gobbles up trailing ws; EX: "==a== \n\t \n \nb" gobbles up all 3 "\n"s; otherwise para_wkr will process <br/> 
+
+		// gobble ws; hdr gobbles up trailing ws; EX: "==a== \n\t \n \nb" gobbles up all 3 "\n"s; otherwise para_wkr will process <br/> 
+		cur_pos = Find_fwd_while_ws_hdr_version(src, cur_pos, src_len);
 		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag__h2);
+
+		// add to root tkn; other post-processing
 		hdr.Subs_move(root);
 		hdr.Src_end_(cur_pos);
 		if (ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt) {	// do not add if defn / tmpl mode

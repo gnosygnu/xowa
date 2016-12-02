@@ -15,11 +15,11 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-public class Xot_compile_data {
-	public boolean OnlyInclude_exists;
-	public boolean Arg_nde_has_key() {return arg_nde_has_key;}  private boolean arg_nde_has_key;
-	public Xot_compile_data Arg_nde_has_key_(boolean v) {arg_nde_has_key = v; return this;}
-
-	public static final    Xot_compile_data Noop = new Xot_compile_data();
+package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.hdrs.*;
+public class Xoh_section_editable_ {
+	public static void Write_imt1(Bry_bfr bfr, Xop_ctx ctx, Xop_tkn_itm tkn) {
+		Xop_hdr_tkn hdr_tkn = (Xop_hdr_tkn)tkn;
+		ctx.Wiki().Parser_mgr().Hdr__section_editable__imt_fmt().Bld_many_to_bry(bfr, hdr_tkn.Section_editable_page(), hdr_tkn.Section_editable_idx());
+	}
 }

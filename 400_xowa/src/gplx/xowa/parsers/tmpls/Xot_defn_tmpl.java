@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.brys.*; import gplx.xowa.wikis.nss.*;
 public class Xot_defn_tmpl implements Xot_defn {
+	private boolean onlyinclude_parsed = false;
 	public byte Defn_tid() {return Xot_defn_.Tid_tmpl;}
 	public boolean Defn_require_colon_arg() {return false;}
 	public int Cache_size() {return data_raw.length;}
@@ -60,7 +61,7 @@ public class Xot_defn_tmpl implements Xot_defn {
 		if (root != null) root.Clear();
 		root = null;
 	}
-	public void Parse_tmpl(Xop_ctx ctx) {ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn(this, ctx, ctx.Tkn_mkr(), ns, name, data_raw);}	boolean onlyinclude_parsed = false;
+	public void Parse_tmpl(Xop_ctx ctx) {ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn(this, ctx, ctx.Tkn_mkr(), ns, name, data_raw);}
 	public boolean Tmpl_evaluate(Xop_ctx ctx, Xot_invk caller, Bry_bfr bfr) {
 		if (root == null) Parse_tmpl(ctx);
 		Xoae_page page = ctx.Page();

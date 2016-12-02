@@ -20,21 +20,19 @@ import gplx.core.envs.*;
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.miscs.*;
 public class Xot_tmpl_wtr {
 	public byte[] Write_all(Xop_ctx ctx, Xop_root_tkn root, byte[] src) {
-//			synchronized (this) {	// THREAD:added synchronized after "failed to write tkn" DATE:2015-04-29
-			Bry_bfr rslt_bfr = ctx.Wiki().Utl__bfr_mkr().Get_m001();
-			rslt_bfr.Reset_if_gt(Io_mgr.Len_mb);
-			Write_tkn(ctx, src, src.length, rslt_bfr, root);
-			return rslt_bfr.To_bry_and_rls();
-//			}
+		Bry_bfr rslt_bfr = ctx.Wiki().Utl__bfr_mkr().Get_m001();
+		rslt_bfr.Reset_if_gt(Io_mgr.Len_mb);
+		Write_tkn(rslt_bfr, ctx, src, src.length, root);
+		return rslt_bfr.To_bry_and_rls();
 	}
-	private void Write_tkn(Xop_ctx ctx, byte[] src, int src_len, Bry_bfr rslt_bfr, Xop_tkn_itm tkn) {
+	private void Write_tkn(Bry_bfr rslt_bfr, Xop_ctx ctx, byte[] src, int src_len, Xop_tkn_itm tkn) {
 		switch (tkn.Tkn_tid()) {
 			case Xop_tkn_itm_.Tid_root:											// write each sub
 				int subs_len = tkn.Subs_len();
 				for (int i = 0; i < subs_len; i++) {
 					Xop_tkn_itm sub_tkn = tkn.Subs_get(i);
 					if (!sub_tkn.Ignore())
-						Write_tkn(ctx, src, src_len, rslt_bfr, sub_tkn);
+						Write_tkn(rslt_bfr, ctx, src, src_len, sub_tkn);
 				}
 				break;
 			case Xop_tkn_itm_.Tid_bry:
