@@ -105,6 +105,10 @@ public class Scrib_lib_wikibase_tst {
 		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, wdata_fxt.Make_claim_quantity(3, "123", "1", "125", "121"));	// NOTE: entity-less units output "1"; EX:wd:Q493409 DATE:2016-11-08
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "123±2");
 	}
+	@Test  public void RenderSnak__quantity__null_bounds() {	// PURPOSE: handle null lbound / ubound; PAGE:wd.q:183 DATE:2016-12-03
+		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, wdata_fxt.Make_claim_quantity(3, "123", "1", null, null));
+		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "123");
+	}
 	@Test  public void RenderSnak__time() {
 		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, wdata_fxt.Make_claim_time(3, "2012-01-02 03:04:05"));
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "30405 2 Jan 2012"); // NOTE: format is missing ":" b/c test does not init messages for html_wtr;  DATE:2015-08-03

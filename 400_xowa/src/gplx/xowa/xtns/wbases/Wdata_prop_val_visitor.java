@@ -58,9 +58,9 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 	public void Visit_quantity(Wbase_claim_quantity itm) {Write_quantity(bfr, wdata_mgr, lang, itm.Amount(), itm.Lbound(), itm.Ubound(), itm.Unit());}
 	public static void Write_quantity(Bry_bfr bfr, Wdata_wiki_mgr wdata_mgr, Xol_lang_itm lang, byte[] val_bry, byte[] lo_bry, byte[] hi_bry, byte[] unit) {
 		// get val, lo, hi; NOTE: must handle large numbers; EX:{{#property:P1082}} PAGE:en.w:Earth; DATE:2015-08-02; NOTE: must handle decimals; PAGE:en.w:Malinao,_Aklan; DATE:2016-11-08
-		Decimal_adp val = Decimal_adp_.parse(String_.new_u8(Normalize_for_decimal(val_bry)));
-		Decimal_adp lo = Decimal_adp_.parse(String_.new_u8(Normalize_for_decimal(lo_bry)));
-		Decimal_adp hi = Decimal_adp_.parse(String_.new_u8(Normalize_for_decimal(hi_bry)));
+		Decimal_adp val = Decimal__parse_or(val_bry, null); if (val == null) throw Err_.new_wo_type("wbase:quanity val can not be null");
+		Decimal_adp lo = Decimal__parse_or(lo_bry, val);
+		Decimal_adp hi = Decimal__parse_or(hi_bry, val);
 
 		// fmt val
 		if (lo.Eq(hi) && hi.Eq(val))// lo, hi, val are same; print val only;
@@ -82,7 +82,7 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 		}
 
 		// output unit
-		int unit_qid_bgn = Bry_find_.Find_fwd(unit, Wikidata_url);
+		int unit_qid_bgn = unit == null ? Bry_find_.Not_found : Bry_find_.Find_fwd(unit, Wikidata_url);
 		if (unit_qid_bgn == Bry_find_.Not_found) {}			// entity missing; output nothing; EX:"unit":"1"; PAGE:en.w:Malinao,_Aklan DATE:2016-11-08																
 		else {												// entity exists; EX:"http://www.wikidata.org/entity/Q11573" (meter)
 			bfr.Add_byte_space();
@@ -91,7 +91,11 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 			bfr.Add(entity_doc.Label_list__get_or_fallback(lang));
 		}
 	}
+	private static Decimal_adp Decimal__parse_or(byte[] bry, Decimal_adp or) {	// handle missing lbound / ubound; DATE:2016-12-03
+		return bry == null ? or : Decimal_adp_.parse(String_.new_u8(Normalize_for_decimal(bry)));
+	}
 	public static byte[] Normalize_for_decimal(byte[] bry) { // remove leading "+" and any commas; was Bry_.To_long_or(val_bry, Byte_ascii.Comma_bry, 0, val_bry.length, 0)
+		if (bry == null) return null;
 		Bry_bfr bfr = null;
 		int len = bry.length;
 		for (int i = 0; i < len; i++) {

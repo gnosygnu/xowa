@@ -55,11 +55,18 @@ public class Wdata_wiki_mgr_tst {
 		,	"</span>"
 		));
 	}
-	@Test  public void normalize_for_decimal() {
+	@Test  public void Normalize_for_decimal() {
 		fxt.Test__normalize_for_decimal("1234"		, "1234");	// basic
 		fxt.Test__normalize_for_decimal("+1234"		, "1234");	// plus
 		fxt.Test__normalize_for_decimal("1,234"		, "1234");	// comma
 		fxt.Test__normalize_for_decimal("+1,234"	, "1234");	// both
+	}
+	@Test  public void Write_quantity_null() {	// handle missing lbound / ubound; DATE:2016-12-03
+		Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt().Init();
+
+		Bry_bfr bfr = Bry_bfr_.New();
+		Wdata_prop_val_visitor.Write_quantity(bfr, fxt.Wdata_mgr(), fxt.Wiki().Lang(), Bry_.new_a7("123"), null, null, null);
+		Gftest.Eq__str("123", bfr.To_bry_and_clear());
 	}
 }
 class Wdata_prop_val_visitor__fxt {

@@ -28,15 +28,31 @@ public class Wbase_claim_quantity extends Wbase_claim_base {
 	public byte[]			Unit()		{return unit;} private final    byte[] unit;
 
 	public Decimal_adp Amount_as_num() {
-		if (amount_as_num == null) amount_as_num = To_decimal("amount", amount);
+		if (amount_as_num == null) {
+			amount_as_num = To_decimal_or_null("amount", amount);
+			if (amount_as_num == null) {
+				amount_as_num = Decimal_adp_.Zero;
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "wbase.claim: value is null; name=~{0}", "amount");
+			}
+		}
 		return amount_as_num;
 	}	private Decimal_adp amount_as_num;
 	public Decimal_adp Ubound_as_num() {
-		if (ubound_as_num == null) ubound_as_num = To_decimal("upper", ubound);
+		if (ubound_as_num == null) {
+			ubound_as_num = To_decimal_or_null("upper", ubound);
+			if (ubound_as_num == null) {
+				ubound_as_num = amount_as_num;
+			}
+		}
 		return ubound_as_num;
 	}	private Decimal_adp ubound_as_num;
 	public Decimal_adp Lbound_as_num() {
-		if (lbound_as_num == null) lbound_as_num = To_decimal("lower", lbound);
+		if (lbound_as_num == null) {
+			lbound_as_num = To_decimal_or_null("lower", lbound);
+			if (lbound_as_num == null) {
+				lbound_as_num = amount_as_num;
+			}
+		}
 		return lbound_as_num;
 	}	private Decimal_adp lbound_as_num;
 
@@ -46,10 +62,10 @@ public class Wbase_claim_quantity extends Wbase_claim_base {
 	}
 
 	public static final    byte[] Unit_1 = Bry_.new_a7("1");
-	public static Decimal_adp To_decimal(String name, byte[] bry) {
-		if (bry == null) throw Err_.new_wo_type("wbase.claim: value is null", "name", name);
+	private static Decimal_adp To_decimal_or_null(String name, byte[] bry) {
+		if (bry == null) return null;
 		int len = bry.length;
-		if (len == 0) throw Err_.new_wo_type("wbase.claim: value is empty", "name", name);
+		if (len == 0) return null;
 		if (bry[0] == Byte_ascii.Plus) bry = Bry_.Mid(bry, 1);
 		return Decimal_adp_.parse(String_.new_a7(bry));
 	}
