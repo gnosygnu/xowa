@@ -35,6 +35,8 @@ public class Wbase_prop_mgr {	// lang-agnostic registry of props; EX: "p15" -> c
 	public String Get_or_null(String pid) {
 		if (init_needed) Init();
 		if (hash == null) return null;
+		if (String_.Has_at_bgn(pid, "p"))
+			pid = String_.Upper(pid);	// convert "p123" to "P123"; note (a) Scrib.v2 calls as "P123"; (b) db stores as "p123"; (c) XO loads as "P123"; DATE:2016-12-03
 		String rv = (String)hash.Get_by(pid);
 		if (rv == null) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "wbase:could not find datatype for pid; pid=~{0}", pid);

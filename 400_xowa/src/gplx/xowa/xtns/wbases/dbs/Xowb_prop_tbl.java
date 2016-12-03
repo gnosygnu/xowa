@@ -49,7 +49,7 @@ public class Xowb_prop_tbl implements Db_tbl {
 		return rv;
 	}
 	private void Select_all__add(Ordered_hash hash, Db_rdr rdr) {
-		String pid = rdr.Read_str(fld__wbp_pid);
+		String pid = String_.Upper(rdr.Read_str(fld__wbp_pid));	// convert "p123" to "P123"; note (a) Scrib.v2 calls as "P123"; (b) db stores as "p123"; (c) XO loads as "P123"; DATE:2016-12-03
 		byte datatype_id = (byte)rdr.Read_int(fld__wbp_datatype);
 		Wbase_enum_itm datatype_itm = Wbase_claim_type_.Reg.Get_itm_or((byte)datatype_id, null);
 		if (datatype_itm == null) {

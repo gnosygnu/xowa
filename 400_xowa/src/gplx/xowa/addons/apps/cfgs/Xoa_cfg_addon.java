@@ -33,6 +33,6 @@ public class Xoa_cfg_addon implements Xoax_addon_itm, Xoax_addon_itm__special, X
 	}
 
 	public String Addon__key() {return ADDON__KEY;} private static final String ADDON__KEY = "xowa.app.cfg";
-	public static void Init(Xoae_app app) {
-	}
+//		public static void Init(Xoae_app app) {
+//		}
 }
