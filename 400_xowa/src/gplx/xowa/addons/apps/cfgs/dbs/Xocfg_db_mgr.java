@@ -34,7 +34,7 @@ public class Xocfg_db_mgr {
 	public Xoitm_data_tbl Tbl__itm_data() {return tbl__itm_data;} private final    Xoitm_data_tbl tbl__itm_data;
 	public Xonde_i18n_tbl Tbl__nde_i18n() {return tbl__nde_i18n;} private final    Xonde_i18n_tbl tbl__nde_i18n;
 
-	public String Get_str(String ctx, String key) {
+	public String Get_str1(String ctx, String key) {
 		Xoitm_meta_itm meta_itm = tbl__itm_meta.Select_by_key_or_null(key);
 		if (meta_itm == null) throw Err_.new_wo_type("cfg not defined", "ctx", ctx, "key", key);
 		Xoitm_data_itm data_itm = tbl__itm_data.Select_by_id_or_null(meta_itm.Id());

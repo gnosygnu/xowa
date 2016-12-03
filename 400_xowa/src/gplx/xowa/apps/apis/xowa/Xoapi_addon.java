@@ -25,7 +25,7 @@ public class Xoapi_addon implements Gfo_invk {
 	public boolean						App__scripting__enabled() {return app__scripting__enabled;} private boolean app__scripting__enabled = false;
 	public String					App__update__restart_cmd()		{return app__update__restart_cmd;} private String app__update__restart_cmd = "";
 	public String					App__update__update_db_src()	{return app__update__update_db_src;} private String app__update__update_db_src = "http://xowa.org";
-	public boolean						Parser__hdr__section_editable() {return parser__hdr__section_editable;} private boolean parser__hdr__section_editable = false;
+	public boolean						Parser__hdr__section_editable() {return parser__hdr__section_editable;} private boolean parser__hdr__section_editable = true;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__search)) 								return search;
 		else if	(ctx.Match(k, Invk__bldr)) 									return bldr;

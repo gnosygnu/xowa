@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.*; import gplx.core.envs.*;
 import gplx.xowa.files.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wbases.hwtrs.*; import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.ttls.*;
-import gplx.xowa.parsers.uniqs.*;
+import gplx.xowa.parsers.uniqs.*; import gplx.xowa.parsers.hdrs.sections.*;
 public class Xow_parser_mgr {
 	private final    Xowe_wiki wiki; private final    Xop_tkn_mkr tkn_mkr;
 	public Xow_parser_mgr(Xowe_wiki wiki) {
@@ -42,7 +42,9 @@ public class Xow_parser_mgr {
 	public boolean						Lst__recursing()	{return lst_recursing;} private boolean lst_recursing; public void	Lst__recursing_(boolean v) {lst_recursing = v;}
 	public Bry_bfr					Wbase__time__bfr()  {return wbase__time__bfr;} private final    Bry_bfr wbase__time__bfr = Bry_bfr_.New();
 	public Bry_fmtr					Wbase__time__fmtr() {return wbase__time__fmtr;} private final    Bry_fmtr wbase__time__fmtr = Bry_fmtr.new_();
-	public Bry_fmt					Hdr__section_editable__imt_fmt() {return hdr__section_editable__imt_fmt;} private final    Bry_fmt hdr__section_editable__imt_fmt = Bry_fmt.New("<!--xo_meta|section_edit|~{page}|~{section}-->");
+	public boolean					Hdr__section_editable__enabled()	{return hdr__section_editable__enabled;} private boolean hdr__section_editable__enabled;
+	public Bry_fmt					Hdr__section_editable__imt_fmt()	{return hdr__section_editable__imt_fmt;} private final    Bry_fmt hdr__section_editable__imt_fmt = Bry_fmt.New("<!--xo_meta|section_edit|~{page}|~{section}-->");
+	public Xop_section_mgr			Hdr__section_editable__mgr()		{return hdr__section_editable__mgr;} private final    Xop_section_mgr hdr__section_editable__mgr = new Xop_section_mgr();
 	public Wdata_hwtr_msgs			Wbase__time__msgs() {
 		if (wbase__time__msgs == null)
 			wbase__time__msgs = Wdata_hwtr_msgs.new_(wiki.Msg_mgr());
@@ -77,9 +79,12 @@ public class Xow_parser_mgr {
 	}	private Pfunc_anchorencode_mgr anchor_encoder_mgr;
 	public void Parse(Xoae_page page, boolean clear) {	// main parse method; should never be called nested
 		if (!Env_.Mode_testing()) wiki.Init_assert();
+
+		// init
 		tmpl_stack_ary = Bry_.Ary_empty;
 		tmpl_stack_ary_len = tmpl_stack_ary_max = 0;
 		uniq_mgr.Clear();
+		hdr__section_editable__enabled = page.Wikie().Appe().Api_root().Addon().Parser__hdr__section_editable();
 
 		scrib.When_page_changed(page);	// notify scribunto about page changed
 		ctx.Page_(page);

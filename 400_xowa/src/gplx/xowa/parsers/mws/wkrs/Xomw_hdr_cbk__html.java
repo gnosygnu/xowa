@@ -16,24 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.mws.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.mws.*;
-import org.junit.*;
-public class Xomw_hdr_wkr_tst {
-	private final    Xomw_hdr_wkr_fxt fxt = new Xomw_hdr_wkr_fxt();
-	@Test  public void Basic()		{
-		fxt.Test__parse("==A=="					, "<h2>A</h2>");
-		fxt.Test__parse("abc\n==A==\ndef"		, "abc\n<h2>A</h2>\ndef");
-
-		fxt.Test__parse("abc"					, "abc");
-		fxt.Test__parse("abc\ndef"				, "abc\ndef");
-		fxt.Test__parse("abc\n=="				, "abc\n<h1></h1>");
+public class Xomw_hdr_cbk__html implements Xomw_hdr_cbk {
+	public void Write(Bry_bfr bfr, Xomw_parser_ctx pctx, Xomw_hdr_wkr wkr) {
+		int hdr_len = wkr.Hdr_len();
+		bfr.Add(Tag__lhs).Add_int_digits(1, hdr_len).Add(Byte_ascii.Angle_end_bry);	// <h2>
+		bfr.Add_mid(wkr.Src(), wkr.Hdr_lhs_end(), wkr.Hdr_rhs_bgn());
+		bfr.Add(Tag__rhs).Add_int_digits(1, hdr_len).Add(Byte_ascii.Angle_end_bry);	// </h2>
 	}
-}
-class Xomw_hdr_wkr_fxt {
-	private final    Xomw_hdr_wkr wkr = new Xomw_hdr_wkr();
-	private final    Bry_bfr bfr = Bry_bfr_.New(); private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx(null);
-	public void Test__parse(String src_str, String expd) {
-		byte[] src_bry = Bry_.new_u8(src_str);
-		wkr.Parse(bfr, pctx, src_bry, -1, src_bry.length, new Xomw_hdr_cbk__html());
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear(), src_str);
-	}
+	private static final    byte[] 
+	  Tag__lhs = Bry_.new_a7("<h")
+	, Tag__rhs = Bry_.new_a7("</h")
+	;
 }

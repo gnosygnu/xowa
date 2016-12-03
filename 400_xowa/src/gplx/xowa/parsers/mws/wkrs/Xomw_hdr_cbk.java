@@ -15,11 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.parsers.mws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-public class Xomw_parser_ctx {
-	public Xomw_parser_ctx(Xoa_ttl page_ttl) {
-		this.page_ttl = page_ttl;
-	}
-	public Xoa_ttl Page_ttl() {return page_ttl;} private Xoa_ttl page_ttl;
-	public static final int Pos__bos = -1;
+package gplx.xowa.parsers.mws.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.mws.*;
+public interface Xomw_hdr_cbk {
+	void Write(Bry_bfr bfr, Xomw_parser_ctx pctx, Xomw_hdr_wkr wkr);
 }

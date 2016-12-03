@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.xowa.parsers.xndes.*;
+import gplx.xowa.parsers.hdrs.sections.*;
 public class Xop_hdr_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {}
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {}
@@ -75,6 +76,12 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 		}
 		if (dirty)
 			hdr.Init_by_parse(hdr_len, bgn_manual, end_manual);
+
+		// section-editable
+		if (	ctx.Wiki().Parser_mgr().Hdr__section_editable__enabled()
+			&&	Bry_.Eq(src, cur_pos, cur_pos + Xop_section_mgr.Len__meta, Xop_section_mgr.Bry__meta)) {
+			ctx.Wiki().Parser_mgr().Hdr__section_editable__mgr().Parse(hdr, ctx.Page().Ttl().Full_db(), src, cur_pos, src_len);
+		}
 
 		// gobble ws; hdr gobbles up trailing ws; EX: "==a== \n\t \n \nb" gobbles up all 3 "\n"s; otherwise para_wkr will process <br/> 
 		cur_pos = Find_fwd_while_ws_hdr_version(src, cur_pos, src_len);
