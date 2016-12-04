@@ -16,21 +16,22 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
-import gplx.xowa.specials.*; import gplx.xowa.htmls.bridges.*;
-import gplx.xowa.addons.apps.cfgs.specials.lists.*; import gplx.xowa.addons.apps.cfgs.specials.items.*;
-public class Xoa_cfg_addon implements Xoax_addon_itm, Xoax_addon_itm__special, Xoax_addon_itm__json {
-	public Xow_special_page[] Special_pages() {
-		return new Xow_special_page[]
-		{ Xocfg_item_special.Prototype
-		, Xocfg_list_special.Prototype
-		};
+import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
+public class Xocfg_mgr {
+	private final    Xocfg_cache_mgr cache_mgr;
+	public Xocfg_mgr(Db_conn conn) {
+		this.cache_mgr = new Xocfg_cache_mgr(conn);
 	}
-	public Bridge_cmd_itm[] Json_cmds() {
-		return new Bridge_cmd_itm[]
-		{ Xocfg_item_bridge.Prototype
-		, Xocfg_list_bridge.Prototype
-		};
+	public void Clear() {
+		cache_mgr.Clear();
 	}
+	public void Sub_many(Gfo_evt_itm sub, String ctx, String... keys) {
+		cache_mgr.Sub_many(sub, ctx, keys);
+	}
+	public String Get_str(String ctx, String key)			{return cache_mgr.Get(ctx, key);}
+	public void Set_str(String ctx, String key, String val) {cache_mgr.Set(ctx, key, val);}
 
-	public String Addon__key() {return ADDON__KEY;} private static final String ADDON__KEY = "xowa.app.cfg";
+	public static Xocfg_mgr New(Db_conn conn) {
+		return new Xocfg_mgr(conn);
+	}
 }

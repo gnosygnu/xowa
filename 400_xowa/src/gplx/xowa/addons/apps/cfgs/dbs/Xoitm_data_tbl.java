@@ -31,17 +31,32 @@ public class Xoitm_data_tbl implements Db_tbl {
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
-	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_tbl() {
+		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
+		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "", fld__itm_id, fld__itm_ctx)
+		));
+	}
 	public void Upsert(int itm_id, String ctx, String itm_val, String itm_date) {
 		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__itm_id), itm_id, ctx, itm_val, itm_date);
 	}
 	public void Delete(int id, String ctx) {
 		conn.Stmt_delete(tbl_name, fld__itm_id, fld__itm_ctx).Crt_int(fld__itm_id, id).Crt_str(fld__itm_ctx, ctx).Exec_delete();
 	}
-	public Xoitm_data_itm Select_by_id_or_null(int id) {
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__itm_id).Exec_select__rls_auto();
+	public Xoitm_data_itm Select_one_by_id_or_null(int id, String ctx) {
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__itm_id, fld__itm_ctx).Crt_int(fld__itm_id, id).Crt_str(fld__itm_ctx, ctx).Exec_select__rls_auto();
 		try {return rdr.Move_next() ? Load(rdr) : null;}
 		finally {rdr.Rls();}
+	}
+	public Xoitm_data_itm[] Select_all_by_id(int id) {
+		List_adp list = List_adp_.New();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__itm_id).Crt_int(fld__itm_id, id).Exec_select__rls_auto();
+		try {
+			while (rdr.Move_next()) {
+				list.Add(Load(rdr));
+			}
+		}
+		finally {rdr.Rls();}
+		return (Xoitm_data_itm[])list.To_ary_and_clear(Xoitm_data_itm.class);
 	}
 	private Xoitm_data_itm Load(Db_rdr rdr) {
 		return new Xoitm_data_itm
