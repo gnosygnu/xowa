@@ -19,19 +19,19 @@ package gplx.xowa.addons.apps.cfgs.specials.lists; import gplx.*; import gplx.xo
 import gplx.langs.jsons.*;
 import gplx.xowa.addons.apps.cfgs.dbs.*;
 public class Xocfg_list_bridge_mgr {
-	private final    Xocfg_db_mgr db_mgr;
+	private final    Xoa_app app;
 	public Xocfg_list_bridge_mgr(Xoa_app app) {
-		this.db_mgr = new Xocfg_db_mgr(app.User().User_db_mgr().Conn());
+		this.app = app;
 	}
 	public void Upsert(Json_nde args) {
 		String ctx = args.Get_as_str("ctx");
 		String key = args.Get_as_str("key");
 		String val = args.Get_as_str("val");
-		db_mgr.Set_str(ctx, key, val);
+		app.Cfg().Set_str(ctx, key, val);
 	}
 	public void Revert(Json_nde args) {
-		String ctx = args.Get_as_str("ctx");
-		String key = args.Get_as_str("key");
-		db_mgr.Del(ctx, key);
+//			String ctx = args.Get_as_str("ctx");
+//			String key = args.Get_as_str("key");
+//			app.Cfg().d.Del(ctx, key);
 	}
 }

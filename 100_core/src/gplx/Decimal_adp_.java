@@ -21,6 +21,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 public class Decimal_adp_ {
+	public static final String Cls_val_name = "decimal";
 	public static final    Class<?> Cls_ref_type = Decimal_adp.class;
 	public static Decimal_adp as_(Object obj) {return obj instanceof Decimal_adp ? (Decimal_adp)obj : null;}
 	public static final    Decimal_adp Zero = new Decimal_adp(0);

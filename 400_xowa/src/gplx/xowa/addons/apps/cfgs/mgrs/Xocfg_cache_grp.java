@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.apps.cfgs.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
 class Xocfg_cache_grp {
 	private final    Hash_adp vals = Hash_adp_.New();
-	private final    Hash_adp subs = Hash_adp_.New();
+	private final    Ordered_hash subs = Ordered_hash_.New();
 	private final    String dflt;
 	public Xocfg_cache_grp(String key, String dflt) {
 		this.key = key;
@@ -50,7 +50,7 @@ class Xocfg_cache_grp {
 	public void Add(String ctx, Xocfg_cache_itm itm) {
 		vals.Add(ctx, itm);
 	}
-	public void Sub(Gfo_evt_itm sub, String ctx, String evt) {
+	public void Sub(Gfo_invk sub, String ctx, String evt) {
 		List_adp list = (List_adp)subs.Get_by(ctx);
 		if (list == null) {
 			list = List_adp_.New();
@@ -62,8 +62,11 @@ class Xocfg_cache_grp {
 		// exact match; EX: "en.w|key_1"
 		List_adp list = (List_adp)subs.Get_by(ctx);
 		if (list == null) {// global match; EX: "app|key_1"
-			list = (List_adp)subs.Get_by(ctx);
-			if (list == null) return;
+			int len = subs.Len();
+			for (int i = 0; i < len; i++) {
+				list = (List_adp)subs.Get_at(i);
+				Pub(list, val);
+			}
 		}
 		Pub(list, val);
 	}
@@ -71,7 +74,7 @@ class Xocfg_cache_grp {
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {
 			Xocfg_cache_sub sub = (Xocfg_cache_sub)list.Get_at(i);
-			Gfo_evt_mgr_.Pub_val(sub.Sub(), sub.Evt(), val);
+			Gfo_invk_.Invk_by_msg(sub.Sub(), sub.Evt(), GfoMsg_.new_parse_(sub.Evt()).Add("v", val));
 		}
 	}
 }

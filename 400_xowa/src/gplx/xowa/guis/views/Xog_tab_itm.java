@@ -27,7 +27,7 @@ public class Xog_tab_itm implements Gfo_invk {
 	private Xog_win_itm win; private Xocfg_tab_mgr cfg_tab_mgr;
 	public Xog_tab_itm(Xog_tab_mgr tab_mgr, Gfui_tab_itm_data tab_data, Xowe_wiki wiki, Xoae_page page) {
 		this.tab_mgr = tab_mgr; this.tab_data = tab_data; this.wiki = wiki; this.page = page;
-		this.win = tab_mgr.Win(); this.cfg_tab_mgr = win.App().Cfg_regy	().App().Gui_mgr().Tab_mgr();
+		this.win = tab_mgr.Win(); this.cfg_tab_mgr = win.App().Cfg_regy().App().Gui_mgr().Tab_mgr();
 		this.html_itm = new Xog_html_itm(this);
 		cmd_sync = win.Kit().New_cmd_sync(this);
 	}

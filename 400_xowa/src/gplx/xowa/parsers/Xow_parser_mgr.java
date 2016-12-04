@@ -21,7 +21,7 @@ import gplx.xowa.wikis.*; import gplx.core.envs.*;
 import gplx.xowa.files.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wbases.hwtrs.*; import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.ttls.*;
 import gplx.xowa.parsers.uniqs.*; import gplx.xowa.parsers.hdrs.sections.*;
-public class Xow_parser_mgr {
+public class Xow_parser_mgr implements Gfo_invk {
 	private final    Xowe_wiki wiki; private final    Xop_tkn_mkr tkn_mkr;
 	public Xow_parser_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki; this.tkn_mkr = wiki.Appe().Parser_mgr().Tkn_mkr();
@@ -84,7 +84,8 @@ public class Xow_parser_mgr {
 		tmpl_stack_ary = Bry_.Ary_empty;
 		tmpl_stack_ary_len = tmpl_stack_ary_max = 0;
 		uniq_mgr.Clear();
-		hdr__section_editable__enabled = page.Wikie().Appe().Api_root().Addon().Parser__hdr__section_editable();
+
+		hdr__section_editable__enabled = page.Wiki().App().Cfg().Bind_bool(wiki, gplx.xowa.htmls.core.wkrs.hdrs.Xoh_section_editable_.Cfg__section_editing__enabled, this);
 
 		scrib.When_page_changed(page);	// notify scribunto about page changed
 		ctx.Page_(page);
@@ -97,5 +98,10 @@ public class Xow_parser_mgr {
 		}
 		page.Root_(root);
 		root.Data_htm_(root.Root_src());
+	}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, gplx.xowa.htmls.core.wkrs.hdrs.Xoh_section_editable_.Cfg__section_editing__enabled))	hdr__section_editable__enabled = m.ReadBool("v");
+		else	return Gfo_invk_.Rv_unhandled;
+		return this;
 	}
 }

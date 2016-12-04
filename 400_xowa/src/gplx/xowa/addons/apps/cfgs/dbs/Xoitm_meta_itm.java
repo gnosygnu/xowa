@@ -17,9 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
 public class Xoitm_meta_itm {
-	public Xoitm_meta_itm(int id, int scope_id, int gui_type, String gui_args, String key, String dflt) {
+	public Xoitm_meta_itm(int id, int scope_id, int db_type, int gui_type, String gui_args, String key, String dflt) {
 		this.id = id;
 		this.scope_id = scope_id;
+		this.db_type = db_type;
 		this.gui_type = gui_type;
 		this.gui_args = gui_args;
 		this.key = key;
@@ -27,6 +28,7 @@ public class Xoitm_meta_itm {
 	}
 	public int Id() {return id;} private final    int id;
 	public int Scope_id() {return scope_id;} private final    int scope_id;
+	public int Db_type() {return db_type;} private final    int db_type;
 	public int Gui_type() {return gui_type;} private final    int gui_type;
 	public String Gui_args() {return gui_args;} private final    String gui_args;
 	public String Key() {return key;} private final    String key;

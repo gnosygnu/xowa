@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
 class Xocfg_cache_sub {
-	public Xocfg_cache_sub(Gfo_evt_itm sub, String ctx, String evt, String key) {
+	public Xocfg_cache_sub(Gfo_invk sub, String ctx, String evt, String key) {
 		this.ctx = ctx;
 		this.key = key;
 		this.evt = evt;
@@ -26,5 +26,5 @@ class Xocfg_cache_sub {
 	public String Ctx() {return ctx;} private final    String ctx;
 	public String Key() {return key;} private final    String key;
 	public String Evt() {return evt;} private final    String evt;
-	public Gfo_evt_itm Sub() {return sub;} private final    Gfo_evt_itm sub;
+	public Gfo_invk Sub() {return sub;} private final    Gfo_invk sub;
 }

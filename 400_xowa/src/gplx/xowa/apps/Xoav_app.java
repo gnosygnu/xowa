@@ -31,6 +31,7 @@ import gplx.xowa.bldrs.wms.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.addons.*; import gplx.xowa.specials.mgrs.*;
+import gplx.xowa.addons.apps.cfgs.*;
 public class Xoav_app implements Xoa_app, Gfo_invk {
 	public Xoav_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Xog_tab_mgr tab_mgr, String plat_name, Io_url root_dir, Io_url file_dir, Io_url css_dir, Io_url http_root) {
 		Xoa_app_.Usr_dlg_(usr_dlg); this.usr_dlg = usr_dlg; this.mode = mode;
@@ -79,6 +80,7 @@ public class Xoav_app implements Xoa_app, Gfo_invk {
 	public Xog_tab_mgr				Gui__tab_mgr()				{return gui__tab_mgr;} private final    Xog_tab_mgr gui__tab_mgr;
 	public Gfo_thread_mgr			Thread_mgr()				{return thread_mgr;} private final    Gfo_thread_mgr thread_mgr = new Gfo_thread_mgr();
 	public Xop_amp_mgr				Parser_amp_mgr()			{return parser_amp_mgr;} private final    Xop_amp_mgr parser_amp_mgr = Xop_amp_mgr.Instance;
+	public Xocfg_mgr				Cfg()						{return cfg;} private final    Xocfg_mgr cfg = new Xocfg_mgr();
 
 	public Xowmf_mgr				Wmf_mgr()					{return wmf_mgr;} private final    Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Gfo_usr_dlg				Usr_dlg() {return usr_dlg;} public void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; Xoa_app_.Usr_dlg_(usr_dlg);} private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Noop;
@@ -95,6 +97,10 @@ public class Xoav_app implements Xoa_app, Gfo_invk {
 	public void Init_by_app(Io_url user_db_url) {
 		user.Init_db(this, wiki_mgr, user_db_url);
 		this.Addon_mgr().Add_dflts_by_app(this).Run_by_app(this);
+		cfg.Init_by_app(user.User_db_mgr().Conn());
+	}
+	public void Free_mem() {	// NOTE:not yet called in drd; DATE:2016-12-04
+		cfg.Clear();
 	}
 	public static Xoav_app New_by_drd(gplx.xowa.drds.files.Xod_fsys_mgr fsys_mgr, Xog_tab_mgr tab_mgr) {
 		// create log

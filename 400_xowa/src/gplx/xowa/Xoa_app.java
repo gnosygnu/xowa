@@ -31,6 +31,7 @@ import gplx.xowa.users.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.addons.*; import gplx.xowa.specials.mgrs.*;
 import gplx.xowa.parsers.amps.*;
+import gplx.xowa.addons.apps.cfgs.*;
 public interface Xoa_app extends Gfo_invk {
 	boolean					Tid_is_edit();
 	Xoa_app_mode			Mode();
@@ -49,6 +50,7 @@ public interface Xoa_app extends Gfo_invk {
 	Xog_tab_mgr				Gui__tab_mgr();
 	Xou_user				User();
 	Xowmf_mgr				Wmf_mgr();
+	Xocfg_mgr				Cfg();
 	boolean					Xwiki_mgr__missing(byte[] domain);
 	Xoa_sitelink_mgr		Xwiki_mgr__sitelink_mgr();
 	Xow_xwiki_itm_parser	Xwiki_mgr__itm_parser();

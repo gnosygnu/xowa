@@ -25,6 +25,7 @@ public class Db_qry__select_in_tbl implements Db_qry {
 	public boolean			Exec_is_rdr() {return true;}
 	public String		Base_table() {return base_table;} private final    String base_table;
 	public Criteria		Where() {return where;} private Criteria where;
+	public void Where_(Criteria v) {this.where = v;}
 	public String[]		Select_flds() {return select_flds;} private final    String[] select_flds;
 	private final    String[] where_flds;
 	public void Where_sql(String_bldr sb) {

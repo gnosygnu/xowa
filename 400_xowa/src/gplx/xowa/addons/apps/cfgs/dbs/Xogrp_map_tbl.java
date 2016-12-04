@@ -35,7 +35,7 @@ public class Xogrp_map_tbl implements Db_tbl {
 		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__map_src, fld__map_trg), map_src, map_trg, map_sort);
 	}
 	public int Select_next_sort(int owner_id) {
-		Db_rdr rdr = conn.Stmt_sql("SELECT Max(map_sort) AS map_sort FROM cfg_grp_map WHERE map_src = ?").Crt_int(fld__map_src, owner_id).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select_max(tbl_name, fld__map_sort, fld__map_src).Crt_int(fld__map_src, owner_id).Exec_select__rls_auto();
 		try {
 			if (!rdr.Move_next()) return 0;
 			Object max = rdr.Read_obj(fld__map_sort);

@@ -18,20 +18,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
 import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
 public class Xocfg_mgr {
-	private final    Xocfg_cache_mgr cache_mgr;
-	public Xocfg_mgr(Db_conn conn) {
-		this.cache_mgr = new Xocfg_cache_mgr(conn);
+	private final    Xocfg_cache_mgr cache_mgr = new Xocfg_cache_mgr();
+	public void Init_by_app(Db_conn conn) {
+		cache_mgr.Init_by_app(conn);
 	}
 	public void Clear() {
 		cache_mgr.Clear();
 	}
-	public void Sub_many(Gfo_evt_itm sub, String ctx, String... keys) {
-		cache_mgr.Sub_many(sub, ctx, keys);
+	public boolean Bind_bool(Xow_wiki wiki, String key, Gfo_invk sub) {return Bool_.Parse_or(Bind_str(wiki, key, sub), false);}
+	public String Bind_str(Xow_wiki wiki, String key, Gfo_invk sub) {
+		String ctx = wiki.Domain_itm().Abrv_xo_str();
+		cache_mgr.Sub(sub, ctx, key, key);
+		return cache_mgr.Get(ctx, key);
 	}
-	public String Get_str(String ctx, String key)			{return cache_mgr.Get(ctx, key);}
-	public void Set_str(String ctx, String key, String val) {cache_mgr.Set(ctx, key, val);}
-
-	public static Xocfg_mgr New(Db_conn conn) {
-		return new Xocfg_mgr(conn);
+	public String Get_str(String ctx, String key) {
+		return cache_mgr.Get(ctx, key);
+	}
+	public void Set_str(String ctx, String key, String val) {
+		cache_mgr.Set(ctx, key, val);
 	}
 }

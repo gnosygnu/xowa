@@ -40,6 +40,17 @@ public class Bool_ {
 			return false;
 		throw Err_.new_parse_type(boolean.class, raw);
 	}
+	public static boolean		Parse_or(String raw, boolean or) {
+		if		(	String_.Eq(raw, True_str)
+				||	String_.Eq(raw, "True")	// needed for Store_Wtr(){boolVal.toString();}
+				)
+			return true;
+		else if (	String_.Eq(raw, False_str)
+				||	String_.Eq(raw, "False")
+			)
+			return false;
+		return or;
+	}
 	public static int Compare(boolean lhs, boolean rhs) {
 		if		( lhs ==  rhs)	return CompareAble_.Same;
 		else if (!lhs &&  rhs)	return CompareAble_.Less;

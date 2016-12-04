@@ -43,7 +43,7 @@ public class Xocfg_item_bridge implements Bridge_cmd_itm {
 				itm_bldr.Create_grp(ary[1], ary[2], ary[3], ary[4]);
 			}
 			else {
-				itm_bldr.Create_itm(ary[1], ary[2], ary[3], ary[4], ary[5], ary[6], ary[7], ary[8]);
+				itm_bldr.Create_itm(ary[1], ary[2], ary[3], Type_adp_.To_tid(ary[4]), ary[5], ary[6], ary[7], ary[8], ary[9]);
 			}
 		}
 	}

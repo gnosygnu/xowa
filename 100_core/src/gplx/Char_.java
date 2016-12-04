@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Char_ {
-	public static final Class<?> Cls_ref_type = Character.class;
+	public static final String Cls_val_name = "char";
+	public static final    Class<?> Cls_ref_type = Character.class;
 	public static final char Null = '\0', NewLine = '\n';
 	public static boolean IsCaseLower(char c) {return Character.isLowerCase(c);}				
 	public static boolean IsLetterOrDigit(char c) {return Character.isLetterOrDigit(c);}	

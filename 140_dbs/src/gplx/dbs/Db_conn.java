@@ -150,6 +150,7 @@ public class Db_conn {
 	}
 	public Db_stmt				Stmt_select_max(String tbl, String col, String... where) {
 		Db_qry__select_in_tbl qry = new Db_qry__select_in_tbl(tbl, String_.Ary(String_.Format("Max({0}) AS {0}", col)), where, null, null, null, null);
+		qry.Where_(where.length == 0 ? Db_crt_.Wildcard : Db_crt_.eq_many_(where));
 		return engine.Stmt_by_qry(qry);
 	}
 

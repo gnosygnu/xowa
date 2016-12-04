@@ -62,20 +62,35 @@ public class Type_adp_ {
 		else if (Type_adp_.Eq(type, Char_.Cls_ref_type))			return Tid__char;
 		else														return Tid__obj;
 	}
+	public static int To_tid(String name) {
+		if		(String_.Eq(name, Int_.Cls_val_name))				return Tid__int;
+		else if (String_.Eq(name, String_.Cls_val_name))			return Tid__str;
+		else if (String_.Eq(name, Bry_.Cls_val_name))				return Tid__bry;
+		else if (String_.Eq(name, Bool_.Cls_val_name))				return Tid__bool;
+		else if (String_.Eq(name, Byte_.Cls_val_name))				return Tid__byte;
+		else if (String_.Eq(name, Long_.Cls_val_name))				return Tid__long;
+		else if (String_.Eq(name, Double_.Cls_val_name))			return Tid__double;
+		else if (String_.Eq(name, Decimal_adp_.Cls_val_name))		return Tid__decimal;
+		else if (String_.Eq(name, DateAdp_.Cls_ref_name))			return Tid__date;
+		else if (String_.Eq(name, Float_.Cls_val_name))				return Tid__float;
+		else if (String_.Eq(name, Short_.Cls_val_name))				return Tid__short;
+		else if (String_.Eq(name, Char_.Cls_val_name))				return Tid__char;
+		else														return Tid__obj;
+	}
 	public static final int
-		Tid__obj		=  0
-	,	Tid__null		=  1
-	,	Tid__bool		=  2
-	,	Tid__byte		=  3
-	,	Tid__short		=  4
-	,	Tid__int		=  5
-	,	Tid__long		=  6
-	,	Tid__float		=  7
-	,	Tid__double		=  8
-	,	Tid__char		=  9
-	,	Tid__str		= 10
-	,	Tid__bry		= 11
-	,	Tid__date		= 12
-	,	Tid__decimal	= 13
+	  Tid__obj		=  0
+	, Tid__null		=  1
+	, Tid__bool		=  2
+	, Tid__byte		=  3
+	, Tid__short	=  4
+	, Tid__int		=  5
+	, Tid__long		=  6
+	, Tid__float	=  7
+	, Tid__double	=  8
+	, Tid__char		=  9
+	, Tid__str		= 10
+	, Tid__bry		= 11
+	, Tid__date		= 12
+	, Tid__decimal	= 13
 	;
 }

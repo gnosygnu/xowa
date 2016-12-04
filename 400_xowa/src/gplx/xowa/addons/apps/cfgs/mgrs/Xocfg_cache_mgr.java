@@ -19,10 +19,13 @@ package gplx.xowa.addons.apps.cfgs.mgrs; import gplx.*; import gplx.xowa.*; impo
 import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.dbs.*;
 public class Xocfg_cache_mgr {
 	private final    Hash_adp grps = Hash_adp_.New();
-	public Xocfg_cache_mgr(Db_conn conn) {
+	public Xocfg_cache_mgr() {
+		this.db_mgr = new Xocfg_db_mgr(Db_conn_.Noop);
+	}
+	public void Init_by_app(Db_conn conn) {
 		this.db_mgr = new Xocfg_db_mgr(conn);
 	}
-	public Xocfg_db_mgr Db_mgr() {return db_mgr;} private final    Xocfg_db_mgr db_mgr;
+	public Xocfg_db_mgr Db_mgr() {return db_mgr;} private Xocfg_db_mgr db_mgr;
 	public void Clear() {grps.Clear();}
 	public String Get(String ctx, String key) {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
@@ -33,26 +36,25 @@ public class Xocfg_cache_mgr {
 		grp.Set(ctx, val);
 		grp.Pub(ctx, val);
 	}
-	public void Sub_many(Gfo_evt_itm sub, String ctx, String... evts) {
-		int len = evts.length;
-		for (int i = 0; i < len; i++) {
-			String evt = evts[i];
-			if (!String_.Has_at_bgn(evt, "Evt__")) throw Err_.new_wo_type("cfg:event must start with Evt__", "evt", evt);
-			Sub(sub, ctx, String_.Mid(evt, 5), evt);
-		}
-	}
-	public void Sub(Gfo_evt_itm sub, String ctx, String key, String evt) {
+	public void Sub(Gfo_invk sub, String ctx, String key, String evt) {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
 		grp.Sub(sub, ctx, evt);
 	}
 	private Xocfg_cache_grp Grps__get_or_load(String key) {
 		Xocfg_cache_grp grp = (Xocfg_cache_grp)grps.Get_by(key);
-		return grp == null ? Load_grp(key) : grp;
+		if (grp == null) {
+			grp = Load_grp(key);
+			grps.Add(key, grp);
+		}
+		return grp;
 	}
 	private Xocfg_cache_grp Load_grp(String key) {
 		// get data from db
 		Xoitm_meta_itm meta_itm = db_mgr.Tbl__itm_meta().Select_by_key_or_null(key);
-		if (meta_itm == null) throw Err_.new_wo_type("cfg:grp not found;", "key", key);
+		if (meta_itm == null) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:grp not found; key=~{0}", key);
+			return new Xocfg_cache_grp(key, "");
+		}
 		Xoitm_data_itm[] itms = db_mgr.Tbl__itm_data().Select_all_by_id(meta_itm.Id());
 
 		// make
