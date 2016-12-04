@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.apps.cfgs.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.dbs.*;
 public class Xocfg_cache_mgr__tst {
-	private final    Xocfg_cache_mgr__fxt fxt = new Xocfg_cache_mgr__fxt();
+//		private final    Xocfg_cache_mgr__fxt fxt = new Xocfg_cache_mgr__fxt();
 	@Test   public void Basic() {
 //			fxt.Init__db_add("en.w", "key_1", "val_1");
 //			fxt.Test__get("en.w", "key_1", "val_1");

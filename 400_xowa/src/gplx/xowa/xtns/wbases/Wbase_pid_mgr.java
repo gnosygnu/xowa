@@ -37,8 +37,10 @@ public class Wbase_pid_mgr {	// EX: "en|road_map" -> 15 ("Property:P15")
 		byte[] pid_key = Bry_.Add(lang_key, Byte_ascii.Pipe_bry, pid_name);		// EX: "en|road_map"
 		int rv = hash.Get_as_int_or(pid_key, -1);
 		if (rv == -1) {
-			rv = wbase_mgr.Wdata_wiki().Db_mgr().Load_mgr().Load_pid(lang_key, pid_name); if (rv == Wdata_wiki_mgr.Pid_null) return rv;
-			Add(pid_key, rv);
+			synchronized (hash) {	// LOCK:app-level; DATE:2016-12-03
+				rv = wbase_mgr.Wdata_wiki().Db_mgr().Load_mgr().Load_pid(lang_key, pid_name); if (rv == Wdata_wiki_mgr.Pid_null) return rv;
+				Add(pid_key, rv);
+			}
 		}
 		return rv;
 	}
