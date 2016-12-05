@@ -20,12 +20,12 @@ import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
 public class Xocfg_mgr {
 	private final    Xocfg_cache_mgr cache_mgr = new Xocfg_cache_mgr();
 	public void Init_by_app(Db_conn conn) {
-		// cache_mgr.Init_by_app(conn); // COMMENT:section_edit DATE:2016-12-04
+		cache_mgr.Init_by_app(conn); // SECTION_EDIT
 	}
 	public void Clear() {
 		cache_mgr.Clear();
 	}
-	public boolean Bind_bool(Xow_wiki wiki, String key, Gfo_invk sub) {return Bool_.Parse_or(Bind_str(wiki, key, sub), false);}
+	public boolean Bind_bool(Xow_wiki wiki, String key, Gfo_invk sub) {return Yn.parse_or(Bind_str(wiki, key, sub), false);}
 	public String Bind_str(Xow_wiki wiki, String key, Gfo_invk sub) {
 		String ctx = wiki.Domain_itm().Abrv_xo_str();
 		cache_mgr.Sub(sub, ctx, key, key);

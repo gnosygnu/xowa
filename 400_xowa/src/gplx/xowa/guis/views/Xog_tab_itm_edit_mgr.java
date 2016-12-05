@@ -123,6 +123,7 @@ public class Xog_tab_itm_edit_mgr {
 	}
 	private static byte[] Get_new_text(Xog_tab_itm tab) {
 		byte[] rv = tab.Html_itm().Get_elem_value_for_edit_box_as_bry();
+		// tab.Wiki().Parser_mgr().Hdr__section_editable__mgr().Merge(rv);
 		rv = Bry_.Trim(rv, 0, rv.length, false, true, Bry_.Trim_ary_ws);	// MW: trim all trailing ws; REF:EditPage.php!safeUnicodeInput; DATE:2014-04-25
 		return rv;
 	}

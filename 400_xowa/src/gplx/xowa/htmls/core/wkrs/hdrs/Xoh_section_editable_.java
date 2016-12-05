@@ -18,9 +18,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.hdrs.*;
 public class Xoh_section_editable_ {
-	public static void Write_imt(Bry_bfr bfr, Xop_ctx ctx, Xop_tkn_itm tkn) {
-		Xop_hdr_tkn hdr_tkn = (Xop_hdr_tkn)tkn;
-		ctx.Wiki().Parser_mgr().Hdr__section_editable__imt_fmt().Bld_many_to_bry(bfr, hdr_tkn.Section_editable_page(), hdr_tkn.Section_editable_idx());
-	}
 	public static final String Cfg__section_editing__enabled = "section_editing.enabled";
 }

@@ -21,6 +21,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.bldrs.wms.sites.*;
 public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xob_page_wkr, Gfo_invk {
+	private final    Object thread_lock = new Object();
 	private Json_parser parser; private Xob_wbase_ns_parser ns_parser; private final    Xob_wbase_ns_parser_rslt ns_parser_rslt = new Xob_wbase_ns_parser_rslt();
 	public Xob_wdata_qid_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
 	public abstract String Page_wkr__key();
@@ -41,20 +42,22 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 	}
 	public void Page_wkr__run_cleanup() {}
 	public void Parse_jdoc(Json_doc jdoc) {
-		Wdata_doc_parser wdoc_parser = app.Wiki_mgr().Wdata_mgr().Wdoc_parser(jdoc);
-		byte[] qid = wdoc_parser.Parse_qid(jdoc);
-		Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
-		Ordered_hash sitelinks = wdoc_parser.Parse_sitelinks(qid, jdoc);
-		int sitelinks_len = sitelinks.Count(); if (sitelinks_len == 0) return;	// no subs; return;
-		for (int i = 0; i < sitelinks_len; i++) { // iterate sitelinks
-			Wdata_sitelink_itm sitelink = (Wdata_sitelink_itm)sitelinks.Get_at(i);
-			byte[] sitelink_site = sitelink.Site(), sitelink_ttl = sitelink.Name();
-			ns_parser.Find(ns_parser_rslt, sitelink_site, sitelink_ttl);
-			int sitelink_ns = ns_parser_rslt.Ns_id();
-			if (sitelink_ns != Xow_ns_.Tid__main)	// ttl not in main; chop off ns portion; EX:Aide:French_title -> French_title
-				sitelink_ttl = Bry_.Mid(sitelink_ttl, ns_parser_rslt.Ttl_bgn(), sitelink_ttl.length);
-			sitelink_ttl = wiki.Lang().Case_mgr().Case_build_1st_upper(tmp_bfr, sitelink_ttl, 0, sitelink_ttl.length);
-			this.Qid_add(sitelink.Site(), sitelink_ns, Xoa_ttl.Replace_spaces(sitelink_ttl), qid);	// NOTE: always convert spaces to underscores; EX: "A B" -> "A_B" DATE:2015-04-21
+		synchronized (thread_lock) {
+			Wdata_doc_parser wdoc_parser = app.Wiki_mgr().Wdata_mgr().Wdoc_parser(jdoc);
+			byte[] qid = wdoc_parser.Parse_qid(jdoc);
+			Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+			Ordered_hash sitelinks = wdoc_parser.Parse_sitelinks(qid, jdoc);
+			int sitelinks_len = sitelinks.Count(); if (sitelinks_len == 0) return;	// no subs; return;
+			for (int i = 0; i < sitelinks_len; i++) { // iterate sitelinks
+				Wdata_sitelink_itm sitelink = (Wdata_sitelink_itm)sitelinks.Get_at(i);
+				byte[] sitelink_site = sitelink.Site(), sitelink_ttl = sitelink.Name();
+				ns_parser.Find(ns_parser_rslt, sitelink_site, sitelink_ttl);
+				int sitelink_ns = ns_parser_rslt.Ns_id();
+				if (sitelink_ns != Xow_ns_.Tid__main)	// ttl not in main; chop off ns portion; EX:Aide:French_title -> French_title
+					sitelink_ttl = Bry_.Mid(sitelink_ttl, ns_parser_rslt.Ttl_bgn(), sitelink_ttl.length);
+				sitelink_ttl = wiki.Lang().Case_mgr().Case_build_1st_upper(tmp_bfr, sitelink_ttl, 0, sitelink_ttl.length);
+				this.Qid_add(sitelink.Site(), sitelink_ns, Xoa_ttl.Replace_spaces(sitelink_ttl), qid);	// NOTE: always convert spaces to underscores; EX: "A B" -> "A_B" DATE:2015-04-21
+			}
 		}
 	}
 	public void Page_wkr__end() {

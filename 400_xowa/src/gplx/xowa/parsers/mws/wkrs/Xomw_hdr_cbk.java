@@ -17,5 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.mws.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.mws.*;
 public interface Xomw_hdr_cbk {
-	void Write(Bry_bfr bfr, Xomw_parser_ctx pctx, Xomw_hdr_wkr wkr);
+	void On_hdr_seen(Xomw_parser_ctx pctx, Xomw_hdr_wkr wkr);
+	void On_src_done(Xomw_parser_ctx pctx, Xomw_hdr_wkr wkr);
 }

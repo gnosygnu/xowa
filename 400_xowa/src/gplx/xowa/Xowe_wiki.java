@@ -205,6 +205,8 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		db_mgr.Load_mgr().Load_init(this);
 		app.Gfs_mgr().Run_url_for(this, tdb_fsys_mgr.Cfg_wiki_core_fil());
 		gplx.xowa.bldrs.setups.upgrades.Xoa_upgrade_mgr.Check(this);
+		parser_mgr.Init_by_wiki();
+
 		// init ns_mgr
 		if (lang.Init_by_load()) {
 			if (domain_tid == Xow_domain_tid_.Tid__wikipedia)	// NOTE: if type is wikipedia, add "Wikipedia" as an alias; PAGE:en.w:pt.wikipedia.org/wiki/Página principal which redirects to Wikipedia:Página principal
@@ -214,10 +216,12 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		app.Gfs_mgr().Run_url_for(this, app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(domain_str + ".gfs"));		// NOTE: must be run after lang.Init_by_load b/c lang will reload ns_mgr; DATE:2015-04-17run cfg for wiki by user ; EX: /xowa/user/anonymous/wiki/en.wikipedia.org/cfg/user_wiki.gfs
 		cfg_parser.Xtns().Itm_pages().Init(ns_mgr);	// init ns_mgr for Page / Index ns just before rebuild; usually set by #cfg file
 		Xow_ns_mgr_.rebuild_(lang, ns_mgr);	// always rebuild; may be changed by user_wiki.gfs; different lang will change namespaces; EX: de.wikisource.org will have Seite for File and none of {{#lst}} will work
+
 		// push lang changes
 		fragment_mgr.Evt_lang_changed(lang);
 		parser_mgr.Main().Init_by_lang(lang);
 		html_mgr.Init_by_lang(lang);
+
 		// other init
 		Bry_fmtr.Null.Eval_mgr().Enabled_(false); app.Wiki_mgr().Scripts().Exec(this); Bry_fmtr.Null.Eval_mgr().Enabled_(true);
 		app.Html__css_installer().Install(this, Xowd_css_core_mgr.Key_default);

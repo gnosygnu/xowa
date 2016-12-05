@@ -34,6 +34,7 @@ public class Xocfg_cache_mgr {
 	public void Set(String ctx, String key, String val) {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
 		grp.Set(ctx, val);
+		db_mgr.Set_str(ctx, key, val);
 		grp.Pub(ctx, val);
 	}
 	public void Sub(Gfo_invk sub, String ctx, String key, String evt) {

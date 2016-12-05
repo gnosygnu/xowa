@@ -18,19 +18,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.mws.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.mws.*;
 import gplx.core.btries.*; import gplx.xowa.langs.*;
 public class Xomw_hdr_wkr {
-	private Bry_bfr bfr;
 	private Xomw_parser_ctx pctx;
-	private int src_end;
 	private Xomw_hdr_cbk cbk;
 	public byte[] Src()			{return src;} private byte[] src;
-	public int Hdr_len()		{return hdr_len;} private int hdr_len;
+	public int Src_end()		{return src_end;} private int src_end;
+	public int Txt_bgn()		{return txt_bgn;} private int txt_bgn;
+	public int Hdr_bgn()		{return hdr_bgn;} private int hdr_bgn;
+	public int Hdr_end()		{return hdr_end;} private int hdr_end;
+	public int Hdr_num()		{return hdr_num;} private int hdr_num;
 	public int Hdr_lhs_bgn()	{return hdr_lhs_bgn;} private int hdr_lhs_bgn;
 	public int Hdr_lhs_end()	{return hdr_lhs_end;} private int hdr_lhs_end;
 	public int Hdr_rhs_bgn()	{return hdr_rhs_bgn;} private int hdr_rhs_bgn;
 	public int Hdr_rhs_end()	{return hdr_rhs_end;} private int hdr_rhs_end;
-	public void Parse(Bry_bfr bfr, Xomw_parser_ctx pctx, byte[] src, int src_bgn, int src_end, Xomw_hdr_cbk cbk) {	// REF.MW: /includes/parser/Parser.php|doHeadings
+	public void Parse(Xomw_parser_ctx pctx, byte[] src, int src_bgn, int src_end, Xomw_hdr_cbk cbk) {	// REF.MW: /includes/parser/Parser.php|doHeadings
 		// init members
-		this.bfr = bfr;
 		this.pctx = pctx;
 		this.src = src;
 		this.src_end = src_end;
@@ -38,41 +39,46 @@ public class Xomw_hdr_wkr {
 
 		// do loop
 		int pos = src_bgn;
-		int txt_bgn = pos == Xomw_parser_ctx.Pos__bos ? 0 : pos;
+		this.txt_bgn = pos == Xomw_parser_ctx.Pos__bos ? 0 : pos;
 		byte b = Byte_ascii.Nl;
 		while (true) {
 			int nxt = pos + 1;
+			// check if (a) cur is \n; (b) nxt is '='
 			if (	b == Byte_ascii.Nl
 				&&	nxt < src_end
 				&&	src[nxt] == Byte_ascii.Eq
-				) {	// if \n, check if "="
-				int rv = Parse_hdr_nl(txt_bgn, pos, nxt + 1);
-				if (rv < 0) {
-					pos = rv * -1;
-				}
-				else
-					pos = txt_bgn = rv;
+				) {
+				pos = Parse_hdr_nl(txt_bgn, pos, nxt + 1);
+				this.txt_bgn = pos;
 			}
 			else
 				++pos;
+
+			// EOS; add all text after last "==\n"
 			if (pos == src_end) {
-				if (txt_bgn != src_end)	// PERF: don't call Add_mid() if hdr is at end of EOS
-					bfr.Add_mid(src, txt_bgn, src_end);
+				cbk.On_src_done(pctx, this);
 				break;
 			}
 			b = src[pos];
 		}
 	}
 	private int Parse_hdr_nl(int txt_bgn, int nl_lhs, int pos) {
-		// calc pos and len
-		this.hdr_lhs_bgn = nl_lhs + 1;
-		this.hdr_lhs_end = Bry_find_.Find_fwd_while(src, pos, src_end, Byte_ascii.Eq); 
-		int nl_rhs = Bry_find_.Find_fwd_or(src, Byte_ascii.Nl, hdr_lhs_end + 1, src_end, src_end);	// no "\n"; src_end is rest of text; EX: "\n==<text>EOS
+		// calc lhs vars
+		this.hdr_bgn = nl_lhs;
+		this.hdr_lhs_bgn = nl_lhs == 0 ? 0 : nl_lhs + 1;	// set pos of 1st "="; note that "==" can be at BOS;
+		this.hdr_lhs_end = Bry_find_.Find_fwd_while(src, pos, src_end, Byte_ascii.Eq);
+
+		// calc rhs vars
+		int nl_rhs = Bry_find_.Find_fwd_or(src, Byte_ascii.Nl, hdr_lhs_end + 1, src_end, src_end);	// if no "\n", src_end is rest of text; EX: "\n==<text>EOS
+		this.hdr_end = nl_rhs;
 		this.hdr_rhs_end = Bry_find_.Find_bwd__skip_ws(src, nl_rhs, hdr_lhs_end);
 		this.hdr_rhs_bgn = Bry_find_.Find_bwd__skip(src, hdr_rhs_end - 1, hdr_lhs_end, Byte_ascii.Eq);
+
 		int hdr_lhs_len = hdr_lhs_end - hdr_lhs_bgn;
 		int hdr_rhs_len = hdr_rhs_end - hdr_rhs_bgn;
-		if (hdr_rhs_len == 0) {	// handle rare situations like "\n====\n"
+
+		// handle rare situations like "\n====\n"
+		if (hdr_rhs_len == 0) {
 			int hdr_lhs_len_half = hdr_lhs_len / 2;
 			hdr_rhs_len = hdr_lhs_len - hdr_lhs_len_half;
 			hdr_lhs_len = hdr_lhs_len_half;
@@ -80,13 +86,9 @@ public class Xomw_hdr_wkr {
 			this.hdr_rhs_bgn = hdr_lhs_end;
 		}
 
-		// bld bry
-		this.hdr_len = hdr_lhs_len < hdr_rhs_len ? hdr_lhs_len : hdr_rhs_len;
-		if (nl_lhs > txt_bgn)
-			bfr.Add_mid(src, txt_bgn, nl_lhs);	// add all txt up to nl_lhs
+		this.hdr_num = hdr_lhs_len < hdr_rhs_len ? hdr_lhs_len : hdr_rhs_len;
 
-		if (nl_lhs != Xomw_parser_ctx.Pos__bos) bfr.Add_byte_nl();
-		cbk.Write(bfr, pctx, this);
+		cbk.On_hdr_seen(pctx, this);
 		return nl_rhs;
 	}
 }

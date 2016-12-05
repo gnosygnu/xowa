@@ -33,12 +33,12 @@ public class Xop_eq_lxr implements Xop_lxr {
 			if (	owner != null && owner.Tkn_tid() == Xop_tkn_itm_.Tid_tmpl_curly_bgn	// inside curly
 				&&	eq_len > 1) {														// only skip if at least "=="; don't want to skip "=" which could be kv delimiter; DATE:2014-04-17
 				int prv_pos = bgn_pos - 1;
-				if (prv_pos > -1 && src[prv_pos] == Byte_ascii.Nl)					// is prv char \n; EX: "\n==="
+				if (prv_pos > -1 && src[prv_pos] == Byte_ascii.Nl)						// is prv char \n; EX: "\n==="
 					hdr_like = true;
 				else {
 					int eol_pos = Bry_find_.Find_fwd_while_space_or_tab(src, cur_pos, src_len);	// skip trailing ws; EX: "== \n"; PAGE:nl.q:Geert_Wilders; DATE:2014-06-05
 					if (	eol_pos == src_len											// eos
-						||	src[eol_pos] == Byte_ascii.Nl							// cur_pos is \n; EX: "===\n"
+						||	src[eol_pos] == Byte_ascii.Nl								// cur_pos is \n; EX: "===\n"
 						) {
 						hdr_like = true;
 						cur_pos = eol_pos;
@@ -58,15 +58,15 @@ public class Xop_eq_lxr implements Xop_lxr {
 			return cur_pos;
 		}
 		int ws_end = Bry_find_.Find_fwd_while_space_or_tab(src, cur_pos, src_len);
-		hdr_like = ws_end == src_len || src[ws_end] == Byte_ascii.Nl;				// hdr_like if next char \n or eos
+		hdr_like = ws_end == src_len || src[ws_end] == Byte_ascii.Nl;					// hdr_like if next char \n or eos
 		if (!hdr_like) {
 			int ctg_end = Xop_nl_lxr.Scan_fwd_for_ctg(ctx, src, cur_pos, src_len);		// check if ==[[Category:A]]; DATE:2014-04-17
-			if (	ctg_end != Bry_find_.Not_found) {										// [[Category: found
+			if (	ctg_end != Bry_find_.Not_found) {									// [[Category: found
 				ctg_end = Bry_find_.Find_fwd(src, Xop_tkn_.Lnki_end, ctg_end, src_len);
-				if (ctg_end != Bry_find_.Not_found) {										// ]] found; note that this should do more validation; EX: [[Category:]] should not be valid; DATE:2014-04-17
+				if (ctg_end != Bry_find_.Not_found) {									// ]] found; note that this should do more validation; EX: [[Category:]] should not be valid; DATE:2014-04-17
 					ctg_end += Xop_tkn_.Lnki_end_len;
 					ctg_end = Bry_find_.Find_fwd_while_space_or_tab(src, ctg_end, src_len);
-					if (ctg_end == src_len || src[ctg_end] == Byte_ascii.Nl)		// hdr_like if ]]\n after [[Category:A]]
+					if (ctg_end == src_len || src[ctg_end] == Byte_ascii.Nl)			// hdr_like if ]]\n after [[Category:A]]
 						hdr_like = true;
 				}
 			}

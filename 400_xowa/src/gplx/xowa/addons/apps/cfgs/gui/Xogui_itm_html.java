@@ -21,7 +21,7 @@ public class Xogui_itm_html {
 	public void Build_html(Bry_bfr bfr, String key, String name, int gui_type, String gui_args, String data) {
 		switch (gui_type) {
 			case Xoitm_gui_tid.Tid__checkbox:
-				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='checkbox' accesskey='d' class='xocfg_checkbox'{1}></input>", key, String_.Eq(data, "true") ? " checked='checked'" : "");
+				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='checkbox' accesskey='d' class='xocfg_checkbox'{1}></input>", key, String_.Eq(data, "y") ? " checked='checked'" : "");
 				break;
 			case Xoitm_gui_tid.Tid__numeric:
 				bfr.Add_str_u8_fmt("<input id='{0}' data-xocfg='0' type='text' accesskey='d' class='xocfg_numeric' value='{1}'></input>", key, data);

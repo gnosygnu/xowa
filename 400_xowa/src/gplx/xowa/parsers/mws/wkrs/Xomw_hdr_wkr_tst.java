@@ -30,10 +30,11 @@ public class Xomw_hdr_wkr_tst {
 }
 class Xomw_hdr_wkr_fxt {
 	private final    Xomw_hdr_wkr wkr = new Xomw_hdr_wkr();
-	private final    Bry_bfr bfr = Bry_bfr_.New(); private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx(null);
+	private final    Xomw_hdr_cbk__html cbk = new Xomw_hdr_cbk__html();
+	private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		wkr.Parse(bfr, pctx, src_bry, -1, src_bry.length, new Xomw_hdr_cbk__html());
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear(), src_str);
+		wkr.Parse(pctx, src_bry, -1, src_bry.length, cbk);
+		Tfds.Eq_str_lines(expd, cbk.Bfr().To_str_and_clear(), src_str);
 	}
 }
