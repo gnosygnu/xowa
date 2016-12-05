@@ -42,7 +42,7 @@ public class Xoh_html_wtr {
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		cfg.Toc__show_(Bool_.Y).Lnki__title_(true).Lnki__visited_y_().Lnki__id_(Bool_.Y);	// NOTE: set during Init_by_wiki, b/c all tests assume these are false
 
-		cfg.Section_editable_(wiki.App().Cfg().Bind_bool(wiki, gplx.xowa.htmls.core.wkrs.hdrs.Xoh_section_editable_.Cfg__section_editing__enabled, cfg));
+		// cfg.Section_editable_(wiki.App().Cfg().Bind_bool(wiki, gplx.xowa.htmls.core.wkrs.hdrs.Xoh_section_editable_.Cfg__section_editing__enabled, cfg));	// COMMENT:section_edit DATE:2016-12-04
 		ref_wtr.Init_by_wiki(wiki);
 	}
 	public void Init_by_page(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xoae_page page) {

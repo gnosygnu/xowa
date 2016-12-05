@@ -20,7 +20,7 @@ import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
 public class Xocfg_mgr {
 	private final    Xocfg_cache_mgr cache_mgr = new Xocfg_cache_mgr();
 	public void Init_by_app(Db_conn conn) {
-		cache_mgr.Init_by_app(conn);
+		// cache_mgr.Init_by_app(conn); // COMMENT:section_edit DATE:2016-12-04
 	}
 	public void Clear() {
 		cache_mgr.Clear();

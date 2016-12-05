@@ -85,7 +85,7 @@ public class Xow_parser_mgr implements Gfo_invk {
 		tmpl_stack_ary_len = tmpl_stack_ary_max = 0;
 		uniq_mgr.Clear();
 
-		hdr__section_editable__enabled = page.Wiki().App().Cfg().Bind_bool(wiki, gplx.xowa.htmls.core.wkrs.hdrs.Xoh_section_editable_.Cfg__section_editing__enabled, this);
+		// hdr__section_editable__enabled = page.Wiki().App().Cfg().Bind_bool(wiki, gplx.xowa.htmls.core.wkrs.hdrs.Xoh_section_editable_.Cfg__section_editing__enabled, this);	// COMMENT:section_edit DATE:2016-12-04
 
 		scrib.When_page_changed(page);	// notify scribunto about page changed
 		ctx.Page_(page);

@@ -60,7 +60,7 @@ class Xog_url_wkr__file {
 		gplx.core.ios.IoItmFil fil = Io_mgr.Instance.QueryFil(file_url);
 		if (fil.Exists()) {
 			gplx.core.envs.Process_adp media_player = app.Prog_mgr().App_by_ext(file_url.Ext());
-			media_player.Args__include_quotes_(true);	// NOTE:Windows "cmd /c start" requies first quoted argument to be title; note that url must be 2nd arg and quoted; DATE:2016-11-14
+			media_player.Args__include_quotes_(gplx.core.envs.Op_sys.Cur().Tid_is_wnt());	// NOTE:Windows "cmd /c start" requies first quoted argument to be title; note that url must be 2nd arg and quoted; DATE:2016-11-14
 			media_player.Run(file_url);
 
 			fsdb.File_size_(fil.Size());
