@@ -250,7 +250,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 				end_page_int = num_parser.Rv_as_int();
 		}
 		if (bgn_page_int > end_page_int) {
-			Fail_args("from must be less than to: from={0} to={0}", bgn_page_int, end_page_int);
+			Fail_args("from must be less than to: from={0} to={1}", bgn_page_int, end_page_int);
 			return null;
 		}
 		for (int i = bgn_page_int; i <= end_page_int; i++)

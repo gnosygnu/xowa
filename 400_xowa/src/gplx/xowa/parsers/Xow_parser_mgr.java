@@ -42,7 +42,7 @@ public class Xow_parser_mgr {
 	public boolean						Lst__recursing()	{return lst_recursing;} private boolean lst_recursing; public void	Lst__recursing_(boolean v) {lst_recursing = v;}
 	public Bry_bfr					Wbase__time__bfr()  {return wbase__time__bfr;} private final    Bry_bfr wbase__time__bfr = Bry_bfr_.New();
 	public Bry_fmtr					Wbase__time__fmtr() {return wbase__time__fmtr;} private final    Bry_fmtr wbase__time__fmtr = Bry_fmtr.new_();
-	public Xop_section_mgr			Hdr__section_editable__mgr()		{return hdr__section_editable__mgr;} private final    Xop_section_mgr hdr__section_editable__mgr = new Xop_section_mgr();
+	public Xop_section_mgr			Hdr__section_editable__mgr() {return hdr__section_editable__mgr;} private final    Xop_section_mgr hdr__section_editable__mgr = new Xop_section_mgr();
 	public Wdata_hwtr_msgs			Wbase__time__msgs() {
 		if (wbase__time__msgs == null)
 			wbase__time__msgs = Wdata_hwtr_msgs.new_(wiki.Msg_mgr());

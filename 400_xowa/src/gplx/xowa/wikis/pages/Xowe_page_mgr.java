@@ -51,6 +51,7 @@ public class Xowe_page_mgr {
 
 			// load from html_dbs if no wtxt found and option just marked as not read_preferred
 			if (	Bry_.Len_eq_0(page.Db().Text().Text_bry())				// no wtxt found
+				&&	!ttl.Ns().Id_is_special()								// skip special
 				&&	!wiki.Appe().Api_root().Wiki().Hdump().Read_preferred()	// read preferred not marked
 				) {
 				wiki.Html__hdump_mgr().Load_mgr().Load_by_edit(page);

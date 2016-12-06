@@ -23,7 +23,7 @@ public class Xog_tab_itm_edit_mgr {
 	public static void Save(Xog_tab_itm tab, boolean quick_save) {
 		if (tab.View_mode() != Xopg_page_.Tid_edit) return;	// exit if not edit; handles ctrl+s being pressed in read/html modes
 		Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
-		byte[] new_text = Get_new_text(tab);
+		byte[] new_text = Get_new_text(tab, page.Db().Text().Text_bry());
 		if (page.Edit_mode() == Xoa_page_.Edit_mode_create) {
 			int page_id = wiki.Db_mgr().Save_mgr().Data_create(page.Ttl(), new_text);
 			page.Db().Page().Id_(page_id);
@@ -42,6 +42,7 @@ public class Xog_tab_itm_edit_mgr {
 			Xoae_page stack_page = tab.History_mgr().Cur_page(wiki);		// NOTE: must be to CurPage() else changes will be lost when going Bwd,Fwd
 			stack_page.Db().Text().Text_bry_(page.Db().Text().Text_bry());	// NOTE: overwrite with "saved" changes
 			stack_page.Wikie().Parser_mgr().Parse(page, true);				// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
+			page.Url_(Xoa_url.New(tab.Wiki().Domain_bry(), tab.Page().Ttl().Full_db()));
 			win_itm.Page__mode_(Xopg_page_.Tid_read);
 			win_itm.Page__async__bgn(tab);
 		}
@@ -52,7 +53,7 @@ public class Xog_tab_itm_edit_mgr {
 		Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
 		Xog_html_itm html_itm = tab.Html_itm();
 
-		byte[] new_text = Get_new_text(tab);
+		byte[] new_text = Get_new_text(tab, null);
 		Xoae_page new_page = Xoae_page.New(wiki, page.Ttl());
 		new_page.Db().Page().Id_(page.Db().Page().Id());	// NOTE: page_id needed for sqlite (was not needed for xdat)
 		new_page.Db().Text().Text_bry_(new_text);
@@ -121,9 +122,10 @@ public class Xog_tab_itm_edit_mgr {
 		wiki.Parser_mgr().Scrib().Core_term();
 		wiki.Cache_mgr().Free_mem_all();
 	}
-	private static byte[] Get_new_text(Xog_tab_itm tab) {
+	private static byte[] Get_new_text(Xog_tab_itm tab, byte[] orig) {
 		byte[] rv = tab.Html_itm().Get_elem_value_for_edit_box_as_bry();
-		// tab.Wiki().Parser_mgr().Hdr__section_editable__mgr().Merge(rv);
+		if (orig != null)	// orig == null for Preview
+			rv = tab.Wiki().Parser_mgr().Hdr__section_editable__mgr().Merge_section(tab.Page().Url(), rv, orig);
 		rv = Bry_.Trim(rv, 0, rv.length, false, true, Bry_.Trim_ary_ws);	// MW: trim all trailing ws; REF:EditPage.php!safeUnicodeInput; DATE:2014-04-25
 		return rv;
 	}

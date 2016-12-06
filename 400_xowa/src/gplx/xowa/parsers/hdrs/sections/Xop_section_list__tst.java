@@ -19,7 +19,7 @@ package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*; impo
 import org.junit.*; import gplx.core.tests.*;
 public class Xop_section_list__tst {
 	private final    Xop_section_list__fxt fxt = new Xop_section_list__fxt();
-	@Test   public void Basic() {
+	@Test   public void Extract__basic() {
 		fxt.Exec__parse
 		( "== Hdr 1 =="
 		, "Para 1"
@@ -43,15 +43,45 @@ public class Xop_section_list__tst {
 		, "Para 3"
 		);
 	}
+	@Test   public void Merge__basic() {
+		fxt.Exec__parse
+		( "== Hdr 1 =="
+		, "Para 1"
+		, ""
+		, "== Hdr 2 =="
+		, "Para 2"
+		, ""
+		, "== Hdr 3 =="
+		, "Para 3"
+		);
+		fxt.Test__merge_bry_or_null("Hdr 2", String_.Concat_lines_nl_skip_last
+		( "== Hdr 2 =="
+		, "abcd"
+		), String_.Concat_lines_nl_skip_last
+		( "== Hdr 1 =="
+		, "Para 1"
+		, ""
+		, "== Hdr 2 =="
+		, "abcd"
+		, ""
+		, "== Hdr 3 =="
+		, "Para 3"
+		)
+		);
+	}
 }
 class Xop_section_list__fxt {
 	private final    Xop_section_list list = new Xop_section_list();
 	public void Exec__parse(String... lines) {
-		list.Parse(Bry_.Empty, Bry_.new_u8(String_.Concat_lines_nl_skip_last(lines)));
+		list.Parse(Bry_.new_u8(String_.Concat_lines_nl_skip_last(lines)));
 	}
 	public void Test__extract_bry_or_null(String key, String... lines) {
 		String expd = String_.Concat_lines_nl_skip_last(lines);
 		byte[] actl = list.Extract_bry_or_null(Bry_.new_u8(key));
+		Gftest.Eq__ary__lines(expd, actl, key);
+	}
+	public void Test__merge_bry_or_null(String key, String edit, String expd) {
+		byte[] actl = list.Merge_bry_or_null(Bry_.new_u8(key), Bry_.new_u8(edit));
 		Gftest.Eq__ary__lines(expd, actl, key);
 	}
 }

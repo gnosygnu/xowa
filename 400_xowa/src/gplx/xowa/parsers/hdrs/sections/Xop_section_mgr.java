@@ -37,34 +37,29 @@ public class Xop_section_mgr implements Gfo_invk {
 		if (section_key == null) return src;
 
 		// parse wikitext into list of headers
-		Xop_section_list section_list = new Xop_section_list().Parse(ttl.Full_db(), src);
+		Xop_section_list section_list = new Xop_section_list().Parse(src);
 		byte[] rv = section_list.Extract_bry_or_null(section_key);
 		if (rv == null)
 			throw Err_.new_wo_type("section_key not found", "page", ttl.Full_db(), "section_key", section_key);
 		return rv;
 	}
-	public void Parse(Xop_hdr_tkn hdr, byte[] page_ttl, byte[] src, int cur_pos, int src_len) {
-		// get page ttl
-		int page_ttl_bgn = cur_pos + Bry__meta.length;
-		int page_ttl_end = Bry_find_.Find_fwd(src, Byte_ascii.Pipe, page_ttl_bgn, src_len);
-		if (page_ttl_end == Bry_find_.Not_found) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "invalid section ttl; page=~{0} excerpt=~{1}", page_ttl, Bry_.Mid(src, cur_pos, cur_pos + 100));
-			return;
-		}
-		byte[] section_page = Bry_.Mid(src, page_ttl_bgn, page_ttl_end);
+	public byte[] Merge_section(Xoa_url url, byte[] edit, byte[] orig) {
+		// return edit if not enabled
+		if (!enabled) return edit;
 
-		// get section idx
-		int section_idx_bgn = page_ttl_end + 1;
-		int section_idx_end = Bry_find_.Find_fwd(src, Gfh_tag_.Comm_end, section_idx_bgn, src_len);
-		int section_idx = Bry_.To_int_or(src, section_idx_bgn, section_idx_end, -1);
-		if (page_ttl_end == -1) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "invalid section idx; page=~{0} excerpt=~{1}", page_ttl, Bry_.Mid(src, cur_pos, cur_pos + 100));
-			return;
-		}
+		// return edit if section_key not in qargs
+		byte[] section_key = url.Qargs_mgr().Get_val_bry_or(Qarg__section_key, null);
+		if (section_key == null) return edit;
 
-		hdr.Section_editable_(section_page, section_idx);
+		// parse orig
+		Xop_section_list section_list = new Xop_section_list().Parse(orig);
+		byte[] rv = section_list.Merge_bry_or_null(section_key, edit);
+		if (rv == null)
+			throw Err_.new_wo_type("could not merge section_key", "page", url.To_str(), "section_key", section_key);
+		return rv;
 	}
 	public void Write_html(Bry_bfr bfr, byte[] src, byte[] page_ttl, Xop_hdr_tkn hdr, byte[] name) {
+		// make key by (a) taking 1st and nth sub; (b) skipping ws at both ends
 		Xop_tkn_itm[] subs = hdr.Subs();
 		if (subs.length == 0) return;	// GUARD:should not happen, but avoid array-index error
 		int key_bgn = subs[0].Src_bgn();
@@ -72,6 +67,7 @@ public class Xop_section_mgr implements Gfo_invk {
 		key_bgn = Bry_find_.Find_fwd_while_ws(src, key_bgn, key_end);
 		key_end = Bry_find_.Find_bwd__skip_ws(src, key_end, key_bgn);
 		byte[] key = Bry_.Mid(src, key_bgn, key_end);
+
 		section_editable_fmt.Bld_many(bfr, page_ttl, key, name);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
