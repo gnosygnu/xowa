@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
 import gplx.langs.mustaches.*;
+import gplx.core.gfobjs.*; import gplx.langs.jsons.*;
 public class Xogui_itm implements Xogui_nde, Mustache_doc_itm {
 	public Xogui_itm(int id, int sort) {
 		this.id = id;
@@ -30,6 +31,7 @@ public class Xogui_itm implements Xogui_nde, Mustache_doc_itm {
 	public String Gui_args() {return gui_args;} private String gui_args;
 	public String Key() {return key;} private String key;
 	public String Dflt() {return dflt;} private String dflt;
+	public boolean Edited() {return edited;} private boolean edited;
 
 	public String Lang() {return lang;} private String lang;
 	public String Name() {return name;} private String name;
@@ -54,11 +56,33 @@ public class Xogui_itm implements Xogui_nde, Mustache_doc_itm {
 		this.ctx = ctx;
 		this.val = val;
 		this.date = date;
+		this.edited = true;
 	}
 	public void Set_data_by_dflt() {
 		this.ctx = Ctx__app;
 		this.val = dflt;
 		this.date = String_.Empty;
+		this.edited = false;
+	}
+	public Gfobj_nde To_nde() {
+		Gfobj_nde rv = Gfobj_nde.New();
+		rv.Add_int("id", id);
+		rv.Add_str("key", key);
+		rv.Add_str("dflt", lang);
+		rv.Add_str("lang", lang);
+		rv.Add_str("name", name);
+		rv.Add_str("help", help);
+		rv.Add_str("ctx", ctx);
+		rv.Add_str("val", val);
+		rv.Add_str("date", date);
+		Bry_bfr bfr = Bry_bfr_.New();
+		To_html(bfr);
+		// rv.Add_str("html", String_.Replace(bfr.To_str_and_clear(), "'", "\\\""));
+		rv.Add_str("html", bfr.To_str_and_clear());
+		return rv;
+	}
+	private void To_html(Bry_bfr bfr) {
+		new Xogui_itm_html().Build_html(bfr, key, name, gui_type, gui_args, val);
 	}
 	public boolean Mustache__write(String k, Mustache_bfr bfr) {
 		if		(String_.Eq(k, "id"))		bfr.Add_int(id);
@@ -70,11 +94,12 @@ public class Xogui_itm implements Xogui_nde, Mustache_doc_itm {
 		else if	(String_.Eq(k, "ctx"))		bfr.Add_str_u8(ctx);
 		else if	(String_.Eq(k, "val"))		bfr.Add_str_u8(val);
 		else if	(String_.Eq(k, "date"))		bfr.Add_str_u8(date);
-		else if	(String_.Eq(k, "html"))		new Xogui_itm_html().Build_html(bfr.Bfr(), key, name, gui_type, gui_args, val);
+		else if	(String_.Eq(k, "html"))		To_html(bfr.Bfr());
 		return true;
 	}
 	public static String Ctx__app = "app";
-	public Mustache_doc_itm[] Mustache__subs(String key) {
+	public Mustache_doc_itm[] Mustache__subs(String k) {
+		if	(String_.Eq(k, "edited"))		return Mustache_doc_itm_.Ary__bool(edited);
 		return Mustache_doc_itm_.Ary__empty;
 	}
 }

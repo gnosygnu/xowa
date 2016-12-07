@@ -37,4 +37,7 @@ public class Xocfg_mgr {
 	public void Set_str(String ctx, String key, String val) {
 		cache_mgr.Set(ctx, key, val);
 	}
+	public void Del(String ctx, String key) {
+		cache_mgr.Del(ctx, key);
+	}
 }

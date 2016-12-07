@@ -19,12 +19,12 @@ package gplx.xowa.addons.apps.cfgs.mgrs; import gplx.*; import gplx.xowa.*; impo
 class Xocfg_cache_grp {
 	private final    Hash_adp vals = Hash_adp_.New();
 	private final    Ordered_hash subs = Ordered_hash_.New();
-	private final    String dflt;
 	public Xocfg_cache_grp(String key, String dflt) {
 		this.key = key;
 		this.dflt = dflt;
 	}
 	public String Key() {return key;} private final    String key;
+	public String Dflt() {return dflt;} private final    String dflt;
 	public String Get(String ctx) {
 		// exact match; EX: "en.w|key_1"
 		Xocfg_cache_itm rv = (Xocfg_cache_itm)vals.Get_by(ctx);
@@ -47,6 +47,9 @@ class Xocfg_cache_grp {
 			rv.Val_(val);
 		}
 	}
+	public void Del(String ctx) {
+		vals.Del(ctx);
+	}
 	public void Add(String ctx, Xocfg_cache_itm itm) {
 		vals.Add(ctx, itm);
 	}
@@ -68,7 +71,8 @@ class Xocfg_cache_grp {
 				Pub(list, val);
 			}
 		}
-		Pub(list, val);
+		if (list != null)	// NOTE: check for null as it's possible for no subscribers
+			Pub(list, val);
 	}
 	private void Pub(List_adp list, String val) {
 		int len = list.Len();

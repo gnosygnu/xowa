@@ -26,18 +26,22 @@ class Xocfg_list_html extends Xow_special_wtr__base {
 		this.lang = lang;
 	}
 	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return app.Fsys_mgr().Http_root().GenSubDir_nest("bin", "any", "xowa", "addon", "app", "cfg", "list");}
-	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xocfg_list.mustache.html");}
+	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xocfg_list.core.mustache.html");}
 	@Override protected Mustache_doc_itm Bld_mustache_root(Xoa_app app) {
 		Xogui_mgr mgr = Xogui_mgr.New(app);
-		return mgr.Get_by_grp(grp_key, ctx, lang);
+		return mgr.Get_root(grp_key, ctx, lang);
 	}
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {
 		Xopg_tag_mgr head_tags = page_data.Head_tags();
 		Xopg_tag_wtr_.Add__xocss	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__xohelp	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__xolog	(head_tags, app.Fsys_mgr().Http_root());
+		Xopg_tag_wtr_.Add__xoelem	(head_tags, app.Fsys_mgr().Http_root());
+		Xopg_tag_wtr_.Add__mustache	(head_tags, app.Fsys_mgr().Http_root());
+		Xopg_tag_wtr_.Add__xotmpl	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__xoajax	(head_tags, app.Fsys_mgr().Http_root(), app);
 
+		head_tags.Add(Xopg_tag_itm.New_htm_frag(addon_dir.GenSubFil_nest("bin", "xocfg_list.grps.mustache.html"), "xocfg.grps"));
 		head_tags.Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "xocfg_list.css")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("bin", "xocfg_list.js")));
 	}

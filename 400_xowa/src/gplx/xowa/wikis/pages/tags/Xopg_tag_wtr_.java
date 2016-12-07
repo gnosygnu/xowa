@@ -37,6 +37,14 @@ public class Xopg_tag_wtr_ {
 		head_tags.Add(Xopg_tag_itm.New_css_file(dir.GenSubFil_nest("xo.log.css")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(dir.GenSubFil_nest("xo.log.js")));
 	}
+	public static void Add__xotmpl(Xopg_tag_mgr head_tags, Io_url http_root) {
+		Io_url dir = http_root.GenSubDir_nest("bin", "any", "xowa", "html", "res", "src", "xowa", "xotmpl");
+		head_tags.Add(Xopg_tag_itm.New_js_file(dir.GenSubFil_nest("xo.tmpl.js")));
+	}
+	public static void Add__xoelem(Xopg_tag_mgr head_tags, Io_url http_root) {
+		Io_url dir = http_root.GenSubDir_nest("bin", "any", "xowa", "html", "res", "src", "xowa", "xoelem");
+		head_tags.Add(Xopg_tag_itm.New_js_file(dir.GenSubFil_nest("xo.elem.js")));
+	}
 	public static void Add__xoajax(Xopg_tag_mgr head_tags, Io_url http_root, Xoa_app app) {
 		Io_url dir = http_root.GenSubDir_nest("bin", "any", "xowa", "html", "res", "src", "xowa", "xoajax");
 		head_tags.Add(Xopg_tag_itm.New_js_file(dir.GenSubFil_nest("xo.app.js")));

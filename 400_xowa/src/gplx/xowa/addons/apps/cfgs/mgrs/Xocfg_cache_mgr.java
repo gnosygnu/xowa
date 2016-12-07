@@ -37,6 +37,12 @@ public class Xocfg_cache_mgr {
 		db_mgr.Set_str(ctx, key, val);
 		grp.Pub(ctx, val);
 	}
+	public void Del(String ctx, String key) {
+		Xocfg_cache_grp grp = Grps__get_or_load(key);
+		grp.Del(ctx);
+		db_mgr.Del(ctx, key);
+		grp.Pub(ctx, grp.Dflt());
+	}
 	public void Sub(Gfo_invk sub, String ctx, String key, String evt) {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
 		grp.Sub(sub, ctx, evt);

@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
 import gplx.langs.mustaches.*;
-public class Xogui_grp implements Xogui_nde, Mustache_doc_itm {
-	private Xogui_itm[] itms = new Xogui_itm[0];
+import gplx.core.gfobjs.*;
+public class Xogui_grp implements Xogui_nde, Mustache_doc_itm {		
 	public Xogui_grp(int id, int sort, String key) {
 		this.id = id;
 		this.sort = sort;
@@ -32,6 +32,8 @@ public class Xogui_grp implements Xogui_nde, Mustache_doc_itm {
 	public String Lang() {return lang;} private String lang;
 	public String Name() {return name;} private String name;
 	public String Help() {return help;} private String help;
+
+	public Xogui_itm[] Itms() {return itms;} private Xogui_itm[] itms = new Xogui_itm[0];
 	public void Load_by_i18n(String lang, String name, String help) {
 		this.lang = lang;
 		this.name = name;
@@ -42,6 +44,23 @@ public class Xogui_grp implements Xogui_nde, Mustache_doc_itm {
 	}
 	public void Itms_(Xogui_itm[] v) {
 		this.itms = v;
+	}
+	public Gfobj_nde To_nde() {
+		Gfobj_nde rv = Gfobj_nde.New();
+		rv.Add_int("id", id);
+		rv.Add_str("key", key);
+		rv.Add_str("lang", lang);
+		rv.Add_str("name", name);
+		rv.Add_str("help", help);
+
+		List_adp list = List_adp_.New();
+		int len = itms.length;
+		for (int i = 0; i < len; i++) {
+			Xogui_itm itm = itms[i];
+			list.Add(itm.To_nde());
+		}
+		rv.Add_ary("itms", new Gfobj_ary((Gfobj_nde[])list.To_ary_and_clear(Gfobj_nde.class)));
+		return rv;
 	}
 	public boolean Mustache__write(String k, Mustache_bfr bfr) {
 		if		(String_.Eq(k, "id"))		bfr.Add_int(id);

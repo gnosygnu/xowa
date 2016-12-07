@@ -31,6 +31,24 @@ class Xogui_nde_hash {
 	public Xogui_nde Get_by_or_fail(int id) {
 		return (Xogui_nde)hash.Get_by_or_fail(id);
 	}
+	public Xogui_grp[] To_grp_ary_and_clear() {
+		return (Xogui_grp[])hash.To_ary_and_clear(Xogui_grp.class);
+	}
+	public void Delete_container_grps() {// remove container grps else headers with no items will show up
+		int len = hash.Len();
+		for (int i = 0; i < len; i++) {
+			Xogui_grp grp = (Xogui_grp)hash.Get_at(i);
+			if (grp.Itms().length == 0)
+				deleted.Add(grp);
+		}
+
+		len = deleted.Len();
+		for (int i = 0; i < len; i++) {
+			Xogui_grp grp = (Xogui_grp)deleted.Get_at(i);
+			hash.Del(grp.Id());
+		}
+	}
+
 	public Xogui_nde_hash Merge(Xogui_nde_hash src) {
 		int len = src.Len();
 		for (int i = 0; i < len; i++) {
