@@ -23,12 +23,16 @@ public class Xogrp_meta_tbl implements Db_tbl {
 	private final    Db_conn conn;
 	public Xogrp_meta_tbl(Db_conn conn) {
 		this.conn = conn;
-		this.fld__grp_id			= flds.Add_int("grp_id");
+		this.fld__grp_id			= flds.Add_int_pkey("grp_id");
 		this.fld__grp_key			= flds.Add_str("grp_key", 255);
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final    String tbl_name = TBL_NAME;
-	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_tbl() {
+		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
+		, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, fld__grp_key, fld__grp_key)
+		));
+	}
 	public void Upsert(int grp_id, String grp_key) {
 		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__grp_id), grp_id, grp_key);
 	}

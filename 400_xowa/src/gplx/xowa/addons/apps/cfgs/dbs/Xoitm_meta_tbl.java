@@ -24,7 +24,7 @@ public class Xoitm_meta_tbl implements Db_tbl {
 	public Xoitm_meta_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "cfg_itm_meta";
-		this.fld__itm_id			= flds.Add_int("itm_id");					// EX: '2'
+		this.fld__itm_id			= flds.Add_int_pkey("itm_id");				// EX: '2'
 		this.fld__itm_key			= flds.Add_str("itm_key", 255);				// EX: 'cfg_1'
 		this.fld__itm_scope_id		= flds.Add_int("itm_scope_id");				// EX: '1'; ENUM: Xoitm_scope_tid
 		this.fld__itm_db_type		= flds.Add_int("itm_db_type");				// EX: '1'; ENUM: Type_adp_
@@ -34,7 +34,10 @@ public class Xoitm_meta_tbl implements Db_tbl {
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
-	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_tbl() {
+		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
+		, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, fld__itm_key, fld__itm_key)));
+	}
 	public void Upsert(int itm_id, int scope_id, int db_type, int gui_type, String gui_args, String itm_key, String itm_dflt) {
 		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__itm_id), itm_id, itm_key, scope_id, db_type, gui_type, gui_args, itm_dflt);
 	}

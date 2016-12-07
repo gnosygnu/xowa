@@ -27,4 +27,6 @@ public class Xonde_i18n_itm {
 	public String Lang() {return lang;} private final    String lang;
 	public String Name() {return name;} private final    String name;
 	public String Help() {return help;} private final    String help;
+
+	public static final int Tid__grp = 1, Tid__itm = 2;
 }

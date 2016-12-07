@@ -30,7 +30,11 @@ public class Xogrp_map_tbl implements Db_tbl {
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
-	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_tbl() {
+		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
+		, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "core", fld__map_src, fld__map_trg)
+		));
+	}
 	public void Upsert(int map_src, int map_trg, int map_sort) {
 		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__map_src, fld__map_trg), map_src, map_trg, map_sort);
 	}
@@ -48,9 +52,3 @@ public class Xogrp_map_tbl implements Db_tbl {
 	}
 	public void Rls() {}
 }
-/*
-grp_0 -> Name of page
-grp_1 -> H2
-grp_2 -> H3
-...
-*/

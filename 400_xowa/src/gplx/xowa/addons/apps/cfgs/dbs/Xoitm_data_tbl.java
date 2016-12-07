@@ -33,7 +33,7 @@ public class Xoitm_data_tbl implements Db_tbl {
 	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
 	public void Create_tbl() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
-		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "", fld__itm_id, fld__itm_ctx)
+		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "core", fld__itm_id, fld__itm_ctx)
 		));
 	}
 	public void Upsert(int itm_id, String ctx, String itm_val, String itm_date) {

@@ -15,13 +15,14 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.specials.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*;
+package gplx.xowa.addons.apps.cfgs.specials.edits.services; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.guis.cbks.*; import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.gui.*;
-public class Xocfg_list_bridge_mgr {
+import gplx.xowa.addons.apps.cfgs.specials.edits.pages.*;
+public class Xocfg_edit_service {
 	private final    Xoa_app app;
-	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New(Xocfg_list_special.Prototype.Special__meta().Ttl_bry());
-	public Xocfg_list_bridge_mgr(Xoa_app app) {
+	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New(Xocfg_edit_special.Prototype.Special__meta().Ttl_bry());
+	public Xocfg_edit_service(Xoa_app app) {
 		this.app = app;
 	}
 	public void Upsert(Json_nde args) {
@@ -40,6 +41,6 @@ public class Xocfg_list_bridge_mgr {
 		String key = args.Get_as_str("key");
 		Xogui_mgr gui_mgr = new Xogui_mgr(new Xocfg_db_mgr(app.User().User_db_mgr().Conn()));
 		Xogui_root gui_root = gui_mgr.Get_root(key, ctx, "en");
-		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_list.load__recv", gui_root.To_nde());
+		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.load__recv", gui_root.To_nde());
 	}
 }

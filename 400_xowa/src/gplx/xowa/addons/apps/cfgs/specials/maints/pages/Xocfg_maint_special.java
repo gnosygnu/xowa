@@ -15,14 +15,15 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.specials.items; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*;
+package gplx.xowa.addons.apps.cfgs.specials.maints.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.maints.*;
 import gplx.xowa.specials.*; import gplx.core.net.qargs.*;
-public class Xocfg_item_special implements Xow_special_page {
+public class Xocfg_maint_special implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
-		new Xocfg_item_html().Bld_page_by_mustache(wiki.App(), page, this);
+		new Xocfg_maint_html().Bld_page_by_mustache(wiki.App(), page, this);
 	}
-	Xocfg_item_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
+
+	Xocfg_maint_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
 	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;
 	public Xow_special_page Special__clone()	{return this;}
-	public static final    Xow_special_page Prototype = new Xocfg_item_special(Xow_special_meta.New_xo("XowaCfgItem", "Option Admin"));
+	public static final    Xow_special_page Prototype = new Xocfg_maint_special(Xow_special_meta.New_xo("XowaCfgMaint", "Option Maintenance"));
 }
