@@ -17,12 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.specials.edits.services; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 import gplx.langs.jsons.*;
-import gplx.xowa.guis.cbks.*; import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.gui.*;
+import gplx.xowa.guis.cbks.*; import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.specials.edits.objs.*;
 import gplx.xowa.addons.apps.cfgs.specials.edits.pages.*;
-public class Xocfg_edit_service {
+public class Xocfg_edit_svc {
 	private final    Xoa_app app;
+	private Xocfg_edit_loader edit_loader;
 	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New(Xocfg_edit_special.Prototype.Special__meta().Ttl_bry());
-	public Xocfg_edit_service(Xoa_app app) {
+	public Xocfg_edit_svc(Xoa_app app) {
 		this.app = app;
 	}
 	public void Upsert(Json_nde args) {
@@ -39,8 +40,8 @@ public class Xocfg_edit_service {
 	public void Load(Json_nde args) {
 		String ctx = args.Get_as_str("ctx");
 		String key = args.Get_as_str("key");
-		Xogui_mgr gui_mgr = new Xogui_mgr(new Xocfg_db_mgr(app.User().User_db_mgr().Conn()));
-		Xogui_root gui_root = gui_mgr.Get_root(key, ctx, "en");
-		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.load__recv", gui_root.To_nde());
+		if (edit_loader == null) edit_loader = Xocfg_edit_loader.New(app);
+		Xoedit_root root = edit_loader.Load_root(key, ctx, "en");
+		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.load__recv", root.To_nde());
 	}
 }

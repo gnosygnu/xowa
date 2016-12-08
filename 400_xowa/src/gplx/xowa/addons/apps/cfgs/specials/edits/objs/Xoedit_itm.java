@@ -15,13 +15,14 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
+package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 import gplx.langs.mustaches.*;
 import gplx.core.gfobjs.*; import gplx.langs.jsons.*;
-public class Xogui_itm implements Xogui_nde, Mustache_doc_itm {
-	public Xogui_itm(int id, int sort) {
+public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
+	public Xoedit_itm(int id, int sort, String key) {
 		this.id = id;
 		this.sort = sort;
+		this.key = key;
 	}
 	public int Id() {return id;} private final    int id;
 	public int Sort() {return sort;} private final    int sort;
@@ -77,12 +78,11 @@ public class Xogui_itm implements Xogui_nde, Mustache_doc_itm {
 		rv.Add_str("date", date);
 		Bry_bfr bfr = Bry_bfr_.New();
 		To_html(bfr);
-		// rv.Add_str("html", String_.Replace(bfr.To_str_and_clear(), "'", "\\\""));
 		rv.Add_str("html", bfr.To_str_and_clear());
 		return rv;
 	}
 	private void To_html(Bry_bfr bfr) {
-		new Xogui_itm_html().Build_html(bfr, key, name, gui_type, gui_args, val);
+		new Xoedit_itm_html().Build_html(bfr, key, name, gui_type, gui_args, val);
 	}
 	public boolean Mustache__write(String k, Mustache_bfr bfr) {
 		if		(String_.Eq(k, "id"))		bfr.Add_int(id);

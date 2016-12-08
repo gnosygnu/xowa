@@ -19,8 +19,10 @@ package gplx.xowa.addons.apps.cfgs; import gplx.*; import gplx.xowa.*; import gp
 import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
 public class Xocfg_mgr {
 	private final    Xocfg_cache_mgr cache_mgr = new Xocfg_cache_mgr();
-	public void Init_by_app(Db_conn conn) {
-		cache_mgr.Init_by_app(conn); // SECTION_EDIT
+	public void Init_by_app(Xoa_app app) {
+		cache_mgr.Init_by_app	// SECTION_EDIT
+		( gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_app.New_conn(app)
+		, app.User().User_db_mgr().Conn());
 	}
 	public void Clear() {
 		cache_mgr.Clear();

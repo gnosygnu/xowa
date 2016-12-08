@@ -15,12 +15,15 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-public class Xoitm_scope_tid {	// SERIALIZED
-	public static final int Tid__app = 1, Tid__wiki = 2;
-	public static int To_int(String raw) {
-		if		(String_.Eq(raw, "app"))	return Tid__app;
-		else if (String_.Eq(raw, "wiki"))	return Tid__wiki;
-		else								throw Err_.new_unhandled_default(raw);
+package gplx.xowa.addons.apps.cfgs.enums; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
+public class Xoitm_db_tid {
+	public static final int Tid__bool = 1, Tid__int = 2, Tid__str = 3, Tid__memo = 4;
+	public static int To_int(String s) {
+		if		(String_.Eq(s, "bool"))		return Tid__bool;
+		else if	(String_.Eq(s, "int"))			return Tid__int;
+		else if	(String_.Eq(s, "string"))	return Tid__str;
+		else if	(String_.Eq(s, "memo"))			return Tid__memo;
+		else									return Tid__str;
+//			else throw Err_.new_wo_type("xo.cfg_maint:unknown db_type", "db_type", s);
 	}
 }

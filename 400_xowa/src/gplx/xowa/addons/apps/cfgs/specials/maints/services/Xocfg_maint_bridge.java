@@ -19,9 +19,9 @@ package gplx.xowa.addons.apps.cfgs.specials.maints.services; import gplx.*; impo
 import gplx.langs.jsons.*;
 import gplx.xowa.htmls.bridges.*;
 public class Xocfg_maint_bridge implements Bridge_cmd_itm {
-	private Xocfg_maint_service svc;
+	private Xocfg_maint_svc svc;
 	public void Init_by_app(Xoa_app app) {
-		this.svc = new Xocfg_maint_service(app);
+		this.svc = new Xocfg_maint_svc(app);
 	}
 	public String Exec(Json_nde data) {
 		byte proc_id = proc_hash.Get_as_byte_or(data.Get_as_bry_or(Bridge_cmd_mgr.Msg__proc, null), Byte_ascii.Max_7_bit);

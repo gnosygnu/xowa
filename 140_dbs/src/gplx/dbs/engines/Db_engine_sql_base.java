@@ -116,7 +116,9 @@ public abstract class Db_engine_sql_base implements Db_engine {
 	@Override public Object Stmt_by_sql(String sql) {
 		if (connection == null) Conn_assert();
 		try 	{return connection.prepareStatement(sql);}
-		catch 	(Exception e) {throw Err_.new_exc(e, "db", "New_stmt_prep failed", "sql", sql);}
+		catch 	(Exception e) {
+			throw Err_.new_exc(e, "db", "New_stmt_prep failed", "sql", sql);
+			}
 	}
 	private Statement New_stmt_exec(String sql) {
 		if (connection == null) Conn_assert();

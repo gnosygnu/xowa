@@ -97,7 +97,7 @@ public class Xoav_app implements Xoa_app, Gfo_invk {
 	public void Init_by_app(Io_url user_db_url) {
 		user.Init_db(this, wiki_mgr, user_db_url);
 		this.Addon_mgr().Add_dflts_by_app(this).Run_by_app(this);
-		cfg.Init_by_app(user.User_db_mgr().Conn());
+		cfg.Init_by_app(this);
 	}
 	public void Free_mem() {	// NOTE:not yet called in drd; DATE:2016-12-04
 		cfg.Clear();

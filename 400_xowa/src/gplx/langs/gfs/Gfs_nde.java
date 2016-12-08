@@ -80,6 +80,6 @@ public class Gfs_nde {
 			rv[i] = args[i];
 		return rv;		
 	}
-	public static final Gfs_nde[] Ary_empty = new Gfs_nde[0]; 
+	public static final    Gfs_nde[] Ary_empty = new Gfs_nde[0]; 
 	public static final byte Op_tid_null = 0, Op_tid_assign = 1;
 }

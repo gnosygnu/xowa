@@ -15,16 +15,14 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-public class Xoitm_data_itm {
-	public Xoitm_data_itm(int id, String ctx, String val, String date) {
+package gplx.xowa.addons.apps.cfgs.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.dbs.*;
+public class Xocfg_grp_row {
+	public Xocfg_grp_row(int id, String key) {
 		this.id = id;
-		this.ctx = ctx;
-		this.val = val;
-		this.date = date;
+		this.key = key;
 	}
 	public int Id() {return id;} private final    int id;
-	public String Ctx() {return ctx;} private final    String ctx;
-	public String Val() {return val;} private final    String val;
-	public String Date() {return date;} private final    String date;
+	public String Key() {return key;} private final    String key;
+
+	public static final int Id__root = -1;
 }

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.specials.edits.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
-import gplx.xowa.addons.apps.cfgs.gui.*;
+import gplx.xowa.addons.apps.cfgs.specials.edits.services.*; import gplx.xowa.addons.apps.cfgs.specials.edits.objs.*;
 class Xocfg_edit_html extends Xow_special_wtr__base {
 	private final    String grp, ctx, lang;
 	public Xocfg_edit_html(String grp, String ctx, String lang) {
@@ -28,8 +28,8 @@ class Xocfg_edit_html extends Xow_special_wtr__base {
 	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return app.Fsys_mgr().Http_root().GenSubDir_nest("bin", "any", "xowa", "addon", "app", "cfg", "edit");}
 	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xo.cfg_edit.page.mustache.html");}
 	@Override protected Mustache_doc_itm Bld_mustache_root(Xoa_app app) {
-		Xogui_mgr mgr = Xogui_mgr.New(app);
-		return mgr.Get_root(grp, ctx, lang);
+		Xocfg_edit_loader mgr = Xocfg_edit_loader.New(app);
+		return mgr.Load_root(grp, ctx, lang);
 	}
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {
 		Xopg_tag_mgr head_tags = page_data.Head_tags();

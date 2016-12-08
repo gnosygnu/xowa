@@ -15,18 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-public class Xonde_i18n_itm {
-	public Xonde_i18n_itm(int id, String lang, String name, String help) {
-		this.id = id;
-		this.lang = lang;
-		this.name = name;
-		this.help = help;
-	}
-	public int Id() {return id;} private final    int id;
-	public String Lang() {return lang;} private final    String lang;
-	public String Name() {return name;} private final    String name;
-	public String Help() {return help;} private final    String help;
-
-	public static final int Tid__grp = 1, Tid__itm = 2;
+package gplx.xowa.addons.apps.cfgs.enums; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
+public class Xoitm_lang_tid {
+	public static final    String Lang__dflt = "en";
 }

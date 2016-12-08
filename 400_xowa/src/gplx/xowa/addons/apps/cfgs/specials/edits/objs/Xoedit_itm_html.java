@@ -15,9 +15,9 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-import gplx.xowa.addons.apps.cfgs.dbs.*;
-public class Xogui_itm_html {
+package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
+import gplx.xowa.addons.apps.cfgs.enums.*;
+public class Xoedit_itm_html {
 	public void Build_html(Bry_bfr bfr, String key, String name, int gui_type, String gui_args, String data) {
 		switch (gui_type) {
 			case Xoitm_gui_tid.Tid__checkbox:

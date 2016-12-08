@@ -15,13 +15,13 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
+package gplx.xowa.addons.apps.cfgs.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.dbs.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
-public class Xogrp_meta_tbl implements Db_tbl {
+public class Xocfg_grp_tbl implements Db_tbl {
 	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld__grp_id, fld__grp_key;
 	private final    Db_conn conn;
-	public Xogrp_meta_tbl(Db_conn conn) {
+	public Xocfg_grp_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.fld__grp_id			= flds.Add_int_pkey("grp_id");
 		this.fld__grp_key			= flds.Add_str("grp_key", 255);
@@ -37,21 +37,21 @@ public class Xogrp_meta_tbl implements Db_tbl {
 		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__grp_id), grp_id, grp_key);
 	}
 	public int Select_id_by_key_or_fail(String key) {
-		Xogrp_meta_itm itm = this.Select_by_key_or_null(key);
+		Xocfg_grp_row itm = this.Select_by_key_or_null(key);
 		if (itm == null) throw Err_.new_wo_type("cfg.grp:invalid key", "key", key);
 		return itm.Id();
 	}
-	public Xogrp_meta_itm Select_by_key_or_null(String key) {
+	public Xocfg_grp_row Select_by_key_or_null(String key) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__grp_key).Crt_str(fld__grp_key, key).Exec_select__rls_auto();
 		try {return rdr.Move_next() ? Load(rdr): null;}
 		finally {rdr.Rls();}
 	}
-	private Xogrp_meta_itm Load(Db_rdr rdr) {
-		return new Xogrp_meta_itm
+	private Xocfg_grp_row Load(Db_rdr rdr) {
+		return new Xocfg_grp_row
 		( rdr.Read_int(fld__grp_id)
 		, rdr.Read_str(fld__grp_key)
 		);
 	}
 	public void Rls() {}
-	public static final String TBL_NAME = "cfg_grp_meta";
+	public static final String TBL_NAME = "cfg_grp";
 }

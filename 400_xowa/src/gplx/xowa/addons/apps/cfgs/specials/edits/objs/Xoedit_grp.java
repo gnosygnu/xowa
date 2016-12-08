@@ -15,11 +15,11 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
+package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 import gplx.langs.mustaches.*;
 import gplx.core.gfobjs.*;
-public class Xogui_grp implements Xogui_nde, Mustache_doc_itm {		
-	public Xogui_grp(int id, int sort, String key) {
+public class Xoedit_grp implements Xoedit_nde, Mustache_doc_itm {		
+	public Xoedit_grp(int id, int sort, String key) {
 		this.id = id;
 		this.sort = sort;
 		this.key = key;
@@ -33,16 +33,16 @@ public class Xogui_grp implements Xogui_nde, Mustache_doc_itm {
 	public String Name() {return name;} private String name;
 	public String Help() {return help;} private String help;
 
-	public Xogui_itm[] Itms() {return itms;} private Xogui_itm[] itms = new Xogui_itm[0];
+	public Xoedit_itm[] Itms() {return itms;} private Xoedit_itm[] itms = new Xoedit_itm[0];
 	public void Load_by_i18n(String lang, String name, String help) {
 		this.lang = lang;
 		this.name = name;
 		this.help = help;
 	}
 
-	public void Grps__add(Xogui_grp grp) {
+	public void Grps__add(Xoedit_grp grp) {
 	}
-	public void Itms_(Xogui_itm[] v) {
+	public void Itms_(Xoedit_itm[] v) {
 		this.itms = v;
 	}
 	public Gfobj_nde To_nde() {
@@ -56,7 +56,7 @@ public class Xogui_grp implements Xogui_nde, Mustache_doc_itm {
 		List_adp list = List_adp_.New();
 		int len = itms.length;
 		for (int i = 0; i < len; i++) {
-			Xogui_itm itm = itms[i];
+			Xoedit_itm itm = itms[i];
 			list.Add(itm.To_nde());
 		}
 		rv.Add_ary("itms", new Gfobj_ary((Gfobj_nde[])list.To_ary_and_clear(Gfobj_nde.class)));

@@ -15,14 +15,22 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-public class Xogrp_meta_itm {
-	public Xogrp_meta_itm(int id, String key) {
+package gplx.xowa.addons.apps.cfgs.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.dbs.*;
+public class Xocfg_itm_row {
+	public Xocfg_itm_row(int id, int scope_id, int db_type, int gui_type, String gui_args, String key, String dflt) {
 		this.id = id;
+		this.scope_id = scope_id;
+		this.db_type = db_type;
+		this.gui_type = gui_type;
+		this.gui_args = gui_args;
 		this.key = key;
+		this.dflt = dflt;
 	}
 	public int Id() {return id;} private final    int id;
+	public int Scope_id() {return scope_id;} private final    int scope_id;
+	public int Db_type() {return db_type;} private final    int db_type;
+	public int Gui_type() {return gui_type;} private final    int gui_type;
+	public String Gui_args() {return gui_args;} private final    String gui_args;
 	public String Key() {return key;} private final    String key;
-
-	public static final int Id__root = -1;
+	public String Dflt() {return dflt;} private final    String dflt;
 }

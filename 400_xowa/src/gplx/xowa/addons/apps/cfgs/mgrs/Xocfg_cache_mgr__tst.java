@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-import org.junit.*; import gplx.core.tests.*; import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.dbs.*;
+import org.junit.*; import gplx.core.tests.*; import gplx.dbs.*;
+import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.specials.maints.services.*;
 public class Xocfg_cache_mgr__tst {
 	private final    Xocfg_cache_mgr__fxt fxt = new Xocfg_cache_mgr__fxt();
 	@Before public void init() {fxt.Clear();}
@@ -26,14 +27,14 @@ public class Xocfg_cache_mgr__tst {
 		fxt.Test__get("en.d", "key_1", "dflt");
 	}
 	@Test   public void Get__app() {
-		String ctx = gplx.xowa.addons.apps.cfgs.gui.Xogui_itm.Ctx__app;
+		String ctx = gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_itm.Ctx__app;
 		fxt.Init__db_add(ctx, "key_1", "val_1");
 		fxt.Test__get(ctx, "key_1", "val_1");
 		fxt.Test__get("en.w", "key_1", "val_1");
 		fxt.Test__get("en.d", "key_1", "val_1");
 	}
 	@Test   public void Set__app() {
-		String ctx = gplx.xowa.addons.apps.cfgs.gui.Xogui_itm.Ctx__app;
+		String ctx = gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_itm.Ctx__app;
 		fxt.Init__db_add(ctx, "key_1", "123");
 		fxt.Init__sub(ctx, "key_1", "key_1");
 		fxt.Exec__set(ctx, "key_1", "234");
@@ -43,19 +44,16 @@ public class Xocfg_cache_mgr__tst {
 }
 class Xocfg_cache_mgr__fxt {
 	private Xocfg_cache_mgr mgr = new Xocfg_cache_mgr();
-	private Xocfg_itm_bldr cfg_bldr;
 	public void Clear() {
 		gplx.dbs.Db_conn_bldr.Instance.Reg_default_mem();
 		Db_conn conn = Db_conn_bldr.Instance.Get_or_autocreate(true, Io_url_.new_any_("mem/xowa/wiki/en.wikipedia.org/"));
-		mgr.Init_by_app(conn);
-		cfg_bldr = new Xocfg_itm_bldr(mgr.Db_mgr());
+		mgr.Init_by_app(conn, conn);
 	}
 	public Xocfg_cache_sub_mock Sub() {return sub;} private Xocfg_cache_sub_mock sub = new Xocfg_cache_sub_mock();
 	public void Init__db_add(String ctx, String key, Object val) {
-		cfg_bldr.Create_grp("", "test_grp", "", "");
-		int type_id = Type_adp_.To_tid_obj(val);
-		cfg_bldr.Create_itm("test_grp", key, "wiki", type_id, "textbox", "", "dflt", "", "");
-		mgr.Db_mgr().Set_str(ctx, key, Object_.Xto_str_strict_or_null(val));
+		Xocfg_maint_svc.Create_grp(mgr.Db_app(), "test_grp", "", "", "");
+		Xocfg_maint_svc.Create_itm(mgr.Db_app(), key, "test_grp", "", "", "wiki", "string", "dflt", "textbox", "");
+		mgr.Db_usr().Set_str(ctx, key, Object_.Xto_str_strict_or_null(val));
 	}
 	public void Init__sub(String ctx, String key, String evt) {
 		mgr.Sub(sub, ctx, key, evt);

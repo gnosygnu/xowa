@@ -15,15 +15,15 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
+package gplx.xowa.addons.apps.cfgs.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.dbs.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
-public class Xogrp_map_tbl implements Db_tbl {
+public class Xocfg_map_tbl implements Db_tbl {
 	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld__map_src, fld__map_trg, fld__map_sort;
 	private final    Db_conn conn;
-	public Xogrp_map_tbl(Db_conn conn) {
+	public Xocfg_map_tbl(Db_conn conn) {
 		this.conn = conn;
-		this.tbl_name				= "cfg_grp_map";
+		this.tbl_name				= "cfg_map";
 		this.fld__map_src			= flds.Add_int("map_src");
 		this.fld__map_trg			= flds.Add_int("map_trg");
 		this.fld__map_sort			= flds.Add_int("map_sort");

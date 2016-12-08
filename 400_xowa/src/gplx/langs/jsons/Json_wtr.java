@@ -262,8 +262,13 @@ public class Json_wtr {
 			switch (b) {
 				case Byte_ascii.Backslash:	bfr.Add_byte_repeat(Byte_ascii.Backslash, backslash_count).Add_byte(b); break; // "\"	-> "\\"; needed else js will usurp \ as escape; EX: "\&" -> "&"; DATE:2014-06-24
 				case Byte_ascii.Quote:		bfr.Add_byte_repeat(Byte_ascii.Backslash, backslash_count).Add_byte(b); break;
+				case Byte_ascii.Apos: // // "'" -> "'''"; needed else xocfg fails; DATE:2016-12-07
+					if (opt_backslash_2x)
+						bfr.Add_byte_repeat(Byte_ascii.Backslash, 1).Add_byte(b);
+					else
+						bfr.Add_byte(b);
+					break;
 				case Byte_ascii.Nl:			bfr.Add_byte_repeat(Byte_ascii.Backslash, 2).Add_byte(Byte_ascii.Ltr_n); break;	// "\n" -> "\\n"
-				case Byte_ascii.Apos:		bfr.Add_byte(b); break;
 				case Byte_ascii.Cr:			break;// skip
 				default:					bfr.Add_byte(b); break;
 			}
