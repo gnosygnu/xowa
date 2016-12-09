@@ -20,7 +20,6 @@ import gplx.langs.gfs.*;
 class Xocfg_maint_parser {
 	public Xocfg_maint_nde[] Parse(String raw) {
 		GfoMsg root = Gfs_msg_bldr.Instance.ParseToMsg(raw);
-		root = root.Subs_getAt(0);	// NOTE: ignore fake root
 
 		int len = root.Subs_count();
 		Xocfg_maint_nde[] rv = new Xocfg_maint_nde[len];

@@ -77,6 +77,7 @@ class Gfs_parser_ {
 		trie_add_quote(rv, new byte[] {Byte_ascii.Quote});
 		trie_add_quote(rv, Bry_.new_a7("<:[\"\n"), Bry_.new_a7("\n\"]:>"));
 		trie_add_quote(rv, Bry_.new_a7("<:['\n"), Bry_.new_a7("\n']:>"));
+		trie_add_quote(rv, Bry_.new_a7("<:{'"), Bry_.new_a7("'}:>"));
 		trie_add_comment(rv, new byte[] {Byte_ascii.Slash, Byte_ascii.Slash}, new byte[] {Byte_ascii.Nl});
 		trie_add_comment(rv, new byte[] {Byte_ascii.Slash, Byte_ascii.Star}, new byte[] {Byte_ascii.Star, Byte_ascii.Slash});
 		rv.Add(Byte_ascii.Semic, Gfs_lxr_semic.Instance);

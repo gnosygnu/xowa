@@ -31,6 +31,7 @@ public class Xoh_hdr_html {
 
 		// register hdr with TOC
 		byte[] hdr_text_bry = Bld_hdr_html(hdr_text_bfr, wtr, page, ctx, hctx, src, hdr);
+		hdr_text_bry = wiki.Parser_mgr().Uniq_mgr().Convert(hdr_text_bry);	// need for math; DATE:2016-12-09
 		Xoh_toc_itm toc_itm = hdr_is_valid && hdr_text_bry.length > 0
 			? page.Html_data().Toc_mgr().Add(hdr_num, hdr_text_bry)
 			: invalid_toc_itm;

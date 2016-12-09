@@ -20,12 +20,12 @@ import org.junit.*; import gplx.core.tests.*;
 public class Xocfg_maint_parser__tst {
 	private final    Xocfg_maint_parser__fxt fxt = new Xocfg_maint_parser__fxt();
 	@Test   public void Parse_grp() {
-		fxt.Exec__parse("root {grp {key='key_1'; owner='owner_1'; name='name_1'; help='help_1'}}"
+		fxt.Exec__parse("grp {key='key_1'; owner='owner_1'; name='name_1'; help='help_1'}"
 		, fxt.Make__grp("key_1", "owner_1", "name_1", "help_1")
 		);
 	}
 	@Test   public void Parse_itm() {
-		fxt.Exec__parse("root {itm {key='key_1'; owner='owner_1'; name='name_1'; help='help_1'; scope='scope_1'; db_type='db_type_1'; dflt='dflt_1'; gui_type='gui_type_1'; gui_args='gui_args_1'}}"
+		fxt.Exec__parse("itm {key='key_1'; owner='owner_1'; name='name_1'; help='help_1'; scope='scope_1'; db_type='db_type_1'; dflt='dflt_1'; gui_type='gui_type_1'; gui_args='gui_args_1'}"
 		, fxt.Make__itm("key_1", "owner_1", "name_1", "help_1", "scope_1", "db_type_1", "dflt_1", "gui_type_1", "gui_args_1")
 		);
 	}

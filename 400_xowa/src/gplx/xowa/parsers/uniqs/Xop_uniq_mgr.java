@@ -31,6 +31,35 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 		return key;
 	}
 	public byte[] Get(byte[] key) {return (byte[])general_trie.Match_exact(key, 0, key.length);}
+	public byte[] Convert(byte[] src) {
+		if (general_trie.Count() == 0) return src;
+
+		Bry_bfr dirty_bfr = null;
+		int cur = 0;
+		int len = src.length;
+		while (cur < len) {
+			// look for \u007fUNIQ
+			int uniq_bgn = Bry_find_.Find_fwd(src, Bry__uniq__add__bgn, cur);
+			if (uniq_bgn == Bry_find_.Not_found) break;
+			int uniq_end = Bry_find_.Find_fwd(src, Bry__uniq__add__end, uniq_bgn);
+			if (uniq_end == Bry_find_.Not_found) {
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "uniq_mgr:unable to convert uniq; src=~{0}", src);
+				return src;
+			}
+			uniq_end += Bry__uniq__add__end.length;
+
+			// add to bfr
+			if (dirty_bfr == null) dirty_bfr = key_bfr;
+			dirty_bfr.Add_mid(src, 0, uniq_bgn);
+			dirty_bfr.Add((byte[])general_trie.Match_exact(src, uniq_bgn, uniq_end));
+			cur = uniq_end;
+		}
+
+		if (dirty_bfr != null) {
+			dirty_bfr.Add_mid(src, cur, len);
+		}
+		return dirty_bfr == null ? src : dirty_bfr.To_bry_and_clear();
+	}
 	public void Parse(Bry_bfr bfr) {
 		if (general_trie.Count() == 0) return;
 		byte[] rv = Parse(key_bfr, general_trie, bfr.To_bry_and_clear());

@@ -17,18 +17,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*;
 import gplx.langs.htmls.*;
-import gplx.xowa.parsers.mws.*; import gplx.xowa.parsers.mws.wkrs.*; import gplx.xowa.parsers.hdrs.*;
+import gplx.xowa.parsers.mws.*; import gplx.xowa.parsers.mws.wkrs.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.htmls.core.htmls.tidy.*;
 public class Xop_section_mgr implements Gfo_invk {
-	public boolean Enabled() {return enabled;} private boolean enabled;
+	private Xoae_app app; private Xowe_wiki wiki;
+	private Xow_tidy_mgr_interface tidy_mgr;
 	private final    Bry_fmt section_editable_fmt = Bry_fmt.Auto_nl_apos
 	( "<span class='mw-editsection'><span class='mw-editsection-bracket'>[</span><a href='/wiki/~{page_ttl}?action=edit&section_key=~{section_key}' title='Edit section: ~{section_name}' class='xowa-hover-off'>edit</a><span class='mw-editsection-bracket'>]</span></span>"
 	);
-	private static final    byte[] Qarg__section_key = Bry_.new_u8("section_key");
 
+	public boolean Enabled() {return enabled;} private boolean enabled;
 	public void Init_by_wiki(Xowe_wiki wiki) {
-		enabled = wiki.App().Cfg().Bind_bool(wiki, gplx.xowa.htmls.core.wkrs.hdrs.Xoh_section_editable_.Cfg__section_editing__enabled, this);	// SECTION_EDIT
+		this.app = wiki.Appe();
+		this.wiki = wiki;
+		this.enabled = wiki.App().Cfg().Bind_bool(wiki, gplx.xowa.htmls.core.wkrs.hdrs.Xoh_section_editable_.Cfg__section_editing__enabled, this);	// SECTION_EDIT
+		this.tidy_mgr = wiki.Html_mgr().Tidy_mgr();
 	}
-	public byte[] Extract_section(Xoae_app app, Xoa_url url, Xoa_ttl ttl, byte[] src) {
+	public byte[] Slice_section(Xoa_url url, Xoa_ttl ttl, byte[] src) {
 		// return orig if section_editing not enabled
 		if (!enabled) return src;
 
@@ -37,8 +41,8 @@ public class Xop_section_mgr implements Gfo_invk {
 		if (section_key == null) return src;
 
 		// parse wikitext into list of headers
-		Xop_section_list section_list = new Xop_section_list().Parse(src);
-		byte[] rv = section_list.Extract_bry_or_null(section_key);
+		Xop_section_list section_list = new Xop_section_list().Parse(wiki, tidy_mgr, src);
+		byte[] rv = section_list.Slice_bry_or_null(section_key);
 		if (rv == null) {
 			app.Gui_mgr().Kit().Ask_ok("", "", String_.Format("Section extraction failed!\nPlease do not edit this page else data will be lost!!\n\nwiki={0}\npage={1}\nsection={2}", url.Wiki_bry(), ttl.Full_db(), section_key));
 			throw Err_.new_wo_type("section_key not found", "wiki", url.Wiki_bry(), "page", ttl.Full_db(), "section_key", section_key);
@@ -54,23 +58,15 @@ public class Xop_section_mgr implements Gfo_invk {
 		if (section_key == null) return edit;
 
 		// parse orig
-		Xop_section_list section_list = new Xop_section_list().Parse(orig);
+		Xop_section_list section_list = new Xop_section_list().Parse(wiki, tidy_mgr, orig);
 		byte[] rv = section_list.Merge_bry_or_null(section_key, edit);
 		if (rv == null)
 			throw Err_.new_wo_type("could not merge section_key", "page", url.To_str(), "section_key", section_key);
 		return rv;
 	}
 	public void Write_html(Bry_bfr bfr, byte[] src, byte[] page_ttl, Xop_hdr_tkn hdr, byte[] name) {
-		// make key by (a) taking 1st and nth sub; (b) skipping ws at both ends
-		Xop_tkn_itm[] subs = hdr.Subs();
-		if (subs.length == 0) return;	// GUARD:should not happen, but avoid array-index error
-		int key_bgn = subs[0].Src_bgn();
-		int key_end = subs[hdr.Subs_len() - 1].Src_end();
-		key_bgn = Bry_find_.Find_fwd_while_ws(src, key_bgn, key_end);
-		key_end = Bry_find_.Find_bwd__skip_ws(src, key_end, key_bgn);
-		byte[] key = Bry_.Mid(src, key_bgn, key_end);
-
-		section_editable_fmt.Bld_many(bfr, page_ttl, key, name);
+		name = wiki.Parser_mgr().Uniq_mgr().Convert(name);	// need to swap out uniqs for Math; DATE:2016-12-09
+		section_editable_fmt.Bld_many(bfr, page_ttl, name, name);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, gplx.xowa.htmls.core.wkrs.hdrs.Xoh_section_editable_.Cfg__section_editing__enabled)) enabled = m.ReadBool("v");
@@ -80,4 +76,5 @@ public class Xop_section_mgr implements Gfo_invk {
 
 	public static final    byte[] Bry__meta = Bry_.new_a7("<!--xo_meta|section_edit|");
 	public static final    int Len__meta = Bry__meta.length;
+	private static final    byte[] Qarg__section_key = Bry_.new_u8("section_key");
 }

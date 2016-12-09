@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_hdr_html_tst {
-	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
+	private final    Xoh_make_fxt fxt = new Xoh_make_fxt();
 	@Test   public void Basic() {
 		fxt.Test__html(String_.Concat_lines_nl_skip_last
 		( "z"
@@ -34,6 +34,16 @@ public class Xoh_hdr_html_tst {
 		, ""
 		, "<h2><span class='mw-headline' id='B'>B</span></h2>"
 		, "b"
+		));
+	}
+	@Test   public void Uniq() {
+		byte[] uniq = fxt.Parser_fxt().Wiki().Parser_mgr().Uniq_mgr().Add(Bry_.new_a7("bcd"));
+		fxt.Test__html(String_.Concat_lines_nl_skip_last
+		( "== a" + String_.new_u8(uniq) + "e =="
+		, "text"
+		), String_.Concat_lines_nl_skip_last
+		( "<h2><span class='mw-headline' id='abcde'> abcde </span></h2>"
+		, "text"
 		));
 	}
 }

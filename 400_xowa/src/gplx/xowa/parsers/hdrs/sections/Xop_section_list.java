@@ -17,19 +17,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*;
 import gplx.xowa.parsers.mws.*; import gplx.xowa.parsers.mws.wkrs.*;
+import gplx.xowa.addons.htmls.tocs.*; import gplx.xowa.htmls.core.htmls.tidy.*;
 class Xop_section_list implements Xomw_hdr_cbk {
 	private final    Xomw_hdr_wkr hdr_wkr = new Xomw_hdr_wkr();
 	private final    Ordered_hash hash = Ordered_hash_.New_bry();
+	private final    Xoh_toc_mgr toc_mgr = new Xoh_toc_mgr();
 	private byte[] src;
+	private Xowe_wiki wiki;
 
-	public Xop_section_list Parse(byte[] src) {
+	public Xop_section_list Parse(Xowe_wiki wiki, Xow_tidy_mgr_interface tidy_mgr, byte[] src) {
+		// clear
+		this.wiki = wiki;
 		this.src = src;
 		hash.Clear();
+		toc_mgr.Clear();
+		toc_mgr.Init(tidy_mgr, Bry_.Empty, Bry_.Empty);
+
+		// parse
 		Xomw_parser_ctx pctx = new Xomw_parser_ctx();
 		hdr_wkr.Parse(pctx, src, 0, src.length, this);
 		return this;
 	}
-	public byte[] Extract_bry_or_null(byte[] key) {
+	public byte[] Slice_bry_or_null(byte[] key) {
 		// find section matching key
 		Xop_section_itm itm = (Xop_section_itm)hash.Get_by(key);
 		if (itm == null) return null;
@@ -60,23 +69,41 @@ class Xop_section_list implements Xomw_hdr_cbk {
 		return src_bgn;
 	}
 	private int Get_src_end(Xop_section_itm itm) {
-		int src_end = src.length;
-		if (itm.Idx() != hash.Len() - 1) {	// if not last, get next
-			Xop_section_itm nxt = (Xop_section_itm)hash.Get_at(itm.Idx() + 1);
+		int src_end = -1;	// default to last
+		int hash_len = hash.Len();
+		for (int i = itm.Idx() + 1; i < hash_len; i++) {
+			Xop_section_itm nxt = (Xop_section_itm)hash.Get_at(i);
+			if (nxt.Num() > itm.Num()) continue;	// skip headers that are at lower level; EX: == H2 == should skip === H3 ===
 			src_end = nxt.Src_bgn();
+			break;
 		}
+		if (src_end == -1) src_end = src.length;	// no headers found; default to EOS
 		src_end = Bry_find_.Find_bwd__skip_ws(src, src_end, itm.Src_bgn());
 		return src_end;
 	}
 	public void On_hdr_seen(Xomw_parser_ctx pctx, Xomw_hdr_wkr wkr) {
+		// get key by taking everything between ==; EX: "== abc ==" -> " abc "
 		byte[] src = wkr.Src();
 		int hdr_txt_bgn = wkr.Hdr_lhs_end();
 		int hdr_txt_end = wkr.Hdr_rhs_bgn();
+
+		// trim ws
 		hdr_txt_bgn = Bry_find_.Find_fwd_while_ws(src, hdr_txt_bgn, hdr_txt_end);
 		hdr_txt_end = Bry_find_.Find_bwd__skip_ws(src, hdr_txt_end, hdr_txt_bgn);
+		byte[] key = Bry_.Mid(wkr.Src(), hdr_txt_bgn, hdr_txt_end);
 
-		byte[] key = Bry_.Mid(wkr.Src(), hdr_txt_bgn, hdr_txt_end);			
-		Xop_section_itm itm = new Xop_section_itm(hash.Count(), key, wkr.Hdr_bgn(), wkr.Hdr_end());
+		// handle nested templates; EX: "== {{A}} ==" note that calling Parse_text_to_html is expensive (called per header) but should be as long as its not nested
+		key = wiki.Parser_mgr().Main().Parse_text_to_html(wiki.Parser_mgr().Ctx(), key);
+
+		// handle math; EX: "== <math>\delta</math> =="
+		key = wiki.Parser_mgr().Uniq_mgr().Convert(key);
+
+		// convert key to toc_text to handle (a) XML ("<i>a</i>" -> "a"); (b) dupes ("text" -> "text_2")
+		int num = wkr.Hdr_num();
+		Xoh_toc_itm toc_itm = toc_mgr.Add(num, key);
+		key = toc_itm.Anch();
+
+		Xop_section_itm itm = new Xop_section_itm(hash.Count(), num, key, wkr.Hdr_bgn(), wkr.Hdr_end());
 		hash.Add(key, itm);
 	}
 	public void On_src_done(Xomw_parser_ctx pctx, Xomw_hdr_wkr wkr) {}

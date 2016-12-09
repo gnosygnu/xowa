@@ -30,7 +30,7 @@ public class Xop_section_list__merge__tst {
 		, "== Hdr 3 =="
 		, "Para 3"
 		);
-		fxt.Test__merge_bry_or_null("Hdr 2", String_.Concat_lines_nl_skip_last
+		fxt.Test__merge_bry_or_null("Hdr_2", String_.Concat_lines_nl_skip_last
 		( "== Hdr 2 =="
 		, "Para 2a"
 		), String_.Concat_lines_nl_skip_last
@@ -60,7 +60,7 @@ public class Xop_section_list__merge__tst {
 		, "== Hdr 3 =="
 		, "Para 3"
 		);
-		fxt.Test__merge_bry_or_null("Hdr 2", String_.Concat_lines_nl_skip_last
+		fxt.Test__merge_bry_or_null("Hdr_2", String_.Concat_lines_nl_skip_last
 		( "== Hdr 2 =="
 		, "Para 2a"
 		), String_.Concat_lines_nl_skip_last
@@ -87,7 +87,7 @@ public class Xop_section_list__merge__tst {
 		, "== Hdr 2 =="
 		, "Para 2"
 		);
-		fxt.Test__merge_bry_or_null("Hdr 1", String_.Concat_lines_nl_skip_last
+		fxt.Test__merge_bry_or_null("Hdr_1", String_.Concat_lines_nl_skip_last
 		( "== Hdr 1 =="
 		, "Para 1a"
 		), String_.Concat_lines_nl_skip_last
@@ -108,7 +108,7 @@ public class Xop_section_list__merge__tst {
 		, "== Hdr 2 =="
 		, "Para 2"
 		);
-		fxt.Test__merge_bry_or_null("Hdr 1", String_.Concat_lines_nl_skip_last
+		fxt.Test__merge_bry_or_null("Hdr_1", String_.Concat_lines_nl_skip_last
 		( "== Hdr 1 =="
 		, "Para 1a"
 		), String_.Concat_lines_nl_skip_last
@@ -129,7 +129,7 @@ public class Xop_section_list__merge__tst {
 		, "== Hdr 2 =="
 		, "Para 2"
 		);
-		fxt.Test__merge_bry_or_null("Hdr 2", String_.Concat_lines_nl_skip_last
+		fxt.Test__merge_bry_or_null("Hdr_2", String_.Concat_lines_nl_skip_last
 		( "== Hdr 2 =="
 		, "Para 2a"
 		), String_.Concat_lines_nl_skip_last
