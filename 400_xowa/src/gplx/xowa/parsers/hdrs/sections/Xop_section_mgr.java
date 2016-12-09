@@ -21,10 +21,13 @@ import gplx.xowa.parsers.mws.*; import gplx.xowa.parsers.mws.wkrs.*; import gplx
 public class Xop_section_mgr implements Gfo_invk {
 	private Xoae_app app; private Xowe_wiki wiki;
 	private Xow_tidy_mgr_interface tidy_mgr;
-	private final    Bry_fmt section_editable_fmt = Bry_fmt.Auto_nl_apos
-	( "<span class='mw-editsection'><span class='mw-editsection-bracket'>[</span><a href='/wiki/~{page_ttl}?action=edit&section_key=~{section_key}' title='Edit section: ~{section_name}' class='xowa-hover-off'>edit</a><span class='mw-editsection-bracket'>]</span></span>"
-	);
-
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private byte[] bry__edit_text;
+	private final    Bry_fmt fmt__edit_hint = Bry_fmt.New("")
+	, fmt__section_editable = Bry_fmt.Auto_nl_apos
+	( "<span class='mw-editsection'><span class='mw-editsection-bracket'>[</span><a href='/wiki/~{page_ttl}?action=edit&section_key=~{section_key}' title='~{edit_hint}' class='xowa-hover-off'>~{edit_text}</a><span class='mw-editsection-bracket'>]</span></span>"
+	)
+	;
 	public boolean Enabled() {return enabled;} private boolean enabled;
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		this.app = wiki.Appe();
@@ -64,9 +67,15 @@ public class Xop_section_mgr implements Gfo_invk {
 			throw Err_.new_wo_type("could not merge section_key", "page", url.To_str(), "section_key", section_key);
 		return rv;
 	}
-	public void Write_html(Bry_bfr bfr, byte[] src, byte[] page_ttl, Xop_hdr_tkn hdr, byte[] name) {
-		name = wiki.Parser_mgr().Uniq_mgr().Convert(name);	// need to swap out uniqs for Math; DATE:2016-12-09
-		section_editable_fmt.Bld_many(bfr, page_ttl, name, name);
+	public void Write_html(Bry_bfr bfr, byte[] src, byte[] page_ttl, Xop_hdr_tkn hdr, byte[] toc_text) {
+		if (bry__edit_text == null) {	// LAZY: cannot call in Init_by_wiki b/c of circularity; section_mgr is init'd by parser_mgr which is init'd before msg_mgr which is used below
+			this.bry__edit_text = wiki.Msg_mgr().Val_by_key_obj("editlink");
+			this.fmt__edit_hint.Fmt_(String_.new_u8(wiki.Msg_mgr().Val_by_key_obj("editsectionhint")));
+		}
+
+		toc_text = wiki.Parser_mgr().Uniq_mgr().Convert(toc_text);	// need to swap out uniqs for Math; DATE:2016-12-09
+		byte[] edit_hint = fmt__edit_hint.Bld_many_to_bry(tmp_bfr, toc_text);
+		fmt__section_editable.Bld_many(bfr, page_ttl, toc_text, edit_hint, bry__edit_text);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, gplx.xowa.htmls.core.wkrs.hdrs.Xoh_section_editable_.Cfg__section_editing__enabled)) enabled = m.ReadBool("v");
