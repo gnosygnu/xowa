@@ -24,6 +24,7 @@ class Xop_section_list implements Xomw_hdr_cbk {
 
 	public Xop_section_list Parse(byte[] src) {
 		this.src = src;
+		hash.Clear();
 		Xomw_parser_ctx pctx = new Xomw_parser_ctx();
 		hdr_wkr.Parse(pctx, src, 0, src.length, this);
 		return this;

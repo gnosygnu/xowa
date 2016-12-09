@@ -226,7 +226,7 @@ public class Xoh_page_wtr_wkr {
 			data_raw = Gfs_php_converter.Xto_php(tmp_bfr, Bool_.N, data_raw);
 		int data_raw_len = data_raw.length;
 		if (mgr.Html_capable()) {
-			data_raw = wiki.Parser_mgr().Hdr__section_editable__mgr().Extract_section(page.Url(), page.Ttl(), data_raw);
+			data_raw = wiki.Parser_mgr().Hdr__section_editable__mgr().Extract_section(app, page.Url(), page.Ttl(), data_raw);
 			data_raw_len = data_raw.length;
 			Xoh_html_wtr_escaper.Escape(page.Wikie().Appe().Parser_amp_mgr(), bfr, data_raw, 0, data_raw_len, false, false);	// NOTE: must escape; assume that browser will automatically escape (&lt;) (which Mozilla does)
 		}

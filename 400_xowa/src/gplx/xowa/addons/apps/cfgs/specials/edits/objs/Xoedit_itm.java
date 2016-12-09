@@ -69,7 +69,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		Gfobj_nde rv = Gfobj_nde.New();
 		rv.Add_int("id", id);
 		rv.Add_str("key", key);
-		rv.Add_str("dflt", lang);
+		rv.Add_str("dflt", dflt);
 		rv.Add_str("lang", lang);
 		rv.Add_str("name", name);
 		rv.Add_str("help", help);
@@ -88,7 +88,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		if		(String_.Eq(k, "id"))		bfr.Add_int(id);
 		else if	(String_.Eq(k, "key"))		bfr.Add_str_u8(key);
 		else if	(String_.Eq(k, "dflt"))		bfr.Add_str_u8(dflt);
-		else if	(String_.Eq(k, "lang"))		bfr.Add_str_u8(name);
+		else if	(String_.Eq(k, "lang"))		bfr.Add_str_u8(lang);
 		else if	(String_.Eq(k, "name"))		bfr.Add_str_u8(name);
 		else if	(String_.Eq(k, "help"))		bfr.Add_str_u8(help);
 		else if	(String_.Eq(k, "ctx"))		bfr.Add_str_u8(ctx);

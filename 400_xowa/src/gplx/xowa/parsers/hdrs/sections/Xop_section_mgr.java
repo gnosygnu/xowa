@@ -28,7 +28,7 @@ public class Xop_section_mgr implements Gfo_invk {
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		enabled = wiki.App().Cfg().Bind_bool(wiki, gplx.xowa.htmls.core.wkrs.hdrs.Xoh_section_editable_.Cfg__section_editing__enabled, this);	// SECTION_EDIT
 	}
-	public byte[] Extract_section(Xoa_url url, Xoa_ttl ttl, byte[] src) {
+	public byte[] Extract_section(Xoae_app app, Xoa_url url, Xoa_ttl ttl, byte[] src) {
 		// return orig if section_editing not enabled
 		if (!enabled) return src;
 
@@ -39,8 +39,10 @@ public class Xop_section_mgr implements Gfo_invk {
 		// parse wikitext into list of headers
 		Xop_section_list section_list = new Xop_section_list().Parse(src);
 		byte[] rv = section_list.Extract_bry_or_null(section_key);
-		if (rv == null)
-			throw Err_.new_wo_type("section_key not found", "page", ttl.Full_db(), "section_key", section_key);
+		if (rv == null) {
+			app.Gui_mgr().Kit().Ask_ok("", "", String_.Format("Section extraction failed!\nPlease do not edit this page else data will be lost!!\n\nwiki={0}\npage={1}\nsection={2}", url.Wiki_bry(), ttl.Full_db(), section_key));
+			throw Err_.new_wo_type("section_key not found", "wiki", url.Wiki_bry(), "page", ttl.Full_db(), "section_key", section_key);
+		}
 		return rv;
 	}
 	public byte[] Merge_section(Xoa_url url, byte[] edit, byte[] orig) {
