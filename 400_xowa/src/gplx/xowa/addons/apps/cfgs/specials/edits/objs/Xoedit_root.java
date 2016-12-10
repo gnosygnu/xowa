@@ -19,10 +19,10 @@ package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gp
 import gplx.langs.mustaches.*;
 import gplx.core.gfobjs.*;
 public class Xoedit_root implements Mustache_doc_itm {
-	private final    Xoedit_nav_mgr[] nav_mgrs;
+	private final    Xoedit_nav_mgr nav_mgr;
 	private final    Xoedit_grp[] grps;
 	public Xoedit_root(Xoedit_nav_mgr nav_mgr, Xoedit_grp[] grps) {
-		this.nav_mgrs = nav_mgr.Itms().length == 0 ? new Xoedit_nav_mgr[0] : new Xoedit_nav_mgr[] {nav_mgr};
+		this.nav_mgr = nav_mgr;
 		this.grps = grps;
 	}
 	public Gfobj_nde To_nde() {
@@ -41,7 +41,8 @@ public class Xoedit_root implements Mustache_doc_itm {
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
 		if		(String_.Eq(key, "grps"))		return grps;
-		else if	(String_.Eq(key, "nav"))		return nav_mgrs;
+		else if	(String_.Eq(key, "nav_exists"))	return Mustache_doc_itm_.Ary__bool(nav_mgr.Itms().length > 0);
+		else if	(String_.Eq(key, "itms"))		return nav_mgr.Itms();
 		return Mustache_doc_itm_.Ary__empty;
 	}
 }
