@@ -19,7 +19,7 @@ package gplx.xowa.addons.apps.cfgs.dbs.tbls; import gplx.*; import gplx.xowa.*; 
 import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xocfg_itm_tbl implements Db_tbl {
 	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld__itm_id, fld__itm_key, fld__itm_scope_id, fld__itm_db_type, fld__itm_gui_type, fld__itm_gui_args, fld__itm_dflt;
+	private final    String fld__itm_id, fld__itm_key, fld__itm_scope_id, fld__itm_data_type, fld__itm_gui_type, fld__itm_gui_args, fld__itm_dflt;
 	private final    Db_conn conn;
 	public Xocfg_itm_tbl(Db_conn conn) {
 		this.conn = conn;
@@ -27,7 +27,7 @@ public class Xocfg_itm_tbl implements Db_tbl {
 		this.fld__itm_id			= flds.Add_int_pkey("itm_id");				// EX: '2'
 		this.fld__itm_key			= flds.Add_str("itm_key", 255);				// EX: 'cfg_1'
 		this.fld__itm_scope_id		= flds.Add_int("itm_scope_id");				// EX: '1'; ENUM: Xoitm_scope_tid
-		this.fld__itm_db_type		= flds.Add_int("itm_db_type");				// EX: '1'; ENUM: Type_adp_
+		this.fld__itm_data_type		= flds.Add_str("itm_data_type", 255);		// EX: '1'; ENUM: Type_adp_
 		this.fld__itm_gui_type		= flds.Add_int("itm_gui_type");				// EX: '1'; ENUM: Xoitm_gui_tid
 		this.fld__itm_gui_args		= flds.Add_str("itm_gui_args", 255);		// EX: '1,40' (numeric); '255' (textbox); 'enum_name' (combo); etc..
 		this.fld__itm_dflt			= flds.Add_str("itm_dflt", 4096);			// EX: 'abc'
@@ -38,7 +38,7 @@ public class Xocfg_itm_tbl implements Db_tbl {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
 		, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, fld__itm_key, fld__itm_key)));
 	}
-	public void Upsert(int itm_id, int scope_id, int db_type, int gui_type, String gui_args, String itm_key, String itm_dflt) {
+	public void Upsert(int itm_id, int scope_id, String db_type, int gui_type, String gui_args, String itm_key, String itm_dflt) {
 		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__itm_id), itm_id, itm_key, scope_id, db_type, gui_type, gui_args, itm_dflt);
 	}
 	public Xocfg_itm_row Select_by_key_or_null(String key) {
@@ -50,7 +50,7 @@ public class Xocfg_itm_tbl implements Db_tbl {
 		return new Xocfg_itm_row
 		( rdr.Read_int(fld__itm_id)
 		, rdr.Read_int(fld__itm_scope_id)
-		, rdr.Read_int(fld__itm_db_type)
+		, rdr.Read_str(fld__itm_data_type)
 		, rdr.Read_int(fld__itm_gui_type)
 		, rdr.Read_str(fld__itm_gui_args)
 		, rdr.Read_str(fld__itm_key)

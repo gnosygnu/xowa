@@ -18,34 +18,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 import gplx.langs.mustaches.*;
 import gplx.core.gfobjs.*; import gplx.langs.jsons.*;
+import gplx.xowa.addons.apps.cfgs.types.*;
 public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
-	public Xoedit_itm(int id, int sort, String key) {
+	private int gui_type;
+	private boolean edited;
+	private String data_type, gui_args, dflt, lang, name, help, ctx, val, date;
+	private Xocfg_type_mgr type_mgr;
+	public Xoedit_itm(Xocfg_type_mgr type_mgr, int id, String key, int sort) {
+		this.type_mgr = type_mgr;
 		this.id = id;
-		this.sort = sort;
 		this.key = key;
+		this.sort = sort;
 	}
-	public int Id() {return id;} private final    int id;
-	public int Sort() {return sort;} private final    int sort;
-
-	public int Scope_id() {return scope_id;} private int scope_id;
-	public int Gui_type() {return gui_type;} private int gui_type;
-	public String Gui_args() {return gui_args;} private String gui_args;
-	public String Key() {return key;} private String key;
-	public String Dflt() {return dflt;} private String dflt;
-	public boolean Edited() {return edited;} private boolean edited;
-
-	public String Lang() {return lang;} private String lang;
-	public String Name() {return name;} private String name;
-	public String Help() {return help;} private String help;
-
-	public String Ctx() {return ctx;} private String ctx;
-	public String Val() {return val;} private String val;
-	public String Date() {return date;} private String date;
-	public void Load_by_meta(String key, int scope_id, int gui_type, String gui_args, String dflt) {
-		this.scope_id = scope_id;
+	public int		Id()		{return id;}	private final    int id;
+	public String	Key()		{return key;}	private final    String key;
+	public int		Sort()		{return sort;}	private final    int sort;
+	public void Load_by_meta(int scope_id, String data_type, int gui_type, String gui_args, String dflt) {
+		this.data_type = data_type;
 		this.gui_type = gui_type;
 		this.gui_args = gui_args;
-		this.key = key;
 		this.dflt = dflt;
 	}
 	public void Load_by_i18n(String lang, String name, String help) {
@@ -77,12 +68,12 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		rv.Add_str("val", val);
 		rv.Add_str("date", date);
 		Bry_bfr bfr = Bry_bfr_.New();
-		To_html(bfr);
+		To_html(bfr, type_mgr);
 		rv.Add_str("html", bfr.To_str_and_clear());
 		return rv;
 	}
-	private void To_html(Bry_bfr bfr) {
-		new Xoedit_itm_html().Build_html(bfr, key, name, gui_type, gui_args, val);
+	private void To_html(Bry_bfr bfr, Xocfg_type_mgr type_mgr) {
+		new Xoedit_itm_html().Build_html(bfr, type_mgr, key, name, data_type, gui_type, gui_args, val);
 	}
 	public boolean Mustache__write(String k, Mustache_bfr bfr) {
 		if		(String_.Eq(k, "id"))		bfr.Add_int(id);
@@ -94,7 +85,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		else if	(String_.Eq(k, "ctx"))		bfr.Add_str_u8(ctx);
 		else if	(String_.Eq(k, "val"))		bfr.Add_str_u8(val);
 		else if	(String_.Eq(k, "date"))		bfr.Add_str_u8(date);
-		else if	(String_.Eq(k, "html"))		To_html(bfr.Bfr());
+		else if	(String_.Eq(k, "html"))		To_html(bfr.Bfr(), type_mgr);
 		return true;
 	}
 	public static String Ctx__app = "app";

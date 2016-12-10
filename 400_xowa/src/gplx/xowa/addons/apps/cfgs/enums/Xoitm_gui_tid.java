@@ -47,6 +47,8 @@ public class Xoitm_gui_tid {	// SERIALIZED
 			return Xoitm_gui_tid.Str__checkbox;
 		else if (String_.Eq(db_type, "memo"))
 			return Xoitm_gui_tid.Str__memo;
+		else if (String_.Has_at_bgn(db_type, "list:"))
+			return Xoitm_gui_tid.Str__select;
 		else
 			return Xoitm_gui_tid.Str__textbox;
 	}

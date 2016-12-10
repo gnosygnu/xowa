@@ -17,8 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
 import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
+import gplx.xowa.addons.apps.cfgs.types.*;
 public class Xocfg_mgr {
 	private final    Xocfg_cache_mgr cache_mgr = new Xocfg_cache_mgr();
+	public Xocfg_type_mgr Type_mgr() {return type_mgr;} private final    Xocfg_type_mgr type_mgr = new Xocfg_type_mgr();
 	public void Init_by_app(Xoa_app app) {
 		cache_mgr.Init_by_app	// SECTION_EDIT
 		( gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_app.New_conn(app)

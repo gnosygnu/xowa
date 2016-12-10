@@ -43,7 +43,7 @@ class Xocfg_maint_parser {
 			return new Xocfg_maint_grp(key, owner, name, help);
 		}
 		else if (String_.Eq(nde_type, "itm")) {
-			String scope		= Get_atr_as_str_or_fail(hash, "scope_");
+			String scope		= Get_atr_as_str_or(hash, "scope_", ""); if (String_.Eq(scope, "")) scope = "wiki";
 			String db_type		= Get_atr_as_str_or_fail(hash, "db_type_");
 			String dflt			= Get_atr_as_str_or_fail(hash, "dflt_");
 			String gui_type		= Get_atr_as_str_or(hash, "gui_type_", null);

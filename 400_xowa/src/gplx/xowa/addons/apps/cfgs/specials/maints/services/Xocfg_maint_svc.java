@@ -34,6 +34,7 @@ public class Xocfg_maint_svc {
 
 		// exec
 		Xocfg_db_app db_app = Xocfg_db_app.New(app);
+		db_app.Conn().Txn_bgn("xo__cfg_maint__upsert");
 		for (Xocfg_maint_nde nde : ndes) {
 			if (nde.Type_is_grp()) {
 				Xocfg_maint_svc.Create_grp(db_app, nde.Key(), nde.Owner(), nde.Name(), nde.Help());
@@ -44,6 +45,7 @@ public class Xocfg_maint_svc {
 				Xocfg_maint_svc.Create_itm(db_app, nde.Key(), nde.Owner(), nde.Name(), String_.new_u8(help), itm.Scope(), itm.Db_type(), itm.Dflt(), itm.Gui_type(), itm.Gui_args());
 			}
 		}
+		db_app.Conn().Txn_end();
 	}
 	public static void Create_grp(Xocfg_db_app db_app, String key, String owner, String name, String help) {
 		// insert grp_meta
@@ -63,9 +65,8 @@ public class Xocfg_maint_svc {
 		int grp_id = db_app.Tbl__grp().Select_id_by_key_or_fail(owner);
 		int itm_id = db_app.Conn().Sys_mgr().Autonum_next("cfg_itm_meta.itm_id");
 		int scope_id = Xoitm_scope_tid.To_int(scope);
-		int db_type_id = Xoitm_db_tid.To_int(db_type);
 		int gui_type_id = Xoitm_gui_tid.To_tid(gui_type);
-		db_app.Tbl__itm().Upsert(itm_id, scope_id, db_type_id, gui_type_id, gui_args, key, dflt);
+		db_app.Tbl__itm().Upsert(itm_id, scope_id, db_type, gui_type_id, gui_args, key, dflt);
 
 		// insert grp_map
 		int itm_sort = db_app.Tbl__map().Select_next_sort(grp_id);

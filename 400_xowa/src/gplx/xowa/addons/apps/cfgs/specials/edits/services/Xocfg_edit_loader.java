@@ -18,13 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.apps.cfgs.specials.edits.services; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 import gplx.dbs.*;
 import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.dbs.tbls.*;
-import gplx.xowa.addons.apps.cfgs.specials.edits.objs.*;
+import gplx.xowa.addons.apps.cfgs.specials.edits.objs.*; import gplx.xowa.addons.apps.cfgs.types.*;
 public class Xocfg_edit_loader {
 	private final    Xocfg_db_app db_app;
 	private final    Xocfg_db_usr db_usr;
-	public Xocfg_edit_loader(Xocfg_db_app db_app, Xocfg_db_usr db_usr) {
+	private final    Xocfg_type_mgr type_mgr;
+	public Xocfg_edit_loader(Xocfg_db_app db_app, Xocfg_db_usr db_usr, Xocfg_type_mgr type_mgr) {
 		this.db_app = db_app;
 		this.db_usr = db_usr;
+		this.type_mgr = type_mgr;
 	}
 	public Xoedit_root Load_root(String grp_key, String ctx, String lang) {
 		// create lists
@@ -35,7 +37,7 @@ public class Xocfg_edit_loader {
 		// get root_itm
 		Xocfg_grp_row grp_meta = db_app.Tbl__grp().Select_by_key_or_null(grp_key);
 		if (grp_meta == null) throw Err_.new_wo_type("cfg:grp not found", "grp", grp_key);
-		Xoedit_grp owner = new Xoedit_grp(grp_meta.Id(), 0, grp_meta.Key());
+		Xoedit_grp owner = new Xoedit_grp(grp_meta.Id(), grp_meta.Key(), 0);
 		grp_temp.Add(grp_meta.Id(), owner);
 		grp_list.Add(owner);
 
@@ -83,11 +85,11 @@ public class Xocfg_edit_loader {
 		sql = Db_sql_.Make_by_fmt(String_.Ary
 		( "SELECT  m.map_trg"
 		, ",       m.map_sort"
-		, ",       n.nde_name"
-		, ",       t.grp_key"
+		, ",       t.nde_name"
+		, ",       g.grp_key"
 		, "FROM    cfg_map m"
-		, "        LEFT JOIN cfg_grp t ON m.map_trg = t.grp_id"
-		, "        LEFT JOIN cfg_txt n ON m.map_trg = n.nde_id"
+		, "        LEFT JOIN cfg_grp g ON m.map_trg = g.grp_id"
+		, "        LEFT JOIN cfg_txt t ON m.map_trg = t.nde_id"
 		, "WHERE   m.map_src = {0}"
 		, "ORDER BY m.map_sort"
 		), owner_id
@@ -124,14 +126,13 @@ public class Xocfg_edit_loader {
 			String grp_key = rdr.Read_str("key");
 			// nde is grp
 			if (rdr.Read_str("itm_dflt") == null) {
-				Xoedit_grp gui_grp = new Xoedit_grp(rdr.Read_int("map_trg"), rdr.Read_int("map_sort"), grp_key);
-				owner.Grps__add(gui_grp);
+				Xoedit_grp gui_grp = new Xoedit_grp(rdr.Read_int("map_trg"), grp_key, rdr.Read_int("map_sort"));
 				grp_list.Add(gui_grp);
 				grp_temp.Add(gui_grp.Id(), gui_grp);
 			}
 			// nde is itm
 			else {
-				Xoedit_itm gui_itm = new Xoedit_itm(rdr.Read_int("map_trg"), rdr.Read_int("map_sort"), grp_key);
+				Xoedit_itm gui_itm = new Xoedit_itm(type_mgr, rdr.Read_int("map_trg"), grp_key, rdr.Read_int("map_sort"));
 				itms_list.Add(gui_itm);
 				itm_list.Add(gui_itm);
 			}
@@ -142,21 +143,22 @@ public class Xocfg_edit_loader {
 		Xogui_nde_iter iter = Xogui_nde_iter.New_sql(itm_list);
 		while (iter.Move_next()) {
 			String sql = Db_sql_.Make_by_fmt(String_.Ary
-			( "SELECT  t.itm_id"
-			, ",       t.itm_key"
-			, ",       t.itm_scope_id"
-			, ",       t.itm_gui_type"
-			, ",       t.itm_gui_args"
-			, ",       t.itm_dflt"
-			, "FROM    cfg_itm t"
-			, "WHERE   t.itm_key IN ({0})"
+			( "SELECT  i.itm_id"
+			, ",       i.itm_key"
+			, ",       i.itm_scope_id"
+			, ",       i.itm_data_type"
+			, ",       i.itm_gui_type"
+			, ",       i.itm_gui_args"
+			, ",       i.itm_dflt"
+			, "FROM    cfg_itm i"
+			, "WHERE   i.itm_key IN ({0})"
 			), iter.To_sql_in_key()
 			);
 
 			Db_rdr rdr = db_app.Conn().Stmt_sql(sql).Exec_select__rls_auto();
 			while (rdr.Move_next()) {
-				Xoedit_itm gui_itm = (Xoedit_itm)itm_list.Get_by_or_fail(rdr.Read_str("itm_key"));
-				gui_itm.Load_by_meta(rdr.Read_str("itm_key"), rdr.Read_int("itm_scope_id"), rdr.Read_int("itm_gui_type"), rdr.Read_str("itm_gui_args"), rdr.Read_str("itm_dflt"));
+				Xoedit_itm edit_itm = (Xoedit_itm)itm_list.Get_by_or_fail(rdr.Read_str("itm_key"));
+				edit_itm.Load_by_meta(rdr.Read_int("itm_scope_id"), rdr.Read_str("itm_data_type"), rdr.Read_int("itm_gui_type"), rdr.Read_str("itm_gui_args"), rdr.Read_str("itm_dflt"));
 			}
 		}
 	}
@@ -171,13 +173,13 @@ public class Xocfg_edit_loader {
 			while (cur_iter.Move_next()) {
 				// get all data by ids and ctx
 				String sql = Db_sql_.Make_by_fmt(String_.Ary
-				( "SELECT  d.itm_key"
-				, ",       d.itm_ctx"
-				, ",       d.itm_val"
-				, ",       d.itm_date"
-				, "FROM    cfg_val d"
-				, "WHERE   d.itm_key IN ({0})"
-				, "AND     d.itm_ctx = '{1}'"
+				( "SELECT  v.itm_key"
+				, ",       v.itm_ctx"
+				, ",       v.itm_val"
+				, ",       v.itm_date"
+				, "FROM    cfg_val v"
+				, "WHERE   v.itm_key IN ({0})"
+				, "AND     v.itm_ctx = '{1}'"
 				), cur_iter.To_sql_in_key(), ctxs[i]
 				);
 
@@ -210,13 +212,13 @@ public class Xocfg_edit_loader {
 			while (cur_iter.Move_next()) {
 				// get all i18n for itms and lang
 				String sql = Db_sql_.Make_by_fmt(String_.Ary
-				( "SELECT  h.nde_id"
-				, ",       h.nde_name"
-				, ",       h.nde_help"
-				, ",       h.nde_lang"
-				, "FROM    cfg_txt h"
-				, "WHERE   h.nde_id IN ({0})"
-				, "AND     h.nde_lang = '{1}'"
+				( "SELECT  t.nde_id"
+				, ",       t.nde_name"
+				, ",       t.nde_help"
+				, ",       t.nde_lang"
+				, "FROM    cfg_txt t"
+				, "WHERE   t.nde_id IN ({0})"
+				, "AND     t.nde_lang = '{1}'"
 				), cur_iter.To_sql_in()
 				, langs[i]
 				);
@@ -234,6 +236,6 @@ public class Xocfg_edit_loader {
 	}
 	public static Xocfg_edit_loader New(Xoa_app app) {
 		Xocfg_db_app db_app = Xocfg_db_app.New(app);
-		return new Xocfg_edit_loader(db_app, new Xocfg_db_usr(db_app, app.User().User_db_mgr().Conn()));
+		return new Xocfg_edit_loader(db_app, new Xocfg_db_usr(db_app, app.User().User_db_mgr().Conn()), app.Cfg().Type_mgr());
 	}
 }

@@ -19,31 +19,21 @@ package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gp
 import gplx.langs.mustaches.*;
 import gplx.core.gfobjs.*;
 public class Xoedit_grp implements Xoedit_nde, Mustache_doc_itm {		
-	public Xoedit_grp(int id, int sort, String key) {
+	private String lang, name, help;
+	public Xoedit_grp(int id, String key, int sort) {
 		this.id = id;
-		this.sort = sort;
 		this.key = key;
+		this.sort = sort;
 	}
-	public int Id() {return id;} private final    int id;
-	public int Sort() {return sort;} private final    int sort;
-
-	public String Key() {return key;} private String key;
-	
-	public String Lang() {return lang;} private String lang;
-	public String Name() {return name;} private String name;
-	public String Help() {return help;} private String help;
-
+	public int		Id()		{return id;}	private final    int id;
+	public String	Key()		{return key;}	private final    String key;
+	public int		Sort()		{return sort;}	private final    int sort;		
 	public Xoedit_itm[] Itms() {return itms;} private Xoedit_itm[] itms = new Xoedit_itm[0];
+	public void Itms_(Xoedit_itm[] v) {this.itms = v;}
 	public void Load_by_i18n(String lang, String name, String help) {
 		this.lang = lang;
 		this.name = name;
 		this.help = help;
-	}
-
-	public void Grps__add(Xoedit_grp grp) {
-	}
-	public void Itms_(Xoedit_itm[] v) {
-		this.itms = v;
 	}
 	public Gfobj_nde To_nde() {
 		Gfobj_nde rv = Gfobj_nde.New();
