@@ -15,16 +15,15 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.types; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-public class Xocfg_type_mgr {
-	private final    Ordered_hash list_hash = Ordered_hash_.New();
-	public Xocfg_type_mgr() {
-		this.Lists__add("list:Xo_load_html_type", Keyval_.new_("mem"), Keyval_.new_("url"));
+package gplx.xowa.addons.apps.cfgs.mgrs.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
+class Xocfg_cache_itm {
+	public Xocfg_cache_itm(String ctx, String key, String val) {
+		this.ctx = ctx;
+		this.key = key;
+		this.val = val;
 	}
-	public void			Lists__add(String key, Keyval... itms) {
-		list_hash.Add(key, itms);
-	}
-	public Keyval[]		Lists__get(String key) {
-		return (Keyval[])list_hash.Get_by_or_fail(key);
-	}
+	public String Ctx() {return ctx;} private final    String ctx;
+	public String Key() {return key;} private final    String key;
+	public String Val() {return val;} private String val;
+	public void Val_(String val) {this.val = val;}
 }

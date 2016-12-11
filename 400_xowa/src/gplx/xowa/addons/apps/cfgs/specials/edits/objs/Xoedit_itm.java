@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 import gplx.langs.mustaches.*;
 import gplx.core.gfobjs.*; import gplx.langs.jsons.*;
-import gplx.xowa.addons.apps.cfgs.types.*;
+import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
 public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 	private int gui_type;
 	private boolean edited;

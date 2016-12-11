@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
+package gplx.xowa.addons.apps.cfgs.mgrs.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
 import gplx.dbs.*;
 import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.dbs.tbls.*;
 public class Xocfg_cache_mgr {
@@ -50,6 +50,10 @@ public class Xocfg_cache_mgr {
 	public void Sub(Gfo_invk sub, String ctx, String key, String evt) {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
 		grp.Sub(sub, ctx, evt);
+	}
+	public void Dflt(String key, String val) {
+		Xocfg_cache_grp grp = Grps__get_or_load(key);
+		grp.Dflt_(val);
 	}
 	private Xocfg_cache_grp Grps__get_or_load(String key) {
 		Xocfg_cache_grp grp = (Xocfg_cache_grp)grps.Get_by(key);

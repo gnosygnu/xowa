@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 import gplx.xowa.addons.apps.cfgs.enums.*;
-import gplx.xowa.addons.apps.cfgs.types.*;
+import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
 public class Xoedit_itm_html {
 	public void Build_html(Bry_bfr bfr, Xocfg_type_mgr type_mgr, String key, String name, String data_type, int gui_type, String gui_args, String data) {
 		switch (gui_type) {
@@ -44,8 +44,16 @@ public class Xoedit_itm_html {
 				}
 				bfr.Add_str_u8_fmt("</select>");
 				break;
-			case Xoitm_gui_tid.Tid__fs_file:
-				bfr.Add_str_u8_fmt("<input id=\"{0}\" data-xocfg=\"0\" type=\"text\" accesskey=\"d\" class=\"xocfg_fs_file\" value=\"{1}\"></input>", key, data);
+			case Xoitm_gui_tid.Tid__io_process:
+				String[] fields = String_.Split(data, "\n");
+				String exe = fields.length > 1 ? fields[0] : "exe";
+				String arg = fields.length > 2 ? fields[1] : "args"; 
+				bfr.Add_str_u8_fmt
+				( "<input  class=\"xocfg__io_process__exe__txt\" id=\"{0}\" data-xocfg=\"0\" type=\"text\" accesskey=\"d\" value=\"{1}\"></input>\n"
+				+ "<button class=\"xocfg__io_process__exe__btn\" onclick='xowa_io_select(\"file\", \"{0}\", \"Please select a file.\");'>...</button><br/>\n"
+				, key + "-exe", exe);
+				bfr.Add_str_u8_fmt
+				( "<input  class=\"xocfg__io_process__arg__txt\" id=\"{0}\" data-xocfg=\"0\" type=\"text\" accesskey=\"d\" value='{1}'>\n", key + "-arg", arg);
 				break;
 			default:
 				break;

@@ -15,15 +15,16 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-class Xocfg_cache_itm {
-	public Xocfg_cache_itm(String ctx, String key, String val) {
-		this.ctx = ctx;
-		this.key = key;
+package gplx.xowa.addons.apps.cfgs.mgrs.dflts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
+public interface Xocfg_dflt_itm {
+	String Get_str(String key);
+}
+class Xocfg_dflt_itm__static implements Xocfg_dflt_itm {
+	private final    String val;
+	public Xocfg_dflt_itm__static(String val) {
 		this.val = val;
 	}
-	public String Ctx() {return ctx;} private final    String ctx;
-	public String Key() {return key;} private final    String key;
-	public String Val() {return val;} private String val;
-	public void Val_(String val) {this.val = val;}
+	public String Get_str(String key) {
+		return val;
+	}
 }

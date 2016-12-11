@@ -16,15 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
-import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
-import gplx.xowa.addons.apps.cfgs.types.*;
+import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.mgrs.caches.*; import gplx.xowa.addons.apps.cfgs.mgrs.dflts.*; import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
 public class Xocfg_mgr {
 	private final    Xocfg_cache_mgr cache_mgr = new Xocfg_cache_mgr();
+	public Xocfg_mgr() {
+		this.dflt_mgr = new Xocfg_dflt_mgr(cache_mgr);
+	}
 	public Xocfg_type_mgr Type_mgr() {return type_mgr;} private final    Xocfg_type_mgr type_mgr = new Xocfg_type_mgr();
+	public Xocfg_dflt_mgr Dflt_mgr() {return dflt_mgr;} private final    Xocfg_dflt_mgr dflt_mgr;
 	public void Init_by_app(Xoa_app app) {
-		cache_mgr.Init_by_app	// SECTION_EDIT
+		cache_mgr.Init_by_app
 		( gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_app.New_conn(app)
 		, app.User().User_db_mgr().Conn());
+		dflt_mgr.Init_by_app(app);
 	}
 	public void Clear() {
 		cache_mgr.Clear();

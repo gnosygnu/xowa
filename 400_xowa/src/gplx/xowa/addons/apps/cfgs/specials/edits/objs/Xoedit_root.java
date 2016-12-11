@@ -41,7 +41,7 @@ public class Xoedit_root implements Mustache_doc_itm {
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
 		if		(String_.Eq(key, "grps"))		return grps;
-		else if	(String_.Eq(key, "nav_exists"))	return Mustache_doc_itm_.Ary__bool(nav_mgr.Itms().length > 0);
+		else if	(String_.Eq(key, "nav_exists"))	return Mustache_doc_itm_.Ary__bool(nav_mgr.Itms().length > 1);	// NOTE: do not show combo if 0 or 1 item
 		else if	(String_.Eq(key, "itms"))		return nav_mgr.Itms();
 		return Mustache_doc_itm_.Ary__empty;
 	}

@@ -18,15 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.apps.cfgs.specials.edits.services; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 import gplx.dbs.*;
 import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.dbs.tbls.*;
-import gplx.xowa.addons.apps.cfgs.specials.edits.objs.*; import gplx.xowa.addons.apps.cfgs.types.*;
+import gplx.xowa.addons.apps.cfgs.specials.edits.objs.*;
+import gplx.xowa.addons.apps.cfgs.mgrs.*; import gplx.xowa.addons.apps.cfgs.mgrs.dflts.*; import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
 public class Xocfg_edit_loader {
 	private final    Xocfg_db_app db_app;
 	private final    Xocfg_db_usr db_usr;
 	private final    Xocfg_type_mgr type_mgr;
-	public Xocfg_edit_loader(Xocfg_db_app db_app, Xocfg_db_usr db_usr, Xocfg_type_mgr type_mgr) {
+	private final    Xocfg_dflt_mgr dflt_mgr;
+	public Xocfg_edit_loader(Xocfg_db_app db_app, Xocfg_db_usr db_usr, Xocfg_type_mgr type_mgr, Xocfg_dflt_mgr dflt_mgr) {
 		this.db_app = db_app;
 		this.db_usr = db_usr;
 		this.type_mgr = type_mgr;
+		this.dflt_mgr = dflt_mgr;
 	}
 	public Xoedit_root Load_root(String grp_key, String ctx, String lang) {
 		// create lists
@@ -157,8 +160,10 @@ public class Xocfg_edit_loader {
 
 			Db_rdr rdr = db_app.Conn().Stmt_sql(sql).Exec_select__rls_auto();
 			while (rdr.Move_next()) {
-				Xoedit_itm edit_itm = (Xoedit_itm)itm_list.Get_by_or_fail(rdr.Read_str("itm_key"));
-				edit_itm.Load_by_meta(rdr.Read_int("itm_scope_id"), rdr.Read_str("itm_data_type"), rdr.Read_int("itm_gui_type"), rdr.Read_str("itm_gui_args"), rdr.Read_str("itm_dflt"));
+				String key = rdr.Read_str("itm_key");
+				Xoedit_itm edit_itm = (Xoedit_itm)itm_list.Get_by_or_fail(key);
+				String dflt = dflt_mgr.Get_or(key, rdr.Read_str("itm_dflt"));
+				edit_itm.Load_by_meta(rdr.Read_int("itm_scope_id"), rdr.Read_str("itm_data_type"), rdr.Read_int("itm_gui_type"), rdr.Read_str("itm_gui_args"), dflt);
 			}
 		}
 	}
@@ -236,6 +241,6 @@ public class Xocfg_edit_loader {
 	}
 	public static Xocfg_edit_loader New(Xoa_app app) {
 		Xocfg_db_app db_app = Xocfg_db_app.New(app);
-		return new Xocfg_edit_loader(db_app, new Xocfg_db_usr(db_app, app.User().User_db_mgr().Conn()), app.Cfg().Type_mgr());
+		return new Xocfg_edit_loader(db_app, new Xocfg_db_usr(db_app, app.User().User_db_mgr().Conn()), app.Cfg().Type_mgr(), app.Cfg().Dflt_mgr());
 	}
 }

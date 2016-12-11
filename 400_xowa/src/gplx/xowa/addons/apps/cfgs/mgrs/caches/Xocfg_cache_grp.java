@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.cfgs.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
+package gplx.xowa.addons.apps.cfgs.mgrs.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
 class Xocfg_cache_grp {
 	private final    Hash_adp vals = Hash_adp_.New();
 	private final    Ordered_hash subs = Ordered_hash_.New();
@@ -24,7 +24,8 @@ class Xocfg_cache_grp {
 		this.dflt = dflt;
 	}
 	public String Key() {return key;} private final    String key;
-	public String Dflt() {return dflt;} private final    String dflt;
+	public String Dflt() {return dflt;} private String dflt;
+	public void Dflt_(String v) {this.dflt = v;}
 	public String Get(String ctx) {
 		// exact match; EX: "en.w|key_1"
 		Xocfg_cache_itm rv = (Xocfg_cache_itm)vals.Get_by(ctx);
