@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.specials.edits.services; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 import gplx.langs.jsons.*;
+import gplx.core.gfobjs.*;
 import gplx.xowa.guis.cbks.*; import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.specials.edits.objs.*;
 import gplx.xowa.addons.apps.cfgs.specials.edits.pages.*;
 public class Xocfg_edit_svc {
@@ -31,11 +32,14 @@ public class Xocfg_edit_svc {
 		String key = args.Get_as_str("key");
 		String val = args.Get_as_str("val");
 		app.Cfg().Set_str(ctx, key, val);
+		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.upsert__recv", Gfobj_nde.New().Add_str("key", key));
 	}
 	public void Revert(Json_nde args) {
 		String ctx = args.Get_as_str("ctx");
 		String key = args.Get_as_str("key");
 		app.Cfg().Del(ctx, key);
+		String val = app.Cfg().Get_str(ctx, key);
+		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.revert__recv", Gfobj_nde.New().Add_str("key", key).Add_str("val", val));
 	}
 	public void Load(Json_nde args) {
 		String ctx = args.Get_as_str("ctx");

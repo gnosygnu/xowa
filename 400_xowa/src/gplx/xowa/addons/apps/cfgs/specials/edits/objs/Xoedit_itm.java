@@ -70,6 +70,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		Bry_bfr bfr = Bry_bfr_.New();
 		To_html(bfr, type_mgr);
 		rv.Add_str("html", bfr.To_str_and_clear());
+		rv.Add_bool("edited", edited);
 		return rv;
 	}
 	private void To_html(Bry_bfr bfr, Xocfg_type_mgr type_mgr) {

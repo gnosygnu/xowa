@@ -33,9 +33,3 @@ class Xocfg_dflt_loader {
 		}
 	}
 }
-/*
-[
-	{"key":"abcd", "val":"abcde\nbdfdfd"}
-, {"key":"abcd", "val":"abcde\nbdfdfd"}
-]
-*/
