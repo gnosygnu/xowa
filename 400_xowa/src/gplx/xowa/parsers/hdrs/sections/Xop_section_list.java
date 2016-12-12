@@ -39,47 +39,58 @@ class Xop_section_list implements Xomw_hdr_cbk {
 		return this;
 	}
 	public byte[] Slice_bry_or_null(byte[] key) {
-		// find section matching key
-		Xop_section_itm itm = (Xop_section_itm)hash.Get_by(key);
-		if (itm == null) return null;
+		int[] bounds = Get_section_bounds(key);
+		if (bounds == null) return null;	// handle missing key
 
-		int src_bgn = Get_src_bgn(itm.Src_bgn());
-		int src_end = Get_src_end(itm);
-
-		return Bry_.Mid(src, src_bgn, src_end);
+		// return slice
+		return Bry_.Mid(src, bounds[0], bounds[1]);
 	}
 	public byte[] Merge_bry_or_null(byte[] key, byte[] edit) {
-		// find section matching key
-		Xop_section_itm itm = (Xop_section_itm)hash.Get_by(key);
-		if (itm == null) return null;
-
-		int src_bgn = Get_src_bgn(itm.Src_bgn());
-		int src_end = Get_src_end(itm);
+		int[] bounds = Get_section_bounds(key);
+		if (bounds == null) return null;	// handle missing key
 
 		// merge edit into orig
 		Bry_bfr bfr = Bry_bfr_.New();
-		bfr.Add_mid(src, 0, src_bgn);
+		bfr.Add_mid(src, 0, bounds[0]);
 		bfr.Add(edit);
-		bfr.Add_mid(src, src_end, src.length);
+		bfr.Add_mid(src, bounds[1], src.length);
 
 		return bfr.To_bry_and_clear();
 	}
-	private int Get_src_bgn(int src_bgn) {
-		if (src[src_bgn] == Byte_ascii.Nl) src_bgn++;
-		return src_bgn;
-	}
-	private int Get_src_end(Xop_section_itm itm) {
-		int src_end = -1;	// default to last
+	private int[] Get_section_bounds(byte[] key) {
+		int src_bgn = -1, src_end = -1;
 		int hash_len = hash.Len();
-		for (int i = itm.Idx() + 1; i < hash_len; i++) {
-			Xop_section_itm nxt = (Xop_section_itm)hash.Get_at(i);
-			if (nxt.Num() > itm.Num()) continue;	// skip headers that are at lower level; EX: == H2 == should skip === H3 ===
-			src_end = nxt.Src_bgn();
-			break;
+
+		// if key == "", get lead section
+		if (Bry_.Eq(key, Bry_.Empty)) {
+			src_bgn = 0;
+			src_end = src.length;
+			if (hash_len > 0) {
+				Xop_section_itm itm = (Xop_section_itm)hash.Get_at(0);
+				src_end = itm.Src_bgn();	// -1 to skip "\n" in "\n=="
+			}
 		}
-		if (src_end == -1) src_end = src.length;	// no headers found; default to EOS
-		src_end = Bry_find_.Find_bwd__skip_ws(src, src_end, itm.Src_bgn());
-		return src_end;
+		// else, get section matching key
+		else {
+			Xop_section_itm itm = (Xop_section_itm)hash.Get_by(key);
+			if (itm == null) return null;
+
+			// get bgn
+			src_bgn = itm.Src_bgn();
+			if (src[src_bgn] == Byte_ascii.Nl) src_bgn++;	// skip "\n" in "\n=="
+
+			// get end
+			for (int i = itm.Idx() + 1; i < hash_len; i++) {
+				Xop_section_itm nxt = (Xop_section_itm)hash.Get_at(i);
+				if (nxt.Num() > itm.Num()) continue;	// skip headers that are at lower level; EX: == H2 == should skip === H3 ===
+				src_end = nxt.Src_bgn();
+				break;
+			}
+			if (src_end == -1) src_end = src.length;	// no headers found; default to EOS
+			src_end = Bry_find_.Find_bwd__skip_ws(src, src_end, src_bgn);	// always remove ws at end
+		}
+
+		return new int[] {src_bgn, src_end};
 	}
 	public void On_hdr_seen(Xomw_parser_ctx pctx, Xomw_hdr_wkr wkr) {
 		// get key by taking everything between ==; EX: "== abc ==" -> " abc "

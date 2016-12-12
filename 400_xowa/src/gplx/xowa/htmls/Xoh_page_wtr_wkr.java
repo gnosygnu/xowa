@@ -96,7 +96,7 @@ public class Xoh_page_wtr_wkr {
 		fmtr.Bld_bfr_many(bfr
 		, root_dir_bry, Xoa_app_.Version, Xoa_app_.Build_date, app.Tcp_server().Running_str()
 		, page.Db().Page().Id(), page.Ttl().Full_db()
-		, page_name, page.Html_data().Page_heading().Init(page.Html_data(), page_display_title)
+		, page_name, page.Html_data().Page_heading().Init(wiki, html_gen_tid == Xopg_page_.Tid_read, page.Html_data(), page.Ttl().Full_db(), page_display_title)
 		, modified_on_msg
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry(), page.Html_data().Head_mgr().Init(app, wiki, page).Init_dflts()
 		, page.Lang().Dir_ltr_bry(), page.Html_data().Indicators(), page_content_sub, wiki.Html_mgr().Portal_mgr().Div_jump_to(), wiki.Xtn_mgr().Xtn_pgbnr().Write_html(page, ctx, hctx), page_body_class, html_content_editable

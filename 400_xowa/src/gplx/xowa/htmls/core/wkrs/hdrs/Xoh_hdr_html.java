@@ -66,8 +66,10 @@ public class Xoh_hdr_html {
 				bfr.Add(Gfh_tag_.Span_rhs);									// '</span>'
 
 			// write section editable
-			if (wiki.Parser_mgr().Hdr__section_editable__mgr().Enabled())
-				wiki.Parser_mgr().Hdr__section_editable__mgr().Write_html(bfr, src, page.Ttl().Full_db(), hdr, toc_itm.Anch());
+			if (wiki.Parser_mgr().Hdr__section_editable__mgr().Enabled()) {
+				byte[] section_key = toc_itm.Anch();
+				wiki.Parser_mgr().Hdr__section_editable__mgr().Write_html(bfr, page.Ttl().Full_db(), section_key, section_key);
+			}
 
 			bfr.Add(Bry__hdr_rhs_bgn).Add_int(hdr_num, 1, 1);				// '</h', '2'
 			bfr.Add(Bry__hdr_rhs_end);										// '>\n'

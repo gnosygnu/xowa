@@ -141,4 +141,39 @@ public class Xop_section_list__merge__tst {
 		)
 		);
 	}
+	@Test   public void Lead() {
+		fxt.Exec__parse
+		( "lead para"
+		, ""
+		, "== Hdr 1 =="
+		, "Para 1"
+		);
+		fxt.Test__merge_bry_or_null("", String_.Concat_lines_nl_skip_last
+		( "lead para 1"
+		, ""
+		, "lead para 2"
+		), String_.Concat_lines_nl_skip_last
+		( "lead para 1"
+		, ""
+		, "lead para 2"
+		, "== Hdr 1 =="
+		, "Para 1"
+		)
+		);
+	}
+	@Test   public void Lead__new() {
+		fxt.Exec__parse
+		( "== Hdr 1 =="
+		, "Para 1"
+		);
+		fxt.Test__merge_bry_or_null("", String_.Concat_lines_nl_skip_last
+		( "lead para 1"
+		, ""
+		), String_.Concat_lines_nl_skip_last
+		( "lead para 1"
+		, "== Hdr 1 =="
+		, "Para 1"
+		)
+		);
+	}
 }

@@ -67,15 +67,15 @@ public class Xop_section_mgr implements Gfo_invk {
 			throw Err_.new_wo_type("could not merge section_key", "page", url.To_str(), "section_key", section_key);
 		return rv;
 	}
-	public void Write_html(Bry_bfr bfr, byte[] src, byte[] page_ttl, Xop_hdr_tkn hdr, byte[] toc_text) {
+	public void Write_html(Bry_bfr bfr, byte[] page_ttl, byte[] section_key, byte[] section_hint) {
 		if (bry__edit_text == null) {	// LAZY: cannot call in Init_by_wiki b/c of circularity; section_mgr is init'd by parser_mgr which is init'd before msg_mgr which is used below
 			this.bry__edit_text = wiki.Msg_mgr().Val_by_key_obj("editlink");
 			this.fmt__edit_hint.Fmt_(String_.new_u8(wiki.Msg_mgr().Val_by_key_obj("editsectionhint")));
 		}
 
-		toc_text = wiki.Parser_mgr().Uniq_mgr().Convert(toc_text);	// need to swap out uniqs for Math; DATE:2016-12-09
-		byte[] edit_hint = fmt__edit_hint.Bld_many_to_bry(tmp_bfr, toc_text);
-		fmt__section_editable.Bld_many(bfr, page_ttl, toc_text, edit_hint, bry__edit_text);
+		section_key = wiki.Parser_mgr().Uniq_mgr().Convert(section_key);	// need to swap out uniqs for Math; DATE:2016-12-09
+		byte[] edit_hint = fmt__edit_hint.Bld_many_to_bry(tmp_bfr, section_hint);
+		fmt__section_editable.Bld_many(bfr, page_ttl, section_key, edit_hint, bry__edit_text);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, gplx.xowa.htmls.core.wkrs.hdrs.Xoh_section_editable_.Cfg__section_editing__enabled)) enabled = m.ReadBool("v");

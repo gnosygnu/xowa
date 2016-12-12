@@ -108,6 +108,40 @@ public class Xop_section_list__slice__tst {
 		, "Para 1"
 		));
 	}
+	@Test   public void Lead() {
+		fxt.Exec__parse
+		( "lead text"
+		, ""
+		, "== Hdr 1 =="
+		, "Para 1"
+		, ""
+		);
+		fxt.Test__slice_bry_or_null(""
+		, "lead text"
+		);
+	}
+	@Test   public void Lead__none() {
+		fxt.Exec__parse
+		( ""
+		, "== Hdr 1 =="
+		, "Para 1"
+		, ""
+		);
+		fxt.Test__slice_bry_or_null("");
+	}
+	@Test   public void Lead__eos() {
+		fxt.Exec__parse
+		( "lead text"
+		, ""
+		, "para 1"
+		, ""
+		);
+		fxt.Test__slice_bry_or_null(""
+		, "lead text"
+		, ""
+		, "para 1"
+		);
+	}
 }
 class Xop_section_list__fxt {
 	private final    Xop_section_list list = new Xop_section_list();
