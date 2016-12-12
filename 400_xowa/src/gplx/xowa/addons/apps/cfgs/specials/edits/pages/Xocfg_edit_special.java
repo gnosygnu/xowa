@@ -20,11 +20,14 @@ import gplx.xowa.specials.*; import gplx.core.net.qargs.*;
 public class Xocfg_edit_special implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {			
 		Gfo_qarg_mgr url_args = new Gfo_qarg_mgr().Init(url.Qargs_ary());
-
+		
 		String grp = url_args.Read_str_or("grp", "");
 		String ctx = url_args.Read_str_or("ctx", "app");
 		String lang = url_args.Read_str_or("lang", wiki.App().User().Wikii().Lang().Key_str());
 
+		if (String_.Eq(grp, "")) {
+			grp = wiki.App().Cfg().Get_str_app("xowa.app.cfg.general.previous_section");
+		}
 		new Xocfg_edit_html(grp, ctx, lang).Bld_page_by_mustache(wiki.App(), page, this);
 	}
 

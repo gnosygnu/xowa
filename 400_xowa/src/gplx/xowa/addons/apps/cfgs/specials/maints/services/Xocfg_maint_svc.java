@@ -63,9 +63,11 @@ public class Xocfg_maint_svc {
 	public static void Create_itm(Xocfg_db_app db_app, String key, String owner, String name, String help, String scope, String db_type, String dflt, String gui_type, String gui_args) {
 		// insert itm_meta
 		int grp_id = db_app.Tbl__grp().Select_id_by_key_or_fail(owner);
-		int itm_id = db_app.Conn().Sys_mgr().Autonum_next("cfg_itm_meta.itm_id");
 		int scope_id = Xoitm_scope_tid.To_int(scope);
 		int gui_type_id = Xoitm_gui_tid.To_tid(gui_type);
+		int itm_id = db_app.Tbl__itm().Select_id_or(key, -1);
+		if (itm_id == -1)
+			itm_id = db_app.Conn().Sys_mgr().Autonum_next("cfg_itm_meta.itm_id");
 		db_app.Tbl__itm().Upsert(itm_id, scope_id, db_type, gui_type_id, gui_args, key, dflt);
 
 		// insert grp_map

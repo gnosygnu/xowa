@@ -19,12 +19,25 @@ package gplx.xowa.addons.apps.cfgs.mgrs.types; import gplx.*; import gplx.xowa.*
 public class Xocfg_type_mgr {
 	private final    Ordered_hash list_hash = Ordered_hash_.New();
 	public Xocfg_type_mgr() {
-		this.Lists__add("list:Xo_load_html_type", Keyval_.new_("mem"), Keyval_.new_("url"));
+		this.Lists__add("list:xowa.app.security.privacy.load_mode", "mem", "url");
+		this.Lists__add("list:xowa.app.startup.window.mode", "previous", "maximized", "absolute", "relative", "default");
+		this.Lists__add("list:xowa.app.startup.pages.type", "blank", "xowa", "absolute", "previous", "custom");
+		this.Lists__add("list:xowa.gui.window.html_box.adj_type", "none", "absolute", "relative");
+		this.Lists__add("list:xowa.wiki.dbs.html.basic.html_mode", Keyval_.new_("shown", "Shown"), Keyval_.new_("hdump_save", "Saved for HTML DB"), Keyval_.new_("hdump_load", "Loaded by HTML DB"));
+		this.Lists__add("list:xowa.wiki.database.general.zip_mode", "text", "gzip", "bz2", "xz");
 	}
-	public void			Lists__add(String key, Keyval... itms) {
+	public void	Lists__add(String key, String... vals) {
+		int len = vals.length;
+		Keyval[] itms = new Keyval[len];
+		for (int i = 0; i < len; i++) {
+			itms[i] = Keyval_.new_(vals[i]);
+		}
+		Lists__add(key, itms);
+	}
+	public void	Lists__add(String key, Keyval... itms) {
 		list_hash.Add(key, itms);
 	}
-	public Keyval[]		Lists__get(String key) {
+	public Keyval[] Lists__get(String key) {
 		return (Keyval[])list_hash.Get_by_or_fail(key);
 	}
 }

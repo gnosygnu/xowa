@@ -41,6 +41,11 @@ public class Xocfg_itm_tbl implements Db_tbl {
 	public void Upsert(int itm_id, int scope_id, String db_type, int gui_type, String gui_args, String itm_key, String itm_dflt) {
 		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__itm_id), itm_id, itm_key, scope_id, db_type, gui_type, gui_args, itm_dflt);
 	}
+	public int Select_id_or(String key, int or) {
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__itm_key).Crt_str(fld__itm_key, key).Exec_select__rls_auto();
+		try {return rdr.Move_next() ? rdr.Read_int(fld__itm_id) : or;}
+		finally {rdr.Rls();}
+	}
 	public Xocfg_itm_row Select_by_key_or_null(String key) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__itm_key).Crt_str(fld__itm_key, key).Exec_select__rls_auto();
 		try {return rdr.Move_next() ? Load(rdr) : null;}

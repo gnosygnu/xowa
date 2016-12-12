@@ -39,9 +39,11 @@ public class Xocfg_mgr {
 		cache_mgr.Sub(sub, ctx, key, key);
 		return cache_mgr.Get(ctx, key);
 	}
+	public String Get_str_app(String key) {return Get_str(gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_itm.Ctx__app, key);}
 	public String Get_str(String ctx, String key) {
 		return cache_mgr.Get(ctx, key);
 	}
+	public void Set_str_app(String key, String val) {Set_str(gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_itm.Ctx__app, key, val);}
 	public void Set_str(String ctx, String key, String val) {
 		cache_mgr.Set(ctx, key, val);
 	}
