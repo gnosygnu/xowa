@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 public class Xow_page_cache {
 	private final    Xowe_wiki wiki;
-	private final    Hash_adp_bry cache = Hash_adp_bry.cs();	// NOTE: wiki titles are not case-sensitive when ns is "1st-letter" (EX: w:earth an w:Earth); in these cases, two entries will be stored
+	private final    Ordered_hash cache = Ordered_hash_.New_bry();	// NOTE: wiki titles are not case-sensitive when ns is "1st-letter" (EX: w:earth an w:Earth); in these cases, two entries will be stored
+	private final    List_adp deleted = List_adp_.New();
 	private Xow_page_cache_wkr load_wkr;
 	public Xow_page_cache(Xowe_wiki wiki) {this.wiki = wiki;}
 	public Xow_page_cache_wkr Load_wkr() {return load_wkr;}
@@ -32,7 +33,7 @@ public class Xow_page_cache {
 	}
 	public Xow_page_cache_itm Get_or_load_as_itm(Xoa_ttl ttl) {
 		byte[] ttl_full_db = ttl.Full_db();
-		Xow_page_cache_itm rv = (Xow_page_cache_itm)cache.Get_by_bry(ttl_full_db);
+		Xow_page_cache_itm rv = (Xow_page_cache_itm)cache.Get_by(ttl_full_db);
 		if		(rv == Xow_page_cache_itm.Missing) {
 			return null;
 		}
@@ -59,14 +60,14 @@ public class Xow_page_cache {
 			page_redirect_from = page.Redirect_trail().Itms__get_wtxt_at_0th_or_null();
 		}
 		if (page_exists) {
-			rv = new Xow_page_cache_itm(page_ttl, page_text, page_redirect_from);
+			rv = new Xow_page_cache_itm(false, page_ttl, page_text, page_redirect_from);
 			synchronized (this) {	// LOCK:high-usage;DATE:2016-07-14
-				cache.Add_bry_obj(ttl_full_db, rv);
+				cache.Add(ttl_full_db, rv);
 			}
 		}
 		else {
 			synchronized (this) {	// LOCK:high-usage;DATE:2016-07-14
-				cache.Add_bry_obj(ttl_full_db, Xow_page_cache_itm.Missing);
+				cache.Add(ttl_full_db, Xow_page_cache_itm.Missing);
 				rv = null;
 			}
 		}
@@ -74,29 +75,44 @@ public class Xow_page_cache {
 	}
 	public Xow_page_cache_itm Get_or_load_as_itm_2(Xoa_ttl ttl) {	// NOTE: same as Get_or_load_as_itm, but handles redirects to missing pages; DATE:2016-05-02
 		byte[] ttl_full_db = ttl.Full_db();
-		Xow_page_cache_itm rv = (Xow_page_cache_itm)cache.Get_by_bry(ttl_full_db);
+		Xow_page_cache_itm rv = (Xow_page_cache_itm)cache.Get_by(ttl_full_db);
 		if		(rv == Xow_page_cache_itm.Missing) return null;
 		else if (rv == null) {
 			Xoae_page page = wiki.Data_mgr().Load_page_by_ttl(ttl);	// NOTE: do not call Db_mgr.Load_page; need to handle redirects
 			if (	page.Db().Page().Exists()				// page exists
 				||	page.Redirect_trail().Itms__len() > 0 ) {		// page redirects to missing page; note that page.Missing == true and page.Redirected_src() != null; PAGE: en.w:Shah_Rukh_Khan; DATE:2016-05-02
-				rv = new Xow_page_cache_itm(page.Ttl(), page.Db().Text().Text_bry(), page.Redirect_trail().Itms__get_wtxt_at_0th_or_null());
+				rv = new Xow_page_cache_itm(false, page.Ttl(), page.Db().Text().Text_bry(), page.Redirect_trail().Itms__get_wtxt_at_0th_or_null());
 				synchronized (this) {	// LOCK:high-usage;DATE:2016-07-14
-					cache.Add_bry_obj(ttl_full_db, rv);
+					cache.Add(ttl_full_db, rv);
 				}
 			}
 			else {
 				synchronized (this) {	// LOCK:high-usage;DATE:2016-07-14
-					cache.Add_bry_obj(ttl_full_db, Xow_page_cache_itm.Missing);
+					cache.Add(ttl_full_db, Xow_page_cache_itm.Missing);
 					rv = null;
 				}
 			}
 		}
 		return rv;
 	}
-	public void Free_mem_all() {
+	public void Free_mem(boolean clear_permanent_itms) {
 		synchronized (this) {	// LOCK:app-level; DATE:2016-07-06
-			cache.Clear();
+			if (clear_permanent_itms)
+				cache.Clear();
+			else {
+				int len = cache.Count();
+				for (int i = 0; i < len; i++) {
+					Xow_page_cache_itm itm = (Xow_page_cache_itm)cache.Get_at(i);
+					if (!itm.Cache_permanently())
+						deleted.Add(itm);
+				}
+				len = deleted.Len();
+				for (int i = 0; i < len; i++) {
+					Xow_page_cache_itm itm = (Xow_page_cache_itm)cache.Get_at(i);
+					cache.Del(itm.Ttl().Full_db());
+				}
+				deleted.Clear();
+			}
 		}
 	}
 }

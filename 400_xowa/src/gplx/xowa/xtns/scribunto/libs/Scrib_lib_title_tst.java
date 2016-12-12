@@ -87,7 +87,7 @@ public class Scrib_lib_title_tst {
 	@Test   public void GetContent() {
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getContent, Object_.Ary("A")										, Scrib_invoke_func_fxt.Null_rslt);
 
-		fxt.Parser_fxt().Ctx().Wiki().Cache_mgr().Page_cache().Free_mem_all();
+		fxt.Parser_fxt().Ctx().Wiki().Cache_mgr().Page_cache().Free_mem(true);
 		fxt.Parser_fxt().Init_page_create("A", "test");
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getContent, Object_.Ary("A")										, "test");
 	}

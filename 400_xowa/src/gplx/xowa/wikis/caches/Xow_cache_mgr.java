@@ -50,14 +50,17 @@ public class Xow_cache_mgr {
 		}
 		return scrib_lang_names;
 	}
-	public void Free_mem_all() {this.Free_mem_all(Bool_.Y);}
-	public void Free_mem_all(boolean free_page_cache) {
+	public void Free_mem_all() {this.Free_mem(Bool_.Y);}
+	public void Free_mem(boolean free_page_cache) {
 		if (free_page_cache) {
 			commons_cache.Clear();
 			ifexist_cache.Clear();
 			wiki.Appe().Wiki_mgr().Wdata_mgr().Clear();	// moved from ctx.Clear(); DATE:2016-07-21
+			page_cache.Free_mem(true);
 		}
-		page_cache.Free_mem_all();
+		else {
+			page_cache.Free_mem(false);
+		}
 		wiki.Ctg__catpage_mgr().Free_mem_all();
 		tmpl_result_cache.Clear();
 		defn_cache.Free_mem_all();

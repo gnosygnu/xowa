@@ -86,7 +86,7 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 			Xowe_wiki wiki = (Xowe_wiki)list.Get_at(i);
 //				wiki.Defn_cache().ReduceCache();
 			if (clear_ctx) wiki.Parser_mgr().Ctx().Clear_all();	// NOTE: clear_ctx will reset toc and refs
-			wiki.Cache_mgr().Page_cache().Free_mem_all();
+			wiki.Cache_mgr().Page_cache().Free_mem(true);
 			wiki.Cache_mgr().Tmpl_result_cache().Clear();
 		}
 	}
