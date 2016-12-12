@@ -31,6 +31,13 @@ public class Xow_page_cache {
 	public void Add(byte[] ttl_full_db, Xow_page_cache_itm itm) {
 		cache.Add(ttl_full_db, itm);
 	}
+	private void Add_safe(byte[] ttl_full_db, Xow_page_cache_itm itm) {
+		synchronized (cache) {	// LOCK:high-usage;DATE:2016-07-14
+			if (!cache.Has(ttl_full_db)) {	// check again that itm is not in cache; note that this is necessary as cache.Get is not in "synchronized" block (for performance reasons); DATE:2016-12-12
+				cache.Add(ttl_full_db, itm);
+			}
+		}
+	}
 	public Xow_page_cache_itm Get_or_load_as_itm(Xoa_ttl ttl) {
 		byte[] ttl_full_db = ttl.Full_db();
 		Xow_page_cache_itm rv = (Xow_page_cache_itm)cache.Get_by(ttl_full_db);
@@ -61,15 +68,11 @@ public class Xow_page_cache {
 		}
 		if (page_exists) {
 			rv = new Xow_page_cache_itm(false, page_ttl, page_text, page_redirect_from);
-			synchronized (this) {	// LOCK:high-usage;DATE:2016-07-14
-				cache.Add(ttl_full_db, rv);
-			}
+			Add_safe(ttl_full_db, rv);
 		}
 		else {
-			synchronized (this) {	// LOCK:high-usage;DATE:2016-07-14
-				cache.Add(ttl_full_db, Xow_page_cache_itm.Missing);
-				rv = null;
-			}
+			Add_safe(ttl_full_db, Xow_page_cache_itm.Missing);
+			rv = null;
 		}
 		return rv;
 	}
@@ -82,21 +85,17 @@ public class Xow_page_cache {
 			if (	page.Db().Page().Exists()				// page exists
 				||	page.Redirect_trail().Itms__len() > 0 ) {		// page redirects to missing page; note that page.Missing == true and page.Redirected_src() != null; PAGE: en.w:Shah_Rukh_Khan; DATE:2016-05-02
 				rv = new Xow_page_cache_itm(false, page.Ttl(), page.Db().Text().Text_bry(), page.Redirect_trail().Itms__get_wtxt_at_0th_or_null());
-				synchronized (this) {	// LOCK:high-usage;DATE:2016-07-14
-					cache.Add(ttl_full_db, rv);
-				}
+				Add_safe(ttl_full_db, rv);
 			}
 			else {
-				synchronized (this) {	// LOCK:high-usage;DATE:2016-07-14
-					cache.Add(ttl_full_db, Xow_page_cache_itm.Missing);
-					rv = null;
-				}
+				Add_safe(ttl_full_db, Xow_page_cache_itm.Missing);
+				rv = null;
 			}
 		}
 		return rv;
 	}
 	public void Free_mem(boolean clear_permanent_itms) {
-		synchronized (this) {	// LOCK:app-level; DATE:2016-07-06
+		synchronized (cache) {	// LOCK:app-level; DATE:2016-07-06
 			if (clear_permanent_itms)
 				cache.Clear();
 			else {
