@@ -148,6 +148,7 @@ public class Xow_domain_regy {
 , "fi.wikipedia.org"
 , "fi.wiktionary.org"
 , "fi.wikisource.org"
+, "fi.wikivoyage.org"
 , "fi.wikibooks.org"
 , "fi.wikiversity.org"
 , "fi.wikiquote.org"
