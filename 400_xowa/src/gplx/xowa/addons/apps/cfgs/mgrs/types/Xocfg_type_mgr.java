@@ -23,7 +23,6 @@ public class Xocfg_type_mgr {
 		this.Lists__add("list:xowa.app.startup.window.mode", "previous", "maximized", "absolute", "relative", "default");
 		this.Lists__add("list:xowa.app.startup.pages.type", "blank", "xowa", "previous", "custom");
 		this.Lists__add("list:xowa.gui.window.html_box.adj_type", "none", "relative", "absolute");
-		this.Lists__add("list:xowa.wiki.dbs.html.basic.html_mode", Keyval_.new_("shown", "Shown"), Keyval_.new_("hdump_save", "Saved for HTML DB"), Keyval_.new_("hdump_load", "Loaded by HTML DB"));
 		this.Lists__add("list:xowa.wiki.database.general.zip_mode", "text", "gzip", "bzip2", "xz");
 		this.Lists__add("list:xowa.html.wiki.portal.missing_class", Keyval_.new_("", "Show as blue link"), Keyval_.new_("new", "Show as red link"), Keyval_.new_("xowa_display_none", "Hide"));
 		this.Lists__add("list:xowa.html.category.basic.missing_class", "normal", "hide", "red_link");
@@ -42,7 +41,8 @@ public class Xocfg_type_mgr {
 		Lists__add(key, itms);
 	}
 	public void	Lists__add(String key, Keyval... itms) {
-		list_hash.Add(key, itms);
+		if (!list_hash.Has(key)) // ignore multiple calls from Init_by_wiki; EX: Xow_hdump_mode
+			list_hash.Add(key, itms);
 	}
 	public Keyval[] Lists__get(String key) {
 		return (Keyval[])list_hash.Get_by_or_fail(key);

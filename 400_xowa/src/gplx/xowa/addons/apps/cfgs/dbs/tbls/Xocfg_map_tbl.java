@@ -38,8 +38,18 @@ public class Xocfg_map_tbl implements Db_tbl {
 	public void Upsert(int map_src, int map_trg, int map_sort) {
 		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__map_src, fld__map_trg), map_src, map_trg, map_sort);
 	}
-	public int Select_next_sort(int owner_id) {
-		Db_rdr rdr = conn.Stmt_select_max(tbl_name, fld__map_sort, fld__map_src).Crt_int(fld__map_src, owner_id).Exec_select__rls_auto();
+	public int Select_sort_or_next(int src_id, int trg_id) {
+		// select map_sort by map_src,map_trg
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__map_src, fld__map_trg).Crt_int(fld__map_src, src_id).Crt_int(fld__map_trg, trg_id).Exec_select__rls_auto();
+		try {
+			if (rdr.Move_next()) {
+				return rdr.Read_int(fld__map_sort);
+			}
+		}
+		finally {rdr.Rls();}
+
+		// pairing doesn't exist; select max
+		rdr = conn.Stmt_select_max(tbl_name, fld__map_sort, fld__map_src).Crt_int(fld__map_src, src_id).Exec_select__rls_auto();
 		try {
 			if (!rdr.Move_next()) return 0;
 			Object max = rdr.Read_obj(fld__map_sort);

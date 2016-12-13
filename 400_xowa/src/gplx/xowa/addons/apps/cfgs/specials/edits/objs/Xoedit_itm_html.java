@@ -39,8 +39,9 @@ public class Xoedit_itm_html {
 				bfr.Add_str_u8_fmt("<select id=\"{0}\" data-xocfg=\"0\" type=\"text\" accesskey=\"d\" class=\"xocfg_select\" size=\"{1}\">", key, len);
 				for (int i = 0; i < len; i++) {
 					Keyval kv = kvs_ary[i];
+					String kv_key = kv.Key();
 					String kv_val = kv.Val_to_str_or_null();
-					bfr.Add_str_u8_fmt("<option value=\"{0}\"{2}>{1}</option>", kv.Key(), kv_val, String_.Eq(data, kv_val) ? " selected=\"selected\"" : "");
+					bfr.Add_str_u8_fmt("<option value=\"{0}\"{2}>{1}</option>", kv_key, kv_val, String_.Eq(data, kv_key) ? " selected=\"selected\"" : "");
 				}
 				bfr.Add_str_u8_fmt("</select>");
 				break;

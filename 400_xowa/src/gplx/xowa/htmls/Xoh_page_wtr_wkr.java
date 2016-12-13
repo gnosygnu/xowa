@@ -48,7 +48,7 @@ public class Xoh_page_wtr_wkr {
 				}
 				Bry_bfr page_bfr = wiki.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page rv to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
 				Xoh_wtr_ctx hctx = null;
-				if (page_mode == Xopg_page_.Tid_html && wiki.App().Api_root().Wiki().Hdump().Html_mode().Tid_is_hdump_save()) {
+				if (page_mode == Xopg_page_.Tid_html && wiki.Html__hdump_mgr().Load_mgr().Html_mode().Tid_is_hdump_save()) {
 					hctx = Xoh_wtr_ctx.Hdump;
 					Write_body(page_bfr, ctx, hctx, page);
 					Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(page_bfr.To_bry_and_clear()));

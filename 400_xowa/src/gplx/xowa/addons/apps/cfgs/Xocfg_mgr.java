@@ -33,7 +33,8 @@ public class Xocfg_mgr {
 	public void Clear() {
 		cache_mgr.Clear();
 	}
-	public void Bind_many_app(Gfo_invk sub, String... keys) {Bind_many(sub, Xocfg_mgr.Ctx__app, keys);}
+	public void Bind_many_app	(Gfo_invk sub, String... keys) {Bind_many(sub, Xocfg_mgr.Ctx__app, keys);}
+	public void Bind_many_wiki	(Gfo_invk sub, Xow_wiki wiki, String... keys) {Bind_many(sub, wiki.Domain_itm().Abrv_xo_str(), keys);}
 	public void Bind_many(Gfo_invk sub, String ctx, String... keys) {
 		try {
 			for (String key : keys) {

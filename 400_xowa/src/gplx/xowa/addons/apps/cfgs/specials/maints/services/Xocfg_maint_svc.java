@@ -51,12 +51,13 @@ public class Xocfg_maint_svc {
 	}
 	public static void Create_grp(Xocfg_db_app db_app, String key, String owner, String name, String help) {
 		// insert grp_meta
-		int grp_id = db_app.Conn().Sys_mgr().Autonum_next("cfg_grp_meta.grp_id");
+		Xocfg_grp_row grp = db_app.Tbl__grp().Select_by_key_or_null(key);
+		int grp_id = grp == null ? db_app.Conn().Sys_mgr().Autonum_next("cfg_grp_meta.grp_id") : grp.Id();
 		db_app.Tbl__grp().Upsert(grp_id, key);
 
 		// insert grp_map
 		int owner_id = String_.Len_eq_0(owner) ? Xocfg_grp_row.Id__root : db_app.Tbl__grp().Select_id_by_key_or_fail(owner);
-		int map_sort = db_app.Tbl__map().Select_next_sort(owner_id);
+		int map_sort = db_app.Tbl__map().Select_sort_or_next(owner_id, grp_id);
 		db_app.Tbl__map().Upsert(owner_id, grp_id, map_sort);
 
 		// insert nde_i18n
@@ -73,7 +74,7 @@ public class Xocfg_maint_svc {
 		db_app.Tbl__itm().Upsert(itm_id, scope_id, db_type, gui_type_id, gui_args, key, dflt);
 
 		// insert grp_map
-		int itm_sort = db_app.Tbl__map().Select_next_sort(grp_id);
+		int itm_sort = db_app.Tbl__map().Select_sort_or_next(grp_id, itm_id);
 		db_app.Tbl__map().Upsert(grp_id, itm_id, itm_sort);
 
 		// insert nde_i18n

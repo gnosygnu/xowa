@@ -21,7 +21,7 @@ import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.makes.*; import gplx
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.wikis.pages.htmls.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
-public class Xow_hdump_mgr__load {
+public class Xow_hdump_mgr__load implements Gfo_invk {
 	private final    Xow_wiki wiki; private final    Xoh_hzip_mgr hzip_mgr; private final    Io_stream_zip_mgr zip_mgr;
 	private final    Xoh_page tmp_hpg; private final    Bry_bfr tmp_bfr; private final    Xowd_page_itm tmp_dbpg = new Xowd_page_itm();		
 	private Xow_override_mgr override_mgr__html, override_mgr__page;
@@ -29,7 +29,14 @@ public class Xow_hdump_mgr__load {
 		this.wiki = wiki; this.hzip_mgr = hzip_mgr; this.zip_mgr = zip_mgr; this.tmp_hpg = tmp_hpg; this.tmp_bfr = tmp_bfr;
 		this.make_mgr = new Xoh_make_mgr();
 	}
+	public boolean			Read_preferred()		{return read_preferred;}	private boolean read_preferred = true;
+	public Xow_hdump_mode	Html_mode()				{return html_mode;}			private Xow_hdump_mode html_mode;
 	public Xoh_make_mgr Make_mgr() {return make_mgr;} private final    Xoh_make_mgr make_mgr;
+	public void Init_by_wiki(Xow_wiki wiki) {
+		gplx.xowa.addons.apps.cfgs.Xocfg_mgr cfg_mgr = wiki.App().Cfg();
+		Xow_hdump_mode.Cfg__reg_type(cfg_mgr.Type_mgr());
+		cfg_mgr.Bind_many_wiki(this, wiki, Cfg__read_preferred, Cfg__html_mode);
+	}
 	public void Load_by_edit(Xoae_page wpg) {
 		tmp_hpg.Ctor_by_hview(wpg.Wiki(), wpg.Url(), wpg.Ttl(), wpg.Db().Page().Id());
 		Load(tmp_hpg, wpg.Ttl());
@@ -128,6 +135,16 @@ public class Xow_hdump_mgr__load {
 			trg_list.Add_direct(src_list.Get_at(i));
 		}
 	}
+ 		public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, Cfg__read_preferred))	 		read_preferred = m.ReadYn("v");
+		else if	(ctx.Match(k, Cfg__html_mode))				html_mode = Xow_hdump_mode.Parse(m.ReadStr("v"));
+		return this;
+	}
+	private static final String
+	  Cfg__read_preferred	= "xowa.wiki.hdumps.read_preferred"
+	, Cfg__html_mode		= "xowa.wiki.hdumps.html_mode"
+	;
+
 	private static boolean Load__fail(Xoh_page hpg) {hpg.Db().Page().Exists_n_(); return false;}
 	private static boolean Load__dbpg(Xow_wiki wiki, Xowd_page_itm dbpg, Xoh_page hpg, Xoa_ttl ttl) {
 		wiki.Data__core_mgr().Tbl__page().Select_by_ttl(dbpg, ttl.Ns(), ttl.Page_db());
