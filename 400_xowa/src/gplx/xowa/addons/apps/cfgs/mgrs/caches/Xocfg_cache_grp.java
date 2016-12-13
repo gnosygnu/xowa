@@ -32,7 +32,7 @@ class Xocfg_cache_grp {
 		if (rv != null) return rv.Val();
 
 		// global match; EX: "app|key_1"
-		rv = (Xocfg_cache_itm)vals.Get_by(gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_itm.Ctx__app);
+		rv = (Xocfg_cache_itm)vals.Get_by(Xocfg_mgr.Ctx__app);
 		if (rv != null) return rv.Val();
 
 		// dflt

@@ -51,6 +51,10 @@ public class Xocfg_cache_mgr {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
 		grp.Sub(sub, ctx, evt);
 	}
+	public void Pub(String ctx, String key, String val) {
+		Xocfg_cache_grp grp = Grps__get_or_load(key);
+		grp.Pub(ctx, val);
+	}
 	public void Dflt(String key, String val) {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
 		grp.Dflt_(val);

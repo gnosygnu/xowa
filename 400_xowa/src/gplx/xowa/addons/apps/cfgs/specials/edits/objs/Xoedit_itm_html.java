@@ -31,7 +31,7 @@ public class Xoedit_itm_html {
 				bfr.Add_str_u8_fmt("<input id=\"{0}\" data-xocfg=\"0\" type=\"text\" accesskey=\"d\" class=\"xocfg_textbox\" value=\"{1}\"></input>", key, data);
 				break;
 			case Xoitm_gui_tid.Tid__memo:
-				bfr.Add_str_u8_fmt("<textarea id=\"{0}\" data-xocfg=\"0\" type=\"text\" accesskey=\"d\" class=\"xocfg_memo\" rows=\"4\">{1}</textarea>", key, data);
+				bfr.Add_str_u8_fmt("<textarea id=\"{0}\" data-xocfg=\"0\" type=\"text\" accesskey=\"d\" class=\"xocfg_memo\" rows=\"4\">{1}</textarea>", key, String_.Replace(data, "<", "&lt;"));
 				break;
 			case Xoitm_gui_tid.Tid__select:
 				Keyval[] kvs_ary = type_mgr.Lists__get(data_type);

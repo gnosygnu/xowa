@@ -33,21 +33,35 @@ public class Xocfg_mgr {
 	public void Clear() {
 		cache_mgr.Clear();
 	}
-	public boolean Bind_bool(Xow_wiki wiki, String key, Gfo_invk sub) {return Yn.parse_or(Bind_str(wiki, key, sub), false);}
-	public String Bind_str(Xow_wiki wiki, String key, Gfo_invk sub) {
-		String ctx = wiki.Domain_itm().Abrv_xo_str();
+	public void Bind_many_app(Gfo_invk sub, String... keys) {Bind_many(sub, Xocfg_mgr.Ctx__app, keys);}
+	public void Bind_many(Gfo_invk sub, String ctx, String... keys) {
+		try {
+			for (String key : keys) {
+				String val = Bind_str(ctx, key, sub);
+				cache_mgr.Pub(ctx, key, val);
+			}
+		}
+		catch (Exception e) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "bind failed: ctx=~{0} keys=~{1} err=~{2}", ctx, String_.AryXtoStr(keys), Err_.Message_gplx_log(e));
+		}
+	}
+	public boolean Bind_bool_app(String key, Gfo_invk sub)					{return Yn.parse_or(Bind_str(Xocfg_mgr.Ctx__app, key, sub), false);}
+	public boolean Bind_bool(Xow_wiki wiki, String key, Gfo_invk sub)		{return Yn.parse_or(Bind_str(wiki, key, sub), false);}
+	public String Bind_str(Xow_wiki wiki, String key, Gfo_invk sub)		{return Bind_str(wiki.Domain_itm().Abrv_xo_str(), key, sub);}
+	public String Bind_str(String ctx, String key, Gfo_invk sub) {
 		cache_mgr.Sub(sub, ctx, key, key);
 		return cache_mgr.Get(ctx, key);
 	}
-	public String Get_str_app(String key) {return Get_str(gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_itm.Ctx__app, key);}
+	public String Get_str_app(String key) {return Get_str(Xocfg_mgr.Ctx__app, key);}
 	public String Get_str(String ctx, String key) {
 		return cache_mgr.Get(ctx, key);
 	}
-	public void Set_str_app(String key, String val) {Set_str(gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_itm.Ctx__app, key, val);}
+	public void Set_str_app(String key, String val) {Set_str(Xocfg_mgr.Ctx__app, key, val);}
 	public void Set_str(String ctx, String key, String val) {
 		cache_mgr.Set(ctx, key, val);
 	}
 	public void Del(String ctx, String key) {
 		cache_mgr.Del(ctx, key);
 	}
+	public static String Ctx__app = "app";
 }

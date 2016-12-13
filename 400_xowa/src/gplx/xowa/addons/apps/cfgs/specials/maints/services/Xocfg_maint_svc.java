@@ -35,6 +35,7 @@ public class Xocfg_maint_svc {
 		// exec
 		Xocfg_db_app db_app = Xocfg_db_app.New(app);
 		db_app.Conn().Txn_bgn("xo__cfg_maint__upsert");
+		byte[] anch_find_bry = Bry_.new_a7("<a "), anch_repl_bry = Bry_.new_a7("<a tabindex=\"-1\" ");
 		for (Xocfg_maint_nde nde : ndes) {
 			if (nde.Type_is_grp()) {
 				Xocfg_maint_svc.Create_grp(db_app, nde.Key(), nde.Owner(), nde.Name(), nde.Help());
@@ -42,6 +43,7 @@ public class Xocfg_maint_svc {
 			else {
 				Xocfg_maint_itm itm = (Xocfg_maint_itm)nde;
 				byte[] help = parser_mgr.Main().Parse_text_to_html(parser_mgr.Ctx(), Bry_.new_u8(itm.Help()));
+				help = Bry_.Replace(help, anch_find_bry, anch_repl_bry);	// replace "<a " with "<a tabindex=-1 " else tabbing will go to hidden anchors in help text
 				Xocfg_maint_svc.Create_itm(db_app, nde.Key(), nde.Owner(), nde.Name(), String_.new_u8(help), itm.Scope(), itm.Db_type(), itm.Dflt(), itm.Gui_type(), itm.Gui_args());
 			}
 		}

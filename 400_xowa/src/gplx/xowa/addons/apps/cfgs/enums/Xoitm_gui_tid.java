@@ -47,6 +47,8 @@ public class Xoitm_gui_tid {	// SERIALIZED
 	public static String Infer_gui_type(String db_type) {
 		if (String_.Eq(db_type, "bool"))
 			return Xoitm_gui_tid.Str__checkbox;
+		else if (String_.Eq(db_type, "int"))
+			return Xoitm_gui_tid.Str__numeric;
 		else if (String_.Eq(db_type, "memo"))
 			return Xoitm_gui_tid.Str__memo;
 		else if (String_.Eq(db_type, "io.process"))

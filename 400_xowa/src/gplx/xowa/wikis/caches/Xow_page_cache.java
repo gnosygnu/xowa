@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 public class Xow_page_cache {
+	private final    Object thread_lock = new Object();
 	private final    Xowe_wiki wiki;
 	private final    Ordered_hash cache = Ordered_hash_.New_bry();	// NOTE: wiki titles are not case-sensitive when ns is "1st-letter" (EX: w:earth an w:Earth); in these cases, two entries will be stored
 	private final    List_adp deleted = List_adp_.New();
@@ -32,7 +33,7 @@ public class Xow_page_cache {
 		cache.Add(ttl_full_db, itm);
 	}
 	private void Add_safe(byte[] ttl_full_db, Xow_page_cache_itm itm) {
-		synchronized (cache) {	// LOCK:high-usage;DATE:2016-07-14
+		synchronized (thread_lock) {	// LOCK:high-usage;DATE:2016-07-14
 			if (!cache.Has(ttl_full_db)) {	// check again that itm is not in cache; note that this is necessary as cache.Get is not in "synchronized" block (for performance reasons); DATE:2016-12-12
 				cache.Add(ttl_full_db, itm);
 			}
@@ -95,7 +96,7 @@ public class Xow_page_cache {
 		return rv;
 	}
 	public void Free_mem(boolean clear_permanent_itms) {
-		synchronized (cache) {	// LOCK:app-level; DATE:2016-07-06
+		synchronized (thread_lock) {	// LOCK:app-level; DATE:2016-07-06
 			if (clear_permanent_itms)
 				cache.Clear();
 			else {
@@ -107,8 +108,9 @@ public class Xow_page_cache {
 				}
 				len = deleted.Len();
 				for (int i = 0; i < len; i++) {
-					Xow_page_cache_itm itm = (Xow_page_cache_itm)cache.Get_at(i);
-					cache.Del(itm.Ttl().Full_db());
+					Xow_page_cache_itm itm = (Xow_page_cache_itm)deleted.Get_at(i);
+					if (itm.Ttl() != null)	// missing is null
+						cache.Del(itm.Ttl().Full_db());
 				}
 				deleted.Clear();
 			}

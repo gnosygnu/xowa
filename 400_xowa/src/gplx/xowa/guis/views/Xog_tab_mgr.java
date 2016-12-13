@@ -17,10 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.gfui.draws.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.tabs.*; import gplx.gfui.controls.standards.*;
-import gplx.xowa.apps.cfgs.old.*; import gplx.xowa.apps.apis.xowa.gui.browsers.*; import gplx.xowa.specials.*;
+import gplx.xowa.apps.apis.xowa.gui.browsers.*; import gplx.xowa.specials.*;
 import gplx.xowa.apps.urls.*;
 public class Xog_tab_mgr implements Gfo_evt_itm {
 	private Ordered_hash tab_regy = Ordered_hash_.New(); private int tab_uid = 0;
+	private boolean btns__hide_if_one; private int btns__height;
 	public Xog_tab_mgr(Xog_win_itm win) {
 		this.win = win;
 		ev_mgr = new Gfo_evt_mgr(this);
@@ -28,6 +29,8 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 	public Gfo_evt_mgr Evt_mgr() {return ev_mgr;} private Gfo_evt_mgr ev_mgr;
 	public Xog_win_itm Win() {return win;} private Xog_win_itm win;
 	public Gfui_tab_mgr Tab_mgr() {return tab_mgr;} private Gfui_tab_mgr tab_mgr;
+	public int Btns__min_chars() {return btns__min_chars;} private int btns__min_chars;
+	public int Btns__max_chars() {return btns__max_chars;} private int btns__max_chars;
 	public byte Html_load_tid() {return html_load_tid;} private byte html_load_tid;
 	public boolean Html_load_tid__url() {return html_load_tid == Gxw_html_load_tid_.Tid_url;}
 	public void Init_by_kit(Gfui_kit kit) {
@@ -35,19 +38,8 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		active_tab = Xog_tab_itm_.Null;
 		tab_mgr.Btns_selected_color_(ColorAdp_.White);
 		tab_mgr.Btns_unselected_color_(ColorAdp_.LightGray);
-		Gfo_evt_mgr_.Sub_same_many(tab_mgr, this, Gfui_tab_mgr.Evt_tab_selected, Gfui_tab_mgr.Evt_tab_closed, Gfui_tab_mgr.Evt_tab_switched);
-		Xocfg_tab_btn_mgr btn_mgr = win.App().Cfg_regy().App().Gui_mgr().Tab_mgr().Btn_mgr();
-		Btns_place_on_top_(btn_mgr.Place_on_top());
-		Btns_curved_(btn_mgr.Curved());
-		Btns_close_visible_(btn_mgr.Close_visible());
-		Btns_unselected_close_visible_(btn_mgr.Unselected_close_visible());
-		Btns_height_(btn_mgr.Height());
-		Gfo_evt_mgr_.Sub_same_many(btn_mgr, this
-		, Xocfg_tab_btn_mgr.Evt_place_on_top_changed, Xocfg_tab_btn_mgr.Evt_height_changed, Xocfg_tab_btn_mgr.Evt_curved_changed
-		, Xocfg_tab_btn_mgr.Evt_close_visible_changed, Xocfg_tab_btn_mgr.Evt_unselected_close_visible_changed
-		, Xocfg_tab_btn_mgr.Evt_text_min_chars_changed, Xocfg_tab_btn_mgr.Evt_text_max_chars_changed
-		, Xocfg_tab_btn_mgr.Evt_hide_if_one_changed
-		);
+		Gfo_evt_mgr_.Sub_same_many(tab_mgr, this, Gfui_tab_mgr.Evt_tab_selected, Gfui_tab_mgr.Evt_tab_closed, Gfui_tab_mgr.Evt_tab_switched);			
+		win.App().Cfg().Bind_many_app(this, Cfg__place_on_top, Cfg__height, Cfg__hide_if_one, Cfg__curved, Cfg__close_btn_visible, Cfg__unselected_close_btn_visible, Cfg__max_chars, Cfg__min_chars);
 		html_load_tid = win.App().Api_root().Gui().Browser().Html().Load_tid();
 		Gfo_evt_mgr_.Sub_same_many(win.App().Api_root().Gui().Browser().Html(), this
 		, Xoapi_html_box.Evt_load_tid_changed
@@ -59,11 +51,6 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		return active_tab;
 	}
 	public boolean Active_tab_is_null() {return active_tab == Xog_tab_itm_.Null;}
-	private void Btns_place_on_top_(boolean v) {tab_mgr.Btns_place_on_top_(v);}
-	private void Btns_curved_(boolean v) {tab_mgr.Btns_curved_(v);}
-	private void Btns_height_(int v) {tab_mgr.Btns_height_(v);}
-	private void Btns_close_visible_(boolean v) {tab_mgr.Btns_close_visible_(v);}
-	private void Btns_unselected_close_visible_(boolean v) {tab_mgr.Btns_unselected_close_visible_(v);}
 	private void Btns_text_recalc() {
 		int len = this.Tabs_len();
 		for (int i = 0; i < len; i++) {
@@ -99,7 +86,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 			tab_mgr.Tabs_select_by_idx(rv.Tab_idx());
 			active_tab = rv;
 		}
-		Tabs_hide_if_one_chk();
+		Tabs_hide_if_one_chk(false);
 		return rv;
 	}
 	public void Tabs_new_dupe(boolean focus) {
@@ -171,7 +158,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		}
 		else
 			Tabs_recalc_idx();
-		Tabs_hide_if_one_chk();
+		Tabs_hide_if_one_chk(false);
 	}
 	private Xog_tab_itm Tabs_get_by_key_or_warn(String key) {
 		Xog_tab_itm rv = (Xog_tab_itm)tab_regy.Get_by(key); if (rv == null) win.App().Usr_dlg().Warn_many("", "", "tab.selected could not find tab; key={0}", key);
@@ -225,16 +212,17 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		if (focus)
 			tab_mgr.Tabs_select_by_idx(new_tab.Tab_idx());
 	}
-	private void Tabs_hide_if_one_chk() {
-		gplx.xowa.apps.cfgs.old.Xocfg_tab_btn_mgr btn_mgr = win.App().Cfg_regy().App().Gui_mgr().Tab_mgr().Btn_mgr();
-		if (!btn_mgr.Hide_if_one()) return;
-		if (tab_regy.Count() > 1) {
-			if (tab_mgr.Btns_height() != btn_mgr.Height())
-				Btns_height_(btn_mgr.Height());
-		}
-		else {
-			if (tab_mgr.Btns_height() != 0)
-				Btns_height_(0);
+	private void Tabs_hide_if_one_chk(boolean force) {
+		if (btns__hide_if_one || force) {// run code only if enabled or forced
+			if (tab_regy.Count() == 1) {
+				int desired_height = btns__hide_if_one ? 0 : btns__height;
+				if (tab_mgr.Btns_height() != desired_height)
+					tab_mgr.Btns_height_(desired_height);
+			}
+			else {
+				if (tab_mgr.Btns_height() != btns__height)
+					tab_mgr.Btns_height_(btns__height);
+			}
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -249,17 +237,20 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		else if	(ctx.Match(k, Invk_tabs_select_fwd))										Tabs_select(Bool_.Y);
 		else if	(ctx.Match(k, Invk_tabs_switch_cur_bwd))									Tabs_move(Bool_.N);
 		else if	(ctx.Match(k, Invk_tabs_switch_cur_fwd))									Tabs_move(Bool_.Y);
-		else if	(ctx.Match(k, Xocfg_tab_btn_mgr.Evt_place_on_top_changed))					Btns_place_on_top_(m.ReadBool("v"));
-		else if	(ctx.Match(k, Xocfg_tab_btn_mgr.Evt_curved_changed))						Btns_curved_(m.ReadBool("v"));
-		else if	(ctx.Match(k, Xocfg_tab_btn_mgr.Evt_height_changed))						Btns_height_(m.ReadInt("v"));
-		else if	(ctx.Match(k, Xocfg_tab_btn_mgr.Evt_close_visible_changed))					Btns_close_visible_(m.ReadBool("v"));
-		else if	(ctx.Match(k, Xocfg_tab_btn_mgr.Evt_unselected_close_visible_changed))		Btns_unselected_close_visible_(m.ReadBool("v"));
-		else if	(ctx.Match(k, Xocfg_tab_btn_mgr.Evt_text_min_chars_changed))				Btns_text_recalc();
-		else if	(ctx.Match(k, Xocfg_tab_btn_mgr.Evt_text_max_chars_changed))				Btns_text_recalc();
 		else if	(ctx.Match(k, Xoapi_html_box.Evt_load_tid_changed))							html_load_tid = m.ReadByte("v");
+
+		else if	(ctx.Match(k, Cfg__place_on_top))											tab_mgr.Btns_place_on_top_(m.ReadBool("v"));
+		else if	(ctx.Match(k, Cfg__height))													{btns__height = m.ReadInt("v"); tab_mgr.Btns_height_(btns__height);}
+		else if	(ctx.Match(k, Cfg__hide_if_one))											{btns__hide_if_one = m.ReadBool("v"); Tabs_hide_if_one_chk(true);}
+		else if	(ctx.Match(k, Cfg__curved))													tab_mgr.Btns_curved_(m.ReadBool("v"));
+		else if	(ctx.Match(k, Cfg__close_btn_visible))										tab_mgr.Btns_close_visible_(m.ReadBool("v"));
+		else if	(ctx.Match(k, Cfg__unselected_close_btn_visible))							tab_mgr.Btns_unselected_close_visible_(m.ReadBool("v"));
+		else if	(ctx.Match(k, Cfg__max_chars))												{btns__max_chars = m.ReadInt("v"); Btns_text_recalc();}
+		else if	(ctx.Match(k, Cfg__min_chars))												{btns__min_chars = m.ReadInt("v"); Btns_text_recalc();}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
+
 	public static final String
 	  Invk_tabs_select_fwd		= "tabs_select_fwd"		, Invk_tabs_select_bwd = "tabs_select_bwd"
 	, Invk_tabs_switch_cur_fwd	= "tabs_switch_cur_fwd"	, Invk_tabs_switch_cur_bwd = "tabs_switch_cur_bwd"
@@ -268,4 +259,15 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 	, Invk_tabs_new_link__at_dflt__focus_y = "tabs_new_link__at_dflt__focus_y"
     , Invk_tabs_close_cur		= "tabs_close_cur"
 	;
+	private static final    String 
+	  Cfg__place_on_top						= "xowa.gui.tabs.place_on_top"
+	, Cfg__height							= "xowa.gui.tabs.height"
+	, Cfg__hide_if_one						= "xowa.gui.tabs.hide_if_one"
+	, Cfg__curved							= "xowa.gui.tabs.curved"
+	, Cfg__close_btn_visible				= "xowa.gui.tabs.close_btn_visible"
+	, Cfg__unselected_close_btn_visible		= "xowa.gui.tabs.unselected_close_btn_visible"
+	, Cfg__max_chars						= "xowa.gui.tabs.max_chars"
+	, Cfg__min_chars						= "xowa.gui.tabs.min_chars"
+	;
+
 }

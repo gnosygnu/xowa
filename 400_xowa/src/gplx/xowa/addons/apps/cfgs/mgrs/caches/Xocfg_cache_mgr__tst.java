@@ -27,14 +27,14 @@ public class Xocfg_cache_mgr__tst {
 		fxt.Test__get("en.d", "key_1", "dflt");
 	}
 	@Test   public void Get__app() {
-		String ctx = gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_itm.Ctx__app;
+		String ctx = Xocfg_mgr.Ctx__app;
 		fxt.Init__db_add(ctx, "key_1", "val_1");
 		fxt.Test__get(ctx, "key_1", "val_1");
 		fxt.Test__get("en.w", "key_1", "val_1");
 		fxt.Test__get("en.d", "key_1", "val_1");
 	}
 	@Test   public void Set__app() {
-		String ctx = gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_itm.Ctx__app;
+		String ctx = Xocfg_mgr.Ctx__app;
 		fxt.Init__db_add(ctx, "key_1", "123");
 		fxt.Init__sub(ctx, "key_1", "key_1");
 		fxt.Exec__set(ctx, "key_1", "234");

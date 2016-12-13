@@ -21,13 +21,13 @@ import gplx.gfui.*; import gplx.gfui.ipts.*; import gplx.gfui.kits.core.*; impor
 import gplx.xowa.guis.history.*; import gplx.xowa.guis.bnds.*;
 import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.langs.vnts.*;
-import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.apps.cfgs.old.*;
+import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.lnkis.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*;
 public class Xog_tab_itm implements Gfo_invk {
-	private Xog_win_itm win; private Xocfg_tab_mgr cfg_tab_mgr;
+	private Xog_win_itm win;
 	public Xog_tab_itm(Xog_tab_mgr tab_mgr, Gfui_tab_itm_data tab_data, Xowe_wiki wiki, Xoae_page page) {
 		this.tab_mgr = tab_mgr; this.tab_data = tab_data; this.wiki = wiki; this.page = page;
-		this.win = tab_mgr.Win(); this.cfg_tab_mgr = win.App().Cfg_regy().App().Gui_mgr().Tab_mgr();
+		this.win = tab_mgr.Win();
 		this.html_itm = new Xog_html_itm(this);
 		cmd_sync = win.Kit().New_cmd_sync(this);
 	}
@@ -96,9 +96,8 @@ public class Xog_tab_itm implements Gfo_invk {
 		Tab_name_(String_.new_u8(tab_name));
 	}
 	public void Tab_name_(String tab_name) {
-		Xocfg_tab_btn_mgr cfg_tab_btn_mgr = cfg_tab_mgr.Btn_mgr();
-		tab_name = Xog_tab_itm_.Tab_name_min(tab_name, cfg_tab_btn_mgr.Text_min_chars());
-		tab_name = Xog_tab_itm_.Tab_name_max(tab_name, cfg_tab_btn_mgr.Text_max_chars());
+		tab_name = Xog_tab_itm_.Tab_name_min(tab_name, tab_mgr.Btns__min_chars());
+		tab_name = Xog_tab_itm_.Tab_name_max(tab_name, tab_mgr.Btns__max_chars());
 		tab_box.Tab_name_(tab_name);
 	}
 	public Xog_history_mgr		History_mgr() {return history_mgr;} private Xog_history_mgr history_mgr = new Xog_history_mgr();

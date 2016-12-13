@@ -21,10 +21,17 @@ public class Xocfg_type_mgr {
 	public Xocfg_type_mgr() {
 		this.Lists__add("list:xowa.app.security.privacy.load_mode", "mem", "url");
 		this.Lists__add("list:xowa.app.startup.window.mode", "previous", "maximized", "absolute", "relative", "default");
-		this.Lists__add("list:xowa.app.startup.pages.type", "blank", "xowa", "absolute", "previous", "custom");
-		this.Lists__add("list:xowa.gui.window.html_box.adj_type", "none", "absolute", "relative");
+		this.Lists__add("list:xowa.app.startup.pages.type", "blank", "xowa", "previous", "custom");
+		this.Lists__add("list:xowa.gui.window.html_box.adj_type", "none", "relative", "absolute");
 		this.Lists__add("list:xowa.wiki.dbs.html.basic.html_mode", Keyval_.new_("shown", "Shown"), Keyval_.new_("hdump_save", "Saved for HTML DB"), Keyval_.new_("hdump_load", "Loaded by HTML DB"));
-		this.Lists__add("list:xowa.wiki.database.general.zip_mode", "text", "gzip", "bz2", "xz");
+		this.Lists__add("list:xowa.wiki.database.general.zip_mode", "text", "gzip", "bzip2", "xz");
+		this.Lists__add("list:xowa.html.wiki.portal.missing_class", Keyval_.new_("", "Show as blue link"), Keyval_.new_("new", "Show as red link"), Keyval_.new_("xowa_display_none", "Hide"));
+		this.Lists__add("list:xowa.html.category.basic.missing_class", "normal", "hide", "red_link");
+		this.Lists__add("list:xowa.html.tidy.general.engine", "tidy", "jtidy");
+		this.Lists__add("list:xowa.addon.http_server.general.file_retrieve_mode", Keyval_.new_("wait"), Keyval_.new_("skip"), Keyval_.new_("async_server", "async server"));
+		this.Lists__add("list:xowa.addon.search_suggest.html_bar.search_mode", "Search", "AllPages", "AllPages_(v2)");
+		this.Lists__add("list:xowa.addon.math.general.renderer", "MathJax", "LaTeX");
+		this.Lists__add("list:xowa.addon.scribunto.general.engine", "luaj", "lua");
 	}
 	public void	Lists__add(String key, String... vals) {
 		int len = vals.length;

@@ -51,7 +51,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		this.edited = true;
 	}
 	public void Set_data_by_dflt() {
-		this.ctx = Ctx__app;
+		this.ctx = Xocfg_mgr.Ctx__app;
 		this.val = dflt;
 		this.date = String_.Empty;
 		this.edited = false;
@@ -89,7 +89,6 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		else if	(String_.Eq(k, "html"))		To_html(bfr.Bfr(), type_mgr);
 		return true;
 	}
-	public static String Ctx__app = "app";
 	public Mustache_doc_itm[] Mustache__subs(String k) {
 		if	(String_.Eq(k, "edited"))		return Mustache_doc_itm_.Ary__bool(edited);
 		return Mustache_doc_itm_.Ary__empty;
