@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.xowa.addons.apps.cfgs.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.bldrs.filters.core.*;
 public class Dg_match_mgr {
@@ -128,7 +129,25 @@ public class Dg_match_mgr {
 	}
 	public void Rls() {log_mgr.Rls();}
 	public void Commit() {if (log_enabled) log_mgr.Commit();}
-	public static final int Target_tid_title = 1, Target_tid_wikitext = 2;
+
+	public static void Cfg__reg(Xoa_app app) {
+		app.Cfg().Dflt_mgr().Add(Cfg__root_dir, app.Fsys_mgr().Bin_xowa_dir().GenSubDir_nest("cfg", "bldr", "filter").Raw());
+	}
+	public static Dg_match_mgr New_mgr(Xoa_app app, Xow_wiki wiki) {
+		Xocfg_mgr cfg_mgr = app.Cfg();
+		if (!cfg_mgr.Get_bool_by_wiki_or(wiki, Cfg__enabled, false)) return null;
+		String ctx = cfg_mgr.To_ctx(wiki);
+		return new Dg_match_mgr
+		( cfg_mgr.Get_url_or(ctx, Cfg__root_dir, app.Fsys_mgr().Bin_xowa_dir().GenSubDir_nest("cfg", "bldr", "filter")).GenSubDir(wiki.Domain_str())
+		, cfg_mgr.Get_int_or(ctx, "xowa.wiki.import.dansguardian.score_init", 0)
+		, cfg_mgr.Get_int_or(ctx, "xowa.wiki.import.dansguardian.score_fail", 0)
+		, cfg_mgr.Get_bool_or(ctx, "xowa.wiki.import.dansguardian.case_match", false)
+		, cfg_mgr.Get_bool_or(ctx, "xowa.wiki.import.dansguardian.log_enabled", true)
+		, wiki.Fsys_mgr().Root_dir().GenSubFil("dansguardian_log.sqlite3")
+		);
+	}
+	public static final String Cfg__enabled		= "xowa.wiki.import.dansguardian.enabled";
+	private static final String Cfg__root_dir		= "xowa.wiki.import.dansguardian.root_dir";
 }
 class Dg_rule_group {
 	public Dg_rule_group(byte[] word) {this.word = word;}

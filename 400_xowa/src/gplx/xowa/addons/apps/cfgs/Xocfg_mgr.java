@@ -53,10 +53,40 @@ public class Xocfg_mgr {
 		cache_mgr.Sub(sub, ctx, key, key);
 		return cache_mgr.Get(ctx, key);
 	}
-	public String Get_str_app(String key) {return Get_str(Xocfg_mgr.Ctx__app, key);}
-	public String Get_str(String ctx, String key) {
-		return cache_mgr.Get(ctx, key);
+	public boolean Get_bool_by_wiki_or(Xow_wiki wiki, String key, boolean or) {
+		String rv = Get_str(wiki.Domain_itm().Abrv_xo_str(), key);
+		return rv == null ? Yn.parse_or(rv, or) : or;
 	}
+	public String Get_str_app(String key) {return Get_str(Xocfg_mgr.Ctx__app, key);}
+	public boolean Get_bool_or(String ctx, String key, boolean or) {
+		String rv = cache_mgr.Get(ctx, key);
+		try		{return Yn.parse(rv);}
+		catch	(Exception exc) {
+			Err_.Noop(exc);
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:failed to parse boolean; key=~{0} val=~{1}", key, rv);
+			return or;
+		}
+	}
+	public int Get_int_or(String ctx, String key, int or) {
+		String rv = cache_mgr.Get(ctx, key);
+		try		{return Int_.parse(rv);}
+		catch	(Exception exc) {
+			Err_.Noop(exc);
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:failed to parse int; key=~{0} val=~{1}", key, rv);
+			return or;
+		}
+	}
+	public Io_url Get_url_or(String ctx, String key, Io_url or) {
+		String rv = cache_mgr.Get(ctx, key);
+		try		{return Io_url_.new_any_(rv);}
+		catch	(Exception exc) {
+			Err_.Noop(exc);
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:failed to parse int; key=~{0} val=~{1}", key, rv);
+			return or;
+		}
+	}
+	public String To_ctx(Xow_wiki wiki) {return wiki.Domain_itm().Abrv_xo_str();}
+	public String Get_str(String ctx, String key) {return cache_mgr.Get(ctx, key);}
 	public void Set_str_app(String key, String val) {Set_str(Xocfg_mgr.Ctx__app, key, val);}
 	public void Set_str(String ctx, String key, String val) {
 		cache_mgr.Set(ctx, key, val);

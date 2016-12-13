@@ -28,7 +28,7 @@ public class Xob_term_cmd extends Xob_term_base {
 		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp__wiki_init, "props.siteinfo_misc", wiki.Props().Siteinfo_misc());
 		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp__wiki_init, "props.siteinfo_mainpage", wiki.Props().Siteinfo_mainpage());
 		gplx.fsdb.Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, false);// always build file.user db; DATE:2015-05-12
-		if (wiki.Appe().Api_root().Bldr().Wiki().Filter().Dansguardian().Enabled())	// if dansguardian, delete missing pages; DATE:2016-01-06
+		if (wiki.App().Cfg().Get_bool_by_wiki_or(wiki, gplx.xowa.bldrs.filters.dansguardians.Dg_match_mgr.Cfg__enabled, false))
 			new Xob_page_delete_cmd(wiki.Appe().Bldr(), wiki).Cmd_run();
 		wiki.Data__core_mgr().Rls();
 	}

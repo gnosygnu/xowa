@@ -33,6 +33,7 @@ public class Xocfg_dflt_mgr {
 	}
 	public void Add(String key, String val) {
 		cache_mgr.Dflt(key, val);
+		hash.Add(key, new Xocfg_dflt_itm__static(val));
 	}
 	public void Add(String key, Xocfg_dflt_itm itm) {
 		hash.Add(key, itm);

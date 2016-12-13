@@ -65,6 +65,7 @@ public class Xoax_addon_mgr {
 		if (app.Mode().Tid_is_http()) {
 			app.Addon_mgr().Itms__add_many(new gplx.xowa.addons.servers.https.Xoax_long_poll_addon());
 		}
+
 		return this;
 	}
 	public void Run_by_app(Xoa_app app) {
@@ -102,7 +103,13 @@ public class Xoax_addon_mgr {
 			}
 		}
 	}
+	private boolean init_cfg = true;	// WORKAROUND:move cfg to separate proc instead of lazy-loading on 1st wiki
 	public void Load_by_wiki(Xow_wiki wiki) {
+		if (init_cfg) {
+			init_cfg = false;
+			gplx.xowa.bldrs.filters.dansguardians.Dg_match_mgr.Cfg__reg(wiki.App());
+		}
+
 		int len = init_list.Len();
 		for (int i = 0; i < len; ++i) {
 			Xoax_addon_itm__init itm = (Xoax_addon_itm__init)init_list.Get_at(i);

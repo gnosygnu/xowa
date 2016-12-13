@@ -26,7 +26,7 @@ public class Xocfg_edit_special implements Xow_special_page {
 		String lang = url_args.Read_str_or("lang", wiki.App().User().Wikii().Lang().Key_str());
 
 		if (String_.Eq(grp, "")) {
-			grp = wiki.App().Cfg().Get_str_app("xowa.app.cfg.general.previous_section");
+			grp = wiki.App().Cfg().Get_str_app("xowa.app.cfg.recent_page");
 		}
 		new Xocfg_edit_html(grp, ctx, lang).Bld_page_by_mustache(wiki.App(), page, this);
 	}
