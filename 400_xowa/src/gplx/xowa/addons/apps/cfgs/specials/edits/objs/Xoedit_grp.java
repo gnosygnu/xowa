@@ -19,7 +19,7 @@ package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gp
 import gplx.langs.mustaches.*;
 import gplx.core.gfobjs.*;
 public class Xoedit_grp implements Xoedit_nde, Mustache_doc_itm {		
-	private String lang, name, help;
+	private String lang, name;
 	public Xoedit_grp(int id, String key, int sort) {
 		this.id = id;
 		this.key = key;
@@ -27,7 +27,9 @@ public class Xoedit_grp implements Xoedit_nde, Mustache_doc_itm {
 	}
 	public int		Id()		{return id;}	private final    int id;
 	public String	Key()		{return key;}	private final    String key;
-	public int		Sort()		{return sort;}	private final    int sort;		
+	public int		Sort()		{return sort;}	private final    int sort;
+	public String	Help()		{return help;}	private String help;
+
 	public Xoedit_itm[] Itms() {return itms;} private Xoedit_itm[] itms = new Xoedit_itm[0];
 	public void Itms_(Xoedit_itm[] v) {this.itms = v;}
 	public void Load_by_i18n(String lang, String name, String help) {

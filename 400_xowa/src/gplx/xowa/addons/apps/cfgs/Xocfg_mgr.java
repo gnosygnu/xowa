@@ -53,9 +53,13 @@ public class Xocfg_mgr {
 		cache_mgr.Sub(sub, ctx, key, key);
 		return cache_mgr.Get(ctx, key);
 	}
+	public boolean Get_bool_by_app_or(String key, boolean or) {
+		String rv = Get_str(Ctx__app, key);
+		return rv == null ? or : Yn.parse_or(rv, or);
+	}
 	public boolean Get_bool_by_wiki_or(Xow_wiki wiki, String key, boolean or) {
 		String rv = Get_str(wiki.Domain_itm().Abrv_xo_str(), key);
-		return rv == null ? Yn.parse_or(rv, or) : or;
+		return rv == null ? or : Yn.parse_or(rv, or);
 	}
 	public String Get_str_app(String key) {return Get_str(Xocfg_mgr.Ctx__app, key);}
 	public boolean Get_bool_or(String ctx, String key, boolean or) {
@@ -64,6 +68,15 @@ public class Xocfg_mgr {
 		catch	(Exception exc) {
 			Err_.Noop(exc);
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:failed to parse boolean; key=~{0} val=~{1}", key, rv);
+			return or;
+		}
+	}
+	public int Get_int_by_wiki_or(Xow_wiki wiki, String key, int or) {
+		String rv = Get_str(wiki.Domain_itm().Abrv_xo_str(), key);
+		try		{return Int_.parse(rv);}
+		catch	(Exception exc) {
+			Err_.Noop(exc);
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:failed to parse int; key=~{0} val=~{1}", key, rv);
 			return or;
 		}
 	}

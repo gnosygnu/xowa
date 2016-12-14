@@ -465,6 +465,7 @@ class Xop_popup_parser_fxt {
 		parser = wiki.Html_mgr().Head_mgr().Popup_mgr().Parser();
 		parser.Init_by_wiki(wiki);
 		parser.Cfg().Tmpl_read_len_(4);
+		parser.Cfg().Tmpl_read_max_(32 * Io_mgr.Len_kb);
 		parser.Cfg().Ellipsis_(Bry_.Empty);
 		parser.Cfg().Notoc_(Bry_.Empty);
 		parser.Cfg().Show_all_if_less_than_(-1);
@@ -475,7 +476,7 @@ class Xop_popup_parser_fxt {
 		parser.Html_mkr().Output_js_clean_(false);
 		parser.Html_mkr().Output_tidy_(false);
 		parser.Html_mkr().Fmtr_next_sect().Fmt_(" (~{next_sect_val})");
-		parser.Wrdx_mkr().Xnde_ignore_ids_(Xoapi_popups.Dflt_xnde_ignore_ids);
+		parser.Wrdx_mkr().Xnde_ignore_ids_(Bry_.new_a7("coordinates"));
 		word_min = 2;
 	}
 	public Xop_popup_parser_fxt Init_notoc_(String v) {parser.Cfg().Notoc_(Bry_.new_u8(v)); return this;}

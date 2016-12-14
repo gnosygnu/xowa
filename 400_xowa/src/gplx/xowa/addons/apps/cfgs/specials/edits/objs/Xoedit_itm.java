@@ -22,7 +22,7 @@ import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
 public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 	private int gui_type;
 	private boolean edited;
-	private String data_type, gui_args, dflt, lang, name, help, ctx, val, date;
+	private String data_type, gui_args, dflt, lang, name, ctx, val, date;
 	private Xocfg_type_mgr type_mgr;
 	public Xoedit_itm(Xocfg_type_mgr type_mgr, int id, String key, int sort) {
 		this.type_mgr = type_mgr;
@@ -32,6 +32,8 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 	}
 	public int		Id()		{return id;}	private final    int id;
 	public String	Key()		{return key;}	private final    String key;
+	public String	Help()		{return help;}	private String help;
+
 	public int		Sort()		{return sort;}	private final    int sort;
 	public void Load_by_meta(int scope_id, String data_type, int gui_type, String gui_args, String dflt) {
 		this.data_type = data_type;

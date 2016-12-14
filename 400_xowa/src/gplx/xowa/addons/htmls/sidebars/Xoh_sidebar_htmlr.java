@@ -21,7 +21,7 @@ class Xoh_sidebar_htmlr {
 	public static byte[] To_html(Bry_bfr bfr, Xowe_wiki wiki, List_adp grps) {
 		Xoh_sidebar_itms_fmtr itms_fmtr = new Xoh_sidebar_itms_fmtr();
 		int len = grps.Count();
-		boolean popups_enabled = wiki.Appe().Api_root().Html().Modules().Popups().Enabled();
+		boolean popups_enabled = wiki.Html_mgr().Head_mgr().Popup_mgr().Enabled();
 		for (int i = 0; i < len; ++i) {
 			Xoh_sidebar_itm grp = (Xoh_sidebar_itm)grps.Get_at(i);
 			itms_fmtr.Init_by_grp(popups_enabled, grp);

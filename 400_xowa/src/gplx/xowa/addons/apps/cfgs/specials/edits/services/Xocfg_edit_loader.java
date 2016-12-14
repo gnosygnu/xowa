@@ -56,8 +56,10 @@ public class Xocfg_edit_loader {
 		Load_itm_data(itm_list, ctx);
 		Load_i18n(grp_list, itm_list, lang);
 
+		Xoedit_nde page_nde = grp_list.Get_by_or_fail(grp_key);
+
 		grp_list.Delete_container_grps();
-		return new Xoedit_root(Load_nav_mgr(grp_key), (Xoedit_grp[])grp_list.To_grp_ary_and_clear());
+		return new Xoedit_root(Load_nav_mgr(grp_key), page_nde.Help(), (Xoedit_grp[])grp_list.To_grp_ary_and_clear());
 	}
 	private Xoedit_nav_mgr Load_nav_mgr(String grp_key) {
 		// get grp_id

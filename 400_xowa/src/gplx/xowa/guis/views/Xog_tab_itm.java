@@ -130,7 +130,7 @@ public class Xog_tab_itm implements Gfo_invk {
 		if (url.Vnt_bry() != null) Cur_vnt_(wiki, url.Vnt_bry());
 		Tab_name_(new_tab_name);
 		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_u8(ttl.Raw()));
-		if (app.Api_root().Html().Modules().Popups().Enabled())
+		if (wiki.Html_mgr().Head_mgr().Popup_mgr().Enabled())
 			this.Html_box().Html_js_eval_script("if (window.xowa_popups_hide_all != null) window.xowa_popups_hide_all();");	// should be more configurable; DATE:2014-07-09
 		app.Thread_mgr_old().Page_load_mgr().Add_at_end(new Load_page_wkr(this, wiki, url, ttl)).Run();
 	}

@@ -19,5 +19,6 @@ package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gp
 public interface Xoedit_nde {
 	int Id();
 	String Key();
+	String Help();
 	void Load_by_i18n(String lang, String name, String help);
 }

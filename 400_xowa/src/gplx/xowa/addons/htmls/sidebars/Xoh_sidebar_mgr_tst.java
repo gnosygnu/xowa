@@ -169,7 +169,10 @@ class Xoh_sidebar_mgr_fxt {
 		rv.Init_by_title_and_accesskey(Bry_.new_a7(title), Bry_.new_a7(accesskey), null);
 		return rv;
 	}
-	public Xoh_sidebar_mgr_fxt Init__popups_enabled(boolean v) {app.Api_root().Html().Modules().Popups().Enabled_(v); return this;}
+	public Xoh_sidebar_mgr_fxt Init__popups_enabled(boolean v) {
+		wiki.Html_mgr().Head_mgr().Popup_mgr().Enabled_(v);
+		return this;
+	}
 	public Xoh_sidebar_mgr_fxt Init__msg__grp(String key, String text, String title) {
 		Init_msg(key, text);
 		Init_msg("tooltip-n-" + key, title);

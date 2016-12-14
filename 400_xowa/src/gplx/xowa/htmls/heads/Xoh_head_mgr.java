@@ -70,7 +70,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 		itm__navframe.Enabled_y_();
 		boolean popups_enabled 
 			=	!app.Mode().Tid_is_http()		// do not enable if http_server, else js errors when calling xowa_exec; DATE:2016-06-22
-			&&	app.Api_root().Html().Modules().Popups().Enabled();	// check user_cfg
+			&&	wiki.Html_mgr().Head_mgr().Popup_mgr().Enabled();	// check user_cfg
 		itm__popups.Enabled_(popups_enabled);
 		return this;
 	}

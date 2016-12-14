@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.xowa.guis.*;
 import gplx.xowa.apps.apis.xowa.html.modules.*;
+import gplx.xowa.htmls.modules.popups.*; import gplx.xowa.addons.apps.cfgs.*;
 public class Xoh_head_itm__popups extends Xoh_head_itm__base {
 	@Override public byte[] Key() {return Xoh_head_itm_.Key__popups;}
 	@Override public int Flags() {return Flag__css_include | Flag__js_head_global | Flag__js_tail_script;}
@@ -28,21 +29,21 @@ public class Xoh_head_itm__popups extends Xoh_head_itm__base {
 		wtr.Write_css_include(Css_url);
 	}
 	@Override public void Write_js_head_global(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {
-		Xoapi_popups api_popups = app.Api_root().Html().Modules().Popups();
-		wtr.Write_js_global_ini_atr_val(Key_win_show_delay			, api_popups.Win_show_delay());
-		wtr.Write_js_global_ini_atr_val(Key_win_hide_delay			, api_popups.Win_hide_delay());
-		wtr.Write_js_global_ini_atr_val(Key_win_max_w				, api_popups.Win_max_w());
-		wtr.Write_js_global_ini_atr_val(Key_win_max_h				, api_popups.Win_max_h());
-		wtr.Write_js_global_ini_atr_val(Key_win_show_all_max_w		, api_popups.Win_show_all_max_w());
-		wtr.Write_js_global_ini_atr_val(Key_win_bind_focus_blur		, api_popups.Win_bind_focus_blur());
+		Xocfg_mgr cfg_mgr = app.Cfg();
+		wtr.Write_js_global_ini_atr_val(Key_win_show_delay			, cfg_mgr.Get_int_by_wiki_or(wiki, Xow_popup_mgr.Cfg__win_show_delay, 0));
+		wtr.Write_js_global_ini_atr_val(Key_win_hide_delay			, cfg_mgr.Get_int_by_wiki_or(wiki, Xow_popup_mgr.Cfg__win_hide_delay, 0));
+		wtr.Write_js_global_ini_atr_val(Key_win_max_w				, cfg_mgr.Get_int_by_wiki_or(wiki, Xow_popup_mgr.Cfg__win_max_w, 0));
+		wtr.Write_js_global_ini_atr_val(Key_win_max_h				, cfg_mgr.Get_int_by_wiki_or(wiki, Xow_popup_mgr.Cfg__win_max_h, 0));
+		wtr.Write_js_global_ini_atr_val(Key_win_show_all_max_w		, cfg_mgr.Get_int_by_wiki_or(wiki, Xow_popup_mgr.Cfg__win_show_all_max_w, 0));
+		wtr.Write_js_global_ini_atr_val(Key_win_bind_focus_blur		, cfg_mgr.Get_bool_by_wiki_or(wiki, Xow_popup_mgr.Cfg__win_bind_focus_blur, false));
 		wtr.Write_js_global_ini_atr_val(Key_win_bind_hover_area		, bind_hover_area);
 	}
 	@Override public void Write_js_tail_script(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {
 		wtr.Write_js_line(Jquery_init);	// NOTE: must assert that jquery is init'd, else popup.js will not compile after going back / forward; DATE:2014-09-10
 		wtr.Write_js_tail_load_lib(app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "res", "src", "xowa", "popups", "popups.js"));
-	}	public static final byte[] Jquery_init = Bry_.new_a7("xowa.js.jquery.init();"), Mw_init = Bry_.new_a7("xowa.js.mediaWiki.init();");
+	}	public static final    byte[] Jquery_init = Bry_.new_a7("xowa.js.jquery.init();"), Mw_init = Bry_.new_a7("xowa.js.mediaWiki.init();");
 	private static byte[] Css_url;
-	private static final byte[]
+	private static final    byte[]
 	  Key_win_show_delay			= Bry_.new_a7("popups-win-show_delay")
 	, Key_win_hide_delay			= Bry_.new_a7("popups-win-hide_delay")
 	, Key_win_max_w					= Bry_.new_a7("popups-win-max_w")
