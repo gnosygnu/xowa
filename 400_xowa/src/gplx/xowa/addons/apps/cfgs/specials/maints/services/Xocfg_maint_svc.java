@@ -40,19 +40,17 @@ public class Xocfg_maint_svc {
 			byte[] help = parser_mgr.Main().Parse_text_to_html(parser_mgr.Ctx(), Bry_.new_u8(nde.Help()));
 			help = Bry_.Replace(help, anch_find_bry, anch_repl_bry);	// replace "<a " with "<a tabindex=-1 " else tabbing will go to hidden anchors in help text
 			if (nde.Type_is_grp()) {
-				Xocfg_maint_svc.Create_grp(db_app, nde.Key(), nde.Owner(), nde.Name(), String_.new_u8(help));
+				Xocfg_maint_svc.Create_grp(db_app, nde.Id(), nde.Key(), nde.Owner(), nde.Name(), String_.new_u8(help));
 			}
 			else {
 				Xocfg_maint_itm itm = (Xocfg_maint_itm)nde;
-				Xocfg_maint_svc.Create_itm(db_app, nde.Key(), nde.Owner(), nde.Name(), String_.new_u8(help), itm.Scope(), itm.Db_type(), itm.Dflt(), itm.Gui_type(), itm.Gui_args());
+				Xocfg_maint_svc.Create_itm(db_app, nde.Id(), nde.Key(), nde.Owner(), nde.Name(), String_.new_u8(help), itm.Scope(), itm.Db_type(), itm.Dflt(), itm.Gui_type(), itm.Gui_args());
 			}
 		}
 		db_app.Conn().Txn_end();
 	}
-	public static void Create_grp(Xocfg_db_app db_app, String key, String owner, String name, String help) {
+	public static void Create_grp(Xocfg_db_app db_app, int grp_id, String key, String owner, String name, String help) {
 		// insert grp_meta
-		Xocfg_grp_row grp = db_app.Tbl__grp().Select_by_key_or_null(key);
-		int grp_id = grp == null ? db_app.Conn().Sys_mgr().Autonum_next("cfg_grp_meta.grp_id") : grp.Id();
 		db_app.Tbl__grp().Upsert(grp_id, key);
 
 		// insert grp_map
@@ -63,14 +61,11 @@ public class Xocfg_maint_svc {
 		// insert nde_i18n
 		db_app.Tbl__txt().Upsert(grp_id, Xoitm_lang_tid.Lang__dflt, name, help);
 	}
-	public static void Create_itm(Xocfg_db_app db_app, String key, String owner, String name, String help, String scope, String db_type, String dflt, String gui_type, String gui_args) {
+	public static void Create_itm(Xocfg_db_app db_app, int itm_id, String key, String owner, String name, String help, String scope, String db_type, String dflt, String gui_type, String gui_args) {
 		// insert itm_meta
 		int grp_id = db_app.Tbl__grp().Select_id_by_key_or_fail(owner);
 		int scope_id = Xoitm_scope_tid.To_int(scope);
 		int gui_type_id = Xoitm_gui_tid.To_tid(gui_type);
-		int itm_id = db_app.Tbl__itm().Select_id_or(key, -1);
-		if (itm_id == -1)
-			itm_id = db_app.Conn().Sys_mgr().Autonum_next("cfg_itm_meta.itm_id");
 		db_app.Tbl__itm().Upsert(itm_id, scope_id, db_type, gui_type_id, gui_args, key, dflt);
 
 		// insert grp_map

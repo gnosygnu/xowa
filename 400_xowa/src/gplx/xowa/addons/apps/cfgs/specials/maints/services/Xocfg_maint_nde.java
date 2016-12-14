@@ -17,13 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.specials.maints.services; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.maints.*;
 abstract class Xocfg_maint_nde implements gplx.core.brys.Bry_bfr_able {
-	public Xocfg_maint_nde(String key, String owner, String name, String help) {
+	public Xocfg_maint_nde(int id, String key, String owner, String name, String help) {
+		this.id = id;
 		this.key = key;
 		this.owner = owner;
 		this.name = name;
 		this.help = help;
 	}
 	public abstract boolean Type_is_grp();
+	public int Id() {return id;} private final    int id;
 	public String Key() {return key;} private final    String key;
 	public String Owner() {return owner;} private final    String owner;
 	public String Name() {return name;} private final    String name;
@@ -34,12 +36,12 @@ abstract class Xocfg_maint_nde implements gplx.core.brys.Bry_bfr_able {
 	}
 	protected abstract void To_bfr_hook(Bry_bfr bfr);
 }
-class Xocfg_maint_grp extends Xocfg_maint_nde {	public Xocfg_maint_grp(String key, String owner, String name, String help) {super(key, owner, name, help);
+class Xocfg_maint_grp extends Xocfg_maint_nde {	public Xocfg_maint_grp(int id, String key, String owner, String name, String help) {super(id, key, owner, name, help);
 	}
 	@Override public boolean Type_is_grp() {return true;}
 	@Override protected void To_bfr_hook(Bry_bfr bfr) {}
 }
-class Xocfg_maint_itm extends Xocfg_maint_nde {	public Xocfg_maint_itm(String key, String owner, String name, String help, String scope, String db_type, String dflt, String gui_type, String gui_args) {super(key, owner, name, help);
+class Xocfg_maint_itm extends Xocfg_maint_nde {	public Xocfg_maint_itm(int id, String key, String owner, String name, String help, String scope, String db_type, String dflt, String gui_type, String gui_args) {super(id, key, owner, name, help);
 		this.scope = scope;
 		this.db_type = db_type;
 		this.dflt = dflt;

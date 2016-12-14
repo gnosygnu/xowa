@@ -32,6 +32,7 @@ class Xocfg_maint_parser {
 	private Xocfg_maint_nde Parse_nde(GfoMsg msg) {
 		Ordered_hash hash = To_atr_hash(msg);
 		// get common atrs
+		int id			= Int_.parse(Get_atr_as_str_or_fail(hash, "id_"));
 		String owner	= Get_atr_as_str_or_fail(hash, "owner_");
 		String key		= Get_atr_as_str_or_fail(hash, "key_");
 		String name		= Get_atr_as_str_or_fail(hash, "name_");
@@ -40,7 +41,7 @@ class Xocfg_maint_parser {
 		// create
 		String nde_type = msg.Key();
 		if (String_.Eq(nde_type, "grp")) {
-			return new Xocfg_maint_grp(key, owner, name, help);
+			return new Xocfg_maint_grp(id, key, owner, name, help);
 		}
 		else if (String_.Eq(nde_type, "itm")) {
 			String scope		= Get_atr_as_str_or(hash, "scope_", ""); if (String_.Eq(scope, "")) scope = "wiki";
@@ -52,7 +53,7 @@ class Xocfg_maint_parser {
 			if (gui_type == null) {
 				gui_type = gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_tid.Infer_gui_type(db_type);
 			}
-			return new Xocfg_maint_itm(key, owner, name, help, scope, db_type, dflt, gui_type, gui_args);
+			return new Xocfg_maint_itm(id, key, owner, name, help, scope, db_type, dflt, gui_type, gui_args);
 		}
 		else throw Err_.new_wo_type("xo.cfg_maint:unknown type", "type", nde_type);
 	}
