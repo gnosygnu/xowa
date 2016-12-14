@@ -207,18 +207,12 @@ public class Xow_popup_mgr implements Gfo_invk, Gfo_evt_itm {
 		else if (ctx.Match(k, Cfg__read_til_stop_fwd))								parser.Cfg().Read_til_stop_fwd_(m.ReadInt("v"));
 		else if (ctx.Match(k, Cfg__read_til_stop_bwd))								parser.Cfg().Read_til_stop_bwd_(m.ReadInt("v"));
 		else if (ctx.Match(k, Cfg__stop_if_hdr_after))								parser.Cfg().Stop_if_hdr_after_(m.ReadInt("v"));
-		else if	(ctx.Match(k, Cfg__tmpl_tkn_max))									
-			parser.Tmpl_tkn_max_(m.ReadInt("v"));
-		else if	(ctx.Match(k, Cfg__tmpl_keeplist))									
-			parser.Tmpl_keeplist_init_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Cfg__ns_allowed))										
-			Ns_allowed_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Cfg__xnde_ignore_ids))								
-			parser.Wrdx_mkr().Xnde_ignore_ids_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Cfg__scan_len))										
-			parser.Cfg().Tmpl_read_len_(m.ReadInt("v"));
-		else if	(ctx.Match(k, Cfg__scan_max))										
-			parser.Cfg().Tmpl_read_max_(m.ReadInt("v"));
+		else if	(ctx.Match(k, Cfg__tmpl_tkn_max))									parser.Tmpl_tkn_max_(m.ReadInt("v"));
+		else if	(ctx.Match(k, Cfg__tmpl_keeplist))									parser.Tmpl_keeplist_init_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Cfg__ns_allowed))										Ns_allowed_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Cfg__xnde_ignore_ids))								parser.Wrdx_mkr().Xnde_ignore_ids_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Cfg__scan_len))										parser.Cfg().Tmpl_read_len_(m.ReadInt("v"));
+		else if	(ctx.Match(k, Cfg__scan_max))										parser.Cfg().Tmpl_read_max_(m.ReadInt("v"));
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
