@@ -65,7 +65,7 @@ public class Xocfg_maint_svc {
 		// insert itm_meta
 		int grp_id = db_app.Tbl__grp().Select_id_by_key_or_fail(owner);
 		int scope_id = Xoitm_scope_tid.To_int(scope);
-		int gui_type_id = Xoitm_gui_tid.To_tid(gui_type);
+		int gui_type_id = Xoitm_gui_tid.To_uid(gui_type);
 		db_app.Tbl__itm().Upsert(itm_id, scope_id, db_type, gui_type_id, gui_args, key, dflt);
 
 		// insert grp_map

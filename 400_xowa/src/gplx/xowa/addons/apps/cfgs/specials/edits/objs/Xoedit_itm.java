@@ -20,7 +20,7 @@ import gplx.langs.mustaches.*;
 import gplx.core.gfobjs.*; import gplx.langs.jsons.*;
 import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
 public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
-	private int gui_type;
+	private String gui_type;
 	private boolean edited;
 	private String data_type, gui_args, dflt, lang, name, ctx, val, date;
 	private Xocfg_type_mgr type_mgr;
@@ -35,7 +35,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 	public String	Help()		{return help;}	private String help;
 
 	public int		Sort()		{return sort;}	private final    int sort;
-	public void Load_by_meta(int scope_id, String data_type, int gui_type, String gui_args, String dflt) {
+	public void Load_by_meta(int scope_id, String data_type, String gui_type, String gui_args, String dflt) {
 		this.data_type = data_type;
 		this.gui_type = gui_type;
 		this.gui_args = gui_args;
@@ -69,6 +69,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		rv.Add_str("ctx", ctx);
 		rv.Add_str("val", val);
 		rv.Add_str("date", date);
+		rv.Add_str("gui", gui_type);
 		Bry_bfr bfr = Bry_bfr_.New();
 		To_html(bfr, type_mgr);
 		rv.Add_str("html", bfr.To_str_and_clear());
@@ -88,6 +89,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		else if	(String_.Eq(k, "ctx"))		bfr.Add_str_u8(ctx);
 		else if	(String_.Eq(k, "val"))		bfr.Add_str_u8(val);
 		else if	(String_.Eq(k, "date"))		bfr.Add_str_u8(date);
+		else if	(String_.Eq(k, "gui"))		bfr.Add_str_u8(gui_type);
 		else if	(String_.Eq(k, "html"))		To_html(bfr.Bfr(), type_mgr);
 		return true;
 	}

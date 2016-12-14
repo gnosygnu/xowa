@@ -19,42 +19,43 @@ package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gp
 import gplx.xowa.addons.apps.cfgs.enums.*;
 import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
 public class Xoedit_itm_html {
-	public void Build_html(Bry_bfr bfr, Xocfg_type_mgr type_mgr, String key, String name, String data_type, int gui_type, String gui_args, String data) {
-		switch (gui_type) {
-			case Xoitm_gui_tid.Tid__checkbox:
-				bfr.Add_str_u8_fmt("<input id=\"{0}\" data-xocfg=\"0\" type=\"checkbox\" accesskey=\"d\" class=\"xocfg_checkbox\"{1}></input>", key, String_.Eq(data, "y") ? " checked=\"checked\"" : "");
+	public void Build_html(Bry_bfr bfr, Xocfg_type_mgr type_mgr, String key, String name, String data_type, String gui_type_key, String gui_args, String data) {
+		switch (Xoitm_gui_tid.To_uid(gui_type_key)) {
+			case Xoitm_gui_tid.Tid__bool:
+				bfr.Add_str_u8_fmt("<input id=\"{1}\" data-xocfg-key=\"{1}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__bool\" type=\"checkbox\"{2}></input>", gui_type_key, key, String_.Eq(data, "y") ? " checked=\"checked\"" : "");
 				break;
-			case Xoitm_gui_tid.Tid__numeric:
-				bfr.Add_str_u8_fmt("<input id=\"{0}\" data-xocfg=\"0\" type=\"text\" accesskey=\"d\" class=\"xocfg_numeric\" value=\"{1}\"></input>", key, data);
+			case Xoitm_gui_tid.Tid__int:
+				bfr.Add_str_u8_fmt("<input id=\"{1}\" data-xocfg-key=\"{1}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__int\" type=\"text\" value=\"{2}\"></input>", gui_type_key, key, data);
 				break;
-			case Xoitm_gui_tid.Tid__textbox:
-				bfr.Add_str_u8_fmt("<input id=\"{0}\" data-xocfg=\"0\" type=\"text\" accesskey=\"d\" class=\"xocfg_textbox\" value=\"{1}\"></input>", key, data);
+			case Xoitm_gui_tid.Tid__str:
+				bfr.Add_str_u8_fmt("<input id=\"{1}\" data-xocfg-key=\"{1}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__str\" type=\"text\" value=\"{2}\"></input>", gui_type_key, key, data);
 				break;
 			case Xoitm_gui_tid.Tid__memo:
-				bfr.Add_str_u8_fmt("<textarea id=\"{0}\" data-xocfg=\"0\" type=\"text\" accesskey=\"d\" class=\"xocfg_memo\" rows=\"4\">{1}</textarea>", key, String_.Replace(data, "<", "&lt;"));
+				bfr.Add_str_u8_fmt("<textarea id=\"{1}\" data-xocfg-key=\"{1}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__memo\" rows=\"4\">{2}</textarea>", gui_type_key, key, String_.Replace(data, "<", "&lt;"));
 				break;
-			case Xoitm_gui_tid.Tid__select:
+			case Xoitm_gui_tid.Tid__list:
 				Keyval[] kvs_ary = type_mgr.Lists__get(data_type);
 				int len = kvs_ary.length;
-				bfr.Add_str_u8_fmt("<select id=\"{0}\" data-xocfg=\"0\" type=\"text\" accesskey=\"d\" class=\"xocfg_select\" size=\"{1}\">", key, len);
+				bfr.Add_str_u8_fmt("<select id=\"{1}\" data-xocfg-key=\"{1}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__list\" type=\"text\" size=\"{2}\">\n", gui_type_key, key, len);
 				for (int i = 0; i < len; i++) {
 					Keyval kv = kvs_ary[i];
 					String kv_key = kv.Key();
 					String kv_val = kv.Val_to_str_or_null();
-					bfr.Add_str_u8_fmt("<option value=\"{0}\"{2}>{1}</option>", kv_key, kv_val, String_.Eq(data, kv_key) ? " selected=\"selected\"" : "");
+					bfr.Add_str_u8_fmt("<option value=\"{0}\"{2}>{1}</option>\n", kv_key, kv_val, String_.Eq(data, kv_key) ? " selected=\"selected\"" : "");
 				}
-				bfr.Add_str_u8_fmt("</select>");
+				bfr.Add_str_u8_fmt("</select>\n");
 				break;
-			case Xoitm_gui_tid.Tid__io_process:
+			case Xoitm_gui_tid.Tid__io_cmd:
 				String[] fields = String_.Split(data, "\n");
-				String exe = fields.length > 1 ? fields[0] : "exe";
-				String arg = fields.length > 2 ? fields[1] : "args"; 
+				String exe = fields.length > 0 && !String_.Eq(fields[0], "") ? fields[0] : "";
+				String arg = fields.length > 1 ? fields[1] : ""; 
 				bfr.Add_str_u8_fmt
-				( "<input  class=\"xocfg__io_process__exe__txt\" id=\"{0}\" data-xocfg=\"0\" type=\"text\" accesskey=\"d\" value=\"{1}\"></input>\n"
-				+ "<button class=\"xocfg__io_process__exe__btn\" onclick='xowa_io_select(\"file\", \"{0}\", \"Please select a file.\");'>...</button><br/>\n"
-				, key + "-exe", exe);
+				( "<input  class=\"xocfg__io_cmd__exe__txt\" id=\"{1}-exe\" data-xocfg-key=\"{1}\" data-xocfg-gui=\"{0}-exe\" accesskey=\"d\"  type=\"text\" value=\"{2}\"></input>\n"
+				+ "<button class=\"xocfg__io_cmd__exe__btn\" onclick='xowa_io_select(\"file\", \"{1}-exe\", \"Please select a file.\");'>...</button><br/>\n"
+				, gui_type_key, key, exe);
 				bfr.Add_str_u8_fmt
-				( "<input  class=\"xocfg__io_process__arg__txt\" id=\"{0}\" data-xocfg=\"0\" type=\"text\" accesskey=\"d\" value='{1}'>\n", key + "-arg", arg);
+				( "<input  class=\"xocfg__io_cmd__arg__txt\" id=\"{1}-arg\" data-xocfg-key=\"{1}\" data-xocfg-gui=\"{0}-arg\" accesskey=\"d\" type=\"text\" value='{2}'>\n"
+				, gui_type_key, key, arg);
 				break;
 			default:
 				break;
