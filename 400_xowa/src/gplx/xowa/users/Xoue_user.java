@@ -28,9 +28,9 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 		this.ev_mgr = new Gfo_evt_mgr(this);
 		this.fsys_mgr = new Xou_fsys_mgr(user_dir);
 		this.user_db_mgr = new Xou_db_mgr(app);
+		this.cfg_mgr = new Xou_cfg(this);
 		this.history_mgr = new Xou_history_mgr(fsys_mgr.App_data_history_fil());
 		this.prefs_mgr = new gplx.xowa.users.prefs.Prefs_mgr(app);
-		this.cfg_mgr = new Xou_cfg(this);
 		this.session_mgr = new Xou_session(this);
 	}
 	public Gfo_evt_mgr				Evt_mgr() {return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;

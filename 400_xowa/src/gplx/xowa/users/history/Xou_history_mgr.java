@@ -23,7 +23,13 @@ public class Xou_history_mgr implements Gfo_invk {
 	private Ordered_hash itms = Ordered_hash_.New_bry();
 	private boolean load_chk = false;
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	public Xou_history_mgr(Io_url history_fil) {this.history_fil = history_fil;}
+	private boolean log_all;
+	public Xou_history_mgr(Io_url history_fil) {
+		this.history_fil = history_fil;
+	}
+	public void Init_by_app(Xoa_app app) {
+		app.Cfg().Bind_many_app(this, Cfg__log_all);
+	}
 	public int Len() {return itms.Count();}
 	public void Clear() {itms.Clear();}
 	public Xou_history_itm Get_at(int i) {return (Xou_history_itm)itms.Get_at(i);}		
@@ -54,9 +60,9 @@ public class Xou_history_mgr implements Gfo_invk {
 			if (url.Qargs_ary().length > 0)
 				page_ttl = Bry_.Add(page_ttl, url.Qargs_mgr().To_bry());
 		}
-		Add(url, ttl, page_ttl);
+		Add(page.Wiki().App(), url, ttl, page_ttl);
 	}
-	public void Add(Xoa_url url, Xoa_ttl ttl, byte[] page_ttl) {
+	public void Add(Xoa_app app, Xoa_url url, Xoa_ttl ttl, byte[] page_ttl) {
 		if (gplx.xowa.users.history.Xoud_history_mgr.Skip_history(ttl)) return;
 		if (!load_chk) Load();
 		byte[] key = Xou_history_itm.key_(url.Wiki_bry(), page_ttl);
@@ -65,7 +71,7 @@ public class Xou_history_mgr implements Gfo_invk {
 			itm = new Xou_history_itm(url.Wiki_bry(), To_full_db_w_qargs(url, ttl));
 			itms.Add(key, itm);
 		}
-		if (gplx.xowa.apps.apis.xowa.Xoapi_addon.app__page_history__log_all)
+		if (log_all)
 			Io_mgr.Instance.AppendFilStr(history_fil.GenNewNameAndExt("log_all.csv"), String_.Format("{0}|{1}|{2}\n", Datetime_now.Get().XtoStr_fmt_iso_8561_w_tz(), itm.Wiki(), itm.Page()));
 		itm.Tally();
 	}
@@ -120,12 +126,14 @@ public class Xou_history_mgr implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_html_itm_))				html_mgr.Html_itm().Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_current_itms_max_))		current_itms_max = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_current_itms_reset_))	current_itms_reset = m.ReadInt("v");
+		else if	(ctx.Match(k, Cfg__log_all))				log_all = m.ReadYn("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String Invk_html_grp = "html_grp", Invk_html_grp_ = "html_grp_", Invk_html_itm = "html_itm", Invk_html_itm_ = "html_itm_", Invk_current_itms_max_ = "current_itms_max_", Invk_current_itms_reset_ = "current_itms_reset_";
 	public static final    byte[] Ttl_name = Bry_.new_a7("XowaPageHistory");
 	public static final    byte[] Ttl_full = Bry_.new_a7("Special:XowaPageHistory");
+	private static final String Cfg__log_all = "xowa.app.page_history.log_all";
 }	
 class Xou_history_itm_srl {
 	public static void Load(byte[] ary, Ordered_hash list) {

@@ -140,7 +140,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 			page.Url().Anch_bry_(anchor_bry);						// update url
 		}
 		tab.History_mgr().Add(page);
-		app.Usere().History_mgr().Add(page.Url(), page.Ttl(), Bry_.Add_w_dlm(Byte_ascii.Hash, page.Url().Page_bry(), anchor_bry));
+		app.Usere().History_mgr().Add(page.Wiki().App(), page.Url(), page.Ttl(), Bry_.Add_w_dlm(Byte_ascii.Hash, page.Url().Page_bry(), anchor_bry));
 	}
 	public void App__exit() {
 		kit.Kit_term();	// NOTE: Kit_term calls shell.close() which in turn is hooked up to app.Term_cbk() event; DATE:2014-09-09
@@ -314,7 +314,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 
 		if (	!Env_.Mode_testing()
 			&&	app.Mode().Tid_is_gui())	// only run for gui; do not run for tcp/http server; DATE:2014-05-03
-			app.Usr_dlg().Gui_wkr_(new Gfo_usr_dlg__gui__swt(kit, prog_box, info_box, info_box, app.Api_root().Gui().Browser().Info()));
+			app.Usr_dlg().Gui_wkr_(new Gfo_usr_dlg__gui__swt(app, kit, prog_box, info_box, info_box));
 	}
 	public static String Remove_redirect_if_exists(String text) {
 		// remove redirect target; EX: "A -> B" -> "A"

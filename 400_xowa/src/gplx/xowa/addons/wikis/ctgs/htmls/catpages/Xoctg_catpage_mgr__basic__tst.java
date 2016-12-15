@@ -35,7 +35,7 @@ public class Xoctg_catpage_mgr__basic__tst {
 		byte[] page_bry = Bry_.new_a7("A 1");
 		Xoa_url url = Xoa_url.New(Bry_.new_a7("en.wikipedia.org"), page_bry);
 		Xoa_ttl ttl = Xoa_ttl.Parse(fxt.Wiki(), page_bry);
-		fxt.Wiki().Appe().Usere().History_mgr().Add(url, ttl, page_bry);
+		fxt.Wiki().Appe().Usere().History_mgr().Add(fxt.Wiki().App(), url, ttl, page_bry);
 		fxt	.Init_itms__pages("A_1")
 			.Test__html__all(Xoa_ctg_mgr.Tid__page, String_.Concat_lines_nl_skip_last
 			( ""

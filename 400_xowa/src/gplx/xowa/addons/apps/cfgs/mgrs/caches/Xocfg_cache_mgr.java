@@ -71,7 +71,7 @@ public class Xocfg_cache_mgr {
 		// get data from db
 		Xocfg_itm_row meta_itm = db_app.Tbl__itm().Select_by_key_or_null(key);
 		if (meta_itm == null) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:grp not found; key=~{0}", key);
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:itm not found; key=~{0}", key);
 			return new Xocfg_cache_grp(key, "");
 		}
 		Xocfg_val_row[] itms = db_usr.Tbl__val().Select_all(meta_itm.Key());
