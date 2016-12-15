@@ -46,16 +46,14 @@ public class Xoedit_itm_html {
 				bfr.Add_str_u8_fmt("</select>\n");
 				break;
 			case Xoitm_gui_tid.Tid__io_cmd:
-				String[] fields = String_.Split(data, "\n");
-				String exe = fields.length > 0 && !String_.Eq(fields[0], "") ? fields[0] : "";
-				String arg = fields.length > 1 ? fields[1] : ""; 
+				String[] lines = Xocfg_mgr.Parse_io_cmd(data);
 				bfr.Add_str_u8_fmt
 				( "<input  class=\"xocfg__io_cmd__exe__txt\" id=\"{1}-exe\" data-xocfg-key=\"{1}\" data-xocfg-gui=\"{0}-exe\" accesskey=\"d\"  type=\"text\" value=\"{2}\"></input>\n"
 				+ "<button class=\"xocfg__io_cmd__exe__btn\" onclick='xowa_io_select(\"file\", \"{1}-exe\", \"Please select a file.\");'>...</button><br/>\n"
-				, gui_type_key, key, exe);
+				, gui_type_key, key, lines[0]);
 				bfr.Add_str_u8_fmt
 				( "<input  class=\"xocfg__io_cmd__arg__txt\" id=\"{1}-arg\" data-xocfg-key=\"{1}\" data-xocfg-gui=\"{0}-arg\" accesskey=\"d\" type=\"text\" value='{2}'>\n"
-				, gui_type_key, key, arg);
+				, gui_type_key, key, lines[1]);
 				break;
 			default:
 				break;

@@ -132,6 +132,24 @@ public class Process_adp implements Gfo_invk, Rls_able {
 			: exe_args
 			;
 	}
+
+	public void Exe_and_args_(String exe, String args) {
+		Io_url exe_url = Bry_fmtr_eval_mgr_.Eval_url(this.cmd_url_eval, Bry_.new_u8(exe));
+		this.Exe_url_(exe_url).Tmp_dir_(exe_url.OwnerDir());
+		this.Args_fmtr().Fmt_(args);
+	}
+	public static Process_adp New(Gfo_usr_dlg usr_dlg, Bry_fmtr_eval_mgr eval_mgr, byte run_mode, int timeout, String exe, String args, String... args_keys) {
+		Process_adp rv = new Process_adp();
+		rv.Prog_dlg_(usr_dlg);
+		rv.Run_mode_(run_mode);
+		rv.Thread_timeout_seconds_(timeout);
+
+		rv.cmd_url_eval = eval_mgr;
+		Io_url exe_url = Bry_fmtr_eval_mgr_.Eval_url(eval_mgr, Bry_.new_u8(exe));
+		rv.Exe_url_(exe_url).Tmp_dir_(exe_url.OwnerDir());
+		rv.Args_fmtr().Fmt_(args).Keys_(args_keys);
+		return rv;
+	}
 		private Bry_fmtr notify_fmtr = Bry_fmtr.new_("", "process_exe_name", "process_exe_args", "process_seconds"); Bry_bfr notify_bfr = Bry_bfr_.Reset(255);
 	public Process UnderProcess() {return process;} Process process;
 	public void Rls() {if (process != null) process.destroy();}

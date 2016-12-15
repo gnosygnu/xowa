@@ -148,7 +148,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		stage = Xoa_stage_.Tid_init;
 		user.Init_by_app(this);
 		cfg.Init_by_app(this);
-		prog_mgr.Init_by_app(url_cmd_eval);
+		prog_mgr.Init_by_app(this, url_cmd_eval);
 		xtn_mgr.Init_by_app(this);
 		gui_mgr.Init_by_app();
 		html__css_installer.Init_by_app(this);

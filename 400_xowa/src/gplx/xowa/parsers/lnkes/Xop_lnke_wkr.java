@@ -85,7 +85,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 			switch (src[cur_pos]) {
 				case Byte_ascii.Brack_end:
 					if (lnke_type_brack) {	// NOTE: check that frame begins with [ in order to end with ] 
-						lnke_end_tid = End_tid_brack; brack_end_pos = cur_pos + Xoa_prog_mgr.Adj_next_char;
+						lnke_end_tid = End_tid_brack; brack_end_pos = cur_pos + 1;	// 1=adj_next_char
 					}
 					else {					// NOTE: frame does not begin with [ but ] encountered. mark "invalid" in order to force parser to stop before "]"
 						lnke_end_tid = End_tid_invalid;

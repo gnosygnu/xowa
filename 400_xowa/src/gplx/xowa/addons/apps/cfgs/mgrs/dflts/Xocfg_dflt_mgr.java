@@ -25,7 +25,7 @@ public class Xocfg_dflt_mgr {
 	}
 	public void Init_by_app(Xoa_app app) {
 		Xocfg_dflt_loader loader = new Xocfg_dflt_loader();
-		loader.Load_by_file(this, app.Fsys_mgr().Bin_plat_dir().GenSubFil_nest("cfg", "xo.cfg.dflt.json"));
+		loader.Load_by_file(this, app.Fsys_mgr().Bin_plat_dir().GenSubFil_nest("xowa", "cfg", "xo.cfg.dflt.json"));
 	}
 	public String Get_or(String key, String or) {
 		Xocfg_dflt_itm itm = (Xocfg_dflt_itm)hash.Get_by(key);

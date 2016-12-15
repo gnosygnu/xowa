@@ -247,7 +247,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			}
 			if (valid) {
 				ctx.Subs_add(root, tkn_mkr.Ignore(bgn_pos, gtPos, Xop_ignore_tkn.Ignore_tid_include_tmpl));
-				return gtPos + Xoa_prog_mgr.Adj_next_char;
+				return gtPos + 1; // 1=adj_next_char
 			}
 			else {
 				return ctx.Lxr_make_txt_(gtPos);
@@ -281,7 +281,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	private boolean pre2_pending = false;
 	private int Make_xtag_bgn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int gtPos, int name_bgn, int name_end, Xop_xnde_tag tag, int tag_end_pos, byte tag_end_byte, boolean force_xtn_for_nowiki, boolean pre2_hack) {
 		boolean inline = false;
-		int open_tag_end = gtPos + Xoa_prog_mgr.Adj_next_char, atrs_bgn = -1, atrs_end = -1;
+		int open_tag_end = gtPos + 1, atrs_bgn = -1, atrs_end = -1;	// 1=adj_next_char
 		// calc (a) inline; (b) atrs
 		switch (tag_end_byte) {	// look at last char of tag; EX: for b, following are registered: "b/","b>","b\s","b\n","b\t"
 			case Byte_ascii.Slash:	// "/" EX: "<br/"; // NOTE: <pre/a>, <pre//> are allowed

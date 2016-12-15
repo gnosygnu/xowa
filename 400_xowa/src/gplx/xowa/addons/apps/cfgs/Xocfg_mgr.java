@@ -108,4 +108,15 @@ public class Xocfg_mgr {
 		cache_mgr.Del(ctx, key);
 	}
 	public static String Ctx__app = "app";
+	public static String[] Parse_io_cmd(String raw) {
+		String[] rv = new String[2];
+		rv[0] = "";
+		rv[1] = "";
+		int pos = String_.FindFwd(raw, "\n");
+		if (pos != Bry_find_.Not_found) {
+			rv[0] = String_.Mid(raw, 0, pos);
+			rv[1] = String_.Mid(raw, pos + 1);
+		}
+		return rv;
+	}
 }
