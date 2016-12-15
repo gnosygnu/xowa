@@ -30,7 +30,7 @@ public class Xocfg_cache_mgr {
 	}
 	public Xocfg_db_app Db_app() {return db_app;} private Xocfg_db_app db_app;
 	public Xocfg_db_usr Db_usr() {return db_usr;} private Xocfg_db_usr db_usr;
-	public void Clear() {grps.Clear();}
+	// public void Clear() {grps.Clear();} // TOMBSTONE: do not call .Clear b/c subscribers are kept in grps and are only loaded once at app startup
 	public String Get(String ctx, String key) {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
 		return grp.Get(ctx);

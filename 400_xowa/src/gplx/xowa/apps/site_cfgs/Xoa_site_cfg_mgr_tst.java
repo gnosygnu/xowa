@@ -69,6 +69,7 @@ class Xoa_site_cfg_mgr_fxt {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Xoa_site_cfg_mgr_fxt() {
 		// Xoa_app_.Usr_dlg_(Xoa_app_.New__usr_dlg__console());
+		gplx.core.ios.IoEngine_system.Web_access_enabled = true;	// HACK: must manually enable web_access else above tests will fail due to some other test disabling singleton; DATE:2016-12-15
 		Xoa_test_.Inet__init();
 		this.app = Xoa_app_fxt.Make__app__edit();
 		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);

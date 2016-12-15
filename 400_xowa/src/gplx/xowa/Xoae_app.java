@@ -30,7 +30,7 @@ import gplx.xowa.parsers.utils.*; import gplx.xowa.parsers.logs.*; import gplx.x
 import gplx.xowa.bldrs.wms.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.addons.*; import gplx.xowa.specials.mgrs.*;
-import gplx.xowa.addons.apps.cfgs.*;
+import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.apps.miscs.*;
 public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoae_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url user_dir, Io_url css_dir, String bin_dir_name) {
 		Xoa_app_.Usr_dlg_(usr_dlg);
@@ -96,6 +96,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xog_tab_mgr				Gui__tab_mgr()				{return gui__tab_mgr;} private final    Xog_tab_mgr gui__tab_mgr;
 	public Gfo_thread_mgr			Thread_mgr()				{return thread_mgr;} private final    Gfo_thread_mgr thread_mgr = new Gfo_thread_mgr();
 	public Xocfg_mgr				Cfg()						{return cfg;} private final    Xocfg_mgr cfg = new Xocfg_mgr();
+	public Xoa_misc_mgr				Misc_mgr()					{return misc_mgr;} private final    Xoa_misc_mgr misc_mgr = new Xoa_misc_mgr();
 	
 	public Xoae_wiki_mgr		Wiki_mgr() {return wiki_mgr;} private Xoae_wiki_mgr wiki_mgr;
 	public Xoa_wiki_mgr			Wiki_mgri() {return wiki_mgr;}
@@ -148,6 +149,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		stage = Xoa_stage_.Tid_init;
 		user.Init_by_app(this);
 		cfg.Init_by_app(this);
+		misc_mgr.Init_by_app(this);
 		user.History_mgr().Init_by_app(this);
 		prog_mgr.Init_by_app(this, url_cmd_eval);
 		xtn_mgr.Init_by_app(this);
@@ -198,7 +200,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		this.Utl__bfr_mkr().Clear();
 		msg_log.Clear();
 		wiki_mgr.Free_mem(clear_ctx);
-		if (cfg != null) cfg.Clear();	// TEST:cfg is null b/c tests do not call Init_by_app
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_gui))					return gui_mgr;

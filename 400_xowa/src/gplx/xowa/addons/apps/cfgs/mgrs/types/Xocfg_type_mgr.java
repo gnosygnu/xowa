@@ -19,7 +19,7 @@ package gplx.xowa.addons.apps.cfgs.mgrs.types; import gplx.*; import gplx.xowa.*
 public class Xocfg_type_mgr {
 	private final    Ordered_hash list_hash = Ordered_hash_.New();
 	public Xocfg_type_mgr() {
-		this.Lists__add("list:xowa.app.security.privacy.load_mode", "mem", "url");
+		this.Lists__add("list:xowa.gui.browser.page_load_mode", "mem", "url");
 		this.Lists__add("list:xowa.app.startup.window.mode", "previous", "maximized", "absolute", "relative", "default");
 		this.Lists__add("list:xowa.app.startup.pages.type", "blank", "xowa", "previous", "custom");
 		this.Lists__add("list:xowa.gui.window.html_box.adj_type", "none", "relative", "absolute");

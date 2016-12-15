@@ -21,10 +21,12 @@ import gplx.xowa.users.bmks.*;
 import gplx.xowa.wikis.*;
 public class Xoapi_bookmarks implements Gfo_invk {
 	private Xoae_app app; private Xog_win_itm win;
+	private boolean enabled = true;
 	public void Ctor_by_app(Xoae_app app) {this.app = app;}
-	public void Init_by_kit(Xoae_app app) {this.win = app.Gui_mgr().Browser_win();}
-	public boolean Enabled() {return enabled;} private boolean enabled = true;
-	public void Enabled_(boolean v) {enabled = v;}
+	public void Init_by_kit(Xoae_app app) {
+		this.win = app.Gui_mgr().Browser_win();
+		app.Cfg().Bind_many_app(this, Cfg__enabled);
+	}
 	public boolean Delete_confirm() {return delete_confirm;} private boolean delete_confirm = true;
 	public void Show() {win.Page__navigate_by_url_bar("home/wiki/Special:XowaBookmarks");}
 	public String Add(String url_str) {
@@ -43,8 +45,7 @@ public class Xoapi_bookmarks implements Gfo_invk {
 		return rv;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_enabled)) 							return Yn.To_str(enabled);
-		else if	(ctx.Match(k, Invk_enabled_)) 							enabled = m.ReadYn("v");
+		if		(ctx.Match(k, Cfg__enabled)) 							enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_delete_confirm)) 					return Yn.To_str(delete_confirm);
 		else if	(ctx.Match(k, Invk_delete_confirm_)) 					delete_confirm = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_add)) 								return this.Add(m.ReadStrOr("v", null));
@@ -53,7 +54,8 @@ public class Xoapi_bookmarks implements Gfo_invk {
 		return this;
 	}
 	private static final String
-	  Invk_enabled = "enabled", Invk_enabled_ = "enabled_"
-	, Invk_delete_confirm = "delete_confirm", Invk_delete_confirm_ = "delete_confirm_"
-	, Invk_add = "add", Invk_show = "show";
+	  Invk_delete_confirm = "delete_confirm", Invk_delete_confirm_ = "delete_confirm_"
+	, Invk_add = "add", Invk_show = "show"
+	, Cfg__enabled = "xowa.app.bookmarks.enabled"
+	;
 }

@@ -30,7 +30,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 		this.make_mgr = new Xoh_make_mgr();
 	}
 	public boolean			Read_preferred()		{return read_preferred;}	private boolean read_preferred = true;
-	public Xow_hdump_mode	Html_mode()				{return html_mode;}			private Xow_hdump_mode html_mode;
+	public Xow_hdump_mode	Html_mode()				{return html_mode;}			private Xow_hdump_mode html_mode = Xow_hdump_mode.Shown;
 	public Xoh_make_mgr Make_mgr() {return make_mgr;} private final    Xoh_make_mgr make_mgr;
 	public void Init_by_wiki(Xow_wiki wiki) {
 		gplx.xowa.addons.apps.cfgs.Xocfg_mgr cfg_mgr = wiki.App().Cfg();

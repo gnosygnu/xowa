@@ -31,7 +31,6 @@ public class Xoapi_root implements Gfo_invk {
 		nav_api.Init_by_kit(app);
 		gui_api.Init_by_kit(app);
 		html_api.Init_by_kit(app);
-		net_api.Init_by_kit(app);
 		usr_api.Init_by_kit(app);
 		xtns_api.Init_by_kit(app);
 	}
@@ -46,7 +45,6 @@ public class Xoapi_root implements Gfo_invk {
 	public Xoapi_gui		Gui()		{return gui_api;} private final    Xoapi_gui gui_api = new Xoapi_gui();
 	public Xoapi_html		Html()		{return html_api;} private final    Xoapi_html html_api = new Xoapi_html();
 	public Xoapi_bldr		Bldr()		{return bldr_api;} private final    Xoapi_bldr bldr_api = new Xoapi_bldr();
-	public Xoapi_net		Net()		{return net_api;} private final    Xoapi_net net_api = new Xoapi_net();
 	public Xoapi_usr		Usr()		{return usr_api;} private final    Xoapi_usr usr_api = new Xoapi_usr();
 	public Xoapi_special	Special()	{return special_api;} private final    Xoapi_special special_api = new Xoapi_special();
 	public Xoapi_xtns		Xtns()		{return xtns_api;} private final    Xoapi_xtns xtns_api = new Xoapi_xtns();
@@ -64,7 +62,6 @@ public class Xoapi_root implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_nav)) 		return nav_api;
 		else if	(ctx.Match(k, Invk_gui)) 		return gui_api;
 		else if	(ctx.Match(k, Invk_html)) 		return html_api;
-		else if	(ctx.Match(k, Invk_net)) 		return net_api;
 		else if	(ctx.Match(k, Invk_usr)) 		return usr_api;
 		else if	(ctx.Match(k, Invk_special)) 	return special_api;
 		else if	(ctx.Match(k, Invk_xtns)) 		return xtns_api;
@@ -77,7 +74,7 @@ public class Xoapi_root implements Gfo_invk {
 	private static final String 
 	  Invk_exec = "exec"
 	, Invk_app = "app", Invk_addon = "addon"
-	, Invk_bldr = "bldr", Invk_nav = "nav", Invk_gui = "gui", Invk_html = "html", Invk_net = "net", Invk_usr = "usr", Invk_special = "special", Invk_xtns = "xtns"
+	, Invk_bldr = "bldr", Invk_nav = "nav", Invk_gui = "gui", Invk_html = "html", Invk_usr = "usr", Invk_special = "special", Invk_xtns = "xtns"
 	, Invk_test_str = "test_str", Invk_test_str_ = "test_str_"
 	, Invk_wikis = "wikis"
 	;

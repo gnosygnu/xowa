@@ -26,7 +26,7 @@ public class Xow_hdump_mode {
 	}
 	public boolean			Tid_is_hdump_save() {return tid == Hdump_save.tid;}
 
-	private static final    Xow_hdump_mode
+	public static final    Xow_hdump_mode
 	  Shown			= new Xow_hdump_mode(0, "shown"			, "Shown")
 	, Hdump_save	= new Xow_hdump_mode(1, "hdump_save"	, "Saved for HTML DB")
 	, Hdump_load	= new Xow_hdump_mode(2, "hdump_load"	, "Loaded by HTML DB");

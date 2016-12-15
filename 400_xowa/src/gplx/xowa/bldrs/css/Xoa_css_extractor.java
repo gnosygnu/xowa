@@ -73,7 +73,7 @@ public class Xoa_css_extractor {
 	}
 	private void Install_by_wmf(Xowe_wiki wiki, Io_url wiki_html_dir) {
 		opt_download_css_common = wiki.Appe().Setup_mgr().Dump_mgr().Css_commons_download();
-		if (!wiki.Appe().Usere().Cfg_mgr().Security_mgr().Web_access_enabled()) opt_download_css_common = false;	// if !web_access_enabled, don't download
+		if (!gplx.core.ios.IoEngine_system.Web_access_enabled) opt_download_css_common = false;	// if !web_access_enabled, don't download
 		this.wiki_domain = wiki.Domain_bry();
 		mainpage_url = "https://" + wiki.Domain_str();	// NOTE: cannot reuse protocol_prefix b/c "//" needs to be added manually; protocol_prefix is used for logo and images which have form of "//domain/image.png"; changed to https; DATE:2015-02-17
 		if (page_fetcher == null) page_fetcher = new Xow_page_fetcher_wiki();

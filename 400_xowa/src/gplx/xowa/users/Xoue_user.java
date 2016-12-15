@@ -69,7 +69,7 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 	public void App_term() {
 		session_mgr.Window_mgr().Save_window(app.Gui_mgr().Browser_win().Win_box());
 		history_mgr.Save(app);
-		if (app.Gui_mgr().Browser_win().Tab_mgr().Html_load_tid__url())
+		if (app.Gui_mgr().Browser_win().Tab_mgr().Page_load_mode_is_url())
 			Io_mgr.Instance.DeleteDirDeep(fsys_mgr.App_temp_html_dir());
 		app.File_mgr().Cache_mgr().Db_term();
 	}

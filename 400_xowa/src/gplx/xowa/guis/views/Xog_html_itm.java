@@ -71,7 +71,7 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm {
 	}
 	private void Html_src_(Xoae_page page, byte[] html_bry) {
 		String html_str = String_.new_u8(html_bry);
-		if (owner_tab.Tab_mgr().Html_load_tid__url()) {
+		if (owner_tab.Tab_mgr().Page_load_mode_is_url()) {
 			Io_url html_url = app.Usere().Fsys_mgr().App_temp_html_dir().GenSubFil_ary(owner_tab.Tab_key(), ".html");
 			try {html_box.Html_doc_html_load_by_url(html_url, html_str);}
 			catch (Exception e) {

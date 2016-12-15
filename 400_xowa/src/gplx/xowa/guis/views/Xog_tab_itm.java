@@ -37,7 +37,7 @@ public class Xog_tab_itm implements Gfo_invk {
 		this.tab_box = tab_box;
 		Xoae_app app = win.App(); Xoa_gui_mgr gui_mgr = win.Gui_mgr(); Gfui_kit kit = win.Kit();
 		Gfui_html html_box	= kit.New_html("html_box" + Int_.To_str(uid), owner);
-		html_box.Html_js_enabled_(gui_mgr.Html_mgr().Javascript_enabled());
+		html_box.Html_js_enabled_(tab_mgr.Javascript_enabled());
 		html_box.Html_invk_src_(win);
 		html_itm.Html_box_(html_box);
 		if (app.Mode().Tid_is_gui()) {	// NOTE: only run for gui; will cause firefox_addon to fail; DATE:2014-05-03
@@ -175,7 +175,7 @@ public class Xog_tab_itm implements Gfo_invk {
 			if (page.Ttl().Anch_bgn() != Bry_find_.Not_found) page.Url().Anch_bry_(page.Ttl().Anch_txt());	// NOTE: occurs when page is a redirect to an anchor; EX: w:Duck race -> Rubber duck#Races
 			history_mgr.Add(page);
 			Xog_tab_itm_read_mgr.Show_page(this, page, true);
-			if (app.Api_root().Usr().History().Enabled()) {
+			if (app.Usere().History_mgr().Enabled()) {
 				app.Usere().History_mgr().Add(page);
 				app.User().User_db_mgr().History_mgr().Update_async(app.Async_mgr(), ttl, url);
 			}
