@@ -20,6 +20,7 @@ public class Xow_page_cache {
 	private final    Object thread_lock = new Object();
 	private final    Xowe_wiki wiki;
 	private final    Ordered_hash cache = Ordered_hash_.New_bry();	// NOTE: wiki titles are not case-sensitive when ns is "1st-letter" (EX: w:earth an w:Earth); in these cases, two entries will be stored
+	private final    Hash_adp ifexists_cache = Hash_adp_bry.cs();
 	private final    List_adp deleted = List_adp_.New();
 	private Xow_page_cache_wkr load_wkr;
 	public Xow_page_cache(Xowe_wiki wiki) {this.wiki = wiki;}
@@ -28,6 +29,45 @@ public class Xow_page_cache {
 	public byte[] Get_or_load_as_src(Xoa_ttl ttl) {
 		Xow_page_cache_itm rv = Get_or_load_as_itm(ttl);
 		return rv == null ? null : rv.Wtxt__direct();
+	}
+	public boolean Get_ifexist_by_mem(byte[] ifexists_key) {
+		Xow_page_cache_itm ifexists_itm = (Xow_page_cache_itm)ifexists_cache.Get_by(ifexists_key);
+		if		(ifexists_itm == Xow_page_cache_itm.Missing)
+			return false;
+		else if (ifexists_itm != null) 
+			return true;
+
+		// check page_cache
+		ifexists_itm = (Xow_page_cache_itm)cache.Get_by(ifexists_key);
+		if		(ifexists_itm == Xow_page_cache_itm.Missing)
+			return false;
+		else if (ifexists_itm != null)
+			return true;
+
+		return false;
+	}
+	public boolean Load_ifexist(Xoa_ttl ttl) {
+		// check ifexists_cache
+		byte[] ifexists_key = ttl.Full_db();
+		Xow_page_cache_itm ifexists_itm = null;
+		
+		// do load
+		if (load_wkr != null) {
+			// load_wkr
+			byte[] page_text = load_wkr.Get_page_or_null(ifexists_key);
+			ifexists_itm = page_text == null ? Xow_page_cache_itm.Missing : new Xow_page_cache_itm(false, ttl, Bry_.Empty, Bry_.Empty);
+		}
+		else {
+			// page_tbl
+			gplx.xowa.wikis.data.tbls.Xowd_page_itm page_itm = new gplx.xowa.wikis.data.tbls.Xowd_page_itm();
+			wiki.Db_mgr().Load_mgr().Load_by_ttl(page_itm, ttl.Ns(), ttl.Page_db());
+			// wiki.Data__core_mgr().Db__core().Tbl__page().Select_by_ttl(page_itm, ttl);
+			ifexists_itm = page_itm.Exists() ? new Xow_page_cache_itm(false, ttl, Bry_.Empty, Bry_.Empty) : Xow_page_cache_itm.Missing;				
+		}
+
+		// add to ifexists_cache only (not page_cache)
+		ifexists_cache.Add(ifexists_key, ifexists_itm);
+		return ifexists_itm != Xow_page_cache_itm.Missing;
 	}
 	public void Add(byte[] ttl_full_db, Xow_page_cache_itm itm) {
 		cache.Add(ttl_full_db, itm);
@@ -97,8 +137,10 @@ public class Xow_page_cache {
 	}
 	public void Free_mem(boolean clear_permanent_itms) {
 		synchronized (thread_lock) {	// LOCK:app-level; DATE:2016-07-06
-			if (clear_permanent_itms)
+			if (clear_permanent_itms) {
 				cache.Clear();
+				ifexists_cache.Clear();
+			}
 			else {
 				int len = cache.Count();
 				for (int i = 0; i < len; i++) {
