@@ -20,7 +20,7 @@ public class Xoa_misc_mgr implements Gfo_invk {
 	private Xoa_app app;
 	public void Init_by_app(Xoa_app app) {
 		this.app = app;
-		app.Cfg().Bind_many_app(this, Cfg__web_enabled, Cfg__logs_enabled);
+		app.Cfg().Bind_many_app(this, Cfg__web_enabled, Cfg__logs_enabled, Cfg__script);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Cfg__web_enabled))	gplx.core.ios.IoEngine_system.Web_access_enabled = m.ReadYn("v");
@@ -33,8 +33,15 @@ public class Xoa_misc_mgr implements Gfo_invk {
 					Io_mgr.Instance.DeleteFil_args(appe.Log_wtr().Session_fil()).MissingFails_off().Exec();
 			}
 		}
+		else if	(ctx.Match(k, Cfg__script)) {
+			String script = m.ReadStr("v");
+			Object rslt = app.Gfs_mgr().Run_str(script);
+			if (rslt == Gfo_invk_.Rv_error) {
+				app.Usr_dlg().Warn_many("", "", "custom script failed: ~{0}", script);
+			}
+		}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final String Cfg__web_enabled = "xowa.app.web.enabled", Cfg__logs_enabled = "xowa.app.logs.enabled";
+	private static final String Cfg__web_enabled = "xowa.app.web.enabled", Cfg__logs_enabled = "xowa.app.logs.enabled", Cfg__script = "xowa.app.startup.script";
 }

@@ -27,7 +27,7 @@ public class Xog_win_itm_ {
 		win_box.BackColor_(ColorAdp_.White);
 		win.Tab_mgr().Tab_mgr().BackColor_(ColorAdp_.White);
 
-		Xog_win_itm_startup_.Startup(app, win_box);
+		Xog_startup_win_.Startup(app, win_box);
 		win.Resizer().Exec_win_resize(app, win_box.Width(), win_box.Height());
 
 		win_box.Icon_(IconAdp.file_or_blank(app.Fsys_mgr().Bin_xowa_dir().GenSubFil_nest("file", "app.window", "app_icon.png")));

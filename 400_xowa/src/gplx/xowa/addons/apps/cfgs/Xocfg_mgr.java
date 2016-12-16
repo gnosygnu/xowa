@@ -58,6 +58,10 @@ public class Xocfg_mgr {
 		String rv = Get_str(wiki.Domain_itm().Abrv_xo_str(), key);
 		return rv == null ? or : Yn.parse_or(rv, or);
 	}
+	public int Get_int_app_or(String key, int or) {
+		String rv = cache_mgr.Get_or(Ctx__app, key, null);
+		return rv == null ? or : Int_.parse_or(rv, or);
+	}
 	public String Get_str_app_or(String key, String or) {return cache_mgr.Get_or(Ctx__app, key, or);}
 	public String Get_str_app(String key) {return Get_str(Xocfg_mgr.Ctx__app, key);}
 	public boolean Get_bool_or(String ctx, String key, boolean or) {
@@ -99,6 +103,7 @@ public class Xocfg_mgr {
 	public String To_ctx(Xow_wiki wiki) {return wiki.Domain_itm().Abrv_xo_str();}
 	public String Get_str(String ctx, String key) {return cache_mgr.Get(ctx, key);}
 	public void Set_str_app(String key, String val) {Set_str(Xocfg_mgr.Ctx__app, key, val);}
+	public void Set_int_app(String key, int val)	{Set_str(Xocfg_mgr.Ctx__app, key, Int_.To_str(val));}
 	public void Set_str(String ctx, String key, String val) {
 		cache_mgr.Set(ctx, key, val);
 	}

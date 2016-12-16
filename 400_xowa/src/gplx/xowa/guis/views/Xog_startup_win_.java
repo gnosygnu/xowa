@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 import gplx.core.envs.*;
 import gplx.gfui.*; import gplx.gfui.envs.*; import gplx.gfui.controls.windows.*;
-public class Xog_win_itm_startup_ {
+public class Xog_startup_win_ {
 	public static void Startup(Xoa_app app, GfuiWin win) {
 		gplx.xowa.addons.apps.cfgs.Xocfg_mgr cfg_mgr = app.Cfg();
 		String window_mode = cfg_mgr.Get_str_app_or(Cfg__window_mode, "previous");
@@ -79,24 +79,12 @@ public class Xog_win_itm_startup_ {
 			cfg_mgr.Set_str_app(Cfg__prev_rect			, win.Rect().Xto_str());
 			cfg_mgr.Set_str_app(Cfg__prev_maximized		, Yn.To_str(win.Maximized()));
 		}
+		Xog_startup_tabs_.Shutdown(app);
+
 		gplx.xowa.apps.cfgs.Xoa_cfg_mgr cfg_mgr2 = app.Cfg_mgr();
-		gplx.xowa.apps.apis.xowa.startups.tabs.Xoapi_startup_tabs startup_tabs = app.Api_root().App().Startup().Tabs();
-		if (startup_tabs.Type() == gplx.xowa.apps.apis.xowa.startups.tabs.Xoapi_startup_tabs_tid_.Tid_previous) {
-			cfg_mgr2.Set_by_app("xowa.api.app.startup.tabs.previous"	, Calc_previous_tabs(app.Gui_mgr().Browser_win().Tab_mgr()));
-		}
 		cfg_mgr2.Set_by_app("xowa.api.app.env.version_previous"	, Xoa_app_.Version);
 		app.Api_root().Html().Page().Toggle_mgr().Save(cfg_mgr2);
 		cfg_mgr2.Db_save_txt();
-	}
-	private static String Calc_previous_tabs(gplx.xowa.guis.views.Xog_tab_mgr tab_mgr) {
-		Bry_bfr bfr = Bry_bfr_.New();
-		int len = tab_mgr.Tabs_len();
-		for (int i = 0; i < len; ++i) {
-			if (i != 0) bfr.Add_byte_nl();
-			gplx.xowa.guis.views.Xog_tab_itm tab = tab_mgr.Tabs_get_at(i);
-			bfr.Add_str_u8(tab.Page().Url().To_str());
-		}
-		return bfr.To_str_and_clear();
 	}
 	public static SizeAdp Screen_maximized_calc() {
 		Op_sys os = Op_sys.Cur();

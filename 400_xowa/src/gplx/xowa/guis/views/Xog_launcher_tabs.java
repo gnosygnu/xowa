@@ -34,13 +34,14 @@ class Xog_launcher_tabs {
 		app.Usr_dlg().Log_wkr().Log_to_session_direct(log_bfr.Xto_str());
 	}
 	private boolean Restore_tabs(Xoae_app app, Xowe_wiki home_wiki, Xog_win_itm win, Io_fil_marker fil_marker) {
-		String[] launch_urls = app.Api_root().App().Startup().Tabs().Calc_startup_strs(app);
+		String[] launch_urls = Xog_startup_tabs_.Calc_startup_strs(app);
 		try {
 			int launch_urls_len = launch_urls.length;
 			for (int i = 0; i < launch_urls_len; ++i) {
 				String launch_url = launch_urls[i];
 				Launch_tab(win, home_wiki, launch_url);
 			}
+			Xog_startup_tabs_.Select_startup_tab(app);
 			fil_marker.End();
 			return true;
 		}

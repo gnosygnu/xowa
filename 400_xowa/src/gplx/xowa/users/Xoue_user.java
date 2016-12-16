@@ -65,7 +65,7 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 		}
 	}
 	public void App_term() {
-		gplx.xowa.guis.views.Xog_win_itm_startup_.Shutdown(app, app.Gui_mgr().Browser_win().Win_box());	// save window position
+		gplx.xowa.guis.views.Xog_startup_win_.Shutdown(app, app.Gui_mgr().Browser_win().Win_box());	// save window position
 		history_mgr.Save(app);
 		if (app.Gui_mgr().Browser_win().Tab_mgr().Page_load_mode_is_url())
 			Io_mgr.Instance.DeleteDirDeep(fsys_mgr.App_temp_html_dir());

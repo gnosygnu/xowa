@@ -73,7 +73,7 @@ public class Xoa_boot_mgr {
 			try {
 				app.Sys_cfg().Lang_(System_lang());
 				String launch_url = arg_mgr.Gui__home_page();
-				if (launch_url != null) app.Api_root().App().Startup().Tabs().Manual_(launch_url);
+				if (launch_url != null) gplx.xowa.guis.views.Xog_startup_tabs_.Manual = launch_url;
 				app.Tcp_server().Rdr_port_(arg_mgr.Tcp__port_recv()).Wtr_port_(arg_mgr.Tcp__port_send());
 				gplx.xowa.apps.servers.http.Http_server_mgr server_mgr = app.Http_server();
 				server_mgr.Port_(arg_mgr.Http__port());
