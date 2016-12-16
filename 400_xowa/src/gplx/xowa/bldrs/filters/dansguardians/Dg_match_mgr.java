@@ -135,7 +135,7 @@ public class Dg_match_mgr {
 	}
 	public static Dg_match_mgr New_mgr(Xoa_app app, Xow_wiki wiki) {
 		Xocfg_mgr cfg_mgr = app.Cfg();
-		if (!cfg_mgr.Get_bool_by_wiki_or(wiki, Cfg__enabled, false)) return null;
+		if (!cfg_mgr.Get_bool_wiki_or(wiki, Cfg__enabled, false)) return null;
 		String ctx = cfg_mgr.To_ctx(wiki);
 		return new Dg_match_mgr
 		( cfg_mgr.Get_url_or(ctx, Cfg__root_dir, app.Fsys_mgr().Bin_xowa_dir().GenSubDir_nest("cfg", "bldr", "filter")).GenSubDir(wiki.Domain_str())

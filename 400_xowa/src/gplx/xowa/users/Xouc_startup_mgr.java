@@ -17,8 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 public class Xouc_startup_mgr implements Gfo_invk {
-	public Xouc_startup_mgr(Xou_cfg config) {this.config = config; window_mgr = new Xouc_window_mgr(config.User());} private Xou_cfg config;
-	public Xouc_window_mgr Window_mgr() {return window_mgr;} private Xouc_window_mgr window_mgr;
+	public Xouc_startup_mgr(Xou_cfg config) {this.config = config;} private Xou_cfg config;
 	public String Page() {return page;} public Xouc_startup_mgr Page_(String v) {page = v; return this;} private String page = "xowa";
 	public String Page_url() {
 		byte v = Page_parse(page);
@@ -34,10 +33,9 @@ public class Xouc_startup_mgr implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_page_))			page = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk_custom_config))	return Custom_config();
 		else if	(ctx.Match(k, Invk_custom_config_))	Custom_config_(m.ReadStr("v"));
-		else if	(ctx.Match(k, Invk_window))			return window_mgr;
 		return this;
 	}
-	public static final String Invk_window = "window", Invk_page = "page", Invk_page_ = "page_", Invk_custom_config = "custom_config", Invk_custom_config_ = "custom_config_";
+	public static final String Invk_page = "page", Invk_page_ = "page_", Invk_custom_config = "custom_config", Invk_custom_config_ = "custom_config_";
 	private byte Page_parse(String s) {
 		if		(String_.Eq(s, "home")) return Page_home;
 		else if	(String_.Eq(s, "last")) return Page_last;

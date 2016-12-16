@@ -31,7 +31,6 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 		this.cfg_mgr = new Xou_cfg(this);
 		this.history_mgr = new Xou_history_mgr(fsys_mgr.App_data_history_fil());
 		this.prefs_mgr = new gplx.xowa.users.prefs.Prefs_mgr(app);
-		this.session_mgr = new Xou_session(this);
 	}
 	public Gfo_evt_mgr				Evt_mgr() {return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;
 	public String					Key() {return key;} private String key;
@@ -50,7 +49,6 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 	public Xowe_wiki Wiki() {if (wiki == null) wiki = Xou_user_.new_or_create_(this, app); return wiki;} private Xowe_wiki wiki;
 	public Xou_history_mgr History_mgr() {return history_mgr;} private Xou_history_mgr history_mgr;
 	public Xou_cfg Cfg_mgr() {return cfg_mgr;} private Xou_cfg cfg_mgr;
-	public Xou_session Session_mgr() {return session_mgr;} private Xou_session session_mgr;
 	public gplx.xowa.users.prefs.Prefs_mgr Prefs_mgr() {return prefs_mgr;} gplx.xowa.users.prefs.Prefs_mgr prefs_mgr;
 	public Xow_msg_mgr Msg_mgr() {
 		if (msg_mgr == null)
@@ -67,7 +65,7 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 		}
 	}
 	public void App_term() {
-		session_mgr.Window_mgr().Save_window(app.Gui_mgr().Browser_win().Win_box());
+		gplx.xowa.guis.views.Xog_win_itm_startup_.Shutdown(app, app.Gui_mgr().Browser_win().Win_box());	// save window position
 		history_mgr.Save(app);
 		if (app.Gui_mgr().Browser_win().Tab_mgr().Page_load_mode_is_url())
 			Io_mgr.Instance.DeleteDirDeep(fsys_mgr.App_temp_html_dir());
@@ -93,13 +91,12 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 		else if	(ctx.Match(k, Invk_fsys))						return fsys_mgr;
 		else if	(ctx.Match(k, Invk_prefs))						return prefs_mgr;
 		else if	(ctx.Match(k, Invk_cfg))						return cfg_mgr;
-		else if	(ctx.Match(k, Invk_session))					return session_mgr;
 		else if	(ctx.Match(k, "name"))							return key; //throw Err_.new_unhandled(k);	// OBSOLETE: used to return key
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String Invk_available_from_fsys = "available_from_fsys", Invk_available_from_bulk = "available_from_bulk", Invk_bookmarks_add_fmt_ = "bookmarks_add_fmt_"
-	, Invk_wiki = "wiki", Invk_history = "history", Invk_fsys = "fsys", Invk_lang = "lang", Invk_msgs = "msgs", Invk_prefs = "prefs", Invk_cfg = "cfg", Invk_session = "session";
+	, Invk_wiki = "wiki", Invk_history = "history", Invk_fsys = "fsys", Invk_lang = "lang", Invk_msgs = "msgs", Invk_prefs = "prefs", Invk_cfg = "cfg";
 	public static final String Key_xowa_user = "anonymous";
 	public static final String Evt_lang_changed = "lang_changed";
 	public void Available_from_fsys() {

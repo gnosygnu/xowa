@@ -35,6 +35,14 @@ public class Xocfg_cache_mgr {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
 		return grp.Get(ctx);
 	}
+	public String Get_or(String ctx, String key, String or) {
+		Xocfg_cache_grp grp = (Xocfg_cache_grp)grps.Get_by(key);
+		if (grp == null) {
+			grp = Load_grp(key, or);
+			grps.Add(key, grp);
+		}
+		return grp.Get(ctx);
+	}
 	public void Set(String ctx, String key, String val) {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
 		grp.Set(ctx, val);
@@ -62,17 +70,17 @@ public class Xocfg_cache_mgr {
 	private Xocfg_cache_grp Grps__get_or_load(String key) {
 		Xocfg_cache_grp grp = (Xocfg_cache_grp)grps.Get_by(key);
 		if (grp == null) {
-			grp = Load_grp(key);
+			grp = Load_grp(key, "");
 			grps.Add(key, grp);
 		}
 		return grp;
 	}
-	private Xocfg_cache_grp Load_grp(String key) {
+	private Xocfg_cache_grp Load_grp(String key, String or) {
 		// get data from db
 		Xocfg_itm_row meta_itm = db_app.Tbl__itm().Select_by_key_or_null(key);
 		if (meta_itm == null) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:itm not found; key=~{0}", key);
-			return new Xocfg_cache_grp(key, "");
+			return new Xocfg_cache_grp(key, or);
 		}
 		Xocfg_val_row[] itms = db_usr.Tbl__val().Select_all(meta_itm.Key());
 

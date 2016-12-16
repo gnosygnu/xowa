@@ -30,12 +30,12 @@ public class Xoh_head_itm__popups extends Xoh_head_itm__base {
 	}
 	@Override public void Write_js_head_global(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {
 		Xocfg_mgr cfg_mgr = app.Cfg();
-		wtr.Write_js_global_ini_atr_val(Key_win_show_delay			, cfg_mgr.Get_int_by_wiki_or(wiki, Xow_popup_mgr.Cfg__win_show_delay, 0));
-		wtr.Write_js_global_ini_atr_val(Key_win_hide_delay			, cfg_mgr.Get_int_by_wiki_or(wiki, Xow_popup_mgr.Cfg__win_hide_delay, 0));
-		wtr.Write_js_global_ini_atr_val(Key_win_max_w				, cfg_mgr.Get_int_by_wiki_or(wiki, Xow_popup_mgr.Cfg__win_max_w, 0));
-		wtr.Write_js_global_ini_atr_val(Key_win_max_h				, cfg_mgr.Get_int_by_wiki_or(wiki, Xow_popup_mgr.Cfg__win_max_h, 0));
-		wtr.Write_js_global_ini_atr_val(Key_win_show_all_max_w		, cfg_mgr.Get_int_by_wiki_or(wiki, Xow_popup_mgr.Cfg__win_show_all_max_w, 0));
-		wtr.Write_js_global_ini_atr_val(Key_win_bind_focus_blur		, cfg_mgr.Get_bool_by_wiki_or(wiki, Xow_popup_mgr.Cfg__win_bind_focus_blur, false));
+		wtr.Write_js_global_ini_atr_val(Key_win_show_delay			, cfg_mgr.Get_int_wiki_or(wiki, Xow_popup_mgr.Cfg__win_show_delay, 0));
+		wtr.Write_js_global_ini_atr_val(Key_win_hide_delay			, cfg_mgr.Get_int_wiki_or(wiki, Xow_popup_mgr.Cfg__win_hide_delay, 0));
+		wtr.Write_js_global_ini_atr_val(Key_win_max_w				, cfg_mgr.Get_int_wiki_or(wiki, Xow_popup_mgr.Cfg__win_max_w, 0));
+		wtr.Write_js_global_ini_atr_val(Key_win_max_h				, cfg_mgr.Get_int_wiki_or(wiki, Xow_popup_mgr.Cfg__win_max_h, 0));
+		wtr.Write_js_global_ini_atr_val(Key_win_show_all_max_w		, cfg_mgr.Get_int_wiki_or(wiki, Xow_popup_mgr.Cfg__win_show_all_max_w, 0));
+		wtr.Write_js_global_ini_atr_val(Key_win_bind_focus_blur		, cfg_mgr.Get_bool_wiki_or(wiki, Xow_popup_mgr.Cfg__win_bind_focus_blur, false));
 		wtr.Write_js_global_ini_atr_val(Key_win_bind_hover_area		, bind_hover_area);
 	}
 	@Override public void Write_js_tail_script(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {

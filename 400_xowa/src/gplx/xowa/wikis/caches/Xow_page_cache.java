@@ -31,6 +31,7 @@ public class Xow_page_cache {
 		return rv == null ? null : rv.Wtxt__direct();
 	}
 	public boolean Get_ifexist_by_mem(byte[] ifexists_key) {
+		// check ifexists_cache
 		Xow_page_cache_itm ifexists_itm = (Xow_page_cache_itm)ifexists_cache.Get_by(ifexists_key);
 		if		(ifexists_itm == Xow_page_cache_itm.Missing)
 			return false;
@@ -47,7 +48,6 @@ public class Xow_page_cache {
 		return false;
 	}
 	public boolean Load_ifexist(Xoa_ttl ttl) {
-		// check ifexists_cache
 		byte[] ifexists_key = ttl.Full_db();
 		Xow_page_cache_itm ifexists_itm = null;
 		
