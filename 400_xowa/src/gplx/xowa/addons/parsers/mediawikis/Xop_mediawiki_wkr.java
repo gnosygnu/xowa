@@ -27,7 +27,7 @@ public class Xop_mediawiki_wkr {
 	}
 	public void Loader_(Xop_mediawiki_loader loader) {
 		if (loader != null)
-			wiki.Cache_mgr().Page_cache().Load_wkr_(new Xow_page_cache_wkr__embeddable(loader));
+			wiki.Cache_mgr().Load_wkr_(new Xow_page_cache_wkr__embeddable(loader));
 	}
 	public void Free_memory() {
 		wiki.Cache_mgr().Tmpl_result_cache().Clear();

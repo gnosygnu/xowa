@@ -35,21 +35,23 @@ public class Xomp_parse_mgr {
 		Xomp_prog_mgr prog_mgr = new Xomp_prog_mgr();
 		prog_mgr.Init(page_pool_loader.Get_pending_count(), cfg.Progress_interval());
 
-		// cache: disable general settings
-		wiki.App().User().User_db_mgr().Cache_mgr().Enabled_n_();	// disable db lookups of cache
-		Gfo_cache_mgr commons_cache = new Gfo_cache_mgr().Max_size_(Int_.Max_value).Reduce_by_(Int_.Max_value);
-		Gfo_cache_mgr ifexist_cache = new Gfo_cache_mgr().Max_size_(Int_.Max_value).Reduce_by_(Int_.Max_value);
-
 		// cache: preload tmpls and imglinks
 		Xow_page_cache page_cache = Xomp_tmpl_cache_bldr.New(wiki, cfg.Load_all_templates());
+		wiki.App().User().User_db_mgr().Cache_mgr().Enabled_n_();	// disable db lookups of user cache
+
+		Gfo_cache_mgr commons_cache = new Gfo_cache_mgr().Max_size_(Int_.Max_value).Reduce_by_(Int_.Max_value);
+		Xow_ifexist_cache ifexist_cache = new Xow_ifexist_cache(wiki, page_cache).Cache_sizes_(Int_.Max_value, Int_.Max_value);
+		if (cfg.Load_ifexists_ns() != null) Load_ifexists_ns(wiki, ifexist_cache, cfg.Load_ifexists_ns());
+
 		Xof_orig_wkr__img_links file_orig_wkr = new Xof_orig_wkr__img_links(wiki);
-		if (cfg.Load_all_imglnks()) Xof_orig_wkr__img_links_.Load_all(file_orig_wkr);
+		if (cfg.Load_all_imglinks()) Xof_orig_wkr__img_links_.Load_all(file_orig_wkr);
 
 		// load_wkr: init and start
 		// Xomp_load_wkr load_wkr = new Xomp_load_wkr(wiki, db_mgr.Mgr_db().Conn(), cfg.Num_pages_in_pool(), cfg.Num_wkrs());
 		// Thread_adp_.Start_by_key("xomp.load", Cancelable_.Never, load_wkr, Xomp_load_wkr.Invk__exec);
  
 		// assert wkr_tbl
+		Gfo_usr_dlg_.Instance.Prog_many("", "", "initing wkrs");
 		int wkr_len = cfg.Num_wkrs();
 		int wkr_uid_bgn = mgr_db.Tbl__wkr().Init_wkrs(cfg.Wkr_machine_name(), wkr_len);
 		latch = new Gfo_countdown_latch(wkr_len);
@@ -85,5 +87,47 @@ public class Xomp_parse_mgr {
 			wkrs[i].Bld_stats(bfr);
 		}
 		Gfo_usr_dlg_.Instance.Note_many("", "", bfr.To_str_and_clear());
+	}
+	private static void Load_ifexists_ns(Xow_wiki wiki, Xow_ifexist_cache cache, String ns_list) {
+		// expand "*" to all
+		if (String_.Eq(ns_list, "*")) {
+			Bry_bfr bfr = Bry_bfr_.New();
+			gplx.xowa.wikis.nss.Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
+			int len = ns_mgr.Ids_len();
+			for (int i = 0; i < len; i++) {
+				gplx.xowa.wikis.nss.Xow_ns ns = ns_mgr.Ids_get_at(i);
+				if (ns.Id() >= 0) {	// skip Media / Special
+					if (bfr.Len() != 0) bfr.Add_byte_comma();
+					bfr.Add_int_variable(ns.Id());
+				}
+			}
+			ns_list = bfr.To_str_and_clear();
+		}
+		// load all titles
+		gplx.xowa.wikis.data.tbls.Xowd_page_tbl page_tbl = wiki.Data__core_mgr().Db__core().Tbl__page();
+		String sql = gplx.dbs.Db_sql_.Make_by_fmt(String_.Ary
+		( "SELECT  {0}, {1}"
+		, "FROM    {2}"
+		, "WHERE   {0} IN ({3})"
+		), page_tbl.Fld_page_ns(), page_tbl.Fld_page_title()
+		, page_tbl.Tbl_name()
+		, ns_list
+		);
+		gplx.dbs.Db_rdr rdr = page_tbl.Conn().Stmt_sql(sql).Exec_select__rls_auto();
+		try {
+			int counter = 0;
+			while (rdr.Move_next()) {
+				int ns = rdr.Read_int(page_tbl.Fld_page_ns());
+				byte[] page_db = rdr.Read_bry_by_str(page_tbl.Fld_page_title());
+				Xoa_ttl ttl = wiki.Ttl_parse(ns, page_db);
+				cache.Add(ttl);
+				if (counter % 100000 == 0) Gfo_usr_dlg_.Instance.Prog_many("", "", "loading ifexists: " + counter);
+				counter++;
+			}
+		} finally {rdr.Rls();}
+		
+		// mark ns
+		int[] ns_ids = Int_.Ary_parse(ns_list, ",");
+		cache.Add_ns_loaded(ns_ids);
 	}
 }
