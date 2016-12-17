@@ -30,11 +30,11 @@ public class Xoa_cfg_mgr_tst {
 		fxt.Test_cfg_itm("simple.wikipedia.org", "import.db_text_max", true, true);
 		fxt.Test_save("app.cfgs.get('import.db_text_max', 'simple.wikipedia.org').val = '2000';\n");
 	}
-	@Test  public void Notify_quote() {
-		fxt.Test_cfg_set("app.cfgs.get('app.gui.html.css_xtn', 'app').val = 'a''b';", "*", "app.gui.html.css_xtn", "a'b");
-		fxt.Test_cfg_itm("app", "app.gui.html.css_xtn", true, true);
-		fxt.Test_save("app.cfgs.get('app.gui.html.css_xtn', 'app').val = 'a''b';\n");
-	}
+//		@Test  public void Notify_quote() {
+//			fxt.Test_cfg_set("app.cfgs.get('app.gui.html.css_xtn', 'app').val = 'a''b';", "*", "app.gui.html.css_xtn", "a'b");
+//			fxt.Test_cfg_itm("app", "app.gui.html.css_xtn", true, true);
+//			fxt.Test_save("app.cfgs.get('app.gui.html.css_xtn', 'app').val = 'a''b';\n");
+//		}
 	@Test  public void Init_should_not_notify_if_app() {
 		fxt.Init_cfg_app("import.db_text_max", "1000");
 		fxt.Test_init_wiki("simple.wikipedia.org", "import.db_text_max", "3000");	// 3000 is default; itm shouldn't change b/c cfg is app level; DATE:2013-07-14

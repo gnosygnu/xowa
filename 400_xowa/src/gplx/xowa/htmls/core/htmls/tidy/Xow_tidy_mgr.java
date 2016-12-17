@@ -31,7 +31,7 @@ public class Xow_tidy_mgr implements Gfo_evt_itm, Xow_tidy_mgr_interface {
 		}
 		wkr.Init_by_app(app);
 	}
-	public void Init_by_app(Xoae_app app) {
+	public void Init_by_wiki(Xoae_app app) {
 		this.app = app;
 		this.tidy_mgr = app.Html_mgr().Tidy_mgr();
 		Gfo_evt_mgr_.Sub_same_many(tidy_mgr, this, Xoa_tidy_mgr.Evt__enabled_changed, Xoa_tidy_mgr.Evt__engine_changed);

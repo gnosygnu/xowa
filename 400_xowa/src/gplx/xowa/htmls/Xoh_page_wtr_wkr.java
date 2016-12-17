@@ -216,7 +216,7 @@ public class Xoh_page_wtr_wkr {
 		if (hctx.Mode_is_hdump())
 			bfr.Add(data_raw);
 		else
-			app.Html_mgr().Page_mgr().Content_code_fmtr().Bld_bfr_many(bfr, tmp_bfr);
+			app.Html_mgr().Page_mgr().Content_code_fmt().Bld_many(bfr, tmp_bfr);
 		tmp_bfr.Clear();
 	}
 	private void Write_body_edit(Bry_bfr bfr, byte[] data_raw, int ns_id, byte page_tid) {

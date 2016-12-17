@@ -16,45 +16,50 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
-import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.portal.*;
 public class Xoh_page_mgr implements Gfo_invk {
-	public Xoh_subpages_bldr Subpages_bldr() {return subpages_bldr;} private final    Xoh_subpages_bldr subpages_bldr = new Xoh_subpages_bldr();
-	public boolean Font_enabled() {return font_enabled;} private boolean font_enabled = false;
-	public void Font_enabled_(boolean v) {font_enabled = v;}
-	public String Font_name() {return font_name;} private String font_name = "Arial";
+	private boolean font_enabled = false;
+	private String font_name = "Arial";
+	private byte[] font_css_bry = Bry_.Empty, custom_script = Bry_.Empty;
+	private final    Bry_fmt font_css_fmt = Bry_fmt.Auto("body {font-family: ~{font_name}; font-size: ~{font_size}px;}");
 	public float Font_size() {return font_size;} private float font_size = Font_size_default;
-	public void Font_size_(float v) {
-		font_size = v;
-		this.Font_css_bry_update();
+	private void Font_css_bry_() {
+		font_css_bry = font_css_fmt.Bld_many_to_bry(Bry_bfr_.New(), font_name, font_size);
 	}
-	public Bry_fmtr Font_css_fmtr() {return font_css_fmtr;} private final    Bry_fmtr font_css_fmtr = Bry_fmtr.new_("body {font-family: ~{font_name}; font-size: ~{font_size}px;}", "font_name", "font_size");
-	public Bry_fmtr Content_code_fmtr() {return content_code_fmtr;} private final    Bry_fmtr content_code_fmtr = Bry_fmtr.new_("<pre>~{page_text}</pre>", "page_text");
-	private void Font_css_fmtr_(byte[] bry) {
-		font_css_fmtr.Fmt_(bry);
-		Font_css_bry_update();
+	public void Write_css(gplx.xowa.htmls.heads.Xoh_head_wtr wtr) {
+		if (font_enabled)
+			wtr.Write_css_style_itm(font_css_bry);
+		if (Bry_.Len_gt_0(custom_script))
+			wtr.Write_css_style_itm(custom_script);
 	}
-	public byte[] Font_css_bry() {return font_css_bry;}
-	public void Font_css_bry_update() {
-		font_css_bry = font_css_fmtr.Bld_bry_many(Bry_bfr_.New(), font_name, font_size);
-	}	private byte[] font_css_bry = Bry_.Empty;
+
+	public Bry_fmt Content_code_fmt() {return content_code_fmt;} private final    Bry_fmt content_code_fmt = Bry_fmt.Auto("<pre>~{page_text}</pre>");
+	public Xoh_subpages_bldr Subpages_bldr() {return subpages_bldr;} private final    Xoh_subpages_bldr subpages_bldr = new Xoh_subpages_bldr();
+	public void Init_by_app(Xoa_app app) {
+		app.Cfg().Bind_many_app(this, Cfg__font_enabled, Cfg__font_name, Cfg__font_size, Cfg__font_format, Cfg__custom_script);
+	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_font_name)) 				return font_name;
-		else if	(ctx.Match(k, Invk_font_name_))				{font_name = m.ReadStr("v"); this.Font_css_bry_update();}
-		else if	(ctx.Match(k, Invk_font_size)) 				return font_size;
-		else if	(ctx.Match(k, Invk_font_size_))				{font_size = m.ReadFloat("v"); this.Font_css_bry_update();}
-		else if	(ctx.Match(k, Invk_font_css_fmt)) 			return String_.new_u8(font_css_fmtr.Fmt());
-		else if	(ctx.Match(k, Invk_font_css_fmt_)) 			Font_css_fmtr_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_font_enabled)) 			return Yn.To_str(font_enabled);
-		else if	(ctx.Match(k, Invk_font_enabled_)) 			font_enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_content_code_fmt))		return String_.new_u8(content_code_fmtr.Fmt());
-		else if	(ctx.Match(k, Invk_content_code_fmt_))		content_code_fmtr.Fmt_(m.ReadBry("v"));
+		if		(ctx.Match(k, Invk_content_code_fmt))		return String_.new_u8(content_code_fmt.Fmt());
+		else if	(ctx.Match(k, Invk_content_code_fmt_))		content_code_fmt.Fmt_(m.ReadBry("v"));
+
+		else if	(ctx.Match(k, Cfg__font_enabled))			font_enabled = m.ReadYn("v");
+		else if	(ctx.Match(k, Cfg__font_name))				{font_name = m.ReadStr("v"); Font_css_bry_();}
+		else if	(ctx.Match(k, Cfg__font_size))				{font_size = m.ReadFloat("v"); Font_css_bry_();}
+		else if	(ctx.Match(k, Cfg__font_format))			{font_css_fmt.Fmt_(m.ReadBry("v")); Font_css_bry_();}
+		else if	(ctx.Match(k, Cfg__custom_script))			custom_script = m.ReadBry("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final String Invk_font_name = "font_name", Invk_font_name_ = "font_name_", Invk_font_size = "font_size", Invk_font_size_ = "font_size_"
-	, Invk_font_css_fmt = "font_css_fmt", Invk_font_css_fmt_ = "font_css_fmt_", Invk_font_enabled = "font_enabled", Invk_font_enabled_ = "font_enabled_"
-	, Invk_content_code_fmt = "content_code_fmt", Invk_content_code_fmt_ = "content_code_fmt_"
+	private static final String Invk_content_code_fmt = "content_code_fmt", Invk_content_code_fmt_ = "content_code_fmt_";
+
+	public static final String
+	  Cfg__font_enabled			= "xowa.html.css.font.enabled"
+	, Cfg__font_size			= "xowa.html.css.font.size"
+	;
+	private static final String
+	  Cfg__font_name			= "xowa.html.css.font.name"
+	, Cfg__font_format			= "xowa.html.css.font.format"
+	, Cfg__custom_script		= "xowa.html.css.custom.script"
 	;
 	public static final float Font_size_default = 16;
 }

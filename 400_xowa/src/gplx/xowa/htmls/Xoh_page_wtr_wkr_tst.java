@@ -32,9 +32,9 @@ public class Xoh_page_wtr_wkr_tst {
 		fxt.Test_edit("&#9;", "&amp;#9;\n");	// NOTE: cannot by &#9; or will show up in edit box as "\t" and save as "\t" instead of &#9;
 	}
 	@Test  public void Css() {
-		fxt.App().Html_mgr().Page_mgr().Content_code_fmtr().Fmt_("<pre style='overflow:auto'>~{page_text}</pre>");
+		fxt.App().Html_mgr().Page_mgr().Content_code_fmt().Fmt_("<pre style='overflow:auto'>~{page_text}</pre>");
 		fxt.Test_read("MediaWiki:Common.css", ".xowa {}", "<pre style='overflow:auto'>.xowa {}</pre>");
-		fxt.App().Html_mgr().Page_mgr().Content_code_fmtr().Fmt_("<pre>~{page_text}</pre>");
+		fxt.App().Html_mgr().Page_mgr().Content_code_fmt().Fmt_("<pre>~{page_text}</pre>");
 	}
 	@Test  public void Amp_disable() {	// PURPOSE: in js documents; &quot; should be rendered as &quot;, not as "; DATE:2013-11-07
 		fxt.Test_read("MediaWiki:Gadget.js", "&quot;", "<pre>&amp;quot;</pre>");

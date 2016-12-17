@@ -22,6 +22,7 @@ public class Xoh_html_mgr implements Gfo_invk {
 	public Xoh_html_mgr(Xoae_app app) {}
 	public void Init_by_app(Xoae_app app) {
 		tidy_mgr.Init_by_app(app);
+		page_mgr.Init_by_app(app);
 	}
 	public Xoh_page_mgr Page_mgr() {return page_mgr;} private final    Xoh_page_mgr page_mgr = new Xoh_page_mgr();
 	public Xoa_tidy_mgr Tidy_mgr() {return tidy_mgr;} private final    Xoa_tidy_mgr tidy_mgr = new Xoa_tidy_mgr();

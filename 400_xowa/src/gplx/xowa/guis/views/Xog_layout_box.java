@@ -19,20 +19,19 @@ package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.gfui.*; import gplx.gfui.draws.*; import gplx.gfui.controls.elems.*;
 public class Xog_layout_box implements Gfo_invk {
 	public Gfo_invk Owner() {return owner;} public Xog_layout_box Owner_(Gfo_invk v) {owner = v; return this;} Gfo_invk owner;
-	public int X_abs() {return x_abs;} public Xog_layout_box X_abs_(int v) {x_abs = v; return this;} private int x_abs = Int_.Min_value;
-	public int Y_abs() {return y_abs;} public Xog_layout_box Y_abs_(int v) {y_abs = v; return this;} private int y_abs = Int_.Min_value;
-	public int W_abs() {return w_abs;} public Xog_layout_box W_abs_(int v) {w_abs = v; return this;} private int w_abs = Int_.Min_value;
-	public int H_abs() {return h_abs;} public Xog_layout_box H_abs_(int v) {h_abs = v; return this;} private int h_abs = Int_.Min_value;
-	public int X_rel() {return x_rel;} public Xog_layout_box X_rel_(int v) {x_rel = v; return this;} private int x_rel = Int_.Min_value;
-	public int Y_rel() {return y_rel;} public Xog_layout_box Y_rel_(int v) {y_rel = v; return this;} private int y_rel = Int_.Min_value;
-	public int W_rel() {return w_rel;} public Xog_layout_box W_rel_(int v) {w_rel = v; return this;} private int w_rel = Int_.Min_value;
-	public int H_rel() {return h_rel;} public Xog_layout_box H_rel_(int v) {h_rel = v; return this;} private int h_rel = Int_.Min_value;
-	public String Text() {return text;} public Xog_layout_box Text_(String v) {text = v; return this;} private String text;
-	public String Font_name() {return font_name;} public Xog_layout_box Font_name_(String v) {font_name = v; return this;} private String font_name;
-	public float Font_size() {return font_size;} public Xog_layout_box Font_size_(float v) {font_size = v; return this;} float font_size = Float_.NaN;
-	public FontStyleAdp Font_style() {return font_style;} public Xog_layout_box Font_style_(FontStyleAdp v) {font_style = v; return this;} FontStyleAdp font_style;
-	public byte Mode() {return mode;} public Xog_layout_box Mode_(byte v) {mode = v; return this;} private byte mode = Mode_rel;
-	public FontAdp To_font() {return Font_make(font_name, font_size, font_style);}
+	public int X_abs() {return x_abs;} private int x_abs = Int_.Min_value;
+	public int Y_abs() {return y_abs;} private int y_abs = Int_.Min_value;
+	public int W_abs() {return w_abs;} private int w_abs = Int_.Min_value;
+	public int H_abs() {return h_abs;} private int h_abs = Int_.Min_value;
+	private int x_rel = Int_.Min_value;
+	private int y_rel = Int_.Min_value;
+	public Xog_layout_box W_rel_(int v) {w_rel = v; return this;} private int w_rel = Int_.Min_value;
+	public Xog_layout_box H_rel_(int v) {h_rel = v; return this;} private int h_rel = Int_.Min_value;
+	private String text;
+	private String font_name;
+	private float font_size = Float_.NaN;
+	private FontStyleAdp font_style;
+	public byte Mode() {return mode;} private byte mode = Mode_rel;
 	public void Adj_size(Rect_ref rect) {
 		if (w_abs > -1) rect.W_(w_abs);	if (w_rel != Int_.Min_value) rect.W_(w_rel + rect.W());
 		if (h_abs > -1) rect.H_(h_abs);	if (h_rel != Int_.Min_value) rect.H_(h_rel + rect.H());
@@ -71,10 +70,10 @@ public class Xog_layout_box implements Gfo_invk {
 		return this;
 	}
 	public static final byte Mode_abs = 0, Mode_rel = 1;
-	static final String Invk_x_abs_ = "x_abs_", Invk_y_abs_ = "y_abs_", Invk_w_abs_ = "w_abs_", Invk_h_abs_ = "h_abs_", Invk_x_rel_ = "x_rel_", Invk_y_rel_ = "y_rel_", Invk_w_rel_ = "w_rel_", Invk_h_rel_ = "h_rel_"
-		, Invk_size_abs_ = "size_abs_", Invk_pos_abs_ = "pos_abs_", Invk_rect_abs_ = "rect_abs_", Invk_size_rel_ = "size_rel_", Invk_pos_rel_ = "pos_rel_", Invk_rect_rel_ = "rect_rel_"
-		, Invk_text_ = "text_"
-		, Invk_font_name_ = "font_name_", Invk_font_size_ = "font_size_", Invk_font_style_ = "font_style_", Invk_mode_ = "mode_", Invk_owner = "owner";
+	private static final String Invk_x_abs_ = "x_abs_", Invk_y_abs_ = "y_abs_", Invk_w_abs_ = "w_abs_", Invk_h_abs_ = "h_abs_", Invk_x_rel_ = "x_rel_", Invk_y_rel_ = "y_rel_", Invk_w_rel_ = "w_rel_", Invk_h_rel_ = "h_rel_"
+	, Invk_size_abs_ = "size_abs_", Invk_pos_abs_ = "pos_abs_", Invk_rect_abs_ = "rect_abs_", Invk_size_rel_ = "size_rel_", Invk_pos_rel_ = "pos_rel_", Invk_rect_rel_ = "rect_rel_"
+	, Invk_text_ = "text_"
+	, Invk_font_name_ = "font_name_", Invk_font_size_ = "font_size_", Invk_font_style_ = "font_style_", Invk_mode_ = "mode_", Invk_owner = "owner";
 	private static FontAdp Font_make(String font_name, float font_size, FontStyleAdp font_style) {
 		String new_font_name = font_name == null ? "Arial" : font_name;
 		float new_font_size = Float_.IsNaN(font_size) ? 8 : font_size;

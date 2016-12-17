@@ -33,10 +33,8 @@ public class Xoapi_font implements Gfo_invk {
 	}
 	private void Set(boolean enabled, float html_font_size, float gui_font_size) {
 		if (html_font_size <= 0) return;	// font must be positive
-		app.Html_mgr().Page_mgr().Font_enabled_(enabled);
-		app.Html_mgr().Page_mgr().Font_size_(html_font_size);
-		app.Cfg_mgr().Set_by_app("app.html.page.font_enabled", "y");
-		app.Cfg_mgr().Set_by_app("app.html.page.font_size", Float_.To_str(app.Html_mgr().Page_mgr().Font_size()));
+		app.Cfg().Set_bool_app(gplx.xowa.htmls.Xoh_page_mgr.Cfg__font_enabled, enabled);
+		app.Cfg().Set_float_app(gplx.xowa.htmls.Xoh_page_mgr.Cfg__font_size, html_font_size);
 		app.Gui_mgr().Win_cfg().Font().Size_(gui_font_size);
 		app.Cfg_mgr().Set_by_app("app.gui.win_opts.font.size", Float_.To_str(gui_font_size));
 		app.Cfg_mgr().Db_save_txt();
