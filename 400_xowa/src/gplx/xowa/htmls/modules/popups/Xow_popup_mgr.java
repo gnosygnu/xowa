@@ -139,7 +139,7 @@ public class Xow_popup_mgr implements Gfo_invk, Gfo_evt_itm {
 		byte[] tooltip = itm.Tooltip();
 		if (Bry_.Len_gt_0(tooltip))
 			href = Bry_.Add(tooltip);
-		Xog_win_itm__prog_href_mgr.Hover(app, cur_wiki, cur_page, String_.new_u8(href)); // set page ttl again in prog bar; DATE:2014-06-28
+		Xog_win_itm__prog_href_mgr.Hover(app, app.Gui_mgr().Browser_win().Cfg().Status__show_short_url(), cur_wiki, cur_page, String_.new_u8(href)); // set page ttl again in prog bar; DATE:2014-06-28
 	}
 	public void Show_popup_html(String cbk, byte[] mode, Xow_popup_itm popup_itm) {
 		Xog_tab_itm cur_tab = app.Gui_mgr().Browser_win().Active_tab();

@@ -24,7 +24,7 @@ public class Xog_win_itm__prog_href_mgr {
 		if (!String_.Eq(href, win.Prog_box().Text()))
 			win.Usr_dlg().Prog_direct(href);
 	}
-	public static void Hover(Xoae_app app, Xowe_wiki wiki, Xoae_page page, String href) {
+	public static void Hover(Xoae_app app, boolean show_status_url, Xowe_wiki wiki, Xoae_page page, String href) {
 		Gfo_usr_dlg usr_dlg = app.Usr_dlg();
 		if (	String_.Len_eq_0(href)			// href is null / empty; occurs when hovering over empty space
 			||	String_.Eq(href, "file:///")) {
@@ -33,7 +33,6 @@ public class Xog_win_itm__prog_href_mgr {
 		}
 		Xoa_url url = Xoa_url.blank();
 		app.Html__href_parser().Parse_as_url(url, Bry_.new_u8(href), wiki, page.Ttl().Page_txt());
-//			Xoa_url url = wiki.Utl__url_parser().Parse(Bry_.new_u8(href));
-		usr_dlg.Prog_direct(String_.new_u8(url.To_bry(!app.Api_root().Gui().Browser().Prog().Show_short_url(), Bool_.Y)));
+		usr_dlg.Prog_direct(String_.new_u8(url.To_bry(!show_status_url, Bool_.Y)));
 	}
 }

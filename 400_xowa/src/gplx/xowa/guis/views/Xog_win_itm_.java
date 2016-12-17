@@ -53,7 +53,7 @@ public class Xog_win_itm_ {
 	public static void Font_update(Xog_win_itm win, Xol_font_info itm_font) {
 		FontAdp gui_font = win.Url_box().TextMgr().Font();
 		if (!itm_font.Eq(gui_font)) {
-			FontAdp new_font = itm_font.XtoFontAdp();
+			FontAdp new_font = itm_font.To_font();
 			win.Url_box().TextMgr().Font_(new_font);
 			win.Find_box().TextMgr().Font_(new_font);
 			win.Prog_box().TextMgr().Font_(new_font);

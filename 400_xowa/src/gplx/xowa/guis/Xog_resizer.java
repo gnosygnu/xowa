@@ -19,7 +19,18 @@ package gplx.xowa.guis; import gplx.*; import gplx.xowa.*;
 import gplx.core.envs.*;
 import gplx.gfui.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
 import gplx.xowa.users.*; import gplx.xowa.guis.views.*;
-public class Xog_resizer {
+public class Xog_resizer implements Gfo_invk {
+	private Xog_win_itm win_itm;
+	private String browser__adj_type = "none";
+	private RectAdp browser__adj_rect = RectAdp_.Zero;
+	public void Init_by_app(Xoa_app app, Xog_win_itm win_itm) {
+		this.win_itm = win_itm;
+		if (Op_sys.Cur().Tid_is_osx()) {
+			browser__adj_type = "relative";
+			browser__adj_rect = RectAdp_.new_(0, 0, 5, 30);
+		}
+		app.Cfg().Bind_many_app(this, Cfg__browser__adj_type, Cfg__browser__adj_rect);
+	}
 	public void Exec_win_resize(Xoae_app app, int main_w, int main_h) {
 		Xog_layout layout = app.Gui_mgr().Layout();
 		Xog_win_itm main_win = app.Gui_mgr().Browser_win();
@@ -52,12 +63,13 @@ public class Xog_resizer {
 		Exec_win_resize_elem(layout.Search_box()		, search_box			, new Rect_ref(0, 0, 190								, txt_dim				), url_exec_btn, Xog_resizer.Layout_right_top);
 		Exec_win_resize_elem(layout.Search_exec_btn()	, search_exec_btn		, new Rect_ref(0, 0, btn_dim							, btn_dim				), search_box, Xog_resizer.Layout_right_top);
 		Exec_win_resize_elem(layout.Html_box()			, tab_mgr				, new Rect_ref(0, 0, main_w								, main_h + -(bar_dim * 2) - menu_bar_adj), go_bwd_btn, Xog_resizer.Layout_below_left);	// -40:btn_dim(url bar) + btn_dim (find box)
-		Xoc_layout_mgr layout_mgr = app.Usere().Cfg_mgr().Layout_mgr();
-		switch (layout_mgr.Html_box_adj_type()) {
-			case Xoc_layout_mgr.Html_box_adj_type_none_byte: break;
-			case Xoc_layout_mgr.Html_box_adj_type_abs_byte: tab_mgr.Rect_set(layout_mgr.Html_box_adj_rect()); break;
-			case Xoc_layout_mgr.Html_box_adj_type_rel_byte: tab_mgr.Rect_set(tab_mgr.Rect().Op_add(layout_mgr.Html_box_adj_rect())); break;
+		if		(String_.Eq(browser__adj_type, "none"))			{}
+		else if	(String_.Eq(browser__adj_type, "absolute"))		{
+			if (	browser__adj_rect.Width() >= 320	// prevent unshowable window
+				&&	browser__adj_rect.Width() >= 320)
+				tab_mgr.Rect_set(browser__adj_rect);
 		}
+		else if	(String_.Eq(browser__adj_type, "relative"))		tab_mgr.Rect_set(tab_mgr.Rect().Op_add(browser__adj_rect));			
 		Exec_win_resize_elem(layout.Find_close_btn()	, find_close_btn		, new Rect_ref(0, 0, btn_dim							, btn_dim				), tab_mgr, Xog_resizer.Layout_below_left);
 		Exec_win_resize_elem(layout.Find_box()			, find_box				, new Rect_ref(0, 0, 102								, txt_dim				), find_close_btn, Xog_resizer.Layout_right_top);
 		find_box.Y_(tab_mgr.Y_max());
@@ -74,6 +86,14 @@ public class Xog_resizer {
 			GfuiElem_.Y_adj(btn_dif, find_fwd_btn, find_bwd_btn);			
 		}
 	}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, Cfg__browser__adj_type))		{browser__adj_type = m.ReadStr("v"); win_itm.Refresh_win_size();}
+		else if	(ctx.Match(k, Cfg__browser__adj_rect))		{browser__adj_rect = gplx.gfui.RectAdp_.parse_ws_(m.ReadStr("v")); win_itm.Refresh_win_size();}
+		else	return Gfo_invk_.Rv_unhandled;
+		return this;
+	}
+	private static final String Cfg__browser__adj_type = "xowa.gui.window.browser.adj_type", Cfg__browser__adj_rect = "xowa.gui.window.browser.adj_rect";
+
 	private static RectAdp Prv_elem_rect_initial = RectAdp_.Zero, Prv_elem_rect_win_7 = RectAdp_.new_(0, -1, 0, 0);
 	private static void Exec_win_resize_elem(Xog_layout_box box, GfuiElem cur_elem, Rect_ref cur_elem_rect, GfuiElem prv_elem, byte layout) {Exec_win_resize_elem(box, cur_elem, cur_elem_rect, prv_elem.Rect(), layout);}
 	private static void Exec_win_resize_elem(Xog_layout_box box, GfuiElem cur_elem, Rect_ref cur_elem_rect, RectAdp prv_elem_rect, byte layout) {

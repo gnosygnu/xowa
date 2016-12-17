@@ -35,9 +35,7 @@ public class Xoapi_font implements Gfo_invk {
 		if (html_font_size <= 0) return;	// font must be positive
 		app.Cfg().Set_bool_app(gplx.xowa.htmls.Xoh_page_mgr.Cfg__font_enabled, enabled);
 		app.Cfg().Set_float_app(gplx.xowa.htmls.Xoh_page_mgr.Cfg__font_size, html_font_size);
-		app.Gui_mgr().Win_cfg().Font().Size_(gui_font_size);
-		app.Cfg_mgr().Set_by_app("app.gui.win_opts.font.size", Float_.To_str(gui_font_size));
-		app.Cfg_mgr().Db_save_txt();
+		app.Cfg().Set_float_app(gplx.xowa.guis.langs.Xol_font_info.Cfg__font_size, gui_font_size);
 		app.Gui_mgr().Browser_win().Page__reload();	// NOTE: force reload; needed if viewing home/wiki/Options/HTML, else Font size won't update
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

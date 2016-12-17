@@ -15,17 +15,16 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.apps.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
-import gplx.gfui.*; import gplx.xowa.guis.views.*;
-public class Xoapi_prog implements Gfo_invk {
-	public void Init_by_kit(Xoae_app app) {this.app = app;} private Xoae_app app;
-	private Xog_win_itm Win()		{return app.Gui_mgr().Browser_win();}
-	public void Focus()				{this.Win().Prog_box().Focus();}
-	
+package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
+public class Xog_win_itm_cfg implements Gfo_invk {
+	public boolean Status__show_short_url() {return status__show_short_url;} private boolean status__show_short_url = true;
+	public void Init_by_app(Xoa_app app) {
+		app.Cfg().Bind_many_app(this, Cfg__status__show_short_url);
+	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_focus)) 					this.Focus();
+		if		(ctx.Match(k, Cfg__status__show_short_url))			status__show_short_url = m.ReadYn("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final String Invk_focus = "focus";
+	private static final String Cfg__status__show_short_url = "xowa.gui.window.status.show_short_url";
 }

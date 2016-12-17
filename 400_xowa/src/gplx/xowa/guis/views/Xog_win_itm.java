@@ -55,6 +55,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	public Gfui_html		Active_html_box()	{return tab_mgr.Active_tab().Html_itm().Html_box();}
 	public Xog_resizer		Resizer() {return resizer;} private Xog_resizer resizer = new Xog_resizer();
 	public Gfo_usr_dlg		Usr_dlg() {return app.Usr_dlg();}
+	public Xog_win_itm_cfg	Cfg() {return cfg;} private final    Xog_win_itm_cfg cfg = new Xog_win_itm_cfg();
 	public void Refresh_win_size() {
 		if (win_box != null)	// NOTE: will be null when html box adjustment pref is set and application is starting
 			resizer.Exec_win_resize(app, win_box.Width(), win_box.Height());
@@ -93,7 +94,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		else if	(ctx.Match(k, Invk_exit))									App__exit();
 		else if	(ctx.Match(k, Gfui_html.Evt_link_hover)) {
 			if (this.Active_tab() != null)	// NOTE: this.Active_tab() should not be null, but is null when running on raspberry pi; DATE:2016-09-23
-				Xog_win_itm__prog_href_mgr.Hover(app, this.Active_tab().Wiki(), this.Active_page(), Xoh_href_gui_utl.Standardize_xowa_link(m.ReadStr("v")));
+				Xog_win_itm__prog_href_mgr.Hover(app, cfg.Status__show_short_url(), this.Active_tab().Wiki(), this.Active_page(), Xoh_href_gui_utl.Standardize_xowa_link(m.ReadStr("v")));
 		}
 		else																return Gfo_invk_.Rv_unhandled;
 		return this;
@@ -289,7 +290,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		win_box = kit.New_win_app("win");
 		sync_cmd			= win_box.Kit().New_cmd_sync(this);
 		Io_url img_dir		= app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("app.window");
-		FontAdp ui_font		= app.Gui_mgr().Win_cfg().Font().XtoFontAdp();
+		FontAdp ui_font		= app.Gui_mgr().Win_cfg().Font().To_font();
 		go_bwd_btn			= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "go_bwd_btn", "go_bwd.png"				);
 		go_fwd_btn			= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "go_fwd_btn", "go_fwd.png"				);
 		url_box				= Xog_win_itm_.new_cbo(app, kit, win_box, ui_font, "url_box"								, true);
@@ -315,6 +316,8 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		if (	!Env_.Mode_testing()
 			&&	app.Mode().Tid_is_gui())	// only run for gui; do not run for tcp/http server; DATE:2014-05-03
 			app.Usr_dlg().Gui_wkr_(new Gfo_usr_dlg__gui__swt(app, kit, prog_box, info_box, info_box));
+		cfg.Init_by_app(app);
+		resizer.Init_by_app(app, this);
 	}
 	public static String Remove_redirect_if_exists(String text) {
 		// remove redirect target; EX: "A -> B" -> "A"

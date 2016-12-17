@@ -28,7 +28,6 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 		this.app = app;
 		this.browser_win = new Xog_win_itm(app, this);
 		bnd_mgr = new Xog_bnd_mgr(browser_win);
-		win_cfg = new Xocfg_win(app);
 		html_mgr = new Xog_html_mgr(app);
 		menu_mgr = new Xog_menu_mgr(this);
 		search_cfg = new Srch_search_cfg(app);
@@ -40,7 +39,7 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 	public Xog_bnd_mgr Bnd_mgr() {return bnd_mgr;} private Xog_bnd_mgr bnd_mgr;
 	public Gfui_kit Kit() {return kit;} private Gfui_kit kit = Gfui_kit_.Mem();
 	public Xog_cmd_mgr Cmd_mgr() {return cmd_mgr;} private Xog_cmd_mgr cmd_mgr = new Xog_cmd_mgr();
-	public Xocfg_win Win_cfg() {return win_cfg;} private Xocfg_win win_cfg;
+	public Xocfg_win Win_cfg() {return win_cfg;} private Xocfg_win win_cfg = new Xocfg_win();
 	public Xog_layout Layout() {return layout;} private Xog_layout layout = new Xog_layout();
 	public Xog_html_mgr Html_mgr() {return html_mgr;} private Xog_html_mgr html_mgr;
 	public Srch_search_cfg Search_cfg() {return search_cfg;} private Srch_search_cfg search_cfg;
@@ -66,6 +65,7 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 				, Gfo_log_.New_url(app.Fsys_mgr().Root_dir().GenSubDir_nest("user", "anonymous", "app", "tmp", "xolog"))
 				, new gplx.core.logs.Gfo_log_itm_wtr__csv()));
 		}
+		win_cfg.Init_by_app(app);
 	}
 	public void Kit_(Gfui_kit kit) {
 		this.kit = kit;

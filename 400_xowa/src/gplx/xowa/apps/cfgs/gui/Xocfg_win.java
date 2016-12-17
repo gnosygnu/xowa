@@ -20,9 +20,11 @@ import gplx.core.brys.fmtrs.*;
 import gplx.gfui.draws.*;
 import gplx.xowa.guis.langs.*;
 public class Xocfg_win implements Gfo_invk {
-	public Xocfg_win(Xoae_app app) {}
 	public Xol_font_info Font() {return font;} private Xol_font_info font = new Xol_font_info("Arial", 8, FontStyleAdp_.Plain);
 	public Bry_fmtr Search_box_fmtr() {return search_box_fmtr;} private Bry_fmtr search_box_fmtr = Bry_fmtr.new_("Special:Allpages?from=", "search");
+	public void Init_by_app(Xoae_app app) {
+		font.Init_by_app(app);
+	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_font))					return font;
 		else if	(ctx.Match(k, Invk_search_box_fmt_))		search_box_fmtr.Fmt_(m.ReadBry("v"));

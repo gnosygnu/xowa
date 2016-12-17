@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.cfgs.*;
 public class Xocfg_gui_mgr implements Gfo_invk {
-	public Xocfg_gui_mgr(Xoae_app app) {
-		win_cfg = new Xocfg_win(app);
+	public void Init_by_app(Xoae_app app) {
+		win_cfg.Init_by_app(app);
 	}
-	public Xocfg_win Win() {return win_cfg;} private Xocfg_win win_cfg;
+	public Xocfg_win Win() {return win_cfg;} private Xocfg_win win_cfg = new Xocfg_win();
 	public Xocfg_html Html() {return html_cfg;} private Xocfg_html html_cfg = new Xocfg_html();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_win))			return win_cfg;
