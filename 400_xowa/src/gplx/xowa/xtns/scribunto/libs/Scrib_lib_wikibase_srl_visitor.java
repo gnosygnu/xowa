@@ -33,7 +33,7 @@ class Scrib_lib_wikibase_srl_visitor implements Wbase_claim_visitor {
 		Wbase_claim_entity claim_entity = (Wbase_claim_entity)itm;
 		Keyval[] rv = new Keyval[2];
 		rv[0] = Keyval_.new_(Wbase_claim_entity_.Itm__entity_type.Key_str(), claim_entity.Entity_tid_str());
-		rv[1] = Keyval_.new_(Wbase_claim_entity_.Itm__numeric_id.Key_str(), Int_.To_str(claim_entity.Entity_id()));
+		rv[1] = Keyval_.new_(Wbase_claim_entity_.Itm__numeric_id.Key_str(), claim_entity.Entity_id());	// NOTE: must be int, not String, else will fail when comparing directly to integer; PAGE:en.w:Hollywood_Walk_of_Fame DATE:2016-12-17
 		return rv;
 	}
 	public void Visit_monolingualtext(Wbase_claim_monolingualtext itm) {

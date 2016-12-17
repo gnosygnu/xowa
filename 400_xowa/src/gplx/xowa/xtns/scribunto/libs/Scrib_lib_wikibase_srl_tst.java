@@ -408,6 +408,13 @@ public class Scrib_lib_wikibase_srl_tst {
 		, ""
 		);
 	}
+	@Test   public void Numeric_id_is_int() {	// PURPOSE: assert that numeric-id is integer, not String, else will fail when comparing directly to integer; PAGE:en.w:Hollywood_Walk_of_Fame DATE:2016-12-17
+		Wbase_claim_entity claim = (Wbase_claim_entity)fxt.Wdata_fxt().Make_claim_entity_qid(123, 456);
+		Scrib_lib_wikibase_srl_visitor visitor = new Scrib_lib_wikibase_srl_visitor();
+		visitor.Visit_entity(claim);
+		Keyval keyval = Keyval_find_.Find(true, visitor.Rv(), "value", "numeric-id");
+		Gftest.Eq__int(456, (int)keyval.Val());	// NOTE: must be 456 not "456"
+	}
 }	
 class Scrib_lib_wikibase_srl_fxt {
 	private Wdata_doc_bldr wdoc_bldr;
