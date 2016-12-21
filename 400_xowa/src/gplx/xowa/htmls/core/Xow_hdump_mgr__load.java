@@ -67,8 +67,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 			Xoctg_pagebox_itm[] pagebox_itms = wiki.Ctg__pagebox_wtr().Get_catlinks_by_page(wiki, hpg);
 			if (pagebox_itms.length > 0) {
 				tmp_bfr.Add(src);					
-				boolean hidden_enabled = wiki.App().Api_root() == null ? false : wiki.App().Api_root().Addon().Wikis__ctgs__hidden_enabled();	// HACK: handle drd which doesn't have api
-				wiki.Ctg__pagebox_wtr().Write_pagebox(hidden_enabled, tmp_bfr, wiki, hpg, pagebox_itms);
+				wiki.Ctg__pagebox_wtr().Write_pagebox(tmp_bfr, wiki, hpg, pagebox_itms);
 				src = tmp_bfr.To_bry_and_clear();
 			}
 

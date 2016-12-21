@@ -31,12 +31,12 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 	public String Page_wkr__key() {return Xob_cmd_keys.Key_text_page;}
 	public void Page_wkr__bgn() {
 		Xoae_app app = wiki.Appe();
-		Xoapi_import import_cfg = app.Api_root().Bldr().Wiki().Import();
 		this.redirect_mgr = wiki.Redirect_mgr(); 
 		this.db_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();
 		this.page_core_tbl = db_mgr.Tbl__page();
-		this.text_zip_mgr = wiki.Utl__zip_mgr(); text_zip_tid = import_cfg.Zip_tid_text();
-		this.ns_to_db_mgr = new Xob_ns_to_db_mgr(new Xob_ns_to_db_wkr__text(), db_mgr, import_cfg.Text_db_max());
+		this.text_zip_mgr = wiki.Utl__zip_mgr();
+		text_zip_tid = Xobldr_cfg.Zip_mode__text(app);
+		this.ns_to_db_mgr = new Xob_ns_to_db_mgr(new Xob_ns_to_db_wkr__text(), db_mgr, Xobldr_cfg.Max_size__text(app));
 		this.dg_match_mgr = Dg_match_mgr.New_mgr(app, wiki);
 		if (dg_match_mgr != null) redirect_id_enabled = true; // always enable redirect_id if dg_match_mgr enabled; DATE:2016-01-04
 		if (redirect_id_enabled) {
@@ -44,7 +44,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 			redirect_tbl.Conn().Txn_bgn("bldr__page__redirect");
 		}
 		app.Bldr().Dump_parser().Trie_tab_del_();	// disable swapping &#09; for \t
-		byte[] ns_file_map = import_cfg.New_ns_file_map(wiki.Import_cfg().Src_rdr_len());
+		byte[] ns_file_map = Xobldr_cfg.New_ns_file_map(wiki.Import_cfg().Src_rdr_len());
 		Xob_ns_file_itm.Init_ns_bldr_data(Xow_db_file_.Tid__text, wiki.Ns_mgr(), ns_file_map);
 		if (idx_mode.Tid_is_bgn()) page_core_tbl.Create_idx();
 		page_core_tbl.Insert_bgn();

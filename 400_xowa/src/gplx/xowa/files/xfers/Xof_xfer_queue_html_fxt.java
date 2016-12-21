@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.dbs.*;
 import gplx.core.ios.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.files.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
-	private final Xof_xfer_queue queue = new Xof_xfer_queue();
+	private final    Xof_xfer_queue queue = new Xof_xfer_queue();
 	@Override public void Clear(boolean src_repo_is_wmf) {
 		Db_conn_bldr.Instance.Reg_default_mem();
 		super.Clear(src_repo_is_wmf);
@@ -50,7 +50,6 @@ public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
 	@gplx.Virtual public void tst() {
 		Xowe_wiki wiki = this.En_wiki();
 		ini_src_fils();
-		wiki.Appe().File_mgr().Wmf_mgr().Enabled_(true);
 		wiki.File_mgr().Cfg_download().Enabled_(true);
 		queue.Exec(wiki, Xoae_page.New(wiki, wiki.Ttl_parse(Bry_.new_a7("A"))));
 		tst_trg_fils();

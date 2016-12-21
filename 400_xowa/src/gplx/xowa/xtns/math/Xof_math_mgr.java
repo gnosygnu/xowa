@@ -28,6 +28,7 @@ public class Xof_math_mgr implements Gfo_invk {
 		Xoa_prog_mgr app_mgr = app.Prog_mgr();
 		cmd_convert_tex_to_dvi = app_mgr.App_convert_tex_to_dvi();
 		cmd_convert_dvi_to_png = app_mgr.App_convert_dvi_to_png();
+		app.Cfg().Bind_many_app(this, Cfg__enabled, Cfg__renderer);
 	}
 	private Io_url Make_math_dir(String wiki_key) {return app.Fsys_mgr().Root_dir().GenSubDir_nest("file", wiki_key, "math");}
 	public Xof_math_html_wtr Html_wtr() {return html_wtr;} private final    Xof_math_html_wtr html_wtr = new Xof_math_html_wtr();
@@ -49,8 +50,7 @@ public class Xof_math_mgr implements Gfo_invk {
 			.Add(String_.CharAt(hash, 0)).Add(Math_dir_spr)
 			.Add(String_.CharAt(hash, 1)).Add(Math_dir_spr)
 			.Add(String_.CharAt(hash, 2)).Add(Math_dir_spr)
-			.Add(hash).Add(".png")
-			;
+			.Add(hash).Add(".png");
 		return Io_url_.new_fil_(tmp_sb.To_str_and_clear());
 	}
 	public boolean MakePng(byte[] math, String hash, Io_url png_url, String prog_fmt) {
@@ -63,14 +63,14 @@ public class Xof_math_mgr implements Gfo_invk {
 		cmd_convert_tex_to_dvi.Prog_fmt_(prog_fmt + " tex_to_dvi: ~{process_seconds} second(s); ~{process_exe_name} ~{process_exe_args}");
 		boolean pass = cmd_convert_tex_to_dvi.Run(tex_url.Raw(), tmp_dir.Xto_api()).Exit_code_pass();
 		if (!pass) {
-			app.Usr_dlg().Warn_many(GRP_KEY, "tex_to_dvi.fail", "fail: tex_to_dvi: error=~{0} latex=~{1}", cmd_convert_tex_to_dvi.Rslt_out(), latex);
+			app.Usr_dlg().Warn_many("", "tex_to_dvi.fail", "fail: tex_to_dvi: error=~{0} latex=~{1}", cmd_convert_tex_to_dvi.Rslt_out(), latex);
 		}
 		// NOTE: latex sometimes throws errors, but will generate .dvi; for sake of simplicity; always try to run dvipng
 		Io_mgr.Instance.CreateDirIfAbsent(png_url.OwnerDir());
 		cmd_convert_dvi_to_png.Prog_fmt_(prog_fmt + " dvi_to_png: ~{process_seconds} second(s); ~{process_exe_name} ~{process_exe_args}");
 		pass = cmd_convert_dvi_to_png.Run(tex_url.GenNewExt(".dvi"), png_url, tmp_dir.Xto_api()).Exit_code_pass();
 		if (!pass) {
-			app.Usr_dlg().Warn_many(GRP_KEY, "dvi_to_png.fail", "fail: dvi_to_png: error=~{0} latex=~{1}", cmd_convert_tex_to_dvi.Rslt_out(), latex);
+			app.Usr_dlg().Warn_many("", "dvi_to_png.fail", "fail: dvi_to_png: error=~{0} latex=~{1}", cmd_convert_tex_to_dvi.Rslt_out(), latex);
 		}
 		return pass;
 	}
@@ -95,14 +95,13 @@ public class Xof_math_mgr implements Gfo_invk {
 	));
 	public boolean Enabled() {return enabled;} public Xof_math_mgr Enabled_(boolean v) {enabled = v; return this;} private boolean enabled = true;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_enabled))		return Yn.To_str(enabled);
-		else if	(ctx.Match(k, Invk_enabled_))		enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_renderer))		return renderer_is_mathjax ? "mathjax" : "latex";
-		else if	(ctx.Match(k, Invk_renderer_))		renderer_is_mathjax = String_.Eq(m.ReadStr("v"), "mathjax");
-		else if	(ctx.Match(k, Invk_renderer_list))	return Options_renderer_list;
+		if		(ctx.Match(k, Cfg__enabled))		enabled = m.ReadYn("v");
+		else if	(ctx.Match(k, Cfg__renderer))		renderer_is_mathjax = String_.Eq(m.ReadStr("v"), "mathjax");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	private static final String Invk_enabled = "enabled", Invk_enabled_ = "enabled_", Invk_renderer = "renderer", Invk_renderer_ = "renderer_", Invk_renderer_list = "renderer_list";
-	private static Keyval[] Options_renderer_list = Keyval_.Ary(Keyval_.new_("mathjax", "MathJax"), Keyval_.new_("latex", "LaTeX")); 
-	private static final String GRP_KEY = "xowa.math.mgr";
+	}
+	private static final String
+	  Cfg__enabled		= "xowa.addon.math.enabled"
+	, Cfg__renderer		= "xowa.addon.math.renderer"
+	;
 }

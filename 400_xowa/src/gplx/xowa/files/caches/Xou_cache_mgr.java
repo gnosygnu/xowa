@@ -19,7 +19,7 @@ package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.primitives.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.users.data.*;
-public class Xou_cache_mgr {
+public class Xou_cache_mgr implements Gfo_invk {
 	private final    Xoa_wiki_mgr wiki_mgr; private final    Xou_cache_tbl cache_tbl; private final    Db_cfg_tbl cfg_tbl; private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(512);
 	private final    Ordered_hash hash = Ordered_hash_.New_bry(); private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final    Object thread_lock = new Object();
 	private final    Io_url cache_dir; private boolean db_load_needed = true;
@@ -48,6 +48,10 @@ public class Xou_cache_mgr {
 		, Keyval_.new_("file count", len)
 		, Keyval_.new_("oldest file", view_date == Long_.Max_value ? "" : DateAdp_.unixtime_utc_seconds_(view_date).XtoStr_fmt_iso_8561())
 		);
+	}
+	public void Init_by_app(Xoa_app app) {
+		app.Cfg().Bind_many_app(this, Cfg__fsys_size_min, Cfg__fsys_size_max, Run__fsys_clear);
+//			app.Cfg().Exec_mgr().Add(this, Run__fsys_clear);
 	}
 	public Xou_cache_itm Get_or_null(Xof_fsdb_itm fsdb) {return Get_or_null(fsdb.Lnki_wiki_abrv(), fsdb.Lnki_ttl(), fsdb.Lnki_type(), fsdb.Lnki_upright(), fsdb.Lnki_w(), fsdb.Lnki_h(), fsdb.Lnki_time(), fsdb.Lnki_page(), fsdb.User_thumb_w());}
 	public Xou_cache_itm Get_or_null(byte[] wiki, byte[] ttl, int type, double upright, int w, int h, double time, int page, int user_thumb_w) {
@@ -175,6 +179,19 @@ public class Xou_cache_mgr {
 			, Xof_lnki_time.Convert_to_xowa_page		(orig_ext.Id(), cache.File_page())
 			).Xto_url();
 	}
+
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, Cfg__fsys_size_min))			this.fsys_size_min = m.ReadLong("v");
+		else if	(ctx.Match(k, Cfg__fsys_size_max))			this.fsys_size_max = m.ReadLong("v");
+		// else if	(ctx.Match(k, Run__fsys_clear))				this.Reduce(0);
+		else	return Gfo_invk_.Rv_unhandled;
+		return this;
+	}
+	private static final String 
+	  Cfg__fsys_size_min = "xowa.wiki.files.cache.fsys_size_min"
+	, Cfg__fsys_size_max = "xowa.wiki.files.cache.fsys_size_max"
+	, Run__fsys_clear = "xowa.wiki.files.cache.clear"
+	;
 }
 class Xou_cache_grp {
 	private final    List_adp list = List_adp_.New();

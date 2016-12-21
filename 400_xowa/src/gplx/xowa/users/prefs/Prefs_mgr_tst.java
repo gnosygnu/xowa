@@ -39,21 +39,21 @@ public class Prefs_mgr_tst {
 		fxt.Test_set("<input xowa_prop='app.gui.html.auto_focus_id' id='xowa_prop_0'>abc</input>");
 		Tfds.Eq("abc", fxt.App().Gui_mgr().Html_mgr().Auto_focus_id());
 	}
-	@Test   public void Get_checkbox() {
-		fxt.App().File_mgr().Wmf_mgr().Enabled_(true);
-		fxt.Exec_get("a <input type='checkbox' xowa_prop='app.files.download.enabled'></input> b", "a <input type='checkbox' xowa_prop='app.files.download.enabled' id='xowa_prop_0' checked='checked'></input> b");
-		fxt.App().File_mgr().Wmf_mgr().Enabled_(false);
-		fxt.Exec_get("a <input type='checkbox' xowa_prop='app.files.download.enabled'></input> b", "a <input type='checkbox' xowa_prop='app.files.download.enabled' id='xowa_prop_0'></input> b");
-	}
-	@Test   public void Set_checkbox() {
-		fxt.Init_elem_atr_checked("xowa_prop_0", "true");
-		fxt.App().File_mgr().Wmf_mgr().Enabled_(false);
-		fxt.Test_set("<input type='checkbox' xowa_prop='app.files.download.enabled' checked='checked' id='xowa_prop_0'></input>");
-		Tfds.Eq(true, fxt.App().File_mgr().Wmf_mgr().Enabled());
-		fxt.Init_elem_atr_checked("xowa_prop_0", "false");
-		fxt.Test_set("<input type='checkbox' xowa_prop='app.files.download.enabled' id='xowa_prop_0'></input>");
-		Tfds.Eq(false, fxt.App().File_mgr().Wmf_mgr().Enabled());
-	}
+//		@Test   public void Get_checkbox() {
+//			fxt.App().File_mgr().Wmf_mgr().Enabled_(true);
+//			fxt.Exec_get("a <input type='checkbox' xowa_prop='app.files.download.enabled'></input> b", "a <input type='checkbox' xowa_prop='app.files.download.enabled' id='xowa_prop_0' checked='checked'></input> b");
+//			fxt.App().File_mgr().Wmf_mgr().Enabled_(false);
+//			fxt.Exec_get("a <input type='checkbox' xowa_prop='app.files.download.enabled'></input> b", "a <input type='checkbox' xowa_prop='app.files.download.enabled' id='xowa_prop_0'></input> b");
+//		}
+//		@Test   public void Set_checkbox() {
+//			fxt.Init_elem_atr_checked("xowa_prop_0", "true");
+//			fxt.App().File_mgr().Wmf_mgr().Enabled_(false);
+//			fxt.Test_set("<input type='checkbox' xowa_prop='app.files.download.enabled' checked='checked' id='xowa_prop_0'></input>");
+//			Tfds.Eq(true, fxt.App().File_mgr().Wmf_mgr().Enabled());
+//			fxt.Init_elem_atr_checked("xowa_prop_0", "false");
+//			fxt.Test_set("<input type='checkbox' xowa_prop='app.files.download.enabled' id='xowa_prop_0'></input>");
+//			Tfds.Eq(false, fxt.App().File_mgr().Wmf_mgr().Enabled());
+//		}
 	@Test   public void Get_textarea() {
 		fxt.Exec_get("<textarea xowa_prop='app.user.name'></textarea>", "<textarea xowa_prop='app.user.name' id='xowa_prop_0'>test_user</textarea>");
 	}
@@ -71,23 +71,23 @@ public class Prefs_mgr_tst {
 		fxt.Test_set("<textarea xowa_prop='app.gui.html.auto_focus_id' id='xowa_prop_0'>&lt;b&gt;a&lt;/b&gt;</textarea>");
 		Tfds.Eq("<b>a</b>", fxt.App().Gui_mgr().Html_mgr().Auto_focus_id());
 	}
-	@Test   public void Get_select() {
-		fxt.Exec_get
-		(	"<select xowa_prop='app.files.math.renderer' xowa_prop_list='app.files.math.renderer_list'></select>", String_.Concat_lines_nl
-		(	"<select xowa_prop='app.files.math.renderer' xowa_prop_list='app.files.math.renderer_list' id='xowa_prop_0'>"
-		,	"  <option value='mathjax' selected='selected'>MathJax</option>"
-		,	"  <option value='latex'>LaTeX</option>"
-		,	"</select>"
-		));
-	}
-	@Test   public void Set_select() {
-		fxt.Init_elem_atr_val("xowa_prop_0", "mathjax");
-		fxt.Test_set("<select xowa_prop='app.files.math.renderer' xowa_prop_list='app.files.math.renderer_list'></select>");
-		Tfds.Eq(true, fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax());
-		fxt.Init_elem_atr_val("xowa_prop_0", "latex");
-		fxt.Test_set("<select xowa_prop='app.files.math.renderer' xowa_prop_list='app.files.math.renderer_list'></select>");
-		Tfds.Eq(false, fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax());
-	}
+//		@Test   public void Get_select() {
+//			fxt.Exec_get
+//			(	"<select xowa_prop='app.files.math.renderer' xowa_prop_list='app.files.math.renderer_list'></select>", String_.Concat_lines_nl
+//			(	"<select xowa_prop='app.files.math.renderer' xowa_prop_list='app.files.math.renderer_list' id='xowa_prop_0'>"
+//			,	"  <option value='mathjax' selected='selected'>MathJax</option>"
+//			,	"  <option value='latex'>LaTeX</option>"
+//			,	"</select>"
+//			));
+//		}
+//		@Test   public void Set_select() {
+//			fxt.Init_elem_atr_val("xowa_prop_0", "mathjax");
+//			fxt.Test_set("<select xowa_prop='app.files.math.renderer' xowa_prop_list='app.files.math.renderer_list'></select>");
+//			Tfds.Eq(true, fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax());
+//			fxt.Init_elem_atr_val("xowa_prop_0", "latex");
+//			fxt.Test_set("<select xowa_prop='app.files.math.renderer' xowa_prop_list='app.files.math.renderer_list'></select>");
+//			Tfds.Eq(false, fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax());
+//		}
 //		@Test   public void Get_io_file() {
 //			fxt.Exec_get
 //			(	"<input type='xowa_io' xowa_prop='app.fsys.apps.media' xowa_io_msg='Select program for Web Browser'></input>", String_.Concat

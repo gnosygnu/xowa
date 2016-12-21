@@ -18,7 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Xof_math_mgr_html_tst {
-	@Before public void init() {} private final    Xop_fxt fxt = Xop_fxt.New_app_html();
+	@Before public void init() {
+		fxt.App().File_mgr().Init_by_app(fxt.App());
+	}	private final    Xop_fxt fxt = Xop_fxt.New_app_html();
 	@Test  public void Basic__latex() {
 		fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax_(false);
 		fxt.Test__parse_to_html_mgr("<math>x + y</math>", "<img id='xowa_math_img_0' src='' width='' height=''/><span id='xowa_math_txt_0'>x + y</span>");	// latex has img

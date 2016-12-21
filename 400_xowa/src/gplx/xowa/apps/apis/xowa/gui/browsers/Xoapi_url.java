@@ -20,10 +20,8 @@ import gplx.gfui.*; import gplx.gfui.envs.*; import gplx.gfui.controls.standards
 import gplx.xowa.guis.views.*; import gplx.core.envs.*;
 public class Xoapi_url implements Gfo_invk {
 	private Xoae_app app;
-	private Xoapi_url_searcher url_searcher;
 	public void Init_by_kit(Xoae_app app) {
 		this.app = app;
-		this.url_searcher = new Xoapi_url_searcher(app);
 	}
 	private GfuiComboBox Url_box()		{return app.Gui_mgr().Browser_win().Url_box();}
 	public void Focus()					{this.Url_box().Focus(); this.Url_box().Sel_(0, String_.Len(this.Url_box().Text()));}
@@ -34,8 +32,8 @@ public class Xoapi_url implements Gfo_invk {
 		Xog_tab_itm tab = app.Gui_mgr().Browser_win().Active_tab(); if (tab == Xog_tab_itm_.Null) return;
 		this.Url_box().Text_(tab.Page().Url().To_str());
 	}
-	public void Type() {
-		url_searcher.Search();
+	void Type() {
+		app.Addon_mgr().Itms__search__urlbar().Search();
 	}
 	private void Exec_wkr(boolean new_tab, String urls_text) {
 		if (Op_sys.Cur().Tid_is_wnt())

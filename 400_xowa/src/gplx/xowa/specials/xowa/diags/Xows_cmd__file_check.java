@@ -31,7 +31,7 @@ class Xows_cmd__file_check {
 		Fsdb_db_file atr_main = null;
 		try {Write_kv(bfr, "machine.op_sys", Op_sys.Cur().Os_name());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
 		try {Write_kv(bfr, "app.version", Xoa_app_.Version);} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
-		try {Write_kv(bfr, "cfg_file_retrieve", ((Xoae_app)app).File_mgr().Wmf_mgr().Enabled());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
+		try {Write_kv(bfr, "cfg_file_retrieve", ((Xowe_wiki)wiki).File_mgr().Cfg_download().Enabled());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
 		try {Write_kv(bfr, "fsdb.schema_is_1", schema_1);} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
 		try {Write_kv(bfr, "fsdb.mnt_file", wiki.File__fsdb_core().File__mnt_file().Url());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
 		try {Write_kv(bfr, "fsdb.abc_file", wiki.File__fsdb_core().File__abc_file__at(Fsm_mnt_mgr.Mnt_idx_main).Url());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}

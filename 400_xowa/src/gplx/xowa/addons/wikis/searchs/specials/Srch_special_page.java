@@ -16,30 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.searchs.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
-import gplx.core.primitives.*; import gplx.xowa.apps.apis.xowa.specials.*;
+import gplx.core.primitives.*; import gplx.xowa.addons.wikis.searchs.specials.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;	
 import gplx.xowa.specials.*; import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.cbks.*;
-public class Srch_special_page implements Xow_special_page, Gfo_invk, Gfo_evt_itm {
-	private final    Xoae_app app; private final    Xow_domain_itm wiki_domain; private final    Xoapi_search search_api;		
-	private final    Srch_special_searcher search_mgr; private final    Srch_qarg_mgr qargs_mgr;
-	private Xow_domain_itm[] search_domain_ary;
-	public Srch_special_page(Xowe_wiki wiki) {
-		this.ev_mgr = new Gfo_evt_mgr(this);
-		this.app = wiki.Appe();
-		this.wiki_domain = wiki.Domain_itm();
-		this.search_mgr = new Srch_special_searcher(wiki.Appe().Wiki_mgr());
-		this.search_api = wiki.Appe().Api_root().Special().Search();
-		this.qargs_mgr = new Srch_qarg_mgr(app.Gui_mgr().Search_cfg().Ns_mgr());
-		Gfo_evt_mgr_.Sub_same_many(search_api, this, Xoapi_search.Evt_multi_wikis_changed, Xoapi_search.Evt_multi_wikis_changed);
-	}
-	public Gfo_evt_mgr					Evt_mgr()					{return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;
+import gplx.xowa.addons.wikis.searchs.gui.htmlbars.*;
+public class Srch_special_page implements Xow_special_page {
 	public Xow_special_meta		Special__meta()			{return Xow_special_meta_.Itm__search;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
-		if (search_domain_ary == null) Multi_wikis_changed();
+		Srch_special_cfg search_cfg = wiki.Appe().Addon_mgr().Itms__search__special();
+		Xow_domain_itm[] search_domain_ary = Get_domains(wiki.Appe(), search_cfg, wiki.Domain_itm());
 
 		// get args from urls while applying defaults from search_cfg
-		Srch_search_cfg search_cfg = wiki.Appe().Gui_mgr().Search_cfg();
+		Srch_qarg_mgr qargs_mgr = new Srch_qarg_mgr(wiki.App().Addon_mgr().Itms__search__special().Ns_mgr());
 		qargs_mgr.Clear();
 		qargs_mgr.Parse(search_cfg.Args_default());
 		qargs_mgr.Parse(url.Qargs_ary());
@@ -68,6 +57,7 @@ public class Srch_special_page implements Xow_special_page, Gfo_invk, Gfo_evt_it
 
 		// page not found, or explicit_search invoked
 		if (search_page.Db().Page().Exists_n() || fulltext_invoked) {
+			Srch_special_searcher search_mgr = new Srch_special_searcher(wiki.Appe().Wiki_mgr());
 			if (qargs_mgr.Cancel() != null) {	// cancel any existing searches
 				search_mgr.Search__cancel(qargs_mgr.Cancel());
 				page.Tab_data().Cancel_show_y_();
@@ -75,8 +65,8 @@ public class Srch_special_page implements Xow_special_page, Gfo_invk, Gfo_evt_it
 			}
 			page.Html_data().Html_restricted_n_();
 			page.Html_data().Xtn_search_text_(search_raw);
-			Srch_search_qry qry = Srch_search_qry.New__search_page(search_domain_ary, wiki, search_cfg, qargs_mgr.Simple_search(), search_raw, qargs_mgr.Slab_idx(), search_api.Results_per_page());
-			search_mgr.Search(wiki, page, search_api.Async_db(), search_domain_ary, qry);
+			Srch_search_qry qry = Srch_search_qry.New__search_page(search_domain_ary, wiki, wiki.App().Addon_mgr().Itms__search__special().Ns_mgr(), qargs_mgr.Simple_search(), search_raw, qargs_mgr.Slab_idx(), search_cfg.Results_per_page());
+			search_mgr.Search(wiki, page, search_cfg.Async_db(), search_domain_ary, qry);
 		}
 		// page found; return it;
 		else {
@@ -88,24 +78,6 @@ public class Srch_special_page implements Xow_special_page, Gfo_invk, Gfo_evt_it
 			page.Ttl_(search_ttl).Url_(redirect_url);
 			page.Redirect_trail().Itms__add__article(redirect_url, search_ttl, null);
 		}
-	}
-	private void Multi_wikis_changed() {
-		Xow_domain_crt_itm crt = search_api.Multi_wikis_crt(wiki_domain);
-		this.search_domain_ary = Get_by_crt(app.Usere().Wiki().Xwiki_mgr(), wiki_domain, crt);
-		if (search_domain_ary.length == 0) search_domain_ary = new Xow_domain_itm[] {wiki_domain};	// default to current if bad input
-		Multi_sorts_changed();
-	}
-	private void Multi_sorts_changed() {
-		Xow_domain_crt_itm[] ary = search_api.Multi_sorts_crt(wiki_domain);
-		if (ary == null) return;	// default to no sort if bad input
-		Xow_domain_sorter__manual sorter = new Xow_domain_sorter__manual(wiki_domain, ary);
-		Xow_domain_sorter__manual.Sort(sorter, search_domain_ary);
-	}
-	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Xoapi_search.Evt_multi_wikis_changed))				Multi_wikis_changed();
-		else if	(ctx.Match(k, Xoapi_search.Evt_multi_sorts_changed))				Multi_sorts_changed();
-		else	return Gfo_invk_.Rv_unhandled;
-		return this;
 	}
 	public static final byte Match_tid_all = 0, Match_tid_bgn = 1;
 	public static final byte Version_null = 0, Version_1 = 1, Version_2 = 2;
@@ -122,6 +94,17 @@ public class Srch_special_page implements Xow_special_page, Gfo_invk, Gfo_evt_it
 			if (crt.Matches(cur, domain_itm)) rv.Add(domain_itm);
 		}
 		return (Xow_domain_itm[])rv.To_ary_and_clear(Xow_domain_itm.class);
+	}
+	private static Xow_domain_itm[] Get_domains(Xoae_app app, Srch_special_cfg cfg, Xow_domain_itm wiki_domain) {
+		Xow_domain_crt_itm crt = cfg.Multi_wikis_crt(wiki_domain);
+		Xow_domain_itm[] rv = Get_by_crt(app.Usere().Wiki().Xwiki_mgr(), wiki_domain, crt);
+		if (rv.length == 0) rv = new Xow_domain_itm[] {wiki_domain};	// default to current if bad input
+
+		Xow_domain_crt_itm[] ary = cfg.Multi_sorts_crt(wiki_domain);
+		if (ary == null) return Xow_domain_itm_.Ary_empty;	// default to no sort if bad input
+		Xow_domain_sorter__manual sorter = new Xow_domain_sorter__manual(wiki_domain, ary);
+		Xow_domain_sorter__manual.Sort(sorter, rv);
+		return rv;
 	}
 
 	public Xow_special_page Special__clone() {return this;}

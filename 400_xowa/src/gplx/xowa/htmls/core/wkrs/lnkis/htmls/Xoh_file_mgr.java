@@ -29,6 +29,9 @@ public class Xoh_file_mgr {
 		this.wiki = wiki; this.file_wtr = new Xoh_file_wtr__basic(wiki, html_mgr, html_wtr);
 	}
 	public Xoh_file_wtr__basic File_wtr() {return file_wtr;} private final    Xoh_file_wtr__basic file_wtr;
+	public void Init_by_wiki(Xowe_wiki wiki) {
+		file_wtr.Init_by_wiki(wiki);
+	}
 	public void Init_by_page(Xoh_wtr_ctx hctx, Xoae_page page) {file_wtr.Init_by_page(hctx, page);}
 	public void Write_or_queue(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {Write_or_queue(bfr, page, ctx, hctx, src, lnki, file_wtr.Bld_alt(Bool_.N, ctx, Xoh_wtr_ctx.Alt, src, lnki));}
 	public void Write_or_queue(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] alt_text) {

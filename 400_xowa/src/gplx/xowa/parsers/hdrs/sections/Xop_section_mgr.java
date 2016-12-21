@@ -32,7 +32,7 @@ public class Xop_section_mgr implements Gfo_invk {
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		this.app = wiki.Appe();
 		this.wiki = wiki;
-		this.enabled = wiki.App().Cfg().Bind_bool(wiki, gplx.xowa.htmls.core.wkrs.hdrs.Xoh_section_editable_.Cfg__section_editing__enabled, this);
+		this.enabled = wiki.App().Cfg().Bind_bool(wiki, Cfg__section_editing__enabled, this);
 		this.tidy_mgr = wiki.Html_mgr().Tidy_mgr();
 	}
 	public byte[] Slice_section(Xoa_url url, Xoa_ttl ttl, byte[] src) {
@@ -78,7 +78,7 @@ public class Xop_section_mgr implements Gfo_invk {
 		fmt__section_editable.Bld_many(bfr, page_ttl, section_key, edit_hint, bry__edit_text);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, gplx.xowa.htmls.core.wkrs.hdrs.Xoh_section_editable_.Cfg__section_editing__enabled)) enabled = m.ReadBool("v");
+		if		(ctx.Match(k, Cfg__section_editing__enabled)) enabled = m.ReadBool("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -86,4 +86,5 @@ public class Xop_section_mgr implements Gfo_invk {
 	public static final    byte[] Bry__meta = Bry_.new_a7("<!--xo_meta|section_edit|");
 	public static final    int Len__meta = Bry__meta.length;
 	private static final    byte[] Qarg__section_key = Bry_.new_u8("section_key");
+	private static final String Cfg__section_editing__enabled = "xowa.edit.section_edit.enabled";
 }

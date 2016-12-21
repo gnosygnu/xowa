@@ -25,7 +25,8 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 	private final    Hash_adp_bry cache = Hash_adp_bry.cs();
 	private final    Xoctg_catpage_loader loader = new Xoctg_catpage_loader();
 	private final    Xoctg_fmt_grp fmt_subcs = Xoctg_fmt_grp.New__subc(), fmt_pages = Xoctg_fmt_grp.New__page(), fmt_files = Xoctg_fmt_grp.New__file();
-	private final    Uca_ltr_extractor ltr_extractor = new Uca_ltr_extractor(true);		
+	private final    Uca_ltr_extractor ltr_extractor = new Uca_ltr_extractor(true);
+	private String missing_cls = Str__missing_cls__red;
 	public int Grp_max() {return grp_max;} private int grp_max = Grp_max_dflt;
 	public Xoctg_catpage_mgr(Xow_wiki wiki) {
 		this.wiki = wiki;
@@ -39,6 +40,12 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 			case Xoa_ctg_mgr.Tid__file: return fmt_files;
 			default: throw Err_.new_unhandled(tid);
 		}
+	}
+	public byte[] Missing_ctg_cls_css() {
+		if		(String_.Eq(missing_cls, Str__missing_cls__normal))		return Css__missing_cls__normal;
+		else if (String_.Eq(missing_cls, Str__missing_cls__hide))		return Css__missing_cls__hide;
+		else if (String_.Eq(missing_cls, Str__missing_cls__red))		return Css__missing_cls__red;
+		else															throw Err_.new_unhandled(missing_cls);
 	}
 	public void Free_mem_all() {cache.Clear();}
 	public Xoctg_catpage_ctg Get_or_load_or_null(byte[] page_ttl, Xoctg_catpage_url catpage_url, Xoa_ttl cat_ttl, int limit) {
@@ -81,10 +88,15 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 	public void Grp_max_(int v) {grp_max = v;}	// TEST:
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__collation_))		collation_mgr.Collation_name_(m.ReadStr("v"));
+		else if (ctx.Match(k, Cfg__missing_class))		missing_cls = m.ReadStr("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk__collation_ = "collation_";
 
 	public static int Grp_max_dflt = 200;
 	private static final    Object thread_lock = new Object();
+
+	private static final String Cfg__missing_class = "xowa.category.html.missing_class";
+	private static final String Str__missing_cls__normal = "normal", Str__missing_cls__hide = "hide", Str__missing_cls__red = "red_link";
+	private static final    byte[] Css__missing_cls__normal = Bry_.new_a7(".xowa-missing-category-entry {}"), Css__missing_cls__hide = Bry_.new_a7(".xowa-missing-category-entry {display: none;}"), Css__missing_cls__red = Bry_.new_a7(".xowa-missing-category-entry {color: red;}");
 }

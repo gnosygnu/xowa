@@ -28,6 +28,7 @@ public class Xoi_firefox_installer implements Gfo_invk {
 		trg_xpi_package = trg_xpi.OwnerDir().GenSubDir("package");
 		Xoa_fsys_eval cmd_eval = app.Url_cmd_eval();
 		Process_adp.ini_(this, app.Usr_dlg(), program, cmd_eval, Process_adp.Run_mode_async,  0, "firefox", "\"~{url}\"", "url");
+		app.Cfg().Bind_many_app(this, Cfg__firefox_cmd);
 	}
 	public void Install_via_process() {
 		Generate();
@@ -57,9 +58,11 @@ public class Xoi_firefox_installer implements Gfo_invk {
 				+	String_.Mid(src, end);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_program)) 		return program;
 		if		(ctx.Match(k, Invk_install)) 		Install_via_process();
+		else if (ctx.Match(k, Cfg__firefox_cmd))	gplx.xowa.apps.progs.Xoa_prog_mgr.Init_cmd(m.ReadStr("v"), program);
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	private static final    String Invk_program = "program", Invk_install = "install";
+	}	private static final    String Invk_install = "install";
+	private static final String Cfg__firefox_cmd = "xowa.addon.xowa_viewer.firefox";
+
 }

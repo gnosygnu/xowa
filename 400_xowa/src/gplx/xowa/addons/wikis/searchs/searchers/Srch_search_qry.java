@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.searchs.searchers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
 import gplx.xowa.wikis.domains.*;
+import gplx.xowa.addons.wikis.searchs.gui.htmlbars.*;
 public class Srch_search_qry {
 	public Srch_search_qry(byte tid, Srch_ns_mgr ns_mgr, Srch_search_phrase phrase, int slab_bgn, int slab_end) {
 		this.Tid = tid;
@@ -32,17 +33,17 @@ public class Srch_search_qry {
 	public final    int					Slab_end;		// EX: 20
 
 	public static final byte Tid_len = 4, Tid__url_bar = 0, Tid__suggest_box = 1, Tid__search_page = 2, Tid__android = 3;
-	public static Srch_search_qry New__url_bar(Xow_wiki wiki, gplx.xowa.apps.apis.xowa.addons.searchs.Xoapi_url_bar cfg, byte[] search_orig) {
-		return new Srch_search_qry(Tid__url_bar, cfg.Ns_mgr(), Srch_search_phrase.New(wiki.Case_mgr(), search_orig, cfg.Auto_wildcard()), 0, cfg.Max_results());
+	public static Srch_search_qry New__url_bar(Xow_wiki wiki, Srch_ns_mgr ns_mgr, boolean auto_wildcard, int max_results, byte[] search_orig) {
+		return new Srch_search_qry(Tid__url_bar, ns_mgr, Srch_search_phrase.New(wiki.Case_mgr(), search_orig, auto_wildcard), 0, max_results);
 	}
-	public static Srch_search_qry New__suggest_box(Xow_wiki wiki, Srch_search_cfg cfg, byte[] search_orig) {
-		return new Srch_search_qry(Tid__suggest_box, cfg.Ns_mgr(), Srch_search_phrase.New(wiki.Case_mgr(), search_orig, Bool_.Y), 0, cfg.Rslts_max());
+	public static Srch_search_qry New__suggest_box(Xow_wiki wiki, Srch_ns_mgr ns_mgr, int results_max, byte[] search_orig) {
+		return new Srch_search_qry(Tid__suggest_box, ns_mgr, Srch_search_phrase.New(wiki.Case_mgr(), search_orig, Bool_.Y), 0, results_max);
 	}
-	public static Srch_search_qry New__search_page(Xow_domain_itm[] domains, Xow_wiki wiki, Srch_search_cfg cfg, boolean simple_search, byte[] search_orig, int slab_idx, int slab_len) {
+	public static Srch_search_qry New__search_page(Xow_domain_itm[] domains, Xow_wiki wiki, Srch_ns_mgr ns_mgr, boolean simple_search, byte[] search_orig, int slab_idx, int slab_len) {
 		int slab_bgn = slab_idx * slab_len;
 		int slab_end = slab_bgn + slab_len;
 		boolean wildcard = simple_search;
-		return new Srch_search_qry(Tid__search_page, cfg.Ns_mgr(), Srch_search_phrase.New(wiki.Case_mgr(), search_orig, wildcard), slab_bgn, slab_end);
+		return new Srch_search_qry(Tid__search_page, ns_mgr, Srch_search_phrase.New(wiki.Case_mgr(), search_orig, wildcard), slab_bgn, slab_end);
 	}
 	public static Srch_search_qry New__drd(Xow_wiki wiki, Srch_ns_mgr ns_mgr, byte[] search_orig, int slab_bgn, int slab_end) {
 		return new Srch_search_qry(Tid__android, ns_mgr, Srch_search_phrase.New(wiki.Case_mgr(), search_orig, Bool_.Y), slab_bgn, slab_end);

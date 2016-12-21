@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
-import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.mgrs.caches.*; import gplx.xowa.addons.apps.cfgs.mgrs.dflts.*; import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
+import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.mgrs.caches.*; import gplx.xowa.addons.apps.cfgs.mgrs.dflts.*; import gplx.xowa.addons.apps.cfgs.mgrs.types.*; import gplx.xowa.addons.apps.cfgs.mgrs.execs.*;
 public class Xocfg_mgr {
 	private final    Xocfg_cache_mgr cache_mgr = new Xocfg_cache_mgr();
 	public Xocfg_mgr() {
@@ -24,6 +24,7 @@ public class Xocfg_mgr {
 	}
 	public Xocfg_type_mgr Type_mgr() {return type_mgr;} private final    Xocfg_type_mgr type_mgr = new Xocfg_type_mgr();
 	public Xocfg_dflt_mgr Dflt_mgr() {return dflt_mgr;} private final    Xocfg_dflt_mgr dflt_mgr;
+	public Xocfg_exec_mgr Exec_mgr() {return exec_mgr;} private final    Xocfg_exec_mgr exec_mgr = new Xocfg_exec_mgr();
 	public void Init_by_app(Xoa_app app) {
 		cache_mgr.Init_by_app
 		( gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_app.New_conn(app)
@@ -61,6 +62,10 @@ public class Xocfg_mgr {
 	public int Get_int_app_or(String key, int or) {
 		String rv = cache_mgr.Get_or(Ctx__app, key, null);
 		return rv == null ? or : Int_.parse_or(rv, or);
+	}
+	public long Get_long_app_or(String key, long or) {
+		String rv = cache_mgr.Get_or(Ctx__app, key, null);
+		return rv == null ? or : Long_.parse_or(rv, or);
 	}
 	public String Get_str_app_or(String key, String or) {return cache_mgr.Get_or(Ctx__app, key, or);}
 	public String Get_str_app(String key) {return Get_str(Xocfg_mgr.Ctx__app, key);}

@@ -16,10 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.xtns.wbases.specials.*;
 public class Xoa_special_mgr implements Gfo_invk {
+	private Wdata_itemByTitle_cfg wbase_cfg = new Wdata_itemByTitle_cfg();
 	private Ordered_hash hash = Ordered_hash_.New();
 	public Xoa_special_mgr() {
-		hash.Add(gplx.xowa.xtns.wbases.specials.Wdata_itemByTitle_cfg.Key, new gplx.xowa.xtns.wbases.specials.Wdata_itemByTitle_cfg());
+		hash.Add(Wdata_itemByTitle_cfg.Key, wbase_cfg);
+	}
+	public void Init_by_app(Xoae_app app) {
+		wbase_cfg.Init_by_app(app);
 	}
 	public void Add(String key, Gfo_invk cfg)	{hash.Add(key, cfg);}
 	public Gfo_invk Get_or_null(String key)		{return (Gfo_invk)hash.Get_by(key);}

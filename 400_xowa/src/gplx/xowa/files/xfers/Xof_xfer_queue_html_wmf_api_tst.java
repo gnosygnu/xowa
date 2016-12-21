@@ -18,8 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import org.junit.*; import gplx.xowa.parsers.lnkis.*;
 public class Xof_xfer_queue_html_wmf_api_tst {
-	private final Xof_xfer_queue_html_fxt fxt = new Xof_xfer_queue_html_fxt();
-	@Before public void init()		{fxt.Clear(true); fxt.Src_commons_repo().Wmf_api_(true); fxt.Src_en_wiki_repo().Wmf_api_(true);}
+	private final    Xof_xfer_queue_html_fxt fxt = new Xof_xfer_queue_html_fxt();
+	@Before public void init()		{
+		gplx.core.ios.IoEngine_system.Web_access_enabled = true;	// NOTE: must set to true, else Wmf_api calls below will always return false
+		fxt.Clear(true); fxt.Src_commons_repo().Wmf_api_(true); fxt.Src_en_wiki_repo().Wmf_api_(true);
+	}
 	@Test  public void Thumb() {
 		fxt	.ini_page_api("en_wiki", "A.png", "", 2200, 2000);
 		fxt	.Lnki_thumb_("A.png", 220)

@@ -69,6 +69,7 @@ public class Xoitm_gui_tid {
 		else if (String_.Eq(db_type, "memo"))			return Itm__memo.key;
 		else if (String_.Eq(db_type, "io.cmd"))			return Itm__io_cmd.key;
 		else if (String_.Has_at_bgn(db_type, "list:"))	return Itm__list.key;
+		else if (String_.Eq(db_type, "btn"))			return Itm__btn.key;
 		else											return Itm__str.key;
 	}
 }

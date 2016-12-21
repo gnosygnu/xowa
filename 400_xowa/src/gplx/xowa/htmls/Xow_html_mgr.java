@@ -32,7 +32,6 @@ public class Xow_html_mgr implements Gfo_invk {
 		page_wtr_mgr = new Xoh_page_wtr_mgr(app.Gui_mgr().Kit().Tid() != Gfui_kit_.Swing_tid);	// reverse logic to handle swt,drd but not mem
 		img_xowa_protocol = fsys_lnx_encoder.Encode_to_file_protocol(app.Fsys_mgr().Bin_xowa_file_dir().GenSubFil_nest("app.general", "xowa_exec.png"));
 		portal_mgr = new Xow_portal_mgr(wiki);
-		imgs_mgr = new Xoh_imgs_mgr(this);
 		module_mgr = new Xow_module_mgr(wiki);
 		this.js_cleaner = new Xoh_js_cleaner(app);
 	}
@@ -40,6 +39,8 @@ public class Xow_html_mgr implements Gfo_invk {
 		html_wtr.Init_by_wiki(wiki);
 		module_mgr.Init_by_wiki(wiki);
 		tidy_mgr.Init_by_wiki(wiki.Appe());
+		portal_mgr.Init_by_wiki(wiki);
+		page_wtr_mgr.Init_by_wiki(wiki);
 	}
 	public void Init_by_lang(Xol_lang_itm lang) {
 		portal_mgr.Init_by_lang(lang);
@@ -56,14 +57,11 @@ public class Xow_html_mgr implements Gfo_invk {
 	public int Img_thumb_width() {return img_thumb_width;} private int img_thumb_width = 220;
 	public byte[] Img_xowa_protocol() {return img_xowa_protocol;} private byte[] img_xowa_protocol;
 	public boolean Img_suppress_missing_src() {return img_suppress_missing_src;} public Xow_html_mgr Img_suppress_missing_src_(boolean v) {img_suppress_missing_src = v; return this;} private boolean img_suppress_missing_src = true;
-	public Xoh_imgs_mgr Imgs_mgr() {return imgs_mgr;} private Xoh_imgs_mgr imgs_mgr;
-	public void Copy_cfg(Xow_html_mgr html_mgr) {imgs_mgr.Copy_cfg(html_mgr.Imgs_mgr());}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_article))							return page_wtr_mgr;
 		else if	(ctx.Match(k, Invk_portal))								return portal_mgr;
-		else if	(ctx.Match(k, Invk_imgs))								return imgs_mgr;
 		else if	(ctx.Match(k, Invk_modules))							return module_mgr;
 		else	return Gfo_invk_.Rv_unhandled;
 	}
-	public static final String Invk_article = "article", Invk_portal = "portal", Invk_imgs = "imgs", Invk_modules = "modules";
+	public static final String Invk_article = "article", Invk_portal = "portal", Invk_modules = "modules";
 }

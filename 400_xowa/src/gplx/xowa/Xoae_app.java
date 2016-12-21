@@ -149,6 +149,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		stage = Xoa_stage_.Tid_init;
 		user.Init_by_app(this);
 		cfg.Init_by_app(this);
+		user.User_db_mgr().Cache_mgr().Init_by_app(this);
 		misc_mgr.Init_by_app(this);
 		user.History_mgr().Init_by_app(this);
 		prog_mgr.Init_by_app(this, url_cmd_eval);
@@ -157,13 +158,15 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		html__css_installer.Init_by_app(this);
 		wiki_mgr.Init_by_app();
 		gplx.xowa.bldrs.setups.upgrades.Xoa_upgrade_mgr.Check(this);
-		ctg_mgr.Init_by_app(this);
 		setup_mgr.Init_by_app(this);
 		thread_mgr_old.Usr_dlg_(Xoa_app_.Usr_dlg());
 		html_mgr.Init_by_app(this);
 		api_root.Init_by_app(this);
 		wmf_mgr.Init_by_app(this);
 		gplx.core.net.emails.Gfo_email_mgr_.Instance = gplx.core.net.emails.Gfo_email_mgr_.New_jre();
+		file_mgr.Init_by_app(this);
+		special_mgr.Init_by_app(this);
+		sys_cfg.Init_by_app(this);
 	}
 	public boolean Launch_done() {return stage == Xoa_stage_.Tid_launch;}
 	public void Launch() {

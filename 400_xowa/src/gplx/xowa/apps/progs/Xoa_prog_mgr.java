@@ -37,14 +37,19 @@ public class Xoa_prog_mgr implements Gfo_invk {
 		Process_adp.ini_(this, usr_dlg, app_lilypond				, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}lilypond\\usr\\bin\\lilypond.exe", "\"-dsafe=#t\" -dbackend=ps --png --header=texidoc -dmidi-extension=midi \"~{file}\"", "file");
 		Process_adp.ini_(this, usr_dlg, app_abc2ly					, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}lilypond\\usr\\bin\\python.exe", "abc2ly.py -s \"--output=~{target}\" \"~{source}\"", "source", "target");
 		Process_adp.ini_(this, usr_dlg, app_trim_img				, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}imagemagick\\convert", "-trim \"~{source}\"  \"~{target}\"", "source", "target");
-		Process_adp.ini_(this, usr_dlg, app_convert_midi_to_ogg		, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}timidity\\timidity", "-Ov \"--output-file=~{target}\" \"~{source}\"", "source", "target");
+		Process_adp.ini_(this, usr_dlg, app_midi_to_ogg				, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}timidity\\timidity", "-Ov \"--output-file=~{target}\" \"~{source}\"", "source", "target");
 		Process_adp.ini_(this, usr_dlg, app_view_text				, cmd_eval, Process_adp.Run_mode_async			,  0	 , "cmd", "/c start \"~{url}\"", "url");
 
 		for (int i = 0; i < apps_by_ext.length; i++) {
 			apps_by_ext[i] = Process_adp.New(usr_dlg, cmd_eval, Process_adp.Run_mode_async, 0, "cmd", "/c start \"\" \"~{file}\"", "file");
 		}
 		app_web = Process_adp.New(usr_dlg, cmd_eval, Process_adp.Run_mode_async, 0, "cmd", "/c start \"\" \"~{url}\"", "url");
-		app.Cfg().Bind_many_app(this, Cfg__web, Cfg__media, Cfg__image, Cfg__svg, Cfg__pdf, Cfg__djvu);
+		app.Cfg().Bind_many_app(this
+		, Cfg__web, Cfg__media, Cfg__image, Cfg__svg, Cfg__pdf, Cfg__djvu
+		, Cfg__gz, Cfg__bz2, Cfg__bz2__stdout_cmd
+		, Cfg__lua
+		, Cfg__lilypond, Cfg__abc2ly, Cfg__trim_img, Cfg__midi_to_ogg
+		);
 	}
 	private Process_adp App_by_ext_key(String ext)		{return apps_by_ext[Xof_ext_.Get_id_by_ext_(Bry_.new_a7(ext))];}
 	public Process_adp App_query_img_size()				{return app_query_img_size;}			private Process_adp app_query_img_size = new Process_adp();
@@ -62,25 +67,11 @@ public class Xoa_prog_mgr implements Gfo_invk {
 	public Process_adp App_lilypond()					{return app_lilypond;}					private Process_adp app_lilypond = new Process_adp();
 	public Process_adp App_abc2ly()						{return app_abc2ly;}					private Process_adp app_abc2ly = new Process_adp();
 	public Process_adp App_trim_img()					{return app_trim_img;}					private Process_adp app_trim_img = new Process_adp();
-	public Process_adp App_convert_midi_to_ogg()		{return app_convert_midi_to_ogg;}		private Process_adp app_convert_midi_to_ogg = new Process_adp();
+	public Process_adp App_convert_midi_to_ogg()		{return app_midi_to_ogg;}		private Process_adp app_midi_to_ogg = new Process_adp();
 	public Process_adp App_by_ext(String ext)			{return App_by_ext_key(String_.Mid(ext, 1));}	// ignore 1st . in ext; EX: ".png" -> "png"
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_query_img_size))				return app_query_img_size;
-		else if	(ctx.Match(k, Invk_resize_img))					return app_resize_img;
-		else if	(ctx.Match(k, Invk_convert_svg_to_png))			return app_convert_svg_to_png;
-		else if	(ctx.Match(k, Invk_convert_tex_to_dvi))			return app_convert_tex_to_dvi;
+		if		(ctx.Match(k, Invk_convert_tex_to_dvi))			return app_convert_tex_to_dvi;
 		else if	(ctx.Match(k, Invk_convert_dvi_to_png))			return app_convert_dvi_to_png;
-		else if	(ctx.Match(k, Invk_convert_djvu_to_tiff))		return app_convert_djvu_to_tiff;
-		else if	(ctx.Match(k, Invk_view_web))					return app_web;
-		else if	(ctx.Match(k, Invk_decompress_bz2))				return app_decompress_bz2;
-		else if	(ctx.Match(k, Invk_decompress_zip))				return app_decompress_zip;
-		else if	(ctx.Match(k, Invk_decompress_gz))				return app_decompress_gz;
-		else if	(ctx.Match(k, Invk_decompress_bz2_by_stdout))	return app_decompress_bz2_by_stdout;
-		else if	(ctx.Match(k, Invk_lua))						return app_lua;
-		else if	(ctx.Match(k, Invk_lilypond))					return app_lilypond;
-		else if	(ctx.Match(k, Invk_abc2ly))						return app_abc2ly;
-		else if	(ctx.Match(k, Invk_convert_midi_to_ogg))		return app_convert_midi_to_ogg;
-		else if	(ctx.Match(k, Invk_trim_img))					return app_trim_img;
 
 		else if (String_.Eq(k, Cfg__web))						{Init_cmd(m.ReadStr("v"), app_web);}
 		else if (String_.Eq(k, Cfg__media))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_ogv, Xof_ext_.Id_webm, Xof_ext_.Id_flac, Xof_ext_.Id_ogg, Xof_ext_.Id_oga, Xof_ext_.Id_mid, Xof_ext_.Id_wav);}
@@ -88,10 +79,22 @@ public class Xoa_prog_mgr implements Gfo_invk {
 		else if (String_.Eq(k, Cfg__svg))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_svg);}
 		else if (String_.Eq(k, Cfg__pdf))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_pdf);}
 		else if (String_.Eq(k, Cfg__djvu))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_djvu);}
+		else if (String_.Eq(k, Cfg__gz))						{Init_cmd(m.ReadStr("v"), app_decompress_gz);}
+		else if (String_.Eq(k, Cfg__bz2))						{Init_cmd(m.ReadStr("v"), app_decompress_bz2);}
+		else if (String_.Eq(k, Cfg__bz2__stdout_cmd))			{Init_cmd(m.ReadStr("v"), app_decompress_bz2_by_stdout);}
+		else if	(String_.Eq(k, Cfg__query_size))				{Init_cmd(m.ReadStr("v"), app_query_img_size);}
+		else if	(String_.Eq(k, Cfg__resize_img))				{Init_cmd(m.ReadStr("v"), app_resize_img);}
+		else if	(String_.Eq(k, Cfg__convert_svg_to_png))		{Init_cmd(m.ReadStr("v"), app_convert_svg_to_png);}
+		else if	(String_.Eq(k, Cfg__convert_djvu_to_tiff))		{Init_cmd(m.ReadStr("v"), app_convert_djvu_to_tiff);}
+		else if (String_.Eq(k, Cfg__lua))						{Init_cmd(m.ReadStr("v"), app_lua);}
+		else if (String_.Eq(k, Cfg__lilypond))					{Init_cmd(m.ReadStr("v"), app_lilypond);}
+		else if (String_.Eq(k, Cfg__abc2ly))					{Init_cmd(m.ReadStr("v"), app_abc2ly);}
+		else if (String_.Eq(k, Cfg__trim_img))					{Init_cmd(m.ReadStr("v"), app_trim_img);}
+		else if (String_.Eq(k, Cfg__midi_to_ogg))				{Init_cmd(m.ReadStr("v"), app_midi_to_ogg);}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private void Init_cmd(String exe_and_args, Process_adp proc) {
+	public static void Init_cmd(String exe_and_args, Process_adp proc) {
 		String[] lines = gplx.xowa.addons.apps.cfgs.Xocfg_mgr.Parse_io_cmd(exe_and_args);
 		proc.Exe_and_args_(lines[0], lines[1]);
 	}
@@ -107,17 +110,26 @@ public class Xoa_prog_mgr implements Gfo_invk {
 		url_str = Process_adp.Escape_ampersands_if_process_is_cmd(Op_sys.Cur().Tid_is_wnt(), app_web.Exe_url().Raw(), url_str);	// escape ampersands; DATE:2014-05-20
 		app_web.Run(url_str);
 	}
-	private static final String Invk_query_img_size = "query_img_size", Invk_resize_img = "resize_img", Invk_convert_svg_to_png = "convert_svg_to_png", Invk_convert_tex_to_dvi = "convert_tex_to_dvi", Invk_convert_dvi_to_png = "convert_dvi_to_png"
-	, Invk_convert_djvu_to_tiff = "convert_djvu_to_tiff", Invk_view_web = "view_web"
-	, Invk_decompress_bz2 = "decompress_bz2", Invk_decompress_zip = "decompress_zip", Invk_decompress_gz = "decompress_gz", Invk_decompress_bz2_by_stdout = "decompress_bz2_by_stdout"
-	, Invk_lua = "lua", Invk_lilypond = "lilypond", Invk_abc2ly = "abc2ly", Invk_trim_img = "trim_img", Invk_convert_midi_to_ogg = "convert_midi_to_ogg"
-	;
+	private static final String Invk_convert_tex_to_dvi = "convert_tex_to_dvi", Invk_convert_dvi_to_png = "convert_dvi_to_png";
 	private static final String 
-	  Cfg__web			= "xowa.app.content_apps.web"
-	, Cfg__media		= "xowa.app.content_apps.media"
-	, Cfg__image		= "xowa.app.content_apps.image"
-	, Cfg__svg			= "xowa.app.content_apps.svg"
-	, Cfg__pdf			= "xowa.app.content_apps.pdf"
-	, Cfg__djvu			= "xowa.app.content_apps.djvu"
+	  Cfg__web							= "xowa.app.content_apps.web"
+	, Cfg__media						= "xowa.app.content_apps.media"
+	, Cfg__image						= "xowa.app.content_apps.image"
+	, Cfg__svg							= "xowa.app.content_apps.svg"
+	, Cfg__pdf							= "xowa.app.content_apps.pdf"
+	, Cfg__djvu							= "xowa.app.content_apps.djvu"
+	, Cfg__bz2__stdout_cmd				= "xowa.wiki.import.bz2.stdout_cmd"
+	, Cfg__bz2							= "xowa.wiki.import.apps.bz2"
+	, Cfg__gz							= "xowa.wiki.import.apps.gz"
+	, Cfg__query_size					= "xowa.wiki.files.apps.query_size"
+	, Cfg__resize_img					= "xowa.wiki.files.apps.resize_img"
+	, Cfg__convert_svg_to_png			= "xowa.wiki.files.apps.convert_svg_to_png"
+	, Cfg__convert_djvu_to_tiff			= "xowa.wiki.files.apps.convert_djvu_to_tiff"
+	, Cfg__lua							= "xowa.addon.scribunto.lua.cmd"
+	, Cfg__lilypond						= "xowa.addon.score.apps.lilypond"
+	, Cfg__abc2ly						= "xowa.addon.score.apps.abc2ly"
+	, Cfg__trim_img						= "xowa.addon.score.apps.trim_img"
+	, Cfg__midi_to_ogg					= "xowa.addon.score.apps.midi_to_ogg"
 	;
 }
+

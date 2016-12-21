@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.setups.addons; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
 public class Xoi_addon_mgr implements Gfo_invk {
-	public Xoi_firefox_installer Firefox() {return firefox;} private Xoi_firefox_installer firefox = new Xoi_firefox_installer();
+	Xoi_firefox_installer Firefox() {return firefox;} private Xoi_firefox_installer firefox = new Xoi_firefox_installer();
 	public void Init_by_app(Xoae_app app) {
 		firefox.Init_by_app(app);
 	}

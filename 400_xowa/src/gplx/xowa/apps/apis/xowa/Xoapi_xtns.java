@@ -20,6 +20,7 @@ import gplx.xowa.apps.apis.xowa.xtns.*;
 public class Xoapi_xtns implements Gfo_invk {
 	public void Init_by_kit(Xoae_app app) {
 		scribunto.Init_by_kit(app);
+		wikibase.Init_by_app(app);
 	}
 	public Xoapi_scribunto		Scribunto()		{return scribunto;} private final    Xoapi_scribunto scribunto = new Xoapi_scribunto();
 	public Xoapi_wikibase		Wikibase()		{return wikibase;}  private final    Xoapi_wikibase  wikibase = new Xoapi_wikibase();

@@ -48,13 +48,13 @@ class Xowb_json_dump_db {
 		wiki.Ns_mgr().Init();
 
 		// init ns_map
-		Xoapi_import import_cfg = app.Api_root().Bldr().Wiki().Import();
-		this.ns_to_db_mgr = new Xob_ns_to_db_mgr(new Xob_ns_to_db_wkr__text(), db_mgr, import_cfg.Text_db_max());
-		byte[] ns_file_map = import_cfg.New_ns_file_map(src_fil_len);
+		this.ns_to_db_mgr = new Xob_ns_to_db_mgr(new Xob_ns_to_db_wkr__text(), db_mgr, Xobldr_cfg.Max_size__text(app));
+		byte[] ns_file_map = Xobldr_cfg.New_ns_file_map(src_fil_len);
 		Xob_ns_file_itm.Init_ns_bldr_data(Xow_db_file_.Tid__text, wiki.Ns_mgr(), ns_file_map);
 
 		// start import
-		this.text_zip_mgr = wiki.Utl__zip_mgr(); this.text_zip_tid = import_cfg.Zip_tid_text();
+		this.text_zip_mgr = wiki.Utl__zip_mgr();
+		this.text_zip_tid = Xobldr_cfg.Zip_mode__text(app);
 		this.page_modified_on = Datetime_now.Get();
 		page_tbl.Insert_bgn();
 		qid_cmd.Page_wkr__bgn();

@@ -44,6 +44,7 @@ public class Scrib_core_mgr {
 	}
 
 	public static void Term_all(Xoae_app app) {	// NOLOCK.app_level
+		if (app == null) return;
 		Xoae_wiki_mgr wiki_mgr = app.Wiki_mgr();
 		int len = wiki_mgr.Count();
 		for (int i = 0; i < len; ++i) {

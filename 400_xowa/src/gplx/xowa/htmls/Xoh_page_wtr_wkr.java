@@ -28,6 +28,7 @@ public class Xoh_page_wtr_wkr {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); 
 	private final    Xoh_page_wtr_mgr mgr; private final    byte page_mode;
 	private final    Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();	// In other languages
+	private final    gplx.xowa.addons.apps.scripts.Xoscript_mgr scripting_mgr = new gplx.xowa.addons.apps.scripts.Xoscript_mgr();
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; private byte[] root_dir_bry;
 	public Xoh_page_wtr_wkr(Xoh_page_wtr_mgr mgr, byte page_mode) {this.mgr = mgr; this.page_mode = page_mode;}		
 	public Xoh_page_wtr_wkr Ctgs_enabled_(boolean v) {ctgs_enabled = v; return this;} private boolean ctgs_enabled = true;		
@@ -57,7 +58,7 @@ public class Xoh_page_wtr_wkr {
 					hctx = Xoh_wtr_ctx.Basic;
 					Write_body(page_bfr, ctx, hctx, page);
 					Write_page_by_tid(ctx, hctx, view_mode, rv, fmtr, page_bfr.To_bry_and_rls());
-					new gplx.xowa.addons.apps.scripts.Xoscript_mgr().Write(rv, wiki, page);
+					scripting_mgr.Write(rv, wiki, page);
 					if (page_mode == Xopg_page_.Tid_html)	// if html, write page again, but wrap it in html skin this time
 						Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(rv.To_bry_and_clear()));
 					wdata_lang_wtr.Page_(null);
@@ -107,7 +108,7 @@ public class Xoh_page_wtr_wkr {
 		, portal_mgr.Div_ns_bry(wiki.Utl__bfr_mkr(), page_ttl, wiki.Ns_mgr())
 		, portal_mgr.Div_view_bry(wiki.Utl__bfr_mkr(), html_gen_tid, page.Html_data().Xtn_search_text())
 		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar)
-		, portal_mgr.Div_sync_bry(tmp_bfr, app.Api_root().Addon().Bldr().Sync().Manual_enabled(), wiki, page)
+		, portal_mgr.Div_sync_bry(tmp_bfr, wiki.Page_mgr().Sync_mgr().Manual_enabled(), wiki, page)
 		, portal_mgr.Div_wikis_bry(wiki.Utl__bfr_mkr())
 		, portal_mgr.Sidebar_mgr().Html_bry()
 		, mgr.Edit_rename_div_bry(page_ttl), page.Html_data().Edit_preview_w_dbg(), js_edit_toolbar_bry			
@@ -200,8 +201,7 @@ public class Xoh_page_wtr_wkr {
 			) {
 			if (app.Mode().Tid_is_gui()) app.Usr_dlg().Prog_many("", "", "loading categories: count=~{0}", ctgs_len);
 			Xoctg_pagebox_itm[] pagebox_itms = wiki.Ctg__pagebox_wtr().Get_catlinks_by_page(wiki, page);
-			boolean hidden_enabled = wiki.App().Api_root().Addon().Wikis__ctgs__hidden_enabled();
-			wiki.Ctg__pagebox_wtr().Write_pagebox(hidden_enabled, bfr, wiki, page, pagebox_itms);
+			wiki.Ctg__pagebox_wtr().Write_pagebox(bfr, wiki, page, pagebox_itms);
 		}
 
 		// translate if variants are enabled

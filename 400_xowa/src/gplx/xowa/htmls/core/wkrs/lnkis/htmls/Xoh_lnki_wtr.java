@@ -35,6 +35,9 @@ public class Xoh_lnki_wtr {
 		file_wtr = new Xoh_file_mgr(wiki, html_mgr, html_wtr);
 	}
 	public Xoh_file_mgr File_wtr() {return file_wtr;} private Xoh_file_mgr file_wtr;
+	public void Init_by_wiki(Xowe_wiki wiki) {
+		file_wtr.Init_by_wiki(wiki);
+	}
 	public void Init_by_page(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xoae_page page) {
 		this.ctx = ctx; this.page = page;			// NOTE: must set ctx for file.v2; DATE:2014-06-22
 		this.wiki = ctx.Wiki();

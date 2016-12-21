@@ -30,7 +30,7 @@ public class Xoscript_mgr {
 	}
 	public void Write(Bry_bfr rv, Xow_wiki wiki, Xoa_page page) {
 		// init
-		if (!wiki.App().Api_root().Addon().App__scripting__enabled()) return;
+		if (!wiki.Html__wtr_mgr().Scripting_enabled()) return;
 		this.Init(wiki);
 		if (xtn_mgr == null) return;
 

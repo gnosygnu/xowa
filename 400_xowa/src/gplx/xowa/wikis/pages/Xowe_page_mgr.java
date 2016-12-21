@@ -17,10 +17,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.xowa.guis.views.*;
+import gplx.xowa.addons.wikis.pages.syncs.core.*;
 public class Xowe_page_mgr {
 	private final    Xowe_wiki wiki;
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final    Xosync_read_mgr read_mgr = new Xosync_read_mgr();
 	public Xowe_page_mgr(Xowe_wiki wiki) {this.wiki = wiki;}
+	public Xosync_read_mgr Sync_mgr() {return read_mgr;}
+	public void Init_by_wiki(Xowe_wiki wiki) {
+		read_mgr.Init_by_wiki(wiki);
+	}
 	public Xoae_page Load_page(Xoa_url url, Xoa_ttl ttl, Xog_tab_itm tab) {
 		Xoa_app_.Usr_dlg().Log_many("", "", "page.load: url=~{0}", url.To_str());			
 		Wait_for_popups(wiki.App());
@@ -31,7 +37,6 @@ public class Xowe_page_mgr {
 		Wait_for_popups(wiki.App());
 
 		// auto-update
-		gplx.xowa.addons.wikis.pages.syncs.core.Xosync_read_mgr read_mgr = new gplx.xowa.addons.wikis.pages.syncs.core.Xosync_read_mgr();
 		read_mgr.Auto_update(wiki, page, ttl);
 
 		// load page from html_db

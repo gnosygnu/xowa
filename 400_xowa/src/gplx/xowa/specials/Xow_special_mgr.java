@@ -31,11 +31,10 @@ public class Xow_special_mgr {
 		this.app = wiki.App();
 		hash = Hash_adp_bry.ci_u8(lang.Case_mgr());
 		page_allpages = new Xows_page_allpages(wiki);
-		page_search = new Srch_special_page(wiki);
 		Evt_lang_changed(wiki.Lang());
 	}
 	public Xows_page_allpages			Page_allpages() {return page_allpages;} private final    Xows_page_allpages page_allpages;
-	public Srch_special_page			Page_search() {return page_search;} private final    Srch_special_page page_search;
+	public Srch_special_page			Page_search() {return page_search;} private final    Srch_special_page page_search = new Srch_special_page();
 	public Xou_history_html				Page_history() {return page_history;} private final    Xou_history_html page_history = new Xou_history_html();
 	public Xoud_history_special			Page_history2() {return page_history2;} private final    Xoud_history_special page_history2 = new Xoud_history_special();
 	public Nearby_mgr					Page_nearby() {return page_nearby;} private final    Nearby_mgr page_nearby = new Nearby_mgr();

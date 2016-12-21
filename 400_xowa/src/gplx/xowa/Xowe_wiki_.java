@@ -21,7 +21,7 @@ public class Xowe_wiki_ {
 	public static void Create(Xowe_wiki wiki, long src_fil_len, String src_fil_name) {
 		wiki.Db_mgr_create_as_sql(); // create db_mgr as sql
 		Xoapi_import import_api = wiki.Appe().Api_root().Bldr().Wiki().Import();
-		Xowd_core_db_props db_mgr_props = import_api.New_props(wiki.Domain_str(), src_fil_len);
+		Xowd_core_db_props db_mgr_props = gplx.xowa.bldrs.Xobldr_cfg.New_props(wiki.App(), wiki.Domain_str(), src_fil_len);
 		Xob_info_session info_session = Xob_info_session.new_(import_api.User_name(), wiki.Domain_str(), src_fil_name);
 		wiki.Data__core_mgr().Init_by_make(db_mgr_props, info_session);	// make core_db			
 	}

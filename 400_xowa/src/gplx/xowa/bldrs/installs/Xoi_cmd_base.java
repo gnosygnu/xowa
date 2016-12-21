@@ -93,10 +93,8 @@ class Xoi_cmd_search2_build extends Xoi_cmd_base {
 	public Xoi_cmd_search2_build(Xoi_setup_mgr install_mgr, String wiki_key) {this.Ctor(install_mgr, wiki_key);}
 	@Override public String Async_key() {return KEY;} public static final String KEY = "wiki.search2.build";
 	@Override public void Process_async_init(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {
-		if (app.Setup_mgr().Dump_mgr().Wiki_storage_type_is_sql()) {
-			wiki.Db_mgr_as_sql().Category_version_update(false);
-			gplx.xowa.addons.wikis.searchs.bldrs.Srch_bldr_mgr_.Setup(wiki);
-		}
+		wiki.Db_mgr_as_sql().Category_version_update(false);
+		gplx.xowa.addons.wikis.searchs.bldrs.Srch_bldr_mgr_.Setup(wiki);
 	}
 	@Override public void Process_async_done(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {
 		app.Usr_dlg().Prog_many("", "", "search2 setup done");

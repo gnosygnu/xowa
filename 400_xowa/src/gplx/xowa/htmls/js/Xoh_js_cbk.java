@@ -125,7 +125,7 @@ public class Xoh_js_cbk implements Gfo_invk {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		byte[] search_str = Bry_.new_u8((String)m.ReadValAt(0));
 		byte[] cbk_func = Bry_.new_u8((String)m.ReadValAt(1));
-		app.Gui_mgr().Search_cfg().Search(wiki, search_str, cbk_func);
+		app.Addon_mgr().Itms__search__htmlbar().Search(wiki, search_str, cbk_func);
 		return "";
 	}
 	private String[] Wikidata_get_label(GfoMsg m) {

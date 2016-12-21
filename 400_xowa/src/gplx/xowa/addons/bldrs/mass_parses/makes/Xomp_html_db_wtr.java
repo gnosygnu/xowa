@@ -27,7 +27,7 @@ class Xomp_html_db_wtr {
 	private Xob_ns_file_itm ns_itm;
 	public Xomp_html_db_wtr(Xowe_wiki wiki) {
 		this.wiki = wiki; this.db_mgr = wiki.Data__core_mgr();
-		this.len_max = wiki.Appe().Api_root().Bldr().Wiki().Import().Html_db_max();
+		this.len_max = gplx.xowa.bldrs.Xobldr_cfg.Max_size__html(wiki.App());
 	}
 	public int Cur_db_id() {return html_db.Id();}
 	public Xowd_html_tbl Tbls__get_or_new(int ns_id, long html_len) {

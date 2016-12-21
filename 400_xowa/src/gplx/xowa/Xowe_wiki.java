@@ -198,7 +198,6 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		if (app.Stage() == Xoa_stage_.Tid_launch) init_needed = false;	// NOTE: only mark inited if app fully launched; otherwise statements in xowa.gfs can fire and prematurely set home to inited; DATE:2013-03-24
 		Gfo_log_bfr log_bfr = app.Log_bfr(); log_bfr.Add("wiki.init.bgn: " + domain_str);
 		app.Cfg_mgr().Init(this);
-		file_mgr.Cfg_download().Enabled_(app.File_mgr().Wmf_mgr().Enabled());	// default download to app global; can be overriden below
 		app.Gfs_mgr().Run_url_for(this, tdb_fsys_mgr.Cfg_wiki_stats_fil());
 		Init_db_mgr();
 		if (!app.Bldr().Import_marker().Chk(this)) {app.Wiki_mgr().Del(domain_bry); init_needed = false; return;}	// NOTE: must call after Db_mgr_create_as_sql(); also, must delete wiki from mgr; DATE:2014-08-24
@@ -227,7 +226,6 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		app.Html__css_installer().Install(this, Xowd_css_core_mgr.Key_default);
 		html_mgr.Init_by_wiki(this);
 		html__hdump_mgr.Init_by_db(this);
-		this.Copy_cfg(app.Usere().Wiki());
 		Xow_repo_mgr_.Assert_repos(app, this);
 		xtn_mgr.Init_by_wiki(this);
 		log_bfr.Add("wiki.init.end");
@@ -237,6 +235,10 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		app.Site_cfg_mgr().Load(this);
 		app.Addon_mgr().Load_by_wiki(this);
 		ctg_pagebox_wtr.Init_by_wiki(this);
+
+		import_mgr.Init_by_wiki(this);
+		file_mgr.Init_by_wiki(this);
+		page_mgr.Init_by_wiki(this);
 	}
 	public void Rls() {
 		if (rls_list != null) {
@@ -251,7 +253,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		file_mgr.Rls();
 	}
 	public void Init_needed_y_() {this.init_needed = true;}
-	private void Copy_cfg(Xowe_wiki wiki) {html_mgr.Copy_cfg(wiki.Html_mgr());}
+//		private void Copy_cfg(Xowe_wiki wiki) {html_mgr.Copy_cfg(wiki.Html_mgr());}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_files))				return file_mgr;
 		else if	(ctx.Match(k, Invk_stats))				return stats;

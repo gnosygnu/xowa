@@ -46,7 +46,6 @@ public class Xoapi_root implements Gfo_invk {
 	public Xoapi_html		Html()		{return html_api;} private final    Xoapi_html html_api = new Xoapi_html();
 	public Xoapi_bldr		Bldr()		{return bldr_api;} private final    Xoapi_bldr bldr_api = new Xoapi_bldr();
 	public Xoapi_usr		Usr()		{return usr_api;} private final    Xoapi_usr usr_api = new Xoapi_usr();
-	public Xoapi_special	Special()	{return special_api;} private final    Xoapi_special special_api = new Xoapi_special();
 	public Xoapi_xtns		Xtns()		{return xtns_api;} private final    Xoapi_xtns xtns_api = new Xoapi_xtns();
 	public Xoapi_app_wikis	Wikis()		{return app_wikis;} private final    Xoapi_app_wikis app_wikis = new Xoapi_app_wikis();
 	public String			Test_str() {return test_str;} public void Test_str_(String v) {test_str = v;} private String test_str;	// TEST
@@ -63,7 +62,6 @@ public class Xoapi_root implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_gui)) 		return gui_api;
 		else if	(ctx.Match(k, Invk_html)) 		return html_api;
 		else if	(ctx.Match(k, Invk_usr)) 		return usr_api;
-		else if	(ctx.Match(k, Invk_special)) 	return special_api;
 		else if	(ctx.Match(k, Invk_xtns)) 		return xtns_api;
 		else if	(ctx.Match(k, Invk_exec)) 		Exec(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_wikis)) 		return app_wikis;
@@ -74,7 +72,7 @@ public class Xoapi_root implements Gfo_invk {
 	private static final String 
 	  Invk_exec = "exec"
 	, Invk_app = "app", Invk_addon = "addon"
-	, Invk_bldr = "bldr", Invk_nav = "nav", Invk_gui = "gui", Invk_html = "html", Invk_usr = "usr", Invk_special = "special", Invk_xtns = "xtns"
+	, Invk_bldr = "bldr", Invk_nav = "nav", Invk_gui = "gui", Invk_html = "html", Invk_usr = "usr", Invk_xtns = "xtns"
 	, Invk_test_str = "test_str", Invk_test_str_ = "test_str_"
 	, Invk_wikis = "wikis"
 	;

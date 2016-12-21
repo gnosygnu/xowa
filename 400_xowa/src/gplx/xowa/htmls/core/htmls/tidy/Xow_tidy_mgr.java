@@ -16,27 +16,24 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.core.envs.*;
 import gplx.langs.htmls.*;
 public class Xow_tidy_mgr implements Gfo_evt_itm, Xow_tidy_mgr_interface {
-	private Xoae_app app; private Xoa_tidy_mgr tidy_mgr;
+	private Xoae_app app; private Xoh_tidy_wkr_tidy tidy_cmd = new Xoh_tidy_wkr_tidy();	// NOTE: app-level; not thread-safe; needed b/c of Options and exe/args DATE:2016-07-12
 	private boolean enabled = true; private Xoh_tidy_wkr wkr = Xoh_tidy_wkr_.Wkr_null; // TEST: set default wkr to null
 	public Xow_tidy_mgr() {this.evt_mgr = new Gfo_evt_mgr(this);}
 	public Gfo_evt_mgr Evt_mgr() {return evt_mgr;} private final    Gfo_evt_mgr evt_mgr;
-	private void Wkr_(byte tid) {
-		switch (tid) {
-			case Xoh_tidy_wkr_.Tid_tidy:	wkr = tidy_mgr.Wkr_tidy(); break;
-			case Xoh_tidy_wkr_.Tid_jtidy:	wkr = new Xoh_tidy_wkr_jtidy(); break;
-			case Xoh_tidy_wkr_.Tid_null:	wkr = Xoh_tidy_wkr_.Wkr_null; break;
-			default:						throw Err_.new_unhandled_default(tid);
-		}
+	private void Engine_(String v) {
+		if		(String_.Eq(v, "tidy"))		wkr = new Xoh_tidy_wkr_tidy(); // NOTE: app-level; not thread-safe; needed b/c of Options and exe/args DATE:2016-07-12
+		else if (String_.Eq(v, "jtidy"))	wkr = new Xoh_tidy_wkr_jtidy();
+		else								throw Err_.new_unhandled_default(v);
 		wkr.Init_by_app(app);
 	}
 	public void Init_by_wiki(Xoae_app app) {
 		this.app = app;
-		this.tidy_mgr = app.Html_mgr().Tidy_mgr();
-		Gfo_evt_mgr_.Sub_same_many(tidy_mgr, this, Xoa_tidy_mgr.Evt__enabled_changed, Xoa_tidy_mgr.Evt__engine_changed);
-		this.enabled = tidy_mgr.Enabled();
-		this.Wkr_(tidy_mgr.Wkr_tid());
+		tidy_cmd.Init_by_app(app);
+		Process_adp.ini_(this, app.Usr_dlg(), tidy_cmd, app.Url_cmd_eval(), Process_adp.Run_mode_sync_timeout, 1 * 60, "~{<>bin_plat_dir<>}tidy" + Op_sys.Cur().Fsys_dir_spr_str() +  "tidy", Xoh_tidy_wkr_tidy.Args_fmt, "source", "target");
+		app.Cfg().Bind_many_app(this, Cfg__enabled, Cfg__engine, Cfg__cmd);
 	}		
 	public void Exec_tidy(Bry_bfr bfr, boolean indent, byte[] page_url) {
 		if (!enabled) return;
@@ -47,8 +44,9 @@ public class Xow_tidy_mgr implements Gfo_evt_itm, Xow_tidy_mgr_interface {
 		Tidy_unwrap(bfr);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Xoa_tidy_mgr.Evt__enabled_changed))	this.enabled = m.ReadBool("v");
-		else if	(ctx.Match(k, Xoa_tidy_mgr.Evt__engine_changed))	this.Wkr_(m.ReadByte("v"));
+		if		(ctx.Match(k, Cfg__enabled))						this.enabled = m.ReadYn("v");
+		else if	(ctx.Match(k, Cfg__engine))							Engine_(m.ReadStr("v"));
+		else if	(ctx.Match(k, Cfg__cmd))							gplx.xowa.apps.progs.Xoa_prog_mgr.Init_cmd(m.ReadStr("v"), tidy_cmd);
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -77,4 +75,9 @@ public class Xow_tidy_mgr implements Gfo_evt_itm, Xow_tidy_mgr_interface {
 	(   "</body>"
 	+ "</html>"
 	);
+	private static final String 
+	  Cfg__enabled			= "xowa.html.tidy.enabled"
+	, Cfg__engine			= "xowa.html.tidy.engine"
+	, Cfg__cmd				= "xowa.html.tidy.cmd"
+	;
 }

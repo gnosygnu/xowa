@@ -21,17 +21,11 @@ public class Xoapi_addon implements Gfo_invk {
 	public void Ctor_by_app(Xoa_app app) {}
 	public Xoapi_addon_search		Search()	{return search;}	private final    Xoapi_addon_search search = new Xoapi_addon_search();
 	public Xoapi_addon_bldr			Bldr()		{return bldr;}		private final    Xoapi_addon_bldr bldr = new Xoapi_addon_bldr();
-	public boolean						Wikis__ctgs__hidden_enabled() {return wikis__ctgs__hidden_enabled;} private boolean wikis__ctgs__hidden_enabled = false;
-	public boolean						App__scripting__enabled() {return app__scripting__enabled;} private boolean app__scripting__enabled = false;
 	public String					App__update__restart_cmd()		{return app__update__restart_cmd;} private String app__update__restart_cmd = "";
 	public String					App__update__update_db_src()	{return app__update__update_db_src;} private String app__update__update_db_src = "http://xowa.org";
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__search)) 								return search;
 		else if	(ctx.Match(k, Invk__bldr)) 									return bldr;
-		else if	(ctx.Match(k, Invk__wikis__ctgs__hidden_enabled)) 			return Yn.To_str(wikis__ctgs__hidden_enabled);
-		else if	(ctx.Match(k, Invk__wikis__ctgs__hidden_enabled_)) 			wikis__ctgs__hidden_enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk__app__scripting__enabled)) 				return Yn.To_str(app__scripting__enabled);
-		else if	(ctx.Match(k, Invk__app__scripting__enabled_)) 				app__scripting__enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk__app__update__restart_cmd)) 				return app__update__restart_cmd;
 		else if	(ctx.Match(k, Invk__app__update__restart_cmd_)) 			app__update__restart_cmd = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk__app__update__update_db_src)) 			return app__update__update_db_src;
@@ -40,10 +34,6 @@ public class Xoapi_addon implements Gfo_invk {
 		return this;
 	}
 	private static final String Invk__search = "search", Invk__bldr = "bldr"
-	, Invk__wikis__ctgs__hidden_enabled		= "wikis__ctgs__hidden_enabled"
-	, Invk__wikis__ctgs__hidden_enabled_	= "wikis__ctgs__hidden_enabled_"
-	, Invk__app__scripting__enabled			= "app__scripting__enabled"
-	, Invk__app__scripting__enabled_		= "app__scripting__enabled_"
 	, Invk__app__update__restart_cmd		= "app__update__restart_cmd"
 	, Invk__app__update__restart_cmd_		= "app__update__restart_cmd_"
 	, Invk__app__update__update_db_src		= "app__update__update_db_src"

@@ -55,6 +55,9 @@ public class Xoedit_itm_html {
 				( "<input  class=\"xocfg__io_cmd__arg__txt\" id=\"{1}-arg\" data-xocfg-key=\"{1}\" data-xocfg-gui=\"{0}-arg\" accesskey=\"d\" type=\"text\" value='{2}'>\n"
 				, gui_type_key, key, lines[1]);
 				break;
+			case Xoitm_gui_tid.Tid__btn:
+				bfr.Add_str_u8_fmt("<input id=\"{1}\" data-xocfg-key=\"{1}\" data-xocfg-gui=\"{0}\" class=\"xocfg__btn\" type=\"button\"{2}></input>", gui_type_key, key, key);
+				break;
 			default:
 				break;
 		}

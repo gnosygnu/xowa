@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.searchs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*;
 import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*; import gplx.xowa.addons.wikis.searchs.searchers.cbks.*;
+import gplx.xowa.addons.wikis.searchs.gui.urlbars.*;
 import gplx.xowa.langs.cases.*;
 public class Srch_search_addon implements Xoax_addon_itm, Srch_search_addon_api {
 	private final    Srch_search_mgr search_mgr;

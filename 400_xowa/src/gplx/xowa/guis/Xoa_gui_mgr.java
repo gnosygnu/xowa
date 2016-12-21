@@ -20,8 +20,8 @@ import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
 import gplx.gfui.*; import gplx.gfui.ipts.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.standards.*;
 import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.guis.menus.*; import gplx.xowa.guis.cmds.*; import gplx.xowa.apps.cfgs.gui.*; import gplx.xowa.users.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.guis.bnds.*; import gplx.xowa.guis.views.*; import gplx.xowa.guis.urls.url_macros.*;
-import gplx.xowa.guis.views.boots.*;	
+import gplx.xowa.guis.bnds.*; import gplx.xowa.guis.views.*; import gplx.xowa.guis.urls.url_macros.*; import gplx.xowa.addons.wikis.searchs.gui.htmlbars.*;
+import gplx.xowa.guis.views.boots.*;
 public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 	public Xoa_gui_mgr(Xoae_app app) {
 		this.ev_mgr = new Gfo_evt_mgr(this);
@@ -30,7 +30,6 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 		bnd_mgr = new Xog_bnd_mgr(browser_win);
 		html_mgr = new Xog_html_mgr(app);
 		menu_mgr = new Xog_menu_mgr(this);
-		search_cfg = new Srch_search_cfg(app);
 	}
 	public Gfo_evt_mgr Evt_mgr() {return ev_mgr;} private Gfo_evt_mgr ev_mgr;
 	public Xoae_app App() {return app;} private Xoae_app app;
@@ -42,7 +41,6 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 	public Xocfg_win Win_cfg() {return win_cfg;} private Xocfg_win win_cfg = new Xocfg_win();
 	public Xog_layout Layout() {return layout;} private Xog_layout layout = new Xog_layout();
 	public Xog_html_mgr Html_mgr() {return html_mgr;} private Xog_html_mgr html_mgr;
-	public Srch_search_cfg Search_cfg() {return search_cfg;} private Srch_search_cfg search_cfg;
 	public Xog_menu_mgr Menu_mgr() {return menu_mgr;} private Xog_menu_mgr menu_mgr;
 	public Xog_url_macro_mgr Url_macro_mgr() {return url_macro_mgr;} private Xog_url_macro_mgr url_macro_mgr = new Xog_url_macro_mgr();
 	public void Show_prog() {
@@ -75,6 +73,7 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 		layout.Init(browser_win);
 		cmd_mgr.Init_by_kit(app);
 		app.Api_root().Init_by_kit(app);
+		app.Addon_mgr().Init_by_kit(app, kit);
 		menu_mgr.Menu_bldr().Init_by_kit(app, kit, app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("app.menu"));
 		menu_mgr.Init_by_kit();
 		bnd_mgr.Init_by_kit(app);
@@ -97,7 +96,6 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 		else if	(ctx.Match(k, Invk_win_opts))						return win_cfg;
 		else if	(ctx.Match(k, Invk_layout))							return layout;
 		else if	(ctx.Match(k, Invk_html))							return html_mgr;
-		else if	(ctx.Match(k, Invk_search_suggest))					return search_cfg;
 		else if	(ctx.Match(k, Invk_menus))							return menu_mgr;
 		else if	(ctx.Match(k, Invk_cmds))							return cmd_mgr;
 		else if	(ctx.Match(k, Invk_url_macros))						return url_macro_mgr;
@@ -109,7 +107,7 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 	  Invk_kit = "kit", Invk_kit_ = "kit_", Invk_browser_type = "browser_type_", Invk_xul_runner_path_ = "xul_runner_path_", Invk_run = "run"
 	, Invk_main_win = "main_win", Invk_browser_win = "browser_win", Invk_bnds = "bnds"
 	, Invk_bindings = "bindings", Invk_win_opts = "win_opts", Invk_layout = "layout", Invk_html = "html"
-	, Invk_search_suggest = "search_suggest", Invk_menus = "menus", Invk_cmds = "cmds", Invk_url_macros = "url_macros";
+	, Invk_menus = "menus", Invk_cmds = "cmds", Invk_url_macros = "url_macros";
 	public void Run(Rls_able splash_win) {
 		Gfo_log_bfr log_bfr = app.Log_bfr();
 		try {

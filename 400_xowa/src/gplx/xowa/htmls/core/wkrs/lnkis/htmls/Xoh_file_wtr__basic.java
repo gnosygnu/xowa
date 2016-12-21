@@ -21,23 +21,26 @@ import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.files.*; 	
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
-public class Xoh_file_wtr__basic {
+public class Xoh_file_wtr__basic implements Gfo_invk {
 	private final    Xowe_wiki wiki; private final    Xow_html_mgr html_mgr; private final    Xoh_html_wtr html_wtr;
 	private final    Xoh_file_fmtr__basic fmtr__basic = new Xoh_file_fmtr__basic(), fmtr__hdump = new Xoh_file_fmtr__hdump();
 	private final    Xoh_lnki_text_fmtr alt_fmtr, caption_fmtr;
 	private final    Xop_link_parser tmp_link_parser = new Xop_link_parser(); private Xoa_url tmp_url = Xoa_url.blank();
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
-	private Xoae_page page; private boolean cfg_alt_defaults_to_caption; private byte[] msg_file_enlarge;
+	private Xoae_page page; private byte[] msg_file_enlarge;
 	private Xoh_file_fmtr__basic html_fmtr;		
+	private boolean alt_in_caption = true, alt_defaults_to_caption = true;
 	public Xoh_file_wtr__basic(Xowe_wiki wiki, Xow_html_mgr html_mgr, Xoh_html_wtr html_wtr) {
 		this.wiki = wiki; this.html_mgr = html_mgr; this.html_wtr = html_wtr;
 		this.alt_fmtr = new Xoh_lnki_text_fmtr(wiki.Utl__bfr_mkr(), html_wtr);
 		this.caption_fmtr = new Xoh_lnki_text_fmtr(wiki.Utl__bfr_mkr(), html_wtr);
 		this.html_fmtr = fmtr__basic;
 	}
+	public void Init_by_wiki(Xowe_wiki wiki) {
+		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__alt_in_caption, Cfg__alt_defaults_to_caption);
+	}
 	public void Init_by_page(Xoh_wtr_ctx hctx, Xoae_page page) {
 		this.page = page;
-		this.cfg_alt_defaults_to_caption = wiki.Appe().Usere().Wiki().Html_mgr().Imgs_mgr().Alt_defaults_to_caption().Val();
 		this.html_fmtr = hctx.Mode_is_hdump() ? fmtr__hdump : fmtr__basic;
 		if (msg_file_enlarge == null) this.msg_file_enlarge = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_file_enlarge);
 	}
@@ -169,7 +172,7 @@ public class Xoh_file_wtr__basic {
 			if (bfr.Len() > 0) bfr.Add_byte_nl();
 
 			// write image_div
-			byte[] alt_html = wiki.Html_mgr().Imgs_mgr().Alt_in_caption().Val() ? Bld_alt(Bool_.Y, ctx, hctx, src, lnki) : Bry_.Empty;
+			byte[] alt_html = alt_in_caption ? Bld_alt(Bool_.Y, ctx, hctx, src, lnki) : Bry_.Empty;
 			img_fmtr.Add_full_img(tmp_bfr, hctx, page, src, xfer_itm, uid, lnki_href, Bool_.N, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anch_ttl
 				, Xoh_file_fmtr__basic.Escape_xowa_title(lnki_ttl), xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt
 				, xfer_itm.File_exists() ? Xoh_img_cls_.Tid__thumbimage : Xoh_img_cls_.Tid__none
@@ -180,7 +183,7 @@ public class Xoh_file_wtr__basic {
 				);
 		}
 		else {	// is full
-			if	(	cfg_alt_defaults_to_caption
+			if	(	alt_defaults_to_caption
 				&& 	Bry_.Len_eq_0(alt)					// NOTE: if no alt, always use caption for alt; DATE:2013-07-22
 				&& 	!lnki.Alt_exists()					// unless blank alt exists; EX: [[File:A.png|a|alt=]] should have alt of "", not "a" 
 				) {
@@ -261,6 +264,15 @@ public class Xoh_file_wtr__basic {
 			, width - 2, max_width);	// NOTE: -2 is fudge factor else play btn will jut out over video thumb; see Earth and ISS video
 	}
 	private int Get_play_btn_width(int w) {return w > 0 ? w : html_mgr.Img_thumb_width();}	// if no width set width to default img width
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, Cfg__alt_in_caption))				alt_in_caption = m.ReadYn("v");
+		else if	(ctx.Match(k, Cfg__alt_defaults_to_caption))	alt_defaults_to_caption = m.ReadYn("v");
+		else	return Gfo_invk_.Rv_unhandled;
+		return this;
+	}
+	private static final String
+	  Cfg__alt_in_caption				= "xowa.html.wiki.alt_in_caption"
+	, Cfg__alt_defaults_to_caption		= "xowa.html.wiki.alt_defaults_to_caption";
 
 	private static final    byte[]
 	  Div_center_bgn			= Bry_.new_a7("<div class=\"center\">")

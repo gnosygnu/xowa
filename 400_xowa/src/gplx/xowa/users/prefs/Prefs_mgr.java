@@ -67,7 +67,7 @@ public class Prefs_mgr implements Gfo_invk {
 		Gfh_nde[] hndes = html_rdr.Parse_as_ary(src);
 		hndes = Gfh_selecter.Select(src, hndes, atrs_hash);
 		int len = hndes.length;
-		boolean tidy_enabled = app.Html_mgr().Tidy_mgr().Enabled();
+		boolean tidy_enabled = true;	// app.Html_mgr().Tidy_mgr().Enabled();
 		Bry_bfr cmd_bfr = Bry_bfr_.Reset(255);
 		for (int i = 0; i < len; i++) {
 			Gfh_nde hnde = hndes[i];

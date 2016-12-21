@@ -23,13 +23,13 @@ public class Xocfg_type_mgr {
 		this.Lists__add("list:xowa.app.startup.window.mode", "previous", "maximized", "absolute", "relative", "default");
 		this.Lists__add("list:xowa.app.startup.pages.type", "blank", "xowa", "previous", "custom");
 		this.Lists__add("list:xowa.gui.window.html_box.adj_type", "none", "relative", "absolute");
-		this.Lists__add("list:xowa.wiki.database.general.zip_mode", "text", "gzip", "bzip2", "xz");
+		this.Lists__add("list:xowa.wiki.database.zip_mode", "text", "gzip", "bzip2", "xz");
 		this.Lists__add("list:xowa.html.wiki.portal.missing_class", Keyval_.new_("", "Show as blue link"), Keyval_.new_("new", "Show as red link"), Keyval_.new_("xowa_display_none", "Hide"));
 		this.Lists__add("list:xowa.html.category.basic.missing_class", "normal", "hide", "red_link");
 		this.Lists__add("list:xowa.html.tidy.general.engine", "tidy", "jtidy");
-		this.Lists__add("list:xowa.addon.http_server.general.file_retrieve_mode", Keyval_.new_("wait"), Keyval_.new_("skip"), Keyval_.new_("async_server", "async server"));
+		this.Lists__add("list:xowa.addon.http_server.file_retrieve_mode", Keyval_.new_("wait"), Keyval_.new_("skip"), Keyval_.new_("async_server", "async server"));
 		this.Lists__add("list:xowa.addon.search_suggest.html_bar.search_mode", "Search", "AllPages", "AllPages_(v2)");
-		this.Lists__add("list:xowa.addon.math.general.renderer", "MathJax", "LaTeX");
+		this.Lists__add("list:xowa.addon.math.renderer", Keyval_.new_("mathjax","MathJax"), Keyval_.new_("latex", "LaTeX"));
 		this.Lists__add("list:xowa.addon.scribunto.general.engine", "luaj", "lua");
 	}
 	public void	Lists__add(String key, String... vals) {

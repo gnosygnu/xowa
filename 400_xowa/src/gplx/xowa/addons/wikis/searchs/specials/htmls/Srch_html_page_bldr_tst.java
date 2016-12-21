@@ -60,7 +60,7 @@ class Srch_html_page_bldr_fxt {
 	}
 	public void Test_paging(boolean fwd, int slab_idx, String expd) {
 		byte[] search_orig = Bry_.new_a7("A");
-		Srch_search_qry qry = Srch_search_qry.New__search_page(Xow_domain_itm_.Ary_empty, wiki, app.Gui_mgr().Search_cfg(), Bool_.N, search_orig, slab_idx, 100);
+		Srch_search_qry qry = Srch_search_qry.New__search_page(Xow_domain_itm_.Ary_empty, wiki, app.Addon_mgr().Itms__search__special().Ns_mgr(), Bool_.N, search_orig, slab_idx, 100);
 		html_mgr.Init_by_wiki(wiki, wiki.Lang().Num_mgr(), qry);
 		byte[] paging_link = html_mgr.Bld_paging_link(fwd);
 		Tfds.Eq(expd, String_.new_a7(paging_link));

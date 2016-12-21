@@ -75,6 +75,7 @@ public class Http_server_mgr implements Gfo_invk {
 		running = val;
 	}
 	public void Run() {
+		app.Cfg().Bind_many_app(this, Cfg__port, Cfg__file_retrieve_mode);
 		if (wkr == null) wkr = new Http_server_socket(this);
 		Thread_adp_.Start_by_key("thread:xowa.http_server.server", wkr, Http_server_socket.Invk_run);
 		Note("HTTP Server started: Navigate to http://localhost:" + Int_.To_str(port));
@@ -136,19 +137,15 @@ public class Http_server_mgr implements Gfo_invk {
 		usr_dlg.Note_many("", "", s);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_port))					return port;
-		else if	(ctx.Match(k, Invk_port_))					Port_(m.ReadInt("v"));
-		else if	(ctx.Match(k, Invk_running))				return Yn.To_str(running);
+		if		(ctx.Match(k, Cfg__port))					Port_(m.ReadInt("v"));
+		else if	(ctx.Match(k, Cfg__file_retrieve_mode))		retrieve_mode = File_retrieve_mode.Xto_byte(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_running_))				Running_(m.ReadYn("v"));
-		else if	(ctx.Match(k, Invk_retrieve_mode))			return File_retrieve_mode.Xto_str(retrieve_mode);
-		else if	(ctx.Match(k, Invk_retrieve_mode_))			retrieve_mode = File_retrieve_mode.Xto_byte(m.ReadStr("v"));
-		else if	(ctx.Match(k, Invk_retrieve_mode_list))		return File_retrieve_mode.Options__list;
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final String 
-	  Invk_port = "port", Invk_port_ = "port_"
-	, Invk_running = "running", Invk_running_ = "running_"
-	, Invk_retrieve_mode = "retrieve_mode", Invk_retrieve_mode_ = "retrieve_mode_", Invk_retrieve_mode_list = "retrieve_mode_list"
-	;
+	private static final String  Invk_running_ = "running_";
+	private static final String
+	  Cfg__port					= "xowa.addon.http_server.port"
+	, Cfg__file_retrieve_mode	= "xowa.addon.http_server.file_retrieve_mode";
+
 }

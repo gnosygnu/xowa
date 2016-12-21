@@ -22,31 +22,45 @@ import gplx.xowa.guis.*; import gplx.xowa.addons.htmls.sidebars.*; import gplx.x
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*; 
 import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.hrefs.*;
-import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.apps.apis.xowa.html.skins.*;
+import gplx.xowa.apps.apis.xowa.html.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.htmls.portal.vnts.*;
 public class Xow_portal_mgr implements Gfo_invk {
 	private Xowe_wiki wiki; private boolean lang_is_rtl; private Xoapi_toggle_itm toggle_itm;
 	private final    Vnt_mnu_grp_fmtr vnt_menu_fmtr = new Vnt_mnu_grp_fmtr();
 	private final    Gfo_url_encoder fsys_lnx_encoder = Gfo_url_encoder_.New__fsys_lnx().Make();
+	private boolean sidebar_enabled;
 	public Xow_portal_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		this.sidebar_mgr = new Xoh_sidebar_mgr(wiki);
 		this.missing_ns_cls = Bry_.Eq(wiki.Domain_bry(), Xow_domain_tid_.Bry__home) ? Missing_ns_cls_hide : null;	// if home wiki, set missing_ns to application default; if any other wiki, set to null; will be overriden during init
 	}
-	public void Init_by_lang(Xol_lang_itm lang) {
-		lang_is_rtl = !lang.Dir_ltr();
-	}
-	private Xoapi_skin_app_base api_skin;
+	public byte[] Missing_ns_cls() {return missing_ns_cls;} public Xow_portal_mgr Missing_ns_cls_(byte[] v) {missing_ns_cls = v; return this;} private byte[] missing_ns_cls;	// NOTE: must be null due to Init check above
 	public Xoh_sidebar_mgr Sidebar_mgr() {return sidebar_mgr;} private Xoh_sidebar_mgr sidebar_mgr;
 	public Bry_fmtr Div_home_fmtr() {return div_home_fmtr;} private Bry_fmtr div_home_fmtr = Bry_fmtr.new_("");
 	public Xow_portal_mgr Init_assert() {if (init_needed) Init(); return this;}
 	public byte[] Div_jump_to() {return div_jump_to;} private byte[] div_jump_to = Bry_.Empty;
+	public void Init_by_lang(Xol_lang_itm lang) {
+		lang_is_rtl = !lang.Dir_ltr();
+	}
+	public void Init_by_wiki(Xowe_wiki wiki) {
+		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__missing_class, Cfg__sidebar_enabled__desktop, Cfg__sidebar_enabled__server);
+	}
+	private void Sidebar_enabled_(boolean is_desktop, boolean val) {
+		// set sidebar_enabled if (a) is_gui and is_desktop; or (b) is_server and !is_desktop
+		if (wiki.App().Mode().Tid_is_gui()) {
+			if (is_desktop)
+				this.sidebar_enabled = val;
+		}
+		else {
+			if (!is_desktop)
+				this.sidebar_enabled = val;
+		}
+	}
 	public void Init() {
 		init_needed = false;
-		if (missing_ns_cls == null)	// if missing_ns_cls not set for wiki, use the home wiki's
+		if (missing_ns_cls == null)	{// if missing_ns_cls not set for wiki, use the home wiki's
 			Missing_ns_cls_(wiki.Appe().Usere().Wiki().Html_mgr().Portal_mgr().Missing_ns_cls());
-		Xoapi_skins skins = wiki.Appe().Api_root().Html().Skins();
-		api_skin = wiki.App().Mode().Tid_is_gui() ? skins.Desktop() : skins.Server();
+		}
 		Bry_fmtr_eval_mgr eval_mgr = wiki.Eval_mgr();
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Init_fmtr(tmp_bfr, eval_mgr, div_view_fmtr);
@@ -105,7 +119,7 @@ public class Xow_portal_mgr implements Gfo_invk {
 		return tmp_bfr.To_bry_and_rls();
 	}	public static final    byte[] Cls_selected_y = Bry_.new_a7("selected"), Cls_new = Bry_.new_a7("new"), Cls_display_none = Bry_.new_a7("xowa_display_none");
 	public byte[] Div_logo_bry() {return div_logo_bry;} private byte[] div_logo_bry = Bry_.Empty;
-	public byte[] Div_home_bry() {return api_skin != null && api_skin.Sidebar_home_enabled() ? div_home_bry : Bry_.Empty;} private byte[] div_home_bry = Bry_.Empty;
+	public byte[] Div_home_bry() {return sidebar_enabled ? div_home_bry : Bry_.Empty;} private byte[] div_home_bry = Bry_.Empty;
 	public byte[] Div_sync_bry(Bry_bfr tmp_bfr, boolean manual_enabled, Xow_wiki wiki, Xoa_page page) {
 		// only show update_html if wmf; DATE:2016-08-31
 		if (	wiki.Domain_itm().Domain_type().Src() == Xow_domain_tid.Src__wmf
@@ -122,7 +136,6 @@ public class Xow_portal_mgr implements Gfo_invk {
 		div_wikis_fmtr.Bld_bfr_many(tmp_bfr, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr());
 		return tmp_bfr.To_bry_and_rls();
 	}
-	public byte[] Missing_ns_cls() {return missing_ns_cls;} public Xow_portal_mgr Missing_ns_cls_(byte[] v) {missing_ns_cls = v; return this;} private byte[] missing_ns_cls;	// NOTE: must be null due to Init check above
 	private final    Bry_fmtr 
 	  div_personal_fmtr = Bry_fmtr.new_("~{portal_personal_subj_href};~{portal_personal_subj_text};~{portal_personal_talk_cls};~{portal_personal_talk_href};~{portal_personal_talk_cls};", "portal_personal_subj_href", "portal_personal_subj_text", "portal_personal_subj_cls", "portal_personal_talk_href", "portal_personal_talk_cls")
 	, div_ns_fmtr = Bry_fmtr.new_("~{portal_ns_subj_href};~{portal_ns_subj_cls};~{portal_ns_talk_href};~{portal_ns_talk_cls};~{portal_div_vnts}", "portal_ns_subj_href", "portal_ns_subj_cls", "portal_ns_talk_href", "portal_ns_talk_cls", "portal_div_vnts")
@@ -142,21 +155,24 @@ public class Xow_portal_mgr implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_div_home_))						div_home_fmtr.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_div_sync_))						div_sync_fmtr.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_div_wikis_))						div_wikis_fmtr.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_missing_ns_cls))					return String_.new_u8(missing_ns_cls);
-		else if	(ctx.Match(k, Invk_missing_ns_cls_))				missing_ns_cls = m.ReadBry("v");
-		else if	(ctx.Match(k, Invk_missing_ns_cls_list))			return Options_missing_ns_cls_list;
+
+		else if (ctx.Match(k, Cfg__missing_class))					missing_ns_cls = m.ReadBry("v");
+		else if (ctx.Match(k, Cfg__sidebar_enabled__desktop))		Sidebar_enabled_(Bool_.Y, m.ReadYn("v"));
+		else if (ctx.Match(k, Cfg__sidebar_enabled__server))		Sidebar_enabled_(Bool_.N, m.ReadYn("v"));
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_div_personal_ = "div_personal_", Invk_div_view_ = "div_view_", Invk_div_ns_ = "div_ns_", Invk_div_home_ = "div_home_"
-	, Invk_div_sync_ = "div_sync_"
-	, Invk_div_wikis_ = "div_wikis_"
-	, Invk_missing_ns_cls = "missing_ns_cls", Invk_missing_ns_cls_ = "missing_ns_cls_", Invk_missing_ns_cls_list = "missing_ns_cls_list"
-	;
+	, Invk_div_sync_ = "div_sync_", Invk_div_wikis_ = "div_wikis_";
 	public static final String Invk_div_logo_ = "div_logo_";
-	private static Keyval[] Options_missing_ns_cls_list = Keyval_.Ary(Keyval_.new_("", "Show as blue link"), Keyval_.new_("new", "Show as red link"), Keyval_.new_("xowa_display_none", "Hide")); 
 	private static final    byte[] Missing_ns_cls_hide = Bry_.new_a7("xowa_display_none");
 	private static final    Bry_fmtr Div_jump_to_fmtr = Bry_fmtr.new_
 	( "\n    <div id=\"jump-to-nav\" class=\"mw-jump\">~{jumpto}<a href=\"#mw-navigation\">~{jumptonavigation}</a>~{comma-separator}<a href=\"#p-search\">~{jumptosearch}</a></div>"
 	, "jumpto", "jumptonavigation", "comma-separator", "jumptosearch");
+
+	private static final String
+	  Cfg__missing_class				= "xowa.html.wiki.portal.missing_class"
+	, Cfg__sidebar_enabled__desktop		= "xowa.html.wiki.portal.sidebar_enabled_desktop"
+	, Cfg__sidebar_enabled__server		= "xowa.html.wiki.portal.sidebar_enabled_server"
+	;
 }

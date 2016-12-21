@@ -30,6 +30,7 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 	public boolean Html_capable() {return html_capable;} public Xoh_page_wtr_mgr Html_capable_(boolean v) {html_capable = v; return this;} private boolean html_capable;
 	public byte[] Css_common_bry() {return css_common_bry;} private byte[] css_common_bry;
 	public byte[] Css_wiki_bry() {return css_wiki_bry;} private byte[] css_wiki_bry;
+	public boolean Scripting_enabled() {return scripting_enabled;} private boolean scripting_enabled;
 	public Bry_fmtr Page_read_fmtr() {return page_read_fmtr;} private Bry_fmtr page_read_fmtr = Bry_fmtr.new_("", Fmtr_keys);
 	public Bry_fmtr Page_edit_fmtr() {return page_edit_fmtr;} private Bry_fmtr page_edit_fmtr = Bry_fmtr.new_("", Fmtr_keys);
 	public Bry_fmtr Page_html_fmtr() {return page_html_fmtr;} private Bry_fmtr page_html_fmtr = Bry_fmtr.new_("", Fmtr_keys);
@@ -39,6 +40,9 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 		this.css_wiki_bry = css_wiki_url.To_http_file_bry();
 	}
 	public void Init_(boolean v) {init = v;} private boolean init = true;
+	public void Init_by_wiki(Xow_wiki wiki) {
+		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__scripting_enabled);
+	}
 	public byte[] Gen(Xoae_page page, byte output_tid) {
 		Xoh_page_wtr_wkr wtr = Wkr(output_tid);
 		Xowe_wiki wiki = page.Wikie();
@@ -64,6 +68,7 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_page_edit_))						page_edit_fmtr.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_page_html_))						page_html_fmtr.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_xowa_div_edit_rename_))			div_edit_rename_fmtr.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Cfg__scripting_enabled))				scripting_enabled = m.ReadYn("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -88,6 +93,7 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 	, "portal_div_admin", "portal_div_wikis", "portal_sidebar"
 	, "edit_div_rename", "edit_div_preview", "js_edit_toolbar"		
 	};
+	private static final String Cfg__scripting_enabled = "xowa.addon.scripting.enabled";
 }
 /*
 NOTE_1:xowa_anchor_button

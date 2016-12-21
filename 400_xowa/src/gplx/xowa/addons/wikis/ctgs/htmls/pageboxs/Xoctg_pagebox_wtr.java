@@ -19,18 +19,20 @@ package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs; import gplx.*; import gplx.x
 import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.singles.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.doubles.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.ctgs.dbs.*;	
-public class Xoctg_pagebox_wtr {
+public class Xoctg_pagebox_wtr implements Gfo_invk {
 	private final    Xoctg_single_box single_box = new Xoctg_single_box();
 	private final    Xoctg_double_box double_box = new Xoctg_double_box();
 	private final    Xoctg_pagebox_hash hash = new Xoctg_pagebox_hash();
 	private final    Xowd_page_itm tmp_page_itm = new Xowd_page_itm();
+	public boolean Grouping_enabled() {return grouping_enabled;} private boolean grouping_enabled;
 	public void Init_by_wiki(Xow_wiki wiki) {
 		single_box.Init_by_wiki(wiki);
 		double_box.Init_by_wiki(wiki);
+		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__grouping_enabled);
 	}
-	public void Write_pagebox(boolean double_mode, Bry_bfr bfr, Xow_wiki wiki, Xoa_page page, Xoctg_pagebox_itm[] pagebox_itms) {
+	public void Write_pagebox(Bry_bfr bfr, Xow_wiki wiki, Xoa_page page, Xoctg_pagebox_itm[] pagebox_itms) {
 		try {
-			if (double_mode)
+			if (grouping_enabled)
 				double_box.Write_pagebox(bfr, pagebox_itms);
 			else
 				single_box.Write_pagebox(bfr, pagebox_itms);
@@ -72,4 +74,10 @@ public class Xoctg_pagebox_wtr {
 
 		return hash.To_ary_and_clear();
 	}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, Cfg__grouping_enabled))			this.grouping_enabled = m.ReadYn("v");
+		else	return Gfo_invk_.Rv_unhandled;
+		return this;
+	}
+	private static final String Cfg__grouping_enabled = "xowa.category.html.grouping_enabled";
 }

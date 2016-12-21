@@ -31,6 +31,8 @@ public class Xocfg_edit_loader {
 		this.type_mgr = type_mgr;
 		this.dflt_mgr = dflt_mgr;
 	}
+	public boolean Grp_key_exists(String grp_key) {return db_app.Tbl__grp().Select_by_key_or_null(grp_key) != null;
+	}
 	public Xoedit_root Load_root(String grp_key, String ctx, String lang) {
 		// create lists
 		Ordered_hash grp_temp = Ordered_hash_.New();

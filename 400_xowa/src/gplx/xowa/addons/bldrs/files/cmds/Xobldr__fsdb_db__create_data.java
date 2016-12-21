@@ -66,7 +66,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 			wmf_wkr.Fail_timeout_(0);	// 1000; NOTE: set Fail_timeout here; DATE:2014-06-21; NOTE: do not put in ctor, or else will be 1st wkr; DATE:2014-06-28
 		}
 		// trg_mnt_itm
-		this.trg_bin_db_max = app.Api_root().Bldr().Wiki().Import().File_db_max();
+		this.trg_bin_db_max = Xobldr_cfg.Max_size__file(app);
 		Io_url trg_file_dir_v1 = String_.Eq(trg_bin_mgr__fsdb_version, "v1") ? wiki.Fsys_mgr().File_dir().GenNewNameOnly(wiki.Domain_str() + "-prv") : wiki.Fsys_mgr().File_dir();	// NOTE: convoluted way of setting trg to -prv if trg_bin_mgr__fsdb_version_v1 is set; otherwise set to "en.wikipedia.org" which will noop; DATE:2015-12-02
 		Fsdb_db_mgr trg_db_mgr = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), trg_file_dir_v1);
 		if (trg_db_mgr == null) trg_db_mgr = Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, Bool_.Y);

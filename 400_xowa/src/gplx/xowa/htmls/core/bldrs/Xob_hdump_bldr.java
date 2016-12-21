@@ -41,8 +41,7 @@ public class Xob_hdump_bldr implements Gfo_invk {
 		this.stat_tbl = new Xoh_stat_tbl(make_conn); this.stat_itm = hdump_mgr.Hzip_mgr().Hctx().Hzip__stat();
 		this.toc_label = wiki.Msg_mgr().Val_by_id(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc);
 		
-		Xoapi_import import_cfg = wiki.Appe().Api_root().Bldr().Wiki().Import();
-		if (zip_tid == Byte_.Max_value_127) zip_tid = import_cfg.Zip_tid_html();
+		if (zip_tid == Byte_.Max_value_127) zip_tid = Xobldr_cfg.Zip_mode__html(wiki.App());
 		hdump_mgr.Init_by_db(zip_tid, hzip_enabled, hzip_b256);
 		return true;
 	}

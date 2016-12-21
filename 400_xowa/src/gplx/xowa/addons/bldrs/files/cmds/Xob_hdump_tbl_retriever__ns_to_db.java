@@ -22,8 +22,8 @@ class Xob_hdump_tbl_retriever__ns_to_db implements Xob_hdump_tbl_retriever {
 	private final    Xob_ns_to_db_mgr ns_to_db_mgr;
 	public Xob_hdump_tbl_retriever__ns_to_db(Xowe_wiki wiki) {
 		Xow_db_mgr core_data_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();
-		this.ns_to_db_mgr = new Xob_ns_to_db_mgr(new Xob_ns_to_db_wkr__html(core_data_mgr.Db__core()), core_data_mgr, wiki.Appe().Api_root().Bldr().Wiki().Import().Html_db_max());
-		Xob_ns_file_itm.Init_ns_bldr_data(Xow_db_file_.Tid__html_data, wiki.Ns_mgr(), gplx.xowa.apps.apis.xowa.bldrs.imports.Xoapi_import.Ns_file_map__each);
+		this.ns_to_db_mgr = new Xob_ns_to_db_mgr(new Xob_ns_to_db_wkr__html(core_data_mgr.Db__core()), core_data_mgr, Xobldr_cfg.Max_size__html(wiki.App()));
+		Xob_ns_file_itm.Init_ns_bldr_data(Xow_db_file_.Tid__html_data, wiki.Ns_mgr(), gplx.xowa.bldrs.Xobldr_cfg.Ns_file_map__each);
 	}
 	public Xowd_html_tbl Get_html_tbl(Xow_ns ns, int prv_row_len) {
 		Xow_db_file html_db = ns_to_db_mgr.Get_by_ns(ns.Bldr_data(), prv_row_len);							// get html_db

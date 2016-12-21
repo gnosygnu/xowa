@@ -37,6 +37,7 @@ class Xowh_portal_mgr_fxt {
 			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 			wiki.Ns_mgr().Ns_main().Exists_(true);	// needed for ns
 			wiki.Html_mgr().Portal_mgr().Init_assert();	// needed for personal
+			wiki.Html_mgr().Portal_mgr().Missing_ns_cls_(Bry_.new_a7("xowa_display_none"));
 		}
 	}	private Xoae_app app; Xowe_wiki wiki;
 	public void Test_div_ns_bry(String ttl, String expd) {

@@ -55,6 +55,9 @@ public class Score_xtn_mgr extends Xox_mgr_base {
 		,	"    }"
 		,	"  }"
 		,	"}"), "version", "code");
+	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
+		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__enabled);
+	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_html_img))			return html_img.Fmt();
 		else if	(ctx.Match(k, Invk_html_img_))			html_img.Fmt_(m.ReadBry("v"));
@@ -62,9 +65,11 @@ public class Score_xtn_mgr extends Xox_mgr_base {
 		else if	(ctx.Match(k, Invk_html_txt_))			html_txt.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_lilypond_fmt))		return lilypond_fmtr.Fmt();
 		else if	(ctx.Match(k, Invk_lilypond_fmt_))		lilypond_fmtr.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Cfg__enabled))			Enabled_(m.ReadYn("v"));
 		else											return super.Invk(ctx, ikey, k, m);
 		return this;
 	}
 	private static final String Invk_html_img = "html_img", Invk_html_img_ = "html_img_", Invk_html_txt = "html_txt", Invk_html_txt_ = "html_txt_", Invk_lilypond_fmt = "lilypond_fmt", Invk_lilypond_fmt_ = "lilypond_fmt_";
+	private static final String Cfg__enabled = "xowa.addon.score.enabled";
 	public static byte[] Lilypond_version = null;
 }

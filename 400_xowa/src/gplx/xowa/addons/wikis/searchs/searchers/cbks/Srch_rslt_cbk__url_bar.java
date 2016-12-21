@@ -22,13 +22,13 @@ import gplx.xowa.apps.apis.xowa.addons.searchs.*;
 public class Srch_rslt_cbk__url_bar implements Srch_rslt_cbk, Gfo_invk {
 	private final    Xoae_app app;
 	private final    GfuiComboBox url_bar;
-	private final    Xoapi_url_bar url_bar_api;
 	private String[] cbo_ary;
 	private boolean rslts_finished;
 	private int rslts_in_this_pass;
 	private boolean rslts_shown = false;
-	public Srch_rslt_cbk__url_bar(Xoae_app app, GfuiComboBox url_bar, Xoapi_url_bar url_bar_api) {
-		this.app = app; this.url_bar = url_bar; this.url_bar_api = url_bar_api;
+	private int max_results;
+	public Srch_rslt_cbk__url_bar(Xoae_app app, GfuiComboBox url_bar, int max_results) {
+		this.app = app; this.url_bar = url_bar; this.max_results = max_results;
 	}
 	public void On_cancel() {}
 	public void On_rslts_found(Srch_search_qry qry, Srch_rslt_list rslts_list, int rslts_bgn, int rslts_end) {
@@ -41,8 +41,7 @@ public class Srch_rslt_cbk__url_bar implements Srch_rslt_cbk, Gfo_invk {
 			&&	rslts_bgn != 0				// if first one, still update; blanks out results from previous try;
 			&&	!rslts_finished)			// if rslts_finished, still update to force cbo to "shrink"
 			return;							// exit now else will "blink" when refreshing;
-		int max_rslts = url_bar_api.Max_results();
-		int cbo_len = max_rslts;			// force cbo_len to be max_rslts; reduces "blinking" when typing by keeping visible area to same size
+		int cbo_len = max_results;			// force cbo_len to be max_rslts; reduces "blinking" when typing by keeping visible area to same size
 		if (rslts_list.Rslts_are_done) {	// "shrink" cbo_len to rslts_len; EX: 10 wanted; 2 returned; shrink to 2 rows;
 			cbo_len = rslts_len;
 		}
@@ -51,7 +50,7 @@ public class Srch_rslt_cbk__url_bar implements Srch_rslt_cbk, Gfo_invk {
 		this.cbo_ary = new String[cbo_len];
 		for (int i = 0; i < cbo_len; ++i) {
 			String cbo_itm = "";
-			if (i >= max_rslts) break;
+			if (i >= max_results) break;
 			if (i < rslts_len) {
 				Srch_rslt_row rslt = rslts_list.Get_at(i);
 				cbo_itm = String_.new_u8(rslt.Page_ttl_display(Bool_.N));

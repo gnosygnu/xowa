@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.wikis.searchs.gui.urlbars.*; import gplx.xowa.addons.wikis.searchs.gui.htmlbars.*; import gplx.xowa.addons.wikis.searchs.specials.*;
 public class Xoax_addon_mgr {
 	private final    Ordered_hash hash = Ordered_hash_.New(); // LOCK: must synchronized else two search tabs will fail on startup
 	public Xoax_addon_itm	Itms__get_or_null(String key) {synchronized (hash) {return (Xoax_addon_itm)hash.Get_by(key);}}
@@ -29,6 +30,15 @@ public class Xoax_addon_mgr {
 			hash.Add(addon_key, itm);
 			// Xoa_app_.Usr_dlg().Log_many("", "", "addons.init: ~{0}", addon_key);
 		}
+	}
+	// HACK: should make separate generic app-level container
+	public Srch_urlbar_mgr Itms__search__urlbar()	{return itms__search__urlbar;} private final    Srch_urlbar_mgr itms__search__urlbar = new Srch_urlbar_mgr();
+	public Srch_htmlbar_mgr Itms__search__htmlbar()	{return itms__search__htmlbar;} private final    Srch_htmlbar_mgr itms__search__htmlbar = new Srch_htmlbar_mgr();
+	public Srch_special_cfg Itms__search__special()	{return itms__search__special;} private final    Srch_special_cfg itms__search__special = new Srch_special_cfg();
+	public void Init_by_kit(Xoae_app app, gplx.gfui.kits.core.Gfui_kit kit) {
+		itms__search__urlbar.Init_by_kit(app, kit);
+		itms__search__htmlbar.Init_by_kit(app, kit);
+		itms__search__special.Init_by_kit(app, kit);
 	}
 	public Xoax_addon_mgr Add_dflts_by_app(Xoa_app app) {
 		app.Bldr().Cmd_regy().Add_many
