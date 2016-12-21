@@ -51,6 +51,8 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		this.val = val;
 		this.date = date;
 		this.edited = true;
+		if (String_.Has(gui_args, "read"+"only=") || String_.Has(gui_args, "disabled="))
+			edited = false;
 	}
 	public void Set_data_by_dflt() {
 		this.ctx = Xocfg_mgr.Ctx__app;
