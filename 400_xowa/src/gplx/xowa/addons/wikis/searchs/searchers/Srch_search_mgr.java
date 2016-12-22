@@ -31,7 +31,7 @@ public class Srch_search_mgr {
 	private int search_count;
 	public Srch_search_mgr(Srch_search_addon addon, Xow_wiki wiki, Srch_text_parser parser) {
 		this.addon = addon; this.wiki = wiki;
-		crt_parser = new Srch_crt_parser(Scanner_syms);
+		crt_parser = new Srch_crt_parser(Srch_crt_scanner_syms.Dflt);	// NOTE: hard-coded to dflt; should change to use qry.Phrase.Syms, but requires more work
 		
 		// init cur_cmds with Noop cmd to make cancel logic below easier
 		int len = Srch_search_qry.Tid_len;
@@ -70,7 +70,7 @@ public class Srch_search_mgr {
 	public void Search_async(Cancelable cxl, Srch_search_qry qry, Srch_crt_mgr crt_mgr, Srch_rslt_cbk rslt_cbk, Srch_rslt_list rslts_list) {
 		synchronized (mutex) {	// force only one search at a time; do not (a) place around Thread_sleep; (b) reuse for any other locks
 			if (++search_count > 64) this.Clear();	// lazy way of clearing memory
-			Srch_search_ctx ctx = new Srch_search_ctx(cxl, wiki, addon, cache__page, cache__word_counts, qry, Scanner_syms, crt_mgr, rslts_list);
+			Srch_search_ctx ctx = new Srch_search_ctx(cxl, wiki, addon, cache__page, cache__word_counts, qry, qry.Phrase.Syms, crt_mgr, rslts_list);
 			ctx.Score_rng.Select_init(ctx.Rslts_needed, rslts_list.Score_bgn, rslts_list.Score_len, Srch_link_wkr.Percentile_rng__calc_adj(crt_mgr.Words_nth__len()));
 			page_tbl_searcher.Search(ctx, rslt_cbk);
 			if (cxl.Canceled()) return;
@@ -85,5 +85,4 @@ public class Srch_search_mgr {
 		cache__word_counts.Clear();
 		cache__rslts.Clear();
 	}
-	public static final    Srch_crt_scanner_syms Scanner_syms = Srch_crt_scanner_syms.Dflt;
 }

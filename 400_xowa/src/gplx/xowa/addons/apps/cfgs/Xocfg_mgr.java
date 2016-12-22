@@ -31,25 +31,22 @@ public class Xocfg_mgr {
 		, app.User().User_db_mgr().Conn());
 		dflt_mgr.Init_by_app(app);
 	}
-	public void Bind_many_app	(Gfo_invk sub, String... keys) {Bind_many(sub, Xocfg_mgr.Ctx__app, keys);}
-	public void Bind_many_wiki	(Gfo_invk sub, Xow_wiki wiki, String... keys) {Bind_many(sub, wiki.Domain_itm().Abrv_xo_str(), keys);}
-	public void Bind_many(Gfo_invk sub, String ctx, String... keys) {
+	public void Sub_many_app	(Gfo_invk sub, String... keys)					{Bind_many(Bool_.N, sub, Xocfg_mgr.Ctx__app, keys);}
+	public void Bind_many_app	(Gfo_invk sub, String... keys)					{Bind_many(Bool_.Y, sub, Xocfg_mgr.Ctx__app, keys);}
+	public void Bind_many_wiki	(Gfo_invk sub, Xow_wiki wiki, String... keys)		{Bind_many(Bool_.Y, sub, wiki.Domain_itm().Abrv_xo_str(), keys);}
+	private void Bind_many(boolean pub, Gfo_invk sub, String ctx, String... keys) {
 		try {
 			for (String key : keys) {
-				String val = Bind_str(ctx, key, sub);
-				cache_mgr.Pub(ctx, key, val);
+				cache_mgr.Sub(sub, ctx, key, key);
+				if (pub) {
+					String val = cache_mgr.Get(ctx, key);
+					cache_mgr.Pub(ctx, key, val);
+				}
 			}
 		}
 		catch (Exception e) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "bind failed: ctx=~{0} keys=~{1} err=~{2}", ctx, String_.AryXtoStr(keys), Err_.Message_gplx_log(e));
 		}
-	}
-	public boolean Bind_bool_app(String key, Gfo_invk sub)					{return Yn.parse_or(Bind_str(Xocfg_mgr.Ctx__app, key, sub), false);}
-	public boolean Bind_bool(Xow_wiki wiki, String key, Gfo_invk sub)		{return Yn.parse_or(Bind_str(wiki, key, sub), false);}
-	public String Bind_str(Xow_wiki wiki, String key, Gfo_invk sub)		{return Bind_str(wiki.Domain_itm().Abrv_xo_str(), key, sub);}
-	public String Bind_str(String ctx, String key, Gfo_invk sub) {
-		cache_mgr.Sub(sub, ctx, key, key);
-		return cache_mgr.Get(ctx, key);
 	}
 	public boolean Get_bool_app_or(String key, boolean or) {
 		String rv = Get_str(Ctx__app, key);

@@ -32,7 +32,7 @@ public class Xop_section_mgr implements Gfo_invk {
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		this.app = wiki.Appe();
 		this.wiki = wiki;
-		this.enabled = wiki.App().Cfg().Bind_bool(wiki, Cfg__section_editing__enabled, this);
+		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__section_editing__enabled);
 		this.tidy_mgr = wiki.Html_mgr().Tidy_mgr();
 	}
 	public byte[] Slice_section(Xoa_url url, Xoa_ttl ttl, byte[] src) {

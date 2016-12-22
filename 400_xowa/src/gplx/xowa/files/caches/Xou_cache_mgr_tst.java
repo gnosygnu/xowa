@@ -59,6 +59,7 @@ public class Xou_cache_mgr_tst {
 }
 class Xou_cache_mgr_fxt {
 	private Xou_cache_mgr mgr;
+	private long cache_min;
 	public void Clear() {
 		Datetime_now.Manual_(DateAdp_.new_(1970, 1, 1, 0, 0, 0, 0));
 		Io_mgr.Instance.InitEngine_mem();
@@ -70,8 +71,8 @@ class Xou_cache_mgr_fxt {
 		this.mgr = new Xou_cache_mgr(app.Wiki_mgr(), app.Fsys_mgr().File_dir(), app.User().User_db_mgr().Db_file());
 	}
 	public void Init_delete(long min, long max) {
-		mgr.Fsys_size_min_(min);
-		mgr.Fsys_size_max_(max);
+		cache_min = min;
+		mgr.Fsys_size_(min, max);
 	}
 	public Xof_fsdb_itm Make_itm(String wiki, String file, int size) {
 		Xof_fsdb_itm rv = new Xof_fsdb_itm();
@@ -91,7 +92,7 @@ class Xou_cache_mgr_fxt {
 		mgr.Clear();
 	}
 	public void Exec_reduce() {
-		mgr.Reduce(mgr.Fsys_size_min());
+		mgr.Reduce(cache_min);
 	}
 	public void Test_get(Xof_fsdb_itm fsdb, int expd_view_count, long expd_view_date) {
 		Xou_cache_itm cache = mgr.Get_or_null(fsdb);

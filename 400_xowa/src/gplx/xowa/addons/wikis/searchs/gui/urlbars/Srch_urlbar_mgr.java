@@ -28,7 +28,7 @@ public class Srch_urlbar_mgr implements Gfo_invk {	// NOTE: needs to be app-leve
 	private int max_results = 10;
 	private boolean auto_wildcard = true;
 	private final    Srch_ns_mgr ns_mgr = new Srch_ns_mgr().Add_main_if_empty();
-	private Srch_crt_scanner_syms syms = Srch_search_mgr.Scanner_syms;
+	private Srch_crt_scanner_syms syms = Srch_crt_scanner_syms.New__dflt();
 	private void Ns_ids_(String s) {
 		int[] ns_ids = Int_.Ary_empty;
 		if (String_.Eq(s, "*")) {}	// leave as int[0]; ns_mgr will interpret as wildcard
@@ -76,7 +76,7 @@ public class Srch_urlbar_mgr implements Gfo_invk {	// NOTE: needs to be app-leve
 		url_bar.List_sel_idx_(0);	// clear selected list item; EX: search "a" -> page down; sel is row #5 -> search "b" -> sel should not be #5; DATE:2016-03-24
 		if (!url_bar.List_visible()) url_bar.Items__size_to_fit(max_results);	// resize offscreen; handles 1st search when dropdown flashes briefly in middle of screen before being moved under bar; DATE:2016-03-24
 
-		Srch_search_qry qry = Srch_search_qry.New__url_bar(wiki, ns_mgr, auto_wildcard, max_results, Bry_.new_u8(search_str));
+		Srch_search_qry qry = Srch_search_qry.New__url_bar(wiki, ns_mgr, syms, auto_wildcard, max_results, Bry_.new_u8(search_str));
 		Srch_rslt_cbk__url_bar cbk = new Srch_rslt_cbk__url_bar(app, url_bar, max_results);
 		Xoa_app_.Usr_dlg().Prog_one("", "", "searching (please wait): ~{0}", search_str);
 		addon.Search(qry, cbk);
@@ -93,12 +93,12 @@ public class Srch_urlbar_mgr implements Gfo_invk {	// NOTE: needs to be app-leve
 		return this;
 	}
 	private static final String
-	  Cfg__enabled				= "xowa.addon.search.url_bar.enabled"
-	, Cfg__max_results			= "xowa.addon.search.url_bar.max_results"
-	, Cfg__auto_wildcard		= "xowa.addon.search.url_bar.auto_wildcard"
-	, Cfg__ns_ids				= "xowa.addon.search.url_bar.ns_ids"
-	, Cfg__symbols				= "xowa.addon.search.url_bar.symbols"
-	, Cfg__visible_rows			= "xowa.addon.search.url_bar.visible_rows"
-	, Cfg__jump_len				= "xowa.addon.search.url_bar.jump_len"
+	  Cfg__enabled				= "xowa.gui.urlbar.search.enabled"
+	, Cfg__max_results			= "xowa.gui.urlbar.search.max_results"
+	, Cfg__auto_wildcard		= "xowa.gui.urlbar.search.auto_wildcard"
+	, Cfg__ns_ids				= "xowa.gui.urlbar.search.ns_ids"
+	, Cfg__symbols				= "xowa.gui.urlbar.search.symbols"
+	, Cfg__visible_rows			= "xowa.gui.urlbar.search.visible_rows"
+	, Cfg__jump_len				= "xowa.gui.urlbar.search.jump_len"
 	;
 }

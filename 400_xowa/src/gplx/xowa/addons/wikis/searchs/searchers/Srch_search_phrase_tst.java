@@ -34,13 +34,15 @@ public class Srch_search_phrase_tst {
 	@Test   public void Escape() 					{fxt.Test__auto_wildcard("\\*"		, "\\**");}
 	@Test   public void Escape__incomplete() 		{fxt.Test__auto_wildcard("a\\"		, "a\\");}
 	@Test   public void Escape__escaped() 			{fxt.Test__auto_wildcard("a\\\\"	, "a\\\\*");}
+	@Test   public void Auto_wildcard_n() 			{fxt.Init__auto_wildcard_n_().Test__auto_wildcard("a", "a");}
 }
 class Srch_search_phrase_fxt {
 	private final    Srch_crt_scanner_syms syms = Srch_crt_scanner_syms.Dflt;
-	public Srch_search_phrase_fxt() {}
+	private boolean auto_wildcard = true;
+	public Srch_search_phrase_fxt Init__auto_wildcard_n_() {this.auto_wildcard = false; return this;}
 	public void Test__auto_wildcard(String src_str, String expd) {
 		byte[] src_raw = Bry_.new_u8(src_str);
-		byte[] actl = Srch_search_phrase.Auto_wildcard(src_raw, syms);
+		byte[] actl = Srch_search_phrase.Auto_wildcard(src_raw, auto_wildcard, syms);
 		Tfds.Eq(expd, String_.new_u8(actl));
 	}
 }

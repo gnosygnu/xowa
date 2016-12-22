@@ -92,11 +92,13 @@ public class Srch_crt_scanner_syms {
 		if (b == Byte_ascii.Null) return;
 		rv.Add_bry_byte(b, tid);
 	}
-	public static final    Srch_crt_scanner_syms Dflt =
-		new Srch_crt_scanner_syms
+	public static Srch_crt_scanner_syms New__dflt() {
+		return new Srch_crt_scanner_syms
 		( Byte_ascii.Backslash, Byte_ascii.Space, Byte_ascii.Quote, Byte_ascii.Dash, Byte_ascii.Plus, Byte_ascii.Comma
 		, Byte_ascii.Paren_bgn, Byte_ascii.Paren_end, Byte_ascii.Star
 		);
+	}
+	public static final    Srch_crt_scanner_syms Dflt = New__dflt();
 	private static byte Parse__val(byte[] line, int val_bgn, int line_len) {
 		if (line_len - val_bgn == 1) return line[val_bgn];
 		if (	line_len - val_bgn == 2

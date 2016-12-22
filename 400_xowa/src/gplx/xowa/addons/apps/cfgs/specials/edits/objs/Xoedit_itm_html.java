@@ -69,7 +69,7 @@ public class Xoedit_itm_html {
 				, gui_type_key, gui_args, key, lines[1]);
 				break;
 			case Xoitm_gui_tid.Tid__btn:
-				bfr.Add_str_u8_fmt("<input id=\"{2}\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}\" class=\"xocfg__btn\" type=\"button\"{1}{3}></input>", gui_type_key, gui_args, key, key);
+				bfr.Add_str_u8_fmt("<button id=\"{2}\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}\" class=\"xocfg__btn\" {1}>{3}</button>", gui_type_key, gui_args, key, name);
 				break;
 			default:
 				break;

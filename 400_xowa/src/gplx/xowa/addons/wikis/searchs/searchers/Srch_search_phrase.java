@@ -19,27 +19,29 @@ package gplx.xowa.addons.wikis.searchs.searchers; import gplx.*; import gplx.xow
 import gplx.core.btries.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 public class Srch_search_phrase {
-	public Srch_search_phrase(boolean wildcard, byte[] orig, byte[] compiled) {
+	public Srch_search_phrase(boolean wildcard, byte[] orig, byte[] compiled, Srch_crt_scanner_syms syms) {
 		this.Orig = orig;
 		this.Compiled = compiled;
 		this.Wildcard = wildcard;
+		this.Syms = syms;
 	}
 	public final    boolean   Wildcard;
 	public final    byte[] Orig;			// EX: "Earth"
 	public final    byte[] Compiled;		// EX: "earth*"
+	public final    Srch_crt_scanner_syms Syms;
 
-	public static Srch_search_phrase New(gplx.xowa.langs.cases.Xol_case_mgr case_mgr, byte[] orig, boolean wildcard) {
+	public static Srch_search_phrase New(gplx.xowa.langs.cases.Xol_case_mgr case_mgr, Srch_crt_scanner_syms syms, boolean auto_wildcard, byte[] orig) {
 		int orig_len = orig.length;
 		if (	orig_len > 0	// if "*" at end, remove and change to wildcard; needed for Special:Search which will send in "earth*" but "earth" needed for highlighting
-			&&	orig[orig_len - 1] == Srch_crt_scanner_syms.Dflt.Wild()) {
+			&&	orig[orig_len - 1] == syms.Wild()) {
 			orig = Bry_.Mid(orig, 0, orig_len - 1);
-			wildcard = true;
+			auto_wildcard = true;
 		}
 		byte[] lcase = case_mgr.Case_build_lower(orig);
-		lcase = Auto_wildcard(lcase, Srch_crt_scanner_syms.Dflt);
-		return new Srch_search_phrase(wildcard, orig, lcase);
+		lcase = Auto_wildcard(lcase, auto_wildcard, syms);
+		return new Srch_search_phrase(auto_wildcard, orig, lcase, syms);
 	}
-	public static byte[] Auto_wildcard(byte[] raw, Srch_crt_scanner_syms syms) {
+	public static byte[] Auto_wildcard(byte[] raw, boolean auto_wildcard, Srch_crt_scanner_syms syms) {
 		Btrie_slim_mgr trie = syms.Trie();
 		int raw_len = raw.length;
 		int insert_pos = -1;
@@ -118,7 +120,8 @@ public class Srch_search_phrase {
 		}
 
 		// add wildcard
-		if (insert_pos == raw_len - 1) return Bry_.Add(raw, syms.Wild());
+		if (insert_pos == raw_len - 1) 
+			return auto_wildcard ? Bry_.Add(raw, syms.Wild()) : raw;
 		else {
 			byte[] rv = new byte[raw_len + 1];
 			int wildcard_pos = insert_pos + 1;
