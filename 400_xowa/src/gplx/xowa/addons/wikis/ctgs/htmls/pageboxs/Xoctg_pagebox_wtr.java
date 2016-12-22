@@ -41,37 +41,27 @@ public class Xoctg_pagebox_wtr implements Gfo_invk {
 		}
 	}
 	public Xoctg_pagebox_itm[] Get_catlinks_by_page(Xow_wiki wiki, Xoa_page page) {
-		int wtxt_ctgs_len = page.Wtxt().Ctgs__len();
-		// html_dbs will always be 0 since they do not parse ctgs; note that wtxt_dbs can also have 0 if no ctgs
-		if (wtxt_ctgs_len == 0) {
-			// init
-			Xoctg_pagebox_loader select_cbk = new Xoctg_pagebox_loader(hash, page.Url_bry_safe());
+		// NOTE: db load is necessary b/c page.Wtxt().Ctgs__len() is insufficient
+		// html_dbs will always be 0 since they do not parse ctgs;
+		// wtxt_dbs may have page.Wtxt().Ctgs__len() > 0 but these items don't have Id / Hidden
+		Xoctg_pagebox_loader select_cbk = new Xoctg_pagebox_loader(hash, page.Url_bry_safe());
 
-			// get cat_db_id from page
-			boolean exists = wiki.Data__core_mgr().Tbl__page().Select_by_ttl(tmp_page_itm, page.Ttl().Ns(), page.Ttl().Page_db());
-			int cat_db_id = tmp_page_itm.Cat_db_id();
-			if (exists && cat_db_id != -1) {// note that wtxt_dbs can have 0 ctgs but will have cat_db_id == -1
-				Xow_db_file cat_link_db = wiki.Data__core_mgr().Dbs__get_by_id_or_null(cat_db_id);
-				if (cat_link_db != null && Io_mgr.Instance.ExistsFil(cat_link_db.Url())) { // make sure cat_db_id exists
-					select_cbk.Select_catlinks_by_page(wiki, cat_link_db.Conn(), hash, tmp_page_itm.Id());
-				}
-			}
-
-			// get hidden
-			int hash_len = hash.Len();
-			if (hash_len > 0) {	// note that html_dbs may have 0 ctgs in cat_db; don't bother checking cat_core
-				Xowd_cat_core_tbl cat_core_tbl = Xodb_cat_db_.Get_cat_core_or_fail(wiki.Data__core_mgr());
-				cat_core_tbl.Select_by_cat_id_many(select_cbk);
-			}
-		}
-		// wtxt_dbs will always have itms; 
-		else {
-			for (int i = 0; i < wtxt_ctgs_len; ++i) {
-				Xoa_ttl ttl = page.Wtxt().Ctgs__get_at(i);
-				hash.Add_by_ttl(ttl);
+		// get cat_db_id from page
+		boolean exists = wiki.Data__core_mgr().Tbl__page().Select_by_ttl(tmp_page_itm, page.Ttl().Ns(), page.Ttl().Page_db());
+		int cat_db_id = tmp_page_itm.Cat_db_id();
+		if (exists && cat_db_id != -1) {// note that wtxt_dbs can have 0 ctgs but will have cat_db_id == -1
+			Xow_db_file cat_link_db = wiki.Data__core_mgr().Dbs__get_by_id_or_null(cat_db_id);
+			if (cat_link_db != null && Io_mgr.Instance.ExistsFil(cat_link_db.Url())) { // make sure cat_db_id exists
+				select_cbk.Select_catlinks_by_page(wiki, cat_link_db.Conn(), hash, tmp_page_itm.Id());
 			}
 		}
 
+		// get hidden
+		int hash_len = hash.Len();
+		if (hash_len > 0) {	// note that html_dbs may have 0 ctgs in cat_db; don't bother checking cat_core
+			Xowd_cat_core_tbl cat_core_tbl = Xodb_cat_db_.Get_cat_core_or_fail(wiki.Data__core_mgr());
+			cat_core_tbl.Select_by_cat_id_many(select_cbk);
+		}
 		return hash.To_ary_and_clear();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
