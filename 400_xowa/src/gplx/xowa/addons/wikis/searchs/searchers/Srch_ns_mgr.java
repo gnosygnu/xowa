@@ -26,7 +26,7 @@ public class Srch_ns_mgr {
 		ns_hash.Clear();
 		ns_all = ns_main = false;
 	}
-	public boolean Ns_main_only() {return ns_main;}
+	public boolean Ns_main_only() {return ns_main && !ns_all;}	// Ns_main_only is used by Searcher to only search main srch_link db
 	public boolean Has(int ns_id) {
 		return ns_all									// ns_all always returns true
 			|| ns_main && ns_id == Xow_ns_.Tid__main	// ns_main returns true if main_ns

@@ -30,7 +30,14 @@ public class Srch_special_page implements Xow_special_page {
 		// get args from urls while applying defaults from search_cfg
 		Srch_qarg_mgr qargs_mgr = new Srch_qarg_mgr(wiki.App().Addon_mgr().Itms__search__special().Ns_mgr());
 		qargs_mgr.Clear();
-		qargs_mgr.Parse(search_cfg.Args_default());
+
+		// parse args_default_str
+		String args_default_str = wiki.App().Cfg().Get_str_wiki_or(wiki, Srch_search_mgr.Cfg__args_default, "");
+		if (String_.Len_gt_0(args_default_str)) {
+			byte[] bry = Bry_.new_a7("http://x.org/a?" + args_default_str);
+			gplx.core.net.Gfo_url tmp_url = wiki.App().User().Wikii().Utl__url_parser().Url_parser().Parse(bry, 0, bry.length);
+			qargs_mgr.Parse(tmp_url.Qargs());
+		}
 		qargs_mgr.Parse(url.Qargs_ary());
 		qargs_mgr.Ns_mgr().Add_main_if_empty();
 

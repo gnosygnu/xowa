@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.wikis.searchs.searchers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
 import gplx.xowa.addons.wikis.searchs.searchers.rslts.*; import gplx.xowa.addons.wikis.searchs.searchers.wkrs.*; import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.visitors.*;
-public class Srch_search_mgr {
+import gplx.core.net.*; import gplx.core.net.qargs.*;
+public class Srch_search_mgr implements Gfo_invk {
 	private final    Srch_search_addon			addon;
 	private final    Xow_wiki					wiki;
 	private final    Srch_rslt_list				cache__page = new Srch_rslt_list();
@@ -38,6 +39,8 @@ public class Srch_search_mgr {
 		this.cur_cmds = new Srch_search_cmd[Srch_search_qry.Tid_len];
 		for (int i = 0; i < len; ++i)
 			cur_cmds[i] = Srch_search_cmd.Noop();
+
+		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__args_default);
 	}
 	public void Clear_rslts_cache() {cache__rslts.Clear();}
 	public void Search_cancel() {
@@ -85,4 +88,10 @@ public class Srch_search_mgr {
 		cache__word_counts.Clear();
 		cache__rslts.Clear();
 	}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, Cfg__args_default))		this.Clear_rslts_cache();	// NOTE: must clear cache after args_dflt changed
+		else	return Gfo_invk_.Rv_unhandled;
+		return this;
+	}
+	public static final String Cfg__args_default			= "xowa.addon.search.args_default";
 }
