@@ -28,7 +28,7 @@ class Xowb_json_dump_parser {
 		// init
 		Xoae_app app = bldr.App(); Gfo_usr_dlg usr_dlg = app.Usr_dlg(); 
 		Xowb_json_dump_db dump_db = new Xowb_json_dump_db(bldr, wiki);
-		Io_stream_unzip_mgr unzip_mgr = new Io_stream_unzip_mgr(app.Setup_mgr().Dump_mgr().Import_bz2_by_stdout(), app.Prog_mgr().App_decompress_bz2_by_stdout(), String_.Ary(".bz2", ".gz", ".zip"));
+		Io_stream_unzip_mgr unzip_mgr = new Io_stream_unzip_mgr(gplx.xowa.bldrs.installs.Xoi_dump_mgr.Import_bz2_by_stdout(app), app.Prog_mgr().App_decompress_bz2_by_stdout(), String_.Ary(".bz2", ".gz", ".zip"));
 
 		// open buffer from file
 		Io_stream_rdr stream = Io_stream_rdr_mgr.Get_rdr_or_null(json_dump_file, wiki.Fsys_mgr().Root_dir(), unzip_mgr, "*wikidata-*-all.json", "*wikidata-*-all.json.gz");

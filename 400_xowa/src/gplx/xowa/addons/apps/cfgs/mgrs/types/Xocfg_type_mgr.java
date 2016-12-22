@@ -23,7 +23,7 @@ public class Xocfg_type_mgr {
 		this.Lists__add("list:xowa.app.startup.window.mode", "previous", "maximized", "absolute", "relative", "default");
 		this.Lists__add("list:xowa.app.startup.pages.type", "blank", "xowa", "previous", "custom");
 		this.Lists__add("list:xowa.gui.window.html_box.adj_type", "none", "relative", "absolute");
-		this.Lists__add("list:xowa.wiki.database.zip_mode", "text", "gzip", "bzip2", "xz");
+		this.Lists__add("list:xowa.wiki.database.zip_mode", Keyval_.new_("raw", "text"), Keyval_.new_("gzip"), Keyval_.new_("bzip2"), Keyval_.new_("xz"));
 		this.Lists__add("list:xowa.html.wiki.portal.missing_class", Keyval_.new_("", "Show as blue link"), Keyval_.new_("new", "Show as red link"), Keyval_.new_("xowa_display_none", "Hide"));
 		this.Lists__add("list:xowa.html.category.basic.missing_class", "normal", "hide", "red_link");
 		this.Lists__add("list:xowa.html.tidy.general.engine", "tidy", "jtidy");

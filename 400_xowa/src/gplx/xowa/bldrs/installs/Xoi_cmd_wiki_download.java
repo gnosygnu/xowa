@@ -33,12 +33,13 @@ class Xoi_cmd_wiki_download extends Gfo_thread_cmd_download implements Gfo_threa
 	@Override public byte Async_init() {
 		Xoae_app app = install_mgr.App();
 		Xowm_dump_file dump_file = new Xowm_dump_file(wiki_key, dump_date, dump_type);
-		boolean connected = Xowm_dump_file_.Connect_first(dump_file, install_mgr.Dump_mgr().Server_urls());
+		String[] server_urls = gplx.xowa.bldrs.installs.Xoi_dump_mgr.Server_urls(app);
+		boolean connected = Xowm_dump_file_.Connect_first(dump_file, server_urls);
 		if (connected)
 			app.Usr_dlg().Note_many("", "", "url: ~{0}", dump_file.File_url());
 		else {
 			if (!Dump_servers_offline_msg_shown) {
-				app.Gui_mgr().Kit().Ask_ok("", "", "all dump servers are offline: ~{0}", String_.AryXtoStr(install_mgr.Dump_mgr().Server_urls()));
+				app.Gui_mgr().Kit().Ask_ok("", "", "all dump servers are offline: ~{0}", String_.AryXtoStr(server_urls));
 				Dump_servers_offline_msg_shown = true;
 			}
 		}

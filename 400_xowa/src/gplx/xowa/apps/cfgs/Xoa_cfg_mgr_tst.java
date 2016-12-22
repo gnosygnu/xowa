@@ -19,16 +19,17 @@ package gplx.xowa.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import org.junit.*; import gplx.dbs.*;
 public class Xoa_cfg_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xoa_cfg_mgr_fxt fxt = new Xoa_cfg_mgr_fxt();
+	// DELETE: removed import_mgr off of wiki; only app level
 	@Test  public void Init() {
-		fxt.Init_cfg_all("import.db_text_max", "1000");
-		fxt.Test_init_wiki("simple.wikipedia.org", "import.db_text_max", "1000");
-		fxt.Test_cfg_itm("simple.wikipedia.org", "import.db_text_max", false, false);
+//			fxt.Init_cfg_all("import.db_text_max", "1000");
+//			fxt.Test_init_wiki("simple.wikipedia.org", "import.db_text_max", "1000");
+//			fxt.Test_cfg_itm("simple.wikipedia.org", "import.db_text_max", false, false);
 	}
 	@Test  public void Notify() {
-		fxt.Exec_make_wiki("simple.wikipedia.org");
-		fxt.Test_cfg_set("app.cfgs.get('import.db_text_max', 'simple.wikipedia.org').val = '2000';", "simple.wikipedia.org", "import.db_text_max", "2000");
-		fxt.Test_cfg_itm("simple.wikipedia.org", "import.db_text_max", true, true);
-		fxt.Test_save("app.cfgs.get('import.db_text_max', 'simple.wikipedia.org').val = '2000';\n");
+//			fxt.Exec_make_wiki("simple.wikipedia.org");
+//			fxt.Test_cfg_set("app.cfgs.get('import.db_text_max', 'simple.wikipedia.org').val = '2000';", "simple.wikipedia.org", "import.db_text_max", "2000");
+//			fxt.Test_cfg_itm("simple.wikipedia.org", "import.db_text_max", true, true);
+//			fxt.Test_save("app.cfgs.get('import.db_text_max', 'simple.wikipedia.org').val = '2000';\n");
 	}
 //		@Test  public void Notify_quote() {
 //			fxt.Test_cfg_set("app.cfgs.get('app.gui.html.css_xtn', 'app').val = 'a''b';", "*", "app.gui.html.css_xtn", "a'b");
@@ -36,8 +37,8 @@ public class Xoa_cfg_mgr_tst {
 //			fxt.Test_save("app.cfgs.get('app.gui.html.css_xtn', 'app').val = 'a''b';\n");
 //		}
 	@Test  public void Init_should_not_notify_if_app() {
-		fxt.Init_cfg_app("import.db_text_max", "1000");
-		fxt.Test_init_wiki("simple.wikipedia.org", "import.db_text_max", "3000");	// 3000 is default; itm shouldn't change b/c cfg is app level; DATE:2013-07-14
+//			fxt.Init_cfg_app("import.db_text_max", "1000");
+//			fxt.Test_init_wiki("simple.wikipedia.org", "import.db_text_max", "3000");	// 3000 is default; itm shouldn't change b/c cfg is app level; DATE:2013-07-14
 	}
 }
 class Xoa_cfg_mgr_fxt {

@@ -162,7 +162,6 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xow_sys_cfg			Sys_cfg() {return sys_cfg;} private Xow_sys_cfg sys_cfg;
 	public Xowc_parser			Cfg_parser() {return cfg_parser;} private Xowc_parser cfg_parser;
 	public boolean					Cfg_parser_lnki_xwiki_repos_enabled() {return cfg_parser_lnki_xwiki_repos_enabled;} public Xowe_wiki Cfg_parser_lnki_xwiki_repos_enabled_(boolean v) {cfg_parser_lnki_xwiki_repos_enabled = v; return this;} private boolean cfg_parser_lnki_xwiki_repos_enabled;
-	public Xoi_dump_mgr			Import_mgr() {return import_mgr;} private Xoi_dump_mgr import_mgr = new Xoi_dump_mgr();
 	public Xow_maint_mgr		Maint_mgr() {return maint_mgr;} private Xow_maint_mgr maint_mgr;
 	public void Clear_for_tests() {	// NOTE: these are structures that cache items for PERF; need to be cleared out for multiple test runs
 		file_mgr.Dbmeta_mgr().Clear();
@@ -236,7 +235,6 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		app.Addon_mgr().Load_by_wiki(this);
 		ctg_pagebox_wtr.Init_by_wiki(this);
 
-		import_mgr.Init_by_wiki(this);
 		file_mgr.Init_by_wiki(this);
 		page_mgr.Init_by_wiki(this);
 	}
@@ -275,7 +273,6 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		else if	(ctx.Match(k, Invk_app))				return app;
 		else if	(ctx.Match(k, Invk_db_mgr))				return db_mgr;
 		else if	(ctx.Match(k, Invk_db_mgr_to_sql_))		this.Db_mgr_create_as_sql();
-		else if	(ctx.Match(k, Invk_import_mgr))			return import_mgr;
 		else if	(ctx.Match(k, Invk_maint))				return maint_mgr;
 		else if	(ctx.Match(k, Invk_domain))				return domain_str;
 		else if	(ctx.Match(k, Invk_xtns))				return xtn_mgr;
@@ -291,7 +288,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	, Invk_special = "special"
 	, Invk_props = "props", Invk_parser = "parser"
 	, Invk_msgs = "msgs", Invk_app = "app", Invk_util = "util"
-	, Invk_xtns = "xtns", Invk_import_mgr = "import"
+	, Invk_xtns = "xtns"
 	, Invk_db_mgr_to_sql_ = "db_mgr_to_sql_"
 	, Invk_domain = "domain", Invk_maint = "maint", Invk_hdump_enabled_ = "hdump_enabled_"
 	, Invk_catpage_mgr = "catpage_mgr"

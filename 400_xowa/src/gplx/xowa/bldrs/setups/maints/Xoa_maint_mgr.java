@@ -38,7 +38,7 @@ public class Xoa_maint_mgr implements Gfo_invk {
 		Wmf_status_parse();
 	}
 	public boolean Wmf_status_download() {
-		String[] server_urls = app.Setup_mgr().Dump_mgr().Server_urls();
+		String[] server_urls = gplx.xowa.bldrs.installs.Xoi_dump_mgr.Server_urls(app);
 		int len = server_urls.length;
 		Xof_download_wkr download_wkr = app.Wmf_mgr().Download_wkr();
 		for (int i = 0; i < len; i++) {

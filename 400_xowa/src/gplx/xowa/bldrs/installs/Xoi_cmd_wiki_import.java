@@ -65,7 +65,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		wiki.Html_mgr().Page_wtr_mgr().Init_(true);
 		wiki.Init_assert();
 		if		(String_.Eq(src_url.Ext(), ".xml")) {
-			if (app.Setup_mgr().Dump_mgr().Delete_xml_file())
+			if (app.Cfg().Get_bool_app_or("xowa.wiki.import.delete_xml_file", true))		// CFG: Cfg__
 				Io_mgr.Instance.DeleteFil(src_url);
 		}
 		else if (String_.Eq(src_url.Ext(), ".bz2")) {
@@ -83,8 +83,8 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_init);
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_page);
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_css);	
-		if (wiki.Appe().Setup_mgr().Dump_mgr().Search_version() == gplx.xowa.addons.wikis.searchs.specials.Srch_special_page.Version_2)
-			gplx.xowa.addons.wikis.searchs.bldrs.Srch_bldr_mgr_.Setup(wiki);
+//			if (wiki.Appe().Setup_mgr().Dump_mgr().Search_version() == gplx.xowa.addons.wikis.searchs.specials.Srch_special_page.Version_2)
+		gplx.xowa.addons.wikis.searchs.bldrs.Srch_bldr_mgr_.Setup(wiki);
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_term);	
 
 		// setup category

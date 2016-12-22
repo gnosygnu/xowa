@@ -24,11 +24,13 @@ public class Xoedit_itm_html {
 		if (String_.Len_gt_0(gui_args)) gui_args = " " + gui_args;
 		switch (Xoitm_gui_tid.To_uid(gui_type_key)) {
 			case Xoitm_gui_tid.Tid__bool:
-				// bfr.Add_str_u8_fmt("<input id=\"{2}\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__bool\" type=\"checkbox\"{1}{3}></input>", gui_type_key, gui_args, key, String_.Eq(val, "y") ? " checked=\"checked\"" : "");
+				bfr.Add_str_u8_fmt("<input id=\"{2}\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__bool\" type=\"checkbox\"{1}{3}></input>", gui_type_key, gui_args, key, String_.Eq(val, "y") ? " checked=\"checked\"" : "");
+				/*
 				String span_args = "";
 				if (String_.Has(gui_args, "disabled=\"disabled\""))
 					span_args = " class=\"xocfg__bool__disabled\"";
 				bfr.Add_str_u8_fmt("<label><input id=\"{2}\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__bool\" type=\"checkbox\"{1}{3}></input><span{4}></span></label>", gui_type_key, gui_args, key, String_.Eq(val, "y") ? " checked=\"checked\"" : "", span_args);
+				*/
 				break;
 			case Xoitm_gui_tid.Tid__int:
 				bfr.Add_str_u8_fmt("<input id=\"{2}\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__int\" type=\"text\"{1} value=\"{3}\"></input>", gui_type_key, gui_args, key, val);

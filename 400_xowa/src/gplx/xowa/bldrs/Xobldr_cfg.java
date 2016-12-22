@@ -36,7 +36,8 @@ public class Xobldr_cfg {
 	public static long Max_size__html(Xoa_app app) {return Max_size(app, Cfg__max_size__html);}
 	public static long Max_size__file(Xoa_app app) {return Max_size(app, Cfg__max_size__file);}
 	private static long Max_size(Xoa_app app, String key) {
-		return app.Cfg().Get_long_app_or(key, Io_size_.To_long_by_int_mb(1500));
+		long rv = app.Cfg().Get_long_app_or(key, Io_size_.To_long_by_int_mb(1500));
+		return rv * Io_mgr.Len_mb;
 	}
 	public static byte[] New_ns_file_map(long dump_file_size) {
 		return dump_file_size < layout_text_max 

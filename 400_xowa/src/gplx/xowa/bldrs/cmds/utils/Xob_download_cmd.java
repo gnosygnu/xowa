@@ -31,7 +31,7 @@ public class Xob_download_cmd extends Xob_cmd__base implements Xob_cmd {
 		if (!gplx.core.ios.IoEngine_system.Web_access_enabled) return;
 		Xowm_dump_file dump_file = new Xowm_dump_file(wiki.Domain_str(), dump_date, dump_type);
 		if (dump_src == null) {
-			dump_file.Server_url_(app.Setup_mgr().Dump_mgr().Server_urls()[0]);
+			dump_file.Server_url_(gplx.xowa.bldrs.installs.Xoi_dump_mgr.Server_urls(app)[0]);
 			dump_src = dump_file.File_url();
 		}
 		if (dump_trg_zip == null)

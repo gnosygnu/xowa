@@ -87,7 +87,9 @@ public class Xoi_cmd_mgr implements Gfo_invk {
 		return cmd;	// return last cmd
 	}
 	public Gfo_thread_cmd Dump_add_many_custom(String wiki_key, String wiki_date, String dump_type, boolean dumpfile_cmd) {
-		String[] custom_cmds = app.Setup_mgr().Dump_mgr().Custom_cmds();
+		String[] custom_cmds = (app.Cfg().Get_bool_app_or("xowa.wiki.import.unzip_bz2_file", false)) // CFG: Cfg__
+			? String_.Ary(Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_unzip.KEY_dump, Xoi_cmd_wiki_import.KEY)
+			: String_.Ary(Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_import.KEY);
 		int custom_cmds_len = custom_cmds.length;
 		Gfo_thread_cmd cmd = null;
 		for (int j = 0; j < custom_cmds_len; j++) {
@@ -110,14 +112,12 @@ public class Xoi_cmd_mgr implements Gfo_invk {
 		if		(String_.Eq(cmd_key, Xoi_cmd_wiki_download.Key_wiki_download))			return new Xoi_cmd_wiki_download().Ctor_download_(install_mgr, wiki_key, wiki_date, dump_type).Owner_(this);
 		else if	(String_.Eq(cmd_key, Xoi_cmd_wiki_unzip.KEY_dump))						return new Xoi_cmd_wiki_unzip(install_mgr, wiki_key, wiki_date, dump_type).Owner_(this);
 		else if	(String_.Eq(cmd_key, Xoi_cmd_wiki_import.KEY))							return new Xoi_cmd_wiki_import(install_mgr, wiki_key, wiki_date, dump_type).Owner_(this);
-		else if	(String_.Eq(cmd_key, Xoi_cmd_wiki_zip.KEY))								return new Xoi_cmd_wiki_zip(install_mgr, wiki_key, wiki_date, dump_type).Owner_(this);
 		else if	(String_.Eq(cmd_key, Xoi_cmd_category2_build.KEY))						return new Xoi_cmd_category2_build(install_mgr, wiki_key).Owner_(this);
 		else if	(String_.Eq(cmd_key, Xoi_cmd_category2_page_props.KEY_category2))		return new Xoi_cmd_category2_page_props(install_mgr, wiki_key, wiki_date).Owner_(this);
 		else if	(String_.Eq(cmd_key, Xoi_cmd_category2_categorylinks.KEY_category2))	return new Xoi_cmd_category2_categorylinks(install_mgr, wiki_key, wiki_date).Owner_(this);
 		else if	(String_.Eq(cmd_key, Xoi_cmd_search2_build.KEY))						return new Xoi_cmd_search2_build(install_mgr, wiki_key).Owner_(this);
 		else																			throw Err_.new_unhandled(cmd_key);
 	}
-	public static final    String[] Wiki_cmds_valid = new String[] {Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_unzip.KEY_dump, Xoi_cmd_wiki_import.KEY, Xoi_cmd_wiki_zip.KEY, Xoi_cmd_category2_build.KEY, Xoi_cmd_category2_page_props.KEY_category2, Xoi_cmd_category2_categorylinks.KEY_category2};
 	public static final    String Wiki_cmd_custom = "wiki.custom", Wiki_cmd_dump_file = "wiki.dump_file";
 	public Gfo_thread_cmd Cmd_add(GfoMsg m) {Gfo_thread_cmd rv = Cmd_clone(m); cmds.Add(rv); return rv;}
 	Gfo_thread_cmd Cmd_clone(GfoMsg m) {
@@ -128,12 +128,11 @@ public class Xoi_cmd_mgr implements Gfo_invk {
 		else if	(String_.Eq(cmd_key, Xoi_cmd_wiki_image_cfg.KEY_dump))					return new Xoi_cmd_wiki_image_cfg(app, Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("fil"))).Owner_(this);
 		else if	(String_.Eq(cmd_key, Xoi_cmd_wiki_goto_page.KEY))						return new Xoi_cmd_wiki_goto_page(app, m.ReadStr("v")).Owner_(this);
 		else if	(String_.Eq(cmd_key, Xoi_cmd_msg_ok.KEY))								return new Xoi_cmd_msg_ok(app.Usr_dlg(), app.Gui_mgr().Kit(), m.ReadStr("v")).Owner_(this);
-//			else if	(String_.Eq(cmd_key, Gfo_thread_exec_sync.KEY))							return new Gfo_thread_exec_sync(app.Usr_dlg(), app.Gui_mgr().Kit(), Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("url")), m.ReadStr("args")).Owner_(this);
 		else if	(String_.Eq(cmd_key, Xoi_cmd_imageMagick_download.KEY_imageMagick))		return new Xoi_cmd_imageMagick_download(app.Usr_dlg(), app.Gui_mgr().Kit(), Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("trg"))).Owner_(this);
 		else if	(String_.Eq(cmd_key, Wiki_cmd_dump_file))								return Wiki_cmd_dump_file_make(m);
 		else																			throw Err_.new_unhandled(cmd_key);
 	}
-	Gfo_thread_cmd Wiki_cmd_dump_file_make(GfoMsg m) {
+	Gfo_thread_cmd Wiki_cmd_dump_file_make(GfoMsg m) {	// note: might be used directly in home-wiki pages to download files
 		Xoi_cmd_dumpfile dumpfile = new Xoi_cmd_dumpfile().Parse_msg(m);
 		return dumpfile.Exec(this);
 	}

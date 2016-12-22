@@ -67,6 +67,10 @@ public class Xocfg_mgr {
 		String rv = cache_mgr.Get_or(Ctx__app, key, null);
 		return rv == null ? or : Long_.parse_or(rv, or);
 	}
+	public String[] Get_strary_app_or(String key, String dlm, String... or) {
+		String rv = cache_mgr.Get_or(Ctx__app, key, null);
+		return rv == null ? or : String_.Ary_parse(String_.Trim(rv), dlm);
+	}
 	public String Get_str_app_or(String key, String or) {return cache_mgr.Get_or(Ctx__app, key, or);}
 	public String Get_str_app(String key) {return Get_str(Xocfg_mgr.Ctx__app, key);}
 	public boolean Get_bool_or(String ctx, String key, boolean or) {

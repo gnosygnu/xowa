@@ -95,7 +95,6 @@ public class Xob_fxt {
 		tst_fils(wkr.Dump_url_gen().Prv_urls());
 		return this;
 	}
-	public Xob_fxt Run_page_title() {return Run(new gplx.xowa.bldrs.cmds.texts.tdbs.Xob_page_txt(bldr, wiki));}
 	public Xob_fxt Run(Xobd_parser_wkr... wkrs) {
 		Xobd_parser parser_wkr = new Xobd_parser(bldr);
 		int len = wkrs.length;

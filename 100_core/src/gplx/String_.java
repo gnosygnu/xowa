@@ -483,6 +483,7 @@ public class String_ {
 		if (rv == null && obj != null) throw Err_.new_type_mismatch(String.class, obj); // NOTE: obj != null needed; EX: cast(null) --> null
 		return rv;
 	}
+	public static String[] Ary_parse(String raw, String dlm) {return String_.Split(raw, dlm);}
 	public static String[] Ary(byte[]... ary) {
 		if (ary == null) return String_.Ary_empty;
 		int ary_len = ary.length;

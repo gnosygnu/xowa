@@ -46,7 +46,6 @@ public class Xob_cmd_keys {
 	, Key_tdb_text_wdata_qid		= "tdb.text.wdata.qid"
 	, Key_tdb_text_wdata_pid		= "tdb.text.wdata.pid"
 	, Key_exec_sql					= "import.sql.exec_sql"
-	, Key_deploy_zip				= "deploy.zip"
 	, Key_decompress_bz2			= "core.decompress_bz2"
 	;
 }
