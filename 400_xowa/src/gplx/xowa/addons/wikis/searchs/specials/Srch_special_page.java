@@ -41,11 +41,6 @@ public class Srch_special_page implements Xow_special_page {
 			qargs_mgr.Search_raw_(search_raw);
 		}
 		if (Bry_.Len_eq_0(search_raw)) return;		// emptry String; exit now, else null ref error; DATE:2015-08-11
-		if (	search_cfg.Auto_wildcard()			// add * automatically if option set
-			&&	wiki.Db_mgr().Tid() == gplx.xowa.wikis.dbs.Xodb_mgr_sql.Tid_sql	// only apply to sql
-			&&	Bry_find_.Find_fwd(search_raw, Srch_search_addon.Wildcard__star) == -1			// search term does not have asterisk
-			)
-			search_raw = Bry_.Add(search_raw, Srch_search_addon.Wildcard__star);
 
 		// get page directly from url
 		boolean fulltext_invoked = url.Qargs_mgr().Match(Qarg__fulltext, Qarg__fulltext__y);
@@ -65,7 +60,7 @@ public class Srch_special_page implements Xow_special_page {
 			}
 			page.Html_data().Html_restricted_n_();
 			page.Html_data().Xtn_search_text_(search_raw);
-			Srch_search_qry qry = Srch_search_qry.New__search_page(search_domain_ary, wiki, wiki.App().Addon_mgr().Itms__search__special().Ns_mgr(), qargs_mgr.Simple_search(), search_raw, qargs_mgr.Slab_idx(), search_cfg.Results_per_page());
+			Srch_search_qry qry = Srch_search_qry.New__search_page(search_domain_ary, wiki, wiki.App().Addon_mgr().Itms__search__special().Ns_mgr(), search_cfg.Auto_wildcard(), search_raw, qargs_mgr.Slab_idx(), search_cfg.Results_per_page());
 			search_mgr.Search(wiki, page, search_cfg.Async_db(), search_domain_ary, qry);
 		}
 		// page found; return it;

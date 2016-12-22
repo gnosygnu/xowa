@@ -37,7 +37,7 @@ public class Srch_htmlbar_mgr implements Gfo_invk {
 				addon = Srch_search_addon.Get(wiki);
 		}
 		// tab_close_mgr.Add(this);
-		Srch_search_qry qry = Srch_search_qry.New__suggest_box(wiki, wiki.App().Addon_mgr().Itms__search__special().Ns_mgr(), results_max, search_bry);
+		Srch_search_qry qry = Srch_search_qry.New__suggest_box(wiki, wiki.App().Addon_mgr().Itms__search__special().Ns_mgr(), wiki.App().Addon_mgr().Itms__search__special().Auto_wildcard(), results_max, search_bry);
 		Srch_rslt_cbk__suggest_box cbk = new Srch_rslt_cbk__suggest_box(wiki.Appe(), cbk_func, search_bry);
 		addon.Search(qry, cbk);
 	}

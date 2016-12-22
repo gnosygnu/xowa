@@ -37,14 +37,13 @@ public class Srch_search_qry {
 	public static Srch_search_qry New__url_bar(Xow_wiki wiki, Srch_ns_mgr ns_mgr, Srch_crt_scanner_syms syms, boolean auto_wildcard, int max_results, byte[] search_orig) {
 		return new Srch_search_qry(Tid__url_bar, ns_mgr, Srch_search_phrase.New(wiki.Case_mgr(), syms, auto_wildcard, search_orig), 0, max_results);
 	}
-	public static Srch_search_qry New__suggest_box(Xow_wiki wiki, Srch_ns_mgr ns_mgr, int results_max, byte[] search_orig) {
-		return new Srch_search_qry(Tid__suggest_box, ns_mgr, Srch_search_phrase.New(wiki.Case_mgr(), Srch_crt_scanner_syms.Dflt, Bool_.Y, search_orig), 0, results_max);
+	public static Srch_search_qry New__suggest_box(Xow_wiki wiki, Srch_ns_mgr ns_mgr, boolean auto_wildcard, int results_max, byte[] search_orig) {
+		return new Srch_search_qry(Tid__suggest_box, ns_mgr, Srch_search_phrase.New(wiki.Case_mgr(), Srch_crt_scanner_syms.Dflt, auto_wildcard, search_orig), 0, results_max);
 	}
-	public static Srch_search_qry New__search_page(Xow_domain_itm[] domains, Xow_wiki wiki, Srch_ns_mgr ns_mgr, boolean simple_search, byte[] search_orig, int slab_idx, int slab_len) {
+	public static Srch_search_qry New__search_page(Xow_domain_itm[] domains, Xow_wiki wiki, Srch_ns_mgr ns_mgr, boolean auto_wildcard, byte[] search_orig, int slab_idx, int slab_len) {
 		int slab_bgn = slab_idx * slab_len;
 		int slab_end = slab_bgn + slab_len;
-		boolean wildcard = simple_search;
-		return new Srch_search_qry(Tid__search_page, ns_mgr, Srch_search_phrase.New(wiki.Case_mgr(), Srch_crt_scanner_syms.Dflt, wildcard, search_orig), slab_bgn, slab_end);
+		return new Srch_search_qry(Tid__search_page, ns_mgr, Srch_search_phrase.New(wiki.Case_mgr(), Srch_crt_scanner_syms.Dflt, auto_wildcard, search_orig), slab_bgn, slab_end);
 	}
 	public static Srch_search_qry New__drd(Xow_wiki wiki, Srch_ns_mgr ns_mgr, byte[] search_orig, int slab_bgn, int slab_end) {
 		return new Srch_search_qry(Tid__android, ns_mgr, Srch_search_phrase.New(wiki.Case_mgr(), Srch_crt_scanner_syms.Dflt, Bool_.Y, search_orig), slab_bgn, slab_end);
