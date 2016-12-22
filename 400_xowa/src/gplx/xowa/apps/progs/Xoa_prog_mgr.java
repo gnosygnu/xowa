@@ -86,6 +86,7 @@ public class Xoa_prog_mgr implements Gfo_invk {
 		else if	(String_.Eq(k, Cfg__resize_img))				{Init_cmd(m.ReadStr("v"), app_resize_img);}
 		else if	(String_.Eq(k, Cfg__convert_svg_to_png))		{Init_cmd(m.ReadStr("v"), app_convert_svg_to_png);}
 		else if	(String_.Eq(k, Cfg__convert_djvu_to_tiff))		{Init_cmd(m.ReadStr("v"), app_convert_djvu_to_tiff);}
+		else if	(String_.Eq(k, Cfg__convert_tex_to_dvi))		{Init_cmd(m.ReadStr("v"), app_convert_tex_to_dvi);}
 		else if (String_.Eq(k, Cfg__lua))						{Init_cmd(m.ReadStr("v"), app_lua);}
 		else if (String_.Eq(k, Cfg__lilypond))					{Init_cmd(m.ReadStr("v"), app_lilypond);}
 		else if (String_.Eq(k, Cfg__abc2ly))					{Init_cmd(m.ReadStr("v"), app_abc2ly);}
@@ -125,6 +126,7 @@ public class Xoa_prog_mgr implements Gfo_invk {
 	, Cfg__resize_img					= "xowa.wiki.files.apps.resize_img"
 	, Cfg__convert_svg_to_png			= "xowa.wiki.files.apps.convert_svg_to_png"
 	, Cfg__convert_djvu_to_tiff			= "xowa.wiki.files.apps.convert_djvu_to_tiff"
+	, Cfg__convert_tex_to_dvi			= "xowa.wiki.files.apps.convert_tex_to_dvi"
 	, Cfg__lua							= "xowa.addon.scribunto.lua.cmd"
 	, Cfg__lilypond						= "xowa.addon.score.apps.lilypond"
 	, Cfg__abc2ly						= "xowa.addon.score.apps.abc2ly"

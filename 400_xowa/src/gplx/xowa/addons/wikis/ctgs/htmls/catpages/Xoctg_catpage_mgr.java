@@ -47,6 +47,9 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 		else if (String_.Eq(missing_cls, Str__missing_cls__red))		return Css__missing_cls__red;
 		else															throw Err_.new_unhandled(missing_cls);
 	}
+	public void Init_by_wiki(Xow_wiki wiki) {
+		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__missing_class);
+	}
 	public void Free_mem_all() {cache.Clear();}
 	public Xoctg_catpage_ctg Get_or_load_or_null(byte[] page_ttl, Xoctg_catpage_url catpage_url, Xoa_ttl cat_ttl, int limit) {
 		// load categories from cat dbs; exit if not found

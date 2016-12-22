@@ -112,6 +112,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		html__hdump_mgr.Init_by_db(this);
 		app.Addon_mgr().Load_by_wiki(this);
 		ctg_pagebox_wtr.Init_by_wiki(this);
+		ctg_catpage_mgr.Init_by_wiki(this);
 	}
 	public void	Init_by_wiki__force() {init_needed = true; Init_by_wiki();}
 	public void Init_by_make(Xowd_core_db_props props, gplx.xowa.bldrs.infos.Xob_info_session info_session) {

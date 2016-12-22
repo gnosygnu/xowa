@@ -234,6 +234,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		app.Site_cfg_mgr().Load(this);
 		app.Addon_mgr().Load_by_wiki(this);
 		ctg_pagebox_wtr.Init_by_wiki(this);
+		ctg_catpage_mgr.Init_by_wiki(this);
 
 		file_mgr.Init_by_wiki(this);
 		page_mgr.Init_by_wiki(this);
