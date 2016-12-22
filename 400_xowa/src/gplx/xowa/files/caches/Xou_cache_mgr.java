@@ -164,8 +164,8 @@ public class Xou_cache_mgr implements Gfo_invk {
 	}
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Cfg__fsys_size_min))			this.fsys_size_min = m.ReadLong("v");
-		else if	(ctx.Match(k, Cfg__fsys_size_max))			this.fsys_size_max = m.ReadLong("v");
+		if		(ctx.Match(k, Cfg__fsys_size_min))			this.fsys_size_min = m.ReadLong("v") * Io_mgr.Len_mb;
+		else if	(ctx.Match(k, Cfg__fsys_size_max))			this.fsys_size_max = m.ReadLong("v") * Io_mgr.Len_mb;
 		else if	(ctx.Match(k, Run__fsys_reduce_to_min))		{this.Reduce(fsys_size_min);}
 		else if	(ctx.Match(k, Run__fsys_clear))				{this.Reduce(0);}
 		else	return Gfo_invk_.Rv_unhandled;
