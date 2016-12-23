@@ -18,21 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.core.envs.*;
 import gplx.langs.htmls.*;
-public class Xow_tidy_mgr implements Gfo_evt_itm, Xow_tidy_mgr_interface {
-	private Xoae_app app; private Xoh_tidy_wkr_tidy tidy_cmd = new Xoh_tidy_wkr_tidy();	// NOTE: app-level; not thread-safe; needed b/c of Options and exe/args DATE:2016-07-12
-	private boolean enabled = true; private Xoh_tidy_wkr wkr = Xoh_tidy_wkr_.Wkr_null; // TEST: set default wkr to null
-	public Xow_tidy_mgr() {this.evt_mgr = new Gfo_evt_mgr(this);}
-	public Gfo_evt_mgr Evt_mgr() {return evt_mgr;} private final    Gfo_evt_mgr evt_mgr;
-	private void Engine_(String v) {
-		if		(String_.Eq(v, "tidy"))		wkr = new Xoh_tidy_wkr_tidy(); // NOTE: app-level; not thread-safe; needed b/c of Options and exe/args DATE:2016-07-12
-		else if (String_.Eq(v, "jtidy"))	wkr = new Xoh_tidy_wkr_jtidy();
-		else								throw Err_.new_unhandled_default(v);
-		wkr.Init_by_app(app);
-	}
-	public void Init_by_wiki(Xoae_app app) {
-		this.app = app;
-		tidy_cmd.Init_by_app(app);
-		Process_adp.ini_(this, app.Usr_dlg(), tidy_cmd, app.Url_cmd_eval(), Process_adp.Run_mode_sync_timeout, 1 * 60, "~{<>bin_plat_dir<>}tidy" + Op_sys.Cur().Fsys_dir_spr_str() +  "tidy", Xoh_tidy_wkr_tidy.Args_fmt, "source", "target");
+public class Xow_tidy_mgr implements Gfo_invk, Xow_tidy_mgr_interface {
+	private Xoae_app app;
+	private final    Xoh_tidy_wkr_tidy	wkr__tidy = new Xoh_tidy_wkr_tidy();	// NOTE: app-level; not thread-safe; needed b/c of Options and exe/args DATE:2016-07-12
+	private final    Xoh_tidy_wkr_jtidy wkr__jtidy = new Xoh_tidy_wkr_jtidy();
+	private Xoh_tidy_wkr wkr = Xoh_tidy_wkr_.Wkr_null; // TEST: set default wkr to null
+	private boolean enabled = true;
+	public void Init_by_wiki(Xowe_wiki wiki) {
+		this.app = wiki.Appe();
+		Process_adp.ini_(this, app.Usr_dlg(), wkr__tidy, app.Url_cmd_eval(), Process_adp.Run_mode_sync_timeout, 1 * 60, "~{<>bin_plat_dir<>}tidy" + Op_sys.Cur().Fsys_dir_spr_str() +  "tidy", Xoh_tidy_wkr_tidy.Args_fmt, "source", "target");
 		app.Cfg().Bind_many_app(this, Cfg__enabled, Cfg__engine, Cfg__cmd);
 	}		
 	public void Exec_tidy(Bry_bfr bfr, boolean indent, byte[] page_url) {
@@ -45,8 +39,14 @@ public class Xow_tidy_mgr implements Gfo_evt_itm, Xow_tidy_mgr_interface {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Cfg__enabled))						this.enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Cfg__engine))							Engine_(m.ReadStr("v"));
-		else if	(ctx.Match(k, Cfg__cmd))							gplx.xowa.apps.progs.Xoa_prog_mgr.Init_cmd(m.ReadStr("v"), tidy_cmd);
+		else if	(ctx.Match(k, Cfg__cmd))							gplx.xowa.apps.progs.Xoa_prog_mgr.Init_cmd(m.ReadStr("v"), wkr__tidy);
+		else if	(ctx.Match(k, Cfg__engine)) {
+			String engine_str = m.ReadStr("v");
+			if		(String_.Eq(engine_str, "tidy"))	wkr = wkr__tidy; // NOTE: app-level; not thread-safe; needed b/c of Options and exe/args DATE:2016-07-12
+			else if (String_.Eq(engine_str, "jtidy"))	wkr = wkr__jtidy;
+			else										throw Err_.new_unhandled_default(engine_str);
+			wkr.Init_by_app(app);
+		}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}

@@ -38,7 +38,7 @@ public class Xow_html_mgr implements Gfo_invk {
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		html_wtr.Init_by_wiki(wiki);
 		module_mgr.Init_by_wiki(wiki);
-		tidy_mgr.Init_by_wiki(wiki.Appe());
+		tidy_mgr.Init_by_wiki(wiki);
 		portal_mgr.Init_by_wiki(wiki);
 		page_wtr_mgr.Init_by_wiki(wiki);
 	}
