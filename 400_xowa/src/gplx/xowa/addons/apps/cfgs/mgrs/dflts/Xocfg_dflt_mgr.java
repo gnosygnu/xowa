@@ -28,14 +28,16 @@ public class Xocfg_dflt_mgr {
 		loader.Load_by_file(this, app.Fsys_mgr().Bin_plat_dir().GenSubFil_nest("xowa", "cfg", "xo.cfg.dflt.json"));
 	}
 	public String Get_or(String key, String or) {
-		Xocfg_dflt_itm itm = (Xocfg_dflt_itm)hash.Get_by(key);
-		return (itm == null) ? or : itm.Get_str(key);
+		Gfo_invk itm = (Gfo_invk)hash.Get_by(key);
+		return (itm == null) ? or : (String)Gfo_invk_.Invk_by_key(itm, key);
 	}
 	public void Add(String key, String val) {
 		cache_mgr.Dflt(key, val);
 		hash.Add(key, new Xocfg_dflt_itm__static(val));
 	}
-	public void Add(String key, Xocfg_dflt_itm itm) {
-		hash.Add(key, itm);
+	public void Add(Gfo_invk invk, String... keys) {
+		for (String key : keys) {
+			hash.Add(key, invk);
+		}
 	}
 }

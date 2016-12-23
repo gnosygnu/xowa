@@ -16,15 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.mgrs.dflts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
-public interface Xocfg_dflt_itm {
-	String Get_str(String key);
-}
-class Xocfg_dflt_itm__static implements Xocfg_dflt_itm {
+class Xocfg_dflt_itm__static implements Gfo_invk {
 	private final    String val;
 	public Xocfg_dflt_itm__static(String val) {
 		this.val = val;
 	}
-	public String Get_str(String key) {
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		return val;
 	}
 }

@@ -35,6 +35,7 @@ public class Xou_cache_mgr implements Gfo_invk {
 	public void Init_by_app(Xoa_app app) {
 		app.Cfg().Bind_many_app(this, Cfg__fsys_size_min, Cfg__fsys_size_max);
 		app.Cfg().Sub_many_app(this, Run__fsys_reduce_to_min, Run__fsys_clear);
+		app.Cfg().Dflt_mgr().Add(this, Val__fsys_info);
 	}
 	public Xou_cache_itm Get_or_null(Xof_fsdb_itm fsdb) {return Get_or_null(fsdb.Lnki_wiki_abrv(), fsdb.Lnki_ttl(), fsdb.Lnki_type(), fsdb.Lnki_upright(), fsdb.Lnki_w(), fsdb.Lnki_h(), fsdb.Lnki_time(), fsdb.Lnki_page(), fsdb.User_thumb_w());}
 	public Xou_cache_itm Get_or_null(byte[] wiki, byte[] ttl, int type, double upright, int w, int h, double time, int page, int user_thumb_w) {
@@ -166,20 +167,32 @@ public class Xou_cache_mgr implements Gfo_invk {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Cfg__fsys_size_min))			this.fsys_size_min = m.ReadLong("v") * Io_mgr.Len_mb;
 		else if	(ctx.Match(k, Cfg__fsys_size_max))			this.fsys_size_max = m.ReadLong("v") * Io_mgr.Len_mb;
+		else if	(ctx.Match(k, Val__fsys_info))				return this.Info_str();
 		else if	(ctx.Match(k, Run__fsys_reduce_to_min))		{this.Reduce(fsys_size_min);}
 		else if	(ctx.Match(k, Run__fsys_clear))				{this.Reduce(0);}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String 
-	  Cfg__fsys_size_min = "xowa.wiki.files.cache.fsys_size_min"
-	, Cfg__fsys_size_max = "xowa.wiki.files.cache.fsys_size_max"
-	, Run__fsys_reduce_to_min = "xowa.wiki.files.cache.reduce_to_min"
-	, Run__fsys_clear = "xowa.wiki.files.cache.clear"
+	  Cfg__fsys_size_min		= "xowa.wiki.files.cache.fsys_size_min"
+	, Cfg__fsys_size_max		= "xowa.wiki.files.cache.fsys_size_max"
+	, Val__fsys_info			= "xowa.wiki.files.cache.info"
+	, Run__fsys_reduce_to_min	= "xowa.wiki.files.cache.reduce_to_min"
+	, Run__fsys_clear			= "xowa.wiki.files.cache.clear"
 	;
 	public void Fsys_size_(long min, long max) {fsys_size_min = min; fsys_size_max = max;}	// TEST:
-	/*
-	private Keyval[] Info() {
+	private String Info_str() {
+		this.Page_bgn();
+		Bry_bfr bfr = Bry_bfr_.New_w_size(255);
+		Keyval[] ary = this.Info_kvs();
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			Keyval kv = ary[i];
+			bfr.Add_str_a7(kv.Key()).Add_str_a7(": ").Add_str_u8(kv.Val_to_str_or_empty()).Add_byte_nl();
+		}
+		return bfr.To_str_and_clear();
+	}
+	private Keyval[] Info_kvs() {
 		long view_date = Long_.Max_value;
 		long fsys_size = 0;
 		int len = hash.Count();
@@ -195,18 +208,6 @@ public class Xou_cache_mgr implements Gfo_invk {
 		, Keyval_.new_("oldest file", view_date == Long_.Max_value ? "" : DateAdp_.unixtime_utc_seconds_(view_date).XtoStr_fmt_iso_8561())
 		);
 	}
-	private String Info() {
-		cache_mgr.Page_bgn();
-		Bry_bfr bfr = Bry_bfr_.New_w_size(255);
-		Keyval[] ary = cache_mgr.Info();
-		int len = ary.length;
-		for (int i = 0; i < len; ++i) {
-			Keyval kv = ary[i];
-			bfr.Add_str_a7(kv.Key()).Add_str_a7(": ").Add_str_u8(kv.Val_to_str_or_empty()).Add_byte_nl();
-		}
-		return bfr.To_str_and_clear();
-	}
-	*/
 }
 class Xou_cache_grp {
 	private final    List_adp list = List_adp_.New();
