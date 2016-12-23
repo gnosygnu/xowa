@@ -30,7 +30,7 @@ public class Xosync_read_mgr implements Gfo_invk {
 	private final    Xosync_update_mgr update_mgr = new Xosync_update_mgr();
 	public void Init_by_wiki(Xow_wiki wiki) {
 		this.Auto_scope_("*:Main_Page");
-		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__auto__enabled, Cfg__auto__interval, Cfg__auto__scope);
+		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__manual__enabled, Cfg__auto__enabled, Cfg__auto__interval, Cfg__auto__scope);
 	}
 	public boolean Manual_enabled() {return manual_enabled;} private boolean manual_enabled;
 	public void Auto_update(Xow_wiki wiki, Xoa_page page, Xoa_ttl page_ttl) {
