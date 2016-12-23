@@ -19,14 +19,15 @@ package gplx.xowa.guis.menus; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.xowa.guis.menus.dom.*;
 import gplx.xowa.langs.*;
 public class Xog_window_mnu_mgr implements Gfo_invk {
-	private Ordered_hash hash = Ordered_hash_.New();
+	private final    Ordered_hash hash = Ordered_hash_.New();
 	public Xog_mnu_grp Browser() {return browser;} private Xog_mnu_grp browser;
 	public Xog_window_mnu_mgr(Xoa_gui_mgr gui_mgr, Xog_menu_mgr menu_mgr) {
 		this.gui_mgr = gui_mgr;
-		browser = Get_or_new(Root_key_browser_win).Source_default_(Xog_menu_mgr_src.Browser_win);	// NOTE: set default here (fires before cfg)
+		browser = Get_or_new(Root_key_browser_win);
 	}	private Xoa_gui_mgr gui_mgr;
-	public void Init_by_kit() {
+	public void Init_by_kit(Xoae_app app) {
 		browser.Source_exec(gui_mgr.App().Gfs_mgr());	// NOTE: build menu now; NOTE: do not set default here, or else will override user setting
+		app.Cfg().Bind_many_app(this, Cfg__window__enabled, Cfg__window__source);
 	}
 	public Xog_mnu_grp Get_or_new(String key) {			
 		Xog_mnu_grp rv = (Xog_mnu_grp)hash.Get_by(key);
@@ -40,8 +41,15 @@ public class Xog_window_mnu_mgr implements Gfo_invk {
 		Xog_mnu_base.Update_grp_by_lang(gui_mgr.Menu_mgr().Menu_bldr(), lang, browser);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_get))		return Get_or_new(m.ReadStr("v"));
+		if		(ctx.Match(k, Cfg__window__enabled))		browser.Enabled_(m.ReadYn("v"));
+		else if	(ctx.Match(k, Cfg__window__source))			browser.Source_(m.ReadStr("v"));
 		else	return Gfo_invk_.Rv_unhandled;
-	}	private static final String Invk_get = "get";
-	public static final String Root_key_browser_win = "main_win";
+		return this;
+	}
+	private static final String Root_key_browser_win = "main_win";
+
+	private static final String
+	  Cfg__window__enabled	= "xowa.gui.menus.window.enabled"
+	, Cfg__window__source	= "xowa.gui.menus.window.source"
+	;
 }

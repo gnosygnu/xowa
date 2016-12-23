@@ -66,6 +66,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		rv.Add_int("id", id);
 		rv.Add_str("key", key);
 		rv.Add_str("dflt", dflt);
+		rv.Add_str("dflt_text", String_.Replace(dflt, "'", "&apos;"));
 		rv.Add_str("lang", lang);
 		rv.Add_str("name", name);
 		rv.Add_str("help", help);

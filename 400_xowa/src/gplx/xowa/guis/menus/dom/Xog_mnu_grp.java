@@ -42,14 +42,7 @@ public class Xog_mnu_grp extends Xog_mnu_base {
 		if (!mnu_is_popup && app.Gui_mgr().Browser_win().Win_box() != null)
 			Gfo_invk_.Invk_by_key(app.Gui_mgr().Browser_win(), Gfui_html.Evt_win_resized);
 	}
-	public String Source() {return source;} private String source;
-	public String Source_default() {return source_default;} public Xog_mnu_grp Source_default_(String v) {source_default = source = v; return this;} private String source_default;
-	private Xog_mnu_grp Source_(Xoa_gfs_mgr gfs_mgr, String v) {
-		Object rslt = Source_exec(gfs_mgr, v);
-		if (rslt != Gfo_invk_.Rv_error)
-			source = v;
-		return this;
-	} 
+	public String Source() {return source;} private String source; public void Source_(String v) {this.source = v; this.Source_exec(app.Gfs_mgr());}
 	public Object Source_exec(Xoa_gfs_mgr gfs_mgr) {return Source_exec(gfs_mgr, source);}
 	private Object Source_exec(Xoa_gfs_mgr gfs_mgr, String v) {
 		if (!enabled) return Gfo_invk_.Rv_handled;
@@ -101,13 +94,8 @@ public class Xog_mnu_grp extends Xog_mnu_base {
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_build))					this.Build();
-		else if	(ctx.Match(k, Invk_enabled))				return Yn.To_str(enabled);
-		else if	(ctx.Match(k, Invk_enabled_))				this.Enabled_(m.ReadYn("v"));
-		else if	(ctx.Match(k, Invk_source))					return source;
-		else if	(ctx.Match(k, Invk_source_))				this.Source_(app.Gfs_mgr(), m.ReadStr("v"));
-		else if	(ctx.Match(k, Invk_source_default))			return source_default;
-		else if	(ctx.Match(k, Invk_source_default_))		source_default = m.ReadStr("v");
 		else	return super.Invk(ctx, ikey, k, m);
 		return this;
-	}	private static final String Invk_build = "build", Invk_enabled = "enabled", Invk_enabled_ = "enabled_", Invk_source = "source", Invk_source_ = "source_", Invk_source_default = "source_default", Invk_source_default_ = "source_default_";
+	}
+	private static final String Invk_build = "build";
 }

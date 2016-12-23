@@ -37,7 +37,7 @@ public class Xocfg_dflt_mgr {
 	}
 	public void Add(Gfo_invk invk, String... keys) {
 		for (String key : keys) {
-			hash.Add(key, invk);
+			hash.Add_if_dupe_use_nth(key, invk);
 		}
 	}
 }
