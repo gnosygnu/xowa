@@ -46,7 +46,7 @@ public class Srch_urlbar_mgr implements Gfo_invk {	// NOTE: needs to be app-leve
 		url_bar.Items__visible_rows_(10);
 
 		this.app = app;
-		app.Cfg().Bind_many_app(this, Cfg__enabled, Cfg__max_results, Cfg__auto_wildcard, Cfg__ns_ids, Cfg__symbols, Cfg__visible_rows, Cfg__jump_len);
+		app.Cfg().Bind_many_app(this, Cfg__enabled, Cfg__max_results, Cfg__auto_wildcard, Cfg__ns_ids, Cfg__visible_rows, Cfg__jump_len);
 	}
 	public void Search() {
 		if (!enabled) return;
@@ -86,7 +86,6 @@ public class Srch_urlbar_mgr implements Gfo_invk {	// NOTE: needs to be app-leve
 		else if	(ctx.Match(k, Cfg__max_results))					max_results = m.ReadInt("v");
 		else if	(ctx.Match(k, Cfg__auto_wildcard))					auto_wildcard = m.ReadYn("v");
 		else if (ctx.Match(k, Cfg__ns_ids))							Ns_ids_(m.ReadStr("v"));
-		else if (ctx.Match(k, Cfg__symbols))						syms.Parse(m.ReadBry("v"));
 		else if	(ctx.Match(k, Cfg__visible_rows))					url_bar.Items__visible_rows_(m.ReadInt("v"));
 		else if (ctx.Match(k, Cfg__jump_len))						url_bar.Items__jump_len_(m.ReadInt("v"));
 		else	return Gfo_invk_.Rv_unhandled;
@@ -97,7 +96,6 @@ public class Srch_urlbar_mgr implements Gfo_invk {	// NOTE: needs to be app-leve
 	, Cfg__max_results			= "xowa.gui.urlbar.search.max_results"
 	, Cfg__auto_wildcard		= "xowa.gui.urlbar.search.auto_wildcard"
 	, Cfg__ns_ids				= "xowa.gui.urlbar.search.ns_ids"
-	, Cfg__symbols				= "xowa.gui.urlbar.search.symbols"
 	, Cfg__visible_rows			= "xowa.gui.urlbar.search.visible_rows"
 	, Cfg__jump_len				= "xowa.gui.urlbar.search.jump_len"
 	;
