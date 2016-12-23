@@ -19,19 +19,12 @@ package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx
 import gplx.xowa.parsers.logs.*;
 import gplx.xowa.xtns.scribunto.engines.*;
 public class Scrib_xtn_mgr extends Xox_mgr_base {
+	private Xowe_wiki wiki;
 	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final    byte[] XTN_KEY = Bry_.new_a7("scribunto");
 	@Override public void Xtn_ctor_by_app(Xoae_app app) {this.app = app;} private Xoae_app app;
 	@Override public Xox_mgr Xtn_clone_new() {return new Scrib_xtn_mgr();}
 	public Scrib_lib_mgr Lib_mgr() {return lib_mgr;} private Scrib_lib_mgr lib_mgr = new Scrib_lib_mgr();
-	@Override public void Enabled_(boolean v) {
-		Scrib_core_mgr.Term_all(app);
-		super.Enabled_(v);
-	}
 	public byte Engine_type() {return engine_type;} private byte engine_type = Scrib_engine_type.Type_luaj;
-	public void Engine_type_(byte cmd) {
-		engine_type = cmd;
-		if (app != null) gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all(app);
-	}
 	public int Lua_timeout() {return lua_timeout;} private int lua_timeout = 4000;
 	public int Lua_timeout_polling() {return lua_timeout_polling;} private int lua_timeout_polling = 1;
 	public int Lua_timeout_busy_wait() {return lua_timeout_busy_wait;} private int lua_timeout_busy_wait = 250;
@@ -44,16 +37,17 @@ public class Scrib_xtn_mgr extends Xox_mgr_base {
 	}
 	public Xop_log_invoke_wkr Invoke_wkr() {return invoke_wkr;} private Xop_log_invoke_wkr invoke_wkr;
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
+		this.wiki = wiki;
 		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__enabled, Cfg__engine, Cfg__lua__timeout, Cfg__lua__timeout_busy_wait, Cfg__lua__timeout_polling);
 	}
 
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_invoke_wkr))						return m.ReadYnOrY("v") ? Invoke_wkr_or_new() : Gfo_invk_.Noop;
-		else if	(ctx.Match(k, Cfg__enabled))						Enabled_(m.ReadYn("v"));
-		else if	(ctx.Match(k, Cfg__engine))							Engine_type_(Scrib_engine_type.Xto_byte(m.ReadStr("v")));
-		else if	(ctx.Match(k, Cfg__lua__timeout))					lua_timeout = m.ReadInt("v");
-		else if	(ctx.Match(k, Cfg__lua__timeout_polling))			lua_timeout_polling = m.ReadInt("v");
-		else if	(ctx.Match(k, Cfg__lua__timeout_busy_wait))			lua_timeout_busy_wait = m.ReadInt("v");
+		else if	(ctx.Match(k, Cfg__enabled))						{Enabled_(m.ReadYn("v")); wiki.Parser_mgr().Scrib().Core_term();}
+		else if	(ctx.Match(k, Cfg__engine))							{engine_type = Scrib_engine_type.Xto_byte(m.ReadStr("v")); wiki.Parser_mgr().Scrib().Core_term();}
+		else if	(ctx.Match(k, Cfg__lua__timeout))					{lua_timeout = m.ReadInt("v"); wiki.Parser_mgr().Scrib().Core_term();}
+		else if	(ctx.Match(k, Cfg__lua__timeout_polling))			{lua_timeout_polling = m.ReadInt("v"); wiki.Parser_mgr().Scrib().Core_term();}
+		else if	(ctx.Match(k, Cfg__lua__timeout_busy_wait))			{lua_timeout_busy_wait = m.ReadInt("v"); wiki.Parser_mgr().Scrib().Core_term();}
 		else														return super.Invk(ctx, ikey, k, m);
 		return this;
 	}

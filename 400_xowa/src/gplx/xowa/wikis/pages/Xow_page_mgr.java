@@ -168,6 +168,13 @@ public class Xow_page_mgr implements Gfo_invk {
 		page.Redirect_trail().Itms__add__article(trg_url, trg_ttl, null);
 		wiki.Data_mgr().Load_from_db(page, trg_ttl.Ns(), trg_ttl, trg_url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no));
 	}
+	public void Redirect2(Xowe_wiki wiki2, Xoae_page page, byte[] page_bry) {
+		Xoa_ttl trg_ttl = Xoa_ttl.Parse(wiki2, page_bry);
+		Xoa_url trg_url = Xoa_url.New(wiki2.Domain_bry(), page_bry);
+		page.Ttl_(trg_ttl).Url_(trg_url);
+		page.Redirect_trail().Itms__add__article(trg_url, trg_ttl, null);
+		wiki2.Data_mgr().Load_from_db(page, trg_ttl.Ns(), trg_ttl, trg_url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no));
+	}
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_create_enabled_))				wiki.Db_mgr().Save_mgr().Create_enabled_(m.ReadYn("v"));

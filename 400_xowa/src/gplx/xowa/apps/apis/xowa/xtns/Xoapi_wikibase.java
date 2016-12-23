@@ -29,9 +29,9 @@ public class Xoapi_wikibase implements Gfo_invk, Gfo_evt_mgr_owner {
 		app.Cfg().Bind_many_app(this, Cfg__core_langs, Cfg__link_wikis, Cfg__sort_langs);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Cfg__core_langs))	 			{core_langs = m.ReadBryAry(k, Byte_ascii.Semic); Gfo_evt_mgr_.Pub_val(this, Evt_core_langs_changed, core_langs);}
-		else if	(ctx.Match(k, Cfg__sort_langs))	 			{sort_langs = m.ReadBryAry(k, Byte_ascii.Semic); Gfo_evt_mgr_.Pub_val(this, Evt_sort_langs_changed, sort_langs);}
-		else if	(ctx.Match(k, Cfg__link_wikis))	 			{link_wikis = m.ReadBry(k); Gfo_evt_mgr_.Pub_val(this, Evt_link_wikis_changed, link_wikis);}
+		if		(ctx.Match(k, Cfg__core_langs))	 			{core_langs = m.ReadBryAry("v", Byte_ascii.Semic); Gfo_evt_mgr_.Pub_val(this, Evt_core_langs_changed, core_langs);}
+		else if	(ctx.Match(k, Cfg__sort_langs))	 			{sort_langs = m.ReadBryAry("v", Byte_ascii.Semic); Gfo_evt_mgr_.Pub_val(this, Evt_sort_langs_changed, sort_langs);}
+		else if	(ctx.Match(k, Cfg__link_wikis))	 			{link_wikis = m.ReadBry("v"); Gfo_evt_mgr_.Pub_val(this, Evt_link_wikis_changed, link_wikis);}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
