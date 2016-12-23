@@ -31,8 +31,8 @@ public class Srch_special_cfg implements Gfo_invk {
 		app.Cfg().Bind_many_app(this, Cfg__results_per_page, Cfg__async_db, Cfg__auto_wildcard, Cfg__multi_wikis, Cfg__multi_sorts);
 	}
 	public int					Results_per_page()		{return results_per_page;}		private int results_per_page = 100;
-	public boolean					Async_db()				{return async_db;}				private boolean async_db = true;
-	public boolean				Auto_wildcard()			{return auto_wildcard;}			private boolean auto_wildcard = false;		// automatically add wild-card; EX: Earth -> *Earth*
+	public boolean				Async_db()				{return async_db;}				private boolean async_db = true;
+	public boolean					Auto_wildcard()			{return auto_wildcard;}			private boolean auto_wildcard = false;		// automatically add wild-card; EX: Earth -> *Earth*
 	public Srch_ns_mgr			Ns_mgr()				{return ns_mgr;}				private final    Srch_ns_mgr ns_mgr = new Srch_ns_mgr();
 	public Xow_domain_crt_itm	Multi_wikis_crt			(Xow_domain_itm cur_domain) {return multi_wikis_mgr.Find_itm(cur_domain, cur_domain);}
 	public Xow_domain_crt_itm[] Multi_sorts_crt			(Xow_domain_itm cur_domain) {return multi_sorts_mgr.Find_ary(cur_domain, cur_domain);}

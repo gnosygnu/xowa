@@ -34,9 +34,9 @@ public class Srch_special_cmd implements Gfo_invk, Srch_rslt_cbk, Xog_tab_close_
 		this.Hide_cancel_btn();
 	}
 	public void Search() {
+		Srch_html_row_bldr html_row_bldr = new Srch_html_row_bldr(new gplx.xowa.htmls.core.htmls.utls.Xoh_lnki_bldr(wiki.App(), wiki.Html__href_wtr()));
+		this.html_row_wkr = new Srch_html_row_wkr(html_row_bldr, js_wkr, qry.Slab_end - qry.Slab_bgn, wiki.Domain_bry());	// NOTE: must set member reference for html_row_wkr else On_rslts_found will fail with null ref when async_db is false; DATE:2016-12-22
 		if (async) {	// NOTE: async useful with multiple wikis; allows parallel searches;
-			Srch_html_row_bldr html_row_bldr = new Srch_html_row_bldr(new gplx.xowa.htmls.core.htmls.utls.Xoh_lnki_bldr(wiki.App(), wiki.Html__href_wtr()));
-			html_row_wkr = new Srch_html_row_wkr(html_row_bldr, js_wkr, qry.Slab_end - qry.Slab_bgn, wiki.Domain_bry());
 			Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_special_search_db, this, Invk_search_db);
 		}
 		else
