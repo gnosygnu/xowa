@@ -61,12 +61,21 @@ public class Xoedit_itm_html {
 			case Xoitm_gui_tid.Tid__io_cmd:
 				String[] lines = Xocfg_mgr.Parse_io_cmd(val);
 				bfr.Add_str_u8_fmt
-				( "<input  class=\"xocfg__io_cmd__exe__txt\" id=\"{2}-exe\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}-exe\" accesskey=\"d\"  type=\"text\"{1} value=\"{3}\"></input>\n"
+				( "<input  class=\"xocfg__io_cmd__exe__txt\" id=\"{2}-exe\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}-exe\" accesskey=\"d\" type=\"text\"{1} value=\"{3}\"></input>\n"
 				+ "<button class=\"xocfg__io_cmd__exe__btn\" onclick='xowa_io_select(\"file\", \"{2}-exe\", \"Please select a file.\");'>...</button><br/>\n"
 				, gui_type_key, gui_args, key, lines[0]);
 				bfr.Add_str_u8_fmt
-				( "<input  class=\"xocfg__io_cmd__arg__txt\" id=\"{2}-arg\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}-arg\" accesskey=\"d\" type=\"text\"{1} value='{3}'>\n"
+				( "<input  class=\"xocfg__io_cmd__arg__txt\" id=\"{2}-arg\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}-arg\" accesskey=\"d\" type=\"text\"{1} value=\"{3}\">\n"
 				, gui_type_key, gui_args, key, lines[1]);
+				break;
+			case Xoitm_gui_tid.Tid__gui_binding:
+				String[] flds = Xoitm_gui_binding.To_gui(val);
+				bfr.Add_str_u8_fmt
+				( "<input  class=\"xocfg__gui_binding__box__txt\" id=\"{2}-box\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}-box\" accesskey=\"d\" type=\"text\"{1} value=\"{3}\"></input>\n"
+				, gui_type_key, gui_args, key, flds[0]);
+				bfr.Add_str_u8_fmt
+				( "<input  class=\"xocfg__gui_binding__ipt__txt\" id=\"{2}-ipt\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}-ipt\" accesskey=\"d\" type=\"text\"{1} value=\"{3}\"'>\n"
+				, gui_type_key, gui_args, key, flds[1]);
 				break;
 			case Xoitm_gui_tid.Tid__btn:
 				bfr.Add_str_u8_fmt("<button id=\"{2}\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}\" class=\"xocfg__btn\" {1}>{3}</button>", gui_type_key, gui_args, key, name);

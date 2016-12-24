@@ -34,7 +34,7 @@ public class Xoitm_gui_tid {
 	, Tid__io_file		= 6
 	, Tid__io_dir		= 7
 	, Tid__btn			= 8
-	, Tid__label		= 9
+	, Tid__gui_binding	= 9
 	;
 	private static final    Hash_adp		to_uid_hash = Hash_adp_.New();
 	private static final    Xoitm_gui_tid[] to_key_ary = new Xoitm_gui_tid[10];
@@ -48,7 +48,7 @@ public class Xoitm_gui_tid {
 	, Itm__io_file		= New(Tid__io_file		, "io.file")
 	, Itm__io_dir		= New(Tid__io_dir		, "io.dir")
 	, Itm__btn			= New(Tid__btn			, "btn")
-	, Itm__lbl			= New(Tid__label		, "label")
+	, Itm__gui_binding	= New(Tid__gui_binding	, "gui.binding")
 	;
 	private static Xoitm_gui_tid New(int uid, String key) {
 		Xoitm_gui_tid rv = new Xoitm_gui_tid(uid, key);
@@ -68,6 +68,7 @@ public class Xoitm_gui_tid {
 		else if (String_.Eq(db_type, "int"))			return Itm__int.key;
 		else if (String_.Eq(db_type, "memo"))			return Itm__memo.key;
 		else if (String_.Eq(db_type, "io.cmd"))			return Itm__io_cmd.key;
+		else if (String_.Eq(db_type, "gui.binding"))	return Itm__gui_binding.key;
 		else if (String_.Has_at_bgn(db_type, "list:"))	return Itm__list.key;
 		else if (String_.Eq(db_type, "btn"))			return Itm__btn.key;
 		else											return Itm__str.key;

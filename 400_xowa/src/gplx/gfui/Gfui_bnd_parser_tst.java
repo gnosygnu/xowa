@@ -20,30 +20,34 @@ import org.junit.*;
 public class Gfui_bnd_parser_tst {
 	@Before public void init() {fxt.Clear();} private Gfui_bnd_parser_fxt fxt = new Gfui_bnd_parser_fxt();
 	@Test  public void Norm_one() {
-		fxt.Test_x_to_norm("mod.c"							, "Ctrl");
-		fxt.Test_x_to_norm("key.ctrl"						, "Ctrl");
-		fxt.Test_x_to_norm("key.a"							, "A");
-		fxt.Test_x_to_norm("key.left"						, "Left");
+		fxt.Test__to_norm("mod.c"							, "Ctrl");
+		fxt.Test__to_norm("key.ctrl"						, "Ctrl");
+		fxt.Test__to_norm("key.a"							, "A");
+		fxt.Test__to_norm("key.left"						, "Left");
 	}
 	@Test  public void Norm_add() {
-		fxt.Test_x_to_norm("mod.c+key.a"					, "Ctrl + A");
-		fxt.Test_x_to_norm("mod.ca+key.a"					, "Ctrl + Alt + A");
-		fxt.Test_x_to_norm("mod.cas+key.a"					, "Ctrl + Alt + Shift + A");
+		fxt.Test__to_norm("mod.c+key.a"						, "Ctrl + A");
+		fxt.Test__to_norm("mod.ca+key.a"					, "Ctrl + Alt + A");
+		fxt.Test__to_norm("mod.cas+key.a"					, "Ctrl + Alt + Shift + A");
 	}
 	@Test  public void Norm_chord() {
-		fxt.Test_x_to_norm("key.a,key.b"					, "A, B");
+		fxt.Test__to_norm("key.a,key.b"						, "A, B");
 	}
 	@Test  public void Norm_add_and_chord() {
-		fxt.Test_x_to_norm("mod.c+key.a,mod.a+key.b"		, "Ctrl + A, Alt + B");
+		fxt.Test__to_norm("mod.c+key.a,mod.a+key.b"			, "Ctrl + A, Alt + B");
 	}
 	@Test  public void Gfui_add() {
-		fxt.Test_x_to_gfui("Ctrl + A"						, "mod.c+key.a");
-		fxt.Test_x_to_gfui("Ctrl + Shift + A"				, "mod.cs+key.a");
-		fxt.Test_x_to_gfui("Ctrl + Alt + Shift + A"			, "mod.cas+key.a");
+		fxt.Test__to_gfui("Ctrl + A"						, "mod.c+key.a");
+		fxt.Test__to_gfui("Ctrl + Shift + A"				, "mod.cs+key.a");
+		fxt.Test__to_gfui("Ctrl + Alt + Shift + A"			, "mod.cas+key.a");
 	}
 	@Test  public void Keypad_enter() {
-		fxt.Test_x_to_norm("key.keypad_enter"				, "Keypad Enter");
-		fxt.Test_x_to_norm("mod.c+key.keypad_enter"			, "Ctrl + Keypad Enter");
+		fxt.Test__to_norm("key.keypad_enter"				, "Keypad Enter");
+		fxt.Test__to_norm("mod.c+key.keypad_enter"			, "Ctrl + Keypad Enter");
+	}
+	@Test  public void None() {
+		fxt.Test__to_gfui("None"							, "key.none");
+		fxt.Test__to_norm("key.none"						, "None");
 	}
 }
 class Gfui_bnd_parser_fxt {
@@ -51,10 +55,10 @@ class Gfui_bnd_parser_fxt {
 	public void Clear() {
 		parser = Gfui_bnd_parser.new_en_();
 	}
-	public void Test_x_to_norm(String key, String expd) {
+	public void Test__to_norm(String key, String expd) {
 		Tfds.Eq(expd, parser.Xto_norm(key));
 	}
-	public void Test_x_to_gfui(String key, String expd) {
+	public void Test__to_gfui(String key, String expd) {
 		Tfds.Eq(expd, parser.Xto_gfui(key));
 	}
 }

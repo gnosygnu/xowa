@@ -31,14 +31,22 @@ public class Xocfg_edit_svc {
 		String ctx = args.Get_as_str("ctx");
 		String key = args.Get_as_str("key");
 		String val = args.Get_as_str("val");
+		String gui = args.Get_as_str("gui");
+		if (String_.Has_at_bgn(gui, "gui.binding")) {
+			val = gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_db_str(val);
+		}
 		app.Cfg().Set_str(ctx, key, val);
 		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.upsert__recv", Gfobj_nde.New().Add_str("key", key));
 	}
 	public void Revert(Json_nde args) {
 		String ctx = args.Get_as_str("ctx");
 		String key = args.Get_as_str("key");
+		String gui = args.Get_as_str("gui");
 		app.Cfg().Del(ctx, key);
 		String val = app.Cfg().Get_str(ctx, key);
+		if (String_.Has_at_bgn(gui, "gui.binding")) {
+			val = String_.Concat_with_str("|", gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_gui(val));
+		}
 		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.revert__recv", Gfobj_nde.New().Add_str("key", key).Add_str("val", val));
 	}
 	public void Load(Json_nde args) {

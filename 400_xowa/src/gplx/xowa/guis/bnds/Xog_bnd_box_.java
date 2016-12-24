@@ -36,6 +36,14 @@ public class Xog_bnd_box_ {
 		return ary;
 	}	private static Xog_bnd_box[] ary;
 	private static void ary_init(Xog_bnd_box[] ary, int tid, String key) {ary[tid] = new Xog_bnd_box(tid, key);}
+	public static String To_gui_str(String key) {
+		int tid = Xto_sys_int(key);
+		return Xto_gui_str(tid);
+	}
+	public static String To_key_str(String gui) {
+		int tid = Xby_gui_str(gui);
+		return Xto_sys_str(tid);
+	}
 	public static int[] Xto_sys_int_ary(String s) {
 		String[] ary = String_.Split(s, "|");
 		int len = ary.length;
