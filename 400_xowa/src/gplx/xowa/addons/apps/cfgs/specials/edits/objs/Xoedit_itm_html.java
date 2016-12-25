@@ -66,7 +66,7 @@ public class Xoedit_itm_html {
 				, gui_type_key, gui_args, key, lines[0]);
 				bfr.Add_str_u8_fmt
 				( "<input  class=\"xocfg__io_cmd__arg__txt\" id=\"{2}-arg\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}-arg\" accesskey=\"d\" type=\"text\"{1} value=\"{3}\">\n"
-				, gui_type_key, gui_args, key, lines[1]);
+				, gui_type_key, gui_args, key, String_.Replace(lines[1], "\"", "&quot;"));
 				break;
 			case Xoitm_gui_tid.Tid__gui_binding:
 				String[] flds = Xoitm_gui_binding.To_gui(val);

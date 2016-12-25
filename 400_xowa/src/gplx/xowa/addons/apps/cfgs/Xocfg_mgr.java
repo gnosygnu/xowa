@@ -120,16 +120,18 @@ public class Xocfg_mgr implements Gfo_invk {
 		cache_mgr.Del(ctx, key);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk__set_temp))			cache_mgr.Set_wo_save((String)m.ReadValAt(0), (String)m.ReadValAt(1), (String)m.ReadValAt(2));
+		if		(ctx.Match(k, "set"))					cache_mgr.Set			((String)m.ReadValAt(0), (String)m.ReadValAt(1), (String)m.ReadValAt(2));
+		else if	(ctx.Match(k, "set_temp"))				cache_mgr.Set_wo_save	((String)m.ReadValAt(0), (String)m.ReadValAt(1), (String)m.ReadValAt(2));
+		else if	(ctx.Match(k, "set_dflt"))				dflt_mgr.Add			((String)m.ReadValAt(0), (String)m.ReadValAt(1));
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	private static final String Invk__set_temp = "set_temp";
+	}
 	public static String Ctx__app = "app";
 	public static String[] Parse_io_cmd(String raw) {
 		String[] rv = new String[2];
 		rv[0] = "";
 		rv[1] = "";
-		int pos = String_.FindFwd(raw, "\n");
+		int pos = String_.FindFwd(raw, "|");
 		if (pos != Bry_find_.Not_found) {
 			rv[0] = String_.Mid(raw, 0, pos);
 			rv[1] = String_.Mid(raw, pos + 1);
