@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
 import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.mgrs.caches.*; import gplx.xowa.addons.apps.cfgs.mgrs.dflts.*; import gplx.xowa.addons.apps.cfgs.mgrs.types.*; import gplx.xowa.addons.apps.cfgs.mgrs.execs.*;
-public class Xocfg_mgr {
+public class Xocfg_mgr implements Gfo_invk {
 	private final    Xocfg_cache_mgr cache_mgr = new Xocfg_cache_mgr();
 	public Xocfg_mgr() {
 		this.dflt_mgr = new Xocfg_dflt_mgr(cache_mgr);
@@ -119,6 +119,11 @@ public class Xocfg_mgr {
 	public void Del(String ctx, String key) {
 		cache_mgr.Del(ctx, key);
 	}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, Invk__set))			Set_str((String)m.ReadValAt(0), (String)m.ReadValAt(1), (String)m.ReadValAt(2));
+		else	return Gfo_invk_.Rv_unhandled;
+		return this;
+	}	private static final String Invk__set = "set";
 	public static String Ctx__app = "app";
 	public static String[] Parse_io_cmd(String raw) {
 		String[] rv = new String[2];

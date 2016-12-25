@@ -232,7 +232,8 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		else if	(ctx.Match(k, Invk_app))					return this;  
 		else if	(ctx.Match(k, Invk_xowa))					return this;  
 		else if	(ctx.Match(k, Invk_fmtrs))					return fmtr_mgr;  
-		else if	(ctx.Match(k, Invk_cfg))					return cfg_regy;
+//			else if	(ctx.Match(k, Invk_cfg))					return cfg_regy;
+		else if	(ctx.Match(k, Invk_cfg))					return cfg;
 		else if	(ctx.Match(k, Invk_xwiki_langs_load))		xwiki_mgr__sitelink_mgr.Parse(m.ReadBry("v"));  
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
