@@ -162,29 +162,49 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		Add(itm);
 		return itm;
 	}
-	public void Del(Xog_bnd_itm itm, IptArg new_ipt) {
-		boolean itm_has_ipt = !IptArg_.Is_null_or_none(new_ipt);
+	public void Del(Xog_bnd_itm new_bnd, IptArg new_ipt) {
+		boolean new_ipt_exists = !IptArg_.Is_null_or_none(new_ipt);
 		List_adp deleted = List_adp_.New();
+
+		// loop over each box
 		for (int i = 0; i < Xog_bnd_box_.Ary_len; i++) {
 			Xog_bnd_box old_box = boxs[i];
 			int old_itms_len = old_box.Len();
+
+			// loop over each bnd
 			for (int j = 0; j < old_itms_len; j++) {
-				Xog_bnd_itm old_itm = old_box.Get_at(j);
-				if		(	String_.Eq(old_itm.Key(), itm.Key())) {
-					Xog_bnd_box_.Set_bnd_for_grp(Xog_bnd_box_.Set_del_key, win, invk_mgr, old_box, old_itm, itm.Ipt());
-					deleted.Add(itm.Key());
+				Xog_bnd_itm old_bnd = old_box.Get_at(j);
+
+				// if keys match, delete old_bnd
+				if		(	String_.Eq(old_bnd.Key(), new_bnd.Key())) {
+					Xog_bnd_box_.Set_bnd_for_grp(Xog_bnd_box_.Set_del_key, win, invk_mgr, old_box, old_bnd, new_bnd.Ipt());
+					deleted.Add(new_bnd);
 				}
-				else if (	itm_has_ipt
-						&&	String_.Eq(old_itm.Ipt().Key(), new_ipt.Key())) {
-					Xog_bnd_box_.Set_bnd_for_grp(Xog_bnd_box_.Set_del_ipt, win, invk_mgr, old_box, old_itm, old_itm.Ipt());
-					Xog_bnd_mgr_srl.Update_cfg(win.App(), old_itm, i, IptKey_.None);
-					old_itm.Ipt_to_none();
+				// if ipts match, delete old_bnd
+				else if (	new_ipt_exists
+						&&	String_.Eq(old_bnd.Ipt().Key(), new_ipt.Key())) {
+					Xog_bnd_box_.Set_bnd_for_grp(Xog_bnd_box_.Set_del_ipt, win, invk_mgr, old_box, old_bnd, old_bnd.Ipt());
+					Xog_bnd_mgr_srl.Update_cfg(win.App(), old_bnd, i, IptKey_.None);
+					old_bnd.Ipt_to_none();
 				}
 			}
+
+			// remove old bnd from box
 			int deleted_len = deleted.Count();
 			for (int j = 0; j < deleted_len; j++) {
-				String deleted_key = (String)deleted.Get_at(j);
-				old_box.Del(deleted_key);
+				// delete from box
+				Xog_bnd_itm deleted_itm = (Xog_bnd_itm)deleted.Get_at(j);
+				old_box.Del(deleted_itm.Key());
+
+				// add back other items with same cmd but different key; needed b/c gfui.ipt_mgr hashes by cmd ("sandbox"), not key ("sandbox-1"); DATE:2016-12-25
+				List_adp list = old_box.Get_list_by_cmd(deleted_itm.Cmd());
+				if (list != null) {
+					int len = list.Len();
+					for (int k = 0; k < len; k++) {
+						Xog_bnd_itm restore_itm = (Xog_bnd_itm)list.Get_at(k);
+						Xog_bnd_box_.Set_bnd_for_grp(Xog_bnd_box_.Set_add, win, invk_mgr, old_box, restore_itm, restore_itm.Ipt());
+					}
+				}
 			}
 			deleted.Clear();
 		}
