@@ -120,10 +120,10 @@ public class Xocfg_mgr implements Gfo_invk {
 		cache_mgr.Del(ctx, key);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk__set))			Set_str((String)m.ReadValAt(0), (String)m.ReadValAt(1), (String)m.ReadValAt(2));
+		if		(ctx.Match(k, Invk__set_temp))			cache_mgr.Set_wo_save((String)m.ReadValAt(0), (String)m.ReadValAt(1), (String)m.ReadValAt(2));
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	private static final String Invk__set = "set";
+	}	private static final String Invk__set_temp = "set_temp";
 	public static String Ctx__app = "app";
 	public static String[] Parse_io_cmd(String raw) {
 		String[] rv = new String[2];

@@ -44,7 +44,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 			redirect_tbl.Conn().Txn_bgn("bldr__page__redirect");
 		}
 		app.Bldr().Dump_parser().Trie_tab_del_();	// disable swapping &#09; for \t
-		byte[] ns_file_map = Xobldr_cfg.New_ns_file_map(wiki.Import_cfg().Src_rdr_len());
+		byte[] ns_file_map = Xobldr_cfg.New_ns_file_map(app, wiki.Import_cfg().Src_rdr_len());
 		Xob_ns_file_itm.Init_ns_bldr_data(Xow_db_file_.Tid__text, wiki.Ns_mgr(), ns_file_map);
 		if (idx_mode.Tid_is_bgn()) page_core_tbl.Create_idx();
 		page_core_tbl.Insert_bgn();

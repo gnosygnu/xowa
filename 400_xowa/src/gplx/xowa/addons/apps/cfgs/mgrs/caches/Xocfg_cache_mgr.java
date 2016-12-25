@@ -43,10 +43,12 @@ public class Xocfg_cache_mgr {
 		}
 		return grp.Get(ctx);
 	}
-	public void Set(String ctx, String key, String val) {
+	public void Set(String ctx, String key, String val)				{Set(Bool_.Y, ctx, key, val);}
+	public void Set_wo_save(String ctx, String key, String val)		{Set(Bool_.N, ctx, key, val);}
+	public void Set(boolean save, String ctx, String key, String val) {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
 		grp.Set(ctx, val);
-		db_usr.Set_str(ctx, key, val);
+		if (save) db_usr.Set_str(ctx, key, val);
 		grp.Pub(ctx, val);
 	}
 	public void Del(String ctx, String key) {

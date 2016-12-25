@@ -49,7 +49,7 @@ class Xowb_json_dump_db {
 
 		// init ns_map
 		this.ns_to_db_mgr = new Xob_ns_to_db_mgr(new Xob_ns_to_db_wkr__text(), db_mgr, Xobldr_cfg.Max_size__text(app));
-		byte[] ns_file_map = Xobldr_cfg.New_ns_file_map(src_fil_len);
+		byte[] ns_file_map = Xobldr_cfg.New_ns_file_map(app, src_fil_len);
 		Xob_ns_file_itm.Init_ns_bldr_data(Xow_db_file_.Tid__text, wiki.Ns_mgr(), ns_file_map);
 
 		// start import
