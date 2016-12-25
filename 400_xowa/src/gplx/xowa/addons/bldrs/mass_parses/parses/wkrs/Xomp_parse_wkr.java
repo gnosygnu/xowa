@@ -107,8 +107,8 @@ public class Xomp_parse_wkr implements Gfo_invk {
 				// if ns changed and prv_ns is main
 				if (cur_ns != prv_ns) {
 					// COMMENTED: cache now supports 2 levels of permanence; no need to free entire page cache to clear pages added by ifexists and the like; DATE:2016-12-12
-					// if (prv_ns == gplx.xowa.wikis.nss.Xow_ns_.Tid__main)
-					//	wiki.Cache_mgr().Free_mem(Bool_.Y);	// NOTE: clears all caches, include imglinks; only Main will have benefit of 
+					if (prv_ns == gplx.xowa.wikis.nss.Xow_ns_.Tid__main)
+						wiki.Cache_mgr().Free_mem(Bool_.Y);	// NOTE: clears all caches, include imglinks; only Main will have benefit of 
 					prv_ns = cur_ns;
 				}
 				Xoae_page wpg = Xoae_page.New(wiki, ttl);
