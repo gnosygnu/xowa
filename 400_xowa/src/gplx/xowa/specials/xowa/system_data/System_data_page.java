@@ -49,21 +49,16 @@ public class System_data_page implements Xow_special_page {
 			case Type_log_session:			return app.Log_wtr().Session_fil();
 			case Type_cfg_app:				return app.Fsys_mgr().Cfg_app_fil();
 			case Type_cfg_lang:				return Xol_lang_itm_.xo_lang_fil_(app.Fsys_mgr(), wiki.Lang().Key_str());
-			case Type_cfg_user:				return app.Usere().Fsys_mgr().App_data_cfg_user_fil();
-			case Type_cfg_custom:			return app.Usere().Fsys_mgr().App_data_cfg_custom_fil();
 			case Type_usr_history:			return app.Usere().Fsys_mgr().App_data_history_fil();
 			default:						return null;
 		}
 	}
-
 	private static final    byte[] Arg_type = Bry_.new_a7("type");
-	private static final byte Type_log_session = 1, Type_cfg_app = 2, Type_cfg_lang = 3, Type_cfg_user = 4, Type_cfg_custom = 5, Type_usr_history = 6;
+	private static final byte Type_log_session = 1, Type_cfg_app = 2, Type_cfg_lang = 3, Type_usr_history = 6;
 	private static final    Hash_adp_bry type_hash = Hash_adp_bry.cs()
 	.Add_str_byte("log_session"		, Type_log_session)
 	.Add_str_byte("cfg_app"			, Type_cfg_app)
 	.Add_str_byte("cfg_lang"		, Type_cfg_lang)
-	.Add_str_byte("cfg_user"		, Type_cfg_user)
-	.Add_str_byte("cfg_custom"		, Type_cfg_custom)
 	.Add_str_byte("usr_history"		, Type_usr_history)
 	;
 	private Bry_fmtr fmtr_all = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last

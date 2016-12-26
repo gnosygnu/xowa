@@ -56,9 +56,7 @@ public class Xoa_gfs_mgr implements Gfo_invk, Gfo_invk_root_wkr {
 		Io_url app_data_dir = usr_fsys_mgr.App_data_dir();
 		Io_url url = null;
 		if		(String_.Eq(type, "user_system_cfg"))	url = app_data_dir.GenSubFil_nest("cfg", "user_system_cfg.gfs");
-		else if	(String_.Eq(type, "xowa_cfg_custom"))	url = usr_fsys_mgr.App_data_cfg_custom_fil();
-		else if	(String_.Eq(type, "xowa_cfg_user"))		url = usr_fsys_mgr.App_data_cfg_user_fil();
-		else if	(String_.Eq(type, "xowa_cfg_os"))		{url = app_fsys_mgr.Bin_data_os_cfg_fil(); Xoa_gfs_mgr_.Cfg_os_assert(url);}
+		else if	(String_.Eq(type, "xowa_cfg_os"))		{url = app_fsys_mgr.Bin_plat_dir().GenSubFil_nest("xowa", "cfg", Cfg_os); Xoa_gfs_mgr_.Cfg_os_assert(url);}
 		else if	(String_.Eq(type, "xowa_cfg_app"))		url = app_fsys_mgr.Cfg_app_fil();
 		else											throw Err_.new_wo_type("invalid gfs type", "type", type);
 		try {Run_url(url);}
@@ -76,6 +74,6 @@ public class Xoa_gfs_mgr implements Gfo_invk, Gfo_invk_root_wkr {
 		return this;
 	}	private static final String Invk_run_file_by_type = "run_file_by_type", Invk_fail_if_unhandled_ = "fail_if_unhandled_", Invk_txns = "txns";
 	public static void Msg_parser_init() {GfsCore.Instance.MsgParser_(gplx.langs.gfs.Gfs_msg_bldr.Instance);}
-	public static final String Cfg_user_file = "xowa_user_cfg.gfs", Cfg_user_custom_file = "user_custom_cfg.gfs", Cfg_os = "xowa_cfg_os.gfs";
+	private static final String Cfg_os = "xowa_cfg_os.gfs";
 	public static boolean Fail_if_unhandled = false;
 }

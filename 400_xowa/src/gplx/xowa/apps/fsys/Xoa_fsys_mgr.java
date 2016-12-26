@@ -46,7 +46,6 @@ public class Xoa_fsys_mgr implements Gfo_invk {
 	public Io_url Cfg_lang_core_dir()			{return cfg_lang_core_dir;} private final    Io_url cfg_lang_core_dir;
 	public Io_url Cfg_wiki_core_dir()			{return cfg_wiki_core_dir;} private final    Io_url cfg_wiki_core_dir;
 	public Io_url Cfg_site_meta_fil()			{return cfg_site_meta_fil;} private final    Io_url cfg_site_meta_fil;
-	public Io_url Bin_data_os_cfg_fil()			{return bin_plat_dir.GenSubFil_nest("xowa", "cfg", Xoa_gfs_mgr.Cfg_os);}
 	public Io_url Wiki_css_dir(String wiki)		{return css_dir.GenSubDir_nest(wiki, "html");}							// EX: /xowa/temp/simple.wikipedia.org/html/xowa_common.css
 	public Io_url Wiki_file_dir(String wiki)	{return file_dir.GenSubDir_nest(wiki);}									// EX: /xowa/temp/simple.wikipedia.org/orig/
 	public Io_url Home_wiki_dir()				{return home_wiki_dir;} private final    Io_url home_wiki_dir;

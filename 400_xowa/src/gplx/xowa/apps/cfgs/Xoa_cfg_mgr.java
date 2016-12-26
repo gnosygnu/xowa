@@ -21,11 +21,7 @@ public class Xoa_cfg_mgr implements Gfo_invk {
 	private final    Ordered_hash hash = Ordered_hash_.New_bry();
 	public Xoa_cfg_mgr(Xoa_app app) {this.app = app;}
 	public Xoa_app App() {return app;} private final    Xoa_app app;
-	public Xoa_cfg_itm Get_itm_or_null(byte[] grp_key, byte[] itm_key) {
-		Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.Get_by(grp_key); 
-		return grp == null ? null : grp.Get_by_or_null(itm_key);
-	}
-	public Xoa_cfg_itm Get_itm_or_make(byte[] grp_key, byte[] itm_key) {
+	Xoa_cfg_itm Get_itm_or_make(byte[] grp_key, byte[] itm_key) {
 		Xoa_cfg_grp grp = null;
 		Object grp_obj = hash.Get_by(grp_key);
 		if (grp_obj == null) {
@@ -39,7 +35,6 @@ public class Xoa_cfg_mgr implements Gfo_invk {
 	}
 	public void Set_by_app(String grp_key, String val)				{Set(Bry_.new_u8(grp_key), Xoa_cfg_grp_tid.Key_app_bry, val);}
 	public void Set_by_all(String grp_key, String val)				{Set(Bry_.new_u8(grp_key), Xoa_cfg_grp_tid.Key_all_bry, val);}
-	public void Set_by_type(String grp_key, byte tid, String val)	{Set(Bry_.new_u8(grp_key), Xow_domain_tid_.Get_type_as_bry(tid), val);}
 	private void Set(byte[] grp_key, byte[] tid_key, String val)	{Get_itm_or_make(grp_key, tid_key).Val_(val);}
 	public void Init(Xow_wiki wiki) {
 		int len = hash.Count();
@@ -79,24 +74,8 @@ public class Xoa_cfg_mgr implements Gfo_invk {
 				throw Err_.new_unhandled(tid_byte);
 		}
 	}
-	public void Reset_all() {
-		hash.Clear();
-		db_txt.Cfg_reset_all(this);
-	}
-	public void Db_load_txt() {Db_load(db_txt);}
-	public void Db_load(Xoa_cfg_db db) {
-		db.Cfg_load_run(this);
-		this.Db_load_end();
-	}
-	private void Db_load_end() {
-		int len = hash.Count();
-		for (int i = 0; i < len; i++) {
-			Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.Get_at(i);
-			grp.Db_load_end();
-		}
-	}
 	public void Db_save_txt() {Db_save(db_txt);} private final    Xoa_cfg_db_txt db_txt = new Xoa_cfg_db_txt();
-	public void Db_save(Xoa_cfg_db db) {
+	private void Db_save(Xoa_cfg_db db) {
 		int len = hash.Count();
 		db.Cfg_save_bgn(this);
 		for (int i = 0; i < len; i++) {
@@ -110,14 +89,8 @@ public class Xoa_cfg_mgr implements Gfo_invk {
 		Object rslt = app.Gfs_mgr().Run_str_for(invk, msg_str);
 		return rslt != Gfo_invk_.Rv_error;
 	}
-	public Object Eval_get(Gfo_invk invk, String key) {
-		String msg_str = key + ";";
-		return app.Gfs_mgr().Run_str_for(invk, msg_str);
-	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get)) 		return Get_itm_or_make(m.ReadBry("itm_key"), m.ReadBry("grp_key"));
-		else if	(ctx.Match(k, Invk_reset_all)) 	Reset_all();
 		else	return Gfo_invk_.Rv_unhandled;
-		return this;
-	}	private static final String Invk_get = "get", Invk_reset_all = "reset_all";
+	}	private static final String Invk_get = "get";
 }
