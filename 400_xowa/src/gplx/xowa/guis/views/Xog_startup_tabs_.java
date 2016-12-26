@@ -43,10 +43,11 @@ public class Xog_startup_tabs_ {
 			}
 		}
 	}
+	public static final String Page_xowa = "home/wiki/Main_Page";
 	public static String[] Calc_startup_strs(Xoae_app app) {
 		List_adp rv = List_adp_.New();
 		Xocfg_mgr cfg = app.Cfg();
-		String xowa_home = gplx.xowa.users.Xouc_pages_mgr.Page_xowa;
+		String xowa_home = Page_xowa;
 		String type = cfg.Get_str_app_or(Cfg__tabs_type, Opt__tabs_type__previous);
 		if (Manual == null) {
 			if		(String_.Eq(type, "blank"))						{rv.Add(gplx.xowa.specials.Xow_special_meta_.Itm__default_tab.Ttl_str());}

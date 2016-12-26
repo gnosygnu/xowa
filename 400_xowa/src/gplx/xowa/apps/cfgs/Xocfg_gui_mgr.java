@@ -15,15 +15,15 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
-public class Xou_log_mgr implements Gfo_invk {
-	public boolean Log_redlinks() {return log_redlinks;} private boolean log_redlinks;
-	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_log_redlinks))			return Yn.To_str(log_redlinks);
-		else if	(ctx.Match(k, Invk_log_redlinks_))			log_redlinks = m.ReadYn("v");
-		return this;
+package gplx.xowa.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+public class Xocfg_gui_mgr implements Gfo_invk {
+	public void Init_by_app(Xoae_app app) {
+		win_cfg.Init_by_app(app);
 	}
-	public static final    String 
-	  Invk_log_redlinks = "log_redlinks", Invk_log_redlinks_ = "log_redlinks_"
-	;
+	public Xocfg_win Win() {return win_cfg;} private Xocfg_win win_cfg = new Xocfg_win();
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, Invk_win))			return win_cfg;
+		else	return Gfo_invk_.Rv_unhandled;
+	}
+	private static final String Invk_win = "win";
 }

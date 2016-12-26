@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.guis; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
 import gplx.gfui.*; import gplx.gfui.ipts.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.standards.*;
-import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.guis.menus.*; import gplx.xowa.guis.cmds.*; import gplx.xowa.apps.cfgs.gui.*; import gplx.xowa.users.*;
+import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.guis.menus.*; import gplx.xowa.guis.cmds.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.users.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.guis.bnds.*; import gplx.xowa.guis.views.*; import gplx.xowa.guis.urls.url_macros.*; import gplx.xowa.addons.wikis.searchs.gui.htmlbars.*;
 import gplx.xowa.guis.views.boots.*;

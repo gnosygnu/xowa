@@ -18,16 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.wikis.xwikis.*;
 public class Xou_user_tst {
-	private Xou_user_fxt fxt = new Xou_user_fxt();
-	@Test   public void Run() {
-		Io_url user_system_cfg_url = Io_url_.mem_fil_("mem/xowa/user/test_user/app/data/cfg/user_system_cfg.gfs");
-		fxt.Test_fil(user_system_cfg_url, "");								// check that it is blank
-		fxt.App().Init_by_app();											// run Init_by_app
-		fxt.Test_fil(user_system_cfg_url, Xou_user_.User_system_cfg_text);	// check that it is created
-		Io_mgr.Instance.SaveFilStr(user_system_cfg_url, "");						// simulate edit by blanking out file
-		fxt.App().Init_by_app();											// run Init_by_app again
-		fxt.Test_fil(user_system_cfg_url, "");								// check that it is still blank
-	}
+	private final    Xou_user_fxt fxt = new Xou_user_fxt();
 	@Test   public void Available_from_fsys() {
 		Io_mgr.Instance.CreateDir(fxt.App().Fsys_mgr().Wiki_dir().GenSubDir("en.wikipedia.org"));
 		fxt.App().Usere().Available_from_fsys();
@@ -40,9 +31,6 @@ public class Xou_user_tst {
 class Xou_user_fxt {
 	public Xoae_app App() {return app;} private Xoae_app app = Xoa_app_fxt.Make__app__edit();
 	public String Make_xwiki(boolean offline, String name) {return String_.Concat_with_str("|", Yn.To_str(offline), name);}
-	public void Test_fil(Io_url url, String expd) {
-		Tfds.Eq_str_lines(expd, Io_mgr.Instance.LoadFilStr(url));
-	}
 	public void Test_xwikis(String... expd) {
 		Xow_xwiki_mgr xwiki_mgr = app.Usere().Wiki().Xwiki_mgr();
 		int len = xwiki_mgr.Len();

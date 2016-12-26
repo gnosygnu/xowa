@@ -53,7 +53,7 @@ class Xog_launcher_tabs {
 	}
 	private void Restore_tab_failover(Xoae_app app, Xowe_wiki home_wiki, Xog_win_itm win) {
 		try {
-			Launch_tab(win, home_wiki, gplx.xowa.users.Xouc_pages_mgr.Page_xowa);
+			Launch_tab(win, home_wiki, Xog_startup_tabs_.Page_xowa);
 		}
 		catch (Exception e) {
 			app.Usr_dlg().Warn_many("", "", "failed to launch failover tab: err=~{0}", Err_.Message_gplx_full(e));

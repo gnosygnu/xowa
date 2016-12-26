@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
-import gplx.xowa.apps.cfgs.gui.*; import gplx.xowa.htmls.*;
+import gplx.xowa.apps.cfgs.*; import gplx.xowa.htmls.*;
 public class Xoapi_font implements Gfo_invk {
 	private Xoae_app app;
 	public void Init_by_kit(Xoae_app app) {

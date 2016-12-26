@@ -28,7 +28,6 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 		this.ev_mgr = new Gfo_evt_mgr(this);
 		this.fsys_mgr = new Xou_fsys_mgr(user_dir);
 		this.user_db_mgr = new Xou_db_mgr(app);
-		this.cfg_mgr = new Xou_cfg(this);
 		this.history_mgr = new Xou_history_mgr(fsys_mgr.App_data_history_fil());
 	}
 	public Gfo_evt_mgr				Evt_mgr() {return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;
@@ -47,7 +46,6 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 	public Xou_fsys_mgr Fsys_mgr() {return fsys_mgr;} private Xou_fsys_mgr fsys_mgr;
 	public Xowe_wiki Wiki() {if (wiki == null) wiki = Xou_user_.new_or_create_(this, app); return wiki;} private Xowe_wiki wiki;
 	public Xou_history_mgr History_mgr() {return history_mgr;} private Xou_history_mgr history_mgr;
-	public Xou_cfg Cfg_mgr() {return cfg_mgr;} private Xou_cfg cfg_mgr;
 	public Xow_msg_mgr Msg_mgr() {
 		if (msg_mgr == null)
 			msg_mgr = new Xow_msg_mgr(this.Wiki(), this.Lang());	// NOTE: must call this.Lang() not this.lang, else nullRef exception when using "app.shell.fetch_page"; DATE:2013-04-12
@@ -87,13 +85,12 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 		else if	(ctx.Match(k, Invk_wiki))						return this.Wiki();	// NOTE: mass parse relies on this being this.Wiki(), not wiki
 		else if	(ctx.Match(k, Invk_history))					return history_mgr;
 		else if	(ctx.Match(k, Invk_fsys))						return fsys_mgr;
-		else if	(ctx.Match(k, Invk_cfg))						return cfg_mgr;
 		else if	(ctx.Match(k, "name"))							return key; //throw Err_.new_unhandled(k);	// OBSOLETE: used to return key
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String Invk_available_from_fsys = "available_from_fsys", Invk_available_from_bulk = "available_from_bulk", Invk_bookmarks_add_fmt_ = "bookmarks_add_fmt_"
-	, Invk_wiki = "wiki", Invk_history = "history", Invk_fsys = "fsys", Invk_lang = "lang", Invk_msgs = "msgs", Invk_cfg = "cfg";
+	, Invk_wiki = "wiki", Invk_history = "history", Invk_fsys = "fsys", Invk_lang = "lang", Invk_msgs = "msgs";
 	public static final String Key_xowa_user = "anonymous";
 	public static final String Evt_lang_changed = "lang_changed";
 	public void Available_from_fsys() {
