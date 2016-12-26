@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.html; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
 import gplx.core.brys.fmtrs.*;
-public class Xoapi_toggle_itm implements Gfo_invk {
+public class Xoapi_toggle_itm {
 	private final    Xoae_app app;	// NOTE: needed to get "img_dir" below
 	private byte[] img_title_val_y, img_title_val_n;
 	public Xoapi_toggle_itm(Xoae_app app, byte[] key_bry) {
@@ -30,6 +30,10 @@ public class Xoapi_toggle_itm implements Gfo_invk {
 	public byte[] Elem_display() {return elem_display;} private byte[] elem_display = Bry_.Empty;
 	public byte[] Html_toggle_hdr_cls() {return html_toggle_hdr_cls;} public Xoapi_toggle_itm Html_toggle_hdr_cls_(byte[] v) {html_toggle_hdr_cls = v; return this;} private byte[] html_toggle_hdr_cls = Bry_.Empty;
 	public boolean Visible() {return visible;} private boolean visible;
+	public void Visible_(boolean v) {
+		this.visible = v;
+		Html_toggle_gen();
+	}
 	public Xoapi_toggle_itm Init(byte[] heading_bry) {
 		this.heading_bry = heading_bry;		// NOTE: sets "Wikis" or "In other languages"; Wikidata twisties are empty;
 		this.icon_title = app.Usere().Msg_mgr().Val_by_key_obj(visible ? Img_title_msg_y : Img_title_msg_n); // set title ("show" or "hide")
@@ -79,13 +83,6 @@ public class Xoapi_toggle_itm implements Gfo_invk {
 			.Keys_("key", "display", "toggle_hdr_cls").Bld_bry_many(bfr, key_bry, elem_display, html_toggle_hdr_cls)
 			;
 	}
-	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_visible)) 			return Yn.To_str(visible);
-		else if	(ctx.Match(k, Invk_visible_))			this.visible = m.ReadYn("v");
-		else	return Gfo_invk_.Rv_unhandled;
-		return this;
-	}
-	private static final String Invk_visible = "visible", Invk_visible_ = "visible_";
 	private static byte[] Img_src_y, Img_src_n;	// assume these are the same for all itms
 	private static final    byte[] 
 	  Img_title_msg_y = Bry_.new_a7("hide"), Img_title_msg_n = Bry_.new_a7("show")

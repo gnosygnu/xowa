@@ -82,9 +82,6 @@ public class Xog_startup_win_ {
 		Xog_startup_tabs_.Shutdown(app);
 
 		cfg_mgr.Set_str_app(gplx.xowa.guis.views.Xog_startup_tabs_.Cfg__prev_version, Xoa_app_.Version);
-		gplx.xowa.apps.cfgs.Xoa_cfg_mgr cfg_mgr2 = app.Cfg_mgr();
-		app.Api_root().Html().Page().Toggle_mgr().Save(cfg_mgr2);
-		cfg_mgr2.Db_save_txt();
 	}
 	public static SizeAdp Screen_maximized_calc() {
 		Op_sys os = Op_sys.Cur();
