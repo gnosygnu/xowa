@@ -120,12 +120,13 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	, Invk_page_goto = "page_goto", Invk_page_goto_recent = "page_goto_recent"
 	; 
 	private void Win__link_click() {	// NOTE: only applies when content_editable=y; if n, then link_click will be handled by SwtBrowser location changed (Win__link_clicked)
-		Xog_tab_itm tab = tab_mgr.Active_tab(); Xowe_wiki wiki = tab.Wiki();
-		if (wiki.Gui_mgr().Cfg_browser().Content_editable()) {	
-			String href = tab.Html_itm().Html_box().Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_active_for_editable_mode, Gfui_html.Atr_href, null);
-			if (String_.Len_eq_0(href)) return; // NOTE: href can be null for images; EX: [[File:Loudspeaker.svg|11px|link=|alt=play]]; link= basically means don't link to image
-			Page__navigate_by_href(tab, href);
-		}
+		// COMMENT: ignore content editable; DATE:2016-12-25
+		//Xog_tab_itm tab = tab_mgr.Active_tab(); Xowe_wiki wiki = tab.Wiki();
+		//if (wiki.Gui_mgr().Cfg_browser().Content_editable()) {	
+		//	String href = tab.Html_itm().Html_box().Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_active_for_editable_mode, Gfui_html.Atr_href, null);
+		//	if (String_.Len_eq_0(href)) return; // NOTE: href can be null for images; EX: [[File:Loudspeaker.svg|11px|link=|alt=play]]; link= basically means don't link to image
+		//	Page__navigate_by_href(tab, href);
+		//}
 	}
 	private void Win__link_clicked(String anchor_raw) {
 		String url = url_box.Text();

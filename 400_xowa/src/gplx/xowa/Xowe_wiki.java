@@ -124,7 +124,6 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 
 	public Xow_hdump_mgr			Html__hdump_mgr() {return html__hdump_mgr;} private final    Xow_hdump_mgr html__hdump_mgr;
 	public Xoae_app					Appe() {return app;} private Xoae_app app;
-	public Xow_gui_mgr				Gui_mgr() {return gui_mgr;} private final    Xow_gui_mgr gui_mgr = new Xow_gui_mgr();
 	public Xow_user					User() {return user;} private Xow_user user = new Xow_user();
 	public Xow_page_mgr				Data_mgr() {return data_mgr;} private Xow_page_mgr data_mgr;
 	public Xodb_mgr					Db_mgr() {return db_mgr;} private Xodb_mgr db_mgr;
@@ -252,7 +251,6 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		file_mgr.Rls();
 	}
 	public void Init_needed_y_() {this.init_needed = true;}
-//		private void Copy_cfg(Xowe_wiki wiki) {html_mgr.Copy_cfg(wiki.Html_mgr());}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_files))				return file_mgr;
 		else if	(ctx.Match(k, Invk_stats))				return stats;
@@ -261,7 +259,6 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		else if	(ctx.Match(k, Invk_lang))				return lang;
 		else if	(ctx.Match(k, Invk_lang_))				throw Err_.new_deprecated("wiki.lang_");
 		else if	(ctx.Match(k, Invk_html))				return html_mgr;
-		else if	(ctx.Match(k, Invk_gui))				return gui_mgr;
 		else if	(ctx.Match(k, Invk_cfg_history))		return cfg_history;
 		else if	(ctx.Match(k, Invk_user))				return user;
 		else if	(ctx.Match(k, Invk_data_mgr))			return data_mgr;

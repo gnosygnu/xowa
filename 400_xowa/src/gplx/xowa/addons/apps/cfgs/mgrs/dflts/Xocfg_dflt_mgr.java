@@ -25,8 +25,6 @@ public class Xocfg_dflt_mgr {
 	}
 	public void Init_by_app(Xoa_app app) {
 		app.Gfs_mgr().Run_url(app.Fsys_mgr().Bin_plat_dir().GenSubFil_nest("xowa", "cfg", "xo.cfg.dflt.gfs"));
-//			Xocfg_dflt_loader loader = new Xocfg_dflt_loader();
-//			loader.Load_by_file(this, );
 	}
 	public String Get_or(String key, String or) {
 		Gfo_invk itm = (Gfo_invk)hash.Get_by(key);

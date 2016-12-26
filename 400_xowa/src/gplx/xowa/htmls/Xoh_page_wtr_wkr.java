@@ -80,7 +80,8 @@ public class Xoh_page_wtr_wkr {
 		DateAdp modified_on = page.Db().Page().Modified_on();
 		byte[] modified_on_msg = wiki.Msg_mgr().Val_by_id_args(Xol_msg_itm_.Id_portal_lastmodified, modified_on.XtoStr_fmt_yyyy_MM_dd(), modified_on.XtoStr_fmt_HHmm());
 		byte[] page_body_class = Xoh_page_body_cls.Calc(tmp_bfr, page_ttl, page_tid);
-		byte[] html_content_editable = wiki.Gui_mgr().Cfg_browser().Content_editable() ? Content_editable_bry : Bry_.Empty;
+		// byte[] html_content_editable = wiki.Gui_mgr().Cfg_browser().Content_editable() ? Content_editable_bry : Bry_.Empty;
+		byte[] html_content_editable = Bry_.Empty;
 		byte[] page_content_sub = Xoh_page_wtr_wkr_.Bld_page_content_sub(app, wiki, page, tmp_bfr);
 		byte[] js_edit_toolbar_bry = html_gen_tid == Xopg_page_.Tid_edit ? wiki.Fragment_mgr().Html_js_edit_toolbar() : Bry_.Empty;
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
@@ -235,5 +236,5 @@ public class Xoh_page_wtr_wkr {
 		if (data_raw_len > 0)		// do not add nl if empty String
 			bfr.Add_byte_nl();		// per MW:EditPage.php: "Ensure there's a newline at the end, otherwise adding lines is awkward."
 	}
-	private static final    byte[] Content_editable_bry = Bry_.new_a7(" contenteditable=\"true\"");
+	// private static final    byte[] Content_editable_bry = Bry_.new_a7(" contenteditable=\"true\"");
 }

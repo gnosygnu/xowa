@@ -34,7 +34,6 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		Add_system_bnds();
 		Add_custom_bnds();	// NOTE: should go after Add_system_bnds in case user overrides any;
 		Bind_all();
-		app.Cfg_regy().App().Gui_mgr().Bnd_mgr().Init();
 
 		app.Cfg().Bind_many_app(this
 		, "xowa.gui.shortcuts.xowa.app.exit-1"
@@ -184,7 +183,6 @@ public class Xog_bnd_mgr implements Gfo_invk {
 				else if (	new_ipt_exists
 						&&	String_.Eq(old_bnd.Ipt().Key(), new_ipt.Key())) {
 					Xog_bnd_box_.Set_bnd_for_grp(Xog_bnd_box_.Set_del_ipt, win, invk_mgr, old_box, old_bnd, old_bnd.Ipt());
-					Xog_bnd_mgr_srl.Update_cfg(win.App(), old_bnd, i, IptKey_.None);
 					old_bnd.Ipt_to_none();
 				}
 			}
@@ -378,5 +376,4 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		Set(bnd, box, IptArg_.parse(flds[1]));
 		return this;
 	}
-
 }

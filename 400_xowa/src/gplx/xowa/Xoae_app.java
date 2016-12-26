@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.core.brys.*; import gplx.core.btries.*; import gplx.core.brys.fmtrs.*; import gplx.core.flds.*; import gplx.core.ios.*; import gplx.core.threads.*; import gplx.langs.jsons.*; import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.log_msgs.*; import gplx.core.envs.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.metas.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.apps.progs.*; import gplx.xowa.apps.gfs.*;
-import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.apps.cfgs.old.*;
+import gplx.xowa.langs.*; import gplx.xowa.specials.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.css.*; import gplx.xowa.bldrs.installs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.guis.cbks.*; import gplx.xowa.guis.tabs.*;
@@ -63,7 +63,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		fmtr_mgr = new Xoa_fmtr_mgr(this);
 		log_mgr = new Xop_log_mgr(this);
 		http_server = new Http_server_mgr(this);
-		cfg_regy = new Xocfg_regy(this);
 		html_mgr = new Xoh_html_mgr(this);
 		this.html__bridge_mgr = new Xoh_bridge_mgr(utl__json_parser);
 		this.site_cfg_mgr = new Xoa_site_cfg_mgr(this);
@@ -135,7 +134,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoa_fsys_eval		Url_cmd_eval() {return url_cmd_eval;} Xoa_fsys_eval url_cmd_eval;
 	public Xoa_cur				Cur_redirect() {return cur_redirect;} private Xoa_cur cur_redirect;
 	public Xoa_cfg_mgr			Cfg_mgr() {return cfg_mgr;} private Xoa_cfg_mgr cfg_mgr;
-	public Xocfg_regy			Cfg_regy() {return cfg_regy;} private Xocfg_regy cfg_regy;
 	public Io_stream_zip_mgr	Zip_mgr() {return zip_mgr;} Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr();
 	public Xoa_cache_mgr		Cache_mgr() {return cache_mgr;} private Xoa_cache_mgr cache_mgr = new Xoa_cache_mgr();
 
@@ -232,7 +230,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		else if	(ctx.Match(k, Invk_app))					return this;  
 		else if	(ctx.Match(k, Invk_xowa))					return this;  
 		else if	(ctx.Match(k, Invk_fmtrs))					return fmtr_mgr;  
-//			else if	(ctx.Match(k, Invk_cfg))					return cfg_regy;
 		else if	(ctx.Match(k, Invk_cfg))					return cfg;
 		else if	(ctx.Match(k, Invk_xwiki_langs_load))		xwiki_mgr__sitelink_mgr.Parse(m.ReadBry("v"));  
 		else return Gfo_invk_.Rv_unhandled;
