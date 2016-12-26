@@ -70,8 +70,9 @@ public class Xog_startup_tabs_ {
 			list.Add(itm);
 		}
 	}
+	public static String Version_previous(Xoa_app app) {return app.Cfg().Get_str_app_or(Cfg__prev_version, "");}
 	private static void Add_xowa_home_if_new_version(List_adp rv, Xoae_app app, String xowa_home) {
-		if (gplx.xowa.apps.versions.Xoa_version_.Compare(app.Api_root().App().Env().Version_previous(), Xoa_app_.Version) == CompareAble_.Less) {
+		if (gplx.xowa.apps.versions.Xoa_version_.Compare(Version_previous(app), Xoa_app_.Version) == CompareAble_.Less) {
 			boolean xowa_home_exists = false;
 			int len = rv.Count();
 			for (int i = 0; i < len; ++i) {
@@ -81,8 +82,10 @@ public class Xog_startup_tabs_ {
 					break;
 				}
 			}
-			if (!xowa_home_exists)
+			if (!xowa_home_exists) {
 				rv.Add(xowa_home);
+				app.Cfg().Set_int_app(Cfg__prev_selected, rv.Len());
+			}
 		}
 	}
 	private static final String
@@ -92,4 +95,5 @@ public class Xog_startup_tabs_ {
 	, Cfg__prev_selected			= "xowa.app.startup.tabs.previous_selected"
 	, Opt__tabs_type__previous		= "previous"
 	;
+	public static final String Cfg__prev_version				= "xowa.app.session.version";
 }
