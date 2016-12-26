@@ -37,7 +37,7 @@ public class Xoedit_grp implements Xoedit_nde, Mustache_doc_itm {
 		this.name = name;
 		this.help = help;
 	}
-	public Gfobj_nde To_nde() {
+	public Gfobj_nde To_nde(Bry_bfr tmp_bfr) {
 		Gfobj_nde rv = Gfobj_nde.New();
 		rv.Add_int("id", id);
 		rv.Add_str("key", key);
@@ -49,7 +49,7 @@ public class Xoedit_grp implements Xoedit_nde, Mustache_doc_itm {
 		int len = itms.length;
 		for (int i = 0; i < len; i++) {
 			Xoedit_itm itm = itms[i];
-			list.Add(itm.To_nde());
+			list.Add(itm.To_nde(tmp_bfr));
 		}
 		rv.Add_ary("itms", new Gfobj_ary((Gfobj_nde[])list.To_ary_and_clear(Gfobj_nde.class)));
 		return rv;

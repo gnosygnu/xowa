@@ -49,6 +49,7 @@ public class Gfobj_nde implements Gfobj_grp {
 	public Gfobj_nde		Add_int(String key, int val)				{return Add_fld(new Gfobj_fld_int(key, val));}
 	public Gfobj_nde		Add_long(String key, long val)				{return Add_fld(new Gfobj_fld_long(key, val));}
 	public Gfobj_nde		Add_str(String key, String val)				{return Add_fld(new Gfobj_fld_str(key, val));}
+	public Gfobj_nde		Add_bry(String key, byte[] val)				{return Add_fld(new Gfobj_fld_bry(key, val));}
 	public Gfobj_nde		Add_url(String key, Io_url val)				{return Add_fld(new Gfobj_fld_str(key, val.Raw()));}
 	public Gfobj_nde		Add_double(String key, double val)			{return Add_fld(new Gfobj_fld_double(key, val));}
 	public Gfobj_nde		Add_nde(String key, Gfobj_nde val)			{return Add_fld(new Gfobj_fld_nde(key, val));}

@@ -19,10 +19,12 @@ package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gp
 import gplx.langs.mustaches.*;
 import gplx.core.gfobjs.*; import gplx.langs.jsons.*;
 import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
+import gplx.langs.htmls.*;
 public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 	private String gui_type;
 	private boolean edited;
-	private String data_type, gui_args, dflt, lang, name, ctx, val, date;
+	private String data_type, gui_args, lang, name, ctx, date;
+	private byte[] val, dflt;	// NOTE: data is always escaped b/c it is only consumed by mustache; EX: "&lt;&apos;" not "<'"
 	private Xocfg_type_mgr type_mgr;
 	public Xoedit_itm(Xocfg_type_mgr type_mgr, int id, String key, int sort) {
 		this.type_mgr = type_mgr;
@@ -35,20 +37,20 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 	public String	Help()		{return help;}	private String help;
 
 	public int		Sort()		{return sort;}	private final    int sort;
-	public void Load_by_meta(int scope_id, String data_type, String gui_type, String gui_args, String dflt) {
+	public void Load_by_meta(Bry_bfr tmp_bfr, int scope_id, String data_type, String gui_type, String gui_args, String dflt_str) {
 		this.data_type = data_type;
 		this.gui_type = gui_type;
 		this.gui_args = gui_args;
-		this.dflt = dflt;
+		this.dflt = Gfh_utl.Escape_html_as_bry(tmp_bfr, Bry_.new_u8(dflt_str), Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);
 	}
 	public void Load_by_i18n(String lang, String name, String help) {
 		this.lang = lang;
 		this.name = name;
 		this.help = help;
 	}
-	public void Load_by_data(String ctx, String val, String date) {
+	public void Load_by_data(Bry_bfr tmp_bfr, String ctx, String val_str, String date) {
 		this.ctx = ctx;
-		this.val = val;
+		this.val = Gfh_utl.Escape_html_as_bry(tmp_bfr, Bry_.new_u8(val_str), Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);
 		this.date = date;
 		this.edited = true;
 		if (	String_.Has(gui_args, "read"+"only=") || String_.Has(gui_args, "disabled=")
@@ -61,40 +63,38 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		this.date = String_.Empty;
 		this.edited = false;
 	}
-	public Gfobj_nde To_nde() {
+	public Gfobj_nde To_nde(Bry_bfr tmp_bfr) {
 		Gfobj_nde rv = Gfobj_nde.New();
 		rv.Add_int("id", id);
 		rv.Add_str("key", key);
-		rv.Add_str("dflt", dflt);
-		rv.Add_str("dflt_text", String_.Replace(dflt, "'", "&apos;"));
+		rv.Add_bry("dflt", dflt);
 		rv.Add_str("lang", lang);
 		rv.Add_str("name", name);
 		rv.Add_str("help", help);
 		rv.Add_str("ctx", ctx);
-		rv.Add_str("val", val);
+		rv.Add_bry("val", val);
 		rv.Add_str("date", date);
 		rv.Add_str("gui", gui_type);
-		Bry_bfr bfr = Bry_bfr_.New();
-		To_html(bfr, type_mgr);
-		rv.Add_str("html", bfr.To_str_and_clear());
+		To_html(tmp_bfr, type_mgr);
+		rv.Add_str("html", tmp_bfr.To_str_and_clear());
 		rv.Add_bool("edited", edited);
 		return rv;
 	}
 	private void To_html(Bry_bfr bfr, Xocfg_type_mgr type_mgr) {
-		new Xoedit_itm_html().Build_html(bfr, type_mgr, key, name, data_type, gui_type, gui_args, val);
+		Xoedit_itm_html.Build_html(bfr, type_mgr, key, name, data_type, gui_type, gui_args, val);
 	}
 	public boolean Mustache__write(String k, Mustache_bfr bfr) {
-		if		(String_.Eq(k, "id"))		bfr.Add_int(id);
-		else if	(String_.Eq(k, "key"))		bfr.Add_str_u8(key);
-		else if	(String_.Eq(k, "dflt"))		bfr.Add_str_u8(dflt);
-		else if	(String_.Eq(k, "lang"))		bfr.Add_str_u8(lang);
-		else if	(String_.Eq(k, "name"))		bfr.Add_str_u8(name);
-		else if	(String_.Eq(k, "help"))		bfr.Add_str_u8(help);
-		else if	(String_.Eq(k, "ctx"))		bfr.Add_str_u8(ctx);
-		else if	(String_.Eq(k, "val"))		bfr.Add_str_u8(val);
-		else if	(String_.Eq(k, "date"))		bfr.Add_str_u8(date);
-		else if	(String_.Eq(k, "gui"))		bfr.Add_str_u8(gui_type);
-		else if	(String_.Eq(k, "html"))		To_html(bfr.Bfr(), type_mgr);
+		if		(String_.Eq(k, "id"))				bfr.Add_int(id);
+		else if	(String_.Eq(k, "key"))				bfr.Add_str_u8(key);
+		else if	(String_.Eq(k, "dflt"))				bfr.Add_bry(dflt);
+		else if	(String_.Eq(k, "lang"))				bfr.Add_str_u8(lang);
+		else if	(String_.Eq(k, "name"))				bfr.Add_str_u8(name);
+		else if	(String_.Eq(k, "help"))				bfr.Add_str_u8(help);
+		else if	(String_.Eq(k, "ctx"))				bfr.Add_str_u8(ctx);
+		else if	(String_.Eq(k, "val"))				bfr.Add_bry(val);
+		else if	(String_.Eq(k, "date"))				bfr.Add_str_u8(date);
+		else if	(String_.Eq(k, "gui"))				bfr.Add_str_u8(gui_type);
+		else if	(String_.Eq(k, "html"))				To_html(bfr.Bfr(), type_mgr);
 		return true;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String k) {

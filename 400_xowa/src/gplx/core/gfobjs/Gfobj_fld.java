@@ -30,6 +30,7 @@ class Gfobj_fld_ {
 	, Fld_tid__long		= 4
 	, Fld_tid__double	= 5
 	, Fld_tid__str		= 6
+	, Fld_tid__bry		= 7
 	;
 }
 class Gfobj_fld_str implements Gfobj_fld {
@@ -38,6 +39,13 @@ class Gfobj_fld_str implements Gfobj_fld {
 	public byte			Fld_tid() {return Gfobj_fld_.Fld_tid__str;}
 	public Object		As_obj() {return val;}
 	public String		As_str() {return val;} private String val;
+}
+class Gfobj_fld_bry implements Gfobj_fld {
+	public Gfobj_fld_bry(String key, byte[] val) {this.key = key; this.val = val;}
+	public String		Key() {return key;} private final    String key;
+	public byte			Fld_tid() {return Gfobj_fld_.Fld_tid__bry;}
+	public Object		As_obj() {return val;}
+	public byte[]		As_bry() {return val;} private byte[] val;
 }
 class Gfobj_fld_bool implements Gfobj_fld {
 	public Gfobj_fld_bool(String key, boolean val) {this.key = key; this.val = val;}

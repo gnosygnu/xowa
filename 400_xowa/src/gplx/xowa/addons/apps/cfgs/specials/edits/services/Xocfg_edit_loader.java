@@ -54,8 +54,9 @@ public class Xocfg_edit_loader {
 		}
 
 		// load itms and i18n
-		Load_itm_meta(itm_list);
-		Load_itm_data(itm_list, ctx);
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		Load_itm_meta(tmp_bfr, itm_list);
+		Load_itm_data(tmp_bfr, itm_list, ctx);
 		Load_i18n(grp_list, itm_list, lang);
 
 		Xoedit_nde page_nde = grp_list.Get_by_or_fail(grp_key);
@@ -146,7 +147,7 @@ public class Xocfg_edit_loader {
 		}
 		owner.Itms_((Xoedit_itm[])itms_list.To_ary_and_clear(Xoedit_itm.class));
 	}
-	private void Load_itm_meta(Xoedit_nde_hash itm_list) {
+	private void Load_itm_meta(Bry_bfr tmp_bfr, Xoedit_nde_hash itm_list) {
 		Xogui_nde_iter iter = Xogui_nde_iter.New_sql(itm_list);
 		while (iter.Move_next()) {
 			String sql = Db_sql_.Make_by_fmt(String_.Ary
@@ -168,11 +169,11 @@ public class Xocfg_edit_loader {
 				Xoedit_itm edit_itm = (Xoedit_itm)itm_list.Get_by_or_fail(key);
 				String dflt = dflt_mgr.Get_or(key, rdr.Read_str("itm_dflt"));
 				int gui_type = rdr.Read_int("itm_gui_type");
-				edit_itm.Load_by_meta(rdr.Read_int("itm_scope_id"), rdr.Read_str("itm_data_type"), gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_tid.To_key(gui_type), rdr.Read_str("itm_gui_args"), dflt);
+				edit_itm.Load_by_meta(tmp_bfr, rdr.Read_int("itm_scope_id"), rdr.Read_str("itm_data_type"), gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_tid.To_key(gui_type), rdr.Read_str("itm_gui_args"), dflt);
 			}
 		}
 	}
-	private void Load_itm_data(Xoedit_nde_hash itm_list, String... ctxs) {
+	private void Load_itm_data(Bry_bfr tmp_bfr, Xoedit_nde_hash itm_list, String... ctxs) {
 		Xoedit_nde_hash cur_regy = new Xoedit_nde_hash().Merge(itm_list);
 
 		// loop ctxs where later ctxs are more general defaults; EX: ["en.w", "en.*", "*.w", "app"]
@@ -197,7 +198,7 @@ public class Xocfg_edit_loader {
 				Db_rdr rdr = db_usr.Conn().Stmt_sql(sql).Exec_select__rls_auto();
 				while (rdr.Move_next()) {
 					Xoedit_itm gui_itm = (Xoedit_itm)cur_regy.Get_by_or_fail(rdr.Read_str("itm_key"));
-					gui_itm.Load_by_data(rdr.Read_str("itm_ctx"), rdr.Read_str("itm_val"), rdr.Read_str("itm_date"));
+					gui_itm.Load_by_data(tmp_bfr, rdr.Read_str("itm_ctx"), rdr.Read_str("itm_val"), rdr.Read_str("itm_date"));
 					cur_regy.Deleted__add(gui_itm);
 				}
 			}

@@ -27,13 +27,13 @@ public class Xoedit_root implements Mustache_doc_itm {
 		this.page_help = page_help;
 		this.grps = grps;
 	}
-	public Gfobj_nde To_nde() {
+	public Gfobj_nde To_nde(Bry_bfr tmp_bfr) {
 		Gfobj_nde rv = Gfobj_nde.New();
 		List_adp list = List_adp_.New();
 		int len = grps.length;
 		for (int i = 0; i < len; i++) {
 			Xoedit_grp itm = grps[i];
-			list.Add(itm.To_nde());
+			list.Add(itm.To_nde(tmp_bfr));
 		}
 		rv.Add_str("page_help", page_help);
 		rv.Add_ary("grps", new Gfobj_ary((Gfobj_nde[])list.To_ary_and_clear(Gfobj_nde.class)));

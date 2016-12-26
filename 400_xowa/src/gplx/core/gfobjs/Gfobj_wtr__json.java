@@ -53,6 +53,7 @@ public class Gfobj_wtr__json {
 	private void Write_fld(Gfobj_fld itm) {
 		switch (itm.Fld_tid()) {
 			case Gfobj_fld_.Fld_tid__str:		wtr.Kv_str(itm.Key()	, ((Gfobj_fld_str)itm).As_str()); break;
+			case Gfobj_fld_.Fld_tid__bry:		wtr.Kv_bry(itm.Key()	, ((Gfobj_fld_bry)itm).As_bry()); break;
 			case Gfobj_fld_.Fld_tid__int:		wtr.Kv_int(itm.Key()	, ((Gfobj_fld_int)itm).As_int()); break;
 			case Gfobj_fld_.Fld_tid__long:		wtr.Kv_long(itm.Key()	, ((Gfobj_fld_long)itm).As_long()); break;
 			case Gfobj_fld_.Fld_tid__bool:		wtr.Kv_bool(itm.Key()	, ((Gfobj_fld_bool)itm).As_bool()); break;

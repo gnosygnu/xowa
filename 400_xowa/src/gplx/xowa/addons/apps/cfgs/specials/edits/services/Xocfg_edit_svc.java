@@ -54,7 +54,7 @@ public class Xocfg_edit_svc {
 		String key = args.Get_as_str("key");
 		if (edit_loader == null) edit_loader = Xocfg_edit_loader.New(app);
 		Xoedit_root root = edit_loader.Load_root(key, ctx, "en");
+		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.load__recv", root.To_nde(Bry_bfr_.New()));
 		app.Cfg().Set_str_app("xowa.app.cfg.recent_page", key);
-		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.load__recv", root.To_nde());
 	}
 }
