@@ -38,7 +38,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		Io_url.Http_file_str_encoder = Gfo_url_encoder_.New__fsys_lnx().Make();
 		fsys_mgr = new Xoa_fsys_mgr(bin_dir_name, root_dir, wiki_dir, file_dir, css_dir, root_dir);
 		log_wtr = usr_dlg.Log_wkr();
-		cfg_mgr = new Xoa_cfg_mgr(this);
 		api_root = new Xoapi_root(this);
 		user = new Xoue_user(this, user_dir);
 		this.meta_mgr = new Xoa_meta_mgr(this);
@@ -133,7 +132,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoa_ctg_mgr			Ctg_mgr() {return ctg_mgr;} private Xoa_ctg_mgr ctg_mgr = new Xoa_ctg_mgr();
 	public Xoa_fsys_eval		Url_cmd_eval() {return url_cmd_eval;} Xoa_fsys_eval url_cmd_eval;
 	public Xoa_cur				Cur_redirect() {return cur_redirect;} private Xoa_cur cur_redirect;
-	public Xoa_cfg_mgr			Cfg_mgr() {return cfg_mgr;} private Xoa_cfg_mgr cfg_mgr;
 	public Io_stream_zip_mgr	Zip_mgr() {return zip_mgr;} Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr();
 	public Xoa_cache_mgr		Cache_mgr() {return cache_mgr;} private Xoa_cache_mgr cache_mgr = new Xoa_cache_mgr();
 
@@ -221,7 +219,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		else if	(ctx.MatchPriv(k, Invk_term_cbk))			return this.Term_cbk();
 		else if	(ctx.Match(k, Invk_xtns))					return xtn_mgr;
 		else if	(ctx.Match(k, Invk_ctg_mgr))				return ctg_mgr;
-		else if	(ctx.Match(k, Invk_cfgs))					return cfg_mgr;
 		else if	(ctx.Match(k, Invk_usr_dlg))				return Xoa_app_.Usr_dlg();
 		else if	(ctx.Match(k, Invk_specials))				return special_mgr;
 		else if	(ctx.Match(k, Invk_server))					return tcp_server;
@@ -237,7 +234,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public static final String Invk_gui = "gui", Invk_bldr = "bldr", Invk_wikis = "wikis", Invk_files = "files", Invk_langs = "langs", Invk_users = "users"
 	, Invk_sys_cfg = "sys_cfg", Invk_fsys = "fsys", Invk_cur = "cur", Invk_shell = "shell", Invk_log = "log"
 	, Invk_setup = "setup", Invk_scripts = "scripts", Invk_user = "user", Invk_xtns = "xtns", Invk_ctg_mgr = "ctg_mgr"
-	, Invk_cfgs = "cfgs", Invk_app = "app", Invk_xowa = "xowa", Invk_usr_dlg = "usr_dlg", Invk_specials = "specials", Invk_html = "html"
+	, Invk_app = "app", Invk_xowa = "xowa", Invk_usr_dlg = "usr_dlg", Invk_specials = "specials", Invk_html = "html"
 	, Invk_server = "tcp_server", Invk_http_server = "http_server"
 	, Invk_fmtrs = "fmtrs"
 	, Invk_cfg = "cfg"
