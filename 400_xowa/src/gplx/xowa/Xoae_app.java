@@ -171,7 +171,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		if (Launch_done()) return;
 		xwiki_mgr__sitelink_mgr.Init_by_app();
 		stage = Xoa_stage_.Tid_launch;
-		user.Cfg_mgr().Setup_mgr().Setup_run_check(this); log_bfr.Add("app.upgrade.done");
+		Xouc_setup_mgr.Setup_run_check(this); log_bfr.Add("app.upgrade.done");
 		user.Wiki().Init_assert();	// NOTE: must assert wiki and load langs first, else will be asserted during Portal_mgr().Init(), which will cause IndexOutOfBounds; DATE:2014-10-04
 		gplx.xowa.addons.users.wikis.regys.Xou_regy_addon.Init(this);
 	}

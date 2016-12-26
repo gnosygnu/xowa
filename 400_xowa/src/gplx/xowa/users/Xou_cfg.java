@@ -18,18 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 public class Xou_cfg implements Gfo_invk {
 	public Xou_cfg(Xoue_user user) {
-		this.user = user;
-		pages_mgr = new Xouc_pages_mgr(this); setup_mgr = new Xouc_setup_mgr(user);
+		pages_mgr = new Xouc_pages_mgr(this);
 	}
-	public Xoue_user User() {return user;} private Xoue_user user;
 	public Xouc_pages_mgr Pages_mgr() {return pages_mgr;} private Xouc_pages_mgr pages_mgr;
-	public Xouc_setup_mgr Setup_mgr() {return setup_mgr;} private Xouc_setup_mgr setup_mgr;
 	public Xou_log_mgr Log_mgr() {return log_mgr;} private final    Xou_log_mgr log_mgr = new Xou_log_mgr();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_pages))			return pages_mgr;
-		else if	(ctx.Match(k, Invk_setup))			return setup_mgr;
 		else if	(ctx.Match(k, Invk_log))			return log_mgr;
 		return this;
 	}
-	public static final    String Invk_pages = "pages", Invk_setup = "setup", Invk_log = "log";
+	public static final    String Invk_pages = "pages", Invk_log = "log";
 }
