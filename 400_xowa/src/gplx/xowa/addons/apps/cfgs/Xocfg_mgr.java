@@ -113,6 +113,7 @@ public class Xocfg_mgr implements Gfo_invk {
 	public void Set_float_app(String key, float val)	{Set_str(Xocfg_mgr.Ctx__app, key, Float_.To_str(val));}
 	public void Set_str_app(String key, String val)		{Set_str(Xocfg_mgr.Ctx__app, key, val);}
 	public void Set_int_app(String key, int val)		{Set_str(Xocfg_mgr.Ctx__app, key, Int_.To_str(val));}
+	public void Set_bry_wiki(Xowe_wiki wiki, String key, byte[] val)	{Set_str(wiki.Domain_itm().Abrv_xo_str(), key, String_.new_u8(val));}
 	public void Set_str(String ctx, String key, String val) {
 		cache_mgr.Set(ctx, key, val);
 	}

@@ -229,7 +229,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		log_bfr.Add("wiki.init.end");
 		app.Log_wtr().Log_to_session_direct(log_bfr.Xto_str());
 		init_in_process = false;
-		app.Api_root().Wikis().Get(domain_bry).Subscribe(this);
+//			app.Api_root().Wikis().Get(domain_bry).Subscribe(this);
 		app.Site_cfg_mgr().Load(this);
 		app.Addon_mgr().Load_by_wiki(this);
 		ctg_pagebox_wtr.Init_by_wiki(this);
@@ -237,6 +237,8 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 
 		file_mgr.Init_by_wiki(this);
 		page_mgr.Init_by_wiki(this);
+
+		app.Cfg().Bind_many_wiki(this, this, Cfg__variant__current);
 	}
 	public void Rls() {
 		if (rls_list != null) {
@@ -276,7 +278,8 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		else if	(ctx.Match(k, Invk_xtns))				return xtn_mgr;
 		else if	(ctx.Match(k, Invk_catpage_mgr))		return ctg_catpage_mgr;
 		else if	(ctx.Match(k, Invk_hdump_enabled_))		this.html_mgr__hdump_enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, gplx.xowa.apps.apis.xowa.wikis.langs.Xoap_lang_variants.Evt_current_changed))	lang.Vnt_mgr().Cur_itm_(m.ReadBry("v"));
+
+		else if (ctx.Match(k, Cfg__variant__current))	lang.Vnt_mgr().Cur_itm_(m.ReadBry("v"));
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -291,6 +294,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	, Invk_domain = "domain", Invk_maint = "maint", Invk_hdump_enabled_ = "hdump_enabled_"
 	, Invk_catpage_mgr = "catpage_mgr"
 	;
+	public static final String Cfg__variant__current = "xowa.lang.variant.current";
 	public static final String	Invk_db_mgr = "db_mgr";	// SERIALIZED:000.sqlite3|xowa_cfg
 	public static final String Invk_lang_ = "lang_";
 }

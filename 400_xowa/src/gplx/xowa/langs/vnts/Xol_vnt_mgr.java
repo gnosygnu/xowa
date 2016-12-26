@@ -40,6 +40,7 @@ public class Xol_vnt_mgr implements Gfo_invk {
 		return rv;
 	}
 	public void Cur_itm_(byte[] v) {
+		if (Bry_.Len_eq_0(v)) return;	// Cfg is empty by default
 		this.cur_itm = regy.Get_by(v); if (cur_itm == null) throw Err_.new_("lang.vnt", "vnt not found", "key", v);
 	} 
 	public void Init_end() {

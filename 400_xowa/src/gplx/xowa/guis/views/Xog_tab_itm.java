@@ -127,20 +127,16 @@ public class Xog_tab_itm implements Gfo_invk {
 		if (page != null) page.Tab_data().Close_mgr().When_close(this, url);			// cancel any current search cmds
 		app.Log_wtr().Queue_enabled_(true);
 		usr_dlg.Gui_wkr().Clear();
-		if (url.Vnt_bry() != null) Cur_vnt_(wiki, url.Vnt_bry());
+		if (url.Vnt_bry() != null) {
+			byte[] vnt = url.Vnt_bry();
+			if (!Bry_.Eq(vnt, wiki.Lang().Vnt_mgr().Cur_itm().Key()))
+				wiki.Appe().Cfg().Set_bry_wiki(wiki, Xowe_wiki.Cfg__variant__current, vnt);
+		}
 		Tab_name_(new_tab_name);
 		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_u8(ttl.Raw()));
 		if (wiki.Html_mgr().Head_mgr().Popup_mgr().Enabled())
 			this.Html_box().Html_js_eval_script("if (window.xowa_popups_hide_all != null) window.xowa_popups_hide_all();");	// should be more configurable; DATE:2014-07-09
 		app.Thread_mgr_old().Page_load_mgr().Add_at_end(new Load_page_wkr(this, wiki, url, ttl)).Run();
-	}
-	private void Cur_vnt_(Xowe_wiki wiki, byte[] vnt) {
-		Xoae_app app = wiki.Appe();
-		gplx.xowa.apps.apis.xowa.wikis.langs.Xoap_lang_variants vnt_mgr = app.Api_root().Wikis().Get(wiki.Domain_bry()).Lang().Variants();
-		if (Bry_.Eq(vnt, vnt_mgr.Current())) return;
-		vnt_mgr.Current_(vnt);
-		app.Cfg_mgr().Set_by_app(String_.Format("xowa.api.wikis.get('{0}').lang.variants.current", wiki.Domain_str()), String_.new_u8(vnt));
-		app.Cfg_mgr().Db_save_txt();
 	}
 	private void Show_url_loaded(Load_page_wkr wkr) {
 		Xowe_wiki wiki = wkr.Wiki(); Xoae_page page = wkr.Page();
