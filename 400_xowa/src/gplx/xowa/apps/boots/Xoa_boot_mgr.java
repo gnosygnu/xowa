@@ -84,8 +84,7 @@ public class Xoa_boot_mgr {
 			catch (Exception e) {usr_dlg.Warn_many("", "", "app init failed: ~{0}", Err_.Message_gplx_full(e));}
 			app.Usr_dlg().Log_wkr_(app.Log_wtr());	// NOTE: log_wtr must be set for cmd-line (else process will fail);
 
-			// run gfs
-			gplx.xowa.users.prefs.Prefs_rename_mgr.Instance.Check(app.Usere().Fsys_mgr().App_data_cfg_user_fil());
+			// run gfs; prefs.gfs and app.gfs
 			Io_url cmd_file = arg_mgr.Cmd__file();
 			try {app.Gfs_mgr().Run_url(cmd_file);}
 			catch (Exception e) {
