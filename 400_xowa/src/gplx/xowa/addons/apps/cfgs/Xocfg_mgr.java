@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
 import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.mgrs.caches.*; import gplx.xowa.addons.apps.cfgs.mgrs.dflts.*; import gplx.xowa.addons.apps.cfgs.mgrs.types.*; import gplx.xowa.addons.apps.cfgs.mgrs.execs.*;
 public class Xocfg_mgr implements Gfo_invk {
-	private final    Xocfg_cache_mgr cache_mgr = new Xocfg_cache_mgr();
 	public Xocfg_mgr() {
 		this.dflt_mgr = new Xocfg_dflt_mgr(cache_mgr);
 	}
+	public Xocfg_cache_mgr Cache_mgr() {return cache_mgr;} private final    Xocfg_cache_mgr cache_mgr = new Xocfg_cache_mgr();
 	public Xocfg_type_mgr Type_mgr() {return type_mgr;} private final    Xocfg_type_mgr type_mgr = new Xocfg_type_mgr();
 	public Xocfg_dflt_mgr Dflt_mgr() {return dflt_mgr;} private final    Xocfg_dflt_mgr dflt_mgr;
 	public Xocfg_exec_mgr Exec_mgr() {return exec_mgr;} private final    Xocfg_exec_mgr exec_mgr = new Xocfg_exec_mgr();

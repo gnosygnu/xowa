@@ -19,7 +19,7 @@ package gplx.xowa.addons.apps.cfgs.specials.edits.services; import gplx.*; impor
 import gplx.langs.jsons.*;
 import gplx.core.gfobjs.*;
 import gplx.xowa.guis.cbks.*; import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.specials.edits.objs.*;
-import gplx.xowa.addons.apps.cfgs.specials.edits.pages.*;
+import gplx.xowa.addons.apps.cfgs.specials.edits.pages.*; import gplx.xowa.addons.apps.cfgs.mgrs.caches.*;
 public class Xocfg_edit_svc {
 	private final    Xoa_app app;
 	private Xocfg_edit_loader edit_loader;
@@ -36,7 +36,12 @@ public class Xocfg_edit_svc {
 			val = gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_db_str(val);
 		}
 		app.Cfg().Set_str(ctx, key, val);
-		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.upsert__recv", Gfobj_nde.New().Add_str("key", key));
+
+		Xocfg_cache_grp grp = app.Cfg().Cache_mgr().Grps__get_or_load(key);
+		if (String_.Eq(grp.Dflt(), val))
+			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.revert__recv", Gfobj_nde.New().Add_str("key", key).Add_str("val", val));
+		else
+			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.upsert__recv", Gfobj_nde.New().Add_str("key", key));
 	}
 	public void Revert(Json_nde args) {
 		String ctx = args.Get_as_str("ctx");

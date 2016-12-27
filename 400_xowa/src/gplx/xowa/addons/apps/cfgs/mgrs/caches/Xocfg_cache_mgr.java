@@ -48,7 +48,12 @@ public class Xocfg_cache_mgr {
 	public void Set(boolean save, String ctx, String key, String val) {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
 		grp.Set(ctx, val);
-		if (save) db_usr.Set_str(ctx, key, val);
+		if (save) {
+			if (String_.Eq(grp.Dflt(), val))
+				db_usr.Del(ctx, key);
+			else
+				db_usr.Set_str(ctx, key, val);
+		}
 		grp.Pub(ctx, val);
 	}
 	public void Del(String ctx, String key) {
@@ -69,7 +74,7 @@ public class Xocfg_cache_mgr {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
 		grp.Dflt_(val);
 	}
-	private Xocfg_cache_grp Grps__get_or_load(String key) {
+	public Xocfg_cache_grp Grps__get_or_load(String key) {
 		Xocfg_cache_grp grp = (Xocfg_cache_grp)grps.Get_by(key);
 		if (grp == null) {
 			grp = Load_grp(key, "");
