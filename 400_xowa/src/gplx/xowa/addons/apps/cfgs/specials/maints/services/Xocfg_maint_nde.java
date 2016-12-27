@@ -41,12 +41,13 @@ class Xocfg_maint_grp extends Xocfg_maint_nde {	public Xocfg_maint_grp(int id, S
 	@Override public boolean Type_is_grp() {return true;}
 	@Override protected void To_bfr_hook(Bry_bfr bfr) {}
 }
-class Xocfg_maint_itm extends Xocfg_maint_nde {	public Xocfg_maint_itm(int id, String key, String owner, String name, String help, String scope, String db_type, String dflt, String gui_type, String gui_args) {super(id, key, owner, name, help);
+class Xocfg_maint_itm extends Xocfg_maint_nde {	public Xocfg_maint_itm(int id, String key, String owner, String name, String help, String scope, String db_type, String dflt, String gui_type, String gui_args, String gui_cls) {super(id, key, owner, name, help);
 		this.scope = scope;
 		this.db_type = db_type;
 		this.dflt = dflt;
 		this.gui_type = gui_type;
 		this.gui_args = gui_args;
+		this.gui_cls = gui_cls;
 	}
 	@Override public boolean Type_is_grp() {return false;}
 	public String Scope() {return scope;} private final    String scope;
@@ -54,7 +55,8 @@ class Xocfg_maint_itm extends Xocfg_maint_nde {	public Xocfg_maint_itm(int id, S
 	public String Dflt() {return dflt;} private final    String dflt;
 	public String Gui_type() {return gui_type;} private final    String gui_type;
 	public String Gui_args() {return gui_args;} private final    String gui_args;
+	public String Gui_cls() {return gui_cls;} private final    String gui_cls;
 	@Override protected void To_bfr_hook(Bry_bfr bfr) {
-		bfr.Add_str_u8_fmt("|{0}|{1}|{2}|{3}|{4}", scope, db_type, dflt, gui_type, gui_args);
+		bfr.Add_str_u8_fmt("|{0}|{1}|{2}|{3}|{4}|{5}", scope, db_type, dflt, gui_type, gui_args, gui_cls);
 	}
 }

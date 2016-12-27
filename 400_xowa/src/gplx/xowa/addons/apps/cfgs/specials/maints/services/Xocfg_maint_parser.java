@@ -49,11 +49,12 @@ class Xocfg_maint_parser {
 			String dflt			= Get_atr_as_str_or_fail(hash, "dflt_");
 			String gui_type		= Get_atr_as_str_or(hash, "gui_type_", null);
 			String gui_args		= Get_atr_as_str_or(hash, "gui_args_", "");
+			String gui_cls		= Get_atr_as_str_or(hash, "gui_cls_", "");
 
 			if (gui_type == null) {
 				gui_type = gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_tid.Infer_gui_type(db_type);
 			}
-			return new Xocfg_maint_itm(id, key, owner, name, help, scope, db_type, dflt, gui_type, gui_args);
+			return new Xocfg_maint_itm(id, key, owner, name, help, scope, db_type, dflt, gui_type, gui_args, gui_cls);
 		}
 		else throw Err_.new_wo_type("xo.cfg_maint:unknown type", "type", nde_type);
 	}

@@ -157,6 +157,7 @@ public class Xocfg_edit_loader {
 			, ",       i.itm_data_type"
 			, ",       i.itm_gui_type"
 			, ",       i.itm_gui_args"
+			, ",       i.itm_gui_cls"
 			, ",       i.itm_dflt"
 			, "FROM    cfg_itm i"
 			, "WHERE   i.itm_key IN ({0})"
@@ -169,7 +170,7 @@ public class Xocfg_edit_loader {
 				Xoedit_itm edit_itm = (Xoedit_itm)itm_list.Get_by_or_fail(key);
 				String dflt = dflt_mgr.Get_or(key, rdr.Read_str("itm_dflt"));
 				int gui_type = rdr.Read_int("itm_gui_type");
-				edit_itm.Load_by_meta(tmp_bfr, rdr.Read_int("itm_scope_id"), rdr.Read_str("itm_data_type"), gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_tid.To_key(gui_type), rdr.Read_str("itm_gui_args"), dflt);
+				edit_itm.Load_by_meta(tmp_bfr, rdr.Read_int("itm_scope_id"), rdr.Read_str("itm_data_type"), gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_tid.To_key(gui_type), rdr.Read_str("itm_gui_args"), rdr.Read_str("itm_gui_cls"), dflt);
 			}
 		}
 	}

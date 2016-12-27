@@ -23,7 +23,7 @@ import gplx.langs.htmls.*;
 public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 	private String gui_type;
 	private boolean edited;
-	private String data_type, gui_args, lang, name, ctx, date;
+	private String data_type, gui_args, gui_cls, lang, name, ctx, date;
 	private byte[] val, dflt;	// NOTE: data is always escaped b/c it is only consumed by mustache; EX: "&lt;&apos;" not "<'"
 	private Xocfg_type_mgr type_mgr;
 	public Xoedit_itm(Xocfg_type_mgr type_mgr, int id, String key, int sort) {
@@ -37,10 +37,11 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 	public String	Help()		{return help;}	private String help;
 
 	public int		Sort()		{return sort;}	private final    int sort;
-	public void Load_by_meta(Bry_bfr tmp_bfr, int scope_id, String data_type, String gui_type, String gui_args, String dflt_str) {
+	public void Load_by_meta(Bry_bfr tmp_bfr, int scope_id, String data_type, String gui_type, String gui_args, String gui_cls, String dflt_str) {
 		this.data_type = data_type;
 		this.gui_type = gui_type;
 		this.gui_args = gui_args;
+		this.gui_cls = gui_cls;
 		this.dflt = Gfh_utl.Escape_html_as_bry(tmp_bfr, Bry_.new_u8(dflt_str), Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);
 	}
 	public void Load_by_i18n(String lang, String name, String help) {
@@ -53,7 +54,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		this.val = Gfh_utl.Escape_html_as_bry(tmp_bfr, Bry_.new_u8(val_str), Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);
 		this.date = date;
 		this.edited = true;
-		if (	String_.Has(gui_args, "read"+"only=") || String_.Has(gui_args, "disabled=")
+		if (	String_.Has(gui_cls, "read"+"only")
 			||	String_.Eq(gui_type, gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_tid.Itm__btn.Key()))
 			edited = false;
 	}
@@ -81,7 +82,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		return rv;
 	}
 	private void To_html(Bry_bfr bfr, Xocfg_type_mgr type_mgr) {
-		Xoedit_itm_html.Build_html(bfr, type_mgr, key, name, data_type, gui_type, gui_args, val);
+		Xoedit_itm_html.Build_html(bfr, type_mgr, key, name, data_type, gui_type, gui_args, gui_cls, val);
 	}
 	public boolean Mustache__write(String k, Mustache_bfr bfr) {
 		if		(String_.Eq(k, "id"))				bfr.Add_int(id);

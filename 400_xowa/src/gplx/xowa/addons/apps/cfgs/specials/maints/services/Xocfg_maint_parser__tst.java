@@ -25,8 +25,8 @@ public class Xocfg_maint_parser__tst {
 		);
 	}
 	@Test   public void Parse_itm() {
-		fxt.Exec__parse("itm {id='123'; key='key_1'; owner='owner_1'; name='name_1'; help='help_1'; scope='scope_1'; db_type='db_type_1'; dflt='dflt_1'; gui_type='gui_type_1'; gui_args='gui_args_1'}"
-		, fxt.Make__itm(123, "key_1", "owner_1", "name_1", "help_1", "scope_1", "db_type_1", "dflt_1", "gui_type_1", "gui_args_1")
+		fxt.Exec__parse("itm {id='123'; key='key_1'; owner='owner_1'; name='name_1'; help='help_1'; scope='scope_1'; db_type='db_type_1'; dflt='dflt_1'; gui_type='gui_type_1'; gui_args='gui_args_1'; gui_cls='gui_cls_1'}"
+		, fxt.Make__itm(123, "key_1", "owner_1", "name_1", "help_1", "scope_1", "db_type_1", "dflt_1", "gui_type_1", "gui_args_1", "gui_cls_1")
 		);
 	}
 }
@@ -39,7 +39,7 @@ class Xocfg_maint_parser__fxt {
 	public Xocfg_maint_grp Make__grp(int id, String key, String owner, String name, String help) {
 		return new Xocfg_maint_grp(id, key, owner, name, help);
 	}
-	public Xocfg_maint_itm Make__itm(int id, String key, String owner, String name, String help, String scope, String db_type, String dflt, String gui_type, String gui_args) {
-		return new Xocfg_maint_itm(id, key, owner, name, help, scope, db_type, dflt, gui_type, gui_args);
+	public Xocfg_maint_itm Make__itm(int id, String key, String owner, String name, String help, String scope, String db_type, String dflt, String gui_type, String gui_args, String gui_cls) {
+		return new Xocfg_maint_itm(id, key, owner, name, help, scope, db_type, dflt, gui_type, gui_args, gui_cls);
 	}
 }

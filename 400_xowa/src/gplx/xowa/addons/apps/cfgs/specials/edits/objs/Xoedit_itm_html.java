@@ -19,30 +19,31 @@ package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gp
 import gplx.xowa.addons.apps.cfgs.enums.*;
 import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
 public class Xoedit_itm_html {
-	public static void Build_html(Bry_bfr bfr, Xocfg_type_mgr type_mgr, String key, String name, String data_type, String gui_type_key, String gui_args, byte[] val) {
+	public static void Build_html(Bry_bfr bfr, Xocfg_type_mgr type_mgr, String key, String name, String data_type, String gui_type_key, String gui_args, String gui_cls, byte[] val) {
 		// if gui_args exists, prepend space for html insertion; EX: "type='checkbox'{1}>" with "a=b" -> "type='checkbox' a='b'" x> "type='checkbox'a='b'"
 		if (String_.Len_gt_0(gui_args)) gui_args = " " + gui_args;
+		if (String_.Len_gt_0(gui_cls))	gui_cls  = " " + gui_cls;
 		switch (Xoitm_gui_tid.To_uid(gui_type_key)) {
 			case Xoitm_gui_tid.Tid__bool:
 				bfr.Add_str_u8_fmt
-				( "<input id=\"{2}\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__bool\" type=\"checkbox\"{1}{3}></input>"
-				, gui_type_key, gui_args, key, Bry_.Eq(val, Bool_.Y_bry) ? " checked=\"checked\"" : "");
+				( "<input id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__bool{2}\" type=\"checkbox\"{1}{4}></input>"
+				, gui_type_key, gui_args, gui_cls, key, Bry_.Eq(val, Bool_.Y_bry) ? " checked=\"checked\"" : "");
 				break;
 			case Xoitm_gui_tid.Tid__int:
 				bfr.Add_str_u8_fmt
-				( "<input id=\"{2}\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__int\" type=\"text\"{1} value=\"{3}\"></input>"
-				, gui_type_key, gui_args, key, val);
+				( "<input id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__int{2}\" type=\"text\"{1} value=\"{4}\"></input>"
+				, gui_type_key, gui_args, gui_cls, key, val);
 				break;
 			case Xoitm_gui_tid.Tid__str:
 				bfr.Add_str_u8_fmt
-				( "<input id=\"{2}\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__str\" type=\"text\"{1} value=\"{3}\"></input>"
-				, gui_type_key, gui_args, key, val);
+				( "<input id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__str{2}\" type=\"text\"{1} value=\"{4}\"></input>"
+				, gui_type_key, gui_args, gui_cls, key, val);
 				break;
 			case Xoitm_gui_tid.Tid__memo:
 				if (String_.Len_eq_0(gui_args)) gui_args = " rows=\"4\"";
 				bfr.Add_str_u8_fmt
-				( "<textarea id=\"{2}\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__memo\"{1}>{3}</textarea>"
-				, gui_type_key, gui_args, key, val);
+				( "<textarea id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__memo{2}\"{1}>{4}</textarea>"
+				, gui_type_key, gui_args, gui_cls, key, val);
 				break;
 			case Xoitm_gui_tid.Tid__list:
 				// get list of kvs by type
@@ -52,8 +53,8 @@ public class Xoedit_itm_html {
 
 				// build html
 				bfr.Add_str_u8_fmt
-				( "<select id=\"{2}\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__list\" {1}>\n"
-				, gui_type_key, gui_args, key);
+				( "<select id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-gui=\"{0}\" accesskey=\"d\" class=\"xocfg__list{2}\" {1}>\n"
+				, gui_type_key, gui_args, gui_cls, key);
 				String val_str = String_.new_u8(val);
 				for (int i = 0; i < len; i++) {
 					Keyval kv = kvs_ary[i];
@@ -68,26 +69,26 @@ public class Xoedit_itm_html {
 			case Xoitm_gui_tid.Tid__io_cmd:
 				String[] lines = Xocfg_mgr.Parse_io_cmd(String_.new_u8(val));
 				bfr.Add_str_u8_fmt
-				( "<input  class=\"xocfg__io_cmd__exe__txt\" id=\"{2}-exe\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}-exe\" accesskey=\"d\" type=\"text\"{1} value=\"{3}\"></input>\n"
-				+ "<button class=\"xocfg__io_cmd__exe__btn\" onclick='xowa_io_select(\"file\", \"{2}-exe\", \"Please select a file.\");'>...</button><br/>\n"
-				, gui_type_key, gui_args, key, lines[0]);
+				( "<input  class=\"xocfg__io_cmd__exe__txt\" id=\"{3}-exe\" data-xocfg-key=\"{3}\" data-xocfg-gui=\"{0}-exe\" accesskey=\"d\" class=\"{2}\" type=\"text\"{1} value=\"{4}\"></input>\n"
+				+ "<button class=\"xocfg__io_cmd__exe__btn\" onclick='xowa_io_select(\"file\", \"{3}-exe\", \"Please select a file.\");'>...</button><br/>\n"
+				, gui_type_key, gui_args, gui_cls, key, lines[0]);
 				bfr.Add_str_u8_fmt
-				( "<input  class=\"xocfg__io_cmd__arg__txt\" id=\"{2}-arg\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}-arg\" accesskey=\"d\" type=\"text\"{1} value=\"{3}\">\n"
-				, gui_type_key, gui_args, key, lines[1]);
+				( "<input  class=\"xocfg__io_cmd__arg__txt\" id=\"{3}-arg\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}-arg\" accesskey=\"d\" class=\"{2}\" type=\"text\"{1} value=\"{4}\">\n"
+				, gui_type_key, gui_args, gui_cls, key, lines[1]);
 				break;
 			case Xoitm_gui_tid.Tid__gui_binding:
 				String[] flds = Xoitm_gui_binding.To_gui(String_.new_u8(val));
 				bfr.Add_str_u8_fmt
-				( "<input  class=\"xocfg__gui_binding__box__txt\" id=\"{2}-box\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}-box\" accesskey=\"d\" type=\"text\"{1} value=\"{3}\"></input>\n"
-				, gui_type_key, gui_args, key, flds[0]);
+				( "<input  class=\"xocfg__gui_binding__box__txt\" id=\"{3}-box\" data-xocfg-key=\"{3}\" data-xocfg-gui=\"{0}-box\" accesskey=\"d\" class=\"{2}\" type=\"text\"{1} value=\"{4}\"></input>\n"
+				, gui_type_key, gui_args, gui_cls, key, flds[0]);
 				bfr.Add_str_u8_fmt
-				( "<input  class=\"xocfg__gui_binding__ipt__txt\" id=\"{2}-ipt\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}-ipt\" accesskey=\"d\" type=\"text\"{1} value=\"{3}\"'>\n"
-				, gui_type_key, gui_args, key, flds[1]);
+				( "<input  class=\"xocfg__gui_binding__ipt__txt\" id=\"{3}-ipt\" data-xocfg-key=\"{3}\" data-xocfg-gui=\"{0}-ipt\" accesskey=\"d\" class=\"{2}\" type=\"text\"{1} value=\"{4}\"'>\n"
+				, gui_type_key, gui_args, gui_cls, key, flds[1]);
 				break;
 			case Xoitm_gui_tid.Tid__btn:
 				bfr.Add_str_u8_fmt
-				( "<button id=\"{2}\" data-xocfg-key=\"{2}\" data-xocfg-gui=\"{0}\" class=\"xocfg__btn\" {1}>{3}</button>"
-				, gui_type_key, gui_args, key, name);
+				( "<button id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-gui=\"{0}\" class=\"xocfg__btn{2}\" {1}>{4}</button>"
+				, gui_type_key, gui_args, gui_cls, key, name);
 				break;
 			default:
 				break;

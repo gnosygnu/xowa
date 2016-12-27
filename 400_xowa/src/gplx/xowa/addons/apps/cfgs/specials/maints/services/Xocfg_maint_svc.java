@@ -44,7 +44,7 @@ public class Xocfg_maint_svc {
 			}
 			else {
 				Xocfg_maint_itm itm = (Xocfg_maint_itm)nde;
-				Xocfg_maint_svc.Create_itm(db_app, nde.Id(), nde.Key(), nde.Owner(), nde.Name(), String_.new_u8(help), itm.Scope(), itm.Db_type(), itm.Dflt(), itm.Gui_type(), itm.Gui_args());
+				Xocfg_maint_svc.Create_itm(db_app, nde.Id(), nde.Key(), nde.Owner(), nde.Name(), String_.new_u8(help), itm.Scope(), itm.Db_type(), itm.Dflt(), itm.Gui_type(), itm.Gui_args(), itm.Gui_cls());
 			}
 		}
 		db_app.Conn().Txn_end();
@@ -61,12 +61,12 @@ public class Xocfg_maint_svc {
 		// insert nde_i18n
 		db_app.Tbl__txt().Upsert(grp_id, Xoitm_lang_tid.Lang__dflt, name, help);
 	}
-	public static void Create_itm(Xocfg_db_app db_app, int itm_id, String key, String owner, String name, String help, String scope, String db_type, String dflt, String gui_type, String gui_args) {
+	public static void Create_itm(Xocfg_db_app db_app, int itm_id, String key, String owner, String name, String help, String scope, String db_type, String dflt, String gui_type, String gui_args, String gui_cls) {
 		// insert itm_meta
 		int grp_id = db_app.Tbl__grp().Select_id_by_key_or_fail(owner);
 		int scope_id = Xoitm_scope_tid.To_int(scope);
 		int gui_type_id = Xoitm_gui_tid.To_uid(gui_type);
-		db_app.Tbl__itm().Upsert(itm_id, scope_id, db_type, gui_type_id, gui_args, key, dflt);
+		db_app.Tbl__itm().Upsert(itm_id, scope_id, db_type, gui_type_id, gui_args, gui_cls, key, dflt);
 
 		// insert grp_map
 		int itm_sort = db_app.Tbl__map().Select_sort_or_next(grp_id, itm_id);

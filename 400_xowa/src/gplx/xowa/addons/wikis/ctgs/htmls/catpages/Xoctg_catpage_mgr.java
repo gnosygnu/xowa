@@ -45,7 +45,7 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 		if		(String_.Eq(missing_cls, Str__missing_cls__normal))		return Css__missing_cls__normal;
 		else if (String_.Eq(missing_cls, Str__missing_cls__hide))		return Css__missing_cls__hide;
 		else if (String_.Eq(missing_cls, Str__missing_cls__red))		return Css__missing_cls__red;
-		else															throw Err_.new_unhandled(missing_cls);
+		else															return Bry_.Empty;	// NOTE: do not throw error, else fatal error when regen'ing cfg db; DATE:2016-12-27
 	}
 	public void Init_by_wiki(Xow_wiki wiki) {
 		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__missing_class);

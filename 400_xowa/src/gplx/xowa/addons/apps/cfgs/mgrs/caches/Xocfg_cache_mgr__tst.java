@@ -53,7 +53,7 @@ class Xocfg_cache_mgr__fxt {
 	public Xocfg_cache_sub_mock Sub() {return sub;} private Xocfg_cache_sub_mock sub = new Xocfg_cache_sub_mock();
 	public void Init__db_add(String ctx, String key, Object val) {
 		Xocfg_maint_svc.Create_grp(mgr.Db_app(), id++, "test_grp", "", "", "");
-		Xocfg_maint_svc.Create_itm(mgr.Db_app(), id++, key, "test_grp", "", "", "wiki", "string", "dflt", "string", "");
+		Xocfg_maint_svc.Create_itm(mgr.Db_app(), id++, key, "test_grp", "", "", "wiki", "string", "dflt", "string", "", "");
 		mgr.Db_usr().Set_str(ctx, key, Object_.Xto_str_strict_or_null(val));
 	}
 	public void Init__sub(String ctx, String key, String evt) {
