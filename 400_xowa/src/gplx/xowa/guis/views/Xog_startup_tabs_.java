@@ -96,5 +96,5 @@ public class Xog_startup_tabs_ {
 	, Cfg__prev_selected			= "xowa.app.startup.tabs.previous_selected"
 	, Opt__tabs_type__previous		= "previous"
 	;
-	public static final String Cfg__prev_version				= "xowa.app.session.version";
+	public static final String Cfg__prev_version				= "xowa.app.previous_version";
 }

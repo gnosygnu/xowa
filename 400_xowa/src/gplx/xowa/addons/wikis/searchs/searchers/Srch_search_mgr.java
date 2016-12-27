@@ -93,5 +93,5 @@ public class Srch_search_mgr implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	public static final String Cfg__args_default			= "xowa.addon.search.args_default";
+	public static final String Cfg__args_default			= "xowa.addon.search.special.args_default";
 }

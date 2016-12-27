@@ -147,5 +147,4 @@ public class Http_server_mgr implements Gfo_invk {
 	private static final String
 	  Cfg__port					= "xowa.addon.http_server.port"
 	, Cfg__file_retrieve_mode	= "xowa.addon.http_server.file_retrieve_mode";
-
 }

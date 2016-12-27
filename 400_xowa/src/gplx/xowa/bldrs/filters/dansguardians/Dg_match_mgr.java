@@ -139,15 +139,15 @@ public class Dg_match_mgr {
 		String ctx = cfg_mgr.To_ctx(wiki);
 		return new Dg_match_mgr
 		( cfg_mgr.Get_url_or(ctx, Cfg__root_dir, app.Fsys_mgr().Bin_xowa_dir().GenSubDir_nest("cfg", "bldr", "filter")).GenSubDir(wiki.Domain_str())
-		, cfg_mgr.Get_int_or(ctx, "xowa.wiki.import.dansguardian.score_init", 0)
-		, cfg_mgr.Get_int_or(ctx, "xowa.wiki.import.dansguardian.score_fail", 0)
-		, cfg_mgr.Get_bool_or(ctx, "xowa.wiki.import.dansguardian.case_match", false)
-		, cfg_mgr.Get_bool_or(ctx, "xowa.wiki.import.dansguardian.log_enabled", true)
+		, cfg_mgr.Get_int_or(ctx, "xowa.bldr.dansguardian.score_init", 0)
+		, cfg_mgr.Get_int_or(ctx, "xowa.bldr.dansguardian.score_fail", 0)
+		, cfg_mgr.Get_bool_or(ctx, "xowa.bldr.dansguardian.case_match", false)
+		, cfg_mgr.Get_bool_or(ctx, "xowa.bldr.dansguardian.log_enabled", true)
 		, wiki.Fsys_mgr().Root_dir().GenSubFil("dansguardian_log.sqlite3")
 		);
 	}
-	public static final String Cfg__enabled		= "xowa.wiki.import.dansguardian.enabled";
-	private static final String Cfg__root_dir		= "xowa.wiki.import.dansguardian.root_dir";
+	public static final String Cfg__enabled		= "xowa.bldr.dansguardian.enabled";
+	private static final String Cfg__root_dir		= "xowa.bldr.dansguardian.root_dir";
 }
 class Dg_rule_group {
 	public Dg_rule_group(byte[] word) {this.word = word;}

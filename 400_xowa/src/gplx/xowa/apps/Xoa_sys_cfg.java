@@ -34,7 +34,7 @@ public class Xoa_sys_cfg implements Gfo_invk {
 		app.Cfg().Type_mgr().Lists__add("list:" + Cfg__lang, Options_list_lang_.new_());
 		app.Cfg().Bind_many_app(this, Cfg__lang);
 	}
-	private static final String Cfg__lang = "xowa.gui.lang.name";
+	private static final String Cfg__lang = "xowa.gui.app.lang";
 	public int Options_version() {return options_version;} public Xoa_sys_cfg Options_version_(int v) {options_version = v; return this;} private int options_version = 1;
 	public Keyval[] Options_lang_list() {if (options_lang_list == null) options_lang_list = Options_list_lang_.new_(); return options_lang_list;} private Keyval[] options_lang_list;
 	public long Free_mem_when() {return free_mem_when;} long free_mem_when;

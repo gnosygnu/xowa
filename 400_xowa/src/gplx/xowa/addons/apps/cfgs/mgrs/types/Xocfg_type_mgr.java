@@ -19,18 +19,17 @@ package gplx.xowa.addons.apps.cfgs.mgrs.types; import gplx.*; import gplx.xowa.*
 public class Xocfg_type_mgr {
 	private final    Ordered_hash list_hash = Ordered_hash_.New();
 	public Xocfg_type_mgr() {
-		this.Lists__add("list:xowa.gui.browser.page_load_mode", "mem", "url");
 		this.Lists__add("list:xowa.app.startup.window.mode", "previous", "maximized", "absolute", "relative", "default");
 		this.Lists__add("list:xowa.app.startup.pages.type", "blank", "xowa", "previous", "custom");
-		this.Lists__add("list:xowa.gui.window.html_box.adj_type", "none", "relative", "absolute");
-		this.Lists__add("list:xowa.wiki.database.zip_mode", Keyval_.new_("raw", "text"), Keyval_.new_("gzip"), Keyval_.new_("bzip2"), Keyval_.new_("xz"));
-		this.Lists__add("list:xowa.html.wiki.portal.missing_class", Keyval_.new_("", "Show as blue link"), Keyval_.new_("new", "Show as red link"), Keyval_.new_("xowa_display_none", "Hide"));
-		this.Lists__add("list:xowa.html.category.basic.missing_class", "normal", "hide", "red_link");
+		this.Lists__add("list:xowa.gui.html_box.page_load_mode", "mem", "url");
+		this.Lists__add("list:xowa.gui.html_box.adj_type", "none", "relative", "absolute");
+		this.Lists__add("list:xowa.html.portal.missing_class", Keyval_.new_("", "Show as blue link"), Keyval_.new_("new", "Show as red link"), Keyval_.new_("xowa_display_none", "Hide"));
 		this.Lists__add("list:xowa.html.tidy.engine", "tidy", "jtidy");
+		this.Lists__add("list:xowa.bldr.db.zip_mode", Keyval_.new_("raw", "text"), Keyval_.new_("gzip"), Keyval_.new_("bzip2"), Keyval_.new_("xz"));
+		this.Lists__add("list:xowa.addon.category.catpage.missing_class", "normal", "hide", "red_link");
 		this.Lists__add("list:xowa.addon.http_server.file_retrieve_mode", Keyval_.new_("wait"), Keyval_.new_("skip"), Keyval_.new_("async_server", "async server"));
-		this.Lists__add("list:xowa.addon.search_suggest.html_bar.search_mode", "Search", "AllPages", "AllPages_(v2)");
+		this.Lists__add("list:xowa.addon.scribunto.engine", "luaj", "lua");
 		this.Lists__add("list:xowa.addon.math.renderer", Keyval_.new_("mathjax","MathJax"), Keyval_.new_("latex", "LaTeX"));
-		this.Lists__add("list:xowa.addon.scribunto.general.engine", "luaj", "lua");
 	}
 	public void	Lists__add(String key, String... vals) {
 		int len = vals.length;

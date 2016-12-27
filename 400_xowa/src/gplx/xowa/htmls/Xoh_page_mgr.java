@@ -57,7 +57,7 @@ public class Xoh_page_mgr implements Gfo_invk {
 	  Cfg__font_name			= "xowa.html.css.font.name"
 	, Cfg__font_format			= "xowa.html.css.font.format"
 	, Cfg__custom_script		= "xowa.html.css.custom.script"
-	, Cfg__content_code_fmt		= "xowa.html.wiki.content_code_fmt"
+	, Cfg__content_code_fmt		= "xowa.html.page.content_code_fmt"
 	;
 	public static final float Font_size_default = 16;
 }

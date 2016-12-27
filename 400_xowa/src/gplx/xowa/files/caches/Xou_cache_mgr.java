@@ -174,11 +174,11 @@ public class Xou_cache_mgr implements Gfo_invk {
 		return this;
 	}
 	private static final String 
-	  Cfg__fsys_size_min		= "xowa.wiki.files.cache.fsys_size_min"
-	, Cfg__fsys_size_max		= "xowa.wiki.files.cache.fsys_size_max"
-	, Val__fsys_info			= "xowa.wiki.files.cache.info"
-	, Run__fsys_reduce_to_min	= "xowa.wiki.files.cache.reduce_to_min"
-	, Run__fsys_clear			= "xowa.wiki.files.cache.clear"
+	  Cfg__fsys_size_min		= "xowa.files.cache.fsys_size_min"
+	, Cfg__fsys_size_max		= "xowa.files.cache.fsys_size_max"
+	, Run__fsys_reduce_to_min	= "xowa.files.cache.reduce_to_min"
+	, Run__fsys_clear			= "xowa.files.cache.clear"
+	, Val__fsys_info			= "xowa.files.cache.info"
 	;
 	public void Fsys_size_(long min, long max) {fsys_size_min = min; fsys_size_max = max;}	// TEST:
 	private String Info_str() {

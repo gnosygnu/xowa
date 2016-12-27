@@ -28,7 +28,7 @@ public class Xocfg_edit_special implements Xow_special_page {
 
 		Xocfg_edit_loader loader = Xocfg_edit_loader.New(wiki.App());
 		if (String_.Eq(grp, "")) {
-			grp = wiki.App().Cfg().Get_str_app("xowa.app.cfg.recent_page");
+			grp = wiki.App().Cfg().Get_str_app("xowa.app.cfg.previous_grp");
 			if (!loader.Grp_key_exists(grp)) {
 				grp = "xowa.app.security";
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:grp_key not found; defaulting to xowa.app.security; key=~{0}", grp);

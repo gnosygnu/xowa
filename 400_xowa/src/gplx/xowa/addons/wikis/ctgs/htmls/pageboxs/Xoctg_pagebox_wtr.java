@@ -69,5 +69,5 @@ public class Xoctg_pagebox_wtr implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final String Cfg__grouping_enabled = "xowa.category.html.grouping_enabled";
+	private static final String Cfg__grouping_enabled = "xowa.addon.category.pagebox.grouping_enabled";
 }

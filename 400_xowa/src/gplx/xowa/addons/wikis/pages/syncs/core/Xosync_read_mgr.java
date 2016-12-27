@@ -72,9 +72,9 @@ public class Xosync_read_mgr implements Gfo_invk {
 		return this;
 	}
 	private static final String
-	  Cfg__manual__enabled		= "xowa.wiki.import.page_sync.manual.enabled"
-	, Cfg__auto__enabled		= "xowa.wiki.import.page_sync.auto.enabled"
-	, Cfg__auto__interval		= "xowa.wiki.import.page_sync.auto.interval"
-	, Cfg__auto__scope			= "xowa.wiki.import.page_sync.auto.scope"
+	  Cfg__manual__enabled		= "xowa.bldr.page_sync.manual.enabled"
+	, Cfg__auto__enabled		= "xowa.bldr.page_sync.auto.enabled"
+	, Cfg__auto__interval		= "xowa.bldr.page_sync.auto.interval"
+	, Cfg__auto__scope			= "xowa.bldr.page_sync.auto.scope"
 	;
 }

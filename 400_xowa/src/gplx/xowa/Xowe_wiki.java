@@ -294,7 +294,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	, Invk_domain = "domain", Invk_maint = "maint", Invk_hdump_enabled_ = "hdump_enabled_"
 	, Invk_catpage_mgr = "catpage_mgr"
 	;
-	public static final String Cfg__variant__current = "xowa.lang.variant.current";
+	public static final String Cfg__variant__current = "xowa.wiki.lang.variant.current";
 	public static final String	Invk_db_mgr = "db_mgr";	// SERIALIZED:000.sqlite3|xowa_cfg
 	public static final String Invk_lang_ = "lang_";
 }

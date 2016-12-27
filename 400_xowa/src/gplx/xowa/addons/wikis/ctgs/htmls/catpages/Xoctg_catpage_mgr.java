@@ -99,7 +99,7 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 	public static int Grp_max_dflt = 200;
 	private static final    Object thread_lock = new Object();
 
-	private static final String Cfg__missing_class = "xowa.category.html.missing_class";
+	private static final String Cfg__missing_class = "xowa.addon.category.catpage.missing_class";
 	private static final String Str__missing_cls__normal = "normal", Str__missing_cls__hide = "hide", Str__missing_cls__red = "red_link";
 	private static final    byte[] Css__missing_cls__normal = Bry_.new_a7(".xowa-missing-category-entry {}"), Css__missing_cls__hide = Bry_.new_a7(".xowa-missing-category-entry {display: none;}"), Css__missing_cls__red = Bry_.new_a7(".xowa-missing-category-entry {color: red;}");
 }

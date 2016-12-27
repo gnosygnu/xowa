@@ -87,7 +87,7 @@ public class Xoi_cmd_mgr implements Gfo_invk {
 		return cmd;	// return last cmd
 	}
 	public Gfo_thread_cmd Dump_add_many_custom(String wiki_key, String wiki_date, String dump_type, boolean dumpfile_cmd) {
-		String[] custom_cmds = (app.Cfg().Get_bool_app_or("xowa.wiki.import.unzip_bz2_file", false)) // CFG: Cfg__
+		String[] custom_cmds = (app.Cfg().Get_bool_app_or("xowa.bldr.import.unzip_bz2_file", false)) // CFG: Cfg__
 			? String_.Ary(Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_unzip.KEY_dump, Xoi_cmd_wiki_import.KEY)
 			: String_.Ary(Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_import.KEY);
 		int custom_cmds_len = custom_cmds.length;

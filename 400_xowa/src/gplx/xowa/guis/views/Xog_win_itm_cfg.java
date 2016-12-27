@@ -26,5 +26,5 @@ public class Xog_win_itm_cfg implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final String Cfg__status__show_short_url = "xowa.gui.window.status.show_short_url";
+	private static final String Cfg__status__show_short_url = "xowa.gui.prog_box.show_short_url";
 }

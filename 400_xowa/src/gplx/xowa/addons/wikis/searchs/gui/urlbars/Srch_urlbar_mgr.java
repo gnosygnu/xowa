@@ -92,11 +92,11 @@ public class Srch_urlbar_mgr implements Gfo_invk {	// NOTE: needs to be app-leve
 		return this;
 	}
 	private static final String
-	  Cfg__enabled				= "xowa.gui.urlbar.search.enabled"
-	, Cfg__max_results			= "xowa.gui.urlbar.search.max_results"
-	, Cfg__auto_wildcard		= "xowa.gui.urlbar.search.auto_wildcard"
-	, Cfg__ns_ids				= "xowa.gui.urlbar.search.ns_ids"
-	, Cfg__visible_rows			= "xowa.gui.urlbar.search.visible_rows"
-	, Cfg__jump_len				= "xowa.gui.urlbar.search.jump_len"
+	  Cfg__enabled				= "xowa.gui.url_bar.search.enabled"
+	, Cfg__max_results			= "xowa.gui.url_bar.search.max_results"
+	, Cfg__auto_wildcard		= "xowa.gui.url_bar.search.auto_wildcard"
+	, Cfg__ns_ids				= "xowa.gui.url_bar.search.ns_ids"
+	, Cfg__visible_rows			= "xowa.gui.url_bar.search.visible_rows"
+	, Cfg__jump_len				= "xowa.gui.url_bar.search.jump_len"
 	;
 }

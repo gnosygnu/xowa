@@ -48,7 +48,7 @@ public class Srch_htmlbar_mgr implements Gfo_invk {
 		return this;
 	}
 	private static final String
-	  Cfg__enabled				= "xowa.addon.search.html_bar.enabled"
-	, Cfg__results_max			= "xowa.addon.search.html_bar.results_max"
+	  Cfg__enabled				= "xowa.addon.search.suggest.enabled"
+	, Cfg__results_max			= "xowa.addon.search.suggest.results_max"
 	;
 }

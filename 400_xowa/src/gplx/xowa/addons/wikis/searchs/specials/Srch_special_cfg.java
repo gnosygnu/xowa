@@ -56,11 +56,11 @@ public class Srch_special_cfg implements Gfo_invk {
 		return this;
 	}
 	private static final String
-	  Cfg__results_per_page		= "xowa.addon.search.results_per_page"
-	, Cfg__async_db				= "xowa.addon.search.async_db"
-	, Cfg__auto_wildcard		= "xowa.addon.search.auto_wildcard"
-	, Cfg__multi_wikis			= "xowa.addon.search.multi_wikis"
-	, Cfg__multi_sorts			= "xowa.addon.search.multi_sorts"
+	  Cfg__results_per_page		= "xowa.addon.search.special.results_per_page"
+	, Cfg__async_db				= "xowa.addon.search.special.async_db"
+	, Cfg__auto_wildcard		= "xowa.addon.search.special.auto_wildcard"
+	, Cfg__multi_wikis			= "xowa.addon.search.special.multi_wikis"
+	, Cfg__multi_sorts			= "xowa.addon.search.special.multi_sorts"
 	;
 	public static final    byte[]
 	  Dflt_multi_wikis_bry = Bry_.new_a7("<any>|<self>")

@@ -271,8 +271,8 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 		return this;
 	}
 	private static final String
-	  Cfg__alt_in_caption				= "xowa.html.wiki.alt_in_caption"
-	, Cfg__alt_defaults_to_caption		= "xowa.html.wiki.alt_defaults_to_caption";
+	  Cfg__alt_in_caption				= "xowa.html.alt.show_in_caption"
+	, Cfg__alt_defaults_to_caption		= "xowa.html.alt.empty_alt_uses_caption";
 
 	private static final    byte[]
 	  Div_center_bgn			= Bry_.new_a7("<div class=\"center\">")

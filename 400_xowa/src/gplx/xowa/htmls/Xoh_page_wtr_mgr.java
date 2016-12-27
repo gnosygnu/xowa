@@ -93,7 +93,7 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 	, "portal_div_admin", "portal_div_wikis", "portal_sidebar"
 	, "edit_div_rename", "edit_div_preview", "js_edit_toolbar"		
 	};
-	private static final String Cfg__scripting_enabled = "xowa.addon.scripting.enabled";
+	private static final String Cfg__scripting_enabled = "xowa.html.scripting.enabled";
 }
 /*
 NOTE_1:xowa_anchor_button

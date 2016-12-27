@@ -86,5 +86,5 @@ public class Xop_section_mgr implements Gfo_invk {
 	public static final    byte[] Bry__meta = Bry_.new_a7("<!--xo_meta|section_edit|");
 	public static final    int Len__meta = Bry__meta.length;
 	private static final    byte[] Qarg__section_key = Bry_.new_u8("section_key");
-	private static final String Cfg__section_editing__enabled = "xowa.edit.section_edit.enabled";
+	private static final String Cfg__section_editing__enabled = "xowa.wiki.edit.section.enabled";
 }

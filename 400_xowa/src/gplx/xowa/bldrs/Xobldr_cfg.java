@@ -23,22 +23,22 @@ public class Xobldr_cfg {
 	private static boolean hzip_enabled		= Bool_.Y;
 	private static boolean hzip_mode_is_b256	= Bool_.Y;
 
-	public static byte Zip_mode__text(Xoa_app app) {return Zip_mode(app, "xowa.wiki.database.zip_mode.text");}	// CFG: Cfg__
-	public static byte Zip_mode__html(Xoa_app app) {return Zip_mode(app, "xowa.wiki.database.zip_mode.html");}	// CFG: Cfg__
+	public static byte Zip_mode__text(Xoa_app app) {return Zip_mode(app, "xowa.bldr.db.zip_mode.text");}	// CFG: Cfg__
+	public static byte Zip_mode__html(Xoa_app app) {return Zip_mode(app, "xowa.bldr.db.zip_mode.html");}	// CFG: Cfg__
 	private static byte Zip_mode(Xoa_app app, String key) {
 		String val = app.Cfg().Get_str_app_or(key, "gzip");
 		return gplx.core.ios.streams.Io_stream_tid_.To_tid(val);
 	}
-	public static long Max_size__text(Xoa_app app) {return Max_size(app, "xowa.wiki.database.max_size.text");}	// CFG: Cfg__
-	public static long Max_size__html(Xoa_app app) {return Max_size(app, "xowa.wiki.database.max_size.html");}	// CFG: Cfg__
-	public static long Max_size__file(Xoa_app app) {return Max_size(app, "xowa.wiki.database.max_size.file");}	// CFG: Cfg__
+	public static long Max_size__text(Xoa_app app) {return Max_size(app, "xowa.bldr.db.max_size.text");}	// CFG: Cfg__
+	public static long Max_size__html(Xoa_app app) {return Max_size(app, "xowa.bldr.db.max_size.html");}	// CFG: Cfg__
+	public static long Max_size__file(Xoa_app app) {return Max_size(app, "xowa.bldr.db.max_size.file");}	// CFG: Cfg__
 	private static long Max_size(Xoa_app app, String key) {
 		long rv = app.Cfg().Get_long_app_or(key, Io_size_.To_long_by_int_mb(1500));
 		return rv * Io_mgr.Len_mb;
 	}
-	public static long Layout_size__text(Xoa_app app) {return Layout_size(app, "xowa.wiki.database.layout_size.text");}	// CFG: Cfg__
-	public static long Layout_size__html(Xoa_app app) {return Layout_size(app, "xowa.wiki.database.layout_size.html");}	// CFG: Cfg__
-	public static long Layout_size__file(Xoa_app app) {return Layout_size(app, "xowa.wiki.database.layout_size.file");}	// CFG: Cfg__
+	public static long Layout_size__text(Xoa_app app) {return Layout_size(app, "xowa.bldr.db.layout_size.text");}	// CFG: Cfg__
+	public static long Layout_size__html(Xoa_app app) {return Layout_size(app, "xowa.bldr.db.layout_size.html");}	// CFG: Cfg__
+	public static long Layout_size__file(Xoa_app app) {return Layout_size(app, "xowa.bldr.db.layout_size.file");}	// CFG: Cfg__
 	private static long Layout_size(Xoa_app app, String key) {
 		long rv = app.Cfg().Get_long_app_or(key, Io_size_.To_long_by_int_mb(1500));
 		return rv * Io_mgr.Len_mb;

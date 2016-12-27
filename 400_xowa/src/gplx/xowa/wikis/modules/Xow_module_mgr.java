@@ -47,8 +47,8 @@ public class Xow_module_mgr implements Gfo_invk {
 	}	private static final String Invk_get = "get";
 
 	private static final String 
-	  Cfg__collapsible__toc				= "xowa.html.wiki.collapsible.toc"
-	, Cfg__collapsible__collapsible		= "xowa.html.wiki.collapsible.collapsible"
-	, Cfg__collapsible__navframe		= "xowa.html.wiki.collapsible.navframe"
+	  Cfg__collapsible__toc				= "xowa.html.collapsibles.toc"
+	, Cfg__collapsible__collapsible		= "xowa.html.collapsibles.navbox"
+	, Cfg__collapsible__navframe		= "xowa.html.collapsibles.navframe"
 	;
 }

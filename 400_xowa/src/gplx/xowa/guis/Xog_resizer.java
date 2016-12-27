@@ -92,7 +92,7 @@ public class Xog_resizer implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final String Cfg__browser__adj_type = "xowa.gui.window.browser.adj_type", Cfg__browser__adj_rect = "xowa.gui.window.browser.adj_rect";
+	private static final String Cfg__browser__adj_type = "xowa.gui.html_box.adj_type", Cfg__browser__adj_rect = "xowa.gui.html_box.adj_rect";
 
 	private static RectAdp Prv_elem_rect_initial = RectAdp_.Zero, Prv_elem_rect_win_7 = RectAdp_.new_(0, -1, 0, 0);
 	private static void Exec_win_resize_elem(Xog_layout_box box, GfuiElem cur_elem, Rect_ref cur_elem_rect, GfuiElem prv_elem, byte layout) {Exec_win_resize_elem(box, cur_elem, cur_elem_rect, prv_elem.Rect(), layout);}

@@ -51,5 +51,5 @@ public class Xof_cfg_download implements Gfo_invk {
 			default:					throw Err_.new_unhandled(v);
 		}
 	}
-	private static final String Cfg__retrieval_enabled = "xowa.wiki.files.retrieval_enabled";
+	private static final String Cfg__retrieval_enabled = "xowa.files.retrieval_enabled";
 }

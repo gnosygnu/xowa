@@ -274,7 +274,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 	, Cfg__unselected_close_btn_visible		= "xowa.gui.tabs.unselected_close_btn_visible"
 	, Cfg__max_chars						= "xowa.gui.tabs.max_chars"
 	, Cfg__min_chars						= "xowa.gui.tabs.min_chars"
-	, Cfg__javascript_enabled				= "xowa.gui.browser.javascript_enabled"
-	, Cfg__page_load_mode					= "xowa.gui.browser.page_load_mode"
+	, Cfg__javascript_enabled				= "xowa.gui.html_box.javascript_enabled"
+	, Cfg__page_load_mode					= "xowa.gui.html_box.page_load_mode"
 	;
 }

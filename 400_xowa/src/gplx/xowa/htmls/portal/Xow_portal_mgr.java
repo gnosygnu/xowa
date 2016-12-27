@@ -171,8 +171,8 @@ public class Xow_portal_mgr implements Gfo_invk {
 	, "jumpto", "jumptonavigation", "comma-separator", "jumptosearch");
 
 	private static final String
-	  Cfg__missing_class				= "xowa.html.wiki.portal.missing_class"
-	, Cfg__sidebar_enabled__desktop		= "xowa.html.wiki.portal.sidebar_enabled_desktop"
-	, Cfg__sidebar_enabled__server		= "xowa.html.wiki.portal.sidebar_enabled_server"
+	  Cfg__missing_class				= "xowa.html.portal.missing_class"
+	, Cfg__sidebar_enabled__desktop		= "xowa.html.portal.sidebar_enabled_desktop"
+	, Cfg__sidebar_enabled__server		= "xowa.html.portal.sidebar_enabled_server"
 	;
 }

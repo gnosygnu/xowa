@@ -40,6 +40,6 @@ public class Xol_font_info implements Gfo_invk, Gfo_evt_mgr_owner {
 	public static final String Font_changed = "font_changed";
 	private void Font_changed_pub() {Gfo_evt_mgr_.Pub_obj(this, Font_changed, "font", this);}
 
-	private static final String Cfg__font_name = "xowa.gui.window.font.name";
-	public static final String Cfg__font_size = "xowa.gui.window.font.size";
+	private static final String Cfg__font_name = "xowa.gui.app.font.name";
+	public static final String Cfg__font_size = "xowa.gui.app.font.size";
 }	
