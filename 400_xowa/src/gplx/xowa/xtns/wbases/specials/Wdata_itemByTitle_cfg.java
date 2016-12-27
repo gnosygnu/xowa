@@ -27,6 +27,5 @@ public class Wdata_itemByTitle_cfg implements Gfo_invk {
 		return this;
 	}
 	public static final String Key = "itemByTitle";
-	private static final String Cfg__site_default = "xowa.addon.wikibase.site_default";
-
+	private static final String Cfg__site_default = "xowa.addon.wikibase.item_by_title.site_default";
 }

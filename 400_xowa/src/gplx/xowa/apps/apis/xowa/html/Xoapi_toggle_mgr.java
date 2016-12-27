@@ -75,27 +75,27 @@ public class Xoapi_toggle_mgr implements Gfo_invk {
 		, Cfg__toggles__descr
 		, Cfg__toggles__alias
 		, Cfg__toggles__json)) {
-			this.Get_or_new(String_.Replace(k, "xowa.app.recent.toggles.", "")).Visible_(m.ReadYn("v"));
+			this.Get_or_new(String_.Replace(k, "xowa.html.toggles.", "")).Visible_(m.ReadYn("v"));
 		}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String 
-	  Cfg__toggles__offline_wikis		= "xowa.app.recent.toggles.offline-wikis"
-	, Cfg__toggles__wikidata_langs		= "xowa.app.recent.toggles.wikidata-langs"
-	, Cfg__toggles__claim				= "xowa.app.recent.toggles.wikidatawiki-claim"
-	, Cfg__toggles__slink_w				= "xowa.app.recent.toggles.wikidatawiki-slink-wikipedia"
-	, Cfg__toggles__slink_d				= "xowa.app.recent.toggles.wikidatawiki-slink-wiktionary"
-	, Cfg__toggles__slink_s				= "xowa.app.recent.toggles.wikidatawiki-slink-wikisource"
-	, Cfg__toggles__slink_v				= "xowa.app.recent.toggles.wikidatawiki-slink-wikivoyage"
-	, Cfg__toggles__slink_q				= "xowa.app.recent.toggles.wikidatawiki-slink-wikiquote"
-	, Cfg__toggles__slink_b				= "xowa.app.recent.toggles.wikidatawiki-slink-wikibooks"
-	, Cfg__toggles__slink_u				= "xowa.app.recent.toggles.wikidatawiki-slink-wikiversity"
-	, Cfg__toggles__slink_n				= "xowa.app.recent.toggles.wikidatawiki-slink-wikinews"
-	, Cfg__toggles__slink_special		= "xowa.app.recent.toggles.wikidatawiki-slink-special"
-	, Cfg__toggles__label				= "xowa.app.recent.toggles.wikidatawiki-label"
-	, Cfg__toggles__descr				= "xowa.app.recent.toggles.wikidatawiki-descr"
-	, Cfg__toggles__alias				= "xowa.app.recent.toggles.wikidatawiki-alias"
-	, Cfg__toggles__json				= "xowa.app.recent.toggles.wikidatawiki-json"
+	  Cfg__toggles__offline_wikis		= "xowa.html.toggles.offline-wikis"
+	, Cfg__toggles__wikidata_langs		= "xowa.html.toggles.wikidata-langs"
+	, Cfg__toggles__claim				= "xowa.html.toggles.wikidatawiki-claim"
+	, Cfg__toggles__slink_w				= "xowa.html.toggles.wikidatawiki-slink-wikipedia"
+	, Cfg__toggles__slink_d				= "xowa.html.toggles.wikidatawiki-slink-wiktionary"
+	, Cfg__toggles__slink_s				= "xowa.html.toggles.wikidatawiki-slink-wikisource"
+	, Cfg__toggles__slink_v				= "xowa.html.toggles.wikidatawiki-slink-wikivoyage"
+	, Cfg__toggles__slink_q				= "xowa.html.toggles.wikidatawiki-slink-wikiquote"
+	, Cfg__toggles__slink_b				= "xowa.html.toggles.wikidatawiki-slink-wikibooks"
+	, Cfg__toggles__slink_u				= "xowa.html.toggles.wikidatawiki-slink-wikiversity"
+	, Cfg__toggles__slink_n				= "xowa.html.toggles.wikidatawiki-slink-wikinews"
+	, Cfg__toggles__slink_special		= "xowa.html.toggles.wikidatawiki-slink-special"
+	, Cfg__toggles__label				= "xowa.html.toggles.wikidatawiki-label"
+	, Cfg__toggles__descr				= "xowa.html.toggles.wikidatawiki-descr"
+	, Cfg__toggles__alias				= "xowa.html.toggles.wikidatawiki-alias"
+	, Cfg__toggles__json				= "xowa.html.toggles.wikidatawiki-json"
 	;
 }

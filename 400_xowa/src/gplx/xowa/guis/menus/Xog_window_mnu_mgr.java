@@ -27,7 +27,7 @@ public class Xog_window_mnu_mgr implements Gfo_invk {
 	}	private Xoa_gui_mgr gui_mgr;
 	public void Init_by_kit(Xoae_app app) {
 		browser.Source_exec(gui_mgr.App().Gfs_mgr());	// NOTE: build menu now; NOTE: do not set default here, or else will override user setting
-		app.Cfg().Bind_many_app(this, Cfg__window__enabled, Cfg__window__source);
+		app.Cfg().Bind_many_app(this, Cfg__browser__enabled, Cfg__browser__source);
 	}
 	public Xog_mnu_grp Get_or_new(String key) {			
 		Xog_mnu_grp rv = (Xog_mnu_grp)hash.Get_by(key);
@@ -41,15 +41,15 @@ public class Xog_window_mnu_mgr implements Gfo_invk {
 		Xog_mnu_base.Update_grp_by_lang(gui_mgr.Menu_mgr().Menu_bldr(), lang, browser);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Cfg__window__enabled))		browser.Enabled_(m.ReadYn("v"));
-		else if	(ctx.Match(k, Cfg__window__source))			browser.Source_(m.ReadStr("v"));
+		if		(ctx.Match(k, Cfg__browser__enabled))		browser.Enabled_(m.ReadYn("v"));
+		else if	(ctx.Match(k, Cfg__browser__source))		browser.Source_(m.ReadStr("v"));
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Root_key_browser_win = "main_win";
 
 	private static final String
-	  Cfg__window__enabled	= "xowa.gui.menus.window.enabled"
-	, Cfg__window__source	= "xowa.gui.menus.window.source"
+	  Cfg__browser__enabled	= "xowa.gui.menus.browser.enabled"
+	, Cfg__browser__source	= "xowa.gui.menus.browser.source"
 	;
 }

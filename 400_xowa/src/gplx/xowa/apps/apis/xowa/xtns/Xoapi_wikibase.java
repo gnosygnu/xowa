@@ -37,12 +37,12 @@ public class Xoapi_wikibase implements Gfo_invk, Gfo_evt_mgr_owner {
 	}
 	public static final String 
 	  Evt_core_langs_changed = "core_langs_changed"
-	, Evt_link_wikis_changed = "link_wikis_changed"
 	, Evt_sort_langs_changed = "sort_langs_changed"
+	, Evt_link_wikis_changed = "link_wikis_changed"
 	;
 	private static final String
-	  Cfg__core_langs = "xowa.addon.wikibase.pages.core_langs"
-	, Cfg__link_wikis = "xowa.addon.wikibase.pages.link_wikis"
-	, Cfg__sort_langs = "xowa.addon.wikibase.pages.sort_langs"
+	  Cfg__core_langs = "xowa.addon.wikibase.langs.core_langs"
+	, Cfg__sort_langs = "xowa.addon.wikibase.langs.sort_langs"
+	, Cfg__link_wikis = "xowa.addon.wikibase.xwikis.link_wikis"
 	;
 }

@@ -66,8 +66,8 @@ public class Xog_popup_mnu_mgr implements Gfo_invk {
 	, Root_key_html_page = "html_box", Root_key_html_link = "browser.html.link", Root_key_html_file = "browser.html.file";
 	private static final String 
 	  Cfg__tabs			= "xowa.gui.menus.tabs.source"
-	, Cfg__html__basic	= "xowa.gui.menus.html.basic"
-	, Cfg__html__link	= "xowa.gui.menus.html.link"
-	, Cfg__html__file	= "xowa.gui.menus.html.file"
+	, Cfg__html__basic	= "xowa.gui.menus.html.basic.source"
+	, Cfg__html__link	= "xowa.gui.menus.html.link.source"
+	, Cfg__html__file	= "xowa.gui.menus.html.file.source"
 	, Cfg__status		= "xowa.gui.menus.status.source";
 }
