@@ -24,7 +24,13 @@ public class Xocfg_dflt_mgr {
 		this.cache_mgr = cache_mgr;
 	}
 	public void Init_by_app(Xoa_app app) {
-		app.Gfs_mgr().Run_url(app.Fsys_mgr().Bin_plat_dir().GenSubFil_nest("xowa", "cfg", "xo.cfg.dflt.gfs"));
+		Io_url url = app.Fsys_mgr().Bin_plat_dir().GenSubFil_nest("xowa", "cfg", "xo.cfg.dflt.os.gfs");
+		if (!Io_mgr.Instance.ExistsFil(url)) {
+			Io_url src_url = url.GenNewNameAndExt("xo.cfg.dflt.os_default.gfs");
+			if (Io_mgr.Instance.ExistsFil(src_url))	// TEST:
+				Io_mgr.Instance.CopyFil_args(src_url, url, true).MissingFails_off().Exec();
+		}
+		app.Gfs_mgr().Run_url(url);
 	}
 	public String Get_or(String key, String or) {
 		Gfo_invk itm = (Gfo_invk)hash.Get_by(key);
