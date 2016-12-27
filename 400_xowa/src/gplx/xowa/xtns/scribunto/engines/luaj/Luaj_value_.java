@@ -30,17 +30,28 @@ class Luaj_value_ {
 		return Luaj_value_.Lua_tbl_to_kv_ary(server, table);
 	}
 	public static Keyval[] Lua_tbl_to_kv_ary(Luaj_server server, LuaTable tbl) {
-		List_adp temp = List_adp_.New();
-		LuaValue cur = LuaValue.NIL;
-		int len = 0;
-		while (true) {											// iterate over pairs in tbl; no direct way to get kvs
+		// init
+		int tbl_len = tbl.length();	// gets length of tbl.array; note no way of getting length of tbl.hash; note that tbl.length is same as len; getn; rawlen; maxn;
+		Keyval[] rv_ary = tbl_len == 0 ? Keyval_.Ary_empty : new Keyval[tbl_len];	// guess rv_ary dimensions 
+		List_adp rv_list = null;
+		int rv_idx = 0;
+		LuaValue cur = LuaValue.NIL;	// needed for luaj iterator; tbl.next(cur);
+		
+		// loop over pairs in tbl; no direct way to get kvs
+		while (true) {
+			// get next itm
 			Varargs itm = tbl.next(cur);
-			if (itm == LuaValue.NIL) break;						// no more pairs; stop
-			LuaValue itm_val = itm.arg(2);						// val is itm 2
-			Object itm_val_obj = Lua_val_to_obj(server, itm_val);
+			if (itm == LuaValue.NIL) break;	// no more pairs; stop
+			
+			// extract luaj key / val from itm; note itm.arg(1) is key and itm.arg(2) is val
 			LuaValue itm_key = itm.arg(1);
+			LuaValue itm_val = itm.arg(2);
+			Object itm_val_obj = Lua_val_to_obj(server, itm_val);
+
+			// transform to xowa kv
 			Keyval kv = null;
-			if (itm_val.type() == LuaValue.TFUNCTION) {			// function is converted to Scrib_lua_proc
+			// val is function
+			if (itm_val.type() == LuaValue.TFUNCTION) {
 				String func_key = itm_key.tojstring();
 				int func_id = Int_.cast(itm_val_obj);
 				Scrib_lua_proc lua_func = new Scrib_lua_proc(func_key, func_id);
@@ -49,6 +60,7 @@ class Luaj_value_ {
 				else											// some are not; particularly "anonymous" functions in Module for gsub_function; these will have a kv of int,int; note that key must be int; if string, lua will not be able to match it back to int later
 					kv = Keyval_.int_(((LuaInteger)itm_key).v, lua_func);
 			}
+			// val is number or string
 			else {
 				switch (itm_key.type()) {
 					case LuaValue.TNUMBER:
@@ -62,12 +74,30 @@ class Luaj_value_ {
 						throw Err_.new_unhandled(itm_key.type());
 				}
 			}
-			temp.Add(kv);
+
+			// store kv in rv
+			// still enough space in array
+			if (rv_idx < tbl_len) {
+				rv_ary[rv_idx] = kv;
+			}
+			// exceeded rv_ary; store in list
+			else {
+				if (rv_idx == tbl_len) {
+					rv_list = List_adp_.New();
+					if (tbl_len > 0) {	// don't bother entering for loop if rv_ary was 0
+						for (int i = 0; i < tbl_len; i++) {
+							rv_list.Add(rv_ary[i]);
+						}
+					}
+				}
+				rv_list.Add(kv);
+			}
+			
+			// increment list and rv_idx
 			cur = itm_key;
-			++len;
+			++rv_idx;
 		}
-		if (len == 0) return Keyval_.Ary_empty;
-		return (Keyval[])temp.To_ary(Keyval.class);
+		return rv_list == null ? rv_ary : (Keyval[])rv_list.To_ary_and_clear(Keyval.class);
 	}
 	private static Object Lua_val_to_obj(Luaj_server server, LuaValue v) {
 		switch (v.type()) {

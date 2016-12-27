@@ -106,7 +106,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 				Xoa_ttl ttl = wiki.Ttl_parse(cur_ns, ppg.Ttl_bry());
 				// if ns changed and prv_ns is main
 				if (cur_ns != prv_ns) {
-					// COMMENTED: cache now supports 2 levels of permanence; no need to free entire page cache to clear pages added by ifexists and the like; DATE:2016-12-12
+					// TOMBSTONE: do not comment free_mem; will cause OutOfMem error on en.w in 25th hour; will need to reinvestigate cache generations later; DATE:2016-12-27
 					if (prv_ns == gplx.xowa.wikis.nss.Xow_ns_.Tid__main)
 						wiki.Cache_mgr().Free_mem(Bool_.Y);	// NOTE: clears all caches, include imglinks; only Main will have benefit of 
 					prv_ns = cur_ns;
