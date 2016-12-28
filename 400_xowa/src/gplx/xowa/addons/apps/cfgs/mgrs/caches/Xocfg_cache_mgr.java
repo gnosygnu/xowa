@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.mgrs.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
 import gplx.dbs.*;
-import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.dbs.tbls.*;
+import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.dbs.tbls.*; import gplx.xowa.addons.apps.cfgs.enums.*;
 public class Xocfg_cache_mgr {
 	private final    Hash_adp grps = Hash_adp_.New();
 	public Xocfg_cache_mgr() {
@@ -47,6 +47,7 @@ public class Xocfg_cache_mgr {
 	public void Set_wo_save(String ctx, String key, String val)		{Set(Bool_.N, ctx, key, val);}
 	public void Set(boolean save, String ctx, String key, String val) {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
+		grp.Pub(ctx, val);	// publish first; if fail will throw error
 		grp.Set(ctx, val);
 		if (save) {
 			if (String_.Eq(grp.Dflt(), val))
@@ -54,7 +55,6 @@ public class Xocfg_cache_mgr {
 			else
 				db_usr.Set_str(ctx, key, val);
 		}
-		grp.Pub(ctx, val);
 	}
 	public void Del(String ctx, String key) {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
@@ -87,12 +87,12 @@ public class Xocfg_cache_mgr {
 		Xocfg_itm_row meta_itm = db_app.Tbl__itm().Select_by_key_or_null(key);
 		if (meta_itm == null) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:itm not found; key=~{0}", key);
-			return new Xocfg_cache_grp(key, or);
+			return new Xocfg_cache_grp(key, or, String_.Cls_val_name);
 		}
 		Xocfg_val_row[] itms = db_usr.Tbl__val().Select_all(meta_itm.Key());
 
 		// make
-		Xocfg_cache_grp rv = new Xocfg_cache_grp(key, meta_itm.Dflt());
+		Xocfg_cache_grp rv = new Xocfg_cache_grp(key, meta_itm.Dflt(), meta_itm.Type());
 		int len = itms.length;
 		for (int i = 0; i < len; i++) {
 			Xocfg_val_row itm = itms[0];

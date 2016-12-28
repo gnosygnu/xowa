@@ -28,12 +28,11 @@ public class Xocfg_edit_special implements Xow_special_page {
 
 		Xocfg_edit_loader loader = Xocfg_edit_loader.New(wiki.App());
 		if (String_.Eq(grp, "")) {
-			grp = wiki.App().Cfg().Get_str_app("xowa.app.cfg.previous_grp");
+			grp = wiki.App().Cfg().Get_str_app(Cfg__previous_grp);
 			if (!loader.Grp_key_exists(grp)) {
 				grp = "xowa.app.security";
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:grp_key not found; defaulting to xowa.app.security; key=~{0}", grp);
 			}
-
 		}
 		new Xocfg_edit_html(loader, grp, ctx, lang).Bld_page_by_mustache(wiki.App(), page, this);
 	}
@@ -42,4 +41,5 @@ public class Xocfg_edit_special implements Xow_special_page {
 	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;
 	public Xow_special_page Special__clone()	{return this;}
 	public static final    Xow_special_page Prototype = new Xocfg_edit_special(Xow_special_meta.New_xo("XowaCfg", "Options"));
+	public static final String Cfg__previous_grp = "xowa.app.cfg.previous_grp";
 }

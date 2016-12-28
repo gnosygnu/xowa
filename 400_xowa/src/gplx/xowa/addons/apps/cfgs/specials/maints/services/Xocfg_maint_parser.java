@@ -41,20 +41,15 @@ class Xocfg_maint_parser {
 		// create
 		String nde_type = msg.Key();
 		if (String_.Eq(nde_type, "grp")) {
-			return new Xocfg_maint_grp(id, key, owner, name, help);
+			return new Xocfg_maint_grp(owner, id, key, name, help);
 		}
 		else if (String_.Eq(nde_type, "itm")) {
 			String scope		= Get_atr_as_str_or(hash, "scope_", ""); if (String_.Eq(scope, "")) scope = "wiki";
-			String db_type		= Get_atr_as_str_or_fail(hash, "db_type_");
+			String type			= Get_atr_as_str_or_fail(hash, "type_");
 			String dflt			= Get_atr_as_str_or_fail(hash, "dflt_");
-			String gui_type		= Get_atr_as_str_or(hash, "gui_type_", null);
-			String gui_args		= Get_atr_as_str_or(hash, "gui_args_", "");
-			String gui_cls		= Get_atr_as_str_or(hash, "gui_cls_", "");
-
-			if (gui_type == null) {
-				gui_type = gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_tid.Infer_gui_type(db_type);
-			}
-			return new Xocfg_maint_itm(id, key, owner, name, help, scope, db_type, dflt, gui_type, gui_args, gui_cls);
+			String html_atrs	= Get_atr_as_str_or(hash, "html_atrs_", "");
+			String html_cls		= Get_atr_as_str_or(hash, "html_cls_", "");
+			return new Xocfg_maint_itm(owner, id, key, name, help, scope, type, dflt, html_atrs, html_cls);
 		}
 		else throw Err_.new_wo_type("xo.cfg_maint:unknown type", "type", nde_type);
 	}

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.langs.gfs.*;
 public class Bool_ {
-	public static final String Cls_val_name = "boolean";
+	public static final String Cls_val_name = "bool";
 	public static final    Class<?> Cls_ref_type = Boolean.class; 
 	public static final boolean		N		= false	, Y			= true;
 	public static final byte		N_byte	= 0		, Y_byte	= 1		, __byte = 127;

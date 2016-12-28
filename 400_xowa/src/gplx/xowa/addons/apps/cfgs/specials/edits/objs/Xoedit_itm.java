@@ -18,12 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 import gplx.langs.mustaches.*;
 import gplx.core.gfobjs.*; import gplx.langs.jsons.*;
-import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
+import gplx.xowa.addons.apps.cfgs.mgrs.types.*; import gplx.xowa.addons.apps.cfgs.enums.*;
 import gplx.langs.htmls.*;
 public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
-	private String gui_type;
 	private boolean edited;
-	private String data_type, gui_args, gui_cls, lang, name, ctx, date;
+	private String type, html_atrs, html_cls, lang, name, ctx, date;
 	private byte[] val, dflt;	// NOTE: data is always escaped b/c it is only consumed by mustache; EX: "&lt;&apos;" not "<'"
 	private Xocfg_type_mgr type_mgr;
 	public Xoedit_itm(Xocfg_type_mgr type_mgr, int id, String key, int sort) {
@@ -37,12 +36,11 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 	public String	Help()		{return help;}	private String help;
 
 	public int		Sort()		{return sort;}	private final    int sort;
-	public void Load_by_meta(Bry_bfr tmp_bfr, int scope_id, String data_type, String gui_type, String gui_args, String gui_cls, String dflt_str) {
-		this.data_type = data_type;
-		this.gui_type = gui_type;
-		this.gui_args = gui_args;
-		this.gui_cls = gui_cls;
+	public void Load_by_meta(Bry_bfr tmp_bfr, String type, String dflt_str, String html_atrs, String html_cls) {
+		this.type = type;
 		this.dflt = Gfh_utl.Escape_html_as_bry(tmp_bfr, Bry_.new_u8(dflt_str), Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);
+		this.html_atrs = html_atrs;
+		this.html_cls = html_cls;
 	}
 	public void Load_by_i18n(String lang, String name, String help) {
 		this.lang = lang;
@@ -54,8 +52,8 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		this.val = Gfh_utl.Escape_html_as_bry(tmp_bfr, Bry_.new_u8(val_str), Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);
 		this.date = date;
 		this.edited = true;
-		if (	String_.Has(gui_cls, "read"+"only")
-			||	String_.Eq(gui_type, gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_tid.Itm__btn.Key()))
+		if (	String_.Has(html_cls, "read"+"only")
+			||	Xoitm_type_enum.To_uid(type) == Xoitm_type_enum.Tid__btn)
 			edited = false;
 	}
 	public void Set_data_by_dflt() {
@@ -75,14 +73,14 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		rv.Add_str("ctx", ctx);
 		rv.Add_bry("val", val);
 		rv.Add_str("date", date);
-		rv.Add_str("gui", gui_type);
+		rv.Add_str("type", type);
 		To_html(tmp_bfr, type_mgr);
 		rv.Add_str("html", tmp_bfr.To_str_and_clear());
 		rv.Add_bool("edited", edited);
 		return rv;
 	}
 	private void To_html(Bry_bfr bfr, Xocfg_type_mgr type_mgr) {
-		Xoedit_itm_html.Build_html(bfr, type_mgr, key, name, data_type, gui_type, gui_args, gui_cls, val);
+		Xoedit_itm_html.Build_html(bfr, type_mgr, key, name, type, html_atrs, html_cls, val);
 	}
 	public boolean Mustache__write(String k, Mustache_bfr bfr) {
 		if		(String_.Eq(k, "id"))				bfr.Add_int(id);
@@ -94,7 +92,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		else if	(String_.Eq(k, "ctx"))				bfr.Add_str_u8(ctx);
 		else if	(String_.Eq(k, "val"))				bfr.Add_bry(val);
 		else if	(String_.Eq(k, "date"))				bfr.Add_str_u8(date);
-		else if	(String_.Eq(k, "gui"))				bfr.Add_str_u8(gui_type);
+		else if	(String_.Eq(k, "type"))				bfr.Add_str_u8(type);
 		else if	(String_.Eq(k, "html"))				To_html(bfr.Bfr(), type_mgr);
 		return true;
 	}

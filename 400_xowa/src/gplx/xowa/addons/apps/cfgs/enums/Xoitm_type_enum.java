@@ -16,11 +16,27 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.enums; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
-public class Xoitm_scope_tid {	// SERIALIZED
-	public static final int Tid__app = 1, Tid__wiki = 2;
-	public static int To_int(String raw) {
-		if		(String_.Eq(raw, "app"))	return Tid__app;
-		else if (String_.Eq(raw, "wiki"))	return Tid__wiki;
-		else								throw Err_.new_unhandled_default(raw);
+public class Xoitm_type_enum {
+	public static final int
+	  Tid__bool			= 0
+	, Tid__int			= 1
+	, Tid__str			= 2
+	, Tid__memo			= 3
+	, Tid__list			= 4
+	, Tid__btn			= 5
+	, Tid__io_cmd		= 6
+	, Tid__gui_binding	= 7
+	;
+
+	public static int To_uid(String v) {
+		if		(String_.Eq(v, Bool_.Cls_val_name))			return Tid__bool;
+		else if	(String_.Eq(v, Int_.Cls_val_name))			return Tid__int;
+		else if	(String_.Eq(v, String_.Cls_val_name))		return Tid__str;
+		else if	(String_.Eq(v, "memo"))						return Tid__memo;
+		else if	(String_.Eq(v, "btn"))						return Tid__btn;
+		else if	(String_.Eq(v, "io.cmd"))					return Tid__io_cmd;
+		else if	(String_.Eq(v, "gui.binding"))				return Tid__gui_binding;
+		else if (String_.Has_at_bgn(v, "list:"))			return Tid__list;
+		else												throw Err_.new_wo_type("unknown cfg type enum; v=" + v);
 	}
 }
