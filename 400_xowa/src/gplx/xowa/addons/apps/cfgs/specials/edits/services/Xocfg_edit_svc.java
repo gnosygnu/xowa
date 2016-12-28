@@ -49,7 +49,7 @@ public class Xocfg_edit_svc {
 		else
 			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.update__pass", Gfobj_nde.New().Add_str("key", key).Add_str("val", val).Add_str("type", type));
 	}
-	public void Revert(Json_nde args) {
+	public void Delete(Json_nde args) {
 		String ctx = args.Get_as_str("ctx");
 		String key = args.Get_as_str("key");
 		String type = args.Get_as_str("type");
@@ -58,14 +58,14 @@ public class Xocfg_edit_svc {
 		if (String_.Has_at_bgn(type, "gui.binding")) {
 			val = String_.Concat_with_str("|", gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_gui(val));
 		}
-		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.revert__recv", Gfobj_nde.New().Add_str("key", key).Add_str("val", val));
+		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.delete__recv", Gfobj_nde.New().Add_str("key", key).Add_str("val", val));
 	}
-	public void Load(Json_nde args) {
+	public void Select(Json_nde args) {
 		String ctx = args.Get_as_str("ctx");
 		String key = args.Get_as_str("key");
 		if (edit_loader == null) edit_loader = Xocfg_edit_loader.New(app);
 		Xoedit_root root = edit_loader.Load_root(key, ctx, "en");
-		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.load__recv", root.To_nde(Bry_bfr_.New()));
+		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.select__recv", root.To_nde(Bry_bfr_.New()));
 		app.Cfg().Set_str_app(Xocfg_edit_special.Cfg__previous_grp, key);
 	}
 }
