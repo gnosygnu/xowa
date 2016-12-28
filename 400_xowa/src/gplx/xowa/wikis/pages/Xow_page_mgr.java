@@ -32,40 +32,49 @@ public class Xow_page_mgr implements Gfo_invk {
 	}
 	private void Load_by_ns(Xoae_page rv, Xoa_url url, Xoa_ttl ttl, boolean called_from_msg) {
 		rv.Url_(url);	// NOTE: must update page.Url(); should combine with Xoae_page.New()
-		Xow_ns ns = ttl.Ns();
-		switch (ns.Id()) {
-			case Xow_ns_.Tid__special:		// Special pages are built (not loaded from db)
-				wiki.Special_mgr().Special__gen(wiki.App(), wiki, rv, url, ttl);
-				Xopg_redirect_itm redirect_itm = rv.Redirect_trail().Itms__get_at_nth_or_null();
-				if (redirect_itm != null) {
-					rv.Redirect_trail().Clear();	// clear needed; EX: Special:Random -> [[Redirected_page]] -> {must clear here} -> [[Page]]
-					Load_by_ns(rv, redirect_itm.Url(), redirect_itm.Ttl(), called_from_msg);
-				}
-				return;
-			case Xow_ns_.Tid__mediawiki:	// MediaWiki msgs can either be loaded from memory, or from database
-				if (	!called_from_msg	// if called_from_msg, fall through to actual data retrieval below, else infinite loop; DATE:2014-05-09
-					&&	Xow_page_tid.Identify_by_ttl(ttl.Page_db()) == Xow_page_tid.Tid_wikitext // skip ".js" and ".css" pages in MediaWiki; DATE:2014-06-13
-					) {		
-					Xol_lang_itm lang = wiki.Lang();
-					byte[] msg_key = ttl.Page_db();
-					Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
-					msg_key = lang.Case_mgr().Case_build_1st_lower(tmp_bfr, msg_key, 0, msg_key.length);
-					byte[] msg_val = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, wiki.Lang(), msg_key).Val();	// NOTE: do not change to Get_msg_val; Get_msg_val, also replaces $1 with values, and $1 needs to be preserved for callers;
-					rv.Db().Text().Text_bry_(msg_val);
-					tmp_bfr.Mkr_rls();
+
+		// WORKAROUND: loop twice in order to allow redirects from regular page to special
+		for (int i = 0; i < 2; i++) {
+			Xow_ns ns = ttl.Ns();
+			switch (ns.Id()) {
+				case Xow_ns_.Tid__special:		// Special pages are built (not loaded from db)
+					wiki.Special_mgr().Special__gen(wiki.App(), wiki, rv, url, ttl);
+					Xopg_redirect_itm redirect_itm = rv.Redirect_trail().Itms__get_at_nth_or_null();
+					if (redirect_itm != null) {
+						rv.Redirect_trail().Clear();	// clear needed; EX: Special:Random -> [[Redirected_page]] -> {must clear here} -> [[Page]]
+						Load_by_ns(rv, redirect_itm.Url(), redirect_itm.Ttl(), called_from_msg);
+					}
 					return;
-				}
-				break;
+				case Xow_ns_.Tid__mediawiki:	// MediaWiki msgs can either be loaded from memory, or from database
+					if (	!called_from_msg	// if called_from_msg, fall through to actual data retrieval below, else infinite loop; DATE:2014-05-09
+						&&	Xow_page_tid.Identify_by_ttl(ttl.Page_db()) == Xow_page_tid.Tid_wikitext // skip ".js" and ".css" pages in MediaWiki; DATE:2014-06-13
+						) {		
+						Xol_lang_itm lang = wiki.Lang();
+						byte[] msg_key = ttl.Page_db();
+						Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
+						msg_key = lang.Case_mgr().Case_build_1st_lower(tmp_bfr, msg_key, 0, msg_key.length);
+						byte[] msg_val = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, wiki.Lang(), msg_key).Val();	// NOTE: do not change to Get_msg_val; Get_msg_val, also replaces $1 with values, and $1 needs to be preserved for callers;
+						rv.Db().Text().Text_bry_(msg_val);
+						tmp_bfr.Mkr_rls();
+						return;
+					}
+					break;
+			}
+			Xoa_ttl redirect_ttl = Load_from_db(rv, ns, ttl, url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no));
+			if (redirect_ttl != null && redirect_ttl.Ns().Id_is_special()) {
+				ttl = redirect_ttl;
+				rv.Redirect_trail().Clear();
+				rv.Db().Page().Exists_y_();
+			}
 		}
-		Load_from_db(rv, ns, ttl, url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no));
 	}
-	public void Load_from_db(Xoae_page rv, Xow_ns ns, Xoa_ttl ttl, boolean redirect_force) {
+	public Xoa_ttl Load_from_db(Xoae_page rv, Xow_ns ns, Xoa_ttl ttl, boolean redirect_force) {
 		int redirects = 0;
 		Xowd_page_itm page_row = Xowd_page_itm.new_tmp();
 		while (true) {	// loop until (a) no more redirects or (b) page not found
 			// load from page table
 			boolean exists = wiki.Db_mgr().Load_mgr().Load_by_ttl(page_row, ns, ttl.Page_db());
-			if (!exists) {rv.Db().Page().Exists_n_(); return;}
+			if (!exists) {rv.Db().Page().Exists_n_(); return ttl;}
 			if (wiki.App().Mode().Tid_is_gui())	// NOTE: must check if gui, else will write during mass build; DATE:2014-05-03
 				wiki.Appe().Usr_dlg().Prog_many("", "", "loading page for ~{0}", ttl.Raw());
 
@@ -76,20 +85,20 @@ public class Xow_page_mgr implements Gfo_invk {
 			wiki.Db_mgr().Load_mgr().Load_page(page_row, ns);
 			byte[] wtxt = page_row.Text();
 			rv.Db().Text().Text_bry_(wtxt);
-			if (redirect_force) return;			// redirect_force passed; return page now, even if page is a redirect elsewhere; NOTE: only applies to WTXT, not HTML
+			if (redirect_force) return ttl;			// redirect_force passed; return page now, even if page is a redirect elsewhere; NOTE: only applies to WTXT, not HTML
 
 			// handle redirects for html_dbs
 			if (	page_row.Redirect_id() > 0		// redirect exists
 				&&	Bry_.Len_eq_0(wtxt)) {			// wikitext is not found
 				Redirect_to_html_page(rv, wiki, page_row);
-				return;
+				return ttl;
 			}
 
 			// handle redirects
 			Xoa_ttl redirect_ttl = wiki.Redirect_mgr().Extract_redirect(wtxt);
 			if  (	redirect_ttl == null		// not a redirect
 				||	redirects++ > 4)			// too many redirects; something went wrong
-				return;
+				return redirect_ttl;
 
 			// redirect; do some bookkeeping and reset ns / ttl
 			// NOTE: this adds the target ttl to redirect_mgr (#REDIRECT [[A]]); note that special redirects will add source ttl; DATE:2016-07-31
