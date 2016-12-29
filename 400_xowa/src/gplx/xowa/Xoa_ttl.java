@@ -118,6 +118,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		else if (qarg_bgn != -1) end = qarg_bgn - 1;
 		return Bry_.Mid(full_txt, bgn, end);
 	}
+	public byte[] Full_db_wo_qarg() {return Replace_spaces(Full_txt_wo_qarg());}
 	public byte[] Full_txt_wo_qarg() {
 		int bgn = wik_bgn == -1  ? 0 : ns_bgn == -1 ? page_bgn : ns_bgn;
 		int end = full_txt.length;

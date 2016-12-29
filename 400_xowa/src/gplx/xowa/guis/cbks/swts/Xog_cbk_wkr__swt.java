@@ -42,7 +42,7 @@ public class Xog_cbk_wkr__swt implements Xog_cbk_wkr {
 					match = page.Html_data().Cbk_enabled();
 					break;
 				case Xog_cbk_trg.Tid__specific_page:
-					match = Bry_.Eq(trg.Page_ttl(), page.Ttl().Full_db());
+					match = Bry_.Eq(trg.Page_ttl(), page.Ttl().Full_db_wo_qarg());	// NOTE: ignore qargs to handle Special:XowaCfg?grp=some_grp; DATE:2016-12-28
 					break;
 			}
 			if (match) {
