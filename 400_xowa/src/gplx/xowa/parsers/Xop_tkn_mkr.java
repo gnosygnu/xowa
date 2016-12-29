@@ -67,7 +67,7 @@ public class Xop_tkn_mkr {
 	public gplx.xowa.xtns.poems.Poem_nde Xnde__poem()										{return new gplx.xowa.xtns.poems.Poem_nde();}
 	public Ref_nde Xnde__ref()																{return new Ref_nde();}
 	public References_nde Xnde__references()												{return new References_nde();}
-	public gplx.xowa.xtns.math.Math_nde Xnde__math()										{return new gplx.xowa.xtns.math.Math_nde();}
+	public gplx.xowa.xtns.math.Xomath_xnde Xnde__math()										{return new gplx.xowa.xtns.math.Xomath_xnde();}
 	public gplx.xowa.xtns.gallery.Gallery_xnde Xnde__gallery()								{return new gplx.xowa.xtns.gallery.Gallery_xnde();}
 	public gplx.xowa.xtns.imaps.Imap_xnde Xnde__imageMap()									{return new gplx.xowa.xtns.imaps.Imap_xnde();}
 	public gplx.xowa.xtns.hieros.Hiero_xnde Xnde__hiero()									{return new gplx.xowa.xtns.hieros.Hiero_xnde();}

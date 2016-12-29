@@ -59,8 +59,8 @@ public class Xoa_prog_mgr implements Gfo_invk {
 	public Process_adp App_query_img_size()				{return app_query_img_size;}			private Process_adp app_query_img_size = new Process_adp();
 	public Process_adp App_resize_img()					{return app_resize_img;}				private Process_adp app_resize_img = new Process_adp();
 	public Process_adp App_convert_svg_to_png()			{return app_convert_svg_to_png;}		private Process_adp app_convert_svg_to_png = new Process_adp();
-	public Process_adp App_convert_tex_to_dvi()			{return app_convert_tex_to_dvi;}		private Process_adp app_convert_tex_to_dvi = new Process_adp();
-	public Process_adp App_convert_dvi_to_png()			{return app_convert_dvi_to_png;}		private Process_adp app_convert_dvi_to_png = new Process_adp();
+	public Process_adp App__tex_to_dvi()				{return app_convert_tex_to_dvi;}		private Process_adp app_convert_tex_to_dvi = new Process_adp();
+	public Process_adp App__dvi_to_png()				{return app_convert_dvi_to_png;}		private Process_adp app_convert_dvi_to_png = new Process_adp();
 	public Process_adp App_convert_djvu_to_tiff()		{return app_convert_djvu_to_tiff;}		private Process_adp app_convert_djvu_to_tiff = new Process_adp();
 	public Process_adp App_view_text()					{return app_view_text;}					private Process_adp app_view_text = new Process_adp();
 	public Process_adp App_decompress_bz2()				{return app_decompress_bz2;}			private Process_adp app_decompress_bz2 = new Process_adp();

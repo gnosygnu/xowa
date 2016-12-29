@@ -115,7 +115,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoa_shell			Shell() {return shell;} private Xoa_shell shell;
 	public Xoa_thread_mgr		Thread_mgr_old() {return thread_mgr_old;} private Xoa_thread_mgr thread_mgr_old = new Xoa_thread_mgr();
 	public Xoa_hive_mgr			Hive_mgr() {return hive_mgr;} private Xoa_hive_mgr hive_mgr;
-	public Xof_math_subst_regy	Math_subst_regy() {return math_subst_regy;} private Xof_math_subst_regy math_subst_regy = new Xof_math_subst_regy();
 	public Xoa_prog_mgr			Prog_mgr() {return prog_mgr;} private final    Xoa_prog_mgr prog_mgr = new Xoa_prog_mgr();
 	public Gfo_async_mgr		Async_mgr() {return async_mgr;} private Gfo_async_mgr async_mgr = new Gfo_async_mgr();
 
@@ -160,7 +159,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		api_root.Init_by_app(this);
 		wmf_mgr.Init_by_app(this);
 		gplx.core.net.emails.Gfo_email_mgr_.Instance = gplx.core.net.emails.Gfo_email_mgr_.New_jre();
-		file_mgr.Init_by_app(this);
 		special_mgr.Init_by_app(this);
 		sys_cfg.Init_by_app(this);
 	}

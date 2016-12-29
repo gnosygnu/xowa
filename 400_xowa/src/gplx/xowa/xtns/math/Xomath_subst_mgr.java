@@ -17,20 +17,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.btries.*;
-public class Xof_math_subst_regy {
-	Bry_bfr bfr = Bry_bfr_.New();
+class Xomath_subst_mgr {
+	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final    Bry_bfr tmp = Bry_bfr_.New();
+	private boolean init = false;
 	public byte[] Subst(byte[] src) {
 		if (!init) Init();
 		int src_len = src.length;
-		int dollarSignCount = 0;
+		int inserted_dollars = 0;
+
+		// loop each byte
 		for (int i = 0; i < src_len; i++) {
 			byte b = src[i];
 			Object o = trie.Match_bgn_w_byte(b, src, i, src_len);
-			if (o == null)
-				bfr.Add_byte(b);
-			else {
-				Xof_math_subst_itm itm = (Xof_math_subst_itm)o;
-				int itm_src_len = itm.SrcLen();
+			if (o == null)	// regular char; add to bfr
+				tmp.Add_byte(b);
+			else {			// subst itm's trg for src
+				Xomath_subst_itm itm = (Xomath_subst_itm)o;
+				int itm_src_len = itm.Src_len();
+
+				// if whole_word, check last_char for exact match; exit if not
 				int nxt = i + itm_src_len;
 				if (nxt < src_len) {
 					switch (src[nxt]) {	// NOTE: for now, manually list characters that are viable word end characters; NOTE: my knowledge of TeX is nil
@@ -41,24 +47,29 @@ public class Xof_math_subst_regy {
 						case Byte_ascii.Nl: // NOTE: needed for \begin\n
 							break;
 						default:
-							if (itm.WholeWord()) {
-								bfr.Add_byte(b);	// itm does not match; ignore; EX: \alpha is itm, but cur text is \alpham
+							if (itm.Whole_word()) {
+								tmp.Add_byte(b);	// itm does not match; ignore; EX: \alpha is itm, but cur text is \alpham
 								continue;
 							}
 							else
 								break;
 					}
 				}
-				bfr.Add(itm.Trg());
-				if (itm.DollarSign()) ++dollarSignCount;
+
+				// add trg; increment dollar_sign; update i
+				tmp.Add(itm.Trg());
+				if (itm.Dollar_sign()) ++inserted_dollars;	// if .Dollar_sign() is true, then tkn has inserted a dollar sign; will need to add matching closing item below
 				i += itm_src_len - 1;
 			}
 		}
-		for (int i = 0; i < dollarSignCount; i++)
-			bfr.Add_byte(Byte_ascii.Dollar);
-		return bfr.To_bry_and_clear_and_trim();
-	}	boolean init = false;
-	public Xof_math_subst_regy Init() {
+
+		// add closing dollar-sign tokens for inserted_dollars
+		for (int i = 0; i < inserted_dollars; i++)
+			tmp.Add_byte(Byte_ascii.Dollar);
+
+		return tmp.To_bry_and_clear_and_trim();
+	}
+	private Xomath_subst_mgr Init() {
 		if (init) return this;
 		init = true;
 		Reg("\\Alpha", "\\mathrm{A}");
@@ -159,18 +170,19 @@ public class Xof_math_subst_regy {
 		return this;
 	}
 	private void Reg(String src_str, String trg_str) {Reg(src_str, trg_str, false, true);}
-	private void Reg(String src_str, String trg_str, boolean dollarSign, boolean wholeWord) {
+	private void Reg(String src_str, String trg_str, boolean dollar_sign, boolean whole_word) {
 		byte[] src_bry = Bry_.new_a7(src_str);
-		Xof_math_subst_itm itm = new Xof_math_subst_itm(src_bry, Bry_.new_a7(trg_str), dollarSign, wholeWord);
+		Xomath_subst_itm itm = new Xomath_subst_itm(src_bry, Bry_.new_a7(trg_str), dollar_sign, whole_word);
 		trie.Add_obj(src_bry, itm);
 	}
-	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 }
-class Xof_math_subst_itm {
-	public int SrcLen() {return src_len;} private int src_len;
-	public byte[] Src() {return src;} private byte[] src;
-	public byte[] Trg() {return trg;} private byte[] trg;
-	public boolean DollarSign() {return dollarSign;} private boolean dollarSign;
-	public boolean WholeWord() {return wholeWord;} private boolean wholeWord;
-	public Xof_math_subst_itm(byte[] src, byte[] trg, boolean dollarSign, boolean wholeWord) {this.src = src; src_len = src.length; this.trg = trg; this.dollarSign = dollarSign; this.wholeWord = wholeWord;}
+class Xomath_subst_itm {
+	public Xomath_subst_itm(byte[] src, byte[] trg, boolean dollar_sign, boolean whole_word) {
+		this.src = src; src_len = src.length; this.trg = trg; this.dollar_sign = dollar_sign; this.whole_word = whole_word;
+	}
+	public int Src_len() {return src_len;} private final    int src_len;
+	public byte[] Src() {return src;} private final    byte[] src;
+	public byte[] Trg() {return trg;} private final    byte[] trg;
+	public boolean Dollar_sign() {return dollar_sign;} private final    boolean dollar_sign;
+	public boolean Whole_word() {return whole_word;} private final    boolean whole_word;
 }

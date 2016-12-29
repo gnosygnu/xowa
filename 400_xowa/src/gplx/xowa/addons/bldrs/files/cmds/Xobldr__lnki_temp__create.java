@@ -85,7 +85,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 		gplx.xowa.parsers.xndes.Xop_xnde_wkr.Timeline_log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.scores.Score_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.hieros.Hiero_xnde.Log_wkr = log_mgr.Make_wkr();
-		gplx.xowa.xtns.math.Math_nde.Log_wkr = log_mgr.Make_wkr().Save_src_str_(Bool_.Y);	// enabled; DATE:2015-10-10
+		gplx.xowa.xtns.math.Xomath_xnde.Log_wkr = log_mgr.Make_wkr().Save_src_str_(Bool_.Y);	// enabled; DATE:2015-10-10
 
 		// init fsdb
 		Xof_fsdb_mgr__sql trg_fsdb_mgr = new Xof_fsdb_mgr__sql();

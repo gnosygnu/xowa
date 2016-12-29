@@ -17,36 +17,37 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
-public class Xof_math_mgr_html_tst {
-	@Before public void init() {
-		fxt.App().File_mgr().Init_by_app(fxt.App());
-	}	private final    Xop_fxt fxt = Xop_fxt.New_app_html();
+public class Xomath_core__tst {
+	private final    Xop_fxt fxt = Xop_fxt.New_app_html();
 	@Test  public void Basic__latex() {
-		fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax_(false);
+		Renderer_(false);
 		fxt.Test__parse_to_html_mgr("<math>x + y</math>", "<img id='xowa_math_img_0' src='' width='' height=''/><span id='xowa_math_txt_0'>x + y</span>");	// latex has img
 	}
 	@Test  public void Basic__mathjax() {
-		fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax_(true);
+		Renderer_(true);
 		fxt.Test__parse_to_html_mgr("<math>x + y</math>", "<span id='xowa_math_txt_0'>x + y</span>");	// mathjax has no img
 	}
 	@Test  public void Escape__mathjax() {	// PURPOSE: escape <>&"; EX:de.w:Vergleich_(Zahlen); DATE:2014-05-10; PAGE:s.w:Matrix_(mathematics) DATE:2014-07-19
-		fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax_(true);
+		Renderer_(true);
 		fxt.Test__parse_to_html_mgr("<math>a<>b</math>", "<span id='xowa_math_txt_0'>a&lt;&gt;b</span>");
 	}
 	@Test  public void Escape__latex() {
-		fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax_(false);
+		Renderer_(false);
 		fxt.Test__parse_to_html_mgr("<math>a<>b</math>", "<img id='xowa_math_img_0' src='' width='' height=''/><span id='xowa_math_txt_0'>a<>b</span>");
 	}
 	@Test  public void Amp() { // PURPOSE: assert that amp is not escaped; DATE:2014-07-20
-		fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax_(true);
+		Renderer_(true);
 		fxt.Test__parse_to_html_mgr("<math>a&b</math>", "<span id='xowa_math_txt_0'>a&b</span>");
 	}
 	@Test  public void Quote() { // PURPOSE: assert that quote is not escaped; DATE:2014-07-20
-		fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax_(true);
+		Renderer_(true);
 		fxt.Test__parse_to_html_mgr("<math>a\"b</math>", "<span id='xowa_math_txt_0'>a\"b</span>");
 	}
 	@Test   public void Script() {
-		fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax_(false);
+		Renderer_(false);
 		fxt.Test__parse_to_html_mgr("<math><script>alert('fail');</script></math>", "<img id='xowa_math_img_0' src='' width='' height=''/><span id='xowa_math_txt_0'>&lt;script>alert('fail');</script></span>");
+	}
+	private void Renderer_(boolean mathjax) {
+		fxt.Wiki().Parser_mgr().Math__core().Renderer_is_mathjax_(mathjax);
 	}
 }

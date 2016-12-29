@@ -24,7 +24,6 @@ public class Xof_file_mgr implements Gfo_invk {
 	public Xoa_repo_mgr			Repo_mgr() {return repo_mgr;} private Xoa_repo_mgr repo_mgr;
 	public Xof_img_mgr			Img_mgr() {return img_mgr;} private final    Xof_img_mgr img_mgr = new Xof_img_mgr();
 	public Xof_cache_mgr		Cache_mgr() {return cache_mgr;} private Xof_cache_mgr cache_mgr;
-	public Xof_math_mgr			Math_mgr() {return math_mgr;} private final    Xof_math_mgr math_mgr = new Xof_math_mgr();
 	public Xof_rule_mgr			Ext_rules() {return ext_rules;} private final    Xof_rule_mgr ext_rules = new Xof_rule_mgr();
 	public void Ctor_by_app(Xoae_app app) {
 		Gfo_usr_dlg usr_dlg = app.Usr_dlg();
@@ -32,15 +31,11 @@ public class Xof_file_mgr implements Gfo_invk {
 		this.repo_mgr = new Xoa_repo_mgr(app.Fsys_mgr(), ext_rules); 
 		img_mgr.Init_by_app(app.Wmf_mgr(), app.Prog_mgr());
 	}
-	public void Init_by_app(Xoae_app app) {
-		math_mgr.Init_by_app(app);
-	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_repos))				return repo_mgr;
 		else if	(ctx.Match(k, Invk_img_mgr))			return img_mgr;
 		else if	(ctx.Match(k, Invk_ext_rules))			return ext_rules;
-		else if	(ctx.Match(k, Invk_math))				return math_mgr;
 		else if	(ctx.Match(k, Invk_cache_mgr))			return cache_mgr;
 		else											return Gfo_invk_.Rv_unhandled;
-	}	private static final String Invk_repos = "repos", Invk_img_mgr= "img_mgr", Invk_ext_rules = "ext_rules", Invk_math = "math", Invk_cache_mgr = "cache_mgr";
+	}	private static final String Invk_repos = "repos", Invk_img_mgr= "img_mgr", Invk_ext_rules = "ext_rules", Invk_cache_mgr = "cache_mgr";
 }

@@ -16,12 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*;
-public class Xof_math_mgr_tst {
-	@Before public void init() {} Xof_math_subst_regy subst_regy = new Xof_math_subst_regy().Init();
-	@Test  public void Basic()						{tst("a\\plusmn b"			, "a\\pm b");}
-	@Test  public void Match_fails()				{tst("a\\plusmna b"			, "a\\plusmna b");}
-	@Test  public void Part()						{tst("a\\part_t b"			, "a\\partial_t b");}	// PAGE:en.w:Faraday's law of induction
-	@Test  public void Partial()					{tst("a\\partial_{x_i}"		, "a\\partial_{x_i}");}	// DEFECT: partial -> partialial
-	private void tst(String src, String expd) {Tfds.Eq(expd, String_.new_u8(subst_regy.Subst(Bry_.new_u8(src))));}
+class Xomath_latex_itm {
+	public Xomath_latex_itm(int uid, byte[] src, byte[] md5, Io_url png) {
+		this.uid = uid;
+		this.src = src;
+		this.md5 = md5;
+		this.png = png;
+	}
+	public int		Uid() {return uid;} private final    int uid;
+	public byte[]	Src() {return src;} private final    byte[] src;
+	public byte[]	Md5() {return md5;} private final    byte[] md5;
+	public Io_url	Png() {return png;} private final    Io_url png;
 }

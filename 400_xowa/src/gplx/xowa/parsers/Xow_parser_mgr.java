@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.*; import gplx.core.envs.*;
 import gplx.xowa.files.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wbases.hwtrs.*; import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.ttls.*;
-import gplx.xowa.parsers.uniqs.*; import gplx.xowa.parsers.hdrs.sections.*;
+import gplx.xowa.xtns.math.*; import gplx.xowa.parsers.uniqs.*; import gplx.xowa.parsers.hdrs.sections.*;
 public class Xow_parser_mgr {
 	private final    Xowe_wiki wiki; private final    Xop_tkn_mkr tkn_mkr;
 	public Xow_parser_mgr(Xowe_wiki wiki) {
@@ -39,6 +39,7 @@ public class Xow_parser_mgr {
 	public Gfo_number_parser		Pp_num_parser()		{return pp_num_parser;} private final    Gfo_number_parser pp_num_parser = new Gfo_number_parser().Ignore_space_at_end_y_();
 	public int[]					Rel2abs_ary()		{return rel2abs_ary;} private final    int[] rel2abs_ary = new int[Pfunc_rel2abs.Ttl_max];
 	public Xop_uniq_mgr				Uniq_mgr()			{return uniq_mgr;} private final    Xop_uniq_mgr uniq_mgr = new Xop_uniq_mgr();
+	public Xomath_core				Math__core()		{return math__core;} private final    Xomath_core math__core = new Xomath_core();
 	public boolean						Lst__recursing()	{return lst_recursing;} private boolean lst_recursing; public void	Lst__recursing_(boolean v) {lst_recursing = v;}
 	public Bry_bfr					Wbase__time__bfr()  {return wbase__time__bfr;} private final    Bry_bfr wbase__time__bfr = Bry_bfr_.New();
 	public Bry_fmtr					Wbase__time__fmtr() {return wbase__time__fmtr;} private final    Bry_fmtr wbase__time__fmtr = Bry_fmtr.new_();
@@ -75,6 +76,7 @@ public class Xow_parser_mgr {
 		return rv;
 	}	private Pfunc_anchorencode_mgr anchor_encoder_mgr;
 	public void Init_by_wiki() {
+		math__core.Init_by_wiki(wiki);
 		hdr__section_editable__mgr.Init_by_wiki(wiki);
 	}
 	public void Parse(Xoae_page page, boolean clear) {	// main parse method; should never be called nested

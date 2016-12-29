@@ -36,7 +36,7 @@ public class Xog_async_wkr {
 		}
 
 		Async_imgs(usr_dlg, app, wiki, page, js_wkr);
-		Async_math(usr_dlg, app, page, js_wkr);
+		gplx.xowa.xtns.math.Xomath_latex_bldr.Async(app, page, js_wkr);
 		Async_score(usr_dlg, app, page);
 		Async_redlinks(usr_dlg, app, page, js_wkr);
 
@@ -65,29 +65,6 @@ public class Xog_async_wkr {
 			&&	page.Html_data().Head_mgr().Itm__popups().Enabled()
 			)
 			js_wkr.Html_popups_bind_hover_to_doc();			// rebind all elements to popup
-	}
-	private static void Async_math(Gfo_usr_dlg usr_dlg, Xoae_app app, Xoae_page page, Xog_js_wkr js_wkr) {
-		// make png from latex
-		int len = page.File_math().Count();
-		if (len == 0) return;
-		try {
-			usr_dlg.Prog_one("", "", "page.async.math; count=~{0}", len);
-			for (int i = 0; i < len; ++i) {
-				if (usr_dlg.Canceled()) {
-					usr_dlg.Prog_none("", "", "");
-					app.Log_wtr().Queue_enabled_(false);
-					return;
-				}
-				gplx.xowa.xtns.math.Xof_math_itm itm = (gplx.xowa.xtns.math.Xof_math_itm)page.File_math().Get_at(i);
-				String queue_msg = usr_dlg.Prog_many("", "", "generating math ~{0} of ~{1}: ~{2}", i + List_adp_.Base1, len, itm.Math());
-				app.File_mgr().Math_mgr().MakePng(itm.Math(), itm.Hash(), itm.Png_url(), queue_msg);
-				gplx.gfui.SizeAdp size = app.File_mgr().Img_mgr().Wkr_query_img_size().Exec(itm.Png_url());
-				js_wkr.Html_img_update("xowa_math_img_" + itm.Id(), itm.Png_url().To_http_file_str(), size.Width(), size.Height());
-				js_wkr.Html_elem_delete("xowa_math_txt_" + itm.Id());
-			}
-			page.File_math().Clear();
-		}
-		catch (Exception e) {usr_dlg.Warn_many("", "", "page.async.math: page=~{0} err=~{1}", page.Ttl().Raw(), Err_.Message_gplx_log(e));}
 	}
 	private static void Async_score(Gfo_usr_dlg usr_dlg, Xoae_app app, Xoae_page page) {
 		// run other cmds
