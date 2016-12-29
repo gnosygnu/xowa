@@ -45,7 +45,7 @@ public class Xocfg_edit_svc {
 		}
 
 		if (!String_.Eq(type, "btn") && String_.Eq(grp.Dflt(), val))
-			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.revert__recv", Gfobj_nde.New().Add_str("key", key).Add_str("val", val).Add_str("type", type));
+			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.delete__recv", Gfobj_nde.New().Add_str("key", key).Add_str("val", val).Add_str("type", type));
 		else
 			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.update__pass", Gfobj_nde.New().Add_str("key", key).Add_str("val", val).Add_str("type", type));
 	}

@@ -18,10 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apps.progs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.files.*; import gplx.core.envs.*;
 public class Xoa_prog_mgr implements Gfo_invk {
+	private Xoa_app app;
 	private Gfo_usr_dlg usr_dlg;
 	private Process_adp app_web;
 	private Process_adp[] apps_by_ext = new Process_adp[Xof_ext_.Id__max];
 	public void Init_by_app(Xoa_app app, Xoa_fsys_eval cmd_eval) {
+		this.app = app;
 		this.usr_dlg = Xoa_app_.Usr_dlg();
 		Process_adp.ini_(this, usr_dlg, app_query_img_size			, cmd_eval, Process_adp.Run_mode_sync_timeout	, 10 * 60, "~{<>bin_plat_dir<>}imagemagick\\identify", "-ping -format \"<{%w,%h}>\" \"~{file}\"", "file");
 		Process_adp.ini_(this, usr_dlg, app_resize_img				, cmd_eval, Process_adp.Run_mode_sync_timeout	, 10 * 60, "~{<>bin_plat_dir<>}imagemagick\\convert", "\"~{source}\" -coalesce -resize ~{width}x~{height} \"~{target}\"", "source", "target", "width", "height");
@@ -90,7 +92,7 @@ public class Xoa_prog_mgr implements Gfo_invk {
 		else if	(String_.Eq(k, Cfg__convert_djvu_to_tiff))		{Init_cmd(m.ReadStr("v"), app_convert_djvu_to_tiff);}
 		else if	(String_.Eq(k, Cfg__convert_tex_to_dvi))		{Init_cmd(m.ReadStr("v"), app_convert_tex_to_dvi);}
 		else if	(String_.Eq(k, Cfg__convert_dvi_to_png))		{Init_cmd(m.ReadStr("v"), app_convert_dvi_to_png);}
-		else if (String_.Eq(k, Cfg__lua))						{Init_cmd(m.ReadStr("v"), app_lua);}
+		else if (String_.Eq(k, Cfg__lua))						{Init_cmd(m.ReadStr("v"), app_lua); gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all((Xoae_app)app);}
 		else if (String_.Eq(k, Cfg__lilypond))					{Init_cmd(m.ReadStr("v"), app_lilypond);}
 		else if (String_.Eq(k, Cfg__abc2ly))					{Init_cmd(m.ReadStr("v"), app_abc2ly);}
 		else if (String_.Eq(k, Cfg__trim_img))					{Init_cmd(m.ReadStr("v"), app_trim_img);}
