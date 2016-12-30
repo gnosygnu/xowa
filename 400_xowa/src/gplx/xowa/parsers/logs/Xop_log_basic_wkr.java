@@ -20,10 +20,10 @@ import gplx.core.envs.*;
 import gplx.dbs.*;
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Xop_log_basic_wkr implements Gfo_invk {
-	private Xop_log_mgr log_mgr; private Xop_log_basic_tbl log_tbl;
+	private Xop_log_basic_tbl log_tbl;
 	private boolean save_page_ttl, save_log_time, save_args_len, save_args_str;
 	public boolean Save_src_str() {return save_src_str;} public Xop_log_basic_wkr Save_src_str_(boolean v) {save_src_str = v; return this;} private boolean save_src_str;
-	public Xop_log_basic_wkr(Xop_log_mgr log_mgr, Xop_log_basic_tbl log_tbl) {this.log_mgr = log_mgr; this.log_tbl = log_tbl;}
+	public Xop_log_basic_wkr(Xop_log_basic_tbl log_tbl) {this.log_tbl = log_tbl;}
 	public boolean Log_bgn(Xoae_page page, byte[] src, Xop_xnde_tkn xnde) {return true;}
 	public void Log_end_xnde(Xoae_page page, int log_tid, byte[] src, Xop_xnde_tkn xnde_tkn) {
 		Mwh_atr_itm[] atrs_ary = xnde_tkn.Atrs_ary();
@@ -45,7 +45,6 @@ public class Xop_log_basic_wkr implements Gfo_invk {
 			, src_end - src_bgn
 			, save_src_str ? String_.new_u8(src, src_bgn, src_end) : Xop_log_basic_wkr.Null_src_str
 			);
-		log_mgr.Commit_chk();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_save_page_ttl_))			save_page_ttl = m.ReadYn("v");

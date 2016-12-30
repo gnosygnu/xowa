@@ -20,13 +20,11 @@ import gplx.core.envs.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.parsers.logs.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Xop_log_invoke_wkr implements Gfo_invk {
-	private Xop_log_mgr log_mgr;
 	private Db_conn conn; private Db_stmt stmt;
 	private boolean log_enabled = true;
 	private Hash_adp_bry exclude_mod_names = Hash_adp_bry.cs();
 	public Scrib_err_filter_mgr Err_filter_mgr() {return err_filter_mgr;} private final    Scrib_err_filter_mgr err_filter_mgr = new Scrib_err_filter_mgr();
-	public Xop_log_invoke_wkr(Xop_log_mgr log_mgr, Db_conn conn) {
-		this.log_mgr = log_mgr;
+	public Xop_log_invoke_wkr(Db_conn conn) {
 		this.conn = conn;
 		if (log_enabled) {
 			Xop_log_invoke_tbl.Create_table(conn);
@@ -39,7 +37,6 @@ public class Xop_log_invoke_wkr implements Gfo_invk {
 		if (log_enabled && stmt != null) {
 			int eval_time = (int)(System_.Ticks() - invoke_time_bgn);
 			Xop_log_invoke_tbl.Insert(stmt, page.Ttl().Rest_txt(), mod_name, fnc_name, eval_time);
-			log_mgr.Commit_chk();
 		}
 	}
 	private void Exclude_mod_names_add(String[] v) {

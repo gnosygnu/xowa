@@ -19,12 +19,11 @@ package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.envs.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
 public class Xop_log_property_wkr implements Gfo_invk {
-	private Xop_log_mgr log_mgr; private Db_conn conn; private Db_stmt stmt;
+	private Db_conn conn; private Db_stmt stmt;
 	private boolean log_enabled = true;
 	private boolean include_all = true;
 	private Hash_adp_bry include_props = Hash_adp_bry.cs();
-	public Xop_log_property_wkr(Xop_log_mgr log_mgr, Db_conn conn) {
-		this.log_mgr = log_mgr;
+	public Xop_log_property_wkr(Db_conn conn) {
 		this.conn = conn;
 		if (log_enabled) {
 			Xob_log_property_temp_tbl.Create_table(conn);
@@ -37,7 +36,6 @@ public class Xop_log_property_wkr implements Gfo_invk {
 		if (log_enabled && stmt != null) {
 			int eval_time = (int)(System_.Ticks() - invoke_time_bgn);
 			Xob_log_property_temp_tbl.Insert(stmt, page.Ttl().Rest_txt(), prop, eval_time);
-			log_mgr.Commit_chk();
 		}
 	}
 	private void Include_props_add(String[] v) {

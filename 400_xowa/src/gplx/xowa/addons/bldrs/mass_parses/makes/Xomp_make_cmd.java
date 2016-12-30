@@ -23,7 +23,7 @@ public class Xomp_make_cmd extends Xob_cmd__base {
 	@Override public void Cmd_run() {
 		wiki.Init_assert();
 		new Xomp_make_html().Exec(wiki, cfg);
-		new Xomp_make_lnki().Exec(wiki, 10000);
+		new Xomp_make_lnki().Exec(wiki, cfg, 10000);
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__cfg))		return cfg;

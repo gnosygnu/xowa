@@ -32,6 +32,7 @@ public class Xomp_parse_mgr_cfg implements Gfo_invk {
 	public boolean		Load_all_templates()			{return load_all_templates;}			private boolean load_all_templates = true;
 	public boolean		Load_all_imglinks()				{return load_all_imglinks;}				private boolean load_all_imglinks = true;
 	public String	Load_ifexists_ns()				{return load_ifexists_ns;}				private String load_ifexists_ns = null;
+	public boolean		Log_math()						{return log_math;}						private boolean log_math = false;
 	public byte		Zip_tid()						{return zip_tid;}						private byte zip_tid = Io_stream_tid_.Tid__gzip;
 	public Io_url	Mgr_url()						{return mgr_url;}						private Io_url mgr_url;
 	public String	Wkr_machine_name()				{return wkr_machine_name;}				private String wkr_machine_name;
@@ -62,6 +63,7 @@ public class Xomp_parse_mgr_cfg implements Gfo_invk {
 		else if	(ctx.Match(k, Invk__wkr_machine_name_))				wkr_machine_name = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk__show_msg__fetched_pool_))		show_msg__fetched_pool = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk__hdump_catboxes_))				hdump_catboxs = m.ReadYn("v");
+		else if	(ctx.Match(k, Invk__log_math_))						log_math = m.ReadYn("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -71,6 +73,7 @@ public class Xomp_parse_mgr_cfg implements Gfo_invk {
 	, Invk__hdump_enabled_ = "hdump_enabled_", Invk__hzip_enabled_ = "hzip_enabled_", Invk__hdiff_enabled_ = "hdiff_enabled_", Invk__zip_tid_ = "zip_tid_"
 	, Invk__load_all_templates_ = "load_all_templates_", Invk__load_all_imglinks_ = "load_all_imglinks_", Invk__load_ifexists_ns_ = "load_ifexists_ns_", Invk__manual_now_ = "manual_now_"
 	, Invk__hdump_catboxes_ = "hdump_catboxes_"
+	, Invk__log_math_ = "log_math_"
 	, Invk__mgr_url_ = "mgr_url_", Invk__wkr_machine_name_ = "wkr_machine_name_"
 	, Invk__show_msg__fetched_pool_ = "show_msg__fetched_pool_"
 	;

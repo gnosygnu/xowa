@@ -17,14 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
-public class Xop_log_basic_tbl {
+public class Xop_log_basic_tbl implements Db_tbl {
 	private Db_stmt stmt_insert;
-	public Xop_log_basic_tbl(Db_conn conn){this.conn = conn; this.Create_table();} 
+	public Xop_log_basic_tbl(Db_conn conn){this.conn = conn; this.Create_tbl();} 
 	public Db_conn Conn() {return conn;} private Db_conn conn; 
-	private void Create_table()				{Sqlite_engine_.Tbl_create(conn, Tbl_name, Tbl_sql);}
-	public void Delete()					{conn.Exec_qry(Db_qry_delete.new_all_(Tbl_name));}
+	public String Tbl_name() {return TBL_NAME;}
+	public void Create_tbl()				{Sqlite_engine_.Tbl_create(conn, TBL_NAME, Tbl_sql);}
+	public void Delete()					{conn.Exec_qry(Db_qry_delete.new_all_(TBL_NAME));}
 	public void Insert(int log_tid, String log_msg, int log_time, int page_id, String page_ttl, int args_len, String args_str, int src_len, String src_str) {
-		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(conn, Tbl_name, Fld_log_tid, Fld_log_msg, Fld_log_time, Fld_page_id, Fld_page_ttl, Fld_args_len, Fld_args_str, Fld_src_len, Fld_src_str);
+		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(conn, TBL_NAME, Fld_log_tid, Fld_log_msg, Fld_log_time, Fld_page_id, Fld_page_ttl, Fld_args_len, Fld_args_str, Fld_src_len, Fld_src_str);
 		stmt_insert.Clear()
 		.Val_int(log_tid)
 		.Val_str(log_msg)
@@ -40,13 +41,13 @@ public class Xop_log_basic_tbl {
 	public void Rls() {
 		stmt_insert.Rls();
 	}
-	public static final String Tbl_name = "log_basic_temp"
+	public static final String TBL_NAME = "log_basic_temp"
 	, Fld_log_tid = "log_tid", Fld_log_msg = "log_msg", Fld_log_time = "log_time"
 	, Fld_page_id = "page_id", Fld_page_ttl = "page_ttl"
 	, Fld_args_len = "args_len", Fld_args_str = "args_str"
 	, Fld_src_len = "src_len", Fld_src_str = "src_str"
 	;
-	private static final String Tbl_sql = String_.Concat_lines_nl
+	private static final    String Tbl_sql = String_.Concat_lines_nl
 		(	"CREATE TABLE IF NOT EXISTS log_basic_temp"
 		,	"( log_id                   integer             NOT NULL    PRIMARY KEY AUTOINCREMENT"
 		,	", log_tid                  integer             NOT NULL"

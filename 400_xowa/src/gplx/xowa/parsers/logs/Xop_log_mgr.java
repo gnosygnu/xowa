@@ -38,12 +38,12 @@ public class Xop_log_mgr implements Gfo_invk {
 		}
 		return conn;
 	}
-	public Xop_log_invoke_wkr Make_wkr_invoke() {return new Xop_log_invoke_wkr(this, this.Conn());}
-	public Xop_log_property_wkr Make_wkr_property() {return new Xop_log_property_wkr(this, this.Conn());}
+	public Xop_log_invoke_wkr Make_wkr_invoke() {return new Xop_log_invoke_wkr(this.Conn());}
+	public Xop_log_property_wkr Make_wkr_property() {return new Xop_log_property_wkr(this.Conn());}
 	public Xop_log_basic_wkr Make_wkr() {
 		if (log_tbl == null)
 			log_tbl = new Xop_log_basic_tbl(this.Conn());
-		return new Xop_log_basic_wkr(this, log_tbl);
+		return new Xop_log_basic_wkr(log_tbl);
 	}
 	public void Commit_chk() {
 		++exec_count;

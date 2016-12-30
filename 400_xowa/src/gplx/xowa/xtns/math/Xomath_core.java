@@ -16,16 +16,21 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.logs.*;
 public class Xomath_core implements Gfo_invk {
 	private final    Xomath_html_wtr html_wtr = new Xomath_html_wtr();
+	private Xop_log_basic_wkr log_wkr;
 	public boolean   Enabled()				{return enabled;}				private boolean enabled = true;
 	public boolean   Renderer_is_mathjax()	{return renderer_is_mathjax;}	private boolean renderer_is_mathjax = true;
 	public void Renderer_is_mathjax_(boolean v) {renderer_is_mathjax = v;}		// TEST:
 	public void Init_by_wiki(Xow_wiki wiki) {
 		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__enabled, Cfg__renderer);
 	}
+	public void Log_wkr_(Xop_log_wkr_factory factory) {
+		this.log_wkr = factory.Make__generic().Save_src_str_(Bool_.Y);
+	}
 	public void Write(Bry_bfr bfr, Xop_ctx ctx, Xop_xnde_tkn xnde, byte[] src) {
+		if (log_wkr != null) log_wkr.Log_end_xnde(ctx.Page(), Xop_log_basic_wkr.Tid_math, src, xnde);
 		html_wtr.Write(bfr, ctx, xnde, src, !renderer_is_mathjax, enabled);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

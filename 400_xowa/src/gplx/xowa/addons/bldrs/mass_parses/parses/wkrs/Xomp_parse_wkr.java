@@ -19,7 +19,7 @@ package gplx.xowa.addons.bldrs.mass_parses.parses.wkrs; import gplx.*; import gp
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 import gplx.xowa.files.origs.*;
 import gplx.xowa.htmls.core.bldrs.*;
-import gplx.xowa.parsers.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*;
 import gplx.xowa.addons.bldrs.mass_parses.parses.mgrs.*; import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.pools.*;
 public class Xomp_parse_wkr implements Gfo_invk {
 	// mgr vars
@@ -79,6 +79,10 @@ public class Xomp_parse_wkr implements Gfo_invk {
 			parser_mgr.Ctx().Lnki().File_logger_(logger);
 			logger.Bgn();
 		}
+
+		// init log_mgr / property_wkr
+		Xop_log_wkr_factory wkr_factory = new Xop_log_wkr_factory(wkr_db.Conn());
+		if (cfg.Log_math()) wiki.Parser_mgr().Math__core().Log_wkr_(wkr_factory);
 
 		// enable hdump			
 		hdump_bldr.Enabled_(cfg.Hdump_enabled()).Hzip_enabled_(cfg.Hzip_enabled()).Hzip_diff_(cfg.Hdiff_enabled()).Zip_tid_(cfg.Zip_tid());
