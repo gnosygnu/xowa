@@ -21,7 +21,7 @@ import gplx.xowa.guis.cbks.*;
 public class Xog_bnd_win implements Gfo_invk {
 	private GfuiWin win;
 	private GfuiTextBox shortcut_txt, binding_txt, keycode_txt;
-	private GfuiBtn ok_btn, cxl_btn;
+	private GfuiBtn clear_btn, ok_btn, cxl_btn;
 	private Gfui_bnd_parser bnd_parser = Gfui_bnd_parser.new_en_();
 	private Xoa_app app;
 	private String key_text;
@@ -37,6 +37,7 @@ public class Xog_bnd_win implements Gfo_invk {
 		this.shortcut_txt			= Make_txt(kit, win, "shortcut_txt"	, shortcut_text);
 		this.binding_txt			= Make_txt(kit, win, "binding_txt"	, binding_text);
 		this.keycode_txt			= Make_txt(kit, win, "keycode_txt"	, "");
+		this.clear_btn				= Make_btn(kit, win, "clear_btn"	, "Clear");
 		this.ok_btn					= Make_btn(kit, win, "ok_btn"		, "Ok");
 		this.cxl_btn				= Make_btn(kit, win, "cxl_btn"		, "Cancel");
 
@@ -44,14 +45,15 @@ public class Xog_bnd_win implements Gfo_invk {
 		Layout( 0, shortcut_lbl	, shortcut_txt);
 		Layout(20, binding_lbl	, binding_txt);
 		Layout(40, keycode_lbl	, keycode_txt);
-		ok_btn.Pos_(110, 70); cxl_btn.Pos_(150, 70);
+		clear_btn.Pos_(70, 70); ok_btn.Pos_(110, 70); cxl_btn.Pos_(150, 70);
 
 		// hookup events
 		IptCfg null_cfg = IptCfg_.Null; IptEventType btn_event_type = IptEventType_.add_(IptEventType_.MouseDown, IptEventType_.KeyDown); IptArg[] btn_args = IptArg_.Ary(IptMouseBtn_.Left, IptKey_.Enter, IptKey_.Space);
-		IptBnd_.ipt_to_(null_cfg		, binding_txt	, this, Invk_when_key_down	, IptEventType_.KeyDown, IptArg_.Wildcard);
-		IptBnd_.ipt_to_(null_cfg		, binding_txt	, this, Invk_when_key_up	, IptEventType_.KeyUp, IptArg_.Wildcard);
-		IptBnd_.ipt_to_(null_cfg		, ok_btn		, this, "when_ok"			, btn_event_type, btn_args);
-		IptBnd_.ipt_to_(null_cfg		, cxl_btn		, this, "when_cxl"			, btn_event_type, btn_args);
+		IptBnd_.ipt_to_(null_cfg		, binding_txt	, this, Invk__when_key_down		, IptEventType_.KeyDown, IptArg_.Wildcard);
+		IptBnd_.ipt_to_(null_cfg		, binding_txt	, this, Invk__when_key_up		, IptEventType_.KeyUp, IptArg_.Wildcard);
+		IptBnd_.ipt_to_(null_cfg		, clear_btn		, this, Invk__when_clear		, btn_event_type, btn_args);
+		IptBnd_.ipt_to_(null_cfg		, ok_btn		, this, Invk__when_ok			, btn_event_type, btn_args);
+		IptBnd_.ipt_to_(null_cfg		, cxl_btn		, this, Invk__when_cxl			, btn_event_type, btn_args);
 
 		// open
 		win.Pos_(SizeAdp_.center_(ScreenAdp_.Primary.Size(), win.Size()));
@@ -86,19 +88,21 @@ public class Xog_bnd_win implements Gfo_invk {
 
 	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New(gplx.xowa.addons.apps.cfgs.specials.edits.pages.Xocfg_edit_special.Prototype.Special__meta().Ttl_bry());
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_when_key_down))		When_key_down(m);
-		else if	(ctx.Match(k, Invk_when_key_press))		When_key_up(m);
-		else if	(ctx.Match(k, Invk_when_key_up))		When_key_up(m);
-		else if	(ctx.Match(k, Invk_when_ok))			{
-			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.gui_binding__remap_recv"
-			, gplx.core.gfobjs.Gfobj_nde.New().Add_str("key", key_text).Add_str("bnd", binding_txt.Text()));
-			win.Close();
-		}
-		else if	(ctx.Match(k, Invk_when_cxl))			{win.Close();}
+		if		(ctx.Match(k, Invk__when_key_down))		When_key_down(m);
+		else if	(ctx.Match(k, Invk__when_key_press))	When_key_up(m);
+		else if	(ctx.Match(k, Invk__when_key_up))		When_key_up(m);
+		else if	(ctx.Match(k, Invk__when_clear))		Remap_and_close("None");
+		else if	(ctx.Match(k, Invk__when_ok))			Remap_and_close(binding_txt.Text());
+
+		else if	(ctx.Match(k, Invk__when_cxl))			{win.Close();}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final String Invk_when_key_down = "when_key_down", Invk_when_key_press = "when_key_press", Invk_when_key_up = "when_key_up"
-	, Invk_when_ok = "when_ok", Invk_when_cxl = "when_cxl"
+	private static final String Invk__when_key_down = "when_key_down", Invk__when_key_press = "when_key_press", Invk__when_key_up = "when_key_up"
+	, Invk__when_clear= "when_clear", Invk__when_ok = "when_ok", Invk__when_cxl = "when_cxl"
 	;
+	private void Remap_and_close(String new_ipt) {
+		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.gui_binding__remap_recv", gplx.core.gfobjs.Gfobj_nde.New().Add_str("key", key_text).Add_str("bnd", new_ipt));
+		win.Close();
+	}
 }
