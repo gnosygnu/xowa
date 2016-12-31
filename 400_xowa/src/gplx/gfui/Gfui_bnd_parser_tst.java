@@ -42,8 +42,8 @@ public class Gfui_bnd_parser_tst {
 		fxt.Test__to_gfui("Ctrl + Alt + Shift + A"			, "mod.cas+key.a");
 	}
 	@Test  public void Keypad_enter() {
-		fxt.Test__to_norm("key.keypad_enter"				, "Keypad Enter");
-		fxt.Test__to_norm("mod.c+key.keypad_enter"			, "Ctrl + Keypad Enter");
+		fxt.Test__to_norm("key.numpad_enter"				, "Numpad Enter");
+		fxt.Test__to_norm("mod.c+key.numpad_enter"			, "Ctrl + Numpad Enter");
 	}
 	@Test  public void None() {
 		fxt.Test__to_gfui("None"							, "key.none");

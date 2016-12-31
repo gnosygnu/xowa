@@ -92,27 +92,47 @@ class Swt_lnr_key implements KeyListener {
 			case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
 				val -= 32; 
 				break;
-				
-			// numpad numbers
-			case SWT.KEYPAD_0:				val = IptKey_.Numpad_0.Val(); break;
-			case SWT.KEYPAD_1:				val = IptKey_.Numpad_1.Val(); break;
-			case SWT.KEYPAD_2:				val = IptKey_.Numpad_2.Val(); break;
-			case SWT.KEYPAD_3:				val = IptKey_.Numpad_3.Val(); break;
-			case SWT.KEYPAD_4:				val = IptKey_.Numpad_4.Val(); break;
-			case SWT.KEYPAD_5:				val = IptKey_.Numpad_5.Val(); break;
-			case SWT.KEYPAD_6:				val = IptKey_.Numpad_6.Val(); break;
-			case SWT.KEYPAD_7:				val = IptKey_.Numpad_7.Val(); break;
-			case SWT.KEYPAD_8:				val = IptKey_.Numpad_8.Val(); break;
-			case SWT.KEYPAD_9:				val = IptKey_.Numpad_9.Val(); break;
 
-			// symbols; extended
+			//	// numpad numbers
+			//	case SWT.KEYPAD_0:				val = IptKey_.Numpad_0.Val(); break;
+			//	case SWT.KEYPAD_1:				val = IptKey_.Numpad_1.Val(); break;
+			//	case SWT.KEYPAD_2:				val = IptKey_.Numpad_2.Val(); break;
+			//	case SWT.KEYPAD_3:				val = IptKey_.Numpad_3.Val(); break;
+			//	case SWT.KEYPAD_4:				val = IptKey_.Numpad_4.Val(); break;
+			//	case SWT.KEYPAD_5:				val = IptKey_.Numpad_5.Val(); break;
+			//	case SWT.KEYPAD_6:				val = IptKey_.Numpad_6.Val(); break;
+			//	case SWT.KEYPAD_7:				val = IptKey_.Numpad_7.Val(); break;
+			//	case SWT.KEYPAD_8:				val = IptKey_.Numpad_8.Val(); break;
+			//	case SWT.KEYPAD_9:				val = IptKey_.Numpad_9.Val(); break;
+			//	
+			//	// numpad symbols
+			//	case SWT.KEYPAD_MULTIPLY:		val = IptKey_.Numpad_multiply.Val(); break;
+			//	case SWT.KEYPAD_ADD:			val = IptKey_.Numpad_add.Val(); break;
+			//	case SWT.KEYPAD_SUBTRACT:  		val = IptKey_.Numpad_subtract.Val(); break;
+			//	case SWT.KEYPAD_DECIMAL:  		val = IptKey_.Numpad_decimal.Val(); break;
+			//	case SWT.KEYPAD_DIVIDE:  		val = IptKey_.Numpad_divide.Val(); break;
+			//	case SWT.KEYPAD_CR:  			val = IptKey_.Numpad_enter.Val(); break;
+
+			// numpad numbers
+			case SWT.KEYPAD_0:				val = IptKey_.D0.Val(); break;
+			case SWT.KEYPAD_1:				val = IptKey_.D1.Val(); break;
+			case SWT.KEYPAD_2:				val = IptKey_.D2.Val(); break;
+			case SWT.KEYPAD_3:				val = IptKey_.D3.Val(); break;
+			case SWT.KEYPAD_4:				val = IptKey_.D4.Val(); break;
+			case SWT.KEYPAD_5:				val = IptKey_.D5.Val(); break;
+			case SWT.KEYPAD_6:				val = IptKey_.D6.Val(); break;
+			case SWT.KEYPAD_7:				val = IptKey_.D7.Val(); break;
+			case SWT.KEYPAD_8:				val = IptKey_.D8.Val(); break;
+			case SWT.KEYPAD_9:				val = IptKey_.D9.Val(); break;
+
+			// numpad symbols
 			case SWT.KEYPAD_MULTIPLY:		val = IptKey_.Numpad_multiply.Val(); break;
-			case SWT.KEYPAD_ADD:			val = IptKey_.Numpad_add.Val(); break;
-			case SWT.KEYPAD_SUBTRACT:  		val = IptKey_.Numpad_subtract.Val(); break;
-			case SWT.KEYPAD_DECIMAL:  		val = IptKey_.Numpad_decimal.Val(); break;
+			case SWT.KEYPAD_ADD:			val = IptKey_.Equal.Val(); break;
+			case SWT.KEYPAD_SUBTRACT:  		val = IptKey_.Minus.Val(); break;
+			case SWT.KEYPAD_DECIMAL:  		val = IptKey_.Period.Val(); break;
 			case SWT.KEYPAD_DIVIDE:  		val = IptKey_.Numpad_divide.Val(); break;
 			case SWT.KEYPAD_CR:  			val = IptKey_.Enter.Val(); break;
-
+			
 			// function keys
 			case SWT.F1:					val = IptKey_.F1.Val(); break;
 			case SWT.F2:					val = IptKey_.F2.Val(); break;

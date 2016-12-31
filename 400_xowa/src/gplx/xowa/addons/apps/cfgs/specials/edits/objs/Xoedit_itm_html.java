@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 import gplx.xowa.addons.apps.cfgs.enums.*;
 import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
+import gplx.xowa.guis.bnds.*;
 public class Xoedit_itm_html {
 	public static void Build_html(Bry_bfr bfr, Xocfg_type_mgr type_mgr, String key, String name, String type, String html_atrs, String html_cls, byte[] val) {
 		// prepend space for html insertion; EX: "type='checkbox'{1}>" with "a=b" -> "type='checkbox' a='b'" x> "type='checkbox'a='b'"
@@ -25,6 +26,7 @@ public class Xoedit_itm_html {
 		if (String_.Len_gt_0(html_cls))	html_cls  = " " + html_cls;
 
 		// build html
+		bfr.Add_byte_nl();
 		switch (Xoitm_type_enum.To_uid(type)) {
 			case Xoitm_type_enum.Tid__bool:
 				bfr.Add_str_u8_fmt
@@ -71,22 +73,42 @@ public class Xoedit_itm_html {
 			case Xoitm_type_enum.Tid__io_cmd:
 				String[] lines = Xocfg_mgr.Parse_io_cmd(String_.new_u8(val));
 				bfr.Add_str_u8_fmt
-				( "<input  class=\"xocfg__io_cmd__exe__txt\" id=\"{3}-exe\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-exe\" accesskey=\"d\" class=\"xocfg__io_cmd__exe__txt{2}\" type=\"text\"{1} value=\"{4}\"></input>\n"
+				( "<input  class=\"xocfg__io_cmd__exe__txt{2}\" id=\"{3}-exe\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-exe\" accesskey=\"d\" type=\"text\"{1} value=\"{4}\"></input>\n"
 				+ "<button class=\"xocfg__io_cmd__exe__btn\" onclick='xo.cfg_edit.io_cmd__select(\"file\", \"{3}-exe\", \"Please select a file.\");'>...</button><br/>\n"
 				, type, html_atrs, html_cls, key, lines[0]);
 				bfr.Add_str_u8_fmt
-				( "<input  class=\"xocfg__io_cmd__arg__txt\" id=\"{3}-arg\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-arg\" accesskey=\"d\" class=\"xocfg__io_cmd__arg__txt{2}\" type=\"text\"{1} value=\"{4}\">\n"
+				( "<input  class=\"xocfg__io_cmd__arg__txt{2}\" id=\"{3}-arg\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-arg\" accesskey=\"d\" type=\"text\"{1} value=\"{4}\">\n"
 				, type, html_atrs, html_cls, key, lines[1]);
 				break;
-			case Xoitm_type_enum.Tid__gui_binding:
+			case Xoitm_type_enum.Tid__gui_binding: {
 				String[] flds = Xoitm_gui_binding.To_gui(String_.new_u8(val));
+//					bfr.Add_str_u8_fmt
+//					( "<input class=\"xocfg__gui_binding__box\" id=\"{3}-box\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-box\" accesskey=\"d\" type=\"text\"{1} value=\"{4}\"></input>\n"
+//					, type, html_atrs, html_cls, key, flds[0]);
 				bfr.Add_str_u8_fmt
-				( "<input  class=\"xocfg__gui_binding__box__txt\" id=\"{3}-box\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-box\" accesskey=\"d\" class=\"{2}\" type=\"text\"{1} value=\"{4}\"></input>\n"
+				( "<select class=\"xocfg__gui_binding__box\" id=\"{3}-box\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-box\" size=\"1\" accesskey=\"d\"{1}>\n"
 				, type, html_atrs, html_cls, key, flds[0]);
+
+				Xog_bnd_box[] box_ary = Xog_bnd_box_.Ary();
+				int box_len = box_ary.length;
+				String selected_box = flds[0];
+				for (int i = 0; i < box_len; i++) {
+					Xog_bnd_box kv = box_ary[i];
+					String kv_key = kv.Key();
+					String kv_val = Xog_bnd_box_.To_gui_str(kv_key);
+					bfr.Add_str_u8_fmt
+					( "<option value=\"{0}\"{2}>{1}</option>\n"
+					, kv_key, kv_val, String_.Eq(selected_box, kv_val) ? " selected=\"selected\"" : "");
+				}
+				bfr.Add_str_u8_fmt("</select>\n");
 				bfr.Add_str_u8_fmt
-				( "<input  class=\"xocfg__gui_binding__ipt__txt\" id=\"{3}-ipt\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-ipt\" accesskey=\"d\" class=\"{2}\" type=\"text\"{1} value=\"{4}\"'>\n"
+				( "<input class=\"xocfg__gui_binding__ipt\" id=\"{3}-ipt\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-ipt\" accesskey=\"d\" type=\"text\"{1} value=\"{4}\"></input>\n"
 				, type, html_atrs, html_cls, key, flds[1]);
+				bfr.Add_str_u8_fmt
+				( "<span class=\"xoimg_btn_x16 xoimg_app_configure\" onclick='xo.cfg_edit.gui_binding__remap_send(\"{3}\", \"{4}\");'>&nbsp;</span>\n"
+				, type, html_atrs, html_cls, key, name);
 				break;
+			}
 			case Xoitm_type_enum.Tid__btn:
 				bfr.Add_str_u8_fmt
 				( "<button id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" class=\"xocfg__btn{2}\" {1}>{4}</button>"

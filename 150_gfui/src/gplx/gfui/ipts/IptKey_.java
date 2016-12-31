@@ -113,9 +113,9 @@ public class IptKey_ {
 	, Numpad_decimal		= new_(KeyEvent.VK_DECIMAL, "numpad_decimal")		
 	, Numpad_divide			= new_(KeyEvent.VK_DIVIDE, "numpad_divide")		
 	// NOTE: mapping numpad_enter to enter b/c don't want to define two sets of enters for every binding
-	, Numpad_enter			= new_(KeyEvent.VK_ENTER, "numpad_enter")			
+	//, Numpad_enter			= new_(KeyEvent.VK_ENTER, "numpad_enter")			
 	// NOTE: using same value as SWT; SWING value is not available
-	// , Numpad_enter			= new_(16777296, "numpad_enter")
+	, Numpad_enter			= new_(16777296, "numpad_enter")
 
 	// function keys; not supporting f13-f24 b/c only for IBM 3270 keyboards and can't test; also, note that codes differ between .net and swing
 	, F1					= new_(KeyEvent.VK_F1, "f1")					
@@ -209,7 +209,7 @@ public class IptKey_ {
 			, IptKey_.Numpad_0, IptKey_.Numpad_1, IptKey_.Numpad_2, IptKey_.Numpad_3, IptKey_.Numpad_4
 			, IptKey_.Numpad_5, IptKey_.Numpad_6, IptKey_.Numpad_7, IptKey_.Numpad_8, IptKey_.Numpad_9
 			, IptKey_.Numpad_multiply, IptKey_.Numpad_add, IptKey_.Numpad_subtract, IptKey_.Numpad_decimal, IptKey_.Numpad_divide
-			// , IptKey_.Numpad_enter
+			, IptKey_.Numpad_enter
 			);
 		}
 		return ui_str_hash;

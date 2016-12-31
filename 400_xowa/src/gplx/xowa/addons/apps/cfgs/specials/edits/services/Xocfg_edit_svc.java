@@ -40,14 +40,18 @@ public class Xocfg_edit_svc {
 		try {
 			app.Cfg().Set_str(ctx, key, val);
 		} catch (Exception exc) {				
-			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.update__fail", Gfobj_nde.New().Add_str("key", key).Add_str("new_val", val).Add_str("old_val", grp.Get(ctx)).Add_str("err", Err_.Message_lang(exc)));
+			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.update__fail", Gfobj_nde.New().Add_str("key", key).Add_str("new_val", args.Get_as_str("val")).Add_str("old_val", grp.Get(ctx)).Add_str("err", Err_.Message_lang(exc)));
 			return;
 		}
 
-		if (!String_.Eq(type, "btn") && String_.Eq(grp.Dflt(), val))
-			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.delete__recv", Gfobj_nde.New().Add_str("key", key).Add_str("val", val).Add_str("type", type));
+		if (!String_.Eq(type, "btn") && String_.Eq(grp.Dflt(), val)) {
+			if (String_.Has_at_bgn(type, "gui.binding")) {
+				val = String_.Concat_with_str("|", gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_gui(val));
+			}
+			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.delete__recv", Gfobj_nde.New().Add_str("key", key).Add_str("type", type).Add_str("val", val));
+		}
 		else
-			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.update__pass", Gfobj_nde.New().Add_str("key", key).Add_str("val", val).Add_str("type", type));
+			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.update__pass", Gfobj_nde.New().Add_str("key", key).Add_str("type", type));
 	}
 	public void Delete(Json_nde args) {
 		String ctx = args.Get_as_str("ctx");

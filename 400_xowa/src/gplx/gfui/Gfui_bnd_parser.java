@@ -206,7 +206,6 @@ public class Gfui_bnd_parser {
 		Init_itm("key.tab", "Tab");
 		Init_itm("key.clear", "Clear");
 		Init_itm("key.enter", "Enter");
-		Init_itm("key.keypad_enter", "Keypad Enter");
 		Init_itm("key.shiftKey", "ShiftKey");
 		Init_itm("key.ctrlKey", "CtrlKey");
 		Init_itm("key.altKey", "AltKey");
@@ -256,7 +255,7 @@ public class Gfui_bnd_parser {
 		Init_itm("key.numpad_subtract", "Numpad Subtract");
 		Init_itm("key.numpad_decimal", "Numpad Decimal");
 		Init_itm("key.numpad_divide", "Numpad Divide");
-		// Init_itm("key.numpad_enter", "Numpad Enter");
+		Init_itm("key.numpad_enter", "Numpad Enter");
 		return this;
 	}
 	private void Init_itm(String gfui, String norm) {Init_itm(Gfui_bnd_tkn.Tid_key, gfui, norm);}

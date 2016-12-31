@@ -25,7 +25,6 @@ public class Xog_bnd_mgr implements Gfo_invk {
 	private List_adp startup_itms = List_adp_.New();
 	private Ordered_hash regy = Ordered_hash_.New();
 	public Xog_bnd_mgr(Xog_win_itm win) {this.win = win; invk_mgr = win.Gui_mgr().Cmd_mgr().Invk_mgr();}
-	public Gfui_bnd_parser Bnd_parser() {if (bnd_parser == null) bnd_parser = Gfui_bnd_parser.new_en_(); return bnd_parser;} private Gfui_bnd_parser bnd_parser;
 	public int Len() {return regy.Count();}
 	public Xog_bnd_itm Get_at(int i)			{return (Xog_bnd_itm)regy.Get_at(i);}
 	public Xog_bnd_itm Get_or_null(String v)	{return (Xog_bnd_itm)regy.Get_by(v);}
@@ -88,16 +87,12 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		, "xowa.gui.shortcuts.xowa.gui.browser.url.focus-1"
 		, "xowa.gui.shortcuts.xowa.gui.browser.url.focus-2"
 		, "xowa.gui.shortcuts.xowa.gui.browser.url.exec-1"
-		, "xowa.gui.shortcuts.xowa.gui.browser.url.exec-2"
 		, "xowa.gui.shortcuts.xowa.gui.browser.url.exec_by_paste-1"
 		, "xowa.gui.shortcuts.xowa.gui.browser.url.exec_by_paste-2"
-		, "xowa.gui.shortcuts.xowa.gui.browser.url.exec_by_paste-3"
 		, "xowa.gui.shortcuts.xowa.gui.browser.url.exec_new_tab_by_paste-1"
-		, "xowa.gui.shortcuts.xowa.gui.browser.url.exec_new_tab_by_paste-2"
 		, "xowa.gui.shortcuts.xowa.gui.browser.url.restore-1"
 		, "xowa.gui.shortcuts.xowa.gui.browser.search.focus-1"
 		, "xowa.gui.shortcuts.xowa.gui.browser.search.exec-1"
-		, "xowa.gui.shortcuts.xowa.gui.browser.search.exec-2"
 		, "xowa.gui.shortcuts.xowa.gui.browser.html.focus-1"
 		, "xowa.gui.shortcuts.xowa.gui.browser.html.focus-2"
 		, "xowa.gui.shortcuts.xowa.gui.browser.html.focus-3"
@@ -107,7 +102,6 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		, "xowa.gui.shortcuts.xowa.gui.browser.find.show_by_paste-1"
 		, "xowa.gui.shortcuts.xowa.gui.browser.find.hide-1"
 		, "xowa.gui.shortcuts.xowa.gui.browser.find.exec-1"
-		, "xowa.gui.shortcuts.xowa.gui.browser.find.exec-2"
 		, "xowa.gui.shortcuts.xowa.gui.browser.find.find_fwd-1"
 		, "xowa.gui.shortcuts.xowa.gui.browser.find.find_bwd-1"
 		, "xowa.gui.shortcuts.xowa.gui.browser.find.case_toggle-1"
@@ -269,12 +263,12 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		Init_itm(Xog_cmd_itm_.Key_gui_edit_dbg_html								, Xog_bnd_box_.Tid_browser				, "mod.c+key.e,mod.c+key.h");
 		Init_itm(Xog_cmd_itm_.Key_gui_edit_exec									, Xog_bnd_box_.Tid_browser				, "mod.c+key.e,mod.c+key.g");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_focus							, Xog_bnd_box_.Tid_browser				, "mod.a+key.d", "mod.c+key.l");
-		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_exec							, Xog_bnd_box_.Tid_browser_url			, "key.enter", "key.keypad_enter");
-		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_exec_new_tab_by_paste			, Xog_bnd_box_.Tid_browser_url			, "mod.c+key.enter", "mod.c+key.keypad_enter");
-		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_exec_by_paste					, Xog_bnd_box_.Tid_browser_url			, "mouse.middle", "mod.a+key.enter", "mod.a+key.keypad_enter");
+		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_exec							, Xog_bnd_box_.Tid_browser_url			, "key.enter");
+		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_exec_new_tab_by_paste			, Xog_bnd_box_.Tid_browser_url			, "mod.c+key.enter");
+		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_exec_by_paste					, Xog_bnd_box_.Tid_browser_url			, "mouse.middle", "mod.a+key.enter");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_restore						, Xog_bnd_box_.Tid_browser_url			, "mod.c+key.u");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_search_focus						, Xog_bnd_box_.Tid_browser				, "mod.ca+key.s");
-		Init_itm(Xog_cmd_itm_.Key_gui_browser_search_exec						, Xog_bnd_box_.Tid_browser_search		, "key.enter", "key.keypad_enter");
+		Init_itm(Xog_cmd_itm_.Key_gui_browser_search_exec						, Xog_bnd_box_.Tid_browser_search		, "key.enter");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_tabs_new_dflt__at_dflt__focus_y	, Xog_bnd_box_.Tid_browser				, "mod.c+key.t");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_tabs_new_link__at_dflt__focus_n	, Xog_bnd_box_.Tid_browser_html			, "mouse.middle");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_tabs_new_href__at_dflt__focus_y	, Xog_bnd_box_.Tid_browser				, "mod.c+key.g,mod.c+key.f");
@@ -305,7 +299,7 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_find_show							, Xog_bnd_box_.Tid_browser				, "mod.c+key.f");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_find_show_by_paste				, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_find_hide							, Xog_bnd_box_.Tid_browser_find			, "key.escape");
-		Init_itm(Xog_cmd_itm_.Key_gui_browser_find_exec							, Xog_bnd_box_.Tid_browser_find			, "key.enter", "key.keypad_enter");
+		Init_itm(Xog_cmd_itm_.Key_gui_browser_find_exec							, Xog_bnd_box_.Tid_browser_find			, "key.enter");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_find_find_fwd						, Xog_bnd_box_.Tid_browser_find			, "mod.a+key.n");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_find_find_bwd						, Xog_bnd_box_.Tid_browser_find			, "mod.a+key.p");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_find_case_toggle					, Xog_bnd_box_.Tid_browser_find			, "mod.a+key.c");
@@ -372,7 +366,8 @@ public class Xog_bnd_mgr implements Gfo_invk {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(String_.Eq(k, Run__show_remap_win)) {
 			Xog_bnd_win win = new Xog_bnd_win();			
-			win.Show(app, app.Gui_mgr().Kit(), app.Gui_mgr().Browser_win().Win_box(), this.Bnd_parser(), "", "");
+			String[] args = m.ReadStrAry("v", "\n");
+			win.Show(app, app.Gui_mgr().Kit(), app.Gui_mgr().Browser_win().Win_box(), args[0], args[1], args[2]);
 		}
 		else {
 			String[] flds = gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_ary(m.ReadStr("v"));
