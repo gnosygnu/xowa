@@ -124,6 +124,7 @@ public class Xocfg_mgr implements Gfo_invk {
 		if		(ctx.Match(k, "set"))					cache_mgr.Set			((String)m.ReadValAt(0), (String)m.ReadValAt(1), (String)m.ReadValAt(2));
 		else if	(ctx.Match(k, "set_temp"))				cache_mgr.Set_wo_save	((String)m.ReadValAt(0), (String)m.ReadValAt(1), (String)m.ReadValAt(2));
 		else if	(ctx.Match(k, "set_dflt"))				dflt_mgr.Add			((String)m.ReadValAt(0), (String)m.ReadValAt(1));
+		else if	(ctx.Match(k, "run"))					cache_mgr.Pub			((String)m.ReadValAt(0), (String)m.ReadValAt(1), (String)m.ReadValAt(2));
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
