@@ -74,7 +74,7 @@ public class Xoedit_itm_html {
 				String[] lines = Xocfg_mgr.Parse_io_cmd(String_.new_u8(val));
 				bfr.Add_str_u8_fmt
 				( "<input  class=\"xocfg__io_cmd__exe__txt{2}\" id=\"{3}-exe\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-exe\" accesskey=\"d\" type=\"text\"{1} value=\"{4}\"></input>\n"
-				+ "<button class=\"xocfg__io_cmd__exe__btn\" onclick='xo.cfg_edit.io_cmd__select(\"file\", \"{3}-exe\", \"Please select a file.\");'>...</button><br/>\n"
+				+ "<span class=\"xoimg_btn_x16 xoimg_app_configure\" onclick='xo.cfg_edit.io_cmd__select(\"file\", \"{3}-exe\", \"Please select a file.\");'>&nbsp;</span><br/>\n"
 				, type, html_atrs, html_cls, key, lines[0]);
 				bfr.Add_str_u8_fmt
 				( "<input  class=\"xocfg__io_cmd__arg__txt{2}\" id=\"{3}-arg\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-arg\" accesskey=\"d\" type=\"text\"{1} value=\"{4}\">\n"
@@ -82,13 +82,11 @@ public class Xoedit_itm_html {
 				break;
 			case Xoitm_type_enum.Tid__gui_binding: {
 				String[] flds = Xoitm_gui_binding.To_gui(String_.new_u8(val));
-//					bfr.Add_str_u8_fmt
-//					( "<input class=\"xocfg__gui_binding__box\" id=\"{3}-box\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-box\" accesskey=\"d\" type=\"text\"{1} value=\"{4}\"></input>\n"
-//					, type, html_atrs, html_cls, key, flds[0]);
+
+				// write box
 				bfr.Add_str_u8_fmt
 				( "<select class=\"xocfg__gui_binding__box\" id=\"{3}-box\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-box\" size=\"1\" accesskey=\"d\"{1}>\n"
 				, type, html_atrs, html_cls, key, flds[0]);
-
 				Xog_bnd_box[] box_ary = Xog_bnd_box_.Ary();
 				int box_len = box_ary.length;
 				String selected_box = flds[0];
@@ -101,6 +99,8 @@ public class Xoedit_itm_html {
 					, kv_key, kv_val, String_.Eq(selected_box, kv_val) ? " selected=\"selected\"" : "");
 				}
 				bfr.Add_str_u8_fmt("</select>\n");
+
+				// write ipt
 				bfr.Add_str_u8_fmt
 				( "<input class=\"xocfg__gui_binding__ipt\" id=\"{3}-ipt\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-ipt\" accesskey=\"d\" type=\"text\"{1} value=\"{4}\"></input>\n"
 				, type, html_atrs, html_cls, key, flds[1]);
