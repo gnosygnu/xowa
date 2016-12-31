@@ -46,6 +46,7 @@ import java.awt.event.WindowListener;
 import gplx.gfui.draws.*; import gplx.gfui.ipts.*; import gplx.gfui.gfxs.*; import gplx.gfui.imgs.*; import gplx.gfui.kits.swts.*;
 public class GxwWin_lang extends JFrame implements GxwWin, WindowListener  {
 	public void ShowWin() 		{this.setVisible(true);}
+	public void ShowWinModal() {}
 	public void HideWin() 		{this.setVisible(false);}
 	public boolean Minimized()	{return this.getState() == Frame.ICONIFIED;} public void Minimized_(boolean v) {this.setState(v ? Frame.ICONIFIED : Frame.NORMAL);} 
 	public boolean Maximized() 	{return this.getState() == Frame.MAXIMIZED_BOTH;} public void Maximized_(boolean v) {this.setState(v ? Frame.MAXIMIZED_BOTH : Frame.NORMAL);}
@@ -162,6 +163,7 @@ class GxwWin_jdialog extends JDialog implements GxwWin, WindowListener  {
 }
 class GxwWin_jwindow extends JWindow implements GxwWin, WindowListener  {
 	public void ShowWin() {this.setVisible(true);}
+	public void ShowWinModal() {}
 	public void HideWin() {this.setVisible(false);}
 	public void CloseWin() {} //this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); this.dispose();
 	public boolean Maximized() {return false;} public void Maximized_(boolean v) {}

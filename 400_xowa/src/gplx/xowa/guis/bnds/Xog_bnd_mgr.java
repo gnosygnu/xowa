@@ -35,6 +35,7 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		Add_custom_bnds();	// NOTE: should go after Add_system_bnds in case user overrides any;
 		Bind_all();
 
+		app.Cfg().Sub_many_app(this, Run__show_remap_win);
 		app.Cfg().Bind_many_app(this
 		, "xowa.gui.shortcuts.xowa.app.exit-1"
 		, "xowa.gui.shortcuts.xowa.nav.go_bwd-1"
@@ -369,11 +370,18 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		this.Bind(Xog_bnd_box_.Tid_browser_info			, win.Info_box());
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		String[] flds = gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_ary(m.ReadStr("v"));
-		int box = Xog_bnd_box_.Xto_sys_int(flds[0]);
-		String key = String_.Replace(k, "xowa.gui.shortcuts.", "");
-		Xog_bnd_itm bnd = app.Gui_mgr().Bnd_mgr().Get_or_null(key);
-		Set(bnd, box, IptArg_.parse(flds[1]));
+		if		(String_.Eq(k, Run__show_remap_win)) {
+			Xog_bnd_win win = new Xog_bnd_win();			
+			win.Show(app, app.Gui_mgr().Kit(), app.Gui_mgr().Browser_win().Win_box(), this.Bnd_parser(), "", "");
+		}
+		else {
+			String[] flds = gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_ary(m.ReadStr("v"));
+			int box = Xog_bnd_box_.Xto_sys_int(flds[0]);
+			String key = String_.Replace(k, "xowa.gui.shortcuts.", "");
+			Xog_bnd_itm bnd = app.Gui_mgr().Bnd_mgr().Get_or_null(key);
+			Set(bnd, box, IptArg_.parse(flds[1]));
+		}
 		return this;
 	}
+	private static final String Run__show_remap_win = "xowa.gui.shortcuts.show_remap_win";
 }

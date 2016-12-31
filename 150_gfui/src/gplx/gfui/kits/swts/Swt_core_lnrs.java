@@ -65,78 +65,145 @@ class Swt_lnr_traverse implements Listener {
     }
 }
 class Swt_lnr_key implements KeyListener {
-	public Swt_lnr_key(GxwElem elem) {this.elem = elem;} GxwElem elem;
-//	static int counter = 0;
+	public Swt_lnr_key(GxwElem elem) {this.elem = elem;} private GxwElem elem;
 	@Override public void keyPressed(KeyEvent ev) 	{
-		IptEvtDataKey ipt_data = XtoKeyData(ev);
+		IptEvtDataKey ipt_data = To_gfui(ev, Bool_.Y);
+
+		// cancel if handled; note order MUST be "delegate || ipt_data.Handled", not vice-versa
 		if (!elem.Host().KeyDownCbk(ipt_data) || ipt_data.Handled())
 			ev.doit = false;
 	}
 	@Override public void keyReleased(KeyEvent ev) 	{
-		IptEvtDataKey ipt_data = XtoKeyData(ev);
+		IptEvtDataKey ipt_data = To_gfui(ev, Bool_.N);
+
+		// cancel if handled; note order MUST be "delegate || ipt_data.Handled", not vice-versa
 		if (!elem.Host().KeyUpCbk(ipt_data) || ipt_data.Handled())
 			ev.doit = false;
 	}
-	IptEvtDataKey XtoKeyData(KeyEvent ev) {
+	private IptEvtDataKey To_gfui(KeyEvent ev, boolean is_keydown) {
+		// convert codes from SWT keycodes to SWING / .NET style; note that SWT uses keycode values similar to ASCII values
 		int val = ev.keyCode;
 		switch (val) {
-			case Byte_ascii.Cr:	val = 10; break; // enter key is 13 whereas .net/swing is 10
+			// letters; lowercase keys are transmitted as ascii value, instead of key value; EX: "a": SWT=97; SWING=65
 			case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
 			case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
 			case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
 			case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
 			case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
-				val -= 32;	// lowercase keys are transmitted as ascii value, instead of key value; EX: "a" is 97 instead of 65 
+				val -= 32; 
 				break;
-			case 39:		val = IptKey_.Quote.Val(); break;
-			case 44:		val = IptKey_.Comma.Val(); break;
-			case 45:		val = IptKey_.Minus.Val(); break;
-			case 46:		val = IptKey_.Period.Val(); break;
-			case 47:		val = IptKey_.Slash.Val(); break;
-			case 59:		val = IptKey_.Semicolon.Val(); break;
-			case 61:		val = IptKey_.Equal.Val(); break;
-			case 91:		val = IptKey_.OpenBracket.Val(); break;
-			case 93:		val = IptKey_.CloseBracket.Val(); break;
-			case 96:		val = IptKey_.Tick.Val(); break;
-			case 127:		val = IptKey_.Delete.Val(); break;
-			case 16777217:	val = IptKey_.Up.Val(); break;				
-			case 16777218:	val = IptKey_.Down.Val(); break;				
-			case 16777219:	val = IptKey_.Left.Val(); break;
-			case 16777220:	val = IptKey_.Right.Val(); break;
-			case 16777221:	val = IptKey_.PageUp.Val(); break;
-			case 16777222:	val = IptKey_.PageDown.Val(); break;
-			case 16777223:	val = IptKey_.Home.Val(); break;
-			case 16777224:	val = IptKey_.End.Val(); break;
-			case 16777225:	val = IptKey_.Insert.Val(); break;
-			case 16777226:	val = IptKey_.F1.Val(); break;
-			case 16777227:	val = IptKey_.F2.Val(); break;
-			case 16777228:	val = IptKey_.F3.Val(); break;
-			case 16777229:	val = IptKey_.F4.Val(); break;
-			case 16777230:	val = IptKey_.F5.Val(); break;
-			case 16777231:	val = IptKey_.F6.Val(); break;
-			case 16777232:	val = IptKey_.F7.Val(); break;
-			case 16777233:	val = IptKey_.F8.Val(); break;
-			case 16777234:	val = IptKey_.F9.Val(); break;
-			case 16777235:	val = IptKey_.F10.Val(); break;
-			case 16777236:	val = IptKey_.F11.Val(); break;
-			case 16777237:	val = IptKey_.F12.Val(); break;
-			case 16777259:  val = IptKey_.Equal.Val(); break;
-			case 16777261:  val = IptKey_.Minus.Val(); break;
-			case 16777298:  val = IptKey_.CapsLock.Val(); break;
-			case 16777299:	val = IptKey_.NumLock.Val(); break;
-			case 16777300:	val = IptKey_.ScrollLock.Val(); break;
-			case 16777301:	val = IptKey_.Pause.Val(); break;
-			case 16777303:  val = IptKey_.PrintScreen.Val(); break;
-			case 327680: 	val = IptKey_.Insert.Val(); break;
+				
+			// numpad numbers
+			case SWT.KEYPAD_0:				val = IptKey_.Numpad_0.Val(); break;
+			case SWT.KEYPAD_1:				val = IptKey_.Numpad_1.Val(); break;
+			case SWT.KEYPAD_2:				val = IptKey_.Numpad_2.Val(); break;
+			case SWT.KEYPAD_3:				val = IptKey_.Numpad_3.Val(); break;
+			case SWT.KEYPAD_4:				val = IptKey_.Numpad_4.Val(); break;
+			case SWT.KEYPAD_5:				val = IptKey_.Numpad_5.Val(); break;
+			case SWT.KEYPAD_6:				val = IptKey_.Numpad_6.Val(); break;
+			case SWT.KEYPAD_7:				val = IptKey_.Numpad_7.Val(); break;
+			case SWT.KEYPAD_8:				val = IptKey_.Numpad_8.Val(); break;
+			case SWT.KEYPAD_9:				val = IptKey_.Numpad_9.Val(); break;
+
+			// symbols; extended
+			case SWT.KEYPAD_MULTIPLY:		val = IptKey_.Numpad_multiply.Val(); break;
+			case SWT.KEYPAD_ADD:			val = IptKey_.Numpad_add.Val(); break;
+			case SWT.KEYPAD_SUBTRACT:  		val = IptKey_.Numpad_subtract.Val(); break;
+			case SWT.KEYPAD_DECIMAL:  		val = IptKey_.Numpad_decimal.Val(); break;
+			case SWT.KEYPAD_DIVIDE:  		val = IptKey_.Numpad_divide.Val(); break;
+			case SWT.KEYPAD_CR:  			val = IptKey_.Enter.Val(); break;
+
+			// function keys
+			case SWT.F1:					val = IptKey_.F1.Val(); break;
+			case SWT.F2:					val = IptKey_.F2.Val(); break;
+			case SWT.F3:					val = IptKey_.F3.Val(); break;
+			case SWT.F4:					val = IptKey_.F4.Val(); break;
+			case SWT.F5:					val = IptKey_.F5.Val(); break;
+			case SWT.F6:					val = IptKey_.F6.Val(); break;
+			case SWT.F7:					val = IptKey_.F7.Val(); break;
+			case SWT.F8:					val = IptKey_.F8.Val(); break;
+			case SWT.F9:					val = IptKey_.F9.Val(); break;
+			case SWT.F10:					val = IptKey_.F10.Val(); break;
+			case SWT.F11:					val = IptKey_.F11.Val(); break;
+			case SWT.F12:					val = IptKey_.F12.Val(); break;
+
+			// SWT=13; SWING=10; note that Cr maps to "enter key"
+			case Byte_ascii.Cr:				val = IptKey_.Enter.Val(); break;
+
+			case SWT.INSERT:				val = IptKey_.Insert.Val(); break;
+			case 127:						val = IptKey_.Delete.Val(); break;
+			
+			// meta
+			case SWT.PAUSE:					val = IptKey_.Pause.Val(); break;
+			case SWT.PRINT_SCREEN: 			val = IptKey_.PrintScreen.Val(); break;
+
+			// nav keys
+			case SWT.ARROW_UP:				val = IptKey_.Up.Val(); break;				
+			case SWT.ARROW_DOWN:			val = IptKey_.Down.Val(); break;				
+			case SWT.ARROW_LEFT:			val = IptKey_.Left.Val(); break;
+			case SWT.ARROW_RIGHT:			val = IptKey_.Right.Val(); break;
+			case SWT.PAGE_UP:				val = IptKey_.PageUp.Val(); break;
+			case SWT.PAGE_DOWN:				val = IptKey_.PageDown.Val(); break;
+			case SWT.HOME:					val = IptKey_.Home.Val(); break;
+			case SWT.END:					val = IptKey_.End.Val(); break;
+			
+			// locks
+			case SWT.CAPS_LOCK:  			val = IptKey_.CapsLock.Val(); break;
+			case SWT.NUM_LOCK:				val = IptKey_.NumLock.Val(); break;
+			case SWT.SCROLL_LOCK:			val = IptKey_.ScrollLock.Val(); break;			
+			
+			// symbols; ASCII; no SWT const
+			case 39:						val = IptKey_.Quote.Val(); break;
+			case 44:						val = IptKey_.Comma.Val(); break;
+			case 45:						val = IptKey_.Minus.Val(); break;
+			case 46:						val = IptKey_.Period.Val(); break;
+			case 47:						val = IptKey_.Slash.Val(); break;
+			case 59:						val = IptKey_.Semicolon.Val(); break;
+			case 61:						val = IptKey_.Equal.Val(); break;
+			case 91:						val = IptKey_.OpenBracket.Val(); break;
+			case 93:						val = IptKey_.CloseBracket.Val(); break;
+			case 96:						val = IptKey_.Tick.Val(); break;
+
+			// modifiers
+			case SWT.CTRL:					val = IptKey_.Ctrl.Val(); break;
+			case SWT.ALT:					val = IptKey_.Alt.Val(); break;
+			case SWT.SHIFT:					val = IptKey_.Shift.Val(); break;
 		}
-		
-		if (Has_ctrl(ev.stateMask)) 								val |= IptKey_.KeyCode_Ctrl;
-		if (Bitmask_.Has_int(ev.stateMask, IptKey_.KeyCode_Shift))	val |= IptKey_.KeyCode_Alt;
-		if (Bitmask_.Has_int(ev.stateMask, IptKey_.KeyCode_Ctrl))	val |= IptKey_.KeyCode_Shift;
-//		Tfds.Write(String_.Format("val={4} keyCode={0} stateMask={1} keyLocation={2} character={3}", ev.keyCode, ev.stateMask, ev.keyLocation, ev.character, val));
+
+		// handle mod keys
+		val = Handle_modifier(ev, is_keydown, val, SWT.CTRL		, IptKey_.Ctrl.Val());
+		val = Handle_modifier(ev, is_keydown, val, SWT.ALT		, IptKey_.Alt.Val());
+		val = Handle_modifier(ev, is_keydown, val, SWT.SHIFT	, IptKey_.Shift.Val());
+		// Tfds.Write(String_.Format("val={0} keydown={1} keyCode={2} stateMask={3} keyLocation={4} character={5}", val, is_keydown, ev.keyCode, ev.stateMask, ev.keyLocation, ev.character));
 		return IptEvtDataKey.int_(val);		
 	}
-	public static boolean Has_ctrl(int val) {return Bitmask_.Has_int(val, IptKey_.KeyCode_Alt);}	// NOTE:SWT's ctrl constant is different from SWING's 
+	private static int Handle_modifier(KeyEvent ev, boolean is_keydown, int val, int swt, int swing) {
+		// Conversion table for debugging
+		// 
+		// -------------------------
+		// | code  |  SWT  | SWING |
+		// |-------|-------|-------|
+		// | 65536 | ALT   | SHIFT |
+		// |131072 | SHIFT | CTRL  |
+		// |262144 | CTRL  | ALT   |
+		// -------------------------
+		
+		// Also, when debugging, note that ev.stateMask is always the value at the start of the event
+		//
+		// For example, if ctrl is pressed and nothing is held
+		// * if is_keydown = y, then ev.stateMask is      0 (none)
+		// * if is_keydown = n, then ev.stateMask is 262144 (ctrl)  
+		// Note that ev.keyCode is 262144 (ctrl) in both examples
+		// 
+		// However, if ctrl is pressed and shift is already held:
+		// * if is_keydown = y, then ev.stateMask is  65536 (shift)
+		// * if is_keydown = n, then ev.stateMask is 327680 (shift + ctrl) 
+		// Note that ev.keyCode is 262144 (ctrl) in both examples as well.
+
+		// if SWT modifier is present, return val with SWING modifier; else, just return val
+		return Bitmask_.Has_int(ev.stateMask, swt) ? val | swing : val;
+	}
+	public static boolean Has_ctrl(int val) {return Bitmask_.Has_int(val, SWT.CTRL);} 
 }
 class Swt_lnr_mouse implements MouseListener {
 	public Swt_lnr_mouse(GxwElem elem) {this.elem = elem;} GxwElem elem;

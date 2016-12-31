@@ -241,6 +241,22 @@ public class Gfui_bnd_parser {
 		Init_itm("mouse.middle", "Middle Click");
 		Init_itm("mouse.left", "Left Click");
 		Init_itm("mouse.right", "Right Click");
+		Init_itm("key.numpad_0", "Numpad 0");
+		Init_itm("key.numpad_1", "Numpad 1");
+		Init_itm("key.numpad_2", "Numpad 2");
+		Init_itm("key.numpad_3", "Numpad 3");
+		Init_itm("key.numpad_4", "Numpad 4");
+		Init_itm("key.numpad_5", "Numpad 5");
+		Init_itm("key.numpad_6", "Numpad 6");
+		Init_itm("key.numpad_7", "Numpad 7");
+		Init_itm("key.numpad_8", "Numpad 8");
+		Init_itm("key.numpad_9", "Numpad 9");
+		Init_itm("key.numpad_multiply", "Numpad Multiply");
+		Init_itm("key.numpad_add", "Numpad Add");
+		Init_itm("key.numpad_subtract", "Numpad Subtract");
+		Init_itm("key.numpad_decimal", "Numpad Decimal");
+		Init_itm("key.numpad_divide", "Numpad Divide");
+		// Init_itm("key.numpad_enter", "Numpad Enter");
 		return this;
 	}
 	private void Init_itm(String gfui, String norm) {Init_itm(Gfui_bnd_tkn.Tid_key, gfui, norm);}

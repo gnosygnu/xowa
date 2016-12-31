@@ -17,14 +17,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.bnds; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 import gplx.gfui.*; import gplx.gfui.draws.*; import gplx.gfui.ipts.*; import gplx.gfui.kits.core.*; import gplx.gfui.envs.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
+import gplx.xowa.guis.cbks.*;
 public class Xog_bnd_win implements Gfo_invk {
 	private GfuiWin win;
 	private GfuiTextBox shortcut_txt, binding_txt, keycode_txt;
 	private GfuiBtn ok_btn, cxl_btn;
 	private Gfui_bnd_parser bnd_parser;
-	public void Show(Gfui_kit kit, GfuiWin owner_win, Gfui_bnd_parser bnd_parser, String shortcut_text, String binding_text) {
+	private Xoa_app app;
+	public void Show(Xoa_app app, Gfui_kit kit, GfuiWin owner_win, Gfui_bnd_parser bnd_parser, String shortcut_text, String binding_text) {
+		this.app = app;
+
 		// create controls
-		this.win = kit.New_win_utl("shortcut_win", owner_win); win.BackColor_(ColorAdp_.White).Size_(200, 120);
+		this.win = kit.New_win_utl("shortcut_win", owner_win); win.BackColor_(ColorAdp_.White).Size_(240, 140);
 		this.bnd_parser = bnd_parser;
 		GfuiLbl shortcut_lbl		= Make_lbl(kit, win, "shortcut_lbl"	, "Shortcut:");
 		GfuiLbl binding_lbl			= Make_lbl(kit, win, "binding_lbl"	, "Binding:");
@@ -75,11 +79,16 @@ public class Xog_bnd_win implements Gfo_invk {
 		elem_2.Y_(y);
 		elem_2.X_(elem_1.X_max());
 	}
+
+	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New(gplx.xowa.addons.apps.cfgs.specials.edits.pages.Xocfg_edit_special.Prototype.Special__meta().Ttl_bry());
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_when_key_down))		When_key_down(m);
 		else if	(ctx.Match(k, Invk_when_key_press))		When_key_up(m);
 		else if	(ctx.Match(k, Invk_when_key_up))		When_key_up(m);
-		else if	(ctx.Match(k, Invk_when_ok))			{win.Close();}
+		else if	(ctx.Match(k, Invk_when_ok))			{
+			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.gui_binding__remap_recv", gplx.core.gfobjs.Gfobj_nde.New().Add_str("bnd", binding_txt.Text()));
+			win.Close();
+		}
 		else if	(ctx.Match(k, Invk_when_cxl))			{win.Close();}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;

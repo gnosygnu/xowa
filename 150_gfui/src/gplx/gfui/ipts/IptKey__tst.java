@@ -25,7 +25,7 @@ public class IptKey__tst {
 	@Test  public void To_str__numeric() {
 		fxt.Test_to_str(16777296, "key.#16777296");
 	}
-	@Test   public void parse() {
+	@Test   public void Parse() {
 		fxt.Test_parse("key.#10", 10);
 	}
 }
