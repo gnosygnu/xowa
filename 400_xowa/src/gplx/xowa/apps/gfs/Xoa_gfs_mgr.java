@@ -19,9 +19,8 @@ package gplx.xowa.apps.gfs; import gplx.*; import gplx.xowa.*; import gplx.xowa.
 import gplx.langs.gfs.*;
 import gplx.xowa.users.*; import gplx.xowa.apps.fsys.*;
 public class Xoa_gfs_mgr implements Gfo_invk, Gfo_invk_root_wkr {
-	private final    Xou_fsys_mgr usr_fsys_mgr;
-	public Xoa_gfs_mgr(Gfo_invk root_invk, Xoa_fsys_mgr app_fsys_mgr, Xou_fsys_mgr usr_fsys_mgr) {
-		this.root_invk = root_invk; this.app_fsys_mgr = app_fsys_mgr; this.usr_fsys_mgr = usr_fsys_mgr;
+	public Xoa_gfs_mgr(Gfo_invk root_invk, Xoa_fsys_mgr app_fsys_mgr) {
+		this.root_invk = root_invk; this.app_fsys_mgr = app_fsys_mgr;
 		GfsCore.Instance.AddCmd(root_invk, Xoae_app.Invk_app);
 		GfsCore.Instance.AddCmd(root_invk, Xoae_app.Invk_xowa);
 	}
@@ -53,18 +52,9 @@ public class Xoa_gfs_mgr implements Gfo_invk, Gfo_invk_root_wkr {
 		}
 	}
 	private void Run_url_by_type(String type) {
-		Io_url app_data_dir = usr_fsys_mgr.App_data_dir();
-		Io_url url = null;
-		if		(String_.Eq(type, "user_system_cfg"))	url = app_data_dir.GenSubFil_nest("cfg", "user_system_cfg.gfs");
-		else if	(String_.Eq(type, "xowa_cfg_os"))		{url = app_fsys_mgr.Bin_plat_dir().GenSubFil_nest("xowa", "cfg", Cfg_os); Xoa_gfs_mgr_.Cfg_os_assert(url);}
-		else if	(String_.Eq(type, "xowa_cfg_app"))		url = app_fsys_mgr.Cfg_app_fil();
+		if		(String_.Eq(type, "xowa_cfg_app"))		Run_url(app_fsys_mgr.Cfg_app_fil());
+		else if	(String_.Eq(type, "xowa.user.os"))		gplx.xowa.addons.apps.cfgs.mgrs.dflts.Xocfg_dflt_mgr.Run_os_gfs(this, app_fsys_mgr);
 		else											throw Err_.new_wo_type("invalid gfs type", "type", type);
-		try {Run_url(url);}
-		catch (Exception e) {				// gfs is corrupt; may happen if multiple XOWAs opened, and "Close all" chosen in OS; DATE:2014-07-01
-			if	(!String_.Eq(type, "xowa"))			// check if user.gfs
-				Io_mgr.Instance.MoveFil(url, url.GenNewNameOnly(url.NameOnly() + "-" + Datetime_now.Get().XtoStr_fmt_yyyyMMdd_HHmmss()));	// move file
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "invalid gfs; obsoleting: src=~{0} err=~{1}", url.Raw(), Err_.Message_gplx_full(e));
-		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_run_file_by_type))		Run_url_by_type(m.ReadStr("v"));
@@ -74,6 +64,5 @@ public class Xoa_gfs_mgr implements Gfo_invk, Gfo_invk_root_wkr {
 		return this;
 	}	private static final String Invk_run_file_by_type = "run_file_by_type", Invk_fail_if_unhandled_ = "fail_if_unhandled_", Invk_txns = "txns";
 	public static void Msg_parser_init() {GfsCore.Instance.MsgParser_(gplx.langs.gfs.Gfs_msg_bldr.Instance);}
-	private static final String Cfg_os = "xowa_cfg_os.gfs";
 	public static boolean Fail_if_unhandled = false;
 }

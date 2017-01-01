@@ -78,7 +78,7 @@ public class Xog_bnd_win implements Gfo_invk {
 		return (GfuiTextBox)kit.New_text_box(key, owner_win).Text_(text).Size_(120, 20).Border_on_();
 	}
 	private GfuiBtn Make_btn(Gfui_kit kit, GfuiWin owner_win, String key, String text) {
-		return (GfuiBtn)kit.New_btn(key, owner_win).Text_(text).Size_(40, 20).Focus_able_(true);
+		return (GfuiBtn)kit.New_btn(key, owner_win).Text_(text).Size_(40, 20).Focus_able_(true).Border_on_();
 	}
 	private void Layout(int y, GfuiElem elem_1, GfuiElem elem_2) {
 		elem_1.Y_(y);

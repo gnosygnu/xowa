@@ -44,7 +44,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		url_cmd_eval = new Xoa_fsys_eval(fsys_mgr, user.Fsys_mgr());			
 		fsys_mgr.Init_by_app(prog_mgr);
 		log_wtr.Log_dir_(user.Fsys_mgr().App_temp_dir().GenSubDir("log"));
-		this.gfs_mgr = new Xoa_gfs_mgr(this, fsys_mgr, user.Fsys_mgr());
+		this.gfs_mgr = new Xoa_gfs_mgr(this, fsys_mgr);
 		lang_mgr = new Xoa_lang_mgr(this, gfs_mgr);
 		wiki_mgr = new Xoae_wiki_mgr(this);
 		gui_mgr = new Xoa_gui_mgr(this);

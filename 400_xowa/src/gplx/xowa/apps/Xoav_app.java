@@ -36,10 +36,9 @@ public class Xoav_app implements Xoa_app, Gfo_invk {
 	public Xoav_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Xog_tab_mgr tab_mgr, String plat_name, Io_url root_dir, Io_url file_dir, Io_url css_dir, Io_url http_root) {
 		Xoa_app_.Usr_dlg_(usr_dlg); this.usr_dlg = usr_dlg; this.mode = mode;
 		this.fsys_mgr = new Xoa_fsys_mgr(plat_name, root_dir, root_dir.GenSubDir("wiki"), file_dir, css_dir, http_root);
-		Xoa_gfs_mgr gfs_mgr = new Xoa_gfs_mgr(this, fsys_mgr, null);
+		this.gfs_mgr = new Xoa_gfs_mgr(this, fsys_mgr);
 		this.lang_mgr = new Xoa_lang_mgr(this, gfs_mgr);
 		this.meta_mgr = new Xoa_meta_mgr(this);
-		this.gfs_mgr = new Xoa_gfs_mgr(this, fsys_mgr, null);
 		this.file__cache_mgr = new Xof_cache_mgr(usr_dlg, null, null);
 		this.file__img_mgr = new Xof_img_mgr();
 		this.wiki_mgr = new Xoav_wiki_mgr(this, utl_case_mgr);

@@ -23,15 +23,6 @@ public class Xocfg_dflt_mgr {
 	public Xocfg_dflt_mgr(Xocfg_cache_mgr cache_mgr) {
 		this.cache_mgr = cache_mgr;
 	}
-	public void Init_by_app(Xoa_app app) {
-		Io_url url = app.Fsys_mgr().Bin_plat_dir().GenSubFil_nest("xowa", "cfg", "xo.cfg.dflt.os.gfs");
-		if (!Io_mgr.Instance.ExistsFil(url)) {
-			Io_url src_url = url.GenNewNameAndExt("xo.cfg.dflt.os_default.gfs");
-			if (Io_mgr.Instance.ExistsFil(src_url))	// TEST:
-				Io_mgr.Instance.CopyFil_args(src_url, url, true).MissingFails_off().Exec();
-		}
-		app.Gfs_mgr().Run_url(url);
-	}
 	public String Get_or(String key, String or) {
 		Gfo_invk itm = (Gfo_invk)hash.Get_by(key);
 		return (itm == null) ? or : (String)Gfo_invk_.Invk_by_key(itm, key);
@@ -44,5 +35,14 @@ public class Xocfg_dflt_mgr {
 		for (String key : keys) {
 			hash.Add_if_dupe_use_nth(key, invk);
 		}
+	}
+	public static void Run_os_gfs(gplx.xowa.apps.gfs.Xoa_gfs_mgr gfs_mgr, gplx.xowa.apps.fsys.Xoa_fsys_mgr fsys_mgr) {
+		Io_url url = fsys_mgr.Root_dir().GenSubFil_nest("user", "app", "cfg", "os.gfs"); // User_os_gfs(app.Fsys_mgr());
+		if (!Io_mgr.Instance.ExistsFil(url)) {
+			Io_url dflt_url = fsys_mgr.Bin_plat_dir().GenSubFil_nest("xowa", "cfg", "os.default.gfs");
+			if (Io_mgr.Instance.ExistsFil(dflt_url))	// TEST: also, DRD
+				Io_mgr.Instance.CopyFil_args(dflt_url, url, true).MissingFails_off().Exec();
+		}
+		gfs_mgr.Run_url(url);
 	}
 }

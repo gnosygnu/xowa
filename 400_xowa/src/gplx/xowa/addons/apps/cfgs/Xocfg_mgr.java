@@ -29,7 +29,6 @@ public class Xocfg_mgr implements Gfo_invk {
 		cache_mgr.Init_by_app
 		( gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_app.New_conn(app)
 		, app.User().User_db_mgr().Conn());
-		dflt_mgr.Init_by_app(app);
 	}
 	public void Sub_many_app	(Gfo_invk sub, String... keys)					{Bind_many(Bool_.N, sub, Xocfg_mgr.Ctx__app, keys);}
 	public void Bind_many_app	(Gfo_invk sub, String... keys)					{Bind_many(Bool_.Y, sub, Xocfg_mgr.Ctx__app, keys);}
