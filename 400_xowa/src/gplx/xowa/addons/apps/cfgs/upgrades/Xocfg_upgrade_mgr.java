@@ -19,46 +19,52 @@ package gplx.xowa.addons.apps.cfgs.upgrades; import gplx.*; import gplx.xowa.*; 
 import gplx.dbs.*;
 public class Xocfg_upgrade_mgr {
 	public static void Convert(Xoae_app app) {
-		// get cfg_fil; if empty, exit
-		Io_url cfg_fil = app.Fsys_mgr().Root_dir().GenSubFil_nest("user", "anonymous", "app", "data", "cfg", "xowa_user_cfg.gfs");
-		byte[] cfg_raw = Io_mgr.Instance.LoadFilBryOrNull(cfg_fil);
-		if (cfg_raw == null) return;
-
-		// log and rename file
-		Gfo_usr_dlg_.Instance.Log_many("", "", "cfg.convert:old cfg found; converting");
-		Io_mgr.Instance.MoveFil(cfg_fil, cfg_fil.GenNewExt(".bak"));
-
-		// parse, remap, and update
-		Keyval[] kvs = Parse(cfg_raw);
-
-		// get mappings
-		Ordered_hash mappings = Ordered_hash_.New();
-		Db_conn conn = app.Cfg().Cache_mgr().Db_app().Conn();
-		Db_rdr rdr = conn.Stmt_sql("SELECT * FROM cfg_upgrade").Exec_select__rls_auto();
 		try {
-			while (rdr.Move_next()) {
-				String cfg_old = rdr.Read_str("cfg_old");
-				String cfg_new = rdr.Read_str("cfg_new");
-				mappings.Add(cfg_old, Keyval_.new_(cfg_old, cfg_new));
-			}
-		}
-		finally {rdr.Rls();}
+			// get cfg_fil; if empty, exit
+			Io_url cfg_fil = app.Fsys_mgr().Root_dir().GenSubFil_nest("user", "anonymous", "app", "data", "cfg", "xowa_user_cfg.gfs");
+			byte[] cfg_raw = Io_mgr.Instance.LoadFilBryOrNull(cfg_fil);
+			if (cfg_raw == null) return;
 
-		// remap
-		for (Keyval kv : kvs) {
-			Keyval mapping = (Keyval)mappings.Get_by(kv.Key());
-			if (mapping == null) {
-				Gfo_usr_dlg_.Instance.Log_many("", "", "cfg.convert:could not find mapping; key=~{0} val=~{1}", kv.Key(), kv.Val());
-				kv.Key_("");
-				continue;
-			}
-			kv.Key_(mapping.Val());
-		}
+			// log and rename file
+			Gfo_usr_dlg_.Instance.Log_many("", "", "cfg.convert:old cfg found; converting");
+			Io_mgr.Instance.MoveFil_args(cfg_fil, cfg_fil.GenNewExt(".bak"), true).Exec();
 
-		// apply
-		for (Keyval kv : kvs) {
-			if (String_.Eq(kv.Key(), "")) continue;
-			app.Cfg().Set_str_app(kv.Key(), kv.Val_to_str_or_empty());
+			// parse, remap, and update
+			Keyval[] kvs = Parse(cfg_raw);
+
+			// get mappings
+			Ordered_hash mappings = Ordered_hash_.New();
+			Db_conn conn = app.Cfg().Cache_mgr().Db_app().Conn();
+			Db_rdr rdr = conn.Stmt_sql("SELECT * FROM cfg_upgrade").Exec_select__rls_auto();
+			try {
+				while (rdr.Move_next()) {
+					String cfg_old = rdr.Read_str("cfg_old");
+					String cfg_new = rdr.Read_str("cfg_new");
+					mappings.Add(cfg_old, Keyval_.new_(cfg_old, cfg_new));
+				}
+			}
+			finally {rdr.Rls();}
+
+			// remap
+			for (Keyval kv : kvs) {
+				Keyval mapping = (Keyval)mappings.Get_by(kv.Key());
+				if (mapping == null) {
+					Gfo_usr_dlg_.Instance.Log_many("", "", "cfg.convert:could not find mapping; key=~{0} val=~{1}", kv.Key(), kv.Val());
+					kv.Key_("");
+					continue;
+				}
+				kv.Key_(mapping.Val());
+			}
+
+			// apply
+			app.Cfg().Cache_mgr().Db_usr().Conn().Txn_bgn("convert");
+			for (Keyval kv : kvs) {
+				if (String_.Eq(kv.Key(), "")) continue;
+				app.Cfg().Set_str_app(kv.Key(), kv.Val_to_str_or_empty());
+			}
+			app.Cfg().Cache_mgr().Db_usr().Conn().Txn_end();
+		} catch (Exception exc) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to convert old cfg; err=~{0}", Err_.Message_gplx_log(exc));
 		}
 	}
 	public static Keyval[] Parse(byte[] src) {
