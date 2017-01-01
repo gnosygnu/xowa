@@ -65,6 +65,7 @@ public class Swt_kit implements Gfui_kit {
 	private Gfo_usr_dlg gui_wtr; private String xul_runner_path = null;
 	private final Bry_fmtr ask_fmtr = Bry_fmtr.new_().Fail_when_invalid_escapes_(false); private final Bry_bfr ask_bfr = Bry_bfr_.New();
 	private final Object thread_lock = new Object();
+	private Cursor hand_cursor;
 	public byte 				Tid() {return Gfui_kit_.Swt_tid;}
 	public String 				Key() {return "swt";}
 	public Display 				Swt_display() 	{return display;} 	private Display display;
@@ -83,6 +84,7 @@ public class Swt_kit implements Gfui_kit {
 		this.msg_wkr_stop 	= new Swt_msg_wkr_stop(this, gui_wtr);
 		this.display 		= new Display();
 		this.clipboard 		= new Swt_clipboard(display);
+		this.hand_cursor = new Cursor(display, SWT.CURSOR_HAND);
 		UsrDlg_.Instance.Reg(UsrMsgWkr_.Type_Warn, GfoConsoleWin.Instance);
 		UsrDlg_.Instance.Reg(UsrMsgWkr_.Type_Stop, msg_wkr_stop);
 		if (xul_runner_path != null) System.setProperty("org.eclipse.swt.browser.XULRunnerPath", xul_runner_path);
@@ -157,7 +159,9 @@ public class Swt_kit implements Gfui_kit {
 		return GfuiWin_.kit_(this, key, win, ctor_args_null);
 	}
 	public GfuiBtn New_btn(String key, GfuiElem owner, Keyval... args) {
+		ctor_args.Add("cursor", hand_cursor);
 		GfuiBtn rv = GfuiBtn_.kit_(this, key, new Swt_btn_no_border(Swt_control_.cast_or_fail(owner), ctor_args), ctor_args);
+		ctor_args.Del("cursor");
 		owner.SubElems().Add(rv);
 		return rv;
 	}

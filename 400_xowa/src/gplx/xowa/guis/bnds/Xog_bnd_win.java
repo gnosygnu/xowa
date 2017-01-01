@@ -91,7 +91,7 @@ public class Xog_bnd_win implements Gfo_invk {
 		if		(ctx.Match(k, Invk__when_key_down))		When_key_down(m);
 		else if	(ctx.Match(k, Invk__when_key_press))	When_key_up(m);
 		else if	(ctx.Match(k, Invk__when_key_up))		When_key_up(m);
-		else if	(ctx.Match(k, Invk__when_clear))		Remap_and_close("None");
+		else if	(ctx.Match(k, Invk__when_clear))		binding_txt.Text_("None");
 		else if	(ctx.Match(k, Invk__when_ok))			Remap_and_close(binding_txt.Text());
 
 		else if	(ctx.Match(k, Invk__when_cxl))			{win.Close();}
