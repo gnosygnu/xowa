@@ -36,9 +36,11 @@ public class Xocfg_maint_svc {
 		Xocfg_db_app db_app = Xocfg_db_app.New(app);
 		db_app.Conn().Txn_bgn("xo__cfg_maint__upsert");
 		byte[] anch_find_bry = Bry_.new_a7("<a "), anch_repl_bry = Bry_.new_a7("<a tabindex=\"-1\" ");
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		for (Xocfg_maint_nde nde : ndes) {
 			// parse help to html
-			byte[] help = parser_mgr.Main().Parse_text_to_html(parser_mgr.Ctx(), Bry_.new_u8(nde.Help()));
+			parser_mgr.Main().Parse_text_to_html(tmp_bfr, parser_mgr.Ctx(), parser_mgr.Ctx().Page(), true, Bry_.new_u8(nde.Help()));
+			byte[] help = tmp_bfr.To_bry_and_clear();
 			help = Bry_.Replace(help, anch_find_bry, anch_repl_bry);	// replace "<a " with "<a tabindex=-1 " else tabbing will go to hidden anchors in help text
 
 			// do insert

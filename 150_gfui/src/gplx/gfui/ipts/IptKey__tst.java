@@ -23,7 +23,7 @@ public class IptKey__tst {
 		fxt.Test_to_str(196608, "mod.cs");
 	}
 	@Test  public void To_str__numeric() {
-		fxt.Test_to_str(16777296, "key.#16777296");
+		fxt.Test_to_str(12345, "key.#12345");
 	}
 	@Test   public void Parse() {
 		fxt.Test_parse("key.#10", 10);

@@ -30,23 +30,23 @@ public class Xoedit_itm_html {
 		switch (Xoitm_type_enum.To_uid(type)) {
 			case Xoitm_type_enum.Tid__bool:
 				bfr.Add_str_u8_fmt
-				( "<input id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" accesskey=\"d\" class=\"xocfg__bool{2}\" type=\"checkbox\"{1}{4}></input>"
+				( "<input id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" accesskey=\"d\" class=\"xocfg_data__bool{2}\" type=\"checkbox\"{1}{4}></input>"
 				, type, html_atrs, html_cls, key, Bry_.Eq(val, Bool_.Y_bry) ? " checked=\"checked\"" : "");
 				break;
 			case Xoitm_type_enum.Tid__int:
 				bfr.Add_str_u8_fmt
-				( "<input id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" accesskey=\"d\" class=\"xocfg__int{2}\" type=\"text\"{1} value=\"{4}\"></input>"
+				( "<input id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" accesskey=\"d\" class=\"xocfg_data__int{2}\" type=\"text\"{1} value=\"{4}\"></input>"
 				, type, html_atrs, html_cls, key, val);
 				break;
 			case Xoitm_type_enum.Tid__str:
 				bfr.Add_str_u8_fmt
-				( "<input id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" accesskey=\"d\" class=\"xocfg__str{2}\" type=\"text\"{1} value=\"{4}\"></input>"
+				( "<input id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" accesskey=\"d\" class=\"xocfg_data__str{2}\" type=\"text\"{1} value=\"{4}\"></input>"
 				, type, html_atrs, html_cls, key, val);
 				break;
 			case Xoitm_type_enum.Tid__memo:
 				if (String_.Len_eq_0(html_atrs)) html_atrs = " rows=\"4\"";
 				bfr.Add_str_u8_fmt
-				( "<textarea id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" accesskey=\"d\" class=\"xocfg__memo{2}\"{1}>{4}</textarea>"
+				( "<textarea id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" accesskey=\"d\" class=\"xocfg_data__memo{2}\"{1}>{4}</textarea>"
 				, type, html_atrs, html_cls, key, val);
 				break;
 			case Xoitm_type_enum.Tid__list:
@@ -57,7 +57,7 @@ public class Xoedit_itm_html {
 
 				// build html
 				bfr.Add_str_u8_fmt
-				( "<select id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" accesskey=\"d\" class=\"xocfg__list{2}\" {1}>\n"
+				( "<select id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" accesskey=\"d\" class=\"xocfg_data__list{2}\" {1}>\n"
 				, type, html_atrs, html_cls, key);
 				String val_str = String_.new_u8(val);
 				for (int i = 0; i < len; i++) {
@@ -73,11 +73,11 @@ public class Xoedit_itm_html {
 			case Xoitm_type_enum.Tid__io_cmd:
 				String[] lines = Xocfg_mgr.Parse_io_cmd(String_.new_u8(val));
 				bfr.Add_str_u8_fmt
-				( "<input  class=\"xocfg__io_cmd__exe__txt{2}\" id=\"{3}-exe\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-exe\" accesskey=\"d\" type=\"text\"{1} value=\"{4}\"></input>\n"
+				( "<input  class=\"xocfg_data__io_cmd__exe__txt{2}\" id=\"{3}-exe\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-exe\" accesskey=\"d\" type=\"text\"{1} value=\"{4}\"></input>\n"
 				+ "<span class=\"xoimg_btn_x16 xoimg_app_configure\" onclick='xo.cfg_edit.io_cmd__select(\"file\", \"{3}-exe\", \"Please select a file.\");'>&nbsp;</span><br/>\n"
 				, type, html_atrs, html_cls, key, lines[0]);
 				bfr.Add_str_u8_fmt
-				( "<input  class=\"xocfg__io_cmd__arg__txt{2}\" id=\"{3}-arg\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-arg\" accesskey=\"d\" type=\"text\"{1} value=\"{4}\">\n"
+				( "<input  class=\"xocfg_data__io_cmd__arg__txt{2}\" id=\"{3}-arg\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-arg\" accesskey=\"d\" type=\"text\"{1} value=\"{4}\">\n"
 				, type, html_atrs, html_cls, key, lines[1]);
 				break;
 			case Xoitm_type_enum.Tid__gui_binding: {
@@ -85,7 +85,7 @@ public class Xoedit_itm_html {
 
 				// write box
 				bfr.Add_str_u8_fmt
-				( "<select class=\"xocfg__gui_binding__box\" id=\"{3}-box\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-box\" size=\"1\" accesskey=\"d\"{1}>\n"
+				( "<select class=\"xocfg_data__gui_binding__box\" id=\"{3}-box\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-box\" size=\"1\" accesskey=\"d\"{1}>\n"
 				, type, html_atrs, html_cls, key, flds[0]);
 				Xog_bnd_box[] box_ary = Xog_bnd_box_.Ary();
 				int box_len = box_ary.length;
@@ -102,7 +102,7 @@ public class Xoedit_itm_html {
 
 				// write ipt
 				bfr.Add_str_u8_fmt
-				( "<input class=\"xocfg__gui_binding__ipt\" id=\"{3}-ipt\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-ipt\" accesskey=\"d\" type=\"text\"{1} value=\"{4}\"></input>\n"
+				( "<input class=\"xocfg_data__gui_binding__ipt\" id=\"{3}-ipt\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}-ipt\" accesskey=\"d\" type=\"text\"{1} value=\"{4}\"></input>\n"
 				, type, html_atrs, html_cls, key, flds[1]);
 				bfr.Add_str_u8_fmt
 				( "<span class=\"xoimg_btn_x16 xoimg_app_configure\" onclick='xo.cfg_edit.gui_binding__remap_send(\"{3}\", \"{4}\");'>&nbsp;</span>\n"
@@ -111,7 +111,7 @@ public class Xoedit_itm_html {
 			}
 			case Xoitm_type_enum.Tid__btn:
 				bfr.Add_str_u8_fmt
-				( "<button id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" class=\"xocfg__btn{2}\" {1}>{4}</button>"
+				( "<button id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" class=\"xocfg_data__btn{2}\" {1}>{4}</button>"
 				, type, html_atrs, html_cls, key, name);
 				break;
 			default:
