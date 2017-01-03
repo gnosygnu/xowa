@@ -85,7 +85,9 @@ public class Xoa_prog_mgr implements Gfo_invk {
 		else if (String_.Eq(k, Cfg__djvu))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_djvu);}
 		else if (String_.Eq(k, Cfg__gz))						{Init_cmd(m.ReadStr("v"), app_decompress_gz);}
 		else if (String_.Eq(k, Cfg__bz2))						{Init_cmd(m.ReadStr("v"), app_decompress_bz2);}
-		else if (String_.Eq(k, Cfg__bz2__stdout_cmd))			{Init_cmd(m.ReadStr("v"), app_decompress_bz2_by_stdout);}
+		else if (String_.Eq(k, Cfg__bz2__stdout_cmd))			{
+			Init_cmd(m.ReadStr("v"), app_decompress_bz2_by_stdout);
+			}
 		else if	(String_.Eq(k, Cfg__query_size))				{Init_cmd(m.ReadStr("v"), app_query_img_size);}
 		else if	(String_.Eq(k, Cfg__resize_img))				{Init_cmd(m.ReadStr("v"), app_resize_img);}
 		else if	(String_.Eq(k, Cfg__convert_svg_to_png))		{Init_cmd(m.ReadStr("v"), app_convert_svg_to_png);}

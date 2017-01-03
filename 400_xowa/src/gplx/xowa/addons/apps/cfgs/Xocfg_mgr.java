@@ -34,17 +34,17 @@ public class Xocfg_mgr implements Gfo_invk {
 	public void Bind_many_app	(Gfo_invk sub, String... keys)					{Bind_many(Bool_.Y, sub, Xocfg_mgr.Ctx__app, keys);}
 	public void Bind_many_wiki	(Gfo_invk sub, Xow_wiki wiki, String... keys)		{Bind_many(Bool_.Y, sub, wiki.Domain_itm().Abrv_xo_str(), keys);}
 	private void Bind_many(boolean pub, Gfo_invk sub, String ctx, String... keys) {
-		try {
-			for (String key : keys) {
+		for (String key : keys) {
+			try {
 				cache_mgr.Sub(sub, ctx, key, key);
 				if (pub) {
 					String val = cache_mgr.Get(ctx, key);
 					cache_mgr.Pub(ctx, key, val);
 				}
 			}
-		}
-		catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "bind failed: ctx=~{0} keys=~{1} err=~{2}", ctx, String_.AryXtoStr(keys), Err_.Message_gplx_log(e));
+			catch (Exception e) {
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "bind failed: ctx=~{0} key=~{1} err=~{2}", ctx, key, Err_.Message_gplx_log(e));
+			}
 		}
 	}
 	public boolean Get_bool_app_or(String key, boolean or) {

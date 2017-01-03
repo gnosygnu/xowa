@@ -28,8 +28,8 @@ public class Xocfg_dflt_mgr {
 		return (itm == null) ? or : (String)Gfo_invk_.Invk_by_key(itm, key);
 	}
 	public void Add(String key, String val) {
-		cache_mgr.Dflt(key, val);
 		hash.Add(key, new Xocfg_dflt_itm__static(val));
+		cache_mgr.Dflt(key, val);
 	}
 	public void Add(Gfo_invk invk, String... keys) {
 		for (String key : keys) {

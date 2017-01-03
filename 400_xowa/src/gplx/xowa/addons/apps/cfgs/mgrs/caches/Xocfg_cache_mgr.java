@@ -73,6 +73,7 @@ public class Xocfg_cache_mgr {
 	public void Dflt(String key, String val) {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
 		grp.Dflt_(val);
+		grp.Pub(Xocfg_mgr.Ctx__app, val);	// need to pub after dflt is changed; for now, just pub at app-level
 	}
 	public Xocfg_cache_grp Grps__get_or_load(String key) {
 		Xocfg_cache_grp grp = (Xocfg_cache_grp)grps.Get_by(key);
