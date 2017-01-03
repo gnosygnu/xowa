@@ -49,8 +49,8 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		, "xowa.gui.shortcuts.xowa.nav.help.about-1"
 		, "xowa.gui.shortcuts.xowa.nav.help.change_log-1"
 		, "xowa.gui.shortcuts.xowa.nav.help.diagnostics-1"
-		, "xowa.gui.shortcuts.xowa.nav.xowa_main-1"
-		, "xowa.gui.shortcuts.xowa.nav.xowa_blog-1"
+		, "xowa.gui.shortcuts.xowa.nav.help.xowa_main-1"
+		, "xowa.gui.shortcuts.xowa.nav.help.xowa_blog-1"
 		, "xowa.gui.shortcuts.xowa.nav.setup.download_central-1"
 		, "xowa.gui.shortcuts.xowa.nav.setup.import_from_list-1"
 		, "xowa.gui.shortcuts.xowa.nav.setup.import_from_script-1"
@@ -59,8 +59,6 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		, "xowa.gui.shortcuts.xowa.nav.system_data.log_session-1"
 		, "xowa.gui.shortcuts.xowa.nav.system_data.cfg_app-1"
 		, "xowa.gui.shortcuts.xowa.nav.system_data.cfg_lang-1"
-		, "xowa.gui.shortcuts.xowa.nav.system_data.cfg_user-1"
-		, "xowa.gui.shortcuts.xowa.nav.system_data.cfg_custom-1"
 		, "xowa.gui.shortcuts.xowa.nav.system_data.usr_history-1"
 		, "xowa.gui.shortcuts.xowa.gui.font.increase-1"
 		, "xowa.gui.shortcuts.xowa.gui.font.decrease-1"
@@ -176,6 +174,7 @@ public class Xog_bnd_mgr implements Gfo_invk {
 				}
 				// if ipts match, delete old_bnd
 				else if (	new_ipt_exists
+						&&	old_bnd.Box() == new_bnd.Box()
 						&&	String_.Eq(old_bnd.Ipt().Key(), new_ipt.Key())) {
 					Xog_bnd_box_.Set_bnd_for_grp(Xog_bnd_box_.Set_del_ipt, win, invk_mgr, old_box, old_bnd, old_bnd.Ipt());
 					old_bnd.Ipt_to_none();
@@ -239,8 +238,6 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		Init_itm(Xog_cmd_itm_.Key_nav_system_data_log_session					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_system_data_cfg_app						, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_system_data_cfg_lang						, Xog_bnd_box_.Tid_browser				, "");
-		Init_itm(Xog_cmd_itm_.Key_nav_system_data_cfg_user						, Xog_bnd_box_.Tid_browser				, "");
-		Init_itm(Xog_cmd_itm_.Key_nav_system_data_cfg_custom					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_system_data_usr_history					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_gui_font_increase								, Xog_bnd_box_.Tid_browser				, "mod.c+key.equal");
 		Init_itm(Xog_cmd_itm_.Key_gui_font_decrease								, Xog_bnd_box_.Tid_browser				, "mod.c+key.minus");

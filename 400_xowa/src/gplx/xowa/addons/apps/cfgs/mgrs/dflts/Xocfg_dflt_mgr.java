@@ -37,7 +37,7 @@ public class Xocfg_dflt_mgr {
 		}
 	}
 	public static void Run_os_gfs(gplx.xowa.apps.gfs.Xoa_gfs_mgr gfs_mgr, gplx.xowa.apps.fsys.Xoa_fsys_mgr fsys_mgr) {
-		Io_url url = fsys_mgr.Root_dir().GenSubFil_nest("user", "app", "cfg", "os.gfs"); // User_os_gfs(app.Fsys_mgr());
+		Io_url url = fsys_mgr.Root_dir().GenSubFil_nest("user", "anonymous", "app", "cfg", "os.gfs");
 		if (!Io_mgr.Instance.ExistsFil(url)) {
 			Io_url dflt_url = fsys_mgr.Bin_plat_dir().GenSubFil_nest("xowa", "cfg", "os.default.gfs");
 			if (Io_mgr.Instance.ExistsFil(dflt_url))	// TEST: also, DRD

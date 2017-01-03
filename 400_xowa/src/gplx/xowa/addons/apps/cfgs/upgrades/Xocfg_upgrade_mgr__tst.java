@@ -33,10 +33,10 @@ public class Xocfg_upgrade_mgr__tst {
 	}
 	@Test   public void Parse__multi_line() {
 		fxt.Test__parse
-		( "app.cfgs.get('k_1', 'app').val = 'v_1\n"
+		( "app.cfgs.get('k_1', 'app').val = '''v_1'';\n"
 		+ "v_2\n"
 		+ "v_3';\n"
-		, Keyval_.new_("k_1", "v_1\nv_2\nv_3"));
+		, Keyval_.new_("k_1", "'v_1';\nv_2\nv_3"));
 	}
 	@Test   public void Parse__io_cmd() {
 		fxt.Test__parse
@@ -46,7 +46,7 @@ public class Xocfg_upgrade_mgr__tst {
 	}
 	@Test   public void Parse__gui_binding() {
 		fxt.Test__parse
-		( "app.cfgs.get('app.cfg.get.gui.bnds.init('xowa.app.exit-1').src', 'app').val = 'box='browser';ipt='key.none';';\n"
+		( "app.cfgs.get('app.cfg.get.gui.bnds.init(''xowa.app.exit-1'').src', 'app').val = 'box=''browser'';ipt=''key.none'';';\n"
 		, Keyval_.new_("xowa.gui.shortcuts.xowa.app.exit-1", "browser|key.none"));
 	}
 }

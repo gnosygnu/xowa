@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.cfgs.upgrades; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
 import gplx.dbs.*;
+import gplx.langs.gfs.*;
 public class Xocfg_upgrade_mgr {
 	public static void Convert(Xoae_app app) {
 		try {
@@ -60,6 +61,7 @@ public class Xocfg_upgrade_mgr {
 			app.Cfg().Cache_mgr().Db_usr().Conn().Txn_bgn("convert");
 			for (Keyval kv : kvs) {
 				if (String_.Eq(kv.Key(), "")) continue;
+				Gfo_usr_dlg_.Instance.Log_many("", "", "cfg.convert:converting; key=~{0} val=~{1}", kv.Key(), kv.Val());
 				app.Cfg().Set_str_app(kv.Key(), kv.Val_to_str_or_empty());
 			}
 			app.Cfg().Cache_mgr().Db_usr().Conn().Txn_end();
@@ -68,45 +70,25 @@ public class Xocfg_upgrade_mgr {
 		}
 	}
 	public static Keyval[] Parse(byte[] src) {
-		int pos = 0; int len = src.length;
-		byte[] key_bgn_bry = Bry_.new_a7("app.cfgs.get('");
-		byte[] key_end_bry = Bry_.new_a7("', 'app').val = '");
-		byte[] val_end_bry = Bry_.new_a7("';\n");
-		byte[] apos_2_bry = Bry_.new_a7("''");
-
 		// main parse
+		Gfs_parser parser = new Gfs_parser();
 		Ordered_hash hash = Ordered_hash_.New();
-		while (true) {
-			// find "app.cfgs.get('"
-			int key_bgn = Bry_find_.Find_fwd(src, key_bgn_bry, pos, len);
-			if (key_bgn == Bry_find_.Not_found) break;	// no more cfgs; break;
-
-			// update key_bgn; find key_end
-			key_bgn += key_bgn_bry.length; 
-			int key_end = Bry_find_.Find_fwd(src, key_end_bry, key_bgn, len);
-			if (key_end == Bry_find_.Not_found) {
-				Gfo_usr_dlg_.Instance.Log_many("", "", "cfg.convert:could not find key_end; src=~{0}", Bry_.Mid(src, key_bgn, len));
-				break;
-			}
-
-			// look for val_end
-			int val_bgn = key_end + key_end_bry.length;
-			int val_end = Bry_find_.Find_fwd(src, val_end_bry, val_bgn, len);
-			if (val_end == Bry_find_.Not_found) {
-				Gfo_usr_dlg_.Instance.Log_many("", "", "cfg.convert:could not find val_bgn; src=~{0}", Bry_.Mid(src, val_bgn, len));
-				break;
-			}
-
-			byte[] key = Bry_.Replace(Bry_.Mid(src, key_bgn, key_end), apos_2_bry, Byte_ascii.Apos_bry);
-			byte[] val = Bry_.Replace(Bry_.Mid(src, val_bgn, val_end), apos_2_bry, Byte_ascii.Apos_bry);
-			String key_str = String_.new_u8(key);
-			hash.Add_if_dupe_use_nth(key_str, Keyval_.new_(key_str, String_.new_u8(val)));
-			pos = val_end + val_end_bry.length;
+		Gfs_nde root = parser.Parse(src);
+		int root_len = root.Subs_len();
+		for (int i = 0; i < root_len; i++) {
+			Gfs_nde app_nde = root.Subs_get_at(i);
+			Gfs_nde cfgs_nde = app_nde.Subs_get_at(0);
+			Gfs_nde get_nde = cfgs_nde.Subs_get_at(0);
+			Gfs_nde key_atr = get_nde.Atrs_get_at(0);
+			Gfs_nde val_nde = get_nde.Subs_get_at(0);
+			Gfs_nde val_atr = val_nde.Atrs_get_at(0);
+			String key = String_.new_u8(key_atr.Name_bry(src));
+			hash.Add(key, Keyval_.new_(key, String_.new_u8(val_atr.Name_bry(src))));
 		}
 
 		// consolidate io.cmd
 		List_adp deleted = List_adp_.New();
-		len = hash.Len();
+		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
 			Keyval args_kv = (Keyval)hash.Get_at(i);
 			String args_kv_key = args_kv.Key();

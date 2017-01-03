@@ -199,7 +199,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 	public void Tabs_new_link(boolean focus, String link) {	// handle empty link
 		if (String_.Len_eq_0(link)) {
 			if (this.Active_tab_is_null()) return;
-			link = active_tab.Html_itm().Html_selected_get_active_or_selection();
+			link = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode_str(active_tab.Html_itm().Html_selected_get_active_or_selection());	// NOTE: must decode else url-encoded special pages don't work; EX:home/wiki/Special:XowaCfg%3Fgrp%3Dxowa.html.css; DATE:2017-01-02
 		}
 		if (String_.Len_eq_0(link)) {win.App().Usr_dlg().Prog_many("", "", "no link or text selected"); return;}
 		Tabs_new_link(link, focus);

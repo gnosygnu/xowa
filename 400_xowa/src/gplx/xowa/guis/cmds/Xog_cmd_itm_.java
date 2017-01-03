@@ -47,8 +47,6 @@ public class Xog_cmd_itm_ {
 	, Key_nav_system_data_log_session							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.system_data.log_session"				, "Special:XowaSystemData?type=log_session")
 	, Key_nav_system_data_cfg_app								= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.system_data.cfg_app"					, "Special:XowaSystemData?type=cfg_app")
 	, Key_nav_system_data_cfg_lang								= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.system_data.cfg_lang"					, "Special:XowaSystemData?type=cfg_lang")
-	, Key_nav_system_data_cfg_user								= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.system_data.cfg_user"					, "Special:XowaSystemData?type=cfg_user")
-	, Key_nav_system_data_cfg_custom							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.system_data.cfg_custom"					, "Special:XowaSystemData?type=cfg_custom")
 	, Key_nav_system_data_usr_history							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.system_data.usr_history"				, "Special:XowaSystemData?type=usr_history")
 
 	, Key_gui_font_increase										= new_dflt_(Xog_ctg_itm_.Tid_font			, "xowa.gui.font.increase")

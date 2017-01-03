@@ -86,8 +86,6 @@ public class Xog_mnu_regy {
 		Init_obsolete_itm(hash, gui_mgr, "xowa.system.data.log_session"						, Xog_cmd_itm_.Key_nav_system_data_log_session);
 		Init_obsolete_itm(hash, gui_mgr, "xowa.system.data.cfg_app"							, Xog_cmd_itm_.Key_nav_system_data_cfg_app);
 		Init_obsolete_itm(hash, gui_mgr, "xowa.system.data.cfg_lang"						, Xog_cmd_itm_.Key_nav_system_data_cfg_lang);
-		Init_obsolete_itm(hash, gui_mgr, "xowa.system.data.cfg_user"						, Xog_cmd_itm_.Key_nav_system_data_cfg_user);
-		Init_obsolete_itm(hash, gui_mgr, "xowa.system.data.cfg_custom"						, Xog_cmd_itm_.Key_nav_system_data_cfg_custom);
 		Init_obsolete_itm(hash, gui_mgr, "xowa.system.data.usr_history"						, Xog_cmd_itm_.Key_nav_system_data_usr_history);
 		Init_obsolete_itm(hash, gui_mgr, "xowa.help.about"									, Xog_cmd_itm_.Key_nav_help_about);
 		Init_obsolete_itm(hash, gui_mgr, "xowa.tabs.new_link__at_dflt__focus_n"				, Xog_cmd_itm_.Key_gui_browser_tabs_new_link__at_dflt__focus_n);
