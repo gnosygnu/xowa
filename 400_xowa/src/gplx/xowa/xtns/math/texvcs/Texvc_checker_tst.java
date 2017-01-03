@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.math.texvcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
 import org.junit.*; import gplx.xowa.xtns.math.texvcs.tkns.*; import gplx.xowa.xtns.math.texvcs.funcs.*;
 public class Texvc_checker_tst {
-	private final Texvc_checker_fxt fxt = new Texvc_checker_fxt();
+	private final    Texvc_checker_fxt fxt = new Texvc_checker_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Mathrm_tkns() {
 		fxt.Test_check("\\mathrm\\frac{a}{b}"
@@ -40,7 +40,7 @@ public class Texvc_checker_tst {
 		fxt.Test_check("\\frac a b"	, "\\frac a b");
 	}
 }
-class Texvc_checker_fxt extends Texvc_parser_fxt {		private final Texvc_checker checker = new Texvc_checker();
+class Texvc_checker_fxt extends Texvc_parser_fxt {		private final    Texvc_checker checker = new Texvc_checker();
 	public void Test_check(String src_str, Texvc_tkn... expd_tkns) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		Texvc_root actl_root = this.Exec_parse(src_bry);

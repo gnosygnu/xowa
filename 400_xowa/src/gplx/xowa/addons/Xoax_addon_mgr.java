@@ -59,6 +59,9 @@ public class Xoax_addon_mgr {
 		, new gplx.xowa.addons.wikis.ctgs.bldrs			.Xoax_ctg_bldr_addon()
 		, new gplx.xowa.xtns.wbases.imports				.Xowb_bldr_addon()
 
+		// xtns
+		, new gplx.xowa.xtns.math						.Xomath_addon()
+
 		// specials
 		, new gplx.xowa.addons.wikis.registrys			.Wiki_registry_addon()
 		, new gplx.xowa.addons.wikis.imports			.Xow_import_addon()

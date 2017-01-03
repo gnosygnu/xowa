@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.math.texvcs.tkns; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.math.texvcs.*;
 import gplx.core.primitives.*;
 public class Texvc_root implements Texvc_tkn {
-	private final Texvc_regy_tkn regy_tkn;
-	private final Texvc_regy_nde regy_nde = new Texvc_regy_nde();
-	private final Texvc_regy_sub regy_sub = new Texvc_regy_sub();
+	private final    Texvc_regy_tkn regy_tkn;
+	private final    Texvc_regy_nde regy_nde = new Texvc_regy_nde();
+	private final    Texvc_regy_sub regy_sub = new Texvc_regy_sub();
 	public Texvc_root() {
 		this.regy_tkn = new Texvc_regy_tkn(this);
 	}

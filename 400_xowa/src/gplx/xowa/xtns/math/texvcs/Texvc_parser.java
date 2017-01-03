@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.math.texvcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
 import gplx.core.btries.*;
 import gplx.xowa.xtns.math.texvcs.lxrs.*; import gplx.xowa.xtns.math.texvcs.tkns.*;
-class Texvc_parser {
+public class Texvc_parser {
 	private final    Btrie_rv trv = new Btrie_rv();
 	public void Parse(Texvc_ctx ctx, Texvc_root root, byte[] src) {
 		int src_len = src.length;

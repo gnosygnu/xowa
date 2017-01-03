@@ -19,8 +19,11 @@ package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
 public class Xop_log_basic_tbl implements Db_tbl {
 	private Db_stmt stmt_insert;
-	public Xop_log_basic_tbl(Db_conn conn){this.conn = conn; this.Create_tbl();} 
-	public Db_conn Conn() {return conn;} private Db_conn conn; 
+	public Xop_log_basic_tbl(Db_conn conn){
+		this.conn = conn;
+		this.Create_tbl();
+	} 
+	public Db_conn Conn() {return conn;} private final    Db_conn conn; 
 	public String Tbl_name() {return TBL_NAME;}
 	public void Create_tbl()				{Sqlite_engine_.Tbl_create(conn, TBL_NAME, Tbl_sql);}
 	public void Delete()					{conn.Exec_qry(Db_qry_delete.new_all_(TBL_NAME));}
@@ -48,17 +51,17 @@ public class Xop_log_basic_tbl implements Db_tbl {
 	, Fld_src_len = "src_len", Fld_src_str = "src_str"
 	;
 	private static final    String Tbl_sql = String_.Concat_lines_nl
-		(	"CREATE TABLE IF NOT EXISTS log_basic_temp"
-		,	"( log_id                   integer             NOT NULL    PRIMARY KEY AUTOINCREMENT"
-		,	", log_tid                  integer             NOT NULL"
-		,	", log_msg                  varchar(255)        NOT NULL"
-		,	", log_time                 integer             NOT NULL"
-		,	", page_id                  integer             NOT NULL"
-		,	", page_ttl                 varchar(255)        NOT NULL"
-		,	", args_len                 integer             NOT NULL"
-		,	", args_str                 varchar(4096)       NOT NULL"
-		,	", src_len                  integer             NOT NULL"
-		,	", src_str                  varchar(4096)       NOT NULL"
-		,	");"
-		);
+	(	"CREATE TABLE IF NOT EXISTS log_basic_temp"
+	,	"( log_id                   integer             NOT NULL    PRIMARY KEY AUTOINCREMENT"
+	,	", log_tid                  integer             NOT NULL"
+	,	", log_msg                  varchar(255)        NOT NULL"
+	,	", log_time                 integer             NOT NULL"
+	,	", page_id                  integer             NOT NULL"
+	,	", page_ttl                 varchar(255)        NOT NULL"
+	,	", args_len                 integer             NOT NULL"
+	,	", args_str                 varchar(4096)       NOT NULL"
+	,	", src_len                  integer             NOT NULL"
+	,	", src_str                  varchar(4096)       NOT NULL"
+	,	");"
+	);
 }

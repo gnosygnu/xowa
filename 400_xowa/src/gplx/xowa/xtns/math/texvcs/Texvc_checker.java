@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math.texvcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
 import gplx.xowa.xtns.math.texvcs.tkns.*; import gplx.xowa.xtns.math.texvcs.funcs.*;
-class Texvc_checker {
+public class Texvc_checker {
 	private final    List_adp func_stack = List_adp_.New();
 	private Texvc_root root; private int root_idx, root_len;
 	private boolean fail;
