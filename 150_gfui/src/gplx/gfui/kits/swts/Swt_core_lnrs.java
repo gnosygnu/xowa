@@ -26,6 +26,8 @@ import gplx.GfsCtx;
 import gplx.String_;
 import gplx.Tfds;
 import gplx.core.bits.Bitmask_;
+import gplx.core.envs.Op_sys;
+import gplx.core.envs.Op_sys_;
 import gplx.gfui.controls.gxws.GxwElem;
 import gplx.gfui.controls.standards.Gfui_html;
 import gplx.gfui.controls.windows.GfuiWin;
@@ -188,10 +190,14 @@ class Swt_lnr_key implements KeyListener {
 			case SWT.CTRL:					val = IptKey_.Ctrl.Val(); break;
 			case SWT.ALT:					val = IptKey_.Alt.Val(); break;
 			case SWT.SHIFT:					val = IptKey_.Shift.Val(); break;
+			
+			// map Mac OS X cmd to Ctrl
+			case SWT.COMMAND:				val = IptKey_.Ctrl.Val(); break;
 		}
 
 		// handle mod keys
-		val = Handle_modifier(ev, is_keydown, val, SWT.CTRL		, IptKey_.Ctrl.Val());
+		int swt_ctrl = Op_sys.Cur().Tid_is_osx() ? SWT.COMMAND : SWT.CTRL;
+		val = Handle_modifier(ev, is_keydown, val, swt_ctrl		, IptKey_.Ctrl.Val());
 		val = Handle_modifier(ev, is_keydown, val, SWT.ALT		, IptKey_.Alt.Val());
 		val = Handle_modifier(ev, is_keydown, val, SWT.SHIFT	, IptKey_.Shift.Val());
 		// Tfds.Write(String_.Format("val={0} keydown={1} keyCode={2} stateMask={3} keyLocation={4} character={5}", val, is_keydown, ev.keyCode, ev.stateMask, ev.keyLocation, ev.character));
