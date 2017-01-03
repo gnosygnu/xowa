@@ -63,6 +63,7 @@ public class Xow_page_mgr implements Gfo_invk {
 			Xoa_ttl redirect_ttl = Load_from_db(rv, ns, ttl, url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no));
 			if (redirect_ttl != null && redirect_ttl.Ns().Id_is_special()) {
 				ttl = redirect_ttl;
+				url = wiki.Utl__url_parser().Parse(ttl.Raw());	// update url w/ redirected ttl; need to update qargs else will redirect to correct ttl (Special:XowaCfg) but not qargs (grp=xowa.addon.math); EX:src=Options/Math; trg=Special:XowaCfg?grp=xowa.addon.math; DATE:2017-01-02
 				rv.Redirect_trail().Clear();
 				rv.Db().Page().Exists_y_();
 			}
