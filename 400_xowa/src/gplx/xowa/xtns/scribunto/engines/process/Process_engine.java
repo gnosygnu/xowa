@@ -22,11 +22,11 @@ public class Process_engine implements Scrib_engine {
 	private Scrib_core core; private Xoae_app app; private Scrib_xtn_mgr scrib_opts;
 	private Process_recv_msg rsp = new Process_recv_msg(); private Process_send_wtr msg_encoder;
 	private Scrib_proc_mgr proc_mgr;
-	public Process_engine(Xoae_app app, Scrib_core core) {
+	public Process_engine(Xoae_app app, Xowe_wiki wiki, Scrib_core core) {
 		this.app = app; this.core = core; this.proc_mgr = core.Proc_mgr();
 		msg_encoder = new Process_send_wtr(app.Usr_dlg()); 
 		server = new Process_server();
-		scrib_opts = (Scrib_xtn_mgr)app.Xtn_mgr().Get_or_fail(Scrib_xtn_mgr.XTN_KEY);
+		scrib_opts = (Scrib_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Scrib_xtn_mgr.XTN_KEY);
 	}
 	public boolean Dbg_print() {return dbg_print;} public void Dbg_print_(boolean v) {dbg_print = v;} private boolean dbg_print;
 	public Scrib_server Server() {return server;} public void Server_(Scrib_server v) {server = v;} Scrib_server server;

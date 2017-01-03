@@ -51,7 +51,7 @@ public class Scrib_core {
 	public void Engine_(Scrib_engine v) {this.engine = v;}
 	private void Engine_(byte type, boolean luaj_debug_enabled) {
 		if		(type == Scrib_engine_type.Type_lua)
-			engine = new gplx.xowa.xtns.scribunto.engines.process.Process_engine(app, this);
+			engine = new gplx.xowa.xtns.scribunto.engines.process.Process_engine(app, wiki, this);
 		else if (type == Scrib_engine_type.Type_luaj)
 			engine = new gplx.xowa.xtns.scribunto.engines.luaj.Luaj_engine(app, this, luaj_debug_enabled);
 	}
@@ -70,7 +70,7 @@ public class Scrib_core {
 	public Scrib_lib_wikibase Lib_wikibase() {return lib_wikibase;} private Scrib_lib_wikibase lib_wikibase;
 	public Scrib_lib_wikibase_entity Lib_wikibase_entity() {return lib_wikibase_entity;} private Scrib_lib_wikibase_entity lib_wikibase_entity;
 	public Scrib_core Init() {	// REF:LuaCommon.php!Load
-		Scrib_xtn_mgr xtn_mgr = (Scrib_xtn_mgr)app.Xtn_mgr().Get_or_fail(Scrib_xtn_mgr.XTN_KEY);
+		Scrib_xtn_mgr xtn_mgr = (Scrib_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Scrib_xtn_mgr.XTN_KEY);
 		Engine_(xtn_mgr.Engine_type(), xtn_mgr.Luaj_debug_enabled());
 		engine.Server().Server_timeout_(xtn_mgr.Lua_timeout()).Server_timeout_polling_(xtn_mgr.Lua_timeout_polling()).Server_timeout_busy_wait_(xtn_mgr.Lua_timeout_busy_wait());
 		enabled = xtn_mgr.Enabled();

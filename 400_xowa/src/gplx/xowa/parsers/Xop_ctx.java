@@ -75,7 +75,7 @@ public class Xop_ctx {
 	public Xop_log_property_wkr Xtn__wikidata__property_wkr() {return app.Wiki_mgr().Wdata_mgr().Property_wkr();}
 	public Xop_log_invoke_wkr	Xtn__scribunto__invoke_wkr() {
 		if (scrib_invoke_wkr == null)
-			scrib_invoke_wkr = ((Scrib_xtn_mgr)(app.Xtn_mgr().Get_or_fail(Scrib_xtn_mgr.XTN_KEY))).Invoke_wkr();
+			scrib_invoke_wkr = ((Scrib_xtn_mgr)(wiki.Xtn_mgr().Get_or_fail(Scrib_xtn_mgr.XTN_KEY))).Invoke_wkr();
 		return scrib_invoke_wkr;
 	}	private Xop_log_invoke_wkr scrib_invoke_wkr;
 
