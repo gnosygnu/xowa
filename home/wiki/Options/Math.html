@@ -5,213 +5,7 @@
   <title>Options/Math - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
-  <style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-<style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-
+  
 </head>
 <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
 <div id="mw-page-base" class="noprint"></div>
@@ -223,155 +17,217 @@ li.active a, li.active a:hover
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
-    <div>
-      <table>
-        <tr>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Window'>Apps (basic)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Security'>Apps (advanced)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Import'>Wiki</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/HTML'>HTML</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Content_apps'>External apps</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Search_suggest'>Modules</a>
-          </td>
-          <td class='optionsButton active'>
-            <a class='optionsLink' href='/wiki/Options/Math'>Extensions</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Dev'>Misc</a>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="tabs">
+    <div id='xocfg_body'>
+      <div id='xocfg_err'>
+      </div>
       <div>
-        <ul class='tab-links' style='margin-left:0px;'>
-          <li class='active'>
-            <a href='/wiki/Options/Math'>Math</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Scribunto'>Scribunto</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Score'>Score</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Wikibase'>Wikibase</a>
-          </li>
-        </ul>
-      </div><br>
-      <div class='tab-content'>
-        <div id="toc" class="toc">
-          <div id="toctitle">
-            <h2>
-              Contents
-            </h2>
-          </div>
-          <ul>
-            <li class="toclevel-1 tocsection-1">
-              <a href="#Math"><span class="tocnumber">1</span> <span class="toctext">Math</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-2">
-              <a href="#LaTEX"><span class="tocnumber">2</span> <span class="toctext">LaT<sub>E</sub>X</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-3">
-              <a href="#Notes"><span class="tocnumber">3</span> <span class="toctext">Notes</span></a>
-            </li>
-          </ul>
-        </div>
-        <div style='float:right; margin-right:10px; margin-top:5px;'>
-          <p>
-            <a href="xowa-cmd:app.user.prefs.save();" accesskey='s'><img src='file:///C:/xowa/bin/any/xowa/file/app.window/save.png' width="16" height="16">Save</a>
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+          <option value='xowa.app.security'>
+            App - Security
+          </option>
+          <option value='xowa.app.startup'>
+            App - Startup
+          </option>
+          <option value='xowa.gui.general'>
+            Gui - General
+          </option>
+          <option value='xowa.gui.tabs'>
+            Gui - Tabs
+          </option>
+          <option value='xowa.gui.url_bar'>
+            Gui - Address bar
+          </option>
+          <option value='xowa.gui.menus'>
+            Gui - Menus
+          </option>
+          <option value='xowa.gui.shortcuts'>
+            Gui - Shortcuts
+          </option>
+          <option value='xowa.wiki.hdumps'>
+            Wiki - HTML Databases
+          </option>
+          <option value='xowa.wiki.edit'>
+            Wiki - Editing
+          </option>
+          <option value='xowa.bldr.general'>
+            Import - General
+          </option>
+          <option value='xowa.bldr.db'>
+            Import - Database
+          </option>
+          <option value='xowa.bldr.page_sync'>
+            Import - Page sync
+          </option>
+          <option value='xowa.bldr.dansguardian'>
+            Import - Dansguardian
+          </option>
+          <option value='xowa.html.css'>
+            HTML - CSS
+          </option>
+          <option value='xowa.html.page'>
+            HTML - Page
+          </option>
+          <option value='xowa.html.tidy'>
+            HTML - Tidy
+          </option>
+          <option value='xowa.html.scripting'>
+            HTML - Scripting
+          </option>
+          <option value='xowa.files.general'>
+            Files - General
+          </option>
+          <option value='xowa.files.apps'>
+            Files - Apps
+          </option>
+          <option value='xowa.addon.search'>
+            Addon - Search
+          </option>
+          <option value='xowa.addon.category'>
+            Addon - Category
+          </option>
+          <option value='xowa.addon.http_server'>
+            Addon - HTTP Server
+          </option>
+          <option value='xowa.addon.scribunto'>
+            Addon - Scribunto
+          </option>
+          <option value='xowa.addon.math' selected='selected'>
+            Addon - Math
+          </option>
+          <option value='xowa.addon.score'>
+            Addon - Score
+          </option>
+          <option value='xowa.addon.popups'>
+            Addon - Popups
+          </option>
+          <option value='xowa.addon.wikibase'>
+            Addon - Wikidata
+          </option>
+          <option value='xowa.dev.general'>
+            Dev - General
+          </option>
+        </select>
+      </div>
+      <div id='cfg_grps'>
+        <div>
+          <p id='page_help_para'>
           </p>
-        </div><br>
-         
+        </div>
         <h2>
-          <span class="mw-headline" id="Math">Math</span>
+          Math
         </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Enabled: <sup id="cite_ref-math_enabled_0-0" class="reference"><a href="#cite_note-math_enabled-0">[1]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.files.math.enabled" type="checkbox" class="options_checkbox" id='xowa_prop_0' checked='checked'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Renderer: <sup id="cite_ref-math_renderer_1-0" class="reference"><a href="#cite_note-math_renderer-1">[2]</a></sup>
-            </td>
-            <td>
-              <select xowa_prop="app.files.math.renderer" xowa_prop_list="app.files.math.renderer_list" class='options_select' size="2" id='xowa_prop_1'>
-                <option value='mathjax' selected='selected'>
-                  MathJax
-                </option>
-                <option value='latex'>
-                  LaTeX
-                </option>
-              </select>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="LaTEX">LaT<sub>E</sub>X</span>
-        </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              LaT<sub>E</sub>X app 
-              <p>
-                <sup id="cite_ref-2" class="reference"><a href="#cite_note-2">[3]</a></sup>
-              </p>
-            </td>
-            <td>
-              <input xowa_prop="app.fsys.apps.convert_dvi_to_png.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_2' value='C:\xowa\bin\windows_64\miktex\miktex\bin\dvipng'><button id='xowa_prop_2_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_2", "Please select a file.");'>...</button> 
-              <p>
-                <input xowa_prop="app.fsys.apps.convert_dvi_to_png.args" class="options_textbox" style="width: 380px;" id='xowa_prop_3' value='"~{dvi_file}" -o "~{png_file}" -q* -T tight -bg Transparent"'>
-              </p>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="Notes">Notes</span>
-        </h2>
-        <ol class="references">
-          <li id="cite_note-math_enabled-0">
-            <span class="mw-cite-backlink"><a href="#cite_ref-math_enabled_0-0">^</a></span> <span class="reference-text">Choose one of the following (default is <code>checked</code>)</span>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.math.enabled")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.math.enabled__name' class='xocfg_itm_name'>
+            Enabled
+          </div>
+          <div id='xowa.addon.math.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.math.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.math.enabled" data-xocfg-key="xowa.addon.math.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.addon.math.enabled__key_box' value='xowa.addon.math.enabled'> <input type='hidden' id='xowa.addon.math.enabled__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.math.enabled_help_div' class='xohelp_div'>
+          <div id='xowa.addon.math.enabled_help_msg' class='xohelp_msg'>
+            <p>
+              Choose one of the following:
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>checked</b> to transform &lt;math&gt; sections to images</span>
+                <b>checked</b> to transform &lt;math&gt; sections to images
               </li>
               <li>
-                <span class="reference-text"><b>unchecked</b> to leave &lt;math&gt; sections as text</span>
+                <b>unchecked</b> to leave &lt;math&gt; sections as text
               </li>
             </ul>
-          </li>
-          <li id="cite_note-math_renderer-1">
-            <span class="mw-cite-backlink"><a href="#cite_ref-math_renderer_1-0">^</a></span> <span class="reference-text">Choose one of the following (default is <code>MathJax</code>)</span>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.math.renderer")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.math.renderer__name' class='xocfg_itm_name'>
+            Renderer
+          </div>
+          <div id='xowa.addon.math.renderer__undo' data-xocfg-type='list:xowa.addon.math.renderer' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.math.renderer")' title="reset to &quot;mathjax&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <select id="xowa.addon.math.renderer" data-xocfg-key="xowa.addon.math.renderer" data-xocfg-type="list:xowa.addon.math.renderer" accesskey="d" class="xocfg_data__list" size="2">
+              <option value="mathjax" selected="selected">
+                MathJax
+              </option>
+              <option value="latex">
+                LaTeX
+              </option>
+            </select>
+          </div><input type='hidden' id='xowa.addon.math.renderer__key_box' value='xowa.addon.math.renderer'> <input type='hidden' id='xowa.addon.math.renderer__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.math.renderer_help_div' class='xohelp_div'>
+          <div id='xowa.addon.math.renderer_help_msg' class='xohelp_msg'>
+            <p>
+              Choose one of the following:
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>MathJax</b>: use MathJax for &lt;math&gt;. Note that this is faster, does not use any disk space, and requires no additional setup</span>
+                <b>MathJax</b>: use MathJax for &lt;math&gt;. Note that this is faster, does not use any disk space, and requires no additional setup
               </li>
               <li>
-                <span class="reference-text"><b>LaTeX</b>: use LaT<sub>E</sub>X for &lt;math&gt;. Note that LaT<sub>E</sub>X is slower and will use extra disk space. It <b>must</b> also be installed. See <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Math/Setup.html" id="xolnki_2" title="App/Xtn/Mediawiki/Math/Setup">App/Xtn/Mediawiki/Math/Setup</a></span>
+                <b>LaTeX</b>: use LaT<sub>E</sub>X for &lt;math&gt;. Note that LaT<sub>E</sub>X is slower and will use extra disk space. It <b>must</b> also be installed. See <a tabindex="-1" href="/wiki/App/Xtn/Mediawiki/Math/Setup" id="xolnki_32" title="App/Xtn/Mediawiki/Math/Setup">App/Xtn/Mediawiki/Math/Setup</a>
               </li>
             </ul>
-          </li>
-          <li id="cite_note-2">
-            <span class="mw-cite-backlink"><a href="#cite_ref-2">^</a></span> <span class="reference-text">Converts dvi to png (needed for LaT<sub>E</sub>X; not needed for MathJax) . Recommended: <a href="http://www.miktex.org/" rel="nofollow" class="external text">MikTeX</a></span>
-          </li>
-        </ol>
+          </div>
+        </div>
+        <h2>
+          LaTeX
+        </h2>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.math.apps.tex_to_dvi")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.math.apps.tex_to_dvi__name' class='xocfg_itm_name'>
+            Tex to dvi
+          </div>
+          <div id='xowa.addon.math.apps.tex_to_dvi__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.math.apps.tex_to_dvi")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}miktex\texmfs\install\miktex\bin\latex|-quiet -output-directory=&quot;~{temp_dir}&quot; -job-name=xowa_math_temp &quot;~{tex_file}&quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.math.apps.tex_to_dvi-exe" data-xocfg-key="xowa.addon.math.apps.tex_to_dvi" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}miktex\texmfs\install\miktex\bin\latex"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.math.apps.tex_to_dvi-exe", "Please select a file.");'>&nbsp;</span><br>
+            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.math.apps.tex_to_dvi-arg" data-xocfg-key="xowa.addon.math.apps.tex_to_dvi" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="-quiet -output-directory=&quot;~{temp_dir}&quot; -job-name=xowa_math_temp &quot;~{tex_file}&quot;">
+          </div><input type='hidden' id='xowa.addon.math.apps.tex_to_dvi__key_box' value='xowa.addon.math.apps.tex_to_dvi'> <input type='hidden' id='xowa.addon.math.apps.tex_to_dvi__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.math.apps.tex_to_dvi_help_div' class='xohelp_div'>
+          <div id='xowa.addon.math.apps.tex_to_dvi_help_msg' class='xohelp_msg'>
+            <p>
+              Converts tex to dvi (needed for LaT<sub>E</sub>X; not needed for MathJax) (Recommended: <a tabindex="-1" href="http://www.miktex.org/" rel="nofollow" class="external text">MikTeX</a>)
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.math.apps.dvi_to_png")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.math.apps.dvi_to_png__name' class='xocfg_itm_name'>
+            Dvi to png
+          </div>
+          <div id='xowa.addon.math.apps.dvi_to_png__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.math.apps.dvi_to_png")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}miktex\texmfs\install\miktex\bin\dvipng|&quot;~{dvi_file}&quot; -o &quot;~{png_file}&quot; -q* -T tight -bg Transparent&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.math.apps.dvi_to_png-exe" data-xocfg-key="xowa.addon.math.apps.dvi_to_png" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}miktex\texmfs\install\miktex\bin\dvipng"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.math.apps.dvi_to_png-exe", "Please select a file.");'>&nbsp;</span><br>
+            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.math.apps.dvi_to_png-arg" data-xocfg-key="xowa.addon.math.apps.dvi_to_png" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="&quot;~{dvi_file}&quot; -o &quot;~{png_file}&quot; -q* -T tight -bg Transparent">
+          </div><input type='hidden' id='xowa.addon.math.apps.dvi_to_png__key_box' value='xowa.addon.math.apps.dvi_to_png'> <input type='hidden' id='xowa.addon.math.apps.dvi_to_png__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.math.apps.dvi_to_png_help_div' class='xohelp_div'>
+          <div id='xowa.addon.math.apps.dvi_to_png_help_msg' class='xohelp_msg'>
+            <p>
+              Converts dvi to png (needed for LaT<sub>E</sub>X; not needed for MathJax) (Recommended: <a tabindex="-1" href="http://www.miktex.org/" rel="nofollow" class="external text">MikTeX</a>)
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   

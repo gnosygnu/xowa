@@ -5,213 +5,7 @@
   <title>Options/Security - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
-  <style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-<style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-
+  
 </head>
 <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
 <div id="mw-page-base" class="noprint"></div>
@@ -223,244 +17,350 @@ li.active a, li.active a:hover
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
-    <div>
-      <table>
-        <tr>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Window'>Apps (basic)</a>
-          </td>
-          <td class='optionsButton active'>
-            <a class='optionsLink' href='/wiki/Options/Security'>Apps (advanced)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Import'>Wiki</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/HTML'>HTML</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Content_apps'>External apps</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Search_suggest'>Modules</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Math'>Extensions</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Dev'>Misc</a>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="tabs">
+    <div id='xocfg_body'>
+      <div id='xocfg_err'>
+      </div>
       <div>
-        <ul class='tab-links' style='margin-left:0px;'>
-          <li class='active'>
-            <a href='/wiki/Options/Security'>Security</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Scripting'>Scripting</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Shortcuts'>Shortcuts</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Menus'>Menus</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Config_script'>Config script</a>
-          </li>
-        </ul>
-      </div><br>
-      <div class='tab-content'>
-        <div id="toc" class="toc">
-          <div id="toctitle">
-            <h2>
-              Contents
-            </h2>
-          </div>
-          <ul>
-            <li class="toclevel-1 tocsection-1">
-              <a href="#Security"><span class="tocnumber">1</span> <span class="toctext">Security</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-2">
-              <a href="#Web"><span class="tocnumber">2</span> <span class="toctext">Web</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-3">
-              <a href="#Privacy"><span class="tocnumber">3</span> <span class="toctext">Privacy</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-4">
-              <a href="#Notes"><span class="tocnumber">4</span> <span class="toctext">Notes</span></a>
-            </li>
-          </ul>
-        </div>
-        <div style='float:right; margin-right:10px; margin-top:5px;'>
-          <p>
-            <a href="xowa-cmd:app.user.prefs.save();" accesskey='s'><img src='file:///C:/xowa/bin/any/xowa/file/app.window/save.png' width="16" height="16">Save</a>
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+          <option value='xowa.app.security' selected='selected'>
+            App - Security
+          </option>
+          <option value='xowa.app.startup'>
+            App - Startup
+          </option>
+          <option value='xowa.gui.general'>
+            Gui - General
+          </option>
+          <option value='xowa.gui.tabs'>
+            Gui - Tabs
+          </option>
+          <option value='xowa.gui.url_bar'>
+            Gui - Address bar
+          </option>
+          <option value='xowa.gui.menus'>
+            Gui - Menus
+          </option>
+          <option value='xowa.gui.shortcuts'>
+            Gui - Shortcuts
+          </option>
+          <option value='xowa.wiki.hdumps'>
+            Wiki - HTML Databases
+          </option>
+          <option value='xowa.wiki.edit'>
+            Wiki - Editing
+          </option>
+          <option value='xowa.bldr.general'>
+            Import - General
+          </option>
+          <option value='xowa.bldr.db'>
+            Import - Database
+          </option>
+          <option value='xowa.bldr.page_sync'>
+            Import - Page sync
+          </option>
+          <option value='xowa.bldr.dansguardian'>
+            Import - Dansguardian
+          </option>
+          <option value='xowa.html.css'>
+            HTML - CSS
+          </option>
+          <option value='xowa.html.page'>
+            HTML - Page
+          </option>
+          <option value='xowa.html.tidy'>
+            HTML - Tidy
+          </option>
+          <option value='xowa.html.scripting'>
+            HTML - Scripting
+          </option>
+          <option value='xowa.files.general'>
+            Files - General
+          </option>
+          <option value='xowa.files.apps'>
+            Files - Apps
+          </option>
+          <option value='xowa.addon.search'>
+            Addon - Search
+          </option>
+          <option value='xowa.addon.category'>
+            Addon - Category
+          </option>
+          <option value='xowa.addon.http_server'>
+            Addon - HTTP Server
+          </option>
+          <option value='xowa.addon.scribunto'>
+            Addon - Scribunto
+          </option>
+          <option value='xowa.addon.math'>
+            Addon - Math
+          </option>
+          <option value='xowa.addon.score'>
+            Addon - Score
+          </option>
+          <option value='xowa.addon.popups'>
+            Addon - Popups
+          </option>
+          <option value='xowa.addon.wikibase'>
+            Addon - Wikidata
+          </option>
+          <option value='xowa.dev.general'>
+            Dev - General
+          </option>
+        </select>
+      </div>
+      <div id='cfg_grps'>
+        <div>
+          <p id='page_help_para'>
           </p>
-        </div><br>
-         
+        </div>
         <h2>
-          <span class="mw-headline" id="Security">Security</span>
+          Web
         </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              JavaScript enabled: <sup id="cite_ref-javascript_enabled_0-0" class="reference"><a href="#cite_note-javascript_enabled-0">[1]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.gui.html.javascript_enabled" type="checkbox" class="options_checkbox" id='xowa_prop_0' checked='checked'>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="Web">Web</span>
-        </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Web access enabled: <sup id="cite_ref-web_access_enabled_1-0" class="reference"><a href="#cite_note-web_access_enabled-1">[2]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.user.cfg.security.web_access_enabled" type="checkbox" accesskey='d' class="options_checkbox" id='xowa_prop_1' checked='checked'>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="Privacy">Privacy</span>
-        </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Logs enabled: <sup id="cite_ref-logs_enabled_2-0" class="reference"><a href="#cite_note-logs_enabled-2">[3]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.api.usr.logs.enabled" type="checkbox" class="options_checkbox" id='xowa_prop_2' checked='checked'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              History enabled: <sup id="cite_ref-history_enabled_3-0" class="reference"><a href="#cite_note-history_enabled-3">[4]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.api.usr.history.enabled" type="checkbox" class="options_checkbox" id='xowa_prop_3' checked='checked'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Bookmarks enabled: <sup id="cite_ref-bookmarks_enabled_4-0" class="reference"><a href="#cite_note-bookmarks_enabled-4">[5]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.api.usr.bookmarks.enabled" type="checkbox" class="options_checkbox" id='xowa_prop_4' checked='checked'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Load HTML to browser method: <sup id="cite_ref-html_load_tid_5-0" class="reference"><a href="#cite_note-html_load_tid-5">[6]</a></sup>
-            </td>
-            <td>
-              <select xowa_prop="xowa.api.gui.browser.html.load_tid" xowa_prop_list="xowa.api.gui.browser.html.load_tid_list" class="options_textbox" size='2' id='xowa_prop_5'>
-                <option value='mem' selected='selected'>
-                  mem
-                </option>
-                <option value='url'>
-                  url
-                </option>
-              </select>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="Notes">Notes</span>
-        </h2>
-        <ol class="references">
-          <li id="cite_note-javascript_enabled-0">
-            <span class="mw-cite-backlink"><a href="#cite_ref-javascript_enabled_0-0">^</a></span> <span class="reference-text">Choose if Javascript enabled: (default is <code>checked</code>)</span>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.web.enabled")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.web.enabled__name' class='xocfg_itm_name'>
+            Web access enabled
+          </div>
+          <div id='xowa.app.web.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.web.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.app.web.enabled" data-xocfg-key="xowa.app.web.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
+          </div><input type='hidden' id='xowa.app.web.enabled__key_box' value='xowa.app.web.enabled'> <input type='hidden' id='xowa.app.web.enabled__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.web.enabled_help_div' class='xohelp_div'>
+          <div id='xowa.app.web.enabled_help_msg' class='xohelp_msg'>
+            <p>
+              Choose if XOWA is allowed to access the Web:
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>checked</b> to enable JavaScript. Note that this will allow you to use the functions listed at <a href="http://xowa.org/home/wiki/Diagnostics/Javascript/All.html" id="xolnki_2" title="Diagnostics/Javascript/All">Diagnostics/Javascript/All</a></span>
+                <b>checked</b>: Allow web access.
               </li>
               <li>
-                <span class="reference-text"><b>unchecked</b> to disable JavaScript. Only JavaScript specified by XOWA will run</span>
+                <b>unchecked</b>: Forbid web access. XOWA will not connect to the internet under any circumstances. This is equivalent to pulling the network cable for XOWA only.
               </li>
             </ul>
-            <dl>
-              <dd>
-                <span class="reference-text">XOWA uses JavaScript for certain functionality such as MathJax, sortable, collapsible, and reference tooltips. Unfortunately, JavaScript can also be a vector of attack. Although XOWA scrubs pages to eliminate embedded JavaScript, it is possible for malicious JavaScript to be injected into a Wiki page that evades XOWA's code. For those concerned about security, the safest approach would be to disable JavaScript entirely.</span>
-              </dd>
-            </dl>
-          </li>
-          <li id="cite_note-web_access_enabled-1">
-            <span class="mw-cite-backlink"><a href="#cite_ref-web_access_enabled_1-0">^</a></span> <span class="reference-text">Choose if XOWA is allowed to access the Web: (default is <code>checked</code>)</span>
+            <p>
+              Note that this may cause the app to not behave properly. For example:
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>checked</b> to allow web access.</span>
+                Images will not download, even if "Retrieve files" is checked
               </li>
               <li>
-                <span class="reference-text"><b>unchecked</b> to forbid web access. XOWA will not connect to the internet under any circumstances. This is equivalent to pulling the network cable for XOWA only.</span>
-              </li>
-            </ul><span class="reference-text">Note that this may cause the app to not behave properly. For example:</span>
-            <ul>
-              <li>
-                <span class="reference-text">Images will not download, even if "Retrieve files" is checked</span>
+                Import links on Import/List will not work
               </li>
               <li>
-                <span class="reference-text">Import links on Import/List will not work</span>
+                Download dump status on Wiki/Maintenance will not work
               </li>
               <li>
-                <span class="reference-text">Download dump status on Wiki/Maintenance will not work</span>
-              </li>
-              <li>
-                <span class="reference-text">etc..</span>
-              </li>
-            </ul><span class="reference-text">Also, note that this only controls XOWA's access to the internet. <a href="http://xowa.org/home/wiki/Options/Apps.html" id="xolnki_3" title="Options/Apps">Viewer apps</a> may still access the internet. For example, clicking on an external link will still launch a "Web browser". If you have VLC set up to play media files, it may access the internet when you click on a media file. A PDF app may try to update itself when you click on a PDF file. For more information, see <a href="http://xowa.org/home/wiki/Help/Privacy.html" id="xolnki_4" title="Help/Privacy">Help/Privacy</a></span>
-          </li>
-          <li id="cite_note-logs_enabled-2">
-            <span class="mw-cite-backlink"><a href="#cite_ref-logs_enabled_2-0">^</a></span> <span class="reference-text">Choose if logs are enabled: (default is <code>checked</code>)</span>
-            <ul>
-              <li>
-                <span class="reference-text"><b>checked</b> to enable logs. XOWA logs application activity for diagnostic purposes. Note that these logs are never shared or uploaded. See <a href="http://xowa.org/home/wiki/Help/Privacy.html" id="xolnki_5" title="Help/Privacy">Help/Privacy</a> for more info</span>
-              </li>
-              <li>
-                <span class="reference-text"><b>unchecked</b> to disable logs. No messages will be written to the log. You can check by going to Help -&gt; System Data -&gt; Session Log</span>
+                etc..
               </li>
             </ul>
-          </li>
-          <li id="cite_note-history_enabled-3">
-            <span class="mw-cite-backlink"><a href="#cite_ref-history_enabled_3-0">^</a></span> <span class="reference-text">Choose if page history is enabled: (default is <code>checked</code>)</span>
+            <p>
+              Also, note that this only controls XOWA's access to the internet. <a tabindex="-1" href="/wiki/Options/Apps" id="xolnki_2" title="Options/Apps">Viewer apps</a> may still access the internet. For example, clicking on an external link will still launch a "Web browser". If you have VLC set up to play media files, it may access the internet when you click on a media file. A PDF app may try to update itself when you click on a PDF file.
+            </p>
+            <p>
+              For more information, see <a tabindex="-1" href="/wiki/Help/Privacy" id="xolnki_3" title="Help/Privacy">Help/Privacy</a>
+            </p>
+          </div>
+        </div>
+        <h2>
+          JavaScript
+        </h2>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.html_box.javascript_enabled")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.gui.html_box.javascript_enabled__name' class='xocfg_itm_name'>
+            JavaScript enabled
+          </div>
+          <div id='xowa.gui.html_box.javascript_enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.html_box.javascript_enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.gui.html_box.javascript_enabled" data-xocfg-key="xowa.gui.html_box.javascript_enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.gui.html_box.javascript_enabled__key_box' value='xowa.gui.html_box.javascript_enabled'> <input type='hidden' id='xowa.gui.html_box.javascript_enabled__ctx_box' value='app'>
+        </div>
+        <div id='xowa.gui.html_box.javascript_enabled_help_div' class='xohelp_div'>
+          <div id='xowa.gui.html_box.javascript_enabled_help_msg' class='xohelp_msg'>
+            <p>
+              Choose if JavaScript enabled:
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>checked</b> to enable page history. XOWA stores viewed pages for the Page History page (History -&gt; Show). Note that this history is never shared or uploaded. See <a href="http://xowa.org/home/wiki/Help/Privacy.html" id="xolnki_6" title="Help/Privacy">Help/Privacy</a> for more info</span>
+                <b>checked</b>: Enable JavaScript. Note that this will allow you to use the functions listed at <a tabindex="-1" href="/wiki/Diagnostics/Javascript/All" id="xolnki_4" title="Diagnostics/Javascript/All">Diagnostics/Javascript/All</a>
               </li>
               <li>
-                <span class="reference-text"><b>unchecked</b> to disable page history. No pages will be stored in page history. You can check by going to Help -&gt; System Data -&gt; Page History</span>
+                <b>unchecked</b>: Disable JavaScript. Only JavaScript specified by XOWA will run
               </li>
             </ul>
-          </li>
-          <li id="cite_note-bookmarks_enabled-4">
-            <span class="mw-cite-backlink"><a href="#cite_ref-bookmarks_enabled_4-0">^</a></span> <span class="reference-text">Choose if bookmarks are enabled: (default is <code>checked</code>)</span>
+          </div>
+        </div>
+        <h2>
+          Privacy
+        </h2>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.logs.enabled")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.logs.enabled__name' class='xocfg_itm_name'>
+            Logs enabled
+          </div>
+          <div id='xowa.app.logs.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.logs.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.app.logs.enabled" data-xocfg-key="xowa.app.logs.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.app.logs.enabled__key_box' value='xowa.app.logs.enabled'> <input type='hidden' id='xowa.app.logs.enabled__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.logs.enabled_help_div' class='xohelp_div'>
+          <div id='xowa.app.logs.enabled_help_msg' class='xohelp_msg'>
+            <p>
+              Choose if logs are enabled:
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>checked</b> to enable bookmarks. XOWA adds bookmarks whenever the user chooses "Bookmark this page". Note that these bookmarks are never shared or uploaded. See <a href="http://xowa.org/home/wiki/Help/Privacy.html" id="xolnki_7" title="Help/Privacy">Help/Privacy</a> for more info</span>
+                <b>checked</b>: Enable logs. XOWA logs application activity for diagnostic purposes. Note that these logs are never shared or uploaded. See <a tabindex="-1" href="/wiki/Help/Privacy" id="xolnki_5" title="Help/Privacy">Help/Privacy</a> for more info
               </li>
               <li>
-                <span class="reference-text"><b>unchecked</b> to disable adding bookmarks. No bookmarks will be be added, even if the user clicks "Bookmark this page". You can check by clicking "Bookmark this page" and then clicking "Show all bookmarks"</span>
+                <b>unchecked</b>: Disable logs. No messages will be written to the log. You can check by going to Help -&gt; System Data -&gt; Session Log
               </li>
             </ul>
-          </li>
-          <li id="cite_note-html_load_tid-5">
-            <span class="mw-cite-backlink"><a href="#cite_ref-html_load_tid_5-0">^</a></span> <span class="reference-text">Choose how HTML is loaded into the browser: (default is <code>mem</code>) (recommended is <code>url</code>) This is a performance optimization with privacy implications</span>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.bookmarks.enabled")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.bookmarks.enabled__name' class='xocfg_itm_name'>
+            Bookmarks enabled
+          </div>
+          <div id='xowa.app.bookmarks.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.bookmarks.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.app.bookmarks.enabled" data-xocfg-key="xowa.app.bookmarks.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.app.bookmarks.enabled__key_box' value='xowa.app.bookmarks.enabled'> <input type='hidden' id='xowa.app.bookmarks.enabled__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.bookmarks.enabled_help_div' class='xohelp_div'>
+          <div id='xowa.app.bookmarks.enabled_help_msg' class='xohelp_msg'>
+            <p>
+              Choose if bookmarks are enabled:
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>mem</b>: Loads HTML through memory by calling <code>browser.setText(html)</code>. For unknown reasons, SWT / XULRunner uses more memory when loading HTML by setText -- as much as 5 - 10 MB for a page like en.w:Earth.</span>
+                <b>checked</b>: Enable bookmarks. XOWA adds bookmarks whenever the user chooses "Bookmark this page". Note that these bookmarks are never shared or uploaded. See <a tabindex="-1" href="/wiki/Help/Privacy" id="xolnki_6" title="Help/Privacy">Help/Privacy</a> for more info
               </li>
               <li>
-                <span class="reference-text"><b>url</b>: Loads HTML through the file system by calling <code>browser.setUrl(file, html)</code>. This call uses less memory, but requires writing the HTML to disk. (see /xowa/user/anonymous/app/tmp/html) Although setting HTML via disk is theoretically slower than memory, the time difference is not noticeable. This may be more of an issue for users with privacy concerns. For more info on the latter, see <a href="http://xowa.org/home/wiki/Help/Privacy.html" id="xolnki_8" title="Help/Privacy">Help/Privacy</a>.</span>
+                <b>unchecked</b>: Disable adding bookmarks. No bookmarks will be be added, even if the user clicks "Bookmark this page". You can check by clicking "Bookmark this page" and then clicking "Show all bookmarks"
               </li>
-            </ul><span class="reference-text">Note that <b>mem</b> is currently the default, but <b>url</b> will be made the default in a future release.</span>
-          </li>
-        </ol>
+            </ul>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.page_history.enabled")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.page_history.enabled__name' class='xocfg_itm_name'>
+            History enabled
+          </div>
+          <div id='xowa.app.page_history.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.page_history.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.app.page_history.enabled" data-xocfg-key="xowa.app.page_history.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.app.page_history.enabled__key_box' value='xowa.app.page_history.enabled'> <input type='hidden' id='xowa.app.page_history.enabled__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.page_history.enabled_help_div' class='xohelp_div'>
+          <div id='xowa.app.page_history.enabled_help_msg' class='xohelp_msg'>
+            <p>
+              Choose if page history is enabled:
+            </p>
+            <ul>
+              <li>
+                <b>checked</b>: Enable page history. XOWA stores viewed pages for the Page History page (History -&gt; Show). Note that this history is never shared or uploaded. See <a tabindex="-1" href="/wiki/Help/Privacy" id="xolnki_7" title="Help/Privacy">Help/Privacy</a> for more info
+              </li>
+              <li>
+                <b>unchecked</b>: Disable page history. No pages will be stored in page history. You can check by going to Help -&gt; System Data -&gt; Page History
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.page_history.log_all")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.page_history.log_all__name' class='xocfg_itm_name'>
+            Log all page history
+          </div>
+          <div id='xowa.app.page_history.log_all__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.page_history.log_all")' title="reset to &quot;n&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.app.page_history.log_all" data-xocfg-key="xowa.app.page_history.log_all" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
+          </div><input type='hidden' id='xowa.app.page_history.log_all__key_box' value='xowa.app.page_history.log_all'> <input type='hidden' id='xowa.app.page_history.log_all__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.page_history.log_all_help_div' class='xohelp_div'>
+          <div id='xowa.app.page_history.log_all_help_msg' class='xohelp_msg'>
+            <p>
+              Log every page visit in a separate log file
+            </p>
+            <ul>
+              <li>
+                <b>checked</b>: Logs every page visit in a separate log file: C:\xowa\user\anonymous\app\data\history\log_all.csv
+              </li>
+              <li>
+                <b>unchecked</b> Does not log every page visit to a separate log file.
+              </li>
+            </ul>
+            <p>
+              XOWA currently consolidates visits to the same page as one entry. For example, 3 visits to en.wikipedia.org/wiki/Earth would show up only once with the <code>date</code> being the most recent one. The <code>date</code> for the previous two entries would be lost. This option retains dates for all 3 entries by logging each visit to a separate file.
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.html_box.page_load_mode")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.gui.html_box.page_load_mode__name' class='xocfg_itm_name'>
+            Load HTML to browser method
+          </div>
+          <div id='xowa.gui.html_box.page_load_mode__undo' data-xocfg-type='list:xowa.gui.html_box.page_load_mode' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.html_box.page_load_mode")' title="reset to &quot;mem&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <select id="xowa.gui.html_box.page_load_mode" data-xocfg-key="xowa.gui.html_box.page_load_mode" data-xocfg-type="list:xowa.gui.html_box.page_load_mode" accesskey="d" class="xocfg_data__list" size="2">
+              <option value="mem" selected="selected">
+                mem
+              </option>
+              <option value="url">
+                url
+              </option>
+            </select>
+          </div><input type='hidden' id='xowa.gui.html_box.page_load_mode__key_box' value='xowa.gui.html_box.page_load_mode'> <input type='hidden' id='xowa.gui.html_box.page_load_mode__ctx_box' value='app'>
+        </div>
+        <div id='xowa.gui.html_box.page_load_mode_help_div' class='xohelp_div'>
+          <div id='xowa.gui.html_box.page_load_mode_help_msg' class='xohelp_msg'>
+            <p>
+              Choose how HTML is loaded into the browser: This is a performance optimization with privacy implications
+            </p>
+            <ul>
+              <li>
+                <b>mem</b>: Load HTML through memory by calling <code>browser.setText(html)</code>. For unknown reasons, SWT / XULRunner uses more memory when loading HTML by setText -- as much as 5 - 10 MB for a page like en.w:Earth.
+              </li>
+              <li>
+                <b>url</b>: Load HTML through the file system by calling <code>browser.setUrl(file, html)</code>. This call uses less memory, but requires writing the HTML to disk. (see /xowa/user/anonymous/app/tmp/html) Although setting HTML via disk is theoretically slower than memory, the time difference is not noticeable. This may be more of an issue for users with privacy concerns. For more info on the latter, see <a tabindex="-1" href="/wiki/Help/Privacy" id="xolnki_8" title="Help/Privacy">Help/Privacy</a>.
+              </li>
+            </ul>
+            <p>
+              Note that <b>mem</b> is currently the default, but <b>url</b> will be made the default in a future release.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   

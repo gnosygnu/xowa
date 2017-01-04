@@ -5,213 +5,7 @@
   <title>Options/Page sync - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
-  <style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-<style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-
+  
 </head>
 <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
 <div id="mw-page-base" class="noprint"></div>
@@ -223,200 +17,259 @@ li.active a, li.active a:hover
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
-    <div>
-      <table>
-        <tr>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Window'>Apps (basic)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Security'>Apps (advanced)</a>
-          </td>
-          <td class='optionsButton active'>
-            <a class='optionsLink' href='/wiki/Options/Import'>Wiki</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/HTML'>HTML</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Content_apps'>External apps</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Search_suggest'>Modules</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Math'>Extensions</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Dev'>Misc</a>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="tabs">
+    <div id='xocfg_body'>
+      <div id='xocfg_err'>
+      </div>
       <div>
-        <ul class='tab-links' style='margin-left:0px;'>
-          <li class=''>
-            <a href='/wiki/Options/Import'>Import</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Files'>Files</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/HTML_databases'>HTML databases</a>
-          </li>
-          <li class='active'>
-            <a href='/wiki/Options/Page_sync'>Page sync</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Category'>Category</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Import_Dansguardian'>Import Dansguardian</a>
-          </li>
-        </ul>
-      </div><br>
-      <div class='tab-content'>
-        <div id="toc" class="toc">
-          <div id="toctitle">
-            <h2>
-              Contents
-            </h2>
-          </div>
-          <ul>
-            <li class="toclevel-1 tocsection-1">
-              <a href="#Manual"><span class="tocnumber">1</span> <span class="toctext">Manual</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-2">
-              <a href="#Automatic"><span class="tocnumber">2</span> <span class="toctext">Automatic</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-3">
-              <a href="#Notes"><span class="tocnumber">3</span> <span class="toctext">Notes</span></a>
-            </li>
-          </ul>
-        </div>
-        <div style='float:right; margin-right:10px; margin-top:5px;'>
-          <p>
-            <a href="xowa-cmd:app.user.prefs.save();" accesskey='s'><img src='file:///C:/xowa/bin/any/xowa/file/app.window/save.png' width="16" height="16">Save</a>
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+          <option value='xowa.app.security'>
+            App - Security
+          </option>
+          <option value='xowa.app.startup'>
+            App - Startup
+          </option>
+          <option value='xowa.gui.general'>
+            Gui - General
+          </option>
+          <option value='xowa.gui.tabs'>
+            Gui - Tabs
+          </option>
+          <option value='xowa.gui.url_bar'>
+            Gui - Address bar
+          </option>
+          <option value='xowa.gui.menus'>
+            Gui - Menus
+          </option>
+          <option value='xowa.gui.shortcuts'>
+            Gui - Shortcuts
+          </option>
+          <option value='xowa.wiki.hdumps'>
+            Wiki - HTML Databases
+          </option>
+          <option value='xowa.wiki.edit'>
+            Wiki - Editing
+          </option>
+          <option value='xowa.bldr.general'>
+            Import - General
+          </option>
+          <option value='xowa.bldr.db'>
+            Import - Database
+          </option>
+          <option value='xowa.bldr.page_sync' selected='selected'>
+            Import - Page sync
+          </option>
+          <option value='xowa.bldr.dansguardian'>
+            Import - Dansguardian
+          </option>
+          <option value='xowa.html.css'>
+            HTML - CSS
+          </option>
+          <option value='xowa.html.page'>
+            HTML - Page
+          </option>
+          <option value='xowa.html.tidy'>
+            HTML - Tidy
+          </option>
+          <option value='xowa.html.scripting'>
+            HTML - Scripting
+          </option>
+          <option value='xowa.files.general'>
+            Files - General
+          </option>
+          <option value='xowa.files.apps'>
+            Files - Apps
+          </option>
+          <option value='xowa.addon.search'>
+            Addon - Search
+          </option>
+          <option value='xowa.addon.category'>
+            Addon - Category
+          </option>
+          <option value='xowa.addon.http_server'>
+            Addon - HTTP Server
+          </option>
+          <option value='xowa.addon.scribunto'>
+            Addon - Scribunto
+          </option>
+          <option value='xowa.addon.math'>
+            Addon - Math
+          </option>
+          <option value='xowa.addon.score'>
+            Addon - Score
+          </option>
+          <option value='xowa.addon.popups'>
+            Addon - Popups
+          </option>
+          <option value='xowa.addon.wikibase'>
+            Addon - Wikidata
+          </option>
+          <option value='xowa.dev.general'>
+            Dev - General
+          </option>
+        </select>
+      </div>
+      <div id='cfg_grps'>
+        <div>
+          <p id='page_help_para'>
           </p>
-        </div><br>
-         
-        <p>
-          For more information, see <a href="http://xowa.org/home/wiki/App/Xtn/Page_sync.html" id="xolnki_2" title="App/Xtn/Page sync">the page sync help page</a>
-        </p>
+          <p>
+            For more information, see <a tabindex="-1" href="/wiki/App/Xtn/Page_sync" id="xolnki_19" title="App/Xtn/Page sync">the page sync help page</a>
+          </p>
+        </div>
         <h2>
-          <span class="mw-headline" id="Manual">Manual</span>
+          Manual
         </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Enable manual syncs: <sup id="cite_ref-manual_enabled_0-0" class="reference"><a href="#cite_note-manual_enabled-0">[1]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.addon.bldr.sync.manual_enabled" type="checkbox" class="options_checkbox" accesskey='d' id='xowa_prop_0' checked='checked'>
-            </td>
-          </tr>
-        </table>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.page_sync.manual.enabled")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.bldr.page_sync.manual.enabled__name' class='xocfg_itm_name'>
+            Enabled
+          </div>
+          <div id='xowa.bldr.page_sync.manual.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.page_sync.manual.enabled")' title="reset to &quot;n&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.bldr.page_sync.manual.enabled" data-xocfg-key="xowa.bldr.page_sync.manual.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
+          </div><input type='hidden' id='xowa.bldr.page_sync.manual.enabled__key_box' value='xowa.bldr.page_sync.manual.enabled'> <input type='hidden' id='xowa.bldr.page_sync.manual.enabled__ctx_box' value='app'>
+        </div>
+        <div id='xowa.bldr.page_sync.manual.enabled_help_div' class='xohelp_div'>
+          <div id='xowa.bldr.page_sync.manual.enabled_help_msg' class='xohelp_msg'>
+            <p>
+              Choose one of the following:
+            </p>
+            <ul>
+              <li>
+                <b>checked</b>: Show "Sync" in sidebar
+              </li>
+              <li>
+                <b>unchecked</b>: Do not show "Sync" in sidebar
+              </li>
+            </ul>
+            <p>
+              Other notes:
+            </p>
+            <ul>
+              <li>
+                Clicking "Sync" will manually synchronize current page
+              </li>
+              <li>
+                "Sync" will never show in the home wiki
+              </li>
+              <li>
+                "Sync" will not work on Special pages
+              </li>
+            </ul>
+          </div>
+        </div>
         <h2>
-          <span class="mw-headline" id="Automatic">Automatic</span>
+          Automatic
         </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Enable automatic syncs: <sup id="cite_ref-auto_enabled_1-0" class="reference"><a href="#cite_note-auto_enabled-1">[2]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.addon.bldr.sync.auto_enabled" type="checkbox" class="options_checkbox" id='xowa_prop_1'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Time to wait before sync: <sup id="cite_ref-auto_interval_2-0" class="reference"><a href="#cite_note-auto_interval-2">[3]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.addon.bldr.sync.auto_interval" class="options_textbox" style="width: 400px;" id='xowa_prop_2' value='1440'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Pages to sync: <sup id="cite_ref-auto_scope_3-0" class="reference"><a href="#cite_note-auto_scope-3">[4]</a></sup>
-            </td>
-            <td>
-<textarea xowa_prop="xowa.api.addon.bldr.sync.auto_scope" class="options_textarea" style="width: 400px; height:72px;" id='xowa_prop_3'>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.page_sync.auto.enabled")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.bldr.page_sync.auto.enabled__name' class='xocfg_itm_name'>
+            Enabled
+          </div>
+          <div id='xowa.bldr.page_sync.auto.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.page_sync.auto.enabled")' title="reset to &quot;n&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.bldr.page_sync.auto.enabled" data-xocfg-key="xowa.bldr.page_sync.auto.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
+          </div><input type='hidden' id='xowa.bldr.page_sync.auto.enabled__key_box' value='xowa.bldr.page_sync.auto.enabled'> <input type='hidden' id='xowa.bldr.page_sync.auto.enabled__ctx_box' value='app'>
+        </div>
+        <div id='xowa.bldr.page_sync.auto.enabled_help_div' class='xohelp_div'>
+          <div id='xowa.bldr.page_sync.auto.enabled_help_msg' class='xohelp_msg'>
+            <p>
+              Choose one of the following:
+            </p>
+            <ul>
+              <li>
+                <b>checked</b>: Automatically synchronize page when viewing it
+              </li>
+              <li>
+                <b>unchecked</b>: (default) Do not automatically synchronize page
+              </li>
+            </ul>
+            <p>
+              Other notes:
+            </p>
+            <ul>
+              <li>
+                Pages are automatically synchronized based on options for time and scope. The default behavior is to synchronize when first visiting the page, and then every 24 hours afterwards
+              </li>
+              <li>
+                Automatic synchronization will never occur in the home wiki
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.page_sync.auto.interval")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.bldr.page_sync.auto.interval__name' class='xocfg_itm_name'>
+            Time to wait before syncs
+          </div>
+          <div id='xowa.bldr.page_sync.auto.interval__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.page_sync.auto.interval")' title="reset to &quot;1440&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.bldr.page_sync.auto.interval" data-xocfg-key="xowa.bldr.page_sync.auto.interval" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="1440">
+          </div><input type='hidden' id='xowa.bldr.page_sync.auto.interval__key_box' value='xowa.bldr.page_sync.auto.interval'> <input type='hidden' id='xowa.bldr.page_sync.auto.interval__ctx_box' value='app'>
+        </div>
+        <div id='xowa.bldr.page_sync.auto.interval_help_div' class='xohelp_div'>
+          <div id='xowa.bldr.page_sync.auto.interval_help_msg' class='xohelp_msg'>
+            <p>
+              Enter the number of minutes to wait before checking for a new update:
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.page_sync.auto.scope")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.bldr.page_sync.auto.scope__name' class='xocfg_itm_name'>
+            Pages to sync
+          </div>
+          <div id='xowa.bldr.page_sync.auto.scope__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.page_sync.auto.scope")' title="reset to &quot;*&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+<textarea id="xowa.bldr.page_sync.auto.scope" data-xocfg-key="xowa.bldr.page_sync.auto.scope" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
 *
 </textarea>
-            </td>
-          </tr>
-        </table>
-        <p>
-          <br>
-        </p>
-        <h2>
-          <span class="mw-headline" id="Notes">Notes</span>
-        </h2>
-        <ol class="references">
-          <li id="cite_note-manual_enabled-0">
-            <span class="mw-cite-backlink"><a href="#cite_ref-manual_enabled_0-0">^</a></span> <span class="reference-text">Choose one of the following: (default is <code>unchecked</code>)</span>
+          </div><input type='hidden' id='xowa.bldr.page_sync.auto.scope__key_box' value='xowa.bldr.page_sync.auto.scope'> <input type='hidden' id='xowa.bldr.page_sync.auto.scope__ctx_box' value='app'>
+        </div>
+        <div id='xowa.bldr.page_sync.auto.scope_help_div' class='xohelp_div'>
+          <div id='xowa.bldr.page_sync.auto.scope_help_msg' class='xohelp_msg'>
+            <p>
+              Specify specific page titles to sync:
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>checked</b>: Show "Sync" in sidebar</span>
+                <b>*:Main_Page</b>: means sync all Main_Pages in all wikis
               </li>
               <li>
-                <span class="reference-text"><b>unchecked</b>: (default) Do not show "Sync" in sidebar</span>
-              </li>
-            </ul><span class="reference-text">Other notes:</span>
-            <ul>
-              <li>
-                <span class="reference-text">Clicking "Sync" will manually synchronize current page</span>
+                <b>*</b>: is a wildcard and means sync all pages in all wikis
               </li>
               <li>
-                <span class="reference-text">"Sync" will never show in the home wiki</span>
+                Individual pages can be specified on each line.
               </li>
             </ul>
-          </li>
-          <li id="cite_note-auto_enabled-1">
-            <span class="mw-cite-backlink"><a href="#cite_ref-auto_enabled_1-0">^</a></span> <span class="reference-text">Choose one of the following: (default is <code>unchecked</code>)</span>
-            <ul>
-              <li>
-                <span class="reference-text"><b>checked</b>: Automatically synchronize page when viewing it</span>
-              </li>
-              <li>
-                <span class="reference-text"><b>unchecked</b>: (default) Do not automatically synchronize page</span>
-              </li>
-            </ul><span class="reference-text">Other notes:</span>
-            <ul>
-              <li>
-                <span class="reference-text">Pages are automatically synchronized based on options for time and scope. The default behavior is to synchronize when first visiting the page, and then every 24 hours afterwards</span>
-              </li>
-              <li>
-                <span class="reference-text">Automatic synchronization will never occur in the home wiki</span>
-              </li>
-            </ul>
-          </li>
-          <li id="cite_note-auto_interval-2">
-            <span class="mw-cite-backlink"><a href="#cite_ref-auto_interval_2-0">^</a></span> <span class="reference-text">Enter the number of minutes to wait before checking for a new update: (default is <code>1440</code>) <sup id="cite_ref-auto_scope_3-1" class="reference"><a href="#cite_note-auto_scope-3">[4]</a></sup></span>
-          </li>
-          <li id="cite_note-auto_scope-3">
-            <span class="mw-cite-backlink"><a href="#cite_ref-auto_scope_3-0">^</a></span> <span class="reference-text">Specify specific page titles to sync: (default is <code>Main_Page</code>)</span>
-            <ul>
-              <li>
-                <span class="reference-text"><b>*:Main_Page</b>: means sync all Main_Pages in all wikis</span>
-              </li>
-              <li>
-                <span class="reference-text"><b>*</b>: is a wildcard and means sync all pages in all wikis</span>
-              </li>
-              <li>
-                <span class="reference-text">Individual pages can be specified on each line.</span>
-              </li>
-            </ul><span class="reference-text">For example, the following would only auto-synchronize two pages: the Main_Page and Earth in English Wikipedia:</span>
+            <p>
+              For example, the following would only auto-synchronize two pages: the Main_Page and Earth in English Wikipedia:
+            </p>
 <pre>
-<span class="reference-text">en.w:Main_Page
+en.w:Main_Page
 en.w:Earth
-</span>
 </pre>
-            <span class="reference-text">Note that all lines must be separated by a UNIX line ending (ASCII 10) not a Windows line ending (ASCII 13 + ASCII 10)</span>
-          </li>
-        </ol>
+            <p>
+              Note that all lines must be separated by a UNIX line ending (ASCII 10) not a Windows line ending (ASCII 13 + ASCII 10)
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   

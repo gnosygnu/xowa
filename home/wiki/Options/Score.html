@@ -5,213 +5,7 @@
   <title>Options/Score - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
-  <style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-<style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-
+  
 </head>
 <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
 <div id="mw-page-base" class="noprint"></div>
@@ -223,196 +17,239 @@ li.active a, li.active a:hover
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
-    <div>
-      <table>
-        <tr>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Window'>Apps (basic)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Security'>Apps (advanced)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Import'>Wiki</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/HTML'>HTML</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Content_apps'>External apps</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Search_suggest'>Modules</a>
-          </td>
-          <td class='optionsButton active'>
-            <a class='optionsLink' href='/wiki/Options/Math'>Extensions</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Dev'>Misc</a>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="tabs">
+    <div id='xocfg_body'>
+      <div id='xocfg_err'>
+      </div>
       <div>
-        <ul class='tab-links' style='margin-left:0px;'>
-          <li class=''>
-            <a href='/wiki/Options/Math'>Math</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Scribunto'>Scribunto</a>
-          </li>
-          <li class='active'>
-            <a href='/wiki/Options/Score'>Score</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Wikibase'>Wikibase</a>
-          </li>
-        </ul>
-      </div><br>
-      <div class='tab-content'>
-        <div id="toc" class="toc">
-          <div id="toctitle">
-            <h2>
-              Contents
-            </h2>
-          </div>
-          <ul>
-            <li class="toclevel-1 tocsection-1">
-              <a href="#General"><span class="tocnumber">1</span> <span class="toctext">General</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-2">
-              <a href="#Apps"><span class="tocnumber">2</span> <span class="toctext">Apps</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-3">
-              <a href="#Notes"><span class="tocnumber">3</span> <span class="toctext">Notes</span></a>
-            </li>
-          </ul>
-        </div>
-        <div style='float:right; margin-right:10px; margin-top:5px;'>
-          <p>
-            <a href="xowa-cmd:app.user.prefs.save();" accesskey='s'><img src='file:///C:/xowa/bin/any/xowa/file/app.window/save.png' width="16" height="16">Save</a>
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+          <option value='xowa.app.security'>
+            App - Security
+          </option>
+          <option value='xowa.app.startup'>
+            App - Startup
+          </option>
+          <option value='xowa.gui.general'>
+            Gui - General
+          </option>
+          <option value='xowa.gui.tabs'>
+            Gui - Tabs
+          </option>
+          <option value='xowa.gui.url_bar'>
+            Gui - Address bar
+          </option>
+          <option value='xowa.gui.menus'>
+            Gui - Menus
+          </option>
+          <option value='xowa.gui.shortcuts'>
+            Gui - Shortcuts
+          </option>
+          <option value='xowa.wiki.hdumps'>
+            Wiki - HTML Databases
+          </option>
+          <option value='xowa.wiki.edit'>
+            Wiki - Editing
+          </option>
+          <option value='xowa.bldr.general'>
+            Import - General
+          </option>
+          <option value='xowa.bldr.db'>
+            Import - Database
+          </option>
+          <option value='xowa.bldr.page_sync'>
+            Import - Page sync
+          </option>
+          <option value='xowa.bldr.dansguardian'>
+            Import - Dansguardian
+          </option>
+          <option value='xowa.html.css'>
+            HTML - CSS
+          </option>
+          <option value='xowa.html.page'>
+            HTML - Page
+          </option>
+          <option value='xowa.html.tidy'>
+            HTML - Tidy
+          </option>
+          <option value='xowa.html.scripting'>
+            HTML - Scripting
+          </option>
+          <option value='xowa.files.general'>
+            Files - General
+          </option>
+          <option value='xowa.files.apps'>
+            Files - Apps
+          </option>
+          <option value='xowa.addon.search'>
+            Addon - Search
+          </option>
+          <option value='xowa.addon.category'>
+            Addon - Category
+          </option>
+          <option value='xowa.addon.http_server'>
+            Addon - HTTP Server
+          </option>
+          <option value='xowa.addon.scribunto'>
+            Addon - Scribunto
+          </option>
+          <option value='xowa.addon.math'>
+            Addon - Math
+          </option>
+          <option value='xowa.addon.score' selected='selected'>
+            Addon - Score
+          </option>
+          <option value='xowa.addon.popups'>
+            Addon - Popups
+          </option>
+          <option value='xowa.addon.wikibase'>
+            Addon - Wikidata
+          </option>
+          <option value='xowa.dev.general'>
+            Dev - General
+          </option>
+        </select>
+      </div>
+      <div id='cfg_grps'>
+        <div>
+          <p id='page_help_para'>
           </p>
-        </div><br>
-        <table class="metadata plainlinks ambox ambox-delete" style="">
-          <tr>
-            <td class="mbox-empty-cell">
-            </td>
-            <td class="mbox-text" style="">
-              <p>
-                <span class="mbox-text-span">ImageMagick must be set up in order for Score to work correctly.</span>
-              </p>
-              <p>
-                <span class="mbox-text-span">See the following pages: <a href="http://xowa.org/home/wiki/Dev/File/Setup/Windows.html" id="xolnki_2" title="Dev/File/Setup/Windows">Dev/File/Setup/Windows</a>, <a href="http://xowa.org/home/wiki/Dev/File/Setup/Linux.html" id="xolnki_3" title="Dev/File/Setup/Linux">Dev/File/Setup/Linux</a>, <a href="http://xowa.org/home/wiki/Dev/File/Setup/Mac_OS_X.html" id="xolnki_4" title="Dev/File/Setup/Mac OS X">Dev/File/Setup/Mac OS X</a></span>
-              </p>
-            </td>
-          </tr>
-        </table>
+          <table class="metadata plainlinks ambox ambox-delete" style="">
+            <tr>
+              <td class="mbox-empty-cell">
+              </td>
+              <td class="mbox-text" style="">
+                <p>
+                  <span class="mbox-text-span">ImageMagick must be set up in order for Score to work correctly.</span>
+                </p>
+                <p>
+                  <span class="mbox-text-span">See the following pages: <a tabindex="-1" href="/wiki/Dev/File/Setup/Windows" id="xolnki_33" title="Dev/File/Setup/Windows" class="xowa-visited">Dev/File/Setup/Windows</a>, <a tabindex="-1" href="/wiki/Dev/File/Setup/Linux" id="xolnki_34" title="Dev/File/Setup/Linux">Dev/File/Setup/Linux</a>, <a tabindex="-1" href="/wiki/Dev/File/Setup/Mac_OS_X" id="xolnki_35" title="Dev/File/Setup/Mac OS X">Dev/File/Setup/Mac OS X</a></span>
+                </p>
+              </td>
+            </tr>
+          </table>
+        </div>
         <h2>
-          <span class="mw-headline" id="General">General</span>
+          General
         </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Enabled: <sup id="cite_ref-enabled_0-0" class="reference"><a href="#cite_note-enabled-0">[1]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.xtns.get('score').enabled" type="checkbox" class='options_checkbox' id='xowa_prop_0' checked='checked'>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="Apps">Apps</span>
-        </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Lilypond: 
-              <p>
-                <sup id="cite_ref-1" class="reference"><a href="#cite_note-1">[2]</a></sup>
-              </p>
-            </td>
-            <td>
-              <input xowa_prop="app.fsys.apps.lilypond.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_1' value='C:\xowa\bin\windows_64\lilypond\usr\bin\lilypond.exe'><button id='xowa_prop_1_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_1", "Please select a file.");'>...</button> 
-              <p>
-                <input xowa_prop="app.fsys.apps.lilypond.args" class="options_textbox" style="width: 380px;" id='xowa_prop_2' value='"-dsafe=#t" -dbackend=ps --png --header=texidoc -dmidi-extension=midi "~{file}"'>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Python: 
-              <p>
-                <sup id="cite_ref-2" class="reference"><a href="#cite_note-2">[3]</a></sup>
-              </p>
-            </td>
-            <td>
-              <input xowa_prop="app.fsys.apps.abc2ly.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_3' value='C:\xowa\bin\windows_64\lilypond\usr\bin\python.exe'><button id='xowa_prop_3_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_3", "Please select a file.");'>...</button> 
-              <p>
-                <input xowa_prop="app.fsys.apps.abc2ly.args" class="options_textbox" style="width: 380px;" id='xowa_prop_4' value='abc2ly.py -s "--output=~{target}" "~{source}"'>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              ImageMagick - Trim: 
-              <p>
-                <sup id="cite_ref-3" class="reference"><a href="#cite_note-3">[4]</a></sup>
-              </p>
-            </td>
-            <td>
-              <input xowa_prop="app.fsys.apps.trim_img.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_5' value='C:\xowa\bin\windows_64\imagemagick\convert'><button id='xowa_prop_5_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_5", "Please select a file.");'>...</button> 
-              <p>
-                <input xowa_prop="app.fsys.apps.trim_img.args" class="options_textbox" style="width: 380px;" id='xowa_prop_6' value='-trim "~{source}" "~{target}"'>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Convert midi to ogg 
-              <p>
-                <sup id="cite_ref-4" class="reference"><a href="#cite_note-4">[5]</a></sup>
-              </p>
-            </td>
-            <td>
-              <input xowa_prop="app.fsys.apps.convert_midi_to_ogg.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_7' value='C:\xowa\bin\windows_64\timidity\timidity'><button id='xowa_prop_7_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_7", "Please select a file.");'>...</button> 
-              <p>
-                <input xowa_prop="app.fsys.apps.convert_midi_to_ogg.args" class="options_textbox" style="width: 380px;" id='xowa_prop_8' value='-Ov "--output-file=~{target}" "~{source}"'>
-              </p>
-            </td>
-          </tr>
-        </table>
-        <p>
-          <br>
-        </p>
-        <h2>
-          <span class="mw-headline" id="Notes">Notes</span>
-        </h2>
-        <ol class="references">
-          <li id="cite_note-enabled-0">
-            <span class="mw-cite-backlink"><a href="#cite_ref-enabled_0-0">^</a></span> <span class="reference-text">Handles &lt;score&gt; tags (default is <code>checked</code>)</span>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.enabled")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.score.enabled__name' class='xocfg_itm_name'>
+            Enabled
+          </div>
+          <div id='xowa.addon.score.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.score.enabled" data-xocfg-key="xowa.addon.score.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.addon.score.enabled__key_box' value='xowa.addon.score.enabled'> <input type='hidden' id='xowa.addon.score.enabled__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.score.enabled_help_div' class='xohelp_div'>
+          <div id='xowa.addon.score.enabled_help_msg' class='xohelp_msg'>
+            <p>
+              Handles &lt;score&gt; tags:
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>checked</b> to process through lilypond binary (lilypond must be installed and its path must be set: <a href="http://xowa.org/home/wiki/Options/Apps.html" id="xolnki_5" title="Options/Apps">Options/Apps</a></span>
+                <b>checked</b> to process through lilypond binary (lilypond must be installed and its path must be set: <a tabindex="-1" href="/wiki/Options/Apps" id="xolnki_36" title="Options/Apps">Options/Apps</a>
               </li>
               <li>
-                <span class="reference-text"><b>unchecked</b> to render text only</span>
+                <b>unchecked</b> to render text only
               </li>
             </ul>
-          </li>
-          <li id="cite_note-1">
-            <span class="mw-cite-backlink"><a href="#cite_ref-1">^</a></span> <span class="reference-text">Converts Lilypond to music scores / midi files . Recommended: <a href="http://www.lilypond.org" rel="nofollow" class="external text">Lilypond</a></span>
-          </li>
-          <li id="cite_note-2">
-            <span class="mw-cite-backlink"><a href="#cite_ref-2">^</a></span> <span class="reference-text">Converts ABC notation to Lilypond . Recommended: <a href="http://www.lilypond.org" rel="nofollow" class="external text">Lilypond</a></span>
-          </li>
-          <li id="cite_note-3">
-            <span class="mw-cite-backlink"><a href="#cite_ref-3">^</a></span> <span class="reference-text">Trims image . Recommended: <a href="http://www.imagemagick.org/" rel="nofollow" class="external text">ImageMagick</a></span>
-          </li>
-          <li id="cite_note-4">
-            <span class="mw-cite-backlink"><a href="#cite_ref-4">^</a></span> <span class="reference-text">Converts midi to ogg . Recommended: <a href="http://timidity.sourceforge.net/" rel="nofollow" class="external text">TiMidity++</a></span>
-          </li>
-        </ol>
+          </div>
+        </div>
+        <h2>
+          Apps
+        </h2>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.apps.lilypond")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.score.apps.lilypond__name' class='xocfg_itm_name'>
+            Lilypond
+          </div>
+          <div id='xowa.addon.score.apps.lilypond__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.apps.lilypond")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}lilypond\usr\bin\lilypond.exe|&quot;-dsafe=#t&quot; -dbackend=ps --png --header=texidoc -dmidi-extension=midi &quot;~{file}&quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.lilypond-exe" data-xocfg-key="xowa.addon.score.apps.lilypond" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="C:\000\100_bin\300_doc\300_aud\200_edit\100_lilypond\usr\bin\lilypond.exe"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.score.apps.lilypond-exe", "Please select a file.");'>&nbsp;</span><br>
+            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.score.apps.lilypond-arg" data-xocfg-key="xowa.addon.score.apps.lilypond" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="&quot;-dsafe=#t&quot; -dbackend=ps --png --header=texidoc -dmidi-extension=midi &quot;~{file}&quot;">
+          </div><input type='hidden' id='xowa.addon.score.apps.lilypond__key_box' value='xowa.addon.score.apps.lilypond'> <input type='hidden' id='xowa.addon.score.apps.lilypond__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.score.apps.lilypond_help_div' class='xohelp_div'>
+          <div id='xowa.addon.score.apps.lilypond_help_msg' class='xohelp_msg'>
+            <p>
+              Converts Lilypond to music scores / midi files (Recommended: <a tabindex="-1" href="http://www.lilypond.org" rel="nofollow" class="external text">Lilypond</a>)
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.apps.abc2ly")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.score.apps.abc2ly__name' class='xocfg_itm_name'>
+            Python
+          </div>
+          <div id='xowa.addon.score.apps.abc2ly__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.apps.abc2ly")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}lilypond\usr\bin\python.exe|abc2ly.py -s &quot;--output=~{target}&quot; &quot;~{source}&quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.abc2ly-exe" data-xocfg-key="xowa.addon.score.apps.abc2ly" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="C:\000\100_bin\300_doc\300_aud\200_edit\100_lilypond\usr\bin\python.exe"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.score.apps.abc2ly-exe", "Please select a file.");'>&nbsp;</span><br>
+            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.score.apps.abc2ly-arg" data-xocfg-key="xowa.addon.score.apps.abc2ly" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="abc2ly.py -s &quot;--output=~{target}&quot; &quot;~{source}&quot;">
+          </div><input type='hidden' id='xowa.addon.score.apps.abc2ly__key_box' value='xowa.addon.score.apps.abc2ly'> <input type='hidden' id='xowa.addon.score.apps.abc2ly__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.score.apps.abc2ly_help_div' class='xohelp_div'>
+          <div id='xowa.addon.score.apps.abc2ly_help_msg' class='xohelp_msg'>
+            <p>
+              Converts ABC notation to Lilypond <a tabindex="-1" href="http://www.lilypond.org" rel="nofollow" class="external text">Lilypond</a>
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.apps.trim_img")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.score.apps.trim_img__name' class='xocfg_itm_name'>
+            ImageMagick - Trim
+          </div>
+          <div id='xowa.addon.score.apps.trim_img__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.apps.trim_img")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}imagemagick\convert|-trim &quot;~{source}&quot; &quot;~{target}&quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.trim_img-exe" data-xocfg-key="xowa.addon.score.apps.trim_img" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}imagemagick\convert"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.score.apps.trim_img-exe", "Please select a file.");'>&nbsp;</span><br>
+            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.score.apps.trim_img-arg" data-xocfg-key="xowa.addon.score.apps.trim_img" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="-trim &quot;~{source}&quot; &quot;~{target}&quot;">
+          </div><input type='hidden' id='xowa.addon.score.apps.trim_img__key_box' value='xowa.addon.score.apps.trim_img'> <input type='hidden' id='xowa.addon.score.apps.trim_img__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.score.apps.trim_img_help_div' class='xohelp_div'>
+          <div id='xowa.addon.score.apps.trim_img_help_msg' class='xohelp_msg'>
+            <p>
+              Trims image <a tabindex="-1" href="http://www.imagemagick.org/" rel="nofollow" class="external text">ImageMagick</a>
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.apps.midi_to_ogg")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.score.apps.midi_to_ogg__name' class='xocfg_itm_name'>
+            Convert midi to ogg
+          </div>
+          <div id='xowa.addon.score.apps.midi_to_ogg__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.apps.midi_to_ogg")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}timidity\timidity|-Ov &quot;--output-file=~{target}&quot; &quot;~{source}&quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.midi_to_ogg-exe" data-xocfg-key="xowa.addon.score.apps.midi_to_ogg" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}timidity\timidity"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.score.apps.midi_to_ogg-exe", "Please select a file.");'>&nbsp;</span><br>
+            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.score.apps.midi_to_ogg-arg" data-xocfg-key="xowa.addon.score.apps.midi_to_ogg" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="-Ov &quot;--output-file=~{target}&quot; &quot;~{source}&quot;">
+          </div><input type='hidden' id='xowa.addon.score.apps.midi_to_ogg__key_box' value='xowa.addon.score.apps.midi_to_ogg'> <input type='hidden' id='xowa.addon.score.apps.midi_to_ogg__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.score.apps.midi_to_ogg_help_div' class='xohelp_div'>
+          <div id='xowa.addon.score.apps.midi_to_ogg_help_msg' class='xohelp_msg'>
+            <p>
+              Converts midi to ogg <a tabindex="-1" href="http://timidity.sourceforge.net/" rel="nofollow" class="external text">TiMidity++</a>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   

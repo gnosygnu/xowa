@@ -5,213 +5,7 @@
   <title>Options/HTML Tidy - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
-  <style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-<style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-
+  
 </head>
 <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
 <div id="mw-page-base" class="noprint"></div>
@@ -223,268 +17,288 @@ li.active a, li.active a:hover
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
-    <div>
-      <table>
-        <tr>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Window'>Apps (basic)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Security'>Apps (advanced)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Import'>Wiki</a>
-          </td>
-          <td class='optionsButton active'>
-            <a class='optionsLink' href='/wiki/Options/HTML'>HTML</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Content_apps'>External apps</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Search_suggest'>Modules</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Math'>Extensions</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Dev'>Misc</a>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="tabs">
+    <div id='xocfg_body'>
+      <div id='xocfg_err'>
+      </div>
       <div>
-        <ul class='tab-links' style='margin-left:0px;'>
-          <li class=''>
-            <a href='/wiki/Options/HTML'>HTML</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Wiki_HTML'>Wiki HTML</a>
-          </li>
-          <li class='active'>
-            <a href='/wiki/Options/HTML_Tidy'>HTML Tidy</a>
-          </li>
-        </ul>
-      </div><br>
-      <div class='tab-content'>
-        <div id="toc" class="toc">
-          <div id="toctitle">
-            <h2>
-              Contents
-            </h2>
-          </div>
-          <ul>
-            <li class="toclevel-1 tocsection-1">
-              <a href="#General"><span class="tocnumber">1</span> <span class="toctext">General</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-2">
-              <a href="#Engine:_tidy_binary"><span class="tocnumber">2</span> <span class="toctext">Engine: tidy binary</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-3">
-              <a href="#Notes"><span class="tocnumber">3</span> <span class="toctext">Notes</span></a>
-            </li>
-          </ul>
-        </div>
-        <div style='float:right; margin-right:10px; margin-top:5px;'>
-          <p>
-            <a href="xowa-cmd:app.user.prefs.save();" accesskey='s'><img src='file:///C:/xowa/bin/any/xowa/file/app.window/save.png' width="16" height="16">Save</a>
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+          <option value='xowa.app.security'>
+            App - Security
+          </option>
+          <option value='xowa.app.startup'>
+            App - Startup
+          </option>
+          <option value='xowa.gui.general'>
+            Gui - General
+          </option>
+          <option value='xowa.gui.tabs'>
+            Gui - Tabs
+          </option>
+          <option value='xowa.gui.url_bar'>
+            Gui - Address bar
+          </option>
+          <option value='xowa.gui.menus'>
+            Gui - Menus
+          </option>
+          <option value='xowa.gui.shortcuts'>
+            Gui - Shortcuts
+          </option>
+          <option value='xowa.wiki.hdumps'>
+            Wiki - HTML Databases
+          </option>
+          <option value='xowa.wiki.edit'>
+            Wiki - Editing
+          </option>
+          <option value='xowa.bldr.general'>
+            Import - General
+          </option>
+          <option value='xowa.bldr.db'>
+            Import - Database
+          </option>
+          <option value='xowa.bldr.page_sync'>
+            Import - Page sync
+          </option>
+          <option value='xowa.bldr.dansguardian'>
+            Import - Dansguardian
+          </option>
+          <option value='xowa.html.css'>
+            HTML - CSS
+          </option>
+          <option value='xowa.html.page'>
+            HTML - Page
+          </option>
+          <option value='xowa.html.tidy' selected='selected'>
+            HTML - Tidy
+          </option>
+          <option value='xowa.html.scripting'>
+            HTML - Scripting
+          </option>
+          <option value='xowa.files.general'>
+            Files - General
+          </option>
+          <option value='xowa.files.apps'>
+            Files - Apps
+          </option>
+          <option value='xowa.addon.search'>
+            Addon - Search
+          </option>
+          <option value='xowa.addon.category'>
+            Addon - Category
+          </option>
+          <option value='xowa.addon.http_server'>
+            Addon - HTTP Server
+          </option>
+          <option value='xowa.addon.scribunto'>
+            Addon - Scribunto
+          </option>
+          <option value='xowa.addon.math'>
+            Addon - Math
+          </option>
+          <option value='xowa.addon.score'>
+            Addon - Score
+          </option>
+          <option value='xowa.addon.popups'>
+            Addon - Popups
+          </option>
+          <option value='xowa.addon.wikibase'>
+            Addon - Wikidata
+          </option>
+          <option value='xowa.dev.general'>
+            Dev - General
+          </option>
+        </select>
+      </div>
+      <div id='cfg_grps'>
+        <div>
+          <p id='page_help_para'>
           </p>
-        </div><br>
-         
-        <p>
-          HTML Tidy is a software library whose purpose is to fix invalid HTML. It is enabled on all Wikimedia wikis. Without HTML Tidy, a small percentage of pages will render incorrectly (broken tables; extended bold; horizontal scroll bar; misplaced images), etc. See <a href="http://xowa.org/home/wiki/Diagnostics/HTML_Tidy.html" id="xolnki_2" title="Diagnostics/HTML Tidy">Diagnostics/HTML_Tidy</a> for examples.
-        </p>
-        <p>
-          For more info about XOWA's customized JTidy jar, see <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Tidy/JTidy.html" id="xolnki_3" title="App/Xtn/Mediawiki/Tidy/JTidy">App/Xtn/Mediawiki/Tidy/JTidy</a>
-        </p>
+          <p>
+            HTML Tidy is a software library whose purpose is to fix invalid HTML. It is enabled on all Wikimedia wikis. Without HTML Tidy, a small percentage of pages will render incorrectly (broken tables; extended bold; horizontal scroll bar; misplaced images), etc. See <a tabindex="-1" href="/wiki/Diagnostics/HTML_Tidy" id="xolnki_24" title="Diagnostics/HTML Tidy">Diagnostics/HTML_Tidy</a> for examples.
+          </p>
+          <p>
+            For more info about XOWA's customized JTidy jar, see <a tabindex="-1" href="/wiki/App/Xtn/Mediawiki/Tidy/JTidy" id="xolnki_25" title="App/Xtn/Mediawiki/Tidy/JTidy">App/Xtn/Mediawiki/Tidy/JTidy</a>
+          </p>
+        </div>
         <h2>
-          <span class="mw-headline" id="General">General</span>
+          General
         </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Enabled: <sup id="cite_ref-enabled_0-0" class="reference"><a href="#cite_note-enabled-0">[1]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.html.tidy.enabled" type="checkbox" class='options_checkbox' id='xowa_prop_0' checked='checked'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Tidy engine: <sup id="cite_ref-engine_type_1-0" class="reference"><a href="#cite_note-engine_type-1">[2]</a></sup>
-            </td>
-            <td>
-              <select xowa_prop="app.html.tidy.engine_type" xowa_prop_list="app.html.tidy.engine_type_list" class="options_textbox" size='2' id='xowa_prop_1'>
-                <option value='tidy'>
-                  tidy
-                </option>
-                <option value='jtidy' selected='selected'>
-                  jtidy
-                </option>
-              </select>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="Engine:_tidy_binary">Engine: tidy binary</span>
-        </h2>
-        <table class="metadata plainlinks ambox ambox-delete" style="">
-          <tr>
-            <td class="mbox-empty-cell">
-            </td>
-            <td class="mbox-text" style="">
-              <p>
-                <span class="mbox-text-span">Linux / Mac OS X users:</span>
-              </p>
-              <ul>
-                <li>
-                  <span class="mbox-text-span">If you choose to use the tidy binary, please download the appropriate one for your platform from <a href="http://tidy.sourceforge.net/" rel="nofollow" class="external free">http://tidy.sourceforge.net/</a></span>
-                </li>
-                <li>
-                  <span class="mbox-text-span">If you enable tidy and XOWA shows no HTML, you will need to disable tidy through a text editor: /xowa/user/anonymous/app/data/cfg/xowa_user_cfg.gfs</span>
-                </li>
-              </ul>
-            </td>
-          </tr>
-        </table>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              tidy library: 
-              <p>
-                <sup id="cite_ref-2" class="reference"><a href="#cite_note-2">[3]</a></sup>
-              </p>
-            </td>
-            <td>
-              <input xowa_prop="app.html.tidy.lib.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_2' value='C:\xowa\bin\windows_64\tidy\tidy'><button id='xowa_prop_2_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_2", "Please select a file.");'>...</button> 
-              <p>
-                <input xowa_prop="app.html.tidy.lib.args" class="options_textbox" style="width: 380px;" id='xowa_prop_3' value='-utf8 --force-output y --quiet y --tidy-mark n --doctype &#39;&#39; --wrap 0 --indent y --quote-nbsp y --literal-attributes y --wrap-attributes n --fix-uri n --fix-backslash n --enclose-block-text y -o "~{target}" "~{source}"'><sup id="cite_ref-engine_tidy_3-0" class="reference"><a href="#cite_note-engine_tidy-3">[4]</a></sup>
-              </p>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="Notes">Notes</span>
-        </h2>
-        <ol class="references">
-          <li id="cite_note-enabled-0">
-            <span class="mw-cite-backlink"><a href="#cite_ref-enabled_0-0">^</a></span> <span class="reference-text">Choose if HTML tidy is enabled (default is <code>checked</code>)</span>
-          </li>
-          <li id="cite_note-engine_type-1">
-            <span class="mw-cite-backlink"><a href="#cite_ref-engine_type_1-0">^</a></span> <span class="reference-text">Choose an HTML tidy engine (default is <code>jtidy</code>)</span>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.tidy.enabled")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.tidy.enabled__name' class='xocfg_itm_name'>
+            Enabled
+          </div>
+          <div id='xowa.html.tidy.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.tidy.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.tidy.enabled" data-xocfg-key="xowa.html.tidy.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.html.tidy.enabled__key_box' value='xowa.html.tidy.enabled'> <input type='hidden' id='xowa.html.tidy.enabled__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.tidy.enabled_help_div' class='xohelp_div'>
+          <div id='xowa.html.tidy.enabled_help_msg' class='xohelp_msg'>
+            <p>
+              Choose if HTML tidy is enabled
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.tidy.engine")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.tidy.engine__name' class='xocfg_itm_name'>
+            Tidy engine
+          </div>
+          <div id='xowa.html.tidy.engine__undo' data-xocfg-type='list:xowa.html.tidy.engine' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.tidy.engine")' title="reset to &quot;jtidy&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <select id="xowa.html.tidy.engine" data-xocfg-key="xowa.html.tidy.engine" data-xocfg-type="list:xowa.html.tidy.engine" accesskey="d" class="xocfg_data__list" size="2">
+              <option value="tidy">
+                tidy
+              </option>
+              <option value="jtidy" selected="selected">
+                jtidy
+              </option>
+            </select>
+          </div><input type='hidden' id='xowa.html.tidy.engine__key_box' value='xowa.html.tidy.engine'> <input type='hidden' id='xowa.html.tidy.engine__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.tidy.engine_help_div' class='xohelp_div'>
+          <div id='xowa.html.tidy.engine_help_msg' class='xohelp_msg'>
+            <p>
+              Choose an HTML tidy engine:
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b><a href="http://tidy.sourceforge.net/" rel="nofollow" class="external text">tidy</a></b>: The same library that is used by WMF wikis. Choose <code>tidy</code> if you want to run the official tidy library that WM uses. Note that you must download the binary if you are on Linux / Mac OS X.</span>
+                <b><a tabindex="-1" href="http://tidy.sourceforge.net/" rel="nofollow" class="external text">tidy</a></b>: The same library that is used by WMF wikis. Choose <code>tidy</code> if you want to run the official tidy library that WM uses. Note that you must download the binary if you are on Linux / Mac OS X.
               </li>
               <li>
-                <span class="reference-text"><b><a href="http://jtidy.sourceforge.net/" rel="nofollow" class="external text">jtidy</a></b>: A Java implementation of the tidy library. Choose <code>jtidy</code> if you don't want to install a platform specific binary. Note that JTidy is not a 100% implementation of tidy, though it appears to be quite close (at about 95%).</span>
+                <b><a tabindex="-1" href="http://jtidy.sourceforge.net/" rel="nofollow" class="external text">jtidy</a></b>: A Java implementation of the tidy library. Choose <code>jtidy</code> if you don't want to install a platform specific binary. Note that JTidy is not a 100% implementation of tidy, though it appears to be quite close (at about 95%).
               </li>
             </ul>
-          </li>
-          <li id="cite_note-2">
-            <span class="mw-cite-backlink"><a href="#cite_ref-2">^</a></span> <span class="reference-text">Path to the tidy binary . Recommended: <a href="http://tidy.sourceforge.net" rel="nofollow" class="external text">tidy</a></span>
-          </li>
-          <li id="cite_note-engine_tidy-3">
-            <span class="mw-cite-backlink"><a href="#cite_ref-engine_tidy_3-0">^</a></span> <span class="reference-text">XOWA defaults to the following tidy arguments:</span>
+          </div>
+        </div>
+        <h2>
+          Tidy binary
+        </h2>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.tidy.cmd")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.tidy.cmd__name' class='xocfg_itm_name'>
+            Process
+          </div>
+          <div id='xowa.html.tidy.cmd__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.tidy.cmd")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}tidy\tidy|-utf8 --force-output y --quiet y --tidy-mark n --doctype '' --wrap 0 --indent y --quote-nbsp y --literal-attributes y --wrap-attributes n --fix-uri n --fix-backslash n --enclose-block-text y -o &quot;~{target}&quot; &quot;~{source}&quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.html.tidy.cmd-exe" data-xocfg-key="xowa.html.tidy.cmd" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}tidy\tidy"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.html.tidy.cmd-exe", "Please select a file.");'>&nbsp;</span><br>
+            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.html.tidy.cmd-arg" data-xocfg-key="xowa.html.tidy.cmd" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="-utf8 --force-output y --quiet y --tidy-mark n --doctype '' --wrap 0 --indent y --quote-nbsp y --literal-attributes y --wrap-attributes n --fix-uri n --fix-backslash n --enclose-block-text y -o &quot;~{target}&quot; &quot;~{source}&quot;">
+          </div><input type='hidden' id='xowa.html.tidy.cmd__key_box' value='xowa.html.tidy.cmd'> <input type='hidden' id='xowa.html.tidy.cmd__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.tidy.cmd_help_div' class='xohelp_div'>
+          <div id='xowa.html.tidy.cmd_help_msg' class='xohelp_msg'>
+            <p>
+              XOWA defaults to the following tidy arguments:
+            </p>
 <pre style='overflow:auto;'>
-<span class="reference-text">-utf8 --force-output y --quiet y --tidy-mark n --doctype '''' --wrap 0 --indent y --quote-nbsp y --literal-attributes y --wrap-attributes n --fix-url n --fix-backslash n --enclose-block-text y -o "~{target}" "~{source}"
-</span>
+-utf8 --force-output y --quiet y --tidy-mark n --doctype '''' --wrap 0 --indent y --quote-nbsp y --literal-attributes y --wrap-attributes n --fix-url n --fix-backslash n --enclose-block-text y -o "~{target}" "~{source}"
 </pre>
             <dl>
               <dt>
-                <span class="reference-text">-utf8</span>
+                -utf8
               </dt>
               <dd>
-                <span class="reference-text">default is ascii</span>
+                default is ascii
               </dd>
               <dt>
-                <span class="reference-text">--force-output y</span>
+                --force-output y
               </dt>
               <dd>
-                <span class="reference-text">always generate output; do not fail on error</span>
+                always generate output; do not fail on error
               </dd>
               <dt>
-                <span class="reference-text">--quiet y</span>
+                --quiet y
               </dt>
               <dd>
-                <span class="reference-text">suppress command-line header</span>
+                suppress command-line header
               </dd>
               <dt>
-                <span class="reference-text">--tidy-mark n</span>
+                --tidy-mark n
               </dt>
               <dd>
-                <span class="reference-text">do not add tidy watermark</span>
+                do not add tidy watermark
               </dd>
               <dt>
-                <span class="reference-text">--doctype ''''</span>
+                --doctype ''''
               </dt>
               <dd>
-                <span class="reference-text">default is auto (TRANSITIONAL); causes weird quirks with short text lines on some wikis (tr.wikibooks.org)</span>
+                default is auto (TRANSITIONAL); causes weird quirks with short text lines on some wikis (tr.wikibooks.org)
               </dd>
               <dt>
-                <span class="reference-text">--wrap 0</span>
+                --wrap 0
               </dt>
               <dd>
-                <span class="reference-text">default is 80; do not limit lines to 80 chars</span>
+                default is 80; do not limit lines to 80 chars
               </dd>
               <dt>
-                <span class="reference-text">--indent y</span>
+                --indent y
               </dt>
               <dd>
-                <span class="reference-text">indent block levels</span>
+                indent block levels
               </dd>
               <dt>
-                <span class="reference-text">--quote-nbsp y</span>
+                --quote-nbsp y
               </dt>
               <dd>
-                <span class="reference-text">preserve nbsp as entities; do not convert to Unicode character 160</span>
+                preserve nbsp as entities; do not convert to Unicode character 160
               </dd>
               <dt>
-                <span class="reference-text">--literal-attributes y</span>
+                --literal-attributes y
               </dt>
               <dd>
-                <span class="reference-text">do not alter whitespace chars in attributes</span>
+                do not alter whitespace chars in attributes
               </dd>
               <dt>
-                <span class="reference-text">--wrap-attributes n</span>
+                --wrap-attributes n
               </dt>
               <dd>
-                <span class="reference-text">do not line-wrap attribute values</span>
+                do not line-wrap attribute values
               </dd>
               <dt>
-                <span class="reference-text">--fix-url n</span>
+                --fix-url n
               </dt>
               <dd>
-                <span class="reference-text">do not escape invalid chars in uris</span>
+                do not escape invalid chars in uris
               </dd>
               <dt>
-                <span class="reference-text">--fix-backslash n</span>
+                --fix-backslash n
               </dt>
               <dd>
-                <span class="reference-text">do not change \ to / in URLs</span>
+                do not change \ to / in URLs
               </dd>
               <dt>
-                <span class="reference-text">--enclose-block-text y</span>
+                --enclose-block-text y
               </dt>
               <dd>
-                <span class="reference-text">always enclose text in element with &lt;p&gt;</span>
+                always enclose text in element with &lt;p&gt;
               </dd>
               <dt>
-                <span class="reference-text">-o ~{target}</span>
+                -o ~{target}
               </dt>
               <dd>
-                <span class="reference-text">target file</span>
+                target file
               </dd>
               <dt>
-                <span class="reference-text">~{source}</span>
+                ~{source}
               </dt>
               <dd>
-                <span class="reference-text">source file</span>
+                source file
               </dd>
             </dl>
-          </li>
-        </ol>
+          </div>
+        </div>
       </div>
     </div>
   

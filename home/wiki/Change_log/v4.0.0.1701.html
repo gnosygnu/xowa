@@ -2,7 +2,7 @@
 <html dir="ltr">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>App/Databases/Overview - XOWA</title>
+  <title>Change log/v4.0.0.1701 - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   
@@ -11,115 +11,235 @@
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>App/Databases/Overview</span></h1>
+  <h1 id="firstHeading" class="firstHeading"><span>Change log/v4.0.0.1701</span></h1>
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
-    <p>
-      XOWA stores wiki data in SQLite databases. These databases can be classified as either Wikitext or HTML
-    </p>
-    <div id="toc" class="toc">
-      <div id="toctitle">
-        <h2>
-          Contents
-        </h2>
-      </div>
-      <ul>
-        <li class="toclevel-1 tocsection-1">
-          <a href="#SQLite"><span class="tocnumber">1</span> <span class="toctext">SQLite</span></a>
-        </li>
-        <li class="toclevel-1 tocsection-2">
-          <a href="#XOWA_Database_sets:_Wikitext_vs_HTML"><span class="tocnumber">2</span> <span class="toctext">XOWA Database sets: Wikitext vs HTML</span></a> 
-          <ul>
-            <li class="toclevel-2 tocsection-3">
-              <a href="#Wikitext"><span class="tocnumber">2.1</span> <span class="toctext">Wikitext</span></a>
-            </li>
-            <li class="toclevel-2 tocsection-4">
-              <a href="#HTML"><span class="tocnumber">2.2</span> <span class="toctext">HTML</span></a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
     <h2>
-      <span class="mw-headline" id="SQLite">SQLite</span>
+      <span class="mw-headline" id="v4.0.0.1701_.282017-01-01.29">v4.0.0.1701 (2017-01-01)</span>
     </h2>
-    <p>
-      XOWA uses SQLite database files to store its data.
-    </p>
-    <ul>
-      <li>
-        Files have an extension of either ".xowa" or ".sqlite3". Note that ".xowa" files are just plain old sqlite3 databases with a renamed extension.
-      </li>
-      <li>
-        Files are limited to 2 GB. Note that SQLite can easily handle files greater than 100 GB. The 2 GB limit is imposed for the following two constraints: 
-        <ul>
-          <li>
-            <b>2 GB limit for SQLite files on Android</b>. I've not found any documentation that states this, but opening a file larger than 2 GB file always fails.
-          </li>
-          <li>
-            <b>4 GB limit for FAT32 on flash cards</b>. FAT32 is an old file-system format. However, it is the only format that is supported natively by all major operating systems. I install a set of wikis on a 200 GB FAT32-formatted microSD card and carry it around from machine to machine
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <p>
-      Various programs can be used to read SQLite3.
-    </p>
-    <ul>
-      <li>
-        <b>sqlite3 command shell</b>: This is the official shell for SQLite. Instructions are available here: the <a href="https://www.sqlite.org/cli.html" rel="nofollow" class="external free">https://www.sqlite.org/cli.html</a> . Download is available here: <a href="https://www.sqlite.org/download.html" rel="nofollow" class="external free">https://www.sqlite.org/download.html</a>
-      </li>
-      <li>
-        <b>SQLite browser</b>. This is a free, open-source GUI that can be useful for those who don't want just a command-line shell. See: <a href="http://sqlitebrowser.org/" rel="nofollow" class="external free">http://sqlitebrowser.org/</a>
-      </li>
-    </ul>
-    <h2>
-      <span class="mw-headline" id="XOWA_Database_sets:_Wikitext_vs_HTML">XOWA Database sets: Wikitext vs HTML</span>
-    </h2>
-    <p>
-      There are two types of database sets for XOWA: Wikitext and HTML
-    </p>
     <h3>
-      <span class="mw-headline" id="Wikitext">Wikitext</span>
+      <span class="mw-headline" id="Wikis">Wikis</span>
     </h3>
     <ul>
       <li>
-        Wikitext is a custom language by MediaWiki to generate HTML. For example, two apostrophes are used for italics: <code>''italics''</code>
+        Package: Publish 2016-12 Italian wikis.
       </li>
+    </ul>
+    <ul>
       <li>
-        Wikitext databases will have <code>-text-</code> in the file name. For example, <code>en.wikipedia.org-text-ns.000.xowa</code>
-      </li>
-      <li>
-        Users can generates this Wikitext set by using either <a href="http://xowa.org/home/wiki/Dashboard/Import/Online.html" id="xolnki_2" title="Dashboard/Import/Online">Dashboard/Import/Online</a> or <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline.html" id="xolnki_3" title="Dashboard/Import/Offline" class="xowa-visited">Dashboard/Import/Offline</a>
-      </li>
-      <li>
-        Wikitext databases have been supported since the very start of XOWA. As such, they have a full set of functionality
-      </li>
-      <li>
-        However, Wikitext databases are slower. They need to take the Wikitext and convert it to HTML. As such, Wikitext databases don't work for Android, nor for other low-spec machines like Raspberry Pi
+        Package: Publish 2016-12 Swahili wikis.
       </li>
     </ul>
     <h3>
-      <span class="mw-headline" id="HTML">HTML</span>
+      <span class="mw-headline" id="PC">PC</span>
     </h3>
+    <p>
+      <b>major</b>
+    </p>
     <ul>
       <li>
-        HTML is the raw text as used by a web browser. For example, the following is used for italics: <code>&lt;i&gt;italics&lt;/i&gt;</code>
+        Cfg: Add new Options system.
       </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="http://xowa.org/home/wiki/Options.html" id="xolnki_2" title="Options">Options</a>
+      </dd>
+    </dl>
+    <ul>
       <li>
-        HTML databases will have <code>-html-</code> in the file name. For example, <code>en.wikipedia.org-html.xowa</code>
+        Setup: Change to semantic versioning.
       </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: 4.0.17011.1 vs 4.1.
+      </dd>
+    </dl>
+    <p>
+      <b>minor</b>
+    </p>
+    <ul>
       <li>
-        Users can generate this HTML database using <a href="http://xowa.org/home/wiki/Dev/Command-line/Thumbs.html" id="xolnki_4" title="Dev/Command-line/Thumbs">Dev/Command-line/Thumbs</a>. However, for most users, they will just download the already-generated HTML databases from <a href="http://archive.org" rel="nofollow" class="external free">http://archive.org</a> through <a href="http://xowa.org/home/wiki/Special:XowaDownloadCentral.html" id="xolnki_5" title="Special:XowaDownloadCentral" class="xowa-visited">Special:XowaDownloadCentral</a>
+        Wikibase: Fix 'Attached KML error' on many dozen en.w pages. {detected by Ope30}
       </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Do not cast 'numeric-id' to 'string'; leave as 'int'.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: Route map: Attached KML Error: item specified on Wikidata, or in |wikidata=, is not a KML file (P31→Q26267864 not found).
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Hollywood_Walk_of_Fame" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Hollywood_Walk_of_Fame</a>
+      </dd>
+    </dl>
+    <ul>
       <li>
-        HTML databases have only been supported recently (as of 2016-06). As such, they are missing a small percentage of functionality. The most significant piece of that functionality is Popups, but there may be other features.
+        Gui: Allow Ctrl+Insert to be used to copy text. {detected by William}
       </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Do not override Ctrl+Insert with Ctrl+Minus.
+      </dd>
+    </dl>
+    <ul>
       <li>
-        HTML databases are fast, as they don't need to convert Wikitext to HTML. As such, HTML databases are used for Android and recommended for Raspberry Pi
+        Gui: Support numpad keys for page find. {detected by William}
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Gui: Add option to auto-remember last tab opened.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Gui: Support Command key on Mac OS X for keyboard shortcuts.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Html: Remove horizontal scroll bar on some Mac OS X configurations.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Replace width:20vw with width:20em in /xowa/user/wiki/home/html/xowa_common.css.
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Edit: Add section-editing. {requested by anonymous}
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Cfg: Add better support for Shortcuts.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Category: Show Hidden Categories in "Hidden" section.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/A" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/A</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Search.Suggest: Do not add * at end of search phrase; use auto-wildcard option instead.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Search: Fix 'url_default' not working.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Xtn.Popups: Fix multiple blue lines at bottom of page whenever new popup shows.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Suppress attributes from mw-body class.
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Redirect: Allow redirects to Special pages.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: #REDIRECT [[Special:XowaCfg]].
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="http://xowa.org/home/wiki/Options.html" id="xolnki_3" title="Options">Options</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Gui: Allow navigation to urls with arguments.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: Special:XowaCfg%3Fgrp%3Dxowa.html.css.
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Mass_parse: Fix memory leak / slow performance due to over-zealous page caching.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Add two levels of permenance to page cache; add separate ifexists cache.
+      </dd>
+    </dl>
+    <p>
+      <b>trivial</b>
+    </p>
+    <ul>
+      <li>
+        Cfg: Remove 'Gui - Url bar' Symbols.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Cfg: Replace 'Custom wiki commands' with 'Unzip bz2 file'.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Cfg: Remove Search Suggest 'AllPages look-ahead', 'AllPages minimum length', and 'Log enabled'.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Cfg: Remove config page for Firefox Addon.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Wikibase: Add "fiwikivoyage" to list of known wikis.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Html: Remove content_editable support.
+      </li>
+    </ul>
+    <p>
+      <b>dev</b>
+    </p>
+    <ul>
+      <li>
+        Math: Refactor Math classes.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Mass_parse: Refactor make cmd to merge other wkr tables such as log_basic_temp.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Gui: Refactor IptKey; in particular, use SWING and SWT constants where possible; also handle modifers.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Mass_parse: Improve performance when returning Keyvals from Scribunto function.
       </li>
     </ul>
   

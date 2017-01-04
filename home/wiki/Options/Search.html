@@ -5,213 +5,7 @@
   <title>Options/Search - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
-  <style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-<style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-
+  
 </head>
 <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
 <div id="mw-page-base" class="noprint"></div>
@@ -223,272 +17,402 @@ li.active a, li.active a:hover
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
-    <div>
-      <table>
-        <tr>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Window'>Apps (basic)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Security'>Apps (advanced)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Import'>Wiki</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/HTML'>HTML</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Content_apps'>External apps</a>
-          </td>
-          <td class='optionsButton active'>
-            <a class='optionsLink' href='/wiki/Options/Search_suggest'>Modules</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Math'>Extensions</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Dev'>Misc</a>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="tabs">
+    <div id='xocfg_body'>
+      <div id='xocfg_err'>
+      </div>
       <div>
-        <ul class='tab-links' style='margin-left:0px;'>
-          <li class=''>
-            <a href='/wiki/Options/Search_suggest'>Search suggest</a>
-          </li>
-          <li class='active'>
-            <a href='/wiki/Options/Search'>Search</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Popups'>Popups</a>
-          </li>
-        </ul>
-      </div><br>
-      <div class='tab-content'>
-        <div id="toc" class="toc">
-          <div id="toctitle">
-            <h2>
-              Contents
-            </h2>
-          </div>
-          <ul>
-            <li class="toclevel-1 tocsection-1">
-              <a href="#Search"><span class="tocnumber">1</span> <span class="toctext">Search</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-2">
-              <a href="#Notes"><span class="tocnumber">2</span> <span class="toctext">Notes</span></a>
-            </li>
-          </ul>
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+          <option value='xowa.app.security'>
+            App - Security
+          </option>
+          <option value='xowa.app.startup'>
+            App - Startup
+          </option>
+          <option value='xowa.gui.general'>
+            Gui - General
+          </option>
+          <option value='xowa.gui.tabs'>
+            Gui - Tabs
+          </option>
+          <option value='xowa.gui.url_bar'>
+            Gui - Address bar
+          </option>
+          <option value='xowa.gui.menus'>
+            Gui - Menus
+          </option>
+          <option value='xowa.gui.shortcuts'>
+            Gui - Shortcuts
+          </option>
+          <option value='xowa.wiki.hdumps'>
+            Wiki - HTML Databases
+          </option>
+          <option value='xowa.wiki.edit'>
+            Wiki - Editing
+          </option>
+          <option value='xowa.bldr.general'>
+            Import - General
+          </option>
+          <option value='xowa.bldr.db'>
+            Import - Database
+          </option>
+          <option value='xowa.bldr.page_sync'>
+            Import - Page sync
+          </option>
+          <option value='xowa.bldr.dansguardian'>
+            Import - Dansguardian
+          </option>
+          <option value='xowa.html.css'>
+            HTML - CSS
+          </option>
+          <option value='xowa.html.page'>
+            HTML - Page
+          </option>
+          <option value='xowa.html.tidy'>
+            HTML - Tidy
+          </option>
+          <option value='xowa.html.scripting'>
+            HTML - Scripting
+          </option>
+          <option value='xowa.files.general'>
+            Files - General
+          </option>
+          <option value='xowa.files.apps'>
+            Files - Apps
+          </option>
+          <option value='xowa.addon.search' selected='selected'>
+            Addon - Search
+          </option>
+          <option value='xowa.addon.category'>
+            Addon - Category
+          </option>
+          <option value='xowa.addon.http_server'>
+            Addon - HTTP Server
+          </option>
+          <option value='xowa.addon.scribunto'>
+            Addon - Scribunto
+          </option>
+          <option value='xowa.addon.math'>
+            Addon - Math
+          </option>
+          <option value='xowa.addon.score'>
+            Addon - Score
+          </option>
+          <option value='xowa.addon.popups'>
+            Addon - Popups
+          </option>
+          <option value='xowa.addon.wikibase'>
+            Addon - Wikidata
+          </option>
+          <option value='xowa.dev.general'>
+            Dev - General
+          </option>
+        </select>
+      </div>
+      <div id='cfg_grps'>
+        <div>
+          <p id='page_help_para'>
+          </p>
         </div>
-        <p>
-          This page provides options for Search. Note that configuration changes will apply automatically to new searches. However, any currently loaded searches must be reloaded to pick up the new configuration change.
-        </p>
-        <p>
-          You can also test your configuration changes by going to this link: <a href="https://simple.wikipedia.org/wiki/Special:Search/Earth*" rel="nofollow" class="external free">https://simple.wikipedia.org/wiki/Special:Search/Earth*</a> or <a href="https://en.wikipedia.org/wiki/Special:Search/Earth*" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Special:Search/Earth*</a>
-        </p>
-        <p>
-          For more infomation, visit the <a href="http://xowa.org/home/wiki/App/Search.html" id="xolnki_2" title="App/Search">Search help page</a><br>
-        </p>
-        <div style='float:right;'>
-          <div style='float:right; margin-right:10px; margin-top:5px;'>
+        <h2>
+          Suggest box
+        </h2>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.suggest.enabled")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.search.suggest.enabled__name' class='xocfg_itm_name'>
+            Enabled
+          </div>
+          <div id='xowa.addon.search.suggest.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.suggest.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.search.suggest.enabled" data-xocfg-key="xowa.addon.search.suggest.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.addon.search.suggest.enabled__key_box' value='xowa.addon.search.suggest.enabled'> <input type='hidden' id='xowa.addon.search.suggest.enabled__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.search.suggest.enabled_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.suggest.enabled_help_msg' class='xohelp_msg'>
             <p>
-              <a href="xowa-cmd:app.user.prefs.save();" accesskey='s'><img src='file:///C:/xowa/bin/any/xowa/file/app.window/save.png' width="16" height="16">Save</a>
+              Choose one of the following:
             </p>
-          </div><br>
-        </div><br>
-         
-        <h2>
-          <span class="mw-headline" id="Search">Search</span>
-        </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Results per page: <sup id="cite_ref-results_per_page_0-0" class="reference"><a href="#cite_note-results_per_page-0">[1]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.special.search.results_per_page" class="options_textbox" id='xowa_prop_0' value='100'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Run database search in background: <sup id="cite_ref-async_db_1-0" class="reference"><a href="#cite_note-async_db-1">[2]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.special.search.async_db" type="checkbox" class="options_checkbox" id='xowa_prop_1' checked='checked'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Auto-wildcard: <sup id="cite_ref-auto_wildcard_2-0" class="reference"><a href="#cite_note-auto_wildcard-2">[3]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.gui.search_suggest.auto_wildcard" type="checkbox" class="options_checkbox" id='xowa_prop_2'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Default url search arguments: <sup id="cite_ref-args_default_3-0" class="reference"><a href="#cite_note-args_default-3">[4]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.gui.search_suggest.args_default" class="options_textbox" id='xowa_prop_3' value=''>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Multi-wiki search wikis: <sup id="cite_ref-multi_wikis_4-0" class="reference"><a href="#cite_note-multi_wikis-4">[5]</a></sup>
-            </td>
-            <td>
-<textarea xowa_prop="xowa.api.special.search.multi_wikis" class="options_textarea" style="width: 600px; height:100px;" accesskey=',' id='xowa_prop_4'>
-&lt;any&gt;|&lt;self&gt;
-</textarea>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Multi-wiki sort order: <sup id="cite_ref-multi_sorts_5-0" class="reference"><a href="#cite_note-multi_sorts-5">[6]</a></sup>
-            </td>
-            <td>
-<textarea xowa_prop="xowa.api.special.search.multi_sorts" class="options_textarea" style="width: 600px; height:100px;" accesskey=',' id='xowa_prop_5'>
-&lt;any&gt;|&lt;self&gt;,*.wikipedia,*.wikivoyage,*.wiktionary,*.wikisource,*.wikiquote,*.wikibooks,*.wikiversity,*.wikinews
-</textarea>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="Notes">Notes</span>
-        </h2>
-        <ol class="references">
-          <li id="cite_note-results_per_page-0">
-            <span class="mw-cite-backlink"><a href="#cite_ref-results_per_page_0-0">^</a></span> <span class="reference-text">Enter number of results to show per page: (default is <code>20</code>) .</span>
-          </li>
-          <li id="cite_note-async_db-1">
-            <span class="mw-cite-backlink"><a href="#cite_ref-async_db_1-0">^</a></span> <span class="reference-text">Choose one of the following: (default is <code>checked</code>) .</span>
             <ul>
               <li>
-                <span class="reference-text"><b>checked</b>: XOWA continues while database searches are done in the background. These searches return results faster, especially for big queries.</span>
+                <b>checked</b>: Search suggest enabled (typing in search box will dynamically retrieve suggestions)
               </li>
               <li>
-                <span class="reference-text"><b>unchecked</b>: XOWA waits until the database search completes. This will often be slower, but will be more stable than background searches.</span>
+                <b>unchecked</b>: Search suggest disabled
               </li>
             </ul>
-          </li>
-          <li id="cite_note-auto_wildcard-2">
-            <span class="mw-cite-backlink"><a href="#cite_ref-auto_wildcard_2-0">^</a></span> <span class="reference-text">Choose one of the following: (default is <code>checked</code>)</span>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.suggest.results_max")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.search.suggest.results_max__name' class='xocfg_itm_name'>
+            Max results
+          </div>
+          <div id='xowa.addon.search.suggest.results_max__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.suggest.results_max")' title="reset to &quot;25&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.search.suggest.results_max" data-xocfg-key="xowa.addon.search.suggest.results_max" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="25">
+          </div><input type='hidden' id='xowa.addon.search.suggest.results_max__key_box' value='xowa.addon.search.suggest.results_max'> <input type='hidden' id='xowa.addon.search.suggest.results_max__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.search.suggest.results_max_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.suggest.results_max_help_msg' class='xohelp_msg'>
+            <p>
+              Maximum number of search suggestions
+            </p>
+          </div>
+        </div>
+        <h2>
+          Special:Search
+        </h2>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.special.results_per_page")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.search.special.results_per_page__name' class='xocfg_itm_name'>
+            Results per page
+          </div>
+          <div id='xowa.addon.search.special.results_per_page__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.special.results_per_page")' title="reset to &quot;100&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.search.special.results_per_page" data-xocfg-key="xowa.addon.search.special.results_per_page" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="100">
+          </div><input type='hidden' id='xowa.addon.search.special.results_per_page__key_box' value='xowa.addon.search.special.results_per_page'> <input type='hidden' id='xowa.addon.search.special.results_per_page__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.search.special.results_per_page_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.special.results_per_page_help_msg' class='xohelp_msg'>
+            <p>
+              Enter number of results to show per page
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.special.async_db")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.search.special.async_db__name' class='xocfg_itm_name'>
+            Run database search in background
+          </div>
+          <div id='xowa.addon.search.special.async_db__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.special.async_db")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.search.special.async_db" data-xocfg-key="xowa.addon.search.special.async_db" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.addon.search.special.async_db__key_box' value='xowa.addon.search.special.async_db'> <input type='hidden' id='xowa.addon.search.special.async_db__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.search.special.async_db_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.special.async_db_help_msg' class='xohelp_msg'>
+            <p>
+              Choose one of the following:
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>checked</b>: Search will automatically append wildcard if no wildcards are present. For example:</span>
+                <b>checked</b>: XOWA continues while database searches are done in the background. These searches return results faster, especially for big queries.
+              </li>
+              <li>
+                <b>unchecked</b>: XOWA waits until the database search completes. This will often be slower, but will be more stable than background searches.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.special.auto_wildcard")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.search.special.auto_wildcard__name' class='xocfg_itm_name'>
+            Auto-wildcard
+          </div>
+          <div id='xowa.addon.search.special.auto_wildcard__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.special.auto_wildcard")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.search.special.auto_wildcard" data-xocfg-key="xowa.addon.search.special.auto_wildcard" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.addon.search.special.auto_wildcard__key_box' value='xowa.addon.search.special.auto_wildcard'> <input type='hidden' id='xowa.addon.search.special.auto_wildcard__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.search.special.auto_wildcard_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.special.auto_wildcard_help_msg' class='xohelp_msg'>
+            <p>
+              Choose one of the following:
+            </p>
+            <ul>
+              <li>
+                <b>checked</b>: Search will automatically append wildcard if no wildcards are present. For example:
               </li>
             </ul>
             <dl>
               <dd>
                 <dl>
                   <dd>
-                    <span class="reference-text"><code>Earth</code> will become <code>Earth*</code></span>
+                    <code>Earth</code> will become <code>Earth*</code>
                   </dd>
                   <dd>
-                    <span class="reference-text"><code>Ea*rth</code> will stay <code>Ea*rth</code> b/c it already has a wildcard</span>
+                    <code>Ea*rth</code> will stay <code>Ea*rth</code> b/c it already has a wildcard
                   </dd>
                 </dl>
               </dd>
             </dl>
             <ul>
               <li>
-                <span class="reference-text"><b>unchecked</b>: Search will not apply any automatic behavior</span>
+                <b>unchecked</b>: Search will not apply any automatic behavior
               </li>
             </ul>
-          </li>
-          <li id="cite_note-args_default-3">
-            <span class="mw-cite-backlink"><a href="#cite_ref-args_default_3-0">^</a></span> <span class="reference-text">Enter default args for every search: (default is ) . Examples include:</span>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.special.args_default")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.search.special.args_default__name' class='xocfg_itm_name'>
+            Default url search arguments
+          </div>
+          <div id='xowa.addon.search.special.args_default__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.special.args_default")' title="reset to &quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.search.special.args_default" data-xocfg-key="xowa.addon.search.special.args_default" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="">
+          </div><input type='hidden' id='xowa.addon.search.special.args_default__key_box' value='xowa.addon.search.special.args_default'> <input type='hidden' id='xowa.addon.search.special.args_default__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.search.special.args_default_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.special.args_default_help_msg' class='xohelp_msg'>
+            <p>
+              Enter default args for every search. Examples include:
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>ns*=1</b> will search across all namespaces (current default is to search main namespace only)</span>
+                <b>ns*=1</b> will search across all namespaces (current default is to search main namespace only)
               </li>
               <li>
-                <span class="reference-text"><b>ns0=1&amp;ns14=1</b> will search across the main (0) and category (14) namespaces</span>
+                <b>ns0=1&amp;ns14=1</b> will search across the main (0) and category (14) namespaces
               </li>
             </ul>
-          </li>
-          <li id="cite_note-multi_wikis-4">
-            <span class="mw-cite-backlink"><a href="#cite_ref-multi_wikis_4-0">^</a></span> <span class="reference-text">Enter wikis to search: (default is <code>&lt;any&gt;|&lt;self&gt;</code>) .</span>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.special.multi_wikis")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.search.special.multi_wikis__name' class='xocfg_itm_name'>
+            Multi-wiki search wikis
+          </div>
+          <div id='xowa.addon.search.special.multi_wikis__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.special.multi_wikis")' title="reset to &quot;&lt;any&gt;|&lt;self&gt;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+<textarea id="xowa.addon.search.special.multi_wikis" data-xocfg-key="xowa.addon.search.special.multi_wikis" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
+</textarea>
+            |
+          </div><input type='hidden' id='xowa.addon.search.special.multi_wikis__key_box' value='xowa.addon.search.special.multi_wikis'> <input type='hidden' id='xowa.addon.search.special.multi_wikis__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.search.special.multi_wikis_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.special.multi_wikis_help_msg' class='xohelp_msg'>
+            <p>
+              Enter wikis to search:
+            </p>
             <ul>
               <li>
-                <span class="reference-text">For example:</span>
+                For example:
               </li>
             </ul>
 <pre>
-<span class="reference-text">en.wikipedia.org|&lt;same_lang&gt;
+en.wikipedia.org|&lt;same_lang&gt;
 en.wiktionary.org|&lt;same_type&gt;
 fr.wikivoyage.org,en.wikivoyage.org|&lt;self&gt;,en.wikipedia.org
 &lt;any&gt;|&lt;self&gt;
-</span>
 </pre>
             <ul>
               <li>
-                <span class="reference-text">Line 1 means "For English Wikipedia, seach all English wikis, such as English Wiktionary, English Wikisource, English Wikivoyage, etc."</span>
+                Line 1 means "For English Wikipedia, seach all English wikis, such as English Wiktionary, English Wikisource, English Wikivoyage, etc."
               </li>
               <li>
-                <span class="reference-text">Line 2 means "For English Wiktionary, search all Wiktionarys, such as English Wiktionary, French Wiktionary, German Wiktionary, etc."</span>
+                Line 2 means "For English Wiktionary, search all Wiktionarys, such as English Wiktionary, French Wiktionary, German Wiktionary, etc."
               </li>
               <li>
-                <span class="reference-text">Line 3 means "For French Wikivoyage and English Wikivoyage, search the current wiki and English Wikipedia"</span>
+                Line 3 means "For French Wikivoyage and English Wikivoyage, search the current wiki and English Wikipedia"
               </li>
               <li>
-                <span class="reference-text">Line 4 means "For any wiki, search only the current wiki"</span>
-              </li>
-            </ul><span class="reference-text">The multi-wikis criteria has the following format:</span>
-            <ul>
-              <li>
-                <span class="reference-text"><b>Line-based</b>: Each line represents a separate rule. A wiki will be compared against the rule, and if it matches, only that rule will apply. If it doesn't match, it goes on to the next line.</span>
-              </li>
-              <li>
-                <span class="reference-text"><b>Match</b>: The match part is the text before the first pipe (<code>|</code>). Think of this as "when in this wiki...". This can be a wiki domain (en.wikipedia.org), a languages wildcard (en.*), a type wildcard (*.wikipedia) or the reserved word &lt;any&gt;). In addition, multiple terms can be chained together (en.wikipedia.org,fr.wikipedia.org).</span>
-              </li>
-              <li>
-                <span class="reference-text"><b>Include</b>: Think of this as "...search these wikis". This can use any term as Match (domain, wildcard, reserved word) but can also use the reserved words: <code>&lt;self&gt;</code>, <code>&lt;same_lang&gt;</code> <code>&lt;same_type&gt;</code></span>
-              </li>
-            </ul><span class="reference-text">Terms:</span>
-            <ul>
-              <li>
-                <span class="reference-text"><code>&lt;any&gt;</code>: matches any wiki. For example, in en.wikipedia.org, any wiki is matched, including home, en.wikipedia.org, fr.wiktionary.org, de.wikisource.org, etc..</span>
-              </li>
-              <li>
-                <span class="reference-text"><code>&lt;self&gt;</code>: matches only the current wiki. For example, in en.wikipedia.org, only en.wikipedia.org is matched.</span>
-              </li>
-              <li>
-                <span class="reference-text"><code>&lt;same_lang&gt;</code>: matches wikis with the same language. For example, in en.wikipedia.org, en.wiktionary.org, en.wikisource.org, etc. are matched. However, fr.wiktionary.org and de.wikisource.org are not matched.</span>
-              </li>
-              <li>
-                <span class="reference-text"><code>&lt;same_type&gt;</code>: matches wikis with the same type. For example, in en.wikipedia.org, fr.wikipedia.org, de.wikipedia.org, ru.wikipedia.org, etc. are matched. However, en.wiktionary.org, en.wikisource.org, etc. are not matched.</span>
-              </li>
-              <li>
-                <span class="reference-text"><code>{language}.*</code>: matches all wikis of that language. For example, "en.*" will match en.wikipedia.org, en.wiktionary.org, en.wikisource.org, etc regardless of the current wiki</span>
-              </li>
-              <li>
-                <span class="reference-text"><code>*.{type}</code>: matches all wikis of that type. For example, "*.wikipedia" will match en.wikipedia.org, fr.wikipedia.org, de.wikipedia.org, etc</span>
+                Line 4 means "For any wiki, search only the current wiki"
               </li>
             </ul>
-          </li>
-          <li id="cite_note-multi_sorts-5">
-            <span class="mw-cite-backlink"><a href="#cite_ref-multi_sorts_5-0">^</a></span> <span class="reference-text">Enter sorting-order for multiple wikis: (default is <code>&lt;any&gt;|&lt;self&gt;,*.wikipedia,*.wikivoyage,*.wiktionary,*.wikisource,*.wikiquote,*.wikibooks,*.wikiversity,*.wikinews</code> ) . The sort criteria has the following format:</span>
+            <p>
+              The multi-wikis criteria has the following format:
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>Line-based</b>: Each line represents a separate rule. A wiki will be compared against the rule, and if it matches, only that rule will apply. If it doesn't match, it goes on to the next line.</span>
+                <b>Line-based</b>: Each line represents a separate rule. A wiki will be compared against the rule, and if it matches, only that rule will apply. If it doesn't match, it goes on to the next line.
               </li>
               <li>
-                <span class="reference-text"><b>Match</b>: The match part is the text before the first pipe (<code>|</code>). Think of this as "when in this wiki...". This can be a wiki domain (en.wikipedia.org), a languages wildcard (en.*), a type wildcard (*.wikipedia) or the reserved word &lt;any&gt;). In addition, multiple terms can be chained together (en.wikipedia.org,fr.wikipedia.org).</span>
+                <b>Match</b>: The match part is the text before the first pipe (<code>|</code>). Think of this as "when in this wiki...". This can be a wiki domain (en.wikipedia.org), a languages wildcard (en.*), a type wildcard (*.wikipedia) or the reserved word &lt;any&gt;). In addition, multiple terms can be chained together (en.wikipedia.org,fr.wikipedia.org).
               </li>
               <li>
-                <span class="reference-text"><b>Sort</b>: Think of this as "...sort according to following order".</span>
-              </li>
-              <li>
-                <span class="reference-text">For example, consider if the following wikis are searched: en.wikipedia.org and en.wiktionary.org. Since en.wikipedia.org matches *.wikipedia.org, it will be sorted before en.wiktionary.org (which matches *.wiktionary.org)</span>
+                <b>Include</b>: Think of this as "...search these wikis". This can use any term as Match (domain, wildcard, reserved word) but can also use the reserved words: <code>&lt;self&gt;</code>, <code>&lt;same_lang&gt;</code> <code>&lt;same_type&gt;</code>
               </li>
             </ul>
-          </li>
-        </ol>
+            <p>
+              Terms:
+            </p>
+            <ul>
+              <li>
+                <code>&lt;any&gt;</code>: matches any wiki. For example, in en.wikipedia.org, any wiki is matched, including home, en.wikipedia.org, fr.wiktionary.org, de.wikisource.org, etc..
+              </li>
+              <li>
+                <code>&lt;self&gt;</code>: matches only the current wiki. For example, in en.wikipedia.org, only en.wikipedia.org is matched.
+              </li>
+              <li>
+                <code>&lt;same_lang&gt;</code>: matches wikis with the same language. For example, in en.wikipedia.org, en.wiktionary.org, en.wikisource.org, etc. are matched. However, fr.wiktionary.org and de.wikisource.org are not matched.
+              </li>
+              <li>
+                <code>&lt;same_type&gt;</code>: matches wikis with the same type. For example, in en.wikipedia.org, fr.wikipedia.org, de.wikipedia.org, ru.wikipedia.org, etc. are matched. However, en.wiktionary.org, en.wikisource.org, etc. are not matched.
+              </li>
+              <li>
+                <code>{language}.*</code>: matches all wikis of that language. For example, "en.*" will match en.wikipedia.org, en.wiktionary.org, en.wikisource.org, etc regardless of the current wiki
+              </li>
+              <li>
+                <code>*.{type}</code>: matches all wikis of that type. For example, "*.wikipedia" will match en.wikipedia.org, fr.wikipedia.org, de.wikipedia.org, etc
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.special.multi_sorts")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.search.special.multi_sorts__name' class='xocfg_itm_name'>
+            Multi-wiki sort order
+          </div>
+          <div id='xowa.addon.search.special.multi_sorts__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.special.multi_sorts")' title="reset to &quot;&lt;any&gt;|&lt;self&gt;,*.wikipedia,*.wikivoyage,*.wiktionary,*.wikisource,*.wikiquote,*.wikibooks,*.wikiversity,*.wikinews&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+<textarea id="xowa.addon.search.special.multi_sorts" data-xocfg-key="xowa.addon.search.special.multi_sorts" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
+</textarea>
+            |,*.wikipedia,*.wikivoyage,*.wiktionary,*.wikisource,*.wikiquote,*.wikibooks,*.wikiversity,*.wikinews
+          </div><input type='hidden' id='xowa.addon.search.special.multi_sorts__key_box' value='xowa.addon.search.special.multi_sorts'> <input type='hidden' id='xowa.addon.search.special.multi_sorts__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.search.special.multi_sorts_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.special.multi_sorts_help_msg' class='xohelp_msg'>
+            <p>
+              Enter sorting-order for multiple wikis: &lt;any&gt;|&lt;self&gt;,*.wikipedia,*.wikivoyage,*.wiktionary,*.wikisource,*.wikiquote,*.wikibooks,*.wikiversity,*.wikinews }}. The sort criteria has the following format:
+            </p>
+            <ul>
+              <li>
+                <b>Line-based</b>: Each line represents a separate rule. A wiki will be compared against the rule, and if it matches, only that rule will apply. If it doesn't match, it goes on to the next line.
+              </li>
+              <li>
+                <b>Match</b>: The match part is the text before the first pipe (<code>|</code>). Think of this as "when in this wiki...". This can be a wiki domain (en.wikipedia.org), a languages wildcard (en.*), a type wildcard (*.wikipedia) or the reserved word &lt;any&gt;). In addition, multiple terms can be chained together (en.wikipedia.org,fr.wikipedia.org).
+              </li>
+              <li>
+                <b>Sort</b>: Think of this as "...sort according to following order".
+              </li>
+              <li>
+                For example, consider if the following wikis are searched: en.wikipedia.org and en.wiktionary.org. Since en.wikipedia.org matches *.wikipedia.org, it will be sorted before en.wiktionary.org (which matches *.wiktionary.org)
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   

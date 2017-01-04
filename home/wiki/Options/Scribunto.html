@@ -5,213 +5,7 @@
   <title>Options/Scribunto - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
-  <style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-<style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-
+  
 </head>
 <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
 <div id="mw-page-base" class="noprint"></div>
@@ -223,261 +17,322 @@ li.active a, li.active a:hover
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
-    <div>
-      <table>
-        <tr>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Window'>Apps (basic)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Security'>Apps (advanced)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Import'>Wiki</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/HTML'>HTML</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Content_apps'>External apps</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Search_suggest'>Modules</a>
-          </td>
-          <td class='optionsButton active'>
-            <a class='optionsLink' href='/wiki/Options/Math'>Extensions</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Dev'>Misc</a>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="tabs">
+    <div id='xocfg_body'>
+      <div id='xocfg_err'>
+      </div>
       <div>
-        <ul class='tab-links' style='margin-left:0px;'>
-          <li class=''>
-            <a href='/wiki/Options/Math'>Math</a>
-          </li>
-          <li class='active'>
-            <a href='/wiki/Options/Scribunto'>Scribunto</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Score'>Score</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Wikibase'>Wikibase</a>
-          </li>
-        </ul>
-      </div><br>
-      <div class='tab-content'>
-        <div id="toc" class="toc">
-          <div id="toctitle">
-            <h2>
-              Contents
-            </h2>
-          </div>
-          <ul>
-            <li class="toclevel-1 tocsection-1">
-              <a href="#General"><span class="tocnumber">1</span> <span class="toctext">General</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-2">
-              <a href="#Lua_options"><span class="tocnumber">2</span> <span class="toctext">Lua options</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-3">
-              <a href="#Notes"><span class="tocnumber">3</span> <span class="toctext">Notes</span></a>
-            </li>
-          </ul>
-        </div>
-        <div style='float:right; margin-right:10px; margin-top:5px;'>
-          <p>
-            <a href="xowa-cmd:app.user.prefs.save();" accesskey='s'><img src='file:///C:/xowa/bin/any/xowa/file/app.window/save.png' width="16" height="16">Save</a>
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+          <option value='xowa.app.security'>
+            App - Security
+          </option>
+          <option value='xowa.app.startup'>
+            App - Startup
+          </option>
+          <option value='xowa.gui.general'>
+            Gui - General
+          </option>
+          <option value='xowa.gui.tabs'>
+            Gui - Tabs
+          </option>
+          <option value='xowa.gui.url_bar'>
+            Gui - Address bar
+          </option>
+          <option value='xowa.gui.menus'>
+            Gui - Menus
+          </option>
+          <option value='xowa.gui.shortcuts'>
+            Gui - Shortcuts
+          </option>
+          <option value='xowa.wiki.hdumps'>
+            Wiki - HTML Databases
+          </option>
+          <option value='xowa.wiki.edit'>
+            Wiki - Editing
+          </option>
+          <option value='xowa.bldr.general'>
+            Import - General
+          </option>
+          <option value='xowa.bldr.db'>
+            Import - Database
+          </option>
+          <option value='xowa.bldr.page_sync'>
+            Import - Page sync
+          </option>
+          <option value='xowa.bldr.dansguardian'>
+            Import - Dansguardian
+          </option>
+          <option value='xowa.html.css'>
+            HTML - CSS
+          </option>
+          <option value='xowa.html.page'>
+            HTML - Page
+          </option>
+          <option value='xowa.html.tidy'>
+            HTML - Tidy
+          </option>
+          <option value='xowa.html.scripting'>
+            HTML - Scripting
+          </option>
+          <option value='xowa.files.general'>
+            Files - General
+          </option>
+          <option value='xowa.files.apps'>
+            Files - Apps
+          </option>
+          <option value='xowa.addon.search'>
+            Addon - Search
+          </option>
+          <option value='xowa.addon.category'>
+            Addon - Category
+          </option>
+          <option value='xowa.addon.http_server'>
+            Addon - HTTP Server
+          </option>
+          <option value='xowa.addon.scribunto' selected='selected'>
+            Addon - Scribunto
+          </option>
+          <option value='xowa.addon.math'>
+            Addon - Math
+          </option>
+          <option value='xowa.addon.score'>
+            Addon - Score
+          </option>
+          <option value='xowa.addon.popups'>
+            Addon - Popups
+          </option>
+          <option value='xowa.addon.wikibase'>
+            Addon - Wikidata
+          </option>
+          <option value='xowa.dev.general'>
+            Dev - General
+          </option>
+        </select>
+      </div>
+      <div id='cfg_grps'>
+        <div>
+          <p id='page_help_para'>
           </p>
-        </div><br>
-         
+        </div>
         <h2>
-          <span class="mw-headline" id="General">General</span>
+          General
         </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Enabled: <sup id="cite_ref-enabled_0-0" class="reference"><a href="#cite_note-enabled-0">[1]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.xtns.get('scribunto').enabled" type="checkbox" class='options_checkbox' accesskey="e" id='xowa_prop_0' checked='checked'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Lua engine: <sup id="cite_ref-engine_type_1-0" class="reference"><a href="#cite_note-engine_type-1">[2]</a></sup>
-            </td>
-            <td>
-              <select xowa_prop="app.xtns.get('scribunto').engine_type" xowa_prop_list="app.xtns.get('scribunto').engine_type_list" class="options_textbox" size='2' id='xowa_prop_1'>
-                <option value='luaj' selected='selected'>
-                  luaj
-                </option>
-                <option value='lua'>
-                  lua
-                </option>
-              </select>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="Lua_options">Lua options</span>
-        </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Lua path: <sup id="cite_ref-lua_path_2-0" class="reference"><a href="#cite_note-lua_path-2">[3]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.fsys.apps.lua.cmd" class="options_textbox" style="width: 380px;" type='xowa_io' id='xowa_prop_2' value='C:\xowa\bin\windows_64\lua\lua5.1.exe'><button id='xowa_prop_2_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_2", "Please select a file.");'>...</button>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2" style='text-align:center;'>
-              <b>The options below are for developer usage only.</b>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Lua log enabled: <sup id="cite_ref-lua_log_enabled_3-0" class="reference"><a href="#cite_note-lua_log_enabled-3">[4]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.xtns.get('scribunto').lua_log_enabled" type="checkbox" class='options_checkbox' id='xowa_prop_3'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Lua timeout: <sup id="cite_ref-lua_timeout_4-0" class="reference"><a href="#cite_note-lua_timeout-4">[5]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.xtns.get('scribunto').lua_timeout" class="options_textbox" style="width: 120px;" id='xowa_prop_4' value='4000'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Lua timeout polling: <sup id="cite_ref-lua_timeout_polling_5-0" class="reference"><a href="#cite_note-lua_timeout_polling-5">[6]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.xtns.get('scribunto').lua_timeout_polling" class="options_textbox" style="width: 120px;" id='xowa_prop_5' value='1'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Lua timeout busy wait: <sup id="cite_ref-lua_timeout_busy_wait_6-0" class="reference"><a href="#cite_note-lua_timeout_busy_wait-6">[7]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.xtns.get('scribunto').lua_timeout_busy_wait" class="options_textbox" style="width: 120px;" id='xowa_prop_6' value='250'>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="Notes">Notes</span>
-        </h2>
-        <ol class="references">
-          <li id="cite_note-enabled-0">
-            <span class="mw-cite-backlink"><a href="#cite_ref-enabled_0-0">^</a></span> <span class="reference-text">Handles {{#invoke:Module:Module_name|Function_name|Arguments}} (default is <code>checked</code>)</span>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.enabled")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.scribunto.enabled__name' class='xocfg_itm_name'>
+            Enabled
+          </div>
+          <div id='xowa.addon.scribunto.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.scribunto.enabled" data-xocfg-key="xowa.addon.scribunto.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.addon.scribunto.enabled__key_box' value='xowa.addon.scribunto.enabled'> <input type='hidden' id='xowa.addon.scribunto.enabled__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.scribunto.enabled_help_div' class='xohelp_div'>
+          <div id='xowa.addon.scribunto.enabled_help_msg' class='xohelp_msg'>
+            <p>
+              Handles {{#invoke:Module:Module_name|Function_name|Arguments}}
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>checked</b> to process #invoke statements</span>
+                <b>checked</b> to process #invoke statements
               </li>
               <li>
-                <span class="reference-text"><b>unchecked</b> to render #invoke as text only</span>
+                <b>unchecked</b> to render #invoke as text only
               </li>
             </ul>
-          </li>
-          <li id="cite_note-engine_type-1">
-            <span class="mw-cite-backlink"><a href="#cite_ref-engine_type_1-0">^</a></span> <span class="reference-text">Select lua engine. See <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Scribunto.html#Engines" id="xolnki_2" title="App/Xtn/Mediawiki/Scribunto">App/Xtn/Mediawiki/Scribunto#Engines</a> (default is <code>luaj</code>)</span>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.engine")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.scribunto.engine__name' class='xocfg_itm_name'>
+            Lua engine
+          </div>
+          <div id='xowa.addon.scribunto.engine__undo' data-xocfg-type='list:xowa.addon.scribunto.engine' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.engine")' title="reset to &quot;luaj&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <select id="xowa.addon.scribunto.engine" data-xocfg-key="xowa.addon.scribunto.engine" data-xocfg-type="list:xowa.addon.scribunto.engine" accesskey="d" class="xocfg_data__list" size="2">
+              <option value="luaj" selected="selected">
+                luaj
+              </option>
+              <option value="lua">
+                lua
+              </option>
+            </select>
+          </div><input type='hidden' id='xowa.addon.scribunto.engine__key_box' value='xowa.addon.scribunto.engine'> <input type='hidden' id='xowa.addon.scribunto.engine__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.scribunto.engine_help_div' class='xohelp_div'>
+          <div id='xowa.addon.scribunto.engine_help_msg' class='xohelp_msg'>
+            <p>
+              Select lua engine. See <a tabindex="-1" href="/wiki/App/Xtn/Mediawiki/Scribunto#Engines" id="xolnki_29" title="App/Xtn/Mediawiki/Scribunto">App/Xtn/Mediawiki/Scribunto#Engines</a>
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>luaj</b>: lua code will be processed through the <a href="http://luaj.org/luaj/README.html" rel="nofollow" class="external text">luaj</a> jar at /bin/any/java/luaj/.</span>
+                <b>luaj</b>: lua code will be processed through the <a tabindex="-1" href="http://luaj.org/luaj/README.html" rel="nofollow" class="external text">luaj</a> jar at /bin/any/java/luaj/.
               </li>
               <li>
-                <span class="reference-text"><b>lua</b> : lua code will be processed through the <a href="http://lua.org/about" rel="nofollow" class="external text">lua</a> binary at /bin/os_name/lua/.</span>
+                <b>lua</b> : lua code will be processed through the <a tabindex="-1" href="http://lua.org/about" rel="nofollow" class="external text">lua</a> binary at /bin/os_name/lua/.
               </li>
-            </ul><span class="reference-text"><b>Note for Lua engine users:</b></span>
+            </ul>
+            <p>
+              <b>Note for Lua engine users:</b>
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>executable permissions</b>: Linux / Mac OS X users may need to grant execute permission to the Lua binary. To ensure proper setup, please do the following:</span>
+                <b>executable permissions</b>: Linux / Mac OS X users may need to grant execute permission to the Lua binary. To ensure proper setup, please do the following: 
                 <ul>
                   <li>
-                    <span class="reference-text">Open <a href="http://xowa.org/home/wiki/Diagnostics/Scribunto/All.html" id="xolnki_3" title="Diagnostics/Scribunto/All">Diagnostics/Scribunto/All</a></span>
+                    Open <a tabindex="-1" href="/wiki/Diagnostics/Scribunto/All" id="xolnki_30" title="Diagnostics/Scribunto/All">Diagnostics/Scribunto/All</a>
                   </li>
                   <li>
-                    <span class="reference-text">If the page fails, then see <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Scribunto.html#Permissions" id="xolnki_4" title="App/Xtn/Mediawiki/Scribunto">App/Xtn/Mediawiki/Scribunto#Permissions</a></span>
+                    If the page fails, then see <a tabindex="-1" href="/wiki/App/Xtn/Mediawiki/Scribunto#Permissions" id="xolnki_31" title="App/Xtn/Mediawiki/Scribunto">App/Xtn/Mediawiki/Scribunto#Permissions</a>
                   </li>
                 </ul>
               </li>
               <li>
-                <span class="reference-text"><b>NTFS partitions</b>: Linux users with NTFS partitions will need to run a command like the following:</span>
+                <b>NTFS partitions</b>: Linux users with NTFS partitions will need to run a command like the following:
               </li>
             </ul>
             <dl>
               <dd>
-                <span class="reference-text"><code>sudo mount -t ntfs -o rw,auto,user,fmask=0022,dmask=0000 /dev/whatever /mnt/whatever</code></span>
+                <code>sudo mount -t ntfs -o rw,auto,user,fmask=0022,dmask=0000 /dev/whatever /mnt/whatever</code>
               </dd>
               <dd>
-                <span class="reference-text">See <a href="http://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition" rel="nofollow" class="external free">http://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition</a> (Thanks to Anselm)</span>
+                See <a tabindex="-1" href="http://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition" rel="nofollow" class="external free">http://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition</a> (Thanks to Anselm)
               </dd>
             </dl>
-          </li>
-          <li id="cite_note-lua_path-2">
-            <span class="mw-cite-backlink"><a href="#cite_ref-lua_path_2-0">^</a></span> <span class="reference-text">Path to Lua binary. Only applies to the <code>lua</code>engine.</span>
-          </li>
-          <li id="cite_note-lua_log_enabled-3">
-            <span class="mw-cite-backlink"><a href="#cite_ref-lua_log_enabled_3-0">^</a></span> <span class="reference-text">Choose one of the following (default is <code>unchecked</code>)</span>
-            <ul>
-              <li>
-                <span class="reference-text"><b>checked</b> to output Lua send / recv statements to a log file (/xowa/user/anonymous/app/tmp/log)</span>
-              </li>
-              <li>
-                <span class="reference-text"><b>unchecked</b> to output nothing</span>
-              </li>
-            </ul>
-          </li>
-          <li id="cite_note-lua_timeout-4">
-            <span class="mw-cite-backlink"><a href="#cite_ref-lua_timeout_4-0">^</a></span> <span class="reference-text"># of milliseconds before canceling Lua call (default is <code>4000</code>)</span>
-          </li>
-          <li id="cite_note-lua_timeout_polling-5">
-            <span class="mw-cite-backlink"><a href="#cite_ref-lua_timeout_polling_5-0">^</a></span> <span class="reference-text"># of milliseconds before checking for timeout. (default is <code>1</code>) For example, with a timeout of 4000:</span>
+          </div>
+        </div>
+        <h2>
+          Lua options
+        </h2>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.cmd")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.scribunto.lua.cmd__name' class='xocfg_itm_name'>
+            Lua path
+          </div>
+          <div id='xowa.addon.scribunto.lua.cmd__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.cmd")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}lua\lua5.1.exe|&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.scribunto.lua.cmd-exe" data-xocfg-key="xowa.addon.scribunto.lua.cmd" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}lua\lua5.1.exe"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.scribunto.lua.cmd-exe", "Please select a file.");'>&nbsp;</span><br>
+            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.scribunto.lua.cmd-arg" data-xocfg-key="xowa.addon.scribunto.lua.cmd" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="">
+          </div><input type='hidden' id='xowa.addon.scribunto.lua.cmd__key_box' value='xowa.addon.scribunto.lua.cmd'> <input type='hidden' id='xowa.addon.scribunto.lua.cmd__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.scribunto.lua.cmd_help_div' class='xohelp_div'>
+          <div id='xowa.addon.scribunto.lua.cmd_help_msg' class='xohelp_msg'>
+            <p>
+              Path to Lua binary. Only applies to the <code>lua</code>engine.
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.timeout")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.scribunto.lua.timeout__name' class='xocfg_itm_name'>
+            Lua timeout
+          </div>
+          <div id='xowa.addon.scribunto.lua.timeout__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.timeout")' title="reset to &quot;4000&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.scribunto.lua.timeout" data-xocfg-key="xowa.addon.scribunto.lua.timeout" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="4000">
+          </div><input type='hidden' id='xowa.addon.scribunto.lua.timeout__key_box' value='xowa.addon.scribunto.lua.timeout'> <input type='hidden' id='xowa.addon.scribunto.lua.timeout__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.scribunto.lua.timeout_help_div' class='xohelp_div'>
+          <div id='xowa.addon.scribunto.lua.timeout_help_msg' class='xohelp_msg'>
+            <p>
+              # of milliseconds before canceling Lua call
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.timeout_polling")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.scribunto.lua.timeout_polling__name' class='xocfg_itm_name'>
+            Lua timeout polling
+          </div>
+          <div id='xowa.addon.scribunto.lua.timeout_polling__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.timeout_polling")' title="reset to &quot;1&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.scribunto.lua.timeout_polling" data-xocfg-key="xowa.addon.scribunto.lua.timeout_polling" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="1">
+          </div><input type='hidden' id='xowa.addon.scribunto.lua.timeout_polling__key_box' value='xowa.addon.scribunto.lua.timeout_polling'> <input type='hidden' id='xowa.addon.scribunto.lua.timeout_polling__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.scribunto.lua.timeout_polling_help_div' class='xohelp_div'>
+          <div id='xowa.addon.scribunto.lua.timeout_polling_help_msg' class='xohelp_msg'>
+            <p>
+              # of milliseconds before checking for timeout. For example, with a timeout of 4000:
+            </p>
             <dl>
               <dd>
-                <span class="reference-text">A timeout polling of 1 will check roughly 4000 times before timing out.</span>
+                A timeout polling of 1 will check roughly 4000 times before timing out.
               </dd>
               <dd>
-                <span class="reference-text">A timeout polling of 1000 will check roughly 4 times before timing out.</span>
+                A timeout polling of 1000 will check roughly 4 times before timing out.
               </dd>
-            </dl><span class="reference-text">This setting should be left at 1. It is meant to "tweak" certain outlier situations should they arise.</span>
-          </li>
-          <li id="cite_note-lua_timeout_busy_wait-6">
-            <span class="mw-cite-backlink"><a href="#cite_ref-lua_timeout_busy_wait_6-0">^</a></span> <span class="reference-text"># of milliseconds before entering timeout poll (default is <code>250</code>) This setting should be left at 250 (or higher). It is also meant to "tweak" certain outlier situations.<br>
-             Background:</span>
+            </dl>
+            <p>
+              This setting should be left at 1. It is meant to "tweak" certain outlier situations should they arise.
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.timeout_busy_wait")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.scribunto.lua.timeout_busy_wait__name' class='xocfg_itm_name'>
+            Lua timeout busy wait
+          </div>
+          <div id='xowa.addon.scribunto.lua.timeout_busy_wait__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.timeout_busy_wait")' title="reset to &quot;250&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.scribunto.lua.timeout_busy_wait" data-xocfg-key="xowa.addon.scribunto.lua.timeout_busy_wait" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="250">
+          </div><input type='hidden' id='xowa.addon.scribunto.lua.timeout_busy_wait__key_box' value='xowa.addon.scribunto.lua.timeout_busy_wait'> <input type='hidden' id='xowa.addon.scribunto.lua.timeout_busy_wait__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.scribunto.lua.timeout_busy_wait_help_div' class='xohelp_div'>
+          <div id='xowa.addon.scribunto.lua.timeout_busy_wait_help_msg' class='xohelp_msg'>
+            <p>
+              # of milliseconds before entering timeout poll This setting should be left at 250 (or higher). It is also meant to "tweak" certain outlier situations.<br>
+              Background:
+            </p>
             <ul>
               <li>
-                <span class="reference-text">On Windows, a sleep call can take 15 ms. This could potentially cause each Lua call to take 15 ms.</span>
+                On Windows, a sleep call can take 15 ms. This could potentially cause each Lua call to take 15 ms.
               </li>
               <li>
-                <span class="reference-text">Some pages / templates will call Lua hundreds of times. (For example: the Weather Box on <a href="http://en.wikipedia.org/wiki/Aruba" rel="nofollow" class="external free">http://en.wikipedia.org/wiki/Aruba</a> or the Citations on <a href="http://en.wikipedia.org/wiki/Earth" rel="nofollow" class="external free">http://en.wikipedia.org/wiki/Earth</a> )</span>
+                Some pages / templates will call Lua hundreds of times. (For example: the Weather Box on <a tabindex="-1" href="/site/en.wikipedia.org/wiki/Aruba">http://en.wikipedia.org/wiki/Aruba</a> or the Citations on <a tabindex="-1" href="/site/en.wikipedia.org/wiki/Earth">http://en.wikipedia.org/wiki/Earth</a> )
               </li>
               <li>
-                <span class="reference-text">The busy wait is a primitive way to limit a wait to 1 ms (or less) before entering a more expensive sleep</span>
+                The busy wait is a primitive way to limit a wait to 1 ms (or less) before entering a more expensive sleep
               </li>
               <li>
-                <span class="reference-text">A higher timeout busy wait value is more performant, but the disadvantage is that the UI will be locked up for longer</span>
+                A higher timeout busy wait value is more performant, but the disadvantage is that the UI will be locked up for longer
               </li>
             </ul>
             <dl>
               <dd>
-                <span class="reference-text">For example, a busy wait of 250 means that the code will loop for 250 milliseconds before entering a sleep.</span>
+                For example, a busy wait of 250 means that the code will loop for 250 milliseconds before entering a sleep.
               </dd>
               <dd>
-                <span class="reference-text">For sub-second values, this freezing will be unnoticeable</span>
+                For sub-second values, this freezing will be unnoticeable
               </dd>
-            </dl><span class="reference-text">For reference, here is the corresponding code</span>
+            </dl>
+            <p>
+              For reference, here is the corresponding code
+            </p>
 <pre style="overflow:auto;">
-<span class="reference-text">long time_bgn = System.currentTimeMillis();
+long time_bgn = System.currentTimeMillis();
 long time_woke = time_bgn;
 while (true) {
   byte[] rv = stream_read.Data();
@@ -489,10 +344,9 @@ while (true) {
     time_woke = System.currentTimeMillis();
   }
 }
-</span>
 </pre>
-          </li>
-        </ol>
+          </div>
+        </div>
       </div>
     </div>
   

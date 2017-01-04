@@ -2,7 +2,7 @@
 <html dir="ltr">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>App/UI/Tabs - XOWA</title>
+  <title>Diagnostics/Scribunto/FlaggedRevs - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   
@@ -11,120 +11,50 @@
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>App/UI/Tabs</span></h1>
+  <h1 id="firstHeading" class="firstHeading"><span>Diagnostics/Scribunto/FlaggedRevs</span></h1>
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
-    <p>
-      As of v1.5.1, XOWA provides a tab interface.
-    </p>
     <h2>
-      <span class="mw-headline" id="Notes">Notes</span>
+      <span class="mw-headline" id="FlaggedRevs">FlaggedRevs</span>
     </h2>
     <ul>
       <li>
-        Tab commands can be activated from the following: 
-        <ul>
-          <li>
-            Main menu
-          </li>
-          <li>
-            Context menu (right click menu)
-          </li>
-          <li>
-            Keyboard shortcuts
-          </li>
-        </ul>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/FlaggedRevs.html" id="xolnki_2" title="Module:Diagnostics/FlaggedRevs">Module:Diagnostics/FlaggedRevs</a>
       </li>
       <li>
-        Tabs can be reordered by the following: 
-        <ul>
-          <li>
-            Using the keyboard shortcuts for <code>Move tab left</code> and <code>Move tab right</code>
-          </li>
-          <li>
-            Clicking on a tab and dragging it left or right
-          </li>
-        </ul>
-      </li>
-      <li>
-        New tabs are automatically added to the end of the list -- after the right-most tab.
-      </li>
-      <li>
-        Tab functionality will be enhanced in later v1.5.* releases.
-      </li>
-      <li>
-        Tab configuration is available at <a href="http://xowa.org/home/wiki/Options/Tabs.html" id="xolnki_2" title="Options/Tabs">Options/Tabs</a>
+        Tests functionality for mw.ext.FlaggedRevs.lua
       </li>
     </ul>
-    <h2>
-      <span class="mw-headline" id="Shortcuts">Shortcuts</span>
-    </h2>
     <table class="wikitable">
       <tr>
         <th>
-          Name
+          name
         </th>
         <th>
-          Shortcut
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
         </th>
       </tr>
       <tr>
         <td>
-          New Tab
+          basic test; note that FlaggedRevs are not implemented in XOWA
         </td>
         <td>
-          Control + t
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Close Current Tab
+          {{#invoke:Diagnostics/FlaggedRevs|test}}
         </td>
         <td>
-          Control + w
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Switch to next tab
+          0;;infinity
         </td>
         <td>
-          Control + Tab; Control + PageDown
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Switch to previous tab
-        </td>
-        <td>
-          Control + Shift + Tab; Control + PageUp
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Move tab left
-        </td>
-        <td>
-          Alt + PageDown
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Move tab right
-        </td>
-        <td>
-          Alt + PageUp
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Open link in new tab
-        </td>
-        <td>
-          MiddleClick
+          <span style='color: green;'>pass</span>
         </td>
       </tr>
     </table>

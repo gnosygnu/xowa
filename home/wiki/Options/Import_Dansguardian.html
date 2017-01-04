@@ -5,213 +5,7 @@
   <title>Options/Import Dansguardian - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
-  <style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-<style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-
+  
 </head>
 <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
 <div id="mw-page-base" class="noprint"></div>
@@ -223,200 +17,274 @@ li.active a, li.active a:hover
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
-    <div>
-      <table>
-        <tr>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Window'>Apps (basic)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Security'>Apps (advanced)</a>
-          </td>
-          <td class='optionsButton active'>
-            <a class='optionsLink' href='/wiki/Options/Import'>Wiki</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/HTML'>HTML</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Content_apps'>External apps</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Search_suggest'>Modules</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Math'>Extensions</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Dev'>Misc</a>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="tabs">
+    <div id='xocfg_body'>
+      <div id='xocfg_err'>
+      </div>
       <div>
-        <ul class='tab-links' style='margin-left:0px;'>
-          <li class=''>
-            <a href='/wiki/Options/Import'>Import</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Files'>Files</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/HTML_databases'>HTML databases</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Page_sync'>Page sync</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Category'>Category</a>
-          </li>
-          <li class='active'>
-            <a href='/wiki/Options/Import_Dansguardian'>Import Dansguardian</a>
-          </li>
-        </ul>
-      </div><br>
-      <div class='tab-content'>
-        <div id="toc" class="toc">
-          <div id="toctitle">
-            <h2>
-              Contents
-            </h2>
-          </div>
-          <ul>
-            <li class="toclevel-1 tocsection-1">
-              <a href="#Basic"><span class="tocnumber">1</span> <span class="toctext">Basic</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-2">
-              <a href="#Notes"><span class="tocnumber">2</span> <span class="toctext">Notes</span></a>
-            </li>
-          </ul>
-        </div>
-        <div style='float:right; margin-right:10px; margin-top:5px;'>
-          <p>
-            <a href="xowa-cmd:app.user.prefs.save();" accesskey='s'><img src='file:///C:/xowa/bin/any/xowa/file/app.window/save.png' width="16" height="16">Save</a>
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+          <option value='xowa.app.security'>
+            App - Security
+          </option>
+          <option value='xowa.app.startup'>
+            App - Startup
+          </option>
+          <option value='xowa.gui.general'>
+            Gui - General
+          </option>
+          <option value='xowa.gui.tabs'>
+            Gui - Tabs
+          </option>
+          <option value='xowa.gui.url_bar'>
+            Gui - Address bar
+          </option>
+          <option value='xowa.gui.menus'>
+            Gui - Menus
+          </option>
+          <option value='xowa.gui.shortcuts'>
+            Gui - Shortcuts
+          </option>
+          <option value='xowa.wiki.hdumps'>
+            Wiki - HTML Databases
+          </option>
+          <option value='xowa.wiki.edit'>
+            Wiki - Editing
+          </option>
+          <option value='xowa.bldr.general'>
+            Import - General
+          </option>
+          <option value='xowa.bldr.db'>
+            Import - Database
+          </option>
+          <option value='xowa.bldr.page_sync'>
+            Import - Page sync
+          </option>
+          <option value='xowa.bldr.dansguardian' selected='selected'>
+            Import - Dansguardian
+          </option>
+          <option value='xowa.html.css'>
+            HTML - CSS
+          </option>
+          <option value='xowa.html.page'>
+            HTML - Page
+          </option>
+          <option value='xowa.html.tidy'>
+            HTML - Tidy
+          </option>
+          <option value='xowa.html.scripting'>
+            HTML - Scripting
+          </option>
+          <option value='xowa.files.general'>
+            Files - General
+          </option>
+          <option value='xowa.files.apps'>
+            Files - Apps
+          </option>
+          <option value='xowa.addon.search'>
+            Addon - Search
+          </option>
+          <option value='xowa.addon.category'>
+            Addon - Category
+          </option>
+          <option value='xowa.addon.http_server'>
+            Addon - HTTP Server
+          </option>
+          <option value='xowa.addon.scribunto'>
+            Addon - Scribunto
+          </option>
+          <option value='xowa.addon.math'>
+            Addon - Math
+          </option>
+          <option value='xowa.addon.score'>
+            Addon - Score
+          </option>
+          <option value='xowa.addon.popups'>
+            Addon - Popups
+          </option>
+          <option value='xowa.addon.wikibase'>
+            Addon - Wikidata
+          </option>
+          <option value='xowa.dev.general'>
+            Dev - General
+          </option>
+        </select>
+      </div>
+      <div id='cfg_grps'>
+        <div>
+          <p id='page_help_para'>
           </p>
-        </div><br>
-         
-        <p>
-          For more information, see <a href="http://xowa.org/home/wiki/App/Xtn/Import/Dansguardian.html" id="xolnki_2" title="App/Xtn/Import/Dansguardian">App/Xtn/Import/Dansguardian</a>
-        </p>
+          <p>
+            For more information, see <a tabindex="-1" href="/wiki/App/Xtn/Import/Dansguardian" id="xolnki_20" title="App/Xtn/Import/Dansguardian">App/Xtn/Import/Dansguardian</a>
+          </p>
+        </div>
         <h2>
-          <span class="mw-headline" id="Basic">Basic</span>
+          Basic
         </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Enabled: <sup id="cite_ref-enabled_0-0" class="reference"><a href="#cite_note-enabled-0">[1]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.bldr.wiki.filter.dansguardian.enabled" type="checkbox" class="options_checkbox" id='xowa_prop_0'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Root directory: <sup id="cite_ref-root_dir_1-0" class="reference"><a href="#cite_note-root_dir-1">[2]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.bldr.wiki.filter.dansguardian.root_dir" class="options_textbox" style="width: 400px;" id='xowa_prop_1' value='C:\xowa\bin\any\xowa\cfg\bldr\filter\'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Initial page score: <sup id="cite_ref-score_init_2-0" class="reference"><a href="#cite_note-score_init-2">[3]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.bldr.wiki.filter.dansguardian.score_init" class="options_textbox" style="width: 100px;" id='xowa_prop_2' value='0'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Filtered page score: <sup id="cite_ref-score_fail_3-0" class="reference"><a href="#cite_note-score_fail-3">[4]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.bldr.wiki.filter.dansguardian.score_fail" class="options_textbox" style="width: 100px;" id='xowa_prop_3' value='0'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Case sensitive: <sup id="cite_ref-case_match_4-0" class="reference"><a href="#cite_note-case_match-4">[5]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.bldr.wiki.filter.dansguardian.case_match" type="checkbox" class="options_checkbox" id='xowa_prop_4'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Log enabled: <sup id="cite_ref-log_enabled_5-0" class="reference"><a href="#cite_note-log_enabled-5">[6]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.bldr.wiki.filter.dansguardian.log_enabled" type="checkbox" class="options_checkbox" id='xowa_prop_5' checked='checked'>
-            </td>
-          </tr>
-        </table>
-        <p>
-          <br>
-        </p>
-        <h2>
-          <span class="mw-headline" id="Notes">Notes</span>
-        </h2>
-        <ol class="references">
-          <li id="cite_note-enabled-0">
-            <span class="mw-cite-backlink"><a href="#cite_ref-enabled_0-0">^</a></span> <span class="reference-text">Choose one of the following: (default is <code>unchecked</code>)</span>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.dansguardian.enabled")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.bldr.dansguardian.enabled__name' class='xocfg_itm_name'>
+            Enabled
+          </div>
+          <div id='xowa.bldr.dansguardian.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.dansguardian.enabled")' title="reset to &quot;n&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.bldr.dansguardian.enabled" data-xocfg-key="xowa.bldr.dansguardian.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
+          </div><input type='hidden' id='xowa.bldr.dansguardian.enabled__key_box' value='xowa.bldr.dansguardian.enabled'> <input type='hidden' id='xowa.bldr.dansguardian.enabled__ctx_box' value='app'>
+        </div>
+        <div id='xowa.bldr.dansguardian.enabled_help_div' class='xohelp_div'>
+          <div id='xowa.bldr.dansguardian.enabled_help_msg' class='xohelp_msg'>
+            <p>
+              Choose one of the following:
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>checked</b>: import filter system is enabled</span>
+                <b>checked</b>: Import filter system is enabled
               </li>
               <li>
-                <span class="reference-text"><b>unchecked</b>: (default) import filter system is disabled</span>
+                <b>unchecked</b>: Import filter system is disabled
               </li>
             </ul>
-          </li>
-          <li id="cite_note-root_dir-1">
-            <span class="mw-cite-backlink"><a href="#cite_ref-root_dir_1-0">^</a></span> <span class="reference-text">Enter the root directory where the filters are located. Note that dansguardian files must be placed within a folder named after wiki. For example, on a Windows system, a phraselist file for simple.wikipedia.org can be placed at <code>C:\xowa\bin\any\xowa\cfg\bldr\filter\simple.wikipedia.org\dansguardian\phraselist1.txt</code></span>
-          </li>
-          <li id="cite_note-score_init-2">
-            <span class="mw-cite-backlink"><a href="#cite_ref-score_init_2-0">^</a></span> <span class="reference-text">Enter the initial score of a page. (default is <code>0</code>)</span>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.dansguardian.root_dir")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.bldr.dansguardian.root_dir__name' class='xocfg_itm_name'>
+            Root directory
+          </div>
+          <div id='xowa.bldr.dansguardian.root_dir__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.dansguardian.root_dir")' title="reset to &quot;C:\xowa\bin\any\xowa\cfg\bldr\filter\&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.bldr.dansguardian.root_dir" data-xocfg-key="xowa.bldr.dansguardian.root_dir" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="C:\xowa\bin\any\xowa\cfg\bldr\filter\">
+          </div><input type='hidden' id='xowa.bldr.dansguardian.root_dir__key_box' value='xowa.bldr.dansguardian.root_dir'> <input type='hidden' id='xowa.bldr.dansguardian.root_dir__ctx_box' value='app'>
+        </div>
+        <div id='xowa.bldr.dansguardian.root_dir_help_div' class='xohelp_div'>
+          <div id='xowa.bldr.dansguardian.root_dir_help_msg' class='xohelp_msg'>
+            <p>
+              Enter the root directory where the filters are located.
+            </p>
+            <p>
+              Note that dansguardian files must be placed within a folder named after wiki. For example, on a Windows system, a phraselist file for simple.wikipedia.org can be placed at <code>C:\xowa\bin\any\xowa\cfg\bldr\filter\simple.wikipedia.org\dansguardian\phraselist1.txt</code>
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.dansguardian.score_init")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.bldr.dansguardian.score_init__name' class='xocfg_itm_name'>
+            Initial page score
+          </div>
+          <div id='xowa.bldr.dansguardian.score_init__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.dansguardian.score_init")' title="reset to &quot;0&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.bldr.dansguardian.score_init" data-xocfg-key="xowa.bldr.dansguardian.score_init" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="0">
+          </div><input type='hidden' id='xowa.bldr.dansguardian.score_init__key_box' value='xowa.bldr.dansguardian.score_init'> <input type='hidden' id='xowa.bldr.dansguardian.score_init__ctx_box' value='app'>
+        </div>
+        <div id='xowa.bldr.dansguardian.score_init_help_div' class='xohelp_div'>
+          <div id='xowa.bldr.dansguardian.score_init_help_msg' class='xohelp_msg'>
+            <p>
+              Enter the initial score of a page.
+            </p>
             <ul>
               <li>
-                <span class="reference-text">For building a wiki where pages matching the filter are removed, choose a score of 0.</span>
+                For building a wiki where pages matching the filter are removed, choose a score of 0.
               </li>
               <li>
-                <span class="reference-text">For building a wiki where pages matching the filter are kept, choose a positive score like 100.</span>
+                For building a wiki where pages matching the filter are kept, choose a positive score like 100.
               </li>
             </ul>
-          </li>
-          <li id="cite_note-score_fail-3">
-            <span class="mw-cite-backlink"><a href="#cite_ref-score_fail_3-0">^</a></span> <span class="reference-text">Enter the score which causes the page to be removed from the database. (default is <code>0</code>)</span>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.dansguardian.score_fail")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.bldr.dansguardian.score_fail__name' class='xocfg_itm_name'>
+            Filtered page score
+          </div>
+          <div id='xowa.bldr.dansguardian.score_fail__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.dansguardian.score_fail")' title="reset to &quot;0&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.bldr.dansguardian.score_fail" data-xocfg-key="xowa.bldr.dansguardian.score_fail" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="0">
+          </div><input type='hidden' id='xowa.bldr.dansguardian.score_fail__key_box' value='xowa.bldr.dansguardian.score_fail'> <input type='hidden' id='xowa.bldr.dansguardian.score_fail__ctx_box' value='app'>
+        </div>
+        <div id='xowa.bldr.dansguardian.score_fail_help_div' class='xohelp_div'>
+          <div id='xowa.bldr.dansguardian.score_fail_help_msg' class='xohelp_msg'>
+            <p>
+              Enter the score which causes the page to be removed from the database.
+            </p>
             <ul>
               <li>
-                <span class="reference-text">Any page which has a score higher than the fail score will be removed from the database.</span>
+                Any page which has a score higher than the fail score will be removed from the database.
               </li>
             </ul>
-          </li>
-          <li id="cite_note-case_match-4">
-            <span class="mw-cite-backlink"><a href="#cite_ref-case_match_4-0">^</a></span> <span class="reference-text">Choose if case sensitivity is enabled. (default is <code>unchecked</code>)</span>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.dansguardian.case_match")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.bldr.dansguardian.case_match__name' class='xocfg_itm_name'>
+            Case sensitive
+          </div>
+          <div id='xowa.bldr.dansguardian.case_match__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.dansguardian.case_match")' title="reset to &quot;n&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.bldr.dansguardian.case_match" data-xocfg-key="xowa.bldr.dansguardian.case_match" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
+          </div><input type='hidden' id='xowa.bldr.dansguardian.case_match__key_box' value='xowa.bldr.dansguardian.case_match'> <input type='hidden' id='xowa.bldr.dansguardian.case_match__ctx_box' value='app'>
+        </div>
+        <div id='xowa.bldr.dansguardian.case_match_help_div' class='xohelp_div'>
+          <div id='xowa.bldr.dansguardian.case_match_help_msg' class='xohelp_msg'>
+            <p>
+              Choose if case sensitivity is enabled.
+            </p>
             <ul>
               <li>
-                <span class="reference-text">If checked, words are matched by case-sensitivity. For example, "&lt; earth &gt;" will match "earth", but not "Earth".</span>
+                If checked, words are matched by case-sensitivity. For example, "&lt; earth &gt;" will match "earth", but not "Earth".
               </li>
               <li>
-                <span class="reference-text">If unchecked, words are matched regardless of case. For example, "&lt; earth &gt;" will match "earth" and "Earth". Note that this will slow the import process down by 5% - 10%</span>
+                If unchecked, words are matched regardless of case. For example, "&lt; earth &gt;" will match "earth" and "Earth". Note that this will slow the import process down by 5% - 10%
               </li>
             </ul>
-          </li>
-          <li id="cite_note-log_enabled-5">
-            <span class="mw-cite-backlink"><a href="#cite_ref-log_enabled_5-0">^</a></span> <span class="reference-text">Choose if a log is enabled. (default is <code>checked</code>)</span>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.dansguardian.log_enabled")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.bldr.dansguardian.log_enabled__name' class='xocfg_itm_name'>
+            Log enabled
+          </div>
+          <div id='xowa.bldr.dansguardian.log_enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.dansguardian.log_enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.bldr.dansguardian.log_enabled" data-xocfg-key="xowa.bldr.dansguardian.log_enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.bldr.dansguardian.log_enabled__key_box' value='xowa.bldr.dansguardian.log_enabled'> <input type='hidden' id='xowa.bldr.dansguardian.log_enabled__ctx_box' value='app'>
+        </div>
+        <div id='xowa.bldr.dansguardian.log_enabled_help_div' class='xohelp_div'>
+          <div id='xowa.bldr.dansguardian.log_enabled_help_msg' class='xohelp_msg'>
+            <p>
+              Choose if a log is enabled.
+            </p>
             <ul>
               <li>
-                <span class="reference-text">If checked, a database called dansguardian_log.sqlite3 will be created at <code>/xowa/wiki/wiki_name/</code></span>
+                If checked, a database called dansguardian_log.sqlite3 will be created at <code>/xowa/wiki/wiki_name/</code>
               </li>
               <li>
-                <span class="reference-text">If unchecked, no database will be created</span>
+                If unchecked, no database will be created
               </li>
             </ul>
-          </li>
-        </ol>
+          </div>
+        </div>
       </div>
     </div>
   

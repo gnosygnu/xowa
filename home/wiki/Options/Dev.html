@@ -5,213 +5,7 @@
   <title>Options/Dev - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
-  <style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-<style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-
+  
 </head>
 <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
 <div id="mw-page-base" class="noprint"></div>
@@ -223,144 +17,635 @@ li.active a, li.active a:hover
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
-    <div>
-      <table>
-        <tr>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Window'>Apps (basic)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Security'>Apps (advanced)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Import'>Wiki</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/HTML'>HTML</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Content_apps'>External apps</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Search_suggest'>Modules</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Math'>Extensions</a>
-          </td>
-          <td class='optionsButton active'>
-            <a class='optionsLink' href='/wiki/Options/Dev'>Misc</a>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="tabs">
+    <div id='xocfg_body'>
+      <div id='xocfg_err'>
+      </div>
       <div>
-        <ul class='tab-links' style='margin-left:0px;'>
-          <li class='active'>
-            <a href='/wiki/Options/Dev'>Dev</a>
-          </li>
-        </ul>
-      </div><br>
-      <div class='tab-content'>
-        <div id="toc" class="toc">
-          <div id="toctitle">
-            <h2>
-              Contents
-            </h2>
-          </div>
-          <ul>
-            <li class="toclevel-1 tocsection-1">
-              <a href="#Messages"><span class="tocnumber">1</span> <span class="toctext">Messages</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-2">
-              <a href="#Miscellaneous"><span class="tocnumber">2</span> <span class="toctext">Miscellaneous</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-3">
-              <a href="#Notes"><span class="tocnumber">3</span> <span class="toctext">Notes</span></a>
-            </li>
-          </ul>
-        </div>
-        <p>
-          These options are intended for developer use only. You are welcome to experiment, but you are probably better off with the defaults.
-        </p>
-        <div style='float:right; margin-right:10px; margin-top:5px;'>
-          <p>
-            <a href="xowa-cmd:app.user.prefs.save();" accesskey='s'><img src='file:///C:/xowa/bin/any/xowa/file/app.window/save.png' width="16" height="16">Save</a>
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+          <option value='xowa.app.security'>
+            App - Security
+          </option>
+          <option value='xowa.app.startup'>
+            App - Startup
+          </option>
+          <option value='xowa.gui.general'>
+            Gui - General
+          </option>
+          <option value='xowa.gui.tabs'>
+            Gui - Tabs
+          </option>
+          <option value='xowa.gui.url_bar'>
+            Gui - Address bar
+          </option>
+          <option value='xowa.gui.menus'>
+            Gui - Menus
+          </option>
+          <option value='xowa.gui.shortcuts'>
+            Gui - Shortcuts
+          </option>
+          <option value='xowa.wiki.hdumps'>
+            Wiki - HTML Databases
+          </option>
+          <option value='xowa.wiki.edit'>
+            Wiki - Editing
+          </option>
+          <option value='xowa.bldr.general'>
+            Import - General
+          </option>
+          <option value='xowa.bldr.db'>
+            Import - Database
+          </option>
+          <option value='xowa.bldr.page_sync'>
+            Import - Page sync
+          </option>
+          <option value='xowa.bldr.dansguardian'>
+            Import - Dansguardian
+          </option>
+          <option value='xowa.html.css'>
+            HTML - CSS
+          </option>
+          <option value='xowa.html.page'>
+            HTML - Page
+          </option>
+          <option value='xowa.html.tidy'>
+            HTML - Tidy
+          </option>
+          <option value='xowa.html.scripting'>
+            HTML - Scripting
+          </option>
+          <option value='xowa.files.general'>
+            Files - General
+          </option>
+          <option value='xowa.files.apps'>
+            Files - Apps
+          </option>
+          <option value='xowa.addon.search'>
+            Addon - Search
+          </option>
+          <option value='xowa.addon.category'>
+            Addon - Category
+          </option>
+          <option value='xowa.addon.http_server'>
+            Addon - HTTP Server
+          </option>
+          <option value='xowa.addon.scribunto'>
+            Addon - Scribunto
+          </option>
+          <option value='xowa.addon.math'>
+            Addon - Math
+          </option>
+          <option value='xowa.addon.score'>
+            Addon - Score
+          </option>
+          <option value='xowa.addon.popups'>
+            Addon - Popups
+          </option>
+          <option value='xowa.addon.wikibase'>
+            Addon - Wikidata
+          </option>
+          <option value='xowa.dev.general' selected='selected'>
+            Dev - General
+          </option>
+        </select>
+      </div>
+      <div id='cfg_grps'>
+        <div>
+          <p id='page_help_para'>
           </p>
-        </div><br>
-         
+        </div>
         <h2>
-          <span class="mw-headline" id="Messages">Messages</span>
+          Messages
         </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Show warnings: <sup id="cite_ref-show_warn_0-0" class="reference"><a href="#cite_note-show_warn-0">[1]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.gui.browser.info.warn_enabled" type="checkbox" class="options_checkbox" id='xowa_prop_0'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Show notes: <sup id="cite_ref-show_note_1-0" class="reference"><a href="#cite_note-show_note-1">[2]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.gui.browser.info.note_enabled" type="checkbox" class="options_checkbox" id='xowa_prop_1'>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="Miscellaneous">Miscellaneous</span>
-        </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Log all page history: <sup id="cite_ref-page_history__log_all_2-0" class="reference"><a href="#cite_note-page_history__log_all-2">[3]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.addon.app__page_history__log_all" type="checkbox" class="options_checkbox" id='xowa_prop_2'>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="Notes">Notes</span>
-        </h2>
-        <ol class="references">
-          <li id="cite_note-show_warn-0">
-            <span class="mw-cite-backlink"><a href="#cite_ref-show_warn_0-0">^</a></span> <span class="reference-text">Show warnings in info box (default is <code>unchecked</code>)</span>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.debug.show_warn")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.debug.show_warn__name' class='xocfg_itm_name'>
+            Show warnings
+          </div>
+          <div id='xowa.app.debug.show_warn__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.debug.show_warn")' title="reset to &quot;n&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.app.debug.show_warn" data-xocfg-key="xowa.app.debug.show_warn" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
+          </div><input type='hidden' id='xowa.app.debug.show_warn__key_box' value='xowa.app.debug.show_warn'> <input type='hidden' id='xowa.app.debug.show_warn__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.debug.show_warn_help_div' class='xohelp_div'>
+          <div id='xowa.app.debug.show_warn_help_msg' class='xohelp_msg'>
+            <p>
+              Show warnings in info box
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>checked</b> to show warnings in the info box in lower right hand corner</span>
+                <b>checked</b> to show warnings in the info box in lower right hand corner
               </li>
               <li>
-                <span class="reference-text"><b>unchecked</b> to not show warnings in the info box in lower right hand corner</span>
+                <b>unchecked</b> to not show warnings in the info box in lower right hand corner
               </li>
-            </ul><span class="reference-text">Warnings are messages which XOWA generates when it encounters situations that are not strictly errors, but appear incorrect. For example, a missing file will generate a warning. Note that if this option is enabled, then the info box must be manually cleared by pressing Ctrl + Alt + C</span>
-          </li>
-          <li id="cite_note-show_note-1">
-            <span class="mw-cite-backlink"><a href="#cite_ref-show_note_1-0">^</a></span> <span class="reference-text">Show notes in info box (default is <code>unchecked</code>)</span>
+            </ul>
+            <p>
+              Warnings are messages which XOWA generates when it encounters situations that are not strictly errors, but appear incorrect. For example, a missing file will generate a warning. Note that if this option is enabled, then the info box must be manually cleared by pressing Ctrl + Alt + C
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.debug.show_note")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.debug.show_note__name' class='xocfg_itm_name'>
+            Show notes
+          </div>
+          <div id='xowa.app.debug.show_note__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.debug.show_note")' title="reset to &quot;n&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.app.debug.show_note" data-xocfg-key="xowa.app.debug.show_note" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
+          </div><input type='hidden' id='xowa.app.debug.show_note__key_box' value='xowa.app.debug.show_note'> <input type='hidden' id='xowa.app.debug.show_note__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.debug.show_note_help_div' class='xohelp_div'>
+          <div id='xowa.app.debug.show_note_help_msg' class='xohelp_msg'>
+            <p>
+              Show notes in info box
+            </p>
             <ul>
               <li>
-                <span class="reference-text"><b>checked</b> to show notes in the info box in lower right hand corner</span>
+                <b>checked</b> to show notes in the info box in lower right hand corner
               </li>
               <li>
-                <span class="reference-text"><b>unchecked</b> to not show notes in the info box in lower right hand corner</span>
+                <b>unchecked</b> to not show notes in the info box in lower right hand corner
               </li>
-            </ul><span class="reference-text">Notes are messages that are informational, but more permanent than status messages. For example, import messages generate notes for each started stage ("deleting directory").</span>
-          </li>
-          <li id="cite_note-page_history__log_all-2">
-            <span class="mw-cite-backlink"><a href="#cite_ref-page_history__log_all_2-0">^</a></span> <span class="reference-text">Log every page visit in a separate log file (default is <code>unchecked</code>)</span>
-            <ul>
-              <li>
-                <span class="reference-text"><b>checked</b>: Logs every page visit in a separate log file: C:\xowa\user\anonymous\app\data\history\log_all.csv</span>
-              </li>
-              <li>
-                <span class="reference-text"><b>unchecked</b> Does not log every page visit to a separate log file.</span>
-              </li>
-            </ul><span class="reference-text">XOWA currently consolidates visits to the same page as one entry. For example, 3 visits to en.wikipedia.org/wiki/Earth would show up only once with the <code>date</code> being the most recent one. The <code>date</code> for the previous two entries would be lost. This option retains dates for all 3 entries by logging each visit to a separate file.</span>
-          </li>
-        </ol>
+            </ul>
+            <p>
+              Notes are messages that are informational, but more permanent than status messages. For example, import messages generate notes for each started stage ("deleting directory").
+            </p>
+          </div>
+        </div>
+        <h2>
+          Previous settings
+        </h2>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.setup.previous_version")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.setup.previous_version__name' class='xocfg_itm_name'>
+            Version
+          </div>
+          <div id='xowa.app.setup.previous_version__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.setup.previous_version")' title="reset to &quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.app.setup.previous_version" data-xocfg-key="xowa.app.setup.previous_version" data-xocfg-type="string" accesskey="d" class="xocfg_data__str xocfg_data__readonly" type="text" readonly="true" value="4.0.0.1701">
+          </div><input type='hidden' id='xowa.app.setup.previous_version__key_box' value='xowa.app.setup.previous_version'> <input type='hidden' id='xowa.app.setup.previous_version__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.setup.previous_version_help_div' class='xohelp_div'>
+          <div id='xowa.app.setup.previous_version_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.setup.os_script_list")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.setup.os_script_list__name' class='xocfg_itm_name'>
+            OS script list
+          </div>
+          <div id='xowa.app.setup.os_script_list__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.setup.os_script_list")' title="reset to &quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.app.setup.os_script_list" data-xocfg-key="xowa.app.setup.os_script_list" data-xocfg-type="string" accesskey="d" class="xocfg_data__str xocfg_data__readonly" type="text" readonly="true" value="">
+          </div><input type='hidden' id='xowa.app.setup.os_script_list__key_box' value='xowa.app.setup.os_script_list'> <input type='hidden' id='xowa.app.setup.os_script_list__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.setup.os_script_list_help_div' class='xohelp_div'>
+          <div id='xowa.app.setup.os_script_list_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.cfg.previous_grp")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.cfg.previous_grp__name' class='xocfg_itm_name'>
+            Recent page
+          </div>
+          <div id='xowa.app.cfg.previous_grp__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.cfg.previous_grp")' title="reset to &quot;xowa.app.security&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.app.cfg.previous_grp" data-xocfg-key="xowa.app.cfg.previous_grp" data-xocfg-type="string" accesskey="d" class="xocfg_data__str xocfg_data__readonly" type="text" readonly="true" value="xowa.gui.menus">
+          </div><input type='hidden' id='xowa.app.cfg.previous_grp__key_box' value='xowa.app.cfg.previous_grp'> <input type='hidden' id='xowa.app.cfg.previous_grp__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.cfg.previous_grp_help_div' class='xohelp_div'>
+          <div id='xowa.app.cfg.previous_grp_help_msg' class='xohelp_msg'>
+            <p>
+              This is a system property. Do not modify.<br>
+              <br>
+              Stores most recently viewed page. Used when visiting "Special:XowaCfg" without specifying a grp argument
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.wiki.lang.variant.current")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.wiki.lang.variant.current__name' class='xocfg_itm_name'>
+            Selected
+          </div>
+          <div id='xowa.wiki.lang.variant.current__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.lang.variant.current")' title="reset to &quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.wiki.lang.variant.current" data-xocfg-key="xowa.wiki.lang.variant.current" data-xocfg-type="string" accesskey="d" class="xocfg_data__str xocfg_data__readonly" type="text" readonly="true" value="">
+          </div><input type='hidden' id='xowa.wiki.lang.variant.current__key_box' value='xowa.wiki.lang.variant.current'> <input type='hidden' id='xowa.wiki.lang.variant.current__ctx_box' value='app'>
+        </div>
+        <div id='xowa.wiki.lang.variant.current_help_div' class='xohelp_div'>
+          <div id='xowa.wiki.lang.variant.current_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.window.previous_rect")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.startup.window.previous_rect__name' class='xocfg_itm_name'>
+            Previous rect
+          </div>
+          <div id='xowa.app.startup.window.previous_rect__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.window.previous_rect")' title="reset to &quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.app.startup.window.previous_rect" data-xocfg-key="xowa.app.startup.window.previous_rect" data-xocfg-type="string" accesskey="d" class="xocfg_data__str xocfg_data__readonly" type="text" readonly="true" value="0,0,1600,1170">
+          </div><input type='hidden' id='xowa.app.startup.window.previous_rect__key_box' value='xowa.app.startup.window.previous_rect'> <input type='hidden' id='xowa.app.startup.window.previous_rect__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.startup.window.previous_rect_help_div' class='xohelp_div'>
+          <div id='xowa.app.startup.window.previous_rect_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.window.previous_maximized")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.startup.window.previous_maximized__name' class='xocfg_itm_name'>
+            Previous was maximized
+          </div>
+          <div id='xowa.app.startup.window.previous_maximized__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.window.previous_maximized")' title="reset to &quot;n&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.app.startup.window.previous_maximized" data-xocfg-key="xowa.app.startup.window.previous_maximized" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled">
+          </div><input type='hidden' id='xowa.app.startup.window.previous_maximized__key_box' value='xowa.app.startup.window.previous_maximized'> <input type='hidden' id='xowa.app.startup.window.previous_maximized__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.startup.window.previous_maximized_help_div' class='xohelp_div'>
+          <div id='xowa.app.startup.window.previous_maximized_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.tabs.previous_list")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.startup.tabs.previous_list__name' class='xocfg_itm_name'>
+            Previous list
+          </div>
+          <div id='xowa.app.startup.tabs.previous_list__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.tabs.previous_list")' title="reset to &quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+<textarea id="xowa.app.startup.tabs.previous_list" data-xocfg-key="xowa.app.startup.tabs.previous_list" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo xocfg_data__readonly" readonly="true">
+home/wiki/Diagnostics
+</textarea>
+          </div><input type='hidden' id='xowa.app.startup.tabs.previous_list__key_box' value='xowa.app.startup.tabs.previous_list'> <input type='hidden' id='xowa.app.startup.tabs.previous_list__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.startup.tabs.previous_list_help_div' class='xohelp_div'>
+          <div id='xowa.app.startup.tabs.previous_list_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.tabs.previous_selected")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.startup.tabs.previous_selected__name' class='xocfg_itm_name'>
+            Previous selected
+          </div>
+          <div id='xowa.app.startup.tabs.previous_selected__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.tabs.previous_selected")' title="reset to &quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.app.startup.tabs.previous_selected" data-xocfg-key="xowa.app.startup.tabs.previous_selected" data-xocfg-type="int" accesskey="d" class="xocfg_data__int xocfg_data__readonly" type="text" readonly="true" value="0">
+          </div><input type='hidden' id='xowa.app.startup.tabs.previous_selected__key_box' value='xowa.app.startup.tabs.previous_selected'> <input type='hidden' id='xowa.app.startup.tabs.previous_selected__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.startup.tabs.previous_selected_help_div' class='xohelp_div'>
+          <div id='xowa.app.startup.tabs.previous_selected_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <h2>
+          Toggles
+        </h2>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.offline-wikis")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.offline-wikis__name' class='xocfg_itm_name'>
+            Offline Wikis
+          </div>
+          <div id='xowa.html.toggles.offline-wikis__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.offline-wikis")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.offline-wikis" data-xocfg-key="xowa.html.toggles.offline-wikis" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled">
+          </div><input type='hidden' id='xowa.html.toggles.offline-wikis__key_box' value='xowa.html.toggles.offline-wikis'> <input type='hidden' id='xowa.html.toggles.offline-wikis__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.offline-wikis_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.offline-wikis_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidata-langs")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidata-langs__name' class='xocfg_itm_name'>
+            Wikidata Langs
+          </div>
+          <div id='xowa.html.toggles.wikidata-langs__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidata-langs")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidata-langs" data-xocfg-key="xowa.html.toggles.wikidata-langs" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled">
+          </div><input type='hidden' id='xowa.html.toggles.wikidata-langs__key_box' value='xowa.html.toggles.wikidata-langs'> <input type='hidden' id='xowa.html.toggles.wikidata-langs__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidata-langs_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidata-langs_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidatawiki-claim")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-claim__name' class='xocfg_itm_name'>
+            Wikidata Claims
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-claim__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidatawiki-claim")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidatawiki-claim" data-xocfg-key="xowa.html.toggles.wikidatawiki-claim" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
+          </div><input type='hidden' id='xowa.html.toggles.wikidatawiki-claim__key_box' value='xowa.html.toggles.wikidatawiki-claim'> <input type='hidden' id='xowa.html.toggles.wikidatawiki-claim__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidatawiki-claim_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidatawiki-claim_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidatawiki-slink-wikipedia")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikipedia__name' class='xocfg_itm_name'>
+            Wikidata Links - Wikipedia
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikipedia__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidatawiki-slink-wikipedia")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidatawiki-slink-wikipedia" data-xocfg-key="xowa.html.toggles.wikidatawiki-slink-wikipedia" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
+          </div><input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wikipedia__key_box' value='xowa.html.toggles.wikidatawiki-slink-wikipedia'> <input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wikipedia__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidatawiki-slink-wikipedia_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikipedia_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidatawiki-slink-wiktionary")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wiktionary__name' class='xocfg_itm_name'>
+            Wikidata Links - Wiktionary
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wiktionary__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidatawiki-slink-wiktionary")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidatawiki-slink-wiktionary" data-xocfg-key="xowa.html.toggles.wikidatawiki-slink-wiktionary" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
+          </div><input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wiktionary__key_box' value='xowa.html.toggles.wikidatawiki-slink-wiktionary'> <input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wiktionary__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidatawiki-slink-wiktionary_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wiktionary_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidatawiki-slink-wikisource")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikisource__name' class='xocfg_itm_name'>
+            Wikidata Links - Wikisource
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikisource__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidatawiki-slink-wikisource")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidatawiki-slink-wikisource" data-xocfg-key="xowa.html.toggles.wikidatawiki-slink-wikisource" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
+          </div><input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wikisource__key_box' value='xowa.html.toggles.wikidatawiki-slink-wikisource'> <input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wikisource__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidatawiki-slink-wikisource_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikisource_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidatawiki-slink-wikivoyage")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikivoyage__name' class='xocfg_itm_name'>
+            Wikidata Links - Wikivoyage
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikivoyage__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidatawiki-slink-wikivoyage")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidatawiki-slink-wikivoyage" data-xocfg-key="xowa.html.toggles.wikidatawiki-slink-wikivoyage" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
+          </div><input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wikivoyage__key_box' value='xowa.html.toggles.wikidatawiki-slink-wikivoyage'> <input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wikivoyage__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidatawiki-slink-wikivoyage_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikivoyage_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidatawiki-slink-wikiquote")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikiquote__name' class='xocfg_itm_name'>
+            Wikidata Links - Wikiquote
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikiquote__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidatawiki-slink-wikiquote")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidatawiki-slink-wikiquote" data-xocfg-key="xowa.html.toggles.wikidatawiki-slink-wikiquote" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
+          </div><input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wikiquote__key_box' value='xowa.html.toggles.wikidatawiki-slink-wikiquote'> <input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wikiquote__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidatawiki-slink-wikiquote_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikiquote_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidatawiki-slink-wikibooks")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikibooks__name' class='xocfg_itm_name'>
+            Wikidata Links - Wikiversity
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikibooks__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidatawiki-slink-wikibooks")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidatawiki-slink-wikibooks" data-xocfg-key="xowa.html.toggles.wikidatawiki-slink-wikibooks" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
+          </div><input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wikibooks__key_box' value='xowa.html.toggles.wikidatawiki-slink-wikibooks'> <input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wikibooks__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidatawiki-slink-wikibooks_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikibooks_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidatawiki-slink-wikiversity")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikiversity__name' class='xocfg_itm_name'>
+            Wikidata Links - Wikinews
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikiversity__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidatawiki-slink-wikiversity")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidatawiki-slink-wikiversity" data-xocfg-key="xowa.html.toggles.wikidatawiki-slink-wikiversity" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
+          </div><input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wikiversity__key_box' value='xowa.html.toggles.wikidatawiki-slink-wikiversity'> <input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wikiversity__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidatawiki-slink-wikiversity_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikiversity_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidatawiki-slink-wikinews")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikinews__name' class='xocfg_itm_name'>
+            Wikidata Links - Wikinews
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikinews__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidatawiki-slink-wikinews")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidatawiki-slink-wikinews" data-xocfg-key="xowa.html.toggles.wikidatawiki-slink-wikinews" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
+          </div><input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wikinews__key_box' value='xowa.html.toggles.wikidatawiki-slink-wikinews'> <input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-wikinews__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidatawiki-slink-wikinews_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidatawiki-slink-wikinews_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidatawiki-slink-special")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-special__name' class='xocfg_itm_name'>
+            Wikidata Links - Special
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-slink-special__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidatawiki-slink-special")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidatawiki-slink-special" data-xocfg-key="xowa.html.toggles.wikidatawiki-slink-special" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
+          </div><input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-special__key_box' value='xowa.html.toggles.wikidatawiki-slink-special'> <input type='hidden' id='xowa.html.toggles.wikidatawiki-slink-special__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidatawiki-slink-special_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidatawiki-slink-special_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidatawiki-label")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-label__name' class='xocfg_itm_name'>
+            Wikidata Labels
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-label__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidatawiki-label")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidatawiki-label" data-xocfg-key="xowa.html.toggles.wikidatawiki-label" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
+          </div><input type='hidden' id='xowa.html.toggles.wikidatawiki-label__key_box' value='xowa.html.toggles.wikidatawiki-label'> <input type='hidden' id='xowa.html.toggles.wikidatawiki-label__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidatawiki-label_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidatawiki-label_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidatawiki-descr")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-descr__name' class='xocfg_itm_name'>
+            Wikidata Descriptions
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-descr__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidatawiki-descr")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidatawiki-descr" data-xocfg-key="xowa.html.toggles.wikidatawiki-descr" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
+          </div><input type='hidden' id='xowa.html.toggles.wikidatawiki-descr__key_box' value='xowa.html.toggles.wikidatawiki-descr'> <input type='hidden' id='xowa.html.toggles.wikidatawiki-descr__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidatawiki-descr_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidatawiki-descr_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidatawiki-alias")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-alias__name' class='xocfg_itm_name'>
+            Wikidata Aliases
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-alias__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidatawiki-alias")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidatawiki-alias" data-xocfg-key="xowa.html.toggles.wikidatawiki-alias" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
+          </div><input type='hidden' id='xowa.html.toggles.wikidatawiki-alias__key_box' value='xowa.html.toggles.wikidatawiki-alias'> <input type='hidden' id='xowa.html.toggles.wikidatawiki-alias__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidatawiki-alias_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidatawiki-alias_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.toggles.wikidatawiki-json")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-json__name' class='xocfg_itm_name'>
+            Wikidata JSON
+          </div>
+          <div id='xowa.html.toggles.wikidatawiki-json__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.wikidatawiki-json")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.toggles.wikidatawiki-json" data-xocfg-key="xowa.html.toggles.wikidatawiki-json" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
+          </div><input type='hidden' id='xowa.html.toggles.wikidatawiki-json__key_box' value='xowa.html.toggles.wikidatawiki-json'> <input type='hidden' id='xowa.html.toggles.wikidatawiki-json__ctx_box' value='app'>
+        </div>
+        <div id='xowa.html.toggles.wikidatawiki-json_help_div' class='xohelp_div'>
+          <div id='xowa.html.toggles.wikidatawiki-json_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <h2>
+          Misc
+        </h2>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.shortcuts.show_remap_win")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.gui.shortcuts.show_remap_win__name' class='xocfg_itm_name'>
+            Show shortcut remap
+          </div>
+          <div id='xowa.gui.shortcuts.show_remap_win__undo' data-xocfg-type='btn' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.shortcuts.show_remap_win")' title="reset to &quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <button id="xowa.gui.shortcuts.show_remap_win" data-xocfg-key="xowa.gui.shortcuts.show_remap_win" data-xocfg-type="btn" class="xocfg_data__btn">Show shortcut remap</button>
+          </div><input type='hidden' id='xowa.gui.shortcuts.show_remap_win__key_box' value='xowa.gui.shortcuts.show_remap_win'> <input type='hidden' id='xowa.gui.shortcuts.show_remap_win__ctx_box' value='app'>
+        </div>
+        <div id='xowa.gui.shortcuts.show_remap_win_help_div' class='xohelp_div'>
+          <div id='xowa.gui.shortcuts.show_remap_win_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
       </div>
     </div>
   

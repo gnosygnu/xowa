@@ -5,213 +5,7 @@
   <title>Options/Wikibase - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
-  <style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-<style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
-  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
-  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
-  .options_textbox     {padding: 2px; border: 1px solid black;}
-  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
-  .options_textarea    {padding: 2px; border: 1px solid black;}
-  .options_select      {padding: 2px; border: 1px solid black;}
-  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
-  .options_checkbox    {padding: 2px; border: 1px solid black;}
-  .options_readonly    {background-color:#F9F9F9;}
-</style>
-<style data-source="xowa" type="text/css">
-.optionsButton
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: lightgray;
-    text-align: center;
-}
-
-.optionsLink
-{
-    color: black !important;
-    text-decoration: none;
-}
-
-.optionsButton.active
-{
-    width: 100px;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-size: 12px;
-    margin-left: -5px;
-    cursor: pointer;
-    background-color: dimgray;
-    color: white !important;
-    border: solid 1px dimgray;
-}
-.optionsButton.active a
-{
-    color: white !important;
-}
-
-.tabs
-{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.tab-links ul
-{
-    margin-left: -40px;
-}
-.tab-links li
-{
-    margin: 0px 0px 0px 0px;
-    float: left;
-    list-style: none;
-}
-
-.tab-links a
-{
-    padding: 9px 15px 9px 15px;
-    border-radius: 3px 3px 0px 0px;
-    background: #f0f0f0;
-    font-family: 'Segoe UI';
-    font-size: 13px;
-    color: black !important;
-    text-decoration: none;
-    border-radius: 3px;
-    border-top: solid 1px gray;
-    border-left: solid 1px gray;
-    border-right: solid 1px gray;
-}
-
-.tab-links a:hover
-{
-    background: #B0B0B0;
-    text-decoration: none;
-}
-
-li.active a, li.active a:hover
-{
-    background: #fff;
-    color: #4c4c4c;
-    font-weight: bold;
-}
-
-.tab-content
-{
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    border-top: solid 1px gray;
-    margin-top: 5px;
-    min-height: 300px;
-}
-</style>
-
+  
 </head>
 <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
 <div id="mw-page-base" class="noprint"></div>
@@ -223,150 +17,206 @@ li.active a, li.active a:hover
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
-    <div>
-      <table>
-        <tr>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Window'>Apps (basic)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Security'>Apps (advanced)</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Import'>Wiki</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/HTML'>HTML</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Content_apps'>External apps</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Search_suggest'>Modules</a>
-          </td>
-          <td class='optionsButton active'>
-            <a class='optionsLink' href='/wiki/Options/Math'>Extensions</a>
-          </td>
-          <td class='optionsButton'>
-            <a class='optionsLink' href='/wiki/Options/Dev'>Misc</a>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="tabs">
+    <div id='xocfg_body'>
+      <div id='xocfg_err'>
+      </div>
       <div>
-        <ul class='tab-links' style='margin-left:0px;'>
-          <li class=''>
-            <a href='/wiki/Options/Math'>Math</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Scribunto'>Scribunto</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Score'>Score</a>
-          </li>
-          <li class='active'>
-            <a href='/wiki/Options/Wikibase'>Wikibase</a>
-          </li>
-        </ul>
-      </div><br>
-      <div class='tab-content'>
-        <div id="toc" class="toc">
-          <div id="toctitle">
-            <h2>
-              Contents
-            </h2>
-          </div>
-          <ul>
-            <li class="toclevel-1 tocsection-1">
-              <a href="#Wikidata_Pages"><span class="tocnumber">1</span> <span class="toctext">Wikidata Pages</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-2">
-              <a href="#Special:Item_by_title"><span class="tocnumber">2</span> <span class="toctext">Special:Item by title</span></a>
-            </li>
-            <li class="toclevel-1 tocsection-3">
-              <a href="#Notes"><span class="tocnumber">3</span> <span class="toctext">Notes</span></a>
-            </li>
-          </ul>
-        </div>
-        <div style='float:right; margin-right:10px; margin-top:5px;'>
-          <p>
-            <a href="xowa-cmd:app.user.prefs.save();" accesskey='s'><img src='file:///C:/xowa/bin/any/xowa/file/app.window/save.png' width="16" height="16">Save</a>
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+          <option value='xowa.app.security'>
+            App - Security
+          </option>
+          <option value='xowa.app.startup'>
+            App - Startup
+          </option>
+          <option value='xowa.gui.general'>
+            Gui - General
+          </option>
+          <option value='xowa.gui.tabs'>
+            Gui - Tabs
+          </option>
+          <option value='xowa.gui.url_bar'>
+            Gui - Address bar
+          </option>
+          <option value='xowa.gui.menus'>
+            Gui - Menus
+          </option>
+          <option value='xowa.gui.shortcuts'>
+            Gui - Shortcuts
+          </option>
+          <option value='xowa.wiki.hdumps'>
+            Wiki - HTML Databases
+          </option>
+          <option value='xowa.wiki.edit'>
+            Wiki - Editing
+          </option>
+          <option value='xowa.bldr.general'>
+            Import - General
+          </option>
+          <option value='xowa.bldr.db'>
+            Import - Database
+          </option>
+          <option value='xowa.bldr.page_sync'>
+            Import - Page sync
+          </option>
+          <option value='xowa.bldr.dansguardian'>
+            Import - Dansguardian
+          </option>
+          <option value='xowa.html.css'>
+            HTML - CSS
+          </option>
+          <option value='xowa.html.page'>
+            HTML - Page
+          </option>
+          <option value='xowa.html.tidy'>
+            HTML - Tidy
+          </option>
+          <option value='xowa.html.scripting'>
+            HTML - Scripting
+          </option>
+          <option value='xowa.files.general'>
+            Files - General
+          </option>
+          <option value='xowa.files.apps'>
+            Files - Apps
+          </option>
+          <option value='xowa.addon.search'>
+            Addon - Search
+          </option>
+          <option value='xowa.addon.category'>
+            Addon - Category
+          </option>
+          <option value='xowa.addon.http_server'>
+            Addon - HTTP Server
+          </option>
+          <option value='xowa.addon.scribunto'>
+            Addon - Scribunto
+          </option>
+          <option value='xowa.addon.math'>
+            Addon - Math
+          </option>
+          <option value='xowa.addon.score'>
+            Addon - Score
+          </option>
+          <option value='xowa.addon.popups'>
+            Addon - Popups
+          </option>
+          <option value='xowa.addon.wikibase' selected='selected'>
+            Addon - Wikidata
+          </option>
+          <option value='xowa.dev.general'>
+            Dev - General
+          </option>
+        </select>
+      </div>
+      <div id='cfg_grps'>
+        <div>
+          <p id='page_help_para'>
           </p>
-        </div><br>
-         
+        </div>
         <h2>
-          <span class="mw-headline" id="Wikidata_Pages">Wikidata Pages</span>
+          Wikidata wiki
         </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Text languages: <sup id="cite_ref-core_langs_0-0" class="reference"><a href="#cite_note-core_langs-0">[1]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.xtns.wikibase.core_langs" class='options_textbox' accesskey=',' id='xowa_prop_0' value='en'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Link wiki: <sup id="cite_ref-link_wikis_1-0" class="reference"><a href="#cite_note-link_wikis-1">[2]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.xtns.wikibase.link_wikis" class='options_textbox' id='xowa_prop_1' value='enwiki'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Sort languages: <sup id="cite_ref-sort_langs_2-0" class="reference"><a href="#cite_note-sort_langs-2">[3]</a></sup>
-            </td>
-            <td>
-<textarea xowa_prop="xowa.api.xtns.wikibase.sort_langs" class="options_textbox" style="width: 400px; height: 100px;" accesskey=',' id='xowa_prop_2'>
-en;de;es;fr;it;nl;pl;ru;sv
-</textarea>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="Special:Item_by_title">Special:Item by title</span>
-        </h2>
-        <table class='options_table'>
-          <tr>
-            <td class='options_row_label'>
-              Site_default: <sup id="cite_ref-site_default_3-0" class="reference"><a href="#cite_note-site_default-3">[4]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="app.specials.get('itemByTitle').site_default" class='options_textbox' id='xowa_prop_3' value='enwiki'>
-            </td>
-          </tr>
-        </table>
-        <h2>
-          <span class="mw-headline" id="Notes">Notes</span>
-        </h2>
-        <ol class="references">
-          <li id="cite_note-core_langs-0">
-            <span class="mw-cite-backlink"><a href="#cite_ref-core_langs_0-0">^</a></span> <span class="reference-text">Enter multiple language codes separated by a semi-colon. See <a href="http://xowa.org/home/wiki/Options/Language.html" id="xolnki_2" title="Options/Language" class="xowa-visited">Options/Language</a> for a full list of valid language codes. (default is <code>en</code>)<br>
-             The text languages are used for the following:</span>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.langs.core_langs")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.wikibase.langs.core_langs__name' class='xocfg_itm_name'>
+            Text languages
+          </div>
+          <div id='xowa.addon.wikibase.langs.core_langs__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.langs.core_langs")' title="reset to &quot;en&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.wikibase.langs.core_langs" data-xocfg-key="xowa.addon.wikibase.langs.core_langs" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="en">
+          </div><input type='hidden' id='xowa.addon.wikibase.langs.core_langs__key_box' value='xowa.addon.wikibase.langs.core_langs'> <input type='hidden' id='xowa.addon.wikibase.langs.core_langs__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.wikibase.langs.core_langs_help_div' class='xohelp_div'>
+          <div id='xowa.addon.wikibase.langs.core_langs_help_msg' class='xohelp_msg'>
+            <p>
+              Enter multiple language codes separated by a semi-colon. See <a tabindex="-1" href="/wiki/Options/Language" id="xolnki_39" title="Options/Language" class="xowa-visited">Options/Language</a> for a full list of valid language codes.<br>
+              The text languages are used for the following:
+            </p>
             <ul>
               <li>
-                <span class="reference-text">The overview for the article's label, description and alias. For example, a value of "en" on <a href="https://www.wikidata.org/wiki/Q2" rel="nofollow" class="external text">Earth's Wikidata page</a> will generate an article title of "Earth" and corresponding English text for everything before the Table of Contents.</span>
+                The overview for the article's label, description and alias. For example, a value of "en" on <a tabindex="-1" href="/site/www.wikidata.org/wiki/Q2">Earth's Wikidata page</a> will generate an article title of "Earth" and corresponding English text for everything before the Table of Contents.
               </li>
               <li>
-                <span class="reference-text">The entity name for claims and properties. For example, a language of "en" will generate "astronomical body" and "Sun" for claim P397</span>
+                The entity name for claims and properties. For example, a language of "en" will generate "astronomical body" and "Sun" for claim P397
               </li>
-            </ul><span class="reference-text">Note that multiple languages allow searching for a preferred language first. For example, a value of "de;en" will search for the German text first. If one is not found, it will then use the English text.</span>
-          </li>
-          <li id="cite_note-link_wikis-1">
-            <span class="mw-cite-backlink"><a href="#cite_ref-link_wikis_1-0">^</a></span> <span class="reference-text">Enter a wiki code. (default is <code>enwiki</code>)<br>
-             The wiki code is used to create a hyperlink for the article title. For example, a wiki code of "enwiki" on <a href="https://www.wikidata.org/wiki/Q2" rel="nofollow" class="external text">Earth's Wikidata page</a> creates a hyperlink to English Wikipedia's Earth article.</span>
-          </li>
-          <li id="cite_note-sort_langs-2">
-            <span class="mw-cite-backlink"><a href="#cite_ref-sort_langs_2-0">^</a></span> <span class="reference-text">Enter multiple language codes separated by a semi-colon. (default is <code>en;de;es;fr;it;nl;pl;ru;sv</code>)<br>
-             The sort languages are used to sort the Link, Label, Description and Alias list. For example, sort languages of "en;de;fr" will place the English, German and French entries at the top of the list, and then sort everything else afterwards alphabetically.</span>
-          </li>
-          <li id="cite_note-site_default-3">
-            <span class="mw-cite-backlink"><a href="#cite_ref-site_default_3-0">^</a></span> <span class="reference-text">The name of the default site when using <a href="https://www.wikidata.org/wiki/Special:ItemByTitle.html" id="xolnki_3" title="Special:ItemByTitle">www.wikidata.org:Special:ItemByTitle</a>. (default is <code>enwiki</code>)</span>
-          </li>
-        </ol>
+            </ul>
+            <p>
+              Note that multiple languages allow searching for a preferred language first. For example, a value of "de;en" will search for the German text first. If one is not found, it will then use the English text.
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.langs.sort_langs")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.wikibase.langs.sort_langs__name' class='xocfg_itm_name'>
+            Sort languages
+          </div>
+          <div id='xowa.addon.wikibase.langs.sort_langs__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.langs.sort_langs")' title="reset to &quot;en;de;es;fr;it;nl;pl;ru;sv&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.wikibase.langs.sort_langs" data-xocfg-key="xowa.addon.wikibase.langs.sort_langs" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="en;de;es;fr;it;nl;pl;ru;sv">
+          </div><input type='hidden' id='xowa.addon.wikibase.langs.sort_langs__key_box' value='xowa.addon.wikibase.langs.sort_langs'> <input type='hidden' id='xowa.addon.wikibase.langs.sort_langs__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.wikibase.langs.sort_langs_help_div' class='xohelp_div'>
+          <div id='xowa.addon.wikibase.langs.sort_langs_help_msg' class='xohelp_msg'>
+            <p>
+              Enter multiple language codes separated by a semi-colon.<br>
+              The sort languages are used to sort the Link, Label, Description and Alias list. For example, sort languages of "en;de;fr" will place the English, German and French entries at the top of the list, and then sort everything else afterwards alphabetically.
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.xwikis.link_wikis")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.wikibase.xwikis.link_wikis__name' class='xocfg_itm_name'>
+            Link wiki
+          </div>
+          <div id='xowa.addon.wikibase.xwikis.link_wikis__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.xwikis.link_wikis")' title="reset to &quot;enwiki&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.wikibase.xwikis.link_wikis" data-xocfg-key="xowa.addon.wikibase.xwikis.link_wikis" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="enwiki">
+          </div><input type='hidden' id='xowa.addon.wikibase.xwikis.link_wikis__key_box' value='xowa.addon.wikibase.xwikis.link_wikis'> <input type='hidden' id='xowa.addon.wikibase.xwikis.link_wikis__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.wikibase.xwikis.link_wikis_help_div' class='xohelp_div'>
+          <div id='xowa.addon.wikibase.xwikis.link_wikis_help_msg' class='xohelp_msg'>
+            <p>
+              Enter a wiki code.<br>
+              The wiki code is used to create a hyperlink for the article title. For example, a wiki code of "enwiki" on <a tabindex="-1" href="/site/www.wikidata.org/wiki/Q2">Earth's Wikidata page</a> creates a hyperlink to English Wikipedia's Earth article.
+            </p>
+          </div>
+        </div>
+        <h2>
+          Special:Item by title
+        </h2>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.item_by_title.site_default")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.wikibase.item_by_title.site_default__name' class='xocfg_itm_name'>
+            Site default
+          </div>
+          <div id='xowa.addon.wikibase.item_by_title.site_default__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.item_by_title.site_default")' title="reset to &quot;enwiki&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.wikibase.item_by_title.site_default" data-xocfg-key="xowa.addon.wikibase.item_by_title.site_default" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="enwiki">
+          </div><input type='hidden' id='xowa.addon.wikibase.item_by_title.site_default__key_box' value='xowa.addon.wikibase.item_by_title.site_default'> <input type='hidden' id='xowa.addon.wikibase.item_by_title.site_default__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.wikibase.item_by_title.site_default_help_div' class='xohelp_div'>
+          <div id='xowa.addon.wikibase.item_by_title.site_default_help_msg' class='xohelp_msg'>
+            <p>
+              The name of the default site when using <a tabindex="-1" href="/site/www.wikidata.org/wiki/Special:ItemByTitle" id="xolnki_40" title="Special:ItemByTitle">www.wikidata.org:Special:ItemByTitle</a>.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   
