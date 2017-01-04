@@ -25,14 +25,15 @@ class Xomath_check_mgr {
 		// get db, conn, rdr
 		Xob_db_file log_db = Xob_db_file.New__file_make(wiki.Fsys_mgr().Root_dir());
 		Db_conn log_conn = log_db.Conn();
-		Db_rdr rdr = log_conn.Stmt_sql("SELECT * FROM " + Xop_log_basic_tbl.TBL_NAME).Exec_select__rls_auto();
+		Xop_log_basic_tbl log_tbl = new Xop_log_basic_tbl(log_conn);
+		Db_rdr rdr = log_conn.Stmt_select_all(log_tbl.Tbl_name(), log_tbl.flds).Exec_select__rls_auto();
 
 		// loop 
 		try {
 			while (rdr.Move_next()) {
 				// get page_id, src
-				int page_id = rdr.Read_int(Xop_log_basic_tbl.Fld_page_id);
-				byte[] src = rdr.Read_bry_by_str(Xop_log_basic_tbl.Fld_src_str);
+				int page_id = rdr.Read_int(log_tbl.fld__page_id);
+				byte[] src = rdr.Read_bry_by_str(log_tbl.fld__src_str);
 				count_total++;
 
 				src = Assert_flanking_math_ndes(page_id, src);

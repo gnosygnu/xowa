@@ -23,7 +23,10 @@ public class Xop_log_wkr_factory {
 	public Xop_log_invoke_wkr	Make__invoke()		{return new Xop_log_invoke_wkr(conn);}
 	public Xop_log_property_wkr Make__property()	{return new Xop_log_property_wkr(conn);}
 	public Xop_log_basic_wkr	Make__generic()		{
-		if (log_tbl == null) log_tbl = new Xop_log_basic_tbl(conn);
+		if (log_tbl == null) {
+			log_tbl = new Xop_log_basic_tbl(conn);
+			conn.Meta_tbl_assert(log_tbl);
+		}
 		return new Xop_log_basic_wkr(log_tbl);
 	}
 }
