@@ -42,8 +42,9 @@ public class Xoh_sidebar_mgr {
 		byte[] rv = rv_msg.Val();
 		if (rv_msg.Defined_in() == Xol_msg_itm.Defined_in__wiki && Bry_.Len_gt_0(rv)) return rv;
 
-		// sidebar is either (a) in lang.gfs (wikia; wmf wikis without MediaWiki:Sidebar), or (b) not even in lang.gfs (wmf wikis in lang.gfs without "lang.gfs"; EX:de.gfs)
-		return null;
+		// sidebar is either (a) in lang.gfs (wikia; wmf wikis without MediaWiki:Sidebar), or (b) not in lang.gfs (wmf wikis in lang.gfs without "lang.gfs"; EX:abcde.gfs)
+		// if wikia, return null; else return rv; note that all "official" langs (EX: sw) fallback to en.gfs which has a sidebar; DATE:2017-01-05
+		return wiki.Domain_tid() == Xow_domain_tid_.Tid__other ? null : rv;
 	}
 	public void Make(Bry_bfr tmp_bfr, byte[] src) {	// TEST:
 		Xoh_sidebar_parser.Parse(tmp_bfr, wiki, grps, src);
