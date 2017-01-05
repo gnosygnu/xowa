@@ -37,7 +37,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 		Xow_hdump_mode.Cfg__reg_type(cfg_mgr.Type_mgr());
 		cfg_mgr.Bind_many_wiki(this, wiki, Cfg__read_preferred, Cfg__html_mode);
 	}
-	public void Load_by_edit(Xoae_page wpg) {
+	public void Load_by_xowe(Xoae_page wpg) {
 		tmp_hpg.Ctor_by_hview(wpg.Wiki(), wpg.Url(), wpg.Ttl(), wpg.Db().Page().Id());
 		Load(tmp_hpg, wpg.Ttl());
 		wpg.Db().Html().Html_bry_(tmp_hpg.Db().Html().Html_bry());

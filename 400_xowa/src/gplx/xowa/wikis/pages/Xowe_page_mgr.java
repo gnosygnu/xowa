@@ -34,33 +34,34 @@ public class Xowe_page_mgr {
 
 		// load page meta; wait_for_popups
 		Xoae_page page = wiki.Data_mgr().Load_page_and_parse(url, ttl, wiki.Lang(), tab, false);
+		ttl = page.Ttl();	// note that Load_page_and_parse can redirect ttl; EX: Special:Random -> A; DATE:2017-01-05
 		Wait_for_popups(wiki.App());
 
 		// auto-update
 		read_mgr.Auto_update(wiki, page, ttl);
 
-		// load page from html_db
+		// load from html_db
 		boolean from_html_db = page.Db().Page().Html_db_id() != -1;
 		boolean read_from_html_db_preferred = wiki.Html__hdump_mgr().Load_mgr().Read_preferred();
 		if (from_html_db) {
 			if (read_from_html_db_preferred) {
-				wiki.Html__hdump_mgr().Load_mgr().Load_by_edit(page);
+				wiki.Html__hdump_mgr().Load_mgr().Load_by_xowe(page);
 				from_html_db = Bry_.Len_gt_0(page.Db().Html().Html_bry());	// NOTE: archive.org has some wtxt_dbs which included page|html_db_id without actual html_dbs; DATE:2016-06-22
 			}
 			else
 				from_html_db = false;
 		}
 
-		// load page from wtxt_db; occurs if (a) no html_db_id; (b) option says to use wtxt db; (c) html_db_id exists, but no html_db;
+		// load from wtxt_db; occurs if (a) no html_db_id; (b) option says to use wtxt db; (c) html_db_id exists, but no html_db;
 		if (!from_html_db) {
 			wiki.Parser_mgr().Parse(page, false);
 
-			// load from html_dbs if no wtxt found and option just marked as not read_preferred
+			// load from html_db if no wtxt found and option just marked as not read_preferred
 			if (	Bry_.Len_eq_0(page.Db().Text().Text_bry())				// no wtxt found
 				&&	!ttl.Ns().Id_is_special()								// skip special
 				&&	!read_from_html_db_preferred							// read preferred not marked
 				) {
-				wiki.Html__hdump_mgr().Load_mgr().Load_by_edit(page);
+				wiki.Html__hdump_mgr().Load_mgr().Load_by_xowe(page);
 				from_html_db = Bry_.Len_gt_0(page.Db().Html().Html_bry());	
 			}
 		}
