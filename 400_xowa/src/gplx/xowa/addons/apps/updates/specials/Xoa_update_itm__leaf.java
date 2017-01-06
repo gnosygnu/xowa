@@ -19,14 +19,15 @@ package gplx.xowa.addons.apps.updates.specials; import gplx.*; import gplx.xowa.
 import gplx.langs.mustaches.*;
 import gplx.xowa.addons.apps.updates.dbs.*;
 class Xoa_update_itm__leaf implements Mustache_doc_itm {
-	private final    String version, date, summary, details;
+	private final    String version, date, summary, details, package_url;
 	private final    int priority;
-	public Xoa_update_itm__leaf(String version, String date, int priority, String summary, String details) {
+	public Xoa_update_itm__leaf(String version, String date, int priority, String summary, String details, String package_url) {
 		this.version = version;
 		this.date = date;
 		this.priority = priority;
 		this.summary = summary;
 		this.details = details;
+		this.package_url = package_url;
 	}
 	@gplx.Virtual public boolean Mustache__write(String k, Mustache_bfr bfr) {
 		if		(String_.Eq(k, "version"))			bfr.Add_str_u8(version);
@@ -34,6 +35,7 @@ class Xoa_update_itm__leaf implements Mustache_doc_itm {
 		else if	(String_.Eq(k, "priority"))			bfr.Add_str_u8(Xoa_app_version_itm.Priority__to_name(priority));
 		else if	(String_.Eq(k, "summary"))			bfr.Add_str_u8(summary);
 		else if	(String_.Eq(k, "details"))			bfr.Add_str_u8(details);
+		else if	(String_.Eq(k, "package_url"))		bfr.Add_str_u8(package_url);
 		return true;
 	}
 	@gplx.Virtual public Mustache_doc_itm[] Mustache__subs(String key) {

@@ -43,7 +43,7 @@ public class Xoa_boot_mgr {
 		log_wtr = usr_dlg.Log_wkr(); log_wtr.Log_to_session_fmt("env.init: version=~{0}", Xoa_app_.Version);
 		GfuiEnv_.Init_swt(args, Xoa_app_.class); 
 		Io_url jar_url = Env_.AppUrl();
-		Xoa_app_.Build_date = Io_mgr.Instance.QueryFil(jar_url).ModifiedTime().XtoUtc().XtoStr_fmt("yyyy-MM-dd HH:mm");
+		Xoa_app_.Build_date = Io_mgr.Instance.QueryFil(jar_url).ModifiedTime().XtoUtc().XtoStr_fmt(Xoa_app_.Build_date_fmt);
 		log_wtr.Log_to_session_fmt("env.init: jar_url=~{0}; build_date=~{1}", jar_url.NameAndExt(), Xoa_app_.Build_date);
 		log_wtr.Log_to_session_fmt("env.init: op_sys=~{0}", Op_sys.Cur().To_str());
 	}
@@ -73,7 +73,7 @@ public class Xoa_boot_mgr {
 			try {
 				app.Sys_cfg().Lang_(System_lang());
 				String launch_url = arg_mgr.Gui__home_page();
-				if (launch_url != null) gplx.xowa.guis.views.Xog_startup_tabs_.Manual = launch_url;
+				if (launch_url != null) gplx.xowa.guis.views.Xog_startup_tabs.Manual = launch_url;
 				app.Tcp_server().Rdr_port_(arg_mgr.Tcp__port_recv()).Wtr_port_(arg_mgr.Tcp__port_send());
 				gplx.xowa.apps.servers.http.Http_server_mgr server_mgr = app.Http_server();
 				server_mgr.Port_(arg_mgr.Http__port());
@@ -92,7 +92,6 @@ public class Xoa_boot_mgr {
 				if (app_type_is_gui)
 					GfuiEnv_.ShowMsg(Err_.Message_gplx_full(e));
 			}
-			gplx.xowa.apps.setups.Xoa_setup_mgr.Delete_old_files(app);
 
 			// launch
 			app.Launch();

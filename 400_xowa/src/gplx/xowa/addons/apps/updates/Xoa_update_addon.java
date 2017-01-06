@@ -17,20 +17,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.updates; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
 import gplx.xowa.specials.*; import gplx.xowa.htmls.bridges.*;
-import gplx.xowa.addons.apps.updates.specials.*;
 public class Xoa_update_addon implements Xoax_addon_itm, Xoax_addon_itm__special, Xoax_addon_itm__json {
 	public Xow_special_page[] Special_pages() {
 		return new Xow_special_page[]
-		{ Xoa_update_special.Prototype
+		{ gplx.xowa.addons.apps.updates.specials.Xoa_update_special.Prototype
 		};
 	}
 	public Bridge_cmd_itm[] Json_cmds() {
 		return new Bridge_cmd_itm[]
-		{ Xoa_update_bridge.Prototype
+		{ gplx.xowa.addons.apps.updates.specials.svcs.Xoa_update_bridge.Prototype
 		};
 	}
 
 	public String Addon__key() {return ADDON__KEY;} private static final String ADDON__KEY = "xowa.app.update";
-	public static void Init(Xoae_app app) {
-	}
 }

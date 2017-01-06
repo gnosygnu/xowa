@@ -31,6 +31,9 @@ public class Xow_special_meta {
 	public byte[] Ttl_bry()			{return ttl_bry;} private final    byte[] ttl_bry;
 	public byte[][] Aliases()		{return aliases;} private final    byte[][] aliases;	// EX: Special:RandomPage has Special:Random as alias
 	public byte[] Display_ttl()		{return display_ttl;} private byte[] display_ttl; public Xow_special_meta Display_ttl_(String v) {display_ttl = Bry_.new_u8(v); return this;} 
+	public String Url__home() {
+		return String_.Concat(gplx.xowa.wikis.domains.Xow_domain_itm_.Str__home, gplx.xowa.htmls.hrefs.Xoh_href_.Str__wiki, ttl_str);
+	}
 
 	public boolean Match_ttl(Xoa_ttl ttl) {
 		return ttl.Ns().Id_is_special() && Bry_.Eq(ttl.Root_txt(), key_bry);

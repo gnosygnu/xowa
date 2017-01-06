@@ -15,20 +15,20 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.updates.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
+package gplx.xowa.addons.apps.updates.specials.svcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*; import gplx.xowa.addons.apps.updates.specials.*;
 import gplx.xowa.guis.cbks.*;
 import gplx.core.gfobjs.*;
 import gplx.xowa.addons.apps.updates.dbs.*; import gplx.xowa.addons.apps.updates.js.*;
 import gplx.xowa.addons.apps.updates.apps.*;
 import gplx.core.envs.*;
-class Xoa_update_controller implements Gfo_invk {
+class Xoa_update_svc implements Gfo_invk {
 	private Xoa_app app;
 	private Io_url app_root_dir, update_dir, update_jar_fil;
-	public void Update_app(Xoa_app app, String version_name) {
-		this.app = app;
+	public Xoa_update_svc(Xoa_app app) {this.app = app;}
+	public void Exec(String version_name) {
 		// get app_version from db
 		this.app_root_dir = app.Fsys_mgr().Root_dir();
-		this.update_dir = app_root_dir.GenSubDir_nest("user", "app", "update");
+		this.update_dir = app_root_dir.GenSubDir_nest("user", "install", "update");
 		Io_url update_db_fil = update_dir.GenSubFil_nest("xoa_update.sqlite3");
 		Xoa_update_db_mgr db_mgr = new Xoa_update_db_mgr(update_db_fil);
 		Xoa_app_version_itm version_itm = db_mgr.Tbl__app_version().Select_by_version_or_null(version_name);
@@ -45,6 +45,9 @@ class Xoa_update_controller implements Gfo_invk {
 		, "xo.app_updater.download__prog", Gfo_invk_cmd.New_by_key(this, Invk__download_done), src, trg, src_len);
 		download_wkr.Exec_async("app_updater");
 	}
+	public void Skip() {
+		Xoa_update_startup.Set_cutoff_date_to_now(app);
+	}
 	private void On_download_done(GfoMsg m) {
 		Xojs_wkr__download download_wkr = (Xojs_wkr__download)m.ReadObj("v");
 		Io_url src = download_wkr.Trg();
@@ -59,7 +62,7 @@ class Xoa_update_controller implements Gfo_invk {
 
 		// copy update_jar
 		Io_url src_jar_fil = src.GenSubFil_nest("bin", "any", "xowa", "addon", "app", "update", "xoa_update.jar");
-		this.update_jar_fil = app_root_dir.GenSubFil_nest("user", "app", "update", "xoa_update.jar");
+		this.update_jar_fil = app_root_dir.GenSubFil_nest("user", "install", "update", "xoa_update.jar");
 		Io_mgr.Instance.MoveFil_args(src_jar_fil, update_jar_fil, true).Exec();
 
 		Xojs_wkr__replace replace_wkr = new Xojs_wkr__replace(unzip_wkr.Cbk_mgr(), unzip_wkr.Cbk_trg(), "xo.app_updater.download__prog", Gfo_invk_cmd.New_by_key(this, Invk__replace_done), src, trg);
@@ -79,12 +82,15 @@ class Xoa_update_controller implements Gfo_invk {
 
 		// write failed
 		Bry_bfr bfr = Bry_bfr_.New();
-		bfr.Add_str_u8(App__update__restart_cmd(app.Api_root().Addon().App__update__restart_cmd(), Env_.AppUrl(), Op_sys.Cur().Tid(), Op_sys.Cur().Bitness()) + "\n");
+		String app_update_cfg = app.Cfg().Get_str_app_or("xowa.app.update.restart_cmd", "");	// CFG:Cfg__
+		bfr.Add_str_u8(App__update__restart_cmd(app_update_cfg, Env_.AppUrl(), Op_sys.Cur().Tid(), Op_sys.Cur().Bitness()) + "\n");
 		list.Save(bfr);
-		Io_mgr.Instance.SaveFilBfr(update_dir.GenSubFil("xoa_update.txt"), bfr);
+		Io_url manifest_url = update_dir.GenSubFil("xoa_update_manifest.txt");
+		Io_mgr.Instance.SaveFilBfr(manifest_url, bfr);
 
 		replace_wkr.Cbk_mgr().Send_json(replace_wkr.Cbk_trg(), "xo.app_updater.download__prog", Gfobj_nde.New().Add_bool("done", true));
-		Runtime_.Exec("java -jar " + update_jar_fil.Raw());
+
+		Runtime_.Exec("java -jar " + update_jar_fil.Raw()+ " " + manifest_url.Raw());
 		System_.Exit();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

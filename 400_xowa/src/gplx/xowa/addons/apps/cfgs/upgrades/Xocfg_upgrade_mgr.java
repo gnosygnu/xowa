@@ -19,7 +19,7 @@ package gplx.xowa.addons.apps.cfgs.upgrades; import gplx.*; import gplx.xowa.*; 
 import gplx.dbs.*;
 import gplx.langs.gfs.*;
 public class Xocfg_upgrade_mgr {
-	public static void Convert(Xoae_app app) {
+	public static void Upgrade_cfg_0(Xoae_app app) {
 		try {
 			// get cfg_fil; if empty, exit
 			Io_url cfg_fil = app.Fsys_mgr().Root_dir().GenSubFil_nest("user", "anonymous", "app", "data", "cfg", "xowa_user_cfg.gfs");

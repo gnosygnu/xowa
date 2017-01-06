@@ -34,14 +34,15 @@ class Xog_launcher_tabs {
 		app.Usr_dlg().Log_wkr().Log_to_session_direct(log_bfr.Xto_str());
 	}
 	private boolean Restore_tabs(Xoae_app app, Xowe_wiki home_wiki, Xog_win_itm win, Io_fil_marker fil_marker) {
-		String[] launch_urls = Xog_startup_tabs_.Calc_startup_strs(app);
+		Xog_startup_tabs startup_tabs = new Xog_startup_tabs().Init_by_app(app).Calc();
+		String[] launch_urls = startup_tabs.Startup_urls();
 		try {
 			int launch_urls_len = launch_urls.length;
 			for (int i = 0; i < launch_urls_len; ++i) {
 				String launch_url = launch_urls[i];
 				Launch_tab(win, home_wiki, launch_url);
 			}
-			Xog_startup_tabs_.Select_startup_tab(app);
+			app.Gui_mgr().Browser_win().Tab_mgr().Tabs_select_by_idx(startup_tabs.Startup_idx());
 			fil_marker.End();
 			return true;
 		}
@@ -52,12 +53,8 @@ class Xog_launcher_tabs {
 		}
 	}
 	private void Restore_tab_failover(Xoae_app app, Xowe_wiki home_wiki, Xog_win_itm win) {
-		try {
-			Launch_tab(win, home_wiki, Xog_startup_tabs_.Page_xowa);
-		}
-		catch (Exception e) {
-			app.Usr_dlg().Warn_many("", "", "failed to launch failover tab: err=~{0}", Err_.Message_gplx_full(e));
-		}
+		try {Launch_tab(win, home_wiki, Xog_startup_tabs.Url__home_main);}
+		catch (Exception e) {app.Usr_dlg().Warn_many("", "", "failed to launch failover tab: err=~{0}", Err_.Message_gplx_full(e));}
 	}
 	private void Launch_tab(Xog_win_itm win, Xowe_wiki home_wiki, String launch_str) {
 		Xoae_app app = win.App();
@@ -78,13 +75,13 @@ class Io_fil_marker {
 		boolean rv = false;
 		synchronized (this) {
 			try {
-				rv = !Io_mgr.Instance.ExistsFil(url);			// exists = fail; !exists = pass;
-				if (rv)									// pass: file does not exist;
-					Io_mgr.Instance.SaveFilStr(url, "");		// create
-				else									// file exists from previous run
+				rv = !Io_mgr.Instance.ExistsFil(url);		// exists = fail; !exists = pass;
+				if (rv)										// pass: file does not exist;
+					Io_mgr.Instance.SaveFilStr(url, "");	// create
+				else										// file exists from previous run
 					Io_mgr.Instance.DeleteFil(url);			// delete
 			}
-			catch (Exception exc) {				// something unexpected happened
+			catch (Exception exc) {					// something unexpected happened
 				usr_dlg.Warn_many("", "", "marker.bgn failed: url=~{0} err=~{1}", url.Raw(), Err_.Message_gplx_full(exc));
 				Io_mgr.Instance.DeleteFil(url);				// try to delete it again
 			}

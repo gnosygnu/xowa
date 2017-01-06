@@ -79,9 +79,7 @@ public class Xog_startup_win_ {
 			cfg_mgr.Set_str_app(Cfg__prev_rect			, win.Rect().Xto_str());
 			cfg_mgr.Set_str_app(Cfg__prev_maximized		, Yn.To_str(win.Maximized()));
 		}
-		Xog_startup_tabs_.Shutdown(app);
-
-		cfg_mgr.Set_str_app(gplx.xowa.guis.views.Xog_startup_tabs_.Cfg__prev_version, Xoa_app_.Version);
+		Xog_startup_tabs.Shutdown(app);
 	}
 	public static SizeAdp Screen_maximized_calc() {
 		Op_sys os = Op_sys.Cur();

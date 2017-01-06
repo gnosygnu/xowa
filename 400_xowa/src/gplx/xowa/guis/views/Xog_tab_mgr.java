@@ -181,7 +181,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		tab_mgr.Tabs_select_by_idx(new_idx);
 	}
 	public void Tabs_select_by_idx(int v) {
-		if (v >= tab_regy.Count()) return;
+		if (v < 0 || v >= tab_regy.Count()) return;
 		tab_mgr.Tabs_select_by_idx(v);
 	}
 	public void Tabs_move(boolean fwd) {

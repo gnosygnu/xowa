@@ -17,16 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.updates.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
 import gplx.langs.mustaches.*;
-class Xoa_update_itm__root extends Xoa_update_itm__leaf { 	private final    String current_version, current_date, download_url, check_date;
+class Xoa_update_itm__root extends Xoa_update_itm__leaf { 	private final    String current_version, current_date, check_date;
 	private final    boolean web_access_enabled;
 	private Xoa_update_itm__leaf[] itms = Xoa_update_itm__leaf.Ary__empty;
 	public Xoa_update_itm__root
-		( String current_version, String current_date, String download_url, String check_date, boolean web_access_enabled
-		, String version, String date, int priority, String summary, String details
-		) {super(version, date, priority, summary, details);
+		( String current_version, String current_date, String check_date, boolean web_access_enabled
+		, String version, String date, int priority, String summary, String details, String package_url
+		) {super(version, date, priority, summary, details, package_url);
 		this.current_version = current_version;
 		this.current_date = current_date;
-		this.download_url = download_url;
 		this.check_date = check_date;
 		this.web_access_enabled = web_access_enabled;
 	}
@@ -36,7 +35,6 @@ class Xoa_update_itm__root extends Xoa_update_itm__leaf { 	private final    Stri
 	@Override public boolean Mustache__write(String k, Mustache_bfr bfr) {
 		if		(String_.Eq(k, "current_version"))		bfr.Add_str_u8(current_version);
 		else if	(String_.Eq(k, "current_date"))			bfr.Add_str_u8(current_date);
-		else if	(String_.Eq(k, "download_url"))			bfr.Add_str_u8(download_url);
 		else if	(String_.Eq(k, "check_date"))			bfr.Add_str_u8(check_date);
 		return super.Mustache__write (k, bfr);
 	}

@@ -43,7 +43,7 @@ public class Xoa_app_version_tbl implements Db_tbl {
 		( "SELECT  *"
 		, "FROM    app_version"
 		, "WHERE   version_date > '{0}'"
-		, "ORDER BY version_date DESC"
+		// , "ORDER BY version_date DESC"
 		), date);
 
 		Db_rdr rdr = conn.Stmt_sql(sql).Exec_select__rls_auto();

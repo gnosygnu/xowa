@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.apps.updates.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
+package gplx.xowa.addons.apps.updates.specials.svcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*; import gplx.xowa.addons.apps.updates.specials.*;
 import gplx.langs.jsons.*; import gplx.xowa.htmls.bridges.*;
 public class Xoa_update_bridge implements Bridge_cmd_itm {
 	private Xoa_app app;
@@ -25,19 +25,20 @@ public class Xoa_update_bridge implements Bridge_cmd_itm {
 	public String Exec(Json_nde data) {
 		byte proc_id = proc_hash.Get_as_byte_or(data.Get_as_bry_or(Bridge_cmd_mgr.Msg__proc, null), Byte_ascii.Max_7_bit);
 		Json_nde args = data.Get_kv(Bridge_cmd_mgr.Msg__args).Val_as_nde();
+
+		Xoa_update_svc svc = new Xoa_update_svc(app);
 		switch (proc_id) {
-			case Proc__download:
-				Xoa_update_controller controller = new Xoa_update_controller();
-				controller.Update_app(app, args.Get_as_str("version"));
-				break;
-			default: throw Err_.new_unhandled_default(proc_id);
+			case Proc__exec:		svc.Exec(args.Get_as_str("version"));break;
+			case Proc__skip:		svc.Skip(); break;
+			default:				throw Err_.new_unhandled_default(proc_id);
 		}
 		return "";
 	}
 
-	private static final byte Proc__download = 0;
+	private static final byte Proc__exec = 0, Proc__skip = 1;
 	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
-	.Add_str_byte("download"						, Proc__download)
+	.Add_str_byte("exec"						, Proc__exec)
+	.Add_str_byte("skip"						, Proc__skip)
 	;
 
 	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("app.updater");

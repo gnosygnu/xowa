@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.xwikis.sitelinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.wikis.xwikis.sitelinks.htmls.*; import gplx.xowa.langs.*;
 public class Xoa_sitelink_mgr {
-	private final Xoa_sitelink_div_wtr div_wtr = new Xoa_sitelink_div_wtr();
-	public Xoa_sitelink_itm_mgr Itm_mgr() {return itm_mgr;} private final Xoa_sitelink_itm_mgr itm_mgr;
-	public Xoa_sitelink_grp_mgr Grp_mgr() {return grp_mgr;} private final Xoa_sitelink_grp_mgr grp_mgr = new Xoa_sitelink_grp_mgr();
+	private final    Xoa_sitelink_div_wtr div_wtr = new Xoa_sitelink_div_wtr();
+	public Xoa_sitelink_itm_mgr Itm_mgr() {return itm_mgr;} private final    Xoa_sitelink_itm_mgr itm_mgr;
+	public Xoa_sitelink_grp_mgr Grp_mgr() {return grp_mgr;} private final    Xoa_sitelink_grp_mgr grp_mgr = new Xoa_sitelink_grp_mgr();
 	public Xoa_sitelink_mgr() {
 		this.itm_mgr = new Xoa_sitelink_itm_mgr(grp_mgr.Default_grp());
 	}

@@ -44,7 +44,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		url_cmd_eval = new Xoa_fsys_eval(fsys_mgr, user.Fsys_mgr());			
 		fsys_mgr.Init_by_app(prog_mgr);
 		log_wtr.Log_dir_(user.Fsys_mgr().App_temp_dir().GenSubDir("log"));
-		this.gfs_mgr = new Xoa_gfs_mgr(this, fsys_mgr);
+		this.gfs_mgr = new Xoa_gfs_mgr(user.Key(), this, fsys_mgr);
 		lang_mgr = new Xoa_lang_mgr(this, gfs_mgr);
 		wiki_mgr = new Xoae_wiki_mgr(this);
 		gui_mgr = new Xoa_gui_mgr(this);
@@ -162,13 +162,18 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		special_mgr.Init_by_app(this);
 		sys_cfg.Init_by_app(this);
 	}
-	public boolean Launch_done() {return stage == Xoa_stage_.Tid_launch;}
 	public void Launch() {
-		if (Launch_done()) return;
-		xwiki_mgr__sitelink_mgr.Init_by_app();
+		// guard against circular calls; probably no longer needed
+		if (stage == Xoa_stage_.Tid_launch) return;
 		stage = Xoa_stage_.Tid_launch;
-		gplx.xowa.addons.apps.cfgs.upgrades.Xocfg_upgrade_mgr.Convert(this);
-		gplx.xowa.apps.setups.Xoa_setup_mgr.Setup_run_check(this); log_bfr.Add("app.upgrade.done");
+
+		// run app-launch actions
+		gplx.xowa.apps.setups.Xoa_setup_mgr.Launch(this);
+
+		// init "In other langs"
+		xwiki_mgr__sitelink_mgr.Init_by_app();
+
+		// init user wiki
 		user.Wiki().Init_assert();	// NOTE: must assert wiki and load langs first, else will be asserted during Portal_mgr().Init(), which will cause IndexOutOfBounds; DATE:2014-10-04
 		gplx.xowa.addons.users.wikis.regys.Xou_regy_addon.Init(this);
 	}

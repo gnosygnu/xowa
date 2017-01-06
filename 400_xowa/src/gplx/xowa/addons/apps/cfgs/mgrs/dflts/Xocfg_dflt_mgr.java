@@ -36,8 +36,8 @@ public class Xocfg_dflt_mgr {
 			hash.Add_if_dupe_use_nth(key, invk);
 		}
 	}
-	public static void Run_os_gfs(gplx.xowa.apps.gfs.Xoa_gfs_mgr gfs_mgr, gplx.xowa.apps.fsys.Xoa_fsys_mgr fsys_mgr) {
-		Io_url url = fsys_mgr.Root_dir().GenSubFil_nest("user", "anonymous", "app", "cfg", "os.gfs");
+	public static void Run_os_gfs(String user_name, gplx.xowa.apps.gfs.Xoa_gfs_mgr gfs_mgr, gplx.xowa.apps.fsys.Xoa_fsys_mgr fsys_mgr) {
+		Io_url url = fsys_mgr.Root_dir().GenSubFil_nest("user", user_name, "app", "cfg", "os.gfs");
 		if (!Io_mgr.Instance.ExistsFil(url)) {
 			Io_url dflt_url = fsys_mgr.Bin_plat_dir().GenSubFil_nest("xowa", "cfg", "os.default.gfs");
 			if (Io_mgr.Instance.ExistsFil(dflt_url))	// TEST: also, DRD

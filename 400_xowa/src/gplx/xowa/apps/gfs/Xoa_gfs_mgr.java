@@ -19,7 +19,9 @@ package gplx.xowa.apps.gfs; import gplx.*; import gplx.xowa.*; import gplx.xowa.
 import gplx.langs.gfs.*;
 import gplx.xowa.users.*; import gplx.xowa.apps.fsys.*;
 public class Xoa_gfs_mgr implements Gfo_invk, Gfo_invk_root_wkr {
-	public Xoa_gfs_mgr(Gfo_invk root_invk, Xoa_fsys_mgr app_fsys_mgr) {
+	private final    String user_name;
+	public Xoa_gfs_mgr(String user_name, Gfo_invk root_invk, Xoa_fsys_mgr app_fsys_mgr) {
+		this.user_name = user_name;
 		this.root_invk = root_invk; this.app_fsys_mgr = app_fsys_mgr;
 		GfsCore.Instance.AddCmd(root_invk, Xoae_app.Invk_app);
 		GfsCore.Instance.AddCmd(root_invk, Xoae_app.Invk_xowa);
@@ -53,7 +55,7 @@ public class Xoa_gfs_mgr implements Gfo_invk, Gfo_invk_root_wkr {
 	}
 	private void Run_url_by_type(String type) {
 		if		(String_.Eq(type, "xowa_cfg_app"))		Run_url(app_fsys_mgr.Cfg_app_fil());
-		else if	(String_.Eq(type, "xowa.user.os"))		gplx.xowa.addons.apps.cfgs.mgrs.dflts.Xocfg_dflt_mgr.Run_os_gfs(this, app_fsys_mgr);
+		else if	(String_.Eq(type, "xowa.user.os"))		gplx.xowa.addons.apps.cfgs.mgrs.dflts.Xocfg_dflt_mgr.Run_os_gfs(user_name, this, app_fsys_mgr);
 		else											throw Err_.new_wo_type("invalid gfs type", "type", type);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
