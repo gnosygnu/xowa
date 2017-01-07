@@ -21,7 +21,7 @@ public class Xoa_update_db_mgr_ {
 	public static Io_url Url(Xoa_app app) {return app.Fsys_mgr().Root_dir().GenSubFil_nest("user", "install", "update", "xoa_update.sqlite3");}
 	public static Xoa_app_version_itm[] Select(Io_url db_url, DateAdp cutoff_date) {
 		Xoa_update_db_mgr db_mgr = new Xoa_update_db_mgr(db_url);
-		return db_mgr.Tbl__app_version().Select_by_date(cutoff_date.XtoStr_fmt_yyyy_MM_dd_HH_mm_ss());
+		return db_mgr.Tbl__app_version().Select_by_date(cutoff_date.XtoStr_fmt(Xocfg_mgr.Fmt__time));
 	}
 	public static boolean Download_from_inet(Xoa_app app, boolean exit_if_too_soon, Io_url db_url) {
 		// exit if web_access disabled
