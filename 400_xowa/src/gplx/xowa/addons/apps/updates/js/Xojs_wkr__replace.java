@@ -42,11 +42,9 @@ public class Xojs_wkr__replace extends Xojs_wkr__base {
 			} catch (Exception exc) {
 				Gfo_usr_dlg_.Instance.Log_many("failed to delete and move file; file=~{0} msg=~{1}", trg_fil.Raw(), Err_.Message_gplx_log(exc));
 				failed_list.Add(Keyval_.new_(src_fil.Raw(), trg_fil.Raw()));
-				try {
-					Io_mgr.Instance.CopyFil(src_fil, trg_fil, true);	// try to copy file anyway
-				} catch (Exception exc2) {
-					Gfo_usr_dlg_.Instance.Log_many("failed to fopy file; file=~{0} msg=~{1}", trg_fil.Raw(), Err_.Message_gplx_log(exc2));
-				}
+				
+				// try {Io_mgr.Instance.CopyFil(src_fil, trg_fil, true);}	// try to copy file anyway
+				// catch (Exception exc2) {Gfo_usr_dlg_.Instance.Log_many("failed to fopy file; file=~{0} msg=~{1}", trg_fil.Raw(), Err_.Message_gplx_log(exc2));}
 			}
 		}
 

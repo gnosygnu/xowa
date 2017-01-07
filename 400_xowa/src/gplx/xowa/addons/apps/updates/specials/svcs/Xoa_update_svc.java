@@ -25,7 +25,7 @@ class Xoa_update_svc implements Gfo_invk {
 	private Xoa_app app;
 	private Io_url app_root_dir, update_dir, update_jar_fil;
 	public Xoa_update_svc(Xoa_app app) {this.app = app;}
-	public void Exec(String version_name) {
+	public void Install(String version_name) {
 		// get app_version from db
 		this.app_root_dir = app.Fsys_mgr().Root_dir();
 		this.update_dir = app_root_dir.GenSubDir_nest("user", "install", "update");
@@ -46,7 +46,7 @@ class Xoa_update_svc implements Gfo_invk {
 		download_wkr.Exec_async("app_updater");
 	}
 	public void Skip() {
-		Xoa_update_startup.Set_cutoff_date_to_now(app);
+		Xoa_update_startup.Set_ignore_date_to_now(app);
 	}
 	private void On_download_done(GfoMsg m) {
 		Xojs_wkr__download download_wkr = (Xojs_wkr__download)m.ReadObj("v");

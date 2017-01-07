@@ -25,14 +25,14 @@ public class Xoa_update_html extends Xow_special_wtr__base {
 		return Load(app);
 	}
 	private static Mustache_doc_itm Load(Xoa_app app) {
-		Io_url db_url = Xoa_update_db.Url(app);
+		Io_url db_url = Xoa_update_db_mgr_.Url(app);
 
 		// get from internet
 		boolean web_access_enabled = gplx.core.ios.IoEngine_system.Web_access_enabled;
-		Xoa_update_db.Download_from_inet(app, db_url);
+		Xoa_update_db_mgr_.Download_from_inet(app, Bool_.N, db_url);
 
 		// load from db
-		Xoa_app_version_itm[] db_itms = Xoa_update_db.Select(db_url, DateAdp_.parse_fmt(Xoa_app_.Build_date, Xoa_app_.Build_date_fmt));
+		Xoa_app_version_itm[] db_itms = Xoa_update_db_mgr_.Select(db_url, DateAdp_.parse_fmt(Xoa_app_.Build_date, Xoa_app_.Build_date_fmt));
 
 		// build root
 		String check_date = app.Cfg().Get_str_app_or("xowa.app.update.startup.inet_date", null);	// CFG:Cfg__
