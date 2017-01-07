@@ -39,7 +39,7 @@ public class Xoa_update_db_mgr_ {
 		// check text file to see if version changed
 		Io_url trg_summary_fil = db_url.OwnerDir().GenSubFil("xoa_update.txt");
 		int trg_summary_version = Bry_.To_int_or(Io_mgr.Instance.LoadFilBryOr(trg_summary_fil, Bry_.new_a7("-1")), -1);
-		String src_summary_server = app.Cfg().Get_str_app_or("xowa.app.inet.server_url", "http://xowa.org");	// CFG:Cfg__
+		String src_summary_server = app.Cfg().Get_str_app_or("xowa.app.update.inet.server_url", "http://xowa.org");	// CFG:Cfg__
 		byte[] src_summary_bry = Io_mgr.Instance.DownloadFil_args("", Io_url_.Empty).Exec_as_bry(src_summary_server + "/admin/app_update/xoa_update.txt");
 		if (src_summary_bry == null) return false;
 		int src_summary_version = Bry_.To_int(src_summary_bry);

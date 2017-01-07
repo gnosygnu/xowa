@@ -88,8 +88,11 @@ class Xoa_update_svc implements Gfo_invk {
 		Io_url manifest_url = update_dir.GenSubFil("xoa_update_manifest.txt");
 		Io_mgr.Instance.SaveFilBfr(manifest_url, bfr);
 
+		// update prog as finished
 		replace_wkr.Cbk_mgr().Send_json(replace_wkr.Cbk_trg(), "xo.app_updater.download__prog", Gfobj_nde.New().Add_bool("done", true));
+		Xoa_update_startup.Set_ignore_date_to_now(app);	// update ignore_date so current offline updates are ignore
 
+		// run standalone app
 		Runtime_.Exec("java -jar " + update_jar_fil.Raw()+ " " + manifest_url.Raw());
 		System_.Exit();
 	}

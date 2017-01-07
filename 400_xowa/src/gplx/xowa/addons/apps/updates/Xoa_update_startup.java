@@ -27,9 +27,11 @@ public class Xoa_update_startup {
 
 			// check online for updates
 			Io_url db_url = Xoa_update_db_mgr_.Url(app);
-			if (Xoa_update_db_mgr_.Download_from_inet(app, Bool_.Y, db_url))
-				return true;
-
+			boolean offline_exists = Io_mgr.Instance.ExistsFil(db_url);
+			if (Xoa_update_db_mgr_.Download_from_inet(app, Bool_.Y, db_url)) {
+				return offline_exists;	// if !offline_exists, then application is brand-new install; don't bother showing update
+			}
+			
 			// check offline for updates
 			DateAdp ignore_date = cfg.Get_date_app_or(Cfg__ignore_date, DateAdp_.parse_fmt(Xoa_app_.Build_date, Xoa_app_.Build_date_fmt));
 			if (Xoa_update_db_mgr_.Select(db_url, ignore_date).length > 0)
