@@ -21,7 +21,7 @@ public class Pp_pages_nde_recursion_tst {
 	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void Init() {fxt.Init_xtn_pages();}
 	@After public void term() {
-		fxt.Wiki().Cache_mgr().Free_mem_all();
+		fxt.Wiki().Cache_mgr().Free_mem__all();
 	}
 	@Test  public void Page() {	// PURPOSE: handle recursive calls on page; EX: fr.s:Page:NRF_19.djvu/19; DATE:2014-01-01
 		fxt.Init_page_create("Page:A/1", "<pages index=\"A\" from=1 to=1 />abc");	// NOTE: recursive call to self

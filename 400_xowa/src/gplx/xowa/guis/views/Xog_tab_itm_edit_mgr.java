@@ -120,7 +120,7 @@ public class Xog_tab_itm_edit_mgr {
 	}
 	private static void Invalidate(Xowe_wiki wiki) {// invalidate everything on updates; especially needed for page transclusion; {{/my_subpage}} DATE:2014-04-10
 		wiki.Parser_mgr().Scrib().Core_term();
-		wiki.Cache_mgr().Free_mem_all();
+		wiki.Cache_mgr().Free_mem__all();
 	}
 	private static byte[] Get_new_text(Xog_tab_itm tab, byte[] orig) {
 		byte[] rv = tab.Html_itm().Get_elem_value_for_edit_box_as_bry();

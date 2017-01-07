@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*; import gplx.xowa.apps.cfgs.*;
 public class Pp_pages_nde_index_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void Init() {
 		Io_mgr.Instance.InitEngine_mem();
 		fxt.Wiki().Xtn_mgr().Xtn_proofread().Enabled_y_();
@@ -26,7 +26,7 @@ public class Pp_pages_nde_index_tst {
 		fxt.Wiki().Ns_mgr().Add_new(Xowc_xtn_pages.Ns_page_id_default, "Page").Add_new(Xowc_xtn_pages.Ns_index_id_default, "Index").Init();
 	}
 	@After public void term() {
-		fxt.Wiki().Cache_mgr().Free_mem_all();
+		fxt.Wiki().Cache_mgr().Free_mem__all();
 	}
 	@Test  public void Repeated() {	// PURPOSE: repeated pages should still show (and not be excluded by recursive logic); DATE:2014-01-01
 		fxt.Init_page_create("Page:A/1", "<pages index=\"A\" from=1 to=1 />abc");	// NOTE: recursive call to self
@@ -203,7 +203,7 @@ public class Pp_pages_nde_index_tst {
 		fxt.Init_page_create("Index:A", "");
 
 		// [[Index:]] has no [[Page:]] links; interpret to=1 as [[Page:A/1]]
-		fxt.Wiki().Cache_mgr().Free_mem_all();
+		fxt.Wiki().Cache_mgr().Free_mem__all();
 		fxt.Init_page_update("Index:A" , String_.Concat_lines_nl
 		( "no links"
 		));
@@ -213,7 +213,7 @@ public class Pp_pages_nde_index_tst {
 		));
 
 		// [[Index:]] has [[Page:]] links; interpret to=1 as 1st [[Page:]] in [[Index:]]'s [[Page:]] links
-		fxt.Wiki().Cache_mgr().Free_mem_all();
+		fxt.Wiki().Cache_mgr().Free_mem__all();
 		fxt.Init_page_update("Index:A" , String_.Concat_lines_nl
 		( "[[Page:A/0]]"
 		));
@@ -223,7 +223,7 @@ public class Pp_pages_nde_index_tst {
 		));
 
 		// [[Index:]] has [[Page:]] links but also <pagelist>; interpret to=1 as [[Page:A/1]]
-		fxt.Wiki().Cache_mgr().Free_mem_all();
+		fxt.Wiki().Cache_mgr().Free_mem__all();
 		fxt.Init_page_update("Index:A" , String_.Concat_lines_nl
 		( "[[Page:A/0]]"
 		, "<pagelist/>"

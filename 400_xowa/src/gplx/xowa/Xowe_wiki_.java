@@ -34,7 +34,7 @@ public class Xowe_wiki_ {
 	}
 	public static void Rls_mem(Xowe_wiki wiki, boolean clear_ctx) {
 		wiki.Appe().Free_mem(clear_ctx);
-		wiki.Cache_mgr().Free_mem_all();
+		wiki.Cache_mgr().Free_mem__all();
 		wiki.Parser_mgr().Scrib().Core_term();
 	}
 }

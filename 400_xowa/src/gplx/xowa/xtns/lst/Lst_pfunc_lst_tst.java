@@ -125,7 +125,7 @@ class Lst_pfunc_lst_fxt {
 	public Lst_pfunc_lst_fxt Clear() {
 		if (fxt == null) fxt = new Xop_fxt();
 		fxt.Reset();
-		fxt.Wiki().Cache_mgr().Free_mem_all();
+		fxt.Wiki().Cache_mgr().Free_mem__all();
 		Io_mgr.Instance.InitEngine_mem();
 		return this;
 	}

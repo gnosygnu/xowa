@@ -33,7 +33,10 @@ public class Xow_ifexist_cache {
 		return this;
 	}
 	public void Load_wkr_(Xow_page_cache_wkr v) {this.load_wkr = v;} private Xow_page_cache_wkr load_wkr;
-	public void Clear() {cache_mgr.Clear();}
+	public void Clear() {
+		cache_mgr.Clear();
+		ns_loaded_hash.Clear();
+	}
 	public void Add(Xoa_ttl ttl) {
 		byte[] key = ttl.Full_db();
 		cache_mgr.Add(key, itm__exists, key.length);

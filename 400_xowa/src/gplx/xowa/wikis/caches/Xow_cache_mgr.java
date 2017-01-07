@@ -55,16 +55,24 @@ public class Xow_cache_mgr {
 		}
 		return scrib_lang_names;
 	}
-	public void Free_mem_all() {this.Free_mem(Bool_.Y);}
-	public void Free_mem(boolean free_page_cache) {
-		if (free_page_cache) {
-			commons_cache.Clear();
-			ifexist_cache.Clear();
-			wiki.Appe().Wiki_mgr().Wdata_mgr().Clear();	// moved from ctx.Clear(); DATE:2016-07-21
-			page_cache.Free_mem(true);
-		}
-		else {
-			page_cache.Free_mem(false);
+	public void Free_mem__page()	{this.Free_mem(Free_mem__page_tid);}
+	public void Free_mem__wbase()	{this.Free_mem(Free_mem__wbase_tid);}
+	public void Free_mem__all()		{this.Free_mem(Free_mem__all_tid);}
+	private void Free_mem(int level) {
+		switch (level) {
+			case Free_mem__page_tid:
+				page_cache.Free_mem(false);
+				break;
+			case Free_mem__wbase_tid:
+				page_cache.Free_mem(false);
+				wiki.Appe().Wiki_mgr().Wdata_mgr().Clear();
+				break;
+			case Free_mem__all_tid:
+				page_cache.Free_mem(true);
+				wiki.Appe().Wiki_mgr().Wdata_mgr().Clear();
+				commons_cache.Clear();
+				ifexist_cache.Clear();
+				break;
 		}
 		wiki.Ctg__catpage_mgr().Free_mem_all();
 		tmpl_result_cache.Clear();
@@ -73,5 +81,6 @@ public class Xow_cache_mgr {
 		lst_cache.Clear();
 		scrib_lang_names = null;
 	}
+	private static final int Free_mem__page_tid = 0, Free_mem__wbase_tid = 1, Free_mem__all_tid = 2;
 	private static Keyval[] scrib_lang_names;
 }
