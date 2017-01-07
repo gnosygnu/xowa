@@ -31,8 +31,8 @@ public class Xoa_update_html extends Xow_special_wtr__base {
 		boolean web_access_enabled = gplx.core.ios.IoEngine_system.Web_access_enabled;
 		Xoa_update_db_mgr_.Download_from_inet(app, Bool_.N, db_url);
 
-		// load from db
-		Xoa_app_version_itm[] db_itms = Xoa_update_db_mgr_.Select(db_url, DateAdp_.parse_fmt(Xoa_app_.Build_date, Xoa_app_.Build_date_fmt));
+		// load from db			
+		Xoa_app_version_itm[] db_itms = Xoa_update_db_mgr_.Select(db_url, Xoa_update_startup.Version_cutoff(app));
 
 		// build root
 		String check_date = app.Cfg().Get_str_app_or("xowa.app.update.startup.inet_date", null);	// CFG:Cfg__

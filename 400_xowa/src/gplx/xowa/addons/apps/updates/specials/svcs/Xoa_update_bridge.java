@@ -29,7 +29,7 @@ public class Xoa_update_bridge implements Bridge_cmd_itm {
 		Xoa_update_svc svc = new Xoa_update_svc(app);
 		switch (proc_id) {
 			case Proc__install:		svc.Install(args.Get_as_str("version"));break;
-			case Proc__skip:		svc.Skip(); break;
+			case Proc__skip:		svc.Skip(args.Get_as_str("version")); break;
 			default:				throw Err_.new_unhandled_default(proc_id);
 		}
 		return "";

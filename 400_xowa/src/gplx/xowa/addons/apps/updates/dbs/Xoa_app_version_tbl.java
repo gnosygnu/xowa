@@ -34,17 +34,15 @@ public class Xoa_app_version_tbl implements Db_tbl {
 	}
 	public String Tbl_name() {return tbl_name;} private final    String tbl_name = TBL_NAME;
 	public void Create_tbl() {
-		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
-			, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, fld__version_date, fld__version_date))
-			);
+		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));
 	}
-	public Xoa_app_version_itm[] Select_by_date(String date) {	// NOTE: use version_date b/c (a) version_id is not available; (b) version_name is not easy to sort;
+	public Xoa_app_version_itm[] Select_by_id(int id) {
 		String sql = Db_sql_.Make_by_fmt(String_.Ary
 		( "SELECT  *"
 		, "FROM    app_version"
-		, "WHERE   version_date > '{0}'"
-		// , "ORDER BY version_date DESC"
-		), date);
+		, "WHERE   version_id > {0}"
+		, "ORDER BY version_id"
+		), id);
 
 		Db_rdr rdr = conn.Stmt_sql(sql).Exec_select__rls_auto();
 		try {
@@ -55,7 +53,7 @@ public class Xoa_app_version_tbl implements Db_tbl {
 			return (Xoa_app_version_itm[])list.To_ary_and_clear(Xoa_app_version_itm.class);
 		} finally {rdr.Rls();}
 	}
-	public Xoa_app_version_itm Select_by_version_or_null(String name) {
+	public Xoa_app_version_itm Select_by_name_or_null(String name) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__version_name).Crt_str(fld__version_name, name).Exec_select__rls_auto();
 		try {
 			return rdr.Move_next() ? Load(rdr) : null;

@@ -24,14 +24,18 @@ import gplx.core.envs.*;
 class Xoa_update_svc implements Gfo_invk {
 	private Xoa_app app;
 	private Io_url app_root_dir, update_dir, update_jar_fil;
+	private Xoa_app_version_itm version_itm;
 	public Xoa_update_svc(Xoa_app app) {this.app = app;}
-	public void Install(String version_name) {
-		// get app_version from db
+	private Xoa_update_db_mgr Init_db() {
 		this.app_root_dir = app.Fsys_mgr().Root_dir();
 		this.update_dir = app_root_dir.GenSubDir_nest("user", "install", "update");
 		Io_url update_db_fil = update_dir.GenSubFil_nest("xoa_update.sqlite3");
-		Xoa_update_db_mgr db_mgr = new Xoa_update_db_mgr(update_db_fil);
-		Xoa_app_version_itm version_itm = db_mgr.Tbl__app_version().Select_by_version_or_null(version_name);
+		return new Xoa_update_db_mgr(update_db_fil);
+	}
+	public void Install(String version_name) {
+		// get app_version from db
+		Xoa_update_db_mgr db_mgr = Init_db();
+		this.version_itm = db_mgr.Tbl__app_version().Select_by_name_or_null(version_name);
 
 		// get src, trg, etc..
 		String src = version_itm.Package_url();
@@ -45,8 +49,9 @@ class Xoa_update_svc implements Gfo_invk {
 		, "xo.app_updater.download__prog", Gfo_invk_cmd.New_by_key(this, Invk__download_done), src, trg, src_len);
 		download_wkr.Exec_async("app_updater");
 	}
-	public void Skip() {
-		Xoa_update_startup.Set_ignore_date_to_now(app);
+	public void Skip(String version_name) {
+		Xoa_update_db_mgr db_mgr = Init_db();
+		Xoa_update_startup.Version_cutoff_(app, db_mgr.Tbl__app_version().Select_by_name_or_null(version_name).Id());
 	}
 	private void On_download_done(GfoMsg m) {
 		Xojs_wkr__download download_wkr = (Xojs_wkr__download)m.ReadObj("v");
@@ -90,7 +95,7 @@ class Xoa_update_svc implements Gfo_invk {
 
 		// update prog as finished
 		replace_wkr.Cbk_mgr().Send_json(replace_wkr.Cbk_trg(), "xo.app_updater.download__prog", Gfobj_nde.New().Add_bool("done", true));
-		Xoa_update_startup.Set_ignore_date_to_now(app);	// update ignore_date so current offline updates are ignore
+		Xoa_update_startup.Version_cutoff_(app, version_itm.Id());
 
 		// run standalone app
 		Runtime_.Exec("java -jar " + update_jar_fil.Raw()+ " " + manifest_url.Raw());
