@@ -28,6 +28,7 @@ public class Xoax_builds_files_addon implements Xoax_addon_itm, Xoax_addon_itm__
 		, Xobldr__lnki_regy__create.Prototype
 		, Xobldr__page_regy__create.Prototype
 		, Xobldr__orig_regy__create.Prototype
+		, Xobldr__orig_regy__find_missing.Prototype
 		, Xobldr__xfer_temp__insert_thm.Prototype
 		, Xobldr__xfer_temp__insert_orig.Prototype
 		, Xobldr__xfer_regy__create.Prototype
