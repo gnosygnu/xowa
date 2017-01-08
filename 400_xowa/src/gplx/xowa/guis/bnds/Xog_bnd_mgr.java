@@ -49,6 +49,7 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		, "xowa.gui.shortcuts.xowa.nav.help.about-1"
 		, "xowa.gui.shortcuts.xowa.nav.help.change_log-1"
 		, "xowa.gui.shortcuts.xowa.nav.help.diagnostics-1"
+		, "xowa.gui.shortcuts.xowa.nav.help.xowa_update-1"
 		, "xowa.gui.shortcuts.xowa.nav.help.xowa_main-1"
 		, "xowa.gui.shortcuts.xowa.nav.help.xowa_blog-1"
 		, "xowa.gui.shortcuts.xowa.nav.setup.download_central-1"
@@ -231,6 +232,7 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		Init_itm(Xog_cmd_itm_.Key_nav_help_about								, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_help_xowa_main							, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_help_xowa_blog							, Xog_bnd_box_.Tid_browser				, "");
+		Init_itm(Xog_cmd_itm_.Key_nav_help_xowa_update							, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_setup_download_central					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_setup_import_from_list					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_setup_import_from_script					, Xog_bnd_box_.Tid_browser				, "");

@@ -23,7 +23,7 @@ import gplx.xowa.addons.apps.updates.apps.*;
 import gplx.core.envs.*;
 class Xoa_update_svc implements Gfo_invk {
 	private Xoa_app app;
-	private Io_url app_root_dir, update_dir, update_jar_fil;
+	private Io_url app_root_dir, update_dir, update_jar_fil, version_root;
 	private Xoa_app_version_itm version_itm;
 	public Xoa_update_svc(Xoa_app app) {this.app = app;}
 	private Xoa_update_db_mgr Init_db() {
@@ -39,8 +39,9 @@ class Xoa_update_svc implements Gfo_invk {
 
 		// get src, trg, etc..
 		String src = version_itm.Package_url();
-		Io_url trg = update_dir.GenSubFil_nest("temp", version_itm.Name(), version_itm.Name() + ".zip");
-		Io_mgr.Instance.DeleteDirDeep(trg.OwnerDir());
+		Io_url trg = update_dir.GenSubFil_nest("temp", version_itm.Name(), version_itm.Name() + ".zip");	// EX: "/xowa/user/app/install/update/temp/4.1.0/4.1.0.zip"
+		this.version_root = trg.OwnerDir();
+		Io_mgr.Instance.DeleteDirDeep(version_root);
 		long src_len = -1;
 
 		// start download
@@ -65,11 +66,15 @@ class Xoa_update_svc implements Gfo_invk {
 		Io_url src = unzip_wkr.Trg();
 		Io_url trg = app_root_dir;
 
+		// delete zip
+		Io_mgr.Instance.DeleteFil(unzip_wkr.Src());
+
 		// copy update_jar
 		Io_url src_jar_fil = src.GenSubFil_nest("bin", "any", "xowa", "addon", "app", "update", "xoa_update.jar");
 		this.update_jar_fil = app_root_dir.GenSubFil_nest("user", "install", "update", "xoa_update.jar");
 		Io_mgr.Instance.MoveFil_args(src_jar_fil, update_jar_fil, true).Exec();
 
+		// run replace_wkr
 		Xojs_wkr__replace replace_wkr = new Xojs_wkr__replace(unzip_wkr.Cbk_mgr(), unzip_wkr.Cbk_trg(), "xo.app_updater.download__prog", Gfo_invk_cmd.New_by_key(this, Invk__replace_done), src, trg);
 		replace_wkr.Exec_async("app_updater");
 	}
@@ -98,7 +103,7 @@ class Xoa_update_svc implements Gfo_invk {
 		Xoa_update_startup.Version_cutoff_(app, version_itm.Id());
 
 		// run standalone app
-		Runtime_.Exec("java -jar " + update_jar_fil.Raw()+ " " + manifest_url.Raw());
+		Runtime_.Exec("java -jar " + update_jar_fil.Raw()+ " " + manifest_url.Raw() + " " + version_root.Raw());
 		System_.Exit();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

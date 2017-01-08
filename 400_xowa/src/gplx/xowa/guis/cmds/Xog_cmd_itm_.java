@@ -31,12 +31,13 @@ public class Xog_cmd_itm_ {
 	, Key_nav_wiki_sandbox										= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.wiki.sandbox")
 	, Key_nav_wiki_random										= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.wiki.random")
 
-	, Key_nav_help_help											= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.help"								, "home/wiki/Help/Contents")		// HOME
-	, Key_nav_help_about										= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.about"								, "home/wiki/Help/About")			// HOME
-	, Key_nav_help_change_log									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.change_log"						, "home/wiki/Change_log")			// HOME
-	, Key_nav_help_diagnostics									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.diagnostics"						, "home/wiki/Diagnostics")			// HOME
-	, Key_nav_help_xowa_main									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.xowa_main"							, "home/wiki/Main_Page")			// HOME
-	, Key_nav_help_xowa_blog									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.xowa_blog"							, "home/wiki/Blog")					// HOME
+	, Key_nav_help_help											= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.help"								, "home/wiki/Help/Contents")               // HOME
+	, Key_nav_help_about										= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.about"								, "home/wiki/Help/About")                  // HOME
+	, Key_nav_help_change_log									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.change_log"						, "home/wiki/Change_log")                  // HOME
+	, Key_nav_help_diagnostics									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.diagnostics"						, "home/wiki/Diagnostics")                 // HOME
+	, Key_nav_help_xowa_update									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.xowa_update"						, "home/wiki/Special:XowaAppUpdate")       // HOME
+	, Key_nav_help_xowa_main									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.xowa_main"							, "home/wiki/Main_Page")                   // HOME
+	, Key_nav_help_xowa_blog									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.xowa_blog"							, "home/wiki/Blog")                        // HOME
 
 	, Key_nav_setup_download_central							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.download_central"					, "home/wiki/Special:XowaDownloadCentral")	// HOME
 	, Key_nav_setup_import_from_list							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.import_from_list"					, "home/wiki/Dashboard/Import/Online")		// HOME
