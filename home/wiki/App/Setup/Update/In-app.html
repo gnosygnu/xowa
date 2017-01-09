@@ -2,7 +2,7 @@
 <html dir="ltr">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Help/Overview - XOWA</title>
+  <title>App/Setup/Update/In-app - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   
@@ -11,12 +11,15 @@
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>Help/Overview</span></h1>
+  <h1 id="firstHeading" class="firstHeading"><span>App/Setup/Update/In-app</span></h1>
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
+    <p>
+      This page describes how to update your XOWA application using the in-app updater.
+    </p>
     <div id="toc" class="toc">
       <div id="toctitle">
         <h2>
@@ -25,94 +28,157 @@
       </div>
       <ul>
         <li class="toclevel-1 tocsection-1">
-          <a href="#Summary"><span class="tocnumber">1</span> <span class="toctext">Summary</span></a>
+          <a href="#Special:XowaAppUpdate"><span class="tocnumber">1</span> <span class="toctext">Special:XowaAppUpdate</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-2">
+              <a href="#Opening"><span class="tocnumber">1.1</span> <span class="toctext">Opening</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-3">
+              <a href="#Installing"><span class="tocnumber">1.2</span> <span class="toctext">Installing</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#Skipping"><span class="tocnumber">1.3</span> <span class="toctext">Skipping</span></a>
+            </li>
+          </ul>
         </li>
-        <li class="toclevel-1 tocsection-2">
-          <a href="#Features"><span class="tocnumber">2</span> <span class="toctext">Features</span></a>
+        <li class="toclevel-1 tocsection-5">
+          <a href="#Auto-startup_reminder"><span class="tocnumber">2</span> <span class="toctext">Auto-startup reminder</span></a>
         </li>
-        <li class="toclevel-1 tocsection-3">
-          <a href="#Supported_wikis"><span class="tocnumber">3</span> <span class="toctext">Supported wikis</span></a>
-        </li>
-        <li class="toclevel-1 tocsection-4">
-          <a href="#Philosophy"><span class="tocnumber">4</span> <span class="toctext">Philosophy</span></a>
+        <li class="toclevel-1 tocsection-6">
+          <a href="#Manual_updates"><span class="tocnumber">3</span> <span class="toctext">Manual updates</span></a>
         </li>
       </ul>
     </div>
     <h2>
-      <span class="mw-headline" id="Summary">Summary</span>
+      <span class="mw-headline" id="Special:XowaAppUpdate"><a href="http://xowa.org/home/wiki/Special:XowaAppUpdate.html" id="xolnki_2" title="Special:XowaAppUpdate" class="xowa-visited">Special:XowaAppUpdate</a></span>
     </h2>
     <p>
-      XOWA is an application for reading and editing wikis offline. It aims to provide full offline access to all content in every Wikimedia Foundation wiki.
+      This <a href="http://xowa.org/home/wiki/Special:XowaAppUpdate.html" id="xolnki_3" title="Special:XowaAppUpdate" class="xowa-visited">Special page</a> shows all pending updates.
     </p>
-    <h2>
-      <span class="mw-headline" id="Features">Features</span>
-    </h2>
+    <h3>
+      <span class="mw-headline" id="Opening">Opening</span>
+    </h3>
     <p>
-      XOWA has several features:
+      Everytime this page is opened, it checks the XOWA site for updates: <a href="http://xowa.org/admin/app_update/xoa_update.db" rel="nofollow" class="external free">http://xowa.org/admin/app_update/xoa_update.db</a>
     </p>
     <ul>
       <li>
-        Displays all articles from a Wikimedia data dump.
+        If updates are found, it downloads the descriptions, stores them offline, and shows it on the page
       </li>
       <li>
-        Works with English Wikipedia, Wiktionary, Wikisource, Wikiquote, as well as the non-English language counterparts (for example, French Wikipedia).
-      </li>
-      <li>
-        Renders articles with full HTML formatting.
-      </li>
-      <li>
-        Downloads images and other files on demand.
-      </li>
-      <li>
-        Edits articles.
-      </li>
-      <li>
-        Runs on Windows, Linux, Mac OS X, Raspberry PI, and Android.
-      </li>
-      <li>
-        Installs to a flash memory card for portability to other machines.
-      </li>
-      <li>
-        Is customizable and extendable at many levels: from keyboard shortcuts to HTML layouts to internal options.
-      </li>
-      <li>
-        Is open-source under the AGPLv3 license.
+        If no updates are found, it shows any offline descriptions
       </li>
     </ul>
-    <h2>
-      <span class="mw-headline" id="Supported_wikis">Supported wikis</span>
-    </h2>
+    <h3>
+      <span class="mw-headline" id="Installing">Installing</span>
+    </h3>
     <p>
-      XOWA should work with any dump that has been generated by MediaWiki software. It has been personally tested for over 200 wikis, including:
+      If install is chosen, the following is done:
     </p>
     <ul>
       <li>
-        <a href="https://en.wikipedia.org" rel="nofollow" class="external text">English Wikipedia</a>
+        The appropriate package is chosen from from <a href="http://github.com/gnosygnu/xowa/releases/" rel="nofollow" class="external free">http://github.com/gnosygnu/xowa/releases/</a>. 
+        <ul>
+          <li>
+            Note that XOWA will automatically choose the matching operating system package. (If you're running XOWA on GNU/Linux 64-bit it will automatically download a xowa_app_linux_64 package)
+          </li>
+          <li>
+            Note that the latest version will always be chosen for two reasons: 
+            <ul>
+              <li>
+                The latest version is always the recommended version
+              </li>
+              <li>
+                Downgrading from a later version to an earlier version is not recommended. Downgrading will generally work, but it's not something that is ever tested.
+              </li>
+            </ul>
+          </li>
+        </ul>
       </li>
       <li>
-        The English sister projects: <a href="https://en.wiktionary.org" rel="nofollow" class="external text">Wiktionary</a>, <a href="https://en.wikisource.org" rel="nofollow" class="external text">Wikisource</a>, <a href="https://en.wikivoyage.org" rel="nofollow" class="external text">Wikivoyage</a>, <a href="https://en.wikiquote.org" rel="nofollow" class="external text">Wikiquote</a>, <a href="https://en.wikibooks.org" rel="nofollow" class="external text">Wikibooks</a>, <a href="https://en.wikiversity.org" rel="nofollow" class="external text">Wikiversity</a> and <a href="https://en.wikinews.org" rel="nofollow" class="external text">Wikinews</a>
+        The package is downloaded and unzipped to C:\xowa\user\install\update
       </li>
       <li>
-        Non-English Wikipedias including <a href="https://de.wikipedia.org" rel="nofollow" class="external text">German</a>, <a href="https://es.wikipedia.org" rel="nofollow" class="external text">Spanish</a>, <a href="https://fr.wikipedia.org" rel="nofollow" class="external text">French</a>, <a href="https://it.wikipedia.org" rel="nofollow" class="external text">Italian</a>, <a href="https://nl.wikipedia.org" rel="nofollow" class="external text">Dutch</a>, <a href="https://pl.wikipedia.org" rel="nofollow" class="external text">Polish</a>, <a href="https://ru.wikipedia.org" rel="nofollow" class="external text">Russian</a>, <a href="https://sv.wikipedia.org" rel="nofollow" class="external text">Swedish</a>, <a href="https://ja.wikipedia.org" rel="nofollow" class="external text">Japanese</a>, <a href="https://zh.wikipedia.org" rel="nofollow" class="external text">Chinese</a>, <a href="https://ar.wikipedia.org" rel="nofollow" class="external text">Arabic</a>, <a href="https://la.wikipedia.org" rel="nofollow" class="external text">Latin</a>, and many more.
+        For each file in the install package: 
+        <ul>
+          <li>
+            The corresponding old file will be deleted
+          </li>
+          <li>
+            The new file will be moved into the old file's place
+          </li>
+          <li>
+            Any old file that can't be deleted will be saved to a list
+          </li>
+        </ul>
       </li>
       <li>
-        Unique wikis including <a href="https://commons.wikimedia.org" rel="nofollow" class="external text">Wikimedia Commons</a>, <a href="https://www.wikidata.org" rel="nofollow" class="external text">Wikidata</a>, <a href="https://species.wikimedia.org" rel="nofollow" class="external text">Wikispecies</a>, <a href="https://www.mediawiki.org" rel="nofollow" class="external text">MediaWiki</a>, <a href="https://meta.wikimedia.org" rel="nofollow" class="external text">Meta-wiki</a>, <a href="https://incubator.wikimedia.org" rel="nofollow" class="external text">Incubator</a>, <a href="https://wikimediafoundation.org" rel="nofollow" class="external text">WikimediaFoundation</a>
+        XOWA will then shutdown and launch a standalone update app. It will copy any old files that couldn't be deleted in the previous step
+      </li>
+      <li>
+        Once the standalone update app completes, it will launch XOWA
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Skipping">Skipping</span>
+    </h3>
+    <p>
+      This only applies to the auto-startup reminder (see the next section).
+    </p>
+    <ul>
+      <li>
+        By pressing the "Skip this update" button, the Special:XowaAppUpdate page will tempoarily stop reminding you automatically at startup.
+      </li>
+      <li>
+        However, once a new XOWA version is available, the Special:XowaAppUpdate page will resume launching automatically at startup.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Auto-startup_reminder">Auto-startup reminder</span>
+    </h2>
+    <p>
+      XOWA will check for updates every time the application starts. It does this in a two-step process:
+    </p>
+    <ul>
+      <li>
+        First, it checks online to see if any new updates have been released. 
+        <ul>
+          <li>
+            By default, the time interval is set to 7 days. If XOWA has checked online for an update, it won't check again for another 7 days.
+          </li>
+          <li>
+            If you want to disable online check or change the interval, you can do so at <a href="http://xowa.org/home/wiki/Special:XowaCfg%3Fgrp%3Dxowa.app.update.html" id="xolnki_4" title="Special:XowaCfg?grp=xowa.app.update" class="xowa-visited">the Options page</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Next, it will check offline to see any existing updates have not been applied. 
+        <ul>
+          <li>
+            A list of offline updates are at C:\xowa\user\install\update
+          </li>
+        </ul>
       </li>
     </ul>
     <p>
-      For a full list, see <a href="http://xowa.org/home/wiki/Dashboard/Import/Online.html" id="xolnki_2" title="Dashboard/Import/Online" class="xowa-visited">Dashboard/Import/Online</a> and <a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" id="xolnki_3" title="Dashboard/Image databases">Dashboard/Image_databases</a>
+      If any updates are available, it will open the Special:XowaUpdate page
     </p>
     <h2>
-      <span class="mw-headline" id="Philosophy">Philosophy</span>
+      <span class="mw-headline" id="Manual_updates">Manual updates</span>
     </h2>
     <p>
-      XOWA is free software. The code is open source under the AGPLv3 license, and available to anyone for review or modification. See <a href="http://xowa.org/home/wiki/Help/License/Code.html" id="xolnki_4" title="Help/License/Code" class="xowa-visited">Help/License/Code</a> for more information as well as <a href="https://github.com/gnosygnu/xowa" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa</a>.
+      XOWA can always be updated manually:
     </p>
+    <ul>
+      <li>
+        You can download the latest version from <a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" rel="nofollow" class="external text">XOWA's download page</a>
+      </li>
+      <li>
+        You can view all available versions at <a href="http://localhost/github.com/gnosygnu/xowa/releases/" rel="nofollow" class="external text">XOWA's Github page</a>
+      </li>
+    </ul>
     <p>
-      XOWA advocates free content. All documentation and project artifacts are provided under the Creative Commons CC BY-NC-SA license. See <a href="http://xowa.org/home/wiki/Help/License/Docs.html" id="xolnki_5" title="Help/License/Docs">Help/License/Docs</a> for more information.
-    </p>
-    <p>
-      XOWA values user privacy. It will never collect and upload personal information. It is designed to be run in a standalone environment, without any connection to the internet. See <a href="http://xowa.org/home/wiki/Help/Privacy/Desktop.html" id="xolnki_6" title="Help/Privacy/Desktop" class="xowa-visited">Help/Privacy/Desktop</a> for more information.
+      For more information on manual updates, see <a href="http://xowa.org/home/wiki/App/Setup/Update/Manual.html" id="xolnki_5" title="App/Setup/Update/Manual" class="xowa-visited">the manual update help page</a>
     </p>
   
     </div>

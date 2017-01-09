@@ -28,6 +28,9 @@
           <option value='xowa.app.startup'>
             App - Startup
           </option>
+          <option value='xowa.app.update'>
+            App - Update
+          </option>
           <option value='xowa.gui.general'>
             Gui - General
           </option>
@@ -675,6 +678,49 @@
           <div id='xowa.gui.shortcuts.xowa.nav.help.diagnostics-1_help_msg' class='xohelp_msg'>
             <p>
               Diagnose parts of your XOWA installation
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.shortcuts.xowa.nav.help.xowa_update")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.gui.shortcuts.xowa.nav.help.xowa_update__name' class='xocfg_itm_name'>
+            XOWA App Update
+          </div>
+          <div id='xowa.gui.shortcuts.xowa.nav.help.xowa_update__undo' data-xocfg-type='gui.binding' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.shortcuts.xowa.nav.help.xowa_update")' title="reset to &quot;browser|key.none&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <select class="xocfg_data__gui_binding__box" id="xowa.gui.shortcuts.xowa.nav.help.xowa_update-box" data-xocfg-key="xowa.gui.shortcuts.xowa.nav.help.xowa_update" data-xocfg-type="gui.binding-box" size="1" accesskey="d">
+              <option value="browser" selected="selected">
+                Window
+              </option>
+              <option value="browser.url">
+                Url bar
+              </option>
+              <option value="browser.search">
+                Search box
+              </option>
+              <option value="browser.html">
+                HTML browser
+              </option>
+              <option value="browser.find">
+                Find box
+              </option>
+              <option value="browser.prog">
+                Status bar
+              </option>
+              <option value="browser.info">
+                System Messages box
+              </option>
+            </select> <input class="xocfg_data__gui_binding__ipt" id="xowa.gui.shortcuts.xowa.nav.help.xowa_update-ipt" data-xocfg-key="xowa.gui.shortcuts.xowa.nav.help.xowa_update" data-xocfg-type="gui.binding-ipt" accesskey="d" type="text" value="None"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.gui_binding__remap_send("xowa.gui.shortcuts.xowa.nav.help.xowa_update", "XOWA App Update");'>&nbsp;</span>
+          </div><input type='hidden' id='xowa.gui.shortcuts.xowa.nav.help.xowa_update__key_box' value='xowa.gui.shortcuts.xowa.nav.help.xowa_update'> <input type='hidden' id='xowa.gui.shortcuts.xowa.nav.help.xowa_update__ctx_box' value='app'>
+        </div>
+        <div id='xowa.gui.shortcuts.xowa.nav.help.xowa_update_help_div' class='xohelp_div'>
+          <div id='xowa.gui.shortcuts.xowa.nav.help.xowa_update_help_msg' class='xohelp_msg'>
+            <p>
+              Update the XOWA app
             </p>
           </div>
         </div>
