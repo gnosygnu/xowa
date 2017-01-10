@@ -17,59 +17,43 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.mws.prepros; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.mws.*;
 import gplx.core.btries.*;
-public class Xomw_prepro_wkr {
-	private static final    Xomw_prepro_rule 
-	  rule_curly = new Xomw_prepro_rule(Bry_.new_a7("{"), Bry_.new_a7("}")  , 2, 3, new int[] {Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__tmpl, Xomw_prepro_rule.Name__targ})
-	, rule_brack = new Xomw_prepro_rule(Bry_.new_a7("["), Bry_.new_a7("]")  , 2, 2, new int[] {Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__null})
-	, rule_langv = new Xomw_prepro_rule(Bry_.new_a7("-{"), Bry_.new_a7("}-"), 1, 1, new int[] {Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__null})
-	;
-	private static final    byte[] 
-	  Bry__only_include_bgn = Bry_.new_a7("<onlyinclude>")
-	, Bry__only_include_end = Bry_.new_a7("</onlyinclude>")
-	, Bry__comment_bgn = Bry_.new_a7("<!--")
-	, Bry__comment_end = Bry_.new_a7("-->")
-	, Bry__escaped_lt = Bry_.new_a7("&lt;")
-	, Bry__includeonly = Bry_.new_a7("includeonly")
-	, Bry__noinclude = Bry_.new_a7("noinclude")
-	, Bry__onlyinclude = Bry_.new_a7("onlyinclude")
-	;
-	private static final    int Len__only_include_end = Bry__only_include_end.length;
-	private static final int 
-	  Found__line_bgn = 0
-	, Found__line_end = 1
-	, Found__pipe = 2
-	, Found__equals = 3
-	, Found__angle = 4
-	, Found__close = 5
-	, Found__open = 6
-	;
+public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final    List_adp comments_list = List_adp_.New();
+	private final    Hash_adp_bry xmlish_elems = Hash_adp_bry.ci_a7();
+	private final    Hash_adp_bry xmlish_allow_missing_end_tag = Hash_adp_bry.cs();
+	private final    Hash_adp_bry no_more_closing_tag = Hash_adp_bry.cs();
+	// private final    Btrie_slim_mgr search_dflt_trie = Btrie_slim_mgr.cs().Add_many_int(0, "[", "{", "<", "\n");	// $searchBase = "[{<\n";
+	private final    Xomw_prepro_stack stack = new Xomw_prepro_stack();
+	private Bry_bfr accum = Bry_bfr_.New();
 
-	private Bry_bfr accum = Bry_bfr_.New(), tmp_bfr = Bry_bfr_.New();
-	private List_adp comments_list = List_adp_.New();
-	private byte[] htmlspecialchars(byte[] bry) {
-		return bry;
+	private final    Btrie_rv trv = new Btrie_rv();
+
+	private static final    Btrie_slim_mgr cur_char_trie = Cur_char_trie__new();
+	private static final    Hash_adp_bry 
+	  ignored_tags__noinclude       = Hash_adp_bry.cs().Add_many_str("includeonly", "/includeonly")
+	, ignored_elements__noinclude   = Hash_adp_bry.cs().Add_many_str("noinclude")
+	, ignored_tags__includeonly     = Hash_adp_bry.cs().Add_many_str("noinclude", "/noinclude", "onlyinclude", "/onlyinclude")
+	, ignored_elements__includeonly = Hash_adp_bry.cs().Add_many_str("includeonly");
+	private static Btrie_slim_mgr Cur_char_trie__new() {
+		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();
+		String[] ary = new String[] {"|", "=", "<", "\n", "{", "[", "-{"};
+		for (String str : ary) {
+			byte[] bry = Bry_.new_a7(str);
+			rv.Add_obj(bry, new Xomw_prepro_curchar_itm(bry));
+		}
+		return rv;
 	}
-	private Xomw_prepro_rule Get_rule(byte[] bry) {
-		if		(Bry_.Eq(bry, rule_curly.bgn))   return rule_curly;
-		else if	(Bry_.Eq(bry, rule_brack.bgn))   return rule_brack;
-		else if	(Bry_.Eq(bry, rule_langv.bgn))   return rule_langv;
-		else                                     throw Err_.new_unhandled(bry);
-	}
+
 	public byte[] Preprocess_to_xml(byte[] src, boolean for_inclusion) {
-		Hash_adp_bry xmlish_elems = Hash_adp_bry.ci_a7();	// parser->getStripList();
-
-		Hash_adp_bry xmlish_allow_missing_end_tag = Hash_adp_bry.cs();
-		xmlish_allow_missing_end_tag.Add_as_key_and_val(Bry__includeonly);
-		xmlish_allow_missing_end_tag.Add_as_key_and_val(Bry__noinclude);
-		xmlish_allow_missing_end_tag.Add_as_key_and_val(Bry__onlyinclude);
-
+		xmlish_elems.Clear(); // TODO.XO: parser->getStripList();
+		xmlish_allow_missing_end_tag.Add_many_str("includeonly", "noinclude", "onlyinclude");
 		boolean enable_only_include = false;
 
-		Hash_adp_bry ignored_tags = Hash_adp_bry.cs();
-		Hash_adp_bry ignored_elements = Hash_adp_bry.cs();
+		Hash_adp_bry ignored_tags, ignored_elements;
 		if (for_inclusion) {
-			ignored_tags.Add_many_str("includeonly", "/includeonly");
-			ignored_elements.Add_many_str("noinclude");
+			ignored_tags = ignored_tags__noinclude;
+			ignored_elements = ignored_elements__noinclude;
 			xmlish_elems.Add_many_str("noinclude");
 			if (	Bry_.Has(src, Bry__only_include_bgn)
 				&&	Bry_.Has(src, Bry__only_include_end)) {
@@ -77,8 +61,8 @@ public class Xomw_prepro_wkr {
 			}
 		}
 		else {
-			ignored_tags.Add_many_str("noinclude", "/noinclude", "onlyinclude", "/onlyinclude");
-			ignored_elements.Add_many_str("includeonly");
+			ignored_tags = ignored_tags__includeonly;
+			ignored_elements = ignored_elements__includeonly;
 			xmlish_elems.Add_many_str("includeonly");
 		}
 
@@ -86,8 +70,7 @@ public class Xomw_prepro_wkr {
 		// Use "A" modifier (anchored) instead of "^", because ^ doesn't work with an offset
 		// $elementsRegex = "~($xmlishRegex)(?:\s|\/>|>)|(!--)~iA";
 
-		Xomw_prepro_stack stack = new Xomw_prepro_stack();
-//			$searchBase = "[{<\n"; # }
+		stack.Clear();
 
 		// Input pointer, starts out pointing to a pseudo-newline before the start
 		int i = 0;
@@ -110,7 +93,7 @@ public class Xomw_prepro_wkr {
 		boolean no_more_gt = false;
 
 		// Map of tag name => true if there are no more closing tags of given type right of $i
-		Hash_adp_bry no_more_closing_tag = Hash_adp_bry.cs();
+		no_more_closing_tag.Clear();
 
 		// True to ignore all input up to the next <onlyinclude>
 		boolean find_only_include = enable_only_include;
@@ -118,15 +101,14 @@ public class Xomw_prepro_wkr {
 		// Do a line-start run without outputting an LF character
 		boolean fake_line_start = true;
 
+		// XOWA-related init
 		int src_len = src.length;
 		int found = -1;
-		byte[] cur_closing = Bry_.Empty;
 
 		Btrie_slim_mgr elements_trie = Btrie_slim_mgr.ci_a7();
 		Btrie_slim_mgr elements_end_trie = Btrie_slim_mgr.ci_a7();
-		Btrie_rv elements_trv = new Btrie_rv();
 
-		Btrie_slim_mgr cur_char_trie = Btrie_slim_mgr.ci_a7();
+		byte[] cur_closing = Bry_.Empty;
 		byte[] inner = null;
 
 		while (true) {
@@ -145,85 +127,107 @@ public class Xomw_prepro_wkr {
 			}
 
 			byte[] cur_char = Bry_.Empty;
+			Xomw_prepro_rule rule = null;
 			if (fake_line_start) {
 				found = Found__line_bgn;
 				cur_char = Bry_.Empty;
 			}
-
-			// Find next opening brace, closing brace or pipe
-//				$search = $searchBase;
-			if (stack.top == null) {
-				cur_closing = Bry_.Empty;
-			}
 			else {
-				cur_closing = stack.top.close;
-				// $search .= $currentClosing;
-			}
-			if (find_pipe) {
-				// $search .= '|';
-			}
-			if (find_equals) {
-				// First equals will be for the template
-				// $search .= '=';
-			}
-			Xomw_prepro_rule rule = null;
-
-			// Output literal section, advance input counter
-			int literal_len = 0; // strcspn(src, $search, i);
-			if (literal_len > 0) {
-				accum.Add(htmlspecialchars(Bry_.Mid(src, i, i + literal_len)));
-				i += literal_len;
-			}
-
-			if (i >= src_len) {
-				if (Bry_.Eq(cur_closing, Byte_ascii.Nl_bry)) {
-					// Do a past-the-end run to finish off the heading
-					cur_char = Byte_ascii.Nl_bry;
-					found = Found__line_end;
+				// Find next opening brace, closing brace or pipe
+				
+				// $search = $searchBase;
+				if (stack.top == null) {
+					cur_closing = Bry_.Empty;
 				}
 				else {
-					// All done
-					break;
+					cur_closing = stack.top.close;
+					// $search .= $currentClosing;
 				}
-			}
-			else {
-				Xomw_prepro_curchar_itm cur_char_itm = (Xomw_prepro_curchar_itm)cur_char_trie.Match_at(elements_trv, src, i, src_len);
-				cur_char = cur_char_itm.sequence;
-				switch (cur_char_itm.type) {
-					case Byte_ascii.Pipe:         found = Found__pipe; break;
-					case Byte_ascii.Eq:           found = Found__equals; break;
-					case Byte_ascii.Angle_bgn:    found = Found__angle; break;
-					case Byte_ascii.Nl:           found = in_heading ? Found__line_end : Found__line_bgn; break;
-					case Byte_ascii.Curly_bgn: {
-						found = Found__open;
-						rule = rule_curly;
-						break;
-					}
-					case Byte_ascii.Brack_bgn: {
-						found = Found__open;
-						rule = rule_brack;
-						break;
-					}
-					default:
-						if (cur_char_itm.type == Byte_ascii.Dash) {
-							int nxt_pos = i + 1;
-							if (nxt_pos < src_len) {
-								if (src[i + 1] == Byte_ascii.Curly_bgn) {
-									found = Found__open;
-									rule = rule_langv;
-									continue;
+				if (find_pipe) {
+					// $search .= '|';
+				}
+				if (find_equals) {
+					// First equals will be for the template
+					// $search .= '=';
+				}
+
+				// Output literal section, advance input counter
+				int literal_len = 0; 
+				// NOTE: hard-coded translation of "strcspn(src, $search, i)"; no trie b/c of frequent additions / deletions
+				boolean loop_stop = false;
+				for (int j = i; j < src_len; j++) {
+					byte b = src[j];
+					switch (b) {                // handle '$searchBase = "[{<\n";'
+						case Byte_ascii.Brack_bgn:
+						case Byte_ascii.Curly_bgn:
+						case Byte_ascii.Angle_bgn:
+						case Byte_ascii.Nl:
+							loop_stop = true;
+							break;
+						case Byte_ascii.Pipe:   // handle "find_pipe"
+							if (find_pipe)   loop_stop = true;
+							break;
+						case Byte_ascii.Eq:     // handle "find_equals"
+							if (find_equals) loop_stop = true;
+							break;
+						default:                // handle "cur_closing"; specified by piece.close and rule.close, so "\n", "}", "]" and "}-"
+							if (cur_closing != Bry_.Empty) {
+								byte cur_closing_0 = cur_closing[0];
+								if (b == cur_closing_0) {
+									if (cur_closing.length == 1) {	// handle "\n", "}", "]"
+										loop_stop = true;
+									}
+									else {// handle "}-"
+										int nxt_idx = j + 1;
+										if (nxt_idx < src_len && src[nxt_idx] == Byte_ascii.Dash)
+											loop_stop = true;
+									}
 								}
 							}
-						}
-
-						if (Bry_.Eq(cur_char, cur_closing)) {
-							found = Found__close;
-						}
-						else {
-							i++;
-							continue;
-						}
+							break;
+					}
+					if (loop_stop)
 						break;
+					else
+						literal_len++;
+				}
+				if (literal_len > 0) {
+					accum.Add(htmlspecialchars(Bry_.Mid(src, i, i + literal_len)));
+					i += literal_len;
+				}
+
+				if (i >= src_len) {
+					if (Bry_.Eq(cur_closing, Byte_ascii.Nl_bry)) {
+						// Do a past-the-end run to finish off the heading
+						cur_char = Bry_.Empty;
+						found = Found__line_end;
+					}
+					else {
+						// All done
+						break;
+					}
+				}
+				else {
+					Xomw_prepro_curchar_itm cur_char_itm = (Xomw_prepro_curchar_itm)cur_char_trie.Match_at(trv, src, i, src_len);
+					cur_char = cur_char_itm.bry;
+					switch (cur_char_itm.type) {
+						case Byte_ascii.Pipe:         found = Found__pipe; break;
+						case Byte_ascii.Eq:           found = Found__equals; break;
+						case Byte_ascii.Angle_bgn:    found = Found__angle; break;
+						case Byte_ascii.Nl:           found = in_heading ? Found__line_end : Found__line_bgn; break;
+						case Byte_ascii.Curly_bgn:   {found = Found__open; rule = rule_curly; break;}
+						case Byte_ascii.Brack_bgn:   {found = Found__open; rule = rule_brack; break;}
+						case Byte_ascii.Dash:        {found = Found__open; rule = rule_langv; break;}
+						default:
+							if (Bry_.Eq(cur_char, cur_closing)) {
+								found = Found__close;
+							}
+							else {
+								i++;
+								continue;
+							}
+							break;
+					}
 				}
 			}
 
@@ -236,8 +240,9 @@ public class Xomw_prepro_wkr {
 				}
 
 				// Determine element name; $elementsRegex = "~($xmlishRegex)(?:\s|\/>|>)|(!--)~iA"; EX: "(span|div)(?:\s|\/>|>)|(!--)
-				Xomw_prepro_elem element = (Xomw_prepro_elem)elements_trie.Match_at(elements_trv, src, i + 1, src_len);
-				if (element == null) {// Element name missing or not listed
+				Xomw_prepro_elem element = (Xomw_prepro_elem)elements_trie.Match_at(trv, src, i + 1, src_len);
+				if (element == null) {
+					// Element name missing or not listed
 					accum.Add(Bry__escaped_lt);
 					i++;
 					continue;
@@ -245,9 +250,8 @@ public class Xomw_prepro_wkr {
 
 				// Handle comments
 				if (element.type == Xomw_prepro_elem.Type__comment) {
-					// To avoid leaving blank lines,
-					// when a sequence of space-separated comments is both preceded and followed by a newline (ignoring spaces), 
-					// then trim leading and trailing spaces and the trailing newline.
+					// To avoid leaving blank lines, when a sequence of space-separated comments is both preceded and followed by a newline
+					// (ignoring spaces), then trim leading and trailing spaces and the trailing newline.
 
 					// Find the end
 					int comment_end_pos = Bry_find_.Find_fwd(src, Bry__comment_end, i + 4, src_len);
@@ -288,10 +292,11 @@ public class Xomw_prepro_wkr {
 							// Remove leading whitespace from the end of the accumulator
 							// Sanity check first though
 							int ws_len = i - ws_bgn;
+							byte[] accum_bry = accum.To_bry();
 							if (   ws_len > 0
-								&& Bry_find_.Find_fwd_while_space_or_tab(accum.To_bry(), -ws_len, src_len) == ws_len
+								&& Bry_find_.Find_fwd_while_space_or_tab(accum_bry, -ws_len, src_len) == ws_len
 							) {
-								accum.Clear().Add(Bry_.Mid(accum.To_bry(), 0, -ws_len));
+								accum.Clear().Add(Bry_.Mid(accum_bry, 0, -ws_len));
 							}
 
 							// Dump all but the last comment to the accumulator
@@ -318,7 +323,7 @@ public class Xomw_prepro_wkr {
 
 						if (stack.top != null) {
 							Xomw_prepro_part part = stack.top.Get_current_part();
-							if (!(part.comment_end == ws_end - 1)) {
+							if (!(part.comment_end != -1 && part.comment_end == ws_bgn - 1)) {
 								part.visual_end = ws_bgn;
 							}
 							// Else comments abutting, no change in visual end
@@ -344,8 +349,9 @@ public class Xomw_prepro_wkr {
 					continue;
 				}
 
+				// Handle ignored tags
 				if (ignored_tags.Has(name)) {
-					accum.Add_str_a7("<ignore>").Add(htmlspecialchars(Bry_.Mid(src, i, tag_end_pos - i + 1))).Add_str_a7("</ignore>");
+					accum.Add_str_a7("<ignore>").Add(htmlspecialchars(Bry_.Mid(src, i, tag_end_pos + 1))).Add_str_a7("</ignore>");
 					i = tag_end_pos + 1;
 					continue;
 				}
@@ -357,28 +363,35 @@ public class Xomw_prepro_wkr {
 					atr_end = tag_end_pos - 1;
 					inner = null;
 					i = tag_end_pos + 1;
-					close = null;
+					close = Bry_.Empty;
 				}
 				else {
 					atr_end = tag_end_pos;
 					// Find closing tag
-					// FIXME: need to search forward
-					Xomw_prepro_elem elem_end = (Xomw_prepro_elem)elements_end_trie.Match_at(elements_trv, src, tag_end_pos + 1, src_len); // preg_match( "/<\/" . preg_quote( $name, '/' ) . "\s*>/i",
-					int elem_end_lhs = elements_trv.Pos();
-					int elem_end_rhs = elements_trv.Pos();
-					// check for "\s*>"
-					if (elem_end != null) {
-						elem_end_rhs = Bry_find_.Find_fwd_while(src, elem_end_rhs, src_len, Byte_ascii.Space);
-						if (elem_end_rhs == src_len) {
-							elem_end = null;
-						}
-						else {
-							if (src[elem_end_rhs] == Byte_ascii.Gt) 
-								elem_end_rhs = elem_end_rhs + 1;
-							else
+					// NOTE: translation of `preg_match( "/<\/" . preg_quote( $name, '/' ) . "\s*>/i",`
+					Xomw_prepro_elem elem_end = null;
+					int elem_end_lhs = -1, elem_end_rhs = -1;
+					for (int j = tag_end_pos + 1; j < src_len; j++) {
+						elem_end = (Xomw_prepro_elem)elements_end_trie.Match_at(trv, src, j, src_len);
+						elem_end_lhs = elem_end_rhs = trv.Pos();
+
+						// found a possible elem_end tag; validate "\s*>"
+						if (elem_end != null) {
+							elem_end_rhs = Bry_find_.Find_fwd_while(src, elem_end_rhs, src_len, Byte_ascii.Space);
+							if (elem_end_rhs == src_len) {
 								elem_end = null;
+							}
+							else {
+								if (src[elem_end_rhs] == Byte_ascii.Gt) 
+									elem_end_rhs = elem_end_rhs + 1;
+								else
+									elem_end = null;
+							}
 						}
+						if (elem_end != null)
+							break;
 					}
+
 					if (	!no_more_closing_tag.Has(name)
 						&&	elem_end != null) {
 						inner = Bry_.Mid(src, tag_end_pos + 1, elem_end_lhs);
@@ -605,8 +618,7 @@ public class Xomw_prepro_wkr {
 							arg_idx++;
 						}
 					}
-					tmp_bfr.Add_str_a7("</").Add(name_bry).Add_str_a7(">");
-					element = tmp_bfr.To_bry_and_clear();
+					element = tmp_bfr.Add_str_a7("</").Add(name_bry).Add_str_a7(">").To_bry_and_clear();
 				}
 
 				// Advance input pointer
@@ -664,52 +676,35 @@ public class Xomw_prepro_wkr {
 		root_accum.Add_str_a7("</root>");
 		return root_accum.To_bry_and_clear();
 	}
-}
-class Xomw_prepro_rule {
-	public Xomw_prepro_rule(byte[] bgn, byte[] end, int min, int max, int[] names) {
-		this.bgn = bgn;
-		this.end = end;
-		this.min = min;
-		this.max = max;
-		this.names = names;
+	private byte[] htmlspecialchars(byte[] bry) {
+		return bry;
 	}
-	public final    byte[] bgn;
-	public final    byte[] end;
-	public final    int min;
-	public final    int max;
-	public final    int[] names;
-	public boolean Names_exist(int idx) {
-		return idx < names.length && names[idx] != Name__invalid;
+	private Xomw_prepro_rule Get_rule(byte[] bry) {
+		if		(Bry_.Eq(bry, rule_curly.bgn))   return rule_curly;
+		else if	(Bry_.Eq(bry, rule_brack.bgn))   return rule_brack;
+		else if	(Bry_.Eq(bry, rule_langv.bgn))   return rule_langv;
+		else                                     throw Err_.new_unhandled(bry);
 	}
-	private static final    byte[] Name__tmpl_bry = Bry_.new_a7("template"), Name__targ_bry = Bry_.new_a7("tplarg");
-	public static final int Name__invalid = -1, Name__null = 0, Name__tmpl = 1, Name__targ = 2;
-	public static byte[] Name(int type) {
-		switch (type) {
-			case Name__tmpl:    return Name__tmpl_bry;
-			case Name__targ:    return Name__targ_bry;
-			default:
-			case Name__invalid: return null;
-			case Name__null:    return null;
-		}
-	}
-}
-class Xomw_prepro_elem {
-	private static final    byte[] Bry__tag_end = Bry_.new_a7("</");
-	public Xomw_prepro_elem(int type, byte[] name) {
-		this.type = type;
-		this.name = name;
-		this.tag_end_lhs = Bry_.Add(Bry__tag_end, name);
-	}
-	public final    int type;
-	public final    byte[] name;
-	public final    byte[] tag_end_lhs;
-	public static final int Type__comment = 0;
-}
-class Xomw_prepro_curchar_itm {
-	public Xomw_prepro_curchar_itm(int type, byte[] sequence) {
-		this.type = type;
-		this.sequence = sequence;
-	}
-	public int type;
-	public byte[] sequence;
+	private static final    Xomw_prepro_rule 
+	  rule_curly = new Xomw_prepro_rule(Bry_.new_a7("{"), Bry_.new_a7("}")  , 2, 3, new int[] {Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__tmpl, Xomw_prepro_rule.Name__targ})
+	, rule_brack = new Xomw_prepro_rule(Bry_.new_a7("["), Bry_.new_a7("]")  , 2, 2, new int[] {Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__null})
+	, rule_langv = new Xomw_prepro_rule(Bry_.new_a7("-{"), Bry_.new_a7("}-"), 1, 1, new int[] {Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__null})
+	;
+	private static final    byte[] 
+	  Bry__only_include_bgn = Bry_.new_a7("<onlyinclude>")
+	, Bry__only_include_end = Bry_.new_a7("</onlyinclude>")
+	, Bry__comment_bgn = Bry_.new_a7("<!--")
+	, Bry__comment_end = Bry_.new_a7("-->")
+	, Bry__escaped_lt = Bry_.new_a7("&lt;")
+	;
+	private static final    int Len__only_include_end = Bry__only_include_end.length;
+	private static final int 
+	  Found__line_bgn = 0
+	, Found__line_end = 1
+	, Found__pipe = 2
+	, Found__equals = 3
+	, Found__angle = 4
+	, Found__close = 5
+	, Found__open = 6
+	;
 }

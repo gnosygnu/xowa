@@ -22,6 +22,12 @@ class Xomw_prepro_stack {
 	private Bry_bfr accum = Bry_bfr_.New(), root_accum = Bry_bfr_.New();
 	private final    Xomw_prepro_flags flags = new Xomw_prepro_flags();
 
+	public void Clear() {
+		stack.Clear();
+		accum.Clear();
+		root_accum.Clear();
+		top = null;
+	}
 	public int Count() {return stack.Len();}
 	public Bry_bfr Get_accum() {return accum;}
 	public Bry_bfr Get_root_accum() {return root_accum;}
