@@ -22,9 +22,15 @@ public class Xomw_prepro_wkr__tst {
 	@Test  public void Text() {
 		fxt.Test__parse("abc", "<root>abc</root>");
 	}
-//		@Test  public void Brack() {
-//			fxt.Test__parse("a[[b]]c", "<root>abc</root>");
-//		}
+	@Test  public void Brack() {
+		fxt.Test__parse("a[[b]]c", "<root>a[[b]]c</root>");
+	}
+	@Test  public void Template() {
+		fxt.Test__parse("a{{b}}c", "<root>a<template lineStart=\"1\"><title>b</title></template>c</root>");
+	}
+	@Test  public void Tplarg() {
+		fxt.Test__parse("a{{{b}}}c", "<root>a<tplarg lineStart=\"1\"><title>b</title></tplarg>c</root>");
+	}
 }
 class Xomw_prepro_wkr__fxt {
 	private final    Xomw_prepro_wkr wkr = new Xomw_prepro_wkr();

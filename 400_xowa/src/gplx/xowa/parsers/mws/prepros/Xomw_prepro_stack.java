@@ -37,7 +37,8 @@ class Xomw_prepro_stack {
 	public Xomw_prepro_part Get_current_part() {
 		if (top == null) {
 			return null;
-		} else {
+		}
+		else {
 			return top.Get_current_part();
 		}
 	}
@@ -45,7 +46,7 @@ class Xomw_prepro_stack {
 	public void Push(Xomw_prepro_piece item) {
 		stack.Add(item);
 		this.top = (Xomw_prepro_piece)stack.Get_at(stack.Len() - 1);			
-		accum.Clear().Add(top.Get_accum());
+		accum = top.Get_accum();
 	}
 
 	public Xomw_prepro_piece Pop() {
@@ -56,10 +57,11 @@ class Xomw_prepro_stack {
 
 		Xomw_prepro_piece rv = (Xomw_prepro_piece)stack.Get_at(len - 1);
 		stack.Del_at(len - 1);
+		len--;
 
 		if (len > 0) {
 			this.top = (Xomw_prepro_piece)stack.Get_at(stack.Len() - 1);			
-			accum.Clear().Add(top.Get_accum());
+			accum = top.Get_accum();
 		} else {
 			this.top = null;
 			this.accum = root_accum;
@@ -69,7 +71,7 @@ class Xomw_prepro_stack {
 
 	public void Add_part(byte[] bry) {
 		top.Add_part(bry);
-		accum.Clear().Add(top.Get_accum());
+		accum = top.Get_accum();
 	}
 
 	public Xomw_prepro_flags Get_flags() {
@@ -103,12 +105,13 @@ class Xomw_prepro_piece {
 		this.count = count;
 		this.start_pos = start_pos;
 		this.line_start = line_start;
+		parts.Add(new Xomw_prepro_part(Bry_.Empty));
 	}
 	public Xomw_prepro_part Get_current_part() {
 		return (Xomw_prepro_part)parts.Get_at(parts.Len() - 1);
 	}
-	public byte[] Get_accum() {
-		return Get_current_part().bry;
+	public Bry_bfr Get_accum() {
+		return Get_current_part().bfr;
 	}
 	public void Add_part(byte[] bry) {
 		parts.Add(new Xomw_prepro_part(bry));
@@ -126,13 +129,13 @@ class Xomw_prepro_piece {
 	public byte[] Break_syntax(Bry_bfr tmp_bfr, int opening_count) {
 		byte[] rv = Bry_.Empty;
 		if (Bry_.Eq(open, Byte_ascii.Nl_bry)) {
-			rv = ((Xomw_prepro_part)parts.Get_at(0)).bry;
+			rv = ((Xomw_prepro_part)parts.Get_at(0)).bfr.To_bry();
 		}
 		else {
 			if (opening_count == -1) {
 				opening_count = count;
 			}
-			rv = Bry_.Repeat_bry(open, opening_count);
+			tmp_bfr.Add(Bry_.Repeat_bry(open, opening_count));
 
 			// concat parts with "|"
 			boolean first = true;
@@ -145,7 +148,7 @@ class Xomw_prepro_piece {
 				else {
 					tmp_bfr.Add_byte_pipe();
 				}
-				tmp_bfr.Add(part.bry);
+				tmp_bfr.Add(part.bfr.To_bry());
 			}
 			rv = tmp_bfr.To_bry_and_clear();
 		}
@@ -154,9 +157,9 @@ class Xomw_prepro_piece {
 }
 class Xomw_prepro_part {
 	public Xomw_prepro_part(byte[] bry) {
-		this.bry = bry;
+		bfr.Add(bry);
 	}
-	public final    byte[] bry;
+	public final    Bry_bfr bfr = Bry_bfr_.New();
 	public int Eqpos = -1;
 	public int comment_end = -1;
 	public int visual_end = -1;

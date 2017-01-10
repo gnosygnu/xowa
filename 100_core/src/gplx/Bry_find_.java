@@ -235,6 +235,16 @@ public class Bry_find_ {
 			cur++;
 		}
 	}
+	public static int Find_fwd_while(byte[] src, int cur, int end, byte[] while_bry) {
+		int while_len = while_bry.length;
+		while (true) {
+			if (cur == end) return cur;
+			for (int i = 0; i < while_len; i++) {
+				if (while_bry[i] != src[i + cur]) return cur;
+			}
+			cur += while_len;
+		}
+	}
 	public static int Find_fwd_until(byte[] src, int cur, int end, byte until_byte) {
 		while (true) {
 			if (	cur == end

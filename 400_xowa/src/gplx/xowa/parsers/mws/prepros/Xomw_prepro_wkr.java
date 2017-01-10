@@ -21,7 +21,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private final    List_adp comments_list = List_adp_.New();
 	private final    Hash_adp_bry xmlish_elems = Hash_adp_bry.ci_a7();
-	private final    Hash_adp_bry xmlish_allow_missing_end_tag = Hash_adp_bry.cs();
+	private final    Hash_adp_bry xmlish_allow_missing_end_tag = Hash_adp_bry.cs().Add_many_str("includeonly", "noinclude", "onlyinclude");
 	private final    Hash_adp_bry no_more_closing_tag = Hash_adp_bry.cs();
 	// private final    Btrie_slim_mgr search_dflt_trie = Btrie_slim_mgr.cs().Add_many_int(0, "[", "{", "<", "\n");	// $searchBase = "[{<\n";
 	private final    Xomw_prepro_stack stack = new Xomw_prepro_stack();
@@ -47,7 +47,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 
 	public byte[] Preprocess_to_xml(byte[] src, boolean for_inclusion) {
 		xmlish_elems.Clear(); // TODO.XO: parser->getStripList();
-		xmlish_allow_missing_end_tag.Add_many_str("includeonly", "noinclude", "onlyinclude");
+		// PERF: xmlish_allow_missing_end_tag.Add_many_str("includeonly", "noinclude", "onlyinclude")
 		boolean enable_only_include = false;
 
 		Hash_adp_bry ignored_tags, ignored_elements;
@@ -108,6 +108,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 		Btrie_slim_mgr elements_trie = Btrie_slim_mgr.ci_a7();
 		Btrie_slim_mgr elements_end_trie = Btrie_slim_mgr.ci_a7();
 
+		byte[] cur_char = Bry_.Empty;
 		byte[] cur_closing = Bry_.Empty;
 		byte[] inner = null;
 
@@ -126,7 +127,6 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 				find_only_include = false;
 			}
 
-			byte[] cur_char = Bry_.Empty;
 			Xomw_prepro_rule rule = null;
 			if (fake_line_start) {
 				found = Found__line_bgn;
@@ -208,25 +208,33 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 					}
 				}
 				else {
-					Xomw_prepro_curchar_itm cur_char_itm = (Xomw_prepro_curchar_itm)cur_char_trie.Match_at(trv, src, i, src_len);
-					cur_char = cur_char_itm.bry;
-					switch (cur_char_itm.type) {
-						case Byte_ascii.Pipe:         found = Found__pipe; break;
-						case Byte_ascii.Eq:           found = Found__equals; break;
-						case Byte_ascii.Angle_bgn:    found = Found__angle; break;
-						case Byte_ascii.Nl:           found = in_heading ? Found__line_end : Found__line_bgn; break;
-						case Byte_ascii.Curly_bgn:   {found = Found__open; rule = rule_curly; break;}
-						case Byte_ascii.Brack_bgn:   {found = Found__open; rule = rule_brack; break;}
-						case Byte_ascii.Dash:        {found = Found__open; rule = rule_langv; break;}
-						default:
-							if (Bry_.Eq(cur_char, cur_closing)) {
-								found = Found__close;
+					boolean match = false;
+					if (cur_closing != Bry_.Empty) {
+						if (Bry_.Match(src, i, i + cur_closing.length, cur_closing)) {
+							match = true;
+							found = Found__close;
+							cur_char = cur_closing;
+						}
+					}
+					else {
+						Xomw_prepro_curchar_itm cur_char_itm = (Xomw_prepro_curchar_itm)cur_char_trie.Match_at(trv, src, i, src_len);
+						if (cur_char_itm != null) {
+							match = true;
+							cur_char = cur_char_itm.bry;
+							switch (cur_char_itm.type) {
+								case Byte_ascii.Pipe:         found = Found__pipe; break;
+								case Byte_ascii.Eq:           found = Found__equals; break;
+								case Byte_ascii.Angle_bgn:    found = Found__angle; break;
+								case Byte_ascii.Nl:           found = in_heading ? Found__line_end : Found__line_bgn; break;
+								case Byte_ascii.Curly_bgn:   {found = Found__open; rule = rule_curly; break;}
+								case Byte_ascii.Brack_bgn:   {found = Found__open; rule = rule_brack; break;}
+								case Byte_ascii.Dash:        {found = Found__open; rule = rule_langv; break;}
 							}
-							else {
-								i++;
-								continue;
-							}
-							break;
+						}
+					}
+					if (!match) {
+						i++;
+						continue;
 					}
 				}
 			}
@@ -528,7 +536,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 			}
 			else if (found == Found__open) {
 				// count opening brace characters
-				int count = Bry_find_.Find_fwd(src, cur_char, i, src_len);
+				int count = Bry_find_.Find_fwd_while(src, i, src_len, cur_char) - i;
 
 				// we need to add to stack only if opening brace count is enough for one of the rules
 				if (count >= rule.min) {
@@ -550,7 +558,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 			else if (found == Found__close) {
 				Xomw_prepro_piece piece = stack.top;
 				// lets check if there are enough characters for closing brace
-				int count = Bry_find_.Find_fwd(src, cur_char, i, src_len);
+				int count = Bry_find_.Find_fwd_while(src, i, src_len, cur_char) - i;
 				int max_count = piece.count;
 				if (count > max_count) count = max_count;
 
@@ -582,13 +590,13 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 				byte[] element = null;
 				if (name_type == Xomw_prepro_rule.Name__null) {
 					// No element, just literal text
-					piece.Break_syntax(tmp_bfr, matching_count);
+					tmp_bfr.Add(piece.Break_syntax(tmp_bfr, matching_count));
 					element = tmp_bfr.Add(Bry_.Repeat_bry(rule.end, matching_count)).To_bry_and_clear();
 				}
 				else {
 					// Create XML element; Note: $parts is already XML, does not need to be encoded further
 					List_adp parts = piece.parts;
-					byte[] title = ((Xomw_prepro_part)parts.Get_at(0)).bry;
+					byte[] title = ((Xomw_prepro_part)parts.Get_at(0)).bfr.To_bry_and_clear();
 					parts.Del_at(0);
 
 					// The invocation is at the start of the line if lineStart is set in the stack, and all opening brackets are used up.
@@ -609,12 +617,13 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 					for (int j = 0; j < parts_len; j++) {
 						Xomw_prepro_part part = (Xomw_prepro_part)parts.Get_at(j);
 						if (part.Eqpos != -1) {
-							byte[] arg_key = Bry_.Mid(part.bry, 0, part.Eqpos);
-							byte[] arg_val = Bry_.Mid(part.bry, part.Eqpos + 1);
+							byte[] part_bry = part.bfr.To_bry();
+							byte[] arg_key = Bry_.Mid(part_bry, 0, part.Eqpos);
+							byte[] arg_val = Bry_.Mid(part_bry, part.Eqpos + 1);
 							tmp_bfr.Add_str_a7("<part><name>").Add(arg_key).Add_str_a7("</name>=<value>").Add(arg_val).Add_str_a7("</value></part>");
 						}
 						else {
-							tmp_bfr.Add_str_a7("<part><name index=\"").Add_int_variable(arg_idx).Add_str_a7("\" /><value>{").Add(part.bry).Add_str_a7("}</value></part>");
+							tmp_bfr.Add_str_a7("<part><name index=\"").Add_int_variable(arg_idx).Add_str_a7("\" /><value>{").Add(part.bfr.To_bry()).Add_str_a7("}</value></part>");
 							arg_idx++;
 						}
 					}
