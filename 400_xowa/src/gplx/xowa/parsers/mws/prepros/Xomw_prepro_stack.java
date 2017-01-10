@@ -19,13 +19,15 @@ package gplx.xowa.parsers.mws.prepros; import gplx.*; import gplx.xowa.*; import
 class Xomw_prepro_stack {
 	public List_adp stack = List_adp_.New();
 	public Xomw_prepro_piece top;
-	private Bry_bfr accum = Bry_bfr_.New(), root_accum = Bry_bfr_.New();
+	private Bry_bfr root_accum = Bry_bfr_.New(), accum;
 	private final    Xomw_prepro_flags flags = new Xomw_prepro_flags();
 
+	public Xomw_prepro_stack() {
+		accum = root_accum;
+	}
 	public void Clear() {
 		stack.Clear();
 		accum.Clear();
-		root_accum.Clear();
 		top = null;
 	}
 	public int Count() {return stack.Len();}

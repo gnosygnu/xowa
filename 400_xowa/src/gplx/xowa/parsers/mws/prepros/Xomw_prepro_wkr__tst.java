@@ -18,10 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.mws.prepros; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.mws.*;
 import org.junit.*;
 public class Xomw_prepro_wkr__tst {
-//		private final    Xomw_prepro_wkr__fxt fxt = new Xomw_prepro_wkr__fxt();
-	@Test  public void Basic()		{
-//			fxt.Test__parse("a", "a");
+	private final    Xomw_prepro_wkr__fxt fxt = new Xomw_prepro_wkr__fxt();
+	@Test  public void Text() {
+		fxt.Test__parse("abc", "<root>abc</root>");
 	}
+//		@Test  public void Brack() {
+//			fxt.Test__parse("a[[b]]c", "<root>abc</root>");
+//		}
 }
 class Xomw_prepro_wkr__fxt {
 	private final    Xomw_prepro_wkr wkr = new Xomw_prepro_wkr();
