@@ -93,15 +93,14 @@ public class References_nde_rare_tst {
 	}
 	@Test  public void Dangling_ref_and_stack_overflow() { // PURPOSE: handle dangling <ref> with nested <references/>; PAGE:cs.s:Page:Hejčl,_Jan_-_Pentateuch.pdf/128 DATE:2016-09-01
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
-		( "a<ref name='ref_0'/>b"
-		, "<references><ref name='ref_0'>c"
+		( "a<ref name='ref_0'>b</ref>c"
+		, "<references><ref name='ref_1'>d"
 		, "<references/>"		// must be ignored, else it will be same as outer <references>
 		, "</references>"
 		), String_.Concat_lines_nl_skip_last
-		( "a<sup id=\"cite_ref-ref_0_0-0\" class=\"reference\"><a href=\"#cite_note-ref_0-0\">[1]</a></sup>b"
+		( "a<sup id=\"cite_ref-ref_0_0-0\" class=\"reference\"><a href=\"#cite_note-ref_0-0\">[1]</a></sup>c"
 		, "<ol class=\"references\">"
-		, "<li id=\"cite_note-ref_0-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-ref_0_0-0\">^</a></span> <span class=\"reference-text\">c"
-		, "</span></li>"
+		, "<li id=\"cite_note-ref_0-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-ref_0_0-0\">^</a></span> <span class=\"reference-text\">b</span></li>"
 		, "</ol>"
 		, ""
 		));

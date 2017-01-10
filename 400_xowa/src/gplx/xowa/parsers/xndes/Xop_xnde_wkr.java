@@ -580,7 +580,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			if (close_bgn == Bry_find_.Not_found) auto_close = true;	// auto-close if end not found; verified with <poem>, <gallery>, <imagemap>, <hiero>, <references> DATE:2014-08-23
 			int close_end = -1;
 			if (auto_close) {
-				xnde_end = close_bgn = close_end = src_len;
+				return ctx.Lxr_make_txt_(open_end);	// dangling tags are now escaped; used to gobble up rest of page with "xnde_end = close_bgn = close_end = src_len;"; DATE:2017-01-10
 			}
 			else {
 				close_end = Find_end_tag_pos(src, src_len, close_bgn + close_bry.length);

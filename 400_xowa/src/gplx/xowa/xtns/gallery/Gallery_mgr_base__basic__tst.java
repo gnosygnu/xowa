@@ -140,7 +140,7 @@ public class Gallery_mgr_base__basic__tst {
 		));
 	}
 	@Test   public void Dangling_autcloses() {	// PURPOSE: dangling gallery should auto-close, not escape; PAGE:en.w:Wikipedia:Featured_pictures_thumbs_43 DATE:2014-08-23
-		fxt.Test_html_frag("<gallery>File:A.png|b", "<ul id=\"xowa_gallery_ul_0\"");
+		fxt.Test_html_frag("<gallery>File:A.png|b", "&lt;gallery&gt;File:A.png|b");
 	}
 	@Test   public void Nested() {	// PURPOSE: handle gallery nested inside ref; PAGE: es.w:Arquitectura_medieval DATE:2015-07-10
 		fxt.Test_html_frag(String_.Concat_lines_nl_skip_last
@@ -153,7 +153,7 @@ public class Gallery_mgr_base__basic__tst {
 		);
 	}
 	@Test   public void Alt__quotes() {	// PURPOSE: file name with quotes will cause broken alt; PAGE:en.w:en.w:Alexandria,_Romania; DATE:2015-12-27
-		fxt.Test_html_frag("<gallery>File:A\"b.png", "alt=\"A&quot;b.png\"");	// NOTE: not 'alt="A"b.png"'
+		fxt.Test_html_frag("<gallery>File:A\"b.png</gallery>", "alt=\"A&quot;b.png\"");	// NOTE: not 'alt="A"b.png"'
 	}
 	@Test   public void Invalid() {	// PURPOSE: ignore invalid file names; DATE:2016-01-12
 		fxt.Test_html_str("<gallery>File:#A.png|a</gallery>"

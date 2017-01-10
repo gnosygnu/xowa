@@ -274,13 +274,16 @@ public class Dpl_xnde_tst {
 		));
 	}
 	@Test   public void Err__bad_key_causes_out_of_bound() {	// PURPOSE: bad key causes out of bounds error; PAGE:de.n:Portal:Brandenburg DATE:2016-04-21
-		fxt.Init__warns("dynamic_page_list:unknown_key: page=Test page key=<DynamicPageList>category", "dynamic_page_list:unknown_key: page=Test page key=<DynamicPageList>category");
 		fxt.Exec__parse
 		( "<DynamicPageList>"
 		, "<DynamicPageList>category=A</DynamicPageList>a=b c=d"
 		, "<DynamicPageList>category=B</DynamicPageList>"
 		);
-		fxt.Test__html("No pages meet these criteria.");
+		fxt.Test__html(String_.Concat_lines_nl_skip_last
+		( "&lt;DynamicPageList&gt;"
+		, "No pages meet these criteria.a=b c=d"
+		, "No pages meet these criteria."
+		));
 	}
 }
 class Dpl_page_mok {
