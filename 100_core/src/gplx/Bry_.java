@@ -164,6 +164,17 @@ public class Bry_ {
 			rv[i] = b;
 		return rv;
 	}
+	public static byte[] Repeat_bry(byte[] bry, int len) {
+		int bry_len = bry.length;
+		int rv_len = len * bry_len;
+		byte[] rv = new byte[rv_len];
+		for (int i = 0; i < len; i++) {
+			for (int j = 0; j < bry_len; j++) {
+				rv[(i * bry_len) + j] = bry[j];
+			}
+		}
+		return rv;
+	}
 	public static byte[] Add(byte[] src, byte b) {
 		int src_len = src.length;
 		byte[] rv = new byte[src_len + 1];

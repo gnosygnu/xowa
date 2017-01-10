@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import org.junit.*; import gplx.core.primitives.*; import gplx.core.brys.*;
+import org.junit.*; import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.tests.*;
 public class Bry__tst {
 	private final    Bry__fxt fxt = new Bry__fxt();
 	@Test  public void new_ascii_() {
@@ -276,6 +276,9 @@ public class Bry__tst {
 		fxt.Test__new_u8_nl_apos(String_.Ary("a", "b"), "a\nb");
 		fxt.Test__new_u8_nl_apos(String_.Ary("a", "b'c", "d"), "a\nb\"c\nd");
 	}
+	@Test   public void Repeat_bry() {
+		fxt.Test__repeat_bry("abc"  , 3, "abcabcabc");
+	}
 }
 class Bry__fxt {
 	public void Test_trim_end(String raw, byte trim, String expd) {
@@ -291,5 +294,8 @@ class Bry__fxt {
 	public void Test_Mid_w_trim(String src, String expd) {byte[] bry = Bry_.new_u8(src); Tfds.Eq(expd, String_.new_u8(Bry_.Mid_w_trim(bry, 0, bry.length)));}
 	public void Test__new_u8_nl_apos(String[] ary, String expd) {
 		Tfds.Eq_str_lines(expd, String_.new_u8(Bry_.New_u8_nl_apos(ary)));
+	}
+	public void Test__repeat_bry(String s, int count, String expd) {
+		Gftest.Eq__str(expd, Bry_.Repeat_bry(Bry_.new_u8(s), count));
 	}
 }

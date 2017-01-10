@@ -38,6 +38,6 @@ public class Arg_nde_tkn extends Xop_tkn_itm_base {
 		val_tkn.Tmpl_evaluate(ctx, src, caller, bfr);
 		return true;
 	}
-	public static final Arg_nde_tkn[] Ary_empty = new Arg_nde_tkn[0];
-	public static final Arg_nde_tkn Null = new Arg_nde_tkn(-1, -1);
+	public static final    Arg_nde_tkn[] Ary_empty = new Arg_nde_tkn[0];
+	public static final    Arg_nde_tkn Null = new Arg_nde_tkn(-1, -1);
 }
