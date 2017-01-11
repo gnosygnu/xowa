@@ -19,6 +19,7 @@ package gplx;
 import gplx.core.lists.*; /*EnumerAble,ComparerAble*/
 public interface Ordered_hash extends Hash_adp, List_adp__getable {
 	void Add_at(int i, Object o);
+	Ordered_hash Add_many_str(String... ary);
 	int Idx_of(Object item);
 	void Sort();
 	void Sort_by(ComparerAble comparer);

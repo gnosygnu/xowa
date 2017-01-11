@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.mws.prepros; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.mws.*;
 import gplx.core.btries.*;
-public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
+public class Xomw_prepro_wkr {	// THREAD.UNSAFE:caching for repeated calls
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private final    List_adp comments_list = List_adp_.New();
 	private final    Hash_adp_bry xmlish_elems = Hash_adp_bry.ci_a7();
@@ -25,36 +25,15 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 	private final    Hash_adp_bry no_more_closing_tag = Hash_adp_bry.cs();
 	private final    Btrie_slim_mgr elements_trie = Btrie_slim_mgr.ci_a7();
 	private final    Xomw_prepro_stack stack = new Xomw_prepro_stack();
-	private Bry_bfr accum = Bry_bfr_.New();
-
 	private final    Btrie_rv trv = new Btrie_rv();
-
-	private static final    Btrie_slim_mgr cur_char_trie = Cur_char_trie__new();
-	private static final    Hash_adp_bry 
-	  ignored_tags__noinclude       = Hash_adp_bry.cs().Add_many_str("includeonly", "/includeonly")
-	, ignored_elements__noinclude   = Hash_adp_bry.cs().Add_many_str("noinclude")
-	, ignored_tags__includeonly     = Hash_adp_bry.cs().Add_many_str("noinclude", "/noinclude", "onlyinclude", "/onlyinclude")
-	, ignored_elements__includeonly = Hash_adp_bry.cs().Add_many_str("includeonly");
-	private static Btrie_slim_mgr Cur_char_trie__new() {
-		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();
-		String[] ary = new String[] {"|", "=", "<", "\n", "{", "[", "-{", "}", "]"};
-		for (String str : ary) {
-			byte[] bry = Bry_.new_a7(str);
-			rv.Add_obj(bry, new Xomw_prepro_curchar_itm(bry, bry[0]));
-		}
-
-		// handle "}-" separately
-		byte[] langv_end = Bry_.new_a7("}-");
-		rv.Add_obj(langv_end, new Xomw_prepro_curchar_itm(langv_end, Byte_ascii.Bang));
-		return rv;
-	}
+	private Bry_bfr accum = Bry_bfr_.New();
 
 	public byte[] Preprocess_to_xml(byte[] src, boolean for_inclusion) {
 		xmlish_elems.Clear(); // TODO.XO: parser->getStripList(); pre|nowiki|gallery|indicator|ref|reference
 		// RELIC: $xmlishAllowMissingEndTag = [ 'includeonly', 'noinclude', 'onlyinclude' ];
 		boolean enable_only_include = false;
 
-		Hash_adp_bry ignored_tags, ignored_elements;
+		Ordered_hash ignored_tags; Hash_adp ignored_elements;
 		if (for_inclusion) {
 			ignored_tags = ignored_tags__noinclude;
 			ignored_elements = ignored_elements__noinclude;
@@ -70,8 +49,17 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 			xmlish_elems.Add_many_str("includeonly");
 		}
 
+		// PORTED:$xmlishRegex = implode( '|', array_merge( $xmlishElements, $ignoredTags ) );
+		elements_trie.Clear();
+		elements_trie.Add_obj("pre", new Xomw_prepro_elem(Xomw_prepro_elem.Type__other, Bry_.new_a7("pre")));
+		elements_trie.Add_obj("!--", new Xomw_prepro_elem(Xomw_prepro_elem.Type__comment, Bry_.new_a7("comment")));
+		int ignored_tags_len = ignored_tags.Count();
+		for (int j = 0; j < ignored_tags_len; j++) {
+			byte[] bry = (byte[])ignored_tags.Get_at(j);
+			elements_trie.Add_obj(bry, new Xomw_prepro_elem(Xomw_prepro_elem.Type__other, bry));
+		}
+
 		// RELIC:
-		// $xmlishRegex = implode( '|', array_merge( $xmlishElements, $ignoredTags ) );
 		// Use "A" modifier (anchored) instead of "^", because ^ doesn't work with an offset
 		// $elementsRegex = "~($xmlishRegex)(?:\s|\/>|>)|(!--)~iA";
 
@@ -119,11 +107,6 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 		byte[] cur_closing = Bry_.Empty;
 		byte[] inner = null;
 		Xomw_prepro_rule rule = null;
-
-		// XOWA: xml elements
-		elements_trie.Clear();
-		elements_trie.Add_obj("pre", new Xomw_prepro_elem(Xomw_prepro_elem.Type__other, Bry_.new_a7("pre")));
-		elements_trie.Add_obj("!--", new Xomw_prepro_elem(Xomw_prepro_elem.Type__comment, Bry_.new_a7("comment")));
 
 		while (true) {
 			if (find_only_include) {
@@ -488,7 +471,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 				}
 
 				int eq_end = Bry_find_.Find_fwd_while(src, i, i + 6, Byte_ascii.Eq);	// PORTED:strspn( $src, '=', $i, 6 );					
-				int count = i - eq_end;
+				int count = eq_end - i;
 				if (count == 1 && find_equals) {
 					// DWIM: This looks kind of like a name/value separator.
 					// Let's let the equals handler have it and break the
@@ -739,6 +722,15 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 		else if	(Bry_.Eq(bry, rule_langv.bgn))   return rule_langv;
 		else                                     throw Err_.new_unhandled(bry);
 	}
+	private static final int 
+	  Found__line_bgn = 0
+	, Found__line_end = 1
+	, Found__pipe = 2
+	, Found__equals = 3
+	, Found__angle = 4
+	, Found__close = 5
+	, Found__open = 6
+	;
 	private static final    Xomw_prepro_rule 
 	  rule_curly = new Xomw_prepro_rule(Bry_.new_a7("{"), Bry_.new_a7("}")  , 2, 3, new int[] {Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__tmpl, Xomw_prepro_rule.Name__targ})
 	, rule_brack = new Xomw_prepro_rule(Bry_.new_a7("["), Bry_.new_a7("]")  , 2, 2, new int[] {Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__null})
@@ -753,13 +745,24 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 	, Bry__end_lhs      = Bry_.new_a7("</")
 	;
 	private static final    int Len__only_include_end = Bry__only_include_end.length;
-	private static final int 
-	  Found__line_bgn = 0
-	, Found__line_end = 1
-	, Found__pipe = 2
-	, Found__equals = 3
-	, Found__angle = 4
-	, Found__close = 5
-	, Found__open = 6
-	;
+	private static final    Btrie_slim_mgr cur_char_trie = Cur_char_trie__new();
+	private static final    Ordered_hash
+	  ignored_tags__noinclude       = Ordered_hash_.New_bry().Add_many_str("includeonly", "/includeonly")
+	, ignored_tags__includeonly     = Ordered_hash_.New_bry().Add_many_str("noinclude", "/noinclude", "onlyinclude", "/onlyinclude");
+	private static final    Hash_adp_bry 
+	  ignored_elements__noinclude   = Hash_adp_bry.cs().Add_many_str("noinclude")
+	, ignored_elements__includeonly = Hash_adp_bry.cs().Add_many_str("includeonly");
+	private static Btrie_slim_mgr Cur_char_trie__new() {
+		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();
+		String[] ary = new String[] {"|", "=", "<", "\n", "{", "[", "-{", "}", "]"};
+		for (String str : ary) {
+			byte[] bry = Bry_.new_a7(str);
+			rv.Add_obj(bry, new Xomw_prepro_curchar_itm(bry, bry[0]));
+		}
+
+		// handle "}-" separately
+		byte[] langv_end = Bry_.new_a7("}-");
+		rv.Add_obj(langv_end, new Xomw_prepro_curchar_itm(langv_end, Byte_ascii.Bang));
+		return rv;
+	}
 }

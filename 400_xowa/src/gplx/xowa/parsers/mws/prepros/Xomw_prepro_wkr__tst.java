@@ -59,18 +59,48 @@ public class Xomw_prepro_wkr__tst {
 	@Test  public void Ext__pre() {
 		fxt.Test__parse("a<pre id=\"1\">b</pre>c", "<root>a<ext><name>pre</name><attr> id=&quot;1&quot;</attr><inner>b</inner><close>&lt;/pre&gt;</close></ext>c</root>");
 	}
-/*
-TODO:
-* for_inclusion; <onlyinclude> in String
-* heading.general
-* heading.EOS: "==a" (no closing ==)
-* ignored tags
-*/
+	@Test  public void Heading() {
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "a"
+		, "== b1 =="
+		, "z"
+		), String_.Concat_lines_nl_skip_last
+		( "<root>a"
+		, "<h level=\"2\" i=\"1\">== b1 ==</h>"
+		, "z</root>"
+		));
+	}
+	@Test  public void Heading__eos__no_nl() {
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "a"
+		, "== b1 =="
+		), String_.Concat_lines_nl_skip_last
+		( "<root>a"
+		, "<h level=\"2\" i=\"1\">== b1 ==</h></root>"
+		));
+	}
+	@Test  public void Heading__bos__implied_nl() {
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "== b1 =="
+		, "z"
+		), String_.Concat_lines_nl_skip_last
+		( "<root><h level=\"2\" i=\"1\">== b1 ==</h>"
+		, "z</root>"
+		));
+	}
+	@Test  public void Inclusion__n() {
+		fxt.Init__for_inclusion_(Bool_.N);
+		fxt.Test__parse("a<onlyinclude>b</onlyinclude>c", "<root>a<ignore>&lt;onlyinclude&gt;</ignore>b<ignore>&lt;/onlyinclude&gt;</ignore>c</root>");
+	}
+	@Test  public void Inclusion__y() {
+		fxt.Init__for_inclusion_(Bool_.Y);
+		fxt.Test__parse("a<onlyinclude>b</onlyinclude>c", "<root><ignore>a&lt;onlyinclude&gt;</ignore>b<ignore>&lt;/onlyinclude&gt;c</ignore></root>");
+	}
 }
 class Xomw_prepro_wkr__fxt {
 	private final    Xomw_prepro_wkr wkr = new Xomw_prepro_wkr();
 	private boolean for_inclusion = false;
-	public void Init__for_inclusion_y_() {for_inclusion = true;}
+	public void Init__for_inclusion_(boolean v) {for_inclusion = v;}
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		byte[] actl = wkr.Preprocess_to_xml(src_bry, for_inclusion);

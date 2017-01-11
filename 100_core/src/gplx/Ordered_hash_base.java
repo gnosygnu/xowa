@@ -54,6 +54,15 @@ public class Ordered_hash_base extends Hash_adp_base implements Ordered_hash, Gf
 		ordered.Add_at(i, val);
 		AssertCounts();
 	}
+	public Ordered_hash Add_many_str(String... ary) {
+		int ary_len = ary.length;
+		for (int i = 0; i < ary_len; i++) {
+			String itm = ary[i];
+			byte[] bry = Bry_.new_u8(itm);
+			this.Add(bry, bry);
+		}
+		return this;
+	}
 	void AssertCounts() {
 		if (super.Count() != ordered.Count()) throw Err_.new_wo_type("counts do not match", "hash", super.Count(), "list", ordered.Count());
 	}
