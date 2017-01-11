@@ -28,11 +28,13 @@ public class Xomw_tblw_wkr {
 	private static final    byte[] 
 	  Bry__tblw_end = Bry_.new_a7("|}"), Bry__tr = Bry_.new_a7("|-"), Bry__th = Bry_.new_a7("|+")
 	, Bry__special_case = Bry_.new_a7("<table>\n<tr><td></td></tr>\n</table>")
+	, Bry__tag__td = Bry_.new_a7("td"), Bry__tag__th = Bry_.new_a7("th"), Bry__tag__caption = Bry_.new_a7("caption")
+	, Bry__elem_end__tr = Bry_.new_a7("</tr>")
 	;
 	private static final    int Len__special_case = Bry__special_case.length;
 	public byte[] Do_table_stuff(byte[] src) {
 		int src_len = src.length;
-		byte[][] lines = Bry_split_.Split(src, 0, src_len, Byte_ascii.Nl_bry); // PORTED: $lines = StringUtils::explode( "\n", $text );
+		byte[][] lines = Bry_split_.Split(src, 0, src_len, Byte_ascii.Nl_bry); // PORTED: $lines = StringUtils::explode("\n", $text);
 		int lines_len = lines.length;
 
 		// PORTED:member variables
@@ -61,19 +63,19 @@ public class Xomw_tblw_wkr {
 			boolean is_indented_table = false;
 			// ":*" , "\s*" , "{|" , ".*"
 			if (is_indented_table) {
-//				if ( preg_match( '/^(:*)\s*\{\|(.*)$/', $line, $matches ) ) {
+//				if (preg_match('/^(:*)\s*\{\|(.*)$/', $line, $matches)) {
 //					// First check if we are starting a new table
-//					$indent_level = strlen( $matches[1] );
+//					$indent_level = strlen(matches[1]);
 //
-//					$attributes = $this->mStripState->unstripBoth( $matches[2] );
-//					$attributes = Sanitizer::fixTagAttributes( $attributes, 'table' );
+//					$attributes = $this->mStripState->unstripBoth(matches[2]);
+//					$attributes = Sanitizer::fixTagAttributes(attributes, 'table');
 //
-//					line_orig = str_repeat( '<dl><dd>', $indent_level ) . "<table{$attributes}>";
-//					array_push( $td_history, false );
-//					array_push( $last_tag_history, '' );
-//					array_push( $tr_history, false );
-//					array_push( $tr_attributes, '' );
-//					array_push( $has_opened_tr, false );
+//					line_orig = str_repeat('<dl><dd>', $indent_level) . "<table{$attributes}>";
+				td_history.Add(false);
+				last_tag_history.Add(Bry_.Empty);
+				tr_history.Add(false);
+				tr_attributes.Add(Bry_.Empty);
+				has_opened_tr.Add(false);
 			}
 			else if (td_history.Len() == 0) {
 				// Don't do any of the following
@@ -103,105 +105,109 @@ public class Xomw_tblw_wkr {
 			}
 			else if (Bry_.Eq(chars_2, Bry__tr)) {
 //					// Now we have a table row
-//					$line = preg_replace( '#^\|-+#', '', $line );
+//					$line = preg_replace('#^\|-+#', '', $line);
 //
 //					// Whats after the tag is now only attributes
-//					$attributes = $this->mStripState->unstripBoth( $line );
-//					$attributes = Sanitizer::fixTagAttributes( $attributes, 'tr' );
-//					array_pop( $tr_attributes );
-//					array_push( $tr_attributes, $attributes );
-//
-//					$line = '';
-//					$last_tag = array_pop( $last_tag_history );
-//					array_pop( $has_opened_tr );
-//					array_push( $has_opened_tr, true );
-//
-//					if ( array_pop( $tr_history ) ) {
-//						$line = '</tr>';
-//					}
-//
-//					if ( array_pop( $td_history ) ) {
-//						$line = "</{$last_tag}>{$line}";
-//					}
-//
-//					line_orig = $line;
-//					array_push( $tr_history, false );
-//					array_push( $td_history, false );
-//					array_push( $last_tag_history, '' );
+//					$attributes = $this->mStripState->unstripBoth(line);
+//					$attributes = Sanitizer::fixTagAttributes(attributes, 'tr');
+				List_adp_.Pop(tr_attributes);
+//					array_push(tr_attributes, $attributes);
+
+				line = Bry_.Empty;
+				byte[] last_tag = (byte[])List_adp_.Pop(last_tag_history);
+				List_adp_.Pop(has_opened_tr);
+				has_opened_tr.Add(true);
+
+				if ((boolean)List_adp_.Pop(tr_history)) {
+					line = Bry__elem_end__tr;
+				}
+
+				if ((boolean)List_adp_.Pop(td_history)) {
+					line = tmp_bfr.Add_str_a7("</").Add(last_tag).Add_byte(Byte_ascii.Gt).Add(line).To_bry_and_clear();
+				}
+
+				line_orig = line;
+				tr_history.Add(false);
+				td_history.Add(false);
+				last_tag_history.Add(Bry_.Empty);
 			}
-			else if (  char_0 == Byte_ascii.Pipe
+			else if ( char_0 == Byte_ascii.Pipe
 					|| char_0 == Byte_ascii.Bang
 					|| Bry_.Eq(chars_2, Bry__th)
 				) {
 				// This might be cell elements, td, th or captions
-//					if ( $first_two === '|+' ) {
-//						$first_character = '+';
-//						$line = substr( $line, 2 );
-//					} else {
-//						$line = substr( $line, 1 );
-//					}
-//
-//					// Implies both are valid for table headings.
-//					if ( $first_character === '!' ) {
-//						$line = StringUtils::replaceMarkup( '!!', '||', $line );
-//					}
-//
-//					// Split up multiple cells on the same line.
-//					// FIXME : This can result in improper nesting of tags processed
-//					// by earlier parser steps.
-//					$cells = explode( '||', $line );
-//
-//					line_orig = '';
-//
-//					// Loop through each table cell
-//					foreach ( $cells as $cell ) {
-//						$previous = '';
-//						if ( $first_character !== '+' ) {
-//							$tr_after = array_pop( $tr_attributes );
-//							if ( !array_pop( $tr_history ) ) {
-//								$previous = "<tr{$tr_after}>\n";
-//							}
-//							array_push( $tr_history, true );
-//							array_push( $tr_attributes, '' );
-//							array_pop( $has_opened_tr );
-//							array_push( $has_opened_tr, true );
-//						}
-//
-//						$last_tag = array_pop( $last_tag_history );
-//
-//						if ( array_pop( $td_history ) ) {
-//							$previous = "</{$last_tag}>\n{$previous}";
-//						}
-//
-//						if ( $first_character === '|' ) {
-//							$last_tag = 'td';
-//						} elseif ( $first_character === '!' ) {
-//							$last_tag = 'th';
-//						} elseif ( $first_character === '+' ) {
-//							$last_tag = 'caption';
-//						} else {
-//							$last_tag = '';
-//						}
-//
-//						array_push( $last_tag_history, $last_tag );
+				if (Bry_.Eq(chars_2, Bry__th)) {
+					char_0 = Byte_ascii.Pipe;
+					line = Bry_.Mid(line, 2);
+				} else {
+					line = Bry_.Mid(line, 1);
+				}
+
+				// Implies both are valid for table headings.
+				if (char_0 == Byte_ascii.Nl) {
+					// $line = StringUtils::replaceMarkup('!!', '||', $line);
+				}
+
+				// Split up multiple cells on the same line.
+				// FIXME : This can result in improper nesting of tags processed
+				// by earlier parser steps.
+//					$cells = explode('||', $line);
+
+				line_orig = Bry_.Empty;
+
+				byte[] previous = null;
+				// Loop through each table cell
+//					foreach (cells as $cell) {
+					previous = Bry_.Empty;
+					if (char_0 != Byte_ascii.Plus) {
+						byte[] tr_after = (byte[])List_adp_.Pop(tr_attributes);
+						if (!(boolean)List_adp_.Pop(tr_history)) {
+							previous = tmp_bfr.Add_str_a7("<tr").Add(tr_after).Add_str_a7(">\n").To_bry_and_clear();
+						}
+						tr_history.Add(true);
+						tr_attributes.Add(Bry_.Empty);
+						List_adp_.Pop(has_opened_tr);
+						has_opened_tr.Add(true);
+					}
+
+					byte[] last_tag = (byte[])List_adp_.Pop(last_tag_history);
+
+					if ((boolean)List_adp_.Pop(td_history)) {
+						previous = tmp_bfr.Add_str_a7("</").Add(last_tag).Add_str_a7(">\n").Add(previous).To_bry_and_clear();
+					}
+
+					if (char_0 == Byte_ascii.Pipe) {
+						last_tag = Bry__tag__td;
+					}
+					else if (char_0 == Byte_ascii.Bang) {
+						last_tag = Bry__tag__th;
+					}
+					else if (char_0 == Byte_ascii.Plus) {
+						last_tag = Bry__tag__caption;
+					}
+					else {
+						last_tag = Bry_.Empty;
+					}
+
+					last_tag_history.Add(last_tag);
 //
 //						// A cell could contain both parameters and data
-//						$cell_data = explode( '|', $cell, 2 );
+//						$cell_data = explode('|', $cell, 2);
 //
 //						// Bug 553: Note that a '|' inside an invalid link should not
 //						// be mistaken as delimiting cell parameters
-//						if ( strpos( $cell_data[0], '[[' ) !== false ) {
+//						if (strpos(cell_data[0], '[[') !== false) {
 //							$cell = "{$previous}<{$last_tag}>{$cell}";
-//						} elseif ( count( $cell_data ) == 1 ) {
+//						} else if (count(cell_data) == 1) {
 //							$cell = "{$previous}<{$last_tag}>{$cell_data[0]}";
 //						} else {
-//							$attributes = $this->mStripState->unstripBoth( $cell_data[0] );
-//							$attributes = Sanitizer::fixTagAttributes( $attributes, $last_tag );
+//							$attributes = $this->mStripState->unstripBoth(cell_data[0]);
+//							$attributes = Sanitizer::fixTagAttributes(attributes, $last_tag);
 //							$cell = "{$previous}<{$last_tag}{$attributes}>{$cell_data[1]}";
 //						}
 //
-//						line_orig .= $cell;
-//						array_push( $td_history, true );
+//						line_orig = Bry_.Add(line_orig, $cell);
+					td_history.Add(true);
 //					}
 			}
 			bfr.Add(line_orig).Add_byte_nl();
