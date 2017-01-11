@@ -494,7 +494,9 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 					i++;
 				}
 
-				int eq_end = Bry_find_.Find_fwd_while(src, i, i + 6, Byte_ascii.Eq);	// PORTED:strspn( $src, '=', $i, 6 );					
+				// PORTED: $count = strspn( $text, '=', $i, 6 );
+				int eq_end_max = i + 6; if (eq_end_max > src_len) eq_end_max = src_len;
+				int eq_end = Bry_find_.Find_fwd_while(src, i, eq_end_max, Byte_ascii.Eq);
 				int count = eq_end - i;
 				if (count == 1 && find_equals) {	// EX: "{{a|\n=b=\n"
 					// DWIM: This looks kind of like a name/value separator.
@@ -529,10 +531,10 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 					// Comment found at line end
 					// Search for equals signs before the comment
 					search_bgn = part.visual_end;
-					search_bgn -= Bry_find_.Find_bwd__while_space_or_tab(src, search_bgn, 0);
+					search_bgn = Bry_find_.Find_bwd__while_space_or_tab(src, search_bgn, 0);
 				}
 				int count = piece.count;
-				int eq_len = Bry_find_.Find_bwd_while(src, search_bgn, 0, Byte_ascii.Eq);
+				int eq_len = search_bgn - Bry_find_.Find_bwd_while(src, search_bgn, 0, Byte_ascii.Eq) - 1;
 
 				byte[] element = Bry_.Empty;
 				if (eq_len > 0) {

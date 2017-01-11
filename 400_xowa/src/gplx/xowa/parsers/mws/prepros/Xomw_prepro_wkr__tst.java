@@ -117,7 +117,7 @@ public class Xomw_prepro_wkr__tst {
 		, "z</root>"
 		));
 	}
-	@Test  public void Heading__eq_1() {	// COVERS: "DWIM: This looks kind of like a name/value separator."
+	@Test  public void Heading__dwim__y() {	// COVERS: "DWIM: This looks kind of like a name/value separator."
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "a{{b|"
 		, "=c="
@@ -128,7 +128,61 @@ public class Xomw_prepro_wkr__tst {
 		, "</value></part></template>d</root>"
 		));
 	}
-	
+	@Test  public void Heading__dwim__n() {	// COVERS: "DWIM: This looks kind of like a name/value separator."
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "a{{b|"
+		, "==c=="
+		, "}}d"
+		), String_.Concat_lines_nl_skip_last
+		( "<root>a<template><title>b</title><part><name index=\"1\" /><value>"
+		, "<h level=\"2\" i=\"1\">==c==</h>"
+		, "</value></part></template>d</root>"
+		));
+	}
+	@Test  public void Heading__comment() {	// COVERS: "Comment found at line end"
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "a"
+		, "==b== <!--c-->"
+		, ""
+		), String_.Concat_lines_nl_skip_last
+		( "<root>a"
+		, "<h level=\"2\" i=\"1\">==b== <comment>&lt;!--c--&gt;</comment></h>"
+		, "</root>"
+		));
+	}
+	@Test  public void Heading__consecutive__5() {	// COVERS: "This is just a single String of equals signs on its own line"
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "a"
+		, "====="
+		, ""
+		), String_.Concat_lines_nl_skip_last
+		( "<root>a"
+		, "<h level=\"2\" i=\"1\">=====</h>"
+		, "</root>"
+		));
+	}
+	@Test  public void Heading__consecutive__1() {	// COVERS: "Single equals sign on its own line, count=0"
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "a"
+		, "="
+		, ""
+		), String_.Concat_lines_nl_skip_last
+		( "<root>a"
+		, "="
+		, "</root>"
+		));
+	}
+	@Test  public void Heading__unclosed() {	// COVERS: "No match, no <h>, just pass down the inner src"
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "a"
+		, "===b"
+		, ""
+		), String_.Concat_lines_nl_skip_last
+		( "<root>a"
+		, "===b"
+		, "</root>"
+		));
+	}
 	@Test  public void Inclusion__n() {
 		fxt.Init__for_inclusion_(Bool_.N);
 		fxt.Test__parse("a<onlyinclude>b</onlyinclude>c", "<root>a<ignore>&lt;onlyinclude&gt;</ignore>b<ignore>&lt;/onlyinclude&gt;</ignore>c</root>");
