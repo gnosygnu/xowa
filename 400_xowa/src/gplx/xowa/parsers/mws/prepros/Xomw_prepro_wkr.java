@@ -38,17 +38,21 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 	, ignored_elements__includeonly = Hash_adp_bry.cs().Add_many_str("includeonly");
 	private static Btrie_slim_mgr Cur_char_trie__new() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();
-		String[] ary = new String[] {"|", "=", "<", "\n", "{", "[", "-{"};
+		String[] ary = new String[] {"|", "=", "<", "\n", "{", "[", "-{", "}", "]"};
 		for (String str : ary) {
 			byte[] bry = Bry_.new_a7(str);
-			rv.Add_obj(bry, new Xomw_prepro_curchar_itm(bry));
+			rv.Add_obj(bry, new Xomw_prepro_curchar_itm(bry, bry[0]));
 		}
+
+		// handle "}-" separately
+		byte[] langv_end = Bry_.new_a7("}-");
+		rv.Add_obj(langv_end, new Xomw_prepro_curchar_itm(langv_end, Byte_ascii.Bang));
 		return rv;
 	}
 
 	public byte[] Preprocess_to_xml(byte[] src, boolean for_inclusion) {
-		xmlish_elems.Clear(); // TODO.XO: parser->getStripList();
-		// PERF: xmlish_allow_missing_end_tag.Add_many_str("includeonly", "noinclude", "onlyinclude")
+		xmlish_elems.Clear(); // TODO.XO: parser->getStripList(); pre|nowiki|gallery|indicator|ref|reference
+		// RELIC: $xmlishAllowMissingEndTag = [ 'includeonly', 'noinclude', 'onlyinclude' ];
 		boolean enable_only_include = false;
 
 		Hash_adp_bry ignored_tags, ignored_elements;
@@ -67,11 +71,18 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 			xmlish_elems.Add_many_str("includeonly");
 		}
 
+		// RELIC:
 		// $xmlishRegex = implode( '|', array_merge( $xmlishElements, $ignoredTags ) );
 		// Use "A" modifier (anchored) instead of "^", because ^ doesn't work with an offset
 		// $elementsRegex = "~($xmlishRegex)(?:\s|\/>|>)|(!--)~iA";
 
 		stack.Clear();
+
+		// RELIC:
+		// $searchBase = "[{<\n"; # }
+		// For fast reverse searches
+		// $revText = strrev( $text );
+		// $lengthText = strlen( $text );
 
 		// Input pointer, starts out pointing to a pseudo-newline before the start
 		int i = 0;
@@ -102,17 +113,18 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 		// Do a line-start run without outputting an LF character
 		boolean fake_line_start = true;
 
-		// XOWA-related init
+		// XOWA: init
 		int src_len = src.length;
 		int found = -1;
-
-		elements_trie.Clear();
-		elements_trie.Add_obj("!--", new Xomw_prepro_elem(Xomw_prepro_elem.Type__comment, Bry_.new_a7("comment")));
-		Btrie_slim_mgr elements_end_trie = Btrie_slim_mgr.ci_a7();
-
 		byte[] cur_char = Bry_.Empty;
 		byte[] cur_closing = Bry_.Empty;
 		byte[] inner = null;
+		Xomw_prepro_rule rule = null;
+
+		// XOWA: xml elements
+		elements_trie.Clear();
+		elements_trie.Add_obj("pre", new Xomw_prepro_elem(Xomw_prepro_elem.Type__other, Bry_.new_a7("pre")));
+		elements_trie.Add_obj("!--", new Xomw_prepro_elem(Xomw_prepro_elem.Type__comment, Bry_.new_a7("comment")));
 
 		while (true) {
 			if (find_only_include) {
@@ -129,34 +141,33 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 				find_only_include = false;
 			}
 
-			Xomw_prepro_rule rule = null;
 			if (fake_line_start) {
 				found = Found__line_bgn;
 				cur_char = Bry_.Empty;
 			}
 			else {
-				// Find next opening brace, closing brace or pipe
-				
-				// $search = $searchBase;
+				// Find next opening brace, closing brace or pipe		
+				// PORTED: $search = $searchBase;
 				if (stack.top == null) {
 					cur_closing = Bry_.Empty;
 				}
 				else {
 					cur_closing = stack.top.close;
-					// $search .= $currentClosing;
+					// RELIC: $search .= $currentClosing;
 				}
 				if (find_pipe) {
-					// $search .= '|';
+					// RELIC: $search .= '|';
 				}
 				if (find_equals) {
 					// First equals will be for the template
-					// $search .= '=';
+					// RELIC: $search .= '=';
 				}
 
 				// Output literal section, advance input counter
+				// PORTED: "$literalLength = strcspn(src, $search, i)"; NOTE: no trie b/c of frequent changes to $search
 				int literal_len = 0; 
-				// NOTE: hard-coded translation of "strcspn(src, $search, i)"; no trie b/c of frequent additions / deletions
 				boolean loop_stop = false;
+				// read String until search_char is found
 				for (int j = i; j < src_len; j++) {
 					byte b = src[j];
 					switch (b) {                // handle '$searchBase = "[{<\n";'
@@ -197,7 +208,6 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 					accum.Add(htmlspecialchars(Bry_.Mid(src, i, i + literal_len)));
 					i += literal_len;
 				}
-
 				if (i >= src_len) {
 					if (Bry_.Eq(cur_closing, Byte_ascii.Nl_bry)) {
 						// Do a past-the-end run to finish off the heading
@@ -210,31 +220,28 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 					}
 				}
 				else {
-					boolean match = false;
-					if (cur_closing != Bry_.Empty) {
-						if (Bry_.Match(src, i, i + cur_closing.length, cur_closing)) {
-							match = true;
-							found = Found__close;
-							cur_char = cur_closing;
+					// PORTED: corresponding block of MW code; note complexity to handle 2 char byte[]
+					Xomw_prepro_curchar_itm cur_char_itm = (Xomw_prepro_curchar_itm)cur_char_trie.Match_at(trv, src, i, src_len);
+					if (cur_char_itm != null) {
+						cur_char = cur_char_itm.bry;
+						switch (cur_char_itm.type) {
+							case Byte_ascii.Pipe:         found = Found__pipe; break;
+							case Byte_ascii.Eq:           found = Found__equals; break;
+							case Byte_ascii.Angle_bgn:    found = Found__angle; break;
+							case Byte_ascii.Nl:           found = in_heading ? Found__line_end : Found__line_bgn; break;
+
+							// PORT:"elseif ( $curChar == $currentClosing )"
+							case Byte_ascii.Curly_end:    found = Found__close; break;
+							case Byte_ascii.Brack_end:    found = Found__close; break;
+							case Byte_ascii.Bang:         found = Found__close; break;
+
+							// PORT:"elseif ( isset( $this->rules[$curChar] ) )"
+							case Byte_ascii.Curly_bgn:   {found = Found__open; rule = rule_curly; break;}
+							case Byte_ascii.Brack_bgn:   {found = Found__open; rule = rule_brack; break;}
+							case Byte_ascii.Dash:        {found = Found__open; rule = rule_langv; break;}
 						}
 					}
 					else {
-						Xomw_prepro_curchar_itm cur_char_itm = (Xomw_prepro_curchar_itm)cur_char_trie.Match_at(trv, src, i, src_len);
-						if (cur_char_itm != null) {
-							match = true;
-							cur_char = cur_char_itm.bry;
-							switch (cur_char_itm.type) {
-								case Byte_ascii.Pipe:         found = Found__pipe; break;
-								case Byte_ascii.Eq:           found = Found__equals; break;
-								case Byte_ascii.Angle_bgn:    found = Found__angle; break;
-								case Byte_ascii.Nl:           found = in_heading ? Found__line_end : Found__line_bgn; break;
-								case Byte_ascii.Curly_bgn:   {found = Found__open; rule = rule_curly; break;}
-								case Byte_ascii.Brack_bgn:   {found = Found__open; rule = rule_brack; break;}
-								case Byte_ascii.Dash:        {found = Found__open; rule = rule_langv; break;}
-							}
-						}
-					}
-					if (!match) {
 						i++;
 						continue;
 					}
@@ -249,7 +256,8 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 					continue;
 				}
 
-				// Determine element name; $elementsRegex = "~($xmlishRegex)(?:\s|\/>|>)|(!--)~iA"; EX: "(span|div)(?:\s|\/>|>)|(!--)
+				// Determine element name
+				// PORT: $elementsRegex = "~($xmlishRegex)(?:\s|\/>|>)|(!--)~iA"; EX: "(span|div)(?:\s|\/>|>)|(!--)
 				Xomw_prepro_elem element = (Xomw_prepro_elem)elements_trie.Match_at(trv, src, i + 1, src_len);
 				if (element == null) {
 					// Element name missing or not listed
@@ -260,12 +268,14 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 
 				// Handle comments
 				if (element.type == Xomw_prepro_elem.Type__comment) {
-					// To avoid leaving blank lines, when a sequence of space-separated comments is both preceded and followed by a newline
-					// (ignoring spaces), then trim leading and trailing spaces and the trailing newline.
+					// To avoid leaving blank lines, when a sequence of
+					// space-separated comments is both preceded and followed by
+					// a newline (ignoring spaces), then
+					// trim leading and trailing spaces and the trailing newline.
 
 					// Find the end
-					int comment_end_pos = Bry_find_.Find_fwd(src, Bry__comment_end, i + 4, src_len);
-					if (comment_end_pos == Bry_find_.Not_found) {
+					int end_pos = Bry_find_.Find_fwd(src, Bry__comment_end, i + 4, src_len);
+					if (end_pos == Bry_find_.Not_found) {
 						// Unclosed comment in input, runs to end
 						accum.Add_str_a7("<comment>").Add(htmlspecialchars(Bry_.Mid(src, i))).Add_str_a7("</comment>");
 						i = src_len;
@@ -276,9 +286,10 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 
 						// Search forwards for trailing whitespace
 						// $wsEnd will be the position of the last space (or the '>' if there's none)
-						int ws_end = Bry_find_.Find_fwd_while_space_or_tab(src, comment_end_pos + 3, src_len);
+						int ws_end = Bry_find_.Find_fwd_while_space_or_tab(src, end_pos + 3, src_len);
 
-						// Keep looking forward as long as we're finding more comments.
+						// Keep looking forward as long as we're finding more
+						// comments.
 						comments_list.Clear();
 						comments_list.Add(new int[] {ws_bgn, ws_end});
 						while (Bry_.Eq(src, ws_end + 1, ws_end + 5, Bry__comment_bgn)) {
@@ -292,9 +303,10 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 						}
 
 						// Eat the line if possible
-						// TODO: This could theoretically be done if $wsStart == 0, i.e. for comments at the overall start.
-						// That's not how Sanitizer::removeHTMLcomments() did it, but it's a possible beneficial b/c break.
-						int comment_bgn_pos = -1;
+						// TODO: This could theoretically be done if $wsStart == 0, i.e. for comments at
+						// the overall start. That's not how Sanitizer::removeHTMLcomments() did it, but
+						// it's a possible beneficial b/c break.
+						int bgn_pos = -1;
 						if (	ws_bgn > 0 
 							&&	Bry_.Eq(src, ws_bgn - 1, ws_bgn    , Byte_ascii.Nl_bry)
 							&&	Bry_.Eq(src, ws_end + 1, ws_end + 2, Byte_ascii.Nl_bry)
@@ -313,12 +325,12 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 							int comments_list_len = comments_list.Len();
 							for (int j = 0; j < comments_list_len; j++) {
 								int[] com = (int[])comments_list.Get_at(j);
-								comment_bgn_pos = com[0];
-								comment_end_pos = com[1] + 1;
+								bgn_pos = com[0];
+								end_pos = com[1] + 1;
 								if (j == comments_list_len - 1) {
 									break;
 								}
-								inner = Bry_.Mid(src, comment_bgn_pos, comment_end_pos);
+								inner = Bry_.Mid(src, bgn_pos, end_pos);
 								accum.Add_str_a7("<comment>").Add(htmlspecialchars(inner)).Add_str_a7("</comment>");
 							}
 
@@ -327,8 +339,8 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 						}
 						else {
 							// No line to eat, just take the comment itself
-							comment_bgn_pos = i;
-							comment_end_pos += 2;
+							bgn_pos = i;
+							end_pos += 2;
 						}
 
 						if (stack.top != null) {
@@ -337,22 +349,24 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 								part.visual_end = ws_bgn;
 							}
 							// Else comments abutting, no change in visual end
-							part.comment_end = comment_end_pos;
+							part.comment_end = end_pos;
 						}
-						i = comment_end_pos + 1;
-						inner = Bry_.Mid(src, comment_bgn_pos, comment_end_pos + 1);
+						i = end_pos + 1;
+						inner = Bry_.Mid(src, bgn_pos, end_pos + 1);
 						accum.Add_str_a7("<comment>").Add(htmlspecialchars(inner)).Add_str_a7("</comment>");
 						continue;
 					}
 				}
 
 				byte[] name = element.name;
+				// RELIC:$lowerName = strtolower( $name );
 				int atr_bgn = i + name.length + 1;
 
 				// Find end of tag
 				int tag_end_pos = no_more_gt ? Bry_find_.Not_found : Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, atr_bgn);
 				if (tag_end_pos == Bry_find_.Not_found) {
-					// Infinite backtrack; Disable tag search to prevent worst-case O(N^2) performance
+					// Infinite backtrack
+					// Disable tag search to prevent worst-case O(N^2) performance
 					no_more_gt = true;
 					accum.Add(Bry__escaped_lt);
 					i++;
@@ -378,32 +392,38 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 				else {
 					atr_end = tag_end_pos;
 					// Find closing tag
-					// NOTE: translation of `preg_match( "/<\/" . preg_quote( $name, '/' ) . "\s*>/i",`
-					Xomw_prepro_elem elem_end = null;
+					// PORTED: `preg_match( "/<\/" . preg_quote( $name, '/' ) . "\s*>/i",`
+					boolean elem_end_found = false;
 					int elem_end_lhs = -1, elem_end_rhs = -1;
-					for (int j = tag_end_pos + 1; j < src_len; j++) {
-						elem_end = (Xomw_prepro_elem)elements_end_trie.Match_at(trv, src, j, src_len);
-						elem_end_lhs = elem_end_rhs = trv.Pos();
-
-						// found a possible elem_end tag; validate "\s*>"
-						if (elem_end != null) {
-							elem_end_rhs = Bry_find_.Find_fwd_while(src, elem_end_rhs, src_len, Byte_ascii.Space);
-							if (elem_end_rhs == src_len) {
-								elem_end = null;
-							}
-							else {
-								if (src[elem_end_rhs] == Byte_ascii.Gt) 
-									elem_end_rhs = elem_end_rhs + 1;
-								else
-									elem_end = null;
-							}
-						}
-						if (elem_end != null)
+					int elem_end_cur = tag_end_pos + 1;
+					while (true) {
+						// search for "</"
+						elem_end_lhs = Bry_find_.Find_fwd(src, Bry__end_lhs, elem_end_cur, src_len);
+						if (elem_end_lhs == Bry_find_.Not_found) {
 							break;
-					}
+						}
 
+						// verify $name
+						elem_end_cur = elem_end_lhs + 2;	// 2="</"
+						int elem_end_tmp = elem_end_cur + name.length;
+						if (!Bry_.Eq_ci_a7(name, src, elem_end_cur, elem_end_tmp)) {
+							continue;
+						}
+
+						// verify "\s*>"
+						elem_end_cur = elem_end_tmp;
+						elem_end_cur = Bry_find_.Find_fwd_while(src, elem_end_cur, src_len, Byte_ascii.Space);
+						if (elem_end_cur == src_len) {	// just "\s", but no ">"
+							break;
+						}
+						if (src[elem_end_cur] == Byte_ascii.Gt) {
+							elem_end_rhs = elem_end_cur + 1;
+							elem_end_found = true;
+							break;
+						}
+					}
 					if (	!no_more_closing_tag.Has(name)
-						&&	elem_end != null) {
+						&&	elem_end_found) {
 						inner = Bry_.Mid(src, tag_end_pos + 1, elem_end_lhs);
 						i = elem_end_rhs;
 						tmp_bfr.Add_str_a7("<close>").Add(htmlspecialchars(Bry_.Mid(src, elem_end_lhs, elem_end_rhs))).Add_str_a7("</close>");
@@ -446,7 +466,8 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 				accum.Add(close).Add_str_a7("</ext>");
 			}
 			else if (found == Found__line_bgn) {
-				// Is this the start of a heading?; Line break belongs before the heading element in any case
+				// Is this the start of a heading?
+				// Line break belongs before the heading element in any case
 				if (fake_line_start) {
 					fake_line_start = false;
 				} else {
@@ -454,12 +475,14 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 					i++;
 				}
 
-				int eq_end = Bry_find_.Find_fwd_while(src, i, i + 6, Byte_ascii.Eq);	// strspn( $src, '=', $i, 6 );					
+				int eq_end = Bry_find_.Find_fwd_while(src, i, i + 6, Byte_ascii.Eq);	// PORTED:strspn( $src, '=', $i, 6 );					
 				int count = i - eq_end;
 				if (count == 1 && find_equals) {
 					// DWIM: This looks kind of like a name/value separator.
-					// Let's let the equals handler have it and break the potential heading.
-					// This is heuristic, but AFAICT the methods for completely correct disambiguation are very complex.
+					// Let's let the equals handler have it and break the
+					// potential heading. This is heuristic, but AFAICT the
+					// methods for completely correct disambiguation are very
+					// complex.
 				}
 				else if (count > 0) {
 					Xomw_prepro_piece piece = new Xomw_prepro_piece(Byte_ascii.Nl_bry, Byte_ascii.Nl_bry, count, i, false);
@@ -480,10 +503,12 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 				Xomw_prepro_part part = piece.Get_current_part();
 
 				// Search back through the input to see if it has a proper close.
-				// Do this using the reversed String since the other solutions (end anchor, etc.) are inefficient.
+				// Do this using the reversed String since the other solutions
+				// (end anchor, etc.) are inefficient.
 				int search_bgn = Bry_find_.Find_bwd__while_space_or_tab(src, i, 0);
 				if (part.comment_end != -1 && search_bgn -1 == part.comment_end) {
-					// Comment found at line end; Search for equals signs before the comment
+					// Comment found at line end
+					// Search for equals signs before the comment
 					search_bgn = part.visual_end;
 					search_bgn -= Bry_find_.Find_bwd__while_space_or_tab(src, search_bgn, 0);
 				}
@@ -499,14 +524,14 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 						count = eq_len;
 						if (count < 3) {
 							count = 0;
-						} else {
+						}
+						else {
 							count = (count - 1) / 2;
 							if (count > 6) count = 6;
 						}
 					} 
 					else {
-						if (eq_len < count)
-							count = eq_len;
+						if (eq_len < count)	count = eq_len;	// PORTED: $count = min( $equalsLength, $count );
 					}
 					if (count > 0) {
 						// Normal match, output <h>
@@ -533,17 +558,21 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 
 				// Append the result to the enclosing accumulator
 				accum.Add(element);
-				// Note that we do NOT increment the input pointer. This is because the closing linebreak could be the opening linebreak of another heading.
-				// Infinite loops are avoided because the next iteration MUST hit the heading open case above, which unconditionally increments the input pointer.
+				// Note that we do NOT increment the input pointer.
+				// This is because the closing linebreak could be the opening linebreak of
+				// another heading. Infinite loops are avoided because the next iteration MUST
+				// hit the heading open case above, which unconditionally increments the
+				// input pointer.
 			}
 			else if (found == Found__open) {
 				// count opening brace characters
-				int count = Bry_find_.Find_fwd_while(src, i, src_len, cur_char) - i;
+				int count = Bry_find_.Find_fwd_while(src, i, src_len, cur_char) - i;	// PORTED: $count = strspn( $text, $curChar, $i );
 
 				// we need to add to stack only if opening brace count is enough for one of the rules
 				if (count >= rule.min) {
 					// Add it to the stack
 					Xomw_prepro_piece piece = new Xomw_prepro_piece(cur_char, rule.end, count, -1, i > 0 && src[i - 1] == Byte_ascii.Nl);
+
 					stack.Push(piece);
 					accum = stack.Get_accum();
 					Xomw_prepro_flags flags = stack.Get_flags();
@@ -560,15 +589,15 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 			else if (found == Found__close) {
 				Xomw_prepro_piece piece = stack.top;
 				// lets check if there are enough characters for closing brace
-				int count = Bry_find_.Find_fwd_while(src, i, src_len, cur_char) - i;
 				int max_count = piece.count;
-				if (count > max_count) count = max_count;
+				int count = Bry_find_.Find_fwd_while(src, i, i + max_count, cur_char) - i;	// $count = strspn( $text, $curChar, $i, $maxCount );
 
 				// check for maximum matching characters (if there are 5 closing characters, we will probably need only 3 - depending on the rules)
 				rule = Get_rule(piece.open);
 				int matching_count = -1;
 				if (count > rule.max) {
-					// The specified maximum exists in the callback array, unless the caller has made an error
+					// The specified maximum exists in the callback array, unless the caller
+					// has made an error
 					matching_count = rule.max;
 				}
 				else {
@@ -596,12 +625,14 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 					element = tmp_bfr.Add(Bry_.Repeat_bry(rule.end, matching_count)).To_bry_and_clear();
 				}
 				else {
-					// Create XML element; Note: $parts is already XML, does not need to be encoded further
+					// Create XML element
+					// Note: $parts is already XML, does not need to be encoded further
 					List_adp parts = piece.parts;
 					byte[] title = ((Xomw_prepro_part)parts.Get_at(0)).bfr.To_bry_and_clear();
 					parts.Del_at(0);
 
-					// The invocation is at the start of the line if lineStart is set in the stack, and all opening brackets are used up.
+					// The invocation is at the start of the line if lineStart is set in
+					// the stack, and all opening brackets are used up.
 					byte[] attr = null;
 					if (max_count == matching_count && !piece.line_start) {
 						attr = Bry_.new_a7(" lineStart=\"1\"");
@@ -625,7 +656,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 							tmp_bfr.Add_str_a7("<part><name>").Add(arg_key).Add_str_a7("</name>=<value>").Add(arg_val).Add_str_a7("</value></part>");
 						}
 						else {
-							tmp_bfr.Add_str_a7("<part><name index=\"").Add_int_variable(arg_idx).Add_str_a7("\" /><value>{").Add(part.bfr.To_bry()).Add_str_a7("}</value></part>");
+							tmp_bfr.Add_str_a7("<part><name index=\"").Add_int_variable(arg_idx).Add_str_a7("\" /><value>").Add(part.bfr.To_bry()).Add_str_a7("</value></part>");
 							arg_idx++;
 						}
 					}
@@ -641,7 +672,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 
 				// Re-add the old stack element if it still has unmatched opening characters remaining
 				if (matching_count < piece.count) {
-					piece.parts.Clear(); // piece.parts = [ new PPDPart ];
+					piece.parts.Clear(); // PORTED: piece.parts = [ new PPDPart ];
 					piece.count -= matching_count;
 
 					// do we still qualify for any callback with remaining count?
@@ -688,6 +719,12 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 		return root_accum.To_bry_and_clear();
 	}
 	private byte[] htmlspecialchars(byte[] bry) {
+//			http://php.net/manual/en/function.htmlspecialchars.php
+//& (ampersand) 	&amp;
+//" (double quote) 	&quot;, unless ENT_NOQUOTES is set
+//' (single quote) 	&#039; (for ENT_HTML401) or &apos; (for ENT_XML1, ENT_XHTML or ENT_HTML5), but only when ENT_QUOTES is set
+//< (less than) 	&lt;
+//> (greater than) 	&gt;
 		return bry;
 	}
 	private Xomw_prepro_rule Get_rule(byte[] bry) {
@@ -704,9 +741,10 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 	private static final    byte[] 
 	  Bry__only_include_bgn = Bry_.new_a7("<onlyinclude>")
 	, Bry__only_include_end = Bry_.new_a7("</onlyinclude>")
-	, Bry__comment_bgn = Bry_.new_a7("<!--")
-	, Bry__comment_end = Bry_.new_a7("-->")
-	, Bry__escaped_lt = Bry_.new_a7("&lt;")
+	, Bry__comment_bgn  = Bry_.new_a7("<!--")
+	, Bry__comment_end  = Bry_.new_a7("-->")
+	, Bry__escaped_lt   = Bry_.new_a7("&lt;")
+	, Bry__end_lhs      = Bry_.new_a7("</")
 	;
 	private static final    int Len__only_include_end = Bry__only_include_end.length;
 	private static final int 

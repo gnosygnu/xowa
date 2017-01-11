@@ -34,6 +34,25 @@ public class Xomw_prepro_wkr__tst {
 	@Test  public void Comment() {
 		fxt.Test__parse("a<!--b-->c", "<root>a<comment><!--b--></comment>c</root>");
 	}
+	@Test  public void Ext__pre() {
+		fxt.Test__parse("a<pre id=\"1\">b</pre>c", "<root>a<ext><name>pre</name><attr> id=\"1\"</attr><inner>b</inner><close></pre></close></ext>c</root>");
+	}
+/*
+TODO:
+* htmlspecialchars
+
+* for_inclusion; <onlyinclude> in String
+* heading.general
+* heading.EOS: "==a" (no closing ==)
+* ignored tags
+* FIX:
+if (   ws_len > 0
+	&& Bry_find_.Find_fwd_while_space_or_tab(accum_bry, -ws_len, src_len) == ws_len
+) {
+	accum.Clear().Add(Bry_.Mid(accum_bry, 0, -ws_len));
+}
+
+*/
 }
 class Xomw_prepro_wkr__fxt {
 	private final    Xomw_prepro_wkr wkr = new Xomw_prepro_wkr();

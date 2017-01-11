@@ -54,12 +54,12 @@ class Xomw_prepro_elem {
 	public final    int type;
 	public final    byte[] name;
 	public final    byte[] tag_end_lhs;
-	public static final int Type__comment = 0;
+	public static final int Type__comment = 0, Type__other = 1;
 }
 class Xomw_prepro_curchar_itm {
-	public Xomw_prepro_curchar_itm(byte[] bry) {
+	public Xomw_prepro_curchar_itm(byte[] bry, byte type) {
 		this.bry = bry;
-		this.type = bry[0];
+		this.type = type;
 	}
 	public byte[] bry;
 	public byte type;
