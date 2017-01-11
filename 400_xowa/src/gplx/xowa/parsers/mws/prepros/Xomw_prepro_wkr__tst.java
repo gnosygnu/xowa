@@ -31,6 +31,9 @@ public class Xomw_prepro_wkr__tst {
 	@Test  public void Tplarg() {
 		fxt.Test__parse("a{{{b}}}c", "<root>a<tplarg lineStart=\"1\"><title>b</title></tplarg>c</root>");
 	}
+	@Test  public void Comment() {
+		fxt.Test__parse("a<!--b-->c", "<root>a<comment><!--b--></comment>c</root>");
+	}
 }
 class Xomw_prepro_wkr__fxt {
 	private final    Xomw_prepro_wkr wkr = new Xomw_prepro_wkr();

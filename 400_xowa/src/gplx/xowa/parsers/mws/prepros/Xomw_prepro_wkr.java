@@ -24,6 +24,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 	private final    Hash_adp_bry xmlish_allow_missing_end_tag = Hash_adp_bry.cs().Add_many_str("includeonly", "noinclude", "onlyinclude");
 	private final    Hash_adp_bry no_more_closing_tag = Hash_adp_bry.cs();
 	// private final    Btrie_slim_mgr search_dflt_trie = Btrie_slim_mgr.cs().Add_many_int(0, "[", "{", "<", "\n");	// $searchBase = "[{<\n";
+	private final    Btrie_slim_mgr elements_trie = Btrie_slim_mgr.ci_a7();
 	private final    Xomw_prepro_stack stack = new Xomw_prepro_stack();
 	private Bry_bfr accum = Bry_bfr_.New();
 
@@ -105,7 +106,8 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 		int src_len = src.length;
 		int found = -1;
 
-		Btrie_slim_mgr elements_trie = Btrie_slim_mgr.ci_a7();
+		elements_trie.Clear();
+		elements_trie.Add_obj("!--", new Xomw_prepro_elem(Xomw_prepro_elem.Type__comment, Bry_.new_a7("comment")));
 		Btrie_slim_mgr elements_end_trie = Btrie_slim_mgr.ci_a7();
 
 		byte[] cur_char = Bry_.Empty;
@@ -270,11 +272,11 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 					}
 					else {
 						// Search backwards for leading whitespace
-						int ws_bgn = i > 0 ? i - Bry_find_.Find_bwd__while_space_or_tab(src, i, 0) : 0;
+						int ws_bgn = i > 0 ? Bry_find_.Find_bwd__while_space_or_tab(src, i, 0) : 0;
 
 						// Search forwards for trailing whitespace
 						// $wsEnd will be the position of the last space (or the '>' if there's none)
-						int ws_end = comment_end_pos + 2 + Bry_find_.Find_fwd_while_space_or_tab(src, comment_end_pos + 3, src_len);
+						int ws_end = Bry_find_.Find_fwd_while_space_or_tab(src, comment_end_pos + 3, src_len);
 
 						// Keep looking forward as long as we're finding more comments.
 						comments_list.Clear();
