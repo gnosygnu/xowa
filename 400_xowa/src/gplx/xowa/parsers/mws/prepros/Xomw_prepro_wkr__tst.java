@@ -26,24 +26,27 @@ public class Xomw_prepro_wkr__tst {
 		fxt.Test__parse("a[[b]]c", "<root>a[[b]]c</root>");
 	}
 	@Test  public void Template() {
-		fxt.Test__parse("a{{b}}c", "<root>a<template lineStart=\"1\"><title>b</title></template>c</root>");
+		fxt.Test__parse("a{{b}}c", "<root>a<template><title>b</title></template>c</root>");
+	}
+	@Test  public void Template__args() {
+		fxt.Test__parse("a{{b|c|d}}e", "<root>a<template><title>b</title><part><name index=\"1\" /><value>c</value></part><part><name index=\"2\" /><value>d</value></part></template>e</root>");
 	}
 	@Test  public void Tplarg() {
-		fxt.Test__parse("a{{{b}}}c", "<root>a<tplarg lineStart=\"1\"><title>b</title></tplarg>c</root>");
+		fxt.Test__parse("a{{{b}}}c", "<root>a<tplarg><title>b</title></tplarg>c</root>");
 	}
 	@Test  public void Comment() {
 		fxt.Test__parse("a<!--b-->c", "<root>a<comment>&lt;!--b--&gt;</comment>c</root>");
 	}
-	@Test  public void Comment__dangling() {
+	@Test  public void Comment__dangling() {// COVERS: "Unclosed comment in input, runs to end"
 		fxt.Test__parse("a<!--b", "<root>a<comment>&lt;!--b</comment></root>");
 	}
-	@Test  public void Comment__ws() {		// NOTE: space is outside comment
-		fxt.Test__parse("a <!--b--> c", "<root>a <comment>&lt;!--b--&gt;</comment> c</root>");
+	@Test  public void Comment__ws() {		// COVERS: "Search backwards for leading whitespace"
+		fxt.Test__parse("a <!--b--> c", "<root>a <comment>&lt;!--b--&gt;</comment> c</root>");	// NOTE: space is outside comment
 	}
-	@Test  public void Comment__many__ws() {		// NOTE: space is outside comment
-		fxt.Test__parse("a <!--1--> <!--2--> z", "<root>a <comment>&lt;!--1--&gt;</comment> <comment>&lt;!--2--&gt;</comment> z</root>");
+	@Test  public void Comment__many__ws() {// COVERS: "Dump all but the last comment to the accumulator"
+		fxt.Test__parse("a <!--1--> <!--2--> z", "<root>a <comment>&lt;!--1--&gt;</comment> <comment>&lt;!--2--&gt;</comment> z</root>"); // NOTE: space is outside comment; 
 	}
-	@Test  public void Comment__nl__ws() {	// NOTE: space is inside comment if flanked by nl
+	@Test  public void Comment__nl__ws() {	// COVERS: "Eat the line if possible"
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "a"
 		, " <!--1--> "
@@ -51,13 +54,39 @@ public class Xomw_prepro_wkr__tst {
 		, "z"
 		), String_.Concat_lines_nl_skip_last
 		( "<root>a"
-		, "<comment> &lt;!--1--&gt; "
+		, "<comment> &lt;!--1--&gt; "  // NOTE: space is inside </comment> if flanked by nl; 
 		, "</comment><comment> &lt;!--2--&gt; "
 		, "</comment>z</root>"
 		));
 	}
-	@Test  public void Ext__pre() {
+	@Test  public void Ext() {					// COVERS.ALSO: "Note that the attr element contains the whitespace between name and attribute," 
 		fxt.Test__parse("a<pre id=\"1\">b</pre>c", "<root>a<ext><name>pre</name><attr> id=&quot;1&quot;</attr><inner>b</inner><close>&lt;/pre&gt;</close></ext>c</root>");
+	}
+	@Test  public void Ext__inline() {			// COVERS: "if ( $text[$tagEndPos - 1] == '/' ) {"
+		fxt.Test__parse("a<pre/>b"   , "<root>a<ext><name>pre</name><attr></attr></ext>b</root>");
+		fxt.Test__parse("a<pre />b"  , "<root>a<ext><name>pre</name><attr> </attr></ext>b</root>");
+	}
+	@Test  public void Ext__end__pass__space() {// COVERS: "\s*" in `preg_match( "/<\/" . preg_quote( $name, '/' ) . "\s*>/i",`
+		fxt.Test__parse("a<pre>b</pre >c", "<root>a<ext><name>pre</name><attr></attr><inner>b</inner><close>&lt;/pre &gt;</close></ext>c</root>");
+	}
+	@Test  public void Ext__end__pass__name() { // COVERS: "\s*" in `preg_match( "/<\/" . preg_quote( $name, '/' ) . "\s*>/i",`
+		fxt.Test__parse("a<pre>b</pro></pre>c", "<root>a<ext><name>pre</name><attr></attr><inner>b&lt;/pro&gt;</inner><close>&lt;/pre&gt;</close></ext>c</root>");
+	}
+	@Test  public void Ext__end__fail__angle() {// COVERS: "\s*" in `preg_match( "/<\/" . preg_quote( $name, '/' ) . "\s*>/i",`
+		fxt.Test__parse("a<pre>b</pre c", "<root>a&lt;pre&gt;b&lt;/pre c</root>");
+	}
+	@Test  public void Ext__dangling() {		// COVERS: "Let it run out to the end of the text."
+		fxt.Test__parse("a<pre>bc", "<root>a&lt;pre&gt;bc</root>");
+	}
+	@Test  public void Ext__dangling__many() {	// COVERS: "Cache results, otherwise we have O(N^2) performance for input like <foo><foo><foo>..."
+		fxt.Test__parse("a<pre><pre><pre>bc", "<root>a&lt;pre&gt;&lt;pre&gt;&lt;pre&gt;bc</root>");
+	}
+	@Test  public void Ext__unclosed() {		// COVERS: "Infinite backtrack"
+		fxt.Test__parse("a<pre bcd", "<root>a&lt;pre bcd</root>");
+	}		
+	@Test  public void Ext__noinclude() {	    // COVERS: "<includeonly> and <noinclude> just become <ignore> tags"
+		fxt.Init__for_inclusion_(Bool_.N);
+		fxt.Test__parse("a<includeonly>b<noinclude>c</noinclude>d</includeonly>e", "<root>a<ignore>&lt;includeonly&gt;b&lt;noinclude&gt;c&lt;/noinclude&gt;d&lt;/includeonly&gt;</ignore>e</root>");
 	}
 	@Test  public void Heading() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
@@ -79,7 +108,7 @@ public class Xomw_prepro_wkr__tst {
 		, "<h level=\"2\" i=\"1\">== b1 ==</h></root>"
 		));
 	}
-	@Test  public void Heading__bos__implied_nl() {
+	@Test  public void Heading__bos__implied_nl() {  // COVERS: "Is this the start of a heading?"
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "== b1 =="
 		, "z"
@@ -88,6 +117,18 @@ public class Xomw_prepro_wkr__tst {
 		, "z</root>"
 		));
 	}
+	@Test  public void Heading__eq_1() {	// COVERS: "DWIM: This looks kind of like a name/value separator."
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "a{{b|"
+		, "=c="
+		, "}}d"
+		), String_.Concat_lines_nl_skip_last
+		( "<root>a<template><title>b</title><part><name>"
+		, "</name>=<value>c="
+		, "</value></part></template>d</root>"
+		));
+	}
+	
 	@Test  public void Inclusion__n() {
 		fxt.Init__for_inclusion_(Bool_.N);
 		fxt.Test__parse("a<onlyinclude>b</onlyinclude>c", "<root>a<ignore>&lt;onlyinclude&gt;</ignore>b<ignore>&lt;/onlyinclude&gt;</ignore>c</root>");
@@ -95,6 +136,10 @@ public class Xomw_prepro_wkr__tst {
 	@Test  public void Inclusion__y() {
 		fxt.Init__for_inclusion_(Bool_.Y);
 		fxt.Test__parse("a<onlyinclude>b</onlyinclude>c", "<root><ignore>a&lt;onlyinclude&gt;</ignore>b<ignore>&lt;/onlyinclude&gt;c</ignore></root>");
+	}
+	@Test  public void Ignored__noinclude() {	// COVERS: "Handle ignored tags"
+		fxt.Init__for_inclusion_(Bool_.N);
+		fxt.Test__parse("a<noinclude>b</noinclude>c", "<root>a<ignore>&lt;noinclude&gt;</ignore>b<ignore>&lt;/noinclude&gt;</ignore>c</root>");
 	}
 }
 class Xomw_prepro_wkr__fxt {

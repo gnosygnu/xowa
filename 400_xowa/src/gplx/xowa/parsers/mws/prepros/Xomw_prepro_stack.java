@@ -120,7 +120,7 @@ class Xomw_prepro_piece {
 	public void Set_flags(Xomw_prepro_flags flags) {
 		int parts_len = parts.Len();
 		boolean open_is_nl = Bry_.Eq(open, Byte_ascii.Nl_bry);
-		boolean find_pipe = !open_is_nl && Bry_.Eq(open, Brack_bgn_bry);
+		boolean find_pipe = !open_is_nl && !Bry_.Eq(open, Brack_bgn_bry);
 		flags.Find_pipe = find_pipe;
 		flags.Find_eq = find_pipe && parts_len > 1 && ((Xomw_prepro_part)parts.Get_at(parts_len - 1)).Eqpos != -1;
 		flags.In_heading = open_is_nl;

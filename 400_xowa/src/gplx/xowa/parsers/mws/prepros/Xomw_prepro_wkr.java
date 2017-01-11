@@ -153,27 +153,27 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 			}
 			else {
 				// Find next opening brace, closing brace or pipe		
-				// PORTED: $search = $searchBase;
+				// RELIC.REGEX: $search = $searchBase;
 				if (stack.top == null) {
 					cur_closing = Bry_.Empty;
 				}
 				else {
 					cur_closing = stack.top.close;
-					// RELIC: $search .= $currentClosing;
+					// RELIC.REGEX: $search .= $currentClosing;
 				}
 				if (find_pipe) {
-					// RELIC: $search .= '|';
+					// RELIC.REGEX: $search .= '|';
 				}
 				if (find_equals) {
 					// First equals will be for the template
-					// RELIC: $search .= '=';
+					// RELIC.REGEX: $search .= '=';
 				}
 
 				// Output literal section, advance input counter
 				// PORTED: "$literalLength = strcspn(src, $search, i)"; NOTE: no trie b/c of frequent changes to $search
 				int literal_len = 0; 
 				boolean loop_stop = false;
-				// read String until search_char is found
+				// loop chars until search_char is found
 				for (int j = i; j < src_len; j++) {
 					byte b = src[j];
 					switch (b) {                // handle '$searchBase = "[{<\n";'
@@ -226,7 +226,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 					}
 				}
 				else {
-					// PORTED: corresponding block of MW code; note complexity to handle 2 char byte[]
+					// PORTED: "if ( $curChar == '|' ) {", etc..
 					Xomw_prepro_curchar_itm cur_char_itm = (Xomw_prepro_curchar_itm)cur_char_trie.Match_at(trv, src, i, src_len);
 					if (cur_char_itm != null) {
 						cur_char = cur_char_itm.bry;
@@ -239,7 +239,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 							// PORTED: "elseif ( $curChar == $currentClosing )"
 							case Byte_ascii.Curly_end:    found = Found__close; break;
 							case Byte_ascii.Brack_end:    found = Found__close; break;
-							case Byte_ascii.Bang:         found = Found__close; break;
+							case Byte_ascii.At:           found = Found__close; break;	// NOTE: At is type for "}-"
 
 							// PORTED: "elseif ( isset( $this->rules[$curChar] ) )"
 							case Byte_ascii.Curly_bgn:   {found = Found__open; rule = rule_curly; break;}
@@ -263,7 +263,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 				}
 
 				// Determine element name
-				// PORTED: $elementsRegex = "~($xmlishRegex)(?:\s|\/>|>)|(!--)~iA"; EX: "(span|div)(?:\s|\/>|>)|(!--)
+				// PORTED: $elementsRegex = "~($xmlishRegex)(?:\s|\/>|>)|(!--)~iA"; EX: "(pre|ref)(?:\s|\/>|>)|(!--)
 				Xomw_prepro_elem element = (Xomw_prepro_elem)elements_trie.Match_at(trv, src, i + 1, src_len);
 				if (element == null) {
 					// Element name missing or not listed
@@ -295,8 +295,8 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 						// PORTED: $wsEnd = $endPos + 2 + strspn( $text, " \t", $endPos + 3 );
 						int ws_end = end_pos + 2;	// set pos to ">"
 						int ws_end2 = Bry_find_.Find_fwd_while_space_or_tab(src, end_pos + 3, src_len);
-						if (ws_end2 != ws_end + 1)	// if ws after ">"
-							ws_end = ws_end2 - 1;	// set to "last space"
+						if (ws_end2 != ws_end + 1)	// if ws is after ">"...
+							ws_end = ws_end2 - 1;	// ...then set to "last space" as per comment above
 
 						// Keep looking forward as long as we're finding more
 						// comments.
@@ -370,7 +370,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 				}
 
 				byte[] name = element.name;
-				// RELIC:$lowerName = strtolower( $name );
+				// RELIC.BTRIE_CI: $lowerName = strtolower( $name );
 				int atr_bgn = i + name.length + 1;
 
 				// Find end of tag
@@ -496,7 +496,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 
 				int eq_end = Bry_find_.Find_fwd_while(src, i, i + 6, Byte_ascii.Eq);	// PORTED:strspn( $src, '=', $i, 6 );					
 				int count = eq_end - i;
-				if (count == 1 && find_equals) {
+				if (count == 1 && find_equals) {	// EX: "{{a|\n=b=\n"
 					// DWIM: This looks kind of like a name/value separator.
 					// Let's let the equals handler have it and break the
 					// potential heading. This is heuristic, but AFAICT the
@@ -655,7 +655,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 					// The invocation is at the start of the line if lineStart is set in
 					// the stack, and all opening brackets are used up.
 					byte[] attr = null;
-					if (max_count == matching_count && !piece.line_start) {
+					if (max_count == matching_count && piece.line_start) {	// RELIC:!empty( $piece->lineStart )
 						attr = Bry_.new_a7(" lineStart=\"1\"");
 					}
 					else {
@@ -786,7 +786,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 
 		// handle "}-" separately
 		byte[] langv_end = Bry_.new_a7("}-");
-		rv.Add_obj(langv_end, new Xomw_prepro_curchar_itm(langv_end, Byte_ascii.Bang));
+		rv.Add_obj(langv_end, new Xomw_prepro_curchar_itm(langv_end, Byte_ascii.At));
 		return rv;
 	}
 }
