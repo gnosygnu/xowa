@@ -100,6 +100,9 @@ public class Xomw_prepro_wkr__tst {
 class Xomw_prepro_wkr__fxt {
 	private final    Xomw_prepro_wkr wkr = new Xomw_prepro_wkr();
 	private boolean for_inclusion = false;
+	public Xomw_prepro_wkr__fxt() {
+		wkr.Init_by_wiki("pre");
+	}
 	public void Init__for_inclusion_(boolean v) {for_inclusion = v;}
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);

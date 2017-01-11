@@ -17,56 +17,80 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.mws.prepros; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.mws.*;
 import gplx.core.btries.*;
-public class Xomw_prepro_wkr {	// THREAD.UNSAFE:caching for repeated calls
+public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private final    List_adp comments_list = List_adp_.New();
-	private final    Hash_adp_bry xmlish_elems = Hash_adp_bry.ci_a7();
+	private final    Btrie_slim_mgr elements_trie__y = Btrie_slim_mgr.ci_a7(), elements_trie__n = Btrie_slim_mgr.ci_a7();
 	private final    Hash_adp_bry xmlish_allow_missing_end_tag = Hash_adp_bry.cs().Add_many_str("includeonly", "noinclude", "onlyinclude");
 	private final    Hash_adp_bry no_more_closing_tag = Hash_adp_bry.cs();
-	private final    Btrie_slim_mgr elements_trie = Btrie_slim_mgr.ci_a7();
 	private final    Xomw_prepro_stack stack = new Xomw_prepro_stack();
 	private final    Btrie_rv trv = new Btrie_rv();
 	private Bry_bfr accum = Bry_bfr_.New();
 
+	public void Init_by_wiki(String... xmlish_elems_ary) {
+		Elements_trie__init_by_wiki(elements_trie__y, ignored_tags_y, xmlish_elems_ary, "noinclude");
+		Elements_trie__init_by_wiki(elements_trie__n, ignored_tags_n, xmlish_elems_ary, "includeonly");
+	}
+	private void Elements_trie__init_by_wiki(Btrie_slim_mgr trie, Ordered_hash ignored_tags, String[] strip_list_ary, String xmlish_elem) {
+		trie.Clear();
+		Elements_trie__add(trie, Bool_.Y, "!--", "comment");
+		// PORTED: $xmlishElements = parser->getStripList();
+		for (String itm : strip_list_ary) {
+			Elements_trie__add(trie, Bool_.N, itm, itm);
+		}
+		// PORTED: "$xmlishElements[] = 'noinclude';" or "$xmlishElements[] = 'includeonly';"
+		Elements_trie__add(trie, Bool_.N, xmlish_elem, xmlish_elem);
+
+		// PORTED: $xmlishRegex = implode( '|', array_merge( $xmlishElements, $ignoredTags ) );
+		int ignored_tags_len = ignored_tags.Count();
+		for (int j = 0; j < ignored_tags_len; j++) {
+			byte[] bry = (byte[])ignored_tags.Get_at(j);
+			String str = String_.new_u8(bry);
+			Elements_trie__add(trie, Bool_.N, str, str);
+		}
+	}
+	private static void Elements_trie__add(Btrie_slim_mgr trie, boolean type_is_comment, String hook, String name) {
+		trie.Add_obj(hook, new Xomw_prepro_elem(type_is_comment ? Xomw_prepro_elem.Type__comment : Xomw_prepro_elem.Type__other, Bry_.new_a7(name)));
+	}
 	public byte[] Preprocess_to_xml(byte[] src, boolean for_inclusion) {
-		xmlish_elems.Clear(); // TODO.XO: parser->getStripList(); pre|nowiki|gallery|indicator|ref|reference
-		// RELIC: $xmlishAllowMissingEndTag = [ 'includeonly', 'noinclude', 'onlyinclude' ];
+		// RELIC.PROC_VAR:     forInclusion = $flags & Parser::PTD_FOR_INCLUSION;
+		// RELIC.INIT_BY_WIKI: $xmlishElements = parser->getStripList();
+		// RELIC.CLASS_VAR:    $xmlishAllowMissingEndTag = [ 'includeonly', 'noinclude', 'onlyinclude' ];
 		boolean enable_only_include = false;
 
-		Ordered_hash ignored_tags; Hash_adp ignored_elements;
+		// PORTED: rewritten so that all add / del is done in INIT_BY_WIKI
+		Ordered_hash ignored_tags;
+		Hash_adp ignored_elements;
+		Btrie_slim_mgr elements_trie;
 		if (for_inclusion) {
-			ignored_tags = ignored_tags__noinclude;
-			ignored_elements = ignored_elements__noinclude;
-			xmlish_elems.Add_many_str("noinclude");
+			ignored_tags = ignored_tags_y;              // RELIC: $ignoredTags = [ 'includeonly', '/includeonly' ];
+			ignored_elements = ignored_elements__y;     // RELIC: $ignoredElements = [ 'noinclude' ];
+			// RELIC.INIT_BY_WIKI: $xmlishElements[] = 'noinclude';
 			if (	Bry_.Has(src, Bry__only_include_bgn)
 				&&	Bry_.Has(src, Bry__only_include_end)) {
 				enable_only_include = true;
 			}
+			elements_trie = elements_trie__y;
 		}
 		else {
-			ignored_tags = ignored_tags__includeonly;
-			ignored_elements = ignored_elements__includeonly;
-			xmlish_elems.Add_many_str("includeonly");
+			ignored_tags = ignored_tags_n;              // $ignoredTags = [ 'noinclude', '/noinclude', 'onlyinclude', '/onlyinclude' ];
+			ignored_elements = ignored_elements__n;     // $ignoredElements = [ 'includeonly' ];
+			// RELIC.INIT_BY_WIKI: $xmlishElements[] = 'includeonly';
+			elements_trie = elements_trie__n;
 		}
 
-		// PORTED:$xmlishRegex = implode( '|', array_merge( $xmlishElements, $ignoredTags ) );
-		elements_trie.Clear();
-		elements_trie.Add_obj("pre", new Xomw_prepro_elem(Xomw_prepro_elem.Type__other, Bry_.new_a7("pre")));
-		elements_trie.Add_obj("!--", new Xomw_prepro_elem(Xomw_prepro_elem.Type__comment, Bry_.new_a7("comment")));
-		int ignored_tags_len = ignored_tags.Count();
-		for (int j = 0; j < ignored_tags_len; j++) {
-			byte[] bry = (byte[])ignored_tags.Get_at(j);
-			elements_trie.Add_obj(bry, new Xomw_prepro_elem(Xomw_prepro_elem.Type__other, bry));
-		}
+		// RELIC.INIT_BY_WIKI: $xmlishRegex = implode( '|', array_merge( $xmlishElements, $ignoredTags ) );
 
-		// RELIC:
+		// RELIC.REGEX
 		// Use "A" modifier (anchored) instead of "^", because ^ doesn't work with an offset
 		// $elementsRegex = "~($xmlishRegex)(?:\s|\/>|>)|(!--)~iA";
 
 		stack.Clear();
 
-		// RELIC:
+		// RELIC.REGEX:
 		// $searchBase = "[{<\n"; # }
+
+		// RELIC.BRY_FIND
 		// For fast reverse searches
 		// $revText = strrev( $text );
 		// $lengthText = strlen( $text );
@@ -747,11 +771,11 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE:caching for repeated calls
 	private static final    int Len__only_include_end = Bry__only_include_end.length;
 	private static final    Btrie_slim_mgr cur_char_trie = Cur_char_trie__new();
 	private static final    Ordered_hash
-	  ignored_tags__noinclude       = Ordered_hash_.New_bry().Add_many_str("includeonly", "/includeonly")
-	, ignored_tags__includeonly     = Ordered_hash_.New_bry().Add_many_str("noinclude", "/noinclude", "onlyinclude", "/onlyinclude");
+	  ignored_tags_y     = Ordered_hash_.New_bry().Add_many_str("includeonly", "/includeonly")
+	, ignored_tags_n     = Ordered_hash_.New_bry().Add_many_str("noinclude", "/noinclude", "onlyinclude", "/onlyinclude");
 	private static final    Hash_adp_bry 
-	  ignored_elements__noinclude   = Hash_adp_bry.cs().Add_many_str("noinclude")
-	, ignored_elements__includeonly = Hash_adp_bry.cs().Add_many_str("includeonly");
+	  ignored_elements__y   = Hash_adp_bry.cs().Add_many_str("noinclude")
+	, ignored_elements__n = Hash_adp_bry.cs().Add_many_str("includeonly");
 	private static Btrie_slim_mgr Cur_char_trie__new() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();
 		String[] ary = new String[] {"|", "=", "<", "\n", "{", "[", "-{", "}", "]"};
