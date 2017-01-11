@@ -230,12 +230,12 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 							case Byte_ascii.Angle_bgn:    found = Found__angle; break;
 							case Byte_ascii.Nl:           found = in_heading ? Found__line_end : Found__line_bgn; break;
 
-							// PORT:"elseif ( $curChar == $currentClosing )"
+							// PORTED: "elseif ( $curChar == $currentClosing )"
 							case Byte_ascii.Curly_end:    found = Found__close; break;
 							case Byte_ascii.Brack_end:    found = Found__close; break;
 							case Byte_ascii.Bang:         found = Found__close; break;
 
-							// PORT:"elseif ( isset( $this->rules[$curChar] ) )"
+							// PORTED: "elseif ( isset( $this->rules[$curChar] ) )"
 							case Byte_ascii.Curly_bgn:   {found = Found__open; rule = rule_curly; break;}
 							case Byte_ascii.Brack_bgn:   {found = Found__open; rule = rule_brack; break;}
 							case Byte_ascii.Dash:        {found = Found__open; rule = rule_langv; break;}
@@ -257,7 +257,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 				}
 
 				// Determine element name
-				// PORT: $elementsRegex = "~($xmlishRegex)(?:\s|\/>|>)|(!--)~iA"; EX: "(span|div)(?:\s|\/>|>)|(!--)
+				// PORTED: $elementsRegex = "~($xmlishRegex)(?:\s|\/>|>)|(!--)~iA"; EX: "(span|div)(?:\s|\/>|>)|(!--)
 				Xomw_prepro_elem element = (Xomw_prepro_elem)elements_trie.Match_at(trv, src, i + 1, src_len);
 				if (element == null) {
 					// Element name missing or not listed
