@@ -159,14 +159,14 @@ public class Bry_find_ {
 		return Bry_find_.Not_found;
 	}
 	public static int Find_bwd__while_space_or_tab(byte[] src, int cur, int end) { // get pos of 1st char that is not \t or \s 
-		if (cur >= src.length) return Bry_find_.Not_found;
-		for (int i = cur; i >= end; i--) {
+		if (cur < 0 || cur >= src.length) return Bry_find_.Not_found;
+		for (int i = cur - 1; i >= end; i--) {
 			byte b = src[i];
 			switch (b) {
 				case Byte_ascii.Space: case Byte_ascii.Tab:
 					break;
 				default:
-					return i;
+					return i + 1;
 			}
 		}
 		return Bry_find_.Not_found;

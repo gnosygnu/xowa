@@ -34,6 +34,9 @@ public class Xomw_prepro_wkr__tst {
 	@Test  public void Comment() {
 		fxt.Test__parse("a<!--b-->c", "<root>a<comment>&lt;!--b--&gt;</comment>c</root>");
 	}
+	@Test  public void Comment__nl__ws() {
+		fxt.Test__parse("xo\n <!--1--> \n <!--2--> \nz", "<root>xo\n<comment> &lt;!--1--&gt; \n</comment><comment> &lt;!--2--&gt; \n</comment>z</root>");
+	}
 	@Test  public void Ext__pre() {
 		fxt.Test__parse("a<pre id=\"1\">b</pre>c", "<root>a<ext><name>pre</name><attr> id=&quot;1&quot;</attr><inner>b</inner><close>&lt;/pre&gt;</close></ext>c</root>");
 	}
@@ -43,13 +46,6 @@ TODO:
 * heading.general
 * heading.EOS: "==a" (no closing ==)
 * ignored tags
-* FIX:
-if (   ws_len > 0
-	&& Bry_find_.Find_fwd_while_space_or_tab(accum_bry, -ws_len, src_len) == ws_len
-) {
-	accum.Clear().Add(Bry_.Mid(accum_bry, 0, -ws_len));
-}
-
 */
 }
 class Xomw_prepro_wkr__fxt {

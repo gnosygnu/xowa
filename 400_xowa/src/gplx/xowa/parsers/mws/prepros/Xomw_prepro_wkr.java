@@ -23,7 +23,6 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 	private final    Hash_adp_bry xmlish_elems = Hash_adp_bry.ci_a7();
 	private final    Hash_adp_bry xmlish_allow_missing_end_tag = Hash_adp_bry.cs().Add_many_str("includeonly", "noinclude", "onlyinclude");
 	private final    Hash_adp_bry no_more_closing_tag = Hash_adp_bry.cs();
-	// private final    Btrie_slim_mgr search_dflt_trie = Btrie_slim_mgr.cs().Add_many_int(0, "[", "{", "<", "\n");	// $searchBase = "[{<\n";
 	private final    Btrie_slim_mgr elements_trie = Btrie_slim_mgr.ci_a7();
 	private final    Xomw_prepro_stack stack = new Xomw_prepro_stack();
 	private Bry_bfr accum = Bry_bfr_.New();
@@ -286,7 +285,11 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 
 						// Search forwards for trailing whitespace
 						// $wsEnd will be the position of the last space (or the '>' if there's none)
-						int ws_end = Bry_find_.Find_fwd_while_space_or_tab(src, end_pos + 3, src_len);
+						// PORTED: $wsEnd = $endPos + 2 + strspn( $text, " \t", $endPos + 3 );
+						int ws_end = end_pos + 2;	// set pos to ">"
+						int ws_end2 = Bry_find_.Find_fwd_while_space_or_tab(src, end_pos + 3, src_len);
+						if (ws_end2 != ws_end + 1)	// if ws after ">"
+							ws_end = ws_end2 - 1;	// set to "last space"
 
 						// Keep looking forward as long as we're finding more
 						// comments.
@@ -314,11 +317,12 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 							// Remove leading whitespace from the end of the accumulator
 							// Sanity check first though
 							int ws_len = i - ws_bgn;
-							byte[] accum_bry = accum.To_bry();
-							if (   ws_len > 0
-								&& Bry_find_.Find_fwd_while_space_or_tab(accum_bry, -ws_len, src_len) == ws_len
-							) {
-								accum.Clear().Add(Bry_.Mid(accum_bry, 0, -ws_len));
+							if (ws_len > 0) {
+								// PORTED:"&& strspn( $accum, " \t", -$wsLength ) === $wsLength"
+								int accum_bry_len = accum.Len();
+								int ws_end_lhs = Bry_find_.Find_bwd__while_space_or_tab(accum.Bfr(), accum_bry_len, 0);
+								if (accum_bry_len - ws_end_lhs == ws_len)
+									accum.Del_by(ws_len);
 							}
 
 							// Dump all but the last comment to the accumulator
@@ -660,10 +664,11 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 					for (int j = 0; j < parts_len; j++) {
 						Xomw_prepro_part part = (Xomw_prepro_part)parts.Get_at(j);
 						if (part.Eqpos != -1) {
-							byte[] part_bry = part.bfr.To_bry();
-							byte[] arg_key = Bry_.Mid(part_bry, 0, part.Eqpos);
-							byte[] arg_val = Bry_.Mid(part_bry, part.Eqpos + 1);
-							tmp_bfr.Add_str_a7("<part><name>").Add(arg_key).Add_str_a7("</name>=<value>").Add(arg_val).Add_str_a7("</value></part>");
+							Bry_bfr part_bfr = part.bfr;
+							byte[] part_bfr_bry = part_bfr.Bfr();
+							tmp_bfr.Add_str_a7("<part><name>").Add_mid(part_bfr_bry, 0, part.Eqpos);
+							tmp_bfr.Add_str_a7("</name>=<value>").Add_mid(part_bfr_bry, part.Eqpos + 1, part_bfr.Len());
+							tmp_bfr.Add_str_a7("</value></part>");
 						}
 						else {
 							tmp_bfr.Add_str_a7("<part><name index=\"").Add_int_variable(arg_idx).Add_str_a7("\" /><value>").Add(part.bfr.To_bry()).Add_str_a7("</value></part>");
