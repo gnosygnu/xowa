@@ -132,11 +132,11 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 				int start_pos = Bry_find_.Find_fwd(src, Bry__only_include_bgn, i, src_len);
 				if (start_pos == Bry_find_.Not_found) {
 					// Ignored section runs to the end
-					accum.Add_str_a7("<ignore>").Add(htmlspecialchars(Bry_.Mid(src, i))).Add_str_a7("</ignore>");
+					accum.Add_str_a7("<ignore>").Add_bry_escape_html(src, i, src_len).Add_str_a7("</ignore>");
 					break;
 				}
 				int tag_end_pos = start_pos + Bry__only_include_bgn.length; // past-the-end
-				accum.Add_str_a7("<ignore>").Add(htmlspecialchars(Bry_.Mid(src, i, tag_end_pos))).Add_str_a7("</ignore>");
+				accum.Add_str_a7("<ignore>").Add_bry_escape_html(src, i, tag_end_pos).Add_str_a7("</ignore>");
 				i = tag_end_pos;
 				find_only_include = false;
 			}
@@ -205,7 +205,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 						literal_len++;
 				}
 				if (literal_len > 0) {
-					accum.Add(htmlspecialchars(Bry_.Mid(src, i, i + literal_len)));
+					accum.Add_bry_escape_html(src, i, i + literal_len);
 					i += literal_len;
 				}
 				if (i >= src_len) {
@@ -277,7 +277,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 					int end_pos = Bry_find_.Find_fwd(src, Bry__comment_end, i + 4, src_len);
 					if (end_pos == Bry_find_.Not_found) {
 						// Unclosed comment in input, runs to end
-						accum.Add_str_a7("<comment>").Add(htmlspecialchars(Bry_.Mid(src, i))).Add_str_a7("</comment>");
+						accum.Add_str_a7("<comment>").Add_bry_escape_html(src, i, src_len).Add_str_a7("</comment>");
 						i = src_len;
 					}
 					else {
@@ -331,7 +331,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 									break;
 								}
 								inner = Bry_.Mid(src, bgn_pos, end_pos);
-								accum.Add_str_a7("<comment>").Add(htmlspecialchars(inner)).Add_str_a7("</comment>");
+								accum.Add_str_a7("<comment>").Add_bry_escape_html(inner).Add_str_a7("</comment>");
 							}
 
 							// Do a line-start run next time to look for headings after the comment
@@ -353,7 +353,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 						}
 						i = end_pos + 1;
 						inner = Bry_.Mid(src, bgn_pos, end_pos + 1);
-						accum.Add_str_a7("<comment>").Add(htmlspecialchars(inner)).Add_str_a7("</comment>");
+						accum.Add_str_a7("<comment>").Add_bry_escape_html(inner).Add_str_a7("</comment>");
 						continue;
 					}
 				}
@@ -375,7 +375,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 
 				// Handle ignored tags
 				if (ignored_tags.Has(name)) {
-					accum.Add_str_a7("<ignore>").Add(htmlspecialchars(Bry_.Mid(src, i, tag_end_pos + 1))).Add_str_a7("</ignore>");
+					accum.Add_str_a7("<ignore>").Add_bry_escape_html(src, i, tag_end_pos + 1).Add_str_a7("</ignore>");
 					i = tag_end_pos + 1;
 					continue;
 				}
@@ -426,7 +426,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 						&&	elem_end_found) {
 						inner = Bry_.Mid(src, tag_end_pos + 1, elem_end_lhs);
 						i = elem_end_rhs;
-						tmp_bfr.Add_str_a7("<close>").Add(htmlspecialchars(Bry_.Mid(src, elem_end_lhs, elem_end_rhs))).Add_str_a7("</close>");
+						tmp_bfr.Add_str_a7("<close>").Add_bry_escape_html(src, elem_end_lhs, elem_end_rhs).Add_str_a7("</close>");
 						close = tmp_bfr.To_bry_and_clear();
 					} 
 					else {
@@ -440,7 +440,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 						else {
 							// Don't match the tag, treat opening tag as literal and resume parsing.
 							i = tag_end_pos + 1;
-							accum.Add(htmlspecialchars(Bry_.Mid(src, tag_bgn_pos, tag_end_pos + 1)));
+							accum.Add_bry_escape_html(src, tag_bgn_pos, tag_end_pos + 1);
 							// Cache results, otherwise we have O(N^2) performance for input like <foo><foo><foo>...
 							no_more_closing_tag.Add_if_dupe_use_nth(name, name);
 							continue;
@@ -450,18 +450,26 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 
 				// <includeonly> and <noinclude> just become <ignore> tags
 				if (ignored_elements.Has(name)) {
-					accum.Add_str_a7("<ignore>").Add(htmlspecialchars(Bry_.Mid(src, tag_bgn_pos, i))).Add_str_a7("</ignore>");
+					accum.Add_str_a7("<ignore>").Add_bry_escape_html(src, tag_bgn_pos, i).Add_str_a7("</ignore>");
 					continue;
 				}
 
 				accum.Add_str_a7("<ext>");
-				byte[] atr_bry = atr_end <= atr_bgn ? Bry_.Empty : Bry_.Mid(src, atr_bgn, atr_end);
+				// PORTED:
+				// if ( $attrEnd <= $attrStart ) {
+				//	 $attr = '';
+				// } else {
+				//   $attr = substr( $text, $attrStart, $attrEnd - $attrStart );
+				// }
 				accum.Add_str_a7("<name>").Add(name).Add_str_a7("</name>");
 				// Note that the attr element contains the whitespace between name and attribute,
 				// this is necessary for precise reconstruction during pre-save transform.
-				accum.Add_str_a7("<attr>").Add(htmlspecialchars(atr_bry)).Add_str_a7("</attr>");
+				accum.Add_str_a7("<attr>");
+				if (atr_end > atr_bgn)
+					accum.Add_bry_escape_html(src, atr_bgn, atr_end);
+				accum.Add_str_a7("</attr>");
 				if (inner != null) {
-					accum.Add_str_a7("<inner>").Add(htmlspecialchars(inner)).Add_str_a7("</inner>");
+					accum.Add_str_a7("<inner>").Add_bry_escape_html(inner).Add_str_a7("</inner>");
 				}
 				accum.Add(close).Add_str_a7("</ext>");
 			}
@@ -582,7 +590,8 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 				}
 				else {
 					// Add literal brace(s)
-					accum.Add(htmlspecialchars(Bry_.Repeat_bry(cur_char, count)));
+					for (int j = 0; j < count; j++)
+						accum.Add_bry_escape_html(cur_char);
 				}
 				i += count;
 			}
@@ -613,7 +622,8 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 				if (matching_count <= 0) {
 					// No matching element found in callback array
 					// Output a literal closing brace and continue
-					accum.Add(htmlspecialchars(Bry_.Repeat_bry(cur_char, count)));
+					for (int j = 0; j < count; j++)
+						accum.Add_bry_escape_html(cur_char);
 					i += count;
 					continue;
 				}
@@ -717,15 +727,6 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 		}
 		root_accum.Add_str_a7("</root>");
 		return root_accum.To_bry_and_clear();
-	}
-	private byte[] htmlspecialchars(byte[] bry) {
-//			http://php.net/manual/en/function.htmlspecialchars.php
-//& (ampersand) 	&amp;
-//" (double quote) 	&quot;, unless ENT_NOQUOTES is set
-//' (single quote) 	&#039; (for ENT_HTML401) or &apos; (for ENT_XML1, ENT_XHTML or ENT_HTML5), but only when ENT_QUOTES is set
-//< (less than) 	&lt;
-//> (greater than) 	&gt;
-		return bry;
 	}
 	private Xomw_prepro_rule Get_rule(byte[] bry) {
 		if		(Bry_.Eq(bry, rule_curly.bgn))   return rule_curly;

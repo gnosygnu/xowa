@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import org.junit.*;
+import org.junit.*; import gplx.core.tests.*;
 public class Bry_bfr_tst {
 	private Bry_bfr bb = Bry_bfr_.New();
 	@Before public void setup() {bb.Clear();} private ByteAryBfr_fxt fxt = new ByteAryBfr_fxt();
@@ -187,9 +187,16 @@ public class Bry_bfr_tst {
 		fxt.Test_Add_int_pad_bgn(Byte_ascii.Num_0, 3, 1000, "1000");
 	}
 	@Test  public void Add_bry_escape() {
-		fxt.Test_Add_bry_escape("abc"					, "abc");		// nothing to escape
-		fxt.Test_Add_bry_escape("a'bc"					, "a''bc");		// single escape (code handles first quote differently)
-		fxt.Test_Add_bry_escape("a'b'c"					, "a''b''c");	// double escape (code handles subsequent quotes different than first)
+		fxt.Test__add_bry_escape("abc"                  , "abc");            // nothing to escape
+		fxt.Test__add_bry_escape("a'bc"                 , "a''bc");          // single escape (code handles first quote differently)
+		fxt.Test__add_bry_escape("a'b'c"                , "a''b''c");        // double escape (code handles subsequent quotes different than first)
+		fxt.Test__add_bry_escape("abc", 1, 2            , "b");              // nothing to escape
+	}
+	@Test   public void Add_bry_escape_html() {
+		fxt.Test__add_bry_escape_html("abc"             , "abc");                            // escape=none
+		fxt.Test__add_bry_escape_html("a&\"'<>b"        , "a&amp;&quot;&#39;&lt;&gt;b");     // escape=all; code handles first escape differently
+		fxt.Test__add_bry_escape_html("a&b&c"           , "a&amp;b&amp;c");                  // staggered; code handles subsequent escapes differently
+		fxt.Test__add_bry_escape_html("abc", 1, 2       , "b");                              // by index; fixes bug in initial implementation
 	}
 	@Test  public void Insert_at() {
 		fxt.Test_Insert_at("abcd", 0, "xyz"					, "xyzabcd");	// bgn
@@ -217,13 +224,15 @@ public class Bry_bfr_tst {
 }
 class ByteAryBfr_fxt {
 	private final    Bry_bfr bfr = Bry_bfr_.Reset(16);
+	public Bry_bfr Bfr() {return bfr;}
 	public void Clear() {
 		bfr.ClearAndReset();
 	}
 	public void Test_Add_int_pad_bgn(byte pad_byte, int str_len, int val, String expd) {Tfds.Eq(expd, bfr.Add_int_pad_bgn(pad_byte, str_len, val).To_str_and_clear());}
-	public void Test_Add_bry_escape(String val, String expd) {
-		byte[] val_bry = Bry_.new_u8(val);
-		Tfds.Eq(expd, bfr.Add_bry_escape(Byte_ascii.Apos, Byte_.Ary(Byte_ascii.Apos, Byte_ascii.Apos), val_bry, 0, val_bry.length).To_str_and_clear());
+	public void Test__add_bry_escape(String src, String expd) {Test__add_bry_escape(src, 0, String_.Len(src), expd);}
+	public void Test__add_bry_escape(String src, int src_bgn, int src_end, String expd) {
+		byte[] val_bry = Bry_.new_u8(src);
+		Tfds.Eq(expd, bfr.Add_bry_escape(Byte_ascii.Apos, Byte_.Ary(Byte_ascii.Apos, Byte_ascii.Apos), val_bry, src_bgn, src_end).To_str_and_clear());
 	}
 	public void Test_Insert_at(String init, int pos, String val, String expd)	{Tfds.Eq(expd, bfr.Add_str_u8(init).Insert_at(pos, Bry_.new_u8(val)).To_str_and_clear());}
 	public void Test_Insert_at(String init, int pos, String val, int val_bgn, int val_end, String expd)	{Tfds.Eq(expd, bfr.Add_str_u8(init).Insert_at(pos, Bry_.new_u8(val), val_bgn, val_end).To_str_and_clear());}
@@ -232,5 +241,9 @@ class ByteAryBfr_fxt {
 	public void Test_Delete_rng_to_end(String init, int pos, String expd)		{Tfds.Eq(expd, bfr.Add_str_u8(init).Delete_rng_to_end(pos).To_str_and_clear());}
 	public void Test__to_bry_ary_and_clear(String bfr_str, String... expd) {
 		Tfds.Eq_ary(expd, String_.Ary(bfr.Add_str_u8(bfr_str).To_bry_ary_and_clear()));
+	}
+	public void Test__add_bry_escape_html(String src, String expd) {Test__add_bry_escape_html(src, 0, String_.Len(src), expd);}
+	public void Test__add_bry_escape_html(String src, int src_bgn, int src_end, String expd) {
+		Gftest.Eq__bry(Bry_.new_u8(expd), bfr.Add_bry_escape_html(Bry_.new_u8(src), src_bgn, src_end).To_bry_and_clear());
 	}
 }

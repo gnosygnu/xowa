@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.encoders.*;
+import gplx.langs.htmls.entitys.*;
 public class Bry_bfr {
 	private Bry_bfr_mkr_mgr mkr_mgr; private int reset;
 	public byte[] Bfr() {return bfr;} private byte[] bfr;
@@ -293,7 +294,38 @@ public class Bry_bfr {
 			}
 		}
 		if (clean)
-			Add(val);
+			Add_mid(val, bgn, end);
+		return this;
+	}
+	public Bry_bfr Add_bry_escape_html(byte[] val) {return Add_bry_escape_html(val, 0, val.length);}
+	public Bry_bfr Add_bry_escape_html(byte[] val, int bgn, int end) {	// uses PHP rules for htmlspecialchars; REF.PHP:http://php.net/manual/en/function.htmlspecialchars.php
+		boolean clean = true;
+		for (int i = bgn; i < end; ++i) {
+			byte[] escaped = null;
+			byte b = val[i];
+			switch (b) {
+				case Byte_ascii.Amp:        escaped = Gfh_entity_.Amp_bry; break;
+				case Byte_ascii.Quote:      escaped = Gfh_entity_.Quote_bry; break;
+				case Byte_ascii.Apos:       escaped = Gfh_entity_.Apos_num_bry; break;
+				case Byte_ascii.Lt:         escaped = Gfh_entity_.Lt_bry; break;
+				case Byte_ascii.Gt:         escaped = Gfh_entity_.Gt_bry; break;
+			}
+			if (escaped == null && clean) {
+				continue;
+			}
+			else {
+				if (clean) {
+					clean = false;
+					this.Add_mid(val, bgn, i);
+				}
+				if (escaped == null)
+					this.Add_byte(b);
+				else
+					this.Add(escaped);
+			}
+		}
+		if (clean)
+			Add_mid(val, bgn, end);
 		return this;
 	}
 	public Bry_bfr Add_str_u8_w_nl(String s) {Add_str_u8(s); return Add_byte_nl();}

@@ -32,15 +32,13 @@ public class Xomw_prepro_wkr__tst {
 		fxt.Test__parse("a{{{b}}}c", "<root>a<tplarg lineStart=\"1\"><title>b</title></tplarg>c</root>");
 	}
 	@Test  public void Comment() {
-		fxt.Test__parse("a<!--b-->c", "<root>a<comment><!--b--></comment>c</root>");
+		fxt.Test__parse("a<!--b-->c", "<root>a<comment>&lt;!--b--&gt;</comment>c</root>");
 	}
 	@Test  public void Ext__pre() {
-		fxt.Test__parse("a<pre id=\"1\">b</pre>c", "<root>a<ext><name>pre</name><attr> id=\"1\"</attr><inner>b</inner><close></pre></close></ext>c</root>");
+		fxt.Test__parse("a<pre id=\"1\">b</pre>c", "<root>a<ext><name>pre</name><attr> id=&quot;1&quot;</attr><inner>b</inner><close>&lt;/pre&gt;</close></ext>c</root>");
 	}
 /*
 TODO:
-* htmlspecialchars
-
 * for_inclusion; <onlyinclude> in String
 * heading.general
 * heading.EOS: "==a" (no closing ==)

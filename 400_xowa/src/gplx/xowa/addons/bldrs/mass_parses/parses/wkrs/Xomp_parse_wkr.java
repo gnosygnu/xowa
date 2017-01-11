@@ -111,7 +111,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 				// if ns changed and prv_ns is main
 				if (cur_ns != prv_ns) {
 					if (prv_ns == gplx.xowa.wikis.nss.Xow_ns_.Tid__main)
-						wiki.Cache_mgr().Free_mem__all();	// NOTE: clears page and wbase cache only; needed else OutOfMemory error for en.w in 25th hour; DATE:2017-01-07
+						wiki.Cache_mgr().Free_mem__all();	// NOTE: clears page and wbase cache only; needed else OutOfMemory error for en.w in 25th hour; DATE:2017-01-11
 					prv_ns = cur_ns;
 				}
 				Xoae_page wpg = Xoae_page.New(wiki, ttl);
