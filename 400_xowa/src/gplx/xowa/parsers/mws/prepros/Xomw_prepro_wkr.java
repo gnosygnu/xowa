@@ -295,7 +295,7 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 						// comments.
 						comments_list.Clear();
 						comments_list.Add(new int[] {ws_bgn, ws_end});
-						while (Bry_.Eq(src, ws_end + 1, ws_end + 5, Bry__comment_bgn)) {
+						while (ws_end + 5 < src_len && Bry_.Eq(src, ws_end + 1, ws_end + 5, Bry__comment_bgn)) {
 							int cur_char_pos = Bry_find_.Find_fwd(src, Bry__comment_end, ws_end + 4);
 							if (cur_char_pos == Bry_find_.Not_found) {
 								break;
@@ -358,8 +358,8 @@ public class Xomw_prepro_wkr {	// TS.UNSAFE:caching for repeated calls
 						i = end_pos + 1;
 						inner = Bry_.Mid(src, bgn_pos, end_pos + 1);
 						accum.Add_str_a7("<comment>").Add_bry_escape_html(inner).Add_str_a7("</comment>");
-						continue;
 					}
+					continue;
 				}
 
 				byte[] name = element.name;
