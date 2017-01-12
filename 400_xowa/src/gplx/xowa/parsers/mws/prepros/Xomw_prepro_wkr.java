@@ -691,7 +691,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 
 				// Re-add the old stack element if it still has unmatched opening characters remaining
 				if (matching_count < piece.count) {
-					piece.parts.Clear(); // PORTED: piece.parts = [ new PPDPart ];
+					piece.Parts__renew(); // PORTED: piece.parts = [ new PPDPart ];
 					piece.count -= matching_count;
 
 					// do we still qualify for any callback with remaining count?

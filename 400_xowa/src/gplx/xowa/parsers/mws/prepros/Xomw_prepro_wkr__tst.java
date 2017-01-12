@@ -25,11 +25,32 @@ public class Xomw_prepro_wkr__tst {
 	@Test  public void Brack() {
 		fxt.Test__parse("a[[b]]c", "<root>a[[b]]c</root>");
 	}
+	@Test  public void Brack__one() {	// COVERS: "Add literal brace(s)"
+		fxt.Test__parse("a[b]c", "<root>a[b]c</root>");
+	}
+	@Test  public void Brack__max() {	// COVERS: "The specified maximum exists in the callback array, unless the caller"
+		fxt.Test__parse("a[[[[[b]]]]]c", "<root>a[[[[[b]]]]]c</root>");
+	}
 	@Test  public void Template() {
 		fxt.Test__parse("a{{b}}c", "<root>a<template><title>b</title></template>c</root>");
 	}
-	@Test  public void Template__args() {
+	@Test  public void Template__args__idx() {
 		fxt.Test__parse("a{{b|c|d}}e", "<root>a<template><title>b</title><part><name index=\"1\" /><value>c</value></part><part><name index=\"2\" /><value>d</value></part></template>e</root>");
+	}
+	@Test  public void Template__args__key() {
+		fxt.Test__parse("a{{b|c=d}}e", "<root>a<template><title>b</title><part><name>c</name>=<value>d</value></part></template>e</root>");
+	}
+	@Test  public void Template__line_start() {	// COVERS: "The invocation is at the start of the line if lineStart is set in"
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "a"
+		, "{{b}}"
+		), String_.Concat_lines_nl_skip_last
+		( "<root>a"
+		, "<template lineStart=\"1\"><title>b</title></template></root>"
+		));
+	}		
+	@Test  public void Template__max() {	// COVERS: "do we still qualify for any callback with remaining count?"
+		fxt.Test__parse("a{{{{{b}}}}}c", "<root>a<template><title><tplarg><title>b</title></tplarg></title></template>c</root>");
 	}
 	@Test  public void Tplarg() {
 		fxt.Test__parse("a{{{b}}}c", "<root>a<tplarg><title>b</title></tplarg>c</root>");

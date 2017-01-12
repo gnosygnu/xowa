@@ -107,6 +107,10 @@ class Xomw_prepro_piece {
 		this.line_start = line_start;
 		parts.Add(new Xomw_prepro_part(Bry_.Empty));
 	}
+	public void Parts__renew() {
+		parts.Clear();
+		this.Add_part(Bry_.Empty);
+	}
 	public Xomw_prepro_part Get_current_part() {
 		return (Xomw_prepro_part)parts.Get_at(parts.Len() - 1);
 	}
