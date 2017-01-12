@@ -22,6 +22,7 @@ public class Xomp_parse_mgr_cfg implements Gfo_invk {
 	public int		Num_pages_in_pool()				{return num_pages_in_pool;}				private int num_pages_in_pool = -1;
 	public int		Num_pages_per_wkr()				{return num_pages_per_wkr;}				private int num_pages_per_wkr = 1000;
 	public int		Progress_interval()				{return progress_interval;}				private int progress_interval = 1000;
+	public int		Perf_interval()					{return perf_interval;}					private int perf_interval = 10000;
 	public int		Commit_interval()				{return commit_interval;}				private int commit_interval = 10000;
 	public int		Cleanup_interval()				{return cleanup_interval;}				private int cleanup_interval = 50;	// setting at 1000 uses lots of memory
 	public boolean		Hdump_enabled()					{return hdump_enabled;}					private boolean hdump_enabled = true;
@@ -49,6 +50,7 @@ public class Xomp_parse_mgr_cfg implements Gfo_invk {
 		else if	(ctx.Match(k, Invk__num_pages_in_pool_))			num_pages_in_pool = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk__num_pages_per_wkr_))			num_pages_per_wkr = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk__progress_interval_))			progress_interval = m.ReadInt("v");
+		else if	(ctx.Match(k, "perf_interval_"))					perf_interval = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk__commit_interval_))				commit_interval = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk__cleanup_interval_))				cleanup_interval = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk__hdump_enabled_))				hdump_enabled = m.ReadYn("v");

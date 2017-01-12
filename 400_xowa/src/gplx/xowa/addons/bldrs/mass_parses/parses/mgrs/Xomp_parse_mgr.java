@@ -33,7 +33,7 @@ public class Xomp_parse_mgr {
 		Xomp_page_pool_loader page_pool_loader = new Xomp_page_pool_loader(wiki, mgr_db.Conn(), cfg.Num_pages_in_pool(), cfg.Show_msg__fetched_pool());
 		Xomp_page_pool page_pool = new Xomp_page_pool(page_pool_loader, cfg.Num_pages_per_wkr());
 		Xomp_prog_mgr prog_mgr = new Xomp_prog_mgr();
-		prog_mgr.Init(page_pool_loader.Get_pending_count(), cfg.Progress_interval());
+		prog_mgr.Init(page_pool_loader.Get_pending_count(), cfg.Progress_interval(), cfg.Perf_interval(), mgr_db.Url().GenNewNameAndExt("xomp.perf.csv"));
 
 		// cache: preload tmpls and imglinks
 		Xow_page_cache page_cache = Xomp_tmpl_cache_bldr.New(wiki, cfg.Load_all_templates());

@@ -77,9 +77,9 @@ public class Xow_cache_mgr {
 		wiki.Ctg__catpage_mgr().Free_mem_all();
 		tmpl_result_cache.Clear();
 		defn_cache.Free_mem_all();
-		misc_cache.Clear();
 		lst_cache.Clear();
-		scrib_lang_names = null;
+		misc_cache.Clear();
+		// scrib_lang_names = null;
 	}
 	private static final int Free_mem__page_tid = 0, Free_mem__wbase_tid = 1, Free_mem__all_tid = 2;
 	private static Keyval[] scrib_lang_names;

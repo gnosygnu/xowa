@@ -22,6 +22,7 @@ public class Runtime_ {
 	public static long Memory_max() {return Runtime.getRuntime().maxMemory();}		
 	public static long Memory_total() {return Runtime.getRuntime().totalMemory();}	
 	public static long Memory_free() {return Runtime.getRuntime().freeMemory();}	
+	public static long Memory_used() {return Memory_total() - Memory_free();}	// REF:http://stackoverflow.com/questions/3571203/what-are-runtime-getruntime-totalmemory-and-freememory
 
 	public static void Exec(String v) {
 				try {

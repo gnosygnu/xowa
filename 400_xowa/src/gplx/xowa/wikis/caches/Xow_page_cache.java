@@ -101,12 +101,15 @@ public class Xow_page_cache {
 				cache.Clear();
 			}
 			else {
+				// gather non-permanent items
 				int len = cache.Count();
 				for (int i = 0; i < len; i++) {
 					Xow_page_cache_itm itm = (Xow_page_cache_itm)cache.Get_at(i);
 					if (!itm.Cache_permanently())
 						deleted.Add(itm);
 				}
+
+				// remove non-permanent items
 				len = deleted.Len();
 				for (int i = 0; i < len; i++) {
 					Xow_page_cache_itm itm = (Xow_page_cache_itm)deleted.Get_at(i);
