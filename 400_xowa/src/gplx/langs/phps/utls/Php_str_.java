@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+package gplx.langs.phps.utls; import gplx.*; import gplx.langs.*; import gplx.langs.phps.*;
 public class Php_str_ {
 	public static byte[] Substr(byte[] src, int bgn, int len) {return Bry_.Mid(src, bgn, bgn + len);}
 	public static int Strspn_fwd__byte(byte[] src, byte find, int bgn, int max, int src_len) {

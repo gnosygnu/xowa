@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.mws.prepros; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.mws.*;
 import gplx.core.btries.*;
-import gplx.langs.phps.*;
+import gplx.langs.phps.utls.*;
 public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private final    List_adp comments_list = List_adp_.New();

@@ -448,7 +448,14 @@ public class Bry_ {
 			}
 			if (all_ws) return Bry_.Empty;
 		}
-		return Bry_.Mid(src, txt_bgn, txt_end);
+
+		if (	bgn == 0       && end == src.length	 // Trim is called on entire bry, not subset
+			&&	bgn == txt_bgn && end == txt_end     // Trim hasn't trimmed anything
+			) {	
+			return src;
+		}
+		else
+			return Bry_.Mid(src, txt_bgn, txt_end);
 	}
 	public static byte[] Trim_end(byte[] v, byte trim, int end) {
 		boolean trimmed = false;

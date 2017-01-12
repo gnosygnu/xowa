@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.mws.blocks; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.mws.*;
-import gplx.langs.phps.*;
+import gplx.langs.phps.utls.*;
 public class Xomw_block_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Bry_bfr bfr = Bry_bfr_.New();
 	private byte[] last_prefix, last_section;

@@ -29,6 +29,7 @@ public class Xomp_prog_mgr {
 		this.perf_interval = perf_interval;
 		this.perf_url = perf_url;
 		this.prog_bgn = this.prog_prv = this.perf_prv = gplx.core.envs.System_.Ticks();
+		Io_mgr.Instance.DeleteFil(perf_url);
 	}
 	public void Mark_done(int id) {
 		synchronized (thread_lock) {

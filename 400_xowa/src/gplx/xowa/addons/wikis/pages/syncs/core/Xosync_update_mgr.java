@@ -24,7 +24,7 @@ import gplx.xowa.htmls.core.dbs.*;
 import gplx.xowa.addons.wikis.pages.syncs.wmapis.*;
 import gplx.xowa.addons.wikis.pages.syncs.core.parsers.*;
 public class Xosync_update_mgr {
-	private final    Xoh_hzip_bfr bfr = new Xoh_hzip_bfr(Io_mgr.Len_mb, Bool_.N, Byte_.Max_value_127);
+	private final    Xoh_hzip_bfr bfr = new Xoh_hzip_bfr(Io_mgr.Len_kb, Bool_.N, Byte_.Max_value_127);
 	private final    Gfh_doc_parser hdoc_parser_mgr;
 	private final    Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
 	private final    Xosync_hdoc_wtr hdoc_bldr = new Xosync_hdoc_wtr();

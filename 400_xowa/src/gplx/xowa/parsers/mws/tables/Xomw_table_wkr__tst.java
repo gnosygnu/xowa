@@ -19,19 +19,50 @@ package gplx.xowa.parsers.mws.tables; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*;
 public class Xomw_table_wkr__tst {
 	private final    Xomw_table_wkr__fxt fxt = new Xomw_table_wkr__fxt();
-	@Test  public void Table() {
+	@Test  public void Basic() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|-"
 		, "|a"
 		, "|}"
 		), String_.Concat_lines_nl_skip_last
-		( "{|"
+		( "<table>"
+		, ""
+		, "<tr>"
+		, "<td>a"
+		, "</td></tr></table>"
+		));
+	}		
+	@Test  public void Blank() {	// COVERS: "empty line, go to next line"
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "   "
+		), String_.Concat_lines_nl_skip_last
+		( "   "
+		));
+	}
+	@Test  public void Indent() {
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "::{|"
 		, "|-"
 		, "|a"
 		, "|}"
+		), String_.Concat_lines_nl_skip_last
+		( "<dl><dd><dl><dd><table>"
+		, ""
+		, "<tr>"
+		, "<td>a"
+		, "</td></tr></table></dd></dl></dd></dl>"
 		));
-	}		
+	}
+	@Test  public void End__no_rows() {	// COVERS: "if (has_opened_tr.Len() == 0) {"
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "{|"
+		, "|}"
+		), String_.Concat_lines_nl_skip_last
+		( "<table>"
+		, "<tr><td></td></tr></table>"
+		));
+	}
 }
 class Xomw_table_wkr__fxt {
 	private final    Xomw_table_wkr wkr = new Xomw_table_wkr();
