@@ -153,7 +153,7 @@ public class Gftest {
 		if (idx < len) {
 			switch (type_id) {
 				case Type_adp_.Tid__bool:	bfr.Add_yn(Bool_.Cast(Array_.Get_at(ary, idx))); break;
-				case Type_adp_.Tid__bry:	bfr.Add((byte[])Array_.Get_at(ary, idx)); break;
+				case Type_adp_.Tid__bry:	bfr.Add_safe((byte[])Array_.Get_at(ary, idx)); break;
 				case Type_adp_.Tid__long:	bfr.Add_long_variable(Long_.cast(Array_.Get_at(ary, idx))); break;
 				case Type_adp_.Tid__int:	bfr.Add_int_variable(Int_.cast(Array_.Get_at(ary, idx))); break;
 				default:					throw Err_.new_unhandled_default(type_id);

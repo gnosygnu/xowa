@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import org.junit.*;
+import org.junit.*; import gplx.core.tests.*;
 public class Bry_split__tst {
 	private final    Bry_split__fxt fxt = new Bry_split__fxt();
 	@Test   public void Split() {
@@ -43,6 +43,11 @@ public class Bry_split__tst {
 		fxt.Test_split("a|b|c|d"		, 2, 6, "|", "b", "c");
 		fxt.Test_split("a|b|c|d"		, 2, 4, "|", "b");
 	}
+	@Test   public void Split_w_max() {
+		fxt.Test__split_w_max("a|b|c|d"              , Byte_ascii.Pipe, 2, "a", "b");		// max is less
+		fxt.Test__split_w_max("a"                    , Byte_ascii.Pipe, 2, "a", null);		// max is more
+		fxt.Test__split_w_max("|"                    , Byte_ascii.Pipe, 2, "", "");		    // empty itms
+	}
 }
 class Bry_split__fxt {
 	private final    Bry_split_wkr__example wkr = new Bry_split_wkr__example();
@@ -54,6 +59,9 @@ class Bry_split__fxt {
 	}
 	public void Test_split(String src, int src_bgn, int src_end, String dlm, String... expd) {
 		Tfds.Eq_ary_str(Bry_.Ary(expd), Bry_split_.Split(Bry_.new_u8(src), src_bgn, src_end, Bry_.new_u8(dlm)));
+	}
+	public void Test__split_w_max(String src, byte dlm, int max, String... expd) {
+		Gftest.Eq__ary(expd, String_.Ary(Bry_split_.Split_w_max(Bry_.new_u8(src), dlm, max)));
 	}
 }
 class Bry_split_wkr__example implements gplx.core.brys.Bry_split_wkr {

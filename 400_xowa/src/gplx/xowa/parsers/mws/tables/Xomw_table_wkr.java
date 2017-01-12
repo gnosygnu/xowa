@@ -15,8 +15,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.parsers.mws.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.mws.*;
-public class Xomw_tblw_wkr {
+package gplx.xowa.parsers.mws.tables; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.mws.*;
+public class Xomw_table_wkr {
 	private final    Bry_bfr bfr = Bry_bfr_.New(), tmp_bfr = Bry_bfr_.New();
 	private final    List_adp 
 	  td_history = List_adp_.New()
@@ -26,10 +26,12 @@ public class Xomw_tblw_wkr {
 	, has_opened_tr = List_adp_.New()
 	;
 	private static final    byte[] 
-	  Bry__tblw_end = Bry_.new_a7("|}"), Bry__tr = Bry_.new_a7("|-"), Bry__th = Bry_.new_a7("|+")
+	  Bry__tblw_bgn = Bry_.new_a7("{|"), Bry__tblw_end = Bry_.new_a7("|}"), Bry__tr = Bry_.new_a7("|-"), Bry__th = Bry_.new_a7("|+"), Bry__td2 = Bry_.new_a7("||")
+	, Bry__lnki = Bry_.new_a7("[[")
 	, Bry__special_case = Bry_.new_a7("<table>\n<tr><td></td></tr>\n</table>")
 	, Bry__tag__td = Bry_.new_a7("td"), Bry__tag__th = Bry_.new_a7("th"), Bry__tag__caption = Bry_.new_a7("caption")
 	, Bry__elem_end__tr = Bry_.new_a7("</tr>")
+	, Bry__dl_dd = Bry_.new_a7("<dl><dd>")
 	;
 	private static final    int Len__special_case = Bry__special_case.length;
 	public byte[] Do_table_stuff(byte[] src) {
@@ -60,17 +62,27 @@ public class Xomw_tblw_wkr {
 			chars_2[0] = line[0];
 			if (line_len > 1) chars_2[1] = line[1];
 
-			boolean is_indented_table = false;
+			// PORTED: preg_match('/^(:*)\s*\{\|(.*)$/', $line, $matches)
+			byte[] colon_atrs = null;
+			int colons_end = Bry_find_.Find_fwd(src, Byte_ascii.Pipe, 0, line_len);
+			if (colons_end > 0) {
+				int atrs_bgn = Bry_find_.Find_fwd_while(line, colons_end, line_len, Byte_ascii.Space);
+				if (Bry_.Eq(line, atrs_bgn, atrs_bgn + 2, Bry__tblw_bgn)) {
+					colon_atrs = Bry_.Mid(line, atrs_bgn, line_len);
+				}
+			}
 			// ":*" , "\s*" , "{|" , ".*"
-			if (is_indented_table) {
-//				if (preg_match('/^(:*)\s*\{\|(.*)$/', $line, $matches)) {
-//					// First check if we are starting a new table
-//					$indent_level = strlen(matches[1]);
-//
-//					$attributes = $this->mStripState->unstripBoth(matches[2]);
-//					$attributes = Sanitizer::fixTagAttributes(attributes, 'table');
-//
-//					line_orig = str_repeat('<dl><dd>', $indent_level) . "<table{$attributes}>";
+			if (colon_atrs != null) {
+				// First check if we are starting a new table
+				indent_level = colons_end;
+
+//					atrs = $this->mStripState->unstripBoth(matches[2]);
+//					atrs = Sanitizer::fixTagAttributes(attributes, 'table');
+
+				// PORTED: line_orig = str_repeat('<dl><dd>', $indent_level) . "<table{atrs}>";
+				for (int j = 0; j < indent_level; j++)
+					tmp_bfr.Add(Bry__dl_dd);
+				line_orig = tmp_bfr.Add_str_a7("<table").Add(colon_atrs).Add_byte(Byte_ascii.Angle_end).To_bry_and_clear();
 				td_history.Add(false);
 				last_tag_history.Add(Bry_.Empty);
 				tr_history.Add(false);
@@ -104,14 +116,15 @@ public class Xomw_tblw_wkr {
 				line_orig = tmp_bfr.Add(line).Add(Bry_.Repeat_bry(Bry_.new_a7("</dd></dl>"), indent_level)).To_bry_and_clear();
 			}
 			else if (Bry_.Eq(chars_2, Bry__tr)) {
-//					// Now we have a table row
-//					$line = preg_replace('#^\|-+#', '', $line);
-//
-//					// Whats after the tag is now only attributes
-//					$attributes = $this->mStripState->unstripBoth(line);
-//					$attributes = Sanitizer::fixTagAttributes(attributes, 'tr');
+				// Now we have a table row
+				line = Bry_.Mid(line, 2);        // PORTED: $line = preg_replace('#^\|-+#', '', $line);
+
+				// Whats after the tag is now only attributes
+				byte[] atrs = Bry_.Empty;
+//					atrs = $this->mStripState->unstripBoth(line);
+//					atrs = Sanitizer::fixTagAttributes(attributes, 'tr');
 				List_adp_.Pop(tr_attributes);
-//					array_push(tr_attributes, $attributes);
+				tr_attributes.Add(atrs);
 
 				line = Bry_.Empty;
 				byte[] last_tag = (byte[])List_adp_.Pop(last_tag_history);
@@ -145,19 +158,21 @@ public class Xomw_tblw_wkr {
 
 				// Implies both are valid for table headings.
 				if (char_0 == Byte_ascii.Nl) {
-					// $line = StringUtils::replaceMarkup('!!', '||', $line);
+//						$line = StringUtils::replaceMarkup('!!', '||', $line);
 				}
 
 				// Split up multiple cells on the same line.
 				// FIXME : This can result in improper nesting of tags processed
 				// by earlier parser steps.
-//					$cells = explode('||', $line);
+				byte[][] cells = Bry_split_.Split(line, Bry__td2);
 
 				line_orig = Bry_.Empty;
 
 				byte[] previous = null;
 				// Loop through each table cell
-//					foreach (cells as $cell) {
+				int cells_len = cells.length;
+				for (int j = 0; j < cells_len; i++) {
+					byte[] cell = cells[j];
 					previous = Bry_.Empty;
 					if (char_0 != Byte_ascii.Plus) {
 						byte[] tr_after = (byte[])List_adp_.Pop(tr_attributes);
@@ -190,25 +205,29 @@ public class Xomw_tblw_wkr {
 					}
 
 					last_tag_history.Add(last_tag);
-//
-//						// A cell could contain both parameters and data
-//						$cell_data = explode('|', $cell, 2);
-//
-//						// Bug 553: Note that a '|' inside an invalid link should not
-//						// be mistaken as delimiting cell parameters
-//						if (strpos(cell_data[0], '[[') !== false) {
-//							$cell = "{$previous}<{$last_tag}>{$cell}";
-//						} else if (count(cell_data) == 1) {
-//							$cell = "{$previous}<{$last_tag}>{$cell_data[0]}";
-//						} else {
-//							$attributes = $this->mStripState->unstripBoth(cell_data[0]);
-//							$attributes = Sanitizer::fixTagAttributes(attributes, $last_tag);
-//							$cell = "{$previous}<{$last_tag}{$attributes}>{$cell_data[1]}";
-//						}
-//
-//						line_orig = Bry_.Add(line_orig, $cell);
+
+					// A cell could contain both parameters and data
+					byte[][] cell_data = Bry_split_.Split_w_max(cell, Byte_ascii.Pipe, 2);
+
+					// Bug 553: Note that a '|' inside an invalid link should not
+					// be mistaken as delimiting cell parameters
+					byte[] cell_data_0 = cell_data[0];
+					byte[] cell_data_1 = cell_data[1];
+					if (Bry_find_.Find_fwd(cell_data_0, Bry__lnki) != Bry_find_.Not_found) {
+						cell = tmp_bfr.Add(previous).Add_str_a7("<").Add(last_tag).Add_str_a7(">").Add(cell).To_bry_and_clear();
+					}
+					else if (cell_data_1 == null) {
+						cell = tmp_bfr.Add(previous).Add_str_a7("<").Add(last_tag).Add_str_a7(">").Add(cell_data_0).To_bry_and_clear();
+					}
+					else {
+//							atrs = $this->mStripState->unstripBoth(cell_data[0]);
+//							atrs = Sanitizer::fixTagAttributes(attributes, $last_tag);
+						cell = tmp_bfr.Add(previous).Add_str_a7("<").Add(last_tag).Add_str_a7(">").Add(cell_data_1).To_bry_and_clear();
+					}
+
+					line_orig = Bry_.Add(line_orig, cell);
 					td_history.Add(true);
-//					}
+				}
 			}
 			bfr.Add(line_orig).Add_byte_nl();
 		}

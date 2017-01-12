@@ -116,6 +116,27 @@ public class Bry_split_ {
 		}
 		return (byte[][])rv.To_ary(byte[].class);
 	}
+	public static byte[][] Split_w_max(byte[] src, byte dlm, int max) {
+		byte[][] rv = new byte[max][];
+		int src_len = src.length;
+		int rv_idx = 0;
+		int itm_bgn = 0;
+		int src_pos = 0;
+		while (true) {
+			boolean is_last = src_pos == src_len;
+			byte b = is_last ? dlm : src[src_pos];
+			if (b == dlm) {
+				rv[rv_idx++] = Bry_.Mid(src, itm_bgn, src_pos);
+				itm_bgn = src_pos + 1;
+			}
+			if (is_last || rv_idx == max)
+				break;
+			else
+				src_pos++;
+		}
+		return rv;
+	}
+
 	public static final int Rv__ok = 0, Rv__extend = 1, Rv__cancel = 2;
 }
 class Bry_split_wkr__to_ary implements gplx.core.brys.Bry_split_wkr {

@@ -488,8 +488,10 @@ public class String_ {
 		if (ary == null) return String_.Ary_empty;
 		int ary_len = ary.length;
 		String[] rv = new String[ary_len];
-		for (int i = 0; i < ary_len; i++)
-			rv[i] = String_.new_u8(ary[i]);
+		for (int i = 0; i < ary_len; i++) {
+			byte[] itm = ary[i];
+			rv[i] = itm == null ? null : String_.new_u8(itm);
+		}
 		return rv;
 	}
 	public static String [] Ary_filter(String[] src, String[] filter) {
