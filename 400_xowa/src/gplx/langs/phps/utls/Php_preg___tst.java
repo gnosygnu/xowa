@@ -19,9 +19,8 @@ package gplx.langs.phps.utls; import gplx.*; import gplx.langs.*; import gplx.la
 import org.junit.*; import gplx.core.tests.*;
 public class Php_preg___tst {
 	private final    Php_preg___fxt fxt = new Php_preg___fxt();
-	@Test  public void Split() {
-		fxt.Test__split("a''b''c", "''", Bool_.N, "a", "''", "b", "''", "c");
-	}
+	@Test  public void Basic()         {fxt.Test__split("a''b''c"          , "''", Bool_.Y, "a", "''", "b", "''", "c");}
+	@Test  public void Extend()        {fxt.Test__split("a'''b'''c"        , "''", Bool_.Y, "a", "'''", "b", "'''", "c");}
 }
 class Php_preg___fxt {
 	public void Test__split(String src, String dlm, boolean extend, String... expd) {Test__split(src, 0, String_.Len(src), dlm, extend, expd);}

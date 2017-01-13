@@ -39,6 +39,10 @@ public class Php_str___tst {
 		fxt.Test__strspn_bwd__space_or_tab("     a", 4, -1, 4);	// bgn
 		fxt.Test__strspn_bwd__space_or_tab("     a", 4,  2, 2);	// max
 	}
+	@Test   public void Substr__bgn_is_neg() {
+		fxt.Test__substr("abcde"                   , -1, "e");
+		fxt.Test__substr("abcde"                   , -3, -1, "cd");
+	}
 }
 class Php_str___fxt {
 	public void Test__strspn_fwd__byte(String src_str, byte find, int bgn, int max, int expd) {
@@ -54,5 +58,9 @@ class Php_str___fxt {
 	}
 	public void Test__strspn_bwd__space_or_tab(String src_str, int bgn, int max, int expd) {
 		Gftest.Eq__int(expd, Php_str_.Strspn_bwd__space_or_tab(Bry_.new_u8(src_str), bgn, max));
+	}
+	public void Test__substr(String src_str, int bgn, String expd) {Test__substr(src_str, bgn, String_.Len(src_str), expd);}
+	public void Test__substr(String src_str, int bgn, int len, String expd) {
+		Gftest.Eq__str(expd, Php_str_.Substr(Bry_.new_u8(src_str), bgn, len));
 	}
 }

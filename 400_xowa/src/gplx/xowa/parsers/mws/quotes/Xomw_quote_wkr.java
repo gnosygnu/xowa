@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.mws.quotes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.mws.*;
 import gplx.langs.phps.utls.*;
 import gplx.xowa.parsers.htmls.*;
-import gplx.xowa.parsers.mws.utils.*; import gplx.xowa.parsers.uniqs.*;
 import gplx.core.primitives.*;
 public class Xomw_quote_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Bry_bfr bfr = Bry_bfr_.New();
@@ -26,15 +25,13 @@ public class Xomw_quote_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 	private final    Int_list apos_pos_ary = new Int_list(32);
 	public byte[] Do_all_quotes(byte[] src) {
 		Bry_split_.Split(src, 0, src.length, Byte_ascii.Nl, Bool_.N, this); // PORTED.SPLIT: $lines = StringUtils::explode( "\n", $text );
-		// PORTED: `$outtext .= $this->doQuotes( $line ) . "\n";` NOTE: "\n" is added below
-		bfr.Del_by_1(); // $outtext = substr( $outtext, 0, -1 );
+		bfr.Del_by_1(); // REF.MW: $outtext = substr( $outtext, 0, -1 );
 		apos_pos_ary.Clear();
 		return bfr.To_bry_and_clear();
 	}
 	private static final    byte[] Wtxt__apos = Bry_.new_a7("''");
-	public int Split(byte[] src, int itm_bgn, int itm_end) {
-		// PORTED: arr = preg_split("/(''+)/", text, -1, PREG_SPLIT_DELIM_CAPTURE);
-		byte[][] arr = Php_preg_.Split(apos_pos_ary, src, itm_bgn, itm_end, Wtxt__apos, Bool_.Y);
+	public int Split(byte[] src, int itm_bgn, int itm_end) {			
+		byte[][] arr = Php_preg_.Split(apos_pos_ary, src, itm_bgn, itm_end, Wtxt__apos, Bool_.Y);	// PORTED.REGX: arr = preg_split("/(''+)/", text, -1, PREG_SPLIT_DELIM_CAPTURE);
 		if (arr == null) {
 			bfr.Add_mid(src, itm_bgn, itm_end).Add_byte_nl();
 			return Bry_split_.Rv__ok;
@@ -81,50 +78,51 @@ public class Xomw_quote_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 		// that one of the bold ones was meant to be an apostrophe followed
 		// by italics. Which one we cannot know for certain, but it is more
 		// likely to be one that has a single-letter word before it.
+		// NOTE: this code primarily handles italicized possessives; EX: The ''[[Main Page]]'''s talk page.
 		if ((num_bold % 2 == 1) && (num_italics % 2 == 1)) {
-			int first_word_1 = -1;
-			int first_word_n = -1;
-			int first_space = -1;
+			int prv_ends_w_word_1char = -1;
+			int prv_ends_w_word_nchar = -1;
+			int prv_ends_w_space = -1;
 			for (int i = 1; i < arr_len; i += 2) {
 				if (arr[i].length == 3) {
 					byte[] prv = arr[i - 1];
-					byte[] x1 = Php_str_.Substr(prv, -1);
-					byte[] x2 = Php_str_.Substr(prv, -2, 1);
-					if (Bry_.Eq(x1, Byte_ascii.Space_bry)) {
-						if (first_space == -1) {
-							first_space = i;
+					byte prv__last_char = Php_str_.Substr_byte(prv, -1);
+					byte prv__last_minus_1_char = Php_str_.Substr_byte(prv, -2, 1);
+					if (prv__last_char == Byte_ascii.Space) {              // NOTE: prv ends in space; EX: "''prv '''"
+						if (prv_ends_w_space == -1) {
+							prv_ends_w_space = i;
 						}
 					}
-					else if (Bry_.Eq(x2, Byte_ascii.Space_bry)) {
-						first_word_1 = i;
+					else if (prv__last_minus_1_char == Byte_ascii.Space) { // NOTE: prv ends in 1-char word; EX: "''prv a'''"
+						prv_ends_w_word_1char = i;
 						// if $firstsingleletterword is set, we don't
 						// look at the other options, so we can bail early.
 						break;
 					}
 					else {
-						if (first_word_n == -1) {
-							first_word_n = i;
+						if (prv_ends_w_word_nchar == -1) {
+							prv_ends_w_word_nchar = i;
 						}
 					}
 				}
 			}
 
 			// If there is a single-letter word, use it!
-			if (first_word_1 > -1) {
-				arr[first_word_1] = Wtxt__apos;
-				arr[first_word_1 - 1] = Bry_.Add(arr[first_word_1 - 1], Byte_ascii.Apos);
+			if (prv_ends_w_word_1char > -1) {
+				arr[prv_ends_w_word_1char] = Wtxt__apos;
+				arr[prv_ends_w_word_1char - 1] = Bry_.Add(arr[prv_ends_w_word_1char - 1], Byte_ascii.Apos);
 			}
-			else if (first_word_n > -1) {
+			else if (prv_ends_w_word_nchar > -1) {
 				// If not, but there's a multi-letter word, use that one.
-				arr[first_word_n] = Wtxt__apos;
-				arr[first_word_n - 1] = Bry_.Add(arr[first_word_n - 1], Byte_ascii.Apos);
+				arr[prv_ends_w_word_nchar] = Wtxt__apos;
+				arr[prv_ends_w_word_nchar - 1] = Bry_.Add(arr[prv_ends_w_word_nchar - 1], Byte_ascii.Apos);
 			}
-			else if (first_space > -1) {
+			else if (prv_ends_w_space > -1) {
 				// ... otherwise use the first one that has neither.
 				// (notice that it is possible for all three to be -1 if, for example,
 				// there is only one pentuple-apostrophe in the line)
-				arr[first_space] = Wtxt__apos;
-				arr[first_space - 1] = Bry_.Add(arr[first_space - 1], Byte_ascii.Apos);
+				arr[prv_ends_w_space] = Wtxt__apos;
+				arr[prv_ends_w_space - 1] = Bry_.Add(arr[prv_ends_w_space - 1], Byte_ascii.Apos);
 			}
 		}
 
@@ -140,7 +138,7 @@ public class Xomw_quote_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 				}
 			}
 			else {
-				int apos_len = 2; // strlen(r);
+				int apos_len = arr[j].length;
 				if (apos_len == 2) {
 					if (state == State__i) {
 						bfr.Add_str_a7("</i>");
@@ -203,7 +201,7 @@ public class Xomw_quote_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 						state = State__empty;
 					}
 					else if (state == State__both) {
-						bfr.Add_str_a7("<i><b>' . buffer . '</b></i>");
+						bfr.Add_str_a7("<i><b>").Add_bfr_and_preserve(tmp).Add_str_a7("</b></i>");
 						state = State__empty;
 					}
 					else { // (state == '')

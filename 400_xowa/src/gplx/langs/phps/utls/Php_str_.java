@@ -17,11 +17,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.phps.utls; import gplx.*; import gplx.langs.*; import gplx.langs.phps.*;
 public class Php_str_ {
-	public static byte[] Substr(byte[] src, int bgn) {
-		return src;
-	}
+	public static byte[] Substr(byte[] src, int bgn) {return Substr(src, bgn, src.length);}
 	public static byte[] Substr(byte[] src, int bgn, int len) {
-		return Bry_.Mid(src, bgn, bgn + len);
+		int src_len = src.length;
+		if (bgn < 0) bgn = src_len + bgn; // handle negative
+		if (bgn < 0) bgn = 0;	// handle out of bounds; EX: ("a", -1, -1)
+		int end = len < 0 ? src_len + len : bgn + len;
+		if (end > src.length) end = src.length;; // handle out of bounds;
+		return Bry_.Mid(src, bgn, end);
+	}
+	public static byte Substr_byte(byte[] src, int bgn) {return Substr_byte(src, bgn, src.length);}
+	public static byte Substr_byte(byte[] src, int bgn, int len) {
+		int src_len = src.length;
+		if (bgn < 0) bgn = src_len + bgn; // handle negative
+		if (bgn < 0) bgn = 0;	// handle out of bounds; EX: ("a", -1, -1)
+		int end = len < 0 ? src_len + len : bgn + len;
+		if (end > src.length) end = src.length;; // handle out of bounds;
+		return src[bgn];
 	}
 	public static int Strspn_fwd__byte(byte[] src, byte find, int bgn, int max, int src_len) {
 		if (max == -1) max = src_len;
