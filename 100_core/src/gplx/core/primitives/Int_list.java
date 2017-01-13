@@ -17,7 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.primitives; import gplx.*; import gplx.core.*;
 public class Int_list {
+	private int capacity = 0;
 	private int[] ary = Int_.Ary_empty; private int ary_len, ary_max;
+	public Int_list()				{this.capacity = 0;        this.ary = Int_.Ary_empty;}
+	public Int_list(int capacity)	{this.capacity = capacity; this.ary = new int[capacity];}
 	public void Add(int uid) {
 		int new_len = ary_len + 1;
 		if (new_len > ary_max) {
@@ -32,8 +35,16 @@ public class Int_list {
 	public int Len() {return ary_len;}
 	public int Get_at(int i) {return ary[i];}
 	public void Clear() {
-		ary = Int_.Ary_empty;
+		if (ary_len > capacity) {
+			ary = (capacity == 0) ? Int_.Ary_empty : new int[capacity];
+		}
 		ary_len = ary_max = 0;
+	}
+	public int[] To_ary() {
+		int[] rv = new int[ary_len];
+		for (int i = 0; i < ary_len; i++)
+			rv[i] = ary[i];
+		return rv;
 	}
 	public static Int_list new_(int... ary) {
 		Int_list rv = new Int_list();

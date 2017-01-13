@@ -248,4 +248,14 @@ public class Xomw_block_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 		}
 		return Bry_split_.Rv__ok;
 	}
+//		private static final int 
+//		  Para_stack_none = 0	// false
+//		, Para_stack_bgn  = 1	// <p>
+//		, Para_stack_mid  = 2	// </p><p>
+//		;
+//		private static final byte
+//		  Mode_none = 0			// ''
+//		, Mode_para = 1			// p
+//		, Mode_pre  = 2			// pre
+//		;
 }
