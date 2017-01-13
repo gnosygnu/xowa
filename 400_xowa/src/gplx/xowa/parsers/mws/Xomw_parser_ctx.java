@@ -16,8 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.mws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+import gplx.xowa.parsers.htmls.*;
+import gplx.xowa.parsers.mws.utils.*;
+import gplx.xowa.parsers.uniqs.*;
 public class Xomw_parser_ctx {
-	public Xomw_parser_ctx() {
-	}
+	public Xomw_sanitizer_mgr Sanitizer() {return sanitizer;} private final    Xomw_sanitizer_mgr sanitizer = new Xomw_sanitizer_mgr();
+	public Xop_uniq_mgr Uniq_mgr() {return uniq_mgr;} private final    Xop_uniq_mgr uniq_mgr = new Xop_uniq_mgr();
+	
 	public static final int Pos__bos = -1;
 }

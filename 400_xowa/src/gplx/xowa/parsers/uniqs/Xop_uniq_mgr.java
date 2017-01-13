@@ -31,6 +31,9 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 		return key;
 	}
 	public byte[] Get(byte[] key) {return (byte[])general_trie.Match_exact(key, 0, key.length);}
+	public byte[] Unstrip_both(byte[] src) {
+		return Convert(src);
+	}
 	public byte[] Convert(byte[] src) {
 		if (general_trie.Count() == 0) return src;
 

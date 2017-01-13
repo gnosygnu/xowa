@@ -33,6 +33,44 @@ public class Xomw_table_wkr__tst {
 		, "</td></tr></table>"
 		));
 	}		
+	@Test  public void Tb__atrs() {
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "{|id='1'"
+		, "|-"
+		, "|a"
+		, "|}"
+		), String_.Concat_lines_nl_skip_last
+		( "<table id=\"1\">"
+		, ""
+		, "<tr>"
+		, "<td>a"
+		, "</td></tr></table>"
+		));
+	}		
+	@Test  public void Tc__atrs() {
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "{|"
+		, "|+id='1'|a"
+		, "|}"
+		), String_.Concat_lines_nl_skip_last
+		( "<table>"
+		, "<caption id=\"1\">a"
+		, "</caption><tr><td></td></tr></table>"
+		));
+	}
+	@Test  public void Th__double() {
+		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		( "{|"
+		, "!a!!b"
+		, "|}"
+		), String_.Concat_lines_nl_skip_last
+		( "<table>"
+		, "<tr>"
+		, "<th>a</th>"
+		, "<th>b"
+		, "</th></tr></table>"
+		));
+	}		
 	@Test  public void Blank() {	// COVERS: "empty line, go to next line"
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "   "
@@ -40,7 +78,7 @@ public class Xomw_table_wkr__tst {
 		( "   "
 		));
 	}
-	@Test  public void Indent() {
+	@Test  public void Tb__indent() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "::{|"
 		, "|-"
@@ -54,7 +92,7 @@ public class Xomw_table_wkr__tst {
 		, "</td></tr></table></dd></dl></dd></dl>"
 		));
 	}
-	@Test  public void End__no_rows() {	// COVERS: "if (has_opened_tr.Len() == 0) {"
+	@Test  public void Tb__empty() {	// COVERS: "if (has_opened_tr.Len() == 0) {"
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|}"
@@ -65,10 +103,11 @@ public class Xomw_table_wkr__tst {
 	}
 }
 class Xomw_table_wkr__fxt {
+	private final    Xomw_parser_ctx ctx = new Xomw_parser_ctx();
 	private final    Xomw_table_wkr wkr = new Xomw_table_wkr();
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		byte[] actl = wkr.Do_table_stuff(src_bry);
+		byte[] actl = wkr.Do_table_stuff(ctx, src_bry);
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl), src_str);
 	}
 }

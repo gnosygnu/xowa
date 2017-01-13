@@ -39,5 +39,9 @@ public class Mwh_doc_wkr__atr_bldr implements Mwh_doc_wkr {
 	public void On_nde_tail_end(Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {}
 	public void On_comment_end (Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {}
 	public void On_entity_end  (Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {}
+
 	public Mwh_atr_itm[] To_atr_ary() {return (Mwh_atr_itm[])list.To_ary_and_clear(Mwh_atr_itm.class);}
+	public int Atrs__len() {return list.Len();}
+	public Mwh_atr_itm Atrs__get_at(int i) {return (Mwh_atr_itm)list.Get_at(i);}
+	public void Atrs__clear() {list.Clear();}
 }
