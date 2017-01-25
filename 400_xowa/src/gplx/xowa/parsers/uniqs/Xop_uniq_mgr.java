@@ -50,7 +50,7 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 
 			// add to bfr
 			if (dirty_bfr == null) dirty_bfr = key_bfr;
-			dirty_bfr.Add_mid(src, 0, uniq_bgn);
+			dirty_bfr.Add_mid(src, cur, uniq_bgn);
 			dirty_bfr.Add((byte[])general_trie.Match_exact(src, uniq_bgn, uniq_end));
 			cur = uniq_end;
 		}

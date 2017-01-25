@@ -51,6 +51,13 @@ public class Xop_uniq_mgr__tst {
 		fxt.Test__add("2", key);
 		fxt.Test__convert("1" + key + "3", "123");
 	}
+	@Test   public void Convert__many() {
+		String key_0 = "UNIQ-item-0--QINU";
+		String key_1 = "UNIQ-item-1--QINU";
+		fxt.Test__add("0", key_0);
+		fxt.Test__add("1", key_1);
+		fxt.Test__convert("a " + key_0 + " b " + key_1 + " c", "a 0 b 1 c");
+	}
 }
 class Xop_uniq_mgr__fxt {
 	private final    Xop_uniq_mgr mgr = new Xop_uniq_mgr();
