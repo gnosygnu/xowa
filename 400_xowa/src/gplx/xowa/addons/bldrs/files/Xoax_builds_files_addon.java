@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
 import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.addons.bldrs.files.cmds.*;
-import gplx.xowa.addons.bldrs.mass_parses.inits.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*; import gplx.xowa.addons.bldrs.mass_parses.makes.*;
+import gplx.xowa.addons.bldrs.mass_parses.inits.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*; import gplx.xowa.addons.bldrs.mass_parses.makes.*; import gplx.xowa.addons.bldrs.mass_parses.resumes.*;
 import gplx.xowa.addons.bldrs.files.cksums.*;
 import gplx.xowa.addons.bldrs.app_cfgs.wm_server_cfgs.*;
 public class Xoax_builds_files_addon implements Xoax_addon_itm, Xoax_addon_itm__bldr {
@@ -46,6 +46,7 @@ public class Xoax_builds_files_addon implements Xoax_addon_itm, Xoax_addon_itm__
 		, Xomp_init_cmd.Prototype
 		, Xomp_parse_cmd.Prototype
 		, Xomp_make_cmd.Prototype
+		, Xomp_resume_cmd.Prototype
 		, Xocksum_calc_cmd.Prototype
 
 		, Xowm_server_cfg_cmd.Prototype

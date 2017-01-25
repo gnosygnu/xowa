@@ -54,7 +54,8 @@ public class Xomp_prog_mgr {
 				// save to file
 				tmp_bfr.Add_int_fixed(pages_done, 12).Add_byte_pipe();
 				tmp_bfr.Add_int_fixed(memory_used, 6).Add_byte_pipe();
-				tmp_bfr.Add_long_variable(perf_diff).Add_byte_nl();
+				tmp_bfr.Add_long_variable(perf_diff).Add_byte_pipe();
+				tmp_bfr.Add_dte(Datetime_now.Get()).Add_byte_nl();
 				Io_mgr.Instance.AppendFilBfr(perf_url, tmp_bfr);
 			}
 		}
