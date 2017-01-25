@@ -279,8 +279,13 @@ public class Bry__tst {
 	@Test   public void Repeat_bry() {
 		fxt.Test__repeat_bry("abc"  , 3, "abcabcabc");
 	}
+	@Test   public void Xcase__build__all() {
+		fxt.Test__xcase__build__all(Bool_.N, "abc", "abc");
+		fxt.Test__xcase__build__all(Bool_.N, "aBc", "abc");
+	}
 }
 class Bry__fxt {
+	private final    Bry_bfr tmp = Bry_bfr_.New();
 	public void Test_trim_end(String raw, byte trim, String expd) {
 		byte[] raw_bry = Bry_.new_a7(raw);
 		Tfds.Eq(expd, String_.new_u8(Bry_.Trim_end(raw_bry, trim, raw_bry.length)));
@@ -297,5 +302,8 @@ class Bry__fxt {
 	}
 	public void Test__repeat_bry(String s, int count, String expd) {
 		Gftest.Eq__str(expd, Bry_.Repeat_bry(Bry_.new_u8(s), count));
+	}
+	public void Test__xcase__build__all(boolean upper, String src, String expd) {
+		Gftest.Eq__str(expd, Bry_.Xcase__build__all(tmp, upper, Bry_.new_u8(src)));
 	}
 }

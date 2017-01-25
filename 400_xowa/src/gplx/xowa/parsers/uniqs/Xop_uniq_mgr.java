@@ -22,6 +22,7 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 	private final    Bry_bfr key_bfr = Bry_bfr_.New_w_size(32);
 	private int idx = -1;
 	public void Clear() {idx = -1; general_trie.Clear();}
+	public byte[] Get(byte[] key) {return (byte[])general_trie.Match_exact(key, 0, key.length);}
 	public byte[] Add(byte[] val) {		// "<b>" -> "\u007fUNIQ-item-1--QINU\u007f"
 		byte[] key = key_bfr	
 			.Add(Bry__uniq__add__bgn)
@@ -29,10 +30,6 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 			.Add(Bry__uniq__add__end).To_bry_and_clear();
 		general_trie.Add_bry_bry(key, val);
 		return key;
-	}
-	public byte[] Get(byte[] key) {return (byte[])general_trie.Match_exact(key, 0, key.length);}
-	public byte[] Unstrip_both(byte[] src) {
-		return Convert(src);
 	}
 	public byte[] Convert(byte[] src) {
 		if (general_trie.Count() == 0) return src;

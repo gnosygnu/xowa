@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import java.lang.*;
 import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.core.ios.*;
+import gplx.langs.htmls.entitys.*;
 public class Bry_ {
 	public static final String Cls_val_name = "byte[]";
 	public static final    byte[] Empty = new byte[0];
@@ -62,6 +63,7 @@ public class Bry_ {
 	public static byte[] new_u8(String str) {
 		try {
 			int str_len = str.length();							
+			if (str_len == 0) return Bry_.Empty;
 			int bry_len = new_u8__by_len(str, str_len);
 			byte[] rv = new byte[bry_len];
 			new_u8__write(str, str_len, rv, 0);
@@ -365,7 +367,7 @@ public class Bry_ {
 			||	(end < bgn)
 			)
 			return or;
-		return Mid(src, bgn, src.length);
+		return bgn == src_len ? Bry_.Empty : Mid(src, bgn, src_len);
 	}
 	public static byte[] Mid(byte[] src, int bgn, int end) {
 		try {
@@ -1001,6 +1003,33 @@ public class Bry_ {
 		}
 		return rv;
 	}
+	public static byte[] Xcase__build__all(Bry_bfr tmp, boolean upper, byte[] src) {
+		if (src == null) return null;
+		int src_bgn = 0;
+		int src_end = src.length;
+		int lbound = 96, ubound = 123;
+		if (!upper) {
+			lbound = 64; ubound =  91;
+		}
+
+		boolean dirty = false;
+		for (int i = src_bgn; i < src_end; i++) {
+			byte b = src[i];
+			if (b > lbound && b < ubound) {
+				if (!dirty) {
+					dirty = true;
+					tmp.Add_mid(src, src_bgn, i);
+				}
+				if (upper)
+					b -= 32;
+				else
+					b += 32;
+			}
+			if (dirty)
+				tmp.Add_byte(b);
+		}
+		return dirty ? tmp.To_bry_and_clear() : src;
+	}
 	public static byte[] Ucase__1st(byte[] src)						{return Xcase__1st(Bool_.Y, src);}
 	public static byte[] Lcase__1st(byte[] src)						{return Xcase__1st(Bool_.N, src);}
 	private static byte[] Xcase__1st(boolean upper, byte[] src) {
@@ -1075,5 +1104,72 @@ public class Bry_ {
 	}
 	public static byte[] Replace_nl_w_tab(byte[] src, int bgn, int end) {
 		return Bry_.Replace(Bry_.Mid(src, bgn, end), Byte_ascii.Nl, Byte_ascii.Tab);
+	}
+	public static byte[] Escape_html(byte[] src) {
+		return Escape_html(null, src, 0, src.length);
+	}
+	public static byte[] Escape_html(Bry_bfr bfr, byte[] src, int src_bgn, int src_end) {	// uses PHP rules for htmlspecialchars; REF.PHP:http://php.net/manual/en/function.htmlspecialchars.php
+		boolean dirty = false;
+		int cur = src_bgn;
+		int prv = cur;
+		boolean called_by_bry = bfr == null;
+
+		// loop over chars
+		while (true) {
+			// if EOS, exit
+			if (cur == src_end) {
+				if (dirty) {
+					bfr.Add_mid(src, prv, src_end);
+				}
+				break;
+			}
+
+			// check current byte if escaped
+			byte b = src[cur];
+			byte[] escaped = null;
+			switch (b) {
+				case Byte_ascii.Amp:        escaped = Gfh_entity_.Amp_bry; break;
+				case Byte_ascii.Quote:      escaped = Gfh_entity_.Quote_bry; break;
+				case Byte_ascii.Apos:       escaped = Gfh_entity_.Apos_num_bry; break;
+				case Byte_ascii.Lt:         escaped = Gfh_entity_.Lt_bry; break;
+				case Byte_ascii.Gt:         escaped = Gfh_entity_.Gt_bry; break;
+			}
+
+			// not escaped; increment and continue
+			if (escaped == null) {
+				cur++;
+				continue;
+			}
+			// escaped
+			else {
+				dirty = true;
+				if (bfr == null) bfr = Bry_bfr_.New();
+
+				if (prv < cur)
+					bfr.Add_mid(src, prv, cur);
+				bfr.Add(escaped);
+				cur++;
+				prv = cur;
+			}
+		}
+
+		if (dirty) {
+			if (called_by_bry)
+				return bfr.To_bry_and_clear();
+			else
+				return null;
+		}
+		else {
+			if (called_by_bry) {
+				if (src_bgn == 0 && src_end == src.length)
+					return src;
+				else
+					return Bry_.Mid(src, src_bgn, src_end);
+			}
+			else {						
+				bfr.Add_mid(src, src_bgn, src_end);
+				return null;
+			}
+		}
 	}
 }

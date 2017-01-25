@@ -114,4 +114,9 @@ public class Array_ {
 			Set_at(trg, i, Get_at(add, i - srcLen));
 		return trg;
 	}
+	public static Object     Clone(Object src) {
+		Object trg = Create(Component_type(src), Len(src));
+		Copy(src, trg);
+		return trg;
+	}
 	}

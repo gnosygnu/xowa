@@ -132,6 +132,67 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		return Bry_.Mid(full_txt, page_bgn, ques_pos == Bry_find_.Not_found ? full_txt_len : ques_pos);
 	}
 
+	public byte[] Get_prefixed_text()   {return Full_txt_wo_qarg();}
+	public byte[] Get_prefixed_db_key() {return Full_db();}
+	public boolean   Has_fragment() {return anch_bgn != -1;}
+	public byte[] Get_fragment() {return Anch_txt();}
+	public byte[] Get_link_url(byte[] query, boolean query2, boolean proto) {
+		// if ( $this->isExternal() || $proto !== false ) {
+		//	$ret = $this->getFullURL( $query, $query2, $proto );
+		// }
+		// else if ( $this->getPrefixedText() === '' && $this->hasFragment() ) {
+		//	$ret = $this->getFragmentForURL();
+		// }
+		// else {
+		//	$ret = $this->getLocalURL( $query, $query2 ) . $this->getFragmentForURL();
+		// }
+		return Bry_.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, this.Full_db_w_anch());
+	}
+	public boolean Is_always_known() {
+//			$isKnown = null;
+
+		/**
+		* Allows overriding default behavior for determining if a page exists.
+		* If $isKnown is kept as null, regular checks happen. If it's
+		* a boolean, this value is returned by the isKnown method.
+		*
+		* @since 1.20
+		*
+		* @param Title $title
+		* @param boolean|null $isKnown
+		*/
+//			Hooks::run( 'TitleIsAlwaysKnown', [ $this, &$isKnown ] );
+//
+//			if ( !is_null( $isKnown ) ) {
+//				return $isKnown;
+//			}
+//
+//			if ( $this->isExternal() ) {
+//				return true;  // any interwiki link might be viewable, for all we know
+//			}
+//
+//			switch ( $this->mNamespace ) {
+//				case NS_MEDIA:
+//				case NS_FILE:
+//					// file exists, possibly in a foreign repo
+//					return (boolean)wfFindFile( $this );
+//				case NS_SPECIAL:
+//					// valid special page
+//					return SpecialPageFactory::exists( $this->getDBkey() );
+//				case NS_MAIN:
+//					// selflink, possibly with fragment
+//					return $this->mDbkeyform == '';
+//				case NS_MEDIAWIKI:
+//					// known system message
+//					return $this->hasSourceText() !== false;
+//				default:
+//					return false;
+//			}
+		return false;
+	}
+
+	public boolean Is_external() {return this.wik_bgn != -1;}
+
 	public static final byte Subpage_spr = Byte_ascii.Slash;	// EX: A/B/C		
 	public static final    Xoa_ttl Null = null;
 

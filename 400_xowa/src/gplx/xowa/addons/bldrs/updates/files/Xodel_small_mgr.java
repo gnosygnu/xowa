@@ -19,6 +19,7 @@ package gplx.xowa.addons.bldrs.updates.files; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.xowa.files.*;
+import gplx.xowa.bldrs.wkrs.*;	
 class Xodel_small_mgr {
 	public void Exec(Xowe_wiki wiki, int[] ext_max_ary) {
 		wiki.Init_assert();
@@ -53,20 +54,3 @@ class Xodel_small_mgr {
 		);
 	}
 } 
-class Xobldr__fsdb_db__delete_small_files_ {
-	public static int[] New_ext_max_ary() {
-		int[] rv = new int[Xof_ext_.Id__max];
-		Ext_max_(rv,   35, Xof_ext_.Id_svg);
-		Ext_max_(rv,   40, Xof_ext_.Id_gif);
-		Ext_max_(rv,  100, Xof_ext_.Id_png, Xof_ext_.Id_jpg, Xof_ext_.Id_jpeg);
-		Ext_max_(rv,  500, Xof_ext_.Id_tif, Xof_ext_.Id_tiff);
-		Ext_max_(rv,  500, Xof_ext_.Id_xcf);
-		Ext_max_(rv, 1000, Xof_ext_.Id_bmp);
-		Ext_max_(rv,  700, Xof_ext_.Id_webm);
-		Ext_max_(rv, 1000, Xof_ext_.Id_ogv);
-		Ext_max_(rv,  400, Xof_ext_.Id_pdf);
-		Ext_max_(rv,  700, Xof_ext_.Id_djvu);
-		return rv;
-	}
-	private static void Ext_max_(int[] ary, int max, int... exts) {for (int ext : exts) ary[ext] = max;}
-}

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*;
 import gplx.langs.htmls.*;
-import gplx.xowa.parsers.mws.*; import gplx.xowa.parsers.mws.wkrs.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.htmls.core.htmls.tidy.*;
+import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.htmls.core.htmls.tidy.*;
 public class Xop_section_mgr implements Gfo_invk {
 	private Xoae_app app; private Xowe_wiki wiki;
 	private Xow_tidy_mgr_interface tidy_mgr;

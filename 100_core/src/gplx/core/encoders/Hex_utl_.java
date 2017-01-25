@@ -87,9 +87,29 @@ public class Hex_utl_ {
 	public static void Write(byte[] bry, int bgn, int end, int val) {
 		for (int i = end - 1; i > bgn - 1; i--) {
 			int b = val % 16;
-			bry[i] = To_byte(b);
+			bry[i] = To_byte_ucase(b);
 			val /= 16;
 			if (val == 0) break;
+		}
+	}
+	public static void Write_bfr(Bry_bfr bfr, boolean lcase, int val) {
+		// count bytes
+		int val_len = 0;
+		int tmp = val;
+		while (true) {
+			tmp /= 16;
+			val_len++;
+			if (tmp == 0) break;
+		}
+
+		// fill bytes from right to left
+		int hex_bgn = bfr.Len();
+		bfr.Add_byte_repeat(Byte_ascii.Null, val_len);
+		byte[] bry = bfr.Bfr();
+		for (int i = 0; i < val_len; i++) {
+			int b = val % 16;
+			bry[hex_bgn + val_len - i - 1] = lcase ? To_byte_lcase(b) : To_byte_ucase(b);
+			val /= 16;
 		}
 	}
 	public static boolean Is_hex_many(byte... ary) {
@@ -123,7 +143,7 @@ public class Hex_utl_ {
 			default: throw Err_.new_parse("hexstring", Int_.To_str(val));
 		}
 	}
-	private static byte To_byte(int v) {
+	private static byte To_byte_ucase(int v) {
 		switch (v) {
 			case  0: return Byte_ascii.Num_0; case  1: return Byte_ascii.Num_1; case  2: return Byte_ascii.Num_2; case  3: return Byte_ascii.Num_3; case  4: return Byte_ascii.Num_4;
 			case  5: return Byte_ascii.Num_5; case  6: return Byte_ascii.Num_6; case  7: return Byte_ascii.Num_7; case  8: return Byte_ascii.Num_8; case  9: return Byte_ascii.Num_9;

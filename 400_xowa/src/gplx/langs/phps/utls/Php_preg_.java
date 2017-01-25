@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.phps.utls; import gplx.*; import gplx.langs.*; import gplx.langs.phps.*;
+import gplx.core.btries.*;
 import gplx.core.primitives.*;
 public class Php_preg_ {
 	public static byte[][] Split(Int_list list, byte[] src, int src_bgn, int src_end, byte[] dlm, boolean extend) {
@@ -27,7 +28,7 @@ public class Php_preg_ {
 		while (true) {
 			if (i == src_end) break;
 			int dlm_end = i + dlm_len;
-			if (dlm_end < src_end && Bry_.Eq(src, i, dlm_end, dlm)) {
+			if (dlm_end <= src_end && Bry_.Eq(src, i, dlm_end, dlm)) {
 				if (extend) {
 					dlm_end = Bry_find_.Find_fwd_while(src, i, src_end, dlm_nth);
 				}
@@ -42,13 +43,33 @@ public class Php_preg_ {
 
 		// create brys
 		int rv_len = list.Len() - 1;
-		if (rv_len == 1) return null;
+		if (rv_len == 1) {
+			list.Clear();
+			return null;
+		}
+		if (list.Get_at(list.Len() - 2) == src_end) {	// if 2nd to last elem == src_end, then last item is Bry_.Empty; ignore it; EX: "a''" -> "a", "''" x> "a", "''", ""
+			rv_len--;
+		}
 		byte[][] rv = new byte[rv_len][];
 		for (i = 0; i < rv_len; i += 2) {
 			rv[i    ] = Bry_.Mid(src, list.Get_at(i + 0), list.Get_at(i + 1));
 			if (i + 1 == rv_len) break;
 			rv[i + 1] = Bry_.Mid(src, list.Get_at(i + 1), list.Get_at(i + 2));
 		}
+		list.Clear();
 		return rv;
+	}
+	public static Object Match(Btrie_slim_mgr trie, Btrie_rv trv, byte[] src, int src_bgn, int src_end) {
+		int cur = src_bgn;
+		while (cur < src_end) {
+			byte b = src[cur];
+			Object o = trie.Match_at_w_b0(trv, b, src, cur, src_end);
+			if (o == null)
+				cur += gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
+			else {
+				return o;
+			}
+		}
+		return null;
 	}
 }

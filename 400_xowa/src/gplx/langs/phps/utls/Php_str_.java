@@ -16,7 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.phps.utls; import gplx.*; import gplx.langs.*; import gplx.langs.phps.*;
+import gplx.core.btries.*;
 public class Php_str_ {
+	public static int Strpos(byte[] src, byte find, int bgn, int end) {
+		return Bry_find_.Find_fwd(src, find, bgn, end);
+	}
 	public static byte[] Substr(byte[] src, int bgn) {return Substr(src, bgn, src.length);}
 	public static byte[] Substr(byte[] src, int bgn, int len) {
 		int src_len = src.length;
@@ -29,11 +33,23 @@ public class Php_str_ {
 	public static byte Substr_byte(byte[] src, int bgn) {return Substr_byte(src, bgn, src.length);}
 	public static byte Substr_byte(byte[] src, int bgn, int len) {
 		int src_len = src.length;
+		if (src_len == 0) return Byte_ascii.Null;
 		if (bgn < 0) bgn = src_len + bgn; // handle negative
 		if (bgn < 0) bgn = 0;	// handle out of bounds; EX: ("a", -1, -1)
 		int end = len < 0 ? src_len + len : bgn + len;
 		if (end > src.length) end = src.length;; // handle out of bounds;
 		return src[bgn];
+	}		
+	public static int Strspn_fwd__ary(byte[] src, boolean[] find, int bgn, int max, int src_len) {
+		if (max == -1) max = src_len;
+		int rv = 0;
+		for (int i = bgn; i < src_len; i++) {
+			if (find[src[i]] && rv < max) 
+				rv++;
+			else
+				break;
+		}
+		return rv;
 	}
 	public static int Strspn_fwd__byte(byte[] src, byte find, int bgn, int max, int src_len) {
 		if (max == -1) max = src_len;
@@ -90,5 +106,32 @@ public class Php_str_ {
 			break;
 		}
 		return rv;
+	}
+	public static byte[] Strtr(byte[] src, Btrie_slim_mgr trie, Bry_bfr tmp, Btrie_rv trv) {
+		boolean dirty = false;
+		int src_bgn = 0;
+		int src_end = src.length;
+		int i = src_bgn;
+
+		while (true) {
+			if (i == src_end) break;
+			byte b = src[i];
+			Object o = trie.Match_at_w_b0(trv, b, src, i, src_end);
+			if (o == null) {
+				if (dirty) {
+					tmp.Add_byte(b);
+				}
+				i++;
+			}
+			else {
+				if (!dirty) {
+					dirty = true;
+					tmp.Add_mid(src, 0, i);
+				}
+				tmp.Add((byte[])o);
+				i = trv.Pos();
+			}
+		}
+		return dirty ? tmp.To_bry_and_clear() : src;
 	}
 }

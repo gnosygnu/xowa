@@ -297,35 +297,21 @@ public class Bry_bfr {
 			Add_mid(val, bgn, end);
 		return this;
 	}
-	public Bry_bfr Add_bry_escape_html(byte[] val) {return Add_bry_escape_html(val, 0, val.length);}
-	public Bry_bfr Add_bry_escape_html(byte[] val, int bgn, int end) {	// uses PHP rules for htmlspecialchars; REF.PHP:http://php.net/manual/en/function.htmlspecialchars.php
-		boolean clean = true;
-		for (int i = bgn; i < end; ++i) {
-			byte[] escaped = null;
-			byte b = val[i];
-			switch (b) {
-				case Byte_ascii.Amp:        escaped = Gfh_entity_.Amp_bry; break;
-				case Byte_ascii.Quote:      escaped = Gfh_entity_.Quote_bry; break;
-				case Byte_ascii.Apos:       escaped = Gfh_entity_.Apos_num_bry; break;
-				case Byte_ascii.Lt:         escaped = Gfh_entity_.Lt_bry; break;
-				case Byte_ascii.Gt:         escaped = Gfh_entity_.Gt_bry; break;
-			}
-			if (escaped == null && clean) {
-				continue;
-			}
-			else {
-				if (clean) {
-					clean = false;
-					this.Add_mid(val, bgn, i);
-				}
-				if (escaped == null)
-					this.Add_byte(b);
-				else
-					this.Add(escaped);
-			}
+	public Bry_bfr Add_bry_many(byte[]... ary) {
+		int len = ary.length;
+		for (int i = 0; i < len; i++) {
+			byte[] bry = ary[i];
+			if (bry != null && bry.length > 0)
+				this.Add(bry);
 		}
-		if (clean)
-			Add_mid(val, bgn, end);
+		return this;
+	}
+	public Bry_bfr Add_bry_escape_html(byte[] val) {
+		if (val == null) return this;
+		return Add_bry_escape_html(val, 0, val.length);
+	}
+	public Bry_bfr Add_bry_escape_html(byte[] val, int bgn, int end) {
+		Bry_.Escape_html(this, val, bgn, end);
 		return this;
 	}
 	public Bry_bfr Add_str_u8_w_nl(String s) {Add_str_u8(s); return Add_byte_nl();}
@@ -541,6 +527,30 @@ public class Bry_bfr {
 		if (count > 0)
 			this.Del_by(count);
 		return this;
+	}
+	public Bry_bfr Trim_end_ws() {
+		if (bfr_len == 0) return this;
+		int count = 0;
+		for (int i = bfr_len - 1; i > -1; --i) {
+			byte b = bfr[i];
+			if (Trim_end_ws_ary[b])
+				++count;
+			else
+				break;
+		}
+		if (count > 0)
+			this.Del_by(count);
+		return this;
+	}
+	private static final    boolean[] Trim_end_ws_ary = Trim_end_ws_new(); 
+	private static boolean[] Trim_end_ws_new() {
+		boolean[] rv = new boolean[256];
+		rv[32] = true;
+		rv[ 9] = true;
+		rv[10] = true;
+		rv[13] = true;
+		rv[11] = true;
+		return rv;
 	}
 	public Bry_bfr Concat_skip_empty(byte[] dlm, byte[]... ary) {
 		int ary_len = ary.length;

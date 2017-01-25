@@ -109,6 +109,14 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 			Add_obj(Bry_.new_u8(ary[i]), bval);
 		return this;
 	}
+	public Btrie_slim_mgr Add_many_str(String... ary) {
+		int len = ary.length;			
+		for (int i = 0; i < len; i++) {
+			byte[] itm = Bry_.new_u8(ary[i]);
+			Add_obj(itm, itm);
+		}
+		return this;
+	}
 	public Btrie_slim_mgr Add_many_int(int val, String... ary) {return Add_many_int(val, Bry_.Ary(ary));}
 	public Btrie_slim_mgr Add_many_int(int val, byte[]... ary) {
 		int len = ary.length;

@@ -43,6 +43,9 @@ public class Bry_split__tst {
 		fxt.Test_split("a|b|c|d"		, 2, 6, "|", "b", "c");
 		fxt.Test_split("a|b|c|d"		, 2, 4, "|", "b");
 	}
+	@Test   public void Empty() {
+		fxt.Test_split("a\n\nb"         , Byte_ascii.Nl, Bool_.N, "a", "", "b");
+	}
 	@Test   public void Split_w_max() {
 		fxt.Test__split_w_max("a|b|c|d"              , Byte_ascii.Pipe, 2, "a", "b");		// max is less
 		fxt.Test__split_w_max("a"                    , Byte_ascii.Pipe, 2, "a", null);		// max is more

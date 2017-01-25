@@ -48,7 +48,7 @@ public class Bry_split_ {
 					boolean reset = true;
 					if (itm_bgn == -1) {
 						if (pos_is_last) {}							// skip dlm at bgn / end; EX: "a,"
-						else {wkr.Split(src, itm_bgn, itm_end);}	// else, process "empty" dlm; EX: ",a"
+						else {wkr.Split(src, pos, pos );}			// else, process "empty" dlm; EX: ",a"
 					}	
 					else {
 						int rv = wkr.Split(src, itm_bgn, itm_end);

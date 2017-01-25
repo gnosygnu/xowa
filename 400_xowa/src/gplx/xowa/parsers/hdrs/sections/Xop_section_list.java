@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*;
-import gplx.xowa.parsers.mws.*; import gplx.xowa.parsers.mws.wkrs.*;
+import gplx.xowa.mws.parsers.*; import gplx.xowa.mws.parsers.headings.*;
 import gplx.xowa.addons.htmls.tocs.*; import gplx.xowa.htmls.core.htmls.tidy.*;
-class Xop_section_list implements Xomw_hdr_cbk {
-	private final    Xomw_hdr_wkr hdr_wkr = new Xomw_hdr_wkr();
+class Xop_section_list implements Xomw_heading_cbk {
+	private final    Xomw_heading_wkr hdr_wkr = new Xomw_heading_wkr();
 	private final    Ordered_hash hash = Ordered_hash_.New_bry();
 	private final    Xoh_toc_mgr toc_mgr = new Xoh_toc_mgr();
 	private byte[] src;
@@ -92,7 +92,7 @@ class Xop_section_list implements Xomw_hdr_cbk {
 
 		return new int[] {src_bgn, src_end};
 	}
-	public void On_hdr_seen(Xomw_parser_ctx pctx, Xomw_hdr_wkr wkr) {
+	public void On_hdr_seen(Xomw_parser_ctx pctx, Xomw_heading_wkr wkr) {
 		// get key by taking everything between ==; EX: "== abc ==" -> " abc "
 		byte[] src = wkr.Src();
 		int hdr_txt_bgn = wkr.Hdr_lhs_end();
@@ -117,5 +117,5 @@ class Xop_section_list implements Xomw_hdr_cbk {
 		Xop_section_itm itm = new Xop_section_itm(hash.Count(), num, key, wkr.Hdr_bgn(), wkr.Hdr_end());
 		hash.Add(key, itm);
 	}
-	public void On_src_done(Xomw_parser_ctx pctx, Xomw_hdr_wkr wkr) {}
+	public void On_src_done(Xomw_parser_ctx pctx, Xomw_heading_wkr wkr) {}
 }

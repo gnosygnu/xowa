@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.phps.utls; import gplx.*; import gplx.langs.*; import gplx.langs.phps.*;
-import org.junit.*; import gplx.core.tests.*;
+import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*;
 public class Php_str___tst {
 	private final    Php_str___fxt fxt = new Php_str___fxt();
 	@Test  public void Strspn_fwd__byte() {
@@ -43,6 +43,14 @@ public class Php_str___tst {
 		fxt.Test__substr("abcde"                   , -1, "e");
 		fxt.Test__substr("abcde"                   , -3, -1, "cd");
 	}
+	@Test   public void Strtr() {
+		fxt.Init__strtr_by_trie("01", "89", "02", "79");
+		fxt.Test__strtr_by_trie("abc"           , "abc");                 // found=none
+		fxt.Test__strtr_by_trie("ab_01_cd"      , "ab_89_cd");            // found=one
+		fxt.Test__strtr_by_trie("ab_01_cd_02_ef", "ab_89_cd_79_ef");      // found=many
+		fxt.Test__strtr_by_trie("01_ab"         , "89_ab");               // BOS
+		fxt.Test__strtr_by_trie("ab_01"         , "ab_89");               // EOS
+	}
 }
 class Php_str___fxt {
 	public void Test__strspn_fwd__byte(String src_str, byte find, int bgn, int max, int expd) {
@@ -62,5 +70,18 @@ class Php_str___fxt {
 	public void Test__substr(String src_str, int bgn, String expd) {Test__substr(src_str, bgn, String_.Len(src_str), expd);}
 	public void Test__substr(String src_str, int bgn, int len, String expd) {
 		Gftest.Eq__str(expd, Php_str_.Substr(Bry_.new_u8(src_str), bgn, len));
+	}
+	private Btrie_slim_mgr strtr_trie;
+	public void Init__strtr_by_trie(String... kvs) {
+		if (strtr_trie == null) strtr_trie = Btrie_slim_mgr.cs();
+		int len = kvs.length;
+		for (int i = 0; i < len; i += 2) {
+			strtr_trie.Add_str_str(kvs[i], kvs[i + 1]);
+		}
+	}
+	public void Test__strtr_by_trie(String src, String expd) {
+		Bry_bfr tmp = Bry_bfr_.New();
+		Btrie_rv trv = new Btrie_rv();
+		Gftest.Eq__str(expd, Php_str_.Strtr(Bry_.new_u8(src), strtr_trie, tmp, trv));
 	}
 }

@@ -46,3 +46,12 @@ public class Xocfg_dflt_mgr {
 		gfs_mgr.Run_url(url);
 	}
 }
+class Xocfg_dflt_itm__static implements Gfo_invk {
+	private final    String val;
+	public Xocfg_dflt_itm__static(String val) {
+		this.val = val;
+	}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		return val;
+	}
+}

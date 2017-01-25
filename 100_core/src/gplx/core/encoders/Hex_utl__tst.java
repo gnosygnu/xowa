@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.encoders; import gplx.*; import gplx.core.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.tests.*;
 public class Hex_utl__tst {
 	private final    Hex_utl__fxt fxt = new Hex_utl__fxt();
 	@Test  public void To_int() {
@@ -46,6 +46,15 @@ public class Hex_utl__tst {
 		fxt.Test__write("[00000000]", 1, 9,  15, "[0000000F]");
 		fxt.Test__write("[00000000]", 1, 9, 255, "[000000FF]");
 	}
+	@Test   public void Write_bfr() {
+		fxt.Test__write_bfr(Bool_.Y,              0, "0");
+		fxt.Test__write_bfr(Bool_.Y,             15, "f");
+		fxt.Test__write_bfr(Bool_.Y,             16, "10");
+		fxt.Test__write_bfr(Bool_.Y,             32, "20");
+		fxt.Test__write_bfr(Bool_.Y,            255, "ff");
+		fxt.Test__write_bfr(Bool_.Y,            256, "100");
+		fxt.Test__write_bfr(Bool_.Y, Int_.Max_value, "7fffffff");
+	}
 }
 class Hex_utl__fxt {
 	public void Test__write(String s, int bgn, int end, int val, String expd) {
@@ -62,6 +71,11 @@ class Hex_utl__fxt {
 	public void Test__to_str(int val, int pad, String expd) {
 		String actl = Hex_utl_.To_str(val, pad);
 		Tfds.Eq(expd, actl);
+	}
+	private final    Bry_bfr bfr = Bry_bfr_.New();
+	public void Test__write_bfr(boolean lcase, int val, String expd) {
+		Hex_utl_.Write_bfr(bfr, lcase, val);
+		Gftest.Eq__str(expd, bfr.To_str_and_clear());
 	}
 //		public void Test__encode_bry(int val, int pad, String expd) {
 //			String actl = Hex_utl_.To_str(val, pad);
