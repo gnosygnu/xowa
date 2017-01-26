@@ -47,6 +47,7 @@ public class Xop_mediawiki_mgr {
 		Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Make(Bry_.new_u8(domain_str), app.Fsys_mgr().Wiki_dir());
 		if (mode_is_prod) {
 			wiki.Init_by_wiki();
+			wiki.File_mgr().Version_2_y_(); // must set to version_2 else video files will use old v1 Meta_code; DATE:2017-01-26
 			wiki.File_mgr().Fsdb_mode().Tid__v2__mp__y_();	// must set to mass_parse mode, else will use old v1 Meta_code for xfer_itm and url_bldr; DATE:2017-01-26
 		}
 		return new Xop_mediawiki_wkr(wiki, loader);
