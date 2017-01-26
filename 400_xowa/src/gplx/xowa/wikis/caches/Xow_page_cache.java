@@ -38,6 +38,9 @@ public class Xow_page_cache {
 			}
 		}
 	}
+	public void Del(byte[] ttl_full_db) {
+		cache.Del(ttl_full_db);
+	}
 	public Xow_page_cache_itm Get_or_load_as_itm(Xoa_ttl ttl) {
 		byte[] ttl_full_db = ttl.Full_db();
 		Xow_page_cache_itm rv = (Xow_page_cache_itm)cache.Get_by(ttl_full_db);

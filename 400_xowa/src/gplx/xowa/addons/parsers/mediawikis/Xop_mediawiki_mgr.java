@@ -37,8 +37,10 @@ public class Xop_mediawiki_mgr {
 		, root_dir.GenSubDir_nest("user", "anonymous", "wiki")
 		, gplx.xowa.apps.boots.Xoa_cmd_arg_mgr.Bin_dir_name()
 		);
-		if (mode_is_prod)
+		if (mode_is_prod) {
 			app.Init_by_app();
+			app.Stage_(gplx.xowa.apps.Xoa_stage_.Tid_launch);	// must set to Launch, else wiki.init_needed will never be false; DATE:2017-01-26
+		}
 	}
 	public Xop_mediawiki_wkr Make(String domain_str) {return Make(domain_str, null);}
 	public Xop_mediawiki_wkr Make(String domain_str, Xop_mediawiki_loader loader) {

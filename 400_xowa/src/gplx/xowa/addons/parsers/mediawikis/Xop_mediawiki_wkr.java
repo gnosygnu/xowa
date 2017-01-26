@@ -35,6 +35,8 @@ public class Xop_mediawiki_wkr {
 		wiki.Parser_mgr().Scrib().Core_term();
 		wiki.Appe().Wiki_mgr().Wdata_mgr().Clear();
 	}
+	public void Clear_cache() {
+	}
 	public String Parse(String page, String wikitext) {
 		Xoa_ttl ttl = wiki.Ttl_parse(Bry_.new_u8(page));
 
