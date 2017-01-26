@@ -24,8 +24,8 @@ public class Pfunc_urlencode extends Pf_func_base {	// EX: {{urlencode:a b}} -> 
 	@Override public boolean Func_require_colon_arg() {return true;}
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] argx = Eval_argx(ctx, src, caller, self); if (argx == Bry_.Empty) return;
-		gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Encode(urlEncodeBfr, argx);
-		bfr.Add_bfr_and_preserve(urlEncodeBfr);
-		urlEncodeBfr.Clear();
-	}	private Bry_bfr urlEncodeBfr = Bry_bfr_.New_w_size(128);
+		Bry_bfr tmp_bfr = ctx.Wiki().Parser_mgr().Tmp_bfr();
+		gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Encode(tmp_bfr, argx);
+		bfr.Add_bfr_and_clear(tmp_bfr);
+	}
 }
