@@ -66,7 +66,10 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 		return rv;
 	}
 	public Xow_wiki Make(byte[] domain_bry, Io_url wiki_root_dir) {
+		// init domain
 		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(domain_bry);
+
+		// get lang from domain; if not wmf, default to en
 		byte[] lang_key = domain_itm.Lang_actl_key();
 		if (lang_key == Xol_lang_stub_.Key__unknown) lang_key = Xol_lang_itm_.Key_en;	// unknown langs default to english; note that this makes nonwmf english by default
 		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_new(lang_key);			
@@ -74,7 +77,11 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 			lang = new Xol_lang_itm(app.Lang_mgr(), Xol_lang_itm_.Key_en).Kwd_mgr__strx_(true);	// create a new english lang, but enable strx functions; DATE:2015-08-23
 			Xol_lang_itm_.Lang_init(lang);
 		}
-		Xow_ns_mgr ns_mgr = Xow_ns_mgr_.default_(lang.Case_mgr()); //app.Dbmeta_mgr().Ns__get_or_load(key);
+
+		// load ns from site_meta
+		Xow_ns_mgr ns_mgr = app.Dbmeta_mgr().Ns__get_or_load(domain_bry);
+		if (ns_mgr.Ids_len() == 0) ns_mgr = Xow_ns_mgr_.default_(lang.Case_mgr());	// non-wmf wikis will use default ns_mgr
+
 		return new Xowe_wiki(app, lang, ns_mgr, domain_itm, wiki_root_dir);
 	}
 	public Xow_wiki		Import_by_url(Io_url url) {return Xoa_wiki_mgr_.Import_by_url(app, this, url);}
