@@ -48,14 +48,10 @@ class Xomp_make_lnki {
 		while (true) {
 			// load rows
 			Gfo_usr_dlg_.Instance.Prog_many("", "", "merging rows; bgn_uid=~{0} end_uid=~{1}", cur_xomp_uid, cur_xomp_uid + uid_count);
-			int tmp_xomp_uid_max = -1;	// maximum uid for a grp of wkrs; EX: looping over 8 wkrs with xomp_uid range of 1 - 1000; max xomp_uid may only be 990 b/c pages are missing / failed
 			for (int i = 0; i < wkr_count; ++i) {
 				Xomp_wkr_db src_wkr_db = src_mgr_dbs[i];
-				int wkr_uid_max = tmp_xomp_uid_max;
 				for (Xomp_make_merger merger : merger_ary)
-					wkr_uid_max = merger.Merger__load(src_mgr_db, src_wkr_db, cur_xomp_uid, cur_xomp_uid + uid_count);
-				if (wkr_uid_max > tmp_xomp_uid_max)
-					tmp_xomp_uid_max = wkr_uid_max;
+					merger.Merger__load(src_mgr_db, src_wkr_db, cur_xomp_uid, cur_xomp_uid + uid_count);
 			}
 
 			// save rows
@@ -63,8 +59,8 @@ class Xomp_make_lnki {
 				merger.Merger__save();
 
 			// NOTE: not ">=" else small wikis will fail with 0 images; EX:cs.q; DATE:2016-09-04
-			if (tmp_xomp_uid_max > max_xomp_uid || tmp_xomp_uid_max == -1) break;	// if max_xomp_uid seen, break; note that ">" necessary because max_xomp_uid may not be in set of wkrs;
 			cur_xomp_uid += uid_count;	// note that this sequentially counts up by uid_count (1000), so inevitable that cur_xomp_uid will exceed wkr_uid_max
+			if (cur_xomp_uid > max_xomp_uid) break;	// if max_xomp_uid seen, break; note that ">" necessary because max_xomp_uid may not be in set of wkrs;
 		}
 
 		// save rows
