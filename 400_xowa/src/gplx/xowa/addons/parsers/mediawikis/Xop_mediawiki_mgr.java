@@ -25,8 +25,10 @@ public class Xop_mediawiki_mgr {
 		Io_url root_dir = Io_url_.new_dir_(root_str);
 
 		this.mode_is_prod = mode_is_prod;
-		if (mode_is_prod)
+		if (mode_is_prod) {
 			gplx.dbs.Db_conn_bldr.Instance.Reg_default_sqlite();
+			gplx.core.envs.Env_.Init_swt(String_.Ary_empty, Type_adp_.ClassOf_obj(this));	// must call Init else unit_testing will be true
+		}
 		this.app = new Xoae_app(usr_dlg, gplx.xowa.apps.Xoa_app_mode.Itm_cmd
 		, root_dir
 		, root_dir.GenSubDir("wiki")

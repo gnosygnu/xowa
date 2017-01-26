@@ -20,7 +20,6 @@ import gplx.core.btries.*; import gplx.core.intls.*; import gplx.core.envs.*; im
 import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.langs.kwds.*;
 public class Xol_func_regy {
-	private final    Object thread_lock = new Object();
 	private final    Xoa_lang_mgr lang_mgr; private final    Xol_lang_itm lang;
 	private final    Btrie_slim_mgr cs_trie = Btrie_slim_mgr.cs(), ci_trie = Btrie_slim_mgr.ci_u8();
 	public Xol_func_regy(Xoa_lang_mgr lang_mgr, Xol_lang_itm lang) {this.lang_mgr = lang_mgr; this.lang = lang;}
@@ -103,19 +102,10 @@ public class Xol_func_regy {
 				return rv;
 			// else {}							// func_name doesn't match cur_name; continue below; EX: NAME"+"SPACENUMBER passed in and matches NAME"+"SPACE (which is cs); note that NAME"+"SPACENUMBER only exists in ci
 		}
-		LowerAry(src, bgn, end);
-		byte[] ary = lang.Case_mgr().Case_build_lower(lower_ary, 0, end - bgn);
-		Xot_defn rv_alt = (Xot_defn)ci_trie.Match_bgn(ary, 0, end - bgn);
+		byte[] ary = lang.Case_mgr().Case_build_lower(src, bgn, end);	// NOTE: cannot call Case_reuse_lower b/c some langs (Turkish) may have differently-sized brys between upper and lower; DATE:2017-01-26
+		Xot_defn rv_alt = (Xot_defn)ci_trie.Match_bgn(ary, 0, ary.length);
 		return (rv != null && rv_alt == null) 
 			? rv		// name not found in ci, but name was found in cs; return cs; handles NAME"+"SPACENUMBER
 			: rv_alt;	// else return rv_alt
 	}
-	private void LowerAry(byte[] src, int bgn, int end) {
-		synchronized (thread_lock) {
-			int len = end - bgn;
-			if (len > lower_ary_len) {lower_ary = new byte[len]; lower_ary_len = len;}
-			lower_ary_len = len;
-			Array_.Copy_to(src, bgn, lower_ary, 0, len);
-		}
-	}	byte[] lower_ary = new byte[255]; int lower_ary_len = 255;
 }
