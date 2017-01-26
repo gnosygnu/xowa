@@ -26,21 +26,22 @@ class Xomp_resume_mgr {
 
 		// clear out page_status
 		Gfo_usr_dlg_.Instance.Prog_many("", "", "xomp_resume:clearing status");
-		mgr_conn.Exec_sql("UPDATE xomp_page SET page_status = 0");
+		mgr_conn.Exec_sql("UPDATE xomp_page SET page_status = 0, xomp_wkr_id = -1");
 
 		// update mgr.xomp_page.status for each row in wkr.html
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(mgr_conn);
 		int wkrs_len = mgr_db.Tbl__wkr().Select_count();
-		String sql = Db_sql_.Make_by_fmt
-		( String_.Ary
-		( "UPDATE  xomp_page"
-		, "SET     page_status = 1"
-		, "WHERE   page_id IN (SELECT page_id FROM <wkr_db>html)"
-		));
 		for (int i = 0; i < wkrs_len; ++i) {
 			Gfo_usr_dlg_.Instance.Prog_many("", "", "xomp_resume:updating status; wkr=~{0}", i);
 			Xomp_wkr_db wkr_db = Xomp_wkr_db.New(mgr_db.Dir(), i);
 			attach_mgr.Conn_links_(new Db_attach_itm("wkr_db", wkr_db.Conn()));
+			String sql = Db_sql_.Make_by_fmt
+			( String_.Ary
+			( "UPDATE  xomp_page"
+			, "SET     page_status = 1"
+			, ",       xomp_wkr_id = {0}"
+			, "WHERE   page_id IN (SELECT page_id FROM <wkr_db>html)"
+			), i);
 			attach_mgr.Exec_sql(sql);
 		}
 	}

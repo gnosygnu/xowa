@@ -23,6 +23,7 @@ class Xomp_make_merger__lnki_temp extends Xomp_make_merger__base {
 	private Xob_lnki_temp_tbl trg_tbl__lnki_temp;
 	@Override protected Db_tbl	Init__trg_tbl(Xob_db_file trg_db) {
 		this.trg_tbl__lnki_temp = new Xob_lnki_temp_tbl(trg_db.Conn());
+		trg_db.Conn().Meta_tbl_remake(trg_tbl__lnki_temp);
 		return trg_tbl__lnki_temp;
 	}
 	@Override protected String	Init__src_fld__page_id()			{return "lnki_page_id";}

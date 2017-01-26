@@ -43,7 +43,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public int					Lnki_h()					{return lnki_h;} private int lnki_h;
 	public double				Lnki_time()					{return lnki_time;} private double lnki_time;
 	public int					Lnki_page()					{return lnki_page;} private int lnki_page;
-	public boolean					Orig_exists()				{return orig_exists;} private boolean orig_exists;
+	public boolean				Orig_exists()				{return orig_exists;} private boolean orig_exists;
 	public byte					Orig_repo_id()				{return orig_repo_id;} private byte orig_repo_id;
 	public byte[]				Orig_repo_name()			{return orig_repo_name;} private byte[] orig_repo_name;
 	public byte[]				Orig_ttl()					{return orig_ttl;} private byte[] orig_ttl;
@@ -53,7 +53,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public int					Orig_h()					{return orig_h;} private int orig_h;
 	public byte[]				Orig_redirect()				{return orig_redirect;} private byte[] orig_redirect;
 	public long					Orig_file_len()				{return orig_file_len;} private long orig_file_len;	// used for filtering downloads by file_max
-	public boolean					File_is_orig()				{return file_is_orig;} private boolean file_is_orig; // SEE:NOTE_1:Lnki_thumbable
+	public boolean				File_is_orig()				{return file_is_orig;} private boolean file_is_orig; // SEE:NOTE_1:Lnki_thumbable
 	public int					File_w()					{return file_w == -1 ? html_w : file_w;} private int file_w = -1;	// NOTE: for itm_meta, file_w == html_w
 	public int					Html_uid()					{return html_uid;} private int html_uid;
 	public byte					Html_elem_tid()				{return html_elem_tid;} private byte html_elem_tid;
@@ -63,9 +63,9 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public Io_url				Html_orig_url()				{return html_orig_url;} private Io_url html_orig_url = Io_url_.Empty;	// needed else null_err
 	public int					Html_gallery_mgr_h()		{return html_gallery_mgr_h;} private int html_gallery_mgr_h;
 	public Js_img_wkr			Html_img_wkr()				{return html_img_wkr;} private Js_img_wkr html_img_wkr;
-	public boolean					File_exists()				{return file_exists;} private boolean file_exists;
-	public boolean				File_exists_in_cache()		{return false;}
-	public boolean					Dbmeta_is_new()				{return meta_itm.State_new();}
+	public boolean				File_exists()				{return file_exists;} private boolean file_exists;
+	public boolean   			File_exists_in_cache()		{return false;}
+	public boolean				Dbmeta_is_new()				{return meta_itm.State_new();}
 	public void					Html_elem_tid_(byte v)		{html_elem_tid = v;}
 	public void					Html_size_(int w, int h)	{this.html_w = w; this.html_h = h;}
 	public void					Html_gallery_mgr_h_(int v)	{html_gallery_mgr_h = v;} 
