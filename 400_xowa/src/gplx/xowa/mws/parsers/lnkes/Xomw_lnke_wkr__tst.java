@@ -45,7 +45,8 @@ class Xomw_lnke_wkr__fxt {
 	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
 	private boolean apos = true;
 	public Xomw_lnke_wkr__fxt() {
-		wkr.Init_by_wiki(Xomw_parser.Protocols__dflt());
+		Xomw_regex_space regex_space = new Xomw_regex_space();
+		wkr.Init_by_wiki(Xomw_parser.Protocols__dflt(), new Xomw_regex_url(regex_space), regex_space);
 	}
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);

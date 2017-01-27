@@ -26,12 +26,16 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private int autonumber;
 	private final    Xomw_linker linker;
 	private final    Xomwh_atr_mgr attribs = new Xomwh_atr_mgr();
+	private Xomw_regex_url regex_url;
+	private Xomw_regex_space regex_space;
 	public Xomw_lnke_wkr(Xomw_parser mgr) {
 		this.tmp = mgr.Tmp();
 		this.linker = mgr.Linker();
 	}
-	public void Init_by_wiki(Btrie_slim_mgr protocol_trie) {
+	public void Init_by_wiki(Btrie_slim_mgr protocol_trie, Xomw_regex_url regex_url, Xomw_regex_space regex_space) {
 		this.protocol_trie = protocol_trie;
+		this.regex_url = regex_url;
+		this.regex_space = regex_space;
 	}
 	public void Replace_external_links(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
 		// XO.PBFR
@@ -101,14 +105,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			
 			// check for one-or-more url chars; [^][<>"\\x00-\\x20\\x7F\p{Zs}]
 			int domain_bgn = cur;
-			while (true) {
-				byte b = src[cur];
-				Object url_char_byte = invalid_url_chars_trie.Match_at_w_b0(trv, b, src, cur, src_end);
-				if (url_char_byte == null)
-					cur += gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
-				else
-					break;
-			}
+			cur = regex_url.Find_fwd_while(trv, src, domain_bgn, src_end);
 			if (cur - domain_bgn == 0) {
 				bfr.Add_mid(src, prv, cur);
 				prv = cur;
@@ -116,14 +113,8 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 			int url_end = cur;
 
-			// get ws (if any)
-			int ws_bgn = -1;
-			while (true) {
-				Object space_byte = space_chars_trie.Match_at(trv, src, cur, src_end);
-				if (space_byte == null) break;
-				if (ws_bgn == -1) ws_bgn = cur;
-				cur += ((Int_obj_val)space_byte).Val();
-			}
+			// skip ws
+			cur = regex_space.Find_fwd_while(trv, src, cur, src_end);
 
 			// get text (if any)
 			int text_bgn = -1, text_end = -1;
@@ -244,27 +235,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 	, Link_type__autonumber     = Bry_.new_a7("autonumber")
 	;
 
-	private static final    Btrie_slim_mgr
-	  invalid_url_chars_trie  = New__invalid_url_chars_trie()
-	, space_chars_trie        = New__space_chars_trie()
-	, invalid_text_chars_trie = New__invalid_text_chars_trie()
-	;
-	private static Btrie_slim_mgr New__invalid_url_chars_trie() {	// REGEX:[^][<>"\\x00-\\x20\\x7F\p{Zs}]; NOTE: val is just a marker
-		Btrie_slim_mgr rv = Btrie_slim_mgr.cs();
-		rv.Add_str_byte__many(Byte_.Zero, "[", "]", "<", ">", "\"");
-		for (byte i = 0; i < 33; i++) {
-			rv.Add_bry_byte(new byte[] {i}, Byte_.Zero);
-		}
-		rv.Add_bry_byte(Bry_.New_by_ints(127), Byte_.Zero);	// x7F
-		rv.Add_bry_byte(Bry_.New_by_ints(227, 128, 128), Byte_.Zero);	// \p{Zs}	// e3 80 80; https://phabricator.wikimedia.org/T21052
-		return rv;
-	}
-	private static Btrie_slim_mgr New__space_chars_trie() { // REGEX:\p{Zs}; NOTE: val is key.length
-		Btrie_slim_mgr rv = Btrie_slim_mgr.cs();
-		New__trie_itm__by_len(rv, 32);
-		New__trie_itm__by_len(rv, 227, 128, 128);  // \p{Zs}	// e3 80 80; https://phabricator.wikimedia.org/T21052
-		return rv;
-	}
+	private static final    Btrie_slim_mgr invalid_text_chars_trie = New__invalid_text_chars_trie();
 	private static Btrie_slim_mgr New__invalid_text_chars_trie() { // REGEX:([^\]\\x00-\\x08\\x0a-\\x1F]*?); NOTE: val is key.length
 		Btrie_slim_mgr rv = Btrie_slim_mgr.cs();
 		New__trie_itm__by_len(rv, Byte_ascii.Brack_end);

@@ -19,7 +19,7 @@ package gplx.xowa.mws.parsers; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.btries.*; import gplx.core.net.*;
 import gplx.xowa.mws.parsers.prepros.*; import gplx.xowa.mws.parsers.headings.*;
 import gplx.xowa.mws.parsers.quotes.*; import gplx.xowa.mws.parsers.tables.*; import gplx.xowa.mws.parsers.hrs.*; import gplx.xowa.mws.parsers.nbsps.*;
-import gplx.xowa.mws.parsers.lnkes.*; import gplx.xowa.mws.parsers.lnkis.*;
+import gplx.xowa.mws.parsers.lnkes.*; import gplx.xowa.mws.parsers.lnkis.*; import gplx.xowa.mws.parsers.magiclinks.*;
 import gplx.xowa.mws.utls.*; import gplx.xowa.mws.linkers.*;
 public class Xomw_parser {
 	private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();
@@ -29,10 +29,13 @@ public class Xomw_parser {
 	private final    Xomw_nbsp_wkr nbsp_wkr = new Xomw_nbsp_wkr();
 	private final    Xomw_block_level_pass block_wkr = new Xomw_block_level_pass();
 	private final    Xomw_heading_wkr heading_wkr = new Xomw_heading_wkr();
+	private final    Xomw_magiclinks_wkr magiclinks_wkr = new Xomw_magiclinks_wkr();
 	private final    Xomw_link_renderer link_renderer = new Xomw_link_renderer();
 	private final    Xomw_link_holders holders;
 	private final    Xomw_heading_cbk__html heading_wkr_cbk;
 	private final    Btrie_slim_mgr protocols_trie;
+	private static Xomw_regex_space regex_space;
+	private static Xomw_regex_url regex_url;
 	private final    Btrie_rv trv = new Btrie_rv();
 	private int marker_index = 0;
 	// private final    Xomw_prepro_wkr prepro_wkr = new Xomw_prepro_wkr();
@@ -51,10 +54,16 @@ public class Xomw_parser {
 		this.lnke_wkr = new Xomw_lnke_wkr(this);
 		this.lnki_wkr = new Xomw_lnki_wkr(this, holders, link_renderer, protocols_trie);
 		this.heading_wkr_cbk = new Xomw_heading_cbk__html();
+		if (regex_space == null) {
+			synchronized (Type_adp_.ClassOf_obj(this)) {
+				regex_space = new Xomw_regex_space();
+				regex_url = new Xomw_regex_url(regex_space);
+			}
+		}
 	}
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		linker.Init_by_wiki(wiki.Lang().Lnki_trail_mgr().Trie());
-		lnke_wkr.Init_by_wiki(protocols_trie);
+		lnke_wkr.Init_by_wiki(protocols_trie, regex_url, regex_space);
 		lnki_wkr.Init_by_wiki(wiki);
 	}
 	public void Internal_parse(Xomw_parser_bfr pbfr, byte[] text) {
@@ -107,8 +116,8 @@ public class Xomw_parser {
 		// replaceInternalLinks may sometimes leave behind
 		// absolute URLs, which have to be masked to hide them from replaceExternalLinks
 		Xomw_parser_bfr_.Replace(pbfr, Bry__marker__noparse, Bry_.Empty);
+		magiclinks_wkr.Do_magic_links(pctx, pbfr);
 
-//			$text = $this->doMagicLinks($text);
 //			$text = $this->formatHeadings($text, $origText, $isMain);
 	}
 

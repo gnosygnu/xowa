@@ -21,37 +21,9 @@ public class Xomw_parser__tst {
 	private final    Xomw_parser__fxt fxt = new Xomw_parser__fxt();
 	@Test  public void Basic() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
-		( "== heading_1 =="
-		, "para_1"
-		, "== heading_2 =="
-		, "para_2"
-		, "-----"
-		, "{|"
-		, "|-"
-		, "|a"
-		, "|}"
-		, "''italics''"
-		, "[https://a.org b]"
-		, "[[A|abc]]"
-		, "a »b« &#160;!important c"
+		("a https://c.org b"
 		), String_.Concat_lines_nl_skip_last
-		( "<h2> heading_1 </h2>"
-		, "<p>para_1"
-		, "</p>"
-		, "<h2> heading_2 </h2>"
-		, "<p>para_2"
-		, "</p>"
-		, "<hr />"
-		, "<table>"
-		, ""
-		, "<tr>"
-		, "<td>a"
-		, "</td></tr></table>"
-		, "<p><i>italics</i>"
-		, "<a class=\"external text\" rel=\"nofollow\" href=\"https://a.org\">b</a>"
-		, "<a href=\"/wiki/A\" title=\"A\">abc</a>"
-		, "a&#160;»b«&#160; !important c"
-		, "</p>"
+		( ""
 		));
 	}		
 }

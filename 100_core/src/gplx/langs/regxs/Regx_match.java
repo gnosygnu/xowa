@@ -24,5 +24,5 @@ public class Regx_match {
 	public int Find_end() {return find_end;} int find_end;
 	public int Find_len() {return find_end - find_bgn;}
 	public Regx_group[] Groups() {return groups;} Regx_group[] groups = Regx_group.Ary_empty;
-	public static final Regx_match[] Ary_empty = new Regx_match[0];
+	public static final    Regx_match[] Ary_empty = new Regx_match[0];
 }

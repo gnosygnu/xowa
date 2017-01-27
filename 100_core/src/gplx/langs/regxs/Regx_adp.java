@@ -40,6 +40,7 @@ public class Regx_adp {
 		return (Regx_match[])rv.To_ary(Regx_match.class);
 	}
 		private Pattern under;
+	public Pattern Under() {return under;}
 	void Under_sync() {
 		try {under = Pattern.compile(pattern, Pattern.DOTALL | Pattern.UNICODE_CHARACTER_CLASS);}	// JRE.7:UNICODE_CHARACTER_CLASS; added during %w fix for en.w:A#; DATE:2015-06-10 
 		catch (Exception e) {	// NOTE: if invalid, then default to empty pattern (which should return nothing); EX:d:〆る generates [^]; DATE:2013-10-20
