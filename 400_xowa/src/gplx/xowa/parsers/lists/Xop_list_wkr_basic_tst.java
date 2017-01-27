@@ -260,6 +260,20 @@ public class Xop_list_wkr_basic_tst {
 			,	fxt.tkn_list_end_(10).List_path_(0)
 			);
 	}
+	@Test  public void Mix_tblw_w_space() {
+		fxt.Test_html_full_str(": {|\n|a\n|}", String_.Concat_lines_nl_skip_last
+		( "<dl>"
+		, "  <dd>"
+		, "    <table>"
+		, "      <tr>"
+		, "        <td>a"
+		, "        </td>"
+		, "      </tr>"
+		, "    </table>"
+		, "  </dd>"
+		, "</dl>"
+		));
+	}
 	@Test  public void Dif_lvls_1_3_1() {
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 			(	"*1"

@@ -373,7 +373,9 @@ public class Xop_fxt {
 		Tfds.Eq_str_lines(gplx.langs.htmls.Gfh_utl.Replace_apos(expd), actl, raw);
 	}
 
-	public void Test_str_full(String raw, String expd, String actl) {Tfds.Eq_str_lines(expd, actl, raw);}
+	public void Test_str_full(String raw, String expd, String actl) {
+		Tfds.Eq_str_lines(expd, actl, raw);
+	}
 	public void Test_str_part_y(String actl, String... expd_parts) {
 		int expd_parts_len = expd_parts.length;
 		for (int i = 0; i < expd_parts_len; i++) {

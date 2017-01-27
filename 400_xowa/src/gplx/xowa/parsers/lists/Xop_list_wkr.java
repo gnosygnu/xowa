@@ -89,12 +89,13 @@ public class Xop_list_wkr implements Xop_ctx_wkr {
 				ctx.Empty_ignored_y_();
 			}
 		}
-		if (allDd && cur_pos < src_len - 2 && src[cur_pos] == '{' && src[cur_pos + 1] == '|') // NOTE: if indent && next == {| then invoke table; EX: ":::{|"
-			return ctx.Tblw().Make_tkn_bgn(ctx, tkn_mkr, root, src, src_len, cur_pos, cur_pos + 2, false, Xop_tblw_wkr.Tblw_type_tb, Xop_tblw_wkr.Called_from_list, -1, -1);	// NOTE: ws_enabled must be set to true; see test for Adinkras; Cato the Elder
-		else {
-			dd_chk = symByt == Xop_list_tkn_.List_itmTyp_dt;
-			return cur_pos;
+		if (allDd) { // NOTE: if indent && next == {| then invoke table; EX: ":::{|"
+			int tblw_bgn = Bry_find_.Find_fwd_while(src, cur_pos, src_len, Byte_ascii.Space);  // skip spaces; EX: ": {|" DATE:2017-01-26
+			if (tblw_bgn < src_len - 2 && src[tblw_bgn] == '{' && src[tblw_bgn + 1] == '|')	   // check if next chars are "{|"
+				return ctx.Tblw().Make_tkn_bgn(ctx, tkn_mkr, root, src, src_len, tblw_bgn, tblw_bgn+ 2, false, Xop_tblw_wkr.Tblw_type_tb, Xop_tblw_wkr.Called_from_list, -1, -1);	// NOTE: ws_enabled must be set to true; see test for Adinkras; Cato the Elder
 		}
+		dd_chk = symByt == Xop_list_tkn_.List_itmTyp_dt;
+		return cur_pos;
 	}
 	public void MakeTkn_end(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, Xop_list_tkn bgn, byte sub_last) {
 		// boolean empty_ignored = ctx.Empty_ignored(); // commented; see below; DATE:2014-06-24
