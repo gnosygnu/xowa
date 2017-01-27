@@ -35,6 +35,7 @@ public class Xomw_parser {
 	private final    Xomw_link_holders holders;
 	private final    Xomw_heading_cbk__html heading_wkr_cbk;
 	private final    Btrie_slim_mgr protocols_trie;
+	private final    Xomw_doubleunder_data doubleunder_data = new Xomw_doubleunder_data();
 	private static Xomw_regex_space regex_space;
 	private static Xomw_regex_boundary regex_boundary;
 	private static Xomw_regex_url regex_url;
@@ -69,7 +70,7 @@ public class Xomw_parser {
 		lnke_wkr.Init_by_wiki(protocols_trie, regex_url, regex_space);
 		lnki_wkr.Init_by_wiki(wiki);
 		magiclinks_wkr.Init_by_wiki(linker, regex_boundary, regex_url);
-		doubleunder_wkr.Init_by_wiki();
+		doubleunder_wkr.Init_by_wiki(doubleunder_data, wiki.Lang());
 	}
 	public void Init_by_page(Xoa_ttl ttl) {
 		pctx.Init_by_page(ttl);

@@ -17,18 +17,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.parsers.doubleunders; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
 import gplx.core.btries.*;
-// TODO.CS: handle case sensitive keys; EX: __notoc__ should not match __NOTOC__ if cs is enabled for magic word
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 public class Xomw_doubleunder_wkr {
 	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.ci_u8();
 	private final    Btrie_rv trv = new Btrie_rv();
-	public Xomw_doubleunder_data data = new Xomw_doubleunder_data();
-	public void Init_by_wiki() {
-		// TODO.XO: pull from lang
-		trie.Add_str_byte("__TOC__", Tid__toc);
-		trie.Add_str_byte("__NOTOC__", Tid__no_toc);
-		trie.Add_str_byte("__FORCETOC__", Tid__force_toc);
+	private Xomw_doubleunder_data data;
+	public void Init_by_wiki(Xomw_doubleunder_data data, Xol_lang_itm lang) {
+		this.data = data;
+		Reg(trie, lang.Kwd_mgr()
+		, Xol_kwd_grp_.Id_notoc
+		, Xol_kwd_grp_.Id_nogallery
+		, Xol_kwd_grp_.Id_forcetoc
+		, Xol_kwd_grp_.Id_toc
+		, Xol_kwd_grp_.Id_noeditsection
+		, Xol_kwd_grp_.Id_newsectionlink
+		, Xol_kwd_grp_.Id_hiddencat
+		, Xol_kwd_grp_.Id_index
+		, Xol_kwd_grp_.Id_noindex
+		, Xol_kwd_grp_.Id_staticredirect
+		, Xol_kwd_grp_.Id_notitleconvert
+		, Xol_kwd_grp_.Id_nocontentconvert
+		);
 	}
-	public void Do_double_underscore(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {	// REF.MW: text = preg_replace('/(^|\n)-----*/', '\\1<hr />', text);
+	public void Do_double_underscore(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();
@@ -37,14 +48,15 @@ public class Xomw_doubleunder_wkr {
 		Bry_bfr bfr = pbfr.Trg();
 
 		data.Reset();
-		// XO.MW: MW does TOC before others; XO does it at the same time
 
+		// XO.MW: MW does TOC before others; XO does it at the same time
 		// Now match and remove the rest of them
 		// XO.MW.BGN: $this->mDoubleUnderscores = $mwa->matchAndRemove( $text );
 		int cur = src_bgn;
 		int prv = cur;
 		boolean dirty = false;
 		while (true) {
+			// reached end; stop
 			if (cur == src_end) {
 				if (dirty) {
 					bfr.Add_mid(src, prv, src_end);
@@ -52,6 +64,7 @@ public class Xomw_doubleunder_wkr {
 				break;
 			}
 
+			// no match; keep searching
 			byte b = src[cur];
 			Object o = trie.Match_at_w_b0(trv, b, src, cur, src_end);
 			if (o == null) {
@@ -59,11 +72,19 @@ public class Xomw_doubleunder_wkr {
 				continue;
 			}
 
+			// if cs, ensure exact-match (trie is case-insensitive)
+			int kwd_end = trv.Pos();
+			Xomw_doubleunder_itm itm = (Xomw_doubleunder_itm)o;
+			if (itm.case_match && !Bry_.Match(src, cur, kwd_end, itm.val)) {
+				cur = kwd_end;
+				continue;
+			}
+
+			// match; replace __KWD__ with "" (or "<!--MWTOC-->" if __TOC__)
 			dirty = true;
 			bfr.Add_mid(src, prv, cur);
-			byte tid = ((gplx.core.primitives.Byte_obj_val)o).Val();
-			switch (tid) {
-				case Tid__toc:
+			switch (itm.tid) {
+				case Xol_kwd_grp_.Id_toc:
 					// The position of __TOC__ needs to be recorded
 					boolean already_seen = !data.show_toc;
 					data.toc = true;
@@ -77,20 +98,20 @@ public class Xomw_doubleunder_wkr {
 					}
 					break;
 				// XO.MW: MW adds boolean to hash_table; XO uses boolean props; note that "remove" is done by not adding to bfr
-				case Tid__no_toc:                data.no_toc = true; break;
-				case Tid__no_gallery:            data.no_gallery = true; break;
-				case Tid__force_toc:             data.force_toc = true; break;
-				case Tid__no_edit_section:       data.no_edit_section = true; break;
-				case Tid__new_section_link:      data.new_section_link = true; break;
-				case Tid__hidden_cat:            data.hidden_cat = true; break;
-				case Tid__index:                 data.index = true; break;
-				case Tid__no_index:              data.no_index = true; break;
-				case Tid__static_redirect:       data.static_redirect = true; break;
-				case Tid__no_title_convert:      data.no_title_convert = true; break;
-				case Tid__no_content_convert:    data.no_content_convert = true; break;
-				default:                         throw Err_.new_unhandled_default(tid);
+				case Xol_kwd_grp_.Id_notoc:                data.no_toc = true; break;
+				case Xol_kwd_grp_.Id_nogallery:            data.no_gallery = true; break;
+				case Xol_kwd_grp_.Id_forcetoc:             data.force_toc = true; break;
+				case Xol_kwd_grp_.Id_noeditsection:        data.no_edit_section = true; break;
+				case Xol_kwd_grp_.Id_newsectionlink:       data.new_section_link = true; break;
+				case Xol_kwd_grp_.Id_hiddencat:            data.hidden_cat = true; break;
+				case Xol_kwd_grp_.Id_index:                data.index = true; break;
+				case Xol_kwd_grp_.Id_noindex:              data.no_index = true; break;
+				case Xol_kwd_grp_.Id_staticredirect:       data.static_redirect = true; break;
+				case Xol_kwd_grp_.Id_notitleconvert:       data.no_title_convert = true; break;
+				case Xol_kwd_grp_.Id_nocontentconvert:     data.no_content_convert = true; break;
+				default:                                   throw Err_.new_unhandled_default(itm.tid);
 			}
-			cur = trv.Pos();
+			cur = kwd_end;
 			prv = cur;
 		}
 		// XO.MW.END: $this->mDoubleUnderscores = $mwa->matchAndRemove( $text );
@@ -100,22 +121,28 @@ public class Xomw_doubleunder_wkr {
 		}
 
 		// XO.MW.EDIT: hidden_cat, index, noindex are used to add to tracking category
+
 		if (dirty)
 			pbfr.Switch();
 	}
-
-	private static final byte 
-	  Tid__no_toc               = 0
-	, Tid__no_gallery           = 1
-	, Tid__force_toc            = 2
-	, Tid__toc                  = 3
-	, Tid__no_edit_section      = 4
-	, Tid__new_section_link     = 5
-	, Tid__hidden_cat           = 6
-	, Tid__index                = 7
-	, Tid__no_index             = 8
-	, Tid__static_redirect      = 9
-	, Tid__no_title_convert     = 10
-	, Tid__no_content_convert   = 11
-	;
+	private static void Reg(Btrie_slim_mgr trie, Xol_kwd_mgr mgr, int... ids) {
+		for (int id : ids) {
+			Xol_kwd_grp grp = mgr.Get_or_new(id);
+			Xol_kwd_itm[] itms = grp.Itms();
+			for (Xol_kwd_itm itm : itms) {
+				byte[] val = itm.Val();
+				trie.Add_obj(val, new Xomw_doubleunder_itm(id, grp.Case_match(), val));
+			}
+		}
+	}
+}
+class Xomw_doubleunder_itm {
+	public int tid;
+	public boolean case_match;
+	public byte[] val;
+	public Xomw_doubleunder_itm(int tid, boolean case_match, byte[] val) {
+		this.tid = tid;
+		this.case_match = case_match;
+		this.val = val;
+	}
 }

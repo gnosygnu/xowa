@@ -24,15 +24,17 @@ public class Xomw_doubleunder_wkr__tst {
 	@Test  public void Toc()             {fxt.Test__parse("a __TOC__ b __TOC__ c"                    , "a <!--MWTOC--> b  c").Test__prop_y(fxt.data.toc, fxt.data.show_toc, fxt.data.force_toc_position);}
 	@Test  public void Notoc_only()      {fxt.Test__parse("a __NOTOC__ b"                            , "a  b").Test__prop_y(fxt.data.no_toc).Test__prop_n(fxt.data.show_toc);}	// show_toc is false
 	@Test  public void Notoc_w_toc()     {fxt.Test__parse("a __TOC__ b __NOTOC__ c"                  , "a <!--MWTOC--> b  c").Test__prop_y(fxt.data.toc, fxt.data.show_toc, fxt.data.force_toc_position);} // show_toc is true
+	@Test  public void Case_match()      {fxt.Test__parse("a __index__ b"                            , "a __index__ b");}
 }
 class Xomw_doubleunder_wkr__fxt {
 	private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();
 	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
 	private final    Xomw_doubleunder_wkr wkr = new Xomw_doubleunder_wkr();
-	public Xomw_doubleunder_data data;
+	public Xomw_doubleunder_data data = new Xomw_doubleunder_data();
 	public Xomw_doubleunder_wkr__fxt() {
-		wkr.Init_by_wiki();
-		data = wkr.data;
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
+		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
+		wkr.Init_by_wiki(data, wiki.Lang());
 	}
 	public Xomw_doubleunder_wkr__fxt Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
