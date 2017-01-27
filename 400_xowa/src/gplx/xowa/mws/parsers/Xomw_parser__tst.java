@@ -21,9 +21,41 @@ public class Xomw_parser__tst {
 	private final    Xomw_parser__fxt fxt = new Xomw_parser__fxt();
 	@Test  public void Basic() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
-		("a https://c.org b"
+		( "== heading_1 =="
+		, "para_1"
+		, "== heading_2 =="
+		, "para_2"
+		, "-----"
+		, "{|"
+		, "|-"
+		, "|a"
+		, "|}"
+		, "''italics''"
+		, "__TOC__"
+		, "[https://a.org b]"
+		, "[[A|abc]]"
+		, "https://c.org"
+		, "a »b« &#160;!important c"
 		), String_.Concat_lines_nl_skip_last
-		( ""
+		( "<h2> heading_1 </h2>"
+		, "<p>para_1"
+		, "</p>"
+		, "<h2> heading_2 </h2>"
+		, "<p>para_2"
+		, "</p>"
+		, "<hr />"
+		, "<table>"
+		, ""
+		, "<tr>"
+		, "<td>a"
+		, "</td></tr></table>"
+		, "<p><i>italics</i>"
+		, "<!--MWTOC-->"
+		, "<a class=\"external text\" rel=\"nofollow\" href=\"https://a.org\">b</a>"
+		, "<a href=\"/wiki/A\" title=\"A\">abc</a>"
+		, "<a class=\"external free\" rel=\"nofollow\" href=\"https://c.org\">https://c.org</a>"
+		, "a&#160;»b«&#160; !important c"
+		, "</p>"
 		));
 	}		
 }
@@ -34,6 +66,7 @@ class Xomw_parser__fxt {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		mgr.Init_by_wiki(wiki);
+		mgr.Init_by_page(wiki.Ttl_parse(Bry_.new_a7("Page_1")));
 	}
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);

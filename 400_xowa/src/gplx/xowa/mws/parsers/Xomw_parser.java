@@ -19,7 +19,7 @@ package gplx.xowa.mws.parsers; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.btries.*; import gplx.core.net.*;
 import gplx.xowa.mws.parsers.prepros.*; import gplx.xowa.mws.parsers.headings.*;
 import gplx.xowa.mws.parsers.quotes.*; import gplx.xowa.mws.parsers.tables.*; import gplx.xowa.mws.parsers.hrs.*; import gplx.xowa.mws.parsers.nbsps.*;
-import gplx.xowa.mws.parsers.lnkes.*; import gplx.xowa.mws.parsers.lnkis.*; import gplx.xowa.mws.parsers.magiclinks.*;
+import gplx.xowa.mws.parsers.lnkes.*; import gplx.xowa.mws.parsers.lnkis.*; import gplx.xowa.mws.parsers.magiclinks.*; import gplx.xowa.mws.parsers.doubleunders.*;
 import gplx.xowa.mws.utls.*; import gplx.xowa.mws.linkers.*;
 public class Xomw_parser {
 	private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();
@@ -30,11 +30,13 @@ public class Xomw_parser {
 	private final    Xomw_block_level_pass block_wkr = new Xomw_block_level_pass();
 	private final    Xomw_heading_wkr heading_wkr = new Xomw_heading_wkr();
 	private final    Xomw_magiclinks_wkr magiclinks_wkr = new Xomw_magiclinks_wkr();
+	private final    Xomw_doubleunder_wkr doubleunder_wkr = new Xomw_doubleunder_wkr();
 	private final    Xomw_link_renderer link_renderer = new Xomw_link_renderer();
 	private final    Xomw_link_holders holders;
 	private final    Xomw_heading_cbk__html heading_wkr_cbk;
 	private final    Btrie_slim_mgr protocols_trie;
 	private static Xomw_regex_space regex_space;
+	private static Xomw_regex_boundary regex_boundary;
 	private static Xomw_regex_url regex_url;
 	private final    Btrie_rv trv = new Btrie_rv();
 	private int marker_index = 0;
@@ -57,6 +59,7 @@ public class Xomw_parser {
 		if (regex_space == null) {
 			synchronized (Type_adp_.ClassOf_obj(this)) {
 				regex_space = new Xomw_regex_space();
+				regex_boundary = new Xomw_regex_boundary(regex_space);
 				regex_url = new Xomw_regex_url(regex_space);
 			}
 		}
@@ -65,6 +68,11 @@ public class Xomw_parser {
 		linker.Init_by_wiki(wiki.Lang().Lnki_trail_mgr().Trie());
 		lnke_wkr.Init_by_wiki(protocols_trie, regex_url, regex_space);
 		lnki_wkr.Init_by_wiki(wiki);
+		magiclinks_wkr.Init_by_wiki(linker, regex_boundary, regex_url);
+		doubleunder_wkr.Init_by_wiki();
+	}
+	public void Init_by_page(Xoa_ttl ttl) {
+		pctx.Init_by_page(ttl);
 	}
 	public void Internal_parse(Xomw_parser_bfr pbfr, byte[] text) {
 		pbfr.Init(text);
@@ -106,7 +114,7 @@ public class Xomw_parser {
 		table_wkr.Do_table_stuff(pctx, pbfr);
 		hr_wkr.Replace_hrs(pctx, pbfr);
 
-		// text = $this->doDoubleUnderscore(text);
+		doubleunder_wkr.Do_double_underscore(pctx, pbfr);
 
 		heading_wkr.Do_headings(pctx, pbfr, heading_wkr_cbk);
 		lnki_wkr.Replace_internal_links(pctx, pbfr);
