@@ -104,32 +104,36 @@ public class Xomw_magiclinks_wkr {
 
 			// looks like magiclink; do additional processing
 			byte regex_tid = ((Byte_obj_val)o).Val();
-			int old_pos = cur;
-			int trv_pos = trv.Pos();
-			int nxt_pos = trv_pos;
+			int hook_bgn = cur;
+			int hook_end = trv.Pos();
+			int tmp_pos = hook_end;
 			boolean regex_valid = true;
 			switch (regex_tid) {
 				case Regex__anch:	// (<a[ \t\r\n>].*?</a>) |      // m[1]: Skip link text
-					if (trv_pos < src_end) {
-						// find ws in "[ \t\r\n>]"
-						byte ws_byte = src[cur];
+					if (tmp_pos < src_end) {
+						// find "[ \t\r\n>]" after "<a"; i.e.: don't match "<ab" or "<ac", etc..
+						byte ws_byte = src[tmp_pos];
 						switch (ws_byte) {
+							// next char after "<a" is ws -> valid
 							case Byte_ascii.Space:
 							case Byte_ascii.Tab:
 							case Byte_ascii.Cr:
 							case Byte_ascii.Nl:
 								break;
+							// next char after "<a" is not ws -> invalid
 							default:
 								regex_valid = false;
 								break;
 						}
 						if (regex_valid) {
 							// find </a>
-							nxt_pos++;
-							int anch_end = Bry_find_.Find_fwd(src, Tag__anch__rhs, nxt_pos, src_end);
+							tmp_pos++;
+							int anch_end = Bry_find_.Find_fwd(src, Tag__anch__rhs, tmp_pos, src_end);
+							// </a> not found -> invalid
 							if (anch_end == Bry_find_.Not_found) {
 								regex_valid = false;
 							}
+							// </a> found -> valid; set cur to after "</a>"
 							else {
 								cur = anch_end + Tag__anch__rhs.length;
 							}
@@ -141,36 +145,51 @@ public class Xomw_magiclinks_wkr {
 					break;
 				case Regex__elem: // (<.*?>) |                    // m[2]: Skip stuff inside
 					// just find ">"
-					int elem_end = Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, nxt_pos, src_end);
-					if (elem_end == Bry_find_.Not_found)
+					tmp_pos = Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, tmp_pos, src_end);
+					// > not found -> invalid
+					if (tmp_pos == Bry_find_.Not_found) {
 						regex_valid = false;
-					else
-						cur = elem_end + 1;
+					}
+					// > found -> valid; set cur to after ">"
+					else {
+						cur = tmp_pos + 1;
+					}
 					break;
 				case Regex__free:
-					if (regex_boundary.Is_boundary_prv(src, cur)) {
-						int url_end = regex_url.Find_fwd_while(trv, src, nxt_pos, src_end);
-						if (url_end == nxt_pos) {
+					// make sure that protocol starts at word bound; EX: "ahttp://a.org" should be invalid
+					if (regex_boundary.Is_boundary_prv(src, hook_bgn)) {
+						// skip forward until invalid url char
+						tmp_pos = regex_url.Find_fwd_while(trv, src, tmp_pos, src_end);
+						// no url chars found -> invalid
+						if (tmp_pos == hook_end) {
 							regex_valid = false;
 						}
-						else
-							cur = url_end;
+						// url chars found -> valid; set cur to 1st invalid url-char;
+						else {
+							cur = tmp_pos;
+						}
 					}
 					else
 						regex_valid = false;
 					break;
 			}
+			// regex is invalid; advance by 1 and continue;
 			if (!regex_valid) {
 				cur++;
 			}
+			// regex is valid
 			else {
+				// handle free
 				if (regex_tid == Regex__free) {
 					this.page_title = pctx.Page_title().Full_db();
                         dirty = true;
-					bfr.Add_mid(src, prv, old_pos);
-                        this.Make_free_external_link(bfr, Bry_.Mid(src, old_pos, cur), 0);
+					bfr.Add_mid(src, prv, hook_bgn);
+					byte[] url = Bry_.Mid(src, hook_bgn, cur);
+					int num_post_proto = cur - hook_end; // get length of url without proto; EX: "http://a.org" should be 5 ("a.org")
+                        this.Make_free_external_link(bfr, url, num_post_proto);
 					prv = cur;
 				}
+				// "<a " and "<" just need to be ignored; note that they already update cur so noop
 				else {
 				}
 			}
@@ -223,9 +242,10 @@ public class Xomw_magiclinks_wkr {
 
 		// Verify that we still have a real URL after trail removal, and
 		// not just lone protocol
-//			if (strlen($trail) >= $numPostProto) {
-//				return $url . $trail;
-//			}
+		if (trail.length >= num_post_proto) {
+			bfr.Add_bry_many(url, trail);
+			return;
+		}
 
 //			$url = Sanitizer::cleanUrl($url);
 

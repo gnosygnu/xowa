@@ -22,6 +22,59 @@ import gplx.xowa.mws.parsers.*;
 public class Xomw_sanitizer {
 	private final    Mwh_doc_wkr__atr_bldr atr_bldr = new Mwh_doc_wkr__atr_bldr();
 	private final    Mwh_atr_parser atr_parser = new Mwh_atr_parser();
+//		static function cleanUrl($url) {
+//			// Normalize any HTML entities in input. They will be
+//			// re-escaped by makeExternalLink().
+//			$url = Sanitizer::decodeCharReferences($url);
+//
+//			// Escape any control characters introduced by the above step
+//			$url = preg_replace_callback('/[\][<>"\\x00-\\x20\\x7F\|]/',
+//				[ __CLASS__, 'cleanUrlCallback' ], $url);
+//
+//			// Validate hostname portion
+//			$matches = [];
+//			if (preg_match('!^([^:]+:)(//[^/]+)?(.*)$!iD', $url, $matches)) {
+//				list(/* $whole */, $protocol, $host, $rest) = $matches;
+//
+//				// Characters that will be ignored in IDNs.
+//				// https://tools.ietf.org/html/rfc3454#section-3.1
+//				// Strip them before further processing so blacklists and such work.
+//				$strip = "/
+//					\\s|          // general whitespace
+//					\xc2\xad|     // 00ad SOFT HYPHEN
+//					\xe1\xa0\x86| // 1806 MONGOLIAN TODO SOFT HYPHEN
+//					\xe2\x80\x8b| // 200b ZERO WIDTH SPACE
+//					\xe2\x81\xa0| // 2060 WORD JOINER
+//					\xef\xbb\xbf| // feff ZERO WIDTH NO-BREAK SPACE
+//					\xcd\x8f|     // 034f COMBINING GRAPHEME JOINER
+//					\xe1\xa0\x8b| // 180b MONGOLIAN FREE VARIATION SELECTOR ONE
+//					\xe1\xa0\x8c| // 180c MONGOLIAN FREE VARIATION SELECTOR TWO
+//					\xe1\xa0\x8d| // 180d MONGOLIAN FREE VARIATION SELECTOR THREE
+//					\xe2\x80\x8c| // 200c ZERO WIDTH NON-JOINER
+//					\xe2\x80\x8d| // 200d ZERO WIDTH JOINER
+//					[\xef\xb8\x80-\xef\xb8\x8f] // fe00-fe0f VARIATION SELECTOR-1-16
+//					/xuD";
+//
+//				$host = preg_replace($strip, '', $host);
+//
+//				// IPv6 host names are bracketed with [].  Url-decode these.
+//				if (substr_compare("//%5B", $host, 0, 5) === 0 &&
+//					preg_match('!^//%5B([0-9A-Fa-f:.]+)%5D((:\d+)?)$!', $host, $matches)
+//				) {
+//					$host = '//[' . $matches[1] . ']' . $matches[2];
+//				}
+//
+//				// @todo FIXME: Validate hostnames here
+//
+//				return $protocol . $host . $rest;
+//			} else {
+//				return $url;
+//			}
+//		}
+//
+//		static function cleanUrlCallback($matches) {
+//			return urlencode($matches[0]);
+//		}
 	public void Fix_tag_attributes(Bry_bfr bfr, byte[] tag_name, byte[] atrs) {
 		atr_bldr.Atrs__clear();
 		atr_parser.Parse(atr_bldr, -1, -1, atrs, 0, atrs.length);
@@ -29,11 +82,11 @@ public class Xomw_sanitizer {
 
 		// PORTED: Sanitizer.php|safeEncodeTagAttributes
 		for (int i = 0; i < len; i++) {
-			// $encAttribute = htmlspecialchars( $attribute );
-			// $encValue = Sanitizer::safeEncodeAttribute( $value );
+			// $encAttribute = htmlspecialchars($attribute);
+			// $encValue = Sanitizer::safeEncodeAttribute($value);
 			// $attribs[] = "$encAttribute=\"$encValue\"";
 			Mwh_atr_itm itm = atr_bldr.Atrs__get_at(i);
-			bfr.Add_byte_space();	// "return count( $attribs ) ? ' ' . implode( ' ', $attribs ) : '';"
+			bfr.Add_byte_space();	// "return count($attribs) ? ' ' . implode(' ', $attribs) : '';"
 			bfr.Add_bry_escape_html(itm.Key_bry(), itm.Key_bgn(), itm.Key_end());
 			bfr.Add_byte_eq().Add_byte_quote();
 			bfr.Add(itm.Val_as_bry());	// TODO.XO:Sanitizer::encode
@@ -201,7 +254,7 @@ public class Xomw_sanitizer {
 		int point = Hex_utl_.Parse_or(codepoint, -1);
 		if (Validate_codepoint(point)) {
 			bfr.Add_str_a7("&#x");
-			Hex_utl_.Write_bfr(bfr, Bool_.Y, point);	// sprintf( '&#x%x;', $point )
+			Hex_utl_.Write_bfr(bfr, Bool_.Y, point);	// sprintf('&#x%x;', $point)
 			bfr.Add_byte_semic();
 			return true;
 		}
