@@ -20,7 +20,7 @@ import gplx.core.btries.*;
 public class Xomw_regex_ {
 	public static int Find_fwd_while(Btrie_slim_mgr trie, Btrie_rv trv, byte[] src, int src_bgn, int src_end) {
 		int cur = src_bgn;
-		while (true) {
+		while (cur < src_end) {
 			byte b = src[cur];
 			Object o = trie.Match_at_w_b0(trv, b, src, cur, src_end);
 			if (o == null)
@@ -32,7 +32,7 @@ public class Xomw_regex_ {
 	}
 	public static int Find_fwd_until(Btrie_slim_mgr trie, Btrie_rv trv, byte[] src, int src_bgn, int src_end) {
 		int cur = src_bgn;
-		while (true) {
+		while (cur < src_end) {
 			byte b = src[cur];
 			Object o = trie.Match_at_w_b0(trv, b, src, cur, src_end);
 			if (o == null)

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
-import gplx.core.encoders.*; import gplx.langs.htmls.entitys.*;
+import gplx.core.encoders.*; import gplx.core.primitives.*; import gplx.langs.htmls.entitys.*;
 import gplx.xowa.parsers.htmls.*;
 import gplx.xowa.mws.parsers.*;
 public class Xomw_sanitizer {
@@ -514,25 +514,4 @@ class Xomw_html_ent {
 	public final    byte[] name;
 	public final    byte[] html;
 	public static final byte Type__null = 0, Type__alias = 1, Type__char = 2, Type__entity = 3;
-}
-class Bool_ary_bldr {
-	private final    boolean[] ary;
-	public Bool_ary_bldr(int len) {
-		this.ary = new boolean[len];
-	}
-	public Bool_ary_bldr Set_many(int... v) {
-		int len = v.length;
-		for (int i = 0; i < len; i++)
-			ary[v[i]] = true;
-		return this;
-	}
-	public Bool_ary_bldr Set_rng(int bgn, int end) {
-		for (int i = bgn; i <= end; i++)
-			ary[i] = true;
-		return this;
-	}
-	public boolean[] To_ary() {
-		return ary;
-	}
-	public static Bool_ary_bldr New_u8() {return new Bool_ary_bldr(256);}
 }

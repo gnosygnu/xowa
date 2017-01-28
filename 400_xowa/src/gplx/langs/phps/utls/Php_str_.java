@@ -39,7 +39,7 @@ public class Php_str_ {
 		int end = len < 0 ? src_len + len : bgn + len;
 		if (end > src.length) end = src.length;; // handle out of bounds;
 		return src[bgn];
-	}		
+	}
 	public static int Strspn_fwd__ary(byte[] src, boolean[] find, int bgn, int max, int src_len) {
 		if (max == -1) max = src_len;
 		int rv = 0;
@@ -84,6 +84,17 @@ public class Php_str_ {
 		int rv = 0;
 		for (int i = bgn - 1; i > -1; i--) {
 			if (find == src[i] && rv < max) 
+				rv++;
+			else
+				break;
+		}
+		return rv;
+	}
+	public static int Strspn_bwd__ary(byte[] src, boolean[] find, int bgn, int max) {
+		if (max == -1) max = Int_.Max_value;
+		int rv = 0;
+		for (int i = bgn - 1; i > -1; i--) {
+			if (find[src[i]] && rv < max) 
 				rv++;
 			else
 				break;
