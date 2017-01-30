@@ -34,10 +34,8 @@ public class Xomw_magiclinks_wkr__tst {
 		fxt.Test__parse("a https://&lt; z"       , "a https://&lt; z");
 	}
 	@Test   public void Interrupt__hex_dec() {// implementation specific test for mixed hex / dec
-		// hex-dec
-		fxt.Test__parse("a https://b.org&#x60;z" , "a <a class='external free' rel='nofollow' href='https://b.org&amp;#x60;z'>https://b.org&amp;#x60;z</a>");
 		// dec-hex
-		fxt.Test__parse("a https://b.org&#3c;z"  , "a <a class='external free' rel='nofollow' href='https://b.org&amp;#3c;z'>https://b.org&amp;#3c;z</a>");
+		fxt.Test__parse("a https://b.org&#3c;z"      , "a <a class='external free' rel='nofollow' href='https://b.org&amp;#3c;z'>https://b.org&amp;#3c;z</a>");
 	}
 	@Test   public void Separator() {
 		// basic; ,;.:!?
@@ -50,10 +48,10 @@ public class Xomw_magiclinks_wkr__tst {
 		fxt.Test__parse("a https://b.org;.:!? z"     , "a <a class='external free' rel='nofollow' href='https://b.org'>https://b.org</a>;.:!? z");
 		// ";" included b/c of ent
 		fxt.Test__parse("a https://b.org&abc;.:!? z" , "a <a class='external free' rel='nofollow' href='https://b.org&amp;abc;'>https://b.org&amp;abc;</a>.:!? z");
-		// ";" included b/c of hex
-		fxt.Test__parse("a https://b.org&#xB1;.:!? z", "a <a class='external free' rel='nofollow' href='https://b.org&amp;#xB1;'>https://b.org&amp;#xB1;</a>.:!? z");
-		// ";" included b/c of dec
-		fxt.Test__parse("a https://b.org&#123;.:!? z", "a <a class='external free' rel='nofollow' href='https://b.org&amp;#123;'>https://b.org&amp;#123;</a>.:!? z");
+		// ";" included b/c of hex; note that Clean_url changes "&#xB1;" to "±"
+		fxt.Test__parse("a https://b.org&#xB1;.:!? z", "a <a class='external free' rel='nofollow' href='https://b.org±'>https://b.org±</a>.:!? z");
+		// ";" included b/c of dec; note that Clean_url changes "&#123;" to "{"
+		fxt.Test__parse("a https://b.org&#123;.:!? z", "a <a class='external free' rel='nofollow' href='https://b.org{'>https://b.org{</a>.:!? z");
 		// ";" excluded b/c of invalid.ent
 		fxt.Test__parse("a https://b.org&a1b;.:!? z" , "a <a class='external free' rel='nofollow' href='https://b.org&amp;a1b'>https://b.org&amp;a1b</a>;.:!? z");
 		// ";" excluded b/c of invalid.hex
@@ -63,9 +61,13 @@ public class Xomw_magiclinks_wkr__tst {
 		// num_post_proto rule
 		fxt.Test__parse("a https://.:!? z"           , "a https://.:!? z");
 	}
+	@Test   public void Clean_url() {
+		// basic
+		fxt.Test__parse("http://a᠆b.org/c᠆d"          , "<a class='external free' rel='nofollow' href='http://ab.org/c᠆d'>http://ab.org/c᠆d</a>");
+	}
 }
 class Xomw_magiclinks_wkr__fxt {
-	private final    Xomw_magiclinks_wkr wkr = new Xomw_magiclinks_wkr();
+	private final    Xomw_magiclinks_wkr wkr;
 	private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();
 	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
 	public Xomw_magiclinks_wkr__fxt() {
@@ -74,7 +76,8 @@ class Xomw_magiclinks_wkr__fxt {
 
 		Xomw_regex_space regex_space = new Xomw_regex_space();
 		pctx.Init_by_page(wiki.Ttl_parse(Bry_.new_a7("Page_1")));
-		wkr.Init_by_wiki(new Xomw_linker(), new Xomw_regex_boundary(regex_space), new Xomw_regex_url(regex_space));
+		this.wkr = new Xomw_magiclinks_wkr(new Xomw_sanitizer(), new Xomw_linker(), new Xomw_regex_boundary(regex_space), new Xomw_regex_url(regex_space));
+		wkr.Init_by_wiki();
 	}
 	public void Test__parse(String src_str, String expd) {Test__parse(Bool_.Y, src_str, expd);}
 	public void Test__parse(boolean apos, String src_str, String expd) {

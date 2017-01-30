@@ -19,28 +19,40 @@ package gplx.xowa.mws.parsers.magiclinks; import gplx.*; import gplx.xowa.*; imp
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.net.*;
 import gplx.langs.phps.utls.*; import gplx.xowa.mws.htmls.*;
 import gplx.langs.regxs.*;
+// TODO.XO: getExternalLinkAttribs($url)
+// TODO.XO: this->getConverterLanguage()->markNoConversion($url, true),
 public class Xomw_magiclinks_wkr {
 	private final    Btrie_slim_mgr regex_trie = Btrie_slim_mgr.ci_a7(); // NOTE: must be ci to handle protocols; EX: "https:" and "HTTPS:"
 	private final    Btrie_rv trv = new Btrie_rv();
 	private static byte[] Tag__anch__rhs;
 	private boolean[] url_separators;
 	private static Xomw_regex_link_interrupt regex_link_interrupt;
-	private Xomw_regex_boundary regex_boundary;
-	private Xomw_regex_url regex_url;
-	private Xomw_linker linker;
+	private final    Xomw_regex_boundary regex_boundary;
+	private final    Xomw_regex_url regex_url;
+	private final    Xomw_sanitizer sanitizer;
+	private final    Xomw_linker linker;
 	private byte[] page_title;
 
 	private static final byte Regex__anch = 1, Regex__elem = 2, Regex__free = 3;
-	public Xomw_magiclinks_wkr() {
+	public Xomw_magiclinks_wkr(Xomw_sanitizer sanitizer, Xomw_linker linker, Xomw_regex_boundary regex_boundary, Xomw_regex_url regex_url) {
+		this.sanitizer = sanitizer;
+		this.linker = linker;
+		this.regex_boundary = regex_boundary;
+		this.regex_url = regex_url;
+
 		// ',;\.:!?'
 		url_separators = Bool_ary_bldr.New_u8()
 			.Set_many(Byte_ascii.Comma,Byte_ascii.Semic, Byte_ascii.Dot, Byte_ascii.Colon, Byte_ascii.Bang, Byte_ascii.Question)
 			.To_ary();
+
+		if (Tag__anch__rhs == null) {
+			synchronized (Type_adp_.ClassOf_obj(this)) {
+				Tag__anch__rhs = Bry_.new_a7("</a>");
+				regex_link_interrupt = new Xomw_regex_link_interrupt();
+			}
+		}
 	}
-	public void Init_by_wiki(Xomw_linker linker, Xomw_regex_boundary regex_boundary, Xomw_regex_url regex_url) {
-		this.linker = linker;
-		this.regex_boundary = regex_boundary;
-		this.regex_url = regex_url;
+	public void Init_by_wiki() {
 		regex_trie.Add_str_byte("<a", Regex__anch);
 		regex_trie.Add_str_byte("<" , Regex__elem);
 		
@@ -49,13 +61,6 @@ public class Xomw_magiclinks_wkr {
 		for (int i = 0; i < protocol_len; i++) {
 			Gfo_protocol_itm itm = protocol_ary[i];
 			regex_trie.Add_bry_byte(itm.Text_bry(), Regex__free);
-		}
-
-		if (Tag__anch__rhs == null) {
-			synchronized (Type_adp_.ClassOf_obj(this)) {
-				Tag__anch__rhs = Bry_.new_a7("</a>");
-				regex_link_interrupt = new Xomw_regex_link_interrupt();
-			}
 		}
 	}
 
@@ -247,7 +252,7 @@ public class Xomw_magiclinks_wkr {
 			return;
 		}
 
-//			$url = Sanitizer::cleanUrl($url);
+		url = sanitizer.Clean_url(url);
 
 		// XO.MW.UNSUPPORTED.NON-WMF: not supporting images from freefrom url; (EX: "http://a.org/image.png" -> "<img>"); haven't seen this used on WMF wikis
 		// Is this an external image?			

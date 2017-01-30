@@ -62,6 +62,12 @@ public class Gfo_url_encoder_ {
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.N)
 			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Plus);
 	}
+	public static Gfo_url_encoder_mkr New__php_urlencode() {
+		// equivalent to php's urlencode; http://php.net/manual/en/function.urlencode.php;
+		// "Returns a String in which all non-alphanumeric characters except -_. have been replaced with a percent (%) sign followed by two hex digits and spaces encoded as plus (+) signs"
+		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
+			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Plus);
+	}
 	private static Gfo_url_encoder_mkr New__http_url_ttl() {
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y);
 	}
@@ -103,5 +109,6 @@ public class Gfo_url_encoder_ {
 	, Http_url			= Gfo_url_encoder_.New__http_url().Make()
 	, Http_url_ttl		= Gfo_url_encoder_.New__http_url_ttl().Make()
 	, Mw_ttl			= Gfo_url_encoder_.New__mw_ttl().Make()
+	, Php_urlencode		= Gfo_url_encoder_.New__php_urlencode().Make()
 	;
 }

@@ -16,65 +16,123 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
-import gplx.core.encoders.*; import gplx.core.primitives.*; import gplx.langs.htmls.entitys.*;
+import gplx.core.brys.*; import gplx.core.btries.*; import gplx.core.encoders.*; import gplx.core.primitives.*; import gplx.langs.htmls.entitys.*;
 import gplx.xowa.parsers.htmls.*;
-import gplx.xowa.mws.parsers.*;
+import gplx.xowa.mws.parsers.*; import gplx.langs.phps.utls.*;
 public class Xomw_sanitizer {
 	private final    Mwh_doc_wkr__atr_bldr atr_bldr = new Mwh_doc_wkr__atr_bldr();
 	private final    Mwh_atr_parser atr_parser = new Mwh_atr_parser();
-//		static function cleanUrl($url) {
-//			// Normalize any HTML entities in input. They will be
-//			// re-escaped by makeExternalLink().
-//			$url = Sanitizer::decodeCharReferences($url);
-//
-//			// Escape any control characters introduced by the above step
-//			$url = preg_replace_callback('/[\][<>"\\x00-\\x20\\x7F\|]/',
-//				[ __CLASS__, 'cleanUrlCallback' ], $url);
-//
-//			// Validate hostname portion
-//			$matches = [];
-//			if (preg_match('!^([^:]+:)(//[^/]+)?(.*)$!iD', $url, $matches)) {
-//				list(/* $whole */, $protocol, $host, $rest) = $matches;
-//
-//				// Characters that will be ignored in IDNs.
-//				// https://tools.ietf.org/html/rfc3454#section-3.1
-//				// Strip them before further processing so blacklists and such work.
-//				$strip = "/
-//					\\s|          // general whitespace
-//					\xc2\xad|     // 00ad SOFT HYPHEN
-//					\xe1\xa0\x86| // 1806 MONGOLIAN TODO SOFT HYPHEN
-//					\xe2\x80\x8b| // 200b ZERO WIDTH SPACE
-//					\xe2\x81\xa0| // 2060 WORD JOINER
-//					\xef\xbb\xbf| // feff ZERO WIDTH NO-BREAK SPACE
-//					\xcd\x8f|     // 034f COMBINING GRAPHEME JOINER
-//					\xe1\xa0\x8b| // 180b MONGOLIAN FREE VARIATION SELECTOR ONE
-//					\xe1\xa0\x8c| // 180c MONGOLIAN FREE VARIATION SELECTOR TWO
-//					\xe1\xa0\x8d| // 180d MONGOLIAN FREE VARIATION SELECTOR THREE
-//					\xe2\x80\x8c| // 200c ZERO WIDTH NON-JOINER
-//					\xe2\x80\x8d| // 200d ZERO WIDTH JOINER
-//					[\xef\xb8\x80-\xef\xb8\x8f] // fe00-fe0f VARIATION SELECTOR-1-16
-//					/xuD";
-//
-//				$host = preg_replace($strip, '', $host);
-//
-//				// IPv6 host names are bracketed with [].  Url-decode these.
-//				if (substr_compare("//%5B", $host, 0, 5) === 0 &&
-//					preg_match('!^//%5B([0-9A-Fa-f:.]+)%5D((:\d+)?)$!', $host, $matches)
-//				) {
-//					$host = '//[' . $matches[1] . ']' . $matches[2];
-//				}
-//
-//				// @todo FIXME: Validate hostnames here
-//
-//				return $protocol . $host . $rest;
-//			} else {
-//				return $url;
-//			}
-//		}
-//
-//		static function cleanUrlCallback($matches) {
-//			return urlencode($matches[0]);
-//		}
+	private final    Xomw_regex_escape_invalid regex_clean_url = new Xomw_regex_escape_invalid();
+	private final    Xomw_regex_find_domain regex_find_domain = new Xomw_regex_find_domain();
+	private final    Xomw_regex_ipv6_brack regex_ipv6_brack = new Xomw_regex_ipv6_brack();
+	private final    Bry_tmp tmp_host = new Bry_tmp();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final    Btrie_rv trv = new Btrie_rv();
+	private final    Xomw_regex_url_char_cbk__normalize normalize_cbk;
+	private final    Xomw_regex_url_char_cbk__decode decode_cbk;
+
+	private static Xomw_regex_url_char regex_url_char;
+	private static Btrie_slim_mgr invalid_idn_trie;
+	public Xomw_sanitizer() {
+		this.normalize_cbk = new Xomw_regex_url_char_cbk__normalize(this);
+		this.decode_cbk = new Xomw_regex_url_char_cbk__decode(this);
+		if (regex_url_char == null) {
+			synchronized (Type_adp_.ClassOf_obj(this)) {
+				regex_url_char = new Xomw_regex_url_char();
+
+				// Characters that will be ignored in IDNs.
+				// https://tools.ietf.org/html/rfc3454#section-3.1
+				// $strip = "/
+				//	 \\s|          // general whitespace
+				//	 \xc2\xad|     // 00ad SOFT HYPHEN
+				//	 \xe1\xa0\x86| // 1806 MONGOLIAN TODO SOFT HYPHEN
+				//	 \xe2\x80\x8b| // 200b ZERO WIDTH SPACE
+				//	 \xe2\x81\xa0| // 2060 WORD JOINER
+				//	 \xef\xbb\xbf| // feff ZERO WIDTH NO-BREAK SPACE
+				//	 \xcd\x8f|     // 034f COMBINING GRAPHEME JOINER
+				//	 \xe1\xa0\x8b| // 180b MONGOLIAN FREE VARIATION SELECTOR ONE
+				//	 \xe1\xa0\x8c| // 180c MONGOLIAN FREE VARIATION SELECTOR TWO
+				//	 \xe1\xa0\x8d| // 180d MONGOLIAN FREE VARIATION SELECTOR THREE
+				//	 \xe2\x80\x8c| // 200c ZERO WIDTH NON-JOINER
+				//	 \xe2\x80\x8d| // 200d ZERO WIDTH JOINER
+				//	 [\xef\xb8\x80-\xef\xb8\x8f] // fe00-fe0f VARIATION SELECTOR-1-16
+				//	 /xuD";
+				// XO.MW.REGEX:http://php.net/manual/en/reference.pcre.pattern.modifiers.php
+				//   /x : ignore embedded ws
+				//   /u : enabled pcre utf8
+				//   /D : $ matches EOS, not NL
+				invalid_idn_trie = Btrie_slim_mgr.cs()
+				.Add_many_bry(new Xomw_regex_parser().Add_ary
+				( "\\s"
+				, "\\xc2\\xad"      // 00ad SOFT HYPHEN
+				, "\\xe1\\xa0\\x86" // 1806 MONGOLIAN TODO SOFT HYPHEN
+				, "\\xe2\\x80\\x8b" // 200b ZERO WIDTH SPACE
+				, "\\xe2\\x81\\xa0" // 2060 WORD JOINER
+				, "\\xef\\xbb\\xbf" // feff ZERO WIDTH NO-BREAK SPACE
+				, "\\xcd\\x8f"      // 034f COMBINING GRAPHEME JOINER
+				, "\\xe1\\xa0\\x8b" // 180b MONGOLIAN FREE VARIATION SELECTOR ONE
+				, "\\xe1\\xa0\\x8c" // 180c MONGOLIAN FREE VARIATION SELECTOR TWO
+				, "\\xe1\\xa0\\x8d" // 180d MONGOLIAN FREE VARIATION SELECTOR THREE
+				, "\\xe2\\x80\\x8c" // 200c ZERO WIDTH NON-JOINER
+				, "\\xe2\\x80\\x8d" // 200d ZERO WIDTH JOINER
+				)
+				.Add_rng
+				( "\\xef\\xb8\\x80", "\\xef\\xb8\\x8f" // fe00-fe0f VARIATION SELECTOR-1-16
+				)
+				.Rslt());
+
+				// assert static structs
+				if (html_entities == null) {
+					synchronized (Type_adp_.ClassOf_obj(this)) {
+						html_entities = Html_entities_new();
+					}
+				}
+			}
+		}
+	}
+
+	public byte[] Clean_url(byte[] url) {
+		// Normalize any HTML entities in input. They will be
+		// re-escaped by makeExternalLink().			
+		url = Decode_char_references(null, Bool_.Y, url, 0, url.length);
+
+		// Escape any control characters introduced by the above step
+		// XO.MW.REGEX: $url = preg_replace_callback('/[\][<>"\\x00-\\x20\\x7F\|]/', [ __CLASS__, 'cleanUrlCallback' ], $url);
+		//   '[]<>"' | '00 -> 32' | 127
+		if (regex_clean_url.Escape(tmp_bfr, url, 0, url.length))
+			url = tmp_bfr.To_bry_and_clear();
+
+		// XO.MW.REGEX: if (preg_match('!^([^:]+:)(//[^/]+)?(.*)$!iD', $url, $matches))
+		if (regex_find_domain.Match(url, 0, url.length)) {
+			// Characters that will be ignored in IDNs.
+			// https://tools.ietf.org/html/rfc3454#section-3.1
+			// Strip them before further processing so blacklists and such work.
+			Php_preg_.Replace(tmp_host.Init(url, regex_find_domain.host_bgn, regex_find_domain.host_end), tmp_bfr, invalid_idn_trie, trv, Bry_.Empty);
+			
+			// IPv6 host names are bracketed with [].  Url-decode these.
+			// if (substr_compare("//%5B", $host, 0, 5) === 0 &&
+			//	preg_match('!^//%5B([0-9A-Fa-f:.]+)%5D((:\d+)?)$!', $host, $matches)
+			//  XO.MW.REGEX:
+			//    !^//%5B([0-9A-Fa-f:.]+)%5D((:\d+)?)$!
+			//    "//%5B" + ("hex-dec" | [:.]) + "%5D" + numbers
+			//    EX: [ABCD]:80:12
+			if (regex_ipv6_brack.Match(tmp_host.src, tmp_host.src_bgn, tmp_host.src_end)) {
+				tmp_bfr.Add_str_a7("//[").Add_mid(tmp_host.src, regex_ipv6_brack.host_bgn, regex_ipv6_brack.host_end)
+					.Add_byte(Byte_ascii.Brack_end).Add_mid(tmp_host.src, regex_ipv6_brack.segs_bgn, regex_ipv6_brack.segs_end);
+				tmp_host.Set_by_bfr(tmp_bfr);
+			}
+
+			// @todo FIXME: Validate hostnames here
+
+			tmp_bfr.Add_mid(url, regex_find_domain.prot_bgn, regex_find_domain.prot_end);
+			tmp_host.Add_to_bfr(tmp_bfr);
+			tmp_bfr.Add_mid(url, regex_find_domain.rest_bgn, regex_find_domain.rest_end);
+			return tmp_bfr.To_bry_and_clear();
+		}
+		else {
+			return url;
+		}
+	}
 	public void Fix_tag_attributes(Bry_bfr bfr, byte[] tag_name, byte[] atrs) {
 		atr_bldr.Atrs__clear();
 		atr_parser.Parse(atr_bldr, -1, -1, atrs, 0, atrs.length);
@@ -105,163 +163,13 @@ public class Xomw_sanitizer {
 		Normalize_char_references(bfr, Bool_.N, src, src_bgn, src_end);
 	}
 	public byte[] Normalize_char_references(Bry_bfr bfr, boolean lone_bfr, byte[] src, int src_bgn, int src_end) {
-		// assert static structs
-		if (Normalize__dec == null) {
-			synchronized (Xomw_sanitizer.class) {
-				html_entities = Html_entities_new();
-				Normalize__dec = Bool_ary_bldr.New_u8().Set_rng(Byte_ascii.Num_0, Byte_ascii.Num_9).To_ary();
-				Normalize__hex = Bool_ary_bldr.New_u8()
-					.Set_rng(Byte_ascii.Num_0, Byte_ascii.Num_9)
-					.Set_rng(Byte_ascii.Ltr_A, Byte_ascii.Ltr_Z)
-					.Set_rng(Byte_ascii.Ltr_a, Byte_ascii.Ltr_z)
-					.To_ary();
-				Normalize__ent = Bool_ary_bldr.New_u8()
-					.Set_rng(Byte_ascii.Num_0, Byte_ascii.Num_9)
-					.Set_rng(Byte_ascii.Ltr_A, Byte_ascii.Ltr_Z)
-					.Set_rng(Byte_ascii.Ltr_a, Byte_ascii.Ltr_z)
-					.Set_rng(128, 255)
-					.To_ary();
-			}
-		}
-
-		// XO.BRY_BFR
-		boolean dirty = false;
-		int cur = src_bgn;
-		boolean called_by_bry = bfr == null;
-
-		while (true) {
-			// search for "&"
-			int find_bgn = Bry_find_.Find_fwd(src, Byte_ascii.Amp, cur);
-			if (find_bgn == Bry_find_.Not_found) {	// "&" not found; exit
-				if (dirty)
-					bfr.Add_mid(src, cur, src_end);
-				break;
-			}
-			int ent_bgn = find_bgn + 1;	// +1 to skip &
-
-			// get regex; (a) dec (&#09;); (b) hex (&#xFF;); (c) entity (&alpha;);
-			boolean[] regex = null;
-			// check for #;
-			if (ent_bgn < src_end && src[ent_bgn] == Byte_ascii.Hash) {
-				ent_bgn++;
-				if (ent_bgn < src_end) {
-					byte nxt = src[ent_bgn];
-					// check for x
-					if (nxt == Byte_ascii.Ltr_X || nxt == Byte_ascii.Ltr_x) {
-						ent_bgn++;
-						regex = Normalize__hex;
-					}
-				}
-				if (regex == null)
-					regex = Normalize__dec;
-			}
-			else {
-				regex = Normalize__ent;
-			}
-
-			// keep looping until invalid regex
-			int ent_end = ent_bgn;
-			byte b = Byte_ascii.Null;
-			for (int i = ent_bgn; i < src_end; i++) {
-				b = src[i];
-				if (regex[b])
-					ent_end++;
-				else
-					break;
-			}
-
-			// mark dirty; can optimize later by checking if "&lt;" already exists
-			dirty = true;
-			if (bfr == null) bfr = Bry_bfr_.New();
-			bfr.Add_mid(src, cur, find_bgn); // add everything before &
-
-			// invalid <- regex ended, but not at semic
-			if (b != Byte_ascii.Semic) {
-				bfr.Add(Gfh_entity_.Amp_bry);       // transform "&" to "&amp;"
-				cur = find_bgn + 1;                 // position after "&"
-				continue;
-			}
-
-			// do normalization
-			byte[] name = Bry_.Mid(src, ent_bgn, ent_end);
-			boolean ret = false;
-			if      (regex == Normalize__ent) {
-				Normalize_entity(bfr, name);
-				ret = true;
-			}
-			else if (regex == Normalize__dec) {
-				ret = Dec_char_reference(bfr, name);
-			}
-			else if (regex == Normalize__hex) {
-				ret = Hex_char_reference(bfr, name);
-			}
-			if (!ret) {
-				bfr.Add(Gfh_entity_.Amp_bry);       // transform "&" to "&amp;"
-				bfr.Add_bry_escape_html(src, find_bgn + 1, ent_end + 1); // "find_bgn + 1" to start after "&"; "ent_end + 1" to include ";"
-			}
-
-			cur = ent_end + 1;	// +1 to position after ";"
-		}
-
-		// XO.BRY_BFR
-		if (dirty) {
-			if (called_by_bry)
-				return bfr.To_bry_and_clear();
-			else
-				return Bry_.Empty;
-		}
-		else {
-			if (called_by_bry) {
-				if (src_bgn == 0 && src_end == src.length)
-					return src;
-				else
-					return Bry_.Mid(src, src_bgn, src_end);
-			}
-			else {
-				if (lone_bfr)
-					bfr.Add_mid(src, src_bgn, src_end);
-				return null;
-			}
-		}
+		return regex_url_char.Replace_by_cbk(bfr, lone_bfr, src, src_bgn, src_end, normalize_cbk);
+	}
+	public byte[] Decode_char_references(Bry_bfr bfr, boolean lone_bfr, byte[] src, int src_bgn, int src_end) {
+		return regex_url_char.Replace_by_cbk(bfr, lone_bfr, src, src_bgn, src_end, decode_cbk);
 	}
 
-	// If the named entity is defined in the HTML 4.0/XHTML 1.0 DTD,
-	// return the equivalent numeric entity reference (except for the core &lt;
-	// &gt; &amp; &quot;). If the entity is a MediaWiki-specific alias, returns
-	// the HTML equivalent. Otherwise, returns HTML-escaped text of
-	// pseudo-entity source (eg &amp;foo;)
-	private void Normalize_entity(Bry_bfr bfr, byte[] name) {
-		Object o = html_entities.Get_by_bry(name);
-		if (o == null) {
-			bfr.Add_str_a7("&amp;").Add(name).Add_byte_semic();
-		}
-		else {
-			Xomw_html_ent entity = (Xomw_html_ent)o;
-			bfr.Add(entity.html);
-		}
-	}
-
-	private boolean Dec_char_reference(Bry_bfr bfr, byte[] codepoint) {
-		int point = Bry_.To_int_or(codepoint, -1);
-		if (Validate_codepoint(point)) {
-			bfr.Add_str_a7("&#").Add_int_variable(point).Add_byte_semic();
-			return true;
-		}
-		return false;
-	}
-
-	private boolean Hex_char_reference(Bry_bfr bfr, byte[] codepoint) {
-		int point = Hex_utl_.Parse_or(codepoint, -1);
-		if (Validate_codepoint(point)) {
-			bfr.Add_str_a7("&#x");
-			Hex_utl_.Write_bfr(bfr, Bool_.Y, point);	// sprintf('&#x%x;', $point)
-			bfr.Add_byte_semic();
-			return true;
-		}
-		return false;
-	}
-
-	private boolean Validate_codepoint(int codepoint) {
+	public boolean Validate_codepoint(int codepoint) {
 		// U+000C is valid in HTML5 but not allowed in XML.
 		// U+000D is valid in XML but not allowed in HTML5.
 		// U+007F - U+009F are disallowed in HTML5 (control characters).
@@ -273,14 +181,13 @@ public class Xomw_sanitizer {
 			|| (codepoint >= 0x10000 && codepoint <= 0x10ffff);
 	}
 
-	private static boolean[] Normalize__dec, Normalize__hex, Normalize__ent; 
-	private static Hash_adp_bry html_entities;
+	public static Hash_adp_bry html_entities;
 	private static Hash_adp_bry Html_entities_new() {
 		Bry_bfr tmp = Bry_bfr_.New();
 		Hash_adp_bry rv = Hash_adp_bry.cs();
 
-		Html_entities_set(rv, Xomw_html_ent.Type__alias, -1, "רלמ", "&rlm;");
-		Html_entities_set(rv, Xomw_html_ent.Type__alias, -1, "رلم", "&rlm;");
+		Html_entities_set(rv, Xomw_html_ent.Type__alias, 8207, "רלמ", "&rlm;");
+		Html_entities_set(rv, Xomw_html_ent.Type__alias, 8207, "رلم", "&rlm;");
 
 		Html_entities_set(rv, Xomw_html_ent.Type__char, 60, "lt", "&lt;");
 		Html_entities_set(rv, Xomw_html_ent.Type__char, 62, "gt", "&gt;");
@@ -567,4 +474,396 @@ class Xomw_html_ent {
 	public final    byte[] name;
 	public final    byte[] html;
 	public static final byte Type__null = 0, Type__alias = 1, Type__char = 2, Type__entity = 3;
+}
+class Xomw_regex_find_domain {
+	public int prot_bgn;
+	public int prot_end;
+	public int host_bgn;
+	public int host_end;
+	public int rest_bgn;
+	public int rest_end;
+	public boolean Match(byte[] src, int src_bgn, int src_end) {
+		// Validate hostname portion
+		// XO.MW.REGEX: if (preg_match('!^([^:]+:)(//[^/]+)?(.*)$!iD', $url, $matches)) {
+		//   ([^:]+:)(//[^/]+)?(.*) 
+		//   "protocol" + "host" + "rest"
+		//   "protocol" -> ([^:]+:)     EX: "https:"    anything not-colon up to colon
+		//   "host"     -> (//[^/]+)?   EX: "//abc/"    anything not-slash up to slash
+		//   "rest"     -> (.*)         EX: rest"
+	    //   /i : case-insensitive
+	    //   /D : $ matches EOS, not NL
+
+		// find prot; EX: "https:"
+		prot_bgn = src_bgn;
+		prot_end = Bry_find_.Move_fwd(src, Byte_ascii.Colon, prot_bgn, src_end);
+		// exit if not found
+		if (prot_end == Bry_find_.Not_found) return false;
+
+		// find host: EX: "//a.org"
+		host_bgn = prot_end;
+		int double_slash_end = host_bgn + 2;
+		// exit if eos
+		if (double_slash_end >= src_end) return false;
+		// exit if not "//"
+		if (   src[host_bgn    ] != Byte_ascii.Slash
+			|| src[host_bgn + 1] != Byte_ascii.Slash
+			) return false;
+		host_end = Bry_find_.Find_fwd(src, Byte_ascii.Slash, double_slash_end, src_end);
+		// exit if not found
+		if (host_end == Bry_find_.Not_found) {
+			host_end = src_end;
+			rest_bgn = rest_end = -1;
+		}
+		// exit if only "//"
+		if (host_end - host_bgn == 2) return false;
+
+		// set rest
+		rest_bgn = host_end;
+		rest_end = src_end;
+		return true;
+	}
+}
+class Xomw_regex_escape_invalid {
+	// [\][<>"\\x00-\\x20\\x7F\|]
+	public boolean Escape(Bry_bfr bfr, byte[] src, int src_bgn, int src_end) {
+		boolean dirty = false;
+		int cur = src_bgn;
+		int prv = cur;
+		while (true) {
+			// eos
+			if (cur == src_end) {
+				if (dirty) {
+					bfr.Add_mid(src, prv, src_end);
+				}
+				break;
+			}
+			boolean match = false;
+			byte b = src[cur];
+			switch (b) {
+				case Byte_ascii.Brack_bgn:
+				case Byte_ascii.Brack_end:
+				case Byte_ascii.Angle_bgn:
+				case Byte_ascii.Angle_end:
+				case Byte_ascii.Quote:
+				case Byte_ascii.Pipe:
+				case Byte_ascii.Delete:
+					match = true;
+					break;
+				default:
+					if (b >= 0 && b <= 32)
+						match = true;
+					break;
+			}
+			if (match) {
+				bfr.Add_mid(src, prv, cur);
+				gplx.langs.htmls.encoders.Gfo_url_encoder_.Php_urlencode.Encode(bfr, src, cur, cur + 1);
+				dirty = true;
+				cur++;
+				prv = cur;
+			}
+			else
+				cur++;
+		}
+		return dirty;
+	}
+}
+class Xomw_regex_ipv6_brack {
+	public int host_bgn;
+	public int host_end;
+	public int segs_bgn;
+	public int segs_end;
+	private final    byte[] 
+	  Bry__host_bgn = Bry_.new_a7("//%5B")
+	, Bry__host_end = Bry_.new_a7("%5D")
+	;
+	public boolean Match(byte[] src, int src_bgn, int src_end) {
+		//	preg_match('!^//%5B([0-9A-Fa-f:.]+)%5D((:\d+)?)$!', $host, $matches)
+		//  XO.MW.REGEX:
+		//    !^//%5B([0-9A-Fa-f:.]+)%5D((:\d+)?)$!
+		//    "//%5B" + ("hex-dec" | [:.]) + "%5D" + numbers
+		//    EX: [ABCD]:80:12
+		host_bgn = src_bgn + Bry__host_bgn.length;
+		// exit if no match for "//%5B"
+		if (!Bry_.Match(src, src_bgn, host_bgn, Bry__host_bgn)) return false;
+
+		// skip all [0-9A-Fa-f:.]
+		host_end = host_bgn;
+		while (true) {
+			// exit if eos
+			if (host_end == src_end) return false;
+			boolean done = false;
+			byte b = src[host_end];
+			switch (b) {
+				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
+				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E: case Byte_ascii.Ltr_F:
+				case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e: case Byte_ascii.Ltr_f:
+				case Byte_ascii.Colon:
+				case Byte_ascii.Dot:
+					host_end++;
+					break;
+				case Byte_ascii.Percent:
+					// matches "%5D"
+					segs_bgn = host_end + Bry__host_end.length;
+					if (   Bry_.Match(src, host_end, segs_bgn, Bry__host_end)
+						&& host_end - host_bgn > 0) // host can't be 0-len; EX: "//%5B%5D"
+						done = true;
+					// exit if no match
+					else {
+						return false;
+					}
+					break;
+				// exit if no match
+				default: {
+					return false;
+				}
+			}
+			if (done) break;
+		}
+		// skip all (:\d+)
+		segs_end = segs_bgn;
+		while (true) {
+			// stop if eos
+			if (segs_end == src_end) return true;
+
+			// check if ":"
+			if (src[segs_end] == Byte_ascii.Colon) {
+				int num_bgn = segs_end + 1;
+				int num_end = Bry_find_.Find_fwd_while_num(src, num_bgn, src_end);
+				// exit if no nums found; EX:"[ABC]:80:"
+				if (num_end == num_bgn) {
+					return false;
+				}
+				segs_end = num_end;
+			}
+			// exit if seg doesn't start with ":"
+			else {
+				return false;
+			}
+		}
+	}
+}
+interface Xomw_regex_url_char_cbk {
+	boolean When_ent(Bry_bfr bfr, byte[] name);
+	boolean When_dec(Bry_bfr bfr, byte[] name);
+	boolean When_hex(Bry_bfr bfr, byte[] name);
+	boolean When_amp(Bry_bfr bfr);
+}
+class Xomw_regex_url_char_cbk__normalize implements Xomw_regex_url_char_cbk {
+	private final    Xomw_sanitizer sanitizer;
+	public Xomw_regex_url_char_cbk__normalize(Xomw_sanitizer sanitizer) {
+		this.sanitizer = sanitizer;
+	}
+	public boolean When_ent(Bry_bfr bfr, byte[] name) {  // XO.MW:normalizeEntity
+		// If the named entity is defined in the HTML 4.0/XHTML 1.0 DTD,
+		// return the equivalent numeric entity reference (except for the core &lt;
+		// &gt; &amp; &quot;). If the entity is a MediaWiki-specific alias, returns
+		// the HTML equivalent. Otherwise, returns HTML-escaped text of
+		// pseudo-entity source (eg &amp;foo;)
+		Object o = Xomw_sanitizer.html_entities.Get_by_bry(name);
+		if (o == null) {
+			bfr.Add_str_a7("&amp;").Add(name).Add_byte_semic();
+			return false;
+		}
+		else {
+			Xomw_html_ent entity = (Xomw_html_ent)o;
+			bfr.Add(entity.html);
+			return true;
+		}
+	}
+	public boolean When_dec(Bry_bfr bfr, byte[] name) {  // XO.MW:decCharReference
+		int point = Bry_.To_int_or(name, -1);
+		if (sanitizer.Validate_codepoint(point)) {
+			bfr.Add_str_a7("&#").Add_int_variable(point).Add_byte_semic();
+			return true;
+		}
+		return false;
+	}
+	public boolean When_hex(Bry_bfr bfr, byte[] name) {  // XO.MW:hexCharReference
+		int point = Hex_utl_.Parse_or(name, -1);
+		if (sanitizer.Validate_codepoint(point)) {
+			bfr.Add_str_a7("&#x");
+			Hex_utl_.Write_bfr(bfr, Bool_.Y, point);	// sprintf('&#x%x;', $point)
+			bfr.Add_byte_semic();
+			return true;
+		}
+		return false;
+	}
+	public boolean When_amp(Bry_bfr bfr) {
+		bfr.Add(Gfh_entity_.Amp_bry);       // transform "&" to "&amp;"
+		return true;
+	}
+}
+class Xomw_regex_url_char_cbk__decode implements Xomw_regex_url_char_cbk {
+	private final    Xomw_sanitizer sanitizer;
+	public Xomw_regex_url_char_cbk__decode(Xomw_sanitizer sanitizer) {
+		this.sanitizer = sanitizer;
+	}
+	public boolean When_ent(Bry_bfr bfr, byte[] name) {// XO.MW:decodeEntity
+		// If the named entity is defined in the HTML 4.0/XHTML 1.0 DTD,
+		// return the UTF-8 encoding of that character. Otherwise, returns
+		// pseudo-entity source (eg "&foo;")
+		Object o = Xomw_sanitizer.html_entities.Get_by_bry(name);
+		if (o == null) {
+			bfr.Add_byte(Byte_ascii.Amp).Add(name).Add_byte_semic();
+		}
+		else {
+			Xomw_html_ent entity = (Xomw_html_ent)o;
+			bfr.Add(gplx.core.intls.Utf16_.Encode_int_to_bry(entity.code));
+		}
+		return true;
+	}
+	public boolean When_dec(Bry_bfr bfr, byte[] name) {
+		return Decode_char(bfr, Bry_.To_int(name));
+	}
+	public boolean When_hex(Bry_bfr bfr, byte[] name) {
+		return Decode_char(bfr, gplx.core.encoders.Hex_utl_.Parse_or(name, 0, name.length, -1));
+	}
+	public boolean When_amp(Bry_bfr bfr) {
+		bfr.Add_byte(Byte_ascii.Amp);
+		return true;
+	}
+	private boolean Decode_char(Bry_bfr bfr, int point) {// XO.MW:decodeChar
+		// Return UTF-8 String for a codepoint if that is a valid
+		// character reference, otherwise U+FFFD REPLACEMENT CHARACTER.
+		if (sanitizer.Validate_codepoint(point)) {
+			bfr.Add(gplx.core.intls.Utf16_.Encode_int_to_bry(point));
+		}
+		else {
+			bfr.Add(Utf8_replacement_char);
+		}
+		return true;
+	}
+	private static final    byte[] Utf8_replacement_char = Bry_.New_by_ints(255, 253); // 0xfffd 
+}
+class Xomw_regex_url_char {
+	// Regular expression to match various types of character references in
+	// Sanitizer::normalizeCharReferences and Sanitizer::decodeCharReferences
+	// static final CHAR_REFS_REGEX =
+	//	'/&([A-Za-z0-9\x80-\xff]+);
+	//	|&\#([0-9]+);
+	//	|&\#[xX]([0-9A-Fa-f]+);
+	//	|(&)/x';
+	public Xomw_regex_url_char() {
+		// assert static structs
+		if (Normalize__dec == null) {
+			synchronized (Xomw_sanitizer.class) {
+				Normalize__dec = Bool_ary_bldr.New_u8().Set_rng(Byte_ascii.Num_0, Byte_ascii.Num_9).To_ary();
+				Normalize__hex = Bool_ary_bldr.New_u8()
+					.Set_rng(Byte_ascii.Num_0, Byte_ascii.Num_9)
+					.Set_rng(Byte_ascii.Ltr_A, Byte_ascii.Ltr_Z)
+					.Set_rng(Byte_ascii.Ltr_a, Byte_ascii.Ltr_z)
+					.To_ary();
+				Normalize__ent = Bool_ary_bldr.New_u8()
+					.Set_rng(Byte_ascii.Num_0, Byte_ascii.Num_9)
+					.Set_rng(Byte_ascii.Ltr_A, Byte_ascii.Ltr_Z)
+					.Set_rng(Byte_ascii.Ltr_a, Byte_ascii.Ltr_z)
+					.Set_rng(128, 255)
+					.To_ary();
+			}
+		}
+	}
+	public byte[] Replace_by_cbk(Bry_bfr bfr, boolean lone_bfr, byte[] src, int src_bgn, int src_end, Xomw_regex_url_char_cbk cbk) {
+		// XO.BRY_BFR
+		boolean dirty = false;
+		int cur = src_bgn;
+		boolean called_by_bry = bfr == null;
+
+		while (true) {
+			// search for "&"
+			int find_bgn = Bry_find_.Find_fwd(src, Byte_ascii.Amp, cur);
+			if (find_bgn == Bry_find_.Not_found) {	// "&" not found; exit
+				if (dirty)
+					bfr.Add_mid(src, cur, src_end);
+				break;
+			}
+			int ent_bgn = find_bgn + 1;	// +1 to skip &
+
+			// get regex; (a) dec (&#09;); (b) hex (&#xFF;); (c) entity (&alpha;);
+			boolean[] regex = null;
+			// check for #;
+			if (ent_bgn < src_end && src[ent_bgn] == Byte_ascii.Hash) {
+				ent_bgn++;
+				if (ent_bgn < src_end) {
+					byte nxt = src[ent_bgn];
+					// check for x
+					if (nxt == Byte_ascii.Ltr_X || nxt == Byte_ascii.Ltr_x) {
+						ent_bgn++;
+						regex = Normalize__hex;
+					}
+				}
+				if (regex == null)
+					regex = Normalize__dec;
+			}
+			else {
+				regex = Normalize__ent;
+			}
+
+			// keep looping until invalid regex
+			int ent_end = ent_bgn;
+			int b = Byte_ascii.Null;
+			for (int i = ent_bgn; i < src_end; i++) {
+				b = src[i] & 0xFF; // PATCH.JAVA:need to convert to unsigned byte
+				if (regex[b])
+					ent_end++;
+				else
+					break;
+			}
+
+			// mark dirty; can optimize later by checking if "&lt;" already exists
+			dirty = true;
+			if (bfr == null) bfr = Bry_bfr_.New();
+			bfr.Add_mid(src, cur, find_bgn); // add everything before &
+
+			// invalid <- regex ended, but not at semic
+			if (b != Byte_ascii.Semic) {
+				cbk.When_amp(bfr);
+				cur = find_bgn + 1;                 // position after "&"
+				continue;
+			}
+
+			// do normalization
+			byte[] name = Bry_.Mid(src, ent_bgn, ent_end);
+			boolean ret = false;
+			if      (regex == Normalize__ent) {
+				cbk.When_ent(bfr, name);
+				ret = true;
+			}
+			else if (regex == Normalize__dec) {
+				ret = cbk.When_dec(bfr, name);
+			}
+			else if (regex == Normalize__hex) {
+				ret = cbk.When_hex(bfr, name);
+			}
+			if (!ret) {
+				cbk.When_amp(bfr);
+				cur = find_bgn + 1;                 // position after "&"
+				continue;
+			}
+
+			cur = ent_end + 1;	// +1 to position after ";"
+		}
+
+		// XO.BRY_BFR
+		if (dirty) {
+			if (called_by_bry)
+				return bfr.To_bry_and_clear();
+			else
+				return Bry_.Empty;
+		}
+		else {
+			if (called_by_bry) {
+				if (src_bgn == 0 && src_end == src.length)
+					return src;
+				else
+					return Bry_.Mid(src, src_bgn, src_end);
+			}
+			else {
+				if (lone_bfr)
+					bfr.Add_mid(src, src_bgn, src_end);
+				return null;
+			}
+		}
+	}
+	private static boolean[] Normalize__dec, Normalize__hex, Normalize__ent; 
 }

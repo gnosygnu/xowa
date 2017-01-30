@@ -60,13 +60,13 @@ public class Xomw_ttl_utl {
 			if (cur == src_end) break;
 			byte b = src[cur];
 			int b_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
-			if (b_len == 1) {   // ASCII
-				if (valid[b])	// valid; EX: "a0A B&$"
+			if (b_len == 1) {         // ASCII
+				if (valid[b & 0xFF])  // valid; EX: "a0A B&$"; PATCH.JAVA:need to convert to unsigned byte
 					cur++;
-				else            // invalid; EX: "<title>"
+				else                  // invalid; EX: "<title>"
 					break;
 			}
-			else {              // Multi-byte UTF8; NOTE: all sequences are valid
+			else {                    // Multi-byte UTF8; NOTE: all sequences are valid
 				cur += b_len;
 			}
 		}

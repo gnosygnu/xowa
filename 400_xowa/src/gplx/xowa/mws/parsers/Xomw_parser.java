@@ -29,7 +29,7 @@ public class Xomw_parser {
 	private final    Xomw_nbsp_wkr nbsp_wkr = new Xomw_nbsp_wkr();
 	private final    Xomw_block_level_pass block_wkr = new Xomw_block_level_pass();
 	private final    Xomw_heading_wkr heading_wkr = new Xomw_heading_wkr();
-	private final    Xomw_magiclinks_wkr magiclinks_wkr = new Xomw_magiclinks_wkr();
+	private final    Xomw_magiclinks_wkr magiclinks_wkr;
 	private final    Xomw_doubleunder_wkr doubleunder_wkr = new Xomw_doubleunder_wkr();
 	private final    Xomw_link_renderer link_renderer = new Xomw_link_renderer();
 	private final    Xomw_link_holders holders;
@@ -50,13 +50,6 @@ public class Xomw_parser {
 	public Xomw_lnki_wkr           Lnki_wkr()        {return lnki_wkr;}       private final    Xomw_lnki_wkr lnki_wkr;
 	public boolean                 Output_type__wiki() {return output_type__wiki;} private final    boolean output_type__wiki = false;
 	public Xomw_parser() {
-		this.protocols_trie = Xomw_parser.Protocols__dflt();
-		this.holders = new Xomw_link_holders(link_renderer, tmp);
-		this.table_wkr = new Xomw_table_wkr(this);
-		this.quote_wkr = new Xomw_quote_wkr(this);
-		this.lnke_wkr = new Xomw_lnke_wkr(this);
-		this.lnki_wkr = new Xomw_lnki_wkr(this, holders, link_renderer, protocols_trie);
-		this.heading_wkr_cbk = new Xomw_heading_cbk__html();
 		if (regex_space == null) {
 			synchronized (Type_adp_.ClassOf_obj(this)) {
 				regex_space = new Xomw_regex_space();
@@ -64,13 +57,22 @@ public class Xomw_parser {
 				regex_url = new Xomw_regex_url(regex_space);
 			}
 		}
+
+		this.protocols_trie = Xomw_parser.Protocols__dflt();
+		this.holders = new Xomw_link_holders(link_renderer, tmp);
+		this.table_wkr = new Xomw_table_wkr(this);
+		this.quote_wkr = new Xomw_quote_wkr(this);
+		this.lnke_wkr = new Xomw_lnke_wkr(this);
+		this.lnki_wkr = new Xomw_lnki_wkr(this, holders, link_renderer, protocols_trie);
+		this.heading_wkr_cbk = new Xomw_heading_cbk__html();
+		this.magiclinks_wkr = new Xomw_magiclinks_wkr(sanitizer, linker, regex_boundary, regex_url);
 	}
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		linker.Init_by_wiki(wiki.Lang().Lnki_trail_mgr().Trie());
 		lnke_wkr.Init_by_wiki(protocols_trie, regex_url, regex_space);
 		lnki_wkr.Init_by_wiki(wiki);
-		magiclinks_wkr.Init_by_wiki(linker, regex_boundary, regex_url);
 		doubleunder_wkr.Init_by_wiki(doubleunder_data, wiki.Lang());
+		magiclinks_wkr.Init_by_wiki();
 	}
 	public void Init_by_page(Xoa_ttl ttl) {
 		pctx.Init_by_page(ttl);
@@ -115,7 +117,7 @@ public class Xomw_parser {
 		table_wkr.Do_table_stuff(pctx, pbfr);
 		hr_wkr.Replace_hrs(pctx, pbfr);
 
-		doubleunder_wkr.Do_double_underscore(pctx, pbfr);
+		doubleunder_wkr.Do_double_underscore(pctx, pbfr);   // DONE: DATE:2017-01-27
 
 		heading_wkr.Do_headings(pctx, pbfr, heading_wkr_cbk);
 		lnki_wkr.Replace_internal_links(pctx, pbfr);

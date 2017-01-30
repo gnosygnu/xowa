@@ -19,18 +19,93 @@ package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*;
 public class Xomw_sanitizer__tst {
 	private final    Xomw_sanitizer__fxt fxt = new Xomw_sanitizer__fxt();
-	@Test   public void Text()                  {fxt.Test__normalize_char_references("abc"                      , "abc");}
-	@Test   public void Dec()                   {fxt.Test__normalize_char_references("&#08;"                    , "&amp;#08;");}
-	@Test   public void Dec__invalid()          {fxt.Test__normalize_char_references("&#09;"                    , "&#9;");}
-	@Test   public void Hex()                   {fxt.Test__normalize_char_references("&#xFF;"                   , "&#xff;");}
-	@Test   public void Entity()                {fxt.Test__normalize_char_references("&alpha;"                  , "&#945;");}
-	@Test   public void Entity__lt()            {fxt.Test__normalize_char_references("&lt;"                     , "&lt;");}
-	@Test   public void Invalid()               {fxt.Test__normalize_char_references("&(invalid);"              , "&amp;(invalid);");}
-	@Test   public void Many() {
+	@Test   public void Normalize__text()                  {fxt.Test__normalize_char_references("abc"                      , "abc");}
+	@Test   public void Normalize__dec()                   {fxt.Test__normalize_char_references("&#08;"                    , "&amp;#08;");}
+	@Test   public void Normalize__dec__invalid()          {fxt.Test__normalize_char_references("&#09;"                    , "&#9;");}
+	@Test   public void Normalize__hex()                   {fxt.Test__normalize_char_references("&#xFF;"                   , "&#xff;");}
+	@Test   public void Normalize__entity()                {fxt.Test__normalize_char_references("&alpha;"                  , "&#945;");}
+	@Test   public void Normalize__entity__lt()            {fxt.Test__normalize_char_references("&lt;"                     , "&lt;");}
+	@Test   public void Normalize__entity__alias()         {fxt.Test__normalize_char_references("&רלמ;"                    , "&rlm;");}
+	@Test   public void Normalize__amp()                   {fxt.Test__normalize_char_references("a&b"                      , "a&amp;b");}
+	@Test   public void Normalize__invalid()               {fxt.Test__normalize_char_references("&(invalid);"              , "&amp;(invalid);");}
+	@Test   public void Normalize__many() {
 		fxt.Test__normalize_char_references
 		( "a &#09; b &alpha; c &#xFF; d &(invalid); e"
 		, "a &#9; b &#945; c &#xff; d &amp;(invalid); e"
 		);
+	}
+	@Test   public void Regex__domain() {
+		Xomw_regex_find_domain regex_domain = new Xomw_regex_find_domain();
+		// normal
+		fxt.Test__regex_domain_y(regex_domain, "https://a.org/bcd", "https:", "//a.org", "/bcd");
+		// trailing backslash
+		fxt.Test__regex_domain_y(regex_domain, "https://a.org/", "https:", "//a.org", "/");
+		// domain only
+		fxt.Test__regex_domain_y(regex_domain, "https://a.org", "https:", "//a.org", "");
+		// colon not found
+		fxt.Test__regex_domain_n(regex_domain, "https//a.org/bcd");
+		// host_bgn.eos
+		fxt.Test__regex_domain_n(regex_domain, "https:");
+		// host_bgn.//
+		fxt.Test__regex_domain_n(regex_domain, "https:a//");
+		// host_bgn.///
+		fxt.Test__regex_domain_n(regex_domain, "https:///a.org/b");
+	}
+	@Test   public void Regex__clean_url() {
+		Xomw_regex_escape_invalid regex = new Xomw_regex_escape_invalid();
+		// noop
+		fxt.Test__regex_escape_invalid(regex, "https://a.org/bcd", Bool_.N, "");
+		// symbols
+		fxt.Test__regex_escape_invalid(regex, "[]<>\"|", Bool_.Y, "%5B%5D%3C%3E%22%7C%7F");
+		// range: 00 - 32
+		fxt.Test__regex_escape_invalid(regex, "\t\n ", Bool_.Y, "%09%0A+");
+	}
+	@Test   public void Regex__ipv6_brack() {
+		Xomw_regex_ipv6_brack regex = new Xomw_regex_ipv6_brack();
+		// basic
+		fxt.Test__regex_ipv6_brack(regex, Bool_.Y, "//%5B0a.1b:12%5D:123");
+		// port: none
+		fxt.Test__regex_ipv6_brack(regex, Bool_.Y, "//%5Ba%5D");
+		// port: multiple
+		fxt.Test__regex_ipv6_brack(regex, Bool_.Y, "//%5Ba%5D:1:2:3");
+		// "//%5B" missing
+		fxt.Test__regex_ipv6_brack(regex, Bool_.N, "abc");
+		// ipv6: invalid
+		fxt.Test__regex_ipv6_brack(regex, Bool_.N, "//%5Ba!%5D:1");
+		// ipv6: 0-len
+		fxt.Test__regex_ipv6_brack(regex, Bool_.N, "//%5B%5D:1");
+		// port: invalid
+		fxt.Test__regex_ipv6_brack(regex, Bool_.N, "//%5Ba%5D:a");
+		// port: 0-len
+		fxt.Test__regex_ipv6_brack(regex, Bool_.N, "//%5Ba%5D:");
+	}
+	@Test   public void Decode() {
+		// dec
+		fxt.Test__decode_char_references("&#33;"           , "!");
+		// hex
+		fxt.Test__decode_char_references("&#x23;"          , "#");
+		// entity
+		fxt.Test__decode_char_references("&alpha;"         , "α");
+		// entity:lt
+		fxt.Test__decode_char_references("&lt;"            , "<");
+		// entity:rlm
+		fxt.Test__decode_char_references("&רלמ;"           , "‏");
+		// entity:invalid
+		fxt.Test__decode_char_references("&invalid;"       , "&invalid;");
+		// amp
+		fxt.Test__decode_char_references("a&b"             , "a&b");
+	}
+	@Test   public void Clean_url() {
+		// entity
+		fxt.Test__clean_url("http://a.org/b&amp;c"           , "http://a.org/b&c");
+		// entity: escape
+		fxt.Test__clean_url("http://a.org/b&quot;c"          , "http://a.org/b%22c");
+		// domain=n; make sure &quot; is changed, but not soft-hyphen
+		fxt.Test__clean_url("a&quot;­z"                      , "a%22­z");
+		// host: invalid idn
+		fxt.Test__clean_url("http://a᠆b.org/c᠆d"              , "http://ab.org/c᠆d");
+		// ipv6_brack
+		fxt.Test__clean_url("http://[0a.1b:12]:123/cd"       , "http://[0a.1b:12]:123/cd");
 	}
 }
 class Xomw_sanitizer__fxt {
@@ -40,5 +115,34 @@ class Xomw_sanitizer__fxt {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		sanitizer.Normalize_char_references(tmp, Bool_.Y, src_bry, 0, src_bry.length);
 		Gftest.Eq__str(expd, tmp.To_str_and_clear());
+	}
+	public void Test__regex_domain_y(Xomw_regex_find_domain regex_domain, String src_str, String expd_prot, String expd_host, String expd_rest) {
+		byte[] src_bry = Bry_.new_u8(src_str);
+		Gftest.Eq__bool(true, regex_domain.Match(src_bry, 0, src_bry.length), src_str);
+		Gftest.Eq__str(expd_prot, Bry_.Mid(src_bry, regex_domain.prot_bgn, regex_domain.prot_end));
+		Gftest.Eq__str(expd_host, Bry_.Mid(src_bry, regex_domain.host_bgn, regex_domain.host_end));
+		Gftest.Eq__str(expd_rest, Bry_.Mid(src_bry, regex_domain.rest_bgn, regex_domain.rest_end));
+	}
+	public void Test__regex_domain_n(Xomw_regex_find_domain regex_domain, String src_str) {
+		byte[] src_bry = Bry_.new_u8(src_str);
+		Gftest.Eq__bool(false, regex_domain.Match(src_bry, 0, src_bry.length), src_str);
+	}
+	public void Test__regex_escape_invalid(Xomw_regex_escape_invalid regex, String src_str, boolean expd_rslt, String expd_str) {
+		byte[] src_bry = Bry_.new_u8(src_str);
+		Gftest.Eq__bool(expd_rslt, regex.Escape(tmp, src_bry, 0, src_bry.length));
+		Gftest.Eq__str(expd_str, tmp.To_bry_and_clear());
+	}
+	public void Test__regex_ipv6_brack(Xomw_regex_ipv6_brack regex, boolean expd_rslt, String src_str) {
+		byte[] src_bry = Bry_.new_u8(src_str);
+		Gftest.Eq__bool(expd_rslt, regex.Match(src_bry, 0, src_bry.length));
+	}
+	public void Test__decode_char_references(String src_str, String expd) {
+		byte[] src_bry = Bry_.new_u8(src_str);
+		sanitizer.Decode_char_references(tmp, Bool_.Y, src_bry, 0, src_bry.length);
+		Gftest.Eq__str(expd, tmp.To_str_and_clear());
+	}
+	public void Test__clean_url(String src_str, String expd) {
+		byte[] src_bry = Bry_.new_u8(src_str);
+		Gftest.Eq__str(expd, sanitizer.Clean_url(src_bry));
 	}
 }

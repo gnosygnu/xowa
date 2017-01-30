@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.phps.utls; import gplx.*; import gplx.langs.*; import gplx.langs.phps.*;
-import gplx.core.btries.*;
+import gplx.core.btries.*; import gplx.core.brys.*;
 import gplx.core.primitives.*;
 public class Php_preg_ {
 	public static byte[][] Split(Int_list list, byte[] src, int src_bgn, int src_end, byte[] dlm, boolean extend) {
@@ -71,5 +71,42 @@ public class Php_preg_ {
 			}
 		}
 		return null;
+	}
+	
+	public static void Replace(Bry_tmp bry, Bry_bfr tmp, Btrie_slim_mgr find_trie, Btrie_rv trv, byte[] repl_bry) {
+		byte[] src = bry.src;
+		int src_bgn = bry.src_bgn;
+		int src_end = bry.src_end;
+ 
+		int cur = src_bgn;
+		int prv = cur;
+		boolean dirty = false;
+
+		while (true) {
+			// eos
+			if (cur == src_end) {
+				if (dirty) {
+					tmp.Add_mid(src, prv, src_end);
+				}
+				break;
+			}
+
+			byte b = src[cur];
+			Object o = find_trie.Match_at_w_b0(trv, b, src, cur, src_end);
+			if (o == null) {
+				cur += gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
+			}
+			else {
+				dirty = true;
+				tmp.Add_mid(src, prv, cur);
+				tmp.Add(repl_bry);
+				cur = trv.Pos();
+				prv = cur;
+			}
+		}
+
+		if (dirty) {
+			bry.Set_by_bfr(tmp);
+		}
 	}
 }

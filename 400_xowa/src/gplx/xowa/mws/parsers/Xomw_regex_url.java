@@ -20,6 +20,7 @@ import gplx.core.btries.*;
 public class Xomw_regex_url {
 	private final    Btrie_slim_mgr trie;
 	public Xomw_regex_url(Xomw_regex_space regex_space) {
+		//       [^][<>"\\x00-\\x20\\x7F\|]
 		// REGEX:[^][<>"\\x00-\\x20\\x7F\p{Zs}]; NOTE: val is just a marker
 		this.trie = Btrie_slim_mgr.cs();
 		trie.Add_str_byte__many(Byte_.Zero, "[", "]", "<", ">", "\"");

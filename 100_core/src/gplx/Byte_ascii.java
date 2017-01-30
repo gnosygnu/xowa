@@ -40,7 +40,7 @@ public class Byte_ascii {
 		, Ltr_n			= 110, Ltr_o			= 111, Ltr_p			= 112, Ltr_q			= 113, Ltr_r			= 114
 		, Ltr_s			= 115, Ltr_t			= 116, Ltr_u			= 117, Ltr_v			= 118, Ltr_w			= 119
 		, Ltr_x			= 120, Ltr_y			= 121, Ltr_z			= 122, Curly_bgn		= 123, Pipe				= 124
-		, Curly_end		= 125, Tilde			= 126
+		, Curly_end		= 125, Tilde			= 126, Delete           = 127
 		;
 	public static final byte
 	  Angle_bgn = Lt, Angle_end = Gt

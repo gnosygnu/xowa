@@ -44,7 +44,7 @@ public class Php_str_ {
 		if (max == -1) max = src_len;
 		int rv = 0;
 		for (int i = bgn; i < src_len; i++) {
-			if (find[src[i]] && rv < max) 
+			if (find[src[i] & 0xFF] && rv < max) // PATCH.JAVA:need to convert to unsigned byte
 				rv++;
 			else
 				break;
@@ -94,7 +94,7 @@ public class Php_str_ {
 		if (max == -1) max = Int_.Max_value;
 		int rv = 0;
 		for (int i = bgn - 1; i > -1; i--) {
-			if (find[src[i]] && rv < max) 
+			if (find[src[i & 0xFF]] && rv < max)  // PATCH.JAVA:need to convert to unsigned byte
 				rv++;
 			else
 				break;
