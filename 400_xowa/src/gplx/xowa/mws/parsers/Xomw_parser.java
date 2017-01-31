@@ -21,6 +21,7 @@ import gplx.xowa.mws.parsers.prepros.*; import gplx.xowa.mws.parsers.headings.*;
 import gplx.xowa.mws.parsers.quotes.*; import gplx.xowa.mws.parsers.tables.*; import gplx.xowa.mws.parsers.hrs.*; import gplx.xowa.mws.parsers.nbsps.*;
 import gplx.xowa.mws.parsers.lnkes.*; import gplx.xowa.mws.parsers.lnkis.*; import gplx.xowa.mws.parsers.magiclinks.*; import gplx.xowa.mws.parsers.doubleunders.*;
 import gplx.xowa.mws.utls.*; import gplx.xowa.mws.linkers.*;
+import gplx.xowa.mws.htmls.*;
 public class Xomw_parser {
 	private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();
 	private final    Xomw_table_wkr table_wkr;
@@ -55,6 +56,8 @@ public class Xomw_parser {
 				regex_space = new Xomw_regex_space();
 				regex_boundary = new Xomw_regex_boundary(regex_space);
 				regex_url = new Xomw_regex_url(regex_space);
+				Atr__rel = Bry_.new_a7("rel");
+				Get_external_link_rel = Bry_.new_a7("nofollow");
 			}
 		}
 
@@ -65,7 +68,7 @@ public class Xomw_parser {
 		this.lnke_wkr = new Xomw_lnke_wkr(this);
 		this.lnki_wkr = new Xomw_lnki_wkr(this, holders, link_renderer, protocols_trie);
 		this.heading_wkr_cbk = new Xomw_heading_cbk__html();
-		this.magiclinks_wkr = new Xomw_magiclinks_wkr(sanitizer, linker, regex_boundary, regex_url);
+		this.magiclinks_wkr = new Xomw_magiclinks_wkr(this, sanitizer, linker, regex_boundary, regex_url);
 	}
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		linker.Init_by_wiki(wiki.Lang().Lnki_trail_mgr().Trie());
@@ -263,6 +266,19 @@ public class Xomw_parser {
 		strip_state.Add_general(marker, text);
 		return marker;
 	}
+	public Xomwh_atr_mgr Get_external_link_attribs(Xomwh_atr_mgr atrs) {
+		atrs.Clear();
+		byte[] rel = Get_external_link_rel;
+
+		// XO.MW.UNSUPPORTED: XO will assume target is blank; MW will set target of "_blank", "_self", etc. depending on global opt
+		// $target = $this->mOptions->getExternalLinkTarget();
+		atrs.Add(Atr__rel, rel);
+		return atrs;
+	}
+	// XO.MW.UNSUPPORTED: XO will always assume "nofollow"; MW will return "nofollow" if (a) ns is in ns-exception list or (b) domain is in domain-exception list; 
+	// if ($wgNoFollowLinks && !in_array($ns, $wgNoFollowNsExceptions) && !wfMatchesDomainList($url, $wgNoFollowDomainExceptions)
+	public byte[] Get_external_link_rel;
+	private static byte[] Atr__rel;
 	private static final    byte[] Bry__strip_state_item = Bry_.new_a7("-item-"), Bry__noparse = Bry_.new_a7("NOPARSE");
 	private static final    byte[] Bry__marker__noparse = Bry_.Add(Xomw_strip_state.Bry__marker__bgn, Bry__noparse);
 	public static Btrie_slim_mgr Protocols__dflt() {

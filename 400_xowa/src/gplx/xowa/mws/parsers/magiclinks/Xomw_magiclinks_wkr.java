@@ -27,14 +27,17 @@ public class Xomw_magiclinks_wkr {
 	private static byte[] Tag__anch__rhs;
 	private boolean[] url_separators;
 	private static Xomw_regex_link_interrupt regex_link_interrupt;
+	private final    Xomw_parser parser;
 	private final    Xomw_regex_boundary regex_boundary;
 	private final    Xomw_regex_url regex_url;
 	private final    Xomw_sanitizer sanitizer;
 	private final    Xomw_linker linker;
+	private final    Xomwh_atr_mgr atrs = new Xomwh_atr_mgr();
 	private byte[] page_title;
 
 	private static final byte Regex__anch = 1, Regex__elem = 2, Regex__free = 3;
-	public Xomw_magiclinks_wkr(Xomw_sanitizer sanitizer, Xomw_linker linker, Xomw_regex_boundary regex_boundary, Xomw_regex_url regex_url) {
+	public Xomw_magiclinks_wkr(Xomw_parser parser, Xomw_sanitizer sanitizer, Xomw_linker linker, Xomw_regex_boundary regex_boundary, Xomw_regex_url regex_url) {
+		this.parser = parser;
 		this.sanitizer = sanitizer;
 		this.linker = linker;
 		this.regex_boundary = regex_boundary;
@@ -262,7 +265,7 @@ public class Xomw_magiclinks_wkr {
 			linker.Make_external_link(bfr, url
 				, url	// $this->getConverterLanguage()->markNoConversion($url, true),
 				, true, Bry_.new_a7("free")
-				, new Xomwh_atr_mgr()	// $this->getExternalLinkAttribs($url)
+				, parser.Get_external_link_attribs(atrs)
 				, page_title);
 
 			// XO.MW.UNSUPPORTED.HOOK: registers link for processing by other extensions?

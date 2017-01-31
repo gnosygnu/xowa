@@ -24,13 +24,15 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Bry_bfr tmp;
 	private Btrie_slim_mgr protocol_trie; private final    Btrie_rv trv = new Btrie_rv();
 	private int autonumber;
+	private final    Xomw_parser parser;
 	private final    Xomw_linker linker;
 	private final    Xomwh_atr_mgr attribs = new Xomwh_atr_mgr();
 	private Xomw_regex_url regex_url;
 	private Xomw_regex_space regex_space;
-	public Xomw_lnke_wkr(Xomw_parser mgr) {
-		this.tmp = mgr.Tmp();
-		this.linker = mgr.Linker();
+	public Xomw_lnke_wkr(Xomw_parser parser) {
+		this.parser = parser;
+		this.tmp = parser.Tmp();
+		this.linker = parser.Linker();
 	}
 	public void Init_by_wiki(Btrie_slim_mgr protocol_trie, Xomw_regex_url regex_url, Xomw_regex_space regex_space) {
 		this.protocol_trie = protocol_trie;
@@ -187,9 +189,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// This means that users can paste URLs directly into the text
 			// Funny characters like � aren't valid in URLs anyway
 			// This was changed in August 2004
-			// TODO.XO:getExternalLinkAttribs
-			attribs.Clear();
-			linker.Make_external_link(bfr, Bry_.Mid(src, url_bgn, url_end), Bry_.Mid(src, text_bgn, text_end), Bool_.N, link_type, attribs, Bry_.Empty);				
+			linker.Make_external_link(bfr, Bry_.Mid(src, url_bgn, url_end), Bry_.Mid(src, text_bgn, text_end), Bool_.N, link_type, parser.Get_external_link_attribs(attribs), Bry_.Empty);
 
 			// Register link in the output Object.
 			// Replace unnecessary URL escape codes with the referenced character
@@ -198,36 +198,6 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// $this->mOutput->addExternalLink( $pasteurized );
 		}
 	}
-//		public function getExternalLinkAttribs( $url ) {
-//			$attribs = [];
-//			$rel = self::getExternalLinkRel( $url, $this->mTitle );
-//
-//			$target = $this->mOptions->getExternalLinkTarget();
-//			if ( $target ) {
-//				$attribs['target'] = $target;
-//				if ( !in_array( $target, [ '_self', '_parent', '_top' ] ) ) {
-//					// T133507. New windows can navigate parent cross-origin.
-//					// Including noreferrer due to lacking browser
-//					// support of noopener. Eventually noreferrer should be removed.
-//					if ( $rel !== '' ) {
-//						$rel .= ' ';
-//					}
-//					$rel .= 'noreferrer noopener';
-//				}
-//			}
-//			$attribs['rel'] = $rel;
-//			return $attribs;
-//		}
-//		public static function getExternalLinkRel( $url = false, $title = null ) {
-//			global $wgNoFollowLinks, $wgNoFollowNsExceptions, $wgNoFollowDomainExceptions;
-//			$ns = $title ? $title->getNamespace() : false;
-//			if ( $wgNoFollowLinks && !in_array( $ns, $wgNoFollowNsExceptions )
-//				&& !wfMatchesDomainList( $url, $wgNoFollowDomainExceptions )
-//			) {
-//				return 'nofollow';
-//			}
-//			return null;
-//		}
 
 	private static final    byte[]
 	  Link_type__free           = Bry_.new_a7("free")
