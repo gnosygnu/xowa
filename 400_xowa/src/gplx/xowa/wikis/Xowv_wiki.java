@@ -129,7 +129,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		if (ttl.Ns().Id_is_special())
 			special_mgr.Get_by_ttl(rv, url, ttl);
 		else
-			html__hdump_mgr.Load_mgr().Load(rv, ttl);
+			html__hdump_mgr.Load_mgr().Load_by_xowh(rv, ttl, Bool_.Y);
 	}
 	public Xoa_ttl	Ttl_parse(byte[] ttl)								{return Ttl_parse(ttl, 0, ttl.length);}
 	public Xoa_ttl	Ttl_parse(byte[] src, int src_bgn, int src_end)		{return Xoa_ttl.Parse(app.Utl_amp_mgr(), app.Utl_case_mgr(), xwiki_mgr, ns_mgr, src, src_bgn, src_end);}

@@ -137,7 +137,7 @@ public class Xol_msg_mgr_ {
 			Xoh_page hpg = new Xoh_page();
 			pg = hpg;				
 			hpg.Ctor_by_hview(wiki, Xoa_url.New(wiki, ttl), ttl, -1);
-			wiki.Html__hdump_mgr().Load_mgr().Load(hpg, ttl);
+			wiki.Html__hdump_mgr().Load_mgr().Load_by_xowh(hpg, ttl, Bool_.N);
 			pg.Db().Text().Text_bry_(pg.Db().Html().Html_bry());
 		}
 		return pg.Db().Page().Exists() ? pg.Db().Text().Text_bry() : null;

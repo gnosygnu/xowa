@@ -38,7 +38,7 @@ public class Xod_page_mgr {
 		Xoh_page hpg = new Xoh_page();
 		hpg.Ctor_by_hview(wiki, Xoa_url.New(wiki, ttl), ttl, 1);
 		rv.Init_by_hpg(hpg);
-		wiki.Html__hdump_mgr().Load_mgr().Load(hpg, ttl);
+		wiki.Html__hdump_mgr().Load_mgr().Load_by_xowh(hpg, ttl, Bool_.Y);
 		Load_sections(rv, hpg);
 		return rv;
 	}

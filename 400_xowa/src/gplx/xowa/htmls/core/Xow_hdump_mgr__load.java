@@ -39,12 +39,12 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 	}
 	public void Load_by_xowe(Xoae_page wpg) {
 		tmp_hpg.Ctor_by_hview(wpg.Wiki(), wpg.Url(), wpg.Ttl(), wpg.Db().Page().Id());
-		Load(tmp_hpg, wpg.Ttl());
+		Load_by_xowh(tmp_hpg, wpg.Ttl(), Bool_.Y);
 		wpg.Db().Html().Html_bry_(tmp_hpg.Db().Html().Html_bry());
 		wpg.Root_(new gplx.xowa.parsers.Xop_root_tkn());	// HACK: set root, else load page will fail
 		Fill_page(wpg, tmp_hpg);
 	}
-	public boolean Load(Xoh_page hpg, Xoa_ttl ttl) {
+	public boolean Load_by_xowh(Xoh_page hpg, Xoa_ttl ttl, boolean load_ctg) {
 		synchronized (tmp_dbpg) {
 			if (override_mgr__page == null) {
 				Io_url override_root_url = wiki.Fsys_mgr().Root_dir().GenSubDir_nest("data", "wiki");
@@ -64,11 +64,13 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 			byte[] src = Parse(hpg, hpg.Db().Html().Zip_tid(), hpg.Db().Html().Hzip_tid(), hpg.Db().Html().Html_bry());
 
 			// write ctgs
-			Xoctg_pagebox_itm[] pagebox_itms = wiki.Ctg__pagebox_wtr().Get_catlinks_by_page(wiki, hpg);
-			if (pagebox_itms.length > 0) {
-				tmp_bfr.Add(src);					
-				wiki.Ctg__pagebox_wtr().Write_pagebox(tmp_bfr, wiki, hpg, pagebox_itms);
-				src = tmp_bfr.To_bry_and_clear();
+			if (load_ctg) {
+				Xoctg_pagebox_itm[] pagebox_itms = wiki.Ctg__pagebox_wtr().Get_catlinks_by_page(wiki, hpg);
+				if (pagebox_itms.length > 0) {
+					tmp_bfr.Add(src);					
+					wiki.Ctg__pagebox_wtr().Write_pagebox(tmp_bfr, wiki, hpg, pagebox_itms);
+					src = tmp_bfr.To_bry_and_clear();
+				}
 			}
 
 			hpg.Db().Html().Html_bry_(src);
@@ -76,7 +78,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 		}
 	}
 	public byte[] Decode_as_bry(Bry_bfr bfr, Xoh_page hpg, byte[] src, boolean mode_is_diff) {hzip_mgr.Hctx().Mode_is_diff_(mode_is_diff); hzip_mgr.Decode(bfr, wiki, hpg, src); return bfr.To_bry_and_clear();}
-	private byte[] Parse(Xoh_page hpg, int zip_tid, int hzip_tid, byte[] src) {
+	public byte[] Parse(Xoh_page hpg, int zip_tid, int hzip_tid, byte[] src) {
 		if (zip_tid > gplx.core.ios.streams.Io_stream_tid_.Tid__raw)
 			src = zip_mgr.Unzip((byte)zip_tid, src);
 		switch (hzip_tid) {
@@ -84,7 +86,8 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 				src = make_mgr.Parse(src, hpg, hpg.Wiki());
 				break;
 			case Xoh_hzip_dict_.Hzip__v1:
-				src = override_mgr__html.Get_or_same(hpg.Ttl().Page_db(), src);
+				if (override_mgr__html != null)	// null when Parse is called directly
+					src = override_mgr__html.Get_or_same(hpg.Ttl().Page_db(), src);
 				hpg.Section_mgr().Add(0, 2, Bry_.Empty, Bry_.Empty).Content_bgn_(0);	// +1 to skip \n
 				src = Decode_as_bry(tmp_bfr.Clear(), hpg, src, Bool_.N);
 				hpg.Section_mgr().Set_content(hpg.Section_mgr().Len() - 1, src, src.length);
