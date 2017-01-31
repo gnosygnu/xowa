@@ -23,7 +23,7 @@ public class Xomw_linker__split_trail__tst {
 	@Test  public void None()                 {fxt.Test__split_trail(" abc"             , null              , " abc");}
 }
 class Xomw_linker__split_trail__fxt {
-	private final    Xomw_linker linker = new Xomw_linker();
+	private final    Xomw_linker linker = new Xomw_linker(new gplx.xowa.mws.linkers.Xomw_link_renderer());
 	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public Xomw_linker__split_trail__fxt() {
 		String[] ary = new String[] {"a", "b", "c", "d", "e", "f"};

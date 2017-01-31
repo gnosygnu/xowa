@@ -35,7 +35,8 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Xomw_linker__normalize_subpage_link normalize_subpage_link = new Xomw_linker__normalize_subpage_link();
 	private final    Bry_bfr tmp;
 	private final    Xomw_parser parser;
-	private final    Xomwh_atr_mgr extra_atrs = new Xomwh_atr_mgr();
+	private final    Xomw_atr_mgr extra_atrs = new Xomw_atr_mgr();
+	private final    Xomw_qry_mgr query = new Xomw_qry_mgr();
 	public Xomw_lnki_wkr(Xomw_parser parser, Xomw_link_holders holders, Xomw_link_renderer link_renderer, Btrie_slim_mgr protocols_trie) {
 		this.parser = parser;
 		this.holders = holders;
@@ -436,7 +437,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		tmp.Add_bry_escape_html(inside);
 		text = tmp.To_bry_and_clear();
 		
-		link_renderer.Make_known_link(bfr, nt, text, extra_atrs, Bry_.Empty);
+		link_renderer.Make_known_link(bfr, nt, text, extra_atrs, query);
 		byte[] link = bfr.To_bry_and_clear();
 		parser.Armor_links(bfr, link, 0, link.length);
 		bfr.Add(trail);

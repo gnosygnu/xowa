@@ -26,7 +26,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private int autonumber;
 	private final    Xomw_parser parser;
 	private final    Xomw_linker linker;
-	private final    Xomwh_atr_mgr attribs = new Xomwh_atr_mgr();
+	private final    Xomw_atr_mgr attribs = new Xomw_atr_mgr();
 	private Xomw_regex_url regex_url;
 	private Xomw_regex_space regex_space;
 	public Xomw_lnke_wkr(Xomw_parser parser) {

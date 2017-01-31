@@ -45,7 +45,7 @@ public class Xomw_parser {
 	// private final    Xomw_prepro_wkr prepro_wkr = new Xomw_prepro_wkr();
 	public Xomw_strip_state        Strip_state()     {return strip_state;}    private final    Xomw_strip_state strip_state = new Xomw_strip_state();
 	public Xomw_sanitizer          Sanitizer()       {return sanitizer;}      private final    Xomw_sanitizer sanitizer = new Xomw_sanitizer();
-	public Xomw_linker             Linker()          {return linker;}         private final    Xomw_linker linker = new Xomw_linker();
+	public Xomw_linker             Linker()          {return linker;}         private final    Xomw_linker linker;
 	public Bry_bfr                 Tmp()             {return tmp;}            private final    Bry_bfr tmp = Bry_bfr_.New();
 	public Xomw_quote_wkr          Quote_wkr()       {return quote_wkr;}      private final    Xomw_quote_wkr quote_wkr;
 	public Xomw_lnki_wkr           Lnki_wkr()        {return lnki_wkr;}       private final    Xomw_lnki_wkr lnki_wkr;
@@ -61,6 +61,7 @@ public class Xomw_parser {
 			}
 		}
 
+		this.linker = new Xomw_linker(link_renderer);
 		this.protocols_trie = Xomw_parser.Protocols__dflt();
 		this.holders = new Xomw_link_holders(link_renderer, tmp);
 		this.table_wkr = new Xomw_table_wkr(this);
@@ -266,7 +267,7 @@ public class Xomw_parser {
 		strip_state.Add_general(marker, text);
 		return marker;
 	}
-	public Xomwh_atr_mgr Get_external_link_attribs(Xomwh_atr_mgr atrs) {
+	public Xomw_atr_mgr Get_external_link_attribs(Xomw_atr_mgr atrs) {
 		atrs.Clear();
 		byte[] rel = Get_external_link_rel;
 

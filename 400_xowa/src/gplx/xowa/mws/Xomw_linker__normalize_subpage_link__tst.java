@@ -28,7 +28,7 @@ public class Xomw_linker__normalize_subpage_link__tst {
 	@Test  public void Dot2__trailing()      {fxt.Test__normalize_subpage_link("A/B/C"          , "../../Z/"      , ""    , "A/Z"        , "Z");}
 }
 class Xomw_linker__normalize_subpage_link__fxt {
-	private final    Xomw_linker mgr = new Xomw_linker();
+	private final    Xomw_linker mgr = new Xomw_linker(new gplx.xowa.mws.linkers.Xomw_link_renderer());
 	private final    Xowe_wiki wiki;
 	private final    Xomw_linker__normalize_subpage_link normalize_subpage_link = new Xomw_linker__normalize_subpage_link();
 	public Xomw_linker__normalize_subpage_link__fxt() {

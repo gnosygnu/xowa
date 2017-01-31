@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
-public class Xomwh_atr_itm {
-	public Xomwh_atr_itm(int key_int, byte[] key, byte[] val) {
+public class Xomw_atr_itm {
+	public Xomw_atr_itm(int key_int, byte[] key, byte[] val) {
 		this.key_int = key_int;
 		this.key_bry = key;
 		this.val = val;

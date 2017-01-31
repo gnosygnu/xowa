@@ -19,7 +19,6 @@ package gplx.xowa.mws.parsers.magiclinks; import gplx.*; import gplx.xowa.*; imp
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.net.*;
 import gplx.langs.phps.utls.*; import gplx.xowa.mws.htmls.*;
 import gplx.langs.regxs.*;
-// TODO.XO: getExternalLinkAttribs($url)
 // TODO.XO: this->getConverterLanguage()->markNoConversion($url, true),
 public class Xomw_magiclinks_wkr {
 	private final    Btrie_slim_mgr regex_trie = Btrie_slim_mgr.ci_a7(); // NOTE: must be ci to handle protocols; EX: "https:" and "HTTPS:"
@@ -32,7 +31,7 @@ public class Xomw_magiclinks_wkr {
 	private final    Xomw_regex_url regex_url;
 	private final    Xomw_sanitizer sanitizer;
 	private final    Xomw_linker linker;
-	private final    Xomwh_atr_mgr atrs = new Xomwh_atr_mgr();
+	private final    Xomw_atr_mgr atrs = new Xomw_atr_mgr();
 	private byte[] page_title;
 
 	private static final byte Regex__anch = 1, Regex__elem = 2, Regex__free = 3;

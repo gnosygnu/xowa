@@ -25,7 +25,8 @@ public class Xomw_link_holders {
 	private final    Bry_bfr tmp;
 	private int link_id = 0;	// MOVED:Parser.php
 	private final    Xomw_link_holder_list internals = new Xomw_link_holder_list();
-	private final    Xomwh_atr_mgr extra_atrs = new Xomwh_atr_mgr();
+	private final    Xomw_atr_mgr extra_atrs = new Xomw_atr_mgr();
+	private final    Xomw_qry_mgr query = new Xomw_qry_mgr();
 	public Xomw_link_holders(Xomw_link_renderer link_renderer, Bry_bfr tmp) {
 		this.link_renderer = link_renderer;
 		this.tmp = tmp;
@@ -136,7 +137,7 @@ public class Xomw_link_holders {
 //					}
 
 			bfr.Add_mid(src, prv, link_bgn);
-			link_renderer.Make_preloaded_link(bfr, item.Title(), item.Text(), Bry_.Empty, extra_atrs, Bry_.Empty);
+			link_renderer.Make_preloaded_link(bfr, item.Title(), item.Text(), Bry_.Empty, extra_atrs, query.Clear());
 			cur = key_end + Gfh_tag_.Comm_end_len;
 			prv = cur;
 		}

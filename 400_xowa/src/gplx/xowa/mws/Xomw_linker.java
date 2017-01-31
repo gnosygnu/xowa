@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*;
 import gplx.xowa.mws.htmls.*;
+import gplx.xowa.mws.linkers.*;
 public class Xomw_linker {
 	private final    Bry_bfr tmp = Bry_bfr_.New();
 	private final    Linker_rel_splitter splitter = new Linker_rel_splitter();
@@ -27,95 +28,88 @@ public class Xomw_linker {
 	private final    byte[][] split_trail_rv = new byte[2][];
 	private Btrie_slim_mgr split_trail_trie;
 	private static final    byte[] Atr__class = Bry_.new_a7("class"), Atr__rel = Bry_.new_a7("rel"), Atr__href = Bry_.new_a7("href"), Rel__nofollow = Bry_.new_a7("nofollow");
+	private final    Xomw_link_renderer link_renderer;
+	public Xomw_linker(Xomw_link_renderer link_renderer) {
+		this.link_renderer = link_renderer;
+	}
 	public void Init_by_wiki(Btrie_slim_mgr trie) {
 		this.split_trail_trie = trie;
 	}
-//		/**
-//		* This function returns an HTML link to the given target.  It serves a few
-//		* purposes:
-//		*   1) If $target is a Title, the correct URL to link to will be figured
-//		*      out automatically.
-//		*   2) It automatically adds the usual classes for various types of link
-//		*      targets: "new" for red links, "stub" for short articles, etc.
-//		*   3) It escapes all attribute values safely so there's no risk of XSS.
-//		*   4) It provides a default tooltip if the target is a Title (the page
-//		*      name of the target).
-//		* link() replaces the old functions in the makeLink() family.
-//		*
-//		* @since 1.18 Method exists since 1.16 as non-static, made static in 1.18.
-//		* @deprecated since 1.28, use MediaWiki\Linker\LinkRenderer instead
-//		*
-//		* @param Title $target Can currently only be a Title, but this may
-//		*   change to support Images, literal URLs, etc.
-//		* @param String $html The HTML contents of the <a> element, i.e.,
-//		*   the link text.  This is raw HTML and will not be escaped.  If null,
-//		*   defaults to the prefixed text of the Title; or if the Title is just a
-//		*   fragment, the contents of the fragment.
-//		* @param array $customAttribs A key => value array of extra HTML attributes,
-//		*   such as title and class.  (href is ignored.)  Classes will be
-//		*   merged with the default classes, while other attributes will replace
-//		*   default attributes.  All passed attribute values will be HTML-escaped.
-//		*   A false attribute value means to suppress that attribute.
-//		* @param array $query The query String to append to the URL
-//		*   you're linking to, in key => value array form.  Query keys and values
-//		*   will be URL-encoded.
-//		* @param String|array $options String or array of strings:
-//		*     'known': Page is known to exist, so don't check if it does.
-//		*     'broken': Page is known not to exist, so don't check if it does.
-//		*     'noclasses': Don't add any classes automatically (includes "new",
-//		*       "stub", "mw-redirect", "extiw").  Only use the class attribute
-//		*       provided, if any, so you get a simple blue link with no funny i-
-//		*       cons.
-//		*     'forcearticlepath': Use the article path always, even with a querystring.
-//		*       Has compatibility issues on some setups, so avoid wherever possible.
-//		*     'http': Force a full URL with http:// as the scheme.
-//		*     'https': Force a full URL with https:// as the scheme.
-//		*     'stubThreshold' => (int): Stub threshold to use when determining link classes.
-//		* @return String HTML <a> attribute
-//		*/
-//		public static function link(
-//			$target, $html = null, $customAttribs = [], $query = [], $options = []
-//		) {
-//			if ( !$target instanceof Title ) {
-//				wfWarn( __METHOD__ . ': Requires $target to be a Title Object.', 2 );
-//				return "<!-- ERROR -->$html";
-//			}
-//
-//			if ( is_string( $query ) ) {
-//				// some functions withing core using this still hand over query strings
-//				wfDeprecated( __METHOD__ . ' with parameter $query as String (should be array)', '1.20' );
-//				$query = wfCgiToArray( $query );
-//			}
-//
-//			$services = MediaWikiServices::getInstance();
-//			$options = (array)$options;
-//			if ( $options ) {
-//				// Custom options, create new LinkRenderer
-//				if ( !isset( $options['stubThreshold'] ) ) {
-//					$defaultLinkRenderer = $services->getLinkRenderer();
-//					$options['stubThreshold'] = $defaultLinkRenderer->getStubThreshold();
-//				}
-//				$linkRenderer = $services->getLinkRendererFactory()
-//					->createFromLegacyOptions( $options );
-//			} else {
-//				$linkRenderer = $services->getLinkRenderer();
-//			}
-//
-//			if ( $html !== null ) {
-//				$text = new HtmlArmor( $html );
-//			} else {
-//				$text = $html; // null
-//			}
-//			if ( in_array( 'known', $options, true ) ) {
-//				return $linkRenderer->makeKnownLink( $target, $text, $customAttribs, $query );
-//			} elseif ( in_array( 'broken', $options, true ) ) {
-//				return $linkRenderer->makeBrokenLink( $target, $text, $customAttribs, $query );
-//			} elseif ( in_array( 'noclasses', $options, true ) ) {
-//				return $linkRenderer->makePreloadedLink( $target, $text, '', $customAttribs, $query );
-//			} else {
-//				return $linkRenderer->makeLink( $target, $text, $customAttribs, $query );
-//			}
-//		}
+	// This function returns an HTML link to the given target.  It serves a few
+	// purposes:
+	//   1) If $target is a Title, the correct URL to link to will be figured
+	//      out automatically.
+	//   2) It automatically adds the usual classes for various types of link
+	//      targets: "new" for red links, "stub" for short articles, etc.
+	//   3) It escapes all attribute values safely so there's no risk of XSS.
+	//   4) It provides a default tooltip if the target is a Title (the page
+	//      name of the target).
+	// link() replaces the old functions in the makeLink() family.
+	//
+	// @since 1.18 Method exists since 1.16 as non-static, made static in 1.18.
+	// @deprecated since 1.28, use MediaWiki\Linker\LinkRenderer instead
+	//
+	// @param Title $target Can currently only be a Title, but this may
+	//   change to support Images, literal URLs, etc.
+	// @param String $html The HTML contents of the <a> element, i.e.,
+	//   the link text.  This is raw HTML and will not be escaped.  If null,
+	//   defaults to the prefixed text of the Title; or if the Title is just a
+	//   fragment, the contents of the fragment.
+	// @param array $customAttribs A key => value array of extra HTML attributes,
+	//   such as title and class.  (href is ignored.)  Classes will be
+	//   merged with the default classes, while other attributes will replace
+	//   default attributes.  All passed attribute values will be HTML-escaped.
+	//   A false attribute value means to suppress that attribute.
+	// @param array $query The query String to append to the URL
+	//   you're linking to, in key => value array form.  Query keys and values
+	//   will be URL-encoded.
+	// @param String|array $options String or array of strings:
+	//     'known': Page is known to exist, so don't check if it does.
+	//     'broken': Page is known not to exist, so don't check if it does.
+	//     'noclasses': Don't add any classes automatically (includes "new",
+	//       "stub", "mw-redirect", "extiw").  Only use the class attribute
+	//       provided, if any, so you get a simple blue link with no funny i-
+	//       cons.
+	//     'forcearticlepath': Use the article path always, even with a querystring.
+	//       Has compatibility issues on some setups, so avoid wherever possible.
+	//     'http': Force a full URL with http:// as the scheme.
+	//     'https': Force a full URL with https:// as the scheme.
+	//     'stubThreshold' => (int): Stub threshold to use when determining link classes.
+	// @return String HTML <a> attribute
+	public void Link(Bry_bfr bfr, Xoa_ttl target, byte[] html, Xomw_atr_mgr custom_attribs, Xomw_qry_mgr query, Xomw_opt_mgr options) {
+		// XO.MW.UNSUPPORTED:MW has different renderers -- presumably for forcing "https:" and others; XO only has one
+		//if (options != null) {
+		//	// Custom options, create new LinkRenderer
+		//	if (!isset($options['stubThreshold'])) {
+		//		$defaultLinkRenderer = $services->getLinkRenderer();
+		//		$options['stubThreshold'] = $defaultLinkRenderer->getStubThreshold();
+		//	}
+		//	$linkRenderer = $services->getLinkRendererFactory()->createFromLegacyOptions($options);
+		//}
+		//else {
+		//	$linkRenderer = $services->getLinkRenderer();
+		//}
+
+		byte[] text = null;
+		if (html != null) {
+			// $text = new HtmlArmor($html);
+		}
+		else {
+			text = html; // null
+		}
+		if (options.known) {
+			link_renderer.Make_known_link(bfr, target, text, custom_attribs, query);
+		}
+		else if (options.broken) {
+//				return $linkRenderer->makeBrokenLink($target, $text, $customAttribs, $query);
+		}
+		else if (options.no_classes) {
+			link_renderer.Make_preloaded_link(bfr, target, text, Bry_.Empty, custom_attribs, query);
+		}
+		else {
+//				$linkRenderer->makeLink($target, $text, $customAttribs, $query);
+		}
+	}
 	public void Make_self_link_obj(Bry_bfr bfr, Xoa_ttl nt, byte[] html, byte[] query, byte[] trail, byte[] prefix) {
 		// MW.HOOK:SelfLinkBegin
 		if (html == Bry_.Empty) {
@@ -130,12 +124,12 @@ public class Xomw_linker {
 		bfr.Add_str_a7("</strong>");
 		bfr.Add(trail);
 	}
-	public void Make_external_link(Bry_bfr bfr, byte[] url, byte[] text, boolean escape, byte[] link_type, Xomwh_atr_mgr attribs, byte[] title) {
+	public void Make_external_link(Bry_bfr bfr, byte[] url, byte[] text, boolean escape, byte[] link_type, Xomw_atr_mgr attribs, byte[] title) {
 		tmp.Add_str_a7("external");
 		if (link_type != null) {
 			tmp.Add_byte_space().Add(link_type);
 		}
-		Xomwh_atr_itm cls_itm = attribs.Get_by_or_make(Atr__class);
+		Xomw_atr_itm cls_itm = attribs.Get_by_or_make(Atr__class);
 		if (cls_itm.Val() != null) {
  				tmp.Add(cls_itm.Val());
 		}
@@ -148,23 +142,23 @@ public class Xomw_linker {
 			title = wg_title;
 
 		byte[] new_rel = Get_external_link_rel(url, title);
-		Xomwh_atr_itm cur_rel_atr = attribs.Get_by_or_make(Atr__rel);
+		Xomw_atr_itm cur_rel_atr = attribs.Get_by_or_make(Atr__rel);
 		if (cur_rel_atr.Val() == null) {
 			cur_rel_atr.Val_(new_rel);
 		}
 		else {
 			// Merge the rel attributes.
 			byte[] cur_rel = cur_rel_atr.Val();
-			Bry_split_.Split(new_rel, 0, new_rel.length, Byte_ascii.Space, Bool_.N, splitter);	// $newRels = explode( ' ', $newRel );
-			Bry_split_.Split(cur_rel, 0, cur_rel.length, Byte_ascii.Space, Bool_.N, splitter);	// $oldRels = explode( ' ', $attribs['rel'] );
-			cur_rel_atr.Val_(splitter.To_bry());		// $attribs['rel'] = implode( ' ', $combined );				
+			Bry_split_.Split(new_rel, 0, new_rel.length, Byte_ascii.Space, Bool_.N, splitter);	// $newRels = explode(' ', $newRel);
+			Bry_split_.Split(cur_rel, 0, cur_rel.length, Byte_ascii.Space, Bool_.N, splitter);	// $oldRels = explode(' ', $attribs['rel']);
+			cur_rel_atr.Val_(splitter.To_bry());		// $attribs['rel'] = implode(' ', $combined);				
 		}
 		//$link = '';
-		//$success = Hooks::run( 'LinkerMakeExternalLink',
-		//	[ &$url, &$text, &$link, &$attribs, $linktype ] );
-		//if ( !$success ) {
-		//	wfDebug( "Hook LinkerMakeExternalLink changed the output of link "
-		//		. "with url {$url} and text {$text} to {$link}\n", true );
+		//$success = Hooks::run('LinkerMakeExternalLink',
+		//	[ &$url, &$text, &$link, &$attribs, $linktype ]);
+		//if (!$success) {
+		//	wfDebug("Hook LinkerMakeExternalLink changed the output of link "
+		//		. "with url {$url} and text {$text} to {$link}\n", true);
 		//	return $link;
 		//}
 		attribs.Set(Atr__href, url);
@@ -174,9 +168,9 @@ public class Xomw_linker {
 	private byte[] Get_external_link_rel(byte[] url, byte[] title) {
 		// global $wgNoFollowLinks, $wgNoFollowNsExceptions, $wgNoFollowDomainExceptions;
 		// $ns = $title ? $title->getNamespace() : false;
-		// if ( $wgNoFollowLinks && !in_array( $ns, $wgNoFollowNsExceptions )
-		//	&& !wfMatchesDomainList( $url, $wgNoFollowDomainExceptions )
-		// ) {
+		// if ($wgNoFollowLinks && !in_array($ns, $wgNoFollowNsExceptions)
+		//	&& !wfMatchesDomainList($url, $wgNoFollowDomainExceptions)
+		//) {
 			return Rel__nofollow;
 		// }
 		// return null;
@@ -388,7 +382,7 @@ public class Xomw_linker {
 //									$paramName = 'no-link';
 //									$value = true;
 //									$validated = true;
-//								} elseif (preg_match("/^((?i)$prots)/", $value)) {
+//								} else if (preg_match("/^((?i)$prots)/", $value)) {
 //									if (preg_match("/^((?i)$prots)$addr$chars*$/u", $value, $m)) {
 //										$paramName = 'link-url';
 //										$this->mOutput->addExternalLink($value);
@@ -537,19 +531,8 @@ public class Xomw_linker {
 //			}
 //			return [ $this->mImageParams[$handlerClass], $this->mImageParamsMagicArray[$handlerClass] ];
 //		}
-//		/**
-//		* Make HTML for a thumbnail including image, border and caption
-//		* @param Title $title
-//		* @param File|boolean $file File Object or false if it doesn't exist
-//		* @param String $label
-//		* @param String $alt
-//		* @param String $align
-//		* @param array $params
-//		* @param boolean $framed
-//		* @param String $manualthumb
-//		* @return String
-//		*/
-//		public static function makeThumbLinkObj( Title $title, $file, $label = '', $alt,
+//		// Make HTML for a thumbnail including image, border and caption
+//		public static function makeThumbLinkObj(Title $title, $file, $label = '', $alt,
 //			$align = 'right', $params = [], $framed = false, $manualthumb = ""
 //		) {
 //			$frameParams = [
@@ -557,227 +540,189 @@ public class Xomw_linker {
 //				'caption' => $label,
 //				'align' => $align
 //			];
-//			if ( $framed ) {
+//			if ($framed) {
 //				$frameParams['framed'] = true;
 //			}
-//			if ( $manualthumb ) {
+//			if ($manualthumb) {
 //				$frameParams['manualthumb'] = $manualthumb;
 //			}
-//			return self::makeThumbLink2( $title, $file, $frameParams, $params );
+//			return self::makeThumbLink2($title, $file, $frameParams, $params);
 //		}
-//
-//		/**
-//		* @param Title $title
-//		* @param File $file
-//		* @param array $frameParams
-//		* @param array $handlerParams
-//		* @param boolean $time
-//		* @param String $query
-//		* @return String
-//		*/
-//		public static function makeThumbLink2( Title $title, $file, $frameParams = [],
+
+//		public static function makeThumbLink2(Title $title, $file, $frameParams = [],
 //			$handlerParams = [], $time = false, $query = ""
 //		) {
 //			$exists = $file && $file->exists();
 //
-//			$page = isset( $handlerParams['page'] ) ? $handlerParams['page'] : false;
-//			if ( !isset( $frameParams['align'] ) ) {
+//			$page = isset($handlerParams['page']) ? $handlerParams['page'] : false;
+//			if (!isset($frameParams['align'])) {
 //				$frameParams['align'] = 'right';
 //			}
-//			if ( !isset( $frameParams['alt'] ) ) {
+//			if (!isset($frameParams['alt'])) {
 //				$frameParams['alt'] = '';
 //			}
-//			if ( !isset( $frameParams['title'] ) ) {
+//			if (!isset($frameParams['title'])) {
 //				$frameParams['title'] = '';
 //			}
-//			if ( !isset( $frameParams['caption'] ) ) {
+//			if (!isset($frameParams['caption'])) {
 //				$frameParams['caption'] = '';
 //			}
 //
-//			if ( empty( $handlerParams['width'] ) ) {
+//			if (empty($handlerParams['width'])) {
 //				// Reduce width for upright images when parameter 'upright' is used
-//				$handlerParams['width'] = isset( $frameParams['upright'] ) ? 130 : 180;
+//				$handlerParams['width'] = isset($frameParams['upright']) ? 130 : 180;
 //			}
 //			$thumb = false;
 //			$noscale = false;
 //			$manualthumb = false;
 //
-//			if ( !$exists ) {
+//			if (!$exists) {
 //				$outerWidth = $handlerParams['width'] + 2;
 //			} else {
-//				if ( isset( $frameParams['manualthumb'] ) ) {
-//					# Use manually specified thumbnail
-//					$manual_title = Title::makeTitleSafe( NS_FILE, $frameParams['manualthumb'] );
-//					if ( $manual_title ) {
-//						$manual_img = wfFindFile( $manual_title );
-//						if ( $manual_img ) {
-//							$thumb = $manual_img->getUnscaledThumb( $handlerParams );
+//				if (isset($frameParams['manualthumb'])) {
+//					// Use manually specified thumbnail
+//					$manual_title = Title::makeTitleSafe(NS_FILE, $frameParams['manualthumb']);
+//					if ($manual_title) {
+//						$manual_img = wfFindFile($manual_title);
+//						if ($manual_img) {
+//							$thumb = $manual_img->getUnscaledThumb($handlerParams);
 //							$manualthumb = true;
 //						} else {
 //							$exists = false;
 //						}
 //					}
-//				} elseif ( isset( $frameParams['framed'] ) ) {
+//				} else if (isset($frameParams['framed'])) {
 //					// Use image dimensions, don't scale
-//					$thumb = $file->getUnscaledThumb( $handlerParams );
+//					$thumb = $file->getUnscaledThumb($handlerParams);
 //					$noscale = true;
 //				} else {
-//					# Do not present an image bigger than the source, for bitmap-style images
-//					# This is a hack to maintain compatibility with arbitrary pre-1.10 behavior
-//					$srcWidth = $file->getWidth( $page );
-//					if ( $srcWidth && !$file->mustRender() && $handlerParams['width'] > $srcWidth ) {
+//					// Do not present an image bigger than the source, for bitmap-style images
+//					// This is a hack to maintain compatibility with arbitrary pre-1.10 behavior
+//					$srcWidth = $file->getWidth($page);
+//					if ($srcWidth && !$file->mustRender() && $handlerParams['width'] > $srcWidth) {
 //						$handlerParams['width'] = $srcWidth;
 //					}
-//					$thumb = $file->transform( $handlerParams );
+//					$thumb = $file->transform($handlerParams);
 //				}
 //
-//				if ( $thumb ) {
+//				if ($thumb) {
 //					$outerWidth = $thumb->getWidth() + 2;
 //				} else {
 //					$outerWidth = $handlerParams['width'] + 2;
 //				}
 //			}
 //
-//			# ThumbnailImage::toHtml() already adds page= onto the end of DjVu URLs
-//			# So we don't need to pass it here in $query. However, the URL for the
-//			# zoom icon still needs it, so we make a unique query for it. See bug 14771
-//			$url = $title->getLocalURL( $query );
-//			if ( $page ) {
-//				$url = wfAppendQuery( $url, [ 'page' => $page ] );
+//			// ThumbnailImage::toHtml() already adds page= onto the end of DjVu URLs
+//			// So we don't need to pass it here in $query. However, the URL for the
+//			// zoom icon still needs it, so we make a unique query for it. See bug 14771
+//			$url = $title->getLocalURL($query);
+//			if ($page) {
+//				$url = wfAppendQuery($url, [ 'page' => $page ]);
 //			}
-//			if ( $manualthumb
-//				&& !isset( $frameParams['link-title'] )
-//				&& !isset( $frameParams['link-url'] )
-//				&& !isset( $frameParams['no-link'] ) ) {
+//			if ($manualthumb
+//				&& !isset($frameParams['link-title'])
+//				&& !isset($frameParams['link-url'])
+//				&& !isset($frameParams['no-link'])) {
 //				$frameParams['link-url'] = $url;
 //			}
 //
 //			$s = "<div class=\"thumb t{$frameParams['align']}\">"
 //				. "<div class=\"thumbinner\" style=\"width:{$outerWidth}px;\">";
 //
-//			if ( !$exists ) {
-//				$s .= self::makeBrokenImageLinkObj( $title, $frameParams['title'], '', '', '', $time == true );
+//			if (!$exists) {
+//				$s .= self::makeBrokenImageLinkObj($title, $frameParams['title'], '', '', '', $time == true);
 //				$zoomIcon = '';
-//			} elseif ( !$thumb ) {
-//				$s .= wfMessage( 'thumbnail_error', '' )->escaped();
+//			} else if (!$thumb) {
+//				$s .= wfMessage('thumbnail_error', '')->escaped();
 //				$zoomIcon = '';
 //			} else {
-//				if ( !$noscale && !$manualthumb ) {
-//					self::processResponsiveImages( $file, $thumb, $handlerParams );
+//				if (!$noscale && !$manualthumb) {
+//					self::processResponsiveImages($file, $thumb, $handlerParams);
 //				}
 //				$params = [
 //					'alt' => $frameParams['alt'],
 //					'title' => $frameParams['title'],
-//					'img-class' => ( isset( $frameParams['class'] ) && $frameParams['class'] !== ''
+//					'img-class' => (isset($frameParams['class']) && $frameParams['class'] !== ''
 //						? $frameParams['class'] . ' '
-//						: '' ) . 'thumbimage'
+//						: '') . 'thumbimage'
 //				];
-//				$params = self::getImageLinkMTOParams( $frameParams, $query ) + $params;
-//				$s .= $thumb->toHtml( $params );
-//				if ( isset( $frameParams['framed'] ) ) {
+//				$params = self::getImageLinkMTOParams($frameParams, $query) + $params;
+//				$s .= $thumb->toHtml($params);
+//				if (isset($frameParams['framed'])) {
 //					$zoomIcon = "";
 //				} else {
-//					$zoomIcon = Html::rawElement( 'div', [ 'class' => 'magnify' ],
-//						Html::rawElement( 'a', [
+//					$zoomIcon = Html::rawElement('div', [ 'class' => 'magnify' ],
+//						Html::rawElement('a', [
 //							'href' => $url,
 //							'class' => '@gplx.Internal protected',
-//							'title' => wfMessage( 'thumbnail-more' )->text() ],
-//							"" ) );
+//							'title' => wfMessage('thumbnail-more')->text() ],
+//							""));
 //				}
 //			}
 //			$s .= '  <div class="thumbcaption">' . $zoomIcon . $frameParams['caption'] . "</div></div></div>";
-//			return str_replace( "\n", ' ', $s );
+//			return str_replace("\n", ' ', $s);
 //		}
-//		/**
-//		* Make a "broken" link to an image
-//		*
-//		* @since 1.16.3
-//		* @param Title $title
-//		* @param String $label Link label (plain text)
-//		* @param String $query Query String
-//		* @param String $unused1 Unused parameter kept for b/c
-//		* @param String $unused2 Unused parameter kept for b/c
-//		* @param boolean $time A file of a certain timestamp was requested
-//		* @return String
-//		*/
-//		public static function makeBrokenImageLinkObj( $title, $label = '',
+//		// Make a "broken" link to an image
+//		public static function makeBrokenImageLinkObj($title, $label = '',
 //			$query = '', $unused1 = '', $unused2 = '', $time = false
 //		) {
-//			if ( !$title instanceof Title ) {
-//				wfWarn( __METHOD__ . ': Requires $title to be a Title Object.' );
-//				return "<!-- ERROR -->" . htmlspecialchars( $label );
+//			if (!$title instanceof Title) {
+//				wfWarn(__METHOD__ . ': Requires $title to be a Title Object.');
+//				return "<!-- ERROR -->" . htmlspecialchars($label);
 //			}
 //
 //			global $wgEnableUploads, $wgUploadMissingFileUrl, $wgUploadNavigationUrl;
-//			if ( $label == '' ) {
+//			if ($label == '') {
 //				$label = $title->getPrefixedText();
 //			}
-//			$encLabel = htmlspecialchars( $label );
-//			$currentExists = $time ? ( wfFindFile( $title ) != false ) : false;
+//			$encLabel = htmlspecialchars($label);
+//			$currentExists = $time ? (wfFindFile($title) != false) : false;
 //
-//			if ( ( $wgUploadMissingFileUrl || $wgUploadNavigationUrl || $wgEnableUploads )
+//			if (($wgUploadMissingFileUrl || $wgUploadNavigationUrl || $wgEnableUploads)
 //				&& !$currentExists
 //			) {
-//				$redir = RepoGroup::singleton()->getLocalRepo()->checkRedirect( $title );
+//				$redir = RepoGroup::singleton()->getLocalRepo()->checkRedirect($title);
 //
-//				if ( $redir ) {
+//				if ($redir) {
 //					// We already know it's a redirect, so mark it
 //					// accordingly
 //					return self::link(
 //						$title,
 //						$encLabel,
 //						[ 'class' => 'mw-redirect' ],
-//						wfCgiToArray( $query ),
+//						wfCgiToArray($query),
 //						[ 'known', 'noclasses' ]
 //					);
 //				}
 //
-//				$href = self::getUploadUrl( $title, $query );
+//				$href = self::getUploadUrl($title, $query);
 //
-//				return '<a href="' . htmlspecialchars( $href ) . '" class="new" title="' .
-//					htmlspecialchars( $title->getPrefixedText(), ENT_QUOTES ) . '">' .
+//				return '<a href="' . htmlspecialchars($href) . '" class="new" title="' .
+//					htmlspecialchars($title->getPrefixedText(), ENT_QUOTES) . '">' .
 //					$encLabel . '</a>';
 //			}
 //
-//			return self::link( $title, $encLabel, [], wfCgiToArray( $query ), [ 'known', 'noclasses' ] );
+//			return self::link($title, $encLabel, [], wfCgiToArray($query), [ 'known', 'noclasses' ]);
 //		}
-//		/**
-//		* Create a direct link to a given uploaded file.
-//		*
-//		* @since 1.16.3
-//		* @param Title $title
-//		* @param String $html Pre-sanitized HTML
-//		* @param String $time MW timestamp of file creation time
-//		* @return String HTML
-//		*/
-//		public static function makeMediaLinkObj( $title, $html = '', $time = false ) {
-//			$img = wfFindFile( $title, [ 'time' => $time ] );
-//			return self::makeMediaLinkFile( $title, $img, $html );
+//		// Create a direct link to a given uploaded file.
+//		public static function makeMediaLinkObj($title, $html = '', $time = false) {
+//			$img = wfFindFile($title, [ 'time' => $time ]);
+//			return self::makeMediaLinkFile($title, $img, $html);
 //		}
 //
-//		/**
-//		* Create a direct link to a given uploaded file.
-//		* This will make a broken link if $file is false.
-//		*
-//		* @since 1.16.3
-//		* @param Title $title
-//		* @param File|boolean $file File Object or false
-//		* @param String $html Pre-sanitized HTML
-//		* @return String HTML
-//		*
-//		* @todo Handle invalid or missing images better.
-//		*/
-//		public static function makeMediaLinkFile( Title $title, $file, $html = '' ) {
-//			if ( $file && $file->exists() ) {
+//		// Create a direct link to a given uploaded file.
+//		// This will make a broken link if $file is false.
+//		public static function makeMediaLinkFile(Title $title, $file, $html = '') {
+//			if ($file && $file->exists()) {
 //				$url = $file->getUrl();
 //				$class = '@gplx.Internal protected';
 //			} else {
-//				$url = self::getUploadUrl( $title );
+//				$url = self::getUploadUrl($title);
 //				$class = 'new';
 //			}
 //
 //			$alt = $title->getText();
-//			if ( $html == '' ) {
+//			if ($html == '') {
 //				$html = $alt;
 //			}
 //
@@ -788,21 +733,34 @@ public class Xomw_linker {
 //				'title' => $alt
 //			];
 //
-//			if ( !Hooks::run( 'LinkerMakeMediaLinkFile',
-//				[ $title, $file, &$html, &$attribs, &$ret ] ) ) {
-//				wfDebug( "Hook LinkerMakeMediaLinkFile changed the output of link "
-//					. "with url {$url} and text {$html} to {$ret}\n", true );
+//			if (!Hooks::run('LinkerMakeMediaLinkFile',
+//				[ $title, $file, &$html, &$attribs, &$ret ])) {
+//				wfDebug("Hook LinkerMakeMediaLinkFile changed the output of link "
+//					. "with url {$url} and text {$html} to {$ret}\n", true);
 //				return $ret;
 //			}
 //
-//			return Html::rawElement( 'a', $attribs, $html );
+//			return Html::rawElement('a', $attribs, $html);
 //		}
+	public static Xoa_ttl Normalise_special_page(Xoa_ttl target) {			
+//			if (target.Ns().Id_is_special() && !target.Is_external()) {
+//				list($name, $subpage) = SpecialPageFactory::resolveAlias($target->getDBkey());
+//				if (!$name) {
+//					return $target;
+//				}
+//				$ret = SpecialPage::getTitleValueFor($name, $subpage, $target->getFragment());
+//				return $ret;
+//			} 
+//			else {
+			return target;
+//			}
+	}
 	private static final    byte[] Bry__dot2 = Bry_.new_a7("../");
 }
 class Linker_rel_splitter implements gplx.core.brys.Bry_split_wkr {
 	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
 	private final    Bry_bfr bfr = Bry_bfr_.New();
-	public int Split(byte[] src, int itm_bgn, int itm_end) {	// $combined = array_unique( array_merge( $newRels, $oldRels ) );
+	public int Split(byte[] src, int itm_bgn, int itm_end) {	// $combined = array_unique(array_merge($newRels, $oldRels));
 		byte[] val = (byte[])hash.Get_by_mid(src, itm_bgn, itm_end);
 		if (val == null) {
 			val = Bry_.Mid(src, itm_bgn, itm_end);

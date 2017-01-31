@@ -21,7 +21,7 @@ import gplx.langs.phps.utls.*;
 public class Xomw_html_utl {
 	private final    Bry_bfr tmp = Bry_bfr_.New();
 	private final    Btrie_rv trv = new Btrie_rv();
-	public void Raw_element(Bry_bfr bfr, byte[] element, Xomwh_atr_mgr attribs, byte[] contents) {			
+	public void Raw_element(Bry_bfr bfr, byte[] element, Xomw_atr_mgr attribs, byte[] contents) {			
 		Bry_.Lcase__all(element); // XO:lcase element
 
 		Open_element__lcased(bfr, element, attribs);
@@ -33,7 +33,7 @@ public class Xomw_html_utl {
 			Close_element__lcased(bfr, element);
 		}
 	}
-	private void Open_element__lcased(Bry_bfr bfr, byte[] element, Xomwh_atr_mgr attribs) {
+	private void Open_element__lcased(Bry_bfr bfr, byte[] element, Xomw_atr_mgr attribs) {
 		// This is not required in HTML5, but let's do it anyway, for
 		// consistency and better compression.
 		// $element = strtolower($element);	// XO:handled by callers
@@ -58,10 +58,10 @@ public class Xomw_html_utl {
 		Expand_attributes(bfr, attribs);	// TODO.XO:self::dropDefaults($element, $attribs)
 		bfr.Add_byte(Byte_ascii.Angle_end);
 	}
-	public void Expand_attributes(Bry_bfr bfr, Xomwh_atr_mgr atrs) {
+	public void Expand_attributes(Bry_bfr bfr, Xomw_atr_mgr atrs) {
 		int len = atrs.Len();
 		for (int i = 0; i < len; i++) {
-			Xomwh_atr_itm atr = (Xomwh_atr_itm)atrs.Get_at(i);
+			Xomw_atr_itm atr = (Xomw_atr_itm)atrs.Get_at(i);
 			byte[] key = atr.Key_bry();
 			byte[] val = atr.Val();
 
