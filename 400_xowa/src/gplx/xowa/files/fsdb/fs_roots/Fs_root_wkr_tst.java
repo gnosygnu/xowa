@@ -30,11 +30,6 @@ public class Fs_root_wkr_tst {
 		fxt.Init_fs("mem/dir/sub1/A1.png", 200, 100);
 		fxt.Test_get("A1.png", fxt.itm_().Url_("mem/dir/sub1/A1.png").Size_(200, 100));
 	}
-	@Test  public void Xto_fil_bry() {
-		fxt.Test_xto_fil_bry("/dir/A.png"		, "A.png");		// basic
-		fxt.Test_xto_fil_bry("/dir/A b.png"		, "A_b.png");	// lower
-		fxt.Test_xto_fil_bry("/dir/a.png"		, "A.png");		// title
-	}
 }
 class Fs_root_wkr_fxt {
 	private Fs_root_wkr root_dir = new Fs_root_wkr();
@@ -60,10 +55,6 @@ class Fs_root_wkr_fxt {
 	public static void Save_img(String url, int w, int h) {
 		gplx.gfui.SizeAdp img_size = gplx.gfui.SizeAdp_.new_(w, h);
 		Io_mgr.Instance.SaveFilStr(url, img_size.To_str());
-	}
-	public void Test_xto_fil_bry(String url_str, String expd) {
-		Io_url url = Io_url_.new_fil_(url_str);
-		Tfds.Eq(expd, String_.new_u8(Fs_root_wkr.To_fil_bry(url)));
 	}
 }
 class Orig_fil_mok {

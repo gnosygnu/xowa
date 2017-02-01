@@ -29,10 +29,13 @@ class Fs_root_mgr {
 	}
 	public Fs_root_wkr Wkr() {return wkr;}
 	public boolean Find_file(Xof_fsdb_itm fsdb_itm) {
+		// get orig; exit if not found in dir
 		byte[] orig_ttl = fsdb_itm.Orig_ttl();
 		Orig_fil_row orig_itm = wkr.Get_by_ttl(orig_ttl);
 		if (orig_itm == Orig_fil_row.Null) return false;
-		fsdb_itm.Change_repo(Xof_repo_tid_.Tid__local, wiki.Domain_bry());
+
+		// update orig
+		fsdb_itm.Init_at_orig(Xof_repo_tid_.Tid__local, wiki.Domain_bry(), orig_ttl, Xof_ext_.new_by_id_(orig_itm.Ext_id()), orig_itm.W(), orig_itm.H(), null);
 		Io_url orig_url = orig_itm.Url();
 		if (fsdb_itm.File_is_orig()) {
 			fsdb_itm.Html_size_(orig_itm.W(), orig_itm.H());

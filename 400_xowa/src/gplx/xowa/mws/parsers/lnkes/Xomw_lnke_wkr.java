@@ -19,13 +19,21 @@ package gplx.xowa.mws.parsers.lnkes; import gplx.*; import gplx.xowa.*; import g
 import gplx.core.btries.*; import gplx.core.primitives.*;
 import gplx.langs.phps.utls.*;
 import gplx.xowa.mws.htmls.*;
-// TODO.XO: add proto-rel; EX: [//a.org b]
+/*	TODO.XO
+	* P8: url = sanitizer.Clean_url(url);
+	* P8: The characters '<' and '>' (which were escaped by
+	* P7: add proto-rel; EX: [//a.org b]
+	* P7: list( $dtrail, $trail ) = Linker::splitTrail( $trail );
+	* P3: $langObj->formatNum( ++$this->mAutonumber );
+	* P2: $this->getConverterLanguage()->markNoConversion( $text );
+*/
 public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Bry_bfr tmp;
 	private Btrie_slim_mgr protocol_trie; private final    Btrie_rv trv = new Btrie_rv();
 	private int autonumber;
 	private final    Xomw_parser parser;
 	private final    Xomw_linker linker;
+	// private final    Xomw_sanitizer sanitizer;
 	private final    Xomw_atr_mgr attribs = new Xomw_atr_mgr();
 	private Xomw_regex_url regex_url;
 	private Xomw_regex_space regex_space;
@@ -33,12 +41,14 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 		this.parser = parser;
 		this.tmp = parser.Tmp();
 		this.linker = parser.Linker();
+		// this.sanitizer = parser.Sanitizer();
 	}
 	public void Init_by_wiki(Btrie_slim_mgr protocol_trie, Xomw_regex_url regex_url, Xomw_regex_space regex_space) {
 		this.protocol_trie = protocol_trie;
 		this.regex_url = regex_url;
 		this.regex_space = regex_space;
 	}
+	// XO.MW:SYNC:1.29; DATE:2017-02-01
 	public void Replace_external_links(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
@@ -150,12 +160,10 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 			// If the link text is an image URL, replace it with an <img> tag
 			// This happened by accident in the original parser, but some people used it extensively
-			// TODO.XO:
-			//$img = $this->maybeMakeExternalImage( $text );
-			//if ( $img !== false ) {
-			//	$text = $img;
-			//}
-			//
+			// XO.MW.UNSUPPORTED.NON-WMF: not supporting images from freefrom url; (EX: "http://a.org/image.png" -> "<img>"); haven't seen this used on WMF wikis
+			// $img = $this->maybeMakeExternalImage( $text );
+			// if ($img !== false) $text = $img;
+
 			//$dtrail = '';
 
 			// Set linktype for CSS - if URL==text, link is essentially free
@@ -181,7 +189,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// $text = $this->getConverterLanguage()->markNoConversion( $text );
 
 			// TODO.XO:
-			// $url = Sanitizer::cleanUrl( $url );
+			// url = sanitizer.Clean_url(url);
 
 			bfr.Add_mid(src, prv, lnke_bgn);
 			prv = cur;
@@ -191,6 +199,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// This was changed in August 2004
 			linker.Make_external_link(bfr, Bry_.Mid(src, url_bgn, url_end), Bry_.Mid(src, text_bgn, text_end), Bool_.N, link_type, parser.Get_external_link_attribs(attribs), Bry_.Empty);
 
+			// XO.MW.UNSUPPORTED.HOOK: registers link for processing by other extensions?
 			// Register link in the output Object.
 			// Replace unnecessary URL escape codes with the referenced character
 			// This prevents spammers from hiding links from the filters
