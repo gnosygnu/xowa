@@ -27,8 +27,8 @@ public class Fs_root_wkr_tst {
 		fxt.Test_db("A.png", fxt.itm_().Init(1, "mem/dir/7/70/A.png", 200, 100));
 	}
 	@Test   public void Recurse() {
-		fxt.Init_fs("mem/dir/sub1/A1.png", 200, 100);
-		fxt.Test_get("A1.png", fxt.itm_().Url_("mem/dir/sub1/A1.png").Size_(200, 100));
+		fxt.Init_fs("mem/dir/A/A1.png", 200, 100);
+		fxt.Test_get("A1.png", fxt.itm_().Url_("mem/dir/A/A1.png").Size_(200, 100));
 	}
 }
 class Fs_root_wkr_fxt {

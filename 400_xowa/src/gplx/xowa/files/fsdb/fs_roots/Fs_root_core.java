@@ -48,7 +48,7 @@ public class Fs_root_core implements Xof_fsdb_mgr, Gfo_invk {	// reads images fr
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_root_dir_))		mgr.Root_dir_(To_url(m.ReadBry("v")));
 		else if	(ctx.Match(k, Invk_orig_dir_))		mgr.Orig_dir_(To_url(m.ReadBry("v")));
-		else if	(ctx.Match(k, Invk_thumb_dir_))		mgr.Thumb_dir_(To_url(m.ReadBry("v")));
+		else if	(ctx.Match(k, Invk_thumb_dir_))		{}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
