@@ -20,6 +20,7 @@ import gplx.core.primitives.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.xfers.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.xowa.files.fsdb.*; import gplx.xowa.files.fsdb.fs_roots.*;
 public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 	private Xoa_ttl ttl; private Xoh_file_page_wtr html_wtr; private final    Xoh_file_page__other_resolutions alt_wtr = new Xoh_file_page__other_resolutions();
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
@@ -31,18 +32,35 @@ public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 		this.ttl = ttl; this.html_wtr = html_wtr; this.repo_mgr = wiki.File__repo_mgr();
 		this.xfer_itm = wiki.Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Lnki_eval(Xof_exec_tid.Tid_wiki_file, ctx, ctx.Page(), queue, ttl.Page_txt()
 		, Xop_lnki_type.Id_thumb, Xop_lnki_tkn.Upright_null, html_wtr.Main_img_w(), html_wtr.Main_img_h(), Xof_lnki_time.Null, Xof_lnki_page.Null, Bool_.N);
+
+		// get orig
 		Xof_orig_itm orig = wiki.File_mgr().Orig_mgr().Find_by_ttl_or_null(xfer_itm.Lnki_ttl());
 		if (orig == Xof_orig_itm.Null) return;	// no orig;
 		Xof_repo_itm repo = wiki.File__repo_mgr().Get_trg_by_id_or_null(orig.Repo(), xfer_itm.Lnki_ttl(), Bry_.Empty);
 		if (repo == null) return;
 		xfer_itm.Init_at_orig(orig.Repo(), repo.Wiki_domain(), orig.Ttl(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
 		xfer_itm.Init_at_html(Xof_exec_tid.Tid_wiki_file, img_size, repo, url_bldr);
+
+		// if non-wmf, point orig_url to fs_dir, not cache_dir; DATE:2017-02-01
+		if (wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__other) {
+			Xof_fsdb_mgr fsdb_mgr = cur_wiki.File_mgr().Fsdb_mgr();
+			if (String_.Eq(fsdb_mgr.Key(), Fs_root_core.Fsdb_mgr_key)) {
+				Fs_root_core fs_dir_core = (Fs_root_core)fsdb_mgr;
+				Io_url orig_url = fs_dir_core.Get_orig_url_or_null(xfer_itm.Lnki_ttl());
+				if (orig_url != null)
+					xfer_itm.Html_orig_url_(orig_url);
+			}
+		}
+
+		// get file size
 		this.file_size_bry = Bry_.Empty;
 		if (xfer_itm.File_exists()) {	// file exists
 			long file_size = Io_mgr.Instance.QueryFil(xfer_itm.Html_orig_url()).Size();
 			if (file_size == -1) file_size = 0; // QueryFil returns -1 if file doesn't exist
 			this.file_size_bry = Bry_.new_a7(gplx.core.ios.Io_size_.To_str(file_size));
 		}
+
+		// get commons notice
 		String commons_notice =  page.Commons_mgr().Xowa_mockup()
 			? String_.Format(Str_commons_notice, gplx.langs.htmls.Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, page.Ttl().Full_db_as_str()))
 			: "";

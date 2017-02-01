@@ -51,6 +51,7 @@ public interface Xof_file_itm {
 	int					Hdump_mode();
 
 	void				File_exists_(boolean v);
+	void				Html_orig_url_(Io_url v);
 	void				Html_img_wkr_(Js_img_wkr v);
 	void				Html_elem_tid_(byte v);
 	void				Html_size_(int w, int h);

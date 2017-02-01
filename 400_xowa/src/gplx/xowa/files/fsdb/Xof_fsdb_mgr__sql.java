@@ -24,6 +24,7 @@ import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files
 public class Xof_fsdb_mgr__sql implements Xof_fsdb_mgr, Gfo_invk {
 	private boolean init = false; private boolean fsdb_enabled = false;
 	private Xow_repo_mgr repo_mgr; private Xof_url_bldr url_bldr; private final    Xof_img_size img_size = new Xof_img_size();
+	public String Key() {return "fsdb.sql";}
 	public Xof_bin_mgr Bin_mgr() {return bin_mgr;} private Xof_bin_mgr bin_mgr;
 	public Fsm_mnt_mgr Mnt_mgr() {return mnt_mgr;} private Fsm_mnt_mgr mnt_mgr = new Fsm_mnt_mgr();
 	public void Init_by_wiki(Xow_wiki wiki) {

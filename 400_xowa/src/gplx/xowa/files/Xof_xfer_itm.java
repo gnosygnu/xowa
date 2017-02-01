@@ -73,6 +73,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public int					Hdump_mode()				{return hdump_mode;} private int hdump_mode = Xof_fsdb_itm.Hdump_mode__null;
 
 	public void File_exists_y_() {file_exists = Bool_.Y;} public void File_exists_n_() {file_exists = Bool_.N;} public void File_exists_(boolean v) {file_exists = v;}
+	public void Html_orig_url_(Io_url v) {html_orig_url = v;}
 	public void Init_at_lnki(int exec_tid, byte[] wiki_abrv, byte[] ttl, byte lnki_type, double upright, int w, int h, double time, int page, int lnki_upright_patch) {
 		this.lnki_exec_tid = exec_tid; this.lnki_wiki_abrv = wiki_abrv;
 		this.lnki_type = lnki_type; this.lnki_upright = upright; this.lnki_w = w; this.lnki_h = h; this.lnki_time = time; this.lnki_page = page;

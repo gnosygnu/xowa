@@ -71,7 +71,7 @@ class Fs_root_wkr {
 		int sub_dirs_len = sub_dirs.length;
 		for (int i = 0; i < sub_dirs_len; i++) {
 			Io_url sub_dir = sub_dirs[i];
-			if (String_.Len(sub_dir.NameOnly()) != 1) continue;	// only look at subdirs with 1 char; EX: "/orig_dir/a/" vs "/orig_dir/math/"
+			// if (String_.Len(sub_dir.NameOnly()) != 1) continue;	// only look at subdirs with 1 char; EX: "/orig_dir/a/" vs "/orig_dir/math/"
 
 			// loop over all fils in that 1-char dir
 			Io_url[] fils = Io_mgr.Instance.QueryDir_args(sub_dir).Recur_(recurse).ExecAsUrlAry();

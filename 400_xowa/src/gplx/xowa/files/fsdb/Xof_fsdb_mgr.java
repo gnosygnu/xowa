@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.fsdb; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 public interface Xof_fsdb_mgr {
+	String                              Key();
 	gplx.xowa.files.bins.Xof_bin_mgr    Bin_mgr();
 	gplx.fsdb.meta.Fsm_mnt_mgr          Mnt_mgr();
 	void                                Init_by_wiki(Xow_wiki wiki);
