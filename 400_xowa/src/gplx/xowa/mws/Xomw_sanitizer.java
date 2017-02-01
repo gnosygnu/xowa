@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.*; import gplx.core.btries.*; import gplx.core.encoders.*; import gplx.core.primitives.*; import gplx.langs.htmls.entitys.*;
 import gplx.xowa.parsers.htmls.*;
-import gplx.xowa.mws.parsers.*; import gplx.langs.phps.utls.*;
+import gplx.langs.htmls.*; import gplx.xowa.mws.htmls.*; import gplx.xowa.mws.parsers.*; import gplx.langs.phps.utls.*;
 public class Xomw_sanitizer {
 	private final    Mwh_doc_wkr__atr_bldr atr_bldr = new Mwh_doc_wkr__atr_bldr();
 	private final    Mwh_atr_parser atr_parser = new Mwh_atr_parser();
@@ -91,6 +91,50 @@ public class Xomw_sanitizer {
 		}
 	}
 
+	// Merge two sets of HTML attributes.  Conflicting items in the second set
+	// will override those in the first, except for 'class' attributes which
+	// will be combined (if they're both strings).
+	// XO.MW: XO does src += trg; MW does rv = src + trg;
+	public void Merge_attributes(Xomw_atr_mgr src, Xomw_atr_mgr trg) {
+		int trg_len = trg.Len();
+		for (int i = 0; i < trg_len; i++) {
+			Xomw_atr_itm trg_atr = trg.Get_at(i);
+			// merge trg and src
+			byte[] atr_cls = Gfh_atr_.Bry__class;
+			if (Bry_.Eq(trg_atr.Key_bry(), atr_cls)) {
+				Xomw_atr_itm src_atr = src.Get_by_or_null(atr_cls);
+				if (src_atr != null) {
+					// NOTE: need byte[]-creation is unavoidable b/c src_atr and trg_atr are non-null
+					Merge_atrs_combine(tmp_bfr, src_atr.Val(), Byte_ascii.Space);
+					tmp_bfr.Add_byte_space();
+					Merge_atrs_combine(tmp_bfr, trg_atr.Val(), Byte_ascii.Space);
+					src_atr.Val_(tmp_bfr.To_bry_and_clear());
+					continue;
+				}
+			}
+			src.Add_or_set(trg_atr);
+		}
+	}
+	private void Merge_atrs_combine(Bry_bfr trg, byte[] src, byte sep) {
+		int src_len = src.length;
+		for (int i = 0; i < src_len; i++) {
+			byte b = src[i];
+			if (b == sep) {
+				// gobble ws; EX: "a   b"
+				int space_bgn = i;
+				int space_end = Bry_find_.Find_fwd_while(src, i, src_len, sep);
+				i = space_end - 1;	// -1 b/c i++ above
+
+				// ignore ws at BOS; EX: "  a"
+				if (space_bgn == 0)
+					continue;
+				// ignore ws at EOS; EX: "a  "
+				if (space_end == src_len)
+					break;
+			}
+			trg.Add_byte(b);
+		}
+	}
 	public byte[] Clean_url(byte[] url) {
 		// Normalize any HTML entities in input. They will be
 		// re-escaped by makeExternalLink().			

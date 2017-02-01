@@ -19,18 +19,20 @@ package gplx.xowa.mws.linkers; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.langs.htmls.*;
 import gplx.xowa.mws.htmls.*;
 /*	TODO.XO
-	* titleFormatter->gePrefixedTex
-	* $html = HtmlArmor::getHtml($text);
-	* Get_link_url
-	* Normalise_special_page
-	* Merge_attribs
-	* Get_link_classes
+	* P7: $html = HtmlArmor::getHtml($text);
+	* P3: Get_link_url [alternate urls? EX: mw/wiki/index.php/title?]
+	* P2: titleFormatter->getPrefixedText [depends on redlinks]
+	* P1: Get_link_classes [depends on redlinks]
 */
 public class Xomw_link_renderer {
 	private boolean expand_urls = false;
 	private final    Xomw_html_utl html_utl = new Xomw_html_utl();
 	private final    Xomw_atr_mgr attribs = new Xomw_atr_mgr();
-
+	private final    List_adp tmp_merge_deleted = List_adp_.New();
+	private final    Xomw_sanitizer sanitizer;
+	public Xomw_link_renderer(Xomw_sanitizer sanitizer) {
+		this.sanitizer = sanitizer;
+	}
 	// XO.MW:SYNC:1.29; DATE:2017-01-31
 	public void Make_link(Bry_bfr bfr, Xoa_ttl target, byte[] text, byte[] classes, Xomw_atr_mgr extra_atrs, Xomw_qry_mgr query) {
 		if (target.Is_known()) {
@@ -57,7 +59,7 @@ public class Xomw_link_renderer {
 			attribs.Add(Gfh_atr_.Bry__title, prefixed_text);
 		}
 
-		attribs.Merge(extra_atrs);
+		Merge_attribs(attribs, extra_atrs);
 
 		if (text == null) {
 			text = this.Get_link_text(target);
@@ -99,7 +101,7 @@ public class Xomw_link_renderer {
 		attribs.Clear();
 		attribs.Add(Gfh_atr_.Bry__href, url); // $attribs = ['href' => $url,] + $this->mergeAttribs($attribs, $extraAttribs);
 		attribs.Add(Gfh_atr_.Bry__class, Bry_.new_a7("new"));
-		attribs.Merge(extra_atrs);
+		Merge_attribs(attribs, extra_atrs);
 
 //			$prefixedText = $this->titleFormatter->getPrefixedText($target);
 //			if ($prefixedText !== '') {
@@ -157,22 +159,35 @@ public class Xomw_link_renderer {
 	private Xoa_ttl Normalize_target(Xoa_ttl target) {
 		return Xomw_linker.Normalise_special_page(target);
 	}
-//		private function mergeAttribs( $defaults, $attribs ) {
-//			if ( !$attribs ) {
-//				return $defaults;
-//			}
-//			// Merge the custom attribs with the default ones, and iterate
-//			// over that, deleting all "false" attributes.
-//			$ret = [];
-//			$merged = Sanitizer::mergeAttributes( $defaults, $attribs );
-//			foreach ( $merged as $key => $val ) {
-//				# A false value suppresses the attribute
-//				if ( $val !== false ) {
-//					$ret[$key] = $val;
-//				}
-//			}
-//			return $ret;
-//		}
+	// XO.MW:SYNC:1.29; DATE:2017-02-01
+	private void Merge_attribs(Xomw_atr_mgr src, Xomw_atr_mgr trg) {
+		// XO.MW: ignore; src is always non-null and empty; if trg exists, it will be merged below
+		// if (!$attribs) {return $defaults;}
+
+		// Merge the custom attribs with the default ones, and iterate
+		// over that, deleting all "false" attributes.
+		sanitizer.Merge_attributes(src, trg);
+
+		// XO.MW:MW removes "false" values; XO removes "null" values
+		boolean deleted = false;
+		int len = trg.Len();
+		for (int i = 0; i < len; i++) {
+			Xomw_atr_itm trg_atr = trg.Get_at(i);
+			// A false value suppresses the attribute
+			if (trg_atr.Val() == null) {
+				tmp_merge_deleted.Add(trg_atr);
+				deleted = true;
+			}
+		}
+		if (deleted) {
+			len = tmp_merge_deleted.Len();
+			for (int i = 0; i < len; i++) {
+				Xomw_atr_itm atr = (Xomw_atr_itm)trg.Get_at(i);
+				trg.Del(atr.Key_bry());
+			}
+			tmp_merge_deleted.Clear();
+		}
+	}
 	public byte[] Get_link_classes(Xoa_ttl target) {
 		// Make sure the target is in the cache
 //			$id = $this->linkCache->addLinkObj($target);

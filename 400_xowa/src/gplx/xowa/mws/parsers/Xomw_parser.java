@@ -32,7 +32,7 @@ public class Xomw_parser {
 	private final    Xomw_heading_wkr heading_wkr = new Xomw_heading_wkr();
 	private final    Xomw_magiclinks_wkr magiclinks_wkr;
 	private final    Xomw_doubleunder_wkr doubleunder_wkr = new Xomw_doubleunder_wkr();
-	private final    Xomw_link_renderer link_renderer = new Xomw_link_renderer();
+	private final    Xomw_link_renderer link_renderer;
 	private final    Xomw_link_holders holders;
 	private final    Xomw_heading_cbk__html heading_wkr_cbk;
 	private final    Btrie_slim_mgr protocols_trie;
@@ -61,6 +61,7 @@ public class Xomw_parser {
 			}
 		}
 
+		this.link_renderer = new Xomw_link_renderer(sanitizer);
 		this.linker = new Xomw_linker(link_renderer);
 		this.protocols_trie = Xomw_parser.Protocols__dflt();
 		this.holders = new Xomw_link_holders(link_renderer, tmp);

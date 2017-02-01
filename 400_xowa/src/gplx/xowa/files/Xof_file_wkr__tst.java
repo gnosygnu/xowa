@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import org.junit.*;
 public class Xof_file_wkr__tst {		
-	private final Xof_file_wkr___fxt fxt = new Xof_file_wkr___fxt();
+	private final    Xof_file_wkr___fxt fxt = new Xof_file_wkr___fxt();
 	@Test 	public void Ttl_standardize() {
 		fxt.Test__ttl_standardize("Abc.png"		, "Abc.png");		// basic
 		fxt.Test__ttl_standardize("A b.png"		, "A_b.png");		// spaces -> unders

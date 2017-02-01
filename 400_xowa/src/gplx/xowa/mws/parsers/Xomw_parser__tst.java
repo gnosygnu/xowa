@@ -51,9 +51,9 @@ public class Xomw_parser__tst {
 		, "</td></tr></table>"
 		, "<p><i>italics</i>"
 		, "<!--MWTOC-->"
-		, "<a class=\"external text\" rel=\"nofollow\" href=\"https://a.org\">b</a>"
+		, "<a rel=\"nofollow\" class=\"external text\" href=\"https://a.org\">b</a>"
 		, "<a href=\"/wiki/A\" title=\"A\">abc</a>"
-		, "<a class=\"external free\" rel=\"nofollow\" href=\"https://c.org\">https://c.org</a>"
+		, "<a rel=\"nofollow\" class=\"external free\" href=\"https://c.org\">https://c.org</a>"
 		, "a&#160;»b«&#160; !important c"
 		, "</p>"
 		));

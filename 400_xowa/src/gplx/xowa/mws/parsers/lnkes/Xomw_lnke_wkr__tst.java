@@ -19,7 +19,7 @@ package gplx.xowa.mws.parsers.lnkes; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*;
 public class Xomw_lnke_wkr__tst {
 	private final    Xomw_lnke_wkr__fxt fxt = new Xomw_lnke_wkr__fxt();
-	@Test   public void Basic()                         {fxt.Test__parse("[https://a.org b]"           , "<a class='external text' rel='nofollow' href='https://a.org'>b</a>");}
+	@Test   public void Basic()                         {fxt.Test__parse("[https://a.org b]"           , "<a rel='nofollow' class='external text' href='https://a.org'>b</a>");}
 	@Test   public void Invaild__protocol()             {fxt.Test__parse("[httpz:a.org]"               , "[httpz:a.org]");}
 	@Test   public void Invaild__protocol_slash()       {fxt.Test__parse("[https:a.org]"               , "[https:a.org]");}
 	@Test   public void Invaild__urlchars__0()          {fxt.Test__parse("[https://]"                  , "[https://]");}
@@ -33,9 +33,9 @@ public class Xomw_lnke_wkr__tst {
 		, "g"
 		), String_.Concat_lines_nl_apos_skip_last
 		( "a"
-		, "<a class='external text' rel='nofollow' href='https://b.org'>c</a>"
+		, "<a rel='nofollow' class='external text' href='https://b.org'>c</a>"
 		, "d"
-		, "<a class='external text' rel='nofollow' href='https://e.org'>f</a>"
+		, "<a rel='nofollow' class='external text' href='https://e.org'>f</a>"
 		, "g"
 		));
 	}

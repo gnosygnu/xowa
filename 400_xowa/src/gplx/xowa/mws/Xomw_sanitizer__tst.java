@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*;
+import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*; import gplx.xowa.mws.htmls.*;
 public class Xomw_sanitizer__tst {
 	private final    Xomw_sanitizer__fxt fxt = new Xomw_sanitizer__fxt();
 	@Test   public void Normalize__text()                  {fxt.Test__normalize_char_references("abc"                      , "abc");}
@@ -107,6 +107,22 @@ public class Xomw_sanitizer__tst {
 		// ipv6_brack
 		fxt.Test__clean_url("http://[0a.1b:12]:123/cd"       , "http://[0a.1b:12]:123/cd");
 	}
+	@Test   public void Merge_atrs() {
+		Xomw_atr_mgr src_atrs = new Xomw_atr_mgr();
+		Xomw_atr_mgr trg_atrs = new Xomw_atr_mgr();
+		Xomw_atr_mgr expd_atrs = new Xomw_atr_mgr();
+		String cls = "class";
+		// basic: k1 + k2
+		fxt.Test__merge_attributes(src_atrs.Clear().Add_many("k1", "v1"), trg_atrs.Clear().Add_many("k2", "v2"), expd_atrs.Clear().Add_many("k1", "v1", "k2", "v2"));
+		// overwrite: k1 + k1
+		fxt.Test__merge_attributes(src_atrs.Clear().Add_many("k1", "v1"), trg_atrs.Clear().Add_many("k1", "v1a"), expd_atrs.Clear().Add_many("k1", "v1a"));
+		// cls: many
+		fxt.Test__merge_attributes(src_atrs.Clear().Add_many(cls, "v1 v2"), trg_atrs.Clear().Add_many(cls, "v3 v4"), expd_atrs.Clear().Add_many(cls, "v1 v2 v3 v4"));
+		// cls: src.empty
+		fxt.Test__merge_attributes(src_atrs.Clear(), trg_atrs.Clear().Add_many(cls, "v1"), expd_atrs.Clear().Add_many(cls, "v1"));
+		// cls: ws
+		fxt.Test__merge_attributes(src_atrs.Clear().Add_many(cls, "  v1   v2  "), trg_atrs.Clear().Add_many(cls, "  v3   v4   "), expd_atrs.Clear().Add_many(cls, "v1 v2 v3 v4"));
+	}
 }
 class Xomw_sanitizer__fxt {
 	private final    Xomw_sanitizer sanitizer = new Xomw_sanitizer();
@@ -144,5 +160,9 @@ class Xomw_sanitizer__fxt {
 	public void Test__clean_url(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		Gftest.Eq__str(expd, sanitizer.Clean_url(src_bry));
+	}
+	public void Test__merge_attributes(Xomw_atr_mgr src, Xomw_atr_mgr trg, Xomw_atr_mgr expd) {
+		sanitizer.Merge_attributes(src, trg);
+		Gftest.Eq__ary__lines(expd.To_str(tmp), src.To_str(tmp), "merge_atrs");
 	}
 }

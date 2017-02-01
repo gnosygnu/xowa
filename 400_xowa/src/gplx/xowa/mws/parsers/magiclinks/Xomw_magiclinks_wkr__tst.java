@@ -19,51 +19,51 @@ package gplx.xowa.mws.parsers.magiclinks; import gplx.*; import gplx.xowa.*; imp
 import org.junit.*;
 public class Xomw_magiclinks_wkr__tst {
 	private final    Xomw_magiclinks_wkr__fxt fxt = new Xomw_magiclinks_wkr__fxt();
-	@Test   public void Basic() {fxt.Test__parse("a https://b.org z", "a <a class='external free' rel='nofollow' href='https://b.org'>https://b.org</a> z");}
+	@Test   public void Basic() {fxt.Test__parse("a https://b.org z", "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a> z");}
 	@Test   public void Invalid() {fxt.Test__parse("a _https://b.org z", "a _https://b.org z");}
 	@Test   public void Tag__anch() {fxt.Test__parse("a <a title=\"https://b.org\">b</a> z", "a <a title=\"https://b.org\">b</a> z");}
 	@Test   public void Tag__misc() {fxt.Test__parse("a <div title=\"https://b.org\">b</div> z", "a <div title=\"https://b.org\">b</div> z");}
 	@Test   public void Interrupt() {
 		// ent
-		fxt.Test__parse("a https://b.org&lt;z"   , "a <a class='external free' rel='nofollow' href='https://b.org'>https://b.org</a>&lt;z");
+		fxt.Test__parse("a https://b.org&lt;z"   , "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a>&lt;z");
 		// hex
-		fxt.Test__parse("a https://b.org&#x3c;z" , "a <a class='external free' rel='nofollow' href='https://b.org'>https://b.org</a>&#x3c;z");
+		fxt.Test__parse("a https://b.org&#x3c;z" , "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a>&#x3c;z");
 		// dec
-		fxt.Test__parse("a https://b.org&#60;z"  , "a <a class='external free' rel='nofollow' href='https://b.org'>https://b.org</a>&#60;z");
+		fxt.Test__parse("a https://b.org&#60;z"  , "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a>&#60;z");
 		// num_post_proto rule
 		fxt.Test__parse("a https://&lt; z"       , "a https://&lt; z");
 	}
 	@Test   public void Interrupt__hex_dec() {// implementation specific test for mixed hex / dec
 		// dec-hex
-		fxt.Test__parse("a https://b.org&#3c;z"      , "a <a class='external free' rel='nofollow' href='https://b.org&amp;#3c;z'>https://b.org&amp;#3c;z</a>");
+		fxt.Test__parse("a https://b.org&#3c;z"      , "a <a rel='nofollow' class='external free' href='https://b.org&amp;#3c;z'>https://b.org&amp;#3c;z</a>");
 	}
 	@Test   public void Separator() {
 		// basic; ,;.:!?
-		fxt.Test__parse("a https://b.org,;.:!? z"    , "a <a class='external free' rel='nofollow' href='https://b.org'>https://b.org</a>,;.:!? z");
+		fxt.Test__parse("a https://b.org,;.:!? z"    , "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a>,;.:!? z");
 		// ")" excluded
-		fxt.Test__parse("a https://b.org).:!? z"     , "a <a class='external free' rel='nofollow' href='https://b.org'>https://b.org</a>).:!? z");
+		fxt.Test__parse("a https://b.org).:!? z"     , "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a>).:!? z");
 		// ")" included b/c "(" exists
-		fxt.Test__parse("a https://b.org().:!? z"    , "a <a class='external free' rel='nofollow' href='https://b.org()'>https://b.org()</a>.:!? z");
+		fxt.Test__parse("a https://b.org().:!? z"    , "a <a rel='nofollow' class='external free' href='https://b.org()'>https://b.org()</a>.:!? z");
 		// ";" excluded
-		fxt.Test__parse("a https://b.org;.:!? z"     , "a <a class='external free' rel='nofollow' href='https://b.org'>https://b.org</a>;.:!? z");
+		fxt.Test__parse("a https://b.org;.:!? z"     , "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a>;.:!? z");
 		// ";" included b/c of ent
-		fxt.Test__parse("a https://b.org&abc;.:!? z" , "a <a class='external free' rel='nofollow' href='https://b.org&amp;abc;'>https://b.org&amp;abc;</a>.:!? z");
+		fxt.Test__parse("a https://b.org&abc;.:!? z" , "a <a rel='nofollow' class='external free' href='https://b.org&amp;abc;'>https://b.org&amp;abc;</a>.:!? z");
 		// ";" included b/c of hex; note that Clean_url changes "&#xB1;" to "±"
-		fxt.Test__parse("a https://b.org&#xB1;.:!? z", "a <a class='external free' rel='nofollow' href='https://b.org±'>https://b.org±</a>.:!? z");
+		fxt.Test__parse("a https://b.org&#xB1;.:!? z", "a <a rel='nofollow' class='external free' href='https://b.org±'>https://b.org±</a>.:!? z");
 		// ";" included b/c of dec; note that Clean_url changes "&#123;" to "{"
-		fxt.Test__parse("a https://b.org&#123;.:!? z", "a <a class='external free' rel='nofollow' href='https://b.org{'>https://b.org{</a>.:!? z");
+		fxt.Test__parse("a https://b.org&#123;.:!? z", "a <a rel='nofollow' class='external free' href='https://b.org{'>https://b.org{</a>.:!? z");
 		// ";" excluded b/c of invalid.ent
-		fxt.Test__parse("a https://b.org&a1b;.:!? z" , "a <a class='external free' rel='nofollow' href='https://b.org&amp;a1b'>https://b.org&amp;a1b</a>;.:!? z");
+		fxt.Test__parse("a https://b.org&a1b;.:!? z" , "a <a rel='nofollow' class='external free' href='https://b.org&amp;a1b'>https://b.org&amp;a1b</a>;.:!? z");
 		// ";" excluded b/c of invalid.hex
-		fxt.Test__parse("a https://b.org&#x;.:!? z"  , "a <a class='external free' rel='nofollow' href='https://b.org&amp;#x'>https://b.org&amp;#x</a>;.:!? z");
+		fxt.Test__parse("a https://b.org&#x;.:!? z"  , "a <a rel='nofollow' class='external free' href='https://b.org&amp;#x'>https://b.org&amp;#x</a>;.:!? z");
 		// ";" excluded b/c of invalid.dec
-		fxt.Test__parse("a https://b.org&#a;.:!? z"  , "a <a class='external free' rel='nofollow' href='https://b.org&amp;#a'>https://b.org&amp;#a</a>;.:!? z");
+		fxt.Test__parse("a https://b.org&#a;.:!? z"  , "a <a rel='nofollow' class='external free' href='https://b.org&amp;#a'>https://b.org&amp;#a</a>;.:!? z");
 		// num_post_proto rule
 		fxt.Test__parse("a https://.:!? z"           , "a https://.:!? z");
 	}
 	@Test   public void Clean_url() {
 		// basic
-		fxt.Test__parse("http://a᠆b.org/c᠆d"          , "<a class='external free' rel='nofollow' href='http://ab.org/c᠆d'>http://ab.org/c᠆d</a>");
+		fxt.Test__parse("http://a᠆b.org/c᠆d"          , "<a rel='nofollow' class='external free' href='http://ab.org/c᠆d'>http://ab.org/c᠆d</a>");
 	}
 }
 class Xomw_magiclinks_wkr__fxt {

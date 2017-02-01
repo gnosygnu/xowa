@@ -19,6 +19,12 @@ package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*;
 import gplx.xowa.mws.htmls.*;
 import gplx.xowa.mws.linkers.*;
+/*	TODO.XO
+	* titleFormatter->gePrefixedTex
+	* $html = HtmlArmor::getHtml($text);
+	* Get_link_url
+	* Get_link_classes
+*/
 public class Xomw_linker {
 	private final    Bry_bfr tmp = Bry_bfr_.New();
 	private final    Linker_rel_splitter splitter = new Linker_rel_splitter();
