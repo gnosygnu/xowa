@@ -19,12 +19,12 @@ package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import
 import org.junit.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.files.imgs.*;
 import gplx.fsdb.meta.*;
-public class Fs_root_dir_tst {
-	@Before public void init() {fxt.Reset();} private Fs_root_dir_fxt fxt = new Fs_root_dir_fxt();
+public class Fs_root_wkr_tst {
+	@Before public void init() {fxt.Reset();} private Fs_root_wkr_fxt fxt = new Fs_root_wkr_fxt();
 	@Test   public void Basic() {
-		fxt.Init_fs("mem/dir/A.png", 200, 100);
-		fxt.Test_get("A.png", fxt.itm_().Url_("mem/dir/A.png").Size_(200, 100));
-		fxt.Test_db("A.png", fxt.itm_().Init(1, "mem/dir/A.png", 200, 100));
+		fxt.Init_fs("mem/dir/7/70/A.png", 200, 100);
+		fxt.Test_get("A.png", fxt.itm_().Url_("mem/dir/7/70/A.png").Size_(200, 100));
+		fxt.Test_db("A.png", fxt.itm_().Init(1, "mem/dir/7/70/A.png", 200, 100));
 	}
 	@Test   public void Recurse() {
 		fxt.Init_fs("mem/dir/sub1/A1.png", 200, 100);
@@ -36,27 +36,25 @@ public class Fs_root_dir_tst {
 		fxt.Test_xto_fil_bry("/dir/a.png"		, "A.png");		// title
 	}
 }
-class Fs_root_dir_fxt {
-	private Fs_root_dir root_dir = new Fs_root_dir();
-	private Orig_fil_tbl orig_fil_tbl;
+class Fs_root_wkr_fxt {
+	private Fs_root_wkr root_dir = new Fs_root_wkr();
 	private Io_url url;
 	public void Reset() {
 		Db_conn_bldr.Instance.Reg_default_mem();
 		Io_mgr.Instance.InitEngine_mem();
 		url = Io_url_.mem_dir_("mem/dir/");
-		root_dir = new Fs_root_dir();
-		orig_fil_tbl = new Orig_fil_tbl();
+		root_dir = new Fs_root_wkr();
 		Xof_img_wkr_query_img_size img_size_wkr = new Xof_img_wkr_query_img_size_test();
-		root_dir.Init(url, orig_fil_tbl, Gfo_usr_dlg_.Noop, img_size_wkr);
+		root_dir.Init(img_size_wkr, url);
 	}
 	public Orig_fil_mok itm_() {return new Orig_fil_mok();}
 	public void Init_fs(String url, int w, int h) {Save_img(url, w, h);}
 	public void Test_get(String name, Orig_fil_mok expd) {
-		Orig_fil_itm actl = root_dir.Get_by_ttl(Bry_.new_u8(name));
+		Orig_fil_row actl = root_dir.Get_by_ttl(Bry_.new_u8(name));
 		expd.Test(actl);
 	}
 	public void Test_db(String ttl, Orig_fil_mok expd) {
-		Orig_fil_itm actl = orig_fil_tbl.Select_itm(Bry_.new_u8(ttl));
+		Orig_fil_row actl = root_dir.Orig_tbl().Select_itm_or_null(url, Bry_.new_u8(ttl));
 		expd.Test(actl);
 	}
 	public static void Save_img(String url, int w, int h) {
@@ -65,7 +63,7 @@ class Fs_root_dir_fxt {
 	}
 	public void Test_xto_fil_bry(String url_str, String expd) {
 		Io_url url = Io_url_.new_fil_(url_str);
-		Tfds.Eq(expd, String_.new_u8(Fs_root_dir.Xto_fil_bry(url)));
+		Tfds.Eq(expd, String_.new_u8(Fs_root_wkr.To_fil_bry(url)));
 	}
 }
 class Orig_fil_mok {
@@ -83,13 +81,13 @@ class Orig_fil_mok {
 		this.ext_id = Xof_ext_.new_by_ttl_(Bry_.new_u8(name)).Id();
 		return this;
 	}
-	public void Test(Orig_fil_itm actl) {
+	public void Test(Orig_fil_row actl) {
 		if (actl == null) Tfds.Fail("actl itm is null");
-		if (w != -1)			Tfds.Eq(w, actl.Fil_w());
-		if (h != -1)			Tfds.Eq(h, actl.Fil_h());
-		if (url != null)		Tfds.Eq(url, actl.Fil_url().Raw());
-		if (uid != -1)			Tfds.Eq(uid, actl.Fil_uid());
-		if (ext_id != -1)		Tfds.Eq(uid, actl.Fil_ext_id());
-		if (name != null)		Tfds.Eq(name, String_.new_u8(actl.Fil_name()));
+		if (w != -1)			Tfds.Eq(w, actl.W());
+		if (h != -1)			Tfds.Eq(h, actl.H());
+		if (url != null)		Tfds.Eq(url, actl.Url().Raw());
+		if (uid != -1)			Tfds.Eq(uid, actl.Uid());
+		if (ext_id != -1)		Tfds.Eq(uid, actl.Ext_id());
+		if (name != null)		Tfds.Eq(name, String_.new_u8(actl.Name()));
 	}
 }

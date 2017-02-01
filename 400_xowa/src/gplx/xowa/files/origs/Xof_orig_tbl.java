@@ -43,14 +43,9 @@ public class Xof_orig_tbl implements Db_tbl {
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "main", fld_ttl)));}
 	public void Select_by_list(Ordered_hash rv, List_adp itms) {select_in_wkr.Init(rv, itms).Select_in(Cancelable_.Never, conn, 0, itms.Count());}
 	public Xof_orig_itm Select_itm(byte[] ttl) {
-		Xof_orig_itm rv = Xof_orig_itm.Null;
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_ttl).Clear().Crt_bry_as_str(fld_ttl, ttl).Exec_select__rls_auto();
-		try {
-			if (rdr.Move_next())
-				rv = Load_by_rdr(rdr);
-		}
+		try {return rdr.Move_next() ? Load_by_rdr(rdr) : Xof_orig_itm.Null;}
 		finally {rdr.Rls();}
-		return rv;
 	}
 	public boolean Exists__repo_ttl(byte repo, byte[] ttl) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_repo, fld_ttl).Crt_byte(fld_repo, repo).Crt_bry_as_str(fld_ttl, ttl).Exec_select__rls_auto();
