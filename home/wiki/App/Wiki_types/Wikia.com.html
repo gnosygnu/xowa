@@ -5,7 +5,21 @@
   <title>App/Wiki types/Wikia.com - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
-  
+  <style data-source="xowa" type="text/css">
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+<style data-source="xowa" type="text/css">
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+
 </head>
 <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
 <div id="mw-page-base" class="noprint"></div>
@@ -17,6 +31,52 @@
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Acknowledgments"><span class="tocnumber">1</span> <span class="toctext">Acknowledgments</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Overview"><span class="tocnumber">2</span> <span class="toctext">Overview</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Part_1:_Set_up_the_wikia_dump"><span class="tocnumber">3</span> <span class="toctext">Part 1: Set up the wikia dump</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#Part_2:_Import_the_wikia_dump"><span class="tocnumber">4</span> <span class="toctext">Part 2: Import the wikia dump</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-5">
+          <a href="#Part_3:_Import_the_images"><span class="tocnumber">5</span> <span class="toctext">Part 3: Import the images</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#Part_3a:_Setup_dumpgenerator.py"><span class="tocnumber">5.1</span> <span class="toctext">Part 3a: Setup dumpgenerator.py</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#Part_3b:_Run_dumpgenerator.py"><span class="tocnumber">5.2</span> <span class="toctext">Part 3b: Run dumpgenerator.py</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-8">
+              <a href="#Part_3c:_Setup_Imagemagick_and_Inkscape"><span class="tocnumber">5.3</span> <span class="toctext">Part 3c: Setup Imagemagick and Inkscape</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-9">
+          <a href="#Other_notes"><span class="tocnumber">6</span> <span class="toctext">Other notes</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-10">
+          <a href="#Developer_notes"><span class="tocnumber">7</span> <span class="toctext">Developer notes</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-11">
+              <a href="#Resetting_images"><span class="tocnumber">7.1</span> <span class="toctext">Resetting images</span></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
     <h2>
       <span class="mw-headline" id="Acknowledgments">Acknowledgments</span>
     </h2>
@@ -33,6 +93,17 @@
       As Wikia's wikis run <a href="http://community.wikia.com/wiki/Help:MediaWiki" rel="nofollow" class="external text">on version 1.19.9 of MediaWiki</a>, it is possible for XOWA to import their database dumps.
     </p>
     <p>
+      Note that the same process can also be applied to other MediaWiki wikis. For example, <a href="https://nethackwiki.com" rel="nofollow" class="external text">the Nethack wiki</a> runs on MediaWiki and makes its dumps available for offline use:
+    </p>
+    <ul>
+      <li>
+        Article dump: <a href="http://nethackwiki.com/nethackwiki_current.xml.gz" rel="nofollow" class="external free">http://nethackwiki.com/nethackwiki_current.xml.gz</a>
+      </li>
+      <li>
+        Image dump: <a href="http://nethackwiki.com/nethackwiki_current_images.tar.gz" rel="nofollow" class="external free">http://nethackwiki.com/nethackwiki_current_images.tar.gz</a>
+      </li>
+    </ul>
+    <p>
       The remainder of this walkthrough details the process to import a wiki. It assumes the following:
     </p>
     <ul>
@@ -43,29 +114,26 @@
         A wikia of dungeons.wikia.com (Dungeons and Dragons)
       </li>
     </ul>
-    <p>
-      Feel free to adjust as necessary.
-    </p>
     <h2>
       <span class="mw-headline" id="Part_1:_Set_up_the_wikia_dump">Part 1: Set up the wikia dump</span>
     </h2>
     <ul>
       <li>
-        Create a folder for the wikia dump. For example, C:\xowa\wiki\dungeons.wikia.com
+        Create a folder for the wikia dump. For example, <code>C:\xowa\wiki\dungeons.wikia.com</code>
       </li>
       <li>
-        Download the dump from <a href="http://dungeons.wikia.com/wiki/Special:Statistics" rel="nofollow" class="external free">http://dungeons.wikia.com/wiki/Special:Statistics</a> If a dump is not available, you can do the following 
+        Download the <code>Current pages</code> dump from <a href="http://dungeons.wikia.com/wiki/Special:Statistics" rel="nofollow" class="external free">http://dungeons.wikia.com/wiki/Special:Statistics</a> If a dump is not available, you can do the following 
         <ul>
           <li>
             Log on to the site as a wikia user (You must create an account if you don't have one)
           </li>
           <li>
-            Visit <a href="http://dungeons.wikia.com/wiki/Special:Statistics" rel="nofollow" class="external free">http://dungeons.wikia.com/wiki/Special:Statistics</a> You will see a button for "Request a database dump"
+            Visit <a href="http://dungeons.wikia.com/wiki/Special:Statistics" rel="nofollow" class="external free">http://dungeons.wikia.com/wiki/Special:Statistics</a> You will see a button for <code>Request a database dump</code>
           </li>
         </ul>
       </li>
       <li>
-        Unzip the dump. You should end up with a file called C:\xowa\wiki\dungeons.wikia.com\dungeons_pages_current.xml
+        Unzip the dump. You should end up with a file called <code>C:\xowa\wiki\dungeons.wikia.com\dungeons_pages_current.xml</code>
       </li>
     </ul>
     <h2>
@@ -76,21 +144,114 @@
         Navigate to <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline.html" id="xolnki_2" title="Dashboard/Import/Offline" class="xowa-visited">Dashboard/Import/Offline</a>
       </li>
       <li>
-        Change the "Wiki" choice from "Wikipedia" to "Other wiki"
+        Change the <code>Wiki</code> choice from <code>Wikipedia</code> to <code>Other wiki</code>
       </li>
       <li>
-        Change "Where to get the dump" from "download" to "read from file"
+        Change <code>Where to get the dump</code> from <code>download</code> to <code>read from file</code>
       </li>
       <li>
-        In the next box, click on the "..." icon. Select C:\xowa\wiki\dungeons.wikia.com\dungeons_pages_current.xml
+        In the next box, click on the <code>...</code> icon. Select <code>C:\xowa\wiki\dungeons.wikia.com\dungeons_pages_current.xml</code>
       </li>
       <li>
-        Click "Import now"
+        Click <code>Import now</code>
       </li>
       <li>
         Wait for the import to complete
       </li>
     </ul>
+    <h2>
+      <span class="mw-headline" id="Part_3:_Import_the_images">Part 3: Import the images</span>
+    </h2>
+    <p>
+      This part is more complicated and requires three steps:
+    </p>
+    <h3>
+      <span class="mw-headline" id="Part_3a:_Setup_dumpgenerator.py">Part 3a: Setup dumpgenerator.py</span>
+    </h3>
+    <ul>
+      <li>
+        Setup Python 2: <a href="https://www.python.org/downloads/" rel="nofollow" class="external free">https://www.python.org/downloads/</a> . For the rest of this walkthrough, we'll assume it's installed at <code>C:\Python2.7</code>
+      </li>
+      <li>
+        Download the wikiteam project from <a href="https://github.com/WikiTeam/wikiteam" rel="nofollow" class="external free">https://github.com/WikiTeam/wikiteam</a> For the rest of this walkthrough, we'll assume it's downloaded to <code>C:\WikiTeam</code>
+      </li>
+      <li>
+        Setup <code>kitchen</code> and <code>requests</code>. Assuming Python 
+        <ul>
+          <li>
+            <span class='console'>cd C:\Python2.7\Scripts</span>
+          </li>
+          <li>
+            <span class='console'>pip install kitchen</span>
+          </li>
+          <li>
+            <span class='console'>pip install requests</span>
+          </li>
+        </ul>
+      </li>
+      <li>
+        (If Windows) Edit the dumpgenerator.py script
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <b>Old</b>
+      </dd>
+    </dl>
+<pre>
+        filename3 = u'%s/%s' % (imagepath, filename2)
+</pre>
+    <dl>
+      <dd>
+        <b>New</b>
+      </dd>
+    </dl>
+<pre>
+        # replace invalid windows chars
+        filename2 = filename2.replace(" ", "_")
+        filename2 = filename2.replace("\"", "%22")
+        filename2 = filename2.replace(":", "%3A")
+        filename2 = filename2.replace("?", "%3F")
+
+        filename3 = u'%s/%s' % (imagepath, filename2)
+</pre>
+    <h3>
+      <span class="mw-headline" id="Part_3b:_Run_dumpgenerator.py">Part 3b: Run dumpgenerator.py</span>
+    </h3>
+    <ul>
+      <li>
+        Run <span class='console'>C:\Python2.7\python C:\WikiTeam\dumpgenerator.py http://dungeons.wikia.com --images</span> 
+        <ul>
+          <li>
+            Note: You can also download an up-to-date article dump using the "--xml" flag. EX: <span class='console'>C:\Python2.7\python C:\WikiTeam\dumpgenerator.py http://dungeons.wikia.com --xml --images</span>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Move <code>C:\Python2.7\dungeonswikiacom-20170201-wikidump\images</code> to <code>C:\xowa\wiki\dungeons.wikia.com\file\orig\images</code> 
+        <ul>
+          <li>
+            (Optional) Delete any .desc files
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Part_3c:_Setup_Imagemagick_and_Inkscape">Part 3c: Setup Imagemagick and Inkscape</span>
+    </h3>
+    <ul>
+      <li>
+        Get the portable versions of Imagemagick and Inkscape. See <a href="http://xowa.org/home/wiki/Dev/File/Setup/Windows.html" id="xolnki_3" title="Dev/File/Setup/Windows" class="xowa-visited">Dev/File/Setup/Windows</a>, <a href="http://xowa.org/home/wiki/Dev/File/Setup/Mac_OS_X.html" id="xolnki_4" title="Dev/File/Setup/Mac OS X">Dev/File/Setup/Mac OS X</a> and <a href="http://xowa.org/home/wiki/Dev/File/Setup/Linux.html" id="xolnki_5" title="Dev/File/Setup/Linux" class="xowa-visited">Dev/File/Setup/Linux</a> 
+        <ul>
+          <li>
+            For example, on Windows, make sure the files are copied to <code>C:\xowa\bin\windows_64\imagemagick</code> and <code>C:\xowa\bin\windows_64\inkscape</code>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      Finally, run XOWA and navigate to <code>dungeons.wikia.com/wiki/Drow_(4e_Monster)</code>. You will see images on the page
+    </p>
     <h2>
       <span class="mw-headline" id="Other_notes">Other notes</span>
     </h2>
@@ -114,18 +275,15 @@
         XOWA will try to implement these custom extensions in the future, but due to time constraints, they will be prioritized after Wikimedia extensions.
       </dd>
       <dd>
-        If you have an extension that you would like to see supported, please contact me through <a href="http://xowa.org/home/wiki/Help/Feedback.html" id="xolnki_3" title="Help/Feedback">Help/Feedback</a> and let me know the wiki and the extension. Depending on number of requests and difficulty of implementation, I will try to include support for it.
+        If you have an extension that you would like to see supported, please contact me through <a href="http://xowa.org/home/wiki/Help/Feedback.html" id="xolnki_6" title="Help/Feedback">Help/Feedback</a> and let me know the wiki and the extension. Depending on number of requests and difficulty of implementation, I will try to include support for it.
       </dd>
     </dl>
     <ul>
       <li>
-        <b>Missing images</b>: XOWA currently can not show images for wikia wikis. It may include offline support for images in a future release, but downloading the image will be up to the user (i.e.: XOWA will not provide image database dumps for wikia wikis).
-      </li>
-      <li>
         <b>Stylesheets</b>: Wikia.com uses custom style sheets per wiki. By default, XOWA uses stylesheets for Wikimedia wikis. If you are adventurous, you can try to implement your own wikia.com stylesheet. Changes would need to be made in the following locations: 
         <ul>
           <li>
-            <b>css files</b>: C:\xowa\user\anonymous\wiki\dungeons.wikia.com\html\xowa_commons.css and xowa_wiki.css . See <a href="http://xowa.org/home/wiki/Dev/Design/CSS.html" id="xolnki_4" title="Dev/Design/CSS">Dev/Design/CSS</a> for more info.
+            <b>css files</b>: C:\xowa\user\anonymous\wiki\dungeons.wikia.com\html\xowa_commons.css and xowa_wiki.css . See <a href="http://xowa.org/home/wiki/Dev/Design/CSS.html" id="xolnki_7" title="Dev/Design/CSS">Dev/Design/CSS</a> for more info.
           </li>
           <li>
             <b>html layout</b>: C:\xowa\xowa.gfs. Refer to the lines after <code>page_read =</code>
@@ -138,9 +296,26 @@
         You can refer to <a href="https://sourceforge.net/p/xowa/discussion/general/thread/7e8cca53/" rel="nofollow" class="external text">this thread</a> for instructions on creating an inverted-colors css for Wikimedia wikis
       </dd>
       <dd>
-        If you create a css that matches the wikia.com one and would like it to be part of XOWA's release, please contact me via <a href="http://xowa.org/home/wiki/Help/Feedback.html" id="xolnki_5" title="Help/Feedback">Help/Feedback</a>
+        If you create a css that matches the wikia.com one and would like it to be part of XOWA's release, please contact me via <a href="http://xowa.org/home/wiki/Help/Feedback.html" id="xolnki_8" title="Help/Feedback">Help/Feedback</a>
       </dd>
     </dl>
+    <h2>
+      <span class="mw-headline" id="Developer_notes">Developer notes</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Resetting_images">Resetting images</span>
+    </h3>
+    <p>
+      To clean up the images, do the following:
+    </p>
+    <ul>
+      <li>
+        Delete <code>C:\xowa\wiki\dungeons.wikia.com\file\orig\^orig_regy.sqlite3</code>
+      </li>
+      <li>
+        Go to <code>home/wiki/Special:XowaCfg?grp=xowa.files.general</code> and press <code>Clear cache</code>
+      </li>
+    </ul>
   
     </div>
   </div>

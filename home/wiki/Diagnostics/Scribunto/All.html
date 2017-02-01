@@ -1367,132 +1367,6 @@
       <br>
     </p>
     <h2>
-      <span class="mw-headline" id="ParserFunctions">ParserFunctions</span>
-    </h2>
-    <ul>
-      <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/ParserFunctions.html" id="xolnki_15" title="Module:Diagnostics/ParserFunctions" class="xowa-visited">Module:Diagnostics/ParserFunctions</a>
-      </li>
-      <li>
-        Tests functionality for mw.ext.ParserFunctions.lua
-      </li>
-    </ul>
-    <table class="wikitable">
-      <tr>
-        <th>
-          name
-        </th>
-        <th>
-          code
-        </th>
-        <th>
-          actl
-        </th>
-        <th>
-          rslt
-        </th>
-      </tr>
-      <tr>
-        <td>
-          basic expr
-        </td>
-        <td>
-          {{#invoke:Diagnostics/ParserFunctions|expr|1 + 2}}
-        </td>
-        <td>
-          3
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
-        </td>
-      </tr>
-    </table>
-    <h2>
-      <span class="mw-headline" id="TitleBlacklist">TitleBlacklist</span>
-    </h2>
-    <ul>
-      <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TitleBlacklist.html" id="xolnki_16" title="Module:Diagnostics/TitleBlacklist" class="xowa-visited">Module:Diagnostics/TitleBlacklist</a>
-      </li>
-      <li>
-        Tests functionality for mw.ext.TitleBlacklist.lua
-      </li>
-    </ul>
-    <table class="wikitable">
-      <tr>
-        <th>
-          name
-        </th>
-        <th>
-          code
-        </th>
-        <th>
-          actl
-        </th>
-        <th>
-          rslt
-        </th>
-      </tr>
-      <tr>
-        <td>
-          basic test; note that TitleBlacklists are not implemented in XOWA
-        </td>
-        <td>
-          {{#invoke:Diagnostics/TitleBlacklist|test|Title_to_check_for_blacklist}}
-        </td>
-        <td>
-          pass
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
-        </td>
-      </tr>
-    </table>
-    <p>
-      <br>
-    </p>
-    <h2>
-      <span class="mw-headline" id="FlaggedRevs">FlaggedRevs</span>
-    </h2>
-    <ul>
-      <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/FlaggedRevs.html" id="xolnki_17" title="Module:Diagnostics/FlaggedRevs">Module:Diagnostics/FlaggedRevs</a>
-      </li>
-      <li>
-        Tests functionality for mw.ext.FlaggedRevs.lua
-      </li>
-    </ul>
-    <table class="wikitable">
-      <tr>
-        <th>
-          name
-        </th>
-        <th>
-          code
-        </th>
-        <th>
-          actl
-        </th>
-        <th>
-          rslt
-        </th>
-      </tr>
-      <tr>
-        <td>
-          basic test; note that FlaggedRevs are not implemented in XOWA
-        </td>
-        <td>
-          {{#invoke:Diagnostics/FlaggedRevs|test}}
-        </td>
-        <td>
-          0;;infinity
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
-        </td>
-      </tr>
-    </table>
-    <h2>
       <span class="mw-headline" id="Luaj">Luaj</span>
     </h2>
     <ul>
@@ -1500,13 +1374,13 @@
         Applies to the Luaj engine (as opposed to the Lua engine)
       </li>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj.html" id="xolnki_18" title="Module:Diagnostics/Luaj">Module:Diagnostics/Luaj</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj.html" id="xolnki_15" title="Module:Diagnostics/Luaj">Module:Diagnostics/Luaj</a>
       </li>
       <li>
         Tests changes to the luaj_xowa.jar
       </li>
       <li>
-        Further notes available at <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Scribunto/Luaj.html" id="xolnki_19" title="App/Xtn/Mediawiki/Scribunto/Luaj">App/Xtn/Mediawiki/Scribunto/Luaj</a>
+        Further notes available at <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Scribunto/Luaj.html" id="xolnki_16" title="App/Xtn/Mediawiki/Scribunto/Luaj">App/Xtn/Mediawiki/Scribunto/Luaj</a>
       </li>
     </ul>
     <h3>
@@ -2170,6 +2044,132 @@
         </td>
         <td>
           a,b,c,d
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="ParserFunctions">ParserFunctions</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/ParserFunctions.html" id="xolnki_17" title="Module:Diagnostics/ParserFunctions">Module:Diagnostics/ParserFunctions</a>
+      </li>
+      <li>
+        Tests functionality for mw.ext.ParserFunctions.lua
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          basic expr
+        </td>
+        <td>
+          {{#invoke:Diagnostics/ParserFunctions|expr|1 + 2}}
+        </td>
+        <td>
+          3
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="TitleBlacklist">TitleBlacklist</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TitleBlacklist.html" id="xolnki_18" title="Module:Diagnostics/TitleBlacklist">Module:Diagnostics/TitleBlacklist</a>
+      </li>
+      <li>
+        Tests functionality for mw.ext.TitleBlacklist.lua
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          basic test; note that TitleBlacklists are not implemented in XOWA
+        </td>
+        <td>
+          {{#invoke:Diagnostics/TitleBlacklist|test|Title_to_check_for_blacklist}}
+        </td>
+        <td>
+          pass
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <p>
+      <br>
+    </p>
+    <h2>
+      <span class="mw-headline" id="FlaggedRevs">FlaggedRevs</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/FlaggedRevs.html" id="xolnki_19" title="Module:Diagnostics/FlaggedRevs">Module:Diagnostics/FlaggedRevs</a>
+      </li>
+      <li>
+        Tests functionality for mw.ext.FlaggedRevs.lua
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          basic test; note that FlaggedRevs are not implemented in XOWA
+        </td>
+        <td>
+          {{#invoke:Diagnostics/FlaggedRevs|test}}
+        </td>
+        <td>
+          0;;infinity
         </td>
         <td>
           <span style='color: green;'>pass</span>
