@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*;
-import gplx.xowa.mws.htmls.*;
-import gplx.xowa.mws.linkers.*;
+import gplx.langs.htmls.*;
+import gplx.xowa.mws.htmls.*; import gplx.xowa.mws.linkers.*; import gplx.xowa.mws.parsers.*;
 /*	TODO.XO
 	* P7: titleFormatter->getPrefixedText
 	* P7: $html = HtmlArmor::getHtml($text);
@@ -32,6 +32,12 @@ public class Xomw_linker {
 	private final    byte[][] split_trail_rv = new byte[2][];
 	private Btrie_slim_mgr split_trail_trie;
 	private static final    byte[] Atr__class = Bry_.new_a7("class"), Atr__rel = Bry_.new_a7("rel"), Atr__href = Bry_.new_a7("href"), Rel__nofollow = Bry_.new_a7("nofollow");
+	public static final    byte[] 
+	  Align__frame__center = Bry_.new_a7("center")
+	, Align__frame__none = Bry_.new_a7("none")
+	, Align__frame__right = Bry_.new_a7("right")
+	, Prefix__center = Bry_.new_a7("<div class=\"center\">")
+	;
 	private final    Xomw_link_renderer link_renderer;
 	public Xomw_linker(Xomw_link_renderer link_renderer) {
 		this.link_renderer = link_renderer;
@@ -39,6 +45,292 @@ public class Xomw_linker {
 	public void Init_by_wiki(Btrie_slim_mgr trie) {
 		this.split_trail_trie = trie;
 	}
+	// Given parameters derived from [[Image:Foo|options...]], generate the
+	// HTML that that syntax inserts in the page.
+	//
+	// @param Parser $parser
+	// @param Title $title Title Object of the file (not the currently viewed page)
+	// @param File $file File Object, or false if it doesn't exist
+	// @param array frame_params Associative array of parameters external to the media handler.
+	//     Boolean parameters are indicated by presence or absence, the value is arbitrary and
+	//     will often be false.
+	//          thumbnail       If present, downscale and frame
+	//          manual_thumb     Image name to use as a thumbnail, instead of automatic scaling
+	//          framed          Shows image in original size in a frame
+	//          frameless       Downscale but don't frame
+	//          upright         If present, tweak default sizes for portrait orientation
+	//          upright_factor  Fudge factor for "upright" tweak (default 0.75)
+	//          border          If present, show a border around the image
+	//          align           Horizontal alignment (left, right, center, none)
+	//          valign          Vertical alignment (baseline, sub, super, top, text-top, middle,
+	//                          bottom, text-bottom)
+	//          alt             Alternate text for image (i.e. alt attribute). Plain text.
+	//          class           HTML for image classes. Plain text.
+	//          caption         HTML for image caption.
+	//          link-url        URL to link to
+	//          link-title      Title Object to link to
+	//          link-target     Value for the target attribute, only with link-url
+	//          no-link         Boolean, suppress description link
+	//
+	// @param array $handlerParams Associative array of media handler parameters, to be passed
+	//       to transform(). Typical keys are "width" and "page".
+	// @param String|boolean $time Timestamp of the file, set as false for current
+	// @param String $query Query params for desc url
+	// @param int|null $widthOption Used by the parser to remember the user preference thumbnailsize
+	// @since 1.20
+	// @return String HTML for an image, with links, wrappers, etc.
+	public void Make_image_link(Xomw_parser parser, Xoa_ttl title, Object file, Xomw_img_frame frame_params, Object handlerParams, Object time, Object query, Object widthOption) {
+		// XO.MW.HOOK:ImageBeforeProduceHTML
+
+//			if ($file && !$file->allowInlineDisplay()) {
+//				wfDebug(__METHOD__ . ': ' . $title->getPrefixedDBkey() . " does not allow inline display\n");
+//				return self::link($title);
+//			}
+
+		// Clean up parameters
+//			$page = isset($handlerParams['page']) ? $handlerParams['page'] : false;
+		if (frame_params.align == null) {
+			frame_params.align = Bry_.Empty;
+		}
+		if (frame_params.alt == null) {
+			frame_params.alt = Bry_.Empty;
+		}
+		if (frame_params.title == null) {
+			frame_params.title = Bry_.Empty;
+		}
+		if (frame_params.cls == null) {
+			frame_params.cls = Bry_.Empty;
+		}
+
+		byte[] prefix = Bry_.Empty; byte[] postfix = Bry_.Empty;
+
+		if (Bry_.Eq(Align__frame__center, frame_params.align)) {
+			prefix = Prefix__center;
+			postfix = Gfh_tag_.Div_rhs;
+			frame_params.align = Align__frame__none;
+		}
+//			if ($file && !isset($handlerParams['width'])) {
+//				if (isset($handlerParams['height']) && $file->isVectorized()) {
+//					// If its a vector image, and user only specifies height
+//					// we don't want it to be limited by its "normal" width.
+//					global $wgSVGMaxSize;
+//					$handlerParams['width'] = $wgSVGMaxSize;
+//				} else {
+//					$handlerParams['width'] = $file->getWidth($page);
+//				}
+//
+			if (   frame_params.thumbnail != null
+				|| frame_params.manual_thumb != null
+				|| frame_params.framed != null
+				|| frame_params.frameless != null
+//					|| !$handlerParams['width']
+			) {
+//					global $wgThumbLimits, $wgThumbUpright;
+//
+//					if ($widthOption === null || !isset($wgThumbLimits[$widthOption])) {
+//						$widthOption = User::getDefaultOption('thumbsize');
+//					}
+//
+//					// Reduce width for upright images when parameter 'upright' is used
+//					if (isset(frame_params['upright']) && frame_params['upright'] == 0) {
+//						frame_params['upright'] = $wgThumbUpright;
+//					}
+//
+//					// For caching health: If width scaled down due to upright
+//					// parameter, round to full __0 pixel to avoid the creation of a
+//					// lot of odd thumbs.
+//					$prefWidth = isset(frame_params['upright']) ?
+//						round($wgThumbLimits[$widthOption] * frame_params['upright'], -1) :
+//						$wgThumbLimits[$widthOption];
+//
+//					// Use width which is smaller: real image width or user preference width
+//					// Unless image is scalable vector.
+//					if (!isset($handlerParams['height']) && ($handlerParams['width'] <= 0 ||
+//							$prefWidth < $handlerParams['width'] || $file->isVectorized())) {
+//						$handlerParams['width'] = $prefWidth;
+//					}
+			}
+//			}
+
+		if (frame_params.thumbnail != null || frame_params.manual_thumb != null
+			|| frame_params.framed != null
+		) {
+			// Create a thumbnail. Alignment depends on the writing direction of
+			// the page content language (right-aligned for LTR languages,
+			// left-aligned for RTL languages)
+			// If a thumbnail width has not been provided, it is set
+			// to the default user option as specified in Language*.php
+			if (frame_params.align == Bry_.Empty) {
+//					frame_params.align = $parser->getTargetLanguage()->alignEnd();
+			}
+//				return prefix .
+//					self::makeThumbLink2($title, $file, frame_params, $handlerParams, $time, $query) .
+//					postfix;
+		}
+//
+//			if ($file && isset(frame_params['frameless'])) {
+//				$srcWidth = $file->getWidth($page);
+//				// For "frameless" option: do not present an image bigger than the
+//				// source (for bitmap-style images). This is the same behavior as the
+//				// "thumb" option does it already.
+//				if ($srcWidth && !$file->mustRender() && $handlerParams['width'] > $srcWidth) {
+//					$handlerParams['width'] = $srcWidth;
+//				}
+//			}
+//
+//			if ($file && isset($handlerParams['width'])) {
+//				// Create a resized image, without the additional thumbnail features
+//				$thumb = $file->transform($handlerParams);
+//			} else {
+//				$thumb = false;
+//			}
+//
+//			if (!$thumb) {
+//				$s = self::makeBrokenImageLinkObj($title, frame_params['title'], '', '', '', $time == true);
+//			} else {
+//				self::processResponsiveImages($file, $thumb, $handlerParams);
+//				$params = [
+//					'alt' => frame_params['alt'],
+//					'title' => frame_params['title'],
+//					'valign' => isset(frame_params['valign']) ? frame_params['valign'] : false,
+//					'img-class' => frame_params['class'] ];
+//				if (isset(frame_params['border'])) {
+//					$params['img-class'] .= ($params['img-class'] !== '' ? ' ' : '') . 'thumbborder';
+//				}
+//				$params = self::getImageLinkMTOParams(frame_params, $query, $parser) + $params;
+//
+//				$s = $thumb->toHtml($params);
+//			}
+//			if (frame_params['align'] != '') {
+//				$s = "<div class=\"float{frame_params['align']}\">{$s}</div>";
+//			}
+//			return str_replace("\n", ' ', prefix . $s . postfix);
+		if (prefix == null || postfix == null) {
+		}
+	}
+	public void Make_thumb_link2(Bry_bfr bfr, Xoa_ttl title, Object file, Xomw_img_frame frame_params, Object handlerParams, Object time, Object query) {
+		boolean exists = false; // = $file && $file->exists();
+
+//			$page = isset($handlerParams['page']) ? $handlerParams['page'] : false;
+		if (frame_params.align == null) {
+			frame_params.align = Align__frame__right;
+		}
+		if (frame_params.alt == null) {
+			frame_params.alt = Bry_.Empty;
+		}
+		if (frame_params.title == null) {
+			frame_params.title = Bry_.Empty;
+		}
+		if (frame_params.caption == null) {
+			frame_params.caption = Bry_.Empty;
+		}
+
+//			if (empty($handlerParams['width'])) {
+//				// Reduce width for upright images when parameter 'upright' is used
+//				$handlerParams['width'] = isset(frame_params['upright']) ? 130 : 180;
+//			}
+		boolean thumb = false;
+		boolean no_scale = false;
+		boolean manual_thumb = false;
+		int outer_width = 0;
+
+		if (!exists) {
+//				outer_width = $handlerParams['width'] + 2;
+		}
+		else {
+			if (frame_params.manual_thumb != null) {
+				// Use manually specified thumbnail
+//					$manual_title = Title::makeTitleSafe(NS_FILE, frame_params['manual_thumb']);
+//					if ($manual_title) {
+//						$manual_img = wfFindFile($manual_title);
+//						if ($manual_img) {
+//							thumb = $manual_img->getUnscaledThumb($handlerParams);
+//							manual_thumb = true;
+//						} else {
+//							exists = false;
+//						}
+//					}
+			}
+			else if (frame_params.framed != null) {
+				// Use image dimensions, don't scale
+//					thumb = $file->getUnscaledThumb($handlerParams);
+				no_scale = true;
+			}
+			else {
+				// Do not present an image bigger than the source, for bitmap-style images
+				// This is a hack to maintain compatibility with arbitrary pre-1.10 behavior
+//					$srcWidth = $file->getWidth($page);
+//					if ($srcWidth && !$file->mustRender() && $handlerParams['width'] > $srcWidth) {
+//						$handlerParams['width'] = $srcWidth;
+//					}
+//					thumb = $file->transform($handlerParams);
+			}
+
+			if (thumb) {
+//					outer_width = thumb->getWidth() + 2;
+			}
+			else {
+//					outer_width = $handlerParams['width'] + 2;
+			}
+		}
+
+		// ThumbnailImage::toHtml() already adds page= onto the end of DjVu URLs
+		// So we don't need to pass it here in $query. However, the URL for the
+		// zoom icon still needs it, so we make a unique query for it. See bug 14771
+//			$url = $title->getLocalURL($query);
+//			if ($page) {
+//				$url = wfAppendQuery($url, [ 'page' => $page ]);
+//			}
+		if (manual_thumb
+			&& frame_params.link_title != null
+			&& frame_params.link_url != null
+			&& frame_params.no_link != null) {
+//				frame_params.link_url = url;
+		}
+
+		int rv_bgn = bfr.Len();
+		bfr.Add_str_a7("<div class=\"thumb t").Add(frame_params.align)
+			.Add_str_a7("\"><div class=\"thumbinner\" style=\"width:").Add_int_variable(outer_width).Add_str_a7("px;\">");
+
+		byte[] zoom_icon = Bry_.Empty;
+		if (!exists) {
+//				$s .= self::makeBrokenImageLinkObj($title, frame_params['title'], '', '', '', $time == true);
+//				zoom_icon = '';
+		}
+		else if (!thumb) {
+//				$s .= wfMessage('thumbnail_error', '')->escaped();
+//				zoom_icon = '';
+		}
+		else {
+			if (!no_scale && !manual_thumb) {
+//					self::processResponsiveImages($file, thumb, $handlerParams);
+			}
+//				$params = [
+//					'alt' => frame_params['alt'],
+//					'title' => frame_params['title'],
+//					'img-class' => (isset(frame_params['class']) && frame_params['class'] !== ''
+//						? frame_params['class'] . ' '
+//						: '') . 'thumbimage'
+//				];
+//				$params = self::getImageLinkMTOParams(frame_params, $query) + $params;
+//				$s .= thumb->toHtml($params);
+			if (frame_params.framed != null) {
+				zoom_icon = Bry_.Empty;
+			}
+			else {
+//					html_utl.Raw_element(bfr, Gfh_tag_.Bry__div, 
+//					zoom_icon = Html::rawElement('div', [ 'class' => 'magnify' ],
+//						Html::rawElement('a', [
+//							'href' => $url,
+//							'class' => '@gplx.Internal protected',
+//							'title' => wfMessage('thumbnail-more')->text() ],
+//							""));
+			}
+		}
+		bfr.Add_str_a7("  <div class=\"thumbcaption\">").Add(zoom_icon).Add(frame_params.caption).Add_str_a7("</div></div></div>");
+		Bry_.Replace_all_direct(bfr.Bfr(), Byte_ascii.Nl, Byte_ascii.Space, rv_bgn, bfr.Len());	// str_replace("\n", ' ', $s);
+	}
+
 	// This function returns an HTML link to the given target.  It serves a few
 	// purposes:
 	//   1) If $target is a Title, the correct URL to link to will be figured
@@ -283,218 +575,6 @@ public class Xomw_linker {
 		}
 		return split_trail_rv;
 	}
-	public void Make_image(Bry_bfr bfr, Xoa_ttl title, byte[] options, boolean holders) {
-		// Check if the options text is of the form "options|alt text"
-		// Options are:
-		//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang
-		//  * left       no resizing, just left align. label is used for alt= only
-		//  * right      same, but right aligned
-		//  * none       same, but not aligned
-		//  * ___px      scale to ___ pixels width, no aligning. e.g. use in taxobox
-		//  * center     center the image
-		//  * frame      Keep original image size, no magnify-button.
-		//  * framed     Same as "frame"
-		//  * frameless  like 'thumb' but without a frame. Keeps user preferences for width
-		//  * upright    reduce width for upright images, rounded to full __0 px
-		//  * border     draw a 1px border around the image
-		//  * alt        Text for HTML alt attribute (defaults to empty)
-		//  * class      Set a class for img node
-		//  * link       Set the target of the image link. Can be external, interwiki, or local
-		// vertical-align values (no % or length right now):
-		//  * baseline
-		//  * sub
-		//  * super
-		//  * top
-		//  * text-top
-		//  * middle
-		//  * bottom
-		//  * text-bottom
-
-		// Protect LanguageConverter markup when splitting into parts
-//			$parts = StringUtils::delimiterExplode(
-//				'-{', '}-', '|', $options, true /* allow nesting */
-//			);
-
-		// Give extensions a chance to select the file revision for us
-//			$options = [];
-//			$descQuery = false;
-		// MW.HOOK:BeforeParserFetchFileAndTitle
-
-		// Fetch and register the file (file title may be different via hooks)
-//			list($file, $title) = $this->fetchFileAndTitle($title, $options);
-
-		// Get parameter map
-//			$handler = $file ? $file->getHandler() : false;
-
-//			list($paramMap, $mwArray) = $this->getImageParams($handler);
-
-//			if (!$file) {
-//				$this->addTrackingCategory('broken-file-category');
-//			}
-
-		// Process the input parameters
-//			$caption = '';
-//			$params = [ 'frame' => [], 'handler' => [],
-//				'horizAlign' => [], 'vertAlign' => [] ];
-//			$seenformat = false;
-//			foreach ($parts as $part) {
-//				$part = trim($part);
-//				list($magicName, $value) = $mwArray->matchVariableStartToEnd($part);
-//				$validated = false;
-//				if (isset($paramMap[$magicName])) {
-//					list($type, $paramName) = $paramMap[$magicName];
-
-				// Special case; width and height come in one variable together
-//					if ($type === 'handler' && $paramName === 'width') {
-//						$parsedWidthParam = $this->parseWidthParam($value);
-//						if (isset($parsedWidthParam['width'])) {
-//							$width = $parsedWidthParam['width'];
-//							if ($handler->validateParam('width', $width)) {
-//								$params[$type]['width'] = $width;
-//								$validated = true;
-//							}
-//						}
-//						if (isset($parsedWidthParam['height'])) {
-//							$height = $parsedWidthParam['height'];
-//							if ($handler->validateParam('height', $height)) {
-//								$params[$type]['height'] = $height;
-//								$validated = true;
-//							}
-//						}
-					// else no validation -- T15436
-//					} else {
-//						if ($type === 'handler') {
-//							// Validate handler parameter
-//							$validated = $handler->validateParam($paramName, $value);
-//						} else {
-//							// Validate @gplx.Internal protected parameters
-//							switch ($paramName) {
-//							case 'manualthumb':
-//							case 'alt':
-//							case 'class':
-							// @todo FIXME: Possibly check validity here for
-							// manualthumb? downstream behavior seems odd with
-							// missing manual thumbs.
-//								$validated = true;
-//								$value = $this->stripAltText($value, $holders);
-//								break;
-//							case 'link':
-//								$chars = self::EXT_LINK_URL_CLASS;
-//								$addr = self::EXT_LINK_ADDR;
-//								$prots = $this->mUrlProtocols;
-//								if ($value === '') {
-//									$paramName = 'no-link';
-//									$value = true;
-//									$validated = true;
-//								} else if (preg_match("/^((?i)$prots)/", $value)) {
-//									if (preg_match("/^((?i)$prots)$addr$chars*$/u", $value, $m)) {
-//										$paramName = 'link-url';
-//										$this->mOutput->addExternalLink($value);
-//										if ($this->mOptions->getExternalLinkTarget()) {
-//											$params[$type]['link-target'] = $this->mOptions->getExternalLinkTarget();
-//										}
-//										$validated = true;
-//									}
-//								} else {
-//									$linkTitle = Title::newFromText($value);
-//									if ($linkTitle) {
-//										$paramName = 'link-title';
-//										$value = $linkTitle;
-//										$this->mOutput->addLink($linkTitle);
-//										$validated = true;
-//									}
-//								}
-//								break;
-//							case 'frameless':
-//							case 'framed':
-//							case 'thumbnail':
-//								// use first appearing option, discard others.
-//								$validated = !$seenformat;
-//								$seenformat = true;
-//								break;
-//							default:
-//								// Most other things appear to be empty or numeric...
-//								$validated = ($value === false || is_numeric(trim($value)));
-//							}
-//						}
-
-//						if ($validated) {
-//							$params[$type][$paramName] = $value;
-//						}
-//					}
-//				}
-//				if (!$validated) {
-//					$caption = $part;
-//				}
-//			}
-
-		// Process alignment parameters
-//			if ($params['horizAlign']) {
-//				$params['frame']['align'] = key($params['horizAlign']);
-//			}
-//			if ($params['vertAlign']) {
-//				$params['frame']['valign'] = key($params['vertAlign']);
-//			}
-
-//			$params['frame']['caption'] = $caption;
-
-		// Will the image be presented in a frame, with the caption below?
-//			$imageIsFramed = isset($params['frame']['frame'])
-//				|| isset($params['frame']['framed'])
-//				|| isset($params['frame']['thumbnail'])
-//				|| isset($params['frame']['manualthumb']);
-
-		// In the old days, [[Image:Foo|text...]] would set alt text.  Later it
-		// came to also set the caption, ordinary text after the image -- which
-		// makes no sense, because that just repeats the text multiple times in
-		// screen readers.  It *also* came to set the title attribute.
-		// Now that we have an alt attribute, we should not set the alt text to
-		// equal the caption: that's worse than useless, it just repeats the
-		// text.  This is the framed/thumbnail case.  If there's no caption, we
-		// use the unnamed parameter for alt text as well, just for the time be-
-		// ing, if the unnamed param is set and the alt param is not.
-		// For the future, we need to figure out if we want to tweak this more,
-		// e.g., introducing a title= parameter for the title; ignoring the un-
-		// named parameter entirely for images without a caption; adding an ex-
-		// plicit caption= parameter and preserving the old magic unnamed para-
-		// meter for BC; ...
-//			if ($imageIsFramed) { // Framed image
-//				if ($caption === '' && !isset($params['frame']['alt'])) {
-//					// No caption or alt text, add the filename as the alt text so
-//					// that screen readers at least get some description of the image
-//					$params['frame']['alt'] = $title->getText();
-//				}
-			// Do not set $params['frame']['title'] because tooltips don't make sense
-			// for framed images
-//			} else { // Inline image
-//				if (!isset($params['frame']['alt'])) {
-//					// No alt text, use the "caption" for the alt text
-//					if ($caption !== '') {
-//						$params['frame']['alt'] = $this->stripAltText($caption, $holders);
-//					} else {
-//						// No caption, fall back to using the filename for the
-//						// alt text
-//						$params['frame']['alt'] = $title->getText();
-//					}
-//				}
-			// Use the "caption" for the tooltip text
-//				$params['frame']['title'] = $this->stripAltText($caption, $holders);
-//			}
-
-		// MW.HOOK:ParserMakeImageParams
-
-		// Linker does the rest
-//			$time = isset($options['time']) ? $options['time'] : false;
-//			$ret = Linker::makeImageLink($this, $title, $file, $params['frame'], $params['handler'],
-//				$time, $descQuery, $this->mOptions->getThumbSize());
-
-		// Give the handler a chance to modify the parser Object
-//			if ($handler) {
-//				$handler->parserTransformHook($this, $file);
-//			}
-
-//			return $ret;
-	}
 //		public function getImageParams($handler) {
 //			if ($handler) {
 //				$handlerClass = get_class($handler);
@@ -508,7 +588,7 @@ public class Xomw_linker {
 //					'horizAlign' => [ 'left', 'right', 'center', 'none' ],
 //					'vertAlign' => [ 'baseline', 'sub', 'super', 'top', 'text-top', 'middle',
 //						'bottom', 'text-bottom' ],
-//					'frame' => [ 'thumbnail', 'manualthumb', 'framed', 'frameless',
+//					'frame' => [ 'thumbnail', 'manual_thumb', 'framed', 'frameless',
 //						'upright', 'border', 'link', 'alt', 'class' ],
 //				];
 //				static $internalParamMap;
@@ -537,135 +617,22 @@ public class Xomw_linker {
 //		}
 //		// Make HTML for a thumbnail including image, border and caption
 //		public static function makeThumbLinkObj(Title $title, $file, $label = '', $alt,
-//			$align = 'right', $params = [], $framed = false, $manualthumb = ""
+//			$align = 'right', $params = [], $framed = false, $manual_thumb = ""
 //		) {
-//			$frameParams = [
+//			frame_params = [
 //				'alt' => $alt,
 //				'caption' => $label,
 //				'align' => $align
 //			];
 //			if ($framed) {
-//				$frameParams['framed'] = true;
+//				frame_params['framed'] = true;
 //			}
-//			if ($manualthumb) {
-//				$frameParams['manualthumb'] = $manualthumb;
+//			if ($manual_thumb) {
+//				frame_params['manual_thumb'] = $manual_thumb;
 //			}
-//			return self::makeThumbLink2($title, $file, $frameParams, $params);
+//			return self::makeThumbLink2($title, $file, frame_params, $params);
 //		}
 
-//		public static function makeThumbLink2(Title $title, $file, $frameParams = [],
-//			$handlerParams = [], $time = false, $query = ""
-//		) {
-//			$exists = $file && $file->exists();
-//
-//			$page = isset($handlerParams['page']) ? $handlerParams['page'] : false;
-//			if (!isset($frameParams['align'])) {
-//				$frameParams['align'] = 'right';
-//			}
-//			if (!isset($frameParams['alt'])) {
-//				$frameParams['alt'] = '';
-//			}
-//			if (!isset($frameParams['title'])) {
-//				$frameParams['title'] = '';
-//			}
-//			if (!isset($frameParams['caption'])) {
-//				$frameParams['caption'] = '';
-//			}
-//
-//			if (empty($handlerParams['width'])) {
-//				// Reduce width for upright images when parameter 'upright' is used
-//				$handlerParams['width'] = isset($frameParams['upright']) ? 130 : 180;
-//			}
-//			$thumb = false;
-//			$noscale = false;
-//			$manualthumb = false;
-//
-//			if (!$exists) {
-//				$outerWidth = $handlerParams['width'] + 2;
-//			} else {
-//				if (isset($frameParams['manualthumb'])) {
-//					// Use manually specified thumbnail
-//					$manual_title = Title::makeTitleSafe(NS_FILE, $frameParams['manualthumb']);
-//					if ($manual_title) {
-//						$manual_img = wfFindFile($manual_title);
-//						if ($manual_img) {
-//							$thumb = $manual_img->getUnscaledThumb($handlerParams);
-//							$manualthumb = true;
-//						} else {
-//							$exists = false;
-//						}
-//					}
-//				} else if (isset($frameParams['framed'])) {
-//					// Use image dimensions, don't scale
-//					$thumb = $file->getUnscaledThumb($handlerParams);
-//					$noscale = true;
-//				} else {
-//					// Do not present an image bigger than the source, for bitmap-style images
-//					// This is a hack to maintain compatibility with arbitrary pre-1.10 behavior
-//					$srcWidth = $file->getWidth($page);
-//					if ($srcWidth && !$file->mustRender() && $handlerParams['width'] > $srcWidth) {
-//						$handlerParams['width'] = $srcWidth;
-//					}
-//					$thumb = $file->transform($handlerParams);
-//				}
-//
-//				if ($thumb) {
-//					$outerWidth = $thumb->getWidth() + 2;
-//				} else {
-//					$outerWidth = $handlerParams['width'] + 2;
-//				}
-//			}
-//
-//			// ThumbnailImage::toHtml() already adds page= onto the end of DjVu URLs
-//			// So we don't need to pass it here in $query. However, the URL for the
-//			// zoom icon still needs it, so we make a unique query for it. See bug 14771
-//			$url = $title->getLocalURL($query);
-//			if ($page) {
-//				$url = wfAppendQuery($url, [ 'page' => $page ]);
-//			}
-//			if ($manualthumb
-//				&& !isset($frameParams['link-title'])
-//				&& !isset($frameParams['link-url'])
-//				&& !isset($frameParams['no-link'])) {
-//				$frameParams['link-url'] = $url;
-//			}
-//
-//			$s = "<div class=\"thumb t{$frameParams['align']}\">"
-//				. "<div class=\"thumbinner\" style=\"width:{$outerWidth}px;\">";
-//
-//			if (!$exists) {
-//				$s .= self::makeBrokenImageLinkObj($title, $frameParams['title'], '', '', '', $time == true);
-//				$zoomIcon = '';
-//			} else if (!$thumb) {
-//				$s .= wfMessage('thumbnail_error', '')->escaped();
-//				$zoomIcon = '';
-//			} else {
-//				if (!$noscale && !$manualthumb) {
-//					self::processResponsiveImages($file, $thumb, $handlerParams);
-//				}
-//				$params = [
-//					'alt' => $frameParams['alt'],
-//					'title' => $frameParams['title'],
-//					'img-class' => (isset($frameParams['class']) && $frameParams['class'] !== ''
-//						? $frameParams['class'] . ' '
-//						: '') . 'thumbimage'
-//				];
-//				$params = self::getImageLinkMTOParams($frameParams, $query) + $params;
-//				$s .= $thumb->toHtml($params);
-//				if (isset($frameParams['framed'])) {
-//					$zoomIcon = "";
-//				} else {
-//					$zoomIcon = Html::rawElement('div', [ 'class' => 'magnify' ],
-//						Html::rawElement('a', [
-//							'href' => $url,
-//							'class' => '@gplx.Internal protected',
-//							'title' => wfMessage('thumbnail-more')->text() ],
-//							""));
-//				}
-//			}
-//			$s .= '  <div class="thumbcaption">' . $zoomIcon . $frameParams['caption'] . "</div></div></div>";
-//			return str_replace("\n", ' ', $s);
-//		}
 //		// Make a "broken" link to an image
 //		public static function makeBrokenImageLinkObj($title, $label = '',
 //			$query = '', $unused1 = '', $unused2 = '', $time = false

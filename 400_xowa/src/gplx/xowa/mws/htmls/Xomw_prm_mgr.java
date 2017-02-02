@@ -16,9 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
-public class Xomw_opt_mgr {
-	public boolean known;
-	public boolean broken;
-	public boolean no_classes;
-	public byte[] time = null;
+public class Xomw_prm_mgr {
+	public Xomw_prm_itm Get_or_null(int name_type) {
+		return null;
+	}
+	public Xomw_prm_itm Get_or_null(byte[] key) {
+		return null;
+	}
+	public static final int 
+	  Name__horiz_align             = 0
+	, Name__vert_align              = 1
+	;
 }

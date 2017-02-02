@@ -23,6 +23,18 @@ import gplx.xowa.mws.parsers.*; import gplx.xowa.mws.parsers.quotes.*;
 import gplx.xowa.mws.htmls.*; import gplx.xowa.mws.linkers.*;
 import gplx.xowa.mws.utls.*;
 import gplx.xowa.parsers.uniqs.*;
+/*	TODO.XO
+	* P7: multi-line links; // look at the next 'line' to see if we can close it there
+	* P7: interwiki
+	* P7: [[File:]]
+	* P7: [[Category:]]
+	* P6: [[Media:]]
+	* P4: handle "]]]"; "If we get a ] at the beginning of $m[3]"
+	* P4: handle "[[http://a.org]]"
+	* P3: $langObj->formatNum( ++$this->mAutonumber );
+	* P2: $this->getConverterLanguage()->markNoConversion( $text );
+	* P1: link_prefix; EX: b[[A]]; [not enabled on enwiki]
+*/
 public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Xomw_link_holders holders;
 	private final    Xomw_linker linker;
@@ -73,9 +85,12 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 		Replace_internal_links(bfr, src, src_bgn, src_end);
 	}
+	// XO.MW:SYNC:1.29; DATE:2017-02-02
 	public void Replace_internal_links(Bry_bfr bfr, byte[] src, int src_bgn, int src_end) {
-		// PORTED: regex for tc move to header; e1 and e1_img moved to code
-		// split the entire text String on occurrences of [[
+		// XO.MW: regex for tc move to header; e1 and e1_img moved to code
+		// the % is needed to support urlencoded titles as well
+
+		// XO.MW.BGN: split the entire text String on occurrences of [[
 		int cur = src_bgn;
 		int prv = cur;
 		while (true) {
@@ -86,9 +101,9 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 			cur = lnki_bgn + 2;	// 2="[[".length
 
-			// IGNORE: handles strange split logic of adding space to String; "$s = substr($s, 1);"
+			// XO.MW.IGNORE: handles strange split logic of adding space to String; "$s = substr($s, 1);"
 
-			// TODO.XO:lnke_bgn; EX: b[[A]]
+			// TODO.XO:link_prefix; EX: b[[A]]
 			// $useLinkPrefixExtension = $this->getTargetLanguage()->linkPrefixExtension();
 			// $e2 = null;
 			// if ($useLinkPrefixExtension) {
@@ -103,7 +118,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 			// $nottalk = !$this->mTitle->isTalkPage();
 
-			// TODO.XO:lnke_bgn
+			// TODO.XO:link_prefix
 			byte[] prefix = Bry_.Empty;
 			//if ($useLinkPrefixExtension) {
 			//	$m = [];
@@ -116,9 +131,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			//	$prefix = '';
 			//}
 
-			// IGNORE: "Check for excessive memory usage"
-
-			// TODO.XO:lnke_bgn; EX: b[[A]]
+			// TODO.XO:link_prefix; EX: b[[A]]
 			//if ($useLinkPrefixExtension) {
 			//	if (preg_match($e2, $s, $m)) {
 			//		$prefix = $m[2];
@@ -183,6 +196,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			byte[] text = Bry_.Mid(src, capt_bgn, capt_end);
 			byte[] trail = Bry_.Empty;
 			if (!might_be_img) {
+				// TODO.XO:
 				// If we get a ] at the beginning of $m[3] that means we have a link that's something like:
 				// [[Image:Foo.jpg|[http://example.com desc]]] <- having three ] in a row fucks up,
 				// the real problem is with the $e1 regex
@@ -416,6 +430,248 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 		}
 	}
+	public void Make_image(Bry_bfr bfr, Xoa_ttl title, byte[] options, boolean holders) {
+		// Check if the options text is of the form "options|alt text"
+		// Options are:
+		//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang
+		//  * left       no resizing, just left align. label is used for alt= only
+		//  * right      same, but right aligned
+		//  * none       same, but not aligned
+		//  * ___px      scale to ___ pixels width, no aligning. e.g. use in taxobox
+		//  * center     center the image
+		//  * frame      Keep original image size, no magnify-button.
+		//  * framed     Same as "frame"
+		//  * frameless  like 'thumb' but without a frame. Keeps user preferences for width
+		//  * upright    reduce width for upright images, rounded to full __0 px
+		//  * border     draw a 1px border around the image
+		//  * alt        Text for HTML alt attribute (defaults to empty)
+		//  * class      Set a class for img node
+		//  * link       Set the target of the image link. Can be external, interwiki, or local
+		// vertical-align values (no % or length right now):
+		//  * baseline
+		//  * sub
+		//  * super
+		//  * top
+		//  * text-top
+		//  * middle
+		//  * bottom
+		//  * text-bottom
+
+		// Protect LanguageConverter markup when splitting into parts
+//			$parts = StringUtils::delimiterExplode(
+//				'-{', '}-', '|', $options, true /* allow nesting */
+//			);
+
+		// Give extensions a chance to select the file revision for us
+//			$options = [];
+//			$descQuery = false;
+		// MW.HOOK:BeforeParserFetchFileAndTitle
+
+		// Fetch and register the file (file title may be different via hooks)
+//			list($file, $title) = $this->fetchFileAndTitle($title, $options);
+
+		// Get parameter map
+//			$handler = $file ? $file->getHandler() : false;
+
+//			list($paramMap, $mwArray) = $this->getImageParams($handler);
+
+//			if (!$file) {
+//				$this->addTrackingCategory('broken-file-category');
+//			}
+
+		// Process the input parameters
+//			caption = '';
+//			$params = [ 'frame' => [], 'handler' => [],
+//				'horizAlign' => [], 'vertAlign' => [] ];
+//			$seenformat = false;
+//			foreach ($parts as $part) {
+			Xomw_prm_mgr param_map = new Xomw_prm_mgr();
+			Xomw_prm_mgr param_mgr = new Xomw_prm_mgr();
+			byte[] caption = Bry_.Empty;
+
+			byte[] part = null;
+			part = Bry_.Trim(part);
+			byte[] magic_name = null;	// $mwArray->matchVariableStartToEnd($part);
+			boolean validated = false;
+			
+			Xomw_prm_itm prm_itm = param_map.Get_or_null(magic_name);
+			if (prm_itm != null) {
+				int prm_type = prm_itm.type;
+				int prm_name = prm_itm.name_type;
+				// Special case; width and height come in one variable together
+				if (prm_type == Xomw_prm_itm.Type__handler && prm_name == Xomw_prm_itm.Name__width) {
+//						$parsedWidthParam = $this->parseWidthParam($value);
+//						if (isset($parsedWidthParam['width'])) {
+//							$width = $parsedWidthParam['width'];
+//							if ($handler->validateParam('width', $width)) {
+//								$params[$type]['width'] = $width;
+//								validated = true;
+//							}
+//						}
+//						if (isset($parsedWidthParam['height'])) {
+//							$height = $parsedWidthParam['height'];
+//							if ($handler->validateParam('height', $height)) {
+//								$params[$type]['height'] = $height;
+//								validated = true;
+//							}
+//						}
+					// else no validation -- T15436
+				}
+				else {
+					if (prm_type == Xomw_prm_itm.Type__handler) {
+						// Validate handler parameter
+						// validated = $handler->validateParam($paramName, $value);
+					}
+					else {
+						// Validate @gplx.Internal protected parameters
+						switch (prm_name) {
+							case Xomw_prm_itm.Name__manual_thumb:
+							case Xomw_prm_itm.Name__alt:
+							case Xomw_prm_itm.Name__class:
+								// @todo FIXME: Possibly check validity here for
+								// manualthumb? downstream behavior seems odd with
+								// missing manual thumbs.
+								validated = true;
+								// $value = $this->stripAltText($value, $holders);
+								break;
+							case Xomw_prm_itm.Name__link:
+//									$chars = self::EXT_LINK_URL_CLASS;
+//									$addr = self::EXT_LINK_ADDR;
+//									$prots = $this->mUrlProtocols;
+//									if ($value === '') {
+//										$paramName = 'no-link';
+//										$value = true;
+//										validated = true;
+//									} else if (preg_match("/^((?i)$prots)/", $value)) {
+//										if (preg_match("/^((?i)$prots)$addr$chars*$/u", $value, $m)) {
+//											$paramName = 'link-url';
+//											$this->mOutput->addExternalLink($value);
+//											if ($this->mOptions->getExternalLinkTarget()) {
+//												$params[$type]['link-target'] = $this->mOptions->getExternalLinkTarget();
+//											}
+//											validated = true;
+//										}
+//									} else {
+//										$linkTitle = Title::newFromText($value);
+//										if ($linkTitle) {
+//											$paramName = 'link-title';
+//											$value = $linkTitle;
+//											$this->mOutput->addLink($linkTitle);
+//											validated = true;
+//										}
+//									}
+								break;
+							case Xomw_prm_itm.Name__frameless:
+							case Xomw_prm_itm.Name__framed:
+							case Xomw_prm_itm.Name__thumbnail:
+								// use first appearing option, discard others.
+								// validated = !$seenformat;
+								// $seenformat = true;
+								break;
+							default:
+								// Most other things appear to be empty or numeric...
+								// validated = ($value === false || is_numeric(trim($value)));
+								break;
+						}
+					}
+				}
+			}
+			if (!validated) {
+				caption = part;
+			}
+//			}
+
+		// Process alignment parameters
+		Xomw_prm_itm tmp = param_mgr.Get_or_null(Xomw_prm_mgr.Name__horiz_align);
+		Xomw_img_frame frame = new Xomw_img_frame(); // param_mgr.frame;
+		if (tmp != null) {
+			frame.align = tmp.val;
+		}
+		tmp = param_mgr.Get_or_null(Xomw_prm_mgr.Name__vert_align);
+		if (tmp != null) {
+			frame.valign = tmp.val;
+		}
+
+		frame.caption = caption;
+
+		boolean image_is_framed 
+			=  frame.frame != null
+			|| frame.framed != null
+			|| frame.thumbnail != null
+			|| frame.manual_thumb != null
+			;
+
+		// Will the image be presented in a frame, with the caption below?
+		// In the old days, [[Image:Foo|text...]] would set alt text.  Later it
+		// came to also set the caption, ordinary text after the image -- which
+		// makes no sense, because that just repeats the text multiple times in
+		// screen readers.  It *also* came to set the title attribute.
+		// Now that we have an alt attribute, we should not set the alt text to
+		// equal the caption: that's worse than useless, it just repeats the
+		// text.  This is the framed/thumbnail case.  If there's no caption, we
+		// use the unnamed parameter for alt text as well, just for the time be-
+		// ing, if the unnamed param is set and the alt param is not.
+		// For the future, we need to figure out if we want to tweak this more,
+		// e.g., introducing a title= parameter for the title; ignoring the un-
+		// named parameter entirely for images without a caption; adding an ex-
+		// plicit caption= parameter and preserving the old magic unnamed para-
+		// meter for BC; ...
+		if (image_is_framed) { // Framed image
+			if (caption == Bry_.Empty && frame.alt == null) {
+				// No caption or alt text, add the filename as the alt text so
+				// that screen readers at least get some description of the image
+//					frame.alt = title.Get_text();
+			}
+			// Do not set $params['frame']['title'] because tooltips don't make sense
+			// for framed images
+		} 
+		else { // Inline image
+			if (frame.alt == null) {
+				// No alt text, use the "caption" for the alt text
+				if (caption != Bry_.Empty) {
+//						frame.alt = $this->stripAltText(caption, $holders);
+				}
+				else {
+					// No caption, fall back to using the filename for the
+					// alt text
+//						frame.alt = title.Get_text();
+				}
+			}
+			// Use the "caption" for the tooltip text
+//				frame.title = $this->stripAltText(caption, $holders);
+		}
+
+		// MW.HOOK:ParserMakeImageParams
+
+		// Linker does the rest
+//			byte[] time = options.time;
+//			$ret = Linker::makeImageLink($this, $title, $file, $params['frame'], $params['handler'],
+//				$time, $descQuery, $this->mOptions->getThumbSize());
+//
+//			// Give the handler a chance to modify the parser Object
+//			if (handler != null) {
+//				$handler->parserTransformHook($this, $file);
+//			}
+	}
+//		protected function stripAltText( $caption, $holders ) {
+//			// Strip bad stuff out of the title (tooltip).  We can't just use
+//			// replaceLinkHoldersText() here, because if this function is called
+//			// from replaceInternalLinks2(), mLinkHolders won't be up-to-date.
+//			if ( $holders ) {
+//				$tooltip = $holders->replaceText( $caption );
+//			} else {
+//				$tooltip = $this->replaceLinkHoldersText( $caption );
+//			}
+//
+//			// make sure there are no placeholders in thumbnail attributes
+//			// that are later expanded to html- so expand them now and
+//			// remove the tags
+//			$tooltip = $this->mStripState->unstripBoth( $tooltip );
+//			$tooltip = Sanitizer::stripAllTags( $tooltip );
+//
+//			return $tooltip;
+//		}
+
 	public void Maybe_do_subpage_link(Xomw_linker__normalize_subpage_link rv, byte[] target, byte[] text) {
 		linker.Normalize_subpage_link(rv, page_title, target, text);
 	}
