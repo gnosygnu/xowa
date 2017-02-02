@@ -65,7 +65,9 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		wiki.Html_mgr().Page_wtr_mgr().Init_(true);
 		wiki.Init_assert();
 		if		(String_.Eq(src_url.Ext(), ".xml")) {
-			if (app.Cfg().Get_bool_app_or("xowa.bldr.import.delete_xml_file", true))		// CFG: Cfg__
+			if (   app.Cfg().Get_bool_app_or("xowa.bldr.import.delete_xml_file", true)	// CFG: Cfg__
+				&& Io_mgr.Instance.ExistsFil(src_url.GenNewExt(".bz2"))	// only delete the file if there is a corresponding bz2 file; BUG.GH:#124; DATE:2017-02-02
+				)
 				Io_mgr.Instance.DeleteFil(src_url);
 		}
 		else if (String_.Eq(src_url.Ext(), ".bz2")) {
