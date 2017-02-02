@@ -66,55 +66,47 @@ class Fs_root_wkr {
 		Orig_fil_mgr rv = new Orig_fil_mgr();
 		Io_url orig_changes_log = orig_dir.GenSubFil("xowa.orig.changes.log");
 
-		// loop over all dirs in orig_dir
-		Io_url[] sub_dirs = Io_mgr.Instance.QueryDir_args(orig_dir).DirInclude_(true).ExecAsUrlAry();
-		int sub_dirs_len = sub_dirs.length;
-		for (int i = 0; i < sub_dirs_len; i++) {
-			Io_url sub_dir = sub_dirs[i];
-			// if (String_.Len(sub_dir.NameOnly()) != 1) continue;	// only look at subdirs with 1 char; EX: "/orig_dir/a/" vs "/orig_dir/math/"
+		// loop over all fils in orig_dir
+		Io_url[] fils = Io_mgr.Instance.QueryDir_args(orig_dir).Recur_(recurse).ExecAsUrlAry();
+		int fils_len = fils.length;
+		for (int i = 0; i < fils_len; i++) {
+			Io_url fil = fils[i];
+			byte[] fil_name_bry = Bry_.new_u8(fil.NameAndExt());
 
-			// loop over all fils in that 1-char dir
-			Io_url[] fils = Io_mgr.Instance.QueryDir_args(sub_dir).Recur_(recurse).ExecAsUrlAry();
-			int fils_len = fils.length;
-			for (int j = 0; j < fils_len; j++) {
-				Io_url fil = fils[j];
-				byte[] fil_name_bry = Bry_.new_u8(fil.NameAndExt());
-
-				String orig_change_type = null;
-				// if url has space, replace it with underscore
-				if (Bry_.Has(fil_name_bry, Byte_ascii.Space)) {
-					fil_name_bry = Bry_.Replace(fil_name_bry, Byte_ascii.Space, Byte_ascii.Underline);
-					orig_change_type = "space_to_underscore";
-				}
-
-				// TOMBSTONE: code below had unit_test, but not sure if needed; file's title should be title-cased, but it's possible to be lower-case for "File:" namespaces with case_match; DATE:2017-02-01
-				// if url's first char is lowercase, uppercase it;
-				// byte b_0 = fil_name_bry[0];
-				// if (b_0 >= Byte_ascii.Ltr_a && b_0 <= Byte_ascii.Ltr_z) {
-				//	 fil_name_bry = Bry_.Ucase__1st(fil_name_bry);
-				//	 orig_change_type = "ucase_1st";
-				// }
-
-				// if changed above, rename it and log it
-				if (orig_change_type != null) {
-					Io_url new_url = fil.GenNewNameAndExt(String_.new_u8(fil_name_bry));
-					Io_mgr.Instance.MoveFil_args(fil, new_url, true).Exec();
-					Io_mgr.Instance.AppendFilStr(orig_changes_log, orig_change_type + "|" + fil.Raw() + "\n");
-					fil = new_url;
-				}
-
-				// if file already seen, ignore it
-				Orig_fil_row fil_itm = rv.Get_by_ttl(fil_name_bry);
-				if (fil_itm != Orig_fil_row.Null) {
-					Gfo_usr_dlg_.Instance.Warn_many("", "", "file already exists: cur=~{0} new=~{1}", fil_itm.Url().Raw(), fil.Raw());
-					continue;
-				}
-
-				// add it to cache
-				Xof_ext ext = Xof_ext_.new_by_ttl_(fil_name_bry);
-				fil_itm = Orig_fil_row.New_by_fs(fil, fil_name_bry, ext.Id());
-				rv.Add(fil_itm);
+			String orig_change_type = null;
+			// if url has space, replace it with underscore
+			if (Bry_.Has(fil_name_bry, Byte_ascii.Space)) {
+				fil_name_bry = Bry_.Replace(fil_name_bry, Byte_ascii.Space, Byte_ascii.Underline);
+				orig_change_type = "space_to_underscore";
 			}
+
+			// TOMBSTONE: code below had unit_test, but not sure if needed; file's title should be title-cased, but it's possible to be lower-case for "File:" namespaces with case_match; DATE:2017-02-01
+			// if url's first char is lowercase, uppercase it;
+			// byte b_0 = fil_name_bry[0];
+			// if (b_0 >= Byte_ascii.Ltr_a && b_0 <= Byte_ascii.Ltr_z) {
+			//	 fil_name_bry = Bry_.Ucase__1st(fil_name_bry);
+			//	 orig_change_type = "ucase_1st";
+			// }
+
+			// if changed above, rename it and log it
+			if (orig_change_type != null) {
+				Io_url new_url = fil.GenNewNameAndExt(String_.new_u8(fil_name_bry));
+				Io_mgr.Instance.MoveFil_args(fil, new_url, true).Exec();
+				Io_mgr.Instance.AppendFilStr(orig_changes_log, orig_change_type + "|" + fil.Raw() + "\n");
+				fil = new_url;
+			}
+
+			// if file already seen, ignore it
+			Orig_fil_row fil_itm = rv.Get_by_ttl(fil_name_bry);
+			if (fil_itm != Orig_fil_row.Null) {
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "file already exists: cur=~{0} new=~{1}", fil_itm.Url().Raw(), fil.Raw());
+				continue;
+			}
+
+			// add it to cache
+			Xof_ext ext = Xof_ext_.new_by_ttl_(fil_name_bry);
+			fil_itm = Orig_fil_row.New_by_fs(fil, fil_name_bry, ext.Id());
+			rv.Add(fil_itm);
 		}
 		return rv;
 	}
