@@ -20,10 +20,8 @@ import gplx.core.btries.*;
 import gplx.xowa.mws.htmls.*;
 import gplx.xowa.mws.linkers.*;
 /*	TODO.XO
-	* titleFormatter->gePrefixedTex
-	* $html = HtmlArmor::getHtml($text);
-	* Get_link_url
-	* Get_link_classes
+	* P7: titleFormatter->getPrefixedText
+	* P7: $html = HtmlArmor::getHtml($text);
 */
 public class Xomw_linker {
 	private final    Bry_bfr tmp = Bry_bfr_.New();
@@ -107,13 +105,13 @@ public class Xomw_linker {
 			link_renderer.Make_known_link(bfr, target, text, custom_attribs, query);
 		}
 		else if (options.broken) {
-//				return $linkRenderer->makeBrokenLink($target, $text, $customAttribs, $query);
+			link_renderer.Make_broken_link(bfr, target, text, custom_attribs, query);
 		}
 		else if (options.no_classes) {
 			link_renderer.Make_preloaded_link(bfr, target, text, Bry_.Empty, custom_attribs, query);
 		}
 		else {
-//				$linkRenderer->makeLink($target, $text, $customAttribs, $query);
+			link_renderer.Make_link(bfr, target, text, Bry_.Empty, custom_attribs, query);
 		}
 	}
 	public void Make_self_link_obj(Bry_bfr bfr, Xoa_ttl nt, byte[] html, byte[] query, byte[] trail, byte[] prefix) {

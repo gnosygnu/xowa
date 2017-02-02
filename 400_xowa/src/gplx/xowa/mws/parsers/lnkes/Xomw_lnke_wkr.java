@@ -20,10 +20,6 @@ import gplx.core.btries.*; import gplx.core.primitives.*;
 import gplx.langs.phps.utls.*;
 import gplx.xowa.mws.htmls.*;
 /*	TODO.XO
-	* P8: url = sanitizer.Clean_url(url);
-	* P8: The characters '<' and '>' (which were escaped by
-	* P7: add proto-rel; EX: [//a.org b]
-	* P7: list( $dtrail, $trail ) = Linker::splitTrail( $trail );
 	* P3: $langObj->formatNum( ++$this->mAutonumber );
 	* P2: $this->getConverterLanguage()->markNoConversion( $text );
 */
@@ -33,7 +29,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private int autonumber;
 	private final    Xomw_parser parser;
 	private final    Xomw_linker linker;
-	// private final    Xomw_sanitizer sanitizer;
+	private final    Xomw_sanitizer sanitizer;
 	private final    Xomw_atr_mgr attribs = new Xomw_atr_mgr();
 	private Xomw_regex_url regex_url;
 	private Xomw_regex_space regex_space;
@@ -41,7 +37,27 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 		this.parser = parser;
 		this.tmp = parser.Tmp();
 		this.linker = parser.Linker();
-		// this.sanitizer = parser.Sanitizer();
+		this.sanitizer = parser.Sanitizer();
+
+		if (angle_entities_trie == null) {
+			synchronized (Type_adp_.ClassOf_obj(this)) {
+				Link_type__free           = Bry_.new_a7("free");
+				Link_type__text           = Bry_.new_a7("text");
+				Link_type__autonumber     = Bry_.new_a7("autonumber");
+
+				angle_entities_trie = Btrie_slim_mgr.cs().Add_many_str("&lt;", "&gt;");
+
+				// REGEX:([^\]\\x00-\\x08\\x0a-\\x1F]*?); NOTE: val is key.length
+				invalid_text_chars_trie = Btrie_slim_mgr.cs();
+				New__trie_itm__by_len(invalid_text_chars_trie, Byte_ascii.Brack_end);
+				for (int i = 0; i <= 8; i++) {		// x00-x08
+					New__trie_itm__by_len(invalid_text_chars_trie, i);
+				}
+				for (int i = 10; i <= 31; i++) {	// x0a-x1F
+					New__trie_itm__by_len(invalid_text_chars_trie, i);
+				}
+			}
+		}
 	}
 	public void Init_by_wiki(Btrie_slim_mgr protocol_trie, Xomw_regex_url regex_url, Xomw_regex_space regex_space) {
 		this.protocol_trie = protocol_trie;
@@ -151,12 +167,11 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// The characters '<' and '>' (which were escaped by
 			// removeHTMLtags()) should not be included in
 			// URLs, per RFC 2396.
-			// TODO.XO:
-			//$m2 = [];
-			//if ( preg_match( '/&(lt|gt);/', $url, $m2, PREG_OFFSET_CAPTURE ) ) {
-			//	$text = substr( $url, $m2[0][1] ) . ' ' . $text;
-			//	$url = substr( $url, 0, $m2[0][1] );
-			//}
+			if (Php_preg_.Match(angle_entities_trie, trv, src, url_bgn, url_end) != null) {
+				int angle_bgn = trv.Match_bgn;
+				text_bgn = angle_bgn;
+				url_end = angle_bgn;
+			}
 
 			// If the link text is an image URL, replace it with an <img> tag
 			// This happened by accident in the original parser, but some people used it extensively
@@ -164,6 +179,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// $img = $this->maybeMakeExternalImage( $text );
 			// if ($img !== false) $text = $img;
 
+			// XO.MW.SKIP: See "Have link text"
 			//$dtrail = '';
 
 			// Set linktype for CSS - if URL==text, link is essentially free
@@ -179,17 +195,17 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 				link_type = Link_type__autonumber;
 			}
 			else {
+				// XO.MW.SKIP: skipped b/c MW splits $trail into $dtrail and $trail but does no extra logic with variables; just concatenates later; "$this->getExternalLinkAttribs( $url ) ) . $dtrail . $trail;"
 				// Have link text, e.g. [http://domain.tld/some.link text]s
 				// Check for trail
-				// TODO.XO:
 				// list( $dtrail, $trail ) = Linker::splitTrail( $trail );
 			}
 
 			// TODO.XO:
 			// $text = $this->getConverterLanguage()->markNoConversion( $text );
 
-			// TODO.XO:
-			// url = sanitizer.Clean_url(url);
+			byte[] url = Bry_.Mid(src, url_bgn, url_end);
+			url = sanitizer.Clean_url(url);
 
 			bfr.Add_mid(src, prv, lnke_bgn);
 			prv = cur;
@@ -197,7 +213,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// This means that users can paste URLs directly into the text
 			// Funny characters like � aren't valid in URLs anyway
 			// This was changed in August 2004
-			linker.Make_external_link(bfr, Bry_.Mid(src, url_bgn, url_end), Bry_.Mid(src, text_bgn, text_end), Bool_.N, link_type, parser.Get_external_link_attribs(attribs), Bry_.Empty);
+			linker.Make_external_link(bfr, url, Bry_.Mid(src, text_bgn, text_end), Bool_.N, link_type, parser.Get_external_link_attribs(attribs), Bry_.Empty);
 
 			// XO.MW.UNSUPPORTED.HOOK: registers link for processing by other extensions?
 			// Register link in the output Object.
@@ -208,24 +224,9 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 		}
 	}
 
-	private static final    byte[]
-	  Link_type__free           = Bry_.new_a7("free")
-	, Link_type__text           = Bry_.new_a7("text")
-	, Link_type__autonumber     = Bry_.new_a7("autonumber")
-	;
-
-	private static final    Btrie_slim_mgr invalid_text_chars_trie = New__invalid_text_chars_trie();
-	private static Btrie_slim_mgr New__invalid_text_chars_trie() { // REGEX:([^\]\\x00-\\x08\\x0a-\\x1F]*?); NOTE: val is key.length
-		Btrie_slim_mgr rv = Btrie_slim_mgr.cs();
-		New__trie_itm__by_len(rv, Byte_ascii.Brack_end);
-		for (int i = 0; i <= 8; i++) {		// x00-x08
-			New__trie_itm__by_len(rv, i);
-		}
-		for (int i = 10; i <= 31; i++) {	// x0a-x1F
-			New__trie_itm__by_len(rv, i);
-		}
-		return rv;
-	}
+	private static byte[] Link_type__free, Link_type__text, Link_type__autonumber;
+	private static Btrie_slim_mgr angle_entities_trie;
+	private static Btrie_slim_mgr invalid_text_chars_trie;
 	private static void New__trie_itm__by_len(Btrie_slim_mgr mgr, int... ary) {
 		mgr.Add_obj(Bry_.New_by_ints(ary), new Int_obj_val(ary.length));
 	}

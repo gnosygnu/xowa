@@ -60,6 +60,7 @@ public class Php_preg_ {
 		return rv;
 	}
 	public static Object Match(Btrie_slim_mgr trie, Btrie_rv trv, byte[] src, int src_bgn, int src_end) {
+		trv.Match_bgn = -1;
 		int cur = src_bgn;
 		while (cur < src_end) {
 			byte b = src[cur];
@@ -67,6 +68,7 @@ public class Php_preg_ {
 			if (o == null)
 				cur += gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
 			else {
+				trv.Match_bgn = cur;
 				return o;
 			}
 		}

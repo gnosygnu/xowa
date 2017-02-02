@@ -39,6 +39,20 @@ public class Xomw_lnke_wkr__tst {
 		, "g"
 		));
 	}
+	@Test   public void Protocol_rel() {
+		fxt.Test__parse("[//a.org b]"                             , "<a rel='nofollow' class='external text' href='//a.org'>b</a>");
+	}
+	@Test   public void Url_should_not_has_angle_entities() {
+		fxt.Test__parse("[https://a.org/b&lt;c z]"                , "<a rel='nofollow' class='external text' href='https://a.org/b'>&lt;c z</a>");
+		fxt.Test__parse("[https://a.org/b&gt;c z]"                , "<a rel='nofollow' class='external text' href='https://a.org/b'>&gt;c z</a>");
+	}
+	@Test   public void Link_trail() {// checks for noop via "Have link text"
+		fxt.Test__parse("[https://a.org b]xyz"                    , "<a rel='nofollow' class='external text' href='https://a.org'>b</a>xyz");
+		fxt.Test__parse("[https://a.org b]x!z"                    , "<a rel='nofollow' class='external text' href='https://a.org'>b</a>x!z");
+	}
+	@Test   public void Clean_url() {
+		fxt.Test__parse("[https://a&quot;­b c]"                   , "<a rel='nofollow' class='external text' href='https://a%22b'>c</a>");
+	}
 }
 class Xomw_lnke_wkr__fxt {
 	private final    Xomw_lnke_wkr wkr = new Xomw_lnke_wkr(new Xomw_parser());

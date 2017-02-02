@@ -290,6 +290,8 @@ public class Xomw_parser {
 			byte[] key = itm.Text_bry();	// EX: "https://"
 			rv.Add_obj(key, key);
 		}
+		byte[] bry__relative = Bry_.new_a7("//");
+		rv.Add_obj(bry__relative, bry__relative);	// REF.MW: "$this->mUrlProtocols = wfUrlProtocols();"; "wfUrlProtocols( $includeProtocolRelative = true )"
 		return rv;
 	}
 }
