@@ -28,7 +28,7 @@ class Xof_wkr_mgr implements Gfo_invk {
 	private static final String Invk_get = "get";
 	private Xof_fsdb_mgr Get_or_new(String key) {
 		if (String_.Eq(key, "fs.dir")) {
-			return Fs_root_core.New(file_mgr, file_mgr.Wiki());
+			return Fs_root_core.Set_fsdb_mgr(file_mgr, file_mgr.Wiki());
 		}
 		else
 			throw Err_.new_unhandled(key);

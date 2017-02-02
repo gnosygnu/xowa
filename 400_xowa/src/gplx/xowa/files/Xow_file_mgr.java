@@ -72,6 +72,12 @@ public class Xow_file_mgr implements Gfo_invk {
 	public Xof_cfg_download Cfg_download() {return cfg_download;} private Xof_cfg_download cfg_download = new Xof_cfg_download();
 	public void Init_by_wiki(Xow_wiki wiki) {
 		cfg_download.Init_by_wiki(wiki);
+		
+		// if non-wmf, set fsdb_mgr to fs.dir; DATE:2017-02-01
+		if (wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__other) {
+			gplx.xowa.files.fsdb.fs_roots.Fs_root_core fsdir_core = gplx.xowa.files.fsdb.fs_roots.Fs_root_core.Set_fsdb_mgr(this, this.wiki);
+			fsdir_core.Orig_dir_(wiki.Fsys_mgr().Root_dir().GenSubDir_nest("file", "orig"));
+		}
 	}
 	public void Cfg_set(String grp, String key, String val) {	// TEST: should only be called by tests
 		if (test_grps == null) test_grps = Hash_adp_.New();

@@ -34,6 +34,7 @@ public class Fs_root_core implements Xof_fsdb_mgr, Gfo_invk {	// reads images fr
 		Orig_fil_row rv = mgr.Wkr().Get_by_ttl(lnki_ttl);
 		return rv == null ? null : rv.Url();
 	}
+	public void Orig_dir_(Io_url v) {mgr.Orig_dir_(v);}
 	public void Fsdb_search_by_list(List_adp itms, Xow_wiki wiki, Xoa_page page, Xog_js_wkr js_wkr) {
 		int itms_len = itms.Count();
 
@@ -63,7 +64,7 @@ public class Fs_root_core implements Xof_fsdb_mgr, Gfo_invk {	// reads images fr
 			v = Bry_.Replace(v, Byte_ascii.Slash, Byte_ascii.Backslash);
 		return gplx.core.brys.fmtrs.Bry_fmtr_eval_mgr_.Eval_url(wiki.Appe().Url_cmd_eval(), v);
 	}
-	public static Fs_root_core New(Xow_file_mgr file_mgr, Xowe_wiki wiki) {
+	public static Fs_root_core Set_fsdb_mgr(Xow_file_mgr file_mgr, Xowe_wiki wiki) {
 		Fs_root_core rv = new Fs_root_core(wiki);
 		file_mgr.Fsdb_mgr_(rv);
 

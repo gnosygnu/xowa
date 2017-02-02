@@ -185,6 +185,21 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 			db_mgr_sql.Core_data_mgr().Init_by_load(core_db_url);
 			file_mgr.Init_file_mgr_by_load(this);
 			db_mgr_sql.Core_data_mgr().Tbl__page().Flds__assert();	// NOTE: must go above html_mgr.Init_by_wiki b/c Page_load will be done via messages
+
+			// FOLDER.RENAME: handle renamed folders; EX:"/wiki/en.wikipedia.org-2016-12" DATE:2017-02-01
+			try {
+				byte[] cfg_domain_bry = db_mgr_sql.Core_data_mgr().Db__core().Tbl__cfg().Select_bry("xowa.bldr.session", "wiki_domain");
+				if (!Bry_.Eq(cfg_domain_bry, domain_bry)) {
+					Xow_domain_itm cfg_domain_itm = Xow_domain_itm_.parse(cfg_domain_bry);
+					this.wdata_wiki_tid	= cfg_domain_itm.Domain_type_id();
+					this.wdata_wiki_lang = cfg_domain_itm.Lang_orig_key();			
+					Bry_bfr bfr = Bry_bfr_.New();
+					Xow_abrv_wm_.To_abrv(bfr, wdata_wiki_lang, Int_obj_ref.New(wdata_wiki_tid));
+					this.wdata_wiki_abrv = bfr.To_bry_and_rls();
+				}
+			} catch (Exception e) {
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "db.init: failed to get domain from config; err=~{0}", Err_.Message_gplx_log(e));
+			}
 		}
 	}
 	private void Init_wiki(Xoue_user user) {	// NOTE: (a) one-time initialization for all wikis; (b) not called by tests

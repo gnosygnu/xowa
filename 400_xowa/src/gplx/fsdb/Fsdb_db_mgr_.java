@@ -31,7 +31,19 @@ public class Fsdb_db_mgr_ {
 				);
 			return new Fsdb_db_mgr__v1(file_dir);
 		}
+
+		// FOLDER.RENAME: handle renamed folders; EX:"/wiki/en.wikipedia.org-2016-12" DATE:2017-02-01
 		String domain_str = wiki.Domain_str();
+		try {
+			String cfg_domain_str = wiki.Data__core_mgr().Db__core().Tbl__cfg().Select_str("xowa.bldr.session", "wiki_domain");
+			if (!String_.Eq(domain_str, cfg_domain_str)) {
+				domain_str = cfg_domain_str;
+				Gfo_usr_dlg_.Instance.Note_many("", "", "fsdb.db_core.init: fsys.domain doesn't match db.domain; import db.*; fsys=~{0} db=~{1}", domain_str, cfg_domain_str);
+			}
+		} catch (Exception e) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "fsdb.db_core.init: failed to get domain from config; err=~{0}", Err_.Message_gplx_log(e));
+		}
+
 		Fsdb_db_mgr rv = null;
 		rv = load_or_null(Xow_db_layout.Itm_few, usr_dlg, wiki_dir, wiki, domain_str); if (rv != null) return rv;
 		rv = load_or_null(Xow_db_layout.Itm_lot, usr_dlg, wiki_dir, wiki, domain_str); if (rv != null) return rv;
