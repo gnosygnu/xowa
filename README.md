@@ -58,7 +58,7 @@ XOWA has seven dependencies:
 #### Setup the XOWA source
 * Download the latest XOWA source archive. For example: "xowa_source_v1.9.5.1.7z"
 * Unzip the source to "/xowa/dev". When you're done, you'll have a file called "/xowa/dev/build.xml" as well as others
-    * NOTE: if you're not on a Linux 64-bit system, overwrite the swt jar at "/xowa/dev/150_gfui/lib/swt.jar" with the copy from your "/bin/OS" directory. For example, if you're on a 64 bit Windows system, replace "/xowa/dev/150_gfui/lib/swt.jar" with "/bin/windows_64/swt/swt/jar"
+    * NOTE: if you're not on a Linux 64-bit system, overwrite the swt jar at "/xowa/dev/150_gfui/lib/swt.jar" with the copy from your "/bin/OS" directory. For example, if you're on a 64 bit Windows system, replace "/xowa/dev/150_gfui/lib/swt.jar" with "/bin/windows_64/swt/swt.jar"
 
 #### Run the ant file
 * Open up a console, and run "ant -buildfile build.xml -Dplat_name=linux_64"

@@ -136,6 +136,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		return Bry_.Mid(full_txt, page_bgn, ques_pos == Bry_find_.Not_found ? full_txt_len : ques_pos);
 	}
 
+	public byte[] Get_text()			{return Page_txt();}
 	public byte[] Get_prefixed_text()   {return Full_txt_wo_qarg();}
 	public byte[] Get_prefixed_db_key() {return Full_db();}
 	public boolean   Has_fragment() {return anch_bgn != -1;}

@@ -24,7 +24,10 @@ public class Xomw_atr_mgr {
 	public Xomw_atr_mgr        Clear()                  {hash.Clear(); return this;}
 	public void                Del(byte[] key)          {hash.Del(key);}
 	public void                Add(Xomw_atr_itm itm)    {hash.Add(itm.Key_bry(), itm);}
-	public void Add(byte[] key, byte[] val) {this.Add(new Xomw_atr_itm(-1, key, val));}
+	public Xomw_atr_mgr Add(byte[] key, byte[] val) {
+		this.Add(new Xomw_atr_itm(-1, key, val));
+		return this;
+	}
 	public void Add_or_set(Xomw_atr_itm src) {
 		Xomw_atr_itm trg = (Xomw_atr_itm)hash.Get_by(src.Key_bry());
 		if (trg == null)

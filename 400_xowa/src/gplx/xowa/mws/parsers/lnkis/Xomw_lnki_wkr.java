@@ -22,6 +22,7 @@ import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.mws.parsers.*; import gplx.xowa.mws.parsers.quotes.*;
 import gplx.xowa.mws.htmls.*; import gplx.xowa.mws.linkers.*;
 import gplx.xowa.mws.utls.*;
+import gplx.xowa.mws.filerepos.files.*;
 import gplx.xowa.parsers.uniqs.*;
 /*	TODO.XO
 	* P7: multi-line links; // look at the next 'line' to see if we can close it there
@@ -404,7 +405,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			if (ns.Id_is_media()) {
 				// Give extensions a chance to select the file revision for us
 //					options = [];
-//					descQuery = false;
+//					desc_query = false;
 				// MW.HOOK:BeforeParserFetchFileAndTitle
 				// Fetch and register the file (file title may be different via hooks)
 //					list(file, nt) = this->fetchFileAndTitle(nt, options);
@@ -464,10 +465,11 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 		// Give extensions a chance to select the file revision for us
 //			$options = [];
-//			$descQuery = false;
+		byte[] desc_query = null;
 		// MW.HOOK:BeforeParserFetchFileAndTitle
 
 		// Fetch and register the file (file title may be different via hooks)
+		Xomw_file file = new Xomw_file();
 //			list($file, $title) = $this->fetchFileAndTitle($title, $options);
 
 		// Get parameter map
@@ -480,14 +482,14 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //			}
 
 		// Process the input parameters
-//			caption = '';
-//			$params = [ 'frame' => [], 'handler' => [],
-//				'horizAlign' => [], 'vertAlign' => [] ];
-//			$seenformat = false;
+		byte[] caption = Bry_.Empty;
+		// XO.MW: $params = [ 'frame' => [], 'handler' => [], 'horizAlign' => [], 'vertAlign' => [] ];
+		Xomw_img_prms frame = new Xomw_img_prms();
+		Xomw_mda_prms handler = new Xomw_mda_prms();
+		boolean seen_format = false;
 //			foreach ($parts as $part) {
 			Xomw_prm_mgr param_map = new Xomw_prm_mgr();
 			Xomw_prm_mgr param_mgr = new Xomw_prm_mgr();
-			byte[] caption = Bry_.Empty;
 
 			byte[] part = null;
 			part = Bry_.Trim(part);
@@ -541,15 +543,16 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //									if ($value === '') {
 //										$paramName = 'no-link';
 //										$value = true;
-//										validated = true;
-//									} else if (preg_match("/^((?i)$prots)/", $value)) {
+									validated = true;
+//									}
+//									else if (preg_match("/^((?i)$prots)/", $value)) {
 //										if (preg_match("/^((?i)$prots)$addr$chars*$/u", $value, $m)) {
 //											$paramName = 'link-url';
 //											$this->mOutput->addExternalLink($value);
 //											if ($this->mOptions->getExternalLinkTarget()) {
 //												$params[$type]['link-target'] = $this->mOptions->getExternalLinkTarget();
 //											}
-//											validated = true;
+										validated = true;
 //										}
 //									} else {
 //										$linkTitle = Title::newFromText($value);
@@ -557,7 +560,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //											$paramName = 'link-title';
 //											$value = $linkTitle;
 //											$this->mOutput->addLink($linkTitle);
-//											validated = true;
+										validated = true;
 //										}
 //									}
 								break;
@@ -565,8 +568,8 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 							case Xomw_prm_itm.Name__framed:
 							case Xomw_prm_itm.Name__thumbnail:
 								// use first appearing option, discard others.
-								// validated = !$seenformat;
-								// $seenformat = true;
+								validated = !seen_format;
+								seen_format = true;
 								break;
 							default:
 								// Most other things appear to be empty or numeric...
@@ -583,7 +586,6 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 		// Process alignment parameters
 		Xomw_prm_itm tmp = param_mgr.Get_or_null(Xomw_prm_mgr.Name__horiz_align);
-		Xomw_img_frame frame = new Xomw_img_frame(); // param_mgr.frame;
 		if (tmp != null) {
 			frame.align = tmp.val;
 		}
@@ -620,7 +622,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			if (caption == Bry_.Empty && frame.alt == null) {
 				// No caption or alt text, add the filename as the alt text so
 				// that screen readers at least get some description of the image
-//					frame.alt = title.Get_text();
+				frame.alt = title.Get_text();
 			}
 			// Do not set $params['frame']['title'] because tooltips don't make sense
 			// for framed images
@@ -634,7 +636,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 				else {
 					// No caption, fall back to using the filename for the
 					// alt text
-//						frame.alt = title.Get_text();
+					frame.alt = title.Get_text();
 				}
 			}
 			// Use the "caption" for the tooltip text
@@ -645,10 +647,11 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 		// Linker does the rest
 //			byte[] time = options.time;
-//			$ret = Linker::makeImageLink($this, $title, $file, $params['frame'], $params['handler'],
-//				$time, $descQuery, $this->mOptions->getThumbSize());
-//
-//			// Give the handler a chance to modify the parser Object
+		Object time = null;
+//			options = $this->mOptions->getThumbSize()
+		linker.Make_image_link(bfr, parser, title, file, frame, handler, time, desc_query, null);
+
+		// Give the handler a chance to modify the parser Object
 //			if (handler != null) {
 //				$handler->parserTransformHook($this, $file);
 //			}

@@ -19,7 +19,9 @@ package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.mws.htmls.*; import gplx.xowa.mws.linkers.*; import gplx.xowa.mws.parsers.*;
+import gplx.xowa.mws.filerepos.files.*;
 /*	TODO.XO
+	* P8: wfMessage
 	* P7: titleFormatter->getPrefixedText
 	* P7: $html = HtmlArmor::getHtml($text);
 */
@@ -31,12 +33,15 @@ public class Xomw_linker {
 	private final    Btrie_rv trv = new Btrie_rv();
 	private final    byte[][] split_trail_rv = new byte[2][];
 	private Btrie_slim_mgr split_trail_trie;
+	private final    Xomw_atr_mgr tmp_attribs = new Xomw_atr_mgr();
 	private static final    byte[] Atr__class = Bry_.new_a7("class"), Atr__rel = Bry_.new_a7("rel"), Atr__href = Bry_.new_a7("href"), Rel__nofollow = Bry_.new_a7("nofollow");
 	public static final    byte[] 
 	  Align__frame__center = Bry_.new_a7("center")
 	, Align__frame__none = Bry_.new_a7("none")
 	, Align__frame__right = Bry_.new_a7("right")
 	, Prefix__center = Bry_.new_a7("<div class=\"center\">")
+	, Class__internal = Bry_.new_a7("internal")
+	, Class__magnify = Bry_.new_a7("magnify")
 	;
 	private final    Xomw_link_renderer link_renderer;
 	public Xomw_linker(Xomw_link_renderer link_renderer) {
@@ -72,23 +77,23 @@ public class Xomw_linker {
 	//          link-target     Value for the target attribute, only with link-url
 	//          no-link         Boolean, suppress description link
 	//
-	// @param array $handlerParams Associative array of media handler parameters, to be passed
+	// @param array handler_params Associative array of media handler parameters, to be passed
 	//       to transform(). Typical keys are "width" and "page".
 	// @param String|boolean $time Timestamp of the file, set as false for current
 	// @param String $query Query params for desc url
-	// @param int|null $widthOption Used by the parser to remember the user preference thumbnailsize
+	// @param int|null width_option Used by the parser to remember the user preference thumbnailsize
 	// @since 1.20
 	// @return String HTML for an image, with links, wrappers, etc.
-	public void Make_image_link(Xomw_parser parser, Xoa_ttl title, Object file, Xomw_img_frame frame_params, Object handlerParams, Object time, Object query, Object widthOption) {
+	public void Make_image_link(Bry_bfr bfr, Xomw_parser parser, Xoa_ttl title, Xomw_file file, Xomw_img_prms frame_params, Xomw_mda_prms handler_params, Object time, Object query, Object widthOption) {
 		// XO.MW.HOOK:ImageBeforeProduceHTML
 
-//			if ($file && !$file->allowInlineDisplay()) {
-//				wfDebug(__METHOD__ . ': ' . $title->getPrefixedDBkey() . " does not allow inline display\n");
-//				return self::link($title);
-//			}
+		if (file != null && !file.Allow_inline_display()) {
+//				this.Link(bfr, title, Bry_.Empty, tmp_attribs, tmp_query, tmp_options);
+			return;
+		}
 
 		// Clean up parameters
-//			$page = isset($handlerParams['page']) ? $handlerParams['page'] : false;
+		int page = handler_params.page;
 		if (frame_params.align == null) {
 			frame_params.align = Bry_.Empty;
 		}
@@ -109,48 +114,50 @@ public class Xomw_linker {
 			postfix = Gfh_tag_.Div_rhs;
 			frame_params.align = Align__frame__none;
 		}
-//			if ($file && !isset($handlerParams['width'])) {
-//				if (isset($handlerParams['height']) && $file->isVectorized()) {
-//					// If its a vector image, and user only specifies height
-//					// we don't want it to be limited by its "normal" width.
+		if (file != null && handler_params.width == -1) {
+			if (handler_params.height != -1 && file.Is_vectorized()) {
+				// If its a vector image, and user only specifies height
+				// we don't want it to be limited by its "normal" width.
 //					global $wgSVGMaxSize;
-//					$handlerParams['width'] = $wgSVGMaxSize;
-//				} else {
-//					$handlerParams['width'] = $file->getWidth($page);
-//				}
-//
+//					handler_params.width = $wgSVGMaxSize;
+			}
+			else {
+				handler_params.width = file.Get_width(page);
+			}
+
 			if (   frame_params.thumbnail != null
 				|| frame_params.manual_thumb != null
 				|| frame_params.framed != null
 				|| frame_params.frameless != null
-//					|| !$handlerParams['width']
+				|| handler_params.width == -1
 			) {
 //					global $wgThumbLimits, $wgThumbUpright;
-//
-//					if ($widthOption === null || !isset($wgThumbLimits[$widthOption])) {
-//						$widthOption = User::getDefaultOption('thumbsize');
+
+//					if (width_option === null || !isset($wgThumbLimits[width_option])) {
+//						width_option = User::getDefaultOption('thumbsize');
 //					}
-//
-//					// Reduce width for upright images when parameter 'upright' is used
-//					if (isset(frame_params['upright']) && frame_params['upright'] == 0) {
-//						frame_params['upright'] = $wgThumbUpright;
-//					}
-//
-//					// For caching health: If width scaled down due to upright
-//					// parameter, round to full __0 pixel to avoid the creation of a
-//					// lot of odd thumbs.
-//					$prefWidth = isset(frame_params['upright']) ?
-//						round($wgThumbLimits[$widthOption] * frame_params['upright'], -1) :
-//						$wgThumbLimits[$widthOption];
-//
-//					// Use width which is smaller: real image width or user preference width
-//					// Unless image is scalable vector.
-//					if (!isset($handlerParams['height']) && ($handlerParams['width'] <= 0 ||
-//							$prefWidth < $handlerParams['width'] || $file->isVectorized())) {
-//						$handlerParams['width'] = $prefWidth;
-//					}
+
+				// Reduce width for upright images when parameter 'upright' is used
+				if (frame_params.upright == 0) {
+//						frame_params.upright = $wgThumbUpright;
+				}
+
+				// For caching health: If width scaled down due to upright
+				// parameter, round to full __0 pixel to avoid the creation of a
+				// lot of odd thumbs.
+				int pref_width = 0;
+//					pref_width = isset(frame_params['upright']) ?
+//						round($wgThumbLimits[width_option] * frame_params['upright'], -1) :
+//						$wgThumbLimits[width_option];
+
+				// Use width which is smaller: real image width or user preference width
+				// Unless image is scalable vector.
+				if (handler_params.height == -1 && handler_params.width <= 0 ||
+						pref_width < handler_params.width || file.Is_vectorized()) {
+					handler_params.width = pref_width;
+				}
 			}
-//			}
+		}
 
 		if (frame_params.thumbnail != null || frame_params.manual_thumb != null
 			|| frame_params.framed != null
@@ -163,32 +170,35 @@ public class Xomw_linker {
 			if (frame_params.align == Bry_.Empty) {
 //					frame_params.align = $parser->getTargetLanguage()->alignEnd();
 			}
-//				return prefix .
-//					self::makeThumbLink2($title, $file, frame_params, $handlerParams, $time, $query) .
-//					postfix;
+			bfr.Add(prefix);
+			this.Make_thumb_link2(bfr, title, file, frame_params, handler_params, time, query);
+			bfr.Add(postfix);
 		}
-//
-//			if ($file && isset(frame_params['frameless'])) {
-//				$srcWidth = $file->getWidth($page);
-//				// For "frameless" option: do not present an image bigger than the
-//				// source (for bitmap-style images). This is the same behavior as the
-//				// "thumb" option does it already.
-//				if ($srcWidth && !$file->mustRender() && $handlerParams['width'] > $srcWidth) {
-//					$handlerParams['width'] = $srcWidth;
-//				}
-//			}
-//
-//			if ($file && isset($handlerParams['width'])) {
-//				// Create a resized image, without the additional thumbnail features
-//				$thumb = $file->transform($handlerParams);
-//			} else {
-//				$thumb = false;
-//			}
-//
-//			if (!$thumb) {
+
+		if (file != null && frame_params.frameless != null) {
+			int src_width = file.Get_width(page);
+			// For "frameless" option: do not present an image bigger than the
+			// source (for bitmap-style images). This is the same behavior as the
+			// "thumb" option does it already.
+			if (src_width != -1 && !file.Must_render() && handler_params.width > src_width) {
+				handler_params.width = src_width;
+			}
+		}
+
+		boolean thumb = false;
+		if (file != null && handler_params.width != -1) {
+			// Create a resized image, without the additional thumbnail features
+//				$thumb = $file->transform(handler_params);
+		}
+		else {
+			thumb = false;
+		}
+
+		if (!thumb) {
 //				$s = self::makeBrokenImageLinkObj($title, frame_params['title'], '', '', '', $time == true);
-//			} else {
-//				self::processResponsiveImages($file, $thumb, $handlerParams);
+		}
+		else {
+//				self::processResponsiveImages($file, $thumb, handler_params);
 //				$params = [
 //					'alt' => frame_params['alt'],
 //					'title' => frame_params['title'],
@@ -200,18 +210,22 @@ public class Xomw_linker {
 //				$params = self::getImageLinkMTOParams(frame_params, $query, $parser) + $params;
 //
 //				$s = $thumb->toHtml($params);
-//			}
-//			if (frame_params['align'] != '') {
-//				$s = "<div class=\"float{frame_params['align']}\">{$s}</div>";
-//			}
-//			return str_replace("\n", ' ', prefix . $s . postfix);
-		if (prefix == null || postfix == null) {
 		}
+		if (frame_params.align != Bry_.Empty) {
+			tmp.Add_str_a7("<div class=\"float").Add(frame_params.align).Add_str_a7("\">{$s}</div>");
+		}
+
+		// XO.MW: "str_replace("\n", ' ', prefix . $s . postfix);"
+		int rv_bgn = bfr.Len();
+		bfr.Add(prefix);
+		bfr.Add_bfr_and_clear(tmp);
+		bfr.Add(postfix);
+		Bry_.Replace_all_direct(bfr.Bfr(), Byte_ascii.Nl, Byte_ascii.Space, rv_bgn, bfr.Len());	
 	}
-	public void Make_thumb_link2(Bry_bfr bfr, Xoa_ttl title, Object file, Xomw_img_frame frame_params, Object handlerParams, Object time, Object query) {
+	public void Make_thumb_link2(Bry_bfr bfr, Xoa_ttl title, Object file, Xomw_img_prms frame_params, Object handler_params, Object time, Object query) {
 		boolean exists = false; // = $file && $file->exists();
 
-//			$page = isset($handlerParams['page']) ? $handlerParams['page'] : false;
+//			$page = isset(handler_params['page']) ? handler_params['page'] : false;
 		if (frame_params.align == null) {
 			frame_params.align = Align__frame__right;
 		}
@@ -225,9 +239,9 @@ public class Xomw_linker {
 			frame_params.caption = Bry_.Empty;
 		}
 
-//			if (empty($handlerParams['width'])) {
+//			if (empty(handler_params['width'])) {
 //				// Reduce width for upright images when parameter 'upright' is used
-//				$handlerParams['width'] = isset(frame_params['upright']) ? 130 : 180;
+//				handler_params['width'] = isset(frame_params['upright']) ? 130 : 180;
 //			}
 		boolean thumb = false;
 		boolean no_scale = false;
@@ -235,7 +249,7 @@ public class Xomw_linker {
 		int outer_width = 0;
 
 		if (!exists) {
-//				outer_width = $handlerParams['width'] + 2;
+//				outer_width = handler_params['width'] + 2;
 		}
 		else {
 			if (frame_params.manual_thumb != null) {
@@ -244,7 +258,7 @@ public class Xomw_linker {
 //					if ($manual_title) {
 //						$manual_img = wfFindFile($manual_title);
 //						if ($manual_img) {
-//							thumb = $manual_img->getUnscaledThumb($handlerParams);
+//							thumb = $manual_img->getUnscaledThumb(handler_params);
 //							manual_thumb = true;
 //						} else {
 //							exists = false;
@@ -253,31 +267,31 @@ public class Xomw_linker {
 			}
 			else if (frame_params.framed != null) {
 				// Use image dimensions, don't scale
-//					thumb = $file->getUnscaledThumb($handlerParams);
+//					thumb = $file->getUnscaledThumb(handler_params);
 				no_scale = true;
 			}
 			else {
 				// Do not present an image bigger than the source, for bitmap-style images
 				// This is a hack to maintain compatibility with arbitrary pre-1.10 behavior
-//					$srcWidth = $file->getWidth($page);
-//					if ($srcWidth && !$file->mustRender() && $handlerParams['width'] > $srcWidth) {
-//						$handlerParams['width'] = $srcWidth;
+//					src_width = $file->getWidth($page);
+//					if (src_width && !$file->mustRender() && handler_params['width'] > src_width) {
+//						handler_params['width'] = src_width;
 //					}
-//					thumb = $file->transform($handlerParams);
+//					thumb = $file->transform(handler_params);
 			}
 
 			if (thumb) {
 //					outer_width = thumb->getWidth() + 2;
 			}
 			else {
-//					outer_width = $handlerParams['width'] + 2;
+//					outer_width = handler_params['width'] + 2;
 			}
 		}
 
 		// ThumbnailImage::toHtml() already adds page= onto the end of DjVu URLs
 		// So we don't need to pass it here in $query. However, the URL for the
 		// zoom icon still needs it, so we make a unique query for it. See bug 14771
-//			$url = $title->getLocalURL($query);
+		byte[] url = Bry_.Empty; // $title->getLocalURL($query);
 //			if ($page) {
 //				$url = wfAppendQuery($url, [ 'page' => $page ]);
 //			}
@@ -295,15 +309,15 @@ public class Xomw_linker {
 		byte[] zoom_icon = Bry_.Empty;
 		if (!exists) {
 //				$s .= self::makeBrokenImageLinkObj($title, frame_params['title'], '', '', '', $time == true);
-//				zoom_icon = '';
+			zoom_icon = Bry_.Empty;
 		}
 		else if (!thumb) {
 //				$s .= wfMessage('thumbnail_error', '')->escaped();
-//				zoom_icon = '';
+			zoom_icon = Bry_.Empty;
 		}
 		else {
 			if (!no_scale && !manual_thumb) {
-//					self::processResponsiveImages($file, thumb, $handlerParams);
+//					self::processResponsiveImages($file, thumb, handler_params);
 			}
 //				$params = [
 //					'alt' => frame_params['alt'],
@@ -318,13 +332,14 @@ public class Xomw_linker {
 				zoom_icon = Bry_.Empty;
 			}
 			else {
-//					html_utl.Raw_element(bfr, Gfh_tag_.Bry__div, 
-//					zoom_icon = Html::rawElement('div', [ 'class' => 'magnify' ],
-//						Html::rawElement('a', [
-//							'href' => $url,
-//							'class' => '@gplx.Internal protected',
-//							'title' => wfMessage('thumbnail-more')->text() ],
-//							""));
+				html_utl.Raw_element(tmp, Gfh_tag_.Bry__a
+					, tmp_attribs.Clear()
+					.Add(Gfh_atr_.Bry__href , url)
+					.Add(Gfh_atr_.Bry__class, Class__internal)
+//						.Add(Gfh_atr_.Bry__title, wfMessage('thumbnail-more')->text())
+					, Bry_.Empty);
+				byte[] zoom_anch = tmp.To_bry_and_clear();
+				html_utl.Raw_element(bfr, Gfh_tag_.Bry__div, tmp_attribs.Clear().Add(Gfh_atr_.Bry__class, Class__magnify), zoom_anch);
 			}
 		}
 		bfr.Add_str_a7("  <div class=\"thumbcaption\">").Add(zoom_icon).Add(frame_params.caption).Add_str_a7("</div></div></div>");
