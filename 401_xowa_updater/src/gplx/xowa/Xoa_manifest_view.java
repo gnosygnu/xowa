@@ -88,6 +88,7 @@ public class Xoa_manifest_view extends JFrame implements Gfo_invk {
 		run_xowa_lbl.addMouseListener(new Swing_mouse_adapter(Gfo_invk_cmd.New_by_key(this, Invk__run_xowa)));
 			}
 	public void Run_xowa() {
+		this.Append("running: " + run_xowa_cmd);
 		Runtime_.Exec(run_xowa_cmd);
 		System_.Exit();
 	}

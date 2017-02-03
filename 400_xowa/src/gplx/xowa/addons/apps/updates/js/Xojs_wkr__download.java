@@ -30,6 +30,7 @@ public class Xojs_wkr__download extends Xojs_wkr__base {
 	public long Src_len() {return src_len;} private final    long src_len;
 	@Override protected void Exec_run() {
 		Http_download_wkr wkr = Http_download_wkr_.Proto.Make_new();
-		wkr.Exec(this, src, trg, src_len);
+		if (wkr.Exec(this, src, trg, src_len) != gplx.core.progs.Gfo_prog_ui_.Status__done)
+			this.Cbk_mgr().Send_json(this.Cbk_trg(), "xo.app_updater.write_status", gplx.core.gfobjs.Gfobj_nde.New().Add_str("msg", "failed to download update: " + wkr.Fail_msg()));
 	}
 }
