@@ -27,7 +27,7 @@ import gplx.langs.phps.utls.*;
 	* P7: $html = HtmlArmor::getHtml($text);
 */
 public class Xomw_linker {
-	private final    Bry_bfr tmp = Bry_bfr_.New();
+	private final    Bry_bfr tmp = Bry_bfr_.New(), tmp_2 = Bry_bfr_.New();
 	private final    Linker_rel_splitter splitter = new Linker_rel_splitter();
 	private final    Xomw_html_utl html_utl = new Xomw_html_utl();
 	private byte[] wg_title = null;
@@ -35,8 +35,9 @@ public class Xomw_linker {
 	private final    byte[][] split_trail_rv = new byte[2][];
 	private Btrie_slim_mgr split_trail_trie;
 	private final    Xomw_atr_mgr tmp_attribs = new Xomw_atr_mgr();
-	private final    Xomw_img_prms params_list = new Xomw_img_prms();
+	private final    Xomw_mto_params params_list = new Xomw_mto_params();
 	private final    Xomw_mto_params mto_params = new Xomw_mto_params(); 
+
 	private static final    byte[] Atr__class = Bry_.new_a7("class"), Atr__rel = Bry_.new_a7("rel"), Atr__href = Bry_.new_a7("href"), Rel__nofollow = Bry_.new_a7("nofollow");
 	public static final    byte[] 
 	  Align__frame__center = Bry_.new_a7("center")
@@ -190,16 +191,17 @@ public class Xomw_linker {
 			}
 		}
 
-		boolean thumb = false;
+		Xomw_mto thumb = new Xomw_mto(file.url);
 		if (file != null && handler_params.width != -1) {
 			// Create a resized image, without the additional thumbnail features
 //				$thumb = $file->transform(handler_params);
 		}
 		else {
-			thumb = false;
+			thumb = null;
 		}
 
-		if (!thumb) {
+		byte[] s = null;
+		if (thumb == null) {
 //				$s = self::makeBrokenImageLinkObj($title, frame_params['title'], '', '', '', $time == true);
 		}
 		else {
@@ -213,17 +215,22 @@ public class Xomw_linker {
 				params_list.img_cls = Xomw_img_prms.Cls_add(params_list.img_cls, Img_class__thumbborder);
 			}
 //				$params = self::getImageLinkMTOParams(frame_params, $query, $parser) + $params;
-//
-//				$s = $thumb->toHtml($params);
+
+			thumb.To_html(tmp, tmp_2, params_list);
+			s = tmp.To_bry_and_clear();
 		}
 		if (frame_params.align != Bry_.Empty) {
-			tmp.Add_str_a7("<div class=\"float").Add(frame_params.align).Add_str_a7("\">{$s}</div>");
+			tmp.Add_str_a7("<div class=\"float").Add(frame_params.align);
+			tmp.Add(s);
+			tmp.Add_str_a7("\">");
+			tmp.Add_str_a7("</div>");
+			s = tmp.To_bry_and_clear();
 		}
 
 		// XO.MW: "str_replace("\n", ' ', prefix . $s . postfix);"
 		int rv_bgn = bfr.Len();
 		bfr.Add(prefix);
-		bfr.Add_bfr_and_clear(tmp);
+		bfr.Add(s);
 		bfr.Add(postfix);
 		Bry_.Replace_all_direct(bfr.Bfr(), Byte_ascii.Nl, Byte_ascii.Space, rv_bgn, bfr.Len());	
 	}
@@ -281,10 +288,10 @@ public class Xomw_linker {
 			// Reduce width for upright images when parameter 'upright' is used
 			handler_params.width = frame_params.upright != -1 ? 130 : 180;
 		}
-		Xomw_mto thumb = null;
 		boolean no_scale = false;
 		boolean manual_thumb = false;
 
+		Xomw_mto thumb = null;
 		int outer_width = 0;
 		if (!exists) {
 			outer_width = handler_params.width + 2;
@@ -305,8 +312,8 @@ public class Xomw_linker {
 			}
 			else if (frame_params.framed != null) {
 				// Use image dimensions, don't scale
-				thumb = new Xomw_mto();
 //					thumb = $file->getUnscaledThumb(handler_params);
+				thumb = new Xomw_mto(file.url);
 				no_scale = true;
 			}
 			else {

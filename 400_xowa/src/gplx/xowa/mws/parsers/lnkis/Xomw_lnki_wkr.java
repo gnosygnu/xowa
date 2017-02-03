@@ -353,25 +353,30 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //					}
 //
 				if (ns.Id_is_file()) {
-//						if (!wfIsBadImage(nt->getDBkey(), this->mTitle)) {
-//							if (wasblank) {
-//								// if no parameters were passed, text
-//								// becomes something like "File:Foo.png",
-//								// which we don't want to pass on to the
-//								// image generator
-//								text = '';
-//							} else {
-//								// recursively parse links inside the image caption
-//								// actually, this will parse them in any other parameters, too,
-//								// but it might be hard to fix that, and it doesn't matter ATM
+//						boolean is_good_image = !wfIsBadImage(nt->getDBkey(), this->mTitle)
+					boolean is_good_image = true;
+					if (is_good_image) {
+						if (was_blank) {
+							// if no parameters were passed, text
+							// becomes something like "File:Foo.png",
+							// which we don't want to pass on to the
+							// image generator
+							text = Bry_.Empty;
+						}
+						else {
+							// recursively parse links inside the image caption
+							// actually, this will parse them in any other parameters, too,
+							// but it might be hard to fix that, and it doesn't matter ATM
 //								text = this->replaceExternalLinks(text);
 //								holders->merge(this->replaceInternalLinks2(text));
-//							}
-//							// cloak any absolute URLs inside the image markup, so replaceExternalLinks() won't touch them
-//							s .= prefix . this->armorLinks(
-//								this->makeImage(nt, text, holders)) . trail;
-//							continue;
-//						}
+						}
+						// cloak any absolute URLs inside the image markup, so replaceExternalLinks() won't touch them
+						bfr.Add(prefix);
+						// Armor_links(Make_image(bfr, nt, text, holders))
+						Make_image(bfr, nt, text, holders);
+						bfr.Add(trail);
+						continue;
+					}
 				} 
 				else if (ns.Id_is_ctg()) {
 					bfr.Trim_end_ws(); // s = rtrim(s . "\n"); // T2087
@@ -434,7 +439,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 		}
 	}
-	public void Make_image(Bry_bfr bfr, Xoa_ttl title, byte[] link_args, boolean holders) {
+	public void Make_image(Bry_bfr bfr, Xoa_ttl title, byte[] link_args, Xomw_link_holders holders) {
 		// Check if the options text is of the form "options|alt text"
 		// Options are:
 		//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang
@@ -471,6 +476,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 		// Fetch and register the file (file title may be different via hooks)
 		Xomw_file file = new Xomw_file();
+		file.url = Bry_.new_a7("A.png");
 //			list($file, $title) = $this->fetchFileAndTitle($title, $options);
 
 		// Get parameter map

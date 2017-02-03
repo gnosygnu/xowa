@@ -20,8 +20,11 @@ import gplx.langs.htmls.*;
 import gplx.langs.phps.utls.*;
 public class Xomw_mto {
 	private int width = -1, height = -1;
-	private byte[] url = null;
-	private final    Ordered_hash attribs = Ordered_hash_.New_bry(), link_attribs = Ordered_hash_.New_bry();
+	public byte[] url;
+	private final    List_adp attribs = List_adp_.New(), link_attribs = List_adp_.New();
+	public Xomw_mto(byte[] url) {
+		this.url = url;
+	}
 
 	// Return HTML <img ... /> tag for the thumbnail, will include
 	// width and height attributes and a blank alt text (as required).
@@ -57,31 +60,31 @@ public class Xomw_mto {
 //			byte[] query = options.desc_query;
 
 		attribs.Clear();
-		attribs.Add(Gfh_atr_.Bry__alt, alt);
-		attribs.Add(Gfh_atr_.Bry__src, url);
+		attribs.Add_many(Gfh_atr_.Bry__alt, alt);
+		attribs.Add_many(Gfh_atr_.Bry__src, url);
 		boolean link_attribs_is_null = false;
 		if (!Php_utl_.Empty(options.custom_url_link)) {
 			link_attribs.Clear();
-			link_attribs.Add(Gfh_atr_.Bry__href, options.custom_url_link);
+			link_attribs.Add_many(Gfh_atr_.Bry__href, options.custom_url_link);
 			if (!Php_utl_.Empty(options.title)) {
-				link_attribs.Add(Gfh_atr_.Bry__title, options.title);
+				link_attribs.Add_many(Gfh_atr_.Bry__title, options.title);
 			}
 			if (Php_utl_.Empty(options.custom_target_link)) {
-				link_attribs.Add(Gfh_atr_.Bry__target, options.custom_target_link);
+				link_attribs.Add_many(Gfh_atr_.Bry__target, options.custom_target_link);
 			}
 			else if (Php_utl_.Empty(options.parser_extlink_target)) {
-				link_attribs.Add(Gfh_atr_.Bry__target, options.parser_extlink_target);
+				link_attribs.Add_many(Gfh_atr_.Bry__target, options.parser_extlink_target);
 			}
 			if (Php_utl_.Empty(options.parser_extlink_rel)) {
-				link_attribs.Add(Gfh_atr_.Bry__rel, options.parser_extlink_rel);
+				link_attribs.Add_many(Gfh_atr_.Bry__rel, options.parser_extlink_rel);
 			}
 		}
 		else if (!Php_utl_.Empty(options.custom_title_link)) {
 //				byte[] title = options.custom_title_link;
 			link_attribs.Clear();
-//				link_attribs.Add(Gfh_atr_.Bry__href, title.Get_link_url());
+//				link_attribs.Add_many(Gfh_atr_.Bry__href, title.Get_link_url());
 //				byte[] options_title = options.title;
-//				link_attribs.Add(Gfh_atr_.Bry__title, Php_utl_.Empty(options_title) ? title.Get_full_text : options_title;
+//				link_attribs.Add_many(Gfh_atr_.Bry__title, Php_utl_.Empty(options_title) ? title.Get_full_text : options_title;
 		}
 		else if (!Php_utl_.Empty(options.desc_link)) {
 //				link_attribs = $this->getDescLinkAttribs(
@@ -91,30 +94,30 @@ public class Xomw_mto {
 		}
 		else if (!Php_utl_.Empty(options.file_link)) {
 			link_attribs.Clear();
-//				link_attribs.Add(Gfh_atr_.Bry__href, file.Get_url());
+//				link_attribs.Add_many(Gfh_atr_.Bry__href, file.Get_url());
 		}
 		else {
 			link_attribs_is_null = true;
 			if (!Php_utl_.Empty(options.title)) {
-				attribs.Add(Gfh_atr_.Bry__title, options.title);
+				attribs.Add_many(Gfh_atr_.Bry__title, options.title);
 			}
 		}
 
 		if (!Php_utl_.Empty(options.no_dimensions)) {
-			attribs.Add(Gfh_atr_.Bry__width, Int_.To_bry(width));
-			attribs.Add(Gfh_atr_.Bry__height, Int_.To_bry(height));
+			attribs.Add_many(Gfh_atr_.Bry__width, Int_.To_bry(width));
+			attribs.Add_many(Gfh_atr_.Bry__height, Int_.To_bry(height));
 		}
 		if (!Php_utl_.Empty(options.valign)) {
-			attribs.Add(Gfh_atr_.Bry__style, Bry_.Add(Bry__vertical_align, options.valign));
+			attribs.Add_many(Gfh_atr_.Bry__style, Bry_.Add(Bry__vertical_align, options.valign));
 		}
 		if (!Php_utl_.Empty(options.img_cls)) {
-			attribs.Add(Gfh_atr_.Bry__class, options.img_cls);
+			attribs.Add_many(Gfh_atr_.Bry__class, options.img_cls);
 		}
 		if (Php_utl_.Is_set(options.override_height)) {
-			attribs.Add(Gfh_atr_.Bry__class, options.override_height);
+			attribs.Add_many(Gfh_atr_.Bry__class, options.override_height);
 		}
 		if (Php_utl_.Is_set(options.override_width)) {
-			attribs.Add(Gfh_atr_.Bry__width, options.override_height);
+			attribs.Add_many(Gfh_atr_.Bry__width, options.override_height);
 		}
 
 		// Additional densities for responsive images, if specified.
@@ -130,7 +133,7 @@ public class Xomw_mto {
 	}
 	// Wrap some XHTML text in an anchor tag with the given attributes
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
-	private void Link_wrap(Bry_bfr bfr, Ordered_hash link_attribs, byte[] contents) {
+	private void Link_wrap(Bry_bfr bfr, List_adp link_attribs, byte[] contents) {
 		if (link_attribs != null) {
 			Xomw_xml.Tags(bfr, Gfh_tag_.Bry__a, link_attribs, contents);
 		}

@@ -23,7 +23,7 @@ public class Xomw_xml {
 	// characters (<, >, &) are escaped but illegals are not touched.
 	// ARGS: contents defaults to ""
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
-	public static void Element(Bry_bfr bfr, byte[] element, Ordered_hash attribs, byte[] contents, boolean allow_short_tag) {
+	public static void Element(Bry_bfr bfr, byte[] element, List_adp attribs, byte[] contents, boolean allow_short_tag) {
 		bfr.Add_byte(Byte_ascii.Angle_bgn).Add(element);
 		if (attribs.Len() > 0) {
 			Expand_attributes(bfr, attribs);
@@ -48,7 +48,7 @@ public class Xomw_xml {
 	// Return null if no attributes given.
 	// @param array $attribs Array of attributes for an XML element
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
-	public static void Expand_attributes(Bry_bfr bfr, Ordered_hash attribs) {
+	public static void Expand_attributes(Bry_bfr bfr, List_adp attribs) {
 		int attribs_len = attribs.Len();
 		for (int i = 0; i < attribs_len; i += 2) {
 			// XO.MW: $out .= " {$name}=\"" . Sanitizer::encodeAttribute( $val ) . '"';
@@ -62,7 +62,7 @@ public class Xomw_xml {
 
 	// This opens an XML element
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
-	public static void Open_element(Bry_bfr bfr, byte[] element, Ordered_hash attribs) {
+	public static void Open_element(Bry_bfr bfr, byte[] element, List_adp attribs) {
 		bfr.Add_byte(Byte_ascii.Angle_bgn).Add(element);
 		Expand_attributes(bfr, attribs);
 		bfr.Add_byte(Byte_ascii.Angle_end);
@@ -77,7 +77,7 @@ public class Xomw_xml {
 	// Same as Xml::element(), but does not escape contents. Handy when the
 	// content you have is already valid xml.
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
-	public static void Tags(Bry_bfr bfr, byte[] element, Ordered_hash attribs, byte[] contents) {
+	public static void Tags(Bry_bfr bfr, byte[] element, List_adp attribs, byte[] contents) {
 		Open_element(bfr, element, attribs);
 		bfr.Add(contents);
 		bfr.Add_byte(Byte_ascii.Angle_bgn).Add_byte(Byte_ascii.Slash).Add(element).Add_byte(Byte_ascii.Angle_end);
