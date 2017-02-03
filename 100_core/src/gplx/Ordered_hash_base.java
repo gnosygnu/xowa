@@ -98,7 +98,6 @@ public class Ordered_hash_base extends Hash_adp_base implements Ordered_hash, Gf
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	static final    String Invk_SetKeyOnly = "SetKeyOnly", Invk_Print = "Print";
-	public int Len() {return ordered.Count();}
 	@Override public int Count() {return ordered.Count();}
 	public Ordered_hash_base() {}
 }

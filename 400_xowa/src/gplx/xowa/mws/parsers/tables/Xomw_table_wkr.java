@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.mws.parsers.tables; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
 import gplx.langs.phps.utls.*;
 import gplx.xowa.parsers.htmls.*;
-import gplx.xowa.mws.utls.*; import gplx.xowa.parsers.uniqs.*;
+import gplx.xowa.mws.libs.*; import gplx.xowa.parsers.uniqs.*;
 public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Bry_bfr tmp;
 	private Bry_bfr bfr;
@@ -190,7 +190,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 
 			// Implies both are valid for table headings.
 			if (first_char == Byte_ascii.Bang) {
-				Xomw_string_utl.Replace_markup(line, 0, line.length, Wtxt__th2, Wtxt__td2); // $line = StringUtils::replaceMarkup('!!', '||', $line);
+				Xomw_string_utils.Replace_markup(line, 0, line.length, Wtxt__th2, Wtxt__td2); // $line = StringUtils::replaceMarkup('!!', '||', $line);
 			}
 
 			// Split up multiple cells on the same line.

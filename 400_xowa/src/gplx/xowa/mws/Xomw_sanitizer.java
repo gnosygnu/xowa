@@ -224,6 +224,14 @@ public class Xomw_sanitizer {
 			|| (codepoint >= 0xe000  && codepoint <= 0xfffd)
 			|| (codepoint >= 0x10000 && codepoint <= 0x10ffff);
 	}
+	// Encode an attribute value for HTML output.
+	// XO.MW:SYNC:1.29; DATE:2017-02-03
+	public static void Encode_attribute(Bry_bfr bfr, byte[] text) {
+		// Whitespace is normalized during attribute decoding,
+		// so if we've been passed non-spaces we must encode them
+		// ahead of time or they won't be preserved.
+		bfr.Add_bry_escape_xml(text, 0, text.length);
+	}
 
 	public static Hash_adp_bry html_entities;
 	private static Hash_adp_bry Html_entities_new() {

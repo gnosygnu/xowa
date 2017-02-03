@@ -26,7 +26,7 @@ public class Gfh_entity_ {
 	, Apos_num_bry = Bry_.new_a7("&#39;")
 	, Apos_key_bry = Bry_.new_a7("&apos;")
 	, Eq_bry = Bry_.new_a7("&#61;")
-	, Nl_bry = Bry_.new_a7(Nl_str), Space_bry = Bry_.new_a7("&#32;")
+	, Nl_bry = Bry_.new_a7(Nl_str), Cr_bry = Bry_.new_a7("&#13;"), Tab_bry = Bry_.new_a7("&#9;"), Space_bry = Bry_.new_a7("&#32;")
 	, Pipe_bry = Bry_.new_a7("&#124;")
 	, Colon_bry = Bry_.new_a7("&#58;"), Underline_bry = Bry_.new_a7("&#95;"), Asterisk_bry = Bry_.new_a7("&#42;")
 	, Brack_bgn_bry = Bry_.new_a7("&#91;"), Brack_end_bry = Bry_.new_a7("&#93;")

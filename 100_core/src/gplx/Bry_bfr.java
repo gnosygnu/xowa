@@ -311,7 +311,11 @@ public class Bry_bfr {
 		return Add_bry_escape_html(val, 0, val.length);
 	}
 	public Bry_bfr Add_bry_escape_html(byte[] val, int bgn, int end) {
-		Bry_.Escape_html(this, val, bgn, end);
+		Bry_.Escape_html(this, Bool_.N, val, bgn, end);
+		return this;
+	}
+	public Bry_bfr Add_bry_escape_xml(byte[] val, int bgn, int end) {
+		Bry_.Escape_html(this, Bool_.Y, val, bgn, end);
 		return this;
 	}
 	public Bry_bfr Add_str_u8_w_nl(String s) {Add_str_u8(s); return Add_byte_nl();}

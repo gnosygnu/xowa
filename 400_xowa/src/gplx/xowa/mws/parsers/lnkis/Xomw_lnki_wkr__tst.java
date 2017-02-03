@@ -20,16 +20,13 @@ import org.junit.*;
 public class Xomw_lnki_wkr__tst {
 	private final    Xomw_lnki_wkr__fxt fxt = new Xomw_lnki_wkr__fxt();
 	@Before public void init() {fxt.Clear();}
-//		@Test   public void Basic()                             {fxt.Test__parse("[[A]]"             , "<!--LINK 0-->");}
 	@Test   public void Text()                             {fxt.Test__parse("a [[A]] z"         , "a <!--LINK 0--> z");}
 	@Test   public void Capt()                             {fxt.Test__parse("a [[A|a]] z"       , "a <!--LINK 0--> z");}
-//		@Test   public void Text()                             {fxt.Test__parse("a [[A]] z"         , "a <a href='/wiki/A' title='A'>A</a> z");}
-//		@Test   public void Capt()                             {fxt.Test__parse("a [[A|a]] z"       , "a <a href='/wiki/A' title='A'>a</a> z");}
-//		@Test   public void Text()                             {fxt.Test__parse("a [[A]] z"         , "a <!--LINK 0--> z");}
-//		@Test   public void Invalid__char()                     {fxt.Test__parse("[[<A>]]"           , "[[<A>]]");}
-	@Test   public void Html__self()                       {fxt.Test__to_html("[[Page_1]]"       , "<strong class='selflink'>Page_1</strong>");}
-	@Test   public void Html__text()                       {fxt.Test__to_html("[[A]]"            , "<a href='/wiki/A' title='A'>A</a>");}
-	@Test   public void Html__capt()                       {fxt.Test__to_html("[[A|a]]"          , "<a href='/wiki/A' title='A'>a</a>");}
+	@Test   public void Invalid__char()                    {fxt.Test__parse("a [[<A>]] z"       , "a [[<A>]] z");}
+	@Test   public void Html__self()                       {fxt.Test__to_html("[[Page_1]]"      , "<strong class='selflink'>Page_1</strong>");}
+	@Test   public void Html__text()                       {fxt.Test__to_html("[[A]]"           , "<a href='/wiki/A' title='A'>A</a>");}
+	@Test   public void Html__capt()                       {fxt.Test__to_html("[[A|a]]"         , "<a href='/wiki/A' title='A'>a</a>");}
+//		@Test   public void Html__file()                       {fxt.Test__to_html("[[File:A.png|thumb|abc]]"  , "<strong class='selflink'>Page_1</strong>");}
 }
 class Xomw_lnki_wkr__fxt {
 	private final    Xomw_lnki_wkr wkr;

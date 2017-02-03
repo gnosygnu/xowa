@@ -21,7 +21,7 @@ import gplx.langs.phps.utls.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.mws.parsers.*; import gplx.xowa.mws.parsers.quotes.*;
 import gplx.xowa.mws.htmls.*; import gplx.xowa.mws.linkers.*;
-import gplx.xowa.mws.utls.*;
+import gplx.xowa.mws.utls.*; import gplx.xowa.mws.libs.*;
 import gplx.xowa.mws.filerepos.files.*;
 import gplx.xowa.parsers.uniqs.*;
 /*	TODO.XO
@@ -50,6 +50,8 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Xomw_parser parser;
 	private final    Xomw_atr_mgr extra_atrs = new Xomw_atr_mgr();
 	private final    Xomw_qry_mgr query = new Xomw_qry_mgr();
+	private final    Btrie_rv trv = new Btrie_rv();
+	private final    List_adp tmp_list = List_adp_.New();
 	public Xomw_lnki_wkr(Xomw_parser parser, Xomw_link_holders holders, Xomw_link_renderer link_renderer, Btrie_slim_mgr protocols_trie) {
 		this.parser = parser;
 		this.holders = holders;
@@ -189,7 +191,9 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 				ttl_end = -1;
 			if (ttl_end == -1) { // either (a) no valid title-chars ("[[<") or (b) title char, but has stray "]" ("[[a]b]]")
 				// Invalid form; output directly
-				bfr.Add_mid(src, cur, src_end);
+				bfr.Add_mid(src, prv, lnki_bgn + 2);
+				bfr.Add_mid(src, cur, ttl_bgn);
+				prv = cur = ttl_bgn;
 				continue;
 			}
 			// PORTED.END: if (preg_match($e1, $line, $m)) && else if (preg_match($e1_img, $line, $m))
@@ -265,8 +269,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 				nt = wiki.Ttl_parse(unstrip);
 			if (nt == null) {
 				bfr.Add_mid(src, prv, lnki_bgn + 2);	// $s .= $prefix . '[[' . $line;
-				cur = lnki_bgn + 2;
-				prv = cur;
+				prv = cur = lnki_bgn + 2;					
 				continue;
 			}
 
@@ -431,7 +434,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 		}
 	}
-	public void Make_image(Bry_bfr bfr, Xoa_ttl title, byte[] options, boolean holders) {
+	public void Make_image(Bry_bfr bfr, Xoa_ttl title, byte[] link_args, boolean holders) {
 		// Check if the options text is of the form "options|alt text"
 		// Options are:
 		//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang
@@ -459,9 +462,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		//  * text-bottom
 
 		// Protect LanguageConverter markup when splitting into parts
-//			$parts = StringUtils::delimiterExplode(
-//				'-{', '}-', '|', $options, true /* allow nesting */
-//			);
+		byte[][] parts = Xomw_string_utils.Delimiter_explode(tmp_list, trv, link_args);
 
 		// Give extensions a chance to select the file revision for us
 //			$options = [];
@@ -484,16 +485,19 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		// Process the input parameters
 		byte[] caption = Bry_.Empty;
 		// XO.MW: $params = [ 'frame' => [], 'handler' => [], 'horizAlign' => [], 'vertAlign' => [] ];
+		Xomw_prm_mgr param_map = new Xomw_prm_mgr();
+		Xomw_prm_mgr param_mgr = new Xomw_prm_mgr();
 		Xomw_img_prms frame = new Xomw_img_prms();
 		Xomw_mda_prms handler = new Xomw_mda_prms();
 		boolean seen_format = false;
-//			foreach ($parts as $part) {
-			Xomw_prm_mgr param_map = new Xomw_prm_mgr();
-			Xomw_prm_mgr param_mgr = new Xomw_prm_mgr();
 
-			byte[] part = null;
+		int parts_len = parts.length;
+		for (int i = 0; i < parts_len; i++) {
+
+			byte[] part = parts[i];
 			part = Bry_.Trim(part);
-			byte[] magic_name = null;	// $mwArray->matchVariableStartToEnd($part);
+//              byte[] magic_name = $mwArray->matchVariableStartToEnd($part);
+			byte[] magic_name = null;
 			boolean validated = false;
 			
 			Xomw_prm_itm prm_itm = param_map.Get_or_null(magic_name);
@@ -582,7 +586,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			if (!validated) {
 				caption = part;
 			}
-//			}
+		}
 
 		// Process alignment parameters
 		Xomw_prm_itm tmp = param_mgr.Get_or_null(Xomw_prm_mgr.Name__horiz_align);

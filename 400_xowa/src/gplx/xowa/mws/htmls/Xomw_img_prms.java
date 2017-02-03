@@ -28,8 +28,20 @@ public class Xomw_img_prms {
 	public byte[] alt = null;
 	public byte[] title = null;
 	public byte[] cls = null;
+	public byte[] img_cls = null;
 	public byte[] link_title = null;
 	public byte[] link_url = null;
+	public byte[] link_target = null;
 	public byte[] no_link = null;
+	public byte[] border = null;
 	public double upright = -1;
+	public void Clear() {
+		align = valign = caption = frame = framed = frameless
+		= thumbnail = manual_thumb = alt = title = cls = img_cls
+		= link_title = link_url = link_target = no_link = null;
+		upright = -1;
+	}
+	public static byte[] Cls_add(byte[] lhs, byte[] rhs) {
+		return Bry_.Len_eq_0(lhs) ? rhs : Bry_.Add(lhs, Byte_ascii.Space_bry, rhs);
+	}
 }

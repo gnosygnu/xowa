@@ -40,6 +40,7 @@ public abstract class Hash_adp_base implements Hash_adp {
 
 	// private final    java.util.HashMap<Object, Object> hash = new java.util.HashMap<Object, Object>();			
 	private final    java.util.Hashtable hash = new java.util.Hashtable();			
+	@gplx.Virtual public int Len() {return hash.size();}														
 	@gplx.Virtual public int Count() {return hash.size();}														
 	@gplx.Virtual public void Clear() {hash.clear();}															
 	@gplx.Virtual protected void Add_base(Object key, Object val) {hash.put(key, val);}						

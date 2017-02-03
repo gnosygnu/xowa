@@ -29,6 +29,7 @@ public class Gfh_atr_ {
 	// <a>
 	, Bry__href					= Bry_.new_a7("href")
 	, Bry__rel					= Bry_.new_a7("rel")
+	, Bry__target				= Bry_.new_a7("target")
 	// <img>
 	, Bry__alt					= Bry_.new_a7("alt")
 	, Bry__src					= Bry_.new_a7("src")

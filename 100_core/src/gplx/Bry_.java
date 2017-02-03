@@ -1106,9 +1106,9 @@ public class Bry_ {
 		return Bry_.Replace(Bry_.Mid(src, bgn, end), Byte_ascii.Nl, Byte_ascii.Tab);
 	}
 	public static byte[] Escape_html(byte[] src) {
-		return Escape_html(null, src, 0, src.length);
+		return Escape_html(null, Bool_.N, src, 0, src.length);
 	}
-	public static byte[] Escape_html(Bry_bfr bfr, byte[] src, int src_bgn, int src_end) {	// uses PHP rules for htmlspecialchars; REF.PHP:http://php.net/manual/en/function.htmlspecialchars.php
+	public static byte[] Escape_html(Bry_bfr bfr, boolean ws, byte[] src, int src_bgn, int src_end) {	// uses PHP rules for htmlspecialchars; REF.PHP:http://php.net/manual/en/function.htmlspecialchars.php
 		boolean dirty = false;
 		int cur = src_bgn;
 		int prv = cur;
@@ -1133,6 +1133,9 @@ public class Bry_ {
 				case Byte_ascii.Apos:       escaped = Gfh_entity_.Apos_num_bry; break;
 				case Byte_ascii.Lt:         escaped = Gfh_entity_.Lt_bry; break;
 				case Byte_ascii.Gt:         escaped = Gfh_entity_.Gt_bry; break;
+				case Byte_ascii.Nl:         if (ws) escaped = Gfh_entity_.Nl_bry; break;
+				case Byte_ascii.Cr:         if (ws) escaped = Gfh_entity_.Cr_bry; break;
+				case Byte_ascii.Tab:        if (ws) escaped = Gfh_entity_.Tab_bry; break;
 			}
 
 			// not escaped; increment and continue

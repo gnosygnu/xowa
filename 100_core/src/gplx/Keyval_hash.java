@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Keyval_hash {
-	private final Ordered_hash hash = Ordered_hash_.New();
+	private final    Ordered_hash hash = Ordered_hash_.New();
 	public int			Count()				{return hash.Count();}
+	public int			Len()				{return hash.Count();}
 	public Keyval_hash	Clear()				{hash.Clear(); return this;}
 	public boolean			Has(String key)		{return hash.Has(key);}
 	public Keyval		Get_at(int i)		{return (Keyval)hash.Get_at(i);}
