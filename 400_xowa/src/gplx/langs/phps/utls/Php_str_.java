@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.phps.utls; import gplx.*; import gplx.langs.*; import gplx.langs.phps.*;
 import gplx.core.btries.*;
 public class Php_str_ {
+	public static int Strpos(byte[] src, byte find) {return Strpos(src, find, 0, src.length);}
 	public static int Strpos(byte[] src, byte find, int bgn, int end) {
 		return Bry_find_.Find_fwd(src, find, bgn, end);
 	}

@@ -22,7 +22,7 @@ import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.mws.parsers.*; import gplx.xowa.mws.parsers.quotes.*;
 import gplx.xowa.mws.htmls.*; import gplx.xowa.mws.linkers.*;
 import gplx.xowa.mws.utls.*; import gplx.xowa.mws.libs.*;
-import gplx.xowa.mws.filerepos.files.*;
+import gplx.xowa.mws.filerepo.file.*;
 import gplx.xowa.parsers.uniqs.*;
 /*	TODO.XO
 	* P7: multi-line links; // look at the next 'line' to see if we can close it there
@@ -43,6 +43,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	// private final    Btrie_slim_mgr protocols_trie;
 	private final    Xomw_quote_wkr quote_wkr;
 	private final    Xomw_strip_state strip_state;
+	private Xomw_parser_env env;
 	private Xow_wiki wiki;
 	private Xoa_ttl page_title;
 	private final    Xomw_linker__normalize_subpage_link normalize_subpage_link = new Xomw_linker__normalize_subpage_link();
@@ -63,7 +64,8 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		this.tmp = parser.Tmp();
 		this.strip_state = parser.Strip_state();
 	}
-	public void Init_by_wiki(Xow_wiki wiki) {
+	public void Init_by_wiki(Xomw_parser_env env, Xow_wiki wiki) {
+		this.env = env;
 		this.wiki = wiki;
 		if (title_chars_for_lnki == null) {
 			title_chars_for_lnki = (boolean[])Array_.Clone(Xomw_ttl_utl.Title_chars_valid());
@@ -475,8 +477,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		// MW.HOOK:BeforeParserFetchFileAndTitle
 
 		// Fetch and register the file (file title may be different via hooks)
-		Xomw_file file = new Xomw_file();
-		file.url = Bry_.new_a7("A.png");
+		Xomw_File file = fetchFileAndTitle(title, null);
 //			list($file, $title) = $this->fetchFileAndTitle($title, $options);
 
 		// Get parameter map
@@ -685,6 +686,48 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //			return $tooltip;
 //		}
 
+	/**
+	* Fetch a file and its title and register a reference to it.
+	* If 'broken' is a key in $options then the file will appear as a broken thumbnail.
+	* @param Title $title
+	* @param array $options Array of options to RepoGroup::findFile
+	* @return array ( File or false, Title of file )
+	*/
+	public Xomw_File fetchFileAndTitle(Xoa_ttl title, Hash_adp options) {
+		Xomw_File file = fetchFileNoRegister(title, options);
+
+		//$time = $file ? $file->getTimestamp() : false;
+		//$sha1 = $file ? $file->getSha1() : false;
+		//# Register the file as a dependency...
+		//$this->mOutput->addImage( $title->getDBkey(), $time, $sha1 );
+		//if ( $file && !$title->equals( $file->getTitle() ) ) {
+		//	# Update fetched file title
+		//	$title = $file->getTitle();
+		//	$this->mOutput->addImage( $title->getDBkey(), $time, $sha1 );
+		//}
+		return file;
+	}
+	/**
+	* Helper function for fetchFileAndTitle.
+	*
+	* Also useful if you need to fetch a file but not use it yet,
+	* for example to get the file's handler.
+	*
+	* @param Title $title
+	* @param array $options Array of options to RepoGroup::findFile
+	* @return File|boolean
+	*/
+	private Xomw_File fetchFileNoRegister(Xoa_ttl title, Hash_adp options) {
+		Xomw_File file = null;
+//			if ( isset( $options['broken'] ) ) {
+//				file = false; // broken thumbnail forced by hook
+//			} elseif ( isset( $options['sha1'] ) ) { // get by (sha1,timestamp)
+//				file = RepoGroup::singleton()->findFileFromKey( $options['sha1'], $options );
+//			} else { // get by (name,timestamp)
+			file = env.File_finder().Find_file(title);	// $options 
+//			}
+		return file;
+	}
 	public void Maybe_do_subpage_link(Xomw_linker__normalize_subpage_link rv, byte[] target, byte[] text) {
 		linker.Normalize_subpage_link(rv, page_title, target, text);
 	}

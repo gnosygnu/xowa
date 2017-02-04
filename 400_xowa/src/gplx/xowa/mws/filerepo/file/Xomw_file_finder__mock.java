@@ -15,15 +15,14 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.mws.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
-import org.junit.*;
-public class Xomw_lnki_wkr__file__tst {
-	private final    Xomw_lnki_wkr__fxt fxt = new Xomw_lnki_wkr__fxt();
-	@Before public void init() {
-		fxt.Clear();
-		fxt.Init__file("A.png", 300, 200);
+package gplx.xowa.mws.filerepo.file; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.filerepo.*;
+public class Xomw_file_finder__mock implements Xomw_file_finder {
+	private final    Hash_adp hash = Hash_adp_.New();
+	public Xomw_File Find_file(Xoa_ttl ttl) {
+		return (Xomw_File)hash.Get_by(ttl.Page_db_as_str());
 	}
-	@Test   public void Plain() {
-		fxt.Test__to_html("[[File:A.png]]",     "<img alt='A.png' src='/orig/7/70/A.png' />");
+	public void Add(String title, Xomw_FileRepo repo, int w, int h) {
+		Xomw_LocalFile file = new Xomw_LocalFile(Bry_.new_u8(title), repo, w, h);
+		hash.Add(title, file);
 	}
 }

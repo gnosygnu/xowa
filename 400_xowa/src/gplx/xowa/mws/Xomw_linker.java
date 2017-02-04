@@ -19,7 +19,7 @@ package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.mws.htmls.*; import gplx.xowa.mws.linkers.*; import gplx.xowa.mws.parsers.*;
-import gplx.xowa.mws.filerepos.files.*; import gplx.xowa.mws.medias.*;
+import gplx.xowa.mws.filerepo.file.*; import gplx.xowa.mws.media.*;
 import gplx.langs.phps.utls.*;
 /*	TODO.XO
 	* P8: wfMessage
@@ -90,10 +90,10 @@ public class Xomw_linker {
 	// @param int|null width_option Used by the parser to remember the user preference thumbnailsize
 	// @since 1.20
 	// @return String HTML for an image, with links, wrappers, etc.
-	public void Make_image_link(Bry_bfr bfr, Xomw_parser parser, Xoa_ttl title, Xomw_file file, Xomw_img_prms frame_params, Xomw_mda_prms handler_params, Object time, byte[] query, Object widthOption) {
+	public void Make_image_link(Bry_bfr bfr, Xomw_parser parser, Xoa_ttl title, Xomw_File file, Xomw_img_prms frame_params, Xomw_mda_prms handler_params, Object time, byte[] query, Object widthOption) {
 		// XO.MW.HOOK:ImageBeforeProduceHTML
 
-		if (file != null && !file.Allow_inline_display()) {
+		if (file != null && !file.allowInlineDisplay()) {
 //				this.Link(bfr, title, Bry_.Empty, tmp_attribs, tmp_query, tmp_options);
 			return;
 		}
@@ -121,14 +121,14 @@ public class Xomw_linker {
 			frame_params.align = Align__frame__none;
 		}
 		if (file != null && handler_params.width == -1) {
-			if (handler_params.height != -1 && file.Is_vectorized()) {
+			if (handler_params.height != -1 && file.isVectorized()) {
 				// If its a vector image, and user only specifies height
 				// we don't want it to be limited by its "normal" width.
 //					global $wgSVGMaxSize;
 //					handler_params.width = $wgSVGMaxSize;
 			}
 			else {
-				handler_params.width = file.Get_width(page);
+				handler_params.width = file.getWidth(page);
 			}
 
 			if (   frame_params.thumbnail != null
@@ -159,7 +159,7 @@ public class Xomw_linker {
 				// Use width which is smaller: real image width or user preference width
 				// Unless image is scalable vector.
 				if (handler_params.height == -1 && handler_params.width <= 0 ||
-						pref_width < handler_params.width || file.Is_vectorized()) {
+						pref_width < handler_params.width || file.isVectorized()) {
 					handler_params.width = pref_width;
 				}
 			}
@@ -182,19 +182,20 @@ public class Xomw_linker {
 		}
 
 		if (file != null && frame_params.frameless != null) {
-			int src_width = file.Get_width(page);
+			int src_width = file.getWidth(page);
 			// For "frameless" option: do not present an image bigger than the
 			// source (for bitmap-style images). This is the same behavior as the
 			// "thumb" option does it already.
-			if (src_width != -1 && !file.Must_render() && handler_params.width > src_width) {
+			if (src_width != -1 && !file.mustRender() && handler_params.width > src_width) {
 				handler_params.width = src_width;
 			}
 		}
 
-		Xomw_mto thumb = new Xomw_mto(file.url);
+		Xomw_mto thumb = null;
 		if (file != null && handler_params.width != -1) {
 			// Create a resized image, without the additional thumbnail features
 //				$thumb = $file->transform(handler_params);
+			thumb = new Xomw_mto(file.getUrl());
 		}
 		else {
 			thumb = null;
@@ -203,6 +204,7 @@ public class Xomw_linker {
 		byte[] s = null;
 		if (thumb == null) {
 //				$s = self::makeBrokenImageLinkObj($title, frame_params['title'], '', '', '', $time == true);
+			s = Bry_.Empty;
 		}
 		else {
 //				self::processResponsiveImages($file, $thumb, handler_params);
@@ -267,7 +269,7 @@ public class Xomw_linker {
 		}
 	}
 
-	public void Make_thumb_link2(Bry_bfr bfr, Xoa_ttl title, Xomw_file file, Xomw_img_prms frame_params, Xomw_mda_prms handler_params, Object time, byte[] query) {
+	public void Make_thumb_link2(Bry_bfr bfr, Xoa_ttl title, Xomw_File file, Xomw_img_prms frame_params, Xomw_mda_prms handler_params, Object time, byte[] query) {
 		boolean exists = false; // = $file && $file->exists();
 
 		int page = handler_params.page;
@@ -313,14 +315,14 @@ public class Xomw_linker {
 			else if (frame_params.framed != null) {
 				// Use image dimensions, don't scale
 //					thumb = $file->getUnscaledThumb(handler_params);
-				thumb = new Xomw_mto(file.url);
+				thumb = new Xomw_mto(file.getUrl());
 				no_scale = true;
 			}
 			else {
 				// Do not present an image bigger than the source, for bitmap-style images
 				// This is a hack to maintain compatibility with arbitrary pre-1.10 behavior
-				int src_width = file.Get_width(page);
-				if (src_width != -1 && !file.Must_render() && handler_params.width > src_width) {
+				int src_width = file.getWidth(page);
+				if (src_width != -1 && !file.mustRender() && handler_params.width > src_width) {
 					handler_params.width = src_width;
 				}
 //					thumb = $file->transform(handler_params);

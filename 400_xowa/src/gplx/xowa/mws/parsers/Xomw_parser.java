@@ -43,6 +43,7 @@ public class Xomw_parser {
 	private final    Btrie_rv trv = new Btrie_rv();
 	private int marker_index = 0;
 	// private final    Xomw_prepro_wkr prepro_wkr = new Xomw_prepro_wkr();
+	public Xomw_parser_env         Env()             {return env;}            private final    Xomw_parser_env env = new Xomw_parser_env();
 	public Xomw_strip_state        Strip_state()     {return strip_state;}    private final    Xomw_strip_state strip_state = new Xomw_strip_state();
 	public Xomw_sanitizer          Sanitizer()       {return sanitizer;}      private final    Xomw_sanitizer sanitizer = new Xomw_sanitizer();
 	public Xomw_linker             Linker()          {return linker;}         private final    Xomw_linker linker;
@@ -75,7 +76,7 @@ public class Xomw_parser {
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		linker.Init_by_wiki(wiki.Lang().Lnki_trail_mgr().Trie());
 		lnke_wkr.Init_by_wiki(protocols_trie, regex_url, regex_space);
-		lnki_wkr.Init_by_wiki(wiki);
+		lnki_wkr.Init_by_wiki(env, wiki);
 		doubleunder_wkr.Init_by_wiki(doubleunder_data, wiki.Lang());
 		magiclinks_wkr.Init_by_wiki();
 	}

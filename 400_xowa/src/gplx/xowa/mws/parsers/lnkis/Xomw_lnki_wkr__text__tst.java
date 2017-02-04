@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.mws.filerepo.*; import gplx.xowa.mws.filerepo.file.*;
 public class Xomw_lnki_wkr__text__tst {
 	private final    Xomw_lnki_wkr__fxt fxt = new Xomw_lnki_wkr__fxt();
 	@Before public void init() {fxt.Clear();}
@@ -31,19 +31,28 @@ class Xomw_lnki_wkr__fxt {
 	private final    Xomw_lnki_wkr wkr;
 	private final    Xomw_parser_ctx pctx;
 	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
+	private final    Xomw_file_finder__mock file_finder = new Xomw_file_finder__mock();
+	private final    Xomw_FileRepo repo = new Xomw_FileRepo(Bry_.new_a7("/orig"), Bry_.new_a7("/thumb"));
 	private boolean apos = true;
 	public Xomw_lnki_wkr__fxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		Xomw_parser parser = new Xomw_parser();
 		wkr = parser.Lnki_wkr();
+
+		// env
+		parser.Env().File_finder_(file_finder);			
 		parser.Init_by_wiki(wiki);
 
+		// ctx
 		pctx = new Xomw_parser_ctx();
 		pctx.Init_by_page(wiki.Ttl_parse(Bry_.new_a7("Page_1")));
 	}
 	public void Clear() {
 		wkr.Clear_state();
+	}
+	public void Init__file(String title, int w, int h) {
+		file_finder.Add(title, repo, w, h);
 	}
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);

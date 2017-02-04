@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.mws.medias; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
+package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
 import gplx.langs.htmls.*;
 import gplx.langs.phps.utls.*;
 public class Xomw_mto {
@@ -81,10 +81,10 @@ public class Xomw_mto {
 		}
 		else if (!Php_utl_.Empty(options.custom_title_link)) {
 //				byte[] title = options.custom_title_link;
-			link_attribs.Clear();
+//				link_attribs.Clear();
 //				link_attribs.Add_many(Gfh_atr_.Bry__href, title.Get_link_url());
 //				byte[] options_title = options.title;
-//				link_attribs.Add_many(Gfh_atr_.Bry__title, Php_utl_.Empty(options_title) ? title.Get_full_text : options_title;
+//				link_attribs.Add_many(Gfh_atr_.Bry__title, Php_utl_.Empty(options_title) ? title.Get_full_text() : options_title);
 		}
 		else if (!Php_utl_.Empty(options.desc_link)) {
 //				link_attribs = $this->getDescLinkAttribs(
@@ -93,7 +93,7 @@ public class Xomw_mto {
 //				);
 		}
 		else if (!Php_utl_.Empty(options.file_link)) {
-			link_attribs.Clear();
+//				link_attribs.Clear();
 //				link_attribs.Add_many(Gfh_atr_.Bry__href, file.Get_url());
 		}
 		else {

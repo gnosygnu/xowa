@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.mws.medias; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
+package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
 public class Xomw_mto_params {
 	public boolean desc_link;
 	public byte[] alt = null;

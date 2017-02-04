@@ -15,19 +15,9 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.mws.filerepos.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.filerepos.*;
-public class Xomw_file {
-	public byte[] url;
-	public boolean Allow_inline_display() {
-		return true;
-	}
-	public boolean Is_vectorized() {
-		return false;
-	}
-	public int Get_width(int page) {
-		return -1;
-	}
-	public boolean Must_render() {
-		return true;
+package gplx.langs.phps.utls; import gplx.*; import gplx.langs.*; import gplx.langs.phps.*;
+public class Php_encode_ {
+	public static byte[] rawurlencode(byte[] v) {
+		return gplx.langs.htmls.encoders.Gfo_url_encoder_.Php_rawurlencode.Encode(v);
 	}
 }

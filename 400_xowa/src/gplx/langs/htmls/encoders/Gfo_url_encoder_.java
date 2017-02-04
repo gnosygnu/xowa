@@ -63,9 +63,16 @@ public class Gfo_url_encoder_ {
 			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Plus);
 	}
 	public static Gfo_url_encoder_mkr New__php_urlencode() {
-		// equivalent to php's urlencode; http://php.net/manual/en/function.urlencode.php;
+		// REF: http://php.net/manual/en/function.urlencode.php;
 		// "Returns a String in which all non-alphanumeric characters except -_. have been replaced with a percent (%) sign followed by two hex digits and spaces encoded as plus (+) signs"
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
+			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Plus);
+	}
+	public static Gfo_url_encoder_mkr New__php_rawurlencode() {
+		// REF: http://php.net/manual/en/function.rawurlencode.php
+		// "Returns a String in which all non-alphanumeric characters except -_.~ have been replaced with a percent (%) sign followed by two hex digits. "
+		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
+			.Init__same__many(Byte_ascii.Tilde)
 			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Plus);
 	}
 	private static Gfo_url_encoder_mkr New__http_url_ttl() {
@@ -110,5 +117,6 @@ public class Gfo_url_encoder_ {
 	, Http_url_ttl		= Gfo_url_encoder_.New__http_url_ttl().Make()
 	, Mw_ttl			= Gfo_url_encoder_.New__mw_ttl().Make()
 	, Php_urlencode		= Gfo_url_encoder_.New__php_urlencode().Make()
+	, Php_rawurlencode	= Gfo_url_encoder_.New__php_rawurlencode().Make()
 	;
 }
