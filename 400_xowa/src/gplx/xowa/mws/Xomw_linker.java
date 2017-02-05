@@ -27,6 +27,7 @@ import gplx.langs.phps.utls.*;
 	* P7: $html = HtmlArmor::getHtml($text);
 */
 public class Xomw_linker {
+//		private Xomw_parser_env env;
 	private final    Bry_bfr tmp = Bry_bfr_.New(), tmp_2 = Bry_bfr_.New();
 	private final    Linker_rel_splitter splitter = new Linker_rel_splitter();
 	private final    Xomw_html_utl html_utl = new Xomw_html_utl();
@@ -53,7 +54,8 @@ public class Xomw_linker {
 	public Xomw_linker(Xomw_link_renderer link_renderer) {
 		this.link_renderer = link_renderer;
 	}
-	public void Init_by_wiki(Btrie_slim_mgr trie) {
+	public void Init_by_wiki(Xomw_parser_env env, Btrie_slim_mgr trie) {
+//			this.env = env;
 		this.split_trail_trie = trie;
 	}
 	// Given parameters derived from [[Image:Foo|options...]], generate the
@@ -360,6 +362,7 @@ public class Xomw_linker {
 			zoom_icon = Bry_.Empty;
 		}
 		else if (thumb == null) {
+			// env.Msg_mgr().Get_by_id().Escaped();
 //				$s .= wfMessage('thumbnail_error', '')->escaped();
 			zoom_icon = Bry_.Empty;
 		}
@@ -383,6 +386,7 @@ public class Xomw_linker {
 					.Add(Gfh_atr_.Bry__class, Class__internal)
 //						.Add(Gfh_atr_.Bry__title, wfMessage('thumbnail-more')->text())
 					, Bry_.Empty);
+				// env.Message_mgr().Get_by_str("thumbnail-more").text();
 				byte[] zoom_anch = tmp.To_bry_and_clear();
 				html_utl.Raw_element(bfr, Gfh_tag_.Bry__div, tmp_attribs.Clear().Add(Gfh_atr_.Bry__class, Class__magnify), zoom_anch);
 			}
@@ -635,46 +639,6 @@ public class Xomw_linker {
 		}
 		return split_trail_rv;
 	}
-//		public function getImageParams($handler) {
-//			if ($handler) {
-//				$handlerClass = get_class($handler);
-//			}
-//			else {
-//				$handlerClass = '';
-//			}
-//			if (!isset($this->mImageParams[$handlerClass])) {
-			// Initialise static lists
-//				static $internalParamNames = [
-//					'horizAlign' => [ 'left', 'right', 'center', 'none' ],
-//					'vertAlign' => [ 'baseline', 'sub', 'super', 'top', 'text-top', 'middle',
-//						'bottom', 'text-bottom' ],
-//					'frame' => [ 'thumbnail', 'manual_thumb', 'framed', 'frameless',
-//						'upright', 'border', 'link', 'alt', 'class' ],
-//				];
-//				static $internalParamMap;
-//				if (!$internalParamMap) {
-//					$internalParamMap = [];
-//					foreach ($internalParamNames as $type => $names) {
-//						foreach ($names as $name) {
-//							$magicName = str_replace('-', '_', "img_$name");
-//							$internalParamMap[$magicName] = [ $type, $name ];
-//						}
-//					}
-//				}
-
-			// Add handler params
-//				$paramMap = $internalParamMap;
-//				if ($handler) {
-//					$handlerParamMap = $handler->getParamMap();
-//					foreach ($handlerParamMap as $magic => $paramName) {
-//						$paramMap[$magic] = [ 'handler', $paramName ];
-//					}
-//				}
-//				$this->mImageParams[$handlerClass] = $paramMap;
-//				$this->mImageParamsMagicArray[$handlerClass] = new MagicWordArray(array_keys($paramMap));
-//			}
-//			return [ $this->mImageParams[$handlerClass], $this->mImageParamsMagicArray[$handlerClass] ];
-//		}
 //		// Make HTML for a thumbnail including image, border and caption
 //		public static function makeThumbLinkObj(Title $title, $file, $label = '', $alt,
 //			$align = 'right', $params = [], $framed = false, $manual_thumb = ""

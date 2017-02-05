@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
 import gplx.xowa.mws.filerepo.file.*;
-public class Xomw_ImageHandler extends Xomw_MediaHandler {	/**
+public class Xomw_ImageHandler extends Xomw_MediaHandler {	public Xomw_ImageHandler(byte[] key) {super(key);}
+	/**
 	* @param File file
 	* @return boolean
 	*/

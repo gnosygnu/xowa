@@ -18,6 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
 import gplx.xowa.mws.filerepo.file.*;
 public class Xomw_MediaHandler {
+	public byte[] Key() {return key;} private byte[] key;
+	public Xomw_MediaHandler(byte[] key) {
+		this.key = key;
+	}
+
 //		static final TRANSFORM_LATER = 1;
 //		static final METADATA_GOOD = true;
 //		static final METADATA_BAD = false;

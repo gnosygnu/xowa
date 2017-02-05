@@ -22,7 +22,7 @@ import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.mws.parsers.*; import gplx.xowa.mws.parsers.quotes.*;
 import gplx.xowa.mws.htmls.*; import gplx.xowa.mws.linkers.*;
 import gplx.xowa.mws.utls.*; import gplx.xowa.mws.libs.*;
-import gplx.xowa.mws.filerepo.file.*;
+import gplx.xowa.mws.media.*; import gplx.xowa.mws.filerepo.file.*;
 import gplx.xowa.parsers.uniqs.*;
 /*	TODO.XO
 	* P7: multi-line links; // look at the next 'line' to see if we can close it there
@@ -53,6 +53,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Xomw_qry_mgr query = new Xomw_qry_mgr();
 	private final    Btrie_rv trv = new Btrie_rv();
 	private final    List_adp tmp_list = List_adp_.New();
+//		private final    Hash_adp mImageParams = Hash_adp_.New();
 	public Xomw_lnki_wkr(Xomw_parser parser, Xomw_link_holders holders, Xomw_link_renderer link_renderer, Btrie_slim_mgr protocols_trie) {
 		this.parser = parser;
 		this.holders = holders;
@@ -88,10 +89,10 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 		this.page_title = pctx.Page_title();
 
-		Replace_internal_links(bfr, src, src_bgn, src_end);
+		Replace_internal_links(pctx, bfr, src, src_bgn, src_end);
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-02-02
-	public void Replace_internal_links(Bry_bfr bfr, byte[] src, int src_bgn, int src_end) {
+	public void Replace_internal_links(Xomw_parser_ctx pctx, Bry_bfr bfr, byte[] src, int src_bgn, int src_end) {
 		// XO.MW: regex for tc move to header; e1 and e1_img moved to code
 		// the % is needed to support urlencoded titles as well
 
@@ -308,7 +309,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 						// we couldn't find the end of this imageLink, so output it raw
 						// but don't ignore what might be perfectly normal links in the text we've examined
 						Bry_bfr nested = wiki.Utl__bfr_mkr().Get_b128();
-						this.Replace_internal_links(nested, text, 0, text.length);
+						this.Replace_internal_links(pctx, nested, text, 0, text.length);
 						nested.Mkr_rls();
 						bfr.Add(prefix).Add(Bry__wtxt__lnki__bgn).Add(link).Add_byte_pipe().Add(text); // s .= "{prefix}[[link|text";
 						// note: no trail, because without an end, there *is* no trail
@@ -375,7 +376,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 						// cloak any absolute URLs inside the image markup, so replaceExternalLinks() won't touch them
 						bfr.Add(prefix);
 						// Armor_links(Make_image(bfr, nt, text, holders))
-						Make_image(bfr, nt, text, holders);
+						Make_image(pctx, bfr, nt, text, holders);
 						bfr.Add(trail);
 						continue;
 					}
@@ -441,7 +442,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 		}
 	}
-	public void Make_image(Bry_bfr bfr, Xoa_ttl title, byte[] link_args, Xomw_link_holders holders) {
+	public void Make_image(Xomw_parser_ctx pctx, Bry_bfr bfr, Xoa_ttl title, byte[] link_args, Xomw_link_holders holders) {
 		// Check if the options text is of the form "options|alt text"
 		// Options are:
 		//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang
@@ -484,10 +485,14 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //			$handler = $file ? $file->getHandler() : false;
 
 //			list($paramMap, $mwArray) = $this->getImageParams($handler);
+//			Xomw_image_params tmp_img_params = new Xomw_image_params();
+//			this.getImageParams(tmp_img_params, handler);
+//			Xomw_param_map paramMap = tmp_img_params.param_map;
 
-//			if (!$file) {
-//				$this->addTrackingCategory('broken-file-category');
-//			}
+		// XO.MW.UNSUPPORTED.TrackingCategory:
+		//if (!$file) {
+		//	$this->addTrackingCategory('broken-file-category');
+		//}
 
 		// Process the input parameters
 		byte[] caption = Bry_.Empty;
@@ -686,6 +691,52 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //			return $tooltip;
 //		}
 
+//		static Xomw_param_list[] internalParamNames;
+//		static Xomw_param_map internalParamMap;
+//		private void getImageParams(Xomw_image_params rv, Xomw_MediaHandler handler) {
+//			byte[] handlerClass = handler.Key();
+//			//XO.MW.SKIP:handled by handler.Key()
+//			//if ($handler) {
+//			//	$handlerClass = get_class($handler);
+//			//}
+//			//else {
+//			//	$handlerClass = '';
+//			//}
+//			Xomw_param_map rv_map = (Xomw_param_map)mImageParams.Get_by(handler.Key());
+//			if (rv == null) {
+//				// Initialise static lists				
+//				if (internalParamNames == null) {
+//					internalParamNames = new Xomw_param_list[]
+//					{ Xomw_param_list.New("horizAlign", "left", "right", "center", "none")
+//					, Xomw_param_list.New("vertAlign", "baseline", "sub", "super", "top", "text-top", "middle", "bottom", "text-bottom")
+//					, Xomw_param_list.New("thumbnail", "manual_thumb", "framed", "frameless", "upright", "border", "link", "alt", "class")
+//					};
+//
+//					internalParamMap = new Xomw_param_map();
+//					byte[] bry_img = Bry_.new_a7("img_");
+//					foreach (Xomw_param_list param_list in internalParamNames) {
+//						byte[] type = param_list.type;
+//						foreach (byte[] name in param_list.names) {
+//							byte[] magic_name = Bry_.Add(bry_img, Bry_.Replace(name, Byte_ascii.Dash, Byte_ascii.Underline));
+//							internalParamMap.Add(magic_name, type, name);
+//						}
+//					}
+//				}
+//
+//				// Add handler params
+//				Xomw_param_map paramMap = internalParamMap.Clone();
+//				if (handler != null) {
+////					$handlerParamMap = $handler->getParamMap();
+////					foreach ($handlerParamMap as $magic => $paramName) {
+////						$paramMap[$magic] = [ 'handler', $paramName ];
+////					}
+//				}
+//				this.mImageParams.Add(handlerClass, paramMap);
+////				$this->mImageParamsMagicArray[$handlerClass] = new MagicWordArray(array_keys($paramMap));
+//			}
+//			rv.param_map = rv_map;
+//		}
+
 	/**
 	* Fetch a file and its title and register a reference to it.
 	* If 'broken' is a key in $options then the file will appear as a broken thumbnail.
@@ -772,4 +823,31 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	//   title-char             -> ([{$tc}]+)
 	//   pipe                   -> \\|
 	//   other chars...         -> (.*)
+}
+class Xomw_image_params {
+	public Xomw_param_map param_map = null;
+	public Object magicArray = null;
+}
+class Xomw_param_map {
+	public void Add(byte[] magic, byte[] type, byte[] name) {
+	}
+	public Xomw_param_map Clone() {
+		return null;
+	}
+}
+class Xomw_param_itm {
+	public byte[] magicName = null;
+	public byte[] type = null;
+	public byte[] name = null;
+}
+class Xomw_param_list {
+	public byte[] type;
+	public byte[][] names;
+
+	public static Xomw_param_list New(String type, String... names) {
+		Xomw_param_list rv = new Xomw_param_list();
+		rv.type = Bry_.new_u8(type);
+		rv.names = Bry_.Ary(names);
+		return rv;
+	}
 }

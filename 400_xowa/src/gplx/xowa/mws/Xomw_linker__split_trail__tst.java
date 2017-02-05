@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*;
+import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*; import gplx.xowa.mws.parsers.*;
 public class Xomw_linker__split_trail__tst {
 	private final    Xomw_linker__split_trail__fxt fxt = new Xomw_linker__split_trail__fxt();
 	@Test  public void Basic()                {fxt.Test__split_trail("abc def"          , "abc"             , " def");}
@@ -29,7 +29,7 @@ class Xomw_linker__split_trail__fxt {
 		String[] ary = new String[] {"a", "b", "c", "d", "e", "f"};
 		for (String itm : ary)
 			trie.Add_str_str(itm, itm);
-		linker.Init_by_wiki(trie);
+		linker.Init_by_wiki(new Xomw_parser_env(), trie);
 	}
 	public void Test__split_trail(String trail_str, String expd_inside, String expd_trail) {
 		byte[][] split_trail = linker.Split_trail(Bry_.new_u8(trail_str));

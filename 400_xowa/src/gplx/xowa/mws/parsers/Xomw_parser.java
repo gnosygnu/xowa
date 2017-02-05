@@ -74,7 +74,7 @@ public class Xomw_parser {
 		this.magiclinks_wkr = new Xomw_magiclinks_wkr(this, sanitizer, linker, regex_boundary, regex_url);
 	}
 	public void Init_by_wiki(Xowe_wiki wiki) {
-		linker.Init_by_wiki(wiki.Lang().Lnki_trail_mgr().Trie());
+		linker.Init_by_wiki(env, wiki.Lang().Lnki_trail_mgr().Trie());
 		lnke_wkr.Init_by_wiki(protocols_trie, regex_url, regex_space);
 		lnki_wkr.Init_by_wiki(env, wiki);
 		doubleunder_wkr.Init_by_wiki(doubleunder_data, wiki.Lang());
