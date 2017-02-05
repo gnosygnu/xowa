@@ -25,7 +25,7 @@
           <option value='xowa.app.security'>
             App - Security
           </option>
-          <option value='xowa.app.startup'>
+          <option value='xowa.app.startup' selected='selected'>
             App - Startup
           </option>
           <option value='xowa.app.update'>
@@ -76,7 +76,7 @@
           <option value='xowa.html.scripting'>
             HTML - Scripting
           </option>
-          <option value='xowa.files.general' selected='selected'>
+          <option value='xowa.files.general'>
             Files - General
           </option>
           <option value='xowa.files.apps'>
@@ -117,186 +117,253 @@
           </p>
         </div>
         <h2>
-          Basic
+          Window
         </h2>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.retrieval_enabled")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.window.mode")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.files.retrieval_enabled__name' class='xocfg_itm_name'>
-            Retrieval enabled
+          <div id='xowa.app.startup.window.mode__name' class='xocfg_itm_name'>
+            Window Mode
           </div>
-          <div id='xowa.files.retrieval_enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.retrieval_enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+          <div id='xowa.app.startup.window.mode__undo' data-xocfg-type='list:xowa.app.startup.window.mode' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.window.mode")' title="reset to &quot;previous&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input id="xowa.files.retrieval_enabled" data-xocfg-key="xowa.files.retrieval_enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.files.retrieval_enabled__key_box' value='xowa.files.retrieval_enabled'> <input type='hidden' id='xowa.files.retrieval_enabled__ctx_box' value='app'>
+            <select id="xowa.app.startup.window.mode" data-xocfg-key="xowa.app.startup.window.mode" data-xocfg-type="list:xowa.app.startup.window.mode" accesskey="d" class="xocfg_data__list" size="5">
+              <option value="previous" selected="selected">
+                previous
+              </option>
+              <option value="maximized">
+                maximized
+              </option>
+              <option value="absolute">
+                absolute
+              </option>
+              <option value="relative">
+                relative
+              </option>
+              <option value="default">
+                default
+              </option>
+            </select>
+          </div><input type='hidden' id='xowa.app.startup.window.mode__key_box' value='xowa.app.startup.window.mode'> <input type='hidden' id='xowa.app.startup.window.mode__ctx_box' value='app'>
         </div>
-        <div id='xowa.files.retrieval_enabled_help_div' class='xohelp_div'>
-          <div id='xowa.files.retrieval_enabled_help_msg' class='xohelp_msg'>
+        <div id='xowa.app.startup.window.mode_help_div' class='xohelp_div'>
+          <div id='xowa.app.startup.window.mode_help_msg' class='xohelp_msg'>
             <p>
               Choose one of the following:
             </p>
             <ul>
               <li>
-                <b>checked</b> to automatically download images / retrieve images from database 
-                <ul>
-                  <li>
-                    ImageMagick and Inkscape <b>must</b> be installed (See <a tabindex="-1" href="/wiki/Dev/File/Setup" id="xolnki_27" title="Dev/File/Setup">Dev/File/Setup</a>)
-                  </li>
-                  <li>
-                    An internet connection must be available, or a local tarball must be set up. (See <a tabindex="-1" href="/wiki/Archive/Usage/Offline_images" id="xolnki_28" title="Archive/Usage/Offline images">Archive/Usage/Offline_images</a>)
-                  </li>
-                </ul>
+                <b>previous</b>: window starts at same rect as previous session (default)
               </li>
               <li>
-                <b>unchecked</b> to leave images unprocessed
+                <b>maximized</b>: window always starts maximized
+              </li>
+              <li>
+                <b>absolute</b>: window bounds are set to rect below
+              </li>
+              <li>
+                <b>relative</b>: window starts at full screen, and then adjusted by rect below
+              </li>
+              <li>
+                <b>default</b>: window starts at default rect (determined by operating system)
               </li>
             </ul>
           </div>
         </div>
-        <h2>
-          Cache
-        </h2>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.fsys_size_min")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.window.manual_rect")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.files.cache.fsys_size_min__name' class='xocfg_itm_name'>
-            Minimum disk space used
+          <div id='xowa.app.startup.window.manual_rect__name' class='xocfg_itm_name'>
+            Window Size
           </div>
-          <div id='xowa.files.cache.fsys_size_min__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.fsys_size_min")' title="reset to &quot;75&quot;">&nbsp;</span>
+          <div id='xowa.app.startup.window.manual_rect__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.window.manual_rect")' title="reset to &quot;0,0,800,640&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input id="xowa.files.cache.fsys_size_min" data-xocfg-key="xowa.files.cache.fsys_size_min" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="75">
-          </div><input type='hidden' id='xowa.files.cache.fsys_size_min__key_box' value='xowa.files.cache.fsys_size_min'> <input type='hidden' id='xowa.files.cache.fsys_size_min__ctx_box' value='app'>
+            <input id="xowa.app.startup.window.manual_rect" data-xocfg-key="xowa.app.startup.window.manual_rect" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="0,0,800,640">
+          </div><input type='hidden' id='xowa.app.startup.window.manual_rect__key_box' value='xowa.app.startup.window.manual_rect'> <input type='hidden' id='xowa.app.startup.window.manual_rect__ctx_box' value='app'>
         </div>
-        <div id='xowa.files.cache.fsys_size_min_help_div' class='xohelp_div'>
-          <div id='xowa.files.cache.fsys_size_min_help_msg' class='xohelp_msg'>
+        <div id='xowa.app.startup.window.manual_rect_help_div' class='xohelp_div'>
+          <div id='xowa.app.startup.window.manual_rect_help_msg' class='xohelp_msg'>
             <p>
-              Enter a minimum size for the cache to use (in MB)<br>
-            </p>
-            <p>
-              This is an advanced configuration tweak. When the cache reaches its maximum size, it will delete files to free space. It will continue deleting files until the minimum size is reached.<br>
-            </p>
-            <p>
-              For example:
+              Enter 'x,y,w,h' numbers separated by commas. Note that this setting is used in conjunction with 'Window Mode'
             </p>
             <ul>
               <li>
-                If the max is set to 100 MB
+                <b>absolute</b>: absolute rect of window; EX: 0,0,1280,1024 means x=0 y=0 w=1280 h=1024
               </li>
               <li>
-                ... and the current size of all files in the cache is 99.9 MB
+                <b>relative</b>: relative adjustment to full screen size; EX: 20,20,-20,-20 on an 1280,1024 screen will yield a rect of x=20 y=20 w=1260 h=1004
               </li>
               <li>
-                ... and a 200 KB file is added
-              </li>
-              <li>
-                Then the cache size will be temporarily 100.1 MB
-              </li>
-              <li>
-                ... triggering the delete mechanism
-              </li>
-              <li>
-                ... which will reduce the current size of all files to 75 MB
+                <b>previous</b>, <b>maximized</b>, <b>default</b>: does nothing
               </li>
             </ul>
           </div>
         </div>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.fsys_size_max")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.window.manual_safe")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.files.cache.fsys_size_max__name' class='xocfg_itm_name'>
-            Maximum disk space used
+          <div id='xowa.app.startup.window.manual_safe__name' class='xocfg_itm_name'>
+            Safe Mode
           </div>
-          <div id='xowa.files.cache.fsys_size_max__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.fsys_size_max")' title="reset to &quot;100&quot;">&nbsp;</span>
+          <div id='xowa.app.startup.window.manual_safe__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.window.manual_safe")' title="reset to &quot;y&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input id="xowa.files.cache.fsys_size_max" data-xocfg-key="xowa.files.cache.fsys_size_max" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="100">
-          </div><input type='hidden' id='xowa.files.cache.fsys_size_max__key_box' value='xowa.files.cache.fsys_size_max'> <input type='hidden' id='xowa.files.cache.fsys_size_max__ctx_box' value='app'>
+            <input id="xowa.app.startup.window.manual_safe" data-xocfg-key="xowa.app.startup.window.manual_safe" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.app.startup.window.manual_safe__key_box' value='xowa.app.startup.window.manual_safe'> <input type='hidden' id='xowa.app.startup.window.manual_safe__ctx_box' value='app'>
         </div>
-        <div id='xowa.files.cache.fsys_size_max_help_div' class='xohelp_div'>
-          <div id='xowa.files.cache.fsys_size_max_help_msg' class='xohelp_msg'>
+        <div id='xowa.app.startup.window.manual_safe_help_div' class='xohelp_div'>
+          <div id='xowa.app.startup.window.manual_safe_help_msg' class='xohelp_msg'>
             <p>
-              Enter a maximum size for the cache to use (in MB)<br>
+              Choose one of the following:
             </p>
+            <ul>
+              <li>
+                <b>checked</b>: prevents window that would be located off screen; EX: x=-9999 or y=9999
+              </li>
+              <li>
+                <b>unchecked</b>: allows off-screen rect.<br>
+              </li>
+            </ul>
+            <p>
+              NOTE: if you create an unviewable rect you will need to edit the options file
+            </p>
+          </div>
+        </div>
+        <h2>
+          Tabs
+        </h2>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.tabs.type")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.startup.tabs.type__name' class='xocfg_itm_name'>
+            Startup type
+          </div>
+          <div id='xowa.app.startup.tabs.type__undo' data-xocfg-type='list:xowa.app.startup.pages.type' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.tabs.type")' title="reset to &quot;previous&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <select id="xowa.app.startup.tabs.type" data-xocfg-key="xowa.app.startup.tabs.type" data-xocfg-type="list:xowa.app.startup.pages.type" accesskey="d" class="xocfg_data__list" size="4">
+              <option value="blank">
+                blank
+              </option>
+              <option value="xowa">
+                xowa
+              </option>
+              <option value="previous" selected="selected">
+                previous
+              </option>
+              <option value="custom">
+                custom
+              </option>
+            </select>
+          </div><input type='hidden' id='xowa.app.startup.tabs.type__key_box' value='xowa.app.startup.tabs.type'> <input type='hidden' id='xowa.app.startup.tabs.type__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.startup.tabs.type_help_div' class='xohelp_div'>
+          <div id='xowa.app.startup.tabs.type_help_msg' class='xohelp_msg'>
+            <p>
+              Choose a startup page from one of the following:
+            </p>
+            <ul>
+              <li>
+                <b>blank</b>: one tab loads and it is set to blank (Special:XowaDefaultTab)
+              </li>
+              <li>
+                <b>xowa</b> : one tab loads and it is set to the XOWA home page (home/wiki/Main_Page)
+              </li>
+              <li>
+                <b>previous</b>: all opened pages from the previous session loads. For example, if "en.w:Earth" and "en.w:Moon" were open when XOWA was last closed, these tabs will be reopened
+              </li>
+              <li>
+                <b>custom</b>: all pages specified in the custom box will load
+              </li>
+            </ul>
           </div>
         </div>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.reduce_to_min")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.tabs.custom")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.files.cache.reduce_to_min__name' class='xocfg_itm_name'>
-            Reduce cache to min
+          <div id='xowa.app.startup.tabs.custom__name' class='xocfg_itm_name'>
+            Custom pages
           </div>
-          <div id='xowa.files.cache.reduce_to_min__undo' data-xocfg-type='btn' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.reduce_to_min")' title="reset to &quot;&quot;">&nbsp;</span>
-          </div>
-          <div class='xocfg_itm_data'>
-            <button id="xowa.files.cache.reduce_to_min" data-xocfg-key="xowa.files.cache.reduce_to_min" data-xocfg-type="btn" class="xocfg_data__btn">Reduce cache to min</button>
-          </div><input type='hidden' id='xowa.files.cache.reduce_to_min__key_box' value='xowa.files.cache.reduce_to_min'> <input type='hidden' id='xowa.files.cache.reduce_to_min__ctx_box' value='app'>
-        </div>
-        <div id='xowa.files.cache.reduce_to_min_help_div' class='xohelp_div'>
-          <div id='xowa.files.cache.reduce_to_min_help_msg' class='xohelp_msg'>
-            <p>
-              Press to reduce the cache to the minimum now (typically 75 MB).
-            </p>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.clear")' title='view more info'>&nbsp;</span>
-          </div>
-          <div id='xowa.files.cache.clear__name' class='xocfg_itm_name'>
-            Clear cache
-          </div>
-          <div id='xowa.files.cache.clear__undo' data-xocfg-type='btn' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.clear")' title="reset to &quot;&quot;">&nbsp;</span>
+          <div id='xowa.app.startup.tabs.custom__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.tabs.custom")' title="reset to &quot;&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <button id="xowa.files.cache.clear" data-xocfg-key="xowa.files.cache.clear" data-xocfg-type="btn" class="xocfg_data__btn">Clear cache</button>
-          </div><input type='hidden' id='xowa.files.cache.clear__key_box' value='xowa.files.cache.clear'> <input type='hidden' id='xowa.files.cache.clear__ctx_box' value='app'>
-        </div>
-        <div id='xowa.files.cache.clear_help_div' class='xohelp_div'>
-          <div id='xowa.files.cache.clear_help_msg' class='xohelp_msg'>
-            <p>
-              Press to clear the cache (reduces to 0 MB).
-            </p>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.info")' title='view more info'>&nbsp;</span>
-          </div>
-          <div id='xowa.files.cache.info__name' class='xocfg_itm_name'>
-            Info
-          </div>
-          <div id='xowa.files.cache.info__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.info")' title="reset to &quot;cache folder: C:\xowa\file
-            space used: 69.812 KB
-            file count: 1
-            oldest file: 2017-02-02 11:03:45
-            &quot;">&nbsp;</span>
-          </div>
-          <div class='xocfg_itm_data'>
-<textarea id="xowa.files.cache.info" data-xocfg-key="xowa.files.cache.info" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo xocfg_data__readonly" readonly="true">
-cache folder: C:\xowa\file
-space used: 69.812 KB
-file count: 1
-oldest file: 2017-02-02 11:03:45
+<textarea id="xowa.app.startup.tabs.custom" data-xocfg-key="xowa.app.startup.tabs.custom" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
 </textarea>
-          </div><input type='hidden' id='xowa.files.cache.info__key_box' value='xowa.files.cache.info'> <input type='hidden' id='xowa.files.cache.info__ctx_box' value='app'>
+          </div><input type='hidden' id='xowa.app.startup.tabs.custom__key_box' value='xowa.app.startup.tabs.custom'> <input type='hidden' id='xowa.app.startup.tabs.custom__ctx_box' value='app'>
         </div>
-        <div id='xowa.files.cache.info_help_div' class='xohelp_div'>
-          <div id='xowa.files.cache.info_help_msg' class='xohelp_msg'>
+        <div id='xowa.app.startup.tabs.custom_help_div' class='xohelp_div'>
+          <div id='xowa.app.startup.tabs.custom_help_msg' class='xohelp_msg'>
             <p>
-              Miscellaneous information about the cache
+              Specify custom pages to show on startup:
             </p>
+            <ul>
+              <li>
+                This option only applies if <code>custom</code> is selected for type.<br>
+              </li>
+            </ul>
+            <p>
+              Also, note the following:
+            </p>
+            <ul>
+              <li>
+                Aliases can be used. For example, "en.w:Earth" is a shortcut for "en.wikipedia.org/wiki/Earth"
+              </li>
+              <li>
+                Multiple pages are separated by new lines. For example, the following will load 2 tabs:
+              </li>
+            </ul>
+<pre>
+en.w:Earth
+en.w:Moon
+</pre>
+          </div>
+        </div>
+        <h2>
+          Advanced
+        </h2>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.script")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.app.startup.script__name' class='xocfg_itm_name'>
+            Script
+          </div>
+          <div id='xowa.app.startup.script__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.script")' title="reset to &quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+<textarea id="xowa.app.startup.script" data-xocfg-key="xowa.app.startup.script" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
+</textarea>
+          </div><input type='hidden' id='xowa.app.startup.script__key_box' value='xowa.app.startup.script'> <input type='hidden' id='xowa.app.startup.script__ctx_box' value='app'>
+        </div>
+        <div id='xowa.app.startup.script_help_div' class='xohelp_div'>
+          <div id='xowa.app.startup.script_help_msg' class='xohelp_msg'>
+            <p>
+              Enter custom configuration.
+            </p>
+            <ul>
+              <li>
+                These scripts will run after the application starts up. They will also run whenever you click Save on this page.
+              </li>
+              <li>
+                These scripts are intended for advanced users. They are in the format of .gfs statements (for examples, see /xowa/xowa.gfs). Please do not enter scripts unless instructed, or else XOWA may fail to start up.
+              </li>
+              <li>
+                These scripts are saved to /xowa/user/anonymous/data/cfg/user_custom_cfg.gfs. If XOWA fails to start up, simply delete the file.
+              </li>
+            </ul>
           </div>
         </div>
       </div>
