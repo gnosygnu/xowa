@@ -111,8 +111,9 @@ public class Btrie_bwd_mgr {
 		count--; // FUTURE: do not decrement if not found
 	}
 	public void Clear() {root.Clear(); count = 0;}
-	public static Btrie_bwd_mgr cs_() {return new Btrie_bwd_mgr(false);}
-	public static Btrie_bwd_mgr ci_() {return new Btrie_bwd_mgr(true);}
+	public static Btrie_bwd_mgr cs_()        {return new Btrie_bwd_mgr(false);}
+	public static Btrie_bwd_mgr ci_()        {return new Btrie_bwd_mgr(true);}
+	public static Btrie_bwd_mgr c__(boolean cs) {return new Btrie_bwd_mgr(!cs);}
 	public Btrie_bwd_mgr(boolean caseAny) {
 		root = new Btrie_slim_itm(Byte_.Zero, null, caseAny);
 	}	private Btrie_slim_itm root;

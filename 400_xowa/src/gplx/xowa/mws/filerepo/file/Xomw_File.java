@@ -83,9 +83,9 @@ public class Xomw_File {
 //
 //		/** @var FSFile|boolean False if undefined */
 //		protected fsFile;
-//
-//		/** @var MediaHandler */
-//		private Xomw_media_handler handler = null;
+
+	/** @var MediaHandler */
+	private Xomw_MediaHandler handler = null;
 
 	/** @var String The URL corresponding to one of the four basic zones */
 	public byte[] url;
@@ -1340,21 +1340,21 @@ public class Xomw_File {
 //		*/
 //		function migrateThumbFile(thumbName) {
 //		}
-//
-//		/**
-//		* Get a MediaHandler instance for this file
-//		*
-//		* @return MediaHandler|boolean Registered MediaHandler for file's MIME type
-//		*   or false if none found
-//		*/
-//		function getHandler() {
-//			if (!isset(this.handler)) {
+
+	/**
+	* Get a MediaHandler instance for this file
+	*
+	* @return MediaHandler|boolean Registered MediaHandler for file's MIME type
+	*   or false if none found
+	*/
+	public Xomw_MediaHandler getHandler() {
+		if (this.handler == null) {
 //				this.handler = MediaHandler::getHandler(this.getMimeType());
-//			}
-//
-//			return this.handler;
-//		}
-//
+		}
+
+		return this.handler;
+	}
+
 //		/**
 //		* Get a ThumbnailImage representing a file type icon
 //		*

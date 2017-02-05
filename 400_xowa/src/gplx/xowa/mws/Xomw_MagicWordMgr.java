@@ -15,12 +15,9 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.mws.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
-import gplx.xowa.mws.filerepo.file.*;
-public class Xomw_parser_env {
-	public Xomw_MagicWordMgr Magic_word_mgr() {return magic_word_mgr;} private final    Xomw_MagicWordMgr magic_word_mgr = new Xomw_MagicWordMgr();
-	public Xomw_message_mgr Message_mgr() {return message_mgr;} private final    Xomw_message_mgr message_mgr = new Xomw_message_mgr();
-	public Xomw_file_finder File_finder() {return file_finder;} private Xomw_file_finder file_finder = new Xomw_file_finder__noop();
-
-	public Xomw_parser_env File_finder_(Xomw_file_finder v) {file_finder = v; return this;} 
+package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
+public class Xomw_MagicWordMgr {
+	public Xomw_MagicWord Get(byte[] name) {
+		return null;
+	}
 }

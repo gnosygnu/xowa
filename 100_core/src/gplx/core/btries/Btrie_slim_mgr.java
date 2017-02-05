@@ -218,5 +218,5 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 	public static Btrie_slim_mgr cs()				{return new Btrie_slim_mgr(Bool_.Y);}
 	public static Btrie_slim_mgr ci_a7()			{return new Btrie_slim_mgr(Bool_.N);}
 	public static Btrie_slim_mgr ci_u8()			{return new Btrie_slim_mgr(Bool_.N);}
-	public static Btrie_slim_mgr new_(boolean v)		{return new Btrie_slim_mgr(v);}
+	public static Btrie_slim_mgr new_(boolean cs)		{return new Btrie_slim_mgr(cs);}
 }

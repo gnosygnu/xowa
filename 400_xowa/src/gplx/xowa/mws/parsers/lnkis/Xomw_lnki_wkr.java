@@ -53,7 +53,8 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Xomw_qry_mgr query = new Xomw_qry_mgr();
 	private final    Btrie_rv trv = new Btrie_rv();
 	private final    List_adp tmp_list = List_adp_.New();
-//		private final    Hash_adp mImageParams = Hash_adp_.New();
+	private final    Hash_adp mImageParams = Hash_adp_bry.cs();
+	private final    Hash_adp mImageParamsMagicArray = Hash_adp_bry.cs();
 	public Xomw_lnki_wkr(Xomw_parser parser, Xomw_link_holders holders, Xomw_link_renderer link_renderer, Btrie_slim_mgr protocols_trie) {
 		this.parser = parser;
 		this.holders = holders;
@@ -482,12 +483,12 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //			list($file, $title) = $this->fetchFileAndTitle($title, $options);
 
 		// Get parameter map
-//			$handler = $file ? $file->getHandler() : false;
+		Xomw_MediaHandler handler2 = file == null ? null : file.getHandler();
 
-//			list($paramMap, $mwArray) = $this->getImageParams($handler);
-//			Xomw_image_params tmp_img_params = new Xomw_image_params();
-//			this.getImageParams(tmp_img_params, handler);
-//			Xomw_param_map paramMap = tmp_img_params.param_map;
+		Xomw_image_params tmp_img_params = new Xomw_image_params();
+		this.getImageParams(tmp_img_params, handler2);
+//			Xomw_param_map paramMap = tmp_img_params.paramMap;
+		Xomw_MagicWordArray mwArray = tmp_img_params.mwArray;
 
 		// XO.MW.UNSUPPORTED.TrackingCategory:
 		//if (!$file) {
@@ -508,8 +509,8 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 			byte[] part = parts[i];
 			part = Bry_.Trim(part);
-//              byte[] magic_name = $mwArray->matchVariableStartToEnd($part);
-			byte[] magic_name = null;
+			byte[] magic_name = mwArray.matchVariableStartToEnd(part);
+//				byte[] magic_name = null;
 			boolean validated = false;
 			
 			Xomw_prm_itm prm_itm = param_map.Get_or_null(magic_name);
@@ -594,6 +595,9 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 						}
 					}
 				}
+//					if ( $validated ) {
+//						$params[$type][$paramName] = $value;
+//					}
 			}
 			if (!validated) {
 				caption = part;
@@ -691,51 +695,49 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //			return $tooltip;
 //		}
 
-//		static Xomw_param_list[] internalParamNames;
-//		static Xomw_param_map internalParamMap;
-//		private void getImageParams(Xomw_image_params rv, Xomw_MediaHandler handler) {
-//			byte[] handlerClass = handler.Key();
-//			//XO.MW.SKIP:handled by handler.Key()
-//			//if ($handler) {
-//			//	$handlerClass = get_class($handler);
-//			//}
-//			//else {
-//			//	$handlerClass = '';
-//			//}
-//			Xomw_param_map rv_map = (Xomw_param_map)mImageParams.Get_by(handler.Key());
-//			if (rv == null) {
-//				// Initialise static lists				
-//				if (internalParamNames == null) {
-//					internalParamNames = new Xomw_param_list[]
-//					{ Xomw_param_list.New("horizAlign", "left", "right", "center", "none")
-//					, Xomw_param_list.New("vertAlign", "baseline", "sub", "super", "top", "text-top", "middle", "bottom", "text-bottom")
-//					, Xomw_param_list.New("thumbnail", "manual_thumb", "framed", "frameless", "upright", "border", "link", "alt", "class")
-//					};
-//
-//					internalParamMap = new Xomw_param_map();
-//					byte[] bry_img = Bry_.new_a7("img_");
-//					foreach (Xomw_param_list param_list in internalParamNames) {
-//						byte[] type = param_list.type;
-//						foreach (byte[] name in param_list.names) {
-//							byte[] magic_name = Bry_.Add(bry_img, Bry_.Replace(name, Byte_ascii.Dash, Byte_ascii.Underline));
-//							internalParamMap.Add(magic_name, type, name);
-//						}
+	private static Xomw_param_list[] internalParamNames;
+	private static Xomw_param_map internalParamMap;
+	private void getImageParams(Xomw_image_params rv, Xomw_MediaHandler handler) {
+		byte[] handlerClass = handler == null ? Bry_.Empty : handler.Key();
+		rv.paramMap = (Xomw_param_map)mImageParams.Get_by(handlerClass);
+		if (rv.paramMap == null) {
+			// Initialise static lists				
+			if (internalParamNames == null) {
+				internalParamNames = new Xomw_param_list[]
+				{ Xomw_param_list.New("horizAlign", "left", "right", "center", "none")
+				, Xomw_param_list.New("vertAlign", "baseline", "sub", "super", "top", "text-top", "middle", "bottom", "text-bottom")
+				, Xomw_param_list.New("thumbnail", "manual_thumb", "framed", "frameless", "upright", "border", "link", "alt", "class")
+				};
+
+				internalParamMap = new Xomw_param_map();
+				byte[] bry_img = Bry_.new_a7("img_");
+				for (Xomw_param_list param_list : internalParamNames) {
+					byte[] type = param_list.type;
+					for (byte[] name : param_list.names) {
+						byte[] magic_name = Bry_.Add(bry_img, Bry_.Replace(name, Byte_ascii.Dash, Byte_ascii.Underline));
+						internalParamMap.Add(magic_name, type, name);
+					}
+				}
+			}
+
+			// Add handler params
+			Xomw_param_map paramMap = internalParamMap.Clone();
+			if (handler != null) {
+//					$handlerParamMap = $handler->getParamMap();
+//					foreach ($handlerParamMap as $magic => $paramName) {
+//						$paramMap[$magic] = [ 'handler', $paramName ];
 //					}
-//				}
-//
-//				// Add handler params
-//				Xomw_param_map paramMap = internalParamMap.Clone();
-//				if (handler != null) {
-////					$handlerParamMap = $handler->getParamMap();
-////					foreach ($handlerParamMap as $magic => $paramName) {
-////						$paramMap[$magic] = [ 'handler', $paramName ];
-////					}
-//				}
-//				this.mImageParams.Add(handlerClass, paramMap);
-////				$this->mImageParamsMagicArray[$handlerClass] = new MagicWordArray(array_keys($paramMap));
-//			}
-//			rv.param_map = rv_map;
-//		}
+			}
+			this.mImageParams.Add(handlerClass, paramMap);
+			rv.paramMap = paramMap;
+			Xomw_MagicWordArray mw_array = new Xomw_MagicWordArray(env.Magic_word_mgr(), paramMap.Keys());
+			this.mImageParamsMagicArray.Add(handlerClass, mw_array);
+			rv.mwArray = mw_array;
+		}
+		else {
+			rv.mwArray = (Xomw_MagicWordArray)mImageParamsMagicArray.Get_by(handlerClass);
+		}
+	}
 
 	/**
 	* Fetch a file and its title and register a reference to it.
@@ -825,20 +827,42 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	//   other chars...         -> (.*)
 }
 class Xomw_image_params {
-	public Xomw_param_map param_map = null;
-	public Object magicArray = null;
+	public Xomw_param_map paramMap = null;
+	public Xomw_MagicWordArray mwArray = null;
 }
 class Xomw_param_map {
+	private final    Ordered_hash hash = Ordered_hash_.New_bry();
+	public byte[][] Keys() {
+		int len = hash.Len();
+		byte[][] rv = new byte[len][];
+		for (int i = 0; i < len; i++) {
+			rv[i] = ((Xomw_param_itm)hash.Get_at(i)).magic;
+		}
+		return rv;
+	}
 	public void Add(byte[] magic, byte[] type, byte[] name) {
+		Xomw_param_itm itm = new Xomw_param_itm(magic, type, name);
+		hash.Add(magic, itm);
 	}
 	public Xomw_param_map Clone() {
-		return null;
+		Xomw_param_map rv = new Xomw_param_map();
+		int len = hash.Len();
+		for (int i = 0; i < len; i++) {
+			Xomw_param_itm itm = (Xomw_param_itm)hash.Get_at(i);
+			rv.Add(itm.magic, itm.type, itm.name);
+		}
+		return rv;
 	}
 }
 class Xomw_param_itm {
-	public byte[] magicName = null;
-	public byte[] type = null;
-	public byte[] name = null;
+	public final    byte[] magic;
+	public final    byte[] type;
+	public final    byte[] name;
+	public Xomw_param_itm(byte[] magic, byte[] type, byte[] name) {
+		this.magic = magic;
+		this.type = type;
+		this.name = name;
+	}
 }
 class Xomw_param_list {
 	public byte[] type;

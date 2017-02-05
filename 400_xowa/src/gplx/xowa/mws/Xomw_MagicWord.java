@@ -15,12 +15,19 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.mws.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
-import gplx.xowa.mws.filerepo.file.*;
-public class Xomw_parser_env {
-	public Xomw_MagicWordMgr Magic_word_mgr() {return magic_word_mgr;} private final    Xomw_MagicWordMgr magic_word_mgr = new Xomw_MagicWordMgr();
-	public Xomw_message_mgr Message_mgr() {return message_mgr;} private final    Xomw_message_mgr message_mgr = new Xomw_message_mgr();
-	public Xomw_file_finder File_finder() {return file_finder;} private Xomw_file_finder file_finder = new Xomw_file_finder__noop();
+package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
+public class Xomw_MagicWord {
+	public boolean case_match;
+	public byte[] name;
+	public Xomw_MagicWordSynonym[] synonyms;
+	public Xomw_MagicWord(byte[] name, boolean case_match, byte[][] synonyms_ary) {
+		this.name = name;
+		this.case_match = case_match;
 
-	public Xomw_parser_env File_finder_(Xomw_file_finder v) {file_finder = v; return this;} 
+		int synonyms_len = synonyms_ary.length;
+		this.synonyms = new Xomw_MagicWordSynonym[synonyms_len];
+		for (int i = 0; i < synonyms_len; i++) {
+			synonyms[i] = new Xomw_MagicWordSynonym(name, case_match, synonyms_ary[i]);
+		}
+	}
 }
