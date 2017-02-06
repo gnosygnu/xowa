@@ -17,7 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
 public class Xomw_MagicWordMgr {
+	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
+	public void Add(byte[] name, boolean cs, byte[]... synonyms) {
+		Xomw_MagicWord mw = new Xomw_MagicWord(name, cs, synonyms);
+		hash.Add(name, mw);
+	}
 	public Xomw_MagicWord Get(byte[] name) {
-		return null;
+		return (Xomw_MagicWord)hash.Get_by(name);
 	}
 }

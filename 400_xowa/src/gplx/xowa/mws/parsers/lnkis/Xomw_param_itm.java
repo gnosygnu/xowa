@@ -16,17 +16,27 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
-import org.junit.*;
-public class Xomw_lnki_wkr__file__tst {
-	private final    Xomw_lnki_wkr__fxt fxt = new Xomw_lnki_wkr__fxt();
-	@Before public void init() {
-		fxt.Clear();
-		fxt.Init__file("A.png", 300, 200);
+public class Xomw_param_itm {
+	public final    byte[] magic;
+	public final    byte[] type;
+	public final    byte[] name;
+	public final    int name_type;
+	public Xomw_param_itm(byte[] magic, byte[] type, byte[] name) {
+		this.magic = magic;
+		this.type = type;
+		this.name = name;
+		this.name_type = name_types.Get_as_int_or(name, -1);
 	}
-	@Test   public void Plain() {
-		fxt.Test__to_html("[[File:A.png]]",     "<img alt='A.png' src='/orig/7/70/A.png' />");
-	}
-	@Test   public void Thumb() {
-		fxt.Test__to_html("[[File:A.png|thumb]]",     "<div class='thumb t'><div class='thumbinner' style='width:2px;'>  <div class='thumbcaption'></div></div></div><img alt='A.png' src='/orig/7/70/A.png' />");
-	}
+	public static final int 
+	  Name__width             = 0
+	, Name__manual_thumb      = 1
+	, Name__alt               = 2
+	, Name__class             = 3
+	, Name__link              = 4
+	, Name__frameless         = 5
+	, Name__framed            = 6
+	, Name__thumbnail         = 7
+	;
+	private static final    Hash_adp_bry name_types = Hash_adp_bry.cs()
+	.Add_str_int("thumbnail", Name__thumbnail);
 }

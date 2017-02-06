@@ -20,12 +20,24 @@ public class Xomw_MagicWordSynonym {
 	public final    byte[] magic_name;
 	public final    boolean case_match;
 	public final    byte[] text;
+	public final    byte[] text_wo_arg1;
 	public final    byte arg1_tid;
 	public Xomw_MagicWordSynonym(byte[] magic_name, boolean case_match, byte[] text) {
 		this.magic_name = magic_name;
 		this.case_match = case_match;
 		this.text = text;
 		this.arg1_tid = Get_arg1_tid(text);
+		switch (arg1_tid) {
+			case Arg1__bgn:
+				text_wo_arg1 = Bry_.Mid(text, 2);
+				break;
+			case Arg1__end:
+				text_wo_arg1 = Bry_.Mid(text, 0, text.length - 2);
+				break;
+			default:
+				text_wo_arg1 = text;
+				break;
+		}
 	}
 
 	private static byte Get_arg1_tid(byte[] src) {
@@ -53,11 +65,11 @@ public class Xomw_MagicWordSynonym {
 						else if (rv == Arg1__mid)
 							rv = Arg1__mix;
 					}
-					cur += 3;
+					cur += 2;
 					continue;
 				}
 				else {
-					cur += 2;
+					cur += 1;
 					continue;
 				}
 			}

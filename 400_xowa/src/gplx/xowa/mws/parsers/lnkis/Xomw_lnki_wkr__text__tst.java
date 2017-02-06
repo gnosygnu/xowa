@@ -41,7 +41,8 @@ class Xomw_lnki_wkr__fxt {
 		wkr = parser.Lnki_wkr();
 
 		// env
-		parser.Env().File_finder_(file_finder);			
+		parser.Env().File_finder_(file_finder);
+		parser.Env().Magic_word_mgr().Add(Bry_.new_u8("img_thumbnail"), Bool_.Y, Bry_.Ary("thumb"));
 		parser.Init_by_wiki(wiki);
 
 		// ctx

@@ -74,8 +74,8 @@ public class Gftest {
 	public static void Eq__bry(byte[] expd, byte[] actl, String msg_fmt, Object... msg_args) {
 		if (Bry_.Eq(expd, actl)) return;
 		Write_fail_head(bfr, msg_fmt, msg_args);
-		bfr.Add_str_a7("expd: ").Add(expd).Add_byte_nl();
-		bfr.Add_str_a7("actl: ").Add(actl).Add_byte_nl();
+		bfr.Add_str_a7("expd: ").Add_safe(expd).Add_byte_nl();
+		bfr.Add_str_a7("actl: ").Add_safe(actl).Add_byte_nl();
 		bfr.Add(Bry__line_end);
 		throw Err_.new_wo_type(bfr.To_str_and_clear());
 	}

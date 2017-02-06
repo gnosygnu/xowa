@@ -487,7 +487,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 		Xomw_image_params tmp_img_params = new Xomw_image_params();
 		this.getImageParams(tmp_img_params, handler2);
-//			Xomw_param_map paramMap = tmp_img_params.paramMap;
+		Xomw_param_map paramMap = tmp_img_params.paramMap;
 		Xomw_MagicWordArray mwArray = tmp_img_params.mwArray;
 
 		// XO.MW.UNSUPPORTED.TrackingCategory:
@@ -498,8 +498,8 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		// Process the input parameters
 		byte[] caption = Bry_.Empty;
 		// XO.MW: $params = [ 'frame' => [], 'handler' => [], 'horizAlign' => [], 'vertAlign' => [] ];
-		Xomw_prm_mgr param_map = new Xomw_prm_mgr();
-		Xomw_prm_mgr param_mgr = new Xomw_prm_mgr();
+//			Xomw_prm_mgr param_map = new Xomw_prm_mgr();
+//			Xomw_prm_mgr param_mgr = new Xomw_prm_mgr();
 		Xomw_img_prms frame = new Xomw_img_prms();
 		Xomw_mda_prms handler = new Xomw_mda_prms();
 		boolean seen_format = false;
@@ -510,15 +510,14 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			byte[] part = parts[i];
 			part = Bry_.Trim(part);
 			byte[] magic_name = mwArray.matchVariableStartToEnd(part);
-//				byte[] magic_name = null;
 			boolean validated = false;
 			
-			Xomw_prm_itm prm_itm = param_map.Get_or_null(magic_name);
+			Xomw_param_itm prm_itm = paramMap.Get_by(magic_name);
 			if (prm_itm != null) {
-				int prm_type = prm_itm.type;
-				int prm_name = prm_itm.name_type;
+				int prm_type = -1;
+				int paramNameType = prm_itm.name_type;
 				// Special case; width and height come in one variable together
-				if (prm_type == Xomw_prm_itm.Type__handler && prm_name == Xomw_prm_itm.Name__width) {
+				if (prm_type == Xomw_prm_itm.Type__handler && paramNameType == Xomw_prm_itm.Name__width) {
 //						$parsedWidthParam = $this->parseWidthParam($value);
 //						if (isset($parsedWidthParam['width'])) {
 //							$width = $parsedWidthParam['width'];
@@ -543,17 +542,17 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 					}
 					else {
 						// Validate @gplx.Internal protected parameters
-						switch (prm_name) {
-							case Xomw_prm_itm.Name__manual_thumb:
-							case Xomw_prm_itm.Name__alt:
-							case Xomw_prm_itm.Name__class:
+						switch (paramNameType) {
+							case Xomw_param_itm.Name__manual_thumb:
+							case Xomw_param_itm.Name__alt:
+							case Xomw_param_itm.Name__class:
 								// @todo FIXME: Possibly check validity here for
 								// manualthumb? downstream behavior seems odd with
 								// missing manual thumbs.
 								validated = true;
 								// $value = $this->stripAltText($value, $holders);
 								break;
-							case Xomw_prm_itm.Name__link:
+							case Xomw_param_itm.Name__link:
 //									$chars = self::EXT_LINK_URL_CLASS;
 //									$addr = self::EXT_LINK_ADDR;
 //									$prots = $this->mUrlProtocols;
@@ -581,12 +580,13 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //										}
 //									}
 								break;
-							case Xomw_prm_itm.Name__frameless:
-							case Xomw_prm_itm.Name__framed:
-							case Xomw_prm_itm.Name__thumbnail:
+							case Xomw_param_itm.Name__frameless:
+							case Xomw_param_itm.Name__framed:
+							case Xomw_param_itm.Name__thumbnail:
 								// use first appearing option, discard others.
 								validated = !seen_format;
 								seen_format = true;
+								frame.thumbnail = Bry_.Empty;
 								break;
 							default:
 								// Most other things appear to be empty or numeric...
@@ -595,9 +595,9 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 						}
 					}
 				}
-//					if ( $validated ) {
-//						$params[$type][$paramName] = $value;
-//					}
+				if (validated) {
+					// $params[$type][$paramName] = $value;
+				}
 			}
 			if (!validated) {
 				caption = part;
@@ -605,13 +605,13 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		}
 
 		// Process alignment parameters
-		Xomw_prm_itm tmp = param_mgr.Get_or_null(Xomw_prm_mgr.Name__horiz_align);
+		Xomw_param_itm tmp = paramMap.Get_by(Xomw_prm_mgr.Name__horiz_align);
 		if (tmp != null) {
-			frame.align = tmp.val;
+//				frame.align = tmp.val;
 		}
-		tmp = param_mgr.Get_or_null(Xomw_prm_mgr.Name__vert_align);
+		tmp = paramMap.Get_by(Xomw_prm_mgr.Name__vert_align);
 		if (tmp != null) {
-			frame.valign = tmp.val;
+//				frame.valign = tmp.val;
 		}
 
 		frame.caption = caption;
@@ -706,7 +706,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 				internalParamNames = new Xomw_param_list[]
 				{ Xomw_param_list.New("horizAlign", "left", "right", "center", "none")
 				, Xomw_param_list.New("vertAlign", "baseline", "sub", "super", "top", "text-top", "middle", "bottom", "text-bottom")
-				, Xomw_param_list.New("thumbnail", "manual_thumb", "framed", "frameless", "upright", "border", "link", "alt", "class")
+				, Xomw_param_list.New("frame", "thumbnail", "manual_thumb", "framed", "frameless", "upright", "border", "link", "alt", "class")
 				};
 
 				internalParamMap = new Xomw_param_map();
@@ -829,49 +829,4 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 class Xomw_image_params {
 	public Xomw_param_map paramMap = null;
 	public Xomw_MagicWordArray mwArray = null;
-}
-class Xomw_param_map {
-	private final    Ordered_hash hash = Ordered_hash_.New_bry();
-	public byte[][] Keys() {
-		int len = hash.Len();
-		byte[][] rv = new byte[len][];
-		for (int i = 0; i < len; i++) {
-			rv[i] = ((Xomw_param_itm)hash.Get_at(i)).magic;
-		}
-		return rv;
-	}
-	public void Add(byte[] magic, byte[] type, byte[] name) {
-		Xomw_param_itm itm = new Xomw_param_itm(magic, type, name);
-		hash.Add(magic, itm);
-	}
-	public Xomw_param_map Clone() {
-		Xomw_param_map rv = new Xomw_param_map();
-		int len = hash.Len();
-		for (int i = 0; i < len; i++) {
-			Xomw_param_itm itm = (Xomw_param_itm)hash.Get_at(i);
-			rv.Add(itm.magic, itm.type, itm.name);
-		}
-		return rv;
-	}
-}
-class Xomw_param_itm {
-	public final    byte[] magic;
-	public final    byte[] type;
-	public final    byte[] name;
-	public Xomw_param_itm(byte[] magic, byte[] type, byte[] name) {
-		this.magic = magic;
-		this.type = type;
-		this.name = name;
-	}
-}
-class Xomw_param_list {
-	public byte[] type;
-	public byte[][] names;
-
-	public static Xomw_param_list New(String type, String... names) {
-		Xomw_param_list rv = new Xomw_param_list();
-		rv.type = Bry_.new_u8(type);
-		rv.names = Bry_.Ary(names);
-		return rv;
-	}
 }

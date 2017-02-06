@@ -44,21 +44,20 @@ public class Xomw_MagicWordArray {
 			for (int i = 0; i < synonyms_len; i++) {
 				Xomw_MagicWordSynonym synonym = synonyms[i];
 				switch (synonym.arg1_tid) {
+					case Xomw_MagicWordSynonym.Arg1__nil:
 					case Xomw_MagicWordSynonym.Arg1__end:
 						if (fwd_trie == null) fwd_trie = word.case_match ? Btrie_slim_mgr.cs() : Btrie_slim_mgr.ci_u8();
-						fwd_trie.Add_obj(synonym.text, synonym);
+						fwd_trie.Add_obj(synonym.text_wo_arg1, synonym);
 						break;
 					case Xomw_MagicWordSynonym.Arg1__bgn:
 						if (bwd_trie == null) bwd_trie = Btrie_bwd_mgr.c__(word.case_match);
-						bwd_trie.Add(synonym.text, synonym);
+						bwd_trie.Add(synonym.text_wo_arg1, synonym);
 						break;
 					// ignore if mid / mix
 					case Xomw_MagicWordSynonym.Arg1__mid:
 					case Xomw_MagicWordSynonym.Arg1__mix:
 						Gfo_usr_dlg_.Instance.Warn_many("", "", "MagicWordArray: unsupported arg_1_tid: tid=~{0}", synonym.arg1_tid);
 						continue;
-					case Xomw_MagicWordSynonym.Arg1__nil:
-						break;
 				}
 			}
 		}
@@ -253,7 +252,7 @@ public class Xomw_MagicWordArray {
 
 		// check bwd; EX: "$1px"
 		if (bwd_trie != null) {
-			Object o = bwd_trie.Match_at(trv, src, src_end, -1);
+			Object o = bwd_trie.Match_at(trv, src, src_end - 1, -1);
 			if (o != null) {
 				return ((Xomw_MagicWordSynonym)o).magic_name;
 			}
