@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
 import gplx.xowa.mws.filerepo.file.*;
-public class Xomw_MediaHandler {
+import gplx.xowa.mws.parsers.lnkis.*;
+public abstract class Xomw_MediaHandler {
 	public byte[] Key() {return key;} private byte[] key;
 	public Xomw_MediaHandler(byte[] key) {
 		this.key = key;
@@ -42,23 +43,23 @@ public class Xomw_MediaHandler {
 //			return MediaWikiServices::getInstance()
 //				->getMediaHandlerFactory()->getHandler($type);
 //		}
-//
-//		/**
-//		* Get an associative array mapping magic word IDs to parameter names.
-//		* Will be used by the parser to identify parameters.
-//		*/
-//		abstract public function getParamMap();
-//
-//		/**
-//		* Validate a thumbnail parameter at parse time.
-//		* Return true to accept the parameter, and false to reject it.
-//		* If you return false, the parser will do something quiet and forgiving.
-//		*
-//		* @param String $name
-//		* @param mixed $value
-//		*/
-//		abstract public function validateParam($name, $value);
-//
+
+	/**
+	* Get an associative array mapping magic word IDs to parameter names.
+	* Will be used by the parser to identify parameters.
+	*/
+	public abstract Xomw_param_map getParamMap();
+
+	/**
+	* Validate a thumbnail parameter at parse time.
+	* Return true to accept the parameter, and false to reject it.
+	* If you return false, the parser will do something quiet and forgiving.
+	*
+	* @param String $name
+	* @param mixed $value
+	*/
+	public abstract boolean validateParam(int name_uid, byte[] val_bry, int val_int);
+
 //		/**
 //		* Merge a parameter array into a String appropriate for inclusion in filenames
 //		*

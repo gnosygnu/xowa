@@ -239,14 +239,31 @@ public class Xomw_MagicWordArray {
 	*
 	* @return array
 	*/
-	public byte[] matchVariableStartToEnd(byte[] src) {
+	public void matchVariableStartToEnd(byte[][] rv, byte[] src) {
 		int src_end = src.length;
+		if (src_end == 0) {
+			rv[0] = rv[1] = null;
+			return;
+		}
+
+		byte[] name = null;
+		int val_bgn = -1, val_end = -1;
 
 		// check fwd; EX: "thumb=$1"
 		if (fwd_trie != null) {
 			Object o = fwd_trie.Match_at(trv, src, 0, src_end);
 			if (o != null) {
-				return ((Xomw_MagicWordSynonym)o).magic_name;
+				Xomw_MagicWordSynonym syn = ((Xomw_MagicWordSynonym)o);
+				name = syn.magic_name;
+				val_bgn = trv.Pos();
+				val_end = src_end;
+
+				// if "nil", then must be full match; EX: "thumbx" does not match "thumb"
+				if (syn.arg1_tid == Xomw_MagicWordSynonym.Arg1__nil
+					&& syn.text_wo_arg1.length != src_end) {
+					rv[0] = rv[1] = null;
+					return;
+				}
 			}
 		}
 
@@ -254,20 +271,15 @@ public class Xomw_MagicWordArray {
 		if (bwd_trie != null) {
 			Object o = bwd_trie.Match_at(trv, src, src_end - 1, -1);
 			if (o != null) {
-				return ((Xomw_MagicWordSynonym)o).magic_name;
+				Xomw_MagicWordSynonym syn = ((Xomw_MagicWordSynonym)o);
+				name = syn.magic_name;
+				val_bgn = 0;
+				val_end = src_end - syn.text_wo_arg1.length;
 			}
 		}
-		return null;
-//			regexes = this->getVariableStartToEndRegex();
-//			foreach (regexes as regex) {
-//				if (regex !== '') {
-//					m = [];
-//					if (preg_match(regex, text, m)) {
-//						return this->parseMatch(m);
-//					}
-//				}
-//			}
-//			return [ false, false ];
+
+		rv[0] = name;
+		rv[1] = val_end - val_bgn == 0 ? Bry_.Empty : Bry_.Mid(src, val_bgn, val_end);
 	}
 
 //		/**

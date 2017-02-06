@@ -15,24 +15,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.mws.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
-public class Xomw_prm_itm {
-	public int type = 0;
-	public int name_type = 1;
-	public byte[] name = null;
-	public byte[] val = null;
-
-	public static final int
-	  Type__handler           = 0
-	;
-	public static final int 
-	  Name__width             = 0
-	, Name__manual_thumb      = 0
-	, Name__alt               = 1
-	, Name__class             = 2
-	, Name__link              = 3
-	, Name__frameless         = 4
-	, Name__framed            = 5
-	, Name__thumbnail         = 6
-	;
+package gplx.xowa.mws.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
+public class Xomw_image_params {
+	public Xomw_param_map paramMap = null;
+	public Xomw_MagicWordArray mwArray = null;
 }

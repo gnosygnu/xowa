@@ -34,10 +34,10 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //
 //		/** @var String MEDIATYPE_xxx (bitmap, drawing, audio...) */
 //		protected media_type;
-//
-//		/** @var String MIME type, determined by MimeMagic::guessMimeType */
-//		protected mime;
-//
+
+	/** @var String MIME type, determined by MimeMagic::guessMimeType */
+	private byte[] mime;
+
 //		/** @var int Size in bytes (loadFromXxx) */
 //		protected size;
 //
@@ -132,9 +132,9 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return LocalFile
 //		*/
 //		static function newFromRow( row, repo ) {
-//			title = Title::makeTitle( NS_FILE, row->img_name );
+//			title = Title::makeTitle( NS_FILE, row.img_name );
 //			file = new self( title, repo );
-//			file->loadFromRow( row );
+//			file.loadFromRow( row );
 //
 //			return file;
 //		}
@@ -149,14 +149,14 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return boolean|LocalFile
 //		*/
 //		static function newFromKey( sha1, repo, timestamp = false ) {
-//			dbr = repo->getReplicaDB();
+//			dbr = repo.getReplicaDB();
 //
 //			conds = [ 'img_sha1' => sha1 ];
 //			if ( timestamp ) {
-//				conds['img_timestamp'] = dbr->timestamp( timestamp );
+//				conds['img_timestamp'] = dbr.timestamp( timestamp );
 //			}
 //
-//			row = dbr->selectRow( 'image', self::selectFields(), conds, __METHOD__ );
+//			row = dbr.selectRow( 'image', self::selectFields(), conds, __METHOD__ );
 //			if ( row ) {
 //				return self::newFromRow( row, repo );
 //			} else {
@@ -187,9 +187,10 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			];
 //		}
 
-	public Xomw_LocalFile(byte[] title, Xomw_FileRepo repo, int w, int h) {super(title, repo);
+	public Xomw_LocalFile(byte[] title, Xomw_FileRepo repo, int w, int h, byte[] mime) {super(title, repo);
 		this.width = w;
 		this.height = h;
+		this.mime = mime;
 	}
 //		/**
 //		* Constructor.
@@ -200,14 +201,14 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		function __construct( title, repo ) {
 //			parent::__construct( title, repo );
 //
-//			this->metadata = '';
-//			this->historyLine = 0;
-//			this->historyRes = null;
-//			this->dataLoaded = false;
-//			this->extraDataLoaded = false;
+//			this.metadata = '';
+//			this.historyLine = 0;
+//			this.historyRes = null;
+//			this.dataLoaded = false;
+//			this.extraDataLoaded = false;
 //
-//			this->assertRepoDefined();
-//			this->assertTitleDefined();
+//			this.assertRepoDefined();
+//			this.assertTitleDefined();
 //		}
 //
 //		/**
@@ -216,43 +217,43 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return String|boolean
 //		*/
 //		function getCacheKey() {
-//			return this->repo->getSharedCacheKey( 'file', sha1( this->getName() ) );
+//			return this.repo.getSharedCacheKey( 'file', sha1( this.getName() ) );
 //		}
 //
 //		/**
 //		* Try to load file metadata from memcached, falling back to the database
 //		*/
 //		private function loadFromCache() {
-//			this->dataLoaded = false;
-//			this->extraDataLoaded = false;
+//			this.dataLoaded = false;
+//			this.extraDataLoaded = false;
 //
-//			key = this->getCacheKey();
+//			key = this.getCacheKey();
 //			if ( !key ) {
-//				this->loadFromDB( self::READ_NORMAL );
+//				this.loadFromDB( self::READ_NORMAL );
 //
 //				return;
 //			}
 //
 //			cache = ObjectCache::getMainWANInstance();
-//			cachedValues = cache->getWithSetCallback(
+//			cachedValues = cache.getWithSetCallback(
 //				key,
 //				cache::TTL_WEEK,
 //				function ( oldValue, &ttl, array &setOpts ) use ( cache ) {
-//					setOpts += Database::getCacheSetOptions( this->repo->getReplicaDB() );
+//					setOpts += Database::getCacheSetOptions( this.repo.getReplicaDB() );
 //
-//					this->loadFromDB( self::READ_NORMAL );
+//					this.loadFromDB( self::READ_NORMAL );
 //
-//					fields = this->getCacheFields( '' );
-//					cacheVal['fileExists'] = this->fileExists;
-//					if ( this->fileExists ) {
+//					fields = this.getCacheFields( '' );
+//					cacheVal['fileExists'] = this.fileExists;
+//					if ( this.fileExists ) {
 //						foreach ( fields as field ) {
-//							cacheVal[field] = this->field;
+//							cacheVal[field] = this.field;
 //						}
 //					}
 //					// Strip off excessive entries from the subset of fields that can become large.
 //					// If the cache value gets to large it will not fit in memcached and nothing will
 //					// get cached at all, causing master queries for any file access.
-//					foreach ( this->getLazyCacheFields( '' ) as field ) {
+//					foreach ( this.getLazyCacheFields( '' ) as field ) {
 //						if ( isset( cacheVal[field] )
 //							&& strlen( cacheVal[field] ) > 100 * 1024
 //						) {
@@ -260,8 +261,8 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //						}
 //					}
 //
-//					if ( this->fileExists ) {
-//						ttl = cache->adaptiveTTL( wfTimestamp( TS_UNIX, this->timestamp ), ttl );
+//					if ( this.fileExists ) {
+//						ttl = cache.adaptiveTTL( wfTimestamp( TS_UNIX, this.timestamp ), ttl );
 //					} else {
 //						ttl = cache::TTL_DAY;
 //					}
@@ -271,15 +272,15 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //				[ 'version' => self::VERSION ]
 //			);
 //
-//			this->fileExists = cachedValues['fileExists'];
-//			if ( this->fileExists ) {
-//				this->setProps( cachedValues );
+//			this.fileExists = cachedValues['fileExists'];
+//			if ( this.fileExists ) {
+//				this.setProps( cachedValues );
 //			}
 //
-//			this->dataLoaded = true;
-//			this->extraDataLoaded = true;
-//			foreach ( this->getLazyCacheFields( '' ) as field ) {
-//				this->extraDataLoaded = this->extraDataLoaded && isset( cachedValues[field] );
+//			this.dataLoaded = true;
+//			this.extraDataLoaded = true;
+//			foreach ( this.getLazyCacheFields( '' ) as field ) {
+//				this.extraDataLoaded = this.extraDataLoaded && isset( cachedValues[field] );
 //			}
 //		}
 //
@@ -287,14 +288,14 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* Purge the file Object/metadata cache
 //		*/
 //		public function invalidateCache() {
-//			key = this->getCacheKey();
+//			key = this.getCacheKey();
 //			if ( !key ) {
 //				return;
 //			}
 //
-//			this->repo->getMasterDB()->onTransactionPreCommitOrIdle(
+//			this.repo.getMasterDB().onTransactionPreCommitOrIdle(
 //				function () use ( key ) {
-//					ObjectCache::getMainWANInstance()->delete( key );
+//					ObjectCache::getMainWANInstance().delete( key );
 //				},
 //				__METHOD__
 //			);
@@ -304,8 +305,8 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* Load metadata from the file itself
 //		*/
 //		function loadFromFile() {
-//			props = this->repo->getFileProps( this->getVirtualUrl() );
-//			this->setProps( props );
+//			props = this.repo.getFileProps( this.getVirtualUrl() );
+//			this.setProps( props );
 //		}
 //
 //		/**
@@ -364,20 +365,20 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			fname = get_class( this ) . '::' . __FUNCTION__;
 //
 //			# Unconditionally set loaded=true, we don't want the accessors constantly rechecking
-//			this->dataLoaded = true;
-//			this->extraDataLoaded = true;
+//			this.dataLoaded = true;
+//			this.extraDataLoaded = true;
 //
 //			dbr = ( flags & self::READ_LATEST )
-//				? this->repo->getMasterDB()
-//				: this->repo->getReplicaDB();
+//				? this.repo.getMasterDB()
+//				: this.repo.getReplicaDB();
 //
-//			row = dbr->selectRow( 'image', this->getCacheFields( 'img_' ),
-//				[ 'img_name' => this->getName() ], fname );
+//			row = dbr.selectRow( 'image', this.getCacheFields( 'img_' ),
+//				[ 'img_name' => this.getName() ], fname );
 //
 //			if ( row ) {
-//				this->loadFromRow( row );
+//				this.loadFromRow( row );
 //			} else {
-//				this->fileExists = false;
+//				this.fileExists = false;
 //			}
 //		}
 //
@@ -389,19 +390,19 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			fname = get_class( this ) . '::' . __FUNCTION__;
 //
 //			# Unconditionally set loaded=true, we don't want the accessors constantly rechecking
-//			this->extraDataLoaded = true;
+//			this.extraDataLoaded = true;
 //
-//			fieldMap = this->loadFieldsWithTimestamp( this->repo->getReplicaDB(), fname );
+//			fieldMap = this.loadFieldsWithTimestamp( this.repo.getReplicaDB(), fname );
 //			if ( !fieldMap ) {
-//				fieldMap = this->loadFieldsWithTimestamp( this->repo->getMasterDB(), fname );
+//				fieldMap = this.loadFieldsWithTimestamp( this.repo.getMasterDB(), fname );
 //			}
 //
 //			if ( fieldMap ) {
 //				foreach ( fieldMap as name => value ) {
-//					this->name = value;
+//					this.name = value;
 //				}
 //			} else {
-//				throw new MWException( "Could not find data for image '{this->getName()}'." );
+//				throw new MWException( "Could not find data for image '{this.getName()}'." );
 //			}
 //		}
 //
@@ -413,20 +414,20 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		private function loadFieldsWithTimestamp( dbr, fname ) {
 //			fieldMap = false;
 //
-//			row = dbr->selectRow( 'image', this->getLazyCacheFields( 'img_' ), [
-//					'img_name' => this->getName(),
-//					'img_timestamp' => dbr->timestamp( this->getTimestamp() )
+//			row = dbr.selectRow( 'image', this.getLazyCacheFields( 'img_' ), [
+//					'img_name' => this.getName(),
+//					'img_timestamp' => dbr.timestamp( this.getTimestamp() )
 //				], fname );
 //			if ( row ) {
-//				fieldMap = this->unprefixRow( row, 'img_' );
+//				fieldMap = this.unprefixRow( row, 'img_' );
 //			} else {
 //				# File may have been uploaded over in the meantime; check the old versions
-//				row = dbr->selectRow( 'oldimage', this->getLazyCacheFields( 'oi_' ), [
-//						'oi_name' => this->getName(),
-//						'oi_timestamp' => dbr->timestamp( this->getTimestamp() )
+//				row = dbr.selectRow( 'oldimage', this.getLazyCacheFields( 'oi_' ), [
+//						'oi_name' => this.getName(),
+//						'oi_timestamp' => dbr.timestamp( this.getTimestamp() )
 //					], fname );
 //				if ( row ) {
-//					fieldMap = this->unprefixRow( row, 'oi_' );
+//					fieldMap = this.unprefixRow( row, 'oi_' );
 //				}
 //			}
 //
@@ -465,11 +466,11 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return array
 //		*/
 //		function decodeRow( row, prefix = 'img_' ) {
-//			decoded = this->unprefixRow( row, prefix );
+//			decoded = this.unprefixRow( row, prefix );
 //
 //			decoded['timestamp'] = wfTimestamp( TS_MW, decoded['timestamp'] );
 //
-//			decoded['metadata'] = this->repo->getReplicaDB()->decodeBlob( decoded['metadata'] );
+//			decoded['metadata'] = this.repo.getReplicaDB().decodeBlob( decoded['metadata'] );
 //
 //			if ( empty( decoded['major_mime'] ) ) {
 //				decoded['mime'] = 'unknown/unknown';
@@ -501,17 +502,17 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @param String prefix
 //		*/
 //		function loadFromRow( row, prefix = 'img_' ) {
-//			this->dataLoaded = true;
-//			this->extraDataLoaded = true;
+//			this.dataLoaded = true;
+//			this.extraDataLoaded = true;
 //
-//			array = this->decodeRow( row, prefix );
+//			array = this.decodeRow( row, prefix );
 //
 //			foreach ( array as name => value ) {
-//				this->name = value;
+//				this.name = value;
 //			}
 //
-//			this->fileExists = true;
-//			this->maybeUpgradeRow();
+//			this.fileExists = true;
+//			this.maybeUpgradeRow();
 //		}
 //
 //		/**
@@ -519,17 +520,17 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @param int flags
 //		*/
 //		function load( flags = 0 ) {
-//			if ( !this->dataLoaded ) {
+//			if ( !this.dataLoaded ) {
 //				if ( flags & self::READ_LATEST ) {
-//					this->loadFromDB( flags );
+//					this.loadFromDB( flags );
 //				} else {
-//					this->loadFromCache();
+//					this.loadFromCache();
 //				}
 //			}
 //
-//			if ( ( flags & self::LOAD_ALL ) && !this->extraDataLoaded ) {
+//			if ( ( flags & self::LOAD_ALL ) && !this.extraDataLoaded ) {
 //				// @note: loads on name/timestamp to reduce race condition problems
-//				this->loadExtraFromDB();
+//				this.loadExtraFromDB();
 //			}
 //		}
 //
@@ -539,17 +540,17 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		function maybeUpgradeRow() {
 //			global wgUpdateCompatibleMetadata;
 //
-//			if ( wfReadOnly() || this->upgrading ) {
+//			if ( wfReadOnly() || this.upgrading ) {
 //				return;
 //			}
 //
 //			upgrade = false;
-//			if ( is_null( this->media_type ) || this->mime == 'image/svg' ) {
+//			if ( is_null( this.media_type ) || this.mime == 'image/svg' ) {
 //				upgrade = true;
 //			} else {
-//				handler = this->getHandler();
+//				handler = this.getHandler();
 //				if ( handler ) {
-//					validity = handler->isMetadataValid( this, this->getMetadata() );
+//					validity = handler.isMetadataValid( this, this.getMetadata() );
 //					if ( validity === MediaHandler::METADATA_BAD ) {
 //						upgrade = true;
 //					} elseif ( validity === MediaHandler::METADATA_COMPATIBLE ) {
@@ -559,12 +560,12 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			}
 //
 //			if ( upgrade ) {
-//				this->upgrading = true;
+//				this.upgrading = true;
 //				// Defer updates unless in auto-commit CLI mode
 //				DeferredUpdates::addCallableUpdate( function() {
-//					this->upgrading = false; // avoid duplicate updates
+//					this.upgrading = false; // avoid duplicate updates
 //					try {
-//						this->upgradeRow();
+//						this.upgradeRow();
 //					} catch ( LocalFileLockError e ) {
 //						// let the other process handle it (or do it next time)
 //					}
@@ -576,55 +577,55 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return boolean Whether upgradeRow() ran for this Object
 //		*/
 //		function getUpgraded() {
-//			return this->upgraded;
+//			return this.upgraded;
 //		}
 //
 //		/**
 //		* Fix assorted version-related problems with the image row by reloading it from the file
 //		*/
 //		function upgradeRow() {
-//			this->synchronized(); // begin
+//			this.synchronized(); // begin
 //
-//			this->loadFromFile();
+//			this.loadFromFile();
 //
 //			# Don't destroy file info of missing files
-//			if ( !this->fileExists ) {
-//				this->unlock();
+//			if ( !this.fileExists ) {
+//				this.unlock();
 //				wfDebug( __METHOD__ . ": file does not exist, aborting\n" );
 //
 //				return;
 //			}
 //
-//			dbw = this->repo->getMasterDB();
-//			list( major, minor ) = self::splitMime( this->mime );
+//			dbw = this.repo.getMasterDB();
+//			list( major, minor ) = self::splitMime( this.mime );
 //
 //			if ( wfReadOnly() ) {
-//				this->unlock();
+//				this.unlock();
 //
 //				return;
 //			}
-//			wfDebug( __METHOD__ . ': upgrading ' . this->getName() . " to the current schema\n" );
+//			wfDebug( __METHOD__ . ': upgrading ' . this.getName() . " to the current schema\n" );
 //
-//			dbw->update( 'image',
+//			dbw.update( 'image',
 //				[
-//					'img_size' => this->size, // sanity
-//					'img_width' => this->width,
-//					'img_height' => this->height,
-//					'img_bits' => this->bits,
-//					'img_media_type' => this->media_type,
+//					'img_size' => this.size, // sanity
+//					'img_width' => this.width,
+//					'img_height' => this.height,
+//					'img_bits' => this.bits,
+//					'img_media_type' => this.media_type,
 //					'img_major_mime' => major,
 //					'img_minor_mime' => minor,
-//					'img_metadata' => dbw->encodeBlob( this->metadata ),
-//					'img_sha1' => this->sha1,
+//					'img_metadata' => dbw.encodeBlob( this.metadata ),
+//					'img_sha1' => this.sha1,
 //				],
-//				[ 'img_name' => this->getName() ],
+//				[ 'img_name' => this.getName() ],
 //				__METHOD__
 //			);
 //
-//			this->invalidateCache();
+//			this.invalidateCache();
 //
-//			this->unlock(); // done
-//			this->upgraded = true; // avoid rework/retries
+//			this.unlock(); // done
+//			this.upgraded = true; // avoid rework/retries
 //		}
 //
 //		/**
@@ -633,27 +634,27 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* All fields *must* be set in info except for getLazyCacheFields().
 //		*
 //		* If 'mime' is given, it will be split into major_mime/minor_mime.
-//		* If major_mime/minor_mime are given, this->mime will also be set.
+//		* If major_mime/minor_mime are given, this.mime will also be set.
 //		*
 //		* @param array info
 //		*/
 //		function setProps( info ) {
-//			this->dataLoaded = true;
-//			fields = this->getCacheFields( '' );
+//			this.dataLoaded = true;
+//			fields = this.getCacheFields( '' );
 //			fields[] = 'fileExists';
 //
 //			foreach ( fields as field ) {
 //				if ( isset( info[field] ) ) {
-//					this->field = info[field];
+//					this.field = info[field];
 //				}
 //			}
 //
 //			// Fix up mime fields
 //			if ( isset( info['major_mime'] ) ) {
-//				this->mime = "{info['major_mime']}/{info['minor_mime']}";
+//				this.mime = "{info['major_mime']}/{info['minor_mime']}";
 //			} elseif ( isset( info['mime'] ) ) {
-//				this->mime = info['mime'];
-//				list( this->major_mime, this->minor_mime ) = self::splitMime( this->mime );
+//				this.mime = info['mime'];
+//				list( this.major_mime, this.minor_mime ) = self::splitMime( this.mime );
 //			}
 //		}
 //
@@ -669,29 +670,29 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return boolean
 //		*/
 //		function isMissing() {
-//			if ( this->missing === null ) {
-//				list( fileExists ) = this->repo->fileExists( this->getVirtualUrl() );
-//				this->missing = !fileExists;
+//			if ( this.missing === null ) {
+//				list( fileExists ) = this.repo.fileExists( this.getVirtualUrl() );
+//				this.missing = !fileExists;
 //			}
 //
-//			return this->missing;
+//			return this.missing;
 //		}
+
+	/**
+	* Return the width of the image
+	*
+	* @param int page
+	* @return int
+	*/
+	@Override public int getWidth(int page) {
+//			this.load();
 //
-//		/**
-//		* Return the width of the image
-//		*
-//		* @param int page
-//		* @return int
-//		*/
-//		public function getWidth( page = 1 ) {
-//			this->load();
-//
-//			if ( this->isMultipage() ) {
-//				handler = this->getHandler();
+//			if ( this.isMultipage() ) {
+//				handler = this.getHandler();
 //				if ( !handler ) {
 //					return 0;
 //				}
-//				dim = handler->getPageDimensions( this, page );
+//				dim = handler.getPageDimensions( this, page );
 //				if ( dim ) {
 //					return dim['width'];
 //				} else {
@@ -700,10 +701,10 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //					return 0;
 //				}
 //			} else {
-//				return this->width;
+			return this.width;
 //			}
-//		}
-//
+	}
+
 //		/**
 //		* Return the height of the image
 //		*
@@ -711,14 +712,14 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return int
 //		*/
 //		public function getHeight( page = 1 ) {
-//			this->load();
+//			this.load();
 //
-//			if ( this->isMultipage() ) {
-//				handler = this->getHandler();
+//			if ( this.isMultipage() ) {
+//				handler = this.getHandler();
 //				if ( !handler ) {
 //					return 0;
 //				}
-//				dim = handler->getPageDimensions( this, page );
+//				dim = handler.getPageDimensions( this, page );
 //				if ( dim ) {
 //					return dim['height'];
 //				} else {
@@ -727,7 +728,7 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //					return 0;
 //				}
 //			} else {
-//				return this->height;
+//				return this.height;
 //			}
 //		}
 //
@@ -738,12 +739,12 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return int|String
 //		*/
 //		function getUser( type = 'text' ) {
-//			this->load();
+//			this.load();
 //
 //			if ( type == 'text' ) {
-//				return this->user_text;
+//				return this.user_text;
 //			} else { // id
-//				return (int)this->user;
+//				return (int)this.user;
 //			}
 //		}
 //
@@ -755,10 +756,10 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @since 1.27
 //		*/
 //		public function getDescriptionShortUrl() {
-//			pageId = this->title->getArticleID();
+//			pageId = this.title.getArticleID();
 //
 //			if ( pageId !== null ) {
-//				url = this->repo->makeUrl( [ 'curid' => pageId ] );
+//				url = this.repo.makeUrl( [ 'curid' => pageId ] );
 //				if ( url !== false ) {
 //					return url;
 //				}
@@ -771,17 +772,17 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return String
 //		*/
 //		function getMetadata() {
-//			this->load( self::LOAD_ALL ); // large metadata is loaded in another step
-//			return this->metadata;
+//			this.load( self::LOAD_ALL ); // large metadata is loaded in another step
+//			return this.metadata;
 //		}
 //
 //		/**
 //		* @return int
 //		*/
 //		function getBitDepth() {
-//			this->load();
+//			this.load();
 //
-//			return (int)this->bits;
+//			return (int)this.bits;
 //		}
 //
 //		/**
@@ -789,30 +790,30 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return int
 //		*/
 //		public function getSize() {
-//			this->load();
+//			this.load();
 //
-//			return this->size;
+//			return this.size;
 //		}
-//
-//		/**
-//		* Returns the MIME type of the file.
-//		* @return String
-//		*/
-//		function getMimeType() {
-//			this->load();
-//
-//			return this->mime;
-//		}
-//
+
+	/**
+	* Returns the MIME type of the file.
+	* @return String
+	*/
+	@Override public byte[] getMimeType() {
+		// this.load();
+
+		return this.mime;
+	}
+
 //		/**
 //		* Returns the type of the media in the file.
 //		* Use the value returned by this function with the MEDIATYPE_xxx constants.
 //		* @return String
 //		*/
 //		function getMediaType() {
-//			this->load();
+//			this.load();
 //
-//			return this->media_type;
+//			return this.media_type;
 //		}
 //
 //		/** canRender inherited */
@@ -826,9 +827,9 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return boolean Whether file exist on disk.
 //		*/
 //		public function exists() {
-//			this->load();
+//			this.load();
 //
-//			return this->fileExists;
+//			return this.fileExists;
 //		}
 //
 //		/** getTransformScript inherited */
@@ -848,15 +849,15 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		*/
 //		function getThumbnails( archiveName = false ) {
 //			if ( archiveName ) {
-//				dir = this->getArchiveThumbPath( archiveName );
+//				dir = this.getArchiveThumbPath( archiveName );
 //			} else {
-//				dir = this->getThumbPath();
+//				dir = this.getThumbPath();
 //			}
 //
-//			backend = this->repo->getBackend();
+//			backend = this.repo.getBackend();
 //			files = [ dir ];
 //			try {
-//				iterator = backend->getFileList( [ 'dir' => dir ] );
+//				iterator = backend.getFileList( [ 'dir' => dir ] );
 //				foreach ( iterator as file ) {
 //					files[] = file;
 //				}
@@ -870,7 +871,7 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* Refresh metadata in memcached, but don't touch thumbnails or CDN
 //		*/
 //		function purgeMetadataCache() {
-//			this->invalidateCache();
+//			this.invalidateCache();
 //		}
 //
 //		/**
@@ -882,14 +883,14 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		*/
 //		function purgeCache( options = [] ) {
 //			// Refresh metadata cache
-//			this->purgeMetadataCache();
+//			this.purgeMetadataCache();
 //
 //			// Delete thumbnails
-//			this->purgeThumbnails( options );
+//			this.purgeThumbnails( options );
 //
 //			// Purge CDN cache for this file
 //			DeferredUpdates::addUpdate(
-//				new CdnCacheUpdate( [ this->getUrl() ] ),
+//				new CdnCacheUpdate( [ this.getUrl() ] ),
 //				DeferredUpdates::PRESEND
 //			);
 //		}
@@ -900,19 +901,19 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		*/
 //		function purgeOldThumbnails( archiveName ) {
 //			// Get a list of old thumbnails and URLs
-//			files = this->getThumbnails( archiveName );
+//			files = this.getThumbnails( archiveName );
 //
 //			// Purge any custom thumbnail caches
 //			Hooks::run( 'LocalFilePurgeThumbnails', [ this, archiveName ] );
 //
 //			// Delete thumbnails
 //			dir = array_shift( files );
-//			this->purgeThumbList( dir, files );
+//			this.purgeThumbList( dir, files );
 //
 //			// Purge the CDN
 //			urls = [];
 //			foreach ( files as file ) {
-//				urls[] = this->getArchiveThumbUrl( archiveName, file );
+//				urls[] = this.getArchiveThumbUrl( archiveName, file );
 //			}
 //			DeferredUpdates::addUpdate( new CdnCacheUpdate( urls ), DeferredUpdates::PRESEND );
 //		}
@@ -922,19 +923,19 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @param array options
 //		*/
 //		public function purgeThumbnails( options = [] ) {
-//			files = this->getThumbnails();
+//			files = this.getThumbnails();
 //			// Always purge all files from CDN regardless of handler filters
 //			urls = [];
 //			foreach ( files as file ) {
-//				urls[] = this->getThumbUrl( file );
+//				urls[] = this.getThumbUrl( file );
 //			}
 //			array_shift( urls ); // don't purge directory
 //
 //			// Give media handler a chance to filter the file purge list
 //			if ( !empty( options['forThumbRefresh'] ) ) {
-//				handler = this->getHandler();
+//				handler = this.getHandler();
 //				if ( handler ) {
-//					handler->filterThumbnailPurgeList( files, options );
+//					handler.filterThumbnailPurgeList( files, options );
 //				}
 //			}
 //
@@ -943,7 +944,7 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //
 //			// Delete thumbnails
 //			dir = array_shift( files );
-//			this->purgeThumbList( dir, files );
+//			this.purgeThumbList( dir, files );
 //
 //			// Purge the CDN
 //			DeferredUpdates::addUpdate( new CdnCacheUpdate( urls ), DeferredUpdates::PRESEND );
@@ -963,16 +964,16 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			rsort( sizes );
 //
 //			foreach ( sizes as size ) {
-//				if ( this->isVectorized() || this->getWidth() > size ) {
+//				if ( this.isVectorized() || this.getWidth() > size ) {
 //					jobs[] = new ThumbnailRenderJob(
-//						this->getTitle(),
+//						this.getTitle(),
 //						[ 'transformParams' => [ 'width' => size ] ]
 //					);
 //				}
 //			}
 //
 //			if ( jobs ) {
-//				JobQueueGroup::singleton()->lazyPush( jobs );
+//				JobQueueGroup::singleton().lazyPush( jobs );
 //			}
 //		}
 //
@@ -992,7 +993,7 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			foreach ( files as file ) {
 //				# Check that the super file name is part of the thumb name
 //				# This is a basic sanity check to avoid erasing unrelated directories
-//				if ( strpos( file, this->getName() ) !== false
+//				if ( strpos( file, this.getName() ) !== false
 //					|| strpos( file, "-thumbnail" ) !== false // "short" thumb name
 //				) {
 //					purgeList[] = "{dir}/{file}";
@@ -1000,9 +1001,9 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			}
 //
 //			# Delete the thumbnails
-//			this->repo->quickPurgeBatch( purgeList );
+//			this.repo.quickPurgeBatch( purgeList );
 //			# Clear out the thumbnail directory if empty
-//			this->repo->quickCleanDir( dir );
+//			this.repo.quickCleanDir( dir );
 //		}
 //
 //		/** purgeDescription inherited */
@@ -1016,19 +1017,19 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return OldLocalFile[]
 //		*/
 //		function getHistory( limit = null, start = null, end = null, inc = true ) {
-//			dbr = this->repo->getReplicaDB();
+//			dbr = this.repo.getReplicaDB();
 //			tables = [ 'oldimage' ];
 //			fields = OldLocalFile::selectFields();
 //			conds = opts = join_conds = [];
 //			eq = inc ? '=' : '';
-//			conds[] = "oi_name = " . dbr->addQuotes( this->title->getDBkey() );
+//			conds[] = "oi_name = " . dbr.addQuotes( this.title.getDBkey() );
 //
 //			if ( start ) {
-//				conds[] = "oi_timestamp <eq " . dbr->addQuotes( dbr->timestamp( start ) );
+//				conds[] = "oi_timestamp <eq " . dbr.addQuotes( dbr.timestamp( start ) );
 //			}
 //
 //			if ( end ) {
-//				conds[] = "oi_timestamp >eq " . dbr->addQuotes( dbr->timestamp( end ) );
+//				conds[] = "oi_timestamp >eq " . dbr.addQuotes( dbr.timestamp( end ) );
 //			}
 //
 //			if ( limit ) {
@@ -1043,11 +1044,11 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			Hooks::run( 'LocalFile::getHistory', [ &this, &tables, &fields,
 //				&conds, &opts, &join_conds ] );
 //
-//			res = dbr->select( tables, fields, conds, __METHOD__, opts, join_conds );
+//			res = dbr.select( tables, fields, conds, __METHOD__, opts, join_conds );
 //			r = [];
 //
 //			foreach ( res as row ) {
-//				r[] = this->repo->newFileFromRow( row );
+//				r[] = this.repo.newFileFromRow( row );
 //			}
 //
 //			if ( order == 'ASC' ) {
@@ -1060,7 +1061,7 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		/**
 //		* Returns the history of this file, line by line.
 //		* starts with current version, then old versions.
-//		* uses this->historyLine to check which line to return:
+//		* uses this.historyLine to check which line to return:
 //		*  0      return line for current version
 //		*  1      query for old versions, return first one
 //		*  2, ... return next old version from above query
@@ -1070,45 +1071,45 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			# Polymorphic function name to distinguish foreign and local fetches
 //			fname = get_class( this ) . '::' . __FUNCTION__;
 //
-//			dbr = this->repo->getReplicaDB();
+//			dbr = this.repo.getReplicaDB();
 //
-//			if ( this->historyLine == 0 ) { // called for the first time, return line from cur
-//				this->historyRes = dbr->select( 'image',
+//			if ( this.historyLine == 0 ) { // called for the first time, return line from cur
+//				this.historyRes = dbr.select( 'image',
 //					[
 //						'*',
 //						"'' AS oi_archive_name",
 //						'0 as oi_deleted',
 //						'img_sha1'
 //					],
-//					[ 'img_name' => this->title->getDBkey() ],
+//					[ 'img_name' => this.title.getDBkey() ],
 //					fname
 //				);
 //
-//				if ( 0 == dbr->numRows( this->historyRes ) ) {
-//					this->historyRes = null;
+//				if ( 0 == dbr.numRows( this.historyRes ) ) {
+//					this.historyRes = null;
 //
 //					return false;
 //				}
-//			} elseif ( this->historyLine == 1 ) {
-//				this->historyRes = dbr->select( 'oldimage', '*',
-//					[ 'oi_name' => this->title->getDBkey() ],
+//			} elseif ( this.historyLine == 1 ) {
+//				this.historyRes = dbr.select( 'oldimage', '*',
+//					[ 'oi_name' => this.title.getDBkey() ],
 //					fname,
 //					[ 'ORDER BY' => 'oi_timestamp DESC' ]
 //				);
 //			}
-//			this->historyLine++;
+//			this.historyLine++;
 //
-//			return dbr->fetchObject( this->historyRes );
+//			return dbr.fetchObject( this.historyRes );
 //		}
 //
 //		/**
 //		* Reset the history pointer to the first element of the history
 //		*/
 //		public function resetHistory() {
-//			this->historyLine = 0;
+//			this.historyLine = 0;
 //
-//			if ( !is_null( this->historyRes ) ) {
-//				this->historyRes = null;
+//			if ( !is_null( this.historyRes ) ) {
+//				this.historyRes = null;
 //			}
 //		}
 //
@@ -1147,26 +1148,26 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		) {
 //			global wgContLang;
 //
-//			if ( this->getRepo()->getReadOnlyReason() !== false ) {
-//				return this->readOnlyFatalStatus();
+//			if ( this.getRepo().getReadOnlyReason() !== false ) {
+//				return this.readOnlyFatalStatus();
 //			}
 //
-//			srcPath = ( src instanceof FSFile ) ? src->getPath() : src;
+//			srcPath = ( src instanceof FSFile ) ? src.getPath() : src;
 //			if ( !props ) {
-//				if ( this->repo->isVirtualUrl( srcPath )
+//				if ( this.repo.isVirtualUrl( srcPath )
 //					|| FileBackend::isStoragePath( srcPath )
 //				) {
-//					props = this->repo->getFileProps( srcPath );
+//					props = this.repo.getFileProps( srcPath );
 //				} else {
 //					mwProps = new MWFileProps( MimeMagic::singleton() );
-//					props = mwProps->getPropsFromPath( srcPath, true );
+//					props = mwProps.getPropsFromPath( srcPath, true );
 //				}
 //			}
 //
 //			options = [];
 //			handler = MediaHandler::getHandler( props['mime'] );
 //			if ( handler ) {
-//				options['headers'] = handler->getStreamHeaders( props['metadata'] );
+//				options['headers'] = handler.getStreamHeaders( props['metadata'] );
 //			} else {
 //				options['headers'] = [];
 //			}
@@ -1176,24 +1177,24 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //
 //			// Truncate nicely or the DB will do it for us
 //			// non-nicely (dangling multi-byte chars, non-truncated version in cache).
-//			comment = wgContLang->truncate( comment, 255 );
-//			this->synchronized(); // begin
-//			status = this->publish( src, flags, options );
+//			comment = wgContLang.truncate( comment, 255 );
+//			this.synchronized(); // begin
+//			status = this.publish( src, flags, options );
 //
-//			if ( status->successCount >= 2 ) {
+//			if ( status.successCount >= 2 ) {
 //				// There will be a copy+(one of move,copy,store).
 //				// The first succeeding does not commit us to updating the DB
 //				// since it simply copied the current version to a timestamped file name.
 //				// It is only *preferable* to avoid leaving such files orphaned.
 //				// Once the second operation goes through, then the current version was
 //				// updated and we must therefore update the DB too.
-//				oldver = status->value;
-//				if ( !this->recordUpload2( oldver, comment, pageText, props, timestamp, user, tags ) ) {
-//					status->fatal( 'filenotfound', srcPath );
+//				oldver = status.value;
+//				if ( !this.recordUpload2( oldver, comment, pageText, props, timestamp, user, tags ) ) {
+//					status.fatal( 'filenotfound', srcPath );
 //				}
 //			}
 //
-//			this->unlock(); // done
+//			this.unlock(); // done
 //
 //			return status;
 //		}
@@ -1219,12 +1220,12 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //
 //			pageText = SpecialUpload::getInitialPageText( desc, license, copyStatus, source );
 //
-//			if ( !this->recordUpload2( oldver, desc, pageText, false, timestamp, user ) ) {
+//			if ( !this.recordUpload2( oldver, desc, pageText, false, timestamp, user ) ) {
 //				return false;
 //			}
 //
 //			if ( watch ) {
-//				user->addWatch( this->getTitle() );
+//				user.addWatch( this.getTitle() );
 //			}
 //
 //			return true;
@@ -1249,65 +1250,65 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //				user = wgUser;
 //			}
 //
-//			dbw = this->repo->getMasterDB();
+//			dbw = this.repo.getMasterDB();
 //
 //			# Imports or such might force a certain timestamp; otherwise we generate
 //			# it and can fudge it slightly to keep (name,timestamp) unique on re-upload.
 //			if ( timestamp === false ) {
-//				timestamp = dbw->timestamp();
+//				timestamp = dbw.timestamp();
 //				allowTimeKludge = true;
 //			} else {
 //				allowTimeKludge = false;
 //			}
 //
-//			props = props ?: this->repo->getFileProps( this->getVirtualUrl() );
+//			props = props ?: this.repo.getFileProps( this.getVirtualUrl() );
 //			props['description'] = comment;
-//			props['user'] = user->getId();
-//			props['user_text'] = user->getName();
-//			props['timestamp'] = wfTimestamp( TS_MW, timestamp ); // DB -> TS_MW
-//			this->setProps( props );
+//			props['user'] = user.getId();
+//			props['user_text'] = user.getName();
+//			props['timestamp'] = wfTimestamp( TS_MW, timestamp ); // DB . TS_MW
+//			this.setProps( props );
 //
 //			# Fail now if the file isn't there
-//			if ( !this->fileExists ) {
-//				wfDebug( __METHOD__ . ": File " . this->getRel() . " went missing!\n" );
+//			if ( !this.fileExists ) {
+//				wfDebug( __METHOD__ . ": File " . this.getRel() . " went missing!\n" );
 //
 //				return false;
 //			}
 //
-//			dbw->startAtomic( __METHOD__ );
+//			dbw.startAtomic( __METHOD__ );
 //
 //			# Test to see if the row exists using INSERT IGNORE
 //			# This avoids race conditions by locking the row until the commit, and also
 //			# doesn't deadlock. SELECT FOR UPDATE causes a deadlock for every race condition.
-//			dbw->insert( 'image',
+//			dbw.insert( 'image',
 //				[
-//					'img_name' => this->getName(),
-//					'img_size' => this->size,
-//					'img_width' => intval( this->width ),
-//					'img_height' => intval( this->height ),
-//					'img_bits' => this->bits,
-//					'img_media_type' => this->media_type,
-//					'img_major_mime' => this->major_mime,
-//					'img_minor_mime' => this->minor_mime,
+//					'img_name' => this.getName(),
+//					'img_size' => this.size,
+//					'img_width' => intval( this.width ),
+//					'img_height' => intval( this.height ),
+//					'img_bits' => this.bits,
+//					'img_media_type' => this.media_type,
+//					'img_major_mime' => this.major_mime,
+//					'img_minor_mime' => this.minor_mime,
 //					'img_timestamp' => timestamp,
 //					'img_description' => comment,
-//					'img_user' => user->getId(),
-//					'img_user_text' => user->getName(),
-//					'img_metadata' => dbw->encodeBlob( this->metadata ),
-//					'img_sha1' => this->sha1
+//					'img_user' => user.getId(),
+//					'img_user_text' => user.getName(),
+//					'img_metadata' => dbw.encodeBlob( this.metadata ),
+//					'img_sha1' => this.sha1
 //				],
 //				__METHOD__,
 //				'IGNORE'
 //			);
 //
-//			reupload = ( dbw->affectedRows() == 0 );
+//			reupload = ( dbw.affectedRows() == 0 );
 //			if ( reupload ) {
 //				if ( allowTimeKludge ) {
 //					# Use LOCK IN SHARE MODE to ignore any transaction snapshotting
-//					ltimestamp = dbw->selectField(
+//					ltimestamp = dbw.selectField(
 //						'image',
 //						'img_timestamp',
-//						[ 'img_name' => this->getName() ],
+//						[ 'img_name' => this.getName() ],
 //						__METHOD__,
 //						[ 'LOCK IN SHARE MODE' ]
 //					);
@@ -1316,8 +1317,8 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //					# TODO: the image/oldimage tables should be like page/revision with an ID field
 //					if ( lUnixtime && wfTimestamp( TS_UNIX, timestamp ) <= lUnixtime ) {
 //						sleep( 1 ); // fast enough re-uploads would go far in the future otherwise
-//						timestamp = dbw->timestamp( lUnixtime + 1 );
-//						this->timestamp = wfTimestamp( TS_MW, timestamp ); // DB -> TS_MW
+//						timestamp = dbw.timestamp( lUnixtime + 1 );
+//						this.timestamp = wfTimestamp( TS_MW, timestamp ); // DB . TS_MW
 //					}
 //				}
 //
@@ -1327,10 +1328,10 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //				# an image that's not fixable by user operations.
 //				# Collision, this is an update of a file
 //				# Insert previous contents into oldimage
-//				dbw->insertSelect( 'oldimage', 'image',
+//				dbw.insertSelect( 'oldimage', 'image',
 //					[
 //						'oi_name' => 'img_name',
-//						'oi_archive_name' => dbw->addQuotes( oldver ),
+//						'oi_archive_name' => dbw.addQuotes( oldver ),
 //						'oi_size' => 'img_size',
 //						'oi_width' => 'img_width',
 //						'oi_height' => 'img_height',
@@ -1345,48 +1346,48 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //						'oi_minor_mime' => 'img_minor_mime',
 //						'oi_sha1' => 'img_sha1'
 //					],
-//					[ 'img_name' => this->getName() ],
+//					[ 'img_name' => this.getName() ],
 //					__METHOD__
 //				);
 //
 //				# Update the current image row
-//				dbw->update( 'image',
+//				dbw.update( 'image',
 //					[
-//						'img_size' => this->size,
-//						'img_width' => intval( this->width ),
-//						'img_height' => intval( this->height ),
-//						'img_bits' => this->bits,
-//						'img_media_type' => this->media_type,
-//						'img_major_mime' => this->major_mime,
-//						'img_minor_mime' => this->minor_mime,
+//						'img_size' => this.size,
+//						'img_width' => intval( this.width ),
+//						'img_height' => intval( this.height ),
+//						'img_bits' => this.bits,
+//						'img_media_type' => this.media_type,
+//						'img_major_mime' => this.major_mime,
+//						'img_minor_mime' => this.minor_mime,
 //						'img_timestamp' => timestamp,
 //						'img_description' => comment,
-//						'img_user' => user->getId(),
-//						'img_user_text' => user->getName(),
-//						'img_metadata' => dbw->encodeBlob( this->metadata ),
-//						'img_sha1' => this->sha1
+//						'img_user' => user.getId(),
+//						'img_user_text' => user.getName(),
+//						'img_metadata' => dbw.encodeBlob( this.metadata ),
+//						'img_sha1' => this.sha1
 //					],
-//					[ 'img_name' => this->getName() ],
+//					[ 'img_name' => this.getName() ],
 //					__METHOD__
 //				);
 //			}
 //
-//			descTitle = this->getTitle();
-//			descId = descTitle->getArticleID();
+//			descTitle = this.getTitle();
+//			descId = descTitle.getArticleID();
 //			wikiPage = new WikiFilePage( descTitle );
-//			wikiPage->setFile( this );
+//			wikiPage.setFile( this );
 //
 //			// Add the log entry...
 //			logEntry = new ManualLogEntry( 'upload', reupload ? 'overwrite' : 'upload' );
-//			logEntry->setTimestamp( this->timestamp );
-//			logEntry->setPerformer( user );
-//			logEntry->setComment( comment );
-//			logEntry->setTarget( descTitle );
+//			logEntry.setTimestamp( this.timestamp );
+//			logEntry.setPerformer( user );
+//			logEntry.setComment( comment );
+//			logEntry.setTarget( descTitle );
 //			// Allow people using the api to associate log entries with the upload.
 //			// Log has a timestamp, but sometimes different from upload timestamp.
-//			logEntry->setParameters(
+//			logEntry.setParameters(
 //				[
-//					'img_sha1' => this->sha1,
+//					'img_sha1' => this.sha1,
 //					'img_timestamp' => timestamp,
 //				]
 //			);
@@ -1396,13 +1397,13 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			// so we later modify the log entry.
 //			// For a similar reason, we avoid making an RC entry
 //			// now and wait until the page exists.
-//			logId = logEntry->insert();
+//			logId = logEntry.insert();
 //
-//			if ( descTitle->exists() ) {
+//			if ( descTitle.exists() ) {
 //				// Use own context to get the action text in content language
 //				formatter = LogFormatter::newFromEntry( logEntry );
-//				formatter->setContext( RequestContext::newExtraneousContext( descTitle ) );
-//				editSummary = formatter->getPlainActionText();
+//				formatter.setContext( RequestContext::newExtraneousContext( descTitle ) );
+//				editSummary = formatter.getPlainActionText();
 //
 //				nullRevision = Revision::newNullRevision(
 //					dbw,
@@ -1412,14 +1413,14 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //					user
 //				);
 //				if ( nullRevision ) {
-//					nullRevision->insertOn( dbw );
+//					nullRevision.insertOn( dbw );
 //					Hooks::run(
 //						'NewRevisionFromEditComplete',
-//						[ wikiPage, nullRevision, nullRevision->getParentId(), user ]
+//						[ wikiPage, nullRevision, nullRevision.getParentId(), user ]
 //					);
-//					wikiPage->updateRevisionOn( dbw, nullRevision );
+//					wikiPage.updateRevisionOn( dbw, nullRevision );
 //					// Associate null revision id
-//					logEntry->setAssociatedRevId( nullRevision->getId() );
+//					logEntry.setAssociatedRevId( nullRevision.getId() );
 //				}
 //
 //				newPageContent = null;
@@ -1430,7 +1431,7 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //
 //			# Defer purges, page creation, and link updates in case they error out.
 //			# The most important thing is that files and the DB registry stay synced.
-//			dbw->endAtomic( __METHOD__ );
+//			dbw.endAtomic( __METHOD__ );
 //
 //			# Do some cache purges after final commit so that:
 //			# a) Changes are more likely to be seen post-purge
@@ -1444,14 +1445,14 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //						logEntry, logId, descId, tags
 //					) {
 //						# Update memcache after the commit
-//						this->invalidateCache();
+//						this.invalidateCache();
 //
 //						updateLogPage = false;
 //						if ( newPageContent ) {
 //							# New file page; create the description page.
 //							# There's already a log entry, so don't make a second RC entry
 //							# CDN and file cache for the description page are purged by doEditContent.
-//							status = wikiPage->doEditContent(
+//							status = wikiPage.doEditContent(
 //								newPageContent,
 //								comment,
 //								EDIT_NEW | EDIT_SUPPRESS_RC,
@@ -1459,47 +1460,47 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //								user
 //							);
 //
-//							if ( isset( status->value['revision'] ) ) {
+//							if ( isset( status.value['revision'] ) ) {
 //								/** @var rev Revision */
-//								rev = status->value['revision'];
+//								rev = status.value['revision'];
 //								// Associate new page revision id
-//								logEntry->setAssociatedRevId( rev->getId() );
+//								logEntry.setAssociatedRevId( rev.getId() );
 //							}
 //							// This relies on the resetArticleID() call in WikiPage::insertOn(),
 //							// which is triggered on descTitle by doEditContent() above.
-//							if ( isset( status->value['revision'] ) ) {
+//							if ( isset( status.value['revision'] ) ) {
 //								/** @var rev Revision */
-//								rev = status->value['revision'];
-//								updateLogPage = rev->getPage();
+//								rev = status.value['revision'];
+//								updateLogPage = rev.getPage();
 //							}
 //						} else {
 //							# Existing file page: invalidate description page cache
-//							wikiPage->getTitle()->invalidateCache();
-//							wikiPage->getTitle()->purgeSquid();
+//							wikiPage.getTitle().invalidateCache();
+//							wikiPage.getTitle().purgeSquid();
 //							# Allow the new file version to be patrolled from the page footer
 //							Article::purgePatrolFooterCache( descId );
 //						}
 //
-//						# Update associated rev id. This should be done by logEntry->insert() earlier,
+//						# Update associated rev id. This should be done by logEntry.insert() earlier,
 //						# but setAssociatedRevId() wasn't called at that point yet...
-//						logParams = logEntry->getParameters();
-//						logParams['associated_rev_id'] = logEntry->getAssociatedRevId();
+//						logParams = logEntry.getParameters();
+//						logParams['associated_rev_id'] = logEntry.getAssociatedRevId();
 //						update = [ 'log_params' => LogEntryBase::makeParamBlob( logParams ) ];
 //						if ( updateLogPage ) {
 //							# Also log page, in case where we just created it above
 //							update['log_page'] = updateLogPage;
 //						}
-//						this->getRepo()->getMasterDB()->update(
+//						this.getRepo().getMasterDB().update(
 //							'logging',
 //							update,
 //							[ 'log_id' => logId ],
 //							__METHOD__
 //						);
-//						this->getRepo()->getMasterDB()->insert(
+//						this.getRepo().getMasterDB().insert(
 //							'log_search',
 //							[
 //								'ls_field' => 'associated_rev_id',
-//								'ls_value' => logEntry->getAssociatedRevId(),
+//								'ls_value' => logEntry.getAssociatedRevId(),
 //								'ls_log_id' => logId,
 //							],
 //							__METHOD__
@@ -1507,32 +1508,32 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //
 //						# Add change tags, if any
 //						if ( tags ) {
-//							logEntry->setTags( tags );
+//							logEntry.setTags( tags );
 //						}
 //
 //						# Uploads can be patrolled
-//						logEntry->setIsPatrollable( true );
+//						logEntry.setIsPatrollable( true );
 //
 //						# Now that the log entry is up-to-date, make an RC entry.
-//						logEntry->publish( logId );
+//						logEntry.publish( logId );
 //
 //						# Run hook for other updates (typically more cache purging)
 //						Hooks::run( 'FileUpload', [ this, reupload, !newPageContent ] );
 //
 //						if ( reupload ) {
 //							# Delete old thumbnails
-//							this->purgeThumbnails();
+//							this.purgeThumbnails();
 //							# Remove the old file from the CDN cache
 //							DeferredUpdates::addUpdate(
-//								new CdnCacheUpdate( [ this->getUrl() ] ),
+//								new CdnCacheUpdate( [ this.getUrl() ] ),
 //								DeferredUpdates::PRESEND
 //							);
 //						} else {
 //							# Update backlink pages pointing to this title if created
-//							LinksUpdate::queueRecursiveJobsForTable( this->getTitle(), 'imagelinks' );
+//							LinksUpdate::queueRecursiveJobsForTable( this.getTitle(), 'imagelinks' );
 //						}
 //
-//						this->prerenderThumbnails();
+//						this.prerenderThumbnails();
 //					}
 //				),
 //				DeferredUpdates::PRESEND
@@ -1544,7 +1545,7 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			}
 //
 //			# Invalidate cache for all pages using this file
-//			DeferredUpdates::addUpdate( new HTMLCacheUpdate( this->getTitle(), 'imagelinks' ) );
+//			DeferredUpdates::addUpdate( new HTMLCacheUpdate( this.getTitle(), 'imagelinks' ) );
 //
 //			return true;
 //		}
@@ -1565,7 +1566,7 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		*     archive name, or an empty String if it was a new file.
 //		*/
 //		function publish( src, flags = 0, array options = [] ) {
-//			return this->publishTo( src, this->getRel(), flags, options );
+//			return this.publishTo( src, this.getRel(), flags, options );
 //		}
 //
 //		/**
@@ -1584,45 +1585,45 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		*     archive name, or an empty String if it was a new file.
 //		*/
 //		function publishTo( src, dstRel, flags = 0, array options = [] ) {
-//			srcPath = ( src instanceof FSFile ) ? src->getPath() : src;
+//			srcPath = ( src instanceof FSFile ) ? src.getPath() : src;
 //
-//			repo = this->getRepo();
-//			if ( repo->getReadOnlyReason() !== false ) {
-//				return this->readOnlyFatalStatus();
+//			repo = this.getRepo();
+//			if ( repo.getReadOnlyReason() !== false ) {
+//				return this.readOnlyFatalStatus();
 //			}
 //
-//			this->synchronized(); // begin
+//			this.synchronized(); // begin
 //
-//			archiveName = wfTimestamp( TS_MW ) . '!' . this->getName();
-//			archiveRel = 'archive/' . this->getHashPath() . archiveName;
+//			archiveName = wfTimestamp( TS_MW ) . '!' . this.getName();
+//			archiveRel = 'archive/' . this.getHashPath() . archiveName;
 //
-//			if ( repo->hasSha1Storage() ) {
-//				sha1 = repo->isVirtualUrl( srcPath )
-//					? repo->getFileSha1( srcPath )
+//			if ( repo.hasSha1Storage() ) {
+//				sha1 = repo.isVirtualUrl( srcPath )
+//					? repo.getFileSha1( srcPath )
 //					: FSFile::getSha1Base36FromPath( srcPath );
 //				/** @var FileBackendDBRepoWrapper wrapperBackend */
-//				wrapperBackend = repo->getBackend();
-//				dst = wrapperBackend->getPathForSHA1( sha1 );
-//				status = repo->quickImport( src, dst );
+//				wrapperBackend = repo.getBackend();
+//				dst = wrapperBackend.getPathForSHA1( sha1 );
+//				status = repo.quickImport( src, dst );
 //				if ( flags & File::DELETE_SOURCE ) {
 //					unlink( srcPath );
 //				}
 //
-//				if ( this->exists() ) {
-//					status->value = archiveName;
+//				if ( this.exists() ) {
+//					status.value = archiveName;
 //				}
 //			} else {
 //				flags = flags & File::DELETE_SOURCE ? LocalRepo::DELETE_SOURCE : 0;
-//				status = repo->publish( srcPath, dstRel, archiveRel, flags, options );
+//				status = repo.publish( srcPath, dstRel, archiveRel, flags, options );
 //
-//				if ( status->value == 'new' ) {
-//					status->value = '';
+//				if ( status.value == 'new' ) {
+//					status.value = '';
 //				} else {
-//					status->value = archiveName;
+//					status.value = archiveName;
 //				}
 //			}
 //
-//			this->unlock(); // done
+//			this.unlock(); // done
 //
 //			return status;
 //		}
@@ -1645,46 +1646,46 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return Status
 //		*/
 //		function move( target ) {
-//			if ( this->getRepo()->getReadOnlyReason() !== false ) {
-//				return this->readOnlyFatalStatus();
+//			if ( this.getRepo().getReadOnlyReason() !== false ) {
+//				return this.readOnlyFatalStatus();
 //			}
 //
-//			wfDebugLog( 'imagemove', "Got request to move {this->name} to " . target->getText() );
+//			wfDebugLog( 'imagemove', "Got request to move {this.name} to " . target.getText() );
 //			batch = new LocalFileMoveBatch( this, target );
 //
-//			this->synchronized(); // begin
-//			batch->addCurrent();
-//			archiveNames = batch->addOlds();
-//			status = batch->execute();
-//			this->unlock(); // done
+//			this.synchronized(); // begin
+//			batch.addCurrent();
+//			archiveNames = batch.addOlds();
+//			status = batch.execute();
+//			this.unlock(); // done
 //
-//			wfDebugLog( 'imagemove', "Finished moving {this->name}" );
+//			wfDebugLog( 'imagemove', "Finished moving {this.name}" );
 //
 //			// Purge the source and target files...
-//			oldTitleFile = wfLocalFile( this->title );
+//			oldTitleFile = wfLocalFile( this.title );
 //			newTitleFile = wfLocalFile( target );
 //			// To avoid slow purges in the transaction, move them outside...
 //			DeferredUpdates::addUpdate(
 //				new AutoCommitUpdate(
-//					this->getRepo()->getMasterDB(),
+//					this.getRepo().getMasterDB(),
 //					__METHOD__,
 //					function () use ( oldTitleFile, newTitleFile, archiveNames ) {
-//						oldTitleFile->purgeEverything();
+//						oldTitleFile.purgeEverything();
 //						foreach ( archiveNames as archiveName ) {
-//							oldTitleFile->purgeOldThumbnails( archiveName );
+//							oldTitleFile.purgeOldThumbnails( archiveName );
 //						}
-//						newTitleFile->purgeEverything();
+//						newTitleFile.purgeEverything();
 //					}
 //				),
 //				DeferredUpdates::PRESEND
 //			);
 //
-//			if ( status->isOK() ) {
+//			if ( status.isOK() ) {
 //				// Now switch the Object
-//				this->title = target;
+//				this.title = target;
 //				// Force regeneration of the name and hashpath
-//				unset( this->name );
-//				unset( this->hashPath );
+//				unset( this.name );
+//				unset( this.hashPath );
 //			}
 //
 //			return status;
@@ -1704,32 +1705,32 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return Status
 //		*/
 //		function delete( reason, suppress = false, user = null ) {
-//			if ( this->getRepo()->getReadOnlyReason() !== false ) {
-//				return this->readOnlyFatalStatus();
+//			if ( this.getRepo().getReadOnlyReason() !== false ) {
+//				return this.readOnlyFatalStatus();
 //			}
 //
 //			batch = new LocalFileDeleteBatch( this, reason, suppress, user );
 //
-//			this->synchronized(); // begin
-//			batch->addCurrent();
+//			this.synchronized(); // begin
+//			batch.addCurrent();
 //			// Get old version relative paths
-//			archiveNames = batch->addOlds();
-//			status = batch->execute();
-//			this->unlock(); // done
+//			archiveNames = batch.addOlds();
+//			status = batch.execute();
+//			this.unlock(); // done
 //
-//			if ( status->isOK() ) {
+//			if ( status.isOK() ) {
 //				DeferredUpdates::addUpdate( SiteStatsUpdate::factory( [ 'images' => -1 ] ) );
 //			}
 //
 //			// To avoid slow purges in the transaction, move them outside...
 //			DeferredUpdates::addUpdate(
 //				new AutoCommitUpdate(
-//					this->getRepo()->getMasterDB(),
+//					this.getRepo().getMasterDB(),
 //					__METHOD__,
 //					function () use ( archiveNames ) {
-//						this->purgeEverything();
+//						this.purgeEverything();
 //						foreach ( archiveNames as archiveName ) {
-//							this->purgeOldThumbnails( archiveName );
+//							this.purgeOldThumbnails( archiveName );
 //						}
 //					}
 //				),
@@ -1739,7 +1740,7 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			// Purge the CDN
 //			purgeUrls = [];
 //			foreach ( archiveNames as archiveName ) {
-//				purgeUrls[] = this->getArchiveUrl( archiveName );
+//				purgeUrls[] = this.getArchiveUrl( archiveName );
 //			}
 //			DeferredUpdates::addUpdate( new CdnCacheUpdate( purgeUrls ), DeferredUpdates::PRESEND );
 //
@@ -1762,24 +1763,24 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return Status
 //		*/
 //		function deleteOld( archiveName, reason, suppress = false, user = null ) {
-//			if ( this->getRepo()->getReadOnlyReason() !== false ) {
-//				return this->readOnlyFatalStatus();
+//			if ( this.getRepo().getReadOnlyReason() !== false ) {
+//				return this.readOnlyFatalStatus();
 //			}
 //
 //			batch = new LocalFileDeleteBatch( this, reason, suppress, user );
 //
-//			this->synchronized(); // begin
-//			batch->addOld( archiveName );
-//			status = batch->execute();
-//			this->unlock(); // done
+//			this.synchronized(); // begin
+//			batch.addOld( archiveName );
+//			status = batch.execute();
+//			this.unlock(); // done
 //
-//			this->purgeOldThumbnails( archiveName );
-//			if ( status->isOK() ) {
-//				this->purgeDescription();
+//			this.purgeOldThumbnails( archiveName );
+//			if ( status.isOK() ) {
+//				this.purgeDescription();
 //			}
 //
 //			DeferredUpdates::addUpdate(
-//				new CdnCacheUpdate( [ this->getArchiveUrl( archiveName ) ] ),
+//				new CdnCacheUpdate( [ this.getArchiveUrl( archiveName ) ] ),
 //				DeferredUpdates::PRESEND
 //			);
 //
@@ -1798,26 +1799,26 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return Status
 //		*/
 //		function restore( versions = [], unsuppress = false ) {
-//			if ( this->getRepo()->getReadOnlyReason() !== false ) {
-//				return this->readOnlyFatalStatus();
+//			if ( this.getRepo().getReadOnlyReason() !== false ) {
+//				return this.readOnlyFatalStatus();
 //			}
 //
 //			batch = new LocalFileRestoreBatch( this, unsuppress );
 //
-//			this->synchronized(); // begin
+//			this.synchronized(); // begin
 //			if ( !versions ) {
-//				batch->addAll();
+//				batch.addAll();
 //			} else {
-//				batch->addIds( versions );
+//				batch.addIds( versions );
 //			}
-//			status = batch->execute();
-//			if ( status->isGood() ) {
-//				cleanupStatus = batch->cleanup();
-//				cleanupStatus->successCount = 0;
-//				cleanupStatus->failCount = 0;
-//				status->merge( cleanupStatus );
+//			status = batch.execute();
+//			if ( status.isGood() ) {
+//				cleanupStatus = batch.cleanup();
+//				cleanupStatus.successCount = 0;
+//				cleanupStatus.failCount = 0;
+//				status.merge( cleanupStatus );
 //			}
-//			this->unlock(); // done
+//			this.unlock(); // done
 //
 //			return status;
 //		}
@@ -1832,7 +1833,7 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return String
 //		*/
 //		function getDescriptionUrl() {
-//			return this->title->getLocalURL();
+//			return this.title.getLocalURL();
 //		}
 //
 //		/**
@@ -1844,17 +1845,17 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return boolean|mixed
 //		*/
 //		function getDescriptionText( lang = null ) {
-//			revision = Revision::newFromTitle( this->title, false, Revision::READ_NORMAL );
+//			revision = Revision::newFromTitle( this.title, false, Revision::READ_NORMAL );
 //			if ( !revision ) {
 //				return false;
 //			}
-//			content = revision->getContent();
+//			content = revision.getContent();
 //			if ( !content ) {
 //				return false;
 //			}
-//			pout = content->getParserOutput( this->title, null, new ParserOptions( null, lang ) );
+//			pout = content.getParserOutput( this.title, null, new ParserOptions( null, lang ) );
 //
-//			return pout->getText();
+//			return pout.getText();
 //		}
 //
 //		/**
@@ -1863,15 +1864,15 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return String
 //		*/
 //		function getDescription( audience = self::FOR_PUBLIC, User user = null ) {
-//			this->load();
-//			if ( audience == self::FOR_PUBLIC && this->isDeleted( self::DELETED_COMMENT ) ) {
+//			this.load();
+//			if ( audience == self::FOR_PUBLIC && this.isDeleted( self::DELETED_COMMENT ) ) {
 //				return '';
 //			} elseif ( audience == self::FOR_THIS_USER
-//				&& !this->userCan( self::DELETED_COMMENT, user )
+//				&& !this.userCan( self::DELETED_COMMENT, user )
 //			) {
 //				return '';
 //			} else {
-//				return this->description;
+//				return this.description;
 //			}
 //		}
 //
@@ -1879,9 +1880,9 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return boolean|String
 //		*/
 //		function getTimestamp() {
-//			this->load();
+//			this.load();
 //
-//			return this->timestamp;
+//			return this.timestamp;
 //		}
 //
 //		/**
@@ -1891,52 +1892,52 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			// The DB lookup might return false, e.g. if the file was just deleted, or the shared DB repo
 //			// itself gets it from elsewhere. To avoid repeating the DB lookups in such a case, we
 //			// need to differentiate between null (uninitialized) and false (failed to load).
-//			if ( this->descriptionTouched === null ) {
+//			if ( this.descriptionTouched === null ) {
 //				cond = [
-//					'page_namespace' => this->title->getNamespace(),
-//					'page_title' => this->title->getDBkey()
+//					'page_namespace' => this.title.getNamespace(),
+//					'page_title' => this.title.getDBkey()
 //				];
-//				touched = this->repo->getReplicaDB()->selectField( 'page', 'page_touched', cond, __METHOD__ );
-//				this->descriptionTouched = touched ? wfTimestamp( TS_MW, touched ) : false;
+//				touched = this.repo.getReplicaDB().selectField( 'page', 'page_touched', cond, __METHOD__ );
+//				this.descriptionTouched = touched ? wfTimestamp( TS_MW, touched ) : false;
 //			}
 //
-//			return this->descriptionTouched;
+//			return this.descriptionTouched;
 //		}
 //
 //		/**
 //		* @return String
 //		*/
 //		function getSha1() {
-//			this->load();
+//			this.load();
 //			// Initialise now if necessary
-//			if ( this->sha1 == '' && this->fileExists ) {
-//				this->synchronized(); // begin
+//			if ( this.sha1 == '' && this.fileExists ) {
+//				this.synchronized(); // begin
 //
-//				this->sha1 = this->repo->getFileSha1( this->getPath() );
-//				if ( !wfReadOnly() && strval( this->sha1 ) != '' ) {
-//					dbw = this->repo->getMasterDB();
-//					dbw->update( 'image',
-//						[ 'img_sha1' => this->sha1 ],
-//						[ 'img_name' => this->getName() ],
+//				this.sha1 = this.repo.getFileSha1( this.getPath() );
+//				if ( !wfReadOnly() && strval( this.sha1 ) != '' ) {
+//					dbw = this.repo.getMasterDB();
+//					dbw.update( 'image',
+//						[ 'img_sha1' => this.sha1 ],
+//						[ 'img_name' => this.getName() ],
 //						__METHOD__ );
-//					this->invalidateCache();
+//					this.invalidateCache();
 //				}
 //
-//				this->unlock(); // done
+//				this.unlock(); // done
 //			}
 //
-//			return this->sha1;
+//			return this.sha1;
 //		}
 //
 //		/**
 //		* @return boolean Whether to cache in RepoGroup (this avoids OOMs)
 //		*/
 //		function isCacheable() {
-//			this->load();
+//			this.load();
 //
 //			// If extra data (metadata) was not loaded then it must have been large
-//			return this->extraDataLoaded
-//			&& strlen( serialize( this->metadata ) ) <= self::CACHE_FIELD_MAX_LEN;
+//			return this.extraDataLoaded
+//			&& strlen( serialize( this.metadata ) ) <= self::CACHE_FIELD_MAX_LEN;
 //		}
 //
 //		/**
@@ -1944,8 +1945,8 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @since 1.28
 //		*/
 //		public function acquireFileLock() {
-//			return this->getRepo()->getBackend()->lockFiles(
-//				[ this->getPath() ], LockManager::LOCK_EX, 10
+//			return this.getRepo().getBackend().lockFiles(
+//				[ this.getPath() ], LockManager::LOCK_EX, 10
 //			);
 //		}
 //
@@ -1954,8 +1955,8 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @since 1.28
 //		*/
 //		public function releaseFileLock() {
-//			return this->getRepo()->getBackend()->unlockFiles(
-//				[ this->getPath() ], LockManager::LOCK_EX
+//			return this.getRepo().getBackend().unlockFiles(
+//				[ this.getPath() ], LockManager::LOCK_EX
 //			);
 //		}
 //
@@ -1969,40 +1970,40 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return boolean Whether the file synchronized owns/spawned the DB transaction
 //		*/
 //		public function synchronized() {
-//			if ( !this->locked ) {
+//			if ( !this.locked ) {
 //				logger = LoggerFactory::getInstance( 'LocalFile' );
 //
-//				dbw = this->repo->getMasterDB();
-//				makesTransaction = !dbw->trxLevel();
-//				dbw->startAtomic( self::ATOMIC_SECTION_LOCK );
+//				dbw = this.repo.getMasterDB();
+//				makesTransaction = !dbw.trxLevel();
+//				dbw.startAtomic( self::ATOMIC_SECTION_LOCK );
 //				// Bug 54736: use simple synchronized to handle when the file does not exist.
 //				// SELECT FOR UPDATE prevents changes, not other SELECTs with FOR UPDATE.
 //				// Also, that would cause contention on INSERT of similarly named rows.
-//				status = this->acquireFileLock(); // represents all versions of the file
-//				if ( !status->isGood() ) {
-//					dbw->endAtomic( self::ATOMIC_SECTION_LOCK );
-//					logger->warning( "Failed to synchronized '{file}'", [ 'file' => this->name ] );
+//				status = this.acquireFileLock(); // represents all versions of the file
+//				if ( !status.isGood() ) {
+//					dbw.endAtomic( self::ATOMIC_SECTION_LOCK );
+//					logger.warning( "Failed to synchronized '{file}'", [ 'file' => this.name ] );
 //
 //					throw new LocalFileLockError( status );
 //				}
 //				// Release the synchronized *after* commit to avoid row-level contention.
 //				// Make sure it triggers on rollback() as well as commit() (T132921).
-//				dbw->onTransactionResolution(
+//				dbw.onTransactionResolution(
 //					function () use ( logger ) {
-//						status = this->releaseFileLock();
-//						if ( !status->isGood() ) {
-//							logger->error( "Failed to unlock '{file}'", [ 'file' => this->name ] );
+//						status = this.releaseFileLock();
+//						if ( !status.isGood() ) {
+//							logger.error( "Failed to unlock '{file}'", [ 'file' => this.name ] );
 //						}
 //					},
 //					__METHOD__
 //				);
 //				// Callers might care if the SELECT snapshot is safely fresh
-//				this->lockedOwnTrx = makesTransaction;
+//				this.lockedOwnTrx = makesTransaction;
 //			}
 //
-//			this->locked++;
+//			this.locked++;
 //
-//			return this->lockedOwnTrx;
+//			return this.lockedOwnTrx;
 //		}
 //
 //		/**
@@ -2014,12 +2015,12 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* may happen immediately or at some point after calling this
 //		*/
 //		public function unlock() {
-//			if ( this->locked ) {
-//				--this->locked;
-//				if ( !this->locked ) {
-//					dbw = this->repo->getMasterDB();
-//					dbw->endAtomic( self::ATOMIC_SECTION_LOCK );
-//					this->lockedOwnTrx = false;
+//			if ( this.locked ) {
+//				--this.locked;
+//				if ( !this.locked ) {
+//					dbw = this.repo.getMasterDB();
+//					dbw.endAtomic( self::ATOMIC_SECTION_LOCK );
+//					this.lockedOwnTrx = false;
 //				}
 //			}
 //		}
@@ -2028,15 +2029,15 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return Status
 //		*/
 //		protected function readOnlyFatalStatus() {
-//			return this->getRepo()->newFatal( 'filereadonlyerror', this->getName(),
-//				this->getRepo()->getName(), this->getRepo()->getReadOnlyReason() );
+//			return this.getRepo().newFatal( 'filereadonlyerror', this.getName(),
+//				this.getRepo().getName(), this.getRepo().getReadOnlyReason() );
 //		}
 //
 //		/**
 //		* Clean up any dangling locks
 //		*/
 //		function __destruct() {
-//			this->unlock();
+//			this.unlock();
 //		}
 //	} // LocalFile class
 //
@@ -2078,28 +2079,28 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @param User|null user
 //		*/
 //		function __construct( File file, reason = '', suppress = false, user = null ) {
-//			this->file = file;
-//			this->reason = reason;
-//			this->suppress = suppress;
+//			this.file = file;
+//			this.reason = reason;
+//			this.suppress = suppress;
 //			if ( user ) {
-//				this->user = user;
+//				this.user = user;
 //			} else {
 //				global wgUser;
-//				this->user = wgUser;
+//				this.user = wgUser;
 //			}
-//			this->status = file->repo->newGood();
+//			this.status = file.repo.newGood();
 //		}
 //
 //		public function addCurrent() {
-//			this->srcRels['.'] = this->file->getRel();
+//			this.srcRels['.'] = this.file.getRel();
 //		}
 //
 //		/**
 //		* @param String oldName
 //		*/
 //		public function addOld( oldName ) {
-//			this->srcRels[oldName] = this->file->getArchiveRel( oldName );
-//			this->archiveUrls[] = this->file->getArchiveUrl( oldName );
+//			this.srcRels[oldName] = this.file.getArchiveRel( oldName );
+//			this.archiveUrls[] = this.file.getArchiveUrl( oldName );
 //		}
 //
 //		/**
@@ -2109,16 +2110,16 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		public function addOlds() {
 //			archiveNames = [];
 //
-//			dbw = this->file->repo->getMasterDB();
-//			result = dbw->select( 'oldimage',
+//			dbw = this.file.repo.getMasterDB();
+//			result = dbw.select( 'oldimage',
 //				[ 'oi_archive_name' ],
-//				[ 'oi_name' => this->file->getName() ],
+//				[ 'oi_name' => this.file.getName() ],
 //				__METHOD__
 //			);
 //
 //			foreach ( result as row ) {
-//				this->addOld( row->oi_archive_name );
-//				archiveNames[] = row->oi_archive_name;
+//				this.addOld( row.oi_archive_name );
+//				archiveNames[] = row.oi_archive_name;
 //			}
 //
 //			return archiveNames;
@@ -2128,11 +2129,11 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return array
 //		*/
 //		protected function getOldRels() {
-//			if ( !isset( this->srcRels['.'] ) ) {
-//				oldRels =& this->srcRels;
+//			if ( !isset( this.srcRels['.'] ) ) {
+//				oldRels =& this.srcRels;
 //				deleteCurrent = false;
 //			} else {
-//				oldRels = this->srcRels;
+//				oldRels = this.srcRels;
 //				unset( oldRels['.'] );
 //				deleteCurrent = true;
 //			}
@@ -2145,53 +2146,53 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		*/
 //		protected function getHashes() {
 //			hashes = [];
-//			list( oldRels, deleteCurrent ) = this->getOldRels();
+//			list( oldRels, deleteCurrent ) = this.getOldRels();
 //
 //			if ( deleteCurrent ) {
-//				hashes['.'] = this->file->getSha1();
+//				hashes['.'] = this.file.getSha1();
 //			}
 //
 //			if ( count( oldRels ) ) {
-//				dbw = this->file->repo->getMasterDB();
-//				res = dbw->select(
+//				dbw = this.file.repo.getMasterDB();
+//				res = dbw.select(
 //					'oldimage',
 //					[ 'oi_archive_name', 'oi_sha1' ],
 //					[ 'oi_archive_name' => array_keys( oldRels ),
-//						'oi_name' => this->file->getName() ], // performance
+//						'oi_name' => this.file.getName() ], // performance
 //					__METHOD__
 //				);
 //
 //				foreach ( res as row ) {
-//					if ( rtrim( row->oi_sha1, "\0" ) === '' ) {
+//					if ( rtrim( row.oi_sha1, "\0" ) === '' ) {
 //						// Get the hash from the file
-//						oldUrl = this->file->getArchiveVirtualUrl( row->oi_archive_name );
-//						props = this->file->repo->getFileProps( oldUrl );
+//						oldUrl = this.file.getArchiveVirtualUrl( row.oi_archive_name );
+//						props = this.file.repo.getFileProps( oldUrl );
 //
 //						if ( props['fileExists'] ) {
 //							// Upgrade the oldimage row
-//							dbw->update( 'oldimage',
+//							dbw.update( 'oldimage',
 //								[ 'oi_sha1' => props['sha1'] ],
-//								[ 'oi_name' => this->file->getName(), 'oi_archive_name' => row->oi_archive_name ],
+//								[ 'oi_name' => this.file.getName(), 'oi_archive_name' => row.oi_archive_name ],
 //								__METHOD__ );
-//							hashes[row->oi_archive_name] = props['sha1'];
+//							hashes[row.oi_archive_name] = props['sha1'];
 //						} else {
-//							hashes[row->oi_archive_name] = false;
+//							hashes[row.oi_archive_name] = false;
 //						}
 //					} else {
-//						hashes[row->oi_archive_name] = row->oi_sha1;
+//						hashes[row.oi_archive_name] = row.oi_sha1;
 //					}
 //				}
 //			}
 //
-//			missing = array_diff_key( this->srcRels, hashes );
+//			missing = array_diff_key( this.srcRels, hashes );
 //
 //			foreach ( missing as name => rel ) {
-//				this->status->error( 'filedelete-old-unregistered', name );
+//				this.status.error( 'filedelete-old-unregistered', name );
 //			}
 //
 //			foreach ( hashes as name => hash ) {
 //				if ( !hash ) {
-//					this->status->error( 'filedelete-missing', this->srcRels[name] );
+//					this.status.error( 'filedelete-missing', this.srcRels[name] );
 //					unset( hashes[name] );
 //				}
 //			}
@@ -2201,38 +2202,38 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //
 //		protected function doDBInserts() {
 //			now = time();
-//			dbw = this->file->repo->getMasterDB();
-//			encTimestamp = dbw->addQuotes( dbw->timestamp( now ) );
-//			encUserId = dbw->addQuotes( this->user->getId() );
-//			encReason = dbw->addQuotes( this->reason );
-//			encGroup = dbw->addQuotes( 'deleted' );
-//			ext = this->file->getExtension();
+//			dbw = this.file.repo.getMasterDB();
+//			encTimestamp = dbw.addQuotes( dbw.timestamp( now ) );
+//			encUserId = dbw.addQuotes( this.user.getId() );
+//			encReason = dbw.addQuotes( this.reason );
+//			encGroup = dbw.addQuotes( 'deleted' );
+//			ext = this.file.getExtension();
 //			dotExt = ext === '' ? '' : ".ext";
-//			encExt = dbw->addQuotes( dotExt );
-//			list( oldRels, deleteCurrent ) = this->getOldRels();
+//			encExt = dbw.addQuotes( dotExt );
+//			list( oldRels, deleteCurrent ) = this.getOldRels();
 //
 //			// Bitfields to further suppress the content
-//			if ( this->suppress ) {
+//			if ( this.suppress ) {
 //				bitfield = Revision::SUPPRESSED_ALL;
 //			} else {
 //				bitfield = 'oi_deleted';
 //			}
 //
 //			if ( deleteCurrent ) {
-//				dbw->insertSelect(
+//				dbw.insertSelect(
 //					'filearchive',
 //					'image',
 //					[
 //						'fa_storage_group' => encGroup,
-//						'fa_storage_key' => dbw->conditional(
+//						'fa_storage_key' => dbw.conditional(
 //							[ 'img_sha1' => '' ],
-//							dbw->addQuotes( '' ),
-//							dbw->buildConcat( [ "img_sha1", encExt ] )
+//							dbw.addQuotes( '' ),
+//							dbw.buildConcat( [ "img_sha1", encExt ] )
 //						),
 //						'fa_deleted_user' => encUserId,
 //						'fa_deleted_timestamp' => encTimestamp,
 //						'fa_deleted_reason' => encReason,
-//						'fa_deleted' => this->suppress ? bitfield : 0,
+//						'fa_deleted' => this.suppress ? bitfield : 0,
 //						'fa_name' => 'img_name',
 //						'fa_archive_name' => 'NULL',
 //						'fa_size' => 'img_size',
@@ -2249,17 +2250,17 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //						'fa_timestamp' => 'img_timestamp',
 //						'fa_sha1' => 'img_sha1'
 //					],
-//					[ 'img_name' => this->file->getName() ],
+//					[ 'img_name' => this.file.getName() ],
 //					__METHOD__
 //				);
 //			}
 //
 //			if ( count( oldRels ) ) {
-//				res = dbw->select(
+//				res = dbw.select(
 //					'oldimage',
 //					OldLocalFile::selectFields(),
 //					[
-//						'oi_name' => this->file->getName(),
+//						'oi_name' => this.file.getName(),
 //						'oi_archive_name' => array_keys( oldRels )
 //					],
 //					__METHOD__,
@@ -2270,50 +2271,50 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //					rowsInsert[] = [
 //						// Deletion-specific fields
 //						'fa_storage_group' => 'deleted',
-//						'fa_storage_key' => ( row->oi_sha1 === '' )
+//						'fa_storage_key' => ( row.oi_sha1 === '' )
 //							? ''
-//							: "{row->oi_sha1}{dotExt}",
-//						'fa_deleted_user' => this->user->getId(),
-//						'fa_deleted_timestamp' => dbw->timestamp( now ),
-//						'fa_deleted_reason' => this->reason,
+//							: "{row.oi_sha1}{dotExt}",
+//						'fa_deleted_user' => this.user.getId(),
+//						'fa_deleted_timestamp' => dbw.timestamp( now ),
+//						'fa_deleted_reason' => this.reason,
 //						// Counterpart fields
-//						'fa_deleted' => this->suppress ? bitfield : row->oi_deleted,
-//						'fa_name' => row->oi_name,
-//						'fa_archive_name' => row->oi_archive_name,
-//						'fa_size' => row->oi_size,
-//						'fa_width' => row->oi_width,
-//						'fa_height' => row->oi_height,
-//						'fa_metadata' => row->oi_metadata,
-//						'fa_bits' => row->oi_bits,
-//						'fa_media_type' => row->oi_media_type,
-//						'fa_major_mime' => row->oi_major_mime,
-//						'fa_minor_mime' => row->oi_minor_mime,
-//						'fa_description' => row->oi_description,
-//						'fa_user' => row->oi_user,
-//						'fa_user_text' => row->oi_user_text,
-//						'fa_timestamp' => row->oi_timestamp,
-//						'fa_sha1' => row->oi_sha1
+//						'fa_deleted' => this.suppress ? bitfield : row.oi_deleted,
+//						'fa_name' => row.oi_name,
+//						'fa_archive_name' => row.oi_archive_name,
+//						'fa_size' => row.oi_size,
+//						'fa_width' => row.oi_width,
+//						'fa_height' => row.oi_height,
+//						'fa_metadata' => row.oi_metadata,
+//						'fa_bits' => row.oi_bits,
+//						'fa_media_type' => row.oi_media_type,
+//						'fa_major_mime' => row.oi_major_mime,
+//						'fa_minor_mime' => row.oi_minor_mime,
+//						'fa_description' => row.oi_description,
+//						'fa_user' => row.oi_user,
+//						'fa_user_text' => row.oi_user_text,
+//						'fa_timestamp' => row.oi_timestamp,
+//						'fa_sha1' => row.oi_sha1
 //					];
 //				}
 //
-//				dbw->insert( 'filearchive', rowsInsert, __METHOD__ );
+//				dbw.insert( 'filearchive', rowsInsert, __METHOD__ );
 //			}
 //		}
 //
 //		function doDBDeletes() {
-//			dbw = this->file->repo->getMasterDB();
-//			list( oldRels, deleteCurrent ) = this->getOldRels();
+//			dbw = this.file.repo.getMasterDB();
+//			list( oldRels, deleteCurrent ) = this.getOldRels();
 //
 //			if ( count( oldRels ) ) {
-//				dbw->delete( 'oldimage',
+//				dbw.delete( 'oldimage',
 //					[
-//						'oi_name' => this->file->getName(),
+//						'oi_name' => this.file.getName(),
 //						'oi_archive_name' => array_keys( oldRels )
 //					], __METHOD__ );
 //			}
 //
 //			if ( deleteCurrent ) {
-//				dbw->delete( 'image', [ 'img_name' => this->file->getName() ], __METHOD__ );
+//				dbw.delete( 'image', [ 'img_name' => this.file.getName() ], __METHOD__ );
 //			}
 //		}
 //
@@ -2322,58 +2323,58 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return Status
 //		*/
 //		public function execute() {
-//			repo = this->file->getRepo();
-//			this->file->synchronized();
+//			repo = this.file.getRepo();
+//			this.file.synchronized();
 //
 //			// Prepare deletion batch
-//			hashes = this->getHashes();
-//			this->deletionBatch = [];
-//			ext = this->file->getExtension();
+//			hashes = this.getHashes();
+//			this.deletionBatch = [];
+//			ext = this.file.getExtension();
 //			dotExt = ext === '' ? '' : ".ext";
 //
-//			foreach ( this->srcRels as name => srcRel ) {
+//			foreach ( this.srcRels as name => srcRel ) {
 //				// Skip files that have no hash (e.g. missing DB record, or sha1 field and file source)
 //				if ( isset( hashes[name] ) ) {
 //					hash = hashes[name];
 //					key = hash . dotExt;
-//					dstRel = repo->getDeletedHashPath( key ) . key;
-//					this->deletionBatch[name] = [ srcRel, dstRel ];
+//					dstRel = repo.getDeletedHashPath( key ) . key;
+//					this.deletionBatch[name] = [ srcRel, dstRel ];
 //				}
 //			}
 //
-//			if ( !repo->hasSha1Storage() ) {
+//			if ( !repo.hasSha1Storage() ) {
 //				// Removes non-existent file from the batch, so we don't get errors.
 //				// This also handles files in the 'deleted' zone deleted via revision deletion.
-//				checkStatus = this->removeNonexistentFiles( this->deletionBatch );
-//				if ( !checkStatus->isGood() ) {
-//					this->status->merge( checkStatus );
-//					return this->status;
+//				checkStatus = this.removeNonexistentFiles( this.deletionBatch );
+//				if ( !checkStatus.isGood() ) {
+//					this.status.merge( checkStatus );
+//					return this.status;
 //				}
-//				this->deletionBatch = checkStatus->value;
+//				this.deletionBatch = checkStatus.value;
 //
 //				// Execute the file deletion batch
-//				status = this->file->repo->deleteBatch( this->deletionBatch );
-//				if ( !status->isGood() ) {
-//					this->status->merge( status );
+//				status = this.file.repo.deleteBatch( this.deletionBatch );
+//				if ( !status.isGood() ) {
+//					this.status.merge( status );
 //				}
 //			}
 //
-//			if ( !this->status->isOK() ) {
+//			if ( !this.status.isOK() ) {
 //				// Critical file deletion error; abort
-//				this->file->unlock();
+//				this.file.unlock();
 //
-//				return this->status;
+//				return this.status;
 //			}
 //
 //			// Copy the image/oldimage rows to filearchive
-//			this->doDBInserts();
+//			this.doDBInserts();
 //			// Delete image/oldimage rows
-//			this->doDBDeletes();
+//			this.doDBDeletes();
 //
 //			// Commit and return
-//			this->file->unlock();
+//			this.file.unlock();
 //
-//			return this->status;
+//			return this.status;
 //		}
 //
 //		/**
@@ -2386,13 +2387,13 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //
 //			foreach ( batch as batchItem ) {
 //				list( src, ) = batchItem;
-//				files[src] = this->file->repo->getVirtualUrl( 'public' ) . '/' . rawurlencode( src );
+//				files[src] = this.file.repo.getVirtualUrl( 'public' ) . '/' . rawurlencode( src );
 //			}
 //
-//			result = this->file->repo->fileExistsBatch( files );
+//			result = this.file.repo.fileExistsBatch( files );
 //			if ( in_array( null, result, true ) ) {
 //				return Status::newFatal( 'backend-fail-@gplx.Internal protected',
-//					this->file->repo->getBackend()->getName() );
+//					this.file.repo.getBackend().getName() );
 //			}
 //
 //			foreach ( batch as batchItem ) {
@@ -2432,10 +2433,10 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @param boolean unsuppress
 //		*/
 //		function __construct( File file, unsuppress = false ) {
-//			this->file = file;
-//			this->cleanupBatch = this->ids = [];
-//			this->ids = [];
-//			this->unsuppress = unsuppress;
+//			this.file = file;
+//			this.cleanupBatch = this.ids = [];
+//			this.ids = [];
+//			this.unsuppress = unsuppress;
 //		}
 //
 //		/**
@@ -2443,7 +2444,7 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @param int fa_id
 //		*/
 //		public function addId( fa_id ) {
-//			this->ids[] = fa_id;
+//			this.ids[] = fa_id;
 //		}
 //
 //		/**
@@ -2451,14 +2452,14 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @param int[] ids
 //		*/
 //		public function addIds( ids ) {
-//			this->ids = array_merge( this->ids, ids );
+//			this.ids = array_merge( this.ids, ids );
 //		}
 //
 //		/**
 //		* Add all revisions of the file
 //		*/
 //		public function addAll() {
-//			this->all = true;
+//			this.all = true;
 //		}
 //
 //		/**
@@ -2473,19 +2474,19 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			/** @var Language */
 //			global wgLang;
 //
-//			repo = this->file->getRepo();
-//			if ( !this->all && !this->ids ) {
+//			repo = this.file.getRepo();
+//			if ( !this.all && !this.ids ) {
 //				// Do nothing
-//				return repo->newGood();
+//				return repo.newGood();
 //			}
 //
-//			lockOwnsTrx = this->file->synchronized();
+//			lockOwnsTrx = this.file.synchronized();
 //
-//			dbw = this->file->repo->getMasterDB();
-//			status = this->file->repo->newGood();
+//			dbw = this.file.repo.getMasterDB();
+//			status = this.file.repo.newGood();
 //
-//			exists = (boolean)dbw->selectField( 'image', '1',
-//				[ 'img_name' => this->file->getName() ],
+//			exists = (boolean)dbw.selectField( 'image', '1',
+//				[ 'img_name' => this.file.getName() ],
 //				__METHOD__,
 //				// The synchronized() should already prevents changes, but this still may need
 //				// to bypass any transaction snapshot. However, if synchronized() started the
@@ -2495,13 +2496,13 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //
 //			// Fetch all or selected archived revisions for the file,
 //			// sorted from the most recent to the oldest.
-//			conditions = [ 'fa_name' => this->file->getName() ];
+//			conditions = [ 'fa_name' => this.file.getName() ];
 //
-//			if ( !this->all ) {
-//				conditions['fa_id'] = this->ids;
+//			if ( !this.all ) {
+//				conditions['fa_id'] = this.ids;
 //			}
 //
-//			result = dbw->select(
+//			result = dbw.select(
 //				'filearchive',
 //				ArchivedFile::selectFields(),
 //				conditions,
@@ -2518,30 +2519,30 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			archiveNames = [];
 //
 //			foreach ( result as row ) {
-//				idsPresent[] = row->fa_id;
+//				idsPresent[] = row.fa_id;
 //
-//				if ( row->fa_name != this->file->getName() ) {
-//					status->error( 'undelete-filename-mismatch', wgLang->timeanddate( row->fa_timestamp ) );
-//					status->failCount++;
+//				if ( row.fa_name != this.file.getName() ) {
+//					status.error( 'undelete-filename-mismatch', wgLang.timeanddate( row.fa_timestamp ) );
+//					status.failCount++;
 //					continue;
 //				}
 //
-//				if ( row->fa_storage_key == '' ) {
+//				if ( row.fa_storage_key == '' ) {
 //					// Revision was missing pre-deletion
-//					status->error( 'undelete-bad-store-key', wgLang->timeanddate( row->fa_timestamp ) );
-//					status->failCount++;
+//					status.error( 'undelete-bad-store-key', wgLang.timeanddate( row.fa_timestamp ) );
+//					status.failCount++;
 //					continue;
 //				}
 //
-//				deletedRel = repo->getDeletedHashPath( row->fa_storage_key ) .
-//					row->fa_storage_key;
-//				deletedUrl = repo->getVirtualUrl() . '/deleted/' . deletedRel;
+//				deletedRel = repo.getDeletedHashPath( row.fa_storage_key ) .
+//					row.fa_storage_key;
+//				deletedUrl = repo.getVirtualUrl() . '/deleted/' . deletedRel;
 //
-//				if ( isset( row->fa_sha1 ) ) {
-//					sha1 = row->fa_sha1;
+//				if ( isset( row.fa_sha1 ) ) {
+//					sha1 = row.fa_sha1;
 //				} else {
 //					// old row, populate from key
-//					sha1 = LocalRepo::getHashFromKey( row->fa_storage_key );
+//					sha1 = LocalRepo::getHashFromKey( row.fa_storage_key );
 //				}
 //
 //				# Fix leading zero
@@ -2549,93 +2550,93 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //					sha1 = substr( sha1, 1 );
 //				}
 //
-//				if ( is_null( row->fa_major_mime ) || row->fa_major_mime == 'unknown'
-//					|| is_null( row->fa_minor_mime ) || row->fa_minor_mime == 'unknown'
-//					|| is_null( row->fa_media_type ) || row->fa_media_type == 'UNKNOWN'
-//					|| is_null( row->fa_metadata )
+//				if ( is_null( row.fa_major_mime ) || row.fa_major_mime == 'unknown'
+//					|| is_null( row.fa_minor_mime ) || row.fa_minor_mime == 'unknown'
+//					|| is_null( row.fa_media_type ) || row.fa_media_type == 'UNKNOWN'
+//					|| is_null( row.fa_metadata )
 //				) {
 //					// Refresh our metadata
 //					// Required for a new current revision; nice for older ones too. :)
-//					props = RepoGroup::singleton()->getFileProps( deletedUrl );
+//					props = RepoGroup::singleton().getFileProps( deletedUrl );
 //				} else {
 //					props = [
-//						'minor_mime' => row->fa_minor_mime,
-//						'major_mime' => row->fa_major_mime,
-//						'media_type' => row->fa_media_type,
-//						'metadata' => row->fa_metadata
+//						'minor_mime' => row.fa_minor_mime,
+//						'major_mime' => row.fa_major_mime,
+//						'media_type' => row.fa_media_type,
+//						'metadata' => row.fa_metadata
 //					];
 //				}
 //
 //				if ( first && !exists ) {
 //					// This revision will be published as the new current version
-//					destRel = this->file->getRel();
+//					destRel = this.file.getRel();
 //					insertCurrent = [
-//						'img_name' => row->fa_name,
-//						'img_size' => row->fa_size,
-//						'img_width' => row->fa_width,
-//						'img_height' => row->fa_height,
+//						'img_name' => row.fa_name,
+//						'img_size' => row.fa_size,
+//						'img_width' => row.fa_width,
+//						'img_height' => row.fa_height,
 //						'img_metadata' => props['metadata'],
-//						'img_bits' => row->fa_bits,
+//						'img_bits' => row.fa_bits,
 //						'img_media_type' => props['media_type'],
 //						'img_major_mime' => props['major_mime'],
 //						'img_minor_mime' => props['minor_mime'],
-//						'img_description' => row->fa_description,
-//						'img_user' => row->fa_user,
-//						'img_user_text' => row->fa_user_text,
-//						'img_timestamp' => row->fa_timestamp,
+//						'img_description' => row.fa_description,
+//						'img_user' => row.fa_user,
+//						'img_user_text' => row.fa_user_text,
+//						'img_timestamp' => row.fa_timestamp,
 //						'img_sha1' => sha1
 //					];
 //
 //					// The live (current) version cannot be hidden!
-//					if ( !this->unsuppress && row->fa_deleted ) {
-//						status->fatal( 'undeleterevdel' );
-//						this->file->unlock();
+//					if ( !this.unsuppress && row.fa_deleted ) {
+//						status.fatal( 'undeleterevdel' );
+//						this.file.unlock();
 //						return status;
 //					}
 //				} else {
-//					archiveName = row->fa_archive_name;
+//					archiveName = row.fa_archive_name;
 //
 //					if ( archiveName == '' ) {
 //						// This was originally a current version; we
 //						// have to devise a new archive name for it.
 //						// Format is <timestamp of archiving>!<name>
-//						timestamp = wfTimestamp( TS_UNIX, row->fa_deleted_timestamp );
+//						timestamp = wfTimestamp( TS_UNIX, row.fa_deleted_timestamp );
 //
 //						do {
-//							archiveName = wfTimestamp( TS_MW, timestamp ) . '!' . row->fa_name;
+//							archiveName = wfTimestamp( TS_MW, timestamp ) . '!' . row.fa_name;
 //							timestamp++;
 //						} while ( isset( archiveNames[archiveName] ) );
 //					}
 //
 //					archiveNames[archiveName] = true;
-//					destRel = this->file->getArchiveRel( archiveName );
+//					destRel = this.file.getArchiveRel( archiveName );
 //					insertBatch[] = [
-//						'oi_name' => row->fa_name,
+//						'oi_name' => row.fa_name,
 //						'oi_archive_name' => archiveName,
-//						'oi_size' => row->fa_size,
-//						'oi_width' => row->fa_width,
-//						'oi_height' => row->fa_height,
-//						'oi_bits' => row->fa_bits,
-//						'oi_description' => row->fa_description,
-//						'oi_user' => row->fa_user,
-//						'oi_user_text' => row->fa_user_text,
-//						'oi_timestamp' => row->fa_timestamp,
+//						'oi_size' => row.fa_size,
+//						'oi_width' => row.fa_width,
+//						'oi_height' => row.fa_height,
+//						'oi_bits' => row.fa_bits,
+//						'oi_description' => row.fa_description,
+//						'oi_user' => row.fa_user,
+//						'oi_user_text' => row.fa_user_text,
+//						'oi_timestamp' => row.fa_timestamp,
 //						'oi_metadata' => props['metadata'],
 //						'oi_media_type' => props['media_type'],
 //						'oi_major_mime' => props['major_mime'],
 //						'oi_minor_mime' => props['minor_mime'],
-//						'oi_deleted' => this->unsuppress ? 0 : row->fa_deleted,
+//						'oi_deleted' => this.unsuppress ? 0 : row.fa_deleted,
 //						'oi_sha1' => sha1 ];
 //				}
 //
-//				deleteIds[] = row->fa_id;
+//				deleteIds[] = row.fa_id;
 //
-//				if ( !this->unsuppress && row->fa_deleted & File::DELETED_FILE ) {
+//				if ( !this.unsuppress && row.fa_deleted & File::DELETED_FILE ) {
 //					// private files can stay where they are
-//					status->successCount++;
+//					status.successCount++;
 //				} else {
 //					storeBatch[] = [ deletedUrl, 'public', destRel ];
-//					this->cleanupBatch[] = row->fa_storage_key;
+//					this.cleanupBatch[] = row.fa_storage_key;
 //				}
 //
 //				first = false;
@@ -2644,32 +2645,32 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			unset( result );
 //
 //			// Add a warning to the status Object for missing IDs
-//			missingIds = array_diff( this->ids, idsPresent );
+//			missingIds = array_diff( this.ids, idsPresent );
 //
 //			foreach ( missingIds as id ) {
-//				status->error( 'undelete-missing-filearchive', id );
+//				status.error( 'undelete-missing-filearchive', id );
 //			}
 //
-//			if ( !repo->hasSha1Storage() ) {
+//			if ( !repo.hasSha1Storage() ) {
 //				// Remove missing files from batch, so we don't get errors when undeleting them
-//				checkStatus = this->removeNonexistentFiles( storeBatch );
-//				if ( !checkStatus->isGood() ) {
-//					status->merge( checkStatus );
+//				checkStatus = this.removeNonexistentFiles( storeBatch );
+//				if ( !checkStatus.isGood() ) {
+//					status.merge( checkStatus );
 //					return status;
 //				}
-//				storeBatch = checkStatus->value;
+//				storeBatch = checkStatus.value;
 //
 //				// Run the store batch
 //				// Use the OVERWRITE_SAME flag to smooth over a common error
-//				storeStatus = this->file->repo->storeBatch( storeBatch, FileRepo::OVERWRITE_SAME );
-//				status->merge( storeStatus );
+//				storeStatus = this.file.repo.storeBatch( storeBatch, FileRepo::OVERWRITE_SAME );
+//				status.merge( storeStatus );
 //
-//				if ( !status->isGood() ) {
+//				if ( !status.isGood() ) {
 //					// Even if some files could be copied, fail entirely as that is the
 //					// easiest thing to do without data loss
-//					this->cleanupFailedBatch( storeStatus, storeBatch );
-//					status->setOK( false );
-//					this->file->unlock();
+//					this.cleanupFailedBatch( storeStatus, storeBatch );
+//					status.setOK( false );
+//					this.file.unlock();
 //
 //					return status;
 //				}
@@ -2682,34 +2683,34 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			// public zone.
 //			// This is not ideal, which is why it's important to synchronized the image row.
 //			if ( insertCurrent ) {
-//				dbw->insert( 'image', insertCurrent, __METHOD__ );
+//				dbw.insert( 'image', insertCurrent, __METHOD__ );
 //			}
 //
 //			if ( insertBatch ) {
-//				dbw->insert( 'oldimage', insertBatch, __METHOD__ );
+//				dbw.insert( 'oldimage', insertBatch, __METHOD__ );
 //			}
 //
 //			if ( deleteIds ) {
-//				dbw->delete( 'filearchive',
+//				dbw.delete( 'filearchive',
 //					[ 'fa_id' => deleteIds ],
 //					__METHOD__ );
 //			}
 //
 //			// If store batch is empty (all files are missing), deletion is to be considered successful
-//			if ( status->successCount > 0 || !storeBatch || repo->hasSha1Storage() ) {
+//			if ( status.successCount > 0 || !storeBatch || repo.hasSha1Storage() ) {
 //				if ( !exists ) {
-//					wfDebug( __METHOD__ . " restored {status->successCount} items, creating a new current\n" );
+//					wfDebug( __METHOD__ . " restored {status.successCount} items, creating a new current\n" );
 //
 //					DeferredUpdates::addUpdate( SiteStatsUpdate::factory( [ 'images' => 1 ] ) );
 //
-//					this->file->purgeEverything();
+//					this.file.purgeEverything();
 //				} else {
-//					wfDebug( __METHOD__ . " restored {status->successCount} as archived versions\n" );
-//					this->file->purgeDescription();
+//					wfDebug( __METHOD__ . " restored {status.successCount} as archived versions\n" );
+//					this.file.purgeDescription();
 //				}
 //			}
 //
-//			this->file->unlock();
+//			this.file.unlock();
 //
 //			return status;
 //		}
@@ -2725,10 +2726,10 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //				files[file[0]] = file[0];
 //			}
 //
-//			result = this->file->repo->fileExistsBatch( files );
+//			result = this.file.repo.fileExistsBatch( files );
 //			if ( in_array( null, result, true ) ) {
 //				return Status::newFatal( 'backend-fail-@gplx.Internal protected',
-//					this->file->repo->getBackend()->getName() );
+//					this.file.repo.getBackend().getName() );
 //			}
 //
 //			foreach ( triplets as file ) {
@@ -2747,14 +2748,14 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		*/
 //		protected function removeNonexistentFromCleanup( batch ) {
 //			files = newBatch = [];
-//			repo = this->file->repo;
+//			repo = this.file.repo;
 //
 //			foreach ( batch as file ) {
-//				files[file] = repo->getVirtualUrl( 'deleted' ) . '/' .
-//					rawurlencode( repo->getDeletedHashPath( file ) . file );
+//				files[file] = repo.getVirtualUrl( 'deleted' ) . '/' .
+//					rawurlencode( repo.getDeletedHashPath( file ) . file );
 //			}
 //
-//			result = repo->fileExistsBatch( files );
+//			result = repo.fileExistsBatch( files );
 //
 //			foreach ( batch as file ) {
 //				if ( result[file] ) {
@@ -2771,13 +2772,13 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return Status
 //		*/
 //		public function cleanup() {
-//			if ( !this->cleanupBatch ) {
-//				return this->file->repo->newGood();
+//			if ( !this.cleanupBatch ) {
+//				return this.file.repo.newGood();
 //			}
 //
-//			this->cleanupBatch = this->removeNonexistentFromCleanup( this->cleanupBatch );
+//			this.cleanupBatch = this.removeNonexistentFromCleanup( this.cleanupBatch );
 //
-//			status = this->file->repo->cleanupDeletedBatch( this->cleanupBatch );
+//			status = this.file.repo.cleanupDeletedBatch( this.cleanupBatch );
 //
 //			return status;
 //		}
@@ -2792,7 +2793,7 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		protected function cleanupFailedBatch( storeStatus, storeBatch ) {
 //			cleanupBatch = [];
 //
-//			foreach ( storeStatus->success as i => success ) {
+//			foreach ( storeStatus.success as i => success ) {
 //				// Check if this item of the batch was successfully copied
 //				if ( success ) {
 //					// Item was successfully copied and needs to be removed again
@@ -2800,7 +2801,7 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //					cleanupBatch[] = [ storeBatch[i][1], storeBatch[i][2] ];
 //				}
 //			}
-//			this->file->repo->cleanupBatch( cleanupBatch );
+//			this.file.repo.cleanupBatch( cleanupBatch );
 //		}
 //	}
 //
@@ -2833,22 +2834,22 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @param Title target
 //		*/
 //		function __construct( File file, Title target ) {
-//			this->file = file;
-//			this->target = target;
-//			this->oldHash = this->file->repo->getHashPath( this->file->getName() );
-//			this->newHash = this->file->repo->getHashPath( this->target->getDBkey() );
-//			this->oldName = this->file->getName();
-//			this->newName = this->file->repo->getNameFromTitle( this->target );
-//			this->oldRel = this->oldHash . this->oldName;
-//			this->newRel = this->newHash . this->newName;
-//			this->db = file->getRepo()->getMasterDB();
+//			this.file = file;
+//			this.target = target;
+//			this.oldHash = this.file.repo.getHashPath( this.file.getName() );
+//			this.newHash = this.file.repo.getHashPath( this.target.getDBkey() );
+//			this.oldName = this.file.getName();
+//			this.newName = this.file.repo.getNameFromTitle( this.target );
+//			this.oldRel = this.oldHash . this.oldName;
+//			this.newRel = this.newHash . this.newName;
+//			this.db = file.getRepo().getMasterDB();
 //		}
 //
 //		/**
 //		* Add the current image to the batch
 //		*/
 //		public function addCurrent() {
-//			this->cur = [ this->oldRel, this->newRel ];
+//			this.cur = [ this.oldRel, this.newRel ];
 //		}
 //
 //		/**
@@ -2857,20 +2858,20 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		*/
 //		public function addOlds() {
 //			archiveBase = 'archive';
-//			this->olds = [];
-//			this->oldCount = 0;
+//			this.olds = [];
+//			this.oldCount = 0;
 //			archiveNames = [];
 //
-//			result = this->db->select( 'oldimage',
+//			result = this.db.select( 'oldimage',
 //				[ 'oi_archive_name', 'oi_deleted' ],
-//				[ 'oi_name' => this->oldName ],
+//				[ 'oi_name' => this.oldName ],
 //				__METHOD__,
 //				[ 'LOCK IN SHARE MODE' ] // ignore snapshot
 //			);
 //
 //			foreach ( result as row ) {
-//				archiveNames[] = row->oi_archive_name;
-//				oldName = row->oi_archive_name;
+//				archiveNames[] = row.oi_archive_name;
+//				oldName = row.oi_archive_name;
 //				bits = explode( '!', oldName, 2 );
 //
 //				if ( count( bits ) != 2 ) {
@@ -2880,21 +2881,21 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //
 //				list( timestamp, filename ) = bits;
 //
-//				if ( this->oldName != filename ) {
+//				if ( this.oldName != filename ) {
 //					wfDebug( "Old file name doesn't match: 'oldName' \n" );
 //					continue;
 //				}
 //
-//				this->oldCount++;
+//				this.oldCount++;
 //
 //				// Do we want to add those to oldCount?
-//				if ( row->oi_deleted & File::DELETED_FILE ) {
+//				if ( row.oi_deleted & File::DELETED_FILE ) {
 //					continue;
 //				}
 //
-//				this->olds[] = [
-//					"{archiveBase}/{this->oldHash}{oldName}",
-//					"{archiveBase}/{this->newHash}{timestamp}!{this->newName}"
+//				this.olds[] = [
+//					"{archiveBase}/{this.oldHash}{oldName}",
+//					"{archiveBase}/{this.newHash}{timestamp}!{this.newName}"
 //				];
 //			}
 //
@@ -2906,67 +2907,67 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return Status
 //		*/
 //		public function execute() {
-//			repo = this->file->repo;
-//			status = repo->newGood();
-//			destFile = wfLocalFile( this->target );
+//			repo = this.file.repo;
+//			status = repo.newGood();
+//			destFile = wfLocalFile( this.target );
 //
-//			this->file->synchronized(); // begin
-//			destFile->synchronized(); // quickly fail if destination is not available
+//			this.file.synchronized(); // begin
+//			destFile.synchronized(); // quickly fail if destination is not available
 //
-//			triplets = this->getMoveTriplets();
-//			checkStatus = this->removeNonexistentFiles( triplets );
-//			if ( !checkStatus->isGood() ) {
-//				destFile->unlock();
-//				this->file->unlock();
-//				status->merge( checkStatus ); // couldn't talk to file backend
+//			triplets = this.getMoveTriplets();
+//			checkStatus = this.removeNonexistentFiles( triplets );
+//			if ( !checkStatus.isGood() ) {
+//				destFile.unlock();
+//				this.file.unlock();
+//				status.merge( checkStatus ); // couldn't talk to file backend
 //				return status;
 //			}
-//			triplets = checkStatus->value;
+//			triplets = checkStatus.value;
 //
 //			// Verify the file versions metadata in the DB.
-//			statusDb = this->verifyDBUpdates();
-//			if ( !statusDb->isGood() ) {
-//				destFile->unlock();
-//				this->file->unlock();
-//				statusDb->setOK( false );
+//			statusDb = this.verifyDBUpdates();
+//			if ( !statusDb.isGood() ) {
+//				destFile.unlock();
+//				this.file.unlock();
+//				statusDb.setOK( false );
 //
 //				return statusDb;
 //			}
 //
-//			if ( !repo->hasSha1Storage() ) {
+//			if ( !repo.hasSha1Storage() ) {
 //				// Copy the files into their new location.
 //				// If a prior process fataled copying or cleaning up files we tolerate any
 //				// of the existing files if they are identical to the ones being stored.
-//				statusMove = repo->storeBatch( triplets, FileRepo::OVERWRITE_SAME );
-//				wfDebugLog( 'imagemove', "Moved files for {this->file->getName()}: " .
-//					"{statusMove->successCount} successes, {statusMove->failCount} failures" );
-//				if ( !statusMove->isGood() ) {
+//				statusMove = repo.storeBatch( triplets, FileRepo::OVERWRITE_SAME );
+//				wfDebugLog( 'imagemove', "Moved files for {this.file.getName()}: " .
+//					"{statusMove.successCount} successes, {statusMove.failCount} failures" );
+//				if ( !statusMove.isGood() ) {
 //					// Delete any files copied over (while the destination is still locked)
-//					this->cleanupTarget( triplets );
-//					destFile->unlock();
-//					this->file->unlock();
+//					this.cleanupTarget( triplets );
+//					destFile.unlock();
+//					this.file.unlock();
 //					wfDebugLog( 'imagemove', "Error in moving files: "
-//						. statusMove->getWikiText( false, false, 'en' ) );
-//					statusMove->setOK( false );
+//						. statusMove.getWikiText( false, false, 'en' ) );
+//					statusMove.setOK( false );
 //
 //					return statusMove;
 //				}
-//				status->merge( statusMove );
+//				status.merge( statusMove );
 //			}
 //
 //			// Rename the file versions metadata in the DB.
-//			this->doDBUpdates();
+//			this.doDBUpdates();
 //
-//			wfDebugLog( 'imagemove', "Renamed {this->file->getName()} in database: " .
-//				"{statusDb->successCount} successes, {statusDb->failCount} failures" );
+//			wfDebugLog( 'imagemove', "Renamed {this.file.getName()} in database: " .
+//				"{statusDb.successCount} successes, {statusDb.failCount} failures" );
 //
-//			destFile->unlock();
-//			this->file->unlock(); // done
+//			destFile.unlock();
+//			this.file.unlock(); // done
 //
 //			// Everything went ok, remove the source files
-//			this->cleanupSource( triplets );
+//			this.cleanupSource( triplets );
 //
-//			status->merge( statusDb );
+//			status.merge( statusDb );
 //
 //			return status;
 //		}
@@ -2978,37 +2979,37 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return Status
 //		*/
 //		protected function verifyDBUpdates() {
-//			repo = this->file->repo;
-//			status = repo->newGood();
-//			dbw = this->db;
+//			repo = this.file.repo;
+//			status = repo.newGood();
+//			dbw = this.db;
 //
-//			hasCurrent = dbw->selectField(
+//			hasCurrent = dbw.selectField(
 //				'image',
 //				'1',
-//				[ 'img_name' => this->oldName ],
+//				[ 'img_name' => this.oldName ],
 //				__METHOD__,
 //				[ 'FOR UPDATE' ]
 //			);
-//			oldRowCount = dbw->selectField(
+//			oldRowCount = dbw.selectField(
 //				'oldimage',
 //				'COUNT(*)',
-//				[ 'oi_name' => this->oldName ],
+//				[ 'oi_name' => this.oldName ],
 //				__METHOD__,
 //				[ 'FOR UPDATE' ]
 //			);
 //
 //			if ( hasCurrent ) {
-//				status->successCount++;
+//				status.successCount++;
 //			} else {
-//				status->failCount++;
+//				status.failCount++;
 //			}
-//			status->successCount += oldRowCount;
+//			status.successCount += oldRowCount;
 //			// Bug 34934: oldCount is based on files that actually exist.
 //			// There may be more DB rows than such files, in which case affected
 //			// can be greater than total. We use max() to avoid negatives here.
-//			status->failCount += max( 0, this->oldCount - oldRowCount );
-//			if ( status->failCount ) {
-//				status->error( 'imageinvalidfilename' );
+//			status.failCount += max( 0, this.oldCount - oldRowCount );
+//			if ( status.failCount ) {
+//				status.error( 'imageinvalidfilename' );
 //			}
 //
 //			return status;
@@ -3019,24 +3020,24 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* many rows where updated.
 //		*/
 //		protected function doDBUpdates() {
-//			dbw = this->db;
+//			dbw = this.db;
 //
 //			// Update current image
-//			dbw->update(
+//			dbw.update(
 //				'image',
-//				[ 'img_name' => this->newName ],
-//				[ 'img_name' => this->oldName ],
+//				[ 'img_name' => this.newName ],
+//				[ 'img_name' => this.oldName ],
 //				__METHOD__
 //			);
 //			// Update old images
-//			dbw->update(
+//			dbw.update(
 //				'oldimage',
 //				[
-//					'oi_name' => this->newName,
-//					'oi_archive_name = ' . dbw->strreplace( 'oi_archive_name',
-//						dbw->addQuotes( this->oldName ), dbw->addQuotes( this->newName ) ),
+//					'oi_name' => this.newName,
+//					'oi_archive_name = ' . dbw.strreplace( 'oi_archive_name',
+//						dbw.addQuotes( this.oldName ), dbw.addQuotes( this.newName ) ),
 //				],
-//				[ 'oi_name' => this->oldName ],
+//				[ 'oi_name' => this.oldName ],
 //				__METHOD__
 //			);
 //		}
@@ -3046,16 +3047,16 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //		* @return array
 //		*/
 //		protected function getMoveTriplets() {
-//			moves = array_merge( [ this->cur ], this->olds );
+//			moves = array_merge( [ this.cur ], this.olds );
 //			triplets = []; // The format is: (srcUrl, destZone, destUrl)
 //
 //			foreach ( moves as move ) {
 //				// move: (oldRelativePath, newRelativePath)
-//				srcUrl = this->file->repo->getVirtualUrl() . '/public/' . rawurlencode( move[0] );
+//				srcUrl = this.file.repo.getVirtualUrl() . '/public/' . rawurlencode( move[0] );
 //				triplets[] = [ srcUrl, 'public', move[1] ];
 //				wfDebugLog(
 //					'imagemove',
-//					"Generated move triplet for {this->file->getName()}: {srcUrl} :: public :: {move[1]}"
+//					"Generated move triplet for {this.file.getName()}: {srcUrl} :: public :: {move[1]}"
 //				);
 //			}
 //
@@ -3074,10 +3075,10 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //				files[file[0]] = file[0];
 //			}
 //
-//			result = this->file->repo->fileExistsBatch( files );
+//			result = this.file.repo.fileExistsBatch( files );
 //			if ( in_array( null, result, true ) ) {
 //				return Status::newFatal( 'backend-fail-@gplx.Internal protected',
-//					this->file->repo->getBackend()->getName() );
+//					this.file.repo.getBackend().getName() );
 //			}
 //
 //			filteredTriplets = [];
@@ -3105,7 +3106,7 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //				pairs[] = [ triplet[1], triplet[2] ];
 //			}
 //
-//			this->file->repo->cleanupBatch( pairs );
+//			this.file.repo.cleanupBatch( pairs );
 //		}
 //
 //		/**
@@ -3120,6 +3121,6 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //				files[] = triplet[0];
 //			}
 //
-//			this->file->repo->cleanupBatch( files );
+//			this.file.repo.cleanupBatch( files );
 //		}
 }

@@ -22,8 +22,23 @@ public class Xomw_mto {
 	private int width = -1, height = -1;
 	public byte[] url;
 	private final    List_adp attribs = List_adp_.New(), link_attribs = List_adp_.New();
-	public Xomw_mto(byte[] url) {
+	public Xomw_mto(byte[] url, int width, int height) {
 		this.url = url;
+		this.width = width;
+		this.height = height;
+	}
+	/**
+	* @return int Width of the output box
+	*/
+	public int getWidth() {
+		return this.width;
+	}
+
+	/**
+	* @return int Height of the output box
+	*/
+	public int getHeight() {
+		return this.height;
 	}
 
 	// Return HTML <img ... /> tag for the thumbnail, will include
@@ -87,7 +102,7 @@ public class Xomw_mto {
 //				link_attribs.Add_many(Gfh_atr_.Bry__title, Php_utl_.Empty(options_title) ? title.Get_full_text() : options_title);
 		}
 		else if (!Php_utl_.Empty(options.desc_link)) {
-//				link_attribs = $this->getDescLinkAttribs(
+//				link_attribs = this.getDescLinkAttribs(
 //					empty(options['title']) ? null : options['title'],
 //					$query
 //				);
@@ -122,7 +137,7 @@ public class Xomw_mto {
 
 		// Additional densities for responsive images, if specified.
 		// If any of these urls is the same as src url, it'll be excluded.
-//			$responsiveUrls = array_diff($this->responsiveUrls, [ $this->url ]);
+//			$responsiveUrls = array_diff(this.responsiveUrls, [ this.url ]);
 //			if (!Php_utl_.Empty($responsiveUrls)) {
 //				$attribs['srcset'] = Html::srcSet($responsiveUrls);
 //			}

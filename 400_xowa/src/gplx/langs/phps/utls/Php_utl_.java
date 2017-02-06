@@ -20,4 +20,19 @@ public class Php_utl_ {
 	public static boolean Empty(byte[] v)  {return v == null || v.length == 0;}
 	public static boolean Empty(boolean v)    {return v == false;}
 	public static boolean Is_set(byte[] v) {return v != null;}
+	public static boolean isnumeric(byte[] src) {
+		if (src == null) return false;
+		int len = src.length;
+		for (int i = 0; i < len; i++) {
+			byte b = src[i];
+			switch (b) {
+				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
+				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+					break;
+				default:
+					return false;
+			}
+		}
+		return true;
+	}
 }

@@ -16,8 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
-import gplx.xowa.mws.filerepo.file.*;
-public class Xomw_ImageHandler extends Xomw_MediaHandler {	public Xomw_ImageHandler(byte[] key) {super(key);}
+import gplx.xowa.mws.filerepo.file.*; import gplx.xowa.mws.parsers.lnkis.*;
+// MEMORY:only one instance per wiki
+public class Xomw_ImageHandler extends Xomw_MediaHandler {	private final    Xomw_param_map paramMap = new Xomw_param_map();
+	public Xomw_ImageHandler(byte[] key) {super(key);
+		paramMap.Add(Xomw_param_itm.Mw__img_width, Xomw_param_map.Type__handler, Xomw_param_itm.Name_bry__width);
+	}
 	/**
 	* @param File file
 	* @return boolean
@@ -26,22 +30,24 @@ public class Xomw_ImageHandler extends Xomw_MediaHandler {	public Xomw_ImageHand
 		return (file.getWidth(1) != -1 && file.getHeight(1) != -1);
 	}
 
-//		public function getParamMap() {
-//			return [ 'img_width' => 'width' ];
-//		}
-//
-//		public function validateParam(name, value) {
-//			if (in_array(name, [ 'width', 'height' ])) {
-//				if (value <= 0) {
-//					return false;
-//				} else {
-//					return true;
-//				}
-//			} else {
-//				return false;
-//			}
-//		}
-//
+	@Override public Xomw_param_map getParamMap() {
+		return paramMap;
+	}
+
+	@Override public boolean validateParam(int name_uid, byte[] val_bry, int val_int) {
+		if (name_uid == Xomw_param_itm.Name__width || name_uid == Xomw_param_itm.Name__height) {
+			if (val_int <= 0) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		else {
+			return false;
+		}
+	}
+
 //		public function makeParamString(params) {
 //			if (isset(params['physicalWidth'])) {
 //				width = params['physicalWidth'];

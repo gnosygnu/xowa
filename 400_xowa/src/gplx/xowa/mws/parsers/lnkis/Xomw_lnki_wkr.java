@@ -377,7 +377,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 						// cloak any absolute URLs inside the image markup, so replaceExternalLinks() won't touch them
 						bfr.Add(prefix);
 						// Armor_links(Make_image(bfr, nt, text, holders))
-						Make_image(pctx, bfr, nt, text, holders);
+						this.makeImage(pctx, bfr, nt, text, holders);
 						bfr.Add(trail);
 						continue;
 					}
@@ -443,7 +443,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 		}
 	}
-	public void Make_image(Xomw_parser_ctx pctx, Bry_bfr bfr, Xoa_ttl title, byte[] link_args, Xomw_link_holders holders) {
+	public void makeImage(Xomw_parser_ctx pctx, Bry_bfr bfr, Xoa_ttl title, byte[] options_at_link, Xomw_link_holders holders) {
 		// Check if the options text is of the form "options|alt text"
 		// Options are:
 		//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang
@@ -471,78 +471,78 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		//  * text-bottom
 
 		// Protect LanguageConverter markup when splitting into parts
-		byte[][] parts = Xomw_string_utils.Delimiter_explode(tmp_list, trv, link_args);
+		byte[][] parts = Xomw_string_utils.Delimiter_explode(tmp_list, trv, options_at_link);
 
 		// Give extensions a chance to select the file revision for us
 //			$options = [];
 		byte[] desc_query = null;
-		// MW.HOOK:BeforeParserFetchFileAndTitle
+		// XO.MW.HOOK:BeforeParserFetchFileAndTitle
 
 		// Fetch and register the file (file title may be different via hooks)
-		Xomw_File file = fetchFileAndTitle(title, null);
 //			list($file, $title) = $this->fetchFileAndTitle($title, $options);
+		Xomw_File file = fetchFileAndTitle(title, null);
 
 		// Get parameter map
-		Xomw_MediaHandler handler2 = file == null ? null : file.getHandler();
+		Xomw_MediaHandler handler = file == null ? null : file.getHandler(env);
 
-		Xomw_image_params tmp_img_params = new Xomw_image_params();
-		this.getImageParams(tmp_img_params, handler2);
+		Xomw_image_params tmp_img_params = pctx.Lnki_wkr__make_image__img_params;
+		this.getImageParams(tmp_img_params, handler);
 		Xomw_param_map paramMap = tmp_img_params.paramMap;
 		Xomw_MagicWordArray mwArray = tmp_img_params.mwArray;
 
-		// XO.MW.UNSUPPORTED.TrackingCategory:
-		//if (!$file) {
-		//	$this->addTrackingCategory('broken-file-category');
-		//}
+		// XO.MW.UNSUPPORTED.TrackingCategory: if (!$file) $this->addTrackingCategory('broken-file-category');
 
 		// Process the input parameters
 		byte[] caption = Bry_.Empty;
 		// XO.MW: $params = [ 'frame' => [], 'handler' => [], 'horizAlign' => [], 'vertAlign' => [] ];
-//			Xomw_prm_mgr param_map = new Xomw_prm_mgr();
-//			Xomw_prm_mgr param_mgr = new Xomw_prm_mgr();
-		Xomw_img_prms frame = new Xomw_img_prms();
-		Xomw_mda_prms handler = new Xomw_mda_prms();
+		Xomw_params_frame       frameParams = paramMap.Frame.Clear();
+		Xomw_params_handler     handlerParams = paramMap.Handler.Clear();
+//			Xomw_params_horizAlign  horizAlignParams = paramMap.HorizAlign.Clear();
+//			Xomw_params_vertAlign   vertAlignParams = paramMap.VertAlign.Clear();
 		boolean seen_format = false;
 
 		int parts_len = parts.length;
 		for (int i = 0; i < parts_len; i++) {
-
 			byte[] part = parts[i];
 			part = Bry_.Trim(part);
-			byte[] magic_name = mwArray.matchVariableStartToEnd(part);
+			byte[][] tmp_match_word = pctx.Lnki_wkr__make_image__match_magic_word;
+			mwArray.matchVariableStartToEnd(tmp_match_word, part);
+			byte[] magic_name = tmp_match_word[0];
+			byte[] val        = tmp_match_word[1];
 			boolean validated = false;
 			
-			Xomw_param_itm prm_itm = paramMap.Get_by(magic_name);
-			if (prm_itm != null) {
-				int prm_type = -1;
-				int paramNameType = prm_itm.name_type;
+			Xomw_param_itm param_item = paramMap.Get_by(magic_name);
+			if (param_item != null) {
+				int typeUid = param_item.type_uid;
+				int paramNameUid = param_item.name_uid;
 				// Special case; width and height come in one variable together
-				if (prm_type == Xomw_prm_itm.Type__handler && paramNameType == Xomw_prm_itm.Name__width) {
-//						$parsedWidthParam = $this->parseWidthParam($value);
-//						if (isset($parsedWidthParam['width'])) {
-//							$width = $parsedWidthParam['width'];
-//							if ($handler->validateParam('width', $width)) {
-//								$params[$type]['width'] = $width;
-//								validated = true;
-//							}
-//						}
-//						if (isset($parsedWidthParam['height'])) {
-//							$height = $parsedWidthParam['height'];
-//							if ($handler->validateParam('height', $height)) {
-//								$params[$type]['height'] = $height;
-//								validated = true;
-//							}
-//						}
+				if (typeUid == Xomw_param_map.Type__handler && paramNameUid == Xomw_param_itm.Name__width) {
+					int[] tmp_img_size = pctx.Lnki_wkr__make_image__img_size;
+					this.parseWidthParam(tmp_img_size, val);
+					int parsedW = tmp_img_size[0];
+					int parsedH = tmp_img_size[1];
+					if (parsedW != 0) {
+						if (handler.validateParam(Xomw_param_itm.Name__width, null, parsedW)) {
+							paramMap.Set(typeUid, Xomw_param_itm.Name__width, null, parsedW);
+							validated = true;
+						}
+					}
+					if (parsedH != 0) {
+						if (handler.validateParam(Xomw_param_itm.Name__height, null, parsedH)) {
+							paramMap.Set(typeUid, Xomw_param_itm.Name__height, null, parsedH);
+							validated = true;
+						}
+					}
 					// else no validation -- T15436
 				}
 				else {
-					if (prm_type == Xomw_prm_itm.Type__handler) {
+					if (typeUid == Xomw_param_map.Type__handler) {
 						// Validate handler parameter
 						// validated = $handler->validateParam($paramName, $value);
 					}
 					else {
 						// Validate @gplx.Internal protected parameters
-						switch (paramNameType) {
+						switch (paramNameUid) {
 							case Xomw_param_itm.Name__manual_thumb:
 							case Xomw_param_itm.Name__alt:
 							case Xomw_param_itm.Name__class:
@@ -586,17 +586,16 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 								// use first appearing option, discard others.
 								validated = !seen_format;
 								seen_format = true;
-								frame.thumbnail = Bry_.Empty;
 								break;
 							default:
 								// Most other things appear to be empty or numeric...
-								// validated = ($value === false || is_numeric(trim($value)));
+								validated = (val == null || Php_utl_.isnumeric(Bry_.Trim(val)));
 								break;
 						}
 					}
-				}
-				if (validated) {
-					// $params[$type][$paramName] = $value;
+					if (validated) {
+						paramMap.Set(typeUid, paramNameUid, val, -1);
+					}
 				}
 			}
 			if (!validated) {
@@ -605,22 +604,22 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		}
 
 		// Process alignment parameters
-		Xomw_param_itm tmp = paramMap.Get_by(Xomw_prm_mgr.Name__horiz_align);
+		Xomw_param_itm tmp = paramMap.Get_by(Xomw_param_map.Type__horizAlign);
 		if (tmp != null) {
-//				frame.align = tmp.val;
+//				frameParams.align = tmp.val;
 		}
-		tmp = paramMap.Get_by(Xomw_prm_mgr.Name__vert_align);
+		tmp = paramMap.Get_by(Xomw_param_map.Type__vertAlign);
 		if (tmp != null) {
-//				frame.valign = tmp.val;
+//				frameParams.valign = tmp.val;
 		}
 
-		frame.caption = caption;
+		frameParams.caption = caption;
 
 		boolean image_is_framed 
-			=  frame.frame != null
-			|| frame.framed != null
-			|| frame.thumbnail != null
-			|| frame.manual_thumb != null
+			=  frameParams.frame != null
+			|| frameParams.framed != null
+			|| frameParams.thumbnail != null
+			|| frameParams.manual_thumb != null
 			;
 
 		// Will the image be presented in a frame, with the caption below?
@@ -639,28 +638,28 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		// plicit caption= parameter and preserving the old magic unnamed para-
 		// meter for BC; ...
 		if (image_is_framed) { // Framed image
-			if (caption == Bry_.Empty && frame.alt == null) {
+			if (caption == Bry_.Empty && frameParams.alt == null) {
 				// No caption or alt text, add the filename as the alt text so
 				// that screen readers at least get some description of the image
-				frame.alt = title.Get_text();
+				frameParams.alt = title.Get_text();
 			}
 			// Do not set $params['frame']['title'] because tooltips don't make sense
 			// for framed images
 		} 
 		else { // Inline image
-			if (frame.alt == null) {
+			if (frameParams.alt == null) {
 				// No alt text, use the "caption" for the alt text
 				if (caption != Bry_.Empty) {
-//						frame.alt = $this->stripAltText(caption, $holders);
+//						frameParams.alt = $this->stripAltText(caption, $holders);
 				}
 				else {
 					// No caption, fall back to using the filename for the
 					// alt text
-					frame.alt = title.Get_text();
+					frameParams.alt = title.Get_text();
 				}
 			}
 			// Use the "caption" for the tooltip text
-//				frame.title = $this->stripAltText(caption, $holders);
+//				frameParams.title = $this->stripAltText(caption, $holders);
 		}
 
 		// MW.HOOK:ParserMakeImageParams
@@ -669,7 +668,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //			byte[] time = options.time;
 		Object time = null;
 //			options = $this->mOptions->getThumbSize()
-		linker.Make_image_link(bfr, parser, title, file, frame, handler, time, desc_query, null);
+		linker.makeImageLink(bfr, parser, title, file, frameParams, handlerParams, time, desc_query, null);
 
 		// Give the handler a chance to modify the parser Object
 //			if (handler != null) {
@@ -697,25 +696,26 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 	private static Xomw_param_list[] internalParamNames;
 	private static Xomw_param_map internalParamMap;
+
 	private void getImageParams(Xomw_image_params rv, Xomw_MediaHandler handler) {
 		byte[] handlerClass = handler == null ? Bry_.Empty : handler.Key();
 		rv.paramMap = (Xomw_param_map)mImageParams.Get_by(handlerClass);
+		// NOTE: lazy-init; code below can be inefficent
 		if (rv.paramMap == null) {
 			// Initialise static lists				
 			if (internalParamNames == null) {
 				internalParamNames = new Xomw_param_list[]
-				{ Xomw_param_list.New("horizAlign", "left", "right", "center", "none")
-				, Xomw_param_list.New("vertAlign", "baseline", "sub", "super", "top", "text-top", "middle", "bottom", "text-bottom")
-				, Xomw_param_list.New("frame", "thumbnail", "manual_thumb", "framed", "frameless", "upright", "border", "link", "alt", "class")
+				{ Xomw_param_list.New(Xomw_param_map.Type__horizAlign, "horizAlign", "left", "right", "center", "none")
+				, Xomw_param_list.New(Xomw_param_map.Type__vertAlign , "vertAlign", "baseline", "sub", "super", "top", "text-top", "middle", "bottom", "text-bottom")
+				, Xomw_param_list.New(Xomw_param_map.Type__frame     , "frame", "thumbnail", "manual_thumb", "framed", "frameless", "upright", "border", "link", "alt", "class")
 				};
 
 				internalParamMap = new Xomw_param_map();
 				byte[] bry_img = Bry_.new_a7("img_");
 				for (Xomw_param_list param_list : internalParamNames) {
-					byte[] type = param_list.type;
 					for (byte[] name : param_list.names) {
 						byte[] magic_name = Bry_.Add(bry_img, Bry_.Replace(name, Byte_ascii.Dash, Byte_ascii.Underline));
-						internalParamMap.Add(magic_name, type, name);
+						internalParamMap.Add(magic_name, param_list.type_uid, name);
 					}
 				}
 			}
@@ -723,10 +723,12 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// Add handler params
 			Xomw_param_map paramMap = internalParamMap.Clone();
 			if (handler != null) {
-//					$handlerParamMap = $handler->getParamMap();
-//					foreach ($handlerParamMap as $magic => $paramName) {
-//						$paramMap[$magic] = [ 'handler', $paramName ];
-//					}
+				Xomw_param_map handlerParamMap = handler.getParamMap();
+				int handlerParamMapLen = handlerParamMap.Len();
+				for (int i = 0; i < handlerParamMapLen; i++) {
+					Xomw_param_itm itm = (Xomw_param_itm)handlerParamMap.Get_at(i);
+					paramMap.Add(itm.magic, itm.type_uid, itm.name);
+				}
 			}
 			this.mImageParams.Add(handlerClass, paramMap);
 			rv.paramMap = paramMap;
@@ -738,6 +740,35 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			rv.mwArray = (Xomw_MagicWordArray)mImageParamsMagicArray.Get_by(handlerClass);
 		}
 	}
+	// Parsed a width param of imagelink like 300px or 200x300px
+	// XO.MW.NOTE: for MW, "" -> null, null while "AxB" -> 0x0
+	public void parseWidthParam(int[] img_size, byte[] src) {
+		img_size[0] = img_size[1] = -1;
+		if (src == Bry_.Empty) {
+			return;
+		}
+		// (T15500) In both cases (width/height and width only),
+		// permit trailing "px" for backward compatibility.
+		int src_bgn = 0;
+		int src_end = src.length;
+		// XO: "px" is optional; if exists at end, ignore it
+		if (Bry_.Has_at_end(src, Bry__px)) {
+			src_end -= 2;
+		}
+
+		// XO.MW: if ( preg_match( '/^([0-9]*)x([0-9]*)\s*(?:px)?\s*$/', $value, $m ) ) {
+		int w_bgn = 0;
+		int w_end = Bry_find_.Find_fwd_while_num(src, src_bgn, src_end);
+		int h_bgn = -1;
+		int h_end = -1;
+		if (w_end < src_end && src[w_end] == Byte_ascii.Ltr_x) {
+			h_bgn = w_end + 1;
+			h_end = Bry_find_.Find_fwd_while_num(src, h_bgn, src_end);
+		}
+		img_size[0] = Bry_.To_int_or(src, w_bgn, w_end, 0);
+		img_size[1] = Bry_.To_int_or(src, h_bgn, h_end, 0);
+	}
+	private static final    byte[] Bry__px = Bry_.new_a7("px");
 
 	/**
 	* Fetch a file and its title and register a reference to it.
@@ -825,8 +856,4 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	//   title-char             -> ([{$tc}]+)
 	//   pipe                   -> \\|
 	//   other chars...         -> (.*)
-}
-class Xomw_image_params {
-	public Xomw_param_map paramMap = null;
-	public Xomw_MagicWordArray mwArray = null;
 }

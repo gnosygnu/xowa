@@ -20,6 +20,7 @@ import gplx.core.btries.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.mws.htmls.*; import gplx.xowa.mws.linkers.*; import gplx.xowa.mws.parsers.*;
 import gplx.xowa.mws.filerepo.file.*; import gplx.xowa.mws.media.*;
+import gplx.xowa.mws.parsers.lnkis.*;
 import gplx.langs.phps.utls.*;
 /*	TODO.XO
 	* P8: wfMessage
@@ -92,7 +93,7 @@ public class Xomw_linker {
 	// @param int|null width_option Used by the parser to remember the user preference thumbnailsize
 	// @since 1.20
 	// @return String HTML for an image, with links, wrappers, etc.
-	public void Make_image_link(Bry_bfr bfr, Xomw_parser parser, Xoa_ttl title, Xomw_File file, Xomw_img_prms frame_params, Xomw_mda_prms handler_params, Object time, byte[] query, Object widthOption) {
+	public void makeImageLink(Bry_bfr bfr, Xomw_parser parser, Xoa_ttl title, Xomw_File file, Xomw_params_frame frame_params, Xomw_params_handler handler_params, Object time, byte[] query, Object widthOption) {
 		// XO.MW.HOOK:ImageBeforeProduceHTML
 
 		if (file != null && !file.allowInlineDisplay()) {
@@ -176,11 +177,12 @@ public class Xomw_linker {
 			// If a thumbnail width has not been provided, it is set
 			// to the default user option as specified in Language*.php
 			if (frame_params.align == Bry_.Empty) {
-//					frame_params.align = $parser->getTargetLanguage()->alignEnd();
+				frame_params.align = parser.Env().Lang__align_end;
 			}
 			bfr.Add(prefix);
 			this.Make_thumb_link2(bfr, title, file, frame_params, handler_params, time, query);
 			bfr.Add(postfix);
+			return;
 		}
 
 		if (file != null && frame_params.frameless != null) {
@@ -197,7 +199,7 @@ public class Xomw_linker {
 		if (file != null && handler_params.width != -1) {
 			// Create a resized image, without the additional thumbnail features
 //				$thumb = $file->transform(handler_params);
-			thumb = new Xomw_mto(file.getUrl());
+			thumb = new Xomw_mto(file.getUrl(), file.getWidth(), file.getHeight());
 		}
 		else {
 			thumb = null;
@@ -216,7 +218,7 @@ public class Xomw_linker {
 			params_list.valign = frame_params.valign;
 			params_list.img_cls = frame_params.cls;
 			if (frame_params.border != null) {
-				params_list.img_cls = Xomw_img_prms.Cls_add(params_list.img_cls, Img_class__thumbborder);
+				params_list.img_cls = Xomw_params_frame.Cls_add(params_list.img_cls, Img_class__thumbborder);
 			}
 //				$params = self::getImageLinkMTOParams(frame_params, $query, $parser) + $params;
 
@@ -245,7 +247,7 @@ public class Xomw_linker {
 	// @param Parser|null $parser
 	// @return array
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
-	public void Get_image_link_mto_params(Xomw_mto_params mto_params, Xomw_img_prms frame_params, byte[] query, Xomw_parser parser) {
+	public void Get_image_link_mto_params(Xomw_mto_params mto_params, Xomw_params_frame frame_params, byte[] query, Xomw_parser parser) {
 		if (Php_utl_.Is_set(frame_params.link_url) && frame_params.link_url != Bry_.Empty) {
 			mto_params.custom_url_link = frame_params.link_url;
 			if (Php_utl_.Is_set(frame_params.link_target)) {
@@ -271,8 +273,8 @@ public class Xomw_linker {
 		}
 	}
 
-	public void Make_thumb_link2(Bry_bfr bfr, Xoa_ttl title, Xomw_File file, Xomw_img_prms frame_params, Xomw_mda_prms handler_params, Object time, byte[] query) {
-		boolean exists = false; // = $file && $file->exists();
+	public void Make_thumb_link2(Bry_bfr bfr, Xoa_ttl title, Xomw_File file, Xomw_params_frame frame_params, Xomw_params_handler handler_params, Object time, byte[] query) {
+		boolean exists = true; // = $file && $file->exists();
 
 		int page = handler_params.page;
 		if (frame_params.align == null) {
@@ -317,7 +319,7 @@ public class Xomw_linker {
 			else if (frame_params.framed != null) {
 				// Use image dimensions, don't scale
 //					thumb = $file->getUnscaledThumb(handler_params);
-				thumb = new Xomw_mto(file.getUrl());
+				thumb = new Xomw_mto(file.getUrl(), file.getWidth(), file.getHeight());
 				no_scale = true;
 			}
 			else {
@@ -328,10 +330,11 @@ public class Xomw_linker {
 					handler_params.width = src_width;
 				}
 //					thumb = $file->transform(handler_params);
+				thumb = new Xomw_mto(file.getUrl(), file.getWidth(), file.getHeight());
 			}
 
 			if (thumb != null) {
-//					outer_width = thumb->getWidth() + 2;
+				outer_width = thumb.getWidth() + 2;
 			}
 			else {
 				outer_width = handler_params.width + 2;
@@ -373,7 +376,7 @@ public class Xomw_linker {
 			mto_params.Clear();
 			mto_params.alt = frame_params.alt;
 			mto_params.title = frame_params.title;
-			mto_params.img_cls = Xomw_img_prms.Cls_add(frame_params.cls, Img_class__thumbimage);
+			mto_params.img_cls = Xomw_params_frame.Cls_add(frame_params.cls, Img_class__thumbimage);
 			Get_image_link_mto_params(mto_params, frame_params, query, null);
 			thumb.To_html(bfr, tmp, mto_params);
 			if (frame_params.framed != null) {
@@ -388,7 +391,8 @@ public class Xomw_linker {
 					, Bry_.Empty);
 				// env.Message_mgr().Get_by_str("thumbnail-more").text();
 				byte[] zoom_anch = tmp.To_bry_and_clear();
-				html_utl.Raw_element(bfr, Gfh_tag_.Bry__div, tmp_attribs.Clear().Add(Gfh_atr_.Bry__class, Class__magnify), zoom_anch);
+				html_utl.Raw_element(tmp, Gfh_tag_.Bry__div, tmp_attribs.Clear().Add(Gfh_atr_.Bry__class, Class__magnify), zoom_anch);
+				zoom_icon = tmp.To_bry_and_clear();
 			}
 		}
 		bfr.Add_str_a7("  <div class=\"thumbcaption\">").Add(zoom_icon).Add(frame_params.caption).Add_str_a7("</div></div></div>");

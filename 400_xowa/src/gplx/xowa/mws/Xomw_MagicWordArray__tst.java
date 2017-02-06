@@ -20,27 +20,30 @@ import org.junit.*; import gplx.core.tests.*;
 public class Xomw_MagicWordArray__tst {
 	private final    Xomw_MagicWordArray__fxt fxt = new Xomw_MagicWordArray__fxt();
 	@Test  public void Nil() {
-		fxt.Init__word(Bool_.Y, "nil", "nil");
-		fxt.Init__ary("nil");
-		fxt.Test__matchVariableStartToEnd("nil", "nil", "nila");
+		fxt.Init__word(Bool_.Y, "img_nil", "nil");
+		fxt.Init__ary("img_nil");
+		fxt.Test__matchVariableStartToEnd("nil", "img_nil", "");
+		fxt.Test__matchVariableStartToEnd("nila", null, null);
 	}
 	@Test  public void Bgn() {
-		fxt.Init__word(Bool_.Y, "bgn", "bgn$1");
-		fxt.Init__ary("bgn");
-		fxt.Test__matchVariableStartToEnd("bgn", "bgn", "bgna");
+		fxt.Init__word(Bool_.Y, "img_bgn", "bgn$1");
+		fxt.Init__ary("img_bgn");
+		fxt.Test__matchVariableStartToEnd("bgna", "img_bgn", "a");
+		fxt.Test__matchVariableStartToEnd("bgn", "img_bgn", "");
 	}
 	@Test  public void End() {
-		fxt.Init__word(Bool_.Y, "end", "$1end");
-		fxt.Init__ary("end");
-		fxt.Test__matchVariableStartToEnd("end", "end", "aend");
+		fxt.Init__word(Bool_.Y, "img_end", "$1end");
+		fxt.Init__ary("img_end");
+		fxt.Test__matchVariableStartToEnd("aend", "img_end", "a");
+		fxt.Test__matchVariableStartToEnd("end", "img_end", "");
 	}
 	@Test  public void Smoke() {
 		fxt.Init__word(Bool_.Y, "img_upright", "upright", "upright=$1", "upright $1");
 		fxt.Init__word(Bool_.Y, "img_width", "$1px");
 		fxt.Init__ary("img_upright", "img_width");
 
-		fxt.Test__matchVariableStartToEnd("img_upright", "upright", "upright=123", "upright 123");
-		fxt.Test__matchVariableStartToEnd("img_width", "123px");
+		fxt.Test__matchVariableStartToEnd("upright=123", "img_upright", "123");
+		fxt.Test__matchVariableStartToEnd("123px", "img_width", "123");
 	}
 }
 class Xomw_MagicWordArray__fxt {
@@ -52,11 +55,10 @@ class Xomw_MagicWordArray__fxt {
 	public void Init__ary(String... words) {
 		magic_word_ary = new Xomw_MagicWordArray(magic_word_mgr, Bry_.Ary(words));
 	}
-	public void Test__matchVariableStartToEnd(String expd_str, String... vals) {
-		byte[] expd = Bry_.new_u8(expd_str);
-		for (String val : vals) {
-			byte[] actl = magic_word_ary.matchVariableStartToEnd(Bry_.new_u8(val));
-			Gftest.Eq__bry(expd, actl, val);
-		}
+	public void Test__matchVariableStartToEnd(String src, String expd_name, String expd_val) {
+		byte[][] rv = new byte[2][];
+		magic_word_ary.matchVariableStartToEnd(rv, Bry_.new_u8(src));
+		Gftest.Eq__str(expd_name, rv[0], expd_name);
+		Gftest.Eq__str(expd_val , rv[1], expd_val);
 	}
 }

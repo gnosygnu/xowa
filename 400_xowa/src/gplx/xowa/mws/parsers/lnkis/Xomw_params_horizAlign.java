@@ -15,9 +15,9 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.mws.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
-public class Xomw_mda_prms {
-	public int width  = -1;
-	public int height = -1;
-	public int page   = -1;
+package gplx.xowa.mws.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
+public class Xomw_params_horizAlign {
+	public Xomw_params_horizAlign Clear() {
+		return this;
+	}
 }

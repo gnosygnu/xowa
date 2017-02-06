@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.mws.filerepo.file; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.filerepo.*;
 import gplx.xowa.mws.media.*;
 import gplx.langs.phps.utls.*;
+import gplx.xowa.mws.parsers.*;
 /*	TODO.XO:
 	* P8: normalizeExtension
 	* P8: normalizeTitle
@@ -442,9 +443,10 @@ public class Xomw_File {
 	* @return int|boolean
 	*/
 	// @dflt: page = 1
-	public int getWidth(int page) {
+	@gplx.Virtual public int getWidth(int page) {
 		return -1;
 	}
+	public int getWidth() {return this.getWidth(1);}
 
 	/**
 	* Return the height of the image. Returns false if the height is unknown
@@ -460,6 +462,7 @@ public class Xomw_File {
 	public int getHeight(int page) {
 		return -1;
 	}
+	public int getHeight() {return this.getHeight(1);}
 
 //		/**
 //		* Return the smallest bucket from wgThumbnailBuckets which is at least
@@ -680,18 +683,19 @@ public class Xomw_File {
 //		public function getSize() {
 //			return false;
 //		}
-//
-//		/**
-//		* Returns the MIME type of the file.
-//		* Overridden by LocalFile, UnregisteredLocalFile
-//		* STUB
-//		*
-//		* @return String
-//		*/
-//		function getMimeType() {
-//			return 'unknown/unknown';
-//		}
-//
+
+	/**
+	* Returns the MIME type of the file.
+	* Overridden by LocalFile, UnregisteredLocalFile
+	* STUB
+	*
+	* @return String
+	*/
+	@gplx.Virtual public byte[] getMimeType() {
+		return Mime_type__unknown;
+	}
+	private static final    byte[] Mime_type__unknown = Bry_.new_a7("unknown/unknown");
+
 //		/**
 //		* Return the type of the media in the file.
 //		* Use the value returned by this function with the MEDIATYPE_xxx constants.
@@ -1347,9 +1351,9 @@ public class Xomw_File {
 	* @return MediaHandler|boolean Registered MediaHandler for file's MIME type
 	*   or false if none found
 	*/
-	public Xomw_MediaHandler getHandler() {
+	public Xomw_MediaHandler getHandler(Xomw_parser_env env) {
 		if (this.handler == null) {
-//				this.handler = MediaHandler::getHandler(this.getMimeType());
+			this.handler = env.MediaHandlerFactory().getHandler(this.getMimeType());
 		}
 
 		return this.handler;
