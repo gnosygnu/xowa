@@ -31,6 +31,7 @@ public class Xobc_task_bridge implements Bridge_cmd_itm {
 			case Proc__add_work:				task_mgr.Todo_mgr().Add_work(args.Get_as_int("task_id")); break;
 			case Proc__del_work:				task_mgr.Work_mgr().Del_work(args.Get_as_int("task_id")); break;
 			case Proc__del_done:				task_mgr.Done_mgr().Del_done(args.Get_as_int("task_id")); break;
+			case Proc__del_todo:				task_mgr.Todo_mgr().Del_todo(args.Get_as_int("task_id")); break;
 			case Proc__run_next:				task_mgr.Work_mgr().Run_next(); break;
 			case Proc__stop_cur:				task_mgr.Work_mgr().Stop_cur(); break;
 			case Proc__redo_cur:				task_mgr.Work_mgr().Redo_cur(); break;
@@ -40,7 +41,11 @@ public class Xobc_task_bridge implements Bridge_cmd_itm {
 		}
 		return "";
 	}
-	private static final byte Proc__reload = 0, Proc__add_work = 1, Proc__del_work = 2, Proc__del_done = 3, Proc__run_next = 4, Proc__stop_cur = 5, Proc__redo_cur = 6, Proc__download_db = 7, Proc__filter_todo = 8;
+	private static final byte 
+	  Proc__reload = 0, Proc__add_work = 1, Proc__del_work = 2, Proc__del_done = 3
+	, Proc__run_next = 4, Proc__stop_cur = 5, Proc__redo_cur = 6, Proc__download_db = 7, Proc__filter_todo = 8
+	, Proc__del_todo = 9
+	;
 	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("reload"						, Proc__reload)
 	.Add_str_byte("add_work"					, Proc__add_work)
@@ -51,6 +56,7 @@ public class Xobc_task_bridge implements Bridge_cmd_itm {
 	.Add_str_byte("redo_cur"					, Proc__redo_cur)
 	.Add_str_byte("download_db"					, Proc__download_db)
 	.Add_str_byte("filter_todo"					, Proc__filter_todo)
+	.Add_str_byte("del_todo"					, Proc__del_todo)
 	;
 
 	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("builder_central.exec");

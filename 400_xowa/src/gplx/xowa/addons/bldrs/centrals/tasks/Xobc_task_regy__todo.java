@@ -40,4 +40,9 @@ public class Xobc_task_regy__todo extends Xobc_task_regy__base {
 		user_db.Work_task_tbl().Insert(task_id, task.Task_seqn(), step_id, Xobc_cmd__base.Seqn__0);
 		task_mgr.Transfer(this, task_mgr.Work_mgr(), task);
 	}
+	public void Del_todo(int task_id) {
+		Xobc_task_itm task = this.Get_by(task_id);
+		task_mgr.User_db().Done_task_tbl().Insert(task_id, task.Task_seqn());
+		task_mgr.Transfer(this, task_mgr.Done_mgr(), task);
+	}
 }
