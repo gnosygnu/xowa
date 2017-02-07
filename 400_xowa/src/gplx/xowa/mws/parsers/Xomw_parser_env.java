@@ -19,6 +19,7 @@ package gplx.xowa.mws.parsers; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.xowa.mws.filerepo.file.*; import gplx.xowa.mws.media.*;
 public class Xomw_parser_env {
 	public byte[] Lang__align_end = Bry_.new_a7("right");
+	public int User__default__thumbsize = 220;
 	public Xomw_MagicWordMgr Magic_word_mgr() {return magic_word_mgr;} private final    Xomw_MagicWordMgr magic_word_mgr = new Xomw_MagicWordMgr();
 	public Xomw_message_mgr Message_mgr() {return message_mgr;} private final    Xomw_message_mgr message_mgr = new Xomw_message_mgr();
 	public Xomw_file_finder File_finder() {return file_finder;} private Xomw_file_finder file_finder = new Xomw_file_finder__noop();

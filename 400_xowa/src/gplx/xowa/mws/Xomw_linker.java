@@ -154,7 +154,7 @@ public class Xomw_linker {
 				// For caching health: If width scaled down due to upright
 				// parameter, round to full __0 pixel to avoid the creation of a
 				// lot of odd thumbs.
-				int pref_width = 0;
+				int pref_width = parser.Env().User__default__thumbsize;
 //					pref_width = isset(frame_params['upright']) ?
 //						round($wgThumbLimits[width_option] * frame_params['upright'], -1) :
 //						$wgThumbLimits[width_option];
@@ -200,7 +200,7 @@ public class Xomw_linker {
 			// Create a resized image, without the additional thumbnail features
 //				$thumb = $file->transform(handler_params);
 			// file.getPath()
-			thumb = new Xomw_MediaTransformOutput(file, file.getUrl(), null, file.getWidth(), file.getHeight());
+			thumb = new Xomw_MediaTransformOutput(file, file.getUrl(), file.getUrl(), file.getWidth(), file.getHeight());
 		}
 		else {
 			thumb = null;
@@ -320,7 +320,7 @@ public class Xomw_linker {
 			else if (frame_params.framed != null) {
 				// Use image dimensions, don't scale
 //					thumb = $file->getUnscaledThumb(handler_params);
-				thumb = new Xomw_MediaTransformOutput(file, file.getUrl(), null, file.getWidth(), file.getHeight());
+				thumb = new Xomw_MediaTransformOutput(file, file.getUrl(), file.getUrl(), file.getWidth(), file.getHeight());
 				no_scale = true;
 			}
 			else {
@@ -331,7 +331,8 @@ public class Xomw_linker {
 					handler_params.width = src_width;
 				}
 //					thumb = $file->transform(handler_params);
-				thumb = new Xomw_MediaTransformOutput(file, file.getUrl(), null, file.getWidth(), file.getHeight());
+				thumb = file.transform(handler_params, 0);
+//						new Xomw_MediaTransformOutput(file, file.getUrl(), file.getUrl(), file.getWidth(), file.getHeight());
 			}
 
 			if (thumb != null) {

@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.mws.filerepo.file; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.filerepo.*;
 import gplx.xowa.mws.media.*;
 import gplx.langs.phps.utls.*;
-import gplx.xowa.mws.parsers.*; import gplx.xowa.mws.parsers.lnkis.*;	
+import gplx.xowa.mws.parsers.*; import gplx.xowa.mws.parsers.lnkis.*;
+public class Xomw_File {
 /*	TODO.XO:
 	* P8: normalizeExtension
 	* P8: normalizeTitle
 */
-public class Xomw_File {
 	private final    Xomw_parser_env env;
 //		// Bitfield values akin to the Revision deletion constants
 //		static final DELETED_FILE = 1;
@@ -98,8 +98,8 @@ public class Xomw_File {
 	/** @var String The name of a file from its title Object */
 	private byte[] name;
 
-//		/** @var String The storage path corresponding to one of the zones */
-//		protected path;
+	/** @var String The storage path corresponding to one of the zones */
+	private byte[] path;
 
 	/** @var String Relative path including trailing slash */
 	private byte[] hashPath;
@@ -129,7 +129,8 @@ public class Xomw_File {
 //
 //		/** @var array Cache of tmp filepaths pointing to generated bucket thumbnails, keyed by width */
 //		protected tmpBucketedThumbCache = [];
-//
+
+	private byte[] relPath;
 //		/**
 //		* Call this constructor from child classes.
 //		*
@@ -385,29 +386,29 @@ public class Xomw_File {
 //				return this.getUrl();
 //			}
 //		}
-//
-//		/**
-//		* Return the storage path to the file. Note that this does
-//		* not mean that a file actually exists under that location.
-//		*
-//		* This path depends on whether directory hashing is active or not,
-//		* i.e. whether the files are all found in the same directory,
-//		* or in hashed paths like /images/3/3c.
-//		*
-//		* Most callers don't check the return value, but ForeignAPIFile::getPath
-//		* returns false.
-//		*
-//		* @return String|boolean ForeignAPIFile::getPath can return false
-//		*/
-//		public function getPath() {
-//			if (!isset(this.path)) {
-//				this.assertRepoDefined();
-//				this.path = this.repo.getZonePath('public') . '/' . this.getRel();
-//			}
-//
-//			return this.path;
-//		}
-//
+
+	/**
+	* Return the storage path to the file. Note that this does
+	* not mean that a file actually exists under that location.
+	*
+	* This path depends on whether directory hashing is active or not,
+	* i.e. whether the files are all found in the same directory,
+	* or in hashed paths like /images/3/3c.
+	*
+	* Most callers don't check the return value, but ForeignAPIFile::getPath
+	* returns false.
+	*
+	* @return String|boolean ForeignAPIFile::getPath can return false
+	*/
+	public byte[] getPath() {
+		if (this.path == null) {
+			// this.assertRepoDefined();
+			this.path = Bry_.Add(this.repo.getZonePath(Xomw_FileRepo.Zone__public), Byte_ascii.Slash_bry, this.getRel());
+		}
+
+		return this.path;
+	}
+
 //		/**
 //		* Get an FS copy or original of this file and return the path.
 //		* Returns false on failure. Callers must not alter the file.
@@ -462,7 +463,7 @@ public class Xomw_File {
 	* @return boolean|int False on failure
 	*/
 	// @dflt: page = 1
-	public int getHeight(int page) {
+	@gplx.Virtual public int getHeight(int page) {
 		return -1;
 	}
 	public int getHeight() {return this.getHeight(1);}
@@ -724,7 +725,7 @@ public class Xomw_File {
 	*/
 	public boolean canRender() {
 		if (this.canRenderObj == null) {
-			this.canRenderVar = this.getHandler(env).canRender(this) && this.exists();
+			this.canRenderVar = this.getHandler().canRender(this) && this.exists();
 			this.canRenderObj = this;
 		}
 
@@ -869,7 +870,7 @@ public class Xomw_File {
 	*/
 	public boolean exists() {
 //			return this.getPath() && this.repo.fileExists(this.path);
-		return false;
+		return true;
 	}
 
 //		/**
@@ -919,53 +920,57 @@ public class Xomw_File {
 //
 //			return this.transform(hp);
 //		}
-//
-//		/**
-//		* Return the file name of a thumbnail with the specified parameters.
-//		* Use File::THUMB_FULL_NAME to always get a name like "<params>-<source>".
-//		* Otherwise, the format may be "<params>-<source>" or "<params>-thumbnail.<ext>".
-//		*
-//		* @param array params Handler-specific parameters
-//		* @param int flags Bitfield that supports THUMB_* constants
-//		* @return String|null
-//		*/
-//		public function thumbName(params, flags = 0) {
+
+	/**
+	* Return the file name of a thumbnail with the specified parameters.
+	* Use File::THUMB_FULL_NAME to always get a name like "<paramsVar>-<source>".
+	* Otherwise, the format may be "<paramsVar>-<source>" or "<paramsVar>-thumbnail.<ext>".
+	*
+	* @param array paramsVar Handler-specific parameters
+	* @param int flags Bitfield that supports THUMB_* constants
+	* @return String|null
+	*/
+	public byte[] thumbName(Xomw_params_handler handlerParams) {return thumbName(handlerParams, 0);}
+	public byte[] thumbName(Xomw_params_handler handlerParams, int flags) {
 //			name = (this.repo && !(flags & self::THUMB_FULL_NAME))
 //				? this.repo.nameForThumb(this.getName())
 //				: this.getName();
-//
-//			return this.generateThumbName(name, params);
-//		}
-//
-//		/**
-//		* Generate a thumbnail file name from a name and specified parameters
-//		*
-//		* @param String name
-//		* @param array params Parameters which will be passed to MediaHandler::makeParamString
-//		* @return String|null
-//		*/
-//		public function generateThumbName(name, params) {
-//			if (!this.getHandler()) {
-//				return null;
-//			}
-//			extension = this.getExtension();
+		byte[] name = this.getName();
+
+		return this.generateThumbName(name, handlerParams);
+	}
+
+	/**
+	* Generate a thumbnail file name from a name and specified parameters
+	*
+	* @param String name
+	* @param array paramsVar Parameters which will be passed to MediaHandler::makeParamString
+	* @return String|null
+	*/
+	public byte[] generateThumbName(byte[] name, Xomw_params_handler handlerParams) {
+		Xomw_MediaHandler handler = this.getHandler();
+		if (handler == null) {
+			return null;
+		}
+		extension = this.getExtension();
 //			list(thumbExt,) = this.getHandler().getThumbType(
-//				extension, this.getMimeType(), params);
-//			thumbName = this.getHandler().makeParamString(params);
-//
+//				extension, this.getMimeType(), paramsVar);
+		byte[] thumbName = handler.makeParamString(handlerParams);
+
 //			if (this.repo.supportsSha1URLs()) {
 //				thumbName .= '-' . this.getSha1() . '.' . thumbExt;
-//			} else {
-//				thumbName .= '-' . name;
-//
+//			}
+//			else {
+			thumbName = Bry_.Add(thumbName, Byte_ascii.Dash_bry, name);
+
 //				if (thumbExt != extension) {
 //					thumbName .= ".thumbExt";
 //				}
 //			}
-//
-//			return thumbName;
-//		}
-//
+
+		return thumbName;
+	}
+
 //		/**
 //		* Create a thumbnail of the image having the specified width/height.
 //		* The thumbnail will not be created if the width is larger than the
@@ -984,11 +989,11 @@ public class Xomw_File {
 //		* @return String
 //		*/
 //		public function createThumb(width, height = -1) {
-//			params = [ 'width' => width ];
+//			paramsVar = [ 'width' => width ];
 //			if (height != -1) {
-//				params['height'] = height;
+//				paramsVar['height'] = height;
 //			}
-//			thumb = this.transform(params);
+//			thumb = this.transform(paramsVar);
 //			if (!thumb || thumb.isError()) {
 //				return '';
 //			}
@@ -1001,41 +1006,40 @@ public class Xomw_File {
 //		*
 //		* @param String thumbPath Thumbnail storage path
 //		* @param String thumbUrl Thumbnail URL
-//		* @param array params
+//		* @param array paramsVar
 //		* @param int flags
 //		* @return MediaTransformOutput
 //		*/
-//		protected function transformErrorOutput(thumbPath, thumbUrl, params, flags) {
+//		protected function transformErrorOutput(thumbPath, thumbUrl, paramsVar, flags) {
 //			global wgIgnoreImageErrors;
 //
 //			handler = this.getHandler();
 //			if (handler && wgIgnoreImageErrors && !(flags & self::RENDER_NOW)) {
-//				return handler.getTransform(this, thumbPath, thumbUrl, params);
+//				return handler.getTransform(this, thumbPath, thumbUrl, paramsVar);
 //			} else {
 //				return new MediaTransformError('thumbnail_error',
-//					params['width'], 0, wfMessage('thumbnail-dest-create'));
+//					paramsVar['width'], 0, wfMessage('thumbnail-dest-create'));
 //			}
 //		}
 
 	/**
 	* Transform a media file
 	*
-	* @param array An associative array of handler-specific parameters.
+	* @param array paramsVar An associative array of handler-specific parameters.
 	*   Typical keys are width, height and page.
 	* @param int flags A bitfield, may contain self::RENDER_NOW to force rendering
 	* @return ThumbnailImage|MediaTransformOutput|boolean False on failure
 	*/
 	// XO.MW.DFLT:flags=0;
-	public Object transform(Xomw_param_map paramsMap, int flags) {
+	public Xomw_MediaTransformOutput transform(Xomw_params_handler handlerParams, int flags) {
 //			global wgThumbnailEpoch;
 
-		Object thumb = null;
+		Xomw_MediaTransformOutput thumb = null;
 		do {
 			if (!this.canRender()) {
-				thumb = this.iconThumb();
+//					thumb = this.iconThumb();
 				break; // not a bitmap or renderable image, don't try
 			}
-
 			// Get the descriptionUrl to embed it as comment into the thumbnail. Bug 19791.
 //				descriptionUrl = this.getDescriptionUrl();
 //				if (descriptionUrl) {
@@ -1051,13 +1055,13 @@ public class Xomw_File {
 //						break;
 //					}
 //				}
-//
-//				normalisedParams = paramsMap;
+
+			Xomw_params_handler normalisedParams = handlerParams;
 //				handler.normaliseParams(this, normalisedParams);
-//
-//				thumbName = this.thumbName(normalisedParams);
-//				thumbUrl = this.getThumbUrl(thumbName);
-//				thumbPath = this.getThumbPath(thumbName); // final thumb path
+
+			byte[] thumbName = this.thumbName(normalisedParams);
+			byte[] thumbUrl = this.getThumbUrl(thumbName);
+			byte[] thumbPath = this.getThumbPath(thumbName); // final thumb path
 
 			if (this.repo != null) {
 //					// Defer rendering if a 404 handler is set up...
@@ -1077,11 +1081,11 @@ public class Xomw_File {
 //							// XXX: Pass in the storage path even though we are not rendering anything
 //							// and the path is supposed to be an FS path. This is due to getScalerType()
 //							// getting called on the path and clobbering thumb.getUrl() if it's false.
-//							thumb = handler.getTransform(this, thumbPath, thumbUrl, paramsMap);
+						thumb = handler.getTransform(this, thumbPath, thumbUrl, handlerParams);
 //							thumb.setStoragePath(thumbPath);
-//							break;
+						break;
 //						}
-//					}
+				}
 //					elseif (flags & self::RENDER_FORCE) {
 //						wfDebug(__METHOD__ . " forcing rendering per flag File::RENDER_FORCE\n");
 //					}
@@ -1092,14 +1096,14 @@ public class Xomw_File {
 //						thumb = this.transformErrorOutput(thumbPath, thumbUrl, paramsMap, flags);
 //						break;
 //					}
-			}
-			Object tmpFile = null;
+//				}
+//				Object tmpFile = null;
 //				tmpFile = this.makeTransformTmpFile(thumbPath);
 //
 //				if (!tmpFile) {
 //					thumb = this.transformErrorOutput(thumbPath, thumbUrl, paramsMap, flags);
 //				} else {
-				thumb = this.generateAndSaveThumb(tmpFile, paramsMap, flags);
+//					thumb = this.generateAndSaveThumb(tmpFile, paramsMap, flags);
 //				}
 		} while (thumb != null);
 
@@ -1143,7 +1147,7 @@ public class Xomw_File {
 //			statTiming = microtime(true) - starttime;
 //			stats.timing('media.thumbnail.generate.transform', 1000 * statTiming);
 //
-//			if (!thumb) { // bad params?
+//			if (!thumb) { // bad paramsVar?
 //				thumb = false;
 //			} elseif (thumb.isError()) { // transform error
 //				/** @var thumb MediaTransformError */
@@ -1177,21 +1181,21 @@ public class Xomw_File {
 //
 //		/**
 //		* Generates chained bucketed thumbnails if needed
-//		* @param array params
+//		* @param array paramsVar
 //		* @param int flags
 //		* @return boolean Whether at least one bucket was generated
 //		*/
-//		protected function generateBucketsIfNeeded(params, flags = 0) {
+//		protected function generateBucketsIfNeeded(paramsVar, flags = 0) {
 //			if (!this.repo
-//				|| !isset(params['physicalWidth'])
-//				|| !isset(params['physicalHeight'])
+//				|| !isset(paramsVar['physicalWidth'])
+//				|| !isset(paramsVar['physicalHeight'])
 //			) {
 //				return false;
 //			}
 //
-//			bucket = this.getThumbnailBucket(params['physicalWidth']);
+//			bucket = this.getThumbnailBucket(paramsVar['physicalWidth']);
 //
-//			if (!bucket || bucket == params['physicalWidth']) {
+//			if (!bucket || bucket == paramsVar['physicalWidth']) {
 //				return false;
 //			}
 //
@@ -1203,10 +1207,10 @@ public class Xomw_File {
 //
 //			starttime = microtime(true);
 //
-//			params['physicalWidth'] = bucket;
-//			params['width'] = bucket;
+//			paramsVar['physicalWidth'] = bucket;
+//			paramsVar['width'] = bucket;
 //
-//			params = this.getHandler().sanitizeParamsForBucketing(params);
+//			paramsVar = this.getHandler().sanitizeParamsForBucketing(paramsVar);
 //
 //			tmpFile = this.makeTransformTmpFile(bucketPath);
 //
@@ -1214,7 +1218,7 @@ public class Xomw_File {
 //				return false;
 //			}
 //
-//			thumb = this.generateAndSaveThumb(tmpFile, params, flags);
+//			thumb = this.generateAndSaveThumb(tmpFile, paramsVar, flags);
 //
 //			buckettime = microtime(true) - starttime;
 //
@@ -1235,14 +1239,14 @@ public class Xomw_File {
 //
 //		/**
 //		* Returns the most appropriate source image for the thumbnail, given a target thumbnail size
-//		* @param array params
+//		* @param array paramsVar
 //		* @return array Source path and width/height of the source
 //		*/
-//		public function getThumbnailSource(params) {
+//		public function getThumbnailSource(paramsVar) {
 //			if (this.repo
 //				&& this.getHandler().supportsBucketing()
-//				&& isset(params['physicalWidth'])
-//				&& bucket = this.getThumbnailBucket(params['physicalWidth'])
+//				&& isset(paramsVar['physicalWidth'])
+//				&& bucket = this.getThumbnailBucket(paramsVar['physicalWidth'])
 //			) {
 //				if (this.getWidth() != 0) {
 //					bucketHeight = round(this.getHeight() * (bucket / this.getWidth()));
@@ -1361,7 +1365,7 @@ public class Xomw_File {
 	* @return MediaHandler|boolean Registered MediaHandler for file's MIME type
 	*   or false if none found
 	*/
-	public Xomw_MediaHandler getHandler(Xomw_parser_env env) {
+	public Xomw_MediaHandler getHandler() {
 		if (this.handler == null) {
 			this.handler = env.MediaHandlerFactory().getHandler(this.getMimeType());
 		}
@@ -1374,7 +1378,7 @@ public class Xomw_File {
 	*
 	* @return ThumbnailImage
 	*/
-	private Object iconThumb() {
+//		private Object iconThumb() {
 //			global wgResourceBasePath, IP;
 //			assetsPath = "wgResourceBasePath/resources/assets/file-type-icons/";
 //			assetsDirectory = "IP/resources/assets/file-type-icons/";
@@ -1382,14 +1386,14 @@ public class Xomw_File {
 //			try = [ 'fileicon-' . this.getExtension() . '.png', 'fileicon.png' ];
 //			foreach (try as icon) {
 //				if (file_exists(assetsDirectory . icon)) { // always FS
-//					params = [ 'width' => 120, 'height' => 120 ];
+//					paramsVar = [ 'width' => 120, 'height' => 120 ];
 //
-//					return new ThumbnailImage(this, assetsPath . icon, false, params);
+//					return new ThumbnailImage(this, assetsPath . icon, false, paramsVar);
 //				}
 //			}
-
-		return null;
-	}
+//
+//			return null;
+//		}
 
 //		/**
 //		* Get last thumbnailing error.
@@ -1407,7 +1411,7 @@ public class Xomw_File {
 //		* @return array
 //		*/
 //		function getThumbnails() {
-//			return ...;
+//			return [];
 //		}
 //
 //		/**
@@ -1502,16 +1506,19 @@ public class Xomw_File {
 		return this.hashPath;
 	}
 
-//		/**
-//		* Get the path of the file relative to the public zone root.
-//		* This function is overridden in OldLocalFile to be like getArchiveRel().
-//		*
-//		* @return String
-//		*/
-//		function getRel() {
-//			return this.getHashPath() . this.getName();
-//		}
-//
+	/**
+	* Get the path of the file relative to the public zone root.
+	* This function is overridden in OldLocalFile to be like getArchiveRel().
+	*
+	* @return String
+	*/
+	private byte[] getRel() {
+		if (relPath == null) {
+			this.relPath = Bry_.Add(this.getHashPath(), this.getName());
+		}
+		return relPath;
+	}
+
 //		/**
 //		* Get the path of an archived file relative to the public zone root
 //		*
@@ -1529,22 +1536,22 @@ public class Xomw_File {
 //
 //			return path;
 //		}
-//
-//		/**
-//		* Get the path, relative to the thumbnail zone root, of the
-//		* thumbnail directory or a particular file if suffix is specified
-//		*
-//		* @param boolean|String suffix If not false, the name of a thumbnail file
-//		* @return String
-//		*/
-//		function getThumbRel(suffix = false) {
-//			path = this.getRel();
-//			if (suffix !== false) {
-//				path .= '/' . suffix;
-//			}
-//
-//			return path;
-//		}
+
+	/**
+	* Get the path, relative to the thumbnail zone root, of the
+	* thumbnail directory or a particular file if suffix is specified
+	*
+	* @param boolean|String suffix If not false, the name of a thumbnail file
+	* @return String
+	*/
+	private byte[] getThumbRel(byte[] suffix) {
+		path = this.getRel();
+		if (suffix != null) {
+			path = Bry_.Add(path, Byte_ascii.Slash_bry, suffix);
+		}
+
+		return path;
+	}
 
 	/**
 	* Get urlencoded path of the file relative to the public zone root.
@@ -1600,19 +1607,19 @@ public class Xomw_File {
 //			return this.repo.getZonePath('thumb') . '/' .
 //			this.getArchiveThumbRel(archiveName, suffix);
 //		}
-//
-//		/**
-//		* Get the path of the thumbnail directory, or a particular file if suffix is specified
-//		*
-//		* @param boolean|String suffix If not false, the name of a thumbnail file
-//		* @return String
-//		*/
-//		function getThumbPath(suffix = false) {
-//			this.assertRepoDefined();
-//
-//			return this.repo.getZonePath('thumb') . '/' . this.getThumbRel(suffix);
-//		}
-//
+
+	/**
+	* Get the path of the thumbnail directory, or a particular file if suffix is specified
+	*
+	* @param boolean|String suffix If not false, the name of a thumbnail file
+	* @return String
+	*/
+	public byte[] getThumbPath(byte[] suffix) {
+		// this.assertRepoDefined();
+
+		return Bry_.Add(this.repo.getZonePath(Xomw_FileRepo.Zone__thumb), Byte_ascii.Slash_bry, this.getThumbRel(suffix));
+	}
+
 //		/**
 //		* Get the path of the transcoded directory, or a particular file if suffix is specified
 //		*
@@ -1664,35 +1671,35 @@ public class Xomw_File {
 //
 //			return path;
 //		}
-//
-//		/**
-//		* Get the URL of the zone directory, or a particular file if suffix is specified
-//		*
-//		* @param String zone Name of requested zone
-//		* @param boolean|String suffix If not false, the name of a file in zone
-//		* @return String Path
-//		*/
-//		function getZoneUrl(zone, suffix = false) {
-//			this.assertRepoDefined();
-//			ext = this.getExtension();
-//			path = this.repo.getZoneUrl(zone, ext) . '/' . this.getUrlRel();
-//			if (suffix !== false) {
-//				path .= '/' . rawurlencode(suffix);
-//			}
-//
-//			return path;
-//		}
-//
-//		/**
-//		* Get the URL of the thumbnail directory, or a particular file if suffix is specified
-//		*
-//		* @param boolean|String suffix If not false, the name of a thumbnail file
-//		* @return String Path
-//		*/
-//		function getThumbUrl(suffix = false) {
-//			return this.getZoneUrl('thumb', suffix);
-//		}
-//
+
+	/**
+	* Get the URL of the zone directory, or a particular file if suffix is specified
+	*
+	* @param String zone Name of requested zone
+	* @param boolean|String suffix If not false, the name of a file in zone
+	* @return String Path
+	*/
+	private byte[] getZoneUrl(int zone, byte[] suffix) {
+		// this.assertRepoDefined();
+		byte[] ext = this.getExtension();
+		byte[] path = Bry_.Add(this.repo.getZoneUrl(zone, ext), Byte_ascii.Slash_bry, this.getUrlRel());
+		if (suffix != null) {
+			path = Bry_.Add(path, Byte_ascii.Slash_bry, gplx.langs.htmls.encoders.Gfo_url_encoder_.Php_rawurlencode.Encode(suffix));
+		}
+
+		return path;
+	}
+
+	/**
+	* Get the URL of the thumbnail directory, or a particular file if suffix is specified
+	*
+	* @param boolean|String suffix If not false, the name of a thumbnail file
+	* @return String Path
+	*/
+	private byte[] getThumbUrl(byte[] suffix) {
+		return this.getZoneUrl(Xomw_FileRepo.Zone__thumb, suffix);
+	}
+
 //		/**
 //		* Get the URL of the transcoded directory, or a particular file if suffix is specified
 //		*

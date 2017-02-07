@@ -24,7 +24,7 @@ public abstract class Xomw_MediaHandler {
 		this.key = key;
 	}
 
-//		static final TRANSFORM_LATER = 1;
+	private static final int TRANSFORM_LATER = 1;
 //		static final METADATA_GOOD = true;
 //		static final METADATA_BAD = false;
 //		static final METADATA_COMPATIBLE = 2; // for old but backwards compatible.
@@ -60,14 +60,14 @@ public abstract class Xomw_MediaHandler {
 	*/
 	public abstract boolean validateParam(int name_uid, byte[] val_bry, int val_int);
 
-//		/**
-//		* Merge a parameter array into a String appropriate for inclusion in filenames
-//		*
-//		* @param array $params Array of parameters that have been through normaliseParams.
-//		* @return String
-//		*/
-//		abstract public function makeParamString($params);
-//
+	/**
+	* Merge a parameter array into a String appropriate for inclusion in filenames
+	*
+	* @param array paramsVar Array of parameters that have been through normaliseParams.
+	* @return String
+	*/
+	public abstract byte[] makeParamString(Xomw_params_handler handlerParams);
+
 //		/**
 //		* Parse a param String made with makeParamString back into an array
 //		*
@@ -81,9 +81,9 @@ public abstract class Xomw_MediaHandler {
 //		* Should be idempotent.
 //		* Returns false if the parameters are unacceptable and the transform should fail
 //		* @param File $image
-//		* @param array $params
+//		* @param array $paramsVar
 //		*/
-//		abstract function normaliseParams($image, &$params);
+//		abstract function normaliseParams($image, &$paramsVar);
 //
 //		/**
 //		* Get an image size array like that returned by getimagesize(), or false if it
@@ -241,26 +241,26 @@ public abstract class Xomw_MediaHandler {
 //		* Return false to fall back to the regular getTransform().
 //		* @param File $image
 //		* @param String $script
-//		* @param array $params
+//		* @param array $paramsVar
 //		* @return boolean|ThumbnailImage
 //		*/
-//		function getScriptedTransform($image, $script, $params) {
+//		function getScriptedTransform($image, $script, $paramsVar) {
 //			return false;
 //		}
-//
-//		/**
-//		* Get a MediaTransformOutput Object representing the transformed output. Does not
-//		* actually do the transform.
-//		*
-//		* @param File $image The image Object
-//		* @param String $dstPath Filesystem destination path
-//		* @param String $dstUrl Destination URL to use in output HTML
-//		* @param array $params Arbitrary set of parameters validated by $this->validateParam()
-//		* @return MediaTransformOutput
-//		*/
-//		final function getTransform($image, $dstPath, $dstUrl, $params) {
-//			return $this->doTransform($image, $dstPath, $dstUrl, $params, self::TRANSFORM_LATER);
-//		}
+
+	/**
+	* Get a MediaTransformOutput Object representing the transformed output. Does not
+	* actually do the transform.
+	*
+	* @param File $image The image Object
+	* @param String $dstPath Filesystem destination path
+	* @param String $dstUrl Destination URL to use in output HTML
+	* @param array $paramsVar Arbitrary set of parameters validated by $this->validateParam()
+	* @return MediaTransformOutput
+	*/
+	public Xomw_MediaTransformOutput getTransform(Xomw_File image, byte[] dstPath, byte[] dstUrl, Xomw_params_handler handlerParams) {
+		return this.doTransform(image, dstPath, dstUrl, handlerParams, TRANSFORM_LATER);
+	}
 
 	/**
 	* Get a MediaTransformOutput Object representing the transformed output. Does the
@@ -269,23 +269,23 @@ public abstract class Xomw_MediaHandler {
 	* @param File $image The image Object
 	* @param String $dstPath Filesystem destination path
 	* @param String $dstUrl Destination URL to use in output HTML
-	* @param array $Arbitrary set of parameters validated by $this->validateParam()
+	* @param array $paramsVar Arbitrary set of parameters validated by $this->validateParam()
 	*   Note: These parameters have *not* gone through $this->normaliseParams()
 	* @param int $flags A bitfield, may contain self::TRANSFORM_LATER
 	* @return MediaTransformOutput
 	*/
 	// XO.MW:flags=0
-//		public abstract Object doTransform(Object image, Object dstPath, Object dstUrl, Xomw_param_map paramsMap, int flags);
+	public abstract Xomw_MediaTransformOutput doTransform(Xomw_File image, byte[] dstPath, byte[] dstUrl, Xomw_params_handler handlerParams, int flags);
 
 //		/**
 //		* Get the thumbnail extension and MIME type for a given source MIME type
 //		*
 //		* @param String $ext Extension of original file
 //		* @param String $mime MIME type of original file
-//		* @param array $params Handler specific rendering parameters
+//		* @param array $paramsVar Handler specific rendering parameters
 //		* @return array Thumbnail extension and MIME type
 //		*/
-//		function getThumbType($ext, $mime, $params = null) {
+//		function getThumbType($ext, $mime, $paramsVar = null) {
 //			$magic = MimeMagic::singleton();
 //			if (!$ext || $magic->isMatchingExtension($ext, $mime) === false) {
 //				// The extension is not valid for this MIME type and we do
@@ -308,7 +308,7 @@ public abstract class Xomw_MediaHandler {
 //		* @return array
 //		*/
 //		public function getStreamHeaders($metadata) {
-//			return ...;
+//			return [];
 //		}
 
 	/**
@@ -614,7 +614,7 @@ public abstract class Xomw_MediaHandler {
 //		*/
 //		static function getGeneralLongDesc($file) {
 //			return wfMessage('file-info')->sizeParams($file->getSize())
-//				->params('<span class="mime-type">' . $file->getMimeType() . '</span>')->parse();
+//				->paramsVar('<span class="mime-type">' . $file->getMimeType() . '</span>')->parse();
 //		}
 //
 //		/**
@@ -828,13 +828,13 @@ public abstract class Xomw_MediaHandler {
 //		}
 //
 //		/**
-//		* Returns a normalised params array for which parameters have been cleaned up for bucketing
+//		* Returns a normalised paramsVar array for which parameters have been cleaned up for bucketing
 //		* purposes
-//		* @param array $params
+//		* @param array $paramsVar
 //		* @return array
 //		*/
-//		public function sanitizeParamsForBucketing($params) {
-//			return $params;
+//		public function sanitizeParamsForBucketing($paramsVar) {
+//			return $paramsVar;
 //		}
 //
 //		/**

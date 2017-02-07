@@ -20,10 +20,12 @@ import gplx.langs.htmls.*;
 import gplx.langs.phps.utls.*;
 import gplx.xowa.mws.filerepo.file.*;
 public class Xomw_MediaTransformOutput {
-	private int width = -1, height = -1;
-	public byte[] url;
+//		private final    Xomw_File file;
+	private final    byte[] url;
+	private final    int width, height;
 	private final    List_adp attribs = List_adp_.New(), link_attribs = List_adp_.New();
 	public Xomw_MediaTransformOutput(Xomw_File file, byte[] url, byte[] path, int width, int height) {
+//			this.file = file;
 		this.url = url;
 		this.width = width;
 		this.height = height;

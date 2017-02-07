@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.filerepo; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
+import gplx.xowa.mws.filerepo.file.*;
 import gplx.langs.phps.utls.*;
 /*	TODO.XO:
 	* getZoneUrl
@@ -345,14 +346,14 @@ public class Xomw_FileRepo {
 //
 //			return [ this.zones[zone]['container'], this.zones[zone]['directory'] ];
 //		}
-//
-//		/**
-//		* Get the storage path corresponding to one of the zones
-//		*
-//		* @param String zone
-//		* @return String|null Returns null if the zone is not defined
-//		*/
-//		public function getZonePath(zone) {
+
+	/**
+	* Get the storage path corresponding to one of the zones
+	*
+	* @param String zone
+	* @return String|null Returns null if the zone is not defined
+	*/
+	public byte[] getZonePath(int zone) {
 //			list(container, super) = this.getZoneLocation(zone);
 //			if (container === null || super === null) {
 //				return null;
@@ -363,8 +364,9 @@ public class Xomw_FileRepo {
 //			}
 //
 //			return "mwstore://backendName/{container}{super}";
-//		}
-//
+		return Bry_.Empty;
+	}
+
 //		/**
 //		* Create a new File Object from the local repository
 //		*
@@ -1337,19 +1339,20 @@ public class Xomw_FileRepo {
 //
 //			return status;
 //		}
-//
-//		/**
-//		* Checks existence of a a file
-//		*
-//		* @param String file Virtual URL (or storage path) of file to check
-//		* @return boolean
-//		*/
-//		public function fileExists(file) {
-//			result = this.fileExistsBatch([ file ]);
+
+	/**
+	* Checks existence of a a file
+	*
+	* @param String file Virtual URL (or storage path) of file to check
+	* @return boolean
+	*/
+	public boolean fileExists(Xomw_File file) {
+//			result = this.fileExistsBatch(file);
 //
 //			return result[0];
-//		}
-//
+		return file.exists();
+	}
+
 //		/**
 //		* Checks existence of an array of files.
 //		*

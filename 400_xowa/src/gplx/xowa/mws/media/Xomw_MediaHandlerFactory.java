@@ -25,7 +25,7 @@ public class Xomw_MediaHandlerFactory {
 	public Xomw_MediaHandlerFactory() {
 		// Default, MediaWiki core media handlers
 //			'image/jpeg' => JpegHandler::class,
-		handlers.Add(Mime__image__png, new Xomw_ImageHandler(Mime__image__png));	// PngHandler
+		handlers.Add(Mime__image__png, new Xomw_TransformationalImageHandler(Mime__image__png));	// PngHandler
 //			'image/gif' => GIFHandler::class,
 //			'image/tiff' => TiffHandler::class,
 //			'image/webp' => WebPHandler::class,

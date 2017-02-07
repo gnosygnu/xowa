@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
 import gplx.xowa.mws.filerepo.file.*; import gplx.xowa.mws.parsers.lnkis.*;
 // MEMORY:only one instance per wiki
-public class Xomw_ImageHandler extends Xomw_MediaHandler {	private final    Xomw_param_map paramMap = new Xomw_param_map();
+public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private final    Xomw_param_map paramMap = new Xomw_param_map();
 	public Xomw_ImageHandler(byte[] key) {super(key);
 		paramMap.Add(Xomw_param_itm.Mw__img_width, Xomw_param_map.Type__handler, Xomw_param_itm.Name_bry__width);
 	}
@@ -48,20 +48,23 @@ public class Xomw_ImageHandler extends Xomw_MediaHandler {	private final    Xomw
 		}
 	}
 
-//		public function makeParamString(params) {
-//			if (isset(params['physicalWidth'])) {
-//				width = params['physicalWidth'];
-//			} elseif (isset(params['width'])) {
-//				width = params['width'];
-//			} else {
-//				throw new MediaTransformInvalidParametersException('No width specified to ' . __METHOD__);
-//			}
-//
-//			# Removed for ProofreadPage
-//			# width = intval(width);
-//			return "{width}px";
-//		}
-//
+	@Override public byte[] makeParamString(Xomw_params_handler handlerParams) {
+		int width = 0;
+		if (handlerParams.physicalWidth != -1) {
+			width = handlerParams.physicalWidth;
+		}
+		else if (handlerParams.width != -1) {
+			width = handlerParams.width;
+		}
+		else {
+			throw Err_.new_wo_type("No width specified to makeParamString");
+		}
+
+		// Removed for ProofreadPage
+		// width = intval(width);
+		return Bry_.Add(Int_.To_bry(width), Xomw_lnki_wkr.Bry__px);
+	}
+
 //		public function parseParamString(str) {
 //			m = false;
 //			if (preg_match('/^(\d+)px/', str, m)) {

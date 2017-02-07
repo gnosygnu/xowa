@@ -19,9 +19,7 @@ package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import gplx.xowa.mws.parsers.lnkis.*;
 import gplx.xowa.mws.filerepo.file.*;
 // Media transform output for images
-// extends MediaTransformOutput {
-public class Xomw_ThumbnailImage {
-	/**
+public class Xomw_ThumbnailImage extends Xomw_MediaTransformOutput {	/**
 	* Get a thumbnail Object from a file and parameters.
 	* If path is set to null, the output file is treated as a source copy.
 	* If path is set to false, no output file will be created.
@@ -33,7 +31,7 @@ public class Xomw_ThumbnailImage {
 	* @param String|boolean path Filesystem path to the thumb
 	* @param array parameters Associative array of parameters
 	*/
-	public Xomw_ThumbnailImage(Xomw_File file, byte[] url, byte[] path, Xomw_param_map parameters) {
+	public Xomw_ThumbnailImage(Xomw_File file, byte[] url, byte[] path, Xomw_params_handler parameters) {super(file, url, path, parameters.width, parameters.height);
 //			defaults = [
 //				'page' => false,
 //				'lang' => false

@@ -20,14 +20,17 @@ public class Xomw_params_handler {
 	public int width  = -1;
 	public int height = -1;
 	public int page   = -1;
+	public int physicalWidth = -1;
 	public Xomw_params_handler Clear() {
 		width = height = page = -1;
+		physicalWidth = -1;
 		return this;
 	}
 	public void Copy_to(Xomw_params_handler src) {
 		this.width = src.width;
 		this.height = src.height;
 		this.page = src.page;
+		this.physicalWidth = -1;
 	}
 	public void Set(int uid, byte[] val_bry, int val_int) {
 		switch (uid) {

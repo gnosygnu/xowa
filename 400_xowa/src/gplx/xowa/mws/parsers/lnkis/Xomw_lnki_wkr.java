@@ -483,7 +483,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		Xomw_File file = fetchFileAndTitle(title, null);
 
 		// Get parameter map
-		Xomw_MediaHandler handler = file == null ? null : file.getHandler(env);
+		Xomw_MediaHandler handler = file == null ? null : file.getHandler();
 
 		Xomw_image_params tmp_img_params = pctx.Lnki_wkr__make_image__img_params;
 		this.getImageParams(tmp_img_params, handler);
@@ -768,7 +768,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		img_size[0] = Bry_.To_int_or(src, w_bgn, w_end, 0);
 		img_size[1] = Bry_.To_int_or(src, h_bgn, h_end, 0);
 	}
-	private static final    byte[] Bry__px = Bry_.new_a7("px");
+	public static final    byte[] Bry__px = Bry_.new_a7("px");
 
 	/**
 	* Fetch a file and its title and register a reference to it.

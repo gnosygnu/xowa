@@ -27,7 +27,7 @@ public class Xomw_lnki_wkr__file__tst {
 		fxt.Test__to_html("[[File:A.png]]",     "<img alt='A.png' src='/orig/7/70/A.png' />");
 	}
 	@Test   public void Thumb() {
-		fxt.Test__to_html("[[File:A.png|thumb]]", "<div class='thumb tright'><div class='thumbinner' style='width:302px;'><a><img alt='A.png' src='/orig/7/70/A.png' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='' class='internal'></a></div></div></div></div>");
+		fxt.Test__to_html("[[File:A.png|thumb]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a><img alt='A.png' src='/thumb/7/70/A.png/220px-A.png' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='' class='internal'></a></div></div></div></div>");
 	}
 	@Test   public void Size() {
 		fxt.Test__to_html("[[File:A.png|123x456px]]", "<img alt='A.png' src='/orig/7/70/A.png' />");

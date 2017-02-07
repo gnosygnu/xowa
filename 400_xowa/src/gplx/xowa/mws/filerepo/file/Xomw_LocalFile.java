@@ -706,13 +706,13 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //			}
 	}
 
-//		/**
-//		* Return the height of the image
-//		*
-//		* @param int page
-//		* @return int
-//		*/
-//		public function getHeight( page = 1 ) {
+	/**
+	* Return the height of the image
+	*
+	* @param int page
+	* @return int
+	*/
+	@Override public int getHeight(int page) {
 //			this.load();
 //
 //			if ( this.isMultipage() ) {
@@ -729,9 +729,9 @@ public class Xomw_LocalFile extends Xomw_File {//		static final VERSION = 10; //
 //					return 0;
 //				}
 //			} else {
-//				return this.height;
+			return this.height;
 //			}
-//		}
+	}
 //
 //		/**
 //		* Returns ID or name of user who uploaded the file
