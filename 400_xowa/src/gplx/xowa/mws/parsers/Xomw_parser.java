@@ -44,6 +44,7 @@ public class Xomw_parser {
 	private int marker_index = 0;
 	// private final    Xomw_prepro_wkr prepro_wkr = new Xomw_prepro_wkr();
 	public Xomw_parser_env         Env()             {return env;}            private final    Xomw_parser_env env = new Xomw_parser_env();
+	public Xomw_parser_options     Options()         {return options;}        private final    Xomw_parser_options options = new Xomw_parser_options();
 	public Xomw_strip_state        Strip_state()     {return strip_state;}    private final    Xomw_strip_state strip_state = new Xomw_strip_state();
 	public Xomw_sanitizer          Sanitizer()       {return sanitizer;}      private final    Xomw_sanitizer sanitizer = new Xomw_sanitizer();
 	public Xomw_linker             Linker()          {return linker;}         private final    Xomw_linker linker;

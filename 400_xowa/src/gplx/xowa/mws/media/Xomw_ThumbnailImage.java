@@ -138,54 +138,54 @@ public class Xomw_ThumbnailImage extends Xomw_MediaTransformOutput {	private fin
 		attribs.Add_many(Gfh_atr_.Bry__alt, alt);
 		attribs.Add_many(Gfh_atr_.Bry__src, url);
 		boolean link_attribs_is_null = false;
-		if (!Php_utl_.Empty(options.custom_url_link)) {
+		if (!Php_utl_.empty(options.custom_url_link)) {
 			link_attribs.Clear();
 			link_attribs.Add_many(Gfh_atr_.Bry__href, options.custom_url_link);
-			if (!Php_utl_.Empty(options.title)) {
+			if (!Php_utl_.empty(options.title)) {
 				link_attribs.Add_many(Gfh_atr_.Bry__title, options.title);
 			}
-			if (Php_utl_.Empty(options.custom_target_link)) {
+			if (Php_utl_.empty(options.custom_target_link)) {
 				link_attribs.Add_many(Gfh_atr_.Bry__target, options.custom_target_link);
 			}
-			else if (Php_utl_.Empty(options.parser_extlink_target)) {
+			else if (Php_utl_.empty(options.parser_extlink_target)) {
 				link_attribs.Add_many(Gfh_atr_.Bry__target, options.parser_extlink_target);
 			}
-			if (Php_utl_.Empty(options.parser_extlink_rel)) {
+			if (Php_utl_.empty(options.parser_extlink_rel)) {
 				link_attribs.Add_many(Gfh_atr_.Bry__rel, options.parser_extlink_rel);
 			}
 		}
-		else if (!Php_utl_.Empty(options.custom_title_link)) {
+		else if (!Php_utl_.empty(options.custom_title_link)) {
 //				byte[] title = options.custom_title_link;
 //				link_attribs.Clear();
 //				link_attribs.Add_many(Gfh_atr_.Bry__href, title.Get_link_url());
 //				byte[] options_title = options.title;
-//				link_attribs.Add_many(Gfh_atr_.Bry__title, Php_utl_.Empty(options_title) ? title.Get_full_text() : options_title);
+//				link_attribs.Add_many(Gfh_atr_.Bry__title, Php_utl_.empty(options_title) ? title.Get_full_text() : options_title);
 		}
-		else if (!Php_utl_.Empty(options.desc_link)) {
+		else if (!Php_utl_.empty(options.desc_link)) {
 //				link_attribs = this.getDescLinkAttribs(
 //					empty(options['title']) ? null : options['title'],
 //					$query
 //				);
 		}
-		else if (!Php_utl_.Empty(options.file_link)) {
+		else if (!Php_utl_.empty(options.file_link)) {
 //				link_attribs.Clear();
 //				link_attribs.Add_many(Gfh_atr_.Bry__href, file.Get_url());
 		}
 		else {
 			link_attribs_is_null = true;
-			if (!Php_utl_.Empty(options.title)) {
+			if (!Php_utl_.empty(options.title)) {
 				attribs.Add_many(Gfh_atr_.Bry__title, options.title);
 			}
 		}
 
-		if (!Php_utl_.Empty(options.no_dimensions)) {
+		if (!Php_utl_.empty(options.no_dimensions)) {
 			attribs.Add_many(Gfh_atr_.Bry__width, Int_.To_bry(width));
 			attribs.Add_many(Gfh_atr_.Bry__height, Int_.To_bry(height));
 		}
-		if (!Php_utl_.Empty(options.valign)) {
+		if (!Php_utl_.empty(options.valign)) {
 			attribs.Add_many(Gfh_atr_.Bry__style, Bry_.Add(Bry__vertical_align, options.valign));
 		}
-		if (!Php_utl_.Empty(options.img_cls)) {
+		if (!Php_utl_.empty(options.img_cls)) {
 			attribs.Add_many(Gfh_atr_.Bry__class, options.img_cls);
 		}
 		if (Php_utl_.isset(options.override_height)) {
@@ -198,7 +198,7 @@ public class Xomw_ThumbnailImage extends Xomw_MediaTransformOutput {	private fin
 		// Additional densities for responsive images, if specified.
 		// If any of these urls is the same as src url, it'll be excluded.
 //			$responsiveUrls = array_diff(this.responsiveUrls, [ this.url ]);
-//			if (!Php_utl_.Empty($responsiveUrls)) {
+//			if (!Php_utl_.empty($responsiveUrls)) {
 //				$attribs['srcset'] = Html::srcSet($responsiveUrls);
 //			}
 

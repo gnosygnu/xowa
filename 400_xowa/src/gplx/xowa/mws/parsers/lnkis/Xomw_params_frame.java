@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
+import gplx.xowa.mws.utls.*;
 public class Xomw_params_frame {
 	public byte[] align = null;
 	public byte[] valign = null;
@@ -24,7 +25,7 @@ public class Xomw_params_frame {
 	public byte[] framed = null;
 	public byte[] frameless = null;
 	public byte[] thumbnail = null;
-	public byte[] manual_thumb = null;
+	public byte[] manualthumb = null;
 	public byte[] alt = null;
 	public byte[] title = null;
 	public byte[] cls = null;
@@ -38,7 +39,7 @@ public class Xomw_params_frame {
 	public byte[] custom_target_link = null;
 	public boolean desc_link = false;
 	public byte[] desc_query = null;
-	public double upright = -1;
+	public double upright;
 	public void Set(int uid, byte[] val_bry, int val_int) {
 		switch (uid) {
 			case Xomw_param_itm.Name__thumbnail: thumbnail = val_bry; break;
@@ -46,12 +47,12 @@ public class Xomw_params_frame {
 	}
 	public Xomw_params_frame Clear() {
 		desc_link = false;
-		upright = -1;
+		upright = Php_utl_.Null_double;
 		align = valign = caption = frame = framed = frameless
-		= thumbnail = manual_thumb = alt = title = cls = img_cls
+		= thumbnail = manualthumb = alt = title = cls = img_cls
 		= link_title = link_url = link_target = no_link 
 		= custom_url_link = custom_target_link = desc_query
-		= null;
+		= Php_utl_.Null_bry;
 		return this;
 	}
 	public void Copy_to(Xomw_params_frame src) {
@@ -64,7 +65,7 @@ public class Xomw_params_frame {
 		this.framed = src.framed;
 		this.frameless = src.frameless;
 		this.thumbnail = src.thumbnail;
-		this.manual_thumb = src.manual_thumb;
+		this.manualthumb = src.manualthumb;
 		this.alt = src.alt;
 		this.title = src.title;
 		this.cls = src.cls;

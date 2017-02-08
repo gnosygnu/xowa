@@ -32,7 +32,7 @@ class Xomw_linker__split_trail__fxt {
 		linker.Init_by_wiki(new Xomw_parser_env(), trie);
 	}
 	public void Test__split_trail(String trail_str, String expd_inside, String expd_trail) {
-		byte[][] split_trail = linker.Split_trail(Bry_.new_u8(trail_str));
+		byte[][] split_trail = linker.splitTrail(Bry_.new_u8(trail_str));
 		Gftest.Eq__str(expd_inside, String_.new_u8(split_trail[0]));
 		Gftest.Eq__str(expd_trail , String_.new_u8(split_trail[1]));
 	}

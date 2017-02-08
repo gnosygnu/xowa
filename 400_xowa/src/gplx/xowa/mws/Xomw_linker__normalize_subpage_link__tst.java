@@ -36,7 +36,7 @@ class Xomw_linker__normalize_subpage_link__fxt {
 		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 	}
 	public void Test__normalize_subpage_link(String page_title_str, String link, String text, String expd_link, String expd_text) {
-		mgr.Normalize_subpage_link(normalize_subpage_link, wiki.Ttl_parse(Bry_.new_u8(page_title_str)), Bry_.new_u8(link), Bry_.new_u8(text));
+		mgr.normalizeSubpageLink(normalize_subpage_link, wiki.Ttl_parse(Bry_.new_u8(page_title_str)), Bry_.new_u8(link), Bry_.new_u8(text));
 		Gftest.Eq__str(expd_link, String_.new_u8(normalize_subpage_link.link));
 		Gftest.Eq__str(expd_text, String_.new_u8(normalize_subpage_link.text));
 	}

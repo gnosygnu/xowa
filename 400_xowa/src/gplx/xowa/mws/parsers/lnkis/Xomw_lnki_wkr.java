@@ -408,7 +408,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// for linking to a different variant.
 			if (!ns.Id_is_special() && nt.Eq_full_db(page_title) && !nt.Has_fragment()) {
 				bfr.Add(prefix);
-				linker.Make_self_link_obj(bfr, nt, text, Bry_.Empty, trail, Bry_.Empty);
+				linker.makeSelfLinkObj(bfr, nt, text, Bry_.Empty, trail, Bry_.Empty);
 				continue;
 			}
 
@@ -619,7 +619,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			=  frameParams.frame != null
 			|| frameParams.framed != null
 			|| frameParams.thumbnail != null
-			|| frameParams.manual_thumb != null
+			|| frameParams.manualthumb != null
 			;
 
 		// Will the image be presented in a frame, with the caption below?
@@ -667,8 +667,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		// Linker does the rest
 //			byte[] time = options.time;
 		Object time = null;
-//			options = $this->mOptions->getThumbSize()
-		linker.makeImageLink(bfr, pctx, parser, title, file, frameParams, handlerParams, time, desc_query, null);
+		linker.makeImageLink(bfr, pctx, parser, title, file, frameParams, handlerParams, time, desc_query, parser.Options().getThumbSize());
 
 		// Give the handler a chance to modify the parser Object
 //			if (handler != null) {
@@ -813,13 +812,13 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		return file;
 	}
 	public void Maybe_do_subpage_link(Xomw_linker__normalize_subpage_link rv, byte[] target, byte[] text) {
-		linker.Normalize_subpage_link(rv, page_title, target, text);
+		linker.normalizeSubpageLink(rv, page_title, target, text);
 	}
 	public void Replace_link_holders(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
 		holders.Replace(pctx, pbfr);
 	}
 	public void Make_known_link_holder(Bry_bfr bfr, Xoa_ttl nt, byte[] text, byte[] trail, byte[] prefix) {
-		byte[][] split_trail = linker.Split_trail(trail);
+		byte[][] split_trail = linker.splitTrail(trail);
 		byte[] inside = split_trail[0];
 		trail = split_trail[1];
 

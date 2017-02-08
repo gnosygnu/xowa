@@ -213,7 +213,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// This means that users can paste URLs directly into the text
 			// Funny characters like � aren't valid in URLs anyway
 			// This was changed in August 2004
-			linker.Make_external_link(bfr, url, Bry_.Mid(src, text_bgn, text_end), Bool_.N, link_type, parser.Get_external_link_attribs(attribs), Bry_.Empty);
+			linker.makeExternalLink(bfr, url, Bry_.Mid(src, text_bgn, text_end), Bool_.N, link_type, parser.Get_external_link_attribs(attribs), Bry_.Empty);
 
 			// XO.MW.UNSUPPORTED.HOOK: registers link for processing by other extensions?
 			// Register link in the output Object.

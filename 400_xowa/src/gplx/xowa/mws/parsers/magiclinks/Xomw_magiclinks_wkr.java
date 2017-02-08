@@ -261,7 +261,7 @@ public class Xomw_magiclinks_wkr {
 		byte[] text = null; // $this->maybeMakeExternalImage($url);
 		if (text == null) {
 			// Not an image, make a link
-			linker.Make_external_link(bfr, url
+			linker.makeExternalLink(bfr, url
 				, url	// $this->getConverterLanguage()->markNoConversion($url, true),
 				, true, Bry_.new_a7("free")
 				, parser.Get_external_link_attribs(atrs)

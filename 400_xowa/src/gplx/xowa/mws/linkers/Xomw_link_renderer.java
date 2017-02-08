@@ -157,7 +157,7 @@ public class Xomw_link_renderer {
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-01-31
 	private Xoa_ttl Normalize_target(Xoa_ttl target) {
-		return Xomw_linker.Normalise_special_page(target);
+		return Xomw_linker.normaliseSpecialPage(target);
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-02-01
 	private void Merge_attribs(Xomw_atr_mgr src, Xomw_atr_mgr trg) {

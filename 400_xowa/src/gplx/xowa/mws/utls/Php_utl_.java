@@ -17,10 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
 public class Php_utl_ {
-	public static boolean Empty(byte[] v)  {return v == null || v.length == 0;}
-	public static boolean Empty(boolean v)    {return v == false;}
-	public static boolean isset(byte[] v) {return v != null;}
-	public static boolean isset(int v) {return v != Null_int;}
+	public static boolean empty(byte[] v)   {return v == null || v.length == 0;}
+	public static boolean empty(boolean v)     {return v == false;}
+	public static boolean empty(int v)      {return v == 0;}
+	public static boolean isset(byte[] v)   {return v != null;}
+	public static boolean isset(int v)      {return v != Null_int;}
+	public static boolean isset(double v)   {return v != Null_double;}
 	public static boolean istrue(int v) {return v != Null_int;}
 	public static boolean isnumeric(byte[] src) {
 		if (src == null) return false;
@@ -38,5 +40,6 @@ public class Php_utl_ {
 		return true;
 	}
 	public static final int Null_int = Int_.Max_value;
+	public static final double Null_double = Double_.MinValue;
 	public static final    byte[] Null_bry = null;
 }
