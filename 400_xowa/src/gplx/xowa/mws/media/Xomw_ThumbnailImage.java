@@ -129,7 +129,7 @@ public class Xomw_ThumbnailImage extends Xomw_MediaTransformOutput {	private fin
 	// For images, desc-link and file-link are implemented as a click-through. For
 	// sounds and videos, they may be displayed in other ways.
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
-	@Override public void toHtml(Bry_bfr bfr, Bry_bfr tmp, Xomw_MediaTransformOutputParams options) {
+	@Override public void toHtml(Bry_bfr bfr, Bry_bfr tmp, Xomw_params_mto options) {
 		byte[] alt = options.alt;
 
 //			byte[] query = options.desc_query;

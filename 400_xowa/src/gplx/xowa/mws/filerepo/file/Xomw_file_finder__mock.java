@@ -21,6 +21,7 @@ public class Xomw_file_finder__mock implements Xomw_file_finder {
 	private final    Xomw_parser_env env;
 	public Xomw_file_finder__mock(Xomw_parser_env env) {this.env = env;}
 	private final    Hash_adp hash = Hash_adp_.New();
+	public void Clear() {hash.Clear();}
 	public Xomw_File Find_file(Xoa_ttl ttl) {
 		return (Xomw_File)hash.Get_by(ttl.Page_db_as_str());
 	}

@@ -22,6 +22,7 @@ public class Xomw_parser_ctx {
 	public Xomw_image_params         Lnki_wkr__make_image__img_params = new Xomw_image_params();
 	public byte[][]                  Lnki_wkr__make_image__match_magic_word = new byte[2][];
 	public int[]                     Lnki_wkr__make_image__img_size = new int[2];
+	public Xomw_params_mto           Linker__makeImageLink__prms = new Xomw_params_mto();
 
 	public void Init_by_page(Xoa_ttl page_title) {
 		this.page_title = page_title;

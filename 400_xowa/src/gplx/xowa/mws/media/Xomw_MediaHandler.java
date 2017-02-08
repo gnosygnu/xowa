@@ -616,25 +616,25 @@ public abstract class Xomw_MediaHandler {
 //			return wfMessage('file-info')->sizeParams($file->getSize())
 //				->paramsVar('<span class="mime-type">' . $file->getMimeType() . '</span>')->parse();
 //		}
-//
-//		/**
-//		* Calculate the largest thumbnail width for a given original file size
-//		* such that the thumbnail's height is at most $maxHeight.
-//		* @param int $boxWidth Width of the thumbnail box.
-//		* @param int $boxHeight Height of the thumbnail box.
-//		* @param int $maxHeight Maximum height expected for the thumbnail.
-//		* @return int
-//		*/
-//		public static function fitBoxWidth($boxWidth, $boxHeight, $maxHeight) {
-//			$idealWidth = $boxWidth * $maxHeight / $boxHeight;
-//			$roundedUp = ceil($idealWidth);
-//			if (round($roundedUp * $boxHeight / $boxWidth) > $maxHeight) {
-//				return floor($idealWidth);
-//			} else {
-//				return $roundedUp;
-//			}
-//		}
-//
+
+	/**
+	* Calculate the largest thumbnail width for a given original file size
+	* such that the thumbnail's height is at most $maxHeight.
+	* @param int $boxWidth Width of the thumbnail box.
+	* @param int $boxHeight Height of the thumbnail box.
+	* @param int $maxHeight Maximum height expected for the thumbnail.
+	* @return int
+	*/
+	public static int fitBoxWidth(int boxWidth, int boxHeight, int maxHeight) {
+		double idealWidth = boxWidth * maxHeight / boxHeight;
+		int roundedUp = Math_.Ceil_as_int(idealWidth);
+		if (Math_.Round(roundedUp * boxHeight / boxWidth, 0) > maxHeight) {
+			return Math_.Floor_as_int(idealWidth);
+		} else {
+			return roundedUp;
+		}
+	}
+
 //		/**
 //		* Shown in file history box on image description page.
 //		*

@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
-import org.junit.*; import gplx.core.tests.*; import gplx.xowa.mws.filerepo.*; import gplx.xowa.mws.filerepo.file.*;
+import org.junit.*; import gplx.core.tests.*;
+import gplx.xowa.mws.filerepo.*; import gplx.xowa.mws.filerepo.file.*;
+import gplx.xowa.mws.media.*;
 public class Xomw_lnki_wkr__file__tst {
 	private final    Xomw_lnki_wkr__fxt fxt = new Xomw_lnki_wkr__fxt();
 	@Before public void init() {
@@ -24,14 +26,28 @@ public class Xomw_lnki_wkr__file__tst {
 		fxt.Init__file("A.png", 300, 200);
 	}
 	@Test   public void Plain() {
-		fxt.Test__to_html("[[File:A.png]]",     "<img alt='A.png' src='/orig/7/70/A.png' />");
+		fxt.Test__to_html("[[File:A.png]]",     "<a><img alt='A.png' src='/orig/7/70/A.png' /></a>");
 	}
 	@Test   public void Thumb() {
 		fxt.Test__to_html("[[File:A.png|thumb]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a><img alt='A.png' src='/thumb/7/70/A.png/220px-A.png' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='' class='internal'></a></div></div></div></div>");
 	}
 	@Test   public void Size() {
-		fxt.Test__to_html("[[File:A.png|123x456px]]", "<img alt='A.png' src='/thumb/7/70/A.png/123px-A.png' />");
+		fxt.Test__to_html("[[File:A.png|123x456px]]", "<a><img alt='A.png' src='/thumb/7/70/A.png/123px-A.png' /></a>");
 	}
+	@Test   public void fitBoxWidth() {
+		// COMMENT:"Height is the relative smaller dimension, so scale width accordingly"
+		// consider file of 200,100 (2:1)
+		// EX_1: view is 120,40 (3:1)
+		// - dimensions are either (a) 120,80 or (b) 80,40
+		// - use (b) 80,40
+		// EX_2: view is 120,80 (1.5:1)
+		// - dimensions are either (a) 120,60 or (b) 160,80
+		// - use (a) 120,60
+		fxt.Init__file("A.png", 200, 100);
+		fxt.Test__to_html__has("[[File:A.png|120x40px]]", "/80px-A.png");
+		fxt.Test__to_html__has("[[File:A.png|120x80px]]", "/120px-A.png");
+	}
+
 	@Test   public void Test__parseWidthParam() {
 		int[] img_size = new int[2];
 		// WxHpx
@@ -76,7 +92,7 @@ class Xomw_lnki_wkr__fxt {
 		wkr.Clear_state();
 	}
 	public void Init__file(String title, int w, int h) {
-		file_finder.Add(title, repo, w, h, gplx.xowa.files.Xof_ext_.Mime_type__ary[gplx.xowa.files.Xof_ext_.Id_png]);
+		file_finder.Add(title, repo, w, h, Xomw_MediaHandlerFactory.Mime__image__png);
 	}
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
@@ -85,11 +101,18 @@ class Xomw_lnki_wkr__fxt {
 		Gftest.Eq__ary__lines(expd, pbfr.Rslt().To_str_and_clear(), src_str);
 	}
 	public void Test__to_html(String src_str, String expd) {
+		if (apos) expd = gplx.langs.htmls.Gfh_utl.Replace_apos(expd);
+		Gftest.Eq__ary__lines(expd, Exec__to_html(src_str), src_str);
+	}
+	public void Test__to_html__has(String src_str, String expd) {
+		if (apos) expd = gplx.langs.htmls.Gfh_utl.Replace_apos(expd);
+		Gftest.Eq__bool_y(String_.Has(Exec__to_html(src_str), expd));
+	}
+	private String Exec__to_html(String src_str) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		wkr.Replace_internal_links(pctx, pbfr.Init(src_bry));
 		wkr.Replace_link_holders(pctx, pbfr);
-		if (apos) expd = gplx.langs.htmls.Gfh_utl.Replace_apos(expd);
-		Gftest.Eq__ary__lines(expd, pbfr.Rslt().To_str_and_clear(), src_str);
+		return pbfr.Rslt().To_str_and_clear();
 	}
 	public void Test__parseWidthParam(int[] img_size, String src_str, int expd_w, int expd_h) {
 		wkr.parseWidthParam(img_size, Bry_.new_u8(src_str));

@@ -15,8 +15,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
-public class Xomw_MediaTransformOutputParams {
+package gplx.xowa.mws.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
+public class Xomw_params_mto {
 	public boolean desc_link;
 	public byte[] alt = null;
 	public byte[] title = null;
@@ -32,12 +32,13 @@ public class Xomw_MediaTransformOutputParams {
 	public byte[] custom_target_link = null;
 	public byte[] parser_extlink_rel = null;
 	public byte[] parser_extlink_target = null;
-	public void Clear() {
+	public Xomw_params_mto Clear() {
 		desc_link = false;
 		alt = title = file_link = valign
 			= desc_query = override_width = override_height = no_dimensions
 			= custom_url_link = custom_title_link 
 			= parser_extlink_rel = parser_extlink_target
 			= null;
+		return this;
 	}
 }

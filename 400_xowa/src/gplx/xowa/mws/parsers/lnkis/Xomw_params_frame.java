@@ -34,6 +34,10 @@ public class Xomw_params_frame {
 	public byte[] link_target = null;
 	public byte[] no_link = null;
 	public byte[] border = null;
+	public byte[] custom_url_link = null;
+	public byte[] custom_target_link = null;
+	public boolean desc_link = false;
+	public byte[] desc_query = null;
 	public double upright = -1;
 	public void Set(int uid, byte[] val_bry, int val_int) {
 		switch (uid) {
@@ -41,13 +45,18 @@ public class Xomw_params_frame {
 		}
 	}
 	public Xomw_params_frame Clear() {
+		desc_link = false;
+		upright = -1;
 		align = valign = caption = frame = framed = frameless
 		= thumbnail = manual_thumb = alt = title = cls = img_cls
-		= link_title = link_url = link_target = no_link = null;
-		upright = -1;
+		= link_title = link_url = link_target = no_link 
+		= custom_url_link = custom_target_link = desc_query
+		= null;
 		return this;
 	}
 	public void Copy_to(Xomw_params_frame src) {
+		this.desc_link = src.desc_link;
+		this.upright = src.upright;
 		this.align = src.align;
 		this.valign = src.valign;
 		this.caption = src.caption;
@@ -65,7 +74,9 @@ public class Xomw_params_frame {
 		this.link_target = src.link_target;
 		this.no_link = src.no_link;
 		this.border = src.border;
-		this.upright = src.upright;
+		this.custom_url_link = src.custom_url_link;
+		this.custom_target_link = src.custom_target_link;
+		this.desc_query = src.desc_query;
 	}
 	public static byte[] Cls_add(byte[] lhs, byte[] rhs) {
 		return Bry_.Len_eq_0(lhs) ? rhs : Bry_.Add(lhs, Byte_ascii.Space_bry, rhs);

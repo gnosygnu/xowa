@@ -37,8 +37,6 @@ public class Xomw_linker {
 	private final    byte[][] split_trail_rv = new byte[2][];
 	private Btrie_slim_mgr split_trail_trie;
 	private final    Xomw_atr_mgr tmp_attribs = new Xomw_atr_mgr();
-	private final    Xomw_MediaTransformOutputParams params_list = new Xomw_MediaTransformOutputParams();
-	private final    Xomw_MediaTransformOutputParams mto_params = new Xomw_MediaTransformOutputParams(); 
 
 	private static final    byte[] Atr__class = Bry_.new_a7("class"), Atr__rel = Bry_.new_a7("rel"), Atr__href = Bry_.new_a7("href"), Rel__nofollow = Bry_.new_a7("nofollow");
 	public static final    byte[] 
@@ -65,7 +63,7 @@ public class Xomw_linker {
 	// @param Parser $parser
 	// @param Title $title Title Object of the file (not the currently viewed page)
 	// @param File $file File Object, or false if it doesn't exist
-	// @param array frame_params Associative array of parameters external to the media handler.
+	// @param array frameParams Associative array of parameters external to the media handler.
 	//     Boolean parameters are indicated by presence or absence, the value is arbitrary and
 	//     will often be false.
 	//          thumbnail       If present, downscale and frame
@@ -93,7 +91,7 @@ public class Xomw_linker {
 	// @param int|null width_option Used by the parser to remember the user preference thumbnailsize
 	// @since 1.20
 	// @return String HTML for an image, with links, wrappers, etc.
-	public void makeImageLink(Bry_bfr bfr, Xomw_parser parser, Xoa_ttl title, Xomw_File file, Xomw_params_frame frame_params, Xomw_params_handler handler_params, Object time, byte[] query, Object widthOption) {
+	public void makeImageLink(Bry_bfr bfr, Xomw_parser_ctx pctx, Xomw_parser parser, Xoa_ttl title, Xomw_File file, Xomw_params_frame frameParams, Xomw_params_handler handler_params, Object time, byte[] query, Object widthOption) {
 		// XO.MW.HOOK:ImageBeforeProduceHTML
 
 		if (file != null && !file.allowInlineDisplay()) {
@@ -103,25 +101,25 @@ public class Xomw_linker {
 
 		// Clean up parameters
 		int page = handler_params.page;
-		if (frame_params.align == null) {
-			frame_params.align = Bry_.Empty;
+		if (frameParams.align == null) {
+			frameParams.align = Bry_.Empty;
 		}
-		if (frame_params.alt == null) {
-			frame_params.alt = Bry_.Empty;
+		if (frameParams.alt == null) {
+			frameParams.alt = Bry_.Empty;
 		}
-		if (frame_params.title == null) {
-			frame_params.title = Bry_.Empty;
+		if (frameParams.title == null) {
+			frameParams.title = Bry_.Empty;
 		}
-		if (frame_params.cls == null) {
-			frame_params.cls = Bry_.Empty;
+		if (frameParams.cls == null) {
+			frameParams.cls = Bry_.Empty;
 		}
 
 		byte[] prefix = Bry_.Empty; byte[] postfix = Bry_.Empty;
 
-		if (Bry_.Eq(Align__frame__center, frame_params.align)) {
+		if (Bry_.Eq(Align__frame__center, frameParams.align)) {
 			prefix = Prefix__center;
 			postfix = Gfh_tag_.Div_rhs;
-			frame_params.align = Align__frame__none;
+			frameParams.align = Align__frame__none;
 		}
 		if (file != null && handler_params.width == Php_utl_.Null_int) {
 			if (handler_params.height != Php_utl_.Null_int && file.isVectorized()) {
@@ -134,10 +132,10 @@ public class Xomw_linker {
 				handler_params.width = file.getWidth(page);
 			}
 
-			if (   frame_params.thumbnail != null
-				|| frame_params.manual_thumb != null
-				|| frame_params.framed != null
-				|| frame_params.frameless != null
+			if (   frameParams.thumbnail != null
+				|| frameParams.manual_thumb != null
+				|| frameParams.framed != null
+				|| frameParams.frameless != null
 				|| handler_params.width == Php_utl_.Null_int
 			) {
 //					global $wgThumbLimits, $wgThumbUpright;
@@ -147,16 +145,16 @@ public class Xomw_linker {
 //					}
 
 				// Reduce width for upright images when parameter 'upright' is used
-				if (frame_params.upright == 0) {
-//						frame_params.upright = $wgThumbUpright;
+				if (frameParams.upright == 0) {
+//						frameParams.upright = $wgThumbUpright;
 				}
 
 				// For caching health: If width scaled down due to upright
 				// parameter, round to full __0 pixel to avoid the creation of a
 				// lot of odd thumbs.
 				int pref_width = parser.Env().User__default__thumbsize;
-//					pref_width = isset(frame_params['upright']) ?
-//						round($wgThumbLimits[width_option] * frame_params['upright'], -1) :
+//					pref_width = isset(frameParams['upright']) ?
+//						round($wgThumbLimits[width_option] * frameParams['upright'], -1) :
 //						$wgThumbLimits[width_option];
 
 				// Use width which is smaller: real image width or user preference width
@@ -168,24 +166,24 @@ public class Xomw_linker {
 			}
 		}
 
-		if (frame_params.thumbnail != null || frame_params.manual_thumb != null
-			|| frame_params.framed != null
+		if (frameParams.thumbnail != null || frameParams.manual_thumb != null
+			|| frameParams.framed != null
 		) {
 			// Create a thumbnail. Alignment depends on the writing direction of
 			// the page content language (right-aligned for LTR languages,
 			// left-aligned for RTL languages)
 			// If a thumbnail width has not been provided, it is set
 			// to the default user option as specified in Language*.php
-			if (frame_params.align == Bry_.Empty) {
-				frame_params.align = parser.Env().Lang__align_end;
+			if (frameParams.align == Bry_.Empty) {
+				frameParams.align = parser.Env().Lang__align_end;
 			}
 			bfr.Add(prefix);
-			this.Make_thumb_link2(bfr, title, file, frame_params, handler_params, time, query);
+			this.Make_thumb_link2(bfr, pctx, title, file, frameParams, handler_params, time, query);
 			bfr.Add(postfix);
 			return;
 		}
 
-		if (file != null && frame_params.frameless != null) {
+		if (file != null && frameParams.frameless != null) {
 			int src_width = file.getWidth(page);
 			// For "frameless" option: do not present an image bigger than the
 			// source (for bitmap-style images). This is the same behavior as the
@@ -206,26 +204,26 @@ public class Xomw_linker {
 
 		byte[] s = null;
 		if (thumb == null) {
-//				$s = self::makeBrokenImageLinkObj($title, frame_params['title'], '', '', '', $time == true);
+//				$s = self::makeBrokenImageLinkObj($title, frameParams['title'], '', '', '', $time == true);
 			s = Bry_.Empty;
 		}
 		else {
 //				self::processResponsiveImages($file, $thumb, handler_params);
-			params_list.Clear();
-			params_list.alt = frame_params.alt;
-			params_list.title = frame_params.title;
-			params_list.valign = frame_params.valign;
-			params_list.img_cls = frame_params.cls;
-			if (frame_params.border != null) {
-				params_list.img_cls = Xomw_params_frame.Cls_add(params_list.img_cls, Img_class__thumbborder);
+			Xomw_params_mto prms = pctx.Linker__makeImageLink__prms.Clear();
+			prms.alt = frameParams.alt;
+			prms.title = frameParams.title;
+			prms.valign = frameParams.valign;
+			prms.img_cls = frameParams.cls;
+			if (frameParams.border != null) {
+				prms.img_cls = Xomw_params_frame.Cls_add(prms.img_cls, Img_class__thumbborder);
 			}
-//				$params = self::getImageLinkMTOParams(frame_params, $query, $parser) + $params;
+			getImageLinkMTOParams(prms, frameParams, query, parser);
 
-			thumb.toHtml(tmp, tmp_2, params_list);
+			thumb.toHtml(tmp, tmp_2, prms);
 			s = tmp.To_bry_and_clear();
 		}
-		if (frame_params.align != Bry_.Empty) {
-			tmp.Add_str_a7("<div class=\"float").Add(frame_params.align);
+		if (frameParams.align != Bry_.Empty) {
+			tmp.Add_str_a7("<div class=\"float").Add(frameParams.align);
 			tmp.Add(s);
 			tmp.Add_str_a7("\">");
 			tmp.Add_str_a7("</div>");
@@ -246,24 +244,24 @@ public class Xomw_linker {
 	// @param Parser|null $parser
 	// @return array
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
-	public void Get_image_link_mto_params(Xomw_MediaTransformOutputParams mto_params, Xomw_params_frame frame_params, byte[] query, Xomw_parser parser) {
-		if (Php_utl_.isset(frame_params.link_url) && frame_params.link_url != Bry_.Empty) {
-			mto_params.custom_url_link = frame_params.link_url;
-			if (Php_utl_.isset(frame_params.link_target)) {
-				mto_params.custom_target_link = frame_params.link_target;
+	private static void getImageLinkMTOParams(Xomw_params_mto mto_params, Xomw_params_frame frameParams, byte[] query, Xomw_parser parser) {
+		if (Php_utl_.isset(frameParams.link_url) && frameParams.link_url != Bry_.Empty) {
+			mto_params.custom_url_link = frameParams.link_url;
+			if (Php_utl_.isset(frameParams.link_target)) {
+				mto_params.custom_target_link = frameParams.link_target;
 			}
 			if (parser != null) {
-//					extLinkAttrs = parser->getExternalLinkAttribs(frame_params['link-url']);
+//					extLinkAttrs = parser->getExternalLinkAttribs(frameParams['link-url']);
 //					foreach (extLinkAttrs as name => val) {
 //						// Currently could include 'rel' and 'target'
 //						mto_params['parser-extlink-' . name] = val;
 //					}
 			}
 		}
-		else if (Php_utl_.isset(frame_params.link_title) && frame_params.link_title != Bry_.Empty) {
-//				mto_params.custom_title_link = Title::newFromLinkTarget(Normalize_speecial_page(frame_params.link_title));
+		else if (Php_utl_.isset(frameParams.link_title) && frameParams.link_title != Bry_.Empty) {
+//				mto_params.custom_title_link = Title::newFromLinkTarget(Normalize_speecial_page(frameParams.link_title));
 		}
-		else if (!Php_utl_.Empty(frame_params.no_link)) {
+		else if (!Php_utl_.Empty(frameParams.no_link)) {
 			// No link
 		}
 		else {
@@ -272,26 +270,26 @@ public class Xomw_linker {
 		}
 	}
 
-	public void Make_thumb_link2(Bry_bfr bfr, Xoa_ttl title, Xomw_File file, Xomw_params_frame frame_params, Xomw_params_handler handler_params, Object time, byte[] query) {
+	public void Make_thumb_link2(Bry_bfr bfr, Xomw_parser_ctx pctx, Xoa_ttl title, Xomw_File file, Xomw_params_frame frameParams, Xomw_params_handler handler_params, Object time, byte[] query) {
 		boolean exists = true; // = $file && $file->exists();
 
 		int page = handler_params.page;
-		if (frame_params.align == null) {
-			frame_params.align = Align__frame__right;
+		if (frameParams.align == null) {
+			frameParams.align = Align__frame__right;
 		}
-		if (frame_params.alt == null) {
-			frame_params.alt = Bry_.Empty;
+		if (frameParams.alt == null) {
+			frameParams.alt = Bry_.Empty;
 		}
-		if (frame_params.title == null) {
-			frame_params.title = Bry_.Empty;
+		if (frameParams.title == null) {
+			frameParams.title = Bry_.Empty;
 		}
-		if (frame_params.caption == null) {
-			frame_params.caption = Bry_.Empty;
+		if (frameParams.caption == null) {
+			frameParams.caption = Bry_.Empty;
 		}
 
 		if (handler_params.width == Php_utl_.Null_int) {
 			// Reduce width for upright images when parameter 'upright' is used
-			handler_params.width = frame_params.upright != Php_utl_.Null_int ? 130 : 180;
+			handler_params.width = frameParams.upright != Php_utl_.Null_int ? 130 : 180;
 		}
 		boolean no_scale = false;
 		boolean manual_thumb = false;
@@ -302,9 +300,9 @@ public class Xomw_linker {
 			outer_width = handler_params.width + 2;
 		}
 		else {
-			if (frame_params.manual_thumb != null) {
+			if (frameParams.manual_thumb != null) {
 				// Use manually specified thumbnail
-//					$manual_title = Title::makeTitleSafe(NS_FILE, frame_params['manual_thumb']);
+//					$manual_title = Title::makeTitleSafe(NS_FILE, frameParams['manual_thumb']);
 //					if ($manual_title) {
 //						$manual_img = wfFindFile($manual_title);
 //						if ($manual_img) {
@@ -315,7 +313,7 @@ public class Xomw_linker {
 //						}
 //					}
 			}
-			else if (frame_params.framed != null) {
+			else if (frameParams.framed != null) {
 				// Use image dimensions, don't scale
 //					thumb = $file->getUnscaledThumb(handler_params);
 				thumb = new Xomw_ThumbnailImage(file, file.getUrl(), file.getUrl(), file.getWidth(), file.getHeight());
@@ -349,19 +347,19 @@ public class Xomw_linker {
 //				$url = wfAppendQuery($url, [ 'page' => $page ]);
 //			}
 		if (manual_thumb
-			&& frame_params.link_title != null
-			&& frame_params.link_url != null
-			&& frame_params.no_link != null) {
-			frame_params.link_url = url;
+			&& frameParams.link_title != null
+			&& frameParams.link_url != null
+			&& frameParams.no_link != null) {
+			frameParams.link_url = url;
 		}
 
 		int rv_bgn = bfr.Len();
-		bfr.Add_str_a7("<div class=\"thumb t").Add(frame_params.align)
+		bfr.Add_str_a7("<div class=\"thumb t").Add(frameParams.align)
 			.Add_str_a7("\"><div class=\"thumbinner\" style=\"width:").Add_int_variable(outer_width).Add_str_a7("px;\">");
 
 		byte[] zoom_icon = Bry_.Empty;
 		if (!exists) {
-//				$s .= self::makeBrokenImageLinkObj($title, frame_params.title, '', '', '', $time == true);
+//				$s .= self::makeBrokenImageLinkObj($title, frameParams.title, '', '', '', $time == true);
 			zoom_icon = Bry_.Empty;
 		}
 		else if (thumb == null) {
@@ -373,13 +371,14 @@ public class Xomw_linker {
 			if (!no_scale && !manual_thumb) {
 //					self::processResponsiveImages($file, thumb, handler_params);
 			}
-			mto_params.Clear();
-			mto_params.alt = frame_params.alt;
-			mto_params.title = frame_params.title;
-			mto_params.img_cls = Xomw_params_frame.Cls_add(frame_params.cls, Img_class__thumbimage);
-			Get_image_link_mto_params(mto_params, frame_params, query, null);
-			thumb.toHtml(bfr, tmp, mto_params);
-			if (frame_params.framed != null) {
+			Xomw_params_mto prms = pctx.Linker__makeImageLink__prms.Clear();
+			prms.alt = frameParams.alt;
+			prms.title = frameParams.title;
+			prms.img_cls = Xomw_params_frame.Cls_add(frameParams.cls, Img_class__thumbimage);
+			
+			getImageLinkMTOParams(prms, frameParams, query, null);
+			thumb.toHtml(bfr, tmp, prms);
+			if (frameParams.framed != null) {
 				zoom_icon = Bry_.Empty;
 			}
 			else {
@@ -395,7 +394,7 @@ public class Xomw_linker {
 				zoom_icon = tmp.To_bry_and_clear();
 			}
 		}
-		bfr.Add_str_a7("  <div class=\"thumbcaption\">").Add(zoom_icon).Add(frame_params.caption).Add_str_a7("</div></div></div>");
+		bfr.Add_str_a7("  <div class=\"thumbcaption\">").Add(zoom_icon).Add(frameParams.caption).Add_str_a7("</div></div></div>");
 		Bry_.Replace_all_direct(bfr.Bfr(), Byte_ascii.Nl, Byte_ascii.Space, rv_bgn, bfr.Len());	// str_replace("\n", ' ', $s);
 	}
 
@@ -647,18 +646,18 @@ public class Xomw_linker {
 //		public static function makeThumbLinkObj(Title $title, $file, $label = '', $alt,
 //			$align = 'right', $params = [], $framed = false, $manual_thumb = ""
 //		) {
-//			frame_params = [
+//			frameParams = [
 //				'alt' => $alt,
 //				'caption' => $label,
 //				'align' => $align
 //			];
 //			if ($framed) {
-//				frame_params['framed'] = true;
+//				frameParams['framed'] = true;
 //			}
 //			if ($manual_thumb) {
-//				frame_params['manual_thumb'] = $manual_thumb;
+//				frameParams['manual_thumb'] = $manual_thumb;
 //			}
-//			return self::makeThumbLink2($title, $file, frame_params, $params);
+//			return self::makeThumbLink2($title, $file, frameParams, $params);
 //		}
 
 //		// Make a "broken" link to an image

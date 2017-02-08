@@ -668,7 +668,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //			byte[] time = options.time;
 		Object time = null;
 //			options = $this->mOptions->getThumbSize()
-		linker.makeImageLink(bfr, parser, title, file, frameParams, handlerParams, time, desc_query, null);
+		linker.makeImageLink(bfr, pctx, parser, title, file, frameParams, handlerParams, time, desc_query, null);
 
 		// Give the handler a chance to modify the parser Object
 //			if (handler != null) {

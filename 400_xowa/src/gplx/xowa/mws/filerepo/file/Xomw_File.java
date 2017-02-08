@@ -1984,25 +1984,26 @@ public class Xomw_File {
 //
 //			return this.pageCount;
 //		}
-//
-//		/**
-//		* Calculate the height of a thumbnail using the source and destination width
-//		*
-//		* @param int srcWidth
-//		* @param int srcHeight
-//		* @param int dstWidth
-//		*
-//		* @return int
-//		*/
-//		static function scaleHeight(srcWidth, srcHeight, dstWidth) {
-//			// Exact integer multiply followed by division
-//			if (srcWidth == 0) {
-//				return 0;
-//			} else {
-//				return (int)round(srcHeight * dstWidth / srcWidth);
-//			}
-//		}
-//
+
+	/**
+	* Calculate the height of a thumbnail us_ing the source and destination width
+	*
+	* @param int srcWidth
+	* @param int srcHeight
+	* @param int dstWidth
+	*
+	* @return int
+	*/
+	public static int scaleHeight(int srcWidth, int srcHeight, int dstWidth) {
+		// Exact integer multiply followed by division
+		if (srcWidth == 0) {
+			return 0;
+		}
+		else {
+			return (int)Math_.Round(srcHeight * dstWidth / srcWidth, 0);
+		}
+	}
+
 //		/**
 //		* Get an image size array like that returned by getImageSize(), or false if it
 //		* can't be determined. Loads the image size directly from the file ignoring caches.

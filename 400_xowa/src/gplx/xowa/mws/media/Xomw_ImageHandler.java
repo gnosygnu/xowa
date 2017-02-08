@@ -19,9 +19,6 @@ package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import gplx.xowa.mws.filerepo.file.*; import gplx.xowa.mws.parsers.lnkis.*;
 import gplx.xowa.mws.utls.*;
 /*	XO.TODO:
-	* parseParamString
-	* fitBoxWidth
-	* scaleHeight
 	* validateThumbParams
 */
 // MEMORY:only one instance per wiki
@@ -73,13 +70,20 @@ public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private fina
 		return Bry_.Add(Int_.To_bry(width), Xomw_lnki_wkr.Bry__px);
 	}
 
-//		public function parseParamString(str) {
-//			m = false;
-//			if (preg_match('/^(\d+)px/', str, m)) {
-//				return [ 'width' => m[1] ];
-//			} else {
-//				return false;
+//		public Xomw_param_map parseParamString(byte[] src) {
+//			int len = src.length;
+//			// XO.MW.REGEX: if (preg_match('/^(\d+)px/', str, m)) {
+//			if (    len > 0                                               // at least one char
+//				&&  Byte_ascii.Is_num(src[0]))                            // 1st char is numeric
+//			{
+//				pos = Bry_find_.Find_fwd_while_num(src, 1, len);          // skip numeric
+//				if (Bry_.Match(src, pos, len, Xomw_lnki_wkr.Bry__px)) {   // matches "px"
+//					Xomw_params_handler rv = new Xomw_params_handler();
+//					rv.width = Bry_.To_int_or(src, 0, pos, Php_utl_.Null_int);
+//					return rv;
+//				}
 //			}
+//			return null;
 //		}
 
 //		function getScriptParams(paramsVar) {
@@ -92,7 +96,7 @@ public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private fina
 	* @return boolean
 	*/
 	@Override public boolean normaliseParams(Xomw_File image, Xomw_params_handler handlerParams) {
-//			mimeType = image.getMimeType();
+		byte[] mimeType = image.getMimeType();
 
 		if (!Php_utl_.isset(handlerParams.width)) {
 			return false;
@@ -119,7 +123,7 @@ public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private fina
 			// Height & width were both set
 			if (handlerParams.width * srcHeight > handlerParams.height * srcWidth) {
 				// Height is the relative smaller dimension, so scale width accordingly
-//					handlerParams.width = self::fitBoxWidth(srcWidth, srcHeight, handlerParams.height);
+				handlerParams.width = fitBoxWidth(srcWidth, srcHeight, handlerParams.height);
 
 				if (handlerParams.width == 0) {
 					// Very small image, so we need to rely on client side scaling :(
@@ -141,57 +145,60 @@ public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private fina
 		// Because thumbs are only referred to by width, the height always needs
 		// to be scaled by the width to keep the thumbnail sizes consistent,
 		// even if it was set inside the if block above
-//			handlerParams.physicalHeight = File::scaleHeight(srcWidth, srcHeight,
-//				handlerParams.physicalWidth);
+		handlerParams.physicalHeight = Xomw_File.scaleHeight(srcWidth, srcHeight,
+			handlerParams.physicalWidth);
 
 		// Set the height if it was not validated in the if block higher up
 		if (!Php_utl_.isset(handlerParams.height) || handlerParams.height == -1) {
 			handlerParams.height = handlerParams.physicalHeight;
 		}
 
-//			if (!this.validateThumbParams(handlerParams.physicalWidth,
-//				handlerParams.physicalHeight, srcWidth, srcHeight, mimeType)
-//			) {
-//				return false;
-//			}
+		if (!this.validateThumbParams(handlerParams, srcWidth, srcHeight, mimeType)
+		) {
+			return false;
+		}
 
 		return true;
 	}
 
-//		/**
-//		* Validate thumbnail parameters and fill in the correct height
-//		*
-//		* @param int width Specified width (input/output)
-//		* @param int height Height (output only)
-//		* @param int srcWidth Width of the source image
-//		* @param int srcHeight Height of the source image
-//		* @param String mimeType Unused
-//		* @return boolean False to indicate that an error should be returned to the user.
-//		*/
-//		function validateThumbParams(&width, &height, srcWidth, srcHeight, mimeType) {
-//			width = intval(width);
-//
-//			# Sanity check width
-//			if (width <= 0) {
-//				wfDebug(__METHOD__ . ": Invalid destination width: width\n");
-//
-//				return false;
-//			}
-//			if (srcWidth <= 0) {
-//				wfDebug(__METHOD__ . ": Invalid source width: srcWidth\n");
-//
-//				return false;
-//			}
-//
-//			height = File::scaleHeight(srcWidth, srcHeight, width);
-//			if (height == 0) {
-//				# Force height to be at least 1 pixel
-//				height = 1;
-//			}
-//
-//			return true;
-//		}
-//
+	/**
+	* Validate thumbnail parameters and fill in the correct height
+	*
+	* @param int width Specified width (input/output)
+	* @param int height Height (output only)
+	* @param int srcWidth Width of the source image
+	* @param int srcHeight Height of the source image
+	* @param String mimeType Unused
+	* @return boolean False to indicate that an error should be returned to the user.
+	*/
+	// XO.MW.NOTE: MW passes w and h by ref, but only changes h; XO will pass handlerParams directly
+	private boolean validateThumbParams(Xomw_params_handler handlerParams, int srcWidth, int srcHeight, byte[] mimeType) {
+		int width = handlerParams.physicalWidth;
+		int height = handlerParams.physicalHeight;
+		// width = intval(width);
+
+		// Sanity check width
+		if (width <= 0) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "validateThumbParams: Invalid destination width: width");
+
+			return false;
+		}
+		if (srcWidth <= 0) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "validateThumbParams: Invalid source width: srcWidth");
+
+			return false;
+		}
+
+		height = Xomw_File.scaleHeight(srcWidth, srcHeight, width);
+		if (height == 0) {
+			// Force height to be at least 1 pixel
+			height = 1;
+		}
+		handlerParams.height = height;
+
+		return true;
+	}
+
 //		/**
 //		* @param File image
 //		* @param String script

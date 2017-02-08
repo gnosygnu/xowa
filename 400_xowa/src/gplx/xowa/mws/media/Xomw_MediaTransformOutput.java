@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.mws.utls.*;
+import gplx.xowa.mws.parsers.lnkis.*;
 import gplx.xowa.mws.filerepo.file.*;
 public abstract class Xomw_MediaTransformOutput {
 	public Xomw_MediaTransformOutput(Xomw_File file, byte[] url, byte[] path, int width, int height) {
@@ -131,7 +132,7 @@ public abstract class Xomw_MediaTransformOutput {
 	*
 	* @return String
 	*/
-	public abstract void toHtml(Bry_bfr bfr, Bry_bfr tmp, Xomw_MediaTransformOutputParams options);
+	public abstract void toHtml(Bry_bfr bfr, Bry_bfr tmp, Xomw_params_mto options);
 
 //		/**
 //		* This will be overridden to return true in error classes

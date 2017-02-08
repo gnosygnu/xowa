@@ -38,4 +38,5 @@ public class Php_utl_ {
 		return true;
 	}
 	public static final int Null_int = Int_.Max_value;
+	public static final    byte[] Null_bry = null;
 }

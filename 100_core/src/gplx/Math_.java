@@ -22,6 +22,7 @@ public class Math_ {
 	public static double	E = java.lang.Math.E; 
 	public static int		Ceil_as_int(double v) {return (int)Ceil(v);}
 	public static double	Ceil(double v) {return java.lang.Math.ceil(v);}
+	public static int		Floor_as_int(double v) {return (int)Floor(v);}
 	public static double	Floor(double v) {return java.lang.Math.floor(v);}
 	public static double	Round(double v, int places) {
 				return java.math.BigDecimal.valueOf(v).setScale(places, java.math.BigDecimal.ROUND_HALF_UP).doubleValue();
