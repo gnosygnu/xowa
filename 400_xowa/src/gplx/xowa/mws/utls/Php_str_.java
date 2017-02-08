@@ -146,4 +146,7 @@ public class Php_str_ {
 		}
 		return dirty ? tmp.To_bry_and_clear() : src;
 	}
+	public static byte[] strtr(byte[] src, byte find, byte repl) {
+		return Bry_.Replace(src, 0, src.length, find, repl);
+	}
 }

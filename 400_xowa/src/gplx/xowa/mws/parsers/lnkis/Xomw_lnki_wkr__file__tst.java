@@ -26,13 +26,13 @@ public class Xomw_lnki_wkr__file__tst {
 		fxt.Init__file("A.png", 300, 200);
 	}
 	@Test   public void Plain() {
-		fxt.Test__to_html("[[File:A.png]]",     "<a><img alt='A.png' src='/orig/7/70/A.png' /></a>");
+		fxt.Test__to_html("[[File:A.png]]",     "<a href='A.png' class='image'><img alt='A.png' src='/orig/7/70/A.png' /></a>");
 	}
 	@Test   public void Thumb() {
-		fxt.Test__to_html("[[File:A.png|thumb]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a><img alt='A.png' src='/thumb/7/70/A.png/220px-A.png' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='' class='internal'></a></div></div></div></div>");
+		fxt.Test__to_html("[[File:A.png|thumb]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a href='A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/220px-A.png' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='' class='internal'></a></div></div></div></div>");
 	}
 	@Test   public void Size() {
-		fxt.Test__to_html("[[File:A.png|123x456px]]", "<a><img alt='A.png' src='/thumb/7/70/A.png/123px-A.png' /></a>");
+		fxt.Test__to_html("[[File:A.png|123x456px]]", "<a href='A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/123px-A.png' /></a>");
 	}
 	@Test   public void fitBoxWidth() {
 		// COMMENT:"Height is the relative smaller dimension, so scale width accordingly"

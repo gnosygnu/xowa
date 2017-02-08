@@ -22,7 +22,7 @@ import gplx.xowa.mws.parsers.lnkis.*;
 import gplx.xowa.mws.filerepo.file.*;
 public abstract class Xomw_MediaTransformOutput {
 	public Xomw_MediaTransformOutput(Xomw_File file, byte[] url, byte[] path, int width, int height) {
-//			this.file = file;
+		this.file = file;
 		this.url = url;
 		this.width = width;
 		this.height = height;
@@ -31,9 +31,9 @@ public abstract class Xomw_MediaTransformOutput {
 //		*  from pixel density (eg 1.5 or 2) to additional URLs.
 //		*/
 //		public $responsiveUrls = [];
-//
-//		/** @var File */
-//		private final    Xomw_File file;
+
+	/** @var File */
+	private final    Xomw_File file;
 
 	/** @var int Image width */
 	protected final    int width;
@@ -235,15 +235,15 @@ public abstract class Xomw_MediaTransformOutput {
 //				return $contents;
 //			}
 //		}
-//
-//		/**
-//		* @param String $title
-//		* @param String|array $params Query parameters to add
-//		* @return array
-//		*/
-//		public function getDescLinkAttribs( $title = null, $params = [] ) {
-//			if ( is_array( $params ) ) {
-//				$query = $params;
+
+	/**
+	* @param String $title
+	* @param String|array $prms Query parameters to add
+	* @return array
+	*/
+	public void getDescLinkAttribs(List_adp attribs, byte[] title, List_adp prms) {
+//			if ( is_array( prms ) ) {
+//				$query = prms;
 //			} else {
 //				$query = [];
 //			}
@@ -254,20 +254,18 @@ public abstract class Xomw_MediaTransformOutput {
 //				$query['lang'] = $this->lang;
 //			}
 //
-//			if ( is_string( $params ) && $params !== '' ) {
-//				$query = $params . '&' . wfArrayToCgi( $query );
+//			if ( is_string( prms ) && prms !== '' ) {
+//				$query = prms . '&' . wfArrayToCgi( $query );
 //			}
-//
-//			$attribs = [
-//				'href' => $this->file->getTitle()->getLocalURL( $query ),
-//				'class' => 'image',
-//			];
-//			if ( $title ) {
-//				$attribs['title'] = $title;
-//			}
-//
-//			return $attribs;
-//		}
+
+		attribs.Clear();
+//			'href' => $this->file->getTitle()->getLocalURL( $query ),
+		attribs.Add_many(Gfh_atr_.Bry__href, this.file.getTitle());
+		attribs.Add_many(Gfh_atr_.Bry__class, Bry__class__image);
+		if (title != null) {
+			attribs.Add_many(Gfh_atr_.Bry__title, title);
+		}
+	}
 
 	// Wrap some XHTML text in an anchor tag with the given attributes
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
@@ -279,4 +277,5 @@ public abstract class Xomw_MediaTransformOutput {
 			bfr.Add(contents);
 		}
 	}
+	private static final    byte[] Bry__class__image = Bry_.new_a7("image");
 }

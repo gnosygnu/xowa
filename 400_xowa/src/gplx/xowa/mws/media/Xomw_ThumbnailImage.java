@@ -166,6 +166,10 @@ public class Xomw_ThumbnailImage extends Xomw_MediaTransformOutput {	private fin
 //					empty(options['title']) ? null : options['title'],
 //					$query
 //				);
+			link_attribs.Clear();
+			this.getDescLinkAttribs(link_attribs, 
+				Php_utl_.empty(options.title) ? null : options.title,
+				null);
 		}
 		else if (!Php_utl_.empty(options.file_link)) {
 //				link_attribs.Clear();
