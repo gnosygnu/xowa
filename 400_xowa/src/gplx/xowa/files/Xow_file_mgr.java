@@ -78,8 +78,22 @@ public class Xow_file_mgr implements Gfo_invk {
 			String cfg_domain_str = wiki.Data__core_mgr().Db__core().Tbl__cfg().Select_str("xowa.bldr.session", "wiki_domain");
 			// FOLDER.RENAME: do not change to fs.dir if renamed; DATE:2017-02-06
 			if (String_.Eq(cfg_domain_str, wiki.Domain_str())) {
+				// wiki has not been renamed; use fs.dir
 				gplx.xowa.files.fsdb.fs_roots.Fs_root_core fsdir_core = gplx.xowa.files.fsdb.fs_roots.Fs_root_core.Set_fsdb_mgr(this, this.wiki);
 				fsdir_core.Orig_dir_(wiki.Fsys_mgr().Root_dir().GenSubDir_nest("file", "orig"));
+			}
+			else {
+				// wiki has been renamed; apply "imported name" to wikis; note that this won't support renamed wikia wikis; DATE:2017-02-07
+				byte[] cfg_domain_bry = Bry_.new_u8(cfg_domain_str);
+				Xof_repo_pair[] repo_pairs = wiki.File__repo_mgr().Repos_ary();
+				for (int i = 0; i < repo_pairs.length; i++) {
+					Xof_repo_pair repo_pair = repo_pairs[i];
+					if (Bry_.Eq(wiki.Domain_bry(), repo_pair.Trg().Wiki_domain())) {
+						repo_pair.Wiki_domain_(cfg_domain_bry);
+						repo_pair.Src().Wiki_domain_(cfg_domain_bry);
+						repo_pair.Trg().Wiki_domain_(cfg_domain_bry);
+					}
+				} 
 			}
 		}
 	}

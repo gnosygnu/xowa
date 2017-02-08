@@ -1056,10 +1056,10 @@ public class Xomw_File {
 //					}
 //				}
 
-			Xomw_params_handler normalisedParams = handlerParams;
+//				Xomw_params_handler normalisedParams = handlerParams;
 //				handler.normaliseParams(this, normalisedParams);
 
-			byte[] thumbName = this.thumbName(normalisedParams);
+//				byte[] thumbName = this.thumbName(normalisedParams);
 //				byte[] thumbUrl = this.getThumbUrl(thumbName);
 //				byte[] thumbPath = this.getThumbPath(thumbName); // final thumb path
 
