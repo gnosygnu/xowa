@@ -20,6 +20,7 @@ public class Php_utl_ {
 	public static boolean Empty(byte[] v)  {return v == null || v.length == 0;}
 	public static boolean Empty(boolean v)    {return v == false;}
 	public static boolean Is_set(byte[] v) {return v != null;}
+	public static boolean isset(int v) {return v != Int_.Max_value;}
 	public static boolean isnumeric(byte[] src) {
 		if (src == null) return false;
 		int len = src.length;

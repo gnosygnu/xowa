@@ -123,8 +123,8 @@ public class Xomw_linker {
 			postfix = Gfh_tag_.Div_rhs;
 			frame_params.align = Align__frame__none;
 		}
-		if (file != null && handler_params.width == -1) {
-			if (handler_params.height != -1 && file.isVectorized()) {
+		if (file != null && handler_params.width == Xomw_param_itm.Null_int) {
+			if (handler_params.height != Xomw_param_itm.Null_int && file.isVectorized()) {
 				// If its a vector image, and user only specifies height
 				// we don't want it to be limited by its "normal" width.
 //					global $wgSVGMaxSize;
@@ -138,7 +138,7 @@ public class Xomw_linker {
 				|| frame_params.manual_thumb != null
 				|| frame_params.framed != null
 				|| frame_params.frameless != null
-				|| handler_params.width == -1
+				|| handler_params.width == Xomw_param_itm.Null_int
 			) {
 //					global $wgThumbLimits, $wgThumbUpright;
 
@@ -161,7 +161,7 @@ public class Xomw_linker {
 
 				// Use width which is smaller: real image width or user preference width
 				// Unless image is scalable vector.
-				if (handler_params.height == -1 && handler_params.width <= 0 ||
+				if (handler_params.height == Xomw_param_itm.Null_int && handler_params.width <= 0 ||
 						pref_width < handler_params.width || file.isVectorized()) {
 					handler_params.width = pref_width;
 				}
@@ -190,17 +190,15 @@ public class Xomw_linker {
 			// For "frameless" option: do not present an image bigger than the
 			// source (for bitmap-style images). This is the same behavior as the
 			// "thumb" option does it already.
-			if (src_width != -1 && !file.mustRender() && handler_params.width > src_width) {
+			if (src_width != Xomw_param_itm.Null_int && !file.mustRender() && handler_params.width > src_width) {
 				handler_params.width = src_width;
 			}
 		}
 
 		Xomw_MediaTransformOutput thumb = null;
-		if (file != null && handler_params.width != -1) {
+		if (file != null && handler_params.width != Xomw_param_itm.Null_int) {
 			// Create a resized image, without the additional thumbnail features
-//				$thumb = $file->transform(handler_params);
-			// file.getPath()
-			thumb = new Xomw_MediaTransformOutput(file, file.getUrl(), file.getUrl(), file.getWidth(), file.getHeight());
+			thumb = file.transform(handler_params);
 		}
 		else {
 			thumb = null;
@@ -291,9 +289,9 @@ public class Xomw_linker {
 			frame_params.caption = Bry_.Empty;
 		}
 
-		if (handler_params.width == -1) {
+		if (handler_params.width == Xomw_param_itm.Null_int) {
 			// Reduce width for upright images when parameter 'upright' is used
-			handler_params.width = frame_params.upright != -1 ? 130 : 180;
+			handler_params.width = frame_params.upright != Xomw_param_itm.Null_int ? 130 : 180;
 		}
 		boolean no_scale = false;
 		boolean manual_thumb = false;
@@ -327,7 +325,7 @@ public class Xomw_linker {
 				// Do not present an image bigger than the source, for bitmap-style images
 				// This is a hack to maintain compatibility with arbitrary pre-1.10 behavior
 				int src_width = file.getWidth(page);
-				if (src_width != -1 && !file.mustRender() && handler_params.width > src_width) {
+				if (src_width != Xomw_param_itm.Null_int && !file.mustRender() && handler_params.width > src_width) {
 					handler_params.width = src_width;
 				}
 //					thumb = $file->transform(handler_params);

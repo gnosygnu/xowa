@@ -751,8 +751,8 @@ public class Xomw_File {
 	* @return boolean
 	*/
 	public boolean mustRender() {
-		return true;
-//			return this.getHandler() && this.handler.mustRender(this);
+		Xomw_MediaHandler handler = this.getHandler();
+		return handler.mustRender(this);
 	}
 
 	/**
@@ -1030,7 +1030,7 @@ public class Xomw_File {
 	* @param int flags A bitfield, may contain self::RENDER_NOW to force rendering
 	* @return ThumbnailImage|MediaTransformOutput|boolean False on failure
 	*/
-	// XO.MW.DFLT:flags=0;
+	public Xomw_MediaTransformOutput transform(Xomw_params_handler handlerParams) {return transform(handlerParams, 0);}
 	public Xomw_MediaTransformOutput transform(Xomw_params_handler handlerParams, int flags) {
 //			global wgThumbnailEpoch;
 
@@ -1060,8 +1060,8 @@ public class Xomw_File {
 //				handler.normaliseParams(this, normalisedParams);
 
 			byte[] thumbName = this.thumbName(normalisedParams);
-			byte[] thumbUrl = this.getThumbUrl(thumbName);
-			byte[] thumbPath = this.getThumbPath(thumbName); // final thumb path
+//				byte[] thumbUrl = this.getThumbUrl(thumbName);
+//				byte[] thumbPath = this.getThumbPath(thumbName); // final thumb path
 
 			if (this.repo != null) {
 //					// Defer rendering if a 404 handler is set up...
@@ -1081,9 +1081,9 @@ public class Xomw_File {
 //							// XXX: Pass in the storage path even though we are not rendering anything
 //							// and the path is supposed to be an FS path. This is due to getScalerType()
 //							// getting called on the path and clobbering thumb.getUrl() if it's false.
-						thumb = handler.getTransform(this, thumbPath, thumbUrl, handlerParams);
+//							thumb = handler.getTransform(this, thumbPath, thumbUrl, handlerParams);
 //							thumb.setStoragePath(thumbPath);
-						break;
+//							break;
 //						}
 				}
 //					elseif (flags & self::RENDER_FORCE) {
@@ -1097,13 +1097,14 @@ public class Xomw_File {
 //						break;
 //					}
 //				}
-//				Object tmpFile = null;
+			Object tmpFile = null;
 //				tmpFile = this.makeTransformTmpFile(thumbPath);
 //
 //				if (!tmpFile) {
 //					thumb = this.transformErrorOutput(thumbPath, thumbUrl, paramsMap, flags);
 //				} else {
-//					thumb = this.generateAndSaveThumb(tmpFile, paramsMap, flags);
+				thumb = this.generateAndSaveThumb(tmpFile, handlerParams, flags);
+				break;
 //				}
 		} while (thumb != null);
 
@@ -1117,22 +1118,23 @@ public class Xomw_File {
 	* @param int flags
 	* @return boolean|MediaTransformOutput
 	*/
-	public Object generateAndSaveThumb(Object tmpFile, Object transformParams, int flags) {
+	public Xomw_MediaTransformOutput generateAndSaveThumb(Object tmpFile, Xomw_params_handler transformParams, int flags) {
 //			global wgIgnoreImageErrors;
 //
 //			stats = RequestContext::getMain().getStats();
-//
-//			handler = this.getHandler();
-//
-//			normalisedParams = transformParams;
-//			handler.normaliseParams(this, normalisedParams);
-//
-//			thumbName = this.thumbName(normalisedParams);
-//			thumbUrl = this.getThumbUrl(thumbName);
-//			thumbPath = this.getThumbPath(thumbName); // final thumb path
-//
+
+		Xomw_MediaHandler handler = this.getHandler();
+
+		Xomw_params_handler normalisedParams = transformParams;
+		handler.normaliseParams(this, normalisedParams);
+
+		byte[] thumbName = this.thumbName(normalisedParams);
+		byte[] thumbUrl = this.getThumbUrl(thumbName);
+//			byte[] thumbPath = this.getThumbPath(thumbName); // final thumb path
+
 //			tmpThumbPath = tmpFile.getPath();
-//
+		byte[] tmpThumbPath = Bry_.Empty;
+
 //			if (handler.supportsBucketing()) {
 //				this.generateBucketsIfNeeded(normalisedParams, flags);
 //			}
@@ -1140,8 +1142,7 @@ public class Xomw_File {
 //			starttime = microtime(true);
 //
 		// Actually render the thumbnail...
-		Object thumb = null;
-//			thumb = handler.doTransform(this, tmpThumbPath, thumbUrl, transformParams);
+		Xomw_MediaTransformOutput thumb = handler.doTransform(this, tmpThumbPath, thumbUrl, transformParams);
 //			tmpFile.bind(thumb); // keep alive with thumb
 //
 //			statTiming = microtime(true) - starttime;

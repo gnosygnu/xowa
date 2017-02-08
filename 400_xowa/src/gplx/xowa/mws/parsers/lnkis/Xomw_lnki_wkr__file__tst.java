@@ -30,7 +30,7 @@ public class Xomw_lnki_wkr__file__tst {
 		fxt.Test__to_html("[[File:A.png|thumb]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a><img alt='A.png' src='/thumb/7/70/A.png/220px-A.png' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='' class='internal'></a></div></div></div></div>");
 	}
 	@Test   public void Size() {
-		fxt.Test__to_html("[[File:A.png|123x456px]]", "<img alt='A.png' src='/orig/7/70/A.png' />");
+		fxt.Test__to_html("[[File:A.png|123x456px]]", "<img alt='A.png' src='/thumb/7/70/A.png/123px-A.png' />");
 	}
 	@Test   public void Test__parseWidthParam() {
 		int[] img_size = new int[2];

@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
 import gplx.xowa.mws.filerepo.file.*; import gplx.xowa.mws.parsers.lnkis.*;
+import gplx.langs.phps.utls.*;
 // MEMORY:only one instance per wiki
 public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private final    Xomw_param_map paramMap = new Xomw_param_map();
 	public Xomw_ImageHandler(byte[] key) {super(key);
@@ -27,7 +28,7 @@ public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private fina
 	* @return boolean
 	*/
 	@Override public boolean canRender(Xomw_File file) {
-		return (file.getWidth(1) != -1 && file.getHeight(1) != -1);
+		return (file.getWidth(1) != Xomw_param_itm.Null_int && file.getHeight(1) != Xomw_param_itm.Null_int);
 	}
 
 	@Override public Xomw_param_map getParamMap() {
@@ -50,10 +51,10 @@ public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private fina
 
 	@Override public byte[] makeParamString(Xomw_params_handler handlerParams) {
 		int width = 0;
-		if (handlerParams.physicalWidth != -1) {
+		if (handlerParams.physicalWidth != Xomw_param_itm.Null_int) {
 			width = handlerParams.physicalWidth;
 		}
-		else if (handlerParams.width != -1) {
+		else if (handlerParams.width != Xomw_param_itm.Null_int) {
 			width = handlerParams.width;
 		}
 		else {
@@ -74,81 +75,82 @@ public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private fina
 //			}
 //		}
 //
-//		function getScriptParams(params) {
-//			return [ 'width' => params['width'] ];
+//		function getScriptParams(paramsVar) {
+//			return [ 'width' => paramsVar['width'] ];
 //		}
-//
-//		/**
-//		* @param File image
-//		* @param array params
-//		* @return boolean
-//		*/
-//		function normaliseParams(image, &params) {
+
+	/**
+	* @param File image
+	* @param array paramsVar
+	* @return boolean
+	*/
+	@Override public boolean normaliseParams(Xomw_File image, Xomw_params_handler handlerParams) {
 //			mimeType = image.getMimeType();
-//
-//			if (!isset(params['width'])) {
-//				return false;
-//			}
-//
-//			if (!isset(params['page'])) {
-//				params['page'] = 1;
-//			} else {
-//				params['page'] = intval(params['page']);
-//				if (params['page'] > image.pageCount()) {
-//					params['page'] = image.pageCount();
+
+		if (!Php_utl_.isset(handlerParams.width)) {
+			return false;
+		}
+
+		if (!Php_utl_.isset(handlerParams.page)) {
+			handlerParams.page = 1;
+		}
+		else {
+			// handlerParams.page = intval(handlerParams.page);
+//				if (handlerParams.page > image.pageCount()) {
+//					handlerParams.page = image.pageCount();
 //				}
 //
-//				if (params['page'] < 1) {
-//					params['page'] = 1;
+//				if (handlerParams.page < 1) {
+//					handlerParams.page = 1;
 //				}
-//			}
-//
-//			srcWidth = image.getWidth(params['page']);
-//			srcHeight = image.getHeight(params['page']);
-//
-//			if (isset(params['height']) && params['height'] != -1) {
-//				# Height & width were both set
-//				if (params['width'] * srcHeight > params['height'] * srcWidth) {
-//					# Height is the relative smaller dimension, so scale width accordingly
-//					params['width'] = self::fitBoxWidth(srcWidth, srcHeight, params['height']);
-//
-//					if (params['width'] == 0) {
-//						# Very small image, so we need to rely on client side scaling :(
-//						params['width'] = 1;
-//					}
-//
-//					params['physicalWidth'] = params['width'];
-//				} else {
-//					# Height was crap, unset it so that it will be calculated later
-//					unset(params['height']);
-//				}
-//			}
-//
-//			if (!isset(params['physicalWidth'])) {
-//				# Passed all validations, so set the physicalWidth
-//				params['physicalWidth'] = params['width'];
-//			}
-//
-//			# Because thumbs are only referred to by width, the height always needs
-//			# to be scaled by the width to keep the thumbnail sizes consistent,
-//			# even if it was set inside the if block above
-//			params['physicalHeight'] = File::scaleHeight(srcWidth, srcHeight,
-//				params['physicalWidth']);
-//
-//			# Set the height if it was not validated in the if block higher up
-//			if (!isset(params['height']) || params['height'] == -1) {
-//				params['height'] = params['physicalHeight'];
-//			}
-//
-//			if (!this.validateThumbParams(params['physicalWidth'],
-//				params['physicalHeight'], srcWidth, srcHeight, mimeType)
+		}
+
+		int srcWidth = image.getWidth(handlerParams.page);
+		int srcHeight = image.getHeight(handlerParams.page);
+
+		if (Php_utl_.isset(handlerParams.height) && handlerParams.height != -1) {
+			// Height & width were both set
+			if (handlerParams.width * srcHeight > handlerParams.height * srcWidth) {
+				// Height is the relative smaller dimension, so scale width accordingly
+//					handlerParams.width = self::fitBoxWidth(srcWidth, srcHeight, handlerParams.height);
+
+				if (handlerParams.width == 0) {
+					// Very small image, so we need to rely on client side scaling :(
+					handlerParams.width = 1;
+				}
+
+				handlerParams.physicalWidth = handlerParams.width;
+			} else {
+				// Height was crap, unset it so that it will be calculated later
+				handlerParams.height = Xomw_param_itm.Null_int;
+			}
+		}
+
+		if (!Php_utl_.isset(handlerParams.physicalWidth)) {
+			// Passed all validations, so set the physicalWidth
+			handlerParams.physicalWidth = handlerParams.width;
+		}
+
+		// Because thumbs are only referred to by width, the height always needs
+		// to be scaled by the width to keep the thumbnail sizes consistent,
+		// even if it was set inside the if block above
+//			handlerParams.physicalHeight = File::scaleHeight(srcWidth, srcHeight,
+//				handlerParams.physicalWidth);
+
+		// Set the height if it was not validated in the if block higher up
+		if (!Php_utl_.isset(handlerParams.height) || handlerParams.height == -1) {
+			handlerParams.height = handlerParams.physicalHeight;
+		}
+
+//			if (!this.validateThumbParams(handlerParams.physicalWidth,
+//				handlerParams.physicalHeight, srcWidth, srcHeight, mimeType)
 //			) {
 //				return false;
 //			}
-//
-//			return true;
-//		}
-//
+
+		return true;
+	}
+
 //		/**
 //		* Validate thumbnail parameters and fill in the correct height
 //		*
@@ -186,17 +188,17 @@ public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private fina
 //		/**
 //		* @param File image
 //		* @param String script
-//		* @param array params
+//		* @param array paramsVar
 //		* @return boolean|MediaTransformOutput
 //		*/
-//		function getScriptedTransform(image, script, params) {
-//			if (!this.normaliseParams(image, params)) {
+//		function getScriptedTransform(image, script, paramsVar) {
+//			if (!this.normaliseParams(image, paramsVar)) {
 //				return false;
 //			}
-//			url = wfAppendQuery(script, this.getScriptParams(params));
+//			url = wfAppendQuery(script, this.getScriptParams(paramsVar));
 //
-//			if (image.mustRender() || params['width'] < image.getWidth()) {
-//				return new ThumbnailImage(image, url, false, params);
+//			if (image.mustRender() || paramsVar['width'] < image.getWidth()) {
+//				return new ThumbnailImage(image, url, false, paramsVar);
 //			}
 //		}
 //
@@ -244,11 +246,11 @@ public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private fina
 //			size = htmlspecialchars(wgLang.formatSize(file.getSize()));
 //			if (pages === false || pages <= 1) {
 //				msg = wfMessage('file-info-size').numParams(file.getWidth(),
-//					file.getHeight()).params(size,
+//					file.getHeight()).paramsVar(size,
 //						'<span class="mime-type">' . file.getMimeType() . '</span>').parse();
 //			} else {
 //				msg = wfMessage('file-info-size-pages').numParams(file.getWidth(),
-//					file.getHeight()).params(size,
+//					file.getHeight()).paramsVar(size,
 //						'<span class="mime-type">' . file.getMimeType() . '</span>').numParams(pages).parse();
 //			}
 //
@@ -270,19 +272,19 @@ public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private fina
 //			}
 //		}
 //
-//		public function sanitizeParamsForBucketing(params) {
-//			params = parent::sanitizeParamsForBucketing(params);
+//		public function sanitizeParamsForBucketing(paramsVar) {
+//			paramsVar = parent::sanitizeParamsForBucketing(paramsVar);
 //
 //			// We unset the height parameters in order to let normaliseParams recalculate them
 //			// Otherwise there might be a height discrepancy
-//			if (isset(params['height'])) {
-//				unset(params['height']);
+//			if (isset(paramsVar['height'])) {
+//				unset(paramsVar['height']);
 //			}
 //
-//			if (isset(params['physicalHeight'])) {
-//				unset(params['physicalHeight']);
+//			if (isset(paramsVar['physicalHeight'])) {
+//				unset(paramsVar['physicalHeight']);
 //			}
 //
-//			return params;
+//			return paramsVar;
 //		}
 }

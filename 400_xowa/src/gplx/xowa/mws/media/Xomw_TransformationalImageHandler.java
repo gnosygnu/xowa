@@ -21,37 +21,37 @@ import gplx.xowa.mws.parsers.lnkis.*;
 public class Xomw_TransformationalImageHandler extends Xomw_ImageHandler {	public Xomw_TransformationalImageHandler(byte[] key) {super(key);
 	}
 
-//		/**
-//		* @param File image
-//		* @param array paramsVar Transform parameters. Entries with the keys 'width'
-//		* and 'height' are the respective screen width and height, while the keys
-//		* 'physicalWidth' and 'physicalHeight' indicate the thumbnail dimensions.
-//		* @return boolean
-//		*/
-//		function normaliseParams(image, &paramsVar) {
-//			if (!parent::normaliseParams(image, paramsVar)) {
-//				return false;
-//			}
-//
-//			// Obtain the source, pre-rotation dimensions
-//			srcWidth = image.getWidth(paramsVar['page']);
-//			srcHeight = image.getHeight(paramsVar['page']);
-//
-//			// Don't make an image bigger than the source
-//			if (paramsVar['physicalWidth'] >= srcWidth) {
-//				paramsVar['physicalWidth'] = srcWidth;
-//				paramsVar['physicalHeight'] = srcHeight;
-//
-//				// Skip scaling limit checks if no scaling is required
-//				// due to requested size being bigger than source.
-//				if (!image.mustRender()) {
-//					return true;
-//				}
-//			}
-//
-//			return true;
-//		}
-//
+	/**
+	* @param File image
+	* @param array paramsVar Transform parameters. Entries with the keys 'width'
+	* and 'height' are the respective screen width and height, while the keys
+	* 'physicalWidth' and 'physicalHeight' indicate the thumbnail dimensions.
+	* @return boolean
+	*/
+	@Override public boolean normaliseParams(Xomw_File image, Xomw_params_handler handlerParams) {
+		if (!super.normaliseParams(image, handlerParams)) {
+			return false;
+		}
+
+		// Obtain the source, pre-rotation dimensions
+		int srcWidth = image.getWidth(handlerParams.page);
+		int srcHeight = image.getHeight(handlerParams.page);
+
+		// Don't make an image bigger than the source
+		if (handlerParams.physicalWidth >= srcWidth) {
+			handlerParams.physicalWidth = srcWidth;
+			handlerParams.physicalHeight = srcHeight;
+
+			// Skip scaling limit checks if no scaling is required
+			// due to requested size being bigger than source.
+			if (!image.mustRender()) {
+				return true;
+			}
+		}
+
+		return true;
+	}
+
 //		/**
 //		* Extracts the width/height if the image will be scaled before rotating
 //		*
@@ -96,37 +96,36 @@ public class Xomw_TransformationalImageHandler extends Xomw_ImageHandler {	publi
 //			}
 //
 //			// Create a parameter array to pass to the scaler
-//			scalerParams = [
-//				// The size to which the image will be resized
-//				'physicalWidth' => paramsVar['physicalWidth'],
-//				'physicalHeight' => paramsVar['physicalHeight'],
-//				'physicalDimensions' => "{paramsVar['physicalWidth']}x{paramsVar['physicalHeight']}",
-//				// The size of the image on the page
-//				'clientWidth' => paramsVar['width'],
-//				'clientHeight' => paramsVar['height'],
-//				// Comment as will be added to the Exif of the thumbnail
-//				'comment' => isset(paramsVar['descriptionUrl'])
-//					? "File source: {paramsVar['descriptionUrl']}"
-//					: '',
-//				// Properties of the original image
-//				'srcWidth' => image.getWidth(),
-//				'srcHeight' => image.getHeight(),
-//				'mimeType' => image.getMimeType(),
-//				'dstPath' => dstPath,
-//				'dstUrl' => dstUrl,
-//				'interlace' => isset(paramsVar['interlace']) ? paramsVar['interlace'] : false,
-//			];
-//
+		Xomw_params_scalar scalerParams = new Xomw_params_scalar();
+//			// The size to which the image will be resized
+		scalerParams.physicalWidth = handlerParams.physicalWidth;
+		scalerParams.physicalHeight = handlerParams.physicalHeight;
+//			'physicalDimensions' => "{paramsVar['physicalWidth']}x{paramsVar['physicalHeight']}",
+		// The size of the image on the page
+		scalerParams.clientWidth = handlerParams.width;
+		scalerParams.clientHeight = handlerParams.height;
+		// Comment as will be added to the Exif of the thumbnail
+//			'comment' => isset(paramsVar['descriptionUrl'])
+//				? "File source: {paramsVar['descriptionUrl']}"
+//				: '',
+		// Properties of the original image
+		scalerParams.srcWidth = image.getWidth();
+		scalerParams.srcHeight = image.getHeight();
+		scalerParams.mimeType = image.getMimeType();
+		scalerParams.dstPath = dstPath;
+		scalerParams.dstUrl = dstUrl;
+//			'interlace' => isset(paramsVar['interlace']) ? paramsVar['interlace'] : false,
+
 //			if (isset(paramsVar['quality']) && paramsVar['quality'] === 'low') {
 //				scalerParams['quality'] = 30;
 //			}
-//
-//			// For subclasses that might be paged.
+
+		// For subclasses that might be paged.
 //			if (image.isMultipage() && isset(paramsVar['page'])) {
 //				scalerParams['page'] = intval(paramsVar['page']);
 //			}
-//
-//			// Determine scaler type
+
+		// Determine scaler type
 //			scaler = this.getScalerType(dstPath);
 //
 //			if (is_array(scaler)) {
@@ -137,19 +136,19 @@ public class Xomw_TransformationalImageHandler extends Xomw_ImageHandler {	publi
 //
 //			wfDebug(__METHOD__ . ": creating {scalerParams['physicalDimensions']} " .
 //				"thumbnail at dstPath using scaler scalerName\n");
-//
-//			if (!image.mustRender() &&
-//				scalerParams['physicalWidth'] == scalerParams['srcWidth']
-//				&& scalerParams['physicalHeight'] == scalerParams['srcHeight']
+
+		if (!image.mustRender() &&
+			scalerParams.physicalWidth == scalerParams.srcWidth
+			&& scalerParams.physicalHeight == scalerParams.srcHeight
 //				&& !isset(scalerParams['quality'])
-//			) {
-//
-//				// normaliseParams (or the user) wants us to return the unscaled image
+		) {
+
+			// normaliseParams (or the user) wants us to return the unscaled image
 //				wfDebug(__METHOD__ . ": returning unscaled image\n");
-//
-//				return this.getClientScalingThumbnailImage(image, scalerParams);
-//			}
-//
+
+			return this.getClientScalingThumbnailImage(image, scalerParams);
+		}
+
 //			if (scaler == 'client') {
 //				// Client-side image scaling, use the source URL
 //				// Using the destination URL in a TRANSFORM_LATER request would be incorrect
@@ -308,26 +307,25 @@ public class Xomw_TransformationalImageHandler extends Xomw_ImageHandler {	publi
 //		* @return String|Callable One of client, im, custom, gd, imext, or a Callable array.
 //		*/
 //		abstract protected function getScalerType(dstPath, checkDstPath = true);
-//
-//		/**
-//		* Get a ThumbnailImage that respresents an image that will be scaled
-//		* client side
-//		*
-//		* @param File image File associated with this thumbnail
-//		* @param array scalerParams Array with scaler paramsVar
-//		* @return ThumbnailImage
-//		*
-//		* @todo FIXME: No rotation support
-//		*/
-//		protected function getClientScalingThumbnailImage(image, scalerParams) {
-//			paramsVar = [
-//				'width' => scalerParams['clientWidth'],
-//				'height' => scalerParams['clientHeight']
-//			];
-//
-//			return new ThumbnailImage(image, image.getUrl(), null, paramsVar);
-//		}
-//
+
+	/**
+	* Get a ThumbnailImage that respresents an image that will be scaled
+	* client side
+	*
+	* @param File image File associated with this thumbnail
+	* @param array scalerParams Array with scaler paramsVar
+	* @return ThumbnailImage
+	*
+	* @todo FIXME: No rotation support
+	*/
+	private Xomw_ThumbnailImage getClientScalingThumbnailImage(Xomw_File image, Xomw_params_scalar scalerParams) {
+		Xomw_params_handler handler_params = new Xomw_params_handler();
+		handler_params.width = scalerParams.clientWidth;
+		handler_params.height = scalerParams.clientHeight;
+
+		return new Xomw_ThumbnailImage(image, image.getUrl(), image.getPath(), handler_params);
+	}
+
 //		/**
 //		* Transform an image using ImageMagick
 //		*

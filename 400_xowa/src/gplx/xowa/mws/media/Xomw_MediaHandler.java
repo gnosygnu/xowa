@@ -75,16 +75,16 @@ public abstract class Xomw_MediaHandler {
 //		* @return array|boolean Array of parameters or false on failure.
 //		*/
 //		abstract public function parseParamString($str);
-//
-//		/**
-//		* Changes the parameter array as necessary, ready for transformation.
-//		* Should be idempotent.
-//		* Returns false if the parameters are unacceptable and the transform should fail
-//		* @param File $image
-//		* @param array $paramsVar
-//		*/
-//		abstract function normaliseParams($image, &$paramsVar);
-//
+
+	/**
+	* Changes the parameter array as necessary, ready for transformation.
+	* Should be idempotent.
+	* Returns false if the parameters are unacceptable and the transform should fail
+	* @param File $image
+	* @param array $paramsVar
+	*/
+	public abstract boolean normaliseParams(Xomw_File image, Xomw_params_handler handlerParams);
+
 //		/**
 //		* Get an image size array like that returned by getimagesize(), or false if it
 //		* can't be determined.
@@ -274,7 +274,7 @@ public abstract class Xomw_MediaHandler {
 	* @param int $flags A bitfield, may contain self::TRANSFORM_LATER
 	* @return MediaTransformOutput
 	*/
-	// XO.MW:flags=0
+	public Xomw_MediaTransformOutput doTransform(Xomw_File image, byte[] dstPath, byte[] dstUrl, Xomw_params_handler handlerParams) {return doTransform(image, dstPath, dstUrl, handlerParams, 0);}
 	public abstract Xomw_MediaTransformOutput doTransform(Xomw_File image, byte[] dstPath, byte[] dstUrl, Xomw_params_handler handlerParams, int flags);
 
 //		/**
@@ -320,18 +320,18 @@ public abstract class Xomw_MediaHandler {
 	@gplx.Virtual public boolean canRender(Xomw_File file) {
 		return true;
 	}
-//
-//		/**
-//		* True if handled types cannot be displayed directly in a browser
-//		* but can be rendered
-//		*
-//		* @param File $file
-//		* @return boolean
-//		*/
-//		public function mustRender($file) {
-//			return false;
-//		}
-//
+
+	/**
+	* True if handled types cannot be displayed directly in a browser
+	* but can be rendered
+	*
+	* @param File $file
+	* @return boolean
+	*/
+	public boolean mustRender(Xomw_File file) {
+		return false;
+	}
+
 //		/**
 //		* True if the type has multi-page capabilities
 //		*
