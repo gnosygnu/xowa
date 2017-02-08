@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
 import gplx.core.btries.*; import gplx.core.primitives.*;
-import gplx.langs.phps.utls.*;
+import gplx.xowa.mws.utls.*;
 import gplx.xowa.mws.htmls.*;
 /*	TODO.XO
 	* P3: $langObj->formatNum( ++$this->mAutonumber );

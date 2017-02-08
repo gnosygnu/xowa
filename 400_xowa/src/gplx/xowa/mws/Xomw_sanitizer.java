@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.mws; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.*; import gplx.core.btries.*; import gplx.core.encoders.*; import gplx.core.primitives.*; import gplx.langs.htmls.entitys.*;
 import gplx.xowa.parsers.htmls.*;
-import gplx.langs.htmls.*; import gplx.xowa.mws.htmls.*; import gplx.xowa.mws.parsers.*; import gplx.langs.phps.utls.*;
+import gplx.langs.htmls.*; import gplx.xowa.mws.htmls.*; import gplx.xowa.mws.parsers.*; import gplx.xowa.mws.utls.*;
 public class Xomw_sanitizer {
 	private final    Mwh_doc_wkr__atr_bldr atr_bldr = new Mwh_doc_wkr__atr_bldr();
 	private final    Mwh_atr_parser atr_parser = new Mwh_atr_parser();

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
+import gplx.xowa.mws.utls.*;
 public class Xomw_params_handler {
 	public int width;
 	public int height;
@@ -24,7 +25,7 @@ public class Xomw_params_handler {
 	public int physicalHeight;
 	public Xomw_params_handler Clear() {
 		width = height = page
-		= physicalWidth = physicalHeight = Xomw_param_itm.Null_int;
+		= physicalWidth = physicalHeight = Php_utl_.Null_int;
 		return this;
 	}
 	public void Copy_to(Xomw_params_handler src) {

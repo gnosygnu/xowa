@@ -15,12 +15,13 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.langs.phps.utls; import gplx.*; import gplx.langs.*; import gplx.langs.phps.*;
+package gplx.xowa.mws.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
 public class Php_utl_ {
 	public static boolean Empty(byte[] v)  {return v == null || v.length == 0;}
 	public static boolean Empty(boolean v)    {return v == false;}
-	public static boolean Is_set(byte[] v) {return v != null;}
-	public static boolean isset(int v) {return v != Int_.Max_value;}
+	public static boolean isset(byte[] v) {return v != null;}
+	public static boolean isset(int v) {return v != Null_int;}
+	public static boolean istrue(int v) {return v != Null_int;}
 	public static boolean isnumeric(byte[] src) {
 		if (src == null) return false;
 		int len = src.length;
@@ -36,4 +37,5 @@ public class Php_utl_ {
 		}
 		return true;
 	}
+	public static final int Null_int = Int_.Max_value;
 }

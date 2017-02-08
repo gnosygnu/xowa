@@ -17,7 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
 import gplx.xowa.mws.filerepo.file.*; import gplx.xowa.mws.parsers.lnkis.*;
-import gplx.langs.phps.utls.*;
+import gplx.xowa.mws.utls.*;
+/*	XO.TODO:
+	* parseParamString
+	* fitBoxWidth
+	* scaleHeight
+	* validateThumbParams
+*/
 // MEMORY:only one instance per wiki
 public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private final    Xomw_param_map paramMap = new Xomw_param_map();
 	public Xomw_ImageHandler(byte[] key) {super(key);
@@ -28,10 +34,11 @@ public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private fina
 	* @return boolean
 	*/
 	@Override public boolean canRender(Xomw_File file) {
-		return (file.getWidth(1) != Xomw_param_itm.Null_int && file.getHeight(1) != Xomw_param_itm.Null_int);
+		return (Php_utl_.istrue(file.getWidth()) && Php_utl_.istrue(file.getHeight()));
 	}
 
 	@Override public Xomw_param_map getParamMap() {
+		// XO.MW: defined above: "return [ 'img_width' => 'width' ];"
 		return paramMap;
 	}
 
@@ -51,10 +58,10 @@ public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private fina
 
 	@Override public byte[] makeParamString(Xomw_params_handler handlerParams) {
 		int width = 0;
-		if (handlerParams.physicalWidth != Xomw_param_itm.Null_int) {
+		if (Php_utl_.isset(handlerParams.physicalWidth)) {
 			width = handlerParams.physicalWidth;
 		}
-		else if (handlerParams.width != Xomw_param_itm.Null_int) {
+		else if (Php_utl_.isset(handlerParams.width)) {
 			width = handlerParams.width;
 		}
 		else {
@@ -74,7 +81,7 @@ public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private fina
 //				return false;
 //			}
 //		}
-//
+
 //		function getScriptParams(paramsVar) {
 //			return [ 'width' => paramsVar['width'] ];
 //		}
@@ -122,7 +129,7 @@ public abstract class Xomw_ImageHandler extends Xomw_MediaHandler {	private fina
 				handlerParams.physicalWidth = handlerParams.width;
 			} else {
 				// Height was crap, unset it so that it will be calculated later
-				handlerParams.height = Xomw_param_itm.Null_int;
+				handlerParams.height = Php_utl_.Null_int;
 			}
 		}
 

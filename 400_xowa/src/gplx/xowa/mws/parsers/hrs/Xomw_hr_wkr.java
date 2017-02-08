@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.parsers.hrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
-import gplx.langs.phps.utls.*;
+import gplx.xowa.mws.utls.*;
 public class Xomw_hr_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private Bry_bfr bfr;
 	public void Replace_hrs(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {	// REF.MW: text = preg_replace('/(^|\n)-----*/', '\\1<hr />', text);

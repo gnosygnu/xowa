@@ -17,19 +17,45 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
 import gplx.langs.htmls.*;
-import gplx.langs.phps.utls.*;
+import gplx.xowa.mws.utls.*;
 import gplx.xowa.mws.filerepo.file.*;
-public class Xomw_MediaTransformOutput {
-//		private final    Xomw_File file;
-	private final    byte[] url;
-	private final    int width, height;
-	private final    List_adp attribs = List_adp_.New(), link_attribs = List_adp_.New();
+public abstract class Xomw_MediaTransformOutput {
 	public Xomw_MediaTransformOutput(Xomw_File file, byte[] url, byte[] path, int width, int height) {
 //			this.file = file;
 		this.url = url;
 		this.width = width;
 		this.height = height;
 	}
+//		/** @var array Associative array mapping optional supplementary image files
+//		*  from pixel density (eg 1.5 or 2) to additional URLs.
+//		*/
+//		public $responsiveUrls = [];
+//
+//		/** @var File */
+//		private final    Xomw_File file;
+
+	/** @var int Image width */
+	protected final    int width;
+
+	/** @var int Image height */
+	protected final    int height;
+
+	/** @var String URL path to the thumb */
+	protected final    byte[] url;
+
+//		/** @var boolean|String */
+//		protected $page;
+//
+//		/** @var boolean|String Filesystem path to the thumb  */
+//		protected $path;
+//
+//		/** @var boolean|String Language code, false if not set */
+//		protected $lang;
+//
+//		/** @var boolean|String Permanent storage path  */
+//		protected $storagePath = false;
+
+
 	/**
 	* @return int Width of the output box
 	*/
@@ -44,114 +70,207 @@ public class Xomw_MediaTransformOutput {
 		return this.height;
 	}
 
-	// Return HTML <img ... /> tag for the thumbnail, will include
-	// width and height attributes and a blank alt text (as required).
-	//
-	// @param array options Associative array of options. Boolean options
-	//     should be indicated with a value of true for true, and false or
-	//     absent for false.
-	//
-	//     alt          HTML alt attribute
-	//     title        HTML title attribute
-	//     desc-link    Boolean, show a description link
-	//     file-link    Boolean, show a file download link
-	//     valign       vertical-align property, if the output is an inline element
-	//     img-class    Class applied to the \<img\> tag, if there is such a tag
-	//     desc-query   String, description link query params
-	//     override-width     Override width attribute. Should generally not set
-	//     override-height    Override height attribute. Should generally not set
-	//     no-dimensions      Boolean, skip width and height attributes (useful if
-	//                        set in CSS)
-	//     custom-url-link    Custom URL to link to
-	//     custom-title-link  Custom Title Object to link to
-	//     custom target-link Value of the target attribute, for custom-target-link
-	//     parser-extlink-*   Attributes added by parser for external links:
-	//          parser-extlink-rel: add rel="nofollow"
-	//          parser-extlink-target: link target, but overridden by custom-target-link
-	//
-	// For images, desc-link and file-link are implemented as a click-through. For
-	// sounds and videos, they may be displayed in other ways.
-	// XO.MW:SYNC:1.29; DATE:2017-02-03
-	public void To_html(Bry_bfr bfr, Bry_bfr tmp, Xomw_MediaTransformOutputParams options) {
-		byte[] alt = options.alt;
-
-//			byte[] query = options.desc_query;
-
-		attribs.Clear();
-		attribs.Add_many(Gfh_atr_.Bry__alt, alt);
-		attribs.Add_many(Gfh_atr_.Bry__src, url);
-		boolean link_attribs_is_null = false;
-		if (!Php_utl_.Empty(options.custom_url_link)) {
-			link_attribs.Clear();
-			link_attribs.Add_many(Gfh_atr_.Bry__href, options.custom_url_link);
-			if (!Php_utl_.Empty(options.title)) {
-				link_attribs.Add_many(Gfh_atr_.Bry__title, options.title);
-			}
-			if (Php_utl_.Empty(options.custom_target_link)) {
-				link_attribs.Add_many(Gfh_atr_.Bry__target, options.custom_target_link);
-			}
-			else if (Php_utl_.Empty(options.parser_extlink_target)) {
-				link_attribs.Add_many(Gfh_atr_.Bry__target, options.parser_extlink_target);
-			}
-			if (Php_utl_.Empty(options.parser_extlink_rel)) {
-				link_attribs.Add_many(Gfh_atr_.Bry__rel, options.parser_extlink_rel);
-			}
-		}
-		else if (!Php_utl_.Empty(options.custom_title_link)) {
-//				byte[] title = options.custom_title_link;
-//				link_attribs.Clear();
-//				link_attribs.Add_many(Gfh_atr_.Bry__href, title.Get_link_url());
-//				byte[] options_title = options.title;
-//				link_attribs.Add_many(Gfh_atr_.Bry__title, Php_utl_.Empty(options_title) ? title.Get_full_text() : options_title);
-		}
-		else if (!Php_utl_.Empty(options.desc_link)) {
-//				link_attribs = this.getDescLinkAttribs(
-//					empty(options['title']) ? null : options['title'],
-//					$query
-//				);
-		}
-		else if (!Php_utl_.Empty(options.file_link)) {
-//				link_attribs.Clear();
-//				link_attribs.Add_many(Gfh_atr_.Bry__href, file.Get_url());
-		}
-		else {
-			link_attribs_is_null = true;
-			if (!Php_utl_.Empty(options.title)) {
-				attribs.Add_many(Gfh_atr_.Bry__title, options.title);
-			}
-		}
-
-		if (!Php_utl_.Empty(options.no_dimensions)) {
-			attribs.Add_many(Gfh_atr_.Bry__width, Int_.To_bry(width));
-			attribs.Add_many(Gfh_atr_.Bry__height, Int_.To_bry(height));
-		}
-		if (!Php_utl_.Empty(options.valign)) {
-			attribs.Add_many(Gfh_atr_.Bry__style, Bry_.Add(Bry__vertical_align, options.valign));
-		}
-		if (!Php_utl_.Empty(options.img_cls)) {
-			attribs.Add_many(Gfh_atr_.Bry__class, options.img_cls);
-		}
-		if (Php_utl_.Is_set(options.override_height)) {
-			attribs.Add_many(Gfh_atr_.Bry__class, options.override_height);
-		}
-		if (Php_utl_.Is_set(options.override_width)) {
-			attribs.Add_many(Gfh_atr_.Bry__width, options.override_height);
-		}
-
-		// Additional densities for responsive images, if specified.
-		// If any of these urls is the same as src url, it'll be excluded.
-//			$responsiveUrls = array_diff(this.responsiveUrls, [ this.url ]);
-//			if (!Php_utl_.Empty($responsiveUrls)) {
-//				$attribs['srcset'] = Html::srcSet($responsiveUrls);
+//		/**
+//		* @return File
+//		*/
+//		public function getFile() {
+//			return $this->file;
+//		}
+//
+//		/**
+//		* Get the final extension of the thumbnail.
+//		* Returns false for scripted transformations.
+//		* @return String|boolean
+//		*/
+//		public function getExtension() {
+//			return $this->path ? FileBackend::extensionFromPath( $this->path ) : false;
+//		}
+//
+//		/**
+//		* @return String|boolean The thumbnail URL
+//		*/
+//		public function getUrl() {
+//			return $this->url;
+//		}
+//
+//		/**
+//		* @return String|boolean The permanent thumbnail storage path
+//		*/
+//		public function getStoragePath() {
+//			return $this->storagePath;
+//		}
+//
+//		/**
+//		* @param String $storagePath The permanent storage path
+//		* @return void
+//		*/
+//		public function setStoragePath( $storagePath ) {
+//			$this->storagePath = $storagePath;
+//			if ( $this->path === false ) {
+//				$this->path = $storagePath;
 //			}
+//		}
 
-		// XO.MW.HOOK:ThumbnailBeforeProduceHTML
-		Xomw_xml.Element(tmp, Gfh_tag_.Bry__img, attribs, Bry_.Empty, Bool_.Y);
-		Link_wrap(bfr, link_attribs_is_null ? null : link_attribs, tmp.To_bry_and_clear());
-	}
+	/**
+	* Fetch HTML for this transform output
+	*
+	* @param array $options Associative array of options. Boolean options
+	*     should be indicated with a value of true for true, and false or
+	*     absent for false.
+	*
+	*     alt          Alternate text or caption
+	*     desc-link    Boolean, show a description link
+	*     file-link    Boolean, show a file download link
+	*     custom-url-link    Custom URL to link to
+	*     custom-title-link  Custom Title Object to link to
+	*     valign       vertical-align property, if the output is an inline element
+	*     img-class    Class applied to the "<img>" tag, if there is such a tag
+	*
+	* For images, desc-link and file-link are implemented as a click-through. For
+	* sounds and videos, they may be displayed in other ways.
+	*
+	* @return String
+	*/
+	public abstract void toHtml(Bry_bfr bfr, Bry_bfr tmp, Xomw_MediaTransformOutputParams options);
+
+//		/**
+//		* This will be overridden to return true in error classes
+//		* @return boolean
+//		*/
+//		public function isError() {
+//			return false;
+//		}
+//
+//		/**
+//		* Check if an output thumbnail file actually exists.
+//		*
+//		* This will return false if there was an error, the
+//		* thumbnail is to be handled client-side only, or if
+//		* transformation was deferred via TRANSFORM_LATER.
+//		* This file may exist as a new file in /tmp, a file
+//		* in permanent storage, or even refer to the original.
+//		*
+//		* @return boolean
+//		*/
+//		public function hasFile() {
+//			// If TRANSFORM_LATER, $this->path will be false.
+//			// Note: a null path means "use the source file".
+//			return ( !$this->isError() && ( $this->path || $this->path === null ) );
+//		}
+//
+//		/**
+//		* Check if the output thumbnail is the same as the source.
+//		* This can occur if the requested width was bigger than the source.
+//		*
+//		* @return boolean
+//		*/
+//		public function fileIsSource() {
+//			return ( !$this->isError() && $this->path === null );
+//		}
+//
+//		/**
+//		* Get the path of a file system copy of the thumbnail.
+//		* Callers should never write to this path.
+//		*
+//		* @return String|boolean Returns false if there isn't one
+//		*/
+//		public function getLocalCopyPath() {
+//			if ( $this->isError() ) {
+//				return false;
+//			} elseif ( $this->path === null ) {
+//				return $this->file->getLocalRefPath(); // assume thumb was not scaled
+//			} elseif ( FileBackend::isStoragePath( $this->path ) ) {
+//				$be = $this->file->getRepo()->getBackend();
+//				// The temp file will be process cached by FileBackend
+//				$fsFile = $be->getLocalReference( [ 'src' => $this->path ] );
+//
+//				return $fsFile ? $fsFile->getPath() : false;
+//			} else {
+//				return $this->path; // may return false
+//			}
+//		}
+//
+//		/**
+//		* Stream the file if there were no errors
+//		*
+//		* @param array $headers Additional HTTP headers to send on success
+//		* @return Status
+//		* @since 1.27
+//		*/
+//		public function streamFileWithStatus( $headers = [] ) {
+//			if ( !$this->path ) {
+//				return Status::newFatal( 'backend-fail-stream', '<no path>' );
+//			} elseif ( FileBackend::isStoragePath( $this->path ) ) {
+//				$be = $this->file->getRepo()->getBackend();
+//				return $be->streamFile( [ 'src' => $this->path, 'headers' => $headers ] );
+//			} else { // FS-file
+//				$success = StreamFile::stream( $this->getLocalCopyPath(), $headers );
+//				return $success ? Status::newGood() : Status::newFatal( 'backend-fail-stream', $this->path );
+//			}
+//		}
+//
+//		/**
+//		* Stream the file if there were no errors
+//		*
+//		* @deprecated since 1.26, use streamFileWithStatus
+//		* @param array $headers Additional HTTP headers to send on success
+//		* @return boolean Success
+//		*/
+//		public function streamFile( $headers = [] ) {
+//			$this->streamFileWithStatus( $headers )->isOK();
+//		}
+//
+//		/**
+//		* Wrap some XHTML text in an anchor tag with the given attributes
+//		*
+//		* @param array $linkAttribs
+//		* @param String $contents
+//		* @return String
+//		*/
+//		protected function linkWrap( $linkAttribs, $contents ) {
+//			if ( $linkAttribs ) {
+//				return Xml::tags( 'a', $linkAttribs, $contents );
+//			} else {
+//				return $contents;
+//			}
+//		}
+//
+//		/**
+//		* @param String $title
+//		* @param String|array $params Query parameters to add
+//		* @return array
+//		*/
+//		public function getDescLinkAttribs( $title = null, $params = [] ) {
+//			if ( is_array( $params ) ) {
+//				$query = $params;
+//			} else {
+//				$query = [];
+//			}
+//			if ( $this->page && $this->page !== 1 ) {
+//				$query['page'] = $this->page;
+//			}
+//			if ( $this->lang ) {
+//				$query['lang'] = $this->lang;
+//			}
+//
+//			if ( is_string( $params ) && $params !== '' ) {
+//				$query = $params . '&' . wfArrayToCgi( $query );
+//			}
+//
+//			$attribs = [
+//				'href' => $this->file->getTitle()->getLocalURL( $query ),
+//				'class' => 'image',
+//			];
+//			if ( $title ) {
+//				$attribs['title'] = $title;
+//			}
+//
+//			return $attribs;
+//		}
+
 	// Wrap some XHTML text in an anchor tag with the given attributes
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
-	private void Link_wrap(Bry_bfr bfr, List_adp link_attribs, byte[] contents) {
+	protected void Link_wrap(Bry_bfr bfr, List_adp link_attribs, byte[] contents) {
 		if (link_attribs != null) {
 			Xomw_xml.Tags(bfr, Gfh_tag_.Bry__a, link_attribs, contents);
 		}
@@ -159,5 +278,4 @@ public class Xomw_MediaTransformOutput {
 			bfr.Add(contents);
 		}
 	}
-	private static final    byte[] Bry__vertical_align = Bry_.new_a7("vertical-align: ");
 }

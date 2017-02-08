@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
 import gplx.core.btries.*;
-import gplx.langs.phps.utls.*;
+import gplx.xowa.mws.utls.*;
 public class Xomw_html_utl {
 	private final    Bry_bfr tmp = Bry_bfr_.New();
 	private final    Btrie_rv trv = new Btrie_rv();

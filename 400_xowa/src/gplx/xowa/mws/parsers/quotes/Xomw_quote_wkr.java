@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.parsers.quotes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
-import gplx.langs.phps.utls.*;
+import gplx.xowa.mws.utls.*;
 import gplx.xowa.parsers.htmls.*;
 import gplx.core.primitives.*;
 public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls

@@ -16,10 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
+import gplx.langs.htmls.*;
+import gplx.xowa.mws.utls.*;
 import gplx.xowa.mws.parsers.lnkis.*;
 import gplx.xowa.mws.filerepo.file.*;
 // Media transform output for images
-public class Xomw_ThumbnailImage extends Xomw_MediaTransformOutput {	/**
+public class Xomw_ThumbnailImage extends Xomw_MediaTransformOutput {	private final    List_adp attribs = List_adp_.New(), link_attribs = List_adp_.New();
+	public Xomw_ThumbnailImage(Xomw_File file, byte[] url, byte[] path, int w, int h) {super(file, url, path, w, h);
+	}
+	/**
 	* Get a thumbnail Object from a file and parameters.
 	* If path is set to null, the output file is treated as a source copy.
 	* If path is set to false, no output file will be created.
@@ -78,7 +83,7 @@ public class Xomw_ThumbnailImage extends Xomw_MediaTransformOutput {	/**
 	*     file-link    Boolean, show a file download link
 	*     valign       vertical-align property, if the output is an inline element
 	*     img-class    Class applied to the \<img\> tag, if there is such a tag
-	*     desc-query   String, description link query 
+	*     desc-query   String, description link query prms
 	*    @Override  width     Override width attribute. Should generally not set
 	*    @Override  height    Override height attribute. Should generally not set
 	*     no-dimensions      Boolean, skip width and height attributes (useful if
@@ -96,80 +101,110 @@ public class Xomw_ThumbnailImage extends Xomw_MediaTransformOutput {	/**
 	* @throws MWException
 	* @return String
 	*/
-//		function toHtml(options = ...) {
-//			if (count(func_get_args()) == 2) {
-//				throw new MWException(__METHOD__ . ' called in the old style');
-//			}
-//
-//			alt = isset(options['alt']) ? options['alt'] : '';
-//
-//			query = isset(options['desc-query']) ? options['desc-query'] : '';
-//
-//			attribs = [
-//				'alt' => alt,
-//				'src' => this->url,
-//			];
-//
-//			if (!empty(options['custom-url-link'])) {
-//				linkAttribs = [ 'href' => options['custom-url-link'] ];
-//				if (!empty(options['title'])) {
-//					linkAttribs['title'] = options['title'];
-//				}
-//				if (!empty(options['custom-target-link'])) {
-//					linkAttribs['target'] = options['custom-target-link'];
-//				} elseif (!empty(options['parser-extlink-target'])) {
-//					linkAttribs['target'] = options['parser-extlink-target'];
-//				}
-//				if (!empty(options['parser-extlink-rel'])) {
-//					linkAttribs['rel'] = options['parser-extlink-rel'];
-//				}
-//			} elseif (!empty(options['custom-title-link'])) {
-//				/** @var Title title */
-//				title = options['custom-title-link'];
-//				linkAttribs = [
-//					'href' => title->getLinkURL(),
-//					'title' => empty(options['title']) ? title->getFullText() : options['title']
-//				];
-//			} elseif (!empty(options['desc-link'])) {
-//				linkAttribs = this->getDescLinkAttribs(
+	// Return HTML <img ... /> tag for the thumbnail, will include
+	// width and height attributes and a blank alt text (as required).
+	//
+	// @param array options Associative array of options. Boolean options
+	//     should be indicated with a value of true for true, and false or
+	//     absent for false.
+	//
+	//     alt          HTML alt attribute
+	//     title        HTML title attribute
+	//     desc-link    Boolean, show a description link
+	//     file-link    Boolean, show a file download link
+	//     valign       vertical-align property, if the output is an inline element
+	//     img-class    Class applied to the \<img\> tag, if there is such a tag
+	//     desc-query   String, description link query prms
+	//     override-width     Override width attribute. Should generally not set
+	//     override-height    Override height attribute. Should generally not set
+	//     no-dimensions      Boolean, skip width and height attributes (useful if
+	//                        set in CSS)
+	//     custom-url-link    Custom URL to link to
+	//     custom-title-link  Custom Title Object to link to
+	//     custom target-link Value of the target attribute, for custom-target-link
+	//     parser-extlink-*   Attributes added by parser for external links:
+	//          parser-extlink-rel: add rel="nofollow"
+	//          parser-extlink-target: link target, but overridden by custom-target-link
+	//
+	// For images, desc-link and file-link are implemented as a click-through. For
+	// sounds and videos, they may be displayed in other ways.
+	// XO.MW:SYNC:1.29; DATE:2017-02-03
+	@Override public void toHtml(Bry_bfr bfr, Bry_bfr tmp, Xomw_MediaTransformOutputParams options) {
+		byte[] alt = options.alt;
+
+//			byte[] query = options.desc_query;
+
+		attribs.Clear();
+		attribs.Add_many(Gfh_atr_.Bry__alt, alt);
+		attribs.Add_many(Gfh_atr_.Bry__src, url);
+		boolean link_attribs_is_null = false;
+		if (!Php_utl_.Empty(options.custom_url_link)) {
+			link_attribs.Clear();
+			link_attribs.Add_many(Gfh_atr_.Bry__href, options.custom_url_link);
+			if (!Php_utl_.Empty(options.title)) {
+				link_attribs.Add_many(Gfh_atr_.Bry__title, options.title);
+			}
+			if (Php_utl_.Empty(options.custom_target_link)) {
+				link_attribs.Add_many(Gfh_atr_.Bry__target, options.custom_target_link);
+			}
+			else if (Php_utl_.Empty(options.parser_extlink_target)) {
+				link_attribs.Add_many(Gfh_atr_.Bry__target, options.parser_extlink_target);
+			}
+			if (Php_utl_.Empty(options.parser_extlink_rel)) {
+				link_attribs.Add_many(Gfh_atr_.Bry__rel, options.parser_extlink_rel);
+			}
+		}
+		else if (!Php_utl_.Empty(options.custom_title_link)) {
+//				byte[] title = options.custom_title_link;
+//				link_attribs.Clear();
+//				link_attribs.Add_many(Gfh_atr_.Bry__href, title.Get_link_url());
+//				byte[] options_title = options.title;
+//				link_attribs.Add_many(Gfh_atr_.Bry__title, Php_utl_.Empty(options_title) ? title.Get_full_text() : options_title);
+		}
+		else if (!Php_utl_.Empty(options.desc_link)) {
+//				link_attribs = this.getDescLinkAttribs(
 //					empty(options['title']) ? null : options['title'],
-//					query
+//					$query
 //				);
-//			} elseif (!empty(options['file-link'])) {
-//				linkAttribs = [ 'href' => this->file->getUrl() ];
-//			} else {
-//				linkAttribs = false;
-//				if (!empty(options['title'])) {
-//					attribs['title'] = options['title'];
-//				}
+		}
+		else if (!Php_utl_.Empty(options.file_link)) {
+//				link_attribs.Clear();
+//				link_attribs.Add_many(Gfh_atr_.Bry__href, file.Get_url());
+		}
+		else {
+			link_attribs_is_null = true;
+			if (!Php_utl_.Empty(options.title)) {
+				attribs.Add_many(Gfh_atr_.Bry__title, options.title);
+			}
+		}
+
+		if (!Php_utl_.Empty(options.no_dimensions)) {
+			attribs.Add_many(Gfh_atr_.Bry__width, Int_.To_bry(width));
+			attribs.Add_many(Gfh_atr_.Bry__height, Int_.To_bry(height));
+		}
+		if (!Php_utl_.Empty(options.valign)) {
+			attribs.Add_many(Gfh_atr_.Bry__style, Bry_.Add(Bry__vertical_align, options.valign));
+		}
+		if (!Php_utl_.Empty(options.img_cls)) {
+			attribs.Add_many(Gfh_atr_.Bry__class, options.img_cls);
+		}
+		if (Php_utl_.isset(options.override_height)) {
+			attribs.Add_many(Gfh_atr_.Bry__class, options.override_height);
+		}
+		if (Php_utl_.isset(options.override_width)) {
+			attribs.Add_many(Gfh_atr_.Bry__width, options.override_height);
+		}
+
+		// Additional densities for responsive images, if specified.
+		// If any of these urls is the same as src url, it'll be excluded.
+//			$responsiveUrls = array_diff(this.responsiveUrls, [ this.url ]);
+//			if (!Php_utl_.Empty($responsiveUrls)) {
+//				$attribs['srcset'] = Html::srcSet($responsiveUrls);
 //			}
-//
-//			if (empty(options['no-dimensions'])) {
-//				attribs['width'] = this->width;
-//				attribs['height'] = this->height;
-//			}
-//			if (!empty(options['valign'])) {
-//				attribs['style'] = "vertical-align: {options['valign']}";
-//			}
-//			if (!empty(options['img-class'])) {
-//				attribs['class'] = options['img-class'];
-//			}
-//			if (isset(options['override-height'])) {
-//				attribs['height'] = options['override-height'];
-//			}
-//			if (isset(options['override-width'])) {
-//				attribs['width'] = options['override-width'];
-//			}
-//
-//			// Additional densities for responsive images, if specified.
-//			// If any of these urls is the same as src url, it'll be excluded.
-//			responsiveUrls = array_diff(this->responsiveUrls, [ this->url ]);
-//			if (!empty(responsiveUrls)) {
-//				attribs['srcset'] = Html::srcSet(responsiveUrls);
-//			}
-//
-//			Hooks::run('ThumbnailBeforeProduceHTML', [ this, &attribs, &linkAttribs ]);
-//
-//			return this->linkWrap(linkAttribs, Xml::element('img', attribs));
-//		}
+
+		// XO.MW.HOOK:ThumbnailBeforeProduceHTML
+		Xomw_xml.Element(tmp, Gfh_tag_.Bry__img, attribs, Bry_.Empty, Bool_.Y);
+		Link_wrap(bfr, link_attribs_is_null ? null : link_attribs, tmp.To_bry_and_clear());
+	}
+	private static final    byte[] Bry__vertical_align = Bry_.new_a7("vertical-align: ");
 }

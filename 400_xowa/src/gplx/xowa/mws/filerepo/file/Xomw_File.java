@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.filerepo.file; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.filerepo.*;
 import gplx.xowa.mws.media.*;
-import gplx.langs.phps.utls.*;
+import gplx.xowa.mws.utls.*;
 import gplx.xowa.mws.parsers.*; import gplx.xowa.mws.parsers.lnkis.*;
 public class Xomw_File {
 /*	TODO.XO:
@@ -281,7 +281,7 @@ public class Xomw_File {
 	* @return String
 	*/
 	public byte[] getName() {
-		if (!Php_utl_.Is_set(this.name)) {
+		if (!Php_utl_.isset(this.name)) {
 			// this.assertRepoDefined();
 			this.name = this.repo.getNameFromTitle(this.title);
 		}
@@ -295,7 +295,7 @@ public class Xomw_File {
 	* @return String
 	*/
 	private byte[] getExtension() {
-		if (!Php_utl_.Is_set(this.extension)) {
+		if (!Php_utl_.isset(this.extension)) {
 			int n = Php_str_.Strpos(this.getName(), Byte_ascii.Dot);
 			this.extension = normalizeExtension(
 				n != Bry_find_.Not_found ? Php_str_.Substr(this.getName(), n + 1) : Bry_.Empty);
@@ -332,7 +332,7 @@ public class Xomw_File {
 	* @return String
 	*/
 	public byte[] getUrl() {
-		if (!Php_utl_.Is_set(this.url)) {
+		if (!Php_utl_.isset(this.url)) {
 			// this.assertRepoDefined();
 			byte[] ext = this.getExtension();
 			this.url = Bry_.Add(this.repo.getZoneUrl(Xomw_FileRepo.Zone__public, ext), Byte_ascii.Slash_bry, this.getUrlRel());
@@ -1499,7 +1499,7 @@ public class Xomw_File {
 	* @return String
 	*/
 	private byte[] getHashPath() {
-		if (!Php_utl_.Is_set(this.hashPath)) {
+		if (!Php_utl_.isset(this.hashPath)) {
 			// this.assertRepoDefined();
 			this.hashPath = this.repo.getHashPath(this.getName());
 		}

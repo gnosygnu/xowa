@@ -54,6 +54,4 @@ public class Xomw_param_itm {
 	public static final    byte[]
 	  Name_bry__width = Bry_.new_a7("width")
 	;
-
-	public static final int Null_int = Int_.Max_value;
 }

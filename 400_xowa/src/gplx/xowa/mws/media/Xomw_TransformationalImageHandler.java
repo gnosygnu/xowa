@@ -28,19 +28,19 @@ public class Xomw_TransformationalImageHandler extends Xomw_ImageHandler {	publi
 	* 'physicalWidth' and 'physicalHeight' indicate the thumbnail dimensions.
 	* @return boolean
 	*/
-	@Override public boolean normaliseParams(Xomw_File image, Xomw_params_handler handlerParams) {
-		if (!super.normaliseParams(image, handlerParams)) {
+	@Override public boolean normaliseParams(Xomw_File image, Xomw_params_handler prms) {
+		if (!super.normaliseParams(image, prms)) {
 			return false;
 		}
 
 		// Obtain the source, pre-rotation dimensions
-		int srcWidth = image.getWidth(handlerParams.page);
-		int srcHeight = image.getHeight(handlerParams.page);
+		int srcWidth = image.getWidth(prms.page);
+		int srcHeight = image.getHeight(prms.page);
 
 		// Don't make an image bigger than the source
-		if (handlerParams.physicalWidth >= srcWidth) {
-			handlerParams.physicalWidth = srcWidth;
-			handlerParams.physicalHeight = srcHeight;
+		if (prms.physicalWidth >= srcWidth) {
+			prms.physicalWidth = srcWidth;
+			prms.physicalHeight = srcHeight;
 
 			// Skip scaling limit checks if no scaling is required
 			// due to requested size being bigger than source.
@@ -90,7 +90,7 @@ public class Xomw_TransformationalImageHandler extends Xomw_ImageHandler {	publi
 	* @param int flags
 	* @return MediaTransformError|ThumbnailImage|TransformParameterError
 	*/
-	@Override public Xomw_MediaTransformOutput doTransform(Xomw_File image, byte[] dstPath, byte[] dstUrl, Xomw_params_handler handlerParams, int flags) {
+	@Override public Xomw_MediaTransformOutput doTransform(Xomw_File image, byte[] dstPath, byte[] dstUrl, Xomw_params_handler prms, int flags) {
 //			if (!this.normaliseParams(image, paramsVar)) {
 //				return new TransformParameterError(paramsVar);
 //			}
@@ -98,12 +98,12 @@ public class Xomw_TransformationalImageHandler extends Xomw_ImageHandler {	publi
 //			// Create a parameter array to pass to the scaler
 		Xomw_params_scalar scalerParams = new Xomw_params_scalar();
 //			// The size to which the image will be resized
-		scalerParams.physicalWidth = handlerParams.physicalWidth;
-		scalerParams.physicalHeight = handlerParams.physicalHeight;
+		scalerParams.physicalWidth = prms.physicalWidth;
+		scalerParams.physicalHeight = prms.physicalHeight;
 //			'physicalDimensions' => "{paramsVar['physicalWidth']}x{paramsVar['physicalHeight']}",
 		// The size of the image on the page
-		scalerParams.clientWidth = handlerParams.width;
-		scalerParams.clientHeight = handlerParams.height;
+		scalerParams.clientWidth = prms.width;
+		scalerParams.clientHeight = prms.height;
 		// Comment as will be added to the Exif of the thumbnail
 //			'comment' => isset(paramsVar['descriptionUrl'])
 //				? "File source: {paramsVar['descriptionUrl']}"
@@ -173,7 +173,7 @@ public class Xomw_TransformationalImageHandler extends Xomw_ImageHandler {	publi
 //					newParams['page'] = paramsVar['page'];
 //				}
 //				return new Xomw_ThumbnailImage(image, dstUrl, null, newParams);
-			return new Xomw_ThumbnailImage(image, dstUrl, null, handlerParams);
+			return new Xomw_ThumbnailImage(image, dstUrl, null, prms);
 //			}
 //
 //			// Try to make a target path for the thumbnail
@@ -319,11 +319,11 @@ public class Xomw_TransformationalImageHandler extends Xomw_ImageHandler {	publi
 	* @todo FIXME: No rotation support
 	*/
 	private Xomw_ThumbnailImage getClientScalingThumbnailImage(Xomw_File image, Xomw_params_scalar scalerParams) {
-		Xomw_params_handler handler_params = new Xomw_params_handler();
-		handler_params.width = scalerParams.clientWidth;
-		handler_params.height = scalerParams.clientHeight;
+		Xomw_params_handler prms = new Xomw_params_handler();
+		prms.width = scalerParams.clientWidth;
+		prms.height = scalerParams.clientHeight;
 
-		return new Xomw_ThumbnailImage(image, image.getUrl(), image.getPath(), handler_params);
+		return new Xomw_ThumbnailImage(image, image.getUrl(), null, prms);
 	}
 
 //		/**

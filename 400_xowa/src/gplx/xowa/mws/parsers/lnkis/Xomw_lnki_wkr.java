@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
 import gplx.core.btries.*; import gplx.core.primitives.*;
-import gplx.langs.phps.utls.*;
+import gplx.xowa.mws.utls.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.mws.parsers.*; import gplx.xowa.mws.parsers.quotes.*;
 import gplx.xowa.mws.htmls.*; import gplx.xowa.mws.linkers.*;
-import gplx.xowa.mws.utls.*; import gplx.xowa.mws.libs.*;
+import gplx.xowa.mws.libs.*;
 import gplx.xowa.mws.media.*; import gplx.xowa.mws.filerepo.file.*;
 import gplx.xowa.parsers.uniqs.*;
 /*	TODO.XO
@@ -743,7 +743,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	// Parsed a width param of imagelink like 300px or 200x300px
 	// XO.MW.NOTE: for MW, "" -> null, null while "AxB" -> 0x0
 	public void parseWidthParam(int[] img_size, byte[] src) {
-		img_size[0] = img_size[1] = Xomw_param_itm.Null_int;
+		img_size[0] = img_size[1] = Php_utl_.Null_int;
 		if (src == Bry_.Empty) {
 			return;
 		}

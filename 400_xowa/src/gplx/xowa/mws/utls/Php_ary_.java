@@ -15,9 +15,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.langs.phps.utls; import gplx.*; import gplx.langs.*; import gplx.langs.phps.*;
-public class Php_encode_ {
-	public static byte[] rawurlencode(byte[] v) {
-		return gplx.langs.htmls.encoders.Gfo_url_encoder_.Php_rawurlencode.Encode(v);
-	}
+package gplx.xowa.mws.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*;
+public class Php_ary_ {
+	public static boolean Pop_bool_or_n(List_adp list)           {return (boolean)List_adp_.Pop_or(list, false);}
+	public static byte[] Pop_bry_or_null(List_adp list)       {return (byte[])List_adp_.Pop_or(list, null);}
 }

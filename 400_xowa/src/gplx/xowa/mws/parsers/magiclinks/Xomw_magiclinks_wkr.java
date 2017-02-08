@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mws.parsers.magiclinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.mws.*; import gplx.xowa.mws.parsers.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.net.*;
-import gplx.langs.phps.utls.*; import gplx.xowa.mws.htmls.*;
+import gplx.xowa.mws.utls.*; import gplx.xowa.mws.htmls.*;
 import gplx.langs.regxs.*;
 // TODO.XO: this->getConverterLanguage()->markNoConversion($url, true),
 public class Xomw_magiclinks_wkr {
