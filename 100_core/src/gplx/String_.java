@@ -84,6 +84,10 @@ public class String_ {
 	public static boolean Has_at_end(String s, String v)						{return s.endsWith(v);}					
 	public static int FindFwd(String s, String find)						{return s.indexOf(find);}				
 	public static int FindFwd(String s, String find, int pos)				{return s.indexOf(find, pos);}			
+	public static int FindFwd(String s, String find, int bgn, int end)		{
+		int rv = FindFwd(s, find, bgn);
+		return rv > end ? String_.Find_none : rv;
+	}			
 	public static int FindBwd(String s, String find)						{return s.lastIndexOf(find);}			
 	public static int FindBwd(String s, String find, int pos)				{
 				return s.lastIndexOf(find, pos);

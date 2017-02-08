@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/100_core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/140_dbs"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/150_gfui"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/400_xowa"/>
+	<classpathentry kind="lib" path="C:/000/200_dev/110_java/lib/junit.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

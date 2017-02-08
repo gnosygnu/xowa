@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*;
-import gplx.xowa.mws.parsers.*; import gplx.xowa.mws.parsers.headings.*;
+import gplx.xowa.mediawiki.includes.parsers.headingsOld.*;
 import gplx.xowa.addons.htmls.tocs.*; import gplx.xowa.htmls.core.htmls.tidy.*;
 class Xop_section_list implements Xomw_heading_cbk {
 	private final    Xomw_heading_wkr hdr_wkr = new Xomw_heading_wkr();
@@ -34,8 +34,7 @@ class Xop_section_list implements Xomw_heading_cbk {
 		toc_mgr.Init(tidy_mgr, Bry_.Empty, Bry_.Empty);
 
 		// parse
-		Xomw_parser_ctx pctx = new Xomw_parser_ctx();
-		hdr_wkr.Parse(pctx, src, 0, src.length, this);
+		hdr_wkr.Parse(src, 0, src.length, this);
 		return this;
 	}
 	public byte[] Slice_bry_or_null(byte[] key) {
@@ -92,7 +91,7 @@ class Xop_section_list implements Xomw_heading_cbk {
 
 		return new int[] {src_bgn, src_end};
 	}
-	public void On_hdr_seen(Xomw_parser_ctx pctx, Xomw_heading_wkr wkr) {
+	public void On_hdr_seen(Xomw_heading_wkr wkr) {
 		// get key by taking everything between ==; EX: "== abc ==" -> " abc "
 		byte[] src = wkr.Src();
 		int hdr_txt_bgn = wkr.Hdr_lhs_end();
@@ -117,5 +116,5 @@ class Xop_section_list implements Xomw_heading_cbk {
 		Xop_section_itm itm = new Xop_section_itm(hash.Count(), num, key, wkr.Hdr_bgn(), wkr.Hdr_end());
 		hash.Add(key, itm);
 	}
-	public void On_src_done(Xomw_parser_ctx pctx, Xomw_heading_wkr wkr) {}
+	public void On_src_done(Xomw_heading_wkr wkr) {}
 }

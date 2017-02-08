@@ -141,7 +141,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public byte[] Get_prefixed_db_key() {return Full_db();}
 	public boolean   Has_fragment() {return anch_bgn != -1;}
 	public byte[] Get_fragment() {return Anch_txt();}
-	public byte[] Get_link_url(gplx.xowa.mws.htmls.Xomw_qry_mgr qry_mgr, boolean query2, boolean proto) {
+	public byte[] Get_link_url(Object qry_mgr, boolean query2, boolean proto) {
 		// if ( $this->isExternal() || $proto !== false ) {
 		//	$ret = $this->getFullURL( $query, $query2, $proto );
 		// }
