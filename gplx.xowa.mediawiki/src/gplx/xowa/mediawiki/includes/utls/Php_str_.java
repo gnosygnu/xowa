@@ -149,4 +149,7 @@ public class Php_str_ {
 	public static byte[] strtr(byte[] src, byte find, byte repl) {
 		return Bry_.Replace(src, 0, src.length, find, repl);
 	}
+	public static byte[] str_replace(byte find, byte repl, byte[] src) {
+		return Bry_.Replace(src, 0, src.length, find, repl);
+	}
 }

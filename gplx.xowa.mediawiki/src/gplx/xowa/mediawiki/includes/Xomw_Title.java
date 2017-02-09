@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import gplx.xowa.mediawiki.includes.utls.*;
+import gplx.xowa.mediawiki.includes.title.*;
 /**
 * Represents a title within MediaWiki.
 * Optionally may contain an interwiki designation or namespace.
@@ -48,35 +49,35 @@ public class Xomw_Title {
 //		* @private
 //		*/
 //		// @{
-//
-//		/** @var String Text form (spaces not underscores) of the main part */
-//		public $mTextform = '';
-//
+
+	/** @var String Text form (spaces not underscores) of the main part */
+	private byte[] mTextform = Bry_.Empty;
+
 //		/** @var String URL-encoded form of the main part */
-//		public $mUrlform = '';
+//		public $mUrlform = Bry_.Empty;
 
 	/** @var String Main part with underscores */
 	// XO: EX: "Help_talk:A_b" . "A_b"
-	public byte[] mDbkeyform = Bry_.Empty;
+	private byte[] mDbkeyform = Bry_.Empty;
 
-//		/** @var String Database key with the initial letter in the case specified by the user */
-//		protected $mUserCaseDBKey;
-//
-//		/** @var int Namespace index, i.e. one of the NS_xxxx constants */
-//		public $mNamespace = NS_MAIN;
-//
-//		/** @var String Interwiki prefix */
-//		public $mInterwiki = '';
-//
-//		/** @var boolean Was this Title created from a String with a local interwiki prefix? */
-//		private $mLocalInterwiki = false;
-//
-//		/** @var String Title fragment (i.e. the bit after the #) */
-//		public $mFragment = '';
-//
-//		/** @var int Article ID, fetched from the link cache on demand */
-//		public $mArticleID = -1;
-//
+	/** @var String Database key with the initial letter in the case specified by the user */
+	protected byte[] mUserCaseDBKey;
+
+	/** @var int Namespace index, i.e. one of the NS_xxxx constants */
+	public int mNamespace = 0;
+
+	/** @var String Interwiki prefix */
+	public byte[] mInterwiki = Bry_.Empty;
+
+	/** @var boolean Was this Title created from a String with a local interwiki prefix? */
+	private boolean mLocalInterwiki = false;
+
+	/** @var String Title fragment (i.e. the bit after the #) */
+	private byte[] mFragment = Bry_.Empty;
+
+	/** @var int Article ID, fetched from the link cache on demand */
+	public int mArticleID = -1;
+
 //		/** @var boolean|int ID of most recent revision */
 //		protected $mLatestID = false;
 //
@@ -118,20 +119,20 @@ public class Xomw_Title {
 //
 //		/** @var boolean Boolean for initialisation on demand */
 //		public $mRestrictionsLoaded = false;
-//
-//		/** @var String Text form including namespace/interwiki, initialised on demand */
-//		protected $mPrefixedText = null;
-//
+
+	/** @var String Text form including namespace/interwiki, initialised on demand */
+	private byte[] mPrefixedText = null;
+
 //		/** @var mixed Cached value for getTitleProtection (create protection) */
 //		public $mTitleProtection;
-//
-//		/**
-//		* @var int Namespace index when there is no namespace. Don't change the
-//		*   following default, NS_MAIN is hardcoded in several places. See bug 696.
-//		*   Zero except in {{transclusion}} tags.
-//		*/
-//		public $mDefaultNamespace = NS_MAIN;
-//
+
+	/**
+	* @var int Namespace index when there is no namespace. Don't change the
+	*   following default, NS_MAIN is hardcoded in several places. See bug 696.
+	*   Zero except in {{transclusion}} tags.
+	*/
+	public int mDefaultNamespace = Xomw_Defines.NS_MAIN;
+
 //		/** @var int The page length, 0 for special pages */
 //		protected $mLength = -1;
 //
@@ -197,12 +198,12 @@ public class Xomw_Title {
 //		* @return Title|null Title, or null on an error
 //		*/
 //		public static function newFromDBkey($key) {
-//			$t = new Title();
-//			$t.mDbkeyform = $key;
+//			t = new Title();
+//			t.mDbkeyform = $key;
 //
 //			try {
-//				$t.secureAndSplit();
-//				return $t;
+//				t.secureAndSplit();
+//				return t;
 //			} catch (MalformedTitleException $ex) {
 //				return null;
 //			}
@@ -238,82 +239,88 @@ public class Xomw_Title {
 //				$linkTarget.getInterwiki()
 //			);
 //		}
-//
-//		/**
-//		* Create a new Title from text, such as what one would find in a link. De-
-//		* codes any HTML entities in the text.
-//		*
-//		* @param String|int|null $text The link text; spaces, prefixes, and an
-//		*   initial ':' indicating the main namespace are accepted.
-//		* @param int $defaultNamespace The namespace to use if none is specified
-//		*   by a prefix.  If you want to force a specific namespace even if
-//		*   $text might begin with a namespace prefix, use makeTitle() or
-//		*   makeTitleSafe().
-//		* @throws InvalidArgumentException
-//		* @return Title|null Title or null on an error.
-//		*/
-//		public static function newFromText($text, $defaultNamespace = NS_MAIN) {
-//			// DWIM: Integers can be passed in here when page titles are used as array keys.
-//			if ($text !== null && !is_string($text) && !is_int($text)) {
-//				throw new InvalidArgumentException('$text must be a String.');
-//			}
-//			if ($text === null) {
-//				return null;
-//			}
-//
-//			try {
-//				return Title::newFromTextThrow(strval($text), $defaultNamespace);
-//			} catch (MalformedTitleException $ex) {
-//				return null;
-//			}
-//		}
-//
-//		/**
-//		* Like Title::newFromText(), but throws MalformedTitleException when the title is invalid,
-//		* rather than returning null.
-//		*
-//		* The exception subclasses encode detailed information about why the title is invalid.
-//		*
-//		* @see Title::newFromText
-//		*
-//		* @since 1.25
-//		* @param String $text Title text to check
-//		* @param int $defaultNamespace
-//		* @throws MalformedTitleException If the title is invalid
-//		* @return Title
-//		*/
-//		public static function newFromTextThrow($text, $defaultNamespace = NS_MAIN) {
-//			if (is_object($text)) {
-//				throw new MWException('$text must be a String, given an Object');
-//			}
-//
-//			$titleCache = self::getTitleCache();
-//
-//			// Wiki pages often contain multiple links to the same page.
-//			// Title normalization and parsing can become expensive on pages with many
-//			// links, so we can save a little time by caching them.
-//			// In theory these are value objects and won't get changed...
-//			if ($defaultNamespace == NS_MAIN) {
-//				$t = $titleCache.get($text);
-//				if ($t) {
-//					return $t;
-//				}
-//			}
-//
-//			// Convert things like &eacute; &#257; or &#x3017; into normalized (bug 14952) text
+
+	/**
+	* Create a new Title from text, such as what one would find in a link. De-
+	* codes any HTML entities in the text.
+	*
+	* @param String|int|null $text The link text; spaces, prefixes, and an
+	*   initial ':' indicating the main namespace are accepted.
+	* @param int $defaultNamespace The namespace to use if none is specified
+	*   by a prefix.  If you want to force a specific namespace even if
+	*   $text might begin with a namespace prefix, use makeTitle() or
+	*   makeTitleSafe().
+	* @throws InvalidArgumentException
+	* @return Title|null Title or null on an error.
+	*/
+	public static Xomw_Title newFromText(byte[] text) {return newFromText(text, Xomw_Defines.NS_MAIN);}
+	public static Xomw_Title newFromText(byte[] text, int defaultNamespace) {
+		// DWIM: Integers can be passed in here when page titles are used as array keys.
+		// XO.MW.SKIP:STRONGCAST
+		// if ($text != null && !is_string($text) && !is_int($text)) {
+		//	throw new InvalidArgumentException('$text must be a String.');
+		// }
+		if (text == null) {
+			return null;
+		}
+
+		try {
+			return Xomw_Title.newFromTextThrow(text, defaultNamespace);
+		} catch (MalformedTitleException ex) {
+			Err_.Noop(ex);
+			return null;
+		}
+	}
+
+	/**
+	* Like Title::newFromText(), but throws MalformedTitleException when the title is invalid,
+	* rather than returning null.
+	*
+	* The exception subclasses encode detailed information about why the title is invalid.
+	*
+	* @see Title::newFromText
+	*
+	* @since 1.25
+	* @param String $text Title text to check
+	* @param int $defaultNamespace
+	* @throws MalformedTitleException If the title is invalid
+	* @return Title
+	*/
+	public static Xomw_Title newFromTextThrow(byte[] text, int defaultNamespace) {
+		// if (is_object($text)) {
+		//	throw new MWException('$text must be a String, given an Object');
+		// }
+
+		// XO.MW.SKIP:CACHE
+		// $titleCache = self::getTitleCache();
+
+		// Wiki pages often contain multiple links to the same page.
+		// Title normalization and parsing can become expensive on pages with many
+		// links, so we can save a little time by caching them.
+		// In theory these are value objects and won't get changed...
+		// if ($defaultNamespace == NS_MAIN) {
+		//	t = $titleCache.get($text);
+		//	if (t) {
+		//		return t;
+		//	}
+		// }
+
+		// Convert things like &eacute; &#257; or &#x3017; into normalized (bug 14952) text
 //			$filteredText = Sanitizer::decodeCharReferencesAndNormalize($text);
-//
-//			$t = new Title();
-//			$t.mDbkeyform = strtr($filteredText, ' ', '_');
-//			$t.mDefaultNamespace = intval($defaultNamespace);
-//
-//			$t.secureAndSplit();
-//			if ($defaultNamespace == NS_MAIN) {
-//				$titleCache.set($text, $t);
-//			}
-//			return $t;
-//		}
-//
+		byte[] filteredText = text;
+
+		Xomw_Title t = new Xomw_Title();
+		t.mDbkeyform = Php_str_.strtr(filteredText, Byte_ascii.Space, Byte_ascii.Underline);
+		t.mDefaultNamespace = defaultNamespace;
+
+		t.secureAndSplit();
+		// XO.MW.SKIP:CACHE
+		// if ($defaultNamespace == NS_MAIN) {
+		//	$titleCache.set($text, t);
+		// }
+		return t;
+	}
+
 //		/**
 //		* THIS IS NOT THE FUNCTION YOU WANT. Use Title::newFromText().
 //		*
@@ -330,20 +337,20 @@ public class Xomw_Title {
 //		* @return Title|null The new Object, or null on an error
 //		*/
 //		public static function newFromURL($url) {
-//			$t = new Title();
+//			t = new Title();
 //
-//			# For compatibility with old buggy URLs. "+" is usually not valid in titles,
-//			# but some URLs used it as a space replacement and they still come
-//			# from some external search tools.
-//			if (strpos(self::legalChars(), '+') === false) {
+//			// For compatibility with old buggy URLs. "+" is usually not valid in titles,
+//			// but some URLs used it as a space replacement and they still come
+//			// from some external search tools.
+//			if (strpos(self::legalChars(), '+') == false) {
 //				$url = strtr($url, '+', ' ');
 //			}
 //
-//			$t.mDbkeyform = strtr($url, ' ', '_');
+//			t.mDbkeyform = strtr($url, ' ', '_');
 //
 //			try {
-//				$t.secureAndSplit();
-//				return $t;
+//				t.secureAndSplit();
+//				return t;
 //			} catch (MalformedTitleException $ex) {
 //				return null;
 //			}
@@ -400,7 +407,7 @@ public class Xomw_Title {
 //				[ 'page_id' => $id ],
 //				__METHOD__
 //			);
-//			if ($row !== false) {
+//			if ($row != false) {
 //				$title = Title::newFromRow($row);
 //			} else {
 //				$title = null;
@@ -441,9 +448,9 @@ public class Xomw_Title {
 //		* @return Title Corresponding Title
 //		*/
 //		public static function newFromRow($row) {
-//			$t = self::makeTitle($row.page_namespace, $row.page_title);
-//			$t.loadFromRow($row);
-//			return $t;
+//			t = self::makeTitle($row.page_namespace, $row.page_title);
+//			t.loadFromRow($row);
+//			return t;
 //		}
 //
 //		/**
@@ -455,35 +462,35 @@ public class Xomw_Title {
 //		public function loadFromRow($row) {
 //			if ($row) { // page found
 //				if (isset($row.page_id)) {
-//					$this.mArticleID = (int)$row.page_id;
+//					this.mArticleID = (int)$row.page_id;
 //				}
 //				if (isset($row.page_len)) {
-//					$this.mLength = (int)$row.page_len;
+//					this.mLength = (int)$row.page_len;
 //				}
 //				if (isset($row.page_is_redirect)) {
-//					$this.mRedirect = (boolean)$row.page_is_redirect;
+//					this.mRedirect = (boolean)$row.page_is_redirect;
 //				}
 //				if (isset($row.page_latest)) {
-//					$this.mLatestID = (int)$row.page_latest;
+//					this.mLatestID = (int)$row.page_latest;
 //				}
-//				if (!$this.mForcedContentModel && isset($row.page_content_model)) {
-//					$this.mContentModel = strval($row.page_content_model);
-//				} elseif (!$this.mForcedContentModel) {
-//					$this.mContentModel = false; # initialized lazily in getContentModel()
+//				if (!this.mForcedContentModel && isset($row.page_content_model)) {
+//					this.mContentModel = strval($row.page_content_model);
+//				} elseif (!this.mForcedContentModel) {
+//					this.mContentModel = false; # initialized lazily in getContentModel()
 //				}
 //				if (isset($row.page_lang)) {
-//					$this.mDbPageLanguage = (String)$row.page_lang;
+//					this.mDbPageLanguage = (String)$row.page_lang;
 //				}
 //				if (isset($row.page_restrictions)) {
-//					$this.mOldRestrictions = $row.page_restrictions;
+//					this.mOldRestrictions = $row.page_restrictions;
 //				}
 //			} else { // page not found
-//				$this.mArticleID = 0;
-//				$this.mLength = 0;
-//				$this.mRedirect = false;
-//				$this.mLatestID = 0;
-//				if (!$this.mForcedContentModel) {
-//					$this.mContentModel = false; # initialized lazily in getContentModel()
+//				this.mArticleID = 0;
+//				this.mLength = 0;
+//				this.mRedirect = false;
+//				this.mLatestID = 0;
+//				if (!this.mForcedContentModel) {
+//					this.mContentModel = false; # initialized lazily in getContentModel()
 //				}
 //			}
 //		}
@@ -501,17 +508,17 @@ public class Xomw_Title {
 //		* @param String $interwiki The interwiki prefix
 //		* @return Title The new Object
 //		*/
-//		public static function makeTitle($ns, $title, $fragment = '', $interwiki = '') {
-//			$t = new Title();
-//			$t.mInterwiki = $interwiki;
-//			$t.mFragment = $fragment;
-//			$t.mNamespace = $ns = intval($ns);
-//			$t.mDbkeyform = strtr($title, ' ', '_');
-//			$t.mArticleID = ($ns >= 0) ? -1 : 0;
-//			$t.mUrlform = wfUrlencode($t.mDbkeyform);
-//			$t.mTextform = strtr($title, '_', ' ');
-//			$t.mContentModel = false; # initialized lazily in getContentModel()
-//			return $t;
+//		public static function makeTitle($ns, $title, $fragment = Bry_.Empty, $interwiki = Bry_.Empty) {
+//			t = new Title();
+//			t.mInterwiki = $interwiki;
+//			t.mFragment = $fragment;
+//			t.mNamespace = $ns = intval($ns);
+//			t.mDbkeyform = strtr($title, ' ', '_');
+//			t.mArticleID = ($ns >= 0) ? -1 : 0;
+//			t.mUrlform = wfUrlencode(t.mDbkeyform);
+//			t.mTextform = strtr($title, '_', ' ');
+//			t.mContentModel = false; # initialized lazily in getContentModel()
+//			return t;
 //		}
 //
 //		/**
@@ -525,17 +532,17 @@ public class Xomw_Title {
 //		* @param String $interwiki Interwiki prefix
 //		* @return Title|null The new Object, or null on an error
 //		*/
-//		public static function makeTitleSafe($ns, $title, $fragment = '', $interwiki = '') {
+//		public static function makeTitleSafe($ns, $title, $fragment = Bry_.Empty, $interwiki = Bry_.Empty) {
 //			if (!MWNamespace::exists($ns)) {
 //				return null;
 //			}
 //
-//			$t = new Title();
-//			$t.mDbkeyform = Title::makeName($ns, $title, $fragment, $interwiki, true);
+//			t = new Title();
+//			t.mDbkeyform = Title::makeName($ns, $title, $fragment, $interwiki, true);
 //
 //			try {
-//				$t.secureAndSplit();
-//				return $t;
+//				t.secureAndSplit();
+//				return t;
 //			} catch (MalformedTitleException $ex) {
 //				return null;
 //			}
@@ -570,7 +577,7 @@ public class Xomw_Title {
 //				[ 'page_id' => $id ],
 //				__METHOD__
 //			);
-//			if ($s === false) {
+//			if ($s == false) {
 //				return null;
 //			}
 //
@@ -614,15 +621,15 @@ public class Xomw_Title {
 //		public static function convertByteClassToUnicodeClass($byteClass) {
 //			$length = strlen($byteClass);
 //			// Input token queue
-//			$x0 = $x1 = $x2 = '';
+//			$x0 = $x1 = $x2 = Bry_.Empty;
 //			// Decoded queue
-//			$d0 = $d1 = $d2 = '';
+//			$d0 = $d1 = $d2 = Bry_.Empty;
 //			// Decoded integer codepoints
 //			$ord0 = $ord1 = $ord2 = 0;
 //			// Re-encoded queue
-//			$r0 = $r1 = $r2 = '';
+//			$r0 = $r1 = $r2 = Bry_.Empty;
 //			// Output
-//			$out = '';
+//			$out = Bry_.Empty;
 //			// Flags
 //			$allowUnicode = false;
 //			for ($pos = 0; $pos < $length; $pos++) {
@@ -664,13 +671,13 @@ public class Xomw_Title {
 //					// Allow unicode if a single high-bit character appears
 //					$r0 = sprintf('\x%02x', $ord0);
 //					$allowUnicode = true;
-//				} elseif (strpos('-\\[]^', $d0) !== false) {
+//				} elseif (strpos('-\\[]^', $d0) != false) {
 //					$r0 = '\\' . $d0;
 //				} else {
 //					$r0 = $d0;
 //				}
 //				// Do the output
-//				if ($x0 !== '' && $x1 === '-' && $x2 !== '') {
+//				if ($x0 != Bry_.Empty && $x1 == '-' && $x2 != Bry_.Empty) {
 //					// Range
 //					if ($ord2 > $ord0) {
 //						// Empty range
@@ -686,7 +693,7 @@ public class Xomw_Title {
 //						$out .= "$r2-$r0";
 //					}
 //					// Reset state to the initial value
-//					$x0 = $x1 = $d0 = $d1 = $r0 = $r1 = '';
+//					$x0 = $x1 = $d0 = $d1 = $r0 = $r1 = Bry_.Empty;
 //				} elseif ($ord2 < 0x80) {
 //					// ASCII character
 //					$out .= $r2;
@@ -715,7 +722,7 @@ public class Xomw_Title {
 //		*   $ns instead of the localized version.
 //		* @return String The prefixed form of the title
 //		*/
-//		public static function makeName($ns, $title, $fragment = '', $interwiki = '',
+//		public static function makeName($ns, $title, $fragment = Bry_.Empty, $interwiki = Bry_.Empty,
 //			$canonicalNamespace = false
 //		) {
 //			global $wgContLang;
@@ -725,11 +732,11 @@ public class Xomw_Title {
 //			} else {
 //				$namespace = $wgContLang.getNsText($ns);
 //			}
-//			$name = $namespace == '' ? $title : "$namespace:$title";
-//			if (strval($interwiki) != '') {
+//			$name = $namespace == Bry_.Empty ? $title : "$namespace:$title";
+//			if (strval($interwiki) != Bry_.Empty) {
 //				$name = "$interwiki:$name";
 //			}
-//			if (strval($fragment) != '') {
+//			if (strval($fragment) != Bry_.Empty) {
 //				$name .= '#' . $fragment;
 //			}
 //			return $name;
@@ -742,10 +749,10 @@ public class Xomw_Title {
 //		* @return String Escaped String
 //		*/
 //		static function escapeFragmentForURL($fragment) {
-//			# Note that we don't urlencode the fragment.  urlencoded Unicode
-//			# fragments appear not to work in IE (at least up to 7) or in at least
-//			# one version of Opera 9.x.  The W3C validator, for one, doesn't seem
-//			# to care if they aren't encoded.
+//			// Note that we don't urlencode the fragment.  urlencoded Unicode
+//			// fragments appear not to work in IE (at least up to 7) or in at least
+//			// one version of Opera 9.x.  The W3C validator, for one, doesn't seem
+//			// to care if they aren't encoded.
 //			return Sanitizer::escapeId($fragment, 'noninitial');
 //		}
 //
@@ -773,24 +780,24 @@ public class Xomw_Title {
 //		* @return boolean True if this is an in-project interwiki link or a wikilink, false otherwise
 //		*/
 //		public function isLocal() {
-//			if ($this.isExternal()) {
-//				$iw = self::getInterwikiLookup().fetch($this.mInterwiki);
+//			if (this.isExternal()) {
+//				$iw = self::getInterwikiLookup().fetch(this.mInterwiki);
 //				if ($iw) {
 //					return $iw.isLocal();
 //				}
 //			}
 //			return true;
 //		}
-//
-//		/**
-//		* Is this Title interwiki?
-//		*
-//		* @return boolean
-//		*/
-//		public function isExternal() {
-//			return $this.mInterwiki !== '';
-//		}
-//
+
+	/**
+	* Is this Title interwiki?
+	*
+	* @return boolean
+	*/
+	public boolean isExternal() {
+		return this.mInterwiki != Bry_.Empty;
+	}
+
 //		/**
 //		* Get the interwiki prefix
 //		*
@@ -799,18 +806,18 @@ public class Xomw_Title {
 //		* @return String Interwiki prefix
 //		*/
 //		public function getInterwiki() {
-//			return $this.mInterwiki;
+//			return this.mInterwiki;
 //		}
-//
-//		/**
-//		* Was this a local interwiki link?
-//		*
-//		* @return boolean
-//		*/
-//		public function wasLocalInterwiki() {
-//			return $this.mLocalInterwiki;
-//		}
-//
+
+	/**
+	* Was this a local interwiki link?
+	*
+	* @return boolean
+	*/
+	public boolean wasLocalInterwiki() {
+		return this.mLocalInterwiki;
+	}
+
 //		/**
 //		* Determine whether the Object refers to a page within
 //		* this project and is transcludable.
@@ -818,11 +825,11 @@ public class Xomw_Title {
 //		* @return boolean True if this is transcludable
 //		*/
 //		public function isTrans() {
-//			if (!$this.isExternal()) {
+//			if (!this.isExternal()) {
 //				return false;
 //			}
 //
-//			return self::getInterwikiLookup().fetch($this.mInterwiki).isTranscludable();
+//			return self::getInterwikiLookup().fetch(this.mInterwiki).isTranscludable();
 //		}
 //
 //		/**
@@ -831,11 +838,11 @@ public class Xomw_Title {
 //		* @return String|false The DB name
 //		*/
 //		public function getTransWikiID() {
-//			if (!$this.isExternal()) {
+//			if (!this.isExternal()) {
 //				return false;
 //			}
 //
-//			return self::getInterwikiLookup().fetch($this.mInterwiki).getWikiID();
+//			return self::getInterwikiLookup().fetch(this.mInterwiki).getWikiID();
 //		}
 //
 //		/**
@@ -848,39 +855,39 @@ public class Xomw_Title {
 //		* @return TitleValue|null
 //		*/
 //		public function getTitleValue() {
-//			if ($this.mTitleValue === null) {
+//			if (this.mTitleValue == null) {
 //				try {
-//					$this.mTitleValue = new TitleValue(
-//						$this.getNamespace(),
-//						$this.getDBkey(),
-//						$this.getFragment(),
-//						$this.getInterwiki()
+//					this.mTitleValue = new TitleValue(
+//						this.getNamespace(),
+//						this.getDBkey(),
+//						this.getFragment(),
+//						this.getInterwiki()
 //					);
 //				} catch (InvalidArgumentException $ex) {
 //					wfDebug(__METHOD__ . ': Can\'t create a TitleValue for [[' .
-//						$this.getPrefixedText() . ']]: ' . $ex.getMessage() . "\n");
+//						this.getPrefixedText() . ']]: ' . $ex.getMessage() . "\n");
 //				}
 //			}
 //
-//			return $this.mTitleValue;
+//			return this.mTitleValue;
 //		}
-//
-//		/**
-//		* Get the text form (spaces not underscores) of the main part
-//		*
-//		* @return String Main part of the title
-//		*/
-//		public function getText() {
-//			return $this.mTextform;
-//		}
-//
+
+	/**
+	* Get the text form (spaces not underscores) of the main part
+	*
+	* @return String Main part of the title
+	*/
+	public byte[] getText() {
+		return this.mTextform;
+	}
+
 //		/**
 //		* Get the URL-encoded form of the main part
 //		*
 //		* @return String Main part of the title, URL-encoded
 //		*/
 //		public function getPartialURL() {
-//			return $this.mUrlform;
+//			return this.mUrlform;
 //		}
 //
 //		/**
@@ -889,7 +896,7 @@ public class Xomw_Title {
 //		* @return String Main part of the title, with underscores
 //		*/
 //		public function getDBkey() {
-//			return $this.mDbkeyform;
+//			return this.mDbkeyform;
 //		}
 //
 //		/**
@@ -898,11 +905,11 @@ public class Xomw_Title {
 //		* @return String DB key
 //		*/
 //		function getUserCaseDBKey() {
-//			if (!is_null($this.mUserCaseDBKey)) {
-//				return $this.mUserCaseDBKey;
+//			if (!is_null(this.mUserCaseDBKey)) {
+//				return this.mUserCaseDBKey;
 //			} else {
-//				// If created via makeTitle(), $this.mUserCaseDBKey is not set.
-//				return $this.mDbkeyform;
+//				// If created via makeTitle(), this.mUserCaseDBKey is not set.
+//				return this.mDbkeyform;
 //			}
 //		}
 //
@@ -912,7 +919,7 @@ public class Xomw_Title {
 //		* @return int Namespace index
 //		*/
 //		public function getNamespace() {
-//			return $this.mNamespace;
+//			return this.mNamespace;
 //		}
 //
 //		/**
@@ -922,30 +929,30 @@ public class Xomw_Title {
 //		* @return String Content model id
 //		*/
 //		public function getContentModel($flags = 0) {
-//			if (!$this.mForcedContentModel
-//				&& (!$this.mContentModel || $flags === Title::GAID_FOR_UPDATE)
-//				&& $this.getArticleID($flags)
+//			if (!this.mForcedContentModel
+//				&& (!this.mContentModel || $flags == Title::GAID_FOR_UPDATE)
+//				&& this.getArticleID($flags)
 //			) {
 //				$linkCache = LinkCache::singleton();
-//				$linkCache.addLinkObj($this); # in case we already had an article ID
-//				$this.mContentModel = $linkCache.getGoodLinkFieldObj($this, 'model');
+//				$linkCache.addLinkObj(this); # in case we already had an article ID
+//				this.mContentModel = $linkCache.getGoodLinkFieldObj(this, 'model');
 //			}
 //
-//			if (!$this.mContentModel) {
-//				$this.mContentModel = ContentHandler::getDefaultModelFor($this);
+//			if (!this.mContentModel) {
+//				this.mContentModel = ContentHandler::getDefaultModelFor(this);
 //			}
 //
-//			return $this.mContentModel;
+//			return this.mContentModel;
 //		}
 //
 //		/**
 //		* Convenience method for checking a title's content model name
 //		*
 //		* @param String $id The content model ID (use the CONTENT_MODEL_XXX constants).
-//		* @return boolean True if $this.getContentModel() == $id
+//		* @return boolean True if this.getContentModel() == $id
 //		*/
 //		public function hasContentModel($id) {
-//			return $this.getContentModel() == $id;
+//			return this.getContentModel() == $id;
 //		}
 //
 //		/**
@@ -960,8 +967,8 @@ public class Xomw_Title {
 //		* @param String $model CONTENT_MODEL_XXX constant
 //		*/
 //		public function setContentModel($model) {
-//			$this.mContentModel = $model;
-//			$this.mForcedContentModel = true;
+//			this.mContentModel = $model;
+//			this.mForcedContentModel = true;
 //		}
 //
 //		/**
@@ -970,19 +977,19 @@ public class Xomw_Title {
 //		* @return String|false Namespace text
 //		*/
 //		public function getNsText() {
-//			if ($this.isExternal()) {
+//			if (this.isExternal()) {
 //				// This probably shouldn't even happen,
 //				// but for interwiki transclusion it sometimes does.
 //				// Use the canonical namespaces if possible to try to
 //				// resolve a foreign namespace.
-//				if (MWNamespace::exists($this.mNamespace)) {
-//					return MWNamespace::getCanonicalName($this.mNamespace);
+//				if (MWNamespace::exists(this.mNamespace)) {
+//					return MWNamespace::getCanonicalName(this.mNamespace);
 //				}
 //			}
 //
 //			try {
 //				$formatter = self::getTitleFormatter();
-//				return $formatter.getNamespaceName($this.mNamespace, $this.mDbkeyform);
+//				return $formatter.getNamespaceName(this.mNamespace, this.mDbkeyform);
 //			} catch (InvalidArgumentException $ex) {
 //				wfDebug(__METHOD__ . ': ' . $ex.getMessage() . "\n");
 //				return false;
@@ -996,7 +1003,7 @@ public class Xomw_Title {
 //		*/
 //		public function getSubjectNsText() {
 //			global $wgContLang;
-//			return $wgContLang.getNsText(MWNamespace::getSubject($this.mNamespace));
+//			return $wgContLang.getNsText(MWNamespace::getSubject(this.mNamespace));
 //		}
 //
 //		/**
@@ -1006,7 +1013,7 @@ public class Xomw_Title {
 //		*/
 //		public function getTalkNsText() {
 //			global $wgContLang;
-//			return $wgContLang.getNsText(MWNamespace::getTalk($this.mNamespace));
+//			return $wgContLang.getNsText(MWNamespace::getTalk(this.mNamespace));
 //		}
 //
 //		/**
@@ -1015,7 +1022,7 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function canTalk() {
-//			return MWNamespace::canTalk($this.mNamespace);
+//			return MWNamespace::canTalk(this.mNamespace);
 //		}
 //
 //		/**
@@ -1024,7 +1031,7 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function canExist() {
-//			return $this.mNamespace >= NS_MAIN;
+//			return this.mNamespace >= NS_MAIN;
 //		}
 //
 //		/**
@@ -1033,7 +1040,7 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isWatchable() {
-//			return !$this.isExternal() && MWNamespace::isWatchable($this.getNamespace());
+//			return !this.isExternal() && MWNamespace::isWatchable(this.getNamespace());
 //		}
 //
 //		/**
@@ -1042,7 +1049,7 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isSpecialPage() {
-//			return $this.getNamespace() == NS_SPECIAL;
+//			return this.getNamespace() == NS_SPECIAL;
 //		}
 //
 //		/**
@@ -1052,8 +1059,8 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isSpecial($name) {
-//			if ($this.isSpecialPage()) {
-//				list($thisName, /* $subpage */) = SpecialPageFactory::resolveAlias($this.getDBkey());
+//			if (this.isSpecialPage()) {
+//				list($thisName, /* $subpage */) = SpecialPageFactory::resolveAlias(this.getDBkey());
 //				if ($name == $thisName) {
 //					return true;
 //				}
@@ -1063,21 +1070,21 @@ public class Xomw_Title {
 //
 //		/**
 //		* If the Title refers to a special page alias which is not the local default, resolve
-//		* the alias, and localise the name as necessary.  Otherwise, return $this
+//		* the alias, and localise the name as necessary.  Otherwise, return this
 //		*
 //		* @return Title
 //		*/
 //		public function fixSpecialName() {
-//			if ($this.isSpecialPage()) {
-//				list($canonicalName, $par) = SpecialPageFactory::resolveAlias($this.mDbkeyform);
+//			if (this.isSpecialPage()) {
+//				list($canonicalName, $par) = SpecialPageFactory::resolveAlias(this.mDbkeyform);
 //				if ($canonicalName) {
 //					$localName = SpecialPageFactory::getLocalNameFor($canonicalName, $par);
-//					if ($localName != $this.mDbkeyform) {
+//					if ($localName != this.mDbkeyform) {
 //						return Title::makeTitle(NS_SPECIAL, $localName);
 //					}
 //				}
 //			}
-//			return $this;
+//			return this;
 //		}
 //
 //		/**
@@ -1091,7 +1098,7 @@ public class Xomw_Title {
 //		* @since 1.19
 //		*/
 //		public function inNamespace($ns) {
-//			return MWNamespace::equals($this.getNamespace(), $ns);
+//			return MWNamespace::equals(this.getNamespace(), $ns);
 //		}
 //
 //		/**
@@ -1108,7 +1115,7 @@ public class Xomw_Title {
 //			}
 //
 //			foreach ($namespaces as $ns) {
-//				if ($this.inNamespace($ns)) {
+//				if (this.inNamespace($ns)) {
 //					return true;
 //				}
 //			}
@@ -1130,7 +1137,7 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function hasSubjectNamespace($ns) {
-//			return MWNamespace::subjectEquals($this.getNamespace(), $ns);
+//			return MWNamespace::subjectEquals(this.getNamespace(), $ns);
 //		}
 //
 //		/**
@@ -1141,7 +1148,7 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isContentPage() {
-//			return MWNamespace::isContent($this.getNamespace());
+//			return MWNamespace::isContent(this.getNamespace());
 //		}
 //
 //		/**
@@ -1151,13 +1158,13 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isMovable() {
-//			if (!MWNamespace::isMovable($this.getNamespace()) || $this.isExternal()) {
+//			if (!MWNamespace::isMovable(this.getNamespace()) || this.isExternal()) {
 //				// Interwiki title or immovable namespace. Hooks don't get to override here
 //				return false;
 //			}
 //
 //			$result = true;
-//			Hooks::run('TitleIsMovable', [ $this, &$result ]);
+//			Hooks::run('TitleIsMovable', [ this, &$result ]);
 //			return $result;
 //		}
 //
@@ -1172,7 +1179,7 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isMainPage() {
-//			return $this.equals(Title::newMainPage());
+//			return this.equals(Title::newMainPage());
 //		}
 //
 //		/**
@@ -1181,8 +1188,8 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isSubpage() {
-//			return MWNamespace::hasSubpages($this.mNamespace)
-//				? strpos($this.getText(), '/') !== false
+//			return MWNamespace::hasSubpages(this.mNamespace)
+//				? strpos(this.getText(), '/') != false
 //				: false;
 //		}
 //
@@ -1194,8 +1201,8 @@ public class Xomw_Title {
 //		public function isConversionTable() {
 //			// @todo ConversionTable should become a separate content model.
 //
-//			return $this.getNamespace() == NS_MEDIAWIKI &&
-//				strpos($this.getText(), 'Conversiontable/') === 0;
+//			return this.getNamespace() == NS_MEDIAWIKI &&
+//				strpos(this.getText(), 'Conversiontable/') == 0;
 //		}
 //
 //		/**
@@ -1204,7 +1211,7 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isWikitextPage() {
-//			return $this.hasContentModel(CONTENT_MODEL_WIKITEXT);
+//			return this.hasContentModel(CONTENT_MODEL_WIKITEXT);
 //		}
 //
 //		/**
@@ -1222,9 +1229,9 @@ public class Xomw_Title {
 //		* @todo FIXME: Rename to isSiteConfigPage() and remove deprecated hook
 //		*/
 //		public function isCssOrJsPage() {
-//			$isCssOrJsPage = NS_MEDIAWIKI == $this.mNamespace
-//				&& ($this.hasContentModel(CONTENT_MODEL_CSS)
-//					|| $this.hasContentModel(CONTENT_MODEL_JAVASCRIPT));
+//			$isCssOrJsPage = NS_MEDIAWIKI == this.mNamespace
+//				&& (this.hasContentModel(CONTENT_MODEL_CSS)
+//					|| this.hasContentModel(CONTENT_MODEL_JAVASCRIPT));
 //
 //			return $isCssOrJsPage;
 //		}
@@ -1235,9 +1242,9 @@ public class Xomw_Title {
 //		* @todo FIXME: Rename to isUserConfigPage()
 //		*/
 //		public function isCssJsSubpage() {
-//			return (NS_USER == $this.mNamespace && $this.isSubpage()
-//					&& ($this.hasContentModel(CONTENT_MODEL_CSS)
-//						|| $this.hasContentModel(CONTENT_MODEL_JAVASCRIPT)));
+//			return (NS_USER == this.mNamespace && this.isSubpage()
+//					&& (this.hasContentModel(CONTENT_MODEL_CSS)
+//						|| this.hasContentModel(CONTENT_MODEL_JAVASCRIPT)));
 //		}
 //
 //		/**
@@ -1246,10 +1253,10 @@ public class Xomw_Title {
 //		* @return String Containing skin name from .css or .js subpage title
 //		*/
 //		public function getSkinFromCssJsSubpage() {
-//			$subpage = explode('/', $this.mTextform);
+//			$subpage = explode('/', this.mTextform);
 //			$subpage = $subpage[count($subpage) - 1];
 //			$lastdot = strrpos($subpage, '.');
-//			if ($lastdot === false) {
+//			if ($lastdot == false) {
 //				return $subpage; # Never happens: only called for names ending in '.css' or '.js'
 //			}
 //			return substr($subpage, 0, $lastdot);
@@ -1261,8 +1268,8 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isCssSubpage() {
-//			return (NS_USER == $this.mNamespace && $this.isSubpage()
-//				&& $this.hasContentModel(CONTENT_MODEL_CSS));
+//			return (NS_USER == this.mNamespace && this.isSubpage()
+//				&& this.hasContentModel(CONTENT_MODEL_CSS));
 //		}
 //
 //		/**
@@ -1271,8 +1278,8 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isJsSubpage() {
-//			return (NS_USER == $this.mNamespace && $this.isSubpage()
-//				&& $this.hasContentModel(CONTENT_MODEL_JAVASCRIPT));
+//			return (NS_USER == this.mNamespace && this.isSubpage()
+//				&& this.hasContentModel(CONTENT_MODEL_JAVASCRIPT));
 //		}
 //
 //		/**
@@ -1281,7 +1288,7 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isTalkPage() {
-//			return MWNamespace::isTalk($this.getNamespace());
+//			return MWNamespace::isTalk(this.getNamespace());
 //		}
 //
 //		/**
@@ -1290,7 +1297,7 @@ public class Xomw_Title {
 //		* @return Title The Object for the talk page
 //		*/
 //		public function getTalkPage() {
-//			return Title::makeTitle(MWNamespace::getTalk($this.getNamespace()), $this.getDBkey());
+//			return Title::makeTitle(MWNamespace::getTalk(this.getNamespace()), this.getDBkey());
 //		}
 //
 //		/**
@@ -1301,11 +1308,11 @@ public class Xomw_Title {
 //		*/
 //		public function getSubjectPage() {
 //			// Is this the same title?
-//			$subjectNS = MWNamespace::getSubject($this.getNamespace());
-//			if ($this.getNamespace() == $subjectNS) {
-//				return $this;
+//			$subjectNS = MWNamespace::getSubject(this.getNamespace());
+//			if (this.getNamespace() == $subjectNS) {
+//				return this;
 //			}
-//			return Title::makeTitle($subjectNS, $this.getDBkey());
+//			return Title::makeTitle($subjectNS, this.getDBkey());
 //		}
 //
 //		/**
@@ -1317,55 +1324,55 @@ public class Xomw_Title {
 //		* @return Title
 //		*/
 //		public function getOtherPage() {
-//			if ($this.isSpecialPage()) {
+//			if (this.isSpecialPage()) {
 //				throw new MWException('Special pages cannot have other pages');
 //			}
-//			if ($this.isTalkPage()) {
-//				return $this.getSubjectPage();
+//			if (this.isTalkPage()) {
+//				return this.getSubjectPage();
 //			} else {
-//				return $this.getTalkPage();
+//				return this.getTalkPage();
 //			}
 //		}
-//
-//		/**
-//		* Get the default namespace index, for when there is no namespace
-//		*
-//		* @return int Default namespace index
-//		*/
-//		public function getDefaultNamespace() {
-//			return $this.mDefaultNamespace;
-//		}
-//
-//		/**
-//		* Get the Title fragment (i.e.\ the bit after the #) in text form
-//		*
-//		* Use Title::hasFragment to check for a fragment
-//		*
-//		* @return String Title fragment
-//		*/
-//		public function getFragment() {
-//			return $this.mFragment;
-//		}
-//
-//		/**
-//		* Check if a Title fragment is set
-//		*
-//		* @return boolean
-//		* @since 1.23
-//		*/
-//		public function hasFragment() {
-//			return $this.mFragment !== '';
-//		}
-//
+
+	/**
+	* Get the default namespace index, for when there is no namespace
+	*
+	* @return int Default namespace index
+	*/
+	public int getDefaultNamespace() {
+		return this.mDefaultNamespace;
+	}
+
+	/**
+	* Get the Title fragment (i.e.\ the bit after the #) in text form
+	*
+	* Use Title::hasFragment to check for a fragment
+	*
+	* @return String Title fragment
+	*/
+	public byte[] getFragment() {
+		return this.mFragment;
+	}
+
+	/**
+	* Check if a Title fragment is set
+	*
+	* @return boolean
+	* @since 1.23
+	*/
+	public boolean hasFragment() {
+		return this.mFragment != Bry_.Empty;
+	}
+
 //		/**
 //		* Get the fragment in URL form, including the "#" character if there is one
 //		* @return String Fragment in URL form
 //		*/
 //		public function getFragmentForURL() {
-//			if (!$this.hasFragment()) {
-//				return '';
+//			if (!this.hasFragment()) {
+//				return Bry_.Empty;
 //			} else {
-//				return '#' . Title::escapeFragmentForURL($this.getFragment());
+//				return '#' . Title::escapeFragmentForURL(this.getFragment());
 //			}
 //		}
 //
@@ -1382,7 +1389,7 @@ public class Xomw_Title {
 //		* @param String $fragment Text
 //		*/
 //		public function setFragment($fragment) {
-//			$this.mFragment = strtr(substr($fragment, 1), '_', ' ');
+//			this.mFragment = strtr(substr($fragment, 1), '_', ' ');
 //		}
 //
 //		/**
@@ -1394,10 +1401,10 @@ public class Xomw_Title {
 //		*/
 //		public function createFragmentTarget($fragment) {
 //			return self::makeTitle(
-//				$this.getNamespace(),
-//				$this.getText(),
+//				this.getNamespace(),
+//				this.getText(),
 //				$fragment,
-//				$this.getInterwiki()
+//				this.getInterwiki()
 //			);
 //		}
 
@@ -1410,12 +1417,12 @@ public class Xomw_Title {
 	*/
 	private byte[] prefix(byte[] name) {
 		byte[] p = Bry_.Empty;
-//			if ($this.isExternal()) {
-//				p = $this.mInterwiki . ':';
+//			if (this.isExternal()) {
+//				p = this.mInterwiki . ':';
 //			}
 
-//			if (0 != $this.mNamespace) {
-//				p .= $this.getNsText() . ':';
+//			if (0 != this.mNamespace) {
+//				p .= this.getNsText() . ':';
 //			}
 		return Bry_.Add(p, name);
 	}
@@ -1432,28 +1439,28 @@ public class Xomw_Title {
 		return s;
 	}
 
-//		/**
-//		* Get the prefixed title with spaces.
-//		* This is the form usually used for display
-//		*
-//		* @return String The prefixed title, with spaces
-//		*/
-//		public function getPrefixedText() {
-//			if ($this.mPrefixedText === null) {
-//				$s = $this.prefix($this.mTextform);
-//				$s = strtr($s, '_', ' ');
-//				$this.mPrefixedText = $s;
-//			}
-//			return $this.mPrefixedText;
-//		}
-//
+	/**
+	* Get the prefixed title with spaces.
+	* This is the form usually used for display
+	*
+	* @return String The prefixed title, with spaces
+	*/
+	public byte[] getPrefixedText() {
+		if (this.mPrefixedText == null) {
+			byte[] s = this.prefix(this.mTextform);
+			s = Php_str_.strtr(s, Byte_ascii.Underline, Byte_ascii.Space);
+			this.mPrefixedText = s;
+		}
+		return this.mPrefixedText;
+	}
+
 //		/**
 //		* Return a String representation of this title
 //		*
 //		* @return String Representation of this title
 //		*/
 //		public function __toString() {
-//			return $this.getPrefixedText();
+//			return this.getPrefixedText();
 //		}
 //
 //		/**
@@ -1463,9 +1470,9 @@ public class Xomw_Title {
 //		* @return String The prefixed title, with spaces and the fragment, including '#'
 //		*/
 //		public function getFullText() {
-//			$text = $this.getPrefixedText();
-//			if ($this.hasFragment()) {
-//				$text .= '#' . $this.getFragment();
+//			$text = this.getPrefixedText();
+//			if (this.hasFragment()) {
+//				$text .= '#' . this.getFragment();
 //			}
 //			return $text;
 //		}
@@ -1483,11 +1490,11 @@ public class Xomw_Title {
 //		* @since 1.20
 //		*/
 //		public function getRootText() {
-//			if (!MWNamespace::hasSubpages($this.mNamespace)) {
-//				return $this.getText();
+//			if (!MWNamespace::hasSubpages(this.mNamespace)) {
+//				return this.getText();
 //			}
 //
-//			return strtok($this.getText(), '/');
+//			return strtok(this.getText(), '/');
 //		}
 //
 //		/**
@@ -1503,7 +1510,7 @@ public class Xomw_Title {
 //		* @since 1.20
 //		*/
 //		public function getRootTitle() {
-//			return Title::makeTitle($this.getNamespace(), $this.getRootText());
+//			return Title::makeTitle(this.getNamespace(), this.getRootText());
 //		}
 //
 //		/**
@@ -1518,12 +1525,12 @@ public class Xomw_Title {
 //		* @return String Base name
 //		*/
 //		public function getBaseText() {
-//			if (!MWNamespace::hasSubpages($this.mNamespace)) {
-//				return $this.getText();
+//			if (!MWNamespace::hasSubpages(this.mNamespace)) {
+//				return this.getText();
 //			}
 //
-//			$parts = explode('/', $this.getText());
-//			# Don't discard the real title if there's no subpage involved
+//			$parts = explode('/', this.getText());
+//			// Don't discard the real title if there's no subpage involved
 //			if (count($parts) > 1) {
 //				unset($parts[count($parts) - 1]);
 //			}
@@ -1543,7 +1550,7 @@ public class Xomw_Title {
 //		* @since 1.20
 //		*/
 //		public function getBaseTitle() {
-//			return Title::makeTitle($this.getNamespace(), $this.getBaseText());
+//			return Title::makeTitle(this.getNamespace(), this.getBaseText());
 //		}
 //
 //		/**
@@ -1558,10 +1565,10 @@ public class Xomw_Title {
 //		* @return String Subpage name
 //		*/
 //		public function getSubpageText() {
-//			if (!MWNamespace::hasSubpages($this.mNamespace)) {
-//				return $this.mTextform;
+//			if (!MWNamespace::hasSubpages(this.mNamespace)) {
+//				return this.mTextform;
 //			}
-//			$parts = explode('/', $this.mTextform);
+//			$parts = explode('/', this.mTextform);
 //			return $parts[count($parts) - 1];
 //		}
 //
@@ -1579,7 +1586,7 @@ public class Xomw_Title {
 //		* @since 1.20
 //		*/
 //		public function getSubpage($text) {
-//			return Title::makeTitleSafe($this.getNamespace(), $this.getText() . '/' . $text);
+//			return Title::makeTitleSafe(this.getNamespace(), this.getText() . '/' . $text);
 //		}
 //
 //		/**
@@ -1588,7 +1595,7 @@ public class Xomw_Title {
 //		* @return String URL-encoded subpage name
 //		*/
 //		public function getSubpageUrlForm() {
-//			$text = $this.getSubpageText();
+//			$text = this.getSubpageText();
 //			$text = wfUrlencode(strtr($text, ' ', '_'));
 //			return $text;
 //		}
@@ -1599,7 +1606,7 @@ public class Xomw_Title {
 //		* @return String The URL-encoded form
 //		*/
 //		public function getPrefixedURL() {
-//			$s = $this.prefix($this.mDbkeyform);
+//			$s = this.prefix(this.mDbkeyform);
 //			$s = wfUrlencode(strtr($s, ' ', '_'));
 //			return $s;
 //		}
@@ -1618,7 +1625,7 @@ public class Xomw_Title {
 //		* @return String
 //		*/
 //		private static function fixUrlQueryArgs($query, $query2 = false) {
-//			if ($query2 !== false) {
+//			if ($query2 != false) {
 //				wfDeprecated("Title::get{Canonical,Full,Link,Local,Internal}URL " .
 //					"method called with a second parameter is deprecated. Add your " .
 //					"parameter to an array passed as the first parameter.", "1.19");
@@ -1655,21 +1662,21 @@ public class Xomw_Title {
 //		* @param String $proto Protocol type to use in URL
 //		* @return String The URL
 //		*/
-//		public function getFullURL($query = '', $query2 = false, $proto = PROTO_RELATIVE) {
+//		public function getFullURL($query = Bry_.Empty, $query2 = false, $proto = PROTO_RELATIVE) {
 //			$query = self::fixUrlQueryArgs($query, $query2);
 //
-//			# Hand off all the decisions on urls to getLocalURL
-//			$url = $this.getLocalURL($query);
+//			// Hand off all the decisions on urls to getLocalURL
+//			$url = this.getLocalURL($query);
 //
-//			# Expand the url to make it a full url. Note that getLocalURL has the
-//			# potential to output full urls for a variety of reasons, so we use
-//			# wfExpandUrl instead of simply prepending $wgServer
+//			// Expand the url to make it a full url. Note that getLocalURL has the
+//			// potential to output full urls for a variety of reasons, so we use
+//			// wfExpandUrl instead of simply prepending $wgServer
 //			$url = wfExpandUrl($url, $proto);
 //
-//			# Finally, add the fragment.
-//			$url .= $this.getFragmentForURL();
-//			// Avoid PHP 7.1 warning from passing $this by reference
-//			$titleRef = $this;
+//			// Finally, add the fragment.
+//			$url .= this.getFragmentForURL();
+//			// Avoid PHP 7.1 warning from passing this by reference
+//			$titleRef = this;
 //			Hooks::run('GetFullURL', [ &$titleRef, &$url, $query ]);
 //			return $url;
 //		}
@@ -1706,9 +1713,9 @@ public class Xomw_Title {
 //			interwiki = self::getInterwikiLookup().fetch(this.mInterwiki);
 //			if (interwiki) {
 //				namespace = this.getNsText();
-//				if (namespace != '') {
-//					# Can this actually happen? Interwikis shouldn't be parsed.
-//					# Yes! It can in interwiki transclusion. But... it probably shouldn't.
+//				if (namespace != Bry_.Empty) {
+//					// Can this actually happen? Interwikis shouldn't be parsed.
+//					// Yes! It can in interwiki transclusion. But... it probably shouldn't.
 //					namespace .= ':';
 //				}
 //				url = interwiki.getURL(namespace . this.getDBkey());
@@ -1716,7 +1723,7 @@ public class Xomw_Title {
 //			} else {
 //				byte[] dbkey = wfUrlencode(this.getPrefixedDBkey());
 			byte[] dbkey = this.getPrefixedDBkey();
-//				if (query == '') {
+//				if (query == Bry_.Empty) {
 //					url = str_replace('$1', dbkey, wgArticlePath);
 				url = Bry_.Add(Bry__wgArticlePath__wiki,  dbkey);
 				// XO.MW.HOOK:GetLocalURL::Article
@@ -1735,13 +1742,13 @@ public class Xomw_Title {
 //								query .= matches[4];
 //							}
 //							url = str_replace('1', dbkey, wgActionPaths[action]);
-//							if (query != '') {
+//							if (query != Bry_.Empty) {
 //								url = wfAppendQuery(url, query);
 //							}
 //						}
 //					}
 //
-//					if (url === false
+//					if (url == false
 //						&& wgVariantArticlePath
 //						&& preg_match('/^variant=([^&]*)/', query, matches)
 //						&& this.getPageLanguage().equals(wgContLang)
@@ -1756,9 +1763,9 @@ public class Xomw_Title {
 //						}
 //					}
 //
-//					if (url === false) {
+//					if (url == false) {
 //						if (query == '-') {
-//							query = '';
+//							query = Bry_.Empty;
 //						}
 //						url = "{wgScript}?title={dbkey}&{query}";
 //					}
@@ -1775,34 +1782,35 @@ public class Xomw_Title {
 		return url;
 	}
 
-//		/**
-//		* Get a URL that's the simplest URL that will be valid to link, locally,
-//		* to the current Title.  It includes the fragment, but does not include
-//		* the server unless action=render is used (or the link is external).  If
-//		* there's a fragment but the prefixed text is empty, we just return a link
-//		* to the fragment.
-//		*
-//		* The result obviously should not be URL-escaped, but does need to be
-//		* HTML-escaped if it's being output in HTML.
-//		*
-//		* @param String|String[] $query
-//		* @param boolean $query2
-//		* @param String|int|boolean $proto A PROTO_* constant on how the URL should be expanded,
-//		*                               or false (default) for no expansion
-//		* @see self::getLocalURL for the arguments.
-//		* @return String The URL
-//		*/
-//		public function getLinkURL($query = '', $query2 = false, $proto = false) {
-//			if ($this.isExternal() || $proto !== false) {
-//				$ret = $this.getFullURL($query, $query2, $proto);
-//			} elseif ($this.getPrefixedText() === '' && $this.hasFragment()) {
-//				$ret = $this.getFragmentForURL();
+	/**
+	* Get a URL that's the simplest URL that will be valid to link, locally,
+	* to the current Title.  It includes the fragment, but does not include
+	* the server unless action=render is used (or the link is external).  If
+	* there's a fragment but the prefixed text is empty, we just return a link
+	* to the fragment.
+	*
+	* The result obviously should not be URL-escaped, but does need to be
+	* HTML-escaped if it's being output in HTML.
+	*
+	* @param String|String[] $query
+	* @param boolean $query2
+	* @param String|int|boolean $proto A PROTO_* constant on how the URL should be expanded,
+	*                               or false (default) for no expansion
+	* @see self::getLocalURL for the arguments.
+	* @return String The URL
+	*/
+	public byte[] getLinkURL(Object qry_mgr, boolean query2, boolean proto) {
+//			if (this.isExternal() || $proto != false) {
+//				$ret = this.getFullURL($query, $query2, $proto);
+//			} elseif (this.getPrefixedText() == Bry_.Empty && this.hasFragment()) {
+//				$ret = this.getFragmentForURL();
 //			} else {
-//				$ret = $this.getLocalURL($query, $query2) . $this.getFragmentForURL();
+//				$ret = this.getLocalURL($query, $query2) . this.getFragmentForURL();
 //			}
 //			return $ret;
-//		}
-//
+		return Bry_.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, this.mPrefixedText);
+	}
+
 //		/**
 //		* Get the URL form for an @gplx.Internal protected link.
 //		* - Used in various CDN-related code, in case we have a different
@@ -1815,13 +1823,13 @@ public class Xomw_Title {
 //		* @see self::getLocalURL for the arguments.
 //		* @return String The URL
 //		*/
-//		public function getInternalURL($query = '', $query2 = false) {
+//		public function getInternalURL($query = Bry_.Empty, $query2 = false) {
 //			global $wgInternalServer, $wgServer;
 //			$query = self::fixUrlQueryArgs($query, $query2);
-//			$server = $wgInternalServer !== false ? $wgInternalServer : $wgServer;
-//			$url = wfExpandUrl($server . $this.getLocalURL($query), PROTO_HTTP);
-//			// Avoid PHP 7.1 warning from passing $this by reference
-//			$titleRef = $this;
+//			$server = $wgInternalServer != false ? $wgInternalServer : $wgServer;
+//			$url = wfExpandUrl($server . this.getLocalURL($query), PROTO_HTTP);
+//			// Avoid PHP 7.1 warning from passing this by reference
+//			$titleRef = this;
 //			Hooks::run('GetInternalURL', [ &$titleRef, &$url, $query ]);
 //			return $url;
 //		}
@@ -1837,11 +1845,11 @@ public class Xomw_Title {
 //		* @return String The URL
 //		* @since 1.18
 //		*/
-//		public function getCanonicalURL($query = '', $query2 = false) {
+//		public function getCanonicalURL($query = Bry_.Empty, $query2 = false) {
 //			$query = self::fixUrlQueryArgs($query, $query2);
-//			$url = wfExpandUrl($this.getLocalURL($query) . $this.getFragmentForURL(), PROTO_CANONICAL);
-//			// Avoid PHP 7.1 warning from passing $this by reference
-//			$titleRef = $this;
+//			$url = wfExpandUrl(this.getLocalURL($query) . this.getFragmentForURL(), PROTO_CANONICAL);
+//			// Avoid PHP 7.1 warning from passing this by reference
+//			$titleRef = this;
 //			Hooks::run('GetCanonicalURL', [ &$titleRef, &$url, $query ]);
 //			return $url;
 //		}
@@ -1852,10 +1860,10 @@ public class Xomw_Title {
 //		* @return String The URL, or a null String if this is an interwiki link
 //		*/
 //		public function getEditURL() {
-//			if ($this.isExternal()) {
-//				return '';
+//			if (this.isExternal()) {
+//				return Bry_.Empty;
 //			}
-//			$s = $this.getLocalURL('action=edit');
+//			$s = this.getLocalURL('action=edit');
 //
 //			return $s;
 //		}
@@ -1875,7 +1883,7 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function quickUserCan($action, $user = null) {
-//			return $this.userCan($action, $user, false);
+//			return this.userCan($action, $user, false);
 //		}
 //
 //		/**
@@ -1893,7 +1901,7 @@ public class Xomw_Title {
 //				$user = $wgUser;
 //			}
 //
-//			return !count($this.getUserPermissionsErrorsInternal($action, $user, $rigor, true));
+//			return !count(this.getUserPermissionsErrorsInternal($action, $user, $rigor, true));
 //		}
 //
 //		/**
@@ -1914,7 +1922,7 @@ public class Xomw_Title {
 //		public function getUserPermissionsErrors(
 //			$action, $user, $rigor = 'secure', $ignoreErrors = []
 //		) {
-//			$errors = $this.getUserPermissionsErrorsInternal($action, $user, $rigor);
+//			$errors = this.getUserPermissionsErrorsInternal($action, $user, $rigor);
 //
 //			// Remove the errors being ignored.
 //			foreach ($errors as $index => $error) {
@@ -1944,32 +1952,32 @@ public class Xomw_Title {
 //		*/
 //		private function checkQuickPermissions($action, $user, $errors, $rigor, $short) {
 //			if (!Hooks::run('TitleQuickPermissions',
-//				[ $this, $user, $action, &$errors, ($rigor !== 'quick'), $short ])
+//				[ this, $user, $action, &$errors, ($rigor != 'quick'), $short ])
 //			) {
 //				return $errors;
 //			}
 //
 //			if ($action == 'create') {
 //				if (
-//					($this.isTalkPage() && !$user.isAllowed('createtalk')) ||
-//					(!$this.isTalkPage() && !$user.isAllowed('createpage'))
+//					(this.isTalkPage() && !$user.isAllowed('createtalk')) ||
+//					(!this.isTalkPage() && !$user.isAllowed('createpage'))
 //				) {
 //					$errors[] = $user.isAnon() ? [ 'nocreatetext' ] : [ 'nocreate-loggedin' ];
 //				}
 //			} elseif ($action == 'move') {
 //				if (!$user.isAllowed('move-rootuserpages')
-//						&& $this.mNamespace == NS_USER && !$this.isSubpage()) {
+//						&& this.mNamespace == NS_USER && !this.isSubpage()) {
 //					// Show user page-specific message only if the user can move other pages
 //					$errors[] = [ 'cant-move-user-page' ];
 //				}
 //
 //				// Check if user is allowed to move files if it's a file
-//				if ($this.mNamespace == NS_FILE && !$user.isAllowed('movefile')) {
+//				if (this.mNamespace == NS_FILE && !$user.isAllowed('movefile')) {
 //					$errors[] = [ 'movenotallowedfile' ];
 //				}
 //
 //				// Check if user is allowed to move category pages if it's a category page
-//				if ($this.mNamespace == NS_CATEGORY && !$user.isAllowed('move-categorypages')) {
+//				if (this.mNamespace == NS_CATEGORY && !$user.isAllowed('move-categorypages')) {
 //					$errors[] = [ 'cant-move-category-page' ];
 //				}
 //
@@ -1989,16 +1997,16 @@ public class Xomw_Title {
 //					// User can't move anything
 //					$errors[] = [ 'movenotallowed' ];
 //				} elseif (!$user.isAllowed('move-rootuserpages')
-//						&& $this.mNamespace == NS_USER && !$this.isSubpage()) {
+//						&& this.mNamespace == NS_USER && !this.isSubpage()) {
 //					// Show user page-specific message only if the user can move other pages
 //					$errors[] = [ 'cant-move-to-user-page' ];
 //				} elseif (!$user.isAllowed('move-categorypages')
-//						&& $this.mNamespace == NS_CATEGORY) {
+//						&& this.mNamespace == NS_CATEGORY) {
 //					// Show category page-specific message only if the user can move other pages
 //					$errors[] = [ 'cant-move-to-category-page' ];
 //				}
 //			} elseif (!$user.isAllowed($action)) {
-//				$errors[] = $this.missingPermissionError($action, $short);
+//				$errors[] = this.missingPermissionError($action, $short);
 //			}
 //
 //			return $errors;
@@ -2019,13 +2027,13 @@ public class Xomw_Title {
 //			} elseif (is_array($result) && is_array($result[0])) {
 //				// A nested array representing multiple errors
 //				$errors = array_merge($errors, $result);
-//			} elseif ($result !== '' && is_string($result)) {
+//			} elseif ($result != Bry_.Empty && is_string($result)) {
 //				// A String representing a message-id
 //				$errors[] = [ $result ];
 //			} elseif ($result instanceof MessageSpecifier) {
 //				// A message specifier representing an error
 //				$errors[] = [ $result ];
-//			} elseif ($result === false) {
+//			} elseif ($result == false) {
 //				// a generic "We don't want them to do that"
 //				$errors[] = [ 'badaccess-group0' ];
 //			}
@@ -2045,25 +2053,25 @@ public class Xomw_Title {
 //		*/
 //		private function checkPermissionHooks($action, $user, $errors, $rigor, $short) {
 //			// Use getUserPermissionsErrors instead
-//			$result = '';
-//			// Avoid PHP 7.1 warning from passing $this by reference
-//			$titleRef = $this;
+//			$result = Bry_.Empty;
+//			// Avoid PHP 7.1 warning from passing this by reference
+//			$titleRef = this;
 //			if (!Hooks::run('userCan', [ &$titleRef, &$user, $action, &$result ])) {
 //				return $result ? [] : [ [ 'badaccess-group0' ] ];
 //			}
 //			// Check getUserPermissionsErrors hook
-//			// Avoid PHP 7.1 warning from passing $this by reference
-//			$titleRef = $this;
+//			// Avoid PHP 7.1 warning from passing this by reference
+//			$titleRef = this;
 //			if (!Hooks::run('getUserPermissionsErrors', [ &$titleRef, &$user, $action, &$result ])) {
-//				$errors = $this.resultToError($errors, $result);
+//				$errors = this.resultToError($errors, $result);
 //			}
 //			// Check getUserPermissionsErrorsExpensive hook
 //			if (
-//				$rigor !== 'quick'
+//				$rigor != 'quick'
 //				&& !($short && count($errors) > 0)
 //				&& !Hooks::run('getUserPermissionsErrorsExpensive', [ &$titleRef, &$user, $action, &$result ])
 //			) {
-//				$errors = $this.resultToError($errors, $result);
+//				$errors = this.resultToError($errors, $result);
 //			}
 //
 //			return $errors;
@@ -2081,17 +2089,17 @@ public class Xomw_Title {
 //		* @return array List of errors
 //		*/
 //		private function checkSpecialsAndNSPermissions($action, $user, $errors, $rigor, $short) {
-//			# Only 'createaccount' can be performed on special pages,
-//			# which don't actually exist in the DB.
-//			if (NS_SPECIAL == $this.mNamespace && $action !== 'createaccount') {
+//			// Only 'createaccount' can be performed on special pages,
+//			// which don't actually exist in the DB.
+//			if (NS_SPECIAL == this.mNamespace && $action != 'createaccount') {
 //				$errors[] = [ 'ns-specialprotected' ];
 //			}
 //
-//			# Check $wgNamespaceProtection for restricted namespaces
-//			if ($this.isNamespaceProtected($user)) {
-//				$ns = $this.mNamespace == NS_MAIN ?
-//					wfMessage('nstab-main').text() : $this.getNsText();
-//				$errors[] = $this.mNamespace == NS_MEDIAWIKI ?
+//			// Check $wgNamespaceProtection for restricted namespaces
+//			if (this.isNamespaceProtected($user)) {
+//				$ns = this.mNamespace == NS_MAIN ?
+//					wfMessage('nstab-main').text() : this.getNsText();
+//				$errors[] = this.mNamespace == NS_MEDIAWIKI ?
 //					[ 'protectedinterface', $action ] : [ 'namespaceprotected', $ns, $action ];
 //			}
 //
@@ -2110,20 +2118,20 @@ public class Xomw_Title {
 //		* @return array List of errors
 //		*/
 //		private function checkCSSandJSPermissions($action, $user, $errors, $rigor, $short) {
-//			# Protect css/js subpages of user pages
-//			# XXX: this might be better using restrictions
-//			# XXX: right 'editusercssjs' is deprecated, for backward compatibility only
+//			// Protect css/js subpages of user pages
+//			// XXX: this might be better using restrictions
+//			// XXX: right 'editusercssjs' is deprecated, for backward compatibility only
 //			if ($action != 'patrol' && !$user.isAllowed('editusercssjs')) {
-//				if (preg_match('/^' . preg_quote($user.getName(), '/') . '\//', $this.mTextform)) {
-//					if ($this.isCssSubpage() && !$user.isAllowedAny('editmyusercss', 'editusercss')) {
+//				if (preg_match('/^' . preg_quote($user.getName(), '/') . '\//', this.mTextform)) {
+//					if (this.isCssSubpage() && !$user.isAllowedAny('editmyusercss', 'editusercss')) {
 //						$errors[] = [ 'mycustomcssprotected', $action ];
-//					} elseif ($this.isJsSubpage() && !$user.isAllowedAny('editmyuserjs', 'edituserjs')) {
+//					} elseif (this.isJsSubpage() && !$user.isAllowedAny('editmyuserjs', 'edituserjs')) {
 //						$errors[] = [ 'mycustomjsprotected', $action ];
 //					}
 //				} else {
-//					if ($this.isCssSubpage() && !$user.isAllowed('editusercss')) {
+//					if (this.isCssSubpage() && !$user.isAllowed('editusercss')) {
 //						$errors[] = [ 'customcssprotected', $action ];
-//					} elseif ($this.isJsSubpage() && !$user.isAllowed('edituserjs')) {
+//					} elseif (this.isJsSubpage() && !$user.isAllowed('edituserjs')) {
 //						$errors[] = [ 'customjsprotected', $action ];
 //					}
 //				}
@@ -2146,7 +2154,7 @@ public class Xomw_Title {
 //		* @return array List of errors
 //		*/
 //		private function checkPageRestrictions($action, $user, $errors, $rigor, $short) {
-//			foreach ($this.getRestrictions($action) as $right) {
+//			foreach (this.getRestrictions($action) as $right) {
 //				// Backwards compatibility, rewrite sysop . editprotected
 //				if ($right == 'sysop') {
 //					$right = 'editprotected';
@@ -2155,12 +2163,12 @@ public class Xomw_Title {
 //				if ($right == 'autoconfirmed') {
 //					$right = 'editsemiprotected';
 //				}
-//				if ($right == '') {
+//				if ($right == Bry_.Empty) {
 //					continue;
 //				}
 //				if (!$user.isAllowed($right)) {
 //					$errors[] = [ 'protectedpagetext', $right, $action ];
-//				} elseif ($this.mCascadeRestriction && !$user.isAllowed('protect')) {
+//				} elseif (this.mCascadeRestriction && !$user.isAllowed('protect')) {
 //					$errors[] = [ 'protectedpagetext', 'protect', $action ];
 //				}
 //			}
@@ -2180,17 +2188,17 @@ public class Xomw_Title {
 //		* @return array List of errors
 //		*/
 //		private function checkCascadingSourcesRestrictions($action, $user, $errors, $rigor, $short) {
-//			if ($rigor !== 'quick' && !$this.isCssJsSubpage()) {
-//				# We /could/ use the protection level on the source page, but it's
-//				# fairly ugly as we have to establish a precedence hierarchy for pages
-//				# included by multiple cascade-protected pages. So just restrict
-//				# it to people with 'protect' permission, as they could remove the
-//				# protection anyway.
-//				list($cascadingSources, $restrictions) = $this.getCascadeProtectionSources();
-//				# Cascading protection depends on more than this page...
-//				# Several cascading protected pages may include this page...
-//				# Check each cascading level
-//				# This is only for protection restrictions, not for all actions
+//			if ($rigor != 'quick' && !this.isCssJsSubpage()) {
+//				// We /could/ use the protection level on the source page, but it's
+//				// fairly ugly as we have to establish a precedence hierarchy for pages
+//				// included by multiple cascade-protected pages. So just restrict
+//				// it to people with 'protect' permission, as they could remove the
+//				// protection anyway.
+//				list($cascadingSources, $restrictions) = this.getCascadeProtectionSources();
+//				// Cascading protection depends on more than this page...
+//				// Several cascading protected pages may include this page...
+//				// Check each cascading level
+//				// This is only for protection restrictions, not for all actions
 //				if (isset($restrictions[$action])) {
 //					foreach ($restrictions[$action] as $right) {
 //						// Backwards compatibility, rewrite sysop . editprotected
@@ -2201,8 +2209,8 @@ public class Xomw_Title {
 //						if ($right == 'autoconfirmed') {
 //							$right = 'editsemiprotected';
 //						}
-//						if ($right != '' && !$user.isAllowedAll('protect', $right)) {
-//							$pages = '';
+//						if ($right != Bry_.Empty && !$user.isAllowedAll('protect', $right)) {
+//							$pages = Bry_.Empty;
 //							foreach ($cascadingSources as $page) {
 //								$pages .= '* [[:' . $page.getPrefixedText() . "]]\n";
 //							}
@@ -2230,14 +2238,14 @@ public class Xomw_Title {
 //			global $wgDeleteRevisionsLimit, $wgLang;
 //
 //			if ($action == 'protect') {
-//				if (count($this.getUserPermissionsErrorsInternal('edit', $user, $rigor, true))) {
+//				if (count(this.getUserPermissionsErrorsInternal('edit', $user, $rigor, true))) {
 //					// If they can't edit, they shouldn't protect.
 //					$errors[] = [ 'protect-cantedit' ];
 //				}
 //			} elseif ($action == 'create') {
-//				$title_protection = $this.getTitleProtection();
+//				$title_protection = this.getTitleProtection();
 //				if ($title_protection) {
-//					if ($title_protection['permission'] == ''
+//					if ($title_protection['permission'] == Bry_.Empty
 //						|| !$user.isAllowed($title_protection['permission'])
 //					) {
 //						$errors[] = [
@@ -2249,31 +2257,31 @@ public class Xomw_Title {
 //				}
 //			} elseif ($action == 'move') {
 //				// Check for immobile pages
-//				if (!MWNamespace::isMovable($this.mNamespace)) {
+//				if (!MWNamespace::isMovable(this.mNamespace)) {
 //					// Specific message for this case
-//					$errors[] = [ 'immobile-source-namespace', $this.getNsText() ];
-//				} elseif (!$this.isMovable()) {
+//					$errors[] = [ 'immobile-source-namespace', this.getNsText() ];
+//				} elseif (!this.isMovable()) {
 //					// Less specific message for rarer cases
 //					$errors[] = [ 'immobile-source-page' ];
 //				}
 //			} elseif ($action == 'move-target') {
-//				if (!MWNamespace::isMovable($this.mNamespace)) {
-//					$errors[] = [ 'immobile-target-namespace', $this.getNsText() ];
-//				} elseif (!$this.isMovable()) {
+//				if (!MWNamespace::isMovable(this.mNamespace)) {
+//					$errors[] = [ 'immobile-target-namespace', this.getNsText() ];
+//				} elseif (!this.isMovable()) {
 //					$errors[] = [ 'immobile-target-page' ];
 //				}
 //			} elseif ($action == 'delete') {
-//				$tempErrors = $this.checkPageRestrictions('edit', $user, [], $rigor, true);
+//				$tempErrors = this.checkPageRestrictions('edit', $user, [], $rigor, true);
 //				if (!$tempErrors) {
-//					$tempErrors = $this.checkCascadingSourcesRestrictions('edit',
+//					$tempErrors = this.checkCascadingSourcesRestrictions('edit',
 //						$user, $tempErrors, $rigor, true);
 //				}
 //				if ($tempErrors) {
 //					// If protection keeps them from editing, they shouldn't be able to delete.
 //					$errors[] = [ 'deleteprotected' ];
 //				}
-//				if ($rigor !== 'quick' && $wgDeleteRevisionsLimit
-//					&& !$this.userCan('bigdelete', $user) && $this.isBigDeletion()
+//				if ($rigor != 'quick' && $wgDeleteRevisionsLimit
+//					&& !this.userCan('bigdelete', $user) && this.isBigDeletion()
 //				) {
 //					$errors[] = [ 'delete-toobig', $wgLang.formatNum($wgDeleteRevisionsLimit) ];
 //				}
@@ -2296,12 +2304,12 @@ public class Xomw_Title {
 //			global $wgEmailConfirmToEdit, $wgBlockDisablesLogin;
 //			// Account creation blocks handled at userlogin.
 //			// Unblocking handled in SpecialUnblock
-//			if ($rigor === 'quick' || in_array($action, [ 'createaccount', 'unblock' ])) {
+//			if ($rigor == 'quick' || in_array($action, [ 'createaccount', 'unblock' ])) {
 //				return $errors;
 //			}
 //
 //			// Optimize for a very common case
-//			if ($action === 'read' && !$wgBlockDisablesLogin) {
+//			if ($action == 'read' && !$wgBlockDisablesLogin) {
 //				return $errors;
 //			}
 //
@@ -2309,13 +2317,13 @@ public class Xomw_Title {
 //				$errors[] = [ 'confirmedittext' ];
 //			}
 //
-//			$useSlave = ($rigor !== 'secure');
+//			$useSlave = ($rigor != 'secure');
 //			if (($action == 'edit' || $action == 'create')
-//				&& !$user.isBlockedFrom($this, $useSlave)
+//				&& !$user.isBlockedFrom(this, $useSlave)
 //			) {
 //				// Don't block the user from editing their own talk page unless they've been
 //				// explicitly blocked from that too.
-//			} elseif ($user.isBlocked() && $user.getBlock().prevents($action) !== false) {
+//			} elseif ($user.isBlocked() && $user.getBlock().prevents($action) != false) {
 //				// @todo FIXME: Pass the relevant context into this function.
 //				$errors[] = $user.getBlock().getPermissionsError(RequestContext::getMain());
 //			}
@@ -2339,36 +2347,36 @@ public class Xomw_Title {
 //
 //			$whitelisted = false;
 //			if (User::isEveryoneAllowed('read')) {
-//				# Shortcut for public wikis, allows skipping quite a bit of code
+//				// Shortcut for public wikis, allows skipping quite a bit of code
 //				$whitelisted = true;
 //			} elseif ($user.isAllowed('read')) {
-//				# If the user is allowed to read pages, he is allowed to read all pages
+//				// If the user is allowed to read pages, he is allowed to read all pages
 //				$whitelisted = true;
-//			} elseif ($this.isSpecial('Userlogin')
-//				|| $this.isSpecial('PasswordReset')
-//				|| $this.isSpecial('Userlogout')
+//			} elseif (this.isSpecial('Userlogin')
+//				|| this.isSpecial('PasswordReset')
+//				|| this.isSpecial('Userlogout')
 //			) {
-//				# Always grant access to the login page.
-//				# Even anons need to be able to log in.
+//				// Always grant access to the login page.
+//				// Even anons need to be able to log in.
 //				$whitelisted = true;
 //			} elseif (is_array($wgWhitelistRead) && count($wgWhitelistRead)) {
-//				# Time to check the whitelist
-//				# Only do these checks is there's something to check against
-//				$name = $this.getPrefixedText();
-//				$dbName = $this.getPrefixedDBkey();
+//				// Time to check the whitelist
+//				// Only do these checks is there's something to check against
+//				$name = this.getPrefixedText();
+//				$dbName = this.getPrefixedDBkey();
 //
 //				// Check for explicit whitelisting with and without underscores
 //				if (in_array($name, $wgWhitelistRead, true) || in_array($dbName, $wgWhitelistRead, true)) {
 //					$whitelisted = true;
-//				} elseif ($this.getNamespace() == NS_MAIN) {
-//					# Old settings might have the title prefixed with
-//					# a colon for main-namespace pages
+//				} elseif (this.getNamespace() == NS_MAIN) {
+//					// Old settings might have the title prefixed with
+//					// a colon for main-namespace pages
 //					if (in_array(':' . $name, $wgWhitelistRead)) {
 //						$whitelisted = true;
 //					}
-//				} elseif ($this.isSpecialPage()) {
-//					# If it's a special page, ditch the subpage bit and check again
-//					$name = $this.getDBkey();
+//				} elseif (this.isSpecialPage()) {
+//					// If it's a special page, ditch the subpage bit and check again
+//					$name = this.getDBkey();
 //					list($name, /* $subpage */) = SpecialPageFactory::resolveAlias($name);
 //					if ($name) {
 //						$pure = SpecialPage::getTitleFor($name).getPrefixedText();
@@ -2380,7 +2388,7 @@ public class Xomw_Title {
 //			}
 //
 //			if (!$whitelisted && is_array($wgWhitelistReadRegexp) && !empty($wgWhitelistReadRegexp)) {
-//				$name = $this.getPrefixedText();
+//				$name = this.getPrefixedText();
 //				// Check for regex whitelisting
 //				foreach ($wgWhitelistReadRegexp as $listItem) {
 //					if (preg_match($listItem, $name)) {
@@ -2391,10 +2399,10 @@ public class Xomw_Title {
 //			}
 //
 //			if (!$whitelisted) {
-//				# If the title is not whitelisted, give extensions a chance to do so...
-//				Hooks::run('TitleReadWhitelist', [ $this, $user, &$whitelisted ]);
+//				// If the title is not whitelisted, give extensions a chance to do so...
+//				Hooks::run('TitleReadWhitelist', [ this, $user, &$whitelisted ]);
 //				if (!$whitelisted) {
-//					$errors[] = $this.missingPermissionError($action, $short);
+//					$errors[] = this.missingPermissionError($action, $short);
 //				}
 //			}
 //
@@ -2447,25 +2455,25 @@ public class Xomw_Title {
 //		protected function getUserPermissionsErrorsInternal(
 //			$action, $user, $rigor = 'secure', $short = false
 //		) {
-//			if ($rigor === true) {
+//			if ($rigor == true) {
 //				$rigor = 'secure'; // b/c
-//			} elseif ($rigor === false) {
+//			} elseif ($rigor == false) {
 //				$rigor = 'quick'; // b/c
 //			} elseif (!in_array($rigor, [ 'quick', 'full', 'secure' ])) {
 //				throw new Exception("Invalid rigor parameter '$rigor'.");
 //			}
 //
-//			# Read has special handling
+//			// Read has special handling
 //			if ($action == 'read') {
 //				$checks = [
 //					'checkPermissionHooks',
 //					'checkReadPermissions',
 //					'checkUserBlock', // for wgBlockDisablesLogin
 //				];
-//			# Don't call checkSpecialsAndNSPermissions or checkCSSandJSPermissions
-//			# here as it will lead to duplicate error messages. This is okay to do
-//			# since anywhere that checks for create will also check for edit, and
-//			# those checks are called for edit.
+//			// Don't call checkSpecialsAndNSPermissions or checkCSSandJSPermissions
+//			// here as it will lead to duplicate error messages. This is okay to do
+//			// since anywhere that checks for create will also check for edit, and
+//			// those checks are called for edit.
 //			} elseif ($action == 'create') {
 //				$checks = [
 //					'checkQuickPermissions',
@@ -2492,7 +2500,7 @@ public class Xomw_Title {
 //			while (count($checks) > 0 &&
 //					!($short && count($errors) > 0)) {
 //				$method = array_shift($checks);
-//				$errors = $this.$method($action, $user, $errors, $rigor, $short);
+//				$errors = this.$method($action, $user, $errors, $rigor, $short);
 //			}
 //
 //			return $errors;
@@ -2509,10 +2517,10 @@ public class Xomw_Title {
 //			global $wgRestrictionTypes;
 //			$types = $wgRestrictionTypes;
 //			if ($exists) {
-//				# Remove the create restriction for existing titles
+//				// Remove the create restriction for existing titles
 //				$types = array_diff($types, [ 'create' ]);
 //			} else {
-//				# Only the create and upload restrictions apply to non-existing titles
+//				// Only the create and upload restrictions apply to non-existing titles
 //				$types = array_intersect($types, [ 'create', 'upload' ]);
 //			}
 //			return $types;
@@ -2524,21 +2532,21 @@ public class Xomw_Title {
 //		* @return array Applicable restriction types
 //		*/
 //		public function getRestrictionTypes() {
-//			if ($this.isSpecialPage()) {
+//			if (this.isSpecialPage()) {
 //				return [];
 //			}
 //
-//			$types = self::getFilteredRestrictionTypes($this.exists());
+//			$types = self::getFilteredRestrictionTypes(this.exists());
 //
-//			if ($this.getNamespace() != NS_FILE) {
-//				# Remove the upload restriction for non-file titles
+//			if (this.getNamespace() != NS_FILE) {
+//				// Remove the upload restriction for non-file titles
 //				$types = array_diff($types, [ 'upload' ]);
 //			}
 //
-//			Hooks::run('TitleGetRestrictionTypes', [ $this, &$types ]);
+//			Hooks::run('TitleGetRestrictionTypes', [ this, &$types ]);
 //
 //			wfDebug(__METHOD__ . ': applicable restrictions to [[' .
-//				$this.getPrefixedText() . ']] are {' . implode(',', $types) . "}\n");
+//				this.getPrefixedText() . ']] are {' . implode(',', $types) . "}\n");
 //
 //			return $types;
 //		}
@@ -2552,16 +2560,16 @@ public class Xomw_Title {
 //		*/
 //		public function getTitleProtection() {
 //			// Can't protect pages in special namespaces
-//			if ($this.getNamespace() < 0) {
+//			if (this.getNamespace() < 0) {
 //				return false;
 //			}
 //
 //			// Can't protect pages that exist.
-//			if ($this.exists()) {
+//			if (this.exists()) {
 //				return false;
 //			}
 //
-//			if ($this.mTitleProtection === null) {
+//			if (this.mTitleProtection == null) {
 //				$dbr = wfGetDB(DB_REPLICA);
 //				$res = $dbr.select(
 //					'protected_titles',
@@ -2571,7 +2579,7 @@ public class Xomw_Title {
 //						'expiry' => 'pt_expiry',
 //						'permission' => 'pt_create_perm'
 //					],
-//					[ 'pt_namespace' => $this.getNamespace(), 'pt_title' => $this.getDBkey() ],
+//					[ 'pt_namespace' => this.getNamespace(), 'pt_title' => this.getDBkey() ],
 //					__METHOD__
 //				);
 //
@@ -2586,9 +2594,9 @@ public class Xomw_Title {
 //					}
 //					$row['expiry'] = $dbr.decodeExpiry($row['expiry']);
 //				}
-//				$this.mTitleProtection = $row;
+//				this.mTitleProtection = $row;
 //			}
-//			return $this.mTitleProtection;
+//			return this.mTitleProtection;
 //		}
 //
 //		/**
@@ -2599,10 +2607,10 @@ public class Xomw_Title {
 //
 //			$dbw.delete(
 //				'protected_titles',
-//				[ 'pt_namespace' => $this.getNamespace(), 'pt_title' => $this.getDBkey() ],
+//				[ 'pt_namespace' => this.getNamespace(), 'pt_title' => this.getDBkey() ],
 //				__METHOD__
 //			);
-//			$this.mTitleProtection = false;
+//			this.mTitleProtection = false;
 //		}
 //
 //		/**
@@ -2615,7 +2623,7 @@ public class Xomw_Title {
 //		public function isSemiProtected($action = 'edit') {
 //			global $wgSemiprotectedRestrictionLevels;
 //
-//			$restrictions = $this.getRestrictions($action);
+//			$restrictions = this.getRestrictions($action);
 //			$semi = $wgSemiprotectedRestrictionLevels;
 //			if (!$restrictions || !$semi) {
 //				// Not protected, or all protection is full protection
@@ -2640,22 +2648,22 @@ public class Xomw_Title {
 //		* by default checks all actions.
 //		* @return boolean
 //		*/
-//		public function isProtected($action = '') {
+//		public function isProtected($action = Bry_.Empty) {
 //			global $wgRestrictionLevels;
 //
-//			$restrictionTypes = $this.getRestrictionTypes();
+//			$restrictionTypes = this.getRestrictionTypes();
 //
-//			# Special pages have inherent protection
-//			if ($this.isSpecialPage()) {
+//			// Special pages have inherent protection
+//			if (this.isSpecialPage()) {
 //				return true;
 //			}
 //
-//			# Check regular protection levels
+//			// Check regular protection levels
 //			foreach ($restrictionTypes as $type) {
-//				if ($action == $type || $action == '') {
-//					$r = $this.getRestrictions($type);
+//				if ($action == $type || $action == Bry_.Empty) {
+//					$r = this.getRestrictions($type);
 //					foreach ($wgRestrictionLevels as $level) {
-//						if (in_array($level, $r) && $level != '') {
+//						if (in_array($level, $r) && $level != Bry_.Empty) {
 //							return true;
 //						}
 //					}
@@ -2675,9 +2683,9 @@ public class Xomw_Title {
 //		public function isNamespaceProtected(User $user) {
 //			global $wgNamespaceProtection;
 //
-//			if (isset($wgNamespaceProtection[$this.mNamespace])) {
-//				foreach ((array)$wgNamespaceProtection[$this.mNamespace] as $right) {
-//					if ($right != '' && !$user.isAllowed($right)) {
+//			if (isset($wgNamespaceProtection[this.mNamespace])) {
+//				foreach ((array)$wgNamespaceProtection[this.mNamespace] as $right) {
+//					if ($right != Bry_.Empty && !$user.isAllowed($right)) {
 //						return true;
 //					}
 //				}
@@ -2691,7 +2699,7 @@ public class Xomw_Title {
 //		* @return boolean If the page is subject to cascading restrictions.
 //		*/
 //		public function isCascadeProtected() {
-//			list($sources, /* $restrictions */) = $this.getCascadeProtectionSources(false);
+//			list($sources, /* $restrictions */) = this.getCascadeProtectionSources(false);
 //			return ($sources > 0);
 //		}
 //
@@ -2705,7 +2713,7 @@ public class Xomw_Title {
 //		* @since 1.23
 //		*/
 //		public function areCascadeProtectionSourcesLoaded($getPages = true) {
-//			return $getPages ? $this.mCascadeSources !== null : $this.mHasCascadingRestrictions !== null;
+//			return $getPages ? this.mCascadeSources != null : this.mHasCascadingRestrictions != null;
 //		}
 //
 //		/**
@@ -2724,26 +2732,26 @@ public class Xomw_Title {
 //		public function getCascadeProtectionSources($getPages = true) {
 //			$pagerestrictions = [];
 //
-//			if ($this.mCascadeSources !== null && $getPages) {
-//				return [ $this.mCascadeSources, $this.mCascadingRestrictions ];
-//			} elseif ($this.mHasCascadingRestrictions !== null && !$getPages) {
-//				return [ $this.mHasCascadingRestrictions, $pagerestrictions ];
+//			if (this.mCascadeSources != null && $getPages) {
+//				return [ this.mCascadeSources, this.mCascadingRestrictions ];
+//			} elseif (this.mHasCascadingRestrictions != null && !$getPages) {
+//				return [ this.mHasCascadingRestrictions, $pagerestrictions ];
 //			}
 //
 //			$dbr = wfGetDB(DB_REPLICA);
 //
-//			if ($this.getNamespace() == NS_FILE) {
+//			if (this.getNamespace() == NS_FILE) {
 //				$tables = [ 'imagelinks', 'page_restrictions' ];
 //				$where_clauses = [
-//					'il_to' => $this.getDBkey(),
+//					'il_to' => this.getDBkey(),
 //					'il_from=pr_page',
 //					'pr_cascade' => 1
 //				];
 //			} else {
 //				$tables = [ 'templatelinks', 'page_restrictions' ];
 //				$where_clauses = [
-//					'tl_namespace' => $this.getNamespace(),
-//					'tl_title' => $this.getDBkey(),
+//					'tl_namespace' => this.getNamespace(),
+//					'tl_title' => this.getDBkey(),
 //					'tl_from=pr_page',
 //					'pr_cascade' => 1
 //				];
@@ -2771,8 +2779,8 @@ public class Xomw_Title {
 //						$page_ns = $row.page_namespace;
 //						$page_title = $row.page_title;
 //						$sources[$page_id] = Title::makeTitle($page_ns, $page_title);
-//						# Add groups needed for each restriction type if its not already there
-//						# Make sure this restriction type still exists
+//						// Add groups needed for each restriction type if its not already there
+//						// Make sure this restriction type still exists
 //
 //						if (!isset($pagerestrictions[$row.pr_type])) {
 //							$pagerestrictions[$row.pr_type] = [];
@@ -2791,10 +2799,10 @@ public class Xomw_Title {
 //			}
 //
 //			if ($getPages) {
-//				$this.mCascadeSources = $sources;
-//				$this.mCascadingRestrictions = $pagerestrictions;
+//				this.mCascadeSources = $sources;
+//				this.mCascadingRestrictions = $pagerestrictions;
 //			} else {
-//				$this.mHasCascadingRestrictions = $sources;
+//				this.mHasCascadingRestrictions = $sources;
 //			}
 //
 //			return [ $sources, $pagerestrictions ];
@@ -2808,7 +2816,7 @@ public class Xomw_Title {
 //		* @since 1.23
 //		*/
 //		public function areRestrictionsLoaded() {
-//			return $this.mRestrictionsLoaded;
+//			return this.mRestrictionsLoaded;
 //		}
 //
 //		/**
@@ -2821,11 +2829,11 @@ public class Xomw_Title {
 //		*     be mapped to 'editprotected' and 'editsemiprotected' respectively.
 //		*/
 //		public function getRestrictions($action) {
-//			if (!$this.mRestrictionsLoaded) {
-//				$this.loadRestrictions();
+//			if (!this.mRestrictionsLoaded) {
+//				this.loadRestrictions();
 //			}
-//			return isset($this.mRestrictions[$action])
-//					? $this.mRestrictions[$action]
+//			return isset(this.mRestrictions[$action])
+//					? this.mRestrictions[$action]
 //					: [];
 //		}
 //
@@ -2837,10 +2845,10 @@ public class Xomw_Title {
 //		* @since 1.23
 //		*/
 //		public function getAllRestrictions() {
-//			if (!$this.mRestrictionsLoaded) {
-//				$this.loadRestrictions();
+//			if (!this.mRestrictionsLoaded) {
+//				this.loadRestrictions();
 //			}
-//			return $this.mRestrictions;
+//			return this.mRestrictions;
 //		}
 //
 //		/**
@@ -2851,10 +2859,10 @@ public class Xomw_Title {
 //		*     or not protected at all, or false if the action is not recognised.
 //		*/
 //		public function getRestrictionExpiry($action) {
-//			if (!$this.mRestrictionsLoaded) {
-//				$this.loadRestrictions();
+//			if (!this.mRestrictionsLoaded) {
+//				this.loadRestrictions();
 //			}
-//			return isset($this.mRestrictionsExpiry[$action]) ? $this.mRestrictionsExpiry[$action] : false;
+//			return isset(this.mRestrictionsExpiry[$action]) ? this.mRestrictionsExpiry[$action] : false;
 //		}
 //
 //		/**
@@ -2863,11 +2871,11 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		function areRestrictionsCascading() {
-//			if (!$this.mRestrictionsLoaded) {
-//				$this.loadRestrictions();
+//			if (!this.mRestrictionsLoaded) {
+//				this.loadRestrictions();
 //			}
 //
-//			return $this.mCascadeRestriction;
+//			return this.mCascadeRestriction;
 //		}
 //
 //		/**
@@ -2882,46 +2890,46 @@ public class Xomw_Title {
 //		public function loadRestrictionsFromRows($rows, $oldFashionedRestrictions = null) {
 //			$dbr = wfGetDB(DB_REPLICA);
 //
-//			$restrictionTypes = $this.getRestrictionTypes();
+//			$restrictionTypes = this.getRestrictionTypes();
 //
 //			foreach ($restrictionTypes as $type) {
-//				$this.mRestrictions[$type] = [];
-//				$this.mRestrictionsExpiry[$type] = 'infinity';
+//				this.mRestrictions[$type] = [];
+//				this.mRestrictionsExpiry[$type] = 'infinity';
 //			}
 //
-//			$this.mCascadeRestriction = false;
+//			this.mCascadeRestriction = false;
 //
-//			# Backwards-compatibility: also load the restrictions from the page record (old format).
-//			if ($oldFashionedRestrictions !== null) {
-//				$this.mOldRestrictions = $oldFashionedRestrictions;
+//			// Backwards-compatibility: also load the restrictions from the page record (old format).
+//			if ($oldFashionedRestrictions != null) {
+//				this.mOldRestrictions = $oldFashionedRestrictions;
 //			}
 //
-//			if ($this.mOldRestrictions === false) {
-//				$this.mOldRestrictions = $dbr.selectField('page', 'page_restrictions',
-//					[ 'page_id' => $this.getArticleID() ], __METHOD__);
+//			if (this.mOldRestrictions == false) {
+//				this.mOldRestrictions = $dbr.selectField('page', 'page_restrictions',
+//					[ 'page_id' => this.getArticleID() ], __METHOD__);
 //			}
 //
-//			if ($this.mOldRestrictions != '') {
-//				foreach (explode(':', trim($this.mOldRestrictions)) as $restrict) {
+//			if (this.mOldRestrictions != Bry_.Empty) {
+//				foreach (explode(':', trim(this.mOldRestrictions)) as $restrict) {
 //					$temp = explode('=', trim($restrict));
 //					if (count($temp) == 1) {
 //						// old old format should be treated as edit/move restriction
-//						$this.mRestrictions['edit'] = explode(',', trim($temp[0]));
-//						$this.mRestrictions['move'] = explode(',', trim($temp[0]));
+//						this.mRestrictions['edit'] = explode(',', trim($temp[0]));
+//						this.mRestrictions['move'] = explode(',', trim($temp[0]));
 //					} else {
 //						$restriction = trim($temp[1]);
-//						if ($restriction != '') { // some old entries are empty
-//							$this.mRestrictions[$temp[0]] = explode(',', $restriction);
+//						if ($restriction != Bry_.Empty) { // some old entries are empty
+//							this.mRestrictions[$temp[0]] = explode(',', $restriction);
 //						}
 //					}
 //				}
 //			}
 //
 //			if (count($rows)) {
-//				# Current system - load second to make them override.
+//				// Current system - load second to make them override.
 //				$now = wfTimestampNow();
 //
-//				# Cycle through all the restrictions.
+//				// Cycle through all the restrictions.
 //				foreach ($rows as $row) {
 //					// Don't take care of restrictions types that aren't allowed
 //					if (!in_array($row.pr_type, $restrictionTypes)) {
@@ -2934,15 +2942,15 @@ public class Xomw_Title {
 //
 //					// Only apply the restrictions if they haven't expired!
 //					if (!$expiry || $expiry > $now) {
-//						$this.mRestrictionsExpiry[$row.pr_type] = $expiry;
-//						$this.mRestrictions[$row.pr_type] = explode(',', trim($row.pr_level));
+//						this.mRestrictionsExpiry[$row.pr_type] = $expiry;
+//						this.mRestrictions[$row.pr_type] = explode(',', trim($row.pr_level));
 //
-//						$this.mCascadeRestriction |= $row.pr_cascade;
+//						this.mCascadeRestriction |= $row.pr_cascade;
 //					}
 //				}
 //			}
 //
-//			$this.mRestrictionsLoaded = true;
+//			this.mRestrictionsLoaded = true;
 //		}
 //
 //		/**
@@ -2952,16 +2960,16 @@ public class Xomw_Title {
 //		*   restrictions from page table (pre 1.10)
 //		*/
 //		public function loadRestrictions($oldFashionedRestrictions = null) {
-//			if ($this.mRestrictionsLoaded) {
+//			if (this.mRestrictionsLoaded) {
 //				return;
 //			}
 //
-//			$id = $this.getArticleID();
+//			$id = this.getArticleID();
 //			if ($id) {
 //				$cache = ObjectCache::getMainWANInstance();
 //				$rows = $cache.getWithSetCallback(
 //					// Page protections always leave a new null revision
-//					$cache.makeKey('page-restrictions', $id, $this.getLatestRevID()),
+//					$cache.makeKey('page-restrictions', $id, this.getLatestRevID()),
 //					$cache::TTL_DAY,
 //					function ($curValue, &$ttl, array &$setOpts) {
 //						$dbr = wfGetDB(DB_REPLICA);
@@ -2972,16 +2980,16 @@ public class Xomw_Title {
 //							$dbr.select(
 //								'page_restrictions',
 //								[ 'pr_type', 'pr_expiry', 'pr_level', 'pr_cascade' ],
-//								[ 'pr_page' => $this.getArticleID() ],
+//								[ 'pr_page' => this.getArticleID() ],
 //								__METHOD__
 //							)
 //						);
 //					}
 //				);
 //
-//				$this.loadRestrictionsFromRows($rows, $oldFashionedRestrictions);
+//				this.loadRestrictionsFromRows($rows, $oldFashionedRestrictions);
 //			} else {
-//				$title_protection = $this.getTitleProtection();
+//				$title_protection = this.getTitleProtection();
 //
 //				if ($title_protection) {
 //					$now = wfTimestampNow();
@@ -2989,16 +2997,16 @@ public class Xomw_Title {
 //
 //					if (!$expiry || $expiry > $now) {
 //						// Apply the restrictions
-//						$this.mRestrictionsExpiry['create'] = $expiry;
-//						$this.mRestrictions['create'] =
+//						this.mRestrictionsExpiry['create'] = $expiry;
+//						this.mRestrictions['create'] =
 //							explode(',', trim($title_protection['permission']));
 //					} else { // Get rid of the old restrictions
-//						$this.mTitleProtection = false;
+//						this.mTitleProtection = false;
 //					}
 //				} else {
-//					$this.mRestrictionsExpiry['create'] = 'infinity';
+//					this.mRestrictionsExpiry['create'] = 'infinity';
 //				}
-//				$this.mRestrictionsLoaded = true;
+//				this.mRestrictionsLoaded = true;
 //			}
 //		}
 //
@@ -3007,8 +3015,8 @@ public class Xomw_Title {
 //		* This is used when updating protection from WikiPage::doUpdateRestrictions().
 //		*/
 //		public function flushRestrictions() {
-//			$this.mRestrictionsLoaded = false;
-//			$this.mTitleProtection = null;
+//			this.mRestrictionsLoaded = false;
+//			this.mTitleProtection = null;
 //		}
 //
 //		/**
@@ -3058,24 +3066,24 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function hasSubpages() {
-//			if (!MWNamespace::hasSubpages($this.mNamespace)) {
-//				# Duh
+//			if (!MWNamespace::hasSubpages(this.mNamespace)) {
+//				// Duh
 //				return false;
 //			}
 //
-//			# We dynamically add a member variable for the purpose of this method
-//			# alone to cache the result.  There's no point in having it hanging
-//			# around uninitialized in every Title Object; therefore we only add it
-//			# if needed and don't declare it statically.
-//			if ($this.mHasSubpages === null) {
-//				$this.mHasSubpages = false;
-//				$subpages = $this.getSubpages(1);
+//			// We dynamically add a member variable for the purpose of this method
+//			// alone to cache the result.  There's no point in having it hanging
+//			// around uninitialized in every Title Object; therefore we only add it
+//			// if needed and don't declare it statically.
+//			if (this.mHasSubpages == null) {
+//				this.mHasSubpages = false;
+//				$subpages = this.getSubpages(1);
 //				if ($subpages instanceof TitleArray) {
-//					$this.mHasSubpages = (boolean)$subpages.count();
+//					this.mHasSubpages = (boolean)$subpages.count();
 //				}
 //			}
 //
-//			return $this.mHasSubpages;
+//			return this.mHasSubpages;
 //		}
 //
 //		/**
@@ -3086,18 +3094,18 @@ public class Xomw_Title {
 //		*  doesn't allow subpages
 //		*/
 //		public function getSubpages($limit = -1) {
-//			if (!MWNamespace::hasSubpages($this.getNamespace())) {
+//			if (!MWNamespace::hasSubpages(this.getNamespace())) {
 //				return [];
 //			}
 //
 //			$dbr = wfGetDB(DB_REPLICA);
-//			$conds['page_namespace'] = $this.getNamespace();
-//			$conds[] = 'page_title ' . $dbr.buildLike($this.getDBkey() . '/', $dbr.anyString());
+//			$conds['page_namespace'] = this.getNamespace();
+//			$conds[] = 'page_title ' . $dbr.buildLike(this.getDBkey() . '/', $dbr.anyString());
 //			$options = [];
 //			if ($limit > -1) {
 //				$options['LIMIT'] = $limit;
 //			}
-//			$this.mSubpages = TitleArray::newFromResult(
+//			this.mSubpages = TitleArray::newFromResult(
 //				$dbr.select('page',
 //					[ 'page_id', 'page_namespace', 'page_title', 'page_is_redirect' ],
 //					$conds,
@@ -3105,7 +3113,7 @@ public class Xomw_Title {
 //					$options
 //				)
 //			);
-//			return $this.mSubpages;
+//			return this.mSubpages;
 //		}
 //
 //		/**
@@ -3114,18 +3122,18 @@ public class Xomw_Title {
 //		* @return int The number of archived revisions
 //		*/
 //		public function isDeleted() {
-//			if ($this.getNamespace() < 0) {
+//			if (this.getNamespace() < 0) {
 //				$n = 0;
 //			} else {
 //				$dbr = wfGetDB(DB_REPLICA);
 //
 //				$n = $dbr.selectField('archive', 'COUNT(*)',
-//					[ 'ar_namespace' => $this.getNamespace(), 'ar_title' => $this.getDBkey() ],
+//					[ 'ar_namespace' => this.getNamespace(), 'ar_title' => this.getDBkey() ],
 //					__METHOD__
 //				);
-//				if ($this.getNamespace() == NS_FILE) {
+//				if (this.getNamespace() == NS_FILE) {
 //					$n += $dbr.selectField('filearchive', 'COUNT(*)',
-//						[ 'fa_name' => $this.getDBkey() ],
+//						[ 'fa_name' => this.getDBkey() ],
 //						__METHOD__
 //					);
 //				}
@@ -3139,17 +3147,17 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isDeletedQuick() {
-//			if ($this.getNamespace() < 0) {
+//			if (this.getNamespace() < 0) {
 //				return false;
 //			}
 //			$dbr = wfGetDB(DB_REPLICA);
 //			$deleted = (boolean)$dbr.selectField('archive', '1',
-//				[ 'ar_namespace' => $this.getNamespace(), 'ar_title' => $this.getDBkey() ],
+//				[ 'ar_namespace' => this.getNamespace(), 'ar_title' => this.getDBkey() ],
 //				__METHOD__
 //			);
-//			if (!$deleted && $this.getNamespace() == NS_FILE) {
+//			if (!$deleted && this.getNamespace() == NS_FILE) {
 //				$deleted = (boolean)$dbr.selectField('filearchive', '1',
-//					[ 'fa_name' => $this.getDBkey() ],
+//					[ 'fa_name' => this.getDBkey() ],
 //					__METHOD__
 //				);
 //			}
@@ -3165,22 +3173,22 @@ public class Xomw_Title {
 //		* @return int The ID
 //		*/
 //		public function getArticleID($flags = 0) {
-//			if ($this.getNamespace() < 0) {
-//				$this.mArticleID = 0;
-//				return $this.mArticleID;
+//			if (this.getNamespace() < 0) {
+//				this.mArticleID = 0;
+//				return this.mArticleID;
 //			}
 //			$linkCache = LinkCache::singleton();
 //			if ($flags & self::GAID_FOR_UPDATE) {
 //				$oldUpdate = $linkCache.forUpdate(true);
-//				$linkCache.clearLink($this);
-//				$this.mArticleID = $linkCache.addLinkObj($this);
+//				$linkCache.clearLink(this);
+//				this.mArticleID = $linkCache.addLinkObj(this);
 //				$linkCache.forUpdate($oldUpdate);
 //			} else {
-//				if (-1 == $this.mArticleID) {
-//					$this.mArticleID = $linkCache.addLinkObj($this);
+//				if (-1 == this.mArticleID) {
+//					this.mArticleID = $linkCache.addLinkObj(this);
 //				}
 //			}
-//			return $this.mArticleID;
+//			return this.mArticleID;
 //		}
 //
 //		/**
@@ -3191,31 +3199,31 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isRedirect($flags = 0) {
-//			if (!is_null($this.mRedirect)) {
-//				return $this.mRedirect;
+//			if (!is_null(this.mRedirect)) {
+//				return this.mRedirect;
 //			}
-//			if (!$this.getArticleID($flags)) {
-//				$this.mRedirect = false;
-//				return $this.mRedirect;
+//			if (!this.getArticleID($flags)) {
+//				this.mRedirect = false;
+//				return this.mRedirect;
 //			}
 //
 //			$linkCache = LinkCache::singleton();
-//			$linkCache.addLinkObj($this); # in case we already had an article ID
-//			$cached = $linkCache.getGoodLinkFieldObj($this, 'redirect');
-//			if ($cached === null) {
-//				# Trust LinkCache's state over our own
-//				# LinkCache is telling us that the page doesn't exist, despite there being cached
-//				# data relating to an existing page in $this.mArticleID. Updaters should clear
-//				# LinkCache as appropriate, or use $flags = Title::GAID_FOR_UPDATE. If that flag is
-//				# set, then LinkCache will definitely be up to date here, since getArticleID() forces
-//				# LinkCache to refresh its data from the master.
-//				$this.mRedirect = false;
-//				return $this.mRedirect;
+//			$linkCache.addLinkObj(this); # in case we already had an article ID
+//			$cached = $linkCache.getGoodLinkFieldObj(this, 'redirect');
+//			if ($cached == null) {
+//				// Trust LinkCache's state over our own
+//				// LinkCache is telling us that the page doesn't exist, despite there being cached
+//				// data relating to an existing page in this.mArticleID. Updaters should clear
+//				// LinkCache as appropriate, or use $flags = Title::GAID_FOR_UPDATE. If that flag is
+//				// set, then LinkCache will definitely be up to date here, since getArticleID() forces
+//				// LinkCache to refresh its data from the master.
+//				this.mRedirect = false;
+//				return this.mRedirect;
 //			}
 //
-//			$this.mRedirect = (boolean)$cached;
+//			this.mRedirect = (boolean)$cached;
 //
-//			return $this.mRedirect;
+//			return this.mRedirect;
 //		}
 //
 //		/**
@@ -3226,25 +3234,25 @@ public class Xomw_Title {
 //		* @return int
 //		*/
 //		public function getLength($flags = 0) {
-//			if ($this.mLength != -1) {
-//				return $this.mLength;
+//			if (this.mLength != -1) {
+//				return this.mLength;
 //			}
-//			if (!$this.getArticleID($flags)) {
-//				$this.mLength = 0;
-//				return $this.mLength;
+//			if (!this.getArticleID($flags)) {
+//				this.mLength = 0;
+//				return this.mLength;
 //			}
 //			$linkCache = LinkCache::singleton();
-//			$linkCache.addLinkObj($this); # in case we already had an article ID
-//			$cached = $linkCache.getGoodLinkFieldObj($this, 'length');
-//			if ($cached === null) {
-//				# Trust LinkCache's state over our own, as for isRedirect()
-//				$this.mLength = 0;
-//				return $this.mLength;
+//			$linkCache.addLinkObj(this); # in case we already had an article ID
+//			$cached = $linkCache.getGoodLinkFieldObj(this, 'length');
+//			if ($cached == null) {
+//				// Trust LinkCache's state over our own, as for isRedirect()
+//				this.mLength = 0;
+//				return this.mLength;
 //			}
 //
-//			$this.mLength = intval($cached);
+//			this.mLength = intval($cached);
 //
-//			return $this.mLength;
+//			return this.mLength;
 //		}
 //
 //		/**
@@ -3254,25 +3262,25 @@ public class Xomw_Title {
 //		* @return int Int or 0 if the page doesn't exist
 //		*/
 //		public function getLatestRevID($flags = 0) {
-//			if (!($flags & Title::GAID_FOR_UPDATE) && $this.mLatestID !== false) {
-//				return intval($this.mLatestID);
+//			if (!($flags & Title::GAID_FOR_UPDATE) && this.mLatestID != false) {
+//				return intval(this.mLatestID);
 //			}
-//			if (!$this.getArticleID($flags)) {
-//				$this.mLatestID = 0;
-//				return $this.mLatestID;
+//			if (!this.getArticleID($flags)) {
+//				this.mLatestID = 0;
+//				return this.mLatestID;
 //			}
 //			$linkCache = LinkCache::singleton();
-//			$linkCache.addLinkObj($this); # in case we already had an article ID
-//			$cached = $linkCache.getGoodLinkFieldObj($this, 'revision');
-//			if ($cached === null) {
-//				# Trust LinkCache's state over our own, as for isRedirect()
-//				$this.mLatestID = 0;
-//				return $this.mLatestID;
+//			$linkCache.addLinkObj(this); # in case we already had an article ID
+//			$cached = $linkCache.getGoodLinkFieldObj(this, 'revision');
+//			if ($cached == null) {
+//				// Trust LinkCache's state over our own, as for isRedirect()
+//				this.mLatestID = 0;
+//				return this.mLatestID;
 //			}
 //
-//			$this.mLatestID = intval($cached);
+//			this.mLatestID = intval($cached);
 //
-//			return $this.mLatestID;
+//			return this.mLatestID;
 //		}
 //
 //		/**
@@ -3287,24 +3295,24 @@ public class Xomw_Title {
 //		*/
 //		public function resetArticleID($newid) {
 //			$linkCache = LinkCache::singleton();
-//			$linkCache.clearLink($this);
+//			$linkCache.clearLink(this);
 //
-//			if ($newid === false) {
-//				$this.mArticleID = -1;
+//			if ($newid == false) {
+//				this.mArticleID = -1;
 //			} else {
-//				$this.mArticleID = intval($newid);
+//				this.mArticleID = intval($newid);
 //			}
-//			$this.mRestrictionsLoaded = false;
-//			$this.mRestrictions = [];
-//			$this.mOldRestrictions = false;
-//			$this.mRedirect = null;
-//			$this.mLength = -1;
-//			$this.mLatestID = false;
-//			$this.mContentModel = false;
-//			$this.mEstimateRevisions = null;
-//			$this.mPageLanguage = false;
-//			$this.mDbPageLanguage = false;
-//			$this.mIsBigDeletion = null;
+//			this.mRestrictionsLoaded = false;
+//			this.mRestrictions = [];
+//			this.mOldRestrictions = false;
+//			this.mRedirect = null;
+//			this.mLength = -1;
+//			this.mLatestID = false;
+//			this.mContentModel = false;
+//			this.mEstimateRevisions = null;
+//			this.mPageLanguage = false;
+//			this.mDbPageLanguage = false;
+//			this.mIsBigDeletion = null;
 //		}
 //
 //		public static function clearCaches() {
@@ -3331,55 +3339,55 @@ public class Xomw_Title {
 //				return $text;
 //			}
 //		}
-//
-//		/**
-//		* Secure and split - main initialisation function for this Object
-//		*
-//		* Assumes that mDbkeyform has been set, and is urldecoded
-//		* and uses underscores, but not otherwise munged.  This function
-//		* removes illegal characters, splits off the interwiki and
-//		* namespace prefixes, sets the other forms, and canonicalizes
-//		* everything.
-//		*
-//		* @throws MalformedTitleException On invalid titles
-//		* @return boolean True on success
-//		*/
-//		private function secureAndSplit() {
-//			# Initialisation
-//			$this.mInterwiki = '';
-//			$this.mFragment = '';
-//			$this.mNamespace = $this.mDefaultNamespace; # Usually NS_MAIN
-//
-//			$dbkey = $this.mDbkeyform;
-//
-//			// @note: splitTitleString() is a temporary hack to allow MediaWikiTitleCodec to share
-//			//        the parsing code with Title, while avoiding massive refactoring.
-//			// @todo: get rid of secureAndSplit, refactor parsing code.
-//			// @note: getTitleParser() returns a TitleParser implementation which does not have a
-//			//        splitTitleString method, but the only implementation (MediaWikiTitleCodec) does
-//			$titleCodec = MediaWikiServices::getInstance().getTitleParser();
-//			// MalformedTitleException can be thrown here
-//			$parts = $titleCodec.splitTitleString($dbkey, $this.getDefaultNamespace());
-//
-//			# Fill fields
-//			$this.setFragment('#' . $parts['fragment']);
-//			$this.mInterwiki = $parts['interwiki'];
-//			$this.mLocalInterwiki = $parts['local_interwiki'];
-//			$this.mNamespace = $parts['namespace'];
-//			$this.mUserCaseDBKey = $parts['user_case_dbkey'];
-//
-//			$this.mDbkeyform = $parts['dbkey'];
-//			$this.mUrlform = wfUrlencode($this.mDbkeyform);
-//			$this.mTextform = strtr($this.mDbkeyform, '_', ' ');
-//
-//			# We already know that some pages won't be in the database!
-//			if ($this.isExternal() || $this.mNamespace == NS_SPECIAL) {
-//				$this.mArticleID = 0;
-//			}
-//
-//			return true;
-//		}
-//
+
+	/**
+	* Secure and split - main initialisation function for this Object
+	*
+	* Assumes that mDbkeyform has been set, and is urldecoded
+	* and uses underscores, but not otherwise munged.  This function
+	* removes illegal characters, splits off the interwiki and
+	* namespace prefixes, sets the other forms, and canonicalizes
+	* everything.
+	*
+	* @throws MalformedTitleException On invalid titles
+	* @return boolean True on success
+	*/
+	private boolean secureAndSplit() {
+		// Initialisation
+		this.mInterwiki = Bry_.Empty;
+		this.mFragment = Bry_.Empty;
+		this.mNamespace = this.mDefaultNamespace; // Usually NS_MAIN
+
+		byte[] dbkey = this.mDbkeyform;
+
+		// @note: splitTitleString() is a temporary hack to allow MediaWikiTitleCodec to share
+		//        the parsing code with Title, while avoiding massive refactoring.
+		// @todo: get rid of secureAndSplit, refactor parsing code.
+		// @note: getTitleParser() returns a TitleParser implementation which does not have a
+		//        splitTitleString method, but the only implementation (MediaWikiTitleCodec) does
+		Xomw_MediaWikiTitleCodec titleCodec = Xomw_MediaWikiServices.getInstance().getTitleParser();
+		// MalformedTitleException can be thrown here
+		Xomw_MediaWikiTitleCodec_Parts parts = titleCodec.splitTitleString(dbkey, this.getDefaultNamespace());
+
+		// Fill fields
+//			this.setFragment('#' . parts.fragment);
+		this.mInterwiki = parts.interwiki;
+		this.mLocalInterwiki = parts.local_interwiki;
+		this.mNamespace = parts.ns;
+		this.mUserCaseDBKey = parts.user_case_dbkey;
+
+		this.mDbkeyform = parts.dbkey;
+//			this.mUrlform = wfUrlencode(this.mDbkeyform);
+		this.mTextform = Php_str_.strtr(this.mDbkeyform, Byte_ascii.Underline, Byte_ascii.Space);
+
+		// We already know that some pages won't be in the database!
+		if (this.isExternal() || this.mNamespace == Xomw_Defines.NS_SPECIAL) {
+			this.mArticleID = 0;
+		}
+
+		return true;
+	}
+
 //		/**
 //		* Get an array of Title objects linking to this Title
 //		* Also stores the IDs in the link cache.
@@ -3404,8 +3412,8 @@ public class Xomw_Title {
 //				self::getSelectFields(),
 //				[
 //					"{$prefix}_from=page_id",
-//					"{$prefix}_namespace" => $this.getNamespace(),
-//					"{$prefix}_title" => $this.getDBkey() ],
+//					"{$prefix}_namespace" => this.getNamespace(),
+//					"{$prefix}_title" => this.getDBkey() ],
 //				__METHOD__,
 //				$options
 //			);
@@ -3435,7 +3443,7 @@ public class Xomw_Title {
 //		* @return Title[] Array of Title the Title objects linking here
 //		*/
 //		public function getTemplateLinksTo($options = []) {
-//			return $this.getLinksTo($options, 'templatelinks', 'tl');
+//			return this.getLinksTo($options, 'templatelinks', 'tl');
 //		}
 //
 //		/**
@@ -3451,9 +3459,9 @@ public class Xomw_Title {
 //		* @return array Array of Title objects linking here
 //		*/
 //		public function getLinksFrom($options = [], $table = 'pagelinks', $prefix = 'pl') {
-//			$id = $this.getArticleID();
+//			$id = this.getArticleID();
 //
-//			# If the page doesn't exist; there can't be any link from this page
+//			// If the page doesn't exist; there can't be any link from this page
 //			if (!$id) {
 //				return [];
 //			}
@@ -3504,7 +3512,7 @@ public class Xomw_Title {
 //		* @return Title[] Array of Title the Title objects used here
 //		*/
 //		public function getTemplateLinksFrom($options = []) {
-//			return $this.getLinksFrom($options, 'templatelinks', 'tl');
+//			return this.getLinksFrom($options, 'templatelinks', 'tl');
 //		}
 //
 //		/**
@@ -3516,8 +3524,8 @@ public class Xomw_Title {
 //		* @return Title[] Array of Title the Title objects
 //		*/
 //		public function getBrokenLinksFrom() {
-//			if ($this.getArticleID() == 0) {
-//				# All links from article ID 0 are false positives
+//			if (this.getArticleID() == 0) {
+//				// All links from article ID 0 are false positives
 //				return [];
 //			}
 //
@@ -3526,7 +3534,7 @@ public class Xomw_Title {
 //				[ 'page', 'pagelinks' ],
 //				[ 'pl_namespace', 'pl_title' ],
 //				[
-//					'pl_from' => $this.getArticleID(),
+//					'pl_from' => this.getArticleID(),
 //					'page_namespace IS NULL'
 //				],
 //				__METHOD__, [],
@@ -3553,26 +3561,26 @@ public class Xomw_Title {
 //		*/
 //		public function getCdnUrls() {
 //			$urls = [
-//				$this.getInternalURL(),
-//				$this.getInternalURL('action=history')
+//				this.getInternalURL(),
+//				this.getInternalURL('action=history')
 //			];
 //
-//			$pageLang = $this.getPageLanguage();
+//			$pageLang = this.getPageLanguage();
 //			if ($pageLang.hasVariants()) {
 //				$variants = $pageLang.getVariants();
 //				foreach ($variants as $vCode) {
-//					$urls[] = $this.getInternalURL($vCode);
+//					$urls[] = this.getInternalURL($vCode);
 //				}
 //			}
 //
 //			// If we are looking at a css/js user subpage, purge the action=raw.
-//			if ($this.isJsSubpage()) {
-//				$urls[] = $this.getInternalURL('action=raw&ctype=text/javascript');
-//			} elseif ($this.isCssSubpage()) {
-//				$urls[] = $this.getInternalURL('action=raw&ctype=text/css');
+//			if (this.isJsSubpage()) {
+//				$urls[] = this.getInternalURL('action=raw&ctype=text/javascript');
+//			} elseif (this.isCssSubpage()) {
+//				$urls[] = this.getInternalURL('action=raw&ctype=text/css');
 //			}
 //
-//			Hooks::run('TitleSquidURLs', [ $this, &$urls ]);
+//			Hooks::run('TitleSquidURLs', [ this, &$urls ]);
 //			return $urls;
 //		}
 //
@@ -3580,7 +3588,7 @@ public class Xomw_Title {
 //		* @deprecated since 1.27 use getCdnUrls()
 //		*/
 //		public function getSquidURLs() {
-//			return $this.getCdnUrls();
+//			return this.getCdnUrls();
 //		}
 //
 //		/**
@@ -3588,7 +3596,7 @@ public class Xomw_Title {
 //		*/
 //		public function purgeSquid() {
 //			DeferredUpdates::addUpdate(
-//				new CdnCacheUpdate($this.getCdnUrls()),
+//				new CdnCacheUpdate(this.getCdnUrls()),
 //				DeferredUpdates::PRESEND
 //			);
 //		}
@@ -3603,7 +3611,7 @@ public class Xomw_Title {
 //		* @param String $reason Is the log summary of the move, used for spam checking
 //		* @return array|boolean True on success, getUserPermissionsErrors()-like array on failure
 //		*/
-//		public function isValidMoveOperation(&$nt, $auth = true, $reason = '') {
+//		public function isValidMoveOperation(&$nt, $auth = true, $reason = Bry_.Empty) {
 //			global $wgUser;
 //
 //			if (!($nt instanceof Title)) {
@@ -3612,7 +3620,7 @@ public class Xomw_Title {
 //				return [ [ 'badtitletext' ] ];
 //			}
 //
-//			$mp = new MovePage($this, $nt);
+//			$mp = new MovePage(this, $nt);
 //			$errors = $mp.isValidMove().getErrorsArray();
 //			if ($auth) {
 //				$errors = wfMergeErrorArrays(
@@ -3659,11 +3667,11 @@ public class Xomw_Title {
 //		* @param array $changeTags Applied to the entry in the move log and redirect page revision
 //		* @return array|boolean True on success, getUserPermissionsErrors()-like array on failure
 //		*/
-//		public function moveTo(&$nt, $auth = true, $reason = '', $createRedirect = true,
+//		public function moveTo(&$nt, $auth = true, $reason = Bry_.Empty, $createRedirect = true,
 //			array $changeTags = []) {
 //
 //			global $wgUser;
-//			$err = $this.isValidMoveOperation($nt, $auth, $reason);
+//			$err = this.isValidMoveOperation($nt, $auth, $reason);
 //			if (is_array($err)) {
 //				// Auto-block user's IP if the account was "hard" blocked
 //				$wgUser.spreadAnyEditBlock();
@@ -3674,7 +3682,7 @@ public class Xomw_Title {
 //				$createRedirect = true;
 //			}
 //
-//			$mp = new MovePage($this, $nt);
+//			$mp = new MovePage(this, $nt);
 //			$status = $mp.move($wgUser, $reason, $createRedirect, $changeTags);
 //			if ($status.isOK()) {
 //				return true;
@@ -3697,20 +3705,20 @@ public class Xomw_Title {
 //		*     getUserPermissionsErrors()-like error array with numeric indices if
 //		*     no pages were moved
 //		*/
-//		public function moveSubpages($nt, $auth = true, $reason = '', $createRedirect = true,
+//		public function moveSubpages($nt, $auth = true, $reason = Bry_.Empty, $createRedirect = true,
 //			array $changeTags = []) {
 //
 //			global $wgMaximumMovedPages;
 //			// Check permissions
-//			if (!$this.userCan('move-subpages')) {
+//			if (!this.userCan('move-subpages')) {
 //				return [
 //					[ 'cant-move-subpages' ],
 //				];
 //			}
 //			// Do the source and target namespaces support subpages?
-//			if (!MWNamespace::hasSubpages($this.getNamespace())) {
+//			if (!MWNamespace::hasSubpages(this.getNamespace())) {
 //				return [
-//					[ 'namespace-nosubpages', MWNamespace::getCanonicalName($this.getNamespace()) ],
+//					[ 'namespace-nosubpages', MWNamespace::getCanonicalName(this.getNamespace()) ],
 //				];
 //			}
 //			if (!MWNamespace::hasSubpages($nt.getNamespace())) {
@@ -3719,7 +3727,7 @@ public class Xomw_Title {
 //				];
 //			}
 //
-//			$subpages = $this.getSubpages($wgMaximumMovedPages + 1);
+//			$subpages = this.getSubpages($wgMaximumMovedPages + 1);
 //			$retval = [];
 //			$count = 0;
 //			foreach ($subpages as $oldSubpage) {
@@ -3733,8 +3741,8 @@ public class Xomw_Title {
 //
 //				// We don't know whether this function was called before
 //				// or after moving the root page, so check both
-//				// $this and $nt
-//				if ($oldSubpage.getArticleID() == $this.getArticleID()
+//				// this and $nt
+//				if ($oldSubpage.getArticleID() == this.getArticleID()
 //					|| $oldSubpage.getArticleID() == $nt.getArticleID()
 //				) {
 //					// When moving a page to a subpage of itself,
@@ -3742,7 +3750,7 @@ public class Xomw_Title {
 //					continue;
 //				}
 //				$newPageName = preg_replace(
-//						'#^' . preg_quote($this.getDBkey(), '#') . '#',
+//						'#^' . preg_quote(this.getDBkey(), '#') . '#',
 //						StringUtils::escapeRegexReplacement($nt.getDBkey()), # bug 21234
 //						$oldSubpage.getDBkey());
 //				if ($oldSubpage.isTalkPage()) {
@@ -3750,12 +3758,12 @@ public class Xomw_Title {
 //				} else {
 //					$newNs = $nt.getSubjectPage().getNamespace();
 //				}
-//				# Bug 14385: we need makeTitleSafe because the new page names may
-//				# be longer than 255 characters.
+//				// Bug 14385: we need makeTitleSafe because the new page names may
+//				// be longer than 255 characters.
 //				$newSubpage = Title::makeTitleSafe($newNs, $newPageName);
 //
 //				$success = $oldSubpage.moveTo($newSubpage, $auth, $reason, $createRedirect, $changeTags);
-//				if ($success === true) {
+//				if ($success == true) {
 //					$retval[$oldSubpage.getPrefixedText()] = $newSubpage.getPrefixedText();
 //				} else {
 //					$retval[$oldSubpage.getPrefixedText()] = $success;
@@ -3775,7 +3783,7 @@ public class Xomw_Title {
 //
 //			$dbw = wfGetDB(DB_MASTER);
 //
-//			# Is it a redirect?
+//			// Is it a redirect?
 //			$fields = [ 'page_is_redirect', 'page_latest', 'page_id' ];
 //			if ($wgContentHandlerUseDB) {
 //				$fields[] = 'page_content_model';
@@ -3783,38 +3791,38 @@ public class Xomw_Title {
 //
 //			$row = $dbw.selectRow('page',
 //				$fields,
-//				$this.pageCond(),
+//				this.pageCond(),
 //				__METHOD__,
 //				[ 'FOR UPDATE' ]
 //			);
-//			# Cache some fields we may want
-//			$this.mArticleID = $row ? intval($row.page_id) : 0;
-//			$this.mRedirect = $row ? (boolean)$row.page_is_redirect : false;
-//			$this.mLatestID = $row ? intval($row.page_latest) : false;
-//			$this.mContentModel = $row && isset($row.page_content_model)
+//			// Cache some fields we may want
+//			this.mArticleID = $row ? intval($row.page_id) : 0;
+//			this.mRedirect = $row ? (boolean)$row.page_is_redirect : false;
+//			this.mLatestID = $row ? intval($row.page_latest) : false;
+//			this.mContentModel = $row && isset($row.page_content_model)
 //				? strval($row.page_content_model)
 //				: false;
 //
-//			if (!$this.mRedirect) {
+//			if (!this.mRedirect) {
 //				return false;
 //			}
-//			# Does the article have a history?
+//			// Does the article have a history?
 //			$row = $dbw.selectField([ 'page', 'revision' ],
 //				'rev_id',
-//				[ 'page_namespace' => $this.getNamespace(),
-//					'page_title' => $this.getDBkey(),
+//				[ 'page_namespace' => this.getNamespace(),
+//					'page_title' => this.getDBkey(),
 //					'page_id=rev_page',
 //					'page_latest != rev_id'
 //				],
 //				__METHOD__,
 //				[ 'FOR UPDATE' ]
 //			);
-//			# Return true if there was no history
-//			return ($row === false);
+//			// Return true if there was no history
+//			return ($row == false);
 //		}
 //
 //		/**
-//		* Checks if $this can be moved to a given Title
+//		* Checks if this can be moved to a given Title
 //		* - Selects for update, so don't call it unless you mean business
 //		*
 //		* @deprecated since 1.25, use MovePage's methods instead
@@ -3822,7 +3830,7 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isValidMoveTarget($nt) {
-//			# Is it an existing file?
+//			// Is it an existing file?
 //			if ($nt.getNamespace() == NS_FILE) {
 //				$file = wfLocalFile($nt);
 //				$file.load(File::READ_LATEST);
@@ -3831,23 +3839,23 @@ public class Xomw_Title {
 //					return false;
 //				}
 //			}
-//			# Is it a redirect with no history?
+//			// Is it a redirect with no history?
 //			if (!$nt.isSingleRevRedirect()) {
 //				wfDebug(__METHOD__ . ": not a one-rev redirect\n");
 //				return false;
 //			}
-//			# Get the article text
+//			// Get the article text
 //			$rev = Revision::newFromTitle($nt, false, Revision::READ_LATEST);
 //			if (!is_object($rev)) {
 //				return false;
 //			}
 //			$content = $rev.getContent();
-//			# Does the redirect point to the source?
-//			# Or is it a broken self-redirect, usually caused by namespace collisions?
+//			// Does the redirect point to the source?
+//			// Or is it a broken self-redirect, usually caused by namespace collisions?
 //			$redirTitle = $content ? $content.getRedirectTarget() : null;
 //
 //			if ($redirTitle) {
-//				if ($redirTitle.getPrefixedDBkey() != $this.getPrefixedDBkey() &&
+//				if ($redirTitle.getPrefixedDBkey() != this.getPrefixedDBkey() &&
 //					$redirTitle.getPrefixedDBkey() != $nt.getPrefixedDBkey()) {
 //					wfDebug(__METHOD__ . ": redirect points to other page\n");
 //					return false;
@@ -3855,7 +3863,7 @@ public class Xomw_Title {
 //					return true;
 //				}
 //			} else {
-//				# Fail safe (not a redirect after all. strange.)
+//				// Fail safe (not a redirect after all. strange.)
 //				wfDebug(__METHOD__ . ": failsafe: database sais " . $nt.getPrefixedDBkey() .
 //							" is a redirect, but it doesn't contain a valid redirect.\n");
 //				return false;
@@ -3874,9 +3882,9 @@ public class Xomw_Title {
 //
 //			$data = [];
 //
-//			$titleKey = $this.getArticleID();
+//			$titleKey = this.getArticleID();
 //
-//			if ($titleKey === 0) {
+//			if ($titleKey == 0) {
 //				return $data;
 //			}
 //
@@ -3892,7 +3900,7 @@ public class Xomw_Title {
 //			if ($res.numRows() > 0) {
 //				foreach ($res as $row) {
 //					// $data[] = Title::newFromText($wgContLang.getNsText (NS_CATEGORY).':'.$row.cl_to);
-//					$data[$wgContLang.getNsText(NS_CATEGORY) . ':' . $row.cl_to] = $this.getFullText();
+//					$data[$wgContLang.getNsText(NS_CATEGORY) . ':' . $row.cl_to] = this.getFullText();
 //				}
 //			}
 //			return $data;
@@ -3906,12 +3914,12 @@ public class Xomw_Title {
 //		*/
 //		public function getParentCategoryTree($children = []) {
 //			$stack = [];
-//			$parents = $this.getParentCategories();
+//			$parents = this.getParentCategories();
 //
 //			if ($parents) {
 //				foreach ($parents as $parent => $current) {
 //					if (array_key_exists($parent, $children)) {
-//						# Circular reference
+//						// Circular reference
 //						$stack[$parent] = [];
 //					} else {
 //						$nt = Title::newFromText($parent);
@@ -3932,11 +3940,11 @@ public class Xomw_Title {
 //		* @return array Array suitable for the $where parameter of DB::select()
 //		*/
 //		public function pageCond() {
-//			if ($this.mArticleID > 0) {
+//			if (this.mArticleID > 0) {
 //				// PK avoids secondary lookups in InnoDB, shouldn't hurt other DBs
-//				return [ 'page_id' => $this.mArticleID ];
+//				return [ 'page_id' => this.mArticleID ];
 //			} else {
-//				return [ 'page_namespace' => $this.mNamespace, 'page_title' => $this.mDbkeyform ];
+//				return [ 'page_namespace' => this.mNamespace, 'page_title' => this.mDbkeyform ];
 //			}
 //		}
 //
@@ -3951,14 +3959,14 @@ public class Xomw_Title {
 //			$db = ($flags & self::GAID_FOR_UPDATE) ? wfGetDB(DB_MASTER) : wfGetDB(DB_REPLICA);
 //			$revId = $db.selectField('revision', 'rev_id',
 //				[
-//					'rev_page' => $this.getArticleID($flags),
+//					'rev_page' => this.getArticleID($flags),
 //					'rev_id < ' . intval($revId)
 //				],
 //				__METHOD__,
 //				[ 'ORDER BY' => 'rev_id DESC' ]
 //			);
 //
-//			if ($revId === false) {
+//			if ($revId == false) {
 //				return false;
 //			} else {
 //				return intval($revId);
@@ -3976,14 +3984,14 @@ public class Xomw_Title {
 //			$db = ($flags & self::GAID_FOR_UPDATE) ? wfGetDB(DB_MASTER) : wfGetDB(DB_REPLICA);
 //			$revId = $db.selectField('revision', 'rev_id',
 //				[
-//					'rev_page' => $this.getArticleID($flags),
+//					'rev_page' => this.getArticleID($flags),
 //					'rev_id > ' . intval($revId)
 //				],
 //				__METHOD__,
 //				[ 'ORDER BY' => 'rev_id' ]
 //			);
 //
-//			if ($revId === false) {
+//			if ($revId == false) {
 //				return false;
 //			} else {
 //				return intval($revId);
@@ -3997,7 +4005,7 @@ public class Xomw_Title {
 //		* @return Revision|null If page doesn't exist
 //		*/
 //		public function getFirstRevision($flags = 0) {
-//			$pageId = $this.getArticleID($flags);
+//			$pageId = this.getArticleID($flags);
 //			if ($pageId) {
 //				$db = ($flags & self::GAID_FOR_UPDATE) ? wfGetDB(DB_MASTER) : wfGetDB(DB_REPLICA);
 //				$row = $db.selectRow('revision', Revision::selectFields(),
@@ -4019,7 +4027,7 @@ public class Xomw_Title {
 //		* @return String MW timestamp
 //		*/
 //		public function getEarliestRevTime($flags = 0) {
-//			$rev = $this.getFirstRevision($flags);
+//			$rev = this.getFirstRevision($flags);
 //			return $rev ? $rev.getTimestamp() : null;
 //		}
 //
@@ -4030,7 +4038,7 @@ public class Xomw_Title {
 //		*/
 //		public function isNewPage() {
 //			$dbr = wfGetDB(DB_REPLICA);
-//			return (boolean)$dbr.selectField('page', 'page_is_new', $this.pageCond(), __METHOD__);
+//			return (boolean)$dbr.selectField('page', 'page_is_new', this.pageCond(), __METHOD__);
 //		}
 //
 //		/**
@@ -4045,21 +4053,21 @@ public class Xomw_Title {
 //				return false;
 //			}
 //
-//			if ($this.mIsBigDeletion === null) {
+//			if (this.mIsBigDeletion == null) {
 //				$dbr = wfGetDB(DB_REPLICA);
 //
 //				$revCount = $dbr.selectRowCount(
 //					'revision',
 //					'1',
-//					[ 'rev_page' => $this.getArticleID() ],
+//					[ 'rev_page' => this.getArticleID() ],
 //					__METHOD__,
 //					[ 'LIMIT' => $wgDeleteRevisionsLimit + 1 ]
 //				);
 //
-//				$this.mIsBigDeletion = $revCount > $wgDeleteRevisionsLimit;
+//				this.mIsBigDeletion = $revCount > $wgDeleteRevisionsLimit;
 //			}
 //
-//			return $this.mIsBigDeletion;
+//			return this.mIsBigDeletion;
 //		}
 //
 //		/**
@@ -4068,17 +4076,17 @@ public class Xomw_Title {
 //		* @return int
 //		*/
 //		public function estimateRevisionCount() {
-//			if (!$this.exists()) {
+//			if (!this.exists()) {
 //				return 0;
 //			}
 //
-//			if ($this.mEstimateRevisions === null) {
+//			if (this.mEstimateRevisions == null) {
 //				$dbr = wfGetDB(DB_REPLICA);
-//				$this.mEstimateRevisions = $dbr.estimateRowCount('revision', '*',
-//					[ 'rev_page' => $this.getArticleID() ], __METHOD__);
+//				this.mEstimateRevisions = $dbr.estimateRowCount('revision', '*',
+//					[ 'rev_page' => this.getArticleID() ], __METHOD__);
 //			}
 //
-//			return $this.mEstimateRevisions;
+//			return this.mEstimateRevisions;
 //		}
 //
 //		/**
@@ -4092,21 +4100,21 @@ public class Xomw_Title {
 //		*/
 //		public function countRevisionsBetween($old, $new, $max = null) {
 //			if (!($old instanceof Revision)) {
-//				$old = Revision::newFromTitle($this, (int)$old);
+//				$old = Revision::newFromTitle(this, (int)$old);
 //			}
 //			if (!($new instanceof Revision)) {
-//				$new = Revision::newFromTitle($this, (int)$new);
+//				$new = Revision::newFromTitle(this, (int)$new);
 //			}
 //			if (!$old || !$new) {
 //				return 0; // nothing to compare
 //			}
 //			$dbr = wfGetDB(DB_REPLICA);
 //			$conds = [
-//				'rev_page' => $this.getArticleID(),
+//				'rev_page' => this.getArticleID(),
 //				'rev_timestamp > ' . $dbr.addQuotes($dbr.timestamp($old.getTimestamp())),
 //				'rev_timestamp < ' . $dbr.addQuotes($dbr.timestamp($new.getTimestamp()))
 //			];
-//			if ($max !== null) {
+//			if ($max != null) {
 //				return $dbr.selectRowCount('revision', '1',
 //					$conds,
 //					__METHOD__,
@@ -4135,13 +4143,13 @@ public class Xomw_Title {
 //		*/
 //		public function getAuthorsBetween($old, $new, $limit, $options = []) {
 //			if (!($old instanceof Revision)) {
-//				$old = Revision::newFromTitle($this, (int)$old);
+//				$old = Revision::newFromTitle(this, (int)$old);
 //			}
 //			if (!($new instanceof Revision)) {
-//				$new = Revision::newFromTitle($this, (int)$new);
+//				$new = Revision::newFromTitle(this, (int)$new);
 //			}
 //			// XXX: what if Revision objects are passed in, but they don't refer to this title?
-//			// Add $old.getPage() != $new.getPage() || $old.getPage() != $this.getArticleID()
+//			// Add $old.getPage() != $new.getPage() || $old.getPage() != this.getArticleID()
 //			// in the sanity check below?
 //			if (!$old || !$new) {
 //				return null; // nothing to compare
@@ -4161,19 +4169,19 @@ public class Xomw_Title {
 //				$new_cmp = '<=';
 //			}
 //			// No DB query needed if $old and $new are the same or successive revisions:
-//			if ($old.getId() === $new.getId()) {
-//				return ($old_cmp === '>' && $new_cmp === '<') ?
+//			if ($old.getId() == $new.getId()) {
+//				return ($old_cmp == '>' && $new_cmp == '<') ?
 //					[] :
 //					[ $old.getUserText(Revision::RAW) ];
-//			} elseif ($old.getId() === $new.getParentId()) {
-//				if ($old_cmp === '>=' && $new_cmp === '<=') {
+//			} elseif ($old.getId() == $new.getParentId()) {
+//				if ($old_cmp == '>=' && $new_cmp == '<=') {
 //					$authors[] = $old.getUserText(Revision::RAW);
 //					if ($old.getUserText(Revision::RAW) != $new.getUserText(Revision::RAW)) {
 //						$authors[] = $new.getUserText(Revision::RAW);
 //					}
-//				} elseif ($old_cmp === '>=') {
+//				} elseif ($old_cmp == '>=') {
 //					$authors[] = $old.getUserText(Revision::RAW);
-//				} elseif ($new_cmp === '<=') {
+//				} elseif ($new_cmp == '<=') {
 //					$authors[] = $new.getUserText(Revision::RAW);
 //				}
 //				return $authors;
@@ -4181,7 +4189,7 @@ public class Xomw_Title {
 //			$dbr = wfGetDB(DB_REPLICA);
 //			$res = $dbr.select('revision', 'DISTINCT rev_user_text',
 //				[
-//					'rev_page' => $this.getArticleID(),
+//					'rev_page' => this.getArticleID(),
 //					"rev_timestamp $old_cmp " . $dbr.addQuotes($dbr.timestamp($old.getTimestamp())),
 //					"rev_timestamp $new_cmp " . $dbr.addQuotes($dbr.timestamp($new.getTimestamp()))
 //				], __METHOD__,
@@ -4208,7 +4216,7 @@ public class Xomw_Title {
 //		* @return int Number of revision authors in the range; zero if not both revisions exist
 //		*/
 //		public function countAuthorsBetween($old, $new, $limit, $options = []) {
-//			$authors = $this.getAuthorsBetween($old, $new, $limit, $options);
+//			$authors = this.getAuthorsBetween($old, $new, $limit, $options);
 //			return $authors ? count($authors) : 0;
 //		}
 //
@@ -4219,10 +4227,10 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function equals(Title $title) {
-//			// Note: === is necessary for proper matching of number-like titles.
-//			return $this.getInterwiki() === $title.getInterwiki()
-//				&& $this.getNamespace() == $title.getNamespace()
-//				&& $this.getDBkey() === $title.getDBkey();
+//			// Note: == is necessary for proper matching of number-like titles.
+//			return this.getInterwiki() == $title.getInterwiki()
+//				&& this.getNamespace() == $title.getNamespace()
+//				&& this.getDBkey() == $title.getDBkey();
 //		}
 //
 //		/**
@@ -4232,9 +4240,9 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isSubpageOf(Title $title) {
-//			return $this.getInterwiki() === $title.getInterwiki()
-//				&& $this.getNamespace() == $title.getNamespace()
-//				&& strpos($this.getDBkey(), $title.getDBkey() . '/') === 0;
+//			return this.getInterwiki() == $title.getInterwiki()
+//				&& this.getNamespace() == $title.getNamespace()
+//				&& strpos(this.getDBkey(), $title.getDBkey() . '/') == 0;
 //		}
 //
 //		/**
@@ -4249,28 +4257,28 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function exists($flags = 0) {
-//			$exists = $this.getArticleID($flags) != 0;
-//			Hooks::run('TitleExists', [ $this, &$exists ]);
+//			$exists = this.getArticleID($flags) != 0;
+//			Hooks::run('TitleExists', [ this, &$exists ]);
 //			return $exists;
 //		}
-//
-//		/**
-//		* Should links to this title be shown as potentially viewable (i.e. as
-//		* "bluelinks"), even if there's no record by this title in the page
-//		* table?
-//		*
-//		* This function is semi-deprecated for public use, as well as somewhat
-//		* misleadingly named.  You probably just want to call isKnown(), which
-//		* calls this function internally.
-//		*
-//		* (ISSUE: Most of these checks are cheap, but the file existence check
-//		* can potentially be quite expensive.  Including it here fixes a lot of
-//		* existing code, but we might want to add an optional parameter to skip
-//		* it and any other expensive checks.)
-//		*
-//		* @return boolean
-//		*/
-//		public function isAlwaysKnown() {
+
+	/**
+	* Should links to this title be shown as potentially viewable (i.e. as
+	* "bluelinks"), even if there's no record by this title in the page
+	* table?
+	*
+	* This function is semi-deprecated for public use, as well as somewhat
+	* misleadingly named.  You probably just want to call isKnown(), which
+	* calls this function internally.
+	*
+	* (ISSUE: Most of these checks are cheap, but the file existence check
+	* can potentially be quite expensive.  Including it here fixes a lot of
+	* existing code, but we might want to add an optional parameter to skip
+	* it and any other expensive checks.)
+	*
+	* @return boolean
+	*/
+	public boolean isAlwaysKnown() {
 //			$isKnown = null;
 //
 //			/**
@@ -4283,34 +4291,35 @@ public class Xomw_Title {
 //			* @param Title $title
 //			* @param boolean|null $isKnown
 //			*/
-//			Hooks::run('TitleIsAlwaysKnown', [ $this, &$isKnown ]);
+//			Hooks::run('TitleIsAlwaysKnown', [ this, &$isKnown ]);
 //
 //			if (!is_null($isKnown)) {
 //				return $isKnown;
 //			}
 //
-//			if ($this.isExternal()) {
+//			if (this.isExternal()) {
 //				return true;  // any interwiki link might be viewable, for all we know
 //			}
 //
-//			switch ($this.mNamespace) {
+//			switch (this.mNamespace) {
 //				case NS_MEDIA:
 //				case NS_FILE:
 //					// file exists, possibly in a foreign repo
-//					return (boolean)wfFindFile($this);
+//					return (boolean)wfFindFile(this);
 //				case NS_SPECIAL:
 //					// valid special page
-//					return SpecialPageFactory::exists($this.getDBkey());
+//					return SpecialPageFactory::exists(this.getDBkey());
 //				case NS_MAIN:
 //					// selflink, possibly with fragment
-//					return $this.mDbkeyform == '';
+//					return this.mDbkeyform == Bry_.Empty;
 //				case NS_MEDIAWIKI:
 //					// known system message
-//					return $this.hasSourceText() !== false;
+//					return this.hasSourceText() != false;
 //				default:
 //					return false;
 //			}
-//		}
+		return false;
+	}
 //
 //		/**
 //		* Does this title refer to a page that can (or might) be meaningfully
@@ -4324,7 +4333,7 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function isKnown() {
-//			return $this.isAlwaysKnown() || $this.exists();
+//			return this.isAlwaysKnown() || this.exists();
 //		}
 //
 //		/**
@@ -4333,18 +4342,18 @@ public class Xomw_Title {
 //		* @return boolean
 //		*/
 //		public function hasSourceText() {
-//			if ($this.exists()) {
+//			if (this.exists()) {
 //				return true;
 //			}
 //
-//			if ($this.mNamespace == NS_MEDIAWIKI) {
+//			if (this.mNamespace == NS_MEDIAWIKI) {
 //				// If the page doesn't exist but is a known system message, default
 //				// message content will be displayed, same for language subpages-
 //				// Use always content language to avoid loading hundreds of languages
 //				// to get the link color.
 //				global $wgContLang;
 //				list($name,) = MessageCache::singleton().figureMessage(
-//					$wgContLang.lcfirst($this.getText())
+//					$wgContLang.lcfirst(this.getText())
 //				);
 //				$message = wfMessage($name).inLanguage($wgContLang).useDatabase(false);
 //				return $message.exists();
@@ -4361,12 +4370,12 @@ public class Xomw_Title {
 //		public function getDefaultMessageText() {
 //			global $wgContLang;
 //
-//			if ($this.getNamespace() != NS_MEDIAWIKI) { // Just in case
+//			if (this.getNamespace() != NS_MEDIAWIKI) { // Just in case
 //				return false;
 //			}
 //
 //			list($name, $lang) = MessageCache::singleton().figureMessage(
-//				$wgContLang.lcfirst($this.getText())
+//				$wgContLang.lcfirst(this.getText())
 //			);
 //			$message = wfMessage($name).inLanguage($lang).useDatabase(false);
 //
@@ -4386,16 +4395,16 @@ public class Xomw_Title {
 //		public function invalidateCache($purgeTime = null) {
 //			if (wfReadOnly()) {
 //				return false;
-//			} elseif ($this.mArticleID === 0) {
+//			} elseif (this.mArticleID == 0) {
 //				return true; // avoid gap locking if we know it's not there
 //			}
 //
 //			$dbw = wfGetDB(DB_MASTER);
 //			$dbw.onTransactionPreCommitOrIdle(function () {
-//				ResourceLoaderWikiModule::invalidateModuleCache($this, null, null, wfWikiID());
+//				ResourceLoaderWikiModule::invalidateModuleCache(this, null, null, wfWikiID());
 //			});
 //
-//			$conds = $this.pageCond();
+//			$conds = this.pageCond();
 //			DeferredUpdates::addUpdate(
 //				new AutoCommitUpdate(
 //					$dbw,
@@ -4408,7 +4417,7 @@ public class Xomw_Title {
 //							$conds + [ 'page_touched < ' . $dbw.addQuotes($dbTimestamp) ],
 //							$fname
 //						);
-//						MediaWikiServices::getInstance().getLinkCache().invalidateTitle($this);
+//						MediaWikiServices::getInstance().getLinkCache().invalidateTitle(this);
 //					}
 //				),
 //				DeferredUpdates::PRESEND
@@ -4423,9 +4432,9 @@ public class Xomw_Title {
 //		* on the number of links. Typically called on create and delete.
 //		*/
 //		public function touchLinks() {
-//			DeferredUpdates::addUpdate(new HTMLCacheUpdate($this, 'pagelinks'));
-//			if ($this.getNamespace() == NS_CATEGORY) {
-//				DeferredUpdates::addUpdate(new HTMLCacheUpdate($this, 'categorylinks'));
+//			DeferredUpdates::addUpdate(new HTMLCacheUpdate(this, 'pagelinks'));
+//			if (this.getNamespace() == NS_CATEGORY) {
+//				DeferredUpdates::addUpdate(new HTMLCacheUpdate(this, 'categorylinks'));
 //			}
 //		}
 //
@@ -4436,10 +4445,10 @@ public class Xomw_Title {
 //		* @return String|false Last-touched timestamp
 //		*/
 //		public function getTouched($db = null) {
-//			if ($db === null) {
+//			if ($db == null) {
 //				$db = wfGetDB(DB_REPLICA);
 //			}
-//			$touched = $db.selectField('page', 'page_touched', $this.pageCond(), __METHOD__);
+//			$touched = $db.selectField('page', 'page_touched', this.pageCond(), __METHOD__);
 //			return $touched;
 //		}
 //
@@ -4462,23 +4471,23 @@ public class Xomw_Title {
 //				return false;
 //			}
 //			// avoid isset here, as it'll return false for null entries
-//			if (array_key_exists($uid, $this.mNotificationTimestamp)) {
-//				return $this.mNotificationTimestamp[$uid];
+//			if (array_key_exists($uid, this.mNotificationTimestamp)) {
+//				return this.mNotificationTimestamp[$uid];
 //			}
 //			// Don't cache too much!
-//			if (count($this.mNotificationTimestamp) >= self::CACHE_MAX) {
-//				$this.mNotificationTimestamp = [];
+//			if (count(this.mNotificationTimestamp) >= self::CACHE_MAX) {
+//				this.mNotificationTimestamp = [];
 //			}
 //
 //			$store = MediaWikiServices::getInstance().getWatchedItemStore();
-//			$watchedItem = $store.getWatchedItem($user, $this);
+//			$watchedItem = $store.getWatchedItem($user, this);
 //			if ($watchedItem) {
-//				$this.mNotificationTimestamp[$uid] = $watchedItem.getNotificationTimestamp();
+//				this.mNotificationTimestamp[$uid] = $watchedItem.getNotificationTimestamp();
 //			} else {
-//				$this.mNotificationTimestamp[$uid] = false;
+//				this.mNotificationTimestamp[$uid] = false;
 //			}
 //
-//			return $this.mNotificationTimestamp[$uid];
+//			return this.mNotificationTimestamp[$uid];
 //		}
 //
 //		/**
@@ -4490,19 +4499,19 @@ public class Xomw_Title {
 //		public function getNamespaceKey($prepend = 'nstab-') {
 //			global $wgContLang;
 //			// Gets the subject namespace if this title
-//			$namespace = MWNamespace::getSubject($this.getNamespace());
+//			$namespace = MWNamespace::getSubject(this.getNamespace());
 //			// Checks if canonical namespace name exists for namespace
-//			if (MWNamespace::exists($this.getNamespace())) {
+//			if (MWNamespace::exists(this.getNamespace())) {
 //				// Uses canonical namespace name
 //				$namespaceKey = MWNamespace::getCanonicalName($namespace);
 //			} else {
 //				// Uses text of namespace
-//				$namespaceKey = $this.getSubjectNsText();
+//				$namespaceKey = this.getSubjectNsText();
 //			}
 //			// Makes namespace key lowercase
 //			$namespaceKey = $wgContLang.lc($namespaceKey);
 //			// Uses main
-//			if ($namespaceKey == '') {
+//			if ($namespaceKey == Bry_.Empty) {
 //				$namespaceKey = 'main';
 //			}
 //			// Changes file to image for backwards compatibility
@@ -4523,14 +4532,14 @@ public class Xomw_Title {
 //
 //			$dbr = wfGetDB(DB_REPLICA);
 //			$where = [
-//				'rd_namespace' => $this.getNamespace(),
-//				'rd_title' => $this.getDBkey(),
+//				'rd_namespace' => this.getNamespace(),
+//				'rd_title' => this.getDBkey(),
 //				'rd_from = page_id'
 //			];
-//			if ($this.isExternal()) {
-//				$where['rd_interwiki'] = $this.getInterwiki();
+//			if (this.isExternal()) {
+//				$where['rd_interwiki'] = this.getInterwiki();
 //			} else {
-//				$where[] = 'rd_interwiki = ' . $dbr.addQuotes('') . ' OR rd_interwiki IS NULL';
+//				$where[] = 'rd_interwiki = ' . $dbr.addQuotes(Bry_.Empty) . ' OR rd_interwiki IS NULL';
 //			}
 //			if (!is_null($ns)) {
 //				$where['page_namespace'] = $ns;
@@ -4557,14 +4566,14 @@ public class Xomw_Title {
 //		public function isValidRedirectTarget() {
 //			global $wgInvalidRedirectTargets;
 //
-//			if ($this.isSpecialPage()) {
+//			if (this.isSpecialPage()) {
 //				// invalid redirect targets are stored in a global array, but explicitly disallow Userlogout here
-//				if ($this.isSpecial('Userlogout')) {
+//				if (this.isSpecial('Userlogout')) {
 //					return false;
 //				}
 //
 //				foreach ($wgInvalidRedirectTargets as $target) {
-//					if ($this.isSpecial($target)) {
+//					if (this.isSpecial($target)) {
 //						return false;
 //					}
 //				}
@@ -4579,7 +4588,7 @@ public class Xomw_Title {
 //		* @return BacklinkCache
 //		*/
 //		public function getBacklinkCache() {
-//			return BacklinkCache::get($this);
+//			return BacklinkCache::get(this);
 //		}
 //
 //		/**
@@ -4594,7 +4603,7 @@ public class Xomw_Title {
 //				? MWNamespace::getContentNamespaces()
 //				: $wgExemptFromUserRobotsControl;
 //
-//			return !in_array($this.mNamespace, $bannedNamespaces);
+//			return !in_array(this.mNamespace, $bannedNamespaces);
 //		}
 //
 //		/**
@@ -4607,19 +4616,19 @@ public class Xomw_Title {
 //		*   prefix.
 //		* @return String
 //		*/
-//		public function getCategorySortkey($prefix = '') {
-//			$unprefixed = $this.getText();
+//		public function getCategorySortkey($prefix = Bry_.Empty) {
+//			$unprefixed = this.getText();
 //
 //			// Anything that uses this hook should only depend
 //			// on the Title Object passed in, and should probably
 //			// tell the users to run updateCollations.php --force
 //			// in order to re-sort existing category relations.
-//			Hooks::run('GetDefaultSortkey', [ $this, &$unprefixed ]);
-//			if ($prefix !== '') {
-//				# Separate with a line feed, so the unprefixed part is only used as
-//				# a tiebreaker when two pages have the exact same prefix.
-//				# In UCA, tab is the only character that can sort above LF
-//				# so we strip both of them from the original prefix.
+//			Hooks::run('GetDefaultSortkey', [ this, &$unprefixed ]);
+//			if ($prefix != Bry_.Empty) {
+//				// Separate with a line feed, so the unprefixed part is only used as
+//				// a tiebreaker when two pages have the exact same prefix.
+//				// In UCA, tab is the only character that can sort above LF
+//				// so we strip both of them from the original prefix.
 //				$prefix = strtr($prefix, "\n\t", '  ');
 //				return "$prefix\n$unprefixed";
 //			}
@@ -4638,13 +4647,13 @@ public class Xomw_Title {
 //
 //			// check, if the page language could be saved in the database, and if so and
 //			// the value is not requested already, lookup the page language using LinkCache
-//			if ($wgPageLanguageUseDB && $this.mDbPageLanguage === false) {
+//			if ($wgPageLanguageUseDB && this.mDbPageLanguage == false) {
 //				$linkCache = LinkCache::singleton();
-//				$linkCache.addLinkObj($this);
-//				$this.mDbPageLanguage = $linkCache.getGoodLinkFieldObj($this, 'lang');
+//				$linkCache.addLinkObj(this);
+//				this.mDbPageLanguage = $linkCache.getGoodLinkFieldObj(this, 'lang');
 //			}
 //
-//			return $this.mDbPageLanguage;
+//			return this.mDbPageLanguage;
 //		}
 //
 //		/**
@@ -4657,29 +4666,29 @@ public class Xomw_Title {
 //		*/
 //		public function getPageLanguage() {
 //			global $wgLang, $wgLanguageCode;
-//			if ($this.isSpecialPage()) {
+//			if (this.isSpecialPage()) {
 //				// special pages are in the user language
 //				return $wgLang;
 //			}
 //
 //			// Checking if DB language is set
-//			$dbPageLanguage = $this.getDbPageLanguageCode();
+//			$dbPageLanguage = this.getDbPageLanguageCode();
 //			if ($dbPageLanguage) {
 //				return wfGetLangObj($dbPageLanguage);
 //			}
 //
-//			if (!$this.mPageLanguage || $this.mPageLanguage[1] !== $wgLanguageCode) {
+//			if (!this.mPageLanguage || this.mPageLanguage[1] != $wgLanguageCode) {
 //				// Note that this may depend on user settings, so the cache should
 //				// be only per-request.
 //				// NOTE: ContentHandler::getPageLanguage() may need to load the
 //				// content to determine the page language!
 //				// Checking $wgLanguageCode hasn't changed for the benefit of unit
 //				// tests.
-//				$contentHandler = ContentHandler::getForTitle($this);
-//				$langObj = $contentHandler.getPageLanguage($this);
-//				$this.mPageLanguage = [ $langObj.getCode(), $wgLanguageCode ];
+//				$contentHandler = ContentHandler::getForTitle(this);
+//				$langObj = $contentHandler.getPageLanguage(this);
+//				this.mPageLanguage = [ $langObj.getCode(), $wgLanguageCode ];
 //			} else {
-//				$langObj = wfGetLangObj($this.mPageLanguage[0]);
+//				$langObj = wfGetLangObj(this.mPageLanguage[0]);
 //			}
 //
 //			return $langObj;
@@ -4696,11 +4705,11 @@ public class Xomw_Title {
 //		public function getPageViewLanguage() {
 //			global $wgLang;
 //
-//			if ($this.isSpecialPage()) {
+//			if (this.isSpecialPage()) {
 //				// If the user chooses a variant, the content is actually
 //				// in a language whose code is the variant code.
 //				$variant = $wgLang.getPreferredVariant();
-//				if ($wgLang.getCode() !== $variant) {
+//				if ($wgLang.getCode() != $variant) {
 //					return Language::factory($variant);
 //				}
 //
@@ -4708,11 +4717,11 @@ public class Xomw_Title {
 //			}
 //
 //			// Checking if DB language is set
-//			$dbPageLanguage = $this.getDbPageLanguageCode();
+//			$dbPageLanguage = this.getDbPageLanguageCode();
 //			if ($dbPageLanguage) {
 //				$pageLang = wfGetLangObj($dbPageLanguage);
 //				$variant = $pageLang.getPreferredVariant();
-//				if ($pageLang.getCode() !== $variant) {
+//				if ($pageLang.getCode() != $variant) {
 //					$pageLang = Language::factory($variant);
 //				}
 //
@@ -4722,8 +4731,8 @@ public class Xomw_Title {
 //			// @note Can't be cached persistently, depends on user settings.
 //			// @note ContentHandler::getPageViewLanguage() may need to load the
 //			//   content to determine the page language!
-//			$contentHandler = ContentHandler::getForTitle($this);
-//			$pageLang = $contentHandler.getPageViewLanguage($this);
+//			$contentHandler = ContentHandler::getForTitle(this);
+//			$pageLang = $contentHandler.getPageViewLanguage(this);
 //			return $pageLang;
 //		}
 //
@@ -4741,12 +4750,12 @@ public class Xomw_Title {
 //			$notices = [];
 //
 //			// Optional notice for the entire namespace
-//			$editnotice_ns = 'editnotice-' . $this.getNamespace();
+//			$editnotice_ns = 'editnotice-' . this.getNamespace();
 //			$msg = wfMessage($editnotice_ns);
 //			if ($msg.exists()) {
 //				$html = $msg.parseAsBlock();
 //				// Edit notices may have complex logic, but output nothing (T91715)
-//				if (trim($html) !== '') {
+//				if (trim($html) != Bry_.Empty) {
 //					$notices[$editnotice_ns] = Html::rawElement(
 //						'div',
 //						[ 'class' => [
@@ -4759,16 +4768,16 @@ public class Xomw_Title {
 //				}
 //			}
 //
-//			if (MWNamespace::hasSubpages($this.getNamespace())) {
+//			if (MWNamespace::hasSubpages(this.getNamespace())) {
 //				// Optional notice for page itself and any parent page
-//				$parts = explode('/', $this.getDBkey());
+//				$parts = explode('/', this.getDBkey());
 //				$editnotice_base = $editnotice_ns;
 //				while (count($parts) > 0) {
 //					$editnotice_base .= '-' . array_shift($parts);
 //					$msg = wfMessage($editnotice_base);
 //					if ($msg.exists()) {
 //						$html = $msg.parseAsBlock();
-//						if (trim($html) !== '') {
+//						if (trim($html) != Bry_.Empty) {
 //							$notices[$editnotice_base] = Html::rawElement(
 //								'div',
 //								[ 'class' => [
@@ -4783,11 +4792,11 @@ public class Xomw_Title {
 //				}
 //			} else {
 //				// Even if there are no subpages in namespace, we still don't want "/" in MediaWiki message keys
-//				$editnoticeText = $editnotice_ns . '-' . strtr($this.getDBkey(), '/', '-');
+//				$editnoticeText = $editnotice_ns . '-' . strtr(this.getDBkey(), '/', '-');
 //				$msg = wfMessage($editnoticeText);
 //				if ($msg.exists()) {
 //					$html = $msg.parseAsBlock();
-//					if (trim($html) !== '') {
+//					if (trim($html) != Bry_.Empty) {
 //						$notices[$editnoticeText] = Html::rawElement(
 //							'div',
 //							[ 'class' => [
@@ -4801,7 +4810,7 @@ public class Xomw_Title {
 //				}
 //			}
 //
-//			Hooks::run('TitleGetEditNotices', [ $this, $oldid, &$notices ]);
+//			Hooks::run('TitleGetEditNotices', [ this, $oldid, &$notices ]);
 //			return $notices;
 //		}
 //
@@ -4821,9 +4830,9 @@ public class Xomw_Title {
 //		}
 //
 //		public function __wakeup() {
-//			$this.mArticleID = ($this.mNamespace >= 0) ? -1 : 0;
-//			$this.mUrlform = wfUrlencode($this.mDbkeyform);
-//			$this.mTextform = strtr($this.mDbkeyform, '_', ' ');
+//			this.mArticleID = (this.mNamespace >= 0) ? -1 : 0;
+//			this.mUrlform = wfUrlencode(this.mDbkeyform);
+//			this.mTextform = strtr(this.mDbkeyform, '_', ' ');
 //		}
 	private static final    byte[] Bry__wgArticlePath__wiki = Bry_.new_a7("/wiki/");
 }

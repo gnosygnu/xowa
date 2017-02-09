@@ -253,6 +253,8 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 				// Strip off leading ':'
 				link = Bry_.Mid(link, 1);
 			}
+			// $nt = is_string( $unstrip ) ? Title::newFromText( $unstrip ) : null;
+			// Xomw_Title nt2 = Xomw_Title.newFromText(link);
 			Xoa_ttl nt = wiki.Ttl_parse(link);
 
 			// Make subpage if necessary
