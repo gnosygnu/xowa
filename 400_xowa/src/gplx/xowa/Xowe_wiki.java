@@ -87,7 +87,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xoa_ttl					Ttl_parse(int ns_id, byte[] ttl)					{return Xoa_ttl.Parse(this, ns_id, ttl);}
 	public boolean						Type_is_edit() {return Bool_.Y;}
 	public Xoa_app					App() {return app;}
-	public Xol_lang_itm				Lang() {return lang;} private final    Xol_lang_itm lang;
+	public Xol_lang_itm				Lang() {return lang;} private Xol_lang_itm lang;
 	public Xol_case_mgr				Case_mgr() {return lang.Case_mgr();}
 	public byte[]					Domain_bry() {return domain_bry;} private final    byte[] domain_bry; 
 	public String					Domain_str() {return domain_str;} private final    String domain_str;
@@ -191,12 +191,17 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 			try {
 				byte[] cfg_domain_bry = db_mgr_sql.Core_data_mgr().Db__core().Tbl__cfg().Select_bry("xowa.bldr.session", "wiki_domain");
 				if (!Bry_.Eq(cfg_domain_bry, domain_bry)) {
+					// set wikidata vars
 					Xow_domain_itm cfg_domain_itm = Xow_domain_itm_.parse(cfg_domain_bry);
 					this.wdata_wiki_tid	= cfg_domain_itm.Domain_type_id();
 					this.wdata_wiki_lang = cfg_domain_itm.Lang_orig_key();			
 					Bry_bfr bfr = Bry_bfr_.New();
 					Xow_abrv_wm_.To_abrv(bfr, wdata_wiki_lang, Int_obj_ref.New(wdata_wiki_tid));
 					this.wdata_wiki_abrv = bfr.To_bry_and_clear();
+
+					// set lang; handles "German Wikipedia" for "de.wikipedia.org"
+					this.lang = app.Lang_mgr().Get_by_or_load(cfg_domain_itm.Lang_actl_key());
+					this.msg_mgr.Lang_(lang);
 				}
 			} catch (Exception e) {
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "db.init: failed to get domain from config; err=~{0}", Err_.Message_gplx_log(e));
