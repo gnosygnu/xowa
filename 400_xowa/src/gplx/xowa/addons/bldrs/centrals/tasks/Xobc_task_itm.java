@@ -39,6 +39,7 @@ public class Xobc_task_itm implements gplx.CompareAble {
 	public void				Task_status_(byte v) {task_status = v;}		// called when task moves from init -> working -> suspended -> done
 	public void				Task_seqn_(int v) {this.task_seqn = v;}		// called when task is init'd from db, or added to list
 	public int				compareTo(Object obj) {Xobc_task_itm comp = (Xobc_task_itm)obj; return Int_.Compare(task_seqn, comp.task_seqn);}
+
 	public Gfobj_nde Save_to(Gfobj_nde nde) {
 		nde.Add_int	("task_id"				, task_id);
 		nde.Add_str	("task_name"			, task_name);

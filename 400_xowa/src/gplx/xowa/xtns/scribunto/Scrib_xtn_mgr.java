@@ -65,5 +65,4 @@ public class Scrib_xtn_mgr extends Xox_mgr_base {
 	, Cfg__lua__timeout_polling		= "xowa.addon.scribunto.lua.timeout_polling"
 	, Cfg__lua__timeout_busy_wait	= "xowa.addon.scribunto.lua.timeout_busy_wait"
 	;
-
 }

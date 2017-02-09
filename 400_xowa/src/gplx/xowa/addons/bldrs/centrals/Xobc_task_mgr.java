@@ -30,6 +30,7 @@ public class Xobc_task_mgr implements Xog_json_wkr {
 		this.todo_mgr = new Xobc_task_regy__todo(this);
 		this.done_mgr = new Xobc_task_regy__done(this);
 		this.step_mgr = new Xobc_step_factory(this, data_db, app.Fsys_mgr().Wiki_dir());
+		this.skip_mgr = new Xobc_skip_mgr(this, app);
 		this.ary = new Xobc_task_regy__base[] {work_mgr, todo_mgr, done_mgr};
 		this.rate_mgr = Xobc_cmd__base.New_rate_mgr();
 	}
@@ -44,6 +45,7 @@ public class Xobc_task_mgr implements Xog_json_wkr {
 	public Gfo_rate_mgr					Rate_mgr()	{return rate_mgr;}	private final    Gfo_rate_mgr rate_mgr;
 	public Xobc_step_factory			Step_mgr()	{return step_mgr;}	private final    Xobc_step_factory step_mgr;
 	public Xobc_filter_mgr				Filter_mgr() {return filter_mgr;} private final    Xobc_filter_mgr filter_mgr = new Xobc_filter_mgr();
+	public Xobc_skip_mgr				Skip_mgr()	{return skip_mgr;}	private final    Xobc_skip_mgr skip_mgr;
 	public Xobc_lang_mgr				Lang_mgr() {return lang_mgr;} private final    Xobc_lang_mgr lang_mgr = new Xobc_lang_mgr();
 	public void Send_json(String func, Gfobj_nde data) {cbk_mgr.Send_json(cbk_trg, func, data);}
 	public Xobc_task_mgr Load_or_init() {

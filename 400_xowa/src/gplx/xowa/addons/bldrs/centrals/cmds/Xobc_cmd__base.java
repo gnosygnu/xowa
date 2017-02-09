@@ -68,7 +68,7 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 				case Gfo_prog_ui_.Status__fail:			task_mgr.Work_mgr().On_fail(this, this.Cmd_fail_resumes(), cmd_exec_err); break;
 				case Gfo_prog_ui_.Status__working:
 					this.Prog_notify_and_chk_if_suspended(data_end, data_end);	// fire one more time for 100%; note that 100% may not fire due to timer logic below
-					task_mgr.Work_mgr().On_done(this); 
+					task_mgr.Work_mgr().On_done(this, true); 
 					break;
 			}
 		} catch (Exception e) {

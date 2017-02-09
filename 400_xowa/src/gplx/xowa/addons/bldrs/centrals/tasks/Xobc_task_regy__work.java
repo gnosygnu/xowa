@@ -19,6 +19,7 @@ package gplx.xowa.addons.bldrs.centrals.tasks; import gplx.*; import gplx.xowa.*
 import gplx.core.gfobjs.*; import gplx.core.progs.*; import gplx.core.threads.*;	
 import gplx.xowa.drds.powers.*;
 import gplx.xowa.addons.bldrs.centrals.steps.*; import gplx.xowa.addons.bldrs.centrals.cmds.*;
+import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*;
 public class Xobc_task_regy__work extends Xobc_task_regy__base {
 	private final    Thread_adp_mgr thread_mgr = new Thread_adp_mgr(1000, 5000);
 	private final    Xobc_cmd_ctx ctx;
@@ -47,6 +48,12 @@ public class Xobc_task_regy__work extends Xobc_task_regy__base {
 		}
 	}
 	public void Run_task(Xobc_task_itm task, Xobc_cmd_itm cmd) {
+		// if task marked for skip, launch skip-cmd on separate thread and exit;
+		if (task_mgr.Skip_mgr().Should_skip(task_mgr.Data_db().Tbl__import_step().Select_one(cmd.Step_id()))) {
+			thread_mgr.Add("skip_" + cmd.Cmd_uid(), Thread_adp_.Start_by_key("skip_xobc: " + cmd.Cmd_name(), new Xobc_task_skip(this, cmd), ""));
+			return;
+		}
+
 		task.Task_status_(gplx.core.progs.Gfo_prog_ui_.Status__working);
 		task_mgr.Send_json("xo.bldr.work.prog__start__recv", task.Save_to(Gfobj_nde.New()));
 		thread_mgr.Add(cmd.Cmd_uid(), Thread_adp_.Start_by_val("xobc: " + cmd.Cmd_name(), cmd, cmd, Xobc_cmd__base.Invk__exec, ctx));
@@ -85,12 +92,13 @@ public class Xobc_task_regy__work extends Xobc_task_regy__base {
 		task_mgr.Send_json("xo.bldr.work.prog__start__recv", task.Save_to(Gfobj_nde.New()));
 		thread_mgr.Add(cmd.Cmd_uid(), Thread_adp_.Start_by_val("xobc: " + cmd.Cmd_name(), cmd, cmd, Xobc_cmd__base.Invk__exec, ctx));
 	}
-	public void On_done(Xobc_cmd_itm cmd) {
+	public void On_done(Xobc_cmd_itm cmd, boolean notify) {
 		Xobc_task_itm task = this.Get_by(cmd.Task_id());
 		Xobc_step_itm step = task.Step();
 		boolean step_is_done = step.Cmd_is_last();
 		boolean task_is_done = step_is_done && task.Step_is_last();
-		task_mgr.Send_json("xo.bldr.work.prog__done__recv", Gfobj_nde.New().Add_int("task_id", task.Task_id()).Add_bool("task_is_done", task_is_done));
+		if (notify)
+			task_mgr.Send_json("xo.bldr.work.prog__done__recv", Gfobj_nde.New().Add_int("task_id", task.Task_id()).Add_bool("task_is_done", task_is_done));
 
 		// step.done -> task.done || step.next
 		if (step_is_done) {
@@ -139,5 +147,17 @@ public class Xobc_task_regy__work extends Xobc_task_regy__base {
 	}
 	public void On_stat(int task_id, String msg) {
 		task_mgr.Send_json("xo.bldr.work.prog__stat__recv", Gfobj_nde.New().Add_int("task_id", task_id).Add_str("msg", msg));
+	}
+}
+class Xobc_task_skip implements Gfo_invk {
+	private final    Xobc_task_regy__work work_regy;
+	private final    Xobc_cmd_itm cmd;
+	public Xobc_task_skip(Xobc_task_regy__work work_regy, Xobc_cmd_itm cmd) {
+		this.work_regy = work_regy;
+		this.cmd = cmd;
+	}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		work_regy.On_done(cmd, false);
+		return Gfo_invk_.Rv_handled;
 	}
 }
