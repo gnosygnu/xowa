@@ -61,6 +61,8 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		, "xowa.gui.shortcuts.xowa.nav.system_data.cfg_app-1"
 		, "xowa.gui.shortcuts.xowa.nav.system_data.cfg_lang-1"
 		, "xowa.gui.shortcuts.xowa.nav.system_data.usr_history-1"
+		, "xowa.gui.shortcuts.xowa.nav.personal.item-1"
+		, "xowa.gui.shortcuts.xowa.nav.personal.list-1"
 		, "xowa.gui.shortcuts.xowa.gui.font.increase-1"
 		, "xowa.gui.shortcuts.xowa.gui.font.decrease-1"
 		, "xowa.gui.shortcuts.xowa.gui.font.reset-1"
@@ -238,6 +240,8 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		Init_itm(Xog_cmd_itm_.Key_nav_setup_import_from_script					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_setup_maintenance							, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_setup_download							, Xog_bnd_box_.Tid_browser				, "");
+		Init_itm(Xog_cmd_itm_.Key_nav_personal_item								, Xog_bnd_box_.Tid_browser				, "");
+		Init_itm(Xog_cmd_itm_.Key_nav_personal_list								, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_system_data_log_session					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_system_data_cfg_app						, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_system_data_cfg_lang						, Xog_bnd_box_.Tid_browser				, "");

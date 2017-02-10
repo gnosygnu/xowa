@@ -189,7 +189,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 
 			// FOLDER.RENAME: handle renamed folders; EX:"/wiki/en.wikipedia.org-2016-12" DATE:2017-02-01
 			try {
-				byte[] cfg_domain_bry = db_mgr_sql.Core_data_mgr().Db__core().Tbl__cfg().Select_bry("xowa.bldr.session", "wiki_domain");
+				byte[] cfg_domain_bry = db_mgr_sql.Core_data_mgr().Db__core().Tbl__cfg().Select_bry_or("xowa.bldr.session", "wiki_domain", domain_bry);	// NOTE: or is "wiki.domain" for user_wikis
 				if (!Bry_.Eq(cfg_domain_bry, domain_bry)) {
 					// set wikidata vars
 					Xow_domain_itm cfg_domain_itm = Xow_domain_itm_.parse(cfg_domain_bry);

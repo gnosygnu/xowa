@@ -15,14 +15,14 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.users.wikis.regys.specials.itms; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.users.*; import gplx.xowa.addons.users.wikis.*; import gplx.xowa.addons.users.wikis.regys.*; import gplx.xowa.addons.users.wikis.regys.specials.*;
+package gplx.xowa.addons.wikis.directorys.specials.items; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*;
 import gplx.langs.jsons.*;
-import gplx.xowa.addons.users.wikis.regys.dbs.*;
+import gplx.xowa.addons.wikis.directorys.dbs.*;
 import gplx.xowa.htmls.bridges.*;
-public class Xouw_itm_bridge implements Bridge_cmd_itm {
-	private Xouw_itm_mgr itm_mgr;
+public class Xowdir_item_bridge implements Bridge_cmd_itm {
+	private Xowdir_item_mgr itm_mgr;
 	public void Init_by_app(Xoa_app app) {
-		this.itm_mgr = new Xouw_itm_mgr(app);
+		this.itm_mgr = new Xowdir_item_mgr(app);
 	}
 	public String Exec(Json_nde data) {
 		byte proc_id = proc_hash.Get_as_byte_or(data.Get_as_bry_or(Bridge_cmd_mgr.Msg__proc, null), Byte_ascii.Max_7_bit);
@@ -41,6 +41,6 @@ public class Xouw_itm_bridge implements Bridge_cmd_itm {
 	.Add_str_byte("delete"						, Proc__delete)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("user.wiki.itm.exec");
-        public static final    Xouw_itm_bridge Prototype = new Xouw_itm_bridge(); Xouw_itm_bridge() {}
+	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("wiki.directory.item");
+        public static final    Xowdir_item_bridge Prototype = new Xowdir_item_bridge(); Xowdir_item_bridge() {}
 }

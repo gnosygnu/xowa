@@ -29,4 +29,7 @@ public class Xog_cbk_mgr {	// INSTANCE:app
 			wkr.Send_json(trg, func, data);
 		}
 	}
+	public void Send_redirect(Xog_cbk_trg trg, String url) {
+		this.Send_json(trg, "xo.server.redirect__recv", gplx.core.gfobjs.Gfobj_nde.New().Add_str("url", url));
+	}
 }

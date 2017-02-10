@@ -220,6 +220,7 @@ public class Swt_kit implements Gfui_kit {
 		return rv;
 	}
 	public Gfui_dlg_file New_dlg_file(byte type, String msg) {return new Swt_dlg_file(type, shell).Init_msg_(msg);}
+	public Gfui_dlg_dir New_dlg_dir(String msg) {return new Swt_dlg_dir(shell).Init_msg_(msg);}
 	public Gfui_dlg_msg New_dlg_msg(String msg) {return new Swt_dlg_msg(shell).Init_msg_(msg);}
 	public ImageAdp New_img_load(Io_url url) {
 		if (url == Io_url_.Empty) return ImageAdp_.Null;
@@ -264,6 +265,7 @@ public class Swt_kit implements Gfui_kit {
 			}
 		}
 		else if	(String_.Eq(k, Invk_ask_file)) return this.New_dlg_file(Gfui_kit_.File_dlg_type_open, m.Args_getAt(0).Val_to_str_or_empty()).Ask();
+		else if	(String_.Eq(k, "ask_dir")) return this.New_dlg_dir(m.Args_getAt(0).Val_to_str_or_empty()).Ask();
 		else if (String_.Eq(k, Invk_shell_close)) shell.close();
 		return this;
 	}

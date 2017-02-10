@@ -175,7 +175,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 
 		// init user wiki
 		user.Wiki().Init_assert();	// NOTE: must assert wiki and load langs first, else will be asserted during Portal_mgr().Init(), which will cause IndexOutOfBounds; DATE:2014-10-04
-		gplx.xowa.addons.users.wikis.regys.Xou_regy_addon.Init(this);
+		gplx.xowa.addons.wikis.directorys.Xowdir_addon.Init(this);
 	}
 	public byte Stage() {return stage;} public Xoae_app Stage_(byte v) {stage = v; return this;} private byte stage = Xoa_stage_.Tid_ctor;
 	public boolean Term_cbk() {

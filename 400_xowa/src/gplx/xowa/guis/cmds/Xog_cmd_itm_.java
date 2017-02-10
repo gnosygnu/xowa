@@ -50,6 +50,9 @@ public class Xog_cmd_itm_ {
 	, Key_nav_system_data_cfg_lang								= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.system_data.cfg_lang"					, "Special:XowaSystemData?type=cfg_lang")
 	, Key_nav_system_data_usr_history							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.system_data.usr_history"				, "Special:XowaSystemData?type=usr_history")
 
+	, Key_nav_personal_item										= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.personal.item"							, "Special:XowaWikiItem")
+	, Key_nav_personal_list										= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.personal.list"							, "Special:XowaWikiDirectory")
+
 	, Key_gui_font_increase										= new_dflt_(Xog_ctg_itm_.Tid_font			, "xowa.gui.font.increase")
 	, Key_gui_font_decrease										= new_dflt_(Xog_ctg_itm_.Tid_font			, "xowa.gui.font.decrease")
 	, Key_gui_font_reset										= new_dflt_(Xog_ctg_itm_.Tid_font			, "xowa.gui.font.reset")

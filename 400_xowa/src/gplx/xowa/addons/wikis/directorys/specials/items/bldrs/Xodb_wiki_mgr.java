@@ -15,18 +15,16 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.users.wikis.regys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.users.*; import gplx.xowa.addons.users.wikis.*; import gplx.xowa.addons.users.wikis.regys.*;
-public class Xou_wiki_itm {
-	public Xou_wiki_itm(int id, String domain, String name, Io_url url, String data) {
-		this.id = id;
+package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*; import gplx.xowa.addons.wikis.directorys.specials.items.*;
+import gplx.dbs.*;
+public class Xodb_wiki_mgr {
+	public Xodb_wiki_mgr(String domain) {
 		this.domain = domain;
-		this.name = name;
-		this.url = url;
-		this.data = data;
 	}
-	public int Id() {return id;} private int id;
-	public String Domain() {return domain;} private String domain;
-	public String Name() {return name;} private String name;
-	public Io_url Url() {return url;} private Io_url url;
-	public String Data() {return data;} private String data;
+	public String Domain() {return domain;} private final    String domain;
+	public Xodb_wiki_db Dbs__get_core() {return dbs__core;} private Xodb_wiki_db dbs__core;
+	public void Dbs__add(Xodb_wiki_db file) {
+		if (file.Tid() == Xodb_wiki_db_tid.Tid__core)
+			dbs__core = file;
+	}
 }

@@ -15,13 +15,12 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.users.wikis.regys.specials.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.users.*; import gplx.xowa.addons.users.wikis.*; import gplx.xowa.addons.users.wikis.regys.*; import gplx.xowa.addons.users.wikis.regys.specials.*;
-import gplx.core.ios.*;
+package gplx.xowa.addons.wikis.directorys.specials.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*;
 import gplx.langs.mustaches.*;
-import gplx.xowa.addons.users.wikis.regys.dbs.*; import gplx.xowa.addons.users.wikis.regys.specials.itms.*;
-class Xouw_list_doc implements Mustache_doc_itm {
-	private final    Xouw_itm_doc[] itms_ary;
-	public Xouw_list_doc(Xouw_itm_doc[] itms_ary) {
+import gplx.xowa.addons.wikis.directorys.specials.items.*;
+class Xowdir_list_doc implements Mustache_doc_itm {
+	private final    Xowdir_item_doc[] itms_ary;
+	public Xowdir_list_doc(Xowdir_item_doc[] itms_ary) {
 		this.itms_ary = itms_ary;
 	}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {

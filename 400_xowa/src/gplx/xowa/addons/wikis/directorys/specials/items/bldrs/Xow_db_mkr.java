@@ -15,15 +15,15 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.users.wikis.regys.specials.itms.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.users.*; import gplx.xowa.addons.users.wikis.*; import gplx.xowa.addons.users.wikis.regys.*; import gplx.xowa.addons.users.wikis.regys.specials.*; import gplx.xowa.addons.users.wikis.regys.specials.itms.*;
+package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*; import gplx.xowa.addons.wikis.directorys.specials.items.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.sys.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.core.ios.streams.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.site_stats.*;
 import gplx.xowa.langs.cases.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.addons.users.wikis.regys.dbs.*;
+import gplx.xowa.addons.wikis.directorys.dbs.*;
 public class Xow_db_mkr {
-	public static Xodb_wiki_mgr Create_wiki(Xodb_wiki_data data) {
+	public static Xodb_wiki_mgr Create_wiki(Xodb_wiki_data data, byte[] mainpage_name, byte[] mainpage_text) {
 		// create db
 		Xodb_wiki_mgr wiki_mgr = new Xodb_wiki_mgr(data.Domain());
 		wiki_mgr.Dbs__add(Xodb_wiki_db.Make(Xodb_wiki_db_tid.Tid__core, data.Core_url()));
@@ -58,8 +58,8 @@ public class Xow_db_mkr {
 		cfg_tbl.Insert_str(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__modified_latest, Datetime_now.Get().XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
 
 		// insert data: page
-		cfg_tbl.Insert_str(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__main_page, "Main_Page");
-		Xopg_db_mgr.Create(core_db, Xow_ns_.Tid__main, Bry_.new_a7("Main_Page"), Bry_.new_a7("Main page created"));
+		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__main_page, mainpage_name);
+		Xopg_db_mgr.Create(core_db, Xow_ns_.Tid__main, mainpage_name, mainpage_text);
 
 		// create tbls: fsdb
 		core_db.Tbls__add(Bool_.Y

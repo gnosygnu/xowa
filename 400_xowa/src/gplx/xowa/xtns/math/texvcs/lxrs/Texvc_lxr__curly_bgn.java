@@ -15,12 +15,13 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.users.wikis.regys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.users.*; import gplx.xowa.addons.users.wikis.*; import gplx.xowa.addons.users.wikis.regys.*;
-import gplx.dbs.*;
-public class Xouw_db_mgr {
-	public Xouw_db_mgr(Db_conn conn) {
-		tbl__wiki = new Xou_wiki_tbl(conn);
-		conn.Meta_tbl_assert(tbl__wiki);
+package gplx.xowa.xtns.math.texvcs.lxrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.math.texvcs.*;
+import gplx.xowa.xtns.math.texvcs.tkns.*; import gplx.xowa.xtns.math.texvcs.funcs.*;
+public class Texvc_lxr__curly_bgn implements Texvc_lxr {
+	public int		Tid() {return Texvc_lxr_.Tid__curly_bgn;}
+	public int		Make_tkn(Texvc_ctx ctx, Texvc_root root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
+		int uid = root.Regy__add(Texvc_tkn_.Tid__curly, Texvc_tkn_mkr.Singleton_id__null, bgn_pos, cur_pos, new Texvc_tkn__func(Texvc_func_itm_.Itm__arg));
+		ctx.Stack().Add(uid);
+		return cur_pos;
 	}
-	public Xou_wiki_tbl Tbl__wiki() {return tbl__wiki;} private final    Xou_wiki_tbl tbl__wiki;
 }

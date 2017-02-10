@@ -15,16 +15,12 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.users.wikis.regys.specials.itms.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.users.*; import gplx.xowa.addons.users.wikis.*; import gplx.xowa.addons.users.wikis.regys.*; import gplx.xowa.addons.users.wikis.regys.specials.*; import gplx.xowa.addons.users.wikis.regys.specials.itms.*;
+package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*;
 import gplx.dbs.*;
-public class Xodb_wiki_mgr {
-	public Xodb_wiki_mgr(String domain) {
-		this.domain = domain;
+public class Xowdir_db_mgr {
+	public Xowdir_db_mgr(Db_conn conn) {
+		tbl__wiki = new Xowdir_wiki_tbl(conn);
+		conn.Meta_tbl_assert(tbl__wiki);
 	}
-	public String Domain() {return domain;} private final    String domain;
-	public Xodb_wiki_db Dbs__get_core() {return dbs__core;} private Xodb_wiki_db dbs__core;
-	public void Dbs__add(Xodb_wiki_db file) {
-		if (file.Tid() == Xodb_wiki_db_tid.Tid__core)
-			dbs__core = file;
-	}
+	public Xowdir_wiki_tbl Tbl__wiki() {return tbl__wiki;} private final    Xowdir_wiki_tbl tbl__wiki;
 }

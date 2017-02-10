@@ -75,7 +75,7 @@ public class Xow_file_mgr implements Gfo_invk {
 		
 		// if non-wmf, set fsdb_mgr to fs.dir; DATE:2017-02-01
 		if (wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__other) {
-			String cfg_domain_str = wiki.Data__core_mgr().Db__core().Tbl__cfg().Select_str("xowa.bldr.session", "wiki_domain");
+			String cfg_domain_str = wiki.Data__core_mgr().Db__core().Tbl__cfg().Select_str_or("xowa.bldr.session", "wiki_domain", wiki.Domain_str());		// NOTE: or is "wiki.domain" for user_wikis
 			// FOLDER.RENAME: do not change to fs.dir if renamed; DATE:2017-02-06
 			if (String_.Eq(cfg_domain_str, wiki.Domain_str())) {
 				// wiki has not been renamed; use fs.dir

@@ -15,7 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons.users.wikis.regys.specials.itms.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.users.*; import gplx.xowa.addons.users.wikis.*; import gplx.xowa.addons.users.wikis.regys.*; import gplx.xowa.addons.users.wikis.regys.specials.*; import gplx.xowa.addons.users.wikis.regys.specials.itms.*;
-public class Xodb_wiki_db_tid {
-	public static final int Tid__core = 0;
+package gplx.gfui.kits.core; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+public interface Gfui_dlg_dir {
+	Gfui_dlg_dir Init_msg_(String v);
+	Gfui_dlg_dir Init_text_(String v);
+	Gfui_dlg_dir Init_dir_(Io_url v);
+	String Ask();
 }
