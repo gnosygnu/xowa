@@ -39,9 +39,11 @@ class Xowdir_item_mgr {
 
 		Xowdir_db_mgr db_mgr = new Xowdir_db_mgr(app.User().User_db_mgr().Conn());
 		Io_url dir_url = Io_url_.new_dir_infer(dir_str);
+		Xowdir_wiki_itm old_item = db_mgr.Tbl__wiki().Select_by_key_or_null(domain);
 
 		// validate
-		String err_msg = Validate(app, db_mgr, domain, name, dir_url, mainpage_name);
+		mainpage_name = String_.Replace(mainpage_name, " ", "_");
+		String err_msg = Validate(app, db_mgr, itm_is_new, domain, name, dir_url, mainpage_name);
 		if (err_msg != null) {
 			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.wiki_directory.notify__recv", gplx.core.gfobjs.Gfobj_nde.New().Add_str("msg_text", err_msg));
 			return;
@@ -51,6 +53,7 @@ class Xowdir_item_mgr {
 		Io_url fil_url = dir_url.GenSubFil(domain + ".xowa");
 		Xowdir_wiki_json json = Xowdir_wiki_json.New_dflt();
 		json.Name_(name);
+		json.Mainpage_(mainpage_name);
 		db_mgr.Tbl__wiki().Upsert(id, domain, fil_url, json.To_str(json_wtr));
 
 		if (itm_is_new) {
@@ -65,6 +68,17 @@ class Xowdir_item_mgr {
 			app.Gui__cbk_mgr().Send_redirect(cbk_trg, "/site/" + domain + "/wiki/" + mainpage_name);
 		}
 		else {
+			if (old_item != null) {
+				// try to move file into new dir
+				// COMMENTED: need to be able to close all connections else move will fail
+				//Io_url old_fil = old_item.Url();
+				//String old_dir = old_fil.OwnerDir().Raw();
+				//if (!String_.Eq(old_dir, dir_str)) {
+				//	Io_url new_fil = dir_url.GenSubFil(old_fil.NameAndExt());
+				//	Io_mgr.Instance.MoveFil(old_fil, new_fil);
+				//}
+			}
+
 			// navigate back to wiki_directory
 			app.Gui__cbk_mgr().Send_redirect(cbk_trg, "/site/home/wiki/Special:XowaWikiDirectory");
 		}
@@ -82,16 +96,18 @@ class Xowdir_item_mgr {
 		// navigate back to wiki_directory
 		app.Gui__cbk_mgr().Send_redirect(cbk_trg, "/site/home/wiki/Special:XowaWikiDirectory");
 	}
-	private String Validate(Xoa_app app, Xowdir_db_mgr db_mgr, String domain, String name, Io_url dir_url, String mainpage_name) {
+	private String Validate(Xoa_app app, Xowdir_db_mgr db_mgr, boolean itm_is_new, String domain, String name, Io_url dir_url, String mainpage_name) {
 		// domain
-		if (String_.Len_eq_0(domain))
-			return "Domain cannot be empty: " + domain;
-		if (db_mgr.Tbl__wiki().Select_by_key_or_null(domain) != null)
-			return "Domain already exists: " + domain;
-		if (String_.Len(domain) > 63)
-			return "Domain must be 63 characters or less: " + domain;
-		if (!Is_valid_domain_name(Bry_.new_u8(domain)))
-			return "Domain is invalid; can only have letters, numbers, or a dot. If a dash exists, it cannot be at the start or the end: " + domain ;
+		if (itm_is_new) {
+			if (String_.Len_eq_0(domain))
+				return "Domain cannot be empty: " + domain;
+			if (db_mgr.Tbl__wiki().Select_by_key_or_null(domain) != null)
+				return "Domain already exists: " + domain;
+			if (String_.Len(domain) > 63)
+				return "Domain must be 63 characters or less: " + domain;
+			if (!Is_valid_domain_name(Bry_.new_u8(domain)))
+				return "Domain is invalid; can only have letters, numbers, or a dot. If a dash exists, it cannot be at the start or the end: " + domain;
+		}
 
 		// name
 		if (String_.Len_eq_0(name))
@@ -103,20 +119,27 @@ class Xowdir_item_mgr {
 		String dir_str = dir_url.Raw();
 		if (String_.Len_eq_0(dir_str))
 			return "Folder cannot be empty: " + dir_str;
+
+		// try to create fil
 		Io_mgr.Instance.CreateDirIfAbsent(dir_url);
-		if (!Io_mgr.Instance.ExistsDir(dir_url))
+		Io_url tmp_fil = dir_url.GenSubFil("xowa.temp.txt");
+		Io_mgr.Instance.SaveFilStr(tmp_fil, "temp");
+		if (!String_.Eq(Io_mgr.Instance.LoadFilStr(tmp_fil), "temp"))
 			return "Folder could not be created: " + dir_str;
+		Io_mgr.Instance.DeleteFil(tmp_fil);
 
 		// mainpage_name
-		byte[] mainpage_name_bry = Bry_.new_u8(mainpage_name);
-		Xoa_ttl ttl = Xoa_ttl.Parse(app.User().Wikii(), mainpage_name_bry);
-		if (ttl == null)
-			return "Main Page has invalid characters. Please see the new wiki help page for more info: " + mainpage_name;
+		if (itm_is_new) {
+			byte[] mainpage_name_bry = Bry_.new_u8(mainpage_name);
+			Xoa_ttl ttl = Xoa_ttl.Parse(app.User().Wikii(), mainpage_name_bry);
+			if (ttl == null)
+				return "Main Page has invalid characters. Please see the new wiki help page for more info: " + mainpage_name;
 
-		Bry_bfr tmp = Bry_bfr_.New();
-		byte[] ucase_1st = app.User().Wikii().Lang().Case_mgr().Case_build_1st_upper(tmp, mainpage_name_bry, 0, mainpage_name_bry.length);
-		if (!Bry_.Eq(mainpage_name_bry, ucase_1st))
-			return "Main Page must start with an uppercase letter.";
+			Bry_bfr tmp = Bry_bfr_.New();
+			byte[] ucase_1st = app.User().Wikii().Lang().Case_mgr().Case_build_1st_upper(tmp, mainpage_name_bry, 0, mainpage_name_bry.length);
+			if (!Bry_.Eq(mainpage_name_bry, ucase_1st))
+				return "Main Page must start with an uppercase letter.";
+		}
 
 		// valid returns null
 		return null;
