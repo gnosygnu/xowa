@@ -45,8 +45,8 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Xomw_strip_state strip_state;
 	private Xomw_parser_env env;
 	private Xow_wiki wiki;
-	private Xoa_ttl page_title;
-	private final    Xomw_linker__normalize_subpage_link normalize_subpage_link = new Xomw_linker__normalize_subpage_link();
+	private Xomw_Title mPageTitle;
+//		private final    Xomw_linker__normalize_subpage_link normalize_subpage_link = new Xomw_linker__normalize_subpage_link();
 	private final    Bry_bfr tmp;
 	private final    Xomw_parser parser;
 	private final    Xomw_atr_mgr extra_atrs = new Xomw_atr_mgr();
@@ -88,7 +88,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		Bry_bfr bfr = pbfr.Trg();
 		pbfr.Switch();
 
-		this.page_title = pctx.Page_title();
+		this.mPageTitle = pctx.Page_title();
 
 		Replace_internal_links(pctx, bfr, src, src_bgn, src_end);
 	}
@@ -254,17 +254,16 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 				link = Bry_.Mid(link, 1);
 			}
 			// $nt = is_string( $unstrip ) ? Title::newFromText( $unstrip ) : null;
-			// Xomw_Title nt2 = Xomw_Title.newFromText(link);
-			Xoa_ttl nt = wiki.Ttl_parse(link);
+			Xomw_Title nt = Xomw_Title.newFromText(link);
 
 			// Make subpage if necessary
-			boolean subpages_enabled = nt.Ns().Subpages_enabled();
-			if (subpages_enabled) {
-				Maybe_do_subpage_link(normalize_subpage_link, orig_link, text);
-				link = normalize_subpage_link.link;
-				text = normalize_subpage_link.text;
-				nt = wiki.Ttl_parse(link);
-			}
+//				boolean useSubpages = nt.Ns().Subpages_enabled();
+//				if (useSubpages) {
+//					Maybe_do_subpage_link(normalize_subpage_link, orig_link, text);
+//					link = normalize_subpage_link.link;
+//					text = normalize_subpage_link.text;
+//					nt = Xomw_Title.newFromText(link);
+//				}
 			// IGNORE: handled in rewrite above
 			// else {
 			//	link = orig_link;
@@ -272,18 +271,18 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 			byte[] unstrip = strip_state.Unstrip_nowiki(link);
 			if (!Bry_.Eq(unstrip, link))
-				nt = wiki.Ttl_parse(unstrip);
+				nt = Xomw_Title.newFromText(unstrip);
 			if (nt == null) {
 				bfr.Add_mid(src, prv, lnki_bgn + 2);	// $s .= $prefix . '[[' . $line;
 				prv = cur = lnki_bgn + 2;					
 				continue;
 			}
 
-			Xow_ns ns = nt.Ns();
-			Xow_xwiki_itm iw = nt.Wik_itm();
+			byte[] iw = nt.getInterwiki();
+			int ns = nt.getNamespace();
 
 			if (might_be_img) { // if this is actually an invalid link
-				if (ns.Id_is_file() && no_force) { // but might be an image
+				if (ns == Xomw_Defines.NS_FILE && no_force) { // but might be an image
 					boolean found = false;
 //						while (true) {
 //							// look at the next 'line' to see if we can close it there
@@ -358,7 +357,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //						continue;
 //					}
 //
-				if (ns.Id_is_file()) {
+				if (ns == Xomw_Defines.NS_FILE) {
 //						boolean is_good_image = !wfIsBadImage(nt->getDBkey(), this->mTitle)
 					boolean is_good_image = true;
 					if (is_good_image) {
@@ -384,7 +383,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 						continue;
 					}
 				} 
-				else if (ns.Id_is_ctg()) {
+				else if (ns == Xomw_Defines.NS_CATEGORY) {
 					bfr.Trim_end_ws(); // s = rtrim(s . "\n"); // T2087
 
 					if (was_blank) {
@@ -408,7 +407,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// Self-link checking. For some languages, variants of the title are checked in
 			// LinkHolderArray::doVariants() to allow batching the existence checks necessary
 			// for linking to a different variant.
-			if (!ns.Id_is_special() && nt.Eq_full_db(page_title) && !nt.Has_fragment()) {
+			if (ns != Xomw_Defines.NS_SPECIAL  && nt.equals(mPageTitle) && !nt.hasFragment()) {
 				bfr.Add(prefix);
 				linker.makeSelfLinkObj(bfr, nt, text, Bry_.Empty, trail, Bry_.Empty);
 				continue;
@@ -416,7 +415,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 			// NS_MEDIA is a pseudo-namespace for linking directly to a file
 			// @todo FIXME: Should do batch file existence checks, see comment below
-			if (ns.Id_is_media()) {
+			if (ns == Xomw_Defines.NS_MEDIA) {
 				// Give extensions a chance to select the file revision for us
 //					options = [];
 //					desc_query = false;
@@ -435,7 +434,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// batch file existence checks for NS_FILE and NS_MEDIA
 			bfr.Add_mid(src, prv, lnki_bgn);
 			prv = cur;
-			if (iw == null && nt.Is_always_known()) {
+			if (iw == null && nt.isAlwaysKnown()) {
 				// this->mOutput->addLink(nt);
 				Make_known_link_holder(bfr, nt, text, trail, prefix);
 			}
@@ -445,7 +444,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 		}
 	}
-	public void makeImage(Xomw_parser_ctx pctx, Bry_bfr bfr, Xoa_ttl title, byte[] options_at_link, Xomw_link_holders holders) {
+	public void makeImage(Xomw_parser_ctx pctx, Bry_bfr bfr, Xomw_Title title, byte[] options_at_link, Xomw_link_holders holders) {
 		// Check if the options text is of the form "options|alt text"
 		// Options are:
 		//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang
@@ -643,7 +642,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			if (caption == Bry_.Empty && frameParams.alt == null) {
 				// No caption or alt text, add the filename as the alt text so
 				// that screen readers at least get some description of the image
-				frameParams.alt = title.Get_text();
+				frameParams.alt = title.getText();
 			}
 			// Do not set $params['frame']['title'] because tooltips don't make sense
 			// for framed images
@@ -657,7 +656,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 				else {
 					// No caption, fall back to using the filename for the
 					// alt text
-					frameParams.alt = title.Get_text();
+					frameParams.alt = title.getText();
 				}
 			}
 			// Use the "caption" for the tooltip text
@@ -778,7 +777,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	* @param array $options Array of options to RepoGroup::findFile
 	* @return array ( File or false, Title of file )
 	*/
-	public Xomw_File fetchFileAndTitle(Xoa_ttl title, Hash_adp options) {
+	public Xomw_File fetchFileAndTitle(Xomw_Title title, Hash_adp options) {
 		Xomw_File file = fetchFileNoRegister(title, options);
 
 		//$time = $file ? $file->getTimestamp() : false;
@@ -802,7 +801,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	* @param array $options Array of options to RepoGroup::findFile
 	* @return File|boolean
 	*/
-	private Xomw_File fetchFileNoRegister(Xoa_ttl title, Hash_adp options) {
+	private Xomw_File fetchFileNoRegister(Xomw_Title title, Hash_adp options) {
 		Xomw_File file = null;
 //			if ( isset( $options['broken'] ) ) {
 //				file = false; // broken thumbnail forced by hook
@@ -814,18 +813,18 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		return file;
 	}
 	public void Maybe_do_subpage_link(Xomw_linker__normalize_subpage_link rv, byte[] target, byte[] text) {
-		linker.normalizeSubpageLink(rv, page_title, target, text);
+		linker.normalizeSubpageLink(rv, mPageTitle, target, text);
 	}
 	public void Replace_link_holders(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
 		holders.Replace(pctx, pbfr);
 	}
-	public void Make_known_link_holder(Bry_bfr bfr, Xoa_ttl nt, byte[] text, byte[] trail, byte[] prefix) {
+	public void Make_known_link_holder(Bry_bfr bfr, Xomw_Title nt, byte[] text, byte[] trail, byte[] prefix) {
 		byte[][] split_trail = linker.splitTrail(trail);
 		byte[] inside = split_trail[0];
 		trail = split_trail[1];
 
 		if (text == Bry_.Empty) {
-			text = Bry_.Escape_html(nt.Get_prefixed_text()); 
+			text = Bry_.Escape_html(nt.getPrefixedText()); 
 		}
 
 		// PORTED:new HtmlArmor( "$prefix$text$inside" )

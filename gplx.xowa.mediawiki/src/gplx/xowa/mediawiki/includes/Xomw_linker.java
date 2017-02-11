@@ -127,7 +127,7 @@ public class Xomw_linker {
 	//     'https': Force a full URL with https:// as the scheme.
 	//     'stubThreshold' => (int): Stub threshold to use when determining link classes.
 	// @return String HTML <a> attribute
-	public void Link(Bry_bfr bfr, Xoa_ttl target, byte[] html, Xomw_atr_mgr custom_attribs, Xomw_qry_mgr query, Xomw_opt_mgr options) {
+	public void Link(Bry_bfr bfr, Xomw_Title target, byte[] html, Xomw_atr_mgr custom_attribs, Xomw_qry_mgr query, Xomw_opt_mgr options) {
 		// XO.MW.UNSUPPORTED:MW has different renderers -- presumably for forcing "https:" and others; XO only has one
 		//if (options != null) {
 		//	// Custom options, create new LinkRenderer
@@ -193,10 +193,10 @@ public class Xomw_linker {
 	* @return String
 	*/
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	public void makeSelfLinkObj(Bry_bfr bfr, Xoa_ttl nt, byte[] html, byte[] query, byte[] trail, byte[] prefix) {
+	public void makeSelfLinkObj(Bry_bfr bfr, Xomw_Title nt, byte[] html, byte[] query, byte[] trail, byte[] prefix) {
 		// MW.HOOK:SelfLinkBegin
 		if (html == Bry_.Empty) {
-			html = tmp.Add_bry_escape_html(nt.Get_prefixed_text()).To_bry_and_clear();
+			html = tmp.Add_bry_escape_html(nt.getPrefixedText()).To_bry_and_clear();
 		}
 		byte[] inside = Bry_.Empty;
 		byte[][] split_trail = splitTrail(trail);
@@ -239,7 +239,7 @@ public class Xomw_linker {
 //		* @param LinkTarget $target
 //		* @return LinkTarget
 //		*/
-	public static Xoa_ttl normaliseSpecialPage(Xoa_ttl target) {			
+	public static Xomw_Title normaliseSpecialPage(Xomw_Title target) {
 //			if (target.Ns().Id_is_special() && !target.Is_external()) {
 //				list($name, $subpage) = SpecialPageFactory::resolveAlias($target->getDBkey());
 //				if (!$name) {
@@ -334,7 +334,7 @@ public class Xomw_linker {
 	// @since 1.20
 	// @return String HTML for an image, with links, wrappers, etc.
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	public void makeImageLink(Bry_bfr bfr, Xomw_parser_ctx pctx, Xomw_parser parser, Xoa_ttl title, Xomw_File file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query, int widthOption) {
+	public void makeImageLink(Bry_bfr bfr, Xomw_parser_ctx pctx, Xomw_parser parser, Xomw_Title title, Xomw_File file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query, int widthOption) {
 		Xomw_parser_env env = parser.Env();
 		// XO.MW.HOOK:ImageBeforeProduceHTML
 
@@ -538,7 +538,7 @@ public class Xomw_linker {
 	* @return String
 	*/
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	private void makeThumbLink2(Bry_bfr bfr, Xomw_parser_ctx pctx, Xoa_ttl title, Xomw_File file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query) {
+	private void makeThumbLink2(Bry_bfr bfr, Xomw_parser_ctx pctx, Xomw_Title title, Xomw_File file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query) {
 		boolean exists = file != null && file.exists();
 
 		int page = handlerParams.page;
@@ -1372,7 +1372,7 @@ public class Xomw_linker {
 	* @return String
 	*/
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	public void normalizeSubpageLink(Xomw_linker__normalize_subpage_link rv, Xoa_ttl context_title, byte[] target, byte[] text) {
+	public void normalizeSubpageLink(Xomw_linker__normalize_subpage_link rv, Xomw_Title context_title, byte[] target, byte[] text) {
 		// Valid link forms:
 		// Foobar -- normal
 		// :Foobar -- override special treatment of prefix (images, language links)
@@ -1388,7 +1388,7 @@ public class Xomw_linker {
 
 		// Some namespaces don't allow subpages,
 		// so only perform processing if subpages are allowed
-		if (context_title != null && context_title.Ns().Subpages_enabled()) {
+		if (context_title != null) {// && context_title.Ns().Subpages_enabled()) {
 			int hash = Bry_find_.Find_fwd(target, Byte_ascii.Hash);
 			byte[] suffix = null;
 			if (hash != Bry_find_.Not_found) {
@@ -1413,7 +1413,7 @@ public class Xomw_linker {
 					no_slash = Bry_.Mid(target, 1);
 				}
 
-				ret = Bry_.Add(context_title.Get_prefixed_text(), Byte_ascii.Slash_bry, Bry_.Trim(no_slash), suffix);
+				ret = Bry_.Add(context_title.getPrefixedText(), Byte_ascii.Slash_bry, Bry_.Trim(no_slash), suffix);
 				if (text == Bry_.Empty) {
 					text = Bry_.Add(target, suffix);
 				} // this might be changed for ugliness reasons
@@ -1427,7 +1427,7 @@ public class Xomw_linker {
 					dot2_stripped = Bry_.Mid(dot2_stripped, 3);
 				}
 				if (dot2_count > 0) {
-					byte[][] exploded = Bry_split_.Split(context_title.Get_prefixed_text(), Byte_ascii.Slash);
+					byte[][] exploded = Bry_split_.Split(context_title.getPrefixedText(), Byte_ascii.Slash);
 					int exploded_len = exploded.length;
 					if (exploded_len > dot2_count) { // not allowed to go below top level page
 						//	PORTED: ret = implode('/', array_slice($exploded, 0, -dot2_count));

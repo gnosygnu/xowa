@@ -188,7 +188,7 @@ public class Xomw_magiclinks_wkr {
 			else {
 				// handle free
 				if (regex_tid == Regex__free) {
-					this.page_title = pctx.Page_title().Full_db();
+					this.page_title = pctx.Page_title().getPrefixedDBkey();
                         dirty = true;
 					bfr.Add_mid(src, prv, hook_bgn);
 					byte[] url = Bry_.Mid(src, hook_bgn, cur);

@@ -20,13 +20,14 @@ import gplx.xowa.mediawiki.includes.parsers.*;
 public class Xomw_file_finder__mock implements Xomw_file_finder {
 	private final    Xomw_parser_env env;
 	public Xomw_file_finder__mock(Xomw_parser_env env) {this.env = env;}
-	private final    Hash_adp hash = Hash_adp_.New();
+	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
 	public void Clear() {hash.Clear();}
-	public Xomw_File Find_file(Xoa_ttl ttl) {
-		return (Xomw_File)hash.Get_by(ttl.Page_db_as_str());
+	public Xomw_File Find_file(Xomw_Title ttl) {
+		return (Xomw_File)hash.Get_by(ttl.getPrefixedDBkey());
 	}
 	public void Add(String title, Xomw_FileRepo repo, int w, int h, byte[] mime) {
-		Xomw_LocalFile file = new Xomw_LocalFile(env, Bry_.new_u8(title), repo, w, h, mime);
-		hash.Add_if_dupe_use_nth(title, file);
+		byte[] title_bry = Bry_.new_u8(title);
+		Xomw_LocalFile file = new Xomw_LocalFile(env, title_bry, repo, w, h, mime);
+		hash.Add_if_dupe_use_nth(title_bry, file);
 	}
 }

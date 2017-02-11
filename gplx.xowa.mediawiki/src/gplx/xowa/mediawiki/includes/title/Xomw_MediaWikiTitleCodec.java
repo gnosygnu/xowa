@@ -273,6 +273,10 @@ public class Xomw_MediaWikiTitleCodec {
 		}
 
 		// Namespace or interwiki prefix
+		if (Bry_.Has_at_bgn(dbkey, Bry_.new_a7("File:"))) {
+			parts.ns = Xomw_Defines.NS_FILE;
+			dbkey = Bry_.Mid(dbkey, 5);
+		}
 //			$prefixRegexp = "/^(.+?)_*:_*(.*)$/S";
 //			do {
 //				$m = [];

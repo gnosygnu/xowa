@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mediawiki.includes.filerepo.file; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.filerepo.*;
 public class Xomw_file_finder__noop implements Xomw_file_finder {
-	public Xomw_File Find_file(Xoa_ttl ttl) {return null;}
+	public Xomw_File Find_file(Xomw_Title ttl) {return null;}
 }

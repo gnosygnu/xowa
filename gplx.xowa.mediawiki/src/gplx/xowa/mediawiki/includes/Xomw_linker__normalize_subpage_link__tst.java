@@ -29,14 +29,9 @@ public class Xomw_linker__normalize_subpage_link__tst {
 }
 class Xomw_linker__normalize_subpage_link__fxt {
 	private final    Xomw_linker mgr = new Xomw_linker(new gplx.xowa.mediawiki.includes.linkers.Xomw_link_renderer(new Xomw_sanitizer()));
-	private final    Xowe_wiki wiki;
 	private final    Xomw_linker__normalize_subpage_link normalize_subpage_link = new Xomw_linker__normalize_subpage_link();
-	public Xomw_linker__normalize_subpage_link__fxt() {
-		Xoae_app app = Xoa_app_fxt.Make__app__edit();
-		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
-	}
 	public void Test__normalize_subpage_link(String page_title_str, String link, String text, String expd_link, String expd_text) {
-		mgr.normalizeSubpageLink(normalize_subpage_link, wiki.Ttl_parse(Bry_.new_u8(page_title_str)), Bry_.new_u8(link), Bry_.new_u8(text));
+		mgr.normalizeSubpageLink(normalize_subpage_link, Xomw_Title.newFromText(Bry_.new_u8(page_title_str)), Bry_.new_u8(link), Bry_.new_u8(text));
 		Gftest.Eq__str(expd_link, String_.new_u8(normalize_subpage_link.link));
 		Gftest.Eq__str(expd_text, String_.new_u8(normalize_subpage_link.text));
 	}

@@ -798,16 +798,16 @@ public class Xomw_Title {
 		return this.mInterwiki != Bry_.Empty;
 	}
 
-//		/**
-//		* Get the interwiki prefix
-//		*
-//		* Use Title::isExternal to check if a interwiki is set
-//		*
-//		* @return String Interwiki prefix
-//		*/
-//		public function getInterwiki() {
-//			return this.mInterwiki;
-//		}
+	/**
+	* Get the interwiki prefix
+	*
+	* Use Title::isExternal to check if a interwiki is set
+	*
+	* @return String Interwiki prefix
+	*/
+	public byte[] getInterwiki() {
+		return this.mInterwiki;
+	}
 
 	/**
 	* Was this a local interwiki link?
@@ -889,16 +889,16 @@ public class Xomw_Title {
 //		public function getPartialURL() {
 //			return this.mUrlform;
 //		}
-//
-//		/**
-//		* Get the main part with underscores
-//		*
-//		* @return String Main part of the title, with underscores
-//		*/
-//		public function getDBkey() {
-//			return this.mDbkeyform;
-//		}
-//
+
+	/**
+	* Get the main part with underscores
+	*
+	* @return String Main part of the title, with underscores
+	*/
+	public byte[] getDBkey() {
+		return this.mDbkeyform;
+	}
+
 //		/**
 //		* Get the DB key with the initial letter case as specified by the user
 //		*
@@ -912,16 +912,16 @@ public class Xomw_Title {
 //				return this.mDbkeyform;
 //			}
 //		}
-//
-//		/**
-//		* Get the namespace index, i.e. one of the NS_xxxx constants.
-//		*
-//		* @return int Namespace index
-//		*/
-//		public function getNamespace() {
-//			return this.mNamespace;
-//		}
-//
+
+	/**
+	* Get the namespace index, i.e. one of the NS_xxxx constants.
+	*
+	* @return int Namespace index
+	*/
+	public int getNamespace() {
+		return this.mNamespace;
+	}
+
 //		/**
 //		* Get the page's content model id, see the CONTENT_MODEL_XXX constants.
 //		*
@@ -1391,22 +1391,23 @@ public class Xomw_Title {
 //		public function setFragment($fragment) {
 //			this.mFragment = strtr(substr($fragment, 1), '_', ' ');
 //		}
-//
-//		/**
-//		* Creates a new Title for a different fragment of the same page.
-//		*
-//		* @since 1.27
-//		* @param String $fragment
-//		* @return Title
-//		*/
-//		public function createFragmentTarget($fragment) {
+
+	/**
+	* Creates a new Title for a different fragment of the same page.
+	*
+	* @since 1.27
+	* @param String $fragment
+	* @return Title
+	*/
+	public Xomw_Title createFragmentTarget(byte[] fragment) {
+		return null;
 //			return self::makeTitle(
 //				this.getNamespace(),
 //				this.getText(),
 //				$fragment,
 //				this.getInterwiki()
 //			);
-//		}
+	}
 
 	/**
 	* Prefix some arbitrary text with the namespace or interwiki prefix
@@ -1808,7 +1809,7 @@ public class Xomw_Title {
 //				$ret = this.getLocalURL($query, $query2) . this.getFragmentForURL();
 //			}
 //			return $ret;
-		return Bry_.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, this.mPrefixedText);
+		return Bry_.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, this.getPrefixedText());
 	}
 
 //		/**
@@ -4219,20 +4220,20 @@ public class Xomw_Title {
 //			$authors = this.getAuthorsBetween($old, $new, $limit, $options);
 //			return $authors ? count($authors) : 0;
 //		}
-//
-//		/**
-//		* Compare with another title.
-//		*
-//		* @param Title $title
-//		* @return boolean
-//		*/
-//		public function equals(Title $title) {
-//			// Note: == is necessary for proper matching of number-like titles.
-//			return this.getInterwiki() == $title.getInterwiki()
-//				&& this.getNamespace() == $title.getNamespace()
-//				&& this.getDBkey() == $title.getDBkey();
-//		}
-//
+
+	/**
+	* Compare with another title.
+	*
+	* @param Title $title
+	* @return boolean
+	*/
+	public boolean equals(Xomw_Title title) {
+		// Note: == is necessary for proper matching of number-like titles.
+		return Bry_.Eq(this.getInterwiki(), title.getInterwiki())
+			&& this.getNamespace() == title.getNamespace()
+			&& Bry_.Eq(this.getDBkey(), title.getDBkey());
+	}
+
 //		/**
 //		* Check if this title is a subpage of another title
 //		*
@@ -4320,22 +4321,23 @@ public class Xomw_Title {
 //			}
 		return false;
 	}
-//
-//		/**
-//		* Does this title refer to a page that can (or might) be meaningfully
-//		* viewed?  In particular, this function may be used to determine if
-//		* links to the title should be rendered as "bluelinks" (as opposed to
-//		* "redlinks" to non-existent pages).
-//		* Adding something else to this function will cause inconsistency
-//		* since LinkHolderArray calls isAlwaysKnown() and does its own
-//		* page existence check.
-//		*
-//		* @return boolean
-//		*/
-//		public function isKnown() {
+
+	/**
+	* Does this title refer to a page that can (or might) be meaningfully
+	* viewed?  In particular, this function may be used to determine if
+	* links to the title should be rendered as "bluelinks" (as opposed to
+	* "redlinks" to non-existent pages).
+	* Adding something else to this function will cause inconsistency
+	* since LinkHolderArray calls isAlwaysKnown() and does its own
+	* page existence check.
+	*
+	* @return boolean
+	*/
+	public boolean isKnown() {
 //			return this.isAlwaysKnown() || this.exists();
-//		}
-//
+		return true;
+	}
+
 //		/**
 //		* Does this page have source text?
 //		*

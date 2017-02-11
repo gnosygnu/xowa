@@ -34,8 +34,8 @@ public class Xomw_link_renderer {
 		this.sanitizer = sanitizer;
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-01-31
-	public void Make_link(Bry_bfr bfr, Xoa_ttl target, byte[] text, byte[] classes, Xomw_atr_mgr extra_atrs, Xomw_qry_mgr query) {
-		if (target.Is_known()) {
+	public void Make_link(Bry_bfr bfr, Xomw_Title target, byte[] text, byte[] classes, Xomw_atr_mgr extra_atrs, Xomw_qry_mgr query) {
+		if (target.isKnown()) {
 			this.Make_known_link(bfr, target, text, extra_atrs, query);
 		} else {
 			this.Make_broken_link(bfr, target, text, extra_atrs, query);
@@ -45,7 +45,7 @@ public class Xomw_link_renderer {
 	// If you have already looked up the proper CSS classes using LinkRenderer::getLinkClasses()
 	// or some other method, use this to avoid looking it up again.
 	// XO.MW:SYNC:1.29; DATE:2017-01-31
-	public void Make_preloaded_link(Bry_bfr bfr, Xoa_ttl target, byte[] text, byte[] classes, Xomw_atr_mgr extra_atrs, Xomw_qry_mgr query) {
+	public void Make_preloaded_link(Bry_bfr bfr, Xomw_Title target, byte[] text, byte[] classes, Xomw_atr_mgr extra_atrs, Xomw_qry_mgr query) {
 		// XO.MW.HOOK: $this->runBeginHook --> 'HtmlPageLinkRendererBegin', 'LinkBegin'
 
 		target = Normalize_target(target);
@@ -54,7 +54,7 @@ public class Xomw_link_renderer {
 		attribs.Add(Gfh_atr_.Bry__href, url);	// XO.MW: add url 1st; MW does attribs["url", url] + attribs + extra_attribs
 		if (classes.length > 0)                 // XO.MW:do not bother adding if empty
 			attribs.Add(Gfh_atr_.Bry__class, classes);
-		byte[] prefixed_text = target.Get_prefixed_text();
+		byte[] prefixed_text = target.getPrefixedText();
 		if (prefixed_text != Bry_.Empty) {
 			attribs.Add(Gfh_atr_.Bry__title, prefixed_text);
 		}
@@ -69,9 +69,9 @@ public class Xomw_link_renderer {
 	}
 	
 	// XO.MW:SYNC:1.29; DATE:2017-01-31
-	public void Make_known_link(Bry_bfr bfr, Xoa_ttl target, byte[] text, Xomw_atr_mgr extra_atrs, Xomw_qry_mgr query) {
+	public void Make_known_link(Bry_bfr bfr, Xomw_Title target, byte[] text, Xomw_atr_mgr extra_atrs, Xomw_qry_mgr query) {
 		byte[] classes = Bry_.Empty;
-		if (target.Is_external()) {
+		if (target.isExternal()) {
 			classes = Bry__classes__extiw;
 		}
 		byte[] colour = Get_link_classes(target);
@@ -82,17 +82,17 @@ public class Xomw_link_renderer {
 		Make_preloaded_link(bfr, target, text, classes, extra_atrs, query);
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-01-31
-	public void Make_broken_link(Bry_bfr bfr, Xoa_ttl target, byte[] text, Xomw_atr_mgr extra_atrs, Xomw_qry_mgr query) {
+	public void Make_broken_link(Bry_bfr bfr, Xomw_Title target, byte[] text, Xomw_atr_mgr extra_atrs, Xomw_qry_mgr query) {
 		// XO.MW.HOOK: Run legacy hook
 
 		// We don't want to include fragments for broken links, because they
 		// generally make no sense.
-		if (target.Has_fragment()) {
-			target =  target.Create_fragment_target();
+		if (target.hasFragment()) {
+			target = target.createFragmentTarget(target.getFragment());
 		}
 		target = Normalize_target(target);
 
-		if (query.action == null && target.Ns().Id() != gplx.xowa.wikis.nss.Xow_ns_.Tid__special) {
+		if (query.action == null && target.getNamespace() != Xomw_Defines.NS_SPECIAL) {
 			query.action = Bry_.new_a7("edit");
 			query.redlink = 1;
 		}
@@ -118,7 +118,7 @@ public class Xomw_link_renderer {
 		Build_a_element(bfr, target, text, attribs, false);
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-01-31
-	private void Build_a_element(Bry_bfr bfr, Xoa_ttl target, byte[] text, Xomw_atr_mgr attribs, boolean is_known) {
+	private void Build_a_element(Bry_bfr bfr, Xomw_Title target, byte[] text, Xomw_atr_mgr attribs, boolean is_known) {
 		// XO.MW.HOOK:HtmlPageLinkRendererEnd
 
 		byte[] html = text;
@@ -129,16 +129,16 @@ public class Xomw_link_renderer {
 		html_utl.Raw_element(bfr, Gfh_tag_.Bry__a, attribs, html);
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-01-31
-	private byte[] Get_link_text(Xoa_ttl target) {
-		byte[] prefixed_text = target.Get_prefixed_text();
+	private byte[] Get_link_text(Xomw_Title target) {
+		byte[] prefixed_text = target.getPrefixedText();
 		// If the target is just a fragment, with no title, we return the fragment
 		// text.  Otherwise, we return the title text itself.
-		if (prefixed_text == Bry_.Empty && target.Has_fragment()) {
-			return target.Get_fragment();
+		if (prefixed_text == Bry_.Empty && target.hasFragment()) {
+			return target.getFragment();
 		}
 		return prefixed_text;
 	}
-	private byte[] Get_link_url(Xoa_ttl target, Xomw_qry_mgr query) {
+	private byte[] Get_link_url(Xomw_Title target, Xomw_qry_mgr query) {
 		// TODO: Use a LinkTargetResolver service instead of Title
 
 //			if ($this->forceArticlePath) {
@@ -148,7 +148,7 @@ public class Xomw_link_renderer {
 //			else {
 //				$realQuery = [];
 //			}
-		byte[] url = target.Get_link_url(query, false, expand_urls);
+		byte[] url = target.getLinkURL(query, false, expand_urls);
 
 //			if ($this->forceArticlePath && $realQuery) {
 //				$url = wfAppendQuery($url, $realQuery);
@@ -156,7 +156,7 @@ public class Xomw_link_renderer {
 		return url;
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-01-31
-	private Xoa_ttl Normalize_target(Xoa_ttl target) {
+	private Xomw_Title Normalize_target(Xomw_Title target) {
 		return Xomw_linker.normaliseSpecialPage(target);
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-02-01
@@ -188,7 +188,7 @@ public class Xomw_link_renderer {
 			tmp_merge_deleted.Clear();
 		}
 	}
-	public byte[] Get_link_classes(Xoa_ttl target) {
+	public byte[] Get_link_classes(Xomw_Title target) {
 		// Make sure the target is in the cache
 //			$id = $this->linkCache->addLinkObj($target);
 //			if ($id == 0) {

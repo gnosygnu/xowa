@@ -86,7 +86,7 @@ class Xomw_lnki_wkr__fxt {
 
 		// ctx
 		pctx = new Xomw_parser_ctx();
-		pctx.Init_by_page(wiki.Ttl_parse(Bry_.new_a7("Page_1")));
+		pctx.Init_by_page(Xomw_Title.newFromText(Bry_.new_a7("Page_1")));
 	}
 	public void Clear() {
 		wkr.Clear_state();

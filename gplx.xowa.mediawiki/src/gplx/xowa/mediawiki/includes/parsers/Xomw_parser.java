@@ -81,7 +81,7 @@ public class Xomw_parser {
 		doubleunder_wkr.Init_by_wiki(doubleunder_data, wiki.Lang());
 		magiclinks_wkr.Init_by_wiki();
 	}
-	public void Init_by_page(Xoa_ttl ttl) {
+	public void Init_by_page(Xomw_Title ttl) {
 		pctx.Init_by_page(ttl);
 	}
 	public void Internal_parse(Xomw_parser_bfr pbfr, byte[] text) {
