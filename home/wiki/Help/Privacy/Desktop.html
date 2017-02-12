@@ -31,6 +31,9 @@
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
+    <h2>
+      <span class="mw-headline" id="User_data">User data</span>
+    </h2>
     <p>
       XOWA is commited to user privacy. As a user of the XOWA desktop app, you can be assured of the following:
     </p>
@@ -64,8 +67,28 @@
         <b>User data collection can be disabled or cleared</b>: Individual features can either be cleared or disabled. The rest of the page details the process for each feature.
       </li>
     </ul>
+    <h2>
+      <span class="mw-headline" id="Internet_access">Internet access</span>
+    </h2>
     <p>
-      <br>
+      XOWA is an offline app. However, it does connect to the internet to download dumps, images, css and other data. In nearly all cases, this internet access needs to be directly activated by the user. (i.e.: you click a link and XOWA goes off to download a dump)
+    </p>
+    <p>
+      However, there is one internet connection that happens automatically -- without any user intervention. As of v4.1, XOWA has an auto-update feature. This feature will do the following:
+    </p>
+    <ul>
+      <li>
+        Once every 7 days, it will automatically check <a href="http://xowa.org/admin/app_update/xoa_update.json" rel="nofollow" class="external free">http://xowa.org/admin/app_update/xoa_update.json</a> for updates. This check happens when XOWA starts-up
+      </li>
+      <li>
+        If an update is found, it will pop open a new tab informing the user of a new update
+      </li>
+      <li>
+        The user can then choose to download the update, or ignore it. If ignored, XOWA won't check again for 7 days.
+      </li>
+    </ul>
+    <p>
+      This feature can be disabled under <a href="http://xowa.org/home/wiki/Special:XowaCfg%3Fgrp%3Dxowa.app.update.html" id="xolnki_2" title="Special:XowaCfg?grp=xowa.app.update" class="xowa-visited">Special:XowaCfg?grp=xowa.app.update</a> by unchecking <code>Enabled</code>
     </p>
     <div id="toc" class="toc">
       <div id="toctitle">
@@ -75,28 +98,34 @@
       </div>
       <ul>
         <li class="toclevel-1 tocsection-1">
-          <a href="#Mozilla_browser_data"><span class="tocnumber">1</span> <span class="toctext">Mozilla browser data</span></a>
+          <a href="#User_data"><span class="tocnumber">1</span> <span class="toctext">User data</span></a>
         </li>
         <li class="toclevel-1 tocsection-2">
-          <a href="#Application_logs"><span class="tocnumber">2</span> <span class="toctext">Application logs</span></a>
+          <a href="#Internet_access"><span class="tocnumber">2</span> <span class="toctext">Internet access</span></a>
         </li>
         <li class="toclevel-1 tocsection-3">
-          <a href="#Page_history"><span class="tocnumber">3</span> <span class="toctext">Page history</span></a>
+          <a href="#Mozilla_browser_data"><span class="tocnumber">3</span> <span class="toctext">Mozilla browser data</span></a>
         </li>
         <li class="toclevel-1 tocsection-4">
-          <a href="#Temporary_HTML_files"><span class="tocnumber">4</span> <span class="toctext">Temporary HTML files</span></a>
+          <a href="#Application_logs"><span class="tocnumber">4</span> <span class="toctext">Application logs</span></a>
         </li>
         <li class="toclevel-1 tocsection-5">
-          <a href="#Bookmarks"><span class="tocnumber">5</span> <span class="toctext">Bookmarks</span></a>
+          <a href="#Page_history"><span class="tocnumber">5</span> <span class="toctext">Page history</span></a>
         </li>
         <li class="toclevel-1 tocsection-6">
-          <a href="#File_download"><span class="tocnumber">6</span> <span class="toctext">File download</span></a>
+          <a href="#Temporary_HTML_files"><span class="tocnumber">6</span> <span class="toctext">Temporary HTML files</span></a>
         </li>
         <li class="toclevel-1 tocsection-7">
-          <a href="#Math_images_.28LaTEX_only.29"><span class="tocnumber">7</span> <span class="toctext">Math images (LaT<sub>E</sub>X only)</span></a>
+          <a href="#Bookmarks"><span class="tocnumber">7</span> <span class="toctext">Bookmarks</span></a>
         </li>
         <li class="toclevel-1 tocsection-8">
-          <a href="#Content_applications"><span class="tocnumber">8</span> <span class="toctext">Content applications</span></a>
+          <a href="#File_download"><span class="tocnumber">8</span> <span class="toctext">File download</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-9">
+          <a href="#Math_images_.28LaTEX_only.29"><span class="tocnumber">9</span> <span class="toctext">Math images (LaT<sub>E</sub>X only)</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-10">
+          <a href="#Content_applications"><span class="tocnumber">10</span> <span class="toctext">Content applications</span></a>
         </li>
       </ul>
     </div>
@@ -135,7 +164,7 @@
       Application logs are enabled by default. They are saved to files in the following directory: <code>/xowa/user/anonymous/app/tmp</code>.
     </p>
     <p>
-      Application logs can be disabled at <a href="http://xowa.org/home/wiki/Options/Security.html" id="xolnki_2" title="Options/Security">Options/Security</a>
+      Application logs can be disabled at <a href="http://xowa.org/home/wiki/Options/Security.html" id="xolnki_3" title="Options/Security">Options/Security</a>
     </p>
     <h2>
       <span class="mw-headline" id="Page_history">Page history</span>
@@ -144,16 +173,16 @@
       Page history is enabled by default. The data is saved to the following file: <code>/xowa/user/anonymous/app/data/history/page_history.csv</code>.
     </p>
     <p>
-      Page history can be disabled at <a href="http://xowa.org/home/wiki/Options/Security.html" id="xolnki_3" title="Options/Security">Options/Security</a>
+      Page history can be disabled at <a href="http://xowa.org/home/wiki/Options/Security.html" id="xolnki_4" title="Options/Security">Options/Security</a>
     </p>
     <h2>
       <span class="mw-headline" id="Temporary_HTML_files">Temporary HTML files</span>
     </h2>
     <p>
-      All HTML for pages will be saved to and loaded from a temp directory on disk. The files are saved to the following directory: <code>/xowa/user/anonymous/app/tmp/html</code>. This is done for performance reasons related to SWT / XULRunner. See <a href="http://xowa.org/home/wiki/Options/Security.html" id="xolnki_4" title="Options/Security">Options/Security</a>
+      All HTML for pages will be saved to and loaded from a temp directory on disk. The files are saved to the following directory: <code>/xowa/user/anonymous/app/tmp/html</code>. This is done for performance reasons related to SWT / XULRunner. See <a href="http://xowa.org/home/wiki/Options/Security.html" id="xolnki_5" title="Options/Security">Options/Security</a>
     </p>
     <p>
-      HTML can be changed to load directly from memory at <a href="http://xowa.org/home/wiki/Options/Security.html" id="xolnki_5" title="Options/Security">Options/Security</a>
+      HTML can be changed to load directly from memory at <a href="http://xowa.org/home/wiki/Options/Security.html" id="xolnki_6" title="Options/Security">Options/Security</a>
     </p>
     <h2>
       <span class="mw-headline" id="Bookmarks">Bookmarks</span>
@@ -162,7 +191,7 @@
       Bookmarks are enabled by default. Note that no data is ever written automatically to the Bookmarks page, so one can simply not use the <code><span style="color:blue;">add</span></code> feature.
     </p>
     <p>
-      If you wish to disable the feature completely (to prevent accidental clicks), then you can disable it at <a href="http://xowa.org/home/wiki/Options/Security.html" id="xolnki_6" title="Options/Security">Options/Security</a>
+      If you wish to disable the feature completely (to prevent accidental clicks), then you can disable it at <a href="http://xowa.org/home/wiki/Options/Security.html" id="xolnki_7" title="Options/Security">Options/Security</a>
     </p>
     <h2>
       <span class="mw-headline" id="File_download">File download</span>
@@ -171,7 +200,7 @@
       File download is disabled by default. All files are downloaded to the following directory: <code>/xowa/file</code>.
     </p>
     <p>
-      If you've enabled it, you can disable it at <a href="http://xowa.org/home/wiki/Options/Files.html" id="xolnki_7" title="Options/Files">Options/Files</a>
+      If you've enabled it, you can disable it at <a href="http://xowa.org/home/wiki/Options/Files.html" id="xolnki_8" title="Options/Files">Options/Files</a>
     </p>
     <h2>
       <span class="mw-headline" id="Math_images_.28LaTEX_only.29">Math images (LaT<sub>E</sub>X only)</span>
@@ -183,7 +212,7 @@
       If you choose to use LaT<sub>E</sub>X then temporary files will be generated. All files are created in the following directory: <code>/xowa/file/name_of_wiki/math</code>.
     </p>
     <p>
-      You can always disable LaT<sub>E</sub>X again at <a href="http://xowa.org/home/wiki/Options/Math.html" id="xolnki_8" title="Options/Math">Options/Math</a>
+      You can always disable LaT<sub>E</sub>X again at <a href="http://xowa.org/home/wiki/Options/Math.html" id="xolnki_9" title="Options/Math">Options/Math</a>
     </p>
     <h2>
       <span class="mw-headline" id="Content_applications">Content applications</span>
@@ -192,7 +221,7 @@
       Content applications are enabled by default. These applications may or may not generate their own temp files.
     </p>
     <p>
-      These third-party viewer applications can be disabled at <a href="http://xowa.org/home/wiki/Options/Apps.html" id="xolnki_9" title="Options/Apps">Options/Apps</a> by setting all values to blank.
+      These third-party viewer applications can be disabled at <a href="http://xowa.org/home/wiki/Options/Apps.html" id="xolnki_10" title="Options/Apps">Options/Apps</a> by setting all values to blank.
     </p>
   
     </div>
@@ -289,7 +318,17 @@
       <ul>
         <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
         <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
-        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+        <li>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="PQ529NWHCGDQ2">
+<div style="display:flex">
+  <span style="margin:2px 4px 0px 0px">XOWA</span>
+  <input type="image" height=14 src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+  <!--<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">-->
+</div>
+</form>        
+        </li>
       </ul>
     </div>
   </div>

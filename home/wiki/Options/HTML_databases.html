@@ -126,11 +126,11 @@
           <div id='xowa.wiki.hdumps.read_preferred__name' class='xocfg_itm_name'>
             Prefer HTML Databases for Read tab
           </div>
-          <div id='xowa.wiki.hdumps.read_preferred__undo' data-xocfg-type='bool' class='xocfg_itm_delete'>
+          <div id='xowa.wiki.hdumps.read_preferred__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.hdumps.read_preferred")' title="reset to &quot;y&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input id="xowa.wiki.hdumps.read_preferred" data-xocfg-key="xowa.wiki.hdumps.read_preferred" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
+            <input id="xowa.wiki.hdumps.read_preferred" data-xocfg-key="xowa.wiki.hdumps.read_preferred" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
           </div><input type='hidden' id='xowa.wiki.hdumps.read_preferred__key_box' value='xowa.wiki.hdumps.read_preferred'> <input type='hidden' id='xowa.wiki.hdumps.read_preferred__ctx_box' value='app'>
         </div>
         <div id='xowa.wiki.hdumps.read_preferred_help_div' class='xohelp_div'>
@@ -284,7 +284,17 @@
       <ul>
         <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
         <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
-        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+        <li>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="PQ529NWHCGDQ2">
+<div style="display:flex">
+  <span style="margin:2px 4px 0px 0px">XOWA</span>
+  <input type="image" height=14 src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+  <!--<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">-->
+</div>
+</form>        
+        </li>
       </ul>
     </div>
   </div>

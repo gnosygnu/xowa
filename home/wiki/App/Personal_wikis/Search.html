@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Personal wikis/Search - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Personal wikis/Search</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <h2>
+      <span class="mw-headline" id="Background">Background</span>
+    </h2>
+    <p>
+      XOWA has a search feature based on page title. It is used for the following:
+    </p>
+    <ul>
+      <li>
+        The url bar
+      </li>
+      <li>
+        The Search bar (next to <code>Read</code>, <code>Edit</code>, <code>View HTML</code>)
+      </li>
+    </ul>
+    <p>
+      The search feature is based off of the <a href="https://en.wikipedia.org/wiki/PageRank" rel="nofollow" class="external text">PageRank algorithm</a>. Because of the complicated, recursive nature of the algorithm, the index can only be run for the entire wiki at once -- not every time a page changes. For small wikis, search reindexing will complete in a few seconds. For a large wiki like en.wikipedia.org, it could take 12 hours.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Reindex_search">Reindex search</span>
+    </h2>
+    <p>
+      To use the search feature, do the following:
+    </p>
+    <ul>
+      <li>
+        Create some pages in your wiki. For example, say you create a page called <code>Example 1</code>
+      </li>
+      <li>
+        From the main menu, select <code>Personal wikis</code> -&gt; <code>Personal wikis list</code>. Or go to <a href="http://xowa.org/home/wiki/Special:XowaWikiDirectory.html" id="xolnki_2" title="Special:XowaWikiDirectory" class="xowa-visited">Special:XowaWikiDirectory</a>
+      </li>
+      <li>
+        Click the <code>wrench icon</code> next to your wiki
+      </li>
+      <li>
+        Press the <code>Reindex search pages</code> link
+      </li>
+      <li>
+        Wait for the process to complete.
+      </li>
+      <li>
+        Go to your wiki. Type in <code>examp</code> in the url bar. You will see <code>Example 1</code> auto-suggested.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Other_links">Other links</span>
+    </h2>
+    <ul>
+      <li>
+        <a href="http://xowa.org/home/wiki/App/Search.html" id="xolnki_3" title="App/Search" class="xowa-visited">App/Search</a>: For details about search query. (You can use booleans and wildcards)
+      </li>
+      <li>
+        <a href="http://xowa.org/home/wiki/App/Search/Score.html" id="xolnki_4" title="App/Search/Score" class="xowa-visited">App/Search/Score</a>: For details about PageRank and scoring
+      </li>
+    </ul>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://www.youtube.com/watch?v=q0qbXYXEH6M" title="See a video of XOWA Desktop in action">Video</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+        <li><a href="https://www.youtube.com/watch?v=jsMTBxGweUw" title="See a video of XOWA Android in action">Video</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <li>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="PQ529NWHCGDQ2">
+<div style="display:flex">
+  <span style="margin:2px 4px 0px 0px">XOWA</span>
+  <input type="image" height=14 src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+  <!--<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">-->
+</div>
+</form>        
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>

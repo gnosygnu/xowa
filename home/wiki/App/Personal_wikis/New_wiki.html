@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Personal wikis/New wiki - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Personal wikis/New wiki</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Domain_name"><span class="tocnumber">1</span> <span class="toctext">Domain name</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Name"><span class="tocnumber">2</span> <span class="toctext">Name</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Folder"><span class="tocnumber">3</span> <span class="toctext">Folder</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#Main_Page"><span class="tocnumber">4</span> <span class="toctext">Main Page</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-5">
+          <a href="#Notes"><span class="tocnumber">5</span> <span class="toctext">Notes</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Domain_name">Domain name</span>
+    </h2>
+    <p>
+      The domain name is a unique id to your wiki within the XOWA app. As reference, English Wikipedia has a domain name of <code>en.wikipedia.org</code>.
+    </p>
+    <p>
+      Here are some guidelines:
+    </p>
+    <ul>
+      <li>
+        A domain name should be short. The maximum length is 64 characters.
+      </li>
+      <li>
+        A domain name can only consist of alphanumeric characters, a dot, or a dash. 
+        <ul>
+          <li>
+            If a dash is present, it cannot be at the start or the end of the domain. 
+            <ul>
+              <li>
+                For example, the following is invalid: <code>-en.wikipedia.org-</code>.
+              </li>
+              <li>
+                For another example, the following is valid: <code>en.wikipedia.org.2016-12</code>.
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        A domain name should be unique. Uniqueness is important if you ever share your wiki with anyone else. If you name your wiki <code>notes</code>, and someone else names their wiki <code>notes</code> then XOWA won't be able to use both wikis at once.
+      </li>
+      <li>
+        A domain name should look like a regular url. Although XOWA is meant for offline environments, it does have a HTML dump feature<sup id="cite_ref-html_dump_generates_xowa_dot_org_0-0" class="reference"><a href="#cite_note-html_dump_generates_xowa_dot_org-0">[1]</a></sup>. Using a regular domain name will make any future transition to online publishing easier.
+      </li>
+      <li>
+        A domain name cannot be changed after the wiki is created. Please choose the domain name carefully.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Name">Name</span>
+    </h2>
+    <p>
+      The name is a freeform text name used to identify your wiki. Currently, it's only being used on <a href="http://xowa.org/home/wiki/Special:XowaWikiDirectory.html" id="xolnki_2" title="Special:XowaWikiDirectory" class="xowa-visited">Special:XowaWikiDirectory</a>, but it will be used more elsewhere.
+    </p>
+    <p>
+      The name only has a limitation of 255 characters or less.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Folder">Folder</span>
+    </h2>
+    <p>
+      The folder is where your wiki is located. XOWA saves all data in one <code>.xowa</code> file<sup id="cite_ref-xowa_is_sqlite_1-0" class="reference"><a href="#cite_note-xowa_is_sqlite-1">[2]</a></sup>, but it needs to assign a folder to a wiki to generate other temporary data.
+    </p>
+    <p>
+      When creating a wiki, XOWA will create the folder if it doesn't exist.
+    </p>
+    <p>
+      When editing a wiki, changing the folder requires extra steps.
+    </p>
+    <p>
+      For example, consider a wiki which was created with a folder of <code>C:\old\wiki.me.org</code> and should be moved to a folder called <code>C:\new\wiki.me.org</code>
+    </p>
+    <ul>
+      <li>
+        Close all tabs that have pages from <code>wiki.me.org</code>
+      </li>
+      <li>
+        Close XOWA
+      </li>
+      <li>
+        Move the file manually from <code>C:\old\wiki.me.org\wiki.me.org.xowa</code> to <code>C:\new\wiki.me.org\wiki.me.org.xowa</code>
+      </li>
+      <li>
+        Open XOWA
+      </li>
+      <li>
+        From the main menu, do <code>Personal wikis</code> -&gt; <code>Personal wiki list</code>
+      </li>
+      <li>
+        Click the wrench icon next on the same row as the moved wiki
+      </li>
+      <li>
+        Enter in <code>C:\new\wiki.me.org\wiki.me.org.xowa</code>
+      </li>
+      <li>
+        Press the Save button
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Main_Page">Main Page</span>
+    </h2>
+    <p>
+      The Main Page is the default start page for your wiki.
+    </p>
+    <ul>
+      <li>
+        XOWA will creating this page after your wiki is created.
+      </li>
+      <li>
+        The Main Page is also the default page when using just the url. For example, entering in <code>en.wikipedia.org</code> in the url bar will automatically navigate to <code>en.wikipedia.org/wiki/Main_Page</code>
+      </li>
+      <li>
+        The Main Page should follow standard conventions for page titles. As a brief overview: 
+        <ul>
+          <li>
+            Alphanumeric characters are fine
+          </li>
+          <li>
+            Spaces are fine
+          </li>
+          <li>
+            Try not to use colons. They can be mistaken for namespaces
+          </li>
+          <li>
+            Try not to use punctuation. Some are invalid (For example: <code>&lt;</code>). For more info, see <a href="https://en.wikipedia.org/wiki/Wikipedia:Page_name#Technical_restrictions_and_limitations" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Wikipedia:Page_name#Technical_restrictions_and_limitations</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        The Main Page cannot be changed after the wiki is created. Please choose the domain name carefully.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Notes">Notes</span>
+    </h2>
+    <ol class="references">
+      <li id="cite_note-html_dump_generates_xowa_dot_org-0">
+        <span class="mw-cite-backlink"><a href="#cite_ref-html_dump_generates_xowa_dot_org_0-0">^</a></span> <span class="reference-text">This is how <a href="http://xowa.org" rel="nofollow" class="external free">http://xowa.org</a> is generated</span>
+      </li>
+      <li id="cite_note-xowa_is_sqlite-1">
+        <span class="mw-cite-backlink"><a href="#cite_ref-xowa_is_sqlite_1-0">^</a></span> <span class="reference-text">A .xowa file is just a .sqlite3 file. Only the extension is different; everything else is the same.</span>
+      </li>
+    </ol>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://www.youtube.com/watch?v=q0qbXYXEH6M" title="See a video of XOWA Desktop in action">Video</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+        <li><a href="https://www.youtube.com/watch?v=jsMTBxGweUw" title="See a video of XOWA Android in action">Video</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <li>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="PQ529NWHCGDQ2">
+<div style="display:flex">
+  <span style="margin:2px 4px 0px 0px">XOWA</span>
+  <input type="image" height=14 src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+  <!--<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">-->
+</div>
+</form>        
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>

@@ -25,7 +25,7 @@
           <option value='xowa.app.security'>
             App - Security
           </option>
-          <option value='xowa.app.startup' selected='selected'>
+          <option value='xowa.app.startup'>
             App - Startup
           </option>
           <option value='xowa.app.update'>
@@ -97,7 +97,7 @@
           <option value='xowa.addon.math'>
             Addon - Math
           </option>
-          <option value='xowa.addon.score'>
+          <option value='xowa.addon.score' selected='selected'>
             Addon - Score
           </option>
           <option value='xowa.addon.popups'>
@@ -115,255 +115,142 @@
         <div>
           <p id='page_help_para'>
           </p>
+          <table class="metadata plainlinks ambox ambox-delete" style="">
+            <tr>
+              <td class="mbox-empty-cell">
+              </td>
+              <td class="mbox-text" style="">
+                <p>
+                  <span class="mbox-text-span">ImageMagick must be set up in order for Score to work correctly.</span>
+                </p>
+                <p>
+                  <span class="mbox-text-span">See the following pages: <a tabindex="-1" href="/wiki/Dev/File/Setup/Windows" id="xolnki_33" title="Dev/File/Setup/Windows" class="xowa-visited">Dev/File/Setup/Windows</a>, <a tabindex="-1" href="/wiki/Dev/File/Setup/Linux" id="xolnki_34" title="Dev/File/Setup/Linux">Dev/File/Setup/Linux</a>, <a tabindex="-1" href="/wiki/Dev/File/Setup/Mac_OS_X" id="xolnki_35" title="Dev/File/Setup/Mac OS X">Dev/File/Setup/Mac OS X</a></span>
+                </p>
+              </td>
+            </tr>
+          </table>
         </div>
         <h2>
-          Window
+          General
         </h2>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.window.mode")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.enabled")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.app.startup.window.mode__name' class='xocfg_itm_name'>
-            Window Mode
+          <div id='xowa.addon.score.enabled__name' class='xocfg_itm_name'>
+            Enabled
           </div>
-          <div id='xowa.app.startup.window.mode__undo' data-xocfg-type='list:xowa.app.startup.window.mode' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.window.mode")' title="reset to &quot;previous&quot;">&nbsp;</span>
+          <div id='xowa.addon.score.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <select id="xowa.app.startup.window.mode" data-xocfg-key="xowa.app.startup.window.mode" data-xocfg-type="list:xowa.app.startup.window.mode" accesskey="d" class="xocfg_data__list" size="5">
-              <option value="previous" selected="selected">
-                previous
-              </option>
-              <option value="maximized">
-                maximized
-              </option>
-              <option value="absolute">
-                absolute
-              </option>
-              <option value="relative">
-                relative
-              </option>
-              <option value="default">
-                default
-              </option>
-            </select>
-          </div><input type='hidden' id='xowa.app.startup.window.mode__key_box' value='xowa.app.startup.window.mode'> <input type='hidden' id='xowa.app.startup.window.mode__ctx_box' value='app'>
+            <input id="xowa.addon.score.enabled" data-xocfg-key="xowa.addon.score.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.addon.score.enabled__key_box' value='xowa.addon.score.enabled'> <input type='hidden' id='xowa.addon.score.enabled__ctx_box' value='app'>
         </div>
-        <div id='xowa.app.startup.window.mode_help_div' class='xohelp_div'>
-          <div id='xowa.app.startup.window.mode_help_msg' class='xohelp_msg'>
+        <div id='xowa.addon.score.enabled_help_div' class='xohelp_div'>
+          <div id='xowa.addon.score.enabled_help_msg' class='xohelp_msg'>
             <p>
-              Choose one of the following:
+              Handles &lt;score&gt; tags:
             </p>
             <ul>
               <li>
-                <b>previous</b>: window starts at same rect as previous session (default)
+                <b>checked</b> to process through lilypond binary (lilypond must be installed and its path must be set: <a tabindex="-1" href="/wiki/Options/Apps" id="xolnki_36" title="Options/Apps">Options/Apps</a>
               </li>
               <li>
-                <b>maximized</b>: window always starts maximized
-              </li>
-              <li>
-                <b>absolute</b>: window bounds are set to rect below
-              </li>
-              <li>
-                <b>relative</b>: window starts at full screen, and then adjusted by rect below
-              </li>
-              <li>
-                <b>default</b>: window starts at default rect (determined by operating system)
+                <b>unchecked</b> to render text only
               </li>
             </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.window.manual_rect")' title='view more info'>&nbsp;</span>
-          </div>
-          <div id='xowa.app.startup.window.manual_rect__name' class='xocfg_itm_name'>
-            Window Size
-          </div>
-          <div id='xowa.app.startup.window.manual_rect__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.window.manual_rect")' title="reset to &quot;0,0,800,640&quot;">&nbsp;</span>
-          </div>
-          <div class='xocfg_itm_data'>
-            <input id="xowa.app.startup.window.manual_rect" data-xocfg-key="xowa.app.startup.window.manual_rect" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="0,0,800,640">
-          </div><input type='hidden' id='xowa.app.startup.window.manual_rect__key_box' value='xowa.app.startup.window.manual_rect'> <input type='hidden' id='xowa.app.startup.window.manual_rect__ctx_box' value='app'>
-        </div>
-        <div id='xowa.app.startup.window.manual_rect_help_div' class='xohelp_div'>
-          <div id='xowa.app.startup.window.manual_rect_help_msg' class='xohelp_msg'>
-            <p>
-              Enter 'x,y,w,h' numbers separated by commas. Note that this setting is used in conjunction with 'Window Mode'
-            </p>
-            <ul>
-              <li>
-                <b>absolute</b>: absolute rect of window; EX: 0,0,1280,1024 means x=0 y=0 w=1280 h=1024
-              </li>
-              <li>
-                <b>relative</b>: relative adjustment to full screen size; EX: 20,20,-20,-20 on an 1280,1024 screen will yield a rect of x=20 y=20 w=1260 h=1004
-              </li>
-              <li>
-                <b>previous</b>, <b>maximized</b>, <b>default</b>: does nothing
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.window.manual_safe")' title='view more info'>&nbsp;</span>
-          </div>
-          <div id='xowa.app.startup.window.manual_safe__name' class='xocfg_itm_name'>
-            Safe Mode
-          </div>
-          <div id='xowa.app.startup.window.manual_safe__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.window.manual_safe")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
-          <div class='xocfg_itm_data'>
-            <input id="xowa.app.startup.window.manual_safe" data-xocfg-key="xowa.app.startup.window.manual_safe" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.app.startup.window.manual_safe__key_box' value='xowa.app.startup.window.manual_safe'> <input type='hidden' id='xowa.app.startup.window.manual_safe__ctx_box' value='app'>
-        </div>
-        <div id='xowa.app.startup.window.manual_safe_help_div' class='xohelp_div'>
-          <div id='xowa.app.startup.window.manual_safe_help_msg' class='xohelp_msg'>
-            <p>
-              Choose one of the following:
-            </p>
-            <ul>
-              <li>
-                <b>checked</b>: prevents window that would be located off screen; EX: x=-9999 or y=9999
-              </li>
-              <li>
-                <b>unchecked</b>: allows off-screen rect.<br>
-              </li>
-            </ul>
-            <p>
-              NOTE: if you create an unviewable rect you will need to edit the options file
-            </p>
           </div>
         </div>
         <h2>
-          Tabs
+          Apps
         </h2>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.tabs.type")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.apps.lilypond")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.app.startup.tabs.type__name' class='xocfg_itm_name'>
-            Startup type
+          <div id='xowa.addon.score.apps.lilypond__name' class='xocfg_itm_name'>
+            Lilypond
           </div>
-          <div id='xowa.app.startup.tabs.type__undo' data-xocfg-type='list:xowa.app.startup.pages.type' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.tabs.type")' title="reset to &quot;previous&quot;">&nbsp;</span>
+          <div id='xowa.addon.score.apps.lilypond__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.apps.lilypond")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}lilypond\usr\bin\lilypond.exe|&quot;-dsafe=#t&quot; -dbackend=ps --png --header=texidoc -dmidi-extension=midi &quot;~{file}&quot;&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <select id="xowa.app.startup.tabs.type" data-xocfg-key="xowa.app.startup.tabs.type" data-xocfg-type="list:xowa.app.startup.pages.type" accesskey="d" class="xocfg_data__list" size="4">
-              <option value="blank">
-                blank
-              </option>
-              <option value="xowa">
-                xowa
-              </option>
-              <option value="previous" selected="selected">
-                previous
-              </option>
-              <option value="custom">
-                custom
-              </option>
-            </select>
-          </div><input type='hidden' id='xowa.app.startup.tabs.type__key_box' value='xowa.app.startup.tabs.type'> <input type='hidden' id='xowa.app.startup.tabs.type__ctx_box' value='app'>
+            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.lilypond-exe" data-xocfg-key="xowa.addon.score.apps.lilypond" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="C:\000\100_bin\300_doc\300_aud\200_edit\100_lilypond\usr\bin\lilypond.exe"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.score.apps.lilypond-exe", "Please select a file.");'>&nbsp;</span><br>
+            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.score.apps.lilypond-arg" data-xocfg-key="xowa.addon.score.apps.lilypond" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="&quot;-dsafe=#t&quot; -dbackend=ps --png --header=texidoc -dmidi-extension=midi &quot;~{file}&quot;">
+          </div><input type='hidden' id='xowa.addon.score.apps.lilypond__key_box' value='xowa.addon.score.apps.lilypond'> <input type='hidden' id='xowa.addon.score.apps.lilypond__ctx_box' value='app'>
         </div>
-        <div id='xowa.app.startup.tabs.type_help_div' class='xohelp_div'>
-          <div id='xowa.app.startup.tabs.type_help_msg' class='xohelp_msg'>
+        <div id='xowa.addon.score.apps.lilypond_help_div' class='xohelp_div'>
+          <div id='xowa.addon.score.apps.lilypond_help_msg' class='xohelp_msg'>
             <p>
-              Choose a startup page from one of the following:
+              Converts Lilypond to music scores / midi files (Recommended: <a tabindex="-1" href="http://www.lilypond.org" rel="nofollow" class="external text">Lilypond</a>)
             </p>
-            <ul>
-              <li>
-                <b>blank</b>: one tab loads and it is set to blank (Special:XowaDefaultTab)
-              </li>
-              <li>
-                <b>xowa</b> : one tab loads and it is set to the XOWA home page (home/wiki/Main_Page)
-              </li>
-              <li>
-                <b>previous</b>: all opened pages from the previous session loads. For example, if "en.w:Earth" and "en.w:Moon" were open when XOWA was last closed, these tabs will be reopened
-              </li>
-              <li>
-                <b>custom</b>: all pages specified in the custom box will load
-              </li>
-            </ul>
           </div>
         </div>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.tabs.custom")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.apps.abc2ly")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.app.startup.tabs.custom__name' class='xocfg_itm_name'>
-            Custom pages
+          <div id='xowa.addon.score.apps.abc2ly__name' class='xocfg_itm_name'>
+            Python
           </div>
-          <div id='xowa.app.startup.tabs.custom__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.tabs.custom")' title="reset to &quot;&quot;">&nbsp;</span>
+          <div id='xowa.addon.score.apps.abc2ly__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.apps.abc2ly")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}lilypond\usr\bin\python.exe|abc2ly.py -s &quot;--output=~{target}&quot; &quot;~{source}&quot;&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-<textarea id="xowa.app.startup.tabs.custom" data-xocfg-key="xowa.app.startup.tabs.custom" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
-</textarea>
-          </div><input type='hidden' id='xowa.app.startup.tabs.custom__key_box' value='xowa.app.startup.tabs.custom'> <input type='hidden' id='xowa.app.startup.tabs.custom__ctx_box' value='app'>
+            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.abc2ly-exe" data-xocfg-key="xowa.addon.score.apps.abc2ly" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="C:\000\100_bin\300_doc\300_aud\200_edit\100_lilypond\usr\bin\python.exe"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.score.apps.abc2ly-exe", "Please select a file.");'>&nbsp;</span><br>
+            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.score.apps.abc2ly-arg" data-xocfg-key="xowa.addon.score.apps.abc2ly" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="abc2ly.py -s &quot;--output=~{target}&quot; &quot;~{source}&quot;">
+          </div><input type='hidden' id='xowa.addon.score.apps.abc2ly__key_box' value='xowa.addon.score.apps.abc2ly'> <input type='hidden' id='xowa.addon.score.apps.abc2ly__ctx_box' value='app'>
         </div>
-        <div id='xowa.app.startup.tabs.custom_help_div' class='xohelp_div'>
-          <div id='xowa.app.startup.tabs.custom_help_msg' class='xohelp_msg'>
+        <div id='xowa.addon.score.apps.abc2ly_help_div' class='xohelp_div'>
+          <div id='xowa.addon.score.apps.abc2ly_help_msg' class='xohelp_msg'>
             <p>
-              Specify custom pages to show on startup:
+              Converts ABC notation to Lilypond <a tabindex="-1" href="http://www.lilypond.org" rel="nofollow" class="external text">Lilypond</a>
             </p>
-            <ul>
-              <li>
-                This option only applies if <code>custom</code> is selected for type.<br>
-              </li>
-            </ul>
-            <p>
-              Also, note the following:
-            </p>
-            <ul>
-              <li>
-                Aliases can be used. For example, "en.w:Earth" is a shortcut for "en.wikipedia.org/wiki/Earth"
-              </li>
-              <li>
-                Multiple pages are separated by new lines. For example, the following will load 2 tabs:
-              </li>
-            </ul>
-<pre>
-en.w:Earth
-en.w:Moon
-</pre>
           </div>
         </div>
-        <h2>
-          Advanced
-        </h2>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.startup.script")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.apps.trim_img")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.app.startup.script__name' class='xocfg_itm_name'>
-            Script
+          <div id='xowa.addon.score.apps.trim_img__name' class='xocfg_itm_name'>
+            ImageMagick - Trim
           </div>
-          <div id='xowa.app.startup.script__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.startup.script")' title="reset to &quot;&quot;">&nbsp;</span>
+          <div id='xowa.addon.score.apps.trim_img__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.apps.trim_img")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}imagemagick\convert|-trim &quot;~{source}&quot; &quot;~{target}&quot;&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-<textarea id="xowa.app.startup.script" data-xocfg-key="xowa.app.startup.script" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
-</textarea>
-          </div><input type='hidden' id='xowa.app.startup.script__key_box' value='xowa.app.startup.script'> <input type='hidden' id='xowa.app.startup.script__ctx_box' value='app'>
+            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.trim_img-exe" data-xocfg-key="xowa.addon.score.apps.trim_img" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}imagemagick\convert"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.score.apps.trim_img-exe", "Please select a file.");'>&nbsp;</span><br>
+            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.score.apps.trim_img-arg" data-xocfg-key="xowa.addon.score.apps.trim_img" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="-trim &quot;~{source}&quot; &quot;~{target}&quot;">
+          </div><input type='hidden' id='xowa.addon.score.apps.trim_img__key_box' value='xowa.addon.score.apps.trim_img'> <input type='hidden' id='xowa.addon.score.apps.trim_img__ctx_box' value='app'>
         </div>
-        <div id='xowa.app.startup.script_help_div' class='xohelp_div'>
-          <div id='xowa.app.startup.script_help_msg' class='xohelp_msg'>
+        <div id='xowa.addon.score.apps.trim_img_help_div' class='xohelp_div'>
+          <div id='xowa.addon.score.apps.trim_img_help_msg' class='xohelp_msg'>
             <p>
-              Enter custom configuration.
+              Trims image <a tabindex="-1" href="http://www.imagemagick.org/" rel="nofollow" class="external text">ImageMagick</a>
             </p>
-            <ul>
-              <li>
-                These scripts will run after the application starts up. They will also run whenever you click Save on this page.
-              </li>
-              <li>
-                These scripts are intended for advanced users. They are in the format of .gfs statements (for examples, see /xowa/xowa.gfs). Please do not enter scripts unless instructed, or else XOWA may fail to start up.
-              </li>
-              <li>
-                These scripts are saved to /xowa/user/anonymous/data/cfg/user_custom_cfg.gfs. If XOWA fails to start up, simply delete the file.
-              </li>
-            </ul>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.apps.midi_to_ogg")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.score.apps.midi_to_ogg__name' class='xocfg_itm_name'>
+            Convert midi to ogg
+          </div>
+          <div id='xowa.addon.score.apps.midi_to_ogg__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.apps.midi_to_ogg")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}timidity\timidity|-Ov &quot;--output-file=~{target}&quot; &quot;~{source}&quot;&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.midi_to_ogg-exe" data-xocfg-key="xowa.addon.score.apps.midi_to_ogg" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}timidity\timidity"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.score.apps.midi_to_ogg-exe", "Please select a file.");'>&nbsp;</span><br>
+            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.score.apps.midi_to_ogg-arg" data-xocfg-key="xowa.addon.score.apps.midi_to_ogg" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="-Ov &quot;--output-file=~{target}&quot; &quot;~{source}&quot;">
+          </div><input type='hidden' id='xowa.addon.score.apps.midi_to_ogg__key_box' value='xowa.addon.score.apps.midi_to_ogg'> <input type='hidden' id='xowa.addon.score.apps.midi_to_ogg__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.score.apps.midi_to_ogg_help_div' class='xohelp_div'>
+          <div id='xowa.addon.score.apps.midi_to_ogg_help_msg' class='xohelp_msg'>
+            <p>
+              Converts midi to ogg <a tabindex="-1" href="http://timidity.sourceforge.net/" rel="nofollow" class="external text">TiMidity++</a>
+            </p>
           </div>
         </div>
       </div>
@@ -463,7 +350,17 @@ en.w:Moon
       <ul>
         <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
         <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
-        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+        <li>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="PQ529NWHCGDQ2">
+<div style="display:flex">
+  <span style="margin:2px 4px 0px 0px">XOWA</span>
+  <input type="image" height=14 src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+  <!--<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">-->
+</div>
+</form>        
+        </li>
       </ul>
     </div>
   </div>
