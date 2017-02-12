@@ -42,8 +42,8 @@ class Fs_root_wkr {
 				rv = Get_from_fs(lnki_ttl);
 				if (rv == null) {
 					// HACK: if failed and not much time has passed, try rescanning the entire fs again; need to change to filesystem watcher
-					long scan_time_cur = gplx.core.envs.System_.Ticks();
-					if (gplx.core.envs.System_.Ticks__elapsed_in_sec(scan_time_prv) > 10) {
+					if (gplx.core.envs.System_.Ticks__elapsed_in_sec(scan_time_prv) > 2) {	// NOTE: 2 seconds chosen just to make sure this doesn't fire multiple times during one page load
+						Gfo_usr_dlg_.Instance.Warn_many("", "", "fs.dir:file not found; title=~{0}", lnki_ttl);
 						fs_fil_mgr = Init_fs_fil_mgr();
 						rv = Get_from_fs(lnki_ttl);
 						scan_time_prv = gplx.core.envs.System_.Ticks();
