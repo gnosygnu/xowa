@@ -69,7 +69,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		else if (ctx.Match(k, Invk_page_refresh))							Page__refresh();
 		else if	(ctx.Match(k, Invk_page_async_exec))						Xog_async_wkr.Async(((Xog_tab_itm)m.ReadObj("v")));
 		else if	(ctx.Match(k, Invk_page_view_read))							Page__mode_(Xopg_page_.Tid_read);
-		else if	(ctx.Match(k, Invk_page_view_edit))							Page__mode_(Xopg_page_.Tid_edit);
+		else if	(ctx.Match(k, Invk_page_view_edit))							Page__mode_edit_();
 		else if	(ctx.Match(k, Invk_page_view_html))							Page__mode_(Xopg_page_.Tid_html);
 		else if (ctx.Match(k, Invk_page_edit_save))							Xog_tab_itm_edit_mgr.Save(tab_mgr.Active_tab(), Bool_.N);
 		else if (ctx.Match(k, Invk_page_edit_save_draft))					Xog_tab_itm_edit_mgr.Save(tab_mgr.Active_tab(), Bool_.Y);
@@ -156,6 +156,12 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		return pos == Bry_find_.Not_found
 			? null
 			: String_.Mid(v, pos + 1);
+	}
+	public void Page__mode_edit_() {	// only called from by link
+		// HACK: when "edit" is clicked, always reload page from database; handles rarely-reproducible issue of "edit-after-rename" causing older versions to show up
+		Xog_tab_itm tab = tab_mgr.Active_tab(); Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki();
+		page = wiki.Page_mgr().Load_page(page.Url(), page.Ttl(), tab);
+		Page__mode_(Xopg_page_.Tid_edit);
 	}
 	public void Page__mode_(byte new_mode_tid) {
 		Xog_tab_itm tab = tab_mgr.Active_tab(); Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki();
