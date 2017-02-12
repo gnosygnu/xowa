@@ -30,15 +30,17 @@ public class Xowdir_item_bridge implements Bridge_cmd_itm {
 		switch (proc_id) {
 			case Proc__save:					itm_mgr.Save(args); break;
 			case Proc__delete:					itm_mgr.Delete(args); break;
+			case Proc__reindex_search:			itm_mgr.Reindex_search(args); break;
 			default: throw Err_.new_unhandled_default(proc_id);
 		}
 		return "";
 	}
 
-	private static final byte Proc__save = 0, Proc__delete = 1;
+	private static final byte Proc__save = 0, Proc__delete = 1, Proc__reindex_search = 2;
 	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("save"						, Proc__save)
 	.Add_str_byte("delete"						, Proc__delete)
+	.Add_str_byte("reindex_search"				, Proc__reindex_search)
 	;
 
 	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("wiki.directory.item");

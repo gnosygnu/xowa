@@ -45,6 +45,11 @@ public class Xopg_tag_wtr_ {
 		Io_url dir = http_root.GenSubDir_nest("bin", "any", "xowa", "html", "res", "src", "xowa", "xoelem");
 		head_tags.Add(Xopg_tag_itm.New_js_file(dir.GenSubFil_nest("xo.elem.js")));
 	}
+	public static void Add__xonotify(Xopg_tag_mgr head_tags, Io_url http_root) {
+		Io_url dir = http_root.GenSubDir_nest("bin", "any", "xowa", "html", "res", "src", "xowa", "xonotify");
+		head_tags.Add(Xopg_tag_itm.New_js_file(http_root.GenSubFil_nest("bin", "any", "xowa", "html", "res", "lib", "notifyjs", "notifyjs-0.3.1.js")));
+		head_tags.Add(Xopg_tag_itm.New_js_file(dir.GenSubFil_nest("xo.notify.js")));
+	}
 	public static void Add__xoajax(Xopg_tag_mgr head_tags, Io_url http_root, Xoa_app app) {
 		Io_url dir = http_root.GenSubDir_nest("bin", "any", "xowa", "html", "res", "src", "xowa", "xoajax");
 		head_tags.Add(Xopg_tag_itm.New_js_file(dir.GenSubFil_nest("xo.app.js")));
@@ -66,8 +71,5 @@ public class Xopg_tag_wtr_ {
 	}
 	public static void Add__jquery(Xopg_tag_mgr head_tags, Io_url http_root) {
 		head_tags.Add(Xopg_tag_itm.New_js_file(http_root.GenSubFil_nest("bin", "any", "xowa", "html", "res", "lib", "jquery", "jquery-1.11.3.js")));
-	}
-	public static void Add__notifyjs(Xopg_tag_mgr head_tags, Io_url http_root) {
-		head_tags.Add(Xopg_tag_itm.New_js_file(http_root.GenSubFil_nest("bin", "any", "xowa", "html", "res", "lib", "notifyjs", "notifyjs-0.3.1.js")));
 	}
 }

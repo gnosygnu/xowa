@@ -245,6 +245,7 @@ public class Xowd_page_tbl implements Db_tbl {
 		}
 		finally {rdr.Rls();}
 	}
+	public int Select_count_all() {return conn.Exec_select_count_as_int(tbl_name, -1);}
 	private Db_rdr Load_ttls_starting_with_rdr(int ns_id, byte[] ttl_frag, boolean include_redirects, int max_results, int min_page_len, int browse_len, boolean fwd, boolean search_suggest) {
 		String ttl_frag_str = String_.new_u8(ttl_frag);
 		Criteria crt_ttl = fwd ? Db_crt_.New_mte(fld_title, ttl_frag_str) : Db_crt_.New_lt(fld_title, ttl_frag_str);

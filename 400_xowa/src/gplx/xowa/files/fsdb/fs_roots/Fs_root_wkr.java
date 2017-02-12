@@ -26,6 +26,7 @@ class Fs_root_wkr {
 	private Db_conn conn; private Db_cfg_tbl cfg_tbl;
 	private Orig_fil_tbl orig_tbl;
 	private int fil_id_next = 0;
+	private long scan_time_prv = gplx.core.envs.System_.Ticks();
 	public Orig_fil_tbl Orig_tbl() {return orig_tbl;}
 	public void Init(Xof_img_wkr_query_img_size img_size_wkr, Io_url orig_dir) {
 		this.img_size_wkr = img_size_wkr;
@@ -39,7 +40,17 @@ class Fs_root_wkr {
 			// not in db; get from fsys
 			if (rv == null) {
 				rv = Get_from_fs(lnki_ttl);
-				if (rv == null) return Orig_fil_row.Null;
+				if (rv == null) {
+					// HACK: if failed and not much time has passed, try rescanning the entire fs again; need to change to filesystem watcher
+					long scan_time_cur = gplx.core.envs.System_.Ticks();
+					if (gplx.core.envs.System_.Ticks__elapsed_in_sec(scan_time_prv) > 10) {
+						fs_fil_mgr = Init_fs_fil_mgr();
+						rv = Get_from_fs(lnki_ttl);
+						scan_time_prv = gplx.core.envs.System_.Ticks();
+					}
+					if (rv == null)
+						return Orig_fil_row.Null;
+				}
 			}
 			cache.Add(rv);
 		}

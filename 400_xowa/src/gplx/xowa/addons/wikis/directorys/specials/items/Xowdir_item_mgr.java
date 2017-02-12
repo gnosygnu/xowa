@@ -96,6 +96,25 @@ class Xowdir_item_mgr {
 		// navigate back to wiki_directory
 		app.Gui__cbk_mgr().Send_redirect(cbk_trg, "/site/home/wiki/Special:XowaWikiDirectory");
 	}
+	public void Reindex_search(Json_nde args) {
+		String domain = args.Get_as_str("domain");
+		Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgri().Get_by_or_null(Bry_.new_u8(domain));
+
+		// update page count; needed else search cannot generate correct ranges when normalizing search_scores
+		int page_count = wiki.Data__core_mgr().Tbl__page().Select_count_all();
+		if (page_count == -1) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "negative page count while reindexing search; domain=~{0}", domain);
+		}
+		wiki.Data__core_mgr().Db__core().Tbl__site_stats().Update(page_count, page_count, 0);
+		wiki.Data__core_mgr().Db__core().Tbl__site_stats().Select(wiki.Stats());
+
+		// run reindexer
+		gplx.xowa.addons.wikis.searchs.bldrs.Srch_bldr_mgr_.Setup(wiki);
+		app.Bldr().Run();
+
+		// send notify
+		app.Gui__cbk_mgr().Send_notify(cbk_trg, "search reindex done");
+	}
 	private String Validate(Xoa_app app, Xowdir_db_mgr db_mgr, boolean itm_is_new, String domain, String name, Io_url dir_url, String mainpage_name) {
 		// domain
 		if (itm_is_new) {

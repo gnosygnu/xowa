@@ -32,4 +32,7 @@ public class Xog_cbk_mgr {	// INSTANCE:app
 	public void Send_redirect(Xog_cbk_trg trg, String url) {
 		this.Send_json(trg, "xo.server.redirect__recv", gplx.core.gfobjs.Gfobj_nde.New().Add_str("url", url));
 	}
+	public void Send_notify(Xog_cbk_trg trg, String text) {
+		this.Send_json(trg, "xo.notify.show__recv", gplx.core.gfobjs.Gfobj_nde.New().Add_str("text", text).Add_str("status", "success"));
+	}
 }
