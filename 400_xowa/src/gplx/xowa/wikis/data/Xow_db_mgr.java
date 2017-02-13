@@ -130,7 +130,7 @@ public class Xow_db_mgr {
 		this.Init_by_load(db__core.Url());
 	}
 	public void Create_page(Xowd_page_tbl core_tbl, Xowd_text_tbl text_tbl, int page_id, int ns_id, byte[] ttl_wo_ns, boolean redirect, DateAdp modified_on, byte[] text_zip_data, int text_raw_len, int random_int, int text_db_id, int html_db_id) {
-		core_tbl.Insert_cmd_by_batch(page_id, ns_id, ttl_wo_ns, redirect, modified_on, text_raw_len, random_int, text_db_id, html_db_id);
+		core_tbl.Insert_cmd_by_batch(page_id, ns_id, ttl_wo_ns, redirect, modified_on, text_raw_len, random_int, text_db_id, html_db_id, -1);
 		text_tbl.Insert_cmd_by_batch(page_id, text_zip_data);
 	}
 	private void Dbs__set_by_tid(Xow_db_file db) {

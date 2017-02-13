@@ -23,4 +23,12 @@ public class Xoa_ctg_mgr {
 	public static final byte Hidden_n = Byte_.Zero, Hidden_y = (byte)1;
 	public static final String Html__cls__str = "CategoryTreeLabel CategoryTreeLabelNs14 CategoryTreeLabelCategory";
 	public static final    byte[] Html__cls__bry = Bry_.new_a7(Html__cls__str);
+
+	public static byte To_tid_by_ns(int ns) {
+		switch (ns) {
+			case gplx.xowa.wikis.nss.Xow_ns_.Tid__category: return Tid__subc;
+			case gplx.xowa.wikis.nss.Xow_ns_.Tid__file    : return Tid__file;
+			default                                       : return Tid__page;
+		}
+	}
 }

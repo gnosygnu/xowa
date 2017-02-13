@@ -52,11 +52,21 @@ public class Xowd_cat_core_tbl implements Db_tbl {
 	public void Update_by_batch(int id, byte hidden) {
 		stmt_update.Clear().Val_byte(fld_hidden, hidden).Crt_int(fld_id, id).Exec_update();
 	}
-	public void Delete_all() {conn.Stmt_delete(tbl_name, Dbmeta_fld_itm.Str_ary_empty).Exec_delete();;}
+	public void Delete_all() {conn.Stmt_delete(tbl_name, Dbmeta_fld_itm.Str_ary_empty).Exec_delete();}
+	public void Update(Xowd_category_itm itm) {
+		conn.Stmt_update_exclude(tbl_name, flds, fld_id).Clear()
+			.Val_int(fld_pages, itm.Count_pages())
+			.Val_int(fld_subcats, itm.Count_subcs())
+			.Val_int(fld_files, itm.Count_files())
+			.Val_bool_as_byte(fld_hidden, itm.Hidden())
+			.Val_int(fld_link_db_id, itm.File_idx())
+			.Crt_int(fld_id, itm.Id())
+			.Exec_update();
+	}
 	public Xowd_category_itm Select(int id) {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_id);
 		Db_rdr rdr = stmt_select.Clear().Crt_int(fld_id, id).Exec_select__rls_manual();
-		try {return rdr.Move_next() ? new_itm(rdr) : Xowd_category_itm.Null;} finally {rdr.Rls();}
+		try {return rdr.Move_next() ? Load_itm(rdr) : Xowd_category_itm.Null;} finally {rdr.Rls();}
 	}
 	public void Select_by_cat_id_in(Cancelable cancelable, Ordered_hash rv, int bgn, int end) {
 		in_wkr.Init(rv);
@@ -76,7 +86,7 @@ public class Xowd_cat_core_tbl implements Db_tbl {
 			} finally {rdr.Rls();}
 		}
 	}
-	public Xowd_category_itm new_itm(Db_rdr rdr) {
+	public Xowd_category_itm Load_itm(Db_rdr rdr) {
 		return Xowd_category_itm.load_
 		( rdr.Read_int(fld_id)
 		, rdr.Read_int(fld_link_db_id)

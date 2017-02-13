@@ -17,63 +17,98 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.ctgs.edits; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*;
 import gplx.dbs.*;
-import gplx.xowa.parsers.*;
-import gplx.xowa.addons.wikis.ctgs.dbs.*;
-import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.domains.*;
+import gplx.xowa.addons.wikis.ctgs.dbs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.*;
 import gplx.xowa.addons.wikis.directorys.specials.items.bldrs.*;
 public class Xoctg_edit_mgr {
-	public void Update(Xowe_wiki wiki, byte[] ttl_bry, int page_id, byte[] old_text, byte[] new_text) {
-//			// get page
-//			Xoa_ttl ttl = wiki.Ttl_parse(ttl_bry);
-//			Xoae_page wpg = Xoae_page.New_edit(wiki, ttl);
-//			wpg.Db().Page().Id_(page_id);
-//			wpg.Db().Text().Text_bry_(old_text);
-//
-//			// parse page
-//			Xop_ctx pctx = wiki.Parser_mgr().Ctx().Clear_all();
-//			wiki.Parser_mgr().Parse(wpg, true);
-//
-//			// get cat_link_db
-//			Xoax_ctg_addon cat_addon = Xoax_ctg_addon.Get(wiki);
-//			Xowd_cat_core_tbl cat_core_tbl = Xodb_cat_db_.Get_cat_core_or_fail(wiki.Data__core_mgr());
-//
-//			// get cat_link_conn
-//			Xowd_page_itm tmp_page = new Xowd_page_itm();
-//			wiki.Data__core_mgr().Db__core().Tbl__page().Select_by_id(tmp_page, page_id);
-//			Db_conn cat_link_conn = wiki.Data__core_mgr().Props().Layout_text().Tid_is_lot()
-//				? wiki.Data__core_mgr().Dbs__get_by_id_or_fail(tmp_page.Cat_db_id()).Conn()
-//				: wiki.Data__core_mgr().Db__core().Conn();
-//			Xowd_cat_link_tbl cat_link_tbl = new Xowd_cat_link_tbl(cat_link_conn, Bool_.N);
-//
-//			// delete old
-//			int cat_len = wpg.Wtxt().Ctgs__len();
-//			for (int i = 0; i < cat_len; i++) {
-//				Xoa_ttl ctg_ttl = wpg.Wtxt().Ctgs__get_at(i);
-//				wiki.Data__core_mgr().Db__core().Tbl__page().Select_by_ttl(tmp_page, ctg_ttl);
-////				int ctg_id = tmp_page.Cat_db_id();
-////				Object data = cat_core_tbl.Select_by_cat_id(ctg_id);
-////				data.cat_pages--
-////				cat_core_Tbl.Save(data);
-//			}
-////			cat_link_tbl.Delete_by_page_id(page_id);
-//
-//			// insert new
-//			wpg.Db().Text().Text_bry_(new_text);
-//			wiki.Parser_mgr().Parse(wpg, true);
-//
-//			cat_len = wpg.Wtxt().Ctgs__len();
-//			Xodb_wiki_db wiki_db_mgr = Xodb_wiki_db.Make(Xodb_wiki_db_tid.Tid__core, wiki.Data__core_mgr().Db__core().Url());
-//			for (int i = 0; i < cat_len; i++) {
-//				Xoa_ttl ctg_ttl = wpg.Wtxt().Ctgs__get_at(i);
-//				boolean exists = wiki.Data__core_mgr().Db__core().Tbl__page().Select_by_ttl(tmp_page, ctg_ttl);
-//				int ctg_id = tmp_page.Cat_db_id();
-//				if (!exists) {
-//					ctg_id = Xopg_db_mgr.Create(wiki_db_mgr, gplx.xowa.wikis.nss.Xow_ns_.Tid__category, ctg_ttl.Page_db(), Bry_.Empty);					
-//				}				
-////				Object data = cat_core_tbl.Select_by_cat_id(ctg_id);
-////				data.cat_pages++
-////				cat_core_Tbl.Save(data);
-////				cat_link_tbl.Insert_by_page_id(page_id, ctg_id);
-//			}
+	public static void Update(Xowe_wiki wiki, byte[] ttl_bry, int page_id, byte[] old_text, byte[] new_text) {
+		// only apply to home or other wiki
+		if (!(   wiki.Domain_tid() == Xow_domain_tid_.Tid__other
+			||   wiki.Domain_tid() == Xow_domain_tid_.Tid__home))
+			return;
+
+		// get page
+		Xoa_ttl ttl = wiki.Ttl_parse(ttl_bry);
+		int ns_id = ttl.Ns().Id();
+		Xoae_page wpg = Xoae_page.New_edit(wiki, ttl);
+		wpg.Db().Page().Id_(page_id);
+
+		// get page_tbl
+		Xow_db_mgr db_mgr = wiki.Data__core_mgr();
+		Xowd_page_tbl page_tbl = db_mgr.Db__core().Tbl__page();
+
+		// get cat_core_tbl
+		Xowd_cat_core_tbl cat_core_tbl = Xodb_cat_db_.Get_cat_core_or_fail(db_mgr);
+
+		// get cat_link_tbl
+		Xodb_cat_link_tbl cat_link_tbl = new Xodb_cat_link_tbl(cat_core_tbl.Conn());
+		Xowd_page_itm tmp_page = new Xowd_page_itm();
+		db_mgr.Tbl__page().Select_by_id(tmp_page, page_id);
+
+		// parse old page
+		wiki.Parser_mgr().Ctx().Clear_all();
+		wpg.Db().Text().Text_bry_(old_text);
+		wiki.Parser_mgr().Parse(wpg, true);
+		wiki.Html_mgr().Page_wtr_mgr().Gen(wpg, Xopg_page_.Tid_read); // need to write html to fill Wtxt().Ctgs
+
+		// cat_core:update; for each category, subtract one from count_page, count_file, or count_subcs
+		int cat_len = wpg.Wtxt().Ctgs__len();
+		for (int i = 0; i < cat_len; i++) {
+			// get cat_core itm for sub_cat
+			Xoa_ttl sub_ttl = wpg.Wtxt().Ctgs__get_at(i);
+			page_tbl.Select_by_ttl(tmp_page, sub_ttl);
+			Xowd_category_itm sub_core_itm = cat_core_tbl.Select(tmp_page.Id());
+
+			// subtract one and save it
+			sub_core_itm.Adjust(ns_id, -1);
+			cat_core_tbl.Update(sub_core_itm);
+		}
+		// cat_link:delete
+		cat_link_tbl.Delete_by_page_id(page_id);
+
+		// parse new page
+		wiki.Parser_mgr().Ctx().Clear_all();
+		wpg.Db().Text().Text_bry_(new_text);
+		wiki.Parser_mgr().Parse(wpg, true);
+		wiki.Html_mgr().Page_wtr_mgr().Gen(wpg, Xopg_page_.Tid_read); // need to write html to fill Wtxt().Ctgs
+
+		// get some variables
+		int timestamp = (int)Datetime_now.Get().Timestamp_unix();
+		Xoctg_collation_mgr collation_mgr = wiki.Ctg__catpage_mgr().Collation_mgr();
+		Xow_db_file core_db = db_mgr.Db__core();
+
+		// cat_core:update; for each category, add one to count_page, count_file, or count_subcs
+		cat_len = wpg.Wtxt().Ctgs__len();
+		cat_link_tbl.Insert_bgn();
+		for (int i = 0; i < cat_len; i++) {
+			// get cat_core itm for sub_cat
+			Xoa_ttl sub_ttl = wpg.Wtxt().Ctgs__get_at(i);
+			boolean exists = page_tbl.Select_by_ttl(tmp_page, sub_ttl);
+
+			// create category if it doesn't exist
+			int sub_id = tmp_page.Id();
+			if (!exists) {
+				sub_id = Xopg_db_mgr.Create
+					( core_db.Tbl__page(), core_db.Tbl__text(), core_db.Tbl__ns(), core_db.Tbl__cfg()
+					, gplx.xowa.wikis.nss.Xow_ns_.Tid__category, sub_ttl.Page_db(), Bry_.Empty, -1);
+				cat_core_tbl.Insert_bgn();
+				cat_core_tbl.Insert_cmd_by_batch(sub_id, 0, 0, 0, Bool_.N_byte, -1);
+				cat_core_tbl.Insert_end();
+			}
+
+			Xowd_category_itm sub_core_itm = cat_core_tbl.Select(sub_id);
+
+			// adjust it and save it
+			sub_core_itm.Adjust(ns_id, 1);
+			cat_core_tbl.Update(sub_core_itm);
+
+			// cat_link:add
+			cat_link_tbl.Insert_cmd_by_batch(page_id, sub_id, Xoa_ctg_mgr.To_tid_by_ns(ns_id), timestamp, collation_mgr.Get_sortkey(wpg.Ttl().Page_db()), wpg.Ttl().Page_db());
+		}
+		cat_link_tbl.Insert_end();
+
+		// update page.cat_db_id
+		page_tbl.Update__cat_db_id(page_id, core_db.Id());
 	}
 }

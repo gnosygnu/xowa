@@ -95,7 +95,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		init_needed = false;
 		if (String_.Eq(domain_str, "xowa")) return;					// HACK: ignore "xowa" for now; WHEN:converting xowa to sqlitedb
 		data_mgr__core_mgr = new Xow_db_mgr(this, fsys_mgr.Root_dir());
-		data_mgr__core_mgr.Init_by_load(gplx.xowa.wikis.data.Xow_db_file__core_.Find_core_fil(this));
+		data_mgr__core_mgr.Init_by_load(gplx.xowa.wikis.data.Xow_db_file__core_.Find_core_fil_or_null(this));
 		app.Html__css_installer().Install(this, Xowd_css_core_mgr.Key_mobile);	// must init after data_mgr
 		this.db_core_mgr = Fsdb_db_mgr_.new_detect(this, fsys_mgr.Root_dir(), fsys_mgr.File_dir());
 		if (db_core_mgr == null)	// no fsdb; occurs during merge; also, will be null for xowa_db; DATE:2016-05-31

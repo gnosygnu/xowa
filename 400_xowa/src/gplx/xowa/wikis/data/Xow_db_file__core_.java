@@ -19,9 +19,8 @@ package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.dbs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.bldrs.infos.*;
 public class Xow_db_file__core_ {
-	public static Io_url Find_core_fil(Xow_wiki wiki) {
-		Io_url wiki_root_dir = wiki.Fsys_mgr().Root_dir();
-		String domain_str = wiki.Domain_str();
+	public static Io_url Find_core_fil_or_null(Xow_wiki wiki) {return Find_core_fil_or_null(wiki.Fsys_mgr().Root_dir(), wiki.Domain_str());}
+	public static Io_url Find_core_fil_or_null(Io_url wiki_root_dir, String domain_str) {
 		Io_url[] ary = Io_mgr.Instance.QueryDir_fils(wiki_root_dir);
 		int ary_len = ary.length; if (ary.length == 0) return null;
 		Io_url rv = Find_core_fil__xowa(ary, ary_len, domain_str);

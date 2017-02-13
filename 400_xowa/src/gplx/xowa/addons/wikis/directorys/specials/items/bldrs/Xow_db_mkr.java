@@ -59,7 +59,13 @@ public class Xow_db_mkr {
 
 		// insert data: page
 		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__main_page, mainpage_name);
-		Xopg_db_mgr.Create(core_db, Xow_ns_.Tid__main, mainpage_name, mainpage_text);
+		Xopg_db_mgr.Create
+			( Xowd_page_tbl.Get_by_key(core_db)
+			, Xowd_text_tbl.Get_by_key(core_db)
+			, Xowd_site_ns_tbl.Get_by_key(core_db)
+			, Db_cfg_tbl.Get_by_key(core_db, Xowd_cfg_tbl_.Tbl_name)
+			, Xow_ns_.Tid__main, mainpage_name, mainpage_text
+			, -1);
 
 		// create tbls: fsdb
 		core_db.Tbls__add(Bool_.Y

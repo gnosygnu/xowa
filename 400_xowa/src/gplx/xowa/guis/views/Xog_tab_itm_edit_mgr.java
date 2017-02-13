@@ -23,9 +23,11 @@ public class Xog_tab_itm_edit_mgr {
 	public static void Save(Xog_tab_itm tab, boolean quick_save) {
 		if (tab.View_mode() != Xopg_page_.Tid_edit) return;	// exit if not edit; handles ctrl+s being pressed in read/html modes
 		Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
+		byte[] old_text = page.Db().Text().Text_bry();
 		byte[] new_text = Get_new_text(tab, page.Db().Text().Text_bry());
+		int page_id = page.Db().Page().Id();
 		if (page.Edit_mode() == Xoa_page_.Edit_mode_create) {
-			int page_id = wiki.Db_mgr().Save_mgr().Data_create(page.Ttl(), new_text);
+			page_id = wiki.Db_mgr().Save_mgr().Data_create(page.Ttl(), new_text);
 			page.Db().Page().Id_(page_id);
 			page.Edit_mode_update_();	// set to update so that next save does not try to create
 		}
@@ -34,7 +36,15 @@ public class Xog_tab_itm_edit_mgr {
 		}
 		Invalidate(wiki);
 		page.Db().Text().Text_bry_(new_text);
-		wiki.Parser_mgr().Parse(page, true);			// refresh html
+
+		try {
+			gplx.xowa.addons.wikis.ctgs.edits.Xoctg_edit_mgr.Update(wiki, page.Ttl().Page_db(), page_id, old_text, new_text);
+		} catch (Exception e) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to update categories; err=~{0}", Err_.Message_gplx_log(e));
+		}
+
+		// refresh html
+		wiki.Parser_mgr().Parse(page, true);
 		if (wiki.Html__hdump_enabled()) wiki.Html__hdump_mgr().Save_mgr().Save(page);	// must go after wiki.Parse
 		win_itm.Usr_dlg().Prog_one("", "", "saved page ~{0}", String_.new_u8(page.Ttl().Full_txt_raw()));	// NOTE: show message after Parse, b/c Parse will flash "Loading page"; DATE:2014-05-17
 		if (!quick_save) {							// full_save; save page and go to read mode

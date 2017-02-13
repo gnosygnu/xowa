@@ -37,7 +37,7 @@ class Xowd_cat_core_tbl__in_wkr extends Db_in_wkr__base {
 	@Override protected void Read_data(Cancelable cancelable, Db_rdr rdr) {
 		while (rdr.Move_next()) {
 			if (cancelable.Canceled()) return;
-			Xowd_category_itm ctg_data = tbl.new_itm(rdr);
+			Xowd_category_itm ctg_data = tbl.Load_itm(rdr);
 			Xowd_page_itm page = (Xowd_page_itm)hash.Get_by(ctg_data.Id_val());
 			page.Xtn_(ctg_data);
 		}

@@ -24,13 +24,13 @@ public class Xodb_cat_link_tbl implements Db_tbl {
 	private Db_stmt stmt_insert;
 	public Xodb_cat_link_tbl(Db_conn conn) {
 		this.conn = conn;
-		this.tbl_name = "cat_link";
-		this.fld__from				= flds.Add_int	("cl_from");
-		this.fld__to_id				= flds.Add_int	("cl_to_id");
-		this.fld__type_id			= flds.Add_byte	("cl_type_id");
+		this.tbl_name = TBL_NAME;
+		this.fld__from				= flds.Add_int	("cl_from");                    // page_id
+		this.fld__to_id				= flds.Add_int	("cl_to_id");                   // cat_id 
+		this.fld__type_id			= flds.Add_byte	("cl_type_id");                 // page,file,subc
 		this.fld__timestamp_unix	= flds.Add_long	("cl_timestamp_unix");
-		this.fld__sortkey			= flds.Add_bry	("cl_sortkey");
-		this.fld__sortkey_prefix	= flds.Add_str	("cl_sortkey_prefix", 255);
+		this.fld__sortkey			= flds.Add_bry	("cl_sortkey");                 // uca key
+		this.fld__sortkey_prefix	= flds.Add_str	(FLD__cl_sortkey_prefix, 255);  // page_title; needed for sorting under letter on catpage
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final    Db_conn conn; 
@@ -50,9 +50,15 @@ public class Xodb_cat_link_tbl implements Db_tbl {
 			.Val_bry_as_str(fld__sortkey_prefix	, sortkey_prefix)
 			.Exec_insert();
 	}
+	public void Delete_by_page_id(int page_id) {
+		conn.Stmt_delete(tbl_name, fld__from)
+			.Crt_int(fld__from, page_id)
+			.Exec_delete();
+	}
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
+	public static final String TBL_NAME = "cat_link", FLD__cl_sortkey_prefix = "cl_sortkey_prefix";
 }
 /*
 NOTE_1: categorylinks row size: 34 + 20 + 12 + (cat_sortkey.length * 2)
@@ -63,9 +69,9 @@ variable_data length	: cat_sortkey.length * 2	sortkey is used for row and cl_mai
 
 Note the following
 . ints are 4 bytes
-. tinyint is assumed to be 4 bytes (should be 1, but sqlite only has one numeric datatype, so import all 4?)
+. tinyint is assumed to be 4 bytes (should be 1, but sqlite only has one numeric datatype, so using all 4?)
 . varchar(14) is assumed to be 14 bytes (should be 15? +1 for length of varchar?)
 . calculations work out "too well". comparing 4 databases gets +/- .25 bytes per row. however
 .. - bytes should not be possible
-.. +.25 bytes is too low (18 MB out of 5.5 GB).*; there must be other bytes used for page breaks / fragmentation
+.. +.25 bytes is too low (18 MB out of 5.5 GB); there must be other bytes used for page breaks / fragmentation
 */

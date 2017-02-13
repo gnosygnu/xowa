@@ -77,12 +77,14 @@ public class Xowd_page_tbl implements Db_tbl {
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds.To_fld_ary()));}
 	public void Insert(int page_id, int ns_id, byte[] ttl_wo_ns, boolean page_is_redirect, DateAdp modified_on, int page_len, int random_int, int text_db_id, int html_db_id) {
 		this.Insert_bgn();
-		this.Insert_cmd_by_batch(page_id, ns_id, ttl_wo_ns, page_is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id);
+		this.Insert_cmd_by_batch(page_id, ns_id, ttl_wo_ns, page_is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id, -1);
 		this.Insert_end();
 	}
 	public void Insert_bgn() {conn.Txn_bgn("page__insert_bulk"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
-	public void Insert_cmd_by_batch(int page_id, int ns_id, byte[] ttl_wo_ns, boolean page_is_redirect, DateAdp modified_on, int page_len, int random_int, int text_db_id, int html_db_id) {
+	public void Insert_cmd_by_batch
+		(int page_id, int ns_id, byte[] ttl_wo_ns, boolean page_is_redirect, DateAdp modified_on, int page_len, int random_int
+		, int text_db_id, int html_db_id, int cat_db_id) {
 		stmt_insert.Clear()
 		.Val_int(fld_id, page_id)
 		.Val_int(fld_ns, ns_id)
@@ -95,7 +97,7 @@ public class Xowd_page_tbl implements Db_tbl {
 		.Val_int(fld_html_db_id, html_db_id)
 		.Val_int(fld_redirect_id, -1)
 		.Val_int(fld_score, -1)
-		.Val_int(fld_cat_db_id, -1)
+		.Val_int(fld_cat_db_id, cat_db_id)
 		.Exec_insert();
 	}
 	public void Insert_by_itm(Db_stmt stmt, Xowd_page_itm itm, int html_db_id) {
@@ -336,6 +338,10 @@ public class Xowd_page_tbl implements Db_tbl {
 		Db_stmt stmt = conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_html_db_id);
 		stmt.Val_int(fld_html_db_id, html_db_id).Crt_int(fld_id, page_id).Exec_update();
 	}
+	public void Update__cat_db_id(int page_id, int cat_db_id) {
+		Db_stmt stmt = conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_cat_db_id);
+		stmt.Val_int(fld_cat_db_id, cat_db_id).Crt_int(fld_id, page_id).Exec_update();
+	}
 	public void Update__ns__ttl(int page_id, int trg_ns, byte[] trg_ttl) {
 		for (int i = 0; i < 2; ++i) {
 			try {
@@ -377,6 +383,6 @@ public class Xowd_page_tbl implements Db_tbl {
 		}
 	}
 	public static final    String Page_touched_fmt = "yyyyMMddHHmmss";
-	public static final String TBL_NAME = "page";
+	public static final String TBL_NAME = "page", FLD__page_cat_db_id = "page_cat_db_id";
 	public static Xowd_page_tbl Get_by_key(Db_tbl_owner owner) {return (Xowd_page_tbl)owner.Tbls__get_by_key(TBL_NAME);}
 }

@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.core.primitives.*; import gplx.xowa.addons.wikis.ctgs.*;
+import gplx.xowa.wikis.nss.*;
 public class Xowd_category_itm {
 	public int Id() {return id;} private int id;
 	public Int_obj_val Id_val() {if (id_val == null) id_val = new Int_obj_val(id); return id_val;} Int_obj_val id_val;
@@ -33,7 +34,15 @@ public class Xowd_category_itm {
 			case Xoa_ctg_mgr.Tid__file: return count_files;
 			default: throw Err_.new_unhandled(tid);
 		}		
-	} 
+	}
+	public void Adjust(int ns, int val) {
+		switch (ns) {
+			case Xow_ns_.Tid__category: count_subcs += val; break;
+			case Xow_ns_.Tid__file    : count_files += val; break;
+			default                   : count_pages += val; break;
+		}
+	}
+
 	public static Xowd_category_itm load_(int id, int file_idx, boolean hidden, int count_subcs, int count_files, int count_pages) {
 		Xowd_category_itm rv = new Xowd_category_itm();
 		rv.id = id; rv.file_idx = file_idx; rv.hidden = hidden;

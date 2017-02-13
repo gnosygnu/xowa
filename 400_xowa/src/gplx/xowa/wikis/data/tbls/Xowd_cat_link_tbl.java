@@ -24,8 +24,8 @@ public class Xowd_cat_link_tbl implements Db_tbl {
 	public Xowd_cat_link_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		this.tbl_name = schema_is_1 ? "categorylinks" : "cat_link";
-		fld_from			= flds.Add_int	("cl_from");
-		fld_to_id			= flds.Add_int	("cl_to_id");
+		fld_from			= flds.Add_int	("cl_from");            // page_id
+		fld_to_id			= flds.Add_int	("cl_to_id");           // cat_id
 		fld_type_id			= flds.Add_byte	("cl_type_id");
 		fld_sortkey			= flds.Add_str	("cl_sortkey", 230);
 		fld_timestamp		= flds.Add_str	("cl_timestamp", 14);
@@ -52,7 +52,6 @@ public class Xowd_cat_link_tbl implements Db_tbl {
 			.Exec_insert();
 	}
 	public void Delete_all() {conn.Stmt_delete(tbl_name, Dbmeta_fld_itm.Str_ary_empty).Exec_delete();}
-
 	public int Select_by_type(List_adp list, int cat_page_id, byte arg_tid, byte[] arg_sortkey, boolean arg_is_from, int limit) {
 		String arg_sortkey_str = arg_sortkey == null ? "" : String_.new_u8(arg_sortkey);
 		gplx.core.criterias.Criteria comp_crt = !arg_is_from 

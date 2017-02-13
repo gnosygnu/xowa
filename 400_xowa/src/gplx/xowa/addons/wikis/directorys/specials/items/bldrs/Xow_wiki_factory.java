@@ -16,9 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*; import gplx.xowa.addons.wikis.directorys.specials.items.*;
+import gplx.dbs.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.ctgs.dbs.*;
 public class Xow_wiki_factory {
 	public static Xowe_wiki Load_personal(Xoae_app app, byte[] domain, Io_url dir_url) {
-		// create the rv
+		// upgrade db
+		Upgrade_db(domain, dir_url);
+
+		// create the wiki
 		Xowe_wiki rv = new Xowe_wiki
 		( app
 		, gplx.xowa.langs.Xol_lang_itm_.Lang_en_make(app.Lang_mgr())
@@ -41,7 +46,35 @@ public class Xow_wiki_factory {
 
 		// HACK: remove CC copyright message; should change to option
 		rv.Msg_mgr().Get_or_make(Bry_.new_a7("wikimedia-copyright")).Atrs_set(Bry_.Empty, false, false);
-
 		return rv;
+	}
+	private static void Upgrade_db(byte[] domain, Io_url dir_url) {
+		// get conn
+		Io_url core_db_url = gplx.xowa.wikis.data.Xow_db_file__core_.Find_core_fil_or_null(dir_url, String_.new_u8(domain));
+		if (core_db_url == null) {
+			throw Err_.new_wo_type("failed to find core_db for wiki; wiki=~{domain} dir=~{dir_url}", domain, dir_url);
+		}
+		Db_conn core_db_conn = Db_conn_bldr.Instance.Get_or_fail(core_db_url);
+
+		// cat_link: if cat_link.cl_sortkey_prefix doesn't exist, then cat_link is old format; drop it and add the new one
+		try {
+			if (!core_db_conn.Meta_fld_exists(Xodb_cat_link_tbl.TBL_NAME, Xodb_cat_link_tbl.FLD__cl_sortkey_prefix)) {
+				Gfo_usr_dlg_.Instance.Log_many("", "", "xo.personal:cat_link upgrade; fil=~{0}", core_db_url.Raw());
+				core_db_conn.Meta_tbl_delete(Xodb_cat_link_tbl.TBL_NAME);
+				core_db_conn.Meta_tbl_assert(new Xodb_cat_link_tbl(core_db_conn));
+			}
+		} catch (Exception e) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "xo.personal:cat_link upgrade failed; err=~{0}", Err_.Message_gplx_log(e));
+		}
+
+		// page.cat_db_id: if page.cat_db_id doesn't exist, then add it
+		try {
+			if (!core_db_conn.Meta_fld_exists(Xowd_page_tbl.TBL_NAME, Xowd_page_tbl.FLD__page_cat_db_id)) {
+				Gfo_usr_dlg_.Instance.Log_many("", "", "xo.personal:page.page_cat_db_id upgrade; fil=~{0}", core_db_url.Raw());
+				core_db_conn.Meta_fld_append(Xowd_page_tbl.TBL_NAME, Dbmeta_fld_itm.new_int(Xowd_page_tbl.FLD__page_cat_db_id).Default_(-1));
+			}
+		} catch (Exception e) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "xo.personal:page.page_cat_db_id upgrade failed; err=~{0}", Err_.Message_gplx_log(e));
+		}
 	}
 }

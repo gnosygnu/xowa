@@ -54,7 +54,7 @@ class Pfunc_pagesincategory_tstr {
 	public void Init_category_counts(String category_title, int pages, int subcs, int files) {
 		int page_id = 1;
 		page_tbl.Insert_bgn();
-		page_tbl.Insert_cmd_by_batch(page_id, Xow_ns_.Tid__category, Bry_.new_u8(category_title), Bool_.N, Datetime_now.Get(), 1, 1, 1, 1);
+		page_tbl.Insert_cmd_by_batch(page_id, Xow_ns_.Tid__category, Bry_.new_u8(category_title), Bool_.N, Datetime_now.Get(), 1, 1, 1, 1, -1);
 		page_tbl.Insert_end();
 		cat_core_tbl.Insert_bgn();
 		cat_core_tbl.Insert_cmd_by_batch(page_id, pages, subcs, files, Byte_.Zero, 1);
