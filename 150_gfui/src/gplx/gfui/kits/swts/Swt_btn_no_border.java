@@ -29,10 +29,13 @@ import gplx.gfui.imgs.ImageAdp;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 
 public class Swt_btn_no_border implements GxwElem, Swt_control {
@@ -40,17 +43,17 @@ public class Swt_btn_no_border implements GxwElem, Swt_control {
 	public Swt_btn_no_border(Swt_control owner_control, Keyval_hash ctorArgs) {
 		Composite owner = owner_control.Under_composite();		
 		Make_btn_no_border(owner.getDisplay(), owner.getShell(), owner);
-		this.core = new Swt_core_cmds(box_btn);
+		this.core = new Swt_core__basic(box_btn);
 		box_btn.addKeyListener(new Swt_lnr_key(this));
 		box_btn.addMouseListener(new Swt_lnr_mouse(this));
 		box_btn.setCursor((Cursor)ctorArgs.Get_val_or_null("cursor"));
 	}
-	@Override public Control Under_control() {return box_btn;}
-	@Override public Control Under_menu_control() {return box_btn;}
+	@Override public Control Under_control() {return box_grp;}
+	@Override public Composite Under_composite() {return box_grp;}
+	@Override public Control Under_menu_control() {return box_grp;}
 	@Override public String TextVal() {return box_btn.getText();} @Override public void TextVal_set(String v) {box_btn.setText(v);}
-	@Override public GxwCore_base Core() {return core;} private final Swt_core_cmds core;
+	@Override public GxwCore_base Core() {return core;} private final Swt_core__basic core;
 	@Override public GxwCbkHost Host() {return host;} @Override public void Host_set(GxwCbkHost host) {this.host = host;} private GxwCbkHost host;
-	@Override public Composite Under_composite() {return null;}
 	@Override public void EnableDoubleBuffering() {}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, GfuiBtn.Invk_btn_img))	return btn_img;
@@ -60,14 +63,16 @@ public class Swt_btn_no_border implements GxwElem, Swt_control {
 	private void Btn_img_(ImageAdp v) {
 		if (box_btn == null || v == null) return;
 		SizeAdp size = core.Size();
-		int dif = 6;
+		int dif = 0;
 		box_btn.setImage((Image)v.Resize(size.Width() - dif, size.Height() - dif).Under());
 	}
-	private void Make_btn_no_border(Display display, Shell shell, Control owner) {
-		box_grp = new Composite(shell, SWT.FLAT);
-		box_btn = new Label(shell, SWT.FLAT);
-		box_btn.setSize(25, 25);
-		box_btn.setBackground(display.getSystemColor(SWT.COLOR_WHITE));
+	private void Make_btn_no_border(Display display, Shell shell, Composite owner) {
+		box_grp = new Composite(owner, SWT.FLAT);
+		box_btn = new Label(box_grp, SWT.FLAT);
+		box_grp.setSize(16, 16);
+		box_btn.setSize(16, 16);
+		box_grp.setBackground(display.getSystemColor(SWT.COLOR_WHITE));
+		box_btn.setBackground(display.getSystemColor(SWT.COLOR_RED));
 		box_btn.addFocusListener(new Swt_clabel_lnr_focus(box_grp));
 	}
 }

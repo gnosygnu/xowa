@@ -44,7 +44,7 @@ public class Swt_text implements GxwTextFld, Swt_control {
 			: SWT.NONE
 			;
 		text_box = new Text(owner_control.Under_composite(), text_box_args); 
-		core = new Swt_core_cmds(text_box);
+		core = new Swt_core__basic(text_box);
 		text_box.addKeyListener(new Swt_lnr_key(this));
 		text_box.addMouseListener(new Swt_lnr_mouse(this));
 	}

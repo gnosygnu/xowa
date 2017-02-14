@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
 import gplx.gfui.draws.*;
+import gplx.gfui.layouts.swts.*;
 public abstract class GxwCore_base {
 	public abstract void Controls_add(GxwElem sub);
 	public abstract void Controls_del(GxwElem sub);
@@ -32,6 +33,10 @@ public abstract class GxwCore_base {
 	public abstract ColorAdp ForeColor(); public abstract void ForeColor_set(ColorAdp v);
 	public abstract FontAdp TextFont(); public abstract void TextFont_set(FontAdp v);
 	public abstract String TipText(); public abstract void TipText_set(String v);
+	public abstract Swt_layout_mgr Layout_mgr();
+	public abstract void Layout_mgr_(Swt_layout_mgr v);
+	public abstract Swt_layout_data Layout_data();
+	public abstract void Layout_data_(Swt_layout_data v);
 
 	public abstract int Focus_index(); public abstract void Focus_index_set(int v);
 	public abstract boolean Focus_able(); public abstract void Focus_able_(boolean v);

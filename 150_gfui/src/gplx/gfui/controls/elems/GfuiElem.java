@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui.controls.elems; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
 import gplx.gfui.draws.*; import gplx.gfui.gfxs.*; import gplx.gfui.ipts.*; import gplx.gfui.layouts.*; import gplx.gfui.imgs.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.*; import gplx.gfui.controls.windows.*;
+import gplx.gfui.layouts.swts.*;
 import gplx.core.interfaces.*;
 public interface GfuiElem extends Gfo_invk, GxwCbkHost, IptBndsOwner, GftItem, Gfo_evt_itm {
 	//% Layout
@@ -32,6 +33,8 @@ public interface GfuiElem extends Gfo_invk, GxwCbkHost, IptBndsOwner, GftItem, G
 	void Zorder_front(); void Zorder_back();
 	PointAdp Pos();
 	SizeAdp Size();
+	Swt_layout_mgr Layout_mgr(); void Layout_mgr_(Swt_layout_mgr v);
+	Swt_layout_data Layout_data(); void Layout_data_(Swt_layout_data v);
 	
 	//% Visual
 	boolean Visible(); void Visible_set(boolean v); GfuiElem Visible_on_(); GfuiElem Visible_off_();

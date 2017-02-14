@@ -44,8 +44,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
-import org.omg.PortableServer.THREAD_POLICY_ID;
-
 
 import gplx.core.threads.*;
 import gplx.gfui.controls.customs.GfuiStatusBox;
@@ -200,10 +198,18 @@ public class Swt_kit implements Gfui_kit {
 		for (int i = 0; i < args_len; i++)
 			ctor_args.Add(args[i]);
 		boolean border_on = Bool_.Cast(ctor_args.Get_val_or(GfuiTextBox.CFG_border_on_, true));
-		GxwTextFld under = new Swt_text_w_border(Swt_control_.cast_or_fail(owner), New_color(border_on ? ColorAdp_.LightGray : ColorAdp_.White), ctor_args);
+		GxwTextFld under = new Swt_text_w_border(Swt_control_.cast_or_fail(owner), New_color(border_on ? ColorAdp_.LightGray : ColorAdp_.White), ctor_args, Swt_text_w_border.Margin_t__text);
 		GfuiTextBox rv = GfuiTextBox_.kit_(this, key, under, ctor_args);
 		rv.Owner_(owner);
 		ctor_args.Clear();
+		return rv;
+	}
+	public Gfui_grp New_grp(String key, GfuiElem owner, Keyval... args) {
+		ctor_args.Clear();
+		Swt_grp rv_swt = new Swt_grp(this, Swt_control_.cast_or_fail(owner), ctor_args);
+		Gfui_grp rv = Gfui_grp.kit_(this, key, rv_swt, ctor_args);
+		rv.Owner_(owner);
+		rv_swt.Evt_mgr_(rv.Evt_mgr());
 		return rv;
 	}
 	public GfuiComboBox New_combo(String key, GfuiElem owner, Keyval... args) {
@@ -277,18 +283,6 @@ public class Swt_kit implements Gfui_kit {
 		if		(String_.Eq(v, "mozilla"))	return Swt_html.Browser_tid_mozilla;
 		else if	(String_.Eq(v, "webkit"))	return Swt_html.Browser_tid_webkit;
 		else								return Swt_html.Browser_tid_none;
-	}
-	public static FontAdp Control_font_get(Font font, GxwCore_base owner) {
-		FontData fontData = font.getFontData()[0];
-		FontAdp rv = FontAdp.new_(fontData.getName(), fontData.getHeight(), FontStyleAdp_.lang_(fontData.getStyle()));	// NOTE: swt style constants match swing
-		rv.OwnerGxwCore_(owner);
-		return rv;
-	}
-	public static void Control_font_set(FontAdp font, GxwCore_base owner, Control control) {
-		font.OwnerGxwCore_(owner);
-		FontData fontData = new FontData(font.Name(), (int)font.Size(), font.Style().Val());
-		Font rv = new Font(control.getDisplay(), fontData);
-		control.setFont(rv);
 	}
 }
 class Swt_shell_close_lnr implements Listener, Gfo_invk {

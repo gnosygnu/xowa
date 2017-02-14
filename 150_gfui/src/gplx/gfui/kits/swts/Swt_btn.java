@@ -47,7 +47,7 @@ public class Swt_btn implements GxwElem, Swt_control {
 	private Button btn;
 	public Swt_btn(Swt_control owner, Keyval_hash ctorArgs) {
 		btn = new Button(owner.Under_composite(), SWT.FLAT | SWT.PUSH);
-		core = new Swt_core_cmds(btn);
+		core = new Swt_core__basic(btn);
 		btn.addKeyListener(new Swt_lnr_key(this));
 		btn.addMouseListener(new Swt_lnr_mouse(this));
 	}

@@ -37,6 +37,7 @@ public interface Gfui_kit extends Gfo_invk {
 	GfuiWin			New_win_utl(String key, GfuiWin owner, Keyval... args);
 	Gfui_html		New_html(String key, GfuiElem owner, Keyval... args);
 	Gfui_tab_mgr	New_tab_mgr(String key, GfuiElem owner, Keyval... args);
+	Gfui_grp		New_grp(String key, GfuiElem owner, Keyval... args);
 	GfuiTextBox		New_text_box(String key, GfuiElem owner, Keyval... args);
 	GfuiBtn			New_btn(String key, GfuiElem owner, Keyval... args);
 	GfuiComboBox	New_combo(String key, GfuiElem owner, Keyval... args);

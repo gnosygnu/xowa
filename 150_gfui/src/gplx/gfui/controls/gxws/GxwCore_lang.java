@@ -28,6 +28,7 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import gplx.gfui.draws.*; import gplx.gfui.controls.gxws.*;
+import gplx.gfui.layouts.swts.*;
 public class GxwCore_lang extends GxwCore_base {
 		@Override public int Width() {return control.getWidth();} @Override public void Width_set(int v) {control.setSize(v, control.getHeight());}
 	@Override public int Height() {return control.getHeight();} @Override public void Height_set(int v) {control.setSize(control.getWidth(), v);}
@@ -78,6 +79,11 @@ public class GxwCore_lang extends GxwCore_base {
 		prvFont = v;
 	}
 	@Override public String TipText() {return tipText;} @Override public void TipText_set(String v) {tipText = v;} String tipText;
+	@Override public Swt_layout_mgr Layout_mgr() {return null;}
+	@Override public void Layout_mgr_(Swt_layout_mgr v) {}
+	@Override public Swt_layout_data Layout_data() {return null;}
+	@Override public void Layout_data_(Swt_layout_data v) {}
+	
 	@Override public void Controls_add(GxwElem sub)	{
 		try {
 		JComponent component = (JComponent)sub;

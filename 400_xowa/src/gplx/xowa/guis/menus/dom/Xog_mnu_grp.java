@@ -39,8 +39,6 @@ public class Xog_mnu_grp extends Xog_mnu_base {
 			this.Source_exec(app.Gfs_mgr());
 		else 
 			this.Clear();
-		if (!mnu_is_popup && app.Gui_mgr().Browser_win().Win_box() != null)
-			Gfo_invk_.Invk_by_key(app.Gui_mgr().Browser_win(), Gfui_html.Evt_win_resized);
 	}
 	public String Source() {return source;} private String source = "";	// NOTE: default to "" not null, else init will try to run "clear;\nnullbuild;"
 	public void Source_(String v) {this.source = v; this.Source_exec(app.Gfs_mgr());}

@@ -39,14 +39,15 @@ public class Swt_text_w_border implements GxwTextFld, Swt_control {
 	private Composite text_host;
 	private Composite text_margin;
 	private Text text_elem;
-	public Swt_text_w_border(Swt_control owner_control, Color color, Keyval_hash ctorArgs) {
+	public Swt_text_w_border(Swt_control owner_control, Color color, Keyval_hash ctorArgs, int margin_t) {
 		Composite owner = owner_control.Under_composite();
 		int text_elem_style = ctorArgs.Has(GfuiTextBox_.Ctor_Memo) ? SWT.MULTI | SWT.WRAP | SWT.V_SCROLL : SWT.FLAT;
-		New_box_text_w_border(owner.getDisplay(), owner.getShell(), text_elem_style, color);
-		core = new Swt_core_cmds_frames(text_host, new Swt_core_cmds_frames_itm[]
-				{	new Swt_core_cmds_frames_itm_manual(text_margin, 1, 1, -2, -2)
-				,	new Swt_core_cmds_frames_itm_center_v(text_elem, this)
-				});
+		New_box_text_w_border(owner.getDisplay(), owner, text_elem_style, color);
+		core = new Swt_core__frames(this, text_host, new Swt_frame_itm[]
+		{ new Swt_frame_itm__manual(text_margin, 1, 1, -2, -2)
+		, new Swt_frame_itm__center_v(text_elem, this)
+		});
+		this.margins_t = margin_t;
 		text_elem.addKeyListener(new Swt_lnr_key(this));
 		text_elem.addMouseListener(new Swt_lnr_mouse(this));
 	}
@@ -57,7 +58,7 @@ public class Swt_text_w_border implements GxwTextFld, Swt_control {
 	@Override public int SelBgn() {return text_elem.getCaretPosition();} 	@Override public void SelBgn_set(int v) {text_elem.setSelection(v);}
 	@Override public int SelLen() {return text_elem.getSelectionCount();} @Override public void SelLen_set(int v) {text_elem.setSelection(this.SelBgn(), this.SelBgn() + v);}	
 	@Override public String TextVal() {return text_elem.getText();} @Override public void TextVal_set(String v) {text_elem.setText(v);}
-	@Override public GxwCore_base Core() {return core;} Swt_core_cmds_frames core;
+	@Override public GxwCore_base Core() {return core;} Swt_core__frames core;
 	@Override public GxwCbkHost Host() {return host;} @Override public void Host_set(GxwCbkHost host) {this.host = host;} GxwCbkHost host;
 	@Override public void EnableDoubleBuffering() {}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -65,7 +66,7 @@ public class Swt_text_w_border implements GxwTextFld, Swt_control {
 	}
 	public int Margins_l() {return margins_l;} int margins_l;
 	public int Margins_r() {return margins_r;} int margins_r;
-	public int Margins_t() {return margins_t;} int margins_t;
+	public int Margins_t() {return margins_t;} int margins_t; 
 	public int Margins_b() {return margins_b;} int margins_b;
 	public void Margins_set(int left, int top, int right, int bot) {
 		this.margins_l = left; this.margins_t = top; this.margins_r = right; this.margins_b = bot;
@@ -73,18 +74,17 @@ public class Swt_text_w_border implements GxwTextFld, Swt_control {
 	@Override public boolean Border_on() {return false;} @Override public void Border_on_(boolean v) {} // SWT_TODO:borderWidth doesn't seem mutable
 	@Override public void CreateControlIfNeeded() {}
 	@Override public boolean OverrideTabKey() {return false;} @Override public void OverrideTabKey_(boolean v) {}
-	void New_box_text_w_border(Display display, Shell shell, int style, Color color) {
-		text_host = new Composite(shell, SWT.FLAT);
+	private void New_box_text_w_border(Display display, Composite owner, int style, Color color) {
+		text_host = new Composite(owner, SWT.FLAT);
 		text_margin = new Composite(text_host, SWT.FLAT);
 		text_elem = new Text(text_margin, style);
 		text_elem .addTraverseListener(Swt_lnr_traverse_ignore_ctrl.Instance);	// do not allow ctrl+tab to change focus when pressed in text box; allows ctrl+tab to be used by other bindings; DATE:2014-04-30  
 		text_host.setSize(20, 20);
 		text_host.setBackground(color);
 		text_margin.setBackground(display.getSystemColor(SWT.COLOR_WHITE));
-		text_margin.setSize(20, 20);
-		text_elem.setSize(20 - 2, 20 - 2);
-		text_elem.setLocation(1, 1);
+		text_margin.setSize(25, 25);
 	}
+	public static final int Margin_t__text = 4, Margin_t__combo = 6; // magic constants
 }
 class Swt_lnr_traverse_ignore_ctrl implements TraverseListener {
     public void keyTraversed(TraverseEvent e) {

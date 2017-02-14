@@ -28,21 +28,20 @@ public class Xog_win_itm_ {
 		win.Tab_mgr().Tab_mgr().BackColor_(ColorAdp_.White);
 
 		Xog_startup_win_.Startup(app, win_box);
-		win.Resizer().Exec_win_resize(app, win_box.Width(), win_box.Height());
 
 		win_box.Icon_(IconAdp.file_or_blank(app.Fsys_mgr().Bin_xowa_dir().GenSubFil_nest("file", "app.window", "app_icon.png")));
 	}
-	public static GfuiBtn new_btn(Xoae_app app, Gfui_kit kit, GfuiWin win, Io_url img_dir, String id, String file) {
+	public static GfuiBtn new_btn(Xoae_app app, Gfui_kit kit, GfuiElem win, Io_url img_dir, String id, String file) {
 		GfuiBtn rv = kit.New_btn(id, win);
 		rv.Btn_img_(kit.New_img_load(img_dir.GenSubFil(file)));
 		return rv;
 	}
-	public static GfuiComboBox new_cbo(Xoae_app app, Gfui_kit kit, GfuiWin win, FontAdp ui_font, String id, boolean border_on) {
+	public static GfuiComboBox new_cbo(Xoae_app app, Gfui_kit kit, GfuiElem win, FontAdp ui_font, String id, boolean border_on) {
 		GfuiComboBox rv = kit.New_combo(id, win, Keyval_.new_(GfuiTextBox.CFG_border_on_, border_on));
 		rv.TextMgr().Font_(ui_font);
 		return rv;
 	}
-	public static GfuiTextBox new_txt(Xoae_app app, Gfui_kit kit, GfuiWin win, FontAdp ui_font, String id, boolean border_on) {
+	public static GfuiTextBox new_txt(Xoae_app app, Gfui_kit kit, GfuiElem win, FontAdp ui_font, String id, boolean border_on) {
 		GfuiTextBox rv = kit.New_text_box(id, win, Keyval_.new_(GfuiTextBox.CFG_border_on_, border_on));
 		rv.TextMgr().Font_(ui_font);
 		return rv;

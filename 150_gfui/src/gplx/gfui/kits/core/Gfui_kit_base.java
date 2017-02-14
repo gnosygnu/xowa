@@ -58,6 +58,11 @@ public abstract class Gfui_kit_base implements Gfui_kit {
 		owner.SubElems().Add(rv);
 		return rv;
 	}
+	public Gfui_grp New_grp(String key, GfuiElem owner, Keyval... args) {
+		Gfui_grp rv = Gfui_grp.kit_(this, key, this.New_grp_impl(), ctor_args);
+		owner.SubElems().Add(rv);
+		return rv;
+	}
 	public GfuiTextBox New_text_box(String key, GfuiElem owner, Keyval... args) {
 		GfuiTextBox rv = GfuiTextBox_.kit_(this, key, this.Factory().text_fld_(), ctor_args);
 		owner.SubElems().Add(rv);
@@ -87,6 +92,7 @@ public abstract class Gfui_kit_base implements Gfui_kit {
 	protected abstract Gxw_html New_html_impl();
 	protected abstract Gxw_tab_mgr New_tab_mgr_impl();
 	protected abstract Gxw_tab_itm New_tab_itm_impl();
+	protected abstract GxwElem New_grp_impl();
 	protected abstract GxwElem New_btn_impl();
 	protected abstract GxwElem New_combo_impl();
 	@gplx.Virtual public Gfui_dlg_file New_dlg_file(byte type, String msg) {return Gfui_dlg_file_.Noop;}

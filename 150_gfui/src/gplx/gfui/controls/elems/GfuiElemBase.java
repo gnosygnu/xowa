@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui.controls.elems; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
 import gplx.gfui.draws.*; import gplx.gfui.gfxs.*; import gplx.gfui.ipts.*; import gplx.gfui.layouts.*; import gplx.gfui.imgs.*; import gplx.gfui.kits.core.*;
+import gplx.gfui.layouts.swts.*;
 import gplx.gfui.controls.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.standards.*; import gplx.gfui.controls.windows.*;
 import gplx.core.strings.*; import gplx.core.interfaces.*;
 public class GfuiElemBase implements GfuiElem {
@@ -61,6 +62,11 @@ public class GfuiElemBase implements GfuiElem {
 		this.Visible_set(true);
 		this.Focus();
 	}
+	public Swt_layout_mgr Layout_mgr() {return underElem.Core().Layout_mgr();}
+	public void Layout_mgr_(Swt_layout_mgr v) {underElem.Core().Layout_mgr_(v);}
+	public Swt_layout_data Layout_data() {return underElem.Core().Layout_data();}
+	public void Layout_data_(Swt_layout_data v) {underElem.Core().Layout_data_(v);}
+
 	//% Visual
 	@gplx.Virtual public boolean Visible() {return underMgr.Visible();} @gplx.Virtual public void Visible_set(boolean v) {underMgr.Visible_set(v);}
 	public GfuiElem Visible_on_() {this.Visible_set(true); return this;} public GfuiElem Visible_off_() {this.Visible_set(false); return this;}

@@ -47,6 +47,7 @@ import gplx.gfui.SizeAdp;
 import gplx.gfui.controls.elems.GfuiElem;
 import gplx.gfui.draws.*;
 import gplx.gfui.ipts.*; import gplx.gfui.controls.windows.*;
+import gplx.gfui.layouts.swts.*;
 public class GxwTextMemo_lang extends JScrollPane implements GxwTextMemo {
 	public JTextArea Inner() {return txt_box;} GxwTextBox_lang txt_box;
 	public GxwCore_base Core() {return core;} GxwCore_base core; 
@@ -322,6 +323,11 @@ class GxwCore_host extends GxwCore_base {
 	@Override public ColorAdp ForeColor(){return outer.ForeColor();} @Override public void ForeColor_set(ColorAdp v){outer.ForeColor_set(v); inner.ForeColor_set(v);}
 	@Override public FontAdp TextFont(){return outer.TextFont();} @Override public void TextFont_set(FontAdp v){outer.TextFont_set(v); inner.TextFont_set(v);}
 	@Override public String TipText() {return tipText;} @Override public void TipText_set(String v) {tipText = v;} String tipText;	
+	@Override public Swt_layout_mgr Layout_mgr() {return null;}
+	@Override public void Layout_mgr_(Swt_layout_mgr v) {}
+	@Override public Swt_layout_data Layout_data() {return null;}
+	@Override public void Layout_data_(Swt_layout_data v) {}
+
 	public Object Reapply() {
 		TextFont_set(outer.TextFont()); return this;} // HACK:
 

@@ -30,7 +30,7 @@ public class Swt_lbl implements GxwElem, Swt_control {
 	private Label lbl;
 	public Swt_lbl(Swt_control owner, Keyval_hash ctorArgs) {
 		lbl = new Label(owner.Under_composite(), SWT.CENTER);
-		core = new Swt_core_cmds(lbl);
+		core = new Swt_core__basic(lbl);
 		lbl.addKeyListener(new Swt_lnr_key(this));
 		lbl.addMouseListener(new Swt_lnr_mouse(this));
 	}

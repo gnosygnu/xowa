@@ -19,6 +19,7 @@ package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.threads.*; import gplx.core.envs.*;
 import gplx.gfui.*; import gplx.gfui.draws.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.standards.*;
 import gplx.xowa.guis.*; import gplx.xowa.guis.history.*; import gplx.xowa.guis.langs.*; import gplx.xowa.guis.urls.*; import gplx.xowa.guis.views.*; 
+import gplx.gfui.layouts.swts.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.apps.urls.*; import gplx.xowa.files.*;
 import gplx.xowa.htmls.hrefs.*;
@@ -53,19 +54,13 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	public Xowe_wiki		Active_wiki()		{return tab_mgr.Active_tab().Wiki();}
 	public Xog_html_itm		Active_html_itm()	{return tab_mgr.Active_tab().Html_itm();}
 	public Gfui_html		Active_html_box()	{return tab_mgr.Active_tab().Html_itm().Html_box();}
-	public Xog_resizer		Resizer() {return resizer;} private Xog_resizer resizer = new Xog_resizer();
 	public Gfo_usr_dlg		Usr_dlg() {return app.Usr_dlg();}
 	public Xog_win_itm_cfg	Cfg() {return cfg;} private final    Xog_win_itm_cfg cfg = new Xog_win_itm_cfg();
-	public void Refresh_win_size() {
-		if (win_box != null)	// NOTE: will be null when html box adjustment pref is set and application is starting
-			resizer.Exec_win_resize(app, win_box.Width(), win_box.Height());
-	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_link_click))								Win__link_click();
 		else if	(ctx.Match(k, Invk_link_print))								Xog_win_itm__prog_href_mgr.Print(this);
 		else if	(ctx.Match(k, Gfui_html.Evt_location_changed))				Win__link_clicked(m.ReadStr("v"));
 		else if	(ctx.Match(k, Gfui_html.Evt_location_changing))				Page__navigate_by_href(tab_mgr.Active_tab(), Xoh_href_gui_utl.Standardize_xowa_link(m.ReadStr("v")));
-		else if (ctx.Match(k, Gfui_html.Evt_win_resized))					Refresh_win_size();
 		else if (ctx.Match(k, Invk_page_refresh))							Page__refresh();
 		else if	(ctx.Match(k, Invk_page_async_exec))						Xog_async_wkr.Async(((Xog_tab_itm)m.ReadObj("v")));
 		else if	(ctx.Match(k, Invk_page_view_read))							Page__mode_(Xopg_page_.Tid_read);
@@ -298,23 +293,40 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		sync_cmd			= win_box.Kit().New_cmd_sync(this);
 		Io_url img_dir		= app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("app.window");
 		FontAdp ui_font		= app.Gui_mgr().Win_cfg().Font().To_font();
-		go_bwd_btn			= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "go_bwd_btn", "go_bwd.png"				);
-		go_fwd_btn			= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "go_fwd_btn", "go_fwd.png"				);
-		url_box				= Xog_win_itm_.new_cbo(app, kit, win_box, ui_font, "url_box"								, true);
-		url_exec_btn		= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "url_exec_btn", "url_exec.png"			);
-		search_box			= Xog_win_itm_.new_txt(app, kit, win_box, ui_font, "search_box"								, true);
-		search_exec_btn		= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "search_exec_btn", "search_exec.png"		);
-		find_close_btn		= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "find_close_btn", "find_close.png"		);
-		find_box			= Xog_win_itm_.new_txt(app, kit, win_box, ui_font, "find_box"								, true);
-		find_fwd_btn		= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "find_fwd_btn", "find_fwd.png"			);
-		find_bwd_btn		= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "find_bwd_btn", "find_bwd.png"			);
-		prog_box			= Xog_win_itm_.new_txt(app, kit, win_box, ui_font, "prog_box"								, false);
-		info_box			= Xog_win_itm_.new_txt(app, kit, win_box, ui_font, "note_box"								, false);
+
+		win_box.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(1).Margin_w_(0).Margin_h_(0).Spacing_h_(0));
+		Gfui_grp toolbar_grp = kit.New_grp("toolbar_grp", win_box);
+		toolbar_grp.BackColor_(ColorAdp_.White);
+		toolbar_grp.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w_fill_(true));
+		toolbar_grp.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(6).Margin_w_(0).Margin_h_(0).Spacing_h_(0));
+		go_bwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "go_bwd_btn", "go_bwd.png"				);
+		go_fwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "go_fwd_btn", "go_fwd.png"				);
+		url_box				= Xog_win_itm_.new_cbo(app, kit, toolbar_grp, ui_font, "url_box"								, true);
+		url_exec_btn		= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "url_exec_btn", "url_exec.png"			);
+		search_box			= Xog_win_itm_.new_txt(app, kit, toolbar_grp, ui_font, "search_box"								, true);
+		search_exec_btn		= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "search_exec_btn", "search_exec.png"		);
+		url_box.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w_fill_(true).Min_w_(100));
+		search_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(110));
+		
 		tab_mgr.Init_by_kit(kit);
+		tab_mgr.Tab_mgr().Layout_data_(new Swt_layout_data__grid().Grab_excess_h_(true).Align_h_fill_(true).Grab_excess_w_(true).Align_w_fill_(true)); 
+
+		Gfui_grp statusbar_grp = kit.New_grp("statusbar_grp", win_box);
+		statusbar_grp.BackColor_(ColorAdp_.White);
+		statusbar_grp.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w_fill_(true));
+		statusbar_grp.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(6).Margin_w_(0).Margin_h_(0).Spacing_h_(0));
+		find_close_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, img_dir, "find_close_btn", "find_close.png"		);
+		find_box			= Xog_win_itm_.new_txt(app, kit, statusbar_grp, ui_font, "find_box"								, true);
+		find_fwd_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, img_dir, "find_fwd_btn", "find_fwd.png"			);
+		find_bwd_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, img_dir, "find_bwd_btn", "find_bwd.png"			);
+		prog_box			= Xog_win_itm_.new_txt(app, kit, statusbar_grp, ui_font, "prog_box"								, false);
+		info_box			= Xog_win_itm_.new_txt(app, kit, statusbar_grp, ui_font, "note_box"								, false);
+		find_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(110));
+		prog_box.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w_fill_(true).Min_w_(100));
+
 		this.Lang_changed(app.Usere().Lang());
 
 		Gfo_evt_mgr_.Sub_same_many(this, this, Gfui_html.Evt_location_changed, Gfui_html.Evt_location_changing, Gfui_html.Evt_link_hover);
-		Gfo_evt_mgr_.Sub_same(win_box, Gfui_html.Evt_win_resized, this);
 		Gfo_evt_mgr_.Sub(app.Gui_mgr().Win_cfg().Font(), Xol_font_info.Font_changed, this, Invk_window_font_changed);
 		url_box__selection_changed = new Xog_url_box__selection_changed(app, url_box);
 		Gfo_evt_mgr_.Sub_same(url_box, GfuiComboBox.Evt__selected_changed, url_box__selection_changed);
@@ -324,7 +336,6 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 			&&	app.Mode().Tid_is_gui())	// only run for gui; do not run for tcp/http server; DATE:2014-05-03
 			app.Usr_dlg().Gui_wkr_(new Gfo_usr_dlg__gui__swt(app, kit, prog_box, info_box, info_box));
 		cfg.Init_by_app(app);
-		resizer.Init_by_app(app, this);
 	}
 	public static String Remove_redirect_if_exists(String text) {
 		// remove redirect target; EX: "A -> B" -> "A"

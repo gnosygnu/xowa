@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
 import gplx.gfui.draws.*; import gplx.gfui.ipts.*;
+import gplx.gfui.layouts.swts.*;
 public class GxwCore_mock extends GxwCore_base {
 	@Override public int Width() {return size.Width();} @Override public void Width_set(int v) {size = SizeAdp_.new_(v, size.Height());}
 	@Override public int Height() {return size.Height();} @Override public void Height_set(int v) {size = SizeAdp_.new_(size.Width(), v);}
@@ -30,6 +31,10 @@ public class GxwCore_mock extends GxwCore_base {
 	@Override public ColorAdp ForeColor() {return textColor;} @Override public void ForeColor_set(ColorAdp v) {textColor = v;} ColorAdp textColor = ColorAdp_.Null;
 	@Override public FontAdp TextFont() {return font;} @Override public void TextFont_set(FontAdp v) {font = v;} FontAdp font;
 	@Override public String TipText() {return tipText;} @Override public void TipText_set(String v) {tipText = v;} private String tipText;
+	@Override public Swt_layout_mgr Layout_mgr() {return null;}
+	@Override public void Layout_mgr_(Swt_layout_mgr v) {}
+	@Override public Swt_layout_data Layout_data() {return null;}
+	@Override public void Layout_data_(Swt_layout_data v) {}
 
 	@Override public void Controls_add(GxwElem sub) {list.Add(sub);}
 	@Override public void Controls_del(GxwElem sub) {list.Del(sub);}

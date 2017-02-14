@@ -51,7 +51,7 @@ public class Swt_tab_mgr implements Gxw_tab_mgr, Swt_control, FocusListener, Gfo
 
 		new Swt_tab_mgr_lnr_drag_drop(this, tab_folder);
 		tab_folder.addCTabFolder2Listener(new Swt_tab_mgr_lnr_close(this));
-		core = new Swt_core_cmds(tab_folder);
+		core = new Swt_core__basic(tab_folder);
 //		cmd_async = kit.New_cmd_async(this);
 		cmd_sync = kit.New_cmd_sync(this);
 	}

@@ -33,6 +33,7 @@ public class Mem_kit extends Gfui_kit_base {
 	@Override protected Gxw_html New_html_impl() {return html_impl_prototype == null ? new Mem_html(): html_impl_prototype;}
 	@Override protected Gxw_tab_mgr New_tab_mgr_impl() {return new Mem_tab_mgr();}
 	@Override protected Gxw_tab_itm New_tab_itm_impl() {return new Mem_tab_itm();}
+	@Override protected GxwElem New_grp_impl() {return factory.control_();}
 	@Override protected GxwElem New_btn_impl() {return factory.control_();}
 	@Override protected GxwElem New_combo_impl() {return factory.comboBox_();}
 	@Override public ImageAdp New_img_load(Io_url url) {return ImageAdp_null.Instance;}

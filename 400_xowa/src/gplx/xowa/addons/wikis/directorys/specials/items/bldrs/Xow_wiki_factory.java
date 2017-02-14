@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*; import gplx.xowa.addons.wikis.directorys.specials.items.*;
-import gplx.dbs.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.ctgs.dbs.*;
 public class Xow_wiki_factory {
 	public static Xowe_wiki Load_personal(Xoae_app app, byte[] domain, Io_url dir_url) {
@@ -56,6 +56,7 @@ public class Xow_wiki_factory {
 		}
 		Db_conn core_db_conn = Db_conn_bldr.Instance.Get_or_fail(core_db_url);
 
+		// > v4.2.0
 		// cat_link: if cat_link.cl_sortkey_prefix doesn't exist, then cat_link is old format; drop it and add the new one
 		try {
 			if (!core_db_conn.Meta_fld_exists(Xodb_cat_link_tbl.TBL_NAME, Xodb_cat_link_tbl.FLD__cl_sortkey_prefix)) {
@@ -76,5 +77,9 @@ public class Xow_wiki_factory {
 		} catch (Exception e) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "xo.personal:page.page_cat_db_id upgrade failed; err=~{0}", Err_.Message_gplx_log(e));
 		}
+
+		// cfg: add some settings
+//			Db_cfg_tbl cfg_tbl = Xowd_cfg_tbl_.Get_or_fail(core_db_conn);
+//			Db_cfg_hash cfg_hash = cfg_tbl.Select_as_hash("xowa.wiki.settings");
 	}
 }

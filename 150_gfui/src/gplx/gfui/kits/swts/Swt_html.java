@@ -159,7 +159,7 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_m
 	, Browser_tid_webkit	= SWT.WEBKIT
 	;	
 }
-class Swt_core_cmds_html extends Swt_core_cmds {
+class Swt_core_cmds_html extends Swt_core__basic {
 	public Swt_core_cmds_html(Swt_html html_box, Control control) {super(control);}
 	@Override public void Focus() {
 		if (Focus_able())

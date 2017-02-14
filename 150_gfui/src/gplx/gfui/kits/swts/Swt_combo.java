@@ -44,7 +44,7 @@ class Swt_combo implements GxwElem, GxwComboBox, Swt_control, Gfo_evt_mgr_owner 
 	private final Combo combo;
 	public Swt_combo(Swt_control owner, Keyval_hash ctorArgs) {
 		combo = new Combo(owner.Under_composite(), SWT.DROP_DOWN);
-		core = new Swt_core_cmds(combo);
+		core = new Swt_core__basic(combo);
 		combo.addKeyListener(new Swt_lnr_key(this));
 		combo.addMouseListener(new Swt_lnr_mouse(this));
 		combo.addSelectionListener(new Swt_combo__selection_listener(this));

@@ -42,7 +42,7 @@ public class Swt_win implements GxwWin, Swt_control {
 	void ctor(boolean window_is_dialog, Shell shell, Display display) {
 		this.shell = shell;		
 		this.display = display;
-		this.ctrl_mgr = new Swt_core_cmds(shell);
+		this.ctrl_mgr = new Swt_core__basic(shell);
 		this.show_lnr = new Swt_lnr_show(this);
 		this.resize_lnr = new Swt_lnr_resize(this);
 		shell.addListener(SWT.Show, show_lnr);
