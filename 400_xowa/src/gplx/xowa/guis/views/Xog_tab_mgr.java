@@ -40,7 +40,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		tab_mgr.Btns_selected_color_(ColorAdp_.White);
 		tab_mgr.Btns_unselected_color_(ColorAdp_.LightGray);
 		Gfo_evt_mgr_.Sub_same_many(tab_mgr, this, Gfui_tab_mgr.Evt_tab_selected, Gfui_tab_mgr.Evt_tab_closed, Gfui_tab_mgr.Evt_tab_switched);			
-		win.App().Cfg().Bind_many_app(this, Cfg__javascript_enabled, Cfg__page_load_mode
+		win.App().Cfg().Bind_many_app(this, Cfg__page_load_mode
 		, Cfg__place_on_top, Cfg__height, Cfg__hide_if_one, Cfg__curved, Cfg__close_btn_visible, Cfg__unselected_close_btn_visible, Cfg__max_chars, Cfg__min_chars);
 	}
 	public Xog_tab_itm Active_tab() {return active_tab;} private Xog_tab_itm active_tab;
