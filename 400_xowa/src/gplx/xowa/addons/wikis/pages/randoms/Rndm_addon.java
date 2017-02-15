@@ -32,6 +32,7 @@ public class Rndm_addon implements Xoax_addon_itm, Xoax_addon_itm__bldr, Xoax_ad
 		return new Xow_special_page[] 
 		{ Rndm_root_special.Prototype
 		, Rndm_page_special.Prototype
+		, new gplx.xowa.specials.deletes				.Xodel_page_special()
 		};
 	}
 

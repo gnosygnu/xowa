@@ -40,6 +40,12 @@ public class Srch_link_tbl {
 	public void Fill_for_insert(Db_stmt stmt, Srch_link_row row) {
 		stmt.Val_int(fld_word_id, row.Word_id).Val_int(fld_page_id, row.Page_id).Val_int(fld_link_score, row.Link_score);
 	}
+	public void Delete(int page_id) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.search_link: delete started: page_id=~{0}", page_id);
+		Db_stmt stmt = conn.Stmt_delete(tbl_name, fld_page_id);
+		stmt.Clear().Crt_int(fld_page_id, page_id).Exec_delete();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.search_link: delete done");
+	}
 
 	public static final    Srch_link_tbl[] Ary_empty = new Srch_link_tbl[0];
 	public static final String Fld_link_score = "link_score";

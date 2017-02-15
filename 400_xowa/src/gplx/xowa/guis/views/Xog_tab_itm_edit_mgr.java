@@ -22,8 +22,9 @@ import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Xog_tab_itm_edit_mgr {
 	public static void Save(Xog_tab_itm tab, boolean quick_save) {
 		if (tab.View_mode() != Xopg_page_.Tid_edit) return;	// exit if not edit; handles ctrl+s being pressed in read/html modes
+
+		// get text and save directly to text_db
 		Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
-		byte[] old_text = page.Db().Text().Text_bry();
 		byte[] new_text = Get_new_text(tab, page.Db().Text().Text_bry());
 		int page_id = page.Db().Page().Id();
 		if (page.Edit_mode() == Xoa_page_.Edit_mode_create) {
@@ -37,17 +38,20 @@ public class Xog_tab_itm_edit_mgr {
 		Invalidate(wiki);
 		page.Db().Text().Text_bry_(new_text);
 
-		try {
-			gplx.xowa.addons.wikis.ctgs.edits.Xoctg_edit_mgr.Update(wiki, page.Ttl().Page_db(), page_id, old_text, new_text);
-		} catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to update categories; err=~{0}", Err_.Message_gplx_log(e));
-		}
-
 		// refresh html
 		wiki.Parser_mgr().Parse(page, true);
 		if (wiki.Html__hdump_enabled()) wiki.Html__hdump_mgr().Save_mgr().Save(page);	// must go after wiki.Parse
+
 		win_itm.Usr_dlg().Prog_one("", "", "saved page ~{0}", String_.new_u8(page.Ttl().Full_txt_raw()));	// NOTE: show message after Parse, b/c Parse will flash "Loading page"; DATE:2014-05-17
 		if (!quick_save) {							// full_save; save page and go to read mode
+			// update categories
+			try {
+				wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xopg_page_.Tid_read); // NOTE: need to write html to fill Wtxt().Ctgs
+				gplx.xowa.addons.wikis.ctgs.edits.Xoctg_edit_mgr.Update(wiki, page.Ttl().Page_db(), page_id, page.Wtxt().Ctgs__to_ary());
+			} catch (Exception e) {
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to update categories; err=~{0}", Err_.Message_gplx_log(e));
+			}
+
 			page.Html_data().Edit_preview_(Bry_.Empty);
 			Xoae_page stack_page = tab.History_mgr().Cur_page(wiki);		// NOTE: must be to CurPage() else changes will be lost when going Bwd,Fwd
 			stack_page.Db().Text().Text_bry_(page.Db().Text().Text_bry());	// NOTE: overwrite with "saved" changes

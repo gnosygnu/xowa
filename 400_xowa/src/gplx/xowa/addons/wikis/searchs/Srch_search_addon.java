@@ -33,6 +33,14 @@ public class Srch_search_addon implements Xoax_addon_itm, Srch_search_addon_api 
 
 	public void Search(Srch_search_qry qry, Srch_rslt_cbk cbk) {search_mgr.Search(qry, cbk);}
 	public void Clear_rslts_cache() {search_mgr.Clear_rslts_cache();}
+	public void Delete_links(int ns_id, int page_id) {
+		int search_link_db_id = db_mgr.Tbl__link__get_idx(ns_id);
+		Srch_link_tbl search_link_tbl = db_mgr.Tbl__link__get_at(search_link_db_id);
+		if (search_link_tbl.conn.Meta_tbl_exists("search_link")) {	// NOTE: personal_wikis may not have search_link; exit early else delete will fail; DATE:2017-02-15
+			search_link_tbl.Delete(page_id);
+		}
+		this.Clear_rslts_cache();
+	}
 
 	public static final int Score_max = 1000000;
 	public static final byte Wildcard__star = Byte_ascii.Star;

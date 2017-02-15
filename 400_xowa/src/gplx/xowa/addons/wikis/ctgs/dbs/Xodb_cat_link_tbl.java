@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.ctgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*;
 import gplx.dbs.*;
+import gplx.xowa.wikis.data.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 public class Xodb_cat_link_tbl implements Db_tbl {
 	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
@@ -50,6 +51,26 @@ public class Xodb_cat_link_tbl implements Db_tbl {
 			.Val_bry_as_str(fld__sortkey_prefix	, sortkey_prefix)
 			.Exec_insert();
 	}
+	public Xodb_cat_link_row[] Select_by_page_id(int page_id) {
+		List_adp list = List_adp_.New();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld__from).Crt_int(fld__from, page_id).Exec_select__rls_auto();
+		try {
+			while (rdr.Move_next()) {
+				Xodb_cat_link_row row = new Xodb_cat_link_row
+				( rdr.Read_int(fld__from)
+				, rdr.Read_int(fld__to_id)
+				, rdr.Read_byte(fld__type_id)
+				, rdr.Read_long(fld__timestamp_unix)
+				, rdr.Read_bry(fld__sortkey)
+				, rdr.Read_bry_by_str(fld__sortkey_prefix)
+				);
+				list.Add(row);
+			}
+		} finally {
+			rdr.Rls();
+		}
+		return (Xodb_cat_link_row[])list.To_ary_and_clear(Xodb_cat_link_row.class);
+	}
 	public void Delete_by_page_id(int page_id) {
 		conn.Stmt_delete(tbl_name, fld__from)
 			.Crt_int(fld__from, page_id)
@@ -59,6 +80,33 @@ public class Xodb_cat_link_tbl implements Db_tbl {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
 	public static final String TBL_NAME = "cat_link", FLD__cl_sortkey_prefix = "cl_sortkey_prefix";
+	public static Xodb_cat_link_tbl[] Get_catlink_tbls(Xow_db_mgr db_mgr) {
+		List_adp rv = List_adp_.New();
+
+		boolean layout_is_lot = db_mgr.Props().Layout_text().Tid_is_lot();
+
+		// loop all dbs
+		int len = db_mgr.Dbs__len();
+		for (int i = 0; i < len; i++) {
+			Xow_db_file link_db = db_mgr.Dbs__get_at(i);
+			switch (link_db.Tid()) {
+				// if core, add if all or few; skip if lot
+				case Xow_db_file_.Tid__core:
+					if (layout_is_lot)
+						continue;
+					break;
+				// if cat_link, add
+				case Xow_db_file_.Tid__cat_link:
+					break;
+				// else, skip
+				default:
+					continue;
+			}
+			rv.Add(new Xodb_cat_link_tbl(link_db.Conn()));
+		}
+
+		return (Xodb_cat_link_tbl[])rv.To_ary_and_clear(Xodb_cat_link_tbl.class);
+	}
 }
 /*
 NOTE_1: categorylinks row size: 34 + 20 + 12 + (cat_sortkey.length * 2)

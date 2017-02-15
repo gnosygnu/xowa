@@ -22,7 +22,7 @@ import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.x
 import gplx.xowa.addons.wikis.ctgs.dbs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.*;
 import gplx.xowa.addons.wikis.directorys.specials.items.bldrs.*;
 public class Xoctg_edit_mgr {
-	public static void Update(Xowe_wiki wiki, byte[] ttl_bry, int page_id, byte[] old_text, byte[] new_text) {
+	public static void Update(Xowe_wiki wiki, byte[] ttl_bry, int page_id, Xoa_ttl[] ctg_ttls) {
 		// only apply to home or other wiki
 		if (!(   wiki.Domain_tid() == Xow_domain_tid_.Tid__other
 			||   wiki.Domain_tid() == Xow_domain_tid_.Tid__home))
@@ -46,32 +46,8 @@ public class Xoctg_edit_mgr {
 		Xowd_page_itm tmp_page = new Xowd_page_itm();
 		db_mgr.Tbl__page().Select_by_id(tmp_page, page_id);
 
-		// parse old page
-		wiki.Parser_mgr().Ctx().Clear_all();
-		wpg.Db().Text().Text_bry_(old_text);
-		wiki.Parser_mgr().Parse(wpg, true);
-		wiki.Html_mgr().Page_wtr_mgr().Gen(wpg, Xopg_page_.Tid_read); // need to write html to fill Wtxt().Ctgs
-
-		// cat_core:update; for each category, subtract one from count_page, count_file, or count_subcs
-		int cat_len = wpg.Wtxt().Ctgs__len();
-		for (int i = 0; i < cat_len; i++) {
-			// get cat_core itm for sub_cat
-			Xoa_ttl sub_ttl = wpg.Wtxt().Ctgs__get_at(i);
-			page_tbl.Select_by_ttl(tmp_page, sub_ttl);
-			Xowd_category_itm sub_core_itm = cat_core_tbl.Select(tmp_page.Id());
-
-			// subtract one and save it
-			sub_core_itm.Adjust(ns_id, -1);
-			cat_core_tbl.Update(sub_core_itm);
-		}
-		// cat_link:delete
-		cat_link_tbl.Delete_by_page_id(page_id);
-
-		// parse new page
-		wiki.Parser_mgr().Ctx().Clear_all();
-		wpg.Db().Text().Text_bry_(new_text);
-		wiki.Parser_mgr().Parse(wpg, true);
-		wiki.Html_mgr().Page_wtr_mgr().Gen(wpg, Xopg_page_.Tid_read); // need to write html to fill Wtxt().Ctgs
+		// delete old categories
+		Delete(wiki, page_id);
 
 		// get some variables
 		int timestamp = (int)Datetime_now.Get().Timestamp_unix();
@@ -79,11 +55,11 @@ public class Xoctg_edit_mgr {
 		Xow_db_file core_db = db_mgr.Db__core();
 
 		// cat_core:update; for each category, add one to count_page, count_file, or count_subcs
-		cat_len = wpg.Wtxt().Ctgs__len();
+		int ctg_ttls_len = ctg_ttls.length;
 		cat_link_tbl.Insert_bgn();
-		for (int i = 0; i < cat_len; i++) {
+		for (int i = 0; i < ctg_ttls_len; i++) {
 			// get cat_core itm for sub_cat
-			Xoa_ttl sub_ttl = wpg.Wtxt().Ctgs__get_at(i);
+			Xoa_ttl sub_ttl = ctg_ttls[i];
 			boolean exists = page_tbl.Select_by_ttl(tmp_page, sub_ttl);
 
 			// create category if it doesn't exist
@@ -110,5 +86,35 @@ public class Xoctg_edit_mgr {
 
 		// update page.cat_db_id
 		page_tbl.Update__cat_db_id(page_id, core_db.Id());
+	}
+	public static void Delete(Xowe_wiki wiki, int page_id) {
+		// get page_tbl
+		Xowd_page_tbl page_tbl = wiki.Data__core_mgr().Db__core().Tbl__page();
+		Xowd_page_itm tmp_page = new Xowd_page_itm();
+		page_tbl.Select_by_id(tmp_page, page_id);
+		int ns_id = tmp_page.Ns_id();
+
+		// get cat_core_tbl
+		Xowd_cat_core_tbl cat_core_tbl = Xodb_cat_db_.Get_cat_core_or_fail(wiki.Data__core_mgr());
+
+		// get cat_link_tbls
+		Xodb_cat_link_tbl[] cat_link_tbls = Xodb_cat_link_tbl.Get_catlink_tbls(wiki.Data__core_mgr());
+
+		// loop cat_link tbls to find linked categories
+		for (Xodb_cat_link_tbl cat_link_tbl : cat_link_tbls) {
+			Xodb_cat_link_row[] cat_link_rows = cat_link_tbl.Select_by_page_id(page_id);
+			// loop linked categories
+			for (Xodb_cat_link_row cat_link_row : cat_link_rows) {
+				// get cat_core_itm
+				Xowd_category_itm sub_core_itm = cat_core_tbl.Select(cat_link_row.Cat_id());
+
+				// subtract one and save it
+				sub_core_itm.Adjust(ns_id, -1);
+				cat_core_tbl.Update(sub_core_itm);
+			}
+
+			// delete cat_links
+			cat_link_tbl.Delete_by_page_id(page_id);
+		}
 	}
 }

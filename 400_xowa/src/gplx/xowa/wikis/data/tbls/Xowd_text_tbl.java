@@ -44,6 +44,11 @@ public class Xowd_text_tbl implements Db_tbl {
 		text = zip_mgr.Zip(zip_tid, text);
 		stmt.Clear().Val_bry(fld_text_data, text).Crt_int(fld_page_id, page_id).Exec_update();
 	}
+	public void Delete(int page_id) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.text: delete started: db=~{0} page_id=~{1}", conn.Conn_info().Raw(), page_id);
+		conn.Stmt_delete(tbl_name, fld_page_id).Crt_int(fld_page_id, page_id).Exec_delete();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.text: delete done");
+	}
 	public byte[] Select(int page_id) {
 		synchronized (thread_lock) {	// LOCK:stmt-rls; DATE:2016-07-06
 			if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_page_id);

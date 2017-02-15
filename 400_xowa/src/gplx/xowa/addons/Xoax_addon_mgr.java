@@ -69,7 +69,7 @@ public class Xoax_addon_mgr {
 		, new gplx.xowa.addons.bldrs.centrals			.Xobc_task_addon()
 		, new gplx.xowa.addons.apps.helps.logs			.Xolog_addon()
 		, new gplx.xowa.addons.wikis.pages.syncs		.Xosync_addon()
-		, new gplx.xowa.addons.wikis.directorys		.Xowdir_addon()
+		, new gplx.xowa.addons.wikis.directorys			.Xowdir_addon()
 		, new gplx.xowa.addons.apps.cfgs				.Xoa_cfg_addon()
 		, new gplx.xowa.addons.apps.updates				.Xoa_update_addon()
 

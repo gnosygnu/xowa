@@ -76,11 +76,13 @@ public class Xowd_site_ns_tbl implements Db_tbl {
 		}	finally {rdr.Rls();}
 	}
 	public void Update_ns_count(int ns_id, int ns_count) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.site_ns: update started: ns_id=~{0} ns_count=~{1}", ns_id, ns_count);
 		Db_stmt stmt = conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_count);
 		stmt.Clear()
 			.Val_int(fld_count, ns_count)
 			.Crt_int(fld_id, ns_id)
 			.Exec_update();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.site_ns: update done");
 	}
 	public void Rls() {}
 

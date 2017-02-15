@@ -32,11 +32,13 @@ public class Xowd_site_stats_tbl implements Db_tbl {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));
 		conn.Stmt_insert(tbl_name, flds).Val_int(fld_row_id, Site_stats_row_id).Val_long(fld_good_articles, 0).Val_long(fld_total_pages, 0).Val_int(fld_images, 0).Exec_insert();
 	}
-	public void Update(int num_articles, int num_pages, int num_files) {
+	public void Update(long num_articles, long num_pages, int num_files) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.site_stats: update started: num_articles=~{0} num_pages=~{1} num_files=~{2}", num_articles, num_pages, num_files);
 		Db_stmt stmt = conn.Stmt_update(tbl_name, String_.Ary(fld_row_id), fld_good_articles, fld_total_pages, fld_images);
 		stmt.Val_long(fld_good_articles, num_articles).Val_long(fld_total_pages, num_pages).Val_int(fld_images, num_files)
 			.Crt_int(fld_row_id, Site_stats_row_id)
 			.Exec_update();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.site_stats: update done");
 	}
 	public void Select(Xowd_site_stats_mgr stats) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_row_id).Crt_int(fld_row_id, Site_stats_row_id).Exec_select__rls_auto();

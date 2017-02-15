@@ -365,6 +365,12 @@ public class Xowd_page_tbl implements Db_tbl {
 			.Exec_update()
 			;
 	}
+	public void Delete(int page_id) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.page: delete started: page_id=~{0}", page_id);
+		Db_stmt stmt = conn.Stmt_delete(tbl_name, fld_id);
+		stmt.Clear().Crt_int(fld_id, page_id).Exec_delete();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.page: delete done");
+	}
 	public void Create_idx() {
 		conn.Meta_idx_create(Xoa_app_.Usr_dlg()
 		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "title"		, fld_title, fld_ns)

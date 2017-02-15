@@ -19,7 +19,7 @@ package gplx.xowa.htmls.core.dbs; import gplx.*; import gplx.xowa.*; import gplx
 import gplx.dbs.*; import gplx.core.brys.*;
 public class Xowd_html_tbl implements Db_tbl {
 	private final    String fld_page_id, fld_head_flag, fld_body_flag, fld_display_ttl, fld_content_sub, fld_sidebar_div, fld_body;
-	private Db_stmt stmt_select, stmt_insert, stmt_delete, stmt_update;
+	private Db_stmt stmt_select, stmt_insert, stmt_update;
 	private final    Int_flag_bldr body_flag_bldr = Make_body_flag_bldr();
 	public Xowd_html_tbl(Db_conn conn) {
 		this.conn = conn;
@@ -68,8 +68,10 @@ public class Xowd_html_tbl implements Db_tbl {
 			Insert(page_id, head_flag, zip_tid, hzip_tid, display_ttl, content_sub, sidebar_div, body);
 	}
 	public void Delete(int page_id) {
-		if (stmt_delete == null) stmt_delete = conn.Stmt_delete(tbl_name, fld_page_id);
-		stmt_delete.Clear().Crt_int(fld_page_id, page_id).Exec_delete();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.html: delete started: db=~{0} page_id=~{1}", conn.Conn_info().Raw(), page_id);
+		Db_stmt stmt = conn.Stmt_delete(tbl_name, fld_page_id);
+		stmt.Clear().Crt_int(fld_page_id, page_id).Exec_delete();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.html: delete done");
 	}
 	public boolean Select_by_page(Xoh_page hpg) {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_page_id);
@@ -107,7 +109,6 @@ public class Xowd_html_tbl implements Db_tbl {
 	}
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
-		stmt_delete = Db_stmt_.Rls(stmt_delete);
 		stmt_select = Db_stmt_.Rls(stmt_select);
 		stmt_update = Db_stmt_.Rls(stmt_update);
 	}
