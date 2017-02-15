@@ -135,6 +135,11 @@ public class Xowd_page_tbl implements Db_tbl {
 			return false;
 		}
 	}
+	public Xowd_page_itm Select_by_id_or_null(int page_id) {
+		Xowd_page_itm rv = new Xowd_page_itm();
+		boolean exists = Select_by_id(rv, page_id);
+		return exists ? rv : null;
+	}
 	public boolean Select_by_id(Xowd_page_itm rv, int page_id) {
 		if (stmt_select_all_by_id == null) stmt_select_all_by_id = conn.Stmt_select(tbl_name, flds_select_all, fld_id);
 		Db_rdr rdr = stmt_select_all_by_id.Clear().Crt_int(fld_id, page_id).Exec_select__rls_manual();

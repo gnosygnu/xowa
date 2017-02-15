@@ -16,21 +16,45 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+import gplx.core.net.qargs.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.addons.wikis.pages.syncs.core.*;
+import gplx.xowa.wikis.data.tbls.*;
 public class Xowe_page_mgr {
 	private final    Xowe_wiki wiki;
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private final    Xosync_read_mgr read_mgr = new Xosync_read_mgr();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final    Gfo_qarg_mgr tmp_qarg_mgr = new Gfo_qarg_mgr();
 	public Xowe_page_mgr(Xowe_wiki wiki) {this.wiki = wiki;}
 	public Xosync_read_mgr Sync_mgr() {return read_mgr;}
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		read_mgr.Init_by_wiki(wiki);
 	}
-	public Xoae_page Load_page(Xoa_url url, Xoa_ttl ttl, Xog_tab_itm tab) {
+	public Xoae_page Load_page(Xoa_url url, Xoa_ttl ttl, Xog_tab_itm tab) {	// NOTE: called by GUI and HTTP_SERVER; not called by MASS_PARSE
 		Xoa_app_.Usr_dlg().Log_many("", "", "page.load: url=~{0}", url.To_str());			
 		Wait_for_popups(wiki.App());
 		Xowe_wiki_.Rls_mem_if_needed(wiki);
+
+		// handle curid query_arg; EX:en.wikipedia.org/wiki/?curid=303 DATE:2017-02-15
+		Gfo_qarg_itm[] qarg_ary = url.Qargs_ary();
+		// if qargs exist...
+		if (qarg_ary.length > 0) {
+			tmp_qarg_mgr.Init(qarg_ary);
+			byte[] curid_bry = tmp_qarg_mgr.Read_bry_or(Xoa_url_.Qarg__curid, null);
+			// if "curid" qarg exists....
+			if (curid_bry != null) {
+				int curid = Bry_.To_int_or(curid_bry, -1);
+				Xowd_page_itm tmp_page = wiki.Data__core_mgr().Db__core().Tbl__page().Select_by_id_or_null(curid);
+				// if curid exists in db...
+				if (tmp_page != null) {
+					ttl = wiki.Ttl_parse(tmp_page.Ns_id(), tmp_page.Ttl_page_db());
+					// handle "home/wiki/?curid=123"; XO automatically changes to "home/wiki/Main_Page?curid=123"; change back to "home/wiki/?curid=123"
+					if (url.Page_is_main()) {
+						url.Page_bry_(Bry_.Empty);
+					}
+				}
+			}
+		}
 
 		// load page meta; wait_for_popups
 		Xoae_page page = wiki.Data_mgr().Load_page_and_parse(url, ttl, wiki.Lang(), tab, false);
