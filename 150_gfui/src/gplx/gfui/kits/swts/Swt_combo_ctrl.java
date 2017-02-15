@@ -268,8 +268,10 @@ class Swt_combo_text__key_down implements Listener {			// for list-box, highligh
 					}
 					break;
 				case SWT.ESC:
-					list.Sel_idx_by_key(-1);
-					list.Visible_(false);
+					if (list.Visible()) {	// NOTE: must check if list is visible, else will need to press escape twice to restore url; DATE:2017-02-15 
+						list.Sel_idx_by_key(-1);
+						list.Visible_(false);
+					}
 					break;
 			}
 		} catch (Exception e) {
