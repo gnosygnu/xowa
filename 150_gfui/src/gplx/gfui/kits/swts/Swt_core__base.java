@@ -131,20 +131,16 @@ abstract class Swt_core__base extends GxwCore_base {
 	}
 	private static void Layout_data_set(Control control, Swt_layout_data v) {
 		Swt_layout_data__grid gfui_data = (Swt_layout_data__grid)v;
+
 		GridData swt_data = new GridData();
-		if (gfui_data.Align_w_fill()) swt_data.horizontalAlignment = GridData.FILL;
-		if (gfui_data.Align_h_fill()) swt_data.verticalAlignment = GridData.FILL;
 		if (gfui_data.Grab_excess_w()) swt_data.grabExcessHorizontalSpace = gfui_data.Grab_excess_w();
 		if (gfui_data.Grab_excess_h()) swt_data.grabExcessVerticalSpace = gfui_data.Grab_excess_h();
-		if (gfui_data.Hint_w() > 0) {
-			swt_data.widthHint = gfui_data.Hint_w();
-			swt_data.horizontalAlignment = GridData.CENTER;
-		}
-		if (gfui_data.Hint_h() > 0) {
-			swt_data.heightHint = gfui_data.Hint_h();
-			swt_data.verticalAlignment = GridData.CENTER;
-		}
-		if (gfui_data.Min_w() > 0) swt_data.minimumWidth = gfui_data.Min_w();
+		if (gfui_data.Align_w() != Swt_layout_data__grid.Align__null) swt_data.horizontalAlignment = gfui_data.Align_w();
+		if (gfui_data.Align_h() != Swt_layout_data__grid.Align__null) swt_data.verticalAlignment   = gfui_data.Align_h();
+		if (gfui_data.Hint_w() > -1) swt_data.widthHint = gfui_data.Hint_w();
+		if (gfui_data.Hint_h() > -1) swt_data.heightHint = gfui_data.Hint_h();
+		if (gfui_data.Min_w() > -1) swt_data.minimumWidth = gfui_data.Min_w();
+		if (gfui_data.Min_h() > -1) swt_data.minimumHeight = gfui_data.Min_h();
 		
 		control.setLayoutData(swt_data);
 	}	

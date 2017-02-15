@@ -297,7 +297,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		win_box.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(1).Margin_w_(0).Margin_h_(0).Spacing_h_(0));
 		Gfui_grp toolbar_grp = kit.New_grp("toolbar_grp", win_box);
 		toolbar_grp.BackColor_(ColorAdp_.White);
-		toolbar_grp.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w_fill_(true));
+		toolbar_grp.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_());
 		toolbar_grp.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(6).Margin_w_(0).Margin_h_(0).Spacing_h_(0));
 		go_bwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "go_bwd_btn", "go_bwd.png"				);
 		go_fwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "go_fwd_btn", "go_fwd.png"				);
@@ -305,15 +305,15 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		url_exec_btn		= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "url_exec_btn", "url_exec.png"			);
 		search_box			= Xog_win_itm_.new_txt(app, kit, toolbar_grp, ui_font, "search_box"								, true);
 		search_exec_btn		= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "search_exec_btn", "search_exec.png"		);
-		url_box.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w_fill_(true).Min_w_(100));
-		search_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(110));
+		url_box.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_().Min_w_(100));
+		search_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(10));
 		
 		tab_mgr.Init_by_kit(kit);
-		tab_mgr.Tab_mgr().Layout_data_(new Swt_layout_data__grid().Grab_excess_h_(true).Align_h_fill_(true).Grab_excess_w_(true).Align_w_fill_(true)); 
+		tab_mgr.Tab_mgr().Layout_data_(new Swt_layout_data__grid().Grab_excess_h_(true).Align_w__fill_().Align_h__fill_().Grab_excess_w_(true)); 
 
 		Gfui_grp statusbar_grp = kit.New_grp("statusbar_grp", win_box);
 		statusbar_grp.BackColor_(ColorAdp_.White);
-		statusbar_grp.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w_fill_(true));
+		statusbar_grp.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_());
 		statusbar_grp.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(6).Margin_w_(0).Margin_h_(0).Spacing_h_(0));
 		find_close_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, img_dir, "find_close_btn", "find_close.png"		);
 		find_box			= Xog_win_itm_.new_txt(app, kit, statusbar_grp, ui_font, "find_box"								, true);
@@ -322,7 +322,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		prog_box			= Xog_win_itm_.new_txt(app, kit, statusbar_grp, ui_font, "prog_box"								, false);
 		info_box			= Xog_win_itm_.new_txt(app, kit, statusbar_grp, ui_font, "note_box"								, false);
 		find_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(110));
-		prog_box.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w_fill_(true).Min_w_(100));
+		prog_box.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_().Min_w_(100));
 
 		this.Lang_changed(app.Usere().Lang());
 
