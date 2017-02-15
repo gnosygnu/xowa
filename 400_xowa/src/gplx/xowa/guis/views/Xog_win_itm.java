@@ -306,7 +306,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		search_box			= Xog_win_itm_.new_txt(app, kit, toolbar_grp, ui_font, "search_box"								, true);
 		search_exec_btn		= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "search_exec_btn", "search_exec.png"		);
 		url_box.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_().Min_w_(100));
-		search_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(10));
+		search_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(160));
 		
 		tab_mgr.Init_by_kit(kit);
 		tab_mgr.Tab_mgr().Layout_data_(new Swt_layout_data__grid().Grab_excess_h_(true).Align_w__fill_().Align_h__fill_().Grab_excess_w_(true)); 

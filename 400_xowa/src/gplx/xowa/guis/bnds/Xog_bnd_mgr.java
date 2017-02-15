@@ -270,7 +270,7 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_exec							, Xog_bnd_box_.Tid_browser_url			, "key.enter");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_exec_new_tab_by_paste			, Xog_bnd_box_.Tid_browser_url			, "mod.c+key.enter");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_exec_by_paste					, Xog_bnd_box_.Tid_browser_url			, "mouse.middle", "mod.a+key.enter");
-		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_restore						, Xog_bnd_box_.Tid_browser_url			, "mod.c+key.u");
+		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_restore						, Xog_bnd_box_.Tid_browser_url			, "key.escape");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_search_focus						, Xog_bnd_box_.Tid_browser				, "mod.ca+key.s");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_search_exec						, Xog_bnd_box_.Tid_browser_search		, "key.enter");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_tabs_new_dflt__at_dflt__focus_y	, Xog_bnd_box_.Tid_browser				, "mod.c+key.t");

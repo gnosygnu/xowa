@@ -24,7 +24,11 @@ public class Xoapi_url implements Gfo_invk {
 		this.app = app;
 	}
 	private GfuiComboBox Url_box()		{return app.Gui_mgr().Browser_win().Url_box();}
-	public void Focus()					{this.Url_box().Focus(); this.Url_box().Sel_(0, String_.Len(this.Url_box().Text()));}
+	public void Focus()					{
+		GfuiComboBox url_box = this.Url_box();
+		url_box.Focus(); 
+		url_box.Sel_(0, String_.Len(this.Url_box().Text()));
+	}
 	public void Exec()					{Exec_wkr(Bool_.N, this.Url_box().Text());}
 	public void Exec_by_paste()			{Exec_wkr(Bool_.N, ClipboardAdp_.GetText());}
 	public void Exec_new_tab_by_paste() {Exec_wkr(Bool_.Y, ClipboardAdp_.GetText());}

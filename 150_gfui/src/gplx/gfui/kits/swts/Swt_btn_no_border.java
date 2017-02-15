@@ -43,7 +43,7 @@ public class Swt_btn_no_border implements GxwElem, Swt_control {
 	public Swt_btn_no_border(Swt_control owner_control, Keyval_hash ctorArgs) {
 		Composite owner = owner_control.Under_composite();		
 		Make_btn_no_border(owner.getDisplay(), owner.getShell(), owner);
-		this.core = new Swt_core__basic(box_btn);
+		this.core = new Swt_core__dual(box_grp, box_btn, 2, 2);
 		box_btn.addKeyListener(new Swt_lnr_key(this));
 		box_btn.addMouseListener(new Swt_lnr_mouse(this));
 		box_btn.setCursor((Cursor)ctorArgs.Get_val_or_null("cursor"));
@@ -52,7 +52,7 @@ public class Swt_btn_no_border implements GxwElem, Swt_control {
 	@Override public Composite Under_composite() {return box_grp;}
 	@Override public Control Under_menu_control() {return box_grp;}
 	@Override public String TextVal() {return box_btn.getText();} @Override public void TextVal_set(String v) {box_btn.setText(v);}
-	@Override public GxwCore_base Core() {return core;} private final Swt_core__basic core;
+	@Override public GxwCore_base Core() {return core;} private final Swt_core__base core;
 	@Override public GxwCbkHost Host() {return host;} @Override public void Host_set(GxwCbkHost host) {this.host = host;} private GxwCbkHost host;
 	@Override public void EnableDoubleBuffering() {}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -63,8 +63,7 @@ public class Swt_btn_no_border implements GxwElem, Swt_control {
 	private void Btn_img_(ImageAdp v) {
 		if (box_btn == null || v == null) return;
 		SizeAdp size = core.Size();
-		int dif = 0;
-		box_btn.setImage((Image)v.Resize(size.Width() - dif, size.Height() - dif).Under());
+		box_btn.setImage((Image)v.Resize(size.Width(), size.Height()).Under());
 	}
 	private void Make_btn_no_border(Display display, Shell shell, Composite owner) {
 		box_grp = new Composite(owner, SWT.FLAT);
@@ -72,7 +71,7 @@ public class Swt_btn_no_border implements GxwElem, Swt_control {
 		box_grp.setSize(16, 16);
 		box_btn.setSize(16, 16);
 		box_grp.setBackground(display.getSystemColor(SWT.COLOR_WHITE));
-		box_btn.setBackground(display.getSystemColor(SWT.COLOR_RED));
+		box_btn.setBackground(display.getSystemColor(SWT.COLOR_WHITE));
 		box_btn.addFocusListener(new Swt_clabel_lnr_focus(box_grp));
 	}
 }
