@@ -39,20 +39,24 @@ public class Xowe_page_mgr {
 		Gfo_qarg_itm[] qarg_ary = url.Qargs_ary();
 		// if qargs exist...
 		if (qarg_ary.length > 0) {
-			tmp_qarg_mgr.Init(qarg_ary);
-			byte[] curid_bry = tmp_qarg_mgr.Read_bry_or(Xoa_url_.Qarg__curid, null);
-			// if "curid" qarg exists....
-			if (curid_bry != null) {
-				int curid = Bry_.To_int_or(curid_bry, -1);
-				Xowd_page_itm tmp_page = wiki.Data__core_mgr().Db__core().Tbl__page().Select_by_id_or_null(curid);
-				// if curid exists in db...
-				if (tmp_page != null) {
-					ttl = wiki.Ttl_parse(tmp_page.Ns_id(), tmp_page.Ttl_page_db());
-					// handle "home/wiki/?curid=123"; XO automatically changes to "home/wiki/Main_Page?curid=123"; change back to "home/wiki/?curid=123"
-					if (url.Page_is_main()) {
-						url.Page_bry_(Bry_.Empty);
+			try {
+				tmp_qarg_mgr.Init(qarg_ary);
+				byte[] curid_bry = tmp_qarg_mgr.Read_bry_or(Xoa_url_.Qarg__curid, null);
+				// if "curid" qarg exists....
+				if (curid_bry != null) {
+					int curid = Bry_.To_int_or(curid_bry, -1);
+					Xowd_page_itm tmp_page = wiki.Data__core_mgr().Db__core().Tbl__page().Select_by_id_or_null(curid);
+					// if curid exists in page tbl...
+					if (tmp_page != null) {
+						ttl = wiki.Ttl_parse(tmp_page.Ns_id(), tmp_page.Ttl_page_db());
+						// handle "home/wiki/?curid=123"; XO automatically changes to "home/wiki/Main_Page?curid=123"; change back to "home/wiki/?curid=123"
+						if (url.Page_is_main()) {
+							url.Page_bry_(Bry_.Empty);
+						}
 					}
 				}
+			} catch (Exception exc) {
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to handle cur_id; url=~{0} err=~{1}", url.Raw(), Err_.Message_gplx_log(exc));
 			}
 		}
 
