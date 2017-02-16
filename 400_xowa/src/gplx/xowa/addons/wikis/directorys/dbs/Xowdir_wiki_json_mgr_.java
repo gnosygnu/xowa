@@ -16,10 +16,6 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*;
-import gplx.dbs.sys.*;
-public class Xowdir_db_utl {
-	public static int Wiki_id__next(Xoa_app app) {
-		Db_sys_mgr sys_mgr = new Db_sys_mgr(app.User().User_db_mgr().Conn());
-		return sys_mgr.Autonum_next("user.wikis.id");
-	}
+public class Xowdir_wiki_json_mgr_ {
+	public static Xowdir_wiki_json_mgr New_xowa(Xoa_app app, Io_url core_db_url) {return new Xowdir_wiki_json_mgr__xowa(app, core_db_url);}
 }

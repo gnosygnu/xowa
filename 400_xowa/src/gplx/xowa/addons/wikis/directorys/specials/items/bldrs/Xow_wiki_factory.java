@@ -80,6 +80,6 @@ public class Xow_wiki_factory {
 		}
 
 		// verify json
-		Xowdir_db_utl.Wiki_json__verify(app, domain, core_db_url, core_db_conn);
+		Xowdir_wiki_json_.Verify(app, domain, core_db_url, core_db_conn);
 	}
 }

@@ -27,7 +27,7 @@ class Xowdir_list_svc {
 	}
 	public void Import_wiki(Json_nde args) {Import_wiki(args.Get_as_str("url"));}
 	public void Import_wiki(String url) {
-		// verify it is sqlite
+		// verify file is sqlite
 		Io_url core_db_url = Io_url_.new_fil_(url);
 		Db_conn core_db_conn = Db_conn_bldr.Instance.Get_or_noop(core_db_url);
 		if (core_db_conn == Db_conn_.Noop) {
@@ -35,14 +35,15 @@ class Xowdir_list_svc {
 			return;
 		}
 
-		// verify it is a core_db
+		// verify file is a core_db
 		if (!core_db_conn.Meta_tbl_exists(gplx.xowa.wikis.data.tbls.Xowd_xowa_db_tbl.TBL_NAME)) {
 			app.Gui__cbk_mgr().Send_notify(cbk_trg, "file is not a .xowa file or missing xowa_db table: file=" + url);
 			return;
 		}
 		
 		// get wiki_json from core_db.cfg
-		Xowdir_wiki_json wiki_json = Xowdir_db_utl.Wiki_json__get_or_create(core_db_url, core_db_conn);
+		Xowdir_wiki_json_mgr wiki_json_mgr = Xowdir_wiki_json_mgr_.New_xowa(app, core_db_url);
+		Xowdir_wiki_json wiki_json = wiki_json_mgr.Verify(Bool_.Y, core_db_url.NameOnly(), core_db_url);
 		String domain = wiki_json.Domain();
 		String mainpage = wiki_json.Mainpage();
 

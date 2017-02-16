@@ -66,7 +66,7 @@ class Xowdir_item_mgr {
 			Xowe_wiki wiki = Xow_wiki_factory.Load_personal((Xoae_app)app, Bry_.new_u8(domain), dir_url);
 
 			// upsert json into cfg for import
-			Xowdir_db_utl.Wiki_json__upsert(wiki, wiki_json);
+			Xowdir_wiki_json_.Upsert(wiki, wiki_json);
 
 			// navigate to it
 			app.Gui__cbk_mgr().Send_redirect(cbk_trg, "/site/" + domain + "/wiki/" + mainpage_name);
