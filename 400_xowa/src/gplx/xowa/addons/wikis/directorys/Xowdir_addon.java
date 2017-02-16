@@ -31,6 +31,7 @@ public class Xowdir_addon implements Xoax_addon_itm, Xoax_addon_itm__special, Xo
 	public Bridge_cmd_itm[] Json_cmds() {
 		return new Bridge_cmd_itm[]
 		{ Xowdir_item_bridge.Prototype
+		, Xowdir_list_bridge.Prototype
 		};
 	}
 

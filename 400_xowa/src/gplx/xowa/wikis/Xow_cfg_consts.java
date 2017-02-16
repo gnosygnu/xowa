@@ -27,5 +27,6 @@ public class Xow_cfg_consts {
 	, Key__init__main_page			= "props.main_page"
 	, Key__init__bldr_version		= "props.bldr_version"
 	, Key__init__modified_latest	= "props.modified_latest"
+	, Key__init__domain				= "props.domain"
 	;
 }

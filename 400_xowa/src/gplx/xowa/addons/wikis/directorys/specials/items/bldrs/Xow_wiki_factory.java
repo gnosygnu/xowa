@@ -18,10 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*; import gplx.xowa.addons.wikis.directorys.specials.items.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.ctgs.dbs.*;
+import gplx.xowa.addons.wikis.directorys.dbs.*;
 public class Xow_wiki_factory {
 	public static Xowe_wiki Load_personal(Xoae_app app, byte[] domain, Io_url dir_url) {
-		// upgrade db
-		Upgrade_db(domain, dir_url);
+		// upgrade wiki directly at db
+		Upgrade_wiki(app, domain, dir_url);
 
 		// create the wiki
 		Xowe_wiki rv = new Xowe_wiki
@@ -36,7 +37,7 @@ public class Xow_wiki_factory {
 
 		// do more initialization
 		rv.Init_by_wiki__force_and_mark_inited();
-		rv.Db_mgr_as_sql().Save_mgr().Create_enabled_(true);			
+		rv.Db_mgr_as_sql().Save_mgr().Create_enabled_(true);
 
 		// register it for the url-bar; EX: test.me.org/wiki/Main_Page
 		app.User().Wikii().Xwiki_mgr().Add_by_atrs(domain, domain);
@@ -48,7 +49,7 @@ public class Xow_wiki_factory {
 		rv.Msg_mgr().Get_or_make(Bry_.new_a7("wikimedia-copyright")).Atrs_set(Bry_.Empty, false, false);
 		return rv;
 	}
-	private static void Upgrade_db(byte[] domain, Io_url dir_url) {
+	private static void Upgrade_wiki(Xoae_app app, byte[] domain, Io_url dir_url) {
 		// get conn
 		Io_url core_db_url = gplx.xowa.wikis.data.Xow_db_file__core_.Find_core_fil_or_null(dir_url, String_.new_u8(domain));
 		if (core_db_url == null) {
@@ -78,8 +79,7 @@ public class Xow_wiki_factory {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "xo.personal:page.page_cat_db_id upgrade failed; err=~{0}", Err_.Message_gplx_log(e));
 		}
 
-		// cfg: add some settings
-//			Db_cfg_tbl cfg_tbl = Xowd_cfg_tbl_.Get_or_fail(core_db_conn);
-//			Db_cfg_hash cfg_hash = cfg_tbl.Select_as_hash("xowa.wiki.settings");
+		// verify json
+		Xowdir_db_utl.Wiki_json__verify(app, domain, core_db_url, core_db_conn);
 	}
 }

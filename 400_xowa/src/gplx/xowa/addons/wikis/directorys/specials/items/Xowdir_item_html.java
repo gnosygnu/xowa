@@ -30,7 +30,7 @@ class Xowdir_item_html extends Xow_special_wtr__base {
 		Xowdir_db_mgr db_mgr = new Xowdir_db_mgr(conn);
 		Xowdir_wiki_itm itm = db_mgr.Tbl__wiki().Select_by_key_or_null(domain);
 		if (itm == null)
-			itm = new Xowdir_wiki_itm(-1, "", Io_url_.Empty, Xowdir_wiki_json.New_dflt());
+			itm = new Xowdir_wiki_itm(-1, "", Io_url_.Empty, Xowdir_wiki_json.New_empty());
 		return Xowdir_item_doc.New(itm);
 	}
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {

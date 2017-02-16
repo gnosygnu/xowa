@@ -33,8 +33,7 @@ class Xowdir_item_mgr {
 		// get next id if none provided
 		if (id == -1) {
 			itm_is_new = true;
-			Db_sys_mgr sys_mgr = new Db_sys_mgr(app.User().User_db_mgr().Conn());
-			id = sys_mgr.Autonum_next("user.wikis.id");
+			id = Xowdir_db_utl.Wiki_id__next(app);
 		}
 
 		Xowdir_db_mgr db_mgr = new Xowdir_db_mgr(app.User().User_db_mgr().Conn());
@@ -51,10 +50,12 @@ class Xowdir_item_mgr {
 
 		// upsert into user_db.wiki_list
 		Io_url fil_url = dir_url.GenSubFil(domain + ".xowa");
-		Xowdir_wiki_json json = Xowdir_wiki_json.New_dflt();
+		Xowdir_wiki_json json = Xowdir_wiki_json.New_empty();
+		json.Domain_(domain);
 		json.Name_(name);
 		json.Mainpage_(mainpage_name);
-		db_mgr.Tbl__wiki().Upsert(id, domain, fil_url, json.To_str(json_wtr));
+		String wiki_json = json.To_str(json_wtr);
+		db_mgr.Tbl__wiki().Upsert(id, domain, fil_url, wiki_json);
 
 		if (itm_is_new) {
 			// create the actual wiki
@@ -62,7 +63,10 @@ class Xowdir_item_mgr {
 			Xow_db_mkr.Create_wiki(new Xodb_wiki_data(domain, fil_url), Bry_.new_u8(mainpage_name), mainpage_text);
 
 			// load it
-			Xow_wiki_factory.Load_personal((Xoae_app)app, Bry_.new_u8(domain), dir_url);
+			Xowe_wiki wiki = Xow_wiki_factory.Load_personal((Xoae_app)app, Bry_.new_u8(domain), dir_url);
+
+			// upsert json into cfg for import
+			Xowdir_db_utl.Wiki_json__upsert(wiki, wiki_json);
 
 			// navigate to it
 			app.Gui__cbk_mgr().Send_redirect(cbk_trg, "/site/" + domain + "/wiki/" + mainpage_name);
