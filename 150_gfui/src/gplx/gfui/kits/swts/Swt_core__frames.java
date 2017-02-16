@@ -46,8 +46,9 @@ class Swt_core__frames extends Swt_core__base {
 		    	Frames_h_set(outer_rect.height);
 		    	
 		    	// vertically center
-		    	int text_size = frames[1].Item().getSize().y;
-		    	text_w_border.margins_t = (outer_rect.height - text_size) / 2; 
+		    	int text_size = frames[frames_len - 1].Item().getSize().y;
+		    	text_w_border.margins_t = (outer_rect.height - text_size) / 2;
+		    	// Tfds.Write(outer_rect.height, frames[frames_len - 2].Item().getSize().y, text_size, text_w_border.margins_t, frames[frames_len - 1].Item().getToolTipText());
 		    }
 		});		
 	}
@@ -104,6 +105,7 @@ class Swt_frame_itm__center_v implements Swt_frame_itm {
 	public void Rect_set(int new_w, int new_h) {
 		int margin_t = margin_owner.margins_t;
 		int margin_b = margin_owner.margins_b;
+		// Tfds.Write(margin_t, margin_b, new_h - (margin_t + margin_b), control.getToolTipText());
 		Swt_control_.Rect_set(control, 0, margin_t, new_w, new_h - (margin_t + margin_b));
 	}
 }

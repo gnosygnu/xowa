@@ -33,19 +33,21 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	}
 	public Gfui_kit			Kit() {return kit;} private Gfui_kit kit;
 	public Xoa_gui_mgr		Gui_mgr() {return gui_mgr;} private Xoa_gui_mgr gui_mgr;
-	public GfuiWin			Win_box() {return win_box;} private GfuiWin win_box;
-	public GfuiBtn			Go_bwd_btn() {return go_bwd_btn;} private GfuiBtn go_bwd_btn;
-	public GfuiBtn			Go_fwd_btn() {return go_fwd_btn;} private GfuiBtn go_fwd_btn;
-	public GfuiComboBox		Url_box() {return url_box;} private GfuiComboBox url_box;
-	public GfuiBtn			Url_exec_btn() {return url_exec_btn;} private GfuiBtn url_exec_btn;
-	public GfuiTextBox		Search_box() {return search_box;} private GfuiTextBox search_box;
-	public GfuiBtn			Search_exec_btn() {return search_exec_btn;} private GfuiBtn search_exec_btn;
-	public GfuiTextBox		Find_box() {return find_box;} private GfuiTextBox find_box;
-	public GfuiBtn			Find_close_btn() {return find_close_btn;} private GfuiBtn find_close_btn;
-	public GfuiBtn			Find_fwd_btn() {return find_fwd_btn;} private GfuiBtn find_fwd_btn;
-	public GfuiBtn			Find_bwd_btn() {return find_bwd_btn;} private GfuiBtn find_bwd_btn;
-	public GfuiTextBox		Prog_box() {return prog_box;} private GfuiTextBox prog_box;
-	public GfuiTextBox		Info_box() {return info_box;} private GfuiTextBox info_box;
+
+	public GfuiWin          Win_box()            {return win_box;}            private GfuiWin        win_box;
+	public GfuiBtn          Go_bwd_btn()         {return go_bwd_btn;}         private GfuiBtn        go_bwd_btn;
+	public GfuiBtn          Go_fwd_btn()         {return go_fwd_btn;}         private GfuiBtn        go_fwd_btn;
+	public GfuiComboBox     Url_box()            {return url_box;}            private GfuiComboBox   url_box;
+	public GfuiBtn          Url_exec_btn()       {return url_exec_btn;}       private GfuiBtn        url_exec_btn;
+	public GfuiTextBox      Search_box()         {return search_box;}         private GfuiTextBox    search_box;
+	public GfuiBtn          Search_exec_btn()    {return search_exec_btn;}    private GfuiBtn        search_exec_btn;
+	public GfuiTextBox      Find_box()           {return find_box;}           private GfuiTextBox    find_box;
+	public GfuiBtn          Find_close_btn()     {return find_close_btn;}     private GfuiBtn        find_close_btn;
+	public GfuiBtn          Find_fwd_btn()       {return find_fwd_btn;}       private GfuiBtn        find_fwd_btn;
+	public GfuiBtn          Find_bwd_btn()       {return find_bwd_btn;}       private GfuiBtn        find_bwd_btn;
+	public GfuiTextBox      Prog_box()           {return prog_box;}           private GfuiTextBox    prog_box;
+	public GfuiTextBox      Info_box()           {return info_box;}           private GfuiTextBox    info_box;
+
 	public Gfo_evt_mgr		Evt_mgr() {if (evt_mgr == null) evt_mgr = new Gfo_evt_mgr(this); return evt_mgr;} private Gfo_evt_mgr evt_mgr;
 	public Xoae_app			App()				{return app;} private Xoae_app app;
 	public Xog_tab_mgr		Tab_mgr()			{return tab_mgr;} private Xog_tab_mgr tab_mgr;
@@ -287,40 +289,58 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	}	private Object App__retrieve__lock = new Object();
 	public void Init_by_kit(Gfui_kit kit) {
 		this.kit = kit;
-		win_box = kit.New_win_app("win");
-		sync_cmd			= win_box.Kit().New_cmd_sync(this);
+		this.win_box = kit.New_win_app("win");
+		this.sync_cmd		= win_box.Kit().New_cmd_sync(this);
 		Io_url img_dir		= app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("app.window");
 		FontAdp ui_font		= app.Gui_mgr().Win_cfg().Font().To_font();
 
 		win_box.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(1).Margin_w_(0).Margin_h_(0).Spacing_h_(0));
+
+		// toolbar
 		Gfui_grp toolbar_grp = kit.New_grp("toolbar_grp", win_box);
 		toolbar_grp.BackColor_(ColorAdp_.White);
-		toolbar_grp.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_());
-		toolbar_grp.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(6).Margin_w_(0).Margin_h_(0).Spacing_h_(0));
 		go_bwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "go_bwd_btn", "go_bwd.png"				);
 		go_fwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "go_fwd_btn", "go_fwd.png"				);
 		url_box				= Xog_win_itm_.new_cbo(app, kit, toolbar_grp, ui_font, "url_box"								, true);
 		url_exec_btn		= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "url_exec_btn", "url_exec.png"			);
 		search_box			= Xog_win_itm_.new_txt(app, kit, toolbar_grp, ui_font, "search_box"								, true);
 		search_exec_btn		= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "search_exec_btn", "search_exec.png"		);
+
+		toolbar_grp.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_().Hint_h_(28));
+		toolbar_grp.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(6)
+			.Margin_w_(4)   // sets space to far-left / right window edges
+			.Margin_h_(1)   // sets space to top-menu and bot-html
+			.Spacing_w_(4)  // sets space between buttons, or else very squished
+			.Spacing_h_(0)  // not needed since only one row, but be explicit
+			);
 		url_box.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_().Min_w_(100));
 		search_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(160));
-		
+		search_exec_btn.Layout_data_(new Swt_layout_data__grid().Align_w__fill_().Hint_w_(20)); // force 20 width to add even more space to right-hand of screen
+
+		// tab / html space
 		tab_mgr.Init_by_kit(kit);
 		tab_mgr.Tab_mgr().Layout_data_(new Swt_layout_data__grid().Grab_excess_h_(true).Align_w__fill_().Align_h__fill_().Grab_excess_w_(true)); 
 
+		// statusbar
 		Gfui_grp statusbar_grp = kit.New_grp("statusbar_grp", win_box);
 		statusbar_grp.BackColor_(ColorAdp_.White);
-		statusbar_grp.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_());
-		statusbar_grp.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(6).Margin_w_(0).Margin_h_(0).Spacing_h_(0));
 		find_close_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, img_dir, "find_close_btn", "find_close.png"		);
 		find_box			= Xog_win_itm_.new_txt(app, kit, statusbar_grp, ui_font, "find_box"								, true);
 		find_fwd_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, img_dir, "find_fwd_btn", "find_fwd.png"			);
 		find_bwd_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, img_dir, "find_bwd_btn", "find_bwd.png"			);
 		prog_box			= Xog_win_itm_.new_txt(app, kit, statusbar_grp, ui_font, "prog_box"								, false);
 		info_box			= Xog_win_itm_.new_txt(app, kit, statusbar_grp, ui_font, "note_box"								, false);
-		find_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(110));
+
+		statusbar_grp.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_().Hint_h_(28));
+		statusbar_grp.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(6)
+			.Margin_w_(4)	// adds buffer on far-left / right window edges
+			.Margin_h_(0)	// sets space to top-html / bot-window
+			.Spacing_w_(4)  // sets space between buttons, or else very squished
+			.Spacing_h_(0)  // not needed since only one row, but be explicit
+			);
+		find_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(108)); // 108 is a magic number to have status bar text line up with vertical bar on Wikipedia style sheets
 		prog_box.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_().Min_w_(100));
+		info_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(0));  // hide for now; may add back later if need static text in corner; DATE:2017-02-15
 
 		this.Lang_changed(app.Usere().Lang());
 

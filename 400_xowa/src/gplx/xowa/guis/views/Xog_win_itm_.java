@@ -54,8 +54,10 @@ public class Xog_win_itm_ {
 		if (!itm_font.Eq(gui_font)) {
 			FontAdp new_font = itm_font.To_font();
 			win.Url_box().TextMgr().Font_(new_font);
+			win.Search_box().TextMgr().Font_(new_font);
 			win.Find_box().TextMgr().Font_(new_font);
 			win.Prog_box().TextMgr().Font_(new_font);
+			win.Info_box().TextMgr().Font_(new_font);
 			win.Tab_mgr().Tab_mgr().TextMgr().Font_(new_font);
 		}
 	}

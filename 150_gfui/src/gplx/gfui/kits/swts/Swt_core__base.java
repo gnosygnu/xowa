@@ -122,9 +122,10 @@ abstract class Swt_core__base extends GxwCore_base {
 		Swt_layout_mgr__grid gfui_layout = (Swt_layout_mgr__grid)v; 
 		GridLayout swt_layout = new GridLayout();
 		swt_layout.numColumns = gfui_layout.Cols();
-		swt_layout.marginHeight = gfui_layout.Margin_h();
-		swt_layout.marginWidth = gfui_layout.Margin_w();
-		swt_layout.verticalSpacing = gfui_layout.Spacing_h();
+		if (gfui_layout.Margin_w() > -1) swt_layout.marginWidth = gfui_layout.Margin_w();
+		if (gfui_layout.Margin_h() > -1) swt_layout.marginHeight = gfui_layout.Margin_h();
+		if (gfui_layout.Spacing_w() > -1) swt_layout.horizontalSpacing = gfui_layout.Spacing_w();
+		if (gfui_layout.Spacing_h() > -1) swt_layout.verticalSpacing = gfui_layout.Spacing_h();
 		
 		Composite control_as_composite = (Composite)control;
 		control_as_composite.setLayout(swt_layout);		
