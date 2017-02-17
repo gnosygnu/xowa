@@ -57,10 +57,10 @@ public class Fsdb_db_mgr__v2 implements Fsdb_db_mgr {
 	}
 	public static Xow_db_layout Cfg__layout_file__get(Db_conn main_core_conn) {
 		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(main_core_conn);
-		return Xow_db_layout.Get_by_name(cfg_tbl.Select_str_or(gplx.xowa.wikis.Xow_cfg_consts.Grp__bldr_fsdb, Cfg_key__layout_file, Xow_db_layout.Key__few));
+		return Xow_db_layout.Get_by_name(cfg_tbl.Select_str_or(gplx.xowa.wikis.data.Xowd_cfg_key_.Grp__bldr_fsdb, Cfg_key__layout_file, Xow_db_layout.Key__few));
 	}
 	public static void Cfg__layout_file__set(Db_cfg_tbl cfg_tbl, Xow_db_layout v) {
-		cfg_tbl.Insert_str(gplx.xowa.wikis.Xow_cfg_consts.Grp__bldr_fsdb, Cfg_key__layout_file, v.Key());
+		cfg_tbl.Insert_str(gplx.xowa.wikis.data.Xowd_cfg_key_.Grp__bldr_fsdb, Cfg_key__layout_file, v.Key());
 	}
 	private static final String Cfg_key__layout_file = "layout_file";
 }

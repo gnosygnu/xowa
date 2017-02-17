@@ -50,7 +50,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		file_mgr = new Xow_file_mgr(this);
 		parser_mgr = new Xow_parser_mgr(this);
 		cfg_parser = new Xowc_parser(this);
-		props.Init_props(domain_tid, domain_bry);
+		props.Init_by_ctor(domain_tid, domain_bry);
 		props.ContentLanguage_(lang.Key_bry());
 		stats = new Xowd_site_stats_mgr(this);
 		Pf_func_.Reg(domain_itm, lang.Func_regy(), lang);
@@ -58,7 +58,6 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		sys_cfg = new Xow_sys_cfg(this);
 		hive_mgr = new Xob_hive_mgr(this);
 		util = new Xow_html_util(this);
-		cfg_wiki_core = new Xow_cfg_wiki_core(this);
 		import_cfg = new Xob_import_cfg(this);
 		msg_mgr = new Xow_msg_mgr(this, lang);
 		eval_mgr = new Bfmtr_eval_wiki(this);
@@ -154,7 +153,6 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xop_redirect_mgr Redirect_mgr() {return redirect_mgr;} private Xop_redirect_mgr redirect_mgr;
 	public List_adp Rls_list() {if (rls_list == null) rls_list = List_adp_.New(); return rls_list;} private List_adp rls_list;
 	public Xow_file_mgr			File_mgr() {return file_mgr;} private Xow_file_mgr file_mgr;
-	public Xow_cfg_wiki_core	Cfg_wiki_core() {return cfg_wiki_core;} private Xow_cfg_wiki_core cfg_wiki_core;
 	public Xob_import_cfg		Import_cfg() {return import_cfg;} private Xob_import_cfg import_cfg;
 	public Xotdb_fsys_mgr		Tdb_fsys_mgr() {return tdb_fsys_mgr;} private final    Xotdb_fsys_mgr tdb_fsys_mgr;
 	public Xou_history_cfg		Cfg_history() {return cfg_history;} private Xou_history_cfg cfg_history = new Xou_history_cfg();
@@ -222,7 +220,6 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		if (!app.Bldr().Import_marker().Chk(this)) {app.Wiki_mgr().Del(domain_bry); init_needed = false; return;}	// NOTE: must call after Db_mgr_create_as_sql(); also, must delete wiki from mgr; DATE:2014-08-24
 		db_mgr.Load_mgr().Load_init(this);
 		app.Gfs_mgr().Run_url_for(this, tdb_fsys_mgr.Cfg_wiki_core_fil());
-		gplx.xowa.bldrs.setups.upgrades.Xoa_upgrade_mgr.Check(this);
 		parser_mgr.Init_by_wiki();
 
 		// init ns_mgr

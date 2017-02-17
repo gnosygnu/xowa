@@ -55,10 +55,8 @@ public class Xow_db_mkr {
 		Db_cfg_tbl cfg_tbl = Db_cfg_tbl.Get_by_key(core_db, Xowd_cfg_tbl_.Tbl_name);
 		Xowd_core_db_props props = new Xowd_core_db_props(2, Xow_db_layout.Itm_all, Xow_db_layout.Itm_all, Xow_db_layout.Itm_all, Io_stream_tid_.Tid__raw, Io_stream_tid_.Tid__raw, Bool_.N, Bool_.N);
 		props.Cfg_save(cfg_tbl);
-		cfg_tbl.Insert_str(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__modified_latest, Datetime_now.Get().XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
-		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__main_page, mainpage_name);
-		cfg_tbl.Insert_str(Xow_cfg_consts.Grp__empty, Xowdir_wiki_cfg_.Key__domain   , data.Domain());
-		cfg_tbl.Insert_str(Xow_cfg_consts.Grp__empty, Xowdir_wiki_cfg_.Key__name     , wiki_name);
+
+		Xowd_cfg_tbl_.Insert__create(cfg_tbl, data.Domain(), wiki_name, mainpage_name);
 
 		// insert data: page
 		Xopg_db_mgr.Create

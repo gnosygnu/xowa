@@ -91,7 +91,7 @@ public class Xoa_css_extractor {
 		if (	core_db_mgr == null
 			||	core_db_mgr.Props() == null
 			||	core_db_mgr.Props().Schema_is_1()
-			||	!core_db_mgr.Tbl__cfg().Select_yn_or(Xow_cfg_consts.Grp__wiki_schema, Xow_db_file_schema_props.Key__tbl_css_core, Bool_.N)
+			||	!core_db_mgr.Tbl__cfg().Select_yn_or(Xowd_cfg_key_.Grp__wiki_schema, Xow_db_file_schema_props.Key__tbl_css_core, Bool_.N)
 			) {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "css.db not found; wiki=~{0} css_dir=~{1}", wiki.Domain_str(), wiki_html_dir.Raw());
 			return false;

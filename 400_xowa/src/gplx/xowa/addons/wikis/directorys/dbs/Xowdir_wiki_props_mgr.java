@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*;
 import gplx.langs.jsons.*;
+import gplx.xowa.wikis.data.*;
 public interface Xowdir_wiki_props_mgr {
 	void                Wiki_cfg__upsert(String key, String val);
 	String              Wiki_cfg__select_or(String key, String or);
@@ -36,9 +37,9 @@ abstract class Xowdir_wiki_props_mgr__base implements Xowdir_wiki_props_mgr {
 	public Xowdir_wiki_props Verify(boolean mode_is_import, String domain_str, Io_url core_db_url) {
 		Xowdir_wiki_props rv = new Xowdir_wiki_props();
 
-		Verify_or_fix(rv, core_db_url, Xowdir_wiki_cfg_.Key__domain);
-		Verify_or_fix(rv, core_db_url, Xowdir_wiki_cfg_.Key__main_page);
-		Verify_or_fix(rv, core_db_url, Xowdir_wiki_cfg_.Key__name);
+		Verify_or_fix(rv, core_db_url, Xowd_cfg_key_.Key__wiki_core__domain);
+		Verify_or_fix(rv, core_db_url, Xowd_cfg_key_.Key__init__main_page);
+		Verify_or_fix(rv, core_db_url, Xowd_cfg_key_.Key__wiki_core__name);
 
 		return rv;
 	}
@@ -54,16 +55,16 @@ abstract class Xowdir_wiki_props_mgr__base implements Xowdir_wiki_props_mgr {
 		return val;
 	}
 	private static String Fix(Xowdir_wiki_props props, Io_url core_db_url, String key) {
-		if (String_.Eq(key, Xowdir_wiki_cfg_.Key__domain)) {
+		if (String_.Eq(key, Xowd_cfg_key_.Key__wiki_core__domain)) {
 			String rv = core_db_url.NameOnly();
 			if (String_.Has_at_end(rv, "-core"))
 				rv = String_.Mid(rv, 0, String_.Len(rv) - 5);
 			return rv;
 		}
-		else if (String_.Eq(key, Xowdir_wiki_cfg_.Key__name)) {
+		else if (String_.Eq(key, Xowd_cfg_key_.Key__wiki_core__name)) {
 			return props.Domain();	// NOTE: must be called after domain
 		}
-		else if (String_.Eq(key, Xowdir_wiki_cfg_.Key__main_page)) {
+		else if (String_.Eq(key, Xowd_cfg_key_.Key__init__main_page)) {
 			return Xoa_page_.Main_page_str;
 		}
 		else throw Err_.new_unhandled_default(key);

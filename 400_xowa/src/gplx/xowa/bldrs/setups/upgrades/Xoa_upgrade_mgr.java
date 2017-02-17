@@ -21,15 +21,6 @@ public class Xoa_upgrade_mgr {
 	public static void Check(Xoae_app app) {
 		Upgrade_history(app);
 	}
-	public static void Check(Xowe_wiki wiki) {
-		if (wiki.Domain_tid() == Xow_domain_tid_.Tid__home) return;	// home wiki never needs to be migrated
-		try {
-			if (Bry_.Eq(wiki.Props().Bldr_version(), Bry_.Empty)) {	// version is ""; wiki must be created prior to v0.2.1; create wiki_core.gfs
-				Upgrader_v00_02_01 mgr = new Upgrader_v00_02_01();
-				mgr.Run(wiki);
-			}
-		} catch (Exception e) {wiki.Appe().Usr_dlg().Warn_many("", "", "unknown error during migrate; domain=~{0} err=~{1}", wiki.Domain_str(), Err_.Message_gplx_full(e));}
-	}
 	private static void Upgrade_history(Xoae_app app) {
 		Io_url old_history_dir = app.Usere().Fsys_mgr().App_data_dir();
 		Io_url new_history_dir = app.Usere().Fsys_mgr().App_data_dir().GenSubDir("history");

@@ -29,4 +29,18 @@ public class Xowd_cfg_tbl_ {
 		if (rv == null) throw Err_.New("xowa_cfg tbl does not exist: file={0}", conn.Conn_info().Raw());
 		return rv;
 	}
+
+	public static void Insert__import(Xowe_wiki wiki) {
+		Db_cfg_tbl cfg_tbl = wiki.Data__core_mgr().Db__core().Tbl__cfg();
+		cfg_tbl.Insert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__bldr_version, wiki.Props().Bldr_version());
+		cfg_tbl.Insert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__siteinfo_misc, wiki.Props().Siteinfo_misc());
+		cfg_tbl.Insert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__siteinfo_mainpage, wiki.Props().Siteinfo_mainpage());
+	}
+	public static void Insert__create(Xowe_wiki wiki)     {Insert__create(wiki.Data__core_mgr().Db__core().Tbl__cfg(), wiki.Domain_str(), wiki.Domain_str(), wiki.Props().Main_page());}
+	public static void Insert__create(Db_cfg_tbl cfg_tbl, String domain, String name, byte[] main_page) {
+		cfg_tbl.Insert_str(Xowd_cfg_key_.Grp__empty    , Xowd_cfg_key_.Key__wiki_core__domain    , domain);
+		cfg_tbl.Insert_str(Xowd_cfg_key_.Grp__empty    , Xowd_cfg_key_.Key__wiki_core__name      , name);
+		cfg_tbl.Insert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__main_page      , main_page);
+		cfg_tbl.Insert_str(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__modified_latest, Datetime_now.Get().XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
+	}
 }

@@ -30,7 +30,7 @@ public class Xow_db_file_schema_props {
 		boolean wbase__qid__src_ttl_has_spaces = String_.In(version, "2.4.2.1", "2.4.3.1", "2.4.3.2");
 		return new Xow_db_file_schema_props(search__word__page_count_exists, wbase__qid__src_ttl_has_spaces);
 	}
-	public static final String Grp = Xow_cfg_consts.Grp__wiki_schema;
+	public static final String Grp = Xowd_cfg_key_.Grp__wiki_schema;
 	public static final String
 	  Key__tbl_css_core					= "tbl.css_core"						// VERSION:2.4.1
 	, Key__col_search_word_page_count	= "col.search_word.word_page_count"		// VERSION:2.4.2

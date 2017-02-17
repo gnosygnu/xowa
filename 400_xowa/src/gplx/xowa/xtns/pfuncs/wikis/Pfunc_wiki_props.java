@@ -28,10 +28,10 @@ public class Pfunc_wiki_props extends Pf_func_base {
 			case Xol_kwd_grp_.Id_site_sitename:			bfr.Add(props.Site_name()); break;
 			case Xol_kwd_grp_.Id_site_server:			bfr.Add(props.Server()); break;
 			case Xol_kwd_grp_.Id_site_servername:		bfr.Add(props.Server_name()); break;
-			case Xol_kwd_grp_.Id_site_articlepath:		bfr.Add(props.ArticlePath()); break;
-			case Xol_kwd_grp_.Id_site_scriptpath:		bfr.Add(props.ScriptPath()); break;
-			case Xol_kwd_grp_.Id_site_stylepath:		bfr.Add(props.StylePath()); break;
-			case Xol_kwd_grp_.Id_site_directionmark:	bfr.Add(props.DirectionMark()); break;
+			case Xol_kwd_grp_.Id_site_articlepath:		bfr.Add(props.Article_path()); break;
+			case Xol_kwd_grp_.Id_site_scriptpath:		bfr.Add(props.Script_path()); break;
+			case Xol_kwd_grp_.Id_site_stylepath:		bfr.Add(props.Style_path()); break;
+			case Xol_kwd_grp_.Id_site_directionmark:	bfr.Add(props.Direction_mark()); break;
 			case Xol_kwd_grp_.Id_site_currentversion:	bfr.Add(props.Current_version()); break;
 			case Xol_kwd_grp_.Id_site_contentlanguage:	bfr.Add(ctx.Page().Lang().Key_bry()); break;
 			default:									throw Err_.new_unhandled(id);

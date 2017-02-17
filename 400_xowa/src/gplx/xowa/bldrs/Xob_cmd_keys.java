@@ -42,7 +42,6 @@ public class Xob_cmd_keys {
 	, Key_tdb_make_page				= "tdb.text.page"			// "core.make_page"
 	, Key_tdb_make_id				= "core.make_id"
 	, Key_tdb_calc_stats			= "core.calc_stats"
-	, Key_tdb_core_term				= "tdb.text.term"			// "core.term"
 	, Key_tdb_text_wdata_qid		= "tdb.text.wdata.qid"
 	, Key_tdb_text_wdata_pid		= "tdb.text.wdata.pid"
 	, Key_exec_sql					= "import.sql.exec_sql"

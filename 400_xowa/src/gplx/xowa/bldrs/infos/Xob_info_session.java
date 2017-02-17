@@ -48,7 +48,7 @@ public class Xob_info_session {
 		, hash.Get_by(Cfg_key__guid).To_guid_or(Guid_adp_.Empty)
 		);
 	}
-	public static final String Cfg_grp = gplx.xowa.wikis.Xow_cfg_consts.Grp__bldr_session
+	public static final String Cfg_grp = gplx.xowa.wikis.data.Xowd_cfg_key_.Grp__bldr_session
 	, Cfg_key__user				= "user"			// EX: anonymous
 	, Cfg_key__version			= "version"			// EX: 2.3.1.4
 	, Cfg_key__wiki_domain		= "wiki_domain"		// EX: en.wikipedia.org

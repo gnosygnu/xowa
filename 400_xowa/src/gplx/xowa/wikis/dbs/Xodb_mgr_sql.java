@@ -23,7 +23,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, Gfo_invk {
 	public Xodb_mgr_sql(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		this.core_data_mgr = new Xow_db_mgr(wiki, wiki.Fsys_mgr().Root_dir());
-		this.load_mgr = new Xodb_load_mgr_sql(wiki, this, core_data_mgr);
+		this.load_mgr = new Xodb_load_mgr_sql(this);
 		this.save_mgr = new Xodb_save_mgr_sql(this);
 	}
 	public byte Tid() {return Tid_sql;} public String Tid_name() {return "sqlite3";} public static final byte Tid_sql = 1;		
@@ -38,7 +38,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, Gfo_invk {
 		return Io_mgr.Instance.QueryFil(url).ModifiedTime();
 	}
 	public void Category_version_update(boolean version_is_1) {
-		String grp = Xow_cfg_consts.Grp__wiki_init;
+		String grp = Xowd_cfg_key_.Grp__wiki_init;
 		String key = Xoa_gfs_wtr_.Write_func_chain(Xowe_wiki.Invk_db_mgr, Xodb_mgr_sql.Invk_category_version);
 		core_data_mgr.Tbl__cfg().Delete_val(grp, key);// always delete ctg version
 		category_version = version_is_1 ? Xoa_ctg_mgr.Version_1 : Xoa_ctg_mgr.Version_2;

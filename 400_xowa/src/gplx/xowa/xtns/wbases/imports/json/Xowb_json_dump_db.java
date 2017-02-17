@@ -96,7 +96,7 @@ class Xowb_json_dump_db {
 		Xow_db_file db_core = db_mgr.Db__core();
 		db_core.Tbl__site_stats().Update(page_count_main, page_id, ns_mgr.Ns_file().Count());	// save page stats
 		db_core.Tbl__ns().Insert(ns_mgr);														// save ns
-		db_mgr.Tbl__cfg().Insert_str(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__modified_latest, page_modified_on.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
+		db_mgr.Tbl__cfg().Insert_str(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__modified_latest, page_modified_on.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
 	}
 	private static final    byte[] Bry__id_key = Bry_.new_a7("id");
 }

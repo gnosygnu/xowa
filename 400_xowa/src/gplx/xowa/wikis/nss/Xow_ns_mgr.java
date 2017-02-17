@@ -244,10 +244,10 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 		public Xow_ns Ns() {return ns;} private Xow_ns ns;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_load))				Xow_cfg_wiki_core.Load_ns_(this, m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_clear))				this.Clear();
+		if		(ctx.Match(k, Invk_clear))				this.Clear();
+		// NOTE: called by /xowa/bin/any/xowa/cfg/wiki/core/*.gfs for (a) aliases; (b) Subpages_enabled
 		else if	(ctx.Match(k, Invk_add_alias_bulk))		Exec_add_alias_bulk(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_get_by_id_or_new))	return this.Ids_get_or_empty(m.ReadInt("v"));	// NOTE: called by #cfg files for setting Subpages_enabled; if ns doesn't exist, returning empty is fine; DATE:2014-02-15
+		else if	(ctx.Match(k, Invk_get_by_id_or_new))	return this.Ids_get_or_empty(m.ReadInt("v"));	// NOTE: if ns doesn't exist, returning empty is fine; DATE:2014-02-15
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_add_alias_bulk = "add_alias_bulk", Invk_get_by_id_or_new = "get_by_id_or_new";

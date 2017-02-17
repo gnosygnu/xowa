@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*;
+import gplx.xowa.wikis.data.*;
 public class Xowdir_wiki_props {
 	public Xowdir_wiki_props() {}
 	public Xowdir_wiki_props(String domain, String name, String main_page) {
@@ -33,9 +34,9 @@ public class Xowdir_wiki_props {
 	}
 
 	public void Set(String key, String val) {
-		if      (String_.Eq(key, Xowdir_wiki_cfg_.Key__domain))      this.domain = val;
-		else if (String_.Eq(key, Xowdir_wiki_cfg_.Key__name))        this.name = val;
-		else if (String_.Eq(key, Xowdir_wiki_cfg_.Key__main_page))   this.main_page = val;
+		if      (String_.Eq(key, Xowd_cfg_key_.Key__wiki_core__domain))      this.domain = val;
+		else if (String_.Eq(key, Xowd_cfg_key_.Key__wiki_core__name))        this.name = val;
+		else if (String_.Eq(key, Xowd_cfg_key_.Key__init__main_page))   this.main_page = val;
 		else throw Err_.new_unhandled_default(key);
 	}
 

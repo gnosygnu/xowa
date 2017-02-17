@@ -55,7 +55,7 @@ public class Xob_info_file {
 		, hash.Get_by(Cfg_key__orig_file_name	).To_str_or("")
 		);
 	}
-	private static final String Cfg_grp = gplx.xowa.wikis.Xow_cfg_consts.Grp__bldr_db
+	private static final String Cfg_grp = gplx.xowa.wikis.data.Xowd_cfg_key_.Grp__bldr_db
 	, Cfg_key__id				= "id"				// EX: 1
 	, Cfg_key__type				= "type"			// EX: core
 	, Cfg_key__ns_ids			= "ns_ids"			// EX: 0

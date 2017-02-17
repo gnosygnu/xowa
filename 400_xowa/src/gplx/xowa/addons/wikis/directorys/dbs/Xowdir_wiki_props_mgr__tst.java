@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*;
-import org.junit.*; import gplx.core.tests.*;
+import org.junit.*; import gplx.core.tests.*; import gplx.xowa.wikis.data.*;
 public class Xowdir_wiki_props_mgr__tst {
 	private final    Xowdir_wiki_props_mgr__fxt fxt = new Xowdir_wiki_props_mgr__fxt();
 
@@ -47,9 +47,9 @@ class Xowdir_wiki_props_mgr__fxt {
 		return new Xowdir_wiki_props(domain, name, main_page);
 	}
 	public void Init__props(String domain, String name, String main_page) {
-		mgr.Wiki_cfg__upsert(Xowdir_wiki_cfg_.Key__domain, domain);
-		mgr.Wiki_cfg__upsert(Xowdir_wiki_cfg_.Key__name, name);
-		mgr.Wiki_cfg__upsert(Xowdir_wiki_cfg_.Key__main_page, main_page);
+		mgr.Wiki_cfg__upsert(Xowd_cfg_key_.Key__wiki_core__domain, domain);
+		mgr.Wiki_cfg__upsert(Xowd_cfg_key_.Key__wiki_core__name, name);
+		mgr.Wiki_cfg__upsert(Xowd_cfg_key_.Key__init__main_page, main_page);
 	}
 	public void Test__verify(boolean mode_is_import, String url, boolean expd_dirty, Xowdir_wiki_props expd) {
 		Xowdir_wiki_props actl = mgr.Verify(mode_is_import, "", Io_url_.new_any_(url));

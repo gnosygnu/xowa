@@ -16,38 +16,45 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.primitives.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
-import gplx.xowa.apps.gfs.*; import gplx.xowa.addons.wikis.ctgs.bldrs.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.*;
-import gplx.xowa.addons.wikis.searchs.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*;
+import gplx.core.primitives.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.apps.gfs.*; 
+import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.*;
 public class Xodb_load_mgr_sql implements Xodb_load_mgr {
-	private Xodb_mgr_sql db_mgr; Xow_db_mgr fsys_mgr;
-	public Xodb_load_mgr_sql(Xow_wiki wiki, Xodb_mgr_sql db_mgr, Xow_db_mgr fsys_mgr) {this.db_mgr = db_mgr; this.fsys_mgr = fsys_mgr;}
+	private final    Xodb_mgr_sql db_mgr;
+	public Xodb_load_mgr_sql(Xodb_mgr_sql db_mgr) {this.db_mgr = db_mgr;}
 	public void Load_init(Xowe_wiki wiki) {
-		Load_init_cfg(wiki);
 		Xow_db_file db_core = wiki.Data__core_mgr().Db__core();
+		Load_cfg(wiki);
 		db_core.Tbl__site_stats().Select(wiki.Stats());
 		db_core.Tbl__ns().Select_all(wiki.Ns_mgr());
 	}
-	private void Load_init_cfg(Xowe_wiki wiki) {
-		String version_key = Xoa_gfs_wtr_.Write_func_chain(Xowe_wiki.Invk_props, Xow_wiki_props.Invk_bldr_version);
-		Db_cfg_hash cfg_hash = db_mgr.Core_data_mgr().Tbl__cfg().Select_as_hash(Xow_cfg_consts.Grp__wiki_init);
-		String version_val = cfg_hash.Get_by(version_key).To_str_or("");
-		Xodb_upgrade_mgr.Upgrade(db_mgr, cfg_hash, version_key, version_val);
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_k004();
-		Xoa_gfs_mgr gfs_mgr = wiki.Appe().Gfs_mgr();
-		try {
-			int len = cfg_hash.Len();
-			for (int i = 0; i < len; ++i) {
-				Db_cfg_itm cfg_itm = cfg_hash.Get_at(i);
-				Xoa_gfs_wtr_.Write_prop(bfr, Bry_.new_u8(cfg_itm.Key()), Bry_.new_u8(cfg_itm.To_str_or("")));
+	private void Load_cfg(Xowe_wiki wiki) {
+		byte[] main_page = null, bldr_version = null, siteinfo_misc = null, siteinfo_mainpage = null;
+		DateAdp modified_latest = null;
+
+		// load from xowa_cfg
+		gplx.dbs.cfgs.Db_cfg_hash prop_hash = wiki.Data__core_mgr().Db__core().Tbl__cfg().Select_as_hash(Xowd_cfg_key_.Grp__wiki_init);
+		int len = prop_hash.Len();
+		for (int i = 0; i < len; i++) {
+			gplx.dbs.cfgs.Db_cfg_itm prop = prop_hash.Get_at(i);
+			String prop_key = prop.Key();
+			try {
+				if      (String_.Eq(prop_key, Xowd_cfg_key_.Key__init__main_page))         main_page = Bry_.new_u8(prop.Val());
+				else if (String_.Eq(prop_key, Xowd_cfg_key_.Key__init__bldr_version))      bldr_version = Bry_.new_u8(prop.Val());
+				else if (String_.Eq(prop_key, Xowd_cfg_key_.Key__init__siteinfo_misc))     siteinfo_misc = Bry_.new_u8(prop.Val());
+				else if (String_.Eq(prop_key, Xowd_cfg_key_.Key__init__siteinfo_mainpage)) siteinfo_mainpage = Bry_.new_u8(prop.Val());
+				else if (String_.Eq(prop_key, Xowd_cfg_key_.Key__init__modified_latest))   modified_latest = DateAdp_.parse_gplx(prop.Val());
+			} catch (Exception exc) {
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to set prop; key=~{0} val=~{1} err=~{2}", prop_key, prop.Val(), Err_.Message_gplx_log(exc));
 			}
-			gfs_mgr.Run_str_for(wiki, bfr.To_str_and_clear());
-		}	finally {bfr.Mkr_rls();}
+		}
+
+		wiki.Props().Init_by_load_2(main_page, bldr_version, siteinfo_misc, siteinfo_mainpage, modified_latest);
 	}
-	public boolean Load_by_ttl(Xowd_page_itm rv, Xow_ns ns, byte[] ttl) {return db_mgr.Core_data_mgr().Tbl__page().Select_by_ttl(rv, ns, ttl);}
+	public boolean Load_by_ttl(Xowd_page_itm rv, Xow_ns ns, byte[] ttl) {
+		return db_mgr.Core_data_mgr().Tbl__page().Select_by_ttl(rv, ns, ttl);
+	}
 	public void Load_by_ttls(Cancelable cancelable, Ordered_hash rv, boolean fill_idx_fields_only, int bgn, int end) {
 		db_mgr.Core_data_mgr().Tbl__page().Select_in__ns_ttl(cancelable, rv, db_mgr.Wiki().Ns_mgr(), fill_idx_fields_only, bgn, end);
 	}

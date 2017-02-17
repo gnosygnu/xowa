@@ -26,12 +26,26 @@ public abstract class Xob_term_base implements Xob_cmd, Gfo_invk {
 	public void Cmd_run() {}
 	public void Cmd_end() {
 		Xoae_app app = wiki.Appe();
-		app.Gui_mgr().Html_mgr().Portal_mgr().Wikis().Itms_reset();	// NOTE: dirty wiki list so that next refresh will load itm			
-		app.Free_mem(false);	// clear cache, else import will load new page with old items from cache; DATE:2013-11-21
-		wiki.Props().Main_page_update(wiki);
+
+		// dirty wiki list so that next refresh will load wiki
+		app.Gui_mgr().Html_mgr().Portal_mgr().Wikis().Itms_reset();
+
+		// clear cache, else import will load new page with old items from cache; DATE:2013-11-21
+		app.Free_mem(false);
+
+		// update main page
+		byte[] new_main_page = gplx.xowa.langs.msgs.Xow_mainpage_finder.Find_or(wiki, wiki.Props().Siteinfo_mainpage());	// get new main_page from mainpage_finder
+		wiki.Props().Main_page_update_(new_main_page);
+
+		// remove import marker
 		app.Bldr().Import_marker().End(wiki);
-		wiki.Init_needed_(true);// flag init_needed prior to show; dir_info will show page_txt instead of page_gz;
-		wiki.Init_assert();	// force load; needed to pick up MediaWiki ns for MediaWiki:mainpage
+
+		// flag init_needed prior to show; dir_info will show page_txt instead of page_gz;
+		wiki.Init_needed_(true);
+
+		// force load; needed to pick up MediaWiki ns for MediaWiki:mainpage
+		wiki.Init_assert();
+
 		Cmd_end_hook();
 	}
 	public abstract void Cmd_end_hook();
