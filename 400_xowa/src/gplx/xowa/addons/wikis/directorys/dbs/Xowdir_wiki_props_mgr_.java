@@ -15,19 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-public class Xow_cfg_consts {
-	public static final String 
-	  Grp__wiki_core				= "xowa.wiki.core"
-	, Grp__wiki_schema				= "xowa.wiki.schema"
-	, Grp__bldr_session				= "xowa.bldr.session"
-	, Grp__bldr_db					= "xowa.bldr.db"
-	, Grp__bldr_fsdb				= "xowa.bldr.fsdb"
-	, Grp__wiki_init				= "wiki.init"
-	, Grp__empty				    = ""
-	, Key__init__main_page			= "props.main_page"
-	, Key__init__bldr_version		= "props.bldr_version"
-	, Key__init__modified_latest	= "props.modified_latest"
-	, Key__init__domain				= "props.domain"
-	;
+package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*;
+public class Xowdir_wiki_props_mgr_ {
+	public static Xowdir_wiki_props_mgr New_xowa(Xoa_app app, Io_url core_db_url) {return new Xowdir_wiki_props_mgr__xowa(app, core_db_url);}
 }

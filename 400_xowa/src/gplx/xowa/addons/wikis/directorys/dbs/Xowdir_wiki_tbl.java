@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
 import gplx.langs.jsons.*;
-public class Xowdir_wiki_tbl implements Db_tbl {
+public class Xowdir_wiki_tbl implements Db_tbl { // for domain and user-specific data only (name, url); don't replicate wiki-specific info here (like main_page)
 	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld__wiki_id, fld__wiki_domain, fld__wiki_core_url, fld__wiki_json;
 	private final    Db_conn conn;

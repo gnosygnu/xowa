@@ -41,11 +41,10 @@ class Xowdir_list_svc {
 			return;
 		}
 		
-		// get wiki_json from core_db.cfg
-		Xowdir_wiki_json_mgr wiki_json_mgr = Xowdir_wiki_json_mgr_.New_xowa(app, core_db_url);
-		Xowdir_wiki_json wiki_json = wiki_json_mgr.Verify(Bool_.Y, core_db_url.NameOnly(), core_db_url);
-		String domain = wiki_json.Domain();
-		String mainpage = wiki_json.Mainpage();
+		// get wiki_props from core_db.xowa_cfg
+		Xowdir_wiki_props_mgr wiki_props_mgr = Xowdir_wiki_props_mgr_.New_xowa(app, core_db_url);
+		Xowdir_wiki_props wiki_props = wiki_props_mgr.Verify(Bool_.Y, core_db_url.NameOnly(), core_db_url);
+		String domain    = wiki_props.Domain();
 
 		// if same domain exists; return
 		Xowdir_db_mgr db_mgr = new Xowdir_db_mgr(app.User().User_db_mgr().Conn());
@@ -56,12 +55,12 @@ class Xowdir_list_svc {
 
 		// add it to user_wiki
 		int id = Xowdir_db_utl.Wiki_id__next(app);
-		db_mgr.Tbl__wiki().Upsert(id, domain, core_db_url, wiki_json.To_str(new Json_wtr()));
+		db_mgr.Tbl__wiki().Upsert(id, domain, core_db_url, new Xowdir_wiki_json(wiki_props.Name()).To_str(new Json_wtr()));
 
 		// add it to personal wikis
 		gplx.xowa.addons.wikis.directorys.specials.items.bldrs.Xow_wiki_factory.Load_personal((Xoae_app)app, Bry_.new_u8(domain), core_db_url.OwnerDir());
 
 		// navigate to it
-		app.Gui__cbk_mgr().Send_redirect(cbk_trg, "/site/" + domain + "/wiki/" + mainpage);
+		app.Gui__cbk_mgr().Send_redirect(cbk_trg, "/wiki/" + String_.new_u8(cbk_trg.Page_ttl()));
 	}
 }

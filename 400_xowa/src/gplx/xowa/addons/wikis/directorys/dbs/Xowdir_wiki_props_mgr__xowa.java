@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.langs.jsons.*;
-class Xowdir_wiki_json_mgr__xowa extends Xowdir_wiki_json_mgr__base {
+class Xowdir_wiki_props_mgr__xowa extends Xowdir_wiki_props_mgr__base {
 	private final    Xoa_app app;
 	private final    Io_url core_db_url;
 	private Db_cfg_tbl      wiki_cfg_tbl;
 	private Xowdir_wiki_tbl user_reg_tbl;
-	public Xowdir_wiki_json_mgr__xowa(Xoa_app app, Io_url core_db_url) {super(Gfo_usr_dlg_.Instance);
+	public Xowdir_wiki_props_mgr__xowa(Xoa_app app, Io_url core_db_url) {super(Gfo_usr_dlg_.Instance);
 		this.app = app;
 		this.core_db_url = core_db_url;
 	}

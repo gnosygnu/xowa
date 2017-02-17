@@ -16,6 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*;
-public class Xowdir_wiki_json_mgr_ {
-	public static Xowdir_wiki_json_mgr New_xowa(Xoa_app app, Io_url core_db_url) {return new Xowdir_wiki_json_mgr__xowa(app, core_db_url);}
+public class Xowdir_wiki_cfg_ {
+	public static final String
+	  Key__domain    = "xowa.wiki.core.domain"
+	, Key__name      = "xowa.wiki.core.name"
+	, Key__main_page = "props.main_page"
+	;
 }

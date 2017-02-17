@@ -20,21 +20,21 @@ import gplx.langs.mustaches.*; import gplx.xowa.addons.wikis.directorys.dbs.*;
 public class Xowdir_item_doc implements Mustache_doc_itm {
 	private final    boolean mode_is_new;
 	private final    int id;
-	private final    String domain, name, dir, mainpage;
-	public Xowdir_item_doc(int id, String domain, String name, String dir, String mainpage) {
+	private final    String domain, name, dir, main_page;
+	public Xowdir_item_doc(int id, String domain, String name, String dir, String main_page) {
 		this.mode_is_new = id == -1;
 		this.id = id;
 		this.domain = domain;
 		this.name = name;
 		this.dir = dir;
-		this.mainpage = mainpage;
+		this.main_page = main_page;
 	}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
 		if		(String_.Eq(key, "id"))				bfr.Add_int(id);
 		else if	(String_.Eq(key, "domain"))			bfr.Add_str_u8(domain);
 		else if	(String_.Eq(key, "name"))			bfr.Add_str_u8(name);
 		else if	(String_.Eq(key, "dir"))			bfr.Add_str_u8(dir);
-		else if	(String_.Eq(key, "mainpage"))		bfr.Add_str_u8(mainpage);
+		else if	(String_.Eq(key, "mainpage"))		bfr.Add_str_u8(main_page);
 		else										return false;
 		return true;
 	}
@@ -44,12 +44,12 @@ public class Xowdir_item_doc implements Mustache_doc_itm {
 	}
 
 	public static final    Xowdir_item_doc[] Ary_empty = new Xowdir_item_doc[0];
-	public static Xowdir_item_doc New(Xowdir_wiki_itm itm) {return new Xowdir_item_doc(itm.Id(), itm.Domain(), itm.Json().Name(), itm.Url().OwnerDir().Xto_api(), itm.Json().Mainpage());}
+	public static Xowdir_item_doc New(Xowdir_wiki_itm itm, String main_page) {return new Xowdir_item_doc(itm.Id(), itm.Domain(), itm.Json().Name(), itm.Url().OwnerDir().Xto_api(), main_page);}
 	public static Xowdir_item_doc[] New_ary(Xowdir_wiki_itm[] itms_ary) {
 		int len = itms_ary.length;
 		Xowdir_item_doc[] rv = new Xowdir_item_doc[itms_ary.length];
 		for (int i = 0; i < len; i++) {
-			rv[i] = New(itms_ary[i]);
+			rv[i] = New(itms_ary[i], ""); // NOTE: main_page empty b/c not shown on list page
 		}
 		return rv;
 	}
