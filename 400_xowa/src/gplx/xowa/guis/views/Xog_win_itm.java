@@ -42,6 +42,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	public GfuiTextBox      Search_box()         {return search_box;}         private GfuiTextBox    search_box;
 	public GfuiBtn          Search_exec_btn()    {return search_exec_btn;}    private GfuiBtn        search_exec_btn;
 	public GfuiTextBox      Find_box()           {return find_box;}           private GfuiTextBox    find_box;
+	public Gfui_grp         Statusbar_grp()      {return statusbar_grp;}      private Gfui_grp       statusbar_grp;
 	public GfuiBtn          Find_close_btn()     {return find_close_btn;}     private GfuiBtn        find_close_btn;
 	public GfuiBtn          Find_fwd_btn()       {return find_fwd_btn;}       private GfuiBtn        find_fwd_btn;
 	public GfuiBtn          Find_bwd_btn()       {return find_bwd_btn;}       private GfuiBtn        find_bwd_btn;
@@ -322,7 +323,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		tab_mgr.Tab_mgr().Layout_data_(new Swt_layout_data__grid().Grab_excess_h_(true).Align_w__fill_().Align_h__fill_().Grab_excess_w_(true)); 
 
 		// statusbar
-		Gfui_grp statusbar_grp = kit.New_grp("statusbar_grp", win_box);
+		this.statusbar_grp = kit.New_grp("statusbar_grp", win_box);
 		statusbar_grp.BackColor_(ColorAdp_.White);
 		find_close_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, img_dir, "find_close_btn", "find_close.png"		);
 		find_box			= Xog_win_itm_.new_txt(app, kit, statusbar_grp, ui_font, "find_box"								, true);

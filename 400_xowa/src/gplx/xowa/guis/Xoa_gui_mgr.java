@@ -22,6 +22,7 @@ import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.guis.menus.*; import g
 import gplx.xowa.langs.*;
 import gplx.xowa.guis.bnds.*; import gplx.xowa.guis.views.*; import gplx.xowa.guis.urls.url_macros.*; import gplx.xowa.addons.wikis.searchs.gui.htmlbars.*;
 import gplx.xowa.guis.views.boots.*;
+import gplx.gfui.layouts.swts.*;
 public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 	public Xoa_gui_mgr(Xoae_app app) {
 		this.ev_mgr = new Gfo_evt_mgr(this);
@@ -44,12 +45,25 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 	public Xog_menu_mgr Menu_mgr() {return menu_mgr;} private Xog_menu_mgr menu_mgr;
 	public Xog_url_macro_mgr Url_macro_mgr() {return url_macro_mgr;} private Xog_url_macro_mgr url_macro_mgr = new Xog_url_macro_mgr();
 	public void Show_prog() {
-		GfuiWin memo_win = kit.New_win_utl("memo_win", browser_win.Win_box());
-		GfuiTextBox memo_txt = kit.New_text_box("memo_txt", memo_win, Keyval_.new_(GfuiTextBox_.Ctor_Memo, true));
+		// get rects for positioning
+		RectAdp statusbar_rect = browser_win.Statusbar_grp().Rect();
 		RectAdp prog_box_rect = browser_win.Prog_box().Rect();
-		memo_win.Rect_set(RectAdp_.new_(prog_box_rect.X(), prog_box_rect.Y() - 75, prog_box_rect.Width(), 100));
-		memo_txt.Size_(memo_win.Size().Op_add(-8, -30));
+
+		// create window using rects
+		GfuiWin memo_win = kit.New_win_utl("memo_win", browser_win.Win_box());
+		memo_win.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(1).Margin_w_(0).Margin_h_(0).Spacing_h_(0));
+		memo_win.Rect_set(RectAdp_.new_
+			( prog_box_rect.X()
+			, statusbar_rect.Y() - 60     // 60=100 - 30 (height of title bar and window border)
+			, prog_box_rect.Width() + 10  // 10=.Margin_w of statusbar_grp
+			, 100));
+
+		// create text
+		GfuiTextBox memo_txt = kit.New_text_box("memo_txt", memo_win, Keyval_.new_(GfuiTextBox_.Ctor_Memo, true));
+		memo_txt.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(Bool_.Y).Grab_excess_h_(Bool_.Y).Align_w__fill_().Align_h__fill_());
 		memo_txt.Text_(String_.Concat_lines_nl(browser_win.Usr_dlg().Gui_wkr().Prog_msgs().Xto_str_ary()));
+
+		// show and focus
 		memo_win.Show();
 		memo_win.Focus();
 	}
