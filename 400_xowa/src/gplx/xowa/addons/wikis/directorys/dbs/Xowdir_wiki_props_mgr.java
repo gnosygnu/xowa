@@ -37,24 +37,24 @@ abstract class Xowdir_wiki_props_mgr__base implements Xowdir_wiki_props_mgr {
 	public Xowdir_wiki_props Verify(boolean mode_is_import, String domain, Io_url core_db_url) {
 		Xowdir_wiki_props rv = new Xowdir_wiki_props();
 
-		Verify_or_fix(rv, core_db_url, Xowd_cfg_key_.Key__wiki_core__domain);
-		Verify_or_fix(rv, core_db_url, Xowd_cfg_key_.Key__init__main_page);
-		Verify_or_fix(rv, core_db_url, Xowd_cfg_key_.Key__wiki_core__name);
+		Verify_or_fix(rv, mode_is_import, core_db_url, Xowd_cfg_key_.Key__wiki_core__domain);
+		Verify_or_fix(rv, mode_is_import, core_db_url, Xowd_cfg_key_.Key__init__main_page);
+		Verify_or_fix(rv, mode_is_import, core_db_url, Xowd_cfg_key_.Key__wiki_core__name);
 
 		return rv;
 	}
-	private String Verify_or_fix(Xowdir_wiki_props props, Io_url core_db_url, String key) {
+	private String Verify_or_fix(Xowdir_wiki_props props, boolean mode_is_import, Io_url core_db_url, String key) {
 		String val = Wiki_cfg__select_or(key, null);
 		if (val == null) {
 			props.Dirty_y_();
 			usr_dlg.Warn_many("", "", "xowdir: core_db.xowa_cfg does not have val; url=~{0} key=~{1}", core_db_url, key);
-			val = Fix(props, core_db_url, key);
+			val = Fix(props, mode_is_import, core_db_url, key);
 			Wiki_cfg__upsert(key, val);
 		}
 		props.Set(key, val);
 		return val;
 	}
-	private static String Fix(Xowdir_wiki_props props, Io_url core_db_url, String key) {
+	private String Fix(Xowdir_wiki_props props, boolean mode_is_import, Io_url core_db_url, String key) {
 		if (String_.Eq(key, Xowd_cfg_key_.Key__wiki_core__domain)) {
 			String rv = core_db_url.NameOnly();
 			if (String_.Has_at_end(rv, "-core"))
@@ -62,7 +62,12 @@ abstract class Xowdir_wiki_props_mgr__base implements Xowdir_wiki_props_mgr {
 			return rv;
 		}
 		else if (String_.Eq(key, Xowd_cfg_key_.Key__wiki_core__name)) {
-			return props.Domain();	// NOTE: must be called after domain
+			if (mode_is_import)
+				return props.Domain();	// NOTE: must be called after domain
+			else {
+				Xowdir_wiki_json wiki_json = Xowdir_wiki_json.New_by_json(new Json_parser(), User_reg__select(props.Domain()));
+				return wiki_json.Name();
+			}
 		}
 		else if (String_.Eq(key, Xowd_cfg_key_.Key__init__main_page)) {
 			return Xoa_page_.Main_page_str;
