@@ -37,9 +37,9 @@ abstract class Xowdir_wiki_props_mgr__base implements Xowdir_wiki_props_mgr {
 	public Xowdir_wiki_props Verify(boolean mode_is_import, String domain, Io_url core_db_url) {
 		Xowdir_wiki_props rv = new Xowdir_wiki_props();
 
-		Verify_or_fix(rv, mode_is_import, core_db_url, Xowd_cfg_key_.Key__wiki_core__domain);
+		Verify_or_fix(rv, mode_is_import, core_db_url, Xowd_cfg_key_.Key__wiki__core__domain);
 		Verify_or_fix(rv, mode_is_import, core_db_url, Xowd_cfg_key_.Key__init__main_page);
-		Verify_or_fix(rv, mode_is_import, core_db_url, Xowd_cfg_key_.Key__wiki_core__name);
+		Verify_or_fix(rv, mode_is_import, core_db_url, Xowd_cfg_key_.Key__wiki__core__name);
 
 		return rv;
 	}
@@ -47,7 +47,7 @@ abstract class Xowdir_wiki_props_mgr__base implements Xowdir_wiki_props_mgr {
 		String val = Wiki_cfg__select_or(key, null);
 		if (val == null) {
 			props.Dirty_y_();
-			usr_dlg.Warn_many("", "", "xowdir: core_db.xowa_cfg does not have val; url=~{0} key=~{1}", core_db_url, key);
+			usr_dlg.Log_many("", "", "xowdir: core_db.xowa_cfg does not have val; url=~{0} key=~{1}", core_db_url, key);
 			val = Fix(props, mode_is_import, core_db_url, key);
 			Wiki_cfg__upsert(key, val);
 		}
@@ -55,13 +55,13 @@ abstract class Xowdir_wiki_props_mgr__base implements Xowdir_wiki_props_mgr {
 		return val;
 	}
 	private String Fix(Xowdir_wiki_props props, boolean mode_is_import, Io_url core_db_url, String key) {
-		if (String_.Eq(key, Xowd_cfg_key_.Key__wiki_core__domain)) {
+		if (String_.Eq(key, Xowd_cfg_key_.Key__wiki__core__domain)) {
 			String rv = core_db_url.NameOnly();
 			if (String_.Has_at_end(rv, "-core"))
 				rv = String_.Mid(rv, 0, String_.Len(rv) - 5);
 			return rv;
 		}
-		else if (String_.Eq(key, Xowd_cfg_key_.Key__wiki_core__name)) {
+		else if (String_.Eq(key, Xowd_cfg_key_.Key__wiki__core__name)) {
 			if (mode_is_import)
 				return props.Domain();	// NOTE: must be called after domain
 			else {

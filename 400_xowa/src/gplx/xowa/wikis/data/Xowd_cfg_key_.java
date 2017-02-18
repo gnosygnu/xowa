@@ -31,8 +31,13 @@ public class Xowd_cfg_key_ {
 	, Key__init__siteinfo_misc          = "props.siteinfo_misc"
 	, Key__init__siteinfo_mainpage      = "props.siteinfo_mainpage"
 
-	, Grp__wiki_core                    = "xowa.wiki.core"
-	, Key__wiki_core__domain            = "xowa.wiki.core.domain"
-	, Key__wiki_core__name              = "xowa.wiki.core.name"
+	, Grp__wiki__core                   = "xowa.wiki.core"
+	, Key__wiki__core__domain           = "xowa.wiki.core.domain"
+	, Key__wiki__core__name             = "xowa.wiki.core.name"
+
+	, Key__wiki__upgrade__version       = "xowa.wiki.upgrade.version"
+
+	, Grp__db                           = "db"
+	, Key__wiki__page__id_next          = "page.id_next"
 	;
 }

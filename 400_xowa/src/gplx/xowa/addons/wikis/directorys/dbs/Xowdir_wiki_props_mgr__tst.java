@@ -59,8 +59,8 @@ class Xowdir_wiki_props_mgr__fxt {
 		mgr.User_reg__upsert(domain, wiki_json.To_str(new Json_wtr()));
 	}
 	public void Init__wiki_props(String domain, String name, String main_page) {
-		mgr.Wiki_cfg__upsert(Xowd_cfg_key_.Key__wiki_core__domain, domain);
-		mgr.Wiki_cfg__upsert(Xowd_cfg_key_.Key__wiki_core__name, name);
+		mgr.Wiki_cfg__upsert(Xowd_cfg_key_.Key__wiki__core__domain, domain);
+		mgr.Wiki_cfg__upsert(Xowd_cfg_key_.Key__wiki__core__name, name);
 		mgr.Wiki_cfg__upsert(Xowd_cfg_key_.Key__init__main_page, main_page);
 	}
 	public void Test__verify(boolean mode_is_import, String url, boolean expd_dirty, Xowdir_wiki_props expd) {

@@ -83,6 +83,8 @@ public class Db_cfg_tbl implements Db_tbl {
 		if (cur_val == null)	this.Insert_str(grp, key, val);
 		else					this.Update_str(grp, key, val);
 	}
+
+	public void Upsert_int		(String key, int val)			{Upsert_str(key, Int_.To_str(val));}
 	public void Upsert_str		(String key, String val) {
 		String cur_val = this.Select_str_or(key, null);
 		if (cur_val == null)	this.Insert_str(key, val);
@@ -111,6 +113,8 @@ public class Db_cfg_tbl implements Db_tbl {
 		Db_rdr rdr = stmt_select.Clear().Crt_str(fld_grp, grp).Crt_str(fld_key, key).Exec_select__rls_manual();
 		try {return rdr.Move_next() ? rdr.Read_str(fld_val) : or;} finally {rdr.Rls();}
 	}
+
+	public int			Select_int_or	(String key, int or)		     {String val = Select_str_or(key, null)	; return val == null ? or : Parse_int	("", key, val);}
 	public String		Select_str_or	(String key, String or) {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, String_.Ary(fld_val), fld_grp, fld_key);
 		Db_rdr rdr = stmt_select.Clear().Crt_str(fld_grp, "").Crt_str(fld_key, key).Exec_select__rls_manual();

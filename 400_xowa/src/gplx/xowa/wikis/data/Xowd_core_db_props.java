@@ -68,7 +68,7 @@ public class Xowd_core_db_props {
 		, cfg_hash.Get_by(Cfg_key__hzip_mode_is_b256).To_yn_or(Bool_.N)
 		);
 	}
-	private static final String Cfg_grp = gplx.xowa.wikis.data.Xowd_cfg_key_.Grp__wiki_core
+	private static final String Cfg_grp = gplx.xowa.wikis.data.Xowd_cfg_key_.Grp__wiki__core
 	, Cfg_key__schema_version		= "schema_version"
 	, Cfg_key__layout_text			= "layout_text"
 	, Cfg_key__layout_html			= "layout_html"

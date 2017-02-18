@@ -34,8 +34,8 @@ public class Xowdir_wiki_props {
 	}
 
 	public void Set(String key, String val) {
-		if      (String_.Eq(key, Xowd_cfg_key_.Key__wiki_core__domain))      this.domain = val;
-		else if (String_.Eq(key, Xowd_cfg_key_.Key__wiki_core__name))        this.name = val;
+		if      (String_.Eq(key, Xowd_cfg_key_.Key__wiki__core__domain))      this.domain = val;
+		else if (String_.Eq(key, Xowd_cfg_key_.Key__wiki__core__name))        this.name = val;
 		else if (String_.Eq(key, Xowd_cfg_key_.Key__init__main_page))   this.main_page = val;
 		else throw Err_.new_unhandled_default(key);
 	}

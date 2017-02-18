@@ -26,9 +26,9 @@ public class Xopg_db_mgr {
 	public static int Create
 		( Xowd_page_tbl page_tbl, Xowd_text_tbl text_tbl, Xowd_site_ns_tbl ns_tbl, Db_cfg_tbl cfg_tbl
 		, int ns_id, byte[] ttl_page_db, byte[] text_raw, int cat_db_id) {
-		// get next page_id
-		int page_id = cfg_tbl.Select_int_or("db", "page.id_next", 1);
-		cfg_tbl.Upsert_int("db", "page.id_next", page_id + 1);
+		// get next page_id			
+		int page_id = cfg_tbl.Select_int_or(Xowd_cfg_key_.Grp__db, Xowd_cfg_key_.Key__wiki__page__id_next, 1);
+		cfg_tbl.Upsert_int(Xowd_cfg_key_.Grp__db, Xowd_cfg_key_.Key__wiki__page__id_next, page_id + 1);
 
 		// zip if needed
 		byte[] text_zip = text_tbl.Zip(text_raw);
