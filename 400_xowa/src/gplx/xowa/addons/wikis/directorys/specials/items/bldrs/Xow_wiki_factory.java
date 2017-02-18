@@ -84,17 +84,28 @@ public class Xow_wiki_factory {
 		core_db_props.Verify(Bool_.N, String_.new_u8(domain), core_db_url);
 
 		// check for page_ids < 1
-//			Xowd_page_tbl page_tbl = new Xowd_page_tbl(core_db_conn, Bool_.N);
-//			int[] page_ids = page_tbl.Select_invalid();
-//			int page_ids_len = page_ids.length;
-//			if (page_ids_len > 0) {
-//				int next_id = cfg_tbl.Select_int("db", "page.id_next");
-//				for (int i = 0; i < page_ids_len; i++) {
-//					int old_page_id = page_ids[i];
-//					int new_page_id = next_id + i;
-//					Xopg_db_mgr.Update_page_id(wiki, old_id, new_id);
-//				}
-//				cfg_tbl.Upsert_int("db", "page.id_next", next_id + page_ids_len);
-//			}
+		// select from page_tbl for page_id < 1
+		Xow_db_mgr db_mgr = new Xow_db_mgr(dir_url, String_.new_u8(domain));
+		db_mgr.Init_by_load(core_db_url);
+		Xowd_page_tbl page_tbl = db_mgr.Db__core().Tbl__page();
+		List_adp page_ids_list = List_adp_.New();
+		Db_rdr page_rdr = page_tbl.Conn().Stmt_sql(Db_sql_.Make_by_fmt(String_.Ary("SELECT page_id FROM page WHERE page_id < 1"))).Exec_select__rls_auto();
+		try {
+			while (page_rdr.Move_next()) {
+				page_ids_list.Add(page_rdr.Read_int("page_id"));
+			}
+		} finally {page_rdr.Rls();}
+
+		// update page_id if any found
+		int page_ids_len = page_ids_list.Len();
+		if (page_ids_len > 0) {
+			int next_id = db_mgr.Db__core().Tbl__cfg().Select_int("db", "page.id_next");
+			for (int i = 0; i < page_ids_len; i++) {
+				int old_page_id = (int)page_ids_list.Get_at(i);
+				int new_page_id = next_id + i;
+				Xopg_db_mgr.Update_page_id(db_mgr, old_page_id, new_page_id);
+			}
+			db_mgr.Db__core().Tbl__cfg().Upsert_int("db", "page.id_next", next_id + page_ids_len);
+		}
 	}
 }

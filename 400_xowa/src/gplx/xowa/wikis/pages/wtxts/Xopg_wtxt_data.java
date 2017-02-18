@@ -20,7 +20,7 @@ public class Xopg_wtxt_data {
 	public Xopg_toc_mgr				Toc()				{return toc;}	private final    Xopg_toc_mgr toc = new Xopg_toc_mgr(); 		
 	public int						Ctgs__len()			{return ctg_hash == null ? 0 : ctg_hash.Len();} private Ordered_hash ctg_hash;
 	public Xoa_ttl					Ctgs__get_at(int i) {return (Xoa_ttl)ctg_hash.Get_at(i);}
-	public Xoa_ttl[]				Ctgs__to_ary()		{return (Xoa_ttl[])ctg_hash.To_ary(Xoa_ttl.class);}
+	public Xoa_ttl[]				Ctgs__to_ary()		{return ctg_hash == null ? new Xoa_ttl[0] : (Xoa_ttl[])ctg_hash.To_ary(Xoa_ttl.class);}
 	public void Ctgs__add(Xoa_ttl ttl) {
 		if (ctg_hash == null) ctg_hash = Ordered_hash_.New_bry();
 		ctg_hash.Add_if_dupe_use_1st(ttl.Full_db(), ttl);

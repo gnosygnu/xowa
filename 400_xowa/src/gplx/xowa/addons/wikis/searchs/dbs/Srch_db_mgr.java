@@ -99,6 +99,13 @@ public class Srch_db_mgr {
 			Tbl__link__ary__new(tbl__lreg, tbl__link__ary, db_mgr, 1, Bool_.N, null);
 		}
 	}
+	public void Update_links(int ns_id, int old_id, int new_id) {
+		if (this.Tbl__link__len() == 0) return;// NOTE: personal_wikis may not have search_link; exit early else assert will fail; DATE:2017-02-15
+		int search_link_db_id = this.Tbl__link__get_idx(ns_id);
+		Srch_link_tbl search_link_tbl = this.Tbl__link__get_at(search_link_db_id);
+		search_link_tbl.Update_page_id(old_id, new_id);
+	}
+
 	private static Srch_link_tbl Tbl__link__ary__set(Srch_link_tbl[] ary, int idx, Xow_db_file db) {
 		Srch_link_tbl tbl = new Srch_link_tbl(db.Conn());
 		ary[idx] = tbl;

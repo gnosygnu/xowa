@@ -92,9 +92,8 @@ public class Xopg_db_mgr {
 		// delete from page
 		core_db.Tbl__page().Delete(page_id);
 	}
-	public static void Update_page_id(Xowe_wiki wiki, int old_id, int new_id) {
+	public static void Update_page_id(Xow_db_mgr db_mgr, int old_id, int new_id) {
 		// init vars
-		Xow_db_mgr db_mgr = wiki.Data__core_mgr();
 		Xow_db_file core_db = db_mgr.Db__core();
 		Xowd_page_itm tmp = new Xowd_page_itm();
 
@@ -118,7 +117,9 @@ public class Xopg_db_mgr {
 		gplx.xowa.addons.wikis.ctgs.edits.Xoctg_edit_mgr.Update_page_id(db_mgr, ns_id, old_id, new_id);
 
 		// search_link
-		Srch_search_addon.Get(wiki).Update_links(ns_id, old_id, new_id);
+		gplx.xowa.addons.wikis.searchs.dbs.Srch_db_mgr srch_db_mgr = new gplx.xowa.addons.wikis.searchs.dbs.Srch_db_mgr(db_mgr);
+		srch_db_mgr.Update_links(ns_id, old_id, new_id);
+		// NOTE: should clear search_results_cache, but for now, update_page_id is only called as a maint proc when wiki is loaded
 
 		// delete from page
 		core_db.Tbl__page().Update_page_id(old_id, new_id);
