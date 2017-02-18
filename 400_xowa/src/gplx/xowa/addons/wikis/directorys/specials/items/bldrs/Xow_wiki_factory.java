@@ -82,5 +82,19 @@ public class Xow_wiki_factory {
 		// verify json
 		Xowdir_wiki_props_mgr core_db_props = Xowdir_wiki_props_mgr_.New_xowa(app, core_db_url);
 		core_db_props.Verify(Bool_.N, String_.new_u8(domain), core_db_url);
+
+		// check for page_ids < 1
+//			Xowd_page_tbl page_tbl = new Xowd_page_tbl(core_db_conn, Bool_.N);
+//			int[] page_ids = page_tbl.Select_invalid();
+//			int page_ids_len = page_ids.length;
+//			if (page_ids_len > 0) {
+//				int next_id = cfg_tbl.Select_int("db", "page.id_next");
+//				for (int i = 0; i < page_ids_len; i++) {
+//					int old_page_id = page_ids[i];
+//					int new_page_id = next_id + i;
+//					Xopg_db_mgr.Update_page_id(wiki, old_id, new_id);
+//				}
+//				cfg_tbl.Upsert_int("db", "page.id_next", next_id + page_ids_len);
+//			}
 	}
 }

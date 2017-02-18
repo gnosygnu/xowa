@@ -181,7 +181,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		}
 		else {
 			Xodb_mgr_sql db_mgr_sql = this.Db_mgr_create_as_sql();
-			db_mgr_sql.Core_data_mgr().Init_by_load(core_db_url);
+			Xow_db_mgr.Init_by_load(this, core_db_url);
 			file_mgr.Init_file_mgr_by_load(this);
 			db_mgr_sql.Core_data_mgr().Tbl__page().Flds__assert();	// NOTE: must go above html_mgr.Init_by_wiki b/c Page_load will be done via messages
 

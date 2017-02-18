@@ -18,15 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.core.lists.hashs.*;
 import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.bldrs.infos.*;	
+import gplx.xowa.wikis.domains.*; import gplx.xowa.bldrs.infos.*; import gplx.xowa.wikis.metas.*;	
 public class Xow_db_mgr {
 	private final    Ordered_hash hash_by_id = Ordered_hash_.New(); private final    Xow_db_file_hash hash_by_tids = new Xow_db_file_hash();
 	private int db_id_next = 0;
-	private final    Xow_wiki wiki; private final    Io_url wiki_root_dir; private final    String domain_str; // needed for generating new files; EX: en.wikipedia.org-text.ns.001.xowa
-	public Xow_db_mgr(Xow_wiki wiki, Io_url wiki_root_dir) {
-		this.wiki = wiki;
+	private final    Io_url wiki_root_dir; private final    String domain_str; // needed for generating new files; EX: en.wikipedia.org-text.ns.001.xowa
+	public Xow_db_mgr(Io_url wiki_root_dir, String domain_str) {
 		this.wiki_root_dir = wiki_root_dir;
-		this.domain_str = wiki.Domain_str();
+		this.domain_str = domain_str;
 	}
 	public Xowd_core_db_props		Props()			{return props;} private Xowd_core_db_props props = Xowd_core_db_props.Test;
 	public Db_cfg_tbl				Tbl__cfg()		{return db__core.Tbl__cfg();}
@@ -45,7 +44,6 @@ public class Xow_db_mgr {
 		Db_conn core_conn = Db_conn_bldr.Instance.Get(core_url);
 		props = Xowd_core_db_props.Cfg_load(core_conn);	// load props to get layout_text
 		Dbs__set_by_tid(Xow_db_file.Load(props, Xow_db_file_.Uid__core, Xow_db_file__core_.Core_db_tid(props.Layout_text()), core_url, Xob_info_file.Ns_ids_empty, Xob_info_file.Part_id_1st, Guid_adp_.Empty));
-		wiki.Props().Init_by_load(wiki.App(), Tbl__cfg());	// load Main_page
 
 		// load dbs from "xowa_db" tbl
 		Xow_db_file[] ary = db__core.Tbl__db().Select_all(props, core_url.OwnerDir());
@@ -127,6 +125,8 @@ public class Xow_db_mgr {
 			db.Cmd_mode_(Db_cmd_mode.Tid_delete);
 		}
 		db__core.Tbl__db().Commit_all(this);
+
+		// call init again to regen list of dbs
 		this.Init_by_load(db__core.Url());
 	}
 	public void Create_page(Xowd_page_tbl core_tbl, Xowd_text_tbl text_tbl, int page_id, int ns_id, byte[] ttl_wo_ns, boolean redirect, DateAdp modified_on, byte[] text_zip_data, int text_raw_len, int random_int, int text_db_id, int html_db_id) {
@@ -169,5 +169,11 @@ public class Xow_db_mgr {
 			default									: tid_idx_str = tid_idx == 1 ? "" : "-db." + Int_.To_str_pad_bgn_zero(tid_idx, 3); break;
 		}
 		return String_.Format("-{0}{1}.xowa", tid_name, tid_idx_str);	// EX: en.wikipedia.org-text-001.sqlite3
+	}
+
+	// helper method for wikis to (a) init db_mgr; (b) load wiki.props; should probably be moved to more generic "wiki.Init_by_db()"
+	public static void Init_by_load(Xow_wiki wiki, Io_url core_url) {
+		wiki.Data__core_mgr().Init_by_load(core_url);
+		wiki.Props().Init_by_load(wiki.App(), wiki.Data__core_mgr().Tbl__cfg());	// load Main_page
 	}
 }

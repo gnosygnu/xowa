@@ -94,8 +94,8 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		if (!init_needed) return;
 		init_needed = false;
 		if (String_.Eq(domain_str, "xowa")) return;					// HACK: ignore "xowa" for now; WHEN:converting xowa to sqlitedb
-		data_mgr__core_mgr = new Xow_db_mgr(this, fsys_mgr.Root_dir());
-		data_mgr__core_mgr.Init_by_load(gplx.xowa.wikis.data.Xow_db_file__core_.Find_core_fil_or_null(this));
+		data_mgr__core_mgr = new Xow_db_mgr(fsys_mgr.Root_dir(), this.domain_str);
+		Xow_db_mgr.Init_by_load(this, gplx.xowa.wikis.data.Xow_db_file__core_.Find_core_fil_or_null(this));
 		app.Html__css_installer().Install(this, Xowd_css_core_mgr.Key_mobile);	// must init after data_mgr
 		this.db_core_mgr = Fsdb_db_mgr_.new_detect(this, fsys_mgr.Root_dir(), fsys_mgr.File_dir());
 		if (db_core_mgr == null)	// no fsdb; occurs during merge; also, will be null for xowa_db; DATE:2016-05-31
@@ -116,7 +116,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	}
 	public void	Init_by_wiki__force() {init_needed = true; Init_by_wiki();}
 	public void Init_by_make(Xowd_core_db_props props, gplx.xowa.bldrs.infos.Xob_info_session info_session) {
-		data_mgr__core_mgr = new Xow_db_mgr(this, fsys_mgr.Root_dir());
+		data_mgr__core_mgr = new Xow_db_mgr(fsys_mgr.Root_dir(), this.domain_str);
 		data_mgr__core_mgr.Init_by_make(props, info_session);
 		html__hdump_mgr.Init_by_db(this);
 	}
