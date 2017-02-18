@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.searchs.searchers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
+import gplx.xowa.addons.wikis.searchs.dbs.*;
 import gplx.xowa.addons.wikis.searchs.searchers.rslts.*; import gplx.xowa.addons.wikis.searchs.searchers.wkrs.*; import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.visitors.*;
 import gplx.core.net.*; import gplx.core.net.qargs.*;
@@ -51,7 +52,8 @@ public class Srch_search_mgr implements Gfo_invk {
 
 		// handle obsolete search dbs;
 		if (addon.Db_mgr().Cfg().Version_id__needs_upgrade()) {
-			addon.Db_mgr().Upgrade_mgr.Upgrade();
+			Srch_db_upgrade upgrade_mgr = new Srch_db_upgrade(wiki, addon.Db_mgr());
+			upgrade_mgr.Upgrade();
 			return;
 		}
 

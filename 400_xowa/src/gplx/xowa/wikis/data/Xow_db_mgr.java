@@ -20,9 +20,10 @@ import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.core.lists.hashs.*;
 import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.bldrs.infos.*; import gplx.xowa.wikis.metas.*;	
 public class Xow_db_mgr {
+	private final    Io_url wiki_root_dir;
+	private final    String domain_str; // needed for generating new files; EX: en.wikipedia.org-text.ns.001.xowa
 	private final    Ordered_hash hash_by_id = Ordered_hash_.New(); private final    Xow_db_file_hash hash_by_tids = new Xow_db_file_hash();
 	private int db_id_next = 0;
-	private final    Io_url wiki_root_dir; private final    String domain_str; // needed for generating new files; EX: en.wikipedia.org-text.ns.001.xowa
 	public Xow_db_mgr(Io_url wiki_root_dir, String domain_str) {
 		this.wiki_root_dir = wiki_root_dir;
 		this.domain_str = domain_str;

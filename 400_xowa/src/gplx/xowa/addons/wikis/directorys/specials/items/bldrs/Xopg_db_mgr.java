@@ -115,7 +115,7 @@ public class Xopg_db_mgr {
 		}
 
 		// cat_core, cat_link
-		gplx.xowa.addons.wikis.ctgs.edits.Xoctg_edit_mgr.Update_page_id(wiki, ns_id, old_id, new_id);
+		gplx.xowa.addons.wikis.ctgs.edits.Xoctg_edit_mgr.Update_page_id(db_mgr, ns_id, old_id, new_id);
 
 		// search_link
 		Srch_search_addon.Get(wiki).Update_links(ns_id, old_id, new_id);

@@ -120,11 +120,11 @@ public class Xoctg_edit_mgr {
 			cat_core_tbl.Delete(page_id);
 		}
 	}
-	public static void Update_page_id(Xowe_wiki wiki, int ns_id, int old_id, int new_id) {
+	public static void Update_page_id(Xow_db_mgr db_mgr, int ns_id, int old_id, int new_id) {
 		boolean ns_id_is_category = ns_id == Xow_ns_.Tid__category;
 
 		// get cat_link_tbls
-		Xodb_cat_link_tbl[] cat_link_tbls = Xodb_cat_link_tbl.Get_catlink_tbls(wiki.Data__core_mgr());
+		Xodb_cat_link_tbl[] cat_link_tbls = Xodb_cat_link_tbl.Get_catlink_tbls(db_mgr);
 
 		// loop cat_link tbls to find linked categories
 		for (Xodb_cat_link_tbl cat_link_tbl : cat_link_tbls) {
@@ -136,7 +136,7 @@ public class Xoctg_edit_mgr {
 
 		// update cat_core
 		if (ns_id_is_category) {
-			Xowd_cat_core_tbl cat_core_tbl = Xodb_cat_db_.Get_cat_core_or_fail(wiki.Data__core_mgr());
+			Xowd_cat_core_tbl cat_core_tbl = Xodb_cat_db_.Get_cat_core_or_fail(db_mgr);
 			cat_core_tbl.Update_page_id(old_id, new_id);
 		}
 	}

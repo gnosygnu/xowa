@@ -46,7 +46,7 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 		search_temp_tbl.Insert_end();
 
 		// init
-		Srch_db_mgr search_db_mgr = search_addon.Db_mgr().Init();	// NOTE: must call .Init for import-offline else Cfg_tbl will be null; note that .Init will bind to newly created search_word / search_link tbl; DATE:2016-04-04
+		Srch_db_mgr search_db_mgr = search_addon.Db_mgr().Init(wiki.Stats().Num_pages());	// NOTE: must call .Init for import-offline else Cfg_tbl will be null; note that .Init will bind to newly created search_word / search_link tbl; DATE:2016-04-04
 		Db_conn word_conn = search_temp_tbl.conn;
 
 		// update search_word ids if they exist

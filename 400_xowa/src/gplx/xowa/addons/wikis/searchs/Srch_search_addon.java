@@ -23,7 +23,7 @@ public class Srch_search_addon implements Xoax_addon_itm, Srch_search_addon_api 
 	private final    Srch_search_mgr search_mgr;
 	public Srch_search_addon(Xow_wiki wiki) {
 		this.wiki_domain = wiki.Domain_bry();
-		this.db_mgr = new Srch_db_mgr(wiki).Init();
+		this.db_mgr = new Srch_db_mgr(wiki.Data__core_mgr()).Init(wiki.Stats().Num_pages());
 		this.ttl_parser = new Srch_text_parser().Init_for_ttl(wiki.Case_mgr());
 		this.search_mgr = new Srch_search_mgr(this, wiki, ttl_parser);
 	}

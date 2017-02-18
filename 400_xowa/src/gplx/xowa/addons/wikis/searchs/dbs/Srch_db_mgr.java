@@ -19,11 +19,9 @@ package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*; import gplx.xowa.*; i
 import gplx.dbs.cfgs.*;
 import gplx.xowa.wikis.data.*;
 public class Srch_db_mgr {
-	private final    Xow_wiki wiki;
-	public final    Srch_db_upgrade Upgrade_mgr;
-	public Srch_db_mgr(Xow_wiki wiki) {
-		this.wiki = wiki;
-		Upgrade_mgr = new Srch_db_upgrade(wiki, this);
+	private final    Xow_db_mgr db_mgr;
+	public Srch_db_mgr(Xow_db_mgr db_mgr) {
+		this.db_mgr = db_mgr;
 	}
 	public Srch_db_cfg			Cfg()						{return cfg;} private Srch_db_cfg cfg;
 	public Db_cfg_tbl			Tbl__cfg()					{return tbl__cfg;} private Db_cfg_tbl tbl__cfg;
@@ -32,8 +30,7 @@ public class Srch_db_mgr {
 	public Srch_link_tbl		Tbl__link__get_at(int i)	{return tbl__link__ary[i];}
 	public int					Tbl__link__get_idx(int ns)	{return ns == gplx.xowa.wikis.nss.Xow_ns_.Tid__main ? 0 : tbl__link__ary.length - 1;}
 	public Srch_link_tbl[]		Tbl__link__ary()			{return tbl__link__ary;} private Srch_link_tbl[] tbl__link__ary = Srch_link_tbl.Ary_empty;
-	public Srch_db_mgr Init() {
-		Xow_db_mgr db_mgr = wiki.Data__core_mgr();
+	public Srch_db_mgr Init(long num_pages) {
 		Xowd_core_db_props db_props = db_mgr.Db__core().Db_props();
 		Xow_db_file word_db = null;
 		if (	db_props.Schema() == 1
@@ -63,12 +60,12 @@ public class Srch_db_mgr {
 				}
 			}
 		}
-		cfg = Srch_db_cfg_.New(tbl__cfg, wiki.Stats().Num_pages(), Srch_db_cfg_.Select__version_id(tbl__cfg, tbl__word));
+		cfg = Srch_db_cfg_.New(tbl__cfg, num_pages, Srch_db_cfg_.Select__version_id(tbl__cfg, tbl__word));
 		return this;
 	}
 	public void Delete_all(Xow_db_mgr core_data_mgr) {
 		tbl__word.conn.Meta_tbl_delete(Srch_link_reg_tbl.Tbl_name);
-		Xowd_core_db_props db_props = wiki.Data__core_mgr().Db__core().Db_props();
+		Xowd_core_db_props db_props = db_mgr.Db__core().Db_props();
 		if (	db_props.Schema() == 1
 			||	db_props.Layout_text().Tid_is_all_or_few()) {
 			// single_db; just drop tables
@@ -82,8 +79,7 @@ public class Srch_db_mgr {
 		}
 	}
 	public void Create_all() {
-		Xow_db_mgr db_mgr = wiki.Data__core_mgr();
-		Xowd_core_db_props db_props = wiki.Data__core_mgr().Db__core().Db_props();
+		Xowd_core_db_props db_props = db_mgr.Db__core().Db_props();
 		if (	db_props.Schema() == 1
 			||	db_props.Layout_text().Tid_is_all_or_few()) {
 			// single_db; put both in core_db
