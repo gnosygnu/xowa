@@ -71,10 +71,29 @@ public class Xodb_cat_link_tbl implements Db_tbl {
 		}
 		return (Xodb_cat_link_row[])list.To_ary_and_clear(Xodb_cat_link_row.class);
 	}
-	public void Delete_by_page_id(int page_id) {
+	public void Delete_pages(int page_id) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_link: delete pages started: db=~{0} page_id=~{1}", conn.Conn_info().Raw(), page_id);
 		conn.Stmt_delete(tbl_name, fld__from)
 			.Crt_int(fld__from, page_id)
 			.Exec_delete();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_link: delete pages done");
+	}
+	public void Delete_cats(int page_id) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_link: delete cats started: db=~{0} page_id=~{1}", conn.Conn_info().Raw(), page_id);
+		conn.Stmt_delete(tbl_name, fld__to_id)
+			.Crt_int(fld__to_id, page_id)
+			.Exec_delete();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_link: delete cats done");
+	}
+	public void Update_page_id_for_pages(int old_id, int new_id) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_link: update cl_from started: db=~{0} old_id=~{1} new_id=~{2}", conn.Conn_info().Raw(), old_id, new_id);
+		conn.Stmt_update(tbl_name, String_.Ary(fld__from), fld__from).Val_int(fld__from, new_id).Crt_int(fld__from, old_id).Exec_update();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_link: update cl_from done");
+	}
+	public void Update_page_id_for_cats(int old_id, int new_id) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_link: update cl_to started: db=~{0} old_id=~{1} new_id=~{2}", conn.Conn_info().Raw(), old_id, new_id);
+		conn.Stmt_update(tbl_name, String_.Ary(fld__to_id), fld__to_id).Val_int(fld__to_id, new_id).Crt_int(fld__to_id, old_id).Exec_update();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_link: update cl_to done");
 	}
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);

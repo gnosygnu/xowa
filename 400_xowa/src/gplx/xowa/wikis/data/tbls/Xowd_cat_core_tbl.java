@@ -52,7 +52,17 @@ public class Xowd_cat_core_tbl implements Db_tbl {
 	public void Update_by_batch(int id, byte hidden) {
 		stmt_update.Clear().Val_byte(fld_hidden, hidden).Crt_int(fld_id, id).Exec_update();
 	}
+	public void Delete(int page_id) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_core: delete started: db=~{0} page_id=~{1}", conn.Conn_info().Raw(), page_id);
+		conn.Stmt_delete(tbl_name, fld_id).Crt_int(fld_id, page_id).Exec_delete();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_core: delete done");
+	}
 	public void Delete_all() {conn.Stmt_delete(tbl_name, Dbmeta_fld_itm.Str_ary_empty).Exec_delete();}
+	public void Update_page_id(int old_id, int new_id) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_core: update page_id started: db=~{0} old_id=~{1} new_id=~{2}", conn.Conn_info().Raw(), old_id, new_id);
+		conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_id).Val_int(fld_id, new_id).Crt_int(fld_id, old_id).Exec_update();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_core: update page_id done");
+	}
 	public void Update(Xowd_category_itm itm) {
 		conn.Stmt_update_exclude(tbl_name, flds, fld_id).Clear()
 			.Val_int(fld_pages, itm.Count_pages())

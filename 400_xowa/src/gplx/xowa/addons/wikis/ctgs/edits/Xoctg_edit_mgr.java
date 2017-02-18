@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.wikis.ctgs.edits; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*;
 import gplx.dbs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.domains.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.domains.*;
 import gplx.xowa.addons.wikis.ctgs.dbs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.*;
 import gplx.xowa.addons.wikis.directorys.specials.items.bldrs.*;
 public class Xoctg_edit_mgr {
@@ -47,7 +47,7 @@ public class Xoctg_edit_mgr {
 		db_mgr.Tbl__page().Select_by_id(tmp_page, page_id);
 
 		// delete old categories
-		Delete(wiki, page_id);
+		Delete(wiki, ns_id, page_id);
 
 		// get some variables
 		int timestamp = (int)Datetime_now.Get().Timestamp_unix();
@@ -87,12 +87,8 @@ public class Xoctg_edit_mgr {
 		// update page.cat_db_id
 		page_tbl.Update__cat_db_id(page_id, core_db.Id());
 	}
-	public static void Delete(Xowe_wiki wiki, int page_id) {
-		// get page_tbl
-		Xowd_page_tbl page_tbl = wiki.Data__core_mgr().Db__core().Tbl__page();
-		Xowd_page_itm tmp_page = new Xowd_page_itm();
-		page_tbl.Select_by_id(tmp_page, page_id);
-		int ns_id = tmp_page.Ns_id();
+	public static void Delete(Xowe_wiki wiki, int ns_id, int page_id) {
+		boolean ns_id_is_category = ns_id == Xow_ns_.Tid__category;
 
 		// get cat_core_tbl
 		Xowd_cat_core_tbl cat_core_tbl = Xodb_cat_db_.Get_cat_core_or_fail(wiki.Data__core_mgr());
@@ -114,7 +110,34 @@ public class Xoctg_edit_mgr {
 			}
 
 			// delete cat_links
-			cat_link_tbl.Delete_by_page_id(page_id);
+			cat_link_tbl.Delete_pages(page_id);
+			if (ns_id_is_category)
+				cat_link_tbl.Delete_cats(page_id);
+		}
+
+		// delete cat_core
+		if (ns_id_is_category) {
+			cat_core_tbl.Delete(page_id);
+		}
+	}
+	public static void Update_page_id(Xowe_wiki wiki, int ns_id, int old_id, int new_id) {
+		boolean ns_id_is_category = ns_id == Xow_ns_.Tid__category;
+
+		// get cat_link_tbls
+		Xodb_cat_link_tbl[] cat_link_tbls = Xodb_cat_link_tbl.Get_catlink_tbls(wiki.Data__core_mgr());
+
+		// loop cat_link tbls to find linked categories
+		for (Xodb_cat_link_tbl cat_link_tbl : cat_link_tbls) {
+			// delete cat_links
+			cat_link_tbl.Update_page_id_for_pages(old_id, new_id);
+			if (ns_id_is_category)
+				cat_link_tbl.Update_page_id_for_cats(old_id, new_id);
+		}
+
+		// update cat_core
+		if (ns_id_is_category) {
+			Xowd_cat_core_tbl cat_core_tbl = Xodb_cat_db_.Get_cat_core_or_fail(wiki.Data__core_mgr());
+			cat_core_tbl.Update_page_id(old_id, new_id);
 		}
 	}
 }

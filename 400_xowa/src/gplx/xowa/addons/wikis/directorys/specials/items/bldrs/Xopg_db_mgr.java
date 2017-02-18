@@ -84,12 +84,43 @@ public class Xopg_db_mgr {
 		}
 
 		// cat_core, cat_link
-		gplx.xowa.addons.wikis.ctgs.edits.Xoctg_edit_mgr.Delete(wiki, page_id);
+		gplx.xowa.addons.wikis.ctgs.edits.Xoctg_edit_mgr.Delete(wiki, ns_id, page_id);
 
 		// search_link
 		Srch_search_addon.Get(wiki).Delete_links(ns_id, page_id);
 
 		// delete from page
 		core_db.Tbl__page().Delete(page_id);
+	}
+	public static void Update_page_id(Xowe_wiki wiki, int old_id, int new_id) {
+		// init vars
+		Xow_db_mgr db_mgr = wiki.Data__core_mgr();
+		Xow_db_file core_db = db_mgr.Db__core();
+		Xowd_page_itm tmp = new Xowd_page_itm();
+
+		// get ns_id
+		core_db.Tbl__page().Select_by_id(tmp, old_id);
+		int ns_id = tmp.Ns_id();
+
+		// text_db
+		Xow_db_file text_db = db_mgr.Dbs__get_by_id_or_null(tmp.Text_db_id());
+		if (text_db != null) {
+			text_db.Tbl__text().Update_page_id(old_id, new_id);
+		}
+
+		// html_db
+		Xow_db_file html_db = db_mgr.Dbs__get_by_id_or_null(tmp.Html_db_id());
+		if (html_db != null) {
+			html_db.Tbl__html().Update_page_id(old_id, new_id);
+		}
+
+		// cat_core, cat_link
+		gplx.xowa.addons.wikis.ctgs.edits.Xoctg_edit_mgr.Update_page_id(wiki, ns_id, old_id, new_id);
+
+		// search_link
+		Srch_search_addon.Get(wiki).Update_links(ns_id, old_id, new_id);
+
+		// delete from page
+		core_db.Tbl__page().Update_page_id(old_id, new_id);
 	}
 }

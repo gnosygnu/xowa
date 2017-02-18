@@ -49,6 +49,11 @@ public class Xowd_text_tbl implements Db_tbl {
 		conn.Stmt_delete(tbl_name, fld_page_id).Crt_int(fld_page_id, page_id).Exec_delete();
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.text: delete done");
 	}
+	public void Update_page_id(int old_id, int new_id) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.text: update page_id started: db=~{0} old_id=~{1} new_id=~{2}", conn.Conn_info().Raw(), old_id, new_id);
+		conn.Stmt_update(tbl_name, String_.Ary(fld_page_id), fld_page_id).Val_int(fld_page_id, new_id).Crt_int(fld_page_id, old_id).Exec_update();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.text: update page_id done");
+	}
 	public byte[] Select(int page_id) {
 		synchronized (thread_lock) {	// LOCK:stmt-rls; DATE:2016-07-06
 			if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_page_id);

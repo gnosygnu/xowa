@@ -372,9 +372,13 @@ public class Xowd_page_tbl implements Db_tbl {
 	}
 	public void Delete(int page_id) {
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.page: delete started: page_id=~{0}", page_id);
-		Db_stmt stmt = conn.Stmt_delete(tbl_name, fld_id);
-		stmt.Clear().Crt_int(fld_id, page_id).Exec_delete();
+		conn.Stmt_delete(tbl_name, fld_id).Crt_int(fld_id, page_id).Exec_delete();
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.page: delete done");
+	}
+	public void Update_page_id(int old_id, int new_id) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.page: update page_id started: old_id=~{0} new_id=~{1}", old_id, new_id);
+		conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_id).Val_int(fld_id, new_id).Crt_int(fld_id, old_id).Exec_update();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.page: update page_id done");
 	}
 	public void Create_idx() {
 		conn.Meta_idx_create(Xoa_app_.Usr_dlg()

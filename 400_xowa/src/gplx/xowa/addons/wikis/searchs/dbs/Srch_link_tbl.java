@@ -41,10 +41,14 @@ public class Srch_link_tbl {
 		stmt.Val_int(fld_word_id, row.Word_id).Val_int(fld_page_id, row.Page_id).Val_int(fld_link_score, row.Link_score);
 	}
 	public void Delete(int page_id) {
-		Gfo_usr_dlg_.Instance.Log_many("", "", "db.search_link: delete started: page_id=~{0}", page_id);
-		Db_stmt stmt = conn.Stmt_delete(tbl_name, fld_page_id);
-		stmt.Clear().Crt_int(fld_page_id, page_id).Exec_delete();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.search_link: delete started: db=~{0} page_id=~{1}", conn.Conn_info().Raw(), page_id);
+		conn.Stmt_delete(tbl_name, fld_page_id).Crt_int(fld_page_id, page_id).Exec_delete();
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.search_link: delete done");
+	}
+	public void Update_page_id(int old_id, int new_id) {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.search_link: update_page_id started: db=~{0} old_id=~{1} new_id=~{2}", conn.Conn_info().Raw(), old_id, new_id);
+		conn.Stmt_update(tbl_name, String_.Ary(fld_page_id), fld_page_id).Val_int(fld_page_id, old_id).Crt_int(fld_page_id, new_id).Exec_update();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.search_link: update done");
 	}
 
 	public static final    Srch_link_tbl[] Ary_empty = new Srch_link_tbl[0];
