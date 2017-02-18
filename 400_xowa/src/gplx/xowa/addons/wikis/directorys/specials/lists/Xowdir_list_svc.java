@@ -55,7 +55,7 @@ class Xowdir_list_svc {
 
 		// add it to user_wiki
 		int id = Xowdir_db_utl.Wiki_id__next(app);
-		db_mgr.Tbl__wiki().Upsert(id, domain, core_db_url, new Xowdir_wiki_json(wiki_props.Name()).To_str(new Json_wtr()));
+		db_mgr.Tbl__wiki().Upsert(id, domain, core_db_url, new Xowdir_wiki_json(wiki_props.Name(), wiki_props.Main_page()).To_str(new Json_wtr()));
 
 		// add it to personal wikis
 		gplx.xowa.addons.wikis.directorys.specials.items.bldrs.Xow_wiki_factory.Load_personal((Xoae_app)app, Bry_.new_u8(domain), core_db_url.OwnerDir());

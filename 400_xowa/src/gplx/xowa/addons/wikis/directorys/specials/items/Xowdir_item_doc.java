@@ -44,12 +44,12 @@ public class Xowdir_item_doc implements Mustache_doc_itm {
 	}
 
 	public static final    Xowdir_item_doc[] Ary_empty = new Xowdir_item_doc[0];
-	public static Xowdir_item_doc New(Xowdir_wiki_itm itm, String main_page) {return new Xowdir_item_doc(itm.Id(), itm.Domain(), itm.Json().Name(), itm.Url().OwnerDir().Xto_api(), main_page);}
+	public static Xowdir_item_doc New(Xowdir_wiki_itm itm) {return new Xowdir_item_doc(itm.Id(), itm.Domain(), itm.Json().Name(), itm.Url().OwnerDir().Xto_api(), itm.Json().Main_page());}
 	public static Xowdir_item_doc[] New_ary(Xowdir_wiki_itm[] itms_ary) {
 		int len = itms_ary.length;
 		Xowdir_item_doc[] rv = new Xowdir_item_doc[itms_ary.length];
 		for (int i = 0; i < len; i++) {
-			rv[i] = New(itms_ary[i], ""); // NOTE: main_page empty b/c not shown on list page
+			rv[i] = New(itms_ary[i]);
 		}
 		return rv;
 	}

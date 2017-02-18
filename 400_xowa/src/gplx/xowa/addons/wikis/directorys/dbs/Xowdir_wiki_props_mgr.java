@@ -23,7 +23,7 @@ public interface Xowdir_wiki_props_mgr {
 	String              Wiki_cfg__select_or(String key, String or);
 	void                User_reg__upsert(String domain, String val);
 	String              User_reg__select(String domain);
-	Xowdir_wiki_props Verify(boolean mode_is_import, String domain_str, Io_url core_db_url);
+	Xowdir_wiki_props Verify(boolean mode_is_import, String domain, Io_url core_db_url);
 }
 abstract class Xowdir_wiki_props_mgr__base implements Xowdir_wiki_props_mgr {
 	private final    Gfo_usr_dlg usr_dlg;
@@ -34,7 +34,7 @@ abstract class Xowdir_wiki_props_mgr__base implements Xowdir_wiki_props_mgr {
 	public abstract String              Wiki_cfg__select_or(String key, String or);
 	public abstract void                User_reg__upsert(String domain, String val);
 	public abstract String              User_reg__select(String domain);
-	public Xowdir_wiki_props Verify(boolean mode_is_import, String domain_str, Io_url core_db_url) {
+	public Xowdir_wiki_props Verify(boolean mode_is_import, String domain, Io_url core_db_url) {
 		Xowdir_wiki_props rv = new Xowdir_wiki_props();
 
 		Verify_or_fix(rv, core_db_url, Xowd_cfg_key_.Key__wiki_core__domain);

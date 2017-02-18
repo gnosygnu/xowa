@@ -52,6 +52,12 @@ public class Db_cfg_tbl implements Db_tbl {
 			stmt_insert.Clear().Val_str(fld_grp, grp).Val_str(fld_key, key).Val_str(fld_val, val).Exec_insert();
 		} catch (Exception e) {throw Err_.new_exc(e, "db", "db_cfg.insert failed", "grp", grp, "key", key, "val", val, "db", conn.Conn_info().Db_api());}
 	}
+	public void Insert_str		(String key, String val) {
+		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
+		try {
+			stmt_insert.Clear().Val_str(fld_grp, "").Val_str(fld_key, key).Val_str(fld_val, val).Exec_insert();
+		} catch (Exception e) {throw Err_.new_exc(e, "db", "db_cfg.insert failed", "key", key, "val", val, "db", conn.Conn_info().Db_api());}
+	}
 	public void Update_yn		(String grp, String key, boolean  val)		{Update_str(grp, key, val ? "y" : "n");}
 	public void Update_byte		(String grp, String key, byte val)			{Update_str(grp, key, Byte_.To_str(val));}
 	public void Update_int		(String grp, String key, int val)			{Update_str(grp, key, Int_.To_str(val));}
@@ -63,6 +69,10 @@ public class Db_cfg_tbl implements Db_tbl {
 		if (stmt_update == null) stmt_update = conn.Stmt_update_exclude(tbl_name, flds, fld_grp, fld_key);
 		stmt_update.Clear().Val_str(fld_val, val).Crt_str(fld_grp, grp).Crt_str(fld_key, key).Exec_update();
 	}
+	public void Update_str		(String key, String val) {
+		if (stmt_update == null) stmt_update = conn.Stmt_update_exclude(tbl_name, flds, fld_grp, fld_key);
+		stmt_update.Clear().Val_str(fld_val, val).Crt_str(fld_grp, "").Crt_str(fld_key, key).Exec_update();
+	}
 	public void Upsert_yn		(String grp, String key, boolean val)			{Upsert_str(grp, key, val ? "y" : "n");}
 	public void Upsert_int		(String grp, String key, int val)			{Upsert_str(grp, key, Int_.To_str(val));}
 	public void Upsert_date		(String grp, String key, DateAdp val)		{Upsert_str(grp, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
@@ -72,6 +82,11 @@ public class Db_cfg_tbl implements Db_tbl {
 		String cur_val = this.Select_str_or(grp, key, null);
 		if (cur_val == null)	this.Insert_str(grp, key, val);
 		else					this.Update_str(grp, key, val);
+	}
+	public void Upsert_str		(String key, String val) {
+		String cur_val = this.Select_str_or(key, null);
+		if (cur_val == null)	this.Insert_str(key, val);
+		else					this.Update_str(key, val);
 	}
 	public boolean		Select_yn		(String grp, String key)				{String val = Select_str(grp, key); return Parse_yn		(grp, key, val);}
 	public byte			Select_byte		(String grp, String key)				{String val = Select_str(grp, key); return Parse_byte	(grp, key, val);}
@@ -94,6 +109,11 @@ public class Db_cfg_tbl implements Db_tbl {
 	public String		Select_str_or	(String grp, String key, String or) {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, String_.Ary(fld_val), fld_grp, fld_key);
 		Db_rdr rdr = stmt_select.Clear().Crt_str(fld_grp, grp).Crt_str(fld_key, key).Exec_select__rls_manual();
+		try {return rdr.Move_next() ? rdr.Read_str(fld_val) : or;} finally {rdr.Rls();}
+	}
+	public String		Select_str_or	(String key, String or) {
+		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, String_.Ary(fld_val), fld_grp, fld_key);
+		Db_rdr rdr = stmt_select.Clear().Crt_str(fld_grp, "").Crt_str(fld_key, key).Exec_select__rls_manual();
 		try {return rdr.Move_next() ? rdr.Read_str(fld_val) : or;} finally {rdr.Rls();}
 	}
 	public Db_cfg_hash Select_as_hash(String grp) {

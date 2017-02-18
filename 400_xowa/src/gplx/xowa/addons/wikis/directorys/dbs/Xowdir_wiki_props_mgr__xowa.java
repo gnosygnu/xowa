@@ -35,11 +35,11 @@ class Xowdir_wiki_props_mgr__xowa extends Xowdir_wiki_props_mgr__base {
 	}
 	@Override public void Wiki_cfg__upsert(String key, String val) {
 		Wiki_cfg__assert_tbl();
-		wiki_cfg_tbl.Upsert_str("init", key, val);
+		wiki_cfg_tbl.Upsert_str(gplx.xowa.wikis.data.Xowd_cfg_key_.Grp__wiki_init, key, val);
 	}
 	@Override public String Wiki_cfg__select_or(String key, String or) {
 		Wiki_cfg__assert_tbl();
-		return wiki_cfg_tbl.Select_str_or("init", key, or);
+		return wiki_cfg_tbl.Select_str_or(gplx.xowa.wikis.data.Xowd_cfg_key_.Grp__wiki_init, key, or);
 	}
 	private void User_reg__assert_tbl() {
 		if (user_reg_tbl == null) {
