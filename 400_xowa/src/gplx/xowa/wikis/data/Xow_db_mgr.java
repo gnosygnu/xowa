@@ -130,6 +130,53 @@ public class Xow_db_mgr {
 		// call init again to regen list of dbs
 		this.Init_by_load(db__core.Url());
 	}
+	public Xow_db_file Dbs__get_for_create(byte tid, int ns_id) {
+		Xow_db_file[] ary = Dbs__get_ary(tid, ns_id);
+		if (ary.length == 0) throw Err_.new_wo_type("no dbs exist; wiki=~{0} type=~{1}", domain_str, tid);
+		return ary[ary.length - 1];
+	}
+	public Xow_db_file[] Dbs__get_ary(byte tid, int ns_id) {
+		List_adp rv = List_adp_.New();
+
+		// loop all dbs
+		int len = this.Dbs__len();
+		for (int i = 0; i < len; i++) {
+			boolean add = false;
+			Xow_db_file db = this.Dbs__get_at(i);
+			switch (tid) {
+				// cat_link requested
+				case Xow_db_file_.Tid__cat_link:
+					switch (db.Tid()) {
+						case Xow_db_file_.Tid__core:
+							add = props.Layout_text().Tid_is_all_or_few(); // cat_link will be in "core" if "all" or "few" (-text, -html, -file)
+							break;
+						case Xow_db_file_.Tid__cat_link:
+							add = true;
+							break;
+					}
+					break;
+				// text requested
+				case Xow_db_file_.Tid__text:
+					switch (db.Tid()) {
+						case Xow_db_file_.Tid__core:
+							add = props.Layout_text().Tid_is_all(); // text will be in "core" if "all"
+							break;
+						case Xow_db_file_.Tid__text_solo:  // EX: "en.wikipedia.org-text.xowa"
+							add = true;                    // text will be in db if solo; 
+							break;
+						case Xow_db_file_.Tid__text:       // EX: "en.wikipedia.org-text-ns.000.xowa"
+							int db_ns_id = Int_.parse(db.Ns_ids());
+							add = db_ns_id == ns_id;       // text will be in db if ns matches; EX: en.wikipedia.org-text-ns.014.xowa
+							break;
+					}
+					break;
+			}
+			if (add)
+				rv.Add(db);
+		}
+
+		return (Xow_db_file[])rv.To_ary_and_clear(Xow_db_file.class);
+	}
 	public void Create_page(Xowd_page_tbl core_tbl, Xowd_text_tbl text_tbl, int page_id, int ns_id, byte[] ttl_wo_ns, boolean redirect, DateAdp modified_on, byte[] text_zip_data, int text_raw_len, int random_int, int text_db_id, int html_db_id) {
 		core_tbl.Insert_cmd_by_batch(page_id, ns_id, ttl_wo_ns, redirect, modified_on, text_raw_len, random_int, text_db_id, html_db_id, -1);
 		text_tbl.Insert_cmd_by_batch(page_id, text_zip_data);

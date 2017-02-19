@@ -42,7 +42,14 @@ public class Xodb_cat_link_tbl implements Db_tbl {
 	public void Insert_bgn() {conn.Txn_bgn("cl__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int from, int to_id, byte type_id, long timestamp_unix, byte[] sortkey, byte[] sortkey_prefix) {
-		stmt_insert.Clear()
+		this.Insert_cmd_by_batch(stmt_insert, from, to_id, type_id, timestamp_unix, sortkey, sortkey_prefix);
+	}
+	public void Insert_(int from, int to_id, byte type_id, long timestamp_unix, byte[] sortkey, byte[] sortkey_prefix) {
+		Db_stmt stmt = conn.Stmt_insert(tbl_name, flds);
+		this.Insert_cmd_by_batch(stmt, from, to_id, type_id, timestamp_unix, sortkey, sortkey_prefix);
+	}
+	private void Insert_cmd_by_batch(Db_stmt stmt, int from, int to_id, byte type_id, long timestamp_unix, byte[] sortkey, byte[] sortkey_prefix) {
+		stmt.Clear()
 			.Val_int(fld__from					, from)
 			.Val_int(fld__to_id					, to_id)
 			.Val_byte(fld__type_id				, type_id)
@@ -98,34 +105,8 @@ public class Xodb_cat_link_tbl implements Db_tbl {
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
+
 	public static final String TBL_NAME = "cat_link", FLD__cl_sortkey_prefix = "cl_sortkey_prefix";
-	public static Xodb_cat_link_tbl[] Get_catlink_tbls(Xow_db_mgr db_mgr) {
-		List_adp rv = List_adp_.New();
-
-		boolean layout_is_lot = db_mgr.Props().Layout_text().Tid_is_lot();
-
-		// loop all dbs
-		int len = db_mgr.Dbs__len();
-		for (int i = 0; i < len; i++) {
-			Xow_db_file link_db = db_mgr.Dbs__get_at(i);
-			switch (link_db.Tid()) {
-				// if core, add if all or few; skip if lot
-				case Xow_db_file_.Tid__core:
-					if (layout_is_lot)
-						continue;
-					break;
-				// if cat_link, add
-				case Xow_db_file_.Tid__cat_link:
-					break;
-				// else, skip
-				default:
-					continue;
-			}
-			rv.Add(new Xodb_cat_link_tbl(link_db.Conn()));
-		}
-
-		return (Xodb_cat_link_tbl[])rv.To_ary_and_clear(Xodb_cat_link_tbl.class);
-	}
 }
 /*
 NOTE_1: categorylinks row size: 34 + 20 + 12 + (cat_sortkey.length * 2)

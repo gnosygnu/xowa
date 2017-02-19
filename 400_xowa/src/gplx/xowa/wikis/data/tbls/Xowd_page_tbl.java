@@ -400,4 +400,5 @@ public class Xowd_page_tbl implements Db_tbl {
 	public static final    String Page_touched_fmt = "yyyyMMddHHmmss";
 	public static final String TBL_NAME = "page", FLD__page_cat_db_id = "page_cat_db_id";
 	public static Xowd_page_tbl Get_by_key(Db_tbl_owner owner) {return (Xowd_page_tbl)owner.Tbls__get_by_key(TBL_NAME);}
+	public static final int INVALID_PAGE_ID = -1;
 }

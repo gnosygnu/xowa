@@ -47,6 +47,7 @@ public class Xoctg_pagebox_wtr implements Gfo_invk {
 		Xoctg_pagebox_loader select_cbk = new Xoctg_pagebox_loader(hash, page.Url_bry_safe());
 
 		// get cat_db_id from page
+		tmp_page_itm.Clear();
 		boolean exists = wiki.Data__core_mgr().Tbl__page().Select_by_ttl(tmp_page_itm, page.Ttl().Ns(), page.Ttl().Page_db());
 		int cat_db_id = tmp_page_itm.Cat_db_id();
 		if (exists && cat_db_id != -1) {// note that wtxt_dbs can have 0 ctgs but will have cat_db_id == -1

@@ -65,7 +65,7 @@ public class Xow_db_mkr {
 		// insert data: page
 		Xopg_db_mgr.Create
 			( Xowd_page_tbl.Get_by_key(core_db)
-			, Xowd_text_tbl.Get_by_key(core_db)
+			, Xowd_text_tbl.Get_by_key(core_db), Xow_db_file_.Uid__core
 			, Xowd_site_ns_tbl.Get_by_key(core_db)
 			, Db_cfg_tbl.Get_by_key(core_db, Xowd_cfg_tbl_.Tbl_name)
 			, Xow_ns_.Tid__main, mainpage_name, mainpage_text

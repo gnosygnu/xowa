@@ -29,7 +29,7 @@ public class Xowd_page_itm {
 	public int			Text_len() {return text_len;} public Xowd_page_itm Text_len_(int v) {text_len = v; return this;} private int text_len;
 	public int			Text_db_id() {return text_db_id;} public Xowd_page_itm Text_db_id_(int v) {text_db_id = v; return this;} private int text_db_id;
 	public int			Html_db_id() {return html_db_id;} private int html_db_id;
-	public int			Cat_db_id()  {return cat_db_id;} private int cat_db_id;
+	public int			Cat_db_id()  {return cat_db_id;} private int cat_db_id = -1; // NOTE: cannot be 0, else catpage loader will try to load cat_links from db.id=0
 	public byte[]		Text() {return text;} public Xowd_page_itm Text_(byte[] v) {text = v; if (v != null) text_len = v.length; return this;} private byte[] text;
 	public int			Random_int() {return random_int;} private int random_int;
 	public int			Redirect_id() {return redirect_id;} private int redirect_id;

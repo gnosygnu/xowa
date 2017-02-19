@@ -24,10 +24,21 @@ import gplx.xowa.addons.wikis.directorys.specials.items.bldrs.*;
 import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.dbs.*;
 public class Xopg_db_mgr {
 	public static int Create
-		( Xowd_page_tbl page_tbl, Xowd_text_tbl text_tbl, Xowd_site_ns_tbl ns_tbl, Db_cfg_tbl cfg_tbl
+		( Xowd_page_tbl page_tbl, Xowd_text_tbl text_tbl, int text_db_id, Xowd_site_ns_tbl ns_tbl, Db_cfg_tbl cfg_tbl
 		, int ns_id, byte[] ttl_page_db, byte[] text_raw, int cat_db_id) {
 		// get next page_id			
 		int page_id = cfg_tbl.Select_int_or(Xowd_cfg_key_.Grp__db, Xowd_cfg_key_.Key__wiki__page__id_next, 1);
+
+		// check if page_id is unique; needed for existing WMF .xowa dbs which don't set Xowd_cfg_key_.Key__wiki__page__id_next; DATE:2017-02-19
+		if (page_tbl.Select_by_id_or_null(page_id) != null) {
+			int max_page_id = page_tbl.Conn().Exec_select_max_as_int(page_tbl.Tbl_name(), page_tbl.Fld_page_id(), Xowd_page_tbl.INVALID_PAGE_ID);
+			if (max_page_id == Xowd_page_tbl.INVALID_PAGE_ID) {
+				throw Err_.new_wo_type("no max found in page_tbl even though page_id was not unique?: db=~{0} page_id=~{1}", page_tbl.Conn().Conn_info().Db_api(), page_id);
+			}
+			page_id = max_page_id + 1;
+		}
+
+		// update it
 		cfg_tbl.Upsert_int(Xowd_cfg_key_.Grp__db, Xowd_cfg_key_.Key__wiki__page__id_next, page_id + 1);
 
 		// zip if needed
@@ -41,7 +52,7 @@ public class Xopg_db_mgr {
 		text_tbl.Insert_bgn();
 		int ns_count = ns_tbl.Select_ns_count(ns_id) + 1;
 		try {
-			page_tbl.Insert_cmd_by_batch(page_id, ns_id, ttl_page_db, redirect, Datetime_now.Get(), text_raw.length, ns_count, 0, -1, cat_db_id);
+			page_tbl.Insert_cmd_by_batch(page_id, ns_id, ttl_page_db, redirect, Datetime_now.Get(), text_raw.length, ns_count, text_db_id, -1, cat_db_id);
 			text_tbl.Insert_cmd_by_batch(page_id, text_zip);
 			ns_tbl.Update_ns_count(ns_id, ns_count);
 		} finally {
