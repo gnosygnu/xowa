@@ -46,8 +46,8 @@ public class Xomw_parser {
 	public Xomw_parser_env         Env()             {return env;}            private final    Xomw_parser_env env = new Xomw_parser_env();
 	public Xomw_parser_options     Options()         {return options;}        private final    Xomw_parser_options options = new Xomw_parser_options();
 	public Xomw_strip_state        Strip_state()     {return strip_state;}    private final    Xomw_strip_state strip_state = new Xomw_strip_state();
-	public Xomw_sanitizer          Sanitizer()       {return sanitizer;}      private final    Xomw_sanitizer sanitizer = new Xomw_sanitizer();
-	public Xomw_linker             Linker()          {return linker;}         private final    Xomw_linker linker;
+	public XomwSanitizer          Sanitizer()       {return sanitizer;}      private final    XomwSanitizer sanitizer = new XomwSanitizer();
+	public XomwLinker             Linker()          {return linker;}         private final    XomwLinker linker;
 	public Bry_bfr                 Tmp()             {return tmp;}            private final    Bry_bfr tmp = Bry_bfr_.New();
 	public Xomw_quote_wkr          Quote_wkr()       {return quote_wkr;}      private final    Xomw_quote_wkr quote_wkr;
 	public Xomw_lnki_wkr           Lnki_wkr()        {return lnki_wkr;}       private final    Xomw_lnki_wkr lnki_wkr;
@@ -64,7 +64,7 @@ public class Xomw_parser {
 		}
 
 		this.link_renderer = new Xomw_link_renderer(sanitizer);
-		this.linker = new Xomw_linker(link_renderer);
+		this.linker = new XomwLinker(link_renderer);
 		this.protocols_trie = Xomw_parser.Protocols__dflt();
 		this.holders = new Xomw_link_holders(link_renderer, tmp);
 		this.table_wkr = new Xomw_table_wkr(this);
@@ -81,7 +81,7 @@ public class Xomw_parser {
 		doubleunder_wkr.Init_by_wiki(doubleunder_data, wiki.Lang());
 		magiclinks_wkr.Init_by_wiki();
 	}
-	public void Init_by_page(Xomw_Title ttl) {
+	public void Init_by_page(XomwTitle ttl) {
 		pctx.Init_by_page(ttl);
 	}
 	public void Internal_parse(Xomw_parser_bfr pbfr, byte[] text) {

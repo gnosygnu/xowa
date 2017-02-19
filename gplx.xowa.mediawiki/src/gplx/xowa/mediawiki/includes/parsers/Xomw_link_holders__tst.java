@@ -26,13 +26,13 @@ public class Xomw_link_holders__tst {
 	}
 }
 class Xomw_link_holders__fxt {
-	private final    Xomw_link_holders holders = new Xomw_link_holders(new Xomw_link_renderer(new Xomw_sanitizer()), Bry_bfr_.New());
+	private final    Xomw_link_holders holders = new Xomw_link_holders(new Xomw_link_renderer(new XomwSanitizer()), Bry_bfr_.New());
 	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
 	private boolean apos = true;
 	public Xomw_link_holders__fxt() {
 	}
 	public void Init__add(String ttl, String capt) {
-		holders.Test__add(Xomw_Title.newFromText(Bry_.new_u8(ttl)), Bry_.new_u8(capt));
+		holders.Test__add(XomwTitle.newFromText(Bry_.new_u8(ttl)), Bry_.new_u8(capt));
 	}
 	public void Test__replace(String src, String expd) {
 		if (apos) expd = gplx.langs.htmls.Gfh_utl.Replace_apos(expd);

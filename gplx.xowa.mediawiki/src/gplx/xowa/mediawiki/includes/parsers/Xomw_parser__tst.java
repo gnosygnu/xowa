@@ -66,7 +66,7 @@ class Xomw_parser__fxt {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		mgr.Init_by_wiki(wiki);
-		mgr.Init_by_page(Xomw_Title.newFromText(Bry_.new_a7("Page_1")));
+		mgr.Init_by_page(XomwTitle.newFromText(Bry_.new_a7("Page_1")));
 	}
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);

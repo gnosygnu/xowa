@@ -225,7 +225,13 @@ public class Swt_kit implements Gfui_kit {
 		rv.Owner_(owner);
 		return rv;
 	}
-	public Gfui_dlg_file New_dlg_file(byte type, String msg) {return new Swt_dlg_file(type, shell).Init_msg_(msg);}
+	public Gfui_dlg_file New_dlg_file(byte type, String msg) {return New_dlg_file(type, msg, null);}
+	public Gfui_dlg_file New_dlg_file(byte type, String msg, String exts) {
+		Gfui_dlg_file rv = new Swt_dlg_file(type, shell);
+		if (exts != null) rv.Init_exts_(exts);
+		rv.Init_msg_(msg);
+		return rv;
+	}
 	public Gfui_dlg_dir New_dlg_dir(String msg) {return new Swt_dlg_dir(shell).Init_msg_(msg);}
 	public Gfui_dlg_msg New_dlg_msg(String msg) {return new Swt_dlg_msg(shell).Init_msg_(msg);}
 	public ImageAdp New_img_load(Io_url url) {
@@ -270,7 +276,7 @@ public class Swt_kit implements Gfui_kit {
 					Cfg_set(type, Swt_kit.Cfg_Html_BrowserType, Cfg_Html_BrowserType_parse(val));
 			}
 		}
-		else if	(String_.Eq(k, Invk_ask_file)) return this.New_dlg_file(Gfui_kit_.File_dlg_type_open, m.Args_getAt(0).Val_to_str_or_empty()).Ask();
+		else if	(String_.Eq(k, Invk_ask_file)) return this.New_dlg_file(Gfui_kit_.File_dlg_type_open, m.Args_getAt(0).Val_to_str_or_empty(), m.Args_getAt(1).Val_to_str_or_empty()).Ask();
 		else if	(String_.Eq(k, "ask_dir")) return this.New_dlg_dir(m.Args_getAt(0).Val_to_str_or_empty()).Ask();
 		else if (String_.Eq(k, Invk_shell_close)) shell.close();
 		return this;

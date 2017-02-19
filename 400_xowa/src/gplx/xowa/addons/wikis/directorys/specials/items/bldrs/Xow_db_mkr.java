@@ -41,6 +41,9 @@ public class Xow_db_mkr {
 		, new Xowd_text_tbl(core_conn, Bool_.N, data.Text_zip_tid())
 		);
 
+		// upgrade tbl: page for categories; NOTE: should change page_tbl to do this automatically
+		core_conn.Meta_fld_append(Xowd_page_tbl.TBL_NAME, Dbmeta_fld_itm.new_int(Xowd_page_tbl.FLD__page_cat_db_id).Default_(-1));
+
 		// create tbls: cat; may want to do "if (props.Layout_text().Tid_is_all_or_few())"	// create in advance else will fail for v2; import wiki -> wiki loads and tries to load categories; v2 category processes and builds tbl; DATE:2015-03-22
 		core_db.Tbls__add(Bool_.Y
 		, new Xowd_cat_core_tbl(core_conn, Bool_.N)

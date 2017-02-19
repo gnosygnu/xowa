@@ -28,8 +28,8 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private Btrie_slim_mgr protocol_trie; private final    Btrie_rv trv = new Btrie_rv();
 	private int autonumber;
 	private final    Xomw_parser parser;
-	private final    Xomw_linker linker;
-	private final    Xomw_sanitizer sanitizer;
+	private final    XomwLinker linker;
+	private final    XomwSanitizer sanitizer;
 	private final    Xomw_atr_mgr attribs = new Xomw_atr_mgr();
 	private Xomw_regex_url regex_url;
 	private Xomw_regex_space regex_space;

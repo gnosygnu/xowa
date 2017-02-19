@@ -15,8 +15,19 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-public class Xomw_image_params {
-	public Xomw_param_map paramMap = null;
-	public XomwMagicWordArray mwArray = null;
+package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
+public class XomwMagicWord {
+	public boolean case_match;
+	public byte[] name;
+	public XomwMagicWordSynonym[] synonyms;
+	public XomwMagicWord(byte[] name, boolean case_match, byte[][] synonyms_ary) {
+		this.name = name;
+		this.case_match = case_match;
+
+		int synonyms_len = synonyms_ary.length;
+		this.synonyms = new XomwMagicWordSynonym[synonyms_len];
+		for (int i = 0; i < synonyms_len; i++) {
+			synonyms[i] = new XomwMagicWordSynonym(name, case_match, synonyms_ary[i]);
+		}
+	}
 }

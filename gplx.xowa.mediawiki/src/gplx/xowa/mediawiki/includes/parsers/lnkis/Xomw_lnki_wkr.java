@@ -38,15 +38,15 @@ import gplx.xowa.parsers.uniqs.*;
 */
 public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Xomw_link_holders holders;
-	private final    Xomw_linker linker;
+	private final    XomwLinker linker;
 	private final    Xomw_link_renderer link_renderer;
 	// private final    Btrie_slim_mgr protocols_trie;
 	private final    Xomw_quote_wkr quote_wkr;
 	private final    Xomw_strip_state strip_state;
 	private Xomw_parser_env env;
 	private Xow_wiki wiki;
-	private Xomw_Title mPageTitle;
-//		private final    Xomw_linker__normalize_subpage_link normalize_subpage_link = new Xomw_linker__normalize_subpage_link();
+	private XomwTitle mPageTitle;
+//		private final    XomwLinker_NormalizeSubpageLink normalize_subpage_link = new XomwLinker_NormalizeSubpageLink();
 	private final    Bry_bfr tmp;
 	private final    Xomw_parser parser;
 	private final    Xomw_atr_mgr extra_atrs = new Xomw_atr_mgr();
@@ -254,7 +254,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 				link = Bry_.Mid(link, 1);
 			}
 			// $nt = is_string( $unstrip ) ? Title::newFromText( $unstrip ) : null;
-			Xomw_Title nt = Xomw_Title.newFromText(link);
+			XomwTitle nt = XomwTitle.newFromText(link);
 
 			// Make subpage if necessary
 //				boolean useSubpages = nt.Ns().Subpages_enabled();
@@ -262,7 +262,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //					Maybe_do_subpage_link(normalize_subpage_link, orig_link, text);
 //					link = normalize_subpage_link.link;
 //					text = normalize_subpage_link.text;
-//					nt = Xomw_Title.newFromText(link);
+//					nt = XomwTitle.newFromText(link);
 //				}
 			// IGNORE: handled in rewrite above
 			// else {
@@ -271,7 +271,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 			byte[] unstrip = strip_state.Unstrip_nowiki(link);
 			if (!Bry_.Eq(unstrip, link))
-				nt = Xomw_Title.newFromText(unstrip);
+				nt = XomwTitle.newFromText(unstrip);
 			if (nt == null) {
 				bfr.Add_mid(src, prv, lnki_bgn + 2);	// $s .= $prefix . '[[' . $line;
 				prv = cur = lnki_bgn + 2;					
@@ -282,7 +282,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			int ns = nt.getNamespace();
 
 			if (might_be_img) { // if this is actually an invalid link
-				if (ns == Xomw_Defines.NS_FILE && no_force) { // but might be an image
+				if (ns == XomwDefines.NS_FILE && no_force) { // but might be an image
 					boolean found = false;
 //						while (true) {
 //							// look at the next 'line' to see if we can close it there
@@ -357,7 +357,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //						continue;
 //					}
 //
-				if (ns == Xomw_Defines.NS_FILE) {
+				if (ns == XomwDefines.NS_FILE) {
 //						boolean is_good_image = !wfIsBadImage(nt->getDBkey(), this->mTitle)
 					boolean is_good_image = true;
 					if (is_good_image) {
@@ -383,7 +383,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 						continue;
 					}
 				} 
-				else if (ns == Xomw_Defines.NS_CATEGORY) {
+				else if (ns == XomwDefines.NS_CATEGORY) {
 					bfr.Trim_end_ws(); // s = rtrim(s . "\n"); // T2087
 
 					if (was_blank) {
@@ -407,7 +407,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// Self-link checking. For some languages, variants of the title are checked in
 			// LinkHolderArray::doVariants() to allow batching the existence checks necessary
 			// for linking to a different variant.
-			if (ns != Xomw_Defines.NS_SPECIAL  && nt.equals(mPageTitle) && !nt.hasFragment()) {
+			if (ns != XomwDefines.NS_SPECIAL  && nt.equals(mPageTitle) && !nt.hasFragment()) {
 				bfr.Add(prefix);
 				linker.makeSelfLinkObj(bfr, nt, text, Bry_.Empty, trail, Bry_.Empty);
 				continue;
@@ -415,7 +415,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 			// NS_MEDIA is a pseudo-namespace for linking directly to a file
 			// @todo FIXME: Should do batch file existence checks, see comment below
-			if (ns == Xomw_Defines.NS_MEDIA) {
+			if (ns == XomwDefines.NS_MEDIA) {
 				// Give extensions a chance to select the file revision for us
 //					options = [];
 //					desc_query = false;
@@ -444,7 +444,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 		}
 	}
-	public void makeImage(Xomw_parser_ctx pctx, Bry_bfr bfr, Xomw_Title title, byte[] options_at_link, Xomw_link_holders holders) {
+	public void makeImage(Xomw_parser_ctx pctx, Bry_bfr bfr, XomwTitle title, byte[] options_at_link, Xomw_link_holders holders) {
 		// Check if the options text is of the form "options|alt text"
 		// Options are:
 		//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang
@@ -481,15 +481,15 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 		// Fetch and register the file (file title may be different via hooks)
 //			list($file, $title) = $this->fetchFileAndTitle($title, $options);
-		Xomw_File file = fetchFileAndTitle(title, null);
+		XomwFile file = fetchFileAndTitle(title, null);
 
 		// Get parameter map
-		Xomw_MediaHandler handler = file == null ? null : file.getHandler();
+		XomwMediaHandler handler = file == null ? null : file.getHandler();
 
 		Xomw_image_params tmp_img_params = pctx.Lnki_wkr__make_image__img_params;
 		this.getImageParams(tmp_img_params, handler);
 		Xomw_param_map paramMap = tmp_img_params.paramMap;
-		Xomw_MagicWordArray mwArray = tmp_img_params.mwArray;
+		XomwMagicWordArray mwArray = tmp_img_params.mwArray;
 
 		// XO.MW.UNSUPPORTED.TrackingCategory: if (!$file) $this->addTrackingCategory('broken-file-category');
 
@@ -697,7 +697,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private static Xomw_param_list[] internalParamNames;
 	private static Xomw_param_map internalParamMap;
 
-	private void getImageParams(Xomw_image_params rv, Xomw_MediaHandler handler) {
+	private void getImageParams(Xomw_image_params rv, XomwMediaHandler handler) {
 		byte[] handlerClass = handler == null ? Bry_.Empty : handler.Key();
 		rv.paramMap = (Xomw_param_map)mImageParams.Get_by(handlerClass);
 		// NOTE: lazy-init; code below can be inefficent
@@ -732,12 +732,12 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 			this.mImageParams.Add(handlerClass, paramMap);
 			rv.paramMap = paramMap;
-			Xomw_MagicWordArray mw_array = new Xomw_MagicWordArray(env.Magic_word_mgr(), paramMap.Keys());
+			XomwMagicWordArray mw_array = new XomwMagicWordArray(env.Magic_word_mgr(), paramMap.Keys());
 			this.mImageParamsMagicArray.Add(handlerClass, mw_array);
 			rv.mwArray = mw_array;
 		}
 		else {
-			rv.mwArray = (Xomw_MagicWordArray)mImageParamsMagicArray.Get_by(handlerClass);
+			rv.mwArray = (XomwMagicWordArray)mImageParamsMagicArray.Get_by(handlerClass);
 		}
 	}
 	// Parsed a width param of imagelink like 300px or 200x300px
@@ -777,8 +777,8 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	* @param array $options Array of options to RepoGroup::findFile
 	* @return array ( File or false, Title of file )
 	*/
-	public Xomw_File fetchFileAndTitle(Xomw_Title title, Hash_adp options) {
-		Xomw_File file = fetchFileNoRegister(title, options);
+	public XomwFile fetchFileAndTitle(XomwTitle title, Hash_adp options) {
+		XomwFile file = fetchFileNoRegister(title, options);
 
 		//$time = $file ? $file->getTimestamp() : false;
 		//$sha1 = $file ? $file->getSha1() : false;
@@ -801,8 +801,8 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	* @param array $options Array of options to RepoGroup::findFile
 	* @return File|boolean
 	*/
-	private Xomw_File fetchFileNoRegister(Xomw_Title title, Hash_adp options) {
-		Xomw_File file = null;
+	private XomwFile fetchFileNoRegister(XomwTitle title, Hash_adp options) {
+		XomwFile file = null;
 //			if ( isset( $options['broken'] ) ) {
 //				file = false; // broken thumbnail forced by hook
 //			} elseif ( isset( $options['sha1'] ) ) { // get by (sha1,timestamp)
@@ -812,13 +812,13 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //			}
 		return file;
 	}
-	public void Maybe_do_subpage_link(Xomw_linker__normalize_subpage_link rv, byte[] target, byte[] text) {
+	public void Maybe_do_subpage_link(XomwLinker_NormalizeSubpageLink rv, byte[] target, byte[] text) {
 		linker.normalizeSubpageLink(rv, mPageTitle, target, text);
 	}
 	public void Replace_link_holders(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
 		holders.Replace(pctx, pbfr);
 	}
-	public void Make_known_link_holder(Bry_bfr bfr, Xomw_Title nt, byte[] text, byte[] trail, byte[] prefix) {
+	public void Make_known_link_holder(Bry_bfr bfr, XomwTitle nt, byte[] text, byte[] trail, byte[] prefix) {
 		byte[][] split_trail = linker.splitTrail(trail);
 		byte[] inside = split_trail[0];
 		trail = split_trail[1];

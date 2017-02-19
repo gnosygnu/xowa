@@ -29,13 +29,13 @@ public class Xomw_magiclinks_wkr {
 	private final    Xomw_parser parser;
 	private final    Xomw_regex_boundary regex_boundary;
 	private final    Xomw_regex_url regex_url;
-	private final    Xomw_sanitizer sanitizer;
-	private final    Xomw_linker linker;
+	private final    XomwSanitizer sanitizer;
+	private final    XomwLinker linker;
 	private final    Xomw_atr_mgr atrs = new Xomw_atr_mgr();
 	private byte[] page_title;
 
 	private static final byte Regex__anch = 1, Regex__elem = 2, Regex__free = 3;
-	public Xomw_magiclinks_wkr(Xomw_parser parser, Xomw_sanitizer sanitizer, Xomw_linker linker, Xomw_regex_boundary regex_boundary, Xomw_regex_url regex_url) {
+	public Xomw_magiclinks_wkr(Xomw_parser parser, XomwSanitizer sanitizer, XomwLinker linker, Xomw_regex_boundary regex_boundary, Xomw_regex_url regex_url) {
 		this.parser = parser;
 		this.sanitizer = sanitizer;
 		this.linker = linker;

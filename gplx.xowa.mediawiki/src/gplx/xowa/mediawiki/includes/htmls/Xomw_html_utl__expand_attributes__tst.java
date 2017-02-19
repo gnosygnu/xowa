@@ -22,7 +22,7 @@ public class Xomw_html_utl__expand_attributes__tst {
 	@Test   public void Basic()							{fxt.Test__expand_attributes(" a=\"b\"", "a", "b");}
 }
 class Xomw_html_utl__expand_attributes__fxt {
-	private final    Xomw_html_utl utl = new Xomw_html_utl();
+	private final    XomwHtml utl = new XomwHtml();
 	private final    Bry_bfr bfr = Bry_bfr_.New();
 	public void Test__expand_attributes(String expd, String... kvs) {
 		Xomw_atr_mgr atrs = new Xomw_atr_mgr();

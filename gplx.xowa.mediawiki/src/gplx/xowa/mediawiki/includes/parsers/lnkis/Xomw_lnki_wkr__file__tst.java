@@ -26,13 +26,13 @@ public class Xomw_lnki_wkr__file__tst {
 		fxt.Init__file("A.png", 300, 200);
 	}
 	@Test   public void Plain() {
-		fxt.Test__to_html("[[File:A.png]]",     "<a href='A.png' class='image'><img alt='A.png' src='/orig/7/70/A.png' /></a>");
+		fxt.Test__to_html("[[File:A.png]]", "<a href='/wiki/A.png' class='image'><img alt='A.png' src='/orig/7/70/A.png' /></a>");
 	}
 	@Test   public void Thumb() {
-		fxt.Test__to_html("[[File:A.png|thumb]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a href='A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/220px-A.png' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='' class='internal'></a></div></div></div></div>");
+		fxt.Test__to_html("[[File:A.png|thumb]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a href='/wiki/A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/220px-A.png' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='' class='internal'></a></div></div></div></div>");
 	}
 	@Test   public void Size() {
-		fxt.Test__to_html("[[File:A.png|123x456px]]", "<a href='A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/123px-A.png' /></a>");
+		fxt.Test__to_html("[[File:A.png|123x456px]]", "<a href='/wiki/A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/123px-A.png' /></a>");
 	}
 	@Test   public void fitBoxWidth() {
 		// COMMENT:"Height is the relative smaller dimension, so scale width accordingly"
@@ -68,8 +68,8 @@ class Xomw_lnki_wkr__fxt {
 	private final    Xomw_lnki_wkr wkr;
 	private final    Xomw_parser_ctx pctx;
 	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
-	private final    Xomw_file_finder__mock file_finder;
-	private final    Xomw_FileRepo repo = new Xomw_FileRepo(Bry_.new_a7("/orig"), Bry_.new_a7("/thumb"));
+	private final    XomwFileFinderMock file_finder;
+	private final    XomwFileRepo repo = new XomwFileRepo(Bry_.new_a7("/orig"), Bry_.new_a7("/thumb"));
 	private boolean apos = true;
 	public Xomw_lnki_wkr__fxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
@@ -78,7 +78,7 @@ class Xomw_lnki_wkr__fxt {
 		wkr = parser.Lnki_wkr();
 
 		// env
-		file_finder = new Xomw_file_finder__mock(parser.Env());
+		file_finder = new XomwFileFinderMock(parser.Env());
 		parser.Env().File_finder_(file_finder);
 		parser.Env().Magic_word_mgr().Add(Bry_.new_u8("img_thumbnail"), Bool_.Y, Bry_.Ary("thumb"));
 		parser.Env().Magic_word_mgr().Add(Bry_.new_u8("img_width"), Bool_.Y, Bry_.Ary("$1px"));
@@ -86,13 +86,13 @@ class Xomw_lnki_wkr__fxt {
 
 		// ctx
 		pctx = new Xomw_parser_ctx();
-		pctx.Init_by_page(Xomw_Title.newFromText(Bry_.new_a7("Page_1")));
+		pctx.Init_by_page(XomwTitle.newFromText(Bry_.new_a7("Page_1")));
 	}
 	public void Clear() {
 		wkr.Clear_state();
 	}
 	public void Init__file(String title, int w, int h) {
-		file_finder.Add(title, repo, w, h, Xomw_MediaHandlerFactory.Mime__image__png);
+		file_finder.Add(title, repo, w, h, XomwMediaHandlerFactory.Mime__image__png);
 	}
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);

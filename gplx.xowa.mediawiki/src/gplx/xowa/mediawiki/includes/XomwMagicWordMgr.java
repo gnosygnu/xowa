@@ -15,8 +15,14 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-public class Xomw_image_params {
-	public Xomw_param_map paramMap = null;
-	public XomwMagicWordArray mwArray = null;
+package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
+public class XomwMagicWordMgr {
+	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
+	public void Add(byte[] name, boolean cs, byte[]... synonyms) {
+		XomwMagicWord mw = new XomwMagicWord(name, cs, synonyms);
+		hash.Add(name, mw);
+	}
+	public XomwMagicWord Get(byte[] name) {
+		return (XomwMagicWord)hash.Get_by(name);
+	}
 }

@@ -22,7 +22,7 @@ import gplx.xowa.mediawiki.includes.libs.*; import gplx.xowa.parsers.uniqs.*;
 public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Bry_bfr tmp;
 	private Bry_bfr bfr;
-	private final    Xomw_sanitizer sanitizer; private final    Xomw_strip_state strip_state;
+	private final    XomwSanitizer sanitizer; private final    Xomw_strip_state strip_state;
 	private final    List_adp 
 	  td_history       = List_adp_.New() // Is currently a td tag open?
 	, last_tag_history = List_adp_.New() // Save history of last lag activated (td, th or caption)

@@ -36,7 +36,7 @@ public class Xomw_link_holders {
 
 		link_id = 0;
 	}
-	public void Make_holder(Bry_bfr bfr, Xomw_Title nt, byte[] text, byte[][] query, byte[] trail, byte[] prefix) {
+	public void Make_holder(Bry_bfr bfr, XomwTitle nt, byte[] text, byte[][] query, byte[] trail, byte[] prefix) {
 		if (nt == null) {
 			// Fail gracefully
 			bfr.Add_str_a7("<!-- ERROR -->").Add(prefix).Add(text).Add(trail);
@@ -62,7 +62,7 @@ public class Xomw_link_holders {
 			}
 		}
 	}
-	public void Test__add(Xomw_Title ttl, byte[] capt) {
+	public void Test__add(XomwTitle ttl, byte[] capt) {
 		int key = link_id++;
 		Xomw_link_holder_item item = new Xomw_link_holder_item(ttl, capt, Bry_.Ary_empty);
 		internals.Add(key, item);
@@ -239,12 +239,12 @@ class Xomw_link_holder_list {
 	public Xomw_link_holder_item Get_by(int key) {return ary[key];}
 }
 class Xomw_link_holder_item {
-	public Xomw_link_holder_item(Xomw_Title title, byte[] text, byte[][] query) {
+	public Xomw_link_holder_item(XomwTitle title, byte[] text, byte[][] query) {
 		this.title = title;
 		this.text = text;
 		this.query = query;
 	}
-	public Xomw_Title Title() {return title;} private final    Xomw_Title title;
+	public XomwTitle Title() {return title;} private final    XomwTitle title;
 	public byte[] Text()      {return text;} private final    byte[] text;
 	public byte[] Pdbk()      {return title.getPrefixedDBkey();}
 	public byte[][] Query()   {return query;} private final    byte[][] query;

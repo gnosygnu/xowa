@@ -19,12 +19,14 @@ package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*; i
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.ctgs.dbs.*;
 import gplx.xowa.addons.wikis.directorys.dbs.*;
-class Xow_wiki_upgrade_ {
+public class Xow_wiki_upgrade_ {
 	// correlates loosely to App_.Version; however, should only change when new cases are added to this class
 	private static final int 
 	  Upgrade_version__v00  = 515
 	, Upgrade_version__v01  = 516
-	, Upgrade_version__cur  = 516	// must match latest version
+	;
+	public static final int
+	  Upgrade_version__cur  = 516	// must match latest version
 	;
 	public static void Upgrade_wiki(Xoae_app app, byte[] domain, Io_url dir_url) {
 		// get conn
@@ -70,7 +72,7 @@ class Xow_wiki_upgrade_ {
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "xo.personal:page.page_cat_db_id upgrade failed; err=~{0}", Err_.Message_gplx_log(e));
 			}
 
-			// check for page_ids < 1
+			// BGN:check for page_ids < 1
 			// select from page_tbl for page_id < 1
 			Xow_db_mgr db_mgr = new Xow_db_mgr(dir_url, String_.new_u8(domain));
 			db_mgr.Init_by_load(core_db_url);
@@ -94,6 +96,7 @@ class Xow_wiki_upgrade_ {
 				}
 				db_mgr.Db__core().Tbl__cfg().Upsert_int(Xowd_cfg_key_.Grp__db, Xowd_cfg_key_.Key__wiki__page__id_next, next_id + page_ids_len);
 			}
+			// END:check for page_ids < 1
 
 			cfg_tbl.Upsert_int(Xowd_cfg_key_.Key__wiki__upgrade__version, Upgrade_version__v01);
 		}

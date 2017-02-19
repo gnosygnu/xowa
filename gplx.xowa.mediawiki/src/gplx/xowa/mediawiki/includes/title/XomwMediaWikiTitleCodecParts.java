@@ -15,8 +15,20 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-public class Xomw_image_params {
-	public Xomw_param_map paramMap = null;
-	public XomwMagicWordArray mwArray = null;
+package gplx.xowa.mediawiki.includes.title; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+public class XomwMediaWikiTitleCodecParts {
+	public byte[] interwiki;
+	public boolean local_interwiki;
+	public byte[] fragment = Bry_.Empty;
+	public int ns;
+	public byte[] dbkey;
+	public byte[] user_case_dbkey;
+	public XomwMediaWikiTitleCodecParts(byte[] dbkey, int defaultNamespace) {
+		this.interwiki = Bry_.Empty;
+		this.local_interwiki = false;
+		this.fragment = Bry_.Empty;
+		this.ns = defaultNamespace;
+		this.dbkey = dbkey;
+		this.user_case_dbkey = dbkey;
+	}
 }
