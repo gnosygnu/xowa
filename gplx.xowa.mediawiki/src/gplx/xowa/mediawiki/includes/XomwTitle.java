@@ -158,19 +158,19 @@ public class XomwTitle {
 //		/** @var boolean Would deleting this page be a big deletion? */
 //		private $mIsBigDeletion = null;
 //		// @}
-//
-//		/**
-//		* B/C kludge: provide a TitleParser for use by Title.
-//		* Ideally, Title would have no methods that need this.
-//		* Avoid usage of this singleton by using TitleValue
-//		* and the associated services when possible.
-//		*
-//		* @return TitleFormatter
-//		*/
-//		private static function getTitleFormatter() {
-//			return MediaWikiServices::getInstance().getTitleFormatter();
-//		}
-//
+
+	/**
+	* B/C kludge: provide a TitleParser for use by Title.
+	* Ideally, Title would have no methods that need this.
+	* Avoid usage of this singleton by using TitleValue
+	* and the associated services when possible.
+	*
+	* @return TitleFormatter
+	*/
+	private static XomwMediaWikiTitleCodec getTitleFormatter() {
+		return XomwMediaWikiServices.getInstance().getTitleFormatter();
+	}
+
 //		/**
 //		* B/C kludge: provide an InterwikiLookup for use by Title.
 //		* Ideally, Title would have no methods that need this.
@@ -533,7 +533,7 @@ public class XomwTitle {
 //		* @return Title|null The new Object, or null on an error
 //		*/
 //		public static function makeTitleSafe($ns, $title, $fragment = Bry_.Empty, $interwiki = Bry_.Empty) {
-//			if (!MWNamespace::exists($ns)) {
+//			if (!XomwNamespace::exists($ns)) {
 //				return null;
 //			}
 //
@@ -728,7 +728,7 @@ public class XomwTitle {
 //			global $wgContLang;
 //
 //			if ($canonicalNamespace) {
-//				$namespace = MWNamespace::getCanonicalName($ns);
+//				$namespace = XomwNamespace::getCanonicalName($ns);
 //			} else {
 //				$namespace = $wgContLang.getNsText($ns);
 //			}
@@ -970,32 +970,32 @@ public class XomwTitle {
 //			this.mContentModel = $model;
 //			this.mForcedContentModel = true;
 //		}
-//
-//		/**
-//		* Get the namespace text
-//		*
-//		* @return String|false Namespace text
-//		*/
-//		public function getNsText() {
-//			if (this.isExternal()) {
+
+	/**
+	* Get the namespace text
+	*
+	* @return String|false Namespace text
+	*/
+	public byte[] getNsText() {
+		if (this.isExternal()) {
 //				// This probably shouldn't even happen,
 //				// but for interwiki transclusion it sometimes does.
 //				// Use the canonical namespaces if possible to try to
 //				// resolve a foreign namespace.
-//				if (MWNamespace::exists(this.mNamespace)) {
-//					return MWNamespace::getCanonicalName(this.mNamespace);
+//				if (XomwNamespace::exists(this.mNamespace)) {
+//					return XomwNamespace::getCanonicalName(this.mNamespace);
 //				}
-//			}
-//
+		}
+
 //			try {
-//				$formatter = self::getTitleFormatter();
-//				return $formatter.getNamespaceName(this.mNamespace, this.mDbkeyform);
+			XomwMediaWikiTitleCodec formatter = getTitleFormatter();
+			return formatter.getNamespaceName(this.mNamespace, this.mDbkeyform);
 //			} catch (InvalidArgumentException $ex) {
 //				wfDebug(__METHOD__ . ': ' . $ex.getMessage() . "\n");
 //				return false;
 //			}
-//		}
-//
+	}
+
 //		/**
 //		* Get the namespace text of the subject (rather than talk) page
 //		*
@@ -1003,7 +1003,7 @@ public class XomwTitle {
 //		*/
 //		public function getSubjectNsText() {
 //			global $wgContLang;
-//			return $wgContLang.getNsText(MWNamespace::getSubject(this.mNamespace));
+//			return $wgContLang.getNsText(XomwNamespace::getSubject(this.mNamespace));
 //		}
 //
 //		/**
@@ -1013,7 +1013,7 @@ public class XomwTitle {
 //		*/
 //		public function getTalkNsText() {
 //			global $wgContLang;
-//			return $wgContLang.getNsText(MWNamespace::getTalk(this.mNamespace));
+//			return $wgContLang.getNsText(XomwNamespace::getTalk(this.mNamespace));
 //		}
 //
 //		/**
@@ -1022,7 +1022,7 @@ public class XomwTitle {
 //		* @return boolean
 //		*/
 //		public function canTalk() {
-//			return MWNamespace::canTalk(this.mNamespace);
+//			return XomwNamespace::canTalk(this.mNamespace);
 //		}
 //
 //		/**
@@ -1040,7 +1040,7 @@ public class XomwTitle {
 //		* @return boolean
 //		*/
 //		public function isWatchable() {
-//			return !this.isExternal() && MWNamespace::isWatchable(this.getNamespace());
+//			return !this.isExternal() && XomwNamespace::isWatchable(this.getNamespace());
 //		}
 //
 //		/**
@@ -1098,7 +1098,7 @@ public class XomwTitle {
 //		* @since 1.19
 //		*/
 //		public function inNamespace($ns) {
-//			return MWNamespace::equals(this.getNamespace(), $ns);
+//			return XomwNamespace::equals(this.getNamespace(), $ns);
 //		}
 //
 //		/**
@@ -1137,7 +1137,7 @@ public class XomwTitle {
 //		* @return boolean
 //		*/
 //		public function hasSubjectNamespace($ns) {
-//			return MWNamespace::subjectEquals(this.getNamespace(), $ns);
+//			return XomwNamespace::subjectEquals(this.getNamespace(), $ns);
 //		}
 //
 //		/**
@@ -1148,7 +1148,7 @@ public class XomwTitle {
 //		* @return boolean
 //		*/
 //		public function isContentPage() {
-//			return MWNamespace::isContent(this.getNamespace());
+//			return XomwNamespace::isContent(this.getNamespace());
 //		}
 //
 //		/**
@@ -1158,7 +1158,7 @@ public class XomwTitle {
 //		* @return boolean
 //		*/
 //		public function isMovable() {
-//			if (!MWNamespace::isMovable(this.getNamespace()) || this.isExternal()) {
+//			if (!XomwNamespace::isMovable(this.getNamespace()) || this.isExternal()) {
 //				// Interwiki title or immovable namespace. Hooks don't get to override here
 //				return false;
 //			}
@@ -1188,7 +1188,7 @@ public class XomwTitle {
 //		* @return boolean
 //		*/
 //		public function isSubpage() {
-//			return MWNamespace::hasSubpages(this.mNamespace)
+//			return XomwNamespace::hasSubpages(this.mNamespace)
 //				? strpos(this.getText(), '/') != false
 //				: false;
 //		}
@@ -1288,7 +1288,7 @@ public class XomwTitle {
 //		* @return boolean
 //		*/
 //		public function isTalkPage() {
-//			return MWNamespace::isTalk(this.getNamespace());
+//			return XomwNamespace::isTalk(this.getNamespace());
 //		}
 //
 //		/**
@@ -1297,7 +1297,7 @@ public class XomwTitle {
 //		* @return Title The Object for the talk page
 //		*/
 //		public function getTalkPage() {
-//			return Title::makeTitle(MWNamespace::getTalk(this.getNamespace()), this.getDBkey());
+//			return Title::makeTitle(XomwNamespace::getTalk(this.getNamespace()), this.getDBkey());
 //		}
 //
 //		/**
@@ -1308,7 +1308,7 @@ public class XomwTitle {
 //		*/
 //		public function getSubjectPage() {
 //			// Is this the same title?
-//			$subjectNS = MWNamespace::getSubject(this.getNamespace());
+//			$subjectNS = XomwNamespace::getSubject(this.getNamespace());
 //			if (this.getNamespace() == $subjectNS) {
 //				return this;
 //			}
@@ -1422,9 +1422,9 @@ public class XomwTitle {
 //				p = this.mInterwiki . ':';
 //			}
 
-//			if (0 != this.mNamespace) {
-//				p .= this.getNsText() . ':';
-//			}
+		if (0 != this.mNamespace) {
+			p = Bry_.Add(p, this.getNsText(), Byte_ascii.Colon_bry);
+		}
 		return Bry_.Add(p, name);
 	}
 
@@ -1491,7 +1491,7 @@ public class XomwTitle {
 //		* @since 1.20
 //		*/
 //		public function getRootText() {
-//			if (!MWNamespace::hasSubpages(this.mNamespace)) {
+//			if (!XomwNamespace::hasSubpages(this.mNamespace)) {
 //				return this.getText();
 //			}
 //
@@ -1526,7 +1526,7 @@ public class XomwTitle {
 //		* @return String Base name
 //		*/
 //		public function getBaseText() {
-//			if (!MWNamespace::hasSubpages(this.mNamespace)) {
+//			if (!XomwNamespace::hasSubpages(this.mNamespace)) {
 //				return this.getText();
 //			}
 //
@@ -1566,7 +1566,7 @@ public class XomwTitle {
 //		* @return String Subpage name
 //		*/
 //		public function getSubpageText() {
-//			if (!MWNamespace::hasSubpages(this.mNamespace)) {
+//			if (!XomwNamespace::hasSubpages(this.mNamespace)) {
 //				return this.mTextform;
 //			}
 //			$parts = explode('/', this.mTextform);
@@ -2259,7 +2259,7 @@ public class XomwTitle {
 //				}
 //			} elseif ($action == 'move') {
 //				// Check for immobile pages
-//				if (!MWNamespace::isMovable(this.mNamespace)) {
+//				if (!XomwNamespace::isMovable(this.mNamespace)) {
 //					// Specific message for this case
 //					$errors[] = [ 'immobile-source-namespace', this.getNsText() ];
 //				} elseif (!this.isMovable()) {
@@ -2267,7 +2267,7 @@ public class XomwTitle {
 //					$errors[] = [ 'immobile-source-page' ];
 //				}
 //			} elseif ($action == 'move-target') {
-//				if (!MWNamespace::isMovable(this.mNamespace)) {
+//				if (!XomwNamespace::isMovable(this.mNamespace)) {
 //					$errors[] = [ 'immobile-target-namespace', this.getNsText() ];
 //				} elseif (!this.isMovable()) {
 //					$errors[] = [ 'immobile-target-page' ];
@@ -3068,7 +3068,7 @@ public class XomwTitle {
 //		* @return boolean
 //		*/
 //		public function hasSubpages() {
-//			if (!MWNamespace::hasSubpages(this.mNamespace)) {
+//			if (!XomwNamespace::hasSubpages(this.mNamespace)) {
 //				// Duh
 //				return false;
 //			}
@@ -3096,7 +3096,7 @@ public class XomwTitle {
 //		*  doesn't allow subpages
 //		*/
 //		public function getSubpages($limit = -1) {
-//			if (!MWNamespace::hasSubpages(this.getNamespace())) {
+//			if (!XomwNamespace::hasSubpages(this.getNamespace())) {
 //				return [];
 //			}
 //
@@ -3335,7 +3335,7 @@ public class XomwTitle {
 //		public static function capitalize($text, $ns = NS_MAIN) {
 //			global $wgContLang;
 //
-//			if (MWNamespace::isCapitalized($ns)) {
+//			if (XomwNamespace::isCapitalized($ns)) {
 //				return $wgContLang.ucfirst($text);
 //			} else {
 //				return $text;
@@ -3718,14 +3718,14 @@ public class XomwTitle {
 //				];
 //			}
 //			// Do the source and target namespaces support subpages?
-//			if (!MWNamespace::hasSubpages(this.getNamespace())) {
+//			if (!XomwNamespace::hasSubpages(this.getNamespace())) {
 //				return [
-//					[ 'namespace-nosubpages', MWNamespace::getCanonicalName(this.getNamespace()) ],
+//					[ 'namespace-nosubpages', XomwNamespace::getCanonicalName(this.getNamespace()) ],
 //				];
 //			}
-//			if (!MWNamespace::hasSubpages($nt.getNamespace())) {
+//			if (!XomwNamespace::hasSubpages($nt.getNamespace())) {
 //				return [
-//					[ 'namespace-nosubpages', MWNamespace::getCanonicalName($nt.getNamespace()) ],
+//					[ 'namespace-nosubpages', XomwNamespace::getCanonicalName($nt.getNamespace()) ],
 //				];
 //			}
 //
@@ -4502,11 +4502,11 @@ public class XomwTitle {
 //		public function getNamespaceKey($prepend = 'nstab-') {
 //			global $wgContLang;
 //			// Gets the subject namespace if this title
-//			$namespace = MWNamespace::getSubject(this.getNamespace());
+//			$namespace = XomwNamespace::getSubject(this.getNamespace());
 //			// Checks if canonical namespace name exists for namespace
-//			if (MWNamespace::exists(this.getNamespace())) {
+//			if (XomwNamespace::exists(this.getNamespace())) {
 //				// Uses canonical namespace name
-//				$namespaceKey = MWNamespace::getCanonicalName($namespace);
+//				$namespaceKey = XomwNamespace::getCanonicalName($namespace);
 //			} else {
 //				// Uses text of namespace
 //				$namespaceKey = this.getSubjectNsText();
@@ -4603,7 +4603,7 @@ public class XomwTitle {
 //			global $wgExemptFromUserRobotsControl;
 //
 //			$bannedNamespaces = is_null($wgExemptFromUserRobotsControl)
-//				? MWNamespace::getContentNamespaces()
+//				? XomwNamespace::getContentNamespaces()
 //				: $wgExemptFromUserRobotsControl;
 //
 //			return !in_array(this.mNamespace, $bannedNamespaces);
@@ -4771,7 +4771,7 @@ public class XomwTitle {
 //				}
 //			}
 //
-//			if (MWNamespace::hasSubpages(this.getNamespace())) {
+//			if (XomwNamespace::hasSubpages(this.getNamespace())) {
 //				// Optional notice for page itself and any parent page
 //				$parts = explode('/', this.getDBkey());
 //				$editnotice_base = $editnotice_ns;

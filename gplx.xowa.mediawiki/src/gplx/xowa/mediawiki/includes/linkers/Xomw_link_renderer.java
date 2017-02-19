@@ -200,7 +200,7 @@ public class Xomw_link_renderer {
 			// Page is a redirect
 //				return 'mw-redirect';
 //			}
-//			elseif ($this->stubThreshold > 0 && MWNamespace::isContent($target->getNamespace())
+//			elseif ($this->stubThreshold > 0 && XomwNamespace::isContent($target->getNamespace())
 //				&& $this->linkCache->getGoodLinkFieldObj($target, 'length') < $this->stubThreshold
 //			) {
 			// Page is a stub

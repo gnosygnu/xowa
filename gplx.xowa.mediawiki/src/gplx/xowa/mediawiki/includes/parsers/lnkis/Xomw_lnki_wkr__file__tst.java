@@ -23,16 +23,17 @@ public class Xomw_lnki_wkr__file__tst {
 	private final    Xomw_lnki_wkr__fxt fxt = new Xomw_lnki_wkr__fxt();
 	@Before public void init() {
 		fxt.Clear();
-		fxt.Init__file("A.png", 300, 200);
+		fxt.Init__file("File:A.png", 300, 200);
 	}
 	@Test   public void Plain() {
-		fxt.Test__to_html("[[File:A.png]]", "<a href='/wiki/A.png' class='image'><img alt='A.png' src='/orig/7/70/A.png' /></a>");
+		fxt.Test__to_html("[[File:A.png]]", "<a href='/wiki/File:A.png' class='image'><img alt='A.png' src='/orig/7/70/A.png' width='300' height='200' /></a>");
 	}
 	@Test   public void Thumb() {
-		fxt.Test__to_html("[[File:A.png|thumb]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a href='/wiki/A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/220px-A.png' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='' class='internal'></a></div></div></div></div>");
+		// TODO.XO:message=enlarge
+		fxt.Test__to_html("[[File:A.png|thumb]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a href='/wiki/File:A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/220px-A.png' width='220' height='146' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='/wiki/File:A.png' class='internal'></a></div></div></div></div>");
 	}
 	@Test   public void Size() {
-		fxt.Test__to_html("[[File:A.png|123x456px]]", "<a href='/wiki/A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/123px-A.png' /></a>");
+		fxt.Test__to_html("[[File:A.png|123x456px]]", "<a href='/wiki/File:A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/123px-A.png' width='123' height='82' /></a>");
 	}
 	@Test   public void fitBoxWidth() {
 		// COMMENT:"Height is the relative smaller dimension, so scale width accordingly"
@@ -43,7 +44,7 @@ public class Xomw_lnki_wkr__file__tst {
 		// EX_2: view is 120,80 (1.5:1)
 		// - dimensions are either (a) 120,60 or (b) 160,80
 		// - use (a) 120,60
-		fxt.Init__file("A.png", 200, 100);
+		fxt.Init__file("File:A.png", 200, 100);
 		fxt.Test__to_html__has("[[File:A.png|120x40px]]", "/80px-A.png");
 		fxt.Test__to_html__has("[[File:A.png|120x80px]]", "/120px-A.png");
 	}

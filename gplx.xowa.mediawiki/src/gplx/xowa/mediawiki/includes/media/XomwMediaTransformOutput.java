@@ -260,7 +260,6 @@ public abstract class XomwMediaTransformOutput {
 //			}
 
 		attribs.Clear();
-//			'href' => $this->file->getTitle()->getLocalURL( $query ),
 		attribs.Add_many(Gfh_atr_.Bry__href, this.file.getTitle().getLocalURL(query));
 		attribs.Add_many(Gfh_atr_.Bry__class, Bry__class__image);
 		if (title != null) {

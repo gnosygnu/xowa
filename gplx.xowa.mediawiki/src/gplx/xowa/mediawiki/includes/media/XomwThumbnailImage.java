@@ -182,7 +182,7 @@ public class XomwThumbnailImage extends XomwMediaTransformOutput {	private final
 			}
 		}
 
-		if (!Php_utl_.empty(options.no_dimensions)) {
+		if (Php_utl_.empty(options.no_dimensions)) {
 			attribs.Add_many(Gfh_atr_.Bry__width, Int_.To_bry(width));
 			attribs.Add_many(Gfh_atr_.Bry__height, Int_.To_bry(height));
 		}

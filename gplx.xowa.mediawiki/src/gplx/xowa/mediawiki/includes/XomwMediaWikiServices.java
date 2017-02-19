@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
+import gplx.xowa.mediawiki.languages.*;
 import gplx.xowa.mediawiki.includes.title.*;
 /**
 * MediaWikiServices is the service locator for the application scope of MediaWiki.
@@ -564,14 +565,15 @@ public class XomwMediaWikiServices {
 //		public function getLinkRenderer() {
 //			return $this->getService( 'LinkRenderer' );
 //		}
-//
-//		/**
-//		* @since 1.28
-//		* @return TitleFormatter
-//		*/
-//		public function getTitleFormatter() {
-//			return $this->getService( 'TitleFormatter' );
-//		}
+
+	/**
+	* @since 1.28
+	* @return TitleFormatter
+	*/
+	public XomwMediaWikiTitleCodec getTitleFormatter() {
+		// return $this->getService( 'TitleFormatter' );
+		return titleParser;
+	}
 
 	/**
 	* @since 1.28
@@ -581,7 +583,7 @@ public class XomwMediaWikiServices {
 		// return $this->getService( 'TitleParser' );
 		return titleParser;
 	}
-	private XomwMediaWikiTitleCodec titleParser = new XomwMediaWikiTitleCodec();
+	private XomwMediaWikiTitleCodec titleParser = new XomwMediaWikiTitleCodec(new XomwLanguage());
 
 //		/**
 //		* @since 1.28

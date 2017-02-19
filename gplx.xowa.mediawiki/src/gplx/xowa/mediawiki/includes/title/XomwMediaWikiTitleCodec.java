@@ -16,13 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mediawiki.includes.title; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+import gplx.xowa.mediawiki.languages.*;
 import gplx.xowa.mediawiki.includes.utls.*;
 public class XomwMediaWikiTitleCodec {
-//		/**
-//		* @var Language
-//		*/
-//		protected $language;
-//
+	/**
+	* @var Language
+	*/
+	private XomwLanguage language;
+
 //		/**
 //		* @var GenderCache
 //		*/
@@ -34,46 +35,50 @@ public class XomwMediaWikiTitleCodec {
 //		protected $localInterwikis;
 //
 //		/**
-//		* @param Language $language The language Object to use for localizing namespace names.
+//		* @param Language language The language Object to use for localizing namespace names.
 //		* @param GenderCache $genderCache The gender cache for generating gendered namespace names
 //		* @param String[]|String $localInterwikis
 //		*/
-//		public function __construct(Language $language, GenderCache $genderCache,
+//		public function __construct(Language language, GenderCache $genderCache,
 //			$localInterwikis = []
 //		) {
-//			$this->language = $language;
+//			$this->language = language;
 //			$this->genderCache = $genderCache;
 //			$this->localInterwikis = (array)$localInterwikis;
 //		}
-//
-//		/**
-//		* @see TitleFormatter::getNamespaceName()
-//		*
-//		* @param int $namespace
-//		* @param String $text
-//		*
-//		* @throws InvalidArgumentException If the namespace is invalid
-//		* @return String
-//		*/
-//		public function getNamespaceName($namespace, $text) {
+	public XomwMediaWikiTitleCodec(XomwLanguage language) {
+		this.language = language;
+	}
+
+	/**
+	* @see TitleFormatter::getNamespaceName()
+	*
+	* @param int $namespace
+	* @param String $text
+	*
+	* @throws InvalidArgumentException If the namespace is invalid
+	* @return String
+	*/
+	public byte[] getNamespaceName(int ns, byte[] text) {
+		byte[] name = null;
 //			if ($this->language->needsGenderDistinction() &&
-//				MWNamespace::hasGenderDistinction($namespace)
+//				XomwNamespace::hasGenderDistinction($namespace)
 //			) {
 //
 //				// NOTE: we are assuming here that the title text is a user name!
 //				$gender = $this->genderCache->getGenderOf($text, __METHOD__);
 //				$name = $this->language->getGenderNsText($namespace, $gender);
 //			} else {
-//				$name = $this->language->getNsText($namespace);
+			name = language.getNsText(ns);
 //			}
 //
 //			if ($name === false) {
 //				throw new InvalidArgumentException('Unknown namespace ID: ' . $namespace);
 //			}
-//
-//			return $name;
-//		}
-//
+
+		return name;
+	}
+
 //		/**
 //		* @see TitleFormatter::formatTitle()
 //		*

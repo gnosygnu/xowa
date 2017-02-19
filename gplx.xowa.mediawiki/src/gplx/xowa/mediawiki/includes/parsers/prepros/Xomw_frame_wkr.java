@@ -292,7 +292,7 @@ package gplx.xowa.mediawiki.includes.parsers.prepros; import gplx.*; import gplx
 //								);
 //							}
 //						}
-//					} elseif (MWNamespace::isNonincludable(title->getNamespace())) {
+//					} elseif (XomwNamespace::isNonincludable(title->getNamespace())) {
 //						found = false; // access denied
 //						wfDebug(__METHOD__ . ": template inclusion denied for " .
 //							title->getPrefixedDBkey() . "\n");

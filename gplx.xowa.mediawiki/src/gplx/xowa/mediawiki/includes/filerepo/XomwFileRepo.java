@@ -161,7 +161,7 @@ public class XomwFileRepo {
 //			// Optional settings that have a default
 //			this.initialCapital = isset(info['initialCapital'])
 //				? info['initialCapital']
-//				: MWNamespace::isCapitalized(NS_FILE);
+//				: XomwNamespace::isCapitalized(NS_FILE);
 //			this.url = isset(info['url'])
 //				? info['url']
 //				: false; // a subclass may set the URL (e.g. ForeignAPIRepo)
@@ -622,7 +622,7 @@ public class XomwFileRepo {
 	*/
 	public byte[] getNameFromTitle(XomwTitle title) {
 //			global wgContLang;
-//			if (this.initialCapital != MWNamespace::isCapitalized(NS_FILE)) {
+//			if (this.initialCapital != XomwNamespace::isCapitalized(NS_FILE)) {
 //				name = title.getUserCaseDBKey();
 //				if (this.initialCapital) {
 //					name = wgContLang.ucfirst(name);

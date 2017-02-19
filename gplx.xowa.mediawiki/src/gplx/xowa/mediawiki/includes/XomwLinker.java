@@ -222,7 +222,7 @@ public class XomwLinker {
 //			global $wgContLang;
 //
 //			// First we check whether the namespace exists or not.
-//			if ( MWNamespace::exists( $namespace ) ) {
+//			if ( XomwNamespace::exists( $namespace ) ) {
 //				if ( $namespace == NS_MAIN ) {
 //					$name = $context->msg( 'blanknamespace' )->text();
 //				} else {
@@ -608,8 +608,8 @@ public class XomwLinker {
 		// ThumbnailImage::toHtml() already adds page= onto the end of DjVu URLs
 		// So we don't need to pass it here in $query. However, the URL for the
 		// zoom icon still needs it, so we make a unique query for it. See bug 14771
-//			byte[] url = $title->getLocalURL($query);
-		byte[] url = Bry_.Empty;
+		byte[] url = title.getLocalURL(query);
+//			byte[] url = Bry_.Empty;
 //			if ($page) {
 //				$url = wfAppendQuery($url, [ 'page' => $page ]);
 //			}
@@ -1256,7 +1256,7 @@ public class XomwLinker {
 //				function ( $match ) use ( $title, $local, $wikiId ) {
 //					global $wgContLang;
 //
-//					$medians = '(?:' . preg_quote( MWNamespace::getCanonicalName( NS_MEDIA ), '/' ) . '|';
+//					$medians = '(?:' . preg_quote( XomwNamespace::getCanonicalName( NS_MEDIA ), '/' ) . '|';
 //					$medians .= preg_quote( $wgContLang->getNsText( NS_MEDIA ), '/' ) . '):';
 //
 //					$comment = $match[0];
