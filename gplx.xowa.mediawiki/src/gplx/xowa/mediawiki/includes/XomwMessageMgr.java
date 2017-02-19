@@ -18,5 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 public class XomwMessageMgr {
 	private final    Hash_adp hash = Hash_adp_.New();
+	public void Add(String key, String val) {
+		hash.Add(key, new XomwMessage(Bry_.new_u8(val)));
+	}
 	public XomwMessage Get_by_str(String key) {return (XomwMessage)hash.Get_by(key);}
 }

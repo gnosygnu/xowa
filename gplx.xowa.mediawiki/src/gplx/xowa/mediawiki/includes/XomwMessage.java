@@ -17,6 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 public class XomwMessage {
-	public byte[] text() {return null;}
-	public byte[] escaped() {return null;}
+	public XomwMessage(byte[] textBry) {
+		this.textBry = textBry;
+	}
+	public byte[] text() {return textBry;} private byte[] textBry;
+	public byte[] escaped() {throw Err_.new_unimplemented();}
 }

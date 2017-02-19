@@ -418,7 +418,7 @@ public class XomwLinker {
 				frameParams.align = parser.Env().Lang__align_end;
 			}
 			bfr.Add(prefix);
-			makeThumbLink2(bfr, pctx, title, file, frameParams, handlerParams, time, query);
+			makeThumbLink2(bfr, env, pctx, title, file, frameParams, handlerParams, time, query);
 			bfr.Add(postfix);
 			return;
 		}
@@ -538,7 +538,7 @@ public class XomwLinker {
 	* @return String
 	*/
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	private void makeThumbLink2(Bry_bfr bfr, Xomw_parser_ctx pctx, XomwTitle title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query) {
+	private void makeThumbLink2(Bry_bfr bfr, Xomw_parser_env env, Xomw_parser_ctx pctx, XomwTitle title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query) {
 		boolean exists = file != null && file.exists();
 
 		int page = handlerParams.page;
@@ -654,9 +654,8 @@ public class XomwLinker {
 					, tmp_attribs.Clear()
 					.Add(Gfh_atr_.Bry__href , url)
 					.Add(Gfh_atr_.Bry__class, Class__internal)
-//						.Add(Gfh_atr_.Bry__title, wfMessage('thumbnail-more')->text())
+					.Add(Gfh_atr_.Bry__title, XomwGlobalFunctions.wfMessage(env, "thumbnail-more").text())
 					, Bry_.Empty);
-				// env.Message_mgr().Get_by_str("thumbnail-more").text();
 				byte[] zoom_anch = tmp.To_bry_and_clear();
 				html_utl.Raw_element(tmp, Gfh_tag_.Bry__div, tmp_attribs.Clear().Add(Gfh_atr_.Bry__class, Class__magnify), zoom_anch);
 				zoom_icon = tmp.To_bry_and_clear();

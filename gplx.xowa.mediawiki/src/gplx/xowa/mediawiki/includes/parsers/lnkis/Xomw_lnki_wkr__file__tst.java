@@ -29,8 +29,7 @@ public class Xomw_lnki_wkr__file__tst {
 		fxt.Test__to_html("[[File:A.png]]", "<a href='/wiki/File:A.png' class='image'><img alt='A.png' src='/orig/7/70/A.png' width='300' height='200' /></a>");
 	}
 	@Test   public void Thumb() {
-		// TODO.XO:message=enlarge
-		fxt.Test__to_html("[[File:A.png|thumb]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a href='/wiki/File:A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/220px-A.png' width='220' height='146' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='/wiki/File:A.png' class='internal'></a></div></div></div></div>");
+		fxt.Test__to_html("[[File:A.png|thumb]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a href='/wiki/File:A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/220px-A.png' width='220' height='146' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='/wiki/File:A.png' class='internal' title='enlarge'></a></div></div></div></div>");
 	}
 	@Test   public void Size() {
 		fxt.Test__to_html("[[File:A.png|123x456px]]", "<a href='/wiki/File:A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/123px-A.png' width='123' height='82' /></a>");
@@ -83,6 +82,7 @@ class Xomw_lnki_wkr__fxt {
 		parser.Env().File_finder_(file_finder);
 		parser.Env().Magic_word_mgr().Add(Bry_.new_u8("img_thumbnail"), Bool_.Y, Bry_.Ary("thumb"));
 		parser.Env().Magic_word_mgr().Add(Bry_.new_u8("img_width"), Bool_.Y, Bry_.Ary("$1px"));
+		parser.Env().Message_mgr().Add("thumbnail-more", "enlarge");
 		parser.Init_by_wiki(wiki);
 
 		// ctx

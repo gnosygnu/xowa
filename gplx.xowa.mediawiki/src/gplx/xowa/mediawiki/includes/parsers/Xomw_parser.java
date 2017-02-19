@@ -46,8 +46,8 @@ public class Xomw_parser {
 	public Xomw_parser_env         Env()             {return env;}            private final    Xomw_parser_env env = new Xomw_parser_env();
 	public Xomw_parser_options     Options()         {return options;}        private final    Xomw_parser_options options = new Xomw_parser_options();
 	public Xomw_strip_state        Strip_state()     {return strip_state;}    private final    Xomw_strip_state strip_state = new Xomw_strip_state();
-	public XomwSanitizer          Sanitizer()       {return sanitizer;}      private final    XomwSanitizer sanitizer = new XomwSanitizer();
-	public XomwLinker             Linker()          {return linker;}         private final    XomwLinker linker;
+	public XomwSanitizer           Sanitizer()       {return sanitizer;}      private final    XomwSanitizer sanitizer = new XomwSanitizer();
+	public XomwLinker              Linker()          {return linker;}         private final    XomwLinker linker;
 	public Bry_bfr                 Tmp()             {return tmp;}            private final    Bry_bfr tmp = Bry_bfr_.New();
 	public Xomw_quote_wkr          Quote_wkr()       {return quote_wkr;}      private final    Xomw_quote_wkr quote_wkr;
 	public Xomw_lnki_wkr           Lnki_wkr()        {return lnki_wkr;}       private final    Xomw_lnki_wkr lnki_wkr;
