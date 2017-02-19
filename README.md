@@ -102,4 +102,7 @@ These settings are available under Window -> Preferences
         * <code>--root_dir /xowa/ --show_license n --show_args n</code>
 
 ## License
-XOWA is released under the AGPLv3 license. See LICENSE.txt for more information.
+XOWA is licensed under the terms of the General Public License (GPL) Version 3,
+or alternatively under the terms of the Apache License Version 2.0.
+
+See LICENSE.txt for more information.
