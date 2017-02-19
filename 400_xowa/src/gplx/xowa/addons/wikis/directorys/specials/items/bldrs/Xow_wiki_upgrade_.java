@@ -34,6 +34,10 @@ class Xow_wiki_upgrade_ {
 		}
 		Db_conn core_db_conn = Db_conn_bldr.Instance.Get_or_fail(core_db_url);
 
+		// verify json
+		Xowdir_wiki_props_mgr core_db_props = Xowdir_wiki_props_mgr_.New_xowa(app, core_db_url);
+		core_db_props.Verify(Bool_.N, String_.new_u8(domain), core_db_url);
+
 		// get cfg
 		Db_cfg_tbl cfg_tbl = Xowd_cfg_tbl_.Get_or_fail(core_db_conn);
 		int upgrade_version = cfg_tbl.Select_int_or(Xowd_cfg_key_.Key__wiki__upgrade__version, Upgrade_version__v00);
@@ -45,7 +49,6 @@ class Xow_wiki_upgrade_ {
 		if (upgrade_version == Upgrade_version__v00) {
 			Gfo_usr_dlg_.Instance.Log_many("", "", "xo.wiki.upgrade:upgrading; db=~{0} cur=~{1} new=~{2}", core_db_url.Raw(), upgrade_version, Upgrade_version__v01);
 
-			// > v4.2.0
 			// cat_link: if cat_link.cl_sortkey_prefix doesn't exist, then cat_link is old format; drop it and add the new one
 			try {
 				if (!core_db_conn.Meta_fld_exists(Xodb_cat_link_tbl.TBL_NAME, Xodb_cat_link_tbl.FLD__cl_sortkey_prefix)) {
@@ -66,10 +69,6 @@ class Xow_wiki_upgrade_ {
 			} catch (Exception e) {
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "xo.personal:page.page_cat_db_id upgrade failed; err=~{0}", Err_.Message_gplx_log(e));
 			}
-
-			// verify json
-			Xowdir_wiki_props_mgr core_db_props = Xowdir_wiki_props_mgr_.New_xowa(app, core_db_url);
-			core_db_props.Verify(Bool_.N, String_.new_u8(domain), core_db_url);
 
 			// check for page_ids < 1
 			// select from page_tbl for page_id < 1

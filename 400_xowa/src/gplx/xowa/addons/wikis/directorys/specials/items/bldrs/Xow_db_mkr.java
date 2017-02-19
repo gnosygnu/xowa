@@ -22,6 +22,7 @@ import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wik
 import gplx.xowa.langs.cases.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.addons.wikis.directorys.dbs.*;
+import gplx.xowa.addons.wikis.ctgs.dbs.*;
 public class Xow_db_mkr {
 	public static Xodb_wiki_mgr Create_wiki(Xodb_wiki_data data, String wiki_name, byte[] mainpage_name, byte[] mainpage_text) {
 		// create db
@@ -43,7 +44,7 @@ public class Xow_db_mkr {
 		// create tbls: cat; may want to do "if (props.Layout_text().Tid_is_all_or_few())"	// create in advance else will fail for v2; import wiki -> wiki loads and tries to load categories; v2 category processes and builds tbl; DATE:2015-03-22
 		core_db.Tbls__add(Bool_.Y
 		, new Xowd_cat_core_tbl(core_conn, Bool_.N)
-		, new Xowd_cat_link_tbl(core_conn, Bool_.N)
+		, new Xodb_cat_link_tbl(core_conn)
 		);
 
 		// insert data: wiki

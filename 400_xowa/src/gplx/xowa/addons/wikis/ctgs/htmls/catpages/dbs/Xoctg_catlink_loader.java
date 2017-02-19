@@ -175,12 +175,12 @@ class Xoctg_catlink_loader {
 		int nl_pos = Bry_find_.Find_fwd(tmp_sortkey, Byte_ascii.Nl);
 		if (nl_pos != Bry_find_.Not_found)
 			tmp_sortkey = Bry_.Mid(tmp_sortkey, 0, nl_pos);
-
 		if (version == 4) {
 			if (Bry_.Len_gt_0(url_sortkey)) {
 				// make sortkey_val
 				sortkey_val_bfr.Add_byte(Byte_ascii.Ltr_x).Add_byte_apos();
 				gplx.core.encoders.Hex_utl_.Encode_bfr(sortkey_val_bfr, collation_mgr.Get_sortkey(tmp_sortkey));
+				Tfds.Write(version, tmp_sortkey, sortkey_val_bfr.To_str());
 				sortkey_val_bfr.Add_byte_apos();
 			}
 			else
