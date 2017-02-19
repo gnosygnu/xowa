@@ -34,7 +34,7 @@ public class Srch_search_addon implements Xoax_addon_itm, Srch_search_addon_api 
 	public void Search(Srch_search_qry qry, Srch_rslt_cbk cbk) {search_mgr.Search(qry, cbk);}
 	public void Clear_rslts_cache() {search_mgr.Clear_rslts_cache();}
 	public void Delete_links(int ns_id, int page_id) {
-		if (db_mgr.Tbl__link__len() == 0) return;// NOTE: personal_wikis may not have search_link; exit early else assert will fail; DATE:2017-02-15
+		if (!db_mgr.Tbl__word().conn.Meta_tbl_exists(Srch_word_tbl.TABLE_NAME)) return; // NOTE: personal_wikis may not have search_link; exit early else assert will fail; DATE:2017-02-15
 		int search_link_db_id = db_mgr.Tbl__link__get_idx(ns_id);
 		Srch_link_tbl search_link_tbl = db_mgr.Tbl__link__get_at(search_link_db_id);
 		search_link_tbl.Delete(page_id);

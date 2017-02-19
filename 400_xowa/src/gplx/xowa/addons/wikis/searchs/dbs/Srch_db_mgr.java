@@ -100,7 +100,7 @@ public class Srch_db_mgr {
 		}
 	}
 	public void Update_links(int ns_id, int old_id, int new_id) {
-		if (this.Tbl__link__len() == 0) return;// NOTE: personal_wikis may not have search_link; exit early else assert will fail; DATE:2017-02-15
+		if (!tbl__word.conn.Meta_tbl_exists(Srch_word_tbl.TABLE_NAME)) return; // NOTE: personal_wikis may not have search_link; exit early else assert will fail; DATE:2017-02-15
 		int search_link_db_id = this.Tbl__link__get_idx(ns_id);
 		Srch_link_tbl search_link_tbl = this.Tbl__link__get_at(search_link_db_id);
 		search_link_tbl.Update_page_id(old_id, new_id);

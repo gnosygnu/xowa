@@ -24,7 +24,7 @@ public class Srch_word_tbl implements Rls_able {
 	public final    Db_conn conn; private Db_stmt stmt_insert, stmt_select_by;
 	public Srch_word_tbl(Db_conn conn) {
 		this.conn = conn;
-		this.tbl_name				= "search_word";
+		this.tbl_name				= TABLE_NAME;
 		this.fld_id					= flds.Add_int_pkey("word_id");
 		this.fld_text				= flds.Add_str("word_text", 255);
 		this.fld_link_count			= flds.Add_int("link_count");
@@ -77,4 +77,5 @@ public class Srch_word_tbl implements Rls_able {
 		stmt_select_by			= Db_stmt_.Rls(stmt_select_by);
 	}
 	public static final String Fld_link_score_min = "link_score_min", Fld_link_score_max = "link_score_max";
+	public static final String TABLE_NAME = "search_word";
 }
