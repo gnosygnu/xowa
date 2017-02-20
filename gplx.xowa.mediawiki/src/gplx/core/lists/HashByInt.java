@@ -50,7 +50,7 @@ public class HashByInt {
 		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
 			HashByIntItem item = (HashByIntItem)hash.Get_at(i);
-			rv.Add(item.key, item);
+			rv.Add(item.key, item.val);
 		}
 		return rv;
 	}

@@ -37,7 +37,7 @@ import gplx.xowa.parsers.uniqs.*;
 	* P1: link_prefix; EX: b[[A]]; [not enabled on enwiki]
 */
 public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
-	private final    Xomw_link_holders holders;
+	private final    XomwLinkHolderArray holders;
 	private final    XomwLinker linker;
 	private final    Xomw_link_renderer link_renderer;
 	// private final    Btrie_slim_mgr protocols_trie;
@@ -55,7 +55,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    List_adp tmp_list = List_adp_.New();
 	private final    Hash_adp mImageParams = Hash_adp_bry.cs();
 	private final    Hash_adp mImageParamsMagicArray = Hash_adp_bry.cs();
-	public Xomw_lnki_wkr(Xomw_parser parser, Xomw_link_holders holders, Xomw_link_renderer link_renderer, Btrie_slim_mgr protocols_trie) {
+	public Xomw_lnki_wkr(Xomw_parser parser, XomwLinkHolderArray holders, Xomw_link_renderer link_renderer, Btrie_slim_mgr protocols_trie) {
 		this.parser = parser;
 		this.holders = holders;
 		this.link_renderer = link_renderer;
@@ -77,7 +77,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		}
 	}
 	public void Clear_state() {
-		holders.Clear();
+		holders.clear();
 	}
 	public void Replace_internal_links(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
 		// XO.PBFR
@@ -440,11 +440,11 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 			else {
 				// Links will be added to the output link list after checking
-				holders.Make_holder(bfr, nt, text, Bry_.Ary_empty, trail, prefix);
+				holders.makeHolder(bfr, nt, text, Bry_.Ary_empty, trail, prefix);
 			}
 		}
 	}
-	public void makeImage(Xomw_parser_ctx pctx, Bry_bfr bfr, XomwTitle title, byte[] options_at_link, Xomw_link_holders holders) {
+	public void makeImage(Xomw_parser_ctx pctx, Bry_bfr bfr, XomwTitle title, byte[] options_at_link, XomwLinkHolderArray holders) {
 		// Check if the options text is of the form "options|alt text"
 		// Options are:
 		//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang

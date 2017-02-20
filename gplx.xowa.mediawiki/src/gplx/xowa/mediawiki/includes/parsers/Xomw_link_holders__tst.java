@@ -26,7 +26,7 @@ public class Xomw_link_holders__tst {
 	}
 }
 class Xomw_link_holders__fxt {
-	private final    Xomw_link_holders holders = new Xomw_link_holders(new Xomw_link_renderer(new XomwSanitizer()), Bry_bfr_.New());
+	private final    XomwLinkHolderArray holders = new XomwLinkHolderArray(new Xomw_parser());
 	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
 	private boolean apos = true;
 	public Xomw_link_holders__fxt() {

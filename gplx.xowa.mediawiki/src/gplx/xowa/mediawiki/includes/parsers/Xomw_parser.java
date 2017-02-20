@@ -33,7 +33,7 @@ public class Xomw_parser {
 	private final    Xomw_magiclinks_wkr magiclinks_wkr;
 	private final    Xomw_doubleunder_wkr doubleunder_wkr = new Xomw_doubleunder_wkr();
 	private final    Xomw_link_renderer link_renderer;
-	private final    Xomw_link_holders holders;
+	private final    XomwLinkHolderArray holders;
 	private final    Xomw_heading_cbk__html heading_wkr_cbk;
 	private final    Btrie_slim_mgr protocols_trie;
 	private final    Xomw_doubleunder_data doubleunder_data = new Xomw_doubleunder_data();
@@ -63,6 +63,23 @@ public class Xomw_parser {
 	}
 
 
+	/**
+	* Get a LinkRenderer instance to make links with
+	*
+	* @since 1.28
+	* @return LinkRenderer
+	*/
+	public Xomw_link_renderer getLinkRenderer() {
+//			if ( !$this->mLinkRenderer ) {
+//				$this->mLinkRenderer = MediaWikiServices::getInstance()
+//					->getLinkRendererFactory()->create();
+//				$this->mLinkRenderer->setStubThreshold(
+//					$this->getOptions()->getStubThreshold()
+//				);
+//			}
+		return link_renderer;
+	}
+
 	public Xomw_parser() {
 		if (regex_space == null) {
 			synchronized (Type_adp_.ClassOf_obj(this)) {
@@ -77,7 +94,7 @@ public class Xomw_parser {
 		this.link_renderer = new Xomw_link_renderer(sanitizer);
 		this.linker = new XomwLinker(link_renderer);
 		this.protocols_trie = Xomw_parser.Protocols__dflt();
-		this.holders = new Xomw_link_holders(link_renderer, tmp);
+		this.holders = new XomwLinkHolderArray(this);
 		this.table_wkr = new Xomw_table_wkr(this);
 		this.quote_wkr = new Xomw_quote_wkr(this);
 		this.lnke_wkr = new Xomw_lnke_wkr(this);
