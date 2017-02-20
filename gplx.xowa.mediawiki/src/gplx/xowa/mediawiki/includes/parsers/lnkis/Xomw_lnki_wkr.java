@@ -675,24 +675,25 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //				$handler->parserTransformHook($this, $file);
 //			}
 	}
-//		private byte[] stripAltText(byte[] caption, Xomw_link_holders holders) {
+//		private byte[] stripAltText(byte[] caption, XomwLinkHolderArray holders) {
 //			// Strip bad stuff out of the title (tooltip).  We can't just use
 //			// replaceLinkHoldersText() here, because if this function is called
 //			// from replaceInternalLinks2(), mLinkHolders won't be up-to-date.
 //			byte[] tooltip;
 //			if (holders != null) {
-//				tooltip = holders.Replace(caption);
+//				tooltip = holders.replace(caption);
 //			} else {
-//				tooltip = this.Replace_link_holders(caption);
+//				tooltip = this.replace_link_holders(caption);
 //			}
-
+//
 //			// make sure there are no placeholders in thumbnail attributes
 //			// that are later expanded to html- so expand them now and
 //			// remove the tags
-//			$tooltip = $this->mStripState->unstripBoth( $tooltip );
-//			$tooltip = Sanitizer::stripAllTags( $tooltip );
-//
-//			return $tooltip;
+////			$tooltip = $this->mStripState->unstripBoth( $tooltip );
+////			$tooltip = Sanitizer::stripAllTags( $tooltip );
+////
+////			return $tooltip;
+//			return null;
 //		}
 
 	private static Xomw_param_list[] internalParamNames;
@@ -816,8 +817,8 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	public void Maybe_do_subpage_link(XomwLinker_NormalizeSubpageLink rv, byte[] target, byte[] text) {
 		linker.normalizeSubpageLink(rv, mPageTitle, target, text);
 	}
-	public void Replace_link_holders(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
-		holders.Replace(pctx, pbfr);
+	public void replaceLinkHolders(Xomw_parser_bfr pbfr) {
+		holders.replace(pbfr);
 	}
 	public void Make_known_link_holder(Bry_bfr bfr, XomwTitle nt, byte[] text, byte[] trail, byte[] prefix) {
 		byte[][] split_trail = linker.splitTrail(trail);

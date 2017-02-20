@@ -112,7 +112,7 @@ class Xomw_lnki_wkr__fxt {
 	private String Exec__to_html(String src_str) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		wkr.Replace_internal_links(pctx, pbfr.Init(src_bry));
-		wkr.Replace_link_holders(pctx, pbfr);
+		wkr.replaceLinkHolders(pbfr);
 		return pbfr.Rslt().To_str_and_clear();
 	}
 	public void Test__parseWidthParam(int[] img_size, String src_str, int expd_w, int expd_h) {

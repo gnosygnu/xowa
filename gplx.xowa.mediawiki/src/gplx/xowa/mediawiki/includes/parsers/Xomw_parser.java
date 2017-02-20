@@ -53,7 +53,6 @@ public class Xomw_parser {
 	public Xomw_lnki_wkr           Lnki_wkr()        {return lnki_wkr;}       private final    Xomw_lnki_wkr lnki_wkr;
 	public boolean                 Output_type__wiki() {return output_type__wiki;} private final    boolean output_type__wiki = false;
 
-
 	private int mLinkID;
 	/**
 	* @return int
@@ -177,7 +176,7 @@ public class Xomw_parser {
 
 		block_wkr.Do_block_levels(pctx, pbfr, line_start);
 
-		lnki_wkr.Replace_link_holders(pctx, pbfr);
+		lnki_wkr.replaceLinkHolders(pbfr);
 
 		// The input doesn't get language converted if
 		// a) It's disabled

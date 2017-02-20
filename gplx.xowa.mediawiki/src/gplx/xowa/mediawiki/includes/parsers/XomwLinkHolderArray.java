@@ -263,7 +263,7 @@ public class XomwLinkHolderArray {
 	*
 	* @param String $text
 	*/
-	public void Replace(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
+	public void replace(Xomw_parser_bfr pbfr) {
 		this.replaceInternal(pbfr);
 //			$this->replaceInterwiki( $text );
 	}
