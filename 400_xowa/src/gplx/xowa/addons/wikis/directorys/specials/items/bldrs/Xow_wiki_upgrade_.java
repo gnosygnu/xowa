@@ -88,7 +88,11 @@ public class Xow_wiki_upgrade_ {
 			// update page_id if any found
 			int page_ids_len = page_ids_list.Len();
 			if (page_ids_len > 0) {
-				int next_id = db_mgr.Db__core().Tbl__cfg().Select_int(Xowd_cfg_key_.Grp__db, Xowd_cfg_key_.Key__wiki__page__id_next);
+				int next_id = db_mgr.Db__core().Tbl__cfg().Assert_int(Xowd_cfg_key_.Grp__db, Xowd_cfg_key_.Key__wiki__page__id_next, Xowd_page_tbl.INVALID_PAGE_ID);
+				if (next_id == Xowd_page_tbl.INVALID_PAGE_ID) {
+					next_id = db_mgr.Db__core().Conn().Exec_select_max_as_int(Xowd_page_tbl.TBL_NAME, page_tbl.Fld_page_id(), 1);
+					next_id++;
+				}
 				for (int i = 0; i < page_ids_len; i++) {
 					int old_page_id = (int)page_ids_list.Get_at(i);
 					int new_page_id = next_id + i;

@@ -34,7 +34,7 @@ public class Xowdir_item_doc implements Mustache_doc_itm {
 		else if	(String_.Eq(key, "domain"))			bfr.Add_str_u8(domain);
 		else if	(String_.Eq(key, "name"))			bfr.Add_str_u8(name);
 		else if	(String_.Eq(key, "dir"))			bfr.Add_str_u8(dir);
-		else if	(String_.Eq(key, "mainpage"))		bfr.Add_str_u8(main_page);
+		else if	(String_.Eq(key, "main_page"))		bfr.Add_str_u8(main_page);
 		else										return false;
 		return true;
 	}

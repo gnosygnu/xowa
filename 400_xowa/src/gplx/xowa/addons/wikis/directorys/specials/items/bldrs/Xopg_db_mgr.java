@@ -129,6 +129,7 @@ public class Xopg_db_mgr {
 
 		// search_link
 		gplx.xowa.addons.wikis.searchs.dbs.Srch_db_mgr srch_db_mgr = new gplx.xowa.addons.wikis.searchs.dbs.Srch_db_mgr(db_mgr);
+		srch_db_mgr.Init(0);	// NOTE: num_pages doesn't matter for updating links
 		srch_db_mgr.Update_links(ns_id, old_id, new_id);
 		// NOTE: should clear search_results_cache, but for now, update_page_id is only called as a maint proc when wiki is loaded
 
