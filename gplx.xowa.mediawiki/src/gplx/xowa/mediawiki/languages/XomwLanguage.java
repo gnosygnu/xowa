@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mediawiki.languages; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
-import gplx.core.lists.hashs.*;
+import gplx.core.lists.*;
 import gplx.xowa.mediawiki.includes.*;
 public class XomwLanguage {
 //		/**
@@ -32,7 +32,7 @@ public class XomwLanguage {
 //		public $mExtendedSpecialPageAliases;
 //
 //		/** @var array|null */
-	private Hash_adp__int namespaceNames;
+	private HashByInt namespaceNames;
 //		protected $mNamespaceIds, $namespaceAliases;
 //
 //		/**
@@ -482,11 +482,11 @@ public class XomwLanguage {
 	*
 	* @return array
 	*/
-	public Hash_adp__int getNamespaces() {
+	public HashByInt getNamespaces() {
 		if (this.namespaceNames == null) {
 //				global $wgMetaNamespace, $wgMetaNamespaceTalk, $wgExtraNamespaces;
 //
-			Hash_adp__int validNamespaces = XomwNamespace.getCanonicalNamespaces();
+			HashByInt validNamespaces = XomwNamespace.getCanonicalNamespaces();
 //
 //				this.namespaceNames = $wgExtraNamespaces +
 //					self::$dataCache->getItem(this.mCode, 'namespaceNames');
@@ -563,9 +563,8 @@ public class XomwLanguage {
 	* @return String|boolean String if the namespace value exists, otherwise false
 	*/
 	public byte[] getNsText(int index) {
-		Hash_adp__int ns = this.getNamespaces();
+		HashByInt ns = this.getNamespaces();
 		return (byte[])ns.Get_by_or_null(index);
-//			return isset($ns[$index]) ? $ns[$index] : false;
 	}
 
 //		/**

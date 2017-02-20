@@ -204,7 +204,7 @@ public class XomwTitle {
 //			try {
 //				t.secureAndSplit();
 //				return t;
-//			} catch (MalformedTitleException $ex) {
+//			} catch (XomwMalformedTitleException $ex) {
 //				return null;
 //			}
 //		}
@@ -266,14 +266,14 @@ public class XomwTitle {
 
 		try {
 			return XomwTitle.newFromTextThrow(text, defaultNamespace);
-		} catch (MalformedTitleException ex) {
+		} catch (XomwMalformedTitleException ex) {
 			Err_.Noop(ex);
 			return null;
 		}
 	}
 
 	/**
-	* Like Title::newFromText(), but throws MalformedTitleException when the title is invalid,
+	* Like Title::newFromText(), but throws XomwMalformedTitleException when the title is invalid,
 	* rather than returning null.
 	*
 	* The exception subclasses encode detailed information about why the title is invalid.
@@ -283,7 +283,7 @@ public class XomwTitle {
 	* @since 1.25
 	* @param String $text Title text to check
 	* @param int $defaultNamespace
-	* @throws MalformedTitleException If the title is invalid
+	* @throws XomwMalformedTitleException If the title is invalid
 	* @return Title
 	*/
 	public static XomwTitle newFromTextThrow(byte[] text, int defaultNamespace) {
@@ -351,7 +351,7 @@ public class XomwTitle {
 //			try {
 //				t.secureAndSplit();
 //				return t;
-//			} catch (MalformedTitleException $ex) {
+//			} catch (XomwMalformedTitleException $ex) {
 //				return null;
 //			}
 //		}
@@ -543,7 +543,7 @@ public class XomwTitle {
 //			try {
 //				t.secureAndSplit();
 //				return t;
-//			} catch (MalformedTitleException $ex) {
+//			} catch (XomwMalformedTitleException $ex) {
 //				return null;
 //			}
 //		}
@@ -988,7 +988,7 @@ public class XomwTitle {
 		}
 
 //			try {
-			XomwMediaWikiTitleCodec formatter = getTitleFormatter();
+			XomwTitleFormatter formatter = getTitleFormatter();
 			return formatter.getNamespaceName(this.mNamespace, this.mDbkeyform);
 //			} catch (InvalidArgumentException $ex) {
 //				wfDebug(__METHOD__ . ': ' . $ex.getMessage() . "\n");
@@ -3351,7 +3351,7 @@ public class XomwTitle {
 	* namespace prefixes, sets the other forms, and canonicalizes
 	* everything.
 	*
-	* @throws MalformedTitleException On invalid titles
+	* @throws XomwMalformedTitleException On invalid titles
 	* @return boolean True on success
 	*/
 	private boolean secureAndSplit() {
@@ -3368,7 +3368,7 @@ public class XomwTitle {
 		// @note: getTitleParser() returns a TitleParser implementation which does not have a
 		//        splitTitleString method, but the only implementation (MediaWikiTitleCodec) does
 		XomwMediaWikiTitleCodec titleCodec = XomwMediaWikiServices.getInstance().getTitleParser();
-		// MalformedTitleException can be thrown here
+		// XomwMalformedTitleException can be thrown here
 		XomwMediaWikiTitleCodecParts parts = titleCodec.splitTitleString(dbkey, this.getDefaultNamespace());
 
 		// Fill fields

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
-import gplx.core.lists.hashs.*;
+import gplx.core.lists.*;
 /**
 * Include most things that are needed to make MediaWiki work.
 *
@@ -395,7 +395,7 @@ public class XomwSetup {
 	* Definitions of the NS_ constants are in Defines.php
 	* @private
 	*/
-	public static Hash_adp__int wgCanonicalNamespaceNames = new Hash_adp__int()
+	public static HashByInt wgCanonicalNamespaceNames = new HashByInt()
 		.Add_as_bry(XomwDefines.NS_MEDIA            ,  "Media")
 		.Add_as_bry(XomwDefines.NS_SPECIAL          ,  "Special")
 		.Add_as_bry(XomwDefines.NS_TALK             ,  "Talk")

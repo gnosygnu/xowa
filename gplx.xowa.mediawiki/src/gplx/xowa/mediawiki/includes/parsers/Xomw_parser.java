@@ -52,6 +52,17 @@ public class Xomw_parser {
 	public Xomw_quote_wkr          Quote_wkr()       {return quote_wkr;}      private final    Xomw_quote_wkr quote_wkr;
 	public Xomw_lnki_wkr           Lnki_wkr()        {return lnki_wkr;}       private final    Xomw_lnki_wkr lnki_wkr;
 	public boolean                 Output_type__wiki() {return output_type__wiki;} private final    boolean output_type__wiki = false;
+
+
+	private int mLinkID;
+	/**
+	* @return int
+	*/
+	public int nextLinkID() {
+		return this.mLinkID++;
+	}
+
+
 	public Xomw_parser() {
 		if (regex_space == null) {
 			synchronized (Type_adp_.ClassOf_obj(this)) {

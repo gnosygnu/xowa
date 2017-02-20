@@ -16,5 +16,5 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mediawiki.includes.title; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-public class MalformedTitleException extends Err { 	public MalformedTitleException(String name, byte[] text) {super(false, "", name, name);}
+public class XomwMalformedTitleException extends Err { 	public XomwMalformedTitleException(String name, byte[] text) {super(false, "", name, name);}
 }

@@ -675,16 +675,17 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //				$handler->parserTransformHook($this, $file);
 //			}
 	}
-//		protected function stripAltText( $caption, $holders ) {
+//		private byte[] stripAltText(byte[] caption, Xomw_link_holders holders) {
 //			// Strip bad stuff out of the title (tooltip).  We can't just use
 //			// replaceLinkHoldersText() here, because if this function is called
 //			// from replaceInternalLinks2(), mLinkHolders won't be up-to-date.
-//			if ( $holders ) {
-//				$tooltip = $holders->replaceText( $caption );
+//			byte[] tooltip;
+//			if (holders != null) {
+//				tooltip = holders.Replace(caption);
 //			} else {
-//				$tooltip = $this->replaceLinkHoldersText( $caption );
+//				tooltip = this.Replace_link_holders(caption);
 //			}
-//
+
 //			// make sure there are no placeholders in thumbnail attributes
 //			// that are later expanded to html- so expand them now and
 //			// remove the tags

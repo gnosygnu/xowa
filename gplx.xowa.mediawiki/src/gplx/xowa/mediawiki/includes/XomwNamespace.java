@@ -16,9 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
-import gplx.core.lists.hashs.*;
+import gplx.core.lists.*;
 public class XomwNamespace {
-//
 //		/**
 //		* These namespaces should always be first-letter capitalized, now and
 //		* forevermore. Historically, they could've probably been lowercased too,
@@ -192,12 +191,12 @@ public class XomwNamespace {
 	* @return array
 	* @since 1.17
 	*/
-	private static Hash_adp__int namespaces = null;
-	public static Hash_adp__int getCanonicalNamespaces() {return getCanonicalNamespaces(false);}
-	public static Hash_adp__int getCanonicalNamespaces(boolean rebuild) {
+	private static HashByInt namespaces = null;
+	public static HashByInt getCanonicalNamespaces() {return getCanonicalNamespaces(false);}
+	public static HashByInt getCanonicalNamespaces(boolean rebuild) {
 		if (namespaces == null || rebuild) {
 //				global $wgExtraNamespaces, $wgCanonicalNamespaceNames;
-			namespaces = XomwSetup.wgCanonicalNamespaceNames;
+			namespaces = XomwSetup.wgCanonicalNamespaceNames.Clone();
 			namespaces.Add_as_bry(XomwDefines.NS_MAIN, "");
 
 //				// Add extension namespaces

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.mediawiki.includes.title; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.mediawiki.languages.*;
 import gplx.xowa.mediawiki.includes.utls.*;
-public class XomwMediaWikiTitleCodec {
+public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 	/**
 	* @var Language
 	*/
@@ -120,7 +120,7 @@ public class XomwMediaWikiTitleCodec {
 //		* @param String $text The text to parse
 //		* @param int $defaultNamespace Namespace to assume per default (usually NS_MAIN)
 //		*
-//		* @throws MalformedTitleException
+//		* @throws XomwMalformedTitleException
 //		* @return TitleValue
 //		*/
 //		public function parseTitle($text, $defaultNamespace) {
@@ -131,7 +131,7 @@ public class XomwMediaWikiTitleCodec {
 //
 //			// Relative fragment links are not supported by TitleValue
 //			if ($parts['dbkey'] === '') {
-//				throw new MalformedTitleException('title-invalid-empty', $text);
+//				throw new XomwMalformedTitleException('title-invalid-empty', $text);
 //			}
 //
 //			return new TitleValue(
@@ -232,7 +232,7 @@ public class XomwMediaWikiTitleCodec {
 	* @param String $text
 	* @param int $defaultNamespace
 	*
-	* @throws MalformedTitleException If $text is not a valid title String.
+	* @throws XomwMalformedTitleException If $text is not a valid title String.
 	* @return array A map with the fields 'interwiki', 'fragment', 'namespace',
 	*         'user_case_dbkey', and 'dbkey'.
 	*/
@@ -260,7 +260,7 @@ public class XomwMediaWikiTitleCodec {
 
 //			if (strpos(dbkey, UtfNormal\Constants::UTF8_REPLACEMENT) !== false) {
 //				// Contained illegal UTF-8 sequences or forbidden Unicode chars.
-//				throw new MalformedTitleException('title-invalid-utf8', text);
+//				throw new XomwMalformedTitleException('title-invalid-utf8', text);
 //			}
 
 		parts.dbkey = dbkey;
@@ -274,7 +274,7 @@ public class XomwMediaWikiTitleCodec {
 //			}
 
 		if (dbkey == Bry_.Empty) {
-			throw new MalformedTitleException("title-invalid-empty", text);
+			throw new XomwMalformedTitleException("title-invalid-empty", text);
 		}
 
 		// Namespace or interwiki prefix
@@ -296,11 +296,11 @@ public class XomwMediaWikiTitleCodec {
 //						if ($ns == NS_TALK && preg_match($prefixRegexp, dbkey, $x)) {
 //							if ($this->language->getNsIndex($x[1])) {
 //								// Disallow Talk:File:x type titles...
-//								throw new MalformedTitleException('title-invalid-talk-namespace', text);
+//								throw new XomwMalformedTitleException('title-invalid-talk-namespace', text);
 //							} elseif (Interwiki::isValidInterwiki($x[1])) {
 //								// TODO: get rid of global state!
 //								// Disallow Talk:Interwiki:x type titles...
-//								throw new MalformedTitleException('title-invalid-talk-namespace', text);
+//								throw new XomwMalformedTitleException('title-invalid-talk-namespace', text);
 //							}
 //						}
 //					} elseif (Interwiki::isValidInterwiki($p)) {
@@ -359,7 +359,7 @@ public class XomwMediaWikiTitleCodec {
 //			$rxTc = self::getTitleInvalidRegex();
 //			$matches = [];
 //			if (preg_match($rxTc, dbkey, $matches)) {
-//				throw new MalformedTitleException('title-invalid-characters', text, [ $matches[0] ]);
+//				throw new XomwMalformedTitleException('title-invalid-characters', text, [ $matches[0] ]);
 //			}
 
 		// Pages with "/./" or "/../" appearing in the URLs will often be un-
@@ -377,12 +377,12 @@ public class XomwMediaWikiTitleCodec {
 //					substr(dbkey, -3) == '/..'
 //				)
 //			) {
-//				throw new MalformedTitleException('title-invalid-relative', text);
+//				throw new XomwMalformedTitleException('title-invalid-relative', text);
 //			}
 
 		// Magic tilde sequences? Nu-uh!
 //			if (strpos(dbkey, '~~~') !== false) {
-//				throw new MalformedTitleException('title-invalid-magic-tilde', text);
+//				throw new XomwMalformedTitleException('title-invalid-magic-tilde', text);
 //			}
 
 		// Limit the size of titles to 255 bytes. This is typically the size of the
@@ -391,7 +391,7 @@ public class XomwMediaWikiTitleCodec {
 		// to subpage syntax for long titles, e.g. [[Special:Block/Long name]]
 //			$maxLength = (parts['namespace'] != NS_SPECIAL) ? 255 : 512;
 //			if (strlen(dbkey) > $maxLength) {
-//				throw new MalformedTitleException('title-invalid-too-long', text,
+//				throw new XomwMalformedTitleException('title-invalid-too-long', text,
 //					[ Message::numParam($maxLength) ]);
 //			}
 
@@ -407,7 +407,7 @@ public class XomwMediaWikiTitleCodec {
 		// self-links with a fragment identifier.
 //			if (dbkey == '' && parts['interwiki'] === '') {
 //				if (parts['namespace'] != NS_MAIN) {
-//					throw new MalformedTitleException('title-invalid-empty', text);
+//					throw new XomwMalformedTitleException('title-invalid-empty', text);
 //				}
 //			}
 
@@ -423,7 +423,7 @@ public class XomwMediaWikiTitleCodec {
 
 		// Any remaining initial :s are illegal.
 		if (dbkey != Bry_.Empty && Byte_ascii.Colon == dbkey[0]) {
-			throw new MalformedTitleException("title-invalid-leading-colon", text);
+			throw new XomwMalformedTitleException("title-invalid-leading-colon", text);
 		}
 
 		// Fill fields
