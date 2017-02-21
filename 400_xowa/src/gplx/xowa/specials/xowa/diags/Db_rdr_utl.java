@@ -19,7 +19,7 @@ package gplx.xowa.specials.xowa.diags; import gplx.*; import gplx.xowa.*; import
 import gplx.core.stores.*;
 import gplx.dbs.*;
 import gplx.dbs.engines.mems.*;
-class Db_rdr_utl {
+public class Db_rdr_utl {
 	public static void Load_and_write(Db_conn conn, String sql, Bry_bfr bfr) {
 		Write_to_bfr(bfr, Load(conn, sql));
 	}
