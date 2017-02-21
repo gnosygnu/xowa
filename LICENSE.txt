@@ -9,7 +9,7 @@ or alternatively under the terms of the Apache License Version 2.0.
 You may use XOWA according to either of these licenses as is most appropriate
 for your project on a case-by-case basis.
 
-The terms of each license can be found in the main directory:
+The terms of each license can be found in the following files:
 
-GPL3 License: LICENSE-GPL3.txt
+GPLv3 License: LICENSE-GPLv3.txt
 Apache License: LICENSE-APACHE2.txt
