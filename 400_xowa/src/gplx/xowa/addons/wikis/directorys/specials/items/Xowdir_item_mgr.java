@@ -50,6 +50,7 @@ class Xowdir_item_mgr {
 		Io_url fil_url = dir_url.GenSubFil(domain + ".xowa");
 		Xowdir_wiki_json json = Xowdir_wiki_json.New_empty();
 		json.Name_(name);
+		json.Main_page_(mainpage_name);
 		String wiki_json = json.To_str(json_wtr);
 		db_mgr.Tbl__wiki().Upsert(id, domain, fil_url, wiki_json);
 
