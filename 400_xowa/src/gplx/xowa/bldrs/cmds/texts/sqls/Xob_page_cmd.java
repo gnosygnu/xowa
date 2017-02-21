@@ -35,7 +35,11 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 		this.db_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();
 		this.page_core_tbl = db_mgr.Tbl__page();
 		this.text_zip_mgr = wiki.Utl__zip_mgr();
-		text_zip_tid = Xobldr_cfg.Zip_mode__text(app);
+		this.text_zip_tid = Xobldr_cfg.Zip_mode__text(app);
+
+		// NOTE: rebuild needed to add canonical namespaces as templates; else, redirects to English namespaces won't work in non-English wikis; EX: gu.w and #REDIRECT [[Template:COLON]]; DATE:2017-02-20
+		Xow_ns_mgr_.rebuild_(wiki.Lang(), wiki.Ns_mgr());
+
 		this.ns_to_db_mgr = new Xob_ns_to_db_mgr(new Xob_ns_to_db_wkr__text(), db_mgr, Xobldr_cfg.Max_size__text(app));
 		this.dg_match_mgr = Dg_match_mgr.New_mgr(app, wiki);
 		if (dg_match_mgr != null) redirect_id_enabled = true; // always enable redirect_id if dg_match_mgr enabled; DATE:2016-01-04

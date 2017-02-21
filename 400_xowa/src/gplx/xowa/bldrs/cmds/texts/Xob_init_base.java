@@ -41,11 +41,15 @@ public abstract class Xob_init_base implements Xob_cmd, Gfo_invk {
 	}
 	public void Cmd_end() {
 		wiki.Appe().Gui_mgr().Html_mgr().Portal_mgr().Wikis().Itms_reset();	// dirty wiki list so that next refresh will load itm
+
 		// if (wiki.Appe().Setup_mgr().Dump_mgr().Css_wiki_update()) {	// NOTE: used to be option, but was no longer being set; may need to reinstate; DATE:2016-12-21
 			Io_url url = wiki.Appe().Fsys_mgr().Wiki_css_dir(wiki.Domain_str()).GenSubFil(Xoa_css_extractor.Css_wiki_name);
 			usr_dlg.Log_many("", "", "deleting css: ~{0}", url.Raw());
 			Io_mgr.Instance.DeleteFil_args(url).MissingFails_off().Exec();
 		// }
+
+		// always save xowa_cfg import data now; note that other builder commands will load cfg and overwrite data with null; DATE:2017-02-20
+		gplx.xowa.wikis.data.Xowd_cfg_tbl_.Insert__import(wiki);
 	}
 	@gplx.Virtual public void Cmd_term() {}
 	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

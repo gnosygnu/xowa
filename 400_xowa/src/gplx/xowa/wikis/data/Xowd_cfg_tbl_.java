@@ -32,9 +32,9 @@ public class Xowd_cfg_tbl_ {
 
 	public static void Insert__import(Xowe_wiki wiki) {
 		Db_cfg_tbl cfg_tbl = wiki.Data__core_mgr().Db__core().Tbl__cfg();
-		cfg_tbl.Insert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__bldr_version, wiki.Props().Bldr_version());
-		cfg_tbl.Insert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__siteinfo_misc, wiki.Props().Siteinfo_misc());
-		cfg_tbl.Insert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__siteinfo_mainpage, wiki.Props().Siteinfo_mainpage());
+		cfg_tbl.Upsert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__bldr_version, wiki.Props().Bldr_version());
+		cfg_tbl.Upsert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__siteinfo_misc, wiki.Props().Siteinfo_misc());
+		cfg_tbl.Upsert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__siteinfo_mainpage, wiki.Props().Siteinfo_mainpage());
 	}
 	public static void Insert__create(Xowe_wiki wiki)     {Insert__create(wiki.Data__core_mgr().Db__core().Tbl__cfg(), wiki.Domain_str(), wiki.Domain_str(), wiki.Props().Main_page());}
 	public static void Insert__create(Db_cfg_tbl cfg_tbl, String domain, String name, byte[] main_page) {
