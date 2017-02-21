@@ -44,6 +44,7 @@ public class Xow_wiki_props {
 	public void Main_page_        (byte[] v) {main_page = v;}
 	public void Siteinfo_mainpage_(byte[] v) {siteinfo_mainpage = v;}
 	public void Siteinfo_misc_(byte[] v) {
+		if (v == null) return; // exit else will fail for personal wikis which don't have a siteinfo_misc
 		this.siteinfo_misc = v;
 		int pipe_0 = Bry_find_.Find_fwd(v, Byte_ascii.Pipe);
 		if (pipe_0 != Bry_find_.Not_found)
