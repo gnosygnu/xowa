@@ -50,18 +50,19 @@ public class Xow_wiki_props {
 			this.site_name = Bry_.Mid(siteinfo_misc, 0, pipe_0);
 	}
 
-	// inits
+	// Init_by_ctor initializes by domain_name, not by db
 	public void Init_by_ctor(int domain_tid, byte[] domain_bry) {
-		// site_name is based on domain_tid; EX: "Wikipedia"
+		// initialize site_name to something based on domain_tid; EX: "Wikipedia"
+		// note that "home" becomes "Home"; will be changed back to "home" in Init_by_load_2
 		this.site_name = Bry_.new_a7(String_.UpperFirst(String_.new_a7(Xow_domain_tid_.Get_type_as_bry(domain_tid))));
 
 		// server_name is domain; EX: "en.wikipedia.org"
-		this.server_name = domain_bry;																	
+		this.server_name = domain_bry;						
 
 		// server_name is https: + domain EX: "https://en.wikipedia.org"
 		this.server = Bry_.Add(gplx.core.net.Gfo_protocol_itm.Itm_https.Text_bry(), domain_bry);
 	}
-	// called by wiki.Init_by_load; leaving as separate proc b/c of "if (app.Bldr__running())"; DATE:2017-02-17
+	// Init_by_load initializes by db; called after Init_by_ctor but before Init_by_load_2; should be replaced by Init_by_load_2, but leaving as separate proc b/c of "if (app.Bldr__running())"; DATE:2017-02-17
 	public void Init_by_load(Xoa_app app, gplx.dbs.cfgs.Db_cfg_tbl cfg_tbl) {
 		if (app.Bldr__running()) return;	// never load main_page during bldr; note that Init_by_load is called by bldr cmds like css; DATE:2015-07-24
 
@@ -74,12 +75,20 @@ public class Xow_wiki_props {
 
 		this.modified_latest = cfg_tbl.Select_date_or(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__modified_latest, null);
 	}
-	// called by Xodb_load_mgr_sql; note that it might be called during bldr; DATE:2017-02-17
+	// Init_by_load_2 is called by Xodb_load_mgr_sql; note that it might be called during bldr; DATE:2017-02-17
 	public void Init_by_load_2(byte[] main_page, byte[] bldr_version, byte[] siteinfo_misc, byte[] siteinfo_mainpage, DateAdp modified_latest) {
 		this.main_page = main_page;
+		if	(main_page == null) {			// main_page not found
+			Xoa_app_.Usr_dlg().Warn_many("", "", "mw_props.load; main_page not found2");
+			this.main_page = Xoa_page_.Main_page_bry;
+		}
+
 		this.bldr_version = bldr_version;
-		this.siteinfo_misc = siteinfo_misc;
 		this.siteinfo_mainpage = siteinfo_mainpage;
 		this.modified_latest = modified_latest;
+
+		// note that Siteinfo_misc_ must be called b/c site_name should come from xowa_cfg / dump.xml's siteinfo_misc, not Init_by_ctor's Get_type_as_bry
+		// doing "this.siteinfo_misc = siteinfo_misc" will cause "home" to be "Home" and diag will fail; DATE:2017-02-21
+		this.Siteinfo_misc_(siteinfo_misc);
 	}
 }
