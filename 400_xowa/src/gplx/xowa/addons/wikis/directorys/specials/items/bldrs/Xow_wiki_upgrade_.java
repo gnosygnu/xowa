@@ -87,9 +87,15 @@ public class Xow_wiki_upgrade_ {
 			int page_ids_len = page_ids_list.Len();
 			if (page_ids_len > 0) {
 				int next_id = db_mgr.Db__core().Tbl__cfg().Assert_int(Xowd_cfg_key_.Grp__db, Xowd_cfg_key_.Key__wiki__page__id_next, Xowd_page_tbl.INVALID_PAGE_ID);
+				// no "next_id" found in xowa_cfg
 				if (next_id == Xowd_page_tbl.INVALID_PAGE_ID) {
-					next_id = db_mgr.Db__core().Conn().Exec_select_max_as_int(Xowd_page_tbl.TBL_NAME, page_tbl.Fld_page_id(), 1);
-					next_id++;
+					// get max page_id
+					int max_page_id = db_mgr.Db__core().Conn().Exec_select_max_as_int(Xowd_page_tbl.TBL_NAME, page_tbl.Fld_page_id(), 1);
+
+					// note that max_page_id can be -1 or 0 for v4.2 personal wikis; EX: only one page created and it has an id of -1
+					next_id = max_page_id < 1
+						? 1
+						: max_page_id + 1;
 				}
 				for (int i = 0; i < page_ids_len; i++) {
 					int old_page_id = (int)page_ids_list.Get_at(i);
