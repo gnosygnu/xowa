@@ -30,18 +30,18 @@ public class Xowd_cfg_tbl_ {
 		return rv;
 	}
 
-	public static void Insert__import(Xowe_wiki wiki) {
+	public static void Upsert__import(Xowe_wiki wiki) {
 		Db_cfg_tbl cfg_tbl = wiki.Data__core_mgr().Db__core().Tbl__cfg();
 		cfg_tbl.Upsert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__bldr_version, wiki.Props().Bldr_version());
 		cfg_tbl.Upsert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__siteinfo_misc, wiki.Props().Siteinfo_misc());
 		cfg_tbl.Upsert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__siteinfo_mainpage, wiki.Props().Siteinfo_mainpage());
 	}
-	public static void Insert__create(Xowe_wiki wiki)     {Insert__create(wiki.Data__core_mgr().Db__core().Tbl__cfg(), wiki.Domain_str(), wiki.Domain_str(), wiki.Props().Main_page());}
-	public static void Insert__create(Db_cfg_tbl cfg_tbl, String domain, String name, byte[] main_page) {
-		cfg_tbl.Insert_str(Xowd_cfg_key_.Grp__empty    , Xowd_cfg_key_.Key__wiki__core__domain      , domain);
-		cfg_tbl.Insert_str(Xowd_cfg_key_.Grp__empty    , Xowd_cfg_key_.Key__wiki__core__name        , name);
-		cfg_tbl.Insert_int(Xowd_cfg_key_.Grp__empty    , Xowd_cfg_key_.Key__wiki__upgrade__version  , gplx.xowa.addons.wikis.directorys.specials.items.bldrs.Xow_wiki_upgrade_.Upgrade_version__cur);
-		cfg_tbl.Insert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__main_page         , main_page);
-		cfg_tbl.Insert_str(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__modified_latest   , Datetime_now.Get().XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
+	public static void Upsert__create(Xowe_wiki wiki)     {Upsert__create(wiki.Data__core_mgr().Db__core().Tbl__cfg(), wiki.Domain_str(), wiki.Domain_str(), wiki.Props().Main_page());}
+	public static void Upsert__create(Db_cfg_tbl cfg_tbl, String domain, String name, byte[] main_page) {
+		cfg_tbl.Upsert_str(Xowd_cfg_key_.Grp__empty    , Xowd_cfg_key_.Key__wiki__core__domain      , domain);
+		cfg_tbl.Upsert_str(Xowd_cfg_key_.Grp__empty    , Xowd_cfg_key_.Key__wiki__core__name        , name);
+		cfg_tbl.Upsert_int(Xowd_cfg_key_.Grp__empty    , Xowd_cfg_key_.Key__wiki__upgrade__version  , gplx.xowa.addons.wikis.directorys.specials.items.bldrs.Xow_wiki_upgrade_.Upgrade_version__cur);
+		cfg_tbl.Upsert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__main_page         , main_page);
+		cfg_tbl.Upsert_str(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__modified_latest   , Datetime_now.Get().XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
 	}
 }

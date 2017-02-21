@@ -29,7 +29,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		db_core.Tbl__site_stats().Select(wiki.Stats());
 		db_core.Tbl__ns().Select_all(wiki.Ns_mgr());
 	}
-	private void Load_cfg(Xowe_wiki wiki) {
+	private static void Load_cfg(Xow_wiki wiki) {
 		byte[] main_page = null, bldr_version = null, siteinfo_misc = null, siteinfo_mainpage = null;
 		DateAdp modified_latest = null;
 

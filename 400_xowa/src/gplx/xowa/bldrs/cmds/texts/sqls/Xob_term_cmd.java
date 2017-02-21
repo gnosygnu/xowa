@@ -25,10 +25,6 @@ public class Xob_term_cmd extends Xob_term_base {
 		// delete wiki's temp dir
 		Io_mgr.Instance.DeleteDirDeep(wiki.Fsys_mgr().Tmp_dir());
 
-		// insert cfg defaults
-		Xowd_cfg_tbl_.Insert__import(wiki);
-		Xowd_cfg_tbl_.Insert__create(wiki);
-
 		// build fsdb
 		gplx.fsdb.Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, false);// always build file.user db; DATE:2015-05-12
 

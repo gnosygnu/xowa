@@ -19,6 +19,7 @@ package gplx.xowa.bldrs.cmds.texts; import gplx.*; import gplx.xowa.*; import gp
 import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.cmds.texts.xmls.*;
 import gplx.xowa.bldrs.css.*; import gplx.xowa.wikis.domains.*;
+import gplx.xowa.wikis.data.*;
 public abstract class Xob_init_base implements Xob_cmd, Gfo_invk {
 	private Xob_bldr bldr; private Xowe_wiki wiki; private Gfo_usr_dlg usr_dlg;
 	private byte wbase_enabled = Bool_.__byte;
@@ -48,8 +49,11 @@ public abstract class Xob_init_base implements Xob_cmd, Gfo_invk {
 			Io_mgr.Instance.DeleteFil_args(url).MissingFails_off().Exec();
 		// }
 
-		// always save xowa_cfg import data now; note that other builder commands will load cfg and overwrite data with null; DATE:2017-02-20
-		gplx.xowa.wikis.data.Xowd_cfg_tbl_.Insert__import(wiki);
+		// always save xowa_cfg data at end of init step, not term step; else, other builder commands will load empty cfg and import data will be null; DATE:2017-02-20
+		if (!gplx.core.envs.Env_.Mode_testing()) {	// need else Xob_init_base_tst fails; DATE:2017-02-20
+			Xowd_cfg_tbl_.Upsert__import(wiki);
+			Xowd_cfg_tbl_.Upsert__create(wiki);
+		}
 	}
 	@gplx.Virtual public void Cmd_term() {}
 	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

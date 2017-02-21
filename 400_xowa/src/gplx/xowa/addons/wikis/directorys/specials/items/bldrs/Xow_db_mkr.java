@@ -60,7 +60,7 @@ public class Xow_db_mkr {
 		Xowd_core_db_props props = new Xowd_core_db_props(2, Xow_db_layout.Itm_all, Xow_db_layout.Itm_all, Xow_db_layout.Itm_all, Io_stream_tid_.Tid__raw, Io_stream_tid_.Tid__raw, Bool_.N, Bool_.N);
 		props.Cfg_save(cfg_tbl);
 
-		Xowd_cfg_tbl_.Insert__create(cfg_tbl, data.Domain(), wiki_name, mainpage_name);
+		Xowd_cfg_tbl_.Upsert__create(cfg_tbl, data.Domain(), wiki_name, mainpage_name);
 
 		// insert data: page
 		Xopg_db_mgr.Create

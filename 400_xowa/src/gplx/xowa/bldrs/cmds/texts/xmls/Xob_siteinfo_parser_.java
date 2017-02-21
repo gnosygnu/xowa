@@ -34,6 +34,7 @@ public class Xob_siteinfo_parser_ {
 		Xob_siteinfo_nde nde = Parse(String_.new_u8(siteinfo_bry), wiki.Ns_mgr());
 		wiki.Props().Bldr_version_(Bry_.new_a7(Xoa_app_.Version));
 		wiki.Props().Main_page_(nde.Main_page());
+		wiki.Props().Siteinfo_mainpage_(nde.Main_page());
 		Bry_bfr bfr = Bry_bfr_.New().Add_str_u8(nde.Site_name()).Add_byte_pipe().Add_str_u8(nde.Generator()).Add_byte_pipe().Add_str_u8(nde.Case_dflt()).Add_byte_pipe();
 		wiki.Props().Siteinfo_misc_(bfr.To_bry_and_clear());
 	}

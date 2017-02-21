@@ -35,7 +35,8 @@ public abstract class Xob_term_base implements Xob_cmd, Gfo_invk {
 
 		// update main page
 		byte[] new_main_page = gplx.xowa.langs.msgs.Xow_mainpage_finder.Find_or(wiki, wiki.Props().Siteinfo_mainpage());	// get new main_page from mainpage_finder
-		wiki.Props().Main_page_update_(new_main_page);
+		wiki.Props().Main_page_(new_main_page);
+		wiki.Data__core_mgr().Db__core().Tbl__cfg().Upsert_bry(gplx.xowa.wikis.data.Xowd_cfg_key_.Grp__wiki_init, gplx.xowa.wikis.data.Xowd_cfg_key_.Key__init__main_page         , new_main_page);
 
 		// remove import marker
 		app.Bldr().Import_marker().End(wiki);

@@ -44,13 +44,7 @@ public class Xow_wiki_props {
 	public void ContentLanguage_  (byte[] v) {content_language = v;} 
 	public void Bldr_version_     (byte[] v) {bldr_version = v;}
 	public void Main_page_        (byte[] v) {main_page = v;}
-	public void Main_page_update_(byte[] v) {
-		// old main_page comes directly from <siteinfo>; store it in siteinfo_mainpage for record's sake
-		this.siteinfo_mainpage = main_page;
-
-		// update main_page to new_main_page
-		this.main_page = v;
-	}
+	public void Siteinfo_mainpage_(byte[] v) {siteinfo_mainpage = v;}
 	public void Siteinfo_misc_(byte[] v) {
 		this.siteinfo_misc = v;
 		int pipe_0 = Bry_find_.Find_fwd(v, Byte_ascii.Pipe);
