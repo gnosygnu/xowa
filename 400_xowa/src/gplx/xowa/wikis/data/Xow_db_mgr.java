@@ -163,8 +163,13 @@ public class Xow_db_mgr {
 							add = true;                    // text will be in db if solo; 
 							break;
 						case Xow_db_file_.Tid__text:       // EX: "en.wikipedia.org-text-ns.000.xowa"
-							int db_ns_id = Int_.parse(db.Ns_ids());
-							add = db_ns_id == ns_id;       // text will be in db if ns matches; EX: en.wikipedia.org-text-ns.014.xowa
+							int[] db_ns_ids = Int_.Ary_parse(db.Ns_ids(), "|"); // need to handle both "0" and "0|4"
+							for (int db_ns_id : db_ns_ids) {								
+								if (db_ns_id == ns_id) {
+									add = true;				// text will be in db if ns matches; EX: en.wikipedia.org-text-ns.014.xowa
+									break;
+								}
+							}
 							break;
 					}
 					break;
