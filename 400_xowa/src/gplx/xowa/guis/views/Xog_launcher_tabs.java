@@ -40,7 +40,8 @@ class Xog_launcher_tabs {
 				String launch_url = launch_urls[i];
 				Launch_tab(win, home_wiki, launch_url);
 			}
-			app.Gui_mgr().Browser_win().Tab_mgr().Tabs_select_by_idx(startup_tabs.Startup_idx());
+			if (startup_tabs.Startup_idx() != -1)
+				app.Gui_mgr().Browser_win().Tab_mgr().Tabs_select_by_idx(startup_tabs.Startup_idx());
 			fil_marker.End();
 			return true;
 		}

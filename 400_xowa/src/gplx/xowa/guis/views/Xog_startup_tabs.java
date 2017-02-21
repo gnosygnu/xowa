@@ -94,7 +94,12 @@ public class Xog_startup_tabs {
 		app.Cfg().Set_str_app(Cfg__prev_version, Xoa_app_.Version);
 		if (String_.Eq(app.Cfg().Get_str_app_or(Cfg__startup_type, Opt__startup_type__previous), Opt__startup_type__previous)) {
 			app.Cfg().Set_str_app(Cfg__prev_list	, Calc_previous_tabs(app.Gui_mgr().Browser_win().Tab_mgr()));
-			app.Cfg().Set_int_app(Cfg__prev_selected, app.Gui_mgr().Browser_win().Tab_mgr().Active_tab().Tab_idx());
+
+			// save prev_selected
+			int prev_selected = app.Gui_mgr().Browser_win().Tab_mgr().Tabs_len() == 0 // must check for 0 tabs, else null ref
+				? -1
+				: app.Gui_mgr().Browser_win().Tab_mgr().Active_tab().Tab_idx();
+			app.Cfg().Set_int_app(Cfg__prev_selected, prev_selected);
 		}
 	}
 	private static String Calc_previous_tabs(gplx.xowa.guis.views.Xog_tab_mgr tab_mgr) {
