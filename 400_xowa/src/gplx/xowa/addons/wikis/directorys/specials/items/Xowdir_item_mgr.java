@@ -110,6 +110,9 @@ class Xowdir_item_mgr {
 		gplx.xowa.addons.wikis.searchs.bldrs.Srch_bldr_mgr_.Setup(wiki);
 		app.Bldr().Run();
 
+		// clear cache
+		gplx.xowa.addons.wikis.searchs.Srch_search_addon.Get(wiki).Clear_rslts_cache();;
+
 		// send notify
 		app.Gui__cbk_mgr().Send_notify(cbk_trg, "search reindex done");
 	}
