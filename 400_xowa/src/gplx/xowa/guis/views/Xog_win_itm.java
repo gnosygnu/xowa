@@ -268,16 +268,33 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	public byte[] App__retrieve_by_url(String url_str, String output_str) {
 		synchronized (App__retrieve__lock) {
 			boolean output_html = String_.Eq(output_str, "html");
+
+			// parse url according to rules of home_wiki; 
 			Xowe_wiki home_wiki = app.Usere().Wiki();
 			Xoa_url url = home_wiki.Utl__url_parser().Parse_by_urlbar_or_null(url_str); if (url == null) return Bry_.Empty;
+
+			// get wiki from url
 			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(url.Wiki_bry());
+
+			// parse url again, but this time according to rules of actual wiki
+			wiki.Utl__url_parser().Parse(Bry_.new_u8(url_str));
+
+			// get title
 			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, url.Page_bry());
-			Xoae_page new_page = wiki.Data_mgr().Load_page_and_parse(url, ttl);
-			if (new_page.Db().Page().Exists_n()) {return Bry_.Empty;}
-			gplx.xowa.apps.servers.Gxw_html_server.Assert_tab(app, new_page);		// HACK: assert at least 1 tab for Firefox addon; DATE:2015-01-23
+
+			// get tab for Load_page
+			gplx.xowa.apps.servers.Gxw_html_server.Assert_tab(app, Xoae_page.Empty);		// HACK: assert at least 1 tab for Firefox addon; DATE:2015-01-23
 			Xog_tab_itm tab = tab_mgr.Active_tab();
+
+			// get page
+			Xoae_page new_page = wiki.Page_mgr().Load_page(url, ttl, tab);
+			if (new_page.Db().Page().Exists_n()) {return Bry_.Empty;}
+
+			// update tab-specific vars
 			tab.Page_(new_page);
-			tab.History_mgr().Add(new_page);			
+			tab.History_mgr().Add(new_page);
+
+			// gen html
 			byte[] rv = output_html
 				? wiki.Html_mgr().Page_wtr_mgr().Gen(new_page, tab.View_mode())
 				: new_page.Db().Text().Text_bry();
