@@ -36,8 +36,8 @@ class Xoa_cmd_arg_mgr_ {
 			, newLine
 			, "The terms of each license can be found in the following files:", lineEnd
 			, newLine
-			, "GPLv3 License: LICENSE-GPLv3.txt"
-			, "Apache License: LICENSE-APACHE2.txt"
+			, "GPLv3 License: LICENSE-GPLv3.txt", lineEnd
+			, "Apache License: LICENSE-APACHE2.txt", lineEnd
 			, codeEnd
 			, hdr_end
 			);
