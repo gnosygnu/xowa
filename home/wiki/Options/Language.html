@@ -1566,11 +1566,11 @@
           <div id='xowa.gui.app.font.size__name' class='xocfg_itm_name'>
             Font size
           </div>
-          <div id='xowa.gui.app.font.size__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+          <div id='xowa.gui.app.font.size__undo' data-xocfg-type='string' class='xocfg_itm_delete'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.app.font.size")' title="reset to &quot;8.0&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input id="xowa.gui.app.font.size" data-xocfg-key="xowa.gui.app.font.size" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="8.0">
+            <input id="xowa.gui.app.font.size" data-xocfg-key="xowa.gui.app.font.size" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="8">
           </div><input type='hidden' id='xowa.gui.app.font.size__key_box' value='xowa.gui.app.font.size'> <input type='hidden' id='xowa.gui.app.font.size__ctx_box' value='app'>
         </div>
         <div id='xowa.gui.app.font.size_help_div' class='xohelp_div'>
@@ -1587,83 +1587,6 @@
               </li>
               <li>
                 To change the fonts for the menu, you will need to do it through your Operating System. SWT does not support customizable fonts for menus: <a tabindex="-1" href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=29899" rel="nofollow" class="external free">https://bugs.eclipse.org/bugs/show_bug.cgi?id=29899</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <h2>
-          HTML box
-        </h2>
-        <div class="xocfg_row flex_div">
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.html_box.adj_type")' title='view more info'>&nbsp;</span>
-          </div>
-          <div id='xowa.gui.html_box.adj_type__name' class='xocfg_itm_name'>
-            Adjustment type
-          </div>
-          <div id='xowa.gui.html_box.adj_type__undo' data-xocfg-type='list:xowa.gui.html_box.adj_type' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.html_box.adj_type")' title="reset to &quot;none&quot;">&nbsp;</span>
-          </div>
-          <div class='xocfg_itm_data'>
-            <select id="xowa.gui.html_box.adj_type" data-xocfg-key="xowa.gui.html_box.adj_type" data-xocfg-type="list:xowa.gui.html_box.adj_type" accesskey="d" class="xocfg_data__list" size="3">
-              <option value="none" selected="selected">
-                none
-              </option>
-              <option value="relative">
-                relative
-              </option>
-              <option value="absolute">
-                absolute
-              </option>
-            </select>
-          </div><input type='hidden' id='xowa.gui.html_box.adj_type__key_box' value='xowa.gui.html_box.adj_type'> <input type='hidden' id='xowa.gui.html_box.adj_type__ctx_box' value='app'>
-        </div>
-        <div id='xowa.gui.html_box.adj_type_help_div' class='xohelp_div'>
-          <div id='xowa.gui.html_box.adj_type_help_msg' class='xohelp_msg'>
-            <p>
-              Choose one of the following:
-            </p>
-            <ul>
-              <li>
-                <b>none</b>: Take no action
-              </li>
-              <li>
-                <b>absolute</b>: Use absolute coordinates of html box rectangle
-              </li>
-              <li>
-                <b>relative</b>: Use relative adjustment to html box rectangle
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.html_box.adj_rect")' title='view more info'>&nbsp;</span>
-          </div>
-          <div id='xowa.gui.html_box.adj_rect__name' class='xocfg_itm_name'>
-            Adjustment rect
-          </div>
-          <div id='xowa.gui.html_box.adj_rect__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.html_box.adj_rect")' title="reset to &quot;0,0,0,0&quot;">&nbsp;</span>
-          </div>
-          <div class='xocfg_itm_data'>
-            <input id="xowa.gui.html_box.adj_rect" data-xocfg-key="xowa.gui.html_box.adj_rect" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="0,0,0,0">
-          </div><input type='hidden' id='xowa.gui.html_box.adj_rect__key_box' value='xowa.gui.html_box.adj_rect'> <input type='hidden' id='xowa.gui.html_box.adj_rect__ctx_box' value='app'>
-        </div>
-        <div id='xowa.gui.html_box.adj_rect_help_div' class='xohelp_div'>
-          <div id='xowa.gui.html_box.adj_rect_help_msg' class='xohelp_msg'>
-            <p>
-              Enter 'x,y,w,h' numbers separated by commas:
-            </p>
-            <ul>
-              <li>
-                <b>none</b>: blank; EX: ''
-              </li>
-              <li>
-                <b>absolute</b>: absolute rect of HTML box; EX: '0,40,1280,900' will place the html box at x=0,y=40,w=1280,h=900
-              </li>
-              <li>
-                <b>relative</b>: relative adjustment to xowa calc; EX: '1,2,-3,-4' will add x=1,y=2,w=-3,h=-4
               </li>
             </ul>
           </div>
@@ -1797,17 +1720,7 @@
       <ul>
         <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
         <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
-        <li>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="PQ529NWHCGDQ2">
-<div style="display:flex">
-  <span style="margin:2px 4px 0px 0px">XOWA</span>
-  <input type="image" height=14 src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-  <!--<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">-->
-</div>
-</form>        
-        </li>
+        <li><a href="http://xowa.org/home/Help/Donate" title="Support XOWA!">XOWA</a></li>
       </ul>
     </div>
   </div>

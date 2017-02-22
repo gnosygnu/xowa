@@ -76,7 +76,7 @@
           <option value='xowa.html.scripting'>
             HTML - Scripting
           </option>
-          <option value='xowa.files.general'>
+          <option value='xowa.files.general' selected='selected'>
             Files - General
           </option>
           <option value='xowa.files.apps'>
@@ -97,7 +97,7 @@
           <option value='xowa.addon.math'>
             Addon - Math
           </option>
-          <option value='xowa.addon.score' selected='selected'>
+          <option value='xowa.addon.score'>
             Addon - Score
           </option>
           <option value='xowa.addon.popups'>
@@ -115,141 +115,187 @@
         <div>
           <p id='page_help_para'>
           </p>
-          <table class="metadata plainlinks ambox ambox-delete" style="">
-            <tr>
-              <td class="mbox-empty-cell">
-              </td>
-              <td class="mbox-text" style="">
-                <p>
-                  <span class="mbox-text-span">ImageMagick must be set up in order for Score to work correctly.</span>
-                </p>
-                <p>
-                  <span class="mbox-text-span">See the following pages: <a tabindex="-1" href="/wiki/Dev/File/Setup/Windows" id="xolnki_33" title="Dev/File/Setup/Windows" class="xowa-visited">Dev/File/Setup/Windows</a>, <a tabindex="-1" href="/wiki/Dev/File/Setup/Linux" id="xolnki_34" title="Dev/File/Setup/Linux">Dev/File/Setup/Linux</a>, <a tabindex="-1" href="/wiki/Dev/File/Setup/Mac_OS_X" id="xolnki_35" title="Dev/File/Setup/Mac OS X">Dev/File/Setup/Mac OS X</a></span>
-                </p>
-              </td>
-            </tr>
-          </table>
         </div>
         <h2>
-          General
+          Basic
         </h2>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.enabled")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.retrieval_enabled")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.addon.score.enabled__name' class='xocfg_itm_name'>
-            Enabled
+          <div id='xowa.files.retrieval_enabled__name' class='xocfg_itm_name'>
+            Retrieval enabled
           </div>
-          <div id='xowa.addon.score.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+          <div id='xowa.files.retrieval_enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.retrieval_enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input id="xowa.addon.score.enabled" data-xocfg-key="xowa.addon.score.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.addon.score.enabled__key_box' value='xowa.addon.score.enabled'> <input type='hidden' id='xowa.addon.score.enabled__ctx_box' value='app'>
+            <input id="xowa.files.retrieval_enabled" data-xocfg-key="xowa.files.retrieval_enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.files.retrieval_enabled__key_box' value='xowa.files.retrieval_enabled'> <input type='hidden' id='xowa.files.retrieval_enabled__ctx_box' value='app'>
         </div>
-        <div id='xowa.addon.score.enabled_help_div' class='xohelp_div'>
-          <div id='xowa.addon.score.enabled_help_msg' class='xohelp_msg'>
+        <div id='xowa.files.retrieval_enabled_help_div' class='xohelp_div'>
+          <div id='xowa.files.retrieval_enabled_help_msg' class='xohelp_msg'>
             <p>
-              Handles &lt;score&gt; tags:
+              Choose one of the following:
             </p>
             <ul>
               <li>
-                <b>checked</b> to process through lilypond binary (lilypond must be installed and its path must be set: <a tabindex="-1" href="/wiki/Options/Apps" id="xolnki_36" title="Options/Apps">Options/Apps</a>
+                <b>checked</b> to automatically download images / retrieve images from database 
+                <ul>
+                  <li>
+                    ImageMagick and Inkscape <b>must</b> be installed (See <a tabindex="-1" href="/wiki/Dev/File/Setup" id="xolnki_27" title="Dev/File/Setup">Dev/File/Setup</a>)
+                  </li>
+                  <li>
+                    An internet connection must be available, or a local tarball must be set up. (See <a tabindex="-1" href="/wiki/Archive/Usage/Offline_images" id="xolnki_28" title="Archive/Usage/Offline images">Archive/Usage/Offline_images</a>)
+                  </li>
+                </ul>
               </li>
               <li>
-                <b>unchecked</b> to render text only
+                <b>unchecked</b> to leave images unprocessed
               </li>
             </ul>
           </div>
         </div>
         <h2>
-          Apps
+          Cache
         </h2>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.apps.lilypond")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.fsys_size_min")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.addon.score.apps.lilypond__name' class='xocfg_itm_name'>
-            Lilypond
+          <div id='xowa.files.cache.fsys_size_min__name' class='xocfg_itm_name'>
+            Minimum disk space used
           </div>
-          <div id='xowa.addon.score.apps.lilypond__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.apps.lilypond")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}lilypond\usr\bin\lilypond.exe|&quot;-dsafe=#t&quot; -dbackend=ps --png --header=texidoc -dmidi-extension=midi &quot;~{file}&quot;&quot;">&nbsp;</span>
+          <div id='xowa.files.cache.fsys_size_min__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.fsys_size_min")' title="reset to &quot;75&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.lilypond-exe" data-xocfg-key="xowa.addon.score.apps.lilypond" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="C:\000\100_bin\300_doc\300_aud\200_edit\100_lilypond\usr\bin\lilypond.exe"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.score.apps.lilypond-exe", "Please select a file.");'>&nbsp;</span><br>
-            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.score.apps.lilypond-arg" data-xocfg-key="xowa.addon.score.apps.lilypond" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="&quot;-dsafe=#t&quot; -dbackend=ps --png --header=texidoc -dmidi-extension=midi &quot;~{file}&quot;">
-          </div><input type='hidden' id='xowa.addon.score.apps.lilypond__key_box' value='xowa.addon.score.apps.lilypond'> <input type='hidden' id='xowa.addon.score.apps.lilypond__ctx_box' value='app'>
+            <input id="xowa.files.cache.fsys_size_min" data-xocfg-key="xowa.files.cache.fsys_size_min" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="75">
+          </div><input type='hidden' id='xowa.files.cache.fsys_size_min__key_box' value='xowa.files.cache.fsys_size_min'> <input type='hidden' id='xowa.files.cache.fsys_size_min__ctx_box' value='app'>
         </div>
-        <div id='xowa.addon.score.apps.lilypond_help_div' class='xohelp_div'>
-          <div id='xowa.addon.score.apps.lilypond_help_msg' class='xohelp_msg'>
+        <div id='xowa.files.cache.fsys_size_min_help_div' class='xohelp_div'>
+          <div id='xowa.files.cache.fsys_size_min_help_msg' class='xohelp_msg'>
             <p>
-              Converts Lilypond to music scores / midi files (Recommended: <a tabindex="-1" href="http://www.lilypond.org" rel="nofollow" class="external text">Lilypond</a>)
+              Enter a minimum size for the cache to use (in MB)<br>
+            </p>
+            <p>
+              This is an advanced configuration tweak. When the cache reaches its maximum size, it will delete files to free space. It will continue deleting files until the minimum size is reached.<br>
+            </p>
+            <p>
+              For example:
+            </p>
+            <ul>
+              <li>
+                If the max is set to 100 MB
+              </li>
+              <li>
+                ... and the current size of all files in the cache is 99.9 MB
+              </li>
+              <li>
+                ... and a 200 KB file is added
+              </li>
+              <li>
+                Then the cache size will be temporarily 100.1 MB
+              </li>
+              <li>
+                ... triggering the delete mechanism
+              </li>
+              <li>
+                ... which will reduce the current size of all files to 75 MB
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.fsys_size_max")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.files.cache.fsys_size_max__name' class='xocfg_itm_name'>
+            Maximum disk space used
+          </div>
+          <div id='xowa.files.cache.fsys_size_max__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.fsys_size_max")' title="reset to &quot;100&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.files.cache.fsys_size_max" data-xocfg-key="xowa.files.cache.fsys_size_max" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="100">
+          </div><input type='hidden' id='xowa.files.cache.fsys_size_max__key_box' value='xowa.files.cache.fsys_size_max'> <input type='hidden' id='xowa.files.cache.fsys_size_max__ctx_box' value='app'>
+        </div>
+        <div id='xowa.files.cache.fsys_size_max_help_div' class='xohelp_div'>
+          <div id='xowa.files.cache.fsys_size_max_help_msg' class='xohelp_msg'>
+            <p>
+              Enter a maximum size for the cache to use (in MB)<br>
             </p>
           </div>
         </div>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.apps.abc2ly")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.reduce_to_min")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.addon.score.apps.abc2ly__name' class='xocfg_itm_name'>
-            Python
+          <div id='xowa.files.cache.reduce_to_min__name' class='xocfg_itm_name'>
+            Reduce cache to min
           </div>
-          <div id='xowa.addon.score.apps.abc2ly__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.apps.abc2ly")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}lilypond\usr\bin\python.exe|abc2ly.py -s &quot;--output=~{target}&quot; &quot;~{source}&quot;&quot;">&nbsp;</span>
+          <div id='xowa.files.cache.reduce_to_min__undo' data-xocfg-type='btn' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.reduce_to_min")' title="reset to &quot;&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.abc2ly-exe" data-xocfg-key="xowa.addon.score.apps.abc2ly" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="C:\000\100_bin\300_doc\300_aud\200_edit\100_lilypond\usr\bin\python.exe"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.score.apps.abc2ly-exe", "Please select a file.");'>&nbsp;</span><br>
-            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.score.apps.abc2ly-arg" data-xocfg-key="xowa.addon.score.apps.abc2ly" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="abc2ly.py -s &quot;--output=~{target}&quot; &quot;~{source}&quot;">
-          </div><input type='hidden' id='xowa.addon.score.apps.abc2ly__key_box' value='xowa.addon.score.apps.abc2ly'> <input type='hidden' id='xowa.addon.score.apps.abc2ly__ctx_box' value='app'>
+            <button id="xowa.files.cache.reduce_to_min" data-xocfg-key="xowa.files.cache.reduce_to_min" data-xocfg-type="btn" class="xocfg_data__btn">Reduce cache to min</button>
+          </div><input type='hidden' id='xowa.files.cache.reduce_to_min__key_box' value='xowa.files.cache.reduce_to_min'> <input type='hidden' id='xowa.files.cache.reduce_to_min__ctx_box' value='app'>
         </div>
-        <div id='xowa.addon.score.apps.abc2ly_help_div' class='xohelp_div'>
-          <div id='xowa.addon.score.apps.abc2ly_help_msg' class='xohelp_msg'>
+        <div id='xowa.files.cache.reduce_to_min_help_div' class='xohelp_div'>
+          <div id='xowa.files.cache.reduce_to_min_help_msg' class='xohelp_msg'>
             <p>
-              Converts ABC notation to Lilypond <a tabindex="-1" href="http://www.lilypond.org" rel="nofollow" class="external text">Lilypond</a>
+              Press to reduce the cache to the minimum now (typically 75 MB).
             </p>
           </div>
         </div>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.apps.trim_img")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.clear")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.addon.score.apps.trim_img__name' class='xocfg_itm_name'>
-            ImageMagick - Trim
+          <div id='xowa.files.cache.clear__name' class='xocfg_itm_name'>
+            Clear cache
           </div>
-          <div id='xowa.addon.score.apps.trim_img__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.apps.trim_img")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}imagemagick\convert|-trim &quot;~{source}&quot; &quot;~{target}&quot;&quot;">&nbsp;</span>
+          <div id='xowa.files.cache.clear__undo' data-xocfg-type='btn' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.clear")' title="reset to &quot;&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.trim_img-exe" data-xocfg-key="xowa.addon.score.apps.trim_img" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}imagemagick\convert"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.score.apps.trim_img-exe", "Please select a file.");'>&nbsp;</span><br>
-            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.score.apps.trim_img-arg" data-xocfg-key="xowa.addon.score.apps.trim_img" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="-trim &quot;~{source}&quot; &quot;~{target}&quot;">
-          </div><input type='hidden' id='xowa.addon.score.apps.trim_img__key_box' value='xowa.addon.score.apps.trim_img'> <input type='hidden' id='xowa.addon.score.apps.trim_img__ctx_box' value='app'>
+            <button id="xowa.files.cache.clear" data-xocfg-key="xowa.files.cache.clear" data-xocfg-type="btn" class="xocfg_data__btn">Clear cache</button>
+          </div><input type='hidden' id='xowa.files.cache.clear__key_box' value='xowa.files.cache.clear'> <input type='hidden' id='xowa.files.cache.clear__ctx_box' value='app'>
         </div>
-        <div id='xowa.addon.score.apps.trim_img_help_div' class='xohelp_div'>
-          <div id='xowa.addon.score.apps.trim_img_help_msg' class='xohelp_msg'>
+        <div id='xowa.files.cache.clear_help_div' class='xohelp_div'>
+          <div id='xowa.files.cache.clear_help_msg' class='xohelp_msg'>
             <p>
-              Trims image <a tabindex="-1" href="http://www.imagemagick.org/" rel="nofollow" class="external text">ImageMagick</a>
+              Press to clear the cache (reduces to 0 MB).
             </p>
           </div>
         </div>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.score.apps.midi_to_ogg")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.info")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.addon.score.apps.midi_to_ogg__name' class='xocfg_itm_name'>
-            Convert midi to ogg
+          <div id='xowa.files.cache.info__name' class='xocfg_itm_name'>
+            Info
           </div>
-          <div id='xowa.addon.score.apps.midi_to_ogg__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.apps.midi_to_ogg")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}timidity\timidity|-Ov &quot;--output-file=~{target}&quot; &quot;~{source}&quot;&quot;">&nbsp;</span>
+          <div id='xowa.files.cache.info__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.info")' title="reset to &quot;cache folder: C:\xowa\file
+            space used: 4.773 MB
+            file count: 337
+            oldest file: 2017-02-20 21:57:41
+            &quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.midi_to_ogg-exe" data-xocfg-key="xowa.addon.score.apps.midi_to_ogg" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}timidity\timidity"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.score.apps.midi_to_ogg-exe", "Please select a file.");'>&nbsp;</span><br>
-            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.score.apps.midi_to_ogg-arg" data-xocfg-key="xowa.addon.score.apps.midi_to_ogg" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="-Ov &quot;--output-file=~{target}&quot; &quot;~{source}&quot;">
-          </div><input type='hidden' id='xowa.addon.score.apps.midi_to_ogg__key_box' value='xowa.addon.score.apps.midi_to_ogg'> <input type='hidden' id='xowa.addon.score.apps.midi_to_ogg__ctx_box' value='app'>
+<textarea id="xowa.files.cache.info" data-xocfg-key="xowa.files.cache.info" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo xocfg_data__readonly" readonly="true">
+cache folder: C:\xowa\file
+space used: 4.773 MB
+file count: 337
+oldest file: 2017-02-20 21:57:41
+</textarea>
+          </div><input type='hidden' id='xowa.files.cache.info__key_box' value='xowa.files.cache.info'> <input type='hidden' id='xowa.files.cache.info__ctx_box' value='app'>
         </div>
-        <div id='xowa.addon.score.apps.midi_to_ogg_help_div' class='xohelp_div'>
-          <div id='xowa.addon.score.apps.midi_to_ogg_help_msg' class='xohelp_msg'>
+        <div id='xowa.files.cache.info_help_div' class='xohelp_div'>
+          <div id='xowa.files.cache.info_help_msg' class='xohelp_msg'>
             <p>
-              Converts midi to ogg <a tabindex="-1" href="http://timidity.sourceforge.net/" rel="nofollow" class="external text">TiMidity++</a>
+              Miscellaneous information about the cache
             </p>
           </div>
         </div>
@@ -350,17 +396,7 @@
       <ul>
         <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
         <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
-        <li>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="PQ529NWHCGDQ2">
-<div style="display:flex">
-  <span style="margin:2px 4px 0px 0px">XOWA</span>
-  <input type="image" height=14 src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-  <!--<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">-->
-</div>
-</form>        
-        </li>
+        <li><a href="http://xowa.org/home/Help/Donate" title="Support XOWA!">XOWA</a></li>
       </ul>
     </div>
   </div>
