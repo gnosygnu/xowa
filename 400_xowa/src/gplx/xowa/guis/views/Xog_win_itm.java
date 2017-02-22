@@ -277,7 +277,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(url.Wiki_bry());
 
 			// parse url again, but this time according to rules of actual wiki
-			wiki.Utl__url_parser().Parse(Bry_.new_u8(url_str));
+			url = wiki.Utl__url_parser().Parse(Bry_.new_u8(url_str));
 
 			// get title
 			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, url.Page_bry());
