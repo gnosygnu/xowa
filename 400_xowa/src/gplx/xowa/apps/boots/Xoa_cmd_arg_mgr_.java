@@ -26,20 +26,18 @@ class Xoa_cmd_arg_mgr_ {
 			( codeBgn
 			, codeHdr
 			, hdr_bgn
-			, "Copyright (c) 2012-2016 gnosygnu@gmail.com", newLine
+			, "Copyright (c) 2012-2017 gnosygnu@gmail.com", newLine
 			, newLine
-			, "This program is free software: you can redistribute it and/or modify", lineEnd
-			, "it under the terms of the GNU Affero General Public License as", lineEnd
-			, "published by the Free Software Foundation, either version 3 of the", lineEnd
-			, "License, or (at your option) any later version.", newLine
+			, "XOWA is licensed under the terms of the General Public License (GPL) Version 3,", lineEnd
+			, "or alternatively under the terms of the Apache License Version 2.0.", lineEnd
 			, newLine
-			, "This program is distributed in the hope that it will be useful,", lineEnd
-			, "but WITHOUT ANY WARRANTY; without even the implied warranty of", lineEnd
-			, "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the", lineEnd
-			, "GNU Affero General Public License for more details.", newLine
+			, "You may use XOWA according to either of these licenses as is most appropriate", lineEnd
+			, "for your project on a case-by-case basis.", lineEnd
 			, newLine
-			, "You should have received a copy of the GNU Affero General Public License", lineEnd
-			, "along with this program.  If not, see <http://www.gnu.org/licenses/>.", newLine
+			, "The terms of each license can be found in the following files:", lineEnd
+			, newLine
+			, "GPLv3 License: LICENSE-GPLv3.txt"
+			, "Apache License: LICENSE-APACHE2.txt"
 			, codeEnd
 			, hdr_end
 			);
