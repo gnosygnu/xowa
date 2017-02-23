@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*; import gplx.core.tests.*;
-public class Xomw_string_utils__tst {
-	private final    Xomw_string_utils__fxt fxt = new Xomw_string_utils__fxt();
+public class XomwStringUtilsTest {
+	private final    XomwStringUtilsFxt fxt = new XomwStringUtilsFxt();
 	@Test  public void Delimiter_explode() {
 		// basic
 		fxt.Test__delimiter_explode("a|b|c"                             , "a", "b", "c");
@@ -42,17 +42,17 @@ public class Xomw_string_utils__tst {
 		fxt.Test__replace_markup("a!!b<!!>!!>!!c"   , "!!", "||", "a||b<!!>||>||c");	// NOTE: should probably be "!!>!!>", but unmatched ">" are escaped to "&gt;"
 	}
 }
-class Xomw_string_utils__fxt {
+class XomwStringUtilsFxt {
 	public void Test__delimiter_explode(String src_str, String... expd) {
 		List_adp tmp = List_adp_.New();
 		gplx.core.btries.Btrie_rv trv = new gplx.core.btries.Btrie_rv();
 
-		byte[][] actl = Xomw_string_utils.Delimiter_explode(tmp, trv, Bry_.new_u8(src_str));
+		byte[][] actl = XomwStringUtils.delimiterExplode(tmp, trv, Bry_.new_u8(src_str));
 		Gftest.Eq__ary(expd, actl, "src=~{0}", src_str);
 	}
 	public void Test__replace_markup(String src_str, String find, String repl, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		Xomw_string_utils.Replace_markup(src_bry, 0, src_bry.length, Bry_.new_a7(find), Bry_.new_a7(repl));
+		XomwStringUtils.replaceMarkup(src_bry, 0, src_bry.length, Bry_.new_a7(find), Bry_.new_a7(repl));
 		Gftest.Eq__str(expd, src_bry);
 	}
 }

@@ -203,7 +203,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// $text = $this->getConverterLanguage()->markNoConversion( $text );
 
 			byte[] url = Bry_.Mid(src, url_bgn, url_end);
-			url = sanitizer.Clean_url(url);
+			url = sanitizer.cleanUrl(url);
 
 			bfr.Add_mid(src, prv, lnke_bgn);
 			prv = cur;

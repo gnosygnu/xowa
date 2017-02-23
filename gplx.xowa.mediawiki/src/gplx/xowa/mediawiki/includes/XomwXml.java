@@ -53,7 +53,7 @@ public class XomwXml {
 			bfr.Add_byte_space();
 			bfr.Add((byte[])attribs.Get_at(i));
 			bfr.Add_byte_eq().Add_byte_quote();
-			XomwSanitizer.Encode_attribute(bfr, (byte[])attribs.Get_at(i + 1));
+			XomwSanitizer.encodeAttribute(bfr, (byte[])attribs.Get_at(i + 1));
 			bfr.Add_byte_quote();
 		}
 	}

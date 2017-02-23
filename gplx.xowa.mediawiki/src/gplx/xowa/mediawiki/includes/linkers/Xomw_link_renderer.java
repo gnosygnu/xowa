@@ -164,7 +164,7 @@ public class Xomw_link_renderer {
 
 		// Merge the custom attribs with the default ones, and iterate
 		// over that, deleting all "false" attributes.
-		sanitizer.Merge_attributes(src, trg);
+		sanitizer.mergeAttributes(src, trg);
 
 		// XO.MW:MW removes "false" values; XO removes "null" values
 		boolean deleted = false;

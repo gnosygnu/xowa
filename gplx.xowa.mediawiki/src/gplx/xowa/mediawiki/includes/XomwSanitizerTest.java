@@ -121,13 +121,20 @@ public class XomwSanitizerTest {
 		// cls: ws
 		fxt.Test__merge_attributes(src_atrs.Clear().Add_many(cls, "  v1   v2  "), trg_atrs.Clear().Add_many(cls, "  v3   v4   "), expd_atrs.Clear().Add_many(cls, "v1 v2 v3 v4"));
 	}
+
+	@Test   public void normalizeWhitespace() {
+		fxt.Test_normalizeWhitespace("a\r\nb", "a b");
+		fxt.Test_normalizeWhitespace("a\rb", "a b");
+		fxt.Test_normalizeWhitespace("a\nb", "a b");
+		fxt.Test_normalizeWhitespace("a\tb", "a b");
+	}
 }
 class XomwSanitizerFxt {
 	private final    XomwSanitizer sanitizer = new XomwSanitizer();
 	private final    Bry_bfr tmp = Bry_bfr_.New();
 	public void Test__normalize_char_references(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		sanitizer.Normalize_char_references(tmp, Bool_.Y, src_bry, 0, src_bry.length);
+		sanitizer.normalizeCharReferences(tmp, Bool_.Y, src_bry, 0, src_bry.length);
 		Gftest.Eq__str(expd, tmp.To_str_and_clear());
 	}
 	public void Test__regex_domain_y(Xomw_regex_find_domain regex_domain, String src_str, String expd_prot, String expd_host, String expd_rest) {
@@ -152,15 +159,18 @@ class XomwSanitizerFxt {
 	}
 	public void Test__decode_char_references(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		sanitizer.Decode_char_references(tmp, Bool_.Y, src_bry, 0, src_bry.length);
+		sanitizer.decodeCharReferences(tmp, Bool_.Y, src_bry, 0, src_bry.length);
 		Gftest.Eq__str(expd, tmp.To_str_and_clear());
 	}
 	public void Test__clean_url(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		Gftest.Eq__str(expd, sanitizer.Clean_url(src_bry));
+		Gftest.Eq__str(expd, sanitizer.cleanUrl(src_bry));
 	}
 	public void Test__merge_attributes(Xomw_atr_mgr src, Xomw_atr_mgr trg, Xomw_atr_mgr expd) {
-		sanitizer.Merge_attributes(src, trg);
+		sanitizer.mergeAttributes(src, trg);
 		Gftest.Eq__ary__lines(expd.To_str(tmp), src.To_str(tmp), "merge_atrs");
+	}
+	public void Test_normalizeWhitespace(String src_str, String expd) {
+		Gftest.Eq__str(expd, sanitizer.normalizeWhitespace(Bry_.new_u8(src_str)), "merge_atrs");
 	}
 }

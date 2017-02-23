@@ -472,7 +472,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		//  * text-bottom
 
 		// Protect LanguageConverter markup when splitting into parts
-		byte[][] parts = Xomw_string_utils.Delimiter_explode(tmp_list, trv, options_at_link);
+		byte[][] parts = XomwStringUtils.delimiterExplode(tmp_list, trv, options_at_link);
 
 		// Give extensions a chance to select the file revision for us
 //			$options = [];

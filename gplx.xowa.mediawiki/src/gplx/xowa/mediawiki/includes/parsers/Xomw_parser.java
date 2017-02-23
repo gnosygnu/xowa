@@ -200,7 +200,7 @@ public class Xomw_parser implements XomwParserIface {
 //			$text = $this->replaceTransparentTags( $text );
 		strip_state.unstripGeneral(pbfr);
 
-		sanitizer.Normalize_char_references(pbfr);
+		sanitizer.normalizeCharReferences(pbfr);
 
 //			if ( MWTidy::isEnabled() ) {
 //				if ( $this->mOptions->getTidy() ) {

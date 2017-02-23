@@ -107,7 +107,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 			for (int j = 0; j < indent_level; j++)
 				tmp.Add(Html__dl__bgn);
 			tmp.Add_str_a7("<table");
-			sanitizer.Fix_tag_attributes(tmp, Name__table, tblw_atrs);
+			sanitizer.fixTagAttributes(tmp, Name__table, tblw_atrs);
 			tmp.Add_byte(Byte_ascii.Angle_end);
 			out_line = tmp.To_bry_and_clear();
 			td_history.Add(false);
@@ -150,7 +150,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 
 			// Whats after the tag is now only attributes
 			byte[] atrs = strip_state.unstripBoth(line);
-			sanitizer.Fix_tag_attributes(tmp, Name__tr, atrs);
+			sanitizer.fixTagAttributes(tmp, Name__tr, atrs);
 			atrs = tmp.To_bry_and_clear();
 
 			Php_ary_.Pop_bry_or_null(tr_attributes);
@@ -188,7 +188,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 
 			// Implies both are valid for table headings.
 			if (first_char == Byte_ascii.Bang) {
-				Xomw_string_utils.Replace_markup(line, 0, line.length, Wtxt__th2, Wtxt__td2); // $line = StringUtils::replaceMarkup('!!', '||', $line);
+				XomwStringUtils.replaceMarkup(line, 0, line.length, Wtxt__th2, Wtxt__td2); // $line = StringUtils::replaceMarkup('!!', '||', $line);
 			}
 
 			// Split up multiple cells on the same line.
@@ -253,7 +253,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 				else {
 					byte[] atrs = strip_state.unstripBoth(cell_data_0);
 					tmp.Add(previous).Add_byte(Byte_ascii.Angle_bgn).Add(last_tag);
-					sanitizer.Fix_tag_attributes(tmp, last_tag, atrs);
+					sanitizer.fixTagAttributes(tmp, last_tag, atrs);
 					tmp.Add_byte(Byte_ascii.Angle_end).Add(cell_data_1);
 					cell = tmp.To_bry_and_clear();
 				}

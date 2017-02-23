@@ -1244,7 +1244,7 @@ public class XomwParser implements XomwParserIface {
 //			$text = $this->replaceTransparentTags( $text );
 		mStripState.unstripGeneral(pbfr);
 
-		sanitizer.Normalize_char_references(pbfr);
+		sanitizer.normalizeCharReferences(pbfr);
 
 //			if ( MWTidy::isEnabled() ) {
 //				if ( $this->mOptions->getTidy() ) {
@@ -4605,20 +4605,11 @@ public class XomwParser implements XomwParserIface {
 		// that are later expanded to html- so expand them now and
 		// remove the tags
 		tooltip = this.mStripState.unstripBoth(tooltip);
-//			tooltip = Sanitizer::stripAllTags( tooltip );
+		tooltip = sanitizer.stripAllTags(tooltip);
 
 		return tooltip;
 	}
-//		protected function stripAltText($caption, $holders) {
-//			# make sure there are no placeholders in thumbnail attributes
-//			# that are later expanded to html- so expand them now and
-//			# remove the tags
-//			$tooltip = this.mStripState->unstripBoth($tooltip);
-//			$tooltip = Sanitizer::stripAllTags($tooltip);
-//
-//			return $tooltip;
-//		}
-//
+
 //		/**
 //		* Set a flag in the output Object indicating that the content is dynamic and
 //		* shouldn't be cached.

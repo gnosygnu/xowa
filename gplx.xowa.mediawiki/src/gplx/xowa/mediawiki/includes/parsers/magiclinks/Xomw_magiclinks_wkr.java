@@ -252,7 +252,7 @@ public class Xomw_magiclinks_wkr {
 			return;
 		}
 
-		url = sanitizer.Clean_url(url);
+		url = sanitizer.cleanUrl(url);
 
 		// XO.MW.UNSUPPORTED.NON-WMF: not supporting images from freefrom url; (EX: "http://a.org/image.png" -> "<img>"); haven't seen this used on WMF wikis
 		// Is this an external image?			
