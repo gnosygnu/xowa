@@ -15,6 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.core.btries.*;
+import gplx.xowa.mediawiki.includes.utls.*;
+import gplx.xowa.mediawiki.includes.libs.replacers.*;
 /**
 * A collection of static methods to play with strings.
 */
@@ -143,129 +145,123 @@ public class XomwStringUtils {
 //
 //			return $output;
 //		}
-//
-//		/**
-//		* Perform an operation equivalent to `preg_replace_callback()`
-//		*
-//		* Matches this code:
-//		*
-//		*     preg_replace_callback("!$startDelim(.*)$endDelim!s$flags", $callback, $subject);
-//		*
-//		* If the start delimiter ends with an initial substring of the end delimiter,
-//		* e.g. in the case of C-style comments, the behavior differs from the model
-//		* regex. In this implementation, the end must share no characters with the
-//		* start, so e.g. `/*\/` is not considered to be both the start and end of a
-//		* comment. `/*\/xy/*\/` is considered to be a single comment with contents `/xy/`.
-//		*
-//		* The implementation of delimiterReplaceCallback() is slower than hungryDelimiterReplace()
-//		* but uses far less memory. The delimiters are literal strings, not regular expressions.
-//		*
-//		* @param String $startDelim Start delimiter
-//		* @param String $endDelim End delimiter
-//		* @param callable $callback Function to call on each match
-//		* @param String $subject
-//		* @param String $flags Regular expression flags
-//		* @throws InvalidArgumentException
-//		* @return String
-//		*/
-//		static function delimiterReplaceCallback($startDelim, $endDelim, $callback,
-//			$subject, $flags = ''
-//		) {
-//			$inputPos = 0;
-//			$outputPos = 0;
-//			$contentPos = 0;
-//			$output = '';
-//			$foundStart = false;
-//			$encStart = preg_quote($startDelim, '!');
-//			$encEnd = preg_quote($endDelim, '!');
-//			$strcmp = strpos($flags, 'i') === false ? 'strcmp' : 'strcasecmp';
-//			$endLength = strlen($endDelim);
-//			$m = [];
-//
-//			while ($inputPos < strlen($subject) &&
-//				preg_match("!($encStart)|($encEnd)!S$flags", $subject, $m, PREG_OFFSET_CAPTURE, $inputPos)
-//			) {
-//				$tokenOffset = $m[0][1];
-//				if ($m[1][0] != '') {
-//					if ($foundStart &&
-//						$strcmp($endDelim, substr($subject, $tokenOffset, $endLength)) == 0
-//					) {
-//						# An end match is present at the same location
-//						$tokenType = 'end';
-//						$tokenLength = $endLength;
-//					} else {
-//						$tokenType = 'start';
-//						$tokenLength = strlen($m[0][0]);
-//					}
-//				} elseif ($m[2][0] != '') {
-//					$tokenType = 'end';
-//					$tokenLength = strlen($m[0][0]);
-//				} else {
-//					throw new InvalidArgumentException('Invalid delimiter given to ' . __METHOD__);
-//				}
-//
-//				if ($tokenType == 'start') {
-//					# Only move the start position if we haven't already found a start
-//					# This means that START START END matches outer pair
-//					if (!$foundStart) {
-//						# Found start
-//						$inputPos = $tokenOffset + $tokenLength;
-//						# Write out the non-matching section
-//						$output .= substr($subject, $outputPos, $tokenOffset - $outputPos);
-//						$outputPos = $tokenOffset;
-//						$contentPos = $inputPos;
-//						$foundStart = true;
-//					} else {
-//						# Move the input position past the *first character* of START,
-//						# to protect against missing END when it overlaps with START
-//						$inputPos = $tokenOffset + 1;
-//					}
-//				} elseif ($tokenType == 'end') {
-//					if ($foundStart) {
-//						# Found match
-//						$output .= call_user_func($callback, [
-//							substr($subject, $outputPos, $tokenOffset + $tokenLength - $outputPos),
-//							substr($subject, $contentPos, $tokenOffset - $contentPos)
-//						]);
-//						$foundStart = false;
-//					} else {
-//						# Non-matching end, write it out
-//						$output .= substr($subject, $inputPos, $tokenOffset + $tokenLength - $outputPos);
-//					}
-//					$inputPos = $outputPos = $tokenOffset + $tokenLength;
-//				} else {
-//					throw new InvalidArgumentException('Invalid delimiter given to ' . __METHOD__);
-//				}
-//			}
-//			if ($outputPos < strlen($subject)) {
-//				$output .= substr($subject, $outputPos);
-//			}
-//
-//			return $output;
-//		}
-//
-//		/**
-//		* Perform an operation equivalent to `preg_replace()` with flags.
-//		*
-//		* Matches this code:
-//		*
-//		*     preg_replace("!$startDelim(.*)$endDelim!$flags", $replace, $subject);
-//		*
-//		* @param String $startDelim Start delimiter regular expression
-//		* @param String $endDelim End delimiter regular expression
-//		* @param String $replace Replacement String. May contain $1, which will be
-//		*  replaced by the text between the delimiters
-//		* @param String $subject String to search
-//		* @param String $flags Regular expression flags
-//		* @return String The String with the matches replaced
-//		*/
-//		static function delimiterReplace($startDelim, $endDelim, $replace, $subject, $flags = '') {
-//			$replacer = new RegexlikeReplacer($replace);
-//
-//			return self::delimiterReplaceCallback($startDelim, $endDelim,
-//				$replacer->cb(), $subject, $flags);
-//		}
-//
+
+	/**
+	* Perform an operation equivalent to `preg_replace_callback()`
+	*
+	* Matches this code:
+	*
+	*     preg_replace_callback("!$startDelim(.*)$endDelim!s$flags", $callback, $subject);
+	*
+	* If the start delimiter ends with an initial substring of the end delimiter,
+	* e.g. in the case of C-style comments, the behavior differs from the model
+	* regex. In this implementation, the end must share no characters with the
+	* start, so e.g. `/*\/` is not considered to be both the start and end of a
+	* comment. `/*\/xy/*\/` is considered to be a single comment with contents `/xy/`.
+	*
+	* The implementation of delimiterReplaceCallback() is slower than hungryDelimiterReplace()
+	* but uses far less memory. The delimiters are literal strings, not regular expressions.
+	*
+	* @param String $startDelim Start delimiter
+	* @param String $endDelim End delimiter
+	* @param callable $callback Function to call on each match
+	* @param String $subject
+	* @param String $flags Regular expression flags
+	* @throws InvalidArgumentException
+	* @return String
+	*/
+	// XO.MW:flags not supported; goes directly to regex; also, flags of "i" will do case-insensitive
+	public static void delimiterReplaceCallback(Bry_bfr bfr, byte[] bgn, byte[] end, XomwReplacer callback,
+		byte[] src
+	) {
+		/* XO.MW.PORTED:
+			MW does following logic
+			* Run start/end regex on subject till no matches
+			* If start/end found, evaluate possible match (handling nesting)
+			* If match found, then pass find-replace pair to callback;
+			    find=substr(subject, outputPos, tokenOffset + tokenLength - outputPos)
+				replace=substr(subject, contentPos, tokenOffset - contentPos)				
+			* Also, unnecessary "overlapping" logic: bgn=ab;end=abc
+				$strcmp( $endDelim, substr( $subject, $tokenOffset, $endLength ) ) == 0
+		*/
+		int pos = 0;
+		int prv = 0;
+		int srcLen = src.length;
+		int bgnLen = bgn.length;
+		int endLen = end.length;
+		boolean foundStart = false;
+		boolean tokenTypeIsStart = false;
+
+		while (true) {
+			if (pos >= srcLen) {
+				bfr.Add_mid(src, prv, srcLen);
+				break;
+			}
+			if      (Bry_.Eq(src, pos, pos + bgnLen, bgn)) {
+				tokenTypeIsStart = true;
+			}
+			else if (Bry_.Eq(src, pos, pos + endLen, end)) {
+				tokenTypeIsStart = false;
+			}
+			else {
+				pos++;
+				continue;
+			}
+
+			if (tokenTypeIsStart) {
+				// Only move the start position if we haven't already found a start
+				// This means that START START END matches outer pair
+				// EX: "(a(b)" has match of "a(b"
+				if (!foundStart) {
+					// Found start
+					// Write out the non-matching section
+					bfr.Add_mid(src, prv, pos);
+					pos += bgnLen;
+					prv = pos;
+					foundStart = true;
+				} else {
+					// Move the input position past the *first character* of START,
+					// to protect against missing END when it overlaps with START
+					pos++;
+				}
+			} else { // elseif (tokenType == 'end')
+				if (foundStart) {
+					// Found match
+					callback.cb(bfr, src, prv, pos);
+					foundStart = false;
+				} else {
+					// Non-matching end, write it out
+					// EX: "a)b" -> "a)"
+					bfr.Add_mid(src, prv, pos + endLen);
+				}
+				pos += endLen;
+				prv = pos;
+			}
+		}
+	}
+
+	/**
+	* Perform an operation equivalent to `preg_replace()` with flags.
+	*
+	* Matches this code:
+	*
+	*     preg_replace("!$startDelim(.*)$endDelim!$flags", $replace, $subject);
+	*
+	* @param String $startDelim Start delimiter regular expression
+	* @param String $endDelim End delimiter regular expression
+	* @param String $replace Replacement String. May contain $1, which will be
+	*  replaced by the text between the delimiters
+	* @param String $subject String to search
+	* @param String $flags Regular expression flags
+	* @return String The String with the matches replaced
+	*/
+	// XO.MW:removed flags=''
+	public static void delimiterReplace(Bry_bfr bfr, byte[] startDelim, byte[] endDelim, byte[] replace, byte[] subject) {
+		XomwRegexlikeReplacer replacer = new XomwRegexlikeReplacer(replace);
+
+		delimiterReplaceCallback(bfr, startDelim, endDelim, replacer, subject);
+	}
+
 //		/**
 //		* More or less "markup-safe" explode()
 //		* Ignores any instances of the separator inside `<...>`

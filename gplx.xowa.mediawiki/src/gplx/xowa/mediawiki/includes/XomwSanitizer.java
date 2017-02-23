@@ -17,6 +17,7 @@ package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import 
 import gplx.core.brys.*; import gplx.core.btries.*; import gplx.core.encoders.*; import gplx.core.primitives.*; import gplx.langs.htmls.entitys.*;
 import gplx.xowa.parsers.htmls.*;
 import gplx.langs.htmls.*; import gplx.xowa.mediawiki.includes.htmls.*; import gplx.xowa.mediawiki.includes.parsers.*; import gplx.xowa.mediawiki.includes.utls.*;
+import gplx.xowa.mediawiki.includes.libs.*;
 public class XomwSanitizer {
 	private final    Mwh_doc_wkr__atr_bldr atr_bldr = new Mwh_doc_wkr__atr_bldr();
 	private final    Mwh_atr_parser atr_parser = new Mwh_atr_parser();
@@ -1671,7 +1672,8 @@ public class XomwSanitizer {
 	*/
 	public byte[] stripAllTags(byte[] text) {
 		// Actual <tags>
-//			$text = StringUtils::delimiterReplace('<', '>', '', $text);
+		XomwStringUtils.delimiterReplace(tmp_bfr, Byte_ascii.Angle_bgn_bry, Byte_ascii.Angle_end_bry, Bry_.Empty, text);
+		text = tmp_bfr.To_bry_and_clear();
 
 		// Normalize &entities and whitespace
 		text = decodeCharReferences(null, false, text, 0, text.length);
