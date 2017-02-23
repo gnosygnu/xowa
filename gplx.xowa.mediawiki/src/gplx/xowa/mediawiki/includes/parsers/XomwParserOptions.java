@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-public class Xomw_parser_options {
-	public Xomw_parser_options() {
+public class XomwParserOptions {
+	public XomwParserOptions() {
 		this.mThumbSize = 220;
 	}
 //		/**

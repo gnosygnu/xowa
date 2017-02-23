@@ -23,11 +23,19 @@ public class Xomw_lnki_wkr__file__tst {
 		fxt.Clear();
 		fxt.Init__file("File:A.png", 300, 200);
 	}
-	@Test   public void Plain() {
+	@Test   public void Orig() {
+		// basic
 		fxt.Test__to_html("[[File:A.png]]", "<a href='/wiki/File:A.png' class='image'><img alt='A.png' src='/orig/7/70/A.png' width='300' height='200' /></a>");
+
+		// caption
+		fxt.Test__to_html("[[File:A.png|abc]]", "<a href='/wiki/File:A.png' class='image' title='abc'><img alt='abc' src='/orig/7/70/A.png' width='300' height='200' /></a>");
 	}
 	@Test   public void Thumb() {
+		// basic
 		fxt.Test__to_html("[[File:A.png|thumb]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a href='/wiki/File:A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/220px-A.png' width='220' height='146' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='/wiki/File:A.png' class='internal' title='enlarge'></a></div></div></div></div>");
+
+		// caption
+		fxt.Test__to_html("[[File:A.png|thumb|abc]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a href='/wiki/File:A.png' class='image'><img alt='' src='/thumb/7/70/A.png/220px-A.png' width='220' height='146' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='/wiki/File:A.png' class='internal' title='enlarge'></a></div>abc</div></div></div>");
 	}
 	@Test   public void Size() {
 		fxt.Test__to_html("[[File:A.png|123x456px]]", "<a href='/wiki/File:A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/123px-A.png' width='123' height='82' /></a>");
@@ -66,17 +74,19 @@ class Xomw_lnki_wkr__fxt {
 	private final    Xomw_lnki_wkr wkr;
 	private final    Xomw_parser_ctx pctx;
 	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
+	private final    Xomw_parser_env env;
 	private final    XomwFileFinderMock file_finder;
 	private final    XomwFileRepo repo = new XomwFileRepo(Bry_.new_a7("/orig"), Bry_.new_a7("/thumb"));
 	private boolean apos = true;
 	public Xomw_lnki_wkr__fxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
-		Xomw_parser parser = new Xomw_parser();
+		XomwParser parser = new XomwParser();
 		wkr = parser.Lnki_wkr();
 
 		// env
 		file_finder = new XomwFileFinderMock(parser.Env());
+		env = parser.Env();
 		parser.Env().File_finder_(file_finder);
 		parser.Env().Magic_word_mgr().Add(Bry_.new_u8("img_thumbnail"), Bool_.Y, Bry_.Ary("thumb"));
 		parser.Env().Magic_word_mgr().Add(Bry_.new_u8("img_width"), Bool_.Y, Bry_.Ary("$1px"));
@@ -95,7 +105,7 @@ class Xomw_lnki_wkr__fxt {
 	}
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		wkr.Replace_internal_links(pctx, pbfr.Init(src_bry));
+		wkr.replaceInternalLinks(pbfr.Init(src_bry), env, pctx);
 		if (apos) expd = gplx.langs.htmls.Gfh_utl.Replace_apos(expd);
 		Gftest.Eq__ary__lines(expd, pbfr.Rslt().To_str_and_clear(), src_str);
 	}
@@ -109,7 +119,7 @@ class Xomw_lnki_wkr__fxt {
 	}
 	private String Exec__to_html(String src_str) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		wkr.Replace_internal_links(pctx, pbfr.Init(src_bry));
+		wkr.replaceInternalLinks(pbfr.Init(src_bry), env, pctx);
 		wkr.replaceLinkHolders(pbfr);
 		return pbfr.Rslt().To_str_and_clear();
 	}

@@ -25,17 +25,17 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Bry_bfr tmp;
 	private Btrie_slim_mgr protocol_trie; private final    Btrie_rv trv = new Btrie_rv();
 	private int autonumber;
-	private final    Xomw_parser parser;
+	private final    XomwParserIface parser;
 	private final    XomwLinker linker;
 	private final    XomwSanitizer sanitizer;
 	private final    Xomw_atr_mgr attribs = new Xomw_atr_mgr();
 	private Xomw_regex_url regex_url;
 	private Xomw_regex_space regex_space;
-	public Xomw_lnke_wkr(Xomw_parser parser) {
+	public Xomw_lnke_wkr(XomwParserIface parser, Bry_bfr tmp, XomwLinker linker, XomwSanitizer sanitizer) {
 		this.parser = parser;
-		this.tmp = parser.Tmp();
-		this.linker = parser.Linker();
-		this.sanitizer = parser.Sanitizer();
+		this.tmp = tmp;
+		this.linker = linker;
+		this.sanitizer = sanitizer;
 
 		if (angle_entities_trie == null) {
 			synchronized (Type_adp_.ClassOf_obj(this)) {
@@ -63,7 +63,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 		this.regex_space = regex_space;
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-02-01
-	public void Replace_external_links(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
+	public void replaceExternalLinks(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();
@@ -211,7 +211,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// This means that users can paste URLs directly into the text
 			// Funny characters like � aren't valid in URLs anyway
 			// This was changed in August 2004
-			linker.makeExternalLink(bfr, url, Bry_.Mid(src, text_bgn, text_end), Bool_.N, link_type, parser.Get_external_link_attribs(attribs), Bry_.Empty);
+			linker.makeExternalLink(bfr, url, Bry_.Mid(src, text_bgn, text_end), Bool_.N, link_type, parser.getExternalLinkAttribs(attribs), Bry_.Empty);
 
 			// XO.MW.UNSUPPORTED.HOOK: registers link for processing by other extensions?
 			// Register link in the output Object.

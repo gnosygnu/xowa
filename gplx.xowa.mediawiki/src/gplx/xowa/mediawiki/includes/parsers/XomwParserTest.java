@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*;
-public class Xomw_parser__tst {
-	private final    Xomw_parser__fxt fxt = new Xomw_parser__fxt();
+public class XomwParserTest {
+	private final    XomwParserFxt fxt = new XomwParserFxt();
 	@Test  public void Basic() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "== heading_1 =="
@@ -57,19 +57,21 @@ public class Xomw_parser__tst {
 		));
 	}		
 }
-class Xomw_parser__fxt {
-	private final    Xomw_parser mgr = new Xomw_parser();
+class XomwParserFxt {
+	private final    XomwParser parser = new XomwParser();
+	private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();
 	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
-	public Xomw_parser__fxt() {
+	public XomwParserFxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
-		mgr.Init_by_wiki(wiki);
-		mgr.Init_by_page(XomwTitle.newFromText(Bry_.new_a7("Page_1")));
+		parser.Init_by_wiki(wiki);
+		parser.Init_by_page(XomwTitle.newFromText(Bry_.new_a7("Page_1")));
+		pctx.Init_by_page(XomwTitle.newFromText(Bry_.new_a7("Page_1")));
 	}
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		mgr.Internal_parse(pbfr, src_bry);
-		mgr.Internal_parse_half_parsed(pbfr, true, true);
+		parser.internalParse(pbfr, pctx, src_bry);
+		parser.internalParseHalfParsed(pbfr, pctx, true, true);
 		Tfds.Eq_str_lines(expd, pbfr.Rslt().To_str_and_clear(), src_str);
 	}
 }

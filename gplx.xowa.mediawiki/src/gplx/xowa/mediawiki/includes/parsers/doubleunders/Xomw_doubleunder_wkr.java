@@ -37,7 +37,7 @@ public class Xomw_doubleunder_wkr {
 		, Xol_kwd_grp_.Id_nocontentconvert
 		);
 	}
-	public void Do_double_underscore(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
+	public void doDoubleUnderscore(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();
@@ -123,6 +123,62 @@ public class Xomw_doubleunder_wkr {
 		if (dirty)
 			pbfr.Switch();
 	}
+//		/**
+//		* Strip double-underscore items like __NOGALLERY__ and __NOTOC__
+//		* Fills this.mDoubleUnderscores, returns the modified text
+//		*
+//		* @param String $text
+//		*
+//		* @return String
+//		*/
+//		public function doDoubleUnderscore($text) {
+//
+//			# The position of __TOC__ needs to be recorded
+//			$mw = MagicWord::get('toc');
+//			if ($mw->match($text)) {
+//				this.mShowToc = true;
+//				this.mForceTocPosition = true;
+//
+//				# Set a placeholder. At the end we'll fill it in with the TOC.
+//				$text = $mw->replace('<!--MWTOC-->', $text, 1);
+//
+//				# Only keep the first one.
+//				$text = $mw->replace('', $text);
+//			}
+//
+//			# Now match and remove the rest of them
+//			$mwa = MagicWord::getDoubleUnderscoreArray();
+//			this.mDoubleUnderscores = $mwa->matchAndRemove($text);
+//
+//			if (isset(this.mDoubleUnderscores['nogallery'])) {
+//				this.mOutput->mNoGallery = true;
+//			}
+//			if (isset(this.mDoubleUnderscores['notoc']) && !this.mForceTocPosition) {
+//				this.mShowToc = false;
+//			}
+//			if (isset(this.mDoubleUnderscores['hiddencat'])
+//				&& this.mTitle->getNamespace() == NS_CATEGORY
+//			) {
+//				this.addTrackingCategory('hidden-category-category');
+//			}
+//			# (T10068) Allow control over whether robots index a page.
+//			# __INDEX__ always overrides __NOINDEX__, see T16899
+//			if (isset(this.mDoubleUnderscores['noindex']) && this.mTitle->canUseNoindex()) {
+//				this.mOutput->setIndexPolicy('noindex');
+//				this.addTrackingCategory('noindex-category');
+//			}
+//			if (isset(this.mDoubleUnderscores['index']) && this.mTitle->canUseNoindex()) {
+//				this.mOutput->setIndexPolicy('index');
+//				this.addTrackingCategory('index-category');
+//			}
+//
+//			# Cache all double underscores in the database
+//			foreach (this.mDoubleUnderscores as $key => $val) {
+//				this.mOutput->setProperty($key, '');
+//			}
+//
+//			return $text;
+//		}
 	private static void Reg(Btrie_slim_mgr trie, Xol_kwd_mgr mgr, int... ids) {
 		for (int id : ids) {
 			Xol_kwd_grp grp = mgr.Get_or_new(id);

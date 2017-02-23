@@ -24,7 +24,7 @@ public class Xomw_block_level_pass {
 	private int last_section;
 	private byte[] find_colon_no_links__before, find_colon_no_links__after;
 
-	public void Do_block_levels(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr, boolean line_start) {
+	public void doBlockLevels(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr, boolean line_start) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();
@@ -41,7 +41,7 @@ public class Xomw_block_level_pass {
 				("<table", "<h1", "<h2", "<h3", "<h4", "<h5", "<h6", "<pre", "<tr", "<p", "<ul", "<ol", "<dl", "<li", "</tr", "</td", "</th");
 				close_match_trie = Btrie_slim_mgr.ci_a7().Add_many_str
 				( "</table", "</h1", "</h2", "</h3", "</h4", "</h5", "</h6", "<td", "<th", "<blockquote", "</blockquote", "<div", "</div", "<hr"
-				, "</pre", "</p", "</mw:", Xomw_strip_state.Str__marker_bgn + "-pre", "</li", "</ul", "</ol", "</dl", "<center", "</center");
+				, "</pre", "</p", "</mw:", XomwStripState.Str__marker_bgn + "-pre", "</li", "</ul", "</ol", "</dl", "<center", "</center");
 				blockquote_trie = Btrie_slim_mgr.ci_a7().Add_many_str("<blockquote", "</blockquote");
 				pre_trie = Btrie_slim_mgr.ci_a7().Add_str_int("<pre", Pre__bgn).Add_str_int("</pre", Pre__end);
 			}

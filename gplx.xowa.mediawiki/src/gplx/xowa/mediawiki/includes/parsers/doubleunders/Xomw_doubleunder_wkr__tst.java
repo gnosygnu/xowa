@@ -36,7 +36,7 @@ class Xomw_doubleunder_wkr__fxt {
 	}
 	public Xomw_doubleunder_wkr__fxt Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		wkr.Do_double_underscore(pctx, pbfr.Init(src_bry));
+		wkr.doDoubleUnderscore(pctx, pbfr.Init(src_bry));
 		Gftest.Eq__str(expd, pbfr.Rslt().To_str_and_clear(), src_str);
 		return this;
 	}

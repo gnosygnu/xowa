@@ -30,8 +30,8 @@ import gplx.xowa.parsers.uniqs.*;
 	* P6: [[Media:]]
 	* P4: handle "]]]"; "If we get a ] at the beginning of $m[3]"
 	* P4: handle "[[http://a.org]]"
-	* P3: $langObj->formatNum( ++$this->mAutonumber );
-	* P2: $this->getConverterLanguage()->markNoConversion( $text );
+	* P3: $langObj->formatNum( ++this.mAutonumber );
+	* P2: this.getConverterLanguage()->markNoConversion( $text );
 	* P1: link_prefix; EX: b[[A]]; [not enabled on enwiki]
 */
 public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
@@ -40,29 +40,31 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Xomw_link_renderer link_renderer;
 	// private final    Btrie_slim_mgr protocols_trie;
 	private final    Xomw_quote_wkr quote_wkr;
-	private final    Xomw_strip_state strip_state;
+	private final    XomwStripState strip_state;
 	private Xomw_parser_env env;
 	private Xow_wiki wiki;
 	private XomwTitle mPageTitle;
 //		private final    XomwLinker_NormalizeSubpageLink normalize_subpage_link = new XomwLinker_NormalizeSubpageLink();
 	private final    Bry_bfr tmp;
-	private final    Xomw_parser parser;
+	private final    XomwParserIface parser;
 	private final    Xomw_atr_mgr extra_atrs = new Xomw_atr_mgr();
 	private final    Xomw_qry_mgr query = new Xomw_qry_mgr();
 	private final    Btrie_rv trv = new Btrie_rv();
 	private final    List_adp tmp_list = List_adp_.New();
 	private final    Hash_adp mImageParams = Hash_adp_bry.cs();
 	private final    Hash_adp mImageParamsMagicArray = Hash_adp_bry.cs();
-	public Xomw_lnki_wkr(Xomw_parser parser, XomwLinkHolderArray holders, Xomw_link_renderer link_renderer, Btrie_slim_mgr protocols_trie) {
+	public Xomw_lnki_wkr(XomwParserIface parser, XomwLinkHolderArray holders, Xomw_link_renderer link_renderer, Btrie_slim_mgr protocols_trie
+		, XomwLinker linker, Xomw_quote_wkr quote_wkr, Bry_bfr tmp, XomwStripState strip_state
+		) {
 		this.parser = parser;
 		this.holders = holders;
 		this.link_renderer = link_renderer;
 		// this.protocols_trie = protocols_trie;
 
-		this.linker = parser.Linker();
-		this.quote_wkr = parser.Quote_wkr();
-		this.tmp = parser.Tmp();
-		this.strip_state = parser.Strip_state();
+		this.linker = linker;
+		this.quote_wkr = quote_wkr;
+		this.tmp = tmp;
+		this.strip_state = strip_state;
 	}
 	public void Init_by_wiki(Xomw_parser_env env, Xow_wiki wiki) {
 		this.env = env;
@@ -77,7 +79,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	public void Clear_state() {
 		holders.clear();
 	}
-	public void Replace_internal_links(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
+	public void replaceInternalLinks(Xomw_parser_bfr pbfr, Xomw_parser_env env, Xomw_parser_ctx pctx) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();
@@ -88,10 +90,10 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 		this.mPageTitle = pctx.Page_title();
 
-		Replace_internal_links(pctx, bfr, src, src_bgn, src_end);
+		replaceInternalLinks(env, pctx, bfr, src, src_bgn, src_end);
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-02-02
-	public void Replace_internal_links(Xomw_parser_ctx pctx, Bry_bfr bfr, byte[] src, int src_bgn, int src_end) {
+	public void replaceInternalLinks(Xomw_parser_env env, Xomw_parser_ctx pctx, Bry_bfr bfr, byte[] src, int src_bgn, int src_end) {
 		// XO.MW: regex for tc move to header; e1 and e1_img moved to code
 		// the % is needed to support urlencoded titles as well
 
@@ -109,7 +111,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// XO.MW.IGNORE: handles strange split logic of adding space to String; "$s = substr($s, 1);"
 
 			// TODO.XO:link_prefix; EX: b[[A]]
-			// $useLinkPrefixExtension = $this->getTargetLanguage()->linkPrefixExtension();
+			// $useLinkPrefixExtension = this.getTargetLanguage()->linkPrefixExtension();
 			// $e2 = null;
 			// if ($useLinkPrefixExtension) {
 			// 	// Match the end of a line for a word that's not followed by whitespace,
@@ -119,9 +121,9 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// 	$e2 = "/^((?>.*[^$charset]|))(.+)$/sDu";
 			// }
 
-			// IGNORE: throw new MWException(__METHOD__ . ": \$this->mTitle is null\n");
+			// IGNORE: throw new MWException(__METHOD__ . ": \this.mTitle is null\n");
 
-			// $nottalk = !$this->mTitle->isTalkPage();
+			// $nottalk = !this.mTitle->isTalkPage();
 
 			// TODO.XO:link_prefix
 			byte[] prefix = Bry_.Empty;
@@ -240,7 +242,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// Don't allow @gplx.Internal protected links to pages containing
 			// PROTO: where PROTO is a valid URL protocol; these
 			// should be external links.
-			// if (preg_match('/^(?i:' . $this->mUrlProtocols . ')/', $origLink)) {
+			// if (preg_match('/^(?i:' . this.mUrlProtocols . ')/', $origLink)) {
 			// 	$s .= $prefix . '[[' . $line;
 			//	continue;
 			// }
@@ -267,7 +269,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			//	link = orig_link;
 			// }
 
-			byte[] unstrip = strip_state.Unstrip_nowiki(link);
+			byte[] unstrip = strip_state.unstripNoWiki(link);
 			if (!Bry_.Eq(unstrip, link))
 				nt = XomwTitle.newFromText(unstrip);
 			if (nt == null) {
@@ -309,7 +311,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 						// we couldn't find the end of this imageLink, so output it raw
 						// but don't ignore what might be perfectly normal links in the text we've examined
 						Bry_bfr nested = wiki.Utl__bfr_mkr().Get_b128();
-						this.Replace_internal_links(pctx, nested, text, 0, text.length);
+						this.replaceInternalLinks(env, pctx, nested, text, 0, text.length);
 						nested.Mkr_rls();
 						bfr.Add(prefix).Add(Bry__wtxt__lnki__bgn).Add(link).Add_byte_pipe().Add(text); // s .= "{prefix}[[link|text";
 						// note: no trail, because without an end, there *is* no trail
@@ -376,7 +378,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 						// cloak any absolute URLs inside the image markup, so replaceExternalLinks() won't touch them
 						bfr.Add(prefix);
 						// Armor_links(Make_image(bfr, nt, text, holders))
-						this.makeImage(pctx, bfr, nt, text, holders);
+						this.makeImage(env, pctx, bfr, nt, text, holders);
 						bfr.Add(trail);
 						continue;
 					}
@@ -442,7 +444,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 		}
 	}
-	public void makeImage(Xomw_parser_ctx pctx, Bry_bfr bfr, XomwTitle title, byte[] options_at_link, XomwLinkHolderArray holders) {
+	public void makeImage(Xomw_parser_env env, Xomw_parser_ctx pctx, Bry_bfr bfr, XomwTitle title, byte[] options_at_link, XomwLinkHolderArray holders) {
 		// Check if the options text is of the form "options|alt text"
 		// Options are:
 		//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang
@@ -478,7 +480,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		// XO.MW.HOOK:BeforeParserFetchFileAndTitle
 
 		// Fetch and register the file (file title may be different via hooks)
-//			list($file, $title) = $this->fetchFileAndTitle($title, $options);
+//			list($file, $title) = this.fetchFileAndTitle($title, $options);
 		XomwFile file = fetchFileAndTitle(title, null);
 
 		// Get parameter map
@@ -489,7 +491,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		Xomw_param_map paramMap = tmp_img_params.paramMap;
 		XomwMagicWordArray mwArray = tmp_img_params.mwArray;
 
-		// XO.MW.UNSUPPORTED.TrackingCategory: if (!$file) $this->addTrackingCategory('broken-file-category');
+		// XO.MW.UNSUPPORTED.TrackingCategory: if (!$file) this.addTrackingCategory('broken-file-category');
 
 		// Process the input parameters
 		byte[] caption = Bry_.Empty;
@@ -549,12 +551,12 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 								// manualthumb? downstream behavior seems odd with
 								// missing manual thumbs.
 								validated = true;
-								// $value = $this->stripAltText($value, $holders);
+								val = parser.stripAltText(val, holders);
 								break;
 							case Xomw_param_itm.Name__link:
 //									$chars = self::EXT_LINK_URL_CLASS;
 //									$addr = self::EXT_LINK_ADDR;
-//									$prots = $this->mUrlProtocols;
+//									$prots = this.mUrlProtocols;
 //									if ($value === '') {
 //										$paramName = 'no-link';
 //										$value = true;
@@ -563,9 +565,9 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //									else if (preg_match("/^((?i)$prots)/", $value)) {
 //										if (preg_match("/^((?i)$prots)$addr$chars*$/u", $value, $m)) {
 //											$paramName = 'link-url';
-//											$this->mOutput->addExternalLink($value);
-//											if ($this->mOptions->getExternalLinkTarget()) {
-//												$params[$type]['link-target'] = $this->mOptions->getExternalLinkTarget();
+//											this.mOutput->addExternalLink($value);
+//											if (this.mOptions->getExternalLinkTarget()) {
+//												$params[$type]['link-target'] = this.mOptions->getExternalLinkTarget();
 //											}
 										validated = true;
 //										}
@@ -574,7 +576,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //										if ($linkTitle) {
 //											$paramName = 'link-title';
 //											$value = $linkTitle;
-//											$this->mOutput->addLink($linkTitle);
+//											this.mOutput->addLink($linkTitle);
 										validated = true;
 //										}
 //									}
@@ -649,7 +651,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			if (frameParams.alt == null) {
 				// No alt text, use the "caption" for the alt text
 				if (caption != Bry_.Empty) {
-//						frameParams.alt = $this->stripAltText(caption, $holders);
+					frameParams.alt = parser.stripAltText(caption, holders);
 				}
 				else {
 					// No caption, fall back to using the filename for the
@@ -658,7 +660,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 				}
 			}
 			// Use the "caption" for the tooltip text
-//				frameParams.title = $this->stripAltText(caption, $holders);
+			frameParams.title = parser.stripAltText(caption, holders);
 		}
 
 		// MW.HOOK:ParserMakeImageParams
@@ -666,33 +668,13 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		// Linker does the rest
 //			byte[] time = options.time;
 		Object time = null;
-		linker.makeImageLink(bfr, pctx, parser, title, file, frameParams, handlerParams, time, desc_query, parser.Options().getThumbSize());
+		linker.makeImageLink(bfr, env, pctx, parser, title, file, frameParams, handlerParams, time, desc_query, parser.getOptions().getThumbSize());
 
 		// Give the handler a chance to modify the parser Object
 //			if (handler != null) {
 //				$handler->parserTransformHook($this, $file);
 //			}
 	}
-//		private byte[] stripAltText(byte[] caption, XomwLinkHolderArray holders) {
-//			// Strip bad stuff out of the title (tooltip).  We can't just use
-//			// replaceLinkHoldersText() here, because if this function is called
-//			// from replaceInternalLinks2(), mLinkHolders won't be up-to-date.
-//			byte[] tooltip;
-//			if (holders != null) {
-//				tooltip = holders.replace(caption);
-//			} else {
-//				tooltip = this.replace_link_holders(caption);
-//			}
-//
-//			// make sure there are no placeholders in thumbnail attributes
-//			// that are later expanded to html- so expand them now and
-//			// remove the tags
-////			$tooltip = $this->mStripState->unstripBoth( $tooltip );
-////			$tooltip = Sanitizer::stripAllTags( $tooltip );
-////
-////			return $tooltip;
-//			return null;
-//		}
 
 	private static Xomw_param_list[] internalParamNames;
 	private static Xomw_param_map internalParamMap;
@@ -783,11 +765,11 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		//$time = $file ? $file->getTimestamp() : false;
 		//$sha1 = $file ? $file->getSha1() : false;
 		//# Register the file as a dependency...
-		//$this->mOutput->addImage( $title->getDBkey(), $time, $sha1 );
+		//this.mOutput->addImage( $title->getDBkey(), $time, $sha1 );
 		//if ( $file && !$title->equals( $file->getTitle() ) ) {
 		//	# Update fetched file title
 		//	$title = $file->getTitle();
-		//	$this->mOutput->addImage( $title->getDBkey(), $time, $sha1 );
+		//	this.mOutput->addImage( $title->getDBkey(), $time, $sha1 );
 		//}
 		return file;
 	}
@@ -835,7 +817,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		
 		link_renderer.Make_known_link(bfr, nt, text, extra_atrs, query);
 		byte[] link = bfr.To_bry_and_clear();
-		parser.Armor_links(bfr, link, 0, link.length);
+		parser.armorLinks(bfr, link, 0, link.length);
 		bfr.Add(trail);
 	}
 
@@ -856,4 +838,326 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	//   title-char             -> ([{$tc}]+)
 	//   pipe                   -> \\|
 	//   other chars...         -> (.*)
+//
+//		/**
+//		* Process [[ ]] wikilinks
+//		*
+//		* @param String $s
+//		*
+//		* @return String Processed text
+//		*
+//		* @private
+//		*/
+//		public function replaceInternalLinks($s) {
+//			this.mLinkHolders->merge(this.replaceInternalLinks2($s));
+//			return $s;
+//		}
+//
+//		/**
+//		* Process [[ ]] wikilinks (RIL)
+//		* @param String $s
+//		* @throws MWException
+//		* @return LinkHolderArray
+//		*
+//		* @private
+//		*/
+//		public function replaceInternalLinks2(&$s) {
+//			global $wgExtraInterlanguageLinkPrefixes;
+//
+//			static $tc = false, $e1, $e1_img;
+//			# the % is needed to support urlencoded titles as well
+//			if (!$tc) {
+//				$tc = Title::legalChars() . '#%';
+//				# Match a link having the form [[namespace:link|alternate]]trail
+//				$e1 = "/^([{$tc}]+)(?:\\|(.+?))?]](.*)\$/sD";
+//				# Match cases where there is no "]]", which might still be images
+//				$e1_img = "/^([{$tc}]+)\\|(.*)\$/sD";
+//			}
+//
+//			$holders = new LinkHolderArray($this);
+//
+//			# split the entire text String on occurrences of [[
+//			$a = StringUtils::explode('[[', ' ' . $s);
+//			# get the first element (all text up to first [[), and remove the space we added
+//			$s = $a->current();
+//			$a->next();
+//			$line = $a->current(); # Workaround for broken ArrayIterator::next() that returns "void"
+//			$s = substr($s, 1);
+//
+//			$useLinkPrefixExtension = this.getTargetLanguage()->linkPrefixExtension();
+//			$e2 = null;
+//			if ($useLinkPrefixExtension) {
+//				# Match the end of a line for a word that's not followed by whitespace,
+//				# e.g. in the case of 'The Arab al[[Razi]]', 'al' will be matched
+//				global $wgContLang;
+//				$charset = $wgContLang->linkPrefixCharset();
+//				$e2 = "/^((?>.*[^$charset]|))(.+)$/sDu";
+//			}
+//
+//			if (is_null(this.mTitle)) {
+//				throw new MWException(__METHOD__ . ": \this.mTitle is null\n");
+//			}
+//			$nottalk = !this.mTitle->isTalkPage();
+//
+//			if ($useLinkPrefixExtension) {
+//				$m = [];
+//				if (preg_match($e2, $s, $m)) {
+//					$first_prefix = $m[2];
+//				} else {
+//					$first_prefix = false;
+//				}
+//			} else {
+//				$prefix = '';
+//			}
+//
+//			$useSubpages = this.areSubpagesAllowed();
+//
+//			// @codingStandardsIgnoreStart Squiz.WhiteSpace.SemicolonSpacing.Incorrect
+//			# Loop for each link
+//			for (; $line !== false && $line !== null; $a->next(), $line = $a->current()) {
+//				// @codingStandardsIgnoreEnd
+//
+//				# Check for excessive memory usage
+//				if ($holders->isBig()) {
+//					# Too big
+//					# Do the existence check, replace the link holders and clear the array
+//					$holders->replace($s);
+//					$holders->clear();
+//				}
+//
+//				if ($useLinkPrefixExtension) {
+//					if (preg_match($e2, $s, $m)) {
+//						$prefix = $m[2];
+//						$s = $m[1];
+//					} else {
+//						$prefix = '';
+//					}
+//					# first link
+//					if ($first_prefix) {
+//						$prefix = $first_prefix;
+//						$first_prefix = false;
+//					}
+//				}
+//
+//				$might_be_img = false;
+//
+//				if (preg_match($e1, $line, $m)) { # page with normal text or alt
+//					$text = $m[2];
+//					# If we get a ] at the beginning of $m[3] that means we have a link that's something like:
+//					# [[Image:Foo.jpg|[http://example.com desc]]] <- having three ] in a row fucks up,
+//					# the real problem is with the $e1 regex
+//					# See T1500.
+//					# Still some problems for cases where the ] is meant to be outside punctuation,
+//					# and no image is in sight. See T4095.
+//					if ($text !== ''
+//						&& substr($m[3], 0, 1) === ']'
+//						&& strpos($text, '[') !== false
+//					) {
+//						$text .= ']'; # so that replaceExternalLinks($text) works later
+//						$m[3] = substr($m[3], 1);
+//					}
+//					# fix up urlencoded title texts
+//					if (strpos($m[1], '%') !== false) {
+//						# Should anchors '#' also be rejected?
+//						$m[1] = str_replace([ '<', '>' ], [ '&lt;', '&gt;' ], rawurldecode($m[1]));
+//					}
+//					$trail = $m[3];
+//				} elseif (preg_match($e1_img, $line, $m)) {
+//					# Invalid, but might be an image with a link in its caption
+//					$might_be_img = true;
+//					$text = $m[2];
+//					if (strpos($m[1], '%') !== false) {
+//						$m[1] = str_replace([ '<', '>' ], [ '&lt;', '&gt;' ], rawurldecode($m[1]));
+//					}
+//					$trail = "";
+//				} else { # Invalid form; output directly
+//					$s .= $prefix . '[[' . $line;
+//					continue;
+//				}
+//
+//				$origLink = ltrim($m[1], ' ');
+//
+//				# Don't allow @gplx.Internal protected links to pages containing
+//				# PROTO: where PROTO is a valid URL protocol; these
+//				# should be external links.
+//				if (preg_match('/^(?i:' . this.mUrlProtocols . ')/', $origLink)) {
+//					$s .= $prefix . '[[' . $line;
+//					continue;
+//				}
+//
+//				# Make subpage if necessary
+//				if ($useSubpages) {
+//					$link = this.maybeDoSubpageLink($origLink, $text);
+//				} else {
+//					$link = $origLink;
+//				}
+//
+//				$noforce = (substr($origLink, 0, 1) !== ':');
+//				if (!$noforce) {
+//					# Strip off leading ':'
+//					$link = substr($link, 1);
+//				}
+//
+//				$unstrip = this.mStripState->unstripNoWiki($link);
+//				$nt = is_string($unstrip) ? Title::newFromText($unstrip) : null;
+//				if ($nt === null) {
+//					$s .= $prefix . '[[' . $line;
+//					continue;
+//				}
+//
+//				$ns = $nt->getNamespace();
+//				$iw = $nt->getInterwiki();
+//
+//				if ($might_be_img) { # if this is actually an invalid link
+//					if ($ns == NS_FILE && $noforce) { # but might be an image
+//						$found = false;
+//						while (true) {
+//							# look at the next 'line' to see if we can close it there
+//							$a->next();
+//							$next_line = $a->current();
+//							if ($next_line === false || $next_line === null) {
+//								break;
+//							}
+//							$m = explode(']]', $next_line, 3);
+//							if (count($m) == 3) {
+//								# the first ]] closes the inner link, the second the image
+//								$found = true;
+//								$text .= "[[{$m[0]}]]{$m[1]}";
+//								$trail = $m[2];
+//								break;
+//							} elseif (count($m) == 2) {
+//								# if there's exactly one ]] that's fine, we'll keep looking
+//								$text .= "[[{$m[0]}]]{$m[1]}";
+//							} else {
+//								# if $next_line is invalid too, we need look no further
+//								$text .= '[[' . $next_line;
+//								break;
+//							}
+//						}
+//						if (!$found) {
+//							# we couldn't find the end of this imageLink, so output it raw
+//							# but don't ignore what might be perfectly normal links in the text we've examined
+//							$holders->merge(this.replaceInternalLinks2($text));
+//							$s .= "{$prefix}[[$link|$text";
+//							# note: no $trail, because without an end, there *is* no trail
+//							continue;
+//						}
+//					} else { # it's not an image, so output it raw
+//						$s .= "{$prefix}[[$link|$text";
+//						# note: no $trail, because without an end, there *is* no trail
+//						continue;
+//					}
+//				}
+//
+//				$wasblank = ($text == '');
+//				if ($wasblank) {
+//					$text = $link;
+//				} else {
+//					# T6598 madness. Handle the quotes only if they come from the alternate part
+//					# [[Lista d''e paise d''o munno]] -> <a href="...">Lista d''e paise d''o munno</a>
+//					# [[Criticism of Harry Potter|Criticism of ''Harry Potter'']]
+//					#    -> <a href="Criticism of Harry Potter">Criticism of <i>Harry Potter</i></a>
+//					$text = this.doQuotes($text);
+//				}
+//
+//				# Link not escaped by : , create the various objects
+//				if ($noforce && !$nt->wasLocalInterwiki()) {
+//					# Interwikis
+//					if (
+//						$iw && this.mOptions->getInterwikiMagic() && $nottalk && (
+//							Language::fetchLanguageName($iw, null, 'mw') ||
+//							in_array($iw, $wgExtraInterlanguageLinkPrefixes)
+//						)
+//					) {
+//						# T26502: filter duplicates
+//						if (!isset(this.mLangLinkLanguages[$iw])) {
+//							this.mLangLinkLanguages[$iw] = true;
+//							this.mOutput->addLanguageLink($nt->getFullText());
+//						}
+//
+//						$s = rtrim($s . $prefix);
+//						$s .= trim($trail, "\n") == '' ? '': $prefix . $trail;
+//						continue;
+//					}
+//
+//					if ($ns == NS_FILE) {
+//						if (!wfIsBadImage($nt->getDBkey(), this.mTitle)) {
+//							if ($wasblank) {
+//								# if no parameters were passed, $text
+//								# becomes something like "File:Foo.png",
+//								# which we don't want to pass on to the
+//								# image generator
+//								$text = '';
+//							} else {
+//								# recursively parse links inside the image caption
+//								# actually, this will parse them in any other parameters, too,
+//								# but it might be hard to fix that, and it doesn't matter ATM
+//								$text = this.replaceExternalLinks($text);
+//								$holders->merge(this.replaceInternalLinks2($text));
+//							}
+//							# cloak any absolute URLs inside the image markup, so replaceExternalLinks() won't touch them
+//							$s .= $prefix . this.armorLinks(
+//								this.makeImage($nt, $text, $holders)) . $trail;
+//							continue;
+//						}
+//					} elseif ($ns == NS_CATEGORY) {
+//						$s = rtrim($s . "\n"); # T2087
+//
+//						if ($wasblank) {
+//							$sortkey = this.getDefaultSort();
+//						} else {
+//							$sortkey = $text;
+//						}
+//						$sortkey = Sanitizer::decodeCharReferences($sortkey);
+//						$sortkey = str_replace("\n", '', $sortkey);
+//						$sortkey = this.getConverterLanguage()->convertCategoryKey($sortkey);
+//						this.mOutput->addCategory($nt->getDBkey(), $sortkey);
+//
+//						/**
+//						* Strip the whitespace Category links produce, see T2087
+//						*/
+//						$s .= trim($prefix . $trail, "\n") == '' ? '' : $prefix . $trail;
+//
+//						continue;
+//					}
+//				}
+//
+//				# Self-link checking. For some languages, variants of the title are checked in
+//				# LinkHolderArray::doVariants() to allow batching the existence checks necessary
+//				# for linking to a different variant.
+//				if ($ns != NS_SPECIAL && $nt->equals(this.mTitle) && !$nt->hasFragment()) {
+//					$s .= $prefix . Linker::makeSelfLinkObj($nt, $text, '', $trail);
+//					continue;
+//				}
+//
+//				# NS_MEDIA is a pseudo-namespace for linking directly to a file
+//				# @todo FIXME: Should do batch file existence checks, see comment below
+//				if ($ns == NS_MEDIA) {
+//					# Give extensions a chance to select the file revision for us
+//					$options = [];
+//					$descQuery = false;
+//					Hooks::run('BeforeParserFetchFileAndTitle',
+//						[ $this, $nt, &$options, &$descQuery ]);
+//					# Fetch and register the file (file title may be different via hooks)
+//					list($file, $nt) = this.fetchFileAndTitle($nt, $options);
+//					# Cloak with NOPARSE to avoid replacement in replaceExternalLinks
+//					$s .= $prefix . this.armorLinks(
+//						Linker::makeMediaLinkFile($nt, $file, $text)) . $trail;
+//					continue;
+//				}
+//
+//				# Some titles, such as valid special pages or files in foreign repos, should
+//				# be shown as bluelinks even though they're not included in the page table
+//				# @todo FIXME: isAlwaysKnown() can be expensive for file links; we should really do
+//				# batch file existence checks for NS_FILE and NS_MEDIA
+//				if ($iw == '' && $nt->isAlwaysKnown()) {
+//					this.mOutput->addLink($nt);
+//					$s .= this.makeKnownLinkHolder($nt, $text, $trail, $prefix);
+//				} else {
+//					# Links will be added to the output link list after checking
+//					$s .= $holders->makeHolder($nt, $text, [], $trail, $prefix);
+//				}
+//			}
+//			return $holders;
+//		}
 }

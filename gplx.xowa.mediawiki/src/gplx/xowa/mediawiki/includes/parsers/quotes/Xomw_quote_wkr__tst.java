@@ -33,11 +33,11 @@ public class Xomw_quote_wkr__tst {
 	@Test  public void Nl__text()      {fxt.Test__parse("a\nb''c''d\n\ne"             , "a\nb<i>c</i>d\n\ne");}
 }
 class Xomw_quote_wkr__fxt {
-	private final    Xomw_quote_wkr wkr = new Xomw_quote_wkr(new Xomw_parser());
+	private final    Xomw_quote_wkr wkr = new Xomw_quote_wkr(Bry_bfr_.New());
 	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		wkr.Do_all_quotes(new Xomw_parser_ctx(), pbfr.Init(src_bry));
+		wkr.doAllQuotes(new Xomw_parser_ctx(), pbfr.Init(src_bry));
 		Tfds.Eq_str_lines(expd, pbfr.Rslt().To_str_and_clear(), src_str);
 	}
 }

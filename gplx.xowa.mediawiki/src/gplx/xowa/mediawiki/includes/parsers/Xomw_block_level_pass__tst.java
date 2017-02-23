@@ -34,7 +34,7 @@ class Xomw_block_level_pass__fxt {
 	private boolean apos = true;
 	public void Test__do_block_levels(String src, String expd) {
 		if (apos) expd = gplx.langs.htmls.Gfh_utl.Replace_apos(expd);
-		block_level_pass.Do_block_levels(pctx, pbfr.Init(Bry_.new_u8(src)), true);
+		block_level_pass.doBlockLevels(pctx, pbfr.Init(Bry_.new_u8(src)), true);
 		Gftest.Eq__str(expd, pbfr.Rslt().To_str_and_clear());
 	}
 }

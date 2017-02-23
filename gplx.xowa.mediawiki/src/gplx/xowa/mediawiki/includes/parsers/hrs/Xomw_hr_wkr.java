@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.includes.parsers.hrs; import gplx.*; import gplx.xow
 import gplx.xowa.mediawiki.includes.utls.*;
 public class Xomw_hr_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private Bry_bfr bfr;
-	public void Replace_hrs(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {	// REF.MW: text = preg_replace('/(^|\n)-----*/', '\\1<hr />', text);
+	public void replaceHrs(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {	// REF.MW: text = preg_replace('/(^|\n)-----*/', '\\1<hr />', text);
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();

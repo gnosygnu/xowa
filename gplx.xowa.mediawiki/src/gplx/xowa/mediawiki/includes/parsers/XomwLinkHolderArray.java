@@ -31,13 +31,13 @@ public class XomwLinkHolderArray {
 	/**
 	* @var Parser
 	*/
-	private final    Xomw_parser parent;
+	private final    XomwParserIface parent;
 //		protected $tempIdOffset;
 
 	/**
 	* @param Parser $parent
 	*/
-	public XomwLinkHolderArray(Xomw_parser parent) {
+	public XomwLinkHolderArray(XomwParserIface parent) {
 		this.parent = parent;
 	}
 
@@ -261,18 +261,22 @@ public class XomwLinkHolderArray {
 	*
 	* @param String $text
 	*/
-	public void replace(Xomw_parser_bfr pbfr) {
-		this.replaceInternal(pbfr);
+	public boolean replace(Xomw_parser_bfr pbfr) {
+		return this.replaceInternal(pbfr);
 //			$this->replaceInterwiki( $text );
+	}
+	public byte[] replace(Xomw_parser_bfr pbfr, byte[] text) {
+		boolean rv = this.replace(pbfr.Init(text));
+		return rv ? pbfr.Trg().To_bry_and_clear() : pbfr.Src().To_bry_and_clear();
 	}
 
 	/**
 	* Replace @gplx.Internal protected links
 	* @param String $text
 	*/
-	private void replaceInternal(Xomw_parser_bfr pbfr) {
+	private boolean replaceInternal(Xomw_parser_bfr pbfr) {
 		if (internals.Len() == 0) {
-			return;
+			return false;
 		}
 
 		// SKIP:Replace_internals does db lookup to identify redlinks;
@@ -430,6 +434,7 @@ public class XomwLinkHolderArray {
 //				$replacer->cb(),
 //				$text
 //			);
+		return true;
 	}
 
 //		/**

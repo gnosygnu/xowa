@@ -20,7 +20,7 @@ import gplx.xowa.mediawiki.includes.libs.*; import gplx.xowa.parsers.uniqs.*;
 public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    Bry_bfr tmp;
 	private Bry_bfr bfr;
-	private final    XomwSanitizer sanitizer; private final    Xomw_strip_state strip_state;
+	private final    XomwSanitizer sanitizer; private final    XomwStripState strip_state;
 	private final    List_adp 
 	  td_history       = List_adp_.New() // Is currently a td tag open?
 	, last_tag_history = List_adp_.New() // Save history of last lag activated (td, th or caption)
@@ -30,12 +30,12 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 	;
 	private int indent_level = 0; // indent level of the table
 	private byte[] first_2 = new byte[2];
-	public Xomw_table_wkr(Xomw_parser parser) {
-		this.tmp = parser.Tmp();
-		this.sanitizer = parser.Sanitizer();
-		this.strip_state = parser.Strip_state();
+	public Xomw_table_wkr(Bry_bfr tmp, XomwSanitizer sanitizer, XomwStripState stripState) {
+		this.tmp = tmp;
+		this.sanitizer = sanitizer;
+		this.strip_state = stripState;
 	}
-	public void Do_table_stuff(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
+	public void doTableStuff(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();
 		int src_bgn = 0;
@@ -101,7 +101,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 			// First check if we are starting a new table
 			indent_level = colons_end;
 
-			tblw_atrs = strip_state.Unstrip_both(tblw_atrs);
+			tblw_atrs = strip_state.unstripBoth(tblw_atrs);
 
 			// PORTED: out_line = str_repeat('<dl><dd>', $indent_level) . "<table{atrs}>";
 			for (int j = 0; j < indent_level; j++)
@@ -149,7 +149,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 			line = Bry_.Mid(line, 2);        // PORTED: $line = preg_replace('#^\|-+#', '', $line);
 
 			// Whats after the tag is now only attributes
-			byte[] atrs = strip_state.Unstrip_both(line);
+			byte[] atrs = strip_state.unstripBoth(line);
 			sanitizer.Fix_tag_attributes(tmp, Name__tr, atrs);
 			atrs = tmp.To_bry_and_clear();
 
@@ -251,7 +251,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 					cell = tmp.Add(previous).Add_byte(Byte_ascii.Angle_bgn).Add(last_tag).Add_byte(Byte_ascii.Angle_end).Add(cell_data_0).To_bry_and_clear();
 				}
 				else {
-					byte[] atrs = strip_state.Unstrip_both(cell_data_0);
+					byte[] atrs = strip_state.unstripBoth(cell_data_0);
 					tmp.Add(previous).Add_byte(Byte_ascii.Angle_bgn).Add(last_tag);
 					sanitizer.Fix_tag_attributes(tmp, last_tag, atrs);
 					tmp.Add_byte(Byte_ascii.Angle_end).Add(cell_data_1);
@@ -265,6 +265,197 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 		bfr.Add(out_line).Add_byte_nl();
 		return Bry_split_.Rv__ok;
 	}
+//		public function doTableStuff($text) {
+//
+//			$lines = StringUtils::explode("\n", $text);
+//			$out = '';
+//			$td_history = []; # Is currently a td tag open?
+//			$last_tag_history = []; # Save history of last lag activated (td, th or caption)
+//			$tr_history = []; # Is currently a tr tag open?
+//			$tr_attributes = []; # history of tr attributes
+//			$has_opened_tr = []; # Did this table open a <tr> element?
+//			$indent_level = 0; # indent level of the table
+//
+//			foreach ($lines as $outLine) {
+//				$line = trim($outLine);
+//
+//				if ($line === '') { # empty line, go to next line
+//					$out .= $outLine . "\n";
+//					continue;
+//				}
+//
+//				$first_character = $line[0];
+//				$first_two = substr($line, 0, 2);
+//				$matches = [];
+//
+//				if (preg_match('/^(:*)\s*\{\|(.*)$/', $line, $matches)) {
+//					# First check if we are starting a new table
+//					$indent_level = strlen($matches[1]);
+//
+//					$attributes = this.mStripState->unstripBoth($matches[2]);
+//					$attributes = Sanitizer::fixTagAttributes($attributes, 'table');
+//
+//					$outLine = str_repeat('<dl><dd>', $indent_level) . "<table{$attributes}>";
+//					array_push($td_history, false);
+//					array_push($last_tag_history, '');
+//					array_push($tr_history, false);
+//					array_push($tr_attributes, '');
+//					array_push($has_opened_tr, false);
+//				} elseif (count($td_history) == 0) {
+//					# Don't do any of the following
+//					$out .= $outLine . "\n";
+//					continue;
+//				} elseif ($first_two === '|}') {
+//					# We are ending a table
+//					$line = '</table>' . substr($line, 2);
+//					$last_tag = array_pop($last_tag_history);
+//
+//					if (!array_pop($has_opened_tr)) {
+//						$line = "<tr><td></td></tr>{$line}";
+//					}
+//
+//					if (array_pop($tr_history)) {
+//						$line = "</tr>{$line}";
+//					}
+//
+//					if (array_pop($td_history)) {
+//						$line = "</{$last_tag}>{$line}";
+//					}
+//					array_pop($tr_attributes);
+//					$outLine = $line . str_repeat('</dd></dl>', $indent_level);
+//				} elseif ($first_two === '|-') {
+//					# Now we have a table row
+//					$line = preg_replace('#^\|-+#', '', $line);
+//
+//					# Whats after the tag is now only attributes
+//					$attributes = this.mStripState->unstripBoth($line);
+//					$attributes = Sanitizer::fixTagAttributes($attributes, 'tr');
+//					array_pop($tr_attributes);
+//					array_push($tr_attributes, $attributes);
+//
+//					$line = '';
+//					$last_tag = array_pop($last_tag_history);
+//					array_pop($has_opened_tr);
+//					array_push($has_opened_tr, true);
+//
+//					if (array_pop($tr_history)) {
+//						$line = '</tr>';
+//					}
+//
+//					if (array_pop($td_history)) {
+//						$line = "</{$last_tag}>{$line}";
+//					}
+//
+//					$outLine = $line;
+//					array_push($tr_history, false);
+//					array_push($td_history, false);
+//					array_push($last_tag_history, '');
+//				} elseif ($first_character === '|'
+//					|| $first_character === '!'
+//					|| $first_two === '|+'
+//				) {
+//					# This might be cell elements, td, th or captions
+//					if ($first_two === '|+') {
+//						$first_character = '+';
+//						$line = substr($line, 2);
+//					} else {
+//						$line = substr($line, 1);
+//					}
+//
+//					// Implies both are valid for table headings.
+//					if ($first_character === '!') {
+//						$line = StringUtils::replaceMarkup('!!', '||', $line);
+//					}
+//
+//					# Split up multiple cells on the same line.
+//					# FIXME : This can result in improper nesting of tags processed
+//					# by earlier parser steps.
+//					$cells = explode('||', $line);
+//
+//					$outLine = '';
+//
+//					# Loop through each table cell
+//					foreach ($cells as $cell) {
+//						$previous = '';
+//						if ($first_character !== '+') {
+//							$tr_after = array_pop($tr_attributes);
+//							if (!array_pop($tr_history)) {
+//								$previous = "<tr{$tr_after}>\n";
+//							}
+//							array_push($tr_history, true);
+//							array_push($tr_attributes, '');
+//							array_pop($has_opened_tr);
+//							array_push($has_opened_tr, true);
+//						}
+//
+//						$last_tag = array_pop($last_tag_history);
+//
+//						if (array_pop($td_history)) {
+//							$previous = "</{$last_tag}>\n{$previous}";
+//						}
+//
+//						if ($first_character === '|') {
+//							$last_tag = 'td';
+//						} elseif ($first_character === '!') {
+//							$last_tag = 'th';
+//						} elseif ($first_character === '+') {
+//							$last_tag = 'caption';
+//						} else {
+//							$last_tag = '';
+//						}
+//
+//						array_push($last_tag_history, $last_tag);
+//
+//						# A cell could contain both parameters and data
+//						$cell_data = explode('|', $cell, 2);
+//
+//						# T2553: Note that a '|' inside an invalid link should not
+//						# be mistaken as delimiting cell parameters
+//						# Bug T153140: Neither should language converter markup.
+//						if (preg_match('/\[\[|-\{/', $cell_data[0]) === 1) {
+//							$cell = "{$previous}<{$last_tag}>{$cell}";
+//						} elseif (count($cell_data) == 1) {
+//							$cell = "{$previous}<{$last_tag}>{$cell_data[0]}";
+//						} else {
+//							$attributes = this.mStripState->unstripBoth($cell_data[0]);
+//							$attributes = Sanitizer::fixTagAttributes($attributes, $last_tag);
+//							$cell = "{$previous}<{$last_tag}{$attributes}>{$cell_data[1]}";
+//						}
+//
+//						$outLine .= $cell;
+//						array_push($td_history, true);
+//					}
+//				}
+//				$out .= $outLine . "\n";
+//			}
+//
+//			# Closing open td, tr && table
+//			while (count($td_history) > 0) {
+//				if (array_pop($td_history)) {
+//					$out .= "</td>\n";
+//				}
+//				if (array_pop($tr_history)) {
+//					$out .= "</tr>\n";
+//				}
+//				if (!array_pop($has_opened_tr)) {
+//					$out .= "<tr><td></td></tr>\n";
+//				}
+//
+//				$out .= "</table>\n";
+//			}
+//
+//			# Remove trailing line-ending (b/c)
+//			if (substr($out, -1) === "\n") {
+//				$out = substr($out, 0, -1);
+//			}
+//
+//			# special case: don't return empty table
+//			if ($out === "<table>\n<tr><td></td></tr>\n</table>") {
+//				$out = '';
+//			}
+//
+//			return $out;
+//		}
 	private static final    byte[] 
 	  Wtxt__tb__bgn     = Bry_.new_a7("{|")
 	, Wtxt__tb__end     = Bry_.new_a7("|}")

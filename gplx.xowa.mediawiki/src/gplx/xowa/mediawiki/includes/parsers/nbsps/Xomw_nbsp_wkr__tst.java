@@ -31,7 +31,7 @@ class Xomw_nbsp_wkr__fxt {
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		pbfr.Init(src_bry);
-		wkr.Do_nbsp(pctx, pbfr);
+		wkr.doNbsp(pctx, pbfr);
 		if (apos) expd = gplx.langs.htmls.Gfh_utl.Replace_apos(expd);
 		Tfds.Eq_str_lines(expd, pbfr.Rslt().To_str_and_clear(), src_str);
 	}

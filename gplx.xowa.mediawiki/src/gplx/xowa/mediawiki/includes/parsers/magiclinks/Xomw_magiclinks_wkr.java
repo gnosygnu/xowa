@@ -24,7 +24,7 @@ public class Xomw_magiclinks_wkr {
 	private static byte[] Tag__anch__rhs;
 	private boolean[] url_separators;
 	private static Xomw_regex_link_interrupt regex_link_interrupt;
-	private final    Xomw_parser parser;
+	private final    XomwParserIface parser;
 	private final    Xomw_regex_boundary regex_boundary;
 	private final    Xomw_regex_url regex_url;
 	private final    XomwSanitizer sanitizer;
@@ -33,7 +33,7 @@ public class Xomw_magiclinks_wkr {
 	private byte[] page_title;
 
 	private static final byte Regex__anch = 1, Regex__elem = 2, Regex__free = 3;
-	public Xomw_magiclinks_wkr(Xomw_parser parser, XomwSanitizer sanitizer, XomwLinker linker, Xomw_regex_boundary regex_boundary, Xomw_regex_url regex_url) {
+	public Xomw_magiclinks_wkr(XomwParserIface parser, XomwSanitizer sanitizer, XomwLinker linker, Xomw_regex_boundary regex_boundary, Xomw_regex_url regex_url) {
 		this.parser = parser;
 		this.sanitizer = sanitizer;
 		this.linker = linker;
@@ -66,7 +66,7 @@ public class Xomw_magiclinks_wkr {
 
 	// Replace special strings like "ISBN xxx" and "RFC xxx" with
 	// magic external links.
-	public void Do_magic_links(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
+	public void doMagicLinks(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();
@@ -262,7 +262,7 @@ public class Xomw_magiclinks_wkr {
 			linker.makeExternalLink(bfr, url
 				, url	// $this->getConverterLanguage()->markNoConversion($url, true),
 				, true, Bry_.new_a7("free")
-				, parser.Get_external_link_attribs(atrs)
+				, parser.getExternalLinkAttribs(atrs)
 				, page_title);
 
 			// XO.MW.UNSUPPORTED.HOOK: registers link for processing by other extensions?
@@ -390,4 +390,107 @@ class Xomw_regex_link_interrupt {
 		}
 		return Bry_find_.Not_found;
 	}
+//		/**
+//		* Replace special strings like "ISBN xxx" and "RFC xxx" with
+//		* magic external links.
+//		*
+//		* DML
+//		* @private
+//		*
+//		* @param String $text
+//		*
+//		* @return String
+//		*/
+//		public function doMagicLinks($text) {
+//			$prots = wfUrlProtocolsWithoutProtRel();
+//			$urlChar = self::EXT_LINK_URL_CLASS;
+//			$addr = self::EXT_LINK_ADDR;
+//			$space = self::SPACE_NOT_NL; #  non-newline space
+//			$spdash = "(?:-|$space)"; # a dash or a non-newline space
+//			$spaces = "$space++"; # possessive match of 1 or more spaces
+//			$text = preg_replace_callback(
+//				'!(?:                            # Start cases
+//					(<a[ \t\r\n>].*?</a>) |      # m[1]: Skip link text
+//					(<.*?>) |                    # m[2]: Skip stuff inside
+//												#       HTML elements' . "
+//					(\b(?i:$prots)($addr$urlChar*)) | # m[3]: Free external links
+//												# m[4]: Post-protocol path
+//					\b(?:RFC|PMID) $spaces       # m[5]: RFC or PMID, capture number
+//						([0-9]+)\b |
+//					\bISBN $spaces (            # m[6]: ISBN, capture number
+//						(?: 97[89] $spdash?)?   #  optional 13-digit ISBN prefix
+//						(?: [0-9]  $spdash?){9} #  9 digits with opt. delimiters
+//						[0-9Xx]                  #  check digit
+//					)\b
+//				)!xu", [ &$this, 'magicLinkCallback' ], $text);
+//			return $text;
+//		}
+//
+//		/**
+//		* @throws MWException
+//		* @param array $m
+//		* @return HTML|String
+//		*/
+//		public function magicLinkCallback($m) {
+//			if (isset($m[1]) && $m[1] !== '') {
+//				# Skip anchor
+//				return $m[0];
+//			} elseif (isset($m[2]) && $m[2] !== '') {
+//				# Skip HTML element
+//				return $m[0];
+//			} elseif (isset($m[3]) && $m[3] !== '') {
+//				# Free external link
+//				return this.makeFreeExternalLink($m[0], strlen($m[4]));
+//			} elseif (isset($m[5]) && $m[5] !== '') {
+//				# RFC or PMID
+//				if (substr($m[0], 0, 3) === 'RFC') {
+//					if (!this.mOptions->getMagicRFCLinks()) {
+//						return $m[0];
+//					}
+//					$keyword = 'RFC';
+//					$urlmsg = 'rfcurl';
+//					$cssClass = 'mw-magiclink-rfc';
+//					$trackingCat = 'magiclink-tracking-rfc';
+//					$id = $m[5];
+//				} elseif (substr($m[0], 0, 4) === 'PMID') {
+//					if (!this.mOptions->getMagicPMIDLinks()) {
+//						return $m[0];
+//					}
+//					$keyword = 'PMID';
+//					$urlmsg = 'pubmedurl';
+//					$cssClass = 'mw-magiclink-pmid';
+//					$trackingCat = 'magiclink-tracking-pmid';
+//					$id = $m[5];
+//				} else {
+//					throw new MWException(__METHOD__ . ': unrecognised match type "' .
+//						substr($m[0], 0, 20) . '"');
+//				}
+//				$url = wfMessage($urlmsg, $id)->inContentLanguage()->text();
+//				this.addTrackingCategory($trackingCat);
+//				return Linker::makeExternalLink($url, "{$keyword} {$id}", true, $cssClass, [], this.mTitle);
+//			} elseif (isset($m[6]) && $m[6] !== ''
+//				&& this.mOptions->getMagicISBNLinks()
+//			) {
+//				# ISBN
+//				$isbn = $m[6];
+//				$space = self::SPACE_NOT_NL; #  non-newline space
+//				$isbn = preg_replace("/$space/", ' ', $isbn);
+//				$num = strtr($isbn, [
+//					'-' => '',
+//					' ' => '',
+//					'x' => 'X',
+//				]);
+//				this.addTrackingCategory('magiclink-tracking-isbn');
+//				return this.getLinkRenderer()->makeKnownLink(
+//					SpecialPage::getTitleFor('Booksources', $num),
+//					"ISBN $isbn",
+//					[
+//						'class' => '@gplx.Internal protected mw-magiclink-isbn',
+//						'title' => false // suppress title attribute
+//					]
+//				);
+//			} else {
+//				return $m[0];
+//			}
+//		}
 }

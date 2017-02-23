@@ -28,7 +28,7 @@ public class Xomw_heading_wkr {
 	public int Hdr_lhs_end()	{return hdr_lhs_end;} private int hdr_lhs_end;
 	public int Hdr_rhs_bgn()	{return hdr_rhs_bgn;} private int hdr_rhs_bgn;
 	public int Hdr_rhs_end()	{return hdr_rhs_end;} private int hdr_rhs_end;
-	public void Do_headings(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr, Xomw_heading_cbk__html cbk) {
+	public void doHeadings(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr, Xomw_heading_cbk__html cbk) {
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src_bry = src_bfr.Bfr();
 		int src_end = src_bfr.Len();
@@ -103,4 +103,20 @@ public class Xomw_heading_wkr {
 		cbk.On_hdr_seen(pctx, this);
 		return nl_rhs;
 	}
+//		/**
+//		* Parse headers and return html
+//		*
+//		* @private
+//		*
+//		* @param String $text
+//		*
+//		* @return String
+//		*/
+//		public function doHeadings($text) {
+//			for ($i = 6; $i >= 1; --$i) {
+//				$h = str_repeat('=', $i);
+//				$text = preg_replace("/^$h(.+)$h\\s*$/m", "<h$i>\\1</h$i>", $text);
+//			}
+//			return $text;
+//		}
 }

@@ -332,8 +332,7 @@ public class XomwLinker {
 	// @since 1.20
 	// @return String HTML for an image, with links, wrappers, etc.
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	public void makeImageLink(Bry_bfr bfr, Xomw_parser_ctx pctx, Xomw_parser parser, XomwTitle title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query, int widthOption) {
-		Xomw_parser_env env = parser.Env();
+	public void makeImageLink(Bry_bfr bfr, Xomw_parser_env env, Xomw_parser_ctx pctx, XomwParserIface parser, XomwTitle title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query, int widthOption) {
 		// XO.MW.HOOK:ImageBeforeProduceHTML
 
 		if (file != null && !file.allowInlineDisplay()) {
@@ -413,7 +412,7 @@ public class XomwLinker {
 			// If a thumbnail width has not been provided, it is set
 			// to the default user option as specified in Language*.php
 			if (frameParams.align == Bry_.Empty) {
-				frameParams.align = parser.Env().Lang__align_end;
+				frameParams.align = env.Lang__align_end;
 			}
 			bfr.Add(prefix);
 			makeThumbLink2(bfr, env, pctx, title, file, frameParams, handlerParams, time, query);
@@ -482,7 +481,7 @@ public class XomwLinker {
 	// @param Parser|null $parser
 	// @return array
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	private static void getImageLinkMTOParams(Xomw_params_mto rv, Xomw_params_frame frameParams, byte[] query, Xomw_parser parser) {
+	private static void getImageLinkMTOParams(Xomw_params_mto rv, Xomw_params_frame frameParams, byte[] query, XomwParserIface parser) {
 		if (Php_utl_.isset(frameParams.link_url) && frameParams.link_url != Bry_.Empty) {
 			rv.custom_url_link = frameParams.link_url;
 			if (Php_utl_.isset(frameParams.link_target)) {

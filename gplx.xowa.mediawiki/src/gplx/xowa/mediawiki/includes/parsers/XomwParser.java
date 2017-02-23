@@ -14,14 +14,25 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+import gplx.core.btries.*;
+import gplx.xowa.mediawiki.includes.htmls.*;
 import gplx.xowa.mediawiki.includes.linkers.*;
+import gplx.xowa.mediawiki.includes.parsers.tables.*;
+import gplx.xowa.mediawiki.includes.parsers.hrs.*;
+import gplx.xowa.mediawiki.includes.parsers.doubleunders.*;
+import gplx.xowa.mediawiki.includes.parsers.headings.*;
+import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
+import gplx.xowa.mediawiki.includes.parsers.quotes.*;
+import gplx.xowa.mediawiki.includes.parsers.lnkes.*;
+import gplx.xowa.mediawiki.includes.parsers.magiclinks.*;
+import gplx.xowa.mediawiki.includes.parsers.nbsps.*;
 /**
 * PHP Parser - Processes wiki markup (which uses a more user-friendly
 * syntax, such as "[[link]]" for making links), and provides a one-way
 * transformation of that wiki markup it into (X)HTML output / markup
 * (which in turn the browser understands, and can display).
 *
-* There are seven main entry points into the Parser class:
+* There are seven main entry points into the Parser cls:
 *
 * - Parser::parse()
 *     produces HTML output
@@ -54,7 +65,7 @@ import gplx.xowa.mediawiki.includes.linkers.*;
 *
 * @ingroup Parser
 */
-public class XomwParser {
+public class XomwParser implements XomwParserIface {
 //		/**
 //		* Update this version number when the ParserOutput format
 //		* changes in an incompatible way, so the parser cache
@@ -162,17 +173,17 @@ public class XomwParser {
 //		*/
 //		public $mOutput;
 //		public $mAutonumber;
-//
-//		/**
-//		* @var StripState
-//		*/
-//		public $mStripState;
-//
+
+	/**
+	* @var StripState
+	*/
+	public XomwStripState mStripState = new XomwStripState();
+
 //		public $mIncludeCount;
-//		/**
-//		* @var LinkHolderArray
-//		*/
-//		public $mLinkHolders;
+	/**
+	* @var LinkHolderArray
+	*/
+	public XomwLinkHolderArray mLinkHolders;
 
 	private int mLinkID;
 //		public $mIncludeSizes, $mPPNodeCount, $mGeneratedPPNodeCount, $mHighestExpansionDepth;
@@ -188,12 +199,12 @@ public class XomwParser {
 //
 //		# Temporary
 //		# These are variables reset at least once per parse regardless of $clearState
-//
-//		/**
-//		* @var ParserOptions
-//		*/
-//		public $mOptions;
-//
+
+	/**
+	* @var ParserOptions
+	*/
+	public XomwParserOptions mOptions = new XomwParserOptions();
+
 //		/**
 //		* @var Title
 //		*/
@@ -243,7 +254,27 @@ public class XomwParser {
 	*/
 	private Xomw_link_renderer mLinkRenderer;
 
+	// XOWA
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final    Xomw_parser_env env = new Xomw_parser_env();
 	private final    XomwSanitizer sanitizer = new XomwSanitizer();
+	private final    Xomw_table_wkr tableWkr;
+	private final    Xomw_hr_wkr hrWkr = new Xomw_hr_wkr();
+	private final    Xomw_doubleunder_wkr doubleunderWkr = new Xomw_doubleunder_wkr();
+	private final    Xomw_heading_wkr headingWkr = new Xomw_heading_wkr();
+	private final    Xomw_heading_cbk__html headingWkrCbk = new Xomw_heading_cbk__html();
+	private final    Xomw_lnki_wkr lnkiWkr;
+	private final    Xomw_quote_wkr quoteWkr;
+	private final    Xomw_lnke_wkr lnkeWkr;
+	private final    Xomw_magiclinks_wkr magiclinksWkr;
+	private final    Xomw_nbsp_wkr nbspWkr = new Xomw_nbsp_wkr();
+	private final    Xomw_block_level_pass blockWkr = new Xomw_block_level_pass();
+	private final    Xomw_doubleunder_data doubleunder_data = new Xomw_doubleunder_data();
+	private static Xomw_regex_space regex_space;
+	private static Xomw_regex_boundary regex_boundary;
+	private static Xomw_regex_url regex_url;
+	private final    Btrie_rv trv = new Btrie_rv();
+//		private int marker_index = 0;
 
 //		/**
 //		* @param array $conf
@@ -270,7 +301,45 @@ public class XomwParser {
 //			}
 //			wfDebug(__CLASS__ . ": using preprocessor: {this.mPreprocessorClass}\n");
 //		}
-//
+	private final    Btrie_slim_mgr protocols_trie;
+	public Xomw_parser_env Env() {return env;}
+	public Xomw_lnki_wkr Lnki_wkr() {return lnkiWkr;}
+	public XomwLinker              Linker()          {return linker;}         private final    XomwLinker linker;
+	public byte[] Get_external_link_rel;
+	private static byte[] Atr__rel;
+	public XomwParser() {
+		if (regex_space == null) {
+			synchronized (Type_adp_.ClassOf_obj(this)) {
+				regex_space = new Xomw_regex_space();
+				regex_boundary = new Xomw_regex_boundary(regex_space);
+				regex_url = new Xomw_regex_url(regex_space);
+				Atr__rel = Bry_.new_a7("rel");
+				Get_external_link_rel = Bry_.new_a7("nofollow");
+			}
+		}
+
+		this.mLinkRenderer = new Xomw_link_renderer(sanitizer);
+		this.linker = new XomwLinker(mLinkRenderer);
+		this.protocols_trie = Xomw_parser.Protocols__dflt();
+		this.mLinkHolders = new XomwLinkHolderArray(this);
+
+		this.tableWkr = new Xomw_table_wkr(tmp_bfr, sanitizer, mStripState);
+		this.quoteWkr = new Xomw_quote_wkr(tmp_bfr);
+		this.lnkiWkr = new Xomw_lnki_wkr(this, mLinkHolders, mLinkRenderer, protocols_trie, linker, quoteWkr, tmp_bfr, mStripState);
+		this.lnkeWkr = new Xomw_lnke_wkr(this, tmp_bfr, linker, sanitizer);
+		this.magiclinksWkr = new Xomw_magiclinks_wkr(this, sanitizer, linker, regex_boundary, regex_url);
+	}
+	public void Init_by_wiki(Xowe_wiki wiki) {
+		linker.Init_by_wiki(env, wiki.Lang().Lnki_trail_mgr().Trie());
+		lnkeWkr.Init_by_wiki(protocols_trie, regex_url, regex_space);
+		lnkiWkr.Init_by_wiki(env, wiki);
+		doubleunderWkr.Init_by_wiki(doubleunder_data, wiki.Lang());
+		magiclinksWkr.Init_by_wiki();
+	}
+	public void Init_by_page(XomwTitle ttl) {
+//			pctx.Init_by_page(ttl);
+	}
+
 //		/**
 //		* Reduce memory usage to reduce the impact of circular references
 //		*/
@@ -321,13 +390,13 @@ public class XomwParser {
 //
 //			Hooks::run('ParserFirstCallInit', [ &$this ]);
 //		}
-//
-//		/**
-//		* Clear Parser state
-//		*
-//		* @private
-//		*/
-//		public function clearState() {
+
+	/**
+	* Clear Parser state
+	*
+	* @private
+	*/
+	public void clearState() {
 //			if (this.mFirstCall) {
 //				this.firstCallInit();
 //			}
@@ -335,7 +404,7 @@ public class XomwParser {
 //			this.mOptions->registerWatcher([ this.mOutput, 'recordOption' ]);
 //			this.mAutonumber = 0;
 //			this.mIncludeCount = [];
-//			this.mLinkHolders = new LinkHolderArray($this);
+		this.mLinkHolders = new XomwLinkHolderArray(this);
 //			this.mLinkID = 0;
 //			this.mRevisionObject = this.mRevisionTimestamp =
 //				this.mRevisionId = this.mRevisionUser = this.mRevisionSize = null;
@@ -343,9 +412,9 @@ public class XomwParser {
 //			this.mUser = null;
 //			this.mLangLinkLanguages = [];
 //			this.currentRevisionCache = null;
-//
-//			this.mStripState = new StripState;
-//
+
+		this.mStripState = new XomwStripState();
+
 //			# Clear these on every parse, T6549
 //			this.mTplRedirCache = this.mTplDomCache = [];
 //
@@ -371,29 +440,34 @@ public class XomwParser {
 //			this.mProfiler = new SectionProfiler();
 //
 //			Hooks::run('ParserClearState', [ &$this ]);
-//		}
-//
-//		/**
-//		* Convert wikitext to HTML
-//		* Do not call this function recursively.
-//		*
-//		* @param String $text Text we want to parse
-//		* @param Title $title
-//		* @param ParserOptions $options
-//		* @param boolean $linestart
-//		* @param boolean $clearState
-//		* @param int $revid Number to pass in {{REVISIONID}}
-//		* @return ParserOutput A ParserOutput
-//		*/
+	}
+
+	/**
+	* Convert wikitext to HTML
+	* Do not call this function recursively.
+	*
+	* @param String $text Text we want to parse
+	* @param Title $title
+	* @param ParserOptions $options
+	* @param boolean $linestart
+	* @param boolean $clearState
+	* @param int $revid Number to pass in {{REVISIONID}}
+	* @return ParserOutput A ParserOutput
+	*/
 //		public function parse(
 //			$text, Title $title, ParserOptions $options,
 //			$linestart = true, $clearState = true, $revid = null
 //		) {
-//			/**
-//			* First pass--just handle <nowiki> sections, pass the rest off
-//			* to internalParse() which does all the real work.
-//			*/
-//
+	public void parse(Xomw_parser_bfr pbfr, Xomw_parser_ctx pctx,byte[] text, XomwTitle title, XomwParserOptions options) {this.parse(pbfr, pctx, text, title, options, true, true, -1);}
+	public void parse(Xomw_parser_bfr pbfr, Xomw_parser_ctx pctx,
+		byte[] text, XomwTitle title, XomwParserOptions options,
+		boolean linestart, boolean clearState, int revid
+	) {
+		/**
+		* First pass--just handle <nowiki> sections, pass the rest off
+		* to internalParse() which does all the real work.
+		*/
+
 //			global $wgShowHostnames;
 //
 //			if ($clearState) {
@@ -427,11 +501,11 @@ public class XomwParser {
 //			Hooks::run('ParserBeforeStrip', [ &$this, &$text, &this.mStripState ]);
 //			# No more strip!
 //			Hooks::run('ParserAfterStrip', [ &$this, &$text, &this.mStripState ]);
-//			$text = this.internalParse($text);
+		this.internalParse(pbfr, pctx, text);
 //			Hooks::run('ParserAfterParse', [ &$this, &$text, &this.mStripState ]);
-//
-//			$text = this.internalParseHalfParsed($text, true, $linestart);
-//
+
+		this.internalParseHalfParsed(pbfr, pctx, true, linestart);
+
 //			/**
 //			* A converted title will be provided in the output Object if title and
 //			* content conversion are enabled, the article text does not contain
@@ -579,8 +653,8 @@ public class XomwParser {
 //			this.currentRevisionCache = null;
 //
 //			return this.mOutput;
-//		}
-//
+	}
+
 //		/**
 //		* Half-parse wikitext to half-parsed HTML. This recursive parser entry point
 //		* can be called from an extension tag hook.
@@ -805,16 +879,17 @@ public class XomwParser {
 //		public function getOutput() {
 //			return this.mOutput;
 //		}
-//
-//		/**
-//		* Get the ParserOptions Object
-//		*
-//		* @return ParserOptions
-//		*/
-//		public function getOptions() {
-//			return this.mOptions;
-//		}
-//
+
+	/**
+	* Get the ParserOptions Object
+	*
+	* @return ParserOptions
+	*/
+	public XomwParserOptions getOptions() {
+		return this.mOptions;
+	}
+
+
 //		/**
 //		* Accessor/mutator for the ParserOptions Object
 //		*
@@ -1034,481 +1109,186 @@ public class XomwParser {
 //			return $marker;
 //		}
 //
-//		/**
-//		* parse the wiki syntax used to render tables
-//		*
-//		* @private
-//		* @param String $text
-//		* @return String
-//		*/
-//		public function doTableStuff($text) {
-//
-//			$lines = StringUtils::explode("\n", $text);
-//			$out = '';
-//			$td_history = []; # Is currently a td tag open?
-//			$last_tag_history = []; # Save history of last lag activated (td, th or caption)
-//			$tr_history = []; # Is currently a tr tag open?
-//			$tr_attributes = []; # history of tr attributes
-//			$has_opened_tr = []; # Did this table open a <tr> element?
-//			$indent_level = 0; # indent level of the table
-//
-//			foreach ($lines as $outLine) {
-//				$line = trim($outLine);
-//
-//				if ($line === '') { # empty line, go to next line
-//					$out .= $outLine . "\n";
-//					continue;
-//				}
-//
-//				$first_character = $line[0];
-//				$first_two = substr($line, 0, 2);
-//				$matches = [];
-//
-//				if (preg_match('/^(:*)\s*\{\|(.*)$/', $line, $matches)) {
-//					# First check if we are starting a new table
-//					$indent_level = strlen($matches[1]);
-//
-//					$attributes = this.mStripState->unstripBoth($matches[2]);
-//					$attributes = Sanitizer::fixTagAttributes($attributes, 'table');
-//
-//					$outLine = str_repeat('<dl><dd>', $indent_level) . "<table{$attributes}>";
-//					array_push($td_history, false);
-//					array_push($last_tag_history, '');
-//					array_push($tr_history, false);
-//					array_push($tr_attributes, '');
-//					array_push($has_opened_tr, false);
-//				} elseif (count($td_history) == 0) {
-//					# Don't do any of the following
-//					$out .= $outLine . "\n";
-//					continue;
-//				} elseif ($first_two === '|}') {
-//					# We are ending a table
-//					$line = '</table>' . substr($line, 2);
-//					$last_tag = array_pop($last_tag_history);
-//
-//					if (!array_pop($has_opened_tr)) {
-//						$line = "<tr><td></td></tr>{$line}";
-//					}
-//
-//					if (array_pop($tr_history)) {
-//						$line = "</tr>{$line}";
-//					}
-//
-//					if (array_pop($td_history)) {
-//						$line = "</{$last_tag}>{$line}";
-//					}
-//					array_pop($tr_attributes);
-//					$outLine = $line . str_repeat('</dd></dl>', $indent_level);
-//				} elseif ($first_two === '|-') {
-//					# Now we have a table row
-//					$line = preg_replace('#^\|-+#', '', $line);
-//
-//					# Whats after the tag is now only attributes
-//					$attributes = this.mStripState->unstripBoth($line);
-//					$attributes = Sanitizer::fixTagAttributes($attributes, 'tr');
-//					array_pop($tr_attributes);
-//					array_push($tr_attributes, $attributes);
-//
-//					$line = '';
-//					$last_tag = array_pop($last_tag_history);
-//					array_pop($has_opened_tr);
-//					array_push($has_opened_tr, true);
-//
-//					if (array_pop($tr_history)) {
-//						$line = '</tr>';
-//					}
-//
-//					if (array_pop($td_history)) {
-//						$line = "</{$last_tag}>{$line}";
-//					}
-//
-//					$outLine = $line;
-//					array_push($tr_history, false);
-//					array_push($td_history, false);
-//					array_push($last_tag_history, '');
-//				} elseif ($first_character === '|'
-//					|| $first_character === '!'
-//					|| $first_two === '|+'
-//				) {
-//					# This might be cell elements, td, th or captions
-//					if ($first_two === '|+') {
-//						$first_character = '+';
-//						$line = substr($line, 2);
-//					} else {
-//						$line = substr($line, 1);
-//					}
-//
-//					// Implies both are valid for table headings.
-//					if ($first_character === '!') {
-//						$line = StringUtils::replaceMarkup('!!', '||', $line);
-//					}
-//
-//					# Split up multiple cells on the same line.
-//					# FIXME : This can result in improper nesting of tags processed
-//					# by earlier parser steps.
-//					$cells = explode('||', $line);
-//
-//					$outLine = '';
-//
-//					# Loop through each table cell
-//					foreach ($cells as $cell) {
-//						$previous = '';
-//						if ($first_character !== '+') {
-//							$tr_after = array_pop($tr_attributes);
-//							if (!array_pop($tr_history)) {
-//								$previous = "<tr{$tr_after}>\n";
-//							}
-//							array_push($tr_history, true);
-//							array_push($tr_attributes, '');
-//							array_pop($has_opened_tr);
-//							array_push($has_opened_tr, true);
-//						}
-//
-//						$last_tag = array_pop($last_tag_history);
-//
-//						if (array_pop($td_history)) {
-//							$previous = "</{$last_tag}>\n{$previous}";
-//						}
-//
-//						if ($first_character === '|') {
-//							$last_tag = 'td';
-//						} elseif ($first_character === '!') {
-//							$last_tag = 'th';
-//						} elseif ($first_character === '+') {
-//							$last_tag = 'caption';
-//						} else {
-//							$last_tag = '';
-//						}
-//
-//						array_push($last_tag_history, $last_tag);
-//
-//						# A cell could contain both parameters and data
-//						$cell_data = explode('|', $cell, 2);
-//
-//						# T2553: Note that a '|' inside an invalid link should not
-//						# be mistaken as delimiting cell parameters
-//						# Bug T153140: Neither should language converter markup.
-//						if (preg_match('/\[\[|-\{/', $cell_data[0]) === 1) {
-//							$cell = "{$previous}<{$last_tag}>{$cell}";
-//						} elseif (count($cell_data) == 1) {
-//							$cell = "{$previous}<{$last_tag}>{$cell_data[0]}";
-//						} else {
-//							$attributes = this.mStripState->unstripBoth($cell_data[0]);
-//							$attributes = Sanitizer::fixTagAttributes($attributes, $last_tag);
-//							$cell = "{$previous}<{$last_tag}{$attributes}>{$cell_data[1]}";
-//						}
-//
-//						$outLine .= $cell;
-//						array_push($td_history, true);
-//					}
-//				}
-//				$out .= $outLine . "\n";
-//			}
-//
-//			# Closing open td, tr && table
-//			while (count($td_history) > 0) {
-//				if (array_pop($td_history)) {
-//					$out .= "</td>\n";
-//				}
-//				if (array_pop($tr_history)) {
-//					$out .= "</tr>\n";
-//				}
-//				if (!array_pop($has_opened_tr)) {
-//					$out .= "<tr><td></td></tr>\n";
-//				}
-//
-//				$out .= "</table>\n";
-//			}
-//
-//			# Remove trailing line-ending (b/c)
-//			if (substr($out, -1) === "\n") {
-//				$out = substr($out, 0, -1);
-//			}
-//
-//			# special case: don't return empty table
-//			if ($out === "<table>\n<tr><td></td></tr>\n</table>") {
-//				$out = '';
-//			}
-//
-//			return $out;
-//		}
-//
-//		/**
-//		* Helper function for parse() that transforms wiki markup into half-parsed
-//		* HTML. Only called for $mOutputType == self::OT_HTML.
-//		*
-//		* @private
-//		*
-//		* @param String $text The text to parse
-//		* @param boolean $isMain Whether this is being called from the main parse() function
-//		* @param PPFrame|boolean $frame A pre-processor frame
-//		*
-//		* @return String
-//		*/
-//		public function internalParse($text, $isMain = true, $frame = false) {
-//
-//			$origText = $text;
-//
-//			# Hook to suspend the parser in this state
-//			if (!Hooks::run('ParserBeforeInternalParse', [ &$this, &$text, &this.mStripState ])) {
-//				return $text;
-//			}
-//
-//			# if $frame is provided, then use $frame for replacing any variables
+	/**
+	* parse the wiki syntax used to render tables
+	*
+	* @private
+	* @param String $text
+	* @return String
+	*/
+	// XO.MOVED to Xomw_table_Wkr
+	// public function doTableStuff($text) {}
+
+	/**
+	* Helper function for parse() that transforms wiki markup into half-parsed
+	* HTML. Only called for $mOutputType == self::OT_HTML.
+	*
+	* @private
+	*
+	* @param String $text The text to parse
+	* @param boolean $isMain Whether this is being called from the main parse() function
+	* @param PPFrame|boolean $frame A pre-processor frame
+	*
+	* @return String
+	*/
+	// isMain=tru
+	public void internalParse(Xomw_parser_bfr pbfr, Xomw_parser_ctx pctx, byte[] text) {internalParse(pbfr, pctx, text, true, false);}
+	public void internalParse(Xomw_parser_bfr pbfr, Xomw_parser_ctx pctx, byte[] text, boolean isMain, boolean frame) {
+		pbfr.Init(text);
+//			$origText = text;
+
+		// MW.HOOK:ParserBeforeInternalParse
+
+		// if $frame is provided, then use $frame for replacing any variables
 //			if ($frame) {
-//				# use frame depth to infer how include/noinclude tags should be handled
-//				# depth=0 means this is the top-level document; otherwise it's an included document
+			// use frame depth to infer how include/noinclude tags should be handled
+			// depth=0 means this is the top-level document; otherwise it's an included document
+//				boolean for_inclusion = false;
 //				if (!$frame->depth) {
 //					$flag = 0;
 //				} else {
 //					$flag = Parser::PTD_FOR_INCLUSION;
 //				}
-//				$dom = this.preprocessToDom($text, $flag);
-//				$text = $frame->expand($dom);
+//				text = prepro_wkr.Preprocess_to_xml(text, for_inclusion);
+			// text = $frame->expand($dom);
 //			} else {
-//				# if $frame is not provided, then use old-style replaceVariables
-//				$text = this.replaceVariables($text);
+//				// if $frame is not provided, then use old-style replaceVariables
+//				text = $this->replaceVariables(text);
 //			}
-//
-//			Hooks::run('InternalParseBeforeSanitize', [ &$this, &$text, &this.mStripState ]);
-//			$text = Sanitizer::removeHTMLtags(
-//				$text,
+
+		// MW.HOOK:InternalParseBeforeSanitize
+//			text = Sanitizer::removeHTMLtags(
+//				text,
 //				[ &$this, 'attributeStripCallback' ],
 //				false,
-//				array_keys(this.mTransparentTagHooks),
+//				array_keys($this->mTransparentTagHooks),
 //				[],
 //				[ &$this, 'addTrackingCategory' ]
 //			);
-//			Hooks::run('InternalParseBeforeLinks', [ &$this, &$text, &this.mStripState ]);
-//
-//			# Tables need to come after variable replacement for things to work
-//			# properly; putting them before other transformations should keep
-//			# exciting things like link expansions from showing up in surprising
-//			# places.
-//			$text = this.doTableStuff($text);
-//
-//			$text = preg_replace('/(^|\n)-----*/', '\\1<hr />', $text);
-//
-//			$text = this.doDoubleUnderscore($text);
-//
-//			$text = this.doHeadings($text);
-//			$text = this.replaceInternalLinks($text);
-//			$text = this.doAllQuotes($text);
-//			$text = this.replaceExternalLinks($text);
-//
-//			# replaceInternalLinks may sometimes leave behind
-//			# absolute URLs, which have to be masked to hide them from replaceExternalLinks
-//			$text = str_replace(self::MARKER_PREFIX . 'NOPARSE', '', $text);
-//
-//			$text = this.doMagicLinks($text);
-//			$text = this.formatHeadings($text, $origText, $isMain);
-//
-//			return $text;
-//		}
-//
-//		/**
-//		* Helper function for parse() that transforms half-parsed HTML into fully
-//		* parsed HTML.
-//		*
-//		* @param String $text
-//		* @param boolean $isMain
-//		* @param boolean $linestart
-//		* @return String
-//		*/
-//		private function internalParseHalfParsed($text, $isMain = true, $linestart = true) {
-//			$text = this.mStripState->unstripGeneral($text);
-//
-//			if ($isMain) {
-//				Hooks::run('ParserAfterUnstrip', [ &$this, &$text ]);
-//			}
-//
-//			# Clean up special characters, only run once, next-to-last before doBlockLevels
-//			$fixtags = [
-//				# French spaces, last one Guillemet-left
-//				# only if there is something before the space
-//				'/(.) (?=\\?|:|;|!|%|\\302\\273)/' => '\\1&#160;',
-//				# french spaces, Guillemet-right
-//				'/(\\302\\253) /' => '\\1&#160;',
-//				'/&#160;(!\s*important)/' => ' \\1', # Beware of CSS magic word !important, T13874.
-//			];
-//			$text = preg_replace(array_keys($fixtags), array_values($fixtags), $text);
-//
-//			$text = this.doBlockLevels($text, $linestart);
-//
-//			this.replaceLinkHolders($text);
-//
-//			/**
-//			* The input doesn't get language converted if
-//			* a) It's disabled
-//			* b) Content isn't converted
-//			* c) It's a conversion table
-//			* d) it is an interface message (which is in the user language)
-//			*/
-//			if (!(this.mOptions->getDisableContentConversion()
-//				|| isset(this.mDoubleUnderscores['nocontentconvert']))
+		// MW.HOOK:InternalParseBeforeLinks
+
+		// Tables need to come after variable replacement for things to work
+		// properly; putting them before other transformations should keep
+		// exciting things like link expansions from showing up in surprising
+		// places.
+		tableWkr.doTableStuff(pctx, pbfr);
+
+		// $text = preg_replace('/(^|\n)-----*/', '\\1<hr />', $text);
+		hrWkr.replaceHrs(pctx, pbfr);
+
+		doubleunderWkr.doDoubleUnderscore(pctx, pbfr);
+
+		headingWkr.doHeadings(pctx, pbfr, headingWkrCbk);
+		lnkiWkr.replaceInternalLinks(pbfr, env, pctx);
+		quoteWkr.doAllQuotes(pctx, pbfr);
+		lnkeWkr.replaceExternalLinks(pctx, pbfr);
+
+		// replaceInternalLinks may sometimes leave behind
+		// absolute URLs, which have to be masked to hide them from replaceExternalLinks			
+		Xomw_parser_bfr_.Replace(pbfr, Bry__marker__noparse, Bry_.Empty); // $text = str_replace(self::MARKER_PREFIX . 'NOPARSE', '', $text);
+
+		magiclinksWkr.doMagicLinks(pctx, pbfr);
+//			$text = $this->formatHeadings($text, $origText, $isMain);
+	}
+
+	/**
+	* Helper function for parse() that transforms half-parsed HTML into fully
+	* parsed HTML.
+	*
+	* @param String $text
+	* @param boolean $isMain
+	* @param boolean $linestart
+	* @return String
+	*/
+	public void internalParseHalfParsed(Xomw_parser_bfr pbfr, Xomw_parser_ctx pctx, boolean isMain, boolean lineStart) {
+		this.mStripState.unstripGeneral(pbfr);
+
+		// MW.HOOK:ParserAfterUnstrip
+
+		// Clean up special characters, only run once, next-to-last before doBlockLevels
+		//	$fixtags = [
+		//		# French spaces, last one Guillemet-left
+		//		# only if there is something before the space
+		//		'/(.) (?=\\?|:|;|!|%|\\302\\273)/' => '\\1&#160;',
+		//		# french spaces, Guillemet-right
+		//		'/(\\302\\253) /' => '\\1&#160;',
+		//		'/&#160;(!\s*important)/' => ' \\1', # Beware of CSS magic word !important, T13874.
+		//	];
+		//	$text = preg_replace( array_keys( $fixtags ), array_values( $fixtags ), $text );
+		nbspWkr.doNbsp(pctx, pbfr);
+
+		blockWkr.doBlockLevels(pctx, pbfr, lineStart);
+
+		lnkiWkr.replaceLinkHolders(pbfr);
+
+		// The input doesn't get language converted if
+		// a) It's disabled
+		// b) Content isn't converted
+		// c) It's a conversion table
+		// d) it is an interface message (which is in the user language)
+//			if ( !( $this->mOptions->getDisableContentConversion()
+//				|| isset( $this->mDoubleUnderscores['nocontentconvert'] ) )
 //			) {
-//				if (!this.mOptions->getInterfaceMessage()) {
-//					# The position of the convert() call should not be changed. it
-//					# assumes that the links are all replaced and the only thing left
-//					# is the <nowiki> mark.
-//					$text = this.getConverterLanguage()->convert($text);
+//				if ( !$this->mOptions->getInterfaceMessage() ) {
+//					// The position of the convert() call should not be changed. it
+//					// assumes that the links are all replaced and the only thing left
+//					// is the <nowiki> mark.
+//					$text = $this->getConverterLanguage()->convert( $text );
 //				}
 //			}
-//
-//			$text = this.mStripState->unstripNoWiki($text);
-//
-//			if ($isMain) {
-//				Hooks::run('ParserBeforeTidy', [ &$this, &$text ]);
-//			}
-//
-//			$text = this.replaceTransparentTags($text);
-//			$text = this.mStripState->unstripGeneral($text);
-//
-//			$text = Sanitizer::normalizeCharReferences($text);
-//
-//			if (MWTidy::isEnabled()) {
-//				if (this.mOptions->getTidy()) {
-//					$text = MWTidy::tidy($text);
+
+		mStripState.unstripNoWiki(pbfr);
+
+		// MW.HOOK:ParserBeforeTidy
+
+//			$text = $this->replaceTransparentTags( $text );
+		mStripState.unstripGeneral(pbfr);
+
+		sanitizer.Normalize_char_references(pbfr);
+
+//			if ( MWTidy::isEnabled() ) {
+//				if ( $this->mOptions->getTidy() ) {
+//					$text = MWTidy::tidy( $text );
 //				}
-//			} else {
-//				# attempt to sanitize at least some nesting problems
-//				# (T4702 and quite a few others)
+//			}
+//			else {
+//				// attempt to sanitize at least some nesting problems
+//				// (T4702 and quite a few others)
 //				$tidyregs = [
-//					# ''Something [http://www.cool.com cool''] -->
-//					# <i>Something</i><a href="http://www.cool.com"..><i>cool></i></a>
+//					// ''Something [http://www.cool.com cool''] -->
+//					// <i>Something</i><a href="http://www.cool.com"..><i>cool></i></a>
 //					'/(<([bi])>)(<([bi])>)?([^<]*)(<\/?a[^<]*>)([^<]*)(<\/\\4>)?(<\/\\2>)/' =>
 //					'\\1\\3\\5\\8\\9\\6\\1\\3\\7\\8\\9',
-//					# fix up an anchor inside another anchor, only
-//					# at least for a single single nested link (T5695)
+//					// fix up an anchor inside another anchor, only
+//					// at least for a single single nested link (T5695)
 //					'/(<a[^>]+>)([^<]*)(<a[^>]+>[^<]*)<\/a>(.*)<\/a>/' =>
 //					'\\1\\2</a>\\3</a>\\1\\4</a>',
-//					# fix div inside inline elements- doBlockLevels won't wrap a line which
-//					# contains a div, so fix it up here; replace
-//					# div with escaped text
+//					// fix div inside inline elements- doBlockLevels won't wrap a line which
+//					// contains a div, so fix it up here; replace
+//					// div with escaped text
 //					'/(<([aib]) [^>]+>)([^<]*)(<div([^>]*)>)(.*)(<\/div>)([^<]*)(<\/\\2>)/' =>
 //					'\\1\\3&lt;div\\5&gt;\\6&lt;/div&gt;\\8\\9',
-//					# remove empty italic or bold tag pairs, some
-//					# introduced by rules above
+//					// remove empty italic or bold tag pairs, some
+//					// introduced by rules above
 //					'/<([bi])><\/\\1>/' => '',
 //				];
-//
+
 //				$text = preg_replace(
-//					array_keys($tidyregs),
-//					array_values($tidyregs),
-//					$text);
+//					array_keys( $tidyregs ),
+//					array_values( $tidyregs ),
+//					$text );
 //			}
-//
-//			if ($isMain) {
-//				Hooks::run('ParserAfterTidy', [ &$this, &$text ]);
-//			}
-//
-//			return $text;
-//		}
-//
-//		/**
-//		* Replace special strings like "ISBN xxx" and "RFC xxx" with
-//		* magic external links.
-//		*
-//		* DML
-//		* @private
-//		*
-//		* @param String $text
-//		*
-//		* @return String
-//		*/
-//		public function doMagicLinks($text) {
-//			$prots = wfUrlProtocolsWithoutProtRel();
-//			$urlChar = self::EXT_LINK_URL_CLASS;
-//			$addr = self::EXT_LINK_ADDR;
-//			$space = self::SPACE_NOT_NL; #  non-newline space
-//			$spdash = "(?:-|$space)"; # a dash or a non-newline space
-//			$spaces = "$space++"; # possessive match of 1 or more spaces
-//			$text = preg_replace_callback(
-//				'!(?:                            # Start cases
-//					(<a[ \t\r\n>].*?</a>) |      # m[1]: Skip link text
-//					(<.*?>) |                    # m[2]: Skip stuff inside
-//												#       HTML elements' . "
-//					(\b(?i:$prots)($addr$urlChar*)) | # m[3]: Free external links
-//												# m[4]: Post-protocol path
-//					\b(?:RFC|PMID) $spaces       # m[5]: RFC or PMID, capture number
-//						([0-9]+)\b |
-//					\bISBN $spaces (            # m[6]: ISBN, capture number
-//						(?: 97[89] $spdash?)?   #  optional 13-digit ISBN prefix
-//						(?: [0-9]  $spdash?){9} #  9 digits with opt. delimiters
-//						[0-9Xx]                  #  check digit
-//					)\b
-//				)!xu", [ &$this, 'magicLinkCallback' ], $text);
-//			return $text;
-//		}
-//
-//		/**
-//		* @throws MWException
-//		* @param array $m
-//		* @return HTML|String
-//		*/
-//		public function magicLinkCallback($m) {
-//			if (isset($m[1]) && $m[1] !== '') {
-//				# Skip anchor
-//				return $m[0];
-//			} elseif (isset($m[2]) && $m[2] !== '') {
-//				# Skip HTML element
-//				return $m[0];
-//			} elseif (isset($m[3]) && $m[3] !== '') {
-//				# Free external link
-//				return this.makeFreeExternalLink($m[0], strlen($m[4]));
-//			} elseif (isset($m[5]) && $m[5] !== '') {
-//				# RFC or PMID
-//				if (substr($m[0], 0, 3) === 'RFC') {
-//					if (!this.mOptions->getMagicRFCLinks()) {
-//						return $m[0];
-//					}
-//					$keyword = 'RFC';
-//					$urlmsg = 'rfcurl';
-//					$cssClass = 'mw-magiclink-rfc';
-//					$trackingCat = 'magiclink-tracking-rfc';
-//					$id = $m[5];
-//				} elseif (substr($m[0], 0, 4) === 'PMID') {
-//					if (!this.mOptions->getMagicPMIDLinks()) {
-//						return $m[0];
-//					}
-//					$keyword = 'PMID';
-//					$urlmsg = 'pubmedurl';
-//					$cssClass = 'mw-magiclink-pmid';
-//					$trackingCat = 'magiclink-tracking-pmid';
-//					$id = $m[5];
-//				} else {
-//					throw new MWException(__METHOD__ . ': unrecognised match type "' .
-//						substr($m[0], 0, 20) . '"');
-//				}
-//				$url = wfMessage($urlmsg, $id)->inContentLanguage()->text();
-//				this.addTrackingCategory($trackingCat);
-//				return Linker::makeExternalLink($url, "{$keyword} {$id}", true, $cssClass, [], this.mTitle);
-//			} elseif (isset($m[6]) && $m[6] !== ''
-//				&& this.mOptions->getMagicISBNLinks()
-//			) {
-//				# ISBN
-//				$isbn = $m[6];
-//				$space = self::SPACE_NOT_NL; #  non-newline space
-//				$isbn = preg_replace("/$space/", ' ', $isbn);
-//				$num = strtr($isbn, [
-//					'-' => '',
-//					' ' => '',
-//					'x' => 'X',
-//				]);
-//				this.addTrackingCategory('magiclink-tracking-isbn');
-//				return this.getLinkRenderer()->makeKnownLink(
-//					SpecialPage::getTitleFor('Booksources', $num),
-//					"ISBN $isbn",
-//					[
-//						'class' => '@gplx.Internal protected mw-magiclink-isbn',
-//						'title' => false // suppress title attribute
-//					]
-//				);
-//			} else {
-//				return $m[0];
-//			}
-//		}
-//
+
+//			// MW.HOOK:ParserAfterTidy
+	}
+
+
+	// XO.MW:MOVED
+	// public function doMagicLinks($text) {}
+
+	// XO.MW:MOVED
+	// public function magicLinkCallback($m) {}
+
 //		/**
 //		* Make a free external link, given a user-supplied URL
 //		*
@@ -1585,224 +1365,15 @@ public class XomwParser {
 //			}
 //			return $text . $trail;
 //		}
-//
-//		/**
-//		* Parse headers and return html
-//		*
-//		* @private
-//		*
-//		* @param String $text
-//		*
-//		* @return String
-//		*/
-//		public function doHeadings($text) {
-//			for ($i = 6; $i >= 1; --$i) {
-//				$h = str_repeat('=', $i);
-//				$text = preg_replace("/^$h(.+)$h\\s*$/m", "<h$i>\\1</h$i>", $text);
-//			}
-//			return $text;
-//		}
-//
-//		/**
-//		* Replace single quotes with HTML markup
-//		* @private
-//		*
-//		* @param String $text
-//		*
-//		* @return String The altered text
-//		*/
-//		public function doAllQuotes($text) {
-//			$outtext = '';
-//			$lines = StringUtils::explode("\n", $text);
-//			foreach ($lines as $line) {
-//				$outtext .= this.doQuotes($line) . "\n";
-//			}
-//			$outtext = substr($outtext, 0, -1);
-//			return $outtext;
-//		}
-//
-//		/**
-//		* Helper function for doAllQuotes()
-//		*
-//		* @param String $text
-//		*
-//		* @return String
-//		*/
-//		public function doQuotes($text) {
-//			$arr = preg_split("/(''+)/", $text, -1, PREG_SPLIT_DELIM_CAPTURE);
-//			$countarr = count($arr);
-//			if ($countarr == 1) {
-//				return $text;
-//			}
-//
-//			// First, do some preliminary work. This may shift some apostrophes from
-//			// being mark-up to being text. It also counts the number of occurrences
-//			// of bold and italics mark-ups.
-//			$numbold = 0;
-//			$numitalics = 0;
-//			for ($i = 1; $i < $countarr; $i += 2) {
-//				$thislen = strlen($arr[$i]);
-//				// If there are ever four apostrophes, assume the first is supposed to
-//				// be text, and the remaining three constitute mark-up for bold text.
-//				// (T15227: ''''foo'''' turns into ' ''' foo ' ''')
-//				if ($thislen == 4) {
-//					$arr[$i - 1] .= "'";
-//					$arr[$i] = "'''";
-//					$thislen = 3;
-//				} elseif ($thislen > 5) {
-//					// If there are more than 5 apostrophes in a row, assume they're all
-//					// text except for the last 5.
-//					// (T15227: ''''''foo'''''' turns into ' ''''' foo ' ''''')
-//					$arr[$i - 1] .= str_repeat("'", $thislen - 5);
-//					$arr[$i] = "'''''";
-//					$thislen = 5;
-//				}
-//				// Count the number of occurrences of bold and italics mark-ups.
-//				if ($thislen == 2) {
-//					$numitalics++;
-//				} elseif ($thislen == 3) {
-//					$numbold++;
-//				} elseif ($thislen == 5) {
-//					$numitalics++;
-//					$numbold++;
-//				}
-//			}
-//
-//			// If there is an odd number of both bold and italics, it is likely
-//			// that one of the bold ones was meant to be an apostrophe followed
-//			// by italics. Which one we cannot know for certain, but it is more
-//			// likely to be one that has a single-letter word before it.
-//			if (($numbold % 2 == 1) && ($numitalics % 2 == 1)) {
-//				$firstsingleletterword = -1;
-//				$firstmultiletterword = -1;
-//				$firstspace = -1;
-//				for ($i = 1; $i < $countarr; $i += 2) {
-//					if (strlen($arr[$i]) == 3) {
-//						$x1 = substr($arr[$i - 1], -1);
-//						$x2 = substr($arr[$i - 1], -2, 1);
-//						if ($x1 === ' ') {
-//							if ($firstspace == -1) {
-//								$firstspace = $i;
-//							}
-//						} elseif ($x2 === ' ') {
-//							$firstsingleletterword = $i;
-//							// if $firstsingleletterword is set, we don't
-//							// look at the other options, so we can bail early.
-//							break;
-//						} else {
-//							if ($firstmultiletterword == -1) {
-//								$firstmultiletterword = $i;
-//							}
-//						}
-//					}
-//				}
-//
-//				// If there is a single-letter word, use it!
-//				if ($firstsingleletterword > -1) {
-//					$arr[$firstsingleletterword] = "''";
-//					$arr[$firstsingleletterword - 1] .= "'";
-//				} elseif ($firstmultiletterword > -1) {
-//					// If not, but there's a multi-letter word, use that one.
-//					$arr[$firstmultiletterword] = "''";
-//					$arr[$firstmultiletterword - 1] .= "'";
-//				} elseif ($firstspace > -1) {
-//					// ... otherwise use the first one that has neither.
-//					// (notice that it is possible for all three to be -1 if, for example,
-//					// there is only one pentuple-apostrophe in the line)
-//					$arr[$firstspace] = "''";
-//					$arr[$firstspace - 1] .= "'";
-//				}
-//			}
-//
-//			// Now let's actually convert our apostrophic mush to HTML!
-//			$output = '';
-//			$buffer = '';
-//			$state = '';
-//			$i = 0;
-//			foreach ($arr as $r) {
-//				if (($i % 2) == 0) {
-//					if ($state === 'both') {
-//						$buffer .= $r;
-//					} else {
-//						$output .= $r;
-//					}
-//				} else {
-//					$thislen = strlen($r);
-//					if ($thislen == 2) {
-//						if ($state === 'i') {
-//							$output .= '</i>';
-//							$state = '';
-//						} elseif ($state === 'bi') {
-//							$output .= '</i>';
-//							$state = 'b';
-//						} elseif ($state === 'ib') {
-//							$output .= '</b></i><b>';
-//							$state = 'b';
-//						} elseif ($state === 'both') {
-//							$output .= '<b><i>' . $buffer . '</i>';
-//							$state = 'b';
-//						} else { // $state can be 'b' or ''
-//							$output .= '<i>';
-//							$state .= 'i';
-//						}
-//					} elseif ($thislen == 3) {
-//						if ($state === 'b') {
-//							$output .= '</b>';
-//							$state = '';
-//						} elseif ($state === 'bi') {
-//							$output .= '</i></b><i>';
-//							$state = 'i';
-//						} elseif ($state === 'ib') {
-//							$output .= '</b>';
-//							$state = 'i';
-//						} elseif ($state === 'both') {
-//							$output .= '<i><b>' . $buffer . '</b>';
-//							$state = 'i';
-//						} else { // $state can be 'i' or ''
-//							$output .= '<b>';
-//							$state .= 'b';
-//						}
-//					} elseif ($thislen == 5) {
-//						if ($state === 'b') {
-//							$output .= '</b><i>';
-//							$state = 'i';
-//						} elseif ($state === 'i') {
-//							$output .= '</i><b>';
-//							$state = 'b';
-//						} elseif ($state === 'bi') {
-//							$output .= '</i></b>';
-//							$state = '';
-//						} elseif ($state === 'ib') {
-//							$output .= '</b></i>';
-//							$state = '';
-//						} elseif ($state === 'both') {
-//							$output .= '<i><b>' . $buffer . '</b></i>';
-//							$state = '';
-//						} else { // ($state == '')
-//							$buffer = '';
-//							$state = 'both';
-//						}
-//					}
-//				}
-//				$i++;
-//			}
-//			// Now close all remaining tags.  Notice that the order is important.
-//			if ($state === 'b' || $state === 'ib') {
-//				$output .= '</b>';
-//			}
-//			if ($state === 'i' || $state === 'bi' || $state === 'ib') {
-//				$output .= '</i>';
-//			}
-//			if ($state === 'bi') {
-//				$output .= '</b>';
-//			}
-//			// There might be lonely ''''', so make sure we have a buffer
-//			if ($state === 'both' && $buffer) {
-//				$output .= '<b><i>' . $buffer . '</i></b>';
-//			}
-//			return $output;
-//		}
-//
+
+	// XO.MW:MOVED
+	// public function doHeadings($text) {}
+
+	// XO.MW:MOVED
+	// public function doAllQuotes($text) {}
+
+	// XO.MW:MOVED
+	// public function doQuotes($text) {}
 //		/**
 //		* Replace external links (REL)
 //		*
@@ -1905,38 +1476,27 @@ public class XomwParser {
 //			}
 //			return null;
 //		}
-//
-//		/**
-//		* Get an associative array of additional HTML attributes appropriate for a
-//		* particular external link.  This currently may include rel => nofollow
-//		* (depending on configuration, namespace, and the URL's domain) and/or a
-//		* target attribute (depending on configuration).
-//		*
-//		* @param String $url URL to extract the domain from for rel =>
-//		*   nofollow if appropriate
-//		* @return array Associative array of HTML attributes
-//		*/
-//		public function getExternalLinkAttribs($url) {
-//			$attribs = [];
-//			$rel = self::getExternalLinkRel($url, this.mTitle);
-//
-//			$target = this.mOptions->getExternalLinkTarget();
-//			if ($target) {
-//				$attribs['target'] = $target;
-//				if (!in_array($target, [ '_self', '_parent', '_top' ])) {
-//					// T133507. New windows can navigate parent cross-origin.
-//					// Including noreferrer due to lacking browser
-//					// support of noopener. Eventually noreferrer should be removed.
-//					if ($rel !== '') {
-//						$rel .= ' ';
-//					}
-//					$rel .= 'noreferrer noopener';
-//				}
-//			}
-//			$attribs['rel'] = $rel;
-//			return $attribs;
-//		}
-//
+
+	/**
+	* Get an associative array of additional HTML attributes appropriate for a
+	* particular external link.  This currently may include rel => nofollow
+	* (depending on configuration, namespace, and the URL's domain) and/or a
+	* target attribute (depending on configuration).
+	*
+	* @param String $url URL to extract the domain from for rel =>
+	*   nofollow if appropriate
+	* @return array Associative array of HTML attributes
+	*/
+	public Xomw_atr_mgr getExternalLinkAttribs(Xomw_atr_mgr atrs) {
+		atrs.Clear();
+		byte[] rel = Get_external_link_rel;
+
+		// XO.MW.UNSUPPORTED: XO will assume target is blank; MW will set target of "_blank", "_self", etc. depending on global opt
+		// $target = $this->mOptions->getExternalLinkTarget();
+		atrs.Add(Atr__rel, rel);
+		return atrs;
+	}
+
 //		/**
 //		* Replace unusual escape codes in a URL with their equivalent characters
 //		*
@@ -2054,329 +1614,13 @@ public class XomwParser {
 //			}
 //			return $text;
 //		}
-//
-//		/**
-//		* Process [[ ]] wikilinks
-//		*
-//		* @param String $s
-//		*
-//		* @return String Processed text
-//		*
-//		* @private
-//		*/
-//		public function replaceInternalLinks($s) {
-//			this.mLinkHolders->merge(this.replaceInternalLinks2($s));
-//			return $s;
-//		}
-//
-//		/**
-//		* Process [[ ]] wikilinks (RIL)
-//		* @param String $s
-//		* @throws MWException
-//		* @return LinkHolderArray
-//		*
-//		* @private
-//		*/
-//		public function replaceInternalLinks2(&$s) {
-//			global $wgExtraInterlanguageLinkPrefixes;
-//
-//			static $tc = false, $e1, $e1_img;
-//			# the % is needed to support urlencoded titles as well
-//			if (!$tc) {
-//				$tc = Title::legalChars() . '#%';
-//				# Match a link having the form [[namespace:link|alternate]]trail
-//				$e1 = "/^([{$tc}]+)(?:\\|(.+?))?]](.*)\$/sD";
-//				# Match cases where there is no "]]", which might still be images
-//				$e1_img = "/^([{$tc}]+)\\|(.*)\$/sD";
-//			}
-//
-//			$holders = new LinkHolderArray($this);
-//
-//			# split the entire text String on occurrences of [[
-//			$a = StringUtils::explode('[[', ' ' . $s);
-//			# get the first element (all text up to first [[), and remove the space we added
-//			$s = $a->current();
-//			$a->next();
-//			$line = $a->current(); # Workaround for broken ArrayIterator::next() that returns "void"
-//			$s = substr($s, 1);
-//
-//			$useLinkPrefixExtension = this.getTargetLanguage()->linkPrefixExtension();
-//			$e2 = null;
-//			if ($useLinkPrefixExtension) {
-//				# Match the end of a line for a word that's not followed by whitespace,
-//				# e.g. in the case of 'The Arab al[[Razi]]', 'al' will be matched
-//				global $wgContLang;
-//				$charset = $wgContLang->linkPrefixCharset();
-//				$e2 = "/^((?>.*[^$charset]|))(.+)$/sDu";
-//			}
-//
-//			if (is_null(this.mTitle)) {
-//				throw new MWException(__METHOD__ . ": \this.mTitle is null\n");
-//			}
-//			$nottalk = !this.mTitle->isTalkPage();
-//
-//			if ($useLinkPrefixExtension) {
-//				$m = [];
-//				if (preg_match($e2, $s, $m)) {
-//					$first_prefix = $m[2];
-//				} else {
-//					$first_prefix = false;
-//				}
-//			} else {
-//				$prefix = '';
-//			}
-//
-//			$useSubpages = this.areSubpagesAllowed();
-//
-//			// @codingStandardsIgnoreStart Squiz.WhiteSpace.SemicolonSpacing.Incorrect
-//			# Loop for each link
-//			for (; $line !== false && $line !== null; $a->next(), $line = $a->current()) {
-//				// @codingStandardsIgnoreEnd
-//
-//				# Check for excessive memory usage
-//				if ($holders->isBig()) {
-//					# Too big
-//					# Do the existence check, replace the link holders and clear the array
-//					$holders->replace($s);
-//					$holders->clear();
-//				}
-//
-//				if ($useLinkPrefixExtension) {
-//					if (preg_match($e2, $s, $m)) {
-//						$prefix = $m[2];
-//						$s = $m[1];
-//					} else {
-//						$prefix = '';
-//					}
-//					# first link
-//					if ($first_prefix) {
-//						$prefix = $first_prefix;
-//						$first_prefix = false;
-//					}
-//				}
-//
-//				$might_be_img = false;
-//
-//				if (preg_match($e1, $line, $m)) { # page with normal text or alt
-//					$text = $m[2];
-//					# If we get a ] at the beginning of $m[3] that means we have a link that's something like:
-//					# [[Image:Foo.jpg|[http://example.com desc]]] <- having three ] in a row fucks up,
-//					# the real problem is with the $e1 regex
-//					# See T1500.
-//					# Still some problems for cases where the ] is meant to be outside punctuation,
-//					# and no image is in sight. See T4095.
-//					if ($text !== ''
-//						&& substr($m[3], 0, 1) === ']'
-//						&& strpos($text, '[') !== false
-//					) {
-//						$text .= ']'; # so that replaceExternalLinks($text) works later
-//						$m[3] = substr($m[3], 1);
-//					}
-//					# fix up urlencoded title texts
-//					if (strpos($m[1], '%') !== false) {
-//						# Should anchors '#' also be rejected?
-//						$m[1] = str_replace([ '<', '>' ], [ '&lt;', '&gt;' ], rawurldecode($m[1]));
-//					}
-//					$trail = $m[3];
-//				} elseif (preg_match($e1_img, $line, $m)) {
-//					# Invalid, but might be an image with a link in its caption
-//					$might_be_img = true;
-//					$text = $m[2];
-//					if (strpos($m[1], '%') !== false) {
-//						$m[1] = str_replace([ '<', '>' ], [ '&lt;', '&gt;' ], rawurldecode($m[1]));
-//					}
-//					$trail = "";
-//				} else { # Invalid form; output directly
-//					$s .= $prefix . '[[' . $line;
-//					continue;
-//				}
-//
-//				$origLink = ltrim($m[1], ' ');
-//
-//				# Don't allow @gplx.Internal protected links to pages containing
-//				# PROTO: where PROTO is a valid URL protocol; these
-//				# should be external links.
-//				if (preg_match('/^(?i:' . this.mUrlProtocols . ')/', $origLink)) {
-//					$s .= $prefix . '[[' . $line;
-//					continue;
-//				}
-//
-//				# Make subpage if necessary
-//				if ($useSubpages) {
-//					$link = this.maybeDoSubpageLink($origLink, $text);
-//				} else {
-//					$link = $origLink;
-//				}
-//
-//				$noforce = (substr($origLink, 0, 1) !== ':');
-//				if (!$noforce) {
-//					# Strip off leading ':'
-//					$link = substr($link, 1);
-//				}
-//
-//				$unstrip = this.mStripState->unstripNoWiki($link);
-//				$nt = is_string($unstrip) ? Title::newFromText($unstrip) : null;
-//				if ($nt === null) {
-//					$s .= $prefix . '[[' . $line;
-//					continue;
-//				}
-//
-//				$ns = $nt->getNamespace();
-//				$iw = $nt->getInterwiki();
-//
-//				if ($might_be_img) { # if this is actually an invalid link
-//					if ($ns == NS_FILE && $noforce) { # but might be an image
-//						$found = false;
-//						while (true) {
-//							# look at the next 'line' to see if we can close it there
-//							$a->next();
-//							$next_line = $a->current();
-//							if ($next_line === false || $next_line === null) {
-//								break;
-//							}
-//							$m = explode(']]', $next_line, 3);
-//							if (count($m) == 3) {
-//								# the first ]] closes the inner link, the second the image
-//								$found = true;
-//								$text .= "[[{$m[0]}]]{$m[1]}";
-//								$trail = $m[2];
-//								break;
-//							} elseif (count($m) == 2) {
-//								# if there's exactly one ]] that's fine, we'll keep looking
-//								$text .= "[[{$m[0]}]]{$m[1]}";
-//							} else {
-//								# if $next_line is invalid too, we need look no further
-//								$text .= '[[' . $next_line;
-//								break;
-//							}
-//						}
-//						if (!$found) {
-//							# we couldn't find the end of this imageLink, so output it raw
-//							# but don't ignore what might be perfectly normal links in the text we've examined
-//							$holders->merge(this.replaceInternalLinks2($text));
-//							$s .= "{$prefix}[[$link|$text";
-//							# note: no $trail, because without an end, there *is* no trail
-//							continue;
-//						}
-//					} else { # it's not an image, so output it raw
-//						$s .= "{$prefix}[[$link|$text";
-//						# note: no $trail, because without an end, there *is* no trail
-//						continue;
-//					}
-//				}
-//
-//				$wasblank = ($text == '');
-//				if ($wasblank) {
-//					$text = $link;
-//				} else {
-//					# T6598 madness. Handle the quotes only if they come from the alternate part
-//					# [[Lista d''e paise d''o munno]] -> <a href="...">Lista d''e paise d''o munno</a>
-//					# [[Criticism of Harry Potter|Criticism of ''Harry Potter'']]
-//					#    -> <a href="Criticism of Harry Potter">Criticism of <i>Harry Potter</i></a>
-//					$text = this.doQuotes($text);
-//				}
-//
-//				# Link not escaped by : , create the various objects
-//				if ($noforce && !$nt->wasLocalInterwiki()) {
-//					# Interwikis
-//					if (
-//						$iw && this.mOptions->getInterwikiMagic() && $nottalk && (
-//							Language::fetchLanguageName($iw, null, 'mw') ||
-//							in_array($iw, $wgExtraInterlanguageLinkPrefixes)
-//						)
-//					) {
-//						# T26502: filter duplicates
-//						if (!isset(this.mLangLinkLanguages[$iw])) {
-//							this.mLangLinkLanguages[$iw] = true;
-//							this.mOutput->addLanguageLink($nt->getFullText());
-//						}
-//
-//						$s = rtrim($s . $prefix);
-//						$s .= trim($trail, "\n") == '' ? '': $prefix . $trail;
-//						continue;
-//					}
-//
-//					if ($ns == NS_FILE) {
-//						if (!wfIsBadImage($nt->getDBkey(), this.mTitle)) {
-//							if ($wasblank) {
-//								# if no parameters were passed, $text
-//								# becomes something like "File:Foo.png",
-//								# which we don't want to pass on to the
-//								# image generator
-//								$text = '';
-//							} else {
-//								# recursively parse links inside the image caption
-//								# actually, this will parse them in any other parameters, too,
-//								# but it might be hard to fix that, and it doesn't matter ATM
-//								$text = this.replaceExternalLinks($text);
-//								$holders->merge(this.replaceInternalLinks2($text));
-//							}
-//							# cloak any absolute URLs inside the image markup, so replaceExternalLinks() won't touch them
-//							$s .= $prefix . this.armorLinks(
-//								this.makeImage($nt, $text, $holders)) . $trail;
-//							continue;
-//						}
-//					} elseif ($ns == NS_CATEGORY) {
-//						$s = rtrim($s . "\n"); # T2087
-//
-//						if ($wasblank) {
-//							$sortkey = this.getDefaultSort();
-//						} else {
-//							$sortkey = $text;
-//						}
-//						$sortkey = Sanitizer::decodeCharReferences($sortkey);
-//						$sortkey = str_replace("\n", '', $sortkey);
-//						$sortkey = this.getConverterLanguage()->convertCategoryKey($sortkey);
-//						this.mOutput->addCategory($nt->getDBkey(), $sortkey);
-//
-//						/**
-//						* Strip the whitespace Category links produce, see T2087
-//						*/
-//						$s .= trim($prefix . $trail, "\n") == '' ? '' : $prefix . $trail;
-//
-//						continue;
-//					}
-//				}
-//
-//				# Self-link checking. For some languages, variants of the title are checked in
-//				# LinkHolderArray::doVariants() to allow batching the existence checks necessary
-//				# for linking to a different variant.
-//				if ($ns != NS_SPECIAL && $nt->equals(this.mTitle) && !$nt->hasFragment()) {
-//					$s .= $prefix . Linker::makeSelfLinkObj($nt, $text, '', $trail);
-//					continue;
-//				}
-//
-//				# NS_MEDIA is a pseudo-namespace for linking directly to a file
-//				# @todo FIXME: Should do batch file existence checks, see comment below
-//				if ($ns == NS_MEDIA) {
-//					# Give extensions a chance to select the file revision for us
-//					$options = [];
-//					$descQuery = false;
-//					Hooks::run('BeforeParserFetchFileAndTitle',
-//						[ $this, $nt, &$options, &$descQuery ]);
-//					# Fetch and register the file (file title may be different via hooks)
-//					list($file, $nt) = this.fetchFileAndTitle($nt, $options);
-//					# Cloak with NOPARSE to avoid replacement in replaceExternalLinks
-//					$s .= $prefix . this.armorLinks(
-//						Linker::makeMediaLinkFile($nt, $file, $text)) . $trail;
-//					continue;
-//				}
-//
-//				# Some titles, such as valid special pages or files in foreign repos, should
-//				# be shown as bluelinks even though they're not included in the page table
-//				# @todo FIXME: isAlwaysKnown() can be expensive for file links; we should really do
-//				# batch file existence checks for NS_FILE and NS_MEDIA
-//				if ($iw == '' && $nt->isAlwaysKnown()) {
-//					this.mOutput->addLink($nt);
-//					$s .= this.makeKnownLinkHolder($nt, $text, $trail, $prefix);
-//				} else {
-//					# Links will be added to the output link list after checking
-//					$s .= $holders->makeHolder($nt, $text, [], $trail, $prefix);
-//				}
-//			}
-//			return $holders;
-//		}
-//
+
+	// XO.MW:MOVED
+	// public function replaceInternalLinks($s) {}
+
+	// XO.MW:MOVED
+//		public function replaceInternalLinks2(&$s) {}
+
 //		/**
 //		* Render a forced-blue link inline; protect against double expansion of
 //		* URLs if we're in a mode that prepends full URL prefixes to @gplx.Internal protected links.
@@ -2404,21 +1648,69 @@ public class XomwParser {
 //			return this.armorLinks($link) . $trail;
 //		}
 //
-//		/**
-//		* Insert a NOPARSE hacky thing into any inline links in a chunk that's
-//		* going to go through further parsing steps before inline URL expansion.
-//		*
-//		* Not needed quite as much as it used to be since free links are a bit
-//		* more sensible these days. But bracketed links are still an issue.
-//		*
-//		* @param String $text More-or-less HTML
-//		* @return String Less-or-more HTML with NOPARSE bits
-//		*/
-//		public function armorLinks($text) {
-//			return preg_replace('/\b((?i)' . this.mUrlProtocols . ')/',
-//				self::MARKER_PREFIX . "NOPARSE$1", $text);
-//		}
-//
+	/**
+	* Insert a NOPARSE hacky thing into any inline links in a chunk that's
+	* going to go through further parsing steps before inline URL expansion.
+	*
+	* Not needed quite as much as it used to be since free links are a bit
+	* more sensible these days. But bracketed links are still an issue.
+	*
+	* @param String $text More-or-less HTML
+	* @return String Less-or-more HTML with NOPARSE bits
+	*/
+	public byte[] armorLinks(Bry_bfr trg, byte[] src, int src_bgn, int src_end) {
+		// XO.MW.PORTED
+		// return preg_replace('/\b((?i)' . this.mUrlProtocols . ')/',
+		//	self::MARKER_PREFIX . "NOPARSE$1", $text);
+		int cur = src_bgn;
+		int prv = cur;
+		boolean dirty = false;
+		boolean called_by_bry = trg == null;
+		while (true) {
+			// exit if EOS
+			if (cur == src_end) {
+				// if dirty, add rest of String
+				if (dirty)
+					trg.Add_mid(src, prv, src_end);
+				break;
+			}
+
+			// check if cur matches protocol
+			Object protocol_obj = protocols_trie.Match_at(trv, src, cur, src_end);
+			// no match; continue
+			if (protocol_obj == null) {
+				cur++;
+			}
+			// match; add to bfr
+			else {
+				dirty = true;
+				byte[] protocol_bry = (byte[])protocol_obj;
+				if (called_by_bry) trg = Bry_bfr_.New();
+				trg.Add_bry_many(XomwStripState.Bry__marker__bgn, Bry__noparse, protocol_bry);
+				cur += protocol_bry.length;
+				prv = cur;
+			}
+		}
+		if (called_by_bry) {
+			if (dirty)
+				return trg.To_bry_and_clear();
+			else {
+				if (src_bgn == 0 && src_end == src.length)
+					return src;
+				else
+					return Bry_.Mid(src, src_bgn, src_end);
+			}
+		}
+		else {
+			if (dirty)
+				return null;
+			else {
+				trg.Add_mid(src, src_bgn, src_end);
+				return null;
+			}
+		}
+	}
+
 //		/**
 //		* Return true if subpage links should be expanded on this page.
 //		* @return boolean
@@ -3925,64 +3217,10 @@ public class XomwParser {
 //			this.mExpensiveFunctionCount++;
 //			return this.mExpensiveFunctionCount <= this.mOptions->getExpensiveParserFunctionLimit();
 //		}
-//
-//		/**
-//		* Strip double-underscore items like __NOGALLERY__ and __NOTOC__
-//		* Fills this.mDoubleUnderscores, returns the modified text
-//		*
-//		* @param String $text
-//		*
-//		* @return String
-//		*/
-//		public function doDoubleUnderscore($text) {
-//
-//			# The position of __TOC__ needs to be recorded
-//			$mw = MagicWord::get('toc');
-//			if ($mw->match($text)) {
-//				this.mShowToc = true;
-//				this.mForceTocPosition = true;
-//
-//				# Set a placeholder. At the end we'll fill it in with the TOC.
-//				$text = $mw->replace('<!--MWTOC-->', $text, 1);
-//
-//				# Only keep the first one.
-//				$text = $mw->replace('', $text);
-//			}
-//
-//			# Now match and remove the rest of them
-//			$mwa = MagicWord::getDoubleUnderscoreArray();
-//			this.mDoubleUnderscores = $mwa->matchAndRemove($text);
-//
-//			if (isset(this.mDoubleUnderscores['nogallery'])) {
-//				this.mOutput->mNoGallery = true;
-//			}
-//			if (isset(this.mDoubleUnderscores['notoc']) && !this.mForceTocPosition) {
-//				this.mShowToc = false;
-//			}
-//			if (isset(this.mDoubleUnderscores['hiddencat'])
-//				&& this.mTitle->getNamespace() == NS_CATEGORY
-//			) {
-//				this.addTrackingCategory('hidden-category-category');
-//			}
-//			# (T10068) Allow control over whether robots index a page.
-//			# __INDEX__ always overrides __NOINDEX__, see T16899
-//			if (isset(this.mDoubleUnderscores['noindex']) && this.mTitle->canUseNoindex()) {
-//				this.mOutput->setIndexPolicy('noindex');
-//				this.addTrackingCategory('noindex-category');
-//			}
-//			if (isset(this.mDoubleUnderscores['index']) && this.mTitle->canUseNoindex()) {
-//				this.mOutput->setIndexPolicy('index');
-//				this.addTrackingCategory('index-category');
-//			}
-//
-//			# Cache all double underscores in the database
-//			foreach (this.mDoubleUnderscores as $key => $val) {
-//				this.mOutput->setProperty($key, '');
-//			}
-//
-//			return $text;
-//		}
-//
+
+	// XO.MW:MOVED
+	// public void doDoubleUnderscore($text) {}
+
 //		/**
 //		* @see ParserOutput::addTrackingCategory()
 //		* @param String $msg Message key
@@ -4877,18 +4115,25 @@ public class XomwParser {
 //
 //			return $old;
 //		}
-//
-//		/**
-//		* Replace "<!--LINK-->" link placeholders with actual links, in the buffer
-//		* Placeholders created in Linker::link()
-//		*
-//		* @param String $text
-//		* @param int $options
-//		*/
-//		public function replaceLinkHolders(&$text, $options = 0) {
-//			this.mLinkHolders->replace($text);
-//		}
-//
+
+	/**
+	* Replace "<!--LINK-->" link placeholders with actual links, in the buffer
+	* Placeholders created in Linker::link()
+	*
+	* @param String $text
+	* @param int $options
+	*/
+	public void replaceLinkHolders(Xomw_parser_bfr pbfr) {
+		// this.mLinkHolders.replace(text);
+		this.mLinkHolders.replace(pbfr);
+	}
+	private final    Xomw_parser_bfr tmp_pbfr = new Xomw_parser_bfr();
+	public byte[] replaceLinkHolders(byte[] text) {
+		// this.mLinkHolders.replace(text);
+		this.mLinkHolders.replace(tmp_pbfr.Init(text));
+		return tmp_pbfr.Trg().To_bry_and_clear();
+	}
+
 //		/**
 //		* Replace "<!--LINK-->" link placeholders with plain text of links
 //		* (not HTML-formatted).
@@ -5339,22 +4584,32 @@ public class XomwParser {
 //
 //			return $ret;
 //		}
-//
-//		/**
-//		* @param String $caption
-//		* @param LinkHolderArray|boolean $holders
-//		* @return mixed|String
-//		*/
+
+	/**
+	* @param String $caption
+	* @param LinkHolderArray|boolean $holders
+	* @return mixed|String
+	*/
+	public byte[] stripAltText(byte[] caption, XomwLinkHolderArray holders) {
+		// Strip bad stuff out of the title (tooltip).  We can't just use
+		// replaceLinkHoldersText() here, because if this function is called
+		// from replaceInternalLinks2(), mLinkHolders won't be up-to-date.
+		byte[] tooltip;
+		if (holders != null) {
+			tooltip = holders.replace(tmp_pbfr, caption);
+		} else {
+			tooltip = this.replaceLinkHolders(caption);
+		}
+
+		// make sure there are no placeholders in thumbnail attributes
+		// that are later expanded to html- so expand them now and
+		// remove the tags
+		tooltip = this.mStripState.unstripBoth(tooltip);
+//			tooltip = Sanitizer::stripAllTags( tooltip );
+
+		return tooltip;
+	}
 //		protected function stripAltText($caption, $holders) {
-//			# Strip bad stuff out of the title (tooltip).  We can't just use
-//			# replaceLinkHoldersText() here, because if this function is called
-//			# from replaceInternalLinks2(), mLinkHolders won't be up-to-date.
-//			if ($holders) {
-//				$tooltip = $holders->replaceText($caption);
-//			} else {
-//				$tooltip = this.replaceLinkHoldersText($caption);
-//			}
-//
 //			# make sure there are no placeholders in thumbnail attributes
 //			# that are later expanded to html- so expand them now and
 //			# remove the tags
@@ -6079,4 +5334,7 @@ public class XomwParser {
 //			OutputPage::setupOOUI();
 //			this.mOutput->setEnableOOUI(true);
 //		}
+	private static final    byte[] // Bry__strip_state_item = Bry_.new_a7("-item-")
+		Bry__noparse = Bry_.new_a7("NOPARSE");
+	private static final    byte[] Bry__marker__noparse = Bry_.Add(XomwStripState.Bry__marker__bgn, Bry__noparse);
 }

@@ -117,11 +117,16 @@ public class Xomw_table_wkr__tst {
 class Xomw_table_wkr__fxt {
 	private final    Xomw_parser_bfr parser_bfr = new Xomw_parser_bfr();
 	private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();
-	private final    Xomw_table_wkr wkr = new Xomw_table_wkr(new Xomw_parser());
+	private final    Xomw_table_wkr wkr;
+	public Xomw_table_wkr__fxt() {
+		Xomw_parser parser = new Xomw_parser();
+		this.wkr = new Xomw_table_wkr(parser.Tmp(), parser.Sanitizer(), parser.Strip_state());
+	}
+
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		parser_bfr.Init(src_bry);
-		wkr.Do_table_stuff(pctx, parser_bfr);
+		wkr.doTableStuff(pctx, parser_bfr);
 		Tfds.Eq_str_lines(expd, parser_bfr.Rslt().To_str_and_clear(), src_str);
 	}
 }
