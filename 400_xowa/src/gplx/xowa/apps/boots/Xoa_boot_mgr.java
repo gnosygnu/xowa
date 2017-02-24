@@ -36,9 +36,12 @@ public class Xoa_boot_mgr {
 		}
 	}
 	private void Init_env(String[] args) {
+		// add global loggers
 		Gfo_usr_dlg_.Instance = usr_dlg = Xoa_app_.New__usr_dlg__console();
 		Gfo_log_.Instance__set(new gplx.xowa.apps.shells.Gfo_log__console());
 		log_wtr = usr_dlg.Log_wkr(); log_wtr.Log_to_session_fmt("env.init: version=~{0}", Xoa_app_.Version);
+
+		// init env
 		GfuiEnv_.Init_swt(args, Xoa_app_.class); 
 		Io_url jar_url = Env_.AppUrl();
 		Xoa_app_.Build_date = Io_mgr.Instance.QueryFil(jar_url).ModifiedTime().XtoUtc().XtoStr_fmt(Xoa_app_.Build_date_fmt);
@@ -49,16 +52,21 @@ public class Xoa_boot_mgr {
 		boolean app_type_is_gui = false;
 		Xoae_app app = null;
 		try {
-			// init vars
+			// pull vars from command-line args
 			Io_url root_dir = arg_mgr.Fsys__root_dir();
 			Xoa_app_.Op_sys_str = arg_mgr.Fsys__bin_dir();
 			Xoa_app_.User_agent = String_.Format("XOWA/{0} ({1}) [gnosygnu@gmail.com]", Xoa_app_.Version, Xoa_app_.Op_sys_str);
+
+			// prep splash window
 			Xoa_app_mode app_type = arg_mgr.App_type();
 			app_type_is_gui = app_type.Tid_is_gui();
 			Xog_splash_win splash_win = new Xog_splash_win(app_type_is_gui);
+
+			// change default db from mock to sqlite
 			Db_conn_bldr.Instance.Reg_default_sqlite();
 
-			// init app
+			// ctor app
+			usr_dlg.Log_wkr().Queue_enabled_(false);				
 			app = new Xoae_app(usr_dlg, app_type
 			, root_dir
 			, arg_mgr.Fsys__wiki_dir()
@@ -67,22 +75,31 @@ public class Xoa_boot_mgr {
 			, root_dir.GenSubDir_nest("user", "anonymous", "wiki")
 			, Xoa_app_.Op_sys_str);
 			app.Addon_mgr().Add_dflts_by_app(app).Run_by_app(app);
-			usr_dlg.Log_wkr().Queue_enabled_(false); log_wtr.Log_to_session_fmt("app.init");
+
 			try {
 				app.Sys_cfg().Lang_(System_lang());
+
 				String launch_url = arg_mgr.Gui__home_page();
 				if (launch_url != null) gplx.xowa.guis.views.Xog_startup_tabs.Manual = launch_url;
+
+				// prep tcp-server
+				Gfo_usr_dlg_.Instance.Log_wkr().Log_to_session_fmt("app.boot:servers");
 				app.Tcp_server().Rdr_port_(arg_mgr.Tcp__port_recv()).Wtr_port_(arg_mgr.Tcp__port_send());
+
+				// prep http-server
 				gplx.xowa.apps.servers.http.Http_server_mgr server_mgr = app.Http_server();
 				server_mgr.Port_(arg_mgr.Http__port());
 				server_mgr.Home_(Bry_.new_u8(arg_mgr.Http__home_page()));
 				server_mgr.Wkr_pool().Init(arg_mgr.Http__max_clients(), arg_mgr.Http__max_clients_timeout());
+
+				Gfo_usr_dlg_.Instance.Log_wkr().Log_to_session_fmt("app.boot:app.init");
 				app.Init_by_app();
 			}
 			catch (Exception e) {usr_dlg.Warn_many("", "", "app init failed: ~{0}", Err_.Message_gplx_full(e));}
 			app.Usr_dlg().Log_wkr_(app.Log_wtr());	// NOTE: log_wtr must be set for cmd-line (else process will fail);
 
 			// run gfs; prefs.gfs and app.gfs
+			Gfo_usr_dlg_.Instance.Log_wkr().Log_to_session_fmt("app.boot:gfs.run");
 			Io_url cmd_file = arg_mgr.Cmd__file();
 			try {app.Gfs_mgr().Run_url(cmd_file);}
 			catch (Exception e) {
@@ -92,6 +109,7 @@ public class Xoa_boot_mgr {
 			}
 
 			// launch
+			Gfo_usr_dlg_.Instance.Log_wkr().Log_to_session_fmt("app.boot:app.launch");
 			app.Launch();
 			if		(app_type.Tid_is_tcp())		app.Tcp_server().Run();
 			else if	(app_type.Tid_is_http())	app.Http_server().Run();

@@ -21,8 +21,10 @@ public class Xog_splash_win implements Rls_able {
 	private Graphics2D graphics; private boolean graphics_init = true;
 		public Xog_splash_win(boolean app_mode_is_gui) {
 		        if (app_mode_is_gui) {
+			Gfo_usr_dlg_.Instance.Log_many("", "", "gui.splash.bgn");
 	        this.splash = SplashScreen.getSplashScreen();
 	        if (splash == null) System.out.println("SplashScreen.getSplashScreen() returned null");
+			Gfo_usr_dlg_.Instance.Log_many("", "", "gui.splash.end");
         }
         	}
 	public void Write(String msg) {

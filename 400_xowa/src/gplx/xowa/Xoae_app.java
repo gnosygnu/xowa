@@ -32,6 +32,8 @@ import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.apps.miscs.*;
 public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoae_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url user_dir, Io_url css_dir, String bin_dir_name) {
 		Xoa_app_.Usr_dlg_(usr_dlg);
+		usr_dlg.Log_wkr().Log_to_session_fmt("app.ctor.bgn");
+
 		this.mode = mode;
 		Io_url.Http_file_str_encoder = Gfo_url_encoder_.New__fsys_lnx().Make();
 		fsys_mgr = new Xoa_fsys_mgr(bin_dir_name, root_dir, wiki_dir, file_dir, css_dir, root_dir);
@@ -63,6 +65,8 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		html_mgr = new Xoh_html_mgr(this);
 		this.html__bridge_mgr = new Xoh_bridge_mgr(utl__json_parser);
 		this.site_cfg_mgr = new Xoa_site_cfg_mgr(this);
+
+		usr_dlg.Log_wkr().Log_to_session_fmt("app.ctor.end");
 	}
 	public boolean						Tid_is_edit()				{return Bool_.Y;}
 	public Xoa_app_mode				Mode()						{return mode;} private final    Xoa_app_mode mode;
