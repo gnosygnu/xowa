@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*; import gplx.core.brys.*;
 import gplx.core.primitives.*;
-public class Php_preg_ {
-	public static byte[][] Split(Int_list list, byte[] src, int src_bgn, int src_end, byte[] dlm, boolean extend) {
+public class XophpPreg {
+	public static byte[][] split(Int_list list, byte[] src, int src_bgn, int src_end, byte[] dlm, boolean extend) {
 		// find delimiters
 		int dlm_len = dlm.length;
 		byte dlm_nth = dlm[dlm_len - 1];
@@ -57,7 +57,7 @@ public class Php_preg_ {
 		list.Clear();
 		return rv;
 	}
-	public static Object Match(Btrie_slim_mgr trie, Btrie_rv trv, byte[] src, int src_bgn, int src_end) {
+	public static Object match(Btrie_slim_mgr trie, Btrie_rv trv, byte[] src, int src_bgn, int src_end) {
 		trv.Match_bgn = -1;
 		int cur = src_bgn;
 		while (cur < src_end) {
@@ -73,7 +73,7 @@ public class Php_preg_ {
 		return null;
 	}
 	
-	public static void Replace(Bry_tmp bry, Bry_bfr tmp, Btrie_slim_mgr find_trie, Btrie_rv trv, byte[] repl_bry) {
+	public static void replace(Bry_tmp bry, Bry_bfr tmp, Btrie_slim_mgr find_trie, Btrie_rv trv, byte[] repl_bry) {
 		byte[] src = bry.src;
 		int src_bgn = bry.src_bgn;
 		int src_end = bry.src_end;

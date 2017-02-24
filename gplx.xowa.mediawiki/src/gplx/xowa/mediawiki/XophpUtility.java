@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-public class Php_utl_ {
+package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+public class XophpUtility {
 	public static boolean empty(byte[] v)   {return v == null || v.length == 0;}
 	public static boolean empty(boolean v)     {return v == false;}
 	public static boolean empty(int v)      {return v == 0;}
@@ -37,6 +37,7 @@ public class Php_utl_ {
 		}
 		return true;
 	}
+
 	public static final int Null_int = Int_.Max_value;
 	public static final double Null_double = Double_.MinValue;
 	public static final    byte[] Null_bry = null;

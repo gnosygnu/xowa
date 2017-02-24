@@ -15,7 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.filerepo; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.mediawiki.includes.filerepo.file.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 /*	TODO.XO:
 	* getZoneUrl
 */

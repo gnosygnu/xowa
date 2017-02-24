@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import gplx.core.brys.*; import gplx.core.btries.*; import gplx.core.encoders.*; import gplx.core.primitives.*; import gplx.langs.htmls.entitys.*;
 import gplx.xowa.parsers.htmls.*;
-import gplx.langs.htmls.*; import gplx.xowa.mediawiki.includes.htmls.*; import gplx.xowa.mediawiki.includes.parsers.*; import gplx.xowa.mediawiki.includes.utls.*;
+import gplx.langs.htmls.*; import gplx.xowa.mediawiki.includes.htmls.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.xowa.mediawiki.includes.libs.*;
 public class XomwSanitizer {
 	private final    Mwh_doc_wkr__atr_bldr atr_bldr = new Mwh_doc_wkr__atr_bldr();
@@ -1233,7 +1233,7 @@ public class XomwSanitizer {
 		//		' ',
 		//		$text);
 		normalizeWhitespaceBry.Init(text, 0, text.length);
-		Php_preg_.Replace(normalizeWhitespaceBry, tmp_bfr_2, normalizeWhitespaceTrie, trv, Byte_ascii.Space_bry);
+		XophpPreg.replace(normalizeWhitespaceBry, tmp_bfr_2, normalizeWhitespaceTrie, trv, Byte_ascii.Space_bry);
 		return normalizeWhitespaceBry.src;
 	}
 
@@ -1722,7 +1722,7 @@ public class XomwSanitizer {
 			// https://tools.ietf.org/html/rfc3454#section-3.1
 			// Strip them before further processing so blacklists and such work.
 			// XO.MW.MOVED: see invalid_idn_trie
-			Php_preg_.Replace(tmp_host.Init(url, regex_find_domain.host_bgn, regex_find_domain.host_end), tmp_bfr, invalid_idn_trie, trv, Bry_.Empty);
+			XophpPreg.replace(tmp_host.Init(url, regex_find_domain.host_bgn, regex_find_domain.host_end), tmp_bfr, invalid_idn_trie, trv, Bry_.Empty);
 			
 			// IPv6 host names are bracketed with [].  Url-decode these.
 			// if (substr_compare("//%5B", $host, 0, 5) === 0 &&

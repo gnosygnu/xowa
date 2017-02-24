@@ -15,7 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.core.btries.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 public class XomwHtml {
 	private final    Bry_bfr tmp = Bry_bfr_.New();
 	private final    Btrie_rv trv = new Btrie_rv();
@@ -128,7 +127,7 @@ public class XomwHtml {
 			}
 			else {
 				// PORTED.HEADER:atr_val_encodings
-				val = Php_str_.Strtr(val, atr_val_encodings, tmp, trv);
+				val = XophpString.strtr(val, atr_val_encodings, tmp, trv);
 				bfr.Add_byte_space().Add(key).Add(Bry__atr__val__quote).Add(val).Add_byte_quote();
 			}
 		}

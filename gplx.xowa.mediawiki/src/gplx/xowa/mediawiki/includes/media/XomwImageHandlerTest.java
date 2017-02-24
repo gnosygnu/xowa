@@ -15,7 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*; import gplx.core.tests.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 import gplx.xowa.mediawiki.includes.parsers.*; import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
 import gplx.xowa.mediawiki.includes.filerepo.*; import gplx.xowa.mediawiki.includes.filerepo.file.*;
 public class XomwImageHandlerTest {
@@ -36,7 +35,7 @@ class XomwImageHandler_fxt {
 	public XomwImageHandler_fxt() {
 		handler = new XomwTransformationalImageHandler(Bry_.new_a7("test_handler"));
 	}
-	public Xomw_params_handler Make__handlerParams(int w) {return Make__handlerParams(w, Php_utl_.Null_int, Php_utl_.Null_int, Php_utl_.Null_int);}
+	public Xomw_params_handler Make__handlerParams(int w) {return Make__handlerParams(w, XophpUtility.Null_int, XophpUtility.Null_int, XophpUtility.Null_int);}
 	public Xomw_params_handler Make__handlerParams(int w, int h, int phys_w, int phys_h) {
 		Xomw_params_handler rv = new Xomw_params_handler();
 		rv.width = w;

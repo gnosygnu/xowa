@@ -15,7 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.filerepo.file; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.filerepo.*;
 import gplx.xowa.mediawiki.includes.media.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 import gplx.xowa.mediawiki.includes.parsers.*; import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
 public class XomwFile {
 /*	TODO.XO:
@@ -279,7 +278,7 @@ public class XomwFile {
 	* @return String
 	*/
 	public byte[] getName() {
-		if (!Php_utl_.isset(this.name)) {
+		if (!XophpUtility.isset(this.name)) {
 			// this.assertRepoDefined();
 			this.name = this.repo.getNameFromTitle(this.title);
 		}
@@ -293,10 +292,10 @@ public class XomwFile {
 	* @return String
 	*/
 	private byte[] getExtension() {
-		if (!Php_utl_.isset(this.extension)) {
-			int n = Php_str_.Strpos(this.getName(), Byte_ascii.Dot);
+		if (!XophpUtility.isset(this.extension)) {
+			int n = XophpString.strpos(this.getName(), Byte_ascii.Dot);
 			this.extension = normalizeExtension(
-				n != Bry_find_.Not_found ? Php_str_.Substr(this.getName(), n + 1) : Bry_.Empty);
+				n != Bry_find_.Not_found ? XophpString.substr(this.getName(), n + 1) : Bry_.Empty);
 		}
 
 		return this.extension;
@@ -330,7 +329,7 @@ public class XomwFile {
 	* @return String
 	*/
 	public byte[] getUrl() {
-		if (!Php_utl_.isset(this.url)) {
+		if (!XophpUtility.isset(this.url)) {
 			// this.assertRepoDefined();
 			byte[] ext = this.getExtension();
 			this.url = Bry_.Add(this.repo.getZoneUrl(XomwFileRepo.Zone__public, ext), Byte_ascii.Slash_bry, this.getUrlRel());
@@ -1497,7 +1496,7 @@ public class XomwFile {
 	* @return String
 	*/
 	private byte[] getHashPath() {
-		if (!Php_utl_.isset(this.hashPath)) {
+		if (!XophpUtility.isset(this.hashPath)) {
 			// this.assertRepoDefined();
 			this.hashPath = this.repo.getHashPath(this.getName());
 		}
@@ -1559,7 +1558,7 @@ public class XomwFile {
 	* @return String
 	*/
 	private byte[] getUrlRel() {
-		return Bry_.Add(this.getHashPath(), Php_encode_.rawurlencode(this.getName()));
+		return Bry_.Add(this.getHashPath(), XophpEncode.rawurlencode(this.getName()));
 	}
 
 //		/**

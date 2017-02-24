@@ -14,7 +14,6 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.hrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 public class Xomw_hr_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private Bry_bfr bfr;
 	public void replaceHrs(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {	// REF.MW: text = preg_replace('/(^|\n)-----*/', '\\1<hr />', text);

@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.magiclinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.net.*;
-import gplx.xowa.mediawiki.includes.utls.*; import gplx.xowa.mediawiki.includes.htmls.*;
+import gplx.xowa.mediawiki.includes.htmls.*;
 import gplx.langs.regxs.*;
 // TODO.XO: this->getConverterLanguage()->markNoConversion($url, true),
 public class Xomw_magiclinks_wkr {
@@ -224,12 +224,12 @@ public class Xomw_magiclinks_wkr {
 		// XO.MW: if (strpos($url, '(') === false) {$sep .= ')';}
 		url_separators[Byte_ascii.Paren_end] = Bry_find_.Find_fwd(url, Byte_ascii.Paren_bgn, 0, url_len) == Bry_find_.Not_found;
 		
-		int num_sep_chars = Php_str_.Strspn_bwd__ary(url, url_separators, url_len, -1);
+		int num_sep_chars = XophpString.strspn_bwd__ary(url, url_separators, url_len, -1);
 		// Don't break a trailing HTML entity by moving the ; into $trail
 		// This is in hot code, so use substr_compare to avoid having to
 		// create a new String Object for the comparison
 		// XO.MW.NOTE: ignore semic if part of entity; EX: "http://a.org&apos;!."
-		if (num_sep_chars > 0 && Php_str_.Substr_byte(url, -num_sep_chars) == Byte_ascii.Semic) {
+		if (num_sep_chars > 0 && XophpString.substr_byte(url, -num_sep_chars) == Byte_ascii.Semic) {
 			// more optimization: instead of running preg_match with a $
 			// anchor, which can be slow, do the match on the reversed
 			// String starting at the desired offset.
@@ -241,8 +241,8 @@ public class Xomw_magiclinks_wkr {
 		}
 
 		if (num_sep_chars > 0) {
-			trail = Bry_.Add(Php_str_.Substr(url, -num_sep_chars), trail);
-			url = Php_str_.Substr(url, 0, -num_sep_chars);
+			trail = Bry_.Add(XophpString.substr(url, -num_sep_chars), trail);
+			url = XophpString.substr(url, 0, -num_sep_chars);
 		}
 
 		// Verify that we still have a real URL after trail removal, and

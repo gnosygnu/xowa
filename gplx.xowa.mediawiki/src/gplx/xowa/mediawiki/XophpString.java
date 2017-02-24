@@ -13,15 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*;
-public class Php_str_ {
-	public static int Strpos(byte[] src, byte find) {return Strpos(src, find, 0, src.length);}
-	public static int Strpos(byte[] src, byte find, int bgn, int end) {
+public class XophpString {
+	public static int strpos(byte[] src, byte find) {return strpos(src, find, 0, src.length);}
+	public static int strpos(byte[] src, byte find, int bgn, int end) {
 		return Bry_find_.Find_fwd(src, find, bgn, end);
 	}
-	public static byte[] Substr(byte[] src, int bgn) {return Substr(src, bgn, src.length);}
-	public static byte[] Substr(byte[] src, int bgn, int len) {
+	public static byte[] substr(byte[] src, int bgn) {return substr(src, bgn, src.length);}
+	public static byte[] substr(byte[] src, int bgn, int len) {
 		int src_len = src.length;
 		if (bgn < 0) bgn = src_len + bgn; // handle negative
 		if (bgn < 0) bgn = 0;	// handle out of bounds; EX: ("a", -1, -1)
@@ -29,8 +29,8 @@ public class Php_str_ {
 		if (end > src.length) end = src.length;; // handle out of bounds;
 		return Bry_.Mid(src, bgn, end);
 	}
-	public static byte Substr_byte(byte[] src, int bgn) {return Substr_byte(src, bgn, src.length);}
-	public static byte Substr_byte(byte[] src, int bgn, int len) {
+	public static byte substr_byte(byte[] src, int bgn) {return substr_byte(src, bgn, src.length);}
+	public static byte substr_byte(byte[] src, int bgn, int len) {
 		int src_len = src.length;
 		if (src_len == 0) return Byte_ascii.Null;
 		if (bgn < 0) bgn = src_len + bgn; // handle negative
@@ -39,7 +39,7 @@ public class Php_str_ {
 		if (end > src.length) end = src.length;; // handle out of bounds;
 		return src[bgn];
 	}
-	public static int Strspn_fwd__ary(byte[] src, boolean[] find, int bgn, int max, int src_len) {
+	public static int strspn_fwd__ary(byte[] src, boolean[] find, int bgn, int max, int src_len) {
 		if (max == -1) max = src_len;
 		int rv = 0;
 		for (int i = bgn; i < src_len; i++) {
@@ -50,7 +50,7 @@ public class Php_str_ {
 		}
 		return rv;
 	}
-	public static int Strspn_fwd__byte(byte[] src, byte find, int bgn, int max, int src_len) {
+	public static int strspn_fwd__byte(byte[] src, byte find, int bgn, int max, int src_len) {
 		if (max == -1) max = src_len;
 		int rv = 0;
 		for (int i = bgn; i < src_len; i++) {
@@ -61,7 +61,7 @@ public class Php_str_ {
 		}
 		return rv;
 	}
-	public static int Strspn_fwd__space_or_tab(byte[] src, int bgn, int max, int src_len) {
+	public static int strspn_fwd__space_or_tab(byte[] src, int bgn, int max, int src_len) {
 		if (max == -1) max = src_len;
 		int rv = 0;
 		for (int i = bgn; i < src_len; i++) {
@@ -78,7 +78,7 @@ public class Php_str_ {
 		}
 		return rv;
 	}
-	public static int Strspn_bwd__byte(byte[] src, byte find, int bgn, int max) {
+	public static int strspn_bwd__byte(byte[] src, byte find, int bgn, int max) {
 		if (max == -1) max = Int_.Max_value;
 		int rv = 0;
 		for (int i = bgn - 1; i > -1; i--) {
@@ -89,7 +89,7 @@ public class Php_str_ {
 		}
 		return rv;
 	}
-	public static int Strspn_bwd__ary(byte[] src, boolean[] find, int bgn, int max) {
+	public static int strspn_bwd__ary(byte[] src, boolean[] find, int bgn, int max) {
 		if (max == -1) max = Int_.Max_value;
 		int rv = 0;
 		for (int i = bgn - 1; i > -1; i--) {
@@ -100,7 +100,7 @@ public class Php_str_ {
 		}
 		return rv;
 	}
-	public static int Strspn_bwd__space_or_tab(byte[] src, int bgn, int max) {
+	public static int strspn_bwd__space_or_tab(byte[] src, int bgn, int max) {
 		if (max == -1) max = Int_.Max_value;
 		int rv = 0;
 		for (int i = bgn - 1; i > -1; i--) {
@@ -117,7 +117,7 @@ public class Php_str_ {
 		}
 		return rv;
 	}
-	public static byte[] Strtr(byte[] src, Btrie_slim_mgr trie, Bry_bfr tmp, Btrie_rv trv) {
+	public static byte[] strtr(byte[] src, Btrie_slim_mgr trie, Bry_bfr tmp, Btrie_rv trv) {
 		boolean dirty = false;
 		int src_bgn = 0;
 		int src_end = src.length;

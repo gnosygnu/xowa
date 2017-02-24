@@ -382,7 +382,7 @@ public class XomwSetup {
 //		$wgMinUploadChunkSize = min(
 //			$wgMinUploadChunkSize,
 //			UploadBase::getMaxUploadSize( 'file' ),
-//			UploadBase::getMaxPhpUploadSize(),
+//			UploadBase::getMaxXophpUploadSize(),
 //			( wfShorthandToInteger(
 //				ini_get( 'post_max_size' ) ?: ini_get( 'hhvm.server.max_post_size' ),
 //				PHP_INT_MAX

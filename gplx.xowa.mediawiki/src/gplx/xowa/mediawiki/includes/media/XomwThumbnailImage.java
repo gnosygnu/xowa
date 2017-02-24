@@ -15,7 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.langs.htmls.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
 import gplx.xowa.mediawiki.includes.filerepo.file.*;
 // Media transform output for images
@@ -136,71 +135,71 @@ public class XomwThumbnailImage extends XomwMediaTransformOutput {	private final
 		attribs.Add_many(Gfh_atr_.Bry__alt, alt);
 		attribs.Add_many(Gfh_atr_.Bry__src, url);
 		boolean link_attribs_is_null = false;
-		if (!Php_utl_.empty(options.custom_url_link)) {
+		if (!XophpUtility.empty(options.custom_url_link)) {
 			link_attribs.Clear();
 			link_attribs.Add_many(Gfh_atr_.Bry__href, options.custom_url_link);
-			if (!Php_utl_.empty(options.title)) {
+			if (!XophpUtility.empty(options.title)) {
 				link_attribs.Add_many(Gfh_atr_.Bry__title, options.title);
 			}
-			if (Php_utl_.empty(options.custom_target_link)) {
+			if (XophpUtility.empty(options.custom_target_link)) {
 				link_attribs.Add_many(Gfh_atr_.Bry__target, options.custom_target_link);
 			}
-			else if (Php_utl_.empty(options.parser_extlink_target)) {
+			else if (XophpUtility.empty(options.parser_extlink_target)) {
 				link_attribs.Add_many(Gfh_atr_.Bry__target, options.parser_extlink_target);
 			}
-			if (Php_utl_.empty(options.parser_extlink_rel)) {
+			if (XophpUtility.empty(options.parser_extlink_rel)) {
 				link_attribs.Add_many(Gfh_atr_.Bry__rel, options.parser_extlink_rel);
 			}
 		}
-		else if (!Php_utl_.empty(options.custom_title_link)) {
+		else if (!XophpUtility.empty(options.custom_title_link)) {
 //				byte[] title = options.custom_title_link;
 //				link_attribs.Clear();
 //				link_attribs.Add_many(Gfh_atr_.Bry__href, title.Get_link_url());
 //				byte[] options_title = options.title;
-//				link_attribs.Add_many(Gfh_atr_.Bry__title, Php_utl_.empty(options_title) ? title.Get_full_text() : options_title);
+//				link_attribs.Add_many(Gfh_atr_.Bry__title, XophpUtility.empty(options_title) ? title.Get_full_text() : options_title);
 		}
-		else if (!Php_utl_.empty(options.desc_link)) {
+		else if (!XophpUtility.empty(options.desc_link)) {
 //				link_attribs = this.getDescLinkAttribs(
 //					empty(options['title']) ? null : options['title'],
 //					$query
 //				);
 			link_attribs.Clear();
 			this.getDescLinkAttribs(link_attribs, 
-				Php_utl_.empty(options.title) ? null : options.title,
+				XophpUtility.empty(options.title) ? null : options.title,
 				null);
 		}
-		else if (!Php_utl_.empty(options.file_link)) {
+		else if (!XophpUtility.empty(options.file_link)) {
 //				link_attribs.Clear();
 //				link_attribs.Add_many(Gfh_atr_.Bry__href, file.Get_url());
 		}
 		else {
 			link_attribs_is_null = true;
-			if (!Php_utl_.empty(options.title)) {
+			if (!XophpUtility.empty(options.title)) {
 				attribs.Add_many(Gfh_atr_.Bry__title, options.title);
 			}
 		}
 
-		if (Php_utl_.empty(options.no_dimensions)) {
+		if (XophpUtility.empty(options.no_dimensions)) {
 			attribs.Add_many(Gfh_atr_.Bry__width, Int_.To_bry(width));
 			attribs.Add_many(Gfh_atr_.Bry__height, Int_.To_bry(height));
 		}
-		if (!Php_utl_.empty(options.valign)) {
+		if (!XophpUtility.empty(options.valign)) {
 			attribs.Add_many(Gfh_atr_.Bry__style, Bry_.Add(Bry__vertical_align, options.valign));
 		}
-		if (!Php_utl_.empty(options.img_cls)) {
+		if (!XophpUtility.empty(options.img_cls)) {
 			attribs.Add_many(Gfh_atr_.Bry__class, options.img_cls);
 		}
-		if (Php_utl_.isset(options.override_height)) {
+		if (XophpUtility.isset(options.override_height)) {
 			attribs.Add_many(Gfh_atr_.Bry__class, options.override_height);
 		}
-		if (Php_utl_.isset(options.override_width)) {
+		if (XophpUtility.isset(options.override_width)) {
 			attribs.Add_many(Gfh_atr_.Bry__width, options.override_height);
 		}
 
 		// Additional densities for responsive images, if specified.
 		// If any of these urls is the same as src url, it'll be excluded.
 //			$responsiveUrls = array_diff(this.responsiveUrls, [ this.url ]);
-//			if (!Php_utl_.empty($responsiveUrls)) {
+//			if (!XophpUtility.empty($responsiveUrls)) {
 //				$attribs['srcset'] = Html::srcSet($responsiveUrls);
 //			}
 

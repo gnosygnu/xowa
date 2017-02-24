@@ -15,7 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.title; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.mediawiki.languages.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 	/**
 	* @var Language
@@ -235,7 +234,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 	*         'user_case_dbkey', and 'dbkey'.
 	*/
 	public XomwMediaWikiTitleCodecParts splitTitleString(byte[] text, int defaultNamespace) {
-		byte[] dbkey = Php_str_.str_replace(Byte_ascii.Space, Byte_ascii.Underline, text);
+		byte[] dbkey = XophpString.str_replace(Byte_ascii.Space, Byte_ascii.Underline, text);
 
 		// Initialisation
 		XomwMediaWikiTitleCodecParts parts = new XomwMediaWikiTitleCodecParts(dbkey, defaultNamespace);

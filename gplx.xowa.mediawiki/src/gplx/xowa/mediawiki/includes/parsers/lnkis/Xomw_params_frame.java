@@ -14,7 +14,6 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 public class Xomw_params_frame {
 	public byte[] align = null;
 	public byte[] valign = null;
@@ -45,12 +44,12 @@ public class Xomw_params_frame {
 	}
 	public Xomw_params_frame Clear() {
 		desc_link = false;
-		upright = Php_utl_.Null_double;
+		upright = XophpUtility.Null_double;
 		align = valign = caption = frame = framed = frameless
 		= thumbnail = manualthumb = alt = title = cls = img_cls
 		= link_title = link_url = link_target = no_link 
 		= custom_url_link = custom_target_link = desc_query
-		= Php_utl_.Null_bry;
+		= XophpUtility.Null_bry;
 		return this;
 	}
 	public void Copy_to(Xomw_params_frame src) {

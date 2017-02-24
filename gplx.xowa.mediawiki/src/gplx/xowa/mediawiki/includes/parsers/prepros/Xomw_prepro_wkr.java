@@ -15,7 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.prepros; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.core.btries.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private final    List_adp comments_list = List_adp_.New();
@@ -287,11 +286,11 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 					}
 					else {
 						// Search backwards for leading whitespace
-						int ws_bgn = i > 0 ? i - Php_str_.Strspn_bwd__space_or_tab(src, i, -1) : 0;
+						int ws_bgn = i > 0 ? i - XophpString.strspn_bwd__space_or_tab(src, i, -1) : 0;
 
 						// Search forwards for trailing whitespace
 						// $wsEnd will be the position of the last space (or the '>' if there's none)
-						int ws_end = end_pos + 2 + Php_str_.Strspn_fwd__space_or_tab(src, end_pos + 3, -1, src_len);
+						int ws_end = end_pos + 2 + XophpString.strspn_fwd__space_or_tab(src, end_pos + 3, -1, src_len);
 
 						// Keep looking forward as long as we're finding more
 						// comments.
@@ -302,7 +301,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 							if (cur_char_pos == Bry_find_.Not_found) {
 								break;
 							}
-							cur_char_pos = cur_char_pos + 2 + Php_str_.Strspn_fwd__space_or_tab(src, cur_char_pos + 3, -1, src_len);
+							cur_char_pos = cur_char_pos + 2 + XophpString.strspn_fwd__space_or_tab(src, cur_char_pos + 3, -1, src_len);
 							comments_list.Add(new int[] {ws_end + 1, cur_char_pos});
 							ws_end = cur_char_pos;
 						}
@@ -321,7 +320,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 							int ws_len = i - ws_bgn;
 							int accum_len = accum.Len();
 							if (	ws_len > 0
-								&&	Php_str_.Strspn_fwd__space_or_tab(accum.Bfr(), accum_len - ws_len, -1, accum_len) == ws_len) {
+								&&	XophpString.strspn_fwd__space_or_tab(accum.Bfr(), accum_len - ws_len, -1, accum_len) == ws_len) {
 								accum.Del_by(ws_len);
 							}
 
@@ -487,7 +486,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 					i++;
 				}
 
-				int count = Php_str_.Strspn_fwd__byte(src, Byte_ascii.Eq, i, 6, src_len);
+				int count = XophpString.strspn_fwd__byte(src, Byte_ascii.Eq, i, 6, src_len);
 				if (count == 1 && find_equals) {	// EX: "{{a|\n=b=\n"
 					// DWIM: This looks kind of like a name/value separator.
 					// Let's let the equals handler have it and break the
@@ -516,7 +515,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 				// Search back through the input to see if it has a proper close.
 				// Do this using the reversed String since the other solutions
 				// (end anchor, etc.) are inefficient.
-				int ws_len = Php_str_.Strspn_bwd__space_or_tab(src, src_len - i, -1);
+				int ws_len = XophpString.strspn_bwd__space_or_tab(src, src_len - i, -1);
 				int search_bgn = i - ws_len;
 
 				if (part.comment_end != -1 && search_bgn -1 == part.comment_end) {
@@ -524,10 +523,10 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 					// Search for equals signs before the comment
 					search_bgn = part.visual_end;
 					search_bgn = Bry_find_.Find_bwd__while_space_or_tab(src, search_bgn, 0);
-					search_bgn -= Php_str_.Strspn_bwd__space_or_tab(src, search_bgn, -1);
+					search_bgn -= XophpString.strspn_bwd__space_or_tab(src, search_bgn, -1);
 				}
 				int count = piece.count;
-				int eq_len = Php_str_.Strspn_bwd__byte(src, Byte_ascii.Eq, search_bgn, -1);
+				int eq_len = XophpString.strspn_bwd__byte(src, Byte_ascii.Eq, search_bgn, -1);
 
 				byte[] element = Bry_.Empty;
 				if (eq_len > 0) {
@@ -580,7 +579,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 			}
 			else if (found == Found__open) {
 				// count opening brace characters
-				int count = Php_str_.Strspn_fwd__byte(src, cur_char[0], i, -1, src_len);	// NOTE: don't know how MediaWiki will handle "-{"
+				int count = XophpString.strspn_fwd__byte(src, cur_char[0], i, -1, src_len);	// NOTE: don't know how MediaWiki will handle "-{"
 
 				// we need to add to stack only if opening brace count is enough for one of the rules
 				if (count >= rule.min) {
@@ -605,7 +604,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 				Xomw_prepro_piece piece = stack.top;
 				// lets check if there are enough characters for closing brace
 				int max_count = piece.count;
-				int count = Php_str_.Strspn_fwd__byte(src, cur_char[0], i, max_count, src_len);
+				int count = XophpString.strspn_fwd__byte(src, cur_char[0], i, max_count, src_len);
 
 				// check for maximum matching characters (if there are 5 closing characters, we will probably need only 3 - depending on the rules)
 				rule = Get_rule(piece.open);

@@ -18,7 +18,7 @@ import gplx.core.btries.*; import gplx.core.net.*;
 import gplx.xowa.mediawiki.includes.parsers.prepros.*; import gplx.xowa.mediawiki.includes.parsers.headings.*;
 import gplx.xowa.mediawiki.includes.parsers.quotes.*; import gplx.xowa.mediawiki.includes.parsers.tables.*; import gplx.xowa.mediawiki.includes.parsers.hrs.*; import gplx.xowa.mediawiki.includes.parsers.nbsps.*;
 import gplx.xowa.mediawiki.includes.parsers.lnkes.*; import gplx.xowa.mediawiki.includes.parsers.lnkis.*; import gplx.xowa.mediawiki.includes.parsers.magiclinks.*; import gplx.xowa.mediawiki.includes.parsers.doubleunders.*;
-import gplx.xowa.mediawiki.includes.utls.*; import gplx.xowa.mediawiki.includes.linkers.*;
+import gplx.xowa.mediawiki.includes.linkers.*;
 import gplx.xowa.mediawiki.includes.htmls.*;
 public class Xomw_parser implements XomwParserIface {
 	private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();

@@ -15,7 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.core.btries.*; import gplx.core.primitives.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 import gplx.xowa.mediawiki.includes.htmls.*;
 /*	TODO.XO
 	* P3: $langObj->formatNum( ++$this->mAutonumber );
@@ -165,7 +164,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// The characters '<' and '>' (which were escaped by
 			// removeHTMLtags()) should not be included in
 			// URLs, per RFC 2396.
-			if (Php_preg_.Match(angle_entities_trie, trv, src, url_bgn, url_end) != null) {
+			if (XophpPreg.match(angle_entities_trie, trv, src, url_bgn, url_end) != null) {
 				int angle_bgn = trv.Match_bgn;
 				text_bgn = angle_bgn;
 				url_end = angle_bgn;

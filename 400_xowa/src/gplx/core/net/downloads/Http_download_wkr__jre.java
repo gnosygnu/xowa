@@ -44,14 +44,21 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
         HttpURLConnection src_conn = null;
         try {
         	// open connection
+        	Gfo_usr_dlg_.Instance.Warn_many("", "", "a1");
             src_conn = (HttpURLConnection)src_url_itm.openConnection();
+        	Gfo_usr_dlg_.Instance.Warn_many("", "", "a2");
             if (prog_resumed)
             	src_conn.addRequestProperty("Range", "bytes=" + Long_.To_str(prog_data_cur) + "-");
+        	Gfo_usr_dlg_.Instance.Warn_many("", "", "a3");
             src_conn.setReadTimeout(10000);	// explicitly set timeout; NOTE:needed on Mac OS X, else error never thrown; DATE:2016-09-03
+        	Gfo_usr_dlg_.Instance.Warn_many("", "", "a4");
             src_conn.connect();
+        	Gfo_usr_dlg_.Instance.Warn_many("", "", "a5");
             
             // check response code
+        	Gfo_usr_dlg_.Instance.Warn_many("", "", "a6");
             int response_code = src_conn.getResponseCode();
+        	Gfo_usr_dlg_.Instance.Warn_many("", "", "a7");
             if (prog_resumed) {
 	            if (response_code != HttpURLConnection.HTTP_PARTIAL) {
 	    			try {if (trg_stream != null) trg_stream.close();}

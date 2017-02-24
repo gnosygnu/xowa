@@ -15,7 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.core.btries.*; import gplx.core.primitives.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.mediawiki.includes.parsers.*; import gplx.xowa.mediawiki.includes.parsers.quotes.*;
 import gplx.xowa.mediawiki.includes.htmls.*; import gplx.xowa.mediawiki.includes.linkers.*;
@@ -70,7 +69,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		this.env = env;
 		this.wiki = wiki;
 		if (title_chars_for_lnki == null) {
-			title_chars_for_lnki = (boolean[])Array_.Clone(Xomw_ttl_utl.Title_chars_valid());
+			title_chars_for_lnki = (boolean[])Array_.Clone(XomwTitle.Title_chars_valid());
 			// the % is needed to support urlencoded titles as well
 			title_chars_for_lnki[Byte_ascii.Hash] = true;
 			title_chars_for_lnki[Byte_ascii.Percent] = true;
@@ -156,7 +155,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// PORTED.BGN: if (preg_match($e1, $line, $m)) && else if (preg_match($e1_img, $line, $m))
 			// NOTE: both e1 and e1_img are effectively the same; e1_img allows nested "[["; EX: "[[A|b[[c]]d]]" will stop at "[[A|b"
 			int ttl_bgn = cur;
-			int ttl_end = Xomw_ttl_utl.Find_fwd_while_title(src, cur, src_end, title_chars_for_lnki);
+			int ttl_end = XomwTitle.Find_fwd_while_title(src, cur, src_end, title_chars_for_lnki);
 			cur = ttl_end;
 			int capt_bgn = -1, capt_end = -1;
 			int nxt_lnki = -1;
@@ -590,7 +589,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 								break;
 							default:
 								// Most other things appear to be empty or numeric...
-								validated = (val == null || Php_utl_.isnumeric(Bry_.Trim(val)));
+								validated = (val == null || XophpUtility.isnumeric(Bry_.Trim(val)));
 								break;
 						}
 					}
@@ -725,7 +724,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	// Parsed a width param of imagelink like 300px or 200x300px
 	// XO.MW.NOTE: for MW, "" -> null, null while "AxB" -> 0x0
 	public void parseWidthParam(int[] img_size, byte[] src) {
-		img_size[0] = img_size[1] = Php_utl_.Null_int;
+		img_size[0] = img_size[1] = XophpUtility.Null_int;
 		if (src == Bry_.Empty) {
 			return;
 		}

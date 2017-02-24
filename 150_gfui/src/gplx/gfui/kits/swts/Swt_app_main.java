@@ -33,8 +33,8 @@ public class Swt_app_main {
 	public static void main(String[] args) {
 //		Drag_drop();
 //		List_fonts();
-		keystrokes(args);
-//		Permission_denied();
+//		keystrokes(args);
+		Permission_denied();
 //		Combo_default();
 //		Combo_composite();
 	}

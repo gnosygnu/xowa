@@ -14,7 +14,6 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 public class Xomw_params_handler {
 	public int width;
 	public int height;
@@ -23,7 +22,7 @@ public class Xomw_params_handler {
 	public int physicalHeight;
 	public Xomw_params_handler Clear() {
 		width = height = page
-		= physicalWidth = physicalHeight = Php_utl_.Null_int;
+		= physicalWidth = physicalHeight = XophpUtility.Null_int;
 		return this;
 	}
 	public void Copy_to(Xomw_params_handler src) {

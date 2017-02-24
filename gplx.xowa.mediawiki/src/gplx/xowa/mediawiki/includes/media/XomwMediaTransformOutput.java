@@ -15,7 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.langs.htmls.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
 import gplx.xowa.mediawiki.includes.filerepo.file.*;
 public abstract class XomwMediaTransformOutput {

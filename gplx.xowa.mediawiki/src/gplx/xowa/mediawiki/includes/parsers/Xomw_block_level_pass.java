@@ -16,7 +16,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.core.btries.*;
 import gplx.langs.htmls.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 public class Xomw_block_level_pass {
 	private final    Bry_bfr tmp = Bry_bfr_.New();
 	private final    Btrie_rv trv = new Btrie_rv();
@@ -106,8 +105,8 @@ public class Xomw_block_level_pass {
 			// If not in a <pre> element, scan for and figure out what prefixes are there.
 			if (!in_pre) {
 				// Multiple prefixes may abut each other for nested lists.
-				prefix_len = Php_str_.Strspn_fwd__ary(src, block_chars_ary, line_bgn, line_end, line_end); // strspn($oLine, '*#:;');
-				prefix = Php_str_.Substr(src, line_bgn, prefix_len);
+				prefix_len = XophpString.strspn_fwd__ary(src, block_chars_ary, line_bgn, line_end, line_end); // strspn($oLine, '*#:;');
+				prefix = XophpString.substr(src, line_bgn, prefix_len);
 
 				// eh?
 				// ; and : are both from definition-lists, so they're equivalent
@@ -130,7 +129,7 @@ public class Xomw_block_level_pass {
 			int common_prefix_len = -1;
 			if (prefix_len > 0 && Bry_.Eq(last_prefix, prefix2)) {
 				// Same as the last item, so no need to deal with nesting or opening stuff
-				bfr.Add(Next_item(Php_str_.Substr_byte(prefix, -1)));
+				bfr.Add(Next_item(XophpString.substr_byte(prefix, -1)));
 				para_stack = Para_stack__none;
 
 				if (prefix_len > 0 && prefix[prefix_len - 1] == Byte_ascii.Semic) {
@@ -170,7 +169,7 @@ public class Xomw_block_level_pass {
 					bfr.Add_byte_nl();
 				}
 				while (prefix_len > common_prefix_len) {
-					byte c = Php_str_.Substr_byte(prefix, common_prefix_len, 1);
+					byte c = XophpString.substr_byte(prefix, common_prefix_len, 1);
 					bfr.Add(Open_list(c));
 
 					if (c == Byte_ascii.Semic) {
@@ -195,8 +194,8 @@ public class Xomw_block_level_pass {
 				// No prefix (not in list)--go to paragraph mode
 				// XXX: use a stack for nestable elements like span, table and div
 				int t_len = t.length;
-				boolean open_match = Php_preg_.Match(open_match_trie, trv, t, 0, t_len) != null;
-				boolean close_match = Php_preg_.Match(close_match_trie, trv, t, 0, t_len) != null;
+				boolean open_match = XophpPreg.match(open_match_trie, trv, t, 0, t_len) != null;
+				boolean close_match = XophpPreg.match(close_match_trie, trv, t, 0, t_len) != null;
 
 				if (open_match || close_match) {
 					para_stack = Para_stack__none;
@@ -208,7 +207,7 @@ public class Xomw_block_level_pass {
 					int bq_offset = 0;
 					// PORTED:preg_match('/<(\\/?)blockquote[\s>]/i', t, $bqMatch, PREG_OFFSET_CAPTURE, $bq_offset)
 					while (true) {
-						Object o = Php_preg_.Match(blockquote_trie, trv, t, bq_offset, t_len);
+						Object o = XophpPreg.match(blockquote_trie, trv, t, bq_offset, t_len);
 						if (o == null) { // no more blockquotes found; exit
 							break;
 						}
@@ -221,7 +220,7 @@ public class Xomw_block_level_pass {
 					in_block_elem = !close_match;
 				}
 				else if (!in_block_elem && !in_pre) {
-					if (   Php_str_.Substr_byte(t, 0) == Byte_ascii.Space
+					if (   XophpString.substr_byte(t, 0) == Byte_ascii.Space
 						&& (last_section == Last_section__pre || Bry_.Trim(t) != Bry_.Empty)
 						&& !in_blockquote
 					) {
@@ -391,17 +390,17 @@ public class Xomw_block_level_pass {
 	// to prevent illegal overlapping.
 	private int Find_colon_no_links(byte[] str, byte[] before, byte[] after) {
 		int len = str.length;
-		int colon_pos = Php_str_.Strpos(str, Byte_ascii.Colon, 0, len);
+		int colon_pos = XophpString.strpos(str, Byte_ascii.Colon, 0, len);
 		if (colon_pos == Bry_find_.Not_found) {
 			// Nothing to find!
 			return Bry_find_.Not_found;
 		}
 
-		int lt_pos = Php_str_.Strpos(str, Byte_ascii.Angle_bgn, 0, len);
+		int lt_pos = XophpString.strpos(str, Byte_ascii.Angle_bgn, 0, len);
 		if (lt_pos == Bry_find_.Not_found || lt_pos > colon_pos) {
 			// Easy; no tag nesting to worry about
-			find_colon_no_links__before = Php_str_.Substr(str, 0, colon_pos);
-			find_colon_no_links__after = Php_str_.Substr(str, colon_pos + 1);
+			find_colon_no_links__before = XophpString.substr(str, 0, colon_pos);
+			find_colon_no_links__after = XophpString.substr(str, colon_pos + 1);
 			return colon_pos;
 		}
 
@@ -421,25 +420,25 @@ public class Xomw_block_level_pass {
 						case Byte_ascii.Colon:
 							if (level == 0) {
 								// We found it!
-								find_colon_no_links__before = Php_str_.Substr(str, 0, i);
-								find_colon_no_links__after = Php_str_.Substr(str, i + 1);
+								find_colon_no_links__before = XophpString.substr(str, 0, i);
+								find_colon_no_links__after = XophpString.substr(str, i + 1);
 								return i;
 							}
 							// Embedded in a tag; don't break it.
 							break;
 						default:
 							// Skip ahead looking for something interesting
-							colon_pos = Php_str_.Strpos(str, Byte_ascii.Colon, i, len);
+							colon_pos = XophpString.strpos(str, Byte_ascii.Colon, i, len);
 							if (colon_pos == Bry_find_.Not_found) {
 								// Nothing else interesting
 								return Bry_find_.Not_found;
 							}
-							lt_pos = Php_str_.Strpos(str, Byte_ascii.Angle_bgn, i, len);
+							lt_pos = XophpString.strpos(str, Byte_ascii.Angle_bgn, i, len);
 							if (level == 0) {
 								if (lt_pos == Bry_find_.Not_found || colon_pos < lt_pos) {
 									// We found it!
-									find_colon_no_links__before = Php_str_.Substr(str, 0, colon_pos);
-									find_colon_no_links__after = Php_str_.Substr(str, colon_pos + 1);
+									find_colon_no_links__before = XophpString.substr(str, 0, colon_pos);
+									find_colon_no_links__after = XophpString.substr(str, colon_pos + 1);
 									return i;
 								}
 							}

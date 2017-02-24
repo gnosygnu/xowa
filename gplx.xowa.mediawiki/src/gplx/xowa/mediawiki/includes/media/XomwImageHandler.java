@@ -15,7 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.mediawiki.includes.filerepo.file.*; import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
-import gplx.xowa.mediawiki.includes.utls.*;
 /*	XO.TODO:
 	* validateThumbParams
 */
@@ -29,7 +28,7 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 	* @return boolean
 	*/
 	@Override public boolean canRender(XomwFile file) {
-		return (Php_utl_.istrue(file.getWidth()) && Php_utl_.istrue(file.getHeight()));
+		return (XophpUtility.istrue(file.getWidth()) && XophpUtility.istrue(file.getHeight()));
 	}
 
 	@Override public Xomw_param_map getParamMap() {
@@ -53,10 +52,10 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 
 	@Override public byte[] makeParamString(Xomw_params_handler handlerParams) {
 		int width = 0;
-		if (Php_utl_.isset(handlerParams.physicalWidth)) {
+		if (XophpUtility.isset(handlerParams.physicalWidth)) {
 			width = handlerParams.physicalWidth;
 		}
-		else if (Php_utl_.isset(handlerParams.width)) {
+		else if (XophpUtility.isset(handlerParams.width)) {
 			width = handlerParams.width;
 		}
 		else {
@@ -77,7 +76,7 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 //				pos = Bry_find_.Find_fwd_while_num(src, 1, len);          // skip numeric
 //				if (Bry_.Match(src, pos, len, Xomw_lnki_wkr.Bry__px)) {   // matches "px"
 //					Xomw_params_handler rv = new Xomw_params_handler();
-//					rv.width = Bry_.To_int_or(src, 0, pos, Php_utl_.Null_int);
+//					rv.width = Bry_.To_int_or(src, 0, pos, XophpUtility.Null_int);
 //					return rv;
 //				}
 //			}
@@ -96,11 +95,11 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 	@Override public boolean normaliseParams(XomwFile image, Xomw_params_handler handlerParams) {
 		byte[] mimeType = image.getMimeType();
 
-		if (!Php_utl_.isset(handlerParams.width)) {
+		if (!XophpUtility.isset(handlerParams.width)) {
 			return false;
 		}
 
-		if (!Php_utl_.isset(handlerParams.page)) {
+		if (!XophpUtility.isset(handlerParams.page)) {
 			handlerParams.page = 1;
 		}
 		else {
@@ -117,7 +116,7 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 		int srcWidth = image.getWidth(handlerParams.page);
 		int srcHeight = image.getHeight(handlerParams.page);
 
-		if (Php_utl_.isset(handlerParams.height) && handlerParams.height != -1) {
+		if (XophpUtility.isset(handlerParams.height) && handlerParams.height != -1) {
 			// Height & width were both set
 			if (handlerParams.width * srcHeight > handlerParams.height * srcWidth) {
 				// Height is the relative smaller dimension, so scale width accordingly
@@ -131,11 +130,11 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 				handlerParams.physicalWidth = handlerParams.width;
 			} else {
 				// Height was crap, unset it so that it will be calculated later
-				handlerParams.height = Php_utl_.Null_int;
+				handlerParams.height = XophpUtility.Null_int;
 			}
 		}
 
-		if (!Php_utl_.isset(handlerParams.physicalWidth)) {
+		if (!XophpUtility.isset(handlerParams.physicalWidth)) {
 			// Passed all validations, so set the physicalWidth
 			handlerParams.physicalWidth = handlerParams.width;
 		}
@@ -147,7 +146,7 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 			handlerParams.physicalWidth);
 
 		// Set the height if it was not validated in the if block higher up
-		if (!Php_utl_.isset(handlerParams.height) || handlerParams.height == -1) {
+		if (!XophpUtility.isset(handlerParams.height) || handlerParams.height == -1) {
 			handlerParams.height = handlerParams.physicalHeight;
 		}
 
