@@ -458,3 +458,32 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 //			return $rxTc;
 //		}
 }
+class XomwRegexTitlePrefix {
+	// $prefixRegexp = "/^(.+?)_*:_*(.*)$/S";
+	//	 "(.+?)": greedy: same as .*
+	//	 "_*"   : spaces; allows "Talk___:_A" to be (Talk) (A)
+	//	 "(.*)" : gobble up rest;
+	//	 "/S"   : analyze
+	public static boolean preg_match(byte[][] rv, byte[] src) {
+		int len = src.length;
+
+		// look for colon
+		int colon_pos = Bry_find_.Find_fwd(src, Byte_ascii.Colon, 0, len);
+
+		// if no_colon, no match; just return bry;
+		if (colon_pos == Bry_find_.Not_found) {
+			rv[0] = src;
+			rv[1] = null;
+			return false;
+		}
+
+		// colon exists; strip any flanking underlines
+		int ns_end = Bry_find_.Find_bwd_while_v2(src, colon_pos, 0, Byte_ascii.Underline);
+		int ttl_bgn = Bry_find_.Find_fwd_while(src, colon_pos + 1, len, Byte_ascii.Underline);
+
+		// split ns / title and return true
+		rv[0] = Bry_.Mid(src, 0, ns_end);
+		rv[1] = Bry_.Mid(src, ttl_bgn, len);
+		return true;
+	}
+}
