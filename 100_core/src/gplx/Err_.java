@@ -51,10 +51,14 @@ public class Err_ {
 		return new Err(Bool_.Y, Trace_null, Type__gplx, "cast failed", "type", Type_adp_.NameOf_type(t), "obj", o_str);
 	}
 
-	public static String Message_lang(Throwable e) {return e.getMessage();} 
 	public static String Message_gplx_full(Exception e)	{return Cast_or_make(e).To_str__full();}
 	public static String Message_gplx_log(Exception e)	{return Cast_or_make(e).To_str__log();}
-		public static String Trace_lang(Throwable e) 	{return Trace_lang_exec(e.getStackTrace());}
+		public static String Message_lang(Throwable e) {
+		return (e.getClass() == Error.class)
+			? e.toString()    // error has null for "getMessage()" return "toString()" instead
+			: e.getMessage();
+	}
+			public static String Trace_lang(Throwable e) 	{return Trace_lang_exec(e.getStackTrace());}
 	private static String Trace_lang_exec(StackTraceElement[] ary) {
 		String rv = "";
 		int len = ary.length;
