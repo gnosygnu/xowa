@@ -54,17 +54,17 @@ public class Xomw_lnke_wkr__tst {
 }
 class Xomw_lnke_wkr__fxt {
 	private final    Xomw_lnke_wkr wkr;
-	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
+	private final    XomwParserBfr pbfr = new XomwParserBfr();
 	private boolean apos = true;
 	public Xomw_lnke_wkr__fxt() {
-		Xomw_parser parser = new Xomw_parser();
-		this.wkr = new Xomw_lnke_wkr(parser, parser.Tmp(), parser.Linker(), parser.Sanitizer());
+		XomwParser parser = new XomwParser();
+		this.wkr = new Xomw_lnke_wkr(parser, Bry_bfr_.New(), parser.Linker(), parser.Sanitizer());
 		Xomw_regex_space regex_space = new Xomw_regex_space();
-		wkr.Init_by_wiki(Xomw_parser.Protocols__dflt(), new Xomw_regex_url(regex_space), regex_space);
+		wkr.Init_by_wiki(XomwParser.Protocols__dflt(), new Xomw_regex_url(regex_space), regex_space);
 	}
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		wkr.replaceExternalLinks(new Xomw_parser_ctx(), pbfr.Init(src_bry));
+		wkr.replaceExternalLinks(new XomwParserCtx(), pbfr.Init(src_bry));
 		if (apos) expd = gplx.langs.htmls.Gfh_utl.Replace_apos(expd);
 		Tfds.Eq_str_lines(expd, pbfr.Rslt().To_str_and_clear(), src_str);
 	}

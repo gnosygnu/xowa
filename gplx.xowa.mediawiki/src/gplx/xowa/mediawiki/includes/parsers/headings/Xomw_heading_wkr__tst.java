@@ -29,7 +29,7 @@ public class Xomw_heading_wkr__tst {
 class Xomw_heading_wkr__fxt {
 	private final    Xomw_heading_wkr wkr = new Xomw_heading_wkr();
 	private final    Xomw_heading_cbk__html cbk = new Xomw_heading_cbk__html().Bfr_(Bry_bfr_.New());
-	private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();
+	private final    XomwParserCtx pctx = new XomwParserCtx();
 	
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);

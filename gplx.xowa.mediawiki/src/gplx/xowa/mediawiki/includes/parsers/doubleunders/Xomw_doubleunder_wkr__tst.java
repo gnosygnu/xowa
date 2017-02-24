@@ -25,8 +25,8 @@ public class Xomw_doubleunder_wkr__tst {
 	@Test  public void Case_match()      {fxt.Test__parse("a __index__ b"                            , "a __index__ b");}
 }
 class Xomw_doubleunder_wkr__fxt {
-	private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();
-	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
+	private final    XomwParserCtx pctx = new XomwParserCtx();
+	private final    XomwParserBfr pbfr = new XomwParserBfr();
 	private final    Xomw_doubleunder_wkr wkr = new Xomw_doubleunder_wkr();
 	public Xomw_doubleunder_data data = new Xomw_doubleunder_data();
 	public Xomw_doubleunder_wkr__fxt() {

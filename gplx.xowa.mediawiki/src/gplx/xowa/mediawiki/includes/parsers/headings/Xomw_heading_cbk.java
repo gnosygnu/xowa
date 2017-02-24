@@ -15,6 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.headings; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 public interface Xomw_heading_cbk {
-	void On_hdr_seen(Xomw_parser_ctx pctx, Xomw_heading_wkr wkr);
-	void On_src_done(Xomw_parser_ctx pctx, Xomw_heading_wkr wkr);
+	void On_hdr_seen(XomwParserCtx pctx, Xomw_heading_wkr wkr);
+	void On_src_done(XomwParserCtx pctx, Xomw_heading_wkr wkr);
 }

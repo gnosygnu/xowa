@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-public class Xomw_parser_bfr_ {
-	public static void Replace(Xomw_parser_bfr pbfr, byte[] find, byte[] repl) {
+public class XomwParserBfr_ {
+	public static void Replace(XomwParserBfr pbfr, byte[] find, byte[] repl) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();

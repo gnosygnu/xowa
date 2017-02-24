@@ -21,13 +21,13 @@ public class XomwLinker_SplitTrailTest {
 	@Test  public void None()                 {fxt.Test__split_trail(" abc"             , null              , " abc");}
 }
 class XomwLinker_SplitTrailFxt {
-	private final    XomwLinker linker = new XomwLinker(new gplx.xowa.mediawiki.includes.linkers.Xomw_link_renderer(new XomwSanitizer()));
+	private final    XomwLinker linker = new XomwLinker(new gplx.xowa.mediawiki.includes.linkers.XomwLinkRenderer(new XomwSanitizer()));
 	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public XomwLinker_SplitTrailFxt() {
 		String[] ary = new String[] {"a", "b", "c", "d", "e", "f"};
 		for (String itm : ary)
 			trie.Add_str_str(itm, itm);
-		linker.Init_by_wiki(new Xomw_parser_env(), trie);
+		linker.Init_by_wiki(new XomwParserEnv(), trie);
 	}
 	public void Test__split_trail(String trail_str, String expd_inside, String expd_trail) {
 		byte[][] split_trail = linker.splitTrail(Bry_.new_u8(trail_str));

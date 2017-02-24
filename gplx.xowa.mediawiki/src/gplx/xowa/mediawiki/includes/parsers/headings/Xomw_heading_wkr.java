@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers.headings; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.core.btries.*; import gplx.xowa.langs.*;
 public class Xomw_heading_wkr {
-	private Xomw_parser_ctx pctx;
+	private XomwParserCtx pctx;
 	private Xomw_heading_cbk cbk;
 	public byte[] Src()			{return src;} private byte[] src;
 	public int Src_end()		{return src_end;} private int src_end;
@@ -28,7 +28,7 @@ public class Xomw_heading_wkr {
 	public int Hdr_lhs_end()	{return hdr_lhs_end;} private int hdr_lhs_end;
 	public int Hdr_rhs_bgn()	{return hdr_rhs_bgn;} private int hdr_rhs_bgn;
 	public int Hdr_rhs_end()	{return hdr_rhs_end;} private int hdr_rhs_end;
-	public void doHeadings(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr, Xomw_heading_cbk__html cbk) {
+	public void doHeadings(XomwParserCtx pctx, XomwParserBfr pbfr, Xomw_heading_cbk__html cbk) {
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src_bry = src_bfr.Bfr();
 		int src_end = src_bfr.Len();
@@ -36,7 +36,7 @@ public class Xomw_heading_wkr {
 		pbfr.Switch();
 		Parse(pctx, src_bry, 0, src_end, cbk);
 	}
-	public void Parse(Xomw_parser_ctx pctx, byte[] src, int src_bgn, int src_end, Xomw_heading_cbk cbk) {	// REF.MW: /includes/parser/Parser.php|doHeadings
+	public void Parse(XomwParserCtx pctx, byte[] src, int src_bgn, int src_end, Xomw_heading_cbk cbk) {	// REF.MW: /includes/parser/Parser.php|doHeadings
 		// init members
 		this.pctx = pctx;
 		this.src = src;
@@ -51,7 +51,7 @@ public class Xomw_heading_wkr {
 
 		// do loop
 		int pos = src_bgn;
-		this.txt_bgn = pos == Xomw_parser_ctx.Pos__bos ? 0 : pos;
+		this.txt_bgn = pos == XomwParserCtx.Pos__bos ? 0 : pos;
 		byte b = Byte_ascii.Nl;
 		while (true) {
 			int nxt = pos + 1;

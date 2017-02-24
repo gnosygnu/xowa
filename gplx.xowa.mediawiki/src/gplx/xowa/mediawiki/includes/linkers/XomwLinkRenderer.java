@@ -28,7 +28,7 @@ import gplx.xowa.mediawiki.includes.htmls.*;
 * @see https://www.mediawiki.org/wiki/Manual:LinkRenderer
 * @since 1.28
 */
-public class Xomw_link_renderer {
+public class XomwLinkRenderer {
 	/**
 	* Whether to force the pretty article path
 	*
@@ -73,7 +73,7 @@ public class Xomw_link_renderer {
 //		* @param TitleFormatter $titleFormatter
 //		* @param LinkCache $linkCache
 //		*/
-	public Xomw_link_renderer(XomwSanitizer sanitizer) {	// TitleFormatter $titleFormatter, LinkCache $linkCache
+	public XomwLinkRenderer(XomwSanitizer sanitizer) {	// TitleFormatter $titleFormatter, LinkCache $linkCache
 //			this.titleFormatter = $titleFormatter;
 //			this.linkCache = $linkCache;
 		this.sanitizer = sanitizer;

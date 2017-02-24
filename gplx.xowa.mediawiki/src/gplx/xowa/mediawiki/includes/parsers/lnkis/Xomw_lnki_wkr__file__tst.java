@@ -72,9 +72,9 @@ public class Xomw_lnki_wkr__file__tst {
 }
 class Xomw_lnki_wkr__fxt {
 	private final    Xomw_lnki_wkr wkr;
-	private final    Xomw_parser_ctx pctx;
-	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
-	private final    Xomw_parser_env env;
+	private final    XomwParserCtx pctx;
+	private final    XomwParserBfr pbfr = new XomwParserBfr();
+	private final    XomwParserEnv env;
 	private final    XomwFileFinderMock file_finder;
 	private final    XomwFileRepo repo = new XomwFileRepo(Bry_.new_a7("/orig"), Bry_.new_a7("/thumb"));
 	private boolean apos = true;
@@ -94,7 +94,7 @@ class Xomw_lnki_wkr__fxt {
 		parser.Init_by_wiki(wiki);
 
 		// ctx
-		pctx = new Xomw_parser_ctx();
+		pctx = new XomwParserCtx();
 		pctx.Init_by_page(XomwTitle.newFromText(Bry_.new_a7("Page_1")));
 	}
 	public void Clear() {

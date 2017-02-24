@@ -21,7 +21,7 @@ public class XomwFile {
 	* P8: normalizeExtension
 	* P8: normalizeTitle
 */
-	private final    Xomw_parser_env env;
+	private final    XomwParserEnv env;
 //		// Bitfield values akin to the Revision deletion constants
 //		static final DELETED_FILE = 1;
 //		static final DELETED_COMMENT = 2;
@@ -265,7 +265,7 @@ public class XomwFile {
 //			return strcmp(a.getName(), b.getName());
 //		}
 
-	public XomwFile(Xomw_parser_env env, XomwTitle title, XomwFileRepo repo) {
+	public XomwFile(XomwParserEnv env, XomwTitle title, XomwFileRepo repo) {
 		this.env = env;
 		this.title = title;
 // change title.getDBKey to normalizeTitle

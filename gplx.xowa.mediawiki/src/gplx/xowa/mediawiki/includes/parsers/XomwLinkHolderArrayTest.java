@@ -24,8 +24,8 @@ public class XomwLinkHolderArrayTest {
 	}
 }
 class XomwLinkHolderArrayFxt {
-	private final    XomwLinkHolderArray holders = new XomwLinkHolderArray(new Xomw_parser());
-	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
+	private final    XomwLinkHolderArray holders = new XomwLinkHolderArray(new XomwParser());
+	private final    XomwParserBfr pbfr = new XomwParserBfr();
 	private boolean apos = true;
 	public XomwLinkHolderArrayFxt() {
 	}

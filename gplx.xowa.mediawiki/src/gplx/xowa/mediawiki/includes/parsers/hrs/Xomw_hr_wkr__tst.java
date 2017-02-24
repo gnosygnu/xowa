@@ -24,11 +24,11 @@ public class Xomw_hr_wkr__tst {
 	@Test  public void Bos_and_mid() {fxt.Test__parse("-----a\n-----b"                    , "<hr />a\n<hr />b");}
 }
 class Xomw_hr_wkr__fxt {
-	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
+	private final    XomwParserBfr pbfr = new XomwParserBfr();
 	private final    Xomw_hr_wkr wkr = new Xomw_hr_wkr();
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		wkr.replaceHrs(new Xomw_parser_ctx(), pbfr.Init(src_bry));
+		wkr.replaceHrs(new XomwParserCtx(), pbfr.Init(src_bry));
 		Tfds.Eq_str_lines(expd, pbfr.Rslt().To_str_and_clear(), src_str);
 	}
 }

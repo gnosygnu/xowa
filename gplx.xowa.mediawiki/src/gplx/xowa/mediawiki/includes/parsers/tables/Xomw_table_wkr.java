@@ -34,7 +34,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 		this.sanitizer = sanitizer;
 		this.strip_state = stripState;
 	}
-	public void doTableStuff(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
+	public void doTableStuff(XomwParserCtx pctx, XomwParserBfr pbfr) {
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();
 		int src_bgn = 0;

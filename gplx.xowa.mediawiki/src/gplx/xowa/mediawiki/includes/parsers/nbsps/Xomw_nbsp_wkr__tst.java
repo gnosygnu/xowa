@@ -25,8 +25,8 @@ public class Xomw_nbsp_wkr__tst {
 }
 class Xomw_nbsp_wkr__fxt {
 	private final    Xomw_nbsp_wkr wkr = new Xomw_nbsp_wkr();
-	private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();
-	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
+	private final    XomwParserCtx pctx = new XomwParserCtx();
+	private final    XomwParserBfr pbfr = new XomwParserBfr();
 	private boolean apos = true;
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);

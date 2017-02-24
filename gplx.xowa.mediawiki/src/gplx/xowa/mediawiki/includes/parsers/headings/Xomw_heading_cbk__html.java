@@ -20,7 +20,7 @@ public class Xomw_heading_cbk__html implements Xomw_heading_cbk {
 		this.bfr = bfr;
 		return this;
 	}
-	public void On_hdr_seen(Xomw_parser_ctx pctx, Xomw_heading_wkr wkr) {
+	public void On_hdr_seen(XomwParserCtx pctx, Xomw_heading_wkr wkr) {
 		// add from txt_bgn to hdr_bgn; EX: "abc\n==A==\n"; "\n==" seen -> add "abc"
 		byte[] src = wkr.Src();
 		int hdr_bgn = wkr.Hdr_bgn(), txt_bgn = wkr.Txt_bgn();
@@ -28,7 +28,7 @@ public class Xomw_heading_cbk__html implements Xomw_heading_cbk {
 			bfr.Add_mid(src, txt_bgn, hdr_bgn);
 
 		// add "\n" unless BOS
-		if (hdr_bgn != Xomw_parser_ctx.Pos__bos) bfr.Add_byte_nl();
+		if (hdr_bgn != XomwParserCtx.Pos__bos) bfr.Add_byte_nl();
 
 		// add <h2>...</h2>
 		int hdr_num = wkr.Hdr_num();
@@ -36,7 +36,7 @@ public class Xomw_heading_cbk__html implements Xomw_heading_cbk {
 		bfr.Add_mid(wkr.Src(), wkr.Hdr_lhs_end(), wkr.Hdr_rhs_bgn());
 		bfr.Add(Tag__rhs).Add_int_digits(1, hdr_num).Add(Byte_ascii.Angle_end_bry);	// </h2>
 	}
-	public void On_src_done(Xomw_parser_ctx pctx, Xomw_heading_wkr wkr) {
+	public void On_src_done(XomwParserCtx pctx, Xomw_heading_wkr wkr) {
 		// add from txt_bgn to EOS;
 		byte[] src = wkr.Src();
 		int txt_bgn = wkr.Txt_bgn(), src_end = wkr.Src_end();

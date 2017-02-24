@@ -29,8 +29,8 @@ public class Xomw_block_level_pass__tst {
 }
 class Xomw_block_level_pass__fxt {
 	private final    Xomw_block_level_pass block_level_pass = new Xomw_block_level_pass();
-	private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();
-	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
+	private final    XomwParserCtx pctx = new XomwParserCtx();
+	private final    XomwParserBfr pbfr = new XomwParserBfr();
 	private boolean apos = true;
 	public void Test__do_block_levels(String src, String expd) {
 		if (apos) expd = gplx.langs.htmls.Gfh_utl.Replace_apos(expd);

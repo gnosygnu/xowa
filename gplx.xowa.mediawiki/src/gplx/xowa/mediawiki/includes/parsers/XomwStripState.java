@@ -125,10 +125,10 @@ public class XomwStripState {
 	}
 
 	// XOWA
-	public void unstripGeneral(Xomw_parser_bfr pbfr) {unstripType(TYPE_GENERAL, pbfr);}
-	public void unstripNoWiki(Xomw_parser_bfr pbfr)  {unstripType(TYPE_NOWIKI , pbfr);}
-	public void unstripBoth(Xomw_parser_bfr pbfr)    {unstripType(TYPE_BOTH   , pbfr);}
-	private boolean unstripType(byte tid, Xomw_parser_bfr pbfr) {
+	public void unstripGeneral(XomwParserBfr pbfr) {unstripType(TYPE_GENERAL, pbfr);}
+	public void unstripNoWiki(XomwParserBfr pbfr)  {unstripType(TYPE_NOWIKI , pbfr);}
+	public void unstripBoth(XomwParserBfr pbfr)    {unstripType(TYPE_BOTH   , pbfr);}
+	private boolean unstripType(byte tid, XomwParserBfr pbfr) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();

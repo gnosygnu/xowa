@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.mediawiki.includes.filerepo.file.*; import gplx.xowa.mediawiki.includes.media.*;
-public class Xomw_parser_env {
+public class XomwParserEnv {
 	public byte[] Lang__align_end = Bry_.new_a7("right");
 	public int User__default__thumbsize = 220;
 
@@ -28,5 +28,5 @@ public class Xomw_parser_env {
 	public XomwFileFinder File_finder() {return file_finder;} private XomwFileFinder file_finder = new XomwFileFinderNoop();
 	public XomwMediaHandlerFactory MediaHandlerFactory() {return mediaHandlerFactory;} private final    XomwMediaHandlerFactory mediaHandlerFactory = new XomwMediaHandlerFactory();
 
-	public Xomw_parser_env File_finder_(XomwFileFinder v) {file_finder = v; return this;} 
+	public XomwParserEnv File_finder_(XomwFileFinder v) {file_finder = v; return this;} 
 }

@@ -66,7 +66,7 @@ public class Xomw_magiclinks_wkr {
 
 	// Replace special strings like "ISBN xxx" and "RFC xxx" with
 	// magic external links.
-	public void doMagicLinks(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
+	public void doMagicLinks(XomwParserCtx pctx, XomwParserBfr pbfr) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();

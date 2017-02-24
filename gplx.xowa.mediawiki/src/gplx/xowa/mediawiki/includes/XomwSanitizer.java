@@ -1264,7 +1264,7 @@ public class XomwSanitizer {
 //		* @return String
 //		* @private
 //		*/
-	public void normalizeCharReferences(Xomw_parser_bfr pbfr) {
+	public void normalizeCharReferences(XomwParserBfr pbfr) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();

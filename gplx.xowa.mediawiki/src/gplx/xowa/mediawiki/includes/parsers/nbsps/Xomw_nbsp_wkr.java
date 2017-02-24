@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.includes.parsers.nbsps; import gplx.*; import gplx.x
 import gplx.core.btries.*;
 public class Xomw_nbsp_wkr {
 	private final    Btrie_rv trv = new Btrie_rv();
-	public void doNbsp(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
+	public void doNbsp(XomwParserCtx pctx, XomwParserBfr pbfr) {
 		// PORTED:
 		// Clean up special characters, only run once, next-to-last before doBlockLevels
 		// $fixtags = [

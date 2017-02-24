@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.filerepo.file; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.filerepo.*;
 import gplx.xowa.mediawiki.includes.parsers.*;
 public class XomwFileFinderMock implements XomwFileFinder {
-	private final    Xomw_parser_env env;
-	public XomwFileFinderMock(Xomw_parser_env env) {this.env = env;}
+	private final    XomwParserEnv env;
+	public XomwFileFinderMock(XomwParserEnv env) {this.env = env;}
 	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
 	public void Clear() {hash.Clear();}
 	public XomwFile Find_file(XomwTitle ttl) {

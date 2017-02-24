@@ -26,7 +26,7 @@ import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
 	* P7: $html = HtmlArmor::getHtml($text);
 */
 public class XomwLinker {
-//		private Xomw_parser_env env;
+//		private XomwParserEnv env;
 	private final    Bry_bfr tmp = Bry_bfr_.New(), tmp_2 = Bry_bfr_.New();
 	private final    Linker_rel_splitter splitter = new Linker_rel_splitter();
 	private final    XomwHtml html_utl = new XomwHtml();
@@ -47,11 +47,11 @@ public class XomwLinker {
 	, Img_class__thumbborder = Bry_.new_a7("thumbborder")
 	, Img_class__thumbimage = Bry_.new_a7("thumbimage")
 	;
-	private final    Xomw_link_renderer link_renderer;
-	public XomwLinker(Xomw_link_renderer link_renderer) {
+	private final    XomwLinkRenderer link_renderer;
+	public XomwLinker(XomwLinkRenderer link_renderer) {
 		this.link_renderer = link_renderer;
 	}
-	public void Init_by_wiki(Xomw_parser_env env, Btrie_slim_mgr trie) {
+	public void Init_by_wiki(XomwParserEnv env, Btrie_slim_mgr trie) {
 //			this.env = env;
 		this.split_trail_trie = trie;
 	}
@@ -331,7 +331,7 @@ public class XomwLinker {
 	// @since 1.20
 	// @return String HTML for an image, with links, wrappers, etc.
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	public void makeImageLink(Bry_bfr bfr, Xomw_parser_env env, Xomw_parser_ctx pctx, XomwParserIface parser, XomwTitle title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query, int widthOption) {
+	public void makeImageLink(Bry_bfr bfr, XomwParserEnv env, XomwParserCtx pctx, XomwParserIface parser, XomwTitle title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query, int widthOption) {
 		// XO.MW.HOOK:ImageBeforeProduceHTML
 
 		if (file != null && !file.allowInlineDisplay()) {
@@ -534,7 +534,7 @@ public class XomwLinker {
 	* @return String
 	*/
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	private void makeThumbLink2(Bry_bfr bfr, Xomw_parser_env env, Xomw_parser_ctx pctx, XomwTitle title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query) {
+	private void makeThumbLink2(Bry_bfr bfr, XomwParserEnv env, XomwParserCtx pctx, XomwTitle title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query) {
 		boolean exists = file != null && file.exists();
 
 		int page = handlerParams.page;

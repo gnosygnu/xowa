@@ -62,7 +62,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 		this.regex_space = regex_space;
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-02-01
-	public void replaceExternalLinks(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
+	public void replaceExternalLinks(XomwParserCtx pctx, XomwParserBfr pbfr) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();

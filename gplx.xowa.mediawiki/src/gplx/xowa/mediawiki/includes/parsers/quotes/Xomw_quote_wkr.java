@@ -22,7 +22,7 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 	public Xomw_quote_wkr(Bry_bfr tmp) {
 		this.tmp = tmp;
 	}
-	public void doAllQuotes(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
+	public void doAllQuotes(XomwParserCtx pctx, XomwParserBfr pbfr) {
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();
 		int src_bgn = 0;

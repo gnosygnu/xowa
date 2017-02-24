@@ -34,10 +34,10 @@ public class Xomw_quote_wkr__tst {
 }
 class Xomw_quote_wkr__fxt {
 	private final    Xomw_quote_wkr wkr = new Xomw_quote_wkr(Bry_bfr_.New());
-	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
+	private final    XomwParserBfr pbfr = new XomwParserBfr();
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		wkr.doAllQuotes(new Xomw_parser_ctx(), pbfr.Init(src_bry));
+		wkr.doAllQuotes(new XomwParserCtx(), pbfr.Init(src_bry));
 		Tfds.Eq_str_lines(expd, pbfr.Rslt().To_str_and_clear(), src_str);
 	}
 }

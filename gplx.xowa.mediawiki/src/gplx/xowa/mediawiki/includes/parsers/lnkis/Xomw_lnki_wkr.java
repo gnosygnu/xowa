@@ -36,11 +36,11 @@ import gplx.xowa.parsers.uniqs.*;
 public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    XomwLinkHolderArray holders;
 	private final    XomwLinker linker;
-	private final    Xomw_link_renderer link_renderer;
+	private final    XomwLinkRenderer link_renderer;
 	// private final    Btrie_slim_mgr protocols_trie;
 	private final    Xomw_quote_wkr quote_wkr;
 	private final    XomwStripState strip_state;
-	private Xomw_parser_env env;
+	private XomwParserEnv env;
 	private Xow_wiki wiki;
 	private XomwTitle mPageTitle;
 //		private final    XomwLinker_NormalizeSubpageLink normalize_subpage_link = new XomwLinker_NormalizeSubpageLink();
@@ -52,7 +52,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    List_adp tmp_list = List_adp_.New();
 	private final    Hash_adp mImageParams = Hash_adp_bry.cs();
 	private final    Hash_adp mImageParamsMagicArray = Hash_adp_bry.cs();
-	public Xomw_lnki_wkr(XomwParserIface parser, XomwLinkHolderArray holders, Xomw_link_renderer link_renderer, Btrie_slim_mgr protocols_trie
+	public Xomw_lnki_wkr(XomwParserIface parser, XomwLinkHolderArray holders, XomwLinkRenderer link_renderer, Btrie_slim_mgr protocols_trie
 		, XomwLinker linker, Xomw_quote_wkr quote_wkr, Bry_bfr tmp, XomwStripState strip_state
 		) {
 		this.parser = parser;
@@ -65,7 +65,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		this.tmp = tmp;
 		this.strip_state = strip_state;
 	}
-	public void Init_by_wiki(Xomw_parser_env env, Xow_wiki wiki) {
+	public void Init_by_wiki(XomwParserEnv env, Xow_wiki wiki) {
 		this.env = env;
 		this.wiki = wiki;
 		if (title_chars_for_lnki == null) {
@@ -78,7 +78,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	public void Clear_state() {
 		holders.clear();
 	}
-	public void replaceInternalLinks(Xomw_parser_bfr pbfr, Xomw_parser_env env, Xomw_parser_ctx pctx) {
+	public void replaceInternalLinks(XomwParserBfr pbfr, XomwParserEnv env, XomwParserCtx pctx) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();
@@ -92,7 +92,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		replaceInternalLinks(env, pctx, bfr, src, src_bgn, src_end);
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-02-02
-	public void replaceInternalLinks(Xomw_parser_env env, Xomw_parser_ctx pctx, Bry_bfr bfr, byte[] src, int src_bgn, int src_end) {
+	public void replaceInternalLinks(XomwParserEnv env, XomwParserCtx pctx, Bry_bfr bfr, byte[] src, int src_bgn, int src_end) {
 		// XO.MW: regex for tc move to header; e1 and e1_img moved to code
 		// the % is needed to support urlencoded titles as well
 
@@ -443,7 +443,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 		}
 	}
-	public void makeImage(Xomw_parser_env env, Xomw_parser_ctx pctx, Bry_bfr bfr, XomwTitle title, byte[] options_at_link, XomwLinkHolderArray holders) {
+	public void makeImage(XomwParserEnv env, XomwParserCtx pctx, Bry_bfr bfr, XomwTitle title, byte[] options_at_link, XomwLinkHolderArray holders) {
 		// Check if the options text is of the form "options|alt text"
 		// Options are:
 		//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang
@@ -796,7 +796,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	public void Maybe_do_subpage_link(XomwLinker_NormalizeSubpageLink rv, byte[] target, byte[] text) {
 		linker.normalizeSubpageLink(rv, mPageTitle, target, text);
 	}
-	public void replaceLinkHolders(Xomw_parser_bfr pbfr) {
+	public void replaceLinkHolders(XomwParserBfr pbfr) {
 		holders.replace(pbfr);
 	}
 	public void Make_known_link_holder(Bry_bfr bfr, XomwTitle nt, byte[] text, byte[] trail, byte[] prefix) {

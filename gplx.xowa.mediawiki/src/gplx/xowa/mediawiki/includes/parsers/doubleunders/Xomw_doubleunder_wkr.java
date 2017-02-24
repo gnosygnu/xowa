@@ -37,7 +37,7 @@ public class Xomw_doubleunder_wkr {
 		, Xol_kwd_grp_.Id_nocontentconvert
 		);
 	}
-	public void doDoubleUnderscore(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr) {
+	public void doDoubleUnderscore(XomwParserCtx pctx, XomwParserBfr pbfr) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();

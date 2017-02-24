@@ -26,7 +26,7 @@ public class XomwLinker_NormalizeSubpageLinkTest {
 	@Test  public void Dot2__trailing()      {fxt.Test__normalize_subpage_link("A/B/C"          , "../../Z/"      , ""    , "A/Z"        , "Z");}
 }
 class XomwLinker_NormalizeSubpageLinkFxt {
-	private final    XomwLinker mgr = new XomwLinker(new gplx.xowa.mediawiki.includes.linkers.Xomw_link_renderer(new XomwSanitizer()));
+	private final    XomwLinker mgr = new XomwLinker(new gplx.xowa.mediawiki.includes.linkers.XomwLinkRenderer(new XomwSanitizer()));
 	private final    XomwLinker_NormalizeSubpageLink normalize_subpage_link = new XomwLinker_NormalizeSubpageLink();
 	public void Test__normalize_subpage_link(String page_title_str, String link, String text, String expd_link, String expd_text) {
 		mgr.normalizeSubpageLink(normalize_subpage_link, XomwTitle.newFromText(Bry_.new_u8(page_title_str)), Bry_.new_u8(link), Bry_.new_u8(text));

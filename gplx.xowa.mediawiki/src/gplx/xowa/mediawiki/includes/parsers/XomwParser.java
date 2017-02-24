@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.core.btries.*;
+import gplx.core.net.*;
 import gplx.xowa.mediawiki.includes.htmls.*;
 import gplx.xowa.mediawiki.includes.linkers.*;
 import gplx.xowa.mediawiki.includes.parsers.tables.*;
@@ -252,11 +253,13 @@ public class XomwParser implements XomwParserIface {
 	/**
 	* @var LinkRenderer
 	*/
-	private Xomw_link_renderer mLinkRenderer;
+	private XomwLinkRenderer mLinkRenderer;
+
+	private int mMarkerIndex = 0;
 
 	// XOWA
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final    Xomw_parser_env env = new Xomw_parser_env();
+	private final    XomwParserEnv env = new XomwParserEnv();
 	private final    XomwSanitizer sanitizer = new XomwSanitizer();
 	private final    Xomw_table_wkr tableWkr;
 	private final    Xomw_hr_wkr hrWkr = new Xomw_hr_wkr();
@@ -274,7 +277,10 @@ public class XomwParser implements XomwParserIface {
 	private static Xomw_regex_boundary regex_boundary;
 	private static Xomw_regex_url regex_url;
 	private final    Btrie_rv trv = new Btrie_rv();
-//		private int marker_index = 0;
+	private final    Bry_bfr tmp = Bry_bfr_.New();
+
+	public XomwSanitizer Sanitizer() {return sanitizer;}
+	public XomwStripState Strip_state() {return mStripState;}
 
 //		/**
 //		* @param array $conf
@@ -302,7 +308,7 @@ public class XomwParser implements XomwParserIface {
 //			wfDebug(__CLASS__ . ": using preprocessor: {this.mPreprocessorClass}\n");
 //		}
 	private final    Btrie_slim_mgr protocols_trie;
-	public Xomw_parser_env Env() {return env;}
+	public XomwParserEnv Env() {return env;}
 	public Xomw_lnki_wkr Lnki_wkr() {return lnkiWkr;}
 	public XomwLinker              Linker()          {return linker;}         private final    XomwLinker linker;
 	public byte[] Get_external_link_rel;
@@ -318,9 +324,9 @@ public class XomwParser implements XomwParserIface {
 			}
 		}
 
-		this.mLinkRenderer = new Xomw_link_renderer(sanitizer);
+		this.mLinkRenderer = new XomwLinkRenderer(sanitizer);
 		this.linker = new XomwLinker(mLinkRenderer);
-		this.protocols_trie = Xomw_parser.Protocols__dflt();
+		this.protocols_trie = XomwParser.Protocols__dflt();
 		this.mLinkHolders = new XomwLinkHolderArray(this);
 
 		this.tableWkr = new Xomw_table_wkr(tmp_bfr, sanitizer, mStripState);
@@ -458,8 +464,8 @@ public class XomwParser implements XomwParserIface {
 //			$text, Title $title, ParserOptions $options,
 //			$linestart = true, $clearState = true, $revid = null
 //		) {
-	public void parse(Xomw_parser_bfr pbfr, Xomw_parser_ctx pctx,byte[] text, XomwTitle title, XomwParserOptions options) {this.parse(pbfr, pctx, text, title, options, true, true, -1);}
-	public void parse(Xomw_parser_bfr pbfr, Xomw_parser_ctx pctx,
+	public void parse(XomwParserBfr pbfr, XomwParserCtx pctx,byte[] text, XomwTitle title, XomwParserOptions options) {this.parse(pbfr, pctx, text, title, options, true, true, -1);}
+	public void parse(XomwParserBfr pbfr, XomwParserCtx pctx,
 		byte[] text, XomwTitle title, XomwParserOptions options,
 		boolean linestart, boolean clearState, int revid
 	) {
@@ -985,14 +991,14 @@ public class XomwParser implements XomwParserIface {
 	* @since 1.28
 	* @return LinkRenderer
 	*/
-	public Xomw_link_renderer getLinkRenderer() {
+	public XomwLinkRenderer getLinkRenderer() {
 		if (this.mLinkRenderer == null) {
 //				this.mLinkRenderer = XomwMediaWikiServices.getInstance()
 //					.getLinkRendererFactory()->create();
 //				this.mLinkRenderer->setStubThreshold(
 //					this.getOptions()->getStubThreshold()
 //				);
-			this.mLinkRenderer = new Xomw_link_renderer(sanitizer);
+			this.mLinkRenderer = new XomwLinkRenderer(sanitizer);
 		}
 
 		return this.mLinkRenderer;
@@ -1092,23 +1098,23 @@ public class XomwParser implements XomwParserIface {
 //		public function getStripList() {
 //			return this.mStripList;
 //		}
-//
-//		/**
-//		* Add an item to the strip state
-//		* Returns the unique tag which must be inserted into the stripped text
-//		* The tag will be replaced with the original text in unstrip()
-//		*
-//		* @param String $text
-//		*
-//		* @return String
-//		*/
-//		public function insertStripItem($text) {
-//			$marker = self::MARKER_PREFIX . "-item-{this.mMarkerIndex}-" . self::MARKER_SUFFIX;
-//			this.mMarkerIndex++;
-//			this.mStripState->addGeneral($marker, $text);
-//			return $marker;
-//		}
-//
+
+	/**
+	* Add an item to the strip state
+	* Returns the unique tag which must be inserted into the stripped text
+	* The tag will be replaced with the original text in unstrip()
+	*
+	* @param String $text
+	*
+	* @return String
+	*/
+	public byte[] Insert_strip_item(byte[] text) {
+		byte[] marker = tmp.Add_bry_many(MARKER_PREFIX, STRIP_ITEM).Add_int_variable(this.mMarkerIndex).Add(MARKER_SUFFIX).To_bry_and_clear();
+		this.mMarkerIndex++;
+		this.mStripState.addGeneral(marker, text);
+		return marker;
+	}
+
 	/**
 	* parse the wiki syntax used to render tables
 	*
@@ -1132,8 +1138,8 @@ public class XomwParser implements XomwParserIface {
 	* @return String
 	*/
 	// isMain=tru
-	public void internalParse(Xomw_parser_bfr pbfr, Xomw_parser_ctx pctx, byte[] text) {internalParse(pbfr, pctx, text, true, false);}
-	public void internalParse(Xomw_parser_bfr pbfr, Xomw_parser_ctx pctx, byte[] text, boolean isMain, boolean frame) {
+	public void internalParse(XomwParserBfr pbfr, XomwParserCtx pctx, byte[] text) {internalParse(pbfr, pctx, text, true, false);}
+	public void internalParse(XomwParserBfr pbfr, XomwParserCtx pctx, byte[] text, boolean isMain, boolean frame) {
 		pbfr.Init(text);
 //			$origText = text;
 
@@ -1185,7 +1191,7 @@ public class XomwParser implements XomwParserIface {
 
 		// replaceInternalLinks may sometimes leave behind
 		// absolute URLs, which have to be masked to hide them from replaceExternalLinks			
-		Xomw_parser_bfr_.Replace(pbfr, Bry__marker__noparse, Bry_.Empty); // $text = str_replace(self::MARKER_PREFIX . 'NOPARSE', '', $text);
+		XomwParserBfr_.Replace(pbfr, Bry__marker__noparse, Bry_.Empty); // $text = str_replace(self::MARKER_PREFIX . 'NOPARSE', '', $text);
 
 		magiclinksWkr.doMagicLinks(pctx, pbfr);
 //			$text = $this->formatHeadings($text, $origText, $isMain);
@@ -1200,7 +1206,7 @@ public class XomwParser implements XomwParserIface {
 	* @param boolean $linestart
 	* @return String
 	*/
-	public void internalParseHalfParsed(Xomw_parser_bfr pbfr, Xomw_parser_ctx pctx, boolean isMain, boolean lineStart) {
+	public void internalParseHalfParsed(XomwParserBfr pbfr, XomwParserCtx pctx, boolean isMain, boolean lineStart) {
 		this.mStripState.unstripGeneral(pbfr);
 
 		// MW.HOOK:ParserAfterUnstrip
@@ -4123,11 +4129,11 @@ public class XomwParser implements XomwParserIface {
 	* @param String $text
 	* @param int $options
 	*/
-	public void replaceLinkHolders(Xomw_parser_bfr pbfr) {
+	public void replaceLinkHolders(XomwParserBfr pbfr) {
 		// this.mLinkHolders.replace(text);
 		this.mLinkHolders.replace(pbfr);
 	}
-	private final    Xomw_parser_bfr tmp_pbfr = new Xomw_parser_bfr();
+	private final    XomwParserBfr tmp_pbfr = new XomwParserBfr();
 	public byte[] replaceLinkHolders(byte[] text) {
 		// this.mLinkHolders.replace(text);
 		this.mLinkHolders.replace(tmp_pbfr.Init(text));
@@ -5325,7 +5331,25 @@ public class XomwParser implements XomwParserIface {
 //			OutputPage::setupOOUI();
 //			this.mOutput->setEnableOOUI(true);
 //		}
-	private static final    byte[] // Bry__strip_state_item = Bry_.new_a7("-item-")
-		Bry__noparse = Bry_.new_a7("NOPARSE");
-	private static final    byte[] Bry__marker__noparse = Bry_.Add(XomwStripState.Bry__marker__bgn, Bry__noparse);
+	public static final    String MARKER_PREFIX_STR = "\u007f'\"`UNIQ-";
+	public static final    byte[] 
+	  MARKER_PREFIX  = Bry_.new_a7(MARKER_PREFIX_STR)
+	, MARKER_SUFFIX  = Bry_.new_a7("-QINU`\"'\u007f")
+	;
+	private static final    byte[]
+	  STRIP_ITEM = Bry_.new_a7("-item-")
+	, Bry__noparse = Bry_.new_a7("NOPARSE")
+	;
+	private static final    byte[] Bry__marker__noparse = Bry_.Add(MARKER_PREFIX, Bry__noparse);
+	public static Btrie_slim_mgr Protocols__dflt() {
+		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();
+		Gfo_protocol_itm[] ary = Gfo_protocol_itm.Ary();
+		for (Gfo_protocol_itm itm : ary) {
+			byte[] key = itm.Text_bry();	// EX: "https://"
+			rv.Add_obj(key, key);
+		}
+		byte[] bry__relative = Bry_.new_a7("//");
+		rv.Add_obj(bry__relative, bry__relative);	// REF.MW: "$this->mUrlProtocols = wfUrlProtocols();"; "wfUrlProtocols( $includeProtocolRelative = true )"
+		return rv;
+	}
 }

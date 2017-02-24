@@ -23,7 +23,7 @@ public class Xomw_block_level_pass {
 	private int last_section;
 	private byte[] find_colon_no_links__before, find_colon_no_links__after;
 
-	public void doBlockLevels(Xomw_parser_ctx pctx, Xomw_parser_bfr pbfr, boolean line_start) {
+	public void doBlockLevels(XomwParserCtx pctx, XomwParserBfr pbfr, boolean line_start) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();

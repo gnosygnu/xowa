@@ -59,8 +59,8 @@ public class XomwParserTest {
 }
 class XomwParserFxt {
 	private final    XomwParser parser = new XomwParser();
-	private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();
-	private final    Xomw_parser_bfr pbfr = new Xomw_parser_bfr();
+	private final    XomwParserCtx pctx = new XomwParserCtx();
+	private final    XomwParserBfr pbfr = new XomwParserBfr();
 	public XomwParserFxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);

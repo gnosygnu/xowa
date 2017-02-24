@@ -30,7 +30,7 @@ public class XomwImageHandlerTest {
 class XomwImageHandler_fxt {
 	private final    XomwImageHandler handler;
 	private final    XomwFileRepo repo = new XomwFileRepo(Bry_.new_a7("/orig"), Bry_.new_a7("/thumb"));
-	private final    Xomw_parser_env env = new Xomw_parser_env();
+	private final    XomwParserEnv env = new XomwParserEnv();
 	private XomwFile file;
 	public XomwImageHandler_fxt() {
 		handler = new XomwTransformationalImageHandler(Bry_.new_a7("test_handler"));

@@ -19,7 +19,7 @@ import gplx.xowa.mediawiki.includes.linkers.*;
 public interface XomwParserIface {
 	int nextLinkID();
 	XomwParserOptions getOptions();
-	Xomw_link_renderer getLinkRenderer();
+	XomwLinkRenderer getLinkRenderer();
 
 	byte[] armorLinks(Bry_bfr trg, byte[] src, int src_bgn, int src_end);
 	Xomw_atr_mgr getExternalLinkAttribs(Xomw_atr_mgr atrs);

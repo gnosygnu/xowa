@@ -261,11 +261,11 @@ public class XomwLinkHolderArray {
 	*
 	* @param String $text
 	*/
-	public boolean replace(Xomw_parser_bfr pbfr) {
+	public boolean replace(XomwParserBfr pbfr) {
 		return this.replaceInternal(pbfr);
 //			$this->replaceInterwiki( $text );
 	}
-	public byte[] replace(Xomw_parser_bfr pbfr, byte[] text) {
+	public byte[] replace(XomwParserBfr pbfr, byte[] text) {
 		boolean rv = this.replace(pbfr.Init(text));
 		return rv ? pbfr.Trg().To_bry_and_clear() : pbfr.Src().To_bry_and_clear();
 	}
@@ -274,7 +274,7 @@ public class XomwLinkHolderArray {
 	* Replace @gplx.Internal protected links
 	* @param String $text
 	*/
-	private boolean replaceInternal(Xomw_parser_bfr pbfr) {
+	private boolean replaceInternal(XomwParserBfr pbfr) {
 		if (internals.Len() == 0) {
 			return false;
 		}
@@ -285,7 +285,7 @@ public class XomwLinkHolderArray {
 //			$colours = [];
 //			$linkCache = LinkCache::singleton();
 //			$output = this.parent->getOutput();
-		Xomw_link_renderer linkRenderer = this.parent.getLinkRenderer();
+		XomwLinkRenderer linkRenderer = this.parent.getLinkRenderer();
 //
 //			$dbr = wfGetDB( DB_REPLICA );
 //
