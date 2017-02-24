@@ -17,7 +17,7 @@ package gplx.xowa.addons.apps.updates.js; import gplx.*; import gplx.xowa.*; imp
 import gplx.xowa.guis.cbks.*;	
 import gplx.core.ios.zips.*;
 public class Xojs_wkr__unzip extends Xojs_wkr__base {
-	public Xojs_wkr__unzip(Xog_cbk_mgr cbk_mgr, Xog_cbk_trg cbk_trg, String js_cbk, Gfo_invk_cmd done_cbk, Io_url src, Io_url trg, long prog_data_end) {super(cbk_mgr, cbk_trg, js_cbk, done_cbk, "unzipping");
+	public Xojs_wkr__unzip(Xog_cbk_mgr cbk_mgr, Xog_cbk_trg cbk_trg, String js_cbk, Gfo_invk_cmd done_cbk, Io_url src, Io_url trg, long prog_data_end) {super(cbk_mgr, cbk_trg, js_cbk, done_cbk, null, "unzipping");
 		this.src = src; this.trg = trg;
 		this.Prog_data_end_(prog_data_end);
 	}

@@ -63,6 +63,8 @@ public class Xoa_update_html extends Xow_special_wtr__base {
 		Xopg_tag_wtr_.Add__xolog			(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__gui__progbars	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__xoajax			(head_tags, app.Fsys_mgr().Http_root(), app);
+		Xopg_tag_wtr_.Add__jquery			(head_tags, app.Fsys_mgr().Http_root());
+		Xopg_tag_wtr_.Add__xonotify			(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_alertify_.Add_tags				(head_tags, app.Fsys_mgr().Http_root());
 
 		head_tags.Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "xoa_update.css")));

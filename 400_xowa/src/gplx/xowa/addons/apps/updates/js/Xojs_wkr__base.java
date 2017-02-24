@@ -18,24 +18,33 @@ import gplx.core.gfobjs.*; import gplx.core.progs.*; import gplx.core.progs.rate
 import gplx.xowa.guis.cbks.*;
 public class Xojs_wkr__base implements Gfo_prog_ui, Gfo_invk {
 	private final    Gfo_invk_cmd done_cbk;
+	private final    Gfo_invk_cmd fail_cbk;
 	private final    Gfo_rate_list rate_list = new Gfo_rate_list(32);
 	private final    long notify_delay = 1000; 
 	private final    double delta_threshold = .25d;	// allow variance of up to 25% before updating rate
 	private final    String js_cbk, task_type;
 	private long time_prv;
 	private double rate_cur;
-	public Xojs_wkr__base(Xog_cbk_mgr cbk_mgr, Xog_cbk_trg cbk_trg, String js_cbk, Gfo_invk_cmd done_cbk, String task_type) {
+	public Xojs_wkr__base(Xog_cbk_mgr cbk_mgr, Xog_cbk_trg cbk_trg, String js_cbk, Gfo_invk_cmd done_cbk, Gfo_invk_cmd fail_cbk, String task_type) {
 		this.cbk_mgr = cbk_mgr;
 		this.cbk_trg = cbk_trg;
 		this.js_cbk = js_cbk;
 		this.done_cbk = done_cbk;
+		this.fail_cbk = fail_cbk;
 		this.task_type = task_type;
 		rate_list.Add(1024 * 1024, 1);	// add default rate of 1 MB per second;
 	}
 	public void Exec() {
-		this.time_prv = gplx.core.envs.System_.Ticks();
-		this.Exec_run();
-		done_cbk.Exec_by_ctx(GfsCtx.Instance, GfoMsg_.new_cast_("m").Add("v", this));
+		try {
+			this.time_prv = gplx.core.envs.System_.Ticks();
+			this.Exec_run();
+			done_cbk.Exec_by_ctx(GfsCtx.Instance, GfoMsg_.new_cast_("m").Add("v", this));
+		} catch (Exception e) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to run task; task=~{0} err=~{1}", task_type, Err_.Message_gplx_log(e));
+			cbk_mgr.Send_notify(cbk_trg, String_.Format("failed to run task: task={0} err={1}", task_type, Err_.Message_lang(e)));
+			if (fail_cbk != null)
+				fail_cbk.Exec();
+		}
 	}
 	@gplx.Virtual protected void Exec_run() {}
 	public void Exec_async(String thread_name) {

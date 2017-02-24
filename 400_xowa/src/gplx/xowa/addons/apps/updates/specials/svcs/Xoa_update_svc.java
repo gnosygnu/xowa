@@ -23,6 +23,7 @@ class Xoa_update_svc implements Gfo_invk {
 	private Xoa_app app;
 	private Io_url app_root_dir, update_dir, update_jar_fil, version_root;
 	private Xoa_app_version_itm version_itm;
+	private Xoa_update_db_mgr db_mgr;
 	public Xoa_update_svc(Xoa_app app) {this.app = app;}
 	private Xoa_update_db_mgr Init_db() {
 		this.app_root_dir = app.Fsys_mgr().Root_dir();
@@ -32,7 +33,7 @@ class Xoa_update_svc implements Gfo_invk {
 	}
 	public void Install(String version_name) {
 		// get app_version from db
-		Xoa_update_db_mgr db_mgr = Init_db();
+		this.db_mgr = Init_db();
 		this.version_itm = db_mgr.Tbl__app_version().Select_by_name_or_null(version_name);
 
 		// get src, trg, etc..
@@ -45,7 +46,7 @@ class Xoa_update_svc implements Gfo_invk {
 		// start download
 		Xojs_wkr__download download_wkr = new Xojs_wkr__download
 		( app.Gui__cbk_mgr(), Xog_cbk_trg.New(Xoa_update_special.Prototype.Special__meta().Ttl_bry())
-		, "xo.app_updater.download__prog", Gfo_invk_cmd.New_by_key(this, Invk__download_done), src, trg, src_len);
+		, "xo.app_updater.download__prog", Gfo_invk_cmd.New_by_key(this, Invk__download_done), Gfo_invk_cmd.New_by_key(this, Invk__download_fail), src, trg, src_len);
 		download_wkr.Exec_async("app_updater");
 	}
 	public void Skip(String version_name) {
@@ -58,6 +59,12 @@ class Xoa_update_svc implements Gfo_invk {
 		Io_url trg = src.OwnerDir().GenSubDir(src.NameOnly() + "_unzip");
 		Xojs_wkr__unzip unzip_wkr = new Xojs_wkr__unzip(download_wkr.Cbk_mgr(), download_wkr.Cbk_trg(), "xo.app_updater.download__prog", Gfo_invk_cmd.New_by_key(this, Invk__unzip_done), src, trg, -1);
 		unzip_wkr.Exec_async("app_updater");
+	}
+	private void On_download_fail(GfoMsg m) {
+		// in case of bad urls or withdrawn patches, delete update_db and force redownload
+		db_mgr.Conn().Rls_conn();
+		Io_mgr.Instance.DeleteFil(db_mgr.Url());
+		Xoa_update_db_mgr_.Download_from_inet(app, Bool_.N, db_mgr.Url());
 	}
 	private void On_unzip_done(GfoMsg m) {
 		Xojs_wkr__unzip unzip_wkr = (Xojs_wkr__unzip)m.ReadObj("v");
@@ -106,11 +113,13 @@ class Xoa_update_svc implements Gfo_invk {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__download_done))		On_download_done(m);
+		else if	(ctx.Match(k, Invk__download_fail))		On_download_fail(m);
 		else if	(ctx.Match(k, Invk__unzip_done))		On_unzip_done(m);
 		else if	(ctx.Match(k, Invk__replace_done))		On_replace_done(m);
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	private static final String Invk__download_done = "download_done", Invk__unzip_done = "unzip_done", Invk__replace_done = "replace_done";
+	}
+	private static final String Invk__download_done = "download_done", Invk__download_fail = "download_fail", Invk__unzip_done = "unzip_done", Invk__replace_done = "replace_done";
 	public static String App__update__restart_cmd(String current, Io_url app_url, byte op_sys_tid, byte bitness) {
 		String rv = current;
 		if (!String_.Eq(rv, String_.Empty)) return rv; // something specified; return it
