@@ -422,7 +422,7 @@ public class XomwLinkHolderArray {
 //				}
 //			}
 			bfr.Add_mid(src, prv, link_bgn);
-			linkRenderer.Make_preloaded_link(bfr, item.Title(), item.Text(), Bry_.Empty, extraAtrs, query.Clear());
+			linkRenderer.makePreloadedLink(bfr, item.Title(), item.Text(), Bry_.Empty, extraAtrs, query.Clear());
 			cur = key_end + Gfh_tag_.Comm_end_len;
 			prv = cur;
 		}

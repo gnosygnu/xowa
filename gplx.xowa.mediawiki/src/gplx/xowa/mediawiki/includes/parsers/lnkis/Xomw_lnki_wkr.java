@@ -814,7 +814,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		tmp.Add_bry_escape_html(inside);
 		text = tmp.To_bry_and_clear();
 		
-		link_renderer.Make_known_link(bfr, nt, text, extra_atrs, query);
+		link_renderer.makeKnownLink(bfr, nt, text, extra_atrs, query);
 		byte[] link = bfr.To_bry_and_clear();
 		parser.armorLinks(bfr, link, 0, link.length);
 		bfr.Add(trail);

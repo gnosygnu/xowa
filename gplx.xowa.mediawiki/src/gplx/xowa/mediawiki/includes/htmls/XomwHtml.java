@@ -18,7 +18,7 @@ import gplx.core.btries.*;
 public class XomwHtml {
 	private final    Bry_bfr tmp = Bry_bfr_.New();
 	private final    Btrie_rv trv = new Btrie_rv();
-	public void Raw_element(Bry_bfr bfr, byte[] element, Xomw_atr_mgr attribs, byte[] contents) {			
+	public void rawElement(Bry_bfr bfr, byte[] element, Xomw_atr_mgr attribs, byte[] contents) {			
 		Bry_.Lcase__all(element); // XO:lcase element
 
 		Open_element__lcased(bfr, element, attribs);
