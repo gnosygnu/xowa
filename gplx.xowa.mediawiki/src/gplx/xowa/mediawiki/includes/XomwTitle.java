@@ -50,8 +50,8 @@ public class XomwTitle {
 	/** @var String Text form (spaces not underscores) of the main part */
 	private byte[] mTextform = Bry_.Empty;
 
-//		/** @var String URL-encoded form of the main part */
-//		public $mUrlform = Bry_.Empty;
+	/** @var String URL-encoded form of the main part */
+	private byte[] mUrlform = Bry_.Empty;
 
 	/** @var String Main part with underscores */
 	// XO: EX: "Help_talk:A_b" . "A_b"
@@ -878,14 +878,14 @@ public class XomwTitle {
 		return this.mTextform;
 	}
 
-//		/**
-//		* Get the URL-encoded form of the main part
-//		*
-//		* @return String Main part of the title, URL-encoded
-//		*/
-//		public function getPartialURL() {
-//			return this.mUrlform;
-//		}
+	/**
+	* Get the URL-encoded form of the main part
+	*
+	* @return String Main part of the title, URL-encoded
+	*/
+	public byte[] getPartialURL() {
+		return this.mUrlform;
+	}
 
 	/**
 	* Get the main part with underscores
@@ -3376,7 +3376,7 @@ public class XomwTitle {
 		this.mUserCaseDBKey = parts.user_case_dbkey;
 
 		this.mDbkeyform = parts.dbkey;
-//			this.mUrlform = wfUrlencode(this.mDbkeyform);
+		this.mUrlform = XomwGlobalFunctions.wfUrlencode(this.mDbkeyform);
 		this.mTextform = XophpString.strtr(this.mDbkeyform, Byte_ascii.Underline, Byte_ascii.Space);
 
 		// We already know that some pages won't be in the database!
@@ -4828,12 +4828,12 @@ public class XomwTitle {
 //				'mDefaultNamespace',
 //			];
 //		}
-//
-//		public function __wakeup() {
-//			this.mArticleID = (this.mNamespace >= 0) ? -1 : 0;
-//			this.mUrlform = wfUrlencode(this.mDbkeyform);
-//			this.mTextform = strtr(this.mDbkeyform, '_', ' ');
-//		}
+	
+	//	public function __wakeup() {
+	//		this.mArticleID = (this.mNamespace >= 0) ? -1 : 0;
+	//		this.mUrlform = wfUrlencode(this.mDbkeyform);
+	//		this.mTextform = strtr(this.mDbkeyform, '_', ' ');
+	//	}
 	private static final    byte[] Bry__wgArticlePath__wiki = Bry_.new_a7("/wiki/");
 
 	// REF.MW: DefaultSettings.php

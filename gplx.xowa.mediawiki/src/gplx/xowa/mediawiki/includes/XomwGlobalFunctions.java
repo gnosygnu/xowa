@@ -14,39 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
+import gplx.core.btries.*;
+import gplx.langs.htmls.encoders.*;
 import gplx.xowa.mediawiki.includes.parsers.*;
+/**
+* Global functions used everywhere.
+*/
 public class XomwGlobalFunctions {
-//		<?php
-//		/**
-//		* Global functions used everywhere.
-//		*
-//		* This program is free software; you can redistribute it and/or modify
-//		* it under the terms of the GNU General Public License as published by
-//		* the Free Software Foundation; either version 2 of the License, or
-//		* (at your option) any later version.
-//		*
-//		* This program is distributed in the hope that it will be useful,
-//		* but WITHOUT ANY WARRANTY; without even the implied warranty of
-//		* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-//		* GNU General Public License for more details.
-//		*
-//		* You should have received a copy of the GNU General Public License along
-//		* with this program; if not, write to the Free Software Foundation, Inc.,
-//		* 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-//		* http://www.gnu.org/copyleft/gpl.html
-//		*
-//		* @file
-//		*/
-//
-//		if ( !defined( 'MEDIAWIKI' ) ) {
-//			die( "This file is part of MediaWiki, it is not a valid entry point" );
-//		}
-//
-//		use Liuggio\StatsdClient\Sender\SocketSender;
-//		use MediaWiki\Logger\LoggerFactory;
-//		use MediaWiki\Session\SessionManager;
-//		use Wikimedia\ScopedCallback;
-//
 //		// Hide compatibility functions from Doxygen
 //		/// @cond
 //		/**
@@ -59,7 +33,7 @@ public class XomwGlobalFunctions {
 //
 //		// hash_equals function only exists in PHP >= 5.6.0
 //		// https://secure.php.net/hash_equals
-//		if ( !function_exists( 'hash_equals' ) ) {
+//		if (!function_exists('hash_equals')) {
 //			/**
 //			* Check whether a user-provided String is equal to a fixed-length secret String
 //			* without revealing bytes of the secret String through timing differences.
@@ -85,33 +59,33 @@ public class XomwGlobalFunctions {
 //			* @param String $user_string User-provided String
 //			* @return boolean True if the strings are the same, false otherwise
 //			*/
-//			function hash_equals( $known_string, $user_string ) {
+//			function hash_equals($known_string, $user_string) {
 //				// Strict type checking as in PHP's native implementation
-//				if ( !is_string( $known_string ) ) {
-//					trigger_error( 'hash_equals(): Expected known_string to be a String, ' .
-//						gettype( $known_string ) . ' given', E_USER_WARNING );
+//				if (!is_string($known_string)) {
+//					trigger_error('hash_equals(): Expected known_string to be a String, ' .
+//						gettype($known_string) . ' given', E_USER_WARNING);
 //
 //					return false;
 //				}
 //
-//				if ( !is_string( $user_string ) ) {
-//					trigger_error( 'hash_equals(): Expected user_string to be a String, ' .
-//						gettype( $user_string ) . ' given', E_USER_WARNING );
+//				if (!is_string($user_string)) {
+//					trigger_error('hash_equals(): Expected user_string to be a String, ' .
+//						gettype($user_string) . ' given', E_USER_WARNING);
 //
 //					return false;
 //				}
 //
-//				$known_string_len = strlen( $known_string );
-//				if ( $known_string_len !== strlen( $user_string ) ) {
+//				$known_string_len = strlen($known_string);
+//				if ($known_string_len !== strlen($user_string)) {
 //					return false;
 //				}
 //
 //				$result = 0;
-//				for ( $i = 0; $i < $known_string_len; $i++ ) {
-//					$result |= ord( $known_string[$i] ) ^ ord( $user_string[$i] );
+//				for ($i = 0; $i < $known_string_len; $i++) {
+//					$result |= ord($known_string[$i]) ^ ord($user_string[$i]);
 //				}
 //
-//				return ( $result === 0 );
+//				return ($result === 0);
 //			}
 //		}
 //		/// @endcond
@@ -126,12 +100,12 @@ public class XomwGlobalFunctions {
 //		* @param String|null $path Absolute path of where to find the extension.json file
 //		* @since 1.25
 //		*/
-//		function wfLoadExtension( $ext, $path = null ) {
-//			if ( !$path ) {
+//		function wfLoadExtension($ext, $path = null) {
+//			if (!$path) {
 //				global $wgExtensionDirectory;
 //				$path = "$wgExtensionDirectory/$ext/extension.json";
 //			}
-//			ExtensionRegistry::getInstance()->queue( $path );
+//			ExtensionRegistry::getInstance()->queue($path);
 //		}
 //
 //		/**
@@ -147,11 +121,11 @@ public class XomwGlobalFunctions {
 //		* @param String[] $exts Array of extension names to load
 //		* @since 1.25
 //		*/
-//		function wfLoadExtensions( array $exts ) {
+//		function wfLoadExtensions(array $exts) {
 //			global $wgExtensionDirectory;
 //			$registry = ExtensionRegistry::getInstance();
-//			foreach ( $exts as $ext ) {
-//				$registry->queue( "$wgExtensionDirectory/$ext/extension.json" );
+//			foreach ($exts as $ext) {
+//				$registry->queue("$wgExtensionDirectory/$ext/extension.json");
 //			}
 //		}
 //
@@ -163,12 +137,12 @@ public class XomwGlobalFunctions {
 //		* @param String|null $path Absolute path of where to find the skin.json file
 //		* @since 1.25
 //		*/
-//		function wfLoadSkin( $skin, $path = null ) {
-//			if ( !$path ) {
+//		function wfLoadSkin($skin, $path = null) {
+//			if (!$path) {
 //				global $wgStyleDirectory;
 //				$path = "$wgStyleDirectory/$skin/skin.json";
 //			}
-//			ExtensionRegistry::getInstance()->queue( $path );
+//			ExtensionRegistry::getInstance()->queue($path);
 //		}
 //
 //		/**
@@ -178,22 +152,22 @@ public class XomwGlobalFunctions {
 //		* @param String[] $skins Array of extension names to load
 //		* @since 1.25
 //		*/
-//		function wfLoadSkins( array $skins ) {
+//		function wfLoadSkins(array $skins) {
 //			global $wgStyleDirectory;
 //			$registry = ExtensionRegistry::getInstance();
-//			foreach ( $skins as $skin ) {
-//				$registry->queue( "$wgStyleDirectory/$skin/skin.json" );
+//			foreach ($skins as $skin) {
+//				$registry->queue("$wgStyleDirectory/$skin/skin.json");
 //			}
 //		}
 //
 //		/**
-//		* Like array_diff( $a, $b ) except that it works with two-dimensional arrays.
+//		* Like array_diff($a, $b) except that it works with two-dimensional arrays.
 //		* @param array $a
 //		* @param array $b
 //		* @return array
 //		*/
-//		function wfArrayDiff2( $a, $b ) {
-//			return array_udiff( $a, $b, 'wfArrayDiff2_cmp' );
+//		function wfArrayDiff2($a, $b) {
+//			return array_udiff($a, $b, 'wfArrayDiff2_cmp');
 //		}
 //
 //		/**
@@ -201,17 +175,17 @@ public class XomwGlobalFunctions {
 //		* @param array|String $b
 //		* @return int
 //		*/
-//		function wfArrayDiff2_cmp( $a, $b ) {
-//			if ( is_string( $a ) && is_string( $b ) ) {
-//				return strcmp( $a, $b );
-//			} elseif ( count( $a ) !== count( $b ) ) {
-//				return count( $a ) < count( $b ) ? -1 : 1;
+//		function wfArrayDiff2_cmp($a, $b) {
+//			if (is_string($a) && is_string($b)) {
+//				return strcmp($a, $b);
+//			} elseif (count($a) !== count($b)) {
+//				return count($a) < count($b) ? -1 : 1;
 //			} else {
-//				reset( $a );
-//				reset( $b );
-//				while ( ( list( , $valueA ) = each( $a ) ) && ( list( , $valueB ) = each( $b ) ) ) {
-//					$cmp = strcmp( $valueA, $valueB );
-//					if ( $cmp !== 0 ) {
+//				reset($a);
+//				reset($b);
+//				while ((list(, $valueA) = each($a)) && (list(, $valueB) = each($b))) {
+//					$cmp = strcmp($valueA, $valueB);
+//					if ($cmp !== 0) {
 //						return $cmp;
 //					}
 //				}
@@ -228,11 +202,11 @@ public class XomwGlobalFunctions {
 //		* @param array $changed Array to alter
 //		* @throws MWException
 //		*/
-//		function wfAppendToArrayIfNotDefault( $key, $value, $default, &$changed ) {
-//			if ( is_null( $changed ) ) {
-//				throw new MWException( 'GlobalFunctions::wfAppendToArrayIfNotDefault got null' );
+//		function wfAppendToArrayIfNotDefault($key, $value, $default, &$changed) {
+//			if (is_null($changed)) {
+//				throw new MWException('GlobalFunctions::wfAppendToArrayIfNotDefault got null');
 //			}
-//			if ( $default[$key] !== $value ) {
+//			if ($default[$key] !== $value) {
 //				$changed[$key] = $value;
 //			}
 //		}
@@ -256,23 +230,23 @@ public class XomwGlobalFunctions {
 //		* @param array $array1,...
 //		* @return array
 //		*/
-//		function wfMergeErrorArrays( /*...*/ ) {
+//		function wfMergeErrorArrays(/*...*/) {
 //			$args = func_get_args();
 //			$out = [];
-//			foreach ( $args as $errors ) {
-//				foreach ( $errors as $params ) {
+//			foreach ($args as $errors) {
+//				foreach ($errors as $params) {
 //					$originalParams = $params;
-//					if ( $params[0] instanceof MessageSpecifier ) {
+//					if ($params[0] instanceof MessageSpecifier) {
 //						$msg = $params[0];
-//						$params = array_merge( [ $msg->getKey() ], $msg->getParams() );
+//						$params = array_merge([ $msg->getKey() ], $msg->getParams());
 //					}
 //					# @todo FIXME: Sometimes get nested arrays for $params,
 //					# which leads to E_NOTICEs
-//					$spec = implode( "\t", $params );
+//					$spec = implode("\t", $params);
 //					$out[$spec] = $originalParams;
 //				}
 //			}
-//			return array_values( $out );
+//			return array_values($out);
 //		}
 //
 //		/**
@@ -283,16 +257,16 @@ public class XomwGlobalFunctions {
 //		* @param mixed $after The key to insert after
 //		* @return array
 //		*/
-//		function wfArrayInsertAfter( array $array, array $insert, $after ) {
+//		function wfArrayInsertAfter(array $array, array $insert, $after) {
 //			// Find the offset of the element to insert after.
-//			$keys = array_keys( $array );
-//			$offsetByKey = array_flip( $keys );
+//			$keys = array_keys($array);
+//			$offsetByKey = array_flip($keys);
 //
 //			$offset = $offsetByKey[$after];
 //
 //			// Insert at the specified offset
-//			$before = array_slice( $array, 0, $offset + 1, true );
-//			$after = array_slice( $array, $offset + 1, count( $array ) - $offset, true );
+//			$before = array_slice($array, 0, $offset + 1, true);
+//			$after = array_slice($array, $offset + 1, count($array) - $offset, true);
 //
 //			$output = $before + $insert + $after;
 //
@@ -306,14 +280,14 @@ public class XomwGlobalFunctions {
 //		* @param boolean $recursive
 //		* @return array
 //		*/
-//		function wfObjectToArray( $objOrArray, $recursive = true ) {
+//		function wfObjectToArray($objOrArray, $recursive = true) {
 //			$array = [];
-//			if ( is_object( $objOrArray ) ) {
-//				$objOrArray = get_object_vars( $objOrArray );
+//			if (is_object($objOrArray)) {
+//				$objOrArray = get_object_vars($objOrArray);
 //			}
-//			foreach ( $objOrArray as $key => $value ) {
-//				if ( $recursive && ( is_object( $value ) || is_array( $value ) ) ) {
-//					$value = wfObjectToArray( $value );
+//			foreach ($objOrArray as $key => $value) {
+//				if ($recursive && (is_object($value) || is_array($value))) {
+//					$value = wfObjectToArray($value);
 //				}
 //
 //				$array[$key] = $value;
@@ -336,7 +310,7 @@ public class XomwGlobalFunctions {
 //			// The maximum random value is "only" 2^31-1, so get two random
 //			// values to reduce the chance of dupes
 //			$max = mt_getrandmax() + 1;
-//			$rand = number_format( ( mt_rand() * $max + mt_rand() ) / $max / $max, 12, '.', '' );
+//			$rand = number_format((mt_rand() * $max + mt_rand()) / $max / $max, 12, '.', '');
 //			return $rand;
 //		}
 //
@@ -350,108 +324,107 @@ public class XomwGlobalFunctions {
 //		* @return String
 //		* @since 1.20
 //		*/
-//		function wfRandomString( $length = 32 ) {
+//		function wfRandomString($length = 32) {
 //			$str = '';
-//			for ( $n = 0; $n < $length; $n += 7 ) {
-//				$str .= sprintf( '%07x', mt_rand() & 0xfffffff );
+//			for ($n = 0; $n < $length; $n += 7) {
+//				$str .= sprintf('%07x', mt_rand() & 0xfffffff);
 //			}
-//			return substr( $str, 0, $length );
+//			return substr($str, 0, $length);
 //		}
-//
-//		/**
-//		* We want some things to be included as literal characters in our title URLs
-//		* for prettiness, which urlencode encodes by default.  According to RFC 1738,
-//		* all of the following should be safe:
-//		*
-//		* ;:@&=$-_.+!*'(),
-//		*
-//		* RFC 1738 says ~ is unsafe, however RFC 3986 considers it an unreserved
-//		* character which should not be encoded. More importantly, google chrome
-//		* always converts %7E back to ~, and converting it in this function can
-//		* cause a redirect loop (T105265).
-//		*
-//		* But + is not safe because it's used to indicate a space; &= are only safe in
-//		* paths and not in queries (and we don't distinguish here); ' seems kind of
-//		* scary; and urlencode() doesn't touch -_. to begin with.  Plus, although /
-//		* is reserved, we don't care.  So the list we unescape is:
-//		*
-//		* ;:@$!*(),/~
-//		*
-//		* However, IIS7 redirects fail when the url contains a colon (see T24709),
-//		* so no fancy : for IIS7.
-//		*
-//		* %2F in the page titles seems to fatally break for some reason.
-//		*
-//		* @param String $s
-//		* @return String
-//		*/
-//		function wfUrlencode( $s ) {
-//			static $needle;
-//
-//			if ( is_null( $s ) ) {
-//				$needle = null;
-//				return '';
-//			}
-//
-//			if ( is_null( $needle ) ) {
-//				$needle = [ '%3B', '%40', '%24', '%21', '%2A', '%28', '%29', '%2C', '%2F', '%7E' ];
-//				if ( !isset( $_SERVER['SERVER_SOFTWARE'] ) ||
-//					( strpos( $_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS/7' ) === false )
-//				) {
-//					$needle[] = '%3A';
-//				}
-//			}
-//
-//			$s = urlencode( $s );
-//			$s = str_ireplace(
-//				$needle,
-//				[ ';', '@', '$', '!', '*', '(', ')', ',', '/', '~', ':' ],
-//				$s
-//			);
-//
-//			return $s;
-//		}
-//
+
+	/**
+	* We want some things to be included as literal characters in our title URLs
+	* for prettiness, which urlencode encodes by default.  According to RFC 1738,
+	* all of the following should be safe:
+	*
+	* ;:@&=$-_.+!*'(),
+	*
+	* RFC 1738 says ~ is unsafe, however RFC 3986 considers it an unreserved
+	* character which should not be encoded. More importantly, google chrome
+	* always converts %7E back to ~, and converting it in this function can
+	* cause a redirect loop (T105265).
+	*
+	* But + is not safe because it's used to indicate a space; &= are only safe in
+	* paths and not in queries (and we don't distinguish here); ' seems kind of
+	* scary; and urlencode() doesn't touch -_. to begin with.  Plus, although /
+	* is reserved, we don't care.  So the list we unescape is:
+	*
+	* ;:@$!*(),/~
+	*
+	* However, IIS7 redirects fail when the url contains a colon (see T24709),
+	* so no fancy : for IIS7.
+	*
+	* %2F in the page titles seems to fatally break for some reason.
+	*
+	* @param String $s
+	* @return String
+	*/
+	public static byte[] wfUrlencode(byte[] s) {
+		if (s == null) {
+			// $needle = null;
+			return Bry_.Empty;
+		}
+
+		// SKIP: handled directly in Gfo_url_encode
+		//	if (needle == null) {
+		//		needle = [ '%3B', '%40', '%24', '%21', '%2A', '%28', '%29', '%2C', '%2F', '%7E' ];
+		//		if (!isset($_SERVER['SERVER_SOFTWARE']) ||
+		//			(strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS/7') === false)
+		//		) {
+		//			$needle[] = '%3A';
+		//		}
+		//	}
+		// 
+		//	$s = urlencode($s);
+		//	$s = str_ireplace(
+		//		$needle,
+		//		[ ';', '@', '$', '!', '*', '(', ')', ',', '/', '~', ':' ],
+		//		$s
+		//	);
+
+		return Gfo_url_encoder_.Mw_wfUrlencode.Encode(s);
+	}
+
 //		/**
 //		* This function takes one or two arrays as input, and returns a CGI-style String, e.g.
 //		* "days=7&limit=100". Options in the first array override options in the second.
 //		* Options set to null or false will not be output.
 //		*
-//		* @param array $array1 ( String|Array )
-//		* @param array|null $array2 ( String|Array )
+//		* @param array $array1 (String|Array)
+//		* @param array|null $array2 (String|Array)
 //		* @param String $prefix
 //		* @return String
 //		*/
-//		function wfArrayToCgi( $array1, $array2 = null, $prefix = '' ) {
-//			if ( !is_null( $array2 ) ) {
+//		function wfArrayToCgi($array1, $array2 = null, $prefix = '') {
+//			if (!is_null($array2)) {
 //				$array1 = $array1 + $array2;
 //			}
 //
 //			$cgi = '';
-//			foreach ( $array1 as $key => $value ) {
-//				if ( !is_null( $value ) && $value !== false ) {
-//					if ( $cgi != '' ) {
+//			foreach ($array1 as $key => $value) {
+//				if (!is_null($value) && $value !== false) {
+//					if ($cgi != '') {
 //						$cgi .= '&';
 //					}
-//					if ( $prefix !== '' ) {
+//					if ($prefix !== '') {
 //						$key = $prefix . "[$key]";
 //					}
-//					if ( is_array( $value ) ) {
+//					if (is_array($value)) {
 //						$firstTime = true;
-//						foreach ( $value as $k => $v ) {
+//						foreach ($value as $k => $v) {
 //							$cgi .= $firstTime ? '' : '&';
-//							if ( is_array( $v ) ) {
-//								$cgi .= wfArrayToCgi( $v, null, $key . "[$k]" );
+//							if (is_array($v)) {
+//								$cgi .= wfArrayToCgi($v, null, $key . "[$k]");
 //							} else {
-//								$cgi .= urlencode( $key . "[$k]" ) . '=' . urlencode( $v );
+//								$cgi .= urlencode($key . "[$k]") . '=' . urlencode($v);
 //							}
 //							$firstTime = false;
 //						}
 //					} else {
-//						if ( is_object( $value ) ) {
+//						if (is_object($value)) {
 //							$value = $value->__toString();
 //						}
-//						$cgi .= urlencode( $key ) . '=' . urlencode( $value );
+//						$cgi .= urlencode($key) . '=' . urlencode($value);
 //					}
 //				}
 //			}
@@ -467,35 +440,35 @@ public class XomwGlobalFunctions {
 //		* @param String $query Query String
 //		* @return String[] Array version of input
 //		*/
-//		function wfCgiToArray( $query ) {
-//			if ( isset( $query[0] ) && $query[0] == '?' ) {
-//				$query = substr( $query, 1 );
+//		function wfCgiToArray($query) {
+//			if (isset($query[0]) && $query[0] == '?') {
+//				$query = substr($query, 1);
 //			}
-//			$bits = explode( '&', $query );
+//			$bits = explode('&', $query);
 //			$ret = [];
-//			foreach ( $bits as $bit ) {
-//				if ( $bit === '' ) {
+//			foreach ($bits as $bit) {
+//				if ($bit === '') {
 //					continue;
 //				}
-//				if ( strpos( $bit, '=' ) === false ) {
+//				if (strpos($bit, '=') === false) {
 //					// Pieces like &qwerty become 'qwerty' => '' (at least this is what php does)
 //					$key = $bit;
 //					$value = '';
 //				} else {
-//					list( $key, $value ) = explode( '=', $bit );
+//					list($key, $value) = explode('=', $bit);
 //				}
-//				$key = urldecode( $key );
-//				$value = urldecode( $value );
-//				if ( strpos( $key, '[' ) !== false ) {
-//					$keys = array_reverse( explode( '[', $key ) );
-//					$key = array_pop( $keys );
+//				$key = urldecode($key);
+//				$value = urldecode($value);
+//				if (strpos($key, '[') !== false) {
+//					$keys = array_reverse(explode('[', $key));
+//					$key = array_pop($keys);
 //					$temp = $value;
-//					foreach ( $keys as $k ) {
-//						$k = substr( $k, 0, -1 );
+//					foreach ($keys as $k) {
+//						$k = substr($k, 0, -1);
 //						$temp = [ $k => $temp ];
 //					}
-//					if ( isset( $ret[$key] ) ) {
-//						$ret[$key] = array_merge( $ret[$key], $temp );
+//					if (isset($ret[$key])) {
+//						$ret[$key] = array_merge($ret[$key], $temp);
 //					} else {
 //						$ret[$key] = $temp;
 //					}
@@ -514,21 +487,21 @@ public class XomwGlobalFunctions {
 //		* @param String|String[] $query String or associative array
 //		* @return String
 //		*/
-//		function wfAppendQuery( $url, $query ) {
-//			if ( is_array( $query ) ) {
-//				$query = wfArrayToCgi( $query );
+//		function wfAppendQuery($url, $query) {
+//			if (is_array($query)) {
+//				$query = wfArrayToCgi($query);
 //			}
-//			if ( $query != '' ) {
+//			if ($query != '') {
 //				// Remove the fragment, if there is one
 //				$fragment = false;
-//				$hashPos = strpos( $url, '#' );
-//				if ( $hashPos !== false ) {
-//					$fragment = substr( $url, $hashPos );
-//					$url = substr( $url, 0, $hashPos );
+//				$hashPos = strpos($url, '#');
+//				if ($hashPos !== false) {
+//					$fragment = substr($url, $hashPos);
+//					$url = substr($url, 0, $hashPos);
 //				}
 //
 //				// Add parameter
-//				if ( false === strpos( $url, '?' ) ) {
+//				if (false === strpos($url, '?')) {
 //					$url .= '?';
 //				} else {
 //					$url .= '&';
@@ -536,7 +509,7 @@ public class XomwGlobalFunctions {
 //				$url .= $query;
 //
 //				// Put the fragment back
-//				if ( $fragment !== false ) {
+//				if ($fragment !== false) {
 //					$url .= $fragment;
 //				}
 //			}
@@ -566,27 +539,27 @@ public class XomwGlobalFunctions {
 //		* @return String|false Fully-qualified URL, current-path-relative URL or false if
 //		*    no valid URL can be constructed
 //		*/
-//		function wfExpandUrl( $url, $defaultProto = PROTO_CURRENT ) {
+//		function wfExpandUrl($url, $defaultProto = PROTO_CURRENT) {
 //			global $wgServer, $wgCanonicalServer, $wgInternalServer, $wgRequest,
 //				$wgHttpsPort;
-//			if ( $defaultProto === PROTO_CANONICAL ) {
+//			if ($defaultProto === PROTO_CANONICAL) {
 //				$serverUrl = $wgCanonicalServer;
-//			} elseif ( $defaultProto === PROTO_INTERNAL && $wgInternalServer !== false ) {
+//			} elseif ($defaultProto === PROTO_INTERNAL && $wgInternalServer !== false) {
 //				// Make $wgInternalServer fall back to $wgServer if not set
 //				$serverUrl = $wgInternalServer;
 //			} else {
 //				$serverUrl = $wgServer;
-//				if ( $defaultProto === PROTO_CURRENT ) {
+//				if ($defaultProto === PROTO_CURRENT) {
 //					$defaultProto = $wgRequest->getProtocol() . '://';
 //				}
 //			}
 //
 //			// Analyze $serverUrl to obtain its protocol
-//			$bits = wfParseUrl( $serverUrl );
+//			$bits = wfParseUrl($serverUrl);
 //			$serverHasProto = $bits && $bits['scheme'] != '';
 //
-//			if ( $defaultProto === PROTO_CANONICAL || $defaultProto === PROTO_INTERNAL ) {
-//				if ( $serverHasProto ) {
+//			if ($defaultProto === PROTO_CANONICAL || $defaultProto === PROTO_INTERNAL) {
+//				if ($serverHasProto) {
 //					$defaultProto = $bits['scheme'] . '://';
 //				} else {
 //					// $wgCanonicalServer or $wgInternalServer doesn't have a protocol.
@@ -596,33 +569,33 @@ public class XomwGlobalFunctions {
 //				}
 //			}
 //
-//			$defaultProtoWithoutSlashes = substr( $defaultProto, 0, -2 );
+//			$defaultProtoWithoutSlashes = substr($defaultProto, 0, -2);
 //
-//			if ( substr( $url, 0, 2 ) == '//' ) {
+//			if (substr($url, 0, 2) == '//') {
 //				$url = $defaultProtoWithoutSlashes . $url;
-//			} elseif ( substr( $url, 0, 1 ) == '/' ) {
+//			} elseif (substr($url, 0, 1) == '/') {
 //				// If $serverUrl is protocol-relative, prepend $defaultProtoWithoutSlashes,
 //				// otherwise leave it alone.
-//				$url = ( $serverHasProto ? '' : $defaultProtoWithoutSlashes ) . $serverUrl . $url;
+//				$url = ($serverHasProto ? '' : $defaultProtoWithoutSlashes) . $serverUrl . $url;
 //			}
 //
-//			$bits = wfParseUrl( $url );
+//			$bits = wfParseUrl($url);
 //
 //			// ensure proper port for HTTPS arrives in URL
 //			// https://phabricator.wikimedia.org/T67184
-//			if ( $defaultProto === PROTO_HTTPS && $wgHttpsPort != 443 ) {
+//			if ($defaultProto === PROTO_HTTPS && $wgHttpsPort != 443) {
 //				$bits['port'] = $wgHttpsPort;
 //			}
 //
-//			if ( $bits && isset( $bits['path'] ) ) {
-//				$bits['path'] = wfRemoveDotSegments( $bits['path'] );
-//				return wfAssembleUrl( $bits );
-//			} elseif ( $bits ) {
+//			if ($bits && isset($bits['path'])) {
+//				$bits['path'] = wfRemoveDotSegments($bits['path']);
+//				return wfAssembleUrl($bits);
+//			} elseif ($bits) {
 //				# No path to expand
 //				return $url;
-//			} elseif ( substr( $url, 0, 1 ) != '/' ) {
+//			} elseif (substr($url, 0, 1) != '/') {
 //				# URL is a relative path
-//				return wfRemoveDotSegments( $url );
+//				return wfRemoveDotSegments($url);
 //			}
 //
 //			# Expanded URL is not valid.
@@ -642,21 +615,21 @@ public class XomwGlobalFunctions {
 //		* @param array $urlParts URL parts, as output from wfParseUrl
 //		* @return String URL assembled from its component parts
 //		*/
-//		function wfAssembleUrl( $urlParts ) {
+//		function wfAssembleUrl($urlParts) {
 //			$result = '';
 //
-//			if ( isset( $urlParts['delimiter'] ) ) {
-//				if ( isset( $urlParts['scheme'] ) ) {
+//			if (isset($urlParts['delimiter'])) {
+//				if (isset($urlParts['scheme'])) {
 //					$result .= $urlParts['scheme'];
 //				}
 //
 //				$result .= $urlParts['delimiter'];
 //			}
 //
-//			if ( isset( $urlParts['host'] ) ) {
-//				if ( isset( $urlParts['user'] ) ) {
+//			if (isset($urlParts['host'])) {
+//				if (isset($urlParts['user'])) {
 //					$result .= $urlParts['user'];
-//					if ( isset( $urlParts['pass'] ) ) {
+//					if (isset($urlParts['pass'])) {
 //						$result .= ':' . $urlParts['pass'];
 //					}
 //					$result .= '@';
@@ -664,20 +637,20 @@ public class XomwGlobalFunctions {
 //
 //				$result .= $urlParts['host'];
 //
-//				if ( isset( $urlParts['port'] ) ) {
+//				if (isset($urlParts['port'])) {
 //					$result .= ':' . $urlParts['port'];
 //				}
 //			}
 //
-//			if ( isset( $urlParts['path'] ) ) {
+//			if (isset($urlParts['path'])) {
 //				$result .= $urlParts['path'];
 //			}
 //
-//			if ( isset( $urlParts['query'] ) ) {
+//			if (isset($urlParts['query'])) {
 //				$result .= '?' . $urlParts['query'];
 //			}
 //
-//			if ( isset( $urlParts['fragment'] ) ) {
+//			if (isset($urlParts['fragment'])) {
 //				$result .= '#' . $urlParts['fragment'];
 //			}
 //
@@ -694,70 +667,70 @@ public class XomwGlobalFunctions {
 //		* @param String $urlPath URL path, potentially containing dot-segments
 //		* @return String URL path with all dot-segments removed
 //		*/
-//		function wfRemoveDotSegments( $urlPath ) {
+//		function wfRemoveDotSegments($urlPath) {
 //			$output = '';
 //			$inputOffset = 0;
-//			$inputLength = strlen( $urlPath );
+//			$inputLength = strlen($urlPath);
 //
-//			while ( $inputOffset < $inputLength ) {
-//				$prefixLengthOne = substr( $urlPath, $inputOffset, 1 );
-//				$prefixLengthTwo = substr( $urlPath, $inputOffset, 2 );
-//				$prefixLengthThree = substr( $urlPath, $inputOffset, 3 );
-//				$prefixLengthFour = substr( $urlPath, $inputOffset, 4 );
+//			while ($inputOffset < $inputLength) {
+//				$prefixLengthOne = substr($urlPath, $inputOffset, 1);
+//				$prefixLengthTwo = substr($urlPath, $inputOffset, 2);
+//				$prefixLengthThree = substr($urlPath, $inputOffset, 3);
+//				$prefixLengthFour = substr($urlPath, $inputOffset, 4);
 //				$trimOutput = false;
 //
-//				if ( $prefixLengthTwo == './' ) {
+//				if ($prefixLengthTwo == './') {
 //					# Step A, remove leading "./"
 //					$inputOffset += 2;
-//				} elseif ( $prefixLengthThree == '../' ) {
+//				} elseif ($prefixLengthThree == '../') {
 //					# Step A, remove leading "../"
 //					$inputOffset += 3;
-//				} elseif ( ( $prefixLengthTwo == '/.' ) && ( $inputOffset + 2 == $inputLength ) ) {
+//				} elseif (($prefixLengthTwo == '/.') && ($inputOffset + 2 == $inputLength)) {
 //					# Step B, replace leading "/.$" with "/"
 //					$inputOffset += 1;
 //					$urlPath[$inputOffset] = '/';
-//				} elseif ( $prefixLengthThree == '/./' ) {
+//				} elseif ($prefixLengthThree == '/./') {
 //					# Step B, replace leading "/./" with "/"
 //					$inputOffset += 2;
-//				} elseif ( $prefixLengthThree == '/..' && ( $inputOffset + 3 == $inputLength ) ) {
+//				} elseif ($prefixLengthThree == '/..' && ($inputOffset + 3 == $inputLength)) {
 //					# Step C, replace leading "/..$" with "/" and
 //					# remove last path component in output
 //					$inputOffset += 2;
 //					$urlPath[$inputOffset] = '/';
 //					$trimOutput = true;
-//				} elseif ( $prefixLengthFour == '/../' ) {
+//				} elseif ($prefixLengthFour == '/../') {
 //					# Step C, replace leading "/../" with "/" and
 //					# remove last path component in output
 //					$inputOffset += 3;
 //					$trimOutput = true;
-//				} elseif ( ( $prefixLengthOne == '.' ) && ( $inputOffset + 1 == $inputLength ) ) {
+//				} elseif (($prefixLengthOne == '.') && ($inputOffset + 1 == $inputLength)) {
 //					# Step D, remove "^.$"
 //					$inputOffset += 1;
-//				} elseif ( ( $prefixLengthTwo == '..' ) && ( $inputOffset + 2 == $inputLength ) ) {
+//				} elseif (($prefixLengthTwo == '..') && ($inputOffset + 2 == $inputLength)) {
 //					# Step D, remove "^..$"
 //					$inputOffset += 2;
 //				} else {
 //					# Step E, move leading path segment to output
-//					if ( $prefixLengthOne == '/' ) {
-//						$slashPos = strpos( $urlPath, '/', $inputOffset + 1 );
+//					if ($prefixLengthOne == '/') {
+//						$slashPos = strpos($urlPath, '/', $inputOffset + 1);
 //					} else {
-//						$slashPos = strpos( $urlPath, '/', $inputOffset );
+//						$slashPos = strpos($urlPath, '/', $inputOffset);
 //					}
-//					if ( $slashPos === false ) {
-//						$output .= substr( $urlPath, $inputOffset );
+//					if ($slashPos === false) {
+//						$output .= substr($urlPath, $inputOffset);
 //						$inputOffset = $inputLength;
 //					} else {
-//						$output .= substr( $urlPath, $inputOffset, $slashPos - $inputOffset );
+//						$output .= substr($urlPath, $inputOffset, $slashPos - $inputOffset);
 //						$inputOffset += $slashPos - $inputOffset;
 //					}
 //				}
 //
-//				if ( $trimOutput ) {
-//					$slashPos = strrpos( $output, '/' );
-//					if ( $slashPos === false ) {
+//				if ($trimOutput) {
+//					$slashPos = strrpos($output, '/');
+//					if ($slashPos === false) {
 //						$output = '';
 //					} else {
-//						$output = substr( $output, 0, $slashPos );
+//						$output = substr($output, 0, $slashPos);
 //					}
 //				}
 //			}
@@ -772,28 +745,28 @@ public class XomwGlobalFunctions {
 //		*        DO NOT USE this directly, use wfUrlProtocolsWithoutProtRel() instead
 //		* @return String
 //		*/
-//		function wfUrlProtocols( $includeProtocolRelative = true ) {
+//		function wfUrlProtocols($includeProtocolRelative = true) {
 //			global $wgUrlProtocols;
 //
 //			// Cache return values separately based on $includeProtocolRelative
 //			static $withProtRel = null, $withoutProtRel = null;
 //			$cachedValue = $includeProtocolRelative ? $withProtRel : $withoutProtRel;
-//			if ( !is_null( $cachedValue ) ) {
+//			if (!is_null($cachedValue)) {
 //				return $cachedValue;
 //			}
 //
 //			// Support old-style $wgUrlProtocols strings, for backwards compatibility
 //			// with LocalSettings files from 1.5
-//			if ( is_array( $wgUrlProtocols ) ) {
+//			if (is_array($wgUrlProtocols)) {
 //				$protocols = [];
-//				foreach ( $wgUrlProtocols as $protocol ) {
+//				foreach ($wgUrlProtocols as $protocol) {
 //					// Filter out '//' if !$includeProtocolRelative
-//					if ( $includeProtocolRelative || $protocol !== '//' ) {
-//						$protocols[] = preg_quote( $protocol, '/' );
+//					if ($includeProtocolRelative || $protocol !== '//') {
+//						$protocols[] = preg_quote($protocol, '/');
 //					}
 //				}
 //
-//				$retval = implode( '|', $protocols );
+//				$retval = implode('|', $protocols);
 //			} else {
 //				// Ignore $includeProtocolRelative in this case
 //				// This case exists for pre-1.6 compatibility, and we can safely assume
@@ -803,7 +776,7 @@ public class XomwGlobalFunctions {
 //			}
 //
 //			// Cache return value
-//			if ( $includeProtocolRelative ) {
+//			if ($includeProtocolRelative) {
 //				$withProtRel = $retval;
 //			} else {
 //				$withoutProtRel = $retval;
@@ -818,7 +791,7 @@ public class XomwGlobalFunctions {
 //		* @return String
 //		*/
 //		function wfUrlProtocolsWithoutProtRel() {
-//			return wfUrlProtocols( false );
+//			return wfUrlProtocols(false);
 //		}
 //
 //		/**
@@ -832,36 +805,36 @@ public class XomwGlobalFunctions {
 //		* @param String $url A URL to parse
 //		* @return String[]|boolean Bits of the URL in an associative array, per PHP docs, false on failure
 //		*/
-//		function wfParseUrl( $url ) {
+//		function wfParseUrl($url) {
 //			global $wgUrlProtocols; // Allow all protocols defined in DefaultSettings/LocalSettings.php
 //
 //			// Protocol-relative URLs are handled really badly by parse_url(). It's so
 //			// bad that the easiest way to handle them is to just prepend 'http:' and
 //			// strip the protocol out later.
-//			$wasRelative = substr( $url, 0, 2 ) == '//';
-//			if ( $wasRelative ) {
+//			$wasRelative = substr($url, 0, 2) == '//';
+//			if ($wasRelative) {
 //				$url = "http:$url";
 //			}
 //			MediaWiki\suppressWarnings();
-//			$bits = parse_url( $url );
+//			$bits = parse_url($url);
 //			MediaWiki\restoreWarnings();
 //			// parse_url() returns an array without scheme for some invalid URLs, e.g.
 //			// parse_url("%0Ahttp://example.com") == [ 'host' => '%0Ahttp', 'path' => 'example.com' ]
-//			if ( !$bits || !isset( $bits['scheme'] ) ) {
+//			if (!$bits || !isset($bits['scheme'])) {
 //				return false;
 //			}
 //
 //			// parse_url() incorrectly handles schemes case-sensitively. Convert it to lowercase.
-//			$bits['scheme'] = strtolower( $bits['scheme'] );
+//			$bits['scheme'] = strtolower($bits['scheme']);
 //
 //			// most of the protocols are followed by ://, but mailto: and sometimes news: not, check for it
-//			if ( in_array( $bits['scheme'] . '://', $wgUrlProtocols ) ) {
+//			if (in_array($bits['scheme'] . '://', $wgUrlProtocols)) {
 //				$bits['delimiter'] = '://';
-//			} elseif ( in_array( $bits['scheme'] . ':', $wgUrlProtocols ) ) {
+//			} elseif (in_array($bits['scheme'] . ':', $wgUrlProtocols)) {
 //				$bits['delimiter'] = ':';
 //				// parse_url detects for news: and mailto: the host part of an url as path
 //				// We have to correct this wrong detection
-//				if ( isset( $bits['path'] ) ) {
+//				if (isset($bits['path'])) {
 //					$bits['host'] = $bits['path'];
 //					$bits['path'] = '';
 //				}
@@ -870,13 +843,13 @@ public class XomwGlobalFunctions {
 //			}
 //
 //			/* Provide an empty host for eg. file:/// urls (see T30627) */
-//			if ( !isset( $bits['host'] ) ) {
+//			if (!isset($bits['host'])) {
 //				$bits['host'] = '';
 //
 //				// See T47069
-//				if ( isset( $bits['path'] ) ) {
+//				if (isset($bits['path'])) {
 //					/* parse_url loses the third / for file:///c:/ urls (but not on variants) */
-//					if ( substr( $bits['path'], 0, 1 ) !== '/' ) {
+//					if (substr($bits['path'], 0, 1) !== '/') {
 //						$bits['path'] = '/' . $bits['path'];
 //					}
 //				} else {
@@ -885,7 +858,7 @@ public class XomwGlobalFunctions {
 //			}
 //
 //			// If the URL was protocol-relative, fix scheme and delimiter
-//			if ( $wasRelative ) {
+//			if ($wasRelative) {
 //				$bits['scheme'] = '';
 //				$bits['delimiter'] = '//';
 //			}
@@ -902,11 +875,11 @@ public class XomwGlobalFunctions {
 //		* @param String $url
 //		* @return String
 //		*/
-//		function wfExpandIRI( $url ) {
+//		function wfExpandIRI($url) {
 //			return preg_replace_callback(
 //				'/((?:%[89A-F][0-9A-F])+)/i',
 //				'wfExpandIRI_callback',
-//				wfExpandUrl( $url )
+//				wfExpandUrl($url)
 //			);
 //		}
 //
@@ -915,8 +888,8 @@ public class XomwGlobalFunctions {
 //		* @param array $matches
 //		* @return String
 //		*/
-//		function wfExpandIRI_callback( $matches ) {
-//			return urldecode( $matches[1] );
+//		function wfExpandIRI_callback($matches) {
+//			return urldecode($matches[1]);
 //		}
 //
 //		/**
@@ -925,48 +898,48 @@ public class XomwGlobalFunctions {
 //		* @param String $url
 //		* @return array
 //		*/
-//		function wfMakeUrlIndexes( $url ) {
-//			$bits = wfParseUrl( $url );
+//		function wfMakeUrlIndexes($url) {
+//			$bits = wfParseUrl($url);
 //
 //			// Reverse the labels in the hostname, convert to lower case
 //			// For emails reverse domainpart only
-//			if ( $bits['scheme'] == 'mailto' ) {
-//				$mailparts = explode( '@', $bits['host'], 2 );
-//				if ( count( $mailparts ) === 2 ) {
-//					$domainpart = strtolower( implode( '.', array_reverse( explode( '.', $mailparts[1] ) ) ) );
+//			if ($bits['scheme'] == 'mailto') {
+//				$mailparts = explode('@', $bits['host'], 2);
+//				if (count($mailparts) === 2) {
+//					$domainpart = strtolower(implode('.', array_reverse(explode('.', $mailparts[1]))));
 //				} else {
 //					// No domain specified, don't mangle it
 //					$domainpart = '';
 //				}
 //				$reversedHost = $domainpart . '@' . $mailparts[0];
 //			} else {
-//				$reversedHost = strtolower( implode( '.', array_reverse( explode( '.', $bits['host'] ) ) ) );
+//				$reversedHost = strtolower(implode('.', array_reverse(explode('.', $bits['host']))));
 //			}
 //			// Add an extra dot to the end
 //			// Why? Is it in wrong place in mailto links?
-//			if ( substr( $reversedHost, -1, 1 ) !== '.' ) {
+//			if (substr($reversedHost, -1, 1) !== '.') {
 //				$reversedHost .= '.';
 //			}
 //			// Reconstruct the pseudo-URL
 //			$prot = $bits['scheme'];
 //			$index = $prot . $bits['delimiter'] . $reversedHost;
 //			// Leave out user and password. Add the port, path, query and fragment
-//			if ( isset( $bits['port'] ) ) {
+//			if (isset($bits['port'])) {
 //				$index .= ':' . $bits['port'];
 //			}
-//			if ( isset( $bits['path'] ) ) {
+//			if (isset($bits['path'])) {
 //				$index .= $bits['path'];
 //			} else {
 //				$index .= '/';
 //			}
-//			if ( isset( $bits['query'] ) ) {
+//			if (isset($bits['query'])) {
 //				$index .= '?' . $bits['query'];
 //			}
-//			if ( isset( $bits['fragment'] ) ) {
+//			if (isset($bits['fragment'])) {
 //				$index .= '#' . $bits['fragment'];
 //			}
 //
-//			if ( $prot == '' ) {
+//			if ($prot == '') {
 //				return [ "http:$index", "https:$index" ];
 //			} else {
 //				return [ $index ];
@@ -979,13 +952,13 @@ public class XomwGlobalFunctions {
 //		* @param array $domains Array of domains (strings)
 //		* @return boolean True if the host part of $url ends in one of the strings in $domains
 //		*/
-//		function wfMatchesDomainList( $url, $domains ) {
-//			$bits = wfParseUrl( $url );
-//			if ( is_array( $bits ) && isset( $bits['host'] ) ) {
+//		function wfMatchesDomainList($url, $domains) {
+//			$bits = wfParseUrl($url);
+//			if (is_array($bits) && isset($bits['host'])) {
 //				$host = '.' . $bits['host'];
-//				foreach ( (array)$domains as $domain ) {
+//				foreach ((array)$domains as $domain) {
 //					$domain = '.' . $domain;
-//					if ( substr( $host, -strlen( $domain ) ) === $domain ) {
+//					if (substr($host, -strlen($domain)) === $domain) {
 //						return true;
 //					}
 //				}
@@ -1013,34 +986,34 @@ public class XomwGlobalFunctions {
 //		*     - false: same as 'private'
 //		* @param array $context Additional logging context data
 //		*/
-//		function wfDebug( $text, $dest = 'all', array $context = [] ) {
+//		function wfDebug($text, $dest = 'all', array $context = []) {
 //			global $wgDebugRawPage, $wgDebugLogPrefix;
 //			global $wgDebugTimestamps, $wgRequestTime;
 //
-//			if ( !$wgDebugRawPage && wfIsDebugRawPage() ) {
+//			if (!$wgDebugRawPage && wfIsDebugRawPage()) {
 //				return;
 //			}
 //
-//			$text = trim( $text );
+//			$text = trim($text);
 //
-//			if ( $wgDebugTimestamps ) {
+//			if ($wgDebugTimestamps) {
 //				$context['seconds_elapsed'] = sprintf(
 //					'%6.4f',
-//					microtime( true ) - $wgRequestTime
+//					microtime(true) - $wgRequestTime
 //				);
 //				$context['memory_used'] = sprintf(
 //					'%5.1fM',
-//					( memory_get_usage( true ) / ( 1024 * 1024 ) )
+//					(memory_get_usage(true) / (1024 * 1024))
 //				);
 //			}
 //
-//			if ( $wgDebugLogPrefix !== '' ) {
+//			if ($wgDebugLogPrefix !== '') {
 //				$context['prefix'] = $wgDebugLogPrefix;
 //			}
-//			$context['private'] = ( $dest === false || $dest === 'private' );
+//			$context['private'] = ($dest === false || $dest === 'private');
 //
-//			$logger = LoggerFactory::getInstance( 'wfDebug' );
-//			$logger->debug( $text, $context );
+//			$logger = LoggerFactory::getInstance('wfDebug');
+//			$logger->debug($text, $context);
 //		}
 //
 //		/**
@@ -1049,14 +1022,14 @@ public class XomwGlobalFunctions {
 //		*/
 //		function wfIsDebugRawPage() {
 //			static $cache;
-//			if ( $cache !== null ) {
+//			if ($cache !== null) {
 //				return $cache;
 //			}
 //			# Check for raw action using $_GET not $wgRequest, since the latter might not be initialised yet
-//			if ( ( isset( $_GET['action'] ) && $_GET['action'] == 'raw' )
+//			if ((isset($_GET['action']) && $_GET['action'] == 'raw')
 //				|| (
-//					isset( $_SERVER['SCRIPT_NAME'] )
-//					&& substr( $_SERVER['SCRIPT_NAME'], -8 ) == 'load.php'
+//					isset($_SERVER['SCRIPT_NAME'])
+//					&& substr($_SERVER['SCRIPT_NAME'], -8) == 'load.php'
 //				)
 //			) {
 //				$cache = true;
@@ -1071,14 +1044,14 @@ public class XomwGlobalFunctions {
 //		*
 //		* @param boolean $exact Print exact byte values instead of kibibytes (default: false)
 //		*/
-//		function wfDebugMem( $exact = false ) {
+//		function wfDebugMem($exact = false) {
 //			$mem = memory_get_usage();
-//			if ( !$exact ) {
-//				$mem = floor( $mem / 1024 ) . ' KiB';
+//			if (!$exact) {
+//				$mem = floor($mem / 1024) . ' KiB';
 //			} else {
 //				$mem .= ' B';
 //			}
-//			wfDebug( "Memory usage: $mem\n" );
+//			wfDebug("Memory usage: $mem\n");
 //		}
 //
 //		/**
@@ -1109,11 +1082,11 @@ public class XomwGlobalFunctions {
 //		function wfDebugLog(
 //			$logGroup, $text, $dest = 'all', array $context = []
 //		) {
-//			$text = trim( $text );
+//			$text = trim($text);
 //
-//			$logger = LoggerFactory::getInstance( $logGroup );
-//			$context['private'] = ( $dest === false || $dest === 'private' );
-//			$logger->info( $text, $context );
+//			$logger = LoggerFactory::getInstance($logGroup);
+//			$context['private'] = ($dest === false || $dest === 'private');
+//			$logger->info($text, $context);
 //		}
 //
 //		/**
@@ -1124,9 +1097,9 @@ public class XomwGlobalFunctions {
 //		* @param String $text Database error message.
 //		* @param array $context Additional logging context data
 //		*/
-//		function wfLogDBError( $text, array $context = [] ) {
-//			$logger = LoggerFactory::getInstance( 'wfLogDBError' );
-//			$logger->error( trim( $text ), $context );
+//		function wfLogDBError($text, array $context = []) {
+//			$logger = LoggerFactory::getInstance('wfLogDBError');
+//			$logger->error(trim($text), $context);
 //		}
 //
 //		/**
@@ -1142,8 +1115,8 @@ public class XomwGlobalFunctions {
 //		*
 //		* @return null
 //		*/
-//		function wfDeprecated( $function, $version = false, $component = false, $callerOffset = 2 ) {
-//			MWDebug::deprecated( $function, $version, $component, $callerOffset + 1 );
+//		function wfDeprecated($function, $version = false, $component = false, $callerOffset = 2) {
+//			MWDebug::deprecated($function, $version, $component, $callerOffset + 1);
 //		}
 //
 //		/**
@@ -1156,8 +1129,8 @@ public class XomwGlobalFunctions {
 //		* @param int $level PHP error level; defaults to E_USER_NOTICE;
 //		*        only used when $wgDevelopmentWarnings is true
 //		*/
-//		function wfWarn( $msg, $callerOffset = 1, $level = E_USER_NOTICE ) {
-//			MWDebug::warning( $msg, $callerOffset + 1, $level, 'auto' );
+//		function wfWarn($msg, $callerOffset = 1, $level = E_USER_NOTICE) {
+//			MWDebug::warning($msg, $callerOffset + 1, $level, 'auto');
 //		}
 //
 //		/**
@@ -1169,8 +1142,8 @@ public class XomwGlobalFunctions {
 //		*        find the correct caller (1 = function calling wfLogWarning, ...)
 //		* @param int $level PHP error level; defaults to E_USER_WARNING
 //		*/
-//		function wfLogWarning( $msg, $callerOffset = 1, $level = E_USER_WARNING ) {
-//			MWDebug::warning( $msg, $callerOffset + 1, $level, 'production' );
+//		function wfLogWarning($msg, $callerOffset = 1, $level = E_USER_WARNING) {
+//			MWDebug::warning($msg, $callerOffset + 1, $level, 'production');
 //		}
 //
 //		/**
@@ -1186,11 +1159,11 @@ public class XomwGlobalFunctions {
 //		* @throws MWException
 //		* @deprecated since 1.25 Use \MediaWiki\Logger\LegacyLogger::emit or UDPTransport
 //		*/
-//		function wfErrorLog( $text, $file, array $context = [] ) {
-//			wfDeprecated( __METHOD__, '1.25' );
-//			$logger = LoggerFactory::getInstance( 'wfErrorLog' );
+//		function wfErrorLog($text, $file, array $context = []) {
+//			wfDeprecated(__METHOD__, '1.25');
+//			$logger = LoggerFactory::getInstance('wfErrorLog');
 //			$context['destination'] = $file;
-//			$logger->info( trim( $text ), $context );
+//			$logger->info(trim($text), $context);
 //		}
 //
 //		/**
@@ -1203,52 +1176,52 @@ public class XomwGlobalFunctions {
 //			$request = $context->getRequest();
 //
 //			$profiler = Profiler::instance();
-//			$profiler->setContext( $context );
+//			$profiler->setContext($context);
 //			$profiler->logData();
 //
 //			$config = $context->getConfig();
-//			if ( $config->get( 'StatsdServer' ) ) {
+//			if ($config->get('StatsdServer')) {
 //				try {
-//					$statsdServer = explode( ':', $config->get( 'StatsdServer' ) );
+//					$statsdServer = explode(':', $config->get('StatsdServer'));
 //					$statsdHost = $statsdServer[0];
-//					$statsdPort = isset( $statsdServer[1] ) ? $statsdServer[1] : 8125;
-//					$statsdSender = new SocketSender( $statsdHost, $statsdPort );
-//					$statsdClient = new SamplingStatsdClient( $statsdSender, true, false );
-//					$statsdClient->setSamplingRates( $config->get( 'StatsdSamplingRates' ) );
-//					$statsdClient->send( $context->getStats()->getBuffer() );
-//				} catch ( Exception $ex ) {
-//					MWExceptionHandler::logException( $ex );
+//					$statsdPort = isset($statsdServer[1]) ? $statsdServer[1] : 8125;
+//					$statsdSender = new SocketSender($statsdHost, $statsdPort);
+//					$statsdClient = new SamplingStatsdClient($statsdSender, true, false);
+//					$statsdClient->setSamplingRates($config->get('StatsdSamplingRates'));
+//					$statsdClient->send($context->getStats()->getBuffer());
+//				} catch (Exception $ex) {
+//					MWExceptionHandler::logException($ex);
 //				}
 //			}
 //
 //			# Profiling must actually be enabled...
-//			if ( $profiler instanceof ProfilerStub ) {
+//			if ($profiler instanceof ProfilerStub) {
 //				return;
 //			}
 //
-//			if ( isset( $wgDebugLogGroups['profileoutput'] )
+//			if (isset($wgDebugLogGroups['profileoutput'])
 //				&& $wgDebugLogGroups['profileoutput'] === false
 //			) {
 //				// Explicitly disabled
 //				return;
 //			}
-//			if ( !$wgDebugRawPage && wfIsDebugRawPage() ) {
+//			if (!$wgDebugRawPage && wfIsDebugRawPage()) {
 //				return;
 //			}
 //
 //			$ctx = [ 'elapsed' => $request->getElapsedTime() ];
-//			if ( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+//			if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 //				$ctx['forwarded_for'] = $_SERVER['HTTP_X_FORWARDED_FOR'];
 //			}
-//			if ( !empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+//			if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 //				$ctx['client_ip'] = $_SERVER['HTTP_CLIENT_IP'];
 //			}
-//			if ( !empty( $_SERVER['HTTP_FROM'] ) ) {
+//			if (!empty($_SERVER['HTTP_FROM'])) {
 //				$ctx['from'] = $_SERVER['HTTP_FROM'];
 //			}
-//			if ( isset( $ctx['forwarded_for'] ) ||
-//				isset( $ctx['client_ip'] ) ||
-//				isset( $ctx['from'] ) ) {
+//			if (isset($ctx['forwarded_for']) ||
+//				isset($ctx['client_ip']) ||
+//				isset($ctx['from'])) {
 //				$ctx['proxy'] = $_SERVER['REMOTE_ADDR'];
 //			}
 //
@@ -1256,20 +1229,20 @@ public class XomwGlobalFunctions {
 //			// @todo FIXME: We can detect some anons even if it is not loaded.
 //			// See User::getId()
 //			$user = $context->getUser();
-//			$ctx['anon'] = $user->isItemLoaded( 'id' ) && $user->isAnon();
+//			$ctx['anon'] = $user->isItemLoaded('id') && $user->isAnon();
 //
 //			// Command line script uses a FauxRequest Object which does not have
 //			// any knowledge about an URL and throw an exception instead.
 //			try {
-//				$ctx['url'] = urldecode( $request->getRequestURL() );
-//			} catch ( Exception $ignored ) {
+//				$ctx['url'] = urldecode($request->getRequestURL());
+//			} catch (Exception $ignored) {
 //				// no-op
 //			}
 //
 //			$ctx['output'] = $profiler->getOutput();
 //
-//			$log = LoggerFactory::getInstance( 'profileoutput' );
-//			$log->info( "Elapsed: {elapsed}; URL: <{url}>\n{output}", $ctx );
+//			$log = LoggerFactory::getInstance('profileoutput');
+//			$log->info("Elapsed: {elapsed}; URL: <{url}>\n{output}", $ctx);
 //		}
 //
 //		/**
@@ -1279,9 +1252,9 @@ public class XomwGlobalFunctions {
 //		* @param int $count
 //		* @return void
 //		*/
-//		function wfIncrStats( $key, $count = 1 ) {
+//		function wfIncrStats($key, $count = 1) {
 //			$stats = RequestContext::getMain()->getStats();
-//			$stats->updateCount( $key, $count );
+//			$stats->updateCount($key, $count);
 //		}
 //
 //		/**
@@ -1303,12 +1276,12 @@ public class XomwGlobalFunctions {
 //		*/
 //		function wfReadOnlyReason() {
 //			$readOnly = wfConfiguredReadOnlyReason();
-//			if ( $readOnly !== false ) {
+//			if ($readOnly !== false) {
 //				return $readOnly;
 //			}
 //
 //			static $lbReadOnly = null;
-//			if ( $lbReadOnly === null ) {
+//			if ($lbReadOnly === null) {
 //				// Callers use this method to be aware that data presented to a user
 //				// may be very stale and thus allowing submissions can be problematic.
 //				$lbReadOnly = wfGetLB()->getReadOnlyReason();
@@ -1326,10 +1299,10 @@ public class XomwGlobalFunctions {
 //		function wfConfiguredReadOnlyReason() {
 //			global $wgReadOnly, $wgReadOnlyFile;
 //
-//			if ( $wgReadOnly === null ) {
+//			if ($wgReadOnly === null) {
 //				// Set $wgReadOnly for faster access next time
-//				if ( is_file( $wgReadOnlyFile ) && filesize( $wgReadOnlyFile ) > 0 ) {
-//					$wgReadOnly = file_get_contents( $wgReadOnlyFile );
+//				if (is_file($wgReadOnlyFile) && filesize($wgReadOnlyFile) > 0) {
+//					$wgReadOnly = file_get_contents($wgReadOnlyFile);
 //				} else {
 //					$wgReadOnly = false;
 //				}
@@ -1353,36 +1326,36 @@ public class XomwGlobalFunctions {
 //		*                    for the wiki's content language.
 //		* @return Language
 //		*/
-//		function wfGetLangObj( $langcode = false ) {
+//		function wfGetLangObj($langcode = false) {
 //			# Identify which language to get or create a language Object for.
 //			# Using is_object here due to Stub objects.
-//			if ( is_object( $langcode ) ) {
+//			if (is_object($langcode)) {
 //				# Great, we already have the Object (hopefully)!
 //				return $langcode;
 //			}
 //
 //			global $wgContLang, $wgLanguageCode;
-//			if ( $langcode === true || $langcode === $wgLanguageCode ) {
+//			if ($langcode === true || $langcode === $wgLanguageCode) {
 //				# $langcode is the language code of the wikis content language Object.
 //				# or it is a boolean and value is true
 //				return $wgContLang;
 //			}
 //
 //			global $wgLang;
-//			if ( $langcode === false || $langcode === $wgLang->getCode() ) {
+//			if ($langcode === false || $langcode === $wgLang->getCode()) {
 //				# $langcode is the language code of user language Object.
 //				# or it was a boolean and value is false
 //				return $wgLang;
 //			}
 //
-//			$validCodes = array_keys( Language::fetchLanguageNames() );
-//			if ( in_array( $langcode, $validCodes ) ) {
+//			$validCodes = array_keys(Language::fetchLanguageNames());
+//			if (in_array($langcode, $validCodes)) {
 //				# $langcode corresponds to a valid language.
-//				return Language::factory( $langcode );
+//				return Language::factory($langcode);
 //			}
 //
 //			# $langcode is a String, but not a valid language code; use content language.
-//			wfDebug( "Invalid language code passed to wfGetLangObj, falling back to content language.\n" );
+//			wfDebug("Invalid language code passed to wfGetLangObj, falling back to content language.\n");
 //			return $wgContLang;
 //		}
 
@@ -1403,14 +1376,14 @@ public class XomwGlobalFunctions {
 	* @see Message::__construct
 	*/
 	public static XomwMessage wfMessage(XomwParserEnv env, String key) {
-//		function wfMessage( $key /*...*/ ) {
-//			$message = new Message( $key );
+//		function wfMessage($key /*...*/) {
+//			$message = new Message($key);
 
 //			// We call Message::params() to reduce code duplication
 //			$params = func_get_args();
-//			array_shift( $params );
-//			if ( $params ) {
-//				call_user_func_array( [ $message, 'params' ], $params );
+//			array_shift($params);
+//			if ($params) {
+//				call_user_func_array([ $message, 'params' ], $params);
 //			}
 
 		return env.Message_mgr().Get_by_str(key);
@@ -1428,9 +1401,9 @@ public class XomwGlobalFunctions {
 //		*
 //		* @see Message::newFallbackSequence
 //		*/
-//		function wfMessageFallback( /*...*/ ) {
+//		function wfMessageFallback(/*...*/) {
 //			$args = func_get_args();
-//			return call_user_func_array( 'Message::newFallbackSequence', $args );
+//			return call_user_func_array('Message::newFallbackSequence', $args);
 //		}
 //
 //		/**
@@ -1441,21 +1414,21 @@ public class XomwGlobalFunctions {
 //		* @return String
 //		* @private
 //		*/
-//		function wfMsgReplaceArgs( $message, $args ) {
+//		function wfMsgReplaceArgs($message, $args) {
 //			# Fix windows line-endings
 //			# Some messages are split with explode("\n", $msg)
-//			$message = str_replace( "\r", '', $message );
+//			$message = str_replace("\r", '', $message);
 //
 //			// Replace arguments
-//			if ( is_array( $args ) && $args ) {
-//				if ( is_array( $args[0] ) ) {
-//					$args = array_values( $args[0] );
+//			if (is_array($args) && $args) {
+//				if (is_array($args[0])) {
+//					$args = array_values($args[0]);
 //				}
 //				$replacementKeys = [];
-//				foreach ( $args as $n => $param ) {
-//					$replacementKeys['$' . ( $n + 1 )] = $param;
+//				foreach ($args as $n => $param) {
+//					$replacementKeys['$' . ($n + 1)] = $param;
 //				}
-//				$message = strtr( $message, $replacementKeys );
+//				$message = strtr($message, $replacementKeys);
 //			}
 //
 //			return $message;
@@ -1470,27 +1443,27 @@ public class XomwGlobalFunctions {
 //		*/
 //		function wfHostname() {
 //			static $host;
-//			if ( is_null( $host ) ) {
+//			if (is_null($host)) {
 //
 //				# Hostname overriding
 //				global $wgOverrideHostname;
-//				if ( $wgOverrideHostname !== false ) {
+//				if ($wgOverrideHostname !== false) {
 //					# Set static and skip any detection
 //					$host = $wgOverrideHostname;
 //					return $host;
 //				}
 //
-//				if ( function_exists( 'posix_uname' ) ) {
+//				if (function_exists('posix_uname')) {
 //					// This function not present on Windows
 //					$uname = posix_uname();
 //				} else {
 //					$uname = false;
 //				}
-//				if ( is_array( $uname ) && isset( $uname['nodename'] ) ) {
+//				if (is_array($uname) && isset($uname['nodename'])) {
 //					$host = $uname['nodename'];
-//				} elseif ( getenv( 'COMPUTERNAME' ) ) {
+//				} elseif (getenv('COMPUTERNAME')) {
 //					# Windows computer name
-//					$host = getenv( 'COMPUTERNAME' );
+//					$host = getenv('COMPUTERNAME');
 //				} else {
 //					# This may be a virtual server.
 //					$host = $_SERVER['SERVER_NAME'];
@@ -1511,12 +1484,12 @@ public class XomwGlobalFunctions {
 //		function wfReportTime() {
 //			global $wgRequestTime, $wgShowHostnames;
 //
-//			$responseTime = round( ( microtime( true ) - $wgRequestTime ) * 1000 );
+//			$responseTime = round((microtime(true) - $wgRequestTime) * 1000);
 //			$reportVars = [ 'wgBackendResponseTime' => $responseTime ];
-//			if ( $wgShowHostnames ) {
+//			if ($wgShowHostnames) {
 //				$reportVars['wgHostname'] = wfHostname();
 //			}
-//			return Skin::makeVariablesScript( $reportVars );
+//			return Skin::makeVariablesScript($reportVars);
 //		}
 //
 //		/**
@@ -1529,23 +1502,23 @@ public class XomwGlobalFunctions {
 //		*
 //		* @return array Array of backtrace information
 //		*/
-//		function wfDebugBacktrace( $limit = 0 ) {
+//		function wfDebugBacktrace($limit = 0) {
 //			static $disabled = null;
 //
-//			if ( is_null( $disabled ) ) {
-//				$disabled = !function_exists( 'debug_backtrace' );
-//				if ( $disabled ) {
-//					wfDebug( "debug_backtrace() is disabled\n" );
+//			if (is_null($disabled)) {
+//				$disabled = !function_exists('debug_backtrace');
+//				if ($disabled) {
+//					wfDebug("debug_backtrace() is disabled\n");
 //				}
 //			}
-//			if ( $disabled ) {
+//			if ($disabled) {
 //				return [];
 //			}
 //
-//			if ( $limit ) {
-//				return array_slice( debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT, $limit + 1 ), 1 );
+//			if ($limit) {
+//				return array_slice(debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, $limit + 1), 1);
 //			} else {
-//				return array_slice( debug_backtrace(), 1 );
+//				return array_slice(debug_backtrace(), 1);
 //			}
 //		}
 //
@@ -1557,14 +1530,14 @@ public class XomwGlobalFunctions {
 //		* @return String
 //		* @since 1.25 Supports $raw parameter.
 //		*/
-//		function wfBacktrace( $raw = null ) {
+//		function wfBacktrace($raw = null) {
 //			global $wgCommandLineMode;
 //
-//			if ( $raw === null ) {
+//			if ($raw === null) {
 //				$raw = $wgCommandLineMode;
 //			}
 //
-//			if ( $raw ) {
+//			if ($raw) {
 //				$frameFormat = "%s line %s calls %s()\n";
 //				$traceFormat = "%s";
 //			} else {
@@ -1572,32 +1545,32 @@ public class XomwGlobalFunctions {
 //				$traceFormat = "<ul>\n%s</ul>\n";
 //			}
 //
-//			$frames = array_map( function ( $frame ) use ( $frameFormat ) {
-//				$file = !empty( $frame['file'] ) ? basename( $frame['file'] ) : '-';
-//				$line = isset( $frame['line'] ) ? $frame['line'] : '-';
+//			$frames = array_map(function ($frame) use ($frameFormat) {
+//				$file = !empty($frame['file']) ? basename($frame['file']) : '-';
+//				$line = isset($frame['line']) ? $frame['line'] : '-';
 //				$call = $frame['function'];
-//				if ( !empty( $frame['class'] ) ) {
+//				if (!empty($frame['class'])) {
 //					$call = $frame['class'] . $frame['type'] . $call;
 //				}
-//				return sprintf( $frameFormat, $file, $line, $call );
-//			}, wfDebugBacktrace() );
+//				return sprintf($frameFormat, $file, $line, $call);
+//			}, wfDebugBacktrace());
 //
-//			return sprintf( $traceFormat, implode( '', $frames ) );
+//			return sprintf($traceFormat, implode('', $frames));
 //		}
 //
 //		/**
 //		* Get the name of the function which called this function
-//		* wfGetCaller( 1 ) is the function with the wfGetCaller() call (ie. __FUNCTION__)
-//		* wfGetCaller( 2 ) [default] is the caller of the function running wfGetCaller()
-//		* wfGetCaller( 3 ) is the parent of that.
+//		* wfGetCaller(1) is the function with the wfGetCaller() call (ie. __FUNCTION__)
+//		* wfGetCaller(2) [default] is the caller of the function running wfGetCaller()
+//		* wfGetCaller(3) is the parent of that.
 //		*
 //		* @param int $level
 //		* @return String
 //		*/
-//		function wfGetCaller( $level = 2 ) {
-//			$backtrace = wfDebugBacktrace( $level + 1 );
-//			if ( isset( $backtrace[$level] ) ) {
-//				return wfFormatStackFrame( $backtrace[$level] );
+//		function wfGetCaller($level = 2) {
+//			$backtrace = wfDebugBacktrace($level + 1);
+//			if (isset($backtrace[$level])) {
+//				return wfFormatStackFrame($backtrace[$level]);
 //			} else {
 //				return 'unknown';
 //			}
@@ -1610,13 +1583,13 @@ public class XomwGlobalFunctions {
 //		* @param int $limit The maximum depth of the stack frame to return, or false for the entire stack.
 //		* @return String
 //		*/
-//		function wfGetAllCallers( $limit = 3 ) {
-//			$trace = array_reverse( wfDebugBacktrace() );
-//			if ( !$limit || $limit > count( $trace ) - 1 ) {
-//				$limit = count( $trace ) - 1;
+//		function wfGetAllCallers($limit = 3) {
+//			$trace = array_reverse(wfDebugBacktrace());
+//			if (!$limit || $limit > count($trace) - 1) {
+//				$limit = count($trace) - 1;
 //			}
-//			$trace = array_slice( $trace, -$limit - 1, $limit );
-//			return implode( '/', array_map( 'wfFormatStackFrame', $trace ) );
+//			$trace = array_slice($trace, -$limit - 1, $limit);
+//			return implode('/', array_map('wfFormatStackFrame', $trace));
 //		}
 //
 //		/**
@@ -1625,11 +1598,11 @@ public class XomwGlobalFunctions {
 //		* @param array $frame
 //		* @return String
 //		*/
-//		function wfFormatStackFrame( $frame ) {
-//			if ( !isset( $frame['function'] ) ) {
+//		function wfFormatStackFrame($frame) {
+//			if (!isset($frame['function'])) {
 //				return 'NO_FUNCTION_GIVEN';
 //			}
-//			return isset( $frame['class'] ) && isset( $frame['type'] ) ?
+//			return isset($frame['class']) && isset($frame['type']) ?
 //				$frame['class'] . $frame['type'] . $frame['function'] :
 //				$frame['function'];
 //		}
@@ -1643,8 +1616,8 @@ public class XomwGlobalFunctions {
 //		* @param int $limit
 //		* @return String
 //		*/
-//		function wfShowingResults( $offset, $limit ) {
-//			return wfMessage( 'showingresults' )->numParams( $limit, $offset + 1 )->parse();
+//		function wfShowingResults($offset, $limit) {
+//			return wfMessage('showingresults')->numParams($limit, $offset + 1)->parse();
 //		}
 //
 //		/**
@@ -1656,24 +1629,24 @@ public class XomwGlobalFunctions {
 //		* @param boolean $force Forces another check even if we already have a cached result.
 //		* @return boolean
 //		*/
-//		function wfClientAcceptsGzip( $force = false ) {
+//		function wfClientAcceptsGzip($force = false) {
 //			static $result = null;
-//			if ( $result === null || $force ) {
+//			if ($result === null || $force) {
 //				$result = false;
-//				if ( isset( $_SERVER['HTTP_ACCEPT_ENCODING'] ) ) {
+//				if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {
 //					# @todo FIXME: We may want to blacklist some broken browsers
 //					$m = [];
-//					if ( preg_match(
+//					if (preg_match(
 //							'/\bgzip(?:;(q)=([0-9]+(?:\.[0-9]+)))?\b/',
 //							$_SERVER['HTTP_ACCEPT_ENCODING'],
 //							$m
 //						)
 //					) {
-//						if ( isset( $m[2] ) && ( $m[1] == 'q' ) && ( $m[2] == 0 ) ) {
+//						if (isset($m[2]) && ($m[1] == 'q') && ($m[2] == 0)) {
 //							$result = false;
 //							return $result;
 //						}
-//						wfDebug( "wfClientAcceptsGzip: client accepts gzip.\n" );
+//						wfDebug("wfClientAcceptsGzip: client accepts gzip.\n");
 //						$result = true;
 //					}
 //				}
@@ -1690,10 +1663,10 @@ public class XomwGlobalFunctions {
 //		* @param String $text Text to be escaped
 //		* @return String
 //		*/
-//		function wfEscapeWikiText( $text ) {
+//		function wfEscapeWikiText($text) {
 //			global $wgEnableMagicLinks;
 //			static $repl = null, $repl2 = null;
-//			if ( $repl === null || defined( 'MW_PARSER_TEST' ) || defined( 'MW_PHPUNIT_TEST' ) ) {
+//			if ($repl === null || defined('MW_PARSER_TEST') || defined('MW_PHPUNIT_TEST')) {
 //				// Tests depend upon being able to change $wgEnableMagicLinks, so don't cache
 //				// in those situations
 //				$repl = [
@@ -1711,9 +1684,9 @@ public class XomwGlobalFunctions {
 //					'__' => '_&#95;', '://' => '&#58;//',
 //				];
 //
-//				$magicLinks = array_keys( array_filter( $wgEnableMagicLinks ) );
+//				$magicLinks = array_keys(array_filter($wgEnableMagicLinks));
 //				// We have to catch everything "\s" matches in PCRE
-//				foreach ( $magicLinks as $magic ) {
+//				foreach ($magicLinks as $magic) {
 //					$repl["$magic "] = "$magic&#32;";
 //					$repl["$magic\t"] = "$magic&#9;";
 //					$repl["$magic\r"] = "$magic&#13;";
@@ -1724,15 +1697,15 @@ public class XomwGlobalFunctions {
 //				// And handle protocols that don't use "://"
 //				global $wgUrlProtocols;
 //				$repl2 = [];
-//				foreach ( $wgUrlProtocols as $prot ) {
-//					if ( substr( $prot, -1 ) === ':' ) {
-//						$repl2[] = preg_quote( substr( $prot, 0, -1 ), '/' );
+//				foreach ($wgUrlProtocols as $prot) {
+//					if (substr($prot, -1) === ':') {
+//						$repl2[] = preg_quote(substr($prot, 0, -1), '/');
 //					}
 //				}
-//				$repl2 = $repl2 ? '/\b(' . implode( '|', $repl2 ) . '):/i' : '/^(?!)/';
+//				$repl2 = $repl2 ? '/\b(' . implode('|', $repl2) . '):/i' : '/^(?!)/';
 //			}
-//			$text = substr( strtr( "\n$text", $repl ), 1 );
-//			$text = preg_replace( $repl2, '$1&#58;', $text );
+//			$text = substr(strtr("\n$text", $repl), 1);
+//			$text = preg_replace($repl2, '$1&#58;', $text);
 //			return $text;
 //		}
 //
@@ -1746,9 +1719,9 @@ public class XomwGlobalFunctions {
 //		* @param boolean $force
 //		* @return mixed
 //		*/
-//		function wfSetVar( &$dest, $source, $force = false ) {
+//		function wfSetVar(&$dest, $source, $force = false) {
 //			$temp = $dest;
-//			if ( !is_null( $source ) || $force ) {
+//			if (!is_null($source) || $force) {
 //				$dest = $source;
 //			}
 //			return $temp;
@@ -1763,10 +1736,10 @@ public class XomwGlobalFunctions {
 //		*
 //		* @return boolean
 //		*/
-//		function wfSetBit( &$dest, $bit, $state = true ) {
-//			$temp = (boolean)( $dest & $bit );
-//			if ( !is_null( $state ) ) {
-//				if ( $state ) {
+//		function wfSetBit(&$dest, $bit, $state = true) {
+//			$temp = (boolean)($dest & $bit);
+//			if (!is_null($state)) {
+//				if ($state) {
 //					$dest |= $bit;
 //				} else {
 //					$dest &= ~$bit;
@@ -1781,13 +1754,13 @@ public class XomwGlobalFunctions {
 //		*
 //		* @param mixed $var A PHP variable to dump.
 //		*/
-//		function wfVarDump( $var ) {
+//		function wfVarDump($var) {
 //			global $wgOut;
-//			$s = str_replace( "\n", "<br />\n", var_export( $var, true ) . "\n" );
-//			if ( headers_sent() || !isset( $wgOut ) || !is_object( $wgOut ) ) {
+//			$s = str_replace("\n", "<br />\n", var_export($var, true) . "\n");
+//			if (headers_sent() || !isset($wgOut) || !is_object($wgOut)) {
 //				print $s;
 //			} else {
-//				$wgOut->addHTML( $s );
+//				$wgOut->addHTML($s);
 //			}
 //		}
 //
@@ -1798,22 +1771,22 @@ public class XomwGlobalFunctions {
 //		* @param String $label
 //		* @param String $desc
 //		*/
-//		function wfHttpError( $code, $label, $desc ) {
+//		function wfHttpError($code, $label, $desc) {
 //			global $wgOut;
-//			HttpStatus::header( $code );
-//			if ( $wgOut ) {
+//			HttpStatus::header($code);
+//			if ($wgOut) {
 //				$wgOut->disable();
 //				$wgOut->sendCacheControl();
 //			}
 //
-//			header( 'Content-type: text/html; charset=utf-8' );
+//			header('Content-type: text/html; charset=utf-8');
 //			print '<!DOCTYPE html>' .
 //				'<html><head><title>' .
-//				htmlspecialchars( $label ) .
+//				htmlspecialchars($label) .
 //				'</title></head><body><h1>' .
-//				htmlspecialchars( $label ) .
+//				htmlspecialchars($label) .
 //				'</h1><p>' .
-//				nl2br( htmlspecialchars( $desc ) ) .
+//				nl2br(htmlspecialchars($desc)) .
 //				"</p></body></html>\n";
 //		}
 //
@@ -1834,42 +1807,42 @@ public class XomwGlobalFunctions {
 //		*
 //		* @param boolean $resetGzipEncoding
 //		*/
-//		function wfResetOutputBuffers( $resetGzipEncoding = true ) {
-//			if ( $resetGzipEncoding ) {
+//		function wfResetOutputBuffers($resetGzipEncoding = true) {
+//			if ($resetGzipEncoding) {
 //				// Suppress Content-Encoding and Content-length
 //				// headers from 1.10+s wfOutputHandler
 //				global $wgDisableOutputCompression;
 //				$wgDisableOutputCompression = true;
 //			}
-//			while ( $status = ob_get_status() ) {
-//				if ( isset( $status['flags'] ) ) {
+//			while ($status = ob_get_status()) {
+//				if (isset($status['flags'])) {
 //					$flags = PHP_OUTPUT_HANDLER_CLEANABLE | PHP_OUTPUT_HANDLER_REMOVABLE;
-//					$deleteable = ( $status['flags'] & $flags ) === $flags;
-//				} elseif ( isset( $status['del'] ) ) {
+//					$deleteable = ($status['flags'] & $flags) === $flags;
+//				} elseif (isset($status['del'])) {
 //					$deleteable = $status['del'];
 //				} else {
 //					// Guess that any PHP-@gplx.Internal protected setting can't be removed.
 //					$deleteable = $status['type'] !== 0; /* PHP_OUTPUT_HANDLER_INTERNAL */
 //				}
-//				if ( !$deleteable ) {
+//				if (!$deleteable) {
 //					// Give up, and hope the result doesn't break
 //					// output behavior.
 //					break;
 //				}
-//				if ( $status['name'] === 'MediaWikiTestCase::wfResetOutputBuffersBarrier' ) {
+//				if ($status['name'] === 'MediaWikiTestCase::wfResetOutputBuffersBarrier') {
 //					// Unit testing barrier to prevent this function from breaking PHPUnit.
 //					break;
 //				}
-//				if ( !ob_end_clean() ) {
+//				if (!ob_end_clean()) {
 //					// Could not remove output buffer handler; abort now
 //					// to avoid getting in some kind of infinite loop.
 //					break;
 //				}
-//				if ( $resetGzipEncoding ) {
-//					if ( $status['name'] == 'ob_gzhandler' ) {
+//				if ($resetGzipEncoding) {
+//					if ($status['name'] == 'ob_gzhandler') {
 //						// Reset the 'Content-Encoding' field set by this handler
 //						// so we can start fresh.
-//						header_remove( 'Content-Encoding' );
+//						header_remove('Content-Encoding');
 //						break;
 //					}
 //				}
@@ -1889,7 +1862,7 @@ public class XomwGlobalFunctions {
 //		* body are broken over two packets.
 //		*/
 //		function wfClearOutputBuffers() {
-//			wfResetOutputBuffers( false );
+//			wfResetOutputBuffers(false);
 //		}
 //
 //		/**
@@ -1900,24 +1873,24 @@ public class XomwGlobalFunctions {
 //		* @param String $def Default
 //		* @return float[] Associative array of String => float pairs
 //		*/
-//		function wfAcceptToPrefs( $accept, $def = '*/*' ) {
+//		function wfAcceptToPrefs($accept, $def = '*/*') {
 //			# No arg means accept anything (per HTTP spec)
-//			if ( !$accept ) {
+//			if (!$accept) {
 //				return [ $def => 1.0 ];
 //			}
 //
 //			$prefs = [];
 //
-//			$parts = explode( ',', $accept );
+//			$parts = explode(',', $accept);
 //
-//			foreach ( $parts as $part ) {
+//			foreach ($parts as $part) {
 //				# @todo FIXME: Doesn't deal with params like 'text/html; level=1'
-//				$values = explode( ';', trim( $part ) );
+//				$values = explode(';', trim($part));
 //				$match = [];
-//				if ( count( $values ) == 1 ) {
+//				if (count($values) == 1) {
 //					$prefs[$values[0]] = 1.0;
-//				} elseif ( preg_match( '/q\s*=\s*(\d*\.\d+)/', $values[1], $match ) ) {
-//					$prefs[$values[0]] = floatval( $match[1] );
+//				} elseif (preg_match('/q\s*=\s*(\d*\.\d+)/', $values[1], $match)) {
+//					$prefs[$values[0]] = floatval($match[1]);
 //				}
 //			}
 //
@@ -1936,14 +1909,14 @@ public class XomwGlobalFunctions {
 //		* @return String
 //		* @private
 //		*/
-//		function mimeTypeMatch( $type, $avail ) {
-//			if ( array_key_exists( $type, $avail ) ) {
+//		function mimeTypeMatch($type, $avail) {
+//			if (array_key_exists($type, $avail)) {
 //				return $type;
 //			} else {
-//				$mainType = explode( '/', $type )[0];
-//				if ( array_key_exists( "$mainType/*", $avail ) ) {
+//				$mainType = explode('/', $type)[0];
+//				if (array_key_exists("$mainType/*", $avail)) {
 //					return "$mainType/*";
-//				} elseif ( array_key_exists( '*/*', $avail ) ) {
+//				} elseif (array_key_exists('*/*', $avail)) {
 //					return '*/*';
 //				} else {
 //					return null;
@@ -1964,24 +1937,24 @@ public class XomwGlobalFunctions {
 //		* @todo FIXME: Doesn't handle params like 'text/plain; charset=UTF-8'
 //		* XXX: generalize to negotiate other stuff
 //		*/
-//		function wfNegotiateType( $cprefs, $sprefs ) {
+//		function wfNegotiateType($cprefs, $sprefs) {
 //			$combine = [];
 //
-//			foreach ( array_keys( $sprefs ) as $type ) {
-//				$subType = explode( '/', $type )[1];
-//				if ( $subType != '*' ) {
-//					$ckey = mimeTypeMatch( $type, $cprefs );
-//					if ( $ckey ) {
+//			foreach (array_keys($sprefs) as $type) {
+//				$subType = explode('/', $type)[1];
+//				if ($subType != '*') {
+//					$ckey = mimeTypeMatch($type, $cprefs);
+//					if ($ckey) {
 //						$combine[$type] = $sprefs[$type] * $cprefs[$ckey];
 //					}
 //				}
 //			}
 //
-//			foreach ( array_keys( $cprefs ) as $type ) {
-//				$subType = explode( '/', $type )[1];
-//				if ( $subType != '*' && !array_key_exists( $type, $sprefs ) ) {
-//					$skey = mimeTypeMatch( $type, $sprefs );
-//					if ( $skey ) {
+//			foreach (array_keys($cprefs) as $type) {
+//				$subType = explode('/', $type)[1];
+//				if ($subType != '*' && !array_key_exists($type, $sprefs)) {
+//					$skey = mimeTypeMatch($type, $sprefs);
+//					if ($skey) {
 //						$combine[$type] = $sprefs[$skey] * $cprefs[$type];
 //					}
 //				}
@@ -1990,8 +1963,8 @@ public class XomwGlobalFunctions {
 //			$bestq = 0;
 //			$besttype = null;
 //
-//			foreach ( array_keys( $combine ) as $type ) {
-//				if ( $combine[$type] > $bestq ) {
+//			foreach (array_keys($combine) as $type) {
+//				if ($combine[$type] > $bestq) {
 //					$besttype = $type;
 //					$bestq = $combine[$type];
 //				}
@@ -2006,8 +1979,8 @@ public class XomwGlobalFunctions {
 //		* @deprecated since 1.26, use MediaWiki\suppressWarnings() directly
 //		* @param boolean $end
 //		*/
-//		function wfSuppressWarnings( $end = false ) {
-//			MediaWiki\suppressWarnings( $end );
+//		function wfSuppressWarnings($end = false) {
+//			MediaWiki\suppressWarnings($end);
 //		}
 //
 //		/**
@@ -2015,7 +1988,7 @@ public class XomwGlobalFunctions {
 //		* Restore error level to previous value
 //		*/
 //		function wfRestoreWarnings() {
-//			MediaWiki\suppressWarnings( true );
+//			MediaWiki\suppressWarnings(true);
 //		}
 //
 //		/**
@@ -2026,10 +1999,10 @@ public class XomwGlobalFunctions {
 //		* @param mixed $ts Optional timestamp to convert, default 0 for the current time
 //		* @return String|boolean String / false The same date in the format specified in $outputtype or false
 //		*/
-//		function wfTimestamp( $outputtype = TS_UNIX, $ts = 0 ) {
-//			$ret = MWTimestamp::convert( $outputtype, $ts );
-//			if ( $ret === false ) {
-//				wfDebug( "wfTimestamp() fed bogus time value: TYPE=$outputtype; VALUE=$ts\n" );
+//		function wfTimestamp($outputtype = TS_UNIX, $ts = 0) {
+//			$ret = MWTimestamp::convert($outputtype, $ts);
+//			if ($ret === false) {
+//				wfDebug("wfTimestamp() fed bogus time value: TYPE=$outputtype; VALUE=$ts\n");
 //			}
 //			return $ret;
 //		}
@@ -2042,11 +2015,11 @@ public class XomwGlobalFunctions {
 //		* @param String $ts
 //		* @return String
 //		*/
-//		function wfTimestampOrNull( $outputtype = TS_UNIX, $ts = null ) {
-//			if ( is_null( $ts ) ) {
+//		function wfTimestampOrNull($outputtype = TS_UNIX, $ts = null) {
+//			if (is_null($ts)) {
 //				return null;
 //			} else {
-//				return wfTimestamp( $outputtype, $ts );
+//				return wfTimestamp($outputtype, $ts);
 //			}
 //		}
 //
@@ -2057,7 +2030,7 @@ public class XomwGlobalFunctions {
 //		*/
 //		function wfTimestampNow() {
 //			# return NOW
-//			return MWTimestamp::now( TS_MW );
+//			return MWTimestamp::now(TS_MW);
 //		}
 //
 //		/**
@@ -2067,8 +2040,8 @@ public class XomwGlobalFunctions {
 //		*/
 //		function wfIsWindows() {
 //			static $isWindows = null;
-//			if ( $isWindows === null ) {
-//				$isWindows = strtoupper( substr( PHP_OS, 0, 3 ) ) === 'WIN';
+//			if ($isWindows === null) {
+//				$isWindows = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
 //			}
 //			return $isWindows;
 //		}
@@ -2079,7 +2052,7 @@ public class XomwGlobalFunctions {
 //		* @return boolean
 //		*/
 //		function wfIsHHVM() {
-//			return defined( 'HHVM_VERSION' );
+//			return defined('HHVM_VERSION');
 //		}
 //
 //		/**
@@ -2096,7 +2069,7 @@ public class XomwGlobalFunctions {
 //		function wfTempDir() {
 //			global $wgTmpDirectory;
 //
-//			if ( $wgTmpDirectory !== false ) {
+//			if ($wgTmpDirectory !== false) {
 //				return $wgTmpDirectory;
 //			}
 //
@@ -2112,40 +2085,40 @@ public class XomwGlobalFunctions {
 //		* @throws MWException
 //		* @return boolean
 //		*/
-//		function wfMkdirParents( $dir, $mode = null, $caller = null ) {
+//		function wfMkdirParents($dir, $mode = null, $caller = null) {
 //			global $wgDirectoryMode;
 //
-//			if ( FileBackend::isStoragePath( $dir ) ) { // sanity
-//				throw new MWException( __FUNCTION__ . " given storage path '$dir'." );
+//			if (FileBackend::isStoragePath($dir)) { // sanity
+//				throw new MWException(__FUNCTION__ . " given storage path '$dir'.");
 //			}
 //
-//			if ( !is_null( $caller ) ) {
-//				wfDebug( "$caller: called wfMkdirParents($dir)\n" );
+//			if (!is_null($caller)) {
+//				wfDebug("$caller: called wfMkdirParents($dir)\n");
 //			}
 //
-//			if ( strval( $dir ) === '' || is_dir( $dir ) ) {
+//			if (strval($dir) === '' || is_dir($dir)) {
 //				return true;
 //			}
 //
-//			$dir = str_replace( [ '\\', '/' ], DIRECTORY_SEPARATOR, $dir );
+//			$dir = str_replace([ '\\', '/' ], DIRECTORY_SEPARATOR, $dir);
 //
-//			if ( is_null( $mode ) ) {
+//			if (is_null($mode)) {
 //				$mode = $wgDirectoryMode;
 //			}
 //
 //			// Turn off the normal warning, we're doing our own below
 //			MediaWiki\suppressWarnings();
-//			$ok = mkdir( $dir, $mode, true ); // PHP5 <3
+//			$ok = mkdir($dir, $mode, true); // PHP5 <3
 //			MediaWiki\restoreWarnings();
 //
-//			if ( !$ok ) {
+//			if (!$ok) {
 //				// directory may have been created on another request since we last checked
-//				if ( is_dir( $dir ) ) {
+//				if (is_dir($dir)) {
 //					return true;
 //				}
 //
 //				// PHP doesn't report the path in its warning message, so add our own to aid in diagnosis.
-//				wfLogWarning( sprintf( "failed to mkdir \"%s\" mode 0%o", $dir, $mode ) );
+//				wfLogWarning(sprintf("failed to mkdir \"%s\" mode 0%o", $dir, $mode));
 //			}
 //			return $ok;
 //		}
@@ -2155,22 +2128,22 @@ public class XomwGlobalFunctions {
 //		* Does not hide error.
 //		* @param String $dir
 //		*/
-//		function wfRecursiveRemoveDir( $dir ) {
-//			wfDebug( __FUNCTION__ . "( $dir )\n" );
+//		function wfRecursiveRemoveDir($dir) {
+//			wfDebug(__FUNCTION__ . "($dir)\n");
 //			// taken from https://secure.php.net/manual/en/function.rmdir.php#98622
-//			if ( is_dir( $dir ) ) {
-//				$objects = scandir( $dir );
-//				foreach ( $objects as $Object ) {
-//					if ( $Object != "." && $Object != ".." ) {
-//						if ( filetype( $dir . '/' . $Object ) == "dir" ) {
-//							wfRecursiveRemoveDir( $dir . '/' . $Object );
+//			if (is_dir($dir)) {
+//				$objects = scandir($dir);
+//				foreach ($objects as $Object) {
+//					if ($Object != "." && $Object != "..") {
+//						if (filetype($dir . '/' . $Object) == "dir") {
+//							wfRecursiveRemoveDir($dir . '/' . $Object);
 //						} else {
-//							unlink( $dir . '/' . $Object );
+//							unlink($dir . '/' . $Object);
 //						}
 //					}
 //				}
-//				reset( $objects );
-//				rmdir( $dir );
+//				reset($objects);
+//				rmdir($dir);
 //			}
 //		}
 //
@@ -2180,9 +2153,9 @@ public class XomwGlobalFunctions {
 //		* @param boolean $round Whether or not to round the value, default true
 //		* @return String
 //		*/
-//		function wfPercent( $nr, $acc = 2, $round = true ) {
-//			$ret = sprintf( "%.${acc}f", $nr );
-//			return $round ? round( $ret, $acc ) . '%' : "$ret%";
+//		function wfPercent($nr, $acc = 2, $round = true) {
+//			$ret = sprintf("%.${acc}f", $nr);
+//			return $round ? round($ret, $acc) . '%' : "$ret%";
 //		}
 //
 //		/**
@@ -2208,13 +2181,13 @@ public class XomwGlobalFunctions {
 //		* @param String $setting
 //		* @return boolean
 //		*/
-//		function wfIniGetBool( $setting ) {
-//			$val = strtolower( ini_get( $setting ) );
+//		function wfIniGetBool($setting) {
+//			$val = strtolower(ini_get($setting));
 //			// 'on' and 'true' can't have whitespace around them, but '1' can.
 //			return $val == 'on'
 //				|| $val == 'true'
 //				|| $val == 'yes'
-//				|| preg_match( "/^\s*[+-]?0*[1-9]/", $val ); // approx C atoi() function
+//				|| preg_match("/^\s*[+-]?0*[1-9]/", $val); // approx C atoi() function
 //		}
 //
 //		/**
@@ -2227,26 +2200,26 @@ public class XomwGlobalFunctions {
 //		* @param String ... strings to escape and glue together, or a single array of strings parameter
 //		* @return String
 //		*/
-//		function wfEscapeShellArg( /*...*/ ) {
+//		function wfEscapeShellArg(/*...*/) {
 //			wfInitShellLocale();
 //
 //			$args = func_get_args();
-//			if ( count( $args ) === 1 && is_array( reset( $args ) ) ) {
+//			if (count($args) === 1 && is_array(reset($args))) {
 //				// If only one argument has been passed, and that argument is an array,
 //				// treat it as a list of arguments
-//				$args = reset( $args );
+//				$args = reset($args);
 //			}
 //
 //			$first = true;
 //			$retVal = '';
-//			foreach ( $args as $arg ) {
-//				if ( !$first ) {
+//			foreach ($args as $arg) {
+//				if (!$first) {
 //					$retVal .= ' ';
 //				} else {
 //					$first = false;
 //				}
 //
-//				if ( wfIsWindows() ) {
+//				if (wfIsWindows()) {
 //					// Escaping for an MSVC-style command line parser and CMD.EXE
 //					// @codingStandardsIgnoreStart For long URLs
 //					// Refs:
@@ -2256,16 +2229,16 @@ public class XomwGlobalFunctions {
 //					//  * CR r63214
 //					// Double the backslashes before any double quotes. Escape the double quotes.
 //					// @codingStandardsIgnoreEnd
-//					$tokens = preg_split( '/(\\\\*")/', $arg, -1, PREG_SPLIT_DELIM_CAPTURE );
+//					$tokens = preg_split('/(\\\\*")/', $arg, -1, PREG_SPLIT_DELIM_CAPTURE);
 //					$arg = '';
 //					$iteration = 0;
-//					foreach ( $tokens as $token ) {
-//						if ( $iteration % 2 == 1 ) {
+//					foreach ($tokens as $token) {
+//						if ($iteration % 2 == 1) {
 //							// Delimiter, a double quote preceded by zero or more slashes
-//							$arg .= str_replace( '\\', '\\\\', substr( $token, 0, -1 ) ) . '\\"';
-//						} elseif ( $iteration % 4 == 2 ) {
+//							$arg .= str_replace('\\', '\\\\', substr($token, 0, -1)) . '\\"';
+//						} elseif ($iteration % 4 == 2) {
 //							// ^ in $token will be outside quotes, need to be escaped
-//							$arg .= str_replace( '^', '^^', $token );
+//							$arg .= str_replace('^', '^^', $token);
 //						} else { // $iteration % 4 == 0
 //							// ^ in $token will appear inside double quotes, so leave as is
 //							$arg .= $token;
@@ -2275,14 +2248,14 @@ public class XomwGlobalFunctions {
 //					// Double the backslashes before the end of the String, because
 //					// we will soon add a quote
 //					$m = [];
-//					if ( preg_match( '/^(.*?)(\\\\+)$/', $arg, $m ) ) {
-//						$arg = $m[1] . str_replace( '\\', '\\\\', $m[2] );
+//					if (preg_match('/^(.*?)(\\\\+)$/', $arg, $m)) {
+//						$arg = $m[1] . str_replace('\\', '\\\\', $m[2]);
 //					}
 //
 //					// Add surrounding quotes
 //					$retVal .= '"' . $arg . '"';
 //				} else {
-//					$retVal .= escapeshellarg( $arg );
+//					$retVal .= escapeshellarg($arg);
 //				}
 //			}
 //			return $retVal;
@@ -2296,9 +2269,9 @@ public class XomwGlobalFunctions {
 //		*/
 //		function wfShellExecDisabled() {
 //			static $disabled = null;
-//			if ( is_null( $disabled ) ) {
-//				if ( !function_exists( 'proc_open' ) ) {
-//					wfDebug( "proc_open() is disabled\n" );
+//			if (is_null($disabled)) {
+//				if (!function_exists('proc_open')) {
+//					wfDebug("proc_open() is disabled\n");
 //					$disabled = 'disabled';
 //				} else {
 //					$disabled = false;
@@ -2329,101 +2302,101 @@ public class XomwGlobalFunctions {
 //		*
 //		* @return String Collected stdout as a String
 //		*/
-//		function wfShellExec( $cmd, &$retval = null, $environ = [],
+//		function wfShellExec($cmd, &$retval = null, $environ = [],
 //			$limits = [], $options = []
 //		) {
 //			global $IP, $wgMaxShellMemory, $wgMaxShellFileSize, $wgMaxShellTime,
 //				$wgMaxShellWallClockTime, $wgShellCgroup;
 //
 //			$disabled = wfShellExecDisabled();
-//			if ( $disabled ) {
+//			if ($disabled) {
 //				$retval = 1;
 //				return 'Unable to run external programs, proc_open() is disabled.';
 //			}
 //
-//			$includeStderr = isset( $options['duplicateStderr'] ) && $options['duplicateStderr'];
-//			$profileMethod = isset( $options['profileMethod'] ) ? $options['profileMethod'] : wfGetCaller();
+//			$includeStderr = isset($options['duplicateStderr']) && $options['duplicateStderr'];
+//			$profileMethod = isset($options['profileMethod']) ? $options['profileMethod'] : wfGetCaller();
 //
 //			wfInitShellLocale();
 //
 //			$envcmd = '';
-//			foreach ( $environ as $k => $v ) {
-//				if ( wfIsWindows() ) {
+//			foreach ($environ as $k => $v) {
+//				if (wfIsWindows()) {
 //					/* Surrounding a set in quotes (method used by wfEscapeShellArg) makes the quotes themselves
 //					* appear in the environment variable, so we must use carat escaping as documented in
 //					* https://technet.microsoft.com/en-us/library/cc723564.aspx
 //					* Note however that the quote isn't listed there, but is needed, and the parentheses
 //					* are listed there but doesn't appear to need it.
 //					*/
-//					$envcmd .= "set $k=" . preg_replace( '/([&|()<>^"])/', '^\\1', $v ) . '&& ';
+//					$envcmd .= "set $k=" . preg_replace('/([&|()<>^"])/', '^\\1', $v) . '&& ';
 //				} else {
 //					/* Assume this is a POSIX shell, thus required to accept variable assignments before the command
 //					* http://www.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_09_01
 //					*/
-//					$envcmd .= "$k=" . escapeshellarg( $v ) . ' ';
+//					$envcmd .= "$k=" . escapeshellarg($v) . ' ';
 //				}
 //			}
-//			if ( is_array( $cmd ) ) {
-//				$cmd = wfEscapeShellArg( $cmd );
+//			if (is_array($cmd)) {
+//				$cmd = wfEscapeShellArg($cmd);
 //			}
 //
 //			$cmd = $envcmd . $cmd;
 //
 //			$useLogPipe = false;
-//			if ( is_executable( '/bin/bash' ) ) {
-//				$time = intval( isset( $limits['time'] ) ? $limits['time'] : $wgMaxShellTime );
-//				if ( isset( $limits['walltime'] ) ) {
-//					$wallTime = intval( $limits['walltime'] );
-//				} elseif ( isset( $limits['time'] ) ) {
+//			if (is_executable('/bin/bash')) {
+//				$time = intval(isset($limits['time']) ? $limits['time'] : $wgMaxShellTime);
+//				if (isset($limits['walltime'])) {
+//					$wallTime = intval($limits['walltime']);
+//				} elseif (isset($limits['time'])) {
 //					$wallTime = $time;
 //				} else {
-//					$wallTime = intval( $wgMaxShellWallClockTime );
+//					$wallTime = intval($wgMaxShellWallClockTime);
 //				}
-//				$mem = intval( isset( $limits['memory'] ) ? $limits['memory'] : $wgMaxShellMemory );
-//				$filesize = intval( isset( $limits['filesize'] ) ? $limits['filesize'] : $wgMaxShellFileSize );
+//				$mem = intval(isset($limits['memory']) ? $limits['memory'] : $wgMaxShellMemory);
+//				$filesize = intval(isset($limits['filesize']) ? $limits['filesize'] : $wgMaxShellFileSize);
 //
-//				if ( $time > 0 || $mem > 0 || $filesize > 0 || $wallTime > 0 ) {
-//					$cmd = '/bin/bash ' . escapeshellarg( "$IP/includes/limit.sh" ) . ' ' .
-//						escapeshellarg( $cmd ) . ' ' .
+//				if ($time > 0 || $mem > 0 || $filesize > 0 || $wallTime > 0) {
+//					$cmd = '/bin/bash ' . escapeshellarg("$IP/includes/limit.sh") . ' ' .
+//						escapeshellarg($cmd) . ' ' .
 //						escapeshellarg(
-//							"MW_INCLUDE_STDERR=" . ( $includeStderr ? '1' : '' ) . ';' .
+//							"MW_INCLUDE_STDERR=" . ($includeStderr ? '1' : '') . ';' .
 //							"MW_CPU_LIMIT=$time; " .
-//							'MW_CGROUP=' . escapeshellarg( $wgShellCgroup ) . '; ' .
+//							'MW_CGROUP=' . escapeshellarg($wgShellCgroup) . '; ' .
 //							"MW_MEM_LIMIT=$mem; " .
 //							"MW_FILE_SIZE_LIMIT=$filesize; " .
 //							"MW_WALL_CLOCK_LIMIT=$wallTime; " .
 //							"MW_USE_LOG_PIPE=yes"
 //						);
 //					$useLogPipe = true;
-//				} elseif ( $includeStderr ) {
+//				} elseif ($includeStderr) {
 //					$cmd .= ' 2>&1';
 //				}
-//			} elseif ( $includeStderr ) {
+//			} elseif ($includeStderr) {
 //				$cmd .= ' 2>&1';
 //			}
-//			wfDebug( "wfShellExec: $cmd\n" );
+//			wfDebug("wfShellExec: $cmd\n");
 //
 //			// Don't try to execute commands that exceed Linux's MAX_ARG_STRLEN.
 //			// Other platforms may be more accomodating, but we don't want to be
 //			// accomodating, because very long commands probably include user
 //			// input. See T129506.
-//			if ( strlen( $cmd ) > SHELL_MAX_ARG_STRLEN ) {
-//				throw new Exception( __METHOD__ .
-//					'(): total length of $cmd must not exceed SHELL_MAX_ARG_STRLEN' );
+//			if (strlen($cmd) > SHELL_MAX_ARG_STRLEN) {
+//				throw new Exception(__METHOD__ .
+//					'(): total length of $cmd must not exceed SHELL_MAX_ARG_STRLEN');
 //			}
 //
 //			$desc = [
 //				0 => [ 'file', 'php://stdin', 'r' ],
 //				1 => [ 'pipe', 'w' ],
 //				2 => [ 'file', 'php://stderr', 'w' ] ];
-//			if ( $useLogPipe ) {
+//			if ($useLogPipe) {
 //				$desc[3] = [ 'pipe', 'w' ];
 //			}
 //			$pipes = null;
-//			$scoped = Profiler::instance()->scopedProfileIn( __FUNCTION__ . '-' . $profileMethod );
-//			$proc = proc_open( $cmd, $desc, $pipes );
-//			if ( !$proc ) {
-//				wfDebugLog( 'exec', "proc_open() failed: $cmd" );
+//			$scoped = Profiler::instance()->scopedProfileIn(__FUNCTION__ . '-' . $profileMethod);
+//			$proc = proc_open($cmd, $desc, $pipes);
+//			if (!$proc) {
+//				wfDebugLog('exec', "proc_open() failed: $cmd");
 //				$retval = -1;
 //				return '';
 //			}
@@ -2443,19 +2416,19 @@ public class XomwGlobalFunctions {
 //			* call" is String which according to the Linux manual is "possibly"
 //			* localised according to LC_MESSAGES.
 //			*/
-//			$eintr = defined( 'SOCKET_EINTR' ) ? SOCKET_EINTR : 4;
+//			$eintr = defined('SOCKET_EINTR') ? SOCKET_EINTR : 4;
 //			$eintrMessage = "stream_select(): unable to select [$eintr]";
 //
 //			$running = true;
 //			$timeout = null;
 //			$numReadyPipes = 0;
 //
-//			while ( $running === true || $numReadyPipes !== 0 ) {
-//				if ( $running ) {
-//					$status = proc_get_status( $proc );
+//			while ($running === true || $numReadyPipes !== 0) {
+//				if ($running) {
+//					$status = proc_get_status($proc);
 //					// If the process has terminated, switch to nonblocking selects
 //					// for getting any data still waiting to be read.
-//					if ( !$status['running'] ) {
+//					if (!$status['running']) {
 //						$running = false;
 //						$timeout = 0;
 //					}
@@ -2465,83 +2438,83 @@ public class XomwGlobalFunctions {
 //
 //				// Clear last error
 //				// @codingStandardsIgnoreStart Generic.PHP.NoSilencedErrors.Discouraged
-//				@trigger_error( '' );
-//				$numReadyPipes = @stream_select( $readyPipes, $emptyArray, $emptyArray, $timeout );
-//				if ( $numReadyPipes === false ) {
+//				@trigger_error('');
+//				$numReadyPipes = @stream_select($readyPipes, $emptyArray, $emptyArray, $timeout);
+//				if ($numReadyPipes === false) {
 //					// @codingStandardsIgnoreEnd
 //					$error = error_get_last();
-//					if ( strncmp( $error['message'], $eintrMessage, strlen( $eintrMessage ) ) == 0 ) {
+//					if (strncmp($error['message'], $eintrMessage, strlen($eintrMessage)) == 0) {
 //						continue;
 //					} else {
-//						trigger_error( $error['message'], E_USER_WARNING );
+//						trigger_error($error['message'], E_USER_WARNING);
 //						$logMsg = $error['message'];
 //						break;
 //					}
 //				}
-//				foreach ( $readyPipes as $fd => $pipe ) {
-//					$block = fread( $pipe, 65536 );
-//					if ( $block === '' ) {
+//				foreach ($readyPipes as $fd => $pipe) {
+//					$block = fread($pipe, 65536);
+//					if ($block === '') {
 //						// End of file
-//						fclose( $pipes[$fd] );
-//						unset( $pipes[$fd] );
-//						if ( !$pipes ) {
+//						fclose($pipes[$fd]);
+//						unset($pipes[$fd]);
+//						if (!$pipes) {
 //							break 2;
 //						}
-//					} elseif ( $block === false ) {
+//					} elseif ($block === false) {
 //						// Read error
 //						$logMsg = "Error reading from pipe";
 //						break 2;
-//					} elseif ( $fd == 1 ) {
+//					} elseif ($fd == 1) {
 //						// From stdout
 //						$outBuffer .= $block;
-//					} elseif ( $fd == 3 ) {
+//					} elseif ($fd == 3) {
 //						// From log FD
 //						$logBuffer .= $block;
-//						if ( strpos( $block, "\n" ) !== false ) {
-//							$lines = explode( "\n", $logBuffer );
-//							$logBuffer = array_pop( $lines );
-//							foreach ( $lines as $line ) {
-//								wfDebugLog( 'exec', $line );
+//						if (strpos($block, "\n") !== false) {
+//							$lines = explode("\n", $logBuffer);
+//							$logBuffer = array_pop($lines);
+//							foreach ($lines as $line) {
+//								wfDebugLog('exec', $line);
 //							}
 //						}
 //					}
 //				}
 //			}
 //
-//			foreach ( $pipes as $pipe ) {
-//				fclose( $pipe );
+//			foreach ($pipes as $pipe) {
+//				fclose($pipe);
 //			}
 //
 //			// Use the status previously collected if possible, since proc_get_status()
 //			// just calls waitpid() which will not return anything useful the second time.
-//			if ( $running ) {
-//				$status = proc_get_status( $proc );
+//			if ($running) {
+//				$status = proc_get_status($proc);
 //			}
 //
-//			if ( $logMsg !== false ) {
+//			if ($logMsg !== false) {
 //				// Read/select error
 //				$retval = -1;
-//				proc_close( $proc );
-//			} elseif ( $status['signaled'] ) {
+//				proc_close($proc);
+//			} elseif ($status['signaled']) {
 //				$logMsg = "Exited with signal {$status['termsig']}";
 //				$retval = 128 + $status['termsig'];
-//				proc_close( $proc );
+//				proc_close($proc);
 //			} else {
-//				if ( $status['running'] ) {
-//					$retval = proc_close( $proc );
+//				if ($status['running']) {
+//					$retval = proc_close($proc);
 //				} else {
 //					$retval = $status['exitcode'];
-//					proc_close( $proc );
+//					proc_close($proc);
 //				}
-//				if ( $retval == 127 ) {
+//				if ($retval == 127) {
 //					$logMsg = "Possibly missing executable file";
-//				} elseif ( $retval >= 129 && $retval <= 192 ) {
-//					$logMsg = "Probably exited with signal " . ( $retval - 128 );
+//				} elseif ($retval >= 129 && $retval <= 192) {
+//					$logMsg = "Probably exited with signal " . ($retval - 128);
 //				}
 //			}
 //
-//			if ( $logMsg !== false ) {
-//				wfDebugLog( 'exec', "$logMsg: $cmd" );
+//			if ($logMsg !== false) {
+//				wfDebugLog('exec', "$logMsg: $cmd");
 //			}
 //
 //			return $outBuffer;
@@ -2563,9 +2536,9 @@ public class XomwGlobalFunctions {
 //		*   this overwrites the global wgMaxShell* limits.
 //		* @return String Collected stdout and stderr as a String
 //		*/
-//		function wfShellExecWithStderr( $cmd, &$retval = null, $environ = [], $limits = [] ) {
-//			return wfShellExec( $cmd, $retval, $environ, $limits,
-//				[ 'duplicateStderr' => true, 'profileMethod' => wfGetCaller() ] );
+//		function wfShellExecWithStderr($cmd, &$retval = null, $environ = [], $limits = []) {
+//			return wfShellExec($cmd, $retval, $environ, $limits,
+//				[ 'duplicateStderr' => true, 'profileMethod' => wfGetCaller() ]);
 //		}
 //
 //		/**
@@ -2574,13 +2547,13 @@ public class XomwGlobalFunctions {
 //		*/
 //		function wfInitShellLocale() {
 //			static $done = false;
-//			if ( $done ) {
+//			if ($done) {
 //				return;
 //			}
 //			$done = true;
 //			global $wgShellLocale;
-//			putenv( "LC_CTYPE=$wgShellLocale" );
-//			setlocale( LC_CTYPE, $wgShellLocale );
+//			putenv("LC_CTYPE=$wgShellLocale");
+//			setlocale(LC_CTYPE, $wgShellLocale);
 //		}
 //
 //		/**
@@ -2595,18 +2568,18 @@ public class XomwGlobalFunctions {
 //		* 		'wrapper': Path to a PHP wrapper to handle the maintenance script
 //		* @return String
 //		*/
-//		function wfShellWikiCmd( $script, array $parameters = [], array $options = [] ) {
+//		function wfShellWikiCmd($script, array $parameters = [], array $options = []) {
 //			global $wgXophpCli;
 //			// Give site config file a chance to run the script in a wrapper.
 //			// The caller may likely want to call wfBasename() on $script.
-//			Hooks::run( 'wfShellWikiCmd', [ &$script, &$parameters, &$options ] );
-//			$cmd = isset( $options['php'] ) ? [ $options['php'] ] : [ $wgXophpCli ];
-//			if ( isset( $options['wrapper'] ) ) {
+//			Hooks::run('wfShellWikiCmd', [ &$script, &$parameters, &$options ]);
+//			$cmd = isset($options['php']) ? [ $options['php'] ] : [ $wgXophpCli ];
+//			if (isset($options['wrapper'])) {
 //				$cmd[] = $options['wrapper'];
 //			}
 //			$cmd[] = $script;
 //			// Escape each parameter for shell
-//			return wfEscapeShellArg( array_merge( $cmd, $parameters ) );
+//			return wfEscapeShellArg(array_merge($cmd, $parameters));
 //		}
 //
 //		/**
@@ -2619,68 +2592,68 @@ public class XomwGlobalFunctions {
 //		* @param String $result
 //		* @return boolean
 //		*/
-//		function wfMerge( $old, $mine, $yours, &$result ) {
+//		function wfMerge($old, $mine, $yours, &$result) {
 //			global $wgDiff3;
 //
 //			# This check may also protect against code injection in
 //			# case of broken installations.
 //			MediaWiki\suppressWarnings();
-//			$haveDiff3 = $wgDiff3 && file_exists( $wgDiff3 );
+//			$haveDiff3 = $wgDiff3 && file_exists($wgDiff3);
 //			MediaWiki\restoreWarnings();
 //
-//			if ( !$haveDiff3 ) {
-//				wfDebug( "diff3 not found\n" );
+//			if (!$haveDiff3) {
+//				wfDebug("diff3 not found\n");
 //				return false;
 //			}
 //
 //			# Make temporary files
 //			$td = wfTempDir();
-//			$oldtextFile = fopen( $oldtextName = tempnam( $td, 'merge-old-' ), 'w' );
-//			$mytextFile = fopen( $mytextName = tempnam( $td, 'merge-mine-' ), 'w' );
-//			$yourtextFile = fopen( $yourtextName = tempnam( $td, 'merge-your-' ), 'w' );
+//			$oldtextFile = fopen($oldtextName = tempnam($td, 'merge-old-'), 'w');
+//			$mytextFile = fopen($mytextName = tempnam($td, 'merge-mine-'), 'w');
+//			$yourtextFile = fopen($yourtextName = tempnam($td, 'merge-your-'), 'w');
 //
 //			# NOTE: diff3 issues a warning to stderr if any of the files does not end with
 //			#       a newline character. To avoid this, we normalize the trailing whitespace before
 //			#       creating the diff.
 //
-//			fwrite( $oldtextFile, rtrim( $old ) . "\n" );
-//			fclose( $oldtextFile );
-//			fwrite( $mytextFile, rtrim( $mine ) . "\n" );
-//			fclose( $mytextFile );
-//			fwrite( $yourtextFile, rtrim( $yours ) . "\n" );
-//			fclose( $yourtextFile );
+//			fwrite($oldtextFile, rtrim($old) . "\n");
+//			fclose($oldtextFile);
+//			fwrite($mytextFile, rtrim($mine) . "\n");
+//			fclose($mytextFile);
+//			fwrite($yourtextFile, rtrim($yours) . "\n");
+//			fclose($yourtextFile);
 //
 //			# Check for a conflict
-//			$cmd = wfEscapeShellArg( $wgDiff3, '-a', '--overlap-only', $mytextName,
-//				$oldtextName, $yourtextName );
-//			$handle = popen( $cmd, 'r' );
+//			$cmd = wfEscapeShellArg($wgDiff3, '-a', '--overlap-only', $mytextName,
+//				$oldtextName, $yourtextName);
+//			$handle = popen($cmd, 'r');
 //
-//			if ( fgets( $handle, 1024 ) ) {
+//			if (fgets($handle, 1024)) {
 //				$conflict = true;
 //			} else {
 //				$conflict = false;
 //			}
-//			pclose( $handle );
+//			pclose($handle);
 //
 //			# Merge differences
-//			$cmd = wfEscapeShellArg( $wgDiff3, '-a', '-e', '--merge', $mytextName,
-//				$oldtextName, $yourtextName );
-//			$handle = popen( $cmd, 'r' );
+//			$cmd = wfEscapeShellArg($wgDiff3, '-a', '-e', '--merge', $mytextName,
+//				$oldtextName, $yourtextName);
+//			$handle = popen($cmd, 'r');
 //			$result = '';
 //			do {
-//				$data = fread( $handle, 8192 );
-//				if ( strlen( $data ) == 0 ) {
+//				$data = fread($handle, 8192);
+//				if (strlen($data) == 0) {
 //					break;
 //				}
 //				$result .= $data;
-//			} while ( true );
-//			pclose( $handle );
-//			unlink( $mytextName );
-//			unlink( $oldtextName );
-//			unlink( $yourtextName );
+//			} while (true);
+//			pclose($handle);
+//			unlink($mytextName);
+//			unlink($oldtextName);
+//			unlink($yourtextName);
 //
-//			if ( $result === '' && $old !== '' && !$conflict ) {
-//				wfDebug( "Unexpected null result from diff3. Command: $cmd\n" );
+//			if ($result === '' && $old !== '' && !$conflict) {
+//				wfDebug("Unexpected null result from diff3. Command: $cmd\n");
 //				$conflict = true;
 //			}
 //			return !$conflict;
@@ -2697,70 +2670,70 @@ public class XomwGlobalFunctions {
 //		* @param String $params Command-line options for the diff command.
 //		* @return String Unified diff of $before and $after
 //		*/
-//		function wfDiff( $before, $after, $params = '-u' ) {
-//			if ( $before == $after ) {
+//		function wfDiff($before, $after, $params = '-u') {
+//			if ($before == $after) {
 //				return '';
 //			}
 //
 //			global $wgDiff;
 //			MediaWiki\suppressWarnings();
-//			$haveDiff = $wgDiff && file_exists( $wgDiff );
+//			$haveDiff = $wgDiff && file_exists($wgDiff);
 //			MediaWiki\restoreWarnings();
 //
 //			# This check may also protect against code injection in
 //			# case of broken installations.
-//			if ( !$haveDiff ) {
-//				wfDebug( "diff executable not found\n" );
-//				$diffs = new Diff( explode( "\n", $before ), explode( "\n", $after ) );
+//			if (!$haveDiff) {
+//				wfDebug("diff executable not found\n");
+//				$diffs = new Diff(explode("\n", $before), explode("\n", $after));
 //				$format = new UnifiedDiffFormatter();
-//				return $format->format( $diffs );
+//				return $format->format($diffs);
 //			}
 //
 //			# Make temporary files
 //			$td = wfTempDir();
-//			$oldtextFile = fopen( $oldtextName = tempnam( $td, 'merge-old-' ), 'w' );
-//			$newtextFile = fopen( $newtextName = tempnam( $td, 'merge-your-' ), 'w' );
+//			$oldtextFile = fopen($oldtextName = tempnam($td, 'merge-old-'), 'w');
+//			$newtextFile = fopen($newtextName = tempnam($td, 'merge-your-'), 'w');
 //
-//			fwrite( $oldtextFile, $before );
-//			fclose( $oldtextFile );
-//			fwrite( $newtextFile, $after );
-//			fclose( $newtextFile );
+//			fwrite($oldtextFile, $before);
+//			fclose($oldtextFile);
+//			fwrite($newtextFile, $after);
+//			fclose($newtextFile);
 //
 //			// Get the diff of the two files
-//			$cmd = "$wgDiff " . $params . ' ' . wfEscapeShellArg( $oldtextName, $newtextName );
+//			$cmd = "$wgDiff " . $params . ' ' . wfEscapeShellArg($oldtextName, $newtextName);
 //
-//			$h = popen( $cmd, 'r' );
-//			if ( !$h ) {
-//				unlink( $oldtextName );
-//				unlink( $newtextName );
-//				throw new Exception( __METHOD__ . '(): popen() failed' );
+//			$h = popen($cmd, 'r');
+//			if (!$h) {
+//				unlink($oldtextName);
+//				unlink($newtextName);
+//				throw new Exception(__METHOD__ . '(): popen() failed');
 //			}
 //
 //			$diff = '';
 //
 //			do {
-//				$data = fread( $h, 8192 );
-//				if ( strlen( $data ) == 0 ) {
+//				$data = fread($h, 8192);
+//				if (strlen($data) == 0) {
 //					break;
 //				}
 //				$diff .= $data;
-//			} while ( true );
+//			} while (true);
 //
 //			// Clean up
-//			pclose( $h );
-//			unlink( $oldtextName );
-//			unlink( $newtextName );
+//			pclose($h);
+//			unlink($oldtextName);
+//			unlink($newtextName);
 //
 //			// Kill the --- and +++ lines. They're not useful.
-//			$diff_lines = explode( "\n", $diff );
-//			if ( isset( $diff_lines[0] ) && strpos( $diff_lines[0], '---' ) === 0 ) {
-//				unset( $diff_lines[0] );
+//			$diff_lines = explode("\n", $diff);
+//			if (isset($diff_lines[0]) && strpos($diff_lines[0], '---') === 0) {
+//				unset($diff_lines[0]);
 //			}
-//			if ( isset( $diff_lines[1] ) && strpos( $diff_lines[1], '+++' ) === 0 ) {
-//				unset( $diff_lines[1] );
+//			if (isset($diff_lines[1]) && strpos($diff_lines[1], '+++') === 0) {
+//				unset($diff_lines[1]);
 //			}
 //
-//			$diff = implode( "\n", $diff_lines );
+//			$diff = implode("\n", $diff_lines);
 //
 //			return $diff;
 //		}
@@ -2780,11 +2753,11 @@ public class XomwGlobalFunctions {
 //		* @param String|int|float $req_ver The version to check, can be a String, an integer, or a float
 //		* @throws MWException
 //		*/
-//		function wfUsePHP( $req_ver ) {
+//		function wfUsePHP($req_ver) {
 //			$php_ver = PHP_VERSION;
 //
-//			if ( version_compare( $php_ver, (String)$req_ver, '<' ) ) {
-//				throw new MWException( "PHP $req_ver required--this is only $php_ver" );
+//			if (version_compare($php_ver, (String)$req_ver, '<')) {
+//				throw new MWException("PHP $req_ver required--this is only $php_ver");
 //			}
 //		}
 //
@@ -2800,7 +2773,7 @@ public class XomwGlobalFunctions {
 //		* function, if you want to allow the 'wmf' development versions add a 'c' (or
 //		* any single letter other than 'a', 'b' or 'p') as a post-fix to your
 //		* targeted version number. For example if you wanted to allow any variation
-//		* of 1.22 use `wfUseMW( '1.22c' )`. Using an 'a' or 'b' instead of 'c' will
+//		* of 1.22 use `wfUseMW('1.22c')`. Using an 'a' or 'b' instead of 'c' will
 //		* not result in the same comparison due to the @gplx.Internal protected logic of
 //		* version_compare().
 //		*
@@ -2810,11 +2783,11 @@ public class XomwGlobalFunctions {
 //		* @param String|int|float $req_ver The version to check, can be a String, an integer, or a float
 //		* @throws MWException
 //		*/
-//		function wfUseMW( $req_ver ) {
+//		function wfUseMW($req_ver) {
 //			global $wgVersion;
 //
-//			if ( version_compare( $wgVersion, (String)$req_ver, '<' ) ) {
-//				throw new MWException( "MediaWiki $req_ver required--this is only $wgVersion" );
+//			if (version_compare($wgVersion, (String)$req_ver, '<')) {
+//				throw new MWException("MediaWiki $req_ver required--this is only $wgVersion");
 //			}
 //		}
 //
@@ -2830,15 +2803,15 @@ public class XomwGlobalFunctions {
 //		* @param String $suffix String to remove if present
 //		* @return String
 //		*/
-//		function wfBaseName( $path, $suffix = '' ) {
-//			if ( $suffix == '' ) {
+//		function wfBaseName($path, $suffix = '') {
+//			if ($suffix == '') {
 //				$encSuffix = '';
 //			} else {
-//				$encSuffix = '(?:' . preg_quote( $suffix, '#' ) . ')?';
+//				$encSuffix = '(?:' . preg_quote($suffix, '#') . ')?';
 //			}
 //
 //			$matches = [];
-//			if ( preg_match( "#([^/\\\\]*?){$encSuffix}[/\\\\]*$#", $path, $matches ) ) {
+//			if (preg_match("#([^/\\\\]*?){$encSuffix}[/\\\\]*$#", $path, $matches)) {
 //				return $matches[1];
 //			} else {
 //				return '';
@@ -2854,40 +2827,40 @@ public class XomwGlobalFunctions {
 //		* @param String $from Absolute source path, directory only
 //		* @return String
 //		*/
-//		function wfRelativePath( $path, $from ) {
+//		function wfRelativePath($path, $from) {
 //			// Normalize mixed input on Windows...
-//			$path = str_replace( '/', DIRECTORY_SEPARATOR, $path );
-//			$from = str_replace( '/', DIRECTORY_SEPARATOR, $from );
+//			$path = str_replace('/', DIRECTORY_SEPARATOR, $path);
+//			$from = str_replace('/', DIRECTORY_SEPARATOR, $from);
 //
 //			// Trim trailing slashes -- fix for drive root
-//			$path = rtrim( $path, DIRECTORY_SEPARATOR );
-//			$from = rtrim( $from, DIRECTORY_SEPARATOR );
+//			$path = rtrim($path, DIRECTORY_SEPARATOR);
+//			$from = rtrim($from, DIRECTORY_SEPARATOR);
 //
-//			$pieces = explode( DIRECTORY_SEPARATOR, dirname( $path ) );
-//			$against = explode( DIRECTORY_SEPARATOR, $from );
+//			$pieces = explode(DIRECTORY_SEPARATOR, dirname($path));
+//			$against = explode(DIRECTORY_SEPARATOR, $from);
 //
-//			if ( $pieces[0] !== $against[0] ) {
+//			if ($pieces[0] !== $against[0]) {
 //				// Non-matching Windows drive letters?
 //				// Return a full path.
 //				return $path;
 //			}
 //
 //			// Trim off common prefix
-//			while ( count( $pieces ) && count( $against )
-//				&& $pieces[0] == $against[0] ) {
-//				array_shift( $pieces );
-//				array_shift( $against );
+//			while (count($pieces) && count($against)
+//				&& $pieces[0] == $against[0]) {
+//				array_shift($pieces);
+//				array_shift($against);
 //			}
 //
 //			// relative dots to bump us to the parent
-//			while ( count( $against ) ) {
-//				array_unshift( $pieces, '..' );
-//				array_shift( $against );
+//			while (count($against)) {
+//				array_unshift($pieces, '..');
+//				array_shift($against);
 //			}
 //
-//			array_push( $pieces, wfBaseName( $path ) );
+//			array_push($pieces, wfBaseName($path));
 //
-//			return implode( DIRECTORY_SEPARATOR, $pieces );
+//			return implode(DIRECTORY_SEPARATOR, $pieces);
 //		}
 //
 //		/**
@@ -2907,10 +2880,10 @@ public class XomwGlobalFunctions {
 //		* @param String $engine Either "gmp", "bcmath", or "php"
 //		* @return String|boolean The output number as a String, or false on error
 //		*/
-//		function wfBaseConvert( $input, $sourceBase, $destBase, $pad = 1,
+//		function wfBaseConvert($input, $sourceBase, $destBase, $pad = 1,
 //			$lowercase = true, $engine = 'auto'
 //		) {
-//			return Wikimedia\base_convert( $input, $sourceBase, $destBase, $pad, $lowercase, $engine );
+//			return Wikimedia\base_convert($input, $sourceBase, $destBase, $pad, $lowercase, $engine);
 //		}
 //
 //		/**
@@ -2918,7 +2891,7 @@ public class XomwGlobalFunctions {
 //		*  MediaWiki\Session\SessionManager
 //		*/
 //		function wfFixSessionID() {
-//			wfDeprecated( __FUNCTION__, '1.27' );
+//			wfDeprecated(__FUNCTION__, '1.27');
 //		}
 //
 //		/**
@@ -2928,7 +2901,7 @@ public class XomwGlobalFunctions {
 //		* @since 1.22
 //		*/
 //		function wfResetSessionID() {
-//			wfDeprecated( __FUNCTION__, '1.27' );
+//			wfDeprecated(__FUNCTION__, '1.27');
 //			$session = SessionManager::getGlobalSession();
 //			$delay = $session->delaySave();
 //
@@ -2936,11 +2909,11 @@ public class XomwGlobalFunctions {
 //
 //			// Make sure a session is started, since that's what the old
 //			// wfResetSessionID() did.
-//			if ( session_id() !== $session->getId() ) {
-//				wfSetupSession( $session->getId() );
+//			if (session_id() !== $session->getId()) {
+//				wfSetupSession($session->getId());
 //			}
 //
-//			ScopedCallback::consume( $delay );
+//			ScopedCallback::consume($delay);
 //		}
 //
 //		/**
@@ -2952,20 +2925,20 @@ public class XomwGlobalFunctions {
 //		*  here), then calling $session->persist().
 //		* @param boolean|String $sessionId
 //		*/
-//		function wfSetupSession( $sessionId = false ) {
-//			wfDeprecated( __FUNCTION__, '1.27' );
+//		function wfSetupSession($sessionId = false) {
+//			wfDeprecated(__FUNCTION__, '1.27');
 //
-//			if ( $sessionId ) {
-//				session_id( $sessionId );
+//			if ($sessionId) {
+//				session_id($sessionId);
 //			}
 //
 //			$session = SessionManager::getGlobalSession();
 //			$session->persist();
 //
-//			if ( session_id() !== $session->getId() ) {
-//				session_id( $session->getId() );
+//			if (session_id() !== $session->getId()) {
+//				session_id($session->getId());
 //			}
-//			MediaWiki\quietCall( 'session_start' );
+//			MediaWiki\quietCall('session_start');
 //		}
 //
 //		/**
@@ -2974,14 +2947,14 @@ public class XomwGlobalFunctions {
 //		* @param String $name
 //		* @return mixed The variable on success, false on failure
 //		*/
-//		function wfGetPrecompiledData( $name ) {
+//		function wfGetPrecompiledData($name) {
 //			global $IP;
 //
 //			$file = "$IP/serialized/$name";
-//			if ( file_exists( $file ) ) {
-//				$blob = file_get_contents( $file );
-//				if ( $blob ) {
-//					return unserialize( $blob );
+//			if (file_exists($file)) {
+//				$blob = file_get_contents($file);
+//				if ($blob) {
+//					return unserialize($blob);
 //				}
 //			}
 //			return false;
@@ -2993,7 +2966,7 @@ public class XomwGlobalFunctions {
 //		* @param String $args,...
 //		* @return String
 //		*/
-//		function wfMemcKey( /*...*/ ) {
+//		function wfMemcKey(/*...*/) {
 //			return call_user_func_array(
 //				[ ObjectCache::getLocalClusterInstance(), 'makeKey' ],
 //				func_get_args()
@@ -3010,8 +2983,8 @@ public class XomwGlobalFunctions {
 //		* @param String $args,...
 //		* @return String
 //		*/
-//		function wfForeignMemcKey( $db, $prefix /*...*/ ) {
-//			$args = array_slice( func_get_args(), 2 );
+//		function wfForeignMemcKey($db, $prefix /*...*/) {
+//			$args = array_slice(func_get_args(), 2);
 //			$keyspace = $prefix ? "$db-$prefix" : $db;
 //			return call_user_func_array(
 //				[ ObjectCache::getLocalClusterInstance(), 'makeKeyInternal' ],
@@ -3030,7 +3003,7 @@ public class XomwGlobalFunctions {
 //		* @param String $args,...
 //		* @return String
 //		*/
-//		function wfGlobalCacheKey( /*...*/ ) {
+//		function wfGlobalCacheKey(/*...*/) {
 //			return call_user_func_array(
 //				[ ObjectCache::getLocalClusterInstance(), 'makeGlobalKey' ],
 //				func_get_args()
@@ -3045,7 +3018,7 @@ public class XomwGlobalFunctions {
 //		*/
 //		function wfWikiID() {
 //			global $wgDBprefix, $wgDBname;
-//			if ( $wgDBprefix ) {
+//			if ($wgDBprefix) {
 //				return "$wgDBname-$wgDBprefix";
 //			} else {
 //				return $wgDBname;
@@ -3059,9 +3032,9 @@ public class XomwGlobalFunctions {
 //		*
 //		* @return array
 //		*/
-//		function wfSplitWikiID( $wiki ) {
-//			$bits = explode( '-', $wiki, 2 );
-//			if ( count( $bits ) < 2 ) {
+//		function wfSplitWikiID($wiki) {
+//			$bits = explode('-', $wiki, 2);
+//			if (count($bits) < 2) {
 //				$bits[] = '';
 //			}
 //			return $bits;
@@ -3092,8 +3065,8 @@ public class XomwGlobalFunctions {
 //		*
 //		* @return Database
 //		*/
-//		function wfGetDB( $db, $groups = [], $wiki = false ) {
-//			return wfGetLB( $wiki )->getConnection( $db, $groups, $wiki );
+//		function wfGetDB($db, $groups = [], $wiki = false) {
+//			return wfGetLB($wiki)->getConnection($db, $groups, $wiki);
 //		}
 //
 //		/**
@@ -3105,12 +3078,12 @@ public class XomwGlobalFunctions {
 //		* @param String|boolean $wiki Wiki ID, or false for the current wiki
 //		* @return LoadBalancer
 //		*/
-//		function wfGetLB( $wiki = false ) {
-//			if ( $wiki === false ) {
+//		function wfGetLB($wiki = false) {
+//			if ($wiki === false) {
 //				return \MediaWiki\MediaWikiServices::getInstance()->getDBLoadBalancer();
 //			} else {
 //				$factory = \MediaWiki\MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-//				return $factory->getMainLB( $wiki );
+//				return $factory->getMainLB($wiki);
 //			}
 //		}
 //
@@ -3133,8 +3106,8 @@ public class XomwGlobalFunctions {
 //		* @param array $options Associative array of options (see RepoGroup::findFile)
 //		* @return File|boolean File, or false if the file does not exist
 //		*/
-//		function wfFindFile( $title, $options = [] ) {
-//			return RepoGroup::singleton()->findFile( $title, $options );
+//		function wfFindFile($title, $options = []) {
+//			return RepoGroup::singleton()->findFile($title, $options);
 //		}
 //
 //		/**
@@ -3144,8 +3117,8 @@ public class XomwGlobalFunctions {
 //		* @param Title|String $title
 //		* @return LocalFile|null A File, or null if passed an invalid Title
 //		*/
-//		function wfLocalFile( $title ) {
-//			return RepoGroup::singleton()->getLocalRepo()->newFile( $title );
+//		function wfLocalFile($title) {
+//			return RepoGroup::singleton()->getLocalRepo()->newFile($title);
 //		}
 //
 //		/**
@@ -3157,9 +3130,9 @@ public class XomwGlobalFunctions {
 //		function wfQueriesMustScale() {
 //			global $wgMiserMode;
 //			return $wgMiserMode
-//				|| ( SiteStats::pages() > 100000
+//				|| (SiteStats::pages() > 100000
 //				&& SiteStats::edits() > 1000000
-//				&& SiteStats::users() > 10000 );
+//				&& SiteStats::users() > 10000);
 //		}
 //
 //		/**
@@ -3170,11 +3143,11 @@ public class XomwGlobalFunctions {
 //		* @param String $script Script filename, sans extension
 //		* @return String
 //		*/
-//		function wfScript( $script = 'index' ) {
+//		function wfScript($script = 'index') {
 //			global $wgScriptPath, $wgScript, $wgLoadScript;
-//			if ( $script === 'index' ) {
+//			if ($script === 'index') {
 //				return $wgScript;
-//			} elseif ( $script === 'load' ) {
+//			} elseif ($script === 'load') {
 //				return $wgLoadScript;
 //			} else {
 //				return "{$wgScriptPath}/{$script}.php";
@@ -3187,7 +3160,7 @@ public class XomwGlobalFunctions {
 //		* @return String Script URL
 //		*/
 //		function wfGetScriptUrl() {
-//			if ( isset( $_SERVER['SCRIPT_NAME'] ) ) {
+//			if (isset($_SERVER['SCRIPT_NAME'])) {
 //				/* as it was called, minus the query String.
 //				*
 //				* Some sites use Apache rewrite rules to handle subdomains,
@@ -3211,7 +3184,7 @@ public class XomwGlobalFunctions {
 //		* @param boolean $value
 //		* @return String
 //		*/
-//		function wfBoolToStr( $value ) {
+//		function wfBoolToStr($value) {
 //			return $value ? 'true' : 'false';
 //		}
 //
@@ -3249,26 +3222,26 @@ public class XomwGlobalFunctions {
 //		function wfWaitForSlaves(
 //			$ifWritesSince = null, $wiki = false, $cluster = false, $timeout = null
 //		) {
-//			if ( $timeout === null ) {
-//				$timeout = ( PHP_SAPI === 'cli' ) ? 86400 : 10;
+//			if ($timeout === null) {
+//				$timeout = (PHP_SAPI === 'cli') ? 86400 : 10;
 //			}
 //
-//			if ( $cluster === '*' ) {
+//			if ($cluster === '*') {
 //				$cluster = false;
 //				$wiki = false;
-//			} elseif ( $wiki === false ) {
+//			} elseif ($wiki === false) {
 //				$wiki = wfWikiID();
 //			}
 //
 //			try {
-//				wfGetLBFactory()->waitForReplication( [
+//				wfGetLBFactory()->waitForReplication([
 //					'wiki' => $wiki,
 //					'cluster' => $cluster,
 //					'timeout' => $timeout,
 //					// B/C: first argument used to be "max seconds of lag"; ignore such values
-//					'ifWritesSince' => ( $ifWritesSince > 1e9 ) ? $ifWritesSince : null
-//				] );
-//			} catch ( DBReplicationWaitError $e ) {
+//					'ifWritesSince' => ($ifWritesSince > 1e9) ? $ifWritesSince : null
+//				]);
+//			} catch (DBReplicationWaitError $e) {
 //				return false;
 //			}
 //
@@ -3282,15 +3255,15 @@ public class XomwGlobalFunctions {
 //		* @codeCoverageIgnore
 //		* @param int $seconds
 //		*/
-//		function wfCountDown( $seconds ) {
-//			for ( $i = $seconds; $i >= 0; $i-- ) {
-//				if ( $i != $seconds ) {
-//					echo str_repeat( "\x08", strlen( $i + 1 ) );
+//		function wfCountDown($seconds) {
+//			for ($i = $seconds; $i >= 0; $i--) {
+//				if ($i != $seconds) {
+//					echo str_repeat("\x08", strlen($i + 1));
 //				}
 //				echo $i;
 //				flush();
-//				if ( $i ) {
-//					sleep( 1 );
+//				if ($i) {
+//					sleep(1);
 //				}
 //			}
 //			echo "\n";
@@ -3304,7 +3277,7 @@ public class XomwGlobalFunctions {
 //		* @param String $name Filename to process
 //		* @return String
 //		*/
-//		function wfStripIllegalFilenameChars( $name ) {
+//		function wfStripIllegalFilenameChars($name) {
 //			global $wgIllegalFileChars;
 //			$illegalFileChars = $wgIllegalFileChars ? "|[" . $wgIllegalFileChars . "]" : '';
 //			$name = preg_replace(
@@ -3313,7 +3286,7 @@ public class XomwGlobalFunctions {
 //				$name
 //			);
 //			// $wgIllegalFileChars may not include '/' and '\', so we still need to do this
-//			$name = wfBaseName( $name );
+//			$name = wfBaseName($name);
 //			return $name;
 //		}
 //
@@ -3324,19 +3297,19 @@ public class XomwGlobalFunctions {
 //		*/
 //		function wfMemoryLimit() {
 //			global $wgMemoryLimit;
-//			$memlimit = wfShorthandToInteger( ini_get( 'memory_limit' ) );
-//			if ( $memlimit != -1 ) {
-//				$conflimit = wfShorthandToInteger( $wgMemoryLimit );
-//				if ( $conflimit == -1 ) {
-//					wfDebug( "Removing PHP's memory limit\n" );
+//			$memlimit = wfShorthandToInteger(ini_get('memory_limit'));
+//			if ($memlimit != -1) {
+//				$conflimit = wfShorthandToInteger($wgMemoryLimit);
+//				if ($conflimit == -1) {
+//					wfDebug("Removing PHP's memory limit\n");
 //					MediaWiki\suppressWarnings();
-//					ini_set( 'memory_limit', $conflimit );
+//					ini_set('memory_limit', $conflimit);
 //					MediaWiki\restoreWarnings();
 //					return $conflimit;
-//				} elseif ( $conflimit > $memlimit ) {
-//					wfDebug( "Raising PHP's memory limit to $conflimit bytes\n" );
+//				} elseif ($conflimit > $memlimit) {
+//					wfDebug("Raising PHP's memory limit to $conflimit bytes\n");
 //					MediaWiki\suppressWarnings();
-//					ini_set( 'memory_limit', $conflimit );
+//					ini_set('memory_limit', $conflimit);
 //					MediaWiki\restoreWarnings();
 //					return $conflimit;
 //				}
@@ -3353,13 +3326,13 @@ public class XomwGlobalFunctions {
 //		function wfTransactionalTimeLimit() {
 //			global $wgTransactionalTimeLimit;
 //
-//			$timeLimit = ini_get( 'max_execution_time' );
+//			$timeLimit = ini_get('max_execution_time');
 //			// Note that CLI scripts use 0
-//			if ( $timeLimit > 0 && $wgTransactionalTimeLimit > $timeLimit ) {
-//				set_time_limit( $wgTransactionalTimeLimit );
+//			if ($timeLimit > 0 && $wgTransactionalTimeLimit > $timeLimit) {
+//				set_time_limit($wgTransactionalTimeLimit);
 //			}
 //
-//			ignore_user_abort( true ); // ignore client disconnects
+//			ignore_user_abort(true); // ignore client disconnects
 //
 //			return $timeLimit;
 //		}
@@ -3371,14 +3344,14 @@ public class XomwGlobalFunctions {
 //		* @param int $default Returned if $String is empty
 //		* @return int
 //		*/
-//		function wfShorthandToInteger( $String = '', $default = -1 ) {
-//			$String = trim( $String );
-//			if ( $String === '' ) {
+//		function wfShorthandToInteger($String = '', $default = -1) {
+//			$String = trim($String);
+//			if ($String === '') {
 //				return $default;
 //			}
-//			$last = $String[strlen( $String ) - 1];
-//			$val = intval( $String );
-//			switch ( $last ) {
+//			$last = $String[strlen($String) - 1];
+//			$val = intval($String);
+//			switch ($last) {
 //				case 'g':
 //				case 'G':
 //					$val *= 1024;
@@ -3402,25 +3375,25 @@ public class XomwGlobalFunctions {
 //		* @param String $code The language code.
 //		* @return String The language code which complying with BCP 47 standards.
 //		*/
-//		function wfBCP47( $code ) {
-//			$codeSegment = explode( '-', $code );
+//		function wfBCP47($code) {
+//			$codeSegment = explode('-', $code);
 //			$codeBCP = [];
-//			foreach ( $codeSegment as $segNo => $seg ) {
+//			foreach ($codeSegment as $segNo => $seg) {
 //				// when previous segment is x, it is a private segment and should be lc
-//				if ( $segNo > 0 && strtolower( $codeSegment[( $segNo - 1 )] ) == 'x' ) {
-//					$codeBCP[$segNo] = strtolower( $seg );
+//				if ($segNo > 0 && strtolower($codeSegment[($segNo - 1)]) == 'x') {
+//					$codeBCP[$segNo] = strtolower($seg);
 //				// ISO 3166 country code
-//				} elseif ( ( strlen( $seg ) == 2 ) && ( $segNo > 0 ) ) {
-//					$codeBCP[$segNo] = strtoupper( $seg );
+//				} elseif ((strlen($seg) == 2) && ($segNo > 0)) {
+//					$codeBCP[$segNo] = strtoupper($seg);
 //				// ISO 15924 script code
-//				} elseif ( ( strlen( $seg ) == 4 ) && ( $segNo > 0 ) ) {
-//					$codeBCP[$segNo] = ucfirst( strtolower( $seg ) );
+//				} elseif ((strlen($seg) == 4) && ($segNo > 0)) {
+//					$codeBCP[$segNo] = ucfirst(strtolower($seg));
 //				// Use lowercase for other cases
 //				} else {
-//					$codeBCP[$segNo] = strtolower( $seg );
+//					$codeBCP[$segNo] = strtolower($seg);
 //				}
 //			}
-//			$langCode = implode( '-', $codeBCP );
+//			$langCode = implode('-', $codeBCP);
 //			return $langCode;
 //		}
 //
@@ -3430,8 +3403,8 @@ public class XomwGlobalFunctions {
 //		* @param int|String $cacheType A CACHE_* constants, or other key in $wgObjectCaches
 //		* @return BagOStuff
 //		*/
-//		function wfGetCache( $cacheType ) {
-//			return ObjectCache::getInstance( $cacheType );
+//		function wfGetCache($cacheType) {
+//			return ObjectCache::getInstance($cacheType);
 //		}
 //
 //		/**
@@ -3441,7 +3414,7 @@ public class XomwGlobalFunctions {
 //		*/
 //		function wfGetMainCache() {
 //			global $wgMainCacheType;
-//			return ObjectCache::getInstance( $wgMainCacheType );
+//			return ObjectCache::getInstance($wgMainCacheType);
 //		}
 //
 //		/**
@@ -3451,7 +3424,7 @@ public class XomwGlobalFunctions {
 //		*/
 //		function wfGetMessageCacheStorage() {
 //			global $wgMessageCacheType;
-//			return ObjectCache::getInstance( $wgMessageCacheType );
+//			return ObjectCache::getInstance($wgMessageCacheType);
 //		}
 //
 //		/**
@@ -3461,7 +3434,7 @@ public class XomwGlobalFunctions {
 //		*/
 //		function wfGetParserCacheStorage() {
 //			global $wgParserCacheType;
-//			return ObjectCache::getInstance( $wgParserCacheType );
+//			return ObjectCache::getInstance($wgParserCacheType);
 //		}
 //
 //		/**
@@ -3474,8 +3447,8 @@ public class XomwGlobalFunctions {
 //		* @return boolean True if no handler aborted the hook
 //		* @deprecated since 1.25 - use Hooks::run
 //		*/
-//		function wfRunHooks( $event, array $args = [], $deprecatedVersion = null ) {
-//			return Hooks::run( $event, $args, $deprecatedVersion );
+//		function wfRunHooks($event, array $args = [], $deprecatedVersion = null) {
+//			return Hooks::run($event, $args, $deprecatedVersion);
 //		}
 //
 //		/**
@@ -3492,11 +3465,11 @@ public class XomwGlobalFunctions {
 //		* @throws MWException If $data not long enough, or if unpack fails
 //		* @return array Associative array of the extracted data
 //		*/
-//		function wfUnpack( $format, $data, $length = false ) {
-//			if ( $length !== false ) {
-//				$realLen = strlen( $data );
-//				if ( $realLen < $length ) {
-//					throw new MWException( "Tried to use wfUnpack on a "
+//		function wfUnpack($format, $data, $length = false) {
+//			if ($length !== false) {
+//				$realLen = strlen($data);
+//				if ($realLen < $length) {
+//					throw new MWException("Tried to use wfUnpack on a "
 //						. "String of length $realLen, but needed one "
 //						. "of at least length $length."
 //					);
@@ -3504,12 +3477,12 @@ public class XomwGlobalFunctions {
 //			}
 //
 //			MediaWiki\suppressWarnings();
-//			$result = unpack( $format, $data );
+//			$result = unpack($format, $data);
 //			MediaWiki\restoreWarnings();
 //
-//			if ( $result === false ) {
+//			if ($result === false) {
 //				// If it cannot extract the packed data.
-//				throw new MWException( "unpack could not unpack binary data" );
+//				throw new MWException("unpack could not unpack binary data");
 //			}
 //			return $result;
 //		}
@@ -3528,47 +3501,47 @@ public class XomwGlobalFunctions {
 //		* @param String $blacklist Wikitext of a file blacklist
 //		* @return boolean
 //		*/
-//		function wfIsBadImage( $name, $contextTitle = false, $blacklist = null ) {
+//		function wfIsBadImage($name, $contextTitle = false, $blacklist = null) {
 //			# Handle redirects; callers almost always hit wfFindFile() anyway,
 //			# so just use that method because it has a fast process cache.
-//			$file = wfFindFile( $name ); // get the final name
+//			$file = wfFindFile($name); // get the final name
 //			$name = $file ? $file->getTitle()->getDBkey() : $name;
 //
 //			# Run the extension hook
 //			$bad = false;
-//			if ( !Hooks::run( 'BadImage', [ $name, &$bad ] ) ) {
+//			if (!Hooks::run('BadImage', [ $name, &$bad ])) {
 //				return (boolean)$bad;
 //			}
 //
-//			$cache = ObjectCache::getLocalServerInstance( 'hash' );
-//			$key = wfMemcKey( 'bad-image-list', ( $blacklist === null ) ? 'default' : md5( $blacklist ) );
-//			$badImages = $cache->get( $key );
+//			$cache = ObjectCache::getLocalServerInstance('hash');
+//			$key = wfMemcKey('bad-image-list', ($blacklist === null) ? 'default' : md5($blacklist));
+//			$badImages = $cache->get($key);
 //
-//			if ( $badImages === false ) { // cache miss
-//				if ( $blacklist === null ) {
-//					$blacklist = wfMessage( 'bad_image_list' )->inContentLanguage()->plain(); // site list
+//			if ($badImages === false) { // cache miss
+//				if ($blacklist === null) {
+//					$blacklist = wfMessage('bad_image_list')->inContentLanguage()->plain(); // site list
 //				}
 //				# Build the list now
 //				$badImages = [];
-//				$lines = explode( "\n", $blacklist );
-//				foreach ( $lines as $line ) {
+//				$lines = explode("\n", $blacklist);
+//				foreach ($lines as $line) {
 //					# List items only
-//					if ( substr( $line, 0, 1 ) !== '*' ) {
+//					if (substr($line, 0, 1) !== '*') {
 //						continue;
 //					}
 //
 //					# Find all links
 //					$m = [];
-//					if ( !preg_match_all( '/\[\[:?(.*?)\]\]/', $line, $m ) ) {
+//					if (!preg_match_all('/\[\[:?(.*?)\]\]/', $line, $m)) {
 //						continue;
 //					}
 //
 //					$exceptions = [];
 //					$imageDBkey = false;
-//					foreach ( $m[1] as $i => $titleText ) {
-//						$title = Title::newFromText( $titleText );
-//						if ( !is_null( $title ) ) {
-//							if ( $i == 0 ) {
+//					foreach ($m[1] as $i => $titleText) {
+//						$title = Title::newFromText($titleText);
+//						if (!is_null($title)) {
+//							if ($i == 0) {
 //								$imageDBkey = $title->getDBkey();
 //							} else {
 //								$exceptions[$title->getPrefixedDBkey()] = true;
@@ -3576,15 +3549,15 @@ public class XomwGlobalFunctions {
 //						}
 //					}
 //
-//					if ( $imageDBkey !== false ) {
+//					if ($imageDBkey !== false) {
 //						$badImages[$imageDBkey] = $exceptions;
 //					}
 //				}
-//				$cache->set( $key, $badImages, 60 );
+//				$cache->set($key, $badImages, 60);
 //			}
 //
 //			$contextKey = $contextTitle ? $contextTitle->getPrefixedDBkey() : false;
-//			$bad = isset( $badImages[$name] ) && !isset( $badImages[$name][$contextKey] );
+//			$bad = isset($badImages[$name]) && !isset($badImages[$name][$contextKey]);
 //
 //			return $bad;
 //		}
@@ -3596,9 +3569,9 @@ public class XomwGlobalFunctions {
 //		* @param String $ip The IPv4/6 address in the normal human-readable form
 //		* @return boolean
 //		*/
-//		function wfCanIPUseHTTPS( $ip ) {
+//		function wfCanIPUseHTTPS($ip) {
 //			$canDo = true;
-//			Hooks::run( 'CanIPUseHTTPS', [ $ip, &$canDo ] );
+//			Hooks::run('CanIPUseHTTPS', [ $ip, &$canDo ]);
 //			return !!$canDo;
 //		}
 //
@@ -3609,9 +3582,9 @@ public class XomwGlobalFunctions {
 //		* @return boolean
 //		* @since 1.25
 //		*/
-//		function wfIsInfinity( $str ) {
+//		function wfIsInfinity($str) {
 //			$infinityValues = [ 'infinite', 'indefinite', 'infinity', 'never' ];
-//			return in_array( $str, $infinityValues );
+//			return in_array($str, $infinityValues);
 //		}
 //
 //		/**
@@ -3628,11 +3601,11 @@ public class XomwGlobalFunctions {
 //		* @return boolean
 //		* @since 1.24 Moved from thumb.php to GlobalFunctions in 1.25
 //		*/
-//		function wfThumbIsStandard( File $file, array $params ) {
+//		function wfThumbIsStandard(File $file, array $params) {
 //			global $wgThumbLimits, $wgImageLimits, $wgResponsiveImages;
 //
 //			$multipliers = [ 1 ];
-//			if ( $wgResponsiveImages ) {
+//			if ($wgResponsiveImages) {
 //				// These available sizes are hardcoded currently elsewhere in MediaWiki.
 //				// @see Linker::processResponsiveImages
 //				$multipliers[] = 1.5;
@@ -3640,61 +3613,61 @@ public class XomwGlobalFunctions {
 //			}
 //
 //			$handler = $file->getHandler();
-//			if ( !$handler || !isset( $params['width'] ) ) {
+//			if (!$handler || !isset($params['width'])) {
 //				return false;
 //			}
 //
 //			$basicParams = [];
-//			if ( isset( $params['page'] ) ) {
+//			if (isset($params['page'])) {
 //				$basicParams['page'] = $params['page'];
 //			}
 //
 //			$thumbLimits = [];
 //			$imageLimits = [];
 //			// Expand limits to account for multipliers
-//			foreach ( $multipliers as $multiplier ) {
-//				$thumbLimits = array_merge( $thumbLimits, array_map(
-//					function ( $width ) use ( $multiplier ) {
-//						return round( $width * $multiplier );
-//					}, $wgThumbLimits )
+//			foreach ($multipliers as $multiplier) {
+//				$thumbLimits = array_merge($thumbLimits, array_map(
+//					function ($width) use ($multiplier) {
+//						return round($width * $multiplier);
+//					}, $wgThumbLimits)
 //				);
-//				$imageLimits = array_merge( $imageLimits, array_map(
-//					function ( $pair ) use ( $multiplier ) {
+//				$imageLimits = array_merge($imageLimits, array_map(
+//					function ($pair) use ($multiplier) {
 //						return [
-//							round( $pair[0] * $multiplier ),
-//							round( $pair[1] * $multiplier ),
+//							round($pair[0] * $multiplier),
+//							round($pair[1] * $multiplier),
 //						];
-//					}, $wgImageLimits )
+//					}, $wgImageLimits)
 //				);
 //			}
 //
 //			// Check if the width matches one of $wgThumbLimits
-//			if ( in_array( $params['width'], $thumbLimits ) ) {
+//			if (in_array($params['width'], $thumbLimits)) {
 //				$normalParams = $basicParams + [ 'width' => $params['width'] ];
 //				// Append any default values to the map (e.g. "lossy", "lossless", ...)
-//				$handler->normaliseParams( $file, $normalParams );
+//				$handler->normaliseParams($file, $normalParams);
 //			} else {
 //				// If not, then check if the width matchs one of $wgImageLimits
 //				$match = false;
-//				foreach ( $imageLimits as $pair ) {
+//				foreach ($imageLimits as $pair) {
 //					$normalParams = $basicParams + [ 'width' => $pair[0], 'height' => $pair[1] ];
 //					// Decide whether the thumbnail should be scaled on width or height.
 //					// Also append any default values to the map (e.g. "lossy", "lossless", ...)
-//					$handler->normaliseParams( $file, $normalParams );
+//					$handler->normaliseParams($file, $normalParams);
 //					// Check if this standard thumbnail size maps to the given width
-//					if ( $normalParams['width'] == $params['width'] ) {
+//					if ($normalParams['width'] == $params['width']) {
 //						$match = true;
 //						break;
 //					}
 //				}
-//				if ( !$match ) {
+//				if (!$match) {
 //					return false; // not standard for description pages
 //				}
 //			}
 //
 //			// Check that the given values for non-page, non-width, params are just defaults
-//			foreach ( $params as $key => $value ) {
-//				if ( !isset( $normalParams[$key] ) || $normalParams[$key] != $value ) {
+//			foreach ($params as $key => $value) {
+//				if (!isset($normalParams[$key]) || $normalParams[$key] != $value) {
 //					return false;
 //				}
 //			}
@@ -3714,10 +3687,10 @@ public class XomwGlobalFunctions {
 //		* @return array The combined array
 //		* @since 1.26
 //		*/
-//		function wfArrayPlus2d( array $baseArray, array $newValues ) {
+//		function wfArrayPlus2d(array $baseArray, array $newValues) {
 //			// First merge items that are in both arrays
-//			foreach ( $baseArray as $name => &$groupVal ) {
-//				if ( isset( $newValues[$name] ) ) {
+//			foreach ($baseArray as $name => &$groupVal) {
+//				if (isset($newValues[$name])) {
 //					$groupVal += $newValues[$name];
 //				}
 //			}

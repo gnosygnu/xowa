@@ -60,19 +60,6 @@ public class Gfo_url_encoder_ {
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.N)
 			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Plus);
 	}
-	public static Gfo_url_encoder_mkr New__php_urlencode() {
-		// REF: http://php.net/manual/en/function.urlencode.php;
-		// "Returns a String in which all non-alphanumeric characters except -_. have been replaced with a percent (%) sign followed by two hex digits and spaces encoded as plus (+) signs"
-		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
-			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Plus);
-	}
-	public static Gfo_url_encoder_mkr New__php_rawurlencode() {
-		// REF: http://php.net/manual/en/function.rawurlencode.php
-		// "Returns a String in which all non-alphanumeric characters except -_.~ have been replaced with a percent (%) sign followed by two hex digits. "
-		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
-			.Init__same__many(Byte_ascii.Tilde)
-			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Plus);
-	}
 	private static Gfo_url_encoder_mkr New__http_url_ttl() {
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y);
 	}
@@ -103,6 +90,31 @@ public class Gfo_url_encoder_ {
 			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline)
 			;
 	}
+	public static Gfo_url_encoder_mkr New__php_urlencode() {
+		// REF: http://php.net/manual/en/function.urlencode.php;
+		// "Returns a String in which all non-alphanumeric characters except -_. have been replaced with a percent (%) sign followed by two hex digits and spaces encoded as plus (+) signs"
+		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
+			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Plus);
+	}
+	public static Gfo_url_encoder_mkr New__wfUrlencode() {
+		// REF: GlobalFunctions.php|wfUrlencode
+		// same as php_urlencode, but do not encode ";:@$!*(),/~"
+		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
+			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Plus)
+			.Init__same__many
+			( Byte_ascii.Semic, Byte_ascii.At, Byte_ascii.Dollar, Byte_ascii.Bang, Byte_ascii.Star
+			, Byte_ascii.Paren_bgn, Byte_ascii.Paren_end, Byte_ascii.Comma, Byte_ascii.Slash
+			, Byte_ascii.Tilde
+			, Byte_ascii.Colon	// NOTE: MW doesn't unescape colon if IIS. However, all of WMF servers run on non-IIS boxes, so include this;
+			);
+	}
+	public static Gfo_url_encoder_mkr New__php_rawurlencode() {
+		// REF: http://php.net/manual/en/function.rawurlencode.php
+		// "Returns a String in which all non-alphanumeric characters except -_.~ have been replaced with a percent (%) sign followed by two hex digits. "
+		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
+			.Init__same__many(Byte_ascii.Tilde)
+			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Plus);
+	}
 	public static final    Gfo_url_encoder
 	  Id				= Gfo_url_encoder_.New__html_id().Make()
 	, Href				= Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make()
@@ -116,5 +128,6 @@ public class Gfo_url_encoder_ {
 	, Mw_ttl			= Gfo_url_encoder_.New__mw_ttl().Make()
 	, Php_urlencode		= Gfo_url_encoder_.New__php_urlencode().Make()
 	, Php_rawurlencode	= Gfo_url_encoder_.New__php_rawurlencode().Make()
+	, Mw_wfUrlencode	= Gfo_url_encoder_.New__wfUrlencode().Make()
 	;
 }
