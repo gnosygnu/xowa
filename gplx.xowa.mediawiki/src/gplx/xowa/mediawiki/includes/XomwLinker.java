@@ -29,12 +29,12 @@ public class XomwLinker {
 //		private XomwParserEnv env;
 	private final    Bry_bfr tmp = Bry_bfr_.New(), tmp_2 = Bry_bfr_.New();
 	private final    Linker_rel_splitter splitter = new Linker_rel_splitter();
-	private final    XomwHtml html_utl = new XomwHtml();
 	private byte[] wg_title = null;
 	private final    Btrie_rv trv = new Btrie_rv();
 	private final    byte[][] split_trail_rv = new byte[2][];
 	private Btrie_slim_mgr split_trail_trie;
 	private final    Xomw_atr_mgr tmp_attribs = new Xomw_atr_mgr();
+	private final    XomwHtmlTemp htmlTemp = new XomwHtmlTemp();
 
 	private static final    byte[] Atr__class = Bry_.new_a7("class"), Atr__rel = Bry_.new_a7("rel"), Atr__href = Bry_.new_a7("href"), Rel__nofollow = Bry_.new_a7("nofollow");
 	public static final    byte[] 
@@ -646,14 +646,14 @@ public class XomwLinker {
 				zoom_icon = Bry_.Empty;
 			}
 			else {
-				html_utl.rawElement(tmp, Gfh_tag_.Bry__a
+				XomwHtml.rawElement(tmp, htmlTemp, Gfh_tag_.Bry__a
 					, tmp_attribs.Clear()
 					.Add(Gfh_atr_.Bry__href , url)
 					.Add(Gfh_atr_.Bry__class, Class__internal)
 					.Add(Gfh_atr_.Bry__title, XomwGlobalFunctions.wfMessage(env, "thumbnail-more").text())
 					, Bry_.Empty);
 				byte[] zoom_anch = tmp.To_bry_and_clear();
-				html_utl.rawElement(tmp, Gfh_tag_.Bry__div, tmp_attribs.Clear().Add(Gfh_atr_.Bry__class, Class__magnify), zoom_anch);
+				XomwHtml.rawElement(tmp, htmlTemp, Gfh_tag_.Bry__div, tmp_attribs.Clear().Add(Gfh_atr_.Bry__class, Class__magnify), zoom_anch);
 				zoom_icon = tmp.To_bry_and_clear();
 			}
 		}
@@ -890,7 +890,7 @@ public class XomwLinker {
 		// XO.MW.HOOK:LinkerMakeExternalLink
 		attribs.Set(Atr__href, url);
 
-		html_utl.rawElement(bfr, Bry_.new_a7("a"), attribs, text);
+		XomwHtml.rawElement(bfr, htmlTemp, Bry_.new_a7("a"), attribs, text);
 	}
 	// XO.MW: MW puts this function in Parser.php
 	private byte[] getExternalLinkRel(byte[] url, byte[] title) {

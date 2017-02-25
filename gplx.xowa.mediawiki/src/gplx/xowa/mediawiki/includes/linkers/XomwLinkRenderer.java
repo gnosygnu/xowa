@@ -65,7 +65,7 @@ public class XomwLinkRenderer {
 	*/
 //		private boolean runLegacyBeginHook = true;
 
-	private final    XomwHtml html = new XomwHtml();
+	private final    XomwHtmlTemp htmlTemp = new XomwHtmlTemp();
 	private final    Xomw_atr_mgr attribs = new Xomw_atr_mgr();
 	private final    List_adp tmp_merge_deleted = List_adp_.New();
 	private final    XomwSanitizer sanitizer;
@@ -349,7 +349,7 @@ public class XomwLinkRenderer {
 
 		// XO.MW.HOOK:LinkEnd
 
-		html.rawElement(bfr, Gfh_tag_.Bry__a, attribs, htmlBry);
+		XomwHtml.rawElement(bfr, htmlTemp, Gfh_tag_.Bry__a, attribs, htmlBry);
 	}
 
 	/**

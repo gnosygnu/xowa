@@ -277,7 +277,7 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	  Comm_bgn_len = Comm_bgn.length
 	, Comm_end_len = Comm_end.length
 	;
-	private static final    byte[] Rhs_bgn = Bry_.new_a7("</");
+	public static final    byte[] Rhs_bgn = Bry_.new_a7("</");
 	public static void Bld_lhs_bgn(Bry_bfr bfr, byte[] tag) {bfr.Add_byte(Byte_ascii.Lt).Add(tag);}						// >
 	public static void Bld_lhs_end_nde(Bry_bfr bfr)			{bfr.Add_byte(Byte_ascii.Gt);}								// >
 	public static void Bld_lhs_end_inl(Bry_bfr bfr)			{bfr.Add_byte(Byte_ascii.Slash).Add_byte(Byte_ascii.Gt);}	// "/>"

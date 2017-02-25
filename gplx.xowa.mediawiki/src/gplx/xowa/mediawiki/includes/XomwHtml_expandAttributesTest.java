@@ -13,15 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import org.junit.*; import gplx.core.tests.*;
-public class Xomw_html_utl__expand_attributes__tst {
-	private final    Xomw_html_utl__expand_attributes__fxt fxt = new Xomw_html_utl__expand_attributes__fxt();
-	@Test   public void Basic()							{fxt.Test__expand_attributes(" a=\"b\"", "a", "b");}
+import gplx.xowa.mediawiki.includes.htmls.*;
+public class XomwHtml_expandAttributesTest {
+	private final    XomwHtml_expandAttributesFxt fxt = new XomwHtml_expandAttributesFxt();
+	@Test   public void Basic()	{
+		fxt.Test__expand_attributes(" a=\"b\"", "a", "b");
+	}
+	@Test   public void NullVal()	{
+		fxt.Test__expand_attributes("", "a", null);
+	}
 }
-class Xomw_html_utl__expand_attributes__fxt {
-	private final    XomwHtml utl = new XomwHtml();
+class XomwHtml_expandAttributesFxt {
 	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final    XomwHtmlTemp temp = new XomwHtmlTemp();
 	public void Test__expand_attributes(String expd, String... kvs) {
 		Xomw_atr_mgr atrs = new Xomw_atr_mgr();
 		int kvs_len = kvs.length;
@@ -31,7 +37,7 @@ class Xomw_html_utl__expand_attributes__fxt {
 			Xomw_atr_itm itm = new Xomw_atr_itm(-1, key, val);
 			atrs.Add(itm);
 		}
-		utl.Expand_attributes(bfr, atrs);
+		XomwHtml.expandAttributes(bfr, temp, atrs);
 		Gftest.Eq__str(expd, bfr.To_str_and_clear());
 	}
 }
