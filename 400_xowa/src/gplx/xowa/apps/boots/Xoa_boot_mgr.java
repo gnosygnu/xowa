@@ -66,7 +66,6 @@ public class Xoa_boot_mgr {
 			Db_conn_bldr.Instance.Reg_default_sqlite();
 
 			// ctor app
-			usr_dlg.Log_wkr().Queue_enabled_(false);				
 			app = new Xoae_app(usr_dlg, app_type
 			, root_dir
 			, arg_mgr.Fsys__wiki_dir()
@@ -74,6 +73,7 @@ public class Xoa_boot_mgr {
 			, arg_mgr.Fsys__user_dir()
 			, root_dir.GenSubDir_nest("user", "anonymous", "wiki")
 			, Xoa_app_.Op_sys_str);
+			usr_dlg.Log_wkr().Queue_enabled_(false); // NOTE: needs to be called after new Xoae_app
 			app.Addon_mgr().Add_dflts_by_app(app).Run_by_app(app);
 
 			try {
