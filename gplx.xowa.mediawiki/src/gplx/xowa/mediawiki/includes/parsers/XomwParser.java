@@ -271,7 +271,7 @@ public class XomwParser implements XomwParserIface {
 	private final    Xomw_lnke_wkr lnkeWkr;
 	private final    Xomw_magiclinks_wkr magiclinksWkr;
 	private final    Xomw_nbsp_wkr nbspWkr = new Xomw_nbsp_wkr();
-	private final    Xomw_block_level_pass blockWkr = new Xomw_block_level_pass();
+	private final    XomwBlockLevelPass blockWkr = new XomwBlockLevelPass();
 	private final    Xomw_doubleunder_data doubleunder_data = new Xomw_doubleunder_data();
 	private static Xomw_regex_space regex_space;
 	private static Xomw_regex_boundary regex_boundary;
@@ -1692,7 +1692,7 @@ public class XomwParser implements XomwParserIface {
 				dirty = true;
 				byte[] protocol_bry = (byte[])protocol_obj;
 				if (called_by_bry) trg = Bry_bfr_.New();
-				trg.Add_bry_many(XomwStripState.Bry__marker__bgn, Bry__noparse, protocol_bry);
+				trg.Add_bry_many(XomwParser.MARKER_PREFIX, Bry__noparse, protocol_bry);
 				cur += protocol_bry.length;
 				prv = cur;
 			}

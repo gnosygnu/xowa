@@ -327,11 +327,11 @@ public class XomwStripState {
 //		public function killMarkers($text) {
 //			return preg_replace(this.regex, '', $text);
 //		}
-	public static final    String Str__marker_bgn = "\u007f'\"`UNIQ-";
-	public static final    byte[] 
-	  Bry__marker__bgn		= Bry_.new_a7(Str__marker_bgn)
-	, Bry__marker__end		= Bry_.new_a7("-QINU`\"'\u007f")
-	;
+//		public static final    String Str__marker_bgn = "\u007f'\"`UNIQ-";
+//		public static final    byte[] 
+//		  Bry__marker__bgn		= Bry_.new_a7(Str__marker_bgn)
+//		, Bry__marker__end		= Bry_.new_a7("-QINU`\"'\u007f")
+//		;
 	public static final byte TYPE_GENERAL = 1, TYPE_NOWIKI = 2, TYPE_BOTH = 3; 
 }
 class XomwStripItem {
