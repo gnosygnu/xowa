@@ -117,7 +117,8 @@ public class Xoa_css_extractor {
 	}
 	private void Css_common_failover() {
 		Io_url trg_fil = wiki_html_dir.GenSubFil(Css_common_name);
-		Io_mgr.Instance.CopyDirDeep(home_css_dir, trg_fil.OwnerDir()); // NOTE: copy dir first b/c xowa_commons.css will be replaced below
+		if (home_css_dir != null)	// TEST:
+			Io_mgr.Instance.CopyDirDeep(home_css_dir, trg_fil.OwnerDir()); // NOTE: copy dir first b/c xowa_commons.css will be replaced below
 		Io_mgr.Instance.CopyFil(Css_common_failover_url(), trg_fil, true);
 	}
 	private void Css_common_download() {

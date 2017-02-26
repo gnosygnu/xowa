@@ -16,9 +16,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.metas.*;
+import gplx.xowa.addons.wikis.directorys.dbs.*;
 public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 	private final    Xoae_app app;
 	private final    List_adp list = List_adp_.New(); private final    Hash_adp_bry hash = Hash_adp_bry.ci_a7();	// ASCII:url_domain; EX:en.wikipedia.org
+	private Xowdir_db_mgr db_mgr;
 	public Xoae_wiki_mgr(Xoae_app app) {
 		this.app = app;
 		this.wiki_regy = new Xoa_wiki_regy(app);
@@ -34,7 +36,10 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 			return rv;
 		}
 	}
-	public void Init_by_app() {wdata_mgr.Init_by_app();}
+	public void Init_by_app() {
+		this.db_mgr = new Xowdir_db_mgr(app.User().User_db_mgr().Conn());
+		wdata_mgr.Init_by_app();
+	}
 	public int			Count()							{return list.Count();}
 	public boolean			Has(byte[] key)					{return hash.Has(key);}
 	public Xow_wiki		Get_at(int idx)					{return (Xow_wiki)list.Get_at(idx);}
@@ -58,7 +63,14 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 		list.Add(wiki);
 	}
 	public Xowe_wiki Make_and_add(byte[] domain_bry) {
-		Io_url wiki_root_url = app.Fsys_mgr().Wiki_dir().GenSubDir(String_.new_a7(domain_bry));
+		// get wiki_root_url from either user_wiki or /xowa/wiki/
+		Xowdir_wiki_itm user_wiki_itm = db_mgr == null 
+			? null	// TEST:
+			: db_mgr.Tbl__wiki().Select_by_key_or_null(String_.new_u8(domain_bry));
+		Io_url wiki_root_url = user_wiki_itm == null
+			? app.Fsys_mgr().Wiki_dir().GenSubDir(String_.new_a7(domain_bry))
+			: user_wiki_itm.Url().OwnerDir();
+
 		Xowe_wiki rv = (Xowe_wiki)Make(domain_bry, wiki_root_url);
 		Add(rv);
 		return rv;

@@ -53,11 +53,7 @@ public class Xowdir_addon implements Xoax_addon_itm, Xoax_addon_itm__special, Xo
 		int len = itms.length;
 		for (int i = 0; i < len; ++i) {
 			Xowdir_wiki_itm itm = itms[i];
-			try {
-				gplx.xowa.addons.wikis.directorys.specials.items.bldrs.Xow_wiki_factory.Load_personal(app, Bry_.new_u8(itm.Domain()), itm.Url().OwnerDir());
-			} catch (Exception exc) {// handles failures if wiki is deleted, but item is still in wiki_list table
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "personal_wiki: failed to open personal wiki; domain=~{0} url=~{1} err=~{2}", itm.Domain(), itm.Url(), Err_.Message_gplx_log(exc));
-			}
+			app.User().Wikii().Xwiki_mgr().Add_by_atrs(itm.Domain(), itm.Domain());
 		}
 	}
 }
