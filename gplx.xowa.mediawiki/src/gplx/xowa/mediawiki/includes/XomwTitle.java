@@ -156,6 +156,7 @@ public class XomwTitle {
 //		private $mIsBigDeletion = null;
 //		// @}
 
+	private final    XomwEnv env;
 	/**
 	* B/C kludge: provide a TitleParser for use by Title.
 	* Ideally, Title would have no methods that need this.
@@ -164,9 +165,9 @@ public class XomwTitle {
 	*
 	* @return TitleFormatter
 	*/
-	private static XomwMediaWikiTitleCodec getTitleFormatter() {
-		return XomwMediaWikiServices.getInstance().getTitleFormatter();
-	}
+	//	private static XomwMediaWikiTitleCodec getTitleFormatter() {
+	//		return XomwMediaWikiServices.getInstance().getTitleFormatter();
+	//	}
 
 //		/**
 //		* B/C kludge: provide an InterwikiLookup for use by Title.
@@ -179,13 +180,14 @@ public class XomwTitle {
 //		private static function getInterwikiLookup() {
 //			return MediaWikiServices::getInstance().getInterwikiLookup();
 //		}
-//
-//		/**
-//		* @access protected
-//		*/
-//		function __construct() {
-//		}
-//
+
+	/**
+	* @access protected
+	*/
+	XomwTitle(XomwEnv env) {
+		this.env = env;
+	}
+
 //		/**
 //		* Create a new Title from a prefixed DB key
 //		*
@@ -250,8 +252,8 @@ public class XomwTitle {
 	* @throws InvalidArgumentException
 	* @return Title|null Title or null on an error.
 	*/
-	public static XomwTitle newFromText(byte[] text) {return newFromText(text, XomwDefines.NS_MAIN);}
-	public static XomwTitle newFromText(byte[] text, int defaultNamespace) {
+	public static XomwTitle newFromText(XomwEnv env, byte[] text) {return newFromText(env, text, XomwDefines.NS_MAIN);}
+	private static XomwTitle newFromText(XomwEnv env, byte[] text, int defaultNamespace) {
 		// DWIM: Integers can be passed in here when page titles are used as array keys.
 		// XO.MW.SKIP:STRONGCAST
 		// if ($text != null && !is_string($text) && !is_int($text)) {
@@ -262,7 +264,7 @@ public class XomwTitle {
 		}
 
 		try {
-			return XomwTitle.newFromTextThrow(text, defaultNamespace);
+			return XomwTitle.newFromTextThrow(env, text, defaultNamespace);
 		} catch (XomwMalformedTitleException ex) {
 			Err_.Noop(ex);
 			return null;
@@ -283,7 +285,7 @@ public class XomwTitle {
 	* @throws XomwMalformedTitleException If the title is invalid
 	* @return Title
 	*/
-	public static XomwTitle newFromTextThrow(byte[] text, int defaultNamespace) {
+	private static XomwTitle newFromTextThrow(XomwEnv env, byte[] text, int defaultNamespace) {
 		// if (is_object($text)) {
 		//	throw new MWException('$text must be a String, given an Object');
 		// }
@@ -306,11 +308,11 @@ public class XomwTitle {
 //			$filteredText = Sanitizer::decodeCharReferencesAndNormalize($text);
 		byte[] filteredText = text;
 
-		XomwTitle t = new XomwTitle();
+		XomwTitle t = new XomwTitle(env);
 		t.mDbkeyform = XophpString.strtr(filteredText, Byte_ascii.Space, Byte_ascii.Underline);
 		t.mDefaultNamespace = defaultNamespace;
 
-		t.secureAndSplit();
+		t.secureAndSplit(env);
 		// XO.MW.SKIP:CACHE
 		// if ($defaultNamespace == NS_MAIN) {
 		//	$titleCache.set($text, t);
@@ -985,7 +987,7 @@ public class XomwTitle {
 		}
 
 //			try {
-			XomwTitleFormatter formatter = getTitleFormatter();
+			XomwTitleFormatter formatter = env.MediaWikiServices().getTitleFormatter();
 			return formatter.getNamespaceName(this.mNamespace, this.mDbkeyform);
 //			} catch (InvalidArgumentException $ex) {
 //				wfDebug(__METHOD__ . ': ' . $ex.getMessage() . "\n");
@@ -3351,7 +3353,7 @@ public class XomwTitle {
 	* @throws XomwMalformedTitleException On invalid titles
 	* @return boolean True on success
 	*/
-	private boolean secureAndSplit() {
+	private boolean secureAndSplit(XomwEnv env) {
 		// Initialisation
 		this.mInterwiki = Bry_.Empty;
 		this.mFragment = Bry_.Empty;
@@ -3364,7 +3366,7 @@ public class XomwTitle {
 		// @todo: get rid of secureAndSplit, refactor parsing code.
 		// @note: getTitleParser() returns a TitleParser implementation which does not have a
 		//        splitTitleString method, but the only implementation (MediaWikiTitleCodec) does
-		XomwMediaWikiTitleCodec titleCodec = XomwMediaWikiServices.getInstance().getTitleParser();
+		XomwMediaWikiTitleCodec titleCodec = env.MediaWikiServices().getTitleParser();
 		// XomwMalformedTitleException can be thrown here
 		XomwMediaWikiTitleCodecParts parts = titleCodec.splitTitleString(dbkey, this.getDefaultNamespace());
 

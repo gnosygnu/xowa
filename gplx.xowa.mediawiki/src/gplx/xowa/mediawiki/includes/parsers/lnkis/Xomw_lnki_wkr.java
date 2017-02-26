@@ -40,7 +40,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	// private final    Btrie_slim_mgr protocols_trie;
 	private final    Xomw_quote_wkr quote_wkr;
 	private final    XomwStripState strip_state;
-	private XomwParserEnv env;
+	private XomwEnv env;
 	private Xow_wiki wiki;
 	private XomwTitle mPageTitle;
 //		private final    XomwLinker_NormalizeSubpageLink normalize_subpage_link = new XomwLinker_NormalizeSubpageLink();
@@ -65,7 +65,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		this.tmp = tmp;
 		this.strip_state = strip_state;
 	}
-	public void Init_by_wiki(XomwParserEnv env, Xow_wiki wiki) {
+	public void Init_by_wiki(XomwEnv env, Xow_wiki wiki) {
 		this.env = env;
 		this.wiki = wiki;
 		if (title_chars_for_lnki == null) {
@@ -78,7 +78,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	public void Clear_state() {
 		holders.clear();
 	}
-	public void replaceInternalLinks(XomwParserBfr pbfr, XomwParserEnv env, XomwParserCtx pctx) {
+	public void replaceInternalLinks(XomwParserBfr pbfr, XomwEnv env, XomwParserCtx pctx) {
 		// XO.PBFR
 		Bry_bfr src_bfr = pbfr.Src();
 		byte[] src = src_bfr.Bfr();
@@ -92,7 +92,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		replaceInternalLinks(env, pctx, bfr, src, src_bgn, src_end);
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-02-02
-	public void replaceInternalLinks(XomwParserEnv env, XomwParserCtx pctx, Bry_bfr bfr, byte[] src, int src_bgn, int src_end) {
+	public void replaceInternalLinks(XomwEnv env, XomwParserCtx pctx, Bry_bfr bfr, byte[] src, int src_bgn, int src_end) {
 		// XO.MW: regex for tc move to header; e1 and e1_img moved to code
 		// the % is needed to support urlencoded titles as well
 
@@ -253,7 +253,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 				link = Bry_.Mid(link, 1);
 			}
 			// $nt = is_string( $unstrip ) ? Title::newFromText( $unstrip ) : null;
-			XomwTitle nt = XomwTitle.newFromText(link);
+			XomwTitle nt = XomwTitle.newFromText(env, link);
 
 			// Make subpage if necessary
 //				boolean useSubpages = nt.Ns().Subpages_enabled();
@@ -270,7 +270,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 			byte[] unstrip = strip_state.unstripNoWiki(link);
 			if (!Bry_.Eq(unstrip, link))
-				nt = XomwTitle.newFromText(unstrip);
+				nt = XomwTitle.newFromText(env, unstrip);
 			if (nt == null) {
 				bfr.Add_mid(src, prv, lnki_bgn + 2);	// $s .= $prefix . '[[' . $line;
 				prv = cur = lnki_bgn + 2;					
@@ -443,7 +443,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 		}
 	}
-	public void makeImage(XomwParserEnv env, XomwParserCtx pctx, Bry_bfr bfr, XomwTitle title, byte[] options_at_link, XomwLinkHolderArray holders) {
+	public void makeImage(XomwEnv env, XomwParserCtx pctx, Bry_bfr bfr, XomwTitle title, byte[] options_at_link, XomwLinkHolderArray holders) {
 		// Check if the options text is of the form "options|alt text"
 		// Options are:
 		//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang

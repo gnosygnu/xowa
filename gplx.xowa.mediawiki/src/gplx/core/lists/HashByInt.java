@@ -24,6 +24,10 @@ public class HashByInt {
 	public int Len() {
 		return hash.Len();
 	}
+	public Object Get_at_or_null(int idx) {
+		HashByIntItem item = (HashByIntItem)hash.Get_at(idx);
+		return item.val;
+	}
 	public Object Get_by_or_fail(int key) {
 		synchronized (tmp_key) {
 			HashByIntItem item = (HashByIntItem)hash.Get_by_or_fail(tmp_key.Val_(key));

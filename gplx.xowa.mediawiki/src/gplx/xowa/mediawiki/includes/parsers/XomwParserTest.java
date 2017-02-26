@@ -58,15 +58,16 @@ public class XomwParserTest {
 	}		
 }
 class XomwParserFxt {
-	private final    XomwParser parser = new XomwParser();
+	private final    XomwParser parser;
 	private final    XomwParserCtx pctx = new XomwParserCtx();
 	private final    XomwParserBfr pbfr = new XomwParserBfr();
 	public XomwParserFxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
+		this.parser = new XomwParser(XomwEnv.NewTestByApp(app));
 		parser.Init_by_wiki(wiki);
-		parser.Init_by_page(XomwTitle.newFromText(Bry_.new_a7("Page_1")));
-		pctx.Init_by_page(XomwTitle.newFromText(Bry_.new_a7("Page_1")));
+		parser.Init_by_page(XomwTitle.newFromText(parser.Env(), Bry_.new_a7("Page_1")));
+		pctx.Init_by_page(XomwTitle.newFromText(parser.Env(), Bry_.new_a7("Page_1")));
 	}
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);

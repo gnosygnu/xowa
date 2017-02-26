@@ -259,7 +259,7 @@ public class XomwParser implements XomwParserIface {
 
 	// XOWA
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final    XomwParserEnv env = new XomwParserEnv();
+	private final    XomwEnv env;
 	private final    XomwSanitizer sanitizer = new XomwSanitizer();
 	private final    Xomw_table_wkr tableWkr;
 	private final    Xomw_hr_wkr hrWkr = new Xomw_hr_wkr();
@@ -308,12 +308,12 @@ public class XomwParser implements XomwParserIface {
 //			wfDebug(__CLASS__ . ": using preprocessor: {this.mPreprocessorClass}\n");
 //		}
 	private final    Btrie_slim_mgr protocols_trie;
-	public XomwParserEnv Env() {return env;}
+	public XomwEnv Env() {return env;}
 	public Xomw_lnki_wkr Lnki_wkr() {return lnkiWkr;}
 	public XomwLinker              Linker()          {return linker;}         private final    XomwLinker linker;
 	public byte[] Get_external_link_rel;
 	private static byte[] Atr__rel;
-	public XomwParser() {
+	public XomwParser(XomwEnv env) {
 		if (regex_space == null) {
 			synchronized (Type_adp_.ClassOf_obj(this)) {
 				regex_space = new Xomw_regex_space();
@@ -324,6 +324,7 @@ public class XomwParser implements XomwParserIface {
 			}
 		}
 
+		this.env = env;
 		this.mLinkRenderer = new XomwLinkRenderer(sanitizer);
 		this.linker = new XomwLinker(mLinkRenderer);
 		this.protocols_trie = XomwParser.Protocols__dflt();

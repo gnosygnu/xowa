@@ -17,6 +17,7 @@ package gplx.xowa.mediawiki.includes.media; import gplx.*; import gplx.xowa.*; i
 import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.mediawiki.includes.parsers.*; import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
 import gplx.xowa.mediawiki.includes.filerepo.*; import gplx.xowa.mediawiki.includes.filerepo.file.*;
+import gplx.xowa.mediawiki.languages.*;
 public class XomwImageHandlerTest {
 	private final    XomwImageHandler_fxt fxt = new XomwImageHandler_fxt();
 	@Before public void init() {
@@ -30,10 +31,10 @@ public class XomwImageHandlerTest {
 class XomwImageHandler_fxt {
 	private final    XomwImageHandler handler;
 	private final    XomwFileRepo repo = new XomwFileRepo(Bry_.new_a7("/orig"), Bry_.new_a7("/thumb"));
-	private final    XomwParserEnv env = new XomwParserEnv();
+	private final    XomwEnv env = XomwEnv.NewTest();
 	private XomwFile file;
 	public XomwImageHandler_fxt() {
-		handler = new XomwTransformationalImageHandler(Bry_.new_a7("test_handler"));
+		this.handler = new XomwTransformationalImageHandler(Bry_.new_a7("test_handler"));
 	}
 	public Xomw_params_handler Make__handlerParams(int w) {return Make__handlerParams(w, XophpUtility.Null_int, XophpUtility.Null_int, XophpUtility.Null_int);}
 	public Xomw_params_handler Make__handlerParams(int w, int h, int phys_w, int phys_h) {
@@ -45,7 +46,7 @@ class XomwImageHandler_fxt {
 		return rv;
 	}
 	public void Init__file(String title, int w, int h) {
-		this.file = new XomwLocalFile(env, XomwTitle.newFromText(Bry_.new_u8(title)), repo, w, h, XomwMediaHandlerFactory.Mime__image__png);
+		this.file = new XomwLocalFile(env, XomwTitle.newFromText(env, Bry_.new_u8(title)), repo, w, h, XomwMediaHandlerFactory.Mime__image__png);
 	}
 	public void Test__normaliseParams(Xomw_params_handler prms, Xomw_params_handler expd) {
 		// exec

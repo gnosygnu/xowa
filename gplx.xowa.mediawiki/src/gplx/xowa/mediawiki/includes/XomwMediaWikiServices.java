@@ -30,37 +30,11 @@ import gplx.xowa.mediawiki.includes.title.*;
 *      MediaWiki code super.
 */
 public class XomwMediaWikiServices {
-	/**
-	* @var MediaWikiServices|null
-	*/
-	private static XomwMediaWikiServices instance = null;
+	// XO.MW.SKIP:remove global getInstance(). See XomwEnv
+	private final    XomwMediaWikiTitleCodec titleParser;
 
-	/**
-	* Returns the global default instance of the top level service locator.
-	*
-	* @since 1.27
-	*
-	* The default instance is initialized using the service instantiator functions
-	* defined in ServiceWiring.php.
-	*
-	* @note This should only be called by static functions! The instance returned here
-	* should not be passed around! Objects that need access to a service should have
-	* that service injected into the constructor, never a service locator!
-	*
-	* @return MediaWikiServices
-	*/
-	public static XomwMediaWikiServices getInstance() {
-		if (instance == null) {
-			// NOTE: constructing GlobalVarConfig here is not particularly pretty,
-			// but some information from the global scope has to be injected here,
-			// even if it's just a file name or database credentials to load
-			// configuration from.
-//				$bootstrapConfig = new GlobalVarConfig();
-//				self::$instance = self::newInstance($bootstrapConfig, 'load');
-			instance = new XomwMediaWikiServices();
-		}
-
-		return instance;
+	public XomwMediaWikiServices(XomwLanguage language) {
+		this.titleParser = new XomwMediaWikiTitleCodec(language);
 	}
 
 //		/**
@@ -581,7 +555,6 @@ public class XomwMediaWikiServices {
 		// return $this->getService( 'TitleParser' );
 		return titleParser;
 	}
-	private XomwMediaWikiTitleCodec titleParser = new XomwMediaWikiTitleCodec(new XomwLanguage());
 
 //		/**
 //		* @since 1.28

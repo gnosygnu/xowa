@@ -14,7 +14,6 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
-import gplx.core.lists.*;
 /**
 * Include most things that are needed to make MediaWiki work.
 *
@@ -393,24 +392,24 @@ public class XomwSetup {
 	* Definitions of the NS_ constants are in Defines.php
 	* @private
 	*/
-	public static HashByInt wgCanonicalNamespaceNames = new HashByInt()
-		.Add_as_bry(XomwDefines.NS_MEDIA            ,  "Media")
-		.Add_as_bry(XomwDefines.NS_SPECIAL          ,  "Special")
-		.Add_as_bry(XomwDefines.NS_TALK             ,  "Talk")
-		.Add_as_bry(XomwDefines.NS_USER             ,  "User")
-		.Add_as_bry(XomwDefines.NS_USER_TALK        ,  "User_talk")
-		.Add_as_bry(XomwDefines.NS_PROJECT          ,  "Project")
-		.Add_as_bry(XomwDefines.NS_PROJECT_TALK     ,  "Project_talk")
-		.Add_as_bry(XomwDefines.NS_FILE             ,  "File")
-		.Add_as_bry(XomwDefines.NS_FILE_TALK        ,  "File_talk")
-		.Add_as_bry(XomwDefines.NS_MEDIAWIKI        ,  "MediaWiki")
-		.Add_as_bry(XomwDefines.NS_MEDIAWIKI_TALK   ,  "MediaWiki_talk")
-		.Add_as_bry(XomwDefines.NS_TEMPLATE         ,  "Template")
-		.Add_as_bry(XomwDefines.NS_TEMPLATE_TALK    ,  "Template_talk")
-		.Add_as_bry(XomwDefines.NS_HELP             ,  "Help")
-		.Add_as_bry(XomwDefines.NS_HELP_TALK        ,  "Help_talk")
-		.Add_as_bry(XomwDefines.NS_CATEGORY         ,  "Category")
-		.Add_as_bry(XomwDefines.NS_CATEGORY_TALK    ,  "Category_talk")
+	public static XomwNamespaceHash wgCanonicalNamespaceNames = new XomwNamespaceHash()
+		.Add(XomwDefines.NS_MEDIA            ,  "Media")
+		.Add(XomwDefines.NS_SPECIAL          ,  "Special")
+		.Add(XomwDefines.NS_TALK             ,  "Talk")
+		.Add(XomwDefines.NS_USER             ,  "User")
+		.Add(XomwDefines.NS_USER_TALK        ,  "User_talk")
+		.Add(XomwDefines.NS_PROJECT          ,  "Project")
+		.Add(XomwDefines.NS_PROJECT_TALK     ,  "Project_talk")
+		.Add(XomwDefines.NS_FILE             ,  "File")
+		.Add(XomwDefines.NS_FILE_TALK        ,  "File_talk")
+		.Add(XomwDefines.NS_MEDIAWIKI        ,  "MediaWiki")
+		.Add(XomwDefines.NS_MEDIAWIKI_TALK   ,  "MediaWiki_talk")
+		.Add(XomwDefines.NS_TEMPLATE         ,  "Template")
+		.Add(XomwDefines.NS_TEMPLATE_TALK    ,  "Template_talk")
+		.Add(XomwDefines.NS_HELP             ,  "Help")
+		.Add(XomwDefines.NS_HELP_TALK        ,  "Help_talk")
+		.Add(XomwDefines.NS_CATEGORY         ,  "Category")
+		.Add(XomwDefines.NS_CATEGORY_TALK    ,  "Category_talk")
 	;
 
 //		/// @todo UGLY UGLY

@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.languages; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
-import gplx.core.lists.*;
 import gplx.xowa.mediawiki.includes.*;
+import gplx.xowa.langs.*;
 public class XomwLanguage {
 //		/**
 //		* @var LanguageConverter
@@ -30,7 +30,7 @@ public class XomwLanguage {
 //		public $mExtendedSpecialPageAliases;
 //
 //		/** @var array|null */
-	private HashByInt namespaceNames;
+	private XomwNamespaceHash namespaceNames;
 //		protected $mNamespaceIds, $namespaceAliases;
 //
 //		/**
@@ -193,7 +193,9 @@ public class XomwLanguage {
 // -\x{1edff}\x{1ef00}-\x{1efff}\x{608}\x{60b}\x{60d}\x{61b}-\x{64a}\x{66d}-\x{66f}\x{671}-\x{6d5}\x{6e5}\x{6e6}\x{6ee}\x{6ef}\x{6fa}-\x{710}\x{712}-\x{72f}\x{74b}-\x{7a5}\x{7b1}-\x{7bf}\x{8a0}-\x{8e2}\x{fb50}-\x{fd3d}\x{fd40}-\x{fdcf}\x{fdf0}-\x{fdfc}\x{fdfe}\x{fdff}\x{fe70}-\x{fefe}\x{1ee00}-\x{1eeef}\x{1eef2}-\x{1eeff}]))/u';
 //		// @codeCoverageIgnoreEnd
 //		// @codingStandardsIgnoreEnd
-//
+	private Xol_lang_itm xoLang = null;
+	private final    Bry_bfr tmpBfr = Bry_bfr_.New();
+
 //		/**
 //		* Get a cached or new language Object for a given language code
 //		* @param String $code
@@ -430,7 +432,7 @@ public class XomwLanguage {
 //			}
 //			return self::$dataCache;
 //		}
-//
+
 //		function __construct() {
 //			this.mConverter = new FakeConverter($this);
 //			// Set the code to the name of the descendant
@@ -441,7 +443,10 @@ public class XomwLanguage {
 //			}
 //			self::getLocalisationCache();
 //		}
-//
+	public XomwLanguage(Xol_lang_itm xoLang) {
+		this.xoLang = xoLang;
+	}
+
 //		/**
 //		* Reduce memory usage
 //		*/
@@ -480,11 +485,11 @@ public class XomwLanguage {
 	*
 	* @return array
 	*/
-	public HashByInt getNamespaces() {
+	public XomwNamespaceHash getNamespaces() {
 		if (this.namespaceNames == null) {
 //				global $wgMetaNamespace, $wgMetaNamespaceTalk, $wgExtraNamespaces;
 //
-			HashByInt validNamespaces = XomwNamespace.getCanonicalNamespaces();
+			XomwNamespaceHash validNamespaces = XomwNamespace.getCanonicalNamespaces();
 //
 //				this.namespaceNames = $wgExtraNamespaces +
 //					self::$dataCache->getItem(this.mCode, 'namespaceNames');
@@ -561,8 +566,8 @@ public class XomwLanguage {
 	* @return String|boolean String if the namespace value exists, otherwise false
 	*/
 	public byte[] getNsText(int index) {
-		HashByInt ns = this.getNamespaces();
-		return (byte[])ns.Get_by_or_null(index);
+		XomwNamespaceHash nsHash = this.getNamespaces();
+		return nsHash.GetTextOrNull(index);
 	}
 
 //		/**
@@ -705,24 +710,25 @@ public class XomwLanguage {
 //			}
 //			return this.mNamespaceIds;
 //		}
-//
-//		/**
-//		* Get a namespace key by value, case insensitive.  Canonical namespace
-//		* names override custom ones defined for the current language.
-//		*
-//		* @param String $text
-//		* @return int|boolean An integer if $text is a valid value otherwise false
-//		*/
-//		public function getNsIndex($text) {
-//			$lctext = this.lc($text);
-//			$ns = XomwNamespace::getCanonicalIndex($lctext);
-//			if ($ns !== null) {
-//				return $ns;
-//			}
+
+	/**
+	* Get a namespace key by value, case insensitive.  Canonical namespace
+	* @Override names custom ones defined for the current language.
+	*
+	* @param String $text
+	* @return int|boolean An integer if $text is a valid value otherwise false
+	*/
+	public int getNsIndex(byte[] text) {
+		byte[] lctext = this.lc(text);
+		int ns = XomwNamespace.getCanonicalIndex(lctext);
+		if (ns != XomwNamespace.NULL_NS_ID) {
+			return ns;
+		}
 //			$ids = this.getNamespaceIds();
 //			return isset($ids[$lctext]) ? $ids[$lctext] : false;
-//		}
-//
+		return XophpUtility.Null_int;
+	}
+
 //		/**
 //		* short names for language variants used for language conversion links.
 //		*
@@ -2710,24 +2716,30 @@ public class XomwLanguage {
 //				return $str;
 //			}
 //		}
-//
-//		/**
-//		* @param String $str
-//		* @param boolean $first
-//		* @return mixed|String
-//		*/
-//		function lc($str, $first = false) {
-//			if ($first) {
-//				if (this.isMultibyte($str)) {
-//					return mb_strtolower(mb_substr($str, 0, 1)) . mb_substr($str, 1);
-//				} else {
-//					return strtolower(substr($str, 0, 1)) . substr($str, 1);
-//				}
-//			} else {
-//				return this.isMultibyte($str) ? mb_strtolower($str) : strtolower($str);
-//			}
-//		}
-//
+
+	/**
+	* @param String $str
+	* @param boolean $first
+	* @return mixed|String
+	*/
+	private byte[] lc(byte[] str) {return lc(str, false);}
+	private byte[] lc(byte[] str, boolean first) {
+		return first 
+			? xoLang.Case_mgr().Case_build_1st_lower(tmpBfr, str, 0, str.length)
+			: xoLang.Case_mgr().Case_build_lower    (str, 0, str.length);
+		// XO.MW:PORTED
+		//	if (first) {
+		//		if (this.isMultibyte(str)) {
+		//			return mb_strtolower(mb_substr(str, 0, 1)) . mb_substr(str, 1);
+		//		} else {
+		//			return strtolower(substr(str, 0, 1)) . substr(str, 1);
+		//		}
+		//	} else {
+		//		return this.isMultibyte(str) ? mb_strtolower(str) : strtolower(str);
+		//	}
+
+	}
+
 //		/**
 //		* @param String $str
 //		* @return boolean

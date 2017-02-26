@@ -24,13 +24,17 @@ public class XomwLinkHolderArrayTest {
 	}
 }
 class XomwLinkHolderArrayFxt {
-	private final    XomwLinkHolderArray holders = new XomwLinkHolderArray(new XomwParser());
+	private final    XomwEnv env;
+	private final    XomwLinkHolderArray holders;
 	private final    XomwParserBfr pbfr = new XomwParserBfr();
 	private boolean apos = true;
 	public XomwLinkHolderArrayFxt() {
+		XomwParser parser = new XomwParser(XomwEnv.NewTest());
+		this.env = parser.Env();
+		this.holders = new XomwLinkHolderArray(parser);
 	}
 	public void Init__add(String ttl, String capt) {
-		holders.Test__add(XomwTitle.newFromText(Bry_.new_u8(ttl)), Bry_.new_u8(capt));
+		holders.Test__add(XomwTitle.newFromText(env, Bry_.new_u8(ttl)), Bry_.new_u8(capt));
 	}
 	public void Test__replace(String src, String expd) {
 		if (apos) expd = gplx.langs.htmls.Gfh_utl.Replace_apos(expd);

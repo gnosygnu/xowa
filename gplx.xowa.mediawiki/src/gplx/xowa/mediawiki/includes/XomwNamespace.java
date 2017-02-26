@@ -14,7 +14,6 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
-import gplx.core.lists.*;
 public class XomwNamespace {
 //		/**
 //		* These namespaces should always be first-letter capitalized, now and
@@ -189,13 +188,13 @@ public class XomwNamespace {
 	* @return array
 	* @since 1.17
 	*/
-	private static HashByInt namespaces = null;
-	public static HashByInt getCanonicalNamespaces() {return getCanonicalNamespaces(false);}
-	public static HashByInt getCanonicalNamespaces(boolean rebuild) {
+	private static XomwNamespaceHash namespaces = null;
+	public static XomwNamespaceHash getCanonicalNamespaces() {return getCanonicalNamespaces(false);}
+	public static XomwNamespaceHash getCanonicalNamespaces(boolean rebuild) {
 		if (namespaces == null || rebuild) {
 //				global $wgExtraNamespaces, $wgCanonicalNamespaceNames;
 			namespaces = XomwSetup.wgCanonicalNamespaceNames.Clone();
-			namespaces.Add_as_bry(XomwDefines.NS_MAIN, "");
+			namespaces.Add(XomwDefines.NS_MAIN, "");
 
 //				// Add extension namespaces
 //				$namespaces += ExtensionRegistry::getInstance()->getAttribute('ExtensionNamespaces');
@@ -221,29 +220,32 @@ public class XomwNamespace {
 //				return false;
 //			}
 //		}
-//
-//		/**
-//		* Returns the index for a given canonical name, or NULL
-//		* The input *must* be converted to lower case first
-//		*
-//		* @param String $name Namespace name
-//		* @return int
-//		*/
-//		public static function getCanonicalIndex($name) {
-//			static $xNamespaces = false;
-//			if ($xNamespaces == false) {
-//				$xNamespaces = [];
-//				foreach (self::getCanonicalNamespaces() as $i => $text) {
-//					$xNamespaces[strtolower($text)] = $i;
-//				}
-//			}
+
+	/**
+	* Returns the index for a given canonical name, or NULL
+	* The input *must* be converted to lower case first
+	*
+	* @param String $name Namespace name
+	* @return int
+	*/
+	private static Hash_adp xNamespaces = null;
+	public static int getCanonicalIndex(byte[] name) {
+		if (xNamespaces == null) {
+			xNamespaces = Hash_adp_bry.cs();
+			int len = namespaces.Len();
+			for (int i = 0; i < len; i++) {
+				XomwNamespaceItem item = (XomwNamespaceItem)namespaces.GetItemOrNull(i);
+				xNamespaces.Add(Bry_.Lcase__all(item.text), item);	// NOTE: MW does "strtolower($text)"; canonical namespaces are always ascii
+			}
+		}
 //			if (array_key_exists($name, $xNamespaces)) {
 //				return $xNamespaces[$name];
 //			} else {
 //				return null;
 //			}
-//		}
-//
+		return XomwNamespace.NULL_NS_ID;
+	}
+
 //		/**
 //		* Returns an array of the namespaces (by integer id) that exist on the
 //		* wiki. Used primarily by the api in help documentation.
@@ -496,4 +498,5 @@ public class XomwNamespace {
 //
 //			return $usableLevels;
 //		}
+	public static final int NULL_NS_ID = XophpUtility.Null_int;
 }

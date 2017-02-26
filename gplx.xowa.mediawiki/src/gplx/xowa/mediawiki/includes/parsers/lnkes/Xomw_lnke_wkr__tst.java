@@ -57,7 +57,7 @@ class Xomw_lnke_wkr__fxt {
 	private final    XomwParserBfr pbfr = new XomwParserBfr();
 	private boolean apos = true;
 	public Xomw_lnke_wkr__fxt() {
-		XomwParser parser = new XomwParser();
+		XomwParser parser = new XomwParser(XomwEnv.NewTest());
 		this.wkr = new Xomw_lnke_wkr(parser, Bry_bfr_.New(), parser.Linker(), parser.Sanitizer());
 		Xomw_regex_space regex_space = new Xomw_regex_space();
 		wkr.Init_by_wiki(XomwParser.Protocols__dflt(), new Xomw_regex_url(regex_space), regex_space);

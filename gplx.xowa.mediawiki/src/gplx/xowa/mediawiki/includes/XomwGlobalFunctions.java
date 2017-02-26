@@ -1375,7 +1375,7 @@ public class XomwGlobalFunctions {
 	*
 	* @see Message::__construct
 	*/
-	public static XomwMessage wfMessage(XomwParserEnv env, String key) {
+	public static XomwMessage wfMessage(XomwEnv env, String key) {
 //		function wfMessage($key /*...*/) {
 //			$message = new Message($key);
 

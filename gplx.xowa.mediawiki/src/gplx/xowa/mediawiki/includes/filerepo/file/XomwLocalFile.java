@@ -186,7 +186,7 @@ public class XomwLocalFile extends XomwFile {//		static final VERSION = 10; // c
 //			];
 //		}
 
-	public XomwLocalFile(XomwParserEnv env, XomwTitle title, XomwFileRepo repo, int w, int h, byte[] mime) {super(env, title, repo);
+	public XomwLocalFile(XomwEnv env, XomwTitle title, XomwFileRepo repo, int w, int h, byte[] mime) {super(env, title, repo);
 		this.width = w;
 		this.height = h;
 		this.mime = mime;

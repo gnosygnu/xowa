@@ -74,14 +74,15 @@ class Xomw_lnki_wkr__fxt {
 	private final    Xomw_lnki_wkr wkr;
 	private final    XomwParserCtx pctx;
 	private final    XomwParserBfr pbfr = new XomwParserBfr();
-	private final    XomwParserEnv env;
+	private final    XomwEnv env;
 	private final    XomwFileFinderMock file_finder;
 	private final    XomwFileRepo repo = new XomwFileRepo(Bry_.new_a7("/orig"), Bry_.new_a7("/thumb"));
 	private boolean apos = true;
 	public Xomw_lnki_wkr__fxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
-		XomwParser parser = new XomwParser();
+
+		XomwParser parser = new XomwParser(XomwEnv.NewTestByApp(app));
 		wkr = parser.Lnki_wkr();
 
 		// env
@@ -95,7 +96,7 @@ class Xomw_lnki_wkr__fxt {
 
 		// ctx
 		pctx = new XomwParserCtx();
-		pctx.Init_by_page(XomwTitle.newFromText(Bry_.new_a7("Page_1")));
+		pctx.Init_by_page(XomwTitle.newFromText(env, Bry_.new_a7("Page_1")));
 	}
 	public void Clear() {
 		wkr.Clear_state();

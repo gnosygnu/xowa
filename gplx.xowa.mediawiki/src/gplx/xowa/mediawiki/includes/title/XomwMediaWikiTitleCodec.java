@@ -233,6 +233,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 	* @return array A map with the fields 'interwiki', 'fragment', 'namespace',
 	*         'user_case_dbkey', and 'dbkey'.
 	*/
+	// private final    byte[][] tmpPrefixRegex = new byte[2][];
 	public XomwMediaWikiTitleCodecParts splitTitleString(byte[] text, int defaultNamespace) {
 		byte[] dbkey = XophpString.str_replace(Byte_ascii.Space, Byte_ascii.Underline, text);
 
@@ -279,7 +280,13 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 			parts.ns = XomwDefines.NS_FILE;
 			dbkey = Bry_.Mid(dbkey, 5);
 		}
-//			$prefixRegexp = "/^(.+?)_*:_*(.*)$/S";
+//			do {
+//				byte[][] m = tmpPrefixRegex;
+//				if (XomwRegexTitlePrefix.preg_match(m, dbkey)) {
+//					byte[] p = m[0];
+//					int ns = this.language.getNsIndex(p);
+//				}
+//			} while (true);
 //			do {
 //				$m = [];
 //				if (preg_match($prefixRegexp, dbkey, $m)) {
