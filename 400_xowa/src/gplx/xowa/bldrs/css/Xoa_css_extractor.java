@@ -22,7 +22,8 @@ import gplx.xowa.files.downloads.*;
 import gplx.core.net.*;
 import gplx.xowa.addons.wikis.htmls.css.bldrs.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*;
 import gplx.xowa.wikis.data.fetchers.*;
-public class Xoa_css_extractor {	
+public class Xoa_css_extractor {
+	private Io_url home_css_dir;
 	public IoEngine_xrg_downloadFil Download_xrg() {return download_xrg;} private IoEngine_xrg_downloadFil download_xrg = Io_mgr.Instance.DownloadFil_args("", Io_url_.Empty);	
 	public Xoa_css_extractor Wiki_domain_(byte[] v) {wiki_domain = v; return this;} private byte[] wiki_domain; 
 	public Xoa_css_extractor Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; return this;} private Gfo_usr_dlg usr_dlg;
@@ -39,6 +40,7 @@ public class Xoa_css_extractor {
 	private final    Gfo_url_parser url_parser = new Gfo_url_parser();
 	public void Init_by_app(Xoae_app app) {
 		this.usr_dlg = app.Usr_dlg();
+		this.home_css_dir = app.Usere().Fsys_mgr().Wiki_html_dir("home").GenSubDir("html");
 		Xof_download_wkr download_wkr = app.Wmf_mgr().Download_wkr();
 		this.download_xrg = download_wkr.Download_xrg();
 		css_img_downloader = new Xoa_css_img_downloader().Ctor(usr_dlg, download_wkr, Bry_.new_u8(protocol_prefix));
@@ -71,7 +73,13 @@ public class Xoa_css_extractor {
 	}
 	private void Install_by_wmf(Xowe_wiki wiki, Io_url wiki_html_dir) {
 		opt_download_css_common = wiki.Appe().Cfg().Get_bool_app_or("xowa.bldr.import.download_xowa_common", true);	// CFG: Cfg__
-		if (!gplx.core.ios.IoEngine_system.Web_access_enabled) opt_download_css_common = false;	// if !web_access_enabled, don't download
+
+		// do not download css if web_access disabled or wiki is other; DATE:2017-02-25
+		boolean wiki_is_other = wiki.Domain_tid() == Xow_domain_tid_.Tid__other;
+		if (	!gplx.core.ios.IoEngine_system.Web_access_enabled
+			||  wiki_is_other)
+			opt_download_css_common = false;	// if !web_access_enabled, don't download
+
 		this.wiki_domain = wiki.Domain_bry();
 		mainpage_url = "https://" + wiki.Domain_str();	// NOTE: cannot reuse protocol_prefix b/c "//" needs to be added manually; protocol_prefix is used for logo and images which have form of "//domain/image.png"; changed to https; DATE:2015-02-17
 		if (page_fetcher == null) page_fetcher = new Xow_page_fetcher_wiki();
@@ -79,7 +87,11 @@ public class Xoa_css_extractor {
 		this.wiki_html_dir = wiki_html_dir;
 		this.lang_is_ltr = wiki.Lang().Dir_ltr();
 		this.wiki_code = wiki.Domain_abrv();
-		mainpage_html = Mainpage_download_html();
+
+		// get mainpage; do not download css if wiki is other; DATE:2017-02-25
+		mainpage_html = wiki_is_other ? Bry_.Empty : Mainpage_download_html();
+
+		// generate css
 		Css_common_setup();
 		Css_wiki_setup();
 		Logo_setup();
@@ -105,8 +117,8 @@ public class Xoa_css_extractor {
 	}
 	private void Css_common_failover() {
 		Io_url trg_fil = wiki_html_dir.GenSubFil(Css_common_name);
+		Io_mgr.Instance.CopyDirDeep(home_css_dir, trg_fil.OwnerDir()); // NOTE: copy dir first b/c xowa_commons.css will be replaced below
 		Io_mgr.Instance.CopyFil(Css_common_failover_url(), trg_fil, true);
-		css_img_downloader.Chk(wiki_domain, trg_fil);
 	}
 	private void Css_common_download() {
 		boolean css_stylesheet_common_missing = true;
