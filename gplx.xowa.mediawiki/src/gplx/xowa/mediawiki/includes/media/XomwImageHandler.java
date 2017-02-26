@@ -76,7 +76,7 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 //				pos = Bry_find_.Find_fwd_while_num(src, 1, len);          // skip numeric
 //				if (Bry_.Match(src, pos, len, Xomw_lnki_wkr.Bry__px)) {   // matches "px"
 //					Xomw_params_handler rv = new Xomw_params_handler();
-//					rv.width = Bry_.To_int_or(src, 0, pos, XophpUtility.Null_int);
+//					rv.width = Bry_.To_int_or(src, 0, pos, XophpUtility.NULL_INT);
 //					return rv;
 //				}
 //			}
@@ -130,7 +130,7 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 				handlerParams.physicalWidth = handlerParams.width;
 			} else {
 				// Height was crap, unset it so that it will be calculated later
-				handlerParams.height = XophpUtility.Null_int;
+				handlerParams.height = XophpUtility.NULL_INT;
 			}
 		}
 

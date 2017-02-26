@@ -724,7 +724,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	// Parsed a width param of imagelink like 300px or 200x300px
 	// XO.MW.NOTE: for MW, "" -> null, null while "AxB" -> 0x0
 	public void parseWidthParam(int[] img_size, byte[] src) {
-		img_size[0] = img_size[1] = XophpUtility.Null_int;
+		img_size[0] = img_size[1] = XophpUtility.NULL_INT;
 		if (src == Bry_.Empty) {
 			return;
 		}

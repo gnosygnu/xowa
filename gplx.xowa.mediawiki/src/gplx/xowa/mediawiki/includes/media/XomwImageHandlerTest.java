@@ -36,7 +36,7 @@ class XomwImageHandler_fxt {
 	public XomwImageHandler_fxt() {
 		this.handler = new XomwTransformationalImageHandler(Bry_.new_a7("test_handler"));
 	}
-	public Xomw_params_handler Make__handlerParams(int w) {return Make__handlerParams(w, XophpUtility.Null_int, XophpUtility.Null_int, XophpUtility.Null_int);}
+	public Xomw_params_handler Make__handlerParams(int w) {return Make__handlerParams(w, XophpUtility.NULL_INT, XophpUtility.NULL_INT, XophpUtility.NULL_INT);}
 	public Xomw_params_handler Make__handlerParams(int w, int h, int phys_w, int phys_h) {
 		Xomw_params_handler rv = new Xomw_params_handler();
 		rv.width = w;

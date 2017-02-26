@@ -19,9 +19,9 @@ public class XophpUtility {
 	public static boolean empty(boolean v)     {return v == false;}
 	public static boolean empty(int v)      {return v == 0;}
 	public static boolean isset(byte[] v)   {return v != null;}
-	public static boolean isset(int v)      {return v != Null_int;}
-	public static boolean isset(double v)   {return v != Null_double;}
-	public static boolean istrue(int v) {return v != Null_int;}
+	public static boolean isset(int v)      {return v != NULL_INT;}
+	public static boolean isset(double v)   {return v != NULL_DOUBLE;}
+	public static boolean istrue(int v)     {return v != NULL_INT;}
 	public static boolean isnumeric(byte[] src) {
 		if (src == null) return false;
 		int len = src.length;
@@ -38,7 +38,7 @@ public class XophpUtility {
 		return true;
 	}
 
-	public static final int Null_int = Int_.Max_value;
-	public static final double Null_double = Double_.MinValue;
-	public static final    byte[] Null_bry = null;
+	public static final int NULL_INT = Int_.Max_value;
+	public static final double NULL_DOUBLE = Double_.MinValue;
+	public static final    byte[] NULL_BRY = null;
 }

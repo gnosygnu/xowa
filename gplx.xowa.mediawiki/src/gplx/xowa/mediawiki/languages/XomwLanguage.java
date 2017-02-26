@@ -30,9 +30,9 @@ public class XomwLanguage {
 //		public $mExtendedSpecialPageAliases;
 //
 //		/** @var array|null */
-	private XomwNamespaceHash namespaceNames;
-//		protected $mNamespaceIds, $namespaceAliases;
-//
+	private XomwNamespacesById namespaceNames;
+	private XomwNamespacesByName mNamespaceIds, namespaceAliases;
+
 //		/**
 //		* ReplacementArray Object caches
 //		*/
@@ -485,11 +485,11 @@ public class XomwLanguage {
 	*
 	* @return array
 	*/
-	public XomwNamespaceHash getNamespaces() {
+	public XomwNamespacesById getNamespaces() {
 		if (this.namespaceNames == null) {
 //				global $wgMetaNamespace, $wgMetaNamespaceTalk, $wgExtraNamespaces;
 //
-			XomwNamespaceHash validNamespaces = XomwNamespace.getCanonicalNamespaces();
+			XomwNamespacesById validNamespaces = XomwNamespace.getCanonicalNamespaces();
 //
 //				this.namespaceNames = $wgExtraNamespaces +
 //					self::$dataCache->getItem(this.mCode, 'namespaceNames');
@@ -566,8 +566,8 @@ public class XomwLanguage {
 	* @return String|boolean String if the namespace value exists, otherwise false
 	*/
 	public byte[] getNsText(int index) {
-		XomwNamespaceHash nsHash = this.getNamespaces();
-		return nsHash.GetTextOrNull(index);
+		XomwNamespacesById nsHash = this.getNamespaces();
+		return nsHash.GetNameOrNull(index);
 	}
 
 //		/**
@@ -640,12 +640,14 @@ public class XomwLanguage {
 //			$ids = this.getNamespaceIds();
 //			return isset($ids[$lctext]) ? $ids[$lctext] : false;
 //		}
-//
-//		/**
-//		* @return array
-//		*/
-//		public function getNamespaceAliases() {
-//			if (is_null(this.namespaceAliases)) {
+
+	/**
+	* @return array
+	*/
+	public XomwNamespacesByName getNamespaceAliases() {
+		if (this.namespaceAliases == null) {
+			// XO.MW: MW uses two sets: "aliases" + "convertedNames" and then combines them; XO just uses one
+			this.namespaceAliases = new XomwNamespacesByName();
 //				$aliases = self::$dataCache->getItem(this.mCode, 'namespaceAliases');
 //				if (!$aliases) {
 //					$aliases = [];
@@ -667,8 +669,8 @@ public class XomwLanguage {
 //						$aliases[$alias] = $index;
 //					}
 //				}
-//
-//				# Also add converted namespace names as aliases, to avoid confusion.
+
+			// Also add converted namespace names as aliases, to avoid confusion.
 //				$convertedNames = [];
 //				foreach (this.getVariants() as $variant) {
 //					if ($variant === this.mCode) {
@@ -680,36 +682,42 @@ public class XomwLanguage {
 //				}
 //
 //				this.namespaceAliases = $aliases + $convertedNames;
-//			}
-//
-//			return this.namespaceAliases;
-//		}
-//
-//		/**
-//		* @return array
-//		*/
-//		public function getNamespaceIds() {
-//			if (is_null(this.mNamespaceIds)) {
-//				global $wgNamespaceAliases;
-//				# Put namespace names and aliases into a hashtable.
-//				# If this is too slow, then we should arrange it so that it is done
-//				# before caching. The catch is that at pre-cache time, the above
-//				# class-specific fixup hasn't been done.
-//				this.mNamespaceIds = [];
-//				foreach (this.getNamespaces() as $index => $name) {
-//					this.mNamespaceIds[this.lc($name)] = $index;
-//				}
-//				foreach (this.getNamespaceAliases() as $name => $index) {
-//					this.mNamespaceIds[this.lc($name)] = $index;
-//				}
-//				if ($wgNamespaceAliases) {
-//					foreach ($wgNamespaceAliases as $name => $index) {
-//						this.mNamespaceIds[this.lc($name)] = $index;
-//					}
-//				}
-//			}
-//			return this.mNamespaceIds;
-//		}
+		}
+
+		return this.namespaceAliases;
+	}
+
+	/**
+	* @return array
+	*/
+	public XomwNamespacesByName getNamespaceIds() {
+		if (this.mNamespaceIds == null) {
+			// Put namespace names and aliases into a hashtable.
+			// If this is too slow, then we should arrange it so that it is done
+			// before caching. The catch is that at pre-cache time, the above
+			// class-specific fixup hasn't been done.
+			this.mNamespaceIds = new XomwNamespacesByName();
+			XomwNamespacesById getNamespacesHash = this.getNamespaces();
+			int len = getNamespacesHash.Len();
+			for (int i = 0; i < len; i++) {
+				XomwNamespaceItem item = (XomwNamespaceItem)getNamespacesHash.GetAtOrNull(i);
+				this.mNamespaceIds.Add(this.lc(item.name), item);
+			}
+			XomwNamespacesByName getNamespaceAliasesHash = this.getNamespaceAliases();
+			len = getNamespaceAliasesHash.Len();
+			for (int i = 0; i < len; i++) {
+				XomwNamespaceItem item = (XomwNamespaceItem)getNamespaceAliasesHash.GetAtOrNull(i);
+				this.mNamespaceIds.Add(this.lc(item.name), item);
+			}
+			XomwNamespacesByName wgNamespaceAliases = XomwSetup.wgNamespaceAliases;
+			len = wgNamespaceAliases.Len();
+			for (int i = 0; i < len; i++) {
+				XomwNamespaceItem item = (XomwNamespaceItem)wgNamespaceAliases.GetAtOrNull(i);
+				this.mNamespaceIds.Add(this.lc(item.name), item);
+			}
+		}
+		return this.mNamespaceIds;
+	}
 
 	/**
 	* Get a namespace key by value, case insensitive.  Canonical namespace
@@ -724,9 +732,8 @@ public class XomwLanguage {
 		if (ns != XomwNamespace.NULL_NS_ID) {
 			return ns;
 		}
-//			$ids = this.getNamespaceIds();
-//			return isset($ids[$lctext]) ? $ids[$lctext] : false;
-		return XophpUtility.Null_int;
+		XomwNamespacesByName ids = this.getNamespaceIds();
+		return ids.GetAsIdOrNullInt(lctext);
 	}
 
 //		/**

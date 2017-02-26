@@ -377,7 +377,7 @@ public class XomwLinker {
 				|| XophpUtility.isset(frameParams.frameless)
 				|| !XophpUtility.istrue(handlerParams.width)
 			) {
-				if (widthOption == XophpUtility.Null_int) {	// XO.MW: MW does extra validation that widthOption is in array; ("!isset( $wgThumbLimits[$widthOption] )")
+				if (widthOption == XophpUtility.NULL_INT) {	// XO.MW: MW does extra validation that widthOption is in array; ("!isset( $wgThumbLimits[$widthOption] )")
 					widthOption = env.User__default__thumbsize;
 				}
 
@@ -395,7 +395,7 @@ public class XomwLinker {
 
 				// Use width which is smaller: real image width or user preference width
 				// Unless image is scalable vector.
-				if (handlerParams.height == XophpUtility.Null_int && handlerParams.width <= 0 ||
+				if (handlerParams.height == XophpUtility.NULL_INT && handlerParams.width <= 0 ||
 						prefWidth < handlerParams.width || file.isVectorized()) {
 					handlerParams.width = prefWidth;
 				}

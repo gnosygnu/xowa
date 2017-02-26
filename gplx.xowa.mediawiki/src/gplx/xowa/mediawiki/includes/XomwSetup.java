@@ -169,15 +169,17 @@ public class XomwSetup {
 //		* all users if desired.
 //		*/
 //		$wgNamespaceProtection[NS_MEDIAWIKI] = 'editinterface';
-//
-//		/**
-//		* The canonical names of namespaces 6 and 7 are, as of v1.14, "File"
-//		* and "File_talk".  The old names "Image" and "Image_talk" are
-//		* retained as aliases for backwards compatibility.
-//		*/
-//		$wgNamespaceAliases['Image'] = NS_FILE;
-//		$wgNamespaceAliases['Image_talk'] = NS_FILE_TALK;
-//
+
+	/**
+	* The canonical names of namespaces 6 and 7 are, as of v1.14, "File"
+	* and "File_talk".  The old names "Image" and "Image_talk" are
+	* retained as aliases for backwards compatibility.
+	*/
+	public static final    XomwNamespacesByName wgNamespaceAliases = new XomwNamespacesByName()
+		.Add("Image", XomwDefines.NS_FILE)
+		.Add("Image_talk", XomwDefines.NS_FILE_TALK)
+		;
+
 //		/**
 //		* Initialise $wgLockManagers to include basic FS version
 //		*/
@@ -392,7 +394,7 @@ public class XomwSetup {
 	* Definitions of the NS_ constants are in Defines.php
 	* @private
 	*/
-	public static XomwNamespaceHash wgCanonicalNamespaceNames = new XomwNamespaceHash()
+	public static XomwNamespacesById wgCanonicalNamespaceNames = new XomwNamespacesById()
 		.Add(XomwDefines.NS_MEDIA            ,  "Media")
 		.Add(XomwDefines.NS_SPECIAL          ,  "Special")
 		.Add(XomwDefines.NS_TALK             ,  "Talk")

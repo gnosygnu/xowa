@@ -188,9 +188,9 @@ public class XomwNamespace {
 	* @return array
 	* @since 1.17
 	*/
-	private static XomwNamespaceHash namespaces = null;
-	public static XomwNamespaceHash getCanonicalNamespaces() {return getCanonicalNamespaces(false);}
-	public static XomwNamespaceHash getCanonicalNamespaces(boolean rebuild) {
+	private static XomwNamespacesById namespaces = null;
+	public static XomwNamespacesById getCanonicalNamespaces() {return getCanonicalNamespaces(false);}
+	public static XomwNamespacesById getCanonicalNamespaces(boolean rebuild) {
 		if (namespaces == null || rebuild) {
 //				global $wgExtraNamespaces, $wgCanonicalNamespaceNames;
 			namespaces = XomwSetup.wgCanonicalNamespaceNames.Clone();
@@ -234,8 +234,8 @@ public class XomwNamespace {
 			xNamespaces = Hash_adp_bry.cs();
 			int len = namespaces.Len();
 			for (int i = 0; i < len; i++) {
-				XomwNamespaceItem item = (XomwNamespaceItem)namespaces.GetItemOrNull(i);
-				xNamespaces.Add(Bry_.Lcase__all(item.text), item);	// NOTE: MW does "strtolower($text)"; canonical namespaces are always ascii
+				XomwNamespaceItem item = (XomwNamespaceItem)namespaces.GetAtOrNull(i);
+				xNamespaces.Add(Bry_.Lcase__all(item.name), item);	// NOTE: MW does "strtolower($text)"; canonical namespaces are always ascii
 			}
 		}
 //			if (array_key_exists($name, $xNamespaces)) {
@@ -498,5 +498,5 @@ public class XomwNamespace {
 //
 //			return $usableLevels;
 //		}
-	public static final int NULL_NS_ID = XophpUtility.Null_int;
+	public static final int NULL_NS_ID = XophpUtility.NULL_INT;
 }
