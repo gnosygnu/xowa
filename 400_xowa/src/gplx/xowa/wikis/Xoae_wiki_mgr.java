@@ -67,12 +67,15 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 		Xowdir_wiki_itm user_wiki_itm = db_mgr == null 
 			? null	// TEST:
 			: db_mgr.Tbl__wiki().Select_by_key_or_null(String_.new_u8(domain_bry));
-		Io_url wiki_root_url = user_wiki_itm == null
-			? app.Fsys_mgr().Wiki_dir().GenSubDir(String_.new_a7(domain_bry))
-			: user_wiki_itm.Url().OwnerDir();
 
-		Xowe_wiki rv = (Xowe_wiki)Make(domain_bry, wiki_root_url);
-		Add(rv);
+		Xowe_wiki rv = null;
+		if (user_wiki_itm == null) {
+			rv = (Xowe_wiki)Make(domain_bry, app.Fsys_mgr().Wiki_dir().GenSubDir(String_.new_a7(domain_bry)));
+			Add(rv);
+		}
+		else {
+			rv = gplx.xowa.addons.wikis.directorys.specials.items.bldrs.Xow_wiki_factory.Load_personal(app, domain_bry, user_wiki_itm.Url().OwnerDir());
+		}
 		return rv;
 	}
 	public Xow_wiki Make(byte[] domain_bry, Io_url wiki_root_dir) {
