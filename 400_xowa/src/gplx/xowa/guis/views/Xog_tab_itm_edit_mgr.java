@@ -40,7 +40,11 @@ public class Xog_tab_itm_edit_mgr {
 		wiki.Parser_mgr().Parse(page, true);
 		if (wiki.Html__hdump_enabled()) wiki.Html__hdump_mgr().Save_mgr().Save(page);	// must go after wiki.Parse
 
-		win_itm.Usr_dlg().Prog_one("", "", "saved page ~{0}", String_.new_u8(page.Ttl().Full_txt_raw()));	// NOTE: show message after Parse, b/c Parse will flash "Loading page"; DATE:2014-05-17
+		// NOTE: show message after Parse, b/c Parse will flash "Loading page"; DATE:2014-05-17
+		win_itm.Usr_dlg().Prog_many("", "", "saved ~{0} (~{1})"
+			, String_.new_u8(page.Ttl().Full_txt_raw())
+			, Datetime_now.Get().XtoStr_fmt("HH:mm:ss.fff")
+			);
 		if (!quick_save) {							// full_save; save page and go to read mode
 			// update categories
 			try {
