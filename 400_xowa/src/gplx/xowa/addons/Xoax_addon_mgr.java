@@ -71,6 +71,7 @@ public class Xoax_addon_mgr {
 		, new gplx.xowa.addons.apps.cfgs				.Xoa_cfg_addon()
 		, new gplx.xowa.addons.apps.updates				.Xoa_update_addon()
 		, new gplx.xowa.addons.apps.maints.sql_execs	.Xosql_exec_addon()
+		, new gplx.xowa.addons.wikis.searchs.fulltexts	.Xosearch_fulltext_addon()
 
 		// jsons
 		);

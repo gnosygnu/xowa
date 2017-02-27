@@ -67,6 +67,20 @@ public class Xowd_text_tbl implements Db_tbl {
 			}	finally {rdr.Rls();}
 		}
 	}
+	public Xowd_text_row[] Select_where(byte[] query) {
+		List_adp list = List_adp_.New();
+		Db_rdr rdr = conn.Stmt_sql(Db_sql_.Make_by_fmt(String_.Ary("SELECT * FROM text WHERE text_data LIKE '{0}'") , query)).Exec_select__rls_auto();
+		try {
+			while (rdr.Move_next()) {
+				int page_id = rdr.Read_int(fld_page_id);
+				byte[] text = rdr.Read_bry(fld_text_data);
+				if (text == null) text = Bry_.Empty;	// NOTE: defect wherein blank page inserts null not ""; for now always convert null to empty String; DATE:2015-11-08
+				text = zip_mgr.Unzip(zip_tid, text);
+				list.Add(new Xowd_text_row(page_id, text));
+			}
+		}	finally {rdr.Rls();}
+		return (Xowd_text_row[])list.To_ary_and_clear(Xowd_text_row.class);
+	}
 	public byte[] Zip(byte[] data) {return zip_mgr.Zip(zip_tid, data);}
 	public void Rls() {
 		synchronized (thread_lock) {	// LOCK:stmt-rls; DATE:2016-07-06
