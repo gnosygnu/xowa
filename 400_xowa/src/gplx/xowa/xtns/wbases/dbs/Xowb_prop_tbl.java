@@ -47,14 +47,17 @@ public class Xowb_prop_tbl implements Db_tbl {
 		return rv;
 	}
 	private void Select_all__add(Ordered_hash hash, Db_rdr rdr) {
+		// read data
 		String pid = String_.Upper(rdr.Read_str(fld__wbp_pid));	// convert "p123" to "P123"; note (a) Scrib.v2 calls as "P123"; (b) db stores as "p123"; (c) XO loads as "P123"; DATE:2016-12-03
 		byte datatype_id = (byte)rdr.Read_int(fld__wbp_datatype);
-		Wbase_enum_itm datatype_itm = Wbase_claim_type_.Reg.Get_itm_or((byte)datatype_id, null);
+
+		// convert id to key
+		Wbase_claim_type datatype_itm = (Wbase_claim_type)Wbase_claim_type_.Reg.Get_itm_or(datatype_id, null);
 		if (datatype_itm == null) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "wbase:invalid prop datatype_id; pid=~{0} datatype=~{1}", pid, datatype_id);
-			datatype_itm = Wbase_claim_type_.Itm__string;
+			datatype_itm = (Wbase_claim_type)Wbase_claim_type_.Itm__string;
 		}
-		hash.Add(pid, datatype_itm.Key_str());
+		hash.Add(pid, datatype_itm.Key_for_scrib()); // NOTE: must use Key_for_scrib, else multiple invalid-data-type errors in fr.w; DATE:2017-02-26
 	}
 	public void Rls() {}
 }
