@@ -233,7 +233,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 	* @return array A map with the fields 'interwiki', 'fragment', 'namespace',
 	*         'user_case_dbkey', and 'dbkey'.
 	*/
-	// private final    byte[][] tmpPrefixRegex = new byte[2][];
+	private final    byte[][] tmpPrefixRegex = new byte[2][];
 	public XomwMediaWikiTitleCodecParts splitTitleString(byte[] text, int defaultNamespace) {
 		byte[] dbkey = XophpString.str_replace(Byte_ascii.Space, Byte_ascii.Underline, text);
 
@@ -276,74 +276,70 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 		}
 
 		// Namespace or interwiki prefix
-		if (Bry_.Has_at_bgn(dbkey, Bry_.new_a7("File:"))) {
-			parts.ns = XomwDefines.NS_FILE;
-			dbkey = Bry_.Mid(dbkey, 5);
-		}
-//			do {
-//				byte[][] m = tmpPrefixRegex;
-//				if (XomwRegexTitlePrefix.preg_match(m, dbkey)) {
-//					byte[] p = m[0];
-//					int ns = this.language.getNsIndex(p);
-//					if (ns != XophpUtility.NULL_INT) {
-//						// Ordinary namespace
-//						dbkey = m[1];
-//						parts.ns = ns;
-//						// For Talk:X pages, check if X has a "namespace" prefix
-//						if (ns == XomwDefines.NS_TALK && XomwRegexTitlePrefix.preg_match(m, dbkey)) {
-//							if (this.language.getNsIndex(m[0]) != XophpUtility.NULL_INT) {
-//								// Disallow Talk:File:x type titles...
-//								throw new XomwMalformedTitleException("title-invalid-talk-namespace", text);
+		do {
+			byte[][] m = tmpPrefixRegex;
+			if (XomwRegexTitlePrefix.preg_match(m, dbkey)) {
+				byte[] p = m[0];
+				int ns = this.language.getNsIndex(p);
+				if (ns != XophpUtility.NULL_INT) {
+					// Ordinary namespace
+					dbkey = m[1];
+					parts.ns = ns;
+					// For Talk:X pages, check if X has a "namespace" prefix
+					if (ns == XomwDefines.NS_TALK && XomwRegexTitlePrefix.preg_match(m, dbkey)) {
+						if (this.language.getNsIndex(m[0]) != XophpUtility.NULL_INT) {
+							// Disallow Talk:File:x type titles...
+							throw new XomwMalformedTitleException("title-invalid-talk-namespace", text);
+						}
+//							else if (Interwiki::isValidInterwiki($x[1])) {
+//								// TODO: get rid of global state!
+//								// Disallow Talk:Interwiki:x type titles...
+//								throw new XomwMalformedTitleException('title-invalid-talk-namespace', text);
 //							}
-////							else if (Interwiki::isValidInterwiki($x[1])) {
-////								// TODO: get rid of global state!
-////								// Disallow Talk:Interwiki:x type titles...
-////								throw new XomwMalformedTitleException('title-invalid-talk-namespace', text);
-////							}
+					}
+				}
+//					else if (Interwiki::isValidInterwiki($p)) {
+//						// Interwiki link
+//						dbkey = $m[2];
+//						parts['interwiki'] = this.language->lc($p);
+//
+//						// Redundant interwiki prefix to the local wiki
+//						foreach (this.localInterwikis as $localIW) {
+//							if (0 == strcasecmp(parts['interwiki'], $localIW)) {
+//								if (dbkey == '') {
+//									// Empty self-links should point to the Main Page, to ensure
+//									// compatibility with cross-wiki transclusions and the like.
+//									$mainPage = Title::newMainPage();
+//									return [
+//										'interwiki' => $mainPage->getInterwiki(),
+//										'local_interwiki' => true,
+//										'fragment' => $mainPage->getFragment(),
+//										'namespace' => $mainPage->getNamespace(),
+//										'dbkey' => $mainPage->getDBkey(),
+//										'user_case_dbkey' => $mainPage->getUserCaseDBKey()
+//									];
+//								}
+//								parts['interwiki'] = '';
+//								// local interwikis should behave like initial-colon links
+//								parts['local_interwiki'] = true;
+//
+//								// Do another namespace split...
+//								continue 2;
+//							}
+//						}
+//
+//						// If there's an initial colon after the interwiki, that also
+//						// resets the default namespace
+//						if (dbkey !== '' && dbkey[0] == ':') {
+//							parts['namespace'] = NS_MAIN;
+//							dbkey = substr(dbkey, 1);
 //						}
 //					}
-////					else if (Interwiki::isValidInterwiki($p)) {
-////						// Interwiki link
-////						dbkey = $m[2];
-////						parts['interwiki'] = this.language->lc($p);
-////
-////						// Redundant interwiki prefix to the local wiki
-////						foreach (this.localInterwikis as $localIW) {
-////							if (0 == strcasecmp(parts['interwiki'], $localIW)) {
-////								if (dbkey == '') {
-////									// Empty self-links should point to the Main Page, to ensure
-////									// compatibility with cross-wiki transclusions and the like.
-////									$mainPage = Title::newMainPage();
-////									return [
-////										'interwiki' => $mainPage->getInterwiki(),
-////										'local_interwiki' => true,
-////										'fragment' => $mainPage->getFragment(),
-////										'namespace' => $mainPage->getNamespace(),
-////										'dbkey' => $mainPage->getDBkey(),
-////										'user_case_dbkey' => $mainPage->getUserCaseDBKey()
-////									];
-////								}
-////								parts['interwiki'] = '';
-////								// local interwikis should behave like initial-colon links
-////								parts['local_interwiki'] = true;
-////
-////								// Do another namespace split...
-////								continue 2;
-////							}
-////						}
-////
-////						// If there's an initial colon after the interwiki, that also
-////						// resets the default namespace
-////						if (dbkey !== '' && dbkey[0] == ':') {
-////							parts['namespace'] = NS_MAIN;
-////							dbkey = substr(dbkey, 1);
-////						}
-////					}
-//					// If there's no recognized interwiki or namespace,
-//					// then let the colon expression be part of the title.
-//				}
-//				break;
-//			} while (true);
+				// If there's no recognized interwiki or namespace,
+				// then let the colon expression be part of the title.
+			}
+			break;
+		} while (true);
 
 //			$fragment = strstr(dbkey, '#');
 //			if (false !== $fragment) {

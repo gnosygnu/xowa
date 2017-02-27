@@ -232,18 +232,20 @@ public class XomwNamespace {
 	public static int getCanonicalIndex(byte[] name) {
 		if (xNamespaces == null) {
 			xNamespaces = Hash_adp_bry.cs();
-			int len = namespaces.Len();
+			XomwNamespacesById namespacesHash = getCanonicalNamespaces();
+			int len = namespacesHash.Len();
 			for (int i = 0; i < len; i++) {
-				XomwNamespaceItem item = (XomwNamespaceItem)namespaces.GetAtOrNull(i);
+				XomwNamespaceItem item = (XomwNamespaceItem)namespacesHash.GetAtOrNull(i);
 				xNamespaces.Add(Bry_.Lcase__all(item.name), item);	// NOTE: MW does "strtolower($text)"; canonical namespaces are always ascii
 			}
 		}
-//			if (array_key_exists($name, $xNamespaces)) {
-//				return $xNamespaces[$name];
-//			} else {
-//				return null;
-//			}
-		return XomwNamespace.NULL_NS_ID;
+		XomwNamespaceItem xNs = (XomwNamespaceItem)xNamespaces.Get_by(name);
+		if (xNs != null) {
+			return xNs.id;
+		}
+		else {
+			return XomwNamespace.NULL_NS_ID;
+		}
 	}
 
 //		/**

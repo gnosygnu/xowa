@@ -29,4 +29,10 @@ public class XomwMediaWikiTitleCodecParts {
 		this.dbkey = dbkey;
 		this.user_case_dbkey = dbkey;
 	}
+	public String ToStr() {
+		Bry_bfr bfr = Bry_bfr_.New();
+		bfr.Add_int_variable(ns).Add_byte_pipe();
+		bfr.Add(dbkey).Add_byte_pipe();
+		return bfr.To_str_and_clear();
+	}
 }
