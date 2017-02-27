@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.linkers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.langs.htmls.*;
-import gplx.xowa.mediawiki.includes.htmls.*;
+import gplx.xowa.mediawiki.includes.xohtml.*;
 /*	TODO.XO
 	* P7: $html = HtmlArmor::getHtml($text);
 	* P3: getLinkUrl [alternate urls? EX: mw/wiki/index.php/title?]

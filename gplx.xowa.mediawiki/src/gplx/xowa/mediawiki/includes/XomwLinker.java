@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import gplx.core.btries.*;
 import gplx.langs.htmls.*;
-import gplx.xowa.mediawiki.includes.htmls.*; import gplx.xowa.mediawiki.includes.linkers.*; import gplx.xowa.mediawiki.includes.parsers.*;
+import gplx.xowa.mediawiki.includes.xohtml.*; import gplx.xowa.mediawiki.includes.linkers.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.xowa.mediawiki.includes.filerepo.file.*; import gplx.xowa.mediawiki.includes.media.*;
 import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
 /*	TODO.XO

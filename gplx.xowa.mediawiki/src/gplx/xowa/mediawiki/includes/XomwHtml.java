@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import gplx.core.btries.*;
-import gplx.xowa.mediawiki.includes.htmls.*;
+import gplx.xowa.mediawiki.includes.xohtml.*;
 /*	TODO.XO:
 	* handle spaceSeparatedListAttributes; EX: "cls=a cls=b" -> "cls='a b'"
 	* self::dropDefaults($element, $attribs)

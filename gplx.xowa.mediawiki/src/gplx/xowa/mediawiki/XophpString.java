@@ -150,4 +150,7 @@ public class XophpString {
 	public static byte[] str_replace(byte find, byte repl, byte[] src) {
 		return Bry_.Replace(src, 0, src.length, find, repl);
 	}
+	public static byte[] str_replace(byte[] find, byte[] repl, byte[] src) {
+		return Bry_.Replace(src, find, repl);
+	}
 }

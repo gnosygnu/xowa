@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*; import gplx.x
 import gplx.core.btries.*; import gplx.core.primitives.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.mediawiki.includes.parsers.*; import gplx.xowa.mediawiki.includes.parsers.quotes.*;
-import gplx.xowa.mediawiki.includes.htmls.*; import gplx.xowa.mediawiki.includes.linkers.*;
+import gplx.xowa.mediawiki.includes.xohtml.*; import gplx.xowa.mediawiki.includes.linkers.*;
 import gplx.xowa.mediawiki.includes.libs.*;
 import gplx.xowa.mediawiki.includes.media.*; import gplx.xowa.mediawiki.includes.filerepo.file.*;
 import gplx.xowa.parsers.uniqs.*;

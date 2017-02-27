@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import org.junit.*; import gplx.core.tests.*;
-import gplx.xowa.mediawiki.includes.htmls.*;
+import gplx.xowa.mediawiki.includes.xohtml.*;
 public class XomwHtml_expandAttributesTest {
 	private final    XomwHtml_expandAttributesFxt fxt = new XomwHtml_expandAttributesFxt();
 	@Test   public void Basic()	{

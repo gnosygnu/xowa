@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import gplx.core.brys.*; import gplx.core.btries.*; import gplx.core.encoders.*; import gplx.core.primitives.*; import gplx.langs.htmls.entitys.*;
 import gplx.xowa.parsers.htmls.*;
-import gplx.langs.htmls.*; import gplx.xowa.mediawiki.includes.htmls.*; import gplx.xowa.mediawiki.includes.parsers.*;
+import gplx.langs.htmls.*; import gplx.xowa.mediawiki.includes.xohtml.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.xowa.mediawiki.includes.libs.*;
 public class XomwSanitizer {
 	private final    Mwh_doc_wkr__atr_bldr atr_bldr = new Mwh_doc_wkr__atr_bldr();

@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.core.btries.*; import gplx.core.primitives.*;
-import gplx.xowa.mediawiki.includes.htmls.*;
+import gplx.xowa.mediawiki.includes.xohtml.*;
 /*	TODO.XO
 	* P3: $langObj->formatNum( ++$this->mAutonumber );
 	* P2: $this->getConverterLanguage()->markNoConversion( $text );
