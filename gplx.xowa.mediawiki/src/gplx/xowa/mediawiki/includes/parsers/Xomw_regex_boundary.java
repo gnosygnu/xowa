@@ -29,7 +29,7 @@ public class Xomw_regex_boundary {	// THREAD.SAFE: trv is only for consistent in
 	}
 	public boolean Is_boundary_prv(byte[] src, int pos) {
 		if (pos == 0) return true; // BOS is true
-		int bgn = gplx.core.intls.Utf8_.Get_pos0_of_char_bwd(src, pos - 1);
+		int bgn = gplx.core.intls.Utf8_.Get_prv_char_pos0(src, pos);
 		byte b = src[bgn];
 		Object o = trie.Match_at_w_b0(trv, b, src, bgn, pos);
 		return o != null;

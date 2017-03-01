@@ -58,6 +58,40 @@ public class Xosearch_finder_cbk__eval__tst {
 		// n: char exists
 		fxt.Test__eval_n("a");
 	}
+	@Test   public void Trim_end() {
+		fxt.Init__search("a");
+		// y: single
+		fxt.Test__eval_y("a!");
+		// y: many
+		fxt.Test__eval_y("a!!!");
+	}
+	@Test   public void Trim_bgn() {
+		fxt.Init__search("a");
+		// y: single
+		fxt.Test__eval_y("!a");
+		// y: many
+		fxt.Test__eval_y("!!!a");
+	}
+	@Test   public void Trim_both() {
+		fxt.Init__search("a");
+		// y: single
+		fxt.Test__eval_y("'a'");
+		// y: many
+		fxt.Test__eval_y("'''a'''");
+	}
+	@Test   public void Slash() {
+		fxt.Init__search("a");
+		// y: slash before, after
+		fxt.Test__eval_y("a/b/c", "b/a/c", "b/c/a");
+	}
+	// .
+	// ...
+	// -
+	// a'b
+	// https://site/page
+	// ()
+	// []
+	// <>
 }
 class Xosearch_finder_cbk__eval__fxt {
 	private boolean case_match = false;
@@ -76,7 +110,7 @@ class Xosearch_finder_cbk__eval__fxt {
 			byte[] text_bry = Bry_.new_u8(text);
 			cbk.found = false;
 			finder.Match(text_bry, 0, text_bry.length, cbk);
-			Gftest.Eq__bool(expd, cbk.found, "query={0}, text={1}", finder.Query(), text);
+			Gftest.Eq__bool(expd, cbk.found, "query={0} text={1}", finder.Query(), text);
 		}
 	}
 }

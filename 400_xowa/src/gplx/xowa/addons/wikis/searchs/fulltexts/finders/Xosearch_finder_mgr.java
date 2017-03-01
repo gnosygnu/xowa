@@ -22,6 +22,8 @@ public class Xosearch_finder_mgr {
 	private Xosearch_word_node tree_root;
 	private final    Srch_crt_parser parser = new Srch_crt_parser(Srch_crt_scanner_syms.Dflt);
 	private final    Btrie_rv trv = new Btrie_rv();
+	private final    Xosearch_word_lang lang = new Xosearch_word_lang();
+	private final    Xosearch_word_bounds word_bounds = new Xosearch_word_bounds();
 
 	public byte[] Query() {return query;} private byte[] query;
 	public void Init(byte[] query, boolean case_match, boolean auto_wildcard, byte wildchar_byte, byte not_byte) {
@@ -51,16 +53,17 @@ public class Xosearch_finder_mgr {
 
 			// current byte matches a hook; get hook and hook_end
 			Xosearch_word_node hook = (Xosearch_word_node)hook_obj;
+			int hook_bgn = cur;
 			int hook_end = cur + hook.word_hook.length;
 
-			// get current word bounds by finding flanking ws
-			int word_bgn = Bry_find_.Find_bwd_ws(src, cur, 0) + 1;
-			int word_end = Bry_find_.Find_fwd_until_ws(src, hook_end, src_end);
-			if (word_end == -1) word_end = src_end;	// WORKAROUND: no match returns -1 instead of src_end
+			// get word_bounds
+			lang.Get_word_bounds(word_bounds, trv, src, src_end, hook_bgn, hook_end);
+			int word_bgn = word_bounds.word_bgn;
+			int word_end = word_bounds.word_end;
 
 			// check if current word matches criteria-word
-			if (hook.Match_word(src, cur, hook_end, word_bgn, word_end)) {
-				cbk.Process_item_found(src, cur, hook_end, word_bgn, word_end, hook);
+			if (hook.Match_word(lang, src, hook_bgn, hook_end, word_bgn, word_end)) {
+				cbk.Process_item_found(src, hook_bgn, hook_end, word_bgn, word_end, hook);
 			}
 
 			// update position to word_end

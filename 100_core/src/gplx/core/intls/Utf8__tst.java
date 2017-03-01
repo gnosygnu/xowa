@@ -17,12 +17,12 @@ package gplx.core.intls; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Utf8__tst {
 	private Utf8__fxt fxt = new Utf8__fxt();
-	@Test  public void Get_pos0_of_char_bwd() {
-		fxt.Test_Get_pos0_of_char_bwd("abcd", 3);		// len=1; (note that bry.len = 4)
-		fxt.Test_Get_pos0_of_char_bwd("a", 0);			// len=1; short-String
-		fxt.Test_Get_pos0_of_char_bwd("abc¢", 3);		// len=2; (note that bry.len = 5)
-		fxt.Test_Get_pos0_of_char_bwd("abc€", 3);		// len=3; (note that bry.len = 6)
-		fxt.Test_Get_pos0_of_char_bwd("abc" + String_.new_u8(Byte_.Ary_by_ints(240, 164, 173, 162)), 3);		// len=4; (note that bry.len = 7)
+	@Test  public void Get_prv_char_pos0() {
+		fxt.Test__Get_prv_char_pos0("abcd", 3);        // len=1; (note that bry.len = 4)
+		fxt.Test__Get_prv_char_pos0("a", 0);           // len=1; short-String
+		fxt.Test__Get_prv_char_pos0("abc¢", 3);        // len=2; (note that bry.len = 5)
+		fxt.Test__Get_prv_char_pos0("abc€", 3);        // len=3; (note that bry.len = 6)
+		fxt.Test__Get_prv_char_pos0("abc" + String_.new_u8(Byte_.Ary_by_ints(240, 164, 173, 162)), 3);		// len=4; (note that bry.len = 7)
 	}
 	@Test  public void Increment_char_at_last_pos() {
 		fxt.Test_Increment_char_at_last_pos("a", "b");
@@ -56,10 +56,10 @@ public class Utf8__tst {
 //		}
 }
 class Utf8__fxt {
-	public void Test_Get_pos0_of_char_bwd(String str, int expd) {
-		byte[] bry = Bry_.new_u8(str);
-		int pos = bry.length - 1;	// always start from last char
-		Tfds.Eq(expd, Utf8_.Get_pos0_of_char_bwd(bry, pos));
+	public void Test__Get_prv_char_pos0(String src_str, int expd) {
+		byte[] src_bry = Bry_.new_u8(src_str);
+		Tfds.Eq(expd, Utf8_.Get_prv_char_pos0    (src_bry, src_bry.length));
+		Tfds.Eq(expd, Utf8_.Get_prv_char_pos0_old(src_bry, src_bry.length - 1));
 	}
 	public void Test_Increment_char_at_last_pos(String str, String expd) {
 		Tfds.Eq(expd, String_.new_u8(Utf8_.Increment_char_at_last_pos(Bry_.new_u8(str))));

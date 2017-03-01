@@ -285,7 +285,7 @@ class Xomw_regex_html_entity {
 		int numbers = 0;
 		int letters = 0;
 		while (cur >= src_end) {
-			int b_bgn = gplx.core.intls.Utf8_.Get_pos0_of_char_bwd(src, cur);
+			int b_bgn = gplx.core.intls.Utf8_.Get_prv_char_pos0_old(src, cur);
 			switch (src[b_bgn]) {
 				case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
 				case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:

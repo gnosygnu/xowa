@@ -60,7 +60,7 @@ public class Utf8_ {
 		int bry_len = bry.length; if (bry_len == 0) return bry;
 		int pos = bry_len - 1;
 		while (true) {												// loop bwds
-			int cur_char_pos0 = Get_pos0_of_char_bwd(bry, pos);		// get byte0 of char
+			int cur_char_pos0 = Get_prv_char_pos0_old(bry, pos);		// get byte0 of char
 			int cur_char_len = (pos - cur_char_pos0) + 1;			// calc len of char
 			int nxt_char = Codepoint_max;
 			if (cur_char_len == 1) {								// len=1; just change 1 byte
@@ -82,7 +82,7 @@ public class Utf8_ {
 			if (pos < 0) return null;
 		}
 	}
-	public static int Get_pos0_of_char_bwd(byte[] bry, int pos) {	// find pos0 of char while moving bwd through bry; see test
+	public static int Get_prv_char_pos0_old(byte[] bry, int pos) {	// find pos0 of char while moving bwd through bry; see test
 		int stop = pos - 4;						// UTF8 char has max of 4 bytes
 		if (stop < 0) stop = 0;					// if at pos 0 - 3, stop at 0
 		for (int i = pos - 1; i >= stop; i--) {	// start at pos - 1, and move bwd; NOTE: pos - 1 to skip pos, b/c pos will never definitively yield any char_len info
@@ -96,6 +96,34 @@ public class Utf8_ {
 		}
 		return pos;	// no mult-byte char found; return pos
 	}
+	public static int Get_prv_char_pos0(byte[] src, int cur) {	// find pos0 of char while moving bwd through src; see test
+		// do bounds checks
+		if (cur == 0) return -1;
+		if (cur <= -1 || cur > src.length) throw Err_.new_wo_type("invalid index for get_prv_char_pos0", "src", src, "cur", cur);
+
+		// start at cur - 1; note bounds checks above
+		int pos = cur - 1; 
+
+		// get 1st byte and check if ASCII for (a) error-checking (ASCII can only be in 1st byte); (b) performance
+		byte b = src[pos];
+		if (b >= 0 && b <= Byte_.Max_value_127) return pos;
+
+		// loop maximum of 4 times; note that UTF8 char has max of 4 bytes
+		for (int i = 0; i < 4; i++) {
+			int char_len = Len_of_char_by_1st_byte(b);
+			switch (char_len) {	// if char_len is multi-byte and cur is at correct multi-byte pos (cur - i = # of bytes - 1), then pos0 found; EX: � = {226,130,172}; 172 is skipped; 130 has len of 1 -> continue; 226 has len of 3 and is found at correct cur for 3 byte char -> return
+				case 2: if (i == 1) return pos; break;
+				case 3: if (i == 2) return pos; break;
+				case 4: if (i == 3) return pos; break;
+			}
+
+			// decrement and set byte
+			pos--;
+			b = src[pos];
+		}
+
+		throw Err_.new_wo_type("could not get prv_char", "src", src, "cur", cur);
+	}
 	@gplx.Internal protected static int Increment_char(int cur) {
 		while (cur++ < Codepoint_max) {
 			if (cur == Codepoint_surrogate_bgn) cur = Codepoint_surrogate_end + 1;	// skip over surrogate range
@@ -107,7 +135,7 @@ public class Utf8_ {
 	private static boolean Codepoint_valid(int v) {
 				return Character.isDefined(v);
 			}
-	public static final int 
+	public static final    int 
 	  Codepoint_max = 0x10FFFF //see http://unicode.org/glossary/
 	, Codepoint_surrogate_bgn = 0xD800
 	, Codepoint_surrogate_end = 0xDFFF

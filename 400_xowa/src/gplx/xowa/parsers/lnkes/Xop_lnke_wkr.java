@@ -280,7 +280,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 				return false;	// alpha-numerical is invalid; EX: "titel:" should not generate a lnke for "tel:"
 		}
 		if (prv_byte >= Byte_ascii.Ascii_min && prv_byte <= Byte_ascii.Ascii_max) return true;	// consider all other ASCII chars as true; EX: \t\n !, etc; 
-		prv_pos = gplx.core.intls.Utf8_.Get_pos0_of_char_bwd(src, prv_pos);
+		prv_pos = gplx.core.intls.Utf8_.Get_prv_char_pos0_old(src, prv_pos);
 		prv_byte = src[prv_pos];
 		boolean prv_char_is_letter = ctx.Lang().Case_mgr().Match_any_exists(prv_byte, src, prv_pos, bgn_pos);
 		return !prv_char_is_letter;

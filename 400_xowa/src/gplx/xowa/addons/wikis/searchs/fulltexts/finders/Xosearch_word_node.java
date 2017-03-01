@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.fulltexts.finders; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.fulltexts.*;
+import gplx.core.btries.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 public class Xosearch_word_node {
 	public int tid;
@@ -24,9 +25,7 @@ public class Xosearch_word_node {
 	public boolean wildcard_at_end;
 	public boolean found;
 
-	public boolean Match_word(byte[] src, int hook_bgn, int hook_end, int word_bgn, int word_end) {
-		// TODO.XO: handle punctuation
-
+	public boolean Match_word(Xosearch_word_lang ctx, byte[] src, int hook_bgn, int hook_end, int word_bgn, int word_end) {
 		// if no wildcard at bgn, hook_bgn must match word_bgn
 		if (   !wildcard_at_bgn
 			&& hook_bgn != word_bgn)
