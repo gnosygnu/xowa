@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.searchs.fulltexts.finders; import gplx.*; import 
 import gplx.core.btries.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 public class Xosearch_word_node_ {
-	public static Xosearch_word_node New_root(Srch_crt_itm src, Btrie_slim_mgr word_trie, byte wildchar_byte) {
+	public static Xosearch_word_node New_root(Srch_crt_itm src, Btrie_slim_mgr word_trie, byte wildchar_byte, byte not_byte) {
 		Xosearch_word_node trg = new Xosearch_word_node();
 		trg.tid = src.Tid;
 
@@ -25,16 +25,29 @@ public class Xosearch_word_node_ {
 		switch (trg.tid) {
 			case Srch_crt_itm.Tid__word:
 			case Srch_crt_itm.Tid__word_quote:
-				byte[] word_orig = src.Raw;         // EX: "abc*"
-
-				// determine if wildcards at bgn / end
+				// get word_orig; EX: "abc*"
+				byte[] word_orig = src.Raw;
 				int word_orig_len = word_orig.length;
-				boolean wildcard_at_bgn = word_orig_len > 1 && word_orig[0] == wildchar_byte;
-				boolean wildcard_at_end = word_orig_len > 1 && word_orig[word_orig_len - 1] == wildchar_byte;
+
+				// init hook_bgn / hook_end
+				int hook_bgn = 0;
+				int hook_end = word_orig_len;
+
+				// handle wildcard at bgn; EX: "*a"
+				boolean wildcard_at_bgn = false;
+				if (word_orig_len > hook_bgn + 1 && word_orig[hook_bgn] == wildchar_byte) {
+					wildcard_at_bgn = true;
+					hook_bgn++;
+				}
+
+				// handle wildcard at end; EX: "a*"
+				boolean wildcard_at_end = false;
+				if (word_orig_len > hook_bgn + 1 && word_orig[hook_end - 1] == wildchar_byte) {
+					wildcard_at_end = true;
+					hook_end--;
+				}
 
 				// get hook
-				int hook_bgn = wildcard_at_bgn ? 1 : 0;
-				int hook_end = wildcard_at_end ? word_orig_len - 1 : word_orig_len;
 				byte[] word_hook = wildcard_at_bgn || wildcard_at_end ? Bry_.Mid(word_orig, hook_bgn, hook_end) : word_orig;
 
 				// assign to trg
@@ -43,7 +56,7 @@ public class Xosearch_word_node_ {
 				trg.wildcard_at_bgn = wildcard_at_bgn;
 				trg.wildcard_at_end = wildcard_at_end;
 
-				// add to hash, trie
+				// add to trie
 				if (word_trie.Match_exact(word_hook) == null) { // don't add if exists
 					word_trie.Add_obj(word_hook, trg);
 				}						
@@ -56,7 +69,7 @@ public class Xosearch_word_node_ {
 		trg.subs = trg_subs;
 		int len = src_subs.length;
 		for (int i = 0; i < len; i++) {
-			trg.subs[i] = New_root(src_subs[i], word_trie, wildchar_byte);
+			trg.subs[i] = New_root(src_subs[i], word_trie, wildchar_byte, not_byte);
 		}
 
 		return trg;

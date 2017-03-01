@@ -34,7 +34,7 @@ public class Xosearch_word_node {
 
 		// if no wildcard at end, hook_end must match word_end
 		if (   !wildcard_at_end
-			&& hook_bgn != word_end)
+			&& hook_end != word_end)
 			return false;
 
 		return true;
@@ -62,7 +62,7 @@ public class Xosearch_word_node {
 			case Srch_crt_itm.Tid__word_quote:
 				return found;
 			case Srch_crt_itm.Tid__not:
-				return !found;
+				return !subs[0].Eval();
 			case Srch_crt_itm.Tid__invalid:		return false;			// should not happen
 			default:							throw Err_.new_unhandled_default(tid);
 		}

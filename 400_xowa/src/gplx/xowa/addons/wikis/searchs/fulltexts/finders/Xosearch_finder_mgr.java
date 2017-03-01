@@ -23,12 +23,14 @@ public class Xosearch_finder_mgr {
 	private final    Srch_crt_parser parser = new Srch_crt_parser(Srch_crt_scanner_syms.Dflt);
 	private final    Btrie_rv trv = new Btrie_rv();
 
-	public void Init(byte[] query_mcase, boolean case_match, boolean auto_wildcard, byte wildchar_byte) {
+	public byte[] Query() {return query;} private byte[] query;
+	public void Init(byte[] query, boolean case_match, boolean auto_wildcard, byte wildchar_byte, byte not_byte) {
+		this.query = query;
 		// create a new hook_trie based on case_match
 		this.hook_trie = case_match ? Btrie_slim_mgr.cs() : Btrie_slim_mgr.ci_u8();
 
 		// create a new tree_root for eval
-		this.tree_root = Xosearch_word_node_.New_root(parser.Parse_or_invalid(query_mcase, auto_wildcard).Root, hook_trie, wildchar_byte);
+		this.tree_root = Xosearch_word_node_.New_root(parser.Parse_or_invalid(query, auto_wildcard).Root, hook_trie, wildchar_byte, not_byte);
 	}
 	public void Match(byte[] src, int src_bgn, int src_end, Xosearch_finder_cbk cbk) {
 		// init and clear

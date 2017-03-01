@@ -51,7 +51,7 @@ class Xosearch_fulltext_svc {
 			.Add_long("page_count", 0)
 			);
 
-		finder.Init(query_lcase, false, false, Byte_ascii.Star);
+		finder.Init(query_lcase, false, false, Byte_ascii.Star, Byte_ascii.Dash);
 		try {
 			int found = 0;
 			while (page_rdr.Move_next()) {
