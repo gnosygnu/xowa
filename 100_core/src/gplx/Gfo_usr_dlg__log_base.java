@@ -37,7 +37,7 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 	public Io_url Log_dir() {return log_dir;}
 	public void Log_dir_(Io_url log_dir) {
 		this.log_dir = log_dir;
-		session_dir = log_dir.GenSubDir(Dir_name_current);
+		session_dir = log_dir.GenSubDir(Datetime_now.Get().XtoStr_fmt_yyyyMMdd_HHmmss_fff());
 		session_fil = session_dir.GenSubFil("session.txt");
 		err_fil = session_dir.GenSubFil("err.txt");
 	}
@@ -52,9 +52,7 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 			this.Log_to_session("archive dir del: " + session_dir.Raw());
 		}
 		this.Log_to_session("app term");
-		MoveCurrentToArchive(session_dir);
 	}
-	private void MoveCurrentToArchive(Io_url dir) {Io_mgr.Instance.MoveDirDeep(dir, dir.OwnerDir().GenSubDir(Datetime_now.Get().XtoStr_fmt_yyyyMMdd_HHmmss_fff()));}
 	public void Log_info(boolean warn, String s) {if (warn) Log_to_err(s); else Log_to_session(s);}
 	public void Log_msg_to_url_fmt(Io_url url, String fmt, Object... args) {
 		if (!enabled) return;
@@ -102,7 +100,7 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	public static final String Invk_enabled_ = "enabled_", Invk_archive_dirs_max_ = "archive_dirs_max_", Invk_log_dir_ = "log_dir_";
-	static final String Dir_name_log = "log", Dir_name_current = "current";
+	static final String Dir_name_log = "log";
 	public static final    Gfo_usr_dlg__log_base Instance = new Gfo_usr_dlg__log_base();
 }
 class Usr_log_fil {
