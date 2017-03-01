@@ -94,8 +94,8 @@ class Xou_cache_mgr_fxt {
 	}
 	public void Test_get(Xof_fsdb_itm fsdb, int expd_view_count, long expd_view_date) {
 		Xou_cache_itm cache = mgr.Get_or_null(fsdb);
-		Tfds.Eq(expd_view_count, cache.View_count());
-		Tfds.Eq(expd_view_date , cache.View_date() / 60);	// Tfds.Now increments by 60 seconds
+		Tfds.Eq(expd_view_count, cache.View_count(), "count");
+		Tfds.Eq(expd_view_date , (cache.View_date() / 60) - 1, "time");	// Tfds.Now increments by 60 seconds; also -1 b/c Gfo_log now calls Datetime_now.Get once
 	}
 	public void Test_get_n(Xof_fsdb_itm... ary) {
 		for (Xof_fsdb_itm itm : ary) {
