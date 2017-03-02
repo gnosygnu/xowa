@@ -84,6 +84,11 @@ public class Xosearch_finder_cbk__eval__tst {
 		// y: slash before, after
 		fxt.Test__eval_y("a/b/c", "b/a/c", "b/c/a");
 	}
+	@Test   public void Brack() {
+		fxt.Init__search("a");
+		// y
+		fxt.Test__eval_y("[[a]]");
+	}
 	// .
 	// ...
 	// -

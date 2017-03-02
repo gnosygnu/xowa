@@ -267,7 +267,8 @@ public class Json_wtr {
 						bfr.Add_byte(b);
 					break;
 				case Byte_ascii.Nl:			bfr.Add_byte_repeat(Byte_ascii.Backslash, 2).Add_byte(Byte_ascii.Ltr_n); break;	// "\n" -> "\\n"
-				case Byte_ascii.Cr:			break;// skip
+				case Byte_ascii.Cr:			bfr.Add_byte_repeat(Byte_ascii.Backslash, 2).Add_byte(Byte_ascii.Ltr_r); break;	// "\r" -> "\\r"; DATE:2017-03-02
+				case Byte_ascii.Tab:		bfr.Add_byte_repeat(Byte_ascii.Backslash, 2).Add_byte(Byte_ascii.Ltr_t); break;	// "\t" -> "\\t"; DATE:2017-03-02
 				default:					bfr.Add_byte(b); break;
 			}
 		}
