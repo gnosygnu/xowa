@@ -19,7 +19,7 @@ public class Xosearch_finder_cbk__highlight implements Xosearch_finder_cbk {
 	private final    Xog_cbk_trg cbk_trg;
 	private final    Xoa_app app;
 	private Xow_wiki wiki;
-	private Xoa_ttl ttl;
+	private int page_id;
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public int found;
 	private int max_snips_per_page;
@@ -27,9 +27,9 @@ public class Xosearch_finder_cbk__highlight implements Xosearch_finder_cbk {
 		this.app = app;
 		this.cbk_trg = cbk_trg;
 	}
-	public void Init(Xow_wiki wiki, Xoa_ttl ttl, int max_snips_per_page) {
+	public void Init(Xow_wiki wiki, int page_id, int max_snips_per_page) {
 		this.wiki = wiki;
-		this.ttl = ttl;
+		this.page_id = page_id;
 		this.max_snips_per_page = max_snips_per_page;
 		found = 0;
 	}
@@ -63,14 +63,14 @@ public class Xosearch_finder_cbk__highlight implements Xosearch_finder_cbk {
 			// send notification
 			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.search_fulltext.results__line__add__recv", gplx.core.gfobjs.Gfobj_nde.New()
 				.Add_bry("wiki", wiki.Domain_bry())
-				.Add_bry("page", ttl.Full_db())
+				.Add_int("page_id", page_id)
 				.Add_int("line", found)
 				.Add_bry("html", tmp_bfr.To_bry_and_clear())
 				);
 		}
 		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.search_fulltext.results__page__update__recv", gplx.core.gfobjs.Gfobj_nde.New()
 			.Add_bry("wiki", wiki.Domain_bry())
-			.Add_bry("page", ttl.Full_db())
+			.Add_int("page_id", page_id)
 			.Add_int("found", found)
 			);
 	}

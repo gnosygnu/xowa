@@ -72,10 +72,11 @@ class Xosearch_fulltext_svc implements Gfo_invk {
 					Xoa_ttl ttl = wiki.Ttl_parse(ns_id, ttl_bry);
 
 					if (found <= max_pages_per_wiki) {
-						cbk_highlight.Init(wiki, ttl, max_snips_per_page);
+						cbk_highlight.Init(wiki, page_id, max_snips_per_page);
 						app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.search_fulltext.results__page__add__recv", gplx.core.gfobjs.Gfobj_nde.New()
 						.Add_bry("wiki", wiki.Domain_bry())
-						.Add_bry("page", ttl.Full_db())
+						.Add_int("page_id", page_id)
+						.Add_bry("page_ttl", ttl.Full_db())
 						.Add_int("found", 0)
 						);
 
