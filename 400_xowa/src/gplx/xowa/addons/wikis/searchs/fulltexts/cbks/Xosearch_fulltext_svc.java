@@ -64,20 +64,22 @@ class Xosearch_fulltext_svc implements Gfo_invk {
 				int page_id = page_rdr.Read_int("page_id");
 				int text_db_id = page_rdr.Read_int("page_text_db_id");
 				byte[] text_mcase = wiki.Data__core_mgr().Dbs__get_by_id_or_fail(text_db_id).Tbl__text().Select(page_id);
+				int ns_id = page_rdr.Read_int("page_namespace");
+				byte[] ttl_bry = page_rdr.Read_bry_by_str("page_title");
+				Xoa_ttl ttl = wiki.Ttl_parse(ns_id, ttl_bry);
 
-				cbk_eval.found = false;
+				// do eval
+				cbk_eval.Init(ttl.Full_db());
 				finder.Match(text_mcase, 0, text_mcase.length, cbk_eval);
 				searched++;
 				if (cbk_eval.found) {
-					int ns_id = page_rdr.Read_int("page_namespace");
-					byte[] ttl_bry = page_rdr.Read_bry_by_str("page_title");
-					Xoa_ttl ttl = wiki.Ttl_parse(ns_id, ttl_bry);
 					++found;
 
 					Notify_pages_found_and_searched(wiki_domain, found, searched);
 
+					// do highlight
 					if (found <= max_pages_per_wiki) {
-						cbk_highlight.Init(wiki, page_id, max_snips_per_page);
+						cbk_highlight.Init(wiki, page_id, ttl.Full_db(), max_snips_per_page);
 						app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.search_fulltext.results__page__add__recv", gplx.core.gfobjs.Gfobj_nde.New()
 						.Add_bry("wiki", wiki_domain)
 						.Add_int("page_id", page_id)

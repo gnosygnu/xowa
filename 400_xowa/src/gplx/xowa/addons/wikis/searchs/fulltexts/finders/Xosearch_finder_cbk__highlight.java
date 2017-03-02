@@ -27,9 +27,11 @@ public class Xosearch_finder_cbk__highlight implements Xosearch_finder_cbk {
 		this.app = app;
 		this.cbk_trg = cbk_trg;
 	}
-	public void Init(Xow_wiki wiki, int page_id, int max_snips_per_page) {
+	public byte[] Page_ttl() {return page_ttl;} private byte[] page_ttl;
+	public void Init(Xow_wiki wiki, int page_id, byte[] page_ttl, int max_snips_per_page) {
 		this.wiki = wiki;
 		this.page_id = page_id;
+		this.page_ttl= page_ttl;
 		this.max_snips_per_page = max_snips_per_page;
 		found = 0;
 	}

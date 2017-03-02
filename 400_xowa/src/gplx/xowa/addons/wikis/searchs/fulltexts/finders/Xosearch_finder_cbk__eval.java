@@ -16,6 +16,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.fulltexts.finders; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.fulltexts.*;
 public class Xosearch_finder_cbk__eval implements Xosearch_finder_cbk {
 	public boolean found;
+	public byte[] Page_ttl() {return page_ttl;} private byte[] page_ttl;
+	public void Init(byte[] page_ttl) {
+		this.found = false;
+		this.page_ttl = page_ttl;
+	}
 	public void Process_item_found(byte[] src, int hook_bgn, int hook_end, int word_bgn, int word_end, Xosearch_word_node term) {
 		term.found = true;
 	}

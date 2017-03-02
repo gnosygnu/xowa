@@ -56,18 +56,23 @@ public class Xosearch_finder_mgr {
 			int hook_bgn = cur;
 			int hook_end = cur + hook.word_hook.length;
 
-			// get word_bounds
-			lang.Get_word_bounds(word_bounds, trv, src, src_end, hook_bgn, hook_end);
-			int word_bgn = word_bounds.word_bgn;
-			int word_end = word_bounds.word_end;
+			try {
+				// get word_bounds
+				lang.Get_word_bounds(word_bounds, trv, src, src_end, hook_bgn, hook_end);
+				int word_bgn = word_bounds.word_bgn;
+				int word_end = word_bounds.word_end;
 
-			// check if current word matches criteria-word
-			if (hook.Match_word(lang, src, hook_bgn, hook_end, word_bgn, word_end)) {
-				cbk.Process_item_found(src, hook_bgn, hook_end, word_bgn, word_end, hook);
+				// check if current word matches criteria-word
+				if (hook.Match_word(lang, src, hook_bgn, hook_end, word_bgn, word_end)) {
+					cbk.Process_item_found(src, hook_bgn, hook_end, word_bgn, word_end, hook);
+				}
+
+				// update position to word_end
+				cur = word_end;
+			} catch (Exception e) {
+				cur = hook_end;
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal error in match; page=~{0} hook=~{1} src=~{2}", cbk.Page_ttl(), hook.word_orig, Err_.Message_gplx_log(e));
 			}
-
-			// update position to word_end
-			cur = word_end;
 		}
 
 		// mark page done
