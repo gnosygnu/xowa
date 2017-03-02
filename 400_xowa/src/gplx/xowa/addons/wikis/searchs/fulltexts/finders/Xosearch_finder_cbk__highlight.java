@@ -74,13 +74,21 @@ public class Xosearch_finder_cbk__highlight implements Xosearch_finder_cbk {
 			.Add_int("found", found)
 			);
 	}
+	private static final    byte[] Angle_bgn_escaped = Bry_.new_a7("&lt;");
 	private void Add_snip(Bry_bfr bfr, byte[] src, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
-			if (b == Byte_ascii.Nl)
-				bfr.Add(gplx.langs.htmls.Gfh_tag_.Br_inl);
-			else
-				bfr.Add_byte(b);
+			switch (b) {
+				case Byte_ascii.Angle_bgn:
+					bfr.Add(Angle_bgn_escaped);
+					break;
+				case Byte_ascii.Nl:
+					bfr.Add(gplx.langs.htmls.Gfh_tag_.Br_inl);
+					break;
+				default:
+					bfr.Add_byte(b);
+					break;
+			}
 		}
 	}
 	public void Process_page_done(byte[] src, Xosearch_word_node tree_root) {}
