@@ -14,37 +14,38 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.interwiki; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-class XomwInterwikiLookupAdapter {
-//		/**
-//		* @var SiteLookup
-//		*/
-//		private $siteLookup;
-//
+import gplx.xowa.mediawiki.includes.site.*;
+public class XomwInterwikiLookupAdapter implements XomwInterwikiLookup {
+	/**
+	* @var SiteLookup
+	*/
+//		private final    XomwSiteLookup siteLookup;
+
 //		/**
 //		* @var Interwiki[]|null associative array mapping interwiki prefixes to Interwiki objects
 //		*/
 //		private $interwikiMap;
-//
-//		function __construct(
-//			SiteLookup $siteLookup,
+
+	public XomwInterwikiLookupAdapter(
+		XomwSiteLookup siteLookup //,
 //			array $interwikiMap = null
-//		) {
-//			$this->siteLookup = $siteLookup;
-//			$this->interwikiMap = $interwikiMap;
-//		}
-//
-//		/**
-//		* See InterwikiLookup::isValidInterwiki
-//		* It loads the whole interwiki map.
-//		*
-//		* @param String $prefix Interwiki prefix to use
-//		* @return boolean Whether it exists
-//		*/
-//		public function isValidInterwiki( $prefix ) {
-//
-//			return array_key_exists( $prefix, $this->getInterwikiMap() );
-//		}
-//
+	) {
+//			this.siteLookup = siteLookup;
+//			this.interwikiMap = $interwikiMap;
+	}
+
+	/**
+	* See InterwikiLookup::isValidInterwiki
+	* It loads the whole interwiki map.
+	*
+	* @param String $prefix Interwiki prefix to use
+	* @return boolean Whether it exists
+	*/
+	public boolean isValidInterwiki(byte[] prefix) {
+		return false;
+//			return array_key_exists($prefix, this.getInterwikiMap());
+	}
+
 //		/**
 //		* See InterwikiLookup::fetch
 //		* It loads the whole interwiki map.
@@ -52,16 +53,16 @@ class XomwInterwikiLookupAdapter {
 //		* @param String $prefix Interwiki prefix to use
 //		* @return Interwiki|null|boolean
 //		*/
-//		public function fetch( $prefix ) {
-//			if ( $prefix == '' ) {
+//		public function fetch($prefix) {
+//			if ($prefix == '') {
 //				return null;
 //			}
 //
-//			if ( !$this->isValidInterwiki( $prefix ) ) {
+//			if (!this.isValidInterwiki($prefix)) {
 //				return false;
 //			}
 //
-//			return $this->interwikiMap[$prefix];
+//			return this.interwikiMap[$prefix];
 //		}
 //
 //		/**
@@ -70,13 +71,13 @@ class XomwInterwikiLookupAdapter {
 //		* @param String|null $local If set, limits output to local/non-local interwikis
 //		* @return String[] List of prefixes
 //		*/
-//		public function getAllPrefixes( $local = null ) {
-//			if ( $local === null ) {
-//				return array_keys( $this->getInterwikiMap() );
+//		public function getAllPrefixes($local = null) {
+//			if ($local === null) {
+//				return array_keys(this.getInterwikiMap());
 //			}
 //			$res = [];
-//			foreach ( $this->getInterwikiMap() as $interwikiId => $interwiki ) {
-//				if ( $interwiki->isLocal() === $local ) {
+//			foreach (this.getInterwikiMap() as $interwikiId => $interwiki) {
+//				if ($interwiki->isLocal() === $local) {
 //					$res[] = $interwikiId;
 //				}
 //			}
@@ -88,56 +89,60 @@ class XomwInterwikiLookupAdapter {
 //		*
 //		* @param String $prefix
 //		*/
-//		public function invalidateCache( $prefix ) {
-//			if ( !isset( $this->interwikiMap[$prefix] ) ) {
+//		public function invalidateCache($prefix) {
+//			if (!isset(this.interwikiMap[$prefix])) {
 //				return;
 //			}
-//			$globalId = $this->interwikiMap[$prefix]->getWikiID();
-//			unset( $this->interwikiMap[$prefix] );
+//			$globalId = this.interwikiMap[$prefix]->getWikiID();
+//			unset(this.interwikiMap[$prefix]);
 //
 //			// Reload the interwiki
-//			$site = $this->siteLookup->getSites()->getSite( $globalId );
-//			$interwikis = $this->getSiteInterwikis( $site );
-//			$this->interwikiMap = array_merge( $this->interwikiMap, [ $interwikis[$prefix] ] );
+//			$site = this.siteLookup->getSites()->getSite($globalId);
+//			$interwikis = this.getSiteInterwikis($site);
+//			this.interwikiMap = array_merge(this.interwikiMap, [ $interwikis[$prefix] ]);
 //		}
-//
-//		/**
-//		* Load interwiki map to use as cache
-//		*/
-//		private function loadInterwikiMap() {
-//			$interwikiMap = [];
-//			$siteList = $this->siteLookup->getSites();
-//			foreach ( $siteList as $site ) {
-//				$interwikis = $this->getSiteInterwikis( $site );
-//				$interwikiMap = array_merge( $interwikiMap, $interwikis );
+
+	/**
+	* Load interwiki map to use as cache
+	*/
+//		private Object loadInterwikiMap() {
+////			$interwikiMap = [];
+//			XomwSiteList siteList = this.siteLookup.getSites();
+//			int len = siteList.Len();
+//			for (int i = 0; i < len; i++) {
+//				XomwSite site = siteList.GetAt(i);
+////				$interwikis = this.getSiteInterwikis($site);
+////				$interwikiMap = array_merge($interwikiMap, $interwikis);
 //			}
-//			$this->interwikiMap = $interwikiMap;
+////			this.interwikiMap = $interwikiMap;
+//			return null;
 //		}
-//
-//		/**
-//		* Get interwikiMap attribute, load if needed.
-//		*
-//		* @return Interwiki[]
-//		*/
-//		private function getInterwikiMap() {
-//			if ( $this->interwikiMap === null ) {
-//				$this->loadInterwikiMap();
+
+	/**
+	* Get interwikiMap attribute, load if needed.
+	*
+	* @return Interwiki[]
+	*/
+//		private Object getInterwikiMap() {
+//			if (this.interwikiMap === null) {
+//				this.loadInterwikiMap();
 //			}
-//			return $this->interwikiMap;
+//			return this.interwikiMap;
+//			return null;
 //		}
-//
+
 //		/**
 //		* Load interwikis for the given site
 //		*
 //		* @param Site $site
 //		* @return Interwiki[]
 //		*/
-//		private function getSiteInterwikis( Site $site ) {
+//		private function getSiteInterwikis(Site $site) {
 //			$interwikis = [];
-//			foreach ( $site->getInterwikiIds() as $interwiki ) {
+//			foreach ($site->getInterwikiIds() as $interwiki) {
 //				$url = $site->getPageUrl();
-//				if ( $site instanceof MediaWikiSite ) {
-//					$path = $site->getFileUrl( 'api.php' );
+//				if ($site instanceof MediaWikiSite) {
+//					$path = $site->getFileUrl('api.php');
 //				} else {
 //					$path = '';
 //				}

@@ -15,7 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.mediawiki.includes.*;
+import gplx.xowa.mediawiki.includes.interwiki.*;
 import gplx.xowa.mediawiki.includes.filerepo.file.*; import gplx.xowa.mediawiki.includes.media.*;
+import gplx.xowa.mediawiki.includes.site.*;
 import gplx.xowa.mediawiki.languages.*;
 import gplx.xowa.langs.*;
 public class XomwEnv {
@@ -28,7 +30,9 @@ public class XomwEnv {
 
 	public XomwEnv(Xol_lang_itm xoLang) {
 		XomwLanguage language = new XomwLanguage(xoLang);
-		this.mediaWikiServices = new XomwMediaWikiServices(language);
+		XomwFileBasedSiteLookup siteLookup = new XomwFileBasedSiteLookup();
+		XomwInterwikiLookup interwikiLookup = new XomwInterwikiLookupAdapter(siteLookup);
+		this.mediaWikiServices = new XomwMediaWikiServices(interwikiLookup, language);
 	}
 
 	public XomwMagicWordMgr Magic_word_mgr() {return magic_word_mgr;} private final    XomwMagicWordMgr magic_word_mgr = new XomwMagicWordMgr();

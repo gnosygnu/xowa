@@ -48,18 +48,19 @@ public class XomwInterwiki {
 		this.mTrans = trans;
 	}
 
-//		/**
-//		* Check whether an interwiki prefix exists
-//		*
-//		* @deprecated since 1.28, use InterwikiLookup instead
-//		*
-//		* @param String prefix Interwiki prefix to use
-//		* @return boolean Whether it exists
-//		*/
-//		public static function isValidInterwiki(prefix) {
+	/**
+	* Check whether an interwiki prefix exists
+	*
+	* [@]deprecated since 1.28, use InterwikiLookup instead
+	*
+	* @param String prefix Interwiki prefix to use
+	* @return boolean Whether it exists
+	*/
+	public static boolean isValidInterwiki(XomwMediaWikiServices mws, byte[] prefix) {
+		return mws.getInterwikiLookup().isValidInterwiki(prefix);
 //			return MediaWikiServices::getInstance().getInterwikiLookup().isValidInterwiki(prefix);
-//		}
-//
+	}
+
 //		/**
 //		* Fetch an Interwiki Object
 //		*

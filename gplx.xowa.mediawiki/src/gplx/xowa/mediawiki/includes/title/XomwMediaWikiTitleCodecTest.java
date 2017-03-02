@@ -45,7 +45,8 @@ class XomwMediaWikiTitleCodecFxt {
 		return new XomwMediaWikiTitleCodecParts(Bry_.new_u8(dbkey), ns);
 	}
 	public XomwMediaWikiTitleCodec Make_codec(XomwLanguage lang) {
-		return new XomwMediaWikiTitleCodec(lang);
+		XomwEnv env = new XomwEnv(lang.XoLang());
+		return env.MediaWikiServices().getTitleFormatter();
 	}
 	public XomwLanguage Make_lang() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();

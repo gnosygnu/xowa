@@ -28,25 +28,25 @@ public interface XomwInterwikiLookup {
 	*/
 	boolean isValidInterwiki(byte[] prefix);
 
-	/**
-	* Fetch an Interwiki Object
-	*
-	* @param String $prefix Interwiki prefix to use
-	* @return Interwiki|null|boolean
-	*/
-	XomwInterwiki fetch(byte[] prefix);
-
-	/**
-	* Returns all interwiki prefixes
-	*
-	* @param String|null $local If set, limits output to local/non-local interwikis
-	* @return String[] List of prefixes
-	*/
-	byte[][] getAllPrefixes(byte[] local);
-
-	/**
-	* Purge the in-process and persistent Object cache for an interwiki prefix
-	* @param String $prefix
-	*/
-	void invalidateCache(byte[] prefix);
+//		/**
+//		* Fetch an Interwiki Object
+//		*
+//		* @param String $prefix Interwiki prefix to use
+//		* @return Interwiki|null|boolean
+//		*/
+//		XomwInterwiki fetch(byte[] prefix);
+//
+//		/**
+//		* Returns all interwiki prefixes
+//		*
+//		* @param String|null $local If set, limits output to local/non-local interwikis
+//		* @return String[] List of prefixes
+//		*/
+//		byte[][] getAllPrefixes(byte[] local);
+//
+//		/**
+//		* Purge the in-process and persistent Object cache for an interwiki prefix
+//		* @param String $prefix
+//		*/
+//		void invalidateCache(byte[] prefix);
 }

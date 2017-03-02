@@ -15,7 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.title; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.mediawiki.languages.*;
+import gplx.xowa.mediawiki.includes.interwiki.*;
 public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
+	private XomwMediaWikiServices mws;
 	/**
 	* @var Language
 	*/
@@ -43,7 +45,8 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 //			$this->genderCache = $genderCache;
 //			$this->localInterwikis = (array)$localInterwikis;
 //		}
-	public XomwMediaWikiTitleCodec(XomwLanguage language) {
+	public XomwMediaWikiTitleCodec(XomwMediaWikiServices mws, XomwLanguage language) {
+		this.mws = mws;
 		this.language = language;
 	}
 
@@ -291,11 +294,11 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 							// Disallow Talk:File:x type titles...
 							throw new XomwMalformedTitleException("title-invalid-talk-namespace", text);
 						}
-//							else if (Interwiki::isValidInterwiki($x[1])) {
-//								// TODO: get rid of global state!
-//								// Disallow Talk:Interwiki:x type titles...
-//								throw new XomwMalformedTitleException('title-invalid-talk-namespace', text);
-//							}
+						else if (XomwInterwiki.isValidInterwiki(mws, m[0])) {
+							// TODO: get rid of global state!
+							// Disallow Talk:Interwiki:x type titles...
+							throw new XomwMalformedTitleException("title-invalid-talk-namespace", text);
+						}
 					}
 				}
 //					else if (Interwiki::isValidInterwiki($p)) {

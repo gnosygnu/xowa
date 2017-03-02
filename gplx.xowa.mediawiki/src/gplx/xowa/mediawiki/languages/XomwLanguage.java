@@ -17,6 +17,8 @@ package gplx.xowa.mediawiki.languages; import gplx.*; import gplx.xowa.*; import
 import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.langs.*;
 public class XomwLanguage {
+	public Xol_lang_itm XoLang() {return xoLang;} private Xol_lang_itm xoLang = null;
+	private final    Bry_bfr tmpBfr = Bry_bfr_.New();
 //		/**
 //		* @var LanguageConverter
 //		*/
@@ -193,8 +195,6 @@ public class XomwLanguage {
 // -\x{1edff}\x{1ef00}-\x{1efff}\x{608}\x{60b}\x{60d}\x{61b}-\x{64a}\x{66d}-\x{66f}\x{671}-\x{6d5}\x{6e5}\x{6e6}\x{6ee}\x{6ef}\x{6fa}-\x{710}\x{712}-\x{72f}\x{74b}-\x{7a5}\x{7b1}-\x{7bf}\x{8a0}-\x{8e2}\x{fb50}-\x{fd3d}\x{fd40}-\x{fdcf}\x{fdf0}-\x{fdfc}\x{fdfe}\x{fdff}\x{fe70}-\x{fefe}\x{1ee00}-\x{1eeef}\x{1eef2}-\x{1eeff}]))/u';
 //		// @codeCoverageIgnoreEnd
 //		// @codingStandardsIgnoreEnd
-	private Xol_lang_itm xoLang = null;
-	private final    Bry_bfr tmpBfr = Bry_bfr_.New();
 
 //		/**
 //		* Get a cached or new language Object for a given language code

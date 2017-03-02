@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import gplx.xowa.mediawiki.languages.*;
+import gplx.xowa.mediawiki.includes.interwiki.*;
 import gplx.xowa.mediawiki.includes.title.*;
 /**
 * MediaWikiServices is the service locator for the application scope of MediaWiki.
@@ -32,9 +33,11 @@ import gplx.xowa.mediawiki.includes.title.*;
 public class XomwMediaWikiServices {
 	// XO.MW.SKIP:remove global getInstance(). See XomwEnv
 	private final    XomwMediaWikiTitleCodec titleParser;
+	private final    XomwInterwikiLookup interwikiLookup;
 
-	public XomwMediaWikiServices(XomwLanguage language) {
-		this.titleParser = new XomwMediaWikiTitleCodec(language);
+	public XomwMediaWikiServices(XomwInterwikiLookup interwikiLookup, XomwLanguage language) {
+		this.interwikiLookup = interwikiLookup;
+		this.titleParser = new XomwMediaWikiTitleCodec(this, language);
 	}
 
 //		/**
@@ -132,7 +135,7 @@ public class XomwMediaWikiServices {
 //		* @param MediaWikiServices $other
 //		*/
 //		private function salvage( self $other ) {
-//			foreach ( $this->getServiceNames() as $name ) {
+//			foreach ( this.getServiceNames() as $name ) {
 //				// The service could be new in the new instance and not registered in the
 //				// other instance (e.g. an extension that was loaded after the instantiation of
 //				// the other instance. Skip this service in this case. See T143974
@@ -144,7 +147,7 @@ public class XomwMediaWikiServices {
 //
 //				if ( $oldService instanceof SalvageableService ) {
 //					/** @var SalvageableService $newService */
-//					$newService = $this->getService( $name );
+//					$newService = this.getService( $name );
 //					$newService->salvage( $oldService );
 //				}
 //			}
@@ -257,7 +260,7 @@ public class XomwMediaWikiServices {
 //				throw new MWException( 'resetServiceForTesting() must not be used outside unit tests.' );
 //			}
 //
-//			$this->resetService( $name, $destroy );
+//			this.resetService( $name, $destroy );
 //		}
 //
 //		/**
@@ -307,7 +310,7 @@ public class XomwMediaWikiServices {
 //			parent::__construct();
 //
 //			// Register the given Config Object as the bootstrap config service.
-//			$this->defineService( 'BootstrapConfig', function() use ( $config ) {
+//			this.defineService( 'BootstrapConfig', function() use ( $config ) {
 //				return $config;
 //			} );
 //		}
@@ -328,7 +331,7 @@ public class XomwMediaWikiServices {
 //		* @return Config
 //		*/
 //		public function getBootstrapConfig() {
-//			return $this->getService( 'BootstrapConfig' );
+//			return this.getService( 'BootstrapConfig' );
 //		}
 //
 //		/**
@@ -336,7 +339,7 @@ public class XomwMediaWikiServices {
 //		* @return ConfigFactory
 //		*/
 //		public function getConfigFactory() {
-//			return $this->getService( 'ConfigFactory' );
+//			return this.getService( 'ConfigFactory' );
 //		}
 //
 //		/**
@@ -347,7 +350,7 @@ public class XomwMediaWikiServices {
 //		* @return Config
 //		*/
 //		public function getMainConfig() {
-//			return $this->getService( 'MainConfig' );
+//			return this.getService( 'MainConfig' );
 //		}
 //
 //		/**
@@ -355,7 +358,7 @@ public class XomwMediaWikiServices {
 //		* @return SiteLookup
 //		*/
 //		public function getSiteLookup() {
-//			return $this->getService( 'SiteLookup' );
+//			return this.getService( 'SiteLookup' );
 //		}
 //
 //		/**
@@ -363,23 +366,23 @@ public class XomwMediaWikiServices {
 //		* @return SiteStore
 //		*/
 //		public function getSiteStore() {
-//			return $this->getService( 'SiteStore' );
+//			return this.getService( 'SiteStore' );
 //		}
-//
-//		/**
-//		* @since 1.28
-//		* @return InterwikiLookup
-//		*/
-//		public function getInterwikiLookup() {
-//			return $this->getService( 'InterwikiLookup' );
-//		}
-//
+
+	/**
+	* @since 1.28
+	* @return InterwikiLookup
+	*/
+	public XomwInterwikiLookup getInterwikiLookup() {
+		return interwikiLookup;
+	}
+
 //		/**
 //		* @since 1.27
 //		* @return StatsdDataFactory
 //		*/
 //		public function getStatsdDataFactory() {
-//			return $this->getService( 'StatsdDataFactory' );
+//			return this.getService( 'StatsdDataFactory' );
 //		}
 //
 //		/**
@@ -387,7 +390,7 @@ public class XomwMediaWikiServices {
 //		* @return EventRelayerGroup
 //		*/
 //		public function getEventRelayerGroup() {
-//			return $this->getService( 'EventRelayerGroup' );
+//			return this.getService( 'EventRelayerGroup' );
 //		}
 //
 //		/**
@@ -396,7 +399,7 @@ public class XomwMediaWikiServices {
 //		*/
 //		public function newSearchEngine() {
 //			// New engine Object every time, since they keep state
-//			return $this->getService( 'SearchEngineFactory' )->create();
+//			return this.getService( 'SearchEngineFactory' )->create();
 //		}
 //
 //		/**
@@ -404,7 +407,7 @@ public class XomwMediaWikiServices {
 //		* @return SearchEngineFactory
 //		*/
 //		public function getSearchEngineFactory() {
-//			return $this->getService( 'SearchEngineFactory' );
+//			return this.getService( 'SearchEngineFactory' );
 //		}
 //
 //		/**
@@ -412,7 +415,7 @@ public class XomwMediaWikiServices {
 //		* @return SearchEngineConfig
 //		*/
 //		public function getSearchEngineConfig() {
-//			return $this->getService( 'SearchEngineConfig' );
+//			return this.getService( 'SearchEngineConfig' );
 //		}
 //
 //		/**
@@ -420,7 +423,7 @@ public class XomwMediaWikiServices {
 //		* @return SkinFactory
 //		*/
 //		public function getSkinFactory() {
-//			return $this->getService( 'SkinFactory' );
+//			return this.getService( 'SkinFactory' );
 //		}
 //
 //		/**
@@ -428,7 +431,7 @@ public class XomwMediaWikiServices {
 //		* @return LBFactory
 //		*/
 //		public function getDBLoadBalancerFactory() {
-//			return $this->getService( 'DBLoadBalancerFactory' );
+//			return this.getService( 'DBLoadBalancerFactory' );
 //		}
 //
 //		/**
@@ -436,7 +439,7 @@ public class XomwMediaWikiServices {
 //		* @return LoadBalancer The main DB load balancer for the local wiki.
 //		*/
 //		public function getDBLoadBalancer() {
-//			return $this->getService( 'DBLoadBalancer' );
+//			return this.getService( 'DBLoadBalancer' );
 //		}
 //
 //		/**
@@ -444,7 +447,7 @@ public class XomwMediaWikiServices {
 //		* @return WatchedItemStore
 //		*/
 //		public function getWatchedItemStore() {
-//			return $this->getService( 'WatchedItemStore' );
+//			return this.getService( 'WatchedItemStore' );
 //		}
 //
 //		/**
@@ -452,7 +455,7 @@ public class XomwMediaWikiServices {
 //		* @return WatchedItemQueryService
 //		*/
 //		public function getWatchedItemQueryService() {
-//			return $this->getService( 'WatchedItemQueryService' );
+//			return this.getService( 'WatchedItemQueryService' );
 //		}
 //
 //		/**
@@ -460,7 +463,7 @@ public class XomwMediaWikiServices {
 //		* @return CryptRand
 //		*/
 //		public function getCryptRand() {
-//			return $this->getService( 'CryptRand' );
+//			return this.getService( 'CryptRand' );
 //		}
 //
 //		/**
@@ -468,7 +471,7 @@ public class XomwMediaWikiServices {
 //		* @return CryptHKDF
 //		*/
 //		public function getCryptHKDF() {
-//			return $this->getService( 'CryptHKDF' );
+//			return this.getService( 'CryptHKDF' );
 //		}
 //
 //		/**
@@ -476,7 +479,7 @@ public class XomwMediaWikiServices {
 //		* @return MediaHandlerFactory
 //		*/
 //		public function getMediaHandlerFactory() {
-//			return $this->getService( 'MediaHandlerFactory' );
+//			return this.getService( 'MediaHandlerFactory' );
 //		}
 //
 //		/**
@@ -484,7 +487,7 @@ public class XomwMediaWikiServices {
 //		* @return MimeAnalyzer
 //		*/
 //		public function getMimeAnalyzer() {
-//			return $this->getService( 'MimeAnalyzer' );
+//			return this.getService( 'MimeAnalyzer' );
 //		}
 //
 //		/**
@@ -492,7 +495,7 @@ public class XomwMediaWikiServices {
 //		* @return ProxyLookup
 //		*/
 //		public function getProxyLookup() {
-//			return $this->getService( 'ProxyLookup' );
+//			return this.getService( 'ProxyLookup' );
 //		}
 //
 //		/**
@@ -500,7 +503,7 @@ public class XomwMediaWikiServices {
 //		* @return Parser
 //		*/
 //		public function getParser() {
-//			return $this->getService( 'Parser' );
+//			return this.getService( 'Parser' );
 //		}
 //
 //		/**
@@ -508,7 +511,7 @@ public class XomwMediaWikiServices {
 //		* @return GenderCache
 //		*/
 //		public function getGenderCache() {
-//			return $this->getService( 'GenderCache' );
+//			return this.getService( 'GenderCache' );
 //		}
 //
 //		/**
@@ -516,7 +519,7 @@ public class XomwMediaWikiServices {
 //		* @return LinkCache
 //		*/
 //		public function getLinkCache() {
-//			return $this->getService( 'LinkCache' );
+//			return this.getService( 'LinkCache' );
 //		}
 //
 //		/**
@@ -524,7 +527,7 @@ public class XomwMediaWikiServices {
 //		* @return LinkRendererFactory
 //		*/
 //		public function getLinkRendererFactory() {
-//			return $this->getService( 'LinkRendererFactory' );
+//			return this.getService( 'LinkRendererFactory' );
 //		}
 //
 //		/**
@@ -535,7 +538,7 @@ public class XomwMediaWikiServices {
 //		* @return LinkRenderer
 //		*/
 //		public function getLinkRenderer() {
-//			return $this->getService( 'LinkRenderer' );
+//			return this.getService( 'LinkRenderer' );
 //		}
 
 	/**
@@ -543,7 +546,7 @@ public class XomwMediaWikiServices {
 	* @return TitleFormatter
 	*/
 	public XomwMediaWikiTitleCodec getTitleFormatter() {
-		// return $this->getService( 'TitleFormatter' );
+		// return this.getService( 'TitleFormatter' );
 		return titleParser;
 	}
 
@@ -552,7 +555,7 @@ public class XomwMediaWikiServices {
 	* @return TitleParser
 	*/
 	public XomwMediaWikiTitleCodec getTitleParser() {
-		// return $this->getService( 'TitleParser' );
+		// return this.getService( 'TitleParser' );
 		return titleParser;
 	}
 
@@ -561,7 +564,7 @@ public class XomwMediaWikiServices {
 //		* @return \BagOStuff
 //		*/
 //		public function getMainObjectStash() {
-//			return $this->getService( 'MainObjectStash' );
+//			return this.getService( 'MainObjectStash' );
 //		}
 //
 //		/**
@@ -569,7 +572,7 @@ public class XomwMediaWikiServices {
 //		* @return \WANObjectCache
 //		*/
 //		public function getMainWANObjectCache() {
-//			return $this->getService( 'MainWANObjectCache' );
+//			return this.getService( 'MainWANObjectCache' );
 //		}
 //
 //		/**
@@ -577,7 +580,7 @@ public class XomwMediaWikiServices {
 //		* @return \BagOStuff
 //		*/
 //		public function getLocalServerObjectCache() {
-//			return $this->getService( 'LocalServerObjectCache' );
+//			return this.getService( 'LocalServerObjectCache' );
 //		}
 //
 //		/**
@@ -585,7 +588,7 @@ public class XomwMediaWikiServices {
 //		* @return VirtualRESTServiceClient
 //		*/
 //		public function getVirtualRESTServiceClient() {
-//			return $this->getService( 'VirtualRESTServiceClient' );
+//			return this.getService( 'VirtualRESTServiceClient' );
 //		}
 //
 //		///////////////////////////////////////////////////////////////////////////
