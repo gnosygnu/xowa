@@ -42,7 +42,8 @@ public class Xopg_html_data {
 	public byte[]				Edit_preview_w_dbg() {return Bry_.Add(xtn_scribunto_dbg, edit_preview);} public void Edit_preview_(byte[] v) {edit_preview = v;} private byte[] edit_preview = Bry_.Empty;
 	public int					Lnke_autonumber_next() {return lnke_autonumber++;} private int lnke_autonumber = 1;
 	public int					Sect_uid() {return sect_uid;} private int sect_uid = -1; public int Sect_uid_next() {return ++sect_uid;}
-	public boolean					Cbk_enabled() {return cbk_enabled;} private boolean cbk_enabled; public void Cbk_enabled_(boolean v) {this.cbk_enabled = v;}
+	public boolean              Cbk_enabled()  {return cbk_enabled;} private boolean cbk_enabled; public void Cbk_enabled_(boolean v) {this.cbk_enabled = v;}
+	public boolean              Js_enabled()   {return js_enabled;} private boolean js_enabled; public void Js_enabled_(boolean v) {this.js_enabled = v;}
 	public boolean				Hdump_exists() {return hdump_exists;} private boolean hdump_exists; public void Hdump_exists_(boolean v) {this.hdump_exists = v;}
 	public byte[]				Catpage_data() {return catpage_data;} private byte[] catpage_data; public void Catpage_data_(byte[] v) {this.catpage_data = v;}
 

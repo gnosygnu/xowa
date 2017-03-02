@@ -18,7 +18,7 @@ import gplx.core.btries.*;
 import gplx.core.intls.*;
 public class Xosearch_word_lang {
 	private final    Btrie_slim_mgr ws_bgn = Btrie_slim_mgr.cs()
-		.Add_many_str("\t", "\n", "\r", " ", "/");
+		.Add_many_str("\t", "\n", "\r", " ", "/", "(", ")");
 	private final    Btrie_slim_mgr ws_end;
 	private final    Btrie_slim_mgr punct_bgn = Btrie_slim_mgr.cs()
 		.Add_many_str(".", ",", "?", "!", ":", ";", "'", "\"")

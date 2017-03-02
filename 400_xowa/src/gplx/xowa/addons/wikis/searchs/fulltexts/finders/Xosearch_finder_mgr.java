@@ -26,13 +26,13 @@ public class Xosearch_finder_mgr {
 	private final    Xosearch_word_bounds word_bounds = new Xosearch_word_bounds();
 
 	public byte[] Query() {return query;} private byte[] query;
-	public void Init(byte[] query, boolean case_match, boolean auto_wildcard, byte wildchar_byte, byte not_byte) {
+	public void Init(byte[] query, boolean case_match, boolean auto_wildcard_bgn, boolean auto_wildcard_end, byte wildchar_byte, byte not_byte) {
 		this.query = query;
 		// create a new hook_trie based on case_match
 		this.hook_trie = case_match ? Btrie_slim_mgr.cs() : Btrie_slim_mgr.ci_u8();
 
 		// create a new tree_root for eval
-		this.tree_root = Xosearch_word_node_.New_root(parser.Parse_or_invalid(query, auto_wildcard).Root, hook_trie, wildchar_byte, not_byte);
+		this.tree_root = Xosearch_word_node_.New_root(parser.Parse_or_invalid(query).Root, hook_trie, auto_wildcard_bgn, auto_wildcard_end, wildchar_byte, not_byte);
 	}
 	public void Match(byte[] src, int src_bgn, int src_end, Xosearch_finder_cbk cbk) {
 		// init and clear

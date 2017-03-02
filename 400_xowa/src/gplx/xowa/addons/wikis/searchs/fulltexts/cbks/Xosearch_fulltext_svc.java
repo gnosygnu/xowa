@@ -32,17 +32,21 @@ class Xosearch_fulltext_svc {
 		cbk_highlight = new Xosearch_finder_cbk__highlight(app, cbk_trg);
 	}
 	public void Search(Json_nde args) {
+		boolean case_match = args.Get_as_bool_or("case_match", false);
+		boolean auto_wildcard_bgn = args.Get_as_bool_or("auto_wildcard_bgn", false);
+		boolean auto_wildcard_end = args.Get_as_bool_or("auto_wildcard_end", false);
+		int max_pages_per_wiki = args.Get_as_int_or("max_pages_per_wiki", 25);
+		int max_snips_per_page = args.Get_as_int_or("max_snips_per_page", 10);
 		String wikis = args.Get_as_str("wikis");
-		byte[] query_mcase = args.Get_as_bry("query");
+		byte[] query = args.Get_as_bry("query");
 
 		String[] wikis_ary = String_.Split(wikis, "|");
 		for (String wiki_domain : wikis_ary) {
 			Xow_wiki wiki = app.Wiki_mgri().Get_by_or_make_init_y(Bry_.new_u8(wiki_domain));
-			byte[] query_lcase = wiki.Case_mgr().Case_build_lower(query_mcase);
-			Search_wiki(wiki, query_lcase);
+			Search_wiki(wiki, query, case_match, auto_wildcard_bgn, auto_wildcard_end, max_pages_per_wiki, max_snips_per_page);
 		}
 	}
-	private void Search_wiki(Xow_wiki wiki, byte[] query_lcase) {
+	private void Search_wiki(Xow_wiki wiki, byte[] query, boolean case_match, boolean auto_wildcard_bgn, boolean auto_wildcard_end, int max_pages_per_wiki, int max_snips_per_page) {
 		Db_conn page_conn = wiki.Data__core_mgr().Tbl__page().Conn();
 		Db_rdr page_rdr = page_conn.Stmt_sql("SELECT * FROM page WHERE page_namespace IN (0) ORDER BY page_score DESC").Exec_select__rls_auto();
 		
@@ -51,7 +55,7 @@ class Xosearch_fulltext_svc {
 			.Add_long("page_count", 0)
 			);
 
-		finder.Init(query_lcase, false, false, Byte_ascii.Star, Byte_ascii.Dash);
+		finder.Init(query, case_match, auto_wildcard_bgn, auto_wildcard_end, Byte_ascii.Star, Byte_ascii.Dash);
 		try {
 			int found = 0;
 			while (page_rdr.Move_next()) {
@@ -64,19 +68,24 @@ class Xosearch_fulltext_svc {
 				if (cbk_eval.found) {
 					int ns_id = page_rdr.Read_int("page_namespace");
 					byte[] ttl_bry = page_rdr.Read_bry_by_str("page_title");
+					++found;
 					app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.search_fulltext.results__wiki__update__recv", gplx.core.gfobjs.Gfobj_nde.New()
 						.Add_bry("wiki", wiki.Domain_bry())
-						.Add_int("found", ++found)
+						.Add_int("found", found)
 						);
 
 					Xoa_ttl ttl = wiki.Ttl_parse(ns_id, ttl_bry);
-					cbk_highlight.Init(wiki, ttl);
-					app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.search_fulltext.results__page__add__recv", gplx.core.gfobjs.Gfobj_nde.New()
+
+					if (found <= max_pages_per_wiki) {
+						cbk_highlight.Init(wiki, ttl, max_snips_per_page);
+						app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.search_fulltext.results__page__add__recv", gplx.core.gfobjs.Gfobj_nde.New()
 						.Add_bry("wiki", wiki.Domain_bry())
 						.Add_bry("page", ttl.Full_db())
 						.Add_int("found", 0)
 						);
-					finder.Match(text_mcase, 0, text_mcase.length, cbk_highlight);
+
+						finder.Match(text_mcase, 0, text_mcase.length, cbk_highlight);
+					}
 				}
 			}
 		} finally {

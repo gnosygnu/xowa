@@ -39,7 +39,7 @@ class Srch_page_tbl_wkr_fxt {
 	}
 	public void Test__to_bry_or_null(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_a7(src_str);
-		Srch_crt_mgr crt_mgr = crt_parser.Parse_or_invalid(src_bry, Bool_.N);
+		Srch_crt_mgr crt_mgr = crt_parser.Parse_or_invalid(src_bry);
 		Tfds.Eq(expd, String_.new_u8(Srch_page_tbl_wkr.To_bry_or_null(tmp_bfr, Srch_search_addon.Wildcard__star, crt_mgr)));
 	}
 }

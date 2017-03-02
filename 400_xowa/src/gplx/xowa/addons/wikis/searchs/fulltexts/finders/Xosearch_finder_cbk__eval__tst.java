@@ -95,13 +95,14 @@ public class Xosearch_finder_cbk__eval__tst {
 }
 class Xosearch_finder_cbk__eval__fxt {
 	private boolean case_match = false;
-	private boolean auto_wildcard = false;
+	private boolean auto_wildcard_bgn = false;
+	private boolean auto_wildcard_end = false;
 	private byte wildcard_byte = Byte_ascii.Star;
 	private byte not_byte = Byte_ascii.Dash;
 	private final    Xosearch_finder_mgr finder = new Xosearch_finder_mgr();
 	private final    Xosearch_finder_cbk__eval cbk = new Xosearch_finder_cbk__eval();
 	public void Init__search(String query) {
-		finder.Init(Bry_.new_u8(query), case_match, auto_wildcard, wildcard_byte, not_byte);
+		finder.Init(Bry_.new_u8(query), case_match, auto_wildcard_bgn, auto_wildcard_end, wildcard_byte, not_byte);
 	}
 	public void Test__eval_y(String... texts) {Test__eval(Bool_.Y, texts);}
 	public void Test__eval_n(String... texts) {Test__eval(Bool_.N, texts);}

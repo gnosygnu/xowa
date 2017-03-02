@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.searchs.fulltexts.finders; import gplx.*; import 
 import gplx.core.btries.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 public class Xosearch_word_node_ {
-	public static Xosearch_word_node New_root(Srch_crt_itm src, Btrie_slim_mgr word_trie, byte wildchar_byte, byte not_byte) {
+	public static Xosearch_word_node New_root(Srch_crt_itm src, Btrie_slim_mgr word_trie, boolean auto_wildcard_bgn, boolean auto_wildcard_end, byte wildchar_byte, byte not_byte) {
 		Xosearch_word_node trg = new Xosearch_word_node();
 		trg.tid = src.Tid;
 
@@ -34,14 +34,14 @@ public class Xosearch_word_node_ {
 				int hook_end = word_orig_len;
 
 				// handle wildcard at bgn; EX: "*a"
-				boolean wildcard_at_bgn = false;
+				boolean wildcard_at_bgn = auto_wildcard_bgn;
 				if (word_orig_len > hook_bgn + 1 && word_orig[hook_bgn] == wildchar_byte) {
 					wildcard_at_bgn = true;
 					hook_bgn++;
 				}
 
 				// handle wildcard at end; EX: "a*"
-				boolean wildcard_at_end = false;
+				boolean wildcard_at_end = auto_wildcard_end;
 				if (word_orig_len > hook_bgn + 1 && word_orig[hook_end - 1] == wildchar_byte) {
 					wildcard_at_end = true;
 					hook_end--;
@@ -69,7 +69,7 @@ public class Xosearch_word_node_ {
 		trg.subs = trg_subs;
 		int len = src_subs.length;
 		for (int i = 0; i < len; i++) {
-			trg.subs[i] = New_root(src_subs[i], word_trie, wildchar_byte, not_byte);
+			trg.subs[i] = New_root(src_subs[i], word_trie, auto_wildcard_bgn, auto_wildcard_end, wildchar_byte, not_byte);
 		}
 
 		return trg;

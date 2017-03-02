@@ -22,47 +22,52 @@ public class Xosearch_finder_cbk__highlight implements Xosearch_finder_cbk {
 	private Xoa_ttl ttl;
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public int found;
+	private int max_snips_per_page;
 	public Xosearch_finder_cbk__highlight(Xoa_app app, Xog_cbk_trg cbk_trg) {
 		this.app = app;
 		this.cbk_trg = cbk_trg;
 	}
-	public void Init(Xow_wiki wiki, Xoa_ttl ttl) {
+	public void Init(Xow_wiki wiki, Xoa_ttl ttl, int max_snips_per_page) {
 		this.wiki = wiki;
 		this.ttl = ttl;
+		this.max_snips_per_page = max_snips_per_page;
 		found = 0;
 	}
 	public void Process_item_found(byte[] src, int hook_bgn, int hook_end, int word_bgn, int word_end, Xosearch_word_node term) {
-		// get snip bounds by finding flanking 50 chars and then expanding to word-bounds
-		int snip_bgn = hook_bgn - 50;
-		if (snip_bgn < 0)
-			snip_bgn = 0;
-		else {
-			snip_bgn = Bry_find_.Find_bwd_ws(src, snip_bgn, 0) + 1;
-		}
-		int snip_end = hook_end + 50;
-		if (snip_end >= src.length)
-			snip_end = src.length;
-		else {
-			snip_end = Bry_find_.Find_fwd_until_ws(src, snip_end, src.length);
-			if (snip_end == Bry_find_.Not_found) { // when snip_end == src.length
-				snip_end = src.length;
+		++found;
+		if (found <= max_snips_per_page) {
+			// get snip bounds by finding flanking 50 chars and then expanding to word-bounds
+			int snip_bgn = hook_bgn - 50;
+			if (snip_bgn < 0)
+				snip_bgn = 0;
+			else {
+				snip_bgn = Bry_find_.Find_bwd_ws(src, snip_bgn, 0) + 1;
 			}
+			int snip_end = hook_end + 50;
+			if (snip_end >= src.length)
+				snip_end = src.length;
+			else {
+				snip_end = Bry_find_.Find_fwd_until_ws(src, snip_end, src.length);
+				if (snip_end == Bry_find_.Not_found) { // when snip_end == src.length
+					snip_end = src.length;
+				}
+			}
+
+			// build snip
+			Add_snip(tmp_bfr, src, snip_bgn, hook_bgn);
+			tmp_bfr.Add_str_a7("<span class='snip_highlight'>");
+			Add_snip(tmp_bfr, src, hook_bgn, hook_end);
+			tmp_bfr.Add_str_a7("</span>");
+			Add_snip(tmp_bfr, src, hook_end, snip_end);
+
+			// send notification
+			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.search_fulltext.results__line__add__recv", gplx.core.gfobjs.Gfobj_nde.New()
+				.Add_bry("wiki", wiki.Domain_bry())
+				.Add_bry("page", ttl.Full_db())
+				.Add_int("line", found)
+				.Add_bry("html", tmp_bfr.To_bry_and_clear())
+				);
 		}
-
-		// build snip
-		Add_snip(tmp_bfr, src, snip_bgn, hook_bgn);
-		tmp_bfr.Add_str_a7("<span class='snip_highlight'>");
-		Add_snip(tmp_bfr, src, hook_bgn, hook_end);
-		tmp_bfr.Add_str_a7("</span>");
-		Add_snip(tmp_bfr, src, hook_end, snip_end);
-
-		// send notification
-		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.search_fulltext.results__line__add__recv", gplx.core.gfobjs.Gfobj_nde.New()
-			.Add_bry("wiki", wiki.Domain_bry())
-			.Add_bry("page", ttl.Full_db())
-			.Add_int("line", ++found)
-			.Add_bry("html", tmp_bfr.To_bry_and_clear())
-			);
 		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.search_fulltext.results__page__update__recv", gplx.core.gfobjs.Gfobj_nde.New()
 			.Add_bry("wiki", wiki.Domain_bry())
 			.Add_bry("page", ttl.Full_db())

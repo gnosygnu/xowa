@@ -60,7 +60,7 @@ public class Srch_search_mgr implements Gfo_invk {
 		cur_cmd.Cancel();
 
 		// create new one; run it;
-		Srch_crt_mgr crt_mgr = crt_parser.Parse_or_invalid(qry.Phrase.Compiled, qry.Phrase.Wildcard);
+		Srch_crt_mgr crt_mgr = crt_parser.Parse_or_invalid(qry.Phrase.Compiled);
 		if (crt_mgr == Srch_crt_mgr.Invalid) return;	// handle "\\" which is invalid or other fatal errors
 		Srch_rslt_list rslts_list = cache__rslts.Get_or_new(crt_mgr.Key);
 		cur_cmd = new Srch_search_cmd(this, qry, crt_mgr, cbk, rslts_list);

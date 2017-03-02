@@ -18,12 +18,8 @@ import gplx.xowa.specials.*; import gplx.core.net.qargs.*;
 public class Xosearch_fulltext_special implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
 //			Gfo_qarg_mgr url_args = new Gfo_qarg_mgr().Init(url.Qargs_ary());
-		
-//			String domain = url_args.Read_str_or("domain", "[xowa.home]");
-//			String db = url_args.Read_str_or("db", "core");
-//			String sql = url_args.Read_str_or("sql", "SELECT * FROM xowa_cfg;");
 
-		new Xosearch_fulltext_html().Bld_page_by_mustache(wiki.App(), page, this);
+		new Xosearch_fulltext_html(false, false, false, 20, 10, wiki.Domain_str(), "0|4").Bld_page_by_mustache(wiki.App(), page, this);
 	}
 	Xosearch_fulltext_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
 	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;

@@ -60,7 +60,7 @@ class Srch_crt_parser_fxt {
 	}
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_a7(src_str);
-		Srch_crt_mgr crt_mgr = crt_parser.Parse_or_invalid(src_bry, Bool_.N);
+		Srch_crt_mgr crt_mgr = crt_parser.Parse_or_invalid(src_bry);
 		Tfds.Eq(expd, String_.new_u8(visitor__to_str.Print(crt_mgr.Root)));
 	}
 }

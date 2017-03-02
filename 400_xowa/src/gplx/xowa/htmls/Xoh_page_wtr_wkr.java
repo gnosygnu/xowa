@@ -142,6 +142,7 @@ public class Xoh_page_wtr_wkr {
 				}
 			}
 			if (	wiki.Domain_tid() != Xow_domain_tid_.Tid__home	// allow home wiki to use javascript
+				&&  !page.Html_data().Js_enabled()                  // allow special pages to use js
 				&&  !page_tid_uses_pre) {							// if .js, .css or .lua, skip test; may have js fragments, but entire text is escaped and put in pre; don't show spurious warning; DATE:2013-11-21
 				wiki.Html_mgr().Js_cleaner().Clean_bfr(wiki, page_ttl, bfr, bfr_page_bgn);
 			}

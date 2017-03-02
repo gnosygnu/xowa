@@ -26,7 +26,7 @@ public class Srch_crt_parser {
 		this.scanner = new Srch_crt_scanner(trie_bldr);
 	}
 	public int Next_uid() {return ++uid_next;}
-	public Srch_crt_mgr Parse_or_invalid(byte[] src, boolean auto_wildcard) {
+	public Srch_crt_mgr Parse_or_invalid(byte[] src) {
 		this.uid_next = -1;
 
 		Srch_crt_tkn[] tkns_ary = scanner.Scan(src);
