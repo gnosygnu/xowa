@@ -45,7 +45,11 @@ public class Xog_tab_itm_edit_mgr {
 			, String_.new_u8(page.Ttl().Full_txt_raw())
 			, Datetime_now.Get().XtoStr_fmt("HH:mm:ss.fff")
 			);
-		if (!quick_save) {							// full_save; save page and go to read mode
+
+		// full_save; save page and go to read mode
+		if (!quick_save) {
+			gplx.xowa.addons.wikis.pagebaks.Pagebaks_addon.On_page_saved(wiki.Appe(), wiki, page.Ttl(), new_text);
+
 			// update categories
 			try {
 				wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xopg_page_.Tid_read); // NOTE: need to write html to fill Wtxt().Ctgs
@@ -54,6 +58,10 @@ public class Xog_tab_itm_edit_mgr {
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to update categories; err=~{0}", Err_.Message_gplx_log(e));
 			}
 
+			// TODO: save html copy
+			//wiki.Db_mgr().Hdump_mgr().Save(page);
+
+			// parse page and show it
 			page.Html_data().Edit_preview_(Bry_.Empty);
 			Xoae_page stack_page = tab.History_mgr().Cur_page(wiki);		// NOTE: must be to CurPage() else changes will be lost when going Bwd,Fwd
 			stack_page.Db().Text().Text_bry_(page.Db().Text().Text_bry());	// NOTE: overwrite with "saved" changes
@@ -62,7 +70,6 @@ public class Xog_tab_itm_edit_mgr {
 			win_itm.Page__mode_(Xopg_page_.Tid_read);
 			win_itm.Page__async__bgn(tab);
 		}
-//			wiki.Db_mgr().Hdump_mgr().Save(page);
 	}
 	public static void Preview(Xog_tab_itm tab) {
 		if (tab.View_mode() != Xopg_page_.Tid_edit) return;	// exit if not edit; handles preview somehow being called?
