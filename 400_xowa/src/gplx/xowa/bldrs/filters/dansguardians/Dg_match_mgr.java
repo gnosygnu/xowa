@@ -25,12 +25,14 @@ public class Dg_match_mgr {
 	private final    Ordered_hash rule_group_hash = Ordered_hash_.New_bry(), rule_tally_hash = Ordered_hash_.New_bry();
 	private final    Dg_parser parser = new Dg_parser();
 	private final    Xob_ttl_filter_mgr ttl_filter_mgr = new Xob_ttl_filter_mgr();
+	private final    Dg_ns_skip_mgr ns_skip_mgr = new Dg_ns_skip_mgr();
 	private final    Dg_log_mgr log_mgr = new Dg_log_mgr();
 	public Dg_match_mgr(Io_url root_dir, int score_init, int score_fail, boolean case_match, boolean log_enabled, Io_url log_url) {
 		this.score_init = score_init; this.score_fail = score_fail; this.case_match = case_match; this.log_enabled = log_enabled;
 		if (log_enabled) log_mgr.Init(log_url);
 		ttl_filter_mgr.Load(Bool_.N, root_dir.GenSubFil("xowa.title.include.txt"));
 		ttl_filter_mgr.Load(Bool_.Y, root_dir.GenSubFil("xowa.title.exclude.txt"));
+		ns_skip_mgr.Load(root_dir.GenSubFil("xowa.ns.skip.txt"));
 		Io_url dg_root_url = root_dir.GenSubDir("dansguardian");
 		Dg_file[] files = parser.Parse_dir(dg_root_url); Gfo_usr_dlg_.Instance.Plog_many("", "", "import.dg.rules: url=~{0} files=~{1}", dg_root_url, files.length);
 		Init_by_files(files);
@@ -77,6 +79,10 @@ public class Dg_match_mgr {
 		return rv;
 	}
 	public boolean Match(int log_tid, int page_id, int page_ns, byte[] page_ttl, byte[] page_ttl_db, Xol_lang_itm lang, byte[] src) {
+		// if ns is in skip_mgr, ignore; needed to skip Template and Module
+		if (ns_skip_mgr.Has(page_ns))
+			return false;
+
 		int src_len = src.length;
 		int clude_type = 0;
 		if		(ttl_filter_mgr.Match_include(page_ttl_db)) clude_type = -1;
