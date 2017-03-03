@@ -29,6 +29,7 @@ import gplx.gfui.controls.gxws.GxwComboBox;
 import gplx.gfui.controls.gxws.GxwCore_base;
 import gplx.gfui.controls.gxws.GxwElem;
 import gplx.gfui.controls.standards.GfuiComboBox;
+import gplx.gfui.draws.ColorAdp;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -47,6 +48,7 @@ class Swt_combo implements GxwElem, GxwComboBox, Swt_control, Gfo_evt_mgr_owner 
 		combo.addMouseListener(new Swt_lnr_mouse(this));
 		combo.addSelectionListener(new Swt_combo__selection_listener(this));
 	}
+	public ColorAdp Border_color() {return border_color;} public void Border_color_(ColorAdp v) {border_color = v;} private ColorAdp border_color;
 	@Override public Gfo_evt_mgr Evt_mgr() {return ev_mgr;} private Gfo_evt_mgr ev_mgr; public void Evt_mgr_(Gfo_evt_mgr v) {ev_mgr = v;}
 	@Override public Control Under_control() {return combo;}
 	@Override public Control Under_menu_control() {return combo;}

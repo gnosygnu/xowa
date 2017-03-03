@@ -31,6 +31,7 @@ import javax.swing.KeyStroke;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.text.JTextComponent;
+import gplx.gfui.draws.*;
 import gplx.gfui.ipts.*; import gplx.gfui.gfxs.*; import gplx.gfui.controls.elems.*;
 public class GxwTextBox_lang extends JTextArea implements GxwTextFld {
 	public Object UnderElem() {return this;}
@@ -48,6 +49,7 @@ public class GxwTextBox_lang extends JTextArea implements GxwTextFld {
 		Border border = v ? BorderFactory.createLineBorder(Color.BLACK, 1) : null;
 		this.setBorder(border);
 	}
+	public ColorAdp Border_color() {return border_color;} public void Border_color_(ColorAdp v) {border_color = v;} private ColorAdp border_color;
 	public void Margins_set(int left, int top, int right, int bot) {}
 	public boolean OverrideTabKey() {return overrideTabKey;} boolean overrideTabKey;
 	public void OverrideTabKey_(boolean val) {
@@ -124,6 +126,7 @@ class GxwTextFld_cls_lang extends JTextField implements GxwTextFld {
 		Border border = v ? BorderFactory.createLineBorder(Color.BLACK) : null;
 		this.setBorder(border);			
 	} boolean borderOn = true;
+	public ColorAdp Border_color() {return border_color;} public void Border_color_(ColorAdp v) {border_color = v;} private ColorAdp border_color;
 	public void Margins_set(int left, int top, int right, int bot) {}
 	public boolean OverrideTabKey() {return overrideTabKey;}
 	public void OverrideTabKey_(boolean val) {

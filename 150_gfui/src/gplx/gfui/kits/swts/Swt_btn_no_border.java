@@ -27,6 +27,7 @@ import gplx.gfui.imgs.ImageAdp;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -61,15 +62,24 @@ public class Swt_btn_no_border implements GxwElem, Swt_control {
 	private void Btn_img_(ImageAdp v) {
 		if (box_btn == null || v == null) return;
 		SizeAdp size = core.Size();
-		box_btn.setImage((Image)v.Resize(size.Width(), size.Height()).Under());
+		v = v.Resize(size.Width(), size.Height());
+		box_btn.setImage(Copy_w_transparency((Image)v.Under()));
+	}
+	private Image Copy_w_transparency(Image src) {
+      // set transparency
+      ImageData imageData = src.getImageData();
+      imageData.transparentPixel = imageData.getPixel(0, 0);
+
+      // create new image with transparency set
+      Image trg = new Image(box_grp.getDisplay(), imageData);
+      src.dispose();
+      return trg;
 	}
 	private void Make_btn_no_border(Display display, Shell shell, Composite owner) {
 		box_grp = new Composite(owner, SWT.FLAT);
 		box_btn = new Label(box_grp, SWT.FLAT);
 		box_grp.setSize(16, 16);
 		box_btn.setSize(16, 16);
-		box_grp.setBackground(display.getSystemColor(SWT.COLOR_WHITE));
-		box_btn.setBackground(display.getSystemColor(SWT.COLOR_WHITE));
 		box_btn.addFocusListener(new Swt_clabel_lnr_focus(box_grp));
 	}
 }

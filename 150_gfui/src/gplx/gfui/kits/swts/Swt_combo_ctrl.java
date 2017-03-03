@@ -21,6 +21,7 @@ import gplx.core.threads.Thread_adp_;
 import gplx.gfui.controls.gxws.GxwComboBox;
 import gplx.gfui.controls.gxws.GxwElem;
 import gplx.gfui.controls.standards.GfuiComboBox;
+import gplx.gfui.kits.core.Swt_kit;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -43,8 +44,8 @@ import org.eclipse.swt.widgets.Text;
 public class Swt_combo_ctrl extends Swt_text_w_border implements GxwElem, GxwComboBox, Swt_control, Gfo_evt_mgr_owner {	// REF: https://www.eclipse.org/forums/index.php/t/351029/; http://git.eclipse.org/c/platform/eclipse.platform.swt.git/tree/examples/org.eclipse.swt.snippets/src/org/eclipse/swt/snippets/Snippet320.java
 	private final Text swt_text;
 	private final Swt_combo_list list;
-	public Swt_combo_ctrl(Swt_control owner, Color color, Keyval_hash ctorArgs) {
-		super(owner, color, new Keyval_hash());
+	public Swt_combo_ctrl(Swt_kit kit, Swt_control owner, Color color, Keyval_hash ctorArgs) {
+		super(kit, owner, color, new Keyval_hash());
 		Display display = owner.Under_control().getDisplay();
 		Shell shell = owner.Under_control().getShell();
 		this.swt_text = super.Under_text();

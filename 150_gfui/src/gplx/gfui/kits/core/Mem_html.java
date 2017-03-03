@@ -48,8 +48,10 @@ class Mem_html extends GxwTextMemo_lang implements Gxw_html {		public void Html_
 		this.ctor_MsTextBoxMultiline_();
 	}
 }
-class Mem_tab_mgr extends GxwElem_mock_base implements Gxw_tab_mgr {	public ColorAdp Btns_selected_color() {return btns_selected_color;} public void Btns_selected_color_(ColorAdp v) {btns_selected_color = v;} private ColorAdp btns_selected_color;
-	public ColorAdp Btns_unselected_color() {return btns_unselected_color;} public void Btns_unselected_color_(ColorAdp v) {btns_unselected_color = v;} private ColorAdp btns_unselected_color;
+class Mem_tab_mgr extends GxwElem_mock_base implements Gxw_tab_mgr {	public ColorAdp Btns_selected_background() {return btns_selected_background;} public void Btns_selected_background_(ColorAdp v) {btns_selected_background = v;} private ColorAdp btns_selected_background;
+	public ColorAdp Btns_selected_foreground() {return btns_selected_foreground;} public void Btns_selected_foreground_(ColorAdp v) {btns_selected_foreground = v;} private ColorAdp btns_selected_foreground;
+	public ColorAdp Btns_unselected_background() {return btns_unselected_background;} public void Btns_unselected_background_(ColorAdp v) {btns_unselected_background = v;} private ColorAdp btns_unselected_background;
+	public ColorAdp Btns_unselected_foreground() {return btns_unselected_foreground;} public void Btns_unselected_foreground_(ColorAdp v) {btns_unselected_foreground = v;} private ColorAdp btns_unselected_foreground;
 	public Gxw_tab_itm Tabs_add(Gfui_tab_itm_data tab_data) {return new Mem_tab_itm();}
 	public void Tabs_select_by_idx(int i) {}
 	public void Tabs_close_by_idx(int i) {}

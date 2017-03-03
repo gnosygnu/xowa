@@ -102,7 +102,7 @@ abstract class Swt_core__base extends GxwCore_base {
 	@Override public void               Zorder_front()                  {} // TODO.FUTURE: Canvas c; c.moveAbove(arg0);
 	@Override public void               Zorder_back()                   {} // TODO.FUTURE: Canvas c; c.moveBelow(arg0);
 
-	private static ColorAdp To_color_gfui(Color v)                  {return ColorAdp_.new_(0, v.getRed(), v.getGreen(), v.getBlue());}
+	protected static ColorAdp To_color_gfui(Color v)                  {return ColorAdp_.new_(0, v.getRed(), v.getGreen(), v.getBlue());}
 	protected static Color To_color_swt(Control control, ColorAdp v)  {return new Color(control.getDisplay(), v.Red(), v.Green(), v.Blue());}
 	private static FontAdp Control_font_get(Font font, GxwCore_base owner) {
 		FontData fontData = font.getFontData()[0];

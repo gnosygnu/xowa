@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.controls.standards; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+import gplx.gfui.draws.*;
 import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*;
 public class GfuiComboBox extends GfuiElemBase {
 	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
@@ -21,6 +22,7 @@ public class GfuiComboBox extends GfuiElemBase {
 		this.combo = (GxwComboBox)this.UnderElem();
 	}
 	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.comboBox_();} private GxwComboBox combo;
+	public ColorAdp Border_color() {return combo.Border_color();} public void Border_color_(ColorAdp v) {combo.Border_color_(v);}
 	public int SelBgn() {return combo.SelBgn();} public void SelBgn_set(int v) {combo.SelBgn_set(v); Gfo_evt_mgr_.Pub(this, Evt__selection_start_changed);}
 	public int SelLen() {return combo.SelLen();} public void SelLen_set(int v) {combo.SelLen_set(v);}
 	public void Sel_(int bgn, int len) {combo.Sel_(bgn, len);}

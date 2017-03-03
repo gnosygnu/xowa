@@ -267,6 +267,7 @@ public class GxwTextMemo_lang extends JScrollPane implements GxwTextMemo {
 //		return charactersPastEndOfLine == String_.NewLine ? lineLength + newLineLength : lineLength;
 	}
 	public boolean Border_on() {return txt_box.Border_on();} public void Border_on_(boolean v) {txt_box.Border_on_(v);}
+	public ColorAdp Border_color() {return border_color;} public void Border_color_(ColorAdp v) {border_color = v;} private ColorAdp border_color;	
 	public void CreateControlIfNeeded() {txt_box.CreateControlIfNeeded();}
 	public boolean OverrideTabKey() {return txt_box.OverrideTabKey();}
 	public void OverrideTabKey_(boolean v) {

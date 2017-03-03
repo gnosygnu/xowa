@@ -17,8 +17,10 @@ package gplx.gfui.controls.standards; import gplx.*; import gplx.gfui.*; import 
 import gplx.gfui.draws.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*;
 public class Gfui_tab_mgr extends GfuiElemBase {
 	public void Under_tab_mgr_(Gxw_tab_mgr v) {under = v;} private Gxw_tab_mgr under;
-	public ColorAdp Btns_selected_color() {return under.Btns_selected_color();} public void Btns_selected_color_(ColorAdp v) {under.Btns_selected_color_(v);}
-	public ColorAdp Btns_unselected_color() {return under.Btns_unselected_color();} public void Btns_unselected_color_(ColorAdp v) {under.Btns_unselected_color_(v);}
+	public ColorAdp Btns_selected_background() {return under.Btns_selected_background();} public void Btns_selected_background_(ColorAdp v) {under.Btns_selected_background_(v);}
+	public ColorAdp Btns_selected_foreground() {return under.Btns_selected_foreground();} public void Btns_selected_foreground_(ColorAdp v) {under.Btns_selected_foreground_(v);}
+	public ColorAdp Btns_unselected_background() {return under.Btns_unselected_background();} public void Btns_unselected_background_(ColorAdp v) {under.Btns_unselected_background_(v);}
+	public ColorAdp Btns_unselected_foreground() {return under.Btns_unselected_foreground();} public void Btns_unselected_foreground_(ColorAdp v) {under.Btns_unselected_foreground_(v);}
 	public Gfui_tab_itm Tabs_add(Gfui_tab_itm_data tab_data) {
 		Gxw_tab_itm tab_itm = under.Tabs_add(tab_data);
 		return Gfui_tab_itm.kit_(this.Kit(), tab_data.Key(), tab_itm, new Keyval_hash());

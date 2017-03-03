@@ -18,6 +18,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import gplx.gfui.draws.*;
 import gplx.gfui.ipts.*; import gplx.gfui.gfxs.*;
 public class GxwComboBox_lang extends JComboBox implements GxwComboBox, GxwElem, ActionListener {
 	public String[] DataSource_as_str_ary() {return String_.Ary_empty;}
@@ -33,6 +34,7 @@ public class GxwComboBox_lang extends JComboBox implements GxwComboBox, GxwElem,
 			obj = cb.getSelectedItem();  
  		 */
 	}
+	public ColorAdp Border_color() {return border_color;} public void Border_color_(ColorAdp v) {border_color = v;} private ColorAdp border_color;
 	public int SelBgn() {return -1;} public void SelBgn_set(int v) {}
 	public int SelLen() {return 0;}  public void SelLen_set(int v) {}
 	public void Sel_(int bgn, int end) {}

@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
 import gplx.gfui.ipts.*;
+import gplx.gfui.draws.*;
 public class GxwElem_mock_base implements GxwElem {
 	public GxwCore_base Core() {return ctrlMgr;} final    GxwCore_mock ctrlMgr = new GxwCore_mock();
 	public GxwCbkHost Host() {return host;} public void Host_set(GxwCbkHost host) {this.host = host;} GxwCbkHost host = GxwCbkHost_.Null;
@@ -30,6 +31,7 @@ public class GxwElem_mock_base implements GxwElem {
 }
 class MockTextBox extends GxwElem_mock_base implements GxwTextFld {
 	public boolean Border_on() {return borderOn;} public void Border_on_(boolean v) {borderOn = v;} private boolean borderOn = true;
+	public ColorAdp Border_color() {return border_color;} public void Border_color_(ColorAdp v) {border_color = v;} private ColorAdp border_color;
 	public boolean OverrideTabKey() {return false;} public void OverrideTabKey_(boolean v) {}
 	public int SelBgn() {return selectionStart;} public void SelBgn_set(int v) {selectionStart = v;} int selectionStart;
 	public int SelLen() {return selectionLength;} public void SelLen_set(int v) {selectionLength = v;} int selectionLength;
@@ -61,6 +63,7 @@ class MockTextBoxMulti extends MockTextBox implements GxwTextMemo, GxwTextHtml {
 	public void ScrollTillCaretIsVisible() {}
 }
 class MockComboBox extends GxwElem_mock_base implements GxwComboBox {
+	public ColorAdp Border_color() {return border_color;} public void Border_color_(ColorAdp v) {border_color = v;} private ColorAdp border_color;
 	public int SelBgn() {return -1;} public void SelBgn_set(int v) {}
 	public int SelLen() {return 0;}  public void SelLen_set(int v) {}
 	public void Sel_(int bgn, int end) {}

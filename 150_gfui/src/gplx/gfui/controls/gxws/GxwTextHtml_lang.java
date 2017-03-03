@@ -60,6 +60,7 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.HTMLEditorKit.HTMLFactory;
 import javax.swing.text.html.InlineView;
 import javax.swing.text.html.StyleSheet;
+import gplx.gfui.draws.*;
 import gplx.gfui.ipts.*; import gplx.gfui.gfxs.*;
 public class GxwTextHtml_lang extends JScrollPane implements GxwTextHtml {
 	@Override public GxwCore_base Core() {return core;} GxwCore_host core;
@@ -73,6 +74,7 @@ public class GxwTextHtml_lang extends JScrollPane implements GxwTextHtml {
 //		Border border = v ? BorderFactory.createLineBorder(Color.BLACK) : null;
 //		this.setBorder(border);			
 	}
+	public ColorAdp Border_color() {return border_color;} public void Border_color_(ColorAdp v) {border_color = v;} private ColorAdp border_color;
 	@Override public boolean OverrideTabKey() {return false;}
 	@Override public void OverrideTabKey_(boolean v) {}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return null;}
@@ -139,8 +141,9 @@ class GxwTextHtml_editor extends JEditorPane implements GxwTextHtml {
 	@Override public void Border_on_(boolean v) {
 		borderOn = v;
 		Border border = v ? BorderFactory.createLineBorder(Color.BLACK) : null;
-		this.setBorder(border);			
-	} 	
+		this.setBorder(border);		
+	}
+	public ColorAdp Border_color() {return border_color;} public void Border_color_(ColorAdp v) {border_color = v;} private ColorAdp border_color;
 	@Override public boolean OverrideTabKey() {return false;}
 	@Override public void OverrideTabKey_(boolean v) {}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return null;}

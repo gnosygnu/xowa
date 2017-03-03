@@ -16,8 +16,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
 import gplx.gfui.draws.*; import gplx.gfui.controls.standards.*;
 public interface Gxw_tab_mgr extends GxwElem {
-	ColorAdp Btns_selected_color(); void Btns_selected_color_(ColorAdp v);
-	ColorAdp Btns_unselected_color(); void Btns_unselected_color_(ColorAdp v);
+	ColorAdp Btns_selected_background(); void Btns_selected_background_(ColorAdp v);
+	ColorAdp Btns_selected_foreground(); void Btns_selected_foreground_(ColorAdp v);
+	ColorAdp Btns_unselected_background(); void Btns_unselected_background_(ColorAdp v);
+	ColorAdp Btns_unselected_foreground(); void Btns_unselected_foreground_(ColorAdp v);
+
 	int Btns_height(); void Btns_height_(int v);
 	boolean Btns_place_on_top(); void Btns_place_on_top_(boolean v);
 	boolean Btns_curved(); void Btns_curved_(boolean v);

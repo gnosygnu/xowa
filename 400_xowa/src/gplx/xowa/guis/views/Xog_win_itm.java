@@ -313,8 +313,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		win_box.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(1).Margin_w_(0).Margin_h_(0).Spacing_h_(0));
 
 		// toolbar
-		Gfui_grp toolbar_grp = kit.New_grp("toolbar_grp", win_box);
-		toolbar_grp.BackColor_(ColorAdp_.White);
+		Gfui_grp toolbar_grp = Xog_win_itm_.new_grp(app, kit, win_box, "toolbar_grp");
 		go_bwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "go_bwd_btn", "go_bwd.png"				);
 		go_fwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "go_fwd_btn", "go_fwd.png"				);
 		url_box				= Xog_win_itm_.new_cbo(app, kit, toolbar_grp, ui_font, "url_box"								, true);
@@ -338,8 +337,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		tab_mgr.Tab_mgr().Layout_data_(new Swt_layout_data__grid().Grab_excess_h_(true).Align_w__fill_().Align_h__fill_().Grab_excess_w_(true)); 
 
 		// statusbar
-		this.statusbar_grp = kit.New_grp("statusbar_grp", win_box);
-		statusbar_grp.BackColor_(ColorAdp_.White);
+		this.statusbar_grp = Xog_win_itm_.new_grp(app, kit, win_box, "statusbar_grp");
 		find_close_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, img_dir, "find_close_btn", "find_close.png"		);
 		find_box			= Xog_win_itm_.new_txt(app, kit, statusbar_grp, ui_font, "find_box"								, true);
 		find_fwd_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, img_dir, "find_fwd_btn", "find_fwd.png"			);

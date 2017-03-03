@@ -18,6 +18,7 @@ import gplx.gfui.controls.gxws.GxwCbkHost;
 import gplx.gfui.controls.gxws.GxwCore_base;
 import gplx.gfui.controls.gxws.GxwTextFld;
 import gplx.gfui.controls.standards.GfuiTextBox_;
+import gplx.gfui.draws.ColorAdp;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
@@ -58,6 +59,7 @@ public class Swt_text implements GxwTextFld, Swt_control {
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return null;}
 	public void Margins_set(int left, int top, int right, int bot) {}
 	@Override public boolean Border_on() {return false;} @Override public void Border_on_(boolean v) {} // SWT_TODO:borderWidth doesn't seem mutable
+	public ColorAdp Border_color() {return border_color;} public void Border_color_(ColorAdp v) {border_color = v;} private ColorAdp border_color;
 	@Override public void CreateControlIfNeeded() {}
 	@Override public boolean OverrideTabKey() {return false;} @Override public void OverrideTabKey_(boolean v) {}
 }

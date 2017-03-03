@@ -60,30 +60,32 @@ public class Swt_tab_mgr implements Gxw_tab_mgr, Swt_control, FocusListener, Gfo
 	@Override public Control Under_menu_control() {return tab_folder;}
 	public Gfo_evt_mgr Evt_mgr() {return ev_mgr;} private Gfo_evt_mgr ev_mgr;
 	public void Evt_mgr_(Gfo_evt_mgr v) {ev_mgr = v;}
-	public ColorAdp Btns_selected_color() {return btns_selected_color;} private ColorAdp btns_selected_color;
-	public void Btns_selected_color_(ColorAdp v) {
-		btns_selected_color = v;
-		tab_folder.setSelectionBackground(kit.New_color(v));
-	}
-	public ColorAdp Btns_unselected_color() {return btns_unselected_color;} 
-	public void Btns_unselected_color_(ColorAdp v) {
-		btns_unselected_color = v;
-		tab_folder.setBackground(kit.New_color(v));
-	} 	private ColorAdp btns_unselected_color;
-	@Override public boolean Btns_curved() {return tab_folder.getSimple();} @Override public void Btns_curved_(boolean v) {tab_folder.setSimple(!v);}
-	@Override public boolean Btns_place_on_top() {return tab_folder.getTabPosition() == SWT.TOP;} 
-	@Override public void Btns_place_on_top_(boolean v) {tab_folder.setTabPosition(v ? SWT.TOP : SWT.BOTTOM); tab_folder.layout();}
-	@Override public int Btns_height() {return tab_folder.getTabHeight();} @Override public void Btns_height_(int v) {tab_folder.setTabHeight(v); tab_folder.layout();}
-	@Override public boolean Btns_close_visible() {return btns_close_visible;} private boolean btns_close_visible = true;
-	@Override public void Btns_close_visible_(boolean v) {
+	
+	public ColorAdp     Btns_selected_foreground() {return btns_selected_foreground;} private ColorAdp btns_selected_foreground;
+	public void         Btns_selected_foreground_(ColorAdp v) {btns_selected_foreground = v; tab_folder.setSelectionForeground(kit.New_color(v));}
+	public ColorAdp     Btns_selected_background() {return btns_selected_background;} private ColorAdp btns_selected_background;
+	public void         Btns_selected_background_(ColorAdp v) {btns_selected_background = v; tab_folder.setSelectionBackground(kit.New_color(v));}
+	public ColorAdp     Btns_unselected_foreground() {return btns_unselected_foreground;} private ColorAdp btns_unselected_foreground;
+	public void         Btns_unselected_foreground_(ColorAdp v) {btns_unselected_foreground = v; tab_folder.setForeground(kit.New_color(v));}
+	public ColorAdp     Btns_unselected_background() {return btns_unselected_background;} private ColorAdp btns_unselected_background;
+	public void         Btns_unselected_background_(ColorAdp v) {btns_unselected_background = v; tab_folder.setBackground(kit.New_color(v));}
+	public boolean      Btns_curved() {return tab_folder.getSimple();}
+	public void         Btns_curved_(boolean v) {tab_folder.setSimple(!v);}
+	public boolean      Btns_place_on_top() {return tab_folder.getTabPosition() == SWT.TOP;} 
+	public void         Btns_place_on_top_(boolean v) {tab_folder.setTabPosition(v ? SWT.TOP : SWT.BOTTOM); tab_folder.layout();}
+	public int          Btns_height() {return tab_folder.getTabHeight();}
+	public void         Btns_height_(int v) {tab_folder.setTabHeight(v); tab_folder.layout();}
+	public boolean      Btns_close_visible() {return btns_close_visible;} private boolean btns_close_visible = true;
+	public void         Btns_close_visible_(boolean v) {
 		this.btns_close_visible = v;
 		CTabItem[] itms = tab_folder.getItems();
 		int len = itms.length;
 		for (int i = 0; i < len; i++)
 			itms[i].setShowClose(v);
 	}
-	@Override public boolean Btns_unselected_close_visible() {return tab_folder.getUnselectedCloseVisible();} @Override public void Btns_unselected_close_visible_(boolean v) {
-		tab_folder.setUnselectedCloseVisible(v);}
+	public boolean      Btns_unselected_close_visible() {return tab_folder.getUnselectedCloseVisible();} 
+	public void         Btns_unselected_close_visible_(boolean v) {tab_folder.setUnselectedCloseVisible(v);}
+	
 	@Override public Gxw_tab_itm Tabs_add(Gfui_tab_itm_data tab_data) {
 		Swt_tab_itm rv = new Swt_tab_itm(this, kit, tab_folder, tab_data);
 		rv.Under_CTabItem().setData(tab_data);

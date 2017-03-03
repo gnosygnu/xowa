@@ -14,8 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+import gplx.gfui.draws.*;
 public interface GxwTextFld extends GxwElem {
 	boolean Border_on(); void Border_on_(boolean v);
+	ColorAdp Border_color(); void Border_color_(ColorAdp v);
 	int SelBgn(); void SelBgn_set(int v);
 	int SelLen(); void SelLen_set(int v);
 	void CreateControlIfNeeded();

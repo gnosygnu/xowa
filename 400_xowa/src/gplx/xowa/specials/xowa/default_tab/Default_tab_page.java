@@ -19,10 +19,12 @@ public class Default_tab_page implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
 		Xoae_page page = (Xoae_page)pagei;
 		page.Db().Text().Text_bry_(Bry_.Empty);
-		page.Html_data().Custom_html_(Bry_.Empty);
+		page.Html_data().Custom_html_(DEFAULT_HTML);
 		page.Html_data().Custom_tab_name_(Tab_name_bry);
 	}
 	public static final    byte[] Tab_name_bry = Bry_.new_a7("New Tab");
 
 	public Xow_special_page Special__clone() {return this;}
+
+	private static final    byte[] DEFAULT_HTML = Bry_.new_a7("<html><body class='xowa-default_new_tab-body'></body></html>");
 }

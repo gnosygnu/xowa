@@ -53,11 +53,17 @@ class Swt_core__frames extends Swt_core__base {
 	@Override public void               Width_set(int v)                {super.Width_set(v);  Frames_w_set(v);}
 	@Override public void               Height_set(int v)               {super.Height_set(v); Frames_h_set(v);}
 	@Override public void               Size_set(SizeAdp v)             {super.Size_set(v);   Frames_size_set(v);}
-	@Override public void               Rect_set(RectAdp v)             {super.Rect_set(v);   Frames_size_set(v.Size());}	
+	@Override public void               Rect_set(RectAdp v)             {super.Rect_set(v);   Frames_size_set(v.Size());}
 	@Override public void BackColor_set(ColorAdp v) {
 		Color color = Swt_core__base.To_color_swt(outer, v);
-		for (int i = 0; i < frames_len; i++)
+		for (int i = 0; i < frames_len; i++) {
 			frames[i].Item().setBackground(color);
+		}
+	}
+	@Override public void ForeColor_set(ColorAdp v) {
+		Color color = Swt_core__base.To_color_swt(outer, v);
+		for (int i = 0; i < frames_len; i++)
+			frames[i].Item().setForeground(color);
 	}
 	@Override public void Controls_add(GxwElem sub)	{throw Err_.new_unimplemented();}
 	@Override public void Controls_del(GxwElem sub)	{}

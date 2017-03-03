@@ -196,7 +196,7 @@ public class Swt_kit implements Gfui_kit {
 		for (int i = 0; i < args_len; i++)
 			ctor_args.Add(args[i]);
 		boolean border_on = Bool_.Cast(ctor_args.Get_val_or(GfuiTextBox.CFG_border_on_, true));
-		GxwTextFld under = new Swt_text_w_border(Swt_control_.cast_or_fail(owner), New_color(border_on ? ColorAdp_.LightGray : ColorAdp_.White), ctor_args);
+		GxwTextFld under = new Swt_text_w_border(this, Swt_control_.cast_or_fail(owner), New_color(border_on ? ColorAdp_.LightGray : ColorAdp_.White), ctor_args);
 		GfuiTextBox rv = GfuiTextBox_.kit_(this, key, under, ctor_args);
 		rv.Owner_(owner);
 		ctor_args.Clear();
@@ -211,7 +211,7 @@ public class Swt_kit implements Gfui_kit {
 		return rv;
 	}
 	public GfuiComboBox New_combo(String key, GfuiElem owner, Keyval... args) {
-		Swt_combo_ctrl rv_swt = new Swt_combo_ctrl(Swt_control_.cast_or_fail(owner), this.New_color(ColorAdp_.LightGray), ctor_args);
+		Swt_combo_ctrl rv_swt = new Swt_combo_ctrl(this, Swt_control_.cast_or_fail(owner), this.New_color(ColorAdp_.LightGray), ctor_args);
 		GfuiComboBox rv = GfuiComboBox.kit_(this, key, rv_swt, ctor_args);
 		rv.Owner_(owner);
 		rv_swt.Evt_mgr_(rv.Evt_mgr());

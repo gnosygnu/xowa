@@ -14,11 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.controls.standards; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+import gplx.gfui.draws.*;
 import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*;
 public class GfuiTextBox extends GfuiElemBase {
 	public static final    String SelectionStartChanged_evt = "SelectionStartChanged";
 
 	public boolean Border_on() {return textBox.Border_on();} public void Border_on_(boolean v) {BorderOn_set(v);}
+	public ColorAdp Border_color() {return textBox.Border_color();} public void Border_color_(ColorAdp v) {textBox.Border_color_(v);}
 	public int SelBgn() {return textBox.SelBgn();} public void SelBgn_set(int v) {textBox.SelBgn_set(v); Gfo_evt_mgr_.Pub(this, SelectionStartChanged_evt);}
 	public int SelLen() {return textBox.SelLen();} public void SelLen_set(int v) {textBox.SelLen_set(v);}
 	public String SelText() {

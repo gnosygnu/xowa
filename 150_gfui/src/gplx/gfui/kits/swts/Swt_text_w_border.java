@@ -14,10 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+import gplx.gfui.kits.core.Swt_kit;
 import gplx.gfui.controls.gxws.GxwCbkHost;
 import gplx.gfui.controls.gxws.GxwCore_base;
 import gplx.gfui.controls.gxws.GxwTextFld;
 import gplx.gfui.controls.standards.GfuiTextBox_;
+import gplx.gfui.draws.ColorAdp;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.TraverseEvent;
@@ -34,10 +36,12 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 public class Swt_text_w_border implements GxwTextFld, Swt_control {
+	private final Swt_kit kit;
 	private Composite text_host;
 	private Composite text_margin;
 	private Text text_elem;
-	public Swt_text_w_border(Swt_control owner_control, Color color, Keyval_hash ctorArgs) {
+	public Swt_text_w_border(Swt_kit kit, Swt_control owner_control, Color color, Keyval_hash ctorArgs) {
+		this.kit = kit;
 		Composite owner = owner_control.Under_composite();
 		int text_elem_style = ctorArgs.Has(GfuiTextBox_.Ctor_Memo) ? SWT.MULTI | SWT.WRAP | SWT.V_SCROLL : SWT.FLAT;
 		New_box_text_w_border(owner.getDisplay(), owner, text_elem_style, color);
@@ -69,17 +73,20 @@ public class Swt_text_w_border implements GxwTextFld, Swt_control {
 	public void Margins_set(int left, int top, int right, int bot) {
 		this.margins_l = left; this.margins_t = top; this.margins_r = right; this.margins_b = bot;
 	}
-	@Override public boolean Border_on() {return false;} @Override public void Border_on_(boolean v) {} // SWT_TODO:borderWidth doesn't seem mutable
+	@Override public boolean Border_on() {return false;}
+	@Override public void Border_on_(boolean v) {} // SWT_TODO:borderWidth doesn't seem mutable
+	public ColorAdp Border_color() {return border_color;} private ColorAdp border_color;
+	public void Border_color_(ColorAdp v) {
+		this.border_color = v; text_host.setBackground(kit.New_color(v));
+		} 
 	@Override public void CreateControlIfNeeded() {}
 	@Override public boolean OverrideTabKey() {return false;} @Override public void OverrideTabKey_(boolean v) {}
-	private void New_box_text_w_border(Display display, Composite owner, int style, Color color) {
+	private void New_box_text_w_border(Display display, Composite owner, int style, Color border_color) {
 		text_host = new Composite(owner, SWT.FLAT);
 		text_margin = new Composite(text_host, SWT.FLAT);
 		text_elem = new Text(text_margin, style);
 		text_elem .addTraverseListener(Swt_lnr_traverse_ignore_ctrl.Instance);	// do not allow ctrl+tab to change focus when pressed in text box; allows ctrl+tab to be used by other bindings; DATE:2014-04-30  
 		text_host.setSize(20, 20);
-		text_host.setBackground(color);
-		text_margin.setBackground(display.getSystemColor(SWT.COLOR_WHITE));
 		text_margin.setSize(25, 25);
 	}
 	public static final int Margin_v_dflt = 4;
