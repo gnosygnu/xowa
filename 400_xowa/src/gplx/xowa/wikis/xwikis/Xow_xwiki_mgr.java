@@ -31,6 +31,9 @@ public class Xow_xwiki_mgr {
 	public Xow_xwiki_itm Get_at(int i)								{return (Xow_xwiki_itm)list.Get_at(i);}
 	public Xow_xwiki_itm Get_by_key(byte[] key)						{return (Xow_xwiki_itm)hash.Get_by_bry(key);}
 	public Xow_xwiki_itm Get_by_mid(byte[] src, int bgn, int end)	{return (Xow_xwiki_itm)hash.Get_by_mid(src, bgn, end);}
+	public Xow_xwiki_itm Add_by_atrs_offline(String key, String domain) {
+		return Add_by_atrs(Bry_.new_a7(key), Bry_.new_a7(domain), null).Offline_(true);
+	}
 	public Xow_xwiki_itm Add_by_atrs(String key, String domain)		{return Add_by_atrs(Bry_.new_a7(key), Bry_.new_a7(domain), null);}
 	public Xow_xwiki_itm Add_by_atrs(byte[] key, byte[] domain)		{return Add_by_atrs(key, domain, null);}
 	public Xow_xwiki_itm Add_by_atrs(byte[] key, byte[] domain_bry, byte[] url_fmt) {

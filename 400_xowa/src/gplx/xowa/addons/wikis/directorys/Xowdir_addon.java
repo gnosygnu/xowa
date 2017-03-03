@@ -34,14 +34,6 @@ public class Xowdir_addon implements Xoax_addon_itm, Xoax_addon_itm__special, Xo
 	}
 
 	public String Addon__key() {return ADDON__KEY;} private static final String ADDON__KEY = "xowa.user.wiki.regy";
-//		public static Xowdir_addon Addon__get(Xow_wiki wiki) {
-//			Xowdir_addon rv = (Xowdir_addon)wiki.Addon_mgr().Itms__get_or_null(ADDON__KEY);
-//			if (rv == null) {
-//				rv = new Xowdir_addon(wiki.App().User().User_db_mgr().Conn());
-//				wiki.Addon_mgr().Itms__add(rv);
-//			}
-//			return rv;
-//		}
 	public static void Init(Xoae_app app) {
 		// exit if none found
 		Db_conn conn = app.User().User_db_mgr().Conn();
@@ -53,7 +45,7 @@ public class Xowdir_addon implements Xoax_addon_itm, Xoax_addon_itm__special, Xo
 		int len = itms.length;
 		for (int i = 0; i < len; ++i) {
 			Xowdir_wiki_itm itm = itms[i];
-			app.User().Wikii().Xwiki_mgr().Add_by_atrs(itm.Domain(), itm.Domain());
+			app.User().Wikii().Xwiki_mgr().Add_by_atrs_offline(itm.Domain(), itm.Domain());
 		}
 	}
 }

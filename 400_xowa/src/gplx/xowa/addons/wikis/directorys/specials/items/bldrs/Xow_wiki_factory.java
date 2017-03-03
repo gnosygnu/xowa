@@ -35,7 +35,7 @@ public class Xow_wiki_factory {
 		rv.Db_mgr_as_sql().Save_mgr().Create_enabled_(true);
 
 		// register it for the url-bar; EX: test.me.org/wiki/Main_Page
-		app.User().Wikii().Xwiki_mgr().Add_by_atrs(domain, domain);
+		app.User().Wikii().Xwiki_mgr().Add_by_atrs_offline(String_.new_u8(domain), String_.new_u8(domain));
 
 		// add an xwiki to xowa.home
 		rv.Xwiki_mgr().Add_by_atrs("xowa.home", "home");
