@@ -16,7 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.apis.xowa.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
 import gplx.xowa.apps.apis.xowa.gui.browsers.*;
 public class Xoapi_browser implements Gfo_invk {
+	private Xoae_app app;
 	public void Init_by_kit(Xoae_app app) {
+		this.app = app;
 		url.Init_by_kit(app);
 		tabs.Init_by_kit(app);
 		html.Init_by_kit(app);
@@ -34,6 +36,9 @@ public class Xoapi_browser implements Gfo_invk {
 	public Xoapi_prog		Prog()		{return prog;} private Xoapi_prog prog = new Xoapi_prog();
 	public Xoapi_info		Info()		{return info;} private Xoapi_info info = new Xoapi_info();
 	public Xoapi_prog_log	Prog_log()	{return prog_log;} private Xoapi_prog_log prog_log = new Xoapi_prog_log();
+	private void Nightmode_toggle() {
+		app.Gui_mgr().Nightmode_mgr().Enabled_toggle_();
+	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_url)) 						return url;
 		else if	(ctx.Match(k, Invk_tabs)) 						return tabs;
@@ -43,9 +48,13 @@ public class Xoapi_browser implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_prog)) 						return prog;
 		else if	(ctx.Match(k, Invk_info)) 						return info;
 		else if	(ctx.Match(k, Invk_prog_log)) 					return prog_log;
+		else if	(ctx.Match(k, Invk__nightmode_toggle)) 			Nightmode_toggle();
 		else	return Gfo_invk_.Rv_unhandled;
+		return this;
 	}
 	private static final String 
 	  Invk_url = "url", Invk_tabs = "tabs", Invk_html = "html", Invk_search = "search"
-	, Invk_find = "find", Invk_prog = "prog", Invk_info = "info", Invk_prog_log = "prog_log";
+	, Invk_find = "find", Invk_prog = "prog", Invk_info = "info", Invk_prog_log = "prog_log"
+	, Invk__nightmode_toggle = "nightmode_toggle"
+	;
 }

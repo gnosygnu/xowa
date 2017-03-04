@@ -33,6 +33,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	public Xoa_gui_mgr		Gui_mgr() {return gui_mgr;} private Xoa_gui_mgr gui_mgr;
 
 	public GfuiWin          Win_box()            {return win_box;}            private GfuiWin        win_box;
+	public Gfui_grp         Toolbar_grp()        {return toolbar_grp;}        private Gfui_grp       toolbar_grp;
 	public GfuiBtn          Go_bwd_btn()         {return go_bwd_btn;}         private GfuiBtn        go_bwd_btn;
 	public GfuiBtn          Go_fwd_btn()         {return go_fwd_btn;}         private GfuiBtn        go_fwd_btn;
 	public GfuiComboBox     Url_box()            {return url_box;}            private GfuiComboBox   url_box;
@@ -313,7 +314,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		win_box.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(1).Margin_w_(0).Margin_h_(0).Spacing_h_(0));
 
 		// toolbar
-		Gfui_grp toolbar_grp = Xog_win_itm_.new_grp(app, kit, win_box, "toolbar_grp");
+		this.toolbar_grp    = Xog_win_itm_.new_grp(app, kit, win_box, "toolbar_grp");
 		go_bwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "go_bwd_btn", "go_bwd.png"				);
 		go_fwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "go_fwd_btn", "go_fwd.png"				);
 		url_box				= Xog_win_itm_.new_cbo(app, kit, toolbar_grp, ui_font, "url_box"								, true);

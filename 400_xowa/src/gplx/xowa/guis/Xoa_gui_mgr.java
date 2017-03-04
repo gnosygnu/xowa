@@ -19,7 +19,7 @@ import gplx.gfui.*; import gplx.gfui.ipts.*; import gplx.gfui.kits.core.*; impor
 import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.guis.menus.*; import gplx.xowa.guis.cmds.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.users.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.guis.bnds.*; import gplx.xowa.guis.views.*; import gplx.xowa.guis.urls.url_macros.*; import gplx.xowa.addons.wikis.searchs.gui.htmlbars.*;
-import gplx.xowa.guis.views.boots.*;
+import gplx.xowa.guis.views.boots.*; import gplx.xowa.guis.views.nightmodes.*;
 import gplx.gfui.layouts.swts.*;
 public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 	public Xoa_gui_mgr(Xoae_app app) {
@@ -41,7 +41,8 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 	public Xog_layout Layout() {return layout;} private Xog_layout layout = new Xog_layout();
 	public Xog_html_mgr Html_mgr() {return html_mgr;} private Xog_html_mgr html_mgr;
 	public Xog_menu_mgr Menu_mgr() {return menu_mgr;} private Xog_menu_mgr menu_mgr;
-	public Xog_url_macro_mgr Url_macro_mgr() {return url_macro_mgr;} private Xog_url_macro_mgr url_macro_mgr = new Xog_url_macro_mgr();
+	public Xog_url_macro_mgr Url_macro_mgr() {return url_macro_mgr;} private final    Xog_url_macro_mgr url_macro_mgr = new Xog_url_macro_mgr();
+	public Xog_nightmode_mgr Nightmode_mgr() {return nightmode_mgr;} private final    Xog_nightmode_mgr nightmode_mgr = new Xog_nightmode_mgr();
 	public void Show_prog() {
 		// get rects for positioning
 		RectAdp statusbar_rect = browser_win.Statusbar_grp().Rect();
@@ -76,6 +77,7 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 				, new gplx.core.logs.Gfo_log_itm_wtr__csv()));
 		}
 		win_cfg.Init_by_app(app);
+		nightmode_mgr.Init_by_app(app);
 	}
 	public void Kit_(Gfui_kit kit) {
 		this.kit = kit;

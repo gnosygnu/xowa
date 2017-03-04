@@ -20,55 +20,28 @@ import gplx.xowa.guis.langs.*;
 public class Xog_win_itm_ {
 	public static void Show_win(Xog_win_itm win) {
 		Xoae_app app = win.App(); GfuiWin win_box = win.Win_box();			
-
 		win_box.Focus_able_(false);
-		win_box.BackColor_(ColorAdp_.White);
-		win.Tab_mgr().Tab_mgr().BackColor_(ColorAdp_.White);
-		win.Tab_mgr().Tab_mgr().Btns_selected_foreground_(ColorAdp_.Black);
-		win.Tab_mgr().Tab_mgr().Btns_selected_background_(ColorAdp_.White);
-		win.Tab_mgr().Tab_mgr().Btns_unselected_foreground_(ColorAdp_.Black);
-		win.Tab_mgr().Tab_mgr().Btns_unselected_background_(ColorAdp_.White);
-
-//			win_box.BackColor_(ColorAdp_.Black);
-//			win.Tab_mgr().Tab_mgr().BackColor_(ColorAdp_.Black);
-//			win.Tab_mgr().Tab_mgr().Btns_selected_foreground_(ColorAdp_.White);
-//			win.Tab_mgr().Tab_mgr().Btns_selected_background_(ColorAdp_.Black);
-//			win.Tab_mgr().Tab_mgr().Btns_unselected_foreground_(ColorAdp_.White);
-//			win.Tab_mgr().Tab_mgr().Btns_unselected_background_(ColorAdp_.Black);
-
+		app.Gui_mgr().Nightmode_mgr().Enabled_dflt_();
 		Xog_startup_win_.Startup(app, win_box);
 
 		win_box.Icon_(IconAdp.file_or_blank(app.Fsys_mgr().Bin_xowa_dir().GenSubFil_nest("file", "app.window", "app_icon.png")));
 	}
 	public static Gfui_grp new_grp(Xoae_app app, Gfui_kit kit, GfuiElem win, String id) {
-		Gfui_grp rv = kit.New_grp(id, win);
-		rv.BackColor_(ColorAdp_.White);
-//			rv.BackColor_(ColorAdp_.Black);
-		return rv;
+		return kit.New_grp(id, win);
 	}
 	public static GfuiBtn new_btn(Xoae_app app, Gfui_kit kit, GfuiElem win, Io_url img_dir, String id, String file) {
 		GfuiBtn rv = kit.New_btn(id, win);
 		rv.Btn_img_(kit.New_img_load(img_dir.GenSubFil(file)));
-		rv.ForeColor_(ColorAdp_.Black).BackColor_(ColorAdp_.White);
-//			rv.ForeColor_(ColorAdp_.White).BackColor_(ColorAdp_.Black);
 		return rv;
 	}
 	public static GfuiComboBox new_cbo(Xoae_app app, Gfui_kit kit, GfuiElem win, FontAdp ui_font, String id, boolean border_on) {
 		GfuiComboBox rv = kit.New_combo(id, win, Keyval_.new_(GfuiTextBox.CFG_border_on_, border_on));
 		rv.TextMgr().Font_(ui_font);
-		rv.ForeColor_(ColorAdp_.Black).BackColor_(ColorAdp_.White);
-		rv.Border_color_(ColorAdp_.LightGray);
-//			rv.ForeColor_(ColorAdp_.White).BackColor_(ColorAdp_.Black);
-//			rv.Border_color_(ColorAdp_.Black);
 		return rv;
 	}
 	public static GfuiTextBox new_txt(Xoae_app app, Gfui_kit kit, GfuiElem win, FontAdp ui_font, String id, boolean border_on) {
 		GfuiTextBox rv = kit.New_text_box(id, win, Keyval_.new_(GfuiTextBox.CFG_border_on_, border_on));
 		rv.TextMgr().Font_(ui_font);
-		rv.ForeColor_(ColorAdp_.Black).BackColor_(ColorAdp_.White);
-		rv.Border_color_(border_on ? ColorAdp_.LightGray : rv.BackColor());
-//			rv.ForeColor_(ColorAdp_.White).BackColor_(ColorAdp_.Black);
-//			rv.Border_color_(border_on ? ColorAdp_.Black : rv.BackColor());
 		return rv;
 	}
 	public static void Update_tiptext(Xoae_app app, GfuiElem elem, int tiptext_id) {

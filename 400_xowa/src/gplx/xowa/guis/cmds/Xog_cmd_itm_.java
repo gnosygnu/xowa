@@ -123,6 +123,7 @@ public class Xog_cmd_itm_ {
 	, Key_gui_browser_prog_log_show								= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.prog_log.show")
 	, Key_gui_browser_info_focus								= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.info.focus")
 	, Key_gui_browser_info_clear								= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.info.clear")
+	, Key_gui_browser_nightmode_toggle                          = new_dflt_(Xog_ctg_itm_.Tid_browser        , "xowa.gui.browser.nightmode_toggle")
 
 	, Key_gui_menus_group_file									= "xowa.gui.menus.group.file"
 	, Key_gui_menus_group_edit									= "xowa.gui.menus.group.edit"

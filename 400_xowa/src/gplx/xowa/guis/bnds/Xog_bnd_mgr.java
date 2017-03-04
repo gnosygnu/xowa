@@ -311,6 +311,7 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_info_focus						, Xog_bnd_box_.Tid_browser				, "mod.ca+key.i");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_info_clear						, Xog_bnd_box_.Tid_browser				, "mod.ca+key.c");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_prog_log_show						, Xog_bnd_box_.Tid_browser_prog			, "mouse.middle", "mod.cs+key.p");
+		Init_itm(Xog_cmd_itm_.Key_gui_browser_nightmode_toggle					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_html_tidy_toggle								, Xog_bnd_box_.Tid_browser				, "key.f7");
 		Init_itm(Xog_cmd_itm_.Key_usr_bookmarks_add								, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_usr_bookmarks_show							, Xog_bnd_box_.Tid_browser				, "key.f3");

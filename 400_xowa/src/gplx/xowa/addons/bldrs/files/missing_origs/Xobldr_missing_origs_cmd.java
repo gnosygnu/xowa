@@ -13,21 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.missing_origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;	
 import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.apps.wms.apis.origs.*;
 import gplx.xowa.addons.bldrs.files.dbs.*;
-public class Xobldr__orig_regy__find_missing extends Xob_cmd__base {
+public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 	private int fail_max = 100000;
-	public Xobldr__orig_regy__find_missing(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
+	public Xobldr_missing_origs_cmd(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
 	@Override public void Cmd_run() {
 		// got orig_tbl
 		Db_conn conn = Xob_db_file.New__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
 		Xob_orig_regy_tbl.Create_table(conn);
 
 		// get counts; fail if too many
-		int fail_count = conn.Exec_select_count_as_int("orig_regy", 0);
+		int fail_count = conn.Exec_sql(Db_sql_.Make_by_fmt(String_.Ary("SELECT Count(lnki_ttl) FROM orig_regy WHERE orig_page_id IS NULL")));
 		if (fail_count > fail_max) throw Err_.new_wo_type("bldr.find_missing: too many missing: missing=~{0} max=~{1}", fail_count, fail_max);
 		Gfo_usr_dlg_.Instance.Note_many("", "", "bldr.find_missing: found=~{0}", fail_count);
 
@@ -70,7 +70,8 @@ public class Xobldr__orig_regy__find_missing extends Xob_cmd__base {
 		for (int i = 0; i < len; i++)  {
 			Xof_fsdb_itm itm = (Xof_fsdb_itm)list.Get_at(i);
 			update_stmt
-				.Val_int("orig_w", itm.Orig_w()).Val_int("orig_h", itm.Orig_h())
+				.Val_int("orig_w", itm.Orig_w())
+				.Val_int("orig_h", itm.Orig_h())
 				.Crt_bry_as_str("lnki_ttl", itm.Lnki_ttl()).Exec_update();
 		}
 		conn.Txn_end();
@@ -83,6 +84,6 @@ public class Xobldr__orig_regy__find_missing extends Xob_cmd__base {
 
 	public static final String BLDR_CMD_KEY = "file.orig_regy.find_missing";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Xobldr__orig_regy__find_missing(null, null);
-	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__orig_regy__find_missing(bldr, wiki);}
+	public static final    Xob_cmd Prototype = new Xobldr_missing_origs_cmd(null, null);
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr_missing_origs_cmd(bldr, wiki);}
 }

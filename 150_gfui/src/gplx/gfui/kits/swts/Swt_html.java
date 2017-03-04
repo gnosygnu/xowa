@@ -25,6 +25,8 @@ import gplx.gfui.controls.gxws.Gxw_html;
 import gplx.gfui.controls.gxws.Gxw_html_load_tid_;
 import gplx.gfui.controls.standards.Gfui_html;
 import gplx.gfui.controls.standards.Gfui_tab_mgr;
+import gplx.gfui.draws.ColorAdp;
+import gplx.gfui.draws.ColorAdp_;
 import gplx.gfui.ipts.*;
 import gplx.gfui.kits.core.Swt_kit;
 
@@ -62,6 +64,7 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_m
 		browser.addFocusListener(this);
 		browser.addTitleListener(new Swt_html_lnr_title(this));
 		browser.addMouseWheelListener(new Swt_html_lnr_wheel(this));
+		
 		// browser.addOpenWindowListener(new Swt_open_window_listener(this));	// handle target='blank'
 		// browser.addTraverseListener(new Swt_html_lnr_Traverse(this));
 	}
@@ -74,7 +77,7 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_m
 	public String Load_by_url_path() {return load_by_url_path;} private String load_by_url_path;
 	public void 		Html_doc_html_load_by_mem(String html) {
 		this.html_doc_html_load_tid = Gxw_html_load_tid_.Tid_mem;
-		this.load_by_url_path = null; 
+		this.load_by_url_path = null;
 		browser.setText(html);	// DBG: Io_mgr.I.SaveFilStr(Io_url_.new_fil_("C:\\temp.txt"), s)
 	}
 	public void Html_doc_html_load_by_url(Io_url path, String html) {
