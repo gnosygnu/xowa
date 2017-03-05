@@ -217,7 +217,10 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		Page__refresh();
 	}
 	public void Page__refresh() {
-		Xog_tab_itm tab = tab_mgr.Active_tab(); Xoae_page page = tab.Page(); Xog_html_itm html_itm = tab.Html_itm();
+		Page__refresh(tab_mgr.Active_tab());
+	}
+	public void Page__refresh(Xog_tab_itm tab) {
+		Xoae_page page = tab.Page(); Xog_html_itm html_itm = tab.Html_itm();
 		page = page.Wikie().Page_mgr().Load_page(page.Url(), page.Ttl(), tab);	// NOTE: refresh should always reload and regen page; DATE:2017-02-15
 		page.Html_data().Bmk_pos_(html_itm.Html_box().Html_js_eval_proc_as_str(Xog_js_procs.Win__vpos_get));
 		html_itm.Show(page);
@@ -308,19 +311,18 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		this.kit = kit;
 		this.win_box = kit.New_win_app("win");
 		this.sync_cmd		= win_box.Kit().New_cmd_sync(this);
-		Io_url img_dir		= app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("app.window");
 		FontAdp ui_font		= app.Gui_mgr().Win_cfg().Font().To_font();
 
 		win_box.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(1).Margin_w_(0).Margin_h_(0).Spacing_h_(0));
 
 		// toolbar
 		this.toolbar_grp    = Xog_win_itm_.new_grp(app, kit, win_box, "toolbar_grp");
-		go_bwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "go_bwd_btn", "go_bwd.png"				);
-		go_fwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "go_fwd_btn", "go_fwd.png"				);
+		go_bwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, "go_bwd_btn");
+		go_fwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, "go_fwd_btn");
 		url_box				= Xog_win_itm_.new_cbo(app, kit, toolbar_grp, ui_font, "url_box"								, true);
-		url_exec_btn		= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "url_exec_btn", "url_exec.png"			);
+		url_exec_btn		= Xog_win_itm_.new_btn(app, kit, toolbar_grp, "url_exec_btn");
 		search_box			= Xog_win_itm_.new_txt(app, kit, toolbar_grp, ui_font, "search_box"								, true);
-		search_exec_btn		= Xog_win_itm_.new_btn(app, kit, toolbar_grp, img_dir, "search_exec_btn", "search_exec.png"		);
+		search_exec_btn		= Xog_win_itm_.new_btn(app, kit, toolbar_grp, "search_exec_btn");
 
 		toolbar_grp.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_().Hint_h_(28));
 		toolbar_grp.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(6)
@@ -339,10 +341,10 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 
 		// statusbar
 		this.statusbar_grp = Xog_win_itm_.new_grp(app, kit, win_box, "statusbar_grp");
-		find_close_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, img_dir, "find_close_btn", "find_close.png"		);
+		find_close_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, "find_close_btn");
 		find_box			= Xog_win_itm_.new_txt(app, kit, statusbar_grp, ui_font, "find_box"								, true);
-		find_fwd_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, img_dir, "find_fwd_btn", "find_fwd.png"			);
-		find_bwd_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, img_dir, "find_bwd_btn", "find_bwd.png"			);
+		find_fwd_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, "find_fwd_btn");
+		find_bwd_btn		= Xog_win_itm_.new_btn(app, kit, statusbar_grp, "find_bwd_btn");
 		prog_box			= Xog_win_itm_.new_txt(app, kit, statusbar_grp, ui_font, "prog_box"								, false);
 		info_box			= Xog_win_itm_.new_txt(app, kit, statusbar_grp, ui_font, "note_box"								, false);
 

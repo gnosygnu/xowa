@@ -21,7 +21,7 @@ public class Xog_win_itm_ {
 	public static void Show_win(Xog_win_itm win) {
 		Xoae_app app = win.App(); GfuiWin win_box = win.Win_box();			
 		win_box.Focus_able_(false);
-		app.Gui_mgr().Nightmode_mgr().Enabled_dflt_();
+		app.Gui_mgr().Nightmode_mgr().Enabled_by_cfg();
 		Xog_startup_win_.Startup(app, win_box);
 
 		win_box.Icon_(IconAdp.file_or_blank(app.Fsys_mgr().Bin_xowa_dir().GenSubFil_nest("file", "app.window", "app_icon.png")));
@@ -29,10 +29,8 @@ public class Xog_win_itm_ {
 	public static Gfui_grp new_grp(Xoae_app app, Gfui_kit kit, GfuiElem win, String id) {
 		return kit.New_grp(id, win);
 	}
-	public static GfuiBtn new_btn(Xoae_app app, Gfui_kit kit, GfuiElem win, Io_url img_dir, String id, String file) {
-		GfuiBtn rv = kit.New_btn(id, win);
-		rv.Btn_img_(kit.New_img_load(img_dir.GenSubFil(file)));
-		return rv;
+	public static GfuiBtn new_btn(Xoae_app app, Gfui_kit kit, GfuiElem win, String id) {
+		return kit.New_btn(id, win);
 	}
 	public static GfuiComboBox new_cbo(Xoae_app app, Gfui_kit kit, GfuiElem win, FontAdp ui_font, String id, boolean border_on) {
 		GfuiComboBox rv = kit.New_combo(id, win, Keyval_.new_(GfuiTextBox.CFG_border_on_, border_on));

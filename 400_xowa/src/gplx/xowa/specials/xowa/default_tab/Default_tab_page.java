@@ -28,7 +28,7 @@ public class Default_tab_page implements Xow_special_page {
 
 	public Xow_special_page Special__clone() {return this;}
 
-	private static final    byte[]
+	public static final    byte[]
 	  DEFAULT_HTML_DAY   = Bry_.new_a7("<html><body style='background-color:white'></body></html>")
 	, DEFAULT_HTML_NIGHT = Bry_.new_a7("<html><body style='background-color:black'></body></html>")
 	;

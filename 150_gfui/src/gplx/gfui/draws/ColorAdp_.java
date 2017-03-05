@@ -54,7 +54,7 @@ public class ColorAdp_ implements ParseAble {
 		else
 			return null;
 	}
-	@gplx.Internal protected static ColorAdp parse_hex_(String raw) {
+	public static ColorAdp parse_hex_(String raw) {
 		try {
 			int[] ary = new int[4];						// make ARGB ary
 			int idx = 0;

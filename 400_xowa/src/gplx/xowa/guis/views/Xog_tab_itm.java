@@ -38,8 +38,18 @@ public class Xog_tab_itm implements Gfo_invk {
 		html_box.Html_js_enabled_(tab_mgr.Javascript_enabled());
 		html_box.Html_invk_src_(win);
 		html_itm.Html_box_(html_box);
-		if (app.Mode().Tid_is_gui()) {	// NOTE: only run for gui; will cause firefox_addon to fail; DATE:2014-05-03
-			html_box.Html_doc_html_load_by_mem("");	// NOTE: must set source, else control will be empty, and key events will not be raised; DATE:2014-04-30
+		if (app.Mode().Tid_is_gui()) {	// NOTE: only run for gui; will cause firefox_addon to fail; DATE:2014-05-03								
+			// NOTE: must set source, else control will be empty, and key events will not be raised; DATE:2014-04-30
+			// NOTE: use load_by_url for nightmode else load_by_mem causes "white flashing" DATE:2017-03-04
+			if (app.Gui_mgr().Nightmode_mgr().Enabled()) {
+				html_box.Html_doc_html_load_by_url
+				( app.Usere().Fsys_mgr().App_temp_html_dir().GenSubFil("tab_new.html")
+				, String_.new_u8(gplx.xowa.specials.xowa.default_tab.Default_tab_page.DEFAULT_HTML_NIGHT)
+				);
+			}
+			else {
+				html_box.Html_doc_html_load_by_mem("");
+			}
 			IptBnd_.ipt_to_(IptCfg_.Null, html_box, this, "popup", IptEventType_.MouseDown, IptMouseBtn_.Right);
 			IptBnd_.cmd_to_(IptCfg_.Null, html_box, win, Xog_win_itm.Invk_exit, IptKey_.add_(IptKey_.Alt, IptKey_.F4));	// WORKAROUND:SWT: xulrunner_v24 no longer sends Alt+F4 to SwtShell; must manually subscribe it to quit; DATE:2015-07-31
 			Gfo_evt_mgr_.Sub_same(html_box, GfuiElemKeys.Evt_menu_detected, html_itm);

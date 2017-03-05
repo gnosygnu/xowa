@@ -37,7 +37,15 @@ public class Xoapi_browser implements Gfo_invk {
 	public Xoapi_info		Info()		{return info;} private Xoapi_info info = new Xoapi_info();
 	public Xoapi_prog_log	Prog_log()	{return prog_log;} private Xoapi_prog_log prog_log = new Xoapi_prog_log();
 	private void Nightmode_toggle() {
-		app.Gui_mgr().Nightmode_mgr().Enabled_toggle_();
+		// toggle nightmode
+		app.Gui_mgr().Nightmode_mgr().Enabled_toggle();
+
+		// toggle nightmode for all other tabs
+		gplx.xowa.guis.views.Xog_tab_mgr tab_mgr = app.Gui_mgr().Browser_win().Tab_mgr();
+		int len = tab_mgr.Tabs_len();
+		for (int i = 0; i < len; i++) {
+			app.Gui_mgr().Browser_win().Page__refresh(tab_mgr.Tabs_get_at(i));
+		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_url)) 						return url;
