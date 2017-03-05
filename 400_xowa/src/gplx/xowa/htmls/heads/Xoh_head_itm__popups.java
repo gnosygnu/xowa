@@ -23,8 +23,11 @@ public class Xoh_head_itm__popups extends Xoh_head_itm__base {
 	public boolean Bind_hover_area() {return bind_hover_area;} public void Bind_hover_area_(boolean v) {bind_hover_area = v;} private boolean bind_hover_area;
 	@Override public void Clear() {this.Enabled_n_(); bind_hover_area = false;}
 	@Override public void Write_css_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {
-		if (Css_url == null) Css_url = app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "res", "src", "xowa", "popups", "popups.css").To_http_file_bry();
-		wtr.Write_css_include(Css_url);
+		if (Css_url_day == null) {
+			Css_url_day = app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "res", "src", "xowa", "popups", "popups.css").To_http_file_bry();
+			Css_url_night = app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "res", "src", "xowa", "popups", "popups_night.css").To_http_file_bry();
+		}
+		wtr.Write_css_include(app.Gui_mgr().Nightmode_mgr().Enabled() ? Css_url_night : Css_url_day);
 	}
 	@Override public void Write_js_head_global(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {
 		Xocfg_mgr cfg_mgr = app.Cfg();
@@ -40,7 +43,7 @@ public class Xoh_head_itm__popups extends Xoh_head_itm__base {
 		wtr.Write_js_line(Jquery_init);	// NOTE: must assert that jquery is init'd, else popup.js will not compile after going back / forward; DATE:2014-09-10
 		wtr.Write_js_tail_load_lib(app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "res", "src", "xowa", "popups", "popups.js"));
 	}	public static final    byte[] Jquery_init = Bry_.new_a7("xowa.js.jquery.init();"), Mw_init = Bry_.new_a7("xowa.js.mediaWiki.init();");
-	private static byte[] Css_url;
+	private static byte[] Css_url_day, Css_url_night;
 	private static final    byte[]
 	  Key_win_show_delay			= Bry_.new_a7("popups-win-show_delay")
 	, Key_win_hide_delay			= Bry_.new_a7("popups-win-hide_delay")
