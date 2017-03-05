@@ -56,6 +56,7 @@ public class Xog_nightmode_mgr implements Gfo_invk {
 				win.Tab_mgr().Tab_mgr().BackColor_(color);
 				win.Tab_mgr().Tab_mgr().Btns_selected_background_(color);
 				win.Tab_mgr().Tab_mgr().Btns_unselected_background_(color);
+				win.Url_box().Items__backcolor_(color);
 				for (GfuiElemBase elem : backcolor_elems)
 					elem.BackColor_(color);
 				win.Prog_box().Border_color_(color);
@@ -63,6 +64,7 @@ public class Xog_nightmode_mgr implements Gfo_invk {
 			case COLOR_GROUP_FORE:
 				win.Tab_mgr().Tab_mgr().Btns_selected_foreground_(color);
 				win.Tab_mgr().Tab_mgr().Btns_unselected_foreground_(color);
+				win.Url_box().Items__forecolor_(color);
 				for (GfuiElemBase elem : forecolor_elems)
 					elem.ForeColor_(color);
 				break;

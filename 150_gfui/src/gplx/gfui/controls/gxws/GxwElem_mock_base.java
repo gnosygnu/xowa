@@ -76,6 +76,8 @@ class MockComboBox extends GxwElem_mock_base implements GxwComboBox {
 	public void Items__size_to_fit(int count) {}
 	public void Items__visible_rows_(int v) {}
 	public void Items__jump_len_(int v) {}
+	public void Items__backcolor_(ColorAdp v) {}
+	public void Items__forecolor_(ColorAdp v) {}
 	public void Margins_set(int left, int top, int right, int bot) {}
 	public Object SelectedItm() {return selectedItm;} public void SelectedItm_set(Object v) {this.selectedItm = v;} Object selectedItm;
 }

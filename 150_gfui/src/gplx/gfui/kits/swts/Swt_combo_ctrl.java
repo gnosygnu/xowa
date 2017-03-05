@@ -20,6 +20,7 @@ import gplx.core.envs.Op_sys_;
 import gplx.core.threads.Thread_adp_;
 import gplx.gfui.controls.gxws.GxwComboBox;
 import gplx.gfui.controls.gxws.GxwElem;
+import gplx.gfui.draws.ColorAdp;
 import gplx.gfui.controls.standards.GfuiComboBox;
 import gplx.gfui.kits.core.Swt_kit;
 
@@ -79,7 +80,7 @@ public class Swt_combo_ctrl extends Swt_text_w_border implements GxwElem, GxwCom
 	public void Text_fallback_restore() {
 		if (String_.Len_eq_0(text_fallback)) return; // handle escape pressed after dropdown is visible, but down / up not pressed
 		this.Text_(text_fallback);
-		this.text_fallback = "";		
+		this.text_fallback = "";
 	}
 	@Override public void Items__update(String[] ary) 				{list.Items_(ary);}
 	@Override public void Items__size_to_fit(int count) 			{list.Resize_shell(count);}
@@ -87,6 +88,7 @@ public class Swt_combo_ctrl extends Swt_text_w_border implements GxwElem, GxwCom
 	@Override public void List_sel_idx_(int v) 						{list.Sel_idx_(v);}
 	@Override public boolean List_visible() 						{return list.Visible();}
 	@Override public void List_visible_(boolean v) 					{list.Visible_(v);}
+	
 	@Override public void Items__visible_rows_(int v) 				{list.Visible_rows = v;}
 	@Override public void Items__jump_len_(int v) 					{list.Jump_len = v;}
 	public Rectangle Bounds() {return super.Under_control().getBounds();}
@@ -95,6 +97,8 @@ public class Swt_combo_ctrl extends Swt_text_w_border implements GxwElem, GxwCom
 		String text_text = swt_text.getText();
 		this.Sel_(0, String_.Len(text_text));
 	}
+	public void Items__backcolor_(ColorAdp v) {list.Under_table_as_swt().setBackground(kit.New_color(v));}
+	public void Items__forecolor_(ColorAdp v) {list.Under_table_as_swt().setForeground(kit.New_color(v));}
 }
 class Swt_combo_list {
 	private final Display display; private final Shell owner_shell;

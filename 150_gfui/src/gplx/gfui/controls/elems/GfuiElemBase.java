@@ -69,7 +69,7 @@ public class GfuiElemBase implements GfuiElem {
 	@gplx.Virtual public boolean Visible() {return underMgr.Visible();} @gplx.Virtual public void Visible_set(boolean v) {underMgr.Visible_set(v);}
 	public GfuiElem Visible_on_() {this.Visible_set(true); return this;} public GfuiElem Visible_off_() {this.Visible_set(false); return this;}
 	@gplx.Virtual public ColorAdp BackColor() {return backColor;} ColorAdp backColor = ColorAdp_.White;
-	public GfuiElem BackColor_(ColorAdp v) {backColor = v; underMgr.BackColor_set(backColor); return this;}
+	@gplx.Virtual public GfuiElem BackColor_(ColorAdp v) {backColor = v; underMgr.BackColor_set(backColor); return this;}
 	public GfuiBorderMgr Border() {return border;} GfuiBorderMgr border = GfuiBorderMgr.new_();
 	public GfuiElem Border_on_() {border.All_(PenAdp_.new_(ColorAdp_.Black, 1)); return this;}
 	public GfuiElem Border_off_() {border.All_(null); return this;}
@@ -81,7 +81,7 @@ public class GfuiElemBase implements GfuiElem {
 		Click_key_set_(v);
 		return this;
 	}
-	public GfuiElem ForeColor_(ColorAdp v) {textMgr.Color_(v); return this;}
+	@gplx.Virtual public GfuiElem ForeColor_(ColorAdp v) {textMgr.Color_(v); return this;}
 	public void TextAlignH_(GfuiAlign v) {textMgr.AlignH_(v);}
 	public GfuiElem TextAlignH_left_() {textMgr.AlignH_(GfuiAlign_.Left); return this;}
 	public GfuiElem TextAlignH_right_() {textMgr.AlignH_(GfuiAlign_.Right); return this;}

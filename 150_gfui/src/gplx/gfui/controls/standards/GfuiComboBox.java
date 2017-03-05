@@ -27,6 +27,16 @@ public class GfuiComboBox extends GfuiElemBase {
 	public int SelLen() {return combo.SelLen();} public void SelLen_set(int v) {combo.SelLen_set(v);}
 	public void Sel_(int bgn, int len) {combo.Sel_(bgn, len);}
 	public Object SelectedItm() {return combo.SelectedItm();} public void SelectedItm_set(Object v) {combo.SelectedItm_set(v);}
+	@Override public GfuiElem BackColor_(ColorAdp v) {
+		super.BackColor_(v);
+		combo.Items__backcolor_(v);
+		return this;
+	}
+	@Override public GfuiElem ForeColor_(ColorAdp v) {
+		super.ForeColor_(v);
+		combo.Items__forecolor_(v);
+		return this;
+	}
 	public String[]	DataSource_as_str_ary()								{return combo.DataSource_as_str_ary();}
 	public void		DataSource_set(Object... ary)					{combo.DataSource_set(ary);}
 	public String	Text_fallback()										{return combo.Text_fallback();}
@@ -39,6 +49,8 @@ public class GfuiComboBox extends GfuiElemBase {
 	public void		Items__size_to_fit(int len)							{combo.Items__size_to_fit(len);}
 	public void		Items__visible_rows_(int v)							{combo.Items__visible_rows_(v);}
 	public void		Items__jump_len_(int v)								{combo.Items__jump_len_(v);}
+	public void     Items__backcolor_(ColorAdp v)                       {combo.Items__backcolor_(v);}
+	public void     Items__forecolor_(ColorAdp v)                       {combo.Items__forecolor_(v);}
 	public void		Margins_set(int left, int top, int right, int bot)	{combo.Margins_set(left, top, right, bot);}
 	public static GfuiComboBox new_() {
 		GfuiComboBox rv = new GfuiComboBox();

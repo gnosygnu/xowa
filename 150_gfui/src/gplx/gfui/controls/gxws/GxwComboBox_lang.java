@@ -35,6 +35,8 @@ public class GxwComboBox_lang extends JComboBox implements GxwComboBox, GxwElem,
  		 */
 	}
 	public ColorAdp Border_color() {return border_color;} public void Border_color_(ColorAdp v) {border_color = v;} private ColorAdp border_color;
+	public void Items__backcolor_(ColorAdp v) {}
+	public void Items__forecolor_(ColorAdp v) {}
 	public int SelBgn() {return -1;} public void SelBgn_set(int v) {}
 	public int SelLen() {return 0;}  public void SelLen_set(int v) {}
 	public void Sel_(int bgn, int end) {}

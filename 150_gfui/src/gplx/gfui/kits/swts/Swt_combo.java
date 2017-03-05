@@ -72,6 +72,8 @@ class Swt_combo implements GxwElem, GxwComboBox, Swt_control, Gfo_evt_mgr_owner 
 	@Override public void Items__visible_rows_(int v) {}
 	@Override public void Items__jump_len_(int v) {}
 	@Override public void Margins_set(int left, int top, int right, int bot) {}
+	public void Items__backcolor_(ColorAdp v) {}
+	public void Items__forecolor_(ColorAdp v) {}
 //	@Override public void DataSource_update(Object... ary) {
 //		String[] src = (String[])ary;
 //		int trg_len = combo.getItems().length;

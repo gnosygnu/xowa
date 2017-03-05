@@ -36,7 +36,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 public class Swt_text_w_border implements GxwTextFld, Swt_control {
-	private final Swt_kit kit;
+	protected final Swt_kit kit;
 	private Composite text_host;
 	private Composite text_margin;
 	private Text text_elem;
@@ -76,9 +76,7 @@ public class Swt_text_w_border implements GxwTextFld, Swt_control {
 	@Override public boolean Border_on() {return false;}
 	@Override public void Border_on_(boolean v) {} // SWT_TODO:borderWidth doesn't seem mutable
 	public ColorAdp Border_color() {return border_color;} private ColorAdp border_color;
-	public void Border_color_(ColorAdp v) {
-		this.border_color = v; text_host.setBackground(kit.New_color(v));
-		} 
+	public void Border_color_(ColorAdp v) {this.border_color = v; text_host.setBackground(kit.New_color(v));} 
 	@Override public void CreateControlIfNeeded() {}
 	@Override public boolean OverrideTabKey() {return false;} @Override public void OverrideTabKey_(boolean v) {}
 	private void New_box_text_w_border(Display display, Composite owner, int style, Color border_color) {

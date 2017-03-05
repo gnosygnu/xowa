@@ -31,5 +31,7 @@ public interface GxwComboBox extends GxwElem {
 	void Items__size_to_fit(int count);
 	void Items__visible_rows_(int v);
 	void Items__jump_len_(int v);
+	void Items__backcolor_(ColorAdp v);
+	void Items__forecolor_(ColorAdp v);
 	void Margins_set(int left, int top, int right, int bot);
 }
