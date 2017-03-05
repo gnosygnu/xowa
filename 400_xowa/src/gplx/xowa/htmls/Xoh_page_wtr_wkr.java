@@ -93,13 +93,14 @@ public class Xoh_page_wtr_wkr {
 		byte[] page_display_title = Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page_ttl, page.Html_data().Display_ttl());
 		page.Html_data().Custom_tab_name_(page_name);	// set tab_name to page_name; note that if null, gui code will ignore and use Ttl.Page_txt; PAGE: zh.w:釣魚臺列嶼主權問題 DATE:2015-10-05
 		Xow_portal_mgr portal_mgr = wiki.Html_mgr().Portal_mgr().Init_assert();
+		boolean nightmode_enabled = app.Gui_mgr().Nightmode_mgr().Enabled();
 		fmtr.Bld_bfr_many(bfr
 		, root_dir_bry, Xoa_app_.Version, Xoa_app_.Build_date, app.Tcp_server().Running_str()
 		, page.Db().Page().Id(), page.Ttl().Full_db()
 		, page_name, page.Html_data().Page_heading().Init(wiki, html_gen_tid == Xopg_page_.Tid_read, page.Html_data(), page.Ttl().Full_db(), page_display_title)
 		, modified_on_msg
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry()
-		, mgr.Css_night_bry(app.Gui_mgr().Nightmode_mgr().Enabled())
+		, mgr.Css_night_bry(nightmode_enabled)
 		, page.Html_data().Head_mgr().Init(app, wiki, page).Init_dflts()
 		, page.Lang().Dir_ltr_bry(), page.Html_data().Indicators(), page_content_sub, wiki.Html_mgr().Portal_mgr().Div_jump_to(), wiki.Xtn_mgr().Xtn_pgbnr().Write_html(page, ctx, hctx), page_body_class, html_content_editable
 		, page_data, wdata_lang_wtr
@@ -108,7 +109,7 @@ public class Xoh_page_wtr_wkr {
 		, portal_mgr.Div_personal_bry()
 		, portal_mgr.Div_ns_bry(wiki.Utl__bfr_mkr(), page_ttl, wiki.Ns_mgr())
 		, portal_mgr.Div_view_bry(wiki.Utl__bfr_mkr(), html_gen_tid, page.Html_data().Xtn_search_text())
-		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar)
+		, portal_mgr.Div_logo_bry(nightmode_enabled), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar)
 		, portal_mgr.Div_sync_bry(tmp_bfr, wiki.Page_mgr().Sync_mgr().Manual_enabled(), wiki, page)
 		, portal_mgr.Div_wikis_bry(wiki.Utl__bfr_mkr())
 		, portal_mgr.Sidebar_mgr().Html_bry()

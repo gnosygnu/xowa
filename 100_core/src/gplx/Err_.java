@@ -54,7 +54,7 @@ public class Err_ {
 	public static String Message_gplx_full(Exception e)	{return Cast_or_make(e).To_str__full();}
 	public static String Message_gplx_log(Exception e)	{return Cast_or_make(e).To_str__log();}
 		public static String Message_lang(Throwable e) {
-		return (e.getClass() == Error.class)
+		return Error.class.isAssignableFrom(e.getClass())
 			? e.toString()    // error has null for "getMessage()" return "toString()" instead
 			: e.getMessage();
 	}

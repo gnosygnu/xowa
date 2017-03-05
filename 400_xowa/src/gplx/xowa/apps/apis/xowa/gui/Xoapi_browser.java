@@ -36,10 +36,14 @@ public class Xoapi_browser implements Gfo_invk {
 	public Xoapi_prog		Prog()		{return prog;} private Xoapi_prog prog = new Xoapi_prog();
 	public Xoapi_info		Info()		{return info;} private Xoapi_info info = new Xoapi_info();
 	public Xoapi_prog_log	Prog_log()	{return prog_log;} private Xoapi_prog_log prog_log = new Xoapi_prog_log();
-	private void Nightmode_toggle() {
+	public void Nightmode_toggle() {
 		// toggle nightmode
-		app.Gui_mgr().Nightmode_mgr().Enabled_toggle();
-
+		boolean val = !app.Gui_mgr().Nightmode_mgr().Enabled();
+		app.Gui_mgr().Nightmode_mgr().Enabled_(val);
+		app.Cfg().Set_bool_app(gplx.xowa.guis.views.nightmodes.Xog_nightmode_mgr.Cfg__enabled, val);
+		this.Nightmode_reload();
+	}
+	public void Nightmode_reload() {
 		// toggle nightmode for all other tabs
 		gplx.xowa.guis.views.Xog_tab_mgr tab_mgr = app.Gui_mgr().Browser_win().Tab_mgr();
 		int len = tab_mgr.Tabs_len();

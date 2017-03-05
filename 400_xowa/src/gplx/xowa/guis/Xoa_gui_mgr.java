@@ -91,6 +91,7 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 		menu_mgr.Menu_bldr().Init_by_kit(app, kit, app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("app.menu"));
 		menu_mgr.Init_by_kit();
 		bnd_mgr.Init_by_kit(app);
+		nightmode_mgr.Init_by_kit(app);
 		Gfo_evt_mgr_.Sub_same_many(app.Usere(), this, Xoue_user.Evt_lang_changed);
 		app.Sys_cfg().Lang_(app.Sys_cfg().Lang());	// NOTE: force refresh of lang. must occur after after gui_mgr init, else menu lbls will break
 	}
