@@ -20,76 +20,109 @@ import gplx.xowa.files.repos.*;
 import gplx.xowa.files.downloads.*;
 import gplx.xowa.apps.wms.apis.origs.*;
 public class Xobldr_missing_origs_wmfapi {
-//		private final    Xoapi_orig_base orig_api;
-//		private final    Xof_download_wkr download_wkr;
-//		private final    Xow_repo_mgr repo_mgr;
-//		private final    byte[] wiki_domain;
-//		private final    Xoapi_orig_rslts api_rv = new Xoapi_orig_rslts();		
-	public Xobldr_missing_origs_wmfapi(Xoapi_orig_base orig_api, Xof_download_wkr download_wkr, Xow_repo_mgr repo_mgr, byte[] wiki_domain) {
-//			this.orig_api = orig_api;
-//			this.download_wkr = download_wkr;
-//			this.repo_mgr = repo_mgr;
-//			this.wiki_domain = wiki_domain;
+	private final    Xof_download_wkr download_wkr;
+	private final    Ordered_hash temp_hash = Ordered_hash_.New();
+	public static final    byte[] FILE_NS_PREFIX = Bry_.new_a7("File:");
+	public Xobldr_missing_origs_wmfapi(Xof_download_wkr download_wkr) {
+		this.download_wkr = download_wkr;
 	}
-	public void	Find_by_list(Ordered_hash src, Ordered_hash trg, String api_domain, int idx) {
+	public void	Find_by_list(Ordered_hash src, byte repo_id, String api_domain, int idx) {
 		// fail if web access disabled
 		if (!gplx.core.ios.IoEngine_system.Web_access_enabled) {
 			throw Err_.new_wo_type("web access must be enabled for missing_origs cmd");
 		}
 
-//			Json_parser parser = new Json_parser();			
+		Json_parser parser = new Json_parser();			
 		Gfo_url_encoder encoder = Gfo_url_encoder_.New__http_url().Make();
 		Bry_bfr bfr = Bry_bfr_.New();
 		int len = src.Len();
 		try {
 			// loop until all titles found
 			while (idx < len) {
-				// generate super api; EX: https://commons.wikimedia.org/w/api.php?action=query&format=xml&prop=imageinfo&iiprop=size|url|mediatype|mime|bitdepth|timestamp|size|sha1&redirects&iilimit=500&titles=
+				// generate api: EX: https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=timestamp|size|mediatype|mime&redirects&iilimit=500&titles=File:Different%20Faces%20Neptune.jpg|File:East.svg
+				// generate everything up to titles
 				bfr.Add_str_a7("https://");
 				bfr.Add_str_a7(api_domain);
 				bfr.Add_str_a7("/w/api.php?action=query");
 				bfr.Add_str_a7("&format=json"); // json easier to use than xml
 				bfr.Add_str_a7("&iilimit=1"); // limit to 1 revision history (default will return more); EX:File:Different_Faces_Neptune.jpg
 				bfr.Add_str_a7("&redirects"); // show redirects
-				bfr.Add_str_a7("&prop=imageinfo&iiprop=size|url|mediatype|mime|bitdepth|timestamp|size|sha1"); // list of props
+				bfr.Add_str_a7("&prop=imageinfo&iiprop=timestamp|size|mediatype|mime"); // list of props; NOTE: "url" / "sha1" for future; "bitdepth" always 0?
 				bfr.Add_str_a7("&titles=");
 
 				// add titles; EX: File:A.png|File:B.png|
 				for (int i = idx; i < idx + 500; i++) {
 					Xobldr_missing_origs_item item = (Xobldr_missing_origs_item)src.Get_at(i);
-					Xoa_ttl ttl = item.Lnki_ttl(); 
 
 					// skip "|" if first
 					if (i != idx) bfr.Add_byte_pipe();
 
-					// make ttl_bry so (a) namespace is present (EX:File:); (b) spaces are present (not underscores)
-					byte[] ttl_bry = ttl.Full_txt_wo_qarg();
-					ttl_bry = encoder.Encode(ttl_bry);
+					// add ttl_bry
+					byte[] ttl_bry = item.Lnki_ttl();
+					ttl_bry = Bry_.Add(FILE_NS_PREFIX, ttl_bry); // WMF API requires "File:" prefix; EX: "File:A.png" x> "A.png"
+					ttl_bry = Xoa_ttl.Replace_unders(ttl_bry); // convert to spaces else will get extra "normalize" node
+					ttl_bry = encoder.Encode(ttl_bry); // encode for good form
 					bfr.Add(ttl_bry);
 				}
 				
 				// call api
-//					byte[] rslt = download_wkr.Download_xrg().Exec_as_bry(bfr.To_bry_and_clear());
+				byte[] rslt = download_wkr.Download_xrg().Exec_as_bry(bfr.To_str_and_clear());
 
 				// deserialize
-//					Json_doc jdoc = parser.Parse(rslt);
+				Json_doc jdoc = parser.Parse(rslt);
 
-				// loop over /query/pages
-				//   for each node, deserialize orig info and add to hash by "title"
-				// loop over /query/redirects
-				//   for each node, retrieve from hash by "to"; add "from" as prop
-				// loop over hash
-				//   for each item, retrieve from src; copy props over
+				// loop over pages
+				Json_ary pages_ary = (Json_ary)jdoc.Get_grp_many("query", "pages");
+				int pages_len = pages_ary.Len();
+				for (int i = 0; i < pages_len; i++) {
+					// get vars from page nde
+					Json_nde page = pages_ary.Get_at_as_nde(i);
+					int page_id = page.Get_as_int("page_id");
+					byte[] title = page.Get_as_bry("title");
+
+					// get vars from imageinfo node
+					Json_ary info_ary = (Json_ary)page.Get_as_ary("imageinfo");
+					Json_nde info_nde = (Json_nde)info_ary.Get_as_nde(0);
+					byte[] timestamp = info_nde.Get_as_bry("timestamp");
+					long size = info_nde.Get_as_long("size");
+					int width = info_nde.Get_as_int("width");
+					int height = info_nde.Get_as_int("height");
+					byte[] mime = info_nde.Get_as_bry("mime");
+					byte[] mediatype = info_nde.Get_as_bry("mediatype");
+
+					// add to trg hash
+					Xobldr_missing_origs_item trg_item = new Xobldr_missing_origs_item().Init_by_api_page(repo_id, page_id, title, timestamp, size, width, height, mime, mediatype);
+					temp_hash.Add(trg_item.Orig_ttl(), trg_item);
+				}
+
+				// loop over redirects
+				Json_ary redirects_ary = (Json_ary)jdoc.Get_grp_many("query", "redirects");
+				int redirects_len = pages_ary.Len();
+				for (int i = 0; i < redirects_len; i++) {
+					// get vars from redirect nde
+					Json_nde redirect = redirects_ary.Get_at_as_nde(i);
+					byte[] from = redirect.Get_as_bry("from");
+					byte[] to = redirect.Get_as_bry("to");
+
+					// get nde by "to" and copy redirect
+					Xobldr_missing_origs_item trg_item = (Xobldr_missing_origs_item)temp_hash.Get_by_or_fail(to);
+					trg_item.Init_by_api_redirect(from, to);
+
+					// update temp_hash key
+					temp_hash.Del(to);
+					temp_hash.Add(from, trg_item);
+				}
+
+				// loop over hash and copy back to src
+				int temp_hash_len = temp_hash.Len();
+				for (int i = 0; i < temp_hash_len; i++) {
+					Xobldr_missing_origs_item trg_item = (Xobldr_missing_origs_item)temp_hash.Get_at(i);
+					Xobldr_missing_origs_item src_item = (Xobldr_missing_origs_item)temp_hash.Get_by(trg_item.Lnki_ttl());
+					src_item.Copy_api_props(trg_item);
+				}
 			}
 		} catch (Exception e) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "missing_origs:failure while calling wmf_api; domain=~{0} idx=~{1} err=~{2}", api_domain, idx, Err_.Message_gplx_log(e));
 		}
 	}
-}
-class Xobldr_missing_origs_item {
-	private final    Xoa_ttl lnki_ttl;
-	public Xobldr_missing_origs_item(Xoa_ttl lnki_ttl) {
-		this.lnki_ttl = lnki_ttl;
-	}
-	public Xoa_ttl Lnki_ttl() {return lnki_ttl;}
 }

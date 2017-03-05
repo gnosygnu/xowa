@@ -55,9 +55,9 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 		} finally {rdr.Rls();}
 		Gfo_usr_dlg_.Instance.Note_many("", "", "bldr.find_missing: invalid=~{0}", invalid_count);
 
-		// call api with list
-		Xof_orig_wkr__wmf_api wkr = new Xof_orig_wkr__wmf_api(new Xoapi_orig_wmf(), wiki.App().Wmf_mgr().Download_wkr(), wiki.File__repo_mgr(), wiki.Domain_bry());
-		wkr.Find_by_list(null, null);
+// call api with list
+		Xobldr_missing_origs_wmfapi wmf_api = new Xobldr_missing_origs_wmfapi(wiki.App().Wmf_mgr().Download_wkr());
+		wmf_api.Find_by_list(null, Byte_.Zero, null, 0);
 
 		// loop list and update
 		conn.Txn_bgn("bldr.find_missing");
