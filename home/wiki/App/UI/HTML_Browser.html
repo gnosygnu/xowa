@@ -99,7 +99,7 @@
       XOWA uses SWT for its Web Browser across all 3 major operating systems: Windows, Linux, Mac OS X.
     </p>
     <p>
-      SWT provides 3 different modes for its Web Browser: mozilla, webkit and none. These can be configured through /xowa/bin/operating_system_name/xowa/cfg/xowa_cfg_os.gfs with the following snippet:
+      SWT provides 3 different modes for its Web Browser: mozilla, webkit and none. These can be configured through /xowa/user/anonymous/app/os_name.gfs with the following snippet:
     </p>
 <pre>
 app.gui {
@@ -150,6 +150,30 @@ app.gui {
     </p>
     <p>
       XOWA may support WebKit on Linux / Windows at a future date, but for now, it is not a backlog item. If you are interested, please contact me and I will reevaluate.
+    </p>
+    <p>
+      If you're on Linux, and want to experiment, you can try the following:
+    </p>
+    <ul>
+      <li>
+        Open the following file in your text editor: /xowa/user/anonymous/app/os.linux_64.gfs
+      </li>
+      <li>
+        Change <code>browser_type</code> to <code>webkit</code>. When you're done, it should look something like this:
+      </li>
+    </ul>
+<pre>
+app.gui {
+  browser_type = 'webkit';
+}
+</pre>
+    <ul>
+      <li>
+        Run XOWA
+      </li>
+    </ul>
+    <p>
+      Note this may not work on systems with proper webkit support.
     </p>
     <h3>
       <span class="mw-headline" id="None">None</span>

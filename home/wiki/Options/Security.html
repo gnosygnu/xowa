@@ -109,6 +109,9 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Night mode
+          </option>
         </select>
       </div>
       <div id='cfg_grps'>
@@ -300,15 +303,15 @@
           <div id='xowa.gui.html_box.page_load_mode__name' class='xocfg_itm_name'>
             Load HTML to browser method
           </div>
-          <div id='xowa.gui.html_box.page_load_mode__undo' data-xocfg-type='list:xowa.gui.html_box.page_load_mode' class='xocfg_itm_delete xocfg_itm_hide'>
+          <div id='xowa.gui.html_box.page_load_mode__undo' data-xocfg-type='list:xowa.gui.html_box.page_load_mode' class='xocfg_itm_delete'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.html_box.page_load_mode")' title="reset to &quot;mem&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
             <select id="xowa.gui.html_box.page_load_mode" data-xocfg-key="xowa.gui.html_box.page_load_mode" data-xocfg-type="list:xowa.gui.html_box.page_load_mode" accesskey="d" class="xocfg_data__list" size="2">
-              <option value="mem" selected="selected">
+              <option value="mem">
                 mem
               </option>
-              <option value="url">
+              <option value="url" selected="selected">
                 url
               </option>
             </select>

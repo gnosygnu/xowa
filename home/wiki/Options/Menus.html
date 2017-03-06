@@ -109,6 +109,9 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Night mode
+          </option>
         </select>
       </div>
       <div id='cfg_grps'>
@@ -182,6 +185,8 @@
               add_btn_default('xowa.gui.page.view.reload');
               add_spr;
               add_btn_default('xowa.gui.browser.prog_log.show');
+              add_spr;
+              add_btn_default('xowa.gui.browser.nightmode_toggle');
             }
             add_grp_default('xowa.gui.menus.group.history') {
               add_btn_default('xowa.nav.go_bwd');
@@ -257,6 +262,8 @@ add_grp_default('xowa.gui.menus.group.view') {
   add_btn_default('xowa.gui.page.view.reload');
   add_spr;
   add_btn_default('xowa.gui.browser.prog_log.show');
+  add_spr;
+  add_btn_default('xowa.gui.browser.nightmode_toggle');
 }
 add_grp_default('xowa.gui.menus.group.history') {
   add_btn_default('xowa.nav.go_bwd');
@@ -432,6 +439,8 @@ add_btn_default('xowa.gui.browser.tabs.close_undo');
               add_btn_default('xowa.gui.page.view.mode_html');
               add_spr;
               add_btn_default('xowa.gui.browser.prog_log.show');
+              add_spr;
+              add_btn_default('xowa.gui.browser.nightmode_toggle');
             }
             add_grp_default('xowa.gui.menus.group.history') {
               add_btn_default('xowa.usr.history.show');
@@ -452,10 +461,6 @@ add_btn_default('xowa.gui.browser.tabs.close_undo');
               add_spr;
               add_btn_default('xowa.nav.setup.maintenance');
               add_btn_default('xowa.nav.setup.download');
-            }
-            add_grp_default('xowa.gui.menus.group.personal') {
-              add_btn_default('xowa.nav.personal.item');
-              add_btn_default('xowa.nav.personal.list');
             }
             add_grp_default('xowa.gui.menus.group.help') {
               add_btn_default('xowa.nav.help.help');
@@ -509,6 +514,8 @@ add_grp_default('xowa.gui.menus.group.view') {
   add_btn_default('xowa.gui.page.view.mode_html');
   add_spr;
   add_btn_default('xowa.gui.browser.prog_log.show');
+  add_spr;
+  add_btn_default('xowa.gui.browser.nightmode_toggle');
 }
 add_grp_default('xowa.gui.menus.group.history') {
   add_btn_default('xowa.usr.history.show');
@@ -529,10 +536,6 @@ add_grp_default('xowa.gui.menus.group.tools') {
   add_spr;
   add_btn_default('xowa.nav.setup.maintenance');
   add_btn_default('xowa.nav.setup.download');
-}
-add_grp_default('xowa.gui.menus.group.personal') {
-  add_btn_default('xowa.nav.personal.item');
-  add_btn_default('xowa.nav.personal.list');
 }
 add_grp_default('xowa.gui.menus.group.help') {
   add_btn_default('xowa.nav.help.help');

@@ -109,6 +109,9 @@
           <option value='xowa.dev.general' selected='selected'>
             Dev - General
           </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Night mode
+          </option>
         </select>
       </div>
       <div id='cfg_grps'>
@@ -197,7 +200,7 @@
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.setup.previous_version")' title="reset to &quot;&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input id="xowa.app.setup.previous_version" data-xocfg-key="xowa.app.setup.previous_version" data-xocfg-type="string" accesskey="d" class="xocfg_data__str xocfg_data__readonly" type="text" readonly="true" value="4.3.0.1702">
+            <input id="xowa.app.setup.previous_version" data-xocfg-key="xowa.app.setup.previous_version" data-xocfg-type="string" accesskey="d" class="xocfg_data__str xocfg_data__readonly" type="text" readonly="true" value="4.4.0.1703">
           </div><input type='hidden' id='xowa.app.setup.previous_version__key_box' value='xowa.app.setup.previous_version'> <input type='hidden' id='xowa.app.setup.previous_version__ctx_box' value='app'>
         </div>
         <div id='xowa.app.setup.previous_version_help_div' class='xohelp_div'>
@@ -233,7 +236,7 @@
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.cfg.previous_grp")' title="reset to &quot;xowa.app.security&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input id="xowa.app.cfg.previous_grp" data-xocfg-key="xowa.app.cfg.previous_grp" data-xocfg-type="string" accesskey="d" class="xocfg_data__str xocfg_data__readonly" type="text" readonly="true" value="xowa.files.general">
+            <input id="xowa.app.cfg.previous_grp" data-xocfg-key="xowa.app.cfg.previous_grp" data-xocfg-type="string" accesskey="d" class="xocfg_data__str xocfg_data__readonly" type="text" readonly="true" value="xowa.wiki.edit">
           </div><input type='hidden' id='xowa.app.cfg.previous_grp__key_box' value='xowa.app.cfg.previous_grp'> <input type='hidden' id='xowa.app.cfg.previous_grp__ctx_box' value='app'>
         </div>
         <div id='xowa.app.cfg.previous_grp_help_div' class='xohelp_div'>
@@ -311,9 +314,9 @@
           </div>
           <div class='xocfg_itm_data'>
 <textarea id="xowa.app.startup.tabs.previous_list" data-xocfg-key="xowa.app.startup.tabs.previous_list" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo xocfg_data__readonly" readonly="true">
-home/wiki/Special:XowaWikiDirectory
+home/wiki/Special:XowaSearch
 home/wiki/Main_Page
-home/wiki/Help/Download_XOWA
+home/wiki/Change_log/v4.4.0.1703
 </textarea>
           </div><input type='hidden' id='xowa.app.startup.tabs.previous_list__key_box' value='xowa.app.startup.tabs.previous_list'> <input type='hidden' id='xowa.app.startup.tabs.previous_list__ctx_box' value='app'>
         </div>
@@ -353,7 +356,7 @@ home/wiki/Help/Download_XOWA
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.toggles.offline-wikis")' title="reset to &quot;y&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input id="xowa.html.toggles.offline-wikis" data-xocfg-key="xowa.html.toggles.offline-wikis" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled">
+            <input id="xowa.html.toggles.offline-wikis" data-xocfg-key="xowa.html.toggles.offline-wikis" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool xocfg_data__readonly" type="checkbox" disabled="disabled" checked="checked">
           </div><input type='hidden' id='xowa.html.toggles.offline-wikis__key_box' value='xowa.html.toggles.offline-wikis'> <input type='hidden' id='xowa.html.toggles.offline-wikis__ctx_box' value='app'>
         </div>
         <div id='xowa.html.toggles.offline-wikis_help_div' class='xohelp_div'>

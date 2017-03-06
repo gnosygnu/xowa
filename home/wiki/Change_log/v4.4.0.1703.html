@@ -2,7 +2,7 @@
 <html dir="ltr">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Blog/Archives - XOWA</title>
+  <title>Change log/v4.4.0.1703 - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   
@@ -11,42 +11,189 @@
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>Blog/Archives</span></h1>
+  <h1 id="firstHeading" class="firstHeading"><span>Change log/v4.4.0.1703</span></h1>
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
+    <h2>
+      <span class="mw-headline" id="v4.4.0.1703_.282017-03-06.29">v4.4.0.1703 (2017-03-06)</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Wiki">Wiki</span>
+    </h3>
+    <ul>
+      <li>
+        Package: Publish 2017-02 German Wikipedia.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="http://xowa.org/home/wiki/Wiki_setup/German_wikis.html" id="xolnki_2" title="Wiki setup/German wikis">Wiki_setup/German_wikis</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Package: Publish 2017-02 French Wikipedia.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="http://xowa.org/home/wiki/Wiki_setup/French_wikis.html" id="xolnki_3" title="Wiki setup/French wikis" class="xowa-visited">Wiki_setup/French_wikis</a>
+      </dd>
+    </dl>
+    <h2>
+      <span class="mw-headline" id="PC">PC</span>
+    </h2>
     <p>
-      2016
+      <b>major</b>
     </p>
     <ul>
       <li>
-        <a href="http://xowa.org/home/wiki/Blog/2016-03.html" id="xolnki_2" title="Blog/2016-03">2016-03</a>
-      </li>
-      <li>
-        <a href="http://xowa.org/home/wiki/Blog/2016-02.html" id="xolnki_3" title="Blog/2016-02">2016-02</a>
-      </li>
-      <li>
-        <a href="http://xowa.org/home/wiki/Blog/2016-01.html" id="xolnki_4" title="Blog/2016-01">2016-01</a>
+        Gui: Add night mode. {assisted by anonymous4; requested by Lasairiona}
       </li>
     </ul>
+    <ul>
+      <li>
+        Personal_wikis: Add page backup feature. {suggested by Lasairiona}
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Full-text search: Add preliminary implementation of full-text search for personal wikis.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="http://xowa.org/home/wiki/Special:XowaSearch.html" id="xolnki_4" title="Special:XowaSearch" class="xowa-visited">Special:XowaSearch</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        XULRunner: Fix bad layout on French Wikipedia main page.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Upgrade xulrunner from v24 to v31.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: flex:.35em.
+      </dd>
+    </dl>
     <p>
-      2015
+      <b>minor</b>
     </p>
     <ul>
       <li>
-        <a href="http://xowa.org/home/wiki/Blog/2015.html" id="xolnki_5" title="Blog/2015">2015 Blog</a><br>
+        Wikibase: Fix multiple "unknown datavalue type" on many fr.w pages.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Message</span>: <code>Erreur de script: =Module:Wikidata:522 unknown datavalue type. Erreur de script: =Module:Coordinates:808 unknown datavalue type.</code>
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Use scribunto key name for datatypes.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://fr.wikipedia.org/wiki/Louis_Malle" rel="nofollow" class="external free">https://fr.wikipedia.org/wiki/Louis_Malle</a> <a href="https://fr.wikipedia.org/wiki/Toulon" rel="nofollow" class="external free">https://fr.wikipedia.org/wiki/Toulon</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Personal_wikis: Update modified date on page save. {detected by Lasairiona}
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Personal_wikis: Show personal wikis in left sidebar. {detected by Lasairiona}
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Personal_wikis: Add timestamp to quick save status message.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: saved Main Page (01:02:03.456).
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Personal_wikis: Speed up creation of wikis.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Do not download css when creating wiki.
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Personal_wikis: Speed up loading of wikis.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Do not load every personal wiki on startup.
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        App: Speed up loading of app. {detected by Lasairiona}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Remove initialMemorySize of 256 MB.
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Command-line: Support ?curid for command-line calls. {detected by shopuz}
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Log: Remove "current" directory; always use timestamp directory. {detected by anonymous}
       </li>
     </ul>
     <p>
-      2014
+      <b>trivial</b>
     </p>
     <ul>
       <li>
-        <a href="http://xowa.org/home/wiki/Blog/2014.html" id="xolnki_6" title="Blog/2014">2014 Blog</a><br>
+        Search: Clear cache after pages are reindexed.
       </li>
     </ul>
+    <ul>
+      <li>
+        App_update: Redownload update_db if download fails.
+      </li>
+    </ul>
+    <ul>
+      <li>
+        App: Fix rare crash to desktop.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Call toString on Error, not getMessage.
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Log: Delete old Download Central logs.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: /xowa/user/anonymous/app/tmp/xolog.
+      </dd>
+    </dl>
   
     </div>
   </div>
