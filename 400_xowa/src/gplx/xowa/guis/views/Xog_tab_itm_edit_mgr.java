@@ -67,8 +67,11 @@ public class Xog_tab_itm_edit_mgr {
 			stack_page.Db().Text().Text_bry_(page.Db().Text().Text_bry());	// NOTE: overwrite with "saved" changes
 			stack_page.Wikie().Parser_mgr().Parse(page, true);				// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 			page.Url_(Xoa_url.New(tab.Wiki().Domain_bry(), tab.Page().Ttl().Full_db()));
-			win_itm.Page__mode_(Xopg_page_.Tid_read);
-			win_itm.Page__async__bgn(tab);
+
+			// force full reload of page; needed to refresh page_modified; DATE:2017-03-06
+			tab.Show_url_bgn(page.Url());
+//				win_itm.Page__mode_(Xopg_page_.Tid_read);
+//				win_itm.Page__async__bgn(tab);
 		}
 	}
 	public static void Preview(Xog_tab_itm tab) {

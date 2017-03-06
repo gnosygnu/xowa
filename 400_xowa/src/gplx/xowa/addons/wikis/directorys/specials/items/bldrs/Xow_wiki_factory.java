@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*; import gplx.xowa.addons.wikis.directorys.specials.items.*;
+import gplx.xowa.wikis.dbs.*;
 public class Xow_wiki_factory {
 	public static Xowe_wiki Load_personal(Xoae_app app, byte[] domain, Io_url dir_url) {
 		// upgrade wiki directly at db
@@ -32,7 +33,9 @@ public class Xow_wiki_factory {
 
 		// do more initialization
 		rv.Init_by_wiki__force_and_mark_inited();
-		rv.Db_mgr_as_sql().Save_mgr().Create_enabled_(true);
+		Xodb_save_mgr save_mgr = rv.Db_mgr_as_sql().Save_mgr();
+		save_mgr.Create_enabled_(true);
+		save_mgr.Update_modified_on_enabled_(true);
 
 		// register it for the url-bar; EX: test.me.org/wiki/Main_Page
 		app.User().Wikii().Xwiki_mgr().Add_by_atrs_offline(String_.new_u8(domain), String_.new_u8(domain));

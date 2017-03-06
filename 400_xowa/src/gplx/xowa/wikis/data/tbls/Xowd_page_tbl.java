@@ -363,8 +363,9 @@ public class Xowd_page_tbl implements Db_tbl {
 	}
 	public void Update__redirect__modified(int page_id, boolean redirect, DateAdp modified) {
 		conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_is_redirect, fld_touched)
+			.Val_int(fld_is_redirect, redirect ? 1 : 0)
+			.Val_str(fld_touched, modified.XtoStr_fmt(Page_touched_fmt))
 			.Crt_int(fld_id, page_id)
-			.Val_int(fld_is_redirect, redirect ? 1 : 0).Val_str(fld_touched, modified.XtoStr_fmt(Page_touched_fmt))
 			.Exec_update()
 			;
 	}
