@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.files.missing_origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;	
-import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.apps.wms.apis.origs.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.apps.wms.apis.origs.*;
 import gplx.xowa.addons.bldrs.files.dbs.*;
 public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 	private int fail_max = 100000;
@@ -32,8 +32,7 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 		Gfo_usr_dlg_.Instance.Note_many("", "", "bldr.find_missing: found=~{0}", fail_count);
 
 		// select into list; ignore any which are invalid titles
-		List_adp list = List_adp_.New();
-		byte[] wiki_abrv = wiki.Domain_itm().Abrv_xo();
+		Ordered_hash list = Ordered_hash_.New_bry();
 		int invalid_count = 0;
 		String sql = "SELECT lnki_ttl FROM orig_regy WHERE orig_page_id IS NULL";
 		Db_rdr rdr = conn.Stmt_sql(sql).Exec_select__rls_auto();
@@ -48,33 +47,57 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 				}
 
 				// create itm and add to list
-				Xof_fsdb_itm itm = new Xof_fsdb_itm();
-				itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, wiki_abrv, lnki_ttl, Byte_.Zero, Xof_img_size.Upright_null, -1, -1, -1, -1, Xof_patch_upright_tid_.Tid_all);
-				list.Add(itm);
+				Xobldr_missing_origs_item itm = new Xobldr_missing_origs_item();
+				itm.Init_by_orig_tbl(lnki_ttl);
+				list.Add(itm.Lnki_ttl(), itm);
 			}
 		} finally {rdr.Rls();}
 		Gfo_usr_dlg_.Instance.Note_many("", "", "bldr.find_missing: invalid=~{0}", invalid_count);
 
 // call api with list
 		Xobldr_missing_origs_wmfapi wmf_api = new Xobldr_missing_origs_wmfapi(wiki.App().Wmf_mgr().Download_wkr());
-		wmf_api.Find_by_list(null, Byte_.Zero, null, 0);
+		int list_len = list.Len();
+		int list_bgn = 0;
+		// loop until no more entries
+		while (true) {
+			int list_end = list_bgn + 500;
+			if (list_end > list_len) list_end = list_len;
 
-		// loop list and update
-		conn.Txn_bgn("bldr.find_missing");
-		Db_stmt update_stmt = conn.Stmt_update("orig_regy", String_.Ary("lnki_ttl")
-			, "orig_commons_flag", "orig_repo"
-			, "orig_page_id", "orig_redirect_id", "orig_redirect_ttl"
-			, "orig_file_id", "orig_file_ttl", "orig_file_ext"
-			, "orig_size", "orig_w", "orig_h", "orig_bits", "orig_media_type", "orig_minor_mime", "orig_timestamp");
-		int len = list.Len();
-		for (int i = 0; i < len; i++)  {
-			Xof_fsdb_itm itm = (Xof_fsdb_itm)list.Get_at(i);
-			update_stmt
-				.Val_int("orig_w", itm.Orig_w())
-				.Val_int("orig_h", itm.Orig_h())
-				.Crt_bry_as_str("lnki_ttl", itm.Lnki_ttl()).Exec_update();
+			// find items
+			wmf_api.Find_by_list(list, Xof_repo_tid_.Tid__remote, "commons.wikimedia.org", list_bgn);
+
+			// loop list and update
+			conn.Txn_bgn("bldr.find_missing");
+			Db_stmt update_stmt = conn.Stmt_update("orig_regy", String_.Ary("lnki_ttl")
+				, "orig_repo"
+				, "orig_page_id", "orig_redirect_id", "orig_redirect_ttl"
+				, "orig_file_id", "orig_file_ttl", "orig_file_ext"
+				, "orig_size", "orig_w", "orig_h", "orig_media_type", "orig_minor_mime", "orig_timestamp");
+			// , "orig_bits"
+			for (int i = list_bgn; i < list_end; i++)  {
+				Xobldr_missing_origs_item itm = (Xobldr_missing_origs_item)list.Get_at(i);
+				update_stmt
+					.Val_byte("orig_repo", itm.Orig_repo())
+					.Val_int("orig_page_id", itm.Orig_page_id())
+					.Val_int("orig_redirect_id", itm.Orig_redirect_id())
+					.Val_bry_as_str("orig_redirect_ttl", itm.Orig_redirect_ttl())
+					.Val_int("orig_file_id", itm.Orig_file_id())
+					.Val_bry_as_str("orig_file_ttl", itm.Orig_file_ttl())
+					.Val_int("orig_file_ext", itm.Orig_file_ext())
+					.Val_int("orig_size", itm.Orig_size())
+					.Val_int("orig_w", itm.Orig_w())
+					.Val_int("orig_h", itm.Orig_h())
+					.Val_bry_as_str("orig_media_type", itm.Orig_media_type())
+					.Val_bry_as_str("orig_minor_mime", itm.Orig_minor_mime())
+					.Val_bry_as_str("orig_timestamp", itm.Orig_timestamp())
+					.Crt_bry_as_str("lnki_ttl", itm.Lnki_ttl()).Exec_update();
+			}
+			conn.Txn_end();
+
+			// update bounds
+			if (list_end == list_len) break;
+			list_bgn += 500;
 		}
-		conn.Txn_end();
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__fail_max_))					this.fail_max = m.ReadInt("v");

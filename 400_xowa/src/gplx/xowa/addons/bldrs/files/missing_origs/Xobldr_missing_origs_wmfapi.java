@@ -84,15 +84,19 @@ public class Xobldr_missing_origs_wmfapi {
 					Json_ary info_ary = (Json_ary)page.Get_as_ary("imageinfo");
 					Json_nde info_nde = (Json_nde)info_ary.Get_as_nde(0);
 					byte[] timestamp = info_nde.Get_as_bry("timestamp");
-					long size = info_nde.Get_as_long("size");
+					int size = info_nde.Get_as_int("size");
 					int width = info_nde.Get_as_int("width");
 					int height = info_nde.Get_as_int("height");
 					byte[] mime = info_nde.Get_as_bry("mime");
 					byte[] mediatype = info_nde.Get_as_bry("mediatype");
 
 					// add to trg hash
-					Xobldr_missing_origs_item trg_item = new Xobldr_missing_origs_item().Init_by_api_page(repo_id, page_id, title, timestamp, size, width, height, mime, mediatype);
-					temp_hash.Add(trg_item.Orig_ttl(), trg_item);
+					try {
+						Xobldr_missing_origs_item trg_item = new Xobldr_missing_origs_item().Init_by_api_page(repo_id, page_id, title, size, width, height, mediatype, mime, timestamp);
+						temp_hash.Add(trg_item.Orig_file_ttl(), trg_item);
+					} catch (Exception e2) {
+						Gfo_usr_dlg_.Instance.Warn_many("", "", "missing_origs:failed to deserialize api obj; domain=~{0} ttl=~{1} json=~{2} err=~{3}", api_domain, title, page.Print_as_json(), Err_.Message_gplx_log(e2));
+					}
 				}
 
 				// loop over redirects
