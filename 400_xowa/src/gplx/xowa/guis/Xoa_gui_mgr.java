@@ -72,9 +72,11 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 		menu_mgr.Init_by_app(app);
 		if (app.Mode().Tid_is_gui()) {
 			app.Gui__cbk_mgr().Reg(new gplx.xowa.guis.cbks.swts.Xog_cbk_wkr__swt(this));
+			Io_url gfo_log_dir = app.Fsys_mgr().Root_dir().GenSubDir_nest("user", "anonymous", "app", "tmp", "xolog");
 			Gfo_log_.Instance__set(new gplx.xowa.guis.cbks.swts.Gfo_log__swt(app.Gui__cbk_mgr()
-				, Gfo_log_.New_url(app.Fsys_mgr().Root_dir().GenSubDir_nest("user", "anonymous", "app", "tmp", "xolog"))
+				, Gfo_log_.New_url(gfo_log_dir)
 				, new gplx.core.logs.Gfo_log_itm_wtr__csv()));
+			gplx.core.logs.Gfo_log__file.Delete_old_files(gfo_log_dir, Gfo_log_.Instance);
 		}
 		win_cfg.Init_by_app(app);
 		nightmode_mgr.Init_by_app(app);
