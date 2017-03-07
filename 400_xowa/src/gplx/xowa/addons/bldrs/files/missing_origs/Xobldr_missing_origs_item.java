@@ -79,7 +79,7 @@ class Xobldr_missing_origs_item {
 		this.lnki_ext = Xof_ext_.new_by_ttl_(lnki_ttl).Id();
 		this.orig_redirect_ext = Xof_ext_.new_by_ttl_(orig_redirect_ttl).Id();
 	}
-	private static byte[] Normalize_ttl(byte[] v) {
+	public static byte[] Normalize_ttl(byte[] v) {
 		// remove "File:"
 		if (Bry_.Has_at_bgn(v, Xobldr_missing_origs_wmfapi.FILE_NS_PREFIX)) {
 			v = Bry_.Mid(v, Xobldr_missing_origs_wmfapi.FILE_NS_PREFIX.length);
@@ -93,7 +93,7 @@ class Xobldr_missing_origs_item {
 
 		return v;
 	}
-	private static byte[] Normalize_minor_mime(byte[] src) {
+	public static byte[] Normalize_minor_mime(byte[] src) {
 		// convert "image/svg+xml" to "svg+xml"
 		int src_len = src.length;
 		int slash_pos = Bry_find_.Find_fwd(src, Byte_ascii.Slash, 0, src_len);
@@ -102,7 +102,7 @@ class Xobldr_missing_origs_item {
 		}
 		return Bry_.Mid(src, slash_pos + 1, src_len);
 	}
-	private static byte[] Normalize_timestamp(byte[] src) {
+	public static byte[] Normalize_timestamp(byte[] src) {
 		// convert 2017-03-06T08:09:10Z to 20170306080910
 		byte[] rv = new byte[14];
 		int rv_idx = 0;
