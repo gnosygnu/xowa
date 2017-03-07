@@ -18,7 +18,7 @@ import gplx.xowa.files.*;
 class Xobldr_missing_origs_item {
 	public byte[] Lnki_ttl() {return lnki_ttl;} private byte[] lnki_ttl;
 	public byte Orig_repo() {return orig_repo;} private byte orig_repo;
-	public int Orig_page_id() {return orig_page_id;} private int orig_page_id;
+	public int Orig_page_id() {return orig_page_id;} private int orig_page_id = -1;
 	public int Orig_file_id() {return orig_page_id;}
 	public byte[] Orig_file_ttl() {return orig_file_ttl;} private byte[] orig_file_ttl;
 	public byte[] Orig_timestamp() {return orig_timestamp;} private byte[] orig_timestamp;

@@ -24,10 +24,9 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 	@Override public void Cmd_run() {
 		// got orig_tbl
 		Db_conn conn = Xob_db_file.New__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
-		Xob_orig_regy_tbl.Create_table(conn);
 
 		// get counts; fail if too many
-		int fail_count = conn.Exec_sql(Db_sql_.Make_by_fmt(String_.Ary("SELECT Count(lnki_ttl) FROM orig_regy WHERE orig_page_id IS NULL")));
+		int fail_count = conn.Exec_select_as_int(Db_sql_.Make_by_fmt(String_.Ary("SELECT Count(lnki_ttl) FROM orig_regy WHERE orig_page_id IS NULL")), Int_.Max_value);
 		if (fail_count > fail_max) throw Err_.new_wo_type("bldr.find_missing: too many missing: missing=~{0} max=~{1}", fail_count, fail_max);
 		Gfo_usr_dlg_.Instance.Note_many("", "", "bldr.find_missing: found=~{0}", fail_count);
 
@@ -54,7 +53,22 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 		} finally {rdr.Rls();}
 		Gfo_usr_dlg_.Instance.Note_many("", "", "bldr.find_missing: invalid=~{0}", invalid_count);
 
-// call api with list
+		// call api for commons
+		Download(conn, list, Xof_repo_tid_.Tid__remote, gplx.xowa.wikis.domains.Xow_domain_itm_.Str__commons);
+
+		// filter to unfound
+		Ordered_hash unfound = Ordered_hash_.New();
+		int list_len = list.Len();
+		for (int i = 0; i < list_len; i++) {
+			Xobldr_missing_origs_item item = (Xobldr_missing_origs_item)list.Get_at(i);
+			if (item.Orig_page_id() == -1)
+				unfound.Add(item.Lnki_ttl(), item);
+		}
+
+		// call api for local
+		Download(conn, unfound, Xof_repo_tid_.Tid__local , wiki.Domain_str());
+	}
+	private void Download(Db_conn conn, Ordered_hash list, byte repo_tid, String repo_domain) {
 		Xobldr_missing_origs_wmfapi wmf_api = new Xobldr_missing_origs_wmfapi(wiki.App().Wmf_mgr().Download_wkr());
 		int list_len = list.Len();
 		int list_bgn = 0;
@@ -94,8 +108,10 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 			}
 			conn.Txn_end();
 
-			// update bounds
+			// exit if done
 			if (list_end == list_len) break;
+
+			// update bounds
 			list_bgn += 500;
 		}
 	}
