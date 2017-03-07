@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.missing_origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.missing_origs.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*; import gplx.xowa.addons.bldrs.files.missing_origs.*;
 import gplx.xowa.files.*;
-class Xobldr_missing_origs_item {
+public class Xowmf_imageinfo_item {
 	public byte[] Lnki_ttl() {return lnki_ttl;} private byte[] lnki_ttl;
 	public byte Orig_repo() {return orig_repo;} private byte orig_repo;
 	public int Orig_page_id() {return orig_page_id;} private int orig_page_id = -1;
@@ -33,11 +33,11 @@ class Xobldr_missing_origs_item {
 	public int Orig_redirect_ext() {return orig_redirect_ext;} private int orig_redirect_ext;
 	public int Orig_redirect_id() {return orig_redirect_id;} private int orig_redirect_id;
 
-	public Xobldr_missing_origs_item Init_by_orig_tbl(byte[] lnki_ttl) {
+	public Xowmf_imageinfo_item Init_by_orig_tbl(byte[] lnki_ttl) {
 		this.lnki_ttl = lnki_ttl;
 		return this;
 	}
-	public Xobldr_missing_origs_item Init_by_api_page(byte orig_repo, int orig_page_id, byte[] orig_file_ttl, int orig_size, int orig_w, int orig_h, byte[] orig_media_type, byte[] orig_minor_mime, byte[] orig_timestamp) {
+	public Xowmf_imageinfo_item Init_by_api_page(byte orig_repo, int orig_page_id, byte[] orig_file_ttl, int orig_size, int orig_w, int orig_h, byte[] orig_media_type, byte[] orig_minor_mime, byte[] orig_timestamp) {
 		this.orig_repo = orig_repo;
 		this.orig_page_id = orig_page_id;
 		this.orig_file_ttl = Normalize_ttl(orig_file_ttl);
@@ -50,7 +50,7 @@ class Xobldr_missing_origs_item {
 		this.orig_timestamp = Normalize_timestamp(orig_timestamp); 
 		return this;
 	}
-	public Xobldr_missing_origs_item Init_by_api_redirect(byte[] from, byte[] to) {
+	public Xowmf_imageinfo_item Init_by_api_redirect(byte[] from, byte[] to) {
 		this.lnki_ttl = Normalize_ttl(from);
 		this.orig_redirect_ttl = Normalize_ttl(to);
 		// page_id is always redirect_id
@@ -59,7 +59,7 @@ class Xobldr_missing_origs_item {
 		this.orig_page_id = -987;
 		return this;
 	}
-	public void Copy_api_props(Xobldr_missing_origs_item src) {
+	public void Copy_api_props(Xowmf_imageinfo_item src) {
 		// page nde
 		this.orig_repo = src.orig_repo;
 		this.orig_page_id = src.orig_page_id;
@@ -81,8 +81,8 @@ class Xobldr_missing_origs_item {
 	}
 	public static byte[] Normalize_ttl(byte[] v) {
 		// remove "File:"
-		if (Bry_.Has_at_bgn(v, Xobldr_missing_origs_wmfapi.FILE_NS_PREFIX)) {
-			v = Bry_.Mid(v, Xobldr_missing_origs_wmfapi.FILE_NS_PREFIX.length);
+		if (Bry_.Has_at_bgn(v, Xowmf_imageinfo_api.FILE_NS_PREFIX)) {
+			v = Bry_.Mid(v, Xowmf_imageinfo_api.FILE_NS_PREFIX.length);
 		}
 		else {
 			throw Err_.new_wo_type("wmf_api does not start with 'File:'", "title", v);

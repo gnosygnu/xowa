@@ -18,16 +18,39 @@ import gplx.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;	
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.apps.wms.apis.origs.*;
 import gplx.xowa.addons.bldrs.files.dbs.*;
+import gplx.xowa.addons.bldrs.files.missing_origs.apis.*;
 public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 	private int fail_max = 100000;
+	private String recentchanges_bgn, recentchanges_end;
 	public Xobldr_missing_origs_cmd(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
 	@Override public void Cmd_run() {
-		// got orig_tbl
+		gplx.xowa.files.downloads.Xof_download_wkr download_wkr = wiki.App().Wmf_mgr().Download_wkr();
+
+		// get recentchanges
+		Xowmf_recentchanges_api rc_api = new Xowmf_recentchanges_api();
+		if (recentchanges_bgn == null || recentchanges_end == null) {
+			throw Err_.new_wo_type("bldr.find_missing: recentchanges_bgn or recentchanges_end not set");
+		}
+		Ordered_hash rc_list = rc_api.Find(download_wkr, gplx.xowa.wikis.domains.Xow_domain_itm_.Str__commons, recentchanges_bgn, recentchanges_end, 500);
+
+		// got orig_db
 		Db_conn conn = Xob_db_file.New__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
+		String sql_fmt = "UPDATE orig_regy SET orig_page_id = -1 WHERE lnki_ttl = '{0}' AND orig_page_id IS NULL";
+
+		// loop recentchanges
+		int rc_list_len = rc_list.Len();
+		conn.Txn_bgn("orig_regy__recentchanges");
+		for (int i = 0; i < rc_list_len; i++) {
+			Xowmf_recentchanges_item item = (Xowmf_recentchanges_item)rc_list.Get_at(i);
+			conn.Exec_sql_args(sql_fmt, item.Title());
+		}
+		conn.Txn_end();
 
 		// get counts; fail if too many
-		int fail_count = conn.Exec_select_as_int(Db_sql_.Make_by_fmt(String_.Ary("SELECT Count(lnki_ttl) FROM orig_regy WHERE orig_page_id IS NULL")), Int_.Max_value);
-		if (fail_count > fail_max) throw Err_.new_wo_type("bldr.find_missing: too many missing: missing=~{0} max=~{1}", fail_count, fail_max);
+		int fail_count = conn.Exec_select_as_int(Db_sql_.Make_by_fmt(String_.Ary("SELECT Count(lnki_ttl) FROM orig_regy WHERE orig_page_id = -1")), Int_.Max_value);
+		if (fail_count > fail_max) {
+			throw Err_.new_wo_type("bldr.find_missing: too many missing: missing=~{0} max=~{1}", fail_count, fail_max);
+		}
 		Gfo_usr_dlg_.Instance.Note_many("", "", "bldr.find_missing: found=~{0}", fail_count);
 
 		// select into list; ignore any which are invalid titles
@@ -46,7 +69,7 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 				}
 
 				// create itm and add to list
-				Xobldr_missing_origs_item itm = new Xobldr_missing_origs_item();
+				Xowmf_imageinfo_item itm = new Xowmf_imageinfo_item();
 				itm.Init_by_orig_tbl(lnki_ttl);
 				list.Add(itm.Lnki_ttl(), itm);
 			}
@@ -60,7 +83,7 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 		Ordered_hash unfound = Ordered_hash_.New();
 		int list_len = list.Len();
 		for (int i = 0; i < list_len; i++) {
-			Xobldr_missing_origs_item item = (Xobldr_missing_origs_item)list.Get_at(i);
+			Xowmf_imageinfo_item item = (Xowmf_imageinfo_item)list.Get_at(i);
 			if (item.Orig_page_id() == -1)
 				unfound.Add(item.Lnki_ttl(), item);
 		}
@@ -69,7 +92,7 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 		Download(conn, unfound, Xof_repo_tid_.Tid__local , wiki.Domain_str());
 	}
 	private void Download(Db_conn conn, Ordered_hash list, byte repo_tid, String repo_domain) {
-		Xobldr_missing_origs_wmfapi wmf_api = new Xobldr_missing_origs_wmfapi(wiki.App().Wmf_mgr().Download_wkr());
+		Xowmf_imageinfo_api wmf_api = new Xowmf_imageinfo_api(wiki.App().Wmf_mgr().Download_wkr());
 		int list_len = list.Len();
 		int list_bgn = 0;
 		// loop until no more entries
@@ -89,7 +112,7 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 				, "orig_size", "orig_w", "orig_h", "orig_media_type", "orig_minor_mime", "orig_timestamp");
 			// , "orig_bits"
 			for (int i = list_bgn; i < list_end; i++)  {
-				Xobldr_missing_origs_item itm = (Xobldr_missing_origs_item)list.Get_at(i);
+				Xowmf_imageinfo_item itm = (Xowmf_imageinfo_item)list.Get_at(i);
 				update_stmt
 					.Val_byte("orig_repo", itm.Orig_repo())
 					.Val_int("orig_page_id", itm.Orig_page_id())
@@ -116,10 +139,12 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 		}
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk__fail_max_))					this.fail_max = m.ReadInt("v");
+		if		(ctx.Match(k, "fail_max_"))                     this.fail_max = m.ReadInt("v");
+		else if	(ctx.Match(k, "recentchanges_bgn_"))            this.recentchanges_bgn = m.ReadStr("v");
+		else if	(ctx.Match(k, "recentchanges_end_"))            this.recentchanges_end = m.ReadStr("v");
 		else													return super.Invk(ctx, ikey, k, m);
 		return this;
-	}	private static final String Invk__fail_max_ = "fail_max_";
+	}
 
 	public static final String BLDR_CMD_KEY = "file.orig_regy.find_missing";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
