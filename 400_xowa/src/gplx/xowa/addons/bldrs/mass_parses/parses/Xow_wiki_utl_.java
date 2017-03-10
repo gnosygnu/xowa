@@ -25,6 +25,9 @@ public class Xow_wiki_utl_ {
 		rv.File_mgr().Repo_mgr().Clone(wiki.File_mgr().Repo_mgr());
 		rv.File__fsdb_mode().Tid__v2__bld__y_();
 
+		// copy other members
+		rv.Sys_cfg().Copy(wiki.Sys_cfg());
+
 		Clone_repos(wiki);
 		return rv;
 	}

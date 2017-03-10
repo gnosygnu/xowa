@@ -18,6 +18,7 @@ import gplx.core.threads.*; import gplx.core.threads.utils.*;
 import gplx.core.caches.*; import gplx.xowa.wikis.caches.*;
 import gplx.xowa.addons.bldrs.mass_parses.parses.wkrs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.parses.pools.*; import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*;
 import gplx.xowa.addons.bldrs.wmdumps.imglinks.*;
+import gplx.xowa.addons.wikis.searchs.fulltexts.indexers.*;
 public class Xomp_parse_mgr {
 	private Gfo_countdown_latch latch;
 	public Xomp_parse_mgr_cfg Cfg() {return cfg;} private final    Xomp_parse_mgr_cfg cfg = new Xomp_parse_mgr_cfg();		
@@ -58,6 +59,10 @@ public class Xomp_parse_mgr {
 		// init ns_ord_mgr
 		Xomp_ns_ord_mgr ns_ord_mgr = new Xomp_ns_ord_mgr(Int_.Ary_parse(mgr_db.Tbl__cfg().Select_str("", Xomp_parse_wkr.Cfg__ns_ids), "|"));
 
+		// init indexer
+		Xosearch_indexer indexer = cfg.Indexer_enabled() ? new Xosearch_indexer() : null;
+		if (indexer != null) indexer.Init(wiki);
+
 		// init parse_wkrs
 		for (int i = 0; i < wkr_len; ++i) {
 			// make wiki
@@ -65,7 +70,7 @@ public class Xomp_parse_mgr {
 			wkr_wiki.Cache_mgr().Page_cache_(page_cache).Commons_cache_(commons_cache).Ifexist_cache_(ifexist_cache);				
 
 			// make wkr
-			Xomp_parse_wkr wkr = new Xomp_parse_wkr(this, cfg, mgr_db, page_pool, prog_mgr, file_orig_wkr, ns_ord_mgr, wkr_wiki, i + wkr_uid_bgn);
+			Xomp_parse_wkr wkr = new Xomp_parse_wkr(this, cfg, mgr_db, page_pool, prog_mgr, file_orig_wkr, ns_ord_mgr, wkr_wiki, indexer, i + wkr_uid_bgn);
 			wkrs[i] = wkr;
 		}
 
@@ -78,6 +83,7 @@ public class Xomp_parse_mgr {
 		// wait until wkrs are done
 		latch.Await();
 		page_pool.Rls();
+		if (indexer != null) indexer.Term();
 
 		// print stats
 		Bry_bfr bfr = Bry_bfr_.New();
