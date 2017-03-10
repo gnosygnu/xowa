@@ -18,11 +18,15 @@ import gplx.xowa.specials.*; import gplx.core.net.qargs.*;
 import gplx.xowa.addons.apps.cfgs.*;
 public class Xosearch_fulltext_special implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
-//			Gfo_qarg_mgr url_args = new Gfo_qarg_mgr().Init(url.Qargs_ary());
+		// get qry if any
+		Gfo_qarg_mgr url_args = new Gfo_qarg_mgr().Init(url.Qargs_ary());
+		byte[] query = url_args.Read_bry_or("query", Bry_.Empty);
 
+		// get options and create page
 		Xocfg_mgr cfg_mgr = wiki.App().Cfg();
 		new Xosearch_fulltext_html
-		( cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.case_match", false)
+		( query
+		, cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.case_match", false)
 		, cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.auto_wildcard_bgn", false)
 		, cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.auto_wildcard_end", false)
 		, cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.expand_matches_section", false)

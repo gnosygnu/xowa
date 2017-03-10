@@ -17,14 +17,16 @@ package gplx.xowa.addons.wikis.searchs.fulltexts.specials; import gplx.*; import
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.dbs.*;
 class Xosearch_fulltext_html extends Xow_special_wtr__base {
+	private final    byte[] query;
 	private final    boolean case_match, auto_wildcard_bgn, auto_wildcard_end, expand_matches_section, show_all_matches;
 	private final    int max_pages_per_wiki;
 	private final    String wikis, namespaces;
 	public Xosearch_fulltext_html
-		( boolean case_match, boolean auto_wildcard_bgn, boolean auto_wildcard_end
+		( byte[] query, boolean case_match, boolean auto_wildcard_bgn, boolean auto_wildcard_end
 		, boolean expand_matches_section, boolean show_all_matches
 		, int max_pages_per_wiki
 		, String wikis, String namespaces) {
+		this.query = query;
 		this.case_match = case_match;
 		this.auto_wildcard_bgn = auto_wildcard_bgn;
 		this.auto_wildcard_end = auto_wildcard_end;
@@ -38,7 +40,7 @@ class Xosearch_fulltext_html extends Xow_special_wtr__base {
 	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xosearch_fulltext.template.html");}
 	@Override protected Mustache_doc_itm Bld_mustache_root(Xoa_app app) {
 		return new Xosearch_fulltext_doc
-		( case_match, auto_wildcard_bgn, auto_wildcard_end
+		( query, case_match, auto_wildcard_bgn, auto_wildcard_end
 		, expand_matches_section, show_all_matches
 		, max_pages_per_wiki, wikis, namespaces);
 	}

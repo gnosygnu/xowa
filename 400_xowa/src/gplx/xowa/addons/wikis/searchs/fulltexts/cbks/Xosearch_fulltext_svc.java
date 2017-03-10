@@ -39,14 +39,16 @@ class Xosearch_fulltext_svc implements Gfo_invk {
 
 		Xocfg_mgr cfg_mgr = app.Cfg();
 		Xosearch_search_args thread_args = Xosearch_search_args.New_by_json(args);
-
-		cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.case_match", thread_args.case_match);
-		cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.auto_wildcard_bgn", thread_args.auto_wildcard_bgn);
-		cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.auto_wildcard_end", thread_args.auto_wildcard_end);
-		cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.expand_matches_section", thread_args.expand_matches_section);
-		cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.show_all_matches", thread_args.show_all_matches);
-		cfg_mgr.Get_int_app_or ("xowa.addon.search.fulltext.special.max_pages_per_wiki", thread_args.max_pages_per_wiki);
-		cfg_mgr.Get_str_app_or ("xowa.addon.search.fulltext.special.namespaces", thread_args.namespaces);
+		
+		if (cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.options.autosave_enabled", true)) {
+			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.case_match", thread_args.case_match);
+			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.auto_wildcard_bgn", thread_args.auto_wildcard_bgn);
+			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.auto_wildcard_end", thread_args.auto_wildcard_end);
+			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.expand_matches_section", thread_args.expand_matches_section);
+			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.show_all_matches", thread_args.show_all_matches);
+			cfg_mgr.Get_int_app_or ("xowa.addon.search.fulltext.special.max_pages_per_wiki", thread_args.max_pages_per_wiki);
+			cfg_mgr.Get_str_app_or ("xowa.addon.search.fulltext.special.namespaces", thread_args.namespaces);
+		}
 
 		gplx.core.threads.Thread_adp_.Start_by_val("search", Cancelable_.Never, this, Invk__search, thread_args);
 	}

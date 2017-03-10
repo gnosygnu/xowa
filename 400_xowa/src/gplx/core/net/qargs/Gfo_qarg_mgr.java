@@ -30,6 +30,7 @@ public class Gfo_qarg_mgr {
 	public byte[] Read_bry_or_empty(byte[] key)		{return Read_bry_or(key, Bry_.Empty);}
 	public byte[] Read_bry_or_null(String key)		{return Read_bry_or(Bry_.new_u8(key), null);}
 	public byte[] Read_bry_or_null(byte[] key)		{return Read_bry_or(key, null);}
+	public byte[] Read_bry_or(String key, byte[] or) {return Read_bry_or(Bry_.new_u8(key), or);}
 	public byte[] Read_bry_or(byte[] key, byte[] or) {
 		Gfo_qarg_itm arg = (Gfo_qarg_itm)hash.Get_by_bry(key);
 		return arg == null ? or : arg.Val_bry();
