@@ -17,25 +17,30 @@ package gplx.xowa.addons.wikis.searchs.fulltexts.specials; import gplx.*; import
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.dbs.*;
 class Xosearch_fulltext_html extends Xow_special_wtr__base {
-	private final    boolean case_match, auto_wildcard_bgn, auto_wildcard_end;
-	private final    int max_pages_per_wiki, max_snips_per_page;
+	private final    boolean case_match, auto_wildcard_bgn, auto_wildcard_end, expand_matches_section, show_all_matches;
+	private final    int max_pages_per_wiki;
 	private final    String wikis, namespaces;
 	public Xosearch_fulltext_html
 		( boolean case_match, boolean auto_wildcard_bgn, boolean auto_wildcard_end
-		, int max_pages_per_wiki, int max_snips_per_page
+		, boolean expand_matches_section, boolean show_all_matches
+		, int max_pages_per_wiki
 		, String wikis, String namespaces) {
 		this.case_match = case_match;
 		this.auto_wildcard_bgn = auto_wildcard_bgn;
 		this.auto_wildcard_end = auto_wildcard_end;
+		this.expand_matches_section = expand_matches_section;
+		this.show_all_matches = show_all_matches;
 		this.max_pages_per_wiki = max_pages_per_wiki;
-		this.max_snips_per_page = max_snips_per_page;
 		this.wikis = wikis;
 		this.namespaces = namespaces;
 	}
 	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return Addon_dir(app);}
 	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xosearch_fulltext.template.html");}
 	@Override protected Mustache_doc_itm Bld_mustache_root(Xoa_app app) {
-		return new Xosearch_fulltext_doc(case_match, auto_wildcard_bgn, auto_wildcard_end, max_pages_per_wiki, max_snips_per_page, wikis, namespaces);
+		return new Xosearch_fulltext_doc
+		( case_match, auto_wildcard_bgn, auto_wildcard_end
+		, expand_matches_section, show_all_matches
+		, max_pages_per_wiki, wikis, namespaces);
 	}
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {
 		Xopg_tag_mgr head_tags = page_data.Head_tags();
