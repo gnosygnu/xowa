@@ -274,7 +274,14 @@ public class Swt_kit implements Gfui_kit {
 					Cfg_set(type, Swt_kit.Cfg_Html_BrowserType, Cfg_Html_BrowserType_parse(val));
 			}
 		}
-		else if	(String_.Eq(k, Invk_ask_file)) return this.New_dlg_file(Gfui_kit_.File_dlg_type_open, m.Args_getAt(0).Val_to_str_or_empty(), m.Args_getAt(1).Val_to_str_or_empty()).Ask();
+		else if	(String_.Eq(k, Invk_ask_file)) { 
+			String exts = "";
+			
+			// note that Dashboard/Offline does not specify exts
+			if (m.Args_count() > 1)
+				exts = m.Args_getAt(1).Val_to_str_or_empty();
+			return this.New_dlg_file(Gfui_kit_.File_dlg_type_open, m.Args_getAt(0).Val_to_str_or_empty(), exts).Ask();
+		}
 		else if	(String_.Eq(k, "ask_dir")) return this.New_dlg_dir(m.Args_getAt(0).Val_to_str_or_empty()).Ask();
 		else if (String_.Eq(k, Invk_shell_close)) shell.close();
 		return this;
