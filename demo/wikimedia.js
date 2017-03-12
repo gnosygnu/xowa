@@ -1,6 +1,6 @@
 /*
   Given a domain and a category, list its member pages and readability score
-  EX: http://xowa.org/wikimedia.html?domain=en.wikipedia.org&page=Earth
+  EX: http://xowa.org/wikimedia.html?domain=en.wikipedia.org&category=Earth
 */
 (function (wm) {
   wm.category = new function() {
@@ -13,17 +13,20 @@
     // wikimedia domain; EX: en.wikipedia.org
     this.domain = 'en.wikipedia.org';
 
-    // array of categories
-    this.categories = [];
+    // array of pages
+    this.pages = [];
     
     // number of pages in category
-    this.categoriesTotal = 0;
+    this.pagesTotal = 0;
 
     // number of excerpts found
     this.excerptsFound = 0;
 
     // maximum number of excerpts to find
     this.excerptsMax = 50;
+    
+    // member variable for category
+    this.category_title = '';
     
     // **********************************************
     // main entry function
@@ -33,14 +36,17 @@
         // parse url to get domain and page
         var url = window.location.href;
         var domain = wm.category.getQueryArg(url, 'domain');
-        var category = wm.category.getQueryArg(url, 'category');
+        wm.category.category_title = wm.category.getQueryArg(url, 'category');
         
         // use domain arg if available; otherwise use default
         if (domain)
           wm.category.domain = domain;
         
+        // write status
+        wm.category.writeHtml('<div class="header_div">Evaluating Category:' + wm.category.category_title + '. Please wait...</div>');
+        
         // find pages in category
-        wm.category.findPagesInCategory(wm.category.domain, category);
+        wm.category.findPagesInCategory(wm.category.domain, wm.category.category_title);
       }, 100);
     }
 
@@ -51,10 +57,10 @@
       }
       name = name.replace(/[\[\]]/g, "\\$&");
       var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-          categories = regex.exec(url);
-      if (!categories) return null;
-      if (!categories[2]) return '';
-      return decodeURIComponent(categories[2].replace(/\+/g, " "));
+          pages = regex.exec(url);
+      if (!pages) return null;
+      if (!pages[2]) return '';
+      return decodeURIComponent(pages[2].replace(/\+/g, " "));
     }
 
     // **********************************************
@@ -67,8 +73,9 @@
         wm.category.runAjax(url, wm.category.findPagesInCategoryCallback);      
       }
       else {      
-      // var root = {"query":{"categorymembers":[{"pageid":9228,"ns":0,"title":"Earth"},{"pageid":51506837,"ns":0,"title":"Outline of Earth"},{"pageid":25287133,"ns":0,"title":"Anywhere on Earth"},{"pageid":174069,"ns":0,"title":"Asteroid impact avoidance"},{"pageid":35971482,"ns":0,"title":"Day length fluctuations"},{"pageid":33256286,"ns":0,"title":"Demographics of the world"},{"pageid":19509955,"ns":0,"title":"Earth in culture"},{"pageid":212485,"ns":0,"title":"Earth religion"},{"pageid":944638,"ns":0,"title":"Earth's energy budget"},{"pageid":41077022,"ns":0,"title":"Earth's internal heat budget"}]}};
+        // var root = {"query":{"categorymembers":[{"pageid":9228,"ns":0,"title":"Earth"},{"pageid":51506837,"ns":0,"title":"Outline of Earth"},{"pageid":25287133,"ns":0,"title":"Anywhere on Earth"},{"pageid":174069,"ns":0,"title":"Asteroid impact avoidance"},{"pageid":35971482,"ns":0,"title":"Day length fluctuations"},{"pageid":33256286,"ns":0,"title":"Demographics of the world"},{"pageid":19509955,"ns":0,"title":"Earth in culture"},{"pageid":212485,"ns":0,"title":"Earth religion"},{"pageid":944638,"ns":0,"title":"Earth's energy budget"},{"pageid":41077022,"ns":0,"title":"Earth's internal heat budget"}]}};
         var root = {"query":{"categorymembers":[{"pageid":9228,"ns":0,"title":"Earth"}]}};
+        // var root = {"query":{"categorymembers":[]}};
         wm.category.findPagesInCategoryCallbackRoot(root);
       }
     }
@@ -90,18 +97,23 @@
         var ns = category.ns;
         var title = category.title;
         
-        // populate local categories table
-        wm.category.categories[page_id] = category;
+        // populate local pages table
+        wm.category.pages[page_id] = category;
         
         // increment total
-        wm.category.categoriesTotal++;
+        wm.category.pagesTotal++;
         
         // assign score
         category.score = 'N/A';
       }
-      
-      // now, get excerpts
-      wm.category.getExcerpts();
+
+      if (wm.category.pagesTotal == 0) {
+        wm.category.writeHtml("No results found for Category:" + wm.category.category_title);  
+      }
+      else {
+        // get excerpts
+        wm.category.getExcerpts();
+      }
     }
 
     // **********************************************
@@ -110,13 +122,13 @@
     this.getExcerpts = function() {
       // loop each page to get excerpt
       var excerptsCount = 0;
-      for (var page_id in wm.category.categories) {
-        var category = wm.category.categories[page_id];
+      for (var page_id in wm.category.pages) {
+        var category = wm.category.pages[page_id];
 
         // exit if too many
         if (excerptsCount++ >= wm.category.excerptsMax) {
-          // NOTE: must update categoriesTotal
-          wm.category.categoriesTotal = wm.category.excerptsMax;
+          // NOTE: must update pagesTotal
+          wm.category.pagesTotal = wm.category.excerptsMax;
           break;
         }
         
@@ -150,7 +162,7 @@
       var score = wm.category.calcReadabilityScore(page.title, excerpt);
       
       // update local category
-      var category = wm.category.categories[page_id];
+      var category = wm.category.pages[page_id];
       category.excerpt = excerpt;
       category.score = score[0];
       category.totalSentences = score[1];
@@ -160,7 +172,7 @@
         console.log(JSON.stringify(category));
       
       // if last category, print all
-      if (++wm.category.excerptsFound == wm.category.categoriesTotal) {
+      if (++wm.category.excerptsFound == wm.category.pagesTotal) {
         wm.category.printResults();        
       }
     }
@@ -239,18 +251,22 @@
     // **********************************************
     this.printResults = function() {
       // sort results by score
-      wm.category.categories.sort(wm.category.compareResult);
+      wm.category.pages.sort(wm.category.compareResult);
             
       // generate string
       var s 
-        = '<div class="results_div">\n'
+        = '<div class="header_div">\n'
+        + '  <div>Readability scores for member pages of ' + wm.category.buildWikiLink(wm.category.domain, 'Category:' + wm.category.category_title) + ' in ' + wm.category.domain + '</div>\n'
+        + '</div>\n'
+        + '<br/>\n'
+        + '<div class="results_div">\n'
         + '  <div class="result_div">\n'
         + '    <div class="result_title result_header">Title</div>\n'
         + '    <div class="result_score result_header">Score</div>\n'
         + '  </div>'
         ;
-      for (var page_id in wm.category.categories) {
-        var category = wm.category.categories[page_id];
+      for (var page_id in wm.category.pages) {
+        var category = wm.category.pages[page_id];
         
         // get category_title for url
         var page_enc = category.title.replace(/ /g, '_');
@@ -266,7 +282,7 @@
         }
         
         s += '  <div class="result_div">\n'
-          +  '    <div class="result_title tooltip"><a href="https://' + wm.category.domain + '/wiki/' + page_enc + '">' + category.title + '</a>\n'
+          +  '    <div class="result_title tooltip">' + wm.category.buildWikiLink(wm.category.domain, category.title) + '\n'
           +  '      <span class="tooltiptext">\n' 
           +  '        Sentences: ' + category.totalSentences + '<br/>\n' 
           +  '        Words: ' + category.totalWords + '<br/>\n' 
@@ -281,7 +297,12 @@
       s += '</div>';
       
       // print string
-      document.body.innerHTML = s;
+      wm.category.writeHtml(s);
+    }
+    this.buildWikiLink = function(wiki, page) {
+      var page_enc = page.replace(/ /g, '_');
+      page_enc = encodeURI(page_enc);      
+      return '<a href="https://' + wiki + '/wiki/' + page_enc + '">' + page + '</a>'
     }
     this.compareResult = function(lhs, rhs) {
       // sort from least readable to most readable
@@ -296,6 +317,9 @@
       xhr.open("GET", url, true);
       xhr.onreadystatechange = callback;
       xhr.send();      
+    }
+    this.writeHtml = function(html) {
+      document.body.innerHTML = html;      
     }
   }
 }(window.wm = window.wm || {}));
