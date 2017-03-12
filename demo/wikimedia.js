@@ -56,8 +56,8 @@
     // find page in category
     // **********************************************
     this.findPagesInCategory = function(domain, category) {
-      // run ajax
-      var url = 'https://' + domain + '/w/api.php?action=query&format=json&formatversion=2&list=categorymembers&cmlimit=' + wm.category.excerptsMax + '&cmtitle=Category:' + category;
+      // run ajax; NOTE: must specify origin to bypass CORS; http://stackoverflow.com/a/38921370
+      var url = 'https://' + domain + '/w/api.php?action=query&format=json&formatversion=2&origin=*&list=categorymembers&cmlimit=' + wm.category.excerptsMax + '&cmtitle=Category:' + category;
       wm.category.runAjax(url, wm.category.findPagesInCategoryCallback);      
       /*
       */
@@ -117,8 +117,8 @@
           break;
         }
         
-        // run ajax
-        var url = 'https://' + wm.category.domain + '/w/api.php?action=query&format=json&formatversion=2&prop=extracts&exintro=1&explaintext&titles=' + category.title;
+        // run ajax; NOTE: must specify origin to bypass CORS; http://stackoverflow.com/a/38921370
+        var url = 'https://' + wm.category.domain + '/w/api.php?action=query&format=json&formatversion=2&origin=*&prop=extracts&exintro=1&explaintext&titles=' + category.title;
         wm.category.runAjax(url, wm.category.getExcerptCallback);
         /*
         */
@@ -233,10 +233,10 @@
     // utility
     // **********************************************
     this.runAjax = function(url, callback) {
-      var req = new XMLHttpRequest();
-      req.onreadystatechange = callback;
-      req.open("GET", url, true);
-      req.send();      
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", url, true);
+      xhr.onreadystatechange = callback;
+      xhr.send();      
     }
   }
 }(window.wm = window.wm || {}));
