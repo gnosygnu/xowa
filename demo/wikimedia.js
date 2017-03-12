@@ -26,17 +26,19 @@
     // main entry function
     // **********************************************
     this.run = function() {
-      // parse url to get domain and page
-      var url = window.location.href;
-      var domain = wm.category.getQueryArg(url, 'domain');
-      var category = wm.category.getQueryArg(url, 'category');
-      
-      // use domain arg if available; otherwise use default
-      if (domain)
-        wm.category.domain = domain;
-      
-      // find pages in category
-      wm.category.findPagesInCategory(wm.category.domain, category);
+      setTimeout(function() {
+        // parse url to get domain and page
+        var url = window.location.href;
+        var domain = wm.category.getQueryArg(url, 'domain');
+        var category = wm.category.getQueryArg(url, 'category');
+        
+        // use domain arg if available; otherwise use default
+        if (domain)
+          wm.category.domain = domain;
+        
+        // find pages in category
+        wm.category.findPagesInCategory(wm.category.domain, category);
+      }, 100);
     }
 
     this.getQueryArg = function(url, name) {
