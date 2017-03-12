@@ -7,6 +7,9 @@
     // **********************************************
     // member variables
     // **********************************************
+    // test mode
+    this.production = true;
+    
     // wikimedia domain; EX: en.wikipedia.org
     this.domain = 'en.wikipedia.org';
 
@@ -59,17 +62,15 @@
     // **********************************************
     this.findPagesInCategory = function(domain, category) {
       // run ajax; NOTE: must specify origin to bypass CORS; http://stackoverflow.com/a/38921370
-      var url = 'https://' + domain + '/w/api.php?action=query&format=json&formatversion=2&origin=*&list=categorymembers&cmlimit=' + wm.category.excerptsMax + '&cmtitle=Category:' + category;
-      wm.category.runAjax(url, wm.category.findPagesInCategoryCallback);      
-      /*
-      */
-      
-      // run mock code
-      /*
-      var root = {"query":{"categorymembers":[{"pageid":9228,"ns":0,"title":"Earth"},{"pageid":51506837,"ns":0,"title":"Outline of Earth"},{"pageid":25287133,"ns":0,"title":"Anywhere on Earth"},{"pageid":174069,"ns":0,"title":"Asteroid impact avoidance"},{"pageid":35971482,"ns":0,"title":"Day length fluctuations"},{"pageid":33256286,"ns":0,"title":"Demographics of the world"},{"pageid":19509955,"ns":0,"title":"Earth in culture"},{"pageid":212485,"ns":0,"title":"Earth religion"},{"pageid":944638,"ns":0,"title":"Earth's energy budget"},{"pageid":41077022,"ns":0,"title":"Earth's internal heat budget"}]}};
-      var root = {"query":{"categorymembers":[{"pageid":9228,"ns":0,"title":"Earth"}]}};
-      wm.category.findPagesInCategoryCallbackRoot(root);
-      */
+      if (wm.category.production) {
+        var url = 'https://' + domain + '/w/api.php?action=query&format=json&formatversion=2&origin=*&list=categorymembers&cmlimit=' + wm.category.excerptsMax + '&cmtitle=Category:' + category;
+        wm.category.runAjax(url, wm.category.findPagesInCategoryCallback);      
+      }
+      else {      
+      // var root = {"query":{"categorymembers":[{"pageid":9228,"ns":0,"title":"Earth"},{"pageid":51506837,"ns":0,"title":"Outline of Earth"},{"pageid":25287133,"ns":0,"title":"Anywhere on Earth"},{"pageid":174069,"ns":0,"title":"Asteroid impact avoidance"},{"pageid":35971482,"ns":0,"title":"Day length fluctuations"},{"pageid":33256286,"ns":0,"title":"Demographics of the world"},{"pageid":19509955,"ns":0,"title":"Earth in culture"},{"pageid":212485,"ns":0,"title":"Earth religion"},{"pageid":944638,"ns":0,"title":"Earth's energy budget"},{"pageid":41077022,"ns":0,"title":"Earth's internal heat budget"}]}};
+        var root = {"query":{"categorymembers":[{"pageid":9228,"ns":0,"title":"Earth"}]}};
+        wm.category.findPagesInCategoryCallbackRoot(root);
+      }
     }
 
     this.findPagesInCategoryCallback = function() {
@@ -96,7 +97,7 @@
         wm.category.categoriesTotal++;
         
         // assign score
-        category.score = 0;
+        category.score = 'N/A';
       }
       
       // now, get excerpts
@@ -120,19 +121,17 @@
         }
         
         // run ajax; NOTE: must specify origin to bypass CORS; http://stackoverflow.com/a/38921370
-        var url = 'https://' + wm.category.domain + '/w/api.php?action=query&format=json&formatversion=2&origin=*&prop=extracts&exintro=1&explaintext&titles=' + category.title;
-        wm.category.runAjax(url, wm.category.getExcerptCallback);
-        /*
-        */
-        
-        // run mock code
-        /*
-        var root = {"query":{"pages":
-        [
-         {"pageid":9228,"ns":0,"title":"Earth","extract":"Earth (Greek: Γαῖα Gaia; Latin: Terra)."}
-        ]}};
-        wm.category.getExcerptCallbackRoot(root);
-        */
+        if (wm.category.production) {
+          var url = 'https://' + wm.category.domain + '/w/api.php?action=query&format=json&formatversion=2&origin=*&prop=extracts&exintro=1&explaintext&titles=' + category.title;
+          wm.category.runAjax(url, wm.category.getExcerptCallback);
+        }
+        else {
+          var root = {"query":{"pages":
+          [
+           {"pageid":9228,"ns":0,"title":"Earth","extract":"Earth (Greek: Γαῖα Gaia; Latin: Terra)."}
+          ]}};
+          wm.category.getExcerptCallbackRoot(root);
+        }
       }
     }
     this.getExcerptCallback = function() {
@@ -148,12 +147,17 @@
       var excerpt = page.extract;
     
       // calc readability score
-      var score = wm.category.calcReadabilityScore(excerpt);
+      var score = wm.category.calcReadabilityScore(page.title, excerpt);
       
       // update local category
       var category = wm.category.categories[page_id];
       category.excerpt = excerpt;
-      category.score = score;
+      category.score = score[0];
+      category.totalSentences = score[1];
+      category.totalWords = score[2];
+      category.totalSyllables = score[3];
+      if (!category.score)
+        console.log(JSON.stringify(category));
       
       // if last category, print all
       if (++wm.category.excerptsFound == wm.category.categoriesTotal) {
@@ -164,22 +168,25 @@
     // **********************************************
     // calc readability
     // **********************************************
-    this.calcReadabilityScore = function(s) {
+    this.calcReadabilityScore = function(title, s) {
       // REF: https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests
       
       // count words and sentences
       var words = wm.category.toWordArray(s);
+      if (words.length == 1) return [999, 0, 0, 0];
       var totalWords = words.length;
       var totalSentences = wm.category.countSentences(s);
       
       // count syllables
       var totalSyllables = 0;
-      for (var word in words) {
-        totalSyllables += wm.category.countSyllablesInWord(word);
+      var wordsLength = words.length;
+      for (var i = 0; i < wordsLength; i++) {
+        totalSyllables += wm.category.countSyllablesInWord(words[i]);
       }
 
       // calc score: again, see https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests
-      return 206.835 - (1.015 * (totalWords / totalSentences)) - (84.6 * (totalSyllables / totalWords));
+      var score = 206.835 - (1.015 * (totalWords / totalSentences)) - (84.6 * (totalSyllables / totalWords));
+      return [score, totalSentences, totalWords, totalSyllables];
     }
     
     this.toWordArray = function(s){
@@ -192,7 +199,25 @@
     
     this.countSentences = function(s) {
       // REF: http://stackoverflow.com/questions/35215348/count-sentences-in-string-with-javascript
-      return s.replace(/\w[.?!](\s|$)/g, "$1|").split("|").length;
+      var replaced = s.replace(/\w[.?!](\s|$)/g, "$1|");
+      var arr = replaced.split("|");
+      var arr_len = arr.length;
+      var count = 0;
+      for (var i = 0; i < arr_len; i++) {
+        var sentence = arr[i];
+        sentence = sentence.trim(); // remove any whitespace        
+        // ignore 0 length sentences; note that "Yes." will become ["Yes", ""] so 2nd needs to be ignored
+        if (sentence.length == 0) continue;
+
+        // add back acronyms; 5 is a heuristic for maximum length of acronym
+        if (sentence.length < 5) {
+          // ignore; NOTE: not handling "Words U.S.A." will break up into ["Words U", "S", "A"]; 
+        }
+        else {
+          count++;
+        }
+      }
+      return count;
     }
     
     this.countSyllablesInWord = function(word) {
@@ -200,8 +225,13 @@
       word = word.toLowerCase();                                   //word.downcase!
       if(word.length <= 3) {return 1;}                             //return 1 if word.length <= 3
       word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, ''); //word.sub!(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '')
+      if (word == null) return 1;
+      
       word = word.replace(/^y/, '');                               //word.sub!(/^y/, '')
-      return word.match(/[aeiouy]{1,2}/g).length;                  //word.scan(/[aeiouy]{1,2}/).size
+      if (word == null) return 1;
+      
+      word = word.match(/[aeiouy]{1,2}/g);                         //word.scan(/[aeiouy]{1,2}/).size    
+      return word == null ? 1 : word.length;
     }
     
     // **********************************************
@@ -226,11 +256,26 @@
         var page_enc = category.title.replace(/ /g, '_');
         page_enc = encodeURI(page_enc);
         
+        // get score
+        var score = category.score;
+        if (score === 999) {
+          score = 'N/A';
+        }
+        else {
+          score = score.toFixed(2);
+        }
+        
         s += '  <div class="result_div">\n'
           +  '    <div class="result_title tooltip"><a href="https://' + wm.category.domain + '/wiki/' + page_enc + '">' + category.title + '</a>\n'
-          +  '      <span class="tooltiptext">' + category.excerpt + '\n'
+          +  '      <span class="tooltiptext">\n' 
+          +  '        Sentences: ' + category.totalSentences + '<br/>\n' 
+          +  '        Words: ' + category.totalWords + '<br/>\n' 
+          +  '        Syllables: ' + category.totalSyllables + '<br/>\n' 
+          +  '        <br/>\n' 
+          +           category.excerpt
+          +  '      </span>\n' 
           +  '    </div>\n'
-          +  '    <div class="result_score">' + category.score.toFixed(2) + '</div>\n'
+          +  '    <div class="result_score">' + score + '</div>\n'
           +  '  </div>\n';
       }
       s += '</div>';
