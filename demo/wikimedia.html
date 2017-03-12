@@ -29,10 +29,40 @@
 
       border-left: 1px solid #ddd;
     }
+    .result_hover {
+      width:80px;
+      padding:2px;      
+      text-align:center;
+
+      border-left: 1px solid #ddd;
+    }
+    
+    /* REF:https://www.w3schools.com/css/css_tooltip.asp */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      /* border-bottom: 1px dotted black; */
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 100%;
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+      padding: 5px;
+
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 1;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+    }    
   </style>
   <script src="wikimedia.js" type='text/javascript'></script>
 </head>
 <body>
+  Please wait. Generating.
 </body>
 <script>
   wm.category.run();

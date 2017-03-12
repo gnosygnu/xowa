@@ -1,6 +1,6 @@
 /*
   Given a domain and a category, list its member pages and readability score
-  EX: http://localhost/wikimedia.html?domain=en.wikipedia.org&page=Earth
+  EX: http://xowa.org/wikimedia.html?domain=en.wikipedia.org&page=Earth
 */
 (function (wm) {
   wm.category = new function() {
@@ -40,7 +40,7 @@
     }
 
     this.getQueryArg = function(url, name) {
-      //     http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+      // REF: http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
       if (!url) {
         url = window.location.href;
       }
@@ -62,8 +62,8 @@
       /*
       */
       
-      /*
       // run mock code
+      /*
       var root = {"query":{"categorymembers":[{"pageid":9228,"ns":0,"title":"Earth"},{"pageid":51506837,"ns":0,"title":"Outline of Earth"},{"pageid":25287133,"ns":0,"title":"Anywhere on Earth"},{"pageid":174069,"ns":0,"title":"Asteroid impact avoidance"},{"pageid":35971482,"ns":0,"title":"Day length fluctuations"},{"pageid":33256286,"ns":0,"title":"Demographics of the world"},{"pageid":19509955,"ns":0,"title":"Earth in culture"},{"pageid":212485,"ns":0,"title":"Earth religion"},{"pageid":944638,"ns":0,"title":"Earth's energy budget"},{"pageid":41077022,"ns":0,"title":"Earth's internal heat budget"}]}};
       var root = {"query":{"categorymembers":[{"pageid":9228,"ns":0,"title":"Earth"}]}};
       wm.category.findPagesInCategoryCallbackRoot(root);
@@ -123,8 +123,8 @@
         /*
         */
         
-        /*
         // run mock code
+        /*
         var root = {"query":{"pages":
         [
          {"pageid":9228,"ns":0,"title":"Earth","extract":"Earth (Greek: Γαῖα Gaia; Latin: Terra)."}
@@ -145,10 +145,10 @@
       var page_id = page.pageid;
       var excerpt = page.extract;
     
-      // calc score
+      // calc readability score
       var score = wm.category.calcReadabilityScore(excerpt);
       
-      // update category
+      // update local category
       var category = wm.category.categories[page_id];
       category.excerpt = excerpt;
       category.score = score;
@@ -164,15 +164,19 @@
     // **********************************************
     this.calcReadabilityScore = function(s) {
       // REF: https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests
+      
+      // count words and sentences
       var words = wm.category.toWordArray(s);
       var totalWords = words.length;
       var totalSentences = wm.category.countSentences(s);
       
+      // count syllables
       var totalSyllables = 0;
       for (var word in words) {
         totalSyllables += wm.category.countSyllablesInWord(word);
       }
 
+      // calc score: again, see https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests
       return 206.835 - (1.015 * (totalWords / totalSentences)) - (84.6 * (totalSyllables / totalWords));
     }
     
@@ -204,24 +208,32 @@
     this.printResults = function() {
       // sort results by score
       wm.category.categories.sort(wm.category.compareResult);
-      
+            
       // generate string
-      var s = '';
-      s += '<div class="results_div">\n';
-      s += '  <div class="result_div">\n';
-      s += '    <div class="result_title result_header">Title</div>\n';
-      s += '    <div class="result_score result_header">Score</div>\n';
-      s += '  </div>';
+      var s 
+        = '<div class="results_div">\n'
+        + '  <div class="result_div">\n'
+        + '    <div class="result_title result_header">Title</div>\n'
+        + '    <div class="result_score result_header">Score</div>\n'
+        + '  </div>'
+        ;
       for (var page_id in wm.category.categories) {
         var category = wm.category.categories[page_id];
-        s += '  <div class="result_div">\n';
-        s += '    <div class="result_title">' + category.title + '</div>\n'
-        s += '    <div class="result_score">' + category.score.toFixed(2) + '</div>\n'
-        s += '  </div>';
+        
+        // get category_title for url
+        var page_enc = category.title.replace(/ /g, '_');
+        page_enc = encodeURI(page_enc);
+        
+        s += '  <div class="result_div">\n'
+          +  '    <div class="result_title tooltip"><a href="https://' + wm.category.domain + '/wiki/' + page_enc + '">' + category.title + '</a>\n'
+          +  '      <span class="tooltiptext">' + category.excerpt + '\n'
+          +  '    </div>\n'
+          +  '    <div class="result_score">' + category.score.toFixed(2) + '</div>\n'
+          +  '  </div>\n';
       }
       s += '</div>';
       
-      // print it
+      // print string
       document.body.innerHTML = s;
     }
     this.compareResult = function(lhs, rhs) {
