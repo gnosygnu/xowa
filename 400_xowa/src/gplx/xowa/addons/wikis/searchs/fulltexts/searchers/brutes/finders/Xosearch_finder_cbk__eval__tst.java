@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.fulltexts.finders; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.fulltexts.*;
+package gplx.xowa.addons.wikis.searchs.fulltexts.searchers.brutes.finders; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.fulltexts.*; import gplx.xowa.addons.wikis.searchs.fulltexts.searchers.*; import gplx.xowa.addons.wikis.searchs.fulltexts.searchers.brutes.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xosearch_finder_cbk__eval__tst {
 	private final    Xosearch_finder_cbk__eval__fxt fxt = new Xosearch_finder_cbk__eval__fxt();

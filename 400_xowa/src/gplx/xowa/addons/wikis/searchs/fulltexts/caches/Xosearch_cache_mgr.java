@@ -47,12 +47,6 @@ public class Xosearch_cache_mgr {
 		page.Lines().Add(line);
 	}
 	public Object Get_pages_rng(int qry_id, byte[] wiki, int page_seq_bgn, int page_seq_end) {
-//			List_adp list = List_adp_.New();
-//			for (int i = page_seq_bgn; i < page_seq_end; i++) {
-//				Xosearch_cache_qry page = (Xosearch_cache_qry)qry_hash.Get_at(i);
-//				list.Add(page);	
-//			}
-//			return list.To_ary_and_clear(typeof(Xosearch_cache_itm));
 		return null;
 	}
 	public Xosearch_cache_line[] Get_lines_rest(int qry_id, byte[] wiki_bry, int page_id) {
@@ -61,7 +55,7 @@ public class Xosearch_cache_mgr {
 		Xosearch_cache_wiki wiki = (Xosearch_cache_wiki)qry.Wikis().Get_by(wiki_bry);
 		Xosearch_cache_page page = (Xosearch_cache_page)wiki.Pages().Get_by(page_id);
 
-		// loop lines from 1 to n
+		// loop lines from 1 to n; note "1" b/c results will always show at least 1st line
 		List_adp list = List_adp_.New();
 		int lines_len = page.Lines().Len();
 		for (int i = 1; i < lines_len; i++) {

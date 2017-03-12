@@ -14,23 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.fulltexts.indexers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.fulltexts.*;
-import gplx.gflucene.*;
-public class Xosearch_indexer {
-	private final    Gflucene_index_bldr index_wtr = new Gflucene_index_bldr();
-	public void Init(Xow_wiki wiki) {
-		Io_url search_dir = wiki.Fsys_mgr().Root_dir().GenSubDir_nest("data", "search");
-		Io_mgr.Instance.DeleteDirDeep(search_dir);
-		index_wtr.Init(search_dir.Xto_api());
+import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
+public class Xosearch_indexer_cmd extends Xob_cmd__base {
+	public Xosearch_indexer_cmd(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
+	@Override public void Cmd_run() {
+		wiki.Init_assert();
+		new Xosearch_indexer_mgr().Exec(wiki);
 	}
-	public void Index(Xoae_page wpg) {
-		// TODO: skip if not main_ns
-		Index(wpg.Db().Page().Id(), wpg.Db().Page().Score(), wpg.Ttl().Page_txt(), wpg.Db().Html().Html_bry());
-	}
-	public void Index(int page_id, int score, byte[] ttl, byte[] html) {
-		Gflucene_index_data data = new Gflucene_index_data(page_id, score, String_.new_u8(ttl), String_.new_u8(html));
-		index_wtr.Exec(data);
-	}
-	public void Term() {
-		index_wtr.Term();
-	}
+
+	@Override public String Cmd_key() {return "search.index";}
+	public static final    Xob_cmd Prototype = new Xosearch_indexer_cmd(null, null);
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xosearch_indexer_cmd(bldr, wiki);}
 }
