@@ -42,6 +42,10 @@
         if (domain)
           wm.category.domain = domain;
         
+        // handle bare url
+        if (!wm.category.category_title)
+          return;
+        
         // write status
         wm.category.writeHtml('<div class="header_div">Evaluating Category:' + wm.category.category_title + '. Please wait...</div>');
         
