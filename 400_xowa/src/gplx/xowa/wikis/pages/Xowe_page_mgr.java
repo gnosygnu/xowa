@@ -64,7 +64,12 @@ public class Xowe_page_mgr {
 		Wait_for_popups(wiki.App());
 
 		// auto-update
-		read_mgr.Auto_update(wiki, page, ttl);
+		if (read_mgr.Auto_update(wiki, page, ttl)) {
+			// page-sync occurred; reload metadata, especially to pick up Html_db_id; DATE:2017-03-13
+			page = wiki.Data_mgr().Load_page_and_parse(url, ttl, wiki.Lang(), tab, false);
+			ttl = page.Ttl();	// note that Load_page_and_parse can redirect ttl; EX: Special:Random -> A; DATE:2017-01-05
+		}
+			
 
 		// load from html_db
 		boolean from_html_db = page.Db().Page().Html_db_id() != -1;
@@ -72,7 +77,9 @@ public class Xowe_page_mgr {
 		if (from_html_db) {
 			if (read_from_html_db_preferred) {
 				wiki.Html__hdump_mgr().Load_mgr().Load_by_xowe(page);
-				from_html_db = Bry_.Len_gt_0(page.Db().Html().Html_bry());	// NOTE: archive.org has some wtxt_dbs which included page|html_db_id without actual html_dbs; DATE:2016-06-22
+				int html_len = Bry_.Len(page.Db().Html().Html_bry());
+				from_html_db = html_len > 0;	// NOTE: archive.org has some wtxt_dbs which included page|html_db_id without actual html_dbs; DATE:2016-06-22
+				Gfo_usr_dlg_.Instance.Log_many("", "", "page_load: loaded html; page=~{0} html_len=~{1}", ttl.Full_db(), html_len);
 			}
 			else
 				from_html_db = false;

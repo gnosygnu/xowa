@@ -48,13 +48,17 @@ public class Xosync_update_mgr {
 		if (data == null) return;
 
 		// parse
+		Gfo_usr_dlg_.Instance.Log_many("", "", "page_sync: parsing page; page=~{0}", page_ttl.Full_db());
 		Parse(hpg, wiki, hctx.Page__url(), data.Revn_html());
 
 		// get existing html_tbl
 		Xow_db_file html_db = html_tbl_mgr.Get_html_db(wiki);
-		html_tbl_mgr.Save_html(wiki, html_db, data.Page_id(), data.Revn_id(), hpg.Db().Html().Html_bry());
+		byte[] html_bry = hpg.Db().Html().Html_bry();
+		Gfo_usr_dlg_.Instance.Log_many("", "", "page_sync: saving html; page=~{0} html_len=~{1}", page_ttl.Full_db(), Bry_.Len(html_bry));
+		html_tbl_mgr.Save_html(wiki, html_db, data.Page_id(), data.Revn_id(), html_bry);
 
 		// download files
+		Gfo_usr_dlg_.Instance.Log_many("", "", "page_sync: downloading files; page=~{0}", page_ttl.Full_db());
 		hpg.Ctor_by_hview(wiki, wiki.Utl__url_parser().Parse(page_ttl.Full_db()), page_ttl, data.Page_id());
 		gplx.xowa.files.Xof_file_wkr file_thread = new gplx.xowa.files.Xof_file_wkr
 			( wiki.File__orig_mgr(), wiki.File__bin_mgr(), wiki.File__mnt_mgr()
