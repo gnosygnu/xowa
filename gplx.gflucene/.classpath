@@ -7,6 +7,6 @@
 	<classpathentry kind="lib" path="lib/lucene-memory-6.4.2.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-highlighter-6.4.2.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-queryparser-6.4.2.jar"/>
-	<classpathentry kind="lib" path="C:/000/200_dev/110_java/gplx.gflucene/lib/lucene-analyzers-common-6.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-analyzers-common-6.4.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
