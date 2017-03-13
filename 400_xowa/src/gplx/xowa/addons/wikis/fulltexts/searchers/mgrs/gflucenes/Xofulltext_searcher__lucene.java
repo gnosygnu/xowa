@@ -15,18 +15,23 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.gflucenes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.*;
 import gplx.gflucene.*;
+import gplx.gflucene.core.*;
+import gplx.gflucene.indexers.*;
+import gplx.gflucene.searchers.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
 public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
-	private final    Gflucene_searcher searcher = new Gflucene_searcher();
+	private final    Gflucene_searcher_mgr searcher = new Gflucene_searcher_mgr();
 	public void Search(Xofulltext_searcher_ui cbk, Xow_wiki wiki, Xofulltext_searcher_args args) {
 		// create list
 		List_adp list = List_adp_.New();
 
 		// init searcher with wiki
-		searcher.Init(wiki.Fsys_mgr().Root_dir().GenSubDir_nest("data", "search").Xto_api());
+		searcher.Init(new Gflucene_index_data
+		( Gflucene_analyzer_data.New_data_from_locale(wiki.Lang().Key_str())
+		, wiki.Fsys_mgr().Root_dir().GenSubDir_nest("data", "search").Xto_api()));
 
 		// exec search
-		searcher.Exec(list, new Gflucene_searcher_data(String_.new_u8(args.query), args.max_pages_per_wiki));
+		searcher.Exec(list, new Gflucene_searcher_qry(String_.new_u8(args.query), args.max_pages_per_wiki));
 
 		// term
 		searcher.Term();
@@ -34,7 +39,7 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 		// loop list
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {
-			Gflucene_index_data found = (Gflucene_index_data)list.Get_at(i);
+			Gflucene_doc_data found = (Gflucene_doc_data)list.Get_at(i);
 
 			// call page found
 			Xofulltext_searcher_page page = new Xofulltext_searcher_page(args.query_id, wiki.Domain_str(), found.page_id, found.title, false);
