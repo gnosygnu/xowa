@@ -69,7 +69,6 @@ public class Xowe_page_mgr {
 			page = wiki.Data_mgr().Load_page_and_parse(url, ttl, wiki.Lang(), tab, false);
 			ttl = page.Ttl();	// note that Load_page_and_parse can redirect ttl; EX: Special:Random -> A; DATE:2017-01-05
 		}
-			
 
 		// load from html_db
 		boolean from_html_db = page.Db().Page().Html_db_id() != -1;

@@ -2,11 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/100_core"/>
-	<classpathentry kind="lib" path="lib/lucene-core-6.4.2.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-memory-6.4.2.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-highlighter-6.4.2.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-queryparser-6.4.2.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-analyzers-common-6.4.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/lucene-analyzers-common-5.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-core-5.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-highlighter-5.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-memory-5.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-queryparser-5.5.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

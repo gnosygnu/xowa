@@ -16,7 +16,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.gflucene.analyzers; import gplx.*; import gplx.gflucene.*;
 import gplx.gflucene.core.*;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.CharArraySet;
 public class Gflucene_analyzer_mgr_ {
 		public static Analyzer New_analyzer(String key) {
 		if 		(String_.Eq(key, "standard"))        return new org.apache.lucene.analysis.standard.StandardAnalyzer();
