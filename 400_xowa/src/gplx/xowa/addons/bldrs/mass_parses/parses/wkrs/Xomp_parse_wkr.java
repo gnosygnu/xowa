@@ -19,7 +19,7 @@ import gplx.xowa.files.origs.*;
 import gplx.xowa.htmls.core.bldrs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*;
 import gplx.xowa.addons.bldrs.mass_parses.parses.mgrs.*; import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.pools.*;
-import gplx.xowa.addons.wikis.searchs.fulltexts.indexers.*;
+import gplx.xowa.addons.wikis.fulltexts.indexers.bldrs.*;
 public class Xomp_parse_wkr implements Gfo_invk {
 	// mgr vars
 	private final    Xomp_parse_mgr mgr;
@@ -40,14 +40,14 @@ public class Xomp_parse_wkr implements Gfo_invk {
 	private final    int uid;
 	private Xomp_wkr_db wkr_db;
 
-	private final    Xosearch_indexer indexer;
+	private final    Xofulltext_indexer_wkr indexer;
 
 	private final    List_adp list = List_adp_.New(); private int list_idx = 0, list_len = 0;		
 	private int done_count; private long done_time;
 	public Xomp_parse_wkr(Xomp_parse_mgr mgr, Xomp_parse_mgr_cfg cfg
 		, Xomp_mgr_db mgr_db, Xomp_page_pool page_pool
 		, Xomp_prog_mgr prog_mgr, Xof_orig_wkr file_orig_wkr, Xomp_ns_ord_mgr ns_ord_mgr
-		, Xowe_wiki wiki, Xosearch_indexer indexer, int uid) {
+		, Xowe_wiki wiki, Xofulltext_indexer_wkr indexer, int uid) {
 		// mgr vars
 		this.mgr = mgr; this.mgr_db = mgr_db;
 		this.page_pool = page_pool; this.prog_mgr = prog_mgr; this.file_orig_wkr = file_orig_wkr;
