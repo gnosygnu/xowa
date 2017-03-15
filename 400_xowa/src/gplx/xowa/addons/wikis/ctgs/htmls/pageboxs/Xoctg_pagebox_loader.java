@@ -49,8 +49,9 @@ class Xoctg_pagebox_loader implements Select_in_cbk {
 
 		// select
 		attach_mgr.Attach();
-		Db_rdr rdr = cat_link_conn.Stmt_sql(sql).Exec_select__rls_auto();
+		Db_rdr rdr = Db_rdr_.Empty;
 		try {
+			rdr = cat_link_conn.Stmt_sql(sql).Exec_select__rls_auto();
 			while (rdr.Move_next()) {
 				Xoa_ttl ttl = wiki.Ttl_parse(rdr.Read_int("page_namespace"), rdr.Read_bry_by_str("page_title"));
 				// check if ttl exists already in hash; add it if not; check is not needed now b/c html_dbs will never put itms in hash, but may need in future if merging "wtxt" and "ctgs_dbs"
@@ -59,6 +60,9 @@ class Xoctg_pagebox_loader implements Select_in_cbk {
 					itm = hash.Add_by_ttl(ttl);
 				itm.Load_by_db(rdr.Read_int("cl_to_id"), DateAdp_.unixtime_utc_ms_(rdr.Read_long("cl_timestamp_unix")));
 			}
+		}
+		catch (Exception e) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "category.pagebox: fatal error while retrieving categories; page=~{0} err=~{1}", page_id, Err_.Message_gplx_log(e));
 		}
 		finally {
 			rdr.Rls();
