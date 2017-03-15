@@ -52,8 +52,8 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.auto_wildcard_end", search_args.auto_wildcard_end);
 			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.expand_matches_section", search_args.expand_matches_section);
 			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.show_all_matches", search_args.show_all_matches);
-			cfg_mgr.Get_int_app_or ("xowa.addon.search.fulltext.special.max_pages_per_wiki", search_args.max_pages_per_wiki);
-			cfg_mgr.Get_str_app_or ("xowa.addon.search.fulltext.special.namespaces", search_args.namespaces);
+			cfg_mgr.Set_int_app ("xowa.addon.search.fulltext.special.max_pages_per_wiki", search_args.max_pages_per_wiki);
+			cfg_mgr.Set_str_app ("xowa.addon.search.fulltext.special.namespaces", search_args.namespaces);
 		}
 
 		// launch thread
