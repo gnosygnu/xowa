@@ -19,12 +19,14 @@ import gplx.gflucene.indexers.*;
 public class Xofulltext_indexer_wkr {
 	private final    Gflucene_indexer_mgr index_wtr = new Gflucene_indexer_mgr();
 	public void Init(Xow_wiki wiki) {
-		Io_url search_dir = wiki.Fsys_mgr().Root_dir().GenSubDir_nest("data", "search");
-		Io_mgr.Instance.DeleteDirDeep(search_dir);
-		;
+		// delete existing dir
+		Io_url index_dir = Xosearch_fulltext_addon.Get_index_dir(wiki);
+		Io_mgr.Instance.DeleteDirDeep(index_dir);
+
+		// init index_dir
 		index_wtr.Init(new Gflucene_index_data
 		( Gflucene_analyzer_data.New_data_from_locale(wiki.Lang().Key_str())
-		, search_dir.Xto_api()));
+		, index_dir.Xto_api()));
 	}
 	public void Index(Xoae_page wpg) {
 		// TODO: skip if not main_ns

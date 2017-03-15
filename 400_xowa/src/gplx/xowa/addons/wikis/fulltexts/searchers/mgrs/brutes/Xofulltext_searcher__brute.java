@@ -22,10 +22,7 @@ import gplx.xowa.addons.wikis.fulltexts.searchers.caches.*;
 public class Xofulltext_searcher__brute implements Xofulltext_searcher {
 	private final    Xofulltext_finder_mgr finder = new Xofulltext_finder_mgr();
 	private final    Xofulltext_finder_cbk__eval cbk_eval = new Xofulltext_finder_cbk__eval();
-	private final    Xofulltext_finder_cbk__highlight cbk_highlight;
-	public Xofulltext_searcher__brute(Xoa_app app, Xog_cbk_trg cbk_trg, Xofulltext_cache_mgr cache_mgr) {
-		this.cbk_highlight = new Xofulltext_finder_cbk__highlight(app, cbk_trg, cache_mgr);
-	}
+	private final    Xofulltext_finder_cbk__highlight cbk_highlight = new Xofulltext_finder_cbk__highlight();
 	public void Search(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_searcher_args args) {
 		// get pages from db
 		Db_conn page_conn = wiki.Data__core_mgr().Tbl__page().Conn();
@@ -62,7 +59,7 @@ public class Xofulltext_searcher__brute implements Xofulltext_searcher {
 
 					// do highlight
 					if (found <= args.max_pages_per_wiki) {
-						cbk_highlight.Init(args.query, args.query_id, wiki, page_id, ttl.Full_db(), args.show_all_matches);
+						cbk_highlight.Init(ui, args.query_id, wiki, page_id, ttl.Full_db(), args.show_all_matches);
 						ui.Send_page_add(new Xofulltext_searcher_page
 							( args.query_id
 							, String_.new_u8(wiki_domain)

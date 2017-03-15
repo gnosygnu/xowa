@@ -36,4 +36,9 @@ public class Xosearch_fulltext_addon implements Xoax_addon_itm, Xoax_addon_itm__
 	}
 
 	public String Addon__key() {return ADDON__KEY;} private static final String ADDON__KEY = "xowa.wiki.fulltext";
+
+	public static Io_url Get_index_dir(Xow_wiki wiki) {return Get_index_dir(wiki.Fsys_mgr().Root_dir());}
+	public static Io_url Get_index_dir(Io_url wiki_dir) {
+		return wiki_dir.GenSubDir_nest("data", "search", "java8-v1");
+	}
 }

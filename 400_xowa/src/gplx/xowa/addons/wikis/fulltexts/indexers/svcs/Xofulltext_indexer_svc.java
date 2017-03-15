@@ -48,7 +48,7 @@ class Xofulltext_indexer_svc implements Gfo_invk {
 			}
 
 			wiki.Init_by_wiki();
-			Io_url search_dir = wiki.Fsys_mgr().Root_dir().GenSubDir_nest("data", "search");
+			Io_url search_dir = Xosearch_fulltext_addon.Get_index_dir(wiki);
 			if (Io_mgr.Instance.ExistsDir(search_dir)) {
 				app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.fulltext_indexer.status__note__recv", gplx.core.gfobjs.Gfobj_nde.New()
 					.Add_str("note", Datetime_now.Get().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss() + ": search dir already exists; please delete it manually before reindexing; " + String_.new_u8(domain)));

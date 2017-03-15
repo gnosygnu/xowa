@@ -32,10 +32,13 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.highlight.Formatter;
+import org.apache.lucene.search.highlight.Fragmenter;
 import org.apache.lucene.search.highlight.Highlighter;
 import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
 import org.apache.lucene.search.highlight.QueryScorer;
+import org.apache.lucene.search.highlight.SimpleFragmenter;
 import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
+import org.apache.lucene.search.highlight.SimpleSpanFragmenter;
 import org.apache.lucene.search.highlight.TextFragment;
 import org.apache.lucene.search.highlight.TokenSources;
 import org.apache.lucene.store.FSDirectory;
@@ -60,16 +63,21 @@ public class Gflucene_highlighter_mgr {
 		
 		// create highlighter
 		SimpleHTMLFormatter htmlFormatter = new SimpleHTMLFormatter("<span class='snip_highlight'>", "</span>");
-		Highlighter highlighter = new Highlighter(htmlFormatter, new QueryScorer(query));
+		QueryScorer scorer = new QueryScorer(query);
+		scorer.setExpandMultiTermQuery(false);
+		Highlighter highlighter = new Highlighter(htmlFormatter, scorer);
+		SimpleFragmenter fragmenter = new SimpleFragmenter(100);
+		highlighter.setTextFragmenter(fragmenter);
 
 		// get token stream
 		String text = doc_data.body;
 		TokenStream tokenStream = analyzer.tokenStream("body", text);
 		
 		// get fragments from stream
-		String[] frags;
+		TextFragment[] frags;
 		try {
-			frags = highlighter.getBestFragments(tokenStream, text, 10);
+//			frags = highlighter.getBestTextFragments(tokenStream, text, false, 1000);
+			frags = highlighter.getBestTextFragments(tokenStream, text, true, 10);
 		} catch (IOException e) {
 			throw Err_.new_exc(e, "lucene_index", "failed to get best", "query", qry_data.query);
 		} catch (InvalidTokenOffsetsException e) {
@@ -80,7 +88,7 @@ public class Gflucene_highlighter_mgr {
 		int frags_len = frags.length;
 		Gflucene_highlighter_item[] array = new Gflucene_highlighter_item[frags_len];
 		for (int i = 0; i < frags_len; i++) {
-			String frag = frags[i];
+			String frag = frags[i].toString();
 			array[i] = new Gflucene_highlighter_item(i, frag);
 		}
 		return array;

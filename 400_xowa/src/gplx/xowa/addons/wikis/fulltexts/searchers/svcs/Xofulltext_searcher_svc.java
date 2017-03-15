@@ -31,10 +31,10 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 	private final    Xoa_app app;
 	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New(Xofulltext_searcher_special.Prototype.Special__meta().Ttl_bry());
 	private final    Xofulltext_cache_mgr cache_mgr = new Xofulltext_cache_mgr();
-	private final    Xofulltext_searcher_ui searcher_cbk;
+	private final    Xofulltext_searcher_ui searcher_ui;
 	public Xofulltext_searcher_svc(Xoa_app app) {
 		this.app = app;
-		this.searcher_cbk = new Xofulltext_searcher_ui__gui(app.Gui__cbk_mgr(), cbk_trg);
+		this.searcher_ui = new Xofulltext_searcher_ui(cache_mgr, app.Gui__cbk_mgr(), cbk_trg);
 	}
 	public void Search(Json_nde args) {
 		// for now, always clear cache; "get_lines_rest" will only work for latest search
@@ -43,6 +43,7 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 		// get search_args
 		Xofulltext_searcher_args search_args = Xofulltext_searcher_args.New_by_json(args);
 		search_args.query_id = cache_mgr.Next_qry_id();
+		cache_mgr.Add(search_args.query_id, search_args.query);
 		
 		// autosave any changes if enabled
 		Xocfg_mgr cfg_mgr = app.Cfg();
@@ -66,11 +67,11 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 			for (byte[] wiki_domain : wiki_domains) {
 				// get wiki and notify
 				Xow_wiki wiki = app.Wiki_mgri().Get_by_or_make_init_y(wiki_domain);
-				searcher_cbk.Send_wiki_add(wiki_domain);
+				searcher_ui.Send_wiki_add(wiki_domain);
 
 				// get searcher and search
 				Xofulltext_searcher searcher = Get_searcher(wiki);
-				searcher.Search(searcher_cbk, wiki, args);
+				searcher.Search(searcher_ui, wiki, args);
 			}
 		} catch (Exception exc) {
 			if (app.Tid_is_edit())
@@ -83,16 +84,15 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 	private void Get_lines_rest(int qry_id, byte[] wiki_bry, int page_id) {
 		Xofulltext_cache_line[] lines = cache_mgr.Get_lines_rest(qry_id, wiki_bry, page_id);
 		for (Xofulltext_cache_line line : lines) {
-			Xofulltext_searcher_line match = new Xofulltext_searcher_line(String_.new_u8(wiki_bry), page_id, line.Line_seq() + 1, String_.new_u8(line.Line_html()));
-			searcher_cbk.Send_line_add(match);
+			searcher_ui.Send_line_add(true, qry_id, wiki_bry, page_id, line.Line_seq(), line.Line_html());
 		}
 	}
 	private Xofulltext_searcher Get_searcher(Xow_wiki wiki) {
-		if (Io_mgr.Instance.ExistsDir(wiki.Fsys_mgr().Root_dir().GenSubDir_nest("data", "search"))) {
+		if (Io_mgr.Instance.ExistsDir(Xosearch_fulltext_addon.Get_index_dir(wiki))) {
 			return new Xofulltext_searcher__lucene();
 		}
 		else {
-			return new Xofulltext_searcher__brute(app, cbk_trg, cache_mgr);
+			return new Xofulltext_searcher__brute();
 		}
 	}
 

@@ -23,17 +23,17 @@ import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
 class Xofulltext_highlighter_mgr implements Gfo_invk {
 	private final    Xofulltext_searcher_ui ui;
 	private final    Xow_wiki wiki;
-	private final    String wiki_domain;
-	private final    List_adp list;
+	private final    Xofulltext_searcher_args searcher_args;
 	private final    Gflucene_analyzer_data analyzer_data;
 	private final    Gflucene_searcher_qry searcher_data;
 	private final    Gflucene_highlighter_mgr highlighter_mgr = new Gflucene_highlighter_mgr();
 	private final    Xoh_page hpg = new Xoh_page();
 	private final    Xowd_page_itm tmp_page_row = new Xowd_page_itm();
-	public Xofulltext_highlighter_mgr(Xofulltext_searcher_ui ui, Xow_wiki wiki, Gflucene_analyzer_data analyzer_data, Gflucene_searcher_qry searcher_data, List_adp list) {
+	private final    List_adp list;
+	public Xofulltext_highlighter_mgr(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_searcher_args searcher_args, Gflucene_analyzer_data analyzer_data, Gflucene_searcher_qry searcher_data, List_adp list) {
 		this.ui = ui;
 		this.wiki = wiki;
-		this.wiki_domain = wiki.Domain_str();
+		this.searcher_args = searcher_args;
 		this.analyzer_data = analyzer_data;
 		this.searcher_data = searcher_data;
 		this.list = list;
@@ -76,7 +76,7 @@ class Xofulltext_highlighter_mgr implements Gfo_invk {
 		int page_id = item.page_id;
 		Gflucene_highlighter_item[] lines = highlighter_mgr.Exec(searcher_data, item);
 		for (Gflucene_highlighter_item line : lines) {
-			ui.Send_line_add(new Xofulltext_searcher_line(wiki_domain, page_id, line.num, line.text));
+			ui.Send_line_add(searcher_args.show_all_matches, searcher_args.query_id, wiki.Domain_bry(), page_id, line.num, Bry_.new_u8(line.text));
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

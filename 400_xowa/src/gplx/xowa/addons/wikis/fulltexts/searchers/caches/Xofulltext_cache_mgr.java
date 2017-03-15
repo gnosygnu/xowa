@@ -20,12 +20,18 @@ public class Xofulltext_cache_mgr {
 	public void Clear() {
 		qry_hash.Clear();
 	}
-	public void Add(int query_id, byte[] query, byte[] wiki_bry, int page_seq, int page_id, int line_seq, byte[] line_html) {
-		// get qry
+	public void Add(int query_id, byte[] query) {
 		Xofulltext_cache_qry qry = (Xofulltext_cache_qry)qry_hash.Get_by(query_id);
 		if (qry == null) {
 			qry = new Xofulltext_cache_qry(query_id, query);
 			qry_hash.Add(query_id, qry);
+		}
+	}
+	public void Add(int query_id, byte[] wiki_bry, int page_id, int line_seq, byte[] line_html) {
+		// get qry
+		Xofulltext_cache_qry qry = (Xofulltext_cache_qry)qry_hash.Get_by(query_id);
+		if (qry == null) {
+			throw Err_.new_wo_type("query not found; query_id=~{0}", query_id);
 		}
 
 		// get wiki
@@ -38,7 +44,7 @@ public class Xofulltext_cache_mgr {
 		// get page
 		Xofulltext_cache_page page = (Xofulltext_cache_page)wiki.Pages().Get_by(page_id);
 		if (page == null) {
-			page = new Xofulltext_cache_page(page_id, page_seq);
+			page = new Xofulltext_cache_page(page_id, wiki.Pages().Count());
 			wiki.Pages().Add(page_id, page);
 		}
 

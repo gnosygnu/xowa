@@ -30,7 +30,7 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 		Gflucene_analyzer_data analyzer_data = Gflucene_analyzer_data.New_data_from_locale(wiki.Lang().Key_str());
 		searcher.Init(new Gflucene_index_data
 		( analyzer_data
-		, wiki.Fsys_mgr().Root_dir().GenSubDir_nest("data", "search").Xto_api()));
+		, Xosearch_fulltext_addon.Get_index_dir(wiki).Xto_api()));
 
 		// exec search
 		Gflucene_searcher_qry searcher_data = new Gflucene_searcher_qry(String_.new_u8(args.query), args.max_pages_per_wiki);
@@ -50,7 +50,7 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 		}
 
 		// create highlighter thread and launch it
-		Xofulltext_highlighter_mgr highlighter_mgr = new Xofulltext_highlighter_mgr(ui, wiki, analyzer_data, searcher_data, list);
+		Xofulltext_highlighter_mgr highlighter_mgr = new Xofulltext_highlighter_mgr(ui, wiki, args, analyzer_data, searcher_data, list);
 		gplx.core.threads.Thread_adp_.Start_by_key("highlighter", Cancelable_.Never, highlighter_mgr, Xofulltext_highlighter_mgr.Invk__highlight);
 	}
 }
