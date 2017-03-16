@@ -40,6 +40,7 @@ public class Xof_repo_itm implements Gfo_invk {
 	public byte[][]			Mode_names()		{return mode_names;}	private byte[][] mode_names = new byte[][] {Xof_img_mode_.Names_ary[0], Xof_img_mode_.Names_ary[1]};
 	public Xof_rule_grp		Ext_rules()			{return ext_rules;}		private Xof_rule_grp ext_rules;
 	public boolean			Primary()			{return primary;}		private boolean primary;
+	public void             Url_max_len_(int v) {url_max_len = v;}      private int url_max_len = 250;
 
 	public Xof_repo_itm		Fsys_is_wnt_(boolean v) {fsys_is_wnt = v; return this;} 
 	public Xof_repo_itm		Shorten_ttl_(boolean v) {shorten_ttl = v; return this;} 
@@ -82,7 +83,26 @@ public class Xof_repo_itm implements Gfo_invk {
 	}
 	public byte[] Gen_name_trg(Bry_bfr tmp_bfr, byte[] bry, byte[] md5, Xof_ext ext) {
 		byte[] rv = Gen_name_src(tmp_bfr, bry);
-		return shorten_ttl ? Xof_itm_ttl_.Shorten(tmp_bfr, rv, Ttl__max_len, md5, ext.Ext()) : rv;
+		if (shorten_ttl) {
+			int max = url_max_len;
+			if (fsys_is_wnt) {
+				max = url_max_len          // 250 is approximate max of windows path
+					- root_bry.length      // EX: "C:\xowa\"
+					- 5                    // EX: "file\"
+					- 6                    // EX: "thumb\"
+					- dir_depth * 2        // EX: "0\1\2\3\"; *2  is for "\"
+					- 17                   // 17 is length of "\1234px@1234-1234"
+					- ext.Ext().length + 1 // EX: ".png"; +1 is for "."
+					;
+			}
+			else {
+				max = 180; // legacy val of max title; can probably be higher
+			}
+			return Xof_itm_ttl_.Shorten(tmp_bfr, rv, max, md5, ext.Ext());
+		}
+		else {
+			return rv;
+		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_owner))				throw Err_.new_unimplemented_w_msg("deprecated repo_itm.owner");
@@ -96,5 +116,4 @@ public class Xof_repo_itm implements Gfo_invk {
 		return this;
 	}
 	private static final String Invk_owner = "owner", Invk_fsys_ = "fsys_", Invk_ext_rules_ = "ext_rules_", Invk_primary_ = "primary_", Invk_wmf_api_ = "wmf_api_", Invk_tarball_ = "tarball_", Invk_tid_ = "tid_";
-	public static final int Ttl__max_len = 180;
 }
