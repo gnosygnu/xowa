@@ -20,6 +20,7 @@ import gplx.gflucene.searchers.*;
 import gplx.xowa.htmls.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
+import gplx.xowa.addons.wikis.fulltexts.core.*;
 class Xofulltext_highlighter_mgr implements Gfo_invk {
 	private final    Xofulltext_searcher_ui ui;
 	private final    Xow_wiki wiki;
@@ -30,6 +31,7 @@ class Xofulltext_highlighter_mgr implements Gfo_invk {
 	private final    Xoh_page hpg = new Xoh_page();
 	private final    Xowd_page_itm tmp_page_row = new Xowd_page_itm();
 	private final    List_adp list;
+	private final    Xofulltext_extractor extractor = new Xofulltext_extractor();
 	public Xofulltext_highlighter_mgr(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_searcher_args searcher_args, Gflucene_analyzer_data analyzer_data, Gflucene_searcher_qry searcher_data, List_adp list) {
 		this.ui = ui;
 		this.wiki = wiki;
@@ -70,7 +72,9 @@ class Xofulltext_highlighter_mgr implements Gfo_invk {
 
 		// load db.html.html
 		wiki.Html__hdump_mgr().Load_mgr().Load_by_xowh(hpg, page_ttl, false); // don't load categories for perf reasons
-		item.body = String_.new_u8(hpg.Db().Html().Html_bry());
+		byte[] html = hpg.Db().Html().Html_bry();
+		html = extractor.Extract(html);
+		item.body = String_.new_u8(html);
 
 		// loop pages
 		int page_id = item.page_id;

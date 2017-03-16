@@ -16,13 +16,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.*;
 import gplx.core.btries.*;
 import gplx.core.intls.*;
+import gplx.xowa.addons.wikis.fulltexts.core.*;
 public class Xofulltext_word_lang {
-	private final    Btrie_slim_mgr ws_bgn = Btrie_slim_mgr.cs()
-		.Add_many_str("\t", "\n", "\r", " ", "/", "(", ")", "[", "]", "<", ">");
+	private final    Btrie_slim_mgr ws_bgn = Btrie_slim_mgr.cs().Add_many_str(Xofulltext_punct_.Ws_bgn_ary);
 	private final    Btrie_slim_mgr ws_end;
-	private final    Btrie_slim_mgr punct_bgn = Btrie_slim_mgr.cs()
-		.Add_many_str(".", ",", "?", "!", ":", ";", "'", "\"", "-")
-		;
+	private final    Btrie_slim_mgr punct_bgn = Btrie_slim_mgr.cs().Add_many_str(Xofulltext_punct_.Punct_bgn_ary);
 	private final    Btrie_slim_mgr punct_end;
 	public Xofulltext_word_lang() {
 		this.ws_end = ws_bgn;
