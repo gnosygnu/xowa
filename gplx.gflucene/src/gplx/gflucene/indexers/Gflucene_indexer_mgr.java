@@ -25,6 +25,7 @@ import org.apache.lucene.document.*;
 import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.TieredMergePolicy;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
@@ -44,6 +45,11 @@ public class Gflucene_indexer_mgr {
 		this.analyzer = Gflucene_analyzer_mgr_.New_analyzer(idx_data.analyzer_data.key);
 		this.config = new IndexWriterConfig(analyzer);
 		
+		// limit max size by setting merge policy
+		TieredMergePolicy merge_policy = new TieredMergePolicy();
+		merge_policy.setMaxMergedSegmentMB(idx_data.max_merged_segments);
+		config.setMergePolicy(merge_policy);
+		
 		// create index
 		Path path = Paths.get(idx_data.index_dir);
         try {
@@ -55,6 +61,7 @@ public class Gflucene_indexer_mgr {
         // create writer
         try {
 			wtr = new IndexWriter(index, config);
+//			((TieredMergePolicy)config.getMergePolicy()).
 		} catch (IOException e) {
 			throw Err_.new_exc(e, "lucene_index", "failed to create writer");
 		}
