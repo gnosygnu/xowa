@@ -24,7 +24,13 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.queries.CustomScoreQuery;
+import org.apache.lucene.queries.function.FunctionQuery;
+import org.apache.lucene.queries.function.valuesource.LongFieldSource;
+import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
 import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
@@ -56,9 +62,15 @@ public class Gflucene_searcher_mgr {
 				try {
 			IndexReader reader = DirectoryReader.open(index);
 			IndexSearcher searcher = new IndexSearcher(reader);
-			
-			
+
 			Query query = new QueryParser("body", analyzer).parse(data.query);
+//			Query multi_query = MultiFieldQueryParser.parse(data.query, new String[] {"body"}, new BooleanClause.Occur []{BooleanClause.Occur.SHOULD}, analyzer);
+			
+//			Query body_query = new QueryParser("body", analyzer).parse(data.query);
+//			Query title_query = new QueryParser("title", analyzer).parse(data.query);
+//			FunctionQuery boost_query = new FunctionQuery(new LongFieldSource("page_score"));			
+//			CustomScoreQuery query = new CustomScoreQuery(multi_query, boost_query);
+ 
 //			TopDocs docs = searcher.search(query, reader.maxDoc());
 			TopDocs docs = searcher.search(query, data.match_max);
 			ScoreDoc[] hits = docs.scoreDocs;
@@ -66,8 +78,10 @@ public class Gflucene_searcher_mgr {
 			for(int i = 0; i < hits.length; i++) {
 				int docId = hits[i].doc;
 				Document d = searcher.doc(docId);
-				Gflucene_doc_data doc = new Gflucene_doc_data(Integer.parseInt(d.get("page_id")), Integer.parseInt(d.get("page_score")), d.get("title"), "");
+//				Gflucene_doc_data doc = new Gflucene_doc_data(Integer.parseInt(d.get("page_id")), Integer.parseInt(d.get("page_score")), d.get("title"), "");
+				Gflucene_doc_data doc = new Gflucene_doc_data(Integer.parseInt(d.get("page_id")), 0, d.get("title"), "");
 				doc.lucene_score = hits[i].score;
+//				Tfds.Write(doc.lucene_score, doc.title);
 				list.Add(doc);
 			}
 			

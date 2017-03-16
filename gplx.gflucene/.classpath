@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="lib/6.4.2/lucene-highlighter-6.4.2.jar"/>
 	<classpathentry kind="lib" path="lib/6.4.2/lucene-memory-6.4.2.jar"/>
 	<classpathentry kind="lib" path="lib/6.4.2/lucene-queryparser-6.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/6.4.2/lucene-queries-6.4.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

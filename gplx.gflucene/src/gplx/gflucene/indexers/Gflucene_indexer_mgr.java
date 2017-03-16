@@ -35,7 +35,7 @@ public class Gflucene_indexer_mgr {
     private IndexWriterConfig config;
 	private Directory index;
     private IndexWriter wtr;
-    private FieldType body_fld;
+    private FieldType body_fld_type;
 	
 		public Gflucene_indexer_mgr() {
 	}
@@ -61,28 +61,37 @@ public class Gflucene_indexer_mgr {
         // create writer
         try {
 			wtr = new IndexWriter(index, config);
-//			((TieredMergePolicy)config.getMergePolicy()).
 		} catch (IOException e) {
 			throw Err_.new_exc(e, "lucene_index", "failed to create writer");
 		}
         
         // create field for body
-		this.body_fld = new FieldType();
-		body_fld.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS);
+		this.body_fld_type = new FieldType();
+		body_fld_type.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS);
+		body_fld_type.setTokenized(true);
+		body_fld_type.setStored(false);
 //		body_fld.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
-//		body_fld.setStored(true);
-		body_fld.setTokenized(true);
 //		body_fld.setStoreTermVectors(true);
 //		body_fld.setStoreTermVectorOffsets(true);
         	}
 	public void Exec(Gflucene_doc_data doc_data) {
-		//		org.apache.lucene.document.
-	    Document doc = new Document();
-//	    doc.add(new SortedNumericDocValuesField("page_score", data.score));
-	    doc.add(new StoredField("page_score", doc_data.score));
+			    Document doc = new Document();
+	    
 	    doc.add(new StoredField("page_id", doc_data.page_id));
-	    doc.add(new TextField("title", doc_data.title, Field.Store.YES));
-	    doc.add(new Field("body", doc_data.body, body_fld));
+	    doc.add(new NumericDocValuesField("page_score", doc_data.score));
+
+//	    float score = ((float)doc_data.score / 1000000);
+//	    float score = doc_data.score;
+
+	    TextField title_field = new TextField("title", doc_data.title, Field.Store.YES);
+//	    title_field.setBoost(score * 1024);
+//	    title_field.setBoost(score);
+	    doc.add(title_field);
+	    
+	    Field body_field = new Field("body", doc_data.body, body_fld_type);
+//	    body_field.setBoost(score);
+	    doc.add(body_field);
+	    
 	    try {
 			wtr.addDocument(doc);
 		} catch (IOException e) {
