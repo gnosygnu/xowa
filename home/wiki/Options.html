@@ -49,7 +49,7 @@
           <option value='xowa.wiki.hdumps'>
             Wiki - HTML Databases
           </option>
-          <option value='xowa.wiki.edit' selected='selected'>
+          <option value='xowa.wiki.edit'>
             Wiki - Editing
           </option>
           <option value='xowa.bldr.general'>
@@ -112,6 +112,9 @@
           <option value='xowa.gui.nightmode'>
             Gui - Night mode
           </option>
+          <option value='xowa.addon.search.fulltext' selected='selected'>
+            Addon - Full text search
+          </option>
         </select>
       </div>
       <div id='cfg_grps'>
@@ -120,108 +123,153 @@
           </p>
         </div>
         <h2>
-          Section editing
+          Special page
         </h2>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.wiki.edit.section.enabled")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.fulltext.special.case_match")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.wiki.edit.section.enabled__name' class='xocfg_itm_name'>
-            Enabled
+          <div id='xowa.addon.search.fulltext.special.case_match__name' class='xocfg_itm_name'>
+            Case match
           </div>
-          <div id='xowa.wiki.edit.section.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.edit.section.enabled")' title="reset to &quot;n&quot;">&nbsp;</span>
+          <div id='xowa.addon.search.fulltext.special.case_match__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.fulltext.special.case_match")' title="reset to &quot;n&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input id="xowa.wiki.edit.section.enabled" data-xocfg-key="xowa.wiki.edit.section.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
-          </div><input type='hidden' id='xowa.wiki.edit.section.enabled__key_box' value='xowa.wiki.edit.section.enabled'> <input type='hidden' id='xowa.wiki.edit.section.enabled__ctx_box' value='app'>
+            <input id="xowa.addon.search.fulltext.special.case_match" data-xocfg-key="xowa.addon.search.fulltext.special.case_match" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
+          </div><input type='hidden' id='xowa.addon.search.fulltext.special.case_match__key_box' value='xowa.addon.search.fulltext.special.case_match'> <input type='hidden' id='xowa.addon.search.fulltext.special.case_match__ctx_box' value='app'>
         </div>
-        <div id='xowa.wiki.edit.section.enabled_help_div' class='xohelp_div'>
-          <div id='xowa.wiki.edit.section.enabled_help_msg' class='xohelp_msg'>
-            <p>
-              Choose whether to enable section editing:
-            </p>
-            <ul>
-              <li>
-                <b>checked</b>: Show an "edit" link next to section headers
-              </li>
-              <li>
-                <b>unchecked</b>: Do not show an "edit" link next to section headers
-              </li>
-            </ul>
+        <div id='xowa.addon.search.fulltext.special.case_match_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.fulltext.special.case_match_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.fulltext.special.auto_wildcard_bgn")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.search.fulltext.special.auto_wildcard_bgn__name' class='xocfg_itm_name'>
+            Auto wildcard start
+          </div>
+          <div id='xowa.addon.search.fulltext.special.auto_wildcard_bgn__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.fulltext.special.auto_wildcard_bgn")' title="reset to &quot;n&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.search.fulltext.special.auto_wildcard_bgn" data-xocfg-key="xowa.addon.search.fulltext.special.auto_wildcard_bgn" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
+          </div><input type='hidden' id='xowa.addon.search.fulltext.special.auto_wildcard_bgn__key_box' value='xowa.addon.search.fulltext.special.auto_wildcard_bgn'> <input type='hidden' id='xowa.addon.search.fulltext.special.auto_wildcard_bgn__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.search.fulltext.special.auto_wildcard_bgn_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.fulltext.special.auto_wildcard_bgn_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.fulltext.special.auto_wildcard_end")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.search.fulltext.special.auto_wildcard_end__name' class='xocfg_itm_name'>
+            Auto wildcard end
+          </div>
+          <div id='xowa.addon.search.fulltext.special.auto_wildcard_end__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.fulltext.special.auto_wildcard_end")' title="reset to &quot;n&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.search.fulltext.special.auto_wildcard_end" data-xocfg-key="xowa.addon.search.fulltext.special.auto_wildcard_end" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
+          </div><input type='hidden' id='xowa.addon.search.fulltext.special.auto_wildcard_end__key_box' value='xowa.addon.search.fulltext.special.auto_wildcard_end'> <input type='hidden' id='xowa.addon.search.fulltext.special.auto_wildcard_end__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.search.fulltext.special.auto_wildcard_end_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.fulltext.special.auto_wildcard_end_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.fulltext.special.expand_matches_section")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.search.fulltext.special.expand_matches_section__name' class='xocfg_itm_name'>
+            Expand matches section
+          </div>
+          <div id='xowa.addon.search.fulltext.special.expand_matches_section__undo' data-xocfg-type='bool' class='xocfg_itm_delete'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.fulltext.special.expand_matches_section")' title="reset to &quot;n&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.search.fulltext.special.expand_matches_section" data-xocfg-key="xowa.addon.search.fulltext.special.expand_matches_section" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.addon.search.fulltext.special.expand_matches_section__key_box' value='xowa.addon.search.fulltext.special.expand_matches_section'> <input type='hidden' id='xowa.addon.search.fulltext.special.expand_matches_section__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.search.fulltext.special.expand_matches_section_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.fulltext.special.expand_matches_section_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.fulltext.special.show_all_matches")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.search.fulltext.special.show_all_matches__name' class='xocfg_itm_name'>
+            Show all matches
+          </div>
+          <div id='xowa.addon.search.fulltext.special.show_all_matches__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.fulltext.special.show_all_matches")' title="reset to &quot;n&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.search.fulltext.special.show_all_matches" data-xocfg-key="xowa.addon.search.fulltext.special.show_all_matches" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
+          </div><input type='hidden' id='xowa.addon.search.fulltext.special.show_all_matches__key_box' value='xowa.addon.search.fulltext.special.show_all_matches'> <input type='hidden' id='xowa.addon.search.fulltext.special.show_all_matches__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.search.fulltext.special.show_all_matches_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.fulltext.special.show_all_matches_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.fulltext.special.max_pages_per_wiki")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.search.fulltext.special.max_pages_per_wiki__name' class='xocfg_itm_name'>
+            Max pages per wiki
+          </div>
+          <div id='xowa.addon.search.fulltext.special.max_pages_per_wiki__undo' data-xocfg-type='int' class='xocfg_itm_delete'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.fulltext.special.max_pages_per_wiki")' title="reset to &quot;100&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.search.fulltext.special.max_pages_per_wiki" data-xocfg-key="xowa.addon.search.fulltext.special.max_pages_per_wiki" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="20">
+          </div><input type='hidden' id='xowa.addon.search.fulltext.special.max_pages_per_wiki__key_box' value='xowa.addon.search.fulltext.special.max_pages_per_wiki'> <input type='hidden' id='xowa.addon.search.fulltext.special.max_pages_per_wiki__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.search.fulltext.special.max_pages_per_wiki_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.fulltext.special.max_pages_per_wiki_help_msg' class='xohelp_msg'>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.fulltext.special.namespaces")' title='view more info'>&nbsp;</span>
+          </div>
+          <div id='xowa.addon.search.fulltext.special.namespaces__name' class='xocfg_itm_name'>
+            namespaces
+          </div>
+          <div id='xowa.addon.search.fulltext.special.namespaces__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.fulltext.special.namespaces")' title="reset to &quot;0|4&quot;">&nbsp;</span>
+          </div>
+          <div class='xocfg_itm_data'>
+            <input id="xowa.addon.search.fulltext.special.namespaces" data-xocfg-key="xowa.addon.search.fulltext.special.namespaces" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="0|4">
+          </div><input type='hidden' id='xowa.addon.search.fulltext.special.namespaces__key_box' value='xowa.addon.search.fulltext.special.namespaces'> <input type='hidden' id='xowa.addon.search.fulltext.special.namespaces__ctx_box' value='app'>
+        </div>
+        <div id='xowa.addon.search.fulltext.special.namespaces_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.fulltext.special.namespaces_help_msg' class='xohelp_msg'>
           </div>
         </div>
         <h2>
-          Page backups
+          Options
         </h2>
         <div class="xocfg_row flex_div">
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.wiki.edit.pagebaks.enabled")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.fulltext.options.autosave_enabled")' title='view more info'>&nbsp;</span>
           </div>
-          <div id='xowa.wiki.edit.pagebaks.enabled__name' class='xocfg_itm_name'>
-            Enabled
+          <div id='xowa.addon.search.fulltext.options.autosave_enabled__name' class='xocfg_itm_name'>
+            Autosave enabled
           </div>
-          <div id='xowa.wiki.edit.pagebaks.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.edit.pagebaks.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
-          <div class='xocfg_itm_data'>
-            <input id="xowa.wiki.edit.pagebaks.enabled" data-xocfg-key="xowa.wiki.edit.pagebaks.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.wiki.edit.pagebaks.enabled__key_box' value='xowa.wiki.edit.pagebaks.enabled'> <input type='hidden' id='xowa.wiki.edit.pagebaks.enabled__ctx_box' value='app'>
-        </div>
-        <div id='xowa.wiki.edit.pagebaks.enabled_help_div' class='xohelp_div'>
-          <div id='xowa.wiki.edit.pagebaks.enabled_help_msg' class='xohelp_msg'>
-            <p>
-              Choose whether to enable page backups:
-            </p>
-            <ul>
-              <li>
-                <b>checked</b>: Saves a backup copy of your page every time you press "Save page". The backup is saved as /your_wiki_directory/user/temp/Page_title/datetime.txt
-              </li>
-              <li>
-                <b>unchecked</b>: Does not save a backup copy
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.wiki.edit.pagebaks.max_backups")' title='view more info'>&nbsp;</span>
-          </div>
-          <div id='xowa.wiki.edit.pagebaks.max_backups__name' class='xocfg_itm_name'>
-            Max backups
-          </div>
-          <div id='xowa.wiki.edit.pagebaks.max_backups__undo' data-xocfg-type='int' class='xocfg_itm_delete'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.edit.pagebaks.max_backups")' title="reset to &quot;16&quot;">&nbsp;</span>
+          <div id='xowa.addon.search.fulltext.options.autosave_enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.fulltext.options.autosave_enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
           </div>
           <div class='xocfg_itm_data'>
-            <input id="xowa.wiki.edit.pagebaks.max_backups" data-xocfg-key="xowa.wiki.edit.pagebaks.max_backups" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="3">
-          </div><input type='hidden' id='xowa.wiki.edit.pagebaks.max_backups__key_box' value='xowa.wiki.edit.pagebaks.max_backups'> <input type='hidden' id='xowa.wiki.edit.pagebaks.max_backups__ctx_box' value='app'>
+            <input id="xowa.addon.search.fulltext.options.autosave_enabled" data-xocfg-key="xowa.addon.search.fulltext.options.autosave_enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><input type='hidden' id='xowa.addon.search.fulltext.options.autosave_enabled__key_box' value='xowa.addon.search.fulltext.options.autosave_enabled'> <input type='hidden' id='xowa.addon.search.fulltext.options.autosave_enabled__ctx_box' value='app'>
         </div>
-        <div id='xowa.wiki.edit.pagebaks.max_backups_help_div' class='xohelp_div'>
-          <div id='xowa.wiki.edit.pagebaks.max_backups_help_msg' class='xohelp_msg'>
-            <p>
-              Enter a maximum number of backups to be kept for a page. For example:
-            </p>
-            <ul>
-              <li>
-                The maximum is set to 4
-              </li>
-              <li>
-                A page is edited 4 times
-              </li>
-              <li>
-                4 backups are created
-              </li>
-              <li>
-                A page is edited for the 5th time
-              </li>
-              <li>
-                A 5th backup is created
-              </li>
-              <li>
-                The 1st backup (oldest) will be deleted to keep the total number at 4
-              </li>
-            </ul>
+        <div id='xowa.addon.search.fulltext.options.autosave_enabled_help_div' class='xohelp_div'>
+          <div id='xowa.addon.search.fulltext.options.autosave_enabled_help_msg' class='xohelp_msg'>
           </div>
         </div>
       </div>
