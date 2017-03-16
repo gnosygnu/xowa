@@ -51,7 +51,15 @@ public class Xomp_tmpl_cache_bldr {
 				Xow_page_cache_itm itm = new Xow_page_cache_itm(true, page_ttl, null, null);	// NOTE: "null, null;" b/c GetContent in Scrib_title checks specifically for null, not empty String; DATE:2016-10-19
 				itm.Set_page_ids(page_id, page_redirect_id);
 				text_db_loader.Add(rdr.Read_int("page_text_db_id"), itm);
-				cache.Add(page_ttl.Full_db(), itm);
+				
+				// ignore duplicate page_titles in cache; EX:ru.n:Модуль:Weather/data DATE:2017-03-16
+				if (cache.Get_or_null(page_ttl.Full_db()) == null) {
+					cache.Add(page_ttl.Full_db(), itm);
+				}
+				else {
+					Gfo_usr_dlg_.Instance.Warn_many("", "", "mass_parse: ignoring duplicate page title in page cache; title=~{0} id=~{1}", page_ttl.Full_db(), page_id);
+				}
+
 				page_regy.Add(page_id, itm);
 
 				if (page_redirect_id != -1)
