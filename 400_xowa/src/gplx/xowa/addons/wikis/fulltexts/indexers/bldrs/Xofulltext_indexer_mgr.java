@@ -20,19 +20,28 @@ import gplx.xowa.wikis.data.*;
 import gplx.xowa.htmls.core.dbs.*;
 import gplx.xowa.addons.wikis.fulltexts.indexers.svcs.*;
 public class Xofulltext_indexer_mgr {
-	public void Exec(Xowe_wiki wiki, Xofulltext_indexer_ui ui) {
-		Xow_db_file core_db = wiki.Data__core_mgr().Db__core();
-		gplx.xowa.wikis.data.tbls.Xowd_page_tbl page_tbl = core_db.Tbl__page();
-
-		Xoh_page hpg = new Xoh_page();
-
+	public void Exec(Xowe_wiki wiki, Xofulltext_indexer_ui ui, Xofulltext_indexer_args args) {
+		// init indexer
 		Xofulltext_indexer_wkr indexer = new Xofulltext_indexer_wkr();
 		indexer.Init(wiki);
 
-		Db_conn conn = page_tbl.Conn();
-		Db_rdr rdr = conn.Exec_rdr("SELECT page_id, page_score, page_namespace, page_title, page_html_db_id FROM page WHERE page_namespace = 0;");
+		// get page tbl
+		Xow_db_file core_db = wiki.Data__core_mgr().Db__core();
+		gplx.xowa.wikis.data.tbls.Xowd_page_tbl page_tbl = core_db.Tbl__page();
+
+		// init args
+		args.Init_by_wiki(wiki);
 		int count = 0;
+		Xoh_page hpg = new Xoh_page();
+
+		// get rdr and loop
+		Db_conn conn = page_tbl.Conn();
+		Db_rdr rdr = conn.Exec_rdr(Db_sql_.Make_by_fmt(String_.Ary
+		( "SELECT  page_id, page_score, page_namespace, page_title, page_html_db_id"
+		, "FROM    page"
+		, "WHERE   page_namespace IN ({0});"), String_.Replace(args.ns_ids, "|", ",")));
 		while (rdr.Move_next()) {
+			// read vars
 			int page_namespace = rdr.Read_int("page_namespace");
 			byte[] page_ttl_bry = rdr.Read_bry_by_str("page_title");
 			int page_id = rdr.Read_int("page_id");
@@ -52,7 +61,10 @@ public class Xofulltext_indexer_mgr {
 					continue;
 				byte[] html_text = wiki.Html__hdump_mgr().Load_mgr().Parse(hpg, hpg.Db().Html().Zip_tid(), hpg.Db().Html().Hzip_tid(), hpg.Db().Html().Html_bry());
 
+				// run index
 				indexer.Index(page_id, page_score, page_ttl.Page_txt(), html_text);
+
+				// notify
 				if ((++count % 10000) == 0) {
 					Gfo_usr_dlg_.Instance.Prog_many("", "", "indexing page: ~{0}", count);
 					if (ui != null)
@@ -63,6 +75,7 @@ public class Xofulltext_indexer_mgr {
 			}
 		}
 
+		// term indexer
 		indexer.Term();
 	}
 }

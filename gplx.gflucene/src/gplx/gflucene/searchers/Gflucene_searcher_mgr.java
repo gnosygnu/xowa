@@ -63,13 +63,13 @@ public class Gflucene_searcher_mgr {
 			IndexReader reader = DirectoryReader.open(index);
 			IndexSearcher searcher = new IndexSearcher(reader);
 
-			Query query = new QueryParser("body", analyzer).parse(data.query);
-//			Query multi_query = MultiFieldQueryParser.parse(data.query, new String[] {"body"}, new BooleanClause.Occur []{BooleanClause.Occur.SHOULD}, analyzer);
+//			Query query = new QueryParser("body", analyzer).parse(data.query);
+			Query multi_query = MultiFieldQueryParser.parse(data.query, new String[] {"body"}, new BooleanClause.Occur []{BooleanClause.Occur.SHOULD}, analyzer);
 			
 //			Query body_query = new QueryParser("body", analyzer).parse(data.query);
 //			Query title_query = new QueryParser("title", analyzer).parse(data.query);
-//			FunctionQuery boost_query = new FunctionQuery(new LongFieldSource("page_score"));			
-//			CustomScoreQuery query = new CustomScoreQuery(multi_query, boost_query);
+			FunctionQuery boost_query = new FunctionQuery(new LongFieldSource("page_score"));			
+			CustomScoreQuery query = new CustomScoreQuery(multi_query, boost_query);
  
 //			TopDocs docs = searcher.search(query, reader.maxDoc());
 			TopDocs docs = searcher.search(query, data.match_max);

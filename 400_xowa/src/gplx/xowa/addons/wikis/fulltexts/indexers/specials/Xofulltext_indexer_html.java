@@ -17,15 +17,15 @@ package gplx.xowa.addons.wikis.fulltexts.indexers.specials; import gplx.*; impor
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.dbs.*;
 class Xofulltext_indexer_html extends Xow_special_wtr__base {
-	private final    byte[] wikis_bry;
-	public Xofulltext_indexer_html
-		( byte[] wikis_bry) {
+	private final    String wikis_bry, ns_ids;
+	public Xofulltext_indexer_html(String wikis_bry, String ns_ids) {
 		this.wikis_bry = wikis_bry;
+		this.ns_ids = ns_ids;
 	}
 	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return Addon_dir(app);}
 	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xofulltext_indexer.template.html");}
 	@Override protected Mustache_doc_itm Bld_mustache_root(Xoa_app app) {
-		return new Xofulltext_indexer_doc(wikis_bry);
+		return new Xofulltext_indexer_doc(wikis_bry, ns_ids);
 	}
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {
 		Xopg_tag_mgr head_tags = page_data.Head_tags();

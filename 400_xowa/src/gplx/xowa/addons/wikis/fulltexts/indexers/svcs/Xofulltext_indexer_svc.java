@@ -29,8 +29,7 @@ class Xofulltext_indexer_svc implements Gfo_invk {
 	}
 	public void Index(Json_nde args) {
 		// create args
-		byte[] wikis_bry = args.Get_as_bry("wikis");
-		Xofulltext_indexer_args indexer_args = new Xofulltext_indexer_args(wikis_bry);
+		Xofulltext_indexer_args indexer_args = Xofulltext_indexer_args.New_by_json(args);
 
 		// launch thread
 		gplx.core.threads.Thread_adp_.Start_by_val("index", Cancelable_.Never, this, Invk__index, indexer_args);
@@ -47,6 +46,7 @@ class Xofulltext_indexer_svc implements Gfo_invk {
 				continue;
 			}
 
+			// check if dir exists
 			wiki.Init_by_wiki();
 			Io_url search_dir = Xosearch_fulltext_addon.Get_index_dir(wiki);
 			if (Io_mgr.Instance.ExistsDir(search_dir)) {
@@ -55,11 +55,14 @@ class Xofulltext_indexer_svc implements Gfo_invk {
 				continue;
 			}
 
+			// notify bgn
 			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.fulltext_indexer.status__note__recv", gplx.core.gfobjs.Gfobj_nde.New()
 				.Add_str("note", Datetime_now.Get().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss() + ": wiki index started: " + String_.new_u8(domain)));
 
-			new Xofulltext_indexer_mgr().Exec((Xowe_wiki)wiki, new Xofulltext_indexer_ui(app.Gui__cbk_mgr(), cbk_trg));
+			// run index
+			new Xofulltext_indexer_mgr().Exec((Xowe_wiki)wiki, new Xofulltext_indexer_ui(app.Gui__cbk_mgr(), cbk_trg), args);
 
+			// notify end
 			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.fulltext_indexer.status__note__recv", gplx.core.gfobjs.Gfobj_nde.New()
 				.Add_str("note", Datetime_now.Get().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss() + ": wiki index ended: " + String_.new_u8(domain)));
 		}
@@ -71,10 +74,4 @@ class Xofulltext_indexer_svc implements Gfo_invk {
 		return this;
 	}  
 	private static final String Invk__index = "index";
-}
-class Xofulltext_indexer_args {
-	public byte[] wikis;
-	public Xofulltext_indexer_args(byte[] wikis) {
-		this.wikis = wikis;
-	}
 }

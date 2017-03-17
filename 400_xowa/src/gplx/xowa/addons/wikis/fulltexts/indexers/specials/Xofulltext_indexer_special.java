@@ -20,12 +20,12 @@ public class Xofulltext_indexer_special implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
 		// get qry if any
 		Gfo_qarg_mgr url_args = new Gfo_qarg_mgr().Init(url.Qargs_ary());
-		byte[] wikis_bry = url_args.Read_bry_or("wikis", Bry_.Empty);
 
 		// get options and create page
 		// Xocfg_mgr cfg_mgr = wiki.App().Cfg();
 		new Xofulltext_indexer_html
-		( wikis_bry
+		( url_args.Read_str_or("wikis", wiki.Domain_str())
+		, url_args.Read_str_or("ns_ids", "0")
 		).Bld_page_by_mustache(wiki.App(), page, this);
 	}
 	Xofulltext_indexer_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}

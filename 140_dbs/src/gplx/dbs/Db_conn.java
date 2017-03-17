@@ -105,7 +105,7 @@ public class Db_conn {
 	public int					Exec_sql_args(String sql, Object... args)	{return this.Exec_qry(Db_qry_sql.dml_(String_.Format(sql, args)));}
 	public int					Exec_sql_plog_ntx(String msg, String sql) {return Exec_sql_plog(Bool_.N, msg, sql);}
 	public int					Exec_sql_plog_txn(String msg, String sql) {return Exec_sql_plog(Bool_.Y, msg, sql);}
-	public int					Exec_sql_plog(boolean txn, String msg, String sql) {
+	public int					Exec_sql_plog(boolean txn, String msg, String sql) {			
 		Gfo_usr_dlg_.Instance.Plog_many("", "", msg);
 		if (txn) this.Txn_bgn(msg);
 		int rv = Exec_sql(sql);
