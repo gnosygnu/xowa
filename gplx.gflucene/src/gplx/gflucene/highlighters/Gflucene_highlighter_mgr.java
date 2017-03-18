@@ -71,7 +71,12 @@ public class Gflucene_highlighter_mgr {
 
 		// get token stream
 		String text = doc_data.body;
-		TokenStream tokenStream = analyzer.tokenStream("body", text);
+		TokenStream tokenStream = null;
+		try {
+			tokenStream = analyzer.tokenStream("body", text);
+		} catch (IOException e) {
+			throw Err_.new_exc(e, "lucene_index", "failed to get stream", "query", qry_data.query);
+		}
 		
 		// get fragments from stream
 		TextFragment[] frags;

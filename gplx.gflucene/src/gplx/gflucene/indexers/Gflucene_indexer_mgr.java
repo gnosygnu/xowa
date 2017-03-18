@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.gflucene.indexers; import gplx.*; import gplx.gflucene.*;
 import gplx.gflucene.core.*;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import org.lukhnos.portmobile.file.Path;
+import org.lukhnos.portmobile.file.Paths;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;

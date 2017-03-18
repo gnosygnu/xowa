@@ -57,7 +57,7 @@ public class Xoa_update_html extends Xow_special_wtr__base {
 	}
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {
 		Xopg_tag_mgr head_tags = page_data.Head_tags();
-		Xopg_tag_wtr_.Add__core				(head_tags, app.Fsys_mgr().Http_root());
+		Xopg_tag_wtr_.Add__baselib			(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__xocss			(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__xohelp			(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__xolog			(head_tags, app.Fsys_mgr().Http_root());

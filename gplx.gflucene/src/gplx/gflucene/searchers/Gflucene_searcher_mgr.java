@@ -17,8 +17,8 @@ package gplx.gflucene.searchers; import gplx.*; import gplx.gflucene.*;
 import gplx.gflucene.core.*;
 import gplx.gflucene.analyzers.*;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import org.lukhnos.portmobile.file.Path;
+import org.lukhnos.portmobile.file.Paths;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;

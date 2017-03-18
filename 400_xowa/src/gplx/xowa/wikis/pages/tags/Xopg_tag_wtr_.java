@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.pages.tags; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
 public class Xopg_tag_wtr_ {
-	public static void Add__core(Xopg_tag_mgr head_tags, Io_url http_root) {
+	public static void Add__baselib(Xopg_tag_mgr head_tags, Io_url http_root) {
 		Io_url css_dir = http_root.GenSubDir_nest("bin", "any", "xowa", "html", "res", "src", "xowa", "core");
 		head_tags.Add(Xopg_tag_itm.New_js_file(css_dir.GenSubFil_nest("Namespace_.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(css_dir.GenSubFil_nest("String_.js")));
