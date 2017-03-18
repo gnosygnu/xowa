@@ -36,5 +36,6 @@ public class Xoh_head_itm_ {
 	, Key__bmk				= Bry_.new_a7("bmk")
 	, Key__server			= Bry_.new_a7("server")
 	, Key__tabber			= Bry_.new_a7("tabber")
+	, Key__xo_elem			= Bry_.new_a7("xo.elem")
 	;
 }

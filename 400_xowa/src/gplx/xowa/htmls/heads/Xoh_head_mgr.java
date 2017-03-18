@@ -29,13 +29,14 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 	, list__js_window_onload	= new Xoh_head_wkr()
 	;
 	public Xoh_head_mgr() {
-		Itms_add(itm__css, itm__globals, itm__server, itm__popups, itm__toc, itm__collapsible, itm__navframe, itm__gallery, itm__gallery_styles
+		Itms_add(itm__css, itm__globals, itm__xo_elem, itm__server, itm__popups, itm__toc, itm__collapsible, itm__navframe, itm__gallery, itm__gallery_styles
 		, itm__mathjax, itm__graph, itm__hiero, itm__top_icon, itm__title_rewrite, itm__search_suggest, itm__timeline
 		, itm__dbui, itm__pgbnr, itm__tabber
 		);
 	}
 	public Xoh_head_itm__css					Itm__css() {return itm__css;} private final    Xoh_head_itm__css itm__css = new Xoh_head_itm__css();
 	public Xoh_head_itm__globals				Itm__globals() {return itm__globals;} private final    Xoh_head_itm__globals itm__globals = new Xoh_head_itm__globals();
+	public Xoh_head_itm__xo_elem				Itm__xo_elem() {return itm__xo_elem;} private final    Xoh_head_itm__xo_elem itm__xo_elem = new Xoh_head_itm__xo_elem();
 	public Xoh_head_itm__server					Itm__server() {return itm__server;} private final    Xoh_head_itm__server itm__server = new Xoh_head_itm__server();
 	public Xoh_head_itm__popups					Itm__popups() {return itm__popups;} private final    Xoh_head_itm__popups itm__popups = new Xoh_head_itm__popups();
 	public Xoh_head_itm__toc					Itm__toc() {return itm__toc;} private final    Xoh_head_itm__toc itm__toc = new Xoh_head_itm__toc();
@@ -64,6 +65,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 		if (app.Addon_mgr().Itms__search__htmlbar().Enabled())				itm__search_suggest.Enabled_y_();
 		itm__css.Enabled_y_();
 		itm__globals.Enabled_y_();	// for now, always mark this and rest as exists; DATE:2014-06-09
+		itm__xo_elem.Enabled_y_();
 		itm__collapsible.Enabled_y_();
 		itm__navframe.Enabled_y_();
 		boolean popups_enabled 
