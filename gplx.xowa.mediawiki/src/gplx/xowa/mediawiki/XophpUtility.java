@@ -38,6 +38,7 @@ public class XophpUtility {
 		return true;
 	}
 
+	public static boolean is_null(int v) {return v == NULL_INT;}
 	public static final int NULL_INT = Int_.Max_value;
 	public static final double NULL_DOUBLE = Double_.MinValue;
 	public static final    byte[] NULL_BRY = null;

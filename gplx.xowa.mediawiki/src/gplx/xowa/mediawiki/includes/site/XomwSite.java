@@ -83,7 +83,7 @@ public class XomwSite {
 	*
 	* @var array[]
 	*/
-	private Hash_adp localIds;
+	private Ordered_hash localIds;
 
 	/**
 	* @since 1.21
@@ -492,12 +492,12 @@ public class XomwSite {
 	*/
 	public void addLocalId(String type, String identifier) {
 		if (this.localIds == null) {
-			this.localIds = Hash_adp_.New();
+			this.localIds = Ordered_hash_.New();
 		}
 
-		Hash_adp typeHash = (Hash_adp)this.localIds.Get_by(type);
+		Ordered_hash typeHash = (Ordered_hash)this.localIds.Get_by(type);
 		if (typeHash == null) {
-			typeHash = Hash_adp_.New();
+			typeHash = Ordered_hash_.New();
 			this.localIds.Add(type, typeHash);
 		}
 
@@ -535,8 +535,8 @@ public class XomwSite {
 	*
 	* @return String[]
 	*/
-	public Hash_adp getInterwikiIds() {
-		return (Hash_adp)this.localIds.Get_by(XomwSite.ID_INTERWIKI);
+	public Ordered_hash getInterwikiIds() {
+		return (Ordered_hash)this.localIds.Get_by(XomwSite.ID_INTERWIKI);
 	}
 
 	/**
@@ -547,8 +547,8 @@ public class XomwSite {
 	*
 	* @return String[]
 	*/
-	public Hash_adp getNavigationIds() {
-		return (Hash_adp)this.localIds.Get_by(XomwSite.ID_EQUIVALENT);
+	public Ordered_hash getNavigationIds() {
+		return (Ordered_hash)this.localIds.Get_by(XomwSite.ID_EQUIVALENT);
 	}
 
 	/**
@@ -558,7 +558,7 @@ public class XomwSite {
 	*
 	* @return array[]
 	*/
-	public Hash_adp getLocalIds() {
+	public Ordered_hash getLocalIds() {
 		return this.localIds;
 	}
 
@@ -635,20 +635,10 @@ public class XomwSite {
 	* @return Site
 	*/
 	public static XomwSite newForType(String siteType) {
-//			global $wgSiteTypes;
-
-		/*
-//$wgSiteTypes = [
-//	'mediawiki' => 'MediaWikiSite',
-//];
-		Object o = XomwDefaultSettings.wgSiteTypes;
-		if (o != null) {
-			return new XomwMediaWikiSite()
+		String type = (String)XomwDefaultSettings.wgSiteTypes.Get_by(siteType);
+		if (String_.Eq(type, XomwDefaultSettings.wgSiteTypes__MediaWikiSite)) {
+			return new XomwMediaWikiSite();
 		}
-		*/
-//			if (array_key_exists($siteType, $wgSiteTypes)) {
-//				return new $wgSiteTypes[$siteType]();
-//			}
 
 		return new XomwSite(siteType);
 	}
