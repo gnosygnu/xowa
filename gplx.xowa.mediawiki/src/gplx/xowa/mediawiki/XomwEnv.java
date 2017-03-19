@@ -30,7 +30,7 @@ public class XomwEnv {
 
 	public XomwEnv(Xol_lang_itm xoLang) {
 		XomwLanguage language = new XomwLanguage(xoLang);
-		XomwFileBasedSiteLookup siteLookup = new XomwFileBasedSiteLookup();
+		XomwSiteLookup siteLookup = new XomwXowaSiteLookup();
 		XomwInterwikiLookup interwikiLookup = new XomwInterwikiLookupAdapter(siteLookup);
 		this.mediaWikiServices = new XomwMediaWikiServices(interwikiLookup, language);
 	}

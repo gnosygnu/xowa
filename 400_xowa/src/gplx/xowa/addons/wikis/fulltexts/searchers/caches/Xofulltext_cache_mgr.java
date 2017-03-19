@@ -52,7 +52,7 @@ public class Xofulltext_cache_mgr {
 		Xofulltext_cache_line line = new Xofulltext_cache_line(line_seq, line_html);
 		page.Lines().Add(line);
 	}
-	public Object Get_pages_rng(int qry_id, byte[] wiki, int page_seq_bgn, int page_seq_end) {
+	public Object Get_pages_rng(int qry_id, int page_seq_bgn, int page_seq_end) {
 		return null;
 	}
 	public Xofulltext_cache_line[] Get_lines_rest(int qry_id, byte[] wiki_bry, int page_id) {
