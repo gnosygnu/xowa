@@ -64,6 +64,7 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 			Xofulltext_searcher_page page = new Xofulltext_searcher_page(args.query_id, wiki.Domain_str(), doc_data.page_id, String_.new_u8(doc_data.page_full_db), args.expand_matches_section);
 			ui.Send_page_add(page);
 		}
+		ui.Send_wiki_update(wiki.Domain_bry(), len + List_adp_.Base1, -1);
 
 		// create highlighter thread and launch it
 		Xofulltext_highlighter_mgr highlighter_mgr = new Xofulltext_highlighter_mgr(ui, wiki, args, analyzer_data, searcher_data, list);

@@ -37,7 +37,7 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base {
 		this.namespaces = namespaces;
 	}
 	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return Addon_dir(app);}
-	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.template.html");}
+	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.main.template.html");}
 	@Override protected Mustache_doc_itm Bld_mustache_root(Xoa_app app) {
 		return new Xofulltext_searcher_doc
 		( query, case_match, auto_wildcard_bgn, auto_wildcard_end
@@ -51,12 +51,17 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base {
 		Xopg_tag_wtr_.Add__xohelp	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__xolog	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__xoajax	(head_tags, app.Fsys_mgr().Http_root(), app);
+		Xopg_tag_wtr_.Add__xotmpl	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__jquery	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__xonotify (head_tags, app.Fsys_mgr().Http_root());
+		Xopg_tag_wtr_.Add__mustache	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_alertify_.Add_tags	    (head_tags, app.Fsys_mgr().Http_root());
 
 		head_tags.Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.css")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.js")));
+		head_tags.Add(Xopg_tag_itm.New_htm_frag(addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.wiki.template.html"), "xofts.wiki"));
+		head_tags.Add(Xopg_tag_itm.New_htm_frag(addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.page.template.html"), "xofts.page"));
+		head_tags.Add(Xopg_tag_itm.New_htm_frag(addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.line.template.html"), "xofts.line"));
 
 		page_data.Js_enabled_y_();
 	}
