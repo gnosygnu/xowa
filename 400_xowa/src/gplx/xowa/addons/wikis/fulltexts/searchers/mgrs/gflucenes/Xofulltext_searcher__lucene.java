@@ -19,6 +19,7 @@ import gplx.gflucene.core.*;
 import gplx.gflucene.indexers.*;
 import gplx.gflucene.searchers.*;
 import gplx.gflucene.highlighters.*;
+import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
 public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 	private final    Gflucene_searcher_mgr searcher = new Gflucene_searcher_mgr();
@@ -39,13 +40,28 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 		// term
 		searcher.Term();
 
-		// loop list and send pages
+		// get page_load vars
+		Xowd_page_itm tmp_page_row = new Xowd_page_itm();
+		Xowd_page_tbl page_tbl = wiki.Data__core_mgr().Db__core().Tbl__page();
+
+		// loop list and load pages
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {
-			Gflucene_doc_data found = (Gflucene_doc_data)list.Get_at(i);
+			Gflucene_doc_data doc_data = (Gflucene_doc_data)list.Get_at(i);
 
-			// call page found
-			Xofulltext_searcher_page page = new Xofulltext_searcher_page(args.query_id, wiki.Domain_str(), found.page_id, found.title, args.expand_matches_section);
+			// load page
+			if (!page_tbl.Select_by_id(tmp_page_row, doc_data.page_id)) {
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "searcher.lucene: could not find page; page_id=~{0}", doc_data.page_id);
+				continue;
+			}
+
+			// make page_ttl
+			Xoa_ttl page_ttl = wiki.Ttl_parse(tmp_page_row.Ns_id(), tmp_page_row.Ttl_page_db());
+			doc_data.ns_id = tmp_page_row.Ns_id();
+			doc_data.page_full_db = page_ttl.Full_db();
+
+			// call page doc_data
+			Xofulltext_searcher_page page = new Xofulltext_searcher_page(args.query_id, wiki.Domain_str(), doc_data.page_id, String_.new_u8(doc_data.page_full_db), args.expand_matches_section);
 			ui.Send_page_add(page);
 		}
 

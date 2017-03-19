@@ -29,7 +29,6 @@ class Xofulltext_highlighter_mgr implements Gfo_invk {
 	private final    Gflucene_searcher_qry searcher_data;
 	private final    Gflucene_highlighter_mgr highlighter_mgr = new Gflucene_highlighter_mgr();
 	private final    Xoh_page hpg = new Xoh_page();
-	private final    Xowd_page_itm tmp_page_row = new Xowd_page_itm();
 	private final    Ordered_hash list;
 	private final    Xofulltext_extractor extractor = new Xofulltext_extractor();
 	public Xofulltext_highlighter_mgr(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_searcher_args searcher_args, Gflucene_analyzer_data analyzer_data, Gflucene_searcher_qry searcher_data, Ordered_hash list) {
@@ -59,15 +58,9 @@ class Xofulltext_highlighter_mgr implements Gfo_invk {
 		highlighter_mgr.Term();
 	}
 	private void Highlight_item(Gflucene_doc_data item) {
-		// load db.core.page
-		if (!wiki.Data__core_mgr().Db__core().Tbl__page().Select_by_id(tmp_page_row, item.page_id)) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "search.highlight: could not find page; page_id=~{0}", item.page_id);
-			return;
-		}
-
 		// init hpg
-		Xoa_ttl page_ttl = wiki.Ttl_parse(tmp_page_row.Ns_id(), tmp_page_row.Ttl_page_db());
-		Xoa_url page_url = wiki.Utl__url_parser().Parse(page_ttl.Page_db());
+		Xoa_ttl page_ttl = wiki.Ttl_parse(item.page_full_db);
+		Xoa_url page_url = wiki.Utl__url_parser().Parse(page_ttl.Full_db());
 		hpg.Ctor_by_hview(wiki, page_url, page_ttl, item.page_id);
 
 		// load db.html.html
