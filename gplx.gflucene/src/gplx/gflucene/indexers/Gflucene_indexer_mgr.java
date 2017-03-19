@@ -67,10 +67,10 @@ public class Gflucene_indexer_mgr {
         
         // create field for body
 		this.body_fld_type = new FieldType();
-		body_fld_type.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS);
+		IndexOptions index_options = idx_data.positional_enabled ? IndexOptions.DOCS_AND_FREQS_AND_POSITIONS : IndexOptions.DOCS_AND_FREQS;
+		body_fld_type.setIndexOptions(index_options);
 		body_fld_type.setTokenized(true);
 		body_fld_type.setStored(false);
-//		body_fld.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
 //		body_fld.setStoreTermVectors(true);
 //		body_fld.setStoreTermVectorOffsets(true);
         	}

@@ -28,6 +28,8 @@ public class Xopage_html_data {
 	public Xopg_tag_mgr Tail_tags()		{return tail_tags;} private final    Xopg_tag_mgr tail_tags = new Xopg_tag_mgr(Bool_.N);
 
 	public void Apply(Xoa_page page) {
+		Xopg_tag_wtr_.Add__tab_uid	(head_tags, page.Page_guid());
+
 		Xopg_html_data html_data = page.Html_data();
 		html_data.Html_restricted_n_();
 		html_data.Skip_parse_(Bool_.Y);

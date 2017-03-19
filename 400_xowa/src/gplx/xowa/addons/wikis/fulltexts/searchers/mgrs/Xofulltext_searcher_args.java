@@ -26,6 +26,7 @@ public class Xofulltext_searcher_args {
 	public byte[] query;
 	public String namespaces;
 	public int query_id;
+	public String page_guid;
 	public static Xofulltext_searcher_args New_by_json(Json_nde args) {
 		Xofulltext_searcher_args rv = new Xofulltext_searcher_args();
 		rv.case_match = args.Get_as_bool_or("case_match", false);
@@ -37,6 +38,7 @@ public class Xofulltext_searcher_args {
 		rv.wikis = args.Get_as_bry("wikis");
 		rv.query = args.Get_as_bry("query");
 		rv.namespaces = args.Get_as_str("namespaces");
+		rv.page_guid = args.Get_as_str("page_guid");
 		return rv;
 	}
 }

@@ -26,8 +26,12 @@ public class Xog_cbk_wkr__swt implements Xog_cbk_wkr {
 	}
 	public Object Send_json(Xog_cbk_trg trg, String func, Gfobj_nde data) {
 		if (gui_mgr.Kit().Tid() != Gfui_kit_.Swt_tid) return null;	// guard against calling when HTTP_server
+
+		// create cmd for script
 		String script = json_wtr.Write_as_func__swt(func, data);
 		GfuiInvkCmd swt_cmd = gui_mgr.Kit().New_cmd_sync(browser_func.Script_(script));
+
+		// iterate tabs
 		Xog_tab_mgr tab_mgr = gui_mgr.Browser_win().Tab_mgr();
 		int tabs_len = tab_mgr.Tabs_len();
 		Object rv = null;
@@ -36,6 +40,9 @@ public class Xog_cbk_wkr__swt implements Xog_cbk_wkr {
 			Xoa_page page = tab.Page();
 			boolean match = false;
 			switch (trg.Tid()) {
+				case Xog_cbk_trg.Tid__page_guid:
+					match = String_.Eq(trg.Page_guid, page.Page_guid().To_str());
+					break;
 				case Xog_cbk_trg.Tid__cbk_enabled:
 					match = page.Html_data().Cbk_enabled();
 					break;

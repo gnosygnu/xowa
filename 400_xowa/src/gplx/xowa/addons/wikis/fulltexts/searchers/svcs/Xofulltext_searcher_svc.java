@@ -29,12 +29,9 @@ import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.gflucenes.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.*;
 class Xofulltext_searcher_svc implements Gfo_invk {
 	private final    Xoa_app app;
-	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New(Xofulltext_searcher_special.Prototype.Special__meta().Ttl_bry());
 	private final    Xofulltext_cache_mgr cache_mgr = new Xofulltext_cache_mgr();
-	private final    Xofulltext_searcher_ui searcher_ui;
 	public Xofulltext_searcher_svc(Xoa_app app) {
 		this.app = app;
-		this.searcher_ui = new Xofulltext_searcher_ui(cache_mgr, app.Gui__cbk_mgr(), cbk_trg);
 	}
 	public void Search(Json_nde args) {
 		// for now, always clear cache; "get_lines_rest" will only work for latest search
@@ -61,6 +58,8 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 		gplx.core.threads.Thread_adp_.Start_by_val("search", Cancelable_.Never, this, Invk__search, search_args);
 	}
 	private void Search(Xofulltext_searcher_args args) {
+		Xofulltext_searcher_ui searcher_ui = new Xofulltext_searcher_ui(cache_mgr, app.Gui__cbk_mgr(), new Xog_cbk_trg(args.page_guid));
+
 		try {
 			// loop wikis
 			byte[][] wiki_domains = Bry_split_.Split(args.wikis, Byte_ascii.Pipe_bry);
@@ -79,9 +78,11 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 		}
 	} 			
 	public void Get_lines_rest(Json_nde args) {
-		Get_lines_rest(args.Get_as_int("qry_id"), args.Get_as_bry("wiki"), args.Get_as_int("page_id"));
+		Get_lines_rest(args.Get_as_int("qry_id"), args.Get_as_bry("wiki"), args.Get_as_int("page_id"), args.Get_as_str("page_guid"));
 	}
-	private void Get_lines_rest(int qry_id, byte[] wiki_bry, int page_id) {
+	private void Get_lines_rest(int qry_id, byte[] wiki_bry, int page_id, String page_guid) {
+		Xofulltext_searcher_ui searcher_ui = new Xofulltext_searcher_ui(cache_mgr, app.Gui__cbk_mgr(), new Xog_cbk_trg(page_guid));
+
 		Xofulltext_cache_line[] lines = cache_mgr.Get_lines_rest(qry_id, wiki_bry, page_id);
 		for (Xofulltext_cache_line line : lines) {
 			searcher_ui.Send_line_add(true, qry_id, wiki_bry, page_id, line.Line_seq(), line.Line_html());

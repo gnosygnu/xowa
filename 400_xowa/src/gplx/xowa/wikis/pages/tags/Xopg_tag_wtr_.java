@@ -20,6 +20,9 @@ public class Xopg_tag_wtr_ {
 		head_tags.Add(Xopg_tag_itm.New_js_file(css_dir.GenSubFil_nest("Namespace_.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(css_dir.GenSubFil_nest("String_.js")));
 	}
+	public static void Add__tab_uid(Xopg_tag_mgr head_tags, Guid_adp page_guid) {
+		head_tags.Add(Xopg_tag_itm.New_js_code("xo.page_guid = '" + page_guid.To_str() + "'"));
+	}
 	public static void Add__xocss(Xopg_tag_mgr head_tags, Io_url http_root) {
 		Io_url css_dir = http_root.GenSubDir_nest("bin", "any", "xowa", "html", "res", "src", "xowa", "xocss", "core");
 		head_tags.Add(Xopg_tag_itm.New_css_file(css_dir.GenSubFil_nest("xocss_core-0.0.1.css")));

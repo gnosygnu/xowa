@@ -30,6 +30,13 @@ public class Xoh_page implements Xoa_page {
 	public Xopg_wtxt_data			Wtxt()				{return wtxt;}				private final    Xopg_wtxt_data wtxt = new Xopg_wtxt_data();
 	public Xopg_hdump_data			Hdump_mgr()			{return hdump;}				private final    Xopg_hdump_data hdump = new Xopg_hdump_data();
 	public Xol_lang_itm				Lang()				{return lang;}				private Xol_lang_itm lang;
+	private Guid_adp page_guid;
+	public Guid_adp Page_guid() {
+		if (page_guid == null) {
+			page_guid = Guid_adp_.New();
+		}
+		return page_guid;
+	}
 
 	public boolean					Xtn__timeline_exists() {return xtn__timeline_exists;} private boolean xtn__timeline_exists; public void Xtn__timeline_exists_y_() {xtn__timeline_exists = true;}
 	public boolean					Xtn__gallery_exists() {return xtn__gallery_exists;} private boolean xtn__gallery_exists; public void Xtn__gallery_exists_y_() {xtn__gallery_exists = true;}

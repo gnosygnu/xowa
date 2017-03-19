@@ -19,6 +19,7 @@ public class Gflucene_index_data {
 	public final    Gflucene_analyzer_data analyzer_data;
 	public final    String index_dir;
 	public final    float max_merged_segments = 1500; // "limits" maximum file size
+	public final    boolean positional_enabled = false;
 	public Gflucene_index_data(Gflucene_analyzer_data analyzer_data, String index_dir) {
 		this.analyzer_data = analyzer_data;
 		this.index_dir = index_dir;

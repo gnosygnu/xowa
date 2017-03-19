@@ -18,6 +18,7 @@ import gplx.xowa.langs.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.wikis.pages.redirects.*; import gplx.xowa.wikis.pages.hdumps.*; import gplx.xowa.wikis.pages.htmls.*; import gplx.xowa.wikis.pages.wtxts.*;
 public interface Xoa_page {
 	Xow_wiki				Wiki();
+	Guid_adp                Page_guid();
 	Xoa_url					Url(); byte[] Url_bry_safe();
 	Xoa_ttl					Ttl();
 	Xopg_db_data			Db();

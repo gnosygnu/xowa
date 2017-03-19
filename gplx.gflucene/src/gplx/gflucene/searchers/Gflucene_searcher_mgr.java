@@ -58,7 +58,7 @@ public class Gflucene_searcher_mgr {
 			throw Err_.new_exc(e, "lucene_index", "failed to init searcher", "dir", idx_data.index_dir);
 		}
 			}
-	public void Exec(List_adp list, Gflucene_searcher_qry data) {
+	public void Exec(Ordered_hash list, Gflucene_searcher_qry data) {
 				try {
 			IndexReader reader = DirectoryReader.open(index);
 			IndexSearcher searcher = new IndexSearcher(reader);
@@ -79,10 +79,14 @@ public class Gflucene_searcher_mgr {
 				int docId = hits[i].doc;
 				Document d = searcher.doc(docId);
 //				Gflucene_doc_data doc = new Gflucene_doc_data(Integer.parseInt(d.get("page_id")), Integer.parseInt(d.get("page_score")), d.get("title"), "");
-				Gflucene_doc_data doc = new Gflucene_doc_data(Integer.parseInt(d.get("page_id")), 0, d.get("title"), "");
-				doc.lucene_score = hits[i].score;
+				String docTitle = d.get("title");
+				Gflucene_doc_data doc = (Gflucene_doc_data)list.Get_by(docTitle);
+				if (doc == null) {
+					doc = new Gflucene_doc_data(Integer.parseInt(d.get("page_id")), 0, docTitle, "");
+					doc.lucene_score = hits[i].score;
+					list.Add(docTitle, doc);
+				}
 //				Tfds.Write(doc.lucene_score, doc.title);
-				list.Add(doc);
 			}
 			
 			reader.close();

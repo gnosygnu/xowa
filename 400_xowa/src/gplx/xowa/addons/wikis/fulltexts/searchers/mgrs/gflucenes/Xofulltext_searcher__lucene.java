@@ -24,7 +24,7 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 	private final    Gflucene_searcher_mgr searcher = new Gflucene_searcher_mgr();
 	public void Search(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_searcher_args args) {
 		// create list
-		List_adp list = List_adp_.New();
+		Ordered_hash list = Ordered_hash_.New();
 
 		// init searcher with wiki
 		Gflucene_analyzer_data analyzer_data = Gflucene_analyzer_data.New_data_from_locale(wiki.Lang().Key_str());

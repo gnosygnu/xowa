@@ -47,6 +47,13 @@ public class Xoae_page implements Xoa_page {
 	public void						Xtn_gallery_packed_exists_y_() {html.Xtn_gallery_packed_exists_y_();}
 	public boolean						Xtn__timeline_exists() {return false;}	// drd always sets timeline
 	public boolean					Xtn__gallery_exists() {return false;}	// drd does not need to set gallery.style.css
+	private Guid_adp page_guid;
+	public Guid_adp Page_guid() {
+		if (page_guid == null) {
+			page_guid = Guid_adp_.New();
+		}
+		return page_guid;
+	}
 
 	public Xowe_wiki				Wikie() {return wiki;} private Xowe_wiki wiki;
 	public Xol_lang_itm				Lang() {return lang;} public Xoae_page Lang_(Xol_lang_itm v) {lang = v; return this;} private Xol_lang_itm lang;

@@ -30,9 +30,9 @@ class Xofulltext_highlighter_mgr implements Gfo_invk {
 	private final    Gflucene_highlighter_mgr highlighter_mgr = new Gflucene_highlighter_mgr();
 	private final    Xoh_page hpg = new Xoh_page();
 	private final    Xowd_page_itm tmp_page_row = new Xowd_page_itm();
-	private final    List_adp list;
+	private final    Ordered_hash list;
 	private final    Xofulltext_extractor extractor = new Xofulltext_extractor();
-	public Xofulltext_highlighter_mgr(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_searcher_args searcher_args, Gflucene_analyzer_data analyzer_data, Gflucene_searcher_qry searcher_data, List_adp list) {
+	public Xofulltext_highlighter_mgr(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_searcher_args searcher_args, Gflucene_analyzer_data analyzer_data, Gflucene_searcher_qry searcher_data, Ordered_hash list) {
 		this.ui = ui;
 		this.wiki = wiki;
 		this.searcher_args = searcher_args;
