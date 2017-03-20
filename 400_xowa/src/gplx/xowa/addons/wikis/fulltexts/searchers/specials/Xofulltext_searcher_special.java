@@ -18,23 +18,13 @@ import gplx.xowa.specials.*; import gplx.core.net.qargs.*;
 import gplx.xowa.addons.apps.cfgs.*;
 public class Xofulltext_searcher_special implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
-		// get qry if any
+		// get url_args, cfg_mgr
 		Gfo_qarg_mgr url_args = new Gfo_qarg_mgr().Init(url.Qargs_ary());
-		byte[] query = url_args.Read_bry_or("query", Bry_.Empty);
-
-		// get options and create page
 		Xocfg_mgr cfg_mgr = wiki.App().Cfg();
-		new Xofulltext_searcher_html
-		( query
-		, cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.case_match", false)
-		, cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.auto_wildcard_bgn", false)
-		, cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.auto_wildcard_end", false)
-		, cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.expand_matches_section", false)
-		, cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.show_all_matches", false)
-		, cfg_mgr.Get_int_app_or ("xowa.addon.search.fulltext.special.max_pages_per_wiki", 100)
-		, wiki.Domain_str()
-		, cfg_mgr.Get_str_app_or ("xowa.addon.search.fulltext.special.namespaces", "0|4")
-		).Bld_page_by_mustache(wiki.App(), page, this);
+
+		// create page
+		Xofulltext_searcher_html html = new Xofulltext_searcher_html(cfg_mgr, url_args, wiki);
+		html.Bld_page_by_mustache(wiki.App(), page, this);
 	}
 	Xofulltext_searcher_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
 	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;

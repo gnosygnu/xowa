@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.fulltexts.searchers.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*;
 public class Xofulltext_cache_qry {
-	public Xofulltext_cache_qry(int id, byte[] qry) {
+	public Xofulltext_cache_qry(int id, byte[] text) {
 		this.id = id;
-		this.qry = qry;
+		this.text = text;
 	}
-	public int Id() {return id;} private final    int id;
-	public byte[] Qry() {return qry;} private final    byte[] qry;
-	public Hash_adp_bry Wikis() {return wikis;} private final    Hash_adp_bry wikis = Hash_adp_bry.cs();
+	public int            Id()    {return id;} private final    int id;
+	public byte[]         Text()  {return text;} private final    byte[] text;
+	public Ordered_hash   Pages() {return pages;} private final    Ordered_hash pages = Ordered_hash_.New();
 }

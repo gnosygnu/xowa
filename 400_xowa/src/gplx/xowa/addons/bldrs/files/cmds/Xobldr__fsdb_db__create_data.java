@@ -284,7 +284,9 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 			trg_cfg_mgr.Tbl().Conn().Txn_end();
 		trg_cfg_mgr.Tbl().Conn().Rls_conn();
 		if (!trg_mnt_itm.Db_mgr().File__solo_file()) {
-			trg_bin_fil.Conn().Txn_end(); trg_bin_fil.Conn().Rls_conn();
+			if (trg_bin_fil != null) { // NOTE: trg_bin_fil is null when there are no images in the wiki; EX: bo.b; DATE:2017-03-19
+				trg_bin_fil.Conn().Txn_end(); trg_bin_fil.Conn().Rls_conn();
+			}
 		}
 		if (exec_done) {
 			bldr_cfg_tbl.Delete_grp(Cfg_fsdb_make);	// delete bmks for future reruns; DATE:2014-08-20

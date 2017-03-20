@@ -23,7 +23,7 @@ import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
 public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 	private final    Gflucene_searcher_mgr searcher = new Gflucene_searcher_mgr();
-	public void Search(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_searcher_args args) {
+	public void Search(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_args_qry args, Xofulltext_args_wiki wiki_args) {
 		// create list
 		Ordered_hash list = Ordered_hash_.New();
 
@@ -34,7 +34,7 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 		, Xosearch_fulltext_addon.Get_index_dir(wiki).Xto_api()));
 
 		// exec search
-		Gflucene_searcher_qry searcher_data = new Gflucene_searcher_qry(String_.new_u8(args.query), args.max_pages_per_wiki);
+		Gflucene_searcher_qry searcher_data = new Gflucene_searcher_qry(String_.new_u8(args.search_text), wiki_args.limit);
 		searcher.Exec(list, searcher_data);
 
 		// term
@@ -61,7 +61,7 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 			doc_data.page_full_db = page_ttl.Full_db();
 
 			// call page doc_data
-			Xofulltext_searcher_page page = new Xofulltext_searcher_page(args.query_id, wiki.Domain_str(), doc_data.page_id, String_.new_u8(doc_data.page_full_db), args.expand_matches_section);
+			Xofulltext_searcher_page page = new Xofulltext_searcher_page(args.qry_id, wiki.Domain_bry(), doc_data.page_id, doc_data.page_full_db, args.expand_matches_section);
 			ui.Send_page_add(page);
 		}
 		ui.Send_wiki_update(wiki.Domain_bry(), len + List_adp_.Base1, -1);

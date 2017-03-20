@@ -25,9 +25,9 @@ public class Xofulltext_searcher_ui {
 		this.cbk_mgr = cbk_mgr;
 		this.cbk_trg = cbk_trg;
 	}
-	public void Send_wiki_add(byte[] wiki_domain) {
+	public void Send_wiki_add(byte[] wiki) {
 		cbk_mgr.Send_json(cbk_trg, "xo.fulltext_searcher.results__wiki__add__recv", gplx.core.gfobjs.Gfobj_nde.New()
-			.Add_bry("wiki", wiki_domain)
+			.Add_bry("wiki", wiki)
 			);
 	}
 	public void Send_wiki_update(byte[] wiki, int found, int searched) {
@@ -40,14 +40,15 @@ public class Xofulltext_searcher_ui {
 	public void Send_page_add(Xofulltext_searcher_page page) {
 		cbk_mgr.Send_json(cbk_trg, "xo.fulltext_searcher.results__page__add__recv", gplx.core.gfobjs.Gfobj_nde.New()
 		.Add_int("query_id", page.Query_id())
-		.Add_str("wiki", page.Wiki_domain())
+		.Add_bry("wiki", page.Wiki_domain())
 		.Add_int("page_id", page.Page_id())
-		.Add_str("page_ttl", page.Page_title())
+		.Add_bry("page_ttl", page.Page_ttl())
 		.Add_bool("expand_matches_section", page.Expand_matches_section())
 		);
+		cache_mgr.Add_page(page.Query_id(), page.Wiki_domain(), page.Page_id(), page.Page_ttl());
 	}
 	public void Send_line_add(boolean show_all_matches, int qry_id, byte[] wiki_domain, int page_id, int line_sort_order, byte[] line_html) {
-		cache_mgr.Add(qry_id, wiki_domain, page_id, line_sort_order, line_html);
+		cache_mgr.Add_line(qry_id, wiki_domain, page_id, line_sort_order, line_html);
 
 		line_sort_order += List_adp_.Base1; // NOTE: increment after cache_mgr
 		if (line_sort_order == 1 || show_all_matches) {

@@ -23,13 +23,13 @@ public class Xofulltext_searcher__brute implements Xofulltext_searcher {
 	private final    Xofulltext_finder_mgr finder = new Xofulltext_finder_mgr();
 	private final    Xofulltext_finder_cbk__eval cbk_eval = new Xofulltext_finder_cbk__eval();
 	private final    Xofulltext_finder_cbk__highlight cbk_highlight = new Xofulltext_finder_cbk__highlight();
-	public void Search(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_searcher_args args) {
+	public void Search(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_args_qry args, Xofulltext_args_wiki wiki_args) {
 		// get pages from db
 		Db_conn page_conn = wiki.Data__core_mgr().Tbl__page().Conn();
 		Db_rdr page_rdr = page_conn.Stmt_sql("SELECT * FROM page WHERE page_namespace IN (0) ORDER BY page_score DESC").Exec_select__rls_auto();
 
 		// init finder
-		finder.Init(args.query, args.case_match, args.auto_wildcard_bgn, args.auto_wildcard_end, Byte_ascii.Star, Byte_ascii.Dash);
+		finder.Init(args.search_text, args.case_match, args.auto_wildcard_bgn, args.auto_wildcard_end, Byte_ascii.Star, Byte_ascii.Dash);
 
 		// loop
 		byte[] wiki_domain = wiki.Domain_bry();
@@ -58,13 +58,13 @@ public class Xofulltext_searcher__brute implements Xofulltext_searcher {
 					ui.Send_wiki_update(wiki_domain, found, searched);
 
 					// do highlight
-					if (found <= args.max_pages_per_wiki) {
-						cbk_highlight.Init(ui, args.query_id, wiki, page_id, ttl.Full_db(), args.show_all_matches);
+					if (found <= wiki_args.limit) {
+						cbk_highlight.Init(ui, args.qry_id, wiki, page_id, ttl.Full_db(), args.show_all_matches);
 						ui.Send_page_add(new Xofulltext_searcher_page
-							( args.query_id
-							, String_.new_u8(wiki_domain)
+							( args.qry_id
+							, wiki_domain
 							, page_id
-							, String_.new_u8(ttl.Full_db())
+							, ttl.Full_db()
 							, args.expand_matches_section
 							));
 						finder.Match(text_mcase, 0, text_mcase.length, cbk_highlight);

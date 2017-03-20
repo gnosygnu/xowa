@@ -14,7 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*;
-import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
-public interface Xofulltext_searcher {
-	void Search(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_args_qry qry_args, Xofulltext_args_wiki wiki_args);
+public class Xofulltext_args_wiki {
+	public byte[] wiki;
+	public byte[] ns_ids;
+	public int offset;
+	public int limit;
+
+	public Xofulltext_args_wiki(byte[] wiki) {
+		this.wiki = wiki;
+	}
+	public void Init_by_json(String key, byte[] val) {
+		if      (String_.Eq(key, "ns_ids"))           this.ns_ids = val;
+		else if (String_.Eq(key, "offsets"))          this.offset = Bry_.To_int(val);
+		else if (String_.Eq(key, "limits"))           this.limit = Bry_.To_int(val);
+	}
 }
