@@ -82,9 +82,10 @@ public class Gflucene_searcher_mgr {
 				String docTitle = d.get("title");
 				Gflucene_doc_data doc = (Gflucene_doc_data)list.Get_by(docTitle);
 				if (doc == null) {
-					doc = new Gflucene_doc_data(Integer.parseInt(d.get("page_id")), 0, docTitle, "");
+					int doc_id = Integer.parseInt(d.get("page_id"));
+					doc = new Gflucene_doc_data(doc_id, 0, docTitle, "");
 					doc.lucene_score = hits[i].score;
-					list.Add(docTitle, doc);
+					list.Add(doc_id, doc);
 				}
 //				Tfds.Write(doc.lucene_score, doc.title);
 			}

@@ -22,4 +22,5 @@ public class Xofulltext_cache_qry {
 	public int            Id()    {return id;} private final    int id;
 	public byte[]         Text()  {return text;} private final    byte[] text;
 	public Ordered_hash   Pages() {return pages;} private final    Ordered_hash pages = Ordered_hash_.New();
+	public boolean done;
 }

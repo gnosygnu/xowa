@@ -77,33 +77,48 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 			// try to get from cache
 			byte[] qry_key = args.Qry_key(wiki_domain, wiki_args.ns_ids);
 			int qry_id = cache_mgr.Ids__get_or_neg1(qry_key);
+			Xofulltext_cache_qry qry = null;
 			if (qry_id == -1) {
 				qry_id = cache_mgr.Ids__next();
 				cache_mgr.Add(qry_id, qry_key);
+				qry = cache_mgr.Get_or_null(qry_id);
 			}
 			else {
-				Xofulltext_cache_page[] cached_pages = cache_mgr.Get_pages_rng(qry_id, wiki_args.offset, wiki_args.limit);
-				if (cached_pages != null) {
-					for (Xofulltext_cache_page page : cached_pages) {
-						ui.Send_page_add(new Xofulltext_searcher_page(qry_id, wiki.Domain_bry(), page.Page_id(), page.Page_ttl(), args.expand_matches_section));
-						int len = page.Lines().Len();
-						for (int i = 0; i < len; i++) {
-							Xofulltext_cache_line line = (Xofulltext_cache_line)page.Lines().Get_at(i);
-							ui.Send_line_add(args.show_all_matches, qry_id, wiki.Domain_bry(), page.Page_id(), line.Line_seq(), line.Line_html());
-						}
-					}
-					return;
+				qry = cache_mgr.Get_or_null(qry_id);
+				if (qry != null) {
+					boolean all_shown = Display_cached_qry(args, ui, wiki, qry, qry_id, wiki_args);
+					if (all_shown || qry.done)
+						return;
 				}
 			}
 			args.qry_id = qry_id;
 
 			// do search
 			Xofulltext_searcher searcher = Get_searcher(wiki);
-			searcher.Search(ui, wiki, args, wiki_args);
+			searcher.Search(ui, wiki, qry, args, wiki_args);
 		}
 		catch (Exception exc) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to search_wiki; err=~{0}", Err_.Message_gplx_log(exc));
 		}
+	}
+	private boolean Display_cached_qry(Xofulltext_args_qry args, Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_cache_qry qry, int qry_id, Xofulltext_args_wiki wiki_args) {
+		int bgn = wiki_args.bgn;
+		int len = wiki_args.len;
+		int end = bgn + len;
+		int max = qry.Pages().Len();
+		for (int i = bgn; i < end; i++) {
+			if (i >= max) return false; // more pages requested than available
+			Xofulltext_cache_page page = (Xofulltext_cache_page)qry.Pages().Get_at(i);
+			ui.Send_page_add(new Xofulltext_searcher_page(qry_id, wiki.Domain_bry(), page.Page_id(), page.Page_ttl(), args.expand_matches_section));
+
+			// loop lines
+			int lines_len = page.Lines().Len();
+			for (int j = 0; j < lines_len; j++) {
+				Xofulltext_cache_line line = (Xofulltext_cache_line)page.Lines().Get_at(j);
+				ui.Send_line_add(args.show_all_matches, qry_id, wiki.Domain_bry(), page.Page_id(), line.Line_seq(), line.Line_html());
+			}
+		}
+		return true;
 	}
 
 	public void Get_lines_rest(Json_nde args) {

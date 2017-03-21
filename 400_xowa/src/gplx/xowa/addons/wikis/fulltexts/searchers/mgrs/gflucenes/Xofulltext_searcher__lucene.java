@@ -21,11 +21,14 @@ import gplx.gflucene.searchers.*;
 import gplx.gflucene.highlighters.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
+import gplx.xowa.addons.wikis.fulltexts.searchers.caches.*;
 public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 	private final    Gflucene_searcher_mgr searcher = new Gflucene_searcher_mgr();
-	public void Search(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_args_qry args, Xofulltext_args_wiki wiki_args) {
-		// create list
-		Ordered_hash list = Ordered_hash_.New();
+	public void Search(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_cache_qry qry, Xofulltext_args_qry args, Xofulltext_args_wiki wiki_args) {
+		// create lists
+		Ordered_hash full_list = Ordered_hash_.New();
+		Ordered_hash temp_list = Ordered_hash_.New();
+		Ordered_hash page_list = qry.Pages();
 
 		// init searcher with wiki
 		Gflucene_analyzer_data analyzer_data = Gflucene_analyzer_data.New_data_from_locale(wiki.Lang().Key_str());
@@ -33,41 +36,56 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 		( analyzer_data
 		, Xosearch_fulltext_addon.Get_index_dir(wiki).Xto_api()));
 
-		// exec search
-		Gflucene_searcher_qry searcher_data = new Gflucene_searcher_qry(String_.new_u8(args.search_text), wiki_args.limit);
-		searcher.Exec(list, searcher_data);
-
-		// term
-		searcher.Term();
-
 		// get page_load vars
 		Xowd_page_itm tmp_page_row = new Xowd_page_itm();
 		Xowd_page_tbl page_tbl = wiki.Data__core_mgr().Db__core().Tbl__page();
 
-		// loop list and load pages
-		int len = list.Len();
-		for (int i = 0; i < len; i++) {
-			Gflucene_doc_data doc_data = (Gflucene_doc_data)list.Get_at(i);
+		// exec search
+		int needed_bgn = wiki_args.bgn;
+		if (needed_bgn < page_list.Len()) needed_bgn = page_list.Len();
+		int needed_end = wiki_args.bgn + wiki_args.len;
+		int needed_len = needed_end - needed_bgn;
+		int found = 0;
+		Gflucene_searcher_qry searcher_data = new Gflucene_searcher_qry(String_.new_u8(args.search_text), 100);
+		while (found < needed_len) {
+			searcher.Exec(temp_list, searcher_data);
 
-			// load page
-			if (!page_tbl.Select_by_id(tmp_page_row, doc_data.page_id)) {
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "searcher.lucene: could not find page; page_id=~{0}", doc_data.page_id);
-				continue;
+			int temp_list_len = temp_list.Len();
+			for (int i = 0; i < temp_list_len; i++) {
+				Gflucene_doc_data doc_data = (Gflucene_doc_data)temp_list.Get_at(i);
+				if (!page_list.Has(doc_data.page_id)) {
+					// load page
+					if (!page_tbl.Select_by_id(tmp_page_row, doc_data.page_id)) {
+						Gfo_usr_dlg_.Instance.Warn_many("", "", "searcher.lucene: could not find page; page_id=~{0}", doc_data.page_id);
+						continue;
+					}
+
+					// make page_ttl
+					Xoa_ttl page_ttl = wiki.Ttl_parse(tmp_page_row.Ns_id(), tmp_page_row.Ttl_page_db());
+					doc_data.ns_id = tmp_page_row.Ns_id();
+					doc_data.page_full_db = page_ttl.Full_db();
+
+					if (!wiki_args.ns_hash.Has(doc_data.ns_id)) continue;
+
+					// call page doc_data
+					Xofulltext_searcher_page page = new Xofulltext_searcher_page(args.qry_id, wiki.Domain_bry(), doc_data.page_id, doc_data.page_full_db, args.expand_matches_section);
+					ui.Send_page_add(page);
+
+					full_list.Add(doc_data.page_id, doc_data);
+					found++;
+					if (found >= needed_len) break;
+				}
 			}
-
-			// make page_ttl
-			Xoa_ttl page_ttl = wiki.Ttl_parse(tmp_page_row.Ns_id(), tmp_page_row.Ttl_page_db());
-			doc_data.ns_id = tmp_page_row.Ns_id();
-			doc_data.page_full_db = page_ttl.Full_db();
-
-			// call page doc_data
-			Xofulltext_searcher_page page = new Xofulltext_searcher_page(args.qry_id, wiki.Domain_bry(), doc_data.page_id, doc_data.page_full_db, args.expand_matches_section);
-			ui.Send_page_add(page);
+			temp_list.Clear();
 		}
-		ui.Send_wiki_update(wiki.Domain_bry(), len + List_adp_.Base1, -1);
+
+		// term
+		searcher.Term();
+
+		ui.Send_wiki_update(wiki.Domain_bry(), page_list.Len(), -1);
 
 		// create highlighter thread and launch it
-		Xofulltext_highlighter_mgr highlighter_mgr = new Xofulltext_highlighter_mgr(ui, wiki, args, analyzer_data, searcher_data, list);
+		Xofulltext_highlighter_mgr highlighter_mgr = new Xofulltext_highlighter_mgr(ui, wiki, args, analyzer_data, searcher_data, full_list);
 		gplx.core.threads.Thread_adp_.Start_by_key("highlighter", Cancelable_.Never, highlighter_mgr, Xofulltext_highlighter_mgr.Invk__highlight);
 	}
 }

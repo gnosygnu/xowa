@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*;
+import gplx.xowa.addons.wikis.fulltexts.searchers.caches.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
 public interface Xofulltext_searcher {
-	void Search(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_args_qry qry_args, Xofulltext_args_wiki wiki_args);
+	void Search(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_cache_qry qry, Xofulltext_args_qry qry_args, Xofulltext_args_wiki wiki_args);
 }

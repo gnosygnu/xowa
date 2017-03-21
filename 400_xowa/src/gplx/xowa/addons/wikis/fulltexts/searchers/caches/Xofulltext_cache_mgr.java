@@ -55,6 +55,9 @@ public class Xofulltext_cache_mgr {
 		Xofulltext_cache_line line = new Xofulltext_cache_line(line_seq, line_html);
 		page.Lines().Add(line);
 	}
+	public Xofulltext_cache_qry Get_or_null(int qry_id) {
+		return (Xofulltext_cache_qry)qry_hash.Get_by(qry_id);
+	}
 	public Xofulltext_cache_page[] Get_pages_rng(int qry_id, int page_seq_bgn, int page_seq_end) {
 		Xofulltext_cache_qry qry = (Xofulltext_cache_qry)qry_hash.Get_by(qry_id);
 		if (qry == null) return null;
