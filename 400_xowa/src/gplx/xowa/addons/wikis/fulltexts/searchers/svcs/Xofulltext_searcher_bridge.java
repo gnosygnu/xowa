@@ -26,15 +26,17 @@ public class Xofulltext_searcher_bridge implements Bridge_cmd_itm {
 		Json_nde args = data.Get_kv(Bridge_cmd_mgr.Msg__args).Val_as_nde();
 		switch (proc_id) {
 			case Proc__search:					svc.Search(args); break;
+			case Proc__cancel:					svc.Cancel(args); break;
 			case Proc__get_lines_rest:			svc.Get_lines_rest(args); break;
 			default: throw Err_.new_unhandled_default(proc_id);
 		}
 		return "";
 	}
 
-	private static final byte Proc__search = 0, Proc__get_lines_rest = 1;
+	private static final byte Proc__search = 0, Proc__cancel = 1, Proc__get_lines_rest = 2;
 	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("search"						, Proc__search)
+	.Add_str_byte("cancel"						, Proc__cancel)
 	.Add_str_byte("get_lines_rest"				, Proc__get_lines_rest)
 	;
 

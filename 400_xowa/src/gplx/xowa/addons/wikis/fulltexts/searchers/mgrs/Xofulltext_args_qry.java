@@ -28,10 +28,17 @@ public class Xofulltext_args_qry {
 	public boolean auto_wildcard_end;
 	public boolean expand_matches_section;
 	public boolean show_all_matches;
+	private boolean canceled;
 
 	public byte[] Qry_key(byte[] wiki, byte[] ns_ids) {
 		return Bry_.Add_w_dlm(Byte_ascii.Nl, wiki, ns_ids, search_text); // EX: "en.wikipedia.org\n0|4\nearth"
 	}
+	public void Cancel() {
+		synchronized (this) {
+			canceled = true;
+		}
+	}
+	public boolean Canceled() {return canceled;}
 
 	public static Xofulltext_args_qry New_by_json(Json_nde args) {
 		Xofulltext_args_qry rv = new Xofulltext_args_qry();

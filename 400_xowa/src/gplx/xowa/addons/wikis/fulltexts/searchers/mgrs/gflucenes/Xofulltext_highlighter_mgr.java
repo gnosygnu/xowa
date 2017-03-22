@@ -46,6 +46,7 @@ class Xofulltext_highlighter_mgr implements Gfo_invk {
 		// loop items
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {
+			if (searcher_args.Canceled()) return;
 			Gflucene_doc_data item = (Gflucene_doc_data)list.Get_at(i);
 			try {
 				Highlight_item(item);

@@ -48,10 +48,12 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 		int found = 0;
 		Gflucene_searcher_qry searcher_data = new Gflucene_searcher_qry(String_.new_u8(args.search_text), 100);
 		while (found < needed_len) {
+			if (args.Canceled()) return;
 			searcher.Exec(temp_list, searcher_data);
 
 			int temp_list_len = temp_list.Len();
 			for (int i = 0; i < temp_list_len; i++) {
+				if (args.Canceled()) return;
 				Gflucene_doc_data doc_data = (Gflucene_doc_data)temp_list.Get_at(i);
 				if (!page_list.Has(doc_data.page_id)) {
 					// load page

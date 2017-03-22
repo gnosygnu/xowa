@@ -23,7 +23,7 @@ public class Xofulltext_searcher_special implements Xow_special_page {
 		Xocfg_mgr cfg_mgr = wiki.App().Cfg();
 
 		// create page
-		Xofulltext_searcher_html html = new Xofulltext_searcher_html(cfg_mgr, url_args, wiki);
+		Xofulltext_searcher_html html = new Xofulltext_searcher_html(cfg_mgr, url_args, wiki, page.Page_guid());
 		html.Bld_page_by_mustache(wiki.App(), page, this);
 	}
 	Xofulltext_searcher_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}

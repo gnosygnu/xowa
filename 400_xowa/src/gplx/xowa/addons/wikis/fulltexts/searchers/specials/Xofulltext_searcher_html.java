@@ -21,7 +21,8 @@ import gplx.xowa.addons.apps.cfgs.*;
 class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache_doc_itm {
 	private final    boolean case_match, auto_wildcard_bgn, auto_wildcard_end, expand_matches_section, show_all_matches;
 	private final    Hash_adp props = Hash_adp_.New();
-	public Xofulltext_searcher_html(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, Xow_wiki wiki) {
+	public Xofulltext_searcher_html(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, Xow_wiki wiki, Guid_adp page_guid) {
+		props.Add("page_guid", page_guid.To_str());
 		props.Add("cur_wiki", wiki.Domain_str());
 		props.Add("search", url_args.Read_str_or("search", ""));
 		props_Add(cfg_mgr, url_args, "wikis" , wiki.Domain_str());

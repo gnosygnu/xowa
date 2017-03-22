@@ -20,7 +20,7 @@ import gplx.xowa.addons.wikis.fulltexts.core.*;
 public class Xofulltext_indexer_wkr {
 	private final    Gflucene_indexer_mgr index_wtr = new Gflucene_indexer_mgr();
 	private final    Xofulltext_extractor extractor = new Xofulltext_extractor();
-	public void Init(Xow_wiki wiki) {
+	public void Init(Xow_wiki wiki, String idx_opt) {
 		// delete existing dir
 		Io_url index_dir = Xosearch_fulltext_addon.Get_index_dir(wiki);
 		Io_mgr.Instance.DeleteDirDeep(index_dir);
@@ -28,7 +28,9 @@ public class Xofulltext_indexer_wkr {
 		// init index_dir
 		index_wtr.Init(new Gflucene_index_data
 		( Gflucene_analyzer_data.New_data_from_locale(wiki.Lang().Key_str())
-		, index_dir.Xto_api()));
+		, index_dir.Xto_api())
+		, idx_opt
+		);
 	}
 	public void Index(Xoae_page wpg) {
 		byte[] html = extractor.Extract(wpg.Db().Html().Html_bry());

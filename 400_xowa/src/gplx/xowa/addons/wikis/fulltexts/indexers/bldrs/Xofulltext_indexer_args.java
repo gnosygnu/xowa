@@ -15,9 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.fulltexts.indexers.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.indexers.*;
 import gplx.xowa.wikis.nss.*;
+import gplx.gflucene.indexers.*;
 public class Xofulltext_indexer_args implements Gfo_invk {
 	public byte[] wikis;
 	public String ns_ids;
+	public String idx_opt;
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		// wikis: null 
 		if (wikis == null)
@@ -34,15 +36,21 @@ public class Xofulltext_indexer_args implements Gfo_invk {
 				Xow_ns ns = ns_ary[i];
 				int ns_id = ns.Id();
 				if (ns_id < 0) continue; // ignore media, special 
-				if (i != 0) bfr.Add_byte(Byte_ascii.Pipe);
+				if (i != 0) bfr.Add_byte(Byte_ascii.Comma);
 				bfr.Add_int_variable(ns_id);
 			}
 			ns_ids = bfr.To_str_and_clear();
+		}
+
+		// idx_opt
+		if (idx_opt == null) {
+			idx_opt = Gflucene_idx_opt.Docs_and_freqs.Key();
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if      (ctx.Match(k, "wikis_"))            this.wikis = m.ReadBryOr("v", null);
 		else if	(ctx.Match(k, "ns_ids"))            this.ns_ids = m.ReadStrOr("v", null);
+		else if	(ctx.Match(k, "idx_opt"))           this.idx_opt = m.ReadStrOr("v", null);
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -50,6 +58,7 @@ public class Xofulltext_indexer_args implements Gfo_invk {
 		Xofulltext_indexer_args rv = new Xofulltext_indexer_args();
 		rv.wikis = args.Get_as_bry("wikis");
 		rv.ns_ids = args.Get_as_str("ns_ids");
+		rv.idx_opt = args.Get_as_str("idx_opt");
 		return rv;
 	}
 }

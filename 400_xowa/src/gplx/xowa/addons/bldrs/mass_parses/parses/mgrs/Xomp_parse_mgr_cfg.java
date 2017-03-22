@@ -37,6 +37,7 @@ public class Xomp_parse_mgr_cfg implements Gfo_invk {
 	public String	Wkr_machine_name()				{return wkr_machine_name;}				private String wkr_machine_name;
 	public boolean		Show_msg__fetched_pool()		{return show_msg__fetched_pool;}		private boolean show_msg__fetched_pool;
 	public boolean		Indexer_enabled()               {return indexer_enabled;}               private boolean indexer_enabled;
+	public String   Indexer_opt()                   {return indexer_opt;}                   private String indexer_opt = gplx.gflucene.indexers.Gflucene_idx_opt.Docs_and_freqs.Key();
 	public void Init(Xowe_wiki wiki) {
 		if (num_wkrs == -1)				num_wkrs = gplx.core.envs.Runtime_.Cpu_count();
 		if (num_pages_in_pool == -1)	num_pages_in_pool = num_wkrs * 1000;
@@ -66,6 +67,7 @@ public class Xomp_parse_mgr_cfg implements Gfo_invk {
 		else if	(ctx.Match(k, Invk__hdump_catboxes_))				hdump_catboxs = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk__log_math_))						log_math = m.ReadYn("v");
 		else if	(ctx.Match(k, "indexer_enabled_"))                  indexer_enabled = m.ReadYn("v");
+		else if	(ctx.Match(k, "indexer_opt_"))                      indexer_opt = m.ReadStr("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}

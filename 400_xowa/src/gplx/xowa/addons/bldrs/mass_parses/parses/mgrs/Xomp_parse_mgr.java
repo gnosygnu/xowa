@@ -61,7 +61,7 @@ public class Xomp_parse_mgr {
 
 		// init indexer
 		Xofulltext_indexer_wkr indexer = cfg.Indexer_enabled() ? new Xofulltext_indexer_wkr() : null;
-		if (indexer != null) indexer.Init(wiki);
+		if (indexer != null) indexer.Init(wiki, cfg.Indexer_opt());
 
 		// init parse_wkrs
 		for (int i = 0; i < wkr_len; ++i) {

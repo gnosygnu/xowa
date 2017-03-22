@@ -23,7 +23,7 @@ public class Xofulltext_indexer_mgr {
 	public void Exec(Xowe_wiki wiki, Xofulltext_indexer_ui ui, Xofulltext_indexer_args args) {
 		// init indexer
 		Xofulltext_indexer_wkr indexer = new Xofulltext_indexer_wkr();
-		indexer.Init(wiki);
+		indexer.Init(wiki, args.idx_opt);
 
 		// get page tbl
 		Xow_db_file core_db = wiki.Data__core_mgr().Db__core();
@@ -39,7 +39,7 @@ public class Xofulltext_indexer_mgr {
 		Db_rdr rdr = conn.Exec_rdr(Db_sql_.Make_by_fmt(String_.Ary
 		( "SELECT  page_id, page_score, page_namespace, page_title, page_html_db_id"
 		, "FROM    page"
-		, "WHERE   page_namespace IN ({0});"), String_.Replace(args.ns_ids, "|", ",")));
+		, "WHERE   page_namespace IN ({0});"), args.ns_ids));
 		while (rdr.Move_next()) {
 			// read vars
 			int page_namespace = rdr.Read_int("page_namespace");

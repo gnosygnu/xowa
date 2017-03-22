@@ -40,7 +40,7 @@ public class Gflucene_indexer_mgr {
 		public Gflucene_indexer_mgr() {
 	}
 	
-	public void Init(Gflucene_index_data idx_data) {
+	public void Init(Gflucene_index_data idx_data, String idx_opt) {
 				// create analyzer
 		this.analyzer = Gflucene_analyzer_mgr_.New_analyzer(idx_data.analyzer_data.key);
 		this.config = new IndexWriterConfig(analyzer);
@@ -67,7 +67,7 @@ public class Gflucene_indexer_mgr {
         
         // create field for body
 		this.body_fld_type = new FieldType();
-		IndexOptions index_options = idx_data.positional_enabled ? IndexOptions.DOCS_AND_FREQS_AND_POSITIONS : IndexOptions.DOCS_AND_FREQS;
+		IndexOptions index_options = To_index_options(idx_opt);
 		body_fld_type.setIndexOptions(index_options);
 		body_fld_type.setTokenized(true);
 		body_fld_type.setStored(false);
@@ -110,4 +110,15 @@ public class Gflucene_indexer_mgr {
 			throw Err_.new_exc(e, "lucene_index", "failed to close writer");
 		}
 			}
-}
+
+		private static IndexOptions To_index_options(String key) {
+		Gflucene_idx_opt opt = Gflucene_idx_opt.Parse(key);
+		switch (opt.Uid()) {
+			case Gflucene_idx_opt.Uid_docs:                                     return IndexOptions.DOCS;
+			case Gflucene_idx_opt.Uid_docs_and_freqs:                           return IndexOptions.DOCS_AND_FREQS;
+			case Gflucene_idx_opt.Uid_docs_and_freqs_and_positions:             return IndexOptions.DOCS_AND_FREQS_AND_POSITIONS;
+			case Gflucene_idx_opt.Uid_docs_and_freqs_and_positions_and_offsets: return IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS;
+			default:                                                            throw Err_.new_unhandled_default(opt.Uid());
+		}
+	}
+	}

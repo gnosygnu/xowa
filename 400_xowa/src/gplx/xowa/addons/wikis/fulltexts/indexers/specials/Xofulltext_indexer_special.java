@@ -26,6 +26,7 @@ public class Xofulltext_indexer_special implements Xow_special_page {
 		new Xofulltext_indexer_html
 		( url_args.Read_str_or("wikis", wiki.Domain_str())
 		, url_args.Read_str_or("ns_ids", "0")
+		, url_args.Read_str_or("idx_opt", gplx.gflucene.indexers.Gflucene_idx_opt.Docs_and_freqs.Key())
 		).Bld_page_by_mustache(wiki.App(), page, this);
 	}
 	Xofulltext_indexer_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
