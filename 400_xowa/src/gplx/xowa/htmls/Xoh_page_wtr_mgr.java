@@ -53,7 +53,8 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 	public void Init_by_wiki(Xow_wiki wiki) {
 		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__scripting_enabled);
 	}
-	public byte[] Gen(Xoae_page page, byte output_tid) {
+	public byte[] Gen(Xoae_page page, byte output_tid) {return Gen(page, Xoh_page_html_source_.Noop, output_tid);}
+	public byte[] Gen(Xoae_page page, Xoh_page_html_source page_html_source, byte output_tid) {
 		Xoh_page_wtr_wkr wtr = Wkr(output_tid);
 		Xowe_wiki wiki = page.Wikie();
 		if (init) {
@@ -62,7 +63,7 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 			page_edit_fmtr.Eval_mgr_(wiki.Eval_mgr());
 			page_html_fmtr.Eval_mgr_(wiki.Eval_mgr());
 		}
-		wtr.Write_page(html_bfr, page, wiki.Parser_mgr().Ctx());
+		wtr.Write_page(html_bfr, page, wiki.Parser_mgr().Ctx(), page_html_source);
 		return html_bfr.To_bry_and_clear_and_rls();
 	}
 	public Xoh_page_wtr_wkr Wkr(byte output_tid) {

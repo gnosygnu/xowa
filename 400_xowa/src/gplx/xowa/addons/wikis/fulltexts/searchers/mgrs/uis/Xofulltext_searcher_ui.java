@@ -25,9 +25,11 @@ public class Xofulltext_searcher_ui {
 		this.cbk_mgr = cbk_mgr;
 		this.cbk_trg = cbk_trg;
 	}
-	public void Send_wiki_add(byte[] wiki) {
+	public void Send_wiki_add(byte[] wiki, int rng_bgn, int rng_end) {
 		cbk_mgr.Send_json(cbk_trg, "xo.fulltext_searcher.results__wiki__add__recv", gplx.core.gfobjs.Gfobj_nde.New()
 			.Add_bry("wiki", wiki)
+			.Add_int("rng_bgn", rng_bgn + List_adp_.Base1)
+			.Add_int("rng_end", rng_end)
 			);
 	}
 	public void Send_wiki_update(byte[] wiki, int found, int searched) {
@@ -65,5 +67,8 @@ public class Xofulltext_searcher_ui {
 			.Add_int("found", line_sort_order)
 			.Add_bool("show_all_matches", show_all_matches)
 			);
+	}
+	public void Send_done() {
+		cbk_mgr.Send_json(cbk_trg, "xo.fulltext_searcher.results__done__recv", gplx.core.gfobjs.Gfobj_nde.New());
 	}
 }

@@ -29,13 +29,13 @@ import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.gflucenes.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.*;
 class Xofulltext_searcher_svc implements Gfo_invk {
 	private final    Xoa_app app;
-	private final    Hash_adp hash = Hash_adp_.New();
+	private final    Hash_adp wkr_hash = Hash_adp_.New();
 	public Xofulltext_searcher_svc(Xoa_app app) {
 		this.app = app;
 	}
 	public void Cancel(Json_nde args) {this.Cancel(args.Get_as_str("page_guid"));}
 	private void Cancel(String page_guid) {
-		Xofulltext_args_qry prv_args = (Xofulltext_args_qry)hash.Get_by(page_guid);
+		Xofulltext_args_qry prv_args = (Xofulltext_args_qry)wkr_hash.Get_by(page_guid);
 		if (prv_args != null) {
 			prv_args.Cancel();
 		}
@@ -45,7 +45,9 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 		Xofulltext_args_qry search_args = Xofulltext_args_qry.New_by_json(args);
 		search_args.cache_mgr = this.Cache_mgr();
 
+		// cancel any existing searches
 		this.Cancel(search_args.page_guid);
+		wkr_hash.Add(search_args.page_guid, search_args);
 		
 		// autosave any changes if enabled
 		Xocfg_mgr cfg_mgr = app.Cfg();
@@ -58,8 +60,6 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 //				cfg_mgr.Set_int_app ("xowa.addon.search.fulltext.special.max_pages_per_wiki", search_args.max_pages_per_wiki);
 //				cfg_mgr.Set_bry_app ("xowa.addon.search.fulltext.special.namespaces", search_args.namespaces);
 		}
-
-		hash.Add(search_args.page_guid, search_args);
 
 		// launch thread
 		gplx.core.threads.Thread_adp_.Start_by_val("search", Cancelable_.Never, this, Invk__search, search_args);
@@ -84,7 +84,7 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 			// get wiki and notify
 			byte[] wiki_domain = wiki_args.wiki;
 			Xow_wiki wiki = app.Wiki_mgri().Get_by_or_make_init_y(wiki_domain);
-			ui.Send_wiki_add(wiki_domain);
+			ui.Send_wiki_add(wiki_domain, wiki_args.bgn, wiki_args.end());
 
 			// try to get from cache
 			byte[] qry_key = args.Qry_key(wiki_domain, wiki_args.ns_ids);
@@ -99,8 +99,10 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 				qry = cache_mgr.Get_or_null(qry_id);
 				if (qry != null) {
 					boolean all_shown = Display_cached_qry(args, ui, wiki, qry, qry_id, wiki_args);
-					if (all_shown || qry.done)
+					if (all_shown || qry.done) {
+						ui.Send_done();
 						return;
+					}
 				}
 			}
 			args.qry_id = qry_id;
@@ -108,6 +110,7 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 			// do search
 			Xofulltext_searcher searcher = Get_searcher(wiki);
 			searcher.Search(ui, wiki, qry, args, wiki_args);
+			ui.Send_done();
 		}
 		catch (Exception exc) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to search_wiki; err=~{0}", Err_.Message_gplx_log(exc));

@@ -18,7 +18,8 @@ import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
 import gplx.xowa.guis.menus.*; import gplx.xowa.guis.menus.dom.*; import gplx.xowa.guis.cbks.js.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.js.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.wikis.pages.*;
-public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm {
+import gplx.xowa.htmls.*;
+public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm, Xoh_page_html_source {
 	private Xoae_app app; private final    Object thread_lock = new Object();
 	private final    String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
 	protected Xog_html_itm() {}	// TEST: for prefs_mgr
@@ -47,6 +48,9 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm {
 		html_box.Html_js_cbks_add("xowa_exec", js_cbk);
 		Gfo_evt_mgr_.Sub_same(html_box, Gfui_html.Evt_zoom_changed, this);
 	}
+	public byte[] Get_page_html() {
+		return Bry_.new_u8(html_box.Text());
+	}
 	public String Html_selected_get_src_or_empty()			{return html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_src_or_empty);}
 	public String Html_selected_get_href_or_text()			{return Html_extract_text(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_href_or_text));}
 	public String Html_selected_get_text_or_href()			{return Html_extract_text(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_text_or_href));}
@@ -60,7 +64,7 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm {
 	}
 	public void Show(Xoae_page page) {
 		byte view_mode = owner_tab.View_mode();			
-		byte[] html_src = page.Wikie().Html_mgr().Page_wtr_mgr().Gen(page, view_mode);	// NOTE: must use wiki of page, not of owner tab; DATE:2015-03-05
+		byte[] html_src = page.Wikie().Html_mgr().Page_wtr_mgr().Gen(page, this, view_mode);	// NOTE: must use wiki of page, not of owner tab; DATE:2015-03-05
 		Html_src_(page, html_src);
 		if (view_mode == Xopg_page_.Tid_read){						// used only for Xosrh test; DATE:2014-01-29
 			html_box.Html_js_eval_proc_as_str(Xog_js_procs.Win__focus_body);	// NOTE: only focus if read so up / down will scroll box; edit / html should focus edit-box; DATE:2014-06-05

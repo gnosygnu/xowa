@@ -21,6 +21,7 @@ import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.d
 import gplx.xowa.xtns.pagebanners.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.htmls.portal.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
+import gplx.xowa.htmls.core.*;
 public class Xoh_page_wtr_wkr {
 	private final    Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); 
@@ -30,7 +31,7 @@ public class Xoh_page_wtr_wkr {
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; private byte[] root_dir_bry;
 	public Xoh_page_wtr_wkr(Xoh_page_wtr_mgr mgr, byte page_mode) {this.mgr = mgr; this.page_mode = page_mode;}		
 	public Xoh_page_wtr_wkr Ctgs_enabled_(boolean v) {ctgs_enabled = v; return this;} private boolean ctgs_enabled = true;		
-	public void Write_page(Bry_bfr rv, Xoae_page page, Xop_ctx ctx) {
+	public void Write_page(Bry_bfr rv, Xoae_page page, Xop_ctx ctx, Xoh_page_html_source page_html_source) {
 		synchronized (thread_lock_1) {
 			this.page = page; this.wiki = page.Wikie(); this.app = wiki.Appe();
 			ctx.Page_(page); // HACK: must update page for toc_mgr; WHEN: Xoae_page rewrite
@@ -47,10 +48,20 @@ public class Xoh_page_wtr_wkr {
 				}
 				Bry_bfr page_bfr = wiki.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page rv to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
 				Xoh_wtr_ctx hctx = null;
-				if (page_mode == Xopg_page_.Tid_html && wiki.Html__hdump_mgr().Load_mgr().Html_mode().Tid_is_hdump_save()) {
-					hctx = Xoh_wtr_ctx.Hdump;
-					Write_body(page_bfr, ctx, hctx, page);
-					Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(page_bfr.To_bry_and_clear()));
+				if (page_mode == Xopg_page_.Tid_html && wiki.Html__hdump_mgr().Load_mgr().Html_mode().Tid_is_custom()) {
+					byte[] html_bry = null;
+
+					// get html from html dump
+					if (wiki.Html__hdump_mgr().Load_mgr().Html_mode().Tid() == Xow_hdump_mode.Hdump_save.Tid()) {
+						hctx = Xoh_wtr_ctx.Hdump;
+						Write_body(page_bfr, ctx, hctx, page);
+						html_bry = page_bfr.To_bry_and_clear();
+					}
+					// get from swt browser
+					else {
+						html_bry = page_html_source.Get_page_html();
+					}
+					Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(html_bry));
 				}
 				else {
 					hctx = Xoh_wtr_ctx.Basic;

@@ -20,6 +20,7 @@ public class Xofulltext_args_wiki {
 	public Hash_adp ns_hash = Hash_adp_.New();
 	public int bgn;
 	public int len;
+	public int end() {return bgn + len;}
 
 	public Xofulltext_args_wiki(byte[] wiki) {
 		this.wiki = wiki;
