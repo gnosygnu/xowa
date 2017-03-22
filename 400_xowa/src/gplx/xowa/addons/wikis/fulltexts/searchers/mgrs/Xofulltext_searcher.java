@@ -17,5 +17,6 @@ package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs; import gplx.*; import g
 import gplx.xowa.addons.wikis.fulltexts.searchers.caches.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
 public interface Xofulltext_searcher {
+	boolean Type_is_lucene();
 	void Search(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_cache_qry qry, Xofulltext_args_qry qry_args, Xofulltext_args_wiki wiki_args);
 }

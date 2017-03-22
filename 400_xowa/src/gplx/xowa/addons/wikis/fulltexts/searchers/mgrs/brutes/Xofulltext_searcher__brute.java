@@ -23,6 +23,7 @@ public class Xofulltext_searcher__brute implements Xofulltext_searcher {
 	private final    Xofulltext_finder_mgr finder = new Xofulltext_finder_mgr();
 	private final    Xofulltext_finder_cbk__eval cbk_eval = new Xofulltext_finder_cbk__eval();
 	private final    Xofulltext_finder_cbk__highlight cbk_highlight = new Xofulltext_finder_cbk__highlight();
+	public boolean Type_is_lucene() {return false;}
 	public void Search(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_cache_qry qry, Xofulltext_args_qry args, Xofulltext_args_wiki wiki_args) {
 		// get pages from db
 		Db_conn page_conn = wiki.Data__core_mgr().Tbl__page().Conn();

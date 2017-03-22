@@ -24,6 +24,7 @@ import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.caches.*;
 public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 	private final    Gflucene_searcher_mgr searcher = new Gflucene_searcher_mgr();
+	public boolean Type_is_lucene() {return true;}
 	public void Search(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_cache_qry qry, Xofulltext_args_qry args, Xofulltext_args_wiki wiki_args) {
 		// create lists
 		Ordered_hash full_list = Ordered_hash_.New();

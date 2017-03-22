@@ -84,7 +84,8 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 			// get wiki and notify
 			byte[] wiki_domain = wiki_args.wiki;
 			Xow_wiki wiki = app.Wiki_mgri().Get_by_or_make_init_y(wiki_domain);
-			ui.Send_wiki_add(wiki_domain, wiki_args.bgn, wiki_args.end());
+			Xofulltext_searcher searcher = Get_searcher(wiki);
+			ui.Send_wiki_add(searcher.Type_is_lucene(), wiki_domain, wiki_args.bgn, wiki_args.end());
 
 			// try to get from cache
 			byte[] qry_key = args.Qry_key(wiki_domain, wiki_args.ns_ids);
@@ -107,8 +108,6 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 			}
 			args.qry_id = qry_id;
 
-			// do search
-			Xofulltext_searcher searcher = Get_searcher(wiki);
 			searcher.Search(ui, wiki, qry, args, wiki_args);
 			ui.Send_done();
 		}

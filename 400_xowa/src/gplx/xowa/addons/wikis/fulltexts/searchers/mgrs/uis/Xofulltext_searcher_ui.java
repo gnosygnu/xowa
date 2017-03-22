@@ -25,9 +25,10 @@ public class Xofulltext_searcher_ui {
 		this.cbk_mgr = cbk_mgr;
 		this.cbk_trg = cbk_trg;
 	}
-	public void Send_wiki_add(byte[] wiki, int rng_bgn, int rng_end) {
+	public void Send_wiki_add(boolean type_is_lucene, byte[] wiki, int rng_bgn, int rng_end) {
 		cbk_mgr.Send_json(cbk_trg, "xo.fulltext_searcher.results__wiki__add__recv", gplx.core.gfobjs.Gfobj_nde.New()
 			.Add_bry("wiki", wiki)
+			.Add_bool("type_is_lucene", type_is_lucene)
 			.Add_int("rng_bgn", rng_bgn + List_adp_.Base1)
 			.Add_int("rng_end", rng_end)
 			);
