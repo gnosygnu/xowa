@@ -129,7 +129,7 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 			int lines_len = page.Lines().Len();
 			for (int j = 0; j < lines_len; j++) {
 				Xofulltext_cache_line line = (Xofulltext_cache_line)page.Lines().Get_at(j);
-				ui.Send_line_add(args.show_all_matches, qry_id, wiki.Domain_bry(), page.Page_id(), line.Line_seq(), line.Line_html());
+				ui.Send_line_add(false, args.show_all_matches, qry_id, wiki.Domain_bry(), page.Page_id(), line.Line_seq(), line.Line_html());
 			}
 		}
 		return true;
@@ -144,7 +144,7 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 
 		Xofulltext_cache_line[] lines = cache_mgr.Get_lines_rest(qry_id, wiki_bry, page_id);
 		for (Xofulltext_cache_line line : lines) {
-			searcher_ui.Send_line_add(true, qry_id, wiki_bry, page_id, line.Line_seq(), line.Line_html());
+			searcher_ui.Send_line_add(false, true, qry_id, wiki_bry, page_id, line.Line_seq(), line.Line_html());
 		}
 	}
 	private Xofulltext_searcher Get_searcher(Xow_wiki wiki) {

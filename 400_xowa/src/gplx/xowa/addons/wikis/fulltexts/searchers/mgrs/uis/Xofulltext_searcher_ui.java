@@ -50,8 +50,9 @@ public class Xofulltext_searcher_ui {
 		);
 		cache_mgr.Add_page(page.Query_id(), page.Wiki_domain(), page.Page_id(), page.Page_ttl());
 	}
-	public void Send_line_add(boolean show_all_matches, int qry_id, byte[] wiki_domain, int page_id, int line_sort_order, byte[] line_html) {
-		cache_mgr.Add_line(qry_id, wiki_domain, page_id, line_sort_order, line_html);
+	public void Send_line_add(boolean add_to_cache, boolean show_all_matches, int qry_id, byte[] wiki_domain, int page_id, int line_sort_order, byte[] line_html) {
+		if (add_to_cache)
+			cache_mgr.Add_line(qry_id, wiki_domain, page_id, line_sort_order, line_html);
 
 		line_sort_order += List_adp_.Base1; // NOTE: increment after cache_mgr
 		if (line_sort_order == 1 || show_all_matches) {

@@ -62,7 +62,7 @@ public class Xofulltext_finder_cbk__highlight implements Xofulltext_finder_cbk {
 
 		// send notification
 		byte[] line_html = tmp_bfr.To_bry_and_clear();
-		ui.Send_line_add(show_all_matches, qry_id, wiki.Domain_bry(), page_id, found, line_html);
+		ui.Send_line_add(true, show_all_matches, qry_id, wiki.Domain_bry(), page_id, found, line_html);
 		found++;
 	}
 	private static final    byte[] Angle_bgn_escaped = Bry_.new_a7("&lt;");
