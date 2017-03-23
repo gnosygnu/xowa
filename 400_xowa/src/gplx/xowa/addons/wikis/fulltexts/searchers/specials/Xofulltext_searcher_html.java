@@ -22,9 +22,11 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache
 	private final    boolean case_match, auto_wildcard_bgn, auto_wildcard_end, expand_matches_section, show_all_matches;
 	private final    Hash_adp props = Hash_adp_.New();
 	public Xofulltext_searcher_html(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, Xow_wiki wiki, Guid_adp page_guid) {
+		String search_text = url_args.Read_str_or("search", ""); 
+		search_text = String_.Replace(search_text, "_", " "); // xofulltext_searcher.js chains multiple words with "_"; convert back to space
+		props.Add("search", search_text);
 		props.Add("page_guid", page_guid.To_str());
 		props.Add("cur_wiki", wiki.Domain_str());
-		props.Add("search", url_args.Read_str_or("search", ""));
 		props_Add(cfg_mgr, url_args, "wikis" , wiki.Domain_str());
 		props_Add(cfg_mgr, url_args, "ns_ids", "0");
 		props_Add(cfg_mgr, url_args, "limits", "100");

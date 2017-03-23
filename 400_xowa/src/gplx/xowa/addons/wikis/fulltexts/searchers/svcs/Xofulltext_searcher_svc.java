@@ -29,7 +29,7 @@ import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.gflucenes.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.*;
 class Xofulltext_searcher_svc implements Gfo_invk {
 	private final    Xoa_app app;
-	private final    Hash_adp wkr_hash = Hash_adp_.New();
+	private final    Ordered_hash wkr_hash = Ordered_hash_.New();
 	public Xofulltext_searcher_svc(Xoa_app app) {
 		this.app = app;
 	}
@@ -38,6 +38,31 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 		Xofulltext_args_qry prv_args = (Xofulltext_args_qry)wkr_hash.Get_by(page_guid);
 		if (prv_args != null) {
 			prv_args.Cancel();
+			synchronized (wkr_hash) {
+				wkr_hash.Del(page_guid);
+			}
+		}
+	}
+	private static void Compress(Ordered_hash wkr_hash) {
+		int max = 2;
+		int len = wkr_hash.Len();
+		if (len > max) {
+			synchronized (wkr_hash) {
+				// create list for deleted items; in general, this list will never be more than 1
+				List_adp deleted = List_adp_.New();
+
+				int bgn = len - max;
+				for (int i = 0; i < bgn; i++) {
+					Xofulltext_args_qry args = (Xofulltext_args_qry)wkr_hash.Get_at(i);
+					deleted.Add(args);
+				}
+
+				len = deleted.Len();
+				for (int i = 0; i < len; i++) {
+					Xofulltext_args_qry args = (Xofulltext_args_qry)deleted.Get_at(i);
+					wkr_hash.Del(args.page_guid);
+				}
+			}
 		}
 	}
 	public void Search(Json_nde args) {
@@ -47,7 +72,10 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 
 		// cancel any existing searches
 		this.Cancel(search_args.page_guid);
-		wkr_hash.Add(search_args.page_guid, search_args);
+		Compress(wkr_hash);
+		synchronized (wkr_hash) {
+			wkr_hash.Add(search_args.page_guid, search_args);
+		}
 		
 		// autosave any changes if enabled
 		Xocfg_mgr cfg_mgr = app.Cfg();
