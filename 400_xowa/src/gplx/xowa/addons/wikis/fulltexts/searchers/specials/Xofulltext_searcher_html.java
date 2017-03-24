@@ -59,6 +59,7 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache
 		Xopg_tag_wtr_.Add__xonotify (head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__mustache	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_alertify_.Add_tags	    (head_tags, app.Fsys_mgr().Http_root());
+		Xopg_tag_wtr_.Add__ooui     (head_tags, app.Fsys_mgr().Http_root());
 
 		head_tags.Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.css")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.js")));

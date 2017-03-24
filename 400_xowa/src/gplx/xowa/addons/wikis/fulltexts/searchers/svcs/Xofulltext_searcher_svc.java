@@ -43,28 +43,6 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 			}
 		}
 	}
-	private static void Compress(Ordered_hash wkr_hash) {
-		int max = 2;
-		int len = wkr_hash.Len();
-		if (len > max) {
-			synchronized (wkr_hash) {
-				// create list for deleted items; in general, this list will never be more than 1
-				List_adp deleted = List_adp_.New();
-
-				int bgn = len - max;
-				for (int i = 0; i < bgn; i++) {
-					Xofulltext_args_qry args = (Xofulltext_args_qry)wkr_hash.Get_at(i);
-					deleted.Add(args);
-				}
-
-				len = deleted.Len();
-				for (int i = 0; i < len; i++) {
-					Xofulltext_args_qry args = (Xofulltext_args_qry)deleted.Get_at(i);
-					wkr_hash.Del(args.page_guid);
-				}
-			}
-		}
-	}
 	public void Search(Json_nde args) {
 		// get search_args
 		Xofulltext_args_qry search_args = Xofulltext_args_qry.New_by_json(args);
@@ -72,7 +50,7 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 
 		// cancel any existing searches
 		this.Cancel(search_args.page_guid);
-		Compress(wkr_hash);
+		Compress_cache(wkr_hash);
 		synchronized (wkr_hash) {
 			wkr_hash.Add(search_args.page_guid, search_args);
 		}
@@ -185,6 +163,28 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 	}
 	private Xofulltext_cache_mgr Cache_mgr() {
 		return Xosearch_fulltext_addon.Get_by_app(app).Cache_mgr();
+	}
+	private static void Compress_cache(Ordered_hash wkr_hash) {
+		int max = 8; // cache no more than 8 tabs worth of queries
+		int len = wkr_hash.Len();
+		if (len > max) {
+			synchronized (wkr_hash) {
+				// create list for deleted items; in general, this list will never be more than 1
+				List_adp deleted = List_adp_.New();
+
+				int bgn = len - max;
+				for (int i = 0; i < bgn; i++) {
+					Xofulltext_args_qry args = (Xofulltext_args_qry)wkr_hash.Get_at(i);
+					deleted.Add(args);
+				}
+
+				len = deleted.Len();
+				for (int i = 0; i < len; i++) {
+					Xofulltext_args_qry args = (Xofulltext_args_qry)deleted.Get_at(i);
+					wkr_hash.Del(args.page_guid);
+				}
+			}
+		}
 	}
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

@@ -63,6 +63,10 @@ public class Xopg_tag_wtr_ {
 		head_tags.Add(Xopg_tag_itm.New_js_file(dir.GenSubFil_nest("Progbar.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(dir.GenSubFil_nest("Progbar_util.js")));
 	}
+	public static void Add__ooui(Xopg_tag_mgr head_tags, Io_url http_root) {
+		Io_url dir = http_root.GenSubDir_nest("bin", "any", "xowa", "html", "res", "lib", "oojs-ui");
+		head_tags.Add(Xopg_tag_itm.New_css_file(dir.GenSubFil_nest("oojs-ui-mediawiki.css")));
+	}
 	private static String Get_app_js_file(Xoa_app app) {
 		if (app.Mode().Tid_is_http()) return "xo.app.http_server.js";
 		return gplx.core.envs.Op_sys.Cur().Tid_is_drd() ? "xo.app.drd.js" : "xo.app.swt.js";
