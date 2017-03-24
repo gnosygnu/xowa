@@ -39,7 +39,8 @@ public class Xofulltext_indexer_mgr {
 		Db_rdr rdr = conn.Exec_rdr(Db_sql_.Make_by_fmt(String_.Ary
 		( "SELECT  page_id, page_score, page_namespace, page_title, page_html_db_id"
 		, "FROM    page"
-		, "WHERE   page_namespace IN ({0});"), args.ns_ids));
+		, "WHERE   page_namespace IN ({0})"
+		), args.ns_ids));
 		while (rdr.Move_next()) {
 			// read vars
 			int page_namespace = rdr.Read_int("page_namespace");
