@@ -24,7 +24,7 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache
 	public Xofulltext_searcher_html(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, Xow_wiki wiki, Guid_adp page_guid) {
 		String search_text = url_args.Read_str_or("search", ""); 
 		search_text = String_.Replace(search_text, "_", " "); // xofulltext_searcher.js chains multiple words with "_"; convert back to space
-		props.Add("search", search_text);
+		props.Add("qarg_search", search_text);
 		props.Add("page_guid", page_guid.To_str());
 		props.Add("cur_wiki", wiki.Domain_str());
 		props_Add(cfg_mgr, url_args, "wikis" , wiki.Domain_str());
