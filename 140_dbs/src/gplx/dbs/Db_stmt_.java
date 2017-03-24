@@ -46,6 +46,10 @@ public class Db_stmt_ {
 	public static Db_stmt new_select_as_rdr(Db_conn conn, String sql) {
 		return conn.Stmt_new(Db_qry_sql.rdr_(sql));
 	}
+	public static Db_stmt New_sql_lines(Db_conn conn, String... lines) {
+		Db_qry qry = Db_qry_sql.sql_(String_.Concat_with_str("\n", lines));
+		return conn.Stmt_new(qry);
+	}
 	public static Err err_(Exception e, Db_stmt stmt, String proc) {
 		throw Err_.new_exc(e, "db", "db stmt failed", "proc", proc);
 	}

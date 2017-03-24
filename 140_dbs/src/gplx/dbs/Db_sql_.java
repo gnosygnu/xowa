@@ -48,4 +48,13 @@ public class Db_sql_ {
 		}
 		return dirty ? bfr.To_bry_and_clear() : raw;
 	}
+	public static String Prep_in_from_ary(Object ary) {	
+		Bry_bfr bfr = Bry_bfr_.New();
+		int len = Array_.Len(ary);
+		for (int i = 0; i < len; i++) {
+			if (i != 0) bfr.Add_byte(Byte_ascii.Comma);
+			bfr.Add_byte(Byte_ascii.Question);
+		}
+		return bfr.To_str_and_clear();
+	}
 }

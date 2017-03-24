@@ -18,29 +18,38 @@ import gplx.xowa.wikis.nss.*;
 import gplx.gflucene.indexers.*;
 public class Xofulltext_indexer_args implements Gfo_invk {
 	public byte[] wikis;
-	public String ns_ids;
 	public String idx_opt;
+	private String ns_ids_str;
+	public int[] ns_ids_ary;
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		// wikis: null 
 		if (wikis == null)
 			wikis = wiki.Domain_bry();
 
-		// ns: null / *
-		if (ns_ids == null)
-			ns_ids = "0";
-		else if (String_.Eq(ns_ids, "*")) {
+		// ns: null or *
+		// if null, use Main namespace
+		List_adp temp_ns_list = List_adp_.New();
+		if (ns_ids_str == null)
+			temp_ns_list.Add(Xow_ns_.Tid__main);
+		// if *, use all namespaces
+		else if (String_.Eq(ns_ids_str, "*")) {
 			Xow_ns[] ns_ary = wiki.Ns_mgr().Ords_ary();
 			int len = ns_ary.length;
-			Bry_bfr bfr = Bry_bfr_.New();
 			for (int i = 0; i < len; i++) {
 				Xow_ns ns = ns_ary[i];
 				int ns_id = ns.Id();
 				if (ns_id < 0) continue; // ignore media, special 
-				if (i != 0) bfr.Add_byte(Byte_ascii.Comma);
-				bfr.Add_int_variable(ns_id);
+				temp_ns_list.Add(ns_id);
 			}
-			ns_ids = bfr.To_str_and_clear();
 		}
+		// else, parse ns
+		else {
+			byte[][] ns_bry_ary = Bry_split_.Split(Bry_.new_u8(ns_ids_str), Byte_ascii.Comma, true);
+			for (byte[] ns_bry : ns_bry_ary) {
+				temp_ns_list.Add(Bry_.To_int(ns_bry));
+			}
+		}
+		ns_ids_ary = (int[])temp_ns_list.To_ary_and_clear(int.class);
 
 		// idx_opt
 		if (idx_opt == null) {
@@ -49,7 +58,7 @@ public class Xofulltext_indexer_args implements Gfo_invk {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if      (ctx.Match(k, "wikis_"))            this.wikis = m.ReadBryOr("v", null);
-		else if	(ctx.Match(k, "ns_ids"))            this.ns_ids = m.ReadStrOr("v", null);
+		else if	(ctx.Match(k, "ns_ids"))            this.ns_ids_str = m.ReadStrOr("v", null);
 		else if	(ctx.Match(k, "idx_opt"))           this.idx_opt = m.ReadStrOr("v", null);
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
@@ -57,7 +66,7 @@ public class Xofulltext_indexer_args implements Gfo_invk {
 	public static Xofulltext_indexer_args New_by_json(gplx.langs.jsons.Json_nde args) {
 		Xofulltext_indexer_args rv = new Xofulltext_indexer_args();
 		rv.wikis = args.Get_as_bry("wikis");
-		rv.ns_ids = args.Get_as_str("ns_ids");
+		rv.ns_ids_str = args.Get_as_str("ns_ids");
 		rv.idx_opt = args.Get_as_str("idx_opt");
 		return rv;
 	}

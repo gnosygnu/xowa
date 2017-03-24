@@ -36,44 +36,57 @@ public class Xofulltext_indexer_mgr {
 
 		// get rdr and loop
 		Db_conn conn = page_tbl.Conn();
-		Db_rdr rdr = conn.Exec_rdr(Db_sql_.Make_by_fmt(String_.Ary
-		( "SELECT  page_id, page_score, page_namespace, page_title, page_html_db_id"
-		, "FROM    page"
-		, "WHERE   page_namespace IN ({0})"
-		), args.ns_ids));
-		while (rdr.Move_next()) {
-			// read vars
-			int page_namespace = rdr.Read_int("page_namespace");
-			byte[] page_ttl_bry = rdr.Read_bry_by_str("page_title");
-			int page_id = rdr.Read_int("page_id");
-			int page_score = rdr.Read_int("page_score");
-			int html_db_id = rdr.Read_int("page_html_db_id");
-
-			// ignore redirects
-			if (html_db_id == -1) continue;
-			try {
-				// load page
-				Xoa_ttl page_ttl = wiki.Ttl_parse(page_namespace, page_ttl_bry);
-				if (page_ttl == null)
-					continue;
-				Xow_db_file html_db = html_db_id == -1 ? core_db : wiki.Data__core_mgr().Dbs__get_by_id_or_fail(html_db_id);
-				hpg.Ctor_by_hview(wiki, wiki.Utl__url_parser().Parse(page_ttl.Full_db()), page_ttl, page_id);
-				if (!html_db.Tbl__html().Select_by_page(hpg))
-					continue;
-				byte[] html_text = wiki.Html__hdump_mgr().Load_mgr().Parse(hpg, hpg.Db().Html().Zip_tid(), hpg.Db().Html().Hzip_tid(), hpg.Db().Html().Html_bry());
-
-				// run index
-				indexer.Index(page_id, page_score, page_ttl.Page_txt(), html_text);
-
-				// notify
-				if ((++count % 10000) == 0) {
-					Gfo_usr_dlg_.Instance.Prog_many("", "", "indexing page: ~{0}", count);
-					if (ui != null)
-						ui.Send_prog(Datetime_now.Get().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss() + ": indexing page: " + count);
-				}
-			} catch (Exception e) {
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "err: ~{0}", Err_.Message_gplx_log(e));
+		int[] ns_ids = args.ns_ids_ary;
+		Db_stmt stmt = Db_stmt_.Null;
+		Db_rdr rdr = Db_rdr_.Empty;
+		try {
+			stmt = Db_stmt_.New_sql_lines(conn
+			, "SELECT  page_id, page_score, page_namespace, page_title, page_html_db_id"
+			, "FROM    page"
+			, "WHERE   page_namespace IN (" + Db_sql_.Prep_in_from_ary(ns_ids) + ")"
+			);
+			for (int ns_id : ns_ids) {
+				stmt.Crt_int("page_namespace", ns_id);
 			}
+			rdr = stmt.Exec_select__rls_auto();
+			while (rdr.Move_next()) {
+				// read vars
+				int page_namespace = rdr.Read_int("page_namespace");
+				byte[] page_ttl_bry = rdr.Read_bry_by_str("page_title");
+				int page_id = rdr.Read_int("page_id");
+				int page_score = rdr.Read_int("page_score");
+				int html_db_id = rdr.Read_int("page_html_db_id");
+
+				// ignore redirects
+				if (html_db_id == -1) continue;
+				try {
+					// load page
+					Xoa_ttl page_ttl = wiki.Ttl_parse(page_namespace, page_ttl_bry);
+					if (page_ttl == null)
+						continue;
+					Xow_db_file html_db = html_db_id == -1 ? core_db : wiki.Data__core_mgr().Dbs__get_by_id_or_fail(html_db_id);
+					hpg.Ctor_by_hview(wiki, wiki.Utl__url_parser().Parse(page_ttl.Full_db()), page_ttl, page_id);
+					if (!html_db.Tbl__html().Select_by_page(hpg))
+						continue;
+					byte[] html_text = wiki.Html__hdump_mgr().Load_mgr().Parse(hpg, hpg.Db().Html().Zip_tid(), hpg.Db().Html().Hzip_tid(), hpg.Db().Html().Html_bry());
+
+					// run index
+					indexer.Index(page_id, page_score, page_ttl.Page_txt(), html_text);
+
+					// notify
+					if ((++count % 10000) == 0) {
+						Gfo_usr_dlg_.Instance.Prog_many("", "", "indexing page: ~{0}", count);
+						if (ui != null)
+							ui.Send_prog(Datetime_now.Get().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss() + ": indexing page: " + count);
+					}
+				} catch (Exception e) {
+					Gfo_usr_dlg_.Instance.Warn_many("", "", "err: ~{0}", Err_.Message_gplx_log(e));
+				}
+			}
+		}
+		finally {
+			rdr.Rls();
+			stmt.Rls();
 		}
 
 		// term indexer
