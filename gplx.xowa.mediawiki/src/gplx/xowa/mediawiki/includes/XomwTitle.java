@@ -546,21 +546,21 @@ public class XomwTitle {
 //				return null;
 //			}
 //		}
-//
-//		/**
-//		* Create a new Title for the Main Page
-//		*
-//		* @return Title The new Object
-//		*/
-//		public static function newMainPage() {
-//			$title = Title::newFromText(wfMessage('mainpage').inContentLanguage().text());
-//			// Don't give fatal errors if the message is broken
-//			if (!$title) {
-//				$title = Title::newFromText('Main Page');
-//			}
-//			return $title;
-//		}
-//
+
+	/**
+	* Create a new Title for the Main Page
+	*
+	* @return Title The new Object
+	*/
+	public static XomwTitle newMainPage(XomwEnv env) {
+		XomwTitle title = XomwTitle.newFromText(env, XomwGlobalFunctions.wfMessage(env, "mainpage").inContentLanguage().text());
+		// Don't give fatal errors if the message is broken
+		if (title == null) {
+			title = XomwTitle.newFromText(env, Bry_.new_a7("Main Page"));
+		}
+		return title;
+	}
+
 //		/**
 //		* Get the prefixed DB key associated with an ID
 //		*
@@ -898,19 +898,19 @@ public class XomwTitle {
 		return this.mDbkeyform;
 	}
 
-//		/**
-//		* Get the DB key with the initial letter case as specified by the user
-//		*
-//		* @return String DB key
-//		*/
-//		function getUserCaseDBKey() {
-//			if (!is_null(this.mUserCaseDBKey)) {
-//				return this.mUserCaseDBKey;
-//			} else {
-//				// If created via makeTitle(), this.mUserCaseDBKey is not set.
-//				return this.mDbkeyform;
-//			}
-//		}
+	/**
+	* Get the DB key with the initial letter case as specified by the user
+	*
+	* @return String DB key
+	*/
+	public byte[] getUserCaseDBKey() {
+		if (this.mUserCaseDBKey != null) {
+			return this.mUserCaseDBKey;
+		} else {
+			// If created via makeTitle(), this.mUserCaseDBKey is not set.
+			return this.mDbkeyform;
+		}
+	}
 
 	/**
 	* Get the namespace index, i.e. one of the NS_xxxx constants.

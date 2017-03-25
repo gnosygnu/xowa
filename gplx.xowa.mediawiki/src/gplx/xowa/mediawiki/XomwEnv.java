@@ -32,7 +32,8 @@ public class XomwEnv {
 		XomwLanguage language = new XomwLanguage(xoLang);
 		XomwSiteLookup siteLookup = new XomwXowaSiteLookup();
 		XomwInterwikiLookup interwikiLookup = new XomwInterwikiLookupAdapter(siteLookup);
-		this.mediaWikiServices = new XomwMediaWikiServices(interwikiLookup, language);
+		byte[][] localInterwikis = new byte[0][]; // TODO.XO: pass in to XomwEnv or retrieve from datastore
+		this.mediaWikiServices = new XomwMediaWikiServices(this, interwikiLookup, language, localInterwikis);
 	}
 
 	public XomwMagicWordMgr Magic_word_mgr() {return magic_word_mgr;} private final    XomwMagicWordMgr magic_word_mgr = new XomwMagicWordMgr();

@@ -25,12 +25,17 @@ public class XophpArray {
 		}
 		return rv;
 	}
-	public static boolean array_key_exists(int key, Ordered_hash array) {
-		return array.Has(key);
+	public static byte[][] array_keys_bry(Ordered_hash array) {
+		int len = array.Len();
+		byte[][] rv = new byte[len][];
+		for (int i = 0; i < len; i++) {
+			 rv[i] = (byte[])array.Get_at(i);
+		}
+		return rv;
 	}
-	public static boolean array_key_exists(String key, Ordered_hash array) {
-		return array.Has(key);
-	}
+	public static boolean array_key_exists(int key, Ordered_hash array)    {return array.Has(key);}
+	public static boolean array_key_exists(String key, Ordered_hash array) {return array.Has(key);}
+	public static boolean array_key_exists(byte[] key, Ordered_hash array) {return array.Has(key);}
 	public static boolean array_is_empty(Ordered_hash array) {
 		return array.Len() == 0;
 	}

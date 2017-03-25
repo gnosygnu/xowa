@@ -2729,8 +2729,8 @@ public class XomwLanguage {
 	* @param boolean $first
 	* @return mixed|String
 	*/
-	private byte[] lc(byte[] str) {return lc(str, false);}
-	private byte[] lc(byte[] str, boolean first) {
+	public byte[] lc(byte[] str) {return lc(str, false);}
+	public byte[] lc(byte[] str, boolean first) {
 		return first 
 			? xoLang.Case_mgr().Case_build_1st_lower(tmpBfr, str, 0, str.length)
 			: xoLang.Case_mgr().Case_build_lower    (str, 0, str.length);

@@ -39,6 +39,8 @@ public class XomwInterwiki {
 	/** @var boolean Whether interwiki transclusions are allowed */
 	private boolean mTrans;
 
+	public byte[] interwikiId;
+
 	public XomwInterwiki(byte[] prefix, byte[] url, byte[] api, byte[] wikiId, boolean local, boolean trans) {
 		this.mPrefix = prefix;
 		this.mURL = url;

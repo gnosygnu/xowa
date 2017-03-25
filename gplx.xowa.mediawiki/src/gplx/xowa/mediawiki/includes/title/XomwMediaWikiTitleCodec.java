@@ -27,27 +27,28 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 //		* @var GenderCache
 //		*/
 //		protected $genderCache;
-//
-//		/**
-//		* @var String[]
-//		*/
-//		protected $localInterwikis;
-//
+
+	/**
+	* @var String[]
+	*/
+	private byte[][] localInterwikis;
+
 //		/**
 //		* @param Language language The language Object to use for localizing namespace names.
 //		* @param GenderCache $genderCache The gender cache for generating gendered namespace names
-//		* @param String[]|String $localInterwikis
+//		* @param String[]|String localInterwikis
 //		*/
 //		public function __construct(Language language, GenderCache $genderCache,
-//			$localInterwikis = []
+//			localInterwikis = []
 //		) {
-//			$this->language = language;
-//			$this->genderCache = $genderCache;
-//			$this->localInterwikis = (array)$localInterwikis;
+//			$this.language = language;
+//			$this.genderCache = $genderCache;
+//			$this.localInterwikis = (array)localInterwikis;
 //		}
-	public XomwMediaWikiTitleCodec(XomwMediaWikiServices mws, XomwLanguage language) {
+	public XomwMediaWikiTitleCodec(XomwMediaWikiServices mws, XomwLanguage language, byte[][] localInterwikis) {
 		this.mws = mws;
 		this.language = language;
+		this.localInterwikis = localInterwikis;
 	}
 
 	/**
@@ -61,13 +62,13 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 	*/
 	public byte[] getNamespaceName(int ns, byte[] text) {
 		byte[] name = null;
-//			if ($this->language->needsGenderDistinction() &&
+//			if ($this.language.needsGenderDistinction() &&
 //				XomwNamespace::hasGenderDistinction($namespace)
 //			) {
 //
 //				// NOTE: we are assuming here that the title text is a user name!
-//				$gender = $this->genderCache->getGenderOf($text, __METHOD__);
-//				$name = $this->language->getGenderNsText($namespace, $gender);
+//				$gender = $this.genderCache.getGenderOf($text, __METHOD__);
+//				$name = $this.language.getGenderNsText($namespace, $gender);
 //			} else {
 			name = language.getNsText(ns);
 //			}
@@ -93,7 +94,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 //		*/
 //		public function formatTitle($namespace, $text, $fragment = '', $interwiki = '') {
 //			if ($namespace !== false) {
-//				$namespace = $this->getNamespaceName($namespace, $text);
+//				$namespace = $this.getNamespaceName($namespace, $text);
 //
 //				if ($namespace !== '') {
 //					$text = $namespace . ':' . $text;
@@ -127,7 +128,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 //			// NOTE: this is an ugly cludge that allows this class to share the
 //			// code for parsing with the old Title class. The parser code should
 //			// be refactored to avoid this.
-//			$parts = $this->splitTitleString($text, $defaultNamespace);
+//			$parts = $this.splitTitleString($text, $defaultNamespace);
 //
 //			// Relative fragment links are not supported by TitleValue
 //			if ($parts['dbkey'] === '') {
@@ -147,10 +148,10 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 //		*
 //		* @param LinkTarget $title
 //		*
-//		* @return String $title->getText()
+//		* @return String $title.getText()
 //		*/
 //		public function getText(LinkTarget $title) {
-//			return $this->formatTitle(false, $title->getText(), '');
+//			return $this.formatTitle(false, $title.getText(), '');
 //		}
 //
 //		/**
@@ -161,11 +162,11 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 //		* @return String
 //		*/
 //		public function getPrefixedText(LinkTarget $title) {
-//			return $this->formatTitle(
-//				$title->getNamespace(),
-//				$title->getText(),
+//			return $this.formatTitle(
+//				$title.getNamespace(),
+//				$title.getText(),
 //				'',
-//				$title->getInterwiki()
+//				$title.getInterwiki()
 //			);
 //		}
 //
@@ -177,25 +178,25 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 //		*/
 //		public function getPrefixedDBkey(LinkTarget $target) {
 //			$key = '';
-//			if ($target->isExternal()) {
-//				$key .= $target->getInterwiki() . ':';
+//			if ($target.isExternal()) {
+//				$key .= $target.getInterwiki() . ':';
 //			}
 //			// Try to get a namespace name, but fallback
 //			// to empty String if it doesn't exist
 //			try {
-//				$nsName = $this->getNamespaceName(
-//					$target->getNamespace(),
-//					$target->getText()
+//				$nsName = $this.getNamespaceName(
+//					$target.getNamespace(),
+//					$target.getText()
 //				);
 //			} catch (InvalidArgumentException $e) {
 //				$nsName = '';
 //			}
 //
-//			if ($target->getNamespace() !== 0) {
+//			if ($target.getNamespace() !== 0) {
 //				$key .= $nsName . ':';
 //			}
 //
-//			$key .= $target->getText();
+//			$key .= $target.getText();
 //
 //			return strtr($key, ' ', '_');
 //		}
@@ -208,11 +209,11 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 //		* @return String
 //		*/
 //		public function getFullText(LinkTarget $title) {
-//			return $this->formatTitle(
-//				$title->getNamespace(),
-//				$title->getText(),
-//				$title->getFragment(),
-//				$title->getInterwiki()
+//			return $this.formatTitle(
+//				$title.getNamespace(),
+//				$title.getText(),
+//				$title.getFragment(),
+//				$title.getInterwiki()
 //			);
 //		}
 
@@ -301,43 +302,46 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 						}
 					}
 				}
-//					else if (Interwiki::isValidInterwiki($p)) {
-//						// Interwiki link
-//						dbkey = $m[2];
-//						parts['interwiki'] = this.language->lc($p);
-//
-//						// Redundant interwiki prefix to the local wiki
-//						foreach (this.localInterwikis as $localIW) {
-//							if (0 == strcasecmp(parts['interwiki'], $localIW)) {
-//								if (dbkey == '') {
-//									// Empty self-links should point to the Main Page, to ensure
-//									// compatibility with cross-wiki transclusions and the like.
-//									$mainPage = Title::newMainPage();
-//									return [
-//										'interwiki' => $mainPage->getInterwiki(),
-//										'local_interwiki' => true,
-//										'fragment' => $mainPage->getFragment(),
-//										'namespace' => $mainPage->getNamespace(),
-//										'dbkey' => $mainPage->getDBkey(),
-//										'user_case_dbkey' => $mainPage->getUserCaseDBKey()
-//									];
-//								}
-//								parts['interwiki'] = '';
-//								// local interwikis should behave like initial-colon links
-//								parts['local_interwiki'] = true;
-//
-//								// Do another namespace split...
-//								continue 2;
-//							}
-//						}
-//
-//						// If there's an initial colon after the interwiki, that also
-//						// resets the default namespace
-//						if (dbkey !== '' && dbkey[0] == ':') {
-//							parts['namespace'] = NS_MAIN;
-//							dbkey = substr(dbkey, 1);
-//						}
-//					}
+				else if (XomwInterwiki.isValidInterwiki(mws, p)) {
+					// Interwiki link
+					dbkey = m[2];
+					parts.interwiki = this.language.lc(p);
+
+					// Redundant interwiki prefix to the local wiki
+					boolean doAnotherNamespaceSplit = false;
+					for (byte[] localIW : this.localInterwikis) {
+						if (Bry_.Eq(parts.interwiki, localIW)) {
+							if (Bry_.Len_eq_0(dbkey)) {
+								// Empty self-links should point to the Main Page, to ensure
+								// compatibility with cross-wiki transclusions and the like.
+								XomwTitle mainPage = XomwTitle.newMainPage(mws.env);
+								XomwMediaWikiTitleCodecParts rv = new XomwMediaWikiTitleCodecParts(mainPage.getDBkey(), mainPage.getNamespace());
+								rv.interwiki = mainPage.getInterwiki();
+								rv.local_interwiki = true;
+								rv.fragment = mainPage.getFragment();
+								// rv.ns = mainPage.getNamespace();
+								// rv.dbkey = mainPage.getDBkey();
+								rv.user_case_dbkey = mainPage.getUserCaseDBKey();
+							}
+							parts.interwiki = Bry_.Empty;
+							// local interwikis should behave like initial-colon links
+							parts.local_interwiki = true;
+
+							// Do another namespace split...
+							doAnotherNamespaceSplit = true;
+							break;
+						}
+					}
+					if (doAnotherNamespaceSplit)
+						continue;
+
+					// If there's an initial colon after the interwiki, that also
+					// resets the default namespace
+					if (dbkey != Bry_.Empty && dbkey[0] == Byte_ascii.Colon) {
+						parts.ns = XomwDefines.NS_MAIN;
+						dbkey = XophpString.substr(dbkey, 1);
+					}
+				}
 				// If there's no recognized interwiki or namespace,
 				// then let the colon expression be part of the title.
 			}

@@ -737,17 +737,17 @@ public class XomwMessage {
 //			$this->interface = false;
 //			return $this;
 //		}
-//
-//		/**
-//		* Request the message in the wiki's content language,
-//		* unless it is disabled for this message.
-//		*
-//		* @since 1.17
-//		* @see $wgForceUIMsgAsContentMsg
-//		*
-//		* @return Message $this
-//		*/
-//		public function inContentLanguage() {
+
+	/**
+	* Request the message in the wiki's content language,
+	* unless it is disabled for this message.
+	*
+	* @since 1.17
+	* @see $wgForceUIMsgAsContentMsg
+	*
+	* @return Message $this
+	*/
+	public XomwMessage inContentLanguage() {
 //			global $wgForceUIMsgAsContentMsg;
 //			if ( in_array( $this->key, (array)$wgForceUIMsgAsContentMsg ) ) {
 //				return $this;
@@ -756,8 +756,9 @@ public class XomwMessage {
 //			global $wgContLang;
 //			$this->inLanguage( $wgContLang );
 //			return $this;
-//		}
-//
+		return this;
+	}
+
 //		/**
 //		* Allows manipulating the interface message flag directly.
 //		* Can be used to restore the flag after setting a language.

@@ -35,9 +35,11 @@ public class XomwMediaWikiServices {
 	private final    XomwMediaWikiTitleCodec titleParser;
 	private final    XomwInterwikiLookup interwikiLookup;
 
-	public XomwMediaWikiServices(XomwInterwikiLookup interwikiLookup, XomwLanguage language) {
+	public XomwEnv env;
+	public XomwMediaWikiServices(XomwEnv env, XomwInterwikiLookup interwikiLookup, XomwLanguage language, byte[][] localInterwikis) {
+		this.env = env;
 		this.interwikiLookup = interwikiLookup;
-		this.titleParser = new XomwMediaWikiTitleCodec(this, language);
+		this.titleParser = new XomwMediaWikiTitleCodec(this, language, localInterwikis);
 	}
 
 //		/**

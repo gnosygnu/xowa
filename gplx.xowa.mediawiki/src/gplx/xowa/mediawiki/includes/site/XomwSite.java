@@ -362,6 +362,7 @@ public class XomwSite {
 	*
 	* @return String|boolean
 	*/
+	@gplx.Virtual public String getPageUrl() {return getPageUrl(null);}
 	@gplx.Virtual public String getPageUrl(String pageName) {
 		String url = this.getLinkPath();
 

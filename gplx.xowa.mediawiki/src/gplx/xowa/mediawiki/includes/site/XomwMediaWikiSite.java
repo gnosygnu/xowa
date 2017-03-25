@@ -21,7 +21,7 @@ package gplx.xowa.mediawiki.includes.site; import gplx.*; import gplx.xowa.*; im
 *
 * @ingroup Site
 */
-class XomwMediaWikiSite extends XomwSite {	private static final String PATH_FILE = "file_path";
+public class XomwMediaWikiSite extends XomwSite {	private static final String PATH_FILE = "file_path";
 	private static final String PATH_PAGE = "page_path";
 
 	/**
@@ -187,6 +187,7 @@ class XomwMediaWikiSite extends XomwSite {	private static final String PATH_FILE
 	*
 	* @return String
 	*/
+	public String getFileUrl() {return getFileUrl(null);}
 	public String getFileUrl(String path) {
 		String filePath = this.getPath(XomwMediaWikiSite.PATH_FILE);
 
