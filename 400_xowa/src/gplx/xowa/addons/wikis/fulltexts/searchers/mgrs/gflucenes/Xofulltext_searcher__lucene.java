@@ -75,7 +75,7 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 					if (!wiki_args.ns_hash.Has(doc_data.ns_id)) continue;
 
 					// call page doc_data
-					Xofulltext_searcher_page page = new Xofulltext_searcher_page(args.qry_id, wiki.Domain_bry(), doc_data.page_id, doc_data.page_full_db, args.expand_matches_section);
+					Xofulltext_searcher_page page = new Xofulltext_searcher_page(args.qry_id, wiki.Domain_bry(), doc_data.page_id, doc_data.page_full_db, args.expand_snips);
 					ui.Send_page_add(page);
 
 					full_list.Add(doc_data.page_id, doc_data);

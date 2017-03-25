@@ -23,11 +23,12 @@ public class Xofulltext_args_qry {
 	public Xofulltext_cache_mgr cache_mgr;
 	public Xofulltext_args_wiki[] wikis_ary;
 
+	public boolean expand_snips;
+	public boolean show_all_snips;
+	public boolean expand_options;
 	public boolean case_match;
 	public boolean auto_wildcard_bgn;
 	public boolean auto_wildcard_end;
-	public boolean expand_matches_section;
-	public boolean show_all_matches;
 	private boolean canceled;
 
 	public byte[] Qry_key(byte[] wiki, byte[] ns_ids) {
@@ -58,11 +59,13 @@ public class Xofulltext_args_qry {
 		Set_prop(wiki_args, wikis_len, args, "limits");
 
 		rv.page_guid = args.Get_as_str("page_guid");
+		rv.expand_snips = args.Get_as_bool_or("expand_snips", false);
+		rv.show_all_snips = args.Get_as_bool_or("show_all_snips", false);
+		rv.expand_options = args.Get_as_bool_or("expand_options", false);
+
 		rv.case_match = args.Get_as_bool_or("case_match", false);
 		rv.auto_wildcard_bgn = args.Get_as_bool_or("auto_wildcard_bgn", false);
 		rv.auto_wildcard_end = args.Get_as_bool_or("auto_wildcard_end", false);
-		rv.expand_matches_section = args.Get_as_bool_or("expand_matches_section", false);
-		rv.show_all_matches = args.Get_as_bool_or("show_all_matches", false);
 		return rv;
 	}
 	private static void Set_prop(Xofulltext_args_wiki[] wikis, int wikis_len, Json_nde args, String key) {

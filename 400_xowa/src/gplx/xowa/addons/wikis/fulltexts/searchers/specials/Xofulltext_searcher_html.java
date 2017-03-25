@@ -19,7 +19,6 @@ import gplx.dbs.*;
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.xowa.addons.apps.cfgs.*;
 class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache_doc_itm {
-	private final    boolean case_match, auto_wildcard_bgn, auto_wildcard_end, expand_matches_section, show_all_matches;
 	private final    Hash_adp props = Hash_adp_.New();
 	public Xofulltext_searcher_html(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, Xow_wiki wiki, Guid_adp page_guid) {
 		String search_text = url_args.Read_str_or("search", ""); 
@@ -27,22 +26,34 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache
 		props.Add("qarg_search", search_text);
 		props.Add("page_guid", page_guid.To_str());
 		props.Add("cur_wiki", wiki.Domain_str());
-		props_Add(cfg_mgr, url_args, "wikis" , wiki.Domain_str());
-		props_Add(cfg_mgr, url_args, "ns_ids", "0");
-		props_Add(cfg_mgr, url_args, "limits", "100");
-		props_Add(cfg_mgr, url_args, "offsets", "0");
+		props_Add_str(cfg_mgr, url_args, "wikis" , wiki.Domain_str(), false);
+		props_Add_str(cfg_mgr, url_args, "ns_ids", "0");
+		props_Add_str(cfg_mgr, url_args, "limits", "100");
+		props_Add_str(cfg_mgr, url_args, "offsets", "0");
 
-		this.case_match = cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.case_match", false);
-		this.auto_wildcard_bgn = cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.auto_wildcard_bgn", false);
-		this.auto_wildcard_end = cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.auto_wildcard_end", false);
-		this.expand_matches_section = cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.expand_matches_section", false);
-		this.show_all_matches = cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.special.show_all_matches", false);
+		props_Add_bool(cfg_mgr, url_args, "expand_snips");
+		props_Add_bool(cfg_mgr, url_args, "show_all_snips");
+		props_Add_bool(cfg_mgr, url_args, "expand_options");
+		props_Add_bool(cfg_mgr, url_args, "case_match");
+		props_Add_bool(cfg_mgr, url_args, "auto_wildcard_bgn");
+		props_Add_bool(cfg_mgr, url_args, "auto_wildcard_end");
 	}
-	private void props_Add(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, String key, String dflt_val) {
-		String cfg_key = "xowa.addon.search.fulltext.special.dflt_" + key;
-		String cfg_val = cfg_mgr.Get_str_app_or(cfg_key, dflt_val);
-		props.Add("dflt_" + key, cfg_val);
-		props.Add("qarg_" + key, url_args.Read_str_or(key, cfg_val));
+	private void props_Add_str(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, String key, String else_val) {
+		props_Add_str(cfg_mgr, url_args, key, else_val, true);
+	}
+	private void props_Add_str(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, String key, String else_val, boolean use_cfg) {
+		String dflt_val = else_val;
+		if (use_cfg) {
+			String cfg_key = "xowa.addon.search.fulltext.special." + key;
+			dflt_val = cfg_mgr.Get_str_app_or(cfg_key, else_val);
+		}
+		props.Add("dflt_" + key, dflt_val);
+		props.Add("qarg_" + key, url_args.Read_str_or(key, dflt_val));
+	}
+	private void props_Add_bool(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, String key) {
+		String cfg_key = "xowa.addon.search.fulltext.special." + key;
+		boolean cfg_val = cfg_mgr.Get_bool_app_or(cfg_key, false);
+		props.Add(key, cfg_val);
 	}
 	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return Addon_dir(app);}
 	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.main.template.html");}
@@ -80,12 +91,13 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache
 		}
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
-		if		(String_.Eq(key, "case_match"))              return Mustache_doc_itm_.Ary__bool(case_match);
-		else if	(String_.Eq(key, "auto_wildcard_bgn"))       return Mustache_doc_itm_.Ary__bool(auto_wildcard_bgn);
-		else if	(String_.Eq(key, "auto_wildcard_end"))       return Mustache_doc_itm_.Ary__bool(auto_wildcard_end);
-		else if	(String_.Eq(key, "expand_matches_section"))  return Mustache_doc_itm_.Ary__bool(expand_matches_section);
-		else if	(String_.Eq(key, "show_all_matches"))        return Mustache_doc_itm_.Ary__bool(show_all_matches);
-		return Mustache_doc_itm_.Ary__empty;
+		Object val_obj = props.Get_by(key);
+		if (val_obj == null) {
+			return Mustache_doc_itm_.Ary__empty;
+		}
+		else {
+			return Mustache_doc_itm_.Ary__bool((boolean)val_obj);
+		}
 	}
 	public static Io_url Addon_dir(Xoa_app app) {
 		return app.Fsys_mgr().Http_root().GenSubDir_nest("bin", "any", "xowa", "addon", "wiki", "fulltext", "searcher");

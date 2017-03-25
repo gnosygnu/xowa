@@ -33,8 +33,8 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 	public Xofulltext_searcher_svc(Xoa_app app) {
 		this.app = app;
 	}
-	public void Cancel(Json_nde args) {this.Cancel(args.Get_as_str("page_guid"));}
-	private void Cancel(String page_guid) {
+	public void Search_cxl(Json_nde args) {this.Search_cxl(args.Get_as_str("page_guid"));}
+	private void Search_cxl(String page_guid) {
 		Xofulltext_args_qry prv_args = (Xofulltext_args_qry)wkr_hash.Get_by(page_guid);
 		if (prv_args != null) {
 			prv_args.Cancel();
@@ -43,29 +43,38 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 			}
 		}
 	}
-	public void Search(Json_nde args) {
+	public void Options_save(Json_nde args) {
+		Xocfg_mgr cfg_mgr = app.Cfg();
+		cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.expand_options", args.Get_as_bool_or("expand_options", false));
+		if (cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.options.autosave_enabled", true)) {
+			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.expand_snips", args.Get_as_bool_or("expand_snips", false));
+			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.show_all_snips", args.Get_as_bool_or("show_all_snips", false));
+		}
+	}
+	public void Search_run(Json_nde args) {
 		// get search_args
 		Xofulltext_args_qry search_args = Xofulltext_args_qry.New_by_json(args);
 		search_args.cache_mgr = this.Cache_mgr();
 
 		// cancel any existing searches
-		this.Cancel(search_args.page_guid);
+		this.Search_cxl(search_args.page_guid);
 		Compress_cache(wkr_hash);
 		synchronized (wkr_hash) {
 			wkr_hash.Add(search_args.page_guid, search_args);
 		}
 		
 		// autosave any changes if enabled
-		Xocfg_mgr cfg_mgr = app.Cfg();
-		if (cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.options.autosave_enabled", true)) {
-			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.case_match", search_args.case_match);
-			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.auto_wildcard_bgn", search_args.auto_wildcard_bgn);
-			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.auto_wildcard_end", search_args.auto_wildcard_end);
-			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.expand_matches_section", search_args.expand_matches_section);
-			cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.show_all_matches", search_args.show_all_matches);
-//				cfg_mgr.Set_int_app ("xowa.addon.search.fulltext.special.max_pages_per_wiki", search_args.max_pages_per_wiki);
-//				cfg_mgr.Set_bry_app ("xowa.addon.search.fulltext.special.namespaces", search_args.namespaces);
-		}
+//			Xocfg_mgr cfg_mgr = app.Cfg();
+//			if (cfg_mgr.Get_bool_app_or("xowa.addon.search.fulltext.options.autosave_enabled", true)) {
+//				cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.expand_snips", search_args.expand_snips);
+//				cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.show_all_snips", search_args.show_all_snips);
+//				cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.expand_options", search_args.expand_options);
+//				cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.case_match", search_args.case_match);
+//				cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.auto_wildcard_bgn", search_args.auto_wildcard_bgn);
+//				cfg_mgr.Set_bool_app("xowa.addon.search.fulltext.special.auto_wildcard_end", search_args.auto_wildcard_end);
+////				cfg_mgr.Set_int_app ("xowa.addon.search.fulltext.special.max_pages_per_wiki", search_args.max_pages_per_wiki);
+////				cfg_mgr.Set_bry_app ("xowa.addon.search.fulltext.special.namespaces", search_args.namespaces);
+//			}
 
 		// launch thread
 		gplx.core.threads.Thread_adp_.Start_by_val("search", Cancelable_.Never, this, Invk__search, search_args);
@@ -129,13 +138,13 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 		for (int i = bgn; i < end; i++) {
 			if (i >= max) return false; // more pages requested than available
 			Xofulltext_cache_page page = (Xofulltext_cache_page)qry.Pages().Get_at(i);
-			ui.Send_page_add(new Xofulltext_searcher_page(qry_id, wiki.Domain_bry(), page.Page_id(), page.Page_ttl(), args.expand_matches_section));
+			ui.Send_page_add(new Xofulltext_searcher_page(qry_id, wiki.Domain_bry(), page.Page_id(), page.Page_ttl(), args.expand_snips));
 
 			// loop lines
 			int lines_len = page.Lines().Len();
 			for (int j = 0; j < lines_len; j++) {
 				Xofulltext_cache_line line = (Xofulltext_cache_line)page.Lines().Get_at(j);
-				ui.Send_line_add(false, args.show_all_matches, qry_id, wiki.Domain_bry(), page.Page_id(), line.Line_seq(), line.Line_html());
+				ui.Send_line_add(false, args.show_all_snips, qry_id, wiki.Domain_bry(), page.Page_id(), line.Line_seq(), line.Line_html());
 			}
 		}
 		return true;

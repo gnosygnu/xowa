@@ -74,7 +74,7 @@ class Xofulltext_highlighter_mgr implements Gfo_invk {
 		int page_id = item.page_id;
 		Gflucene_highlighter_item[] lines = highlighter_mgr.Exec(searcher_data, item);
 		for (Gflucene_highlighter_item line : lines) {
-			ui.Send_line_add(true, searcher_args.show_all_matches, searcher_args.qry_id, wiki.Domain_bry(), page_id, line.num, Bry_.new_u8(line.text));
+			ui.Send_line_add(true, searcher_args.show_all_snips, searcher_args.qry_id, wiki.Domain_bry(), page_id, line.num, Bry_.new_u8(line.text));
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
