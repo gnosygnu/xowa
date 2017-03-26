@@ -153,4 +153,9 @@ public class XophpString {
 	public static byte[] str_replace(byte[] find, byte[] repl, byte[] src) {
 		return Bry_.Replace(src, find, repl);
 	}
+	public static byte[] strstr(byte[] src, byte[] find) {
+		int pos = Bry_find_.Find_fwd(src, find);
+		return pos == Bry_find_.Not_found ? null : Bry_.Mid(src, pos, src.length);
+	}
+	public static int strlen(byte[] src) {return src.length;}
 }

@@ -348,14 +348,14 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 			break;
 		} while (true);
 
-//			$fragment = strstr(dbkey, '#');
-//			if (false !== $fragment) {
-//				parts['fragment'] = str_replace('_', ' ', substr($fragment, 1));
-//				dbkey = substr(dbkey, 0, strlen(dbkey) - strlen($fragment));
-//				// remove whitespace again: prevents "Foo_bar_#"
-//				// becoming "Foo_bar_"
-//				dbkey = preg_replace('/_*$/', '', dbkey);
-//			}
+		byte[] fragment = XophpString.strstr(dbkey, Byte_ascii.Hash_bry);
+		if (null != fragment) {
+			parts.fragment = XophpString.str_replace(Byte_ascii.Underline, Byte_ascii.Space, XophpString.substr(fragment, 1));
+			dbkey = XophpString.substr(dbkey, 0, XophpString.strlen(dbkey) - XophpString.strlen(fragment));
+			// remove whitespace again: prevents "Foo_bar_#"
+			// becoming "Foo_bar_"
+			dbkey = Bry_.Replace(dbkey, Byte_ascii.Underline_bry, Bry_.Empty);
+		}
 
 		// Reject illegal characters.
 //			$rxTc = self::getTitleInvalidRegex();
@@ -382,7 +382,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 //				throw new XomwMalformedTitleException('title-invalid-relative', text);
 //			}
 
-		// Magic tilde sequences? Nu-uh!
+		// Magic tilde sequences?
 //			if (strpos(dbkey, '~~~') !== false) {
 //				throw new XomwMalformedTitleException('title-invalid-magic-tilde', text);
 //			}

@@ -14,9 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
+import gplx.xowa.mediawiki.languages.*;
 /**
 * The Message cls provides methods which fulfil two basic services:
-*  - fetching interface messages
+*  - fetching interfaceIsUserLang messages
 *  - processing messages into a variety of formats
 *
 * First implemented with MediaWiki 1.17, the Message cls is intended to
@@ -45,7 +46,7 @@ package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import 
 * a method. Some of them return a Message instance too so you can chain them.
 * You will find below several examples of wfMessage() usage.
 *
-* Fetching a message text for interface message:
+* Fetching a message text for interfaceIsUserLang message:
 *
 * @code
 *    $button = Xml::button(
@@ -105,7 +106,7 @@ package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import 
 *         ->plain();
 * @endcode
 *
-* @note You can parse the text only in the content or interface languages
+* @note You can parse the text only in the content or interfaceIsUserLang languages
 *
 * @section message_compare_old Comparison with old wfMsg* functions:
 *
@@ -151,112 +152,123 @@ package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import 
 */
 public class XomwMessage {
 //		/** Use message text as-is */
-//		static final FORMAT_PLAIN = 'plain';
-//		/** Use normal wikitext -> HTML parsing (the result will be wrapped in a block-level HTML tag) */
-//		static final FORMAT_BLOCK_PARSE = 'block-parse';
-//		/** Use normal wikitext -> HTML parsing but strip the block-level wrapper */
-//		static final FORMAT_PARSE = 'parse';
-//		/** Transform {{..}} constructs but don't transform to HTML */
-//		static final FORMAT_TEXT = 'text';
-//		/** Transform {{..}} constructs, HTML-escape the result */
-//		static final FORMAT_ESCAPED = 'escaped';
-//
-//		/**
-//		* Mapping from Message::listParam() types to Language methods.
-//		* @var array
-//		*/
-//		protected static $listTypeMap = [
-//			'comma' => 'commaList',
-//			'semicolon' => 'semicolonList',
-//			'pipe' => 'pipeList',
-//			'text' => 'listToText',
-//		];
-//
-//		/**
-//		* In which language to get this message. True, which is the default,
-//		* means the current user language, false content language.
-//		*
-//		* @var boolean
-//		*/
-//		protected $interface = true;
-//
-//		/**
-//		* In which language to get this message. Overrides the $interface setting.
-//		*
-//		* @var Language|boolean Explicit language Object, or false for user language
-//		*/
-//		protected $language = false;
-//
-//		/**
-//		* @var String The message key. If $keysToTry has more than one element,
-//		* this may change to one of the keys to try when fetching the message text.
-//		*/
-//		protected $key;
-//
-//		/**
-//		* @var String... List of keys to try when fetching the message.
-//		*/
-//		protected $keysToTry;
-//
-//		/**
-//		* @var array List of parameters which will be substituted into the message.
-//		*/
-//		protected $parameters = [];
-//
-//		/**
-//		* @var String
-//		* @deprecated
-//		*/
-//		protected $format = 'parse';
-//
-//		/**
-//		* @var boolean Whether database can be used.
-//		*/
-//		protected $useDatabase = true;
-//
-//		/**
-//		* @var Title Title Object to use as context.
-//		*/
-//		protected $title = null;
-//
-//		/**
-//		* @var Content Content Object representing the message.
-//		*/
+	private static final int FORMAT_PLAIN = 0; // 'plain';
+	/** Use normal wikitext -> HTML parsing (the result will be wrapped in a block-level HTML tag) */
+	private static final int FORMAT_BLOCK_PARSE = 1; // 'block-parse';
+	/** Use normal wikitext -> HTML parsing but strip the block-level wrapper */
+	private static final int FORMAT_PARSE = 2; // 'parse';
+	/** Transform {{..}} constructs but don't transform to HTML */
+	private static final int FORMAT_TEXT = 3; // 'text';
+	/** Transform {{..}} constructs, HTML-escape the result */
+	private static final int FORMAT_ESCAPED = 4; // 'escaped';
+
+	/**
+	* Mapping from Message::listParam() types to Language methods.
+	* @var array
+	*/
+	private static final    Hash_adp listTypeMap = Hash_adp_.New()
+	.Add_and_more("comma", "commaList")
+	.Add_and_more("semicolon", "semicolonList")
+	.Add_and_more("pipe", "pipeList")
+	.Add_and_more("text", "listToText")
+	;
+
+	/**
+	* In which language to get this message. True, which is the default,
+	* means the current user language, false content language.
+	*
+	* @var boolean
+	*/
+	private boolean interfaceIsUserLang = true;
+
+	/**
+	* In which language to get this message. Overrides the $interfaceIsUserLang setting.
+	*
+	* @var Language|boolean Explicit language Object, or false for user language
+	*/
+	private XomwLanguage language;
+
+	/**
+	* @var String The message key. If $keysToTry has more than one element,
+	* this may change to one of the keys to try when fetching the message text.
+	*/
+	private String key;
+
+	/**
+	* @var String... List of keys to try when fetching the message.
+	*/
+	private String[] keysToTry;
+
+	/**
+	* @var array List of parameters which will be substituted into the message.
+	*/
+	private List_adp parameters = List_adp_.New();
+
+	/**
+	* @var String
+	* @deprecated
+	*/
+	private int format = FORMAT_PARSE;
+
+	/**
+	* @var boolean Whether database can be used.
+	*/
+	private boolean useDatabase = true;
+
+	/**
+	* @var Title Title Object to use as context.
+	*/
+	private XomwTitle title = null;
+
+	/**
+	* @var Content Content Object representing the message.
+	*/
 //		protected $content = null;
-//
-//		/**
-//		* @var String
-//		*/
-//		protected $message;
-//
+
+	/**
+	* @var String
+	*/
+	private byte[] message;
+
+	public void CompilerAppeasement() {
+		this.language = null; this.key = null; this.keysToTry = null; this.message = null;
+		Tfds.Write(interfaceIsUserLang, language, key, keysToTry, format, useDatabase, title, message, listTypeMap, parameters);
+		Tfds.Write(FORMAT_BLOCK_PARSE, FORMAT_ESCAPED, FORMAT_PARSE, FORMAT_PLAIN, FORMAT_TEXT);
+	}
+	public XomwMessage(byte[] textBry) {
+		this.textBry = textBry;
+	}
+	public byte[] text() {return textBry;} private byte[] textBry;
+	public byte[] escaped() {throw Err_.new_unimplemented();}
+
 //		/**
 //		* @since 1.17
-//		* @param String|String[]|MessageSpecifier $key Message key, or array of
+//		* @param String|String[]|MessageSpecifier key Message key, or array of
 //		* message keys to try and use the first non-empty message for, or a
 //		* MessageSpecifier to copy from.
 //		* @param array $params Message parameters.
 //		* @param Language $language [optional] Language to use (defaults to current user language).
 //		* @throws InvalidArgumentException
 //		*/
-//		public function __construct( $key, $params = [], Language $language = null ) {
-//			if ( $key instanceof MessageSpecifier ) {
+//		public function __construct( key, $params = [], Language $language = null ) {
+//			if ( key instanceof MessageSpecifier ) {
 //				if ( $params ) {
 //					throw new InvalidArgumentException(
-//						'$params must be empty if $key is a MessageSpecifier'
+//						'$params must be empty if key is a MessageSpecifier'
 //					);
 //				}
-//				$params = $key->getParams();
-//				$key = $key->getKey();
+//				$params = key->getParams();
+//				key = key->getKey();
 //			}
 //
-//			if ( !is_string( $key ) && !is_array( $key ) ) {
-//				throw new InvalidArgumentException( '$key must be a String or an array' );
+//			if ( !is_string( key ) && !is_array( key ) ) {
+//				throw new InvalidArgumentException( 'key must be a String or an array' );
 //			}
 //
-//			$this->keysToTry = (array)$key;
+//			$this->keysToTry = (array)key;
 //
 //			if ( empty( $this->keysToTry ) ) {
-//				throw new InvalidArgumentException( '$key must not be an empty list' );
+//				throw new InvalidArgumentException( 'key must not be an empty list' );
 //			}
 //
 //			$this->key = reset( $this->keysToTry );
@@ -274,7 +286,7 @@ public class XomwMessage {
 //		*/
 //		public function serialize() {
 //			return serialize( [
-//				'interface' => $this->interface,
+//				'interfaceIsUserLang' => $this->interfaceIsUserLang,
 //				'language' => $this->language ? $this->language->getCode() : false,
 //				'key' => $this->key,
 //				'keysToTry' => $this->keysToTry,
@@ -292,7 +304,7 @@ public class XomwMessage {
 //		*/
 //		public function unserialize( $serialized ) {
 //			$data = unserialize( $serialized );
-//			$this->interface = $data['interface'];
+//			$this->interfaceIsUserLang = $data['interfaceIsUserLang'];
 //			$this->key = $data['key'];
 //			$this->keysToTry = $data['keysToTry'];
 //			$this->parameters = $data['parameters'];
@@ -380,15 +392,15 @@ public class XomwMessage {
 //		*
 //		* @since 1.17
 //		*
-//		* @param String|String[]|MessageSpecifier $key
+//		* @param String|String[]|MessageSpecifier key
 //		* @param mixed $param,... Parameters as strings.
 //		*
 //		* @return Message
 //		*/
-//		public static function newFromKey( $key /*...*/ ) {
+//		public static function newFromKey( key /*...*/ ) {
 //			$params = func_get_args();
 //			array_shift( $params );
-//			return new self( $key, $params );
+//			return new self( key, $params );
 //		}
 //
 //		/**
@@ -464,16 +476,16 @@ public class XomwMessage {
 //		public function getTitle() {
 //			global $wgContLang, $wgForceUIMsgAsContentMsg;
 //
-//			$title = $this->key;
+//			title = $this->key;
 //			if (
 //				!$this->language->equals( $wgContLang )
 //				&& in_array( $this->key, (array)$wgForceUIMsgAsContentMsg )
 //			) {
 //				$code = $this->language->getCode();
-//				$title .= '/' . $code;
+//				title .= '/' . $code;
 //			}
 //
-//			return Title::makeTitle( NS_MEDIAWIKI, $wgContLang->ucfirst( strtr( $title, ' ', '_' ) ) );
+//			return Title::makeTitle( NS_MEDIAWIKI, $wgContLang->ucfirst( strtr( title, ' ', '_' ) ) );
 //		}
 //
 //		/**
@@ -497,8 +509,8 @@ public class XomwMessage {
 //				if ( $args[0] === [] ) {
 //					$args = [];
 //				} else {
-//					foreach ( $args[0] as $key => $value ) {
-//						if ( is_int( $key ) ) {
+//					foreach ( $args[0] as key => $value ) {
+//						if ( is_int( key ) ) {
 //							$args = $args[0];
 //							break;
 //						}
@@ -702,7 +714,7 @@ public class XomwMessage {
 //		public function setContext( IContextSource $context ) {
 //			$this->inLanguage( $context->getLanguage() );
 //			$this->title( $context->getTitle() );
-//			$this->interface = true;
+//			$this->interfaceIsUserLang = true;
 //
 //			return $this;
 //		}
@@ -710,7 +722,7 @@ public class XomwMessage {
 //		/**
 //		* Request the message in any language that is supported.
 //		*
-//		* As a side effect interface message status is unconditionally
+//		* As a side effect interfaceIsUserLang message status is unconditionally
 //		* turned off.
 //		*
 //		* @since 1.17
@@ -734,7 +746,7 @@ public class XomwMessage {
 //				);
 //			}
 //			$this->message = null;
-//			$this->interface = false;
+//			$this->interfaceIsUserLang = false;
 //			return $this;
 //		}
 
@@ -760,17 +772,17 @@ public class XomwMessage {
 	}
 
 //		/**
-//		* Allows manipulating the interface message flag directly.
+//		* Allows manipulating the interfaceIsUserLang message flag directly.
 //		* Can be used to restore the flag after setting a language.
 //		*
 //		* @since 1.20
 //		*
-//		* @param boolean $interface
+//		* @param boolean $interfaceIsUserLang
 //		*
 //		* @return Message $this
 //		*/
-//		public function setInterfaceMessageFlag( $interface ) {
-//			$this->interface = (boolean)$interface;
+//		public function setInterfaceMessageFlag( $interfaceIsUserLang ) {
+//			$this->interfaceIsUserLang = (boolean)$interfaceIsUserLang;
 //			return $this;
 //		}
 //
@@ -794,12 +806,12 @@ public class XomwMessage {
 //		*
 //		* @since 1.18
 //		*
-//		* @param Title $title
+//		* @param Title title
 //		*
 //		* @return Message $this
 //		*/
-//		public function title( $title ) {
-//			$this->title = $title;
+//		public function title( title ) {
+//			$this->title = title;
 //			return $this;
 //		}
 //
@@ -879,7 +891,7 @@ public class XomwMessage {
 //
 //		/**
 //		* Magic method implementation of the above (for PHP >= 5.2.0), so we can do, eg:
-//		*     $foo = new Message( $key );
+//		*     $foo = new Message( key );
 //		*     $String = "<abbr>$foo</abbr>";
 //		*
 //		* @since 1.18
@@ -1176,7 +1188,7 @@ public class XomwMessage {
 //					// Cache depends on these parameters
 //					$msg->message = null;
 //				}
-//				$msg->interface = $this->interface;
+//				$msg->interfaceIsUserLang = $this->interfaceIsUserLang;
 //				$msg->language = $this->language;
 //				$msg->useDatabase = $this->useDatabase;
 //				$msg->title = $this->title;
@@ -1210,7 +1222,7 @@ public class XomwMessage {
 //				$String,
 //				$this->title,
 //				/*linestart*/true,
-//				$this->interface,
+//				$this->interfaceIsUserLang,
 //				$this->getLanguage()
 //			);
 //
@@ -1229,7 +1241,7 @@ public class XomwMessage {
 //		protected function transformText( $String ) {
 //			return MessageCache::singleton()->transform(
 //				$String,
-//				$this->interface,
+//				$this->interfaceIsUserLang,
 //				$this->getLanguage(),
 //				$this->title
 //			);
@@ -1247,16 +1259,16 @@ public class XomwMessage {
 //			if ( $this->message === null ) {
 //				$cache = MessageCache::singleton();
 //
-//				foreach ( $this->keysToTry as $key ) {
-//					$message = $cache->get( $key, $this->useDatabase, $this->getLanguage() );
+//				foreach ( $this->keysToTry as key ) {
+//					$message = $cache->get( key, $this->useDatabase, $this->getLanguage() );
 //					if ( $message !== false && $message !== '' ) {
 //						break;
 //					}
 //				}
 //
 //				// NOTE: The constructor makes sure keysToTry isn't empty,
-//				//       so we know that $key and $message are initialized.
-//				$this->key = $key;
+//				//       so we know that key and $message are initialized.
+//				$this->key = key;
 //				$this->message = $message;
 //			}
 //			return $this->message;
@@ -1337,9 +1349,4 @@ public class XomwMessage {
 //			$vars = $this->getLanguage()->$func( $vars );
 //			return $this->extractParam( new RawMessage( $vars, $params ), $format );
 //		}
-	public XomwMessage(byte[] textBry) {
-		this.textBry = textBry;
-	}
-	public byte[] text() {return textBry;} private byte[] textBry;
-	public byte[] escaped() {throw Err_.new_unimplemented();}
 }
