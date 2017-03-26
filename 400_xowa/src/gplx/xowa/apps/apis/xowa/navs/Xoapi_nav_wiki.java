@@ -21,18 +21,17 @@ public class Xoapi_nav_wiki implements Gfo_invk {
 	public void Init_by_kit(Xoae_app app) {
 		win = app.Gui_mgr().Browser_win();
 	}
-	public void Random()		{win.Page__navigate_by_url_bar("Special:Random");}
-	public void Sandbox()		{win.Page__navigate_by_url_bar("Project:Sandbox");}
 	public void Main_page()		{
 		win.Tab_mgr().Active_tab_assert();	// force an active tab in case all tabs are closed; needed for win.Active_page() below; DATE:2014-09-17
 		win.Page__navigate_by_url_bar(win.Active_tab().Wiki().Domain_str() + Xoh_href_.Str__wiki);	// NOTE: add "/wiki/" to generate non-page like url;  EX: "home" -> "home/wiki/" which will be interpreted as a url, as opposed to "home" which will be intrepretted as page; DATE:2014-04-14
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_main_page)) 						this.Main_page();
-		else if	(ctx.Match(k, Invk_random)) 						this.Random();
-		else if	(ctx.Match(k, Invk_sandbox)) 						this.Sandbox();
+		if		(ctx.Match(k, "main_page")) 						this.Main_page();
+		else if	(ctx.Match(k, "random")) 							win.Page__navigate_by_url_bar("Special:Random");
+		else if	(ctx.Match(k, "sandbox")) 							win.Page__navigate_by_url_bar("Project:Sandbox");
+		else if	(ctx.Match(k, "allpages")) 							win.Page__navigate_by_url_bar("Special:AllPages?from=!"); // NOTE: for menu, default to ! else empty page
+		else if	(ctx.Match(k, "search")) 							win.Page__navigate_by_url_bar("Special:XowaSearch");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final String Invk_main_page = "main_page", Invk_random = "random", Invk_sandbox = "sandbox";
 }

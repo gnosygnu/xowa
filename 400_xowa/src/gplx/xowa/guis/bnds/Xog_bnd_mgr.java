@@ -43,6 +43,8 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		, "xowa.gui.shortcuts.xowa.nav.wiki.sandbox-1"
 		, "xowa.gui.shortcuts.xowa.nav.wiki.sandbox-2"
 		, "xowa.gui.shortcuts.xowa.nav.wiki.random-1"
+		, "xowa.gui.shortcuts.xowa.nav.wiki.allpages-1"
+		, "xowa.gui.shortcuts.xowa.nav.wiki.search-1"
 		, "xowa.gui.shortcuts.xowa.nav.help.help-1"
 		, "xowa.gui.shortcuts.xowa.nav.help.about-1"
 		, "xowa.gui.shortcuts.xowa.nav.help.change_log-1"
@@ -225,6 +227,8 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		Init_itm(Xog_cmd_itm_.Key_nav_cfg_menu									, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_wiki_main_page							, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_wiki_random								, Xog_bnd_box_.Tid_browser				, "mod.cs+key.r");
+		Init_itm(Xog_cmd_itm_.Key_nav_wiki_allpages								, Xog_bnd_box_.Tid_browser				, "");
+		Init_itm(Xog_cmd_itm_.Key_nav_wiki_search								, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_wiki_sandbox								, Xog_bnd_box_.Tid_browser				, "mod.cs+key.g,mod.cs+key.s", "mod.c+key.f1");
 		Init_itm(Xog_cmd_itm_.Key_nav_help_help									, Xog_bnd_box_.Tid_browser				, "key.f1");
 		Init_itm(Xog_cmd_itm_.Key_nav_help_change_log							, Xog_bnd_box_.Tid_browser				, "");

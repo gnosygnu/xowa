@@ -28,6 +28,8 @@ public class Xog_cmd_itm_ {
 	, Key_nav_wiki_main_page									= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.wiki.main_page")
 	, Key_nav_wiki_sandbox										= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.wiki.sandbox")
 	, Key_nav_wiki_random										= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.wiki.random")
+	, Key_nav_wiki_allpages										= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.wiki.allpages")
+	, Key_nav_wiki_search										= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.wiki.search")
 
 	, Key_nav_help_help											= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.help"								, "home/wiki/Help/Contents")               // HOME
 	, Key_nav_help_about										= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.about"								, "home/wiki/Help/About")                  // HOME
