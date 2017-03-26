@@ -93,6 +93,6 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 
 		// create highlighter thread and launch it
 		Xofulltext_highlighter_mgr highlighter_mgr = new Xofulltext_highlighter_mgr(ui, wiki, args, analyzer_data, searcher_data, full_list);
-		gplx.core.threads.Thread_adp_.Start_by_key("highlighter", Cancelable_.Never, highlighter_mgr, Xofulltext_highlighter_mgr.Invk__highlight);
+		highlighter_mgr.Highlight_list(); // NOTE: do not launch in separate thread, else multiple wikis will have strange race conditions
 	}
 }

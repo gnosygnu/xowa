@@ -76,7 +76,7 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.js")));
 		head_tags.Add(Xopg_tag_itm.New_htm_frag(addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.wiki.template.html"), "xofts.wiki"));
 		head_tags.Add(Xopg_tag_itm.New_htm_frag(addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.page.template.html"), "xofts.page"));
-		head_tags.Add(Xopg_tag_itm.New_htm_frag(addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.line.template.html"), "xofts.line"));
+		head_tags.Add(Xopg_tag_itm.New_htm_frag(addon_dir.GenSubFil_nest("bin", "xofulltext_searcher.snip.template.html"), "xofts.snip"));
 
 		page_data.Js_enabled_y_();
 	}

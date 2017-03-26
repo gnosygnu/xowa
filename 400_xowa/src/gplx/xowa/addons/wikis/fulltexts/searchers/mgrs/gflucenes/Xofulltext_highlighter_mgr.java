@@ -39,7 +39,7 @@ class Xofulltext_highlighter_mgr implements Gfo_invk {
 		this.searcher_data = searcher_data;
 		this.list = list;
 	}
-	private void Highlight_list() {
+	public void Highlight_list() {
 		// init highlighter
 		highlighter_mgr.Init(new Gflucene_index_data(analyzer_data, "")); // NOTE: index_dir not needed for highlighter
 

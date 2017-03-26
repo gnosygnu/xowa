@@ -150,10 +150,10 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 		return true;
 	}
 
-	public void Get_lines_rest(Json_nde args) {
-		Get_lines_rest(args.Get_as_int("qry_id"), args.Get_as_bry("wiki"), args.Get_as_int("page_id"), args.Get_as_str("page_guid"));
+	public void Snips_show_all(Json_nde args) {
+		Snips_show_all(args.Get_as_int("qry_id"), args.Get_as_bry("wiki"), args.Get_as_int("page_id"), args.Get_as_str("page_guid"));
 	}
-	private void Get_lines_rest(int qry_id, byte[] wiki_bry, int page_id, String page_guid) {
+	private void Snips_show_all(int qry_id, byte[] wiki_bry, int page_id, String page_guid) {
 		Xofulltext_cache_mgr cache_mgr = this.Cache_mgr();
 		Xofulltext_searcher_ui searcher_ui = new Xofulltext_searcher_ui(cache_mgr, app.Gui__cbk_mgr(), new Xog_cbk_trg(page_guid));
 

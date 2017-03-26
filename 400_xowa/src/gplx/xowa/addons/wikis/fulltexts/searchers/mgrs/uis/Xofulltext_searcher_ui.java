@@ -46,7 +46,7 @@ public class Xofulltext_searcher_ui {
 		.Add_bry("wiki", page.Wiki_domain())
 		.Add_int("page_id", page.Page_id())
 		.Add_bry("page_ttl", page.Page_ttl())
-		.Add_bool("expand_matches_section", page.Expand_matches_section())
+		.Add_bool("expand_snips", page.Expand_snips())
 		);
 		cache_mgr.Add_page(page.Query_id(), page.Wiki_domain(), page.Page_id(), page.Page_ttl());
 	}

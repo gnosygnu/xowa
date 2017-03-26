@@ -28,18 +28,18 @@ public class Xofulltext_searcher_bridge implements Bridge_cmd_itm {
 			case Proc__search_run:				svc.Search_run(args); break;
 			case Proc__search_cxl:				svc.Search_cxl(args); break;
 			case Proc__options_save:			svc.Options_save(args); break;
-			case Proc__get_lines_rest:			svc.Get_lines_rest(args); break;
+			case Proc__snips_show_all:			svc.Snips_show_all(args); break;
 			default: throw Err_.new_unhandled_default(proc_id);
 		}
 		return "";
 	}
 
-	private static final byte Proc__search_run = 0, Proc__search_cxl = 1, Proc__options_save = 2, Proc__get_lines_rest = 3;
+	private static final byte Proc__search_run = 0, Proc__search_cxl = 1, Proc__options_save = 2, Proc__snips_show_all = 3;
 	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("search_run"					, Proc__search_run)
 	.Add_str_byte("search_cxl"					, Proc__search_cxl)
 	.Add_str_byte("options_save"				, Proc__options_save)
-	.Add_str_byte("get_lines_rest"				, Proc__get_lines_rest)
+	.Add_str_byte("snips_show_all"				, Proc__snips_show_all)
 	;
 
 	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("xowa.wiki.fulltext.searcher");
