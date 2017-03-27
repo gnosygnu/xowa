@@ -387,12 +387,14 @@ public class Scrib_lib_wikibase_srl_tst {
 		);
 	}
 	@Test   public void Type_is_property() {	// PURPOSE: type should be "property"; PAGE:ru.w:Викитека:Проект:Викиданные DATE:2016-11-23
+		fxt.Wdata_fxt().Wdata_mgr().Prop_mgr().Loader_(Wbase_prop_mgr_loader_.New_mock(Keyval_.new_("P1", "commonsMedia")));
 		fxt.Init_header_enabled_y_();
 		fxt.Wdata_fxt().doc_("Property:P1", fxt.Wdata_fxt().Make_claim_string(123, "abc"));
 		fxt.Test
 		( "id:'Property:P1'"
 		, "type:'property'"
 		, "schemaVersion:'2'"
+		, "datatype:'commonsMedia'"
 		, ""
 		);
 	}

@@ -25,6 +25,12 @@ class Scrib_lib_wikibase_srl {
 			rv.Add(Keyval_.new_("id", qid));
 			rv.Add(Keyval_.new_("type", doc_is_qid ? Wbase_claim_entity_type_.Itm__item.Key_str() : Wbase_claim_entity_type_.Itm__property.Key_str()));	// type should be "property"; PAGE:ru.w:Викитека:Проект:Викиданные DATE:2016-11-23
 			rv.Add(Keyval_.new_("schemaVersion", base_adj + 1));	// NOTE: needed by mw.wikibase.lua
+
+			// for Property pages, add a "datatype" property PAGE:ru.w:Маргарян,_Андраник_Наапетович; wd:Property:P18; DATE:2017-03-27
+			if (!doc_is_qid) {
+				String pid_name = String_.new_u8(Bry_.Mid(qid, Wdata_wiki_mgr.Ns_property_name_bry.length + 1));// +1 for ":" in "Property:"
+				rv.Add(Keyval_.new_("datatype", prop_mgr.Get_or_null(pid_name)));
+			}
 		}
 		Srl_root(rv, Wdata_doc_parser_v2.Str_labels			, Srl_langtexts	(Wdata_dict_langtext.Itm__language.Key_str(), Wdata_dict_langtext.Itm__value.Key_str(), wdoc.Label_list()));
 		Srl_root(rv, Wdata_doc_parser_v2.Str_descriptions	, Srl_langtexts	(Wdata_dict_langtext.Itm__language.Key_str(), Wdata_dict_langtext.Itm__value.Key_str(), wdoc.Descr_list()));

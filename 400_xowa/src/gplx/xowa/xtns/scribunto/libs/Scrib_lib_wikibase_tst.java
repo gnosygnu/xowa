@@ -76,6 +76,7 @@ public class Scrib_lib_wikibase_tst {
 		, "  id=Property:p2"	// only difference from above
 		, "  type=property"		// also, type should be "property"; PAGE:ru.w:Викитека:Проект:Викиданные DATE:2016-11-23
 		, "  schemaVersion=2"
+		, "  datatype=<<NULL>>"
 		, "  labels="
 		, "    en="
 		, "      language=en"
