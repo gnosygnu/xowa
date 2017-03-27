@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.exports.packs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.packs.*;
+import gplx.core.ios.*;
 import gplx.fsdb.meta.*;
 import gplx.xowa.wikis.data.*;
 import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*;
@@ -51,6 +52,11 @@ class Pack_hash_bldr {
 			}
 		}
 
+		// bld lucene pack
+		if (cfg.Pack_lucene()) {
+			Pack_lucene(rv, wiki, zip_name_bldr, cfg);
+		}
+
 		// bld file pack
 		if (cfg.Pack_file()) {
 			Fsm_mnt_itm mnt_itm = wiki.File__mnt_mgr().Mnts__get_at(Fsm_mnt_mgr.Mnt_idx_main);
@@ -79,6 +85,51 @@ class Pack_hash_bldr {
 			rv.Add(zip_name_bldr, Xobc_import_type.Tid__fsdb__delete, fsdb_deletion_db.Url());
 		}
 		return rv;
+	}
+	private static void Pack_lucene(Pack_hash rv, Xow_wiki wiki, Pack_zip_name_bldr zip_name_bldr, Pack_file_cfg cfg) {
+		// read files from lucene_dir
+		Io_url lucene_dir = gplx.xowa.addons.wikis.fulltexts.Xosearch_fulltext_addon.Get_index_dir(wiki);
+		IoItmHash fils = Io_mgr.Instance.QueryDir_args(lucene_dir).ExecAsItmHash();
+
+		// init vars
+		int pack_num = 0;
+		long size_cur = 0;
+		long size_max = cfg.Lucene_max();
+		List_adp url_list = List_adp_.New();
+		int fil_idx = 0;
+		int fils_len = fils.Len();
+
+		// loop over each file
+		while (fil_idx < fils_len) {
+			IoItmFil fil = (IoItmFil)fils.Get_at(fil_idx);
+
+			// calc size_new
+			long size_new = size_cur + fil.Size();
+
+			// if last file, set size_new to max
+			boolean add_file = true;
+			if (fil_idx == fils_len - 1) {
+				size_new = size_max;
+				url_list.Add(fil.Url());
+				add_file = false;
+			}
+
+			// size exceeded; make new pack
+			if (size_new >= size_max) {
+				rv.Add(Xobc_import_type.Tid__wiki__lucene, zip_name_bldr.Bld_by_suffix("xtn.fulltext_search", pack_num), (Io_url[])url_list.To_ary_and_clear(Io_url.class));
+				pack_num++;
+				size_cur = 0;
+			}
+			// size too small; just update
+			else {
+				size_cur = size_new;
+			}
+
+			// add file to list
+			if (add_file)
+				url_list.Add(fil.Url());
+			fil_idx++;
+		}
 	}
 	private static Pack_hash Bld_custom_files(Pack_hash rv, Xow_wiki wiki, Io_url wiki_dir, Pack_zip_name_bldr zip_name_bldr, String custom_files_blob) {
 		String[] custom_files = String_.Split(custom_files_blob, "|");

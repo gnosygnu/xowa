@@ -19,14 +19,16 @@ class Pack_hash {
 	public int			Len()				{return hash.Len();}
 	public Pack_list	Get_at(int i)		{return (Pack_list)hash.Get_at(i);}
 	public Pack_list	Get_by(int tid)		{return (Pack_list)hash.Get_by(tid);}
-	public void	Add(Pack_zip_name_bldr bldr, int list_tid, Io_url file_url) {
+	public Pack_itm Add(Pack_zip_name_bldr bldr, int list_tid, Io_url file_url) {return Add(list_tid, bldr.Bld(file_url), file_url);}
+	public Pack_itm Add(int list_tid, Io_url pack_url, Io_url... raw_urls) {
 		Pack_list list = (Pack_list)hash.Get_by(list_tid);
 		if (list == null) {
 			list = new Pack_list(list_tid);
 			hash.Add(list_tid, list);
 		}
-		Pack_itm itm = new Pack_itm(list_tid, bldr.Bld(file_url), file_url);
+		Pack_itm itm = new Pack_itm(list_tid, pack_url, raw_urls);
 		list.Add(itm);
+		return itm;
 	}
 	public void Consolidate(int... tids) {	// merge n itms into 1 itm; needed for search-core + search-link -> search
 		int tids_len = tids.length;

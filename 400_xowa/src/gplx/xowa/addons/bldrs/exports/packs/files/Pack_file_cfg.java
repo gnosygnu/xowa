@@ -20,6 +20,8 @@ public class Pack_file_cfg implements Gfo_invk {
 	public boolean Pack_text() {return pack_text;} private boolean pack_text = false;
 	public boolean Pack_html() {return pack_html;} private boolean pack_html = true;
 	public boolean Pack_file() {return pack_file;} private boolean pack_file = true;
+	public boolean Pack_lucene() {return pack_lucene;} private boolean pack_lucene;
+	public long Lucene_max() {return lucene_max;} private long lucene_max = Io_mgr.Len_mb * 1500;
 	public boolean Pack_fsdb_delete() {return pack_fsdb_delete;} private boolean pack_fsdb_delete;
 	public boolean Pack_custom() {return pack_custom_files != null;}
 	public String Pack_custom_files() {return pack_custom_files;} private String pack_custom_files;
@@ -30,22 +32,18 @@ public class Pack_file_cfg implements Gfo_invk {
 	}	private String wiki_date = null;
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk__deploy_dir_))			deploy_dir = m.ReadIoUrl("v");
-		else if	(ctx.Match(k, Invk__pack_text_))			pack_text = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk__pack_html_))			pack_html = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk__pack_file_))			pack_file = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk__pack_file_cutoff_))		pack_file_cutoff = m.ReadDate("v");
-		else if	(ctx.Match(k, Invk__pack_fsdb_delete_))		pack_fsdb_delete = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk__pack_custom_name_))		pack_custom_name = m.ReadStr("v");
-		else if	(ctx.Match(k, Invk__pack_custom_files_))	pack_custom_files = m.ReadStr("v");	// pack_custom {files='en.wikipedia.org-core.xowa|en.wikipedia.org-html-ns.008.xowa'}}
-		else if	(ctx.Match(k, Invk__wiki_date_))			wiki_date = m.ReadStr("v");
+		if		(ctx.Match(k, "deploy_dir_"))				deploy_dir = m.ReadIoUrl("v");
+		else if	(ctx.Match(k, "pack_text_"))				pack_text = m.ReadYn("v");
+		else if	(ctx.Match(k, "pack_html_"))				pack_html = m.ReadYn("v");
+		else if	(ctx.Match(k, "pack_file_"))				pack_file = m.ReadYn("v");
+		else if	(ctx.Match(k, "pack_file_cutoff_"))			pack_file_cutoff = m.ReadDate("v");
+		else if	(ctx.Match(k, "pack_fsdb_delete_"))			pack_fsdb_delete = m.ReadYn("v");
+		else if	(ctx.Match(k, "pack_custom_name_"))			pack_custom_name = m.ReadStr("v");
+		else if	(ctx.Match(k, "pack_custom_files_"))		pack_custom_files = m.ReadStr("v");	// pack_custom {files='en.wikipedia.org-core.xowa|en.wikipedia.org-html-ns.008.xowa'}}
+		else if	(ctx.Match(k, "wiki_date_"))				wiki_date = m.ReadStr("v");
+		else if	(ctx.Match(k, "pack_lucene_"))				pack_lucene = m.ReadYn("v");
+		else if	(ctx.Match(k, "lucene_max_"))				lucene_max = m.ReadLong("v") * Io_mgr.Len_mb;
 		else												return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final String Invk__deploy_dir_ = "deploy_dir_"
-	, Invk__pack_text_ = "pack_text_", Invk__pack_html_ = "pack_html_", Invk__pack_file_ = "pack_file_", Invk__pack_file_cutoff_ = "pack_file_cutoff_"
-	, Invk__pack_fsdb_delete_ = "pack_fsdb_delete_"
-	, Invk__pack_custom_name_ = "pack_custom_name_", Invk__pack_custom_files_ = "pack_custom_files_"
-	, Invk__wiki_date_ = "wiki_date_"
-	;
 }

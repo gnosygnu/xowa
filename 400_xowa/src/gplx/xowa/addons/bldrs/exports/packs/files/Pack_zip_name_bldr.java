@@ -26,11 +26,21 @@ public class Pack_zip_name_bldr {	// en.wikipedia.org-file-ns.000-db.001.xowa ->
 		this.zip_name_prefix = Bry_.new_u8("Xowa_" + wiki_abrv + "_" + zip_name_suffix);
 	}
 	public Io_url Bld(Io_url orig_url) {
-		String orig_str = orig_url.NameOnly() + ".zip";
-		byte[] orig_bry = Bry_.new_u8(orig_str);
+		// get name and add .zip; EX: "en.wikipedia.org-file-core.xowa" -> "en.wikipedia.org-file-core.zip"
+		byte[] orig_bry = Bry_.new_u8(orig_url.NameOnly() + ".zip");
+
+		// swap dashes with unders; EX: "en.wikipedia.org-file-core.xowa" -> "en.wikipedia.org_file_core.zip"
 		orig_bry = Bry_.Replace(orig_bry, Byte_ascii.Dash, Byte_ascii.Underline);
+
+		// swap domain with xobc-style-prefix; EX: "en.wikipedia.org_file_core.zip" -> "Xowa_enwiki_2017-03_file_core.zip"
 		orig_bry = Bry_.Replace(orig_bry, wiki_domain, zip_name_prefix);
+
 		return pack_dir.GenSubFil(String_.new_u8(orig_bry));
+	}
+	public Io_url Bld_by_suffix(String suffix, int pack_num) {
+		// make fil_name EX: "Xowa_enwiki_2017-03" + "_" + "xtn.fulltext_search.001" + .zip
+		String fil_name = String_.new_u8(zip_name_prefix) + "_" + suffix + "." + Int_.To_str_pad_bgn_zero(pack_num, 3) + ".zip";
+		return pack_dir.GenSubFil(fil_name);
 	}
 	public static Io_url To_wiki_url(Io_url wiki_dir, Io_url zip_dir) {	
 		// get wiki_url based on wiki_dir and xobc_zip_fil; EX: "/wiki/en.wikipedia.org/", "/wiki/tmp/Xowa_enwiki_2016-09_file_core_deletion_2016-09/" -> "/wiki/en.wikipedia.org-file-core-deletion-2016.09.zip" 

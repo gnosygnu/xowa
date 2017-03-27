@@ -19,6 +19,7 @@ import gplx.dbs.*;
 import gplx.xowa.wikis.data.*;
 import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.steps.*;
 import gplx.xowa.addons.bldrs.exports.splits.mgrs.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
+// NOTE: used for experimental pack / split approach (html,file,search in one db)
 class Pack_mgr {
 	public void Exec(Xowe_wiki wiki, long pack_size_max) {
 		// init
