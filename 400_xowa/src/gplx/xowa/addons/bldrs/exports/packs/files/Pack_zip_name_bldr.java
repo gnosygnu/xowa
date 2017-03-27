@@ -39,7 +39,7 @@ public class Pack_zip_name_bldr {	// en.wikipedia.org-file-ns.000-db.001.xowa ->
 	}
 	public Io_url Bld_by_suffix(String suffix, int pack_num) {
 		// make fil_name EX: "Xowa_enwiki_2017-03" + "_" + "xtn.fulltext_search.001" + .zip
-		String fil_name = String_.new_u8(zip_name_prefix) + "_" + suffix + "." + Int_.To_str_pad_bgn_zero(pack_num, 3) + ".zip";
+		String fil_name = String_.new_u8(zip_name_prefix) + "_" + suffix + "." + Int_.To_str_pad_bgn_zero(pack_num + List_adp_.Base1, 3) + ".zip";
 		return pack_dir.GenSubFil(fil_name);
 	}
 	public static Io_url To_wiki_url(Io_url wiki_dir, Io_url zip_dir) {	

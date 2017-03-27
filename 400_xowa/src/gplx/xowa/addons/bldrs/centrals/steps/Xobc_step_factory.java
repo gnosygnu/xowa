@@ -61,6 +61,12 @@ public class Xobc_step_factory {
 		Io_url zip_file_url  = Eval_url(Bry_eval_wkr__builder_central.Make_str(Bry_eval_wkr__builder_central.Type__download_fil, wiki_domain, file_name));
 		Io_url unzip_dir_url = Eval_url(Bry_eval_wkr__builder_central.Make_str(Bry_eval_wkr__builder_central.Type__unzip_dir, wiki_domain, file_name));
 		Io_url wiki_dir_url  = Eval_url(Bry_eval_wkr__builder_central.Make_str(Bry_eval_wkr__builder_central.Type__wiki_dir, wiki_domain, file_name));
+
+		// if lucene, move to /data/search/
+		if (import_itm.Import_type == Xobc_import_type.Tid__wiki__lucene) {
+			wiki_dir_url = gplx.xowa.addons.wikis.fulltexts.Xosearch_fulltext_addon.Get_index_dir(wiki_dir_url);
+		}
+
 		Io_url checksum_url	 = unzip_dir_url.GenSubFil(file_name + ".md5");
 		int cmd_idx = 0;
 		list.Add(new Xobc_cmd__download			(task_mgr, task_id, step_id, cmd_idx++, src_http_url, zip_file_url, import_itm.Import_size_zip));
@@ -69,7 +75,6 @@ public class Xobc_step_factory {
 		list.Add(new Xobc_cmd__verify_dir		(task_mgr, task_id, step_id, cmd_idx++, checksum_url, zip_file_url));
 		// list.Add(new Xobc_cmd__wiki_merge	(task_mgr, task_id, step_id, cmd_idx++, merge_mgr, wiki_domain, unzip_dir_url, import_itm.Import_prog_data_max, import_itm.Import_prog_row_max, step_seqn));
 		list.Add(new Xobc_cmd__move_fils		(task_mgr, task_id, step_id, cmd_idx++, unzip_dir_url, wiki_dir_url));
-		
 		switch (import_itm.Import_type) {
 			case Xobc_import_type.Tid__wiki__core:		list.Add(new Xobc_cmd__wiki_reg		(task_mgr, task_id, step_id, cmd_idx++, wiki_dir_url, wiki_domain)); break;
 			case Xobc_import_type.Tid__fsdb__delete:	list.Add(new Xobc_cmd__fsdb_delete	(task_mgr, task_id, step_id, cmd_idx++, Pack_zip_name_bldr.To_wiki_url(wiki_dir_url, zip_file_url.OwnerDir()))); break;

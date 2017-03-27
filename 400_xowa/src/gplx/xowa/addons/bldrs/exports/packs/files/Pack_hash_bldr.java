@@ -106,7 +106,7 @@ class Pack_hash_bldr {
 			// calc size_new
 			long size_new = size_cur + fil.Size();
 
-			// if last file, set size_new to max
+			// if last file, set size_new to max and add file
 			boolean add_file = true;
 			if (fil_idx == fils_len - 1) {
 				size_new = size_max;
@@ -125,7 +125,7 @@ class Pack_hash_bldr {
 				size_cur = size_new;
 			}
 
-			// add file to list
+			// add file to list; ignore if last file and added above
 			if (add_file)
 				url_list.Add(fil.Url());
 			fil_idx++;
