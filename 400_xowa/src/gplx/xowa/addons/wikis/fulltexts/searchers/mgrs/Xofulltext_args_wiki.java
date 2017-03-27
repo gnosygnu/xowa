@@ -21,6 +21,8 @@ public class Xofulltext_args_wiki {
 	public int bgn;
 	public int len;
 	public int end() {return bgn + len;}
+	public boolean expand_snips;
+	public boolean show_all_snips;
 
 	public Xofulltext_args_wiki(byte[] wiki) {
 		this.wiki = wiki;
@@ -36,5 +38,7 @@ public class Xofulltext_args_wiki {
 		}
 		else if (String_.Eq(key, "offsets"))          this.bgn = Bry_.To_int(val);
 		else if (String_.Eq(key, "limits"))           this.len = Bry_.To_int(val);
+		else if (String_.Eq(key, "expand_snips"))     this.expand_snips = Bry_.Eq(val, Bool_.Y_bry);
+		else if (String_.Eq(key, "show_all_snips"))   this.show_all_snips = Bry_.Eq(val, Bool_.Y_bry);
 	}
 }

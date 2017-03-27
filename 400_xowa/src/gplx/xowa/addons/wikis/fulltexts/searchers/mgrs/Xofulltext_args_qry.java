@@ -20,12 +20,10 @@ public class Xofulltext_args_qry {
 	public int qry_id;
 	public String page_guid;
 	public byte[] search_text;
+	public boolean expand_options;
 	public Xofulltext_cache_mgr cache_mgr;
 	public Xofulltext_args_wiki[] wikis_ary;
 
-	public boolean expand_snips;
-	public boolean show_all_snips;
-	public boolean expand_options;
 	public boolean case_match;
 	public boolean auto_wildcard_bgn;
 	public boolean auto_wildcard_end;
@@ -44,6 +42,8 @@ public class Xofulltext_args_qry {
 	public static Xofulltext_args_qry New_by_json(Json_nde args) {
 		Xofulltext_args_qry rv = new Xofulltext_args_qry();
 		rv.search_text = args.Get_as_bry("search");
+		rv.page_guid = args.Get_as_str("page_guid");
+		rv.expand_options = args.Get_as_bool_or("expand_options", false);
 
 		// create wikis
 		byte[] wikis_bry = args.Get_as_bry("qarg_wikis");
@@ -57,11 +57,8 @@ public class Xofulltext_args_qry {
 		Set_prop(wiki_args, wikis_len, args, "ns_ids");
 		Set_prop(wiki_args, wikis_len, args, "offsets");
 		Set_prop(wiki_args, wikis_len, args, "limits");
-
-		rv.page_guid = args.Get_as_str("page_guid");
-		rv.expand_snips = args.Get_as_bool_or("expand_snips", false);
-		rv.show_all_snips = args.Get_as_bool_or("show_all_snips", false);
-		rv.expand_options = args.Get_as_bool_or("expand_options", false);
+		Set_prop(wiki_args, wikis_len, args, "expand_snips");
+		Set_prop(wiki_args, wikis_len, args, "show_all_snips");
 
 		rv.case_match = args.Get_as_bool_or("case_match", false);
 		rv.auto_wildcard_bgn = args.Get_as_bool_or("auto_wildcard_bgn", false);
@@ -74,7 +71,7 @@ public class Xofulltext_args_qry {
 		byte[][] ary = Bry_split_.Split(json_val, Byte_ascii.Pipe, true);
 		int ary_len = ary.length;
 		for (int i = 0; i < wikis_len; i++) {
-			byte[] val = i < ary_len ? ary[i] : ary[0];
+			byte[] val = i < ary_len ? ary[i] : ary[ary_len - 1];
 			wikis[i].Init_by_json(key, val);
 		}
 	}

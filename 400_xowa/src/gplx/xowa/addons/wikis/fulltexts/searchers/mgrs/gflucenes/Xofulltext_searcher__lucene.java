@@ -75,7 +75,7 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 					if (!wiki_args.ns_hash.Has(doc_data.ns_id)) continue;
 
 					// call page doc_data
-					Xofulltext_searcher_page page = new Xofulltext_searcher_page(args.qry_id, wiki.Domain_bry(), doc_data.page_id, doc_data.page_full_db, args.expand_snips);
+					Xofulltext_searcher_page page = new Xofulltext_searcher_page(args.qry_id, wiki.Domain_bry(), doc_data.page_id, doc_data.page_full_db, wiki_args.expand_snips);
 					ui.Send_page_add(page);
 
 					full_list.Add(doc_data.page_id, doc_data);
@@ -92,7 +92,7 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 		ui.Send_wiki_update(wiki.Domain_bry(), page_list.Len(), -1);
 
 		// create highlighter thread and launch it
-		Xofulltext_highlighter_mgr highlighter_mgr = new Xofulltext_highlighter_mgr(ui, wiki, args, analyzer_data, searcher_data, full_list);
+		Xofulltext_highlighter_mgr highlighter_mgr = new Xofulltext_highlighter_mgr(ui, wiki, args, wiki_args, analyzer_data, searcher_data, full_list);
 		highlighter_mgr.Highlight_list(); // NOTE: do not launch in separate thread, else multiple wikis will have strange race conditions
 	}
 }

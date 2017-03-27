@@ -60,13 +60,13 @@ public class Xofulltext_searcher__brute implements Xofulltext_searcher {
 
 					// do highlight
 					if (found <= wiki_args.len) {
-						cbk_highlight.Init(ui, args.qry_id, wiki, page_id, ttl.Full_db(), args.show_all_snips);
+						cbk_highlight.Init(ui, args.qry_id, wiki, page_id, ttl.Full_db(), wiki_args.show_all_snips);
 						ui.Send_page_add(new Xofulltext_searcher_page
 							( args.qry_id
 							, wiki_domain
 							, page_id
 							, ttl.Full_db()
-							, args.expand_snips
+							, wiki_args.expand_snips
 							));
 						finder.Match(text_mcase, 0, text_mcase.length, cbk_highlight);
 					}

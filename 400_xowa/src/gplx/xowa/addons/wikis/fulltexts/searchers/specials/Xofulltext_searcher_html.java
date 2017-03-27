@@ -28,15 +28,15 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache
 		props.Add("cur_wiki", wiki.Domain_str());
 		props_Add_str(cfg_mgr, url_args, "wikis" , wiki.Domain_str(), false);
 		props_Add_str(cfg_mgr, url_args, "ns_ids", "0");
-		props_Add_str(cfg_mgr, url_args, "limits", "100");
+		props_Add_str(cfg_mgr, url_args, "limits", "25");
 		props_Add_str(cfg_mgr, url_args, "offsets", "0");
+		props_Add_str(cfg_mgr, url_args, "expand_snips", "n");
+		props_Add_str(cfg_mgr, url_args, "show_all_snips", "n");
 
-		props_Add_bool(cfg_mgr, url_args, "expand_snips");
-		props_Add_bool(cfg_mgr, url_args, "show_all_snips");
-		props_Add_bool(cfg_mgr, url_args, "expand_options");
-		props_Add_bool(cfg_mgr, url_args, "case_match");
-		props_Add_bool(cfg_mgr, url_args, "auto_wildcard_bgn");
-		props_Add_bool(cfg_mgr, url_args, "auto_wildcard_end");
+		props_Add_bool(cfg_mgr, url_args, "xowa.addon.fulltext_search.options", "expand_options");
+		props_Add_bool(cfg_mgr, url_args, "xowa.addon.fulltext_search.special", "case_match");
+		props_Add_bool(cfg_mgr, url_args, "xowa.addon.fulltext_search.special", "auto_wildcard_bgn");
+		props_Add_bool(cfg_mgr, url_args, "xowa.addon.fulltext_search.special", "auto_wildcard_end");
 	}
 	private void props_Add_str(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, String key, String else_val) {
 		props_Add_str(cfg_mgr, url_args, key, else_val, true);
@@ -44,14 +44,14 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache
 	private void props_Add_str(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, String key, String else_val, boolean use_cfg) {
 		String dflt_val = else_val;
 		if (use_cfg) {
-			String cfg_key = "xowa.addon.search.fulltext.special." + key;
+			String cfg_key = "xowa.addon.fulltext_search.special." + key;
 			dflt_val = cfg_mgr.Get_str_app_or(cfg_key, else_val);
 		}
 		props.Add("dflt_" + key, dflt_val);
 		props.Add("qarg_" + key, url_args.Read_str_or(key, dflt_val));
 	}
-	private void props_Add_bool(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, String key) {
-		String cfg_key = "xowa.addon.search.fulltext.special." + key;
+	private void props_Add_bool(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, String cfg_grp, String key) {
+		String cfg_key = cfg_grp + "." + key;
 		boolean cfg_val = cfg_mgr.Get_bool_app_or(cfg_key, false);
 		props.Add(key, cfg_val);
 	}
