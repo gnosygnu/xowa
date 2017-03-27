@@ -57,6 +57,7 @@ public class Xofulltext_args_qry {
 		Set_prop(wiki_args, wikis_len, args, "ns_ids");
 		Set_prop(wiki_args, wikis_len, args, "offsets");
 		Set_prop(wiki_args, wikis_len, args, "limits");
+		Set_prop(wiki_args, wikis_len, args, "expand_pages");
 		Set_prop(wiki_args, wikis_len, args, "expand_snips");
 		Set_prop(wiki_args, wikis_len, args, "show_all_snips");
 

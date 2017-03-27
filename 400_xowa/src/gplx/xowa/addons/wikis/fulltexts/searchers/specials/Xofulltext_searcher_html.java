@@ -30,6 +30,7 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache
 		props_Add_str(cfg_mgr, url_args, "ns_ids", "0");
 		props_Add_str(cfg_mgr, url_args, "limits", "25");
 		props_Add_str(cfg_mgr, url_args, "offsets", "0");
+		props_Add_str(cfg_mgr, url_args, "expand_pages", "n");
 		props_Add_str(cfg_mgr, url_args, "expand_snips", "n");
 		props_Add_str(cfg_mgr, url_args, "show_all_snips", "n");
 
