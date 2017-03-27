@@ -14,108 +14,109 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-//	<?php
-//	/**
-//	* A content Object represents page content, e.g. the text to show on a page.
-//	* Content objects have no knowledge about how they relate to Wiki pages.
-//	*/
-//
-//	/**
-//	* Base implementation for content objects.
-//	*
-//	* @ingroup Content
-//	*/
-//	abstract class AbstractContent implements Content {
-//		/**
-//		* Name of the content model this Content Object represents.
-//		* Use with CONTENT_MODEL_XXX constants
-//		*
-//		* @since 1.21
-//		*
-//		* @var String $model_id
-//		*/
-//		protected $model_id;
-//
-//		/**
-//		* @param String $modelId
-//		*
-//		* @since 1.21
-//		*/
-//		public function __construct( $modelId = null ) {
-//			$this->model_id = $modelId;
-//		}
-//
-//		/**
-//		* @since 1.21
-//		*
-//		* @see Content::getModel
-//		*/
-//		public function getModel() {
-//			return $this->model_id;
-//		}
-//
-//		/**
-//		* @since 1.21
-//		*
-//		* @param String $modelId The model to check
-//		*
-//		* @throws MWException If the provided ID is not the ID of the content model supported by this
-//		* Content Object.
-//		*/
-//		protected function checkModelID( $modelId ) {
-//			if ( $modelId !== $this->model_id ) {
-//				throw new MWException(
-//					"Bad content model: " .
-//					"expected {$this->model_id} " .
-//					"but got $modelId."
-//				);
-//			}
-//		}
-//
-//		/**
-//		* @since 1.21
-//		*
-//		* @see Content::getContentHandler
-//		*/
-//		public function getContentHandler() {
-//			return ContentHandler::getForContent( $this );
-//		}
-//
-//		/**
-//		* @since 1.21
-//		*
-//		* @see Content::getDefaultFormat
-//		*/
-//		public function getDefaultFormat() {
-//			return $this->getContentHandler()->getDefaultFormat();
-//		}
-//
-//		/**
-//		* @since 1.21
-//		*
-//		* @see Content::getSupportedFormats
-//		*/
-//		public function getSupportedFormats() {
-//			return $this->getContentHandler()->getSupportedFormats();
-//		}
-//
-//		/**
-//		* @since 1.21
-//		*
-//		* @param String $format
-//		*
-//		* @return boolean
-//		*
-//		* @see Content::isSupportedFormat
-//		*/
-//		public function isSupportedFormat( $format ) {
-//			if ( !$format ) {
-//				return true; // this means "use the default"
-//			}
-//
-//			return $this->getContentHandler()->isSupportedFormat( $format );
-//		}
-//
+import gplx.xowa.mediawiki.includes.exception.*;
+import gplx.xowa.mediawiki.includes.parsers.*;
+/**
+* A content Object represents page content, e.g. the text to show on a page.
+* Content objects have no knowledge about how they relate to Wiki pages.
+*/
+
+/**
+* Base implementation for content objects.
+*
+* @ingroup Content
+*/
+abstract class XomwAbstractContent implements XomwContent {
+	/**
+	* Name of the content model this Content Object represents.
+	* Use with CONTENT_MODEL_XXX constants
+	*
+	* @since 1.21
+	*
+	* @var String $model_id
+	*/
+	private int model_id;
+
+	/**
+	* @param String $modelId
+	*
+	* @since 1.21
+	*/
+	public XomwAbstractContent(int modelId) {
+		this.model_id = modelId;
+	}
+
+	/**
+	* @since 1.21
+	*
+	* @see Content::getModel
+	*/
+	public int getModel() {
+		return this.model_id;
+	}
+
+	/**
+	* @since 1.21
+	*
+	* @param String $modelId The model to check
+	*
+	* @throws MWException If the provided ID is not the ID of the content model supported by this
+	* Content Object.
+	*/
+	protected void checkModelID(int modelId) {
+		if (modelId != this.model_id) {
+			throw new XomwMWException(
+				"Bad content model: " +
+				"expected " + this.model_id +
+				"but got " + modelId
+			);
+		}
+	}
+
+	/**
+	* @since 1.21
+	*
+	* @see Content::getContentHandler
+	*/
+	public XomwContentHandler getContentHandler() {
+		return XomwContentHandler.getForContent(this);
+	}
+
+	/**
+	* @since 1.21
+	*
+	* @see Content::getDefaultFormat
+	*/
+	public String getDefaultFormat() {
+		return this.getContentHandler().getDefaultFormat();
+	}
+
+	/**
+	* @since 1.21
+	*
+	* @see Content::getSupportedFormats
+	*/
+	public String[] getSupportedFormats() {
+		return this.getContentHandler().getSupportedFormats();
+	}
+
+	/**
+	* @since 1.21
+	*
+	* @param String $format
+	*
+	* @return boolean
+	*
+	* @see Content::isSupportedFormat
+	*/
+	public boolean isSupportedFormat(String format) {
+		if (format == null) {
+			return true; // this means "use the default"
+		}
+
+		return this.getContentHandler().isSupportedFormat(format);
+	}
+
 //		/**
 //		* @since 1.21
 //		*
@@ -123,11 +124,11 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @throws MWException If the format is not supported by this content handler.
 //		*/
-//		protected function checkFormat( $format ) {
-//			if ( !$this->isSupportedFormat( $format ) ) {
+//		protected function checkFormat($format) {
+//			if (!this.isSupportedFormat($format)) {
 //				throw new MWException(
 //					"Format $format is not supported for content model " .
-//					$this->getModel()
+//					this.getModel()
 //				);
 //			}
 //		}
@@ -141,8 +142,8 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @see Content::serialize
 //		*/
-//		public function serialize( $format = null ) {
-//			return $this->getContentHandler()->serializeContent( $this, $format );
+//		public function serialize($format = null) {
+//			return this.getContentHandler().serializeContent($this, $format);
 //		}
 //
 //		/**
@@ -153,7 +154,7 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		* @see Content::isEmpty
 //		*/
 //		public function isEmpty() {
-//			return $this->getSize() === 0;
+//			return this.getSize() === 0;
 //		}
 //
 //		/**
@@ -178,20 +179,20 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @see Content::equals
 //		*/
-//		public function equals( Content $that = null ) {
-//			if ( is_null( $that ) ) {
+//		public function equals(Content $that = null) {
+//			if (is_null($that)) {
 //				return false;
 //			}
 //
-//			if ( $that === $this ) {
+//			if ($that === $this) {
 //				return true;
 //			}
 //
-//			if ( $that->getModel() !== $this->getModel() ) {
+//			if ($that.getModel() !== this.getModel()) {
 //				return false;
 //			}
 //
-//			return $this->getNativeData() === $that->getNativeData();
+//			return this.getNativeData() === $that.getNativeData();
 //		}
 //
 //		/**
@@ -217,18 +218,18 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @see Content::getSecondaryDataUpdates()
 //		*/
-//		public function getSecondaryDataUpdates( Title $title, Content $old = null,
+//		public function getSecondaryDataUpdates(Title $title, Content $old = null,
 //			$recursive = true, ParserOutput $parserOutput = null
 //		) {
-//			if ( $parserOutput === null ) {
-//				$parserOutput = $this->getParserOutput( $title, null, null, false );
+//			if ($parserOutput === null) {
+//				$parserOutput = this.getParserOutput($title, null, null, false);
 //			}
 //
 //			$updates = [
-//				new LinksUpdate( $title, $parserOutput, $recursive )
+//				new LinksUpdate($title, $parserOutput, $recursive)
 //			];
 //
-//			Hooks::run( 'SecondaryDataUpdates', [ $title, $old, $recursive, $parserOutput, &$updates ] );
+//			Hooks::run('SecondaryDataUpdates', [ $title, $old, $recursive, $parserOutput, &$updates ]);
 //
 //			return $updates;
 //		}
@@ -242,22 +243,22 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*/
 //		public function getRedirectChain() {
 //			global $wgMaxRedirects;
-//			$title = $this->getRedirectTarget();
-//			if ( is_null( $title ) ) {
+//			$title = this.getRedirectTarget();
+//			if (is_null($title)) {
 //				return null;
 //			}
 //			// recursive check to follow double redirects
 //			$recurse = $wgMaxRedirects;
 //			$titles = [ $title ];
-//			while ( --$recurse > 0 ) {
-//				if ( $title->isRedirect() ) {
-//					$page = WikiPage::factory( $title );
-//					$newtitle = $page->getRedirectTarget();
+//			while (--$recurse > 0) {
+//				if ($title.isRedirect()) {
+//					$page = WikiPage::factory($title);
+//					$newtitle = $page.getRedirectTarget();
 //				} else {
 //					break;
 //				}
 //				// Redirects to some special pages are not permitted
-//				if ( $newtitle instanceof Title && $newtitle->isValidRedirectTarget() ) {
+//				if ($newtitle instanceof Title && $newtitle.isValidRedirectTarget()) {
 //					// The new title passes the checks, so make that our current
 //					// title so that further recursion can be checked
 //					$title = $newtitle;
@@ -293,9 +294,9 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		* @see Content::getUltimateRedirectTarget
 //		*/
 //		public function getUltimateRedirectTarget() {
-//			$titles = $this->getRedirectChain();
+//			$titles = this.getRedirectChain();
 //
-//			return $titles ? array_pop( $titles ) : null;
+//			return $titles ? array_pop($titles) : null;
 //		}
 //
 //		/**
@@ -306,7 +307,7 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		* @see Content::isRedirect
 //		*/
 //		public function isRedirect() {
-//			return $this->getRedirectTarget() !== null;
+//			return this.getRedirectTarget() !== null;
 //		}
 //
 //		/**
@@ -321,7 +322,7 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @see Content::updateRedirect
 //		*/
-//		public function updateRedirect( Title $target ) {
+//		public function updateRedirect(Title $target) {
 //			return $this;
 //		}
 //
@@ -332,7 +333,7 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @see Content::getSection
 //		*/
-//		public function getSection( $sectionId ) {
+//		public function getSection($sectionId) {
 //			return null;
 //		}
 //
@@ -343,7 +344,7 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @see Content::replaceSection
 //		*/
-//		public function replaceSection( $sectionId, Content $with, $sectionTitle = '' ) {
+//		public function replaceSection($sectionId, Content $with, $sectionTitle = '') {
 //			return null;
 //		}
 //
@@ -354,7 +355,7 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @see Content::preSaveTransform
 //		*/
-//		public function preSaveTransform( Title $title, User $user, ParserOptions $popts ) {
+//		public function preSaveTransform(Title $title, User $user, ParserOptions $popts) {
 //			return $this;
 //		}
 //
@@ -365,7 +366,7 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @see Content::addSectionHeader
 //		*/
-//		public function addSectionHeader( $header ) {
+//		public function addSectionHeader($header) {
 //			return $this;
 //		}
 //
@@ -376,7 +377,7 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @see Content::preloadTransform
 //		*/
-//		public function preloadTransform( Title $title, ParserOptions $popts, $params = [] ) {
+//		public function preloadTransform(Title $title, ParserOptions $popts, $params = []) {
 //			return $this;
 //		}
 //
@@ -387,11 +388,11 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @see Content::prepareSave
 //		*/
-//		public function prepareSave( WikiPage $page, $flags, $parentRevId, User $user ) {
-//			if ( $this->isValid() ) {
+//		public function prepareSave(WikiPage $page, $flags, $parentRevId, User $user) {
+//			if (this.isValid()) {
 //				return Status::newGood();
 //			} else {
-//				return Status::newFatal( "invalid-content-data" );
+//				return Status::newFatal("invalid-content-data");
 //			}
 //		}
 //
@@ -405,9 +406,9 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @see Content::getDeletionUpdates
 //		*/
-//		public function getDeletionUpdates( WikiPage $page, ParserOutput $parserOutput = null ) {
+//		public function getDeletionUpdates(WikiPage $page, ParserOutput $parserOutput = null) {
 //			return [
-//				new LinksDeletionUpdate( $page ),
+//				new LinksDeletionUpdate($page),
 //			];
 //		}
 //
@@ -423,7 +424,7 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @see Content::matchMagicWord
 //		*/
-//		public function matchMagicWord( MagicWord $word ) {
+//		public function matchMagicWord(MagicWord $word) {
 //			return false;
 //		}
 //
@@ -438,16 +439,16 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @see Content::convert()
 //		*/
-//		public function convert( $toModel, $lossy = '' ) {
-//			if ( $this->getModel() === $toModel ) {
+//		public function convert($toModel, $lossy = '') {
+//			if (this.getModel() === $toModel) {
 //				// nothing to do, shorten out.
 //				return $this;
 //			}
 //
-//			$lossy = ( $lossy === 'lossy' ); // String flag, convert to boolean for convenience
+//			$lossy = ($lossy === 'lossy'); // String flag, convert to boolean for convenience
 //			$result = false;
 //
-//			Hooks::run( 'ConvertContent', [ $this, $toModel, $lossy, &$result ] );
+//			Hooks::run('ConvertContent', [ $this, $toModel, $lossy, &$result ]);
 //
 //			return $result;
 //		}
@@ -472,27 +473,27 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @return ParserOutput Containing information derived from this content.
 //		*/
-//		public function getParserOutput( Title $title, $revId = null,
+//		public function getParserOutput(Title $title, $revId = null,
 //			ParserOptions $options = null, $generateHtml = true
 //		) {
-//			if ( $options === null ) {
-//				$options = $this->getContentHandler()->makeParserOptions( 'canonical' );
+//			if ($options === null) {
+//				$options = this.getContentHandler().makeParserOptions('canonical');
 //			}
 //
 //			$po = new ParserOutput();
 //
-//			if ( Hooks::run( 'ContentGetParserOutput',
-//				[ $this, $title, $revId, $options, $generateHtml, &$po ] ) ) {
+//			if (Hooks::run('ContentGetParserOutput',
+//				[ $this, $title, $revId, $options, $generateHtml, &$po ])) {
 //
 //				// Save and restore the old value, just in case something is reusing
 //				// the ParserOptions Object in some weird way.
-//				$oldRedir = $options->getRedirectTarget();
-//				$options->setRedirectTarget( $this->getRedirectTarget() );
-//				$this->fillParserOutput( $title, $revId, $options, $generateHtml, $po );
-//				$options->setRedirectTarget( $oldRedir );
+//				$oldRedir = $options.getRedirectTarget();
+//				$options.setRedirectTarget(this.getRedirectTarget());
+//				this.fillParserOutput($title, $revId, $options, $generateHtml, $po);
+//				$options.setRedirectTarget($oldRedir);
 //			}
 //
-//			Hooks::run( 'ContentAlterParserOutput', [ $this, $title, $po ] );
+//			Hooks::run('ContentAlterParserOutput', [ $this, $title, $po ]);
 //
 //			return $po;
 //		}
@@ -517,10 +518,66 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 //		*
 //		* @throws MWException
 //		*/
-//		protected function fillParserOutput( Title $title, $revId,
+//		protected function fillParserOutput(Title $title, $revId,
 //			ParserOptions $options, $generateHtml, ParserOutput &$output
 //		) {
 //			// Don't make abstract, so subclasses that override getParserOutput() directly don't fail.
-//			throw new MWException( 'Subclasses of AbstractContent must override fillParserOutput!' );
+//			throw new MWException('Subclasses of AbstractContent must override fillParserOutput!');
 //		}
-//	}
+	public abstract byte[] getTextForSearchIndex();
+
+	public abstract byte[] getWikitextForTransclusion();
+
+	public abstract byte[] getTextForSummary(int maxLength);
+
+	public abstract Object getNativeData();
+
+	public abstract int getSize();
+
+	public abstract byte[] serialize(byte[] format);
+
+	public abstract boolean isEmpty();
+
+	public abstract boolean isValid();
+
+	public abstract boolean equals(XomwContent that);
+
+	public abstract XomwContent copy();
+
+	public abstract boolean isCountable(boolean hasLinks);
+
+	public abstract XomwParserOutput getParserOutput(XomwTitle title, int revId,
+		XomwParserOptions options, boolean generateHtml);
+
+	public abstract Object getSecondaryDataUpdates(XomwTitle title, XomwContent old,
+		boolean recursive, XomwParserOutput parserOutput);
+
+	public abstract XomwTitle[] getRedirectChain();
+
+	public abstract XomwTitle getRedirectTarget();
+
+	public abstract XomwTitle getUltimateRedirectTarget();
+
+	public abstract boolean isRedirect();
+
+	public abstract XomwContent updateRedirect(XomwTitle target);
+
+	public abstract XomwContent getSection(String sectionId);
+
+	public abstract byte[] replaceSection(String sectionId, XomwContent with, String sectionTitle);
+
+	public abstract XomwContent preSaveTransform(XomwTitle title, Object user, XomwParserOptions parserOptions);
+
+	public abstract XomwContent addSectionHeader(byte[] header);
+
+	public abstract XomwContent preloadTransform(XomwTitle title, XomwParserOptions parserOptions, Object[] ary);
+
+	public abstract Object prepareSave(Object page, int flags, int parentRevId, Object user);
+
+	public abstract Object getDeletionUpdates(Object page,
+		XomwParserOutput parserOutput);
+
+	public abstract boolean matchMagicWord(XomwMagicWord word);
+
+	public abstract XomwContent convert(byte[] toModel, byte[] lossy);
+}

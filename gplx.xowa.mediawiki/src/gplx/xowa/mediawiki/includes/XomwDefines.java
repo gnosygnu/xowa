@@ -275,32 +275,32 @@ public class XomwDefines {
 //		define( 'CONTENT_MODEL_TEXT', 'text' );
 //		define( 'CONTENT_MODEL_JSON', 'json' );
 //		/**@}*/
-//
-//		/**@{
-//		* Content formats, used by Content and ContentHandler.
-//		* These should be MIME types, and will be exposed in the API and XML dumps.
-//		*
-//		* Extensions are free to use the below formats, or define their own.
-//		* It is recommended to stick with the conventions for MIME types.
-//		*/
-//		// wikitext
-//		define( 'CONTENT_FORMAT_WIKITEXT', 'text/x-wiki' );
-//		// for js pages
-//		define( 'CONTENT_FORMAT_JAVASCRIPT', 'text/javascript' );
-//		// for css pages
-//		define( 'CONTENT_FORMAT_CSS', 'text/css' );
-//		// for future use, e.g. with some plain-html messages.
-//		define( 'CONTENT_FORMAT_TEXT', 'text/plain' );
-//		// for future use, e.g. with some plain-html messages.
-//		define( 'CONTENT_FORMAT_HTML', 'text/html' );
-//		// for future use with the api and for extensions
-//		define( 'CONTENT_FORMAT_SERIALIZED', 'application/vnd.php.serialized' );
-//		// for future use with the api, and for use by extensions
-//		define( 'CONTENT_FORMAT_JSON', 'application/json' );
-//		// for future use with the api, and for use by extensions
-//		define( 'CONTENT_FORMAT_XML', 'application/xml' );
-//		/**@}*/
-//
+
+	/**@{
+	* Content formats, used by Content and ContentHandler.
+	* These should be MIME types, and will be exposed in the API and XML dumps.
+	*
+	* Extensions are free to use the below formats, or define their own.
+	* It is recommended to stick with the conventions for MIME types.
+	*/
+	// wikitext
+	public static final String CONTENT_FORMAT_WIKITEXT = "text/x-wiki";
+	// for js pages
+	public static final String CONTENT_FORMAT_JAVASCRIPT = "text/javascript";
+	// for css pages
+	public static final String CONTENT_FORMAT_CSS = "text/css";
+	// for future use, e.g. with some plain-html messages.
+	public static final String CONTENT_FORMAT_TEXT = "text/plain";
+	// for future use, e.g. with some plain-html messages.
+	public static final String CONTENT_FORMAT_HTML = "text/html";
+	// for future use with the api and for extensions
+	public static final String CONTENT_FORMAT_SERIALIZED = "application/vnd.php.serialized";
+	// for future use with the api, and for use by extensions
+	public static final String CONTENT_FORMAT_JSON = "application/json";
+	// for future use with the api, and for use by extensions
+	public static final String CONTENT_FORMAT_XML = "application/xml";
+	/**@}*/
+
 //		/**@{
 //		* Max String length for shell invocations; based on binfmts.h
 //		*/

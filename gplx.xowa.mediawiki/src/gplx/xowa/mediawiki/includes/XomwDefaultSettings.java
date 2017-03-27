@@ -959,14 +959,29 @@ public class XomwDefaultSettings {
 //		* and extensions should use extension.json.
 //		*/
 //		$wgMediaHandlers = [];
-//
-//		/**
-//		* Plugins for page content model handling.
-//		* Each entry in the array maps a model id to a class name or callback
-//		* that creates an instance of the appropriate ContentHandler subclass.
-//		*
-//		* @since 1.21
-//		*/
+
+	/**
+	* Plugins for page content model handling.
+	* Each entry in the array maps a model id to a class name or callback
+	* that creates an instance of the appropriate ContentHandler subclass.
+	*
+	* @since 1.21
+	*/
+	public static final int
+		// the usual case
+		CONTENT_MODEL_WIKITEXT = 0
+		// dumb version, no syntax highlighting
+	,	CONTENT_MODEL_JAVASCRIPT = 1
+		// simple implementation, for use by extensions, etc.
+	,	CONTENT_MODEL_JSON = 2
+		// dumb version, no syntax highlighting
+	,	CONTENT_MODEL_CSS = 3
+		// plain text, for use by extensions, etc.
+	,	CONTENT_MODEL_TEXT = 4
+		// XO:max for array
+	,	CONTENT_MODEL__MAX = 5
+	;
+
 //		$wgContentHandlers = [
 //			// the usual case
 //			CONTENT_MODEL_WIKITEXT => 'WikitextContentHandler',
@@ -979,7 +994,7 @@ public class XomwDefaultSettings {
 //			// plain text, for use by extensions, etc.
 //			CONTENT_MODEL_TEXT => 'TextContentHandler',
 //		];
-//
+
 //		/**
 //		* Whether to enable server-side image thumbnailing. If false, images will
 //		* always be sent to the client in full resolution, with appropriate width= and

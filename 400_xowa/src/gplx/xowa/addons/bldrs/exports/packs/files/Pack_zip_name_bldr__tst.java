@@ -22,7 +22,7 @@ public class Pack_zip_name_bldr__tst {
 	}
 	@Test   public void Bld_by_suffix() {
 		Pack_zip_name_bldr bldr = fxt.Make__bldr("mem/wiki/en.wikipedia.org/tmp/pack/", "en.wikipedia.org", "enwiki", "2017-03", null);
-		fxt.Test__bld_by_suffix(bldr, "xtn.fulltext_search", 1, "mem/wiki/en.wikipedia.org/tmp/pack/Xowa_enwiki_2017-03_xtn.fulltext_search.001.zip");
+		fxt.Test__bld_by_suffix(bldr, "xtn.fulltext_search", 1, "mem/wiki/en.wikipedia.org/tmp/pack/Xowa_enwiki_2017-03_xtn.fulltext_search.002.zip");
 	}
 }
 class Pack_zip_name_bldr__fxt {
