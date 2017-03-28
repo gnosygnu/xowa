@@ -142,5 +142,6 @@ abstract class Swt_core__base extends GxwCore_base {
 		if (gfui_data.Min_h() > -1) swt_data.minimumHeight = gfui_data.Min_h();
 		
 		control.setLayoutData(swt_data);
+		control.requestLayout();		
 	}	
 }

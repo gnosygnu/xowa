@@ -95,6 +95,8 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		, "xowa.gui.shortcuts.xowa.gui.browser.url.restore-1"
 		, "xowa.gui.shortcuts.xowa.gui.browser.search.focus-1"
 		, "xowa.gui.shortcuts.xowa.gui.browser.search.exec-1"
+		, "xowa.gui.shortcuts.xowa.gui.browser.allpages.focus-1"
+		, "xowa.gui.shortcuts.xowa.gui.browser.allpages.exec-1"
 		, "xowa.gui.shortcuts.xowa.gui.browser.html.focus-1"
 		, "xowa.gui.shortcuts.xowa.gui.browser.html.focus-2"
 		, "xowa.gui.shortcuts.xowa.gui.browser.html.focus-3"
@@ -277,6 +279,8 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_restore						, Xog_bnd_box_.Tid_browser_url			, "key.escape");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_search_focus						, Xog_bnd_box_.Tid_browser				, "mod.ca+key.s");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_search_exec						, Xog_bnd_box_.Tid_browser_search		, "key.enter");
+		Init_itm(Xog_cmd_itm_.Key_gui_browser_allpages_focus					, Xog_bnd_box_.Tid_browser				, "mod.ca+key.a");
+		Init_itm(Xog_cmd_itm_.Key_gui_browser_allpages_exec						, Xog_bnd_box_.Tid_browser_allpages		, "key.enter");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_tabs_new_dflt__at_dflt__focus_y	, Xog_bnd_box_.Tid_browser				, "mod.c+key.t");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_tabs_new_link__at_dflt__focus_n	, Xog_bnd_box_.Tid_browser_html			, "mouse.middle");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_tabs_new_link__at_dflt__focus_y	, Xog_bnd_box_.Tid_browser				, "");
@@ -343,15 +347,16 @@ public class Xog_bnd_mgr implements Gfo_invk {
 	}
 	private void Add_system_bnds() {
 		IptCfg null_cfg = IptCfg_.Null; IptEventType btn_event_type = IptEventType_.add_(IptEventType_.MouseUp, IptEventType_.KeyDown); IptArg[] btn_args = IptArg_.Ary(IptMouseBtn_.Left, IptKey_.Enter, IptKey_.Space);
-		IptBnd_.ipt_to_(null_cfg		, win.Go_bwd_btn()		, invk_mgr, Xog_cmd_itm_.Key_nav_go_bwd						, btn_event_type, btn_args);
-		IptBnd_.ipt_to_(null_cfg		, win.Go_fwd_btn()		, invk_mgr, Xog_cmd_itm_.Key_nav_go_fwd						, btn_event_type, btn_args);
-		IptBnd_.ipt_to_(null_cfg		, win.Url_exec_btn()	, invk_mgr, Xog_cmd_itm_.Key_gui_browser_url_exec			, btn_event_type, btn_args);
-		IptBnd_.ipt_to_(null_cfg		, win.Search_exec_btn()	, invk_mgr, Xog_cmd_itm_.Key_gui_browser_search_exec		, btn_event_type, btn_args);
-		IptBnd_.ipt_to_(null_cfg		, win.Find_close_btn()	, invk_mgr, Xog_cmd_itm_.Key_gui_browser_find_hide			, btn_event_type, btn_args);
-		IptBnd_.ipt_to_(null_cfg		, win.Find_fwd_btn()	, invk_mgr, Xog_cmd_itm_.Key_gui_browser_find_find_fwd		, btn_event_type, btn_args);
-		IptBnd_.ipt_to_(null_cfg		, win.Find_bwd_btn()	, invk_mgr, Xog_cmd_itm_.Key_gui_browser_find_find_bwd		, btn_event_type, btn_args);
-		IptBnd_.ipt_to_(null_cfg		, win.Find_box()		, invk_mgr, Xog_cmd_itm_.Key_gui_browser_find_type			, IptEventType_.KeyUp, IptKey_.printableKeys_(IptKey_.Ary(IptKey_.Back, IptKey_.Escape, IptKey_.Ctrl.Add(IptKey_.V)), IptKey_.Ary()));
-		IptBnd_.ipt_to_(null_cfg		, win.Url_box()			, invk_mgr, Xog_cmd_itm_.Key_gui_browser_url_type			, IptEventType_.KeyUp, IptKey_.printableKeys_(IptKey_.Ary(IptKey_.Back, IptKey_.Escape, IptKey_.Ctrl.Add(IptKey_.X), IptKey_.Ctrl.Add(IptKey_.V)), IptKey_.Ary()));
+		IptBnd_.ipt_to_(null_cfg		, win.Go_bwd_btn()		 , invk_mgr, Xog_cmd_itm_.Key_nav_go_bwd					, btn_event_type, btn_args);
+		IptBnd_.ipt_to_(null_cfg		, win.Go_fwd_btn()		 , invk_mgr, Xog_cmd_itm_.Key_nav_go_fwd					, btn_event_type, btn_args);
+		IptBnd_.ipt_to_(null_cfg		, win.Url_exec_btn()	 , invk_mgr, Xog_cmd_itm_.Key_gui_browser_url_exec			, btn_event_type, btn_args);
+		IptBnd_.ipt_to_(null_cfg		, win.Search_exec_btn()	 , invk_mgr, Xog_cmd_itm_.Key_gui_browser_search_exec		, btn_event_type, btn_args);
+		IptBnd_.ipt_to_(null_cfg		, win.Allpages_exec_btn(), invk_mgr, Xog_cmd_itm_.Key_gui_browser_allpages_exec		, btn_event_type, btn_args);
+		IptBnd_.ipt_to_(null_cfg		, win.Find_close_btn()	 , invk_mgr, Xog_cmd_itm_.Key_gui_browser_find_hide			, btn_event_type, btn_args);
+		IptBnd_.ipt_to_(null_cfg		, win.Find_fwd_btn()	 , invk_mgr, Xog_cmd_itm_.Key_gui_browser_find_find_fwd		, btn_event_type, btn_args);
+		IptBnd_.ipt_to_(null_cfg		, win.Find_bwd_btn()	 , invk_mgr, Xog_cmd_itm_.Key_gui_browser_find_find_bwd		, btn_event_type, btn_args);
+		IptBnd_.ipt_to_(null_cfg		, win.Find_box()		 , invk_mgr, Xog_cmd_itm_.Key_gui_browser_find_type			, IptEventType_.KeyUp, IptKey_.printableKeys_(IptKey_.Ary(IptKey_.Back, IptKey_.Escape, IptKey_.Ctrl.Add(IptKey_.V)), IptKey_.Ary()));
+		IptBnd_.ipt_to_(null_cfg		, win.Url_box()			 , invk_mgr, Xog_cmd_itm_.Key_gui_browser_url_type			, IptEventType_.KeyUp, IptKey_.printableKeys_(IptKey_.Ary(IptKey_.Back, IptKey_.Escape, IptKey_.Ctrl.Add(IptKey_.X), IptKey_.Ctrl.Add(IptKey_.V)), IptKey_.Ary()));
 	}
 	private void Add_custom_bnds() {	// NOTE: custom bnds are stored in cfg; cfg executes before Init_by_kit when all windows elements are null; run cfg now, while Init_by_kit is called and elems are now created
 		int len = startup_itms.Count();
@@ -370,6 +375,7 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		this.Bind(Xog_bnd_box_.Tid_browser_url			, win.Url_box());
 		this.Bind(Xog_bnd_box_.Tid_browser_find			, win.Find_box());
 		this.Bind(Xog_bnd_box_.Tid_browser_search		, win.Search_box());
+		this.Bind(Xog_bnd_box_.Tid_browser_allpages		, win.Allpages_box());
 		this.Bind(Xog_bnd_box_.Tid_browser_prog			, win.Prog_box());
 		this.Bind(Xog_bnd_box_.Tid_browser_info			, win.Info_box());
 	}

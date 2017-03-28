@@ -40,6 +40,8 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	public GfuiBtn          Url_exec_btn()       {return url_exec_btn;}       private GfuiBtn        url_exec_btn;
 	public GfuiTextBox      Search_box()         {return search_box;}         private GfuiTextBox    search_box;
 	public GfuiBtn          Search_exec_btn()    {return search_exec_btn;}    private GfuiBtn        search_exec_btn;
+	public GfuiTextBox      Allpages_box()       {return allpages_box;}       private GfuiTextBox    allpages_box;
+	public GfuiBtn          Allpages_exec_btn()  {return allpages_exec_btn;}  private GfuiBtn        allpages_exec_btn;
 	public GfuiTextBox      Find_box()           {return find_box;}           private GfuiTextBox    find_box;
 	public Gfui_grp         Statusbar_grp()      {return statusbar_grp;}      private Gfui_grp       statusbar_grp;
 	public GfuiBtn          Find_close_btn()     {return find_close_btn;}     private GfuiBtn        find_close_btn;
@@ -178,7 +180,8 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		Xog_tab_itm_read_mgr.Show_page(tab, page, false);
 		// Exec_page_refresh(); // commented out; causes lnke to show as [2] instead of [1] when saving page; EX: [http://a.org b] DATE:2014-04-24
 	}
-	public void Page__navigate_by_search() {Page__navigate_by_url_bar(app.Gui_mgr().Win_cfg().Search_box_fmtr().Bld_str_many(search_box.Text()));}
+	public void Page__navigate_by_search()   {Page__navigate_by_url_bar(app.Gui_mgr().Win_cfg().Search_box_fmtr().Bld_str_many(search_box.Text()));}
+	public void Page__navigate_by_allpages() {Page__navigate_by_url_bar(app.Gui_mgr().Win_cfg().Allpages_box_fmtr().Bld_str_many(allpages_box.Text()));}
 	public void Page__navigate_by_url_bar(String href) {
 		Xog_tab_itm tab = tab_mgr.Active_tab_assert();
 		Xoa_url url = tab.Wiki().Utl__url_parser().Parse_by_urlbar_or_null(href); if (url == null) return;
@@ -262,6 +265,8 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		Xog_win_itm_.Update_tiptext(app, url_exec_btn		, Xol_msg_itm_.Id_xowa_window_url_btn_tooltip);
 		Xog_win_itm_.Update_tiptext(app, search_box			, Xol_msg_itm_.Id_xowa_window_search_box_tooltip);
 		Xog_win_itm_.Update_tiptext(app, search_exec_btn	, Xol_msg_itm_.Id_xowa_window_search_btn_tooltip);
+		Xog_win_itm_.Update_tiptext(app, allpages_box		, Xol_msg_itm_.Id_xowa_window_allpages_box_tooltip);
+		Xog_win_itm_.Update_tiptext(app, allpages_exec_btn	, Xol_msg_itm_.Id_xowa_window_allpages_btn_tooltip);
 		Xog_win_itm_.Update_tiptext(app, find_close_btn		, Xol_msg_itm_.Id_xowa_window_find_close_btn_tooltip);
 		Xog_win_itm_.Update_tiptext(app, find_box			, Xol_msg_itm_.Id_xowa_window_find_box_tooltip);
 		Xog_win_itm_.Update_tiptext(app, find_bwd_btn		, Xol_msg_itm_.Id_xowa_window_find_bwd_btn_tooltip);
@@ -319,21 +324,26 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		this.toolbar_grp    = Xog_win_itm_.new_grp(app, kit, win_box, "toolbar_grp");
 		go_bwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, "go_bwd_btn");
 		go_fwd_btn			= Xog_win_itm_.new_btn(app, kit, toolbar_grp, "go_fwd_btn");
-		url_box				= Xog_win_itm_.new_cbo(app, kit, toolbar_grp, ui_font, "url_box"								, true);
+		url_box				= Xog_win_itm_.new_cbo(app, kit, toolbar_grp, ui_font, "url_box", true);
 		url_exec_btn		= Xog_win_itm_.new_btn(app, kit, toolbar_grp, "url_exec_btn");
-		search_box			= Xog_win_itm_.new_txt(app, kit, toolbar_grp, ui_font, "search_box"								, true);
+		search_box			= Xog_win_itm_.new_txt(app, kit, toolbar_grp, ui_font, "search_box", true);
 		search_exec_btn		= Xog_win_itm_.new_btn(app, kit, toolbar_grp, "search_exec_btn");
+		allpages_box		= Xog_win_itm_.new_txt(app, kit, toolbar_grp, ui_font, "allpages_box", true);
+		allpages_exec_btn	= Xog_win_itm_.new_btn(app, kit, toolbar_grp, "allpages_exec_btn");
 
 		toolbar_grp.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_().Hint_h_(28));
-		toolbar_grp.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(6)
+		toolbar_grp.Layout_mgr_(new Swt_layout_mgr__grid().Cols_(8)
 			.Margin_w_(4)   // sets space to far-left / right window edges
 			.Margin_h_(1)   // sets space to top-menu and bot-html
 			.Spacing_w_(4)  // sets space between buttons, or else very squished
 			.Spacing_h_(0)  // not needed since only one row, but be explicit
 			);
-		url_box.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_().Min_w_(100));
-		search_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(160));
-		search_exec_btn.Layout_data_(new Swt_layout_data__grid().Align_w__fill_().Hint_w_(20)); // force 20 width to add even more space to right-hand of screen
+		int toolbar_text_height = 24;
+		url_box.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_().Min_w_(100).Hint_h_(toolbar_text_height));
+		search_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(160).Hint_h_(toolbar_text_height));
+		search_exec_btn.Layout_data_(new Swt_layout_data__grid().Align_w__fill_().Hint_w_(16).Hint_h_(toolbar_text_height));
+		allpages_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(160).Hint_h_(toolbar_text_height));
+		allpages_exec_btn.Layout_data_(new Swt_layout_data__grid().Align_w__fill_().Hint_w_(20).Hint_h_(toolbar_text_height)); // force 20 width to add even more space to right-hand of screen
 
 		// tab / html space
 		tab_mgr.Init_by_kit(kit);

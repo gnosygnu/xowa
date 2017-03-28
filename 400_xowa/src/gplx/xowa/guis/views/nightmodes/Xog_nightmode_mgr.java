@@ -40,6 +40,8 @@ public class Xog_nightmode_mgr implements Gfo_invk {
 		, win.Url_exec_btn()
 		, win.Search_box()
 		, win.Search_exec_btn()
+		, win.Allpages_box()
+		, win.Allpages_exec_btn()
 		, win.Statusbar_grp()
 		, win.Find_close_btn()
 		, win.Find_bwd_btn()
@@ -108,6 +110,7 @@ public class Xog_nightmode_mgr implements Gfo_invk {
 		win.Go_fwd_btn().Btn_img_(app.Gui_mgr().Kit().New_img_load(img_dir.GenSubFil("go_fwd.png")));
 		win.Url_exec_btn().Btn_img_(app.Gui_mgr().Kit().New_img_load(img_dir.GenSubFil("url_exec.png")));
 		win.Search_exec_btn().Btn_img_(app.Gui_mgr().Kit().New_img_load(img_dir.GenSubFil("search_exec.png")));
+		win.Allpages_exec_btn().Btn_img_(app.Gui_mgr().Kit().New_img_load(img_dir.GenSubFil("allpages_exec.png")));
 		win.Find_close_btn().Btn_img_(app.Gui_mgr().Kit().New_img_load(img_dir.GenSubFil("find_close.png")));
 		win.Find_bwd_btn().Btn_img_(app.Gui_mgr().Kit().New_img_load(img_dir.GenSubFil("find_bwd.png")));
 		win.Find_fwd_btn().Btn_img_(app.Gui_mgr().Kit().New_img_load(img_dir.GenSubFil("find_fwd.png")));

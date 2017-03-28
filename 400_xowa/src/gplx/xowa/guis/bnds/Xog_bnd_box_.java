@@ -17,9 +17,9 @@ package gplx.xowa.guis.bnds; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import gplx.gfui.*; import gplx.gfui.ipts.*; import gplx.gfui.controls.elems.*;
 import gplx.xowa.guis.views.*; import gplx.xowa.guis.cmds.*;
 public class Xog_bnd_box_ {
-	public static final    String Key_browser = "browser", Key_browser_url = "browser.url", Key_browser_search = "browser.search", Key_browser_html = "browser.html", Key_browser_find = "browser.find", Key_browser_prog = "browser.prog", Key_browser_info = "browser.info";
-	public static final    String Gui_browser = "Window", Gui_browser_url = "Url bar", Gui_browser_search = "Search box", Gui_browser_html = "HTML browser", Gui_browser_find = "Find box", Gui_browser_prog = "Status bar", Gui_browser_info = "System Messages box";
-	public static final int Tid__max = 7, Tid_browser = 0, Tid_browser_url = 1, Tid_browser_search = 2, Tid_browser_html = 3, Tid_browser_find = 4, Tid_browser_prog = 5, Tid_browser_info = 6;
+	public static final    String Key_browser = "browser", Key_browser_url = "browser.url", Key_browser_search = "browser.search", Key_browser_allpages = "browser.allpages", Key_browser_html = "browser.html", Key_browser_find = "browser.find", Key_browser_prog = "browser.prog", Key_browser_info = "browser.info";
+	public static final    String Gui_browser = "Window", Gui_browser_url = "Url bar", Gui_browser_search = "Search box", Gui_browser_allpages = "Allpages box", Gui_browser_html = "HTML browser", Gui_browser_find = "Find box", Gui_browser_prog = "Status bar", Gui_browser_info = "System Messages box";
+	public static final int Tid__max = 8, Tid_browser = 0, Tid_browser_url = 1, Tid_browser_search = 2, Tid_browser_allpages = 3, Tid_browser_html = 4, Tid_browser_find = 5, Tid_browser_prog = 6, Tid_browser_info = 7;
 	public static final int Ary_len = Tid__max;
 	public static Xog_bnd_box[] Ary() {
 		if (ary != null) return ary;
@@ -27,6 +27,7 @@ public class Xog_bnd_box_ {
 		ary_init(ary, Tid_browser				, Key_browser);
 		ary_init(ary, Tid_browser_url			, Key_browser_url);
 		ary_init(ary, Tid_browser_search		, Key_browser_search);
+		ary_init(ary, Tid_browser_allpages		, Key_browser_allpages);
 		ary_init(ary, Tid_browser_html			, Key_browser_html);
 		ary_init(ary, Tid_browser_find			, Key_browser_find);
 		ary_init(ary, Tid_browser_prog			, Key_browser_prog);
@@ -54,6 +55,7 @@ public class Xog_bnd_box_ {
 		if		(String_.Eq(s, Key_browser))			return Tid_browser;
 		else if	(String_.Eq(s, Key_browser_url))		return Tid_browser_url;
 		else if	(String_.Eq(s, Key_browser_search))		return Tid_browser_search;
+		else if	(String_.Eq(s, Key_browser_allpages))	return Tid_browser_allpages;
 		else if	(String_.Eq(s, Key_browser_html))		return Tid_browser_html;
 		else if	(String_.Eq(s, Key_browser_find))		return Tid_browser_find;
 		else if	(String_.Eq(s, Key_browser_prog))		return Tid_browser_prog;
@@ -65,6 +67,7 @@ public class Xog_bnd_box_ {
 			case Tid_browser:					return Key_browser;
 			case Tid_browser_url:				return Key_browser_url;
 			case Tid_browser_search:			return Key_browser_search;
+			case Tid_browser_allpages:			return Key_browser_allpages;
 			case Tid_browser_html:				return Key_browser_html;
 			case Tid_browser_find:				return Key_browser_find;
 			case Tid_browser_prog:				return Key_browser_prog;
@@ -77,6 +80,7 @@ public class Xog_bnd_box_ {
 			case Tid_browser:					return Gui_browser;
 			case Tid_browser_url:				return Gui_browser_url;
 			case Tid_browser_search:			return Gui_browser_search;
+			case Tid_browser_allpages:			return Gui_browser_allpages;
 			case Tid_browser_html:				return Gui_browser_html;
 			case Tid_browser_find:				return Gui_browser_find;
 			case Tid_browser_prog:				return Gui_browser_prog;
@@ -88,6 +92,7 @@ public class Xog_bnd_box_ {
 		if		(String_.Eq(s, Gui_browser))			return Tid_browser;
 		else if	(String_.Eq(s, Gui_browser_url))		return Tid_browser_url;
 		else if	(String_.Eq(s, Gui_browser_search))		return Tid_browser_search;
+		else if	(String_.Eq(s, Gui_browser_allpages))	return Tid_browser_allpages;
 		else if	(String_.Eq(s, Gui_browser_html))		return Tid_browser_html;
 		else if	(String_.Eq(s, Gui_browser_find))		return Tid_browser_find;
 		else if	(String_.Eq(s, Gui_browser_prog))		return Tid_browser_prog;
@@ -101,6 +106,7 @@ public class Xog_bnd_box_ {
 		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser))					box_elem = win.Win_box();
 		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_url))				box_elem = win.Url_box();
 		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_search))			box_elem = win.Search_box();
+		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_allpages))		box_elem = win.Allpages_box();
 		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_find))			box_elem = win.Find_box();
 		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_prog))			box_elem = win.Prog_box();
 		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_info))			box_elem = win.Info_box();

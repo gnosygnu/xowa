@@ -249,8 +249,10 @@ public static final int
 , Id_xowa_wikidata_normal = 229
 , Id_xowa_wikidata_preferred = 230
 , Id_xowa_wikidata_links_special = 231
+, Id_xowa_window_allpages_box_tooltip = 232
+, Id_xowa_window_allpages_btn_tooltip = 233
 ;
-	public static final int Id__max = 232;
+	public static final int Id__max = 234;
 	public static Xol_msg_itm new_(int id, String key, String val) {return new_(id, Bry_.new_u8(key), Bry_.new_u8(val));}
 	public static Xol_msg_itm new_(int id, byte[] key, byte[] val) {
 		Xol_msg_itm rv = new Xol_msg_itm(id, key);
@@ -388,8 +390,10 @@ case Xol_msg_itm_.Id_xowa_window_go_bwd_btn_tooltip: return new_(Xol_msg_itm_.Id
 case Xol_msg_itm_.Id_xowa_window_go_fwd_btn_tooltip: return new_(Xol_msg_itm_.Id_xowa_window_go_fwd_btn_tooltip, "xowa-window-go_fwd_btn-tooltip", "Go forward one page");
 case Xol_msg_itm_.Id_xowa_window_url_box_tooltip: return new_(Xol_msg_itm_.Id_xowa_window_url_box_tooltip, "xowa-window-url_box-tooltip", "Enter address");
 case Xol_msg_itm_.Id_xowa_window_url_btn_tooltip: return new_(Xol_msg_itm_.Id_xowa_window_url_btn_tooltip, "xowa-window-url_btn-tooltip", "Go to the address in the Location Bar");
-case Xol_msg_itm_.Id_xowa_window_search_box_tooltip: return new_(Xol_msg_itm_.Id_xowa_window_search_box_tooltip, "xowa-window-search_box-tooltip", "Search using {{ns:Special}}:AllPages");
+case Xol_msg_itm_.Id_xowa_window_search_box_tooltip: return new_(Xol_msg_itm_.Id_xowa_window_search_box_tooltip, "xowa-window-search_box-tooltip", "Search using {{ns:Special}}:XowaSearch");
 case Xol_msg_itm_.Id_xowa_window_search_btn_tooltip: return new_(Xol_msg_itm_.Id_xowa_window_search_btn_tooltip, "xowa-window-search_btn-tooltip", "Search");
+case Xol_msg_itm_.Id_xowa_window_allpages_box_tooltip: return new_(Xol_msg_itm_.Id_xowa_window_allpages_box_tooltip, "xowa-window-allpages_box-tooltip", "List using {{ns:Special}}:AllPages");
+case Xol_msg_itm_.Id_xowa_window_allpages_btn_tooltip: return new_(Xol_msg_itm_.Id_xowa_window_allpages_btn_tooltip, "xowa-window-allpages_btn-tooltip", "List all pages");
 case Xol_msg_itm_.Id_xowa_window_find_close_btn_tooltip: return new_(Xol_msg_itm_.Id_xowa_window_find_close_btn_tooltip, "xowa-window-find_close_btn-tooltip", "Close Find bar");
 case Xol_msg_itm_.Id_xowa_window_find_box_tooltip: return new_(Xol_msg_itm_.Id_xowa_window_find_box_tooltip, "xowa-window-find_box-tooltip", "Enter phrase to find on this page");
 case Xol_msg_itm_.Id_xowa_window_find_fwd_btn_tooltip: return new_(Xol_msg_itm_.Id_xowa_window_find_fwd_btn_tooltip, "xowa-window-find_fwd_btn-tooltip", "Find the next occurrence of the phrase");

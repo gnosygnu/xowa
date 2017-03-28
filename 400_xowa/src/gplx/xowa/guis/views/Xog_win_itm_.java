@@ -26,6 +26,19 @@ public class Xog_win_itm_ {
 
 		win_box.Icon_(IconAdp.file_or_blank(app.Fsys_mgr().Bin_xowa_dir().GenSubFil_nest("file", "app.window", "app_icon.png")));
 	}
+	public static void Show_widget(boolean show, GfuiElem box, GfuiElem btn) {
+		int box_w, btn_w;
+		if (show) {
+			box_w = 160;
+			btn_w = 16;
+		}
+		else {
+			box_w = 0;
+			btn_w = 0;
+		}
+		box.Layout_data_(new gplx.gfui.layouts.swts.Swt_layout_data__grid().Hint_w_(box_w).Hint_h_(24));
+		btn.Layout_data_(new gplx.gfui.layouts.swts.Swt_layout_data__grid().Hint_w_(btn_w).Align_w__fill_());
+	}
 	public static Gfui_grp new_grp(Xoae_app app, Gfui_kit kit, GfuiElem win, String id) {
 		return kit.New_grp(id, win);
 	}
@@ -51,6 +64,7 @@ public class Xog_win_itm_ {
 			FontAdp new_font = itm_font.To_font();
 			win.Url_box().TextMgr().Font_(new_font);
 			win.Search_box().TextMgr().Font_(new_font);
+			win.Allpages_box().TextMgr().Font_(new_font);
 			win.Find_box().TextMgr().Font_(new_font);
 			win.Prog_box().TextMgr().Font_(new_font);
 			win.Info_box().TextMgr().Font_(new_font);

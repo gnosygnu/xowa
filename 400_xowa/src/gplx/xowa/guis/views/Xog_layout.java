@@ -24,6 +24,8 @@ public class Xog_layout implements Gfo_invk {
 		find_close_btn.Owner_(this);
 		search_box.Owner_(this);
 		search_exec_btn.Owner_(this);
+		allpages_box.Owner_(this);
+		allpages_exec_btn.Owner_(this);
 		html_box.Owner_(this);
 		find_box.Owner_(this);
 		prog_box.Owner_(this);
@@ -37,6 +39,8 @@ public class Xog_layout implements Gfo_invk {
 	public Xog_layout_box Find_close_btn() {return find_close_btn;} private Xog_layout_box find_close_btn = new Xog_layout_box();
 	public Xog_layout_box Search_box() {return search_box;} private Xog_layout_box search_box = new Xog_layout_box();
 	public Xog_layout_box Search_exec_btn() {return search_exec_btn;} private Xog_layout_box search_exec_btn = new Xog_layout_box();
+	public Xog_layout_box Allpages_box() {return allpages_box;} private Xog_layout_box allpages_box = new Xog_layout_box();
+	public Xog_layout_box Allpages_exec_btn() {return allpages_exec_btn;} private Xog_layout_box allpages_exec_btn = new Xog_layout_box();
 	public Xog_layout_box Html_box() {return html_box;} private Xog_layout_box html_box = new Xog_layout_box();
 	public Xog_layout_box Find_box() {return find_box;} private Xog_layout_box find_box = new Xog_layout_box();
 	public Xog_layout_box Find_fwd_btn() {return find_fwd_btn;} private Xog_layout_box find_fwd_btn = new Xog_layout_box();
@@ -72,6 +76,8 @@ public class Xog_layout implements Gfo_invk {
 		find_close_btn.Adj_text(win.Find_close_btn());
 		search_box.Adj_text(win.Search_box());
 		search_exec_btn.Adj_text(win.Search_exec_btn());
+		allpages_box.Adj_text(win.Allpages_box());
+		allpages_exec_btn.Adj_text(win.Allpages_exec_btn());
 		find_box.Adj_text(win.Find_box());
 		find_fwd_btn.Adj_text(win.Find_fwd_btn());
 		find_bwd_btn.Adj_text(win.Find_bwd_btn());
@@ -94,6 +100,8 @@ public class Xog_layout implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_find_close_btn))			return find_close_btn;
 		else if	(ctx.Match(k, Invk_search_box))				return search_box;
 		else if	(ctx.Match(k, Invk_search_exec_btn))		return search_exec_btn;
+		else if	(ctx.Match(k, "allpages_box"))				return allpages_box;
+		else if	(ctx.Match(k, "allpages_exec_btn"))			return allpages_exec_btn;
 		else if	(ctx.Match(k, Invk_html_box))				return html_box;
 		else if	(ctx.Match(k, Invk_find_box))				return find_box;
 		else if	(ctx.Match(k, Invk_find_fwd_btn))			return find_fwd_btn;

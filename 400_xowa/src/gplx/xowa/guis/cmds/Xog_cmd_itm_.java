@@ -87,6 +87,8 @@ public class Xog_cmd_itm_ {
 
 	, Key_gui_browser_search_focus								= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.search.focus")
 	, Key_gui_browser_search_exec								= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.search.exec")
+	, Key_gui_browser_allpages_focus							= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.allpages.focus")
+	, Key_gui_browser_allpages_exec								= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.allpages.exec")
 	, Key_gui_browser_tabs_new_dflt__at_dflt__focus_y			= new_dflt_(Xog_ctg_itm_.Tid_tabs			, "xowa.gui.browser.tabs.new_dflt__at_dflt__focus_y")
 	, Key_gui_browser_tabs_new_link__at_dflt__focus_n			= new_dflt_(Xog_ctg_itm_.Tid_tabs			, "xowa.gui.browser.tabs.new_link__at_dflt__focus_n")
 	, Key_gui_browser_tabs_new_link__at_dflt__focus_y			= new_dflt_(Xog_ctg_itm_.Tid_tabs			, "xowa.gui.browser.tabs.new_link__at_dflt__focus_y")
