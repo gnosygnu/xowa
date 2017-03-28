@@ -26,6 +26,14 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache
 		props.Add("qarg_search", search_text);
 		props.Add("page_guid", page_guid.To_str());
 		props.Add("cur_wiki", wiki.Domain_str());
+
+		// enabled
+		boolean app_is_drd = gplx.core.envs.Op_sys.Cur().Tid_is_drd();
+		boolean lucene_exists = Io_mgr.Instance.ExistsDir(gplx.xowa.addons.wikis.fulltexts.Xosearch_fulltext_addon.Get_index_dir(wiki));
+		props.Add("app_is_drd", app_is_drd); // for options button
+		props.Add("disabled", app_is_drd && !lucene_exists);
+
+		// options:strings
 		props_Add_str(cfg_mgr, url_args, "wikis" , wiki.Domain_str(), false);
 		props_Add_str(cfg_mgr, url_args, "ns_ids", "0");
 		props_Add_str(cfg_mgr, url_args, "limits", "25");
@@ -34,6 +42,7 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache
 		props_Add_str(cfg_mgr, url_args, "expand_snips", "n");
 		props_Add_str(cfg_mgr, url_args, "show_all_snips", "n");
 
+		// options:bools
 		props_Add_bool(cfg_mgr, url_args, "xowa.addon.fulltext_search.options", "expand_options");
 		props_Add_bool(cfg_mgr, url_args, "xowa.addon.fulltext_search.special", "case_match");
 		props_Add_bool(cfg_mgr, url_args, "xowa.addon.fulltext_search.special", "auto_wildcard_bgn");
