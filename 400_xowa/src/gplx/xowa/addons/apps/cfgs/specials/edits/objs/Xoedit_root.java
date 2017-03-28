@@ -20,10 +20,12 @@ public class Xoedit_root implements Mustache_doc_itm {
 	private final    Xoedit_nav_mgr nav_mgr;
 	private final    Xoedit_grp[] grps;
 	private final    String page_help;
+	private final    boolean app_is_drd;
 	public Xoedit_root(Xoedit_nav_mgr nav_mgr, String page_help, Xoedit_grp[] grps) {
 		this.nav_mgr = nav_mgr;
 		this.page_help = page_help;
 		this.grps = grps;
+		this.app_is_drd = gplx.core.envs.Op_sys.Cur().Tid_is_drd();
 	}
 	public Gfobj_nde To_nde(Bry_bfr tmp_bfr) {
 		Gfobj_nde rv = Gfobj_nde.New();
@@ -44,6 +46,7 @@ public class Xoedit_root implements Mustache_doc_itm {
 	public Mustache_doc_itm[] Mustache__subs(String k) {
 		if		(String_.Eq(k, "grps"))			return grps;
 		else if	(String_.Eq(k, "nav_exists"))	return Mustache_doc_itm_.Ary__bool(nav_mgr.Itms().length > 1);	// NOTE: do not show combo if 0 or 1 item
+		else if	(String_.Eq(k, "app_is_drd"))	return Mustache_doc_itm_.Ary__bool(app_is_drd);
 		else if	(String_.Eq(k, "itms"))			return nav_mgr.Itms();
 		return Mustache_doc_itm_.Ary__empty;
 	}

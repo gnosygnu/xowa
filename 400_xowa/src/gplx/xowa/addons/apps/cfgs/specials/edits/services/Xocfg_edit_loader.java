@@ -84,7 +84,20 @@ public class Xocfg_edit_loader {
 		);
 		int owner_id = -1;
 		rdr = db_app.Conn().Stmt_sql(sql).Exec_select__rls_auto();
-		try		{owner_id = rdr.Move_next() ? rdr.Read_int("map_src") : -1;}
+		try	{
+			while (rdr.Move_next()) {
+				int map_src = rdr.Read_int("map_src");
+				// WORKAROUND:if drd, then ignore desktop root node; needed for links like "?grp=xowa.addon.fulltext_search" which has two owners:desktop and mobile; DATE:2017-03-28
+				// ideally, (a) cfg_grp should have a plat_id column; (b) the above SQL should join to cfg_grp and (c) filter on plat_id = drd / desktop
+				if (gplx.core.envs.Op_sys.Cur().Tid_is_drd()
+					&& map_src == 10000) {
+					continue;
+				} else {
+					owner_id = map_src;
+					break;
+				}
+			}
+		}
 		finally {rdr.Rls();}
 
 		// get peers
