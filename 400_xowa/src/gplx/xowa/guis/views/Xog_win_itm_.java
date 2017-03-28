@@ -29,14 +29,14 @@ public class Xog_win_itm_ {
 	public static void Show_widget(boolean show, GfuiElem box, GfuiElem btn) {
 		int box_w, btn_w;
 		if (show) {
-			box_w = 160;
-			btn_w = 16;
+			box_w = Toolbar_txt_w;
+			btn_w = Toolbar_btn_w;
 		}
 		else {
 			box_w = 0;
 			btn_w = 0;
 		}
-		box.Layout_data_(new gplx.gfui.layouts.swts.Swt_layout_data__grid().Hint_w_(box_w).Hint_h_(24));
+		box.Layout_data_(new gplx.gfui.layouts.swts.Swt_layout_data__grid().Hint_w_(box_w).Hint_h_(Toolbar_grp_h));	// WORKAROUND.SWT: need to specify height, else SWT will shrink textbox on re-layout when showing / hiding search / allpages; DATE:2017-03-28
 		btn.Layout_data_(new gplx.gfui.layouts.swts.Swt_layout_data__grid().Hint_w_(btn_w).Align_w__fill_());
 	}
 	public static Gfui_grp new_grp(Xoae_app app, Gfui_kit kit, GfuiElem win, String id) {
@@ -72,4 +72,8 @@ public class Xog_win_itm_ {
 		}
 	}
 	public static String new_tiptext(Xoae_app app, int id) {return String_.new_u8(app.Usere().Lang().Msg_mgr().Val_by_id(app.Usere().Wiki(), id));}
+	public static final int 
+	  Toolbar_grp_h = 24
+	, Toolbar_txt_w = 160
+	, Toolbar_btn_w = 16;
 }

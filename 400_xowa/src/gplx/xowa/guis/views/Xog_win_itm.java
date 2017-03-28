@@ -338,12 +338,14 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 			.Spacing_w_(4)  // sets space between buttons, or else very squished
 			.Spacing_h_(0)  // not needed since only one row, but be explicit
 			);
-		int toolbar_text_height = 24;
-		url_box.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_().Min_w_(100).Hint_h_(toolbar_text_height));
-		search_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(160).Hint_h_(toolbar_text_height));
-		search_exec_btn.Layout_data_(new Swt_layout_data__grid().Align_w__fill_().Hint_w_(16).Hint_h_(toolbar_text_height));
-		allpages_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(160).Hint_h_(toolbar_text_height));
-		allpages_exec_btn.Layout_data_(new Swt_layout_data__grid().Align_w__fill_().Hint_w_(20).Hint_h_(toolbar_text_height)); // force 20 width to add even more space to right-hand of screen
+		int toolbar_grp_h = Xog_win_itm_.Toolbar_grp_h; // WORKAROUND.SWT: need to specify height, else SWT will shrink textbox on re-layout when showing / hiding search / allpages; DATE:2017-03-28
+		int toolbar_txt_w = Xog_win_itm_.Toolbar_txt_w;
+		int toolbar_btn_w = Xog_win_itm_.Toolbar_btn_w;
+		url_box.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(true).Align_w__fill_().Min_w_(100).Hint_h_(toolbar_grp_h));
+		search_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(toolbar_txt_w).Hint_h_(toolbar_grp_h));
+		search_exec_btn.Layout_data_(new Swt_layout_data__grid().Align_w__fill_().Hint_w_(toolbar_btn_w).Hint_h_(toolbar_grp_h));
+		allpages_box.Layout_data_(new Swt_layout_data__grid().Hint_w_(toolbar_txt_w).Hint_h_(toolbar_grp_h));
+		allpages_exec_btn.Layout_data_(new Swt_layout_data__grid().Align_w__fill_().Hint_w_(toolbar_btn_w).Hint_h_(toolbar_grp_h)); // force 20 width to add even more space to right-hand of screen
 
 		// tab / html space
 		tab_mgr.Init_by_kit(kit);
