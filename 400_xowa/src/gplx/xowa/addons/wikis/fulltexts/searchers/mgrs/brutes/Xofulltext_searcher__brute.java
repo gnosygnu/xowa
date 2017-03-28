@@ -36,6 +36,8 @@ public class Xofulltext_searcher__brute implements Xofulltext_searcher {
 		byte[] wiki_domain = wiki.Domain_bry();
 		int found = 0;
 		int searched = 0;
+		int rng_bgn = wiki_args.bgn;
+		int rng_end = wiki_args.bgn + wiki_args.len;
 		try {
 			while (page_rdr.Move_next()) {
 				// read data from reader
@@ -55,21 +57,25 @@ public class Xofulltext_searcher__brute implements Xofulltext_searcher {
 				if (cbk_eval.found) {
 					++found;
 
+					// paging: ignore any results less than rng_bgn; EX: 21-40 are requested; ignore 1-20
+					if (found <= rng_bgn) continue;
+
 					// update pages found
 					ui.Send_wiki_update(wiki_domain, found, searched);
 
 					// do highlight
-					if (found <= wiki_args.len) {
-						cbk_highlight.Init(ui, args.qry_id, wiki, page_id, ttl.Full_db(), wiki_args.show_all_snips);
-						ui.Send_page_add(new Xofulltext_searcher_page
-							( args.qry_id
-							, wiki_domain
-							, page_id
-							, ttl.Full_db()
-							, wiki_args.expand_snips
-							));
-						finder.Match(text_mcase, 0, text_mcase.length, cbk_highlight);
-					}
+					cbk_highlight.Init(ui, args.qry_id, wiki, page_id, ttl.Full_db(), wiki_args.show_all_snips);
+					ui.Send_page_add(new Xofulltext_searcher_page
+						( args.qry_id
+						, wiki_domain
+						, page_id
+						, ttl.Full_db()
+						, wiki_args.expand_snips
+						));
+					finder.Match(text_mcase, 0, text_mcase.length, cbk_highlight);
+
+					// paging; enough pages found; stop
+					if (found > rng_end) break;
 				}
 
 				// update update pages found every 100 pages
