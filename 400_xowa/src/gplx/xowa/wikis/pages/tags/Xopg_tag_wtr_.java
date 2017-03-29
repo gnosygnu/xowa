@@ -65,7 +65,7 @@ public class Xopg_tag_wtr_ {
 	}
 	public static void Add__ooui(Xopg_tag_mgr head_tags, Io_url http_root) {
 		Io_url dir = http_root.GenSubDir_nest("bin", "any", "xowa", "html", "res", "lib", "oojs-ui");
-		head_tags.Add(Xopg_tag_itm.New_css_file(dir.GenSubFil_nest("oojs-ui-mediawiki.css")));
+		head_tags.Add(Xopg_tag_itm.New_css_file(dir.GenSubFil_nest("oojs-ui-core-mediawiki.css")));
 	}
 	private static String Get_app_js_file(Xoa_app app) {
 		if (app.Mode().Tid_is_http()) return "xo.app.http_server.js";

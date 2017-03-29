@@ -20,7 +20,7 @@ public class Xoh_head_itm__pgbnr extends Xoh_head_itm__base {
 	@Override public int Flags() {return Flag__css_include;}
 	@Override public void Write_css_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {
 		if (Url__css__styles == null) {
-			Url__css__oojs_ui	= app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "res", "lib", "oojs-ui", "oojs-ui-mediawiki.css").To_http_file_bry();	// needed for icons; should move to own file
+			Url__css__oojs_ui	= app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "res", "lib", "oojs-ui", "oojs-ui-core-mediawiki.css").To_http_file_bry();	// needed for icons; should move to own file
 			Io_url resources_dir = app.Fsys_mgr().Bin_any_dir().GenSubDir_nest("xowa", "xtns", "WikidataPageBanner", "resources");
 			Url__css__styles	= resources_dir.GenSubFil_nest("ext.WikidataPageBanner.styles"		, "ext.WikidataPageBanner.css").To_http_file_bry();
 			Url__css__toc		= resources_dir.GenSubFil_nest("ext.WikidataPageBanner.toc.styles"	, "ext.WikidataPageBanner.toc.css").To_http_file_bry();

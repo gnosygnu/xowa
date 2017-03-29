@@ -20,7 +20,7 @@ import gplx.core.brys.args.*; import gplx.core.threads.*; import gplx.xowa.bldrs
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.bldrs.wms.*; import gplx.xowa.bldrs.wms.dumps.*;
 public class Xoi_cmd_wiki_tst {
-	@Test  public void Run() {	// MAINT:2016-12-04
+	@Test  public void Run() {	// MAINT:2017-03-28
 //			Bld_import_list(Xow_domain_regy.All);
 //			Bld_cfg_files(Xow_domain_regy.All);	// NOTE: remember to carry over the wikisource / page / index commands from the existing xowa_build_cfg.gfs; also, only run the xowa_build_cfg.gfs once; DATE:2013-10-15; last run: DATE:2014-09-09
 	}
