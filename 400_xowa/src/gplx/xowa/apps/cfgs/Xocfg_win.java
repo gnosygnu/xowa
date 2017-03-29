@@ -18,26 +18,17 @@ import gplx.core.brys.fmtrs.*;
 import gplx.gfui.draws.*;
 import gplx.xowa.guis.langs.*;
 public class Xocfg_win implements Gfo_invk {
-	private Xoa_app app;
 	public Xol_font_info Font() {return font;} private Xol_font_info font = new Xol_font_info("Arial", 8, FontStyleAdp_.Plain);
 	public Bry_fmtr Search_box_fmtr() {return search_box_fmtr;} private Bry_fmtr search_box_fmtr = Bry_fmtr.new_("Special:Search?search=~{search}", "search");
 	public Bry_fmtr Allpages_box_fmtr() {return allpages_box_fmtr;} private Bry_fmtr allpages_box_fmtr = Bry_fmtr.new_("Special:AllPages?from=~{search}&namespace=0&hideredirects=0", "search");
 	public void Init_by_app(Xoae_app app) {
-		this.app = app;
 		font.Init_by_app(app);
 		app.Cfg().Bind_many_app(this, Cfg__search__default_to_fulltext, Cfg__search__fallback_to_title);			
 	}
 	public String Search_url() {return search_url;} private String search_url = "Special:Search";
 	public void Search_url_(boolean default_to_fulltext) {
-		search_url = default_to_fulltext ? "Special:XowaSearch" : "Special:Search?fulltext=y&search=";
+		search_url = default_to_fulltext ? "Special:XowaSearch" : "Special:Search?fulltext=y&search=enter_search_in_url_bar";
 		search_box_fmtr = Bry_fmtr.new_(search_url + "?fulltext=y&search=~{search}", "search");
-
-		// rest portal on every page in order to refresh searchform link; EX: <form id="searchform" action="/wiki/~{<>app.gui.win_opts.search_url;<>}">
-		int len = app.Wiki_mgri().Count();
-		for (int i = 0; i < len; i++) {
-			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgri().Get_at(i);
-			wiki.Html_mgr().Portal_mgr().Init();
-		}
 	}
 	public boolean Search_fallsback_to_title() {return search_fallsback_to_title;} private boolean search_fallsback_to_title;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
