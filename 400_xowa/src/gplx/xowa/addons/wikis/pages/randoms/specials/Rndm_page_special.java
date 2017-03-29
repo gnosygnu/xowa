@@ -22,7 +22,7 @@ public class Rndm_page_special implements Xow_special_page {
 		// Rndm_addon.Get(wiki).Mgr().Get_rndm_page_by_ns(ns);
 
 		byte[] random_ttl_bry = wiki.Db_mgr().Load_mgr().Find_random_ttl(ns);
-		wiki.Data_mgr().Redirect(page, ns.Gen_ttl(random_ttl_bry));
+		wiki.Data_mgr().Redirect(page, ns.Gen_ttl(random_ttl_bry)); // REDIRECT:as per Special:Random
 	}
 
 	public static final String SPECIAL_KEY = "Randompage";	// NOTE: needs to match lang.gfs

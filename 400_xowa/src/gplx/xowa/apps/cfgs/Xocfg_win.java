@@ -52,7 +52,9 @@ public class Xocfg_win implements Gfo_invk {
 	private static final String Invk_search_box_fmt_ = "search_box_fmt_", Invk_font = "font";
 	private static final String 
 	  Cfg__search__default_to_fulltext = "xowa.addon.fulltext_search.compatibility.default_to_fulltext"
-	, Cfg__search__fallback_to_title   = "xowa.addon.fulltext_search.compatibility.fallback_to_title";
+	;
+	public static final String 
+	  Cfg__search__fallback_to_title   = "xowa.addon.fulltext_search.compatibility.fallback_to_title";
 
 	public static final float Font_size_default = 8;
 }

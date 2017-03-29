@@ -20,7 +20,7 @@ import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wik
 import gplx.xowa.addons.apps.cfgs.*;
 class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache_doc_itm {
 	private final    Hash_adp props = Hash_adp_.New();
-	public Xofulltext_searcher_html(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, Xow_wiki wiki, Guid_adp page_guid) {
+	public Xofulltext_searcher_html(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, Xow_wiki wiki, Guid_adp page_guid, boolean lucene_exists) {
 		String search_text = url_args.Read_str_or("search", ""); 
 		search_text = String_.Replace(search_text, "_", " "); // xofulltext_searcher.js chains multiple words with "_"; convert back to space
 		props.Add("qarg_search", search_text);
@@ -29,7 +29,6 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache
 
 		// enabled
 		boolean app_is_drd = gplx.core.envs.Op_sys.Cur().Tid_is_drd();
-		boolean lucene_exists = Io_mgr.Instance.ExistsDir(gplx.xowa.addons.wikis.fulltexts.Xosearch_fulltext_addon.Get_index_dir(wiki));
 		props.Add("app_is_drd", app_is_drd); // for options button
 		props.Add("disabled", app_is_drd && !lucene_exists);
 
