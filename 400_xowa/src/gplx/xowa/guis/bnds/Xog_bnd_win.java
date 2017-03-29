@@ -74,10 +74,10 @@ public class Xog_bnd_win implements Gfo_invk {
 		return (GfuiLbl)kit.New_lbl(key, owner_win).Text_(text).Size_(80, 20).BackColor_(ColorAdp_.White);
 	}
 	private GfuiTextBox Make_txt(Gfui_kit kit, GfuiWin owner_win, String key, String text) {
-		return (GfuiTextBox)kit.New_text_box(key, owner_win).Text_(text).Size_(120, 20).Border_on_();
+		return (GfuiTextBox)kit.New_text_box(key, owner_win).Text_(text).Size_(120, 20).Border_on_().BackColor_(ColorAdp_.White);
 	}
 	private GfuiBtn Make_btn(Gfui_kit kit, GfuiWin owner_win, String key, String text) {
-		return (GfuiBtn)kit.New_btn(key, owner_win).Text_(text).Size_(40, 20).Focus_able_(true).Border_on_();
+		return (GfuiBtn)kit.New_btn(key, owner_win).Text_(text).Size_(40, 20).Focus_able_(true).Border_on_().BackColor_(ColorAdp_.White);
 	}
 	private void Layout(int y, GfuiElem elem_1, GfuiElem elem_2) {
 		elem_1.Y_(y);
