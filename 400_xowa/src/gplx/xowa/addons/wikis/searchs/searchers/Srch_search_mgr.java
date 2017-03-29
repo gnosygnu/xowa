@@ -29,6 +29,7 @@ public class Srch_search_mgr implements Gfo_invk {
 	private final    Srch_search_cmd[]			cur_cmds;
 	private final    Object						mutex = new Object();
 	private int search_count;
+	private boolean upgrade_prompted;
 	public Srch_search_mgr(Srch_search_addon addon, Xow_wiki wiki, Srch_text_parser parser) {
 		this.addon = addon; this.wiki = wiki;
 		crt_parser = new Srch_crt_parser(Srch_crt_scanner_syms.Dflt);	// NOTE: hard-coded to dflt; should change to use qry.Phrase.Syms, but requires more work
@@ -49,7 +50,9 @@ public class Srch_search_mgr implements Gfo_invk {
 		if (qry.Phrase.Orig.length == 0) return;
 
 		// handle obsolete search dbs;
-		if (addon.Db_mgr().Cfg().Version_id__needs_upgrade()) {
+		if (addon.Db_mgr().Cfg().Version_id__needs_upgrade()
+			&& !upgrade_prompted) {
+			upgrade_prompted = true;
 			Srch_db_upgrade upgrade_mgr = new Srch_db_upgrade(wiki, addon.Db_mgr());
 			upgrade_mgr.Upgrade();
 			return;

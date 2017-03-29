@@ -17,14 +17,11 @@ package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*; import gplx.xowa.*; i
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
 public class Srch_db_upgrade {
 	private final    Xow_wiki wiki;
-	private boolean upgrade_prompted;
 	public Srch_db_upgrade(Xow_wiki wiki, Srch_db_mgr search_db_mgr) {
 		this.wiki = wiki;
 	}
 	public void Upgrade() {
 		if (!wiki.App().Mode().Tid_is_gui()) return;	// ignore if html-server or drd-app
-		if (upgrade_prompted) return;
-		upgrade_prompted = true;
 		Xoae_app app = ((Xoae_app)wiki.App());
 		boolean ok = app.Gui_mgr().Kit().Ask_ok_cancel("", "", String_.Concat_lines_nl_skip_last
 		( "XOWA would like to upgrade your search database for " + wiki.Domain_str() + "."
