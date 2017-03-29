@@ -29,9 +29,10 @@ public class Xoapi_nav_wiki implements Gfo_invk {
 		if		(ctx.Match(k, "main_page")) 						this.Main_page();
 		else if	(ctx.Match(k, "random")) 							win.Page__navigate_by_url_bar("Special:Random");
 		else if	(ctx.Match(k, "sandbox")) 							win.Page__navigate_by_url_bar("Project:Sandbox");
-		else if	(ctx.Match(k, "allpages")) 							win.Page__navigate_by_url_bar("Special:AllPages?from=!"); // NOTE: for menu, default to ! else empty page
+		else if	(ctx.Match(k, "allpages")) 							win.Page__navigate_by_url_bar("Special:AllPages?from=!"); // NOTE: for main_menu, default to ! else empty page
 		else if	(ctx.Match(k, "search_title")) 						win.Page__navigate_by_url_bar("Special:Search?fulltext=y");
 		else if	(ctx.Match(k, "search_full")) 						win.Page__navigate_by_url_bar("Special:XowaSearch");
+		else if	(ctx.Match(k, "search_per_cfg")) 					win.Page__navigate_by_url_bar(win.Gui_mgr().Win_cfg().Search_url());
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}

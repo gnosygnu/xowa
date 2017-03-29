@@ -110,7 +110,7 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 		else if	(ctx.Match(k, Invk_bnds))							return bnd_mgr;
 		else if	(ctx.Match(k, Invk_bindings))						return ipt_cfgs;
 		else if	(ctx.MatchIn(k, Invk_main_win, Invk_browser_win))	return browser_win;
-		else if	(ctx.Match(k, Invk_win_opts))						return win_cfg;
+		else if	(ctx.Match(k, Invk_win_opts))						return win_cfg; // used by xowa.gfs and Special:Search; DATE:2017-03-29
 		else if	(ctx.Match(k, Invk_layout))							return layout;
 		else if	(ctx.Match(k, Invk_html))							return html_mgr;
 		else if	(ctx.Match(k, Invk_menus))							return menu_mgr;

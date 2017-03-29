@@ -31,6 +31,7 @@ public class Xog_cmd_itm_ {
 	, Key_nav_wiki_allpages										= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.wiki.allpages")
 	, Key_nav_wiki_search_title									= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.wiki.search_title")
 	, Key_nav_wiki_search_full									= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.wiki.search_full")
+	, Key_nav_wiki_search_per_cfg								= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.wiki.search_per_cfg")
 
 	, Key_nav_help_help											= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.help"								, "home/wiki/Help/Contents")               // HOME
 	, Key_nav_help_about										= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.about"								, "home/wiki/Help/About")                  // HOME
