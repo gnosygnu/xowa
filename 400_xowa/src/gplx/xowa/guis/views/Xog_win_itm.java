@@ -22,6 +22,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.apps.urls.*; import gplx.xowa.files.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.math.*; 	
+import gplx.xowa.guis.views.url_box_fmts.*;
 public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	private Gfo_invk sync_cmd;
 	private Xog_url_box__selection_changed url_box__selection_changed;
@@ -59,6 +60,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	public Xog_html_itm		Active_html_itm()	{return tab_mgr.Active_tab().Html_itm();}
 	public Gfui_html		Active_html_box()	{return tab_mgr.Active_tab().Html_itm().Html_box();}
 	public Gfo_usr_dlg		Usr_dlg() {return app.Usr_dlg();}
+	public Xog_urlfmtr_mgr  Url_box_fmtr() {return url_box_fmtr;} private final    Xog_urlfmtr_mgr url_box_fmtr = new Xog_urlfmtr_mgr();
 	public Xog_win_itm_cfg	Cfg() {return cfg;} private final    Xog_win_itm_cfg cfg = new Xog_win_itm_cfg();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_link_click))								Win__link_click();
@@ -383,6 +385,8 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 			&&	app.Mode().Tid_is_gui())	// only run for gui; do not run for tcp/http server; DATE:2014-05-03
 			app.Usr_dlg().Gui_wkr_(new Gfo_usr_dlg__gui__swt(app, kit, prog_box, info_box, info_box));
 		cfg.Init_by_app(app);
+
+		url_box_fmtr.Init_by_app(app);
 	}
 	public static String Remove_redirect_if_exists(String text) {
 		// remove redirect target; EX: "A -> B" -> "A"

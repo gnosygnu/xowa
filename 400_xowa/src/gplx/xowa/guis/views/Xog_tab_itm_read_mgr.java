@@ -17,6 +17,7 @@ package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.threads.*;
 import gplx.gfui.*; import gplx.gfui.controls.standards.*; import gplx.xowa.guis.langs.*; import gplx.xowa.guis.history.*;
 import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.wikis.pages.*;
+import gplx.xowa.guis.views.url_box_fmts.*;
 public class Xog_tab_itm_read_mgr {
 	public static void Show_page(Xog_tab_itm tab, Xoae_page new_page, boolean reset_to_read) {Show_page(tab, new_page, reset_to_read, false, false, Xog_history_stack.Nav_fwd);}
 	public static void Show_page(Xog_tab_itm tab, Xoae_page new_page, boolean reset_to_read, boolean new_page_is_same, boolean show_is_err, byte history_nav_type) {
@@ -64,6 +65,12 @@ public class Xog_tab_itm_read_mgr {
 		if (url != null && ttl != null) {
 			url_str = url.To_str();
 			win_str = String_.new_u8(Bry_.Add(ttl.Full_txt_w_ttl_case(), Win_text_suffix_page));
+
+			// fmt to url if set
+			Xog_urlfmtr_mgr url_box_fmtr = win.Url_box_fmtr();
+			if (url_box_fmtr.Exists()) {
+				url_str = url_box_fmtr.Gen(url);
+			}
 		}
 		win.Url_box().Text_(url_str);
 		win.Win_box().Text_(win_str);
