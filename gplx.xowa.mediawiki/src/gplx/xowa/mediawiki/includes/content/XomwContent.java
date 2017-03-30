@@ -25,7 +25,7 @@ import gplx.xowa.mediawiki.includes.parsers.*;
 *
 * @ingroup Content
 */
-interface XomwContent {
+public interface XomwContent {
 
 	/**
 	* @since 1.21
@@ -161,7 +161,7 @@ interface XomwContent {
 	*
 	* @return String Serialized form of this Content Object.
 	*/
-	byte[] serialize(byte[] format);
+	String serialize(String format);
 
 	/**
 	* Returns true if this Content Object represents empty content.

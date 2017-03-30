@@ -33,7 +33,7 @@ package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*;
 *
 * @ingroup Content
 */
-abstract class XomwContentHandler {
+public abstract class XomwContentHandler {
 //		/**
 //		* Convenience function for getting flat text from a Content Object. This
 //		* should only be used in the context of backwards compatibility with code

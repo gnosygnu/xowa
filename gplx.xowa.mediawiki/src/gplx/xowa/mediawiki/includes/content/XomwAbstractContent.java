@@ -26,7 +26,7 @@ import gplx.xowa.mediawiki.includes.parsers.*;
 *
 * @ingroup Content
 */
-abstract class XomwAbstractContent implements XomwContent {
+public abstract class XomwAbstractContent implements XomwContent {
 	/**
 	* Name of the content model this Content Object represents.
 	* Use with CONTENT_MODEL_XXX constants
@@ -117,160 +117,164 @@ abstract class XomwAbstractContent implements XomwContent {
 		return this.getContentHandler().isSupportedFormat(format);
 	}
 
-//		/**
-//		* @since 1.21
-//		*
-//		* @param String $format The serialization format to check.
-//		*
-//		* @throws MWException If the format is not supported by this content handler.
-//		*/
-//		protected function checkFormat($format) {
-//			if (!this.isSupportedFormat($format)) {
-//				throw new MWException(
-//					"Format $format is not supported for content model " .
-//					this.getModel()
-//				);
-//			}
-//		}
-//
-//		/**
-//		* @since 1.21
-//		*
-//		* @param String $format
-//		*
-//		* @return String
-//		*
-//		* @see Content::serialize
-//		*/
-//		public function serialize($format = null) {
-//			return this.getContentHandler().serializeContent($this, $format);
-//		}
-//
-//		/**
-//		* @since 1.21
-//		*
-//		* @return boolean
-//		*
-//		* @see Content::isEmpty
-//		*/
-//		public function isEmpty() {
-//			return this.getSize() === 0;
-//		}
-//
-//		/**
-//		* Subclasses may override this to implement (light weight) validation.
-//		*
-//		* @since 1.21
-//		*
-//		* @return boolean Always true.
-//		*
-//		* @see Content::isValid
-//		*/
-//		public function isValid() {
-//			return true;
-//		}
-//
-//		/**
-//		* @since 1.21
-//		*
-//		* @param Content $that
-//		*
-//		* @return boolean
-//		*
-//		* @see Content::equals
-//		*/
-//		public function equals(Content $that = null) {
-//			if (is_null($that)) {
-//				return false;
-//			}
-//
-//			if ($that === $this) {
-//				return true;
-//			}
-//
-//			if ($that.getModel() !== this.getModel()) {
-//				return false;
-//			}
-//
-//			return this.getNativeData() === $that.getNativeData();
-//		}
-//
-//		/**
-//		* Returns a list of DataUpdate objects for recording information about this
-//		* Content in some secondary data store.
-//		*
-//		* This default implementation returns a LinksUpdate Object and calls the
-//		* SecondaryDataUpdates hook.
-//		*
-//		* Subclasses may override this to determine the secondary data updates more
-//		* efficiently, preferably without the need to generate a parser output Object.
-//		* They should however make sure to call SecondaryDataUpdates to give extensions
-//		* a chance to inject additional updates.
-//		*
-//		* @since 1.21
-//		*
-//		* @param Title $title
-//		* @param Content $old
-//		* @param boolean $recursive
-//		* @param ParserOutput $parserOutput
-//		*
-//		* @return DataUpdate[]
-//		*
-//		* @see Content::getSecondaryDataUpdates()
-//		*/
-//		public function getSecondaryDataUpdates(Title $title, Content $old = null,
-//			$recursive = true, ParserOutput $parserOutput = null
+	/**
+	* @since 1.21
+	*
+	* @param String $format The serialization format to check.
+	*
+	* @throws MWException If the format is not supported by this content handler.
+	*/
+	public void checkFormat(String format) {
+		if (!this.isSupportedFormat(format)) {
+			throw new XomwMWException(
+				"Format " + format + " is not supported for content model " +
+				this.getModel()
+			);
+		}
+	}
+
+	/**
+	* @since 1.21
+	*
+	* @param String $format
+	*
+	* @return String
+	*
+	* @see Content::serialize
+	*/
+	public String serialize(String format) {
+		// return this.getContentHandler().serializeContent(this, format);
+		throw Err_.new_unimplemented();
+	}
+
+	/**
+	* @since 1.21
+	*
+	* @return boolean
+	*
+	* @see Content::isEmpty
+	*/
+	public boolean isEmpty() {
+		return this.getSize() == 0;
+	}
+
+	/**
+	* Subclasses @Override may this to implement (light weight) validation.
+	*
+	* @since 1.21
+	*
+	* @return boolean Always true.
+	*
+	* @see Content::isValid
+	*/
+	@gplx.Virtual public boolean isValid() {
+		return true;
+	}
+
+	/**
+	* @since 1.21
+	*
+	* @param Content that
+	*
+	* @return boolean
+	*
+	* @see Content::equals
+	*/
+	public boolean equals(XomwContent that) {
+		if (that == null) {
+			return false;
+		}
+
+		if (that == this) {
+			return true;
+		}
+
+		if (that.getModel() != this.getModel()) {
+			return false;
+		}
+
+		return this.getNativeData() == that.getNativeData();
+	}
+
+	/**
+	* Returns a list of DataUpdate objects for recording information about this
+	* Content in some secondary data store.
+	*
+	* This default implementation returns a LinksUpdate Object and calls the
+	* SecondaryDataUpdates hook.
+	*
+	* Subclasses @Override may this to determine the secondary data updates more
+	* efficiently, preferably without the need to generate a parser output Object.
+	* They should however make sure to call SecondaryDataUpdates to give extensions
+	* a chance to inject additional updates.
+	*
+	* @since 1.21
+	*
+	* @param Title $title
+	* @param Content $old
+	* @param boolean $recursive
+	* @param ParserOutput parserOutput
+	*
+	* @return DataUpdate[]
+	*
+	* @see Content::getSecondaryDataUpdates()
+	*/
+	// recursive=true
+//		public XomwDataUpdate[] getSecondaryDataUpdates(Title title, Content old,
+//			boolean recursive, ParserOutput parserOutput
 //		) {
-//			if ($parserOutput === null) {
-//				$parserOutput = this.getParserOutput($title, null, null, false);
+//			if (parserOutput == null) {
+//				parserOutput = this.getParserOutput(title, null, null, false);
 //			}
 //
-//			$updates = [
-//				new LinksUpdate($title, $parserOutput, $recursive)
-//			];
+//			XomwDataUpdate[] updates = new XomwDataUpdate[] {
+//				new LinksUpdate(title, parserOutput, recursive)
+//															};
 //
-//			Hooks::run('SecondaryDataUpdates', [ $title, $old, $recursive, $parserOutput, &$updates ]);
+//			Hooks::run('SecondaryDataUpdates', [ $title, $old, $recursive, parserOutput, &$updates ]);
 //
-//			return $updates;
+//			return updates;
 //		}
-//
-//		/**
-//		* @since 1.21
-//		*
-//		* @return Title[]|null
-//		*
-//		* @see Content::getRedirectChain
-//		*/
-//		public function getRedirectChain() {
-//			global $wgMaxRedirects;
-//			$title = this.getRedirectTarget();
-//			if (is_null($title)) {
+
+	/**
+	* @since 1.21
+	*
+	* @return Title[]|null
+	*
+	* @see Content::getRedirectChain
+	*/
+	public XomwTitle[] getRedirectChain() {
+//			XomwTitle title = this.getRedirectTarget();
+//			if (title == null) {
 //				return null;
 //			}
 //			// recursive check to follow double redirects
-//			$recurse = $wgMaxRedirects;
-//			$titles = [ $title ];
-//			while (--$recurse > 0) {
-//				if ($title.isRedirect()) {
-//					$page = WikiPage::factory($title);
+//			int recurse = XomwDefaultSettings.wgMaxRedirects;
+//
+//			List_adp titles = List_adp_.New_by_many(title);
+//			while (--recurse > 0) {
+//				XomwTitle newtitle = null;
+//				if (title.isRedirect()) {
+//					$page = WikiPage::factory(title);
 //					$newtitle = $page.getRedirectTarget();
 //				} else {
 //					break;
 //				}
 //				// Redirects to some special pages are not permitted
-//				if ($newtitle instanceof Title && $newtitle.isValidRedirectTarget()) {
+//				if (Type_adp_.Eq_typeSafe(newtitle, typeof(XomwTitle)) && newtitle.isValidRedirectTarget()) {
 //					// The new title passes the checks, so make that our current
 //					// title so that further recursion can be checked
-//					$title = $newtitle;
-//					$titles[] = $newtitle;
+//					title = newtitle;
+//					titles.Add(newtitle);
 //				} else {
 //					break;
 //				}
 //			}
 //
-//			return $titles;
-//		}
-//
+//			return (XomwTitle[])titles.To_ary_and_clear(typeof(XomwTitle));
+		throw Err_.new_unimplemented();
+	}
+
 //		/**
 //		* Subclasses that implement redirects should override this.
 //		*
@@ -307,7 +311,7 @@ abstract class XomwAbstractContent implements XomwContent {
 //		* @see Content::isRedirect
 //		*/
 //		public function isRedirect() {
-//			return this.getRedirectTarget() !== null;
+//			return this.getRedirectTarget() != null;
 //		}
 //
 //		/**
@@ -400,34 +404,34 @@ abstract class XomwAbstractContent implements XomwContent {
 //		* @since 1.21
 //		*
 //		* @param WikiPage $page
-//		* @param ParserOutput $parserOutput
+//		* @param ParserOutput parserOutput
 //		*
 //		* @return LinksDeletionUpdate[]
 //		*
 //		* @see Content::getDeletionUpdates
 //		*/
-//		public function getDeletionUpdates(WikiPage $page, ParserOutput $parserOutput = null) {
+//		public function getDeletionUpdates(WikiPage $page, ParserOutput parserOutput = null) {
 //			return [
 //				new LinksDeletionUpdate($page),
 //			];
 //		}
-//
-//		/**
-//		* This default implementation always returns false. Subclasses may override
-//		* this to supply matching logic.
-//		*
-//		* @since 1.21
-//		*
-//		* @param MagicWord $word
-//		*
-//		* @return boolean Always false.
-//		*
-//		* @see Content::matchMagicWord
-//		*/
-//		public function matchMagicWord(MagicWord $word) {
-//			return false;
-//		}
-//
+
+	/**
+	* This default implementation always returns false. Subclasses @Override may 
+	* this to supply matching logic.
+	*
+	* @since 1.21
+	*
+	* @param MagicWord $word
+	*
+	* @return boolean Always false.
+	*
+	* @see Content::matchMagicWord
+	*/
+	@gplx.Virtual public boolean matchMagicWord(XomwMagicWord word) {
+		return false;
+	}
+
 //		/**
 //		* This super implementation calls the hook ConvertContent to enable custom conversions.
 //		* Subclasses may override this to implement conversion for "their" content model.
@@ -440,12 +444,12 @@ abstract class XomwAbstractContent implements XomwContent {
 //		* @see Content::convert()
 //		*/
 //		public function convert($toModel, $lossy = '') {
-//			if (this.getModel() === $toModel) {
+//			if (this.getModel() == $toModel) {
 //				// nothing to do, shorten out.
 //				return $this;
 //			}
 //
-//			$lossy = ($lossy === 'lossy'); // String flag, convert to boolean for convenience
+//			$lossy = ($lossy == 'lossy'); // String flag, convert to boolean for convenience
 //			$result = false;
 //
 //			Hooks::run('ConvertContent', [ $this, $toModel, $lossy, &$result ]);
@@ -476,7 +480,7 @@ abstract class XomwAbstractContent implements XomwContent {
 //		public function getParserOutput(Title $title, $revId = null,
 //			ParserOptions $options = null, $generateHtml = true
 //		) {
-//			if ($options === null) {
+//			if ($options == null) {
 //				$options = this.getContentHandler().makeParserOptions('canonical');
 //			}
 //
@@ -534,14 +538,6 @@ abstract class XomwAbstractContent implements XomwContent {
 
 	public abstract int getSize();
 
-	public abstract byte[] serialize(byte[] format);
-
-	public abstract boolean isEmpty();
-
-	public abstract boolean isValid();
-
-	public abstract boolean equals(XomwContent that);
-
 	public abstract XomwContent copy();
 
 	public abstract boolean isCountable(boolean hasLinks);
@@ -551,8 +547,6 @@ abstract class XomwAbstractContent implements XomwContent {
 
 	public abstract Object getSecondaryDataUpdates(XomwTitle title, XomwContent old,
 		boolean recursive, XomwParserOutput parserOutput);
-
-	public abstract XomwTitle[] getRedirectChain();
 
 	public abstract XomwTitle getRedirectTarget();
 
@@ -576,8 +570,6 @@ abstract class XomwAbstractContent implements XomwContent {
 
 	public abstract Object getDeletionUpdates(Object page,
 		XomwParserOutput parserOutput);
-
-	public abstract boolean matchMagicWord(XomwMagicWord word);
 
 	public abstract XomwContent convert(byte[] toModel, byte[] lossy);
 }
