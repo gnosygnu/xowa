@@ -18,10 +18,13 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <div id='xocfg_body'>
+      <!-- TEXT:err_msg -->
       <div id='xocfg_err'>
       </div>
       <div>
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+        <!-- BTN:info -->
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
+         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
           <option value='xowa.app.security'>
             App - Security
           </option>
@@ -45,6 +48,9 @@
           </option>
           <option value='xowa.gui.shortcuts'>
             Gui - Shortcuts
+          </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Nightmode
           </option>
           <option value='xowa.wiki.hdumps'>
             Wiki - HTML Databases
@@ -85,6 +91,9 @@
           <option value='xowa.addon.search'>
             Addon - Search
           </option>
+          <option value='xowa.addon.fulltext_search'>
+            Addon - Full-text search
+          </option>
           <option value='xowa.addon.category'>
             Addon - Category
           </option>
@@ -109,15 +118,14 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Night mode
-          </option>
-          <option value='xowa.addon.search.fulltext'>
-            Addon - Full text search
-          </option>
-        </select>
+        </select> <!-- LINK:cfg_link -->
+         
+        <div style='float:right;margin:2px 7px;'>
+          <a id='options_lnk'>options link</a>
+        </div>
       </div>
       <div id='cfg_grps'>
+        <!-- TEXT:page_help -->
         <div>
           <p id='page_help_para'>
           </p>
@@ -140,19 +148,21 @@
           General
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.enabled__name' class='xocfg_itm_name'>
             Enabled
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.enabled" data-xocfg-key="xowa.addon.popups.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.addon.popups.enabled__key_box' value='xowa.addon.popups.enabled'> <input type='hidden' id='xowa.addon.popups.enabled__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.enabled__key_box' value='xowa.addon.popups.enabled'> <input type='hidden' id='xowa.addon.popups.enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.enabled_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.enabled_help_msg' class='xohelp_msg'>
             <p>
@@ -172,19 +182,21 @@
           Content (basic)
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.show_init_word_count")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.content.show_init_word_count__name' class='xocfg_itm_name'>
             Number of words to show at start
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.content.show_init_word_count__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.show_init_word_count")' title="reset to &quot;128&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.content.show_init_word_count" data-xocfg-key="xowa.addon.popups.content.show_init_word_count" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="128">
-          </div><input type='hidden' id='xowa.addon.popups.content.show_init_word_count__key_box' value='xowa.addon.popups.content.show_init_word_count'> <input type='hidden' id='xowa.addon.popups.content.show_init_word_count__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.content.show_init_word_count__key_box' value='xowa.addon.popups.content.show_init_word_count'> <input type='hidden' id='xowa.addon.popups.content.show_init_word_count__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.content.show_init_word_count_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.content.show_init_word_count_help_msg' class='xohelp_msg'>
             <p>
@@ -201,19 +213,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.show_more_word_count")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.content.show_more_word_count__name' class='xocfg_itm_name'>
             Number of words to show for "more"
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.content.show_more_word_count__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.show_more_word_count")' title="reset to &quot;192&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.content.show_more_word_count" data-xocfg-key="xowa.addon.popups.content.show_more_word_count" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="192">
-          </div><input type='hidden' id='xowa.addon.popups.content.show_more_word_count__key_box' value='xowa.addon.popups.content.show_more_word_count'> <input type='hidden' id='xowa.addon.popups.content.show_more_word_count__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.content.show_more_word_count__key_box' value='xowa.addon.popups.content.show_more_word_count'> <input type='hidden' id='xowa.addon.popups.content.show_more_word_count__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.content.show_more_word_count_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.content.show_more_word_count_help_msg' class='xohelp_msg'>
             <p>
@@ -233,19 +247,21 @@
           Content (advanced)
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.show_all_if_less_than")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.content.show_all_if_less_than__name' class='xocfg_itm_name'>
             Automatically show "all" if page is less than
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.content.show_all_if_less_than__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.show_all_if_less_than")' title="reset to &quot;-1&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.content.show_all_if_less_than" data-xocfg-key="xowa.addon.popups.content.show_all_if_less_than" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="-1">
-          </div><input type='hidden' id='xowa.addon.popups.content.show_all_if_less_than__key_box' value='xowa.addon.popups.content.show_all_if_less_than'> <input type='hidden' id='xowa.addon.popups.content.show_all_if_less_than__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.content.show_all_if_less_than__key_box' value='xowa.addon.popups.content.show_all_if_less_than'> <input type='hidden' id='xowa.addon.popups.content.show_all_if_less_than__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.content.show_all_if_less_than_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.content.show_all_if_less_than_help_msg' class='xohelp_msg'>
             <p>
@@ -267,19 +283,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.read_til_stop_fwd")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.content.read_til_stop_fwd__name' class='xocfg_itm_name'>
             Read forward til header
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.content.read_til_stop_fwd__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.read_til_stop_fwd")' title="reset to &quot;32&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.content.read_til_stop_fwd" data-xocfg-key="xowa.addon.popups.content.read_til_stop_fwd" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="32">
-          </div><input type='hidden' id='xowa.addon.popups.content.read_til_stop_fwd__key_box' value='xowa.addon.popups.content.read_til_stop_fwd'> <input type='hidden' id='xowa.addon.popups.content.read_til_stop_fwd__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.content.read_til_stop_fwd__key_box' value='xowa.addon.popups.content.read_til_stop_fwd'> <input type='hidden' id='xowa.addon.popups.content.read_til_stop_fwd__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.content.read_til_stop_fwd_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.content.read_til_stop_fwd_help_msg' class='xohelp_msg'>
             <p>
@@ -345,19 +363,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.read_til_stop_bwd")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.content.read_til_stop_bwd__name' class='xocfg_itm_name'>
             Read backward til header
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.content.read_til_stop_bwd__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.read_til_stop_bwd")' title="reset to &quot;16&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.content.read_til_stop_bwd" data-xocfg-key="xowa.addon.popups.content.read_til_stop_bwd" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="16">
-          </div><input type='hidden' id='xowa.addon.popups.content.read_til_stop_bwd__key_box' value='xowa.addon.popups.content.read_til_stop_bwd'> <input type='hidden' id='xowa.addon.popups.content.read_til_stop_bwd__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.content.read_til_stop_bwd__key_box' value='xowa.addon.popups.content.read_til_stop_bwd'> <input type='hidden' id='xowa.addon.popups.content.read_til_stop_bwd__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.content.read_til_stop_bwd_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.content.read_til_stop_bwd_help_msg' class='xohelp_msg'>
             <p>
@@ -423,19 +443,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.stop_if_hdr_after")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.content.stop_if_hdr_after__name' class='xocfg_itm_name'>
             Stop if header is found after
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.content.stop_if_hdr_after__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.stop_if_hdr_after")' title="reset to &quot;96&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.content.stop_if_hdr_after" data-xocfg-key="xowa.addon.popups.content.stop_if_hdr_after" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="96">
-          </div><input type='hidden' id='xowa.addon.popups.content.stop_if_hdr_after__key_box' value='xowa.addon.popups.content.stop_if_hdr_after'> <input type='hidden' id='xowa.addon.popups.content.stop_if_hdr_after__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.content.stop_if_hdr_after__key_box' value='xowa.addon.popups.content.stop_if_hdr_after'> <input type='hidden' id='xowa.addon.popups.content.stop_if_hdr_after__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.content.stop_if_hdr_after_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.content.stop_if_hdr_after_help_msg' class='xohelp_msg'>
             <p>
@@ -503,19 +525,21 @@
           Window
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.show_delay")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.window.show_delay__name' class='xocfg_itm_name'>
             Number of milliseconds before showing popup
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.window.show_delay__undo' data-xocfg-type='int' class='xocfg_itm_delete'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.show_delay")' title="reset to &quot;600&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.window.show_delay" data-xocfg-key="xowa.addon.popups.window.show_delay" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="1000">
-          </div><input type='hidden' id='xowa.addon.popups.window.show_delay__key_box' value='xowa.addon.popups.window.show_delay'> <input type='hidden' id='xowa.addon.popups.window.show_delay__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.window.show_delay__key_box' value='xowa.addon.popups.window.show_delay'> <input type='hidden' id='xowa.addon.popups.window.show_delay__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.window.show_delay_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.window.show_delay_help_msg' class='xohelp_msg'>
             <p>
@@ -546,19 +570,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.hide_delay")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.window.hide_delay__name' class='xocfg_itm_name'>
             Number of milliseconds before hiding popup
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.window.hide_delay__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.hide_delay")' title="reset to &quot;400&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.window.hide_delay" data-xocfg-key="xowa.addon.popups.window.hide_delay" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="400">
-          </div><input type='hidden' id='xowa.addon.popups.window.hide_delay__key_box' value='xowa.addon.popups.window.hide_delay'> <input type='hidden' id='xowa.addon.popups.window.hide_delay__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.window.hide_delay__key_box' value='xowa.addon.popups.window.hide_delay'> <input type='hidden' id='xowa.addon.popups.window.hide_delay__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.window.hide_delay_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.window.hide_delay_help_msg' class='xohelp_msg'>
             <p>
@@ -575,19 +601,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.max_w")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.window.max_w__name' class='xocfg_itm_name'>
             Maximum width of window
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.window.max_w__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.max_w")' title="reset to &quot;-1&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.window.max_w" data-xocfg-key="xowa.addon.popups.window.max_w" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="-1">
-          </div><input type='hidden' id='xowa.addon.popups.window.max_w__key_box' value='xowa.addon.popups.window.max_w'> <input type='hidden' id='xowa.addon.popups.window.max_w__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.window.max_w__key_box' value='xowa.addon.popups.window.max_w'> <input type='hidden' id='xowa.addon.popups.window.max_w__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.window.max_w_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.window.max_w_help_msg' class='xohelp_msg'>
             <p>
@@ -601,19 +629,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.max_h")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.window.max_h__name' class='xocfg_itm_name'>
             Maximum height of window
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.window.max_h__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.max_h")' title="reset to &quot;-1&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.window.max_h" data-xocfg-key="xowa.addon.popups.window.max_h" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="-1">
-          </div><input type='hidden' id='xowa.addon.popups.window.max_h__key_box' value='xowa.addon.popups.window.max_h'> <input type='hidden' id='xowa.addon.popups.window.max_h__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.window.max_h__key_box' value='xowa.addon.popups.window.max_h'> <input type='hidden' id='xowa.addon.popups.window.max_h__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.window.max_h_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.window.max_h_help_msg' class='xohelp_msg'>
             <p>
@@ -627,19 +657,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.show_all_max_w")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.window.show_all_max_w__name' class='xocfg_itm_name'>
             Maximum width of window when "show all"
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.window.show_all_max_w__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.show_all_max_w")' title="reset to &quot;800&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.window.show_all_max_w" data-xocfg-key="xowa.addon.popups.window.show_all_max_w" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="800">
-          </div><input type='hidden' id='xowa.addon.popups.window.show_all_max_w__key_box' value='xowa.addon.popups.window.show_all_max_w'> <input type='hidden' id='xowa.addon.popups.window.show_all_max_w__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.window.show_all_max_w__key_box' value='xowa.addon.popups.window.show_all_max_w'> <input type='hidden' id='xowa.addon.popups.window.show_all_max_w__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.window.show_all_max_w_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.window.show_all_max_w_help_msg' class='xohelp_msg'>
             <p>
@@ -663,19 +695,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.bind_focus_blur")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.window.bind_focus_blur__name' class='xocfg_itm_name'>
             Show popup when link is focused
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.window.bind_focus_blur__undo' data-xocfg-type='bool' class='xocfg_itm_delete'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.bind_focus_blur")' title="reset to &quot;n&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.window.bind_focus_blur" data-xocfg-key="xowa.addon.popups.window.bind_focus_blur" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.addon.popups.window.bind_focus_blur__key_box' value='xowa.addon.popups.window.bind_focus_blur'> <input type='hidden' id='xowa.addon.popups.window.bind_focus_blur__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.window.bind_focus_blur__key_box' value='xowa.addon.popups.window.bind_focus_blur'> <input type='hidden' id='xowa.addon.popups.window.bind_focus_blur__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.window.bind_focus_blur_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.window.bind_focus_blur_help_msg' class='xohelp_msg'>
             <p>
@@ -704,19 +738,21 @@
           Performance
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.wtxt.tmpl_tkn_max")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.wtxt.tmpl_tkn_max__name' class='xocfg_itm_name'>
             Template token max
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.wtxt.tmpl_tkn_max__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.wtxt.tmpl_tkn_max")' title="reset to &quot;8192&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.wtxt.tmpl_tkn_max" data-xocfg-key="xowa.addon.popups.wtxt.tmpl_tkn_max" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="8192">
-          </div><input type='hidden' id='xowa.addon.popups.wtxt.tmpl_tkn_max__key_box' value='xowa.addon.popups.wtxt.tmpl_tkn_max'> <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_tkn_max__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_tkn_max__key_box' value='xowa.addon.popups.wtxt.tmpl_tkn_max'> <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_tkn_max__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.wtxt.tmpl_tkn_max_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.wtxt.tmpl_tkn_max_help_msg' class='xohelp_msg'>
             <p>
@@ -746,21 +782,23 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.wtxt.tmpl_keeplist")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.wtxt.tmpl_keeplist__name' class='xocfg_itm_name'>
             Template keeplist
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.wtxt.tmpl_keeplist__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.wtxt.tmpl_keeplist")' title="reset to &quot;en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
 <textarea id="xowa.addon.popups.wtxt.tmpl_keeplist" data-xocfg-key="xowa.addon.popups.wtxt.tmpl_keeplist" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
 en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|
 </textarea>
-          </div><input type='hidden' id='xowa.addon.popups.wtxt.tmpl_keeplist__key_box' value='xowa.addon.popups.wtxt.tmpl_keeplist'> <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_keeplist__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_keeplist__key_box' value='xowa.addon.popups.wtxt.tmpl_keeplist'> <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_keeplist__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.wtxt.tmpl_keeplist_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.wtxt.tmpl_keeplist_help_msg' class='xohelp_msg'>
             <p>
@@ -828,19 +866,21 @@ en.wikipedia.org|formatnum;age_in_days;as_of;gregorian_serial_date;currentminute
           Advanced
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.ns_allowed")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.ns_allowed__name' class='xocfg_itm_name'>
             Allowed namespaces
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.ns_allowed__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.ns_allowed")' title="reset to &quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.ns_allowed" data-xocfg-key="xowa.addon.popups.ns_allowed" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="">
-          </div><input type='hidden' id='xowa.addon.popups.ns_allowed__key_box' value='xowa.addon.popups.ns_allowed'> <input type='hidden' id='xowa.addon.popups.ns_allowed__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.ns_allowed__key_box' value='xowa.addon.popups.ns_allowed'> <input type='hidden' id='xowa.addon.popups.ns_allowed__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.ns_allowed_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.ns_allowed_help_msg' class='xohelp_msg'>
             <p>
@@ -923,19 +963,21 @@ en.wikipedia.org|formatnum;age_in_days;as_of;gregorian_serial_date;currentminute
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.xnde_ignore_ids")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.content.xnde_ignore_ids__name' class='xocfg_itm_name'>
             Ignore HTML elements with the following ids
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.content.xnde_ignore_ids__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.xnde_ignore_ids")' title="reset to &quot;coordinates&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.content.xnde_ignore_ids" data-xocfg-key="xowa.addon.popups.content.xnde_ignore_ids" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="coordinates">
-          </div><input type='hidden' id='xowa.addon.popups.content.xnde_ignore_ids__key_box' value='xowa.addon.popups.content.xnde_ignore_ids'> <input type='hidden' id='xowa.addon.popups.content.xnde_ignore_ids__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.content.xnde_ignore_ids__key_box' value='xowa.addon.popups.content.xnde_ignore_ids'> <input type='hidden' id='xowa.addon.popups.content.xnde_ignore_ids__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.content.xnde_ignore_ids_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.content.xnde_ignore_ids_help_msg' class='xohelp_msg'>
             <p>
@@ -971,19 +1013,21 @@ en.wikipedia.org|formatnum;age_in_days;as_of;gregorian_serial_date;currentminute
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.scanner.scan_len")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.scanner.scan_len__name' class='xocfg_itm_name'>
             Number of bytes to read each pass
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.scanner.scan_len__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.scanner.scan_len")' title="reset to &quot;1024&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.scanner.scan_len" data-xocfg-key="xowa.addon.popups.scanner.scan_len" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="1024">
-          </div><input type='hidden' id='xowa.addon.popups.scanner.scan_len__key_box' value='xowa.addon.popups.scanner.scan_len'> <input type='hidden' id='xowa.addon.popups.scanner.scan_len__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.scanner.scan_len__key_box' value='xowa.addon.popups.scanner.scan_len'> <input type='hidden' id='xowa.addon.popups.scanner.scan_len__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.scanner.scan_len_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.scanner.scan_len_help_msg' class='xohelp_msg'>
             <p>
@@ -1001,19 +1045,21 @@ en.wikipedia.org|formatnum;age_in_days;as_of;gregorian_serial_date;currentminute
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.scanner.scan_max")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.popups.scanner.scan_max__name' class='xocfg_itm_name'>
             Maximum number of bytes to read
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.popups.scanner.scan_max__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.scanner.scan_max")' title="reset to &quot;32768&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.popups.scanner.scan_max" data-xocfg-key="xowa.addon.popups.scanner.scan_max" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="32768">
-          </div><input type='hidden' id='xowa.addon.popups.scanner.scan_max__key_box' value='xowa.addon.popups.scanner.scan_max'> <input type='hidden' id='xowa.addon.popups.scanner.scan_max__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.popups.scanner.scan_max__key_box' value='xowa.addon.popups.scanner.scan_max'> <input type='hidden' id='xowa.addon.popups.scanner.scan_max__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.popups.scanner.scan_max_help_div' class='xohelp_div'>
           <div id='xowa.addon.popups.scanner.scan_max_help_msg' class='xohelp_msg'>
             <p>

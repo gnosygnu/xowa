@@ -18,10 +18,13 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <div id='xocfg_body'>
+      <!-- TEXT:err_msg -->
       <div id='xocfg_err'>
       </div>
       <div>
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+        <!-- BTN:info -->
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
+         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
           <option value='xowa.app.security'>
             App - Security
           </option>
@@ -45,6 +48,9 @@
           </option>
           <option value='xowa.gui.shortcuts'>
             Gui - Shortcuts
+          </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Nightmode
           </option>
           <option value='xowa.wiki.hdumps'>
             Wiki - HTML Databases
@@ -85,6 +91,9 @@
           <option value='xowa.addon.search'>
             Addon - Search
           </option>
+          <option value='xowa.addon.fulltext_search'>
+            Addon - Full-text search
+          </option>
           <option value='xowa.addon.category'>
             Addon - Category
           </option>
@@ -109,15 +118,14 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Night mode
-          </option>
-          <option value='xowa.addon.search.fulltext'>
-            Addon - Full text search
-          </option>
-        </select>
+        </select> <!-- LINK:cfg_link -->
+         
+        <div style='float:right;margin:2px 7px;'>
+          <a id='options_lnk'>options link</a>
+        </div>
       </div>
       <div id='cfg_grps'>
+        <!-- TEXT:page_help -->
         <div>
           <p id='page_help_para'>
           </p>
@@ -129,19 +137,21 @@
           Basic
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.dansguardian.enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.dansguardian.enabled__name' class='xocfg_itm_name'>
             Enabled
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.dansguardian.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.dansguardian.enabled")' title="reset to &quot;n&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.bldr.dansguardian.enabled" data-xocfg-key="xowa.bldr.dansguardian.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.bldr.dansguardian.enabled__key_box' value='xowa.bldr.dansguardian.enabled'> <input type='hidden' id='xowa.bldr.dansguardian.enabled__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.dansguardian.enabled__key_box' value='xowa.bldr.dansguardian.enabled'> <input type='hidden' id='xowa.bldr.dansguardian.enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.dansguardian.enabled_help_div' class='xohelp_div'>
           <div id='xowa.bldr.dansguardian.enabled_help_msg' class='xohelp_msg'>
             <p>
@@ -158,19 +168,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.dansguardian.root_dir")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.dansguardian.root_dir__name' class='xocfg_itm_name'>
             Root directory
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.dansguardian.root_dir__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.dansguardian.root_dir")' title="reset to &quot;C:\xowa\bin\any\xowa\cfg\bldr\filter\&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.bldr.dansguardian.root_dir" data-xocfg-key="xowa.bldr.dansguardian.root_dir" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="C:\xowa\bin\any\xowa\cfg\bldr\filter\">
-          </div><input type='hidden' id='xowa.bldr.dansguardian.root_dir__key_box' value='xowa.bldr.dansguardian.root_dir'> <input type='hidden' id='xowa.bldr.dansguardian.root_dir__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.dansguardian.root_dir__key_box' value='xowa.bldr.dansguardian.root_dir'> <input type='hidden' id='xowa.bldr.dansguardian.root_dir__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.dansguardian.root_dir_help_div' class='xohelp_div'>
           <div id='xowa.bldr.dansguardian.root_dir_help_msg' class='xohelp_msg'>
             <p>
@@ -182,19 +194,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.dansguardian.score_init")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.dansguardian.score_init__name' class='xocfg_itm_name'>
             Initial page score
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.dansguardian.score_init__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.dansguardian.score_init")' title="reset to &quot;0&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.bldr.dansguardian.score_init" data-xocfg-key="xowa.bldr.dansguardian.score_init" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="0">
-          </div><input type='hidden' id='xowa.bldr.dansguardian.score_init__key_box' value='xowa.bldr.dansguardian.score_init'> <input type='hidden' id='xowa.bldr.dansguardian.score_init__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.dansguardian.score_init__key_box' value='xowa.bldr.dansguardian.score_init'> <input type='hidden' id='xowa.bldr.dansguardian.score_init__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.dansguardian.score_init_help_div' class='xohelp_div'>
           <div id='xowa.bldr.dansguardian.score_init_help_msg' class='xohelp_msg'>
             <p>
@@ -211,19 +225,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.dansguardian.score_fail")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.dansguardian.score_fail__name' class='xocfg_itm_name'>
             Filtered page score
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.dansguardian.score_fail__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.dansguardian.score_fail")' title="reset to &quot;0&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.bldr.dansguardian.score_fail" data-xocfg-key="xowa.bldr.dansguardian.score_fail" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="0">
-          </div><input type='hidden' id='xowa.bldr.dansguardian.score_fail__key_box' value='xowa.bldr.dansguardian.score_fail'> <input type='hidden' id='xowa.bldr.dansguardian.score_fail__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.dansguardian.score_fail__key_box' value='xowa.bldr.dansguardian.score_fail'> <input type='hidden' id='xowa.bldr.dansguardian.score_fail__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.dansguardian.score_fail_help_div' class='xohelp_div'>
           <div id='xowa.bldr.dansguardian.score_fail_help_msg' class='xohelp_msg'>
             <p>
@@ -237,19 +253,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.dansguardian.case_match")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.dansguardian.case_match__name' class='xocfg_itm_name'>
             Case sensitive
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.dansguardian.case_match__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.dansguardian.case_match")' title="reset to &quot;n&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.bldr.dansguardian.case_match" data-xocfg-key="xowa.bldr.dansguardian.case_match" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
-          </div><input type='hidden' id='xowa.bldr.dansguardian.case_match__key_box' value='xowa.bldr.dansguardian.case_match'> <input type='hidden' id='xowa.bldr.dansguardian.case_match__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.dansguardian.case_match__key_box' value='xowa.bldr.dansguardian.case_match'> <input type='hidden' id='xowa.bldr.dansguardian.case_match__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.dansguardian.case_match_help_div' class='xohelp_div'>
           <div id='xowa.bldr.dansguardian.case_match_help_msg' class='xohelp_msg'>
             <p>
@@ -266,19 +284,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.dansguardian.log_enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.dansguardian.log_enabled__name' class='xocfg_itm_name'>
             Log enabled
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.dansguardian.log_enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.dansguardian.log_enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.bldr.dansguardian.log_enabled" data-xocfg-key="xowa.bldr.dansguardian.log_enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.bldr.dansguardian.log_enabled__key_box' value='xowa.bldr.dansguardian.log_enabled'> <input type='hidden' id='xowa.bldr.dansguardian.log_enabled__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.dansguardian.log_enabled__key_box' value='xowa.bldr.dansguardian.log_enabled'> <input type='hidden' id='xowa.bldr.dansguardian.log_enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.dansguardian.log_enabled_help_div' class='xohelp_div'>
           <div id='xowa.bldr.dansguardian.log_enabled_help_msg' class='xohelp_msg'>
             <p>

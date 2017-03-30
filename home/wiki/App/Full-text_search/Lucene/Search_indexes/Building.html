@@ -2,7 +2,7 @@
 <html dir="ltr">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Change log/v4.4.0.1703 - XOWA</title>
+  <title>App/Full-text search/Lucene/Search indexes/Building - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   
@@ -11,189 +11,77 @@
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>Change log/v4.4.0.1703</span></h1>
+  <h1 id="firstHeading" class="firstHeading"><span>App/Full-text search/Lucene/Search indexes/Building</span></h1>
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
+    <p>
+      XOWA can generate full-text search indexes for existing Download Central wikis
+    </p>
     <h2>
-      <span class="mw-headline" id="v4.4.0.1703_.282017-03-06.29">v4.4.0.1703 (2017-03-06)</span>
-    </h2>
-    <h3>
-      <span class="mw-headline" id="Wiki">Wiki</span>
-    </h3>
-    <ul>
-      <li>
-        Package: Publish 2017-02 German Wikipedia.
-      </li>
-    </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="http://xowa.org/home/wiki/Wiki_setup/German_wikis.html" id="xolnki_2" title="Wiki setup/German wikis">Wiki_setup/German_wikis</a>
-      </dd>
-    </dl>
-    <ul>
-      <li>
-        Package: Publish 2017-02 French Wikipedia.
-      </li>
-    </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="http://xowa.org/home/wiki/Wiki_setup/French_wikis.html" id="xolnki_3" title="Wiki setup/French wikis">Wiki_setup/French_wikis</a>
-      </dd>
-    </dl>
-    <h2>
-      <span class="mw-headline" id="PC">PC</span>
+      <span class="mw-headline" id="Purpose">Purpose</span>
     </h2>
     <p>
-      <b>major</b>
+      There are two reasons why one would want to build their own search index:
     </p>
     <ul>
       <li>
-        Gui: Add night mode. {assisted by anonymous4; requested by Lasairiona}
+        <b>Old Download Central wiki</b>: Wikis built before 2017-04 will not have search indexes. Rather than wait for a new version, or download a new one, you can build one for the existing wiki
       </li>
-    </ul>
-    <ul>
       <li>
-        Personal_wikis: Add page backup feature. {suggested by Lasairiona}
+        <b>Building a custom index</b>: Download Central imposes 2 restrictions to keep the disk usage low for search indexes: You may want to build a custom index in order to work around the following two limitations: 
+        <ul>
+          <li>
+            <b>Main namespace only</b>: The Project, Portal, Category and other namespaces are not indexed. For example, some Wikisources have an Author and an Index index.
+          </li>
+          <li>
+            <b>Proximity queries are not supported</b>: Lucene supports proximity queries such as <code>"word1 word2"~8</code> which means find pages where word1 and word2 are within 8 words of each other. This support can be added, but it uses significantly more space. For English Wikipedia, the index size can go from 9 GB to 40 GB.
+          </li>
+        </ul>
       </li>
     </ul>
-    <ul>
-      <li>
-        Full-text search: Add preliminary implementation of full-text search for personal wikis.
-      </li>
-    </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="http://xowa.org/home/wiki/Special:XowaSearch.html" id="xolnki_4" title="Special:XowaSearch" class="xowa-visited">Special:XowaSearch</a>
-      </dd>
-    </dl>
-    <ul>
-      <li>
-        XULRunner: Fix bad layout on French Wikipedia main page.
-      </li>
-    </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Resolved by</span>: Upgrade xulrunner from v24 to v31.
-      </dd>
-      <dd>
-        <span style='font-variant:small-caps'>Example</span>: flex:.35em.
-      </dd>
-    </dl>
+    <h2>
+      <span class="mw-headline" id="Requirements">Requirements</span>
+    </h2>
     <p>
-      <b>minor</b>
+      Indexes can only be built for wikis downloaded from Download Central.
     </p>
-    <ul>
-      <li>
-        Wikibase: Fix multiple "unknown datavalue type" on many fr.w pages.
-      </li>
-    </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Message</span>: <code>Erreur de script: =Module:Wikidata:522 unknown datavalue type. Erreur de script: =Module:Coordinates:808 unknown datavalue type.</code>
-      </dd>
-      <dd>
-        <span style='font-variant:small-caps'>Resolved by</span>: Use scribunto key name for datatypes.
-      </dd>
-      <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="https://fr.wikipedia.org/wiki/Louis_Malle" rel="nofollow" class="external free">https://fr.wikipedia.org/wiki/Louis_Malle</a> <a href="https://fr.wikipedia.org/wiki/Toulon" rel="nofollow" class="external free">https://fr.wikipedia.org/wiki/Toulon</a>
-      </dd>
-    </dl>
-    <ul>
-      <li>
-        Personal_wikis: Update modified date on page save. {detected by Lasairiona}
-      </li>
-    </ul>
-    <ul>
-      <li>
-        Personal_wikis: Show personal wikis in left sidebar. {detected by Lasairiona}
-      </li>
-    </ul>
-    <ul>
-      <li>
-        Personal_wikis: Add timestamp to quick save status message.
-      </li>
-    </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Example</span>: saved Main Page (01:02:03.456).
-      </dd>
-    </dl>
-    <ul>
-      <li>
-        Personal_wikis: Speed up creation of wikis.
-      </li>
-    </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Resolved by</span>: Do not download css when creating wiki.
-      </dd>
-    </dl>
-    <ul>
-      <li>
-        Personal_wikis: Speed up loading of wikis.
-      </li>
-    </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Resolved by</span>: Do not load every personal wiki on startup.
-      </dd>
-    </dl>
-    <ul>
-      <li>
-        App: Speed up loading of app. {detected by Lasairiona}
-      </li>
-    </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Resolved by</span>: Remove initialMemorySize of 256 MB.
-      </dd>
-    </dl>
-    <ul>
-      <li>
-        Command-line: Support ?curid for command-line calls. {detected by shopuz}
-      </li>
-    </ul>
-    <ul>
-      <li>
-        Log: Remove "current" directory; always use timestamp directory. {detected by anonymous}
-      </li>
-    </ul>
     <p>
-      <b>trivial</b>
+      If your wiki isn't yet on Download Central, please contact me through <a href="http://xowa.org/home/wiki/Help/Feedback.html" id="xolnki_2" title="Help/Feedback" class="xowa-visited">Help/Feedback</a> and I'll add your wiki to the queue.
     </p>
+    <h2>
+      <span class="mw-headline" id="Process">Process</span>
+    </h2>
     <ul>
       <li>
-        Search: Clear cache after pages are reindexed.
+        Go to <a href="http://xowa.org/home/wiki/Special:XowaSearchBuilder.html" id="xolnki_3" title="Special:XowaSearchBuilder">Special:XowaSearchBuilder</a>
       </li>
-    </ul>
-    <ul>
       <li>
-        App_update: Redownload update_db if download fails.
+        Choose the domain for your wiki. For example, <code>en.wiktionary.org</code>
       </li>
-    </ul>
-    <ul>
       <li>
-        App: Fix rare crash to desktop.
+        Choose namespaces for your wiki. For example, <code>0,4,14</code>. For more info, see <a href="https://en.wikipedia.org/wiki/Wikipedia:Namespace" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Wikipedia:Namespace</a>
       </li>
-    </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Resolved by</span>: Call toString on Error, not getMessage.
-      </dd>
-    </dl>
-    <ul>
       <li>
-        Log: Delete old Download Central logs.
+        Choose index options. 
+        <ul>
+          <li>
+            <b>Documents</b>: This index uses the least amount of space. However, it's not as accurate as "Documents / Frequencies"
+          </li>
+          <li>
+            <b>Documents / Frequencies</b>: This is the default index option used for all of XOWA wikis. It is slightly more accurate, as it tracks the number of words page. For example, if you're searching for "earth" and Page1 has "earth" 1 time, Page2 has "earth" 10 times, and Page3 has "earth" 20 times, then "Documents / Frequencies" returns the pages in the following order: Page3, Page2, Page1. "Documents" would list them in a random order.
+          </li>
+          <li>
+            <b>Documents / Frequencies / Positions</b>: This index option allows proximity queries such as <code>"word1 word2"~8</code>. However, it can use 4 to 5 times as much space
+          </li>
+          <li>
+            <b>Documents / Frequencies / Positions / Offsets</b>: This index option is primarily used for Lucene highlighting. XOWA uses its own highlighter in order to save space. At the moment, there's no reason to choose this option, but it may be useful to some power Lucene users.
+          </li>
+        </ul>
       </li>
     </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Example</span>: /xowa/user/anonymous/app/tmp/xolog.
-      </dd>
-    </dl>
   
     </div>
   </div>

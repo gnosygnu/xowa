@@ -18,10 +18,13 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <div id='xocfg_body'>
+      <!-- TEXT:err_msg -->
       <div id='xocfg_err'>
       </div>
       <div>
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+        <!-- BTN:info -->
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
+         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
           <option value='xowa.app.security'>
             App - Security
           </option>
@@ -45,6 +48,9 @@
           </option>
           <option value='xowa.gui.shortcuts'>
             Gui - Shortcuts
+          </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Nightmode
           </option>
           <option value='xowa.wiki.hdumps'>
             Wiki - HTML Databases
@@ -85,6 +91,9 @@
           <option value='xowa.addon.search'>
             Addon - Search
           </option>
+          <option value='xowa.addon.fulltext_search'>
+            Addon - Full-text search
+          </option>
           <option value='xowa.addon.category'>
             Addon - Category
           </option>
@@ -109,15 +118,14 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Night mode
-          </option>
-          <option value='xowa.addon.search.fulltext'>
-            Addon - Full text search
-          </option>
-        </select>
+        </select> <!-- LINK:cfg_link -->
+         
+        <div style='float:right;margin:2px 7px;'>
+          <a id='options_lnk'>options link</a>
+        </div>
       </div>
       <div id='cfg_grps'>
+        <!-- TEXT:page_help -->
         <div>
           <p id='page_help_para'>
           </p>
@@ -126,19 +134,21 @@
           Math
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.math.enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.math.enabled__name' class='xocfg_itm_name'>
             Enabled
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.math.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.math.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.math.enabled" data-xocfg-key="xowa.addon.math.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.addon.math.enabled__key_box' value='xowa.addon.math.enabled'> <input type='hidden' id='xowa.addon.math.enabled__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.math.enabled__key_box' value='xowa.addon.math.enabled'> <input type='hidden' id='xowa.addon.math.enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.math.enabled_help_div' class='xohelp_div'>
           <div id='xowa.addon.math.enabled_help_msg' class='xohelp_msg'>
             <p>
@@ -155,15 +165,16 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.math.renderer")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.math.renderer__name' class='xocfg_itm_name'>
             Renderer
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.math.renderer__undo' data-xocfg-type='list:xowa.addon.math.renderer' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.math.renderer")' title="reset to &quot;mathjax&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <select id="xowa.addon.math.renderer" data-xocfg-key="xowa.addon.math.renderer" data-xocfg-type="list:xowa.addon.math.renderer" accesskey="d" class="xocfg_data__list" size="2">
               <option value="mathjax" selected="selected">
@@ -173,8 +184,9 @@
                 LaTeX
               </option>
             </select>
-          </div><input type='hidden' id='xowa.addon.math.renderer__key_box' value='xowa.addon.math.renderer'> <input type='hidden' id='xowa.addon.math.renderer__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.math.renderer__key_box' value='xowa.addon.math.renderer'> <input type='hidden' id='xowa.addon.math.renderer__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.math.renderer_help_div' class='xohelp_div'>
           <div id='xowa.addon.math.renderer_help_msg' class='xohelp_msg'>
             <p>
@@ -194,20 +206,22 @@
           LaTeX
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.math.apps.tex_to_dvi")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.math.apps.tex_to_dvi__name' class='xocfg_itm_name'>
             Tex to dvi
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.math.apps.tex_to_dvi__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.math.apps.tex_to_dvi")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}miktex\texmfs\install\miktex\bin\latex|-quiet -output-directory=&quot;~{temp_dir}&quot; -job-name=xowa_math_temp &quot;~{tex_file}&quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.math.apps.tex_to_dvi-exe" data-xocfg-key="xowa.addon.math.apps.tex_to_dvi" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}miktex\texmfs\install\miktex\bin\latex"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.math.apps.tex_to_dvi-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.math.apps.tex_to_dvi-arg" data-xocfg-key="xowa.addon.math.apps.tex_to_dvi" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="-quiet -output-directory=&quot;~{temp_dir}&quot; -job-name=xowa_math_temp &quot;~{tex_file}&quot;">
-          </div><input type='hidden' id='xowa.addon.math.apps.tex_to_dvi__key_box' value='xowa.addon.math.apps.tex_to_dvi'> <input type='hidden' id='xowa.addon.math.apps.tex_to_dvi__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.math.apps.tex_to_dvi__key_box' value='xowa.addon.math.apps.tex_to_dvi'> <input type='hidden' id='xowa.addon.math.apps.tex_to_dvi__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.math.apps.tex_to_dvi_help_div' class='xohelp_div'>
           <div id='xowa.addon.math.apps.tex_to_dvi_help_msg' class='xohelp_msg'>
             <p>
@@ -216,20 +230,22 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.math.apps.dvi_to_png")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.math.apps.dvi_to_png__name' class='xocfg_itm_name'>
             Dvi to png
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.math.apps.dvi_to_png__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.math.apps.dvi_to_png")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}miktex\texmfs\install\miktex\bin\dvipng|&quot;~{dvi_file}&quot; -o &quot;~{png_file}&quot; -q* -T tight -bg Transparent&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.math.apps.dvi_to_png-exe" data-xocfg-key="xowa.addon.math.apps.dvi_to_png" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}miktex\texmfs\install\miktex\bin\dvipng"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.math.apps.dvi_to_png-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.math.apps.dvi_to_png-arg" data-xocfg-key="xowa.addon.math.apps.dvi_to_png" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="&quot;~{dvi_file}&quot; -o &quot;~{png_file}&quot; -q* -T tight -bg Transparent">
-          </div><input type='hidden' id='xowa.addon.math.apps.dvi_to_png__key_box' value='xowa.addon.math.apps.dvi_to_png'> <input type='hidden' id='xowa.addon.math.apps.dvi_to_png__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.math.apps.dvi_to_png__key_box' value='xowa.addon.math.apps.dvi_to_png'> <input type='hidden' id='xowa.addon.math.apps.dvi_to_png__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.math.apps.dvi_to_png_help_div' class='xohelp_div'>
           <div id='xowa.addon.math.apps.dvi_to_png_help_msg' class='xohelp_msg'>
             <p>

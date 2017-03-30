@@ -18,10 +18,13 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <div id='xocfg_body'>
+      <!-- TEXT:err_msg -->
       <div id='xocfg_err'>
       </div>
       <div>
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+        <!-- BTN:info -->
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
+         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
           <option value='xowa.app.security'>
             App - Security
           </option>
@@ -45,6 +48,9 @@
           </option>
           <option value='xowa.gui.shortcuts'>
             Gui - Shortcuts
+          </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Nightmode
           </option>
           <option value='xowa.wiki.hdumps'>
             Wiki - HTML Databases
@@ -85,6 +91,9 @@
           <option value='xowa.addon.search'>
             Addon - Search
           </option>
+          <option value='xowa.addon.fulltext_search'>
+            Addon - Full-text search
+          </option>
           <option value='xowa.addon.category'>
             Addon - Category
           </option>
@@ -109,15 +118,14 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Night mode
-          </option>
-          <option value='xowa.addon.search.fulltext'>
-            Addon - Full text search
-          </option>
-        </select>
+        </select> <!-- LINK:cfg_link -->
+         
+        <div style='float:right;margin:2px 7px;'>
+          <a id='options_lnk'>options link</a>
+        </div>
       </div>
       <div id='cfg_grps'>
+        <!-- TEXT:page_help -->
         <div>
           <p id='page_help_para'>
           </p>
@@ -126,19 +134,21 @@
           General
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.scribunto.enabled__name' class='xocfg_itm_name'>
             Enabled
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.scribunto.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.scribunto.enabled" data-xocfg-key="xowa.addon.scribunto.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.addon.scribunto.enabled__key_box' value='xowa.addon.scribunto.enabled'> <input type='hidden' id='xowa.addon.scribunto.enabled__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.scribunto.enabled__key_box' value='xowa.addon.scribunto.enabled'> <input type='hidden' id='xowa.addon.scribunto.enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.scribunto.enabled_help_div' class='xohelp_div'>
           <div id='xowa.addon.scribunto.enabled_help_msg' class='xohelp_msg'>
             <p>
@@ -155,15 +165,16 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.engine")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.scribunto.engine__name' class='xocfg_itm_name'>
             Lua engine
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.scribunto.engine__undo' data-xocfg-type='list:xowa.addon.scribunto.engine' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.engine")' title="reset to &quot;luaj&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <select id="xowa.addon.scribunto.engine" data-xocfg-key="xowa.addon.scribunto.engine" data-xocfg-type="list:xowa.addon.scribunto.engine" accesskey="d" class="xocfg_data__list" size="2">
               <option value="luaj" selected="selected">
@@ -173,8 +184,9 @@
                 lua
               </option>
             </select>
-          </div><input type='hidden' id='xowa.addon.scribunto.engine__key_box' value='xowa.addon.scribunto.engine'> <input type='hidden' id='xowa.addon.scribunto.engine__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.scribunto.engine__key_box' value='xowa.addon.scribunto.engine'> <input type='hidden' id='xowa.addon.scribunto.engine__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.scribunto.engine_help_div' class='xohelp_div'>
           <div id='xowa.addon.scribunto.engine_help_msg' class='xohelp_msg'>
             <p>
@@ -196,7 +208,7 @@
                 <b>executable permissions</b>: Linux / Mac OS X users may need to grant execute permission to the Lua binary. To ensure proper setup, please do the following: 
                 <ul>
                   <li>
-                    Open <a tabindex="-1" href="/wiki/Diagnostics/Scribunto/All" id="xolnki_30" title="Diagnostics/Scribunto/All" class="xowa-visited">Diagnostics/Scribunto/All</a>
+                    Open <a tabindex="-1" href="/wiki/Diagnostics/Scribunto/All" id="xolnki_30" title="Diagnostics/Scribunto/All">Diagnostics/Scribunto/All</a>
                   </li>
                   <li>
                     If the page fails, then see <a tabindex="-1" href="/wiki/App/Xtn/Mediawiki/Scribunto#Permissions" id="xolnki_31" title="App/Xtn/Mediawiki/Scribunto">App/Xtn/Mediawiki/Scribunto#Permissions</a>
@@ -221,20 +233,22 @@
           Lua options
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.cmd")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.scribunto.lua.cmd__name' class='xocfg_itm_name'>
             Lua path
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.scribunto.lua.cmd__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.cmd")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}lua\lua5.1.exe|&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.scribunto.lua.cmd-exe" data-xocfg-key="xowa.addon.scribunto.lua.cmd" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}lua\lua5.1.exe"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.scribunto.lua.cmd-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.scribunto.lua.cmd-arg" data-xocfg-key="xowa.addon.scribunto.lua.cmd" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="">
-          </div><input type='hidden' id='xowa.addon.scribunto.lua.cmd__key_box' value='xowa.addon.scribunto.lua.cmd'> <input type='hidden' id='xowa.addon.scribunto.lua.cmd__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.scribunto.lua.cmd__key_box' value='xowa.addon.scribunto.lua.cmd'> <input type='hidden' id='xowa.addon.scribunto.lua.cmd__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.scribunto.lua.cmd_help_div' class='xohelp_div'>
           <div id='xowa.addon.scribunto.lua.cmd_help_msg' class='xohelp_msg'>
             <p>
@@ -243,19 +257,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.timeout")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.scribunto.lua.timeout__name' class='xocfg_itm_name'>
             Lua timeout
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.scribunto.lua.timeout__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.timeout")' title="reset to &quot;4000&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.scribunto.lua.timeout" data-xocfg-key="xowa.addon.scribunto.lua.timeout" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="4000">
-          </div><input type='hidden' id='xowa.addon.scribunto.lua.timeout__key_box' value='xowa.addon.scribunto.lua.timeout'> <input type='hidden' id='xowa.addon.scribunto.lua.timeout__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.scribunto.lua.timeout__key_box' value='xowa.addon.scribunto.lua.timeout'> <input type='hidden' id='xowa.addon.scribunto.lua.timeout__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.scribunto.lua.timeout_help_div' class='xohelp_div'>
           <div id='xowa.addon.scribunto.lua.timeout_help_msg' class='xohelp_msg'>
             <p>
@@ -264,19 +280,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.timeout_polling")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.scribunto.lua.timeout_polling__name' class='xocfg_itm_name'>
             Lua timeout polling
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.scribunto.lua.timeout_polling__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.timeout_polling")' title="reset to &quot;1&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.scribunto.lua.timeout_polling" data-xocfg-key="xowa.addon.scribunto.lua.timeout_polling" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="1">
-          </div><input type='hidden' id='xowa.addon.scribunto.lua.timeout_polling__key_box' value='xowa.addon.scribunto.lua.timeout_polling'> <input type='hidden' id='xowa.addon.scribunto.lua.timeout_polling__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.scribunto.lua.timeout_polling__key_box' value='xowa.addon.scribunto.lua.timeout_polling'> <input type='hidden' id='xowa.addon.scribunto.lua.timeout_polling__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.scribunto.lua.timeout_polling_help_div' class='xohelp_div'>
           <div id='xowa.addon.scribunto.lua.timeout_polling_help_msg' class='xohelp_msg'>
             <p>
@@ -296,19 +314,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.timeout_busy_wait")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.scribunto.lua.timeout_busy_wait__name' class='xocfg_itm_name'>
             Lua timeout busy wait
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.scribunto.lua.timeout_busy_wait__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.timeout_busy_wait")' title="reset to &quot;250&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.scribunto.lua.timeout_busy_wait" data-xocfg-key="xowa.addon.scribunto.lua.timeout_busy_wait" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="250">
-          </div><input type='hidden' id='xowa.addon.scribunto.lua.timeout_busy_wait__key_box' value='xowa.addon.scribunto.lua.timeout_busy_wait'> <input type='hidden' id='xowa.addon.scribunto.lua.timeout_busy_wait__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.scribunto.lua.timeout_busy_wait__key_box' value='xowa.addon.scribunto.lua.timeout_busy_wait'> <input type='hidden' id='xowa.addon.scribunto.lua.timeout_busy_wait__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.scribunto.lua.timeout_busy_wait_help_div' class='xohelp_div'>
           <div id='xowa.addon.scribunto.lua.timeout_busy_wait_help_msg' class='xohelp_msg'>
             <p>

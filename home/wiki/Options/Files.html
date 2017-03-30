@@ -18,10 +18,13 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <div id='xocfg_body'>
+      <!-- TEXT:err_msg -->
       <div id='xocfg_err'>
       </div>
       <div>
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+        <!-- BTN:info -->
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
+         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
           <option value='xowa.app.security'>
             App - Security
           </option>
@@ -45,6 +48,9 @@
           </option>
           <option value='xowa.gui.shortcuts'>
             Gui - Shortcuts
+          </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Nightmode
           </option>
           <option value='xowa.wiki.hdumps'>
             Wiki - HTML Databases
@@ -85,6 +91,9 @@
           <option value='xowa.addon.search'>
             Addon - Search
           </option>
+          <option value='xowa.addon.fulltext_search'>
+            Addon - Full-text search
+          </option>
           <option value='xowa.addon.category'>
             Addon - Category
           </option>
@@ -109,15 +118,14 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Night mode
-          </option>
-          <option value='xowa.addon.search.fulltext'>
-            Addon - Full text search
-          </option>
-        </select>
+        </select> <!-- LINK:cfg_link -->
+         
+        <div style='float:right;margin:2px 7px;'>
+          <a id='options_lnk'>options link</a>
+        </div>
       </div>
       <div id='cfg_grps'>
+        <!-- TEXT:page_help -->
         <div>
           <p id='page_help_para'>
           </p>
@@ -126,19 +134,21 @@
           Basic
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.retrieval_enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.retrieval_enabled__name' class='xocfg_itm_name'>
             Retrieval enabled
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.retrieval_enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.retrieval_enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.files.retrieval_enabled" data-xocfg-key="xowa.files.retrieval_enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.files.retrieval_enabled__key_box' value='xowa.files.retrieval_enabled'> <input type='hidden' id='xowa.files.retrieval_enabled__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.retrieval_enabled__key_box' value='xowa.files.retrieval_enabled'> <input type='hidden' id='xowa.files.retrieval_enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.retrieval_enabled_help_div' class='xohelp_div'>
           <div id='xowa.files.retrieval_enabled_help_msg' class='xohelp_msg'>
             <p>
@@ -166,19 +176,21 @@
           Cache
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.fsys_size_min")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.cache.fsys_size_min__name' class='xocfg_itm_name'>
             Minimum disk space used
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.cache.fsys_size_min__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.fsys_size_min")' title="reset to &quot;75&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.files.cache.fsys_size_min" data-xocfg-key="xowa.files.cache.fsys_size_min" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="75">
-          </div><input type='hidden' id='xowa.files.cache.fsys_size_min__key_box' value='xowa.files.cache.fsys_size_min'> <input type='hidden' id='xowa.files.cache.fsys_size_min__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.cache.fsys_size_min__key_box' value='xowa.files.cache.fsys_size_min'> <input type='hidden' id='xowa.files.cache.fsys_size_min__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.cache.fsys_size_min_help_div' class='xohelp_div'>
           <div id='xowa.files.cache.fsys_size_min_help_msg' class='xohelp_msg'>
             <p>
@@ -213,19 +225,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.fsys_size_max")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.cache.fsys_size_max__name' class='xocfg_itm_name'>
             Maximum disk space used
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.cache.fsys_size_max__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.fsys_size_max")' title="reset to &quot;100&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.files.cache.fsys_size_max" data-xocfg-key="xowa.files.cache.fsys_size_max" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="100">
-          </div><input type='hidden' id='xowa.files.cache.fsys_size_max__key_box' value='xowa.files.cache.fsys_size_max'> <input type='hidden' id='xowa.files.cache.fsys_size_max__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.cache.fsys_size_max__key_box' value='xowa.files.cache.fsys_size_max'> <input type='hidden' id='xowa.files.cache.fsys_size_max__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.cache.fsys_size_max_help_div' class='xohelp_div'>
           <div id='xowa.files.cache.fsys_size_max_help_msg' class='xohelp_msg'>
             <p>
@@ -234,19 +248,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.reduce_to_min")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.cache.reduce_to_min__name' class='xocfg_itm_name'>
             Reduce cache to min
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.cache.reduce_to_min__undo' data-xocfg-type='btn' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.reduce_to_min")' title="reset to &quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <button id="xowa.files.cache.reduce_to_min" data-xocfg-key="xowa.files.cache.reduce_to_min" data-xocfg-type="btn" class="xocfg_data__btn">Reduce cache to min</button>
-          </div><input type='hidden' id='xowa.files.cache.reduce_to_min__key_box' value='xowa.files.cache.reduce_to_min'> <input type='hidden' id='xowa.files.cache.reduce_to_min__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.cache.reduce_to_min__key_box' value='xowa.files.cache.reduce_to_min'> <input type='hidden' id='xowa.files.cache.reduce_to_min__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.cache.reduce_to_min_help_div' class='xohelp_div'>
           <div id='xowa.files.cache.reduce_to_min_help_msg' class='xohelp_msg'>
             <p>
@@ -255,19 +271,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.clear")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.cache.clear__name' class='xocfg_itm_name'>
             Clear cache
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.cache.clear__undo' data-xocfg-type='btn' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.clear")' title="reset to &quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <button id="xowa.files.cache.clear" data-xocfg-key="xowa.files.cache.clear" data-xocfg-type="btn" class="xocfg_data__btn">Clear cache</button>
-          </div><input type='hidden' id='xowa.files.cache.clear__key_box' value='xowa.files.cache.clear'> <input type='hidden' id='xowa.files.cache.clear__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.cache.clear__key_box' value='xowa.files.cache.clear'> <input type='hidden' id='xowa.files.cache.clear__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.cache.clear_help_div' class='xohelp_div'>
           <div id='xowa.files.cache.clear_help_msg' class='xohelp_msg'>
             <p>
@@ -276,28 +294,30 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.info")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.cache.info__name' class='xocfg_itm_name'>
             Info
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.cache.info__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.info")' title="reset to &quot;cache folder: C:\xowa\file
-            space used: 5.845 MB
-            file count: 507
-            oldest file: 2017-03-19 20:23:09
+            space used: 473.652 KB
+            file count: 1
+            oldest file: 2017-03-29 18:20:56
             &quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
 <textarea id="xowa.files.cache.info" data-xocfg-key="xowa.files.cache.info" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo xocfg_data__readonly" readonly="true">
 cache folder: C:\xowa\file
-space used: 5.845 MB
-file count: 507
-oldest file: 2017-03-19 20:23:09
+space used: 473.652 KB
+file count: 1
+oldest file: 2017-03-29 18:20:56
 </textarea>
-          </div><input type='hidden' id='xowa.files.cache.info__key_box' value='xowa.files.cache.info'> <input type='hidden' id='xowa.files.cache.info__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.cache.info__key_box' value='xowa.files.cache.info'> <input type='hidden' id='xowa.files.cache.info__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.cache.info_help_div' class='xohelp_div'>
           <div id='xowa.files.cache.info_help_msg' class='xohelp_msg'>
             <p>

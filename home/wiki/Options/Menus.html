@@ -18,10 +18,13 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <div id='xocfg_body'>
+      <!-- TEXT:err_msg -->
       <div id='xocfg_err'>
       </div>
       <div>
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+        <!-- BTN:info -->
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
+         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
           <option value='xowa.app.security'>
             App - Security
           </option>
@@ -45,6 +48,9 @@
           </option>
           <option value='xowa.gui.shortcuts'>
             Gui - Shortcuts
+          </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Nightmode
           </option>
           <option value='xowa.wiki.hdumps'>
             Wiki - HTML Databases
@@ -85,6 +91,9 @@
           <option value='xowa.addon.search'>
             Addon - Search
           </option>
+          <option value='xowa.addon.fulltext_search'>
+            Addon - Full-text search
+          </option>
           <option value='xowa.addon.category'>
             Addon - Category
           </option>
@@ -109,15 +118,14 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Night mode
-          </option>
-          <option value='xowa.addon.search.fulltext'>
-            Addon - Full text search
-          </option>
-        </select>
+        </select> <!-- LINK:cfg_link -->
+         
+        <div style='float:right;margin:2px 7px;'>
+          <a id='options_lnk'>options link</a>
+        </div>
       </div>
       <div id='cfg_grps'>
+        <!-- TEXT:page_help -->
         <div>
           <p id='page_help_para'>
           </p>
@@ -126,19 +134,21 @@
           Window Menu Bar
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.menus.browser.enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.menus.browser.enabled__name' class='xocfg_itm_name'>
             Enabled
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.menus.browser.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.menus.browser.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.gui.menus.browser.enabled" data-xocfg-key="xowa.gui.menus.browser.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.gui.menus.browser.enabled__key_box' value='xowa.gui.menus.browser.enabled'> <input type='hidden' id='xowa.gui.menus.browser.enabled__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.menus.browser.enabled__key_box' value='xowa.gui.menus.browser.enabled'> <input type='hidden' id='xowa.gui.menus.browser.enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.menus.browser.enabled_help_div' class='xohelp_div'>
           <div id='xowa.gui.menus.browser.enabled_help_msg' class='xohelp_msg'>
             <p>
@@ -155,12 +165,13 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.menus.browser.source")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.menus.browser.source__name' class='xocfg_itm_name'>
             Source
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.menus.browser.source__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.menus.browser.source")' title="reset to &quot;add_grp_default('xowa.gui.menus.group.file') {
               add_btn_default('xowa.gui.browser.tabs.new_dflt__at_dflt__focus_y');
@@ -202,6 +213,9 @@
               add_spr;
               add_btn_default('xowa.usr.bookmarks.add');
               add_btn_default('xowa.usr.bookmarks.show');
+              add_spr;
+              add_btn_default('xowa.nav.wiki.allpages');
+              add_btn_default('xowa.nav.wiki.search_per_cfg');
             }
             add_grp_default('xowa.gui.menus.group.tools') {
               add_btn_default('xowa.nav.cfg.main');
@@ -236,7 +250,7 @@
               add_spr;
               add_btn_default('xowa.nav.help.xowa_update');
             }&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
 <textarea id="xowa.gui.menus.browser.source" data-xocfg-key="xowa.gui.menus.browser.source" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
 add_grp_default('xowa.gui.menus.group.file') {
@@ -279,6 +293,9 @@ add_grp_default('xowa.gui.menus.group.bookmarks') {
   add_spr;
   add_btn_default('xowa.usr.bookmarks.add');
   add_btn_default('xowa.usr.bookmarks.show');
+  add_spr;
+  add_btn_default('xowa.nav.wiki.allpages');
+  add_btn_default('xowa.nav.wiki.search_per_cfg');
 }
 add_grp_default('xowa.gui.menus.group.tools') {
   add_btn_default('xowa.nav.cfg.main');
@@ -314,8 +331,9 @@ add_grp_default('xowa.gui.menus.group.help') {
   add_btn_default('xowa.nav.help.xowa_update');
 }
 </textarea>
-          </div><input type='hidden' id='xowa.gui.menus.browser.source__key_box' value='xowa.gui.menus.browser.source'> <input type='hidden' id='xowa.gui.menus.browser.source__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.menus.browser.source__key_box' value='xowa.gui.menus.browser.source'> <input type='hidden' id='xowa.gui.menus.browser.source__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.menus.browser.source_help_div' class='xohelp_div'>
           <div id='xowa.gui.menus.browser.source_help_msg' class='xohelp_msg'>
             <p>
@@ -335,12 +353,13 @@ add_grp_default('xowa.gui.menus.group.help') {
           Tabs
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.menus.tabs.source")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.menus.tabs.source__name' class='xocfg_itm_name'>
             Source
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.menus.tabs.source__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.menus.tabs.source")' title="reset to &quot;add_btn_default('xowa.gui.browser.tabs.new_dflt__at_dflt__focus_y');
             add_btn_default('xowa.gui.browser.tabs.new_dupe__at_dflt__focus_y');
@@ -357,7 +376,7 @@ add_grp_default('xowa.gui.menus.group.help') {
             add_btn_default('xowa.gui.browser.tabs.close_to_end');
             add_spr;
             add_btn_default('xowa.gui.browser.tabs.close_undo');&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
 <textarea id="xowa.gui.menus.tabs.source" data-xocfg-key="xowa.gui.menus.tabs.source" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
 add_btn_default('xowa.gui.browser.tabs.new_dflt__at_dflt__focus_y');
@@ -376,8 +395,9 @@ add_btn_default('xowa.gui.browser.tabs.close_to_end');
 add_spr;
 add_btn_default('xowa.gui.browser.tabs.close_undo');
 </textarea>
-          </div><input type='hidden' id='xowa.gui.menus.tabs.source__key_box' value='xowa.gui.menus.tabs.source'> <input type='hidden' id='xowa.gui.menus.tabs.source__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.menus.tabs.source__key_box' value='xowa.gui.menus.tabs.source'> <input type='hidden' id='xowa.gui.menus.tabs.source__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.menus.tabs.source_help_div' class='xohelp_div'>
           <div id='xowa.gui.menus.tabs.source_help_msg' class='xohelp_msg'>
             <p>
@@ -389,7 +409,7 @@ add_btn_default('xowa.gui.browser.tabs.close_undo');
               </li>
             </ul>
             <p>
-              For more information, see <a tabindex="-1" href="/wiki/App/UI/Menus" id="xolnki_12" title="App/UI/Menus">App/UI/Menus</a>
+              For more information, see <a tabindex="-1" href="/wiki/App/UI/Menus" id="xolnki_11" title="App/UI/Menus">App/UI/Menus</a>
             </p>
           </div>
         </div>
@@ -397,12 +417,13 @@ add_btn_default('xowa.gui.browser.tabs.close_undo');
           HTML Box
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.menus.html.basic.source")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.menus.html.basic.source__name' class='xocfg_itm_name'>
             Basic
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.menus.html.basic.source__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.menus.html.basic.source")' title="reset to &quot;add_btn_default('xowa.nav.go_bwd');
             add_btn_default('xowa.nav.go_fwd');
@@ -453,6 +474,9 @@ add_btn_default('xowa.gui.browser.tabs.close_undo');
               add_spr;
               add_btn_default('xowa.usr.bookmarks.add');
               add_btn_default('xowa.usr.bookmarks.show');
+              add_spr;
+              add_btn_default('xowa.nav.wiki.allpages');
+              add_btn_default('xowa.nav.wiki.search_per_cfg');
             }
             add_grp_default('xowa.gui.menus.group.tools') {
               add_btn_default('xowa.nav.cfg.main');
@@ -476,7 +500,7 @@ add_btn_default('xowa.gui.browser.tabs.close_undo');
               add_spr;
               add_btn_default('xowa.nav.help.xowa_update');
             }&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
 <textarea id="xowa.gui.menus.html.basic.source" data-xocfg-key="xowa.gui.menus.html.basic.source" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
 add_btn_default('xowa.nav.go_bwd');
@@ -528,6 +552,9 @@ add_grp_default('xowa.gui.menus.group.bookmarks') {
   add_spr;
   add_btn_default('xowa.usr.bookmarks.add');
   add_btn_default('xowa.usr.bookmarks.show');
+  add_spr;
+  add_btn_default('xowa.nav.wiki.allpages');
+  add_btn_default('xowa.nav.wiki.search_per_cfg');
 }
 add_grp_default('xowa.gui.menus.group.tools') {
   add_btn_default('xowa.nav.cfg.main');
@@ -552,8 +579,9 @@ add_grp_default('xowa.gui.menus.group.help') {
   add_btn_default('xowa.nav.help.xowa_update');
 }
 </textarea>
-          </div><input type='hidden' id='xowa.gui.menus.html.basic.source__key_box' value='xowa.gui.menus.html.basic.source'> <input type='hidden' id='xowa.gui.menus.html.basic.source__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.menus.html.basic.source__key_box' value='xowa.gui.menus.html.basic.source'> <input type='hidden' id='xowa.gui.menus.html.basic.source__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.menus.html.basic.source_help_div' class='xohelp_div'>
           <div id='xowa.gui.menus.html.basic.source_help_msg' class='xohelp_msg'>
             <p>
@@ -565,24 +593,25 @@ add_grp_default('xowa.gui.menus.group.help') {
               </li>
             </ul>
             <p>
-              For more information, see <a tabindex="-1" href="/wiki/App/UI/Menus" id="xolnki_2" title="App/UI/Menus">App/UI/Menus</a>
+              For more information, see <a tabindex="-1" href="/wiki/App/UI/Menus" id="xolnki_3" title="App/UI/Menus">App/UI/Menus</a>
             </p>
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.menus.html.link.source")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.menus.html.link.source__name' class='xocfg_itm_name'>
             Link
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.menus.html.link.source__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.menus.html.link.source")' title="reset to &quot;add_btn_default('xowa.gui.browser.tabs.new_link__at_dflt__focus_n');
             add_btn_default('xowa.gui.browser.tabs.new_link__at_dflt__focus_y');
             add_spr;
             add_btn_default('xowa.gui.page.selection.copy');
             add_btn_default('xowa.gui.browser.find.show_by_paste');&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
 <textarea id="xowa.gui.menus.html.link.source" data-xocfg-key="xowa.gui.menus.html.link.source" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
 add_btn_default('xowa.gui.browser.tabs.new_link__at_dflt__focus_n');
@@ -591,8 +620,9 @@ add_spr;
 add_btn_default('xowa.gui.page.selection.copy');
 add_btn_default('xowa.gui.browser.find.show_by_paste');
 </textarea>
-          </div><input type='hidden' id='xowa.gui.menus.html.link.source__key_box' value='xowa.gui.menus.html.link.source'> <input type='hidden' id='xowa.gui.menus.html.link.source__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.menus.html.link.source__key_box' value='xowa.gui.menus.html.link.source'> <input type='hidden' id='xowa.gui.menus.html.link.source__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.menus.html.link.source_help_div' class='xohelp_div'>
           <div id='xowa.gui.menus.html.link.source_help_msg' class='xohelp_msg'>
             <p>
@@ -604,23 +634,24 @@ add_btn_default('xowa.gui.browser.find.show_by_paste');
               </li>
             </ul>
             <p>
-              For more information, see <a tabindex="-1" href="/wiki/App/UI/Menus" id="xolnki_14" title="App/UI/Menus">App/UI/Menus</a>
+              For more information, see <a tabindex="-1" href="/wiki/App/UI/Menus" id="xolnki_13" title="App/UI/Menus">App/UI/Menus</a>
             </p>
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.menus.html.file.source")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.menus.html.file.source__name' class='xocfg_itm_name'>
             File
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.menus.html.file.source__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.menus.html.file.source")' title="reset to &quot;add_btn_default('xowa.gui.browser.tabs.new_link__at_dflt__focus_n');
             add_btn_default('xowa.gui.browser.tabs.new_link__at_dflt__focus_y');
             add_spr;
             add_btn_default('xowa.gui.page.selection.save_file_as');&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
 <textarea id="xowa.gui.menus.html.file.source" data-xocfg-key="xowa.gui.menus.html.file.source" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
 add_btn_default('xowa.gui.browser.tabs.new_link__at_dflt__focus_n');
@@ -628,8 +659,9 @@ add_btn_default('xowa.gui.browser.tabs.new_link__at_dflt__focus_y');
 add_spr;
 add_btn_default('xowa.gui.page.selection.save_file_as');
 </textarea>
-          </div><input type='hidden' id='xowa.gui.menus.html.file.source__key_box' value='xowa.gui.menus.html.file.source'> <input type='hidden' id='xowa.gui.menus.html.file.source__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.menus.html.file.source__key_box' value='xowa.gui.menus.html.file.source'> <input type='hidden' id='xowa.gui.menus.html.file.source__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.menus.html.file.source_help_div' class='xohelp_div'>
           <div id='xowa.gui.menus.html.file.source_help_msg' class='xohelp_msg'>
             <p>
@@ -641,7 +673,7 @@ add_btn_default('xowa.gui.page.selection.save_file_as');
               </li>
             </ul>
             <p>
-              For more information, see <a tabindex="-1" href="/wiki/App/UI/Menus" id="xolnki_15" title="App/UI/Menus">App/UI/Menus</a>
+              For more information, see <a tabindex="-1" href="/wiki/App/UI/Menus" id="xolnki_14" title="App/UI/Menus">App/UI/Menus</a>
             </p>
           </div>
         </div>
@@ -649,21 +681,23 @@ add_btn_default('xowa.gui.page.selection.save_file_as');
           Status box
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.menus.status.source")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.menus.status.source__name' class='xocfg_itm_name'>
             Source
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.menus.status.source__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.menus.status.source")' title="reset to &quot;add_btn_default('xowa.gui.browser.prog_log.show');&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
 <textarea id="xowa.gui.menus.status.source" data-xocfg-key="xowa.gui.menus.status.source" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
 add_btn_default('xowa.gui.browser.prog_log.show');
 </textarea>
-          </div><input type='hidden' id='xowa.gui.menus.status.source__key_box' value='xowa.gui.menus.status.source'> <input type='hidden' id='xowa.gui.menus.status.source__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.menus.status.source__key_box' value='xowa.gui.menus.status.source'> <input type='hidden' id='xowa.gui.menus.status.source__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.menus.status.source_help_div' class='xohelp_div'>
           <div id='xowa.gui.menus.status.source_help_msg' class='xohelp_msg'>
             <p>
@@ -675,7 +709,7 @@ add_btn_default('xowa.gui.browser.prog_log.show');
               </li>
             </ul>
             <p>
-              For more information, see <a tabindex="-1" href="/wiki/App/UI/Menus" id="xolnki_16" title="App/UI/Menus">App/UI/Menus</a>
+              For more information, see <a tabindex="-1" href="/wiki/App/UI/Menus" id="xolnki_15" title="App/UI/Menus">App/UI/Menus</a>
             </p>
           </div>
         </div>

@@ -18,10 +18,13 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <div id='xocfg_body'>
+      <!-- TEXT:err_msg -->
       <div id='xocfg_err'>
       </div>
       <div>
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+        <!-- BTN:info -->
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
+         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
           <option value='xowa.app.security'>
             App - Security
           </option>
@@ -45,6 +48,9 @@
           </option>
           <option value='xowa.gui.shortcuts'>
             Gui - Shortcuts
+          </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Nightmode
           </option>
           <option value='xowa.wiki.hdumps'>
             Wiki - HTML Databases
@@ -85,6 +91,9 @@
           <option value='xowa.addon.search'>
             Addon - Search
           </option>
+          <option value='xowa.addon.fulltext_search'>
+            Addon - Full-text search
+          </option>
           <option value='xowa.addon.category'>
             Addon - Category
           </option>
@@ -109,39 +118,40 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Night mode
-          </option>
-          <option value='xowa.addon.search.fulltext'>
-            Addon - Full text search
-          </option>
-        </select>
+        </select> <!-- LINK:cfg_link -->
+         
+        <div style='float:right;margin:2px 7px;'>
+          <a id='options_lnk'>options link</a>
+        </div>
       </div>
       <div id='cfg_grps'>
+        <!-- TEXT:page_help -->
         <div>
           <p id='page_help_para'>
           </p>
           <p>
-            For more info, see <a tabindex="-1" href="/wiki/App/UI/Tabs" id="xolnki_10" title="App/UI/Tabs">App/UI/Tabs</a>
+            For more info, see <a tabindex="-1" href="/wiki/App/UI/Tabs" id="xolnki_9" title="App/UI/Tabs">App/UI/Tabs</a>
           </p>
         </div>
         <h2>
           Position / Size
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.tabs.place_on_top")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.tabs.place_on_top__name' class='xocfg_itm_name'>
             Place on top
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.tabs.place_on_top__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.tabs.place_on_top")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.gui.tabs.place_on_top" data-xocfg-key="xowa.gui.tabs.place_on_top" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.gui.tabs.place_on_top__key_box' value='xowa.gui.tabs.place_on_top'> <input type='hidden' id='xowa.gui.tabs.place_on_top__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.tabs.place_on_top__key_box' value='xowa.gui.tabs.place_on_top'> <input type='hidden' id='xowa.gui.tabs.place_on_top__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.tabs.place_on_top_help_div' class='xohelp_div'>
           <div id='xowa.gui.tabs.place_on_top_help_msg' class='xohelp_msg'>
             <p>
@@ -161,19 +171,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.tabs.height")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.tabs.height__name' class='xocfg_itm_name'>
             Height
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.tabs.height__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.tabs.height")' title="reset to &quot;20&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.gui.tabs.height" data-xocfg-key="xowa.gui.tabs.height" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="20">
-          </div><input type='hidden' id='xowa.gui.tabs.height__key_box' value='xowa.gui.tabs.height'> <input type='hidden' id='xowa.gui.tabs.height__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.tabs.height__key_box' value='xowa.gui.tabs.height'> <input type='hidden' id='xowa.gui.tabs.height__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.tabs.height_help_div' class='xohelp_div'>
           <div id='xowa.gui.tabs.height_help_msg' class='xohelp_msg'>
             <p>
@@ -182,19 +194,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.tabs.hide_if_one")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.tabs.hide_if_one__name' class='xocfg_itm_name'>
             Hide if one
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.tabs.hide_if_one__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.tabs.hide_if_one")' title="reset to &quot;n&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.gui.tabs.hide_if_one" data-xocfg-key="xowa.gui.tabs.hide_if_one" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
-          </div><input type='hidden' id='xowa.gui.tabs.hide_if_one__key_box' value='xowa.gui.tabs.hide_if_one'> <input type='hidden' id='xowa.gui.tabs.hide_if_one__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.tabs.hide_if_one__key_box' value='xowa.gui.tabs.hide_if_one'> <input type='hidden' id='xowa.gui.tabs.hide_if_one__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.tabs.hide_if_one_help_div' class='xohelp_div'>
           <div id='xowa.gui.tabs.hide_if_one_help_msg' class='xohelp_msg'>
             <p>
@@ -214,19 +228,21 @@
           Appearance
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.tabs.curved")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.tabs.curved__name' class='xocfg_itm_name'>
             Curved
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.tabs.curved__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.tabs.curved")' title="reset to &quot;n&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.gui.tabs.curved" data-xocfg-key="xowa.gui.tabs.curved" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
-          </div><input type='hidden' id='xowa.gui.tabs.curved__key_box' value='xowa.gui.tabs.curved'> <input type='hidden' id='xowa.gui.tabs.curved__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.tabs.curved__key_box' value='xowa.gui.tabs.curved'> <input type='hidden' id='xowa.gui.tabs.curved__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.tabs.curved_help_div' class='xohelp_div'>
           <div id='xowa.gui.tabs.curved_help_msg' class='xohelp_msg'>
             <p>
@@ -246,19 +262,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.tabs.close_btn_visible")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.tabs.close_btn_visible__name' class='xocfg_itm_name'>
             Close button visible
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.tabs.close_btn_visible__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.tabs.close_btn_visible")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.gui.tabs.close_btn_visible" data-xocfg-key="xowa.gui.tabs.close_btn_visible" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.gui.tabs.close_btn_visible__key_box' value='xowa.gui.tabs.close_btn_visible'> <input type='hidden' id='xowa.gui.tabs.close_btn_visible__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.tabs.close_btn_visible__key_box' value='xowa.gui.tabs.close_btn_visible'> <input type='hidden' id='xowa.gui.tabs.close_btn_visible__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.tabs.close_btn_visible_help_div' class='xohelp_div'>
           <div id='xowa.gui.tabs.close_btn_visible_help_msg' class='xohelp_msg'>
             <p>
@@ -278,19 +296,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.tabs.unselected_close_btn_visible")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.tabs.unselected_close_btn_visible__name' class='xocfg_itm_name'>
             Unselected close button visible
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.tabs.unselected_close_btn_visible__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.tabs.unselected_close_btn_visible")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.gui.tabs.unselected_close_btn_visible" data-xocfg-key="xowa.gui.tabs.unselected_close_btn_visible" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.gui.tabs.unselected_close_btn_visible__key_box' value='xowa.gui.tabs.unselected_close_btn_visible'> <input type='hidden' id='xowa.gui.tabs.unselected_close_btn_visible__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.tabs.unselected_close_btn_visible__key_box' value='xowa.gui.tabs.unselected_close_btn_visible'> <input type='hidden' id='xowa.gui.tabs.unselected_close_btn_visible__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.tabs.unselected_close_btn_visible_help_div' class='xohelp_div'>
           <div id='xowa.gui.tabs.unselected_close_btn_visible_help_msg' class='xohelp_msg'>
             <p>
@@ -313,19 +333,21 @@
           Title
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.tabs.max_chars")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.tabs.max_chars__name' class='xocfg_itm_name'>
             Max chars
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.tabs.max_chars__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.tabs.max_chars")' title="reset to &quot;40&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.gui.tabs.max_chars" data-xocfg-key="xowa.gui.tabs.max_chars" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="40">
-          </div><input type='hidden' id='xowa.gui.tabs.max_chars__key_box' value='xowa.gui.tabs.max_chars'> <input type='hidden' id='xowa.gui.tabs.max_chars__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.tabs.max_chars__key_box' value='xowa.gui.tabs.max_chars'> <input type='hidden' id='xowa.gui.tabs.max_chars__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.tabs.max_chars_help_div' class='xohelp_div'>
           <div id='xowa.gui.tabs.max_chars_help_msg' class='xohelp_msg'>
             <p>
@@ -357,19 +379,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.tabs.min_chars")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.tabs.min_chars__name' class='xocfg_itm_name'>
             Min chars
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.tabs.min_chars__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.tabs.min_chars")' title="reset to &quot;-1&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.gui.tabs.min_chars" data-xocfg-key="xowa.gui.tabs.min_chars" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="-1">
-          </div><input type='hidden' id='xowa.gui.tabs.min_chars__key_box' value='xowa.gui.tabs.min_chars'> <input type='hidden' id='xowa.gui.tabs.min_chars__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.tabs.min_chars__key_box' value='xowa.gui.tabs.min_chars'> <input type='hidden' id='xowa.gui.tabs.min_chars__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.tabs.min_chars_help_div' class='xohelp_div'>
           <div id='xowa.gui.tabs.min_chars_help_msg' class='xohelp_msg'>
             <p>

@@ -18,10 +18,13 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <div id='xocfg_body'>
+      <!-- TEXT:err_msg -->
       <div id='xocfg_err'>
       </div>
       <div>
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+        <!-- BTN:info -->
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
+         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
           <option value='xowa.app.security'>
             App - Security
           </option>
@@ -45,6 +48,9 @@
           </option>
           <option value='xowa.gui.shortcuts'>
             Gui - Shortcuts
+          </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Nightmode
           </option>
           <option value='xowa.wiki.hdumps'>
             Wiki - HTML Databases
@@ -85,6 +91,9 @@
           <option value='xowa.addon.search'>
             Addon - Search
           </option>
+          <option value='xowa.addon.fulltext_search'>
+            Addon - Full-text search
+          </option>
           <option value='xowa.addon.category'>
             Addon - Category
           </option>
@@ -109,15 +118,14 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Night mode
-          </option>
-          <option value='xowa.addon.search.fulltext'>
-            Addon - Full text search
-          </option>
-        </select>
+        </select> <!-- LINK:cfg_link -->
+         
+        <div style='float:right;margin:2px 7px;'>
+          <a id='options_lnk'>options link</a>
+        </div>
       </div>
       <div id='cfg_grps'>
+        <!-- TEXT:page_help -->
         <div>
           <p id='page_help_para'>
           </p>
@@ -126,18 +134,19 @@
           General
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.import.dump_servers")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.import.dump_servers__name' class='xocfg_itm_name'>
             Dump servers
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.import.dump_servers__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.import.dump_servers")' title="reset to &quot;http://dumps.wikimedia.your.org/,
             https://dumps.wikimedia.org/,
             http://wikipedia.c3sl.ufpr.br/,
             http://ftp.fi.muni.cz/pub/wikimedia/&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
 <textarea id="xowa.bldr.import.dump_servers" data-xocfg-key="xowa.bldr.import.dump_servers" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
 http://dumps.wikimedia.your.org/,
@@ -145,8 +154,9 @@ https://dumps.wikimedia.org/,
 http://wikipedia.c3sl.ufpr.br/,
 http://ftp.fi.muni.cz/pub/wikimedia/
 </textarea>
-          </div><input type='hidden' id='xowa.bldr.import.dump_servers__key_box' value='xowa.bldr.import.dump_servers'> <input type='hidden' id='xowa.bldr.import.dump_servers__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.import.dump_servers__key_box' value='xowa.bldr.import.dump_servers'> <input type='hidden' id='xowa.bldr.import.dump_servers__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.import.dump_servers_help_div' class='xohelp_div'>
           <div id='xowa.bldr.import.dump_servers_help_msg' class='xohelp_msg'>
             <p>
@@ -174,19 +184,21 @@ http://ftp.fi.muni.cz/pub/wikimedia/
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.import.download_xowa_common")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.import.download_xowa_common__name' class='xocfg_itm_name'>
             Download xowa_common.css
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.import.download_xowa_common__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.import.download_xowa_common")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.bldr.import.download_xowa_common" data-xocfg-key="xowa.bldr.import.download_xowa_common" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.bldr.import.download_xowa_common__key_box' value='xowa.bldr.import.download_xowa_common'> <input type='hidden' id='xowa.bldr.import.download_xowa_common__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.import.download_xowa_common__key_box' value='xowa.bldr.import.download_xowa_common'> <input type='hidden' id='xowa.bldr.import.download_xowa_common__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.import.download_xowa_common_help_div' class='xohelp_div'>
           <div id='xowa.bldr.import.download_xowa_common_help_msg' class='xohelp_msg'>
             <p>
@@ -203,19 +215,21 @@ http://ftp.fi.muni.cz/pub/wikimedia/
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.import.unzip_bz2_file")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.import.unzip_bz2_file__name' class='xocfg_itm_name'>
             Unzip bz2 file
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.import.unzip_bz2_file__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.import.unzip_bz2_file")' title="reset to &quot;n&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.bldr.import.unzip_bz2_file" data-xocfg-key="xowa.bldr.import.unzip_bz2_file" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
-          </div><input type='hidden' id='xowa.bldr.import.unzip_bz2_file__key_box' value='xowa.bldr.import.unzip_bz2_file'> <input type='hidden' id='xowa.bldr.import.unzip_bz2_file__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.import.unzip_bz2_file__key_box' value='xowa.bldr.import.unzip_bz2_file'> <input type='hidden' id='xowa.bldr.import.unzip_bz2_file__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.import.unzip_bz2_file_help_div' class='xohelp_div'>
           <div id='xowa.bldr.import.unzip_bz2_file_help_msg' class='xohelp_msg'>
             <p>
@@ -235,19 +249,21 @@ http://ftp.fi.muni.cz/pub/wikimedia/
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.import.delete_xml_file")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.import.delete_xml_file__name' class='xocfg_itm_name'>
             Delete XML file after import
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.import.delete_xml_file__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.import.delete_xml_file")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.bldr.import.delete_xml_file" data-xocfg-key="xowa.bldr.import.delete_xml_file" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.bldr.import.delete_xml_file__key_box' value='xowa.bldr.import.delete_xml_file'> <input type='hidden' id='xowa.bldr.import.delete_xml_file__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.import.delete_xml_file__key_box' value='xowa.bldr.import.delete_xml_file'> <input type='hidden' id='xowa.bldr.import.delete_xml_file__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.import.delete_xml_file_help_div' class='xohelp_div'>
           <div id='xowa.bldr.import.delete_xml_file_help_msg' class='xohelp_msg'>
             <p>
@@ -267,19 +283,21 @@ http://ftp.fi.muni.cz/pub/wikimedia/
           bzip2 Options
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.import.apps.bz2_stdout.enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.import.apps.bz2_stdout.enabled__name' class='xocfg_itm_name'>
             Stdout enabled
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.import.apps.bz2_stdout.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.import.apps.bz2_stdout.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.bldr.import.apps.bz2_stdout.enabled" data-xocfg-key="xowa.bldr.import.apps.bz2_stdout.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.bldr.import.apps.bz2_stdout.enabled__key_box' value='xowa.bldr.import.apps.bz2_stdout.enabled'> <input type='hidden' id='xowa.bldr.import.apps.bz2_stdout.enabled__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.import.apps.bz2_stdout.enabled__key_box' value='xowa.bldr.import.apps.bz2_stdout.enabled'> <input type='hidden' id='xowa.bldr.import.apps.bz2_stdout.enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.import.apps.bz2_stdout.enabled_help_div' class='xohelp_div'>
           <div id='xowa.bldr.import.apps.bz2_stdout.enabled_help_msg' class='xohelp_msg'>
             <p>
@@ -297,20 +315,22 @@ http://ftp.fi.muni.cz/pub/wikimedia/
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.import.apps.bz2_stdout.cmd")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.import.apps.bz2_stdout.cmd__name' class='xocfg_itm_name'>
             Stdout process
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.import.apps.bz2_stdout.cmd__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.import.apps.bz2_stdout.cmd")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}7-zip\7za|x -so &quot;~{src}&quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.bldr.import.apps.bz2_stdout.cmd-exe" data-xocfg-key="xowa.bldr.import.apps.bz2_stdout.cmd" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}7-zip\7za"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.bldr.import.apps.bz2_stdout.cmd-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.bldr.import.apps.bz2_stdout.cmd-arg" data-xocfg-key="xowa.bldr.import.apps.bz2_stdout.cmd" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="x -so &quot;~{src}&quot;">
-          </div><input type='hidden' id='xowa.bldr.import.apps.bz2_stdout.cmd__key_box' value='xowa.bldr.import.apps.bz2_stdout.cmd'> <input type='hidden' id='xowa.bldr.import.apps.bz2_stdout.cmd__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.import.apps.bz2_stdout.cmd__key_box' value='xowa.bldr.import.apps.bz2_stdout.cmd'> <input type='hidden' id='xowa.bldr.import.apps.bz2_stdout.cmd__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.import.apps.bz2_stdout.cmd_help_div' class='xohelp_div'>
           <div id='xowa.bldr.import.apps.bz2_stdout.cmd_help_msg' class='xohelp_msg'>
             <p>
@@ -343,20 +363,22 @@ http://ftp.fi.muni.cz/pub/wikimedia/
           Apps
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.import.apps.bz2")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.import.apps.bz2__name' class='xocfg_itm_name'>
             bz2 app
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.import.apps.bz2__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.import.apps.bz2")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}7-zip\7za|x -y -r &quot;~{src}&quot; -o&quot;~{trg_dir}&quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.bldr.import.apps.bz2-exe" data-xocfg-key="xowa.bldr.import.apps.bz2" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}7-zip\7za"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.bldr.import.apps.bz2-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.bldr.import.apps.bz2-arg" data-xocfg-key="xowa.bldr.import.apps.bz2" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="x -y -r &quot;~{src}&quot; -o&quot;~{trg_dir}&quot;">
-          </div><input type='hidden' id='xowa.bldr.import.apps.bz2__key_box' value='xowa.bldr.import.apps.bz2'> <input type='hidden' id='xowa.bldr.import.apps.bz2__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.import.apps.bz2__key_box' value='xowa.bldr.import.apps.bz2'> <input type='hidden' id='xowa.bldr.import.apps.bz2__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.import.apps.bz2_help_div' class='xohelp_div'>
           <div id='xowa.bldr.import.apps.bz2_help_msg' class='xohelp_msg'>
             <p>
@@ -365,20 +387,22 @@ http://ftp.fi.muni.cz/pub/wikimedia/
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.import.apps.gz")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.import.apps.gz__name' class='xocfg_itm_name'>
             gzip app
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.import.apps.gz__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.import.apps.gz")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}7-zip\7za|x -y -r &quot;~{src}&quot; -o&quot;~{trg_dir}&quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.bldr.import.apps.gz-exe" data-xocfg-key="xowa.bldr.import.apps.gz" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}7-zip\7za"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.bldr.import.apps.gz-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.bldr.import.apps.gz-arg" data-xocfg-key="xowa.bldr.import.apps.gz" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="x -y -r &quot;~{src}&quot; -o&quot;~{trg_dir}&quot;">
-          </div><input type='hidden' id='xowa.bldr.import.apps.gz__key_box' value='xowa.bldr.import.apps.gz'> <input type='hidden' id='xowa.bldr.import.apps.gz__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.import.apps.gz__key_box' value='xowa.bldr.import.apps.gz'> <input type='hidden' id='xowa.bldr.import.apps.gz__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.import.apps.gz_help_div' class='xohelp_div'>
           <div id='xowa.bldr.import.apps.gz_help_msg' class='xohelp_msg'>
             <p>
@@ -390,19 +414,21 @@ http://ftp.fi.muni.cz/pub/wikimedia/
           Search
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.import.page_rank.iteration_max")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.import.page_rank.iteration_max__name' class='xocfg_itm_name'>
             PageRank iterations
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.import.page_rank.iteration_max__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.import.page_rank.iteration_max")' title="reset to &quot;0&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.bldr.import.page_rank.iteration_max" data-xocfg-key="xowa.bldr.import.page_rank.iteration_max" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="0">
-          </div><input type='hidden' id='xowa.bldr.import.page_rank.iteration_max__key_box' value='xowa.bldr.import.page_rank.iteration_max'> <input type='hidden' id='xowa.bldr.import.page_rank.iteration_max__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.import.page_rank.iteration_max__key_box' value='xowa.bldr.import.page_rank.iteration_max'> <input type='hidden' id='xowa.bldr.import.page_rank.iteration_max__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.import.page_rank.iteration_max_help_div' class='xohelp_div'>
           <div id='xowa.bldr.import.page_rank.iteration_max_help_msg' class='xohelp_msg'>
             <p>

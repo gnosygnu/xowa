@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Full-text search - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Full-text search</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      As of v4.5.0, XOWA can search for words in the page text.
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Usage"><span class="tocnumber">1</span> <span class="toctext">Usage</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-2">
+              <a href="#Running"><span class="tocnumber">1.1</span> <span class="toctext">Running</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-3">
+              <a href="#Canceling"><span class="tocnumber">1.2</span> <span class="toctext">Canceling</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#Options"><span class="tocnumber">2</span> <span class="toctext">Options</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#Multiple_wikis"><span class="tocnumber">2.1</span> <span class="toctext">Multiple wikis</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-6">
+          <a href="#Search_engine_types"><span class="tocnumber">3</span> <span class="toctext">Search engine types</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-7">
+          <a href="#Options_2"><span class="tocnumber">4</span> <span class="toctext">Options</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-8">
+          <a href="#Lucene_search_syntax"><span class="tocnumber">5</span> <span class="toctext">Lucene search syntax</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-9">
+              <a href="#Fields"><span class="tocnumber">5.1</span> <span class="toctext">Fields</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-10">
+              <a href="#Wildcards"><span class="tocnumber">5.2</span> <span class="toctext">Wildcards</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-11">
+              <a href="#Fuzzy_Searches"><span class="tocnumber">5.3</span> <span class="toctext">Fuzzy Searches</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-12">
+              <a href="#Proximity_Searches"><span class="tocnumber">5.4</span> <span class="toctext">Proximity Searches</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-13">
+              <a href="#Boosting_a_Term"><span class="tocnumber">5.5</span> <span class="toctext">Boosting a Term</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-14">
+              <a href="#Boolean_Operators"><span class="tocnumber">5.6</span> <span class="toctext">Boolean Operators</span></a> 
+              <ul>
+                <li class="toclevel-3 tocsection-15">
+                  <a href="#OR"><span class="tocnumber">5.6.1</span> <span class="toctext">OR</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-16">
+                  <a href="#AND"><span class="tocnumber">5.6.2</span> <span class="toctext">AND</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-17">
+                  <a href="#.2B"><span class="tocnumber">5.6.3</span> <span class="toctext">+</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-18">
+                  <a href="#NOT"><span class="tocnumber">5.6.4</span> <span class="toctext">NOT</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-19">
+                  <a href="#-"><span class="tocnumber">5.6.5</span> <span class="toctext">-</span></a>
+                </li>
+              </ul>
+            </li>
+            <li class="toclevel-2 tocsection-20">
+              <a href="#Grouping"><span class="tocnumber">5.7</span> <span class="toctext">Grouping</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-21">
+              <a href="#Escaping_Special_Characters"><span class="tocnumber">5.8</span> <span class="toctext">Escaping Special Characters</span></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Usage">Usage</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Running">Running</span>
+    </h3>
+    <p>
+      Full-text search can be reached in any of the following ways:
+    </p>
+    <ul>
+      <li>
+        <b>Main menu</b>: <code>Bookmarks</code> -&gt; <code>Search for pages in the wiki</code>
+      </li>
+      <li>
+        <b>GUI</b>: 
+        <ul>
+          <li>
+            Type in the text-box to the left of the magnifying glass
+          </li>
+          <li>
+            Press enter or click the magnifying glass.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b>HTML</b>: 
+        <ul>
+          <li>
+            Type in the text-box to the right of <code>View HTML</code>
+          </li>
+          <li>
+            Press enter or click the magnifying glass.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b>URL</b>: Go to <code>Special:XowaSearch</code>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Canceling">Canceling</span>
+    </h3>
+    <p>
+      Searches can be canceled by pressing the cancel button to the right of the search button
+    </p>
+    <h2>
+      <span class="mw-headline" id="Options">Options</span>
+    </h2>
+    <p>
+      The following options are available:
+    </p>
+    <ul>
+      <li>
+        <b>Wikis</b>: List wikis to search using a pipe (|) character; EX: <code>en.wikipedia.org|simple.wikipedia.org</code>
+      </li>
+      <li>
+        <b>Namespaces</b>: List namespaces to search using a comma character; EX: <code>0,4</code>
+      </li>
+      <li>
+        <b>Results per page</b>: List number of results per page; EX: <code>50</code>
+      </li>
+      <li>
+        <b>Expand pages</b>: Expand pages sections when retrieving results. If 'n', pages will be collapsed; if 'y', pages will be expanded
+      </li>
+      <li>
+        <b>Expand snips</b>: Expand snips sections when retrieving results. If 'n', snips will be collapsed; if 'y', snips will be expanded
+      </li>
+      <li>
+        <b>Show all snips</b>: Show all snips when retrieving results. If 'n', only the first snip will show; if 'y', all snips will show
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Multiple_wikis">Multiple wikis</span>
+    </h3>
+    <p>
+      In addition, for multiple wikis, options can be specified per wiki using the pipe character. For example:
+    </p>
+    <ul>
+      <li>
+        If <code>Wikis</code> is <code>en.wikipedia.org|simple.wikipedia.org</code>
+      </li>
+      <li>
+        And <code>Results per page</code> is <code>20|10</code>
+      </li>
+      <li>
+        Then <code>en.wikipedia.org</code> will retrieve <code>20</code> results per page and <code>simple.wikipedia.org</code> will retrieve <code>10</code>
+      </li>
+    </ul>
+    <p>
+      In addition, the last value is used for other wikis. For example:
+    </p>
+    <ul>
+      <li>
+        If <code>Wikis</code> is <code>en.wikipedia.org|simple.wikipedia.org|home</code>
+      </li>
+      <li>
+        And <code>Results per page</code> is <code>20|10</code>
+      </li>
+      <li>
+        Then <code>home</code> will have a page count of <code>10</code>
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Search_engine_types">Search engine types</span>
+    </h2>
+    <p>
+      XOWA supports two types of full-text search engines: XOWA Wikitext and Lucene HTML
+    </p>
+    <p>
+      The following table illustrates the high-level differences.
+    </p>
+    <table class='wikitable' style='background: white;'>
+      <tr>
+        <th>
+          function
+        </th>
+        <th>
+          XOWA Wikitext
+        </th>
+        <th>
+          Lucene HTML
+        </th>
+      </tr>
+      <tr>
+        <td>
+          availability
+        </td>
+        <td>
+          Wikitext wikis (Import Online / Offline)
+        </td>
+        <td>
+          HTML wikis (Download Central)
+        </td>
+      </tr>
+      <tr>
+        <td>
+          how it works
+        </td>
+        <td>
+          Opens every page and scans wikitext
+        </td>
+        <td>
+          Searches precompiled Lucene indexes
+        </td>
+      </tr>
+      <tr>
+        <td>
+          speed
+        </td>
+        <td>
+          slower: small wikis will be subsecond, but en.wikipedia.org searches can take 1+ hour for each search
+        </td>
+        <td>
+          fast: en.wikipedia.org searches can execute in less than a second.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          disk space
+        </td>
+        <td>
+          no additional space is needed
+        </td>
+        <td>
+          additional space is needed. en.wikipedia.org will use at least 9 GB
+        </td>
+      </tr>
+      <tr>
+        <td>
+          syntax
+        </td>
+        <td>
+          uses same syntax as title search. See <a href="http://xowa.org/home/wiki/App/Search.html" id="xolnki_2" title="App/Search">App/Search</a>
+        </td>
+        <td>
+          uses Lucene syntax. See <a href="https://lucene.apache.org/core/2_9_4/queryparsersyntax.html" rel="nofollow" class="external text">the lucene search page</a> as well as below.
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="Options_2">Options</span>
+    </h2>
+    <p>
+      Options can be configured at <a href="http://xowa.org/home/wiki/Special:XowaCfg%3Fgrp%3Dxowa.addon.fulltext_search.html" id="xolnki_3" title="Special:XowaCfg?grp=xowa.addon.fulltext search">Special:XowaCfg?grp=xowa.addon.fulltext search</a>
+    </p>
+    <p>
+      In addition, the Special:XowaSearch page also has a copy of the more-frequently used options.
+    </p>
+    <p>
+      <br>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Lucene_search_syntax">Lucene search syntax</span>
+    </h2>
+    <p>
+      The best reference for Lucene syntax is probably <a href="https://lucene.apache.org/core/2_9_4/queryparsersyntax.html" rel="nofollow" class="external text">the lucene search page</a>. The following is an edited version of that page
+    </p>
+    <h3>
+      <span class="mw-headline" id="Fields">Fields</span>
+    </h3>
+    <p>
+      XOWA uses one field: body.
+    </p>
+    <p>
+      Body is the HTML of a page without the markup. So <code>&lt;span title='some more words'&gt;word&lt;/span&gt;</code> will only have <code>word</code>, and ignore <code>span</code>, <code>title</code>, <code>some</code>, <code>more</code>, and <code>words</code>.
+    </p>
+    <p>
+      In addition, XOWA uses three other fields: page_id, title, and page_score. These are included for system purposes only.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Wildcards">Wildcards</span>
+    </h3>
+    <p>
+      Lucene supports single and multiple character wildcard searches within single terms (not within phrase queries).
+    </p>
+    <ul>
+      <li>
+        To perform a single character wildcard search use the "?" symbol. For example, <code>E?rth</code>
+      </li>
+    </ul>
+    <ul>
+      <li>
+        To perform a multiple character wildcard search use the "*" symbol. For example, <code>Ear*</code>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Fuzzy_Searches">Fuzzy Searches</span>
+    </h3>
+    <p>
+      Lucene supports fuzzy searches based on the Levenshtein Distance, or Edit Distance algorithm. To do a fuzzy search use the tilde, "~", symbol at the end of a Single word Term. For example to search for a term similar in spelling to "roam" use the fuzzy search: <code>roam~</code>
+    </p>
+    <p>
+      This search will find terms like <code>foam</code> and <code>roams</code>.
+    </p>
+    <p>
+      An additional (optional) parameter can specify the required similarity. The value is between 0 and 1, with a value closer to 1 only terms with a higher similarity will be matched. For example: <code>roam~0.8</code>
+    </p>
+    <p>
+      The default that is used if the parameter is not given is 0.5.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Proximity_Searches">Proximity Searches</span>
+    </h3>
+    <p>
+      Lucene supports finding words are a within a specific distance away. To do a proximity search use the tilde, "~", symbol at the end of a Phrase. For example to search for a "apache" and "jakarta" within 10 words of each other in a document use the search:
+    </p>
+    <p>
+      <code>"jakarta apache"~10</code>
+    </p>
+    <h3>
+      <span class="mw-headline" id="Boosting_a_Term">Boosting a Term</span>
+    </h3>
+    <p>
+      Lucene provides the relevance level of matching documents based on the terms found. To boost a term use the caret, "^", symbol with a boost factor (a number) at the end of the term you are searching. The higher the boost factor, the more relevant the term will be.
+    </p>
+    <p>
+      Boosting allows you to control the relevance of a document by boosting its term. For example, if you are searching for
+    </p>
+    <p>
+      <code>jakarta apache</code>
+    </p>
+    <p>
+      and you want the term "jakarta" to be more relevant boost it using the ^ symbol along with the boost factor next to the term. You would type:
+    </p>
+    <p>
+      <code>jakarta^4 apache</code>
+    </p>
+    <p>
+      This will make documents with the term jakarta appear more relevant. You can also boost Phrase Terms as in the example:
+    </p>
+    <p>
+      <code>"jakarta apache"^4 "Apache Lucene"</code>
+    </p>
+    <p>
+      By default, the boost factor is 1. Although the boost factor must be positive, it can be less than 1 (e.g. 0.2)
+    </p>
+    <h3>
+      <span class="mw-headline" id="Boolean_Operators">Boolean Operators</span>
+    </h3>
+    <p>
+      Boolean operators allow terms to be combined through logic operators. Lucene supports AND, "+", OR, NOT and "-" as Boolean operators(Note: Boolean operators must be ALL CAPS).
+    </p>
+    <h4>
+      <span class="mw-headline" id="OR">OR</span>
+    </h4>
+    <p>
+      The OR operator is the default conjunction operator. This means that if there is no Boolean operator between two terms, the OR operator is used. The OR operator links two terms and finds a matching document if either of the terms exist in a document. This is equivalent to a union using sets. The symbol || can be used in place of the word OR.
+    </p>
+    <p>
+      To search for documents that contain either <code>jakarta apache</code> or just <code>jakarta</code> use the query:
+    </p>
+    <p>
+      <code>"jakarta apache" jakarta</code>
+    </p>
+    <p>
+      or
+    </p>
+    <p>
+      <code>"jakarta apache" OR jakarta</code>
+    </p>
+    <p>
+      <br>
+    </p>
+    <h4>
+      <span class="mw-headline" id="AND">AND</span>
+    </h4>
+    <p>
+      The AND operator matches documents where both terms exist anywhere in the text of a single document. This is equivalent to an intersection using sets. The symbol &amp;&amp; can be used in place of the word AND.
+    </p>
+    <p>
+      To search for documents that contain "jakarta apache" and "Apache Lucene" use the query:
+    </p>
+    <p>
+      <code>"jakarta apache" AND "Apache Lucene"</code>
+    </p>
+    <h4>
+      <span class="mw-headline" id=".2B">+</span>
+    </h4>
+    <p>
+      The "+" or required operator requires that the term after the "+" symbol exist somewhere in a the field of a single document.
+    </p>
+    <p>
+      To search for documents that must contain "jakarta" and may contain "lucene" use the query:
+    </p>
+    <p>
+      <code>+jakarta lucene</code>
+    </p>
+    <h4>
+      <span class="mw-headline" id="NOT">NOT</span>
+    </h4>
+    <p>
+      The NOT operator excludes documents that contain the term after NOT. This is equivalent to a difference using sets. The symbol ! can be used in place of the word NOT.
+    </p>
+    <p>
+      To search for documents that contain "jakarta apache" but not "Apache Lucene" use the query:
+    </p>
+    <p>
+      <code>"jakarta apache" NOT "Apache Lucene"</code>
+    </p>
+    <p>
+      Note: The NOT operator cannot be used with just one term. For example, the following search will return no results:
+    </p>
+    <p>
+      <code>NOT "jakarta apache"</code>
+    </p>
+    <h4>
+      <span class="mw-headline" id="-">-</span>
+    </h4>
+    <p>
+      The "-" or prohibit operator excludes documents that contain the term after the "-" symbol.
+    </p>
+    <p>
+      To search for documents that contain "jakarta apache" but not "Apache Lucene" use the query:
+    </p>
+    <p>
+      <code>"jakarta apache" -"Apache Lucene"</code>
+    </p>
+    <h3>
+      <span class="mw-headline" id="Grouping">Grouping</span>
+    </h3>
+    <p>
+      Lucene supports using parentheses to group clauses to form sub queries. This can be very useful if you want to control the boolean logic for a query.
+    </p>
+    <p>
+      To search for either "jakarta" or "apache" and "website" use the query:
+    </p>
+    <p>
+      <code>(jakarta OR apache) AND website</code>
+    </p>
+    <p>
+      This eliminates any confusion and makes sure you that website must exist and either term jakarta or apache may exist. Field Grouping
+    </p>
+    <h3>
+      <span class="mw-headline" id="Escaping_Special_Characters">Escaping Special Characters</span>
+    </h3>
+    <p>
+      Lucene supports escaping special characters that are part of the query syntax. The current list special characters are
+    </p>
+    <p>
+      <code>+ - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \</code>
+    </p>
+    <p>
+      To escape these character use the \ before the character. For example to search for (1+1):2 use the query:
+    </p>
+    <p>
+      <code>\(1\+1\)\:2</code>
+    </p>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://www.youtube.com/watch?v=q0qbXYXEH6M" title="See a video of XOWA Desktop in action">Video</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+        <li><a href="https://www.youtube.com/watch?v=jsMTBxGweUw" title="See a video of XOWA Android in action">Video</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Donate.html" title="Support XOWA!">XOWA</a></li>
+      </ul>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>

@@ -18,10 +18,13 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <div id='xocfg_body'>
+      <!-- TEXT:err_msg -->
       <div id='xocfg_err'>
       </div>
       <div>
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+        <!-- BTN:info -->
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
+         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
           <option value='xowa.app.security'>
             App - Security
           </option>
@@ -45,6 +48,9 @@
           </option>
           <option value='xowa.gui.shortcuts'>
             Gui - Shortcuts
+          </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Nightmode
           </option>
           <option value='xowa.wiki.hdumps'>
             Wiki - HTML Databases
@@ -85,6 +91,9 @@
           <option value='xowa.addon.search'>
             Addon - Search
           </option>
+          <option value='xowa.addon.fulltext_search'>
+            Addon - Full-text search
+          </option>
           <option value='xowa.addon.category'>
             Addon - Category
           </option>
@@ -109,15 +118,14 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Night mode
-          </option>
-          <option value='xowa.addon.search.fulltext'>
-            Addon - Full text search
-          </option>
-        </select>
+        </select> <!-- LINK:cfg_link -->
+         
+        <div style='float:right;margin:2px 7px;'>
+          <a id='options_lnk'>options link</a>
+        </div>
       </div>
       <div id='cfg_grps'>
+        <!-- TEXT:page_help -->
         <div>
           <p id='page_help_para'>
           </p>
@@ -126,23 +134,25 @@
           Wikidata wiki
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.langs.core_langs")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.wikibase.langs.core_langs__name' class='xocfg_itm_name'>
             Text languages
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.wikibase.langs.core_langs__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.langs.core_langs")' title="reset to &quot;en&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.wikibase.langs.core_langs" data-xocfg-key="xowa.addon.wikibase.langs.core_langs" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="en">
-          </div><input type='hidden' id='xowa.addon.wikibase.langs.core_langs__key_box' value='xowa.addon.wikibase.langs.core_langs'> <input type='hidden' id='xowa.addon.wikibase.langs.core_langs__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.wikibase.langs.core_langs__key_box' value='xowa.addon.wikibase.langs.core_langs'> <input type='hidden' id='xowa.addon.wikibase.langs.core_langs__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.wikibase.langs.core_langs_help_div' class='xohelp_div'>
           <div id='xowa.addon.wikibase.langs.core_langs_help_msg' class='xohelp_msg'>
             <p>
-              Enter multiple language codes separated by a semi-colon. See <a tabindex="-1" href="/wiki/Options/Language" id="xolnki_39" title="Options/Language" class="xowa-visited">Options/Language</a> for a full list of valid language codes.<br>
+              Enter multiple language codes separated by a semi-colon. See <a tabindex="-1" href="/wiki/Options/Language" id="xolnki_39" title="Options/Language">Options/Language</a> for a full list of valid language codes.<br>
               The text languages are used for the following:
             </p>
             <ul>
@@ -159,19 +169,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.langs.sort_langs")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.wikibase.langs.sort_langs__name' class='xocfg_itm_name'>
             Sort languages
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.wikibase.langs.sort_langs__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.langs.sort_langs")' title="reset to &quot;en;de;es;fr;it;nl;pl;ru;sv&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.wikibase.langs.sort_langs" data-xocfg-key="xowa.addon.wikibase.langs.sort_langs" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="en;de;es;fr;it;nl;pl;ru;sv">
-          </div><input type='hidden' id='xowa.addon.wikibase.langs.sort_langs__key_box' value='xowa.addon.wikibase.langs.sort_langs'> <input type='hidden' id='xowa.addon.wikibase.langs.sort_langs__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.wikibase.langs.sort_langs__key_box' value='xowa.addon.wikibase.langs.sort_langs'> <input type='hidden' id='xowa.addon.wikibase.langs.sort_langs__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.wikibase.langs.sort_langs_help_div' class='xohelp_div'>
           <div id='xowa.addon.wikibase.langs.sort_langs_help_msg' class='xohelp_msg'>
             <p>
@@ -181,19 +193,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.xwikis.link_wikis")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.wikibase.xwikis.link_wikis__name' class='xocfg_itm_name'>
             Link wiki
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.wikibase.xwikis.link_wikis__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.xwikis.link_wikis")' title="reset to &quot;enwiki&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.wikibase.xwikis.link_wikis" data-xocfg-key="xowa.addon.wikibase.xwikis.link_wikis" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="enwiki">
-          </div><input type='hidden' id='xowa.addon.wikibase.xwikis.link_wikis__key_box' value='xowa.addon.wikibase.xwikis.link_wikis'> <input type='hidden' id='xowa.addon.wikibase.xwikis.link_wikis__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.wikibase.xwikis.link_wikis__key_box' value='xowa.addon.wikibase.xwikis.link_wikis'> <input type='hidden' id='xowa.addon.wikibase.xwikis.link_wikis__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.wikibase.xwikis.link_wikis_help_div' class='xohelp_div'>
           <div id='xowa.addon.wikibase.xwikis.link_wikis_help_msg' class='xohelp_msg'>
             <p>
@@ -206,19 +220,21 @@
           Special:Item by title
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.item_by_title.site_default")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.wikibase.item_by_title.site_default__name' class='xocfg_itm_name'>
             Site default
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.wikibase.item_by_title.site_default__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.item_by_title.site_default")' title="reset to &quot;enwiki&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.wikibase.item_by_title.site_default" data-xocfg-key="xowa.addon.wikibase.item_by_title.site_default" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="enwiki">
-          </div><input type='hidden' id='xowa.addon.wikibase.item_by_title.site_default__key_box' value='xowa.addon.wikibase.item_by_title.site_default'> <input type='hidden' id='xowa.addon.wikibase.item_by_title.site_default__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.wikibase.item_by_title.site_default__key_box' value='xowa.addon.wikibase.item_by_title.site_default'> <input type='hidden' id='xowa.addon.wikibase.item_by_title.site_default__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.wikibase.item_by_title.site_default_help_div' class='xohelp_div'>
           <div id='xowa.addon.wikibase.item_by_title.site_default_help_msg' class='xohelp_msg'>
             <p>

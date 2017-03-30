@@ -18,10 +18,13 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <div id='xocfg_body'>
+      <!-- TEXT:err_msg -->
       <div id='xocfg_err'>
       </div>
       <div>
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+        <!-- BTN:info -->
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
+         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
           <option value='xowa.app.security'>
             App - Security
           </option>
@@ -45,6 +48,9 @@
           </option>
           <option value='xowa.gui.shortcuts'>
             Gui - Shortcuts
+          </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Nightmode
           </option>
           <option value='xowa.wiki.hdumps'>
             Wiki - HTML Databases
@@ -85,6 +91,9 @@
           <option value='xowa.addon.search'>
             Addon - Search
           </option>
+          <option value='xowa.addon.fulltext_search'>
+            Addon - Full-text search
+          </option>
           <option value='xowa.addon.category'>
             Addon - Category
           </option>
@@ -109,15 +118,14 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Night mode
-          </option>
-          <option value='xowa.addon.search.fulltext'>
-            Addon - Full text search
-          </option>
-        </select>
+        </select> <!-- LINK:cfg_link -->
+         
+        <div style='float:right;margin:2px 7px;'>
+          <a id='options_lnk'>options link</a>
+        </div>
       </div>
       <div id='cfg_grps'>
+        <!-- TEXT:page_help -->
         <div>
           <p id='page_help_para'>
           </p>
@@ -126,20 +134,22 @@
           View apps
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.apps.view.web")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.apps.view.web__name' class='xocfg_itm_name'>
             Web browser
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.apps.view.web__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.apps.view.web")' title="reset to &quot;cmd|/c start &quot;&quot; &quot;~{url}&quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.files.apps.view.web-exe" data-xocfg-key="xowa.files.apps.view.web" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="cmd"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.files.apps.view.web-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.files.apps.view.web-arg" data-xocfg-key="xowa.files.apps.view.web" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="/c start &quot;&quot; &quot;~{url}&quot;">
-          </div><input type='hidden' id='xowa.files.apps.view.web__key_box' value='xowa.files.apps.view.web'> <input type='hidden' id='xowa.files.apps.view.web__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.apps.view.web__key_box' value='xowa.files.apps.view.web'> <input type='hidden' id='xowa.files.apps.view.web__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.apps.view.web_help_div' class='xohelp_div'>
           <div id='xowa.files.apps.view.web_help_msg' class='xohelp_msg'>
             <p>
@@ -148,20 +158,22 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.apps.view.media")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.apps.view.media__name' class='xocfg_itm_name'>
             Media player
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.apps.view.media__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.apps.view.media")' title="reset to &quot;cmd|/c start &quot;&quot; &quot;~{file}&quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.files.apps.view.media-exe" data-xocfg-key="xowa.files.apps.view.media" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="cmd"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.files.apps.view.media-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.files.apps.view.media-arg" data-xocfg-key="xowa.files.apps.view.media" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="/c start &quot;&quot; &quot;~{file}&quot;">
-          </div><input type='hidden' id='xowa.files.apps.view.media__key_box' value='xowa.files.apps.view.media'> <input type='hidden' id='xowa.files.apps.view.media__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.apps.view.media__key_box' value='xowa.files.apps.view.media'> <input type='hidden' id='xowa.files.apps.view.media__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.apps.view.media_help_div' class='xohelp_div'>
           <div id='xowa.files.apps.view.media_help_msg' class='xohelp_msg'>
             <p>
@@ -170,20 +182,22 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.apps.view.image")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.apps.view.image__name' class='xocfg_itm_name'>
             Image viewer
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.apps.view.image__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.apps.view.image")' title="reset to &quot;cmd|/c start &quot;&quot; &quot;~{file}&quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.files.apps.view.image-exe" data-xocfg-key="xowa.files.apps.view.image" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="cmd"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.files.apps.view.image-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.files.apps.view.image-arg" data-xocfg-key="xowa.files.apps.view.image" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="/c start &quot;&quot; &quot;~{file}&quot;">
-          </div><input type='hidden' id='xowa.files.apps.view.image__key_box' value='xowa.files.apps.view.image'> <input type='hidden' id='xowa.files.apps.view.image__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.apps.view.image__key_box' value='xowa.files.apps.view.image'> <input type='hidden' id='xowa.files.apps.view.image__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.apps.view.image_help_div' class='xohelp_div'>
           <div id='xowa.files.apps.view.image_help_msg' class='xohelp_msg'>
             <p>
@@ -192,20 +206,22 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.apps.view.svg")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.apps.view.svg__name' class='xocfg_itm_name'>
             SVG viewer
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.apps.view.svg__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.apps.view.svg")' title="reset to &quot;cmd|/c start &quot;&quot; &quot;~{file}&quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.files.apps.view.svg-exe" data-xocfg-key="xowa.files.apps.view.svg" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="cmd"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.files.apps.view.svg-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.files.apps.view.svg-arg" data-xocfg-key="xowa.files.apps.view.svg" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="/c start &quot;&quot; &quot;~{file}&quot;">
-          </div><input type='hidden' id='xowa.files.apps.view.svg__key_box' value='xowa.files.apps.view.svg'> <input type='hidden' id='xowa.files.apps.view.svg__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.apps.view.svg__key_box' value='xowa.files.apps.view.svg'> <input type='hidden' id='xowa.files.apps.view.svg__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.apps.view.svg_help_div' class='xohelp_div'>
           <div id='xowa.files.apps.view.svg_help_msg' class='xohelp_msg'>
             <p>
@@ -214,20 +230,22 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.apps.view.pdf")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.apps.view.pdf__name' class='xocfg_itm_name'>
             PDF viewer
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.apps.view.pdf__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.apps.view.pdf")' title="reset to &quot;cmd|/c start &quot;&quot; &quot;~{file}&quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.files.apps.view.pdf-exe" data-xocfg-key="xowa.files.apps.view.pdf" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="cmd"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.files.apps.view.pdf-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.files.apps.view.pdf-arg" data-xocfg-key="xowa.files.apps.view.pdf" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="/c start &quot;&quot; &quot;~{file}&quot;">
-          </div><input type='hidden' id='xowa.files.apps.view.pdf__key_box' value='xowa.files.apps.view.pdf'> <input type='hidden' id='xowa.files.apps.view.pdf__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.apps.view.pdf__key_box' value='xowa.files.apps.view.pdf'> <input type='hidden' id='xowa.files.apps.view.pdf__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.apps.view.pdf_help_div' class='xohelp_div'>
           <div id='xowa.files.apps.view.pdf_help_msg' class='xohelp_msg'>
             <p>
@@ -236,20 +254,22 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.apps.view.djvu")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.apps.view.djvu__name' class='xocfg_itm_name'>
             DjVu viewer
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.apps.view.djvu__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.apps.view.djvu")' title="reset to &quot;cmd|/c start &quot;&quot; &quot;~{file}&quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.files.apps.view.djvu-exe" data-xocfg-key="xowa.files.apps.view.djvu" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="cmd"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.files.apps.view.djvu-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.files.apps.view.djvu-arg" data-xocfg-key="xowa.files.apps.view.djvu" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="/c start &quot;&quot; &quot;~{file}&quot;">
-          </div><input type='hidden' id='xowa.files.apps.view.djvu__key_box' value='xowa.files.apps.view.djvu'> <input type='hidden' id='xowa.files.apps.view.djvu__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.apps.view.djvu__key_box' value='xowa.files.apps.view.djvu'> <input type='hidden' id='xowa.files.apps.view.djvu__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.apps.view.djvu_help_div' class='xohelp_div'>
           <div id='xowa.files.apps.view.djvu_help_msg' class='xohelp_msg'>
             <p>
@@ -261,20 +281,22 @@
           Build apps
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.apps.make.img_size_get")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.apps.make.img_size_get__name' class='xocfg_itm_name'>
             ImageMagick - Identify
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.apps.make.img_size_get__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.apps.make.img_size_get")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}imagemagick\identify|-ping -format &quot;&lt;{%w,%h}&gt;&quot; &quot;~{file}&quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.files.apps.make.img_size_get-exe" data-xocfg-key="xowa.files.apps.make.img_size_get" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}imagemagick\identify"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.files.apps.make.img_size_get-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.files.apps.make.img_size_get-arg" data-xocfg-key="xowa.files.apps.make.img_size_get" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="-ping -format &quot;&lt;{%w,%h}&gt;&quot; &quot;~{file}&quot;">
-          </div><input type='hidden' id='xowa.files.apps.make.img_size_get__key_box' value='xowa.files.apps.make.img_size_get'> <input type='hidden' id='xowa.files.apps.make.img_size_get__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.apps.make.img_size_get__key_box' value='xowa.files.apps.make.img_size_get'> <input type='hidden' id='xowa.files.apps.make.img_size_get__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.apps.make.img_size_get_help_div' class='xohelp_div'>
           <div id='xowa.files.apps.make.img_size_get_help_msg' class='xohelp_msg'>
             <p>
@@ -283,20 +305,22 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.apps.make.img_size_set")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.apps.make.img_size_set__name' class='xocfg_itm_name'>
             ImageMagick - Convert
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.apps.make.img_size_set__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.apps.make.img_size_set")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}imagemagick\convert|&quot;~{source}&quot; -coalesce -resize ~{width}x~{height} &quot;~{target}&quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.files.apps.make.img_size_set-exe" data-xocfg-key="xowa.files.apps.make.img_size_set" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}imagemagick\convert"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.files.apps.make.img_size_set-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.files.apps.make.img_size_set-arg" data-xocfg-key="xowa.files.apps.make.img_size_set" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="&quot;~{source}&quot; -coalesce -resize ~{width}x~{height} &quot;~{target}&quot;">
-          </div><input type='hidden' id='xowa.files.apps.make.img_size_set__key_box' value='xowa.files.apps.make.img_size_set'> <input type='hidden' id='xowa.files.apps.make.img_size_set__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.apps.make.img_size_set__key_box' value='xowa.files.apps.make.img_size_set'> <input type='hidden' id='xowa.files.apps.make.img_size_set__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.apps.make.img_size_set_help_div' class='xohelp_div'>
           <div id='xowa.files.apps.make.img_size_set_help_msg' class='xohelp_msg'>
             <p>
@@ -305,20 +329,22 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.apps.make.svg_to_png")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.apps.make.svg_to_png__name' class='xocfg_itm_name'>
             Inkscape
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.apps.make.svg_to_png__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.apps.make.svg_to_png")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}inkscape\inkscape|-z -w ~{width} -f &quot;~{source}&quot; -e &quot;~{target}&quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.files.apps.make.svg_to_png-exe" data-xocfg-key="xowa.files.apps.make.svg_to_png" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}inkscape\inkscape"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.files.apps.make.svg_to_png-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.files.apps.make.svg_to_png-arg" data-xocfg-key="xowa.files.apps.make.svg_to_png" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="-z -w ~{width} -f &quot;~{source}&quot; -e &quot;~{target}&quot;">
-          </div><input type='hidden' id='xowa.files.apps.make.svg_to_png__key_box' value='xowa.files.apps.make.svg_to_png'> <input type='hidden' id='xowa.files.apps.make.svg_to_png__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.apps.make.svg_to_png__key_box' value='xowa.files.apps.make.svg_to_png'> <input type='hidden' id='xowa.files.apps.make.svg_to_png__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.apps.make.svg_to_png_help_div' class='xohelp_div'>
           <div id='xowa.files.apps.make.svg_to_png_help_msg' class='xohelp_msg'>
             <p>
@@ -327,20 +353,22 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.apps.make.djvu_to_tiff")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.files.apps.make.djvu_to_tiff__name' class='xocfg_itm_name'>
             DjVu converter
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.files.apps.make.djvu_to_tiff__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.apps.make.djvu_to_tiff")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}djvulibre\ddjvu|-format=tiff -page=1 &quot;~{source}&quot; &quot;~{target}&quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input class="xocfg_data__io_cmd__exe__txt" id="xowa.files.apps.make.djvu_to_tiff-exe" data-xocfg-key="xowa.files.apps.make.djvu_to_tiff" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}djvulibre\ddjvu"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.files.apps.make.djvu_to_tiff-exe", "Please select a file.");'>&nbsp;</span><br>
             <input class="xocfg_data__io_cmd__arg__txt" id="xowa.files.apps.make.djvu_to_tiff-arg" data-xocfg-key="xowa.files.apps.make.djvu_to_tiff" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="-format=tiff -page=1 &quot;~{source}&quot; &quot;~{target}&quot;">
-          </div><input type='hidden' id='xowa.files.apps.make.djvu_to_tiff__key_box' value='xowa.files.apps.make.djvu_to_tiff'> <input type='hidden' id='xowa.files.apps.make.djvu_to_tiff__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.apps.make.djvu_to_tiff__key_box' value='xowa.files.apps.make.djvu_to_tiff'> <input type='hidden' id='xowa.files.apps.make.djvu_to_tiff__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.files.apps.make.djvu_to_tiff_help_div' class='xohelp_div'>
           <div id='xowa.files.apps.make.djvu_to_tiff_help_msg' class='xohelp_msg'>
             <p>

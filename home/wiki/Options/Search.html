@@ -18,10 +18,13 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <div id='xocfg_body'>
+      <!-- TEXT:err_msg -->
       <div id='xocfg_err'>
       </div>
       <div>
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+        <!-- BTN:info -->
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
+         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
           <option value='xowa.app.security'>
             App - Security
           </option>
@@ -45,6 +48,9 @@
           </option>
           <option value='xowa.gui.shortcuts'>
             Gui - Shortcuts
+          </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Nightmode
           </option>
           <option value='xowa.wiki.hdumps'>
             Wiki - HTML Databases
@@ -85,6 +91,9 @@
           <option value='xowa.addon.search' selected='selected'>
             Addon - Search
           </option>
+          <option value='xowa.addon.fulltext_search'>
+            Addon - Full-text search
+          </option>
           <option value='xowa.addon.category'>
             Addon - Category
           </option>
@@ -109,15 +118,14 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Night mode
-          </option>
-          <option value='xowa.addon.search.fulltext'>
-            Addon - Full text search
-          </option>
-        </select>
+        </select> <!-- LINK:cfg_link -->
+         
+        <div style='float:right;margin:2px 7px;'>
+          <a id='options_lnk'>options link</a>
+        </div>
       </div>
       <div id='cfg_grps'>
+        <!-- TEXT:page_help -->
         <div>
           <p id='page_help_para'>
           </p>
@@ -126,19 +134,21 @@
           Suggest box
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.suggest.enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.search.suggest.enabled__name' class='xocfg_itm_name'>
             Enabled
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.search.suggest.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.suggest.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.search.suggest.enabled" data-xocfg-key="xowa.addon.search.suggest.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.addon.search.suggest.enabled__key_box' value='xowa.addon.search.suggest.enabled'> <input type='hidden' id='xowa.addon.search.suggest.enabled__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.search.suggest.enabled__key_box' value='xowa.addon.search.suggest.enabled'> <input type='hidden' id='xowa.addon.search.suggest.enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.search.suggest.enabled_help_div' class='xohelp_div'>
           <div id='xowa.addon.search.suggest.enabled_help_msg' class='xohelp_msg'>
             <p>
@@ -155,19 +165,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.suggest.results_max")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.search.suggest.results_max__name' class='xocfg_itm_name'>
             Max results
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.search.suggest.results_max__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.suggest.results_max")' title="reset to &quot;25&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.search.suggest.results_max" data-xocfg-key="xowa.addon.search.suggest.results_max" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="25">
-          </div><input type='hidden' id='xowa.addon.search.suggest.results_max__key_box' value='xowa.addon.search.suggest.results_max'> <input type='hidden' id='xowa.addon.search.suggest.results_max__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.search.suggest.results_max__key_box' value='xowa.addon.search.suggest.results_max'> <input type='hidden' id='xowa.addon.search.suggest.results_max__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.search.suggest.results_max_help_div' class='xohelp_div'>
           <div id='xowa.addon.search.suggest.results_max_help_msg' class='xohelp_msg'>
             <p>
@@ -179,19 +191,21 @@
           Special:Search
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.special.results_per_page")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.search.special.results_per_page__name' class='xocfg_itm_name'>
             Results per page
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.search.special.results_per_page__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.special.results_per_page")' title="reset to &quot;100&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.search.special.results_per_page" data-xocfg-key="xowa.addon.search.special.results_per_page" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="100">
-          </div><input type='hidden' id='xowa.addon.search.special.results_per_page__key_box' value='xowa.addon.search.special.results_per_page'> <input type='hidden' id='xowa.addon.search.special.results_per_page__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.search.special.results_per_page__key_box' value='xowa.addon.search.special.results_per_page'> <input type='hidden' id='xowa.addon.search.special.results_per_page__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.search.special.results_per_page_help_div' class='xohelp_div'>
           <div id='xowa.addon.search.special.results_per_page_help_msg' class='xohelp_msg'>
             <p>
@@ -200,19 +214,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.special.async_db")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.search.special.async_db__name' class='xocfg_itm_name'>
             Run database search in background
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.search.special.async_db__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.special.async_db")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.search.special.async_db" data-xocfg-key="xowa.addon.search.special.async_db" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.addon.search.special.async_db__key_box' value='xowa.addon.search.special.async_db'> <input type='hidden' id='xowa.addon.search.special.async_db__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.search.special.async_db__key_box' value='xowa.addon.search.special.async_db'> <input type='hidden' id='xowa.addon.search.special.async_db__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.search.special.async_db_help_div' class='xohelp_div'>
           <div id='xowa.addon.search.special.async_db_help_msg' class='xohelp_msg'>
             <p>
@@ -229,19 +245,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.special.auto_wildcard")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.search.special.auto_wildcard__name' class='xocfg_itm_name'>
             Auto-wildcard
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.search.special.auto_wildcard__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.special.auto_wildcard")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.search.special.auto_wildcard" data-xocfg-key="xowa.addon.search.special.auto_wildcard" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.addon.search.special.auto_wildcard__key_box' value='xowa.addon.search.special.auto_wildcard'> <input type='hidden' id='xowa.addon.search.special.auto_wildcard__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.search.special.auto_wildcard__key_box' value='xowa.addon.search.special.auto_wildcard'> <input type='hidden' id='xowa.addon.search.special.auto_wildcard__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.search.special.auto_wildcard_help_div' class='xohelp_div'>
           <div id='xowa.addon.search.special.auto_wildcard_help_msg' class='xohelp_msg'>
             <p>
@@ -272,19 +290,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.special.args_default")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.search.special.args_default__name' class='xocfg_itm_name'>
             Default url search arguments
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.search.special.args_default__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.special.args_default")' title="reset to &quot;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.addon.search.special.args_default" data-xocfg-key="xowa.addon.search.special.args_default" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="">
-          </div><input type='hidden' id='xowa.addon.search.special.args_default__key_box' value='xowa.addon.search.special.args_default'> <input type='hidden' id='xowa.addon.search.special.args_default__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.search.special.args_default__key_box' value='xowa.addon.search.special.args_default'> <input type='hidden' id='xowa.addon.search.special.args_default__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.search.special.args_default_help_div' class='xohelp_div'>
           <div id='xowa.addon.search.special.args_default_help_msg' class='xohelp_msg'>
             <p>
@@ -301,21 +321,23 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.special.multi_wikis")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.search.special.multi_wikis__name' class='xocfg_itm_name'>
             Multi-wiki search wikis
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.search.special.multi_wikis__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.special.multi_wikis")' title="reset to &quot;&lt;any&gt;|&lt;self&gt;&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
 <textarea id="xowa.addon.search.special.multi_wikis" data-xocfg-key="xowa.addon.search.special.multi_wikis" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
 </textarea>
             |
-          </div><input type='hidden' id='xowa.addon.search.special.multi_wikis__key_box' value='xowa.addon.search.special.multi_wikis'> <input type='hidden' id='xowa.addon.search.special.multi_wikis__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.search.special.multi_wikis__key_box' value='xowa.addon.search.special.multi_wikis'> <input type='hidden' id='xowa.addon.search.special.multi_wikis__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.search.special.multi_wikis_help_div' class='xohelp_div'>
           <div id='xowa.addon.search.special.multi_wikis_help_msg' class='xohelp_msg'>
             <p>
@@ -386,21 +408,23 @@ fr.wikivoyage.org,en.wikivoyage.org|&lt;self&gt;,en.wikipedia.org
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.search.special.multi_sorts")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.addon.search.special.multi_sorts__name' class='xocfg_itm_name'>
             Multi-wiki sort order
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.addon.search.special.multi_sorts__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.search.special.multi_sorts")' title="reset to &quot;&lt;any&gt;|&lt;self&gt;,*.wikipedia,*.wikivoyage,*.wiktionary,*.wikisource,*.wikiquote,*.wikibooks,*.wikiversity,*.wikinews&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
 <textarea id="xowa.addon.search.special.multi_sorts" data-xocfg-key="xowa.addon.search.special.multi_sorts" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
 </textarea>
             |,*.wikipedia,*.wikivoyage,*.wiktionary,*.wikisource,*.wikiquote,*.wikibooks,*.wikiversity,*.wikinews
-          </div><input type='hidden' id='xowa.addon.search.special.multi_sorts__key_box' value='xowa.addon.search.special.multi_sorts'> <input type='hidden' id='xowa.addon.search.special.multi_sorts__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.addon.search.special.multi_sorts__key_box' value='xowa.addon.search.special.multi_sorts'> <input type='hidden' id='xowa.addon.search.special.multi_sorts__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.addon.search.special.multi_sorts_help_div' class='xohelp_div'>
           <div id='xowa.addon.search.special.multi_sorts_help_msg' class='xohelp_msg'>
             <p>

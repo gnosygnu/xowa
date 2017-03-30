@@ -18,10 +18,13 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <div id='xocfg_body'>
+      <!-- TEXT:err_msg -->
       <div id='xocfg_err'>
       </div>
       <div>
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+        <!-- BTN:info -->
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
+         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
           <option value='xowa.app.security'>
             App - Security
           </option>
@@ -45,6 +48,9 @@
           </option>
           <option value='xowa.gui.shortcuts'>
             Gui - Shortcuts
+          </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Nightmode
           </option>
           <option value='xowa.wiki.hdumps'>
             Wiki - HTML Databases
@@ -85,6 +91,9 @@
           <option value='xowa.addon.search'>
             Addon - Search
           </option>
+          <option value='xowa.addon.fulltext_search'>
+            Addon - Full-text search
+          </option>
           <option value='xowa.addon.category'>
             Addon - Category
           </option>
@@ -109,15 +118,14 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Night mode
-          </option>
-          <option value='xowa.addon.search.fulltext'>
-            Addon - Full text search
-          </option>
-        </select>
+        </select> <!-- LINK:cfg_link -->
+         
+        <div style='float:right;margin:2px 7px;'>
+          <a id='options_lnk'>options link</a>
+        </div>
       </div>
       <div id='cfg_grps'>
+        <!-- TEXT:page_help -->
         <div>
           <p id='page_help_para'>
           </p>
@@ -129,19 +137,21 @@
           Manual
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.page_sync.manual.enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.page_sync.manual.enabled__name' class='xocfg_itm_name'>
             Enabled
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.page_sync.manual.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.page_sync.manual.enabled")' title="reset to &quot;n&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.bldr.page_sync.manual.enabled" data-xocfg-key="xowa.bldr.page_sync.manual.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
-          </div><input type='hidden' id='xowa.bldr.page_sync.manual.enabled__key_box' value='xowa.bldr.page_sync.manual.enabled'> <input type='hidden' id='xowa.bldr.page_sync.manual.enabled__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.page_sync.manual.enabled__key_box' value='xowa.bldr.page_sync.manual.enabled'> <input type='hidden' id='xowa.bldr.page_sync.manual.enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.page_sync.manual.enabled_help_div' class='xohelp_div'>
           <div id='xowa.bldr.page_sync.manual.enabled_help_msg' class='xohelp_msg'>
             <p>
@@ -175,19 +185,21 @@
           Automatic
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.page_sync.auto.enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.page_sync.auto.enabled__name' class='xocfg_itm_name'>
             Enabled
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.page_sync.auto.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.page_sync.auto.enabled")' title="reset to &quot;n&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.bldr.page_sync.auto.enabled" data-xocfg-key="xowa.bldr.page_sync.auto.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
-          </div><input type='hidden' id='xowa.bldr.page_sync.auto.enabled__key_box' value='xowa.bldr.page_sync.auto.enabled'> <input type='hidden' id='xowa.bldr.page_sync.auto.enabled__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.page_sync.auto.enabled__key_box' value='xowa.bldr.page_sync.auto.enabled'> <input type='hidden' id='xowa.bldr.page_sync.auto.enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.page_sync.auto.enabled_help_div' class='xohelp_div'>
           <div id='xowa.bldr.page_sync.auto.enabled_help_msg' class='xohelp_msg'>
             <p>
@@ -215,19 +227,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.page_sync.auto.interval")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.page_sync.auto.interval__name' class='xocfg_itm_name'>
             Time to wait before syncs
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.page_sync.auto.interval__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.page_sync.auto.interval")' title="reset to &quot;1440&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.bldr.page_sync.auto.interval" data-xocfg-key="xowa.bldr.page_sync.auto.interval" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="1440">
-          </div><input type='hidden' id='xowa.bldr.page_sync.auto.interval__key_box' value='xowa.bldr.page_sync.auto.interval'> <input type='hidden' id='xowa.bldr.page_sync.auto.interval__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.page_sync.auto.interval__key_box' value='xowa.bldr.page_sync.auto.interval'> <input type='hidden' id='xowa.bldr.page_sync.auto.interval__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.page_sync.auto.interval_help_div' class='xohelp_div'>
           <div id='xowa.bldr.page_sync.auto.interval_help_msg' class='xohelp_msg'>
             <p>
@@ -236,21 +250,23 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.page_sync.auto.scope")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.bldr.page_sync.auto.scope__name' class='xocfg_itm_name'>
             Pages to sync
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.bldr.page_sync.auto.scope__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.page_sync.auto.scope")' title="reset to &quot;*&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
 <textarea id="xowa.bldr.page_sync.auto.scope" data-xocfg-key="xowa.bldr.page_sync.auto.scope" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
 *
 </textarea>
-          </div><input type='hidden' id='xowa.bldr.page_sync.auto.scope__key_box' value='xowa.bldr.page_sync.auto.scope'> <input type='hidden' id='xowa.bldr.page_sync.auto.scope__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.bldr.page_sync.auto.scope__key_box' value='xowa.bldr.page_sync.auto.scope'> <input type='hidden' id='xowa.bldr.page_sync.auto.scope__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.bldr.page_sync.auto.scope_help_div' class='xohelp_div'>
           <div id='xowa.bldr.page_sync.auto.scope_help_msg' class='xohelp_msg'>
             <p>

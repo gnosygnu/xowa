@@ -18,10 +18,13 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <div id='xocfg_body'>
+      <!-- TEXT:err_msg -->
       <div id='xocfg_err'>
       </div>
       <div>
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+        <!-- BTN:info -->
+        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
+         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
           <option value='xowa.app.security' selected='selected'>
             App - Security
           </option>
@@ -45,6 +48,9 @@
           </option>
           <option value='xowa.gui.shortcuts'>
             Gui - Shortcuts
+          </option>
+          <option value='xowa.gui.nightmode'>
+            Gui - Nightmode
           </option>
           <option value='xowa.wiki.hdumps'>
             Wiki - HTML Databases
@@ -85,6 +91,9 @@
           <option value='xowa.addon.search'>
             Addon - Search
           </option>
+          <option value='xowa.addon.fulltext_search'>
+            Addon - Full-text search
+          </option>
           <option value='xowa.addon.category'>
             Addon - Category
           </option>
@@ -109,15 +118,14 @@
           <option value='xowa.dev.general'>
             Dev - General
           </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Night mode
-          </option>
-          <option value='xowa.addon.search.fulltext'>
-            Addon - Full text search
-          </option>
-        </select>
+        </select> <!-- LINK:cfg_link -->
+         
+        <div style='float:right;margin:2px 7px;'>
+          <a id='options_lnk'>options link</a>
+        </div>
       </div>
       <div id='cfg_grps'>
+        <!-- TEXT:page_help -->
         <div>
           <p id='page_help_para'>
           </p>
@@ -126,19 +134,21 @@
           Web
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.web.enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.app.web.enabled__name' class='xocfg_itm_name'>
             Web access enabled
-          </div>
-          <div id='xowa.app.web.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete'>
+          </div><!-- BTN:undo -->
+          <div id='xowa.app.web.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.web.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
-            <input id="xowa.app.web.enabled" data-xocfg-key="xowa.app.web.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
-          </div><input type='hidden' id='xowa.app.web.enabled__key_box' value='xowa.app.web.enabled'> <input type='hidden' id='xowa.app.web.enabled__ctx_box' value='app'>
-        </div>
+            <input id="xowa.app.web.enabled" data-xocfg-key="xowa.app.web.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.app.web.enabled__key_box' value='xowa.app.web.enabled'> <input type='hidden' id='xowa.app.web.enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.app.web.enabled_help_div' class='xohelp_div'>
           <div id='xowa.app.web.enabled_help_msg' class='xohelp_msg'>
             <p>
@@ -181,19 +191,21 @@
           Privacy
         </h2>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.logs.enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.app.logs.enabled__name' class='xocfg_itm_name'>
             Logs enabled
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.app.logs.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.logs.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.app.logs.enabled" data-xocfg-key="xowa.app.logs.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.app.logs.enabled__key_box' value='xowa.app.logs.enabled'> <input type='hidden' id='xowa.app.logs.enabled__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.app.logs.enabled__key_box' value='xowa.app.logs.enabled'> <input type='hidden' id='xowa.app.logs.enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.app.logs.enabled_help_div' class='xohelp_div'>
           <div id='xowa.app.logs.enabled_help_msg' class='xohelp_msg'>
             <p>
@@ -201,7 +213,7 @@
             </p>
             <ul>
               <li>
-                <b>checked</b>: Enable logs. XOWA logs application activity for diagnostic purposes. Note that these logs are never shared or uploaded. See <a tabindex="-1" href="/wiki/Help/Privacy" id="xolnki_5" title="Help/Privacy">Help/Privacy</a> for more info
+                <b>checked</b>: Enable logs. XOWA logs application activity for diagnostic purposes. Note that these logs are never shared or uploaded. See <a tabindex="-1" href="/wiki/Help/Privacy" id="xolnki_4" title="Help/Privacy">Help/Privacy</a> for more info
               </li>
               <li>
                 <b>unchecked</b>: Disable logs. No messages will be written to the log. You can check by going to Help -&gt; System Data -&gt; Session Log
@@ -210,19 +222,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.bookmarks.enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.app.bookmarks.enabled__name' class='xocfg_itm_name'>
             Bookmarks enabled
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.app.bookmarks.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.bookmarks.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.app.bookmarks.enabled" data-xocfg-key="xowa.app.bookmarks.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.app.bookmarks.enabled__key_box' value='xowa.app.bookmarks.enabled'> <input type='hidden' id='xowa.app.bookmarks.enabled__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.app.bookmarks.enabled__key_box' value='xowa.app.bookmarks.enabled'> <input type='hidden' id='xowa.app.bookmarks.enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.app.bookmarks.enabled_help_div' class='xohelp_div'>
           <div id='xowa.app.bookmarks.enabled_help_msg' class='xohelp_msg'>
             <p>
@@ -230,7 +244,7 @@
             </p>
             <ul>
               <li>
-                <b>checked</b>: Enable bookmarks. XOWA adds bookmarks whenever the user chooses "Bookmark this page". Note that these bookmarks are never shared or uploaded. See <a tabindex="-1" href="/wiki/Help/Privacy" id="xolnki_6" title="Help/Privacy">Help/Privacy</a> for more info
+                <b>checked</b>: Enable bookmarks. XOWA adds bookmarks whenever the user chooses "Bookmark this page". Note that these bookmarks are never shared or uploaded. See <a tabindex="-1" href="/wiki/Help/Privacy" id="xolnki_5" title="Help/Privacy">Help/Privacy</a> for more info
               </li>
               <li>
                 <b>unchecked</b>: Disable adding bookmarks. No bookmarks will be be added, even if the user clicks "Bookmark this page". You can check by clicking "Bookmark this page" and then clicking "Show all bookmarks"
@@ -239,19 +253,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.page_history.enabled")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.app.page_history.enabled__name' class='xocfg_itm_name'>
             History enabled
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.app.page_history.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.page_history.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.app.page_history.enabled" data-xocfg-key="xowa.app.page_history.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><input type='hidden' id='xowa.app.page_history.enabled__key_box' value='xowa.app.page_history.enabled'> <input type='hidden' id='xowa.app.page_history.enabled__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.app.page_history.enabled__key_box' value='xowa.app.page_history.enabled'> <input type='hidden' id='xowa.app.page_history.enabled__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.app.page_history.enabled_help_div' class='xohelp_div'>
           <div id='xowa.app.page_history.enabled_help_msg' class='xohelp_msg'>
             <p>
@@ -259,7 +275,7 @@
             </p>
             <ul>
               <li>
-                <b>checked</b>: Enable page history. XOWA stores viewed pages for the Page History page (History -&gt; Show). Note that this history is never shared or uploaded. See <a tabindex="-1" href="/wiki/Help/Privacy" id="xolnki_7" title="Help/Privacy">Help/Privacy</a> for more info
+                <b>checked</b>: Enable page history. XOWA stores viewed pages for the Page History page (History -&gt; Show). Note that this history is never shared or uploaded. See <a tabindex="-1" href="/wiki/Help/Privacy" id="xolnki_6" title="Help/Privacy">Help/Privacy</a> for more info
               </li>
               <li>
                 <b>unchecked</b>: Disable page history. No pages will be stored in page history. You can check by going to Help -&gt; System Data -&gt; Page History
@@ -268,19 +284,21 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.app.page_history.log_all")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.app.page_history.log_all__name' class='xocfg_itm_name'>
             Log all page history
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.app.page_history.log_all__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.app.page_history.log_all")' title="reset to &quot;n&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <input id="xowa.app.page_history.log_all" data-xocfg-key="xowa.app.page_history.log_all" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
-          </div><input type='hidden' id='xowa.app.page_history.log_all__key_box' value='xowa.app.page_history.log_all'> <input type='hidden' id='xowa.app.page_history.log_all__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.app.page_history.log_all__key_box' value='xowa.app.page_history.log_all'> <input type='hidden' id='xowa.app.page_history.log_all__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.app.page_history.log_all_help_div' class='xohelp_div'>
           <div id='xowa.app.page_history.log_all_help_msg' class='xohelp_msg'>
             <p>
@@ -300,15 +318,16 @@
           </div>
         </div>
         <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.html_box.page_load_mode")' title='view more info'>&nbsp;</span>
-          </div>
+          </div><!-- TEXT:key -->
           <div id='xowa.gui.html_box.page_load_mode__name' class='xocfg_itm_name'>
             Load HTML to browser method
-          </div>
+          </div><!-- BTN:undo -->
           <div id='xowa.gui.html_box.page_load_mode__undo' data-xocfg-type='list:xowa.gui.html_box.page_load_mode' class='xocfg_itm_delete'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.html_box.page_load_mode")' title="reset to &quot;mem&quot;">&nbsp;</span>
-          </div>
+          </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
             <select id="xowa.gui.html_box.page_load_mode" data-xocfg-key="xowa.gui.html_box.page_load_mode" data-xocfg-type="list:xowa.gui.html_box.page_load_mode" accesskey="d" class="xocfg_data__list" size="2">
               <option value="mem">
@@ -318,8 +337,9 @@
                 url
               </option>
             </select>
-          </div><input type='hidden' id='xowa.gui.html_box.page_load_mode__key_box' value='xowa.gui.html_box.page_load_mode'> <input type='hidden' id='xowa.gui.html_box.page_load_mode__ctx_box' value='app'>
-        </div>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.gui.html_box.page_load_mode__key_box' value='xowa.gui.html_box.page_load_mode'> <input type='hidden' id='xowa.gui.html_box.page_load_mode__ctx_box' value='app'>
+        </div><!-- DIV:help -->
         <div id='xowa.gui.html_box.page_load_mode_help_div' class='xohelp_div'>
           <div id='xowa.gui.html_box.page_load_mode_help_msg' class='xohelp_msg'>
             <p>
@@ -330,7 +350,7 @@
                 <b>mem</b>: Load HTML through memory by calling <code>browser.setText(html)</code>. For unknown reasons, SWT / XULRunner uses more memory when loading HTML by setText -- as much as 5 - 10 MB for a page like en.w:Earth.
               </li>
               <li>
-                <b>url</b>: Load HTML through the file system by calling <code>browser.setUrl(file, html)</code>. This call uses less memory, but requires writing the HTML to disk. (see /xowa/user/anonymous/app/tmp/html) Although setting HTML via disk is theoretically slower than memory, the time difference is not noticeable. This may be more of an issue for users with privacy concerns. For more info on the latter, see <a tabindex="-1" href="/wiki/Help/Privacy" id="xolnki_8" title="Help/Privacy">Help/Privacy</a>.
+                <b>url</b>: Load HTML through the file system by calling <code>browser.setUrl(file, html)</code>. This call uses less memory, but requires writing the HTML to disk. (see /xowa/user/anonymous/app/tmp/html) Although setting HTML via disk is theoretically slower than memory, the time difference is not noticeable. This may be more of an issue for users with privacy concerns. For more info on the latter, see <a tabindex="-1" href="/wiki/Help/Privacy" id="xolnki_7" title="Help/Privacy">Help/Privacy</a>.
               </li>
             </ul>
             <p>
