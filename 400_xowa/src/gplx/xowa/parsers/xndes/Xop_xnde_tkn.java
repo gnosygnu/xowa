@@ -106,10 +106,11 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 			default:								// ignore tags except for xtn; NOTE: Xtn tags are part of tagRegy_wiki_tmpl stage
 				if (tag.Xtn()) {
 					Bry_bfr cur_bfr = bfr;
-//						boolean is_tmpl_mode = ctx.Wiki().Parser_mgr().Ctx().Parse_tid() == Xop_parser_tid_.Tid__tmpl;
-//						if (is_tmpl_mode) {
-//							cur_bfr = ctx.Wiki().Utl__bfr_mkr().Get_m001().Reset_if_gt(Io_mgr.Len_mb);
-//						}
+					// UNIQ; DATE:2017-03-31
+					boolean is_tmpl_mode = ctx.Wiki().Parser_mgr().Ctx().Parse_tid() == Xop_parser_tid_.Tid__tmpl;
+					if (is_tmpl_mode) {
+						cur_bfr = ctx.Wiki().Utl__bfr_mkr().Get_m001().Reset_if_gt(Io_mgr.Len_mb);
+					}
 
 					// write tag_bgn; EX: <poem>
 					cur_bfr.Add_mid(src, tag_open_bgn, tag_open_end);
@@ -127,11 +128,12 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 						cur_bfr.Add(Byte_ascii.Gt_bry);
 					}
 
-//						if (is_tmpl_mode) {
-//							byte[] val = cur_bfr.To_bry_and_clear();
-//							byte[] key = ctx.Wiki().Parser_mgr().Uniq_mgr().Add(tag.Name_bry(), val);
-//							bfr.Add(key);
-//						}
+					// UNIQ; DATE:2017-03-31
+					if (is_tmpl_mode) {
+						byte[] val = cur_bfr.To_bry_and_clear();
+						byte[] key = ctx.Wiki().Parser_mgr().Uniq_mgr().Add(tag.Name_bry(), val);
+						bfr.Add(key);
+					}
 				}
 				break;
 		}

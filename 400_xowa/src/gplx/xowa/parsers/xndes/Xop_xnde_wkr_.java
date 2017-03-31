@@ -30,9 +30,9 @@ class Xop_xnde_wkr_ {
 			root.Subs_move(owner, subs_bgn, subs_len);			// move everything after "|" back to root
 	}
 	public static int Find_xtn_end(Xop_ctx ctx, byte[] src, int open_end, int src_end, byte[] open_bry, byte[] close_bry) {
+		// UNIQ; DATE:2017-03-31
 		Btrie_slim_mgr xtn_end_tag_trie = ctx.Tmp_mgr().Xnde__xtn_end();
 		xtn_end_tag_trie.Clear();
-		xtn_end_tag_trie.Add_obj(Pfunc_tag.Xtag_bgn_lhs, Find_xtn_end__key__xtag);
 		xtn_end_tag_trie.Add_obj(open_bry, Find_xtn_end__key__bgn);
 		xtn_end_tag_trie.Add_obj(close_bry, Find_xtn_end__key__end);
 		int depth = 0;
@@ -53,30 +53,14 @@ class Xop_xnde_wkr_ {
 						else
 							--depth;
 						break;
-					case Find_xtn_end__tid__xtag:		// xtag found; skip over it; PAGE:it.s:La_Secchia_rapita/Canto_primo DATE:2015-12-03
-						int xtag_end = Find_xtag_end(ctx, src, i, src_end);
-						int angle_end = Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, xtag_end, src_end);
-						i = angle_end;
-						break;
 				}
 			}
 		}
 		return Bry_find_.Not_found;
 	}
-	public static int Find_xtag_end(Xop_ctx ctx, byte[] src, int pos, int src_end) {
-		int xtag_bgn = pos + Pfunc_tag.Xtag_bgn_lhs.length;
-		int tag_id = Bry_.To_int_or(src, xtag_bgn, xtag_bgn + Pfunc_tag.Id_len, -1); if (tag_id == -1) {Xoa_app_.Usr_dlg().Warn_many("", "", "parser.xtn: could not extract id from xtag_bgn: page=~{0}", ctx.Page().Url().To_str()); return Bry_find_.Not_found;}
-		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b128();
-		tmp_bfr.Add(Pfunc_tag.Xtag_end_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, Pfunc_tag.Id_len, tag_id).Add(Pfunc_tag.Xtag_rhs);
-		byte[] tag_end = tmp_bfr.To_bry_and_clear();
-		tmp_bfr.Mkr_rls();
-		int rv = Bry_find_.Find_fwd(src, tag_end, pos + Pfunc_tag.Xtag_rhs.length); if (rv == Bry_find_.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find xtag end: page=~{0}", ctx.Page().Url().To_str()); return Bry_find_.Not_found;}
-		rv = Bry_find_.Find_bwd(src, Byte_ascii.Lt, rv - 1); if (rv == Bry_find_.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find <: page=~{0}", ctx.Page().Url().To_str()); return Bry_find_.Not_found;}
-		return rv;
-	}
-	private static final int Find_xtn_end__tid__bgn = 0, Find_xtn_end__tid__end = 1, Find_xtn_end__tid__xtag = 2;
+	private static final int Find_xtn_end__tid__bgn = 0, Find_xtn_end__tid__end = 1;//, Find_xtn_end__tid__xtag = 2;
 	private static final    Int_obj_val 
 	  Find_xtn_end__key__bgn  = new Int_obj_val(Find_xtn_end__tid__bgn)
 	, Find_xtn_end__key__end  = new Int_obj_val(Find_xtn_end__tid__end)
-	, Find_xtn_end__key__xtag = new Int_obj_val(Find_xtn_end__tid__xtag);
+	;
 }

@@ -19,8 +19,8 @@ public class Xop_uniq_mgr__parse__tst {
 	private final    Xop_fxt fxt = Xop_fxt.New_app_html();
 	@Before public void init() {fxt.Reset();}
 	@Test  public void Ref_becomes_UNIQ() {
-//			String wikitext = "<ref>b</ref>";
-//			fxt.Init_defn_add("test", "{{#ifeq:{{{1}}}|a" + wikitext + "c|fail|pass}}"); // fail if {{{1}}} is still wikitext; should be UNIQ
-//			fxt.Test__parse__tmpl_to_html("{{test|a" + wikitext + "c}}", "pass");
+		String wikitext = "<ref>b</ref>";
+		fxt.Init_defn_add("test", "{{#ifeq:{{{1}}}|a" + wikitext + "c|fail|pass}}"); // fail if {{{1}}} is still wikitext; should be UNIQ
+		fxt.Test__parse__tmpl_to_html("{{test|a" + wikitext + "c}}", "pass");
 	}
 }

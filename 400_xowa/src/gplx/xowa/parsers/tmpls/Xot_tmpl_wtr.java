@@ -20,9 +20,8 @@ public class Xot_tmpl_wtr {
 	public static byte[] Write_all(Xop_ctx ctx, Xop_root_tkn root, byte[] src) {
 		Bry_bfr bfr = ctx.Wiki().Utl__bfr_mkr().Get_m001().Reset_if_gt(Io_mgr.Len_mb);
 		Write_tkn(bfr, ctx, src, src.length, root);
-		return bfr.To_bry_and_rls();
-//			byte[] rv = bfr.To_bry_and_rls();
-//			return ctx.Wiki().Parser_mgr().Uniq_mgr().Parse(rv); // NOTE: noops if no UNIQs
+		byte[] rv = bfr.To_bry_and_rls();
+		return ctx.Wiki().Parser_mgr().Uniq_mgr().Parse(rv); // NOTE: noops if no UNIQs; // UNIQ; DATE:2017-03-31
 	}
 	private static void Write_tkn(Bry_bfr rslt_bfr, Xop_ctx ctx, byte[] src, int src_len, Xop_tkn_itm tkn) {
 		switch (tkn.Tkn_tid()) {

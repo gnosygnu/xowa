@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.strings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
-public class Pfunc_tag extends Pf_func_base {
+public class Pfunc_tag extends Pf_func_base {// REF:CoreParserFunctions.php
 	@Override public int Id() {return Xol_kwd_grp_.Id_misc_tag;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_tag().Name_(name);}
 	@Override public boolean Func_require_colon_arg() {return true;}
@@ -24,15 +24,10 @@ public class Pfunc_tag extends Pf_func_base {
 		// make <xnde> based on {{#tag}}; EX: {{#tag:ref|a|name=1}} -> <ref name='1'>a</ref>
 		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();			
 		try {
-			// get tag_idx, tag_data, and tag_is_ref
-			int tag_idx = ctx.Wiki().Parser_mgr().Tag__next_idx();
+			// get vars
 			byte[] tag_name = Eval_argx(ctx, src, caller, self); if (tag_name.length == 0) return;
-			Xop_xnde_tag tag = (Xop_xnde_tag)ctx.Xnde_tag_regy().Get_trie(ctx.Xnde_names_tid()).Match_exact(tag_name, 0, tag_name.length);
-			boolean tag_is_ref = tag != null && tag.Id() == Xop_xnde_tag_.Tid__ref;
-
+			
 			// open tag
-			if (tag_is_ref)	// <ref>; add <xtag_bgn> to handle nested refs; PAGE:en.w:Battle_of_Midway; DATE:2014-06-27
-				tmp_bfr.Add(Xtag_bgn_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, 10, tag_idx).Add(Xtag_rhs);				
 			tmp_bfr.Add_byte(Byte_ascii.Lt).Add(tag_name);	// EX: "<ref"
 
 			// iterate args and build attributes; EX: "|a=1|b=2" -> "a='1' b='2'"
@@ -54,21 +49,12 @@ public class Pfunc_tag extends Pf_func_base {
 
 			// close tag
 			tmp_bfr.Add_byte(Byte_ascii.Lt).Add_byte(Byte_ascii.Slash).Add(tag_name).Add_byte(Byte_ascii.Gt);	// EX: "</ref>"
-			if (tag_is_ref)	// <ref>; add <xtag_end> to handle nested refs; PAGE:en.w:Battle_of_Midway; DATE:2014-06-27
-				tmp_bfr.Add(Xtag_end_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, 10, tag_idx).Add(Xtag_rhs);
-			bfr.Add_bfr_and_clear(tmp_bfr);
+
+			// add to UNIQ hash; DATE:2017-03-31
+			byte[] val = tmp_bfr.To_bry_and_clear();
+			byte[] key = ctx.Wiki().Parser_mgr().Uniq_mgr().Add(tag_name, val);
+			bfr.Add(key);
 		}
 		finally {tmp_bfr.Mkr_rls();}
 	}
-
-	public static final    byte[]
-	  Xtag_bgn_lhs = Bry_.new_a7("<xtag_bgn id='")
-	, Xtag_end_lhs = Bry_.new_a7("<xtag_end id='")
-	, Xtag_rhs = Bry_.new_a7("'/>")
-	;
-	public static final int
-	  Xtag_len = 27	// <xtag_bgn id='1234567890'/>
-	, Xtag_bgn = 14 // <xtag_bgn id='
-	, Id_len = 10
-	;
 }

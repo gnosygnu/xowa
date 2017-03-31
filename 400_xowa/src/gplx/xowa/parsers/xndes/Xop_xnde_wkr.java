@@ -545,12 +545,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		return found ? rv : Bry_find_.Not_found;
 	}
 	private int Find_xtn_end_lhs(Xop_ctx ctx, Xop_xnde_tag tag, byte[] src, int src_len, int open_bgn, int open_end, byte[] open_bry, byte[] close_bry) {
-		int tag_bgn = open_bgn - Pfunc_tag.Xtag_len;
-		if (tag_bgn > -1 
-			&& Bry_.Eq(src, tag_bgn, tag_bgn, Pfunc_tag.Xtag_bgn_lhs))	// xtn created by tag
-			return Xop_xnde_wkr_.Find_xtag_end(ctx, src, open_end, src_len);
-		else	// search rest of String for case-insensitive name; NOTE: used to do CS first, then fall-back on CI; DATE:2013-12-02
-			return Xop_xnde_wkr_.Find_xtn_end(ctx, src, open_end, src_len, open_bry, close_bry);
+		return Xop_xnde_wkr_.Find_xtn_end(ctx, src, open_end, src_len, open_bry, close_bry); // UNIQ; DATE:2017-03-31
 	}
 	private int Make_xnde_xtn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, Xop_xnde_tag tag, int open_bgn, int open_end, int name_bgn, int name_end, int atrs_bgn, int atrs_end, Mwh_atr_itm[] atrs, boolean inline, boolean pre2_hack) {
 		// NOTE: find end_tag that exactly matches bgnTag; must be case sensitive;
