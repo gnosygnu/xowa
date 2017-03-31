@@ -53,6 +53,9 @@ public class Hex_utl__tst {
 		fxt.Test__write_bfr(Bool_.Y,            256, "100");
 		fxt.Test__write_bfr(Bool_.Y, Int_.Max_value, "7fffffff");
 	}
+	@Test   public void Encode() {
+		fxt.Test__parse_hex_to_bry("E2A7BC", 226, 167, 188);
+	}
 }
 class Hex_utl__fxt {
 	public void Test__write(String s, int bgn, int end, int val, String expd) {
@@ -75,8 +78,12 @@ class Hex_utl__fxt {
 		Hex_utl_.Write_bfr(bfr, lcase, val);
 		Gftest.Eq__str(expd, bfr.To_str_and_clear());
 	}
-//		public void Test__encode_bry(int val, int pad, String expd) {
-//			String actl = Hex_utl_.To_str(val, pad);
-//			Tfds.Eq(expd, actl);
-//		}
+	public void Test__encode_bry(String val, int... expd) {
+		byte[] actl = Hex_utl_.Encode_bry(Bry_.new_u8(val));
+		Gftest.Eq__ary(Byte_.Ary_by_ints(expd), actl, "encode");
+	}
+	public void Test__parse_hex_to_bry(String val, int... expd) {
+		byte[] actl = Hex_utl_.Parse_hex_to_bry(Bry_.new_u8(val));
+		Gftest.Eq__ary(Byte_.Ary_by_ints(expd), actl, "encode");
+	}
 }

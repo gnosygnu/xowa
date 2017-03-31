@@ -54,8 +54,9 @@ public class Byte_ {
 	public static byte[] Ary_by_ints(int... ary) {
 		int ary_len = ary.length;
 		byte[] rv = new byte[ary_len];
-		for (int i = 0; i < ary_len; i++)
+		for (int i = 0; i < ary_len; i++) {
 			rv[i] = By_int(ary[i]);
+		}
 		return rv;
 	}
 }

@@ -47,6 +47,22 @@ public class Hex_utl_ {
 		}
 		return rv;
 	}
+	public static byte[] Parse_hex_to_bry(String src) {return Parse_hex_to_bry(Bry_.new_u8(src));}
+	public static byte[] Parse_hex_to_bry(byte[] src) {
+		int src_len = src.length;
+		if ((src_len % 2) != 0) throw Err_.new_wo_type("hex_utl: hex_string must have an even length; src=~{0}", src);
+		int ary_len = src_len / 2;
+		byte[] rv = new byte[ary_len];
+		int rv_idx = 0;
+
+		for (int i = 0; i < src_len; i += 2) {
+			int val = Parse_or(src, i, i + 2, -1);
+			if (val == -1) throw Err_.new_wo_type("hex_utl: hex_string has invalid char; src=~{0}", src);
+			rv[rv_idx] = (byte)val;
+			rv_idx++;
+		}
+		return rv;
+	}
 	public static byte[] Encode_bry(byte[] src) {
 		int src_len = src.length;
 		byte[] trg = new byte[src_len * 2];

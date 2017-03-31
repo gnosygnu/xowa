@@ -33,12 +33,12 @@ import gplx.xowa.mediawiki.includes.content.*;
 *
 * @code
 *     // Initialize a Message Object using the 'some_key' message key
-*     $message = wfMessage( 'some_key' );
+*     $message = wfMessage('some_key');
 *
 *     // Using two parameters those values are strings 'value1' and 'value2':
-*     $message = wfMessage( 'some_key',
+*     $message = wfMessage('some_key',
 *          'value1', 'value2'
-*     );
+*    );
 * @endcode
 *
 * @section message_global_fn Global function wrapper:
@@ -51,27 +51,27 @@ import gplx.xowa.mediawiki.includes.content.*;
 *
 * @code
 *    $button = Xml::button(
-*         wfMessage( 'submit' )->text()
-*    );
+*         wfMessage('submit')->text()
+*   );
 * @endcode
 *
 * A Message instance can be passed parameters after it has been constructed,
 * use the prms() method to do so:
 *
 * @code
-*     wfMessage( 'welcome-to' )
-*         ->prmsVar( $wgSitename )
+*     wfMessage('welcome-to')
+*         ->prmsVar($wgSitename)
 *         ->text();
 * @endcode
 *
 * {{GRAMMAR}} and friends work correctly:
 *
 * @code
-*    wfMessage( 'are-friends',
+*    wfMessage('are-friends',
 *        $user, $friend
-*    );
-*    wfMessage( 'bad-message' )
-*         ->rawParams( '<script>...</script>' )
+*   );
+*    wfMessage('bad-message')
+*         ->rawParams('<script>...</script>')
 *         ->escaped();
 * @endcode
 *
@@ -86,24 +86,24 @@ import gplx.xowa.mediawiki.includes.content.*;
 * needed:
 *
 * @code
-*    wfMessage( 'file-log',
+*    wfMessage('file-log',
 *        $user, $filename
-*    )->inContentLanguage()->text();
+*   )->inContentLanguage()->text();
 * @endcode
 *
 * Checking whether a message exists:
 *
 * @code
-*    wfMessage( 'mysterious-message' )->exists()
+*    wfMessage('mysterious-message')->exists()
 *    // returns a boolean whether the 'mysterious-message' key exist.
 * @endcode
 *
 * If you want to use a different language:
 *
 * @code
-*    $userLanguage = $user->getOption( 'language' );
-*    wfMessage( 'email-header' )
-*         ->inLanguage( $userLanguage )
+*    $userLanguage = $user->getOption('language');
+*    wfMessage('email-header')
+*         ->inLanguage($userLanguage)
 *         ->plain();
 * @endcode
 *
@@ -115,9 +115,9 @@ import gplx.xowa.mediawiki.includes.content.*;
 *
 * @code
 *     // old style:
-*     wfMsgExt( 'key', [ 'parseinline' ], 'apple' );
+*     wfMsgExt('key', [ 'parseinline' ], 'apple');
 *     // new style:
-*     wfMessage( 'key', 'apple' )->parse();
+*     wfMessage('key', 'apple')->parse();
 * @endcode
 *
 * Parseinline is used because it is more useful when pre-building HTML.
@@ -126,16 +126,16 @@ import gplx.xowa.mediawiki.includes.content.*;
 * Places where HTML cannot be used. {{-transformation is done.
 * @code
 *     // old style:
-*     wfMsgExt( 'key', [ 'parsemag' ], 'apple', 'pear' );
+*     wfMsgExt('key', [ 'parsemag' ], 'apple', 'pear');
 *     // new style:
-*     wfMessage( 'key', 'apple', 'pear' )->text();
+*     wfMessage('key', 'apple', 'pear')->text();
 * @endcode
 *
 * Shortcut for escaping the message too, similar to wfMsgHTML(), but
 * parameters are not replaced after escaping by default.
 * @code
-*     $escaped = wfMessage( 'key' )
-*          ->rawParams( 'apple' )
+*     $escaped = wfMessage('key')
+*          ->rawParams('apple')
 *          ->escaped();
 * @endcode
 *
@@ -164,6 +164,9 @@ public class XomwMessage {
 	private static final int FORMAT_ESCAPED = 4; // 'escaped';
 
 	private static final int FORMAT_NULL = 5;
+
+//		private static final int PRM_TID_BEFORE = 1; // "before"
+//		private static final int PRM_TID_AFTER = 2;  // "after"
 
 	/**
 	* Mapping from Message::listParam() types to Language methods.
@@ -253,9 +256,9 @@ public class XomwMessage {
 //		* @param Language $language [optional] Language to use (defaults to current user language).
 //		* @throws InvalidArgumentException
 //		*/
-//		public function __construct( key, $prmsVar = [], Language $language = null ) {
-//			if ( key instanceof MessageSpecifier ) {
-//				if ( $prmsVar ) {
+//		public function __construct(key, $prmsVar = [], Language $language = null) {
+//			if (key instanceof MessageSpecifier) {
+//				if ($prmsVar) {
 //					throw new InvalidArgumentException(
 //						'$prmsVar must be empty if key is a MessageSpecifier'
 //					);
@@ -264,59 +267,59 @@ public class XomwMessage {
 //				key = key->getKey();
 //			}
 //
-//			if ( !is_string( key ) && !is_array( key ) ) {
-//				throw new InvalidArgumentException( 'key must be a String or an array' );
+//			if (!is_string(key) && !is_array(key)) {
+//				throw new InvalidArgumentException('key must be a String or an array');
 //			}
 //
-//			$this->keysToTry = (array)key;
+//			this.keysToTry = (array)key;
 //
-//			if ( empty( $this->keysToTry ) ) {
-//				throw new InvalidArgumentException( 'key must not be an empty list' );
+//			if (empty(this.keysToTry)) {
+//				throw new InvalidArgumentException('key must not be an empty list');
 //			}
 //
-//			$this->key = reset( $this->keysToTry );
+//			this.key = reset(this.keysToTry);
 //
-//			$this->parameters = array_values( $prmsVar );
+//			this.parameters = array_values($prmsVar);
 //			// User language is only resolved in getLanguage(). This helps preserve the
 //			// semantic intent of "user language" across serialize() and unserialize().
-//			$this->language = $language ?: false;
+//			this.language = $language ?: false;
 //		}
-//
-//		/**
-//		* @see Serializable::serialize()
-//		* @since 1.26
-//		* @return String
-//		*/
-//		public function serialize() {
-//			return serialize( [
-//				'interfaceIsUserLang' => $this->interfaceIsUserLang,
-//				'language' => $this->language ? $this->language->getCode() : false,
-//				'key' => $this->key,
-//				'keysToTry' => $this->keysToTry,
-//				'parameters' => $this->parameters,
-//				'format' => $this->format,
-//				'useDatabase' => $this->useDatabase,
-//				'title' => $this->title,
-//			] );
-//		}
-//
-//		/**
-//		* @see Serializable::unserialize()
-//		* @since 1.26
-//		* @param String $serialized
-//		*/
-//		public function unserialize( $serialized ) {
-//			$data = unserialize( $serialized );
-//			$this->interfaceIsUserLang = $data['interfaceIsUserLang'];
-//			$this->key = $data['key'];
-//			$this->keysToTry = $data['keysToTry'];
-//			$this->parameters = $data['parameters'];
-//			$this->format = $data['format'];
-//			$this->useDatabase = $data['useDatabase'];
-//			$this->language = $data['language'] ? Language::factory( $data['language'] ) : false;
-//			$this->title = $data['title'];
-//		}
-//
+
+	//	/**
+	//	* @see Serializable::serialize()
+	//	* @since 1.26
+	//	* @return String
+	//	*/
+	//	public function serialize() {
+	//		return serialize([
+	//			'interfaceIsUserLang' => this.interfaceIsUserLang,
+	//			'language' => this.language ? this.language->getCode() : false,
+	//			'key' => this.key,
+	//			'keysToTry' => this.keysToTry,
+	//			'parameters' => this.parameters,
+	//			'format' => this.format,
+	//			'useDatabase' => this.useDatabase,
+	//			'title' => this.title,
+	//		]);
+	//	}
+	//
+	//	/**
+	//	* @see Serializable::unserialize()
+	//	* @since 1.26
+	//	* @param String $serialized
+	//	*/
+	//	public function unserialize($serialized) {
+	//		$data = unserialize($serialized);
+	//		this.interfaceIsUserLang = $data['interfaceIsUserLang'];
+	//		this.key = $data['key'];
+	//		this.keysToTry = $data['keysToTry'];
+	//		this.parameters = $data['parameters'];
+	//		this.format = $data['format'];
+	//		this.useDatabase = $data['useDatabase'];
+	//		this.language = $data['language'] ? Language::factory($data['language']) : false;
+	//		this.title = $data['title'];
+	//	}
+
 //		/**
 //		* @since 1.24
 //		*
@@ -324,7 +327,7 @@ public class XomwMessage {
 //		* constructor was a fallback list of keys to try.
 //		*/
 //		public function isMultiKey() {
-//			return count( $this->keysToTry ) > 1;
+//			return count(this.keysToTry) > 1;
 //		}
 //
 //		/**
@@ -334,7 +337,7 @@ public class XomwMessage {
 //		* in order of preference.
 //		*/
 //		public function getKeysToTry() {
-//			return $this->keysToTry;
+//			return this.keysToTry;
 //		}
 //
 //		/**
@@ -349,7 +352,7 @@ public class XomwMessage {
 //		* @return String
 //		*/
 //		public function getKey() {
-//			return $this->key;
+//			return this.key;
 //		}
 //
 //		/**
@@ -360,7 +363,7 @@ public class XomwMessage {
 //		* @return array
 //		*/
 //		public function getParams() {
-//			return $this->parameters;
+//			return this.parameters;
 //		}
 //
 //		/**
@@ -372,8 +375,8 @@ public class XomwMessage {
 //		* @deprecated since 1.29 formatting is not stateful
 //		*/
 //		public function getFormat() {
-//			wfDeprecated( __METHOD__, '1.29' );
-//			return $this->format;
+//			wfDeprecated(__METHOD__, '1.29');
+//			return this.format;
 //		}
 //
 //		/**
@@ -385,7 +388,7 @@ public class XomwMessage {
 //		*/
 //		public function getLanguage() {
 //			// Defaults to false which means current user language
-//			return $this->language ?: RequestContext::getMain()->getLanguage();
+//			return this.language ?: RequestContext::getMain()->getLanguage();
 //		}
 //
 //		/**
@@ -400,10 +403,10 @@ public class XomwMessage {
 //		*
 //		* @return Message
 //		*/
-//		public static function newFromKey( key /*...*/ ) {
+//		public static function newFromKey(key /*...*/) {
 //			$prmsVar = func_get_args();
-//			array_shift( $prmsVar );
-//			return new self( key, $prmsVar );
+//			array_shift($prmsVar);
+//			return new self(key, $prmsVar);
 //		}
 //
 //		/**
@@ -419,22 +422,22 @@ public class XomwMessage {
 //		* @throws InvalidArgumentException
 //		* @since 1.27
 //		*/
-//		public static function newFromSpecifier( $value ) {
+//		public static function newFromSpecifier($value) {
 //			$prmsVar = [];
-//			if ( is_array( $value ) ) {
+//			if (is_array($value)) {
 //				$prmsVar = $value;
-//				$value = array_shift( $prmsVar );
+//				$value = array_shift($prmsVar);
 //			}
 //
-//			if ( $value instanceof Message ) { // Message, RawMessage, ApiMessage, etc
-//				$message = clone( $value );
-//			} elseif ( $value instanceof MessageSpecifier ) {
-//				$message = new Message( $value );
-//			} elseif ( is_string( $value ) ) {
-//				$message = new Message( $value, $prmsVar );
+//			if ($value instanceof Message) { // Message, RawMessage, ApiMessage, etc
+//				$message = clone($value);
+//			} elseif ($value instanceof MessageSpecifier) {
+//				$message = new Message($value);
+//			} elseif (is_string($value)) {
+//				$message = new Message($value, $prmsVar);
 //			} else {
-//				throw new InvalidArgumentException( __METHOD__ . ': invalid argument type '
-//					. gettype( $value ) );
+//				throw new InvalidArgumentException(__METHOD__ . ': invalid argument type '
+//					. gettype($value));
 //			}
 //
 //			return $message;
@@ -452,18 +455,18 @@ public class XomwMessage {
 //		*
 //		* @return Message
 //		*/
-//		public static function newFallbackSequence( /*...*/ ) {
+//		public static function newFallbackSequence(/*...*/) {
 //			$keys = func_get_args();
-//			if ( func_num_args() == 1 ) {
-//				if ( is_array( $keys[0] ) ) {
+//			if (func_num_args() == 1) {
+//				if (is_array($keys[0])) {
 //					// Allow an array to be passed as the first argument instead
-//					$keys = array_values( $keys[0] );
+//					$keys = array_values($keys[0]);
 //				} else {
 //					// Optimize a single String to not need special fallback handling
 //					$keys = $keys[0];
 //				}
 //			}
-//			return new self( $keys );
+//			return new self($keys);
 //		}
 //
 //		/**
@@ -479,16 +482,16 @@ public class XomwMessage {
 //		public function getTitle() {
 //			global $wgContLang, $wgForceUIMsgAsContentMsg;
 //
-//			title = $this->key;
+//			title = this.key;
 //			if (
-//				!$this->language->equals( $wgContLang )
-//				&& in_array( $this->key, (array)$wgForceUIMsgAsContentMsg )
+//				!this.language->equals($wgContLang)
+//				&& in_array(this.key, (array)$wgForceUIMsgAsContentMsg)
 //			) {
-//				$code = $this->language->getCode();
+//				$code = this.language->getCode();
 //				title .= '/' . $code;
 //			}
 //
-//			return Title::makeTitle( NS_MEDIAWIKI, $wgContLang->ucfirst( strtr( title, ' ', '_' ) ) );
+//			return Title::makeTitle(NS_MEDIAWIKI, $wgContLang->ucfirst(strtr(title, ' ', '_')));
 //		}
 //
 //		/**
@@ -501,19 +504,19 @@ public class XomwMessage {
 //		*
 //		* @return Message $this
 //		*/
-//		public function prmsVar( /*...*/ ) {
+//		public function prmsVar(/*...*/) {
 //			$args = func_get_args();
 //
 //			// If $args has only one entry and it's an array, then it's either a
 //			// non-varargs call or it happens to be a call with just a single
 //			// "special" parameter. Since the "special" parameters don't have any
 //			// numeric keys, we'll test that to differentiate the cases.
-//			if ( count( $args ) === 1 && isset( $args[0] ) && is_array( $args[0] ) ) {
-//				if ( $args[0] === [] ) {
+//			if (count($args) === 1 && isset($args[0]) && is_array($args[0])) {
+//				if ($args[0] === []) {
 //					$args = [];
 //				} else {
-//					foreach ( $args[0] as key => $value ) {
-//						if ( is_int( key ) ) {
+//					foreach ($args[0] as key => $value) {
+//						if (is_int(key)) {
 //							$args = $args[0];
 //							break;
 //						}
@@ -521,7 +524,7 @@ public class XomwMessage {
 //				}
 //			}
 //
-//			$this->parameters = array_merge( $this->parameters, array_values( $args ) );
+//			this.parameters = array_merge(this.parameters, array_values($args));
 //			return $this;
 //		}
 //
@@ -538,13 +541,13 @@ public class XomwMessage {
 //		*
 //		* @return Message $this
 //		*/
-//		public function rawParams( /*...*/ ) {
+//		public function rawParams(/*...*/) {
 //			$prmsVar = func_get_args();
-//			if ( isset( $prmsVar[0] ) && is_array( $prmsVar[0] ) ) {
+//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
 //				$prmsVar = $prmsVar[0];
 //			}
-//			foreach ( $prmsVar as $param ) {
-//				$this->parameters[] = self::rawParam( $param );
+//			foreach ($prmsVar as $param) {
+//				this.parameters[] = self::rawParam($param);
 //			}
 //			return $this;
 //		}
@@ -560,13 +563,13 @@ public class XomwMessage {
 //		*
 //		* @return Message $this
 //		*/
-//		public function numParams( /*...*/ ) {
+//		public function numParams(/*...*/) {
 //			$prmsVar = func_get_args();
-//			if ( isset( $prmsVar[0] ) && is_array( $prmsVar[0] ) ) {
+//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
 //				$prmsVar = $prmsVar[0];
 //			}
-//			foreach ( $prmsVar as $param ) {
-//				$this->parameters[] = self::numParam( $param );
+//			foreach ($prmsVar as $param) {
+//				this.parameters[] = self::numParam($param);
 //			}
 //			return $this;
 //		}
@@ -582,13 +585,13 @@ public class XomwMessage {
 //		*
 //		* @return Message $this
 //		*/
-//		public function durationParams( /*...*/ ) {
+//		public function durationParams(/*...*/) {
 //			$prmsVar = func_get_args();
-//			if ( isset( $prmsVar[0] ) && is_array( $prmsVar[0] ) ) {
+//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
 //				$prmsVar = $prmsVar[0];
 //			}
-//			foreach ( $prmsVar as $param ) {
-//				$this->parameters[] = self::durationParam( $param );
+//			foreach ($prmsVar as $param) {
+//				this.parameters[] = self::durationParam($param);
 //			}
 //			return $this;
 //		}
@@ -604,13 +607,13 @@ public class XomwMessage {
 //		*
 //		* @return Message $this
 //		*/
-//		public function expiryParams( /*...*/ ) {
+//		public function expiryParams(/*...*/) {
 //			$prmsVar = func_get_args();
-//			if ( isset( $prmsVar[0] ) && is_array( $prmsVar[0] ) ) {
+//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
 //				$prmsVar = $prmsVar[0];
 //			}
-//			foreach ( $prmsVar as $param ) {
-//				$this->parameters[] = self::expiryParam( $param );
+//			foreach ($prmsVar as $param) {
+//				this.parameters[] = self::expiryParam($param);
 //			}
 //			return $this;
 //		}
@@ -626,13 +629,13 @@ public class XomwMessage {
 //		*
 //		* @return Message $this
 //		*/
-//		public function timeperiodParams( /*...*/ ) {
+//		public function timeperiodParams(/*...*/) {
 //			$prmsVar = func_get_args();
-//			if ( isset( $prmsVar[0] ) && is_array( $prmsVar[0] ) ) {
+//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
 //				$prmsVar = $prmsVar[0];
 //			}
-//			foreach ( $prmsVar as $param ) {
-//				$this->parameters[] = self::timeperiodParam( $param );
+//			foreach ($prmsVar as $param) {
+//				this.parameters[] = self::timeperiodParam($param);
 //			}
 //			return $this;
 //		}
@@ -648,13 +651,13 @@ public class XomwMessage {
 //		*
 //		* @return Message $this
 //		*/
-//		public function sizeParams( /*...*/ ) {
+//		public function sizeParams(/*...*/) {
 //			$prmsVar = func_get_args();
-//			if ( isset( $prmsVar[0] ) && is_array( $prmsVar[0] ) ) {
+//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
 //				$prmsVar = $prmsVar[0];
 //			}
-//			foreach ( $prmsVar as $param ) {
-//				$this->parameters[] = self::sizeParam( $param );
+//			foreach ($prmsVar as $param) {
+//				this.parameters[] = self::sizeParam($param);
 //			}
 //			return $this;
 //		}
@@ -670,13 +673,13 @@ public class XomwMessage {
 //		*
 //		* @return Message $this
 //		*/
-//		public function bitrateParams( /*...*/ ) {
+//		public function bitrateParams(/*...*/) {
 //			$prmsVar = func_get_args();
-//			if ( isset( $prmsVar[0] ) && is_array( $prmsVar[0] ) ) {
+//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
 //				$prmsVar = $prmsVar[0];
 //			}
-//			foreach ( $prmsVar as $param ) {
-//				$this->parameters[] = self::bitrateParam( $param );
+//			foreach ($prmsVar as $param) {
+//				this.parameters[] = self::bitrateParam($param);
 //			}
 //			return $this;
 //		}
@@ -694,13 +697,13 @@ public class XomwMessage {
 //		*
 //		* @return Message $this
 //		*/
-//		public function plaintextParams( /*...*/ ) {
+//		public function plaintextParams(/*...*/) {
 //			$prmsVar = func_get_args();
-//			if ( isset( $prmsVar[0] ) && is_array( $prmsVar[0] ) ) {
+//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
 //				$prmsVar = $prmsVar[0];
 //			}
-//			foreach ( $prmsVar as $param ) {
-//				$this->parameters[] = self::plaintextParam( $param );
+//			foreach ($prmsVar as $param) {
+//				this.parameters[] = self::plaintextParam($param);
 //			}
 //			return $this;
 //		}
@@ -714,10 +717,10 @@ public class XomwMessage {
 //		*
 //		* @return Message $this
 //		*/
-//		public function setContext( IContextSource $context ) {
-//			$this->inLanguage( $context->getLanguage() );
-//			$this->title( $context->getTitle() );
-//			$this->interfaceIsUserLang = true;
+//		public function setContext(IContextSource $context) {
+//			this.inLanguage($context->getLanguage());
+//			this.title($context->getTitle());
+//			this.interfaceIsUserLang = true;
 //
 //			return $this;
 //		}
@@ -733,23 +736,23 @@ public class XomwMessage {
 //		* @return Message $this
 //		* @throws MWException
 //		*/
-//		public function inLanguage( $lang ) {
-//			if ( $lang instanceof Language ) {
-//				$this->language = $lang;
-//			} elseif ( is_string( $lang ) ) {
-//				if ( !$this->language instanceof Language || $this->language->getCode() != $lang ) {
-//					$this->language = Language::factory( $lang );
+//		public function inLanguage($lang) {
+//			if ($lang instanceof Language) {
+//				this.language = $lang;
+//			} elseif (is_string($lang)) {
+//				if (!this.language instanceof Language || this.language->getCode() != $lang) {
+//					this.language = Language::factory($lang);
 //				}
-//			} elseif ( $lang instanceof StubUserLang ) {
-//				$this->language = false;
+//			} elseif ($lang instanceof StubUserLang) {
+//				this.language = false;
 //			} else {
-//				$type = gettype( $lang );
-//				throw new MWException( __METHOD__ . " must be "
+//				$type = gettype($lang);
+//				throw new MWException(__METHOD__ . " must be "
 //					. "passed a String or Language Object; $type given"
 //				);
 //			}
-//			$this->message = null;
-//			$this->interfaceIsUserLang = false;
+//			this.message = null;
+//			this.interfaceIsUserLang = false;
 //			return $this;
 //		}
 
@@ -764,12 +767,12 @@ public class XomwMessage {
 	*/
 	public XomwMessage inContentLanguage() {
 //			global $wgForceUIMsgAsContentMsg;
-//			if ( in_array( $this->key, (array)$wgForceUIMsgAsContentMsg ) ) {
+//			if (in_array(this.key, (array)$wgForceUIMsgAsContentMsg)) {
 //				return $this;
 //			}
 //
 //			global $wgContLang;
-//			$this->inLanguage( $wgContLang );
+//			this.inLanguage($wgContLang);
 //			return $this;
 		return this;
 	}
@@ -784,8 +787,8 @@ public class XomwMessage {
 //		*
 //		* @return Message $this
 //		*/
-//		public function setInterfaceMessageFlag( $interfaceIsUserLang ) {
-//			$this->interfaceIsUserLang = (boolean)$interfaceIsUserLang;
+//		public function setInterfaceMessageFlag($interfaceIsUserLang) {
+//			this.interfaceIsUserLang = (boolean)$interfaceIsUserLang;
 //			return $this;
 //		}
 //
@@ -798,9 +801,9 @@ public class XomwMessage {
 //		*
 //		* @return Message $this
 //		*/
-//		public function useDatabase( $useDatabase ) {
-//			$this->useDatabase = (boolean)$useDatabase;
-//			$this->message = null;
+//		public function useDatabase($useDatabase) {
+//			this.useDatabase = (boolean)$useDatabase;
+//			this.message = null;
 //			return $this;
 //		}
 //
@@ -813,8 +816,8 @@ public class XomwMessage {
 //		*
 //		* @return Message $this
 //		*/
-//		public function title( title ) {
-//			$this->title = title;
+//		public function title(title) {
+//			this.title = title;
 //			return $this;
 //		}
 
@@ -844,7 +847,7 @@ public class XomwMessage {
 	*/
 
 	// NOTE: causes issues in C# source; E2A7BC; http://www.fileformat.info/info/unicode/char/29fc/index.htm
-	private static final    byte[] LeftPointingCurvedAngleBracket = Bry_.New_by_ints(226, 167, 188);
+	private static final    byte[] LeftPointingCurvedAngleBracket = gplx.core.encoders.Hex_utl_.Parse_hex_to_bry("E2A7BC");
 	public byte[] toString(int format) {
 		if (format == FORMAT_NULL) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "toString import implicit.*; format=~{0} key=~{1}", format, key);
@@ -864,15 +867,15 @@ public class XomwMessage {
 			return Bry_.Escape_html(Bry_.Add(LeftPointingCurvedAngleBracket, key, LeftPointingCurvedAngleBracket));
 		}
 
-//			// Replace $* with a list of parameters for &uselang=qqx.
-//			if (strpos(s, "$*") != false) {
+		// Replace $* with a list of parameters for &uselang=qqx.
+//			if (XophpString.strpos(s, "$*") != false) {
 //				String paramlist = "";
 //				if (this.parameters != []) {
 //					paramlist = ": $" . implode(", $", range(1, count(this.parameters)));
 //				}
 //				s = str_replace("$*", paramlist, s);
 //			}
-//
+
 //			// Replace parameters before text parsing
 //			s = this.replaceParameters(s, "before", format);
 //
@@ -897,7 +900,7 @@ public class XomwMessage {
 
 //		/**
 //		* Magic method implementation of the above (for PHP >= 5.2.0), so we can do, eg:
-//		*     $foo = new Message( key );
+//		*     $foo = new Message(key);
 //		*     $String = "<abbr>$foo</abbr>";
 //		*
 //		* @since 1.18
@@ -909,16 +912,16 @@ public class XomwMessage {
 //			// trigger a fatal error if it does. So, catch any exceptions.
 //
 //			try {
-//				return $this->toString( self::FORMAT_PARSE );
-//			} catch ( Exception $ex ) {
+//				return this.toString(self::FORMAT_PARSE);
+//			} catch (Exception $ex) {
 //				try {
-//					trigger_error( "Exception caught in " . __METHOD__ . " (message " . $this->key . "): "
-//						. $ex, E_USER_WARNING );
-//				} catch ( Exception $ex ) {
+//					trigger_error("Exception caught in " . __METHOD__ . " (message " . this.key . "): "
+//						. $ex, E_USER_WARNING);
+//				} catch (Exception $ex) {
 //					// Doh! Cause a fatal error after all?
 //				}
 //
-//				return '⧼' . htmlspecialchars( $this->key ) . '⧽';
+//				return '⧼' . htmlspecialchars(this.key) . '⧽';
 //			}
 //		}
 //
@@ -930,8 +933,8 @@ public class XomwMessage {
 //		* @return String Parsed HTML.
 //		*/
 //		public function parse() {
-//			$this->format = self::FORMAT_PARSE;
-//			return $this->toString( self::FORMAT_PARSE );
+//			this.format = self::FORMAT_PARSE;
+//			return this.toString(self::FORMAT_PARSE);
 //		}
 
 	/**
@@ -954,8 +957,8 @@ public class XomwMessage {
 //		* @return String Unescaped untransformed message text.
 //		*/
 //		public function plain() {
-//			$this->format = self::FORMAT_PLAIN;
-//			return $this->toString( self::FORMAT_PLAIN );
+//			this.format = self::FORMAT_PLAIN;
+//			return this.toString(self::FORMAT_PLAIN);
 //		}
 //
 //		/**
@@ -966,8 +969,8 @@ public class XomwMessage {
 //		* @return String HTML
 //		*/
 //		public function parseAsBlock() {
-//			$this->format = self::FORMAT_BLOCK_PARSE;
-//			return $this->toString( self::FORMAT_BLOCK_PARSE );
+//			this.format = self::FORMAT_BLOCK_PARSE;
+//			return this.toString(self::FORMAT_BLOCK_PARSE);
 //		}
 //
 //		/**
@@ -979,8 +982,8 @@ public class XomwMessage {
 //		* @return String Escaped message text.
 //		*/
 //		public function escaped() {
-//			$this->format = self::FORMAT_ESCAPED;
-//			return $this->toString( self::FORMAT_ESCAPED );
+//			this.format = self::FORMAT_ESCAPED;
+//			return this.toString(self::FORMAT_ESCAPED);
 //		}
 //
 //		/**
@@ -991,7 +994,7 @@ public class XomwMessage {
 //		* @return boolean
 //		*/
 //		public function exists() {
-//			return $this->fetchMessage() !== false;
+//			return this.fetchMessage() !== false;
 //		}
 //
 //		/**
@@ -1003,7 +1006,7 @@ public class XomwMessage {
 //		* @return boolean
 //		*/
 //		public function isBlank() {
-//			$message = $this->fetchMessage();
+//			$message = this.fetchMessage();
 //			return $message === false || $message === '';
 //		}
 //
@@ -1015,7 +1018,7 @@ public class XomwMessage {
 //		* @return boolean
 //		*/
 //		public function isDisabled() {
-//			$message = $this->fetchMessage();
+//			$message = this.fetchMessage();
 //			return $message === false || $message === '' || $message === '-';
 //		}
 //
@@ -1026,7 +1029,7 @@ public class XomwMessage {
 //		*
 //		* @return array Array with a single "raw" key.
 //		*/
-//		public static function rawParam( $raw ) {
+//		public static function rawParam($raw) {
 //			return [ 'raw' => $raw ];
 //		}
 //
@@ -1037,7 +1040,7 @@ public class XomwMessage {
 //		*
 //		* @return array Array with a single "num" key.
 //		*/
-//		public static function numParam( $num ) {
+//		public static function numParam($num) {
 //			return [ 'num' => $num ];
 //		}
 //
@@ -1048,7 +1051,7 @@ public class XomwMessage {
 //		*
 //		* @return int[] Array with a single "duration" key.
 //		*/
-//		public static function durationParam( $duration ) {
+//		public static function durationParam($duration) {
 //			return [ 'duration' => $duration ];
 //		}
 //
@@ -1059,7 +1062,7 @@ public class XomwMessage {
 //		*
 //		* @return String[] Array with a single "expiry" key.
 //		*/
-//		public static function expiryParam( $expiry ) {
+//		public static function expiryParam($expiry) {
 //			return [ 'expiry' => $expiry ];
 //		}
 //
@@ -1070,7 +1073,7 @@ public class XomwMessage {
 //		*
 //		* @return int[] Array with a single "period" key.
 //		*/
-//		public static function timeperiodParam( $period ) {
+//		public static function timeperiodParam($period) {
 //			return [ 'period' => $period ];
 //		}
 //
@@ -1081,7 +1084,7 @@ public class XomwMessage {
 //		*
 //		* @return int[] Array with a single "size" key.
 //		*/
-//		public static function sizeParam( $size ) {
+//		public static function sizeParam($size) {
 //			return [ 'size' => $size ];
 //		}
 //
@@ -1092,7 +1095,7 @@ public class XomwMessage {
 //		*
 //		* @return int[] Array with a single "bitrate" key.
 //		*/
-//		public static function bitrateParam( $bitrate ) {
+//		public static function bitrateParam($bitrate) {
 //			return [ 'bitrate' => $bitrate ];
 //		}
 //
@@ -1103,7 +1106,7 @@ public class XomwMessage {
 //		*
 //		* @return String[] Array with a single "plaintext" key.
 //		*/
-//		public static function plaintextParam( $plaintext ) {
+//		public static function plaintextParam($plaintext) {
 //			return [ 'plaintext' => $plaintext ];
 //		}
 //
@@ -1114,93 +1117,96 @@ public class XomwMessage {
 //		* @param String $type 'comma', 'semicolon', 'pipe', 'text'
 //		* @return array Array with "list" and "type" keys.
 //		*/
-//		public static function listParam( array $list, $type = 'text' ) {
-//			if ( !isset( self::$listTypeMap[$type] ) ) {
+//		public static function listParam(array $list, $type = 'text') {
+//			if (!isset(self::$listTypeMap[$type])) {
 //				throw new InvalidArgumentException(
-//					"Invalid type '$type'. Known types are: " . join( ', ', array_keys( self::$listTypeMap ) )
+//					"Invalid type '$type'. Known types are: " . join(', ', array_keys(self::$listTypeMap))
 //				);
 //			}
 //			return [ 'list' => $list, 'type' => $type ];
 //		}
-//
-//		/**
-//		* Substitutes any parameters into the message text.
-//		*
-//		* @since 1.17
-//		*
-//		* @param String $message The message text.
-//		* @param String $type Either "before" or "after".
-//		* @param String $format One of the FORMAT_* constants.
-//		*
-//		* @return String
-//		*/
-//		protected function replaceParameters( $message, $type = 'before', $format ) {
+
+	/**
+	* Substitutes any parameters into the message text.
+	*
+	* @since 1.17
+	*
+	* @param String $message The message text.
+	* @param String $type Either "before" or "after".
+	* @param String $format One of the FORMAT_* constants.
+	*
+	* @return String
+	*/
+	// DFLT:type="before"
+//		private byte[] replaceParameters(byte[] message, int prm_tid, int format) {
 //			$replacementKeys = [];
-//			foreach ( $this->parameters as $n => $param ) {
-//				list( $paramType, $value ) = $this->extractParam( $param, $format );
-//				if ( $type === $paramType ) {
-//					$replacementKeys['$' . ( $n + 1 )] = $value;
+//			foreach (this.parameters as $n => $param) {
+//				list($paramType, $value) = this.extractParam($param, $format);
+//				if ($type === $paramType) {
+//					$replacementKeys['$' . ($n + 1)] = $value;
 //				}
 //			}
-//			$message = strtr( $message, $replacementKeys );
+//			$message = strtr($message, $replacementKeys);
 //			return $message;
+//			return null;
 //		}
-//
-//		/**
-//		* Extracts the parameter type and preprocessed the value if needed.
-//		*
-//		* @since 1.18
-//		*
-//		* @param mixed $param Parameter as defined in this cls.
-//		* @param String $format One of the FORMAT_* constants.
-//		*
-//		* @return array Array with the parameter type (either "before" or "after") and the value.
-//		*/
-//		protected function extractParam( $param, $format ) {
-//			if ( is_array( $param ) ) {
-//				if ( isset( $param['raw'] ) ) {
+
+	/**
+	* Extracts the parameter type and preprocessed the value if needed.
+	*
+	* @since 1.18
+	*
+	* @param mixed $param Parameter as defined in this cls.
+	* @param String $format One of the FORMAT_* constants.
+	*
+	* @return array Array with the parameter type (either "before" or "after") and the value.
+	*/
+//		private void extractParam(XomwMessageVal rv, Object param, int format) {
+//			if (is_array($param)) {
+//				if (isset($param['raw'])) {
 //					return [ 'after', $param['raw'] ];
-//				} elseif ( isset( $param['num'] ) ) {
+//				} elseif (isset($param['num'])) {
 //					// Replace number prmsVar always in before step for now.
 //					// No support for combined raw and num prmsVar
-//					return [ 'before', $this->getLanguage()->formatNum( $param['num'] ) ];
-//				} elseif ( isset( $param['duration'] ) ) {
-//					return [ 'before', $this->getLanguage()->formatDuration( $param['duration'] ) ];
-//				} elseif ( isset( $param['expiry'] ) ) {
-//					return [ 'before', $this->getLanguage()->formatExpiry( $param['expiry'] ) ];
-//				} elseif ( isset( $param['period'] ) ) {
-//					return [ 'before', $this->getLanguage()->formatTimePeriod( $param['period'] ) ];
-//				} elseif ( isset( $param['size'] ) ) {
-//					return [ 'before', $this->getLanguage()->formatSize( $param['size'] ) ];
-//				} elseif ( isset( $param['bitrate'] ) ) {
-//					return [ 'before', $this->getLanguage()->formatBitrate( $param['bitrate'] ) ];
-//				} elseif ( isset( $param['plaintext'] ) ) {
-//					return [ 'after', $this->formatPlaintext( $param['plaintext'], $format ) ];
-//				} elseif ( isset( $param['list'] ) ) {
-//					return $this->formatListParam( $param['list'], $param['type'], $format );
+//					return [ 'before', this.getLanguage()->formatNum($param['num']) ];
+//				} elseif (isset($param['duration'])) {
+//					return [ 'before', this.getLanguage()->formatDuration($param['duration']) ];
+//				} elseif (isset($param['expiry'])) {
+//					return [ 'before', this.getLanguage()->formatExpiry($param['expiry']) ];
+//				} elseif (isset($param['period'])) {
+//					return [ 'before', this.getLanguage()->formatTimePeriod($param['period']) ];
+//				} elseif (isset($param['size'])) {
+//					return [ 'before', this.getLanguage()->formatSize($param['size']) ];
+//				} elseif (isset($param['bitrate'])) {
+//					return [ 'before', this.getLanguage()->formatBitrate($param['bitrate']) ];
+//				} elseif (isset($param['plaintext'])) {
+//					return [ 'after', this.formatPlaintext($param['plaintext'], $format) ];
+//				} elseif (isset($param['list'])) {
+//					return this.formatListParam($param['list'], $param['type'], $format);
 //				} else {
-//					$warning = 'Invalid parameter for message "' . $this->getKey() . '": ' .
-//						htmlspecialchars( serialize( $param ) );
-//					trigger_error( $warning, E_USER_WARNING );
+//					$warning = 'Invalid parameter for message "' . this.getKey() . '": ' .
+//						htmlspecialchars(serialize($param));
+//					trigger_error($warning, E_USER_WARNING);
 //					$e = new Exception;
-//					wfDebugLog( 'Bug58676', $warning . "\n" . $e->getTraceAsString() );
+//					wfDebugLog('Bug58676', $warning . "\n" . $e->getTraceAsString());
 //
 //					return [ 'before', '[INVALID]' ];
 //				}
-//			} elseif ( $param instanceof Message ) {
+//			}
+//			else if ($param instanceof Message) {
 //				// Match language, flags, etc. to the current message.
 //				$msg = clone $param;
-//				if ( $msg->language !== $this->language || $msg->useDatabase !== $this->useDatabase ) {
+//				if ($msg->language !== this.language || $msg->useDatabase !== this.useDatabase) {
 //					// Cache depends on these parameters
 //					$msg->message = null;
 //				}
-//				$msg->interfaceIsUserLang = $this->interfaceIsUserLang;
-//				$msg->language = $this->language;
-//				$msg->useDatabase = $this->useDatabase;
-//				$msg->title = $this->title;
+//				$msg->interfaceIsUserLang = this.interfaceIsUserLang;
+//				$msg->language = this.language;
+//				$msg->useDatabase = this.useDatabase;
+//				$msg->title = this.title;
 //
 //				// DWIM
-//				if ( $format === 'block-parse' ) {
+//				if ($format === 'block-parse') {
 //					$format = 'parse';
 //				}
 //				$msg->format = $format;
@@ -1208,12 +1214,13 @@ public class XomwMessage {
 //				// Message objects should not be before parameters because
 //				// then they'll get double escaped. If the message needs to be
 //				// escaped, it'll happen right here when we call toString().
-//				return [ 'after', $msg->toString( $format ) ];
-//			} else {
-//				return [ 'before', $param ];
+//				return [ 'after', $msg->toString($format) ];
+//			}
+//			else {
+//				rv.Set(PRM_TID_BEFORE, param);
 //			}
 //		}
-//
+
 //		/**
 //		* Wrapper for what ever method we use to parse wikitext.
 //		*
@@ -1223,13 +1230,13 @@ public class XomwMessage {
 //		*
 //		* @return String Wikitext parsed into HTML.
 //		*/
-//		protected function parseText( $String ) {
+//		protected function parseText($String) {
 //			$out = MessageCache::singleton()->parse(
 //				$String,
-//				$this->title,
+//				this.title,
 //				/*linestart*/true,
-//				$this->interfaceIsUserLang,
-//				$this->getLanguage()
+//				this.interfaceIsUserLang,
+//				this.getLanguage()
 //			);
 //
 //			return $out instanceof ParserOutput ? $out->getText() : $out;
@@ -1244,12 +1251,12 @@ public class XomwMessage {
 //		*
 //		* @return String Wikitext with {{-constructs replaced with their values.
 //		*/
-//		protected function transformText( $String ) {
+//		protected function transformText($String) {
 //			return MessageCache::singleton()->transform(
 //				$String,
-//				$this->interfaceIsUserLang,
-//				$this->getLanguage(),
-//				$this->title
+//				this.interfaceIsUserLang,
+//				this.getLanguage(),
+//				this.title
 //			);
 //		}
 //
@@ -1262,22 +1269,22 @@ public class XomwMessage {
 //		* @throws MWException If message key array is empty.
 //		*/
 //		protected function fetchMessage() {
-//			if ( $this->message === null ) {
+//			if (this.message === null) {
 //				$cache = MessageCache::singleton();
 //
-//				foreach ( $this->keysToTry as key ) {
-//					$message = $cache->get( key, $this->useDatabase, $this->getLanguage() );
-//					if ( $message !== false && $message !== '' ) {
+//				foreach (this.keysToTry as key) {
+//					$message = $cache->get(key, this.useDatabase, this.getLanguage());
+//					if ($message !== false && $message !== '') {
 //						break;
 //					}
 //				}
 //
 //				// NOTE: The constructor makes sure keysToTry isn't empty,
 //				//       so we know that key and $message are initialized.
-//				$this->key = key;
-//				$this->message = $message;
+//				this.key = key;
+//				this.message = $message;
 //			}
-//			return $this->message;
+//			return this.message;
 //		}
 //
 //		/**
@@ -1292,8 +1299,8 @@ public class XomwMessage {
 //		*
 //		* @return String Input plaintext encoded for output to $format
 //		*/
-//		protected function formatPlaintext( $plaintext, $format ) {
-//			switch ( $format ) {
+//		protected function formatPlaintext($plaintext, $format) {
+//			switch ($format) {
 //			case self::FORMAT_TEXT:
 //			case self::FORMAT_PLAIN:
 //				return $plaintext;
@@ -1302,7 +1309,7 @@ public class XomwMessage {
 //			case self::FORMAT_BLOCK_PARSE:
 //			case self::FORMAT_ESCAPED:
 //			default:
-//				return htmlspecialchars( $plaintext, ENT_QUOTES );
+//				return htmlspecialchars($plaintext, ENT_QUOTES);
 //
 //			}
 //		}
@@ -1315,44 +1322,112 @@ public class XomwMessage {
 //		* @param String $format One of the FORMAT_* constants.
 //		* @return array Array with the parameter type (either "before" or "after") and the value.
 //		*/
-//		protected function formatListParam( array $prmsVar, $listType, $format ) {
-//			if ( !isset( self::$listTypeMap[$listType] ) ) {
-//				$warning = 'Invalid list type for message "' . $this->getKey() . '": '
-//					. htmlspecialchars( $listType )
-//					. ' (prmsVar are ' . htmlspecialchars( serialize( $prmsVar ) ) . ')';
-//				trigger_error( $warning, E_USER_WARNING );
+//		protected function formatListParam(array $prmsVar, $listType, $format) {
+//			if (!isset(self::$listTypeMap[$listType])) {
+//				$warning = 'Invalid list type for message "' . this.getKey() . '": '
+//					. htmlspecialchars($listType)
+//					. ' (prmsVar are ' . htmlspecialchars(serialize($prmsVar)) . ')';
+//				trigger_error($warning, E_USER_WARNING);
 //				$e = new Exception;
-//				wfDebugLog( 'Bug58676', $warning . "\n" . $e->getTraceAsString() );
+//				wfDebugLog('Bug58676', $warning . "\n" . $e->getTraceAsString());
 //				return [ 'before', '[INVALID]' ];
 //			}
 //			$func = self::$listTypeMap[$listType];
 //
 //			// Handle an empty list sensibly
-//			if ( !$prmsVar ) {
-//				return [ 'before', $this->getLanguage()->$func( [] ) ];
+//			if (!$prmsVar) {
+//				return [ 'before', this.getLanguage()->$func([]) ];
 //			}
 //
 //			// First, determine what kinds of list items we have
 //			$types = [];
 //			$vars = [];
 //			$list = [];
-//			foreach ( $prmsVar as $n => $p ) {
-//				list( $type, $value ) = $this->extractParam( $p, $format );
+//			foreach ($prmsVar as $n => $p) {
+//				list($type, $value) = this.extractParam($p, $format);
 //				$types[$type] = true;
 //				$list[] = $value;
-//				$vars[] = '$' . ( $n + 1 );
+//				$vars[] = '$' . ($n + 1);
 //			}
 //
 //			// Easy case: all are 'before' or 'after', so just join the
 //			// values and use the same type.
-//			if ( count( $types ) === 1 ) {
-//				return [ key( $types ), $this->getLanguage()->$func( $list ) ];
+//			if (count($types) === 1) {
+//				return [ key($types), this.getLanguage()->$func($list) ];
 //			}
 //
 //			// Hard case: We need to process each value per its type, then
 //			// return the concatenated values as 'after'. We handle this by turning
 //			// the list into a RawMessage and processing that as a parameter.
-//			$vars = $this->getLanguage()->$func( $vars );
-//			return $this->extractParam( new RawMessage( $vars, $prmsVar ), $format );
+//			$vars = this.getLanguage()->$func($vars);
+//			return this.extractParam(new RawMessage($vars, $prmsVar), $format);
 //		}
+}
+class XomwMessageVal {
+	public int tid;
+	public Object val;
+	public void Set(int tid, Object val) {
+		this.tid = tid;
+		this.val = val;
+	}
+}
+abstract class XomwMessagePrm {
+	public XomwMessagePrm(int tid) {this.tid = tid;}
+	public int Tid() {return tid;} private int tid;
+	public static final int
+	  Tid__raw           = 0
+	, Tid__num           = 1
+	, Tid__duration      = 2
+	, Tid__expiry        = 3
+	, Tid__period        = 4
+	, Tid__size          = 5
+	, Tid__bitrate       = 6
+	, Tid__plaintext     = 7
+	, Tid__list          = 8
+	;
+}
+class XomwMessagePrm_raw extends XomwMessagePrm { 	public byte[] raw;
+	public XomwMessagePrm_raw(byte[] raw) {super(Tid__raw);
+		this.raw = raw;
+	}
+}
+class XomwMessagePrm_num extends XomwMessagePrm { 	public int num;
+	public XomwMessagePrm_num(int num) {super(Tid__num);
+		this.num = num;
+	}
+}
+class XomwMessagePrm_duration extends XomwMessagePrm { 	public int duration;
+	public XomwMessagePrm_duration(int duration) {super(Tid__duration);
+		this.duration = duration;
+	}
+}
+class XomwMessagePrm_expiry extends XomwMessagePrm { 	public byte[] expiry;
+	public XomwMessagePrm_expiry(byte[] expiry) {super(Tid__expiry);
+		this.expiry = expiry;
+	}
+}
+class XomwMessagePrm_period extends XomwMessagePrm { 	public int period;
+	public XomwMessagePrm_period(int period) {super(Tid__period);
+		this.period = period;
+	}
+}
+class XomwMessagePrm_size extends XomwMessagePrm { 	public int size;
+	public XomwMessagePrm_size(int size) {super(Tid__size);
+		this.size = size;
+	}
+}
+class XomwMessagePrm_bitrate extends XomwMessagePrm { 	public int bitrate;
+	public XomwMessagePrm_bitrate(int bitrate) {super(Tid__bitrate);
+		this.bitrate = bitrate;
+	}
+}
+class XomwMessagePrm_plaintext extends XomwMessagePrm { 	public byte[] plaintext;
+	public XomwMessagePrm_plaintext(byte[] plaintext) {super(Tid__plaintext);
+		this.plaintext = plaintext;
+	}
+}
+class XomwMessagePrm_list extends XomwMessagePrm { 	public byte[][] list;
+	public XomwMessagePrm_list(byte[][] list) {super(Tid__list);
+		this.list = list;
+	}
 }
