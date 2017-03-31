@@ -33,8 +33,9 @@ public class Xoh_make_fxt {
 		) {
 		// fxt.Init_cache("en.wikipedia.org", "A.png", 0, 220, 110, 0.5, -1, -1, Bool_.Y, "B.png", 330, 110, -1, -1);
 	}
-	public void Test__html(String wtxt, String expd) {
-		expd = String_.Replace(expd, "'", "\"");
+	public void Test__html(String wtxt, String expd) {Test__html(wtxt, expd, true);}
+	public void Test__html(String wtxt, String expd, boolean escape_apos) {
+		if (escape_apos) expd = String_.Replace(expd, "'", "\"");
             String actl = parser_fxt.Exec__parse_to_hdump(wtxt);
 		Tfds.Eq_str_lines(expd, actl);
 	}

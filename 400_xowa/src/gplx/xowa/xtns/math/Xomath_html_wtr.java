@@ -24,6 +24,7 @@ class Xomath_html_wtr {
 	private final    Bry_fmt 
 	  fmt__latex	= Bry_fmt.Auto( "<img id='xowa_math_img_~{math_idx}' src='' width='' height=''/><span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>")
 	, fmt__mathjax	= Bry_fmt.Auto("<span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>");
+	private static final    byte[] Bry__math = Bry_.new_a7("math");
 
 	public void Write(Bry_bfr bfr, Xop_ctx ctx, Xop_xnde_tkn xnde, byte[] src, boolean is_latex, boolean enabled) {
 		// init vars
@@ -66,7 +67,7 @@ class Xomath_html_wtr {
 		}
 
 		// write html: <span>math_expr</math>
-		byte[] unique_bry = wiki.Parser_mgr().Uniq_mgr().Add(math_bry);
+		byte[] unique_bry = wiki.Parser_mgr().Uniq_mgr().Add(Bry__math, math_bry);
 		Bry_fmt fmt = is_latex ? fmt__latex : fmt__mathjax;
 		fmt.Bld_many(tmp_bfr, uid, unique_bry);
 		bfr.Add_bfr_and_clear(tmp_bfr);

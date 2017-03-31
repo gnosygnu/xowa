@@ -21,9 +21,10 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 	private int idx = -1;
 	public void Clear() {idx = -1; general_trie.Clear();}
 	public byte[] Get(byte[] key) {return (byte[])general_trie.Match_exact(key, 0, key.length);}
-	public byte[] Add(byte[] val) {		// "<b>" -> "\u007fUNIQ-item-1--QINU\u007f"
+	public byte[] Add(byte[] type, byte[] val) {// "<b>" -> "\u007fUNIQ-item-1--QINU\u007f"
 		byte[] key = key_bfr	
-			.Add(Bry__uniq__add__bgn)
+			.Add(Bry__uniq__bgn_w_dash)
+			.Add(type).Add_byte(Byte_ascii.Dash) // EX: "ref-"
 			.Add_int_variable(++idx)
 			.Add(Bry__uniq__add__end).To_bry_and_clear();
 		general_trie.Add_bry_bry(key, val);
@@ -36,10 +37,20 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 		int cur = 0;
 		int len = src.length;
 		while (cur < len) {
-			// look for \u007fUNIQ
-			int uniq_bgn = Bry_find_.Find_fwd(src, Bry__uniq__add__bgn, cur);
+			// find "\u007fUNIQ-"
+			int uniq_bgn = Bry_find_.Find_fwd(src, Bry__uniq__bgn_w_dash, cur);
 			if (uniq_bgn == Bry_find_.Not_found) break;
-			int uniq_end = Bry_find_.Find_fwd(src, Bry__uniq__add__end, uniq_bgn);
+
+			// find "-"; EX: ref-
+			int tmp_pos = uniq_bgn;
+			tmp_pos = Bry_find_.Find_fwd(src, Byte_ascii.Dash, tmp_pos, len);
+			if (tmp_pos == Bry_find_.Not_found) {
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "uniq_mgr:unable to find 2nd dash; src=~{0}", src);
+				return src;
+			}
+
+			// find end
+			int uniq_end = Bry_find_.Find_fwd(src, Bry__uniq__add__end, tmp_pos);
 			if (uniq_end == Bry_find_.Not_found) {
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "uniq_mgr:unable to convert uniq; src=~{0}", src);
 				return src;
@@ -111,10 +122,10 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 		key_bfr.Clear();
 		return rv;
 	}
-	private final    static byte[] 
+
+	private static final    byte[] 
 	  Bry__uniq__bgn		= Bry_.new_a7("\u007fUNIQ")
-	// , Bry__uniq__end		= Bry_.new_a7("-QINU\u007f")
-	, Bry__uniq__add__bgn	= Bry_.new_a7("\u007fUNIQ-item-")
+	, Bry__uniq__bgn_w_dash	= Bry_.new_a7("\u007fUNIQ-")
 	, Bry__uniq__add__end	= Bry_.new_a7("--QINU\u007f")
 	;
 }

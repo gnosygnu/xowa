@@ -105,14 +105,33 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 				break;
 			default:								// ignore tags except for xtn; NOTE: Xtn tags are part of tagRegy_wiki_tmpl stage
 				if (tag.Xtn()) {
-					bfr.Add_mid(src, tag_open_bgn, tag_open_end);	// write tag_bgn
-					for (int i = 0; i < subs_len; i++)				// always evaluate subs; handle <poem>{{{1}}}</poem>; DATE:2014-03-03
-						this.Subs_get(i).Tmpl_evaluate(ctx, src, caller, bfr);
-					bfr.Add_mid(src, tag_close_bgn, tag_close_end);	// write tag_end
-					if (tag_close_bgn == Int_.Min_value) {// xtn is unclosed; add a </xtn> else rest of page will be gobbled; PAGE:en.w:Provinces_and_territories_of_Canada DATE:2014-11-13
-						bfr.Add(tag.Xtn_end_tag());
-						bfr.Add(Byte_ascii.Gt_bry);
+					Bry_bfr cur_bfr = bfr;
+//						boolean is_tmpl_mode = ctx.Wiki().Parser_mgr().Ctx().Parse_tid() == Xop_parser_tid_.Tid__tmpl;
+//						if (is_tmpl_mode) {
+//							cur_bfr = ctx.Wiki().Utl__bfr_mkr().Get_m001().Reset_if_gt(Io_mgr.Len_mb);
+//						}
+
+					// write tag_bgn; EX: <poem>
+					cur_bfr.Add_mid(src, tag_open_bgn, tag_open_end);
+
+					// write subs; must always evaluate subs; handle <poem>{{{1}}}</poem>; DATE:2014-03-03
+					for (int i = 0; i < subs_len; i++)
+						this.Subs_get(i).Tmpl_evaluate(ctx, src, caller, cur_bfr);
+
+					// write tag_end; EX: </poem>
+					cur_bfr.Add_mid(src, tag_close_bgn, tag_close_end);
+
+					// xtn is unclosed; add a </xtn> else rest of page will be gobbled; PAGE:en.w:Provinces_and_territories_of_Canada DATE:2014-11-13
+					if (tag_close_bgn == Int_.Min_value) {
+						cur_bfr.Add(tag.Xtn_end_tag());
+						cur_bfr.Add(Byte_ascii.Gt_bry);
 					}
+
+//						if (is_tmpl_mode) {
+//							byte[] val = cur_bfr.To_bry_and_clear();
+//							byte[] key = ctx.Wiki().Parser_mgr().Uniq_mgr().Add(tag.Name_bry(), val);
+//							bfr.Add(key);
+//						}
 				}
 				break;
 		}

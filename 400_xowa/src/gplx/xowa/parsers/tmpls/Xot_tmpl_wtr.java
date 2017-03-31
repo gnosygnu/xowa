@@ -17,15 +17,16 @@ package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.envs.*;
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.miscs.*;
 public class Xot_tmpl_wtr {
-	public byte[] Write_all(Xop_ctx ctx, Xop_root_tkn root, byte[] src) {
-		Bry_bfr rslt_bfr = ctx.Wiki().Utl__bfr_mkr().Get_m001();
-		rslt_bfr.Reset_if_gt(Io_mgr.Len_mb);
-		Write_tkn(rslt_bfr, ctx, src, src.length, root);
-		return rslt_bfr.To_bry_and_rls();
+	public static byte[] Write_all(Xop_ctx ctx, Xop_root_tkn root, byte[] src) {
+		Bry_bfr bfr = ctx.Wiki().Utl__bfr_mkr().Get_m001().Reset_if_gt(Io_mgr.Len_mb);
+		Write_tkn(bfr, ctx, src, src.length, root);
+		return bfr.To_bry_and_rls();
+//			byte[] rv = bfr.To_bry_and_rls();
+//			return ctx.Wiki().Parser_mgr().Uniq_mgr().Parse(rv); // NOTE: noops if no UNIQs
 	}
-	private void Write_tkn(Bry_bfr rslt_bfr, Xop_ctx ctx, byte[] src, int src_len, Xop_tkn_itm tkn) {
+	private static void Write_tkn(Bry_bfr rslt_bfr, Xop_ctx ctx, byte[] src, int src_len, Xop_tkn_itm tkn) {
 		switch (tkn.Tkn_tid()) {
-			case Xop_tkn_itm_.Tid_root:											// write each sub
+			case Xop_tkn_itm_.Tid_root: // write each sub
 				int subs_len = tkn.Subs_len();
 				for (int i = 0; i < subs_len; i++) {
 					Xop_tkn_itm sub_tkn = tkn.Subs_get(i);
@@ -94,15 +95,13 @@ public class Xot_tmpl_wtr {
 					tkn.Tmpl_evaluate(ctx, src, Xot_invk_temp.Page_is_caller.Src_(src), rslt_bfr);
 				}
 				catch (Exception e) {
-					Err_string = String_.new_u8(src, tkn.Src_bgn(), tkn.Src_end()) + "|" + Type_adp_.NameOf_obj(e) + "|" + Err_.Cast_or_make(e).To_str__log();
+					String err_string = String_.new_u8(src, tkn.Src_bgn(), tkn.Src_end()) + "|" + Type_adp_.NameOf_obj(e) + "|" + Err_.Cast_or_make(e).To_str__log();
 					if (Env_.Mode_testing())
-						throw Err_.new_exc(e, "xo", Err_string);
+						throw Err_.new_exc(e, "xo", err_string);
 					else
-						ctx.App().Usr_dlg().Warn_many("", "", "failed to write tkn: page=~{0} err=~{1}", String_.new_u8(ctx.Page().Ttl().Page_db()), Err_string);
+						ctx.App().Usr_dlg().Warn_many("", "", "failed to write tkn: page=~{0} err=~{1}", String_.new_u8(ctx.Page().Ttl().Page_db()), err_string);
 				}
 				break;
 		}
 	}
-	public static String Err_string = "";
-	public static final    Xot_tmpl_wtr Instance = new Xot_tmpl_wtr(); Xot_tmpl_wtr() {}
 }

@@ -35,13 +35,13 @@ public class Xoh_hdr_html_tst {
 		));
 	}
 	@Test   public void Uniq() {
-		byte[] uniq = fxt.Parser_fxt().Wiki().Parser_mgr().Uniq_mgr().Add(Bry_.new_a7("bcd"));
 		fxt.Test__html(String_.Concat_lines_nl_skip_last
-		( "== a" + String_.new_u8(uniq) + "e =="
+		( "== a <math>c</math> e =="
 		, "text"
 		), String_.Concat_lines_nl_skip_last
-		( "<h2><span class='mw-headline' id='abcde'> abcde </span></h2>"
+		( "<h2><span class=\"mw-headline\" id=\"a_c_e\"> a <span id='xowa_math_txt_0'>c</span> e </span></h2>"
 		, "text"
-		));
+		)
+		, false);
 	}
 }

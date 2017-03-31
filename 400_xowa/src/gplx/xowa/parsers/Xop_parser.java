@@ -46,7 +46,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		int len = root.Subs_len();
 		for (int i = 0; i < len; ++i)
 			root.Subs_get(i).Tmpl_compile(ctx, src, tmpl_props);
-		return Xot_tmpl_wtr.Instance.Write_all(ctx, root, src);
+		return Xot_tmpl_wtr.Write_all(ctx, root, src);
 	}
 
 	public byte[] Parse_text_to_html(Xop_ctx ctx, byte[] src) {
