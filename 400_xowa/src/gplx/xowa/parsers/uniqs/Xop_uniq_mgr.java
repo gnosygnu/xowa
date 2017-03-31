@@ -124,8 +124,8 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 	}
 
 	private static final    byte[] 
-	  Bry__uniq__bgn		= Bry_.new_a7("\u007fUNIQ")
-	, Bry__uniq__bgn_w_dash	= Bry_.new_a7("\u007fUNIQ-")
-	, Bry__uniq__add__end	= Bry_.new_a7("--QINU\u007f")
+	  Bry__uniq__bgn		= Bry_.new_a7("\u007f'\"`UNIQ-")
+	, Bry__uniq__bgn_w_dash	= Bry_.Add(Bry__uniq__bgn, Byte_ascii.Dash_bry)
+	, Bry__uniq__add__end	= Bry_.new_a7("-QINU`\"'\u007f")
 	;
 }
