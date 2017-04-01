@@ -83,12 +83,28 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 				val = 2000 + (val % 10);												// NOTE: emulate PHP's incorrect behavior with 5 digit years; EX:ca.w:Nicolau_de_Mira; DATE:2014-04-18
 				tctx.Seg_idxs_(this, DateAdp_.SegIdx_year);
 				break;
-			case 4:																		// 4 digits; assume year
+			case 4:
+				// 4 digits; assume year
 				switch (data_idx) {
-					case 0:		Pxd_eval_year.Eval_at_pos_0(tctx, this); break;			// year at pos 0; EX: 2001-02-03
-					case 1:		tctx.Err_set(Pft_func_time_log.Invalid_year_mid); return false;// year at pos 1; invalid; EX: 02-2003-03
-					case 2:		Pxd_eval_year.Eval_at_pos_2(tctx, this); break;			// year at pos 2; EX: 02-03-2001
-					default:	Pxd_eval_year.Eval_at_pos_n(tctx, this); break;			// year at pos n; EX: 04:05 02-03-2001
+					// year at pos 0; EX: 2001-02-03
+					case 0:		Pxd_eval_year.Eval_at_pos_0(tctx, this); break;
+					// year at pos 1; invalid; EX: 02-2003-03
+					case 1:		tctx.Err_set(Pft_func_time_log.Invalid_year_mid); return false;
+					// year at pos 2; EX: 02-03-2001
+					case 2:		Pxd_eval_year.Eval_at_pos_2(tctx, this); break;
+					// year at pos 3 or more
+					default:
+						// if year already exists, ignore; needed else multiple access-date errors in references; PAGE:en.w:Template:Date; en.w:Antipas,_Cotabato; EX:"12 November 2016 2008" DATE:2017-04-01
+						if (tctx.Seg_idxs()[DateAdp_.SegIdx_year] != Pxd_itm_base.Seg_idx_null
+						) {
+							this.Seg_idx_(Seg_idx_skip);
+							return true;
+						}
+						// try to evaluate year at pos n; EX: 04:05 02-03-2001
+						else {
+							Pxd_eval_year.Eval_at_pos_n(tctx, this);
+						}
+						break;
 				}
 				tctx.Seg_idxs_(this, DateAdp_.SegIdx_year);
 				break;

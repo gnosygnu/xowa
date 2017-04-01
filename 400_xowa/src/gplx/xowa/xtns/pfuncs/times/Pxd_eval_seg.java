@@ -86,8 +86,9 @@ class Pxd_eval_seg {
 		int val = itm.Val();
 		switch (itm.Digits()) {
 			case 1:
-			case 2:
-				if		(val > -1 && val < 13) {
+			case 2:					
+				if	(	val > -1 && val < 13 // val is between 0 and 12; possible month;
+					&&	tctx.Seg_idxs()[DateAdp_.SegIdx_month] == Pxd_itm_base.Seg_idx_null) { // month is empty; needed else multiple access-date errors in references; PAGE:en.w:Template:Date; en.w:Antipas,_Cotabato; EX:"2 12 November 2016" DATE:2017-04-01
 					tctx.Seg_idxs_(itm, DateAdp_.SegIdx_month);
 					return true;
 				}
