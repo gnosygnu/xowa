@@ -18,6 +18,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.addons.wikis.ctgs.*;
 import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.xtns.scribunto.procs.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.interwikis.*;
 public class Scrib_lib_site implements Scrib_lib {
 	public Scrib_lib_site(Scrib_core core) {this.core = core;} private final    Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -101,28 +102,29 @@ public class Scrib_lib_site implements Scrib_lib {
 		String cache_key = "scribunto.interwikimap." + core.Wiki().Domain_str() + "." + filter;
 		Keyval[] rv = (Keyval[])misc_cache.Get_by(cache_key);
 		if (rv == null) {
-			Xow_xwiki_mgr xwiki_mgr = core.Wiki().Xwiki_mgr();
-			int xwiki_len = xwiki_mgr.Len();
+			Xow_interwiki_map interwiki_map = core.Wiki().Xwiki_mgr().Interwiki_map();
+			int interwiki_map_len = interwiki_map.Len();
 			List_adp list = List_adp_.New();
-			for (int i = 0; i < xwiki_len; ++i) {
-				Xow_xwiki_itm itm = xwiki_mgr.Get_at(i);
-				boolean itm_is_local = itm.Offline();
+			for (int i = 0; i < interwiki_map_len; i++) {
+				Xow_interwiki_itm itm = interwiki_map.Get_at(i);
+				Xow_domain_itm domain = Xow_domain_itm_.parse(itm.Domain());
+				boolean itm_is_local = domain.Domain_type_id() != Xow_domain_tid_.Itm__other.Tid(); // NOTE: define local as anything with an "other" domain; EX: "en.wikipedia.org" -> Wikipedia; "toollabs.org" -> Other; was itm.Offline(); DATE:2017-04-01
 				if (local == 1 && !itm_is_local) continue;
 				if (local == 0 &&  itm_is_local) continue;
-				String prefix = itm.Key_str();
-				list.Add(Keyval_.new_(prefix, InterwikiMap_itm(itm, prefix, itm_is_local)));
+				String prefix = String_.new_u8(itm.Key());
+				list.Add(Keyval_.new_(prefix, InterwikiMap_itm(prefix, itm_is_local, String_.new_u8(itm.Url()))));
 			}
 			rv = (Keyval[])list.To_ary_and_clear(Keyval.class);
 			misc_cache.Add(cache_key, rv);
 		}
 		return rslt.Init_obj(rv);
 	}
-	private Keyval[] InterwikiMap_itm(Xow_xwiki_itm itm, String prefix, boolean itm_is_local) {
+	public static Keyval[] InterwikiMap_itm(String prefix, boolean itm_is_local, String url) {
+		// NOTE: wiki.core_db.xowa_cfg should be upgraded to store isProtocolRelative, isLocal and other properties from WMF_API. DATE:2017-04-01
 		boolean is_extralanguage_link = false;
 		int rv_len = 7;
 		if (is_extralanguage_link) rv_len += 2;
-		String url = String_.new_u8(itm.Domain_bry());
-		boolean url_is_relative = String_.Has_at_bgn(url, "//");
+		boolean url_is_relative = String_.Has_at_bgn(url, "//"); // effectively false since url is built up programatically
 		Keyval[] rv = new Keyval[rv_len];
 		rv[ 0] = Keyval_.new_("prefix"					, prefix);
 		rv[ 1] = Keyval_.new_("url"						, url);								// wfExpandUrl( $row['iw_url'], PROTO_RELATIVE ),

@@ -17,6 +17,7 @@ package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.net.*; import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.langs.*;	
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.parsers.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
+import gplx.xowa.wikis.xwikis.interwikis.*;
 public class Xow_xwiki_mgr {
 	private final    Ordered_hash list = Ordered_hash_.New_bry(); private final    Hash_adp_bry hash = Hash_adp_bry.ci_a7();
 	private final    Xow_wiki wiki;
@@ -24,6 +25,7 @@ public class Xow_xwiki_mgr {
 		this.wiki = wiki;
 		this.xwiki_domain_tid = Xwiki_tid(wiki.Domain_tid());
 	}
+	public Xow_interwiki_map Interwiki_map() {return interwiki_map;} private final    Xow_interwiki_map interwiki_map = new Xow_interwiki_map(); // separate map for Scrib; DATE:2017-04-01
 	public int	Xwiki_domain_tid() {return xwiki_domain_tid;} private int xwiki_domain_tid;
 	public int	Len() {return list.Count();}
 	public void Clear() {hash.Clear(); list.Clear();}
@@ -36,6 +38,11 @@ public class Xow_xwiki_mgr {
 		return Add_by_atrs(Bry_.new_a7(key), Bry_.new_a7(domain), null)
 			.Offline_(true);// NOTE: need to mark offline in order to show in left sidebar
 	}
+	public Xow_xwiki_itm Add_by_site_interwikimap(byte[] key, byte[] domain_bry, byte[] url_xo, byte[] url_wm) {
+		interwiki_map.Add(key, domain_bry, url_wm);
+		return this.Add_by_atrs(key, domain_bry, url_xo);
+	}
+
 	public Xow_xwiki_itm Add_by_atrs(String key, String domain)		{return Add_by_atrs(Bry_.new_a7(key), Bry_.new_a7(domain), null);}
 	public Xow_xwiki_itm Add_by_atrs(byte[] key, byte[] domain)		{return Add_by_atrs(key, domain, null);}
 	public Xow_xwiki_itm Add_by_atrs(byte[] key, byte[] domain_bry, byte[] url_fmt) {

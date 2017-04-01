@@ -39,7 +39,10 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 				byte[][] flds = Bry_split_.Split(line, Byte_ascii.Pipe);
 				byte[] url_fmt = flds[1];
 				byte[] domain_bry = Xow_xwiki_mgr.Get_domain_from_url(url_parser, url_fmt);
-				wiki.Xwiki_mgr().Add_by_atrs(flds[0], domain_bry, url_fmt);
+				wiki.Xwiki_mgr().Add_by_site_interwikimap
+					( flds[0], domain_bry, url_fmt
+					, Bry_.Replace(url_fmt, Arg0_xo, Arg0_wm) // NOTE: interwiki items are stored in wiki.core.xowa_cfg as https://en.wikipedia.org/wiki/~{0}
+					);
 			}
 		}
 	}
@@ -111,6 +114,10 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 	, "0|dmoz|http://www.dmoz.org/~{0}|DMOZ"
 	))
 	, Csv__enwiki = Bry_.new_a7("2|w|wikipedia")
+	;
+	private static final    byte[]
+	  Arg0_xo = Bry_.new_a7("~{0}")
+	, Arg0_wm = Bry_.new_a7("$1")
 	;
 }
 

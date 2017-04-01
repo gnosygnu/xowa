@@ -51,11 +51,16 @@ public class Scrib_lib_site_tst {
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInNs, Object_.Ary("12"), 0);
 	}
 	@Test   public void InterwikiMap() {
+		String key = "scribunto.interwikimap.en.wikipedia.org.!local";
+		fxt.Core().Wiki().Cache_mgr().Misc_cache().Add(key, new Keyval[] 
+		{ Keyval_.new_("en"
+		, Scrib_lib_site.InterwikiMap_itm("en.wikipedia.org", false, "https://en.wikipedia.org/wiki/$1"))
+		});
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_site.Invk_interwikiMap, Object_.Ary("!local"), String_.Concat_lines_nl_skip_last
 		( "1="
-		, "  en.wikipedia.org="
+		, "  en="
 		, "    prefix=en.wikipedia.org"
-		, "    url=en.wikipedia.org"
+		, "    url=https://en.wikipedia.org/wiki/$1"
 		, "    isProtocolRelative=false"
 		, "    isLocal=false"
 		, "    isTranscludable=false"
