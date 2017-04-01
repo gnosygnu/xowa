@@ -44,7 +44,8 @@ public class Scrib_lib_language_tst {
 	@Test  public void FetchLanguageName() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_fetchLanguageName, Object_.Ary("en"), "English");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_fetchLanguageName, Object_.Ary("fr"), "Français");
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_fetchLanguageName, Object_.Ary("enx"), "");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_fetchLanguageName, Object_.Ary("enx"), "enx");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_fetchLanguageName, Object_.Ary("qz"), "qz");
 	}
 	@Test  public void GetFallbacksFor() {
 		Xol_lang_itm other_lang = fxt.Core().App().Lang_mgr().Get_by_or_new(Bry_.new_a7("zh"));

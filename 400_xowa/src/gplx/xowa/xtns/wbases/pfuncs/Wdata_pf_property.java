@@ -23,7 +23,7 @@ public class Wdata_pf_property extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_property;}
 	@Override public Pf_func New(int id, byte[] name) {return new Wdata_pf_property().Name_(name);}
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// EX: {{#property:p123|}}
-		synchronized (this) { // LOCK: must synchronized b/c bfr will later be set as member variable; DATE:2016-07-06
+		synchronized (this) { // LOCK: must synchronized b/c bfr will later be set as member variable in .Resolve_to_bfr; DATE:2016-07-06
 			// init
 			byte[] pid_ttl = Eval_argx(ctx, src, caller, self);
 			Xop_log_property_wkr property_wkr = ctx.Xtn__wikidata__property_wkr();
