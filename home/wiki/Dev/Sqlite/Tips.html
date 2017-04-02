@@ -62,7 +62,7 @@
       </ul>
     </div>
     <h3>
-      <span class="mw-headline" id="Avoid_LIKE">Avoid LIKE</span>
+      <span class="mw-headline" id="Avoid_LIKE">Avoid LIKE</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Sqlite/Tips?action=edit&amp;section_key=Avoid_LIKE" title="Edit section: Avoid_LIKE" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
     </h3>
     <ul>
       <li>
@@ -94,7 +94,7 @@ WHERE   name LIKE 'a%';
       The clause <code>name LIKE 'a%'</code> does not use the index <code>tbl1__name</code>.
     </p>
     <h3>
-      <span class="mw-headline" id="Alternative:_Use_comparison">= Alternative: Use comparison</span>
+      <span class="mw-headline" id="Alternative:_Use_comparison">= Alternative: Use comparison</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Sqlite/Tips?action=edit&amp;section_key=Alternative:_Use_comparison" title="Edit section: Alternative:_Use_comparison" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
     </h3>
     <p>
       If the like has a wildcard at the end, and the data is standardized to one case (all lowercase or all uppercase), use an equality instead:
@@ -108,7 +108,7 @@ WHERE   name &gt;= 'a' AND name &lt; 'b';
       This uses the index <code>tbl1__name</code> and returns the same data.
     </p>
     <h3>
-      <span class="mw-headline" id="Avoid_ORDER_BY">Avoid ORDER BY</span>
+      <span class="mw-headline" id="Avoid_ORDER_BY">Avoid ORDER BY</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Sqlite/Tips?action=edit&amp;section_key=Avoid_ORDER_BY" title="Edit section: Avoid_ORDER_BY" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
     </h3>
     <p>
       ORDER BY will do an expensive sort operation which may not use an index. This will come into play with multiple-table joins
@@ -124,13 +124,13 @@ ORDER BY t2.age
       In most cases, SQLite will only apply one index. In this example, it will be the index for the JOIN. No index gets applied for the score column, even if one is available In some cases, SQLite will actually sort the result-set by the ORDER BY first, before it applies the WHERE.
     </p>
     <h4>
-      <span class="mw-headline" id="Alternative:_denormalize_the_table">Alternative: denormalize the table</span>
+      <span class="mw-headline" id="Alternative:_denormalize_the_table">Alternative: denormalize the table</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Sqlite/Tips?action=edit&amp;section_key=Alternative:_denormalize_the_table" title="Edit section: Alternative:_denormalize_the_table" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
     </h4>
     <p>
       Putting all the columns in one table and building an index across them.
     </p>
     <h4>
-      <span class="mw-headline" id="Alternative:_multiple_where_clauses">Alternative: multiple where clauses</span>
+      <span class="mw-headline" id="Alternative:_multiple_where_clauses">Alternative: multiple where clauses</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Sqlite/Tips?action=edit&amp;section_key=Alternative:_multiple_where_clauses" title="Edit section: Alternative:_multiple_where_clauses" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
     </h4>
 <pre>
 SELECT  t1.id
@@ -145,7 +145,7 @@ WHERE   t2.age &gt;  70 AND t2.age &lt;= 100
 ;
 </pre>
     <h3>
-      <span class="mw-headline" id="Beware_bulk_INSERTs_into_a_table_with_a_PRIMARY_KEY">Beware bulk INSERTs into a table with a PRIMARY KEY</span>
+      <span class="mw-headline" id="Beware_bulk_INSERTs_into_a_table_with_a_PRIMARY_KEY">Beware bulk INSERTs into a table with a PRIMARY KEY</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Sqlite/Tips?action=edit&amp;section_key=Beware_bulk_INSERTs_into_a_table_with_a_PRIMARY_KEY" title="Edit section: Beware_bulk_INSERTs_into_a_table_with_a_PRIMARY_KEY" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
     </h3>
 <pre>
 INSERT INTO 
@@ -161,7 +161,7 @@ WHERE   t2.age &gt; 100 AND t2.age &lt;= 130
       Instead, insert into the table with an ORDER BY
     </p>
     <h3>
-      <span class="mw-headline" id="ATTACH">ATTACH</span>
+      <span class="mw-headline" id="ATTACH">ATTACH</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Sqlite/Tips?action=edit&amp;section_key=ATTACH" title="Edit section: ATTACH" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
     </h3>
     <p>
       ATTACH database does not affect performance. There is no difference between the following
@@ -180,19 +180,19 @@ FROM    tbl1 t1
 ;
 </pre>
     <h2>
-      <span class="mw-headline" id="Get_a_Solid_State_Drive">Get a Solid State Drive</span>
+      <span class="mw-headline" id="Get_a_Solid_State_Drive">Get a Solid State Drive</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Sqlite/Tips?action=edit&amp;section_key=Get_a_Solid_State_Drive" title="Edit section: Get_a_Solid_State_Drive" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
     </h2>
     <p>
       SQLite does a lot of disk reading and writing
     </p>
     <h2>
-      <span class="mw-headline" id="Use_an_INDEX_for_your_SELECTs.2C_especially_JOINs">Use an INDEX for your SELECTs, especially JOINs</span>
+      <span class="mw-headline" id="Use_an_INDEX_for_your_SELECTs.2C_especially_JOINs">Use an INDEX for your SELECTs, especially JOINs</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Sqlite/Tips?action=edit&amp;section_key=Use_an_INDEX_for_your_SELECTs.2C_especially_JOINs" title="Edit section: Use_an_INDEX_for_your_SELECTs.2C_especially_JOINs" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
     </h2>
     <h2>
-      <span class="mw-headline" id="Use_TRANSACTIONs_for_multiple_INSERT_.2F_UPDATE_.2F_DELETE">Use TRANSACTIONs for multiple INSERT / UPDATE / DELETE</span>
+      <span class="mw-headline" id="Use_TRANSACTIONs_for_multiple_INSERT_.2F_UPDATE_.2F_DELETE">Use TRANSACTIONs for multiple INSERT / UPDATE / DELETE</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Sqlite/Tips?action=edit&amp;section_key=Use_TRANSACTIONs_for_multiple_INSERT_.2F_UPDATE_.2F_DELETE" title="Edit section: Use_TRANSACTIONs_for_multiple_INSERT_.2F_UPDATE_.2F_DELETE" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
     </h2>
     <h2>
-      <span class="mw-headline" id="Use_PRAGMA_page_size_4096">Use PRAGMA page_size 4096</span>
+      <span class="mw-headline" id="Use_PRAGMA_page_size_4096">Use PRAGMA page_size 4096</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Sqlite/Tips?action=edit&amp;section_key=Use_PRAGMA_page_size_4096" title="Edit section: Use_PRAGMA_page_size_4096" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
     </h2>
   
     </div>
