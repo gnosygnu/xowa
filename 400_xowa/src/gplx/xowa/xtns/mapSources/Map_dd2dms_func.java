@@ -45,21 +45,23 @@ public class Map_dd2dms_func extends Pf_func_base {
 		tmp_bfr.Mkr_rls();
 		Map_math map_math = Map_math.Instance;
 		if (map_math.Ctor(coord, prec, Bry_.Empty, 2))
-			bfr.Add(map_math.Get_dms(plus, minus));
+			bfr.Add(map_math.Get_dms(Bool_.N, plus, minus));
 		else
 			map_math.Fail(ctx, src, self, bfr, this.Name());
 	}
-	public static void Deg_to_dms(Bry_bfr bfr, boolean coord_is_lng, byte[] coord, int prec) {
+	public static void Deg_to_dms(Bry_bfr bfr, boolean wikibase, boolean coord_is_lng, byte[] coord, int prec) { // NOTE: called by wikibase
 		Map_math map_math = Map_math.Instance;
 		if (map_math.Ctor(coord, prec, Bry_.Empty, 2)) {
-			bfr.Add(map_math.Get_dms(Bry_.Empty, Bry_.Empty));
-			byte[] dir = coord_is_lng ? map_math.Coord_dir_ns() : map_math.Coord_dir_ew();
-			bfr.Add_byte_space().Add(dir);
+			bfr.Add(map_math.Get_dms(wikibase, Bry_.Empty, Bry_.Empty));
+			byte[] dir = coord_is_lng ? map_math.Coord_dir_ew() : map_math.Coord_dir_ns();
+			if (!wikibase)	// NOTE: do not add space if wikibase, else will fail in Module:en.w:WikidataCoord; PAGE:en.w:Hulme_Arch_Bridge DATE:2017-04-02
+				bfr.Add_byte_space();
+			bfr.Add(dir);
 		}
 	}
-	public static final Map_dd2dms_func Instance = new Map_dd2dms_func(); Map_dd2dms_func() {}
+	public static final    Map_dd2dms_func Instance = new Map_dd2dms_func(); Map_dd2dms_func() {}
 	private static final byte Key_tid_plus = 1, Key_tid_minus = 2, Key_tid_precision = 3;
-	private static final Hash_adp_bry Key_hash = Hash_adp_bry.cs()
+	private static final    Hash_adp_bry Key_hash = Hash_adp_bry.cs()
 	.Add_str_byte("plus"		, Key_tid_plus)
 	.Add_str_byte("minus"		, Key_tid_minus)
 	.Add_str_byte("precision"	, Key_tid_precision)

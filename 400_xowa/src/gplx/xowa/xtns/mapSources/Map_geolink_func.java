@@ -72,7 +72,7 @@ public class Map_geolink_func extends Pf_func_base {
 	}
 	private static byte[] Xto_dms(Xop_ctx ctx, Map_math math, boolean pass, byte[] pos, byte[] neg) {
 		return pass
-			? math.Get_dms(pos, neg)
+			? math.Get_dms(Bool_.N, pos, neg)
 			: ctx.Wiki().Msg_mgr().Val_by_key_obj("mapsources-math-incorrect-input")
 			;
 	}

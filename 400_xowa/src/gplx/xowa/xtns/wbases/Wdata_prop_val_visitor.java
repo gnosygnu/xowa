@@ -133,9 +133,9 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 		}
 
 		// build String
-		gplx.xowa.xtns.mapSources.Map_dd2dms_func.Deg_to_dms(bfr, Bool_.N, lat, precision_int);
+		gplx.xowa.xtns.mapSources.Map_dd2dms_func.Deg_to_dms(bfr, Bool_.Y, Bool_.N, lat, precision_int);
 		bfr.Add_byte_comma().Add_byte_space();
-		gplx.xowa.xtns.mapSources.Map_dd2dms_func.Deg_to_dms(bfr, Bool_.Y, lng, precision_int);
+		gplx.xowa.xtns.mapSources.Map_dd2dms_func.Deg_to_dms(bfr, Bool_.Y, Bool_.Y, lng, precision_int);
 
 		// write globe if any
 		if (wikidata_page) {

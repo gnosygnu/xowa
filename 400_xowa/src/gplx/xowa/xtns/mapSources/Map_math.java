@@ -110,19 +110,27 @@ class Map_math {// REF.MW:MapSources_math.php
 		}
 		step = 2;
 	}
-	private static final    byte[] Bry_deg = Bry_.new_u8("°"), Bry_quot = Bry_.new_a7("&quot;");
-	public byte[] Get_dms(byte[] plus, byte[] minus) { // REF.MW: getDMSString
+	public byte[] Get_dms(boolean wikibase, byte[] plus, byte[] minus) { // REF.MW: getDMSString
 		if (step < 2) Set_coord();
 		double deg = coord_deg;
 		if (	dec < 0 
-			&& (Bry_.Len_gt_0(plus) || Bry_.Len_gt_0(minus))) {
+			&& (	(Bry_.Len_gt_0(plus) || Bry_.Len_gt_0(minus))
+				||	wikibase	// NOTE: wikibase will always pass in empty plus / minus; still need to suppress "-" sign because letter has already been reversed; EX:"-2 E" -> "2 W" x> "-2 W" DATE:2017-04-02
+				)
+			) {
 			deg = Math_.Abs_double(deg);
 		}
 		tmp_bfr.Add_double(deg).Add(Bry_deg);
-		if (prec > 0)
-			tmp_bfr.Add_byte_space().Add_double(coord_min).Add_byte(Byte_ascii.Apos);
-		if (prec > 2)
-			tmp_bfr.Add_byte_space().Add_double(coord_sec).Add(Bry_quot);
+		if (prec > 0) {
+			if (!wikibase) // NOTE: do not add space if wikibase, else will fail in Module:en.w:WikidataCoord; PAGE:en.w:Hulme_Arch_Bridge DATE:2017-04-02
+				tmp_bfr.Add_byte_space();
+			tmp_bfr.Add_double(coord_min).Add(wikibase ? Bry_apos_wb : Bry_apos_mw);
+		}
+		if (prec > 2) {
+			if (!wikibase)	// NOTE: do not add space if wikibase, else will fail in Module:en.w:WikidataCoord; PAGE:en.w:Hulme_Arch_Bridge DATE:2017-04-02
+				tmp_bfr.Add_byte_space();
+			tmp_bfr.Add_double(coord_sec).Add(wikibase ? Bry_quot_wb : Bry_quot_mw);
+		}
 		byte[] letter = null;
 		if (dir_id == Dir_lat_id)
 			letter = coord_dir_ns;
@@ -132,8 +140,10 @@ class Map_math {// REF.MW:MapSources_math.php
 			letter = plus;
 		if (dec < 0 && Bry_.Len_gt_0(minus))
 			letter = minus;
-		if (letter != null)
-			tmp_bfr.Add_byte_space().Add(letter);
+		if (letter != null) {
+			tmp_bfr.Add_byte_space();
+			tmp_bfr.Add(letter);
+		}
 		return tmp_bfr.To_bry_and_clear();
 	}
 	private void Parse_input(byte[] src) {	// REF.MW: toDec
@@ -257,6 +267,13 @@ class Map_math {// REF.MW:MapSources_math.php
 		src = Trie__normalize__rest.Replace(bfr, src, 0, src.length);	// normalize rest;
 		return Bry_.Trim(src);
 	}
+	private static final    byte[] 
+	  Bry_deg = Bry_.new_u8("°")
+	, Bry_quot_mw = Bry_.new_a7("&quot;")
+	, Bry_quot_wb = Bry_.new_a7("&#34;") // REF:en.w:Module:WikidataCoord
+	, Bry_apos_mw = Bry_.new_a7("'")
+	, Bry_apos_wb = Bry_.new_a7("&#39;") // REF:en.w:Module:WikidataCoord
+	;
 	private static final byte Dir_unknown_id = 0, Dir_lat_id = 1, Dir_long_id = 2;
 	public static final    byte[] Dir_lat_bry = Bry_.new_a7("lat"), Dir_long_bry = Bry_.new_a7("long");
 	private static final    Btrie_slim_mgr Dir_trie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:MW_const.en
