@@ -17,16 +17,21 @@ package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.hwtrs.*; import gplx.xowa.xtns.wbases.claims.itms.times.*;
-public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
+public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.UNSAFE; callers must do synchronized
 	private Wdata_wiki_mgr wdata_mgr; private Xoae_app app; private Bry_bfr bfr;
 	private Xol_lang_itm lang;
 	private final    Bry_bfr tmp_time_bfr = Bry_bfr_.Reset(255); private final    Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_();
 	private Wdata_hwtr_msgs msgs;
-	public Wdata_prop_val_visitor(Xoae_app app, Wdata_wiki_mgr wdata_mgr) {this.app = app; this.wdata_mgr = wdata_mgr;}
-	public void Init(Bry_bfr bfr, Wdata_hwtr_msgs msgs, byte[] lang_key) {
+	private boolean mode_is_statements;
+	public Wdata_prop_val_visitor(Xoae_app app, Wdata_wiki_mgr wdata_mgr) {
+		this.app = app; this.wdata_mgr = wdata_mgr;
+	}
+	public void Init(Bry_bfr bfr, Wdata_hwtr_msgs msgs, byte[] lang_key, boolean mode_is_statements) {
+		// init some member variables; 
 		this.bfr = bfr; this.msgs = msgs;
 		this.lang = app.Lang_mgr().Get_by(lang_key);
 		if (lang == null) lang = app.Lang_mgr().Lang_en();	// TEST: needed for one test; DATE:2016-10-20
+		this.mode_is_statements = mode_is_statements;
 	}
 	public void Visit_str(Wbase_claim_string itm) {Write_str(bfr, itm.Val_bry());}
 	public static void Write_str(Bry_bfr bfr, byte[] bry) {bfr.Add(bry);}
@@ -43,15 +48,34 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor {
 	}
 	public void Visit_monolingualtext(Wbase_claim_monolingualtext itm)	{Write_langtext(bfr, itm.Text());}
 	public static void Write_langtext(Bry_bfr bfr, byte[] text) {bfr.Add(text);}			// phrase only; PAGE:en.w:Alberta; EX: {{#property:motto}} -> "Fortis et libre"; DATE:2014-08-28
-	public void Visit_entity(Wbase_claim_entity itm) {Write_entity(bfr, wdata_mgr, lang.Key_bry(), itm.Page_ttl_db());}
-	public static void Write_entity(Bry_bfr bfr, Wdata_wiki_mgr wdata_mgr, byte[] lang_key, byte[] entity_ttl_db) {
+	public void Visit_entity(Wbase_claim_entity itm) {Write_entity(bfr, wdata_mgr, lang.Key_bry(), itm.Page_ttl_db(), mode_is_statements);}
+	public static void Write_entity(Bry_bfr bfr, Wdata_wiki_mgr wdata_mgr, byte[] lang_key, byte[] entity_ttl_db, boolean mode_is_statements) {
+		// get entity
 		Wdata_doc entity_doc = wdata_mgr.Doc_mgr.Get_by_xid_or_null(entity_ttl_db);
-		if (entity_doc == null) return;	// NOTE: wiki may refer to entity that no longer exists; EX: {{#property:p1}} which links to Q1, but p1 links to Q2 and Q2 was deleted; DATE:2014-02-01
+
+		// NOTE: wiki may refer to entity that no longer exists; EX: {{#property:p1}} which links to Q1, but p1 links to Q2 and Q2 was deleted; DATE:2014-02-01
+		if (entity_doc == null) 
+			return;
+
+		// get label
 		byte[] label = entity_doc.Label_list__get(lang_key);
-		if (label == null && !Bry_.Eq(lang_key, Xol_lang_itm_.Key_en))	// NOTE: some properties may not exist in language of wiki; default to english; DATE:2013-12-19
+
+		// NOTE: some properties may not exist in language of wiki; default to english; DATE:2013-12-19
+		if (label == null && !Bry_.Eq(lang_key, Xol_lang_itm_.Key_en))
 			label = entity_doc.Label_list__get(Xol_lang_itm_.Key_en);
-		if (label != null)	// if label is still not found, don't add null reference
-			bfr.Add(label);
+
+		// if label is still not found, don't add null reference
+		if (label != null) {
+			// if statements, add "[[entity_val]]"
+			if (mode_is_statements) {
+				bfr.Add(gplx.xowa.parsers.tmpls.Xop_tkn_.Lnki_bgn);
+				bfr.Add(label);
+				bfr.Add(gplx.xowa.parsers.tmpls.Xop_tkn_.Lnki_end);
+			}
+			// else, just add "entity_val"
+			else
+				bfr.Add(label);
+		}
 	}
 	public void Visit_quantity(Wbase_claim_quantity itm) {Write_quantity(bfr, wdata_mgr, lang, itm.Amount(), itm.Lbound(), itm.Ubound(), itm.Unit());}
 	public static void Write_quantity(Bry_bfr bfr, Wdata_wiki_mgr wdata_mgr, Xol_lang_itm lang, byte[] val_bry, byte[] lo_bry, byte[] hi_bry, byte[] unit) {

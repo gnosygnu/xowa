@@ -245,6 +245,7 @@ public class Pf_func_ {
 	, Xol_kwd_grp_.Id_rev_protectionexpiry
 	, Xol_kwd_grp_.Id_categorytree
 	, Xol_kwd_grp_.Id_assessment
+	, Xol_kwd_grp_.Id_statements
 	};
 	public static Xot_defn Get_prototype(int id) {
 		switch (id) {
@@ -404,6 +405,7 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_new_window_link:				return new gplx.xowa.xtns.new_window_links.New_window_link_func();
 
 			case Xol_kwd_grp_.Id_property:						return new gplx.xowa.xtns.wbases.pfuncs.Wdata_pf_property();
+			case Xol_kwd_grp_.Id_statements:					return new gplx.xowa.xtns.wbases.pfuncs.Wdata_pf_statements();
 			case Xol_kwd_grp_.Id_noexternallanglinks:			return new gplx.xowa.xtns.wbases.pfuncs.Wdata_pf_noExternalLangLinks();
 			case Xol_kwd_grp_.Id_wbreponame:					return new gplx.xowa.xtns.wbases.pfuncs.Wdata_pf_wbreponame();
 

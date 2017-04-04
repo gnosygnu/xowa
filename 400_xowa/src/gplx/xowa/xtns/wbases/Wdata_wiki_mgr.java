@@ -92,11 +92,11 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	public void Resolve_claim(Bry_bfr rv, Xow_domain_itm domain, Wbase_claim_base claim_itm) {
 		synchronized (thread_lock) {	// LOCK:must synchronized b/c prop_val_visitor has member bfr which can get overwritten; DATE:2016-07-06
 			if (hwtr_mgr == null) Hwtr_mgr_assert();
-			prop_val_visitor.Init(rv, hwtr_mgr.Msgs(), domain.Lang_orig_key());
+			prop_val_visitor.Init(rv, hwtr_mgr.Msgs(), domain.Lang_orig_key(), Bool_.N);
 			claim_itm.Welcome(prop_val_visitor);
 		}
 	}
-	public void Resolve_to_bfr(Bry_bfr bfr, Wbase_claim_grp prop_grp, byte[] lang_key) {
+	public void Resolve_to_bfr(Bry_bfr bfr, Wbase_claim_grp prop_grp, byte[] lang_key, boolean mode_is_statements) {
 		synchronized (thread_lock) {	// LOCK:must synchronized b/c prop_val_visitor has member bfr which can get overwritten; DATE:2016-07-06
 			if (hwtr_mgr == null) Hwtr_mgr_assert();
 			int len = prop_grp.Len();
@@ -113,7 +113,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 				case Wbase_claim_value_type_.Tid__novalue	: bfr.Add(Wbase_claim_value_type_.Itm__novalue.Key_bry()); break;
 				case Wbase_claim_value_type_.Tid__somevalue	: bfr.Add(Wbase_claim_value_type_.Itm__somevalue.Key_bry()); break;
 				default: {
-					prop_val_visitor.Init(bfr, hwtr_mgr.Msgs(), lang_key);
+					prop_val_visitor.Init(bfr, hwtr_mgr.Msgs(), lang_key, mode_is_statements);
 					selected.Welcome(prop_val_visitor);
 					break;
 				}

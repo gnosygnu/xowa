@@ -102,7 +102,7 @@ public class Wdata_prop_val_visitor_ {
 			}
 		}
 		entity_id = Wbase_claim_entity.To_xid__db(entity_tid, entity_id);	// get p/q and number; PAGE:en.v:Mongolia; EX: [numeric-id=6498663, entity-type=item]; DATE:2016-10-18
-		Wdata_prop_val_visitor.Write_entity(bfr, wdata_mgr, lang.Key_bry(), entity_id);
+		Wdata_prop_val_visitor.Write_entity(bfr, wdata_mgr, lang.Key_bry(), entity_id, Bool_.N);
 	}
 	private static void Write_time(Bry_bfr bfr, Wdata_wiki_mgr wdata_mgr, Xowe_wiki wiki, byte[] page_url, int pid, byte snak_tid, Keyval[] kvs) {
 		byte[] time = null, calendar = null;

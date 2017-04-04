@@ -24,7 +24,7 @@ public class Wdata_pf_property_data {
 	public final    byte[]		Q;			// EX: "Q123"
 	public final    byte[]		From;		// EX: "p2"
 
-	public static Wdata_pf_property_data Parse(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Wdata_pf_property pfunc) {
+	public static Wdata_pf_property_data Parse(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self) {
 		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
 		byte[] of = null, q = null, from = null;
 		int args_len = self.Args_len();

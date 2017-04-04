@@ -40,11 +40,10 @@ class Wdata_pf_property_data_fxt {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Xowe_wiki wiki = parser_fxt.Wiki(); Xop_ctx ctx = wiki.Parser_mgr().Ctx();
 		Xop_tkn_mkr tkn_mkr = app.Parser_mgr().Tkn_mkr();
-		Wdata_pf_property pfunc = new Wdata_pf_property();
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
 		wiki.Parser_mgr().Main().Expand_tmpl(root, ctx, tkn_mkr, raw_bry);
 		Xot_invk tkn = (Xot_invk)root.Subs_get(0);
-		this.actl = Wdata_pf_property_data.Parse(ctx, raw_bry, Xot_invk_mock.Null, tkn, pfunc);
+		this.actl = Wdata_pf_property_data.Parse(ctx, raw_bry, Xot_invk_mock.Null, tkn);
 		return this;
 	}
 	public Wdata_pf_property_data_fxt Chk_q(String v)		{Tfds.Eq_bry(v, actl.Q); return this;}

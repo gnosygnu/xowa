@@ -123,7 +123,7 @@ public class Wdata_wiki_mgr_fxt {
 		Tfds.Eq(expd, String_.new_u8(qid_ttl));
 	}
 	public void Test_parse_pid_null(String val)			{Test_parse_pid(val, Wdata_wiki_mgr.Pid_null);}
-	public void Test_parse_pid(String val, int expd)	{Tfds.Eq(expd, Wdata_pf_property.Parse_pid(num_parser, Bry_.new_a7(val)));} private Gfo_number_parser num_parser = new Gfo_number_parser();
+	public void Test_parse_pid(String val, int expd)	{Tfds.Eq(expd, Wbase_statement_mgr_.Parse_pid(num_parser, Bry_.new_a7(val)));} private Gfo_number_parser num_parser = new Gfo_number_parser();
 	public void Init__docs__add(Wdata_doc page)			{wdata_mgr.Doc_mgr.Add(page.Qid(), page);}
 	public void Test_parse(String raw, String expd) {
 		parser_fxt.Test_parse_page_tmpl_str(raw, expd);

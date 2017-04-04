@@ -79,7 +79,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib {
 
 		// print it
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-		wdata_mgr.Resolve_to_bfr(bfr, prop_grp, lang);
+		wdata_mgr.Resolve_to_bfr(bfr, prop_grp, lang, Bool_.N);
 		return rslt.Init_obj(bfr.To_bry_and_rls());
 	}
 }
