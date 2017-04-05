@@ -165,8 +165,8 @@ public class XomwMessage {
 
 	private static final int FORMAT_NULL = 5;
 
-//		private static final int PRM_TID_BEFORE = 1; // "before"
-//		private static final int PRM_TID_AFTER = 2;  // "after"
+	private static final int PRM_TID_BEFORE = 1; // "before"
+	private static final int PRM_TID_AFTER = 2;  // "after"
 
 	/**
 	* Mapping from Message::listParam() types to Language methods.
@@ -240,6 +240,7 @@ public class XomwMessage {
 		this.language = null; this.key = null; this.keysToTry = null; this.message = null;
 		Tfds.Write(interfaceIsUserLang, language, key, keysToTry, format, useDatabase, title, message, listTypeMap, parameters);
 		Tfds.Write(FORMAT_BLOCK_PARSE, FORMAT_ESCAPED, FORMAT_PARSE, FORMAT_PLAIN, FORMAT_TEXT);
+		this.extractParam(null, null, 0);
 	}
 	public XomwMessage(byte[] textBry) {
 		this.textBry = textBry;
@@ -339,22 +340,22 @@ public class XomwMessage {
 //		public function getKeysToTry() {
 //			return this.keysToTry;
 //		}
-//
-//		/**
-//		* Returns the message key.
-//		*
-//		* If a list of multiple possible keys was supplied to the constructor, this method may
-//		* return any of these keys. After the message has been fetched, this method will return
-//		* the key that was actually used to fetch the message.
-//		*
-//		* @since 1.21
-//		*
-//		* @return String
-//		*/
-//		public function getKey() {
-//			return this.key;
-//		}
-//
+
+	/**
+	* Returns the message key.
+	*
+	* If a list of multiple possible keys was supplied to the constructor, this method may
+	* return any of these keys. After the message has been fetched, this method will return
+	* the key that was actually used to fetch the message.
+	*
+	* @since 1.21
+	*
+	* @return String
+	*/
+	public byte[] getKey() {
+		return this.key;
+	}
+
 //		/**
 //		* Returns the message parameters.
 //		*
@@ -502,7 +503,7 @@ public class XomwMessage {
 //		* @param mixed ... Parameters as strings or arrays from
 //		*  Message::numParam() and the like, or a single array of parameters.
 //		*
-//		* @return Message $this
+//		* @return Message this
 //		*/
 //		public function prmsVar(/*...*/) {
 //			$args = func_get_args();
@@ -525,189 +526,157 @@ public class XomwMessage {
 //			}
 //
 //			this.parameters = array_merge(this.parameters, array_values($args));
-//			return $this;
+//			return this;
 //		}
-//
-//		/**
-//		* Add parameters that are substituted after parsing or escaping.
-//		* In other words the parsing process cannot access the contents
-//		* of this type of parameter, and you need to make sure it is
-//		* sanitized beforehand.  The parser will see "$n", instead.
-//		*
-//		* @since 1.17
-//		*
-//		* @param mixed $prmsVar,... Raw parameters as strings, or a single argument that is
-//		* an array of raw parameters.
-//		*
-//		* @return Message $this
-//		*/
-//		public function rawParams(/*...*/) {
-//			$prmsVar = func_get_args();
-//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
-//				$prmsVar = $prmsVar[0];
-//			}
-//			foreach ($prmsVar as $param) {
-//				this.parameters[] = self::rawParam($param);
-//			}
-//			return $this;
-//		}
-//
-//		/**
-//		* Add parameters that are numeric and will be passed through
-//		* Language::formatNum before substitution
-//		*
-//		* @since 1.18
-//		*
-//		* @param mixed $param,... Numeric parameters, or a single argument that is
-//		* an array of numeric parameters.
-//		*
-//		* @return Message $this
-//		*/
-//		public function numParams(/*...*/) {
-//			$prmsVar = func_get_args();
-//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
-//				$prmsVar = $prmsVar[0];
-//			}
-//			foreach ($prmsVar as $param) {
-//				this.parameters[] = self::numParam($param);
-//			}
-//			return $this;
-//		}
-//
-//		/**
-//		* Add parameters that are durations of time and will be passed through
-//		* Language::formatDuration before substitution
-//		*
-//		* @since 1.22
-//		*
-//		* @param int|int[] $param,... Duration parameters, or a single argument that is
-//		* an array of duration parameters.
-//		*
-//		* @return Message $this
-//		*/
-//		public function durationParams(/*...*/) {
-//			$prmsVar = func_get_args();
-//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
-//				$prmsVar = $prmsVar[0];
-//			}
-//			foreach ($prmsVar as $param) {
-//				this.parameters[] = self::durationParam($param);
-//			}
-//			return $this;
-//		}
-//
-//		/**
-//		* Add parameters that are expiration times and will be passed through
-//		* Language::formatExpiry before substitution
-//		*
-//		* @since 1.22
-//		*
-//		* @param String|String[] $param,... Expiry parameters, or a single argument that is
-//		* an array of expiry parameters.
-//		*
-//		* @return Message $this
-//		*/
-//		public function expiryParams(/*...*/) {
-//			$prmsVar = func_get_args();
-//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
-//				$prmsVar = $prmsVar[0];
-//			}
-//			foreach ($prmsVar as $param) {
-//				this.parameters[] = self::expiryParam($param);
-//			}
-//			return $this;
-//		}
-//
-//		/**
-//		* Add parameters that are time periods and will be passed through
-//		* Language::formatTimePeriod before substitution
-//		*
-//		* @since 1.22
-//		*
-//		* @param int|int[] $param,... Time period parameters, or a single argument that is
-//		* an array of time period parameters.
-//		*
-//		* @return Message $this
-//		*/
-//		public function timeperiodParams(/*...*/) {
-//			$prmsVar = func_get_args();
-//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
-//				$prmsVar = $prmsVar[0];
-//			}
-//			foreach ($prmsVar as $param) {
-//				this.parameters[] = self::timeperiodParam($param);
-//			}
-//			return $this;
-//		}
-//
-//		/**
-//		* Add parameters that are file sizes and will be passed through
-//		* Language::formatSize before substitution
-//		*
-//		* @since 1.22
-//		*
-//		* @param int|int[] $param,... Size parameters, or a single argument that is
-//		* an array of size parameters.
-//		*
-//		* @return Message $this
-//		*/
-//		public function sizeParams(/*...*/) {
-//			$prmsVar = func_get_args();
-//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
-//				$prmsVar = $prmsVar[0];
-//			}
-//			foreach ($prmsVar as $param) {
-//				this.parameters[] = self::sizeParam($param);
-//			}
-//			return $this;
-//		}
-//
-//		/**
-//		* Add parameters that are bitrates and will be passed through
-//		* Language::formatBitrate before substitution
-//		*
-//		* @since 1.22
-//		*
-//		* @param int|int[] $param,... Bit rate parameters, or a single argument that is
-//		* an array of bit rate parameters.
-//		*
-//		* @return Message $this
-//		*/
-//		public function bitrateParams(/*...*/) {
-//			$prmsVar = func_get_args();
-//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
-//				$prmsVar = $prmsVar[0];
-//			}
-//			foreach ($prmsVar as $param) {
-//				this.parameters[] = self::bitrateParam($param);
-//			}
-//			return $this;
-//		}
-//
-//		/**
-//		* Add parameters that are plaintext and will be passed through without
-//		* the content being evaluated.  Plaintext parameters are not valid as
-//		* arguments to parser functions. This differs from self::rawParams in
-//		* that the Message cls handles escaping to match the output format.
-//		*
-//		* @since 1.25
-//		*
-//		* @param String|String[] $param,... plaintext parameters, or a single argument that is
-//		* an array of plaintext parameters.
-//		*
-//		* @return Message $this
-//		*/
-//		public function plaintextParams(/*...*/) {
-//			$prmsVar = func_get_args();
-//			if (isset($prmsVar[0]) && is_array($prmsVar[0])) {
-//				$prmsVar = $prmsVar[0];
-//			}
-//			foreach ($prmsVar as $param) {
-//				this.parameters[] = self::plaintextParam($param);
-//			}
-//			return $this;
-//		}
-//
+
+	/**
+	* Add parameters that are substituted after parsing or escaping.
+	* In other words the parsing process cannot access the contents
+	* of this type of parameter, and you need to make sure it is
+	* sanitized beforehand.  The parser will see "$n", instead.
+	*
+	* @since 1.17
+	*
+	* @param mixed $prmsVar,... Raw parameters as strings, or a single argument that is
+	* an array of raw parameters.
+	*
+	* @return Message this
+	*/
+	public XomwMessage rawParams(byte[]... prmsAry) {
+		for (byte[] prmsVar : prmsAry) {
+			this.parameters.Add(XomwMessage.rawParam(prmsVar));
+		}
+		return this;
+	}
+
+	/**
+	* Add parameters that are numeric and will be passed through
+	* Language::formatNum before substitution
+	*
+	* @since 1.18
+	*
+	* @param mixed $param,... Numeric parameters, or a single argument that is
+	* an array of numeric parameters.
+	*
+	* @return Message this
+	*/
+	public XomwMessage numParams(int... prmsAry) {
+		for (int prmsVar : prmsAry) {
+			this.parameters.Add(XomwMessage.numParam(prmsVar));
+		}
+		return this;
+	}
+
+	/**
+	* Add parameters that are durations of time and will be passed through
+	* Language::formatDuration before substitution
+	*
+	* @since 1.22
+	*
+	* @param int|int[] $param,... Duration parameters, or a single argument that is
+	* an array of duration parameters.
+	*
+	* @return Message this
+	*/
+	public XomwMessage durationParams(int... prmsAry) {
+		for (int prmsVar : prmsAry) {
+			this.parameters.Add(XomwMessage.durationParam(prmsVar));
+		}
+		return this;
+	}
+
+	/**
+	* Add parameters that are expiration times and will be passed through
+	* Language::formatExpiry before substitution
+	*
+	* @since 1.22
+	*
+	* @param String|String[] $param,... Expiry parameters, or a single argument that is
+	* an array of expiry parameters.
+	*
+	* @return Message this
+	*/
+	public XomwMessage expiryParams(byte[]... prmsAry) {
+		for (byte[] prmsVar : prmsAry) {
+			this.parameters.Add(XomwMessage.expiryParam(prmsVar));
+		}
+		return this;
+	}
+
+	/**
+	* Add parameters that are time periods and will be passed through
+	* Language::formatTimePeriod before substitution
+	*
+	* @since 1.22
+	*
+	* @param int|int[] $param,... Time period parameters, or a single argument that is
+	* an array of time period parameters.
+	*
+	* @return Message this
+	*/
+	public XomwMessage timeperiodParams(int... prmsAry) {
+		for (int prmsVar : prmsAry) {
+			this.parameters.Add(XomwMessage.timeperiodParam(prmsVar));
+		}
+		return this;
+	}
+
+	/**
+	* Add parameters that are file sizes and will be passed through
+	* Language::formatSize before substitution
+	*
+	* @since 1.22
+	*
+	* @param int|int[] $param,... Size parameters, or a single argument that is
+	* an array of size parameters.
+	*
+	* @return Message this
+	*/
+	public XomwMessage sizeParams(int... prmsAry) {
+		for (int prmsVar : prmsAry) {
+			this.parameters.Add(XomwMessage.sizeParam(prmsVar));
+		}
+		return this;
+	}
+
+	/**
+	* Add parameters that are bitrates and will be passed through
+	* Language::formatBitrate before substitution
+	*
+	* @since 1.22
+	*
+	* @param int|int[] $param,... Bit rate parameters, or a single argument that is
+	* an array of bit rate parameters.
+	*
+	* @return Message this
+	*/
+	public XomwMessage bitrateParams(int... prmsAry) {
+		for (int prmsVar : prmsAry) {
+			this.parameters.Add(XomwMessage.bitrateParam(prmsVar));
+		}
+		return this;
+	}
+
+	/**
+	* Add parameters that are plaintext and will be passed through without
+	* the content being evaluated.  Plaintext parameters are not valid as
+	* arguments to parser functions. This differs from XomwMessage.rawParams in
+	* that the Message cls handles escaping to match the output format.
+	*
+	* @since 1.25
+	*
+	* @param String|String[] $param,... plaintext parameters, or a single argument that is
+	* an array of plaintext parameters.
+	*
+	* @return Message this
+	*/
+	public XomwMessage plaintextParams(byte[]... prmsAry) {
+		for (byte[] prmsVar : prmsAry) {
+			this.parameters.Add(XomwMessage.plaintextParam(prmsVar));
+		}
+		return this;
+	}
+
 //		/**
 //		* Set the language and the title from a context Object
 //		*
@@ -715,14 +684,14 @@ public class XomwMessage {
 //		*
 //		* @param IContextSource $context
 //		*
-//		* @return Message $this
+//		* @return Message this
 //		*/
 //		public function setContext(IContextSource $context) {
 //			this.inLanguage($context->getLanguage());
 //			this.title($context->getTitle());
 //			this.interfaceIsUserLang = true;
 //
-//			return $this;
+//			return this;
 //		}
 //
 //		/**
@@ -733,7 +702,7 @@ public class XomwMessage {
 //		*
 //		* @since 1.17
 //		* @param Language|String $lang Language code or Language Object.
-//		* @return Message $this
+//		* @return Message this
 //		* @throws MWException
 //		*/
 //		public function inLanguage($lang) {
@@ -753,7 +722,7 @@ public class XomwMessage {
 //			}
 //			this.message = null;
 //			this.interfaceIsUserLang = false;
-//			return $this;
+//			return this;
 //		}
 
 	/**
@@ -763,17 +732,17 @@ public class XomwMessage {
 	* @since 1.17
 	* @see $wgForceUIMsgAsContentMsg
 	*
-	* @return Message $this
+	* @return Message this
 	*/
 	public XomwMessage inContentLanguage() {
 //			global $wgForceUIMsgAsContentMsg;
 //			if (in_array(this.key, (array)$wgForceUIMsgAsContentMsg)) {
-//				return $this;
+//				return this;
 //			}
 //
 //			global $wgContLang;
 //			this.inLanguage($wgContLang);
-//			return $this;
+//			return this;
 		return this;
 	}
 
@@ -785,11 +754,11 @@ public class XomwMessage {
 //		*
 //		* @param boolean $interfaceIsUserLang
 //		*
-//		* @return Message $this
+//		* @return Message this
 //		*/
 //		public function setInterfaceMessageFlag($interfaceIsUserLang) {
 //			this.interfaceIsUserLang = (boolean)$interfaceIsUserLang;
-//			return $this;
+//			return this;
 //		}
 //
 //		/**
@@ -799,12 +768,12 @@ public class XomwMessage {
 //		*
 //		* @param boolean $useDatabase
 //		*
-//		* @return Message $this
+//		* @return Message this
 //		*/
 //		public function useDatabase($useDatabase) {
 //			this.useDatabase = (boolean)$useDatabase;
 //			this.message = null;
-//			return $this;
+//			return this;
 //		}
 //
 //		/**
@@ -814,11 +783,11 @@ public class XomwMessage {
 //		*
 //		* @param Title title
 //		*
-//		* @return Message $this
+//		* @return Message this
 //		*/
 //		public function title(title) {
 //			this.title = title;
-//			return $this;
+//			return this;
 //		}
 
 	/**
@@ -912,7 +881,7 @@ public class XomwMessage {
 //			// trigger a fatal error if it does. So, catch any exceptions.
 //
 //			try {
-//				return this.toString(self::FORMAT_PARSE);
+//				return this.toString(XomwMessage.FORMAT_PARSE);
 //			} catch (Exception $ex) {
 //				try {
 //					trigger_error("Exception caught in " . __METHOD__ . " (message " . this.key . "): "
@@ -933,8 +902,8 @@ public class XomwMessage {
 //		* @return String Parsed HTML.
 //		*/
 //		public function parse() {
-//			this.format = self::FORMAT_PARSE;
-//			return this.toString(self::FORMAT_PARSE);
+//			this.format = XomwMessage.FORMAT_PARSE;
+//			return this.toString(XomwMessage.FORMAT_PARSE);
 //		}
 
 	/**
@@ -957,8 +926,8 @@ public class XomwMessage {
 //		* @return String Unescaped untransformed message text.
 //		*/
 //		public function plain() {
-//			this.format = self::FORMAT_PLAIN;
-//			return this.toString(self::FORMAT_PLAIN);
+//			this.format = XomwMessage.FORMAT_PLAIN;
+//			return this.toString(XomwMessage.FORMAT_PLAIN);
 //		}
 //
 //		/**
@@ -969,8 +938,8 @@ public class XomwMessage {
 //		* @return String HTML
 //		*/
 //		public function parseAsBlock() {
-//			this.format = self::FORMAT_BLOCK_PARSE;
-//			return this.toString(self::FORMAT_BLOCK_PARSE);
+//			this.format = XomwMessage.FORMAT_BLOCK_PARSE;
+//			return this.toString(XomwMessage.FORMAT_BLOCK_PARSE);
 //		}
 //
 //		/**
@@ -982,8 +951,8 @@ public class XomwMessage {
 //		* @return String Escaped message text.
 //		*/
 //		public function escaped() {
-//			this.format = self::FORMAT_ESCAPED;
-//			return this.toString(self::FORMAT_ESCAPED);
+//			this.format = XomwMessage.FORMAT_ESCAPED;
+//			return this.toString(XomwMessage.FORMAT_ESCAPED);
 //		}
 //
 //		/**
@@ -1021,109 +990,109 @@ public class XomwMessage {
 //			$message = this.fetchMessage();
 //			return $message === false || $message === '' || $message === '-';
 //		}
-//
-//		/**
-//		* @since 1.17
-//		*
-//		* @param mixed $raw
-//		*
-//		* @return array Array with a single "raw" key.
-//		*/
-//		public static function rawParam($raw) {
-//			return [ 'raw' => $raw ];
-//		}
-//
-//		/**
-//		* @since 1.18
-//		*
-//		* @param mixed $num
-//		*
-//		* @return array Array with a single "num" key.
-//		*/
-//		public static function numParam($num) {
-//			return [ 'num' => $num ];
-//		}
-//
-//		/**
-//		* @since 1.22
-//		*
-//		* @param int $duration
-//		*
-//		* @return int[] Array with a single "duration" key.
-//		*/
-//		public static function durationParam($duration) {
-//			return [ 'duration' => $duration ];
-//		}
-//
-//		/**
-//		* @since 1.22
-//		*
-//		* @param String $expiry
-//		*
-//		* @return String[] Array with a single "expiry" key.
-//		*/
-//		public static function expiryParam($expiry) {
-//			return [ 'expiry' => $expiry ];
-//		}
-//
-//		/**
-//		* @since 1.22
-//		*
-//		* @param int $period
-//		*
-//		* @return int[] Array with a single "period" key.
-//		*/
-//		public static function timeperiodParam($period) {
-//			return [ 'period' => $period ];
-//		}
-//
-//		/**
-//		* @since 1.22
-//		*
-//		* @param int $size
-//		*
-//		* @return int[] Array with a single "size" key.
-//		*/
-//		public static function sizeParam($size) {
-//			return [ 'size' => $size ];
-//		}
-//
-//		/**
-//		* @since 1.22
-//		*
-//		* @param int $bitrate
-//		*
-//		* @return int[] Array with a single "bitrate" key.
-//		*/
-//		public static function bitrateParam($bitrate) {
-//			return [ 'bitrate' => $bitrate ];
-//		}
-//
-//		/**
-//		* @since 1.25
-//		*
-//		* @param String $plaintext
-//		*
-//		* @return String[] Array with a single "plaintext" key.
-//		*/
-//		public static function plaintextParam($plaintext) {
-//			return [ 'plaintext' => $plaintext ];
-//		}
-//
-//		/**
-//		* @since 1.29
-//		*
-//		* @param array $list
-//		* @param String $type 'comma', 'semicolon', 'pipe', 'text'
-//		* @return array Array with "list" and "type" keys.
-//		*/
-//		public static function listParam(array $list, $type = 'text') {
-//			if (!isset(self::$listTypeMap[$type])) {
-//				throw new InvalidArgumentException(
-//					"Invalid type '$type'. Known types are: " . join(', ', array_keys(self::$listTypeMap))
+
+	/**
+	* @since 1.17
+	*
+	* @param mixed $raw
+	*
+	* @return array Array with a single "raw" key.
+	*/
+	private static XomwMessagePrm_raw rawParam(byte[] raw) {
+		return new XomwMessagePrm_raw(raw);
+	}
+
+	/**
+	* @since 1.18
+	*
+	* @param mixed $num
+	*
+	* @return array Array with a single "num" key.
+	*/
+	private static XomwMessagePrm_num numParam(int num) {
+		return new XomwMessagePrm_num(num);
+	}
+
+	/**
+	* @since 1.22
+	*
+	* @param int $duration
+	*
+	* @return int[] Array with a single "duration" key.
+	*/
+	private static XomwMessagePrm_duration durationParam(int duration) {
+		return new XomwMessagePrm_duration(duration);
+	}
+
+	/**
+	* @since 1.22
+	*
+	* @param String $expiry
+	*
+	* @return String[] Array with a single "expiry" key.
+	*/
+	private static XomwMessagePrm_expiry expiryParam(byte[] expiry) {
+		return new XomwMessagePrm_expiry(expiry);
+	}
+
+	/**
+	* @since 1.22
+	*
+	* @param int $period
+	*
+	* @return int[] Array with a single "period" key.
+	*/
+	private static XomwMessagePrm_period timeperiodParam(int period) {
+		return new XomwMessagePrm_period(period);
+	}
+
+	/**
+	* @since 1.22
+	*
+	* @param int $size
+	*
+	* @return int[] Array with a single "size" key.
+	*/
+	private static XomwMessagePrm_size sizeParam(int size) {
+		return new XomwMessagePrm_size(size);
+	}
+
+	/**
+	* @since 1.22
+	*
+	* @param int $bitrate
+	*
+	* @return int[] Array with a single "bitrate" key.
+	*/
+	private static XomwMessagePrm_bitrate bitrateParam(int bitrate) {
+		return new XomwMessagePrm_bitrate(bitrate);
+	}
+
+	/**
+	* @since 1.25
+	*
+	* @param String $plaintext
+	*
+	* @return String[] Array with a single "plaintext" key.
+	*/
+	private static XomwMessagePrm_plaintext plaintextParam(byte[] plaintext) {
+		return new XomwMessagePrm_plaintext(plaintext);
+	}
+
+	/**
+	* @since 1.29
+	*
+	* @param array $list
+	* @param String $type 'comma', 'semicolon', 'pipe', 'text'
+	* @return array Array with "list" and "type" keys.
+	*/
+//		private static XomwMessagePrm_list listParam(byte[][] list, String type) { // array $list, $type = 'text'
+//			if (!listTypeMap.Has(type)) {
+//				throw new XophpInvalidArgumentException(
+//					"Invalid type " + type
 //				);
 //			}
-//			return [ 'list' => $list, 'type' => $type ];
+//			return new XomwMessagePrm_list(list, type);
 //		}
 
 	/**
@@ -1161,37 +1130,39 @@ public class XomwMessage {
 	*
 	* @return array Array with the parameter type (either "before" or "after") and the value.
 	*/
-//		private void extractParam(XomwMessageVal rv, Object param, int format) {
-//			if (is_array($param)) {
-//				if (isset($param['raw'])) {
-//					return [ 'after', $param['raw'] ];
-//				} elseif (isset($param['num'])) {
-//					// Replace number prmsVar always in before step for now.
-//					// No support for combined raw and num prmsVar
-//					return [ 'before', this.getLanguage()->formatNum($param['num']) ];
-//				} elseif (isset($param['duration'])) {
-//					return [ 'before', this.getLanguage()->formatDuration($param['duration']) ];
+	private void extractParam(XomwMessageVal rv, Object param, int format) {
+		if (Type_adp_.Implements_intf_obj(param, XomwMessagePrm.class)) {
+			XomwMessagePrm prm = (XomwMessagePrm)param;
+			if      (prm.Tid() == XomwMessagePrm.Tid__raw) {
+				rv.Set(PRM_TID_AFTER, ((XomwMessagePrm_raw)prm).raw);
+			}
+			else if (prm.Tid() == XomwMessagePrm.Tid__num) {
+				// Replace number prmsVar always in before step for now.
+				// No support for combined raw and num prmsVar
+//					return [PRM_TID_BEFORE, this.getLanguage()->formatNum($param['num']) ];
+			}
+//				elseif (isset($param['duration'])) {
+//					return [PRM_TID_BEFORE, this.getLanguage()->formatDuration($param['duration']) ];
 //				} elseif (isset($param['expiry'])) {
-//					return [ 'before', this.getLanguage()->formatExpiry($param['expiry']) ];
+//					return [PRM_TID_BEFORE, this.getLanguage()->formatExpiry($param['expiry']) ];
 //				} elseif (isset($param['period'])) {
-//					return [ 'before', this.getLanguage()->formatTimePeriod($param['period']) ];
+//					return [PRM_TID_BEFORE, this.getLanguage()->formatTimePeriod($param['period']) ];
 //				} elseif (isset($param['size'])) {
-//					return [ 'before', this.getLanguage()->formatSize($param['size']) ];
+//					return [PRM_TID_BEFORE, this.getLanguage()->formatSize($param['size']) ];
 //				} elseif (isset($param['bitrate'])) {
-//					return [ 'before', this.getLanguage()->formatBitrate($param['bitrate']) ];
+//					return [PRM_TID_BEFORE, this.getLanguage()->formatBitrate($param['bitrate']) ];
 //				} elseif (isset($param['plaintext'])) {
-//					return [ 'after', this.formatPlaintext($param['plaintext'], $format) ];
+//					return [PRM_TID_AFTER, this.formatPlaintext($param['plaintext'], $format) ];
 //				} elseif (isset($param['list'])) {
 //					return this.formatListParam($param['list'], $param['type'], $format);
-//				} else {
-//					$warning = 'Invalid parameter for message "' . this.getKey() . '": ' .
-//						htmlspecialchars(serialize($param));
-//					trigger_error($warning, E_USER_WARNING);
-//					$e = new Exception;
-//					wfDebugLog('Bug58676', $warning . "\n" . $e->getTraceAsString());
-//
-//					return [ 'before', '[INVALID]' ];
 //				}
+			else {
+				String warning = "Invalid parameter for message '" + this.getKey() + "': " +
+					prm.toString();
+				Gfo_usr_dlg_.Instance.Warn_many("", "", warning);
+
+				rv.Set(PRM_TID_BEFORE, Bry_.new_a7("[INVALID]"));
+			}
 //			}
 //			else if ($param instanceof Message) {
 //				// Match language, flags, etc. to the current message.
@@ -1214,12 +1185,12 @@ public class XomwMessage {
 //				// Message objects should not be before parameters because
 //				// then they'll get double escaped. If the message needs to be
 //				// escaped, it'll happen right here when we call toString().
-//				return [ 'after', $msg->toString($format) ];
+//				return [PRM_TID_AFTER, $msg->toString($format) ];
 //			}
 //			else {
 //				rv.Set(PRM_TID_BEFORE, param);
-//			}
-//		}
+		}
+	}
 
 //		/**
 //		* Wrapper for what ever method we use to parse wikitext.
@@ -1301,13 +1272,13 @@ public class XomwMessage {
 //		*/
 //		protected function formatPlaintext($plaintext, $format) {
 //			switch ($format) {
-//			case self::FORMAT_TEXT:
-//			case self::FORMAT_PLAIN:
+//			case XomwMessage.FORMAT_TEXT:
+//			case XomwMessage.FORMAT_PLAIN:
 //				return $plaintext;
 //
-//			case self::FORMAT_PARSE:
-//			case self::FORMAT_BLOCK_PARSE:
-//			case self::FORMAT_ESCAPED:
+//			case XomwMessage.FORMAT_PARSE:
+//			case XomwMessage.FORMAT_BLOCK_PARSE:
+//			case XomwMessage.FORMAT_ESCAPED:
 //			default:
 //				return htmlspecialchars($plaintext, ENT_QUOTES);
 //
@@ -1323,20 +1294,20 @@ public class XomwMessage {
 //		* @return array Array with the parameter type (either "before" or "after") and the value.
 //		*/
 //		protected function formatListParam(array $prmsVar, $listType, $format) {
-//			if (!isset(self::$listTypeMap[$listType])) {
+//			if (!isset(XomwMessage.$listTypeMap[$listType])) {
 //				$warning = 'Invalid list type for message "' . this.getKey() . '": '
 //					. htmlspecialchars($listType)
 //					. ' (prmsVar are ' . htmlspecialchars(serialize($prmsVar)) . ')';
 //				trigger_error($warning, E_USER_WARNING);
 //				$e = new Exception;
 //				wfDebugLog('Bug58676', $warning . "\n" . $e->getTraceAsString());
-//				return [ 'before', '[INVALID]' ];
+//				return [PRM_TID_BEFORE, '[INVALID]' ];
 //			}
-//			$func = self::$listTypeMap[$listType];
+//			$func = XomwMessage.$listTypeMap[$listType];
 //
 //			// Handle an empty list sensibly
 //			if (!$prmsVar) {
-//				return [ 'before', this.getLanguage()->$func([]) ];
+//				return [PRM_TID_BEFORE, this.getLanguage()->$func([]) ];
 //			}
 //
 //			// First, determine what kinds of list items we have
@@ -1365,8 +1336,8 @@ public class XomwMessage {
 }
 class XomwMessageVal {
 	public int tid;
-	public Object val;
-	public void Set(int tid, Object val) {
+	public byte[] val;
+	public void Set(int tid, byte[] val) {
 		this.tid = tid;
 		this.val = val;
 	}
@@ -1427,7 +1398,9 @@ class XomwMessagePrm_plaintext extends XomwMessagePrm { 	public byte[] plaintext
 	}
 }
 class XomwMessagePrm_list extends XomwMessagePrm { 	public byte[][] list;
-	public XomwMessagePrm_list(byte[][] list) {super(Tid__list);
+	public String type;
+	public XomwMessagePrm_list(byte[][] list, String type) {super(Tid__list);
 		this.list = list;
+		this.type = type;
 	}
 }

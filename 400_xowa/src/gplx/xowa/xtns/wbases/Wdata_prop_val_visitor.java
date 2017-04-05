@@ -66,7 +66,7 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 
 		// if label is still not found, don't add null reference
 		if (label != null) {
-			// if statements, add "[[entity_val]]"
+			// if statements, add "[[entity_val]]"; DATE:2017-04-04
 			if (mode_is_statements) {
 				bfr.Add(gplx.xowa.parsers.tmpls.Xop_tkn_.Lnki_bgn);
 				bfr.Add(label);
