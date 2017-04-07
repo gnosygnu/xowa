@@ -21,6 +21,7 @@ import gplx.xowa.langs.cases.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.addons.wikis.directorys.dbs.*;
 import gplx.xowa.addons.wikis.ctgs.dbs.*;
+import gplx.xowa.addons.wikis.searchs.dbs.*;
 public class Xow_db_mkr {
 	public static Xodb_wiki_mgr Create_wiki(Xodb_wiki_data data, String wiki_name, byte[] mainpage_name, byte[] mainpage_text) {
 		// create db
@@ -48,13 +49,29 @@ public class Xow_db_mkr {
 		, new Xodb_cat_link_tbl(core_conn)
 		);
 
+		// create tbls; search_word
+		Srch_word_tbl search_word_tbl = new Srch_word_tbl(core_conn);
+		search_word_tbl.Create_tbl(); search_word_tbl.Create_idx();
+
+		// create tbls; search_link
+		Srch_link_tbl[] search_link_tbls = new Srch_link_tbl[1];
+		Srch_db_mgr.Tbl__link__ary__set(search_link_tbls, 0, core_conn);
+		for (Srch_link_tbl link : search_link_tbls) {
+			link.Create_tbl();
+			link.Create_idx__link_score();
+			link.Create_idx__page_id();
+		}
+
+		// insert cfg; search version
+		Db_cfg_tbl cfg_tbl = Db_cfg_tbl.Get_by_key(core_db, Xowd_cfg_tbl_.Tbl_name);
+		cfg_tbl.Upsert_int(Srch_db_cfg_.Grp__search__cfg, Srch_db_cfg_.Key__version_id, Srch_db_upgrade.Version__link_score);
+
 		// insert data: wiki
 		Xowd_xowa_db_tbl.Get_by_key(core_db).Upsert(0, Xow_db_file_.Tid__core, core_db.Url().NameAndExt(), "", -1, Guid_adp_.New_str());
 		Xowd_site_ns_tbl.Get_by_key(core_db).Insert(Xow_ns_mgr_.default_(Xol_case_mgr_.U8()));
 		Xowd_site_stats_tbl.Get_by_key(core_db).Update(0, 0, 0);
 
 		// insert data: cfg
-		Db_cfg_tbl cfg_tbl = Db_cfg_tbl.Get_by_key(core_db, Xowd_cfg_tbl_.Tbl_name);
 		Xowd_core_db_props props = new Xowd_core_db_props(2, Xow_db_layout.Itm_all, Xow_db_layout.Itm_all, Xow_db_layout.Itm_all, Io_stream_tid_.Tid__raw, Io_stream_tid_.Tid__raw, Bool_.N, Bool_.N);
 		props.Cfg_save(cfg_tbl);
 

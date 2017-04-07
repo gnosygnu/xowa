@@ -48,7 +48,7 @@ public class Srch_db_cfg_ {
 	}
 
 	public static final int Link_count_score_cutoff = 300;
-	private static final String
+	public static final String
 	  Grp__search__cfg				= "xowa.search.cfg"
 	, Key__version_id				= "version_id"
 	, Key__word_count				= "word_count"

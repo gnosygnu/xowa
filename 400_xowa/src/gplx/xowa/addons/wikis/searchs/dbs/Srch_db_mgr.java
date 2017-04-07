@@ -38,7 +38,7 @@ public class Srch_db_mgr {
 			tbl__cfg = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(word_db.Conn());
 			tbl__word = new Srch_word_tbl(word_db.Conn());
 			tbl__link__ary = new Srch_link_tbl[1];
-			Tbl__link__ary__set(tbl__link__ary, 0, word_db);
+			Tbl__link__ary__set(tbl__link__ary, 0, word_db.Conn());
 		} else {
 			// many_db; figure out link_dbs
 			word_db = db_mgr.Dbs__get_by_tid_or_null(Srch_db_mgr_.Dbtid__search_core);
@@ -48,13 +48,13 @@ public class Srch_db_mgr {
 			Ordered_hash hash = db_mgr.Dbs__get_hash_by_tid(Srch_db_mgr_.Dbtid__search_link);
 			if (hash == null) {	// v2 file layout where search_word and search_link is in 1 search_db
 				tbl__link__ary = new Srch_link_tbl[1];
-				Tbl__link__ary__set(tbl__link__ary, 0, word_db);
+				Tbl__link__ary__set(tbl__link__ary, 0, word_db.Conn());
 			} else {			// v3 file layout where search_link is in many db
 				int dbs_len = hash.Count();
 				tbl__link__ary = new Srch_link_tbl[dbs_len];
 				for (int i = 0; i < dbs_len; ++i) {
 					Xow_db_file db_file = (Xow_db_file)hash.Get_at(i);
-					Tbl__link__ary__set(tbl__link__ary, i, db_file);
+					Tbl__link__ary__set(tbl__link__ary, i, db_file.Conn());
 				}
 			}
 		}
@@ -104,8 +104,8 @@ public class Srch_db_mgr {
 		search_link_tbl.Update_page_id(old_id, new_id);
 	}
 
-	private static Srch_link_tbl Tbl__link__ary__set(Srch_link_tbl[] ary, int idx, Xow_db_file db) {
-		Srch_link_tbl tbl = new Srch_link_tbl(db.Conn());
+	public static Srch_link_tbl Tbl__link__ary__set(Srch_link_tbl[] ary, int idx, gplx.dbs.Db_conn conn) {
+		Srch_link_tbl tbl = new Srch_link_tbl(conn);
 		ary[idx] = tbl;
 		return tbl;
 	}
@@ -115,7 +115,7 @@ public class Srch_db_mgr {
 			String suffix = "-xtn.search.link-title-ns." + ns_ids + "-db.001.xowa"; // -xtn.search.link-title-ns.main-db.001.xowa
 			db = db_mgr.Dbs__make_by_tid(Srch_db_mgr_.Dbtid__search_link, ns_ids, idx, suffix);
 		}
-		Srch_link_tbl tbl = Tbl__link__ary__set(ary, idx, db);
+		Srch_link_tbl tbl = Tbl__link__ary__set(ary, idx, db.Conn());
 		tbl.Create_tbl();
 		lreg_tbl.Insert(idx, db.Id(), Srch_link_reg_tbl.Db_type__title, ns_ids_is_main ? Srch_link_reg_tbl.Ns_type__main : Srch_link_reg_tbl.Ns_type__rest, 0, -1, -1);
 	}
