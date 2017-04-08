@@ -33,9 +33,10 @@ public class Xofulltext_indexer_wkr {
 		);
 	}
 	public void Index(Xoae_page wpg) {
-		byte[] html = extractor.Extract(wpg.Db().Html().Html_bry());
-
-		Index(wpg.Db().Page().Id(), wpg.Db().Page().Score(), wpg.Ttl().Page_txt(), html);
+		synchronized (index_wtr) {// NOTE:synchronized needed for mass_parse; don't launch separate indexer per mp_thread b/c (a) lucene may not handle it well; (b) everything needs to be serialized to the same lucene dir, so no real performance benefits; DATE:2017-04-08
+			byte[] html = extractor.Extract(wpg.Db().Html().Html_bry());
+			Index(wpg.Db().Page().Id(), wpg.Db().Page().Score(), wpg.Ttl().Page_txt(), html);
+		}
 	}
 	public void Index(int page_id, int score, byte[] ttl, byte[] html) {
 		Gflucene_doc_data data = new Gflucene_doc_data(page_id, score, String_.new_u8(ttl), String_.new_u8(html));

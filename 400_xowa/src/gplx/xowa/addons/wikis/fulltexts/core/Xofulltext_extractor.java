@@ -66,7 +66,6 @@ public class Xofulltext_extractor implements Mwh_doc_wkr {
 		// add to bfr
 		bfr.Add_mid(src, itm_bgn, itm_end);
 	}
-
 	public byte[] Extract(byte[] src) {
 		doc_parser.Parse(this, src, 0, src.length);
 		return bfr.To_bry_and_clear();
