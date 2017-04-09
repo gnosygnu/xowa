@@ -496,7 +496,9 @@ public class Xop_tblw_wkr__basic_tst {
 			,	"    </td>"
 			,	"  </tr>"
 			,	"</table>"
-			,	"<br />"	// was being ignored
+			,	""
+			,	"<p><br />"	// (a) <br/> was being ignored; (b) <p> added for TRAILING_TBLW fix; DATE:2017-04-08
+			,	"</p>"
 			,	"<table>"
 			,	"  <tr>"
 			,	"    <td>b"

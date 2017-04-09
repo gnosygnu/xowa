@@ -36,7 +36,9 @@ public class Xop_para_wkr_pre_tst {
 		,	"|a"
 		,	"|}"
 		), String_.Concat_lines_nl
-		(	"<table>"
+		(	"<p>"	// NOTE: <p> added for TRAILING_TBLW fix; DATE:2017-04-08
+		,	"</p>"
+		,	"<table>"
 		,	"  <tr>"
 		,	"    <td>a"
 		,	"    </td>"

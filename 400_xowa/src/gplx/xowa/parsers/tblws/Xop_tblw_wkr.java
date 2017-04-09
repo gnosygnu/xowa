@@ -53,8 +53,11 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 				)
 			) {
 			switch (wlxr_type) {
-				case Tblw_type_tb:								// "{|";
+				case Tblw_type_tb: {							// "{|";
+					// close para when table starts; needed for TRAILING_TBLW fix; PAGE:en.w:Template_engine_(web) DATE:2017-04-08
+					ctx.Para().Process_block__bgn__nl_w_symbol(ctx, root, src, bgn_pos, cur_pos - 1, Xop_xnde_tag_.Tag__table);	// -1 b/c cur_pos includes sym_byte; EX: \n{
 					break;										//	noop; by definition "{|" does not need to have a previous "{|"
+				}
 				case Tblw_type_td:								// "|"
 				case Tblw_type_td2:								// "||"
 					if (tbl_is_xml) {							// <td> should automatically add <table><tr>

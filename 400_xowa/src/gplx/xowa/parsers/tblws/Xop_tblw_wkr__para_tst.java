@@ -151,4 +151,25 @@ public class Xop_tblw_wkr__para_tst {
 	@Test  public void Tblw_td2_should_not_create_ws() { // PURPOSE: a||b -> a\n||b; EX:none;discovered during luaj test; DATE:2014-04-14
 		fxt.Test_parse_page_wiki_str("a||b", "<p>a||b\n</p>");
 	}
+	@Test  public void Para_on_tblw() {	// PURPOSE:table following link should automatically add para around link; PAGE:en.w:Template_engine_(web) DATE:2017-04-08
+		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		(	"[[A]] b"
+		,	"{|"
+		,	"|-"
+		,	"|c"
+		,	"|}"
+		)
+		, String_.Concat_lines_nl_skip_last
+		(	"<p><a href=\"/wiki/A\">A</a> b" // NOTE: previously, <p> was not included; now added for TRAILING_TBLW fix; DATE:2017-04-08
+		,	"</p>"
+		,	"<table>"
+		,	"  <tr>"
+		,	"    <td>c"
+		,	"    </td>"
+		,	"  </tr>"
+		,	"</table>"
+		,	""
+		)
+		);
+	}
 }
