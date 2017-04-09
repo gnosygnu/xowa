@@ -309,7 +309,9 @@ public class Scrib_lib_mw implements Scrib_lib {
 		String ttl_str = args.Pull_str(1);
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
 		Xoa_ttl ttl = Xoa_ttl.Parse(cur_wiki, ttl_bry);	// parse directly; handles titles where template is already part of title; EX: "Template:A"
-		if (ttl == null) return rslt.Init_ary_empty();	// invalid ttl;
+		if (ttl == null) {
+			return rslt.Init_fail("expandTemplate: invalid title \"" + ttl_str + "\"");	// NOTE: must return error if title is invalid; PAGE:en.w:Tetris DATE:2017-04-09
+		}
 		if (!ttl.ForceLiteralLink() && ttl.Ns().Id_is_main())	// title is not literal and is not prefixed with Template; parse again as template; EX: ":A" and "Template:A" are fine; "A" is parsed again as "Template:A"
 			ttl = Xoa_ttl.Parse(cur_wiki, Bry_.Add(cur_wiki.Ns_mgr().Ns_template().Name_db_w_colon(), ttl_bry));	// parse again, but add "Template:"
 		Keyval[] args_ary = args.Pull_kv_ary_safe(2);

@@ -89,7 +89,11 @@ public class Scrib_lib_mw__lib_tst {
 	}
 	@Test  public void ExpandTemplate__missing_template() {// PURPOSE: return error if template is missing; PAGE:en.w:Flag_of_Greenland DATE:2016-05-02
 		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");
-		fxt.Test_scrib_proc_err(lib, Scrib_lib_mw.Invk_expandTemplate, Object_.Ary("current", "A", Scrib_kv_utl_.flat_many_(1, "a")),  "expandTemplate: template \"A\" does not exist");
+		fxt.Test_scrib_proc_err(lib, Scrib_lib_mw.Invk_expandTemplate, Object_.Ary("current", "A", Scrib_kv_utl_.flat_many_(2, "need to pass arg to reach error message")),  "expandTemplate: template \"A\" does not exist");
+	}
+	@Test  public void ExpandTemplate__invalid_title() {// PURPOSE: return error if title is invalid; PAGE:en.w:Tetris DATE:2017-04-09
+		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");
+		fxt.Test_scrib_proc_err(lib, Scrib_lib_mw.Invk_expandTemplate, Object_.Ary("current", "[[A]]"),  "expandTemplate: invalid title \"[[A]]\"");
 	}
 	@Test  public void SetTTL() {
 		fxt.Test_scrib_proc_empty(lib, Scrib_lib_mw.Invk_setTTL, Object_.Ary(123));
