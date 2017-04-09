@@ -88,10 +88,10 @@ class Xomw_lnki_wkr__fxt {
 		// env
 		file_finder = new XomwFileFinderMock(parser.Env());
 		env = parser.Env();
-		parser.Env().File_finder_(file_finder);
-		parser.Env().Magic_word_mgr().Add(Bry_.new_u8("img_thumbnail"), Bool_.Y, Bry_.Ary("thumb"));
-		parser.Env().Magic_word_mgr().Add(Bry_.new_u8("img_width"), Bool_.Y, Bry_.Ary("$1px"));
-		parser.Env().Message_mgr().Add("thumbnail-more", "enlarge");
+		env.File_finder_(file_finder);
+		env.Magic_word_mgr().Add(Bry_.new_u8("img_thumbnail"), Bool_.Y, Bry_.Ary("thumb"));
+		env.Magic_word_mgr().Add(Bry_.new_u8("img_width"), Bool_.Y, Bry_.Ary("$1px"));
+		env.Message_mgr().Add("thumbnail-more", "enlarge", env.Language());
 		parser.Init_by_wiki(wiki);
 
 		// ctx

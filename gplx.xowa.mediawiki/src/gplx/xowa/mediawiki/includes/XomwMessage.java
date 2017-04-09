@@ -237,13 +237,14 @@ public class XomwMessage {
 	private byte[] message;
 
 	public void CompilerAppeasement() {
-		this.language = null; this.key = null; this.keysToTry = null; this.message = null;
+		this.key = null; this.keysToTry = null; this.message = null;
 		Tfds.Write(interfaceIsUserLang, language, key, keysToTry, format, useDatabase, title, message, listTypeMap, parameters);
 		Tfds.Write(FORMAT_BLOCK_PARSE, FORMAT_ESCAPED, FORMAT_PARSE, FORMAT_PLAIN, FORMAT_TEXT);
 		this.extractParam(null, null, 0);
 	}
-	public XomwMessage(byte[] textBry) {
+	public XomwMessage(byte[] textBry, XomwLanguage language) {
 		this.textBry = textBry;
+		this.language = language;
 	}
 	public byte[] text() {return textBry;} private byte[] textBry;
 	public byte[] escaped() {throw Err_.new_unimplemented();}
@@ -379,19 +380,19 @@ public class XomwMessage {
 //			wfDeprecated(__METHOD__, '1.29');
 //			return this.format;
 //		}
-//
-//		/**
-//		* Returns the Language of the Message.
-//		*
-//		* @since 1.23
-//		*
-//		* @return Language
-//		*/
-//		public function getLanguage() {
-//			// Defaults to false which means current user language
-//			return this.language ?: RequestContext::getMain()->getLanguage();
-//		}
-//
+
+	/**
+	* Returns the Language of the Message.
+	*
+	* @since 1.23
+	*
+	* @return Language
+	*/
+	public XomwLanguage getLanguage() {
+		// Defaults to false which means current user language
+		return this.language;
+	}
+
 //		/**
 //		* Factory function that is just wrapper for the real constructor. It is
 //		* intended to be used instead of the real constructor, because it allows
@@ -1133,35 +1134,43 @@ public class XomwMessage {
 	private void extractParam(XomwMessageVal rv, Object param, int format) {
 		if (Type_adp_.Implements_intf_obj(param, XomwMessagePrm.class)) {
 			XomwMessagePrm prm = (XomwMessagePrm)param;
-			if      (prm.Tid() == XomwMessagePrm.Tid__raw) {
-				rv.Set(PRM_TID_AFTER, ((XomwMessagePrm_raw)prm).raw);
-			}
-			else if (prm.Tid() == XomwMessagePrm.Tid__num) {
-				// Replace number prmsVar always in before step for now.
-				// No support for combined raw and num prmsVar
-//					return [PRM_TID_BEFORE, this.getLanguage()->formatNum($param['num']) ];
-			}
-//				elseif (isset($param['duration'])) {
-//					return [PRM_TID_BEFORE, this.getLanguage()->formatDuration($param['duration']) ];
-//				} elseif (isset($param['expiry'])) {
-//					return [PRM_TID_BEFORE, this.getLanguage()->formatExpiry($param['expiry']) ];
-//				} elseif (isset($param['period'])) {
-//					return [PRM_TID_BEFORE, this.getLanguage()->formatTimePeriod($param['period']) ];
-//				} elseif (isset($param['size'])) {
-//					return [PRM_TID_BEFORE, this.getLanguage()->formatSize($param['size']) ];
-//				} elseif (isset($param['bitrate'])) {
-//					return [PRM_TID_BEFORE, this.getLanguage()->formatBitrate($param['bitrate']) ];
-//				} elseif (isset($param['plaintext'])) {
-//					return [PRM_TID_AFTER, this.formatPlaintext($param['plaintext'], $format) ];
-//				} elseif (isset($param['list'])) {
-//					return this.formatListParam($param['list'], $param['type'], $format);
-//				}
-			else {
-				String warning = "Invalid parameter for message '" + this.getKey() + "': " +
-					prm.toString();
-				Gfo_usr_dlg_.Instance.Warn_many("", "", warning);
+			switch (prm.Tid()) {
+				case XomwMessagePrm.Tid__raw:
+					rv.Set(PRM_TID_AFTER, ((XomwMessagePrm_raw)prm).raw);
+					break;
+				case XomwMessagePrm.Tid__num:
+					// Replace number prmsVar always in before step for now.
+					// No support for combined raw and num prmsVar
+//						return [PRM_TID_BEFORE, this.getLanguage()->formatNum($param['num']) ];
+					break;
+				case XomwMessagePrm.Tid__duration:
+//						return [PRM_TID_BEFORE, this.getLanguage()->formatDuration($param['duration']) ];
+					break;
+				case XomwMessagePrm.Tid__expiry:
+//						return [PRM_TID_BEFORE, this.getLanguage()->formatExpiry($param['expiry']) ];
+					break;
+				case XomwMessagePrm.Tid__period:
+//						return [PRM_TID_BEFORE, this.getLanguage()->formatTimePeriod($param['period']) ];
+					break;
+				case XomwMessagePrm.Tid__size:
+//						return [PRM_TID_BEFORE, this.getLanguage()->formatSize($param['size']) ];
+					break;
+				case XomwMessagePrm.Tid__bitrate:
+//						return [PRM_TID_BEFORE, this.getLanguage()->formatBitrate($param['bitrate']) ];
+					break;
+				case XomwMessagePrm.Tid__plaintext:
+//						return [PRM_TID_AFTER, this.formatPlaintext($param['plaintext'], $format) ];
+					break;
+				case XomwMessagePrm.Tid__list:
+//						return this.formatListParam($param['list'], $param['type'], $format);
+					break;
+				default: 
+					String warning = "Invalid parameter for message '" + this.getKey() + "': " +
+						prm.toString();
+					Gfo_usr_dlg_.Instance.Warn_many("", "", warning);
 
-				rv.Set(PRM_TID_BEFORE, Bry_.new_a7("[INVALID]"));
+					rv.Set(PRM_TID_BEFORE, Bry_.new_a7("[INVALID]"));
+					break;
 			}
 //			}
 //			else if ($param instanceof Message) {
