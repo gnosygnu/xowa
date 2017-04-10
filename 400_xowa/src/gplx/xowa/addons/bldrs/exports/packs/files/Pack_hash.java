@@ -27,6 +27,8 @@ class Pack_hash {
 			hash.Add(list_tid, list);
 		}
 		Pack_itm itm = new Pack_itm(list_tid, pack_url, raw_urls);
+
+		// check if file exists; needed for wikitext packs which add same urls as html packs; DATE:2017-04-09
 		if (list.Has(pack_url)) 
 			return itm;
 		list.Add(itm);

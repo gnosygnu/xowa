@@ -47,7 +47,7 @@ class Pack_hash_bldr {
 			for (int i = 0; i < len; ++i) {
 				Xow_db_file file = db_mgr.Dbs__get_at(i);
 				int pack_tid = Get_pack_tid(file.Tid());
-				if (pack_tid == Xobc_import_type.Tid__ignore) continue;
+				if (pack_tid == Xobc_import_type.Tid__ignore) continue; // NOTE: will try to add same urls as html, but noops b/c rv.Add checks for unique urls; DATE:2017-04-09
 				rv.Add(zip_name_bldr, pack_tid, file.Url());
 			}
 		}

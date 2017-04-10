@@ -53,8 +53,8 @@ public class Pack_file_mgr {
 			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, Xobc_task_regy_itm.Type__html, Xobc_import_type.Tid__wiki__core, Xobc_import_type.Tid__wiki__srch, Xobc_import_type.Tid__wiki__html, Xobc_import_type.Tid__wiki__ctg, Xobc_import_type.Tid__wiki__lucene);
 		if (cfg.Pack_file())
 			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, Xobc_task_regy_itm.Type__file, Xobc_import_type.Tid__file__core, Xobc_import_type.Tid__file__data);	// , Xobc_import_type.Tid__fsdb__delete
-		if (cfg.Pack_text())	// right now, only for wikidata
-			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, Xobc_task_regy_itm.Type__text, Xobc_import_type.Tid__wiki__text, Xobc_import_type.Tid__wiki__wbase);  // , Xobc_import_type.Tid__file__core, Xobc_import_type.Tid__wiki__ctg
+		if (cfg.Pack_text())	// NOTE: will only add wikitext and wikibase packs; wikidata needs to pack html also; DATE:2017-04-09
+			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, Xobc_task_regy_itm.Type__text, Xobc_import_type.Tid__wiki__text, Xobc_import_type.Tid__wiki__wbase);
 		if (cfg.Pack_custom())
 			Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, cfg.Pack_custom_name(), Xobc_import_type.Tid__misc);
 		bc_conn.Txn_end();

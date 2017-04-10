@@ -28,7 +28,6 @@ public class Xobc_skip_mgr implements Gfo_invk {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Cfg__namespaces_category))	category_enabled = m.ReadBool("v");
-		else if	(ctx.Match(k, Cfg__namespaces_category))	category_enabled = m.ReadBool("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
