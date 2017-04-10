@@ -27,6 +27,8 @@ class Pack_hash {
 			hash.Add(list_tid, list);
 		}
 		Pack_itm itm = new Pack_itm(list_tid, pack_url, raw_urls);
+		if (list.Has(pack_url)) 
+			return itm;
 		list.Add(itm);
 		return itm;
 	}

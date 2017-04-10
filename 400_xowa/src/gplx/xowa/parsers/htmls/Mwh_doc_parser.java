@@ -29,7 +29,11 @@ public class Mwh_doc_parser {
 	public void Parse(Mwh_doc_wkr wkr, byte[] src, int src_bgn, int src_end) {
 		this.wkr = wkr; this.src = src; this.src_end = src_end;
 		this.nde_regy = wkr.Nde_regy();
+
+		// clear
 		nde_stack.Clear();
+		dom_mgr.Clear(); // must clear, or NegativeArraySizeException during mass_parse; DATE:2017-04-09
+
 		int pos = txt_bgn = src_bgn;
 		nde_uid = cur_nde_tid = -1;
 		cur_nde = null;

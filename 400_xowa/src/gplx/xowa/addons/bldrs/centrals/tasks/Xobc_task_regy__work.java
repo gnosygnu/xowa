@@ -47,10 +47,10 @@ public class Xobc_task_regy__work extends Xobc_task_regy__base {
 	}
 	public void Run_task(Xobc_task_itm task, Xobc_cmd_itm cmd) {
 		// if task marked for skip, launch skip-cmd on separate thread and exit;
-//			if (task_mgr.Skip_mgr().Should_skip(task_mgr.Data_db().Tbl__import_step().Select_one(cmd.Step_id()))) {
-//				thread_mgr.Add("skip_" + cmd.Cmd_uid(), Thread_adp_.Start_by_key("skip_xobc: " + cmd.Cmd_name(), new Xobc_task_skip(this, cmd), ""));
-//				return;
-//			}
+		if (task_mgr.Skip_mgr().Should_skip(task_mgr.Data_db().Tbl__import_step().Select_one(cmd.Step_id()))) {
+			thread_mgr.Add("skip_" + cmd.Cmd_uid(), Thread_adp_.Start_by_key("skip_xobc: " + cmd.Cmd_name(), new Xobc_task_skip(this, cmd), ""));
+			return;
+		}
 
 		task.Task_status_(gplx.core.progs.Gfo_prog_ui_.Status__working);
 		task_mgr.Send_json("xo.bldr.work.prog__start__recv", task.Save_to(Gfobj_nde.New()));
