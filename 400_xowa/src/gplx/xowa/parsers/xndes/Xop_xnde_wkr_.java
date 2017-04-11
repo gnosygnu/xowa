@@ -42,7 +42,13 @@ class Xop_xnde_wkr_ {
 				int tid = ((Int_obj_val)o).Val();
 				switch (tid) {
 					case Find_xtn_end__tid__bgn:		// handle nested refs; PAGE:en.w:UK; DATE:2015-12-26
-						int angle_end_pos = Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, i, src_end); if (angle_end_pos == Bry_find_.Not_found) {Xoa_app_.Usr_dlg().Warn_many("", "", "parser.xtn: could not find angle_end: page=~{0}", ctx.Page().Url().To_str()); return Bry_find_.Not_found;}
+						int angle_end_pos = Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, i, src_end);
+
+						// if dangling, return not found; EX:"<ref>a</ref" PAGE:en.w:Leo_LeBlanc DATE:2017-04-10
+						if (angle_end_pos == Bry_find_.Not_found) {
+							Xoa_app_.Usr_dlg().Warn_many("", "", "parser.xtn: could not find angle_end: page=~{0} close_bry=~{1} excerpt=~{2}", ctx.Page().Url().To_str(), close_bry, String_.new_u8(src, open_end, src_end));
+							return Bry_find_.Not_found;
+						}
 						if (src[angle_end_pos -1] == Byte_ascii.Slash) {}
 						else
 							++depth;
