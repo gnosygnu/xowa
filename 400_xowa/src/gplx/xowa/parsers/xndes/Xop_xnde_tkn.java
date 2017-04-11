@@ -123,7 +123,8 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 					cur_bfr.Add_mid(src, tag_close_bgn, tag_close_end);
 
 					// xtn is unclosed; add a </xtn> else rest of page will be gobbled; PAGE:en.w:Provinces_and_territories_of_Canada DATE:2014-11-13
-					if (tag_close_bgn == Int_.Min_value) {
+					// NOTE: must check for inline else will output trailing '</xtn>' after '<xtn/>' PAGE:en.w:National_Popular_Vote_Interstate_Compact DATE:2017-04-10
+					if (tag_close_bgn == Int_.Min_value && closeMode != Xop_xnde_tkn.CloseMode_inline) {
 						cur_bfr.Add(tag.Xtn_end_tag());
 						cur_bfr.Add(Byte_ascii.Gt_bry);
 					}

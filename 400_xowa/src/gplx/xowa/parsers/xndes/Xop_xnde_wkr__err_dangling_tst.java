@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.xowa.parsers.lists.*;
 public class Xop_xnde_wkr__err_dangling_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Basic() {
 		fxt.Init_log_(Xop_xnde_log.Dangling_xnde)
@@ -191,6 +191,14 @@ public class Xop_xnde_wkr__err_dangling_tst {
 		, "</p>"
 		, "</div>"	// poem ends here
 		, " b"
+		));
+	}
+	@Test   public void Section_inline() {	// PURPOSE.FIX:do not output trailing '</xtn>' after '<xtn/>' PAGE:en.w:National_Popular_Vote_Interstate_Compact DATE:2017-04-10
+		fxt.Init_page_create("Template:Abc", "<section begin=key/>val<section end=key/>");
+		fxt.Test_parse_page_tmpl_str(String_.Concat_lines_nl_skip_last
+		( "{{Abc}}"
+		), String_.Concat_lines_nl_skip_last
+		( "<section begin=key/>val<section end=key/>" // fails if "<section begin=key/></section>val<section end=key/></section>"
 		));
 	}
 }
