@@ -1141,6 +1141,7 @@ public class XomwMessage {
 				case XomwMessagePrm.Tid__num:
 					// Replace number prmsVar always in before step for now.
 					// No support for combined raw and num prmsVar
+//						rv.Set(PRM_TID_BEFORE, this.getLanguage().formatNum((XomwMessagePrm_num)prm).num);
 //						return [PRM_TID_BEFORE, this.getLanguage()->formatNum($param['num']) ];
 					break;
 				case XomwMessagePrm.Tid__duration:

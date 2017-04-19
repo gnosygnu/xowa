@@ -302,6 +302,11 @@ public class Bry_ {
 		for (int i = src_bgn; i < src_end; i++)
 			trg[i + trg_adj] = src[i];
 	}
+	public static void Copy_by_pos_reversed(byte[] src, int src_bgn, int src_end, byte[] trg, int trg_bgn) {
+		int len = src_end - src_bgn;
+		for (int i = 0; i < len; i++)
+			trg[trg_bgn + i] = src[src_end - i - 1];
+	}
 	private static void Copy_by_len(byte[] src, int src_bgn, int src_len, byte[] trg, int trg_bgn) {
 		for (int i = 0; i < src_len; i++)
 			trg[i + trg_bgn] = src[i + src_bgn];

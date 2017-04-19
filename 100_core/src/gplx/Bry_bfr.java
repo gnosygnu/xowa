@@ -93,6 +93,15 @@ public class Bry_bfr {
 		bfr_len += len;
 		return this;
 	}
+	public Bry_bfr Add_reverse_mid(byte[] val, int bgn, int end) {
+		int len = end - bgn;
+		if (len < 0) throw Err_.new_wo_type("negative len", "bgn", bgn, "end", end, "excerpt", String_.new_u8__by_len(val, bgn, bgn + 16));	// NOTE: check for invalid end < bgn, else difficult to debug errors later; DATE:2014-05-11
+		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
+		Bry_.Copy_by_pos_reversed(val, bgn, end, bfr, bfr_len);
+		// Array_.Copy_to(val, bgn, bfr, bfr_len, len);
+		bfr_len += len;
+		return this;
+	}
 	public Bry_bfr Add_mid_w_swap(byte[] val, int bgn, int end, byte swap_src, byte swap_trg) {
 		int len = end - bgn;
 		if (len < 0) throw Err_.new_wo_type("negative len", "bgn", bgn, "end", end, "excerpt", String_.new_u8__by_len(val, bgn, bgn + 16));	// NOTE: check for invalid end < bgn, else difficult to debug errors later; DATE:2014-05-11
@@ -587,6 +596,16 @@ public class Bry_bfr {
 	public byte[] To_bry_and_clear_and_rls() {
 		byte[] rv = To_bry_and_clear();
 		this.Mkr_rls();
+		return rv;
+	}
+	public byte[] To_reversed_bry_and_clear() {
+		int len = this.Len();
+		byte[] rv = new byte[len];
+		for (int i = 0; i < len; i++) {
+			rv[len - i - 1] = bfr[i];
+		}
+		this.Clear();
+		if (reset > 0) Reset_if_gt(reset);
 		return rv;
 	}
 	public String To_str()								{return String_.new_u8(To_bry());}

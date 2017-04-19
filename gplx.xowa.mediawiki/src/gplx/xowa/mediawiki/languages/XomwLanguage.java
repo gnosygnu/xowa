@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.languages; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import gplx.xowa.mediawiki.includes.*;
+import gplx.core.primitives.*;
 import gplx.xowa.langs.*;
 public class XomwLanguage {
 	public Xol_lang_itm XoLang() {return xoLang;} private Xol_lang_itm xoLang = null;
@@ -34,6 +35,9 @@ public class XomwLanguage {
 //		/** @var array|null */
 	private XomwNamespacesById namespaceNames;
 	private XomwNamespacesByName mNamespaceIds, namespaceAliases;
+	private byte[] digitGroupingPattern = null;
+	private final    List_adp tmp_matches = List_adp_.New();
+	private final    Bry_bfr tmp_commafy = Bry_bfr_.New();
 
 //		/**
 //		* ReplacementArray Object caches
@@ -278,7 +282,7 @@ public class XomwLanguage {
 //				return false;
 //			}
 //
-//			if ($code === 'qqq') {
+//			if ($code == 'qqq') {
 //				return false;
 //			}
 //
@@ -364,7 +368,7 @@ public class XomwLanguage {
 //				// see bugs T39564, T39587, T38938
 //				$cache[$code] =
 //					// Protect against path traversal
-//					strcspn($code, ":/\\\000&<>'\"") === strlen($code)
+//					strcspn($code, ":/\\\000&<>'\"") == strlen($code)
 //					&& !preg_match(MediaWikiTitleCodec::getTitleInvalidRegex(), $code);
 //			}
 //			return $cache[$code];
@@ -411,7 +415,7 @@ public class XomwLanguage {
 //			}
 //
 //			if (isset(MediaWiki\Languages\Data\Names::$names[$tag])
-//				|| self::fetchLanguageName($tag, $tag) !== ''
+//				|| self::fetchLanguageName($tag, $tag) != ''
 //			) {
 //				return true;
 //			}
@@ -653,7 +657,7 @@ public class XomwLanguage {
 //					$aliases = [];
 //				} else {
 //					foreach ($aliases as $name => $index) {
-//						if ($index === NS_PROJECT_TALK) {
+//						if ($index == NS_PROJECT_TALK) {
 //							unset($aliases[$name]);
 //							$name = this.fixVariableInNamespace($name);
 //							$aliases[$name] = $index;
@@ -673,7 +677,7 @@ public class XomwLanguage {
 			// Also add converted namespace names as aliases, to avoid confusion.
 //				$convertedNames = [];
 //				foreach (this.getVariants() as $variant) {
-//					if ($variant === this.mCode) {
+//					if ($variant == this.mCode) {
 //						continue;
 //					}
 //					foreach (this.getNamespaces() as $ns => $_) {
@@ -776,7 +780,7 @@ public class XomwLanguage {
 //		*/
 //		public function getDefaultDateFormat() {
 //			$df = self::$dataCache->getItem(this.mCode, 'defaultDateFormat');
-//			if ($df === 'dmy or mdy') {
+//			if ($df == 'dmy or mdy') {
 //				global $wgAmericanDates;
 //				return $wgAmericanDates ? 'mdy' : 'dmy';
 //			} else {
@@ -834,9 +838,9 @@ public class XomwLanguage {
 //		* @since 1.20
 //		*/
 //		public static function fetchLanguageNames($inLanguage = null, $include = 'mw') {
-//			$cacheKey = $inLanguage === null ? 'null' : $inLanguage;
+//			$cacheKey = $inLanguage == null ? 'null' : $inLanguage;
 //			$cacheKey .= ":$include";
-//			if (self::$languageNameCache === null) {
+//			if (self::$languageNameCache == null) {
 //				self::$languageNameCache = new HashBagOStuff([ 'maxKeys' => 20 ]);
 //			}
 //
@@ -862,7 +866,7 @@ public class XomwLanguage {
 //			global $wgExtraLanguageNames;
 //
 //			// If passed an invalid language code to use, fallback to en
-//			if ($inLanguage !== null && !Language::isValidCode($inLanguage)) {
+//			if ($inLanguage != null && !Language::isValidCode($inLanguage)) {
 //				$inLanguage = 'en';
 //			}
 //
@@ -877,12 +881,12 @@ public class XomwLanguage {
 //			foreach ($mwNames as $mwCode => $mwName) {
 //				# - Prefer own MediaWiki native name when not using the hook
 //				# - For other names just add if not added through the hook
-//				if ($mwCode === $inLanguage || !isset($names[$mwCode])) {
+//				if ($mwCode == $inLanguage || !isset($names[$mwCode])) {
 //					$names[$mwCode] = $mwName;
 //				}
 //			}
 //
-//			if ($include === 'all') {
+//			if ($include == 'all') {
 //				ksort($names);
 //				return $names;
 //			}
@@ -893,7 +897,7 @@ public class XomwLanguage {
 //				$returnMw[$coreCode] = $names[$coreCode];
 //			}
 //
-//			if ($include === 'mwfile') {
+//			if ($include == 'mwfile') {
 //				$namesMwFile = [];
 //				# We do this using a foreach over the codes instead of a directory
 //				# loop so that messages files in extensions will work correctly.
@@ -1160,7 +1164,7 @@ public class XomwLanguage {
 //			$usedHijriYear = false;
 //			$usedTennoYear = false;
 //
-//			if (strlen($ts) !== 14) {
+//			if (strlen($ts) != 14) {
 //				throw new MWException(__METHOD__ . ": The timestamp $ts should have 14 characters");
 //			}
 //
@@ -1176,12 +1180,12 @@ public class XomwLanguage {
 //					$code .= $format[++$p];
 //				}
 //
-//				if (($code === 'xi'
-//						|| $code === 'xj'
-//						|| $code === 'xk'
-//						|| $code === 'xm'
-//						|| $code === 'xo'
-//						|| $code === 'xt')
+//				if (($code == 'xi'
+//						|| $code == 'xj'
+//						|| $code == 'xk'
+//						|| $code == 'xm'
+//						|| $code == 'xo'
+//						|| $code == 'xt')
 //					&& $p < $formatLength - 1) {
 //					$code .= $format[++$p];
 //				}
@@ -1475,7 +1479,7 @@ public class XomwLanguage {
 //						# Quoted literal
 //						if ($p < $formatLength - 1) {
 //							$endQuote = strpos($format, '"', $p + 1);
-//							if ($endQuote === false) {
+//							if ($endQuote == false) {
 //								# No terminating quote, assume literal "
 //								$s .= '"';
 //							} else {
@@ -1490,7 +1494,7 @@ public class XomwLanguage {
 //					default:
 //						$s .= $format[$p];
 //				}
-//				if ($num !== false) {
+//				if ($num != false) {
 //					if ($rawToggle || $raw) {
 //						$s .= $num;
 //						$raw = false;
@@ -1506,7 +1510,7 @@ public class XomwLanguage {
 //				}
 //			}
 //
-//			if ($ttl === 'unused') {
+//			if ($ttl == 'unused') {
 //				// No need to calculate the TTL, the caller wont use it anyway.
 //			} elseif ($usedSecond) {
 //				$ttl = 1;
@@ -1628,7 +1632,7 @@ public class XomwLanguage {
 //			}
 //
 //			// Leap years
-//			if ($gm > 1 && (($gy % 4 === 0 && $gy % 100 !== 0 || ($gy % 400 == 0)))) {
+//			if ($gm > 1 && (($gy % 4 == 0 && $gy % 100 != 0 || ($gy % 400 == 0)))) {
 //				$gDayNo++;
 //			}
 //
@@ -1992,7 +1996,7 @@ public class XomwLanguage {
 //			if (!preg_match(self::$strongDirRegex, $text, $matches)) {
 //				return null;
 //			}
-//			if ($matches[1] === '') {
+//			if ($matches[1] == '') {
 //				return 'rtl';
 //			}
 //			return 'ltr';
@@ -2061,9 +2065,9 @@ public class XomwLanguage {
 //			}
 //
 //			// Round thousands have special notations
-//			if ($num === 1000) {
+//			if ($num == 1000) {
 //				return "א' אלף";
-//			} elseif ($num % 1000 === 0) {
+//			} elseif ($num % 1000 == 0) {
 //				return $table[0][$num / 1000] . "' אלפים";
 //			}
 //
@@ -2071,7 +2075,7 @@ public class XomwLanguage {
 //
 //			for ($pow10 = 1000, $i = 3; $i >= 0; $pow10 /= 10, $i--) {
 //				if ($num >= $pow10) {
-//					if ($num === 15 || $num === 16) {
+//					if ($num == 15 || $num == 16) {
 //						$letters[] = $table[0][9];
 //						$letters[] = $table[0][$num - 9];
 //						$num = 0;
@@ -2081,7 +2085,7 @@ public class XomwLanguage {
 //							(array)$table[$i][intval($num / $pow10)]
 //						);
 //
-//						if ($pow10 === 1000) {
+//						if ($pow10 == 1000) {
 //							$letters[] = "'";
 //						}
 //					}
@@ -2091,7 +2095,7 @@ public class XomwLanguage {
 //			}
 //
 //			$preTransformLength = count($letters);
-//			if ($preTransformLength === 1) {
+//			if ($preTransformLength == 1) {
 //				// Add geresh (single quote) to one-letter numbers
 //				$letters[] = "'";
 //			} else {
@@ -2105,7 +2109,7 @@ public class XomwLanguage {
 //				// Add gershayim (double quote) to multiple-letter numbers,
 //				// but exclude numbers with only one letter after the thousands
 //				// (1001-1009, 1020, 1030, 2001-2009, etc.)
-//				if ($letters[1] === "'" && $preTransformLength === 3) {
+//				if ($letters[1] == "'" && $preTransformLength == 3) {
 //					$letters[] = "'";
 //				} else {
 //					array_splice($letters, -1, 0, '"');
@@ -2126,7 +2130,7 @@ public class XomwLanguage {
 //		public function userAdjust($ts, $tz = false) {
 //			global $wgUser, $wgLocalTZoffset;
 //
-//			if ($tz === false) {
+//			if ($tz == false) {
 //				$tz = $wgUser->getOption('timecorrection');
 //			}
 //
@@ -2244,11 +2248,11 @@ public class XomwLanguage {
 //			if (!isset(this.dateFormatStrings[$type][$pref])) {
 //				$df = self::$dataCache->getSubitem(this.mCode, 'dateFormats', "$pref $type");
 //
-//				if ($type === 'pretty' && $df === null) {
+//				if ($type == 'pretty' && $df == null) {
 //					$df = this.getDateFormatString('date', $pref);
 //				}
 //
-//				if (!$wasDefault && $df === null) {
+//				if (!$wasDefault && $df == null) {
 //					$pref = this.getDefaultDateFormat();
 //					$df = self::$dataCache->getSubitem(this.mCode, 'dateFormats', "$pref $type");
 //				}
@@ -2406,15 +2410,15 @@ public class XomwLanguage {
 //		private function internalUserTimeAndDate($type, $ts, User $user, array $options) {
 //			$ts = wfTimestamp(TS_MW, $ts);
 //			$options += [ 'timecorrection' => true, 'format' => true ];
-//			if ($options['timecorrection'] !== false) {
-//				if ($options['timecorrection'] === true) {
+//			if ($options['timecorrection'] != false) {
+//				if ($options['timecorrection'] == true) {
 //					$offset = $user->getOption('timecorrection');
 //				} else {
 //					$offset = $options['timecorrection'];
 //				}
 //				$ts = this.userAdjust($ts, $offset);
 //			}
-//			if ($options['format'] === true) {
+//			if ($options['format'] == true) {
 //				$format = $user->getDatePreference();
 //			} else {
 //				$format = $options['format'];
@@ -2510,10 +2514,10 @@ public class XomwLanguage {
 //		public function getHumanTimestamp(
 //			MWTimestamp $time, MWTimestamp $relativeTo = null, User $user = null
 //		) {
-//			if ($relativeTo === null) {
+//			if ($relativeTo == null) {
 //				$relativeTo = new MWTimestamp();
 //			}
-//			if ($user === null) {
+//			if ($user == null) {
 //				$user = RequestContext::getMain()->getUser();
 //			}
 //
@@ -2552,7 +2556,7 @@ public class XomwLanguage {
 //				(int)$relativeTo->timestamp->format('w'));
 //			$days = $diff->days ?: (int)$diffDay;
 //			if ($diff->invert || $days > 5
-//				&& $ts->timestamp->format('Y') !== $relativeTo->timestamp->format('Y')
+//				&& $ts->timestamp->format('Y') != $relativeTo->timestamp->format('Y')
 //			) {
 //				// Timestamps are in different years: use full timestamp
 //				// Also do full timestamp for future dates
@@ -2752,7 +2756,7 @@ public class XomwLanguage {
 //		* @return boolean
 //		*/
 //		function isMultibyte($str) {
-//			return strlen($str) !== mb_strlen($str);
+//			return strlen($str) != mb_strlen($str);
 //		}
 //
 //		/**
@@ -2896,7 +2900,7 @@ public class XomwLanguage {
 //			static $full = null;
 //			static $half = null;
 //
-//			if ($full === null) {
+//			if ($full == null) {
 //				$fullWidth = "０１２３４５６７８９ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ";
 //				$halfWidth = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 //				$full = str_split($fullWidth, 3);
@@ -3050,7 +3054,7 @@ public class XomwLanguage {
 //		function transformUsingPairFile($file, $String) {
 //			if (!isset(this.transformData[$file])) {
 //				$data = wfGetPrecompiledData($file);
-//				if ($data === false) {
+//				if ($data == false) {
 //					throw new MWException(__METHOD__ . ": The transformation file $file is missing");
 //				}
 //				this.transformData[$file] = new ReplacementArray($data);
@@ -3340,69 +3344,168 @@ public class XomwLanguage {
 //			$number = strtr($number, [ ',' => '' ]);
 //			return $number;
 //		}
-//
-//		/**
-//		* Adds commas to a given number
-//		* @since 1.19
-//		* @param mixed $number
-//		* @return String
-//		*/
-//		function commafy($number) {
-//			$digitGroupingPattern = this.digitGroupingPattern();
-//			if ($number === null) {
-//				return '';
-//			}
-//
-//			if (!$digitGroupingPattern || $digitGroupingPattern === "###,###,###") {
-//				// default grouping is at thousands,  use the same for ###,###,### pattern too.
-//				return strrev((String)preg_replace('/(\d{3})(?=\d)(?!\d*\.)/', '$1,', strrev($number)));
-//			} else {
-//				// Ref: http://cldr.unicode.org/translation/number-patterns
-//				$sign = "";
-//				if (intval($number) < 0) {
-//					// For negative numbers apply the algorithm like positive number and add sign.
-//					$sign = "-";
-//					$number = substr($number, 1);
-//				}
-//				$integerPart = [];
-//				$decimalPart = [];
-//				$numMatches = preg_match_all("/(#+)/", $digitGroupingPattern, $matches);
-//				preg_match("/\d+/", $number, $integerPart);
-//				preg_match("/\.\d*/", $number, $decimalPart);
-//				$groupedNumber = (count($decimalPart) > 0) ? $decimalPart[0] : "";
-//				if ($groupedNumber === $number) {
-//					// the String does not have any number part. Eg: .12345
-//					return $sign . $groupedNumber;
-//				}
-//				$start = $end = ($integerPart) ? strlen($integerPart[0]) : 0;
-//				while ($start > 0) {
-//					$match = $matches[0][$numMatches - 1];
-//					$matchLen = strlen($match);
-//					$start = $end - $matchLen;
-//					if ($start < 0) {
-//						$start = 0;
-//					}
-//					$groupedNumber = substr($number, $start, $end -$start) . $groupedNumber;
-//					$end = $start;
-//					if ($numMatches > 1) {
-//						// use the last pattern for the rest of the number
-//						$numMatches--;
-//					}
-//					if ($start > 0) {
-//						$groupedNumber = "," . $groupedNumber;
-//					}
-//				}
-//				return $sign . $groupedNumber;
-//			}
-//		}
-//
-//		/**
-//		* @return String
-//		*/
-//		function digitGroupingPattern() {
-//			return self::$dataCache->getItem(this.mCode, 'digitGroupingPattern');
-//		}
-//
+
+	/**
+	* Adds commas to a given number
+	* @since 1.19
+	* @param mixed $number
+	* @return String
+	*/
+	private static byte[] DIGIT_GROUPING_PATTERN_MILLION = Bry_.new_a7("###,###,###");
+	public byte[] commafy(byte[] number) {
+		// ignore nulls
+		if (number == null) {
+			return Bry_.Empty;
+		}
+
+		// get number vars
+		int numberLen = number.length;
+		int integerBgn = 0;
+
+		// check for negative; note that MW casts String to number and checks if less than 0
+		boolean negative = false;
+		if (numberLen > 0 && number[0] == Byte_ascii.Dash) {
+			negative = true;
+			integerBgn = 1;
+		}
+
+		// get integer, decimal pos
+		int integerEnd = -1, decimalBgn = -1;
+		boolean decimalExists = false;
+		for (int i = integerBgn; i < numberLen; i++) {
+			switch (number[i]) {
+				// update integerEnd / decimalEnd
+				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
+				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+					if (decimalExists) {
+					}
+					else {
+						integerEnd = i + 1;
+					}
+					break;
+				// switch to decimalMode
+				case Byte_ascii.Dot:
+					decimalExists = true;
+					decimalBgn = i;
+					i = numberLen; // break loop
+					break;
+			}
+		}
+		int integerLen = integerEnd - integerBgn;
+
+		if (digitGroupingPattern == null || Bry_.Eq(digitGroupingPattern, DIGIT_GROUPING_PATTERN_MILLION)) {
+			// default grouping is at thousands,  use the same for ###,###,### pattern too.
+			// return strrev((String)preg_replace('/(\d{3})(?=\d)(?!\d*\.)/', '$1,', strrev(number)));
+			if (negative)
+				tmp_commafy.Add_byte(Byte_ascii.Dash);
+
+			// calculate seg before 1st comma
+			int seg_0 = (integerLen) % 3;
+			if (seg_0 == 0              // handle 3x digit; EX: "123", "123456"
+				&& integerLen > 0)      // ignore numbers with no integer portion; EX: ".123"
+				seg_0 = 3;				// set seg_0 to 3
+
+			// print digits before 1st comma; EX: 12345 -> "12"
+			if (seg_0 > 0) {
+				tmp_commafy.Add_mid(number, integerBgn, integerBgn + seg_0);
+				integerBgn = integerBgn + seg_0;
+			}
+
+			// print digits in groups of 3; add comma to start
+			for (int i = integerBgn; i < integerEnd; i += 3) {
+				tmp_commafy.Add_byte_comma();
+				tmp_commafy.Add_mid(number, i, i + 3);
+			}
+
+			// print decimal portion if it exists
+			if (decimalExists)
+				tmp_commafy.Add_mid(number, decimalBgn, number.length);
+			return tmp_commafy.To_bry_and_clear();
+		}
+		else {
+			// Ref: http://cldr.unicode.org/translation/number-patterns
+			// EX: 	MessagesHi.php; "##,##,###";
+
+			// NOTE: this entire block follows MW approach and prints number from right-to-left
+			// XOMW.REGEX: rewritten b/c of multiple preg_match
+			//   preg_match("/\d+/", number, integerPart);
+			//   preg_match("/\.\d*/", number, decimalPart);
+
+			// decimal exists; add it first
+			if (decimalBgn != -1)
+				tmp_commafy.Add_reverse_mid(number, decimalBgn, numberLen);
+
+			// no integer portion; exit
+			if (integerBgn == -1) {
+				// the String does not have any number part. Eg: .12345
+				return number;
+			}
+
+			// init vars for digitGroupingPattern
+			int numMatches = 0;
+			int digitGroupingPatternLen = digitGroupingPattern.length;
+			tmp_matches.Clear();
+
+			// parse digitGroupingPattern for groups of "#"; EX: "##,###" -> 0,2; 3,6
+			Int_2_ref match = null;
+			boolean matchContinued = false;
+			for (int i = 0; i < digitGroupingPatternLen; i++) {
+				if (digitGroupingPattern[i] == Byte_ascii.Hash) {
+					if (matchContinued) {
+						match.Val_1_(i + 1);
+					}
+					else {
+						match = new Int_2_ref(i, i + 1);
+						tmp_matches.Add(match);
+						numMatches++;
+						matchContinued = true;
+					}
+				}
+				else {
+					matchContinued = false;
+				}
+			}
+
+			// set start and end; note that they default to integerEnd
+			int start = -1, end = -1;
+			start = end = integerEnd != -1 ? integerEnd : 0;
+
+			while (start > integerBgn) {
+				// get rightmost grouping of "#" from digitGroupingPattern
+				Int_2_ref curMatch = (Int_2_ref)tmp_matches.Get_at(numMatches - 1);
+				int matchLen = curMatch.Val_1() - curMatch.Val_0();
+
+				// calc start / end positions based on matchLen
+				start = end - matchLen;
+				if (start < integerBgn) {
+					start = integerBgn;
+				}
+
+				// add number
+				tmp_commafy.Add_reverse_mid(number, start, end);
+				end = start;
+				if (numMatches > 1) {
+					// use the last pattern for the rest of the number
+					numMatches--;
+				}
+
+				// add comma if more digits still available
+				if (start > integerBgn) {
+					tmp_commafy.Add_byte(Byte_ascii.Comma);
+				}
+			}
+
+			// add negative if exists
+			if (negative)
+				tmp_commafy.Add_byte(Byte_ascii.Dash);
+
+			return tmp_commafy.To_reversed_bry_and_clear();
+		}
+	}
+	public void setDigitGroupingPattern(byte[] v) {
+		this.digitGroupingPattern = v;
+	}
+
 //		/**
 //		* @return array
 //		*/
@@ -3724,7 +3827,7 @@ public class XomwLanguage {
 //		* @return int
 //		*/
 //		private function truncate_skip(&$ret, $text, $search, $start, $len = null) {
-//			if ($len === null) {
+//			if ($len == null) {
 //				$len = -1; // -1 means "no limit" for strcspn
 //			} elseif ($len < 0) {
 //				$len = 0; // sanity
@@ -3789,7 +3892,7 @@ public class XomwLanguage {
 //				foreach (array_values($forms) as $rule) {
 //					$form = $rule[0];
 //
-//					if ($form === '@metadata') {
+//					if ($form == '@metadata') {
 //						continue;
 //					}
 //
@@ -3798,12 +3901,12 @@ public class XomwLanguage {
 //					$regex = '/' . addcslashes($form, '/') . '/u';
 //					$patternMatches = preg_match($regex, $word);
 //
-//					if ($patternMatches === false) {
+//					if ($patternMatches == false) {
 //						wfLogWarning(
 //							'An error occurred while processing grammar. ' .
 //							"Word: '$word'. Regex: /$form/."
 //						);
-//					} elseif ($patternMatches === 1) {
+//					} elseif ($patternMatches == 1) {
 //						$word = preg_replace($regex, $replacement, $word);
 //
 //						break;
@@ -3842,7 +3945,7 @@ public class XomwLanguage {
 //		public function getGrammarTransformations() {
 //			$languageCode = this.getCode();
 //
-//			if (self::$grammarTransformations === null) {
+//			if (self::$grammarTransformations == null) {
 //				self::$grammarTransformations = new MapCacheLRU(10);
 //			}
 //
@@ -3859,7 +3962,7 @@ public class XomwLanguage {
 //					true
 //				);
 //
-//				if ($data === null) {
+//				if ($data == null) {
 //					throw new MWException("Invalid grammar data for \"$languageCode\".");
 //				}
 //
@@ -3893,10 +3996,10 @@ public class XomwLanguage {
 //				return '';
 //			}
 //			$forms = this.preConvertPlural($forms, 2);
-//			if ($gender === 'male') {
+//			if ($gender == 'male') {
 //				return $forms[0];
 //			}
-//			if ($gender === 'female') {
+//			if ($gender == 'female') {
 //				return $forms[1];
 //			}
 //			return isset($forms[2]) ? $forms[2] : $forms[0];
@@ -3951,7 +4054,7 @@ public class XomwLanguage {
 //			foreach ($forms as $index => $form) {
 //				if (preg_match('/\d+=/i', $form)) {
 //					$pos = strpos($form, '=');
-//					if (substr($form, 0, $pos) === (String)$count) {
+//					if (substr($form, 0, $pos) == (String)$count) {
 //						return substr($form, $pos + 1);
 //					}
 //					unset($forms[$index]);
@@ -3993,11 +4096,11 @@ public class XomwLanguage {
 //		*/
 //		public function embedBidi($text = '') {
 //			$dir = Language::strongDirFromContent($text);
-//			if ($dir === 'ltr') {
+//			if ($dir == 'ltr') {
 //				// Wrap in LEFT-TO-RIGHT EMBEDDING ... POP DIRECTIONAL FORMATTING
 //				return self::$lre . $text . self::$pdf;
 //			}
-//			if ($dir === 'rtl') {
+//			if ($dir == 'rtl') {
 //				// Wrap in RIGHT-TO-LEFT EMBEDDING ... POP DIRECTIONAL FORMATTING
 //				return self::$rle . $text . self::$pdf;
 //			}
@@ -4036,13 +4139,13 @@ public class XomwLanguage {
 //
 //			// If all else fails, return a standard duration or timestamp description.
 //			$time = strtotime($str, $now);
-//			if ($time === false) { // Unknown format. Return it as-is in case.
+//			if ($time == false) { // Unknown format. Return it as-is in case.
 //				return $str;
-//			} elseif ($time !== strtotime($str, $now + 1)) { // It's a relative timestamp.
+//			} elseif ($time != strtotime($str, $now + 1)) { // It's a relative timestamp.
 //				// The result differs based on current time, so it's a duration length.
 //				return this.formatDuration($time);
 //			} else { // It's an absolute timestamp.
-//				if ($time === 0) {
+//				if ($time == 0) {
 //					// wfTimestamp() handles 0 as current time instead of epoch.
 //					$time = '19700101000000';
 //				}
@@ -4290,7 +4393,7 @@ public class XomwLanguage {
 //		* @since 1.22
 //		*/
 //		public function getParentLanguage() {
-//			if (this.mParentLanguage !== false) {
+//			if (this.mParentLanguage != false) {
 //				return this.mParentLanguage;
 //			}
 //
@@ -4317,7 +4420,7 @@ public class XomwLanguage {
 //		* @return boolean
 //		*/
 //		public function equals(Language $lang) {
-//			return $lang->getCode() === this.mCode;
+//			return $lang->getCode() == this.mCode;
 //		}
 //
 //		/**
@@ -4454,7 +4557,7 @@ public class XomwLanguage {
 //		* @return array Non-empty array, ending in "en"
 //		*/
 //		public static function getFallbacksFor($code) {
-//			if ($code === 'en' || !Language::isValidBuiltInCode($code)) {
+//			if ($code == 'en' || !Language::isValidBuiltInCode($code)) {
 //				return [];
 //			}
 //			// For unknown languages, fallbackSequence returns an empty array,
@@ -4534,7 +4637,7 @@ public class XomwLanguage {
 //		* @return mixed
 //		*/
 //		function fixVariableInNamespace($talk) {
-//			if (strpos($talk, '$1') === false) {
+//			if (strpos($talk, '$1') == false) {
 //				return $talk;
 //			}
 //
@@ -4570,16 +4673,16 @@ public class XomwLanguage {
 //		*/
 //		public function formatExpiry($expiry, $format = true, $infinity = 'infinity') {
 //			static $dbInfinity;
-//			if ($dbInfinity === null) {
+//			if ($dbInfinity == null) {
 //				$dbInfinity = wfGetDB(DB_SLAVE)->getInfinity();
 //			}
 //
-//			if ($expiry == '' || $expiry === 'infinity' || $expiry == $dbInfinity) {
-//				return $format === true
+//			if ($expiry == '' || $expiry == 'infinity' || $expiry == $dbInfinity) {
+//				return $format == true
 //					? this.getMessageFromDB('infiniteblock')
 //					: $infinity;
 //			} else {
-//				return $format === true
+//				return $format == true
 //					? this.timeanddate($expiry, /* User preference timezone */ true)
 //					: wfTimestamp($format, $expiry);
 //			}
@@ -4590,8 +4693,8 @@ public class XomwLanguage {
 //		*
 //		* @param int|float $seconds
 //		* @param array $format An optional argument that formats the returned String in different ways:
-//		*   If $format['avoid'] === 'avoidseconds': don't show seconds if $seconds >= 1 hour,
-//		*   If $format['avoid'] === 'avoidminutes': don't show seconds/minutes if $seconds > 48 hours,
+//		*   If $format['avoid'] == 'avoidseconds': don't show seconds if $seconds >= 1 hour,
+//		*   If $format['avoid'] == 'avoidminutes': don't show seconds/minutes if $seconds > 48 hours,
 //		*   If $format['noabbrevs'] is true: use 'seconds' and friends instead of 'seconds-abbrev'
 //		*     and friends.
 //		* @note For backwards compatibility, $format may also be one of the strings 'avoidseconds'
@@ -4653,7 +4756,7 @@ public class XomwLanguage {
 //				}
 //			} else {
 //				$days = floor($seconds / 86400);
-//				if ($format['avoid'] === 'avoidminutes') {
+//				if ($format['avoid'] == 'avoidminutes') {
 //					$hours = round(($seconds - $days * 86400) / 3600);
 //					if ($hours == 24) {
 //						$hours = 0;
@@ -4662,7 +4765,7 @@ public class XomwLanguage {
 //					$s = $daysMsg->params(this.formatNum($days))->text();
 //					$s .= ' ';
 //					$s .= $hoursMsg->params(this.formatNum($hours))->text();
-//				} elseif ($format['avoid'] === 'avoidseconds') {
+//				} elseif ($format['avoid'] == 'avoidseconds') {
 //					$hours = floor(($seconds - $days * 86400) / 3600);
 //					$minutes = round(($seconds - $days * 86400 - $hours * 3600) / 60);
 //					if ($minutes == 60) {
