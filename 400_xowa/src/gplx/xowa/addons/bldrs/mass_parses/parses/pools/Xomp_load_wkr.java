@@ -56,6 +56,7 @@ public class Xomp_load_wkr implements Gfo_invk {
 		, ",       pp.page_namespace"
 		, ",       pp.page_title"
 		, ",       pp.page_text_db_id"
+		, ",       pp.page_score"
 		, "FROM    xomp_page mp"
 		, "        JOIN <page_db>page pp ON mp.page_id = pp.page_id"
 		, "WHERE   mp.page_id > {0}"
@@ -80,6 +81,7 @@ public class Xomp_load_wkr implements Gfo_invk {
 				( rdr.Read_int("page_namespace")
 				, rdr.Read_bry_by_str("page_title")
 				, text_db_id
+				, rdr.Read_int("page_score")
 				);
 				list.Add(ppg);
 				text_db_loader.Add(text_db_id, ppg);

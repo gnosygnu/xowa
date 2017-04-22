@@ -122,7 +122,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 				Xoae_page wpg = Xoae_page.New(wiki, ttl);
 				wpg.Bldr__ns_ord_(ns_ord_mgr.Get_ord_by_ns_id(cur_ns));	// NOTE: must set ns_id for tier_id in lnki_temp; DATE:2016-09-19
 				wpg.Db().Text().Text_bry_(ppg.Text());
-				wpg.Db().Page().Id_(ppg.Id());
+				wpg.Db().Page().Init_by_mp(ppg.Id(), ppg.Page_score());
 
 				// parse page
 				Xop_ctx pctx = parser_mgr.Ctx();

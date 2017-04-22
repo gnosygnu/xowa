@@ -64,14 +64,12 @@ public class Gflucene_searcher_mgr {
 			IndexSearcher searcher = new IndexSearcher(reader);
 
 //			Query query = new QueryParser("body", analyzer).parse(data.query);
-			Query multi_query = MultiFieldQueryParser.parse(data.query, new String[] {"body"}, new BooleanClause.Occur []{BooleanClause.Occur.SHOULD}, analyzer);
 			
-//			Query body_query = new QueryParser("body", analyzer).parse(data.query);
-//			Query title_query = new QueryParser("title", analyzer).parse(data.query);
+			// creates query that boosts by page_score; not sure if this is needed, but 1st release of fts uses this
+			Query multi_query = MultiFieldQueryParser.parse(data.query, new String[] {"body"}, new BooleanClause.Occur []{BooleanClause.Occur.SHOULD}, analyzer);
 			FunctionQuery boost_query = new FunctionQuery(new LongFieldSource("page_score"));			
 			CustomScoreQuery query = new CustomScoreQuery(multi_query, boost_query);
  
-//			TopDocs docs = searcher.search(query, reader.maxDoc());
 			TopDocs docs = searcher.search(query, data.match_max);
 			ScoreDoc[] hits = docs.scoreDocs;
 			

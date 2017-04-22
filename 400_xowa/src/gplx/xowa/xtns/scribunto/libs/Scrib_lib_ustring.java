@@ -347,7 +347,7 @@ class Scrib_lib_ustring_gsub_mgr {
 					}
 				}
 				Keyval[] rslts = core.Interpreter().CallFunction(repl_func.Id(), luacbk_args);
-				if (rslts.length == 0)
+				if (rslts.length == 0) // will be 0 when gsub_proc returns nil; PAGE:en.d:tracer; DATE:2017-04-22
 					return false;
 				else {									// ArrayIndex check
 					Object rslt_obj = rslts[0].Val();	// 0th idx has result

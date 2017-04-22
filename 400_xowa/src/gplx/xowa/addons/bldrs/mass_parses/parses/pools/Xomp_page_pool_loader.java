@@ -62,6 +62,7 @@ public class Xomp_page_pool_loader {
 		, ",       pp.page_namespace"
 		, ",       pp.page_title"
 		, ",       pp.page_text_db_id"
+		, ",       pp.page_score"
 		, "FROM    xomp_page mp"
 		, "        JOIN <page_db>page pp ON mp.page_id = pp.page_id"
 		, "WHERE   mp.xomp_uid > {0}"
@@ -85,6 +86,7 @@ public class Xomp_page_pool_loader {
 				( rdr.Read_int("page_namespace")
 				, rdr.Read_bry_by_str("page_title")
 				, text_db_id
+				, rdr.Read_int("page_score")
 				);
 				list.Add(ppg);
 				text_db_loader.Add(text_db_id, ppg);
