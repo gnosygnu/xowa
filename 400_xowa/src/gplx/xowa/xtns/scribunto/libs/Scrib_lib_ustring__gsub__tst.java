@@ -59,6 +59,11 @@ public class Scrib_lib_ustring__gsub__tst {
 		fxt.Init__cbk(proc);
 		Exec_gsub("ab", ".", -1, proc.To_scrib_lua_proc(), "12;2");	// fails if "ab;4"
 	}
+	@Test  public void Replace__proc__empty() {	// PURPOSE:if a proc returns null, do not replace anything; PAGE:en.d:tracer; DATE:2017-04-22
+		Mock_proc__empty proc = new Mock_proc__empty(0);
+		fxt.Init__cbk(proc);
+		Exec_gsub("ab", ".", -1, proc.To_scrib_lua_proc(), "ab;0");	// fails if ";2" whic means each letter (".") replaced with null
+	}
 	@Test  public void Regx__int() {	// PURPOSE: do not fail if integer is passed in for @regx; PAGE:en.d:λύω DATE:2014-09-02
 		Exec_gsub("abcd", 1	 , -1, "A"		, "abcd;0");
 	}
@@ -110,5 +115,10 @@ class Mock_proc__number extends Mock_proc_fxt {	private int counter = 0;
 	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
 		args[0].Val_(++counter);	// set replace-val to int
 		return args;
+	}
+}
+class Mock_proc__empty extends Mock_proc_fxt {	public Mock_proc__empty(int id) {super(id, "number");}
+	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
+		return Keyval_.Ary_empty;
 	}
 }

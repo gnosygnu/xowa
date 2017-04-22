@@ -252,7 +252,8 @@ class Scrib_lib_ustring_gsub_mgr {
 			if (limit > -1 && repl_count == limit) break;
 			Regx_match rslt = rslts[i];
 			tmp_bfr.Add_str_u8(String_.Mid(text, pos, rslt.Find_bgn()));	// NOTE: regx returns char pos (not bry); must add as String, not bry; DATE:2013-07-17
-			Exec_repl_itm(tmp_bfr, repl_tid, repl_bry, text, rslt);
+			if (!Exec_repl_itm(tmp_bfr, repl_tid, repl_bry, text, rslt))	// will be false when gsub_proc returns nothing; PAGE:en.d:tracer DATE:2017-04-22
+				break;
 			pos = rslt.Find_end();
 			++repl_count;
 		}
@@ -261,7 +262,7 @@ class Scrib_lib_ustring_gsub_mgr {
 			tmp_bfr.Add_str_u8(String_.Mid(text, pos, text_len));			// NOTE: regx returns char pos (not bry); must add as String, not bry; DATE:2013-07-17
 		return tmp_bfr.To_str_and_clear();
 	}
-	private void Exec_repl_itm(Bry_bfr tmp_bfr, byte repl_tid, byte[] repl_bry, String text, Regx_match match) {
+	private boolean Exec_repl_itm(Bry_bfr tmp_bfr, byte repl_tid, byte[] repl_bry, String text, Regx_match match) {
 		switch (repl_tid) {
 			case Repl_tid_string:
 				int len = repl_bry.length;
@@ -346,7 +347,9 @@ class Scrib_lib_ustring_gsub_mgr {
 					}
 				}
 				Keyval[] rslts = core.Interpreter().CallFunction(repl_func.Id(), luacbk_args);
-				if (rslts.length > 0) {					// ArrayIndex check
+				if (rslts.length == 0)
+					return false;
+				else {									// ArrayIndex check
 					Object rslt_obj = rslts[0].Val();	// 0th idx has result
 					tmp_bfr.Add_str_u8(Object_.Xto_str_strict_or_empty(rslt_obj));	// NOTE: always convert to String; rslt_obj can be int; PAGE:en.d:seven DATE:2016-04-27
 				}
@@ -354,6 +357,7 @@ class Scrib_lib_ustring_gsub_mgr {
 			}
 			default: throw Err_.new_unhandled(repl_tid);
 		}
+		return true;
 	}
 	private static final byte Repl_tid_null = 0, Repl_tid_string = 1, Repl_tid_table = 2, Repl_tid_luacbk = 3;
 	public static final    Scrib_lib_ustring_gsub_mgr[] Ary_empty = new Scrib_lib_ustring_gsub_mgr[0];
