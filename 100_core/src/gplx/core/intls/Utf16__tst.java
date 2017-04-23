@@ -21,6 +21,7 @@ public class Utf16__tst {
 //			fxt.Test_encode_decode(162, 194, 162);				// cent
 //			fxt.Test_encode_decode(8364, 226, 130, 172);		// euro
 		fxt.Test_encode_decode(150370, 240, 164, 173, 162);	// example from [[UTF-8]]; should be encoded as two bytes
+		fxt.Test_encode_decode(143489, 240, 163, 130, 129); // EX: 駣𣂁脁 DATE:2017-04-22
 	}
 	@Test  public void Encode_as_bry_by_hex() {
 		fxt.Test_Encode_hex_to_bry("00", 0);

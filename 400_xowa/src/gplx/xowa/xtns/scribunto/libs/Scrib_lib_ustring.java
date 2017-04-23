@@ -56,7 +56,9 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		synchronized (surrogate_utl) {
 			byte[] text_bry = Bry_.new_u8(text_str); int text_bry_len = text_bry.length;
 			bgn_char_idx = Bgn_adjust(text_str, bgn_char_idx);
-			int bgn_adj = surrogate_utl.Count_surrogates__char_idx(text_bry, text_bry_len, 0, bgn_char_idx);		// NOTE: convert from lua / php charidx to java regex codepoint; PAGE:zh.w:南北鐵路 (越南) DATE:2014-08-27
+			// TOMBSTONE: do not adjust for 2-len chars (surrogates); lua always iterates correctly by chars; DATE:2017-04-23
+			// int bgn_adj = surrogate_utl.Count_surrogates__char_idx(text_bry, text_bry_len, 0, bgn_char_idx);		// NOTE: convert from lua / php charidx to java regex codepoint; PAGE:zh.w:南北鐵路 (越南) DATE:2014-08-27
+			int bgn_adj = 0;
 			int bgn_codepoint_idx = bgn_char_idx + bgn_adj;
 			int bgn_byte_pos = surrogate_utl.Byte_pos();
 			if (String_.Len_eq_0(regx))	// regx of "" should return (bgn, bgn - 1) regardless of whether plain is true or false

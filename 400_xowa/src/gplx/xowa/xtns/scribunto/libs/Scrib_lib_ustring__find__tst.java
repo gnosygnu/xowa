@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*; import gplx.xowa.xtns.scribunto.engines.mocks.*;
 public class Scrib_lib_ustring__find__tst {
-	private final Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
+	private final    Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
 	@Before public void init() {
 		fxt.Clear();
 		lib = fxt.Core().Lib_ustring().Init();
@@ -38,10 +38,11 @@ public class Scrib_lib_ustring__find__tst {
 	@Test   public void Return_int() {
 		fxt.Test__proc__kvps__vals(lib, Scrib_lib_ustring.Invk_find, Scrib_kv_utl_.base1_many_("a", "()", 2, Bool_.N), 2, 1, 2);
 	}
-	@Test  public void Surrogate() {	// PURPOSE: handle surrogates in Find PAGE:zh.w:南北鐵路_(越南); DATE:2014-08-28
-		Exec_find("aé𡼾\nbî𡼾\n"	, "\n"		, 1, Bool_.N, "4;4");				// 4 b/c \n starts at pos 4 (super 1)
-		Exec_find("aé𡼾\nbî𡼾\n"	, "\n"		, 5, Bool_.N, "8;8");				// 8 b/c \n starts at pos 8 (super 1)
-	}
+	// DELETE: no longer needed after tombstoning surrogate logic; DATE:2017-04-23
+	// @Test  public void Surrogate() {	// PURPOSE: handle surrogates in Find PAGE:zh.w:南北鐵路_(越南); DATE:2014-08-28
+	//	Exec_find("aé𡼾\nbî𡼾\n"	, "\n"		, 1, Bool_.N, "4;4");				// 4 b/c \n starts at pos 4 (super 1)
+	//	Exec_find("aé𡼾\nbî𡼾\n"	, "\n"		, 5, Bool_.N, "8;8");				// 8 b/c \n starts at pos 8 (super 1)
+	// }
 	private void Exec_find(String text, String regx, int bgn, boolean plain, String expd) {
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_find, Scrib_kv_utl_.base1_many_(text, regx, bgn, plain), expd);
 	}
