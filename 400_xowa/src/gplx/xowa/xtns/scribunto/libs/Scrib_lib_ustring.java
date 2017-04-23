@@ -107,11 +107,10 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		Regx_match[] regx_rslts = regx_adp.Match_all(text, bgn);
 		int len = regx_rslts.length;
 		if (len == 0) return rslt.Init_null();	// return null if no matches found; EX:w:Mount_Gambier_(volcano); DATE:2014-04-02; confirmed with en.d:民; DATE:2015-01-30
+
+		// TOMBSTONE: add 1st match only; do not add all; PAGE:en.d:действительное_причастие_настоящего_времени DATE:2017-04-23
 		List_adp tmp_list = List_adp_.New();
-		for (int i = 0; i < len; i++) {
-			Regx_match match = regx_rslts[i];
-			AddCapturesFromMatch(tmp_list, match, text, regx_converter.Capt_ary(), true);
-		}
+		AddCapturesFromMatch(tmp_list, regx_rslts[0], text, regx_converter.Capt_ary(), true);
 		return rslt.Init_many_list(tmp_list);
 	}
 	private Scrib_lib_ustring_gsub_mgr[] gsub_mgr_ary = Scrib_lib_ustring_gsub_mgr.Ary_empty;
@@ -180,7 +179,9 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	public static Regx_adp RegxAdp_new_(Xop_ctx ctx, String regx) {
 		Regx_adp rv = Regx_adp_.new_(regx);
 		if (rv.Pattern_is_invalid()) {
-			ctx.App().Usr_dlg().Warn_many("", "", "regx is invalid: regx=~{0} page=~{1}", regx, String_.new_u8(ctx.Page().Ttl().Page_db()));
+			// try to identify [z-a] errors; PAGE:https://en.wiktionary.org/wiki/Module:scripts/data;  DATE:2017-04-23
+			Exception exc = rv.Pattern_is_invalid_exception();
+			ctx.App().Usr_dlg().Warn_many("", "", "regx is invalid: regx=~{0} page=~{1} exc={2}", regx, ctx.Page().Ttl().Page_db(), Err_.Message_gplx_log(exc));
 		}
 		return rv;
 	}

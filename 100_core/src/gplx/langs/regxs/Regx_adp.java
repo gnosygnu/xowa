@@ -20,6 +20,7 @@ public class Regx_adp {
 	@gplx.Internal protected Regx_adp(String regx) {Pattern_(regx);}
 	public String Pattern() {return pattern;} public Regx_adp Pattern_(String val) {pattern = val; Under_sync(); return this;} private String pattern;
 	public boolean Pattern_is_invalid() {return pattern_is_invalid;} private boolean pattern_is_invalid = false;
+	public Exception Pattern_is_invalid_exception() {return pattern_is_invalid_exception;} private Exception pattern_is_invalid_exception = null;
 	public Regx_match[] Match_all(String text, int bgn) {
 		int idx = bgn;
 		List_adp rv = List_adp_.New();
@@ -39,10 +40,11 @@ public class Regx_adp {
 	}
 		private Pattern under;
 	public Pattern Under() {return under;}
-	void Under_sync() {
+	private void Under_sync() {
 		try {under = Pattern.compile(pattern, Pattern.DOTALL | Pattern.UNICODE_CHARACTER_CLASS);}	// JRE.7:UNICODE_CHARACTER_CLASS; added during %w fix for en.w:A#; DATE:2015-06-10 
 		catch (Exception e) {	// NOTE: if invalid, then default to empty pattern (which should return nothing); EX:d:〆る generates [^]; DATE:2013-10-20
 			pattern_is_invalid = true;
+			pattern_is_invalid_exception = e;
 			under = Pattern.compile("", Pattern.DOTALL | Pattern.UNICODE_CHARACTER_CLASS);
 		}
 	}
