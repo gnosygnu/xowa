@@ -59,10 +59,15 @@ public class Scrib_lib_ustring__gsub__tst {
 		fxt.Init__cbk(proc);
 		Exec_gsub("ab", ".", -1, proc.To_scrib_lua_proc(), "12;2");	// fails if "ab;4"
 	}
-	@Test  public void Replace__proc__empty() {	// PURPOSE:if a proc returns null, do not replace anything; PAGE:en.d:tracer; DATE:2017-04-22
-		Mock_proc__empty proc = new Mock_proc__empty(0);
+	@Test  public void Replace__proc__empty__once() {	// PURPOSE:if a proc returns null, do not replace anything; PAGE:en.d:tracer; DATE:2017-04-22
+		Mock_proc__empty proc = new Mock_proc__empty(0, "z", "Z");
 		fxt.Init__cbk(proc);
-		Exec_gsub("ab", ".", -1, proc.To_scrib_lua_proc(), "ab;0");	// fails if ";2" whic means each letter (".") replaced with null
+		Exec_gsub("ab", ".", -1, proc.To_scrib_lua_proc(), "ab;2");	// fails if ";2" whic means each letter (".") replaced with null
+	}
+	@Test  public void Replace__proc__empty__many() {	// PURPOSE:replace all matches, not just first; PAGE:en.d:שלום; DATE:2017-04-24
+		Mock_proc__empty proc = new Mock_proc__empty(0, "a", "A");
+		fxt.Init__cbk(proc);
+		Exec_gsub("aba", ".", -1, proc.To_scrib_lua_proc(), "AbA;3");	// fails if "Aba;3" whic means each that A was only matched once
 	}
 	@Test  public void Regx__int() {	// PURPOSE: do not fail if integer is passed in for @regx; PAGE:en.d:λύω DATE:2014-09-02
 		Exec_gsub("abcd", 1	 , -1, "A"		, "abcd;0");
@@ -117,8 +122,13 @@ class Mock_proc__number extends Mock_proc_fxt {	private int counter = 0;
 		return args;
 	}
 }
-class Mock_proc__empty extends Mock_proc_fxt {	public Mock_proc__empty(int id) {super(id, "number");}
+class Mock_proc__empty extends Mock_proc_fxt {	private final    String find, repl;
+	public Mock_proc__empty(int id, String find, String repl) {super(id, "number");
+		this.find = find;
+		this.repl = repl;
+	}
 	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
-		return Keyval_.Ary_empty;
+		String text = args[0].Val_to_str_or_empty();
+		return String_.Eq(text, find) ? Keyval_.Ary(Keyval_.new_("0", repl)) : Keyval_.Ary_empty;
 	}
 }

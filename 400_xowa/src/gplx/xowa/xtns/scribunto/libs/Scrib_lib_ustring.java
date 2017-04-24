@@ -255,8 +255,9 @@ class Scrib_lib_ustring_gsub_mgr {
 			if (limit > -1 && repl_count == limit) break;
 			Regx_match rslt = rslts[i];
 			tmp_bfr.Add_str_u8(String_.Mid(text, pos, rslt.Find_bgn()));	// NOTE: regx returns char pos (not bry); must add as String, not bry; DATE:2013-07-17
-			if (!Exec_repl_itm(tmp_bfr, repl_tid, repl_bry, text, rslt))	// will be false when gsub_proc returns nothing; PAGE:en.d:tracer DATE:2017-04-22
-				break;
+			if (!Exec_repl_itm(tmp_bfr, repl_tid, repl_bry, text, rslt)) {	// will be false when gsub_proc returns nothing; PAGE:en.d:tracer DATE:2017-04-22
+				tmp_bfr.Add_str_u8(String_.Mid(text, rslt.Find_bgn(), rslt.Find_end()));
+			}
 			pos = rslt.Find_end();
 			++repl_count;
 		}
