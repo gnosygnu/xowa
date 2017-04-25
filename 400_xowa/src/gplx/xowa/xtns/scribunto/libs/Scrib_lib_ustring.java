@@ -56,13 +56,16 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		synchronized (surrogate_utl) {
 			byte[] text_bry = Bry_.new_u8(text_str); int text_bry_len = text_bry.length;
 			bgn_char_idx = Bgn_adjust(text_str, bgn_char_idx);
-			// TOMBSTONE: do not adjust for 2-len chars (surrogates); lua always iterates correctly by chars; DATE:2017-04-23
-			// int bgn_adj = surrogate_utl.Count_surrogates__char_idx(text_bry, text_bry_len, 0, bgn_char_idx);		// NOTE: convert from lua / php charidx to java regex codepoint; PAGE:zh.w:南北鐵路 (越南) DATE:2014-08-27
-			int bgn_adj = 0;
+
+			// regx of "" should return (bgn, bgn - 1) regardless of whether plain is true or false;
+			// NOTE: do not include surrogate calc; PAGE:en.d:佻 DATE:2017-04-24
+			if (String_.Len_eq_0(regx))	// regx of "" should return (bgn, bgn - 1) regardless of whether plain is true or false
+				return rslt.Init_many_objs(bgn_char_idx + Scrib_lib_ustring.Base1, bgn_char_idx + Scrib_lib_ustring.Base1 - 1);
+
+			// NOTE: adjust for 2-len chars (surrogates); PAGE:en.d:iglesia DATE:2017-04-23
+			int bgn_adj = surrogate_utl.Count_surrogates__char_idx(text_bry, text_bry_len, 0, bgn_char_idx);		// NOTE: convert from lua / php charidx to java regex codepoint; PAGE:zh.w:南北鐵路 (越南) DATE:2014-08-27
 			int bgn_codepoint_idx = bgn_char_idx + bgn_adj;
 			int bgn_byte_pos = surrogate_utl.Byte_pos();
-			if (String_.Len_eq_0(regx))	// regx of "" should return (bgn, bgn - 1) regardless of whether plain is true or false
-				return rslt.Init_many_objs(bgn_codepoint_idx + Scrib_lib_ustring.Base1, bgn_codepoint_idx + Scrib_lib_ustring.Base1 - 1);
 			if (plain) {
 				int pos = String_.FindFwd(text_str, regx, bgn_codepoint_idx);
 				boolean found = pos != Bry_find_.Not_found;
@@ -255,7 +258,7 @@ class Scrib_lib_ustring_gsub_mgr {
 			if (limit > -1 && repl_count == limit) break;
 			Regx_match rslt = rslts[i];
 			tmp_bfr.Add_str_u8(String_.Mid(text, pos, rslt.Find_bgn()));	// NOTE: regx returns char pos (not bry); must add as String, not bry; DATE:2013-07-17
-			if (!Exec_repl_itm(tmp_bfr, repl_tid, repl_bry, text, rslt)) {	// will be false when gsub_proc returns nothing; PAGE:en.d:tracer DATE:2017-04-22
+			if (!Exec_repl_itm(tmp_bfr, repl_tid, repl_bry, text, rslt)) {	// will be false when gsub_proc returns nothing; PAGE:en.d:tracer PAGE:en.d:שלום DATE:2017-04-22;
 				tmp_bfr.Add_str_u8(String_.Mid(text, rslt.Find_bgn(), rslt.Find_end()));
 			}
 			pos = rslt.Find_end();
