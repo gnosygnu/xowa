@@ -35,7 +35,7 @@ public abstract class Percentile_select_base {	// SELECT * FROM x ORDER BY y LIM
 					rdr = Rdr__term(rdr);
 					Rng__update(rdr_found);
 					boolean found_enough = Found_enough();
-					boolean none_left = rng.Score_bgn() == 0;
+					boolean none_left = rng.Score_end() == 0; // search is done when score_end == 0; note that this is set in Percentile_rng; DATE:2017-04-24
 					Rdr__done(found_enough, none_left);
 					if (found_enough || none_left)
 						break;

@@ -74,7 +74,14 @@ public class Percentile_rng {
 	private void Rng_len_(boolean first) {
 		score_end = score_bgn + (first ? 1 : 0);	// + 1 to include rows with scores at max; EX: > 999,998 AND < 1,000,001
 		score_bgn = score_end - score_len;
-		if (score_bgn < 0) score_bgn = 0;			// make sure score is not negative
+
+		// note that score_bgn will be first to go negative; EX: (2,000 : 12,000) -> (-8,000 : 2,000) -> (0 : 2,000) -> search still run for 0 - 2000; DATE:2017-04-24
+		if (score_bgn < 0)
+			score_bgn = 0;
+
+		// note that score_end will go to 0 only at end of lookup; EX: (0 : 2,000) -> (-10,000 : -8,000) -> (0 : 0) -> search will not be run; DATE:2017-04-24
+		if (score_end < 0)
+			score_end = 0;
 	}
 	@gplx.Internal protected static int Calc_score_unit(int total_needed, long total_max, int score_max) {// TEST:
 		int rv = (int)Math_.Ceil(Math_.Div_safe_as_double(total_needed, Math_.Div_safe_as_double(total_max, score_max)));	// EX: 100 needed / (16 M / 1 M) -> 7 units to fill 100
