@@ -184,7 +184,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		if (rv.Pattern_is_invalid()) {
 			// try to identify [z-a] errors; PAGE:https://en.wiktionary.org/wiki/Module:scripts/data;  DATE:2017-04-23
 			Exception exc = rv.Pattern_is_invalid_exception();
-			ctx.App().Usr_dlg().Warn_many("", "", "regx is invalid: regx=~{0} page=~{1} exc={2}", regx, ctx.Page().Ttl().Page_db(), Err_.Message_gplx_log(exc));
+			ctx.App().Usr_dlg().Log_many("", "", "regx is invalid: regx=~{0} page=~{1} exc=~{2}", regx, ctx.Page().Ttl().Page_db(), Err_.Message_gplx_log(exc));
 		}
 		return rv;
 	}

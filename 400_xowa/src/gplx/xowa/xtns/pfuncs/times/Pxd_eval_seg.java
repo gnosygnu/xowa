@@ -42,7 +42,7 @@ class Pxd_eval_year {
 		Pxd_itm_int itm_0 = Pxd_itm_int_.CastOrNull(data_ary[0]);
 		Pxd_itm_int itm_1 = Pxd_itm_int_.CastOrNull(data_ary[1]);
 		if (itm_0 == null || itm_1 == null) return;				// 0 or 1 is not an int;
-		if (itm_1.Val() > 13) {
+		if (itm_1.Val() > 12) { // if itm_1 is > 12 then can't be month; must be day; PAGE:en.d:tongue-in-chic DATE:2017-04-25
 			if (!Pxd_eval_seg.Eval_as_m(tctx, itm_0)) return;
 			if (!Pxd_eval_seg.Eval_as_d(tctx, itm_1)) return;						
 		}

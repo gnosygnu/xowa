@@ -35,6 +35,7 @@ public class Pft_func_time__basic__tst {
 	@Test   public void Utc_ym()				{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|201201}}"							, "2012-01-02");}	// PURPOSE: default to today's date
 	@Test   public void Utc_md()				{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|2-13}}"								, "2012-02-13");}	// PURPOSE.fix: m-d failed
 	@Test   public void Slashes()				{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|2/13/12}}"							, "2012-02-13");}	// PURPOSE: assert slashes work
+	@Test   public void Slashes_yyyy()			{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|2/13/2012}}"						, "2012-02-13");}	// PURPOSE: assert slashes work with yyyy; DATE:2017-04-25
 	@Test   public void Utc_day()				{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|March 27}}"							, "2012-03-27");}
 	@Test   public void Parse_day()				{fxt.Test_parse_tmpl_str("{{#time:m d|March 27}}"							, "03 27");}
 	@Test   public void Month_name()			{fxt.Test_parse_tmpl_str("{{#time:M|May 1 2012}}"							, "May");}
