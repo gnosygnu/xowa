@@ -39,7 +39,6 @@ public class Xop_wiki_setup_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		html_wtr.Write_tkn_to_html(bfr, ctx, hctx, root.Root_src(), xnde, Xoh_html_wtr.Sub_idx_null, root);
-//			
 	}
 
 	public Xop_root_tkn Xtn_root()	{throw Err_.new_unimplemented_w_msg("xowa_wiki_setup.xtn_root should not be called");}

@@ -46,16 +46,17 @@ class Xop_wiki_setup_mgr {
 	private Xows_task_itm[] Make_task_ary(Bry_bfr url_list_bfr, byte[] wiki_domain) {
 		Xobc_task_regy_itm[] task_rows = data_db.Tbl__task_regy().Select_by_wiki(wiki_domain);
 		int len = task_rows.length;
-		Xows_task_itm[] rv = new Xows_task_itm[len];
+		List_adp list = List_adp_.New();
 		for (int i = 0; i < len; ++i) {
 			Xobc_task_regy_itm task_row = task_rows[i];
+			if (task_row.Seqn() == 999990) continue; // ignore 999990 archive rows for en.w; DATE:2017-04-26
 			Xobc_task_key task_key = Xobc_task_key.To_itm(String_.new_u8(task_row.Key()));
 			String task_key_type = task_key.Task_type_ui();
 			Xows_file_itm[] files = Make_file_ary(url_list_bfr, wiki_domain, task_row.Id());
-			rv[i] = new Xows_task_itm(task_row.Seqn(), wiki_domain, task_row.Name(), Bry_.new_u8(task_key_type), Bry_.new_u8(task_key.Wiki_date_ui()), files);
+			list.Add(new Xows_task_itm(task_row.Seqn(), wiki_domain, task_row.Name(), Bry_.new_u8(task_key_type), Bry_.new_u8(task_key.Wiki_date_ui()), files));
 		}
-		Array_.Sort(rv, new Xows_task_itm_sorter());
-		return rv;
+		list.Sort_by(new Xows_task_itm_sorter());			
+		return (Xows_task_itm[])list.To_ary_and_clear(Xows_task_itm.class);
 	}
 	private Xows_file_itm[] Make_file_ary(Bry_bfr url_list_bfr, byte[] wiki_domain, int task_id) {
 		Xobc_import_step_itm[] rows = data_db.Tbl__import_step().Select_by_task_id(task_id);
