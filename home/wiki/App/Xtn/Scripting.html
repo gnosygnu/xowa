@@ -34,6 +34,9 @@
     <p>
       XOWA allows custom scripts to run on XOWA pages
     </p>
+    <p>
+      <br>
+    </p>
     <table class="metadata plainlinks ambox ambox-delete" style="">
       <tr>
         <td class="mbox-empty-cell">
@@ -95,13 +98,13 @@
       </ul>
     </div>
     <h2>
-      <span class="mw-headline" id="Options">Options</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Xtn/Scripting?action=edit&amp;section_key=Options" title="Edit section: Options" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Options">Options</span>
     </h2>
     <p>
       The options page is at <a href="http://xowa.org/home/wiki/Options/Scripting.html" id="xolnki_2" title="Options/Scripting">Options/Scripting</a>
     </p>
     <h2>
-      <span class="mw-headline" id="Background">Background</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Xtn/Scripting?action=edit&amp;section_key=Background" title="Edit section: Background" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Background">Background</span>
     </h2>
     <ul>
       <li>
@@ -121,7 +124,7 @@
       However, if you want a simpler approach, XOWA does allow an extension system by adding javascript / lua files
     </p>
     <h2>
-      <span class="mw-headline" id="Overview">Overview</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Xtn/Scripting?action=edit&amp;section_key=Overview" title="Edit section: Overview" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Overview">Overview</span>
     </h2>
     <p>
       The following process is involved:
@@ -141,10 +144,10 @@
       </li>
     </ul>
     <h2>
-      <span class="mw-headline" id="Javascript">Javascript</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Xtn/Scripting?action=edit&amp;section_key=Javascript" title="Edit section: Javascript" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Javascript">Javascript</span>
     </h2>
     <h3>
-      <span class="mw-headline" id="xowa.script.main.js">xowa.script.main.js</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Xtn/Scripting?action=edit&amp;section_key=xowa.script.main.js" title="Edit section: xowa.script.main.js" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="xowa.script.main.js">xowa.script.main.js</span>
     </h3>
 <pre>
 /*
@@ -166,7 +169,7 @@ function xoscript__main(xo) {
 }
 </pre>
     <h3>
-      <span class="mw-headline" id="example.main.js">example.main.js</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Xtn/Scripting?action=edit&amp;section_key=example.main.js" title="Edit section: example.main.js" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="example.main.js">example.main.js</span>
     </h3>
 <pre>
 /*
@@ -262,7 +265,7 @@ function xoscript__page_write_end(page)
 }
 </pre>
     <h3>
-      <span class="mw-headline" id="example.util.js">example.util.js</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Xtn/Scripting?action=edit&amp;section_key=example.util.js" title="Edit section: example.util.js" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="example.util.js">example.util.js</span>
     </h3>
 <pre>
 function xo_uppercase(s) {
@@ -270,7 +273,7 @@ function xo_uppercase(s) {
 }
 </pre>
     <h3>
-      <span class="mw-headline" id="example.include.js">example.include.js</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Xtn/Scripting?action=edit&amp;section_key=example.include.js" title="Edit section: example.include.js" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="example.include.js">example.include.js</span>
     </h3>
 <pre>
 var content = document.getElementById("content");
@@ -281,10 +284,10 @@ if ( h1Elements.length != 0 ) {
 }
 </pre>
     <h2>
-      <span class="mw-headline" id="Lua">Lua</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Xtn/Scripting?action=edit&amp;section_key=Lua" title="Edit section: Lua" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Lua">Lua</span>
     </h2>
     <h3>
-      <span class="mw-headline" id="example.main.lua">example.main.lua</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Xtn/Scripting?action=edit&amp;section_key=example.main.lua" title="Edit section: example.main.lua" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="example.main.lua">example.main.lua</span>
     </h3>
 <pre>
 function xoscript__init(env)
@@ -296,7 +299,7 @@ function xoscript__page_write_end(page)
 end
 </pre>
     <h3>
-      <span class="mw-headline" id="example.util.lua">example.util.lua</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Xtn/Scripting?action=edit&amp;section_key=example.util.lua" title="Edit section: example.util.lua" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="example.util.lua">example.util.lua</span>
     </h3>
 <pre>
 function xo_uppercase(s)

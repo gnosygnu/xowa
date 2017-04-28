@@ -34,6 +34,9 @@
     <p>
       XOWA can generate two types of dumps: file-dumps and html-dumps
     </p>
+    <p>
+      <br>
+    </p>
     <table class="metadata plainlinks ambox ambox-delete" style="">
       <tr>
         <td class="mbox-empty-cell">
@@ -116,7 +119,7 @@
       </ul>
     </div>
     <h2>
-      <span class="mw-headline" id="Overview">Overview</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=Overview" title="Edit section: Overview" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Overview">Overview</span>
     </h2>
     <p>
       The download-thumbs script downloads all thumbs for pages in a specific wiki. It works in the following way:
@@ -155,10 +158,10 @@
       The script for simple wikipedia is listed below.
     </p>
     <h2>
-      <span class="mw-headline" id="Requirements">Requirements</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=Requirements" title="Edit section: Requirements" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Requirements">Requirements</span>
     </h2>
     <h3>
-      <span class="mw-headline" id="commons.wikimedia.org">commons.wikimedia.org</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=commons.wikimedia.org" title="Edit section: commons.wikimedia.org" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="commons.wikimedia.org">commons.wikimedia.org</span>
     </h3>
     <p>
       You will need the latest version of commons.wikimedia.org. Note that if you have an older version, you will have missing images or wrong size information.
@@ -167,13 +170,13 @@
       For example, if you have a commons.wikimedia.org from 2015-04-22 and are trying to import a 2015-05-17 English Wikipedia, then any new images added after 2015-04-22 will not be picked up.
     </p>
     <h3>
-      <span class="mw-headline" id="www.wikidata.org">www.wikidata.org</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=www.wikidata.org" title="Edit section: www.wikidata.org" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="www.wikidata.org">www.wikidata.org</span>
     </h3>
     <p>
       You also need to have the latest version of www.wikidata.org. Note that English Wikipedia and other wikis uses Wikidata through the {{#property}} call or Module code. If you have an earlier version, then data will be missing or out of date.
     </p>
     <h3>
-      <span class="mw-headline" id="Hardware">Hardware</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=Hardware" title="Edit section: Hardware" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Hardware">Hardware</span>
     </h3>
     <p>
       You should have a recent-generation machine with relatively high-performance hardware, especially if you're planning to generate images for English Wikipedia.
@@ -202,7 +205,7 @@
       For English Wikipedia, it still takes about 50 hours for the entire process.
     </p>
     <h3>
-      <span class="mw-headline" id="Internet-connectivity_.28optional.29">Internet-connectivity (optional)</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=Internet-connectivity_.28optional.29" title="Edit section: Internet-connectivity_.28optional.29" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Internet-connectivity_.28optional.29">Internet-connectivity (optional)</span>
     </h3>
     <p>
       You should have a broadband connection to the internet. The script will need to download dump files from Wikimedia and some dump files (like English Wikipedia) will be in the 10s of GB.
@@ -211,7 +214,7 @@
       You can opt to download these files separately and place them in the appropriate location beforehand. However, the script below assumes that the machine is always online. If you are offline, you will need to comment the "util.download" lines yourself.
     </p>
     <h3>
-      <span class="mw-headline" id="Pre-existing_image_databases_for_your_wiki_.28optional.29">Pre-existing image databases for your wiki (optional)</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=Pre-existing_image_databases_for_your_wiki_.28optional.29" title="Edit section: Pre-existing_image_databases_for_your_wiki_.28optional.29" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Pre-existing_image_databases_for_your_wiki_.28optional.29">Pre-existing image databases for your wiki (optional)</span>
     </h3>
     <p>
       XOWA will automatically re-use the images from existing image databases so that you do not have to redownload them. This is particularly useful for large wikis where redownloading millions of images would be unwanted.
@@ -228,7 +231,7 @@
       </li>
     </ul>
     <h2>
-      <span class="mw-headline" id="gfs">gfs</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=gfs" title="Edit section: gfs" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="gfs">gfs</span>
     </h2>
     <p>
       The script is written in the <code>gfs</code> format. This is a custom scripting format specific to XOWA. It is similar to JSON, but also supports commenting.
@@ -263,16 +266,16 @@
       </li>
     </ul>
     <h2>
-      <span class="mw-headline" id="Terms">Terms</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=Terms" title="Edit section: Terms" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Terms">Terms</span>
     </h2>
     <h3>
-      <span class="mw-headline" id="lnki">lnki</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=lnki" title="Edit section: lnki" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="lnki">lnki</span>
     </h3>
     <p>
       A <code>lnki</code> is short for "<b>l</b>i<b>nk</b> <b>i</b>nternal". It refers to all wikitext with the double bracket syntax: [[A]]. A more elaborate example for files would be [[File:A.png|thumb|200x300px|upright=.80]]. Note that the abbreviation was chosen to differentiate it from <code>lnke</code> which is short for "<b>l</b>i<b>nk</b> <b>e</b>nternal". For the purposes of the script, all lnki data comes from the current wiki's data dump
     </p>
     <h3>
-      <span class="mw-headline" id="orig">orig</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=orig" title="Edit section: orig" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="orig">orig</span>
     </h3>
     <ul>
       <li>
@@ -280,7 +283,7 @@
       </li>
     </ul>
     <h3>
-      <span class="mw-headline" id="xfer">xfer</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=xfer" title="Edit section: xfer" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="xfer">xfer</span>
     </h3>
     <ul>
       <li>
@@ -288,7 +291,7 @@
       </li>
     </ul>
     <h3>
-      <span class="mw-headline" id="fsdb">fsdb</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=fsdb" title="Edit section: fsdb" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="fsdb">fsdb</span>
     </h3>
     <ul>
       <li>
@@ -299,7 +302,7 @@
       <br>
     </p>
     <h2>
-      <span class="mw-headline" id="Script:_Simple_Wikipedia_example_with_documentation">Script: Simple Wikipedia example with documentation</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=Script:_Simple_Wikipedia_example_with_documentation" title="Edit section: Script:_Simple_Wikipedia_example_with_documentation" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Script:_Simple_Wikipedia_example_with_documentation">Script: Simple Wikipedia example with documentation</span>
     </h2>
 <pre class='code'>
 app.bldr.pause_at_end_('n');
@@ -493,7 +496,7 @@ app.bldr.cmds {
 app.bldr.run;
 </pre>
     <h2>
-      <span class="mw-headline" id="Script:_gnosygnu.27s_actual_English_Wikipedia_script_.28dirty.3B_provided_for_reference_only.29">Script: gnosygnu's actual English Wikipedia script (dirty; provided for reference only)</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=Script:_gnosygnu.27s_actual_English_Wikipedia_script_.28dirty.3B_provided_for_reference_only.29" title="Edit section: Script:_gnosygnu.27s_actual_English_Wikipedia_script_.28dirty.3B_provided_for_reference_only.29" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Script:_gnosygnu.27s_actual_English_Wikipedia_script_.28dirty.3B_provided_for_reference_only.29">Script: gnosygnu's actual English Wikipedia script (dirty; provided for reference only)</span>
     </h2>
 <pre class='code'>
 app.bldr.pause_at_end_('n');
@@ -620,7 +623,7 @@ app.bldr.cmds {
 app.bldr.run;
 </pre>
     <h2>
-      <span class="mw-headline" id="Change_log">Change log</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dev/Command-line/Dumps?action=edit&amp;section_key=Change_log" title="Edit section: Change_log" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Change_log">Change log</span>
     </h2>
     <ul>
       <li>

@@ -58,7 +58,7 @@
       </ul>
     </div>
     <h2>
-      <span class="mw-headline" id="Overview">Overview</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Search/Score?action=edit&amp;section_key=Overview" title="Edit section: Overview" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Overview">Overview</span>
     </h2>
     <p>
       From a broad perspective, the following happens:
@@ -81,13 +81,13 @@
       <br>
     </p>
     <h2>
-      <span class="mw-headline" id="Scaling_.2F_Ranking">Scaling / Ranking</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Search/Score?action=edit&amp;section_key=Scaling_.2F_Ranking" title="Edit section: Scaling_.2F_Ranking" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Scaling_.2F_Ranking">Scaling / Ranking</span>
     </h2>
     <p>
       XOWA uses "scaling" and "ranking" at various stages to calculate the score.
     </p>
     <h3>
-      <span class="mw-headline" id="Scaling">Scaling</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Search/Score?action=edit&amp;section_key=Scaling" title="Edit section: Scaling" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Scaling">Scaling</span>
     </h3>
     <p>
       A simplified definition of scaling is converting a number from one range to another range based on proportion. For a more thorough definition, see <a href="https://en.wikipedia.org/wiki/Feature_scaling" rel="nofollow" class="external text">the Wikipedia page on feature scaling</a>
@@ -120,7 +120,7 @@ newScore = \frac{oldScore - \text{min}(oldRange)} {\text{max}(oldRange)-\text{mi
 </span>
     </p>
     <h3>
-      <span class="mw-headline" id="Ranking">Ranking</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Search/Score?action=edit&amp;section_key=Ranking" title="Edit section: Ranking" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Ranking">Ranking</span>
     </h3>
     <p>
       A simplified definition of ranking is assigning a number based on its order in a population of numbers. For those familiar with a school setting, this is "grading on a curve". For a more thorough definition, see <a href="https://en.wikipedia.org/wiki/Percentile_rank" rel="nofollow" class="external text">the Wikipedia page on percentile ranks</a>
@@ -213,10 +213,10 @@ newScore = \frac{oldScore - \text{min}(oldRange)} {\text{max}(oldRange)-\text{mi
       <br>
     </p>
     <h2>
-      <span class="mw-headline" id="Calculation">Calculation</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Search/Score?action=edit&amp;section_key=Calculation" title="Edit section: Calculation" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Calculation">Calculation</span>
     </h2>
     <h3>
-      <span class="mw-headline" id="PageRank">PageRank</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Search/Score?action=edit&amp;section_key=PageRank" title="Edit section: PageRank" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="PageRank">PageRank</span>
     </h3>
     <p>
       The basis of XOWA's page score is <a href="https://en.wikipedia.org/wiki/PageRank" rel="nofollow" class="external text">PageRank</a>.
@@ -239,7 +239,7 @@ newScore = \frac{oldScore - \text{min}(oldRange)} {\text{max}(oldRange)-\text{mi
       After XOWA calculates the PageRank, XOWA then scales this score in a range of 0 to 1,000,000
     </p>
     <h3>
-      <span class="mw-headline" id="Short_pages_are_penalized">Short pages are penalized</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Search/Score?action=edit&amp;section_key=Short_pages_are_penalized" title="Edit section: Short_pages_are_penalized" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Short_pages_are_penalized">Short pages are penalized</span>
     </h3>
     <p>
       XOWA penalizes short pages. This reduces the effect of small stub pages which are linked to by many articles, but mostly from boilerplate navigation boxes.
@@ -265,7 +265,7 @@ newScore = \frac{oldScore - \text{min}(oldRange)} {\text{max}(oldRange)-\text{mi
       Note that this calculation is an ad-hoc creation and will probably change in the future.
     </p>
     <h3>
-      <span class="mw-headline" id="Scores_are_re-scaled">Scores are re-scaled</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/App/Search/Score?action=edit&amp;section_key=Scores_are_re-scaled" title="Edit section: Scores_are_re-scaled" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Scores_are_re-scaled">Scores are re-scaled</span>
     </h3>
     <p>
       The final step is to take the modified score and rank it from 0 to 1,000,000. Note that this final score is an integer (not a decimal / float)

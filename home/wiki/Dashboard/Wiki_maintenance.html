@@ -48,7 +48,7 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <h2>
-      <span class="mw-headline" id="Instructions">Instructions</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dashboard/Wiki_maintenance?action=edit&amp;section_key=Instructions" title="Edit section: Instructions" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Instructions">Instructions</span>
     </h2>
     <ul>
       <li>
@@ -68,14 +68,17 @@
       </li>
     </ul>
     <h2>
-      <span class="mw-headline" id="XOWA_App">XOWA App</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dashboard/Wiki_maintenance?action=edit&amp;section_key=XOWA_App" title="Edit section: XOWA_App" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="XOWA_App">XOWA App</span>
     </h2>
     <p>
       <a href="https://github.com/gnosygnu/xowa/releases/" rel="nofollow" class="external text">Check online for the latest version</a>
     </p>
     <h2>
-      <span class="mw-headline" id="Wikis">Wikis</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dashboard/Wiki_maintenance?action=edit&amp;section_key=Wikis" title="Edit section: Wikis" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
-    </h2><button class='options_button' accesskey='u' id='xowa_update_dump_status' onclick='return update_dump_status();'>Update Dump Status</button><sup id="cite_ref-update_dump_status_0-0" class="reference"><a href="#cite_note-update_dump_status-0">[1]</a></sup> <a href="http://dumps.wikimedia.org/backup-index.html" rel="nofollow" class="external text">Dump server wiki status</a> 
+      <span class="mw-headline" id="Wikis">Wikis</span>
+    </h2>
+    <p>
+      <button class='options_button' accesskey='u' id='xowa_update_dump_status' onclick='return update_dump_status();'>Update Dump Status</button><sup id="cite_ref-update_dump_status_0-0" class="reference"><a href="#cite_note-update_dump_status-0">[1]</a></sup> <a href="http://dumps.wikimedia.org/backup-index.html" rel="nofollow" class="external text">Dump server wiki status</a>
+    </p>
     <table class='wikitable sortable'>
       <tr>
         <th>
@@ -120,10 +123,10 @@
           commons.wikimedia.org
         </td>
         <td class='cell_center'>
-          y
+          n
         </td>
         <td class='cell_center'>
-          2017-03-08
+          2017-04-07
         </td>
         <td class='cell_center'>
           2017-03-20
@@ -189,10 +192,10 @@
           en.wikipedia.org
         </td>
         <td class='cell_center'>
-          y
+          n
         </td>
         <td class='cell_center'>
-          2017-03-08
+          2017-04-07
         </td>
         <td class='cell_center'>
           2017-03-20
@@ -252,6 +255,41 @@
         </td>
         <td class='cell_center'>
           <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("en.wikivoyage.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          en.wiktionary.org
+        </td>
+        <td class='cell_center'>
+          n
+        </td>
+        <td class='cell_center'>
+          2017-04-01
+        </td>
+        <td class='cell_center'>
+          2017-03-20
+        </td>
+        <td class='cell_center'>
+          Dump complete
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v0
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("en.wiktionary.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("en.wiktionary.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("en.wiktionary.org")'>Search</button>
         </td>
       </tr>
       <tr>
@@ -328,10 +366,10 @@
           simple.wikipedia.org
         </td>
         <td class='cell_center'>
-          y
+          n
         </td>
         <td class='cell_center'>
-          1969-12-31
+          2017-04-01
         </td>
         <td class='cell_center'>
           2017-03-20
@@ -340,13 +378,13 @@
           Dump complete
         </td>
         <td class='cell_center'>
-          xdat
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v0
         </td>
         <td class='cell_center'>
           v1
-        </td>
-        <td class='cell_center'>
-          v2
         </td>
         <td class='cell_center'>
           <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("simple.wikipedia.org")'>Import</button>
@@ -394,47 +432,13 @@
       </tr>
       <tr>
         <td>
-          simple2.wikipedia.org
+          www.wikidata.org
         </td>
         <td class='cell_center'>
           n
         </td>
         <td class='cell_center'>
-          2016-12-01
-        </td>
-        <td class='cell_center'>
-        </td>
-        <td class='cell_center'>
-          &lt;&lt;NULL&gt;&gt;
-        </td>
-        <td class='cell_center'>
-          sqlite3
-        </td>
-        <td class='cell_center'>
-          v0
-        </td>
-        <td class='cell_center'>
-          v1
-        </td>
-        <td class='cell_center'>
-          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("simple2.wikipedia.org")'>Import</button>
-        </td>
-        <td class='cell_center'>
-          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("simple2.wikipedia.org")'>Category</button>
-        </td>
-        <td class='cell_center'>
-          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("simple2.wikipedia.org")'>Search</button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          www.wikidata.org
-        </td>
-        <td class='cell_center'>
-          y
-        </td>
-        <td class='cell_center'>
-          2017-03-07
+          2017-04-07
         </td>
         <td class='cell_center'>
           2017-03-20
@@ -461,9 +465,44 @@
           <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("www.wikidata.org")'>Search</button>
         </td>
       </tr>
+      <tr>
+        <td>
+          zh.wikipedia.org
+        </td>
+        <td class='cell_center'>
+          y
+        </td>
+        <td class='cell_center'>
+          2016-12-02
+        </td>
+        <td class='cell_center'>
+          2017-03-20
+        </td>
+        <td class='cell_center'>
+          Dump complete
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v0
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("zh.wikipedia.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("zh.wikipedia.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("zh.wikipedia.org")'>Search</button>
+        </td>
+      </tr>
     </table>
     <h2>
-      <span class="mw-headline" id="Script">Script</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dashboard/Wiki_maintenance?action=edit&amp;section_key=Script" title="Edit section: Script" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Script">Script</span>
     </h2>
     <p>
       <button class='options_button' accesskey='r' id='xowa_run_script' onclick='return run_script();'>Run Script</button> 
@@ -471,7 +510,7 @@
 </textarea>
     </p>
     <h2>
-      <span class="mw-headline" id="Usage_notes">Usage notes</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Dashboard/Wiki_maintenance?action=edit&amp;section_key=Usage_notes" title="Edit section: Usage_notes" class="xowa-hover-off">edit</a><span class="mw-editsection-bracket">]</span></span>
+      <span class="mw-headline" id="Usage_notes">Usage notes</span>
     </h2>
     <ol class="references">
       <li id="cite_note-update_dump_status-0">
