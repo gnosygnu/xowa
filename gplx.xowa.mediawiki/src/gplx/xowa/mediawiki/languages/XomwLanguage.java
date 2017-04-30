@@ -47,7 +47,7 @@ public class XomwLanguage {
 //		/**
 //		* @var LocalisationCache
 //		*/
-//		static public $dataCache;
+//		static public $dataCache; // equivalent to MessagesLangCode.php
 //
 //		static public $mLangObjCache = [];
 //
@@ -3267,49 +3267,52 @@ public class XomwLanguage {
 //		function emphasize($text) {
 //			return "<em>$text</em>";
 //		}
-//
-//		/**
-//		* Normally we output all numbers in plain en_US style, that is
-//		* 293,291.235 for twohundredninetythreethousand-twohundredninetyone
-//		* point twohundredthirtyfive. However this is not suitable for all
-//		* languages, some such as Bengali (bn) want ২,৯৩,২৯১.২৩৫ and others such as
-//		* Icelandic just want to use commas instead of dots, and dots instead
-//		* of commas like "293.291,235".
-//		*
-//		* An example of this function being called:
-//		* <code>
-//		* wfMessage('message')->numParams($num)->text()
-//		* </code>
-//		*
-//		* See $separatorTransformTable on MessageIs.php for
-//		* the , => . and . => , implementation.
-//		*
-//		* @todo check if it's viable to use localeconv() for the decimal separator thing.
-//		* @param int|float $number The String to be formatted, should be an integer
-//		*   or a floating point number.
-//		* @param boolean $nocommafy Set to true for special numbers like dates
-//		* @return String
-//		*/
-//		public function formatNum($number, $nocommafy = false) {
-//			global $wgTranslateNumerals;
-//			if (!$nocommafy) {
-//				$number = this.commafy($number);
-//				$s = this.separatorTransformTable();
-//				if ($s) {
-//					$number = strtr($number, $s);
+
+	/**
+	* Normally we output all numbers in plain en_US style, that is
+	* 293,291.235 for twohundredninetythreethousand-twohundredninetyone
+	* point twohundredthirtyfive. However this is not suitable for all
+	* languages, some such as Bengali (bn) want ২,৯৩,২৯১.২৩৫ and others such as
+	* Icelandic just want to use commas instead of dots, and dots instead
+	* of commas like "293.291,235".
+	*
+	* An example of this function being called:
+	* <code>
+	* wfMessage('message')->numParams($num)->text()
+	* </code>
+	*
+	* See $separatorTransformTable on MessageIs.php for
+	* the , => . and . => , implementation.
+	*
+	* @todo check if it's viable to use localeconv() for the decimal separator thing.
+	* @param int|float $number The String to be formatted, should be an integer
+	*   or a floating point number.
+	* @param boolean $nocommafy Set to true for special numbers like dates
+	* @return String
+	*/
+	// DFLT:nocommafy=false
+	public byte[] formatNum(byte[] number) {return formatNum(number, false);}
+	public byte[] formatNum(byte[] number, boolean nocommafy) {
+		if (!nocommafy) {
+			//  XOMW: use earlier port
+			//	number = this.commafy(number);
+			//	s = this.separatorTransformTable();
+			//	if (s) {
+			//		number = strtr(number, s);
+			//	}
+			return xoLang.Num_mgr().Format_num(number, nocommafy);
+		}
+
+		if (XomwDefaultSettings.wgTranslateNumerals) {
+//				s = this.digitTransformTable();
+//				if (s) {
+//					number = strtr(number, s);
 //				}
-//			}
-//
-//			if ($wgTranslateNumerals) {
-//				$s = this.digitTransformTable();
-//				if ($s) {
-//					$number = strtr($number, $s);
-//				}
-//			}
-//
-//			return $number;
-//		}
-//
+		}
+
+		return number;
+	}
+
 //		/**
 //		* Front-end for non-commafied formatNum
 //		*
@@ -3512,14 +3515,14 @@ public class XomwLanguage {
 //		function digitTransformTable() {
 //			return self::$dataCache->getItem(this.mCode, 'digitTransformTable');
 //		}
-//
-//		/**
-//		* @return array
-//		*/
-//		function separatorTransformTable() {
-//			return self::$dataCache->getItem(this.mCode, 'separatorTransformTable');
-//		}
-//
+
+	/**
+	* @return array
+	*/
+	//	private byte[][] separatorTransformTable() {
+	//		return self::$dataCache->getItem(this.mCode, 'separatorTransformTable');
+	//	}
+
 //		/**
 //		* Take a list of strings and build a locale-friendly comma-separated
 //		* list, using the local comma-separator message.

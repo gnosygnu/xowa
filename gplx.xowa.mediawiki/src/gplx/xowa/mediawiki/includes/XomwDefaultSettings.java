@@ -3010,13 +3010,13 @@ public class XomwDefaultSettings {
 //		* is 'dmy or mdy'.
 //		*/
 //		$wgAmericanDates = false;
-//
-//		/**
-//		* For Hindi and Arabic use local numerals instead of Western style (0-9)
-//		* numerals in interface.
-//		*/
-//		$wgTranslateNumerals = true;
-//
+
+	/**
+	* For Hindi and Arabic use local numerals instead of Western style (0-9)
+	* numerals in interface.
+	*/
+	public static boolean wgTranslateNumerals = true;
+
 //		/**
 //		* Translation using MediaWiki: namespace.
 //		* Interface messages will be loaded from the database.

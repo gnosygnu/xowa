@@ -1108,7 +1108,7 @@ public class XomwMessage {
 	* @return String
 	*/
 	// DFLT:type="before"
-//		private byte[] replaceParameters(byte[] message, int prm_tid, int format) {
+//		private byte[] replaceParameters(byte[] message, int type, int format) {
 //			$replacementKeys = [];
 //			foreach (this.parameters as $n => $param) {
 //				list($paramType, $value) = this.extractParam($param, $format);
@@ -1141,30 +1141,29 @@ public class XomwMessage {
 				case XomwMessagePrm.Tid__num:
 					// Replace number prmsVar always in before step for now.
 					// No support for combined raw and num prmsVar
-//						rv.Set(PRM_TID_BEFORE, this.getLanguage().formatNum((XomwMessagePrm_num)prm).num);
-//						return [PRM_TID_BEFORE, this.getLanguage()->formatNum($param['num']) ];
+					rv.Set(PRM_TID_BEFORE, this.getLanguage().formatNum(((XomwMessagePrm_num)prm).numAsBry()));
 					break;
-				case XomwMessagePrm.Tid__duration:
+//					case XomwMessagePrm.Tid__duration:
 //						return [PRM_TID_BEFORE, this.getLanguage()->formatDuration($param['duration']) ];
-					break;
-				case XomwMessagePrm.Tid__expiry:
+//						break;
+//					case XomwMessagePrm.Tid__expiry:
 //						return [PRM_TID_BEFORE, this.getLanguage()->formatExpiry($param['expiry']) ];
-					break;
-				case XomwMessagePrm.Tid__period:
+//						break;
+//					case XomwMessagePrm.Tid__period:
 //						return [PRM_TID_BEFORE, this.getLanguage()->formatTimePeriod($param['period']) ];
-					break;
-				case XomwMessagePrm.Tid__size:
+//						break;
+//					case XomwMessagePrm.Tid__size:
 //						return [PRM_TID_BEFORE, this.getLanguage()->formatSize($param['size']) ];
-					break;
-				case XomwMessagePrm.Tid__bitrate:
+//						break;
+//					case XomwMessagePrm.Tid__bitrate:
 //						return [PRM_TID_BEFORE, this.getLanguage()->formatBitrate($param['bitrate']) ];
-					break;
-				case XomwMessagePrm.Tid__plaintext:
+//						break;
+//					case XomwMessagePrm.Tid__plaintext:
 //						return [PRM_TID_AFTER, this.formatPlaintext($param['plaintext'], $format) ];
-					break;
-				case XomwMessagePrm.Tid__list:
+//						break;
+//					case XomwMessagePrm.Tid__list:
 //						return this.formatListParam($param['list'], $param['type'], $format);
-					break;
+//						break;
 				default: 
 					String warning = "Invalid parameter for message '" + this.getKey() + "': " +
 						prm.toString();
@@ -1373,6 +1372,7 @@ class XomwMessagePrm_raw extends XomwMessagePrm { 	public byte[] raw;
 	}
 }
 class XomwMessagePrm_num extends XomwMessagePrm { 	public int num;
+	public byte[] numAsBry() {return Int_.To_bry(num);}
 	public XomwMessagePrm_num(int num) {super(Tid__num);
 		this.num = num;
 	}

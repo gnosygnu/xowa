@@ -118,6 +118,7 @@ class XomwLanguageFxt {
 	public XomwLanguageFxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xol_lang_itm xoLang = new Xol_lang_itm(app.Lang_mgr(), Bry_.new_a7("en"));
+		XomwEnv env = new XomwEnv(xoLang);
 		this.lang = new XomwLanguage(xoLang);
 	}
 	public void Init_digitGroupingPattern(String digitGroupingPattern) {
