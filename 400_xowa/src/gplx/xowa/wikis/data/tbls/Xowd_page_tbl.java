@@ -369,6 +369,15 @@ public class Xowd_page_tbl implements Db_tbl {
 			.Exec_update()
 			;
 	}
+	public void Update__redirect(int redirect_to_id, int page_id) {
+		conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_is_redirect, fld_redirect_id)
+			.Val_int(fld_is_redirect, Bool_.Y_int)
+			.Val_int(fld_redirect_id, redirect_to_id)
+			.Crt_int(fld_id, page_id)
+			.Exec_update()
+			;
+	}
+
 	public void Delete(int page_id) {
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.page: delete started: page_id=~{0}", page_id);
 		conn.Stmt_delete(tbl_name, fld_id).Crt_int(fld_id, page_id).Exec_delete();

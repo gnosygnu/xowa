@@ -155,7 +155,8 @@ public class Xog_tab_itm implements Gfo_invk {
 			wiki.Parser_mgr().Ctx().Page_(page);
 			if (	page.Db().Page().Exists_n() 
 				&& !page.Commons_mgr().Xowa_mockup()) {	// do not enter "missing" section if File_mockup; EX:en.wikipedia.org/wiki/File:Protoplanetary-disk.jpg DATE:2016-11-13
-				if (wiki.Db_mgr().Save_mgr().Create_enabled()) {
+				if (wiki.Db_mgr().Save_mgr().Create_enabled()
+					|| wiki.Page_mgr().Sync_mgr().Auto_enabled()) {
 					page = Xoae_page.New_edit(wiki, ttl);
 					view_mode = Xopg_page_.Tid_edit;
 					history_mgr.Add(page);	// NOTE: must put new_page on stack so that pressing back will pop new_page, not previous page

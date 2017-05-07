@@ -57,6 +57,9 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		db_mgr.Core_data_mgr().Tbl__page().Select_in__ns_ttl(cancelable, rv, db_mgr.Wiki().Ns_mgr(), fill_idx_fields_only, bgn, end);
 	}
 	public void Load_page(Xowd_page_itm rv, Xow_ns ns) {
+		if (rv.Text_db_id() == -1) return; // NOTE: page_sync will create pages with -1 text_db_id; DATE:2017-05-06
+
+		// get text
 		Xowd_text_tbl text_tbl = db_mgr.Core_data_mgr().Dbs__get_by_id_or_fail(rv.Text_db_id()).Tbl__text();
 		byte[] text_bry = text_tbl.Select(rv.Id());
 		rv.Text_(text_bry);

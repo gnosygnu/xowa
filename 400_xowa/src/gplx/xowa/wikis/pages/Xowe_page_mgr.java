@@ -20,11 +20,10 @@ import gplx.xowa.addons.wikis.pages.syncs.core.*;
 import gplx.xowa.wikis.data.tbls.*;
 public class Xowe_page_mgr {
 	private final    Xowe_wiki wiki;
-	private final    Xosync_read_mgr read_mgr = new Xosync_read_mgr();
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private final    Gfo_qarg_mgr tmp_qarg_mgr = new Gfo_qarg_mgr();
 	public Xowe_page_mgr(Xowe_wiki wiki) {this.wiki = wiki;}
-	public Xosync_read_mgr Sync_mgr() {return read_mgr;}
+	public Xosync_read_mgr Sync_mgr() {return read_mgr;} private final    Xosync_read_mgr read_mgr = new Xosync_read_mgr();
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		read_mgr.Init_by_wiki(wiki);
 	}
@@ -64,10 +63,13 @@ public class Xowe_page_mgr {
 		Wait_for_popups(wiki.App());
 
 		// auto-update
-		if (read_mgr.Auto_update(wiki, page, ttl)) {
-			// page-sync occurred; reload metadata, especially to pick up Html_db_id; DATE:2017-03-13
+		Xoa_ttl redirect_ttl = read_mgr.Auto_update(wiki, page, ttl);
+		if (redirect_ttl != null) {
+			// page-sync occurred; update ttl to handle any redirection; DATE:2017-05-07
+			ttl = redirect_ttl;
+
+			// reload metadata, needed to pick up Html_db_id; DATE:2017-03-13
 			page = wiki.Data_mgr().Load_page_and_parse(url, ttl, wiki.Lang(), tab, false);
-			ttl = page.Ttl();	// note that Load_page_and_parse can redirect ttl; EX: Special:Random -> A; DATE:2017-01-05
 		}
 
 		// load from html_db
