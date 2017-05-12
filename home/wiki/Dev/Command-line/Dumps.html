@@ -441,8 +441,8 @@ app.bldr.cmds {
 
   add     ('simple.wikipedia.org' , 'wiki.mass_parse.exec') {
     cfg {
-      num_wkrs = 8; load_all_templates = 'y'; cleanup_interval = 50; hzip_enabled = 'y'; hdiff_enabled ='y'; manual_now = '2016-08-01 01:02:03';
-      load_all_imglinks = 'y'; 
+      num_wkrs = 8; load_all_templates = 'y'; load_all_imglinks = 'y'; indexer_enabled = 'y';
+      cleanup_interval = 50; hzip_enabled = 'y'; hdiff_enabled ='y'; manual_now = '2017-04-01 00:00:00'
       
       // uncomment the following 3 lines if using the build script as a "worker" helping a "server"
       // num_pages_in_pool = 32000; 
@@ -521,7 +521,8 @@ app.bldr.cmds {
   add     ('www.wikidata.org' , 'wiki.page_props');
   add     ('www.wikidata.org' , 'wiki.categorylinks');
   add     ('www.wikidata.org' , 'wiki.redirect')         {commit_interval = 1000; progress_interval = 100; cleanup_interval = 100;}
-//  add     ('www.wikidata.org' , 'util.cleanup')          {delete_tmp = 'y'; delete_by_match('*.xml|*.sql|*.bz2|*.gz');}
+  add     ('www.wikidata.org' , 'util.cleanup')          {delete_tmp = 'y'; delete_by_match('*.xml|*.sql|*.bz2|*.gz');}
+
   add     ('commons.wikimedia.org' , 'util.cleanup')          {delete_all = 'y';}
   add     ('commons.wikimedia.org' , 'util.download')         {dump_type = 'pages-articles';}
   add     ('commons.wikimedia.org' , 'util.download')         {dump_type = 'image';}
@@ -535,7 +536,8 @@ app.bldr.cmds {
   add     ('commons.wikimedia.org' , 'file.page_regy')        {build_commons = 'y'}
   add     ('commons.wikimedia.org' , 'wiki.page_dump.make');
   add     ('commons.wikimedia.org' , 'wiki.redirect')         {commit_interval = 1000; progress_interval = 100; cleanup_interval = 100;}
-//  add     ('commons.wikimedia.org' , 'util.cleanup')          {delete_tmp = 'y'; delete_by_match('*.xml|*.sql|*.bz2|*.gz');}
+  add     ('commons.wikimedia.org' , 'util.cleanup')          {delete_tmp = 'y'; delete_by_match('*.xml|*.sql|*.bz2|*.gz');}
+  
   add     ('en.wikipedia.org' , 'util.download')         {dump_type = 'pages-articles';}
   add     ('en.wikipedia.org' , 'util.download')         {dump_type = 'pagelinks';}
   add     ('en.wikipedia.org' , 'util.download')         {dump_type = 'categorylinks';}
@@ -543,6 +545,7 @@ app.bldr.cmds {
   add     ('en.wikipedia.org' , 'util.download')         {dump_type = 'image';}
   add     ('en.wikipedia.org' , 'util.download')         {dump_type = 'imagelinks';}
 */
+
 /*
   // en.wikipedia.org
   add     ('en.wikipedia.org' , 'text.init');
@@ -568,28 +571,25 @@ app.bldr.cmds {
       }
     }
   }
-  add     ('en.wikipedia.org' , 'search.word__link_count')
+  add     ('en.wikipedia.org' , 'search.word__link_count');
   add     ('en.wikipedia.org' , 'wiki.page_props');
   add     ('en.wikipedia.org' , 'wiki.categorylinks');
-*/
-/*
+
   add     ('en.wikipedia.org' , 'file.page_regy')        {build_commons = 'n'}
+//  add     ('en.wikipedia.org' , 'wiki.mass_parse.resume');
   add     ('en.wikipedia.org' , 'wiki.mass_parse.init') {cfg {ns_ids = '0|4|100|14|8';}}
-  // add     ('en.wikipedia.org' , 'wiki.mass_parse.resume');
   add     ('en.wikipedia.org' , 'wiki.mass_parse.exec') {cfg {
-    num_wkrs = 8; load_all_templates = 'y'; load_ifexists_ns = '*'; cleanup_interval = 25; hzip_enabled = 'y'; hdiff_enabled ='y'; manual_now = '2017-01-01 01:02:03';}
-//    num_wkrs = 1; load_all_templates = 'n'; load_all_imglnks = 'n'; cleanup_interval = 50; hzip_enabled = 'y'; hdiff_enabled ='y'; manual_now = '2016-07-28 01:02:03';}
+    num_wkrs = 8; load_all_templates = 'y'; load_all_imglinks = 'y'; indexer_enabled = 'y';
+    cleanup_interval = 50; hzip_enabled = 'y'; hdiff_enabled ='y'; manual_now = '2017-04-01 00:00:00'
+    }
   }
+*/
+
+/*
   add     ('en.wikipedia.org' , 'wiki.mass_parse.make');
-*/
-/*
-  add     ('en.wikipedia.org' , 'file.lnki_temp') {
-    commit_interval = 10000; progress_interval = 50; cleanup_interval = 50; select_size = 25;
-    ns_ids = '0|4|14|100|12|8|6|10|828|108|118|446|710|2300|2302|2600';
-    hdump_bldr {enabled = 'y'; hzip_enabled = 'y'; hzip_diff = 'y';}
-  }  
-*/
-/*
+  // SELECT * FROM image ORDER BY img_timestamp DESC LIMIT 20;  // 20170306194400
+  // SELECT * FROM page WHERE page_namespace = 6 ORDER BY page_touched DESC LIMIT 20; // 20170302024207
+  // SELECT * FROM xowa_cfg WHERE cfg_key = 'props.modified_latest';
   add     ('commons.wikimedia.org' , 'file.page_regy')        {build_commons = 'y'}
   add     ('en.wikipedia.org'      , 'file.page_regy')        {build_commons = 'n';}
   add     ('en.wikipedia.org' , 'file.lnki_regy');
@@ -597,9 +597,15 @@ app.bldr.cmds {
   add     ('en.wikipedia.org' , 'file.orig_regy');
   add     ('en.wikipedia.org' , 'file.xfer_temp.thumb');
 
+//  SELECT * FROM orig_regy WHERE lnki_ttl = 'BSicon_CONTr.svg';
+//  SELECT * FROM page_regy WHERE src_ttl = 'BSicon_CONTr.svg';
+//  SELECT Count(*) FROM xfer_regy WHERE xfer_status = 0;
+//  SELECT * FROM xfer_regy WHERE xfer_status = 0 AND lnki_page_id = 372692; --en.w:Featured_picture_candidates
+
   add     ('en.wikipedia.org' , 'file.xfer_regy');
   add     ('en.wikipedia.org' , 'file.xfer_regy_update');
 */
+
 /*
   add     ('en.wikipedia.org' , 'file.fsdb_make') {
     commit_interval = 1000; progress_interval = 200; select_interval = 10000;
@@ -630,7 +636,10 @@ app.bldr.run;
         2016-10-12: explicitly set web_access_enabled to y
       </li>
       <li>
-        2017-02-02: updated script for multi-threaded version and new options
+        2017-02-02: added multi-threaded version and new options
+      </li>
+      <li>
+        2017-05-12: added full-text search
       </li>
     </ul>
   
