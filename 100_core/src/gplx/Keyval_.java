@@ -43,6 +43,10 @@ public class Keyval_ {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			Keyval itm = ary[i];
+			if (itm == null) {
+				sb.Add("<<NULL>>");
+				continue;
+			}
 			sb.Add(itm.Key()).Add("=");
 			Object itm_val = itm.Val();
 			if (Type_adp_.Eq_typeSafe(itm_val, Keyval[].class))

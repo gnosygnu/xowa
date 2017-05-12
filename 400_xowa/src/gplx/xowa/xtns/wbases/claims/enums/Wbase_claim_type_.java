@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.claims.enums; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*;
 public class Wbase_claim_type_ {
-	public static final byte	// SERIALIZED:wbase_prop|datatype
+	public static final byte	// SERIALIZED:wbase_prop|datatype; REF:https://www.wikidata.org/wiki/Help:Data_type
 	  Tid__unknown								=  0
 	, Tid__value								=  1
 	, Tid__bad									=  1
@@ -30,8 +30,9 @@ public class Wbase_claim_type_ {
 	, Tid__url									= 10
 	, Tid__externalid							= 11
 	, Tid__commonsmedia							= 12
+	, Tid__geo_shape							= 13
 	;
-	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.data_type", 13);
+	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.data_type", 14);
 	public static final    Wbase_enum_itm
 	  Itm__unknown					= New(Tid__unknown			, "unknown")
 	, Itm__bad						= New(Tid__bad				, "bad")				// NOTE: wikidata identifies several entries as "bad"; Q1615351|'s-Graveland, Q107538|Baco; DATE:2013-10-20
@@ -46,6 +47,7 @@ public class Wbase_claim_type_ {
 	, Itm__commonsmedia				= New(Tid__commonsmedia		, "commonsMedia")		// EX:wd:Property:P14
 	, Itm__externalid				= New(Tid__externalid		, "external-id")		// EX:wd:Property:P1003
 	, Itm__math						= New(Tid__math				, "math")				// EX:wd:Property:P2534
+	, Itm__geo_shape				= New(Tid__geo_shape		, "geo-shape")			// EX:wd:Property:P3896
 	;
 	private static Wbase_enum_itm New(byte tid, String key)						{return New(tid, key, key);}
 	private static Wbase_enum_itm New(byte tid, String key, String scrib)		{return Reg.Add(new Wbase_claim_type(tid, key, scrib));}

@@ -82,6 +82,10 @@ public class Scrib_proc_args {
 		// loop itms and handle out-of-order; note that in most cases, itms should be in-order and proc will just return rv; DATE:2016-09-12
 		for (int i = 0; i < rv_len; ++i) {
 			Keyval kv = rv[i];
+
+			// ignore null arguments; PAGE:en.w:Huadu_District DATE:2017-05-11
+			if (kv == null) continue;
+
 			// get integer-key; needed to handle gaps
 			if (	kv.Key_tid() == Type_adp_.Tid__int			// luaj will be int
 				|| 	kv.Key_tid() == Type_adp_.Tid__obj) {		// lua will be obj; note that luaj will also have other non-key objects

@@ -32,6 +32,10 @@ public class Scrib_proc_args__tst {
 		, Keyval_.int_(6, null), Keyval_.int_(7, null), Keyval_.int_(8, "h")
 		);
 	}
+	@Test   public void Pull_kv_ary__null() {	// PURPOSE: null arg shouldn't fail; PAGE:en.w:Huadu_District DATE:2017-05-11
+		fxt.Init(Keyval_.int_(1, Keyval_.Ary(Keyval_.int_(1, "a"), null, Keyval_.int_(2, "b"))));
+		fxt.Test__pull_kv_ary(0, Keyval_.int_(1, "a"), null, Keyval_.int_(2, "b"));
+	}
 }
 class Scrib_proc_args__fxt {
 	private Scrib_proc_args args;
