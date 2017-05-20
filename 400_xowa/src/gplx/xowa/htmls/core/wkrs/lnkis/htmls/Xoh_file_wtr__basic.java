@@ -85,8 +85,14 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 		}
 
 		// main html build
-		if		(lnki.Ns_id() == Xow_ns_.Tid__media)				// NOTE: regardless of ext (ogg vs jpeg) and literal status (Media vs :Media), [[Media]] links are always rendered the same way; REF.MW:Linker.php|makeMediaLinkObj; PAGE:en.w:Beethoven; EX: [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]); [[File:Beethoven 3.jpg|The [[Media:BeethovenWithLyreGuitar( W. J. Mahler - 1804).jpg|complete painting]]...]]
-			html_fmtr.Add_media(bfr, hctx.Mode_is_hdump(), img_orig_src, lnki_ttl_bry, Bld_caption(ctx, Xoh_wtr_ctx.Basic, src, lnki));	// NOTE: use orig_src not view_src; DATE:2014-01-19
+		// if [[Media:]], (a) render like any other ns, not [[File:]]; (b) doo not add to download queue; REF.MW:Linker.php|makeMediaLinkObj;
+		// PAGE:en.w:Beethoven; EX: [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]); [[File:Beethoven 3.jpg|The [[Media:BeethovenWithLyreGuitar( W. J. Mahler - 1804).jpg|complete painting]]...]]
+		if		(lnki.Ns_id() == Xow_ns_.Tid__media) {
+			byte[] media_html = lnki.Caption_exists()
+				? caption_fmtr.To_bry(ctx, hctx, src, lnki.Caption_val_tkn(), Bool_.N, Xoh_lnki_text_fmtr.Null__fmt)
+				: lnki.Ttl().Full_db();
+			html_fmtr.Add_media(bfr, hctx.Mode_is_hdump(), img_orig_src, lnki_ttl_bry, media_html);	// NOTE: use orig_src not view_src; DATE:2014-01-19
+		}
 		else {
 			// orig_is_video 
 			boolean orig_is_video = Xof_ext_.Id_is_video_strict(orig_ext.Id());
