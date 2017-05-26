@@ -22,48 +22,50 @@ class Hiero_parser {
 	private Hiero_block cur_block;
 	private Bry_bfr cur_tkn = Bry_bfr_.Reset(16);
 	public Hiero_block[] Parse(byte[] src, int bgn, int end) {
-		blocks.Clear();
-		this.cur_block = new Hiero_block();
-		cur_tkn.Clear();
-		int pos = bgn;
-		while (true) {
-			if (pos == end) break;
-			byte b = src[pos];
-			Object o = trie.Match_at_w_b0(trv, b, src, pos, end);
-			if (o == null) {
-				New_char(b);
-				++pos;
-			}
-			else {
-				Hiero_parser_itm itm = (Hiero_parser_itm)o;
-				int new_pos = trv.Pos();
-				switch (itm.Tid()) {
-					case Hiero_parser_itm.Tid_comment:
-						int end_comm = Bry_find_.Find_fwd(src, Gfh_tag_.Comm_end, new_pos, end);
-						if (end_comm == Bry_find_.Not_found)	// --> not found; for now, ignore <!--
-							pos = new_pos;
-						else
-							pos = end_comm + Gfh_tag_.Comm_end_len;
-						break;
-					case Hiero_parser_itm.Tid_block_spr:
-						New_block();
-						break;
-					case Hiero_parser_itm.Tid_single_char:
-						Single_char_block(itm);
-						break;
-					case Hiero_parser_itm.Tid_dot:
-						Dot();
-						break;
-					case Hiero_parser_itm.Tid_tkn_spr:
-						New_token(itm);
-						break;
-					default: throw Err_.new_unhandled(itm.Tid());	// should never happen
+		synchronized (blocks) { // TS:needed b/c blocks, cur_block, etc are member vars DATE:2017-05-26
+			blocks.Clear();
+			this.cur_block = new Hiero_block();
+			cur_tkn.Clear();
+			int pos = bgn;
+			while (true) {
+				if (pos == end) break;
+				byte b = src[pos];
+				Object o = trie.Match_at_w_b0(trv, b, src, pos, end);
+				if (o == null) {
+					New_char(b);
+					++pos;
 				}
-				pos = new_pos;
-			}
-		}			
-		this.New_block();// flush remaining items
-		return (Hiero_block[])blocks.To_ary_and_clear(Hiero_block.class);
+				else {
+					Hiero_parser_itm itm = (Hiero_parser_itm)o;
+					int new_pos = trv.Pos();
+					switch (itm.Tid()) {
+						case Hiero_parser_itm.Tid_comment:
+							int end_comm = Bry_find_.Find_fwd(src, Gfh_tag_.Comm_end, new_pos, end);
+							if (end_comm == Bry_find_.Not_found)	// --> not found; for now, ignore <!--
+								pos = new_pos;
+							else
+								pos = end_comm + Gfh_tag_.Comm_end_len;
+							break;
+						case Hiero_parser_itm.Tid_block_spr:
+							New_block();
+							break;
+						case Hiero_parser_itm.Tid_single_char:
+							Single_char_block(itm);
+							break;
+						case Hiero_parser_itm.Tid_dot:
+							Dot();
+							break;
+						case Hiero_parser_itm.Tid_tkn_spr:
+							New_token(itm);
+							break;
+						default: throw Err_.new_unhandled(itm.Tid());	// should never happen
+					}
+					pos = new_pos;
+				}
+			}			
+			this.New_block();// flush remaining items
+			return (Hiero_block[])blocks.To_ary_and_clear(Hiero_block.class);
+		}
 	}
 	private void New_block() {
 		this.New_token(null);
