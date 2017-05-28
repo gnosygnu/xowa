@@ -210,7 +210,8 @@ public class Scrib_lib_mw implements Scrib_lib {
 		return rslt.Init_obj((Keyval[])rv.To_ary(Keyval.class));
 	}
 	public boolean FrameExists(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		String frame_id = args.Pull_str(0);
+		String frame_id = args.Cast_str_or_null(0);
+		if (frame_id == null) return rslt.Init_obj(false); // no args should not throw error; PAGE:fr.u:Projet:Laboratoire/Espaces_de_noms/Modèle/Liste_des_pages DATE:2017-05-28
 		Xot_invk frame = Scrib_frame_.Get_frame(core, frame_id);
 		return rslt.Init_obj(frame != null);
 	}

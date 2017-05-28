@@ -28,6 +28,9 @@ public class Scrib_lib_mw__lib_tst {
 	@Test  public void ParentFrameExists_false() {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_mw.Invk_parentFrameExists, Object_.Ary_empty, false);
 	}
+	@Test  public void FrameExists_false() { // no args should not throw error; PAGE:fr.u:Projet:Laboratoire/Espaces_de_noms/Mod�le/Liste_des_pages DATE:2017-05-28
+		fxt.Test_scrib_proc_bool(lib, Scrib_lib_mw.Invk_frameExists, Object_.Ary_empty, false);
+	}
 	@Test  public void GetAllExpandedArguments() {
 		fxt.Init_frame_current(Keyval_.new_("k1", "v1"));
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_mw.Invk_getAllExpandedArguments, Object_.Ary("current"), "1=\n  k1=v1");
