@@ -357,6 +357,10 @@ public class Xoh_html_wtr {
 				Xox_xnde xtn = xnde.Xnde_xtn();
 				xtn.Xtn_write(bfr, app, ctx, this, hctx, page, xnde, src);
 				break;
+			// do not write <meta/> <link/>; PAGE:fr.s:La_Dispute DATE:2017-05-28
+			case Xop_xnde_tag_.Tid__meta:
+			case Xop_xnde_tag_.Tid__link:
+				break;
 			case Xop_xnde_tag_.Tid__xowa_tag_bgn:
 			case Xop_xnde_tag_.Tid__xowa_tag_end:
 				break;

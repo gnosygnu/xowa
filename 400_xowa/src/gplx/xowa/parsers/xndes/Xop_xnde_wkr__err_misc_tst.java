@@ -188,4 +188,7 @@ public class Xop_xnde_wkr__err_misc_tst {
 	@Test   public void Invalid__percent() {	// PURPOSE: invalidate xml tags with %; EX:<ref%s>; PAGE:pl.w:Scynk_nadrzewny; DATE:2016-08-07
 		fxt.Test_parse_page_all_str("<b%>a</b>", "&lt;b%&gt;a</b>");	// NOTE: should be literally printed as <b%>, not transformed to <b>
 	}
+	@Test   public void Meta_link() {	// PURPOSE: meta and link tags should not print; EX:<meta> <link>; PAGE:fr.s:La_Dispute; DATE:2017-05-28
+		fxt.Test_parse_page_all_str("<meta /><link />", "");
+	}
 }

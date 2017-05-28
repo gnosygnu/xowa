@@ -143,8 +143,10 @@ public class Xop_xnde_tag_ {
 , Tid__xowa_wiki_setup = 118
 , Tid__mapframe = 119
 , Tid__maplink = 120
+, Tid__meta = 121
+, Tid__link = 122
 	;
-	public static final int Tid__len = 121;
+	public static final int Tid__len = 123;
 	public static final    Xop_xnde_tag[] Ary = new Xop_xnde_tag[Tid__len];
 	private static Xop_xnde_tag New(int id, String name) {
 		Xop_xnde_tag rv = new Xop_xnde_tag(id, name);
@@ -273,5 +275,7 @@ public class Xop_xnde_tag_ {
 , Tag__xowa_wiki_setup = New(Tid__xowa_wiki_setup, "xowa_Wiki_setup").Xtn_()
 , Tag__mapframe = New(Tid__mapframe, "mapframe").Xtn_mw_()
 , Tag__maplink = New(Tid__maplink, "maplink").Xtn_mw_()
+, Tag__meta = New(Tid__meta, "meta")
+, Tag__link = New(Tid__link, "link")
 	;
 }
