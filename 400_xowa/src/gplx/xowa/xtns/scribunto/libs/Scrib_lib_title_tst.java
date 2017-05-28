@@ -104,6 +104,13 @@ public class Scrib_lib_title_tst {
 	@Test   public void CascadingProtection() {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_cascadingProtection, Object_.Ary("A")								, Scrib_lib_title.CascadingProtection_rv);
 	}
+	@Test   public void RedirectTarget() {
+		fxt.Parser_fxt().Init_page_create("A", "#REDIRECT [[B]]");
+		fxt.Parser_fxt().Init_page_create("B", "C");
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_redirectTarget, Object_.Ary("A")									, ttl_fast(0	, "", "B", "", "", "B"));
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_redirectTarget, Object_.Ary("A1")									, Scrib_invoke_func_fxt.Null_rslt_ary);
+	}
+
 	private static void Wiki_orig_tbl__create(Xowe_wiki wiki) {
 		Xowe_wiki_.Create(wiki, 1, "dump.xml");
 		gplx.xowa.wikis.data.Xow_db_file text_db = wiki.Data__core_mgr().Dbs__make_by_tid(gplx.xowa.wikis.data.Xow_db_file_.Tid__text); text_db.Tbl__text().Create_tbl();

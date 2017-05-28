@@ -20,6 +20,7 @@ import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gpl
 import gplx.xowa.files.commons.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.apps.wms.apis.*;
 import gplx.xowa.xtns.scribunto.procs.*;
+import gplx.xowa.wikis.pages.redirects.*;
 public class Scrib_lib_title implements Scrib_lib {
 	public Scrib_lib_title(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -46,16 +47,18 @@ public class Scrib_lib_title implements Scrib_lib {
 			case Proc_getCurrentTitle:					return GetCurrentTitle(args, rslt);
 			case Proc_protectionLevels:					return ProtectionLevels(args, rslt);
 			case Proc_cascadingProtection:				return CascadingProtection(args, rslt);
+			case Proc_redirectTarget:					return RedirectTarget(args, rslt);
 			default: throw Err_.new_unhandled(key);
 		}
 	}
-	private static final int Proc_newTitle = 0, Proc_makeTitle = 1, Proc_getExpensiveData = 2, Proc_getUrl = 3, Proc_getContent = 4, Proc_getFileInfo = 5, Proc_getCurrentTitle = 6, Proc_protectionLevels = 7, Proc_cascadingProtection = 8;
+	private static final int Proc_newTitle = 0, Proc_makeTitle = 1, Proc_getExpensiveData = 2, Proc_getUrl = 3, Proc_getContent = 4, Proc_getFileInfo = 5, Proc_getCurrentTitle = 6, Proc_protectionLevels = 7, Proc_cascadingProtection = 8, Proc_redirectTarget = 9;
 	public static final String 
 	  Invk_newTitle = "newTitle", Invk_getExpensiveData = "getExpensiveData", Invk_makeTitle = "makeTitle"
 	, Invk_getUrl = "getUrl", Invk_getContent = "getContent", Invk_getFileInfo = "getFileInfo", Invk_getCurrentTitle = "getCurrentTitle"
 	, Invk_protectionLevels = "protectionLevels", Invk_cascadingProtection = "cascadingProtection"
+	, Invk_redirectTarget = "redirectTarget"
 	;
-	private static final    String[] Proc_names = String_.Ary(Invk_newTitle, Invk_makeTitle, Invk_getExpensiveData, Invk_getUrl, Invk_getContent, Invk_getFileInfo, Invk_getCurrentTitle, Invk_protectionLevels, Invk_cascadingProtection);
+	private static final    String[] Proc_names = String_.Ary(Invk_newTitle, Invk_makeTitle, Invk_getExpensiveData, Invk_getUrl, Invk_getContent, Invk_getFileInfo, Invk_getCurrentTitle, Invk_protectionLevels, Invk_cascadingProtection, Invk_redirectTarget);
 	public boolean NewTitle(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		if (args.Len() == 0) return rslt.Init_obj(null);	// invalid title, return null; EX:{{#invoke:Message box|fmbox}} DATE:2015-03-04
 		byte[] ttl_bry = args.Xstr_bry_or_null(0);			// NOTE: Pull_bry fails if caller passes int; PAGE:de.w:Wikipedia:Lua/Modul/Pinging/Test/recipients; DATE:2016-04-21
@@ -172,8 +175,18 @@ public class Scrib_lib_title implements Scrib_lib {
 	}	private static final    Keyval[] GetFileInfo_absent = Keyval_.Ary(Keyval_.new_("exists", false), Keyval_.new_("width", 0), Keyval_.new_("height", 0));	// NOTE: must supply non-null values for w / h, else Modules will fail with nil errors; PAGE:pl.w:Andrespol DATE:2016-08-01
 	public boolean GetContent(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
+		byte[] rv = GetContentInternal(ttl_bry);
+		return rv == null ? rslt.Init_obj(null) : rslt.Init_obj(String_.new_u8(rv));
+	}
+	public boolean GetCurrentTitle(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		return rslt.Init_obj(GetInexpensiveTitleData(core.Page().Ttl()));
+	}
+	public boolean ProtectionLevels(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		return rslt.Init_obj(protectionLevels_dflt);
+	}
+	private byte[] GetContentInternal(byte[] ttl_bry) {
 		Xowe_wiki wiki = core.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry); if (ttl == null) return null;
 		Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm_2(ttl);
 		byte[] rv = null;
 		if (page_itm != null) {
@@ -185,13 +198,7 @@ public class Scrib_lib_title implements Scrib_lib {
 			else
 				rv = page_itm.Wtxt__direct();
 		}
-		return rv == null ? rslt.Init_obj(null) : rslt.Init_obj(String_.new_u8(rv));
-	}
-	public boolean GetCurrentTitle(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		return rslt.Init_obj(GetInexpensiveTitleData(core.Page().Ttl()));
-	}
-	public boolean ProtectionLevels(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		return rslt.Init_obj(protectionLevels_dflt);
+		return rv;
 	}
 	private static final    Keyval[] protectionLevels_dflt = Keyval_.Ary(Keyval_.new_("move", Keyval_.int_(1, "sysop")), Keyval_.new_("edit", Keyval_.int_(1, "sysop")));	// protectionLevels are stored in different table which is currently not mirrored; per en.w:Module:Effective_protection_level; DATE:2014-04-09; 2016-09-07
 	public boolean CascadingProtection(Scrib_proc_args args, Scrib_proc_rslt rslt) {
@@ -199,6 +206,14 @@ public class Scrib_lib_title implements Scrib_lib {
 		Xowe_wiki wiki = core.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
 		return rslt.Init_obj(CascadingProtection_rv);
+	}
+	public boolean RedirectTarget(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		byte[] ttl_bry = args.Pull_bry(0);
+		Xowe_wiki wiki = core.Wiki();
+		Xoa_ttl ttl = wiki.Ttl_parse(ttl_bry);
+		Xoae_page page = Xoae_page.New(wiki, ttl);
+		wiki.Data_mgr().Load_from_db(page, ttl.Ns(), ttl, false);
+		return page.Redirect_trail().Itms__len() == 0 ? rslt.Init_obj(null) : rslt.Init_obj(GetInexpensiveTitleData(page.Ttl()));
 	}
 	public static final    Keyval[] CascadingProtection_rv = Keyval_.Ary(Keyval_.new_("sources", Keyval_.Ary_empty), Keyval_.new_("restrictions", Keyval_.Ary_empty));	// changed sources from "false" to "{}"; DATE:2016-09-09
 	private Keyval[] GetInexpensiveTitleData(Xoa_ttl ttl) {
