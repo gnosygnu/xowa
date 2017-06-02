@@ -25,7 +25,7 @@ class Xow_page_cache_wkr__embeddable implements gplx.xowa.wikis.caches.Xow_page_
 	public byte[] Get_page_or_null(byte[] full_db) {
 		byte[] wikitext = null;
 
-		// loop to handle redirects
+		// loop to handle redirects; DATE:2017-05-29
 		int loops = 0;
 		while (loops++ < 5) {
 			wikitext = Bry_.new_u8(cbk.LoadWikitext(String_.new_u8(full_db)));
@@ -34,7 +34,7 @@ class Xow_page_cache_wkr__embeddable implements gplx.xowa.wikis.caches.Xow_page_
 			if (redirect_ttl == null) {
 				break;
 			}
-			// redirect
+			// redirect; update title and continue;
 			else {
 				full_db = redirect_ttl.Full_db();
 				continue;
