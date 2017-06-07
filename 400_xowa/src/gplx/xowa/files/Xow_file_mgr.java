@@ -111,7 +111,8 @@ public class Xow_file_mgr implements Gfo_invk {
 		}
 		if (this.Version() == Version_1) return new Db_cfg_hash("");
 		this.Init_file_mgr_by_load(wiki);	// make sure fsdb is init'd
-		return fsdb_mgr.Mnt_mgr().Mnts__get_main().Cfg_mgr().Grps_get_or_load(grp);
+		Fsm_mnt_itm mnt_itm = fsdb_mgr.Mnt_mgr().Mnts__get_main_or_null(); // NOTE: can be null for embeddable parser; DATE:2017-06-06
+		return mnt_itm == null ? new Db_cfg_hash("") : mnt_itm.Cfg_mgr().Grps_get_or_load(grp);
 	}
 	public Xof_fsdb_mgr Fsdb_mgr() {return fsdb_mgr;} private Xof_fsdb_mgr fsdb_mgr = new Xof_fsdb_mgr__sql();
 	public void Clear_for_tests() {	// NOTE: must clear else fsdb_mode will be cached for multiple runs; will generally be v1, but some tests will set to v2; DATE:2015-12-22
@@ -146,6 +147,8 @@ public class Xow_file_mgr implements Gfo_invk {
 	}
 	public void Init_file_mgr_by_load(Xow_wiki wiki) {
 		if (db_core != null) return;	// already init'd
+		if (wiki.Data__core_mgr() == null) return; // NOTE: can be null for embeddable parser; DATE:2017-06-06
+
 		this.db_core = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
 		if (	db_core == null			// "-file-core.xowa" not found
 			&&	!wiki.Data__core_mgr().Props().Layout_file().Tid_is_all()	// DATE:2015-08-10

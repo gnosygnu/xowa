@@ -35,6 +35,7 @@ public class Fsm_mnt_mgr implements Gfo_invk {
 	}
 	public int			Mnts__len()						{return mnt_ary_len;}
 	public Fsm_mnt_itm	Mnts__get_at(int i)				{return mnt_ary[i];}
+	public Fsm_mnt_itm	Mnts__get_main_or_null()		{return mnt_ary == null ? null : mnt_ary[Mnt_idx_main];} // NOTE: can be null for embeddable parser; DATE:2017-06-06
 	public Fsm_mnt_itm	Mnts__get_main()				{return mnt_ary[Mnt_idx_main];}
 	public Fsm_mnt_itm	Mnts__get_insert()				{return mnt_ary[insert_idx];} public void Mnts__get_insert_idx_(int v) {insert_idx = v;} private int insert_idx = Mnt_idx_user;
 	public Fsm_bin_fil	Bins__at(int mnt_id, int bin_db_id) {return mnt_ary[mnt_id].Bin_mgr().Dbs__get_by_or_null(bin_db_id);}

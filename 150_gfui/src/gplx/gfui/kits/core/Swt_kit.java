@@ -234,6 +234,7 @@ public class Swt_kit implements Gfui_kit {
 	public Gfui_dlg_msg New_dlg_msg(String msg) {return new Swt_dlg_msg(shell).Init_msg_(msg);}
 	public ImageAdp New_img_load(Io_url url) {
 		if (url == Io_url_.Empty) return ImageAdp_.Null;
+		if (!Io_mgr.Instance.Exists(url)) return ImageAdp_.Null; // must check if exists or fatal error; DATE:2017-06-02
 		Image img = new Image(display, url.Raw());
 		Rectangle rect = img.getBounds();
 		return new Swt_img(this, img, rect.width, rect.height).Url_(url);

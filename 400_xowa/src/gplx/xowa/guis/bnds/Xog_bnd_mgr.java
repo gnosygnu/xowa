@@ -388,7 +388,12 @@ public class Xog_bnd_mgr implements Gfo_invk {
 			win.Show(app, app.Gui_mgr().Kit(), app.Gui_mgr().Browser_win().Win_box(), args[0], args[1], args[2]);
 		}
 		else {
-			String[] flds = gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_ary(m.ReadStr("v"));
+			String val = m.ReadStr("v");
+			if (String_.Len_eq_0(val)) { // need to check, or may fail when running newer codebase against old cfgs; DATE:2017-06-02
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "binding does not have val; key=~{0}", k);
+				return this;
+			}
+			String[] flds = gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_ary(val);
 			int box = Xog_bnd_box_.Xto_sys_int(flds[0]);
 			String key = String_.Replace(k, "xowa.gui.shortcuts.", "");
 			Xog_bnd_itm bnd = app.Gui_mgr().Bnd_mgr().Get_or_null(key);

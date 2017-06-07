@@ -69,7 +69,9 @@ public class Swt_btn_no_border implements GxwElem, Swt_control {
 		// note can't use width, b/c search_exec_btn somehow goes from 16px to 20px
 		if (v.Size().Height() != size.Height())
 			v = v.Resize(size.Width(), size.Height());
-		box_btn.setImage(Copy_w_transparency((Image)v.Under()));
+		if ((v.Under() instanceof Image)) { // check needed else will fail when image doesn't exist; DATE:2017-06-03
+			box_btn.setImage(Copy_w_transparency((Image)v.Under()));
+		}
 	}
 	private Image Copy_w_transparency(Image src) {
       // set transparency
