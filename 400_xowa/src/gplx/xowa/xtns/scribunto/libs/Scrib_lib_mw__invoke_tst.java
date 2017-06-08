@@ -76,7 +76,7 @@ public class Scrib_lib_mw__invoke_tst {
 	}
 	@Test  public void CallParserFunction_tag() {
 		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");
-		fxt.Test_lib_proc_kv(lib, Scrib_lib_mw.Invk_callParserFunction, Scrib_kv_utl_.flat_many_(1, "current", 2, "#tag", 3, Scrib_kv_utl_.flat_many_("3", "id=1", "2", "text", "1", "pre")), "<pre 3=\"id=1\">2=text</pre>");// named: sort args; NOTE: keys should probably be stripped
+		fxt.Test_lib_proc_kv(lib, Scrib_lib_mw.Invk_callParserFunction, Scrib_kv_utl_.flat_many_(1, "current", 2, "#tag", 3, Scrib_kv_utl_.flat_many_("3", "id=1", "2", "text", "1", "pre")), "<pre 3=\"id.3D1\">2=text</pre>");// named: sort args; NOTE: keys should probably be stripped
 	}
 	@Test  public void CallParserFunction__no_args() {	// PURPOSE.fix: 0 args should not fail
 		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");

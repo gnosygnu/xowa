@@ -28,7 +28,7 @@ class Pfunc_tag_kvp_wtr {
 			if (key_bgn != -1)
 				tmp.Add_byte(Byte_ascii.Eq);
 			tmp.Add_byte(Byte_ascii.Quote);
-			tmp.Add_bry_escape_html(kvp_bry, val_bgn, val_end); // PURPOSE: escape html in atrs; PAGE:fr.v:France; DATE:2017-06-01
+			gplx.langs.htmls.encoders.Gfo_url_encoder_.Id.Encode(tmp, kvp_bry, val_bgn, val_end);// PURPOSE: escape html in atrs; PAGE:fr.v:France; DATE:2017-06-01
 			tmp.Add_byte(Byte_ascii.Quote);
 		}
 	}
