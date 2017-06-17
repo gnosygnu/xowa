@@ -22,7 +22,7 @@ public class Xoctg_single_box__tst {
 		fxt.Init__ctgs("Category:A", "Category:B").Test_html(String_.Concat_lines_nl
 		(	"<div id=\"catlinks\" class=\"catlinks\">"
 		,	  "<div id=\"mw-normal-catlinks\" class=\"mw-normal-catlinks\">"
-		,	    "Categories"
+		,	    "Categories:"
 		,	    "<ul>"
 		,	      "<li>"
 		,	        "<a href=\"/wiki/Category:A\" class=\"internal\" title=\"A\">A</a>"
