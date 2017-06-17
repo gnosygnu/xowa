@@ -87,7 +87,7 @@ public class Xow_parser_mgr {
 
 		scrib.When_page_changed(page);	// notify scribunto about page changed
 		ctx.Page_(page);
-		ctx.Page_data().Clear(); // DATE:2017-06-13
+		ctx.Page_data().Clear(); // clear ctx since it gets reused between pages; PAGE:de.w:13._Jahrhundert DATE:2017-06-17
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(page.Db().Text().Text_bry());
 		if (clear) {
 			page.Clear_all();
@@ -100,6 +100,6 @@ public class Xow_parser_mgr {
 		page.Root_(root);
 		root.Data_htm_(root.Root_src());
 
-		ctx.Page_data().Copy_to(page); // copy __TOC__ from ctx to page; needed to prevent template from affecting page output; DATE:2017-06-11
+		ctx.Page_data().Copy_to(page); // copy __TOC__ from ctx to page; needed to prevent template from affecting page output; DATE:2017-06-17
 	}
 }
