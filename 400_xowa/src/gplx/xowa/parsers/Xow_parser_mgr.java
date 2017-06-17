@@ -87,8 +87,11 @@ public class Xow_parser_mgr {
 
 		scrib.When_page_changed(page);	// notify scribunto about page changed
 		ctx.Page_(page);
+		ctx.Page_data().Clear(); // DATE:2017-06-13
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(page.Db().Text().Text_bry());
-		if (clear) {page.Clear_all();}
+		if (clear) {
+			page.Clear_all();
+		}
 		Xoa_ttl ttl = page.Ttl();
 		if (	Xow_page_tid.Identify(wiki.Domain_tid(), ttl.Ns().Id(), ttl.Page_db()) == Xow_page_tid.Tid_wikitext) {	// only parse page if wikitext; skip .js, .css, Module; DATE:2013-11-10
 			byte[] data_raw = page.Db().Text().Text_bry();
@@ -96,5 +99,7 @@ public class Xow_parser_mgr {
 		}
 		page.Root_(root);
 		root.Data_htm_(root.Root_src());
+
+		ctx.Page_data().Copy_to(page); // copy __TOC__ from ctx to page; needed to prevent template from affecting page output; DATE:2017-06-11
 	}
 }

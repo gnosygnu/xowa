@@ -31,7 +31,7 @@ public class Xoctg_single_box {
 	private static final    Bry_fmt Fmt__grp = Bry_fmt.Auto_nl_skip_last
 	( "<div id=\"catlinks\" class=\"catlinks\">"
 	,   "<div id=\"mw-normal-catlinks\" class=\"mw-normal-catlinks\">"
-	,     "~{grp_lbl}"
+	,     "~{grp_lbl}:"
 	,     "<ul>~{grp_itms}"
 	,     "</ul>"
 	,   "</div>"

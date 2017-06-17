@@ -55,7 +55,7 @@ public class Xot_invk_tkn_ {
 		if (tmpl_page_bry != null) {
 			byte old_parse_tid = ctx.Parse_tid(); // NOTE: reusing ctxs is a bad idea; will change Parse_tid and cause strange errors; however, keeping for PERF reasons
 			Xow_ns ns_tmpl = wiki.Ns_mgr().Ns_template();
-			rv = wiki.Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ns_tmpl, name_ary, tmpl_page_bry);
+			rv = wiki.Parser_mgr().Main().Parse_text_to_defn_obj(Xop_ctx.New__sub(wiki, ctx, ctx.Page()), ctx.Tkn_mkr(), ns_tmpl, name_ary, tmpl_page_bry); // DATE:2017-06-13
 			Xoa_ttl tmpl_page_ttl = tmpl_page_itm.Ttl();
 			byte[] frame_ttl = Bry_.Add(tmpl_page_ttl.Ns().Name_db(), Byte_ascii.Colon_bry, tmpl_page_ttl.Page_txt());	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-08-22; (3) must be local language; Russian "Шаблон" not English "Template"; PAGE:ru.w:Королевство_Нидерландов DATE:2016-11-23
 			rv.Frame_ttl_(frame_ttl);								// set defn's frame_ttl; needed for redirect_trg; PAGE:en.w:Statutory_city; DATE:2014-08-22

@@ -59,8 +59,10 @@ public class Xowe_hdr_bldr_fxt {
 		);
 	}
 	public static String Bld_page_with_toc(Bry_bfr bfr, Xop_fxt fxt, String raw) {
-		String rv = fxt.Exec_parse_page_all_as_str(raw);
-		bfr.Add_str_u8(rv);
+		gplx.xowa.parsers.Xop_root_tkn root = fxt.Exec_parse_page_all_as_root(Bry_.new_u8(raw));
+		fxt.Ctx().Page_data().Copy_to(fxt.Page());
+		fxt.Wiki().Html_mgr().Html_wtr().Write_doc(bfr, fxt.Ctx(), fxt.Hctx(), root.Root_src(), root);
+
 		gplx.xowa.htmls.core.wkrs.tocs.Xoh_toc_wtr.Write_toc(bfr, fxt.Page(), Xoh_wtr_ctx.Basic);
 		return bfr.To_str_and_clear();
 	}

@@ -101,7 +101,7 @@ public class Pgbnr_func extends Pf_func_base {
 		itm.Init_from_wtxt(banner_ttl, banner_file_itm, tooltip, title, bottomtoc, toc, data_pos_x, data_pos_y, origin_x, icons_list == null ? Pgbnr_icon.Ary_empty : (Pgbnr_icon[])icons_list.To_ary_and_clear(Pgbnr_icon.class));
 		page.Html_data().Xtn_pgbnr_(itm);
 		page.Html_data().Head_mgr().Itm__pgbnr().Enabled_y_();	// register css / js during parse stage
-		page.Wtxt().Toc().Flag__toc_y_();	// NOTE: must mark toc_manual else will show 2nd TOC in edit mode; DATE:2016-07-10
+		page.Wtxt().Toc().Flag__toc_(true);	// NOTE: must mark toc_manual else will show 2nd TOC in edit mode; DATE:2016-07-10
 	}
 	public static void Add_banner(Bry_bfr bfr, Xoae_page wpg, Xop_ctx ctx, Xoh_wtr_ctx hctx, Pgbnr_itm itm) {
 		Xowe_wiki wiki = ctx.Wiki(); Xoae_app app = wiki.Appe();

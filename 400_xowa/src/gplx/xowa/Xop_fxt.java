@@ -22,6 +22,7 @@ import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.pa
 import gplx.xowa.files.exts.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.tdbs.hives.*;
+import gplx.xowa.wikis.pages.*;
 public class Xop_fxt {
 	public Xop_fxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
@@ -283,7 +284,8 @@ public class Xop_fxt {
 		hdom_wtr.Write_doc(actl_bfr, ctx, hctx, root.Root_src(), root);
 		return actl_bfr.To_str_and_clear();
 	}
-	public void Hctx_(Xoh_wtr_ctx v) {hctx = v;} private Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Basic;
+	public Xoh_wtr_ctx Hctx() {return hctx;} private Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Basic;
+	public void Hctx_(Xoh_wtr_ctx v) {hctx = v;}
 	public String Exec_parse_page_wiki_as_str(String raw) {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
@@ -459,6 +461,21 @@ public class Xop_fxt {
 		page.Root_(root);
 		byte[] actl = wiki.Html_mgr().Page_wtr_mgr().Gen(page, gplx.xowa.wikis.pages.Xopg_page_.Tid_read);
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
+	}
+	public String Exec__parse_to_html_w_skin(String raw) {
+		Bry_bfr bfr = Bry_bfr_.New();
+		Xow_html_mgr html_mgr = wiki.Html_mgr();
+		this.Wiki().Html__wtr_mgr().Page_read_fmtr().Fmt_("~{page_data}");
+
+		byte[] raw_bry = Bry_.new_u8(raw);
+		Xop_root_tkn root = this.Exec_parse_page_all_as_root(raw_bry);
+		this.Page().Root_(root);
+
+		html_mgr.Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_page(bfr, this.Page(), this.Ctx(), Xoh_page_html_source_.Wtr);
+		return bfr.To_str_and_clear();
+	}
+	public void Test__parse_to_html_w_skin(String raw, String expd) {
+		Tfds.Eq_str_lines(expd, Exec__parse_to_html_w_skin(raw));
 	}
 	public static Xop_fxt New_app_html() {
 		Xop_fxt fxt = new Xop_fxt();

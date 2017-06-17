@@ -26,10 +26,10 @@ public class Xopg_toc_mgr {
 				)
 			;
 	}
-	public boolean Flag__toc()			{return flag__toc;}
-	public void Flag__toc_y_()		{flag__toc = true;}			private boolean flag__toc;			// __TOC__
-	public void Flag__forcetoc_y_()	{flag__forcetoc = true;}	private boolean flag__forcetoc;	// __FORCETOC__
-	public void Flag__notoc_y_()	{flag__notoc = true;}		private boolean flag__notoc;		// __NOTOC__
+	public boolean Flag__toc()                {return flag__toc;}
+	public void Flag__toc_(boolean v)         {flag__toc = v;}          private boolean flag__toc;		// __TOC__
+	public void Flag__forcetoc_(boolean v)    {flag__forcetoc = v;}     private boolean flag__forcetoc;	// __FORCETOC__
+	public void Flag__notoc_(boolean v)       {flag__notoc = v;}        private boolean flag__notoc;		// __NOTOC__
 
 	public int			Len()			{return hdrs_len;}
 	public Xop_hdr_tkn	Get_at(int i)	{return hdrs_ary[i];}

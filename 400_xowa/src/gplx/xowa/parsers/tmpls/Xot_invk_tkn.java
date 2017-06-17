@@ -285,7 +285,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 						bfr.Add(rslt);
 					}
 					else {
-						rv = defn_tmpl.Tmpl_evaluate(ctx, invk_tmpl, rslt_bfr);
+						rv = defn_tmpl.Tmpl_evaluate(Xop_ctx.New__sub(wiki, ctx, ctx.Page()), invk_tmpl, rslt_bfr); // DATE:2017-06-13
 						prepend_mgr.End(ctx, bfr, rslt_bfr.Bfr(), rslt_bfr.Len(), Bool_.Y);
 						if (name_had_subst) {	// current invk had "subst:"; parse incoming invk again to remove effects of subst; PAGE:pt.w:Argentina DATE:2014-09-24
 							byte[] tmp_src = rslt_bfr.To_bry_and_clear();

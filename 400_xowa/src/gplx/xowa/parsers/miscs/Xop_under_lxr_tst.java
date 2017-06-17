@@ -101,12 +101,12 @@ public class Xop_under_lxr_tst {
 		fxt.Test_parse_page_all_str("__DISAMBIG__", "");
 	}
 	@Test  public void Nocontentconvert() {	 // simple test; test for flag only; DATE:2014-02-06
-		gplx.xowa.wikis.pages.htmls.Xopg_html_data html_data = fxt.Page().Html_data();
-		Tfds.Eq(html_data.Lang_convert_content(), true);
-		Tfds.Eq(html_data.Lang_convert_title(), true);
+		gplx.xowa.parsers.Xop_ctx_page_data page_data = fxt.Ctx().Page_data();
+		Tfds.Eq(page_data.Lang_convert_content(), true);
+		Tfds.Eq(page_data.Lang_convert_title(), true);
 		fxt.Test_parse_page_all_str("__NOCONTENTCONVERT__ __NOTITLECONVERT__", " ");
-		Tfds.Eq(html_data.Lang_convert_content(), false);
-		Tfds.Eq(html_data.Lang_convert_title(), false);
+		Tfds.Eq(page_data.Lang_convert_content(), false);
+		Tfds.Eq(page_data.Lang_convert_title(), false);
 	}
 	@Test  public void Eos() {	// PURPOSE: check that __ at eos doesn't fail; es.s:Luisa de Bustamante: 3; DATE:2014-02-15
 		fxt.Test_parse_page_all_str("__", "__");
@@ -186,5 +186,41 @@ public class Xop_under_lxr_tst {
 		fxt.Test_parse_page_all_str("a__toc__b"		, "ab");			// ci.pass
 		fxt.Test_parse_page_all_str("a__NOTOC__b"	, "ab");			// cs.pass
 		fxt.Test_parse_page_all_str("a__notoc__b"	, "a__notoc__b");	// cs.fail
+	}
+	@Test  public void Notoc_in_tmpl() {	// PURPOSE: test simultaneous cs and ci; DATE:2017-06-11
+		fxt.Init_page_create("Template:Notoc", "page_text\n__NOTOC__");
+		fxt.Wiki().Html_mgr().Html_wtr().Cfg().Toc__show_(true);
+
+		fxt.Test__parse_to_html_w_skin(String_.Concat_lines_nl
+		( "==A1=="
+		, "==A2=="
+		, "==A3=="
+		, "==A4=="
+		, "{{Notoc}}"
+		), String_.Concat_lines_nl
+		( "<div id=\"toc\" class=\"toc\">"
+		, "  <div id=\"toctitle\">"
+		, "    <h2>Contents</h2>"
+		, "  </div>"
+		, "  <ul>"
+		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#A1\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">A1</span></a>"
+		, "    </li>"
+		, "    <li class=\"toclevel-1 tocsection-2\"><a href=\"#A2\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">A2</span></a>"
+		, "    </li>"
+		, "    <li class=\"toclevel-1 tocsection-3\"><a href=\"#A3\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">A3</span></a>"
+		, "    </li>"
+		, "    <li class=\"toclevel-1 tocsection-4\"><a href=\"#A4\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">A4</span></a>"
+		, "    </li>"
+		, "  </ul>"
+		, "</div>"
+		, "<h2><span class=\"mw-headline\" id=\"A1\">A1</span></h2>"
+		, ""
+		, "<h2><span class=\"mw-headline\" id=\"A2\">A2</span></h2>"
+		, ""
+		, "<h2><span class=\"mw-headline\" id=\"A3\">A3</span></h2>"
+		, ""
+		, "<h2><span class=\"mw-headline\" id=\"A4\">A4</span></h2>"
+		, "page_text"
+		));
 	}
 }

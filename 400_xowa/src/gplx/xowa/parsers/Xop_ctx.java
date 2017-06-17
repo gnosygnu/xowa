@@ -51,6 +51,7 @@ public class Xop_ctx {
 	public Xop_curly_wkr		Curly() 			{return curly;} private final    Xop_curly_wkr curly = new Xop_curly_wkr();
 	public Xop_xnde_tag_regy	Xnde_tag_regy()		{return xnde_tag_regy;} private final    Xop_xnde_tag_regy xnde_tag_regy;	// PERF:demeter
 	public Xop_tmp_mgr			Tmp_mgr()			{return tmp_mgr;} private final    Xop_tmp_mgr tmp_mgr = new Xop_tmp_mgr();
+	public Xop_ctx_page_data    Page_data()         {return page_data;} private final    Xop_ctx_page_data page_data = new Xop_ctx_page_data();
 
 	public byte					Xnde_names_tid()	{return xnde_names_tid;} public Xop_ctx Xnde_names_tid_(byte v) {xnde_names_tid = v; return this;} private byte xnde_names_tid = Xop_parser_tid_.Tid__null;
 	public byte					Parse_tid()			{return parse_tid;} public Xop_ctx Parse_tid_(byte v) {parse_tid = v; xnde_names_tid = v; return this;} private byte parse_tid = Xop_parser_tid_.Tid__null;
@@ -85,6 +86,7 @@ public class Xop_ctx {
 		if (lst_section_mgr != null) lst_section_mgr.Clear();
 		if (lst_page_regy != null) lst_page_regy.Clear();
 		tmpl_args_parsing = false;
+		page_data.Clear();
 		return this;
 	}
 	public String Page_url_str() {
