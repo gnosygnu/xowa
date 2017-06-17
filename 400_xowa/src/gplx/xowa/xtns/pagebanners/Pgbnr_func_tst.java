@@ -29,7 +29,7 @@ public class Pgbnr_func_tst {
 		, "		</div>"
 		, "	</div>"
 		, "	<div class='wpb-topbanner-toc'><div class='wpb-banner-toc'><div>"
-		, "  <div id=\"toctitle\">"
+		, "  <div id=\"toctitle\" class=\"toctitle\">"
 		, "    <h2>Contents</h2>"
 		, "  </div>"
 		, "</div>"

@@ -51,7 +51,7 @@ public class Xowe_hdr_bldr_fxt {
 	public String toc_tbl(boolean nl, String... ary) {
 		return String_.Concat_lines_nl_skip_last
 		( "<div id=\"toc\" class=\"toc\">"
-		, "  <div id=\"toctitle\">"
+		, "  <div id=\"toctitle\" class=\"toctitle\">"
 		, "    <h2>Contents</h2>"
 		, "  </div>"
 		, String_.Concat_lines_nl_skip_last(ary)

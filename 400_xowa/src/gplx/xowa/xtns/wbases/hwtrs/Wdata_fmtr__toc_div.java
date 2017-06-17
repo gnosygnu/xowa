@@ -32,7 +32,7 @@ class Wdata_fmtr__toc_div implements gplx.core.brys.Bfr_arg {
 	private final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "  <div id='toc' class='toc wb-toc'>"
-	, "    <div id='toctitle'>"
+	, "    <div id='toctitle' class='toctitle'>"
 	, "      <h2>~{hdr}</h2>"
 	, "    </div>"
 	, "    <ul>~{itms}"

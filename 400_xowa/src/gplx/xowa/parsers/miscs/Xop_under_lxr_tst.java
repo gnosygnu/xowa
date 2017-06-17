@@ -66,7 +66,7 @@ public class Xop_under_lxr_tst {
 		( "<p>a"
 		, "</p>"
 		, "<div id=\"toc\" class=\"toc\">"
-		, "  <div id=\"toctitle\">"
+		, "  <div id=\"toctitle\" class=\"toctitle\">"
 		, "    <h2>Contents</h2>"
 		, "  </div>"
 		, "  <ul>"
@@ -199,7 +199,7 @@ public class Xop_under_lxr_tst {
 		, "{{Notoc}}"
 		), String_.Concat_lines_nl
 		( "<div id=\"toc\" class=\"toc\">"
-		, "  <div id=\"toctitle\">"
+		, "  <div id=\"toctitle\" class=\"toctitle\">"
 		, "    <h2>Contents</h2>"
 		, "  </div>"
 		, "  <ul>"

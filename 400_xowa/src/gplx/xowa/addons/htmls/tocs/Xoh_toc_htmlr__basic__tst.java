@@ -144,7 +144,7 @@ public class Xoh_toc_htmlr__basic__tst {
 		fxt.Init__add(2, "c");
 		fxt.Test__html_div
 		( "<div id=\"toc\" class=\"toc\">"
-		, "  <div id=\"toctitle\">"
+		, "  <div id=\"toctitle\" class=\"toctitle\">"
 		, "    <h2>Table of contents</h2>"
 		, "  </div>"
 		, "  <ul>"
