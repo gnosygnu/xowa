@@ -72,18 +72,9 @@ public class Xow_portal_mgr implements Gfo_invk {
 		div_logo_day = Init_fmtr(tmp_bfr, eval_mgr, div_logo_fmtr, main_page_href_bry, fsys_lnx_encoder.Encode_to_file_protocol(wiki_css_dir.GenSubFil_nest("logo.png")));
 
 		// night-mode logo; check if wiki-version exists, else use app-version
-		Io_url night_logo = null;
-		Io_url night_logo_wiki = wiki_css_dir.GenSubFil("logo_night.png");
-		if (Io_mgr.Instance.Exists(night_logo_wiki)) {
-			night_logo = night_logo_wiki;
-		}
-		else {
-			night_logo = wiki.Appe().Fsys_mgr().Bin_xowa_dir().GenSubFil_nest("html", "css", "nightmode", "logo.png");
-		}
+		Io_url night_logo = wiki.App().Fsys_mgr().Url_finder().Find_by_css_or(wiki.Domain_str(), "logo_night.png", String_.Ary("bin", "any", "xowa", "html", "css", "nightmode"), true);
 		div_logo_night = Init_fmtr(tmp_bfr, eval_mgr, div_logo_fmtr, main_page_href_bry, fsys_lnx_encoder.Encode_to_file_protocol(night_logo));
 
-//			div_logo_day = Init_fmtr(tmp_bfr, eval_mgr, div_logo_fmtr, main_page_href_bry, fsys_lnx_encoder.Encode_to_file_protocol(wiki.Appe().Usere().Fsys_mgr().Wiki_root_dir().GenSubFil_nest(wiki.Domain_str(), "html", "logo.png")));
-//			div_logo_night = Init_fmtr(tmp_bfr, eval_mgr, div_logo_fmtr, main_page_href_bry, fsys_lnx_encoder.Encode_to_file_protocol(wiki.Appe().Fsys_mgr().Bin_xowa_dir().GenSubFil_nest("html", "css", "nightmode", "logo.png")));
 		div_home_bry = Init_fmtr(tmp_bfr, eval_mgr, div_home_fmtr);
 		div_wikis_fmtr.Eval_mgr_(eval_mgr);
 		Xow_msg_mgr msg_mgr = wiki.Msg_mgr();

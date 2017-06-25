@@ -43,7 +43,11 @@ public class Xoav_app implements Xoa_app, Gfo_invk {
 		this.utl_msg_log = Gfo_msg_log.Test();
 		this.html__bridge_mgr = new Xoh_bridge_mgr(utl__json_parser);
 		this.gui__tab_mgr = tab_mgr;
+
+		// user
 		this.user = new Xouv_user(this, "anonymous", root_dir.GenSubDir_nest("user", "anonymous"));
+		this.fsys_mgr.Url_finder().Init_by_user(user.Fsys_mgr());
+
 		this.api_root = null;
 		this.site_cfg_mgr = new Xoa_site_cfg_mgr(this);
 		this.bldr = new Xob_bldr(null);

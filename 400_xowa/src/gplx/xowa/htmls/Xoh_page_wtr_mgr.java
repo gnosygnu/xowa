@@ -34,20 +34,13 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 	public Bry_fmtr Page_edit_fmtr() {return page_edit_fmtr;} private Bry_fmtr page_edit_fmtr = Bry_fmtr.new_("", Fmtr_keys);
 	public Bry_fmtr Page_html_fmtr() {return page_html_fmtr;} private Bry_fmtr page_html_fmtr = Bry_fmtr.new_("", Fmtr_keys);
 	public byte[] Edit_rename_div_bry(Xoa_ttl ttl) {return div_edit_rename_fmtr.Bld_bry_many(tmp_bfr, ttl.Full_db());}
-	public void Init_css_urls(Xoa_app app, Io_url css_common_url, Io_url css_wiki_url) {
+	public void Init_css_urls(Xoa_app app, String wiki_domain, Io_url css_common_url, Io_url css_wiki_url) {
 		this.css_common_bry = css_common_url.To_http_file_bry();
 		this.css_wiki_bry = css_wiki_url.To_http_file_bry();
 
-		// set css_night_url to /xowa/user/ root
-		Io_url css_night_url = css_wiki_url.OwnerDir().GenSubFil("xowa_night.css");
-
-		// if it doesn't exist, use bin root
-		if (!Io_mgr.Instance.ExistsFil(css_night_url)) {
-			css_night_url = app.Fsys_mgr().Bin_xowa_dir().GenSubFil_nest("html", "css", "nightmode", "xowa_night.css");
-		}
-
-		// make night_bry
-		this.css_night_bry = Bry_.new_u8("<link rel=\"stylesheet\" href=\"" + css_night_url.To_http_file_str() + "\" type=\"text/css\">");; 
+		// xowa_night.css;
+		Io_url css_night_url = app.Fsys_mgr().Url_finder().Find_by_css_or(wiki_domain, "xowa_night.css", String_.Ary("bin", "any", "xowa", "html", "css", "nightmode"), true);
+		this.css_night_bry = Bry_.new_u8("<link rel=\"stylesheet\" href=\"" + css_night_url.To_http_file_str() + "\" type=\"text/css\">");
 	}
 	public void Init_(boolean v) {init = v;} private boolean init = true;
 	public void Init_by_wiki(Xow_wiki wiki) {

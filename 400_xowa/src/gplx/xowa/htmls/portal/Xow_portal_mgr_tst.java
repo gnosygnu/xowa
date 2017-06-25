@@ -35,7 +35,7 @@ public class Xow_portal_mgr_tst {
 		fxt.Test_logo_frag(Bool_.N, "file:///mem/xowa/user/test_user/wiki/en.wikipedia.org/html/logo.png");
 
 		// night-mode: app
-		fxt.Test_logo_frag(Bool_.Y, "file:///mem/xowa/bin/any/xowa/html/css/nightmode/logo.png");
+		fxt.Test_logo_frag(Bool_.Y, "file:///mem/xowa/bin/any/xowa/html/css/nightmode/logo_night.png");
 
 		// night-mode: wiki
 		Io_mgr.Instance.SaveFilStr("mem/xowa/user/test_user/wiki/en.wikipedia.org/html/logo_night.png", "");

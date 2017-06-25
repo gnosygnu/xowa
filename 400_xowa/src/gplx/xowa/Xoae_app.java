@@ -39,7 +39,11 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		fsys_mgr = new Xoa_fsys_mgr(bin_dir_name, root_dir, wiki_dir, file_dir, css_dir, root_dir);
 		log_wtr = usr_dlg.Log_wkr();
 		api_root = new Xoapi_root(this);
+
+		// user
 		user = new Xoue_user(this, user_dir);
+		this.fsys_mgr.Url_finder().Init_by_user(user.Fsys_mgr());
+
 		this.meta_mgr = new Xoa_meta_mgr(this);
 		url_cmd_eval = new Xoa_fsys_eval(fsys_mgr, user.Fsys_mgr());			
 		fsys_mgr.Init_by_app(prog_mgr);

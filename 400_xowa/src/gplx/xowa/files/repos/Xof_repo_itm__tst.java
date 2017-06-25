@@ -43,7 +43,7 @@ class Xof_repo_itm__fxt {
 	public Xof_repo_itm Make__repo(String plat_name, String root_dir_str, String wiki_domain) {
 		String key = "test_repo";
 		Io_url root_dir = Io_url_.new_dir_(root_dir_str);
-		Xoa_fsys_mgr fsys_mgr = new Xoa_fsys_mgr(plat_name, root_dir, root_dir.GenSubDir("wiki"), root_dir.GenSubDir("file"), root_dir.GenSubDir("css"), root_dir.GenSubDir("html"));
+		Xoa_fsys_mgr fsys_mgr = Xoa_fsys_mgr.New_by_plat(plat_name, root_dir);
 		Xof_repo_itm repo = new Xof_repo_itm(Bry_.new_u8(key), fsys_mgr, new Xof_rule_mgr(), Bry_.new_u8(wiki_domain));
 		repo.Root_str_(root_dir.Raw());
 		return repo;

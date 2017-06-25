@@ -22,7 +22,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.
 import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.addons.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.hrefs.*;
-import gplx.xowa.wikis.nss.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.fsys.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.apps.urls.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*;
@@ -33,16 +33,21 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	private boolean init_needed = true;
 	public Xowv_wiki(Xoav_app app, byte[] domain_bry, Io_url wiki_root_dir) {
 		this.app = app;
-		this.domain_bry = domain_bry; this.domain_str = String_.new_u8(domain_bry); 
+
+		// domain vars
+		this.domain_bry = domain_bry;
+		this.domain_str = String_.new_u8(domain_bry); 
 		this.domain_itm = Xow_domain_itm_.parse(domain_bry);
 		this.domain_tid = domain_itm.Domain_type_id();
-		this.domain_abrv = Xow_abrv_wm_.To_abrv(Xow_domain_itm_.parse(domain_bry));
+		this.domain_abrv = Xow_abrv_wm_.To_abrv(domain_itm);
+
+		this.fsys_mgr = new Xow_fsys_mgr(wiki_root_dir, app.Fsys_mgr().File_dir().GenSubDir(domain_str));
+
 		this.ns_mgr = Xow_ns_mgr_.default_(app.Utl_case_mgr());
 		this.lang = app.Lang_mgr().Get_by_or_en(domain_itm.Lang_actl_key());	// NOTE: must not be null, or causes null ref exception on redlinks in drd; DATE:2016-06-28
 		this.msg_mgr = new Xow_msg_mgr(this, lang);
 		this.html__hdump_mgr = new Xow_hdump_mgr(this);
 		this.special_mgr = new Xosp_special_mgr(this);
-		this.fsys_mgr = new Xow_fsys_mgr(wiki_root_dir, app.Fsys_mgr().File_dir().GenSubDir(domain_str));
 		this.fsdb_mgr = new Xof_fsdb_mgr__sql();
 		this.url__parser = new Xow_url_parser(this);
 		this.xwiki_mgr = new Xow_xwiki_mgr(this);
