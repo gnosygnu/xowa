@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.tests.*;
 public class Xow_portal_mgr_tst {
 	@Before public void init() {fxt.Init();} private Xowh_portal_mgr_fxt fxt = new Xowh_portal_mgr_fxt();
 	@Test  public void Div_ns_bry() {
@@ -27,15 +27,32 @@ public class Xow_portal_mgr_tst {
 	@Test  public void Missing_ns_cls() {
 		fxt.Test_missing_ns_cls("xowa_display_none");
 	}
+	@Test  public void Logo() {
+		fxt.Portal_mgr().Div_logo_fmtr().Fmt_("~{portal_logo_url}");
+
+		// day-mode
+		fxt.Portal_mgr().Init();
+		fxt.Test_logo_frag(Bool_.N, "file:///mem/xowa/user/test_user/wiki/en.wikipedia.org/html/logo.png");
+
+		// night-mode: app
+		fxt.Test_logo_frag(Bool_.Y, "file:///mem/xowa/bin/any/xowa/html/css/nightmode/logo.png");
+
+		// night-mode: wiki
+		Io_mgr.Instance.SaveFilStr("mem/xowa/user/test_user/wiki/en.wikipedia.org/html/logo_night.png", "");
+		fxt.Portal_mgr().Init();
+		fxt.Test_logo_frag(Bool_.Y, "file:///mem/xowa/user/test_user/wiki/en.wikipedia.org/html/logo_night.png");
+	}
 }
 class Xowh_portal_mgr_fxt {
+	private Xow_portal_mgr portal_mgr;
 	public void Init() {
 		if (app == null) {
 			app = Xoa_app_fxt.Make__app__edit();
 			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 			wiki.Ns_mgr().Ns_main().Exists_(true);	// needed for ns
-			wiki.Html_mgr().Portal_mgr().Init_assert();	// needed for personal
-			wiki.Html_mgr().Portal_mgr().Missing_ns_cls_(Bry_.new_a7("xowa_display_none"));
+			this.portal_mgr = wiki.Html_mgr().Portal_mgr();
+			portal_mgr.Init_assert();	// needed for personal
+			portal_mgr.Missing_ns_cls_(Bry_.new_a7("xowa_display_none"));
 		}
 	}	private Xoae_app app; Xowe_wiki wiki;
 	public void Test_div_ns_bry(String ttl, String expd) {
@@ -46,5 +63,10 @@ class Xowh_portal_mgr_fxt {
 	}
 	public void Test_missing_ns_cls(String expd) {
 		Tfds.Eq(expd, String_.new_a7(wiki.Html_mgr().Portal_mgr().Missing_ns_cls()));
+	}
+	public Xow_portal_mgr Portal_mgr() {return wiki.Html_mgr().Portal_mgr();}
+	public void Test_logo_frag(boolean nightmode, String expd) {
+		String actl = String_.new_a7(wiki.Html_mgr().Portal_mgr().Div_logo_bry(nightmode));
+		Gftest.Eq__str(expd, actl);
 	}
 }
