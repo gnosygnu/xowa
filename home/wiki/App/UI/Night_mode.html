@@ -21,7 +21,7 @@
       As of v4.4, XOWA offers night mode.
     </p>
     <div id="toc" class="toc">
-      <div id="toctitle">
+      <div id="toctitle" class="toctitle">
         <h2>
           Contents
         </h2>
@@ -42,21 +42,27 @@
             <li class="toclevel-2 tocsection-5">
               <a href="#CSS"><span class="tocnumber">2.3</span> <span class="toctext">CSS</span></a>
             </li>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#Generating_a_night-mode_CSS_from_scratch"><span class="tocnumber">2.4</span> <span class="toctext">Generating a night-mode CSS from scratch</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#Specifying_a_night-mode_CSS_per_wiki"><span class="tocnumber">2.5</span> <span class="toctext">Specifying a night-mode CSS per wiki</span></a>
+            </li>
           </ul>
         </li>
-        <li class="toclevel-1 tocsection-6">
+        <li class="toclevel-1 tocsection-8">
           <a href="#Known_issues"><span class="tocnumber">3</span> <span class="toctext">Known issues</span></a> 
           <ul>
-            <li class="toclevel-2 tocsection-7">
+            <li class="toclevel-2 tocsection-9">
               <a href="#White_border_around_tab_buttons"><span class="tocnumber">3.1</span> <span class="toctext">White border around tab buttons</span></a>
             </li>
-            <li class="toclevel-2 tocsection-8">
+            <li class="toclevel-2 tocsection-10">
               <a href="#Flashing_white_background_when_viewing_new_pages"><span class="tocnumber">3.2</span> <span class="toctext">Flashing white background when viewing new pages</span></a>
             </li>
-            <li class="toclevel-2 tocsection-9">
+            <li class="toclevel-2 tocsection-11">
               <a href="#Flashing_white_background_when_opening_new_tabs"><span class="tocnumber">3.3</span> <span class="toctext">Flashing white background when opening new tabs</span></a>
             </li>
-            <li class="toclevel-2 tocsection-10">
+            <li class="toclevel-2 tocsection-12">
               <a href="#Various_icons_are_hard_to_see_in_night_mode"><span class="tocnumber">3.4</span> <span class="toctext">Various icons are hard to see in night mode</span></a>
             </li>
           </ul>
@@ -74,7 +80,7 @@
         <b>Main Menu</b>: Choose <code>View</code> -&gt; <code>Toggle Night mode</code>
       </li>
       <li>
-        <b>Options</b>: Go to <a href="http://xowa.org/home/wiki/Special:XowaCfg%3Fgrp%3Dxowa.gui.nightmode.html" id="xolnki_2" title="Special:XowaCfg?grp=xowa.gui.nightmode">Special:XowaCfg?grp=xowa.gui.nightmode</a> and check <code>Enabled</code>
+        <b>Options</b>: Go to <a href="http://xowa.org/home/wiki/Special:XowaCfg%3Fgrp%3Dxowa.gui.nightmode.html" id="xolnki_2" title="Special:XowaCfg?grp=xowa.gui.nightmode" class="xowa-visited">Special:XowaCfg?grp=xowa.gui.nightmode</a> and check <code>Enabled</code>
       </li>
     </ul>
     <h2>
@@ -130,7 +136,7 @@
       </li>
     </ul>
     <p>
-      By default, a simple white on black theme is chosen. Exact colors can be chosen through <a href="http://xowa.org/home/wiki/Special:XowaCfg%3Fgrp%3Dxowa.gui.nightmode.html" id="xolnki_3" title="Special:XowaCfg?grp=xowa.gui.nightmode">Special:XowaCfg?grp=xowa.gui.nightmode</a>.
+      By default, a simple white on black theme is chosen. Exact colors can be chosen through <a href="http://xowa.org/home/wiki/Special:XowaCfg%3Fgrp%3Dxowa.gui.nightmode.html" id="xolnki_3" title="Special:XowaCfg?grp=xowa.gui.nightmode" class="xowa-visited">Special:XowaCfg?grp=xowa.gui.nightmode</a>.
     </p>
     <h3>
       <span class="mw-headline" id="CSS">CSS</span>
@@ -138,8 +144,11 @@
     <p>
       Colors for all HTML content are specified through the CSS. By default, XOWA uses a global css at C:\xowa\bin\any\xowa\html\css\nightmode\xowa_night.css.
     </p>
+    <h3>
+      <span class="mw-headline" id="Generating_a_night-mode_CSS_from_scratch">Generating a night-mode CSS from scratch</span>
+    </h3>
     <p>
-      This CSS can be generated using the following process:
+      The night-mode CSS can be generated using the following process:
     </p>
     <ul>
       <li>
@@ -164,11 +173,30 @@
         Remove any line that loads external urls (for example, loading images from <a href="http://imgur.com" rel="nofollow" class="external free">http://imgur.com</a>)
       </li>
     </ul>
+    <h3>
+      <span class="mw-headline" id="Specifying_a_night-mode_CSS_per_wiki">Specifying a night-mode CSS per wiki</span>
+    </h3>
     <p>
-      Note that the global night mode css file should not be modified (C:\xowa\bin\any\xowa\html\css\nightmode\xowa_night.css). Any modifications here will be lost in the next update.
+      The night-mode CSS is chosen using the following priority list:
     </p>
+    <ul>
+      <li>
+        <b>Wiki-specific</b>: XOWA first checks for a night-mode CSS in this location: C:\xowa\user\anonymous\wiki\your_wiki_name\html\xowa_night.css
+      </li>
+      <li>
+        <b>User global</b>: If XOWA doesn't find a wiki-specific file, it checks for a user-defined global file here: C:\xowa\user\anonymous\app\overrides\bin\any\xowa\html\css\nightmode\xowa_night.css.
+      </li>
+      <li>
+        <b>XOWA global</b>: If XOWA still doesn't find a CSS file, it uses the global file that is distributed with the XOWA application package here: C:\xowa\bin\any\xowa\html\css\nightmode\xowa_night.css
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <b>Note that the XOWA global file should not be modified. Any modifications here will be lost in the next update.</b>
+      </dd>
+    </dl>
     <p>
-      If you want to customize the CSS, it must be done per wiki. Place the modified css file at C:\xowa\user\anonymous\wiki\your_wiki_name\html\xowa_night.css
+      The above logic also applies to the night-mode logo: logo_night.png.
     </p>
     <h2>
       <span class="mw-headline" id="Known_issues">Known issues</span>
@@ -212,7 +240,7 @@
       By default, XOWA is designed for a non-night-mode setting ("day mode"). Most icons will look fine for day mode. Unfortunately, resources are not available to always support both a "day mode" and a "night mode" theme.
     </p>
     <p>
-      Of course, contributions are always welcome. If you want to contribute a unified night mode theme, please contact me via <a href="http://xowa.org/home/wiki/Help/Feedback.html" id="xolnki_5" title="Help/Feedback" class="xowa-visited">Help/Feedback</a>
+      Of course, contributions are always welcome. If you want to contribute a unified night mode theme, please contact me via <a href="http://xowa.org/home/wiki/Help/Feedback.html" id="xolnki_5" title="Help/Feedback">Help/Feedback</a>
     </p>
   <div id="catlinks" class="catlinks">
 <div id="mw-normal-catlinks" class="mw-normal-catlinks">
