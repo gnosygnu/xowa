@@ -17,7 +17,9 @@ package gplx.xowa.addons.servers.https; import gplx.*; import gplx.xowa.*; impor
 import gplx.core.envs.*;
 public class Http_long_poll_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_itm {
 	private final    List_adp msgs = List_adp_.New();
-	private boolean active;
+	private String prv_guid;
+	private long prv_start;
+	private long prv_timeout;
 
 	public void Init_by_app(Xoa_app app) {
 		app.Gui__cbk_mgr().Reg(Xog_cbk_wkr__http.Instance);
@@ -27,17 +29,30 @@ public class Http_long_poll_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_it
 			msgs.Add(msg);
 		}
 	}
+	// NOTE: this class is a singleton and only supports one user; need to track multiple requests by having http_server track incoming users
 	public String Exec(gplx.langs.jsons.Json_nde data) {
-		// NOTE: this class is a singleton and only supports one user; need to track multiple requests by having http_server track incoming users
+		// for each new request, update guid / start_time
+		String cur_guid = data.Get_as_str_or("guid", "");
+		long cur_timeout = data.Get_as_long_or("timeout", 5000);
 		synchronized (msgs) {
-			if (active) return "polling";
+			this.prv_guid = cur_guid;
+			this.prv_start = System_.Ticks();
+			this.prv_timeout = cur_timeout;
 		}
+
 		// check if already active; if so, return;
 		while (true) {
+			synchronized (msgs) {
+				if (!String_.Eq(cur_guid, prv_guid))
+					return String_.Format("long-poll ignored: new long-poll arrived: prv={0} cur={1}", prv_guid, cur_guid);
+
+				if (System_.Ticks__elapsed_in_frac(prv_start) > prv_timeout)
+					return String_.Format("long-poll ignored: old long-poll timed-out: guid={0}", cur_guid);
+			}
+
 			// get msgs in queue
 			int msgs_len = 0;
 			synchronized (msgs) {
-				active = true;
 				msgs_len = msgs.Len();
 			}
 
@@ -55,7 +70,6 @@ public class Http_long_poll_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_it
 		String[] rv = null;
 		synchronized (msgs) {
 			rv = msgs.To_str_ary_and_clear();
-			active = false;
 		}
 		return String_.Concat_lines_nl(rv);
 	}

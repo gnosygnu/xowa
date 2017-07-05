@@ -75,7 +75,7 @@ public class Xoa_cmd_arg_mgr {
 		, Gfo_cmd_arg_itm_.opt_("server_port_recv").Example_("55000").Note_("applies to --app_mode server; port where xowa server will receive messages; clients should send messages to this port")
 		, Gfo_cmd_arg_itm_.opt_("server_port_send").Example_("55001").Note_("applies to --app_mode server; port where xowa server will send messages; clients should listen for messages from this port")
 		, Gfo_cmd_arg_itm_.opt_("http_server_port").Example_("8080").Note_("applies to --app_mode http_server; port used by http_server; default is 8080")
-		, Gfo_cmd_arg_itm_.opt_("http_server_home").Example_("home/wiki/Main_Page").Note_("applies to --app_mode http_server; default home page for root address. EX: navigating to localhost:8080 will navigate to localhost:8080/home/wiki/Main_Page")
+		, Gfo_cmd_arg_itm_.opt_("http_server_home").Example_("home/wiki/Main_Page").Note_("applies to --app_mode http_server; default home page for root address. EX: navigating to localhost:8080 will navigate to localhost:8080/home/wiki/Main_Page. To navigate to a wiki's main page, use the domain name only. EX: --http_server_home en.wikipedia.org")
 		, Gfo_cmd_arg_itm_.opt_("http_server.max_clients").Example_("15").Note_("applies to --app_mode http_server; limits maximum number of concurrent connections; default is 0 (no limit)")
 		, Gfo_cmd_arg_itm_.opt_("http_server.max_clients_timeout").Example_("50").Note_("applies to --app_mode http_server; time in milliseconds to wait before checking again to see if a connection is free; default is 50 (wait 50 ms)")
 		, Gfo_cmd_arg_itm_.sys_("show_license").Dflt_(true)

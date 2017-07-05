@@ -161,13 +161,16 @@ class Xosrv_http_wkr_ {
 	public static void Write_response_as_html(Http_client_wtr client_wtr, boolean cross_domain, String html) {Write_response_as_html(client_wtr, cross_domain, Bry_.new_u8(html));}
 	public static void Write_response_as_html(Http_client_wtr client_wtr, boolean cross_domain, byte[] html) {
 		try{
-			client_wtr.Write_bry(Rsp__http_ok);
 			// TODO_OLD: add command-line argument to allow testing from local file
 			// if (cross_domain)
 			//	client_wtr.Write_str("Access-Control-Allow-Origin: *\n");	// No 'Access-Control-Allow-Origin' header is present on the requested resource.
-			client_wtr.Write_bry(Rsp__content_type_html);
-			client_wtr.Write_bry(Byte_ascii.Nl_bry);
-			client_wtr.Write_bry(html);
+			client_wtr.Write_bry
+			( Bry_.Add
+			(   Rsp__http_ok
+			,   Rsp__content_type_html
+			,   Byte_ascii.Nl_bry
+			,   html
+			));
 		} catch (Exception err) {
 			client_wtr.Write_str("Site not found. Check address please, or see console log.\n" + Err_.Message_lang(err));
 			client_wtr.Rls();
