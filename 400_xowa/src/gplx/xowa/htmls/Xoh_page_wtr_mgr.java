@@ -92,6 +92,7 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 	, "html_css_common_path", "html_css_wiki_path", "html_css_night_tag", "xowa_head"
 	, "page_lang_ltr", "page_indicators", "page_content_sub", "page_jumpto", "page_pgbnr", "page_body_cls", "html_content_editable"
 	, "page_data", "page_langs"
+	, "portal_div_footer"
 	, "portal_div_personal", "portal_div_ns", "portal_div_view"
 	, "portal_div_logo", "portal_div_home", "portal_div_xtn"
 	, "portal_div_admin", "portal_div_wikis", "portal_sidebar"

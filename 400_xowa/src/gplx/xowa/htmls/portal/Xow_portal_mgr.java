@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
+import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.brys.fmts.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.guis.*; import gplx.xowa.addons.htmls.sidebars.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.wikis.nss.*;
@@ -41,7 +41,7 @@ public class Xow_portal_mgr implements Gfo_invk {
 		lang_is_rtl = !lang.Dir_ltr();
 	}
 	public void Init_by_wiki(Xowe_wiki wiki) {
-		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__missing_class, Cfg__sidebar_enabled__desktop, Cfg__sidebar_enabled__server);
+		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__divs__footer, Cfg__missing_class, Cfg__sidebar_enabled__desktop, Cfg__sidebar_enabled__server);
 	}
 	private void Sidebar_enabled_(boolean is_desktop, boolean val) {
 		// set sidebar_enabled if (a) is_gui and is_desktop; or (b) is_server and !is_desktop
@@ -87,6 +87,18 @@ public class Xow_portal_mgr implements Gfo_invk {
 		fmtr.Bld_bfr_many(tmp_bfr, fmt_args);
 		return tmp_bfr.To_bry_and_clear();
 	}
+
+	// div_footer
+	private Bry_fmtr div_footer_fmtr = Bry_fmtr.keys_("page_modified_on_msg", "app_version", "app_build_date");
+	private byte[] div_footer_bry = Bry_.Empty;
+	public byte[] Div_footer(byte[] page_modified_on_msg, String app_version, String app_build_date) {
+		if (div_footer_bry == Bry_.Empty) {
+			Bry_bfr tmp_bfr = Bry_bfr_.New();
+			div_footer_bry = Init_fmtr(tmp_bfr, wiki.Eval_mgr(), div_footer_fmtr, page_modified_on_msg, app_version, app_build_date);
+		}
+		return div_footer_bry;
+	}
+
 	public byte[] Div_personal_bry() {return div_personal_bry;} private byte[] div_personal_bry = Bry_.Empty;
 	public byte[] Div_ns_bry(Bry_bfr_mkr bfr_mkr, Xoa_ttl ttl, Xow_ns_mgr ns_mgr) {
 		Xow_ns ns = ttl.Ns();
@@ -166,6 +178,7 @@ public class Xow_portal_mgr implements Gfo_invk {
 		else if (ctx.Match(k, Cfg__missing_class))					missing_ns_cls = m.ReadBry("v");
 		else if (ctx.Match(k, Cfg__sidebar_enabled__desktop))		Sidebar_enabled_(Bool_.Y, m.ReadYn("v"));
 		else if (ctx.Match(k, Cfg__sidebar_enabled__server))		Sidebar_enabled_(Bool_.N, m.ReadYn("v"));
+		else if (ctx.Match(k, Cfg__divs__footer))					div_footer_fmtr.Fmt_(m.ReadBry("v"));
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -181,5 +194,6 @@ public class Xow_portal_mgr implements Gfo_invk {
 	  Cfg__missing_class				= "xowa.html.portal.missing_class"
 	, Cfg__sidebar_enabled__desktop		= "xowa.html.portal.sidebar_enabled_desktop"
 	, Cfg__sidebar_enabled__server		= "xowa.html.portal.sidebar_enabled_server"
+	, Cfg__divs__footer					= "xowa.html.divs.footer"
 	;
 }
