@@ -88,7 +88,7 @@ public class Xoa_boot_mgr {
 
 				// prep http-server
 				gplx.xowa.apps.servers.http.Http_server_mgr server_mgr = app.Http_server();
-				server_mgr.Port_(arg_mgr.Http__port());
+				server_mgr.Port_(arg_mgr.Http__port(), false);
 				server_mgr.Home_(Bry_.new_u8(arg_mgr.Http__home_page()));
 				server_mgr.Wkr_pool().Init(arg_mgr.Http__max_clients(), arg_mgr.Http__max_clients_timeout());
 

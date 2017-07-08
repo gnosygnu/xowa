@@ -47,7 +47,16 @@ public class Http_server_mgr implements Gfo_invk {
 	public Http_server_wtr Server_wtr() {return server_wtr;} private final    Http_server_wtr server_wtr = Http_server_wtr_.New__console();
 	public Http_request_parser Request_parser() {return request_parser;} private final    Http_request_parser request_parser;
 	public Gfo_url_encoder Encoder() {return encoder;} private final    Gfo_url_encoder encoder = Gfo_url_encoder_.New__http_url().Make();
-	public int Port() {return port;} public Http_server_mgr Port_(int v) {port = v; return this;} private int port = 8080;
+	public int Port() {return port;} 
+	public Http_server_mgr Port_(int v, boolean caller_is_cfg) {
+		if (	caller_is_cfg
+			&&	v == Port__default		// new_val == 8080
+			&&  port != Port__default) {// cur_val != 8080
+			return this;				// exit; do not override command-line value with cfg_value
+		}
+		port = v; 
+		return this;
+	} private int port = Port__default;
 	public Http_server_wkr_pool Wkr_pool() {return wkr_pool;} private final    Http_server_wkr_pool wkr_pool = new Http_server_wkr_pool();
 	public Int_pool Uid_pool() {return uid_pool;} private final    Int_pool uid_pool = new Int_pool();
 	public byte[] Home() {return home;} public void Home_(byte[] v) {home = Bry_.Add(Byte_ascii.Slash_bry, v);} private byte[] home = Bry_.new_a7("/home/wiki/Main_Page");
@@ -133,7 +142,7 @@ public class Http_server_mgr implements Gfo_invk {
 		usr_dlg.Note_many("", "", s);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Cfg__port))					Port_(m.ReadInt("v"));
+		if		(ctx.Match(k, Cfg__port))					Port_(m.ReadInt("v"), true);
 		else if	(ctx.Match(k, Cfg__file_retrieve_mode))		retrieve_mode = File_retrieve_mode.Xto_byte(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_running_))				Running_(m.ReadYn("v"));
 		else	return Gfo_invk_.Rv_unhandled;
@@ -143,4 +152,5 @@ public class Http_server_mgr implements Gfo_invk {
 	private static final String
 	  Cfg__port					= "xowa.addon.http_server.port"
 	, Cfg__file_retrieve_mode	= "xowa.addon.http_server.file_retrieve_mode";
+	private static final int Port__default = 8080;
 }
