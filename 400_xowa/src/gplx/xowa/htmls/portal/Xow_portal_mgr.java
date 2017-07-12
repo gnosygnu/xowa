@@ -92,10 +92,8 @@ public class Xow_portal_mgr implements Gfo_invk {
 	private Bry_fmtr div_footer_fmtr = Bry_fmtr.keys_("page_modified_on_msg", "app_version", "app_build_date");
 	private byte[] div_footer_bry = Bry_.Empty;
 	public byte[] Div_footer(byte[] page_modified_on_msg, String app_version, String app_build_date) {
-		if (div_footer_bry == Bry_.Empty) {
-			Bry_bfr tmp_bfr = Bry_bfr_.New();
-			div_footer_bry = Init_fmtr(tmp_bfr, wiki.Eval_mgr(), div_footer_fmtr, page_modified_on_msg, app_version, app_build_date);
-		}
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		div_footer_bry = Init_fmtr(tmp_bfr, wiki.Eval_mgr(), div_footer_fmtr, page_modified_on_msg, app_version, app_build_date);
 		return div_footer_bry;
 	}
 
