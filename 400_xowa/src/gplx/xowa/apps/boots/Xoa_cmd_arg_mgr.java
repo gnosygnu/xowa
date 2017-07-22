@@ -32,6 +32,7 @@ public class Xoa_cmd_arg_mgr {
 	public String Http__home_page() {return http__home_page;} private String http__home_page;
 	public int Http__max_clients() {return http__max_clients;} private int http__max_clients;
 	public int Http__max_clients_timeout() {return http__max_clients_timeout;} private int http__max_clients_timeout;
+	public String Http__special_pages_safelist() {return http__special_pages_safelist;} private String http__special_pages_safelist;
 	public String Gui__home_page() {return gui__home_page;} private String gui__home_page;
 	public boolean Process(Gfo_usr_dlg usr_dlg, String[] args, Io_url jar_dir) {
 		arg_mgr.Parse(args);
@@ -48,6 +49,7 @@ public class Xoa_cmd_arg_mgr {
 		this.http__home_page = arg_mgr.Get_by("http_server_home").Val_as_str_or("home/wiki/Main_Page");
 		this.http__max_clients = arg_mgr.Get_by("http_server.max_clients").Val_as_int_or(0);
 		this.http__max_clients_timeout = arg_mgr.Get_by("http_server.max_clients_timeout").Val_as_int_or(50);
+		this.http__special_pages_safelist = arg_mgr.Get_by("http_server.special_pages_safelist").Val_as_str_or("");
 		this.gui__home_page = arg_mgr.Get_by("url").Val_as_str_or(null);
 		this.fsys__bin_dir = arg_mgr.Get_by("bin_dir_name").Val_as_str_or(Bin_dir_name());
 		return true;
@@ -78,6 +80,7 @@ public class Xoa_cmd_arg_mgr {
 		, Gfo_cmd_arg_itm_.opt_("http_server_home").Example_("home/wiki/Main_Page").Note_("applies to --app_mode http_server; default home page for root address. EX: navigating to localhost:8080 will navigate to localhost:8080/home/wiki/Main_Page. To navigate to a wiki's main page, use the domain name only. EX: --http_server_home en.wikipedia.org")
 		, Gfo_cmd_arg_itm_.opt_("http_server.max_clients").Example_("15").Note_("applies to --app_mode http_server; limits maximum number of concurrent connections; default is 0 (no limit)")
 		, Gfo_cmd_arg_itm_.opt_("http_server.max_clients_timeout").Example_("50").Note_("applies to --app_mode http_server; time in milliseconds to wait before checking again to see if a connection is free; default is 50 (wait 50 ms)")
+		, Gfo_cmd_arg_itm_.opt_("http_server.special_pages_safelist").Example_("Random|XowaSearch|AllPages").Note_("specifies list of permitted special pages; special-page name is case-insensitive and must be separated by pipes (|); default is '' which permits all special pages")
 		, Gfo_cmd_arg_itm_.sys_("show_license").Dflt_(true)
 		, Gfo_cmd_arg_itm_.sys_("show_args").Dflt_(true)
 		, Gfo_cmd_arg_itm_.new_(Gfo_cmd_arg_itm_.Tid_system, "help", Bool_.N, Gfo_cmd_arg_itm_.Val_tid_string)

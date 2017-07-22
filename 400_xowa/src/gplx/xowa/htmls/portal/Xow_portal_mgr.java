@@ -19,9 +19,10 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.guis.*; import gplx.xowa.addons.htmls.sidebars.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*; 
-import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.hrefs.*;
+import gplx.xowa.htmls.core.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.apps.apis.xowa.html.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.htmls.portal.vnts.*;
+import gplx.xowa.parsers.amps.*;
 public class Xow_portal_mgr implements Gfo_invk {
 	private Xowe_wiki wiki; private boolean lang_is_rtl; private Xoapi_toggle_itm toggle_itm;
 	private final    Vnt_mnu_grp_fmtr vnt_menu_fmtr = new Vnt_mnu_grp_fmtr();
@@ -111,8 +112,13 @@ public class Xow_portal_mgr implements Gfo_invk {
 			vnt_menu_fmtr.Init(vnt_mgr.Regy(), wiki.Domain_bry(), ttl.Full_db(), vnt_mgr.Cur_itm().Key());
 			vnt_menu = wiki.Lang().Vnt_mgr().Enabled() ? vnt_menu_fmtr : null;
 		}
+
+		// NOTE: need to escape args href for Search page b/c user can enter in quotes and apos; EX:localhost:8080/en.wikipedia.org/wiki/Special:XowaSearch?search=title:(%2Breturn%20%2B"abc") ; DATE:2017-07-16
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
-		div_ns_fmtr.Bld_bfr_many(tmp_bfr, Bry_.Add(Xoh_href_.Bry__wiki, ttl.Subj_txt()), subj_cls, Bry_.Add(Xoh_href_.Bry__wiki, ttl.Talk_txt()), talk_cls, vnt_menu);
+		byte[] subj_href = Xoh_html_wtr_escaper.Escape(Xop_amp_mgr.Instance, tmp_bfr, Bry_.Add(Xoh_href_.Bry__wiki, ttl.Subj_txt()));
+		byte[] talk_href = Xoh_html_wtr_escaper.Escape(Xop_amp_mgr.Instance, tmp_bfr, Bry_.Add(Xoh_href_.Bry__wiki, ttl.Talk_txt()));
+
+		div_ns_fmtr.Bld_bfr_many(tmp_bfr, subj_href, subj_cls, talk_href, talk_cls, vnt_menu);
 		return tmp_bfr.To_bry_and_rls();
 	}
 	private byte[] Ns_cls_by_ord(Xow_ns_mgr ns_mgr, int ns_ord) {

@@ -18,6 +18,9 @@ import gplx.core.btries.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.entitys.*;
 import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.xndes.*;
 public class Xoh_html_wtr_escaper {
+	public static String Escape_str(Xop_amp_mgr amp_mgr, Bry_bfr tmp_bfr, String src) {
+		return String_.new_u8(Escape(amp_mgr, tmp_bfr, Bry_.new_u8(src)));
+	}
 	public static byte[] Escape(Xop_amp_mgr amp_mgr, Bry_bfr tmp_bfr, byte[] src) {
 		Escape(amp_mgr, tmp_bfr, src, 0, src.length, true, false);
 		return tmp_bfr.To_bry_and_clear();

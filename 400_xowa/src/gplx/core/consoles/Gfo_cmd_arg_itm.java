@@ -44,6 +44,7 @@ public class Gfo_cmd_arg_itm {
 		}
 	}
 	public boolean			Val_as_bool()				{return Bool_.Cast(val);}
+	public boolean			Val_as_bool_or(boolean or)		{return val == null ? or : String_.Eq((String)val, "y");}
 	public String		Val_as_str_or(String or)	{return val == null ? or : (String)val;}
 	public String		Val_as_str()				{return (String)val;}
 	public int			Val_as_int_or(int or)		{return val == null ? or : Int_.parse_or((String)val, or);}

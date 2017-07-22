@@ -92,6 +92,15 @@ public class Xoa_boot_mgr {
 				server_mgr.Home_(Bry_.new_u8(arg_mgr.Http__home_page()));
 				server_mgr.Wkr_pool().Init(arg_mgr.Http__max_clients(), arg_mgr.Http__max_clients_timeout());
 
+				// add safelisted Special pages
+				String special_pages_safelist = arg_mgr.Http__special_pages_safelist();
+				if (String_.Len_gt_0(special_pages_safelist)) {
+					byte[][] special_pages = Bry_split_.Split(Bry_.new_u8(special_pages_safelist), Byte_ascii.Pipe);
+					for (byte[] special_page : special_pages) {
+						app.Special_regy().Safelist_pages().Add_as_key_and_val(special_page);
+					}
+				}
+
 				Gfo_usr_dlg_.Instance.Log_wkr().Log_to_session_fmt("app.boot:app.init");
 				app.Init_by_app();
 			}
