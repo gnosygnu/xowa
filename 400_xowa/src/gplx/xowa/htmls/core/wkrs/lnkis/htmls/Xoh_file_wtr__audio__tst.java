@@ -54,8 +54,10 @@ public class Xoh_file_wtr__audio__tst {
 		, "    <div class=\"thumbcaption\">"
 		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.oga\" class=\"internal\" title=\"Enlarge\"></a></div>a"
 		, "    </div>"
+		, "    <div class=\"xowa_alt_text\">"
 		, "    <hr/>"
 		, "    <div class=\"thumbcaption\">b"
+		, "    </div>"
 		, "    </div>"
 		, "  </div>"
 		, "</div>"
@@ -76,8 +78,10 @@ public class Xoh_file_wtr__audio__tst {
 		, "    </div>"
 		, "    <div class=\"thumbcaption\">a"
 		, "    </div>"
+		, "    <div class=\"xowa_alt_text\">"
 		, "    <hr/>"
 		, "    <div class=\"thumbcaption\">b"
+		, "    </div>"
 		, "    </div>"
 		));		
 	}

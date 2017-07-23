@@ -34,8 +34,9 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 		this.caption_fmtr = new Xoh_lnki_text_fmtr(wiki.Utl__bfr_mkr(), html_wtr);
 		this.html_fmtr = fmtr__basic;
 	}
+	public boolean Alt_show_in_html() {return alt_show_in_html;} private boolean alt_show_in_html;
 	public void Init_by_wiki(Xowe_wiki wiki) {
-		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__alt_in_caption, Cfg__alt_defaults_to_caption);
+		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__alt_in_caption, Cfg__alt_defaults_to_caption, Cfg__alt_show_in_html);
 	}
 	public void Init_by_page(Xoh_wtr_ctx hctx, Xoae_page page) {
 		this.page = page;
@@ -271,12 +272,15 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Cfg__alt_in_caption))				alt_in_caption = m.ReadYn("v");
 		else if	(ctx.Match(k, Cfg__alt_defaults_to_caption))	alt_defaults_to_caption = m.ReadYn("v");
+		else if	(ctx.Match(k, Cfg__alt_show_in_html))			alt_show_in_html = m.ReadYn("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String
 	  Cfg__alt_in_caption				= "xowa.html.alt.show_in_caption"
-	, Cfg__alt_defaults_to_caption		= "xowa.html.alt.empty_alt_uses_caption";
+	, Cfg__alt_defaults_to_caption		= "xowa.html.alt.empty_alt_uses_caption"
+	, Cfg__alt_show_in_html				= "xowa.html.alt.show_in_html"
+	;
 
 	private static final    byte[]
 	  Div_center_bgn			= Bry_.new_a7("<div class=\"center\">")

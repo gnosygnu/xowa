@@ -100,8 +100,10 @@ public class Xoh_file_fmtr__basic implements Xoh_file_fmtr {
 	public Bry_fmt Fmt_thumb_part_alt() {return fmt__thumb_part_alt;} private final    Bry_fmt fmt__thumb_part_alt = Bry_fmt.Auto
 	(String_.Concat_lines_nl_skip_last
 	( ""
+	, "    <div class=\"xowa_alt_text\">"
 	, "    <hr/>"
 	, "    <div class=\"thumbcaption\">~{html}"
+	, "    </div>"
 	, "    </div>"
 	));
 
