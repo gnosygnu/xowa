@@ -67,7 +67,8 @@ public class Swt_btn_no_border implements GxwElem, Swt_control {
 		// for night mode, SWT introduces white pixels
 		// so resize only if height is different knowing that (a) btns have height of 16px and (b) day=32px; night=16px
 		// note can't use width, b/c search_exec_btn somehow goes from 16px to 20px
-		if (v.Size().Height() != size.Height())
+		if (	v.Size().Height() != size.Height()
+			&& 	size.Width() != 0)	// WORKAROUND.SWT: width is 0 due to "need to specify height" workaround on 2017-03-28; however, can't set 0 width else SWT will throw error; DATE:2017-07-23
 			v = v.Resize(size.Width(), size.Height());
 		if ((v.Under() instanceof Image)) { // check needed else will fail when image doesn't exist; DATE:2017-06-03
 			box_btn.setImage(Copy_w_transparency((Image)v.Under()));

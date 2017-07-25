@@ -118,7 +118,7 @@ public class Xoh_file_wtr__video__tst {
 		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.webm\" class=\"internal\" title=\"Enlarge\"></a></div>a"
 		, "    </div>"
 		, "    <div class=\"xowa_alt_text\">"
-		, "    <hr/>"
+			, "    <hr/>"
 		, "    <div class=\"thumbcaption\">b"
 		, "    </div>"
 		, "    </div>"
