@@ -67,7 +67,7 @@ public class Xobc_data_db_upgrader {
 		bc_db.Conn().Rls_conn();
 		if (expd_version_id == actl_version.Id()) {
 			Gfo_log_.Instance.Info("xobc_db update not needed", "version", expd_version_id);
-			Xopg_alertify_.Exec_log(task_mgr, "Wikis are up-to-date");
+			Xopg_alertify_.Exec_log(task_mgr, "Wikis are up-to-date", 30);
 			return;	// version matches; exit
 		}
 
@@ -80,7 +80,7 @@ public class Xobc_data_db_upgrader {
 		download_wkr.Exec(Gfo_prog_ui_.Always
 			, String_.new_u8(new_db_url)
 			, data_db_url, -1);
-		Xopg_alertify_.Exec_log(task_mgr, "Wikis have been updated:<br/>" + note);
+		Xopg_alertify_.Exec_log(task_mgr, "Wikis have been updated:<br/>" + note, 30);
 		task_mgr.Load_or_init();
 		task_mgr.Reload();
 	}

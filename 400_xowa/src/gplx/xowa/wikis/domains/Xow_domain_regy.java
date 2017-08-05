@@ -848,6 +848,8 @@ public class Xow_domain_regy {
 , "olo.wikipedia.org"
 , "dty.wikipedia.org"
 , "pa.wikisource.org"
+, "atj.wikipedia.org"
+, "kbp.wikipedia.org"
 };
 //, "als.wikisource.org"
 //, "als.wikinews.org"

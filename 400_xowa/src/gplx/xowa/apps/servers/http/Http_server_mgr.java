@@ -105,7 +105,7 @@ public class Http_server_mgr implements Gfo_invk {
 			// get the url / ttl
 			if (Bry_.Len_eq_0(ttl_bry)) ttl_bry = wiki.Props().Main_page();
 			Xoa_url url = wiki.Utl__url_parser().Parse(ttl_bry);
-			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, url.To_bry_page_w_anch());
+			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, url.To_bry_page_w_anch()); // changed from ttl_bry to page_w_anch; DATE:2017-07-24
 
 			// get the page
 			gplx.xowa.guis.views.Xog_tab_itm tab = Gxw_html_server.Assert_tab2(app, wiki);	// HACK: assert tab exists

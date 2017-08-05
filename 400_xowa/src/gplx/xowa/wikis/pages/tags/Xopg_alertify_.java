@@ -26,4 +26,7 @@ public class Xopg_alertify_ {
 	public static void Exec_log(Xog_json_wkr wkr, String msg) {
 		wkr.Send_json("xo.alertify.log_by_str", Gfobj_nde.New().Add_str("msg", msg));
 	}
+	public static void Exec_log(Xog_json_wkr wkr, String msg, int wait) {
+		wkr.Send_json("xo.alertify.log_by_str", Gfobj_nde.New().Add_str("msg", msg).Add_str("wait", Int_.To_str(wait * 1000)));
+	}
 }

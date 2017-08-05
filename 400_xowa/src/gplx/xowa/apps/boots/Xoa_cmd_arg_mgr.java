@@ -49,7 +49,7 @@ public class Xoa_cmd_arg_mgr {
 		this.http__home_page = arg_mgr.Get_by("http_server_home").Val_as_str_or("home/wiki/Main_Page");
 		this.http__max_clients = arg_mgr.Get_by("http_server.max_clients").Val_as_int_or(0);
 		this.http__max_clients_timeout = arg_mgr.Get_by("http_server.max_clients_timeout").Val_as_int_or(50);
-		this.http__special_pages_safelist = arg_mgr.Get_by("http_server.special_pages_safelist").Val_as_str_or("");
+		this.http__special_pages_safelist = arg_mgr.Get_by("http_server.special_pages_safelist").Val_as_str_or(null);
 		this.gui__home_page = arg_mgr.Get_by("url").Val_as_str_or(null);
 		this.fsys__bin_dir = arg_mgr.Get_by("bin_dir_name").Val_as_str_or(Bin_dir_name());
 		return true;

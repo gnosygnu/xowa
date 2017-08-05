@@ -94,8 +94,13 @@ public class Xoa_boot_mgr {
 
 				// add safelisted Special pages
 				String special_pages_safelist = arg_mgr.Http__special_pages_safelist();
-				if (String_.Len_gt_0(special_pages_safelist)) {
+				if (special_pages_safelist != null) {
 					byte[][] special_pages = Bry_split_.Split(Bry_.new_u8(special_pages_safelist), Byte_ascii.Pipe);
+
+					// --http_server.special_pages_safelist "" should mean ignore all
+					if (special_pages.length == 0) {
+						special_pages = new byte[][] {Bry_.Empty};
+					}
 					for (byte[] special_page : special_pages) {
 						app.Special_regy().Safelist_pages().Add_as_key_and_val(special_page);
 					}
