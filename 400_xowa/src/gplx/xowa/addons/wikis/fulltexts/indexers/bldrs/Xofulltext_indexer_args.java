@@ -18,7 +18,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.gflucene.indexers.*;
 public class Xofulltext_indexer_args implements Gfo_invk {
 	public byte[] wikis;
-	public String idx_opt;
+	public String idx_opt = Gflucene_idx_opt.Docs_and_freqs.Key();
 	private String ns_ids_str;
 	public int[] ns_ids_ary;
 	public void Init_by_wiki(Xowe_wiki wiki) {
@@ -58,8 +58,8 @@ public class Xofulltext_indexer_args implements Gfo_invk {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if      (ctx.Match(k, "wikis_"))            this.wikis = m.ReadBryOr("v", null);
-		else if	(ctx.Match(k, "ns_ids"))            this.ns_ids_str = m.ReadStrOr("v", null);
-		else if	(ctx.Match(k, "idx_opt"))           this.idx_opt = m.ReadStrOr("v", null);
+		else if	(ctx.Match(k, "ns_ids_"))           this.ns_ids_str = m.ReadStrOr("v", null);
+		else if	(ctx.Match(k, "idx_opt_"))          this.idx_opt = m.ReadStrOr("v", null);
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}

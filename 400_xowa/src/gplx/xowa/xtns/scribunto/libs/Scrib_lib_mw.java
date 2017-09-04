@@ -240,11 +240,10 @@ public class Scrib_lib_mw implements Scrib_lib {
 			String val = tmp_bfr.To_str_and_clear();
 			kv_args[i] = Keyval_.new_(key, val);
 		}
-		Xot_invk_mock mock_frame = Xot_invk_mock.new_(Bry_.new_u8(frame_id), kv_args);	// use frame_id for Frame_ttl; in lieu of a better candidate; DATE:2014-09-21
+		Xot_invk_mock mock_frame = Xot_invk_mock.preprocess_(Bry_.new_u8(frame_id), kv_args);	// use frame_id for Frame_ttl; in lieu of a better candidate; DATE:2014-09-21
 		tmp_ctx.Parse_tid_(Xop_parser_tid_.Tid__tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
-		cur_wiki.Parser_mgr().Main().Expand_tmpl(tmp_root, tmp_ctx, tmp_ctx.Tkn_mkr(), text_bry);
-		tmp_root.Tmpl_evaluate(tmp_ctx, text_bry, mock_frame, tmp_bfr);
-		return rslt.Init_obj(tmp_bfr.To_str_and_rls());
+		byte[] result = cur_wiki.Parser_mgr().Main().Expand_tmpl(tmp_root, tmp_ctx, mock_frame, tmp_ctx.Tkn_mkr(), text_bry);
+		return rslt.Init_obj(result);
 	}
 	public boolean CallParserFunction(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String frame_id = args.Pull_str(0);

@@ -40,13 +40,14 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		Xop_ctx ctx = Xop_ctx.New__sub__reuse_page(wiki.Parser_mgr().Ctx());	// PERF: reuse root ctx
 		return Expand_tmpl(ctx, ctx.Tkn_mkr(), src);
 	}
-	private byte[] Expand_tmpl(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src) {return Expand_tmpl(tkn_mkr.Root(src), ctx, tkn_mkr, src);}
-	public byte[] Expand_tmpl(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src) {
+	private byte[] Expand_tmpl(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src) {return Expand_tmpl(tkn_mkr.Root(src), ctx, Xot_invk_temp.Null_frame, tkn_mkr, src);}
+	public byte[] Expand_tmpl(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src) {return Expand_tmpl(root, ctx, Xot_invk_temp.Null_frame, tkn_mkr, src);}
+	public byte[] Expand_tmpl(Xop_root_tkn root, Xop_ctx ctx, Xot_invk frame, Xop_tkn_mkr tkn_mkr, byte[] src) {
 		Parse(root, ctx, tkn_mkr, src, Xop_parser_tid_.Tid__tmpl, tmpl_trie, Xop_parser_.Doc_bgn_bos);
 		int len = root.Subs_len();
 		for (int i = 0; i < len; ++i)
 			root.Subs_get(i).Tmpl_compile(ctx, src, tmpl_props);
-		return Xot_tmpl_wtr.Write_all(ctx, root, src);
+		return Xot_tmpl_wtr.Write_all(ctx, frame, root, src);
 	}
 
 	public byte[] Parse_text_to_html(Xop_ctx ctx, byte[] src) {

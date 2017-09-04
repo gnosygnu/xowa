@@ -62,7 +62,9 @@ public class Xot_invk_temp implements Xot_invk {
 		}
 		arg_idx_hash.Add_if_dupe_use_nth(Int_obj_ref.New(int_key), arg);	// Add_if_dupe_use_nth to keep latest version; needed for {{A|1=a|1=b}} DATE:2014-07-23
 	}
+
 	public static final    Xot_invk_temp Page_is_caller = new Xot_invk_temp(true);	// SEE NOTE_2
+	public static final    Xot_invk Null_frame = null;
 }
 /*
 NOTE_1:
@@ -81,4 +83,6 @@ TEXT: "a {{{1}}}b c"
 Note that in order to resolve mwo_concat we need to pass in an Xot_invk
 This Xot_invk is the "Page_is_caller" ref
 Note this has no parameters and is always empty
+
+Does this static ref have multi-threaded issues? DATE:2017-09-01
 */

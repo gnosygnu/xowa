@@ -17,20 +17,20 @@ package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.envs.*;
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.miscs.*;
 public class Xot_tmpl_wtr {
-	public static byte[] Write_all(Xop_ctx ctx, Xop_root_tkn root, byte[] src) {
+	public static byte[] Write_all(Xop_ctx ctx, Xot_invk frame, Xop_root_tkn root, byte[] src) {
 		Bry_bfr bfr = ctx.Wiki().Utl__bfr_mkr().Get_m001().Reset_if_gt(Io_mgr.Len_mb);
-		Write_tkn(bfr, ctx, src, src.length, root);
+		Write_tkn(bfr, ctx, frame, src, src.length, root);
 		byte[] rv = bfr.To_bry_and_rls();
 		return ctx.Wiki().Parser_mgr().Uniq_mgr().Parse(rv); // NOTE: noops if no UNIQs; // UNIQ; DATE:2017-03-31
 	}
-	private static void Write_tkn(Bry_bfr rslt_bfr, Xop_ctx ctx, byte[] src, int src_len, Xop_tkn_itm tkn) {
+	private static void Write_tkn(Bry_bfr rslt_bfr, Xop_ctx ctx, Xot_invk frame, byte[] src, int src_len, Xop_tkn_itm tkn) {
 		switch (tkn.Tkn_tid()) {
 			case Xop_tkn_itm_.Tid_root: // write each sub
 				int subs_len = tkn.Subs_len();
 				for (int i = 0; i < subs_len; i++) {
 					Xop_tkn_itm sub_tkn = tkn.Subs_get(i);
 					if (!sub_tkn.Ignore())
-						Write_tkn(rslt_bfr, ctx, src, src_len, sub_tkn);
+						Write_tkn(rslt_bfr, ctx, frame, src, src_len, sub_tkn);
 				}
 				break;
 			case Xop_tkn_itm_.Tid_bry:
@@ -91,7 +91,10 @@ public class Xot_tmpl_wtr {
 				break;
 			case Xop_tkn_itm_.Tid_tmpl_invk:
 				try {
-					tkn.Tmpl_evaluate(ctx, src, Xot_invk_temp.Page_is_caller.Src_(src), rslt_bfr);
+					if (frame == Xot_invk_temp.Null_frame) { // NOTE: should probably remove lazy-instantiation and always force frame to be passed in; DATE:2017-09-03
+						frame = Xot_invk_temp.Page_is_caller.Src_(src);
+					}
+					tkn.Tmpl_evaluate(ctx, src, frame, rslt_bfr);
 				}
 				catch (Exception e) {
 					String err_string = String_.new_u8(src, tkn.Src_bgn(), tkn.Src_end()) + "|" + Type_adp_.NameOf_obj(e) + "|" + Err_.Cast_or_make(e).To_str__log();

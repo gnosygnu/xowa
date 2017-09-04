@@ -56,6 +56,7 @@ public class Xot_invk_mock implements Xot_invk {
 	public Arg_nde_tkn Args_get_by_key(byte[] src, byte[] key) {return (Arg_nde_tkn)args.Get_by(key);}
 	public static Xot_invk_mock new_(byte defn_tid, byte[] frame_ttl, Keyval... args)		{return new_(defn_tid, 1, frame_ttl, args);}
 	public static Xot_invk_mock new_(byte[] frame_ttl, Keyval... args)					{return new_(Xot_defn_.Tid_null, 1, frame_ttl, args);}
+	public static Xot_invk_mock preprocess_(byte[] frame_ttl, Keyval... args)				{return new_(Xot_defn_.Tid_null, 1, frame_ttl, args);}
 	public static Xot_invk_mock test_(byte[] frame_ttl, Keyval... args)					{return new_(Xot_defn_.Tid_null, 0, frame_ttl, args);}
 	public static Xot_invk_mock new_(byte defn_tid, int idx_adj, byte[] frame_ttl, Keyval... args) {
 		Xot_invk_mock rv = new Xot_invk_mock(defn_tid, idx_adj, frame_ttl);

@@ -217,7 +217,7 @@ public class Xow_popup_parser {
 		int subs_len = tmpl_root.Subs_len();
 		for (int i = 0; i < subs_len; i++)
 			tmpl_root.Subs_get(i).Tmpl_compile(tmpl_ctx, src, tmpl_props);
-		return Xot_tmpl_wtr.Write_all(tmpl_ctx, tmpl_root, src);
+		return Xot_tmpl_wtr.Write_all(tmpl_ctx, Xot_invk_temp.Null_frame, tmpl_root, src);
 	}
 }
 class Xow_popup_parser_ {
