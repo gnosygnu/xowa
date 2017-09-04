@@ -29,9 +29,10 @@ class Scrib_lib_wikibase_srl_visitor implements Wbase_claim_visitor {
 	}
 	private static Keyval[] Entity_value(Wbase_claim_base itm) {
 		Wbase_claim_entity claim_entity = (Wbase_claim_entity)itm;
-		Keyval[] rv = new Keyval[2];
+		Keyval[] rv = new Keyval[3];
 		rv[0] = Keyval_.new_(Wbase_claim_entity_.Itm__entity_type.Key_str(), claim_entity.Entity_tid_str());
 		rv[1] = Keyval_.new_(Wbase_claim_entity_.Itm__numeric_id.Key_str(), claim_entity.Entity_id());	// NOTE: must be int, not String, else will fail when comparing directly to integer; PAGE:en.w:Hollywood_Walk_of_Fame DATE:2016-12-17
+		rv[2] = Keyval_.new_(Wbase_claim_entity_.Itm__id.Key_str(), Wbase_claim_entity.To_xid__db(Wbase_claim_entity_.Itm__entity_type.Tid(), claim_entity.Entity_id_bry())); // "id" needed PAGE:es.w:Premio_Hugo_a_la_mejor_novela DATE:2017-09-04
 		return rv;
 	}
 	public void Visit_monolingualtext(Wbase_claim_monolingualtext itm) {
