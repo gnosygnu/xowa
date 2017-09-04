@@ -100,12 +100,13 @@ public class Xoh_file_fmtr__basic implements Xoh_file_fmtr {
 	public Bry_fmt Fmt_thumb_part_alt() {return fmt__thumb_part_alt;} private final    Bry_fmt fmt__thumb_part_alt = Bry_fmt.Auto
 	(String_.Concat_lines_nl_skip_last
 	( ""
-	, "    <div class=\"xowa_alt_text\">"
+	, "    <div class=\"" + String_.new_a7(Bry__xowa_alt_text) + "\">"
 	, "    <hr/>"
 	, "    <div class=\"thumbcaption\">~{html}"
 	, "    </div>"
 	, "    </div>"
 	));
+	public static final    byte[] Bry__xowa_alt_text = Bry_.new_a7("xowa_alt_text");
 
 	public byte[] Bld_thumb_part_magnify(byte[] a_href, byte[] a_title) {
 		return fmtr_thumb_part_magnify.Bld_many_to_bry(tmp_bfr, a_href, a_title);

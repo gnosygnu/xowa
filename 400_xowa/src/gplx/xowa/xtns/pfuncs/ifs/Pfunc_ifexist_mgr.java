@@ -53,6 +53,7 @@ public class Pfunc_ifexist_mgr {
 		// rarely true, but check local wiki's [[File:]] table anyway
 		Xow_ns file_ns = wiki.Ns_mgr().Ns_file();
 		Xoa_ttl file_ttl = wiki.Ttl_parse(file_ns.Id(), page_db);
+		if (file_ttl == null) return false; // NOTE: must check for NPE: PAGE:es.w:Elecciones_presidenciales_de_Venezuela_de_1998 DATE:2017-09-04
 
 		byte exists = wiki.Cache_mgr().Ifexist_cache().Get_by_mem(file_ttl);
 		if		(exists == Bool_.Y_byte) return true;

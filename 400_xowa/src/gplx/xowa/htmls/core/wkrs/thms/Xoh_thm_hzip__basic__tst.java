@@ -19,7 +19,7 @@ import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.pars
 public class Xoh_thm_hzip__basic__tst {
 	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 	@Before public void setup() {fxt.Clear();}
-	@Test   public void Image() {
+	@Test   public void Image_wo_alt_text() {
 		fxt.Test__bicode("~&3abc~abc~!uA.png~)#Sabc~", String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tleft'>"
 		,   "<div class='thumbinner' style='width:220px;'><a href='/wiki/File:A.png' class='image' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' class='thumbimage' alt='abc'></a> "
@@ -28,6 +28,21 @@ public class Xoh_thm_hzip__basic__tst {
 		,       "abc</div>"
 		,     "<hr>"
 		,     "<div class='thumbcaption'>abc</div>"
+		,   "</div>"
+		, "</div>"
+		));
+	}
+	@Test   public void Image_w_alt_text() {
+		fxt.Test__bicode("~&{\"^abc~abc~!uA.png~)#Sabc~", String_.Concat_lines_nl_skip_last
+		( "<div class='thumb tleft'>"
+		,   "<div class='thumbinner' style='width:220px;'><a href='/wiki/File:A.png' class='image' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' class='thumbimage' alt='abc'></a> "
+		,     "<div class='thumbcaption'>"
+		,       "<div class='magnify'><a href='/wiki/File:A.png' class='internal' title='Enlarge'></a></div>"
+		,       "abc</div>"
+		,     "<div class=\"xowa_alt_text\">"
+		,     "<hr>"
+		,     "<div class='thumbcaption'>abc</div>"
+		,     "</div>"
 		,   "</div>"
 		, "</div>"
 		));

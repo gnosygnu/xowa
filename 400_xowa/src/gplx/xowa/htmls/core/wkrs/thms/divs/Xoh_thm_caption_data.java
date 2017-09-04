@@ -28,9 +28,10 @@ public class Xoh_thm_caption_data {
 	public int Capt_3_bgn() {return capt_3_bgn;} private int capt_3_bgn;
 	public int Capt_3_end() {return capt_3_end;} private int capt_3_end;
 	public boolean Capt_3_exists() {return capt_3_end > capt_3_bgn;}
+	public boolean Xowa_alt_text_exists() {return xowa_alt_text_exists;} private boolean xowa_alt_text_exists;
 	public Xoh_thm_magnify_data Magnify_data() {return magnify_data;} private final    Xoh_thm_magnify_data magnify_data = new Xoh_thm_magnify_data();
 	public void Clear() {
-		this.capt_2_is_tidy = false;
+		this.capt_2_is_tidy = this.xowa_alt_text_exists = false;
 		this.src_bgn = src_end = capt_1_bgn = capt_1_end = capt_2_bgn = capt_2_end = capt_3_bgn = capt_3_end = -1;
 		magnify_data.Clear();
 	}
@@ -49,6 +50,11 @@ public class Xoh_thm_caption_data {
 		return true;
 	}
 	private void Capt_2_chk(Gfh_tag_rdr tag_rdr, Gfh_tag capt_tail, byte[] src) {
+		Gfh_tag nxt_div_head = tag_rdr.Tag__peek_fwd_head(Gfh_tag_.Id__div); 
+		if (nxt_div_head.Atrs__cls_has(gplx.xowa.htmls.core.wkrs.lnkis.htmls.Xoh_file_fmtr__basic.Bry__xowa_alt_text)) {
+                tag_rdr.Tag__move_fwd_head();
+			xowa_alt_text_exists = true;
+		}
 		int capt_tail_end = capt_tail.Src_end();
 		Gfh_tag nxt_div_tail = tag_rdr.Tag__peek_fwd_tail(Gfh_tag_.Id__div); 
 		int nxt_div_tail_bgn = nxt_div_tail.Src_bgn();
@@ -59,6 +65,8 @@ public class Xoh_thm_caption_data {
 			capt_2_bgn = nxt_tag.Src_end();	// NOTE: do not try to trim ws; PAGE:en.w:Chimney_sweep; DATE:2016-01-05
 			nxt_tag = tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__div);						// </div>
 			capt_2_end = nxt_tag.Src_bgn(); // NOTE: do not try to trim ws; PAGE:en.w:Chimney_sweep; DATE:2016-01-05
+			if (xowa_alt_text_exists)
+				tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__div);
 		}
 		else {
 			if (!Bry_.Match(src, capt_tail_end, capt_tail_end + 7, Bry__div_1_tail_bgn)) {	// next chars should be "\n</div>"

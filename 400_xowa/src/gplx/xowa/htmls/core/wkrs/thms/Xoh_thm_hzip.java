@@ -31,6 +31,7 @@ public class Xoh_thm_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		}
 		Xoh_thm_caption_data capt_data = data.Capt_data();
 		int div_1_width = data.Div_1_width();
+										  flag_bldr.Set_as_bool(Flag__xowa_alt_text_exists		, capt_data.Xowa_alt_text_exists());
 		boolean capt_3_exists				= flag_bldr.Set_as_bool(Flag__capt_3_exists				, capt_data.Capt_3_exists());
 										  flag_bldr.Set_as_bool(Flag__capt_2_is_tidy			, capt_data.Capt_2_exists() && capt_data.Capt_2_is_tidy());
 		boolean capt_2_exists				= flag_bldr.Set_as_bool(Flag__capt_2_exists				, capt_data.Capt_2_exists());
@@ -48,6 +49,7 @@ public class Xoh_thm_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	}
 	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
 		int flag = rdr.Read_hzip_int(1); flag_bldr.Decode(flag);
+		boolean xowa_alt_text_exists			= flag_bldr.Get_as_bool(Flag__xowa_alt_text_exists);
 		boolean capt_3_exists					= flag_bldr.Get_as_bool(Flag__capt_3_exists);
 		boolean capt_2_is_tidy					= flag_bldr.Get_as_bool(Flag__capt_2_is_tidy);
 		boolean capt_2_exists					= flag_bldr.Get_as_bool(Flag__capt_2_exists);
@@ -65,17 +67,18 @@ public class Xoh_thm_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		int fsdb_w = img_hzip.Wtr().Fsdb_itm().Html_w();
 		if (fsdb_w > 0)				// fsdb_w has value; this occurs when itm is found in user's file_cache; NOTE: do not do !div_1_width_exists b/c all thms have div_1_w; PAGE:en.w:Paris; DATE:2016-06-18
 			div_1_width = fsdb_w;	// override div_1_width, else widths will default to wrong value and not be auto-corrected by post-processing; DATE:2016-06-18
-		wtr.Write(bfr, hpg, hctx, src, img_data.Img_is_vid(), div_0_align, div_1_width, img_hzip.Wtr(), img_hzip.Anch_href_bry(), capt_1, capt_2_exists, capt_2_is_tidy, capt_2_bry, capt_3_exists, capt_3_bry);
+		wtr.Write(bfr, hpg, hctx, src, img_data.Img_is_vid(), div_0_align, div_1_width, img_hzip.Wtr(), img_hzip.Anch_href_bry(), capt_1, capt_2_exists, capt_2_is_tidy, capt_2_bry, capt_3_exists, capt_3_bry, xowa_alt_text_exists);
 		img_data.Pool__rls();
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_thm_hzip rv = new Xoh_thm_hzip(); rv.pool_mgr = mgr; rv.pool_idx = idx; rv.hook = (byte[])args[0]; return rv;}
-	private final    Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_(1, 1, 1, 1, 3);	
+	private final    Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_(1, 1	, 1, 1, 1, 3);	
 	private static final int // SERIALIZED
-	  Flag__capt_3_exists				=  0
-	, Flag__capt_2_is_tidy				=  1
-	, Flag__capt_2_exists				=  2
-	, Flag__div_1_width_exists			=  3
-	, Flag__div_0_align					=  4	// "", "tnone", "tleft", "tcenter", "tright"
+	  Flag__xowa_alt_text_exists		=  0
+	, Flag__capt_3_exists				=  1
+	, Flag__capt_2_is_tidy				=  2
+	, Flag__capt_2_exists				=  3
+	, Flag__div_1_width_exists			=  4
+	, Flag__div_0_align					=  5	// "", "tnone", "tleft", "tcenter", "tright"
 	;
 }

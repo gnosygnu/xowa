@@ -36,7 +36,7 @@ public class Xoh_thm_wtr implements gplx.core.brys.Bfr_arg {
 		return this;
 	}
 	public void Write(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, boolean img_is_vid, int div_0_align, int div_1_w, Xoh_img_wtr img_wtr, byte[] div_2_href
-		, Bfr_arg capt_1, boolean capt_2_exists, boolean capt_2_is_tidy, byte[] capt_2_bry, boolean capt_3_exists, byte[] capt_3_bry) {
+		, Bfr_arg capt_1, boolean capt_2_exists, boolean capt_2_is_tidy, byte[] capt_2_bry, boolean capt_3_exists, byte[] capt_3_bry, boolean xowa_alt_text_exists) {
 		this.Clear();
 		this.img_is_vid_nl = img_is_vid ? Byte_ascii.Nl_bry : Bry_.Empty;
 		this.trailing_space = img_is_vid ? Bry_.Empty : Byte_ascii.Space_bry;
@@ -57,7 +57,9 @@ public class Xoh_thm_wtr implements gplx.core.brys.Bfr_arg {
 			if (capt_2_is_tidy)
 				capt_2.Set_by_val(capt_2_bry);
 			else {
-				alt_fmtr.Bld_bfr_many(tmp_bfr, capt_2_bry);
+				String xowa_alt_text_bgn = xowa_alt_text_exists ? "<div class=\"xowa_alt_text\">\n" : String_.Empty;
+				String xowa_alt_text_end = xowa_alt_text_exists ? "\n</div>" : String_.Empty;
+				alt_fmtr.Bld_bfr_many(tmp_bfr, xowa_alt_text_bgn, capt_2_bry, xowa_alt_text_end);
 				capt_2.Set_by_val(tmp_bfr.To_bry_and_clear());
 			}
 		}
@@ -82,9 +84,9 @@ public class Xoh_thm_wtr implements gplx.core.brys.Bfr_arg {
 	), "div_0_align", "div_1_id", "div_1_width", "img_is_vid_nl", "div_1_img", "trailing_space", "div_2_href", "div_2_magnify", "enlarge", "capt_1", "capt_2", "capt_3");
 	private static final    Bry_fmtr alt_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
-	,     "<hr>"
-	,     "<div class=\"thumbcaption\">~{alt}</div>"
+	,     "~{xowa_alt_text_bgn}<hr>"
+	,     "<div class=\"thumbcaption\">~{alt}</div>~{xowa_alt_text_end}"
 	,	  ""
-	), "alt");
+	), "xowa_alt_text_bgn", "alt", "xowa_alt_text_end");
 	private static final    byte[] bry_div_2_magnify = Bry_.new_a7("bin/any/xowa/file/mediawiki.file/magnify-clip.png");
 }
