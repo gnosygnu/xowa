@@ -850,6 +850,8 @@ public class Xow_domain_regy {
 , "pa.wikisource.org"
 , "atj.wikipedia.org"
 , "kbp.wikipedia.org"
+, "din.wikipedia.org"
+, "hi.wikiversity.org"
 };
 //, "als.wikisource.org"
 //, "als.wikinews.org"
