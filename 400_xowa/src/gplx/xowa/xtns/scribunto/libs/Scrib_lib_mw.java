@@ -115,13 +115,13 @@ public class Scrib_lib_mw implements Scrib_lib {
 		if (idx_int != Int_.Min_value) {	// idx is integer
 			Arg_nde_tkn nde = Get_arg(frame, idx_int, frame_arg_adj);
 			//frame.Args_eval_by_idx(core.Ctx().Src(), idx_int); // NOTE: arg[0] is always MW function name; EX: {{#invoke:Mod_0|Func_0|Arg_1}}; arg_x = "Mod_0"; args[0] = "Func_0"; args[1] = "Arg_1"
-			if (nde == null) return rslt.Init_ary_empty();
+			if (nde == null) return rslt.Init_obj(null);	// idx_str does not exist; [null] not []; PAGE:en.w:Sainte-Catherine,_Quebec DATE:2017-09-16
 			nde.Val_tkn().Tmpl_evaluate(ctx, src, core.Frame_parent(), tmp_bfr);
 			return rslt.Init_obj(tmp_bfr.To_str_and_clear());
 		}
 		else {
 			Arg_nde_tkn nde = frame.Args_get_by_key(src, Bry_.new_u8(idx_str));
-			if (nde == null) return rslt.Init_ary_empty();	// idx_str does not exist;
+			if (nde == null) return rslt.Init_obj(null);	// idx_str does not exist; [null] not []; PAGE:en.w:Sainte-Catherine,_Quebec DATE:2017-09-16
 			nde.Val_tkn().Tmpl_evaluate(ctx, src, core.Frame_parent(), tmp_bfr);
 			return rslt.Init_obj(tmp_bfr.To_str_and_clear_and_trim());	// NOTE: must trim if key_exists; DUPE:TRIM_IF_KEY
 		}
@@ -139,7 +139,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			if (idx == cur) return nde;
 			else ++cur;
 		}
-		return invk.Args_get_by_key(src, Bry_.To_a7_bry(idx + 1, 1));
+		return null; // return null since index does not exist; EX: args[2] when {{#invoke:mod|test|3=abc}} PAGE:en.w:Sainte-Catherine,_Quebec DATE:2017-09-16
 	}
 	private static boolean Verify_arg_key(byte[] src, int idx, Arg_nde_tkn nde) {
 		int key_int = Bry_find_.Not_found;

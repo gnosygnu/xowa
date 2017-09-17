@@ -47,9 +47,9 @@ public class Scrib_lib_mw__lib_tst {
 		fxt.Init_frame_current(Keyval_.int_(1, "val_1"), Keyval_.new_("key_2", "val_2"), Keyval_.int_(3, "val_3"));
 		fxt.Test_scrib_proc_str		(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "1")		, "val_1");		// get 1st by idx
 		fxt.Test_scrib_proc_str		(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "2")		, "val_3");		// get 2nd by idx (which is "3", not "key_2)
-		fxt.Test_scrib_proc_empty	(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "3"));						// get 3rd by idx (which is n/a, not "val_3")
+		fxt.Test_scrib_proc_str		(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "3")		, null);		// get 3rd as null
 		fxt.Test_scrib_proc_str		(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "key_2")	, "val_2");		// get key_2
-		fxt.Test_scrib_proc_empty	(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "key_3"));					// key_3 n/a
+		fxt.Test_scrib_proc_str		(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "key_3")	, null);		// key_3 n/a
 	}
 	@Test  public void GetExpandedArgument_parent() {
 		fxt.Init_frame_parent ("test", Keyval_.new_("1", "a1"), Keyval_.new_("2", "a2"));
@@ -63,11 +63,12 @@ public class Scrib_lib_mw__lib_tst {
 	@Test  public void GetExpandedArgument_numeric_key_2() {	// PURPOSE.FIX: same as above, but for parent context; DATE:2013-09-23
 		fxt.Init_frame_parent ("test", Keyval_.new_("2", "a1"));
 		fxt.Init_frame_current(Keyval_.new_("2", "a2"));
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("parent", "1"), null);				// PAGE:en.w:Sainte-Catherine,_Quebec; DATE:2017-09-16
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("parent", "2"), "a1");				// get 1st by idx, even though idx is String
 	}
 	@Test  public void GetExpandedArgument_out_of_bounds() {
 		fxt.Init_frame_parent ("test");
-		fxt.Test_scrib_proc_empty(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("parent", "2"));
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("parent", "2"), null);
 	}
 	@Test  public void IsSubsting() {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_mw.Invk_isSubsting, Object_.Ary_empty, false);
