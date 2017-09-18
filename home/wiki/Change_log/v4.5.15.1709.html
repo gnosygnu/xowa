@@ -2,7 +2,7 @@
 <html dir="ltr">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Change log/v4.5.7.1706 - XOWA</title>
+  <title>Change log/v4.5.15.1709 - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   
@@ -11,14 +11,14 @@
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>Change log/v4.5.7.1706</span></h1>
+  <h1 id="firstHeading" class="firstHeading"><span>Change log/v4.5.15.1709</span></h1>
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <h2>
-      <span class="mw-headline" id="v4.5.7.1706_.282017-06-25.29">v4.5.7.1706 (2017-06-25)</span>
+      <span class="mw-headline" id="v4.5.15.1709_.282017-09-15.29">v4.5.15.1709 (2017-09-15)</span>
     </h2>
     <h3>
       <span class="mw-headline" id="Wiki">Wiki</span>
@@ -71,234 +71,192 @@
     </p>
     <ul>
       <li>
-        Luaj: Fix Script error 'mwInit.lua:24 bad argument: table expected, got nil' on many en.w pages.
+        Scribunto: Fix script error '=Module:ISBN:68 attempt to call nil' on many pl.w pages.
       </li>
     </ul>
     <dl>
       <dd>
-        <span style='font-variant:small-caps'>Resolved by</span>: Force variadic 'arg' to use global arg, not any uplevel arg.
+        <span style='font-variant:small-caps'>Resolved by</span>: Add addWarning to mw.lua.
       </dd>
       <dd>
-        <span style='font-variant:small-caps'>Example</span>: local arg = ....
+        <span style='font-variant:small-caps'>Example</span>: /xowa/bin/any/xowa/xtns/Scribunto/engines/LuaCommon/lualib/mw.lua.
       </dd>
       <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Module:Wd" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Module:Wd</a> <a href="https://en.wikipedia.org/wiki/Ajanta_Caves" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Ajanta_Caves</a> <a href="https://en.wikipedia.org/wiki/Behistun_Inscription" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Behistun_Inscription</a> <a href="https://en.wikipedia.org/wiki/Great_Rift_Valley" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Great_Rift_Valley</a>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://pl.wikipedia.org/wiki/Opus_Dei" rel="nofollow" class="external free">https://pl.wikipedia.org/wiki/Opus_Dei</a>
       </dd>
     </dl>
     <ul>
       <li>
-        ParserFunctions: Fix broken navboxes on many fr.v pages.
+        Scribunto: Fix script error 'MWServer.lua:59 vm error: gplx.Err: index is out of bounds' on many es.w pages.
       </li>
     </ul>
     <dl>
       <dd>
-        <span style='font-variant:small-caps'>Resolved by</span>: Escape html in attributes when using #tag.
+        <span style='font-variant:small-caps'>Resolved by</span>: Upgrade to latest mw.lua.
       </dd>
       <dd>
-        <span style='font-variant:small-caps'>Example</span>: {{#tag:div|text|id='&lt;br/&gt;'}}.
+        <span style='font-variant:small-caps'>Example</span>: /xowa/bin/any/xowa/xtns/Scribunto/engines/LuaCommon/lualib/mw.lua.
       </dd>
       <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="https://fr.wikivoyage.org/wiki/France" rel="nofollow" class="external free">https://fr.wikivoyage.org/wiki/France</a> <a href="https://fr.wikivoyage.org/wiki/Paris" rel="nofollow" class="external free">https://fr.wikivoyage.org/wiki/Paris</a> <a href="https://fr.wikivoyage.org/wiki/Germany" rel="nofollow" class="external free">https://fr.wikivoyage.org/wiki/Germany</a>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://es.wikipedia.org/wiki/Ladri_di_biciclette" rel="nofollow" class="external free">https://es.wikipedia.org/wiki/Ladri_di_biciclette</a>
       </dd>
     </dl>
     <ul>
       <li>
-        Scribunto: Fix script error '=Module:Header template:93' on many fr.s pages.
+        Scribunto: Do not call preprocess twice.
       </li>
     </ul>
     <dl>
       <dd>
-        <span style='font-variant:small-caps'>Resolved by</span>: Add 'redirectTarget' to Scrib_lib_title.
+        <span style='font-variant:small-caps'>Resolved by</span>: Evaluate template-args when expanding template, not separately afterwards.
       </dd>
       <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="https://fr.wikisource.org/wiki/La_Dispute" rel="nofollow" class="external free">https://fr.wikisource.org/wiki/La_Dispute</a> <a href="https://fr.wikisource.org/wiki/Les_Acteurs_de_bonne_foi" rel="nofollow" class="external free">https://fr.wikisource.org/wiki/Les_Acteurs_de_bonne_foi</a> <a href="https://fr.wikisource.org/wiki/Le_Lion" rel="nofollow" class="external free">https://fr.wikisource.org/wiki/Le_Lion</a>
+        <span style='font-variant:small-caps'>Links</span>: home/wiki/Diagnostics/Scribunto/LuaCommon
       </dd>
     </dl>
     <ul>
       <li>
-        Scribunto: Fix 'gplx.Err: bad argument: nil: idx=0 len=0' on a few dozen fr.u pages.
+        Scribunto: Fix '=Module:Location map:353 Malformed coordinates value' on a few dozen en.w Location pages.
       </li>
     </ul>
     <dl>
       <dd>
-        <span style='font-variant:small-caps'>Resolved by</span>: Do not fail if no arguments passed to frameExists.
+        <span style='font-variant:small-caps'>Resolved by</span>: Return null if integer key is not found.
       </dd>
       <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="https://fr.wikiversity.org/wiki/Projet:Laboratoire/Espaces_de_noms/Mod%C3%A8le/Liste_des_pages" rel="nofollow" class="external free">https://fr.wikiversity.org/wiki/Projet:Laboratoire/Espaces_de_noms/Mod%C3%A8le/Liste_des_pages</a>
+        <span style='font-variant:small-caps'>Example</span>: if {{coord|3=region:CA-QC|display=inline,title}} then [2] -&gt; null.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Sainte-Catherine,_Quebec" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Sainte-Catherine,_Quebec</a>
       </dd>
     </dl>
     <ul>
       <li>
-        Scribunto: Fix script error 'NullPointerException' on 1 en.w page.
+        Wikibase: Add "id" to wikibase data table.
       </li>
     </ul>
     <dl>
       <dd>
-        <span style='font-variant:small-caps'>Message</span>: <code>@C:/xowa/bin/any/xowa/xtns/Scribunto/engines/Luaj/MWServer.lua:59 vm error: java.lang.NullPointerException</code>
-      </dd>
-      <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Huadu_District" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Huadu_District</a>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://es.wikipedia.org/wiki/Premio_Hugo_a_la_mejor_novela" rel="nofollow" class="external free">https://es.wikipedia.org/wiki/Premio_Hugo_a_la_mejor_novela</a>
       </dd>
     </dl>
     <ul>
       <li>
-        Table_of_contents: Show missing TOC on some de.w pages. {detected by Ope30}
+        Luaj: Fix script error '=Module:Authority control:66 vm error: java.lang.ArrayIndexOutOfBoundsException" on some commons pages.
       </li>
     </ul>
     <dl>
       <dd>
-        <span style='font-variant:small-caps'>Resolved by</span>: Ignore NOTOC commands at template level.
+        <span style='font-variant:small-caps'>Message</span>: <code>Script error: =Module:Authority control:66 vm error: java.lang.ArrayIndexOutOfBoundsException: 0</code>
       </dd>
       <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="https://de.wikipedia.org/wiki/13._Jahrhundert" rel="nofollow" class="external free">https://de.wikipedia.org/wiki/13._Jahrhundert</a> <a href="https://de.wikipedia.org/wiki/Vorlage:Artikel_Jahrhundert" rel="nofollow" class="external free">https://de.wikipedia.org/wiki/Vorlage:Artikel_Jahrhundert</a>
+        <span style='font-variant:small-caps'>Resolved by</span>: Check for zero length arrays in string:match.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="http://commons.wikimedia.org/wiki/File:Nouveauxvoyagese-p378.png" rel="nofollow" class="external free">http://commons.wikimedia.org/wiki/File:Nouveauxvoyagese-p378.png</a>
       </dd>
     </dl>
     <ul>
       <li>
-        Parser.Xml: Do not print &lt;meta&gt; and &lt;link&gt; tags.
+        Import: Fix online import not working on Mac OS X. {detected by andyring}
       </li>
     </ul>
     <dl>
       <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="https://fr.wikisource.org/wiki/La_Dispute" rel="nofollow" class="external free">https://fr.wikisource.org/wiki/La_Dispute</a> <a href="https://fr.wikisource.org/wiki/Les_Acteurs_de_bonne_foi" rel="nofollow" class="external free">https://fr.wikisource.org/wiki/Les_Acteurs_de_bonne_foi</a> <a href="https://fr.wikisource.org/wiki/Le_Lion" rel="nofollow" class="external free">https://fr.wikisource.org/wiki/Le_Lion</a>
+        <span style='font-variant:small-caps'>Links</span>: /xowa/user/anonymous/app/cfg/os.macosx_64.gfs
       </dd>
     </dl>
     <ul>
       <li>
-        Parser: Show page name for [[Media:]] links without caption (XOWA-122). {detected by anonymous}
+        Html: Add customizable footer. {requested by Ope30}
       </li>
     </ul>
     <dl>
       <dd>
-        <span style='font-variant:small-caps'>Example</span>: [[Media:A.png]] -&gt; "Media:A.png" x&gt; "".
-      </dd>
-      <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Beethoven" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Beethoven</a>
+        <span style='font-variant:small-caps'>Links</span>: home/wiki/Special:XowaCfg?grp=xowa.html.page
       </dd>
     </dl>
     <ul>
       <li>
-        Luaj: Fix script error on 1 fr.w page.
+        Html: Add option to hide xowa-alt in html db.
       </li>
     </ul>
     <dl>
       <dd>
-        <span style='font-variant:small-caps'>Resolved by</span>: Format doubles using sprintf-like behavior.
-      </dd>
-      <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="https://fr.wikipedia.org/wiki/Hasbro" rel="nofollow" class="external free">https://fr.wikipedia.org/wiki/Hasbro</a>
+        <span style='font-variant:small-caps'>Links</span>: <a href="http://simple.wikipedia.org/wiki/Saturn_(planet)" rel="nofollow" class="external free">http://simple.wikipedia.org/wiki/Saturn_(planet)</a>
       </dd>
     </dl>
     <ul>
       <li>
-        Table_of_contents: Deprecate id='toctitle' in favor of class='toctitle'. {detected by anonymous}
+        Http_server: Fix full-text search not working. {detected by ktry}
       </li>
     </ul>
     <dl>
       <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="https://github.com/gnosygnu/xowa/issues/150" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/150</a>
+        <span style='font-variant:small-caps'>Links</span>: <a href="http://localhost:8080/home/wiki/Special:XowaSearch?search=luaj&amp;fulltext=y" rel="nofollow" class="external free">http://localhost:8080/home/wiki/Special:XowaSearch?search=luaj&amp;fulltext=y</a>
       </dd>
     </dl>
     <ul>
       <li>
-        Category: Add colon to Categories if page_grouping is disabled. {detected by Ope30}
+        Http_server: Do not override command-line port with config port. {detected by ktry}
       </li>
     </ul>
     <dl>
       <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Japanese_invasions_of_Korea_(1592–98)" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Japanese_invasions_of_Korea_(1592–98)</a>
+        <span style='font-variant:small-caps'>Example</span>: --http_server_port 80.
       </dd>
     </dl>
     <ul>
       <li>
-        Import: Fix failed import on Windows 32-bit machines.
+        Http_server: Add special_pages_safelist. {requested by ktry}
       </li>
     </ul>
     <dl>
       <dd>
-        <span style='font-variant:small-caps'>Resolved by</span>: Upgrade to sqlite jdbc 3.18.0.
+        <span style='font-variant:small-caps'>Example</span>: --http_server.special_pages_safelist Random|AllPages|XowaSearch.
       </dd>
     </dl>
     <ul>
       <li>
-        Page_sync: Sync recently-created pages.
-      </li>
-    </ul>
-    <ul>
-      <li>
-        Embeddable: Handle redirects. {detected by Rüdiger Gleim}
+        Http_server: Do not fail if Search has invalid title characters. {detected by ktry}
       </li>
     </ul>
     <dl>
       <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wiktionary.org/wiki/house" rel="nofollow" class="external free">https://en.wiktionary.org/wiki/house</a>
+        <span style='font-variant:small-caps'>Example</span>: Special:XowaSearch?search=mod_date:[20170101 TO 20170131]&amp;fulltext=y.
       </dd>
     </dl>
     <ul>
       <li>
-        Embeddable: Handler null pointer exceptions for &lt;gallery&gt; when no de.wikipedia.org-file-core.xowa file is available. {detected by Rüdiger Gleim}
+        DownloadCentral: Increase notification show time from 3 seconds to 30 seconds. {requested by William}
       </li>
     </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="https://de.wikipedia.org/wiki/Herbizid" rel="nofollow" class="external free">https://de.wikipedia.org/wiki/Herbizid</a>
-      </dd>
-    </dl>
-    <ul>
-      <li>
-        Night-mode: Show mathjax in nightmode. {detected by anonymous}
-      </li>
-    </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Example</span>: /xowa/bin/any/xowa/html/css/nightmode/xowa_night.css.
-      </dd>
-      <dd>
-        <span style='font-variant:small-caps'>Links</span>: home/wiki/Diagnostics/Math
-      </dd>
-    </dl>
-    <ul>
-      <li>
-        Night-mode: Allow custom night-mode logos per wiki. {requested by Ope30}
-      </li>
-    </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Example</span>: /user/anonymous/wiki_domain/html/logo_night.png.
-      </dd>
-      <dd>
-        <span style='font-variant:small-caps'>Links</span>: home/wiki/App/UI/Night_mode
-      </dd>
-    </dl>
-    <ul>
-      <li>
-        Night-mode: Allow global user-overrides for night-mode css / logo. {requested by Ope30}
-      </li>
-    </ul>
-    <dl>
-      <dd>
-        <span style='font-variant:small-caps'>Example</span>: /user/anonymous/bin/xowa/any/xowa/html/css/logo_night.png.
-      </dd>
-      <dd>
-        <span style='font-variant:small-caps'>Links</span>: home/wiki/App/UI/Night_mode
-      </dd>
-    </dl>
     <p>
       <b>trivial</b>
     </p>
     <ul>
       <li>
-        Wikidata: Add geo-shape wikidata data-type.
+        ParserFunctions: Do not fail when calling ifexist with invalid title in Media namespace.
       </li>
     </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://es.wikipedia.org/wiki/Elecciones_presidenciales_de_Venezuela_de_1998" rel="nofollow" class="external free">https://es.wikipedia.org/wiki/Elecciones_presidenciales_de_Venezuela_de_1998</a>
+      </dd>
+    </dl>
     <ul>
       <li>
-        Wikidata: Add dtywiki and pawikisource.
+        Hzip: Compress and decompress recent xowa_alt_text.
       </li>
     </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://es.wikipedia.org/wiki/Biome" rel="nofollow" class="external free">https://es.wikipedia.org/wiki/Biome</a>
+      </dd>
+    </dl>
     <ul>
       <li>
-        Threading: Fix rare multi-thread error for Hiero parser.
+        Wikibase: Add dinwiki and hiwikiversity.
       </li>
     </ul>
     <p>
@@ -306,9 +264,14 @@
     </p>
     <ul>
       <li>
-        Linux: Provide workaround for running XOWA on openSUSE and minimal XFCE desktop. {contributed by anonymous}
+        Doc: Provide more instructions on using XOWA as an HTTP server on linux. {detected by ktry}
       </li>
     </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: readme.txt
+      </dd>
+    </dl>
   
     </div>
   </div>

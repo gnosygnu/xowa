@@ -140,16 +140,13 @@
       </tr>
       <tr>
         <td>
-          expandTemplate; PHP bool
+          expandTemplate; PHP bool; true -&gt; 1 false -&gt; ""
         </td>
         <td>
           {{#invoke:Diagnostics/LuaCommon|expandTemplate_bool}}
         </td>
         <td>
-          bool_true is '1'; bool_false is 'missing'; 
-          <p>
-            <br>
-          </p>
+          bool_true is "1"; bool_false is "";
         </td>
         <td>
           <span style='color: green;'>pass</span>
@@ -290,6 +287,20 @@
         </td>
         <td>
           y
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          preprocess calling Module functions should not call them twice; fails if onceonce
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|preprocess_nested_main}}
+        </td>
+        <td>
+          once
         </td>
         <td>
           <span style='color: green;'>pass</span>

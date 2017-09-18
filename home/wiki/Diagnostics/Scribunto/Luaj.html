@@ -25,13 +25,13 @@
         Applies to the Luaj engine (as opposed to the Lua engine)
       </li>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj.html" id="xolnki_2" title="Module:Diagnostics/Luaj" class="xowa-visited">Module:Diagnostics/Luaj</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj.html" id="xolnki_2" title="Module:Diagnostics/Luaj">Module:Diagnostics/Luaj</a>
       </li>
       <li>
         Tests changes to the luaj_xowa.jar
       </li>
       <li>
-        Further notes available at <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Scribunto/Luaj.html" id="xolnki_3" title="App/Xtn/Mediawiki/Scribunto/Luaj" class="xowa-visited">App/Xtn/Mediawiki/Scribunto/Luaj</a>
+        Further notes available at <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Scribunto/Luaj.html" id="xolnki_3" title="App/Xtn/Mediawiki/Scribunto/Luaj">App/Xtn/Mediawiki/Scribunto/Luaj</a>
       </li>
     </ul>
     <h3>
@@ -709,6 +709,19 @@
         </td>
         <td>
           𣂁 - 脁 - 晁
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          zero-length regex fails
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|lua_match|text|}}
+        </td>
+        <td>
         </td>
         <td>
           <span style='color: green;'>pass</span>

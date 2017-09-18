@@ -203,16 +203,13 @@
       </tr>
       <tr>
         <td>
-          expandTemplate; PHP bool
+          expandTemplate; PHP bool; true -&gt; 1 false -&gt; ""
         </td>
         <td>
           {{#invoke:Diagnostics/LuaCommon|expandTemplate_bool}}
         </td>
         <td>
-          bool_true is '1'; bool_false is 'missing'; 
-          <p>
-            <br>
-          </p>
+          bool_true is "1"; bool_false is "";
         </td>
         <td>
           <span style='color: green;'>pass</span>
@@ -358,13 +355,27 @@
           <span style='color: green;'>pass</span>
         </td>
       </tr>
+      <tr>
+        <td>
+          preprocess calling Module functions should not call them twice; fails if onceonce
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|preprocess_nested_main}}
+        </td>
+        <td>
+          once
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
     </table>
     <h2>
       <span class="mw-headline" id="Ustring_Library">Ustring Library</span>
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/UstringLibrary.html" id="xolnki_6" title="Module:Diagnostics/UstringLibrary" class="xowa-visited">Module:Diagnostics/UstringLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/UstringLibrary.html" id="xolnki_6" title="Module:Diagnostics/UstringLibrary">Module:Diagnostics/UstringLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>UstringLibrary.php</b> and <b>mw.ustring.lua</b>
@@ -964,7 +975,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TitleLibrary.html" id="xolnki_10" title="Module:Diagnostics/TitleLibrary" class="xowa-visited">Module:Diagnostics/TitleLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TitleLibrary.html" id="xolnki_10" title="Module:Diagnostics/TitleLibrary">Module:Diagnostics/TitleLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>TitleLibrary.php</b> and <b>mw.title.lua</b>
@@ -1374,13 +1385,13 @@
         Applies to the Luaj engine (as opposed to the Lua engine)
       </li>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj.html" id="xolnki_15" title="Module:Diagnostics/Luaj" class="xowa-visited">Module:Diagnostics/Luaj</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj.html" id="xolnki_15" title="Module:Diagnostics/Luaj">Module:Diagnostics/Luaj</a>
       </li>
       <li>
         Tests changes to the luaj_xowa.jar
       </li>
       <li>
-        Further notes available at <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Scribunto/Luaj.html" id="xolnki_16" title="App/Xtn/Mediawiki/Scribunto/Luaj" class="xowa-visited">App/Xtn/Mediawiki/Scribunto/Luaj</a>
+        Further notes available at <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Scribunto/Luaj.html" id="xolnki_16" title="App/Xtn/Mediawiki/Scribunto/Luaj">App/Xtn/Mediawiki/Scribunto/Luaj</a>
       </li>
     </ul>
     <h3>
@@ -2058,6 +2069,19 @@
         </td>
         <td>
           𣂁 - 脁 - 晁
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          zero-length regex fails
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|lua_match|text|}}
+        </td>
+        <td>
         </td>
         <td>
           <span style='color: green;'>pass</span>

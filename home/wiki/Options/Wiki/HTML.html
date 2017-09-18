@@ -320,7 +320,7 @@
             <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.alt.show_in_caption")' title='view more info'>&nbsp;</span>
           </div><!-- TEXT:key -->
           <div id='xowa.html.alt.show_in_caption__name' class='xocfg_itm_name'>
-            Show in caption
+            Duplicate alt in caption
           </div><!-- BTN:undo -->
           <div id='xowa.html.alt.show_in_caption__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
             <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.alt.show_in_caption")' title="reset to &quot;y&quot;">&nbsp;</span>
@@ -333,6 +333,12 @@
         <div id='xowa.html.alt.show_in_caption_help_div' class='xohelp_div'>
           <div id='xowa.html.alt.show_in_caption_help_msg' class='xohelp_msg'>
             <p>
+              (obsolete): This setting controls whether or not the "alt" is actually inserted into the HTML. Compare that with "Show in html" which merely hides the already-inserted alt
+            </p>
+            <p>
+              Advanced users may want to disable this to reduce the size of the HTML. Regular users should use the "Show in html" option
+            </p>
+            <p>
               Choose one of the following:
             </p>
             <ul>
@@ -344,7 +350,7 @@
               </li>
             </ul>
             <p>
-              EX: <a tabindex="-1" href="/site/simple.wikipedia.org/wiki/Saturn_(planet)">http://simple.wikipedia.org/wiki/Saturn_(planet)</a>
+              EX: <a tabindex="-1" href="http://simple.wikipedia.org/wiki/Saturn_(planet)" rel="nofollow" class="external free">http://simple.wikipedia.org/wiki/Saturn_(planet)</a>
             </p>
           </div>
         </div>
@@ -377,6 +383,40 @@
                 <b>unchecked</b> : if no alt attribute is specified, alt will be empty (check the HTML source)
               </li>
             </ul>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.alt.show_in_html")' title='view more info'>&nbsp;</span>
+          </div><!-- TEXT:key -->
+          <div id='xowa.html.alt.show_in_html__name' class='xocfg_itm_name'>
+            Show in html
+          </div><!-- BTN:undo -->
+          <div id='xowa.html.alt.show_in_html__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.alt.show_in_html")' title="reset to &quot;y&quot;">&nbsp;</span>
+          </div><!-- TEXT:val -->
+          <div class='xocfg_itm_data'>
+            <input id="xowa.html.alt.show_in_html" data-xocfg-key="xowa.html.alt.show_in_html" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.html.alt.show_in_html__key_box' value='xowa.html.alt.show_in_html'> <input type='hidden' id='xowa.html.alt.show_in_html__ctx_box' value='app'>
+        </div><!-- DIV:help -->
+        <div id='xowa.html.alt.show_in_html_help_div' class='xohelp_div'>
+          <div id='xowa.html.alt.show_in_html_help_msg' class='xohelp_msg'>
+            <p>
+              Choose one of the following:
+            </p>
+            <ul>
+              <li>
+                <b>checked</b> : show alt text underneath caption (default. non-standard behavior, but recommended)
+              </li>
+              <li>
+                <b>unchecked</b> : do not show alt text underneath caption (standard behavior)
+              </li>
+            </ul>
+            <p>
+              EX: <a tabindex="-1" href="http://simple.wikipedia.org/wiki/Saturn_(planet)" rel="nofollow" class="external free">http://simple.wikipedia.org/wiki/Saturn_(planet)</a>
+            </p>
           </div>
         </div>
         <h2>
@@ -500,7 +540,7 @@
                 Most navigation boxes at the side of the article which sometimes have a Show / Hide link. See <a tabindex="-1" href="/wiki/Diagnostics/Javascript/NavFrame" id="xolnki_23" title="Diagnostics/Javascript/NavFrame">Diagnostics/Javascript/NavFrame</a> or <a tabindex="-1" href="/site/en.wikipedia.org/wiki/Quantum_mechanics">http://en.wikipedia.org/wiki/Quantum_mechanics</a>
               </li>
               <li>
-                Some navigation boxes at the bottom of the article which sometimes have a Show / Hide link. See <a tabindex="-1" href="/site/simple.wikipedia.org/wiki/Earth">https://simple.wikipedia.org/wiki/Earth</a>
+                Some navigation boxes at the bottom of the article which sometimes have a Show / Hide link. See <a tabindex="-1" href="https://simple.wikipedia.org/wiki/Earth" rel="nofollow" class="external free">https://simple.wikipedia.org/wiki/Earth</a>
               </li>
             </ul>
           </div>
