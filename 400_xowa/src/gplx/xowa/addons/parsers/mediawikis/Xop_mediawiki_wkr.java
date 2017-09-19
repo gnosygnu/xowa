@@ -16,6 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.parsers.mediawikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.parsers.*;
 import gplx.xowa.wikis.*; import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.caches.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 public class Xop_mediawiki_wkr {
 	private final    Xowe_wiki wiki;
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
@@ -56,6 +57,18 @@ public class Xop_mediawiki_wkr {
 		byte[] orig_bry = Bry_.Empty;
 		if (is_wikitext) {
 			wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_hdump(tmp_bfr, pctx, Xoh_wtr_ctx.Hdump, wpg);
+
+			// write categories
+			int ctgs_len = wpg.Wtxt().Ctgs__len();
+			if (	ctgs_len > 0						// skip if no categories found while parsing wikitext
+				) {
+				Xoctg_pagebox_itm[] pagebox_itms = new Xoctg_pagebox_itm[ctgs_len];
+				for (int i = 0; i < ctgs_len; i++) {
+					pagebox_itms[i] = new Xoctg_pagebox_itm(wpg.Wtxt().Ctgs__get_at(i));
+				}
+				wiki.Ctg__pagebox_wtr().Write_pagebox(tmp_bfr, wiki, wpg, pagebox_itms);
+			}
+
 			orig_bry = tmp_bfr.To_bry_and_clear();
 			wpg.Db().Html().Html_bry_(orig_bry);
 		}
