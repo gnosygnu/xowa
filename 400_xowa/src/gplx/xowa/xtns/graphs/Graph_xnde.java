@@ -25,8 +25,14 @@ public class Graph_xnde implements Xox_xnde {
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
+		// cleanup json
+		byte[] json = Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		json = Json_fmtr.clean(tmp_bfr, json);
+
+		// add to bfr
 		bfr.Add(Html__div_bgn);
-		bfr.Add_mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
+		bfr.Add(json);
 		bfr.Add(Html__div_end);
 	}
 	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
