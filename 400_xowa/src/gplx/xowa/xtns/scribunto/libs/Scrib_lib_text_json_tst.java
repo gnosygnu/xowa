@@ -251,8 +251,8 @@ class Scrib_lib_json_fxt {
 	private String To_str(Object o) {
 		if	(o == null) return "<< NULL >>";
 		Class<?> type = o.getClass();
-		if		(Type_adp_.Eq(type, Keyval[].class))		return Kv_ary_utl.Ary_to_str(wtr, (Keyval[])o);
-		else if	(Type_adp_.Is_array(type))					return Array_.To_str_nested_obj(o);
+		if		(Type_.Eq(type, Keyval[].class))		return Kv_ary_utl.Ary_to_str(wtr, (Keyval[])o);
+		else if	(Type_.Is_array(type))					return Array_.To_str_nested_obj(o);
 		else												return Object_.Xto_str_strict_or_null(o);
 	}
 }

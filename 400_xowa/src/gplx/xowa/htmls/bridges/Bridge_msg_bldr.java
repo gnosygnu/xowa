@@ -32,10 +32,10 @@ public class Bridge_msg_bldr {
 	public Bridge_msg_bldr Notify_hint_(String v)	{synchronized(wtr){this.notify_hint = v;} return this;} private String notify_hint;
 	public Bridge_msg_bldr Notify_pass_(String v){synchronized(wtr){this.notify_text = v; this.notify_status = "success";} return this;}
 	public Bridge_msg_bldr Notify_fail_(String v){synchronized(wtr){this.notify_text = v; this.notify_status = "error"; this.rslt_pass = false;} return this;}
-	public Bridge_msg_bldr Data(String key, boolean val)			{return Data_obj(key, val, Type_adp_.Tid__bool);}
-	public Bridge_msg_bldr Data(String key, int val)			{return Data_obj(key, val, Type_adp_.Tid__int);}
-	public Bridge_msg_bldr Data(String key, String val)			{return Data_obj(key, val, Type_adp_.Tid__str);}
-	public Bridge_msg_bldr Data(String key, byte[] val)			{return Data_obj(key, val, Type_adp_.Tid__bry);}
+	public Bridge_msg_bldr Data(String key, boolean val)			{return Data_obj(key, val, Type_ids_.Id__bool);}
+	public Bridge_msg_bldr Data(String key, int val)			{return Data_obj(key, val, Type_ids_.Id__int);}
+	public Bridge_msg_bldr Data(String key, String val)			{return Data_obj(key, val, Type_ids_.Id__str);}
+	public Bridge_msg_bldr Data(String key, byte[] val)			{return Data_obj(key, val, Type_ids_.Id__bry);}
 	private Bridge_msg_bldr Data_obj(String key, Object val, int val_tid) {
 		synchronized (wtr) {data_root.Add_data(key, val, val_tid);}
 		return this;
@@ -81,9 +81,9 @@ public class Bridge_msg_bldr {
 				Gfo_tree_data sub_kv = (Gfo_tree_data)itm;
 				String key = sub_kv.Key(); Object val = sub_kv.Val();
 				switch (sub_kv.Val_tid()) {
-					case Type_adp_.Tid__bool:	wtr.Kv_bool(key, Bool_.Cast(val)); break;
-					case Type_adp_.Tid__int:		wtr.Kv_int(key, Int_.cast(val)); break;
-					case Type_adp_.Tid__bry:		wtr.Kv_bry(key, (byte[])val); break;
+					case Type_ids_.Id__bool:	wtr.Kv_bool(key, Bool_.Cast(val)); break;
+					case Type_ids_.Id__int:		wtr.Kv_int(key, Int_.cast(val)); break;
+					case Type_ids_.Id__bry:		wtr.Kv_bry(key, (byte[])val); break;
 					default:					wtr.Kv_str(key, Object_.Xto_str_strict_or_null_mark(val)); break;
 				}
 			}

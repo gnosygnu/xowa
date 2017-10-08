@@ -35,7 +35,7 @@ public class XomwSanitizer {
 	private static Btrie_slim_mgr invalid_idn_trie;
 	public XomwSanitizer() {
 		if (regex_url_char == null) {
-			synchronized (Type_adp_.ClassOf_obj(this)) {
+			synchronized (Type_.Type_by_obj(this)) {
 				regex_url_char = new Xomw_regex_url_char();
 
 				// Characters that will be ignored in IDNs.
@@ -81,7 +81,7 @@ public class XomwSanitizer {
 
 				// assert static structs
 				if (html_entities == null) {
-					synchronized (Type_adp_.ClassOf_obj(this)) {
+					synchronized (Type_.Type_by_obj(this)) {
 						html_entities = Html_entities_new();
 					}
 				}

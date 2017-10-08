@@ -61,7 +61,7 @@ public class Scrib_lib_text implements Scrib_lib {
 		Keyval[] itm_as_nde = null;
 		Object itm_as_ary = null;	
 		Class<?> itm_type = itm.getClass();
-		boolean itm_is_nde = Type_adp_.Eq(itm_type, Keyval[].class);
+		boolean itm_is_nde = Type_.Eq(itm_type, Keyval[].class);
 
 		// additional logic to classify "[]" as ary, not nde; note that this is done by checking len of itm_as_nde
 		if (itm_is_nde) {

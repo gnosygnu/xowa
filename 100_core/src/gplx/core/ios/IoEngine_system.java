@@ -445,7 +445,7 @@ public class IoEngine_system extends IoEngine_base {
 		try 	{closeable.close();}
 		catch 	(IOException e) {
 			if (throwErr)
-				throw Err_.new_exc(e, "io", "close object failed", "class", Type_adp_.NameOf_obj(closeable), "url", url_str);
+				throw Err_.new_exc(e, "io", "close object failed", "class", Type_.Name_by_obj(closeable), "url", url_str);
 //			else
 //				UsrDlg_._.Finally("failed to close FileChannel", "url", url, "apiErr", Err_.Message_err_arg(e));
 		}		
@@ -522,8 +522,8 @@ public class IoEngine_system extends IoEngine_base {
 		}
 		catch (Exception exc) {
 			xrg.Rslt_err_(exc);
-			if 		(Type_adp_.Eq_typeSafe(exc, java.net.UnknownHostException.class)) 	xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_host_not_found);
-			else if (Type_adp_.Eq_typeSafe(exc, java.io.FileNotFoundException.class))	xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_file_not_found);
+			if 		(Type_.Eq_by_obj(exc, java.net.UnknownHostException.class)) 	xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_host_not_found);
+			else if (Type_.Eq_by_obj(exc, java.io.FileNotFoundException.class))	xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_file_not_found);
 			else																		xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_unknown);
 			if (prog_dlg != null && !xrg.Prog_cancel()) {
     			if (session_fil == null) session_fil = prog_dlg.Log_wkr().Session_dir().GenSubFil("internet.txt");
@@ -726,8 +726,8 @@ class Io_stream_rdr_http implements Io_stream_rdr {
 		read_done = read_failed = true;
 		len = -1;
 		xrg.Rslt_err_(exc);
-		if 		(Type_adp_.Eq_typeSafe(exc, java.net.UnknownHostException.class)) 	xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_host_not_found);
-		else if (Type_adp_.Eq_typeSafe(exc, java.io.FileNotFoundException.class))	xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_file_not_found);
+		if 		(Type_.Eq_by_obj(exc, java.net.UnknownHostException.class)) 	xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_host_not_found);
+		else if (Type_.Eq_by_obj(exc, java.io.FileNotFoundException.class))	xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_file_not_found);
 		else																		xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_unknown);
 		if (prog_dlg != null && !xrg.Prog_cancel()) {
 			if (session_fil == null) session_fil = prog_dlg.Log_wkr().Session_dir().GenSubFil("internet.txt");

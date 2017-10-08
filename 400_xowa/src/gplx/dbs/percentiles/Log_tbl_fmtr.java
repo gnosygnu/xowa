@@ -18,8 +18,8 @@ class Log_tbl_fmtr {
 	private final    Bry_bfr bfr = Bry_bfr_.New();
 	private final    List_adp itms = List_adp_.New();
 	private Log_fld_itm[] ary;
-	public Log_tbl_fmtr Add_str(String key, int len)			{ary = null; itms.Add(new Log_fld_itm__bry(Type_adp_.Tid__bry, key, len)); return this;}
-	public Log_tbl_fmtr Add_int(String key, int bgn, int end)	{ary = null; itms.Add(new Log_fld_itm__int(Type_adp_.Tid__int, key, bgn, end)); return this;}
+	public Log_tbl_fmtr Add_str(String key, int len)			{ary = null; itms.Add(new Log_fld_itm__bry(Type_ids_.Id__bry, key, len)); return this;}
+	public Log_tbl_fmtr Add_int(String key, int bgn, int end)	{ary = null; itms.Add(new Log_fld_itm__int(Type_ids_.Id__int, key, bgn, end)); return this;}
 	public void Log(Object... vals) {
 		if (ary == null)
 			ary = (Log_fld_itm[])itms.To_ary_and_clear(Log_fld_itm.class);

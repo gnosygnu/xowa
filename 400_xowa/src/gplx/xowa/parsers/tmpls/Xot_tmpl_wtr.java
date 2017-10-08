@@ -97,7 +97,7 @@ public class Xot_tmpl_wtr {
 					tkn.Tmpl_evaluate(ctx, src, frame, rslt_bfr);
 				}
 				catch (Exception e) {
-					String err_string = String_.new_u8(src, tkn.Src_bgn(), tkn.Src_end()) + "|" + Type_adp_.NameOf_obj(e) + "|" + Err_.Cast_or_make(e).To_str__log();
+					String err_string = String_.new_u8(src, tkn.Src_bgn(), tkn.Src_end()) + "|" + Type_.Name_by_obj(e) + "|" + Err_.Cast_or_make(e).To_str__log();
 					if (Env_.Mode_testing())
 						throw Err_.new_exc(e, "xo", err_string);
 					else

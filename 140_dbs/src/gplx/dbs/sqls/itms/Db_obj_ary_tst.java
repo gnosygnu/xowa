@@ -19,10 +19,10 @@ import gplx.dbs.sqls.wtrs.*;
 public class Db_obj_ary_tst {
 	@Before public void init() {} private Db_obj_ary_fxt fxt = new Db_obj_ary_fxt();
 	@Test  public void Int() {
-		fxt.Init_fld("fld_0", Type_adp_.Tid__int).Init_fld("fld_1", Type_adp_.Tid__int).Init_vals(1, 10).Init_vals(2, 20).Test_sql("(fld_0=1 AND fld_1=10) OR (fld_0=2 AND fld_1=20)");
+		fxt.Init_fld("fld_0", Type_ids_.Id__int).Init_fld("fld_1", Type_ids_.Id__int).Init_vals(1, 10).Init_vals(2, 20).Test_sql("(fld_0=1 AND fld_1=10) OR (fld_0=2 AND fld_1=20)");
 	}
 	@Test  public void Str() {
-		fxt.Init_fld("fld_0", Type_adp_.Tid__int).Init_fld("fld_1", Type_adp_.Tid__str).Init_vals(1, "a").Init_vals(2, "b").Test_sql("(fld_0=1 AND fld_1='a') OR (fld_0=2 AND fld_1='b')");
+		fxt.Init_fld("fld_0", Type_ids_.Id__int).Init_fld("fld_1", Type_ids_.Id__str).Init_vals(1, "a").Init_vals(2, "b").Test_sql("(fld_0=1 AND fld_1='a') OR (fld_0=2 AND fld_1='b')");
 	}
 }
 class Db_obj_ary_fxt {

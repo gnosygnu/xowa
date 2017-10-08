@@ -128,8 +128,8 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		list.Add(itm);
 	}
 	public static void Err_classMatch(Exception exc, Class<?> type) {
-		boolean match = Type_adp_.Eq_typeSafe(exc, type);
-		if (!match) throw Err_.new_("Tfds", "error types do not match", "expdType", Type_adp_.FullNameOf_type(type), "actlType", Type_adp_.NameOf_obj(exc), "actlMsg", Err_.Message_lang(exc));
+		boolean match = Type_.Eq_by_obj(exc, type);
+		if (!match) throw Err_.new_("Tfds", "error types do not match", "expdType", Type_.Canonical_name(type), "actlType", Type_.Name_by_obj(exc), "actlMsg", Err_.Message_lang(exc));
 	}
 	public static void Eq_err(Err expd, Exception actlExc) {
 		Tfds.Eq(Err_.Message_gplx_full(expd), Err_.Message_gplx_full(actlExc));

@@ -15,15 +15,15 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
 public class Dsv_fld_parser_ {
-	public static final Dsv_fld_parser Bry_parser = Dsv_fld_parser_bry.Instance;
-	public static final Dsv_fld_parser Int_parser = Dsv_fld_parser_int.Instance;
-	public static final Dsv_fld_parser Line_parser__comment_is_pipe = new Dsv_fld_parser_line(Byte_ascii.Pipe);
+	public static final    Dsv_fld_parser Bry_parser = Dsv_fld_parser_bry.Instance;
+	public static final    Dsv_fld_parser Int_parser = Dsv_fld_parser_int.Instance;
+	public static final    Dsv_fld_parser Line_parser__comment_is_pipe = new Dsv_fld_parser_line(Byte_ascii.Pipe);
 	public static Err err_fld_unhandled(Dsv_fld_parser parser, Dsv_wkr_base wkr, int fld_idx, byte[] src, int bgn, int end) {
-		throw Err_.new_wo_type("fld unhandled", "parser", Type_adp_.NameOf_obj(parser), "wkr", Type_adp_.NameOf_obj(wkr), "fld_idx", fld_idx, "val", String_.new_u8(src, bgn, end)).Trace_ignore_add_1_();
+		throw Err_.new_wo_type("fld unhandled", "parser", Type_.Name_by_obj(parser), "wkr", Type_.Name_by_obj(wkr), "fld_idx", fld_idx, "val", String_.new_u8(src, bgn, end)).Trace_ignore_add_1_();
 	}
 }
 class Dsv_fld_parser_line implements Dsv_fld_parser {
-	private byte row_dlm = Byte_ascii.Nl; private final byte comment_dlm;
+	private byte row_dlm = Byte_ascii.Nl; private final    byte comment_dlm;
 	public Dsv_fld_parser_line(byte comment_dlm) {this.comment_dlm = comment_dlm;}
 	public void Init(byte fld_dlm, byte row_dlm) {
 		this.row_dlm = row_dlm;
@@ -78,7 +78,7 @@ class Dsv_fld_parser_bry implements Dsv_fld_parser {
 				++pos;
 		}
 	}
-	public static final Dsv_fld_parser_bry Instance = new Dsv_fld_parser_bry(); Dsv_fld_parser_bry() {}
+	public static final    Dsv_fld_parser_bry Instance = new Dsv_fld_parser_bry(); Dsv_fld_parser_bry() {}
 }
 class Dsv_fld_parser_int implements Dsv_fld_parser {
 	private byte fld_dlm = Byte_ascii.Pipe, row_dlm = Byte_ascii.Nl;
@@ -108,5 +108,5 @@ class Dsv_fld_parser_int implements Dsv_fld_parser {
 				++pos;
 		}
 	}
-	public static final Dsv_fld_parser_int Instance = new Dsv_fld_parser_int(); Dsv_fld_parser_int() {}
+	public static final    Dsv_fld_parser_int Instance = new Dsv_fld_parser_int(); Dsv_fld_parser_int() {}
 }

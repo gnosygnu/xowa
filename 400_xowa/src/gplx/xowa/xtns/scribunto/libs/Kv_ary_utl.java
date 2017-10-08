@@ -38,11 +38,11 @@ class Kv_ary_utl {
 	private static void Ary_to_str__itm(Json_wtr wtr, int indent, Keyval itm) {
 		Object val = itm.Val();
 		Class<?> val_type = val.getClass();
-		int type_tid = Type_adp_.To_tid_type(val_type);
-		if (type_tid == Type_adp_.Tid__obj) {
-			if (Type_adp_.Eq(val_type, Keyval[].class))
+		int type_tid = Type_ids_.To_id_by_type(val_type);
+		if (type_tid == Type_ids_.Id__obj) {
+			if (Type_.Eq(val_type, Keyval[].class))
 				Ary_to_str__nde(wtr, indent, itm.Key(), (Keyval[])itm.Val());
-			else if (Type_adp_.Is_array(val_type))
+			else if (Type_.Is_array(val_type))
 				Ary_to_str__ary(wtr, indent, itm.Key(), Array_.cast(val));
 			else
 				throw Err_.new_unhandled(type_tid);
@@ -65,11 +65,11 @@ class Kv_ary_utl {
 		for (int j = 0; j < len; ++j) {
 			Object itm = Array_.Get_at(array, j);
 			Class<?> itm_type = itm.getClass();
-			int itm_type_tid = Type_adp_.To_tid_type(itm_type);
-			if (itm_type_tid == Type_adp_.Tid__obj) {
-				if (Type_adp_.Eq(itm_type, Keyval.class))
+			int itm_type_tid = Type_ids_.To_id_by_type(itm_type);
+			if (itm_type_tid == Type_ids_.Id__obj) {
+				if (Type_.Eq(itm_type, Keyval.class))
 					Ary_to_str__itm(wtr, indent + 1, (Keyval)itm);
-				else if (Type_adp_.Is_array(itm_type))
+				else if (Type_.Is_array(itm_type))
 					Ary_to_str__ary_itms(wtr, indent + 1, Array_.cast(itm));
 				else
 					throw Err_.new_unhandled(itm_type);

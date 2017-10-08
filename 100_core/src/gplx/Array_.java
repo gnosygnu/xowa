@@ -70,7 +70,7 @@ public class Array_ {
 		int len = Len(ary);
 		for (int i = 0; i < len; i++) {
 			Object itm = Get_at(ary, i);
-			if (itm != null && Type_adp_.Is_array(itm.getClass()))
+			if (itm != null && Type_.Is_array(itm.getClass()))
 				To_str_nested_ary(bfr, (Object)itm, indent + 1);	
 			else {
 				if (indent > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent * 2);

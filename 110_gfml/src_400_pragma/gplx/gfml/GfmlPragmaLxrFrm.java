@@ -33,7 +33,7 @@ class GfmlPragmaLxrFrm implements GfmlPragma {
 			bldr.Doc().RootLxr().SubLxr_Add(lxr);		// FIXME: always add to cur lxr; should be outside if block; also, auto_add=n to skip adding to rootLxr
 		}
 		else {
-			GfmlLxr_frame frameLxr = GfmlLxr_frame.as_(lxr); if (frameLxr == null) throw Err_.new_wo_type("lxr is not GfmlLxr_frame", "key", key, "type", Type_adp_.NameOf_obj(lxr));
+			GfmlLxr_frame frameLxr = GfmlLxr_frame.as_(lxr); if (frameLxr == null) throw Err_.new_wo_type("lxr is not GfmlLxr_frame", "key", key, "type", Type_.Name_by_obj(lxr));
 			if (type != null) {
 //					frame = frameLxr.Frame.MakeNew(frameLxr);
 			}

@@ -41,17 +41,17 @@ public class Object_ {
 	public static String Xto_str_strict_or_empty(Object v)		{return v == null ? String_.Empty		: ToString_lang(v);}
 	private static String ToString_lang(Object v) {
 		Class<?> c = v.getClass();
-		if		(Type_adp_.Eq(c, String_.Cls_ref_type))		return (String)v;
-		else if	(Type_adp_.Eq(c, Bry_.Cls_ref_type))		return String_.new_u8((byte[])v);
+		if		(Type_.Eq(c, String_.Cls_ref_type))		return (String)v;
+		else if	(Type_.Eq(c, Bry_.Cls_ref_type))		return String_.new_u8((byte[])v);
 		else												return v.toString();	
 	}
 	public static String Xto_str_loose_or(Object v, String or) {	// tries to pretty-print doubles; also standardizes true/false; DATE:2014-07-14
 		if (v == null) return null;
-		Class<?> c = Type_adp_.ClassOf_obj(v);
-		if		(Type_adp_.Eq(c, String_.Cls_ref_type))		return (String)v;
-		else if	(Type_adp_.Eq(c, Bry_.Cls_ref_type))		return String_.new_u8((byte[])v);
-		else if (Type_adp_.Eq(c, Bool_.Cls_ref_type))		return Bool_.Cast(v) ? Bool_.True_str : Bool_.False_str;	// always return "true" / "false"
-		else if	(Type_adp_.Eq(c, Double_.Cls_ref_type))		return Double_.To_str_loose(Double_.cast(v));
+		Class<?> c = Type_.Type_by_obj(v);
+		if		(Type_.Eq(c, String_.Cls_ref_type))		return (String)v;
+		else if	(Type_.Eq(c, Bry_.Cls_ref_type))		return String_.new_u8((byte[])v);
+		else if (Type_.Eq(c, Bool_.Cls_ref_type))		return Bool_.Cast(v) ? Bool_.True_str : Bool_.False_str;	// always return "true" / "false"
+		else if	(Type_.Eq(c, Double_.Cls_ref_type))		return Double_.To_str_loose(Double_.cast(v));
 		else												return v.toString();	
 	}
 	public static final    Object Null = null;

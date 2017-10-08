@@ -46,7 +46,7 @@ public class Xomw_magiclinks_wkr {
 			.To_ary();
 
 		if (Tag__anch__rhs == null) {
-			synchronized (Type_adp_.ClassOf_obj(this)) {
+			synchronized (Type_.Type_by_obj(this)) {
 				Tag__anch__rhs = Bry_.new_a7("</a>");
 				regex_link_interrupt = new Xomw_regex_link_interrupt();
 			}

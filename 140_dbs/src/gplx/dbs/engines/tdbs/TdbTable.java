@@ -53,7 +53,7 @@ public class TdbTable {
 			flds = ndeRdr.UnderNde().SubFlds();
 		}
 		else {	// XmlRdr needs to load each row again...
-			throw Err_.new_invalid_op("TableLoad not implemented").Args_add("rdrType", Type_adp_.NameOf_obj(rdr), "rdrName", rdr.NameOfNode());
+			throw Err_.new_invalid_op("TableLoad not implemented").Args_add("rdrType", Type_.Name_by_obj(rdr), "rdrName", rdr.NameOfNode());
 		}
 		isLoaded = true;
 	}

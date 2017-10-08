@@ -115,7 +115,7 @@ class Luaj_value_ {
 	}
 	public static LuaValue Obj_to_lua_val(Luaj_server server, Object o) {
 		if (o == null) return LuaValue.NIL;
-		Class<?> c = Type_adp_.ClassOf_obj(o);
+		Class<?> c = Type_.Type_by_obj(o);
 		if		(Object_.Eq(c, Bool_.Cls_ref_type))			return LuaValue.valueOf((Boolean)o);
 		else if	(Object_.Eq(c, Byte_.Cls_ref_type))			return LuaValue.valueOf((Byte)o);
 		else if	(Object_.Eq(c, Int_.Cls_ref_type))			return LuaValue.valueOf((Integer)o);
@@ -139,11 +139,11 @@ class Luaj_value_ {
 			Keyval itm = ary[i];
 			LuaValue itm_val = Obj_to_lua_val(server, itm.Val());
 			switch (itm.Key_tid()) {
-				case Type_adp_.Tid__int:
+				case Type_ids_.Id__int:
 					rv.set(Int_.cast(itm.Key_as_obj()), itm_val);
 					break;
-				case Type_adp_.Tid__str:
-				case Type_adp_.Tid__obj:
+				case Type_ids_.Id__str:
+				case Type_ids_.Id__obj:
 					rv.set(itm.Key(), itm_val);
 					break;
 			}				

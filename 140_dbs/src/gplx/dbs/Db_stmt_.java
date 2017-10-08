@@ -58,16 +58,16 @@ public class Db_stmt_ {
 	}
 	public static Db_stmt Rls(Db_stmt v) {if (v != null) v.Rls(); return null;}
 	public static void Val_by_obj(Db_stmt stmt, String key, Object val) {
-		int tid = Type_adp_.To_tid_obj(val);
+		int tid = Type_ids_.To_id_by_obj(val);
 		switch (tid) {
-			case Type_adp_.Tid__bool:			stmt.Val_bool_as_byte	(key, Bool_.Cast(val)); break;
-			case Type_adp_.Tid__byte:			stmt.Val_byte			(key, Byte_.cast(val)); break;
-			case Type_adp_.Tid__int:			stmt.Val_int			(key, Int_.cast(val)); break;
-			case Type_adp_.Tid__long:			stmt.Val_long			(key, Long_.cast(val)); break;
-			case Type_adp_.Tid__float:			stmt.Val_float			(key, Float_.cast(val)); break;
-			case Type_adp_.Tid__double:			stmt.Val_double			(key, Double_.cast(val)); break;
-			case Type_adp_.Tid__str:			stmt.Val_str			(key, String_.cast(val)); break;
-			case Type_adp_.Tid__bry:			stmt.Val_bry			(key, Bry_.cast(val)); break;
+			case Type_ids_.Id__bool:			stmt.Val_bool_as_byte	(key, Bool_.Cast(val)); break;
+			case Type_ids_.Id__byte:			stmt.Val_byte			(key, Byte_.cast(val)); break;
+			case Type_ids_.Id__int:			stmt.Val_int			(key, Int_.cast(val)); break;
+			case Type_ids_.Id__long:			stmt.Val_long			(key, Long_.cast(val)); break;
+			case Type_ids_.Id__float:			stmt.Val_float			(key, Float_.cast(val)); break;
+			case Type_ids_.Id__double:			stmt.Val_double			(key, Double_.cast(val)); break;
+			case Type_ids_.Id__str:			stmt.Val_str			(key, String_.cast(val)); break;
+			case Type_ids_.Id__bry:			stmt.Val_bry			(key, Bry_.cast(val)); break;
 			default:							throw Err_.new_unhandled_default(tid);
 		}
 	}

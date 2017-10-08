@@ -87,8 +87,8 @@ public class Scrib_proc_args {
 			if (kv == null) continue;
 
 			// get integer-key; needed to handle gaps
-			if (	kv.Key_tid() == Type_adp_.Tid__int			// luaj will be int
-				|| 	kv.Key_tid() == Type_adp_.Tid__obj) {		// lua will be obj; note that luaj will also have other non-key objects
+			if (	kv.Key_tid() == Type_ids_.Id__int			// luaj will be int
+				|| 	kv.Key_tid() == Type_ids_.Id__obj) {		// lua will be obj; note that luaj will also have other non-key objects
 				Object key_obj = kv.Key_as_obj();
 				if (key_obj.getClass() == Int_.Cls_ref_type) {	// key is int; cast it
 					int expd_key = i + List_adp_.Base1;			// EX: i=1; expd_key=2
@@ -127,7 +127,7 @@ public class Scrib_proc_args {
 	public byte[][]	Cast_params_as_bry_ary_or_rest_of_ary(int params_idx)	{	// PAGE:ru.w:Ленин,_Владимир_Ильич; DATE:2014-07-01 MW:LanguageLibrary.php|ConvertPlural: if (is_array($args[0])) $args = $args[0];  $forms = array_values(array_map('strval', $args));
 		if (params_idx < 0 || params_idx >= ary_len) return Bry_.Ary_empty;
 		Object o = ary[params_idx].Val();
-		if (Type_adp_.Eq_typeSafe(o, Keyval[].class)) {
+		if (Type_.Eq_by_obj(o, Keyval[].class)) {
 			Keyval[] tbl = (Keyval[])o;
 			int rv_len = tbl.length;
 			byte[][] rv = new byte[rv_len][];
@@ -152,7 +152,7 @@ public class Scrib_proc_args {
 	public byte[] Extract_qry_args(Xowe_wiki wiki, int idx) {
 		Object qry_args_obj = Cast_obj_or_null(idx);
 		if (qry_args_obj == null) return Bry_.Empty;
-		Class<?> qry_args_cls = Type_adp_.ClassOf_obj(qry_args_obj);
+		Class<?> qry_args_cls = Type_.Type_by_obj(qry_args_obj);
 		if		(qry_args_cls == String.class)
 			return Bry_.new_u8((String)qry_args_obj);
 		else if (qry_args_cls == Keyval[].class) {
@@ -169,7 +169,7 @@ public class Scrib_proc_args {
 			return bfr.To_bry_and_rls();
 		}
 		else {
-			wiki.Appe().Usr_dlg().Warn_many("", "", "unknown type for GetUrl query args: ~{0}", Type_adp_.NameOf_type(qry_args_cls));
+			wiki.Appe().Usr_dlg().Warn_many("", "", "unknown type for GetUrl query args: ~{0}", Type_.Name(qry_args_cls));
 			return Bry_.Empty;
 		}
 	}

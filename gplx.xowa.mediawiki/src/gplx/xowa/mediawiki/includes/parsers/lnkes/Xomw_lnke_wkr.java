@@ -37,7 +37,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 		this.sanitizer = sanitizer;
 
 		if (angle_entities_trie == null) {
-			synchronized (Type_adp_.ClassOf_obj(this)) {
+			synchronized (Type_.Type_by_obj(this)) {
 				Link_type__free           = Bry_.new_a7("free");
 				Link_type__text           = Bry_.new_a7("text");
 				Link_type__autonumber     = Bry_.new_a7("autonumber");

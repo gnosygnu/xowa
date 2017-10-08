@@ -26,19 +26,19 @@ public class Sql_val_wtr {
 			bfr.Add_str_a7("NULL");
 			return;
 		}
-		int tid_type = Type_adp_.To_tid_type(val.getClass());
+		int tid_type = Type_ids_.To_id_by_type(val.getClass());
 		switch (tid_type) {
-			case Type_adp_.Tid__bool:			Bld_val__bool		(bfr, Bool_.Cast(val)); break;
-			case Type_adp_.Tid__byte:			Bld_val__byte		(bfr, Byte_.cast(val)); break;
-			case Type_adp_.Tid__short:			Bld_val__short		(bfr, Short_.cast(val)); break;
-			case Type_adp_.Tid__int:			Bld_val__int		(bfr, Int_.cast(val)); break;
-			case Type_adp_.Tid__long:			Bld_val__long		(bfr, Long_.cast(val)); break;
-			case Type_adp_.Tid__float:			Bld_val__float		(bfr, Float_.cast(val)); break;
-			case Type_adp_.Tid__double:			Bld_val__double		(bfr, Double_.cast(val)); break;
-			case Type_adp_.Tid__decimal:		Bld_val__decimal	(bfr, Decimal_adp_.cast(val)); break;
-			case Type_adp_.Tid__str:			Bld_val__str		(bfr, String_.cast(val)); break;
-			case Type_adp_.Tid__date:			Bld_val__date		(bfr, DateAdp_.cast(val)); break;
-			case Type_adp_.Tid__obj:			Bld_val__str		(bfr, Object_.Xto_str_strict_or_null(val)); break;
+			case Type_ids_.Id__bool:			Bld_val__bool		(bfr, Bool_.Cast(val)); break;
+			case Type_ids_.Id__byte:			Bld_val__byte		(bfr, Byte_.cast(val)); break;
+			case Type_ids_.Id__short:			Bld_val__short		(bfr, Short_.cast(val)); break;
+			case Type_ids_.Id__int:			Bld_val__int		(bfr, Int_.cast(val)); break;
+			case Type_ids_.Id__long:			Bld_val__long		(bfr, Long_.cast(val)); break;
+			case Type_ids_.Id__float:			Bld_val__float		(bfr, Float_.cast(val)); break;
+			case Type_ids_.Id__double:			Bld_val__double		(bfr, Double_.cast(val)); break;
+			case Type_ids_.Id__decimal:		Bld_val__decimal	(bfr, Decimal_adp_.cast(val)); break;
+			case Type_ids_.Id__str:			Bld_val__str		(bfr, String_.cast(val)); break;
+			case Type_ids_.Id__date:			Bld_val__date		(bfr, DateAdp_.cast(val)); break;
+			case Type_ids_.Id__obj:			Bld_val__str		(bfr, Object_.Xto_str_strict_or_null(val)); break;
 		}
 	}
 	@gplx.Virtual public void Bld_val__bool		(Bry_bfr bfr, boolean val)			{bfr.Add_int_digits(1, val ? 1 : 0);}	// NOTE: save boolean to 0 or 1 b/c sqlite doesn't support true / false //{bfr.Add_str_a7(val ? "true" : "false");}

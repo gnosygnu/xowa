@@ -148,7 +148,7 @@ public class XomwInterwikiLookupAdapter implements XomwInterwikiLookup {
 			String interwiki = (String)hash.Get_at(i);
 			String url = site.getPageUrl();
 			String path = null;
-			if (Type_adp_.Eq_typeSafe(site, XomwMediaWikiSite.class)) {
+			if (Type_.Eq_by_obj(site, XomwMediaWikiSite.class)) {
 				path = ((XomwMediaWikiSite)site).getFileUrl("api.php");
 			} else {
 				path = "";

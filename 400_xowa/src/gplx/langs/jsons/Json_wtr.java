@@ -69,9 +69,9 @@ public class Json_wtr {
 		Write_nl();
 		return Write_grp_bgn(Sym_ary_bgn);
 	}
-	public Json_wtr Ary_itm_str(String itm) {return Ary_itm_by_type_tid(Type_adp_.Tid__str, itm);}
-	public Json_wtr Ary_itm_bry(byte[] itm) {return Ary_itm_by_type_tid(Type_adp_.Tid__bry, itm);}
-	public Json_wtr Ary_itm_obj(Object itm) {return Ary_itm_by_type_tid(Type_adp_.To_tid_obj(itm), itm);}
+	public Json_wtr Ary_itm_str(String itm) {return Ary_itm_by_type_tid(Type_ids_.Id__str, itm);}
+	public Json_wtr Ary_itm_bry(byte[] itm) {return Ary_itm_by_type_tid(Type_ids_.Id__bry, itm);}
+	public Json_wtr Ary_itm_obj(Object itm) {return Ary_itm_by_type_tid(Type_ids_.To_id_by_obj(itm), itm);}
 	public Json_wtr Ary_itm_by_type_tid(int itm_type_tid, Object itm) {
 		Write_indent_itm();
 		Write_val_obj(Bool_.Y, itm_type_tid, itm);
@@ -126,7 +126,7 @@ public class Json_wtr {
 	}
 	public void Kv_itm_x(byte[] key, Json_itm itm) {
 		Object val = Get_x(itm);
-		int val_tid = Type_adp_.To_tid_obj(val);
+		int val_tid = Type_ids_.To_id_by_obj(val);
 		Kv_obj(key, val, val_tid);
 	}
 	public Json_wtr Kv_obj(byte[] key, Object val, int val_tid) {
@@ -162,19 +162,19 @@ public class Json_wtr {
 	}
 	private void Write_val_obj(boolean called_by_ary, int type_tid, Object obj) {
 		switch (type_tid) {
-			case Type_adp_.Tid__null:				bfr.Add(Object_.Bry__null); break;
-			case Type_adp_.Tid__bool:				bfr.Add_bool(Bool_.Cast(obj)); break;
-			case Type_adp_.Tid__byte:				bfr.Add_byte(Byte_.cast(obj)); break;
-			case Type_adp_.Tid__int:				bfr.Add_int_variable(Int_.cast(obj)); break;
-			case Type_adp_.Tid__long:				bfr.Add_long_variable(Long_.cast(obj)); break;
-			case Type_adp_.Tid__float:				bfr.Add_float(Float_.cast(obj)); break;
-			case Type_adp_.Tid__double:				bfr.Add_double(Double_.cast(obj)); break;
-			case Type_adp_.Tid__str:				Write_str(Bry_.new_u8((String)obj)); break;
-			case Type_adp_.Tid__bry:				Write_str((byte[])obj); break;
-			case Type_adp_.Tid__char:				
-			case Type_adp_.Tid__date:
-			case Type_adp_.Tid__decimal:			Write_str(Bry_.new_u8(Object_.Xto_str_strict_or_empty(obj))); break;
-			case Type_adp_.Tid__obj:
+			case Type_ids_.Id__null:				bfr.Add(Object_.Bry__null); break;
+			case Type_ids_.Id__bool:				bfr.Add_bool(Bool_.Cast(obj)); break;
+			case Type_ids_.Id__byte:				bfr.Add_byte(Byte_.cast(obj)); break;
+			case Type_ids_.Id__int:				bfr.Add_int_variable(Int_.cast(obj)); break;
+			case Type_ids_.Id__long:				bfr.Add_long_variable(Long_.cast(obj)); break;
+			case Type_ids_.Id__float:				bfr.Add_float(Float_.cast(obj)); break;
+			case Type_ids_.Id__double:				bfr.Add_double(Double_.cast(obj)); break;
+			case Type_ids_.Id__str:				Write_str(Bry_.new_u8((String)obj)); break;
+			case Type_ids_.Id__bry:				Write_str((byte[])obj); break;
+			case Type_ids_.Id__char:				
+			case Type_ids_.Id__date:
+			case Type_ids_.Id__decimal:			Write_str(Bry_.new_u8(Object_.Xto_str_strict_or_empty(obj))); break;
+			case Type_ids_.Id__obj:
 				int grp_type = Grp_type__get(obj);
 				if (grp_type < Grp_type__json_ary)
 					Write_val_obj__nde(called_by_ary, grp_type, obj);
@@ -225,7 +225,7 @@ public class Json_wtr {
 			for (int i = 0; i < kvy_len; ++i) {
 				Keyval kv = kvy[i];
 				Object kv_val = kv.Val();
-				Kv_obj(Bry_.new_u8(kv.Key()), kv_val, Type_adp_.To_tid_obj(kv_val));
+				Kv_obj(Bry_.new_u8(kv.Key()), kv_val, Type_ids_.To_id_by_obj(kv_val));
 			}
 		}
 		Write_grp_end(Bool_.Y, Sym_nde_end);
@@ -303,10 +303,10 @@ public class Json_wtr {
 	private static final int Grp_type__json_nde = 1, Grp_type__kv_ary = 2, Grp_type__json_ary = 3, Grp_type__obj_ary = 4;
 	private static int Grp_type__get(Object obj) {
 		Class<?> type = obj.getClass();
-		if		(Type_adp_.Eq(type, Keyval[].class))		return Grp_type__kv_ary;
-		else if (Type_adp_.Is_array(type))					return Grp_type__obj_ary;
-		else if (Type_adp_.Eq(type, Json_nde.class))		return Grp_type__json_nde;
-		else if (Type_adp_.Eq(type, Json_ary.class))		return Grp_type__json_ary;
+		if		(Type_.Eq(type, Keyval[].class))		return Grp_type__kv_ary;
+		else if (Type_.Is_array(type))					return Grp_type__obj_ary;
+		else if (Type_.Eq(type, Json_nde.class))		return Grp_type__json_nde;
+		else if (Type_.Eq(type, Json_ary.class))		return Grp_type__json_ary;
 		else												throw Err_.new_unhandled(type);
 	}
 }

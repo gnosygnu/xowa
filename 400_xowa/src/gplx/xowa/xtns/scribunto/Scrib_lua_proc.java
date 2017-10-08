@@ -20,6 +20,6 @@ public class Scrib_lua_proc {
 	public int Id() {return id;} private int id;
 	@Override public String toString() {return key + ":" + id;}
 	public static Scrib_lua_proc cast_or_null_(Object o) {	// NOTE: maxStringLength and maxPatternLength return d:INF; ignore these
-		return Type_adp_.ClassOf_obj(o) == Scrib_lua_proc.class ? (Scrib_lua_proc)o : null;
+		return Type_.Type_by_obj(o) == Scrib_lua_proc.class ? (Scrib_lua_proc)o : null;
 	}
 }

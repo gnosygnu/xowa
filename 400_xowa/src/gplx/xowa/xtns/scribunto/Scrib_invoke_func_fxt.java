@@ -216,7 +216,7 @@ class Scrib_lua_rsp_bldr {
 		else if	(Object_.Eq(v_type, Double_.Cls_ref_type))		Bld_double(bfr, Double_.cast(v));
 		else if	(Object_.Eq(v_type, Keyval[].class))			Bld_kv_ary(bfr, (Keyval[])v);
 		else if	(Object_.Eq(v_type, Scrib_lua_proc.class))	Bld_fnc(bfr, (Scrib_lua_proc)v);
-		else													throw Err_.new_unhandled(Type_adp_.NameOf_obj(v));
+		else													throw Err_.new_unhandled(Type_.Name_by_obj(v));
 	}
 	private void Bld_bool(Bry_bfr bfr, boolean v)		{bfr.Add_str_a7("b:").Add_int_fixed(v ? 1 : 0, 1).Add_byte(Byte_ascii.Semic);}
 	private void Bld_int(Bry_bfr bfr, int v)		{bfr.Add_str_a7("i:").Add_int_variable(v).Add_byte(Byte_ascii.Semic);}

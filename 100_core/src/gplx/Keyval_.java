@@ -49,7 +49,7 @@ public class Keyval_ {
 			}
 			sb.Add(itm.Key()).Add("=");
 			Object itm_val = itm.Val();
-			if (Type_adp_.Eq_typeSafe(itm_val, Keyval[].class))
+			if (Type_.Eq_by_obj(itm_val, Keyval[].class))
 				sb.Add(Ary_to_str((Keyval[])itm_val));
 			else
 				sb.Add(Object_.Xto_str_strict_or_null_mark(itm_val));
@@ -81,13 +81,13 @@ public class Keyval_ {
 			if (val == null)
 				bfr.Add_str_a7(String_.Null_mark);
 			else {
-				Class<?> val_type = Type_adp_.ClassOf_obj(val);
-				if		(Type_adp_.Eq(val_type, Keyval[].class)) {				// val is Keyval[]; recurse
+				Class<?> val_type = Type_.Type_by_obj(val);
+				if		(Type_.Eq(val_type, Keyval[].class)) {				// val is Keyval[]; recurse
 					bfr.Add_byte_nl();												// add nl		: "\n"
 					Ary__to_str__nest(bfr, indent + 1, (Keyval[])val);
 					continue;														// don't add \n below
 				}
-				else if (Type_adp_.Eq(val_type, Bool_.Cls_ref_type)) {					// val is boolean
+				else if (Type_.Eq(val_type, Bool_.Cls_ref_type)) {					// val is boolean
 					boolean val_as_bool = Bool_.Cast(val);
 					bfr.Add(val_as_bool ? Bool_.True_bry : Bool_.False_bry);		// add "true" or "false"; don't call toString
 				}
@@ -98,8 +98,8 @@ public class Keyval_ {
 		}
 	}
 	public static Keyval as_(Object obj) {return obj instanceof Keyval ? (Keyval)obj : null;}
-	public static Keyval new_(String key)				{return new Keyval(Type_adp_.Tid__str, key, key);}
-	public static Keyval new_(String key, Object val)	{return new Keyval(Type_adp_.Tid__str, key, val);}
-	public static Keyval int_(int key, Object val)		{return new Keyval(Type_adp_.Tid__int, key, val);}
-	public static Keyval obj_(Object key, Object val)	{return new Keyval(Type_adp_.Tid__obj, key, val);}
+	public static Keyval new_(String key)				{return new Keyval(Type_ids_.Id__str, key, key);}
+	public static Keyval new_(String key, Object val)	{return new Keyval(Type_ids_.Id__str, key, val);}
+	public static Keyval int_(int key, Object val)		{return new Keyval(Type_ids_.Id__int, key, val);}
+	public static Keyval obj_(Object key, Object val)	{return new Keyval(Type_ids_.Id__obj, key, val);}
 }

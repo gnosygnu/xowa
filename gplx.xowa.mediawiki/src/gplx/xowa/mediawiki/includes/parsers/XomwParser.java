@@ -315,7 +315,7 @@ public class XomwParser implements XomwParserIface {
 	private static byte[] Atr__rel;
 	public XomwParser(XomwEnv env) {
 		if (regex_space == null) {
-			synchronized (Type_adp_.ClassOf_obj(this)) {
+			synchronized (Type_.Type_by_obj(this)) {
 				regex_space = new Xomw_regex_space();
 				regex_boundary = new Xomw_regex_boundary(regex_space);
 				regex_url = new Xomw_regex_url(regex_space);

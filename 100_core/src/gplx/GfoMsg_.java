@@ -256,11 +256,11 @@ interface XtoStrWkr {
 class XtoStrWkr_gplx implements XtoStrWkr {
 	public String To_str(Object o) {
 		if (o == null) return "<<NULL>>";
-		Class<?> type = Type_adp_.ClassOf_obj(o);
+		Class<?> type = Type_.Type_by_obj(o);
 		String rv = null;
 		if		(type == String.class)	rv = String_.cast(o);
 		else if (Int_.TypeMatch(type))		return Int_.To_str(Int_.cast(o));
-		else if (Type_adp_.Eq(type, Bool_.Cls_ref_type))		return Yn.To_str(Bool_.Cast(o));
+		else if (Type_.Eq(type, Bool_.Cls_ref_type))		return Yn.To_str(Bool_.Cast(o));
 		else if (type == DateAdp.class)	return DateAdp_.cast(o).XtoStr_gplx();
 		else								rv = Object_.Xto_str_strict_or_empty(o);
 		return String_.Replace(rv, "'", "''");

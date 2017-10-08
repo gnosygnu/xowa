@@ -66,7 +66,7 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	}
 	void WriteDataVal(String fld, Object val) {
 		if (insertCmd == null) insertCmd = Db_qry_.insert_(curTableName);
-		if (Type_adp_.Eq_typeSafe(val, String.class))
+		if (Type_.Eq_by_obj(val, String.class))
 			insertCmd.Val_obj_type(fld, val, Db_val_type.Tid_varchar);
 		else
 			insertCmd.Val_obj(fld, val);

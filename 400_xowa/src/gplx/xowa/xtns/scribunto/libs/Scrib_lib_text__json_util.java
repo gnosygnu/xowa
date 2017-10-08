@@ -28,13 +28,13 @@ class Scrib_lib_text__json_util {
 		for (int i = 0; i < len; ++i) {
 			Keyval kv = kv_ary[i];
 			Object kv_val = kv.Val();
-			if (kv_val != null && Type_adp_.Eq(kv_val.getClass(), Keyval[].class)) {
+			if (kv_val != null && Type_.Eq(kv_val.getClass(), Keyval[].class)) {
 				Reindex_arrays(rv, (Keyval[])kv_val, is_encoding);
 				if (!rv.Rv_is_kvy())
 					kv.Val_(rv.Rv_as_ary());
 			}
 			if (is_sequence) {
-				if (kv.Key_tid() == Type_adp_.Tid__int) {
+				if (kv.Key_tid() == Type_ids_.Id__int) {
 					int kv_key_as_int = Int_.cast(kv.Key_as_obj());
 					is_sequence = next++ == kv_key_as_int;
 				}
@@ -161,22 +161,22 @@ class Scrib_lib_text__json_util {
 	}
 	private void Encode_kv(Keyval kv) {
 		Object kv_val = kv.Val();
-		Class<?> type = Type_adp_.ClassOf_obj(kv_val);
-		if		(Type_adp_.Eq(type, Keyval[].class)) {
+		Class<?> type = Type_.Type_by_obj(kv_val);
+		if		(Type_.Eq(type, Keyval[].class)) {
 			wtr.Nde_bgn(kv.Key());
 			Encode_kv_ary((Keyval[])kv_val);
 			wtr.Nde_end();
 		}
-		else if (Type_adp_.Is_array(type)) {	// encode as array
+		else if (Type_.Is_array(type)) {	// encode as array
 			wtr.Ary_bgn(kv.Key());
 			Encode_ary(kv_val);
 			wtr.Ary_end();
 		}
-		else if (Type_adp_.Eq(type, Int_.Cls_ref_type))			wtr.Kv_int(kv.Key(), Int_.cast(kv_val));
-		else if (Type_adp_.Eq(type, Long_.Cls_ref_type))		wtr.Kv_long(kv.Key(), Long_.cast(kv_val));
-		else if (Type_adp_.Eq(type, Float_.Cls_ref_type))		wtr.Kv_float(kv.Key(), Float_.cast(kv_val));
-		else if (Type_adp_.Eq(type, Double_.Cls_ref_type))		wtr.Kv_double(kv.Key(), Double_.cast(kv_val));
-		else if (Type_adp_.Eq(type, Bool_.Cls_ref_type))		wtr.Kv_bool(kv.Key(), Bool_.Cast(kv_val));
+		else if (Type_.Eq(type, Int_.Cls_ref_type))			wtr.Kv_int(kv.Key(), Int_.cast(kv_val));
+		else if (Type_.Eq(type, Long_.Cls_ref_type))		wtr.Kv_long(kv.Key(), Long_.cast(kv_val));
+		else if (Type_.Eq(type, Float_.Cls_ref_type))		wtr.Kv_float(kv.Key(), Float_.cast(kv_val));
+		else if (Type_.Eq(type, Double_.Cls_ref_type))		wtr.Kv_double(kv.Key(), Double_.cast(kv_val));
+		else if (Type_.Eq(type, Bool_.Cls_ref_type))		wtr.Kv_bool(kv.Key(), Bool_.Cast(kv_val));
 		else													wtr.Kv_str(kv.Key(), Object_.Xto_str_strict_or_null(kv_val));
 	}
 	private void Encode_ary(Object ary) {

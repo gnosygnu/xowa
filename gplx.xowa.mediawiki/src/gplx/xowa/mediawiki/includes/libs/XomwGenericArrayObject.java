@@ -112,7 +112,7 @@ public abstract class XomwGenericArrayObject extends XomwArrayObject {	/**
 	*/
 	protected boolean hasValidType(Object val) {
 		Class<?> cls = this.getObjectType();
-		return Type_adp_.Eq_typeSafe(val, cls);
+		return Type_.Eq_by_obj(val, cls);
 	}
 
 	/**
@@ -134,8 +134,8 @@ public abstract class XomwGenericArrayObject extends XomwArrayObject {	/**
 	protected void setElement(int index, Object val) {
 		if (!this.hasValidType(val)) {
 			throw new XophpInvalidArgumentException(
-				"Can only add "	+ Type_adp_.FullNameOf_type(this.getObjectType()) + " implementing objects to "
-				+ Type_adp_.ClassOf_obj(this) + "."
+				"Can only add "	+ Type_.Canonical_name(this.getObjectType()) + " implementing objects to "
+				+ Type_.Type_by_obj(this) + "."
 			);
 		}
 

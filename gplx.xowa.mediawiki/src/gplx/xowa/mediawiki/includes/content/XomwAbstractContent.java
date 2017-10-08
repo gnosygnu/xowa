@@ -261,7 +261,7 @@ public abstract class XomwAbstractContent implements XomwContent {
 //					break;
 //				}
 //				// Redirects to some special pages are not permitted
-//				if (Type_adp_.Eq_typeSafe(newtitle, typeof(XomwTitle)) && newtitle.isValidRedirectTarget()) {
+//				if (Type_.Eq_by_obj(newtitle, typeof(XomwTitle)) && newtitle.isValidRedirectTarget()) {
 //					// The new title passes the checks, so make that our current
 //					// title so that further recursion can be checked
 //					title = newtitle;

@@ -203,7 +203,7 @@ public class XomwBlockLevelPass {
 
 		// XO.STATIC
 		if (block_chars_ary == null) {
-			synchronized (Type_adp_.ClassOf_obj(this)) {
+			synchronized (Type_.Type_by_obj(this)) {
 				block_chars_ary = Block_chars_ary__new();
 				openMatchTrie = Btrie_slim_mgr.ci_a7().Add_many_str
 				( "<table", "<h1", "<h2", "<h3", "<h4", "<h5", "<h6", "<pre", "<tr"

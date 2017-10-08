@@ -106,9 +106,9 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_m
 			Object arg = args[i];
 			if (i != 0) bfr.Add_byte(Byte_ascii.Comma);
 			boolean quote_val = true;
-			if 		(	Type_adp_.Eq_typeSafe(arg, Bool_.Cls_ref_type)
-					||	Type_adp_.Eq_typeSafe(arg, Int_.Cls_ref_type)
-					||	Type_adp_.Eq_typeSafe(arg, Long_.Cls_ref_type)
+			if 		(	Type_.Eq_by_obj(arg, Bool_.Cls_ref_type)
+					||	Type_.Eq_by_obj(arg, Int_.Cls_ref_type)
+					||	Type_.Eq_by_obj(arg, Long_.Cls_ref_type)
 				) {
 				quote_val = false;
 			}

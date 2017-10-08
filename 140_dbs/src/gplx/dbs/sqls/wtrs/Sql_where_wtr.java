@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
 import gplx.core.criterias.*; import gplx.dbs.sqls.itms.*; 
 public class Sql_where_wtr {
-	private final Sql_core_wtr qry_wtr;
-	private final Sql_val_wtr val_wtr;
+	private final    Sql_core_wtr qry_wtr;
+	private final    Sql_val_wtr val_wtr;
 	public Sql_where_wtr(Sql_core_wtr qry_wtr, Sql_val_wtr val_wtr) {this.qry_wtr = qry_wtr; this.val_wtr = val_wtr;}
 	public void Bld_where(Bry_bfr bfr, Sql_wtr_ctx ctx, Sql_where_clause where_itm) {
 		if (where_itm == Sql_where_clause.Where__null) return;
@@ -125,9 +125,9 @@ public class Sql_where_wtr {
 				Object val = itm[j];
 				boolean quote = false;
 				switch (fld.Type_tid()) {
-					case Type_adp_.Tid__str:
-					case Type_adp_.Tid__char:
-					case Type_adp_.Tid__date:
+					case Type_ids_.Id__str:
+					case Type_ids_.Id__char:
+					case Type_ids_.Id__date:
 						quote = true;
 						break;
 				}

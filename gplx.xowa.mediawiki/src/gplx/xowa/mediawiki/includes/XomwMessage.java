@@ -1132,7 +1132,7 @@ public class XomwMessage {
 	* @return array Array with the parameter type (either "before" or "after") and the value.
 	*/
 	private void extractParam(XomwMessageVal rv, Object param, int format) {
-		if (Type_adp_.Implements_intf_obj(param, XomwMessagePrm.class)) {
+		if (Type_.Is_assignable_from_by_obj(param, XomwMessagePrm.class)) {
 			XomwMessagePrm prm = (XomwMessagePrm)param;
 			switch (prm.Tid()) {
 				case XomwMessagePrm.Tid__raw:

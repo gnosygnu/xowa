@@ -87,26 +87,26 @@ public class Xoax_addon_mgr {
 			Xoax_addon_itm addon = (Xoax_addon_itm)hash.Get_at(i);
 
 			// init
-			if (Type_adp_.Implements_intf_obj(addon, Xoax_addon_itm__init.class)) {
+			if (Type_.Is_assignable_from_by_obj(addon, Xoax_addon_itm__init.class)) {
 				Xoax_addon_itm__init addon_init = (Xoax_addon_itm__init)addon;
 				addon_init.Init_addon_by_app(app);
 				init_list.Add(addon_init);
 			}
 
 			// add bldr cmds
-			if (Type_adp_.Implements_intf_obj(addon, Xoax_addon_itm__bldr.class)) {
+			if (Type_.Is_assignable_from_by_obj(addon, Xoax_addon_itm__bldr.class)) {
 				Xoax_addon_itm__bldr addon_bldr = (Xoax_addon_itm__bldr)addon;
 				app.Bldr().Cmd_regy().Add_many(addon_bldr.Bldr_cmds());
 			}
 
 			// add special pages
-			if (Type_adp_.Implements_intf_obj(addon, Xoax_addon_itm__special.class)) {
+			if (Type_.Is_assignable_from_by_obj(addon, Xoax_addon_itm__special.class)) {
 				Xoax_addon_itm__special addon_sp = (Xoax_addon_itm__special)addon;
 				app.Special_regy().Add_many(addon_sp.Special_pages());
 			}
 
 			// add json mgrs
-			if (Type_adp_.Implements_intf_obj(addon, Xoax_addon_itm__json.class)) {
+			if (Type_.Is_assignable_from_by_obj(addon, Xoax_addon_itm__json.class)) {
 				Xoax_addon_itm__json addon_json = (Xoax_addon_itm__json)addon;
 				gplx.xowa.htmls.bridges.Bridge_cmd_itm[] json_cmds = addon_json.Json_cmds();
 				for (gplx.xowa.htmls.bridges.Bridge_cmd_itm json_cmd : json_cmds) {

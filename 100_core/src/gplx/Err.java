@@ -19,25 +19,23 @@ public class Err extends RuntimeException {
 	private final    boolean is_gplx;
 	private final    String trace;
 	private Err_msg[] msgs_ary = new Err_msg[8]; private int msgs_len = 8, msgs_idx = 0;
+
 	public Err(boolean is_gplx, String trace, String type, String msg, Object... args) {
 		this.is_gplx = is_gplx;
-		this.trace = is_gplx ? Err_.Trace_lang(this) : trace;	// NOTE: Err_ factory methods pass in null stack trace for gplx excs; call Stack_trace here, note that trace will not show constructor
+
+		// NOTE: Err_ factory methods pass in null stack trace for gplx excs; call Stack_trace here, note that trace will not show constructor
+		this.trace = is_gplx ? Err_.Trace_lang(this) : trace;
 		Msgs_add(type, msg, args);
 	}
+
+	// marks messages logged so they can be ignored; used by Gfh_utl
 	public boolean Logged() {return logged;} public Err Logged_y_() {logged = true; return this;} private boolean logged;
+
+	// ignores current frame for reporting messages
 	public int Trace_ignore() {return trace_ignore;} public Err Trace_ignore_add_1_() {++trace_ignore; return this;} private int trace_ignore = 0;
+
 	public Err Args_add(Object... args) {msgs_ary[msgs_idx - 1].Args_add(args); return this;}	// i - 1 to get current
-	@gplx.Internal protected void Msgs_add(String type, String msg, Object[] args) {
-		if (msgs_idx == msgs_len) {
-			int new_len = msgs_len * 2;
-			Err_msg[] new_ary = new Err_msg[new_len];
-			Array_.Copy_to(msgs_ary, new_ary, 0);
-			this.msgs_ary = new_ary;
-			this.msgs_len = new_len;
-		}
-		msgs_ary[msgs_idx] = new Err_msg(type, msg, args);
-		++msgs_idx;
-	}
+
 	public String To_str__full()	{return To_str(Bool_.N, Bool_.Y);}
 	public String To_str__log()		{return To_str(Bool_.Y, Bool_.Y);}
 	public String To_str__msg_only(){
@@ -75,5 +73,17 @@ public class Err extends RuntimeException {
 		for (int i = line_bgn; i < lines_len; ++i)
 			rv += line_bgn_dlm + lines[i];
 		return rv;
+	}
+
+	@gplx.Internal protected void Msgs_add(String type, String msg, Object[] args) {
+		if (msgs_idx == msgs_len) {
+			int new_len = msgs_len * 2;
+			Err_msg[] new_ary = new Err_msg[new_len];
+			Array_.Copy_to(msgs_ary, new_ary, 0);
+			this.msgs_ary = new_ary;
+			this.msgs_len = new_len;
+		}
+		msgs_ary[msgs_idx] = new Err_msg(type, msg, args);
+		++msgs_idx;
 	}
 }

@@ -66,13 +66,13 @@ public class Gfobj_wtr__json {
 		Object[] ary_obj = ((Gfobj_ary)ary).Ary_obj();
 		for (int i = 0; i < len; ++i) {
 			Object sub_itm = ary_obj[i];
-			Class<?> sub_itm_type = Type_adp_.ClassOf_obj(sub_itm);
-			if		(Type_adp_.Eq(sub_itm_type, Gfobj_ary.class)) {
+			Class<?> sub_itm_type = Type_.Type_by_obj(sub_itm);
+			if		(Type_.Eq(sub_itm_type, Gfobj_ary.class)) {
 				wtr.Ary_bgn_ary();
 				Write_ary((Gfobj_ary)sub_itm);
 				wtr.Ary_end();
 			}
-			else if (Type_adp_.Eq(sub_itm_type, Gfobj_nde.class)) {
+			else if (Type_.Eq(sub_itm_type, Gfobj_nde.class)) {
 				wtr.Nde_bgn_ary();
 				Write_nde((Gfobj_nde)sub_itm);
 				wtr.Nde_end();

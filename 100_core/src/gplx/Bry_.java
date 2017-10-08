@@ -35,11 +35,11 @@ public class Bry_ {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Object itm = ary[i];
-			Class<?> type = Type_adp_.ClassOf_obj(itm);
-			if		(Type_adp_.Eq(type, int.class))		bfr.Add_byte((byte)Int_.cast(itm));
-			else if	(Type_adp_.Eq(type, String.class))	bfr.Add_str_u8((String)itm);
-			else if	(Type_adp_.Eq(type, byte[].class))	bfr.Add((byte[])itm);
-			else											throw Err_.new_unhandled(Type_adp_.FullNameOf_type(type));
+			Class<?> type = Type_.Type_by_obj(itm);
+			if		(Type_.Eq(type, int.class))		bfr.Add_byte((byte)Int_.cast(itm));
+			else if	(Type_.Eq(type, String.class))	bfr.Add_str_u8((String)itm);
+			else if	(Type_.Eq(type, byte[].class))	bfr.Add((byte[])itm);
+			else											throw Err_.new_unhandled(Type_.Canonical_name(type));
 		}
 		return bfr.To_bry_and_clear();
 	}
