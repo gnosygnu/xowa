@@ -26,13 +26,13 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		// load config; TODO_OLD: load by file
 		boolean enabled = false, enable_heading_override = true, enable_default_banner = false;
-		int[] ns_ary = Int_.Ary(Xow_ns_.Tid__main, Xow_ns_.Tid__user);
+		int[] ns_ary = Int_ary_.New(Xow_ns_.Tid__main, Xow_ns_.Tid__user);
 		int[] standard_sizes = new int[] {640, 1280, 2560};
 		int dflt_img_wdata_prop = 948; byte[] dflt_img_title = Bry_.new_a7("Pagebanner_default.jpg");	// www.wikidata.org/wiki/Property:P948
 		switch (wiki.Domain_tid()) {
 			case Xow_domain_tid_.Tid__home:
 				enabled = true;
-				ns_ary = Int_.Ary(Xow_ns_.Tid__main);
+				ns_ary = Int_ary_.New(Xow_ns_.Tid__main);
 				break;
 			case Xow_domain_tid_.Tid__wikivoyage:
 				switch (wiki.Lang().Lang_id()) {
@@ -42,11 +42,11 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 						enabled = true;
 						break;
 					case Xol_lang_stub_.Id_ru:
-						ns_ary = Int_.Ary(0, 1, 10, 11, 12, 13, 14, 15, 2, 2300, 2301, 2302, 2303, 2600, 3, 4, 5, 6, 7, 8, 828, 829, 9);
+						ns_ary = Int_ary_.New(0, 1, 10, 11, 12, 13, 14, 15, 2, 2300, 2301, 2302, 2303, 2600, 3, 4, 5, 6, 7, 8, 828, 829, 9);
 						enabled = true;
 						break;
 					case Xol_lang_stub_.Id_uk:
-						ns_ary = Int_.Ary(Xow_ns_.Tid__main, Xow_ns_.Tid__user, Xow_ns_.Tid__project);
+						ns_ary = Int_ary_.New(Xow_ns_.Tid__main, Xow_ns_.Tid__user, Xow_ns_.Tid__project);
 						enabled = true;
 						break;
 				}
@@ -55,7 +55,7 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 				switch (wiki.Lang().Lang_id()) {
 					case Xol_lang_stub_.Id_ca:
 						// enabled = enable_default_banner = true;
-						ns_ary = Int_.Ary(102, Xow_ns_.Tid__user);
+						ns_ary = Int_ary_.New(102, Xow_ns_.Tid__user);
 						break;
 					 case Xol_lang_stub_.Id_en:
 						// enabled = enable_default_banner = true;

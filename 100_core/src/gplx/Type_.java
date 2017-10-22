@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-public class Type_ {
+public class Type_ {//RF:2017-10-08
 	public static Class<?> Type_by_obj(Object o) {return o.getClass();}
 	public static Class<?> Type_by_primitive(Object o) {
 				Class<?> rv = o.getClass();

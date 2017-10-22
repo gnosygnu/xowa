@@ -113,9 +113,9 @@ public class Wdata_prop_val_visitor_ {
 			byte val_tid = Wbase_claim_time_.Reg.Get_tid_or_max_and_log(page_url, kv.Key()); if (val_tid == Byte_.Max_value_127) continue;
 			switch (val_tid) {
 				case Wbase_claim_time_.Tid__time:			time				= To_bry_by_str(kv.Val()); break;
-				case Wbase_claim_time_.Tid__before:			before				= Int_.cast(kv.Val()); break;
-				case Wbase_claim_time_.Tid__after:			after				= Int_.cast(kv.Val()); break;
-				case Wbase_claim_time_.Tid__precision:		precision			= Int_.cast(kv.Val()); break;
+				case Wbase_claim_time_.Tid__before:			before				= Int_.Cast(kv.Val()); break;
+				case Wbase_claim_time_.Tid__after:			after				= Int_.Cast(kv.Val()); break;
+				case Wbase_claim_time_.Tid__precision:		precision			= Int_.Cast(kv.Val()); break;
 				case Wbase_claim_time_.Tid__calendarmodel:	calendar			= To_bry_by_str(kv.Val()); break;
 				case Wbase_claim_time_.Tid__timezone:		break;
 			}

@@ -62,12 +62,12 @@ public abstract class DataRdr_base implements SrlMgr {
 
 	public int ReadInt(String key) {
 		Object val = Read(key);
-		try {return (parse) ? Int_.parse(String_.as_(val)) : Int_.cast(val);} 
+		try {return (parse) ? Int_.Parse(String_.as_(val)) : Int_.Cast(val);} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(int.class, key, val, exc);}
 	}
 	public int ReadIntOr(String key, int or) {
 		Object val = Read(key); if (val == null) return or;
-		try {return (parse) ? Int_.parse(String_.as_(val)) : Int_.cast(val);} 
+		try {return (parse) ? Int_.Parse(String_.as_(val)) : Int_.Cast(val);} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, int.class, key, val, or); return or;}
 	}
 	public long ReadLongOr(String key, long or) {
@@ -112,12 +112,12 @@ public abstract class DataRdr_base implements SrlMgr {
 	}
 	@gplx.Virtual public byte ReadByte(String key) {
 		Object val = Read(key);
-		try {return (parse) ? Byte_.parse(String_.as_(val)) : Byte_.cast(val);} 
+		try {return (parse) ? Byte_.Parse(String_.as_(val)) : Byte_.Cast(val);} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(byte.class, key, val, exc);}
 	}
 	@gplx.Virtual public byte ReadByteOr(String key, byte or) {
 		Object val = Read(key); if (val == null) return or;
-		try {return (parse) ? Byte_.parse(String_.as_(val)) : Byte_.cast(val);} 
+		try {return (parse) ? Byte_.Parse(String_.as_(val)) : Byte_.Cast(val);} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, byte.class, key, val, or); return or;}
 	}
 	@gplx.Virtual public DateAdp ReadDate(String key) {

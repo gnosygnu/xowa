@@ -117,7 +117,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		int itm_bgn = xdat_itm.Itm_bgn(), itm_end = xdat_itm.Itm_end();
 		int pos = Bry_find_.Find_fwd(raw, Byte_ascii.Pipe, itm_bgn, raw.length);
 		if (pos == Bry_find_.Not_found) throw wiki.Appe().Usr_dlg().Fail_many(GRP_KEY, "invalid_search_file", "search file is invalid");
-		pos += Int_.Const_dlm_len;	// pipe
+		pos += Byte_ascii.Len_1;	// pipe len
 		
 		while (pos < itm_end) {
 			int page_id 	= Base85_.To_int_by_bry(raw, pos, pos + 4);

@@ -28,7 +28,7 @@ class Db_sys_tbl implements Rls_able {
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public int Assert_int_or(String key, int or) {
 		String rv = Assert_str_or(key, Int_.To_str(or));
-		try {return Int_.parse(rv);}
+		try {return Int_.Parse(rv);}
 		catch (Exception e) {Err_.Noop(e); return or;}
 	}
 	public String Assert_str_or(String key, String or) {

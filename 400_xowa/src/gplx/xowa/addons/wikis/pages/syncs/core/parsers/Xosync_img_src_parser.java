@@ -175,7 +175,7 @@ public class Xosync_img_src_parser {
 	}
 	private boolean Check_md5() {	// check if md5; also, skip past md5; EX: "a/a0/"
 		int pos = rdr.Pos();
-		if (!Byte_.Eq_many(Byte_ascii.Slash, raw[pos + 1], raw[pos + 4])) return false;		// check slashes
+		if (!Byte_.Match_all(Byte_ascii.Slash, raw[pos + 1], raw[pos + 4])) return false;		// check slashes
 		byte b_0 = raw[pos + 0], b_2 = raw[pos + 2];
 		if (b_0 != b_2) return false;														// WM repeats 1st MD5 char; EX: "a" in "a/a0"
 		if (!gplx.core.encoders.Hex_utl_.Is_hex_many(b_0, b_2, raw[pos + 3])) return false;	// check rest is hex

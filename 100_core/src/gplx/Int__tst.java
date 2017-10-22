@@ -17,9 +17,9 @@ package gplx;
 import org.junit.*;
 public class Int__tst {
 	@Test  public void XtoStr_PadBgn() {
-//			tst_XtoStr_PadLeft_Zeroes(1		, 3, "001");		// pad
-//			tst_XtoStr_PadLeft_Zeroes(123	, 3, "123");		// no pad
-//			tst_XtoStr_PadLeft_Zeroes(1234	, 3, "1234");		// val exceeds pad; confirm noop
+		tst_XtoStr_PadLeft_Zeroes(1		, 3, "001");		// pad
+		tst_XtoStr_PadLeft_Zeroes(123	, 3, "123");		// no pad
+		tst_XtoStr_PadLeft_Zeroes(1234	, 3, "1234");		// val exceeds pad; confirm noop
 		tst_XtoStr_PadLeft_Zeroes(-1	, 3, "-01");		// negative
 		tst_XtoStr_PadLeft_Zeroes(-12	, 3, "-12");		// negative
 		tst_XtoStr_PadLeft_Zeroes(-123	, 3, "-123");		// negative
@@ -29,7 +29,7 @@ public class Int__tst {
 		tst_ParseOr("", -1);		// empty
 		tst_ParseOr("123", 123);	// single
 		tst_ParseOr("1a", -1);		// fail
-	}	void tst_ParseOr(String raw, int expd) {Tfds.Eq(expd, Int_.parse_or(raw, -1));}
+	}	void tst_ParseOr(String raw, int expd) {Tfds.Eq(expd, Int_.Parse_or(raw, -1));}
 	@Test  public void Between() {
 		tst_Between(1, 0, 2, true);		// simple true
 		tst_Between(3, 0, 2, false);	// simple false
@@ -40,9 +40,6 @@ public class Int__tst {
 		tst_XtoStr_fmt(1, "1");
 		tst_XtoStr_fmt(1000, "1,000");
 	}	void tst_XtoStr_fmt(int v, String expd) {Tfds.Eq(expd, Int_.To_str_fmt(v, "#,###"));}
-	@Test  public void AryRng() {
-		tst_AryRng(1, 3, Int_.Ary(1, 2, 3));
-	}	void tst_AryRng(int bgn, int end, int[] expd) {Tfds.Eq_ary(expd, Int_.AryRng(bgn, end));}
 	@Test  public void Log10_pos() {
 		tst_Log10(0, 0);
 		tst_Log10(1, 0);
@@ -96,18 +93,5 @@ public class Int__tst {
 	}
 	@Test  public void Xto_int_hex_tst() {
 		Xto_int_hex("007C", 124);
-	}	void Xto_int_hex(String raw, int expd) {Tfds.Eq(expd, Int_.To_int_hex(Bry_.new_a7(raw)));}
-	@Test  public void Ary_parse() {
-		Ary_parse__tst("1,2,3"							, 3, Int_.Ary_empty,   1,   2,   3);
-		Ary_parse__tst("123,321,213"					, 3, Int_.Ary_empty, 123, 321, 213);
-		Ary_parse__tst(" 1,  2,3"						, 3, Int_.Ary_empty,   1,   2,   3);
-		Ary_parse__tst("-1,+2,-3"						, 3, Int_.Ary_empty,  -1,   2,  -3);
-		Ary_parse__tst(Int_.To_str(Int_.Min_value)		, 1, Int_.Ary_empty, Int_.Min_value);
-		Ary_parse__tst(Int_.To_str(Int_.Max_value)		, 1, Int_.Ary_empty, Int_.Max_value);
-		Ary_parse__tst("1,2"							, 1, Int_.Ary_empty);
-		Ary_parse__tst("1"								, 2, Int_.Ary_empty);
-		Ary_parse__tst("a"								, 1, Int_.Ary_empty);
-		Ary_parse__tst("1-2,"							, 1, Int_.Ary_empty);
-	}
-	void Ary_parse__tst(String raw, int reqd_len, int[] or, int... expd) {Tfds.Eq_ary(expd, Int_.Ary_parse(raw, reqd_len, or));}
+	}	void Xto_int_hex(String raw, int expd) {Tfds.Eq(expd, Int_.By_hex_bry(Bry_.new_a7(raw)));}
 }

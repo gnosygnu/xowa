@@ -24,7 +24,7 @@ public class Xobldr__redirect__create extends Xob_dump_mgr_base {
 	private Db_conn conn; private Xob_redirect_tbl redirect_tbl;
 	private Xodb_mgr_sql db_mgr; private Xop_redirect_mgr redirect_mgr; private Gfo_url_encoder encoder;
 	public Xobldr__redirect__create(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.Reset_db_y_();}
-	@Override public int[] Init_ns_ary() {return Int_.Ary(Xow_ns_.Tid__file);}	// restrict to file ns
+	@Override public int[] Init_ns_ary() {return Int_ary_.New(Xow_ns_.Tid__file);}	// restrict to file ns
 	@Override public byte Init_redirect() {return Bool_.Y_byte;}					// restrict to redirects
 	@Override protected void Init_reset(Db_conn conn) {
 		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);

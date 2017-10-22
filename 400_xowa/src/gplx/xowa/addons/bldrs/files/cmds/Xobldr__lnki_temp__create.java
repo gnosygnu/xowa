@@ -33,7 +33,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 	private final    Xob_hdump_bldr hdump_bldr = new Xob_hdump_bldr(); private Vnt_convert_lang converter_lang;
 	public Xobldr__lnki_temp__create(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public byte Init_redirect()	{return Bool_.N_byte;}	// lnki_temp does not look at redirect pages
-	@Override public int[] Init_ns_ary()		{return ns_ids;} private int[] ns_ids = Int_.Ary(Xow_ns_.Tid__main);
+	@Override public int[] Init_ns_ary()		{return ns_ids;} private int[] ns_ids = Int_ary_.New(Xow_ns_.Tid__main);
 	@Override protected void Init_reset(Db_conn conn) {
 		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
 		cfg_tbl.Delete_all();
@@ -157,7 +157,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_wdata_enabled_))				wdata_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_xtn_ref_enabled_))			xtn_ref_enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_ns_ids_))					ns_ids = Int_.Ary_parse(m.ReadStr("v"), "|");
+		else if	(ctx.Match(k, Invk_ns_ids_))					ns_ids = Int_ary_.Parse(m.ReadStr("v"), "|");
 		else if	(ctx.Match(k, Invk_ns_ids_by_aliases))			ns_ids = Xobldr__lnki_temp__create_.Ns_ids_by_aliases(wiki, m.ReadStrAry("v", "|"));
 		else if	(ctx.Match(k, Invk_gen_html_))					gen_html = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk__load_all_imglinks_))		load_all_imglinks = m.ReadYn("v");

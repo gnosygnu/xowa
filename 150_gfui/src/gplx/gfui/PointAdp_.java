@@ -24,7 +24,7 @@ public class PointAdp_ {
 	public static PointAdp parse(String raw) {
 		try {
 			String[] ary = String_.Split(raw, ",");
-			return new PointAdp(Int_.parse(ary[0]), Int_.parse(ary[1]));
+			return new PointAdp(Int_.Parse(ary[0]), Int_.Parse(ary[1]));
 		}	catch (Exception exc) {throw Err_.new_parse_exc(exc, PointAdp.class, raw);}
 	}
 }

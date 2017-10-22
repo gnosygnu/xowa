@@ -25,7 +25,7 @@ public class RectAdp_ {
 	public static RectAdp parse(String raw) {
 		try {
 			String[] ary = String_.Split(raw, ",");
-			return RectAdp_.new_(Int_.parse(ary[0]), Int_.parse(ary[1]), Int_.parse(ary[2]), Int_.parse(ary[3]));
+			return RectAdp_.new_(Int_.Parse(ary[0]), Int_.Parse(ary[1]), Int_.Parse(ary[2]), Int_.Parse(ary[3]));
 		}	catch(Exception exc) {throw Err_.new_parse_exc(exc, RectAdp.class, raw);}
 	}
 	public static String Xto_str(RectAdp rect) {return String_.Format("{0},{1},{2},{3}", rect.X(), rect.Y(), rect.Width(), rect.Height());}

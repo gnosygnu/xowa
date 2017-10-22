@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-public class Type_ids_ {
+public class Type_ids_ {//RF:2017-10-08
 	public static final int // SERIALIZABLE.N
 	  Id__obj            =  0
 	, Id__null           =  1

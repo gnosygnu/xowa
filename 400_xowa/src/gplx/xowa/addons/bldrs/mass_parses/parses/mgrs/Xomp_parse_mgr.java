@@ -57,7 +57,7 @@ public class Xomp_parse_mgr {
 		Xomp_parse_wkr[] wkrs = new Xomp_parse_wkr[wkr_len];
 
 		// init ns_ord_mgr
-		Xomp_ns_ord_mgr ns_ord_mgr = new Xomp_ns_ord_mgr(Int_.Ary_parse(mgr_db.Tbl__cfg().Select_str("", Xomp_parse_wkr.Cfg__ns_ids), "|"));
+		Xomp_ns_ord_mgr ns_ord_mgr = new Xomp_ns_ord_mgr(Int_ary_.Parse(mgr_db.Tbl__cfg().Select_str("", Xomp_parse_wkr.Cfg__ns_ids), "|"));
 
 		// init indexer
 		Xofulltext_indexer_wkr indexer = cfg.Indexer_enabled() ? new Xofulltext_indexer_wkr() : null;
@@ -131,7 +131,7 @@ public class Xomp_parse_mgr {
 		} finally {rdr.Rls();}
 		
 		// mark ns
-		int[] ns_ids = Int_.Ary_parse(ns_list, ",");
+		int[] ns_ids = Int_ary_.Parse(ns_list, ",");
 		cache.Add_ns_loaded(ns_ids);
 	}
 }

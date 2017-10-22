@@ -46,7 +46,7 @@ public class Gfo_qarg_mgr {
 	public int Read_int_or(String key, int or) {return Read_int_or(Bry_.new_u8(key), or);}
 	public int Read_int_or(byte[] key, int or) {
 		byte[] val = Read_bry_or(key, null);
-		return val == null ? or : Int_.parse_or(String_.new_a7(val), or);
+		return val == null ? or : Int_.Parse_or(String_.new_a7(val), or);
 	}
 	public int Read_enm_as_int_or(Gfo_qarg_enum_itm enm, int or) {
 		Gfo_qarg_itm arg = (Gfo_qarg_itm)hash.Get_by_bry(enm.Key());

@@ -349,7 +349,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			Xop_xnde_tkn xnde_inline = Xnde_bgn(ctx, tkn_mkr, root, tag, Xop_xnde_tkn.CloseMode_open, src, bgn_pos, open_tag_end, atrs_bgn, atrs_end, atrs);
 			End_tag(ctx, root, xnde_inline, src, src_len, bgn_pos, gtPos, tagId, false, tag);
 			ctx.Msg_log().Add_itm_none(Xop_xnde_log.No_inline, src, bgn_pos, gtPos);
-			return gtPos + Int_.Const_position_after_char;
+			return gtPos + Int_.Offset_1;
 		}
 		Xop_xnde_tkn xnde = null;
 		xnde = Xnde_bgn(ctx, tkn_mkr, root, tag, inline ? Xop_xnde_tkn.CloseMode_inline : Xop_xnde_tkn.CloseMode_open, src, bgn_pos, open_tag_end, atrs_bgn, atrs_end, atrs);

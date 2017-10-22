@@ -30,7 +30,7 @@ class Xocfg_maint_parser {
 	private Xocfg_maint_nde Parse_nde(GfoMsg msg) {
 		Ordered_hash hash = To_atr_hash(msg);
 		// get common atrs
-		int id			= Int_.parse(Get_atr_as_str_or_fail(hash, "id_"));
+		int id			= Int_.Parse(Get_atr_as_str_or_fail(hash, "id_"));
 		String owner	= Get_atr_as_str_or_fail(hash, "owner_");
 		String key		= Get_atr_as_str_or_fail(hash, "key_");
 		String name		= Get_atr_as_str_or_fail(hash, "name_");

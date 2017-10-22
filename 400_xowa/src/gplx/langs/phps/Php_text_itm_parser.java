@@ -119,11 +119,11 @@ public class Php_text_itm_parser {
 		}	
 		if (txt_bgn != -1) {tmp_list.Add(new Php_text_itm_text(txt_bgn, raw_len)); txt_bgn = -1; rslt_val = Rslt_dirty;}
 		rslt.Val_(rslt_val);
-	}	private static final byte[] CONST_utf_prefix = Bry_.new_a7("\\u00");
+	}	private static final    byte[] CONST_utf_prefix = Bry_.new_a7("\\u00");
 	private void Parse_utf16(List_adp rv, byte[] src, int bgn, int src_len) {
 		int end = bgn + 4;
 		if (end >= src_len) throw Err_.new_wo_type("utf16_parse", "src", String_.new_u8(src));
-		int v = Int_.To_int_hex(src, bgn, end);	// +2; skip "\" + "u"
+		int v = Int_.By_hex_bry(src, bgn, end);	// +2; skip "\" + "u"
 		byte[] literal = gplx.core.intls.Utf16_.Encode_int_to_bry(v);
 		rv.Add(new Php_text_itm_utf16(bgn, end, literal));
 	}

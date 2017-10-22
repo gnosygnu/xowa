@@ -32,7 +32,7 @@ public class IptBnd_upDownRange implements InjectAble, Gfo_invk, Gfo_evt_itm {
 		else if	(ctx.Match(k, Invk_TxtBox_inc))		ExecCmd(cmd, curVal + 1);
 		else if	(ctx.Match(k, Invk_TxtBox_exec))	{
 			Object valObj = IntClassXtn.Instance.ParseOrNull(txtBox.Text()); if (valObj == null) throw Err_.new_wo_type("invalid int", "text", txtBox.Text());
-			ExecCmd(doIt, Int_.cast(valObj));
+			ExecCmd(doIt, Int_.Cast(valObj));
 		}
 		else if	(ctx.Match(k, evt))			WhenEvt(ctx, m);
 		else	return Gfo_invk_.Rv_unhandled;

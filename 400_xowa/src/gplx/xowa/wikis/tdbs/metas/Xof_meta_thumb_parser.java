@@ -49,11 +49,11 @@ public class Xof_meta_thumb_parser extends Obj_ary_parser_base {
 			switch (b) {
 				case Dlm_width:	// "," found; assume width; note that seek commas will be handled by seek
 					itm.Width_(number_parser.Parse(bry, num_bgn, pos).Rv_as_int());
-					num_bgn = pos + Int_.Const_dlm_len;
+					num_bgn = pos + Byte_ascii.Len_1;
 					break;
 				case Dlm_seek:
 					itm.Height_(number_parser.Parse(bry, num_bgn, pos).Rv_as_int());
-					num_bgn = pos + Int_.Const_dlm_len;
+					num_bgn = pos + Byte_ascii.Len_1;
 					height_found = true;
 					itm.Seeks_(int_ary_parser.Parse_ary(bry, num_bgn, end, Byte_ascii.Comma));
 					pos = end;

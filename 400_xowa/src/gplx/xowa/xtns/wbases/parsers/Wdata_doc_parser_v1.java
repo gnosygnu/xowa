@@ -163,7 +163,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 					rv.Wguid_(kv.Data_bry());
 					break;
 				case Prop_tid_rank:
-					rv.Rank_tid_((byte)Int_.cast(((Json_itm_int)kv.Val()).Data_as_int()));
+					rv.Rank_tid_((byte)Int_.Cast(((Json_itm_int)kv.Val()).Data_as_int()));
 					break;
 				case Prop_tid_q:
 					break;

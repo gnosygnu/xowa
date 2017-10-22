@@ -75,7 +75,7 @@ class Dpl_itm {
 						}
 					}
 					else {									// known key; set pos to val_bgn
-						fld_bgn = pos + Int_.Const_dlm_len;
+						fld_bgn = pos + Byte_ascii.Len_1;
 					}
 					ws_bgn_chk = true; ws_bgn_idx = ws_end_idx = -1;
 					break;
@@ -87,7 +87,7 @@ class Dpl_itm {
 						byte[] val = Bry_.Mid(src, fld_bgn, fld_end);
 						Parse_cmd(wiki, key_id, val);
 					}
-					fld_bgn = pos + Int_.Const_dlm_len;
+					fld_bgn = pos + Byte_ascii.Len_1;
 					ws_bgn_chk = true; ws_bgn_idx = ws_end_idx = -1;
 					break;
 				}

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import gplx.core.type_xtns.*;
 public class IoItmClassXtn extends ClassXtn_base implements ClassXtn {
-	public String Key() {return Key_const;}						public static final String Key_const = "ioItemType";
+	public String Key() {return Key_const;}						public static final    String Key_const = "ioItemType";
 	@Override public Class<?> UnderClass()					{return int.class;}
 	public Object DefaultValue()								{return IoItmDir.Type_Dir;}
 	public boolean Eq(Object lhs, Object rhs) {return ((IoItm_base)lhs).compareTo(rhs) == CompareAble_.Same;}
@@ -26,6 +26,6 @@ public class IoItmClassXtn extends ClassXtn_base implements ClassXtn {
 		else if (String_.Eq(rawLower, "fil")) return IoItmFil.Type_Fil;
 		else	throw Err_.new_unhandled(raw);
 	}
-	@Override public Object XtoDb(Object obj)					{return Int_.cast(obj);}
-	public static final IoItmClassXtn Instance = new IoItmClassXtn(); IoItmClassXtn() {}
+	@Override public Object XtoDb(Object obj)					{return Int_.Cast(obj);}
+	public static final    IoItmClassXtn Instance = new IoItmClassXtn(); IoItmClassXtn() {}
 }

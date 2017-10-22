@@ -70,7 +70,7 @@ public class Xotdb_fsys_mgr {
 		int len = ns_dirs.length;
 		Hash_adp rv = Hash_adp_.New();
 		for (int i = 0; i < len; i++) {
-			int ns_int = Int_.parse_or(ns_dirs[i].NameOnly(), Int_.Min_value); if (ns_int == Int_.Min_value) continue; 
+			int ns_int = Int_.Parse_or(ns_dirs[i].NameOnly(), Int_.Min_value); if (ns_int == Int_.Min_value) continue; 
 			Xow_ns ns = ns_mgr.Ids_get_or_null(ns_int); if (ns == null) continue;
 			ns.Exists_(true);
 		}

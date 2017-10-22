@@ -44,7 +44,7 @@ public class Gfs_nde {
 		subs[subs_len] = nde;
 		subs_len = new_len;
 		return this;
-	}	Gfs_nde[] subs = Gfs_nde.Ary_empty; int subs_max; int[] subs_pos_ary = Int_.Ary_empty;
+	}	Gfs_nde[] subs = Gfs_nde.Ary_empty; int subs_max; int[] subs_pos_ary = Int_ary_.Empty;
 	public Gfs_nde Subs_get_at(int i) {return subs[i];}
 	public Gfs_nde[] Subs_to_ary() {
 		Gfs_nde[] rv = new Gfs_nde[subs_len];
@@ -71,7 +71,7 @@ public class Gfs_nde {
 		args[args_len] = nde;
 		args_len = new_len;
 		return this;
-	}	Gfs_nde[] args = Gfs_nde.Ary_empty; int args_max; int[] args_pos_ary = Int_.Ary_empty;
+	}	Gfs_nde[] args = Gfs_nde.Ary_empty; int args_max; int[] args_pos_ary = Int_ary_.Empty;
 	public Gfs_nde[] Atrs_to_ary() {
 		Gfs_nde[] rv = new Gfs_nde[args_len];
 		for (int i = 0; i < args_len; i++)

@@ -65,7 +65,7 @@ class Log_fld_itm__int extends Log_fld_itm__base {
 	public int Bgn() {return bgn;} private final    int bgn;
 	public int End() {return end;} private final    int end;
 	@Override public void Fmt(Bry_bfr bfr, Object val) {
-		int val_int = Int_.cast(val);
+		int val_int = Int_.Cast(val);
 		String val_str = String_.PadBgn(Int_.To_str(val_int), this.Len(), " ");
 		bfr.Add_str_u8(val_str);
 	}

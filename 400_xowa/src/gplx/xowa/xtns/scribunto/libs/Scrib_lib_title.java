@@ -108,7 +108,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		if (Type_.Eq_by_obj(ns_obj, String.class))
 			return Bry_.new_u8(String_.cast(ns_obj));
 		else {
-			int ns_id = Int_.cast(ns_obj);
+			int ns_id = Int_.Cast(ns_obj);
 			Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
 			if (ns != null)
 				return ns.Name_db();

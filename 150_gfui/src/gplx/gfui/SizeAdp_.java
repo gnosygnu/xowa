@@ -23,8 +23,8 @@ public class SizeAdp_ {
 	public static SizeAdp parse(String raw) {return parse_or(raw, SizeAdp_.Null);}
 	public static SizeAdp parse_or(String raw, SizeAdp or) {
 		String[] ary = String_.Split(raw, ","); if (ary.length != 2) return or;
-		int w = Int_.parse_or(ary[0], Int_.Min_value); if (w == Int_.Min_value) return or;
-		int h = Int_.parse_or(ary[1], Int_.Min_value); if (h == Int_.Min_value) return or;
+		int w = Int_.Parse_or(ary[0], Int_.Min_value); if (w == Int_.Min_value) return or;
+		int h = Int_.Parse_or(ary[1], Int_.Min_value); if (h == Int_.Min_value) return or;
 		return new SizeAdp(w, h);
 	}
 	public static SizeAdp corners_(PointAdp topLeft, PointAdp bottomRight) {

@@ -27,7 +27,7 @@ public class Gfh_nde {
 		}
 	}
 	public byte[] Src() {return src;} private byte[] src;
-	public int[] Atrs() {return atrs;} private int[] atrs = Int_.Ary_empty;
+	public int[] Atrs() {return atrs;} private int[] atrs = Int_ary_.Empty;
 	public int Atrs_len() {return atrs_len;} private int atrs_len;
 	public boolean Tag_tid_is_inline() {return tag_tid_is_inline;} private boolean tag_tid_is_inline;
 	public int Tag_lhs_bgn() {return tag_lhs_bgn;} public Gfh_nde Tag_lhs_bgn_(int v) {tag_lhs_bgn = v; return this;} private int tag_lhs_bgn;

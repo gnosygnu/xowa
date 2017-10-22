@@ -43,6 +43,8 @@ public class Byte_ascii {
 	public static final byte
 	  Angle_bgn = Lt, Angle_end = Gt
 	;
+
+	public static final int Len_1 = 1;
 	public static final byte Max_7_bit = (byte)127, Ascii_min = 0, Ascii_max = 127;
 	public static boolean Is_sym(byte b) {
 		switch (b) {

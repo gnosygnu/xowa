@@ -24,7 +24,7 @@ public class Xoud_cfg_mgr {
 	}
 	public int		Select_int_or(String grp, String key, int or)		{
 		String rv = Select_str_or(grp, key, null);
-		return rv == null ? or : Int_.parse_or(rv, or);
+		return rv == null ? or : Int_.Parse_or(rv, or);
 	}
 	public byte[]	Select_bry_or(String key, byte[] or)				{return Select_bry_or(""	, key, or);}
 	public byte[]	Select_bry_or(String grp, String key, byte[] or)	{

@@ -42,7 +42,7 @@ class Gfo_srl_mgr_rdr__db {
 		for (int i = 0; i < crt_len; ++i) {
 			Dbmeta_dat_itm crt = crt_mgr.Get_at(i);
 			switch (crt.Tid) {
-				case Dbmeta_fld_tid.Tid__int: select.Crt_int(crt.Key, Int_.cast(crt.Val)); break;
+				case Dbmeta_fld_tid.Tid__int: select.Crt_int(crt.Key, Int_.Cast(crt.Val)); break;
 			}				
 		}
 		Db_rdr rdr = select.Exec_select__rls_manual();
@@ -63,7 +63,7 @@ class Gfo_srl_mgr_rdr__db {
 		for (int i = 0; i < crt_len; ++i) {
 			Dbmeta_dat_itm crt = crt_mgr.Get_at(i);
 			switch (crt.Tid) {
-				case Dbmeta_fld_tid.Tid__int: delete.Crt_int(crt.Key, Int_.cast(crt.Val)); break;
+				case Dbmeta_fld_tid.Tid__int: delete.Crt_int(crt.Key, Int_.Cast(crt.Val)); break;
 			}				
 		}
 		delete.Exec_delete();

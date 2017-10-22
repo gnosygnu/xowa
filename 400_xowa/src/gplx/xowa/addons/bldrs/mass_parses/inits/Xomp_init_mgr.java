@@ -29,7 +29,7 @@ class Xomp_init_mgr {
 		mgr_db.Remake();
 
 		// insert ns into cfg; need for lnki_temp.tier in xomp.make
-		mgr_db.Tbl__cfg().Insert_str("", gplx.xowa.addons.bldrs.mass_parses.parses.wkrs.Xomp_parse_wkr.Cfg__ns_ids, Int_.Ary_concat("|", cfg.Ns_ids()));
+		mgr_db.Tbl__cfg().Insert_str("", gplx.xowa.addons.bldrs.mass_parses.parses.wkrs.Xomp_parse_wkr.Cfg__ns_ids, Int_ary_.To_str("|", cfg.Ns_ids()));
 
 		// fill page tbl
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(mgr_conn, new Db_attach_itm("page_db", wiki.Data__core_mgr().Db__core().Conn()));

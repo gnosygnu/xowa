@@ -53,7 +53,7 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_m
 		lnr_location = new Swt_html_lnr_location(this);
 		lnr_status = new Swt_html_lnr_status(this);
 		Object browser_tid_obj = ctorArgs.Get_val_or(Swt_kit.Cfg_Html_BrowserType, null);
-		this.browser_tid = browser_tid_obj == null ? Browser_tid_none : Int_.cast(browser_tid_obj);
+		this.browser_tid = browser_tid_obj == null ? Browser_tid_none : Int_.Cast(browser_tid_obj);
 		browser = new Browser(owner_control.Under_composite(), browser_tid);
 		core = new Swt_core_cmds_html(this, browser);
 		browser.addKeyListener(new Swt_lnr_key(this));

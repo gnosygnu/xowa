@@ -26,7 +26,7 @@ public class IptMouseWheel_ {
 		else throw Err_.new_parse_type(IptMouseWheel.class, raw);
 	}
 	public static IptMouseWheel api_(Object obj) {
-		int delta = Int_.cast(obj);
+		int delta = Int_.Cast(obj);
 		if		(delta > 0)		return Up;
 		else if (delta < 0)		return Down;
 		else					return None;

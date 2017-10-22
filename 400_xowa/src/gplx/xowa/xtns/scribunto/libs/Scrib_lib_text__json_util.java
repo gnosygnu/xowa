@@ -35,7 +35,7 @@ class Scrib_lib_text__json_util {
 			}
 			if (is_sequence) {
 				if (kv.Key_tid() == Type_ids_.Id__int) {
-					int kv_key_as_int = Int_.cast(kv.Key_as_obj());
+					int kv_key_as_int = Int_.Cast(kv.Key_as_obj());
 					is_sequence = next++ == kv_key_as_int;
 				}
 				else {
@@ -93,7 +93,7 @@ class Scrib_lib_text__json_util {
 					Json_kv json_kv = root.Get_at_as_kv(i);
 					String kv_str = json_kv.Key_as_str();
 					Object kv_val = Decode_obj(json_kv.Val());
-					int kv_int = Int_.parse_or(kv_str, Int_.Min_value);
+					int kv_int = Int_.Parse_or(kv_str, Int_.Min_value);
 					decode_rslt_as_nde[i] = kv_int == Int_.Min_value ? Keyval_.new_(kv_str, kv_val) : Keyval_.int_(kv_int, kv_val);	// use int_key if applicable; PAGE:it.s:Il_Re_Cervo; DATE:2015-12-06
 				}
 				return Bool_.Y_byte;
@@ -132,7 +132,7 @@ class Scrib_lib_text__json_util {
 		for (int i = 0; i < len; ++i) {
 			Json_kv itm = nde.Get_at_as_kv(i);
 			String kv_str = itm.Key_as_str();
-			int kv_int = Int_.parse_or(kv_str, Int_.Min_value);
+			int kv_int = Int_.Parse_or(kv_str, Int_.Min_value);
 			Object kv_val = Decode_obj(itm.Val());
 			rv[i] = kv_int == Int_.Min_value ? Keyval_.new_(kv_str, kv_val) : Keyval_.int_(kv_int, kv_val);	// use int_key if applicable; PAGE:it.s:Il_Re_Cervo; DATE:2015-12-06
 		}
@@ -172,7 +172,7 @@ class Scrib_lib_text__json_util {
 			Encode_ary(kv_val);
 			wtr.Ary_end();
 		}
-		else if (Type_.Eq(type, Int_.Cls_ref_type))			wtr.Kv_int(kv.Key(), Int_.cast(kv_val));
+		else if (Type_.Eq(type, Int_.Cls_ref_type))			wtr.Kv_int(kv.Key(), Int_.Cast(kv_val));
 		else if (Type_.Eq(type, Long_.Cls_ref_type))		wtr.Kv_long(kv.Key(), Long_.cast(kv_val));
 		else if (Type_.Eq(type, Float_.Cls_ref_type))		wtr.Kv_float(kv.Key(), Float_.cast(kv_val));
 		else if (Type_.Eq(type, Double_.Cls_ref_type))		wtr.Kv_double(kv.Key(), Double_.cast(kv_val));
@@ -203,8 +203,8 @@ class KeyVal__sorter__key_is_numeric implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Keyval lhs_itm = (Keyval)lhsObj;
 		Keyval rhs_itm = (Keyval)rhsObj;
-		int lhs_int = Int_.parse_or(lhs_itm.Key(), Int_.Min_value);
-		int rhs_int = Int_.parse_or(rhs_itm.Key(), Int_.Min_value);
+		int lhs_int = Int_.Parse_or(lhs_itm.Key(), Int_.Min_value);
+		int rhs_int = Int_.Parse_or(rhs_itm.Key(), Int_.Min_value);
 		return CompareAble_.Compare(lhs_int, rhs_int);
 	}
 	public static final    KeyVal__sorter__key_is_numeric Instance = new KeyVal__sorter__key_is_numeric(); KeyVal__sorter__key_is_numeric() {}

@@ -29,7 +29,7 @@ public class Scrib_proc_args {
 		int v_max = -1;
 		for (int i = 0; i < v_len; ++i) {
 			Keyval kv = v[i];
-			int idx = Int_.cast(kv.Key_as_obj());
+			int idx = Int_.Cast(kv.Key_as_obj());
 			if (v_max < idx) v_max = idx;
 		}
 		this.ary_len = v_max;
@@ -42,7 +42,7 @@ public class Scrib_proc_args {
 			ary = new Keyval[ary_len];
 			for (int i = 0; i < v_len; i++) {
 				Keyval kv = v[i];
-				int idx = Int_.cast(kv.Key_as_obj());
+				int idx = Int_.Cast(kv.Key_as_obj());
 				ary[idx - List_adp_.Base1] = kv;
 			}
 		}
@@ -54,7 +54,7 @@ public class Scrib_proc_args {
 	public String	Pull_str(int i)					{return String_.cast(Get_or_fail(i));}
 	public byte[]	Pull_bry(int i)					{return Bry_.new_u8(String_.cast(Get_or_fail(i)));}
 	public int		Pull_int(int i)					{
-		try {return Int_.coerce_(Get_or_fail(i));} // coerce to handle "1" and 1; will still fail if "abc" is passed
+		try {return Int_.Coerce(Get_or_fail(i));} // coerce to handle "1" and 1; will still fail if "abc" is passed
 		catch (Exception e) {
 			Err_.Noop(e);
 			throw Err_.new_wo_type("bad argument; int expected", "idx", i, "len", ary_len);
@@ -63,7 +63,7 @@ public class Scrib_proc_args {
 	public long		Pull_long(int i)				{return (long)Pull_double(i);}
 	public double	Pull_double(int i)				{
 		Object rv = Get_or_fail(i);
-		try {return Int_.coerce_(rv);} // coerce to handle "1" and 1; will still fail if "abc" is passed
+		try {return Int_.Coerce(rv);} // coerce to handle "1" and 1; will still fail if "abc" is passed
 		catch (Exception e) {
 			Err_.Noop(e);
 			try {return Double_.coerce_(rv);} // coerce to handle "1" and 1; will still fail if "abc" is passed
@@ -92,7 +92,7 @@ public class Scrib_proc_args {
 				Object key_obj = kv.Key_as_obj();
 				if (key_obj.getClass() == Int_.Cls_ref_type) {	// key is int; cast it
 					int expd_key = i + List_adp_.Base1;			// EX: i=1; expd_key=2
-					int actl_key = Int_.cast(kv.Key_as_obj());	// EX: i=1; actl_key=3
+					int actl_key = Int_.Cast(kv.Key_as_obj());	// EX: i=1; actl_key=3
 					if (actl_key != expd_key) {					// mismatch; gaps exist; EX:[1:a,3:c]
 						// 1st mismatch; create list, and add everything before itm in array to list;
 						if (list == null) {
@@ -122,7 +122,7 @@ public class Scrib_proc_args {
 	public Object	Cast_obj_or_null(int i)			{return Get_or_null(i);}
 	public boolean	Cast_bool_or_y(int i)			{Object rv = Get_or_null(i); return rv == null ? Bool_.Y		: Bool_.Cast(rv);}
 	public boolean	Cast_bool_or_n(int i)			{Object rv = Get_or_null(i); return rv == null ? Bool_.N		: Bool_.Cast(rv);}
-	public int		Cast_int_or(int i, int or)		{Object rv = Get_or_null(i); return rv == null ? or				: Int_.coerce_(rv);}	// coerce to handle "1" and 1;
+	public int		Cast_int_or(int i, int or)		{Object rv = Get_or_null(i); return rv == null ? or				: Int_.Coerce(rv);}	// coerce to handle "1" and 1;
 	public Keyval[] Cast_kv_ary_or_null(int i)		{Object rv = Get_or_null(i); return rv == null ? null			: (Keyval[])rv;}
 	public byte[][]	Cast_params_as_bry_ary_or_rest_of_ary(int params_idx)	{	// PAGE:ru.w:Ленин,_Владимир_Ильич; DATE:2014-07-01 MW:LanguageLibrary.php|ConvertPlural: if (is_array($args[0])) $args = $args[0];  $forms = array_values(array_map('strval', $args));
 		if (params_idx < 0 || params_idx >= ary_len) return Bry_.Ary_empty;

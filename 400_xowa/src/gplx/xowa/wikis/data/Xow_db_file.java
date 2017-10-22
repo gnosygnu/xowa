@@ -50,7 +50,7 @@ public class Xow_db_file {
 	public String						Url_rel()			{return url_rel;}			private final    String url_rel;
 	public Xowd_core_db_props			Db_props()			{return db_props;}			private final    Xowd_core_db_props db_props;
 	public String						Ns_ids()			{return ns_ids;}			private final    String ns_ids;
-	public int							Ns_id_or_fail()		{return Int_.parse(ns_ids);}
+	public int							Ns_id_or_fail()		{return Int_.Parse(ns_ids);}
 	public int							Part_id()			{return part_id;}			private final    int part_id;
 	public Guid_adp						Guid()				{return guid;}				private final    Guid_adp guid;
 	public byte							Cmd_mode()			{return cmd_mode;}			public Xow_db_file Cmd_mode_(byte v) {cmd_mode = v; return this;}		private byte cmd_mode;

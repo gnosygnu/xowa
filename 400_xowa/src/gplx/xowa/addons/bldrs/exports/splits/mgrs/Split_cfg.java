@@ -32,7 +32,7 @@ public class Split_cfg implements Gfo_invk {
 	}
 	
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk__ns_ids_))			this.Ns_itms_(Int_.Ary_parse(m.ReadStr("v"), "|"));
+		if		(ctx.Match(k, Invk__ns_ids_))			this.Ns_itms_(Int_ary_.Parse(m.ReadStr("v"), "|"));
 		else if	(ctx.Match(k, Invk__loader_rows_))		this.loader_rows = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk__force_rebuild_))	this.force_rebuild = m.ReadBool("v");
 		else if	(ctx.Match(k, Invk__trg_max_))			this.trg_max = m.ReadLong("v");

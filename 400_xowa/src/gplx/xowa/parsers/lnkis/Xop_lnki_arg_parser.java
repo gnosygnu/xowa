@@ -129,7 +129,7 @@ public class Xop_lnki_arg_parser {
 		int len = digit_mgr.Len(); // NOTE: add non-english numbers; EX: ۲۰۰px; DATE:2015-07-18
 		for (int i = 0; i < len; ++i) {
 			Keyval kv = digit_mgr.Get_at(i);
-			int num = (byte)Int_.parse_or(kv.Key(), -1); if (num == -1) continue; // ignore separators; EX: "," "." 
+			int num = (byte)Int_.Parse_or(kv.Key(), -1); if (num == -1) continue; // ignore separators; EX: "," "." 
 			size_trie.Add((byte[])kv.Val(), Byte_obj_val.new_((byte)num));	// NOTE: num corresponds to dim_d0 -> d9 below
 		}
 		size_trie.Add(Byte_ascii.Space, Byte_obj_val.new_(Key_space));

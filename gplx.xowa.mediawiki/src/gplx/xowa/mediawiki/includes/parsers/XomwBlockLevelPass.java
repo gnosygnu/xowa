@@ -264,7 +264,7 @@ public class XomwBlockLevelPass {
 				if (o == null)
 					preCur++;
 				else {
-					int pre_tid = Int_.cast(o);
+					int pre_tid = Int_.Cast(o);
 					if (pre_tid == PRE_BGN)
 						preOpenMatch = true;
 					else if (pre_tid == PRE_END)

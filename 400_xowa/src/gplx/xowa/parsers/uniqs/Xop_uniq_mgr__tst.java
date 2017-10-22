@@ -19,10 +19,10 @@ public class Xop_uniq_mgr__tst {
 	private final    Xop_uniq_mgr__fxt fxt = new Xop_uniq_mgr__fxt();
 	@Before public void init() {fxt.Init();}
 	@Test  public void Test__random_bry() {
-		fxt.Init_random_int_ary(Int_.Ary(240563374, 22728940, 1451248133));
+		fxt.Init_random_int_ary(Int_ary_.New(240563374, 22728940, 1451248133));
 		fxt.Test__uniq_bry_new("'\"`UNIQ-E56B4AE15AD0EC68");
 
-		fxt.Init_random_int_ary(Int_.Ary(1363621437, 426295411, 421041101));
+		fxt.Init_random_int_ary(Int_ary_.New(1363621437, 426295411, 421041101));
 		fxt.Test__uniq_bry_new("'\"`UNIQ-147363D968C07391");
 	}
 	@Test   public void Add_and_get() {

@@ -159,7 +159,7 @@ public class List_adp_tst {
 		list.Shuffle();
 		int hasMovedCount = 0;
 		for (int i = 0; i < list.Count(); i++) {
-			int val = Int_.cast(list.Get_at(i));
+			int val = Int_.Cast(list.Get_at(i));
 			if (val != i) hasMovedCount++;
 		}
 		Tfds.Eq_true(hasMovedCount > 0, "all documents have the same index");	// NOTE: may still fail occasionally (1%)

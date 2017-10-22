@@ -176,7 +176,7 @@ public class Xow_url_parser {
 		}
 		if (xwiki != null) return true;
 		if (app.Wiki_mgri().Has(domain)) return true;
-		return Byte_.In(tmp_protocol_tid, Gfo_protocol_itm.Tid_http, Gfo_protocol_itm.Tid_https);
+		return Byte_.Match_any(tmp_protocol_tid, Gfo_protocol_itm.Tid_http, Gfo_protocol_itm.Tid_https);
 	}
 	private void Bld_page(int bgn_seg) {
 		tmp_tid = Xoa_url_.Tid_page;

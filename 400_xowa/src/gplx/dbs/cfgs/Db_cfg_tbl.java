@@ -149,8 +149,8 @@ public class Db_cfg_tbl implements Db_tbl {
 	public Guid_adp		Assert_guid	(String grp, String key, Guid_adp or)	{String val = Select_str_or(grp, key, null)	; if (val == null) {Insert_guid		(grp, key, or); return or;} return Parse_guid	(grp, key, val);}
 	public String		Assert_str	(String grp, String key, String or)		{String val = Select_str_or(grp, key, null)	; if (val == null) {Insert_str		(grp, key, or); return or;} return val;}
 	private boolean		Parse_yn		(String grp, String key, String val)	{try {return Yn.parse(val)				;} catch (Exception e) {throw err_parse(e, grp, key, val, Bool_.Cls_val_name);}}
-	private byte		Parse_byte		(String grp, String key, String val)	{try {return Byte_.parse(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Byte_.Cls_val_name);}}
-	private int			Parse_int		(String grp, String key, String val)	{try {return Int_.parse(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Int_.Cls_val_name);}}
+	private byte		Parse_byte		(String grp, String key, String val)	{try {return Byte_.Parse(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Byte_.Cls_val_name);}}
+	private int			Parse_int		(String grp, String key, String val)	{try {return Int_.Parse(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Int_.Cls_val_name);}}
 	private long		Parse_long		(String grp, String key, String val)	{try {return Long_.parse(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Long_.Cls_val_name);}}
 	private byte[]		Parse_bry		(String grp, String key, String val)	{try {return Bry_.new_u8(val)		;} catch (Exception e) {throw err_parse(e, grp, key, val, Bry_.Cls_val_name);}}
 	private DateAdp		Parse_date		(String grp, String key, String val)	{try {return DateAdp_.parse_gplx(val)	;} catch (Exception e) {throw err_parse(e, grp, key, val, DateAdp_.Cls_ref_name);}}

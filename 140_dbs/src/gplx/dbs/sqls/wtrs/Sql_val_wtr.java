@@ -29,9 +29,9 @@ public class Sql_val_wtr {
 		int tid_type = Type_ids_.To_id_by_type(val.getClass());
 		switch (tid_type) {
 			case Type_ids_.Id__bool:			Bld_val__bool		(bfr, Bool_.Cast(val)); break;
-			case Type_ids_.Id__byte:			Bld_val__byte		(bfr, Byte_.cast(val)); break;
+			case Type_ids_.Id__byte:			Bld_val__byte		(bfr, Byte_.Cast(val)); break;
 			case Type_ids_.Id__short:			Bld_val__short		(bfr, Short_.cast(val)); break;
-			case Type_ids_.Id__int:			Bld_val__int		(bfr, Int_.cast(val)); break;
+			case Type_ids_.Id__int:			Bld_val__int		(bfr, Int_.Cast(val)); break;
 			case Type_ids_.Id__long:			Bld_val__long		(bfr, Long_.cast(val)); break;
 			case Type_ids_.Id__float:			Bld_val__float		(bfr, Float_.cast(val)); break;
 			case Type_ids_.Id__double:			Bld_val__double		(bfr, Double_.cast(val)); break;

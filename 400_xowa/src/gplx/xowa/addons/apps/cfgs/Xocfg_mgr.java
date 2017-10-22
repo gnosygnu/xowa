@@ -55,7 +55,7 @@ public class Xocfg_mgr implements Gfo_invk {
 	}
 	public int Get_int_app_or(String key, int or) {
 		String rv = cache_mgr.Get_or(Ctx__app, key, null);
-		return rv == null ? or : Int_.parse_or(rv, or);
+		return rv == null ? or : Int_.Parse_or(rv, or);
 	}
 	public long Get_long_app_or(String key, long or) {
 		String rv = cache_mgr.Get_or(Ctx__app, key, null);
@@ -83,7 +83,7 @@ public class Xocfg_mgr implements Gfo_invk {
 	}
 	public int Get_int_wiki_or(Xow_wiki wiki, String key, int or) {
 		String rv = Get_str(wiki.Domain_itm().Abrv_xo_str(), key);
-		try		{return Int_.parse(rv);}
+		try		{return Int_.Parse(rv);}
 		catch	(Exception exc) {
 			Err_.Noop(exc);
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:failed to parse int; key=~{0} val=~{1}", key, rv);
@@ -92,7 +92,7 @@ public class Xocfg_mgr implements Gfo_invk {
 	}
 	public int Get_int_or(String ctx, String key, int or) {
 		String rv = cache_mgr.Get(ctx, key);
-		try		{return Int_.parse(rv);}
+		try		{return Int_.Parse(rv);}
 		catch	(Exception exc) {
 			Err_.Noop(exc);
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:failed to parse int; key=~{0} val=~{1}", key, rv);

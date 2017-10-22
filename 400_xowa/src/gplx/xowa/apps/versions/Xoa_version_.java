@@ -28,7 +28,7 @@ public class Xoa_version_ {
 		for (int i = 0; i < lhs_ary_len; ++i) {
 			String lhs_itm = lhs_ary[i];
 			String rhs_itm = rhs_ary[i];
-			int itm_comp = Int_.Compare(Int_.parse_or(lhs_itm, 0), Int_.parse_or(rhs_itm, 0));
+			int itm_comp = Int_.Compare(Int_.Parse_or(lhs_itm, 0), Int_.Parse_or(rhs_itm, 0));
 			if (itm_comp != CompareAble_.Same) return itm_comp;
 		}
 		return CompareAble_.Same;

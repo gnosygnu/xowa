@@ -69,7 +69,7 @@ public class ColorAdp_ implements ParseAble {
 	@gplx.Internal protected static ColorAdp parse_int_(String v) {
 		String[] ary = String_.Split(v, ",");
 		switch (ary.length) {
-			case 1: return new_int_(Int_.parse(ary[0]));
+			case 1: return new_int_(Int_.Parse(ary[0]));
 			case 3:
 			case 4: return parse_int_ary_(ary);
 			default: throw Err_.new_wo_type("invalid array", "len", ary.length);
@@ -79,10 +79,10 @@ public class ColorAdp_ implements ParseAble {
 		int a;
 		int idx = 0;
 		if (ary.length == 3)	{idx = 0; a = 255;}
-		else					{idx = 1; a = Int_.parse(ary[0]);}
-		int r = Int_.parse(ary[idx++]);
-		int g = Int_.parse(ary[idx++]);
-		int b = Int_.parse(ary[idx++]);
+		else					{idx = 1; a = Int_.Parse(ary[0]);}
+		int r = Int_.Parse(ary[idx++]);
+		int g = Int_.Parse(ary[idx++]);
+		int b = Int_.Parse(ary[idx++]);
 		return ColorAdp_.new_(a, r, g, b);
 	}
 	public static ColorAdp new_int_(int val) {

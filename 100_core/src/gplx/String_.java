@@ -396,7 +396,7 @@ public class String_ {
 					numberStr = "";
 				}
 				else if (c == bracketEnd) {
-					int aryIdx = Int_.parse_or(numberStr, Int_.Min_value);
+					int aryIdx = Int_.Parse_or(numberStr, Int_.Min_value);
 					if (aryIdx != Int_.Min_value && Int_.Between(aryIdx, 0, aryLength - 1))	// check (a) aryIdx is num; (b) aryIdx is in bounds
 						aryVal = Object_.Xto_str_strict_or_empty(ary[aryIdx]);
 					else

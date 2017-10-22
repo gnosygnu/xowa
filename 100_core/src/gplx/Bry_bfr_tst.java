@@ -67,7 +67,7 @@ public class Bry_bfr_tst {
 	void Add_int_variable(int val) {
 		bb.Clear();
 		bb.Add_int_variable(val);
-		Tfds.Eq(val, Int_.parse(String_.new_u8(bb.To_bry())));
+		Tfds.Eq(val, Int_.Parse(String_.new_u8(bb.To_bry())));
 	}
 	@Test  public void Add_int_fixed_len3()				{tst_Add_int_fixed(123, 3, "123");}
 	@Test  public void Add_int_fixed_pad_1()			{tst_Add_int_fixed(2, 1, "2");}

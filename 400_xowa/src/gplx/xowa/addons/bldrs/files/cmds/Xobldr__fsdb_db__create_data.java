@@ -26,7 +26,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 	private Xof_bin_mgr src_bin_mgr; private Xof_bin_wkr__fsdb_sql src_fsdb_wkr; private boolean src_bin_mgr__cache_enabled = Bool_.N; private String src_bin_mgr__fsdb_version; private String[] src_bin_mgr__fsdb_skip_wkrs; private boolean src_bin_mgr__wmf_enabled;
 	private Fsm_mnt_itm trg_mnt_itm; private Fsm_cfg_mgr trg_cfg_mgr; private Fsm_atr_fil trg_atr_fil; private Fsm_bin_fil trg_bin_fil; private long trg_bin_db_max; private String trg_bin_mgr__fsdb_version;
 	private final    Xof_bin_updater trg_bin_updater = new Xof_bin_updater(); private Xob_bin_db_mgr bin_db_mgr; private int[] ns_ids; private int prv_lnki_tier_id = -1;
-	private long download_size_max = Io_mgr.Len_mb_long * 5; private int[] download_keep_tier_ids = Int_.Ary(0);
+	private long download_size_max = Io_mgr.Len_mb_long * 5; private int[] download_keep_tier_ids = Int_ary_.New(0);
 	private Xobu_poll_mgr poll_mgr; private int poll_interval; private long time_bgn;
 	private int select_interval = 2500, progress_interval = 1, commit_interval = 1, delete_interval = 5000;
 	private boolean exec_done, resume_enabled; private int exec_count, exec_count_max = Int_.Max_value, exec_fail, exec_fail_max = 10000; // 115 errors over 900k images		
@@ -142,7 +142,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 		}
 		else {
 			if (tier_id_bmk == -1) {
-				tier_id_bmk = Int_.parse(tier_id_str);
+				tier_id_bmk = Int_.Parse(tier_id_str);
 				usr_dlg.Note_many("", "", "restoring from bmk: tier_id=~{0}", tier_id_bmk);
 			}
 			if (page_id_bmk == -1) {
@@ -312,14 +312,14 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 		else if	(ctx.Match(k, Invk_exit_after_commit_))				exit_after_commit = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_exit_now_))						exit_now = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_resume_enabled_))				resume_enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_ns_ids_))						ns_ids = Int_.Ary_parse(m.ReadStr("v"), "|");
+		else if	(ctx.Match(k, Invk_ns_ids_))						ns_ids = Int_ary_.Parse(m.ReadStr("v"), "|");
 		else if	(ctx.Match(k, Invk_src_bin_mgr__fsdb_version_))		src_bin_mgr__fsdb_version = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk_src_bin_mgr__fsdb_skip_wkrs_))	src_bin_mgr__fsdb_skip_wkrs = m.ReadStrAry("v", "|");
 		else if	(ctx.Match(k, Invk_src_bin_mgr__wmf_enabled_))		src_bin_mgr__wmf_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_src_bin_mgr__cache_enabled_))	src_bin_mgr__cache_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_trg_bin_mgr__fsdb_version_))		trg_bin_mgr__fsdb_version = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk_poll_mgr))						return poll_mgr;
-		else if	(ctx.Match(k, Invk_download_keep_tier_ids))			download_keep_tier_ids = Int_.Ary_parse(m.ReadStr("v"), "|");
+		else if	(ctx.Match(k, Invk_download_keep_tier_ids))			download_keep_tier_ids = Int_ary_.Parse(m.ReadStr("v"), "|");
 		else if	(ctx.Match(k, Invk_download_size_max))				download_size_max = Io_size_.To_long_by_msg_mb(m, download_size_max);
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;

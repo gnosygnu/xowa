@@ -51,7 +51,7 @@ public class Xocfg_map_tbl implements Db_tbl {
 		try {
 			if (!rdr.Move_next()) return 0;
 			Object max = rdr.Read_obj(fld__map_sort);
-			return max == null ? 0 : Int_.cast(max) + 10;
+			return max == null ? 0 : Int_.Cast(max) + 10;
 		}
 		finally {rdr.Rls();}
 	}

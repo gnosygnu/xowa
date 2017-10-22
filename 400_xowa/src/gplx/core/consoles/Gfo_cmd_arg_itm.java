@@ -47,7 +47,7 @@ public class Gfo_cmd_arg_itm {
 	public boolean			Val_as_bool_or(boolean or)		{return val == null ? or : String_.Eq((String)val, "y");}
 	public String		Val_as_str_or(String or)	{return val == null ? or : (String)val;}
 	public String		Val_as_str()				{return (String)val;}
-	public int			Val_as_int_or(int or)		{return val == null ? or : Int_.parse_or((String)val, or);}
+	public int			Val_as_int_or(int or)		{return val == null ? or : Int_.Parse_or((String)val, or);}
 	public Io_url		Val_as_url__rel_dir_or(Io_url owner_dir, Io_url or) {return Val_as_url__rel_url_or(Bool_.Y, owner_dir, or);}
 	public Io_url		Val_as_url__rel_fil_or(Io_url owner_dir, Io_url or) {return Val_as_url__rel_url_or(Bool_.N, owner_dir, or);}
 	public Io_url		Val_as_url__rel_url_or(boolean to_dir, Io_url owner_dir, Io_url or) {return Gfo_cmd_arg_itm_.Val_as_url__rel_url_or(Val_as_str(), to_dir, owner_dir, or);}

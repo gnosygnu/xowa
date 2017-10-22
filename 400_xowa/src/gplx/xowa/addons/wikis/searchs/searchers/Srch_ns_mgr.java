@@ -81,8 +81,8 @@ public class Srch_ns_mgr {
 		}
 	}
 	public int[] To_int_ary() {
-		if		(ns_all)	return Int_.Ary_empty;
-		else if (ns_main)	return Int_.Ary(Xow_ns_.Tid__main);
+		if		(ns_all)	return Int_ary_.Empty;
+		else if (ns_main)	return Int_ary_.New(Xow_ns_.Tid__main);
 		else {
 			int len = ns_hash.Count();
 			int[] rv = new int[len];

@@ -163,7 +163,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		tkn.Lnke_relative_(site_data.Rel());
 		Xow_xwiki_itm xwiki = ctx.App().Usere().Wiki().Xwiki_mgr().Get_by_mid(src, site_bgn, site_end);	// NOTE: check User_wiki.Xwiki_mgr, not App.Wiki_mgr() b/c only it is guaranteed to know all wikis on system
 		if (	xwiki != null												// lnke is to an xwiki; EX: [http://en.wikipedia.org/A a]
-			&& 	Byte_.In(proto_tid, Gfo_protocol_itm.Tid_relative_1, Gfo_protocol_itm.Tid_relative_2, Gfo_protocol_itm.Tid_http, Gfo_protocol_itm.Tid_https)	// only consider http / https; ignore mailto and others; PAGE:uk.w:Маскалі; DATE:2015-07-28
+			&& 	Byte_.Match_any(proto_tid, Gfo_protocol_itm.Tid_relative_1, Gfo_protocol_itm.Tid_relative_2, Gfo_protocol_itm.Tid_http, Gfo_protocol_itm.Tid_https)	// only consider http / https; ignore mailto and others; PAGE:uk.w:Маскалі; DATE:2015-07-28
 			&& 	Bry_.Match(src, site_bgn, site_end, xwiki.Domain_bry())		// only consider full domains, not alliases; EX: [http://w/b] should not match alias of w for en.wikipedia.org
 			) {	
 			Xowe_wiki wiki = ctx.Wiki();

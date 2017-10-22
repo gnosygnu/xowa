@@ -23,7 +23,7 @@ public class Wbase_date_tst {
 		fxt.Test_parse("-98765432109-02-03T04:05:06Z", -98765432109L, 2, 3, 4, 5, 6);
 	}
 	@Test   public void Julian() {
-		fxt.Test_julian(Int_.Ary(1600, 1, 2), Int_.Ary(1600, 1, 18));
+		fxt.Test_julian(Int_ary_.New(1600, 1, 2), Int_ary_.New(1600, 1, 18));
 	}
 	@Test   public void Xto_str() {
 		String date = "+00000002001-02-03T04:05:06Z";

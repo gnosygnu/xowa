@@ -214,12 +214,12 @@ public class Bry_fmtr {
 		}
 	}
 	int Compile_eval_cmd(byte[] fmt, int fmt_len, int eval_lhs_bgn, List_adp list) {
-		int eval_lhs_end = Bry_find_.Find_fwd(fmt, char_eval_end, eval_lhs_bgn + Int_.Const_dlm_len, fmt_len); if (eval_lhs_end == Bry_find_.Not_found) throw Err_.new_wo_type("eval_lhs_end_invalid: could not find eval_lhs_end", "snip", String_.new_u8(fmt, eval_lhs_bgn, fmt_len));
-		byte[] eval_dlm = Bry_.Mid(fmt, eval_lhs_bgn		, eval_lhs_end + Int_.Const_dlm_len);
-		int eval_rhs_bgn = Bry_find_.Find_fwd(fmt, eval_dlm		, eval_lhs_end + Int_.Const_dlm_len, fmt_len); if (eval_rhs_bgn == Bry_find_.Not_found) throw Err_.new_wo_type("eval_rhs_bgn_invalid: could not find eval_rhs_bgn", "snip", String_.new_u8(fmt, eval_lhs_end, fmt_len));
-		byte[] eval_cmd = Bry_.Mid(fmt, eval_lhs_end + Int_.Const_dlm_len, eval_rhs_bgn);
+		int eval_lhs_end = Bry_find_.Find_fwd(fmt, char_eval_end, eval_lhs_bgn + Byte_ascii.Len_1, fmt_len); if (eval_lhs_end == Bry_find_.Not_found) throw Err_.new_wo_type("eval_lhs_end_invalid: could not find eval_lhs_end", "snip", String_.new_u8(fmt, eval_lhs_bgn, fmt_len));
+		byte[] eval_dlm = Bry_.Mid(fmt, eval_lhs_bgn		, eval_lhs_end + Byte_ascii.Len_1);
+		int eval_rhs_bgn = Bry_find_.Find_fwd(fmt, eval_dlm		, eval_lhs_end + Byte_ascii.Len_1, fmt_len); if (eval_rhs_bgn == Bry_find_.Not_found) throw Err_.new_wo_type("eval_rhs_bgn_invalid: could not find eval_rhs_bgn", "snip", String_.new_u8(fmt, eval_lhs_end, fmt_len));
+		byte[] eval_cmd = Bry_.Mid(fmt, eval_lhs_end + Byte_ascii.Len_1, eval_rhs_bgn);
 		byte[] eval_rslt = eval_mgr.Eval(eval_cmd);
-		int eval_rhs_end = eval_rhs_bgn + Int_.Const_dlm_len + eval_dlm.length;
+		int eval_rhs_end = eval_rhs_bgn + Byte_ascii.Len_1 + eval_dlm.length;
 		if (eval_rslt == null) eval_rslt = Bry_.Mid(fmt, eval_lhs_bgn - 2, eval_rhs_end);	// not found; return original argument
 		list.Add(Bry_fmtr_itm.dat_bry_(eval_rslt));
 		return eval_rhs_end;

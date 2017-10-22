@@ -81,7 +81,7 @@ public class Process_send_wtr {
 		if (o == null) {bfr.Add(CONST_nil); return true;}
 		Class<?> c = Type_.Type_by_obj(o);
 		if		(Object_.Eq(c, Bool_.Cls_ref_type))			Encode_bool(bfr, Bool_.Cast(o));
-		else if	(Object_.Eq(c, Int_.Cls_ref_type))			Encode_int(bfr, Int_.cast(o));
+		else if	(Object_.Eq(c, Int_.Cls_ref_type))			Encode_int(bfr, Int_.Cast(o));
 		else if	(Object_.Eq(c, Long_.Cls_ref_type))			bfr.Add_long_variable(Long_.cast(o));
 		else if	(Object_.Eq(c, Double_.Cls_ref_type))		{if (!Encode_double(bfr, Double_.cast(o))) return false;}	
 		else if	(Object_.Eq(c, String.class))				{if (!Encode_str(bfr, (String)o)) return false;}

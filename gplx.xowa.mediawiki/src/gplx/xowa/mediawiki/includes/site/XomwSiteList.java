@@ -82,7 +82,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 		Ordered_hash ids = site.getNavigationIds();
 		int len = ids.Len();
 		for (int i = 0; i < len; i++) {
-			int navId = Int_.cast(ids.Get_at(i));
+			int navId = Int_.Cast(ids.Get_at(i));
 			this.byNavigationId.Add(navId, index);
 		}
 
@@ -109,7 +109,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 			Ordered_hash ids = site.getNavigationIds();
 			int len = ids.Len();
 			for (int i = 0; i < len; i++) {
-				int navId = Int_.cast(ids.Get_at(i));
+				int navId = Int_.Cast(ids.Get_at(i));
 				XophpArray.unset(this.byNavigationId, navId);
 			}
 		}

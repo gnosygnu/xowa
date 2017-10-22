@@ -54,7 +54,7 @@ public class Xol_csv_parser {
 							byte[] utf_bytes = new byte[utf_len]; int utf_idx = 0;
 							int utf_pos = i + 2;
 							for (int j = 0; j < utf_len; j++) {
-								int utf_int = Int_.To_int_hex(src, utf_pos, utf_pos + 4);
+								int utf_int = Int_.By_hex_bry(src, utf_pos, utf_pos + 4);
 								if (utf_int == -1) throw Err_.new_wo_type("invalid value for \\u", "val", String_.new_u8(src, bgn, end));
 								utf_bytes[utf_idx++] = (byte)utf_int;
 								utf_pos += 6;

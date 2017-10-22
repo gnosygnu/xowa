@@ -28,7 +28,7 @@ class Xomp_init_mgr_cfg implements Gfo_invk {
 		return rv;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk__ns_ids_))				ns_ids = Int_.Ary_parse(m.ReadStr("v"), "|");
+		if		(ctx.Match(k, Invk__ns_ids_))				ns_ids = Int_ary_.Parse(m.ReadStr("v"), "|");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}

@@ -56,7 +56,7 @@ public class Db_qry_sql implements Db_qry {
 		if (val == null) {bfr.Add(Bry_null); return;}
 		Class<?> val_type = val.getClass();
 		if		(Type_.Eq(val_type, Int_.Cls_ref_type))
-			bfr.Add_int_variable(Int_.cast(val));
+			bfr.Add_int_variable(Int_.Cast(val));
 		else if	(Type_.Eq(val_type, Bool_.Cls_ref_type))
 			bfr.Add_int_fixed(1, Bool_.To_int(Bool_.Cast(val)));	// NOTE: save boolean to 0 or 1, b/c (a) db may not support bit datatype (sqllite) and (b) avoid i18n issues with "true"/"false"
 		else if (Type_.Eq(val_type, Double_.Cls_ref_type))
@@ -66,7 +66,7 @@ public class Db_qry_sql implements Db_qry {
 		else if (Type_.Eq(val_type, Float_.Cls_ref_type))
 			bfr.Add_float(Float_.cast(val));
 		else if (Type_.Eq(val_type, Byte_.Cls_ref_type))
-			bfr.Add_byte(Byte_.cast(val));
+			bfr.Add_byte(Byte_.Cast(val));
 		else if (Type_.Eq(val_type, DateAdp_.Cls_ref_type))
 			bfr.Add_byte_apos().Add_str_a7(DateAdp_.cast(val).XtoStr_gplx_long()).Add_byte_apos();
 		else if (Type_.Eq(val_type, Decimal_adp_.Cls_ref_type))

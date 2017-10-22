@@ -76,7 +76,7 @@ public class Xoh_js_cbk implements Gfo_invk {
 	}
 	private String Popups_get_html(GfoMsg m) {
 		try {
-			int	   popups_id	= Int_.Xby_double_(Double_.cast(m.Args_getAt(0).Val()));
+			int	   popups_id	= Int_.By_double(Double_.cast(m.Args_getAt(0).Val()));
 			byte[] href_bry		= m.Args_getAt(1).Val_to_bry();
 			byte[] tooltip_bry	= m.Args_getAt(2).Val_to_bry();
 			return html_itm.Owner_tab().Wiki().Html_mgr().Head_mgr().Popup_mgr().Show_init(popups_id, href_bry, tooltip_bry);

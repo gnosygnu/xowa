@@ -110,7 +110,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Xot_invk frame = Scrib_frame_.Get_frame(core, frame_id);
 		int frame_arg_adj = Scrib_frame_.Get_arg_adj(frame.Frame_tid());
 		String idx_str = args.Pull_str(1);
-		int idx_int = Int_.parse_or(idx_str, Int_.Min_value);	// NOTE: should not receive int value < -1; idx >= 0
+		int idx_int = Int_.Parse_or(idx_str, Int_.Min_value);	// NOTE: should not receive int value < -1; idx >= 0
 		Bry_bfr tmp_bfr = Bry_bfr_.New();	// NOTE: do not make modular level variable, else random failures; DATE:2013-10-14
 		if (idx_int != Int_.Min_value) {	// idx is integer
 			Arg_nde_tkn nde = Get_arg(frame, idx_int, frame_arg_adj);
@@ -389,12 +389,12 @@ class Scrib_lib_mw_callParserFunction_sorter implements gplx.core.lists.Comparer
 		Keyval rhs = (Keyval)rhsObj;
 		Object lhs_key = lhs.Key_as_obj();
 		Object rhs_key = rhs.Key_as_obj();
-		boolean lhs_is_int = Int_.TypeMatch(lhs_key.getClass());
-		boolean rhs_is_int = Int_.TypeMatch(rhs_key.getClass());
+		boolean lhs_is_int = Type_.Eq(lhs_key.getClass(), Int_.Cls_ref_type);
+		boolean rhs_is_int = Type_.Eq(rhs_key.getClass(), Int_.Cls_ref_type);
 		if (lhs_is_int != rhs_is_int)									// different types (int vs String or String vs int)
 			return lhs_is_int ? CompareAble_.Less : CompareAble_.More;	// sort ints before strings
 		if (lhs_is_int)													// both are ints
-			return Int_.Compare(Int_.cast(lhs_key), Int_.cast(rhs_key));
+			return Int_.Compare(Int_.Cast(lhs_key), Int_.Cast(rhs_key));
 		else															// both are strings
 			return String_.Compare(String_.cast(lhs_key), String_.cast(rhs_key));
 	}

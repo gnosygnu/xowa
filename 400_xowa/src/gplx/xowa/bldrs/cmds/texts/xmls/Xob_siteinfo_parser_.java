@@ -71,7 +71,7 @@ public class Xob_siteinfo_parser_ {
 			String ns_id		= itm_nde.Atrs().FetchValOr("key", null); if (ns_id == null) throw Err_.new_("Xob_siteinfo_parser_", "missing key for ns", "ns_xml", itm_nde.Text_inner());
 			String case_match	= itm_nde.Atrs().FetchValOr("case", case_dflt);	// NOTE: some dumps can omit "case"; EX: https://dumps.wikimedia.org/sep11wiki; DATE:2015-11-01
 			String name			= itm_nde.Text_inner();
-			ns_mgr.Add_new(Int_.parse(ns_id), Bry_.new_u8(name), Xow_ns_case_.To_tid(case_match), false);
+			ns_mgr.Add_new(Int_.Parse(ns_id), Bry_.new_u8(name), Xow_ns_case_.To_tid(case_match), false);
 		}
 		ns_mgr.Init_w_defaults();
 	}

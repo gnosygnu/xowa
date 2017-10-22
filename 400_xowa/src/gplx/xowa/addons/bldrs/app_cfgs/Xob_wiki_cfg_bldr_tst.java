@@ -134,7 +134,7 @@ public class Xob_wiki_cfg_bldr_tst {
 			for (int j = 0; j < xndes_len; j++) {
 				gplx.langs.xmls.XmlNde ns_nde = xnde.SubNdes().Get_at(j);
 				if (!String_.Eq(ns_nde.Name(), "ns")) continue;
-				int id = Int_.parse(ns_nde.Atrs().FetchValOr("id", "-1"));
+				int id = Int_.Parse(ns_nde.Atrs().FetchValOr("id", "-1"));
 				String name = String_.Replace(String_.Replace(ns_nde.Text_inner(), " ", "_"), "'", "''");
 				sb.Add(Int_.To_str(id)).Add("|").Add(String_.Trim(name)).Add_char_nl();
 			}

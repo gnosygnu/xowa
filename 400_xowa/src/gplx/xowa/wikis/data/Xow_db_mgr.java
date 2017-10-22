@@ -118,7 +118,7 @@ public class Xow_db_mgr {
 		int len = hash_by_id.Len();
 		for (int i = 0; i < len; ++i) {
 			Xow_db_file db = (Xow_db_file)hash_by_id.Get_at(i);
-			if (!Byte_.In(db.Tid(), tids)) continue;
+			if (!Byte_.Match_any(db.Tid(), tids)) continue;
 			db.Rls();
 			Io_mgr.Instance.DeleteFil_args(db.Url()).MissingFails_off().Exec();
 			db.Cmd_mode_(Db_cmd_mode.Tid_delete);
@@ -163,7 +163,7 @@ public class Xow_db_mgr {
 							add = true;                    // text will be in db if solo; 
 							break;
 						case Xow_db_file_.Tid__text:       // EX: "en.wikipedia.org-text-ns.000.xowa"
-							int[] db_ns_ids = Int_.Ary_parse(db.Ns_ids(), "|"); // need to handle both "0" and "0|4"
+							int[] db_ns_ids = Int_ary_.Parse(db.Ns_ids(), "|"); // need to handle both "0" and "0|4"
 							for (int db_ns_id : db_ns_ids) {								
 								if (db_ns_id == ns_id) {
 									add = true;				// text will be in db if ns matches; EX: en.wikipedia.org-text-ns.014.xowa

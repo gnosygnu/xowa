@@ -56,7 +56,7 @@ public class Xob_ns_to_db_mgr {
 		return rv;
 	}
 	private Xow_db_file Init_db(Xob_ns_file_itm ns_file_itm) {
-		Xow_db_file rv = db_mgr.Dbs__make_by_tid(ns_file_itm.Db_file_tid(), Int_.To_str(ns_file_itm.Ns_ids(), "|"), ns_file_itm.Nth_db_idx(), ns_file_itm.Make_file_name());
+		Xow_db_file rv = db_mgr.Dbs__make_by_tid(ns_file_itm.Db_file_tid(), Int_ary_.To_str("|", ns_file_itm.Ns_ids()), ns_file_itm.Nth_db_idx(), ns_file_itm.Make_file_name());
 		ns_file_itm.Nth_db_id_(rv.Id());
 		Init_tbl(rv);
 		return rv;

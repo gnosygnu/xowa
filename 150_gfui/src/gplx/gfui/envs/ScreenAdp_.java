@@ -27,7 +27,7 @@ public class ScreenAdp_ {
 		try {
 			raw = String_.Replace(raw, "{screen{", "");
 			raw = String_.Replace(raw, "}", "");
-			return ScreenAdp_.screen_(Int_.parse(raw));
+			return ScreenAdp_.screen_(Int_.Parse(raw));
 		}	catch(Exception exc) {throw Err_.new_parse_exc(exc, ScreenAdp.class, raw);}
 	}
 	public static ScreenAdp from_point_(PointAdp pos) {// NOTE: not using FromPoint b/c of plat_wce

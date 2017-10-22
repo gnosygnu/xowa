@@ -33,6 +33,6 @@ public class Split_file_tid_ {
 		int bgn = String_.FindFwd(raw, "ns."); if (bgn == Bry_find_.Not_found) throw Err_.new_wo_type("could not find ns in url", "fil", raw);
 		bgn += 3; // ns.
 		int end = String_.FindFwd(raw, ".", bgn); if (end == Bry_find_.Not_found) throw Err_.new_wo_type("could not find ns in url", "fil", raw);
-		return Int_.parse(String_.Mid(raw, bgn, end));
+		return Int_.Parse(String_.Mid(raw, bgn, end));
 	}
 }

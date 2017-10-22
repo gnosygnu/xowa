@@ -34,9 +34,9 @@ public class EnmMgr {
 			if (prefix != null) term = String_.Replace(term, prefix, "");
 			int cur = -1;
 			if (String_.Has_at_bgn(term, "#"))
-				cur = Int_.parse(String_.Mid(term, 1));
+				cur = Int_.Parse(String_.Mid(term, 1));
 			else
-				cur = Int_.cast(rawRegy.Get_by(term));			
+				cur = Int_.Cast(rawRegy.Get_by(term));			
 			rv |= cur;
 		}
 		return rv;

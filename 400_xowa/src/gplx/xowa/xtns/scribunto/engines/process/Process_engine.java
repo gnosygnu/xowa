@@ -30,7 +30,7 @@ public class Process_engine implements Scrib_engine {
 	public Scrib_server Server() {return server;} public void Server_(Scrib_server v) {server = v;} Scrib_server server;
 	public Scrib_lua_proc LoadString(String name, String text) {
 		Keyval[] rslt = this.Dispatch("op", "loadString", "text", text, "chunkName", name);
-		return new Scrib_lua_proc(name, Int_.cast(rslt[0].Val()));
+		return new Scrib_lua_proc(name, Int_.Cast(rslt[0].Val()));
 	}
 	public Keyval[] CallFunction(int id, Keyval[] args) {
 		return this.Dispatch("op", "call", "id", id, "nargs", args.length, "args", args);

@@ -96,7 +96,7 @@ class Dbmeta_fld_wkr__default extends Dbmeta_fld_wkr__base {
 			case Dbmeta_fld_tid.Tid__bool:
 			case Dbmeta_fld_tid.Tid__byte:
 			case Dbmeta_fld_tid.Tid__short:
-			case Dbmeta_fld_tid.Tid__int:		default_val = Int_.parse(Read_str_to_end_of_num(rdr)); break;
+			case Dbmeta_fld_tid.Tid__int:		default_val = Int_.Parse(Read_str_to_end_of_num(rdr)); break;
 			case Dbmeta_fld_tid.Tid__long:		default_val = Long_.parse(Read_str_to_end_of_num(rdr)); break;
 			case Dbmeta_fld_tid.Tid__float:		default_val = Float_.parse(Read_str_to_end_of_num(rdr)); break;
 			case Dbmeta_fld_tid.Tid__double:	default_val = Double_.parse(Read_str_to_end_of_num(rdr)); break;

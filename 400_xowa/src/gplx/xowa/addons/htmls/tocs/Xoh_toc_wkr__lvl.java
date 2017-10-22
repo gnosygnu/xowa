@@ -65,9 +65,9 @@ class Xoh_toc_wkr__lvl {
 		sub_lvl_count[toc_lvl - List_adp_.Base1] = sub_lvl_count[toc_lvl - List_adp_.Base1] + 1;
 		prv_lvl = lvl;	// NOTE: same as "if ( $toclevel ) $prevlevel = $level;" but at end of block
 
-		// Tfds.Write(lvl, prv_lvl, lvl, toc_lvl, Int_.Ary_concat(",", lvl_count), Int_.Ary_concat(",", sub_lvl_count));
+		// Tfds.Write(lvl, prv_lvl, lvl, toc_lvl, Int_ary_.To_str(",", lvl_count), Int_ary_.To_str(",", sub_lvl_count));
 		int[] copy = new int[toc_lvl];
-		Int_.Ary_copy_to(sub_lvl_count, toc_lvl, copy);
+		Int_ary_.Copy_to(sub_lvl_count, toc_lvl, copy);
 		rv.Set__lvl(++uid, toc_lvl, copy);
 	}
 }

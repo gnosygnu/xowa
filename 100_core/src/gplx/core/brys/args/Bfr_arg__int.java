@@ -18,7 +18,7 @@ public class Bfr_arg__int implements Bfr_arg {
 	private int val, val_digits;
 	public Bfr_arg__int(int v) {Set(v);}
 	public Bfr_arg__int Set(int v) {
-		this.val = Int_.cast(v); 
+		this.val = Int_.Cast(v); 
 		this.val_digits = Int_.DigitCount(val);
 		return this;
 	}

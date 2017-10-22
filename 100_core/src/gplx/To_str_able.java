@@ -14,6 +14,6 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-public interface To_str_able {
+public interface To_str_able {//RF:2017-10-08
 	String To_str();
 }

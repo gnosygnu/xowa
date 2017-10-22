@@ -32,8 +32,8 @@ public class Sql_runner {
 	public String Msg() {return msg;} public void Msg_(String v) {msg = v;} private String msg;
 	public String Fill_next(String state) {
 		String[] vals = String_.Split(state, "|");
-		int val_lo = Int_.parse(vals[0]);
-		int interval = Int_.parse(vals[1]);
+		int val_lo = Int_.Parse(vals[0]);
+		int interval = Int_.Parse(vals[1]);
 		int val_hi = val_lo + interval;
 
 		Db_stmt_arg arg = list.Get_at(0);

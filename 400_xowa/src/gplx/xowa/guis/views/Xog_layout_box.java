@@ -52,12 +52,12 @@ public class Xog_layout_box implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_y_rel_))					y_rel = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_w_rel_))					w_rel = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_h_rel_))					h_rel = m.ReadInt("v");
-		else if	(ctx.Match(k, Invk_size_abs_))				{int[] ary = Int_.Ary_parse(m.ReadStr("v"), 2, null); if (ary != null) {w_abs = ary[0]; h_abs = ary[1];}}
-		else if	(ctx.Match(k, Invk_size_rel_))				{int[] ary = Int_.Ary_parse(m.ReadStr("v"), 2, null); if (ary != null) {w_rel = ary[0]; h_rel = ary[1];}}
-		else if	(ctx.Match(k, Invk_pos_abs_))				{int[] ary = Int_.Ary_parse(m.ReadStr("v"), 2, null); if (ary != null) {x_abs = ary[0]; y_abs = ary[1];}}
-		else if	(ctx.Match(k, Invk_pos_rel_))				{int[] ary = Int_.Ary_parse(m.ReadStr("v"), 2, null); if (ary != null) {x_rel = ary[0]; y_rel = ary[1];}}
-		else if	(ctx.Match(k, Invk_rect_abs_))				{int[] ary = Int_.Ary_parse(m.ReadStr("v"), 4, null); if (ary != null) {w_abs = ary[0]; h_abs = ary[1]; x_abs = ary[2]; y_abs = ary[3];}}
-		else if	(ctx.Match(k, Invk_rect_rel_))				{int[] ary = Int_.Ary_parse(m.ReadStr("v"), 4, null); if (ary != null) {w_rel = ary[0]; h_rel = ary[1]; x_rel = ary[2]; y_rel = ary[3];}}
+		else if	(ctx.Match(k, Invk_size_abs_))				{int[] ary = Int_ary_.Parse(m.ReadStr("v"), 2, null); if (ary != null) {w_abs = ary[0]; h_abs = ary[1];}}
+		else if	(ctx.Match(k, Invk_size_rel_))				{int[] ary = Int_ary_.Parse(m.ReadStr("v"), 2, null); if (ary != null) {w_rel = ary[0]; h_rel = ary[1];}}
+		else if	(ctx.Match(k, Invk_pos_abs_))				{int[] ary = Int_ary_.Parse(m.ReadStr("v"), 2, null); if (ary != null) {x_abs = ary[0]; y_abs = ary[1];}}
+		else if	(ctx.Match(k, Invk_pos_rel_))				{int[] ary = Int_ary_.Parse(m.ReadStr("v"), 2, null); if (ary != null) {x_rel = ary[0]; y_rel = ary[1];}}
+		else if	(ctx.Match(k, Invk_rect_abs_))				{int[] ary = Int_ary_.Parse(m.ReadStr("v"), 4, null); if (ary != null) {w_abs = ary[0]; h_abs = ary[1]; x_abs = ary[2]; y_abs = ary[3];}}
+		else if	(ctx.Match(k, Invk_rect_rel_))				{int[] ary = Int_ary_.Parse(m.ReadStr("v"), 4, null); if (ary != null) {w_rel = ary[0]; h_rel = ary[1]; x_rel = ary[2]; y_rel = ary[3];}}
 		else if	(ctx.Match(k, Invk_text_))					text = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk_font_name_))				font_name = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk_font_size_))				font_size = m.ReadFloat("v");

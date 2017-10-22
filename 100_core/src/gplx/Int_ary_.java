@@ -13,9 +13,79 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.primitives; import gplx.*; import gplx.core.*;
-public class Int_ary_ {
-	public static int[] Parse_list_or(byte[] src, int[] or) {
+package gplx;
+import gplx.core.strings.*;
+public class Int_ary_ {//RF:DATE:2017-10-09
+	public static int[] Empty = new int[0];
+
+	public static int[] New(int... v) {return v;}
+
+	public static void Copy_to(int[] src, int src_len, int[] trg) {
+		for (int i = 0; i < src_len; ++i)
+			trg[i] = src[i];
+	}
+
+	public static String To_str(String spr, int... ary) {
+		Bry_bfr bfr = Bry_bfr_.New();
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			if (i != 0) bfr.Add_str_u8(spr);
+			int itm = ary[i];
+			bfr.Add_int_variable(itm);
+		}
+		return bfr.To_str_and_clear();
+	}
+
+	public static int[] Parse(String raw, String spr) {
+		String[] ary = String_.Split(raw, spr);
+		int len = ary.length;
+		int[] rv = new int[len];
+		for (int i = 0; i < len; i++)
+			rv[i] = Int_.Parse(ary[i]);
+		return rv;
+	}
+
+	// parses to a reqd len; EX: "1" -> "[1, 0]"
+	public static int[] Parse(String raw_str, int reqd_len, int[] or) {
+		byte[] raw_bry = Bry_.new_a7(raw_str);
+		int raw_bry_len = raw_bry.length;
+		int[] rv = new int[reqd_len];
+		int cur_val = 0, cur_mult = 1, cur_idx = reqd_len - 1; boolean signed = false;
+		for (int i = raw_bry_len - 1; i > -2; i--) {
+			byte b = i == -1 ? Byte_ascii.Comma : raw_bry[i];
+			switch (b) {
+				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
+				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+					if (signed) return or;
+					cur_val += (b - Byte_ascii.Num_0) * cur_mult;
+					cur_mult *= 10;
+					break;
+				case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Tab:
+					break;
+				case Byte_ascii.Comma:
+					if (cur_idx < 0) return or;
+					rv[cur_idx--] = cur_val;
+					cur_val = 0; cur_mult = 1;
+					signed = false;
+					break;
+				case Byte_ascii.Dash:
+					if (signed) return or;
+					cur_val *= -1;
+					signed = true;
+					break;
+				case Byte_ascii.Plus:	// noop; all values positive by default
+					if (signed) return or;
+					signed = true;
+					break;
+				default:
+					return or;
+			}
+		}
+		return cur_idx == -1 ? rv : or;	// cur_idx == -1 checks for unfilled; EX: Ary_parse("1,2", 3, null) is unfilled
+	}
+
+	// optimizes parse
+	public static int[] Parse_or(byte[] src, int[] or) {
 		try {
 		if (Bry_.Len_eq_0(src)) return or;	// null, "" should return [0]
 		int raw_len = src.length;

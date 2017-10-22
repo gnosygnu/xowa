@@ -53,7 +53,7 @@ public class Xop_link_parser {
 				if (proto_len + 1 < raw_len && raw[proto_len + 1] == Byte_ascii.Slash) {	// next char is slash, assume xfer_itm refers to protocol; EX: file:///C/A.png
 					int slash_pos = Bry_find_.Find_bwd(raw, Byte_ascii.Slash);
 					if (slash_pos != Bry_find_.Not_found)	// set xowa_title to file_name; TODO_OLD: call Xoa_url.build; note that this will fail sometimes when (a) xfer_itm is very long (File:ReallyLongName will be shortened to 128 chars) or (b) xfer_itm has invalid windows characters (EX:File:a"b"c.jpg)
-						html_xowa_ttl = Bry_.Mid(raw, slash_pos + Int_.Const_dlm_len, raw.length);
+						html_xowa_ttl = Bry_.Mid(raw, slash_pos + Byte_ascii.Len_1, raw.length);
 				}
 				else // next char is not slash; assume xfer_itm refers to ns; EX:File:A.png
 					raw = tmp_bfr.Add(Xoh_href_.Bry__wiki).Add(raw).To_bry_and_clear();

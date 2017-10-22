@@ -21,16 +21,16 @@ public class Db_cfg_itm {
 	public String		Val() {return val;} public Db_cfg_itm Val_(String v) {val = v; return this;} private String val;
 	public String		To_str_or(String or)			{return val == null ? or : val;}
 	public byte[]		To_bry_or(byte[] or)			{try {return val == null ? or : Bry_.new_u8(val)			;} catch (Exception e) {throw err_parse(e, Bry_.Cls_val_name);}}
-	public int			To_int_or(int or)				{try {return val == null ? or : Int_.parse_or(val, or)		;} catch (Exception e) {throw err_parse(e, Int_.Cls_val_name);}}
+	public int			To_int_or(int or)				{try {return val == null ? or : Int_.Parse_or(val, or)		;} catch (Exception e) {throw err_parse(e, Int_.Cls_val_name);}}
 	public long			To_long_or(long or)				{try {return val == null ? or : Long_.parse_or(val, or)	;} catch (Exception e) {throw err_parse(e, Long_.Cls_val_name);}}
-	public byte			To_byte_or(byte or)				{try {return val == null ? or : Byte_.parse_or(val, or)	;} catch (Exception e) {throw err_parse(e, Byte_.Cls_val_name);}}
+	public byte			To_byte_or(byte or)				{try {return val == null ? or : Byte_.Parse_or(val, or)	;} catch (Exception e) {throw err_parse(e, Byte_.Cls_val_name);}}
 	public boolean		To_yn_or_n()					{return To_yn_or(Bool_.N);}
 	public boolean		To_yn_or(boolean or)			{try {return val == null ? or : Yn.parse_by_char_or(val, or);} catch (Exception e) {throw err_parse(e, Bool_.Cls_val_name);}}
 	public DateAdp		To_date_or(DateAdp or)			{try {return val == null ? or : DateAdp_.parse_gplx(val)	;} catch (Exception e) {throw err_parse(e, DateAdp_.Cls_ref_name);}}
 	public Guid_adp		To_guid_or(Guid_adp or)			{try {return val == null ? or : Guid_adp_.Parse(val)		;} catch (Exception e) {throw err_parse(e, Guid_adp_.Cls_ref_name);}}
 	public boolean  	To_bool()						{Fail_if_null(); try {return Yn.parse(val)					;} catch (Exception e) {throw err_parse(e, Bool_.Cls_val_name);}}
-	public byte			To_byte()						{Fail_if_null(); try {return Byte_.parse(val)				;} catch (Exception e) {throw err_parse(e, Byte_.Cls_val_name);}}
-	public int     		To_int()						{Fail_if_null(); try {return Int_.parse(val)				;} catch (Exception e) {throw err_parse(e, Int_.Cls_val_name);}}
+	public byte			To_byte()						{Fail_if_null(); try {return Byte_.Parse(val)				;} catch (Exception e) {throw err_parse(e, Byte_.Cls_val_name);}}
+	public int     		To_int()						{Fail_if_null(); try {return Int_.Parse(val)				;} catch (Exception e) {throw err_parse(e, Int_.Cls_val_name);}}
 	public String		To_str()						{Fail_if_null(); return val;}
 	private void		Fail_if_null()					{if (val == null) throw Err_.new_wo_type("cfg.val is empty", "grp", grp, "key", key); }
 	private Err			err_parse(Exception e, String type) {return Err_.new_wo_type("cfg.val is not parseable", "grp", grp, "key", key, "val", val, "type", type).Trace_ignore_add_1_();}

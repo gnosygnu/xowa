@@ -62,7 +62,7 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 		subs[subs_len] = sub;
 		sub.Tkn_grp_(this, subs_len);
 		subs_len = new_len;
-	}	private Xop_tkn_itm[] subs = Xop_tkn_itm_.Ary_empty; int subs_max; int[] subs_pos_ary = Int_.Ary_empty;
+	}	private Xop_tkn_itm[] subs = Xop_tkn_itm_.Ary_empty; int subs_max; int[] subs_pos_ary = Int_ary_.Empty;
 	public void Subs_add_grp(Xop_tkn_itm sub, Xop_tkn_grp old_grp, int old_sub_idx) {
 		this.Subs_add(sub);	
 		if (sub.Tkn_immutable())
@@ -93,7 +93,7 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 	public void Subs_clear() {
 		subs_len = subs_max = 0;
 		subs = Xop_tkn_itm_.Ary_empty;
-		subs_pos_ary = Int_.Ary_empty;
+		subs_pos_ary = Int_ary_.Empty;
 	}
 	public void Subs_move(Xop_tkn_itm tkn) {
 		int nxt_idx = tkn_sub_idx + 1, len = tkn.Subs_len();

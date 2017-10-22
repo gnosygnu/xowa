@@ -30,7 +30,7 @@ class GfoFldList_base implements GfoFldList {
 	public boolean Has(String key) {return hash.Has(key);}
 	public int Idx_of(String key) {			
 		Object rv = idxs.Get_by(key);
-		return rv == null ? List_adp_.Not_found : Int_.cast(rv);
+		return rv == null ? List_adp_.Not_found : Int_.Cast(rv);
 	}
 	public GfoFld Get_at(int i) {return (GfoFld)hash.Get_at(i);}
 	public GfoFld FetchOrNull(String key) {return (GfoFld)hash.Get_by(key);}

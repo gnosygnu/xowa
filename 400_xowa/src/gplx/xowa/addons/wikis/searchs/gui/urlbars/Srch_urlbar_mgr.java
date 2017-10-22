@@ -28,10 +28,10 @@ public class Srch_urlbar_mgr implements Gfo_invk {	// NOTE: needs to be app-leve
 	private final    Srch_ns_mgr ns_mgr = new Srch_ns_mgr().Add_main_if_empty();
 	private Srch_crt_scanner_syms syms = Srch_crt_scanner_syms.New__dflt();
 	private void Ns_ids_(String s) {
-		int[] ns_ids = Int_.Ary_empty;
+		int[] ns_ids = Int_ary_.Empty;
 		if (String_.Eq(s, "*")) {}	// leave as int[0]; ns_mgr will interpret as wildcard
 		else {
-			ns_ids = Int_.Ary_parse(s, ",");
+			ns_ids = Int_ary_.Parse(s, ",");
 		}
 		ns_mgr.Add_by_int_ids(ns_ids);
 		if (addon != null) addon.Clear_rslts_cache();	// invalidate cache when ns changes; else ns_0 rslts will show up in ns_100; DATE:2016-03-24

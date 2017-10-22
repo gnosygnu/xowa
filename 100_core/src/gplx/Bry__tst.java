@@ -162,7 +162,7 @@ public class Bry__tst {
 	}	void tst_ReadCsvDte(String raw) {Tfds.Eq_date(DateAdp_.parse_fmt(raw, Bry_.Fmt_csvDte), Bry_.ReadCsvDte(Bry_.new_u8(raw + "|"), Int_obj_ref.New_zero(), (byte)'|'));}
 	@Test  public void ReadCsvInt() {
 		tst_ReadCsvInt("1234567890");
-	}	void tst_ReadCsvInt(String raw) {Tfds.Eq(Int_.parse(raw), Bry_.ReadCsvInt(Bry_.new_u8(raw + "|"), Int_obj_ref.New_zero(), (byte)'|'));}
+	}	void tst_ReadCsvInt(String raw) {Tfds.Eq(Int_.Parse(raw), Bry_.ReadCsvInt(Bry_.new_u8(raw + "|"), Int_obj_ref.New_zero(), (byte)'|'));}
 	@Test  public void Trim() {
 		Trim_tst("a b c", 1, 4, "b");
 		Trim_tst("a  c", 1, 3, "");

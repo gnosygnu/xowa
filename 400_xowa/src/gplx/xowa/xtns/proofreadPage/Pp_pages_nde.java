@@ -216,7 +216,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	}
 	private List_adp Get_ttls_from_xnde_args__include(List_adp list) {
 		if (Bry_.Len_eq_0(include)) return list;	// include is blank; exit early;
-		int[] include_pages = Int_ary_.Parse_list_or(include, null);
+		int[] include_pages = Int_ary_.Parse_or(include, null);
 		if (include_pages == null) return list;	// ignore invalid include; DATE:2014-02-22
 		int include_pages_len = include_pages.length;
 		for (int i = 0; i < include_pages_len; i++)
@@ -272,7 +272,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	}	private static Xowd_page_itm tmp_page = new Xowd_page_itm();	// tmp_page passed to Load_ttls_for_all_pages; values are never looked at, so use static instance
 	private List_adp Get_ttls_from_xnde_args__exclude(List_adp list) {
 		if (Bry_.Len_eq_0(exclude)) return list;	// exclude is blank; exit early;
-		int[] exclude_pages = Int_ary_.Parse_list_or(exclude, null);
+		int[] exclude_pages = Int_ary_.Parse_or(exclude, null);
 		if (exclude_pages == null) return list;	// ignore invalid exclude; DATE:2014-02-22
 		Hash_adp exclude_pages_hash = Hash_adp_.New();
 		int exclude_pages_len = exclude_pages.length;

@@ -95,7 +95,7 @@ public class Db_conn {
 	public Db_stmt				Stmt_select_order(String tbl, String[] flds, String[] where, String... orderbys) {return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, where, flds, orderbys));}
 	public Db_stmt				Stmt_new(Db_qry qry) {return engine.Stmt_by_qry(qry);}
 	public Db_stmt				Stmt_sql(String sql) {return engine.Stmt_by_qry(Db_qry_sql.sql_(sql));}
-	public int					Exec_qry(Db_qry qry)										{return Int_.cast(engine.Exec_as_obj(qry));}
+	public int					Exec_qry(Db_qry qry)										{return Int_.Cast(engine.Exec_as_obj(qry));}
 	public int					Exec_sql_concat(String... ary)						{return this.Exec_qry(Db_qry_sql.dml_(String_.Concat_lines_nl_skip_last(ary)));}
 	public int					Exec_sql_concat_w_msg(String msg, String... ary)		{Gfo_usr_dlg_.Instance.Plog_many("", "", msg); return Exec_sql_concat(ary);}
 	public int					Exec_sql(String sql)										{return this.Exec_qry(Db_qry_sql.dml_(sql));}
@@ -115,13 +115,13 @@ public class Db_conn {
 	}
 	public int					Exec_select_max_as_int	(String tbl_name, String fld_name, int or) {
 		Object rv = Exec_select_as_obj(String_.Format("SELECT Max({0}) FROM {1}", fld_name, tbl_name));
-		return rv == null ? or : Int_.cast(rv);
+		return rv == null ? or : Int_.Cast(rv);
 	}
 	public int					Exec_select_count_as_int(String tbl_name, int or) {
 		Object rv = Exec_select_as_obj(String_.Format("SELECT Count(*) FROM {0}", tbl_name));
-		return rv == null ? or : Int_.cast(rv);
+		return rv == null ? or : Int_.Cast(rv);
 	}
-	public int					Exec_select_as_int		(String sql, int    or) {Object rv = Exec_select_as_obj(sql); return rv == null ? or : Int_.cast(rv);}
+	public int					Exec_select_as_int		(String sql, int    or) {Object rv = Exec_select_as_obj(sql); return rv == null ? or : Int_.Cast(rv);}
 	public double				Exec_select_as_double	(String sql, double or) {Object rv = Exec_select_as_obj(sql); return rv == null ? or : Double_.cast(rv);}
 	private Object				Exec_select_as_obj(String sql) {
 		Db_rdr rdr = Exec_rdr(sql);

@@ -164,8 +164,8 @@ public class Json_wtr {
 		switch (type_tid) {
 			case Type_ids_.Id__null:				bfr.Add(Object_.Bry__null); break;
 			case Type_ids_.Id__bool:				bfr.Add_bool(Bool_.Cast(obj)); break;
-			case Type_ids_.Id__byte:				bfr.Add_byte(Byte_.cast(obj)); break;
-			case Type_ids_.Id__int:				bfr.Add_int_variable(Int_.cast(obj)); break;
+			case Type_ids_.Id__byte:				bfr.Add_byte(Byte_.Cast(obj)); break;
+			case Type_ids_.Id__int:				bfr.Add_int_variable(Int_.Cast(obj)); break;
 			case Type_ids_.Id__long:				bfr.Add_long_variable(Long_.cast(obj)); break;
 			case Type_ids_.Id__float:				bfr.Add_float(Float_.cast(obj)); break;
 			case Type_ids_.Id__double:				bfr.Add_double(Double_.cast(obj)); break;

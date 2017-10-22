@@ -29,7 +29,7 @@ class Xosql_tbl_parser {
 			byte[] line = lines[i];
 			// get fld bgn / end; EX: "`fld_1`"
 			int bgn = Bry_find_.Find_fwd(line, Byte_ascii.Tick); if (bgn == Bry_find_.Not_found) continue;		// skip blank lines
-			bgn += Int_.Const_position_after_char;
+			bgn += Int_.Offset_1;
 			int end = Bry_find_.Find_fwd(line, Byte_ascii.Tick, bgn); if (end == Bry_find_.Not_found) continue;	// skip blank lines
 
 			// add fld

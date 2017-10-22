@@ -40,7 +40,7 @@ public class Php_srl_parser {
 				val = Xto_kv_ary(ary);
 				break;
 			case Php_srl_itm_.Tid_function:
-				val = new gplx.xowa.xtns.scribunto.Scrib_lua_proc(Object_.Xto_str_strict_or_null_mark(key), Int_.cast(itm_val.Val()));	// NOTE: in most cases, key is a STRING (name of ScribFunction); however, for gsub it is an INT (arg_idx) b/c it is passed as a parameter
+				val = new gplx.xowa.xtns.scribunto.Scrib_lua_proc(Object_.Xto_str_strict_or_null_mark(key), Int_.Cast(itm_val.Val()));	// NOTE: in most cases, key is a STRING (name of ScribFunction); however, for gsub it is an INT (arg_idx) b/c it is passed as a parameter
 				break;
 			default:
 				val = itm_val.Val();

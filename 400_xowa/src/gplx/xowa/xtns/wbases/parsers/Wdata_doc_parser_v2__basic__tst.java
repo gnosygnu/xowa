@@ -239,7 +239,7 @@ public class Wdata_doc_parser_v2__basic__tst {
 		, "    }"
 		, "  ]"
 		, "}"
-		), Int_.Ary(2, 3), fxt.Make_claim_entity_qid(2, 21), fxt.Make_claim_entity_qid(3, 31))
+		), Int_ary_.New(2, 3), fxt.Make_claim_entity_qid(2, 21), fxt.Make_claim_entity_qid(3, 31))
 		;
 	}
 	@Test   public void References_empty() { // PURPOSE:sometimes references can have 0 snaks; return back an empty Wbase_claim_grp_list, not null; PAGE:Птичкин,_Евгений_Николаевич; DATE:2015-02-16
@@ -252,7 +252,7 @@ public class Wdata_doc_parser_v2__basic__tst {
 		, "    }"
 		, "  ]"
 		, "}"
-		), Int_.Ary_empty)
+		), Int_ary_.Empty)
 		;
 	}
 }

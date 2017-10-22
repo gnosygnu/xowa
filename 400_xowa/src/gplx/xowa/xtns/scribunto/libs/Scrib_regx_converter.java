@@ -154,7 +154,7 @@ public class Scrib_regx_converter {
 				}
 			}			
 		}
-		if (grps_open.Count() > 0) throw Err_.new_wo_type("Unclosed capture beginning at pattern character " + Int_.cast(grps_open.Get_at(0)));
+		if (grps_open.Count() > 0) throw Err_.new_wo_type("Unclosed capture beginning at pattern character " + Int_.Cast(grps_open.Get_at(0)));
 //			bfr.Add(Bry_regx_end);	// NOTE: do not add PHP /us at end; u=PCRE_UTF8 which is not needed for Java; s=PCRE_DOTALL which will be specified elsewhere
 		regx = bfr.To_str_and_clear();
 		return regx;
@@ -227,7 +227,7 @@ public class Scrib_regx_converter {
 		int len = list.Count();
 		for (int i = 0; i < len; i++) {
 			Object o = list.Get_at(i);
-			if (Int_.cast(o) == v) return true;
+			if (Int_.Cast(o) == v) return true;
 		}
 		return false;
 	}

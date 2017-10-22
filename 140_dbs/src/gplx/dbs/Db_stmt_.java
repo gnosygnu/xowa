@@ -61,8 +61,8 @@ public class Db_stmt_ {
 		int tid = Type_ids_.To_id_by_obj(val);
 		switch (tid) {
 			case Type_ids_.Id__bool:			stmt.Val_bool_as_byte	(key, Bool_.Cast(val)); break;
-			case Type_ids_.Id__byte:			stmt.Val_byte			(key, Byte_.cast(val)); break;
-			case Type_ids_.Id__int:			stmt.Val_int			(key, Int_.cast(val)); break;
+			case Type_ids_.Id__byte:			stmt.Val_byte			(key, Byte_.Cast(val)); break;
+			case Type_ids_.Id__int:			stmt.Val_int			(key, Int_.Cast(val)); break;
 			case Type_ids_.Id__long:			stmt.Val_long			(key, Long_.cast(val)); break;
 			case Type_ids_.Id__float:			stmt.Val_float			(key, Float_.cast(val)); break;
 			case Type_ids_.Id__double:			stmt.Val_double			(key, Double_.cast(val)); break;

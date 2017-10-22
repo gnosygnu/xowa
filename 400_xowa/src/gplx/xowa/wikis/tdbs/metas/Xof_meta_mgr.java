@@ -78,7 +78,7 @@ public class Xof_meta_mgr implements Gfo_invk {
 	}	private static final String Invk_regy_depth_ = "depth_";
 	static final String GRP_KEY = "xowa.file_regy.";
 	private static Xof_meta_fil Get_fil_or_null_recur(Object[] ary, int depth_max, byte[] md5, int md5_idx) {
-		int ary_idx = Int_.To_int_hex(md5[md5_idx]);
+		int ary_idx = Int_.By_hex_byte(md5[md5_idx]);
 		if (ary_idx < 0 || ary_idx > 15) throw Err_.new_wo_type("md5_not_valid", "md5", String_.new_u8(md5), "idx", md5_idx);
 		Object o = ary[ary_idx];
 		if (o == null) return null;
@@ -89,7 +89,7 @@ public class Xof_meta_mgr implements Gfo_invk {
 		return Get_fil_or_null_recur(nxt, depth_max, md5, md5_idx + 1);
 	}
 	private static Xof_meta_fil Bld_new(Object[] ary, int depth_max, Xof_meta_mgr regy_mgr, byte[] md5, int md5_idx) {
-		int ary_idx = Int_.To_int_hex(md5[md5_idx]);
+		int ary_idx = Int_.By_hex_byte(md5[md5_idx]);
 		if (ary_idx < 0 || ary_idx > 15) throw Err_.new_wo_type("md5_not_valid", "md", String_.new_u8(md5), "idx", md5_idx);
 		Object o = ary[ary_idx];
 		if (md5_idx == depth_max) {	// leaf; create itm

@@ -60,7 +60,7 @@ class Xomp_html_db_wtr {
 		if (prv_ns_id != ns_id
 			|| ns_itm == null) {
 			prv_ns_id = ns_id;
-			ns_itm = new Xob_ns_file_itm(Xow_db_file_.Tid__html_data, "ns." + Int_.To_str_pad_bgn_zero(ns_id, 3), Int_.Ary(ns_id));
+			ns_itm = new Xob_ns_file_itm(Xow_db_file_.Tid__html_data, "ns." + Int_.To_str_pad_bgn_zero(ns_id, 3), Int_ary_.New(ns_id));
 		}
 		String file_name = is_all_or_few ? "-html.xowa" : ns_itm.Make_file_name();
 		this.html_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xow_db_file_.Tid__html_data, Int_.To_str(ns_id), ns_itm.Nth_db_idx(), file_name);

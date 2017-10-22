@@ -82,7 +82,7 @@ public class Bridge_msg_bldr {
 				String key = sub_kv.Key(); Object val = sub_kv.Val();
 				switch (sub_kv.Val_tid()) {
 					case Type_ids_.Id__bool:	wtr.Kv_bool(key, Bool_.Cast(val)); break;
-					case Type_ids_.Id__int:		wtr.Kv_int(key, Int_.cast(val)); break;
+					case Type_ids_.Id__int:		wtr.Kv_int(key, Int_.Cast(val)); break;
 					case Type_ids_.Id__bry:		wtr.Kv_bry(key, (byte[])val); break;
 					default:					wtr.Kv_str(key, Object_.Xto_str_strict_or_null_mark(val)); break;
 				}

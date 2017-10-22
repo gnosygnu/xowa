@@ -44,7 +44,7 @@ public class HierPosAryBldr {
 	}
 	public boolean Dirty() {return aryIdx > -1 || root > 0;}
 	public int[] XtoIntAry() {
-		if (aryIdx == -1) return Int_.Ary_empty;
+		if (aryIdx == -1) return Int_ary_.Empty;
 		int[] rv = new int[aryIdx + 1];
 		for (int i = 0; i < aryIdx + 1; i++)
 			rv[i] = ary[i];

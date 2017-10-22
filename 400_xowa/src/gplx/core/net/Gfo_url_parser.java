@@ -46,7 +46,7 @@ public class Gfo_url_parser {
 		if (!rel) {	// search for ":"; NOTE: only search if not rel; i.e.: "//"
 			int colon_pos = Bry_find_.Find_fwd(src, Byte_ascii.Colon, pos, src_end);		// no colon found; EX: "//a.org/b"; "a.org/b"
 			if (colon_pos != Bry_find_.Not_found)											// colon found; EX: "http://" or "https://"
-				pos = colon_pos + Int_.Const_dlm_len;
+				pos = colon_pos + Byte_ascii.Len_1;
 			if (pos < src_end && src[pos] == Byte_ascii.Slash) {							// skip slash after colon
 				pos += 1;
 				if (pos < src_end && src[pos] == Byte_ascii.Slash)							// skip 2nd slash after colon

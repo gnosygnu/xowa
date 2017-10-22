@@ -34,8 +34,8 @@ public class Db_conn_utl {
 				Object val = row[j];
 				switch (fld.Type().Tid_ansi()) {
 					case Dbmeta_fld_tid.Tid__bool:		stmt.Val_bool_as_byte	(fld_name, Bool_.Cast(val)); break;
-					case Dbmeta_fld_tid.Tid__byte:		stmt.Val_byte			(fld_name, Byte_.cast(val)); break;
-					case Dbmeta_fld_tid.Tid__int:		stmt.Val_int			(fld_name, Int_.cast(val)); break;
+					case Dbmeta_fld_tid.Tid__byte:		stmt.Val_byte			(fld_name, Byte_.Cast(val)); break;
+					case Dbmeta_fld_tid.Tid__int:		stmt.Val_int			(fld_name, Int_.Cast(val)); break;
 					case Dbmeta_fld_tid.Tid__long:		stmt.Val_long			(fld_name, Long_.cast(val)); break;
 					case Dbmeta_fld_tid.Tid__float:		stmt.Val_float			(fld_name, Float_.cast(val)); break;
 					case Dbmeta_fld_tid.Tid__double:	stmt.Val_double			(fld_name, Double_.cast(val)); break;

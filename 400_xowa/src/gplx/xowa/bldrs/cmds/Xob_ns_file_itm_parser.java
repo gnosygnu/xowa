@@ -42,7 +42,7 @@ public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
 			for (int i = 0; i < len; ++i) {
 				Xow_ns ns = ns_mgr.Ords_get_at(i);
 				int ns_id = ns.Id();
-				rslts.Add(new Xob_ns_file_itm(db_file_tid, "ns." + Int_.To_str_pad_bgn_zero(ns_id, 3), Int_.Ary(ns_id)));
+				rslts.Add(new Xob_ns_file_itm(db_file_tid, "ns." + Int_.To_str_pad_bgn_zero(ns_id, 3), Int_ary_.New(ns_id)));
 			}
 			return;
 		}
@@ -65,7 +65,7 @@ public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
 				ns_ids[i] = ns_mgr.Ords_get_at(i).Id();
 		}
 		else
-			ns_ids = Int_.Ary_parse(String_.new_u8(ns_ids_bry), ",");
+			ns_ids = Int_ary_.Parse(String_.new_u8(ns_ids_bry), ",");
 		if (ns_ids.length == 0) throw Err_.new_wo_type("map.invalid.ns_missing", "src", this.Src());
 		if (String_.Len_eq_0(name)) {	// no name; auto-generate
 			int ns_id_1st = ns_ids[0];	// take 1st ns_id

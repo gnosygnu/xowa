@@ -210,7 +210,7 @@ class Scrib_lua_rsp_bldr {
 	}
 	private void Bld_obj(Bry_bfr bfr, Object v) {
 		Class<?> v_type = v.getClass();
-		if		(Object_.Eq(v_type, Int_.Cls_ref_type))			Bld_int(bfr, Int_.cast(v));
+		if		(Object_.Eq(v_type, Int_.Cls_ref_type))			Bld_int(bfr, Int_.Cast(v));
 		else if	(Object_.Eq(v_type, String_.Cls_ref_type))		Bld_str(bfr, String_.cast(v));
 		else if	(Object_.Eq(v_type, Bool_.Cls_ref_type))		Bld_bool(bfr, Bool_.Cast(v));
 		else if	(Object_.Eq(v_type, Double_.Cls_ref_type))		Bld_double(bfr, Double_.cast(v));

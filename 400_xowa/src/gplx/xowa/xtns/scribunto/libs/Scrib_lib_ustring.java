@@ -219,7 +219,7 @@ class Scrib_lib_ustring_gsub_mgr {
 		}
 		else if	(Object_.Eq(repl_type, Int_.Cls_ref_type)) {	// NOTE:@replace sometimes int; PAGE:en.d:λύω; DATE:2014-09-02
 			tmp_repl_tid = Repl_tid_string;
-			tmp_repl_bry = Bry_.new_u8(Int_.To_str(Int_.cast(repl_obj)));
+			tmp_repl_bry = Bry_.new_u8(Int_.To_str(Int_.Cast(repl_obj)));
 		}
 		else if	(Object_.Eq(repl_type, Keyval[].class)) {
 			tmp_repl_tid = Repl_tid_table;

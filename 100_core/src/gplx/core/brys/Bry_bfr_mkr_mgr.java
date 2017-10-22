@@ -22,7 +22,7 @@ public class Bry_bfr_mkr_mgr {
 	public Bry_bfr_mkr_mgr(byte mgr_id, int reset) {// NOTE: random IndexOutOfBounds errors in Get around free[--free_len] with free_len being -1; put member variable initialization within thread_lock to try to avoid; DATE:2014-09-21
 		this.mgr_id = mgr_id;
 		this.reset = reset;
-		this.free = Int_.Ary_empty;
+		this.free = Int_ary_.Empty;
 		this.free_len = 0;
 	}
 	public Bry_bfr Get() {
@@ -66,7 +66,7 @@ public class Bry_bfr_mkr_mgr {
 				used[i] = null;
 			}
 			used = Bry_bfr_.Ary_empty;
-			free = Int_.Ary_empty;
+			free = Int_ary_.Empty;
 			free_len = used_len = used_max = 0;
 		}
 	}
@@ -78,7 +78,7 @@ public class Bry_bfr_mkr_mgr {
 				used[i] = null;
 			}
 			used = Bry_bfr_.Ary_empty;
-			free = Int_.Ary_empty;
+			free = Int_ary_.Empty;
 			free_len = 0;
 			used_len = used_max = 0;
 		}

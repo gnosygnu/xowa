@@ -130,7 +130,7 @@ public class Xoa_css_img_downloader {
 		bfr.Add(css_trg_bry).Add_byte_nl();
 		bfr.Add_byte_nl();
 		int semic_pos = Bry_find_.Find_fwd(src, Byte_ascii.Semic, find_bgn + url_raw.length, src_len);
-		return semic_pos + Int_.Const_dlm_len;
+		return semic_pos + Byte_ascii.Len_1;
 	}
 	private static final    byte[]
 	  Wikisource_dynimg_ttl		= Bry_.new_a7("en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css")

@@ -49,14 +49,14 @@ class Gfo_url_encoder_itm_hex implements Gfo_url_encoder_itm {
 				return 0;
 			}
 		}
-		int hex_val = Int_.To_int_hex(src[idx + 1]);
+		int hex_val = Int_.By_hex_byte(src[idx + 1]);
 		if (hex_val == -1) {	// invalid hex byte; EX: %GC; DATE:2014-04-10
 			bfr.Add_byte(b);
 			return 0;
 		}
 		int v_0 = hex_val * 16;
 		if (v_0 != -1) {
-			int v_1 = Int_.To_int_hex(src[idx + 2]);
+			int v_1 = Int_.By_hex_byte(src[idx + 2]);
 			if (v_1 != -1) {
 				bfr.Add_byte((byte)(v_0 + v_1));
 				return 2;

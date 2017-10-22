@@ -24,7 +24,7 @@ public class Int_ary_parser extends Obj_ary_parser_base {
 	}
 	@Override protected void Ary_len_(int v) {
 		if (v == 0)
-			ary = Int_.Ary_empty;
+			ary = Int_ary_.Empty;
 		else {
 			ary = new int[v];	// NOTE: always create new array; never reuse;
 			ary_idx = 0;

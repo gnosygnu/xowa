@@ -18,7 +18,7 @@ import org.junit.*;
 public class HierPosAryBldr_tst {
 	@Before public void init() {bldr.Init();} HierPosAryBldr bldr = new HierPosAryBldr(256);
 	@Test  public void Basic() {
-		tst_ary(Int_.Ary_empty);
+		tst_ary(Int_ary_.Empty);
 	}
 	@Test  public void Move_d() {
 		bldr.MoveDown();

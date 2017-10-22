@@ -453,8 +453,8 @@ public class Bry_bfr {
 		if (o == null) return this;	// treat null as empty String;
 		Class<?> o_type = o.getClass();
 		if		(o_type == byte[].class)          Add((byte[])o);
-		else if	(o_type == Integer.class)         Add_int_variable(Int_.cast(o));    
-		else if	(o_type == Byte.class)            Add_byte(Byte_.cast(o));           
+		else if	(o_type == Integer.class)         Add_int_variable(Int_.Cast(o));    
+		else if	(o_type == Byte.class)            Add_byte(Byte_.Cast(o));           
 		else if	(o_type == Long.class)            Add_long_variable(Long_.cast(o));  
 		else if	(o_type == String.class)          Add_str_u8((String)o);
 		else if	(o_type == Bry_bfr.class)			Add_bfr_and_preserve((Bry_bfr)o);
@@ -470,8 +470,8 @@ public class Bry_bfr {
 		if (o == null) return this;	// treat null as empty String;
 		Class<?> o_type = o.getClass();
 		if		(o_type == byte[].class)          Add((byte[])o);
-		else if	(o_type == Integer.class)         Add_int_variable(Int_.cast(o));    
-		else if	(o_type == Byte.class)            Add_byte(Byte_.cast(o));           
+		else if	(o_type == Integer.class)         Add_int_variable(Int_.Cast(o));    
+		else if	(o_type == Byte.class)            Add_byte(Byte_.Cast(o));           
 		else if	(o_type == Long.class)            Add_long_variable(Long_.cast(o));  
 		else if	(o_type == String.class)          Add_str_u8((String)o);
 		else if	(o_type == Bry_bfr.class)			Add_bfr_and_preserve((Bry_bfr)o);

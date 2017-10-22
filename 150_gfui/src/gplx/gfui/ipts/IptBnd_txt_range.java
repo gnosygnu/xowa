@@ -58,7 +58,7 @@ public class IptBnd_txt_range implements InjectAble, Gfo_invk, Gfo_evt_itm {
 			if (String_.Eq(find, (String)list[i].Val())) idx = i;
 		}
 		if (idx == Int_.Min_value) {				// try to find .Text in list.Keys
-			int key = Int_.parse_or(txtBox.Text(), Int_.Min_value); if (key == Int_.Min_value) return Gfo_invk_.Rv_unhandled;
+			int key = Int_.Parse_or(txtBox.Text(), Int_.Min_value); if (key == Int_.Min_value) return Gfo_invk_.Rv_unhandled;
 			idx = GetByKey(key); if (idx == Int_.Min_value) return Gfo_invk_.Rv_unhandled;
 		}
 		ExecCmd(setCmd, idx);
