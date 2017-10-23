@@ -142,15 +142,16 @@ public class Scrib_lib_mw implements Scrib_lib {
 		return null; // return null since index does not exist; EX: args[2] when {{#invoke:mod|test|3=abc}} PAGE:en.w:Sainte-Catherine,_Quebec DATE:2017-09-16
 	}
 	private static boolean Verify_arg_key(byte[] src, int idx, Arg_nde_tkn nde) {
+		// NOTE: key must trim ws; EX: "1 =val_1"; PAGE:c:File:Torsåker_kyrka01.JPG; DATE:2017-10-23
 		int key_int = Bry_find_.Not_found;
 		byte[] key_dat_ary = nde.Key_tkn().Dat_ary();
 		if (Env_.Mode_testing() && src == null)	// some tests will always pass a null src;
-			key_int = Bry_.To_int_or(key_dat_ary, 0, key_dat_ary.length, Bry_find_.Not_found);
+			key_int = Bry_.To_int_or__trim_ws(key_dat_ary, 0, key_dat_ary.length, Bry_find_.Not_found);
 		else {
 			if (Bry_.Len_eq_0(key_dat_ary))	// should be called by current context;
-				key_int = Bry_.To_int_or(src, nde.Key_tkn().Src_bgn(), nde.Key_tkn().Src_end(), Bry_find_.Not_found);
+				key_int = Bry_.To_int_or__trim_ws(src, nde.Key_tkn().Src_bgn(), nde.Key_tkn().Src_end(), Bry_find_.Not_found);
 			else							// will be called by parent context; note that this calls Xot_defn_tmpl_.Make_itm which sets a key_dat_ary; DATE:2013-09-23
-				key_int = Bry_.To_int_or(key_dat_ary, 0, key_dat_ary.length, Bry_find_.Not_found);
+				key_int = Bry_.To_int_or__trim_ws(key_dat_ary, 0, key_dat_ary.length, Bry_find_.Not_found);
 		}
 		if (key_int == Bry_find_.Not_found)		// key is not-numeric
 			return false;

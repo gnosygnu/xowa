@@ -28,7 +28,7 @@ public class Scrib_lib_mw__lib_tst {
 	@Test  public void ParentFrameExists_false() {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_mw.Invk_parentFrameExists, Object_.Ary_empty, false);
 	}
-	@Test  public void FrameExists_false() { // no args should not throw error; PAGE:fr.u:Projet:Laboratoire/Espaces_de_noms/Mod�le/Liste_des_pages DATE:2017-05-28
+	@Test  public void FrameExists_false() { // no args should not throw error; PAGE:fr.u:Projet:Laboratoire/Espaces_de_noms/Modèle/Liste_des_pages DATE:2017-05-28
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_mw.Invk_frameExists, Object_.Ary_empty, false);
 	}
 	@Test  public void GetAllExpandedArguments() {
@@ -65,6 +65,10 @@ public class Scrib_lib_mw__lib_tst {
 		fxt.Init_frame_current(Keyval_.new_("2", "a2"));
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("parent", "1"), null);				// PAGE:en.w:Sainte-Catherine,_Quebec; DATE:2017-09-16
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("parent", "2"), "a1");				// get 1st by idx, even though idx is String
+	}
+	@Test  public void GetExpandedArgument_ws() {		// PURPOSE: key must trim ws; EX: "1 =val_1"; PAGE:c:File:Torsåker_kyrka01.JPG; DATE:2017-10-23
+		fxt.Init_frame_current(Keyval_.new_(" 1 ", "val_1"));
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "1"), "val_1");
 	}
 	@Test  public void GetExpandedArgument_out_of_bounds() {
 		fxt.Init_frame_parent ("test");
