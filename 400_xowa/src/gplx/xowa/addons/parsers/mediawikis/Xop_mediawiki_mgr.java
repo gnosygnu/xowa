@@ -44,7 +44,16 @@ public class Xop_mediawiki_mgr {
 	public Xop_mediawiki_wkr Make(String domain_str, Xop_mediawiki_loader loader) {
 		Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Make(Bry_.new_u8(domain_str), app.Fsys_mgr().Wiki_dir());
 		if (mode_is_prod) {
+			wiki.Embeddable_enabled_(true); // must mark wiki as embeddable, else orig_mgr will load wkrs which will download images DATE:2017-10-23
 			wiki.Init_by_wiki();
+
+			// init setup data; xowa_cfg|interwikimap and ns_msg; DATE:2017-10-23
+			if (gplx.xowa.wikis.data.Xow_db_file__core_.Find_core_fil_or_null(wiki) == null) { // only run if file does not exist
+				Xowe_wiki_.Create(wiki, 0, "embeddeable_parser");
+				wiki.App().Site_cfg_mgr().Load(wiki); // load interwikimap et al from WM API
+				wiki.Db_mgr_as_sql().Core_data_mgr().Db__core().Tbl__ns().Insert(wiki.Ns_mgr()); // save ns to xowa_ns
+			}
+
 			wiki.File_mgr().Version_2_y_(); // must set to version_2 else video files will use old v1 Meta_code; DATE:2017-01-26
 			wiki.File_mgr().Fsdb_mode().Tid__v2__mp__y_();	// must set to mass_parse mode, else will use old v1 Meta_code for xfer_itm and url_bldr; DATE:2017-01-26
 		}

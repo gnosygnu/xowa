@@ -93,6 +93,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	public Xosp_special_mgr				Special_mgr() {return special_mgr;} private Xosp_special_mgr special_mgr;
 	public Xow_xwiki_mgr				Xwiki_mgr() {return xwiki_mgr;} private final    Xow_xwiki_mgr xwiki_mgr;
 	public Xoav_app						Appv() {return app;} private final    Xoav_app app;
+	public boolean                      Embeddable_enabled() {return embeddable_enabled;} public void Embeddable_enabled_(boolean v) {this.embeddable_enabled = v;} private boolean embeddable_enabled;
 	public void Init_by_wiki() {
 		if (!init_needed) return;
 		init_needed = false;

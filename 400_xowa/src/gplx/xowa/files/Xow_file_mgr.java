@@ -53,6 +53,7 @@ public class Xow_file_mgr implements Gfo_invk {
 	public boolean Version_2_y() {return this.Version() == Version_2;}
 	public void Version_1_y_() {version = Version_1;}	// TEST:
 	public void Version_2_y_() {version = Version_2; fsdb_mode = Xof_fsdb_mode.New__v2__gui();}	// TEST:
+
 	public void Fsdb_mgr_(Xof_fsdb_mgr fsdb_mgr) {
 		this.fsdb_mgr = fsdb_mgr;			
 		version = Version_2;

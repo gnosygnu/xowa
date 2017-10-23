@@ -23,6 +23,11 @@ public class Xof_orig_mgr {
 	public Xof_orig_mgr() {this.Wkrs__clear();}
 	public void Init_by_wiki(Xow_wiki wiki, Xof_fsdb_mode fsdb_mode, Xof_orig_tbl[] orig_tbls, Xof_url_bldr url_bldr) {
 		this.repo_mgr = wiki.File__repo_mgr(); this.url_bldr = url_bldr;
+
+		// if embeddable, do not load orig wkrs which will download images DATE:2017-10-23
+		if (wiki.Embeddable_enabled())
+			return;
+
 //			if (!fsdb_mode.Tid_v0()) {		// add view,make; don't add if wmf
 			int orig_tbls_len = orig_tbls.length;
 			for (int i = 0; i < orig_tbls_len; ++i) {

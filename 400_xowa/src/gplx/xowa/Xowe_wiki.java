@@ -124,6 +124,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xowe_page_mgr			Page_mgr() {return page_mgr;} private final    Xowe_page_mgr page_mgr;
 	public Xop_sanitizer			Sanitizer() {return sanitizer;} private final    Xop_sanitizer sanitizer;
 	public byte[]					Wtxt__expand_tmpl(byte[] src) {return parser_mgr.Main().Expand_tmpl(src);}
+	public boolean                  Embeddable_enabled() {return embeddable_enabled;} public void Embeddable_enabled_(boolean v) {this.embeddable_enabled = v;} private boolean embeddable_enabled;
 
 
 	public Xow_hdump_mgr			Html__hdump_mgr() {return html__hdump_mgr;} private final    Xow_hdump_mgr html__hdump_mgr;
