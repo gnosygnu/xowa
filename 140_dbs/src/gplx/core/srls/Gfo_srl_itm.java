@@ -13,9 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.srls; import gplx.*; import gplx.core.*;
-public interface Gfo_srl_itm {
-	Gfo_srl_itm		Make_new(Gfo_srl_ctx ctx);
-	void			Load(Gfo_srl_ctx ctx, Gfo_srl_itm owner, Gfo_srl_mgr_rdr rdr);
-	void			Save(Gfo_srl_ctx ctx, Gfo_srl_itm owner, Gfo_srl_mgr_wtr wtr);
-}

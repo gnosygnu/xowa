@@ -13,22 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.gfui.ipts.*; import gplx.gfui.gfxs.*;
-public interface GxwCbkHost {
-	boolean KeyDownCbk(IptEvtDataKey data);
-	boolean KeyHeldCbk(IptEvtDataKeyHeld data);
-	boolean KeyUpCbk(IptEvtDataKey data);
-	boolean MouseDownCbk(IptEvtDataMouse data);
-	boolean MouseUpCbk(IptEvtDataMouse data);
-	boolean MouseMoveCbk(IptEvtDataMouse data);
-	boolean MouseWheelCbk(IptEvtDataMouse data);
-	boolean PaintCbk(PaintArgs paint);
-	boolean PaintBackgroundCbk(PaintArgs paint);
-	boolean DisposeCbk();
-	boolean SizeChangedCbk();
-	boolean FocusGotCbk();
-	boolean FocusLostCbk();
-	boolean VisibleChangedCbk();
-		//boolean WndProcCbk(WindowMessage windowMessage);
-	}

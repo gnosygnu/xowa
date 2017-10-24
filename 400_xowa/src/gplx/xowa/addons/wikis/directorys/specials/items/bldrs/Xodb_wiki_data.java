@@ -13,14 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*; import gplx.xowa.addons.wikis.directorys.specials.items.*;
-import gplx.core.ios.streams.*;
-public class Xodb_wiki_data {
-	public Xodb_wiki_data(String domain, Io_url core_url) {
-		this.domain = domain;
-		this.core_url = core_url;
-	}
-	public String Domain() {return domain;} private final    String domain;
-	public Io_url Core_url() {return core_url;} private final    Io_url core_url;
-	public byte Text_zip_tid() {return text_zip_tid;} private byte text_zip_tid = Io_stream_tid_.Tid__raw;
-}

@@ -13,9 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.mustaches; import gplx.*; import gplx.langs.*;
-import gplx.langs.jsons.*;
-public interface Mustache_doc_itm {
-	boolean				Mustache__write(String key, Mustache_bfr bfr);
-	Mustache_doc_itm[]	Mustache__subs(String key);
-}

@@ -13,7 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.cnvs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-public class Xof_cnv_wkr_ {
-	public static final byte Tid_null = Byte_.Max_value_127, Tid_n = 0, Tid_y = 1;
-}

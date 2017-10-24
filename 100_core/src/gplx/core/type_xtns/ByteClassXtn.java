@@ -13,14 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.type_xtns; import gplx.*; import gplx.core.*;
-public class ByteClassXtn extends ClassXtn_base implements ClassXtn {
-	public static final    String Key_const = "byte";
-	public String Key() {return Key_const;}
-	@Override public Class<?> UnderClass()					{return byte.class;}
-	public Object DefaultValue()								{return 0;}
-	public boolean Eq(Object lhs, Object rhs) {try {return Byte_.Cast(lhs) == Byte_.Cast(rhs);} catch (Exception e) {Err_.Noop(e); return false;}}
-	@Override public Object ParseOrNull(String raw)				{return raw == null ? (Object)null : Byte_.Parse(raw);}
-	@Override public Object XtoDb(Object obj)					{return Byte_.Cast(obj);}
-	public static final    ByteClassXtn Instance =  new ByteClassXtn(); ByteClassXtn() {} // added to ClassXtnPool by default
-}

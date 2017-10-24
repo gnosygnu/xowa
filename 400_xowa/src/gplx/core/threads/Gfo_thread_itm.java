@@ -13,10 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.threads; import gplx.*; import gplx.core.*;
-public interface Gfo_thread_itm {
-	String		Thread__name();
-	void		Thread__exec();
-	void		Thread__stop();
-	boolean		Thread__can_delete(String key);
-}

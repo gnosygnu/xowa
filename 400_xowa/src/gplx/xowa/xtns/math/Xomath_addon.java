@@ -13,15 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.addons.*;
-import gplx.xowa.bldrs.wkrs.*;
-public class Xomath_addon implements Xoax_addon_itm, Xoax_addon_itm__bldr {
-	public Xob_cmd[] Bldr_cmds() {
-		return new Xob_cmd[]
-		{ gplx.xowa.xtns.math.bldrs.Xomath_check_cmd.Prototype
-		};
-	}
-
-	public String Addon__key() {return "xowa.parsers.math";}
-}

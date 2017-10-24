@@ -13,9 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.sql_dumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.strings.*;
-public interface Xosql_dump_cbk {
-	void On_fld_done(int fld_idx, byte[] src, int val_bgn, int val_end);
-	void On_row_done();
-}

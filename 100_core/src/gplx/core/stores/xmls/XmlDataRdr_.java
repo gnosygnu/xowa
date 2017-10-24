@@ -13,11 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.stores.xmls; import gplx.*; import gplx.core.*; import gplx.core.stores.*;
-public class XmlDataRdr_ {
-	public static XmlDataRdr file_(Io_url url) {
-		String text = Io_mgr.Instance.LoadFilStr(url);
-		return new XmlDataRdr(text);
-	}
-	public static XmlDataRdr text_(String text) {return new XmlDataRdr(text);}
-}

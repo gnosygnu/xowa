@@ -13,11 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*;
-public class Pp_pagelist_nde_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Basic() {
-		fxt.Test_parse_page_wiki_str("a<pagelist>b</pagelist>c", "ac");
-	}
-}

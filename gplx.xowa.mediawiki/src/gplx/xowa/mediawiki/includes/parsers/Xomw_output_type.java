@@ -13,13 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-public class Xomw_output_type {
-	public static final byte 
-	  Tid__html       = 1   // like parse()
-	, Tid__wiki       = 2   // like preSaveTransform()
-	, Tid__preprocess = 3   // like preprocess()
-	, Tid__msg        = 3
-	, Tid__plain      = 4   // like extractSections() - portions of the original are returned unchanged.
-	;
-}

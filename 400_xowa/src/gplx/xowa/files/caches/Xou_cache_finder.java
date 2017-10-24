@@ -13,9 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-public interface Xou_cache_finder {
-	boolean Find(Xow_wiki wiki, byte[] page_url, Xof_fsdb_itm fsdb_itm);
-	void Clear();
-	void Add(Xof_fsdb_itm fsdb_itm);
-}

@@ -13,9 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
-public class IptMouseWheel implements IptArg {
-	public String Key()					{return key;} private String key;
-	public boolean Eq(IptArg comp)			{return String_.Eq(key, comp.Key());}
-	public IptMouseWheel(String key)	{this.key = key;}
-}

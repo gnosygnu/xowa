@@ -13,8 +13,3 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios.drives; import gplx.*; import gplx.core.*; import gplx.core.ios.*;
-public interface Io_drive {
-	long Get_space_total(Io_url drive);
-	long Get_space_free (Io_url drive);
-}
