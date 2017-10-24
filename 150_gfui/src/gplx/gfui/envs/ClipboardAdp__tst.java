@@ -13,3 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.gfui.envs; import gplx.*; import gplx.gfui.*;
+import org.junit.*; import gplx.gfui.envs.*;
+public class ClipboardAdp__tst {
+	@Test  public void Basic() {
+		ClipboardAdp_.SetText("test");
+		Tfds.Eq(true, ClipboardAdp_.IsText());
+		Tfds.Eq("test", ClipboardAdp_.GetText());
+	}
+}

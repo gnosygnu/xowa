@@ -13,3 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.gfui.gfxs; import gplx.*; import gplx.gfui.*;
+import java.awt.Graphics2D;
+import gplx.gfui.imgs.*;
+public class GfxAdp_ {
+	@gplx.Internal protected static GfxAdp new_(Graphics2D graphics) {return GfxAdpBase.new_(graphics);}	
+	public static GfxAdp image_(ImageAdp image) {
+				Graphics2D graphics = (Graphics2D)((java.awt.Image)image.Under()).getGraphics();
+				return GfxAdpBase.new_(graphics);
+	}
+}

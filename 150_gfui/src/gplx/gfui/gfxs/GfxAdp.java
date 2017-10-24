@@ -13,3 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.gfui.gfxs; import gplx.*; import gplx.gfui.*;
+import gplx.gfui.draws.*; import gplx.gfui.imgs.*;
+public interface GfxAdp extends Rls_able {
+	void DrawLine(PenAdp pen, PointAdp src, PointAdp trg);
+	void DrawRect(PenAdp pen, int x, int y, int width, int height);
+	void DrawRect(PenAdp pen, PointAdp location, SizeAdp size);
+	void DrawRect(PenAdp pen, RectAdp rect);
+	void FillRect(SolidBrushAdp brush, int x, int y, int width, int height);
+	void DrawImage(ImageAdp image, PointAdp location);
+	void DrawImage(ImageAdp img, int trg_x, int trg_y, int trg_w, int trg_h, int src_x, int src_y, int src_w, int src_h);
+	void DrawStringXtn(String s, FontAdp font, SolidBrushAdp brush, float x, float y, float width, float height, GfxStringData sd);
+	float[] MeasureStringXtn(String s, FontAdp font, GfxStringData sd);
+}

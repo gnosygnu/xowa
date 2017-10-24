@@ -13,3 +13,35 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+public class Keyval_find_ {
+	public static Keyval Find(boolean fail, Keyval[] root, String... keys) {
+		Keyval found = null;
+
+		Keyval[] kvs = root;
+		int keys_len = keys.length;
+		for (int i = 0; i < keys_len; ++i) {
+			String key = keys[i];
+			int kvs_len = kvs.length;
+			found = null;
+			for (int j = 0; j < kvs_len; ++j) {
+				Keyval kv = kvs[j];
+				if (String_.Eq(kv.Key(), key)) {
+					found = kv;
+					break;
+				}
+			}
+			if (found == null) {
+				if (fail)
+					throw Err_.new_wo_type("could not find key", "key", key);
+				else
+					break;
+			}
+			if (i == keys_len - 1)
+				return found;
+			else
+				kvs = (Keyval[])found.Val();
+		}
+		return found;
+	}
+}

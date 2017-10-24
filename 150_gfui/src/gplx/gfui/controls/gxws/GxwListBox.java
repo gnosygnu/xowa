@@ -13,3 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+public interface GxwListBox extends GxwElem {
+	void Items_Add(Object item);
+	void Items_Clear();
+	int Items_Count();
+	int Items_SelIdx(); void Items_SelIdx_set(int v);
+	Object Items_SelObj();
+}

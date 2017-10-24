@@ -13,3 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.xowa.wikis.xwikis.interwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
+public class Xow_interwiki_itm {
+	public Xow_interwiki_itm(byte[] key, byte[] domain, byte[] url) {
+		this.key = key;
+		this.domain = domain;
+		this.url = url;
+	}
+	public byte[] Key() {return key;} private final    byte[] key;
+	public byte[] Domain() {return domain;} private final    byte[] domain;
+	public byte[] Url() {return url;} private final    byte[] url;
+}

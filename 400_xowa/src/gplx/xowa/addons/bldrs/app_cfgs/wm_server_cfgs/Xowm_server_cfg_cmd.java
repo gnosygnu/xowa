@@ -13,3 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.xowa.addons.bldrs.app_cfgs.wm_server_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.app_cfgs.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
+public class Xowm_server_cfg_cmd extends Xob_cmd__base {
+	public Xowm_server_cfg_cmd(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
+	@Override public void Cmd_run() {
+		new Xowm_server_cfg_mgr().Exec(bldr.App());
+	}
+
+	public static final String BLDR_CMD_KEY = "cfg.wikis.wm_server_cfg";
+	@Override public String Cmd_key() {return BLDR_CMD_KEY;}
+	public static final    Xob_cmd Prototype = new Xowm_server_cfg_cmd(null, null);
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xowm_server_cfg_cmd(bldr, wiki);}
+}

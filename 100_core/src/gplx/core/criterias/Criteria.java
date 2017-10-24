@@ -13,3 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.core.criterias; import gplx.*; import gplx.core.*;
+public interface Criteria extends To_str_able {
+	byte Tid();
+	boolean Matches(Object obj);
+	void Val_from_args(Hash_adp args);
+	void Val_as_obj_(Object obj);
+}

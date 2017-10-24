@@ -13,3 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+public class Gxw_html_load_tid_ {
+	public static final byte Tid_mem = 0, Tid_url = 1;
+	public static byte Xto_tid(String s) {
+		if		(String_.Eq(s, "mem"))			return Tid_mem;
+		else if	(String_.Eq(s, "url"))			return Tid_url;
+		else										throw Err_.new_unimplemented();
+	}
+}

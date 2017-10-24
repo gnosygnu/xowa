@@ -13,3 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.dbs.metas.updates; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
+public interface Schema_update_cmd {
+	String Name();
+	boolean Exec_is_done();
+	void Exec(Schema_db_mgr mgr, Db_conn conn);
+}

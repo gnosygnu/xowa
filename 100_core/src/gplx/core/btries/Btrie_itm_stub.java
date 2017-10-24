@@ -13,3 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.core.btries; import gplx.*; import gplx.core.*;
+public class Btrie_itm_stub {
+	public Btrie_itm_stub(byte tid, byte[] val) {this.tid = tid; this.val = val;}
+	public byte Tid() {return tid;} private byte tid;
+	public byte[] Val() {return val;} private byte[] val;
+}

@@ -13,3 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.gflucene.highlighters; import gplx.*; import gplx.gflucene.*;
+public class Gflucene_highlighter_item {
+	public int num;
+	public String text;
+	public Gflucene_highlighter_item(int num, String text) {
+		this.num = num;
+		this.text = text;
+	}
+}

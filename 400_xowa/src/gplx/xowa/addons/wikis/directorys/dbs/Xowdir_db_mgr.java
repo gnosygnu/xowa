@@ -13,3 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*;
+import gplx.dbs.*;
+public class Xowdir_db_mgr {
+	public Xowdir_db_mgr(Db_conn conn) {
+		tbl__wiki = new Xowdir_wiki_tbl(conn);
+		conn.Meta_tbl_assert(tbl__wiki);
+	}
+	public Xowdir_wiki_tbl Tbl__wiki() {return tbl__wiki;} private final    Xowdir_wiki_tbl tbl__wiki;
+}

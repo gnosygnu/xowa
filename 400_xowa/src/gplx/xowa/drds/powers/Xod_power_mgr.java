@@ -13,3 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.xowa.drds.powers; import gplx.*; import gplx.xowa.*; import gplx.xowa.drds.*;
+public interface Xod_power_mgr {
+	void Wake_lock__get(String name);
+	void Wake_lock__rls(String name);
+}

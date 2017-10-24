@@ -13,3 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.*;
+import gplx.xowa.guis.cbks.*;
+public interface Xofulltext_finder_cbk {
+	byte[] Page_ttl();
+	void Process_item_found(byte[] src, int hook_bgn, int hook_end, int word_bgn, int word_end, Xofulltext_word_node term);
+	void Process_page_done(byte[] src, Xofulltext_word_node tree_root);
+}

@@ -13,3 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
+public class XomwNamespaceItem {
+	public final    int id;
+	public final    byte[] name;
+	public XomwNamespaceItem(int id, byte[] name) {
+		this.id = id;
+		this.name = name;
+	}
+}

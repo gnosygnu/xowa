@@ -13,3 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+public class Sqlite_tid {
+	public static final int Tid_int = 1, Tid_text = 2, Tid_none = 3, Tid_real = 4, Tid_numeric = 5;
+}

@@ -13,3 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.core.net; import gplx.*; import gplx.core.*;
+public class Http_client_wtr_ {
+	public static Http_client_wtr new_stream() {return new Http_client_wtr__stream();}
+}

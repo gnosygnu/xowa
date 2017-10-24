@@ -13,3 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.core.lists; import gplx.*; import gplx.core.*;
+public class Iterator_objAry implements java.util.Iterator {
+	public boolean hasNext() {return ++pos < len;}
+	public Object next() {return ary[pos];}
+	public void remove() {pos = -1;}
+	Object[] ary; int pos = -1; int len = 0;
+	public Iterator_objAry(Object[] v, int count) {ary = v; len = count;}
+}

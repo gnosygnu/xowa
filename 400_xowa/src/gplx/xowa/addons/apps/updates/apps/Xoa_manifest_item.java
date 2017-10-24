@@ -13,3 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.xowa.addons.apps.updates.apps; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
+public class Xoa_manifest_item {
+	public Xoa_manifest_item(Io_url src, Io_url trg) {
+		this.src = src;
+		this.trg = trg;
+	}
+	public Io_url Src() {return src;} private final    Io_url src;
+	public Io_url Trg() {return trg;} private final    Io_url trg;
+}

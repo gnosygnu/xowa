@@ -13,3 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.core.stores; import gplx.*; import gplx.core.*;
+import gplx.core.gfo_ndes.*;
+public interface DataWtr extends SrlMgr {
+	Hash_adp EnvVars();
+
+	void InitWtr(String key, Object val);
+	void WriteTableBgn(String name, GfoFldList fields);
+	void WriteNodeBgn(String nodeName);
+	void WriteLeafBgn(String leafName);
+	void WriteData(String name, Object val);
+	void WriteNodeEnd();
+	void WriteLeafEnd();
+
+	void Clear();
+	String To_str();
+}

@@ -13,3 +13,6 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.core.lists; import gplx.*; import gplx.core.*;
+public interface ComparerAble extends java.util.Comparator {} 
+// public int compare(Object lhsObj, Object rhsObj) {}

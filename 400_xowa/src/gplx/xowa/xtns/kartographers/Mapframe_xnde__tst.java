@@ -13,3 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.xowa.xtns.kartographers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import org.junit.*;
+public class Mapframe_xnde__tst {
+	private final    Xop_fxt fxt = new Xop_fxt();
+	@Test   public void Basic() {
+		fxt.Test__parse__tmpl_to_html(String_.Concat_lines_nl_skip_last
+		( "<mapframe latitude='42.68' longitude='-114.79' zoom='3'>"
+		, "{ 'type':'Feature'"
+		, ", 'geometry': {}"
+		, "</mapframe>"
+		), ""
+		);
+	}
+}

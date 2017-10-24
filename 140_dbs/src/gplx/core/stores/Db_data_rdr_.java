@@ -13,3 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.core.stores; import gplx.*; import gplx.core.*;
+import java.sql.ResultSet;
+public class Db_data_rdr_ {
+		public static Db_data_rdr new_(ResultSet rdr, String commandText) {return new Db_data_rdr().ctor_db_data_rdr(rdr, commandText);}
+	}

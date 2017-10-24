@@ -13,3 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.core.primitives; import gplx.*; import gplx.core.*;
+public class Bool_ary_bldr {
+	private final    boolean[] ary;
+	public Bool_ary_bldr(int len) {
+		this.ary = new boolean[len];
+	}
+	public Bool_ary_bldr Set_many(int... v) {
+		int len = v.length;
+		for (int i = 0; i < len; i++)
+			ary[v[i]] = true;
+		return this;
+	}
+	public Bool_ary_bldr Set_rng(int bgn, int end) {
+		for (int i = bgn; i <= end; i++)
+			ary[i] = true;
+		return this;
+	}
+	public boolean[] To_ary() {
+		return ary;
+	}
+	public static Bool_ary_bldr New_u8() {return new Bool_ary_bldr(256);}
+}

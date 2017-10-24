@@ -13,3 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+import org.eclipse.swt.widgets.*;
+import gplx.gfui.controls.gxws.*;
+
+class Swt_core__basic extends Swt_core__base {
+	protected final Control             control;
+	public Swt_core__basic(Control control) {
+		super(control, control);
+		this.control = control;
+	}
+	@Override public void Invalidate() {control.redraw(); control.update();}
+	@Override public void Dispose() {control.dispose();}
+}

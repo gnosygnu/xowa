@@ -13,3 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
+package gplx.xowa.addons.apps.cfgs.specials.maints.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.maints.*;
+import gplx.xowa.specials.*; import gplx.core.net.qargs.*;
+public class Xocfg_maint_special implements Xow_special_page {
+	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
+		new Xocfg_maint_html().Bld_page_by_mustache(wiki.App(), page, this);
+	}
+
+	Xocfg_maint_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
+	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;
+	public Xow_special_page Special__clone()	{return this;}
+	public static final    Xow_special_page Prototype = new Xocfg_maint_special(Xow_special_meta.New_xo("XowaCfgMaint", "Option Maintenance"));
+}
