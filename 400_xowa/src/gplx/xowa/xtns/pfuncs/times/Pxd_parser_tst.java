@@ -16,9 +16,16 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pxd_parser_tst {
-	Bry_bfr bfr = Bry_bfr_.New_w_size(16); Pxd_parser parser = new Pxd_parser();
-	@Before public void init() {Datetime_now.Manual_y_(); Datetime_now.Manual_(test_date);} DateAdp test_date = DateAdp_.parse_fmt("2012-02-27", "yyyy-MM-dd");
-	@After public void teardown() {Datetime_now.Manual_n_();}
+	private final    Bry_bfr bfr = Bry_bfr_.New_w_size(16);
+	private final    Pxd_parser parser = new Pxd_parser();
+	private final    DateAdp test_date = DateAdp_.parse_fmt("2012-02-27", "yyyy-MM-dd");
+	@Before public void init() {
+		Datetime_now.Manual_y_();
+		Datetime_now.Manual_(test_date);
+	}
+	@After public void teardown() {
+		Datetime_now.Manual_n_();
+	}
 	@Test  public void Month_name_0__day__year()					{tst_date_("Mar 2 2001"				, "2001-03-02");}			// y:Mar-02-2001;Mar.02.2001;Mar 02, 2001 n:Mar/02/2001;Feb,05,2011 
 	@Test  public void Month_name_0__day__year__bad_day()			{tst_date_("Mar 32 2001"			, "Invalid day: 32");}
 	@Test  public void Month_name_0__day__year__bad_year()			{tst_date_("Mar 3 999"				, "0999-03-03");}
@@ -52,7 +59,9 @@ public class Pxd_parser_tst {
 	@Test  public void Unit_day_pos()								{tst_date_("+ 3 days"				, "2012-03-01");}
 	@Test  public void Unit_day_neg()								{tst_date_("- 3 days"				, "2012-02-24");}
 	@Test  public void Unit_day_neg_w_day()							{tst_date_("30 May 2012 -1 days"	, "2012-05-29");}	// PAGE:en.w:Main Page
-	@Test  public void Unit_week()									{tst_date_("- 1 week"				, "2012-02-26");}  // PURPOSE.FIX: "week" was not being handled; error on main Page; EX:da.wikipedia.org/Main_Page
+	@Test  public void Unit_day_neg_w_month()						{tst_date_("02-12-2001 -1 month"	, "2001-11-02");}	// PAGE:en.w:Portal:Current_events/December_2001; DATE:2017-11-26
+	@Test  public void Unit_day_neg_w_month_wrap()					{tst_date_("02-01-2000 -1 month"	, "1999-12-02");}	// PAGE:en.w:Portal:Current_events/December_2001; DATE:2017-11-26
+	@Test  public void Unit_week()									{tst_date_("- 1 week"				, "2012-02-26");}	// PURPOSE.FIX: "week" was not being handled; error on main Page; EX:da.wikipedia.org/Main_Page
 	@Test  public void Time_len_6()									{tst_time_("041526"					, "04:15:26.000");}
 	@Test  public void Time_len_12()								{tst_both_("201601020304"			, "2016-01-02 03:04:00.000");}	// PURPOSE: handle 12 digit datetime; PAGE:en.w:Boron; DATE:2015-07-29
 	@Test  public void Err_one_num()								{tst_time_("2"						, "Invalid year: 2");}	// occurs on some templates; PAGE:en.w:Voyager 1 and {{date}}

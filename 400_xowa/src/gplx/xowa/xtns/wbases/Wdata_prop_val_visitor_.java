@@ -169,7 +169,7 @@ public class Wdata_prop_val_visitor_ {
 		}
 		Wdata_prop_val_visitor.Write_langtext(bfr, text);
 	}
-	private static int To_pid_int(byte[] pid) {return Bry_.To_int_or(pid, 1, pid.length, -1);}	// skip "P" at bgn; EX: "p123" -> 123
+	public static int To_pid_int(byte[] pid) {return Bry_.To_int_or(pid, 1, pid.length, -1);}	// skip "P" at bgn; EX: "p123" -> 123
 	private static byte[] To_bry_by_str(Object o) {
 		String rv = String_.cast(o);
 		return rv == null ? null : Bry_.new_u8(rv);

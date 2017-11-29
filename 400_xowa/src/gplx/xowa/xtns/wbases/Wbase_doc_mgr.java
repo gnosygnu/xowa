@@ -95,7 +95,7 @@ public class Wbase_doc_mgr {
 	}
 	private static final    byte[] Bry__redirect = Bry_.new_a7("redirect");
 
-	private static byte[] Prepend_property_if_needed(byte[] bry) {
+	public static byte[] Prepend_property_if_needed(byte[] bry) {
 		int len = bry == null ? 0 : bry.length;
 		return	len > 1
 			&&	Byte_ascii.Case_lower(bry[0]) == Byte_ascii.Ltr_p

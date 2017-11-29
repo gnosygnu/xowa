@@ -31,7 +31,7 @@ public abstract class Wbase_claim_base implements CompareAble {
 	public abstract byte			Val_tid();
 	public abstract void			Welcome(Wbase_claim_visitor visitor);
 
-	public void						Rank_tid_(byte v) {this.rank_tid = v;} 
+	public Wbase_claim_base			Rank_tid_(byte v) {this.rank_tid = v; return this;} 
 	public void						Wguid_(byte[] v) {this.wguid = v;} 
 	public Wbase_claim_base			Qualifiers_(Wbase_claim_grp_list v) {qualifiers = v; return this;} 
 	public void						Qualifiers_order_(int[] v) {qualifiers_order = v;} 

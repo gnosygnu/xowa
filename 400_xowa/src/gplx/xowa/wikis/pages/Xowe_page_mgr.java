@@ -98,6 +98,9 @@ public class Xowe_page_mgr {
 				wiki.Html__hdump_mgr().Load_mgr().Load_by_xowe(page);
 				from_html_db = Bry_.Len_gt_0(page.Db().Html().Html_bry());	
 			}
+			else {
+				Gfo_usr_dlg_.Instance.Log_many("", "", "page_load: loaded wikitext; page=~{0} wikitext_len=~{1}", ttl.Full_db(), page.Db().Text().Text_bry().length);
+			}
 		}
 		page.Html_data().Hdump_exists_(from_html_db);
 

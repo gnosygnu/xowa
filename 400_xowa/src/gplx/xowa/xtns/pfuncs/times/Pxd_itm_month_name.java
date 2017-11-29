@@ -148,36 +148,54 @@ class Pxd_itm_month_name extends Pxd_itm_base implements Pxd_itm_prototype {
 	}
 }
 class Pxd_itm_unit extends Pxd_itm_base implements Pxd_itm_prototype {
-	public Pxd_itm_unit(int ary_idx, byte[] name, int seg_idx, int seg_multiple) {Ctor(ary_idx); this.name = name; Seg_idx_(seg_idx); this.seg_multiple = seg_multiple;} 
-	public byte[] Name() {return name;} private byte[] name;
+	private int seg_val = 1;
+	private int seg_multiple;
+	private boolean eval_done_by_relative_word;
+	public Pxd_itm_unit(int ary_idx, byte[] name, int seg_idx, int seg_multiple) {
+		Ctor(ary_idx);
+		this.name = name;
+		this.seg_multiple = seg_multiple;
+		Seg_idx_(seg_idx);
+	} 
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_unit;}
 	@Override public int Eval_idx() {return 10;}
-	int seg_val = 1; int seg_multiple;
+	public byte[] Name() {return name;} private final    byte[] name;
 	public Pxd_itm MakeNew(int ary_idx) {
 		return new Pxd_itm_unit(ary_idx, name, this.Seg_idx(), seg_val);
 	}
-	public void Unit_seg_val_(int v) {	// handled by relative; EX: next year
-		seg_val = v; seg_multiple = 1;
-		eval_done_by_relative = true;
-	}	private boolean eval_done_by_relative;		
-	@Override public boolean Eval(Pxd_parser state) {
-		if (eval_done_by_relative) return true;
-		state.Seg_idxs_(this, this.Seg_idx(), seg_val);
-		Pxd_itm[] tkns = state.Tkns();
+	public void Unit_seg_val_(int v) {	// handled by relative_word; EX: next year
+		this.seg_val = v;
+		this.seg_multiple = 1;
+		this.eval_done_by_relative_word = true;
+	}
+	@Override public boolean Eval(Pxd_parser dctx) {
+		if (eval_done_by_relative_word) return true;
+
+		// TOMBSTONE: "dctx.Seg_idxs_(this, this.Seg_idx(), seg_val);"; DATE:2017-11-28
+
+		// search for previous int; EX: "2 month", "-3 year"
+		Pxd_itm[] tkns = dctx.Tkns();
 		Pxd_itm_int itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), false);
-		if (itm_int == null) return false; // PAGE:s.w:Crich_Tramway_Village EX:Yearly DATE:2016-07-06
-		state.Seg_idxs_(itm_int, Pxd_itm_base.Seg_idx_skip);
+		if (itm_int == null) return false; // number may be omitted; EX:"Yearly" PAGE:s.w:Crich_Tramway_Village DATE:2016-07-06
+
+		// deactivate number_tkn; will be handled by relative_word_tkn; TOMBSTONE:"dctx.Seg_idxs_(itm_int, Pxd_itm_base.Seg_idx_skip);" DATE:2017-11-28
+		itm_int.Seg_idx_(Pxd_itm_base.Seg_idx_skip);
 		seg_val = itm_int.Val();
+
+		// search for neg sign; update seg_val if found
 		for (int i = itm_int.Ary_idx(); i > -1; i--) {
 			Pxd_itm itm = tkns[i];
 			switch (itm.Tkn_tid()) {
-				case Pxd_itm_.Tid_dash:														// negative sign; stop;
+				// found negative sign -> update seg_val and stop;
+				case Pxd_itm_.Tid_dash:
 					seg_val *= -1;
 					i = -1;
 					break;
-				case Pxd_itm_.Tid_dot: case Pxd_itm_.Tid_int: case Pxd_itm_.Tid_ws:	// ignore
+				// found ws -> ignore
+				case Pxd_itm_.Tid_dot: case Pxd_itm_.Tid_int: case Pxd_itm_.Tid_ws:
 					break;
-				default:																		// word; stop;
+				// found some other word -> stop
+				default:
 					i = -1;
 					break;
 			}
@@ -291,26 +309,33 @@ class Pxd_itm_time_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 	;
 	Pxd_itm_time_relative() {}		
 }
-class Pxd_itm_unit_relative extends Pxd_itm_base implements Pxd_itm_prototype {
-	public Pxd_itm_unit_relative(int adj, int ary_idx) {Ctor(ary_idx); this.adj = adj;}
+class Pxd_itm_unit_relative extends Pxd_itm_base implements Pxd_itm_prototype { // EX: "next year"
+	private final    int adj;
+	public Pxd_itm_unit_relative(int adj, int ary_idx) {
+		Ctor(ary_idx); 
+		this.adj = adj;
+	}
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_unit_relative;}
 	@Override public int Eval_idx() {return 5;}
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_unit_relative(adj, ary_idx);}
 	@Override public boolean Eval(Pxd_parser state) {
+		// find next token: EX: sec, hour, day, fortnight, month, etc.
 		Pxd_itm itm = Pxd_itm_.Find_fwd_by_tid(state.Tkns(), this.Ary_idx() + 1, Pxd_itm_.Tid_unit);
 		if (itm == null) state.Err_set(Pft_func_time_log.Invalid_date, Bfr_arg_.New_int(adj));
+
+		// cast to unit; may fail; EX:update in "last update" as per "March 2006 [last update]";PAGE:s.w:Synesthesia;DATE:2016-07-06
 		Pxd_itm_unit unit_tkn = (Pxd_itm_unit)itm;
-		if (unit_tkn == null) {state.Err_set(Pft_func_time_log.Invalid_date, Bfr_arg_.New_int(adj)); return false;} // PAGE:s.w:Synesthesia EX:"March 2006 [last update]"; DATE:2016-07-06
+		if (unit_tkn == null) {state.Err_set(Pft_func_time_log.Invalid_date, Bfr_arg_.New_int(adj)); return false;}
+
 		unit_tkn.Unit_seg_val_(adj);
 		return true;
 	}
 	@Override public boolean Time_ini(DateAdpBldr bldr) {return true;}
 	public static final    Pxd_itm_unit_relative
-	  Next		= new Pxd_itm_unit_relative(1)
-	, Prev		= new Pxd_itm_unit_relative(-1)
-	, This		= new Pxd_itm_unit_relative(0)
+	  Next		= new Pxd_itm_unit_relative( 1, 0)
+	, Prev		= new Pxd_itm_unit_relative(-1, 0)
+	, This		= new Pxd_itm_unit_relative( 0, 0)
 	;
-	Pxd_itm_unit_relative(int adj) {this.adj = adj;} private int adj;
 }
 class Pxd_itm_unixtime extends Pxd_itm_base implements Pxd_itm_prototype {
 	private long unixtime;

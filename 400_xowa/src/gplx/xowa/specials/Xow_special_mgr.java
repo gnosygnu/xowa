@@ -18,7 +18,7 @@ import gplx.xowa.users.history.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.specials.*;
 import gplx.xowa.specials.*;
 import gplx.xowa.specials.allPages.*; import gplx.xowa.specials.nearby.*; import gplx.xowa.specials.statistics.*; import gplx.xowa.xtns.translates.*; import gplx.xowa.specials.movePage.*;
-import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.addons.wikis.imports.*; import gplx.xowa.specials.xowa.diags.*;
+import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.addons.wikis.imports.*; import gplx.xowa.specials.xowa.diags.*; import gplx.xowa.xtns.wbases.mediawiki.repo.includes.specials.*;
 import gplx.xowa.xtns.wbases.specials.*;
 import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
 import gplx.xowa.specials.mgrs.*; import gplx.xowa.addons.wikis.searchs.specials.*;
@@ -39,6 +39,7 @@ public class Xow_special_mgr {
 	public Nearby_mgr					Page_nearby() {return page_nearby;} private final    Nearby_mgr page_nearby = new Nearby_mgr();
 	public Xop_mylanguage_page			Page_mylanguage() {return page_mylanguage;} private final    Xop_mylanguage_page page_mylanguage = new Xop_mylanguage_page();
 	public Wdata_itemByTitle_page		Page_itemByTitle() {return page_itemByTitle;} private final    Wdata_itemByTitle_page page_itemByTitle = new Wdata_itemByTitle_page();
+	public Xow_special_page				Page_entityPage() {return page_entityPage;} private final    Xow_special_page page_entityPage = Wbase_entityPage.Prototype;
 	public Xop_statistics_page			Page_statistics() {return page_statistics;} private final    Xop_statistics_page page_statistics = new Xop_statistics_page();
 	public Move_page					Page_movePage() {return page_movePage;} private final    Move_page page_movePage = new Move_page();
 	public System_data_page				Page_system_data() {return page_system_data;} private final    System_data_page page_system_data = new System_data_page();
@@ -57,6 +58,7 @@ public class Xow_special_mgr {
 		hash.Add_str_obj(Xow_special_meta_.Ttl__nearby					, page_nearby);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__my_language				, page_mylanguage);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__item_by_title			, page_itemByTitle);
+		hash.Add_str_obj(Wbase_entityPage.SPECIAL_KEY					, page_entityPage);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__statistics				, page_statistics);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__move_page				, page_movePage);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__system_data				, page_system_data);

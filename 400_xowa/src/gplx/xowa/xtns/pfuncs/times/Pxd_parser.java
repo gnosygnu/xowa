@@ -17,7 +17,7 @@ package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import g
 import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.btries.*; import gplx.core.log_msgs.*;
 class Pxd_parser {
 	private final    Btrie_rv trv = new Btrie_rv();
-	byte[] src; int cur_pos, tkn_bgn_pos, src_len, tkn_type;
+	private byte[] src; int cur_pos, tkn_bgn_pos, src_len, tkn_type;
 	public Pxd_itm[] Tkns() {return tkns;} Pxd_itm[] tkns;
 	public int Tkns_len() {return tkns_len;} private int tkns_len;
 	public Pxd_itm[] Data_ary() {return data_ary;} Pxd_itm[] data_ary;

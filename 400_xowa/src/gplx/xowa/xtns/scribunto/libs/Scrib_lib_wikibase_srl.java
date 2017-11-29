@@ -118,6 +118,16 @@ class Scrib_lib_wikibase_srl {
 		}
 		return rv;
 	}
+	public static Keyval[] Srl_claims_prop_ary(Wbase_prop_mgr prop_mgr, String pid, Wbase_claim_base[] itms, int base_adj) {
+		Scrib_lib_wikibase_srl_visitor visitor = new Scrib_lib_wikibase_srl_visitor();
+		int len = itms.length;
+		Keyval[] rv = new Keyval[len];
+		for (int i = 0; i < len; i++) {
+			Wbase_claim_base itm = itms[i];
+			rv[i] = Keyval_.int_(i + base_adj, Srl_claims_prop_itm(prop_mgr, visitor, pid, itm, base_adj));	// NOTE: must be super 0 or super 1; DATE:2014-05-09
+		}
+		return rv;
+	}
 	private static Keyval[] Srl_claims_prop_itm(Wbase_prop_mgr prop_mgr, Scrib_lib_wikibase_srl_visitor visitor, String pid, Wbase_claim_base itm, int base_adj) {
 		List_adp list = List_adp_.New();
 		list.Add(Keyval_.new_("id", pid));

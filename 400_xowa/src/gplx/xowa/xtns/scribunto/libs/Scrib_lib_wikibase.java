@@ -14,13 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.parsers.*;	
+import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.xtns.scribunto.procs.*;
+import gplx.xowa.xtns.wbases.mediawiki.client.includes.*; import gplx.xowa.xtns.wbases.mediawiki.client.dataAccess.scribunto.*;	
 public class Scrib_lib_wikibase implements Scrib_lib {
+	private Wbase_entity_accessor entity_accessor;
 	public Scrib_lib_wikibase(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
-	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
+	public Scrib_lib Init() {
+		procs.Init_by_lib(this, Proc_names); 
+		this.entity_accessor = new Wbase_entity_accessor(core.App().Wiki_mgr().Wdata_mgr().Doc_mgr);
+		return this;
+	}
 	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_wikibase(core);}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
@@ -32,10 +38,13 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
 			case Proc_getLabel:							return GetLabel(args, rslt);
+				// getLabelByLanguage
 			case Proc_getEntity:						return GetEntity(args, rslt);
+			case Proc_getEntityStatements:				return GetEntityStatements(args, rslt);
 			case Proc_getSetting:						return GetSetting(args, rslt);
 			case Proc_getEntityUrl:						return GetEntityUrl(args, rslt);
 			case Proc_renderSnak:						return RenderSnak(args, rslt);
+				// formatValue
 			case Proc_renderSnaks:						return RenderSnaks(args, rslt);
 			case Proc_getEntityId:						return GetEntityId(args, rslt);
 			case Proc_getUserLang:						return GetUserLang(args, rslt);
@@ -49,16 +58,20 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		}
 	}
 	private static final int 
-	  Proc_getLabel = 0, Proc_getEntity = 1, Proc_getSetting = 2, Proc_getEntityUrl = 3, Proc_renderSnak = 4, Proc_renderSnaks = 5, Proc_getEntityId = 6, Proc_getUserLang = 7
-	, Proc_getDescription = 8, Proc_resolvePropertyId = 9, Proc_getSiteLinkPageName = 10, Proc_incrementExpensiveFunctionCount = 11, Proc_getPropertyOrder = 12, Proc_orderProperties = 13;
-	public static final String Invk_getLabel = "getLabel", Invk_getEntity = "getEntity", Invk_getSetting = "getSetting", Invk_getEntityUrl = "getEntityUrl"
-	, Invk_renderSnak = "renderSnak", Invk_renderSnaks = "renderSnaks", Invk_getEntityId = "getEntityId", Invk_getUserLang = "getUserLang"
-	, Invk_getDescription = "getDescription", Invk_resolvePropertyId = "resolvePropertyId", Invk_getSiteLinkPageName = "getSiteLinkPageName", Invk_incrementExpensiveFunctionCount = "incrementExpensiveFunctionCount"
-	, Invk_getPropertyOrder = "getPropertyOrder", Invk_orderProperties = "orderProperties"
+	  Proc_getLabel = 0 //, Proc_getLabelByLanguage = 1
+	, Proc_getEntity = 2, Proc_getEntityStatements = 3, Proc_getSetting = 4, Proc_getEntityUrl = 5, Proc_renderSnak = 6//, Proc_formatValue = 7
+	, Proc_renderSnaks = 8, Proc_getEntityId = 9, Proc_getUserLang = 10, Proc_getDescription = 11, Proc_resolvePropertyId = 12
+	, Proc_getSiteLinkPageName = 13, Proc_incrementExpensiveFunctionCount = 14, Proc_getPropertyOrder = 15, Proc_orderProperties = 16;
+	public static final String
+	  Invk_getLabel = "getLabel", Invk_getLabelByLanguage = "getLabelByLanguage", Invk_getEntity = "getEntity", Invk_getEntityStatements = "getEntityStatements"
+	, Invk_getSetting = "getSetting", Invk_getEntityUrl = "getEntityUrl", Invk_renderSnak = "renderSnak", Invk_formatValue = "formatValue", Invk_renderSnaks = "renderSnaks"
+	, Invk_getEntityId = "getEntityId", Invk_getUserLang = "getUserLang", Invk_getDescription = "getDescription", Invk_resolvePropertyId = "resolvePropertyId"
+	, Invk_getSiteLinkPageName = "getSiteLinkPageName", Invk_incrementExpensiveFunctionCount = "incrementExpensiveFunctionCount", Invk_getPropertyOrder = "getPropertyOrder", Invk_orderProperties = "orderProperties"
 	;
 	private static final    String[] Proc_names = String_.Ary
-	( Invk_getLabel, Invk_getEntity, Invk_getSetting, Invk_getEntityUrl, Invk_renderSnak, Invk_renderSnaks, Invk_getEntityId, Invk_getUserLang
-	, Invk_getDescription, Invk_resolvePropertyId, Invk_getSiteLinkPageName, Invk_incrementExpensiveFunctionCount, Invk_getPropertyOrder, Invk_orderProperties
+	( Invk_getLabel, Invk_getLabelByLanguage, Invk_getEntity, Invk_getEntityStatements, Invk_getSetting, Invk_getEntityUrl, Invk_renderSnak, Invk_formatValue, Invk_renderSnaks
+	, Invk_getEntityId, Invk_getUserLang, Invk_getDescription, Invk_resolvePropertyId, Invk_getSiteLinkPageName, Invk_incrementExpensiveFunctionCount
+	, Invk_getPropertyOrder, Invk_orderProperties
 	);
 	public void Notify_page_changed() {if (notify_page_changed_fnc != null) core.Interpreter().CallFunction(notify_page_changed_fnc.Id(), Keyval_.Ary_empty);}
 	public boolean GetLabel(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
@@ -70,7 +83,11 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		Wbase_prop_mgr prop_mgr = core.Wiki().Appe().Wiki_mgr().Wdata_mgr().Prop_mgr();
 		return rslt.Init_obj(Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc, true, false));	// "false": wbase now always uses v2; PAGE:ja.w:東京競馬場; DATE:2015-07-28
 	}
-	public boolean GetEntityUrl(Scrib_proc_args args, Scrib_proc_rslt rslt)		{throw Err_.new_("wbase", "getEntityUrl not implemented", "url", core.Page().Url().To_str());}
+	public boolean GetEntityUrl(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		byte[] entityId = args.Pull_bry(0);
+		byte[] entity_url = Wbase_client.getDefaultInstance().RepoLinker().getEntityUrl(entityId);
+		return rslt.Init_obj(entity_url);
+	}
 	public boolean GetSetting(Scrib_proc_args args, Scrib_proc_rslt rslt)			{throw Err_.new_("wbase", "getSetting not implemented", "url", core.Page().Url().To_str());}
 	public boolean RenderSnak(Scrib_proc_args args, Scrib_proc_rslt rslt)	{
 		Xowe_wiki wiki = core.Wiki();
@@ -109,7 +126,51 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	public boolean GetGlobalSiteId(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
 		return rslt.Init_obj(core.Wiki().Domain_abrv());	// ;siteGlobalID: This site's global ID (e.g. <code>'itwiki'</code>), as used in the sites table. Default: <code>$wgDBname</code>.; REF:/xtns/Wikibase/docs/options.wiki
 	}
-	private static Wdata_doc Get_wdoc_or_null(Scrib_proc_args args, Scrib_core core) {
+	public boolean GetEntityStatements(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		byte[] prefixedEntityId = args.Pull_bry(0);
+		byte[] propertyId = args.Pull_bry(1);
+		byte[] rank = args.Pull_bry(2);
+
+		Wbase_prop_mgr prop_mgr = core.Wiki().Appe().Wiki_mgr().Wdata_mgr().Prop_mgr();
+		Wbase_claim_base[] statements = this.entity_accessor.getEntityStatements(prefixedEntityId, propertyId, rank);
+		if (statements == null)
+			return rslt.Init_null();
+		return rslt.Init_obj(Scrib_lib_wikibase_srl.Srl_claims_prop_ary(prop_mgr, String_.new_u8(propertyId), statements, 1));
+	}
+	/*
+public function formatValues( $snaksSerialization ) {
+	$this->checkType( 'formatValues', 1, $snaksSerialization, 'table' );
+	try {
+		$ret = [ $this->getSnakSerializationRenderer( 'rich-wikitext' )->renderSnaks( $snaksSerialization ) ];
+		return $ret;
+	} catch ( DeserializationException $e ) {
+		throw new ScribuntoException( 'wikibase-error-deserialize-error' );
+	}
+}	
+public function getLabelByLanguage( $prefixedEntityId, $languageCode ) {
+	$this->checkType( 'getLabelByLanguage', 1, $prefixedEntityId, 'String' );
+	$this->checkType( 'getLabelByLanguage', 2, $languageCode, 'String' );
+	return [ $this->getLanguageIndependentLuaBindings()->getLabelByLanguage( $prefixedEntityId, $languageCode ) ];
+}
+private function getLanguageIndependentLuaBindings() {
+	if ( $this->languageIndependentLuaBindings === null ) {
+		$this->languageIndependentLuaBindings = $this->newLanguageIndependentLuaBindings();
+	}
+	return $this->languageIndependentLuaBindings;
+}
+private function newLanguageIndependentLuaBindings() {
+	$wikibaseClient = WikibaseClient::getDefaultInstance();
+	return new WikibaseLanguageIndependentLuaBindings(
+		$wikibaseClient->getStore()->getSiteLinkLookup(),
+		$wikibaseClient->getSettings(),
+		$this->getUsageAccumulator(),
+		$this->getEntityIdParser(),
+		$wikibaseClient->getTermLookup(),
+		$wikibaseClient->getTermsLanguages(),
+		$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
+	);
+}		*/
+private static Wdata_doc Get_wdoc_or_null(Scrib_proc_args args, Scrib_core core) {
 		// get qid / pid from scrib_arg[0]; if none, return null;
 		byte[] xid_bry = args.Pull_bry(0); if (Bry_.Len_eq_0(xid_bry)) return null;	// NOTE: some Modules do not pass in an argument; return early, else spurious warning "invalid qid for ttl" (since ttl is blank); EX:w:Module:Authority_control; DATE:2013-10-27
 
