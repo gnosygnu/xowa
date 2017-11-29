@@ -31,8 +31,9 @@ public class Wbase_claim_type_ {
 	, Tid__externalid							= 11
 	, Tid__commonsmedia							= 12
 	, Tid__geo_shape							= 13
+	, Tid__tabular_data							= 14
 	;
-	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.data_type", 14);
+	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.data_type", 15);
 	public static final    Wbase_enum_itm
 	  Itm__unknown					= New(Tid__unknown			, "unknown")
 	, Itm__bad						= New(Tid__bad				, "bad")				// NOTE: wikidata identifies several entries as "bad"; Q1615351|'s-Graveland, Q107538|Baco; DATE:2013-10-20
@@ -48,6 +49,7 @@ public class Wbase_claim_type_ {
 	, Itm__externalid				= New(Tid__externalid		, "external-id")		// EX:wd:Property:P1003
 	, Itm__math						= New(Tid__math				, "math")				// EX:wd:Property:P2534
 	, Itm__geo_shape				= New(Tid__geo_shape		, "geo-shape")			// EX:wd:Property:P3896
+	, Itm__tabular_data				= New(Tid__tabular_data		, "tabular-data")		// EX:wd:Property:P4179
 	;
 	private static Wbase_enum_itm New(byte tid, String key)						{return New(tid, key, key);}
 	private static Wbase_enum_itm New(byte tid, String key, String scrib)		{return Reg.Add(new Wbase_claim_type(tid, key, scrib));}
