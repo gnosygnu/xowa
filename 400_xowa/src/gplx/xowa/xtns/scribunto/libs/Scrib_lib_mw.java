@@ -388,6 +388,15 @@ class Scrib_lib_mw_callParserFunction_sorter implements gplx.core.lists.Comparer
 	public int compare(Object lhsObj, Object rhsObj) {
 		Keyval lhs = (Keyval)lhsObj;
 		Keyval rhs = (Keyval)rhsObj;
+
+		// handle null kv; PAGE:en.w:Abziri DATE:2017-11-29
+		if		(lhs == null && rhs == null)
+			return CompareAble_.Same;
+		else if (lhs == null)
+			return CompareAble_.More;
+		else if (rhs == null)
+			return CompareAble_.Less;
+
 		Object lhs_key = lhs.Key_as_obj();
 		Object rhs_key = rhs.Key_as_obj();
 		boolean lhs_is_int = Type_.Eq(lhs_key.getClass(), Int_.Cls_ref_type);

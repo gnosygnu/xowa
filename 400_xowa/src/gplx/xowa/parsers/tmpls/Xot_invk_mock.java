@@ -63,6 +63,10 @@ public class Xot_invk_mock implements Xot_invk {
 		int len = args.length;
 		for (int i = 0; i < len; i++) {
 			Keyval kv = args[i];
+
+			// handle null kv; PAGE:en.w:Abziri DATE:2017-11-29
+			if (kv == null) continue;
+
 			String kv_key_str = kv.Key();
 			Object kv_key_obj = kv.Key_as_obj();
 			Arg_nde_tkn_mock nde_tkn = null;

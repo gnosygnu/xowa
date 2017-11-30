@@ -87,6 +87,10 @@ public class Scrib_lib_mw__invoke_tst {
 		fxt.Test_lib_proc_kv(lib, Scrib_lib_mw.Invk_callParserFunction, Scrib_kv_utl_.base1_many_ary_("current", "DISPLAYTITLE", "''a''"), "");
 		Tfds.Eq("<i>a</i>", String_.new_a7(fxt.Parser_fxt().Ctx().Page().Html_data().Display_ttl()));
 	}
+	@Test  public void CallParserFunction__null() {	// PURPOSE.fix: null arg should not fail; PAGE:en.w:Abziri DATE:2017-11-29
+		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");
+		fxt.Test_lib_proc_kv(lib, Scrib_lib_mw.Invk_callParserFunction, Scrib_kv_utl_.flat_many_(1, "current", 2, "#coordinates", 3, Keyval_.Ary(Keyval_.int_(1, "a"), Keyval_.int_(3, "b"), null)), "");// failed with NullPointerException
+	}
 	@Test  public void ExpandTemplate_tmpl() {
 		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");
 		fxt.Parser_fxt().Data_create("Template:A", "b{{{key1}}}c");

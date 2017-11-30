@@ -228,8 +228,13 @@ class Scrib_lua_rsp_bldr {
 		bfr.Add_str_a7("a:").Add_int_variable(len).Add_str_a7(":{");
 		for (int i = 0; i < len; i++) {
 			Keyval kv = ary[i];
-			Bld_obj(bfr, kv.Key_as_obj());
-			Bld_obj(bfr, kv.Val());
+			if (kv == null) { // handle null kv; PAGE:en.w:Abziri DATE:2017-11-29
+				Bld_obj(bfr, gplx.langs.phps.Php_srl_parser.NULL_ARRAY_ITEM);
+			}
+			else {
+				Bld_obj(bfr, kv.Key_as_obj());
+				Bld_obj(bfr, kv.Val());
+			}
 		}
 		bfr.Add_byte(Byte_ascii.Curly_end);
 	}

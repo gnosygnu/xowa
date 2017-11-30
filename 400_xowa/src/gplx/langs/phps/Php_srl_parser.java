@@ -30,6 +30,7 @@ public class Php_srl_parser {
 		return rv;
 	}
 	Keyval Xto_kv(Php_srl_itm_kv itm) {
+		if (itm == null) return null;
 		Php_srl_itm itm_key = itm.Key();
 		Object key = itm_key == null ? null : itm_key.Val();
 		Php_srl_itm itm_val = itm.Val();
@@ -72,6 +73,13 @@ public class Php_srl_parser {
 		for (int i = 0; i < subs_len; i++) {
 			Php_srl_itm_kv kv = factory.Kv();
 			Php_srl_itm key_itm = Parse_itm(pos);
+
+			// handle null kv; PAGE:en.w:Abziri DATE:2017-11-29
+			if (	key_itm.Tid() == Php_srl_itm_.Tid_string 
+				&&	String_.Eq(Php_srl_parser.NULL_ARRAY_ITEM, (String)key_itm.Val())) {
+				rv.Subs_add(null);
+				continue;
+			} 
 			kv.Key_(key_itm);
 			Php_srl_itm val_itm = Parse_itm(pos);
 			kv.Val_(val_itm);
@@ -191,6 +199,7 @@ public class Php_srl_parser {
 		String msg = String_.Format(fmt, args) + " " + Int_.To_str(bgn) + " " + String_.new_u8__by_len(raw, bgn, 20);
 		return Err_.new_wo_type(msg);
 	}
+	public static final String NULL_ARRAY_ITEM = "NULL_ARRAY_ITEM";
 }
 class Php_srl_factory {
 	public Php_srl_itm		Nil()									{return Php_srl_itm_nil.Nil;}
