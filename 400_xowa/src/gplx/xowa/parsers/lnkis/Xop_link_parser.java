@@ -101,7 +101,14 @@ public class Xop_link_parser {
 			// title-case by ns; needed to handle "link=w:Help:a" which needs to generate "w:Help:A"
 			if (page_ttl_is_valid) {					// valid_ttl; parse in same ns to title-case; EX:link=w:Help:a -> Help:A; DATE:2016-01-11
 				page_ttl = wiki.Ttl_parse(page_ttl.Full_db_wo_xwiki());
-				page_bry = page_ttl.Full_db_w_anch();
+
+				// some links can be invalid; EX:"|link=en.w:User_talk:" PAGE:en.w:Wikipedia:Teahouse/The_menu; DATE:2017-12-02
+				if (page_ttl == null) {
+					page_ttl_is_valid = false;
+					page_bry = Bry_.Empty;
+				}
+				else
+					page_bry = page_ttl.Full_db_w_anch();
 			}
 			tmp_bfr.Add(Xoh_href_.Bry__wiki).Add(page_bry);
 		}

@@ -41,4 +41,13 @@ public class Xoh_file_wtr__image__link__tst {
 		+ "</a>"));
 		fxt.Init_xwiki_clear();
 	}
+	@Test  public void Link__xwiki_empty_ns() {	// handle NPE in odd case where link has xwiki,ns, but no ttl; EX:"|link=en.w:User_talk:" PAGE:en.w:Wikipedia:Teahouse/The_menu; DATE:2017-12-02
+		fxt.Init_xwiki_add_wiki_and_user_("en", "en.wikipedia.org");
+		fxt.Test_parse_page_wiki_str
+		( "[[File:A.png|link=en:User_talk:|abc]]", String_.Concat_lines_nl_skip_last
+		( "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\">" // NOTE: href is to "File:A.png", not "en:User_talk:"
+		+	"<img id=\"xoimg_0\" alt=\"abc\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" />"
+		+ "</a>"
+		));		
+	}
 }

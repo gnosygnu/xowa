@@ -33,6 +33,14 @@ public class Xoh_file_mgr {
 	public void Init_by_page(Xoh_wtr_ctx hctx, Xoae_page page) {file_wtr.Init_by_page(hctx, page);}
 	public void Write_or_queue(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {Write_or_queue(bfr, page, ctx, hctx, src, lnki, file_wtr.Bld_alt(Bool_.N, ctx, Xoh_wtr_ctx.Alt, src, lnki));}
 	public void Write_or_queue(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] alt_text) {
+		try {
+			file_wtr.Write_file(bfr, ctx, hctx, src, lnki, this.Lnki_eval(Xof_exec_tid.Tid_wiki_page, ctx, page, lnki), alt_text);
+		}
+		catch (Exception e) { // do not let fatal exceptions during link_parse break page; DATE:2017-12-02
+			String link_text = String_.new_u8(src, lnki.Src_bgn(), lnki.Src_end());
+			bfr.Add_str_u8("<span style='color:red'>FAIL.PARSER.LINK:" + link_text + "</span>");
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal err when parsing link; link=~{0} err=~{1}", link_text, Err_.Message_gplx_log(e));			
+		}
 		file_wtr.Write_file(bfr, ctx, hctx, src, lnki, this.Lnki_eval(Xof_exec_tid.Tid_wiki_page, ctx, page, lnki), alt_text);
 	}
 	public Xof_file_itm Lnki_eval(int exec_tid, Xop_ctx ctx, Xoae_page page, Xop_lnki_tkn lnki) {return Lnki_eval(exec_tid, ctx, page, page.File_queue(), lnki.Ttl().Page_url(), lnki.Lnki_type(), lnki.Upright(), lnki.W(), lnki.H(), lnki.Time(), lnki.Page(), lnki.Ns_id() == Xow_ns_.Tid__media);}
