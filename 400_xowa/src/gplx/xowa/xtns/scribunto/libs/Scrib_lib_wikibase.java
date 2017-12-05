@@ -17,7 +17,7 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.xtns.scribunto.procs.*;
-import gplx.xowa.xtns.wbases.mediawiki.client.includes.*; import gplx.xowa.xtns.wbases.mediawiki.client.dataAccess.scribunto.*;	
+import gplx.xowa.xtns.wbases.mediawiki.client.includes.*; import gplx.xowa.xtns.wbases.mediawiki.client.includes.dataAccess.scribunto.*;	
 public class Scrib_lib_wikibase implements Scrib_lib {
 	private Wbase_entity_accessor entity_accessor;
 	public Scrib_lib_wikibase(Scrib_core core) {this.core = core;} private Scrib_core core;
