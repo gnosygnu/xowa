@@ -258,6 +258,15 @@ public class Bry_find_ {
 		}
 		return end;
 	}
+	public static boolean[] Find_fwd_while_in_gen(byte... ary) {
+		boolean[] rv = new boolean[256];
+		int len = ary.length;
+		for (int i = 0; i < len; i++) {
+			rv[ary[i]] = true;
+		}
+		return rv;
+	}
+
 	public static int Find_fwd_until(byte[] src, int cur, int end, byte until_byte) {
 		while (true) {
 			if (	cur == end

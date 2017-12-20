@@ -41,7 +41,6 @@ public class Xoh_file_mgr {
 			bfr.Add_str_u8("<span style='color:red'>FAIL.PARSER.LINK:" + link_text + "</span>");
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal err when parsing link; link=~{0} err=~{1}", link_text, Err_.Message_gplx_log(e));			
 		}
-		file_wtr.Write_file(bfr, ctx, hctx, src, lnki, this.Lnki_eval(Xof_exec_tid.Tid_wiki_page, ctx, page, lnki), alt_text);
 	}
 	public Xof_file_itm Lnki_eval(int exec_tid, Xop_ctx ctx, Xoae_page page, Xop_lnki_tkn lnki) {return Lnki_eval(exec_tid, ctx, page, page.File_queue(), lnki.Ttl().Page_url(), lnki.Lnki_type(), lnki.Upright(), lnki.W(), lnki.H(), lnki.Time(), lnki.Page(), lnki.Ns_id() == Xow_ns_.Tid__media);}
 	public Xof_file_itm Lnki_eval(int exec_tid, Xop_ctx ctx, Xoae_page page, Xof_xfer_queue queue, byte[] lnki_ttl, byte lnki_type, double lnki_upright, int lnki_w, int lnki_h, double lnki_time, int lnki_page, boolean lnki_is_media_ns) {

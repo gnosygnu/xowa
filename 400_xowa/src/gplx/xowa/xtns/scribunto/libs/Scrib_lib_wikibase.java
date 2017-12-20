@@ -17,14 +17,17 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.xtns.scribunto.procs.*;
-import gplx.xowa.xtns.wbases.mediawiki.client.includes.*; import gplx.xowa.xtns.wbases.mediawiki.client.includes.dataAccess.scribunto.*;	
+import gplx.xowa.xtns.wbases.mediawiki.client.includes.*; import gplx.xowa.xtns.wbases.mediawiki.client.includes.dataAccess.scribunto.*;
 public class Scrib_lib_wikibase implements Scrib_lib {
 	private Wbase_entity_accessor entity_accessor;
+	private WikibaseLanguageIndependentLuaBindings wikibaseLanguageIndependentLuaBindings;
 	public Scrib_lib_wikibase(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {
 		procs.Init_by_lib(this, Proc_names); 
-		this.entity_accessor = new Wbase_entity_accessor(core.App().Wiki_mgr().Wdata_mgr().Doc_mgr);
+		Wbase_doc_mgr entityMgr = core.App().Wiki_mgr().Wdata_mgr().Doc_mgr;
+		this.entity_accessor = new Wbase_entity_accessor(entityMgr);
+		this.wikibaseLanguageIndependentLuaBindings = new WikibaseLanguageIndependentLuaBindings(entityMgr);
 		return this;
 	}
 	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_wikibase(core);}
@@ -147,30 +150,13 @@ public function formatValues( $snaksSerialization ) {
 		throw new ScribuntoException( 'wikibase-error-deserialize-error' );
 	}
 }	
-public function getLabelByLanguage( $prefixedEntityId, $languageCode ) {
-	$this->checkType( 'getLabelByLanguage', 1, $prefixedEntityId, 'String' );
-	$this->checkType( 'getLabelByLanguage', 2, $languageCode, 'String' );
-	return [ $this->getLanguageIndependentLuaBindings()->getLabelByLanguage( $prefixedEntityId, $languageCode ) ];
-}
-private function getLanguageIndependentLuaBindings() {
-	if ( $this->languageIndependentLuaBindings === null ) {
-		$this->languageIndependentLuaBindings = $this->newLanguageIndependentLuaBindings();
+*/
+	public boolean GetLabelByLanguage(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		byte[] prefixedEntityId = args.Pull_bry(0);
+		byte[] languageCode = args.Pull_bry(1);
+		return rslt.Init_obj(wikibaseLanguageIndependentLuaBindings.getLabelByLanguage(prefixedEntityId, languageCode));
 	}
-	return $this->languageIndependentLuaBindings;
-}
-private function newLanguageIndependentLuaBindings() {
-	$wikibaseClient = WikibaseClient::getDefaultInstance();
-	return new WikibaseLanguageIndependentLuaBindings(
-		$wikibaseClient->getStore()->getSiteLinkLookup(),
-		$wikibaseClient->getSettings(),
-		$this->getUsageAccumulator(),
-		$this->getEntityIdParser(),
-		$wikibaseClient->getTermLookup(),
-		$wikibaseClient->getTermsLanguages(),
-		$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
-	);
-}		*/
-private static Wdata_doc Get_wdoc_or_null(Scrib_proc_args args, Scrib_core core) {
+	private static Wdata_doc Get_wdoc_or_null(Scrib_proc_args args, Scrib_core core) {
 		// get qid / pid from scrib_arg[0]; if none, return null;
 		byte[] xid_bry = args.Pull_bry(0); if (Bry_.Len_eq_0(xid_bry)) return null;	// NOTE: some Modules do not pass in an argument; return early, else spurious warning "invalid qid for ttl" (since ttl is blank); EX:w:Module:Authority_control; DATE:2013-10-27
 
