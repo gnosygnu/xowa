@@ -111,13 +111,13 @@ public class Scrib_lib_title_tst {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_redirectTarget, Object_.Ary("A1")									, Scrib_invoke_func_fxt.Null_rslt_ary);
 	}
 
-	private static void Wiki_orig_tbl__create(Xowe_wiki wiki) {
+	public static void Wiki_orig_tbl__create(Xowe_wiki wiki) {
 		Xowe_wiki_.Create(wiki, 1, "dump.xml");
 		gplx.xowa.wikis.data.Xow_db_file text_db = wiki.Data__core_mgr().Dbs__make_by_tid(gplx.xowa.wikis.data.Xow_db_file_.Tid__text); text_db.Tbl__text().Create_tbl();
 		gplx.fsdb.Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, Bool_.Y);
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
 	}
-	private static void Wiki_orig_tbl__insert(Xowe_wiki wiki, String ttl_str, int w, int h) {
+	public static void Wiki_orig_tbl__insert(Xowe_wiki wiki, String ttl_str, int w, int h) {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
 		wiki.File__orig_mgr().Insert(gplx.xowa.files.repos.Xof_repo_tid_.Tid__remote, ttl_bry, gplx.xowa.files.Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
 	}

@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.langs.jsons.*;
-class Scrib_lib_text__json_util {
+public class Scrib_lib_text__json_util {
 	private final    Json_wtr wtr = new Json_wtr();
 	public void Reindex_arrays(Scrib_lib_text__reindex_data rv, Keyval[] kv_ary, boolean is_encoding) {
 		int next = 0;
@@ -118,11 +118,37 @@ class Scrib_lib_text__json_util {
 		return rv;
 	}
 	private Object Decode_ary_sub(Json_ary ary) {
+		boolean subs_are_primitive = true;
+
+		// if ary has sub_ary / sub_nde, then unflag subs_are_primitive
 		int len = ary.Len();
-		Object[] rv = new Object[len];
-		for (int i = 0; i < len; ++i) {
-			Json_itm itm = ary.Get_at(i);
-			rv[i] = Decode_obj(itm);
+		if (len > 0) {
+			Json_itm sub = ary.Get_at(0);
+			switch (sub.Tid()) {
+				case Json_itm_.Tid__nde:
+				case Json_itm_.Tid__ary:
+					subs_are_primitive = false;
+					break;
+			}
+		}
+
+		// generate array
+		Object[] rv = null;
+		// if subs_are_primitive, then just generate an Object[]
+		if (subs_are_primitive) {
+			rv = new Object[len];
+			for (int i = 0; i < len; ++i) {
+				Json_itm itm = ary.Get_at(i);
+				rv[i] = Decode_obj(itm);
+			}
+		}
+		// else generate a Keyval where val is ary / nde
+		else {
+			rv = new Keyval[len];
+			for (int i = 0; i < len; ++i) {
+				Json_itm itm = ary.Get_at(i);
+				rv[i] = Keyval_.int_(i, Decode_obj(itm));
+			}
 		}
 		return rv;
 	}
@@ -208,14 +234,4 @@ class KeyVal__sorter__key_is_numeric implements gplx.core.lists.ComparerAble {
 		return CompareAble_.Compare(lhs_int, rhs_int);
 	}
 	public static final    KeyVal__sorter__key_is_numeric Instance = new KeyVal__sorter__key_is_numeric(); KeyVal__sorter__key_is_numeric() {}
-}
-class Scrib_lib_text__reindex_data {
-	public boolean				Rv_is_kvy() {return rv_is_kvy;} private boolean rv_is_kvy;
-	public Keyval[]			Rv_as_kvy() {return rv_as_kvy;} private Keyval[] rv_as_kvy;
-	public Object		Rv_as_ary() {return rv_as_ary;} private Object rv_as_ary;	
-	public void Init(boolean rv_is_kvy, Keyval[] rv_as_kvy, Object rv_as_ary) {
-		this.rv_is_kvy = rv_is_kvy;
-		this.rv_as_kvy = rv_as_kvy;
-		this.rv_as_ary = rv_as_ary;
-	}
 }

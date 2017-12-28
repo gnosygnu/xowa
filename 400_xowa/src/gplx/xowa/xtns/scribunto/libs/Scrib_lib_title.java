@@ -175,7 +175,7 @@ public class Scrib_lib_title implements Scrib_lib {
 	}	private static final    Keyval[] GetFileInfo_absent = Keyval_.Ary(Keyval_.new_("exists", false), Keyval_.new_("width", 0), Keyval_.new_("height", 0));	// NOTE: must supply non-null values for w / h, else Modules will fail with nil errors; PAGE:pl.w:Andrespol DATE:2016-08-01
 	public boolean GetContent(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
-		byte[] rv = GetContentInternal(ttl_bry);
+		byte[] rv = GetContentInternal(core, core.Wiki(), ttl_bry);
 		return rv == null ? rslt.Init_obj(null) : rslt.Init_obj(String_.new_u8(rv));
 	}
 	public boolean GetCurrentTitle(Scrib_proc_args args, Scrib_proc_rslt rslt) {
@@ -184,9 +184,8 @@ public class Scrib_lib_title implements Scrib_lib {
 	public boolean ProtectionLevels(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		return rslt.Init_obj(protectionLevels_dflt);
 	}
-	private byte[] GetContentInternal(byte[] ttl_bry) {
-		Xowe_wiki wiki = core.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry); if (ttl == null) return null;
+	public static byte[] GetContentInternal(Scrib_core core, Xowe_wiki wiki, byte[] ttl_bry) {
+		Xoa_ttl ttl = wiki.Ttl_parse(ttl_bry); if (ttl == null) return null;
 		Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm_2(ttl);
 		byte[] rv = null;
 		if (page_itm != null) {

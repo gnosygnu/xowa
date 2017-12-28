@@ -188,29 +188,92 @@ public class Scrib_lib_text_json_tst {
 		, Kv_ary_utl.new_(Bool_.Y, new Object[] {1, 2, 3, new Object[] {4, 5, new Object[] {6, 7, 8}, 9}})
 		);
 	}
-	@Test   public void Nde__smoke() {
-		json_fxt.Test_json_encode(fxt, lib
-		, Scrib_lib_text__json_util.Flag__none
-		, Keyval_.Ary
-		( Keyval_.new_("axes", Keyval_.Ary
-		(	Keyval_.int_(1, Keyval_.Ary
-		(		Keyval_.new_("type", "x")
-		))
-		,	Keyval_.int_(2, Keyval_.Ary
-		(		Keyval_.new_("type", "y")
-		))
-		))
-		)
+	@Test   public void Nested__ary__nde() {
+		json_fxt.Test_json_roundtrip(fxt, lib
 		, Json_doc.Make_str_by_apos
 		( "{ 'axes':"
 		, "  ["
 		, "    { 'type':'x'"
+		, "    , 'name':'X'"
 		, "    }"
 		, "  , { 'type':'y'"
+		, "    , 'name':'Y'"
 		, "    }"
 		, "  ]"
 		, "}"
 		)
+		, Keyval_.Ary
+		( Keyval_.new_("axes", Keyval_.Ary
+		(	Keyval_.int_(1, Keyval_.Ary
+		(		Keyval_.new_("type", "x")
+		,       Keyval_.new_("name", "X")
+		))
+		,	Keyval_.int_(2, Keyval_.Ary
+		(		Keyval_.new_("type", "y")
+		,       Keyval_.new_("name", "Y")
+		))
+		))
+		)
+		);
+	}
+	@Test   public void Nested__ary__ary() {
+		json_fxt.Test_json_roundtrip(fxt, lib
+		, Json_doc.Make_str_by_apos
+		( "{ 'axes':"
+		, "  [ "
+		, "    [ 'a1'"
+		, "    , 'a2'"
+		, "    ]"
+		, "  , "
+		, "    [ 'b1'"
+		, "    , 'b2'"
+		, "    ]"
+		, "  ]"
+		, "}"
+		)
+		, Keyval_.Ary
+		( Keyval_.new_("axes", Keyval_.Ary
+		(	Keyval_.int_(1, new Object[]
+		{		"a1"
+		,       "a2"
+		})
+		,	Keyval_.int_(2, new Object[]
+		{		"b1"
+		,       "b2"
+		})
+		))
+		)
+		);
+	}
+	@Test   public void Nested__ary__ary_nde() {
+		json_fxt.Test_json_roundtrip(fxt, lib
+		, Json_doc.Make_str_by_apos
+		( "{ 'axes':"
+		, "  [ "
+		, "    ["
+		, "      { 'type':'x1'"
+		, "      , 'name':'X1'"
+		, "      }"
+		, "    , { 'type':'y1'"
+		, "      , 'name':'Y1'"
+		, "      }"
+		, "    ]"
+		, "  ]"
+		, "}"
+		)
+		, Keyval_.Ary
+		( Keyval_.new_("axes", Keyval_.Ary
+		(	  Keyval_.int_(1, Keyval_.Ary
+		(		  Keyval_.int_(1, Keyval_.Ary
+		(			  Keyval_.new_("type", "x1")
+		,			  Keyval_.new_("name", "X1")
+		))
+		, 		Keyval_.int_(2, Keyval_.Ary
+		(			Keyval_.new_("type", "y1")
+		,			Keyval_.new_("name", "Y1")
+		))
+		))
+		)))
 		);
 	}
 	@Test   public void Decode__key__int() {

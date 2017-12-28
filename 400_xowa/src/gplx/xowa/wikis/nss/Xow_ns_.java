@@ -27,6 +27,8 @@ public class Xow_ns_ {
 	, Tid__help				=  12				, Tid__help_talk			=  13
 	, Tid__category			=  14				, Tid__category_talk		=  15
 	, Tid__portal			= 100				, Tid__portal_talk			= 101
+	, Tid__config			= 482				, Tid__config_talk			= 483
+	, Tid__data				= 486				, Tid__data_talk			= 487
 	, Tid__module			= 828				, Tid__module_talk			= 829
 	, Tid__null				= Int_.Min_value
 	;
@@ -42,11 +44,13 @@ public class Xow_ns_ {
 	, Key__help				= "Help"			, Key__help_talk			= "Help_talk"
 	, Key__category			= "Category"		, Key__category_talk		= "Category_talk"
 	, Key__portal			= "Portal"			, Key__portal_talk			= "Portal_talk"
+	, Key__config			= "Config"			, Key__config_talk			= "Config_talk"
+	, Key__data				= "Data"			, Key__data_talk			= "Data_talk"
 	, Key__module			= "Module"			, Key__module_talk			= "Module_talk"
 	, Key__null				= "null"
 	, Key__wikipedia		= "Wikipedia"
 	;
-	public static final byte[]
+	public static final    byte[]
 	  Bry__media			= Bry_.new_a7(Key__media)
 	, Bry__special			= Bry_.new_a7(Key__special)
 	, Bry__main				= Bry_.new_a7(Key__main)			, Bry__talk					= Bry_.new_a7(Key__talk)
@@ -58,6 +62,8 @@ public class Xow_ns_ {
 	, Bry__help				= Bry_.new_a7(Key__help)			, Bry__help_talk			= Bry_.new_a7(Key__help_talk)
 	, Bry__category			= Bry_.new_a7(Key__category)		, Bry__category_talk		= Bry_.new_a7(Key__category_talk)
 	, Bry__portal			= Bry_.new_a7(Key__portal)			, Bry__portal_talk			= Bry_.new_a7(Key__portal_talk)
+	, Bry__config			= Bry_.new_a7(Key__config)			, Bry__config_talk			= Bry_.new_a7(Key__config_talk)
+	, Bry__data				= Bry_.new_a7(Key__data)			, Bry__data_talk			= Bry_.new_a7(Key__data_talk)
 	, Bry__module			= Bry_.new_a7(Key__module)			, Bry__module_talk			= Bry_.new_a7(Key__module_talk)
 	, Bry__null				= Bry_.new_a7(Key__null)
 	;
@@ -65,8 +71,8 @@ public class Xow_ns_ {
 	  Alias__wikipedia = "Wikipedia"
 	, Alias__image = "Image"
 	;
-	public static final byte[] Alias__image__bry = Bry_.new_a7(Alias__image);
-	public static final byte[] 
+	public static final    byte[] Alias__image__bry = Bry_.new_a7(Alias__image);
+	public static final    byte[] 
 	  Bry__template_w_colon	= Bry_.new_a7(Key__template + ":")
 	, Bry__module_w_colon	= Bry_.new_a7(Key__module + ":")
 	;

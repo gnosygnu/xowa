@@ -355,10 +355,21 @@ public class Bry_ {
 	public static byte[] Mid_safe(byte[] src, int bgn, int end) {
 		if (src == null) return null;
 		int src_len = src.length;
-		if		(bgn < 0)			bgn = 0;
-		if		(end >= src_len)	end = src_len;
-		if		(bgn > end) bgn = end;
-		else if (end < bgn) end = bgn;
+		if (bgn < 0)
+			bgn = 0;
+		else if (bgn >= src_len)
+			bgn = src_len;
+
+		if (end < 0)
+			end = 0;
+		else if (end >= src_len)
+			end = src_len;
+
+		if (bgn > end)
+			bgn = end;
+		else if (end < bgn)
+			end = bgn;
+
 		return Mid(src, bgn, end);
 	}
 	public static byte[] Mid(byte[] src, int bgn) {return Mid(src, bgn, src.length);}

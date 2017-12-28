@@ -122,17 +122,18 @@ class Luaj_value_ {
 		else if	(Object_.Eq(c, String_.Cls_ref_type))		return LuaValue.valueOf((String)o);
 		else if	(Object_.Eq(c, Double_.Cls_ref_type))		return LuaValue.valueOf((Double)o);
 		else if	(Object_.Eq(c, byte[].class))				return LuaValue.valueOf(String_.new_u8((byte[])o));
-		else if	(Object_.Eq(c, Keyval.class))				return Kv_ary_to_lua_tbl(server, (Keyval)o);
-		else if	(Object_.Eq(c, Keyval[].class))				return Kv_ary_to_lua_tbl(server, (Keyval[])o);
+		else if	(Object_.Eq(c, Keyval.class))				return Make_lua_tbl_by_kv_ary(server, (Keyval)o);
+		else if	(Object_.Eq(c, Keyval[].class))				return Make_lua_tbl_by_kv_ary(server, (Keyval[])o);
+		else if	(Object_.Eq(c, Object[].class))				return Make_lua_tbl_by_obj_ary(server, ((Object[])o));	// PAGE:de.w:Reicholzheim DATE:2017-12-25
 		else if	(Object_.Eq(c, Long_.Cls_ref_type))			return LuaValue.valueOf((Long)o);
 		else if	(Object_.Eq(c, Scrib_lua_proc.class))		return server.Get_closure_by_id(((Scrib_lua_proc)o).Id());
 		else if	(Object_.Eq(c, Float_.Cls_ref_type))		return LuaValue.valueOf((Float)o);
 		else if	(Object_.Eq(c, Char_.Cls_ref_type))			return LuaValue.valueOf((Character)o);
 		else if	(Object_.Eq(c, Short_.Cls_ref_type))		return LuaValue.valueOf((Short)o);
 		else if	(Object_.Eq(c, Decimal_adp.class))			return LuaValue.valueOf(((Decimal_adp)o).To_double());	// DATE:2016-08-01
-		else return LuaValue.NIL; 
+		else                     							return LuaValue.NIL; 
 	}
-	private static LuaTable Kv_ary_to_lua_tbl(Luaj_server server, Keyval... ary) {
+	private static LuaTable Make_lua_tbl_by_kv_ary(Luaj_server server, Keyval... ary) {
 		LuaTable rv = LuaValue.tableOf();
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
@@ -147,6 +148,16 @@ class Luaj_value_ {
 					rv.set(itm.Key(), itm_val);
 					break;
 			}				
+		}
+		return rv;
+	}	
+	private static LuaTable Make_lua_tbl_by_obj_ary(Luaj_server server, Object... ary) {
+		LuaTable rv = LuaValue.tableOf();
+		int len = ary.length;
+		for (int i = 0; i < len; i++) {
+			Object itm = ary[i];
+			LuaValue itm_val = Obj_to_lua_val(server, itm);
+			rv.set(i + List_adp_.Base1, itm_val); // NOTE: + 1 b/c lua array are 1-based
 		}
 		return rv;
 	}	

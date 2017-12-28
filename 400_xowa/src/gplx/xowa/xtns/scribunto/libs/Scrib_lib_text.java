@@ -19,7 +19,6 @@ import gplx.xowa.langs.msgs.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_lib_text implements Scrib_lib {
 	private final    Scrib_lib_text__json_util json_util = new Scrib_lib_text__json_util();
-	private final    Scrib_lib_text__reindex_data reindex_data = new Scrib_lib_text__reindex_data();
 	public Scrib_lib_text(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
@@ -80,6 +79,7 @@ public class Scrib_lib_text implements Scrib_lib {
 		if (	itm_is_nde
 			&&	!Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys)
 			) {
+			Scrib_lib_text__reindex_data reindex_data = new Scrib_lib_text__reindex_data();
 			json_util.Reindex_arrays(reindex_data, itm_as_nde, true);
 			if (reindex_data.Rv_is_kvy()) {
 				itm_as_nde = reindex_data.Rv_as_kvy();
@@ -108,6 +108,11 @@ public class Scrib_lib_text implements Scrib_lib {
 		if (Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__try_fixing))
 			opts = Bitmask_.Add_int(opts, Scrib_lib_text__json_util.Flag__try_fixing);
 
+		return JsonDecodeStatic(args, rslt, core, json_util, json, opts, flags);
+	}
+	public static boolean JsonDecodeStatic
+		( Scrib_proc_args args, Scrib_proc_rslt rslt, Scrib_core core, Scrib_lib_text__json_util json_util
+		, byte[] json, int opts, int flags) {
 		// decode json to Object; note that Bool_.Y means ary and Bool_.N means ary
 		byte rv_tid = json_util.Decode(core.App().Utl__json_parser(), json, opts);
 		if (rv_tid == Bool_.__byte) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to decode String " + String_.new_u8(json));
@@ -116,6 +121,7 @@ public class Scrib_lib_text implements Scrib_lib {
 
 			// reindex unless preserve_keys passed
 			if (!(Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys))) {
+				Scrib_lib_text__reindex_data reindex_data = new Scrib_lib_text__reindex_data();
 				json_util.Reindex_arrays(reindex_data, rv_as_kvy, false);
 				rv_as_kvy = reindex_data.Rv_is_kvy() ? (Keyval[])reindex_data.Rv_as_kvy() : (Keyval[])reindex_data.Rv_as_ary();
 			}					
@@ -124,6 +130,7 @@ public class Scrib_lib_text implements Scrib_lib {
 		else
 			return rslt.Init_obj(json_util.Decode_rslt_as_ary());
 	}
+
 	public void Notify_wiki_changed() {if (notify_wiki_changed_fnc != null) core.Interpreter().CallFunction(notify_wiki_changed_fnc.Id(), Keyval_.Ary_empty);}
 	public boolean Init_text_for_wiki(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xow_msg_mgr msg_mgr = core.Wiki().Msg_mgr();
