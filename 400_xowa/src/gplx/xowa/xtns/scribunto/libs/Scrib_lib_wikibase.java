@@ -82,7 +82,10 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		return rslt.Init_obj(wdoc.Label_list__get_or_fallback(core.Lang()));
 	}
 	public boolean GetEntity(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		Wdata_doc wdoc = Get_wdoc_or_null(args, core); if (wdoc == null) return rslt.Init_ary_empty();
+		Wdata_doc wdoc = Get_wdoc_or_null(args, core); 
+		if (wdoc == null) 
+			return rslt.Init_obj(Keyval_.Ary_empty); // NOTE: was "rslt.Init_ary_empty()" PAGE:de.w:Critérium_International_2016 DATE:2017-12-30
+
 		Wbase_prop_mgr prop_mgr = core.Wiki().Appe().Wiki_mgr().Wdata_mgr().Prop_mgr();
 		return rslt.Init_obj(Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc, true, false));	// "false": wbase now always uses v2; PAGE:ja.w:東京競馬場; DATE:2015-07-28
 	}

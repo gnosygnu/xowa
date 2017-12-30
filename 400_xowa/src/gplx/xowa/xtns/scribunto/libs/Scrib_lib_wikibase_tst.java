@@ -84,6 +84,11 @@ public class Scrib_lib_wikibase_tst {
 		, "      value=b"
 		));
 	}
+	@Test  public void GetEntity__missing() { // PURPOSE: missing entity should return empty kv array; PAGE:de.w:Critérium_International_2016 DATE:2017-12-30
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntity, Object_.Ary("q2", false), String_.Concat_lines_nl_skip_last
+		( "1=" // not ""
+		));
+	}
 	@Test  public void ResolvePropertyId() {
 		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("Property:p2").Add_label("zh-hans", "prop_a").Xto_wdoc());
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_resolvePropertyId, Object_.Ary("p2"), "prop_a");

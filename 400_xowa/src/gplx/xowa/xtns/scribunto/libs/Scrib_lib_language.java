@@ -81,7 +81,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	public void Notify_lang_changed() {if (notify_lang_changed_fnc != null) core.Interpreter().CallFunction(notify_lang_changed_fnc.Id(), Keyval_.Ary_empty);}
 	public boolean GetContLangCode(Scrib_proc_args args, Scrib_proc_rslt rslt)		{return rslt.Init_obj(core.Ctx().Lang().Key_str());}
 	public boolean IsSupportedLanguage(Scrib_proc_args args, Scrib_proc_rslt rslt)	{return IsKnownLanguageTag(args, rslt);}// NOTE: checks if "MessagesXX.php" exists; note that xowa has all "MessagesXX.php"; for now, assume same functionality as IsKnownLanguageTag (worst case is that a small wiki depends on a lang not being there; will need to put in a "wiki.Langs()" then)
-	public boolean IsKnownLanguageTag(Scrib_proc_args args, Scrib_proc_rslt rslt) {	// NOTE: checks if in languages/Names.php
+	public boolean IsKnownLanguageTag(Scrib_proc_args args, Scrib_proc_rslt rslt) {	// NOTE: checks if in languages/Names.php; TODO: support foreign translations; EX: Englische is en in de.w
 		String lang_code = args.Cast_str_or_null(0);
 		boolean exists = false;
 		if (	lang_code != null									// null check; protecting against Module passing in nil from lua
