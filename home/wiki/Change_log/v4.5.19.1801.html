@@ -2,7 +2,7 @@
 <html dir="ltr">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>App/Import/Offline - XOWA</title>
+  <title>Change log/v4.5.19.1801 - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   
@@ -11,44 +11,150 @@
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>App/Import/Offline</span></h1>
+  <h1 id="firstHeading" class="firstHeading"><span>Change log/v4.5.19.1801</span></h1>
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
+    <h2>
+      <span class="mw-headline" id="Wiki">Wiki</span>
+    </h2>
+    <ul>
+      <li>
+        Package: Publish 2017-12 English Wikipedia.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="http://xowa.org/home/wiki/Wiki_setup/English_wikis.html" id="xolnki_2" title="Wiki setup/English wikis">Wiki_setup/English_wikis</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Package: Publish 2017-12 German Wikipedia.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="http://xowa.org/home/wiki/Wiki_setup/German_wikis.html" id="xolnki_3" title="Wiki setup/German wikis">Wiki_setup/German_wikis</a>
+      </dd>
+    </dl>
+    <h2>
+      <span class="mw-headline" id="PC">PC</span>
+    </h2>
     <p>
-      If you've downloaded a dump already, you can import the .bz2 file into XOWA.
+      <b>major</b>
     </p>
-    <h2>
-      <span class="mw-headline" id="Import_through_Dashboard.2FImport.2FOffline">Import through <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline.html" id="xolnki_2" title="Dashboard/Import/Offline" class="xowa-visited">Dashboard/Import/Offline</a></span>
-    </h2>
     <ul>
       <li>
-        Go to <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline.html" id="xolnki_3" title="Dashboard/Import/Offline" class="xowa-visited">Dashboard/Import/Offline</a>
+        Wikibase: Fix script error "=Module:Authority control:272 attempt to call nil" on many en.w pages.
       </li>
     </ul>
-    <h2>
-      <span class="mw-headline" id="Import_through_Dashboard.2FImport.2FOnline">Import through <a href="http://xowa.org/home/wiki/Dashboard/Import/Online.html" id="xolnki_4" title="Dashboard/Import/Online" class="xowa-visited">Dashboard/Import/Online</a></span>
-    </h2>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Add getBestStatements.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Apoptosis" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Apoptosis</a>
+      </dd>
+    </dl>
     <ul>
       <li>
-        Place the dump file in the wiki's directory. For example, if you have a "simplewiki" dump, put it in /xowa/wiki/simple.wikipedia.org/
+        Wikibase: Fix script error "MWServer.lua:59 vm error: java.lang.NullPointerException" on several dozen en.w pages.
       </li>
     </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Add getEntityUrl.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Wikipedia:Persondata" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Wikipedia:Persondata</a> <a href="https://en.wikipedia.org/wiki/Wikipedia:ChemSpider" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Wikipedia:ChemSpider</a> <a href="https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Women_artists/Redlinks_from_Wikidata" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Women_artists/Redlinks_from_Wikidata</a>
+      </dd>
+    </dl>
     <ul>
       <li>
-        Rename the dump to "simplewiki-latest-pages-articles.xml.bz2". The final path should be "/xowa/wiki/simple.wikipedia.org/simplewiki-latest-pages-articles.xml.bz2"
+        ParserFunctions: Fix script error 'bad argument #2 to 'formatDate' (not a valid timestamp)" on several dozen en.w pages.
       </li>
     </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Parse relative month.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: "01-12-2001 -1 month" -&gt; 2001-11-01 x&gt; "Invalid month: 12".
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Portal:Current_events/December_2001" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Portal:Current_events/December_2001</a>
+      </dd>
+    </dl>
+    <p>
+      <b>minor</b>
+    </p>
     <ul>
       <li>
-        Go to <a href="http://xowa.org/home/wiki/Dashboard/Import/Online.html" id="xolnki_5" title="Dashboard/Import/Online" class="xowa-visited">Dashboard/Import/Online</a> and click on the "latest" link.
+        Scribunto: Fix script error 'NullPointerException" on a few en.w pages.
       </li>
     </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: [1, 2, 3, 5] -&gt; [1, 2, 3, null, 5].
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Abziri" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Abziri</a>
+      </dd>
+    </dl>
     <ul>
       <li>
-        You will get a prompt about the file already existing. Answer "No" (do not delete the file).
+        Luaj: Fix script error '=Module:Television ratings graph:312 attempt to index ? (a nil value)" on a dozen en.w pages.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Parse tonumber('-') as nil not 0.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: tonumber('-') -&gt; nil x&gt; 0.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/List_of_Twin_Peaks_episodes" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/List_of_Twin_Peaks_episodes</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        JsonConfig: Fix script error '=Module:Data:8 attempt to index ? (a nil value)' on a dozen de.w pages.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Add JsonConfig support.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: /xowa/bin/any/xowa/xtns/JsonConfig.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://de.wikipedia.org/wiki/Reicholzheim" rel="nofollow" class="external free">https://de.wikipedia.org/wiki/Reicholzheim</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Parser: Fix 1 page not loading b/c of invalid file link.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Parse image.link args with with xwiki, namespace, but no title.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: [[File:A.png|link=en:User_talk:|abc]].
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Wikipedia:Teahouse/The_menu" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Wikipedia:Teahouse/The_menu</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Embeddable: Append categories to HTML. {requested by Rüdiger Gleim}
       </li>
     </ul>
   

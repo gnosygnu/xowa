@@ -1385,7 +1385,7 @@
         Applies to the Luaj engine (as opposed to the Lua engine)
       </li>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj.html" id="xolnki_15" title="Module:Diagnostics/Luaj">Module:Diagnostics/Luaj</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj.html" id="xolnki_15" title="Module:Diagnostics/Luaj" class="xowa-visited">Module:Diagnostics/Luaj</a>
       </li>
       <li>
         Tests changes to the luaj_xowa.jar
@@ -1497,6 +1497,19 @@
         </td>
         <td>
           12.34
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          tonumber('-') should be nil not 0
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|tonumber_lone|-}}
+        </td>
+        <td>
         </td>
         <td>
           <span style='color: green;'>pass</span>
