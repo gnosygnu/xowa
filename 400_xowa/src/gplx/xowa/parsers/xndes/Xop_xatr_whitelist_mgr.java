@@ -18,7 +18,8 @@ import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.parse
 public class Xop_xatr_whitelist_mgr {
 	private final    Hash_adp_bry grp_hash = Hash_adp_bry.cs();
 	private final    Btrie_rv trv = new Btrie_rv();
-	public boolean Chk(int tag_id, byte[] src, Mwh_atr_itm xatr) {
+	public boolean Chk(int tag_id, Mwh_atr_itm xatr) {
+		byte[] src = xatr.Src();
 		byte[] key_bry = xatr.Key_bry();
 		byte[] chk_bry; int chk_bgn, chk_end;
 		if (key_bry == null) {

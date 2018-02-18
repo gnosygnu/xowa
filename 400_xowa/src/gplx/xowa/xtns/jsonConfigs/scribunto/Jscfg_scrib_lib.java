@@ -18,6 +18,7 @@ import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*; impor
 import gplx.xowa.wikis.domains.*;
 public class Jscfg_scrib_lib implements Scrib_lib {
 	private final    Scrib_lib_text__json_util json_util = new Scrib_lib_text__json_util();
+	private final    Jscfg_localizer localizer = new Jscfg_localizer();
 	private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
@@ -57,6 +58,8 @@ public class Jscfg_scrib_lib implements Scrib_lib {
 			throw Err_.new_wo_type("bad argument #1 to 'get' (not a valid title) " + String_.new_u8(ttl_bry));
 		}
 
-		return Scrib_lib_text.JsonDecodeStatic(args, rslt, core, json_util, page, Scrib_lib_text__json_util.Opt__force_assoc, Scrib_lib_text__json_util.Flag__none);
+		Keyval[] rv = Scrib_lib_text.JsonDecodeStatic(args, core, json_util, page, Scrib_lib_text__json_util.Opt__force_assoc, Scrib_lib_text__json_util.Flag__none);
+		rv = localizer.Localize(core.Wiki().Lang(), page, rv);
+		return rslt.Init_obj(rv);
 	}
 }

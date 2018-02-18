@@ -14,12 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.core.bits.*;
+import gplx.core.bits.*; import gplx.core.btries.*;
 import gplx.xowa.langs.msgs.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_lib_text implements Scrib_lib {
 	private final    Scrib_lib_text__json_util json_util = new Scrib_lib_text__json_util();
-	public Scrib_lib_text(Scrib_core core) {this.core = core;} private Scrib_core core;
+	private final    Scrib_lib_text__nowiki_util nowiki_util = new Scrib_lib_text__nowiki_util();
+	private final    Scrib_core core;
+	private final    Btrie_slim_mgr trie;
+	public Scrib_lib_text(Scrib_core core) {
+		this.core = core;
+		this.trie = nowiki_util.Make_trie(gplx.xowa.parsers.xndes.Xop_xnde_tag_.Tag__nowiki.Name_bry());
+	}
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
 	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_text(core);}
@@ -47,7 +53,11 @@ public class Scrib_lib_text implements Scrib_lib {
 	, Invk_init_text_for_wiki = "init_text_for_wiki", Invk_jsonEncode = "jsonEncode", Invk_jsonDecode = "jsonDecode";
 	private static final    String[] Proc_names = String_.Ary(Invk_unstrip, Invk_unstripNoWiki, Invk_killMarkers, Invk_getEntityTable, Invk_init_text_for_wiki, Invk_jsonEncode, Invk_jsonDecode);
 	public boolean Unstrip(Scrib_proc_args args, Scrib_proc_rslt rslt)			{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
-	public boolean UnstripNoWiki(Scrib_proc_args args, Scrib_proc_rslt rslt)	{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
+	public boolean UnstripNoWiki(Scrib_proc_args args, Scrib_proc_rslt rslt)	{
+		// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
+		byte[] src = args.Pull_bry(0);
+		return rslt.Init_obj(nowiki_util.Strip_tag(core.Page().Url_bry_safe(), src, trie));
+	}
 	public boolean KillMarkers(Scrib_proc_args args, Scrib_proc_rslt rslt)		{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
 	public boolean GetEntityTable(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		if (html_entities == null) html_entities = Scrib_lib_text_html_entities.new_();
@@ -108,10 +118,11 @@ public class Scrib_lib_text implements Scrib_lib {
 		if (Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__try_fixing))
 			opts = Bitmask_.Add_int(opts, Scrib_lib_text__json_util.Flag__try_fixing);
 
-		return JsonDecodeStatic(args, rslt, core, json_util, json, opts, flags);
+		Keyval[] rv = JsonDecodeStatic(args, core, json_util, json, opts, flags);
+		return rslt.Init_obj(rv);
 	}
-	public static boolean JsonDecodeStatic
-		( Scrib_proc_args args, Scrib_proc_rslt rslt, Scrib_core core, Scrib_lib_text__json_util json_util
+	public static Keyval[] JsonDecodeStatic
+		( Scrib_proc_args args, Scrib_core core, Scrib_lib_text__json_util json_util
 		, byte[] json, int opts, int flags) {
 		// decode json to Object; note that Bool_.Y means ary and Bool_.N means ary
 		byte rv_tid = json_util.Decode(core.App().Utl__json_parser(), json, opts);
@@ -125,10 +136,10 @@ public class Scrib_lib_text implements Scrib_lib {
 				json_util.Reindex_arrays(reindex_data, rv_as_kvy, false);
 				rv_as_kvy = reindex_data.Rv_is_kvy() ? (Keyval[])reindex_data.Rv_as_kvy() : (Keyval[])reindex_data.Rv_as_ary();
 			}					
-			return rslt.Init_obj(rv_as_kvy);
+			return rv_as_kvy;
 		}
 		else
-			return rslt.Init_obj(json_util.Decode_rslt_as_ary());
+			return json_util.Decode_rslt_as_ary();
 	}
 
 	public void Notify_wiki_changed() {if (notify_wiki_changed_fnc != null) core.Interpreter().CallFunction(notify_wiki_changed_fnc.Id(), Keyval_.Ary_empty);}

@@ -30,6 +30,15 @@ public class Object_ {
 			rv[i] = rhs[i - lhs_len];
 		return rv;
 	}
+	public static Object[] Ary_add_one(Object[] lhs, Object rhs) {
+		int lhs_len = lhs.length, rhs_len = 1;
+		int rv_len = lhs_len + rhs_len;
+		Object[] rv = new Object[rv_len];
+		for (int i = 0; i < lhs_len; ++i)
+			rv[i] = lhs[i];
+		rv[rv_len - 1] = rhs;
+		return rv;
+	}
 	public static boolean Eq(Object lhs, Object rhs) {
 		if		(lhs == null && rhs == null)	return true;
 		else if (lhs == null || rhs == null)	return false;

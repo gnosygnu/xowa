@@ -71,7 +71,7 @@ public class Xop_section_mgr implements Gfo_invk {
 			this.fmt__edit_hint.Fmt_(String_.new_u8(wiki.Msg_mgr().Val_by_key_obj("editsectionhint")));
 		}
 
-		section_key = wiki.Parser_mgr().Uniq_mgr().Convert(section_key);	// need to swap out uniqs for Math; DATE:2016-12-09
+		section_key = wiki.Parser_mgr().Uniq_mgr().Parse(section_key);	// need to swap out uniqs for Math; DATE:2016-12-09
 		byte[] edit_hint = fmt__edit_hint.Bld_many_to_bry(tmp_bfr, section_hint);
 		fmt__section_editable.Bld_many(bfr, page_ttl, section_key, edit_hint, bry__edit_text);
 	}

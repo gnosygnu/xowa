@@ -18,7 +18,7 @@ import gplx.core.btries.*;
 import gplx.langs.htmls.*; import gplx.xowa.langs.kwds.*; import gplx.langs.htmls.entitys.*;
 import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.lnkes.*;
 import gplx.xowa.wikis.domains.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.htmls.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.uniqs.*;
 import gplx.xowa.xtns.*; import gplx.xowa.xtns.cites.*; import gplx.xowa.parsers.hdrs.*;
 public class Xoh_html_wtr {
 	private final    Xoae_app app; private final    Xowe_wiki wiki; private final    Xow_html_mgr html_mgr; private final    Xop_xatr_whitelist_mgr whitelist_mgr;
@@ -90,6 +90,7 @@ public class Xoh_html_wtr {
 			case Xop_tkn_itm_.Tid_tblw_tc:			Tblw		(bfr, ctx, hctx, src, (Xop_tblw_tkn)tkn, Gfh_tag_.Caption_lhs_bgn	, Gfh_tag_.Caption_rhs, false); break;
 			case Xop_tkn_itm_.Tid_newLine:			New_line	(bfr, ctx, hctx, src, (Xop_nl_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_bry:				Bry			(bfr, ctx, hctx, src, (Xop_bry_tkn)tkn); break;
+			case Xop_tkn_itm_.Tid_uniq:				Uniq        (bfr, ctx, hctx, src, (Xop_uniq_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_lnki:				lnki_wtr.Write_lnki(bfr, hctx, src, (Xop_lnki_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_lnke:				wkr__lnke.Write_html(bfr, html_mgr, this, hctx, ctx, src, (Xop_lnke_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_hdr:				wkr__hdr.Write_html(bfr, this, wiki, page, ctx, hctx, cfg, grp, sub_idx, src, (Xop_hdr_tkn)tkn); break;
@@ -231,6 +232,10 @@ public class Xoh_html_wtr {
 	}
 	private void Bry(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_bry_tkn bry) {
 		bfr.Add(bry.Val());
+	}
+	private void Uniq(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_uniq_tkn tkn) {
+		byte[] val = wiki.Parser_mgr().Uniq_mgr().Get(tkn.Key());
+		Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, val, 0, val.length, true, false);
 	}
 	private void Under(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_under_tkn under) {
 		if (hctx.Mode_is_alt()) return;
@@ -436,7 +441,7 @@ public class Xoh_html_wtr {
 		for (int i = 0; i < ary_len; i++) {
 			Mwh_atr_itm atr = ary[i];
 			if (atr.Invalid()) continue;
-			if (!whitelist_mgr.Chk(tag_id, src, atr)) continue;
+			if (!whitelist_mgr.Chk(tag_id, atr)) continue;
 			Xnde_atr_write(bfr, app, hctx, src, atr);
 		}
 	}
@@ -463,7 +468,7 @@ public class Xoh_html_wtr {
 		}
 		else {
 			if (atr.Val_bry() == null)
-				bfr.Add_mid(src, atr.Val_bgn(), atr.Val_end());
+				bfr.Add_mid(atr.Src(), atr.Val_bgn(), atr.Val_end());
 			else
 				bfr.Add(atr.Val_bry());
 		}

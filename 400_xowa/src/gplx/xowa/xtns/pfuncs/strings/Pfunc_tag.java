@@ -52,7 +52,7 @@ public class Pfunc_tag extends Pf_func_base {// REF:CoreParserFunctions.php
 
 			// add to UNIQ hash; DATE:2017-03-31
 			byte[] val = tmp_bfr.To_bry_and_clear();
-			byte[] key = ctx.Wiki().Parser_mgr().Uniq_mgr().Add(tag_name, val);
+			byte[] key = ctx.Wiki().Parser_mgr().Uniq_mgr().Add(Bool_.Y, tag_name, val);
 			bfr.Add(key);
 		}
 		finally {tmp_bfr.Mkr_rls();}

@@ -20,6 +20,6 @@ public class Xop_lxr_ {
 	, Tid_list = 10, Tid_hdr = 11, Tid_hr = 12, Tid_xnde = 13, Tid_lnke_bgn = 14, Tid_lnke_end = 15, Tid_tblw = 16, Tid_pre = 17, Tid_under = 18, Tid_comment = 19
 	, Tid_eq = 20, Tid_curly_bgn = 21, Tid_curly_end = 22, Tid_brack_bgn = 23, Tid_brack_end = 24, Tid_poem = 25
 	, Tid_tvar = 26, Tid_vnt_bgn = 27, Tid_vnt_end = 28, Tid_vnt_eqgt = 29, Tid_vnt_tmpl_bgn = 30, Tid_word = 31, Tid_nl_poem = 32, Tid_cr = 33
-	, Tid_brack_end_lnki = 34, Tid_nl_tab = 35, Tid_escape = 36
+	, Tid_brack_end_lnki = 34, Tid_nl_tab = 35, Tid_escape = 36, Tid_uniq = 37
 	;
 }

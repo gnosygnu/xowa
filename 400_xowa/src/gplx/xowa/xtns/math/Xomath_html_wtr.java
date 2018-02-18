@@ -67,7 +67,7 @@ class Xomath_html_wtr {
 		}
 
 		// write html: <span>math_expr</math>
-		byte[] unique_bry = wiki.Parser_mgr().Uniq_mgr().Add(Bry__math, math_bry);
+		byte[] unique_bry = wiki.Parser_mgr().Uniq_mgr().Add(Bool_.Y, Bry__math, math_bry);
 		Bry_fmt fmt = is_latex ? fmt__latex : fmt__mathjax;
 		fmt.Bld_many(tmp_bfr, uid, unique_bry);
 		bfr.Add_bfr_and_clear(tmp_bfr);

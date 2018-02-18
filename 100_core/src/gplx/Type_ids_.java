@@ -30,6 +30,7 @@ public class Type_ids_ {//RF:2017-10-08
 	, Id__bry            = 11
 	, Id__date           = 12
 	, Id__decimal        = 13
+	, Id__array          = 14
 	;
 
 	public static int To_id_by_obj(Object o) {

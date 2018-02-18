@@ -59,9 +59,13 @@ public class Xol_lang_itm implements Gfo_invk {
 	public Xol_lang_itm			Fallback_bry_(byte[] v) {
 		fallback_bry = v;
 		fallback_bry_ary = Fallbacy_bry_ary__bld(v);
+		for (byte[] key : fallback_bry_ary) {
+			fallback_hash.Add_as_key_and_val(String_.new_u8(key));
+		}
 		return this;
 	}	private byte[] fallback_bry;
 	public byte[][]				Fallback_bry_ary() {return fallback_bry_ary;} private byte[][] fallback_bry_ary = Bry_.Ary_empty;
+	public Ordered_hash			Fallback_hash() {return fallback_hash;} private final    Ordered_hash fallback_hash = Ordered_hash_.New();
 	public boolean					Dir_ltr() {return dir_ltr;} private boolean dir_ltr = true;
 	public void					Dir_ltr_(boolean v) {
 		dir_ltr = v;

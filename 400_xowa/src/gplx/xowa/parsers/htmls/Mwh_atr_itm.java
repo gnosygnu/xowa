@@ -28,22 +28,22 @@ public class Mwh_atr_itm {
 		this.val_bgn = val_bgn; this.val_end = val_end; this.val_bry = val_bry;
 		this.eql_pos = eql_pos; this.qte_tid = qte_tid;
 	}
-	public byte[] Src() {return src;} private final byte[] src;
-	public boolean Valid() {return valid;} private final boolean valid;
-	public boolean Key_exists() {return key_exists;} private final boolean key_exists;
-	public boolean Repeated() {return repeated;} private final boolean repeated;
+	public byte[] Src() {return src;} private final    byte[] src;
+	public boolean Valid() {return valid;} private final    boolean valid;
+	public boolean Key_exists() {return key_exists;} private final    boolean key_exists;
+	public boolean Repeated() {return repeated;} private final    boolean repeated;
 	public boolean Invalid() {return repeated || !valid;} 
 	public int Atr_bgn() {return atr_bgn;} private int atr_bgn;
 	public int Atr_end() {return atr_end;} private int atr_end;
-	public int Key_bgn() {return key_bgn;} private final int key_bgn;
-	public int Key_end() {return key_end;} private final int key_end;
+	public int Key_bgn() {return key_bgn;} private final    int key_bgn;
+	public int Key_end() {return key_end;} private final    int key_end;
 	public byte[] Key_bry() {return key_bry;} private byte[] key_bry;
 	public byte Key_tid() {return key_tid;} public Mwh_atr_itm Key_tid_(byte v) {key_tid = v; return this;} private byte key_tid;
-	public int Val_bgn() {return val_bgn;} private final int val_bgn;
-	public int Val_end() {return val_end;} private final int val_end;
+	public int Val_bgn() {return val_bgn;} private final    int val_bgn;
+	public int Val_end() {return val_end;} private final    int val_end;
 	public byte[] Val_bry() {return val_bry;} private byte[] val_bry;
-	public int Eql_pos() {return eql_pos;} private final int eql_pos;
-	public int Qte_tid() {return qte_tid;} private final int qte_tid;
+	public int Eql_pos() {return eql_pos;} private final    int eql_pos;
+	public int Qte_tid() {return qte_tid;} private final    int qte_tid;
 	public byte Qte_byte() {
 		switch (qte_tid) {
 			case Mwh_atr_itm_.Qte_tid__none:	return Byte_ascii.Null;
@@ -53,7 +53,6 @@ public class Mwh_atr_itm {
 		}
 	}
 	public Mwh_atr_itm Atr_rng(int bgn, int end) {this.atr_bgn = bgn; this.atr_end = end; return this;}
-	public void Key_bry_(byte[] v) {this.key_bry = v;}
 	public void Val_bry_(byte[] v) {this.val_bry = v;}
 	public String Val_as_str() {return String_.new_u8(Val_as_bry());}
 	public byte[] Val_as_bry() {if (val_bry == null) val_bry = Bry_.Mid(src, val_bgn, val_end); return val_bry;}	// NOTE: val_bry is cached

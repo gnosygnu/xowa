@@ -302,6 +302,13 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		}
 		Mwh_atr_itm[] atrs = null;
 		if (ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt) {
+			// NOWIKI;DATE:2018-01-16
+			// if (atrs_bgn < atrs_end) {
+			//	byte[] converted = ctx.Wiki().Parser_mgr().Uniq_mgr().Parse(Bool_.N, Bry_.Mid(src, atrs_bgn, atrs_end));
+			//	atrs = ctx.App().Parser_mgr().Xnde__parse_atrs(converted, 0, converted.length);
+			// }
+			// else
+			//	atrs = ctx.App().Parser_mgr().Xnde__parse_atrs(src, atrs_bgn, atrs_end);
 			atrs = ctx.App().Parser_mgr().Xnde__parse_atrs(src, atrs_bgn, atrs_end);
 		}
 		if ((	(	tag.Xtn() 

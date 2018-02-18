@@ -65,7 +65,7 @@ class Xop_uniq_mgr__fxt {
 		Gftest.Eq__str(expd, String_.new_a7(mgr.Uniq_bry_new()), "unique_bry");
 	}
 	public void Test__add(String raw, String expd) {
-		Gftest.Eq__str(expd, String_.new_a7(mgr.Add(Bry_.new_a7("item"), Bry_.new_a7(raw))), "add");
+		Gftest.Eq__str(expd, String_.new_a7(mgr.Add(Bool_.Y, Bry_.new_a7("item"), Bry_.new_a7(raw))), "add");
 	}
 	public void Test__get(String key, String expd) {
 		Gftest.Eq__str(expd, String_.new_a7(mgr.Get(Bry_.new_a7(key))), "get");
@@ -74,6 +74,6 @@ class Xop_uniq_mgr__fxt {
 		Gftest.Eq__str(expd, String_.new_a7(mgr.Parse(Bry_.new_a7(raw))), "parse");
 	}
 	public void Test__convert(String raw, String expd) {
-		Gftest.Eq__str(expd, String_.new_a7(mgr.Convert(Bry_.new_a7(raw))), "convert");
+		Gftest.Eq__str(expd, String_.new_a7(mgr.Parse(Bry_.new_a7(raw))), "convert");
 	}
 }

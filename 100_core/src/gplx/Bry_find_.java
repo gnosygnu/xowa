@@ -40,6 +40,10 @@ public class Bry_find_ {
 			if (src[i] == lkp) return i;
 		return Bry_find_.Not_found;
 	}
+	public static int Find_bwd_or(byte[] src, byte lkp, int cur, int end, int or) {
+		int rv = Find_bwd(src, lkp, cur, end);
+		return rv == Bry_find_.Not_found ? or : rv;
+	}
 	public static int Move_fwd(byte[] src, byte lkp, int cur, int end) {
 		int rv = Find_fwd(src, lkp, cur, src.length);
 		return rv == Bry_find_.Not_found ? rv : rv + 1;

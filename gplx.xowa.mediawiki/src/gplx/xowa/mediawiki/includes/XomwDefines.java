@@ -261,20 +261,20 @@ public class XomwDefines {
 //		define( 'PROTO_INTERNAL', 2 );
 //		/**@}*/
 //
-//		/**@{
-//		* Content model ids, used by Content and ContentHandler.
-//		* These IDs will be exposed in the API and XML dumps.
-//		*
-//		* Extensions that define their own content model IDs should take
-//		* care to avoid conflicts. Using the extension name as a prefix is recommended,
-//		* for example 'myextension-somecontent'.
-//		*/
-//		define( 'CONTENT_MODEL_WIKITEXT', 'wikitext' );
-//		define( 'CONTENT_MODEL_JAVASCRIPT', 'javascript' );
-//		define( 'CONTENT_MODEL_CSS', 'css' );
-//		define( 'CONTENT_MODEL_TEXT', 'text' );
-//		define( 'CONTENT_MODEL_JSON', 'json' );
-//		/**@}*/
+	/**@{
+	* Content model ids, used by Content and ContentHandler.
+	* These IDs will be exposed in the API and XML dumps.
+	*
+	* Extensions that define their own content model IDs should take
+	* care to avoid conflicts. Using the extension name as a prefix is recommended,
+	* for example 'myextension-somecontent'.
+	*/
+	public static final String CONTENT_MODEL_WIKITEXT = "wikitext";
+	public static final String CONTENT_MODEL_JAVASCRIPT = "javascript";
+	public static final String CONTENT_MODEL_CSS = "css";
+	public static final String CONTENT_MODEL_TEXT = "text";
+	public static final String CONTENT_MODEL_JSON = "json";
+	/**@}*/
 
 	/**@{
 	* Content formats, used by Content and ContentHandler.

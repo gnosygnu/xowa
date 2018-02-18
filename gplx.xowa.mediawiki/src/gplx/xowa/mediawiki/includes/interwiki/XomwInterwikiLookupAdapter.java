@@ -41,7 +41,7 @@ public class XomwInterwikiLookupAdapter implements XomwInterwikiLookup {
 	* @return boolean Whether it exists
 	*/
 	public boolean isValidInterwiki(byte[] prefix) {
-		return XophpArray.array_key_exists(prefix, this.getInterwikiMap());
+		return XophpArrayUtl.array_key_exists(prefix, this.getInterwikiMap());
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class XomwInterwikiLookupAdapter implements XomwInterwikiLookup {
 	*/
 	public byte[][] getAllPrefixes(boolean local) {
 		if (!local) {
-			XophpArray.array_keys_bry(this.getInterwikiMap());
+			XophpArrayUtl.array_keys_bry(this.getInterwikiMap());
 		}
 		List_adp res = List_adp_.New();
 		Ordered_hash hash = this.getInterwikiMap();

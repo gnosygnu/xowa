@@ -104,7 +104,7 @@ class Xop_section_list implements Xomw_heading_cbk {
 		key = wiki.Parser_mgr().Main().Parse_text_to_html(wiki.Parser_mgr().Ctx(), key);
 
 		// handle math; EX: "== <math>\delta</math> =="
-		key = wiki.Parser_mgr().Uniq_mgr().Convert(key);
+		key = wiki.Parser_mgr().Uniq_mgr().Parse(key);
 
 		// convert key to toc_text to handle (a) XML ("<i>a</i>" -> "a"); (b) dupes ("text" -> "text_2")
 		int num = wkr.Hdr_num();

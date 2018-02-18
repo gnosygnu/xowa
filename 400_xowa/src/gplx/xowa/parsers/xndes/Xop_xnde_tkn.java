@@ -132,7 +132,7 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 					// UNIQ; DATE:2017-03-31
 					if (is_tmpl_mode) {
 						byte[] val = cur_bfr.To_bry_and_clear();
-						byte[] key = ctx.Wiki().Parser_mgr().Uniq_mgr().Add(tag.Name_bry(), val);
+						byte[] key = ctx.Wiki().Parser_mgr().Uniq_mgr().Add(Bool_.Y, tag.Name_bry(), val);
 						bfr.Add(key);
 					}
 				}

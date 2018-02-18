@@ -493,6 +493,9 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 			atrs_bgn = Bry_find_.Find_fwd_while(src, atrs_bgn, src.length, Byte_ascii.Dash);
 		prv_tblw.Atrs_rng_set(atrs_bgn, atrs_end);
 		if (ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt && atrs_bgn != -1) {
+			// NOWIKI;DATE:2018-01-16
+			// byte[] converted = ctx.Wiki().Parser_mgr().Uniq_mgr().Parse(Bool_.N, Bry_.Mid(src, atrs_bgn, atrs_end));
+			// Mwh_atr_itm[] atrs = ctx.App().Parser_mgr().Xnde__parse_atrs(converted, 0, converted.length);
 			Mwh_atr_itm[] atrs = ctx.App().Parser_mgr().Xnde__parse_atrs_for_tblw(src, atrs_bgn, atrs_end);
 			prv_tblw.Atrs_ary_as_tblw_(atrs);
 		}
