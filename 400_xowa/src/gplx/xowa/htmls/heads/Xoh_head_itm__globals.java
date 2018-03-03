@@ -43,7 +43,8 @@ public class Xoh_head_itm__globals extends Xoh_head_itm__base {
 		wtr.Write_js_alias_var	(Page__alias, Page__key);
 		wtr.Write_js_alias_kv	(Page__alias, Key__wiki		, page.Wiki().Domain_bry());
 		wtr.Write_js_alias_kv	(Page__alias, Key__ttl		, page.Ttl().Page_db());
-	}	private static final    byte[] Key__app_mode = Bry_.new_a7("xowa.app.mode"), Page__alias = Bry_.new_a7("x_p"), Page__key = Bry_.new_a7("xowa.page"), Key__wiki = Bry_.new_a7("wiki"), Key__ttl = Bry_.new_a7("ttl");
+		wtr.Write_js_alias_kv	(Page__alias, Key__guid		, Bry_.new_a7(page.Page_guid().To_str()));
+	}	private static final    byte[] Key__app_mode = Bry_.new_a7("xowa.app.mode"), Page__alias = Bry_.new_a7("x_p"), Page__key = Bry_.new_a7("xowa.page"), Key__wiki = Bry_.new_a7("wiki"), Key__ttl = Bry_.new_a7("ttl"), Key__guid = Bry_.new_a7("guid");
 	@Override public void Write_js_head_global(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {
 		wtr.Write_js_global_ini_atr_val(Key_mode_is_gui			, app.Mode().Tid_is_gui());
 		wtr.Write_js_global_ini_atr_val(Key_mode_is_http		, app.Mode().Tid_is_http());

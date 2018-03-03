@@ -74,7 +74,9 @@ public class Xoax_addon_mgr {
 		, new gplx.xowa.addons.wikis.fulltexts          .Xosearch_fulltext_addon()
 
 		// jsons
+		, new gplx.xowa.addons.servers.https.utils		.Xoa_util_addon()
 		);
+
 		if (app.Mode().Tid_is_http()) {
 			app.Addon_mgr().Itms__add_many(new gplx.xowa.addons.servers.https.Xoax_long_poll_addon());
 		}

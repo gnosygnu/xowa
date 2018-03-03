@@ -75,6 +75,7 @@ public class Xoh_head_mgr_tst {
 		, "    var x_p = xowa.page;"
 		, "    x_p.wiki = 'en.wikipedia.org';"
 		, "    x_p.ttl = 'Test_page';"
+		, "    x_p.guid = '00000000-0000-0000-0000-000000000000';"
 		, "  </script>"
 		));
 		fxt.Init_msg(Xol_msg_itm_.Id_dte_month_name_january, "January" );	// set it back
@@ -113,6 +114,7 @@ public class Xoh_head_mgr_tst {
 		, "    var x_p = xowa.page;"
 		, "    x_p.wiki = 'en.wikipedia.org';"
 		, "    x_p.ttl = 'Test_page';"
+		, "    x_p.guid = '00000000-0000-0000-0000-000000000000';"
 		, "  </script>"
 		));
 	}
@@ -137,6 +139,7 @@ class Xoh_head_mgr_fxt {
 		msg_itm.Atrs_set(Bry_.new_a7(val), false, false);
 	}
 	public void Test_write(String expd) {
+		fxt.Page().Page_guid_empty_();
 		mgr.Write(bfr, fxt.App(), wiki, fxt.Page());
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
 	}

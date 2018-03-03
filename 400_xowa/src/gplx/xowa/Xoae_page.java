@@ -54,6 +54,7 @@ public class Xoae_page implements Xoa_page {
 		}
 		return page_guid;
 	}
+	public void Page_guid_empty_() {page_guid = Guid_adp_.Empty;} // TEST
 
 	public Xowe_wiki				Wikie() {return wiki;} private Xowe_wiki wiki;
 	public Xol_lang_itm				Lang() {return lang;} public Xoae_page Lang_(Xol_lang_itm v) {lang = v; return this;} private Xol_lang_itm lang;

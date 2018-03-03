@@ -23,12 +23,12 @@ public class Xopg_tag_mgr {
 	public void Add(Xopg_tag_itm... ary) {for (Xopg_tag_itm itm : ary) list.Add(itm);}
 	public void Copy(Xopg_tag_mgr src) {
 		int len = src.Len();
-		for (int i = 0; i < len; ++i)
+		for (int i = 0; i < len; i++)
 			this.Add(src.Get_at(i));
 	}
 	public byte[] To_html(Bry_bfr bfr) {
 		int len = this.Len();
-		for (int i = 0; i < len; ++i) {
+		for (int i = 0; i < len; i++) {
 			Xopg_tag_itm tag = this.Get_at(i);
 			tag.To_html(bfr);
 		}
@@ -36,7 +36,7 @@ public class Xopg_tag_mgr {
 	}
 	public byte[] To_html__style(Bry_bfr bfr) {
 		int len = this.Len();
-		for (int i = 0; i < len; ++i) {
+		for (int i = 0; i < len; i++) {
 			Xopg_tag_itm tag = this.Get_at(i);
 			if (	Bry_.Eq(tag.Node(), gplx.langs.htmls.Gfh_tag_.Bry__style)
 				&&	tag.Body() != null

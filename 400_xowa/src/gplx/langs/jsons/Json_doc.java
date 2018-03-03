@@ -43,6 +43,11 @@ public class Json_doc {
 		Json_itm nde = Find_nde(root_nde, qry_bry, qry_bry.length - 1, 0);
 		return nde == null || nde.Tid() != Json_itm_.Tid__str ? or : (String)nde.Data();
 	}
+	public int Get_val_as_int_or(byte[]   qry_bry, int or) {tmp_qry_bry[0] = qry_bry; return Get_val_as_int_or(tmp_qry_bry, or);}
+	public int Get_val_as_int_or(byte[][] qry_bry, int or) {
+		Json_itm nde = Find_nde(root_nde, qry_bry, qry_bry.length - 1, 0);
+		return nde == null || nde.Tid() != Json_itm_.Tid__int ? or : Bry_.To_int(nde.Data_bry());
+	}
 	public Json_grp Get_grp(byte[] qry_bry) {
 		tmp_qry_bry[0] = qry_bry;
 		Json_itm rv = Find_nde(root_nde, tmp_qry_bry, 0, 0); if (rv == null) return null;

@@ -45,7 +45,7 @@ class Xoa_update_svc implements Gfo_invk {
 
 		// start download
 		Xojs_wkr__download download_wkr = new Xojs_wkr__download
-		( app.Gui__cbk_mgr(), Xog_cbk_trg.New(Xoa_update_special.Prototype.Special__meta().Ttl_bry())
+		( app.Gui__cbk_mgr(), Xog_cbk_trg.New_by_page(Xoa_update_special.Prototype.Special__meta().Ttl_bry())
 		, "xo.app_updater.download__prog", Gfo_invk_cmd.New_by_key(this, Invk__download_done), Gfo_invk_cmd.New_by_key(this, Invk__download_fail), src, trg, src_len);
 		download_wkr.Exec_async("app_updater");
 	}

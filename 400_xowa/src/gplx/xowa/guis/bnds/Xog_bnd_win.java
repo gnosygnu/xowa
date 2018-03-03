@@ -85,7 +85,7 @@ public class Xog_bnd_win implements Gfo_invk {
 		elem_2.X_(elem_1.X_max());
 	}
 
-	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New(gplx.xowa.addons.apps.cfgs.specials.edits.pages.Xocfg_edit_special.Prototype.Special__meta().Ttl_bry());
+	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New_by_page(gplx.xowa.addons.apps.cfgs.specials.edits.pages.Xocfg_edit_special.Prototype.Special__meta().Ttl_bry());
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__when_key_down))		When_key_down(m);
 		else if	(ctx.Match(k, Invk__when_key_press))	When_key_up(m);

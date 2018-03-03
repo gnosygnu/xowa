@@ -19,7 +19,7 @@ import gplx.langs.jsons.*;
 import gplx.xowa.addons.wikis.directorys.dbs.*;
 class Xowdir_list_svc {
 	private final    Xoa_app app;
-	private gplx.xowa.guis.cbks.Xog_cbk_trg cbk_trg = gplx.xowa.guis.cbks.Xog_cbk_trg.New(Xowdir_list_special.Prototype.Special__meta().Ttl_bry());
+	private gplx.xowa.guis.cbks.Xog_cbk_trg cbk_trg = gplx.xowa.guis.cbks.Xog_cbk_trg.New_by_page(Xowdir_list_special.Prototype.Special__meta().Ttl_bry());
 	public Xowdir_list_svc(Xoa_app app) {
 		this.app = app;
 	}

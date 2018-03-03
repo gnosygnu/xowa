@@ -25,7 +25,7 @@ import gplx.dbs.*; import gplx.xowa.specials.xowa.diags.*;
 	* run stored procs? EXEC debug_image 'A.png'
 */
 class Xosql_exec_svc {
-	private gplx.xowa.guis.cbks.Xog_cbk_trg cbk_trg = gplx.xowa.guis.cbks.Xog_cbk_trg.New(gplx.xowa.addons.apps.maints.sql_execs.specials.Xosql_exec_special.Prototype.Special__meta().Ttl_bry());
+	private gplx.xowa.guis.cbks.Xog_cbk_trg cbk_trg = gplx.xowa.guis.cbks.Xog_cbk_trg.New_by_page(gplx.xowa.addons.apps.maints.sql_execs.specials.Xosql_exec_special.Prototype.Special__meta().Ttl_bry());
 	private final    Xoa_app app;
 	public Xosql_exec_svc(Xoa_app app) {
 		this.app = app;

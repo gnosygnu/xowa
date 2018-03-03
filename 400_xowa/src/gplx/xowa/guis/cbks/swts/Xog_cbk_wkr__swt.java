@@ -41,7 +41,7 @@ public class Xog_cbk_wkr__swt implements Xog_cbk_wkr {
 			boolean match = false;
 			switch (trg.Tid()) {
 				case Xog_cbk_trg.Tid__page_guid:
-					match = String_.Eq(trg.Page_guid, page.Page_guid().To_str());
+					match = String_.Eq(trg.Page_guid(), page.Page_guid().To_str());
 					break;
 				case Xog_cbk_trg.Tid__cbk_enabled:
 					match = page.Html_data().Cbk_enabled();

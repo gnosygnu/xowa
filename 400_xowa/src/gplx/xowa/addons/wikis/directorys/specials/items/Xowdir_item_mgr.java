@@ -21,7 +21,7 @@ import gplx.xowa.langs.cases.*;
 class Xowdir_item_mgr {
 	private final    Xoa_app app;
 	private final    Json_wtr json_wtr = new Json_wtr();
-	private gplx.xowa.guis.cbks.Xog_cbk_trg cbk_trg = gplx.xowa.guis.cbks.Xog_cbk_trg.New(Xowdir_item_special.Prototype.Special__meta().Ttl_bry());
+	private gplx.xowa.guis.cbks.Xog_cbk_trg cbk_trg = gplx.xowa.guis.cbks.Xog_cbk_trg.New_by_page(Xowdir_item_special.Prototype.Special__meta().Ttl_bry());
 	public Xowdir_item_mgr(Xoa_app app) {
 		this.app = app;
 	}

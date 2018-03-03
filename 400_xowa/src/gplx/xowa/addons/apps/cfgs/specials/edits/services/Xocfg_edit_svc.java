@@ -21,7 +21,7 @@ import gplx.xowa.addons.apps.cfgs.specials.edits.pages.*; import gplx.xowa.addon
 public class Xocfg_edit_svc {
 	private final    Xoa_app app;
 	private Xocfg_edit_loader edit_loader;
-	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New(Xocfg_edit_special.Prototype.Special__meta().Ttl_bry());
+	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New_by_page(Xocfg_edit_special.Prototype.Special__meta().Ttl_bry());
 	public Xocfg_edit_svc(Xoa_app app) {
 		this.app = app;
 	}

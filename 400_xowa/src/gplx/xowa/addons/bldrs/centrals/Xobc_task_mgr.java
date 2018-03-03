@@ -18,7 +18,7 @@ import gplx.core.brys.evals.*; import gplx.core.gfobjs.*; import gplx.core.progs
 import gplx.xowa.addons.bldrs.centrals.tasks.*; import gplx.xowa.addons.bldrs.centrals.steps.*; import gplx.xowa.addons.bldrs.centrals.cmds.*; import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.mgrs.*;
 import gplx.xowa.guis.cbks.*;
 public class Xobc_task_mgr implements Xog_json_wkr {
-	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New(Xobc_task_special.Prototype.Special__meta().Ttl_bry());
+	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New_by_page(Xobc_task_special.Prototype.Special__meta().Ttl_bry());
 	public Xobc_task_mgr(Xoa_app app, Io_url data_db_url) {
 		this.app = app;
 		this.cbk_mgr = app.Gui__cbk_mgr();

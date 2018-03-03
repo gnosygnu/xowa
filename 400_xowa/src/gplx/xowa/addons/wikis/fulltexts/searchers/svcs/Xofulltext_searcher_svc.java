@@ -65,7 +65,7 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 	private void Search(Xofulltext_args_qry args) {
 		// create ui
 		Xofulltext_cache_mgr cache_mgr = args.cache_mgr;
-		Xofulltext_searcher_ui ui = new Xofulltext_searcher_ui(cache_mgr, app.Gui__cbk_mgr(), new Xog_cbk_trg(args.page_guid));
+		Xofulltext_searcher_ui ui = new Xofulltext_searcher_ui(cache_mgr, app.Gui__cbk_mgr(), Xog_cbk_trg.New_by_guid(args.page_guid));
 
 		try {
 			// loop wikis
@@ -138,7 +138,7 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 	}
 	private void Snips_show_all(int qry_id, byte[] wiki_bry, int page_id, String page_guid) {
 		Xofulltext_cache_mgr cache_mgr = this.Cache_mgr();
-		Xofulltext_searcher_ui searcher_ui = new Xofulltext_searcher_ui(cache_mgr, app.Gui__cbk_mgr(), new Xog_cbk_trg(page_guid));
+		Xofulltext_searcher_ui searcher_ui = new Xofulltext_searcher_ui(cache_mgr, app.Gui__cbk_mgr(), Xog_cbk_trg.New_by_guid(page_guid));
 
 		Xofulltext_cache_line[] lines = cache_mgr.Get_lines_rest(qry_id, wiki_bry, page_id);
 		for (Xofulltext_cache_line line : lines) {
