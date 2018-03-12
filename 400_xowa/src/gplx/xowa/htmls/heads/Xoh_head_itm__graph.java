@@ -36,7 +36,7 @@ public class Xoh_head_itm__graph extends Xoh_head_itm__base {
 		Xopg_tag_wtr_.Add__xologger(tags, http_root);
 		Xopg_tag_wtr_.Add__xolog(tags, http_root, false);
 		Xopg_tag_wtr_.Add__xoajax(tags, http_root, app);
-		Add__xograph(tags, http_root, page, version_is_1);
+		Add__xograph(tags, http_root, page, version_is_1, version_is_2);
 
 		// write tags
 		int len = tags.Len();
@@ -51,7 +51,7 @@ public class Xoh_head_itm__graph extends Xoh_head_itm__base {
 	}
 
 	private static final    byte[] Js__graph_exec = Bry_.new_a7("xo.xtns.graph.exec();");
-	private static void Add__xograph(Xopg_tag_mgr tags, Io_url http_root, Xoae_page page, boolean version_is_1) {
+	private static void Add__xograph(Xopg_tag_mgr tags, Io_url http_root, Xoae_page page, boolean version_is_1, boolean version_is_2) {
 		Io_url base_dir = http_root.GenSubDir_nest("bin", "any", "xowa", "html", "res", "src", "xowa", "core");
 		tags.Add(Xopg_tag_itm.New_js_file(base_dir.GenSubFil_nest("Html_.js")));
 
@@ -59,14 +59,16 @@ public class Xoh_head_itm__graph extends Xoh_head_itm__base {
 		Io_url xtn_dir = http_root.GenSubDir_nest("bin", "any", "xowa", "xtns", "Graph");
 		tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("lib", "d3.js")));
 		// tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("lib", "d3-global.js"))); // XOWA: unused b/c module is not available
-		if (version_is_1) {
-			tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("lib", "vega1", "vega.js")));
-		}
-		else {
-		tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("lib", "d3.layout.cloud.js")));
+
+		// if v2 and v2, prefer v2;
+		if (version_is_2) {
+			tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("lib", "d3.layout.cloud.js")));
 			tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("lib", "vega2", "vega.js")));
 			tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("lib", "graph2.compiled.js")));
 			// tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("modules", "graph2.js")));
+		}
+		else {
+			tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("lib", "vega1", "vega.js")));
 		}
 		tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("Xograph.js")));
 	}

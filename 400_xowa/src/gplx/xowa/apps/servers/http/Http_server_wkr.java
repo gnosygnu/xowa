@@ -43,28 +43,30 @@ class Http_server_wkr implements Gfo_invk {
 		this.socket = socket;
 	}
 	public void Run(){
-		Http_request_itm request = null;
-		try {
-			client_rdr.Stream_(socket.Get_input_stream());
-			client_wtr.Stream_(socket.Get_output_stream());
-			request = request_parser.Parse(client_rdr);
-			this.data__client = new Http_data__client(request.Host(), socket.Ip_address());
-			byte[] url_bry = request.Url();
-			if (Bry_.Eq(url_bry, Url__home)) url_bry = server_mgr.Home();	// "localhost:8080" comes thru as url of "/"; transform to custom home page; DATE:2015-10-11
-			switch (request.Type()) {
-				case Http_request_itm.Type_get:		Process_get(request, url_bry); break;
-				case Http_request_itm.Type_post:	Process_post(request); break;
+		synchronized (client_rdr) { // LOCK:else http_server may sometimes deadlock when serving multiple parallel requests; // DATE:2018-03-11
+			Http_request_itm request = null;
+			try {
+				client_rdr.Stream_(socket.Get_input_stream());
+				client_wtr.Stream_(socket.Get_output_stream());
+				request = request_parser.Parse(client_rdr);
+				this.data__client = new Http_data__client(request.Host(), socket.Ip_address());
+				byte[] url_bry = request.Url();
+				if (Bry_.Eq(url_bry, Url__home)) url_bry = server_mgr.Home();	// "localhost:8080" comes thru as url of "/"; transform to custom home page; DATE:2015-10-11
+				switch (request.Type()) {
+					case Http_request_itm.Type_get:		Process_get(request, url_bry); break;
+					case Http_request_itm.Type_post:	Process_post(request); break;
+				}
+				client_wtr.Rls(); // client_rdr.Rls(); socket.Rls();
 			}
-			client_wtr.Rls(); // client_rdr.Rls(); socket.Rls();
-		}
-		catch (Exception e) {
-			String request_str = request == null ? "<<NULL>>" : request.To_str(tmp_bfr, Bool_.N);
-			server_wtr.Write_str_w_nl(String_.Format("failed to process request;\nrequest={0}\nerr_msg={1}", request_str, Err_.Message_gplx_full(e)));
-		}
-		finally {
-			if (uid != -1) {	// only release if uid was acquired; DATE:2015-10-11
-				server_mgr.Wkr_pool().Del(uid);
-				server_mgr.Uid_pool().Del(uid);
+			catch (Exception e) {
+				String request_str = request == null ? "<<NULL>>" : request.To_str(tmp_bfr, Bool_.N);
+				server_wtr.Write_str_w_nl(String_.Format("failed to process request;\nrequest={0}\nerr_msg={1}", request_str, Err_.Message_gplx_full(e)));
+			}
+			finally {
+				if (uid != -1) {	// only release if uid was acquired; DATE:2015-10-11
+					server_mgr.Wkr_pool().Del(uid);
+					server_mgr.Uid_pool().Del(uid);
+				}
 			}
 		}
 	}
