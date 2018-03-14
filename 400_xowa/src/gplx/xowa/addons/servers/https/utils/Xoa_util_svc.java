@@ -28,6 +28,7 @@ public class Xoa_util_svc {
 	public void Page_get(Json_nde args) {
 		// get args
 		String page_get_cbk = args.Get_as_str("page_get_cbk");
+		byte[] protocol = args.Get_as_bry("protocol");
 		byte[] wiki_bry = args.Get_as_bry("wiki");
 		byte[] page_bry = args.Get_as_bry("page");
 		String vega_cbk_guid = args.Get_as_str("vega_cbk_guid");
@@ -43,12 +44,18 @@ public class Xoa_util_svc {
 		// get page
 		Xoa_ttl ttl = wiki.Ttl_parse(page_bry);
 		Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm_2(ttl);
+		byte[] page_text = page_itm == null ? null : page_itm.Wtxt__direct();
+		if (page_text == null) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "Xoa_utl_svc:page not found: wiki=~{0} page=~{1}", wiki_bry, page_bry);
+		}
+
 		Xog_cbk_trg cbk_trg = Xog_cbk_trg.New_by_guid(page_guid);
 		cbk_mgr.Send_json(cbk_trg, page_get_cbk, gplx.core.gfobjs.Gfobj_nde.New()
+			.Add_bry("protocol", protocol)
 			.Add_bry("wiki", wiki_bry)
 			.Add_bry("page", page_bry)
 			.Add_str("vega_cbk_guid", vega_cbk_guid)
-			.Add_bry("page_text", page_itm.Wtxt__direct())
+			.Add_bry("page_text", page_text)
 			);
 	}
 }

@@ -65,7 +65,7 @@ public class Xoh_head_itm__graph extends Xoh_head_itm__base {
 			tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("lib", "d3.layout.cloud.js")));
 			tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("lib", "vega2", "vega.js")));
 			tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("lib", "graph2.compiled.js")));
-			// tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("modules", "graph2.js")));
+			tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("modules", "graph2.js")));
 		}
 		else {
 			tags.Add(Xopg_tag_itm.New_js_file(xtn_dir.GenSubFil_nest("lib", "vega1", "vega.js")));
