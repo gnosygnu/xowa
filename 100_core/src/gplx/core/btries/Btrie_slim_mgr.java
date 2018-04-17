@@ -20,7 +20,14 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 	public int Count() {return count;} private int count;
 	public int Match_pos() {return match_pos;} private int match_pos;
 
-	public Object Match_at(Btrie_rv rv, byte[] src, int bgn_pos, int end_pos) {return bgn_pos < end_pos ? Match_at_w_b0(rv, src[bgn_pos], src, bgn_pos, end_pos) : null;} // handle out of bounds gracefully; EX: Match_bgn("abc", 3, 3) should return null not fail
+	public Object Match_at(Btrie_rv rv, byte[] src, int bgn_pos, int end_pos) {
+		if (bgn_pos < end_pos)
+			return Match_at_w_b0(rv, src[bgn_pos], src, bgn_pos, end_pos);
+		else { // handle out of bounds gracefully; EX: Match_bgn("abc", 3, 3) should (a) return null not fail; (b) return a pos of bgn_pos, not 0; DATE:2018-04-12
+			rv.Init(bgn_pos, null);
+			return null;
+		}
+	}
 	public Object Match_at_w_b0(Btrie_rv rv, byte b, byte[] src, int bgn_pos, int src_end) {
 		Object rv_obj = null; 
 		int rv_pos = bgn_pos;

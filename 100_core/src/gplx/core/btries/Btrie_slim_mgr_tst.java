@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.btries; import gplx.*; import gplx.core.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.tests.*;
 public class Btrie_slim_mgr_tst {
 	@Before public void init() {
 	}	private Btrie_slim_mgr trie;
@@ -70,6 +70,12 @@ public class Btrie_slim_mgr_tst {
 		trie.Del(Bry_.new_a7("abc"));
 		tst_MatchAtCur("abc"	, null);
 	}
+	@Test  public void Match_none() {
+		Btrie_slim_mgr_fxt fxt = new Btrie_slim_mgr_fxt();
+		fxt.Init__add("k1", "v1");
+		fxt.Exec__match("ak1", 1, 3, "v1", 3); // 3 to position after match
+		fxt.Exec__match("ak2", 1, 1, null, 1); // 1 to position at current pos; used to be 0; de.w:Butter; DATE:2018-04-12
+	}
 
 	private void run_Add(String k, int val) {trie.Add_obj(Bry_.new_a7(k), val);}
 	private void tst_Match(String srcStr, byte b, int bgn_pos, int expd) {
@@ -86,5 +92,18 @@ public class Btrie_slim_mgr_tst {
 		byte[] src = Bry_.new_a7(srcStr);
 		Object actl = trie.Match_exact(src, 0, src.length);
 		Tfds.Eq(expd, actl);
+	}
+}
+class Btrie_slim_mgr_fxt {
+	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	public Btrie_slim_mgr_fxt Init__add(String key, String val) {
+		trie.Add_str_str(key, val);
+		return this;
+	}
+	public void Exec__match(String src, int bgn_pos, int end_pos, Object expd_val, int expd_pos) {
+		Btrie_rv trv = new Btrie_rv();
+		Object actl_val = trie.Match_at(trv, Bry_.new_u8(src), bgn_pos, end_pos);
+		Gftest.Eq__obj_or_null(expd_val, actl_val);
+		Gftest.Eq__int(expd_pos, trv.Pos());
 	}
 }

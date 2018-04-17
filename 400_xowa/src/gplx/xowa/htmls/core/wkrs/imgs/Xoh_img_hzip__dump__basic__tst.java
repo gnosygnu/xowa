@@ -93,6 +93,12 @@ public class Xoh_img_hzip__dump__basic__tst {
 		, "<a href='/wiki/File:A.png' class='image' title='abc' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' class='cls1' alt='abc'></a>"
 		);
 	}
+	@Test   public void Manual_img_cls_empty() {	// PURPOSE: handle empty class; EX: [[File:A.png|class=""]] de.w:Butter; DATE:2018-04-11
+		fxt.Test__bicode
+		( "~%!-A.png~)#Sabc~"
+		, "<a href='/wiki/File:A.png' class='image' title='abc' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' class='' alt='abc'></a>"
+		);
+	}
 	@Test   public void Imap() {
 		fxt.Test__bicode
 		( "~%}#P`uA.png~#:#S#+\""

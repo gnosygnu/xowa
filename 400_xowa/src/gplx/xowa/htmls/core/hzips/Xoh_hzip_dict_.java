@@ -51,5 +51,9 @@ public class Xoh_hzip_dict_ {
 	, Key__pgbnr				= "pgbnr"
 	, Key__media				= "media"
 	;
-	public static final int Hzip__none = 0, Hzip__v1 = 1, Hzip__plain = 2;	// SERIALIZED
+	public static final int  // SERIALIZED
+		  Hzip__none = 0
+		, Hzip__v1 = 1
+		, Hzip__plain = 2 // used for page_sync
+		;	
 }
