@@ -853,6 +853,7 @@ public class Xow_domain_regy {
 , "din.wikipedia.org"
 , "hi.wikiversity.org"
 , "hi.wikivoyage.org"
+, "hif.wiktionary.org"
 };
 //, "als.wikisource.org"
 //, "als.wikinews.org"

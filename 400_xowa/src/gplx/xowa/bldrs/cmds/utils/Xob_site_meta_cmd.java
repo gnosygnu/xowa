@@ -60,6 +60,10 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 				else
 					break;
 			}
+			if (json_text == null) {// if wmf_api never returns, exit else CONSTRAINT error upon INSERT; EX:als.wiktionary.org; DATE:2018-04-17
+				app.Usr_dlg().Note_many("", "", "wm.api: failed; wiki=~{0} api=~{1}", domain_str);
+				continue;
+			}
 			byte[] domain_bry = Bry_.new_u8(domain_str);
 			byte[] site_abrv = Xow_abrv_xo_.To_bry(domain_bry);
 			json_db.Tbl__core().Insert(site_abrv, domain_bry, Bool_.N, json_date, json_text);
@@ -70,6 +74,7 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 			String domain_str = reqd_ary[i];
 			byte[] site_abrv = Xow_abrv_xo_.To_bry(Bry_.new_u8(domain_str));
 			Site_core_itm core_itm = json_db.Tbl__core().Select_itm(site_abrv);
+			if (core_itm == null) continue; // sites with no wmf_api will be null; EX:als.wiktionary.org DATE:2018-04-17
 			if (core_itm.Json_completed()) continue;
 			Site_meta_itm meta_itm = new Site_meta_itm();
 			site_parser.Parse_root(meta_itm, String_.new_u8(core_itm.Site_domain()), core_itm.Json_text());
