@@ -28,6 +28,27 @@ public class Scrib_lib_wikibase_tst {
 	// @Test  public void GetGlobalSiteId() {
 	//	fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getGlobalSiteId, Object_.Ary_empty, "enwiki");
 	// }
+	@Test  public void IsValidEntityId() {
+		IsValidEntityIdCheck(Bool_.Y, "P1");
+		IsValidEntityIdCheck(Bool_.Y, "P123");
+		IsValidEntityIdCheck(Bool_.Y, "Q1");
+		IsValidEntityIdCheck(Bool_.Y, "Q123");
+		IsValidEntityIdCheck(Bool_.Y, "A:B:Q123");
+
+		IsValidEntityIdCheck(Bool_.N, "p1");
+		IsValidEntityIdCheck(Bool_.N, "q1");
+		IsValidEntityIdCheck(Bool_.N, "P");
+		IsValidEntityIdCheck(Bool_.N, "P1A");
+		IsValidEntityIdCheck(Bool_.N, "P01");
+	}
+	private void IsValidEntityIdCheck(boolean expd, String val) {
+		fxt.Test_scrib_proc_bool(lib, Scrib_lib_wikibase.Invk_isValidEntityId, Object_.Ary(val), expd);
+	}
+	@Test  public void EntityExists() {
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_label("en", "b").Xto_wdoc());
+		fxt.Test_scrib_proc_bool(lib, Scrib_lib_wikibase.Invk_entityExists, Object_.Ary("q2"					), true);
+		fxt.Test_scrib_proc_bool(lib, Scrib_lib_wikibase.Invk_entityExists, Object_.Ary("Q1"					), false);
+	}
 	@Test  public void GetEntityId() {
 		wdata_fxt.Init_links_add("enwiki", "Earth", "q2");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary("Earth"							), "q2");
