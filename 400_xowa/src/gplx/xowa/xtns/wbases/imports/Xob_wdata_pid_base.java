@@ -19,18 +19,20 @@ import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public abstract class Xob_wdata_pid_base extends Xob_itm_dump_base implements Xob_page_wkr, Gfo_invk {
 	private Json_parser parser;
 	public Xob_wdata_pid_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
-	public abstract String Page_wkr__key();
 	public abstract void Pid_bgn();
 	public abstract void Pid_add(byte[] src_lang, byte[] src_ttl, byte[] trg_ttl);
 	public abstract void Pid_datatype(byte[] pid, byte[] datatype_bry);
 	public abstract void Pid_end();
+
+	public abstract String Page_wkr__key();
 	public void Page_wkr__bgn() {
 		this.Init_dump(this.Page_wkr__key(), wiki.Tdb_fsys_mgr().Site_dir().GenSubDir_nest("data", "pid"));	// NOTE: must pass in correct make_dir in order to delete earlier version (else make_dirs will append)
-		parser = bldr.App().Wiki_mgr().Wdata_mgr().Jdoc_parser();
+		this.parser = bldr.App().Wiki_mgr().Wdata_mgr().Jdoc_parser();
 		this.Pid_bgn();
 	}
 	public void Page_wkr__run(Xowd_page_itm page) {
 		if (page.Ns_id() != Wdata_wiki_mgr.Ns_property) return;
+
 		Json_doc jdoc = parser.Parse(page.Text()); 
 		if (jdoc == null) {
 			bldr.Usr_dlg().Warn_many(GRP_KEY, "json.invalid", "json is invalid: ns=~{0} id=~{1}", page.Ns_id(), String_.new_u8(page.Ttl_page_db()));
@@ -56,5 +58,5 @@ public abstract class Xob_wdata_pid_base extends Xob_itm_dump_base implements Xo
 		}
 	}
 	public void Page_wkr__end() {this.Pid_end();}
-	static final String GRP_KEY = "xowa.wdata.pid_wkr";
+	private static final String GRP_KEY = "xowa.wdata.pid_wkr";
 }

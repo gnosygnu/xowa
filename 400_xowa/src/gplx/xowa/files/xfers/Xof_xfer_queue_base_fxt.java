@@ -70,7 +70,7 @@ public class Xof_xfer_queue_base_fxt {
 	public void Init_page_create(Xowe_wiki wiki, String ttl, String txt) {
 		Xoa_ttl page_ttl = Xoa_ttl.Parse(wiki, Bry_.new_u8(ttl));
 		byte[] page_raw = Bry_.new_u8(txt);
-		wiki.Db_mgr().Save_mgr().Data_create(page_ttl, page_raw);
+		wiki.Db_mgr().Save_mgr().Data_create(wiki, page_ttl, page_raw);
 	}
 	Xof_repo_itm Ini_repo_add(Xof_file_mgr file_mgr, byte[] key, String root, String wiki, boolean trg) {
 		Xof_repo_itm repo = file_mgr.Repo_mgr().Set(String_.new_u8(key), root, wiki).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);

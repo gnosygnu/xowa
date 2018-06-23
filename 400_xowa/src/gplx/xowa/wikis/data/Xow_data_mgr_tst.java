@@ -131,7 +131,7 @@ class Xow_data_mgr_fxt {
 	}
 	public Xow_data_mgr_fxt Create(String ttl_str, String data) {
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Bry_.new_u8(ttl_str));
-		wiki.Db_mgr().Save_mgr().Data_create(ttl, Bry_.new_u8(data));
+		wiki.Db_mgr().Save_mgr().Data_create(wiki, ttl, Bry_.new_u8(data));
 		return this;
 	}
 	public Xow_data_mgr_fxt Update(String ttl_str, String data) {

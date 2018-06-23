@@ -46,7 +46,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		Xotdb_page_itm_.Txt_ttl_load(rv, tmp_xdat_itm.Itm_bry());
 		return Bry_.Eq(rv.Ttl_page_db(), ttl);
 	}
-	public void Load_by_ttls(Cancelable cancelable, Ordered_hash rv, boolean fill_idx_fields_only, int bgn, int end) {// NOTE: Load_by_ttls just a wrapper around Load_by_ttl; for xdat, Load_by_ttl is fast enough
+	public void Load_by_ttls(Xowe_wiki wiki, Cancelable cancelable, Ordered_hash rv, boolean fill_idx_fields_only, int bgn, int end) {// NOTE: Load_by_ttls just a wrapper around Load_by_ttl; for xdat, Load_by_ttl is fast enough
 		for (int i = bgn; i < end; i++) {
 			if (cancelable.Canceled()) return;
 			Xowd_page_itm page = (Xowd_page_itm)rv.Get_at(i);

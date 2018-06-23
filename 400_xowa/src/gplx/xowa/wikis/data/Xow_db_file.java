@@ -20,10 +20,9 @@ import gplx.xowa.htmls.core.dbs.*; import gplx.xowa.addons.wikis.searchs.dbs.*;
 import gplx.xowa.addons.wikis.htmls.css.dbs.*;
 import gplx.xowa.xtns.wbases.dbs.*;
 public class Xow_db_file {
-	protected Xow_db_file(Db_cfg_tbl cfg_tbl, Xowd_core_db_props props, Xob_info_session info_session, Xob_info_file info_file, Xow_db_file_schema_props schema_props, int id, byte tid, Io_url url, String ns_ids, int part_id, Guid_adp guid, Db_conn conn, byte cmd_mode) {
+	Xow_db_file(Db_cfg_tbl cfg_tbl, Xowd_core_db_props props, Xob_info_session info_session, Xob_info_file info_file, Xow_db_file_schema_props schema_props, int id, byte tid, Io_url url, String ns_ids, int part_id, Guid_adp guid, Db_conn conn, byte cmd_mode) {
 		this.id = id; this.tid = tid; this.url = url; this.ns_ids = ns_ids; this.part_id = part_id; this.guid = guid; this.db_props = props;
 		this.conn = conn; this.cmd_mode = cmd_mode;
-		this.url_rel = url.NameAndExt();			
 		boolean schema_is_1 = props.Schema_is_1();
 		this.tbl__cfg = cfg_tbl;
 		this.tbl__db = new Xowd_xowa_db_tbl(conn, schema_is_1);
@@ -47,7 +46,6 @@ public class Xow_db_file {
 	public byte							Tid()				{return tid;}				private final    byte tid;
 	public Db_conn						Conn()				{return conn;}				private final    Db_conn conn;
 	public Io_url						Url()				{return url;}				private final    Io_url url;
-	public String						Url_rel()			{return url_rel;}			private final    String url_rel;
 	public Xowd_core_db_props			Db_props()			{return db_props;}			private final    Xowd_core_db_props db_props;
 	public String						Ns_ids()			{return ns_ids;}			private final    String ns_ids;
 	public int							Ns_id_or_fail()		{return Int_.Parse(ns_ids);}
@@ -68,7 +66,7 @@ public class Xow_db_file {
 	public Xowd_cat_link_tbl			Tbl__cat_link()		{return tbl__cat_link;}		private final    Xowd_cat_link_tbl tbl__cat_link;
 	public Xowd_site_stats_tbl			Tbl__site_stats()	{return tbl__site_stats;}	private final    Xowd_site_stats_tbl tbl__site_stats;
 	public Xowd_wbase_qid_tbl			Tbl__wbase_qid()	{return tbl__wbase_qid;}	private final    Xowd_wbase_qid_tbl tbl__wbase_qid;
-	public Xowd_wbase_pid_tbl			Tbl__wbase_pid()	{return tbl__wbase_pid;}	private final    Xowd_wbase_pid_tbl tbl__wbase_pid;
+	Xowd_wbase_pid_tbl			Tbl__wbase_pid()	{return tbl__wbase_pid;}	private final    Xowd_wbase_pid_tbl tbl__wbase_pid;
 	public Xowb_prop_tbl				Tbl__wbase_prop()	{return tbl__wbase_prop;}	private final    Xowb_prop_tbl tbl__wbase_prop;
 	public Xob_info_session				Info_session() {
 		if (info_session == null)	// NOTE: null when load; !null when make

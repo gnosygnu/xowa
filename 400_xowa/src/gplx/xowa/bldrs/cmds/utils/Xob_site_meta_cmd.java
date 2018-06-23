@@ -61,7 +61,7 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 					break;
 			}
 			if (json_text == null) {// if wmf_api never returns, exit else CONSTRAINT error upon INSERT; EX:als.wiktionary.org; DATE:2018-04-17
-				app.Usr_dlg().Note_many("", "", "wm.api: failed; wiki=~{0} api=~{1}", domain_str);
+				app.Usr_dlg().Note_many("", "", "wm.api: failed; wiki=~{0}", domain_str);
 				continue;
 			}
 			byte[] domain_bry = Bry_.new_u8(domain_str);

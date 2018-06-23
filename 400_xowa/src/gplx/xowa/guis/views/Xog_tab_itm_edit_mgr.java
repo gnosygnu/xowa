@@ -26,7 +26,7 @@ public class Xog_tab_itm_edit_mgr {
 		byte[] new_text = Get_new_text(tab, page.Db().Text().Text_bry());
 		int page_id = page.Db().Page().Id();
 		if (page.Edit_mode() == Xoa_page_.Edit_mode_create) {
-			page_id = wiki.Db_mgr().Save_mgr().Data_create(page.Ttl(), new_text);
+			page_id = wiki.Db_mgr().Save_mgr().Data_create(wiki, page.Ttl(), new_text);
 			page.Db().Page().Id_(page_id);
 			page.Edit_mode_update_();	// set to update so that next save does not try to create
 		}

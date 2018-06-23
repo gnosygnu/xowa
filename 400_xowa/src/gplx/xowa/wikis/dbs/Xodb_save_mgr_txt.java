@@ -29,7 +29,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 	public boolean Update_modified_on_enabled() {return update_modified_on_enabled;} public void Update_modified_on_enabled_(boolean v) {update_modified_on_enabled = v;} private boolean update_modified_on_enabled;
 	public int Page_id_next() {return page_id_next;} public void Page_id_next_(int v) {page_id_next = v;} private int page_id_next = 0;
 	public void Clear() {page_id_next = 0;}	// TEST: needed for ctg_test		
-	public int Data_create(Xoa_ttl ttl, byte[] text) {
+	public int Data_create(Xowe_wiki wiki, Xoa_ttl ttl, byte[] text) {
 		Xow_ns ns_itm = ttl.Ns(); byte[] ttl_bry = ttl.Page_db();
 		Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
 		boolean found = load_mgr.Load_by_ttl(db_page, ns_itm, ttl_bry);

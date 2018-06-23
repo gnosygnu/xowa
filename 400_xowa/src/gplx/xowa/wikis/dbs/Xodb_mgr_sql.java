@@ -18,6 +18,7 @@ import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.dbs.*; impor
 import gplx.xowa.apps.gfs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.htmls.core.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 public class Xodb_mgr_sql implements Xodb_mgr, Gfo_invk {
+	private final    Xowe_wiki wiki;
 	public Xodb_mgr_sql(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		this.core_data_mgr = new Xow_db_mgr(wiki.Fsys_mgr().Root_dir(), wiki.Domain_str());
@@ -26,7 +27,6 @@ public class Xodb_mgr_sql implements Xodb_mgr, Gfo_invk {
 	}
 	public byte Tid() {return Tid_sql;} public String Tid_name() {return "sqlite3";} public static final byte Tid_sql = 1;		
 	public Xow_db_mgr Core_data_mgr() {return core_data_mgr;} private final    Xow_db_mgr core_data_mgr;
-	public Xowe_wiki Wiki() {return wiki;} private final    Xowe_wiki wiki;
 	public Xodb_load_mgr Load_mgr() {return load_mgr;} private final    Xodb_load_mgr_sql load_mgr;
 	public Xodb_save_mgr Save_mgr() {return save_mgr;} private final    Xodb_save_mgr_sql save_mgr;
 	public byte Category_version() {return category_version;} private byte category_version = Xoa_ctg_mgr.Version_null;

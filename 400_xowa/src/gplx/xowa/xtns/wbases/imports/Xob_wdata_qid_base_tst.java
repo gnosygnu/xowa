@@ -51,7 +51,7 @@ public class Xob_wdata_qid_base_tst {
 		,	"0|Q1_fr|Q2_fr|2"
 		,	""
 		)
-		.Run(new Xob_wdata_qid_txt().Ctor(fxt.Bldr(), this.fxt.Wiki()))
+		.Run_page_wkrs(new Xob_wdata_qid_txt().Ctor(fxt.Bldr(), this.fxt.Wiki()))
 		;
 	}
 	@Test  public void Ns() {
@@ -84,7 +84,7 @@ public class Xob_wdata_qid_base_tst {
 		,	"0|Q1_fr|Q1_fr|1"
 		,	""
 		)
-		.Run(new Xob_wdata_qid_txt().Ctor(fxt.Bldr(), this.fxt.Wiki()))
+		.Run_page_wkrs(new Xob_wdata_qid_txt().Ctor(fxt.Bldr(), this.fxt.Wiki()))
 		;
 	}
 	@Test  public void Links_w_name() {	// PURPOSE: wikidata changed links node from "enwiki:A" to "enwiki:{name:A,badges:[]}"; DATE:2013-09-14
@@ -130,7 +130,7 @@ public class Xob_wdata_qid_base_tst {
 		,	"0|Q1_fr|Q2_fr|2"
 		,	""
 		)
-		.Run(new Xob_wdata_qid_txt().Ctor(fxt.Bldr(), this.fxt.Wiki()))
+		.Run_page_wkrs(new Xob_wdata_qid_txt().Ctor(fxt.Bldr(), this.fxt.Wiki()))
 		;
 	}
 	@Test  public void Spaces() {	// PURPOSE: assert that ttls with spaces are converted to unders DATE:2015-04-21
@@ -160,7 +160,7 @@ public class Xob_wdata_qid_base_tst {
 		,	"0|Q1_fr|Q2_fr|2"
 		,	""
 		)
-		.Run(new Xob_wdata_qid_txt().Ctor(fxt.Bldr(), this.fxt.Wiki()))
+		.Run_page_wkrs(new Xob_wdata_qid_txt().Ctor(fxt.Bldr(), this.fxt.Wiki()))
 		;
 	}
 	public static Io_url reg_(Xowe_wiki wdata, String wiki, String ns_id) {

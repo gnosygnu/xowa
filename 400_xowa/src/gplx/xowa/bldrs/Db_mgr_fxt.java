@@ -32,7 +32,7 @@ public class Db_mgr_fxt {
 	public Xowd_page_itm doc_ttl_(int id, String title) {return bldr_fxt.doc_(id, "2012-01-02 03:04", title, "IGNORE");}
 	public Db_mgr_fxt Init_fil(String url, String raw) {return Init_fil(Io_url_.new_fil_(url), raw);}
 	public Db_mgr_fxt Init_fil(Io_url url, String raw) {Io_mgr.Instance.SaveFilStr(url, raw); return this;}
-	public Db_mgr_fxt Exec_run(Xob_page_wkr wkr)		{bldr_fxt.Run(wkr); return this;}
+	public Db_mgr_fxt Exec_run(Xob_page_wkr wkr)		{bldr_fxt.Run_page_wkrs(wkr); return this;}
 	public Db_mgr_fxt Exec_run(Xob_cmd cmd)			{bldr_fxt.Run_cmds(cmd); return this;}
 	public Db_mgr_fxt Exec_run(Xobd_parser_wkr wkr) {bldr_fxt.Run(wkr); return this;}
 	public void Init_page_insert(Int_obj_ref page_id_next, int ns_id, String[] ttls) {

@@ -18,6 +18,8 @@ import gplx.core.tests.*; import gplx.core.ios.*; import gplx.core.times.*;
 import gplx.dbs.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*;
 import gplx.xowa.bldrs.wkrs.*;
 public class Xob_fxt {
+	private final    Tst_mgr tst_mgr = new Tst_mgr();
+	private final    DateAdp_parser dateParser = DateAdp_parser.new_();
 	public Xob_fxt Ctor_mem() {
 		Io_mgr.Instance.InitEngine_mem();
 		return Ctor(Io_url_.mem_dir_("mem/xowa/"));
@@ -32,14 +34,6 @@ public class Xob_fxt {
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xob_bldr Bldr() {return bldr;} private Xob_bldr bldr;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
-	public Io_url fil_ns_title(int ns_id, int idx)	{return wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_ttl, ns_id, idx);}
-	public Io_url fil_ns_page(int ns_id, int idx)	{return wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_page, ns_id, idx);}
-	public Io_url fil_ns_sttl(int ns_id, int idx)	{return wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_search_ttl, ns_id, idx);}
-	public Io_url fil_site(byte tid, int idx)		{return wiki.Tdb_fsys_mgr().Url_site_fil(tid, idx);}
-	public Io_url fil_site_ctg(int idx)				{return wiki.Tdb_fsys_mgr().Url_site_fil(Xotdb_dir_info_.Tid_category, idx);}
-	public Io_url fil_site_id(int idx)				{return wiki.Tdb_fsys_mgr().Url_site_fil(Xotdb_dir_info_.Tid_id, idx);}
-	public Io_url fil_reg(byte tid) 				{return wiki.Tdb_fsys_mgr().Url_site_reg(tid);}
-	public Io_url fil_reg(int ns_id, byte tid) 		{return wiki.Tdb_fsys_mgr().Url_ns_reg(Int_.To_str_pad_bgn_zero(ns_id, 3), tid);}
 	public Xob_fxt Fil_expd(Io_url url, String... expd) {
 		String text = String_.Concat_lines_nl_skip_last(expd);	// skipLast b/c if trailing line wanted, easier to pass in extra argument for ""
 		expd_list.Add(new Io_fil_chkr(url, text));
@@ -61,7 +55,7 @@ public class Xob_fxt {
 	}
 	public Xob_fxt Run_id() {
 		Xob_make_id_wkr wkr = new Xob_make_id_wkr(bldr, wiki);
-		Run(wkr);
+		Run_page_wkrs(wkr);
 		return this;
 	}
 	private void Run_wkr(Xob_page_wkr wkr) {
@@ -98,10 +92,10 @@ public class Xob_fxt {
 		int len = wkrs.length;
 		for (int i = 0; i < len; i++)
 			parser_wkr.Wkr_add(wkrs[i]);
-		Run(parser_wkr);
+		Run_page_wkrs(parser_wkr);
 		return this;
 	}
-	public Xob_fxt Run(Xob_page_wkr... wkrs) {
+	public Xob_fxt Run_page_wkrs(Xob_page_wkr... wkrs) {
 		int doc_ary_len = doc_ary.length;
 		for (int j = 0; j < wkrs.length; j++) {
 			Xob_page_wkr wkr = wkrs[j];
@@ -147,6 +141,14 @@ public class Xob_fxt {
 			list.Add(fil);
 		}		
 	}
-	Tst_mgr tst_mgr = new Tst_mgr();
-	DateAdp_parser dateParser = DateAdp_parser.new_();
+
+	public void Run_page_wkr(Xob_page_wkr wkr, Xowd_page_itm... pages) {
+		int len = pages.length;
+		wkr.Page_wkr__bgn();
+		for (int i = 0; i < len; i++) {
+			Xowd_page_itm page = pages[i];
+			wkr.Page_wkr__run(page);
+		}
+		wkr.Page_wkr__end();
+	}
 } 

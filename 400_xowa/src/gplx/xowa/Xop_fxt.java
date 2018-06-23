@@ -176,7 +176,7 @@ public class Xop_fxt {
 	public static void Init_page_create_static(Xowe_wiki wiki, String ttl_str, String text_str) {
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Bry_.new_u8(ttl_str));
 		byte[] text = Bry_.new_u8(text_str);
-		wiki.Db_mgr().Save_mgr().Data_create(ttl, text);
+		wiki.Db_mgr().Save_mgr().Data_create(wiki, ttl, text);
 	}
 	public static void Init_msg(Xowe_wiki wiki, String key, String val) {
 		wiki.Lang().Msg_mgr().Itm_by_key_or_new(key, val);

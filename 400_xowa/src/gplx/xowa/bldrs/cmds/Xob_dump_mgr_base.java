@@ -118,7 +118,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
 		int pg_id = pg_bgn;
 		while (true) {
-			page_src.Get_pages(pages, db_id, ns_id, pg_id);
+			page_src.Get_pages(wiki.Appe(), pages, db_id, ns_id, pg_id);
 			int pages_len = pages.Count();
 			if (pages_len == 0) {	// no more pages in db;
 				if (pg_id > pg_bgn)	// reset pg_bgn to 0 only if pg_bgn seen;
@@ -235,7 +235,7 @@ class Xob_dump_mgr_base_ {
 		int load_count = 0;
 		usr_dlg.Note_many("", "", "tmpl_load init");
 		while (true) {
-			page_src.Get_pages(pages, 0, Xow_ns_.Tid__template, cur_page_id);	// 0 is always template db
+			page_src.Get_pages(wiki.Appe(), pages, 0, Xow_ns_.Tid__template, cur_page_id);	// 0 is always template db
 			int page_count = pages.Count();
 			if (page_count == 0) break;	// no more pages in db;
 			Xowd_page_itm page = null;

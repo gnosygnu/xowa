@@ -20,6 +20,7 @@ import gplx.xowa.apps.gfs.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.*;
 public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	private final    Xodb_mgr_sql db_mgr;
+	private Xowd_wbase_pid_tbl wbase_pid_tbl;
 	public Xodb_load_mgr_sql(Xodb_mgr_sql db_mgr) {this.db_mgr = db_mgr;}
 	public void Load_init(Xowe_wiki wiki) {
 		Xow_db_file db_core = wiki.Data__core_mgr().Db__core();
@@ -53,8 +54,8 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	public boolean Load_by_ttl(Xowd_page_itm rv, Xow_ns ns, byte[] ttl) {
 		return db_mgr.Core_data_mgr().Tbl__page().Select_by_ttl(rv, ns, ttl);
 	}
-	public void Load_by_ttls(Cancelable cancelable, Ordered_hash rv, boolean fill_idx_fields_only, int bgn, int end) {
-		db_mgr.Core_data_mgr().Tbl__page().Select_in__ns_ttl(cancelable, rv, db_mgr.Wiki().Ns_mgr(), fill_idx_fields_only, bgn, end);
+	public void Load_by_ttls(Xowe_wiki wiki, Cancelable cancelable, Ordered_hash rv, boolean fill_idx_fields_only, int bgn, int end) {
+		db_mgr.Core_data_mgr().Tbl__page().Select_in__ns_ttl(cancelable, rv, wiki.Ns_mgr(), fill_idx_fields_only, bgn, end);
 	}
 	public void Load_page(Xowd_page_itm rv, Xow_ns ns) {
 		if (rv.Text_db_id() == -1) return; // NOTE: page_sync will create pages with -1 text_db_id; DATE:2017-05-06
@@ -73,8 +74,15 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		db_mgr.Core_data_mgr().Tbl__page().Select_for_search_suggest(cancelable, rslt_list, ns, key, max_results, min_page_len, browse_len, include_redirects, fetch_prv_item);
 	}
 	public byte[] Load_qid(byte[] wiki_alias, byte[] ns_num, byte[] ttl)	{return db_mgr.Core_data_mgr().Db__wbase().Tbl__wbase_qid().Select_qid(wiki_alias, ns_num, ttl);}
-	public int Load_pid(byte[] lang_key, byte[] pid_name)					{return db_mgr.Core_data_mgr().Db__wbase().Tbl__wbase_pid().Select_pid(lang_key, pid_name);}
 	public byte[] Find_random_ttl(Xow_ns ns) {return db_mgr.Core_data_mgr().Tbl__page().Select_random(ns);}
 	public Xodb_page_rdr Get_page_rdr(Xowe_wiki wiki) {return new Xodb_page_rdr__sql(wiki);}
+
+	public int Load_pid(byte[] lang_key, byte[] pid_name) {
+		if (wbase_pid_tbl == null) {
+			Xow_db_mgr core_db_mgr = db_mgr.Core_data_mgr();
+			wbase_pid_tbl = new Xowd_wbase_pid_tbl(core_db_mgr.Db__wbase().Conn(), core_db_mgr.Props().Schema_is_1());
+		}
+		return wbase_pid_tbl.Select_pid(lang_key, pid_name);
+	}
 	public void Clear() {}
 }

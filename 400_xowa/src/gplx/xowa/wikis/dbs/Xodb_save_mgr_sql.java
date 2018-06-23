@@ -22,7 +22,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 	public boolean Create_enabled() {return create_enabled;} public void Create_enabled_(boolean v) {create_enabled = v;} private boolean create_enabled;
 	public boolean Update_modified_on_enabled() {return update_modified_on_enabled;} public void Update_modified_on_enabled_(boolean v) {update_modified_on_enabled = v;} private boolean update_modified_on_enabled;
 	public int Page_id_next() {return page_id_next;} public void Page_id_next_(int v) {page_id_next = v;} private int page_id_next;
-	public int Data_create(Xoa_ttl ttl, byte[] text_raw) {
+	public int Data_create(Xowe_wiki wiki, Xoa_ttl ttl, byte[] text_raw) {
 		int ns_id = ttl.Ns().Id();
 		Xow_db_file db_file = db_mgr.Core_data_mgr().Db__core();
 		int ns_count = db_file.Tbl__ns().Select_ns_count(ns_id) + 1;
@@ -44,7 +44,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		if (page_text_db == null) page_text_db = fsys_mgr.Db__core();	// HACK: needed for create new wiki DATE:2016-10-29
 		Xowd_text_tbl page_text_tbl = page_text_db.Tbl__text();
 		byte[] text_zip = page_text_tbl.Zip(text_raw);
-		boolean redirect = db_mgr.Wiki().Redirect_mgr().Is_redirect(text_raw, text_raw.length);
+		boolean redirect = wiki.Redirect_mgr().Is_redirect(text_raw, text_raw.length);
 		Xowd_page_tbl page_core_tbl = db_mgr.Core_data_mgr().Tbl__page();
 		page_core_tbl.Insert_bgn();
 		page_text_tbl.Insert_bgn();
@@ -58,8 +58,8 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		}
 		return page_id;
 	}
-	public void Data_update(Xoae_page page, byte[] text_raw) {
-		boolean redirect = db_mgr.Wiki().Redirect_mgr().Is_redirect(text_raw, text_raw.length);
+	public void Data_update(Xoae_page page, byte[] text_raw) {			
+		boolean redirect = page.Wikie().Redirect_mgr().Is_redirect(text_raw, text_raw.length);
 		DateAdp modified = update_modified_on_enabled ? Datetime_now.Get() : page.Db().Page().Modified_on();
 		int page_id = page.Db().Page().Id();
 		db_mgr.Core_data_mgr().Tbl__page().Update__redirect__modified(page_id, redirect, modified);

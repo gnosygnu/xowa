@@ -16,8 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.wbases.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
 import org.junit.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+import gplx.xowa.bldrs.*;
 public class Xob_wdata_pid_base_tst {
-	gplx.xowa.bldrs.Xob_fxt fxt = new gplx.xowa.bldrs.Xob_fxt().Ctor_mem();
+	private final    Xob_fxt fxt = new Xob_fxt().Ctor_mem();
 	Io_url reg_(Xowe_wiki wdata, String wiki) {return Wdata_idx_wtr.dir_pid_(wdata, wiki).GenSubFil(Xotdb_dir_info_.Name_reg_fil);}
 	Io_url ttl_(Xowe_wiki wdata, String wiki, int fil_id) {
 		Io_url root = Wdata_idx_wtr.dir_pid_(wdata, wiki);
@@ -51,7 +52,7 @@ public class Xob_wdata_pid_base_tst {
 		,	"0|p1_fr|p2_fr|2"
 		,	""
 		)
-		.Run(new Xob_wdata_pid_txt().Ctor(fxt.Bldr(), this.fxt.Wiki()))
+		.Run_page_wkrs(new Xob_wdata_pid_txt().Ctor(fxt.Bldr(), this.fxt.Wiki()))
 		;
 	}
 	public static String json_(String entity_id, String grp_key, String[] grp_vals) {

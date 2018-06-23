@@ -26,6 +26,7 @@ public abstract class Xob_itm_basic_base implements Gfo_invk {
 	}
 	@gplx.Virtual public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	@gplx.Virtual protected void Cmd_ctor_end(Xob_bldr bldr, Xowe_wiki wiki) {}
+
 	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_owner))				return bldr.Cmd_mgr();
 		else	return Gfo_invk_.Rv_unhandled;

@@ -17,7 +17,8 @@ package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.dbs.metas.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.wikis.dbs.*;
 public class Xowd_core_db_props {
-	public Xowd_core_db_props(int schema, Xow_db_layout layout_text, Xow_db_layout layout_html, Xow_db_layout layout_file
+	public Xowd_core_db_props(int schema
+		, Xow_db_layout layout_text, Xow_db_layout layout_html, Xow_db_layout layout_file
 		, byte zip_tid_text, byte zip_tid_html, boolean hzip_enabled, boolean hzip_mode_is_b256) {
 		this.schema = schema;
 		this.layout_text = layout_text; this.layout_html = layout_html; this.layout_file = layout_file;
@@ -45,6 +46,7 @@ public class Xowd_core_db_props {
 		tbl.Insert_yn		(Cfg_grp, Cfg_key__hzip_mode_is_b256	, hzip_mode_is_b256);
 		tbl.Conn().Txn_end();
 	}
+
 	public static Xowd_core_db_props Cfg_load(Db_conn conn) {return Cfg_load(conn, gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn));}
 	public static Xowd_core_db_props Cfg_load(Db_conn conn, Db_cfg_tbl cfg_tbl) {			
 		return cfg_tbl.Select_int_or(Cfg_grp, Cfg_key__schema_version, 1) == 1
@@ -76,5 +78,6 @@ public class Xowd_core_db_props {
 	, Cfg_key__hzip_enabled			= "hzip_enabled"
 	, Cfg_key__hzip_mode_is_b256	= "hzip_mode_is_b256"
 	;
+
 	public static final    Xowd_core_db_props Test = new Xowd_core_db_props(2, Xow_db_layout.Itm_few, Xow_db_layout.Itm_few, Xow_db_layout.Itm_few, Io_stream_tid_.Tid__raw, Io_stream_tid_.Tid__raw, Bool_.Y, Bool_.Y);
 }

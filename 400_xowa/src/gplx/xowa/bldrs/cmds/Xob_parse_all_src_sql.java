@@ -26,14 +26,14 @@ class Xob_dump_src_id {
 		this.page_db_url = db_mgr.Core_data_mgr().Db__core().Url().Raw();
 		return this;
 	}
-	public void Get_pages(List_adp list, int text_db_idx, int cur_ns, int prv_id) {
+	public void Get_pages(Xoae_app app, List_adp list, int text_db_idx, int cur_ns, int prv_id) {
 		DataRdr rdr = DataRdr_.Null;
 		int size_len = 0;
 		list.Clear();
 		try {
 			rdr = New_rdr(db_mgr, page_db_url, text_db_idx, cur_ns, prv_id, redirect);
 			while (rdr.MoveNextPeer()) {
-				Xowd_page_itm page = New_page(db_mgr, cur_ns, rdr);
+				Xowd_page_itm page = New_page(app, db_mgr, cur_ns, rdr);
 				list.Add(page);
 				size_len += page.Text_len();
 				if (size_len > size_max)
@@ -52,7 +52,7 @@ class Xob_dump_src_id {
 		}
 		return text_stmt.Clear().Val_int(prv_id).Val_int(cur_ns).Exec_select();
 	}
-	private static Xowd_page_itm New_page(Xodb_mgr_sql db_mgr, int ns_id, DataRdr rdr) {
+	private static Xowd_page_itm New_page(Xoae_app app, Xodb_mgr_sql db_mgr, int ns_id, DataRdr rdr) {
 		Xowd_page_tbl page_core_tbl = db_mgr.Core_data_mgr().Tbl__page();
 		Xowd_page_itm rv = new Xowd_page_itm();
 		rv.Id_(rdr.ReadInt(page_core_tbl.Fld_page_id()));
@@ -61,7 +61,7 @@ class Xob_dump_src_id {
 		
 		String text_data_name = db_mgr.Core_data_mgr().Db__core().Tbl__text().Fld_text_data();
 		byte[] text_data = rdr.ReadBry(text_data_name);
-		text_data = db_mgr.Wiki().Appe().Zip_mgr().Unzip(db_mgr.Core_data_mgr().Props().Zip_tid_text(), text_data);
+		text_data = app.Zip_mgr().Unzip(db_mgr.Core_data_mgr().Props().Zip_tid_text(), text_data);
 		rv.Text_(text_data);
 		return rv;
 	}

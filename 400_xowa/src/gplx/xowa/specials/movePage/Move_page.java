@@ -54,7 +54,7 @@ public class Move_page implements Xow_special_page {
 			if (trg_page_exists)
 				save_mgr.Data_update(page, page.Db().Text().Text_bry());
 			else
-				save_mgr.Data_create(trg_ttl, page.Db().Text().Text_bry());
+				save_mgr.Data_create(wiki, trg_ttl, page.Db().Text().Text_bry());
 		}
 		else
 			save_mgr.Data_rename(page, trg_ns_id, trg_ttl_bry);

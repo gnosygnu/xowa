@@ -50,7 +50,7 @@ class Xol_msg_mgr_fxt {
 	}
 	public void Test_mediaWiki_msg(String raw, String expd) {
 		byte[] msg_ttl = Bry_.new_a7("MediaWiki:msg_ttl");
-		wiki.Db_mgr().Save_mgr().Data_create(Xoa_ttl.Parse(wiki, msg_ttl), Bry_.new_a7(raw));
+		wiki.Db_mgr().Save_mgr().Data_create(wiki, Xoa_ttl.Parse(wiki, msg_ttl), Bry_.new_a7(raw));
 		Tfds.Eq(expd, String_.new_u8(wiki.Msg_mgr().Val_by_key_obj(Bry_.new_a7("msg_ttl"))));
 	}
 	public void Test_val_html_accesskey_and_title(String init_title, String init_accesskey, String expd) {

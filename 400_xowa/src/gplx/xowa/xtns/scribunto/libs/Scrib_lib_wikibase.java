@@ -57,6 +57,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 			case Proc_incrementExpensiveFunctionCount:	return IncrementExpensiveFunctionCount(args, rslt);
 			case Proc_getPropertyOrder:					return GetPropertyOrder(args, rslt);
 			case Proc_orderProperties:					return OrderProperties(args, rslt);
+			case Proc_isValidEntityId:					return IsValidEntityId(args, rslt);
 			default: throw Err_.new_unhandled(key);
 		}
 	}
@@ -64,17 +65,18 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	  Proc_getLabel = 0 //, Proc_getLabelByLanguage = 1
 	, Proc_getEntity = 2, Proc_getEntityStatements = 3, Proc_getSetting = 4, Proc_getEntityUrl = 5, Proc_renderSnak = 6//, Proc_formatValue = 7
 	, Proc_renderSnaks = 8, Proc_getEntityId = 9, Proc_getUserLang = 10, Proc_getDescription = 11, Proc_resolvePropertyId = 12
-	, Proc_getSiteLinkPageName = 13, Proc_incrementExpensiveFunctionCount = 14, Proc_getPropertyOrder = 15, Proc_orderProperties = 16;
+	, Proc_getSiteLinkPageName = 13, Proc_incrementExpensiveFunctionCount = 14, Proc_getPropertyOrder = 15, Proc_orderProperties = 16, Proc_isValidEntityId = 17;
 	public static final String
 	  Invk_getLabel = "getLabel", Invk_getLabelByLanguage = "getLabelByLanguage", Invk_getEntity = "getEntity", Invk_getEntityStatements = "getEntityStatements"
 	, Invk_getSetting = "getSetting", Invk_getEntityUrl = "getEntityUrl", Invk_renderSnak = "renderSnak", Invk_formatValue = "formatValue", Invk_renderSnaks = "renderSnaks"
 	, Invk_getEntityId = "getEntityId", Invk_getUserLang = "getUserLang", Invk_getDescription = "getDescription", Invk_resolvePropertyId = "resolvePropertyId"
 	, Invk_getSiteLinkPageName = "getSiteLinkPageName", Invk_incrementExpensiveFunctionCount = "incrementExpensiveFunctionCount", Invk_getPropertyOrder = "getPropertyOrder", Invk_orderProperties = "orderProperties"
+	, Invk_isValidEntityId = "isValidEntityId"
 	;
 	private static final    String[] Proc_names = String_.Ary
 	( Invk_getLabel, Invk_getLabelByLanguage, Invk_getEntity, Invk_getEntityStatements, Invk_getSetting, Invk_getEntityUrl, Invk_renderSnak, Invk_formatValue, Invk_renderSnaks
 	, Invk_getEntityId, Invk_getUserLang, Invk_getDescription, Invk_resolvePropertyId, Invk_getSiteLinkPageName, Invk_incrementExpensiveFunctionCount
-	, Invk_getPropertyOrder, Invk_orderProperties
+	, Invk_getPropertyOrder, Invk_orderProperties, Invk_isValidEntityId
 	);
 	public void Notify_page_changed() {if (notify_page_changed_fnc != null) core.Interpreter().CallFunction(notify_page_changed_fnc.Id(), Keyval_.Ary_empty);}
 	public boolean GetLabel(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
@@ -144,7 +146,9 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 			return rslt.Init_null();
 		return rslt.Init_obj(Scrib_lib_wikibase_srl.Srl_claims_prop_ary(prop_mgr, String_.new_u8(propertyId), statements, 1));
 	}
-	/*
+	public boolean IsValidEntityId(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
+		return rslt.Init_obj(true);
+	}		/*
 public function formatValues( $snaksSerialization ) {
 	$this->checkType( 'formatValues', 1, $snaksSerialization, 'table' );
 	try {

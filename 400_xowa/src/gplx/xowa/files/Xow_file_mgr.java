@@ -74,6 +74,7 @@ public class Xow_file_mgr implements Gfo_invk {
 		
 		// if non-wmf, set fsdb_mgr to fs.dir; DATE:2017-02-01
 		if (wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__other) {
+			if (wiki.Data__core_mgr() == null) return; // HACK: ignore if null; occurs when importing wikia wikis; TODO: rewrite data_core layer; DATE:2018-06-16
 			String cfg_domain_str = wiki.Data__core_mgr().Db__core().Tbl__cfg().Select_str_or("xowa.bldr.session", "wiki_domain", wiki.Domain_str());		// NOTE: or is "wiki.domain" for user_wikis
 			// FOLDER.RENAME: do not change to fs.dir if renamed; DATE:2017-02-06
 			if (String_.Eq(cfg_domain_str, wiki.Domain_str())) {
@@ -112,8 +113,9 @@ public class Xow_file_mgr implements Gfo_invk {
 		}
 		if (this.Version() == Version_1) return new Db_cfg_hash("");
 		this.Init_file_mgr_by_load(wiki);	// make sure fsdb is init'd
-		Fsm_mnt_itm mnt_itm = fsdb_mgr.Mnt_mgr().Mnts__get_main_or_null(); // NOTE: can be null for embeddable parser; DATE:2017-06-06
-		return mnt_itm == null ? new Db_cfg_hash("") : mnt_itm.Cfg_mgr().Grps_get_or_load(grp);
+		Fsm_mnt_mgr mnt_mgr = fsdb_mgr.Mnt_mgr();
+		Fsm_mnt_itm mnt_itm = mnt_mgr == null ? null : mnt_mgr.Mnts__get_main_or_null(); // NOTE: will be null for non-wmf wikis; DATE:2018-04-18
+		return mnt_itm == null ? new Db_cfg_hash("") : mnt_itm.Cfg_mgr().Grps_get_or_load(grp); // NOTE: can be null for embeddable parser DATE:2017-06-06
 	}
 	public Xof_fsdb_mgr Fsdb_mgr() {return fsdb_mgr;} private Xof_fsdb_mgr fsdb_mgr = new Xof_fsdb_mgr__sql();
 	public void Clear_for_tests() {	// NOTE: must clear else fsdb_mode will be cached for multiple runs; will generally be v1, but some tests will set to v2; DATE:2015-12-22

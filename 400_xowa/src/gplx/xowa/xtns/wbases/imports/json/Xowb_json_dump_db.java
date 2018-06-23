@@ -22,7 +22,7 @@ import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.parsers.*;
 class Xowb_json_dump_db {
 	private final    Xoae_app app; private final    Gfo_usr_dlg usr_dlg; private final    Xowe_wiki wiki; private final    Xob_bldr bldr;
 	private final    Json_parser json_parser;
-	private final    Xob_wdata_pid_sql pid_cmd = new Xob_wdata_pid_sql(); private final    Xob_wdata_qid_sql qid_cmd = new Xob_wdata_qid_sql();
+	private final    Xob_wdata_pid_sql pid_cmd; private final    Xob_wdata_qid_sql qid_cmd = new Xob_wdata_qid_sql();
 	private Xow_ns_mgr ns_mgr; private Xow_db_mgr db_mgr; 
 	private Xowd_page_tbl page_tbl; private Xob_ns_to_db_mgr ns_to_db_mgr; 
 	private Io_stream_zip_mgr text_zip_mgr; private byte text_zip_tid;
@@ -32,6 +32,7 @@ class Xowb_json_dump_db {
 		this.app = bldr.App(); this.usr_dlg = app.Usr_dlg(); this.wiki = wiki; this.bldr = bldr;
 		this.json_parser = bldr.App().Wiki_mgr().Wdata_mgr().Jdoc_parser();
 		this.ns_mgr = wiki.Ns_mgr();
+		this.pid_cmd = new Xob_wdata_pid_sql(wiki.Data__core_mgr().Db__wbase().Conn());
 	}
 	public void Parse_all_bgn(long src_fil_len, String src_fil_name) {
 		// load wiki
