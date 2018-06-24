@@ -25,7 +25,7 @@ public class Wbase_doc_mgr__tst {
 		fxt.Parser_fxt().Init_page_create(wbase_mgr.Wdata_wiki(), "Q2", Json_doc.Make_str_by_apos("{'entity':'q2','links':{'enwiki':'q2_en','dewiki':'q2_de'}}"));
 
 		// fetch Q1; assert Q2 comes back
-		Wdata_doc actl = wbase_mgr.Doc_mgr.Load_wdoc_or_null(Bry_.new_u8("Q1"));
+		Wdata_doc actl = wbase_mgr.Doc_mgr.Get_by_bry_or_null(Bry_.new_u8("Q1"));
             Gftest.Eq__str("Q2", String_.new_u8(actl.Qid()));
 	}
 }

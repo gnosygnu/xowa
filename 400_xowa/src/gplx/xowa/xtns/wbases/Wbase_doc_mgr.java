@@ -16,25 +16,26 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.wikis.pages.*;
+import gplx.xowa.apps.caches.*;
 public class Wbase_doc_mgr {
 	private final    Xoae_app app;
 	private final    Wdata_wiki_mgr wbase_mgr;
 	private final    Wbase_qid_mgr qid_mgr;
-	private final    gplx.xowa.apps.caches.Wdata_doc_cache hash;
+	private final    Wbase_doc_cache doc_cache;
 	public Wbase_doc_mgr(Xoae_app app, Wdata_wiki_mgr wbase_mgr, Wbase_qid_mgr qid_mgr) {
 		this.app = app; this.wbase_mgr = wbase_mgr; this.qid_mgr = qid_mgr;
-		this.hash = app.Cache_mgr().Doc_cache();
+		this.doc_cache = app.Cache_mgr().Doc_cache();
 	}
 	public void Enabled_(boolean v) {this.enabled = v;} private boolean enabled;
 	public void Clear() {
-		synchronized (hash) {	// LOCK:app-level
-			hash.Clear();
+		synchronized (doc_cache) {	// LOCK:app-level
+			doc_cache.Clear();
 		}
 	}
 	public void Add(byte[] full_db, Wdata_doc page) {	// TEST:
-		synchronized (hash) {	// LOCK:app-level
-			if (hash.Get_or_null(full_db) == null)
-				hash.Add(full_db, page);
+		synchronized (doc_cache) {	// LOCK:app-level
+			if (doc_cache.Get_or_null(full_db) == null)
+				doc_cache.Add(full_db, page);
 		}
 	}	
 	public Wdata_doc Get_by_ttl_or_null(Xowe_wiki wiki, Xoa_ttl ttl) {
@@ -43,18 +44,18 @@ public class Wbase_doc_mgr {
 	}
 	public Wdata_doc Get_by_xid_or_null(byte[] xid) {return Get_by_bry_or_null(Prepend_property_if_needed(xid));}// scribunto passes either p1 or q1; convert p1 to "Property:P1"
 	public Wdata_doc Get_by_bry_or_null(byte[] ttl_bry) {// must be correct format; EX:"Q2" or "Property:P1"
-		Wdata_doc rv = hash.Get_or_null(ttl_bry);
+		Wdata_doc rv = doc_cache.Get_or_null(ttl_bry);
 		if (rv == null) {
-			synchronized (hash) {	// LOCK:app-level; hash;
+			synchronized (doc_cache) {	// LOCK:app-level; doc_cache;
 				rv = Load_wdoc_or_null(ttl_bry); if (rv == null) return null;	// page not found
 				Add(ttl_bry, rv);// NOTE: use ttl_bry, not rv.Qid; allows subsequent lookups to skip this redirect cycle
 			}
 		}
 		return rv;
 	}
-	public Wdata_doc Load_wdoc_or_null(byte[] src_ttl_bry) {
+	private Wdata_doc Load_wdoc_or_null(byte[] src_ttl_bry) {
 		if (!enabled) return null;
-		synchronized (hash) {	// LOCK:app-level; jdoc_parser; moved synchronized higher up; DATE:2016-09-03
+		synchronized (doc_cache) {	// LOCK:app-level; jdoc_parser; moved synchronized higher up; DATE:2016-09-03
 			byte[] cur_ttl_bry = src_ttl_bry;
 			int load_count = -1;
 			while (load_count < 2) {	// limit to 2 tries (i.e.: 1 redirect)

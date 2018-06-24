@@ -20,6 +20,7 @@ import gplx.xowa.xtns.scribunto.procs.*;
 import gplx.xowa.xtns.wbases.mediawiki.client.includes.*; import gplx.xowa.xtns.wbases.mediawiki.client.includes.dataAccess.scribunto.*;
 public class Scrib_lib_wikibase implements Scrib_lib {
 	private final    Scrib_core core;
+	private Wbase_doc_mgr entity_mgr;
 	private Wbase_entity_accessor entity_accessor;
 	private WikibaseLanguageIndependentLuaBindings wikibaseLanguageIndependentLuaBindings;
 	private Scrib_lua_proc notify_page_changed_fnc;
@@ -28,9 +29,9 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	public Scrib_proc_mgr Procs() {return procs;} private final    Scrib_proc_mgr procs = new Scrib_proc_mgr();
 	public Scrib_lib Init() {
 		procs.Init_by_lib(this, Proc_names); 
-		Wbase_doc_mgr entityMgr = core.App().Wiki_mgr().Wdata_mgr().Doc_mgr;
-		this.entity_accessor = new Wbase_entity_accessor(entityMgr);
-		this.wikibaseLanguageIndependentLuaBindings = new WikibaseLanguageIndependentLuaBindings(entityMgr);
+		this.entity_mgr = core.App().Wiki_mgr().Wdata_mgr().Doc_mgr;
+		this.entity_accessor = new Wbase_entity_accessor(entity_mgr);
+		this.wikibaseLanguageIndependentLuaBindings = new WikibaseLanguageIndependentLuaBindings(entity_mgr);
 		return this;
 	}
 	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_wikibase(core);}
@@ -97,11 +98,14 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 			entityId = Bry_.Mid(entityId, colonPos + 1);
 		}
 
+		boolean valid = checkEntityIdOrNull(entityId) != null;
+		return rslt.Init_obj(valid);
+	}
+	private static byte[] checkEntityIdOrNull(byte[] entityId) {
 		/* REF: https://github.com/wmde/WikibaseDataModel/tree/master/src/Entity/
 		   PropertyId.php.PATTERN: '/^P[1-9]\d{0,9}\z/i';
 		   ItemId.php.PATTERN    : '/^Q[1-9]\d{0,9}\z/i';
 		*/
-		boolean valid = false;
 		if (entityId.length > 0) {
 			switch (entityId[0]) {
 				case Byte_ascii.Ltr_P:
@@ -122,14 +126,14 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 									}
 								}
 								if (numeric)
-									valid = true;
+									return entityId;
 								break;
 						}
 					}
 					break;
 			}
 		}
-		return rslt.Init_obj(valid);
+		return null;
 	}
 	public boolean GetEntityId(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
@@ -138,8 +142,21 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		byte[] rv = wiki.Appe().Wiki_mgr().Wdata_mgr().Qid_mgr.Get_or_null(wiki, ttl); if (rv == null) rv = Bry_.Empty;
 		return rslt.Init_obj(rv);
 	}
+	// REF: https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/client/config/WikibaseClient.default.php
+	private static final int ReferencedEntityIdMaxDepth = 4, ReferencedEntityIdMaxReferencedEntityVisits = 50;
+	// private static final int ReferencedEntityIdAccessLimit = 3; // max # of calls per page?
 	public boolean GetReferencedEntityId(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		throw Err_.new_unimplemented();
+		// get fromId, propertyId, and toIds
+		byte[] fromId = checkEntityIdOrNull(args.Pull_bry(0));
+		byte[] propertyIdBry = checkEntityIdOrNull(args.Pull_bry(1));
+		int propertyId = Bry_.To_int(Bry_.Mid(propertyIdBry, 1));
+		Keyval[] toIdsAry = args.Pull_kv_ary_safe(2);
+		Ordered_hash toIds = Ordered_hash_.New_bry();
+		for (Keyval kv : toIdsAry) {
+			toIds.Add_as_key_and_val(checkEntityIdOrNull(Bry_.new_u8((String)kv.Val())));
+		}
+		Referenced_entity_lookup_wkr wkr = new Referenced_entity_lookup_wkr(ReferencedEntityIdMaxDepth, ReferencedEntityIdMaxReferencedEntityVisits, entity_mgr, core.Page().Url(), fromId, propertyId, toIds);
+		return rslt.Init_obj(wkr.Get_referenced_entity());
 	}
 	public boolean EntityExists(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Wdata_doc wdoc = Get_wdoc_or_null(args, core, false); 
@@ -238,12 +255,12 @@ public function formatValues( $snaksSerialization ) {
 	public boolean IncrementExpensiveFunctionCount(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		return rslt.Init_obj(Keyval_.Ary_empty);	// NOTE: for now, always return null (XOWA does not care about expensive parser functions)
 	}
-	private static Wdata_doc Get_wdoc_or_null(Scrib_proc_args args, Scrib_core core, boolean logMissing) {
+	public Wdata_doc Get_wdoc_or_null(Scrib_proc_args args, Scrib_core core, boolean logMissing) {
 		// get qid / pid from scrib_arg[0]; if none, return null;
 		byte[] xid_bry = args.Pull_bry(0); if (Bry_.Len_eq_0(xid_bry)) return null;	// NOTE: some Modules do not pass in an argument; return early, else spurious warning "invalid qid for ttl" (since ttl is blank); EX:w:Module:Authority_control; DATE:2013-10-27
 
 		// get wdoc
-		Wdata_doc wdoc = core.Wiki().Appe().Wiki_mgr().Wdata_mgr().Doc_mgr.Get_by_xid_or_null(xid_bry); // NOTE: by_xid b/c Module passes just "p1" not "Property:P1"
+		Wdata_doc wdoc = entity_mgr.Get_by_xid_or_null(xid_bry); // NOTE: by_xid b/c Module passes just "p1" not "Property:P1"
 		if (wdoc == null && logMissing) Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), xid_bry);
 		return wdoc;
 	}
