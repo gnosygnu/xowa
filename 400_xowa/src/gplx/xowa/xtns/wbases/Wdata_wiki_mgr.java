@@ -19,7 +19,7 @@ import gplx.langs.jsons.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.htmls.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apps.apis.xowa.xtns.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.users.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.xtns.wbases.pfuncs.*; import gplx.xowa.xtns.wbases.hwtrs.*;
+import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.xtns.wbases.pfuncs.*; import gplx.xowa.xtns.wbases.hwtrs.*; import gplx.xowa.xtns.wbases.stores.*;
 import gplx.xowa.parsers.*;
 public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	private final    Xoae_app app;
@@ -32,7 +32,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		this.evt_mgr = new Gfo_evt_mgr(this);
 		this.Qid_mgr = new Wbase_qid_mgr(this);
 		this.Pid_mgr = new Wbase_pid_mgr(this);
-		this.Doc_mgr = new Wbase_doc_mgr(app, this, this.Qid_mgr);
+		this.Doc_mgr = new Wbase_doc_mgr(this, this.Qid_mgr, app.Cache_mgr().Doc_cache());
 		this.prop_mgr = new Wbase_prop_mgr(Wbase_prop_mgr_loader_.New_db(this));
 		this.prop_val_visitor = new Wdata_prop_val_visitor(app, this);
 		this.Enabled_(true);
@@ -82,8 +82,8 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		}
 	}
 	public byte[] Get_claim_or(Xow_domain_itm domain, Xoa_ttl page_ttl, int pid, byte[] or) {
-		byte[] qid = this.Qid_mgr.Get_or_null(domain.Abrv_wm(), page_ttl); if (qid == null) return or;
-		Wdata_doc wdoc = Doc_mgr.Get_by_bry_or_null(qid); if (wdoc == null) return or;
+		byte[] qid = this.Qid_mgr.Get_qid_or_null(domain.Abrv_wm(), page_ttl); if (qid == null) return or;
+		Wdata_doc wdoc = Doc_mgr.Get_by_loose_id_or_null(qid); if (wdoc == null) return or;
 		Wbase_claim_grp claim_grp = wdoc.Claim_list_get(pid); if (claim_grp == null || claim_grp.Len() == 0) return or;
 		Wbase_claim_base claim_itm = claim_grp.Get_at(0);
 		Resolve_claim(tmp_bfr, domain, claim_itm);
@@ -122,12 +122,12 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	}
 	public byte[] Popup_text(Xoae_page page) {
 		Hwtr_mgr_assert();
-		Wdata_doc wdoc = Doc_mgr.Get_by_bry_or_null(page.Ttl().Full_db());			 
+		Wdata_doc wdoc = Doc_mgr.Get_by_exact_id_or_null(page.Ttl().Full_db());			 
 		return hwtr_mgr.Popup(wdoc);
 	}
-	public void Write_json_as_html(Bry_bfr bfr, byte[] page_full_db, byte[] data_raw) {
+	public void Write_json_as_html(Bry_bfr bfr, Xoa_ttl page_ttl, byte[] data_raw) {
 		Hwtr_mgr_assert();
-		Wdata_doc wdoc = Doc_mgr.Get_by_bry_or_null(page_full_db);
+		Wdata_doc wdoc = Doc_mgr.Get_by_exact_id_or_null(page_ttl.Full_db());
 		hwtr_mgr.Init_by_wdoc(wdoc);
 		bfr.Add(hwtr_mgr.Write(wdoc));
 	}
@@ -178,7 +178,6 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	, Ttl_prefix_qid_bry_gui	= Bry_.new_a7("Q")	// NOTE: use uppercase Q for writing html; DATE:2015-06-12
 	, Ttl_prefix_pid_bry		= Bry_.new_a7("Property:P")
 	;
-	public static final int Pid_null = -1;
 	public static final    byte[] Html_json_id = Bry_.new_a7("xowa-wikidata-json");
 	public static boolean Wiki_page_is_json(int wiki_tid, int ns_id) {
 		switch (wiki_tid) {

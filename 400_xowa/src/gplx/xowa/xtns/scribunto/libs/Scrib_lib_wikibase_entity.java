@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.xowa.xtns.wbases.*;
 import gplx.langs.jsons.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*;
+import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.stores.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_lib_wikibase_entity implements Scrib_lib {
 	public Scrib_lib_wikibase_entity(Scrib_core core) {this.core = core;} private Scrib_core core;
@@ -61,16 +61,16 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib {
 		byte[] lang = wiki.Wdata_wiki_lang();
 
 		// get wdoc
-		Wdata_doc wdoc = wdata_mgr.Doc_mgr.Get_by_bry_or_null(qid);
+		Wdata_doc wdoc = wdata_mgr.Doc_mgr.Get_by_loose_id_or_null(qid);
 		if (wdoc == null) {
 			Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), qid);
 			return rslt.Init_str_empty(); // NOTE: return empty String, not nil; PAGE:fr.s:Henri_Bergson; DATE:2014-08-13
 		}
 
 		// get pid_int
-		int pid_int = Wbase_pid_mgr.To_int_or_null(pid);										// parse as num; EX: p123 -> 123; PAGE:hr.w:Hepatitis DATE:2015-11-08
-		if (pid_int == Wdata_wiki_mgr.Pid_null) pid_int = wdata_mgr.Pid_mgr.Get_or_null(lang, pid);		// parse as name; EX: name > 123
-		if (pid_int == Wdata_wiki_mgr.Pid_null) return rslt.Init_str_empty();
+		int pid_int = Wbase_pid.To_int_or_null(pid);												// parse as num; EX: p123 -> 123; PAGE:hr.w:Hepatitis DATE:2015-11-08
+		if (pid_int == Wbase_pid.Id_null) pid_int = wdata_mgr.Pid_mgr.Get_pid_or_neg1(lang, pid);	// parse as name; EX: name > 123
+		if (pid_int == Wbase_pid.Id_null) return rslt.Init_str_empty();
 
 		// get prop_grp
 		Wbase_claim_grp prop_grp = wdoc.Claim_list_get(pid_int);

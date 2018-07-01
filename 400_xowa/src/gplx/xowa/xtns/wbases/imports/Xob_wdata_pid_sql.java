@@ -18,7 +18,7 @@ import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.xowa.wikis.dbs.*; 
 import gplx.xowa.xtns.wbases.dbs.*; import gplx.xowa.xtns.wbases.claims.enums.*;
 public class Xob_wdata_pid_sql extends Xob_wdata_pid_base {
 	private final    Db_conn conn;
-	private Xowd_wbase_pid_tbl tbl__pid;
+	private Wbase_pid_tbl tbl__pid;
 	private Xowb_prop_tbl tbl__prop;
 	private final    Ordered_hash datatype_hash = Ordered_hash_.New_bry();
 	public Xob_wdata_pid_sql(Db_conn conn) {
@@ -35,7 +35,7 @@ public class Xob_wdata_pid_sql extends Xob_wdata_pid_base {
 		}
 
 		// init wbase_pid
-		tbl__pid = new Xowd_wbase_pid_tbl(conn, false); // schema_is_1 == false b/c new wbase_db will always be latest version
+		tbl__pid = Wbase_pid_tbl.New_make(conn);
 		tbl__pid.Create_tbl();
 		tbl__pid.Insert_bgn();
 

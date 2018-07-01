@@ -15,23 +15,20 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.primitives.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.xtns.wbases.dbs.*;
 import gplx.xowa.apps.gfs.*; 
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.*;
 public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	private final    Xodb_mgr_sql db_mgr;
-	private Xowd_wbase_pid_tbl wbase_pid_tbl;
-	public Xodb_load_mgr_sql(Xodb_mgr_sql db_mgr) {this.db_mgr = db_mgr;}
-	public void Load_init(Xowe_wiki wiki) {
-		Xow_db_file db_core = wiki.Data__core_mgr().Db__core();
-		Load_cfg(wiki);
-		db_core.Tbl__site_stats().Select(wiki.Stats());
-		db_core.Tbl__ns().Select_all(wiki.Ns_mgr());
+	private Wbase_pid_tbl pid_tbl;
+	private Wbase_qid_tbl qid_tbl;
+	public Xodb_load_mgr_sql(Xodb_mgr_sql db_mgr) {
+		this.db_mgr = db_mgr;
 	}
-	private static void Load_cfg(Xow_wiki wiki) {
+	public void Init_by_wiki(Xowe_wiki wiki) {
+		Xow_db_file db_core = wiki.Data__core_mgr().Db__core();
 		byte[] main_page = null, bldr_version = null, siteinfo_misc = null, siteinfo_mainpage = null;
 		DateAdp modified_latest = null;
-
 		// load from xowa_cfg
 		gplx.dbs.cfgs.Db_cfg_hash prop_hash = wiki.Data__core_mgr().Db__core().Tbl__cfg().Select_as_hash(Xowd_cfg_key_.Grp__wiki_init);
 		int len = prop_hash.Len();
@@ -50,6 +47,8 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		}
 
 		wiki.Props().Init_by_load_2(main_page, bldr_version, siteinfo_misc, siteinfo_mainpage, modified_latest);
+		db_core.Tbl__site_stats().Select(wiki.Stats());
+		db_core.Tbl__ns().Select_all(wiki.Ns_mgr());
 	}
 	public boolean Load_by_ttl(Xowd_page_itm rv, Xow_ns ns, byte[] ttl) {
 		return db_mgr.Core_data_mgr().Tbl__page().Select_by_ttl(rv, ns, ttl);
@@ -73,16 +72,17 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	public void Load_ttls_for_search_suggest(Cancelable cancelable, List_adp rslt_list, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
 		db_mgr.Core_data_mgr().Tbl__page().Select_for_search_suggest(cancelable, rslt_list, ns, key, max_results, min_page_len, browse_len, include_redirects, fetch_prv_item);
 	}
-	public byte[] Load_qid(byte[] wiki_alias, byte[] ns_num, byte[] ttl)	{return db_mgr.Core_data_mgr().Db__wbase().Tbl__wbase_qid().Select_qid(wiki_alias, ns_num, ttl);}
 	public byte[] Find_random_ttl(Xow_ns ns) {return db_mgr.Core_data_mgr().Tbl__page().Select_random(ns);}
 	public Xodb_page_rdr Get_page_rdr(Xowe_wiki wiki) {return new Xodb_page_rdr__sql(wiki);}
-
+	public byte[] Load_qid(byte[] wiki_alias, int ns_num, byte[] ttl) {
+		if (qid_tbl == null)
+			qid_tbl = Wbase_qid_tbl.New_load(db_mgr.Core_data_mgr());
+		return qid_tbl.Select_qid(wiki_alias, ns_num, ttl);
+	}
 	public int Load_pid(byte[] lang_key, byte[] pid_name) {
-		if (wbase_pid_tbl == null) {
-			Xow_db_mgr core_db_mgr = db_mgr.Core_data_mgr();
-			wbase_pid_tbl = new Xowd_wbase_pid_tbl(core_db_mgr.Db__wbase().Conn(), core_db_mgr.Props().Schema_is_1());
-		}
-		return wbase_pid_tbl.Select_pid(lang_key, pid_name);
+		if (pid_tbl == null)
+			pid_tbl = Wbase_pid_tbl.New_load(db_mgr.Core_data_mgr());
+		return pid_tbl.Select_pid(lang_key, pid_name);
 	}
 	public void Clear() {}
 }

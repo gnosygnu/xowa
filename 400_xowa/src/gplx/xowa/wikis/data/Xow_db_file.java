@@ -35,8 +35,6 @@ public class Xow_db_file {
 		this.tbl__css_file = new Xowd_css_file_tbl(conn);
 		this.tbl__cat_core = new Xowd_cat_core_tbl(conn, schema_is_1);
 		this.tbl__cat_link = new Xowd_cat_link_tbl(conn, schema_is_1);
-		this.tbl__wbase_qid = new Xowd_wbase_qid_tbl(conn, schema_is_1, schema_props == null ? Bool_.N : schema_props.Wbase__qid__src_ttl_has_spaces());
-		this.tbl__wbase_pid = new Xowd_wbase_pid_tbl(conn, schema_is_1);
 		this.tbl__wbase_prop = new Xowb_prop_tbl(conn);
 		this.info_session = info_session;
 		this.info_file = info_file;
@@ -65,8 +63,6 @@ public class Xow_db_file {
 	public Xowd_cat_core_tbl			Tbl__cat_core()		{return tbl__cat_core;}		private final    Xowd_cat_core_tbl tbl__cat_core;
 	public Xowd_cat_link_tbl			Tbl__cat_link()		{return tbl__cat_link;}		private final    Xowd_cat_link_tbl tbl__cat_link;
 	public Xowd_site_stats_tbl			Tbl__site_stats()	{return tbl__site_stats;}	private final    Xowd_site_stats_tbl tbl__site_stats;
-	public Xowd_wbase_qid_tbl			Tbl__wbase_qid()	{return tbl__wbase_qid;}	private final    Xowd_wbase_qid_tbl tbl__wbase_qid;
-	Xowd_wbase_pid_tbl			Tbl__wbase_pid()	{return tbl__wbase_pid;}	private final    Xowd_wbase_pid_tbl tbl__wbase_pid;
 	public Xowb_prop_tbl				Tbl__wbase_prop()	{return tbl__wbase_prop;}	private final    Xowb_prop_tbl tbl__wbase_prop;
 	public Xob_info_session				Info_session() {
 		if (info_session == null)	// NOTE: null when load; !null when make

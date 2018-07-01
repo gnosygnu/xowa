@@ -32,7 +32,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		this.wiki = wiki;
 		this.fsys_mgr = wiki.Tdb_fsys_mgr();
 	}
-	public void Load_init			(Xowe_wiki wiki) {}
+	public void Init_by_wiki(Xowe_wiki wiki) {}
 	public void Load_page(Xowd_page_itm rv, Xow_ns ns) {Load_page(rv, rv.Text_db_id(), rv.Tdb_row_idx(), ns, false, tmp_xdat_file, tmp_xdat_itm);}
 	public void Load_page(Xowd_page_itm rv, int txt_fil_idx, int txt_row_idx, Xow_ns ns, boolean timestamp_enabled, Xob_xdat_file xdat_file, Xob_xdat_itm xdat_itm) {
 		Io_url file = fsys_mgr.Url_ns_fil(Xotdb_dir_info_.Tid_page, ns.Id(), txt_fil_idx);
@@ -371,18 +371,19 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		if (rslt_prv != null)
 			rslt_prv.Copy(prv_itm);
 	}
-	public byte[] Load_qid(byte[] wiki_alias, byte[] ns_num, byte[] ttl) {
+	public byte[] Load_qid(byte[] wiki_alias, int ns_num, byte[] ttl) {
+		String ns_num_str = Int_.To_str_pad_bgn_zero(ns_num, 3);
 		String xwiki_key = String_.new_a7(wiki_alias);
 		if (qids_root == null)
 			qids_root = wiki.Appe().Wiki_mgr().Wdata_mgr().Wdata_wiki().Tdb_fsys_mgr().Site_dir().GenSubDir_nest("data", "qid");
-		Xob_xdat_itm qid_itm = Load_xdat_itm_by_dir(qids_root.GenSubDir_nest(xwiki_key, String_.new_a7(ns_num)), ttl); if (qid_itm == null) return null;
+		Xob_xdat_itm qid_itm = Load_xdat_itm_by_dir(qids_root.GenSubDir_nest(xwiki_key, ns_num_str), ttl); if (qid_itm == null) return null;
 		return Bry_.Mid(qid_itm.Src(), qid_itm.Itm_bgn() + ttl.length + 1, qid_itm.Itm_end());	// extract qid; note that all itms have format of "ttl|qid"
 	}	Io_url qids_root;
 	public int Load_pid(byte[] lang_key, byte[] pid_name) {
 		if (pids_root == null)
 			pids_root = wiki.Appe().Wiki_mgr().Wdata_mgr().Wdata_wiki().Tdb_fsys_mgr().Site_dir().GenSubDir_nest("data", "pid");
-		Xob_xdat_itm pid_itm = Load_xdat_itm_by_dir(pids_root.GenSubDir(String_.new_u8(lang_key)), pid_name); if (pid_itm == null) return gplx.xowa.xtns.wbases.Wdata_wiki_mgr.Pid_null;
-		return Bry_.To_int_or(pid_itm.Src(), pid_itm.Itm_bgn() + pid_name.length + 1 + 1, pid_itm.Itm_end(), gplx.xowa.xtns.wbases.Wdata_wiki_mgr.Pid_null);	// extract pid; note that all itms have format of "ttl|pid"; +1=skip pipe; +1 skip p
+		Xob_xdat_itm pid_itm = Load_xdat_itm_by_dir(pids_root.GenSubDir(String_.new_u8(lang_key)), pid_name); if (pid_itm == null) return gplx.xowa.xtns.wbases.core.Wbase_pid.Id_null;
+		return Bry_.To_int_or(pid_itm.Src(), pid_itm.Itm_bgn() + pid_name.length + 1 + 1, pid_itm.Itm_end(), gplx.xowa.xtns.wbases.core.Wbase_pid.Id_null);	// extract pid; note that all itms have format of "ttl|pid"; +1=skip pipe; +1 skip p
 	}	Io_url pids_root;
 	Xob_xdat_itm Load_xdat_itm_by_dir(Io_url dir, byte[] ttl) {
 		Xoa_hive_mgr hive_mgr = wiki.Appe().Hive_mgr();

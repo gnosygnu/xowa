@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.mediawiki.repo.includes.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.mediawiki.*; import gplx.xowa.xtns.wbases.mediawiki.repo.*; import gplx.xowa.xtns.wbases.mediawiki.repo.includes.*;
-import gplx.xowa.specials.*; import gplx.core.net.qargs.*;
+import gplx.xowa.specials.*; import gplx.core.net.qargs.*; import gplx.xowa.xtns.wbases.stores.*; import gplx.xowa.xtns.wbases.core.*;
 public class Wbase_entityPage implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {			
 		if (url.Segs_ary().length != 4) { // EX: www.wikidata.org/wiki/Special:EntityPage/Q2
 			throw Err_.new_wo_type("entityPage url must have format of 'domain/wiki/Special:EntityPage/entityId'", "url", url.To_bry(true, true));
 		}
 		byte[] entityId = url.Segs_ary()[3];
-		byte[] pageId = Wbase_doc_mgr.Prepend_property_if_needed(entityId);
+		byte[] pageId = Wbase_pid.Prepend_property_if_needed(entityId);
 
 		Xowe_wiki wikie = (Xowe_wiki)wiki;
 		wikie.Data_mgr().Redirect((Xoae_page)page, pageId);

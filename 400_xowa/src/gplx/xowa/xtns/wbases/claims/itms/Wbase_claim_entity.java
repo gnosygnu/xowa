@@ -43,7 +43,7 @@ public class Wbase_claim_entity extends Wbase_claim_base {
 
 	public static byte[] To_xid__db(byte tid, byte[] bry) {	// EX: 'item,2' -> q2; 'property,2' -> Property:P2
 		return tid == Wbase_claim_entity_type_.Tid__item
-			? Bry_.Add(Wdata_wiki_mgr.Ttl_prefix_qid_bry_db, bry)
+			? Bry_.Add(Wdata_wiki_mgr.Ttl_prefix_qid_bry_gui, bry)
 			: Bry_.Add(Wdata_wiki_mgr.Ttl_prefix_pid_bry, bry)
 			;
 	}

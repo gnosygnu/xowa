@@ -152,7 +152,7 @@ public class Xoh_page_wtr_wkr {
 					case Xow_page_tid.Tid_js:
 					case Xow_page_tid.Tid_css:
 					case Xow_page_tid.Tid_lua:		Write_body_pre			(bfr, app, wiki, hctx, data_raw, tmp_bfr); page_tid_uses_pre = true; break;
-					case Xow_page_tid.Tid_json:		app.Wiki_mgr().Wdata_mgr().Write_json_as_html(bfr, page_ttl.Full_db(), data_raw); break;
+					case Xow_page_tid.Tid_json:		app.Wiki_mgr().Wdata_mgr().Write_json_as_html(bfr, page_ttl, data_raw); break;
 					case Xow_page_tid.Tid_wikitext: Write_body_wikitext		(bfr, app, wiki, data_raw, ctx, hctx, page, page_tid, page_ns_id); break;
 				}
 			}

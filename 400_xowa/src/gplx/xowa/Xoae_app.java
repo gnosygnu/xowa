@@ -138,7 +138,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoa_fsys_eval		Url_cmd_eval() {return url_cmd_eval;} Xoa_fsys_eval url_cmd_eval;
 	public Xoa_cur				Cur_redirect() {return cur_redirect;} private Xoa_cur cur_redirect;
 	public Io_stream_zip_mgr	Zip_mgr() {return zip_mgr;} Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr();
-	public Xoa_cache_mgr		Cache_mgr() {return cache_mgr;} private Xoa_cache_mgr cache_mgr = new Xoa_cache_mgr();
+	public Xoa_cache_mgr		Cache_mgr() {return cache_mgr;} private final    Xoa_cache_mgr cache_mgr = new Xoa_cache_mgr();
 
 	public Xosrv_server			Tcp_server() {return tcp_server;} private Xosrv_server tcp_server = new Xosrv_server();
 	public Http_server_mgr		Http_server() {return http_server;} private Http_server_mgr http_server;

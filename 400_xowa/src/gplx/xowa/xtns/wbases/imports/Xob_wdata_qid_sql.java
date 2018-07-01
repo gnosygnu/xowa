@@ -15,18 +15,19 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.xtns.wbases.dbs.*;
 public class Xob_wdata_qid_sql extends Xob_wdata_qid_base {
-	private Xowd_wbase_qid_tbl tbl;
+	private Wbase_qid_tbl tbl;
 	@Override public String Page_wkr__key() {return gplx.xowa.bldrs.Xob_cmd_keys.Key_wbase_qid;}
 	@Override public void Qid_bgn() {
-		Xow_db_mgr db_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();
+		Xow_db_mgr db_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();			
 		boolean db_is_all_or_few = db_mgr.Props().Layout_text().Tid_is_all_or_few();
 		Xow_db_file wbase_db = db_is_all_or_few
 			? db_mgr.Db__core()
 			: db_mgr.Dbs__make_by_tid(Xow_db_file_.Tid__wbase);
 		if (db_is_all_or_few)
 			db_mgr.Db__wbase_(wbase_db);
-		tbl = wbase_db.Tbl__wbase_qid();
+		tbl = Wbase_qid_tbl.New_make(wbase_db.Conn(), false);
 		tbl.Create_tbl();
 		tbl.Insert_bgn();
 	}

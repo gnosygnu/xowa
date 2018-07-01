@@ -23,8 +23,8 @@ public class Xow_db_file_schema_props {
 	public boolean Search__word__page_count_exists() {return search__word__page_count_exists;} private final    boolean search__word__page_count_exists;
 	public boolean Wbase__qid__src_ttl_has_spaces() {return wbase__qid__src_ttl_has_spaces;} private final    boolean wbase__qid__src_ttl_has_spaces;
 	public static Xow_db_file_schema_props make_() {return new Xow_db_file_schema_props(Bool_.Y, Bool_.N);}
-	public static Xow_db_file_schema_props load_(Db_cfg_tbl tbl, int tid, String version) {
-		boolean search__word__page_count_exists = tbl.Select_yn_or(Grp, Key__col_search_word_page_count, Bool_.N);
+	public static Xow_db_file_schema_props load_(Db_cfg_tbl cfg_tbl, int tid, String version) {
+		boolean search__word__page_count_exists = cfg_tbl.Select_yn_or(Grp, Key__col_search_word_page_count, Bool_.N);
 		boolean wbase__qid__src_ttl_has_spaces = String_.In(version, "2.4.2.1", "2.4.3.1", "2.4.3.2");
 		return new Xow_db_file_schema_props(search__word__page_count_exists, wbase__qid__src_ttl_has_spaces);
 	}

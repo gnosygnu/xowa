@@ -13,10 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-public class Xoa_cache_mgr {
-	public Wbase_doc_cache Doc_cache() {return doc_cache;} private final    Wbase_doc_cache doc_cache = new Wbase_doc_cache();
-	public void Free_mem_all() {
-		doc_cache.Free_mem_all();
-	}
+package gplx.xowa.xtns.wbases.stores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+public interface Wbase_prop_mgr_loader {
+	Ordered_hash Load();
 }

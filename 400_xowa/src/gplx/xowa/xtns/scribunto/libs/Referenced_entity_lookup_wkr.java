@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.claims.enums.*;
+import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.stores.*;
 // REF: https://github.com/wmde/WikibaseDataModelServices/blob/master/src/Lookup/EntityRetrievingClosestReferencedEntityIdLookup.php
 class Referenced_entity_lookup_wkr {		
 	private final    Wbase_doc_mgr entity_mgr;
@@ -92,7 +92,7 @@ class Referenced_entity_lookup_wkr {
 		alreadyVisited.Add_as_key_and_val(id);
 		if (alreadyVisited.Len() > maxEntityVisits)
 			throw newErr(false);
-		return entity_mgr.Get_by_bry_or_null(id);
+		return entity_mgr.Get_by_loose_id_or_null(id);
 	}
 	private Wbase_claim_base[] getMainSnaks(Wdata_doc entity, int propertyId) {
 		Wbase_claim_grp claims = entity.Claim_list_get(propertyId);
