@@ -53,6 +53,7 @@ public class Scrib_lib_wikibase_tst {
 		wdata_fxt.Init_links_add("enwiki", "Earth", "q2");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary("Earth"							), "q2");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary("missing_page"					), "");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary(""								), ""); // PAGE:en.w:Water_treader DATE:2018-07-01
 	}
 	@Test  public void GetReferencedEntityId() {
 		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("Q1").Xto_wdoc());
@@ -67,8 +68,6 @@ public class Scrib_lib_wikibase_tst {
 			rv[i] = Keyval_.int_(i, toIds[i]);
 		return rv;
 	}
-	/*
-	*/
 	@Test  public void GetLabel__cur() {
 		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_label("zh-hans", "s").Add_label("zh-hant", "t").Xto_wdoc());
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getLabel, Object_.Ary("q2"), "s");		// do not get fallback

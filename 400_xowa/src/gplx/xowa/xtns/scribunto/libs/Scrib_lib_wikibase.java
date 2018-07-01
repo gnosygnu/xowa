@@ -139,7 +139,11 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		byte[] ttl_bry = args.Pull_bry(0);
 		Xowe_wiki wiki = core.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
-		byte[] rv = wiki.Appe().Wiki_mgr().Wdata_mgr().Qid_mgr.Get_qid_or_null(wiki, ttl); if (rv == null) rv = Bry_.Empty;
+		byte[] rv = null;
+		if (ttl != null) // must check for null; PAGE:en.w:Water_treader DATE:2018-07-01
+			rv = wiki.Appe().Wiki_mgr().Wdata_mgr().Qid_mgr.Get_qid_or_null(wiki, ttl);
+		if (rv == null)  // can be null if ttl is invalid or doesn't exist
+			rv = Bry_.Empty;
 		return rslt.Init_obj(rv);
 	}
 	// REF: https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/client/config/WikibaseClient.default.php
