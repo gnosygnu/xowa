@@ -250,7 +250,11 @@ public function formatValues( $snaksSerialization ) {
 		return rslt.Init_obj(core.Wiki().Domain_abrv());	// ;siteGlobalID: This site's global ID (e.g. <code>'itwiki'</code>), as used in the sites table. Default: <code>$wgDBname</code>.; REF:/xtns/Wikibase/docs/options.wiki
 	}
 	public boolean GetSetting(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		throw Err_.new_("wbase", "getSetting not implemented", "url", core.Page().Url().To_str());
+		byte[] key = args.Pull_bry(0);
+		Object rv = wikibaseLanguageIndependentLuaBindings.getSetting(key);
+		if (rv == null) 
+			throw Err_.new_("wbase", "getSetting key missing", "key", key, "url", core.Page().Url().To_str());
+		return rslt.Init_obj(rv);
 	}
 	public boolean IncrementExpensiveFunctionCount(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		return rslt.Init_obj(Keyval_.Ary_empty);	// NOTE: for now, always return null (XOWA does not care about expensive parser functions)

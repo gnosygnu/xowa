@@ -133,18 +133,9 @@ public class Scrib_lib_language implements Scrib_lib {
 		byte[] lang_code = args.Pull_bry(0);
 		// byte[] trans_code = args.Get_bry_or_null(1);	// TODO_OLD: FetchLanguageName("en", "fr") -> Anglais; WHEN: needs global database of languages; cldr
 		Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(lang_code);
-		String rv = null;
-
-		// unknown item; return 1st three letters; DATE:2017-04-01
-		if (lang_itm == null) {
-			int lang_code_len = lang_code.length;
-			int rv_len = lang_code_len < 3 ? lang_code_len : 3;
-			rv = String_.new_u8(Bry_.Mid(lang_code, 0, rv_len));
-		}
-		// known item; return canonical name
-		else {
-			rv = String_.new_u8(lang_itm.Canonical_name());
-		}
+		String rv = lang_itm == null				
+			? ""											// unknown -> return ""; PAGE:en.w:United_States_Strategic_Bombing_Survey; DATE:2018-07-01
+			: String_.new_u8(lang_itm.Canonical_name());	// known   -> return canonical name
 		return rslt.Init_obj(rv);
 	}
 	public boolean FetchLanguageNames(Scrib_proc_args args, Scrib_proc_rslt rslt) {	
