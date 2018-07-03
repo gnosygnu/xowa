@@ -21,7 +21,6 @@ public class Xow_ifexist_cache {
 	private final    Xow_page_cache page_cache;
 	private final    Gfo_cache_mgr cache_mgr = new Gfo_cache_mgr().Max_size_(64 * Io_mgr.Len_mb).Reduce_by_(32 * Io_mgr.Len_mb);
 	private final    Hash_adp ns_loaded_hash = Hash_adp_.New();		
-	private final    Xow_ifexist_itm itm__exists = new Xow_ifexist_itm(Bool_.Y), itm__missing = new Xow_ifexist_itm(Bool_.N);
 	public Xow_ifexist_cache(Xowe_wiki wiki, Xow_page_cache page_cache) {
 		this.wiki = wiki;
 		this.page_cache = page_cache;
@@ -35,26 +34,26 @@ public class Xow_ifexist_cache {
 		cache_mgr.Clear();
 		ns_loaded_hash.Clear();
 	}
-	public void Add(Xoa_ttl ttl) {
+	public void Add(Xoa_ttl ttl, boolean exists) {
 		byte[] key = ttl.Full_db();
-		cache_mgr.Add(key, itm__exists, key.length);
+		cache_mgr.Add_replace(key, Xow_ifexist_itm.Get(exists), key.length);
 	}
-	public void Add_ns_loaded(int... ns_ids) {
+	public void Mark_ns_loaded(int... ns_ids) {
 		for (int ns_id : ns_ids)
 			ns_loaded_hash.Add(ns_id, ns_id);
 	}
-	public byte Get_by_mem(Xoa_ttl ttl) {
-		byte[] ttl_full_db = ttl.Full_db();
+	public byte Get_by_cache(Xoa_ttl ttl) {
+		byte[] key = ttl.Full_db();
 
 		// check cache_mgr
-		Xow_ifexist_itm found = (Xow_ifexist_itm)cache_mgr.Get_by_key(ttl_full_db);
+		Xow_ifexist_itm found = (Xow_ifexist_itm)cache_mgr.Get_by_key(key);
 		if (found != null) return found.Exists() ? Bool_.Y_byte : Bool_.N_byte;
 
-		// check ns_loaded cache (xomp only); if exists, return false, since all pages in ns are loaded, and still not found
+		// check ns_loaded cache (xomp only); if ns_exists, return false, since all pages in ns are loaded, and still not found
 		if (ns_loaded_hash.Has(ttl.Ns().Id())) return Bool_.N_byte;
 
 		// check page_cache since full page + text could be loaded there
-		Xow_page_cache_itm itm = (Xow_page_cache_itm)page_cache.Get_or_null(ttl_full_db);
+		Xow_page_cache_itm itm = (Xow_page_cache_itm)page_cache.Get_or_null(key);
 		if		(itm == Xow_page_cache_itm.Missing)
 			return Bool_.N_byte;
 		else if (itm != null)
@@ -62,7 +61,7 @@ public class Xow_ifexist_cache {
 
 		return Bool_.__byte;
 	}
-	public boolean Load(Xoa_ttl ttl) {
+	public boolean Get_by_load(Xoa_ttl ttl) {
 		byte[] key = ttl.Full_db();
 		Xow_ifexist_itm itm = null;
 		// gplx.core.consoles.Console_adp__sys.Instance.Write_str("ifexist_cache:" + String_.new_u8(key));
@@ -70,22 +69,25 @@ public class Xow_ifexist_cache {
 		if (load_wkr != null) {
 			// load_wkr; should call ifexist method, but for now, load entire page
 			byte[] page_text = load_wkr.Get_page_or_null(key);
-			itm = page_text == null ? itm__missing : itm__exists;
+			itm = Xow_ifexist_itm.Get(page_text != null);
 		}
 		else {
 			// page_tbl
 			Xowd_page_itm page_itm = new Xowd_page_itm();
 			wiki.Db_mgr().Load_mgr().Load_by_ttl(page_itm, ttl.Ns(), ttl.Page_db());
-			itm = page_itm.Exists() ? itm__exists : itm__missing;
+			itm = Xow_ifexist_itm.Get(page_itm.Exists());
 		}
 
 		// add
 		cache_mgr.Add(key, itm, key.length);
-		return itm == itm__exists;
+		return itm.Exists();
 	}
 }
 class Xow_ifexist_itm implements Rls_able {		
-	public Xow_ifexist_itm(boolean exists) {this.exists = exists;}
+	Xow_ifexist_itm(boolean exists) {this.exists = exists;}
 	public boolean Exists() {return exists;} private final    boolean exists;
-	public void Rls() {}		
+	public void Rls() {}
+
+	private static final    Xow_ifexist_itm Itm__exists = new Xow_ifexist_itm(Bool_.Y), Itm__missing = new Xow_ifexist_itm(Bool_.N);
+	public static Xow_ifexist_itm Get(boolean exists) {return exists ? Itm__exists : Itm__missing;}
 }

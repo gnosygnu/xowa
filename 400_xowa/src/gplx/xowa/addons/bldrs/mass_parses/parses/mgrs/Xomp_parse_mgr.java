@@ -124,7 +124,7 @@ public class Xomp_parse_mgr {
 				int ns = rdr.Read_int(page_tbl.Fld_page_ns());
 				byte[] page_db = rdr.Read_bry_by_str(page_tbl.Fld_page_title());
 				Xoa_ttl ttl = wiki.Ttl_parse(ns, page_db);
-				cache.Add(ttl);
+				cache.Add(ttl, true);
 				if (counter % 100000 == 0) Gfo_usr_dlg_.Instance.Prog_many("", "", "loading ifexists: " + counter);
 				counter++;
 			}
@@ -132,6 +132,6 @@ public class Xomp_parse_mgr {
 		
 		// mark ns
 		int[] ns_ids = Int_ary_.Parse(ns_list, ",");
-		cache.Add_ns_loaded(ns_ids);
+		cache.Mark_ns_loaded(ns_ids);
 	}
 }

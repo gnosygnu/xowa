@@ -38,6 +38,7 @@ public class Pfunc_ifexist_tst {
 		Xowe_wiki commons_wiki = fxt.App().Wiki_mgr().Get_by_or_make(gplx.xowa.wikis.domains.Xow_domain_itm_.Bry__commons);
 		fxt.Init_page_create(commons_wiki, "File:A.png", "");
 		fxt.Test_parse_tmpl_str_test("{{#ifexist:Media:A.png|y|n}}", "{{test}}", "y");
+		fxt.Test_parse_tmpl_str_test("{{#ifexist:Media:A.png|y|n}}", "{{test}}", "y");	// BUG:2nd call actually ends up as n; PAGE:en.w:Harstad DATE:2018-07-03
 	}
 	@Test  public void Media_y_file_v1() {// DATE:2014-07-04
 		Xof_meta_itm meta_itm = fxt.Wiki().File_mgr().Dbmeta_mgr().Get_itm_or_new(Bry_.new_a7("A.png"));
