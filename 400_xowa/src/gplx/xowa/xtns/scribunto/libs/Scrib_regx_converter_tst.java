@@ -27,7 +27,7 @@ public class Scrib_regx_converter_tst {
 	@Test   public void Percent_has()		{fxt.Test_parse("%a"					, "\\p{L}");}
 	@Test   public void Percent_na()		{fxt.Test_parse("%y"					, "y");}
 	@Test   public void Percent_b00()		{fxt.Test_parse("%b00"					, "{0}[^0]*0");}
-	@Test   public void Percent_b01()		{fxt.Test_parse("%b01"					, "(?<b1>\\0(?:(?>[^\\0\\1]*)|\\0[^\\0\\1]*\\1)*\\1)");}
+	@Test   public void Percent_b01()		{fxt.Test_parse("%b01"					, "(?=\\0)(?:(?=.*?\\0(?!.*?\\1)(.*\\1(?!.*\\2).*))(?=.*?\\1(?!.*?\\2)(.*)).)+?.*?(?=\\1)[^\\0]*(?=\\2$)");}
 //		@Test   public void Percent_num()		{fxt.Test_parse("()%1"					, "(?<m1>)\\g{m1}");}
 	@Test   public void Percent_text()		{fxt.Test_parse("%e"					, "e");}
 	@Test   public void Brack_pow()			{fxt.Test_parse("[^a]"					, "[^a]");}
@@ -42,11 +42,16 @@ public class Scrib_regx_converter_tst {
 	@Test   public void Balanced() {
 		fxt.Test_replace("a(1)c"				, "%b()", "b", "abc");
 		fxt.Test_replace("a(2(1)2)c"			, "%b()", "b", "abc");
-		fxt.Test_replace("a(3(2(1)2)3)c"		, "%b()", "b", "a(3b3)c");
+		fxt.Test_replace("a(3(2(1)2)3)c"		, "%b()", "b", "abc");
+	}
+	@Test   public void Balanced_nested() { // handle nested; PAGE:en.w:Portal:Constructed_languages/Intro DATE:2018-07-02
+		fxt.Test_replace("[[a|b[[c]]d]]  p1"	, "%b[]", "z", "z  p1");
 	}
 	@Test   public void Mbcs() {	// PURPOSE: handle regex for multi-byte chars; PAGE:en.d:どう; DATE:2016-01-22; .NET.REGX:fails 
 		fxt.Test_replace("𠀀"					, "[𠀀-𯨟]"	, "a", "a");
 	}
+//		@Test   public void Brack_empty_all()	{fxt.Test_parse("[]"					, "(?:(*FAIL))");}
+//		@Test   public void Brack_empty_not()	{fxt.Test_parse("[^]"					, ".");}
 }
 class Scrib_regx_converter_fxt {
 	private Scrib_regx_converter under;

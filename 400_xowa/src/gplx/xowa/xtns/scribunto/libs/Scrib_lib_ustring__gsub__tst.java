@@ -27,7 +27,8 @@ public class Scrib_lib_ustring__gsub__tst {
 		Exec_gsub("a"	, "(a)"			, 1, "%%%1"		, "%a;1");
 		Exec_gsub("à{b}c", "{b}"		, 1, "b"		, "àbc;1");		// utf8
 		Exec_gsub("àbc", "^%s*(.-)%s*$"	, 1, "%1"		, "àbc;1");		// utf8; regx is for trim line
-		Exec_gsub("a"	, "[^]"			, 1, "b"		, "a;0");		// invalid regx should not fail; should return self; DATE:2013-10-20
+		// TOMBSTONE: tested with local MW and {{#invoke:Test|test16|a|[^]|b}} -> Lua error: Missing close-bracket for character set beginning at pattern character 1.; DATE:2018-07-02
+		// Exec_gsub("a"	, "[^]"			, 1, "b"		, "a;0");		// invalid regx should not fail; should return self; DATE:2013-10-20
 	}
 	@Test  public void Replace__none() {// PURPOSE: gsub with no replace argument should not fail; EX:d:'orse; DATE:2013-10-14
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_ustring.Invk_gsub, Object_.Ary("text", "regx")						, "text");	// NOTE: repl, limit deliberately omitted

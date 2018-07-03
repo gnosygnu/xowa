@@ -85,7 +85,9 @@ public class Scrib_regx_converter {
 								}
 								else {						// diff char: harder regex; REF.MW: $bfr .= "(?<b$bct>$d1(?:(?>[^$d1$d2]+)|(?P>b$bct))*$d2)";
 									if (fmtr_balanced == null) {
-										fmtr_balanced = Bry_fmtr.new_("(?<b~{0}>\\~{1}(?:(?>[^\\~{1}\\~{2}]*)|\\~{1}[^\\~{1}\\~{2}]*\\~{2})*\\~{2})", "0", "1", "2");	// NOTE: complicated regex; represents 3 level depth of balanced parens; 4+ won't work; EX:(3(2(1)2)3) PAGE:en.w:Electricity_sector_in_Switzerland DATE:2015-01-23
+										// JAVA:recursive regex not possible, but workaround is possible PAGE:en.w:Portal:Constructed_languages/Intro DATE:2018-07-02
+										// REF: https://stackoverflow.com/questions/47162098/is-it-possible-to-match-nested-brackets-with-regex-without-using-recursion-or-ba/47162099#47162099
+										fmtr_balanced = Bry_fmtr.new_("(?=\\~{1})(?:(?=.*?\\~{1}(?!.*?\\1)(.*\\~{2}(?!.*\\2).*))(?=.*?\\~{2}(?!.*?\\2)(.*)).)+?.*?(?=\\1)[^\\~{1}]*(?=\\2$)", "0", "1", "2"); 
 										bfr_balanced = Bry_bfr_.Reset(255);
 									}
 									synchronized (fmtr_balanced) {
@@ -159,68 +161,53 @@ public class Scrib_regx_converter {
 		regx = bfr.To_str_and_clear();
 		return regx;
 	}	private Bry_bfr bfr = Bry_bfr_.New();
-	private int bracketedCharSetToRegex(Bry_bfr bfr, byte[] src, int i, int len) {
+	private int bracketedCharSetToRegex(Bry_bfr bfr, byte[] pat, int i, int len) {
 		bfr.Add_byte(Byte_ascii.Brack_bgn);
-		++i;
-		if (i < len && src[i] == Byte_ascii.Pow) {	// ^
+		i++;
+		if (i < len && pat[i] == Byte_ascii.Pow) {	// ^
 			bfr.Add_byte(Byte_ascii.Pow);
-			++i;						
+			i++;
 		}
-		boolean stop = false;
-		for (; i < len; i++) {
-			byte tmp_b = src[i];
-			switch (tmp_b) {
-				case Byte_ascii.Brack_end:
-					stop = true;
+		for (int j = i; i < len && (j == i || pat[i] != Byte_ascii.Brack_end); i++) {
+			if (pat[i] == Byte_ascii.Percent) {
+				i++;
+				if (i >= len) {
 					break;
-				case Byte_ascii.Percent:
-					++i;
-					if (i >= len)
-						stop = true;
-					else {
-						Object brack_obj = brack_hash.Get_by_mid(src, i, i + 1);
-						if (brack_obj != null)
-							bfr.Add((byte[])brack_obj);
-						else
-							Regx_quote(bfr, src[i]);
-					}
-					break;
-				default:
-					boolean normal = true;
-					int lhs_pos = i;	// NOTE: following block handles MBCS; EX:[𠀀-𯨟] PAGE:en.d:どう DATE:2016-01-22
-					int lhs_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(src[lhs_pos]);
-					int dash_pos = i + lhs_len;
-					if (dash_pos < len) {
-						byte dash_char = src[dash_pos];
-						if (dash_char == Byte_ascii.Dash) {
-							int rhs_pos = dash_pos + 1;
-							if (rhs_pos < len) {
-								byte rhs_byte = src[rhs_pos];
-								if (rhs_byte != Byte_ascii.Brack_end) {// ignore dash if followed by brack_end; EX: [a-]; PAGE:en.d:frei; DATE:2016-01-23
-									int rhs_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(rhs_byte);
-									if (lhs_len == 1)
-										Regx_quote(bfr, src[i]);
-									else
-										bfr.Add_mid(src, i, i + lhs_len);								
-									bfr.Add_byte(Byte_ascii.Dash);
-									if (rhs_len == 1)
-										Regx_quote(bfr, src[rhs_pos]);
-									else
-										bfr.Add_mid(src, rhs_pos, rhs_pos + rhs_len);
-									i = rhs_pos + rhs_len - 1;	// -1 b/c for() will do ++i
-									normal = false;
-								}
-							}
-						}
-					}
-					if (normal)
-						Regx_quote(bfr, src[i]);
-					break;
+				}
+				Object brack_obj = brack_hash.Get_by_mid(pat, i, i + 1);
+				if (brack_obj != null)
+					bfr.Add((byte[])brack_obj);
+				else
+					Regx_quote(bfr, pat[i]);
 			}
-			if (stop) break;
+			else if (i + 2 < len && pat[i + 1] == Byte_ascii.Dash && pat[i + 2] != Byte_ascii.Brack_end && pat[i + 2] != Byte_ascii.Hash) {
+				if (pat[i] <= pat[i + 2]) {
+					Regx_quote(bfr, pat[i]);
+					bfr.Add_byte(Byte_ascii.Dash);
+					Regx_quote(bfr, pat[i + 2]);
+				}
+				i += 2;
+			}
+			else {
+				Regx_quote(bfr, pat[i]);
+			}
 		}
-		if (i >= len) throw Err_.new_wo_type("Missing close-bracket for character set beginning at pattern character $nxt_pos");
+		if (i > len) throw Err_.new_wo_type("Missing close-bracket for character set beginning at pattern character $nxt_pos");
 		bfr.Add_byte(Byte_ascii.Brack_end);
+
+		// TOMBSTONE: below code will never run as it's not possible to generate "[]" or "[^]"; DATE:2018-07-01
+			// Lua just ignores invalid ranges, while pcre throws an error.
+			// We filter them out above, but then we need to special-case empty sets
+			int bfr_len = bfr.Len();
+			byte[] bfr_bry = bfr.Bfr();
+			if (bfr_len == 2 && bfr_bry[0] == Byte_ascii.Brack_bgn && bfr_bry[1] == Byte_ascii.Brack_end) {
+				// Can't directly quantify (*FAIL), so wrap it.
+				// "(?!)" would be simpler and could be quantified if not for a bug in PCRE 8.13 to 8.33
+				bfr.Clear().Add_str_a7("(?:(*FAIL))");
+			}
+			else if (bfr_len == 3 && bfr_bry[0] == Byte_ascii.Brack_bgn && bfr_bry[1] == Byte_ascii.Pow && bfr_bry[2] == Byte_ascii.Brack_end) {
+				bfr.Clear().Add_str_a7(".");// 's' modifier is always used, so this works
+			}
 		return i;
 	}
 	boolean grps_open_Has(List_adp list, int v) {

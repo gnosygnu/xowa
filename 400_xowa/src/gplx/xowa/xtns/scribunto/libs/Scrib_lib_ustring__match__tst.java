@@ -38,6 +38,9 @@ public class Scrib_lib_ustring__match__tst {
 	@Test  public void Args_out_of_order() {
 		fxt.Test__proc__kvps__empty(lib, Scrib_lib_ustring.Invk_match, Keyval_.Ary(Keyval_.int_(2, "[a]")));
 	}
+	@Test  public void Include_trailing_whitespace() {	// PURPOSE: match trailing whitespace; PAGE:en.w:Portal:Constructed_languages/Intro DATE:2018-07-02
+		Exec_match("[[a]]  b", "%b[]%s*", 1, "[[a]]  ");
+	}
 //		@Test  public void Match_viwiktionary() {
 //			fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_match);
 //			Exec_match("tr"	, "()(r)", 1, ";");						// should return all matches

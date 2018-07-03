@@ -161,10 +161,10 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		return rslt.Init_many_objs(match.Find_end(), Scrib_kv_utl_.base1_list_(tmp_list));
 	}
 	private void AddCapturesFromMatch(List_adp tmp_list, Regx_match rslt, String text, Keyval[] capts, boolean op_is_match) {// NOTE: this matches behavior in UstringLibrary.php!addCapturesFromMatch
-		Regx_group[] grps = rslt.Groups();
-		int grps_len = grps.length;
 		int capts_len = capts == null ? 0 : capts.length;
-		if (grps_len > 0) {
+		if (capts_len > 0) { // NOTE: changed from "grps_len > 0"; PAGE:en.w:Portal:Constructed_languages/Intro DATE:2018-07-02
+			Regx_group[] grps = rslt.Groups();
+			int grps_len = grps.length;
 			for (int j = 0; j < grps_len; j++) {
 				Regx_group grp = grps[j];
 				if (	j < capts_len				// bounds check	b/c null can be passed
@@ -338,6 +338,10 @@ class Scrib_lib_ustring_gsub_mgr {
 				break;
 			}
 			case Repl_tid_luacbk: {
+				String find_str = String_.Mid(text, match.Find_bgn(), match.Find_end());
+				Keyval[] luacbk_args = Scrib_kv_utl_.base1_obj_(find_str); 
+				/*
+				TOMBSTONE: was causing garbled text on PAGE:en.w:Portal:Bahamas DATE:2018-07-02
 				Keyval[] luacbk_args = null;
 				Regx_group[] grps = match.Groups();
 				int grps_len = grps.length;
@@ -353,6 +357,7 @@ class Scrib_lib_ustring_gsub_mgr {
 						luacbk_args[i] = Keyval_.int_(i + Scrib_core.Base_1, find_str);
 					}
 				}
+				*/
 				Keyval[] rslts = core.Interpreter().CallFunction(repl_func.Id(), luacbk_args);
 				if (rslts.length == 0) // will be 0 when gsub_proc returns nil; PAGE:en.d:tracer; DATE:2017-04-22
 					return false;

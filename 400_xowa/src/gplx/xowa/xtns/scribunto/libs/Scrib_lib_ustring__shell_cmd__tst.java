@@ -28,13 +28,13 @@ public class Scrib_lib_ustring__shell_cmd__tst {
 	@Test  public void Gsub_proc_w_grouped() {	// PURPOSE: gsub_proc should pass matched String, not entire String; DATE:2013-12-01
 		fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_gsub);
 		Exec_gsub_regx_func_1("[[a]]", "%[%[([^#|%]]-)%]%]"	, "A;1");
-		fxt.Test_log_rcvd(3, "000000370000006D{[\"op\"]=\"call\",[\"id\"]=1,[\"nargs\"]=1,[\"args\"]={[1]=\"a\"}}");	// should be "a", not "[[a]]"
+		fxt.Test_log_rcvd(3, "0000003B00000075{[\"op\"]=\"call\",[\"id\"]=1,[\"nargs\"]=1,[\"args\"]={[1]=\"[[a]]\"}}");	// should be "[[a]]", not "a"; switched on DATE:2018-07-02
 	}
 	@Test  public void Gsub_proc_w_grouped_2() {// PURPOSE: gsub_proc failed when passing multiple matches; DATE:2013-12-01
 		fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_gsub);
 		Exec_gsub_regx_func_2("[[a]] [[b]]", "%[%[([^#|%]]-)%]%]"	, "A B;2");
-		fxt.Test_log_rcvd(3, "000000370000006D{[\"op\"]=\"call\",[\"id\"]=1,[\"nargs\"]=1,[\"args\"]={[1]=\"a\"}}");	// should be "a", not "[[a]]"
-		fxt.Test_log_rcvd(4, "000000370000006D{[\"op\"]=\"call\",[\"id\"]=1,[\"nargs\"]=1,[\"args\"]={[1]=\"b\"}}");	// should be "b", not "[[b]]"
+		fxt.Test_log_rcvd(3, "0000003B00000075{[\"op\"]=\"call\",[\"id\"]=1,[\"nargs\"]=1,[\"args\"]={[1]=\"[[a]]\"}}");	// should be "[[a]]", not "a"; switched on DATE:2018-07-02
+		fxt.Test_log_rcvd(4, "0000003B00000075{[\"op\"]=\"call\",[\"id\"]=1,[\"nargs\"]=1,[\"args\"]={[1]=\"[[b]]\"}}");	// should be "[[b]]", not "b"; switched on DATE:2018-07-02
 	}
 	@Test  public void Gsub_int() {	// PURPOSE: gsub with integer arg should not fail; DATE:2013-11-06
 		fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_gsub);
