@@ -23,7 +23,6 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public int String_len_max() {return string_len_max;} public Scrib_lib_ustring String_len_max_(int v) {string_len_max = v; return this;} private int string_len_max = Xoa_page_.Page_len_max;
 	public int Pattern_len_max() {return pattern_len_max;} public Scrib_lib_ustring Pattern_len_max_(int v) {pattern_len_max = v; return this;} private int pattern_len_max = 10000;
-	private Scrib_regx_converter regx_converter = new Scrib_regx_converter();
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
 	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_ustring(core);}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
@@ -74,7 +73,8 @@ public class Scrib_lib_ustring implements Scrib_lib {
 					: rslt.Init_ary_empty()
 					;
 			}
-			regx = regx_converter.Parse(Bry_.new_u8(regx), Scrib_regx_converter.Anchor_G);
+			Scrib_regx_converter regx_converter = new Scrib_regx_converter();
+			regx = regx_converter.patternToRegex(Bry_.new_u8(regx), Scrib_regx_converter.Anchor_G);
 			Regx_adp regx_adp = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), regx);
 			Regx_match[] regx_rslts = regx_adp.Match_all(text_str, bgn_codepoint_idx);	// NOTE: MW calculates an offset to handle mb strings. however, java's regex always takes offset in chars (not bytes like PHP preg_match); DATE:2014-03-04
 			int len = regx_rslts.length;
@@ -103,7 +103,8 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	public boolean Match(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String text = args.Xstr_str_or_null(0);		// Module can pass raw ints; PAGE:en.w:Budget_of_the_European_Union; DATE:2015-01-22
 		if (text == null) return rslt.Init_many_list(List_adp_.Noop); // if no text is passed, do not fail; return empty; EX:d:changed; DATE:2014-02-06 
-		String regx = regx_converter.Parse(args.Cast_bry_or_null(1), Scrib_regx_converter.Anchor_G);
+		Scrib_regx_converter regx_converter = new Scrib_regx_converter();
+		String regx = regx_converter.patternToRegex(args.Cast_bry_or_null(1), Scrib_regx_converter.Anchor_G);
 		int bgn = args.Cast_int_or(2, 1);
 		bgn = Bgn_adjust(text, bgn);
 		Regx_adp regx_adp = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), regx);
@@ -112,6 +113,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		if (len == 0) return rslt.Init_null();	// return null if no matches found; EX:w:Mount_Gambier_(volcano); DATE:2014-04-02; confirmed with en.d:民; DATE:2015-01-30
 
 		// TOMBSTONE: add 1st match only; do not add all; PAGE:en.d:действительное_причастие_настоящего_времени DATE:2017-04-23
+		regx_rslts = regx_converter.Adjust_balanced(regx_rslts);
 		List_adp tmp_list = List_adp_.New();
 		AddCapturesFromMatch(tmp_list, regx_rslts[0], text, regx_converter.Capt_ary(), true);
 		return rslt.Init_many_list(tmp_list);
@@ -122,6 +124,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	public boolean Gsub(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		boolean rv = false;
 		synchronized (gsub_mgr_lock) {	// handle recursive gsub calls; PAGE:en.d:כלב; DATE:2016-01-22
+			Scrib_regx_converter regx_converter = new Scrib_regx_converter();
 			int new_len = gsub_mgr_len + 1;
 			if (new_len == gsub_mgr_max) {
 				this.gsub_mgr_max = new_len == 0 ? 2 : new_len * 2;
@@ -143,7 +146,8 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	public boolean Gmatch_init(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		// String text = Scrib_kv_utl_.Val_to_str(values, 0);
 		byte[] regx = args.Pull_bry(1);
-		String pcre = regx_converter.Parse(regx, Scrib_regx_converter.Anchor_null);
+		Scrib_regx_converter regx_converter = new Scrib_regx_converter();
+		String pcre = regx_converter.patternToRegex(regx, Scrib_regx_converter.Anchor_null);
 		return rslt.Init_many_objs(pcre, regx_converter.Capt_ary());
 	}
 	public boolean Gmatch_callback(Scrib_proc_args args, Scrib_proc_rslt rslt) {
@@ -204,7 +208,7 @@ class Scrib_lib_ustring_gsub_mgr {
 		String regx = args.Xstr_str_or_null(1);				// NOTE: @pattern sometimes int; PAGE:en.d:λύω; DATE:2014-09-02
 		if (args.Len() == 2) return rslt.Init_obj(text);	// if no replace arg, return self; PAGE:en.d:'orse; DATE:2013-10-13
 		Object repl_obj = args.Cast_obj_or_null(2);
-		regx = regx_converter.Parse(Bry_.new_u8(regx), Scrib_regx_converter.Anchor_pow);
+		regx = regx_converter.patternToRegex(Bry_.new_u8(regx), Scrib_regx_converter.Anchor_pow);
 		int limit = args.Cast_int_or(3, -1);
 		repl_count = 0;
 		Identify_repl(repl_obj);
@@ -251,6 +255,7 @@ class Scrib_lib_ustring_gsub_mgr {
 		if (	rslts.length == 0				// PHP: If matches are found, the new subject will be returned, otherwise subject will be returned unchanged.; http://php.net/manual/en/function.preg-replace-callback.php
 			||	regx_mgr.Pattern_is_invalid()	// NOTE: invalid patterns should return self; EX:[^]; DATE:2014-09-02
 			) return text;	
+		rslts = regx_converter.Adjust_balanced(rslts);
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		int len = rslts.length;
 		int pos = 0;
@@ -338,10 +343,11 @@ class Scrib_lib_ustring_gsub_mgr {
 				break;
 			}
 			case Repl_tid_luacbk: {
+				// TOMBSTONE: was causing garbled text on PAGE:en.w:Template:Infobox_kommune DATE:2018-07-02
+				/*
 				String find_str = String_.Mid(text, match.Find_bgn(), match.Find_end());
 				Keyval[] luacbk_args = Scrib_kv_utl_.base1_obj_(find_str); 
-				/*
-				TOMBSTONE: was causing garbled text on PAGE:en.w:Portal:Bahamas DATE:2018-07-02
+				*/
 				Keyval[] luacbk_args = null;
 				Regx_group[] grps = match.Groups();
 				int grps_len = grps.length;
@@ -357,6 +363,7 @@ class Scrib_lib_ustring_gsub_mgr {
 						luacbk_args[i] = Keyval_.int_(i + Scrib_core.Base_1, find_str);
 					}
 				}
+				/*
 				*/
 				Keyval[] rslts = core.Interpreter().CallFunction(repl_func.Id(), luacbk_args);
 				if (rslts.length == 0) // will be 0 when gsub_proc returns nil; PAGE:en.d:tracer; DATE:2017-04-22

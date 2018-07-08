@@ -38,8 +38,14 @@ public class Scrib_lib_ustring__match__tst {
 	@Test  public void Args_out_of_order() {
 		fxt.Test__proc__kvps__empty(lib, Scrib_lib_ustring.Invk_match, Keyval_.Ary(Keyval_.int_(2, "[a]")));
 	}
-	@Test  public void Include_trailing_whitespace() {	// PURPOSE: match trailing whitespace; PAGE:en.w:Portal:Constructed_languages/Intro DATE:2018-07-02
+	@Test  public void Balanced__trailing_whitespace() {	// PURPOSE: match trailing whitespace; PAGE:en.w:Portal:Constructed_languages/Intro DATE:2018-07-02
 		Exec_match("[[a]]  b", "%b[]%s*", 1, "[[a]]  ");
+	}
+	@Test  public void Balanced__numbered_1() {	// PURPOSE: handle mix of balanced and regular capture; PAGE:en.w:Bahamas
+		Exec_match("[[5]]X99Y", "%b[]X(%d)%1Y", 1, "9");
+	}
+	@Test  public void Balanced__numbered_2() {
+		Exec_match("A88B[[5]]X99Y", "A(%d)%1B%b[]X(%d)%2Y", 1, "8;9");
 	}
 //		@Test  public void Match_viwiktionary() {
 //			fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_match);
