@@ -20,13 +20,7 @@ public class Xob_wdata_qid_sql extends Xob_wdata_qid_base {
 	private Wbase_qid_tbl tbl;
 	@Override public String Page_wkr__key() {return gplx.xowa.bldrs.Xob_cmd_keys.Key_wbase_qid;}
 	@Override public void Qid_bgn() {
-		Xow_db_mgr db_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();			
-		boolean db_is_all_or_few = db_mgr.Props().Layout_text().Tid_is_all_or_few();
-		Xow_db_file wbase_db = db_is_all_or_few
-			? db_mgr.Db__core()
-			: db_mgr.Dbs__make_by_tid(Xow_db_file_.Tid__wbase);
-		if (db_is_all_or_few)
-			db_mgr.Db__wbase_(wbase_db);
+		Xow_db_file wbase_db = Make_wbase_db(wiki.Db_mgr_as_sql().Core_data_mgr());
 		tbl = Wbase_qid_tbl.New_make(wbase_db.Conn(), false);
 		tbl.Create_tbl();
 		tbl.Insert_bgn();
@@ -37,5 +31,14 @@ public class Xob_wdata_qid_sql extends Xob_wdata_qid_base {
 	@Override public void Qid_end() {
 		tbl.Insert_end();
 		tbl.Create_idx();
+	}
+	public static Xow_db_file Make_wbase_db(Xow_db_mgr db_mgr) {
+		boolean db_is_all_or_few = db_mgr.Props().Layout_text().Tid_is_all_or_few();
+		Xow_db_file wbase_db = db_is_all_or_few
+			? db_mgr.Db__core()
+			: db_mgr.Dbs__make_by_tid(Xow_db_file_.Tid__wbase);
+		if (db_is_all_or_few)
+			db_mgr.Db__wbase_(wbase_db);
+		return wbase_db;
 	}
 }

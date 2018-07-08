@@ -17,15 +17,18 @@ package gplx.xowa.xtns.wbases.imports; import gplx.*; import gplx.xowa.*; import
 import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.xtns.wbases.dbs.*; import gplx.xowa.xtns.wbases.claims.enums.*;
 public class Xob_wdata_pid_sql extends Xob_wdata_pid_base {
-	private final    Db_conn conn;
+	private Db_conn conn;
 	private Wbase_pid_tbl tbl__pid;
 	private Xowb_prop_tbl tbl__prop;
 	private final    Ordered_hash datatype_hash = Ordered_hash_.New_bry();
-	public Xob_wdata_pid_sql(Db_conn conn) {
+	public Xob_wdata_pid_sql(Db_conn conn, Xowe_wiki wiki) {
 		this.conn = conn;
+		this.wiki = wiki;
 	}
 	@Override public String Page_wkr__key() {return gplx.xowa.bldrs.Xob_cmd_keys.Key_wbase_pid;}
 	@Override public void Pid_bgn() {
+		if (conn == null)
+			conn = wiki.Data__core_mgr().Db__wbase().Conn();
 		// init datatype_hash
 		Wbase_enum_hash enum_hash = Wbase_claim_type_.Reg;
 		byte len = (byte)enum_hash.Len();

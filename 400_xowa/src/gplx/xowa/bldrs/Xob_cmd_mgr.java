@@ -16,6 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.wbases.imports.*;
+import gplx.xowa.wikis.data.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.cmds.texts.*; import gplx.xowa.bldrs.cmds.texts.sqls.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*; import gplx.xowa.addons.bldrs.files.*; import gplx.xowa.addons.wikis.ctgs.bldrs.*; import gplx.xowa.bldrs.cmds.utils.*;
 import gplx.xowa.bldrs.cmds.diffs.*;
 import gplx.xowa.files.origs.*; import gplx.xowa.htmls.core.bldrs.*;
@@ -49,7 +50,7 @@ public class Xob_cmd_mgr implements Gfo_invk {
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_util_download))				return Add(new Xob_download_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_util_xml_dump))				return Add(new Xob_xml_dumper_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_qid))					return Xml_rdr_direct_add(wiki, new Xob_wdata_qid_sql().Ctor(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_pid))					return Xml_rdr_direct_add(wiki, new Xob_wdata_pid_sql(wiki.Data__core_mgr().Db__wbase().Conn()).Ctor(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_pid))					return Xml_rdr_direct_add(wiki, new Xob_wdata_pid_sql(null, wiki).Ctor(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_db))					return Add(new Xob_wdata_db_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_site_meta))					return Add(new Xob_site_meta_cmd(bldr, wiki));
 

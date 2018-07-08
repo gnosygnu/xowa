@@ -32,7 +32,7 @@ class Xowb_json_dump_db {
 		this.app = bldr.App(); this.usr_dlg = app.Usr_dlg(); this.wiki = wiki; this.bldr = bldr;
 		this.json_parser = bldr.App().Wiki_mgr().Wdata_mgr().Jdoc_parser();
 		this.ns_mgr = wiki.Ns_mgr();
-		this.pid_cmd = new Xob_wdata_pid_sql(wiki.Data__core_mgr().Db__wbase().Conn());
+		this.pid_cmd = new Xob_wdata_pid_sql(wiki.Data__core_mgr().Db__wbase().Conn(), null);
 	}
 	public void Parse_all_bgn(long src_fil_len, String src_fil_name) {
 		// load wiki

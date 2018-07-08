@@ -31,7 +31,7 @@ public class Xob_wdata_pid_sql_tst {
 
 	@Test   public void Basic() {
 		fxt.Wiki().Ns_mgr().Add_new(Wdata_wiki_mgr.Ns_property, "Property");
-		Xob_wdata_pid_sql wkr = new Xob_wdata_pid_sql(conn);
+		Xob_wdata_pid_sql wkr = new Xob_wdata_pid_sql(conn, null);
 		wkr.Ctor(fxt.Bldr(), fxt.Wiki());
 
 		fxt.Run_page_wkr(wkr
