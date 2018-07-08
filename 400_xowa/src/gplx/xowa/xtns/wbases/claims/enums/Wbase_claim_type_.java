@@ -32,6 +32,7 @@ public class Wbase_claim_type_ {
 	, Tid__commonsmedia							= 12
 	, Tid__geo_shape							= 13
 	, Tid__tabular_data							= 14
+	, Tid__lexeme								= 15
 	;
 	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.data_type", 15);
 	public static final    Wbase_enum_itm
@@ -50,6 +51,7 @@ public class Wbase_claim_type_ {
 	, Itm__math						= New(Tid__math				, "math")				// EX:wd:Property:P2534
 	, Itm__geo_shape				= New(Tid__geo_shape		, "geo-shape")			// EX:wd:Property:P3896
 	, Itm__tabular_data				= New(Tid__tabular_data		, "tabular-data")		// EX:wd:Property:P4179
+	, Itm__lexeme					= New(Tid__lexeme			, "lexeme")				// EX:wd:Property:P5188
 	;
 	private static Wbase_enum_itm New(byte tid, String key)						{return New(tid, key, key);}
 	private static Wbase_enum_itm New(byte tid, String key, String scrib)		{return Reg.Add(new Wbase_claim_type(tid, key, scrib));}
