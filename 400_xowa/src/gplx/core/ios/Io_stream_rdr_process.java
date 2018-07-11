@@ -30,7 +30,9 @@ public class Io_stream_rdr_process implements Io_stream_rdr {
 				ProcessBuilder pb = new ProcessBuilder(process_args);
     	pb.redirectErrorStream(false);
     	try {process = pb.start();}
-    	catch (Exception e) {throw Err_.new_exc(e, "core", "process init failed", "args", String_.AryXtoStr(process_args));}
+    	catch (Exception e) {
+    		throw Err_.new_exc(e, "core", "process init failed", "args", String_.AryXtoStr(process_args));
+    		}
     	stream_read = process.getInputStream();
 		return this;
 			}

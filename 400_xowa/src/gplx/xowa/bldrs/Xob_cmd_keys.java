@@ -36,12 +36,6 @@ public class Xob_cmd_keys {
 	, Key_diff_merge				= "diff.merge"
 	, Key_text_delete_page			= "text.delete_page"
 
-	, Key_tdb_text_init				= "tdb.text.init"			// "core.init"
-	, Key_tdb_make_page				= "tdb.text.page"			// "core.make_page"
-	, Key_tdb_make_id				= "core.make_id"
-	, Key_tdb_calc_stats			= "core.calc_stats"
-	, Key_tdb_text_wdata_qid		= "tdb.text.wdata.qid"
-	, Key_tdb_text_wdata_pid		= "tdb.text.wdata.pid"
 	, Key_exec_sql					= "import.sql.exec_sql"
 	, Key_decompress_bz2			= "core.decompress_bz2"
 	;

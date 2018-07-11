@@ -40,6 +40,7 @@ public class Dbmeta_fld_list {
 	public String Add_str_null(String name, int len)	{return Add(Dbmeta_fld_itm.new_str(name, len).Nullable_y_());}
 	public String Add_str_dflt(String name, int len, String dflt)
 														{return Add(Dbmeta_fld_itm.new_str(name, len).Default_(dflt));}
+	public Dbmeta_fld_list Bld_int(String name)			{Add_int(name); return this;}
 	public Dbmeta_fld_list Bld_str(String name)         {return Bld_str(name, 255);}
 	public Dbmeta_fld_list Bld_str(String name, int len){Add_str(name, len); return this;}
 

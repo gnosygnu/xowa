@@ -18,14 +18,23 @@ import org.junit.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*
 public class Wdata_pf_statements__basic__tst {
 	@Before public void init() {fxt.Init();} private final    Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
 	@Test   public void String() {
-		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init__docs__add(fxt.doc_("q1", fxt.Make_claim_string(1, "a")));
+		fxt.Init__docs__add(fxt.Wdoc("Q1")
+			.Add_claims(fxt.Make_claim_string(1, "a"))
+			.Add_sitelink("enwiki", "Test_page")
+			);
+
 		fxt.Test_parse("{{#statements:p1}}", "a");
 	}
 	@Test   public void Entity() {
-		fxt.Init_links_add("enwiki", "Test_page", "Q1");
-		fxt.Init__docs__add(fxt.Wdoc_bldr("Q2").Add_label("en", "b").Xto_wdoc());
-		fxt.Init__docs__add(fxt.doc_("Q1", fxt.Make_claim_entity_qid(1, 2)));
+		fxt.Init__docs__add(fxt.Wdoc("Q1")
+			.Add_claims(fxt.Make_claim_entity_qid(1, 2))
+			.Add_sitelink("enwiki", "Test_page")
+			);
+
+		fxt.Init__docs__add(fxt.Wdoc("Q2")
+			.Add_label("en", "b")
+			);
+
 		fxt.Test_parse("{{#statements:p1}}", "[[b]]");
 	}
 }

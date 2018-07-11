@@ -152,9 +152,9 @@ public class Gftest {
 		if (idx < len) {
 			switch (type_id) {
 				case Type_ids_.Id__bool:	bfr.Add_yn(Bool_.Cast(Array_.Get_at(ary, idx))); break;
-				case Type_ids_.Id__bry:	bfr.Add_safe((byte[])Array_.Get_at(ary, idx)); break;
+				case Type_ids_.Id__bry:		bfr.Add_safe((byte[])Array_.Get_at(ary, idx)); break;
 				case Type_ids_.Id__long:	bfr.Add_long_variable(Long_.cast(Array_.Get_at(ary, idx))); break;
-				case Type_ids_.Id__int:	bfr.Add_int_variable(Int_.Cast(Array_.Get_at(ary, idx))); break;
+				case Type_ids_.Id__int:		bfr.Add_int_variable(Int_.Cast(Array_.Get_at(ary, idx))); break;
 				case Type_ids_.Id__byte:	bfr.Add_int_variable((int)(Byte_.Cast(Array_.Get_at(ary, idx)))); break;
 				default:					throw Err_.new_unhandled_default(type_id);
 			}
@@ -177,9 +177,9 @@ public class Gftest {
 			else {
 				switch (tid) {
 					case Type_ids_.Id__bool:		eq = Bool_.Cast(expd_obj) == Bool_.Cast(actl_obj); break;
-					case Type_ids_.Id__bry:		eq = Bry_.Eq((byte[])expd_obj, (byte[])actl_obj); break;
+					case Type_ids_.Id__bry:			eq = Bry_.Eq((byte[])expd_obj, (byte[])actl_obj); break;
 					case Type_ids_.Id__long:		eq = Long_.cast(expd_obj) == Long_.cast(actl_obj); break;
-					case Type_ids_.Id__int:		eq = Int_.Cast(expd_obj) == Int_.Cast(actl_obj); break;
+					case Type_ids_.Id__int:			eq = Int_.Cast(expd_obj) == Int_.Cast(actl_obj); break;
 					case Type_ids_.Id__byte:		eq = Byte_.Cast(expd_obj) == Byte_.Cast(actl_obj); break;
 				}
 			}

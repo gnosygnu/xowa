@@ -65,7 +65,21 @@ public class Dbmeta_fld_tid {
 			default:							throw Err_.new_unhandled(tid);
 		}
 	}
-	public static Dbmeta_fld_itm To_itm(String raw) {
-		return null;
+	public static int Get_by_obj(Object o) {
+		int type_id = Type_ids_.To_id_by_obj(o);
+		switch (type_id) {
+			case Type_ids_.Id__bool:			return Dbmeta_fld_tid.Tid__bool;
+			case Type_ids_.Id__byte:			return Dbmeta_fld_tid.Tid__byte;
+			case Type_ids_.Id__short:			return Dbmeta_fld_tid.Tid__short;
+			case Type_ids_.Id__int:				return Dbmeta_fld_tid.Tid__int;
+			case Type_ids_.Id__long:			return Dbmeta_fld_tid.Tid__long;
+			case Type_ids_.Id__float:			return Dbmeta_fld_tid.Tid__float;
+			case Type_ids_.Id__double:			return Dbmeta_fld_tid.Tid__double;
+			case Type_ids_.Id__str:				return Dbmeta_fld_tid.Tid__str;
+			case Type_ids_.Id__bry:				return Dbmeta_fld_tid.Tid__bry;
+			case Type_ids_.Id__date:			return Dbmeta_fld_tid.Tid__date;
+			case Type_ids_.Id__decimal:			return Dbmeta_fld_tid.Tid__decimal;
+			default:							throw Err_.new_unhandled_default(type_id);
+		}
 	}
 }

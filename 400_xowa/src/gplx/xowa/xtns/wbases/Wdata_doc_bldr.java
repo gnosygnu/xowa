@@ -32,7 +32,8 @@ public class Wdata_doc_bldr {
 	public Wdata_doc_bldr Add_description(String lang, String text) {byte[] key = Bry_.new_u8(lang); descr_list.Add(key, new Wdata_langtext_itm(key, Bry_.new_u8(text))); return this;}
 	public Wdata_doc_bldr Add_label(String lang, String text)		{byte[] key = Bry_.new_u8(lang); label_list.Add(key, new Wdata_langtext_itm(key, Bry_.new_u8(text))); return this;}
 	public Wdata_doc_bldr Add_sitelink(String site, String link, String... bdgs) {
-		byte[] key = Bry_.new_u8(site); slink_list.Add(key, new Wdata_sitelink_itm(key, Bry_.new_u8(link), Bry_.Ary(bdgs)));
+		byte[] key = Bry_.new_u8(site); 
+		slink_list.Add(key, new Wdata_sitelink_itm(key, Bry_.new_u8(link), Bry_.Ary(bdgs)));
 		return this;
 	}
 	public Wdata_doc_bldr Add_alias(String lang, String... ary){byte[] key = Bry_.new_u8(lang); alias_list.Add(key, new Wdata_alias_itm	  (key, Bry_.Ary(ary))); return this;}

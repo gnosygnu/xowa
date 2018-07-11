@@ -15,12 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.langs.jsons.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.guis.*; import gplx.xowa.xtns.wbases.imports.*; import gplx.xowa.wikis.pages.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.domains.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.pfuncs.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.stores.*;
-import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Wdata_wiki_mgr_fxt {
+	private Xoae_app app; private Xowe_wiki wiki; private Wdata_doc_bldr wdoc_bldr;
 	private final    Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();
 	private final    Bry_bfr tmp_time_bfr = Bry_bfr_.New();
 	public Xowe_wiki Wiki() {return parser_fxt.Wiki();}
@@ -39,15 +37,13 @@ public class Wdata_wiki_mgr_fxt {
 			parser_fxt.Reset();
 		}
 		return this;
-	}	private Xoae_app app; private Xowe_wiki wiki; private Wdata_doc_bldr wdoc_bldr;
+	}
 	public Xoae_app App() {return app;}
 	public Wdata_wiki_mgr Wdata_mgr() {return wdata_mgr;} private Wdata_wiki_mgr wdata_mgr; 
 	public Xop_fxt Parser_fxt() {return parser_fxt;} private Xop_fxt parser_fxt;
-	public void Init_lang_fallbacks(String... fallbacks) {
-		wiki.Lang().Fallback_bry_(Bry_.new_a7(String_.Concat_with_str(",", fallbacks)));
-	}
 	public Wdata_doc_bldr Wdoc_bldr(String qid) {return wdoc_bldr.Qid_(qid);}
 	public Json_doc Make_json(String src) {return app.Utl__json_parser().Parse_by_apos(src);}
+
 	public Wbase_claim_base Make_claim_novalue(int pid)			{return Wbase_claim_value.New_novalue(pid);}
 	public Wbase_claim_base Make_claim_somevalue(int pid)		{return Wbase_claim_value.New_somevalue(pid);}
 	public Wbase_claim_base Make_claim_string(int pid, String val) {return Make_claim_string(pid, Bry_.new_u8(val));}
@@ -74,35 +70,22 @@ public class Wdata_wiki_mgr_fxt {
 		return rv;
 	}
 
+	public Wdata_doc_bldr Wdoc(String qid) {return wdoc_bldr.Qid_(qid);}
 	public Wdata_doc doc_(String qid, Wbase_claim_base... props) {return wdoc_bldr.Qid_(qid).Add_claims(props).Xto_wdoc();}
+
+	public void Init_pids_add(String lang_key, String pid_name, int pid) {wdata_mgr.Pid_mgr.Add(Bry_.new_u8(lang_key + "|" + pid_name), pid);}
+	public void Init_qids_add(String lang_key, int wiki_tid, String ttl, String qid) {
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
+		wdata_mgr.Qid_mgr.Add(tmp_bfr, Bry_.new_a7(lang_key), wiki_tid, Bry_.new_a7("000"), Bry_.new_a7(ttl), Bry_.new_a7(qid));
+		tmp_bfr.Mkr_rls();
+	}
+	public void Init_lang_fallbacks(String... fallbacks) {wiki.Lang().Fallback_bry_(Bry_.new_a7(String_.Concat_with_str(",", fallbacks)));}
 	public void Init_xwikis_add(String... prefixes) {
 		int len = prefixes.length;
 		for (int i = 0; i < len; i++) {
 			String prefix = prefixes[i];
 			wiki.Xwiki_mgr().Add_by_atrs(prefix, prefix + ".wikipedia.org");
 		}
-	}
-	public void Init_qids_add(String lang_key, int wiki_tid, String ttl, String qid) {
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
-		wdata_mgr.Qid_mgr.Add(tmp_bfr, Bry_.new_a7(lang_key), wiki_tid, Bry_.new_a7("000"), Bry_.new_a7(ttl), Bry_.new_a7(qid));
-		tmp_bfr.Mkr_rls();
-	}
-	public void Init_pids_add(String lang_key, String pid_name, int pid) {wdata_mgr.Pid_mgr.Add(Bry_.new_u8(lang_key + "|" + pid_name), pid);}
-	public void Init_links_add(String wiki, String ttl, String qid) {Init_links_add(wiki, "000", ttl, qid);}
-	public void Init_links_add(String wiki, String ns_num, String ttl, String qid) {
-		byte[] ttl_bry = Bry_.new_u8(ttl);
-		Xowd_regy_mgr regy_mgr = app.Hive_mgr().Regy_mgr();
-		Io_url regy_fil = wdata_mgr.Wdata_wiki().Tdb_fsys_mgr().Site_dir().GenSubDir_nest("data", "qid").GenSubFil_nest(wiki, ns_num, "reg.csv");
-		regy_mgr.Init(regy_fil);
-		regy_mgr.Create(ttl_bry);
-		regy_mgr.Save();
-
-		Bry_bfr bfr = Bry_bfr_.New();
-		byte[] itm = bfr.Add(ttl_bry).Add_byte(Byte_ascii.Pipe).Add(Bry_.new_a7(qid)).Add_byte_nl().To_bry_and_clear();
-		Xob_xdat_file xdat_file = new Xob_xdat_file();
-		xdat_file.Insert(bfr, itm);
-		Io_url file_orig = Xob_wdata_qid_base_tst.ttl_(app.Wiki_mgr().Wdata_mgr().Wdata_wiki(), wiki, ns_num, 0);
-		xdat_file.Save(file_orig);
 	}
 	public void Init_external_links_mgr_clear() {wiki.Parser_mgr().Ctx().Page().Wdata_external_lang_links().Reset();}
 	public void Init_external_links_mgr_add(String... langs) {
@@ -117,6 +100,23 @@ public class Wdata_wiki_mgr_fxt {
 				external_lang_links.Langs_add(Bry_.new_a7(lang));
 		}
 	}
+
+	public void Init__docs__add(Wdata_doc_bldr bldr)	{Init__docs__add(bldr.Xto_wdoc());}
+	public void Init__docs__add(Wdata_doc wdoc)			{
+		wdata_mgr.Doc_mgr.Add(wdoc.Qid(), wdoc);
+
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		Wbase_qid_mgr qid_mgr = wdata_mgr.Qid_mgr;
+		Ordered_hash slinks = wdoc.Slink_list();
+		int slinks_len = slinks.Len();
+		for (int i = 0; i < slinks_len; i++) {
+			Wdata_sitelink_itm slink = (Wdata_sitelink_itm)slinks.Get_at(i);
+			Xow_domain_itm domain = Xow_abrv_wm_.Parse_to_domain_itm(slink.Site());
+			Xoa_ttl page_ttl = wiki.Ttl_parse(slink.Name());
+			qid_mgr.Add(tmp_bfr, domain.Lang_actl_key(), domain.Domain_type_id(), page_ttl.Ns().Num_bry(), page_ttl.Page_db(), wdoc.Qid());
+		}
+	}
+
 	public void Test_link(String ttl_str, String expd) {Test_link(Xoa_ttl.Parse(wiki, Xow_ns_.Tid__main, Bry_.new_u8(ttl_str)), expd);}
 	public void Test_link(Xoa_ttl ttl, String expd) {
 		byte[] qid_ttl = wdata_mgr.Qid_mgr.Get_qid_or_null(wiki, ttl);
@@ -124,7 +124,6 @@ public class Wdata_wiki_mgr_fxt {
 	}
 	public void Test_parse_pid_null(String val)			{Test_parse_pid(val, Wbase_pid.Id_null);}
 	public void Test_parse_pid(String val, int expd)	{Tfds.Eq(expd, Wbase_statement_mgr_.Parse_pid(num_parser, Bry_.new_a7(val)));} private Gfo_number_parser num_parser = new Gfo_number_parser();
-	public void Init__docs__add(Wdata_doc page)			{wdata_mgr.Doc_mgr.Add(page.Qid(), page);}
 	public void Test_parse(String raw, String expd) {
 		parser_fxt.Test_parse_page_tmpl_str(raw, expd);
 	}
@@ -157,7 +156,7 @@ public class Wdata_wiki_mgr_fxt {
 		tmp_langs.Clear();
 		Wdata_xwiki_link_wtr.Write_wdata_links(tmp_langs, wiki, Xoa_ttl.Parse(wiki, Bry_.new_u8(ttl)), wiki.Parser_mgr().Ctx().Page().Wdata_external_lang_links());
 		Tfds.Eq_ary_str(expd, Test_xwiki_links_xto_str_ary(tmp_langs));
-	}	List_adp tmp_langs = List_adp_.New();
+	}	private List_adp tmp_langs = List_adp_.New();
 	String[] Test_xwiki_links_xto_str_ary(List_adp list) {
 		int len = list.Count();
 		String[] rv = new String[len];
@@ -174,5 +173,21 @@ public class Wdata_wiki_mgr_fxt {
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Wdata_wiki_mgr.Write_json_as_html(wdata_mgr.Jdoc_parser(), bfr, raw_bry);
 		Tfds.Eq(expd, bfr.To_str_and_rls());
+	}
+	public static String New_json(String entity_id, String grp_key, String[] grp_vals) {
+		Bry_bfr bfr = Bry_bfr_.New();
+		bfr.Add_str_a7("{ 'entity':'").Add_str_u8(entity_id).Add_byte(Byte_ascii.Apos).Add_byte_nl();
+		bfr.Add_str_a7(", 'datatype':'commonsMedia'\n");
+		bfr.Add_str_a7(", '").Add_str_u8(grp_key).Add_str_a7("':").Add_byte_nl();
+		int len = grp_vals.length;
+		for (int i = 0; i < len; i += 2) {
+			bfr.Add_byte_repeat(Byte_ascii.Space, 2);
+			bfr.Add_byte(i == 0 ? Byte_ascii.Curly_bgn : Byte_ascii.Comma).Add_byte(Byte_ascii.Space);			
+			bfr.Add_byte(Byte_ascii.Apos).Add_str_u8(grp_vals[i    ]).Add_byte(Byte_ascii.Apos).Add_byte(Byte_ascii.Colon);
+			bfr.Add_byte(Byte_ascii.Apos).Add_str_u8(grp_vals[i + 1]).Add_byte(Byte_ascii.Apos).Add_byte_nl();
+		}			
+		bfr.Add_str_a7("  }").Add_byte_nl();
+		bfr.Add_str_a7("}").Add_byte_nl();
+		return String_.Replace(bfr.To_str_and_clear(), "'", "\""); 
 	}
 }

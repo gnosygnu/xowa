@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import org.junit.*; import gplx.xowa.htmls.portal.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.xowa.bldrs.cmds.texts.sqls.*;
 public class Xob_init_base_tst {
 	@Before public void init() {fxt.Clear();} private Xob_init_base_fxt fxt = new Xob_init_base_fxt();
 	@Test  public void Dirty_wiki_itms() {
@@ -24,7 +25,7 @@ public class Xob_init_base_tst {
 		Xow_xwiki_itm xwiki_itm = app.Usere().Wiki().Xwiki_mgr().Add_by_atrs("en.wikipedia.org", "en.wikipedia.org");
 		xwiki_itm.Offline_(Bool_.Y);	// simulate add via Available_from_fsys; DATE:2014-09-21
 		Tfds.Eq("", wikis_list.Itms_as_html());			// still empty
-		new Xob_init_tdb(app.Bldr(), wiki).Cmd_end();	// mock "init" task
+		new Xob_init_cmd(app.Bldr(), wiki).Cmd_end();	// mock "init" task
 		Tfds.Eq("\n        <li><a href=\"/site/en.wikipedia.org/\" class='xowa-hover-off'>en.wikipedia.org</a></li>", wikis_list.Itms_as_html());	// no longer empty
 	}
 }

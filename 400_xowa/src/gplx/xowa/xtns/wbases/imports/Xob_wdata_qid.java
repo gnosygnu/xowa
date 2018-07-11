@@ -14,32 +14,44 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import gplx.langs.jsons.*; import gplx.core.ios.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.nss.*;
+import gplx.langs.jsons.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.bldrs.wms.sites.*;
-public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xob_page_wkr, Gfo_invk {
+import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.nss.*;
+import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.dbs.*; import gplx.xowa.xtns.wbases.parsers.*;
+public class Xob_wdata_qid extends Xob_itm_dump_base implements Xob_page_wkr, Gfo_invk {
+	private Db_conn conn;
+	private Wbase_qid_tbl tbl;
 	private final    Object thread_lock = new Object();
 	private Json_parser parser; private Xob_wbase_ns_parser ns_parser; private final    Xob_wbase_ns_parser_rslt ns_parser_rslt = new Xob_wbase_ns_parser_rslt();
-	public Xob_wdata_qid_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
-	public abstract String Page_wkr__key();
-	public abstract void Qid_bgn();
-	public abstract void Qid_add(byte[] wiki_key, int ns_id, byte[] ttl, byte[] qid);
-	public abstract void Qid_end();
+	public Xob_wdata_qid(Db_conn conn) {
+		this.conn = conn;
+	}
+	public String Page_wkr__key() {return gplx.xowa.bldrs.Xob_cmd_keys.Key_wbase_qid;}
+	public Xob_wdata_qid Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
 	public void Page_wkr__bgn() {
-		this.Init_dump(this.Page_wkr__key(), wiki.Tdb_fsys_mgr().Site_dir().GenSubDir_nest("data", "qid"));	// NOTE: must pass in correct make_dir in order to delete earlier version (else make_dirs will append)
 		this.parser = bldr.App().Wiki_mgr().Wdata_mgr().Jdoc_parser();
 		this.ns_parser = new Xob_wbase_ns_parser(bldr.App().Fsys_mgr().Cfg_site_meta_fil());
-		this.Qid_bgn();
+		this.Qid__bgn();
 	}
 	public void Page_wkr__run(Xowd_page_itm page) {
 		if (page.Ns_id() != Xow_ns_.Tid__main) return;	// qid pages are only in the Main Srch_rslt_cbk
 		Json_doc jdoc = parser.Parse(page.Text()); 
 		if (jdoc == null) {bldr.Usr_dlg().Warn_many("", "", "json is invalid: ns=~{0} id=~{1}", page.Ns_id(), String_.new_u8(page.Ttl_page_db())); return;}
-		this.Parse_jdoc(jdoc);
+		this.Qid__run(jdoc);
 	}
 	public void Page_wkr__run_cleanup() {}
-	public void Parse_jdoc(Json_doc jdoc) {
+	public void Page_wkr__end() {this.Qid__end();}
+	public void Qid__bgn() {
+		if (conn == null) {
+			Xow_db_file wbase_db = Make_wbase_db(wiki.Db_mgr_as_sql().Core_data_mgr());
+			conn = wbase_db.Conn();
+		}
+		tbl = Wbase_qid_tbl.New_make(conn, false);
+		tbl.Create_tbl();
+		tbl.Insert_bgn();
+	}
+	public void Qid__run(Json_doc jdoc) {
 		synchronized (thread_lock) {
 			Wdata_doc_parser wdoc_parser = app.Wiki_mgr().Wdata_mgr().Wdoc_parser(jdoc);
 			byte[] qid = wdoc_parser.Parse_qid(jdoc);
@@ -54,12 +66,21 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 				if (sitelink_ns != Xow_ns_.Tid__main)	// ttl not in main; chop off ns portion; EX:Aide:French_title -> French_title
 					sitelink_ttl = Bry_.Mid(sitelink_ttl, ns_parser_rslt.Ttl_bgn(), sitelink_ttl.length);
 				sitelink_ttl = wiki.Lang().Case_mgr().Case_build_1st_upper(tmp_bfr, sitelink_ttl, 0, sitelink_ttl.length);
-				this.Qid_add(sitelink.Site(), sitelink_ns, Xoa_ttl.Replace_spaces(sitelink_ttl), qid);	// NOTE: always convert spaces to underscores; EX: "A B" -> "A_B" DATE:2015-04-21
+				tbl.Insert_cmd_by_batch(sitelink.Site(), sitelink_ns, Xoa_ttl.Replace_spaces(sitelink_ttl), qid);	// NOTE: always convert spaces to underscores; EX: "A B" -> "A_B" DATE:2015-04-21
 			}
 		}
 	}
-	public void Page_wkr__end() {
-		this.Qid_end();
-		// wiki.Data__core_mgr().Db__wbase().Tbl__cfg().Insert_int("", "", 1);
+	public void Qid__end() {
+		tbl.Insert_end();
+		tbl.Create_idx();
+	}
+	public static Xow_db_file Make_wbase_db(Xow_db_mgr db_mgr) {
+		boolean db_is_all_or_few = db_mgr.Props().Layout_text().Tid_is_all_or_few();
+		Xow_db_file wbase_db = db_is_all_or_few
+			? db_mgr.Db__core()
+			: db_mgr.Dbs__make_by_tid(Xow_db_file_.Tid__wbase);
+		if (db_is_all_or_few)
+			db_mgr.Db__wbase_(wbase_db);
+		return wbase_db;
 	}
 }

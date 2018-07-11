@@ -22,7 +22,7 @@ import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.parsers.*;
 class Xowb_json_dump_db {
 	private final    Xoae_app app; private final    Gfo_usr_dlg usr_dlg; private final    Xowe_wiki wiki; private final    Xob_bldr bldr;
 	private final    Json_parser json_parser;
-	private final    Xob_wdata_pid_sql pid_cmd; private final    Xob_wdata_qid_sql qid_cmd = new Xob_wdata_qid_sql();
+	private final    Xob_wdata_pid pid_cmd; private final    Xob_wdata_qid qid_cmd;
 	private Xow_ns_mgr ns_mgr; private Xow_db_mgr db_mgr; 
 	private Xowd_page_tbl page_tbl; private Xob_ns_to_db_mgr ns_to_db_mgr; 
 	private Io_stream_zip_mgr text_zip_mgr; private byte text_zip_tid;
@@ -32,7 +32,8 @@ class Xowb_json_dump_db {
 		this.app = bldr.App(); this.usr_dlg = app.Usr_dlg(); this.wiki = wiki; this.bldr = bldr;
 		this.json_parser = bldr.App().Wiki_mgr().Wdata_mgr().Jdoc_parser();
 		this.ns_mgr = wiki.Ns_mgr();
-		this.pid_cmd = new Xob_wdata_pid_sql(wiki.Data__core_mgr().Db__wbase().Conn(), null);
+		this.pid_cmd = new Xob_wdata_pid(wiki.Data__core_mgr().Db__wbase().Conn());
+		this.qid_cmd = new Xob_wdata_qid(wiki.Data__core_mgr().Db__wbase().Conn());
 	}
 	public void Parse_all_bgn(long src_fil_len, String src_fil_name) {
 		// load wiki
@@ -57,7 +58,7 @@ class Xowb_json_dump_db {
 		this.page_modified_on = Datetime_now.Get();
 		page_tbl.Insert_bgn();
 		qid_cmd.Page_wkr__bgn();
-		pid_cmd.Pid_bgn();
+		pid_cmd.Pid__bgn();
 	}
 	public void Parse_doc(byte[] json_bry) {
 		// parse to jdoc
@@ -78,17 +79,17 @@ class Xowb_json_dump_db {
 
 		// insert text
 		if (jdoc_is_qid) {
-			qid_cmd.Parse_jdoc(jdoc);
+			qid_cmd.Qid__run(jdoc);
 			++page_count_main;
 		}
 		else
-			pid_cmd.Parse_jdoc(jdoc);
+			pid_cmd.Pid__run(jdoc);
 	}
 	public void Parse_all_end() {
 		page_tbl.Insert_end();
 		page_tbl.Create_idx();
-		qid_cmd.Qid_end();
-		pid_cmd.Pid_end();
+		qid_cmd.Qid__end();
+		pid_cmd.Pid__end();
 		ns_to_db_mgr.Rls_all();
 
 		// cleanup core

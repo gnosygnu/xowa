@@ -50,8 +50,11 @@ public class Scrib_lib_wikibase_tst {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_wikibase.Invk_entityExists, Object_.Ary("Q1"					), false);
 	}
 	@Test  public void GetEntityId() {
-		wdata_fxt.Init_links_add("enwiki", "Earth", "q2");
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary("Earth"							), "q2");
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc("Q2")
+			.Add_sitelink("enwiki", "Earth")
+			);
+
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary("Earth"							), "Q2");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary("missing_page"					), "");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary(""								), ""); // PAGE:en.w:Water_treader DATE:2018-07-01
 	}

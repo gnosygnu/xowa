@@ -34,7 +34,7 @@ public class Wbase_claim_type_ {
 	, Tid__tabular_data							= 14
 	, Tid__lexeme								= 15
 	;
-	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.data_type", 15);
+	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.data_type", 16);
 	public static final    Wbase_enum_itm
 	  Itm__unknown					= New(Tid__unknown			, "unknown")
 	, Itm__bad						= New(Tid__bad				, "bad")				// NOTE: wikidata identifies several entries as "bad"; Q1615351|'s-Graveland, Q107538|Baco; DATE:2013-10-20
