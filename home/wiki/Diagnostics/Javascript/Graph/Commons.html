@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Diagnostics/Javascript/Graph/Commons - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Diagnostics/Javascript/Graph/Commons</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <h2>
+      <span class="mw-headline" id="Commons:_tabular_.2F_map">Commons: tabular / map</span>
+    </h2>
+    <ul>
+      <li>
+        From <a href="https://en.wikipedia.org/wiki/Obesity" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Obesity</a>
+      </li>
+      <li>
+        Only works in HTTP_Server mode
+      </li>
+      <li>
+        Only works if Commons is installed
+      </li>
+      <li>
+        Uses data from: 
+        <ul>
+          <li>
+            <a href="http://commons.wikimedia.org/wiki/Data:Sandbox/Doc_James/Obesity_Males_CC-BY-SA.tab" rel="nofollow" class="external text">http://commons.wikimedia.org/wiki/Data:Sandbox/Doc_James/Obesity_Males_CC-BY-SA.tab</a>
+          </li>
+          <li>
+            <a href="http://commons.wikimedia.org/wiki/Data:Naturalearthdata.com/admin-0-countries-no-antarctica.map" rel="nofollow" class="external text">http://commons.wikimedia.org/wiki/Data:Naturalearthdata.com/admin-0-countries-no-antarctica.map</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      <br>
+    </p>
+    <div class='mw-graph' xo-graph-version="2">
+      { "version":2, "width":300, "height":265, "signals":[ { "name":"initYear", "init":2013 }, { "name":"gapHeight", "init":26 }, { "name":"showOverview", "init":{ "expr":"true || height &lt; (gapHeight + 100)" } }, { "name":"overviewHeight", "init":{ "expr":"showOverview ? 40 : 0" } }, { "name":"detailHeight", "init":{ "expr":"height - (showOverview ? overviewHeight + gapHeight : 0)" } }, { "name":"overviewYPos", "init":{ "expr":"height - overviewHeight" } }, { "name":"brush_start", "streams":[ { "type":"@overview:mousedown, @overview:touchstart", "expr":"clamp(eventX(), 0, width)", "scale":{ "name":"xOverview", "invert":true } } ] }, { "name":"brush_end", "streams":[ { "type":"@overview:mousedown, [@overview:mousedown, window:mouseup] &gt; window:mousemove, @overview:mouseup, @overview:touchstart, [@overview:touchstart, window:touchend] &gt; window:touchmove, @overview:touchend", "expr":"clamp(eventX(), 0, width)", "scale":{ "name":"xOverview", "invert":true } } ] }, { "name":"fromYear", "init":{ "expr":"initYear" }, "expr":"year(min(brush_start, brush_end))" }, { "name":"toYear", "init":{ "expr":"initYear" }, "expr":"year(max(brush_start, brush_end))" }, { "name":"isRange", "init":{ "expr":"false" }, "expr":"fromYear !=toYear" }, { "name":"tooltip", "init":{ "expr":"{x: 0, y: 0, datum: false }" }, "streams":[ { "type":"@map:mouseout, @map:touchstart", "expr":"{x: 0, y: 0, datum: false }" }, { "type":"@map:mouseover, @map:touchstart", "expr":"{x: eventX(), y: eventY(), datum: eventItem().datum.lookup}" } ] } ], "data":[ { "name":"data", "url":"tabular:///Sandbox/Doc_James/Obesity_Males_CC-BY-SA.tab", "format":{ "type":"json", "property":"data" }, "transform":[ { "type":"formula", "field":"value", "expr":"datum.percent_overweight" } ] }, { "name":"totals", "source":"data", "transform":[ { "type":"aggregate", "groupby":[ "year" ], "summarize":[ { "field":"value", "ops":[ "sum" ], "as":[ "total" ] } ] }, { "type":"formula", "field":"date", "expr":"datetime(datum.year, 0, 1)" } ] }, { "name":"firstYearData", "source":"data", "transform":[ { "type":"filter", "test":"datum.year === fromYear" } ] }, { "name":"yearData", "source":"data", "transform":[ { "type":"filter", "test":"datum.year === toYear" }, { "type":"sort", "by":[ "-value" ] }, { "type":"rank", "field":"country" }, { "type":"lookup", "on":"firstYearData", "onKey":"country", "keys":[ "country" ], "as":[ "firstYear" ], "default":null }, { "type":"formula", "field":"calc", "expr":"if(isRange, (datum.value - datum.firstYear.value)/datum.firstYear.value, datum.value)" } ] }, { "name":"mapData", "url":"map:///Naturalearthdata.com/admin-0-countries-no-antarctica.map", "format":{ "type":"json", "property":"data.features" }, "transform":[ { "type":"geopath", "projection":"equirectangular", "scale":72, "translate":[ 200, 113 ] }, { "type":"formula", "field":"my_id", "expr":"datum.properties.iso_a3 || datum.properties.adm0_a3" }, { "type":"lookup", "on":"yearData", "onKey":"country", "keys":[ "my_id" ], "as":[ "lookup" ], "default":100 } ] }, { "name":"dummyValue", "values":[ { } ] } ], "scales":[ { "name":"color", "type":"linear", "domain":{ "data":"yearData", "field":"calc" }, "range":[ "#f1f1f0", "#08306b" ], "zero":false }, { "name":"diffColor", "type":"linear", "domain":[ -1, -0.8, -0.6, -0.3, -0.1, 0, 0.1, 0.3, 0.6, 0.8, 1 ], "range":[ "#313695", "#4575b4", "#74add1", "#abd9e9", "#e0f3f8", "#ffffbf", "#fee090", "#fdae61", "#f46d43", "#d73027", "#a50026" ], "zero":false }, { "name":"xOverview", "type":"time", "range":"width", "domain":{ "data":"totals", "field":"date" } }, { "name":"yOverview", "type":"linear", "rangeMin":{ "signal":"overviewHeight" }, "nice":true, "zero":false, "domain":{ "data":"totals", "field":"total" } } ], "marks":[ { "type":"group", "name":"detail", "properties":{ "enter":{ "height":{ "signal":"detailHeight" }, "width":{ "signal":"width" } } }, "marks":[ { "name":"map", "type":"path", "from":{ "data":"mapData" }, "properties":{ "enter":{ "stroke":{ "value":"#fff" }, "path":{ "field":"layout_path" } }, "update":{ "fill":[ { "test":"isRange", "field":"lookup.calc", "scale":"diffColor" }, { "field":"lookup.calc", "scale":"color" } ] } } } ] }, { "type":"group", "name":"overview", "from":{ "data":"dummyValue", "transform":[ { "type":"filter", "test":"(brush_end &amp;&amp; 0) || showOverview" } ] }, "properties":{ "enter":{ "x":{ "value":0 }, "y":{ "signal":"overviewYPos" }, "height":{ "signal":"overviewHeight" }, "width":{ "signal":"width" }, "fill":{ "value":"transparent" } } }, "axes":[ { "type":"x", "scale":"xOverview" } ], "marks":[ { "type":"group", "from":{ "data":"dummyValue", "transform":[ { "type":"filter", "test":"(brush_end &amp;&amp; 0) || !isRange" } ] }, "properties":{ "enter":{ "width":{ "signal":"width" } } }, "legends":[ { "fill":"color", "offset":20, "properties":{ "legend":{ "y":{ "value":30 } } } } ] }, { "type":"group", "from":{ "data":"dummyValue", "transform":[ { "type":"filter", "test":"isRange" } ] }, "properties":{ "enter":{ "width":{ "signal":"width" } } }, "legends":[ { "fill":"diffColor", "offset":20, "properties":{ "legend":{ "y":{ "value":30 } }, "labels":{ "text":[ { "test":"datum.data===0", "value":"0" }, { "test":"(datum.data%1)===0", "template":"\u007b{datum.data|number:'.0%'}\u007d" }, { "value":"" } ] } } } ] }, { "name":"yearLabel", "type":"text", "from":{ "data":"dummyValue", "transform":[ { "type":"formula", "field":"text", "expr":"if(isRange,fromYear + '-' + toYear, fromYear)" }, { "type":"formula", "field":"fontSize", "expr":"if(isRange,22,32)" } ] }, "properties":{ "enter":{ "x":{ "signal":"width", "offset":72 }, "y":{ "value":20 }, "fontWeight":{ "value":"bold" }, "align":{ "value":"center" }, "baseline":{ "value":"middle" }, "fill":{ "value":"#08306b" } }, "update":{ "fontSize":{ "field":"fontSize" }, "text":{ "field":"text" } } } }, { "type":"line", "from":{ "data":"totals" }, "properties":{ "update":{ "x":{ "scale":"xOverview", "field":"date" }, "y":{ "scale":"yOverview", "field":"total" }, "stroke":{ "value":"#08306b" }, "strokeWidth":{ "value":2 } } } }, { "type":"rect", "from":{ "data":"dummyValue", "transform":[ { "type":"formula", "field":"fromDate", "expr":"datetime(fromYear, -6, 1)" }, { "type":"formula", "field":"toDate", "expr":"datetime(toYear, 6, 1)" } ] }, "properties":{ "enter":{ "y":{ "value":0 }, "height":{ "signal":"overviewHeight" }, "fill":{ "value":"#333" }, "fillOpacity":{ "value":0.2 }, "stroke":{ "value":"#f00" }, "strokeDash":{ "value":[ 4 ] } }, "update":{ "x":{ "scale":"xOverview", "field":"fromDate" }, "x2":{ "scale":"xOverview", "field":"toDate" } } } } ] }, { "name":"tooltip", "type":"group", "from":{ "data":"dummyValue", "transform":[ { "type":"filter", "test":"tooltip.datum &amp;&amp; tooltip.datum.calc" }, { "type":"formula", "field":"offsetX", "expr":"5" }, { "type":"formula", "field":"offsetY", "expr":"30" }, { "type":"formula", "field":"tipWidth", "expr":"200" }, { "type":"formula", "field":"tipHeight", "expr":"51" }, { "type":"formula", "field":"alignLeft", "expr":"tooltip.x &gt; width - datum.offsetX - datum.tipWidth" }, { "type":"formula", "field":"alignTop", "expr":"tooltip.y &gt; height - datum.offsetY - datum.tipHeight" }, { "type":"formula", "field":"x", "expr":"max(0, tooltip.x + (datum.alignLeft ? -datum.offsetX-datum.tipWidth : datum.offsetX ))" }, { "type":"formula", "field":"y", "expr":"tooltip.y + (datum.alignTop ? -1 : 1) * datum.offsetY" }, { "type":"formula", "field":"lookupCountry", "expr":"tooltip.datum.country" }, { "type":"lookup", "on":"mapData", "onKey":"my_id", "keys":[ "lookupCountry" ], "as":[ "mapDataVal" ], "default":null }, { "type":"formula", "field":"name", "expr":"datum.mapDataVal ? datum.mapDataVal.properties.name : '?xyz?'" }, { "type":"lookup", "on":"yearData", "onKey":"country", "keys":[ "lookupCountry" ], "as":[ "yearDataVal" ], "default":null }, { "type":"formula", "field":"rank", "expr":"datum.yearDataVal ? datum.yearDataVal.rank : 1000" } ] }, "properties":{ "update":{ "x":{ "field":"x" }, "y":{ "field":"y" }, "width":{ "field":"tipWidth" }, "height":{ "field":"tipHeight" }, "fill":{ "value":"#fff" }, "fillOpacity":{ "value":0.85 }, "stroke":{ "value":"#aaa" }, "strokeWidth":{ "value":0.5 } } }, "marks":[ { "type":"text", "properties":{ "update":{ "x":{ "value":6 }, "y":{ "value":14 }, "text":{ "template":"\u007b{parent.name}\u007d" }, "fill":{ "value":"black" }, "fontWeight":{ "value":"bold" } } } }, { "type":"text", "properties":{ "update":{ "x":{ "value":6 }, "y":{ "value":29 }, "text":[ { "test":"isRange", "template":"Growth:\t\u007b{tooltip.datum.calc|number:'.1%'}\u007d" }, { "template":"Rate of BMI&gt;25:\t\u007b{tooltip.datum.calc|number:',.1f'}\u007d%" } ], "fill":{ "value":"black" } } } }, { "type":"text", "properties":{ "update":{ "x":{ "value":6 }, "y":{ "value":44 }, "text":[ { "test":"isRange", "template":"" }, { "template":"Global position:\t#\u007b{parent.rank|number:'.0f'}\u007d" } ], "fill":{ "value":"black" } } } } ] } ] }
+    </div>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://www.youtube.com/watch?v=q0qbXYXEH6M" title="See a video of XOWA Desktop in action">Video</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+        <li><a href="https://www.youtube.com/watch?v=jsMTBxGweUw" title="See a video of XOWA Android in action">Video</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Donate.html" title="Support XOWA!">XOWA</a></li>
+      </ul>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>

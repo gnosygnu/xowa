@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Diagnostics/Javascript/Graph/v2 - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Diagnostics/Javascript/Graph/v2</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      From <a href="https://www.mediawiki.org/wiki/Extension:Graph/Demo" rel="nofollow" class="external free">https://www.mediawiki.org/wiki/Extension:Graph/Demo</a>
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle" class="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Graph_templates"><span class="tocnumber">1</span> <span class="toctext">Graph templates</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-2">
+              <a href="#Pie_chart"><span class="tocnumber">1.1</span> <span class="toctext">Pie chart</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-3">
+              <a href="#Stacked_area"><span class="tocnumber">1.2</span> <span class="toctext">Stacked area</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#Timeline"><span class="tocnumber">2</span> <span class="toctext">Timeline</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-5">
+          <a href="#Embedded_directly_with_.3Cgraph.3E"><span class="tocnumber">3</span> <span class="toctext">Embedded directly with &lt;graph&gt;</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#Bar_chart"><span class="tocnumber">3.1</span> <span class="toctext">Bar chart</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#Horizontal"><span class="tocnumber">3.2</span> <span class="toctext">Horizontal</span></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Graph_templates">Graph templates</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Pie_chart">Pie chart</span>
+    </h3>
+    <div class='mw-graph' xo-graph-version="2">
+      { "scales": [ { "type":"ordinal" , "name":"color" , "range":"category10" , "domain":{ "data":"chart" , "field":"x" } } , { "type":"linear" , "name":"r" , "domain":{ "data":"chart" , "field":"r" } , "range": [ 0 , 100 ] } ] , "version":2 , "height":100 , "legends": [ { "stroke":"color" , "properties":{ "legend":{ "y":{ "value":-100 } } } , "title":"Legende" , "fill":"color" } ] , "axes": [ ] , "data": [ { "format":{ "type":"json" , "parse":{ "y":"integer" , "x":"string" , "r":"integer" } } , "name":"chart" , "values": [ { "y":100 , "x":"A" , "r":7 } , { "y":200 , "x":"B" , "r":8 } , { "y":150 , "x":"C" , "r":9 } , { "y":300 , "x":"D" , "r":8 } , { "y":100 , "x":"E" , "r":8 } , { "y":100 , "x":"F" , "r":9 } , { "y":150 , "x":"G" , "r":10 } , { "y":50 , "x":"H" , "r":9 } , { "y":200 , "x":"I" , "r":5 } ] } ] , "marks": [ { "type":"arc" , "properties":{ "hover":{ "fill":{ "value":"red" } } , "enter":{ "endAngle":{ "field":"layout_end" } , "innerRadius":{ "value":0 } , "outerRadius":{ "scale":"r" , "field":"r" } , "startAngle":{ "field":"layout_start" } , "stroke":{ "value":"white" } , "strokeWidth":{ "value":1 } , "fill":{ "scale":"color" , "field":"x" } } , "update":{ "fill":{ "scale":"color" , "field":"x" } } } , "from":{ "data":"chart" , "transform": [ { "field":"y" , "type":"pie" } ] } } , { "properties":{ "enter":{ "theta":{ "field":"layout_mid" } , "fontSize":{ "value":10 } , "baseline":{ "value":"top" } , "radius":{ "scale":"r" , "offset":-4 , "field":"r" } , "align":{ "value":"center" } , "text":{ "field":"y" } , "y":{ "group":"height" , "mult":0.5 } , "x":{ "group":"width" , "mult":0.5 } , "angle":{ "field":"layout_mid" , "mult":57.29577951308232 } , "fill":{ "value":"white" } } } , "type":"text" , "from":{ "data":"chart" , "transform": [ { "field":"y" , "type":"pie" } ] } } ] , "width":100 }
+    </div>
+    <h3>
+      <span class="mw-headline" id="Stacked_area">Stacked area</span>
+    </h3>
+    <div class='mw-graph' xo-graph-version="2">
+      { "scales": [ { "type":"linear" , "name":"x" , "zero":false , "range":"width" , "domain":{ "data":"chart" , "field":"x" } , "nice":true } , { "type":"linear" , "name":"y" , "zero":true , "range":"height" , "domain":{ "data":"stats" , "field":"sum_y" } , "nice":true } , { "type":"ordinal" , "name":"color" , "range": [ "seagreen" , "orchid" ] , "domain":{ "data":"chart" , "field":"series" } } ] , "version":2 , "height":100 , "legends": [ { "stroke":"color" , "title":"Legend" , "fill":"color" } ] , "axes": [ { "scale":"x" , "type":"x" , "format":"d" , "title":"X" } , { "scale":"y" , "type":"y" , "format":"d" , "title":"Y" } ] , "data": [ { "format":{ "type":"json" , "parse":{ "y":"integer" , "x":"integer" } } , "name":"chart" , "values": [ { "y":10 , "series":"y1" , "x":1 } , { "y":12 , "series":"y1" , "x":2 } , { "y":6 , "series":"y1" , "x":3 } , { "y":14 , "series":"y1" , "x":4 } , { "y":2 , "series":"y1" , "x":5 } , { "y":10 , "series":"y1" , "x":6 } , { "y":2 , "series":"y2" , "x":1 } , { "y":4 , "series":"y2" , "x":2 } , { "y":6 , "series":"y2" , "x":3 } , { "y":8 , "series":"y2" , "x":4 } , { "y":13 , "series":"y2" , "x":5 } , { "y":11 , "series":"y2" , "x":6 } ] } , { "transform": [ { "type":"aggregate" , "summarize":{ "y":"sum" } , "groupby": [ "x" ] } ] , "name":"stats" , "source":"chart" } ] , "marks": [ { "type":"group" , "marks": [ { "type":"area" , "properties":{ "hover":{ "fill":{ "value":"red" } } , "enter":{ "y":{ "scale":"y" , "field":"layout_start" } , "interpolate":{ "value":"monotone" } , "x":{ "scale":"x" , "field":"x" } , "y2":{ "scale":"y" , "field":"layout_end" } , "fill":{ "scale":"color" , "field":"series" } } , "update":{ "fill":{ "scale":"color" , "field":"series" } } } } ] , "from":{ "data":"chart" , "transform": [ { "type":"stack" , "sortby": [ "series" ] , "groupby": [ "x" ] , "field":"y" } , { "type":"facet" , "groupby": [ "series" ] } ] } } ] , "width":400 }
+    </div>
+    <p>
+      <br>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Timeline">Timeline</span>
+    </h2>
+    <div class='mw-graph' xo-graph-version="2">
+      { "width": 800, "height": 200, "data": [ { "name": "people", "values": [ {"label":"Washington", "born":-7506057600000, "died":-5366196000000, "enter":-5701424400000, "leave":-5453884800000}, {"label":"Adams", "born":-7389766800000, "died":-4528285200000, "enter":-5453884800000, "leave":-5327740800000}, {"label":"Jefferson", "born":-7154586000000, "died":-4528285200000, "enter":-5327740800000, "leave":-5075280000000}, {"label":"Madison", "born":-6904544400000, "died":-4213184400000, "enter":-5075280000000, "leave":-4822819200000}, {"label":"Monroe", "born":-6679904400000, "died":-4370518800000, "enter":-4822819200000, "leave":-4570358400000} ] }, { "name": "events", "format": {"type":"json", "parse":{"when":"date"}}, "values": [ {"name":"Decl. of Independence", "when":"July 4, 1776"}, {"name":"U.S. Constitution", "when":"3/4/1789"}, {"name":"Louisiana Purchase", "when":"April 30, 1803"}, {"name":"Monroe Doctrine", "when":"Dec 2, 1823"} ] } ], "scales": [ { "name": "y", "type": "ordinal", "range": "height", "domain": {"data": "people", "field": "label"} }, { "name": "x", "type": "time", "range": "width", "round": true, "nice": "year", "domain": {"data": "people", "field": ["born", "died"]} } ], "axes": [ { "type": "x", "scale": "x", "properties": {"labels": {"fontSize": {"value": 18}}} } ], "marks": [ { "type": "text", "from": {"data": "events"}, "properties": { "enter": { "x": {"scale": "x", "field": "when"}, "y": {"value": -10}, "angle": {"value": -25}, "fill": {"value": "#000"}, "text": {"field": "name"}, "font": {"value": "Helvetica Neue"}, "fontSize": {"value": 20} } } }, { "type": "rect", "from": {"data": "events"}, "properties": { "enter": { "x": {"scale": "x", "field": "when"}, "y": {"value": -8}, "width": {"value": 1}, "height": {"field": {"group": "height"}, "offset": 8}, "fill": {"value": "#888"} } } }, { "type": "text", "from": {"data": "people"}, "properties": { "enter": { "x": {"scale": "x", "field": "born"}, "y": {"scale": "y", "field": "label", "offset": -3}, "fill": {"value": "#000"}, "text": {"field": "label"}, "font": {"value": "Helvetica Neue"}, "fontSize": {"value": 20} } } }, { "type": "rect", "from": {"data": "people"}, "properties": { "enter": { "x": {"scale": "x", "field": "born"}, "x2": {"scale": "x", "field": "died"}, "y": {"scale": "y", "field": "label"}, "height": {"value": 2}, "fill": {"value": "#557"} } } }, { "type": "rect", "from": {"data": "people"}, "properties": { "enter": { "x": {"scale": "x", "field": "enter"}, "x2": {"scale": "x", "field": "leave"}, "y": {"scale": "y", "field": "label", "offset":-1}, "height": {"value": 4}, "fill": {"value": "#e44"} } } } ] }
+    </div>
+    <h2>
+      <span class="mw-headline" id="Embedded_directly_with_.3Cgraph.3E">Embedded directly with &lt;graph&gt;</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Bar_chart">Bar chart</span>
+    </h3>
+    <div class='mw-graph' xo-graph-version="2">
+      { "version": 2, "width": 400, "height": 200, "padding": {"top": 10, "left": 30, "bottom": 30, "right": 10}, "data": [ { "name": "table", "values": [ {"x": 1, "y": 28}, {"x": 2, "y": 55}, {"x": 3, "y": 43}, {"x": 4, "y": 91}, {"x": 5, "y": 81}, {"x": 6, "y": 53}, {"x": 7, "y": 19}, {"x": 8, "y": 87}, {"x": 9, "y": 52}, {"x": 10, "y": 48}, {"x": 11, "y": 24}, {"x": 12, "y": 49}, {"x": 13, "y": 87}, {"x": 14, "y": 66}, {"x": 15, "y": 17}, {"x": 16, "y": 27}, {"x": 17, "y": 68}, {"x": 18, "y": 16}, {"x": 19, "y": 49}, {"x": 20, "y": 15} ] } ], "scales": [ { "name": "x", "type": "ordinal", "range": "width", "domain": {"data": "table", "field": "x"} }, { "name": "y", "range": "height", "nice": true, "domain": {"data": "table", "field": "y"} } ], "axes": [ {"type": "x", "scale": "x"}, {"type": "y", "scale": "y"} ], "marks": [ { "type": "rect", "from": {"data": "table"}, "properties": { "enter": { "x": {"scale": "x", "field": "x"}, "width": {"scale": "x", "band": true, "offset": -1}, "y": {"scale": "y", "field": "y"}, "y2": {"scale": "y", "value": 0} }, "update": { "fill": {"value": "steelblue"} }, "hover": { "fill": {"value": "red"} } } } ] }
+    </div>
+    <h3>
+      <span class="mw-headline" id="Horizontal">Horizontal</span>
+    </h3>
+    <div class='mw-graph' xo-graph-version="2">
+      { "version": 2, "width": 400, "height": 400, "padding": {"top": 10, "left": 30, "bottom": 30, "right": 10}, "data": [ { "name": "table", "values": [ {"t": "a", "v": 28}, {"t": "b", "v": 55}, {"t": "c", "v": 43}, {"t": "d", "v": 91}, {"t": "e", "v": 81}, {"t": "f", "v": 53}, {"t": "g", "v": 19}, {"t": "h", "v": 87}, {"t": "i", "v": 52}, {"t": "j", "v": 48}, {"t": "k", "v": 24}, {"t": "l", "v": 49}, {"t": "m", "v": 87}, {"t": "n", "v": 66}, {"t": "o", "v": 17}, {"t": "p", "v": 27}, {"t": "q", "v": 68}, {"t": "r", "v": 16}, {"t": "s", "v": 49}, {"t": "t", "v": 15} ] } ], "scales": [ { "name": "x", "range": "width", "domain": {"data": "table", "field": "v"} }, { "name": "y", "range": "height", "type": "ordinal", "domain": {"data": "table", "field": "t"} } ], "axes": [ {"type": "x", "scale": "x"}, {"type": "y", "scale": "y"} ], "marks": [ { "type": "rect", "from": {"data": "table"}, "properties": { "enter": { "y": {"scale": "y", "field": "t"}, "height": {"scale": "y", "band": true, "offset": -1}, "x": {"scale": "x", "value": 0}, "x2": {"scale": "x", "field": "v"} }, "update": { "fill": {"value": "steelblue"} }, "hover": { "fill": {"value": "red"} } } } ] }
+    </div>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://www.youtube.com/watch?v=q0qbXYXEH6M" title="See a video of XOWA Desktop in action">Video</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+        <li><a href="https://www.youtube.com/watch?v=jsMTBxGweUw" title="See a video of XOWA Android in action">Video</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Donate.html" title="Support XOWA!">XOWA</a></li>
+      </ul>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>

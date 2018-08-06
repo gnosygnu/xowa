@@ -64,7 +64,7 @@
           <option value='xowa.bldr.db'>
             Import - Database
           </option>
-          <option value='xowa.bldr.page_sync' selected='selected'>
+          <option value='xowa.bldr.page_sync'>
             Import - Page sync
           </option>
           <option value='xowa.bldr.dansguardian'>
@@ -82,7 +82,7 @@
           <option value='xowa.html.scripting'>
             HTML - Scripting
           </option>
-          <option value='xowa.files.general'>
+          <option value='xowa.files.general' selected='selected'>
             Files - General
           </option>
           <option value='xowa.files.apps'>
@@ -129,99 +129,97 @@
         <div>
           <p id='page_help_para'>
           </p>
-          <p>
-            For more information, see <a tabindex="-1" href="/wiki/App/Xtn/Page_sync" id="xolnki_19" title="App/Xtn/Page sync">the page sync help page</a>
-          </p>
         </div>
         <h2>
-          Manual
+          Basic
         </h2>
         <div class="xocfg_row flex_div">
           <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.page_sync.manual.enabled")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.retrieval_enabled")' title='view more info'>&nbsp;</span>
           </div><!-- TEXT:key -->
-          <div id='xowa.bldr.page_sync.manual.enabled__name' class='xocfg_itm_name'>
-            Enabled
+          <div id='xowa.files.retrieval_enabled__name' class='xocfg_itm_name'>
+            Retrieval enabled
           </div><!-- BTN:undo -->
-          <div id='xowa.bldr.page_sync.manual.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.page_sync.manual.enabled")' title="reset to &quot;n&quot;">&nbsp;</span>
+          <div id='xowa.files.retrieval_enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.retrieval_enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
           </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
-            <input id="xowa.bldr.page_sync.manual.enabled" data-xocfg-key="xowa.bldr.page_sync.manual.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
+            <input id="xowa.files.retrieval_enabled" data-xocfg-key="xowa.files.retrieval_enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
           </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.bldr.page_sync.manual.enabled__key_box' value='xowa.bldr.page_sync.manual.enabled'> <input type='hidden' id='xowa.bldr.page_sync.manual.enabled__ctx_box' value='app'>
+          <input type='hidden' id='xowa.files.retrieval_enabled__key_box' value='xowa.files.retrieval_enabled'> <input type='hidden' id='xowa.files.retrieval_enabled__ctx_box' value='app'>
         </div><!-- DIV:help -->
-        <div id='xowa.bldr.page_sync.manual.enabled_help_div' class='xohelp_div'>
-          <div id='xowa.bldr.page_sync.manual.enabled_help_msg' class='xohelp_msg'>
+        <div id='xowa.files.retrieval_enabled_help_div' class='xohelp_div'>
+          <div id='xowa.files.retrieval_enabled_help_msg' class='xohelp_msg'>
             <p>
               Choose one of the following:
             </p>
             <ul>
               <li>
-                <b>checked</b>: Show "Sync" in sidebar
+                <b>checked</b> to automatically download images / retrieve images from database 
+                <ul>
+                  <li>
+                    ImageMagick and Inkscape <b>must</b> be installed (See <a tabindex="-1" href="/wiki/Dev/File/Setup" id="xolnki_27" title="Dev/File/Setup">Dev/File/Setup</a>)
+                  </li>
+                  <li>
+                    An internet connection must be available, or a local tarball must be set up. (See <a tabindex="-1" href="/wiki/Archive/Usage/Offline_images" id="xolnki_28" title="Archive/Usage/Offline images">Archive/Usage/Offline_images</a>)
+                  </li>
+                </ul>
               </li>
               <li>
-                <b>unchecked</b>: Do not show "Sync" in sidebar
-              </li>
-            </ul>
-            <p>
-              Other notes:
-            </p>
-            <ul>
-              <li>
-                Clicking "Sync" will manually synchronize current page
-              </li>
-              <li>
-                "Sync" will never show in the home wiki
-              </li>
-              <li>
-                "Sync" will not work on Special pages
+                <b>unchecked</b> to leave images unprocessed
               </li>
             </ul>
           </div>
         </div>
         <h2>
-          Automatic
+          Cache
         </h2>
         <div class="xocfg_row flex_div">
           <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.page_sync.auto.enabled")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.fsys_size_min")' title='view more info'>&nbsp;</span>
           </div><!-- TEXT:key -->
-          <div id='xowa.bldr.page_sync.auto.enabled__name' class='xocfg_itm_name'>
-            Enabled
+          <div id='xowa.files.cache.fsys_size_min__name' class='xocfg_itm_name'>
+            Minimum disk space used
           </div><!-- BTN:undo -->
-          <div id='xowa.bldr.page_sync.auto.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.page_sync.auto.enabled")' title="reset to &quot;n&quot;">&nbsp;</span>
+          <div id='xowa.files.cache.fsys_size_min__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.fsys_size_min")' title="reset to &quot;75&quot;">&nbsp;</span>
           </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
-            <input id="xowa.bldr.page_sync.auto.enabled" data-xocfg-key="xowa.bldr.page_sync.auto.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
+            <input id="xowa.files.cache.fsys_size_min" data-xocfg-key="xowa.files.cache.fsys_size_min" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="75">
           </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.bldr.page_sync.auto.enabled__key_box' value='xowa.bldr.page_sync.auto.enabled'> <input type='hidden' id='xowa.bldr.page_sync.auto.enabled__ctx_box' value='app'>
+          <input type='hidden' id='xowa.files.cache.fsys_size_min__key_box' value='xowa.files.cache.fsys_size_min'> <input type='hidden' id='xowa.files.cache.fsys_size_min__ctx_box' value='app'>
         </div><!-- DIV:help -->
-        <div id='xowa.bldr.page_sync.auto.enabled_help_div' class='xohelp_div'>
-          <div id='xowa.bldr.page_sync.auto.enabled_help_msg' class='xohelp_msg'>
+        <div id='xowa.files.cache.fsys_size_min_help_div' class='xohelp_div'>
+          <div id='xowa.files.cache.fsys_size_min_help_msg' class='xohelp_msg'>
             <p>
-              Choose one of the following:
+              Enter a minimum size for the cache to use (in MB)<br>
+            </p>
+            <p>
+              This is an advanced configuration tweak. When the cache reaches its maximum size, it will delete files to free space. It will continue deleting files until the minimum size is reached.<br>
+            </p>
+            <p>
+              For example:
             </p>
             <ul>
               <li>
-                <b>checked</b>: Automatically synchronize page when viewing it
+                If the max is set to 100 MB
               </li>
               <li>
-                <b>unchecked</b>: (default) Do not automatically synchronize page
-              </li>
-            </ul>
-            <p>
-              Other notes:
-            </p>
-            <ul>
-              <li>
-                Pages are automatically synchronized based on options for time and scope. The default behavior is to synchronize when first visiting the page, and then every 24 hours afterwards
+                ... and the current size of all files in the cache is 99.9 MB
               </li>
               <li>
-                Automatic synchronization will never occur in the home wiki
+                ... and a 200 KB file is added
+              </li>
+              <li>
+                Then the cache size will be temporarily 100.1 MB
+              </li>
+              <li>
+                ... triggering the delete mechanism
+              </li>
+              <li>
+                ... which will reduce the current size of all files to 75 MB
               </li>
             </ul>
           </div>
@@ -229,69 +227,101 @@
         <div class="xocfg_row flex_div">
           <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.page_sync.auto.interval")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.fsys_size_max")' title='view more info'>&nbsp;</span>
           </div><!-- TEXT:key -->
-          <div id='xowa.bldr.page_sync.auto.interval__name' class='xocfg_itm_name'>
-            Time to wait before syncs
+          <div id='xowa.files.cache.fsys_size_max__name' class='xocfg_itm_name'>
+            Maximum disk space used
           </div><!-- BTN:undo -->
-          <div id='xowa.bldr.page_sync.auto.interval__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.page_sync.auto.interval")' title="reset to &quot;1440&quot;">&nbsp;</span>
+          <div id='xowa.files.cache.fsys_size_max__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.fsys_size_max")' title="reset to &quot;100&quot;">&nbsp;</span>
           </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
-            <input id="xowa.bldr.page_sync.auto.interval" data-xocfg-key="xowa.bldr.page_sync.auto.interval" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="1440">
+            <input id="xowa.files.cache.fsys_size_max" data-xocfg-key="xowa.files.cache.fsys_size_max" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="100">
           </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.bldr.page_sync.auto.interval__key_box' value='xowa.bldr.page_sync.auto.interval'> <input type='hidden' id='xowa.bldr.page_sync.auto.interval__ctx_box' value='app'>
+          <input type='hidden' id='xowa.files.cache.fsys_size_max__key_box' value='xowa.files.cache.fsys_size_max'> <input type='hidden' id='xowa.files.cache.fsys_size_max__ctx_box' value='app'>
         </div><!-- DIV:help -->
-        <div id='xowa.bldr.page_sync.auto.interval_help_div' class='xohelp_div'>
-          <div id='xowa.bldr.page_sync.auto.interval_help_msg' class='xohelp_msg'>
+        <div id='xowa.files.cache.fsys_size_max_help_div' class='xohelp_div'>
+          <div id='xowa.files.cache.fsys_size_max_help_msg' class='xohelp_msg'>
             <p>
-              Enter the number of minutes to wait before checking for a new update:
+              Enter a maximum size for the cache to use (in MB)<br>
             </p>
           </div>
         </div>
         <div class="xocfg_row flex_div">
           <!-- BTN:help_item -->
           <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.bldr.page_sync.auto.scope")' title='view more info'>&nbsp;</span>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.reduce_to_min")' title='view more info'>&nbsp;</span>
           </div><!-- TEXT:key -->
-          <div id='xowa.bldr.page_sync.auto.scope__name' class='xocfg_itm_name'>
-            Pages to sync
+          <div id='xowa.files.cache.reduce_to_min__name' class='xocfg_itm_name'>
+            Reduce cache to min
           </div><!-- BTN:undo -->
-          <div id='xowa.bldr.page_sync.auto.scope__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.bldr.page_sync.auto.scope")' title="reset to &quot;*&quot;">&nbsp;</span>
+          <div id='xowa.files.cache.reduce_to_min__undo' data-xocfg-type='btn' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.reduce_to_min")' title="reset to &quot;&quot;">&nbsp;</span>
           </div><!-- TEXT:val -->
           <div class='xocfg_itm_data'>
-<textarea id="xowa.bldr.page_sync.auto.scope" data-xocfg-key="xowa.bldr.page_sync.auto.scope" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
-*
+            <button id="xowa.files.cache.reduce_to_min" data-xocfg-key="xowa.files.cache.reduce_to_min" data-xocfg-type="btn" class="xocfg_data__btn">Reduce cache to min</button>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.cache.reduce_to_min__key_box' value='xowa.files.cache.reduce_to_min'> <input type='hidden' id='xowa.files.cache.reduce_to_min__ctx_box' value='app'>
+        </div><!-- DIV:help -->
+        <div id='xowa.files.cache.reduce_to_min_help_div' class='xohelp_div'>
+          <div id='xowa.files.cache.reduce_to_min_help_msg' class='xohelp_msg'>
+            <p>
+              Press to reduce the cache to the minimum now (typically 75 MB).
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.clear")' title='view more info'>&nbsp;</span>
+          </div><!-- TEXT:key -->
+          <div id='xowa.files.cache.clear__name' class='xocfg_itm_name'>
+            Clear cache
+          </div><!-- BTN:undo -->
+          <div id='xowa.files.cache.clear__undo' data-xocfg-type='btn' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.clear")' title="reset to &quot;&quot;">&nbsp;</span>
+          </div><!-- TEXT:val -->
+          <div class='xocfg_itm_data'>
+            <button id="xowa.files.cache.clear" data-xocfg-key="xowa.files.cache.clear" data-xocfg-type="btn" class="xocfg_data__btn">Clear cache</button>
+          </div><!-- HIDDEN:key,ctx -->
+          <input type='hidden' id='xowa.files.cache.clear__key_box' value='xowa.files.cache.clear'> <input type='hidden' id='xowa.files.cache.clear__ctx_box' value='app'>
+        </div><!-- DIV:help -->
+        <div id='xowa.files.cache.clear_help_div' class='xohelp_div'>
+          <div id='xowa.files.cache.clear_help_msg' class='xohelp_msg'>
+            <p>
+              Press to clear the cache (reduces to 0 MB).
+            </p>
+          </div>
+        </div>
+        <div class="xocfg_row flex_div">
+          <!-- BTN:help_item -->
+          <div class='xocfg_itm_help'>
+            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.info")' title='view more info'>&nbsp;</span>
+          </div><!-- TEXT:key -->
+          <div id='xowa.files.cache.info__name' class='xocfg_itm_name'>
+            Info
+          </div><!-- BTN:undo -->
+          <div id='xowa.files.cache.info__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
+            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.info")' title="reset to &quot;cache folder: C:\xowa\file
+            space used: 46.698 MB
+            file count: 4042
+            oldest file: 2018-07-26 21:39:34
+            &quot;">&nbsp;</span>
+          </div><!-- TEXT:val -->
+          <div class='xocfg_itm_data'>
+<textarea id="xowa.files.cache.info" data-xocfg-key="xowa.files.cache.info" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo xocfg_data__readonly" readonly="true">
+cache folder: C:\xowa\file
+space used: 46.698 MB
+file count: 4042
+oldest file: 2018-07-26 21:39:34
 </textarea>
           </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.bldr.page_sync.auto.scope__key_box' value='xowa.bldr.page_sync.auto.scope'> <input type='hidden' id='xowa.bldr.page_sync.auto.scope__ctx_box' value='app'>
+          <input type='hidden' id='xowa.files.cache.info__key_box' value='xowa.files.cache.info'> <input type='hidden' id='xowa.files.cache.info__ctx_box' value='app'>
         </div><!-- DIV:help -->
-        <div id='xowa.bldr.page_sync.auto.scope_help_div' class='xohelp_div'>
-          <div id='xowa.bldr.page_sync.auto.scope_help_msg' class='xohelp_msg'>
+        <div id='xowa.files.cache.info_help_div' class='xohelp_div'>
+          <div id='xowa.files.cache.info_help_msg' class='xohelp_msg'>
             <p>
-              Specify specific page titles to sync:
-            </p>
-            <ul>
-              <li>
-                <b>*:Main_Page</b>: means sync all Main_Pages in all wikis
-              </li>
-              <li>
-                <b>*</b>: is a wildcard and means sync all pages in all wikis
-              </li>
-              <li>
-                Individual pages can be specified on each line.
-              </li>
-            </ul>
-            <p>
-              For example, the following would only auto-synchronize two pages: the Main_Page and Earth in English Wikipedia:
-            </p>
-<pre>
-en.w:Main_Page
-en.w:Earth
-</pre>
-            <p>
-              Note that all lines must be separated by a UNIX line ending (ASCII 10) not a Windows line ending (ASCII 13 + ASCII 10)
+              Miscellaneous information about the cache
             </p>
           </div>
         </div>
