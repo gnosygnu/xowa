@@ -372,8 +372,9 @@ public class Bry_bfr {
 	}
 	public Bry_bfr Add_float(float f) {Add_str_a7(Float_.To_str(f)); return this;}
 	public Bry_bfr Add_double(double v) {Add_str_a7(Double_.To_str(v)); return this;}
-	public Bry_bfr Add_dte(DateAdp val) {return Add_dte_segs(val.Year(), val.Month(),val.Day(), val.Hour(), val.Minute(), val.Second(), val.Frac());}
-	public Bry_bfr Add_dte_segs(int y, int M, int d, int H, int m, int s, int f) {		// yyyyMMdd HHmmss.fff
+	public Bry_bfr Add_dte(DateAdp val)			{return Add_dte_segs(Byte_ascii.Space	 , val.Year(), val.Month(),val.Day(), val.Hour(), val.Minute(), val.Second(), val.Frac());}
+	public Bry_bfr Add_dte_under(DateAdp val)	{return Add_dte_segs(Byte_ascii.Underline, val.Year(), val.Month(),val.Day(), val.Hour(), val.Minute(), val.Second(), val.Frac());}
+	private Bry_bfr Add_dte_segs(byte spr, int y, int M, int d, int H, int m, int s, int f) {		// yyyyMMdd HHmmss.fff
 		if (bfr_len + 19      > bfr_max) Resize((bfr_len + 19) * 2);
 		bfr[bfr_len +  0] = (byte)((y / 1000) + Bry_.Ascii_zero); y %= 1000;
 		bfr[bfr_len +  1] = (byte)((y /  100) + Bry_.Ascii_zero); y %=  100;
@@ -383,7 +384,7 @@ public class Bry_bfr {
 		bfr[bfr_len +  5] = (byte)( M		  + Bry_.Ascii_zero);
 		bfr[bfr_len +  6] = (byte)((d /   10) + Bry_.Ascii_zero); d %=  10;
 		bfr[bfr_len +  7] = (byte)( d		  + Bry_.Ascii_zero);
-		bfr[bfr_len +  8] = Byte_ascii.Space;
+		bfr[bfr_len +  8] = spr;
 		bfr[bfr_len +  9] = (byte)((H /   10) + Bry_.Ascii_zero); H %=  10;
 		bfr[bfr_len + 10] = (byte)( H		  + Bry_.Ascii_zero);
 		bfr[bfr_len + 11] = (byte)((m /   10) + Bry_.Ascii_zero); m %=  10;

@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.brys.*; import gplx.core.btries.*; import gplx.core.brys.fmtrs.*; import gplx.core.flds.*; import gplx.core.ios.*; import gplx.core.threads.*; import gplx.langs.jsons.*; import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.log_msgs.*; import gplx.core.envs.*;
-import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.metas.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.apps.progs.*; import gplx.xowa.apps.gfs.*;
+import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.metas.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.apps.progs.*; import gplx.xowa.apps.gfs.*;
 import gplx.xowa.langs.*; import gplx.xowa.specials.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.css.*; import gplx.xowa.bldrs.installs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
@@ -138,7 +138,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoa_fsys_eval		Url_cmd_eval() {return url_cmd_eval;} Xoa_fsys_eval url_cmd_eval;
 	public Xoa_cur				Cur_redirect() {return cur_redirect;} private Xoa_cur cur_redirect;
 	public Io_stream_zip_mgr	Zip_mgr() {return zip_mgr;} Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr();
-	public Xoa_cache_mgr		Cache_mgr() {return cache_mgr;} private final    Xoa_cache_mgr cache_mgr = new Xoa_cache_mgr();
 
 	public Xosrv_server			Tcp_server() {return tcp_server;} private Xosrv_server tcp_server = new Xosrv_server();
 	public Http_server_mgr		Http_server() {return http_server;} private Http_server_mgr http_server;

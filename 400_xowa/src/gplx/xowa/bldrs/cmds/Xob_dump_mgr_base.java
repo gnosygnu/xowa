@@ -66,6 +66,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 			Init_reset(conn);
 		}
 		bmk_mgr.Load(wiki.Appe(), this);
+
 		Cmd_bgn_end();
 	}
 	protected abstract void Cmd_bgn_end();

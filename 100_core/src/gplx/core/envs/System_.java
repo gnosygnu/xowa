@@ -16,8 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.envs; import gplx.*; import gplx.core.*;
 public class System_ {
 	// *** ticks
+	public static final int Ticks__per_second = 1000;
 	public static long	Ticks() {return Ticks__test_val >= 0 ? Ticks__test_val : System.currentTimeMillis();} 
-	public static int	Ticks__elapsed_in_sec	(long time_bgn) {return (int)(Ticks() - time_bgn) / 1000;}
+	public static int	Ticks__elapsed_in_sec	(long time_bgn) {return (int)(Ticks() - time_bgn) / Ticks__per_second;}
 	public static int	Ticks__elapsed_in_frac	(long time_bgn) {return (int)(Ticks() - time_bgn);}
 	public static void	Ticks__test_set(long v) {Ticks__test_val = v;}
 	public static void	Ticks__test_add(long v) {Ticks__test_val += v;}

@@ -60,6 +60,7 @@ public class Json_doc_wtr {
 		bfr.Add_byte_nl();
 		return this;
 	}
+	public Json_doc_wtr Key(boolean comma, String key) {return Key(comma, Bry_.new_u8(key));}
 	public Json_doc_wtr Key(boolean comma, byte[] key) {
 		Key_internal(comma, key);
 		bfr.Add_byte_nl();

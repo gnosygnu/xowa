@@ -38,6 +38,10 @@ public class Xomp_parse_mgr_cfg implements Gfo_invk {
 	public boolean		Show_msg__fetched_pool()		{return show_msg__fetched_pool;}		private boolean show_msg__fetched_pool;
 	public boolean		Indexer_enabled()               {return indexer_enabled;}               private boolean indexer_enabled;
 	public String   Indexer_opt()                   {return indexer_opt;}                   private String indexer_opt = gplx.gflucene.indexers.Gflucene_idx_opt.Docs_and_freqs.Key();
+	public String	Wbase_cache_mru_type()			{return wbase_cache_mru_type;}			private String wbase_cache_mru_type = "mru";
+	public long		Wbase_cache_mru_size()			{return wbase_cache_mru_size;}			private long wbase_cache_mru_size = 100;
+	public long		Wbase_cache_mru_weight()		{return wbase_cache_mru_weight;}		private long wbase_cache_mru_weight = 10;
+	public long		Wbase_cache_mru_compress_size()	{return wbase_cache_mru_compress_size;}	private long wbase_cache_mru_compress_size = 70;
 	public void Init(Xowe_wiki wiki) {
 		if (num_wkrs == -1)				num_wkrs = gplx.core.envs.Runtime_.Cpu_count();
 		if (num_pages_in_pool == -1)	num_pages_in_pool = num_wkrs * 1000;
@@ -68,6 +72,10 @@ public class Xomp_parse_mgr_cfg implements Gfo_invk {
 		else if	(ctx.Match(k, Invk__log_math_))						log_math = m.ReadYn("v");
 		else if	(ctx.Match(k, "indexer_enabled_"))                  indexer_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, "indexer_opt_"))                      indexer_opt = m.ReadStr("v");
+		else if	(ctx.Match(k, "wbase_cache_mru_type_"))				wbase_cache_mru_type = m.ReadStr("v");
+		else if	(ctx.Match(k, "wbase_cache_mru_size_"))				wbase_cache_mru_size = m.ReadLong("v");
+		else if	(ctx.Match(k, "wbase_cache_mru_weight_"))			wbase_cache_mru_weight = m.ReadLong("v");
+		else if	(ctx.Match(k, "wbase_cache_mru_compress_size_"))	wbase_cache_mru_compress_size = m.ReadLong("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}

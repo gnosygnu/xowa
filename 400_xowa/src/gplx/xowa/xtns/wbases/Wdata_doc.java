@@ -26,6 +26,7 @@ public class Wdata_doc {
 		this.slink_list = slink_list; this.label_list = label_list; this.descr_list = descr_list; this.alias_list = alias_list; this.claim_list = claim_list;
 	}
 	public Json_doc Jdoc() {return jdoc;} private Json_doc jdoc;
+	public int Jdoc_size() {return jdoc == null ? 1 : jdoc.Src().length;}
 	public byte[] Qid() {return qid;} private byte[] qid;
 	public byte[][] Sort_langs() {return sort_langs;} public void Sort_langs_(byte[][] v) {sort_langs = v;} private byte[][] sort_langs = Bry_.Ary_empty;
 	public Ordered_hash Slink_list()	{if (slink_list == null) slink_list = mgr.Wdoc_parser(jdoc).Parse_sitelinks(qid, jdoc);			return slink_list;} private Ordered_hash slink_list;

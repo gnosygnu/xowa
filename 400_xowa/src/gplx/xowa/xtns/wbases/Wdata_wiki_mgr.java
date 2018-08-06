@@ -31,8 +31,8 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		this.app = app;
 		this.evt_mgr = new Gfo_evt_mgr(this);
 		this.Qid_mgr = new Wbase_qid_mgr(this);
-		this.Pid_mgr = new Wbase_pid_mgr(this);
-		this.Doc_mgr = new Wbase_doc_mgr(this, this.Qid_mgr, app.Cache_mgr().Doc_cache());
+		this.Pid_mgr = new Wbase_pid_mgr(this);	
+		this.Doc_mgr = new Wbase_doc_mgr(this, this.Qid_mgr);
 		this.prop_mgr = new Wbase_prop_mgr(Wbase_prop_mgr_loader_.New_db(this));
 		this.prop_val_visitor = new Wdata_prop_val_visitor(app, this);
 		this.Enabled_(true);
