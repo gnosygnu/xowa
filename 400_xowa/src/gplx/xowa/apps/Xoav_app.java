@@ -26,7 +26,7 @@ import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wiki
 import gplx.xowa.guis.cbks.*; import gplx.xowa.guis.tabs.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.bldrs.wms.*;
-import gplx.langs.htmls.encoders.*;
+import gplx.langs.htmls.encoders.*; import gplx.xowa.langs.names.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.addons.*; import gplx.xowa.specials.mgrs.*;
 import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.apps.miscs.*;
@@ -35,7 +35,7 @@ public class Xoav_app implements Xoa_app, Gfo_invk {
 		Xoa_app_.Usr_dlg_(usr_dlg); this.usr_dlg = usr_dlg; this.mode = mode;
 		this.fsys_mgr = new Xoa_fsys_mgr(plat_name, root_dir, root_dir.GenSubDir("wiki"), file_dir, css_dir, http_root);
 		this.gfs_mgr = new Xoa_gfs_mgr("anonymous", this, fsys_mgr);
-		this.lang_mgr = new Xoa_lang_mgr(this, gfs_mgr);
+		this.lang_mgr = new Xoa_lang_mgr(this, Xol_name_mgr.New(root_dir), gfs_mgr);
 		this.meta_mgr = new Xoa_meta_mgr(this);
 		this.file__cache_mgr = new Xof_cache_mgr(usr_dlg, null, null);
 		this.file__img_mgr = new Xof_img_mgr();

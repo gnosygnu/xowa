@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wbases.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.metas.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.langs.names.*;
 import gplx.xowa.addons.wikis.directorys.dbs.*;
 public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 	private final    Xoae_app app;
@@ -87,7 +87,7 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 		if (lang_key == Xol_lang_stub_.Key__unknown) lang_key = Xol_lang_itm_.Key_en;	// unknown langs default to english; note that this makes nonwmf english by default
 		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_new(lang_key);			
 		if (domain_itm.Domain_type_id() == Xow_domain_tid_.Tid__other) {
-			lang = new Xol_lang_itm(app.Lang_mgr(), Xol_lang_itm_.Key_en).Kwd_mgr__strx_(true);	// create a new english lang, but enable strx functions; DATE:2015-08-23
+			lang = Xol_lang_itm.New(app.Lang_mgr(), Xol_lang_itm_.Key_en).Kwd_mgr__strx_(true);	// create a new english lang, but enable strx functions; DATE:2015-08-23
 			Xol_lang_itm_.Lang_init(lang);
 		}
 

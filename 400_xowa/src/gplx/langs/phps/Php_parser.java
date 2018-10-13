@@ -16,12 +16,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.phps; import gplx.*; import gplx.langs.*;
 import gplx.core.btries.*; import gplx.core.log_msgs.*;
 public class Php_parser {
-	Php_lxr[] lxrs; int lxrs_len;
-	int txt_bgn; Php_tkn_txt txt_tkn;
 	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci:PHP tkns are ASCII
 	private final    Btrie_rv trv = new Btrie_rv();
-	byte[] src; int src_len; Php_tkn_wkr tkn_wkr; Php_tkn_factory tkn_factory = new Php_tkn_factory(); Php_ctx ctx = new Php_ctx();
-	Php_parser_interrupt[] parser_interrupts = new Php_parser_interrupt[256]; 
+	private Php_lxr[] lxrs; private int lxrs_len;
+	private int txt_bgn; private Php_tkn_txt txt_tkn;
+	private final    Php_tkn_factory tkn_factory = new Php_tkn_factory();
+	private final    Php_ctx ctx = new Php_ctx();
+	private final    Php_parser_interrupt[] parser_interrupts = new Php_parser_interrupt[256]; 
+	private int src_len; private Php_tkn_wkr tkn_wkr;
 	public Php_parser() {
 		List_adp list = List_adp_.New();
 		Init_lxr(list, new Php_lxr_declaration());
@@ -57,7 +59,7 @@ public class Php_parser {
 	}
 	public void Parse_tkns(String src, Php_tkn_wkr tkn_wkr) {Parse_tkns(Bry_.new_u8(src), tkn_wkr);}
 	public void Parse_tkns(byte[] src, Php_tkn_wkr tkn_wkr) {
-		this.src = src; this.src_len = src.length; this.tkn_wkr = tkn_wkr;
+		this.src_len = src.length; this.tkn_wkr = tkn_wkr;
 		ctx.Src_(src);
 		tkn_wkr.Init(ctx);
 		if (src_len == 0) return;

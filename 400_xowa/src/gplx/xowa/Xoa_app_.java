@@ -30,8 +30,8 @@ public class Xoa_app_ {
 		}
 	}
 	public static final String		Name			= "xowa";
-	public static final int		Version_id		= 542;
-	public static final String		Version			= "4.5.21.1808";
+	public static final int		Version_id		= 545;
+	public static final String		Version			= "4.5.26.1810";
 	public static String	Build_date		= "2012-12-30 00:00:00";
 	public static String	Build_date_fmt	= "yyyy-MM-dd HH:mm:ss";
 	public static String	Op_sys_str;

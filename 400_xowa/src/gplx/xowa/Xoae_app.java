@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa; import gplx.*;
 import gplx.core.brys.*; import gplx.core.btries.*; import gplx.core.brys.fmtrs.*; import gplx.core.flds.*; import gplx.core.ios.*; import gplx.core.threads.*; import gplx.langs.jsons.*; import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.log_msgs.*; import gplx.core.envs.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.metas.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.apps.progs.*; import gplx.xowa.apps.gfs.*;
-import gplx.xowa.langs.*; import gplx.xowa.specials.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.names.*; import gplx.xowa.specials.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.css.*; import gplx.xowa.bldrs.installs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.guis.cbks.*; import gplx.xowa.guis.tabs.*;
@@ -49,7 +49,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		fsys_mgr.Init_by_app(prog_mgr);
 		log_wtr.Log_dir_(user.Fsys_mgr().App_temp_dir().GenSubDir("log"));
 		this.gfs_mgr = new Xoa_gfs_mgr(user.Key(), this, fsys_mgr);
-		lang_mgr = new Xoa_lang_mgr(this, gfs_mgr);
+		lang_mgr = new Xoa_lang_mgr(this, Xol_name_mgr.New(root_dir), gfs_mgr);
 		wiki_mgr = new Xoae_wiki_mgr(this);
 		gui_mgr = new Xoa_gui_mgr(this);
 		this.gui__tab_mgr = new Xog_tab_mgr__swt(gui_mgr);

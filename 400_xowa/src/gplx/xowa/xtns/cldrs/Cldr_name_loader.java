@@ -20,8 +20,8 @@ public class Cldr_name_loader {
 	private final    Io_url cldr_dir;
 	private final    Hash_adp hash = Hash_adp_.New();
 
-	public Cldr_name_loader(Io_url xowa_xtn_dir) {
-		cldr_dir = xowa_xtn_dir.GenSubDir_nest("cldr", "CldrNames");
+	public Cldr_name_loader(Io_url root_dir) {
+		cldr_dir = root_dir.GenSubDir_nest("bin", "any", "xowa", "xtns", "cldr", "CldrNames");
 	}
 
 	public Cldr_name_file Load(String lang_key) {

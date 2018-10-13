@@ -15,12 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
-import gplx.core.intls.*; import gplx.xowa.langs.*; import gplx.xowa.langs.numbers.*;
+import gplx.core.intls.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.names.*;
 public class Pf_formatnum_fa_tst {
 	private Xop_fxt fxt;
 	@Before public void init() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
-		Xol_lang_itm lang = new Xol_lang_itm(app.Lang_mgr(), Bry_.new_a7("fa")).Init_by_load_assert();
+		Xol_lang_itm lang = Xol_lang_itm.New(app.Lang_mgr(), Bry_.new_a7("fa")).Init_by_load_assert();
 		app.Gfs_mgr().Run_str_for(lang, Persian_numbers_gfs);
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, "fa.wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
@@ -31,7 +32,7 @@ public class Pf_formatnum_fa_tst {
 	@Test  public void English() {	// PURPOSE: make sure regular numbers are still read; DATE:2015-07-18
 		fxt.Test_parse_tmpl_str_test("{{formatnum:150|R}}"		, "{{test}}",	"150");
 	}
-	public static final String Persian_numbers_gfs = String_.Concat_lines_nl
+	public static final    String Persian_numbers_gfs = String_.Concat_lines_nl
 	( "numbers {"
 	, "  digits {"
 	, "    clear;"

@@ -653,6 +653,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					case Xop_xnde_tag_.Tid__random_selection:		xnde_xtn = tkn_mkr.Xnde__random_selection(); break;
 					case Xop_xnde_tag_.Tid__tabber:					xnde_xtn = tkn_mkr.Xnde__tabber(); break;
 					case Xop_xnde_tag_.Tid__tabview:				xnde_xtn = tkn_mkr.Xnde__tabview(); break;
+					case Xop_xnde_tag_.Tid__template_styles:		xnde_xtn = tkn_mkr.Xnde__template_styles(); break;
 					case Xop_xnde_tag_.Tid__listing_buy:
 					case Xop_xnde_tag_.Tid__listing_do:
 					case Xop_xnde_tag_.Tid__listing_drink:

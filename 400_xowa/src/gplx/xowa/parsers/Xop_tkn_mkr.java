@@ -93,6 +93,7 @@ public class Xop_tkn_mkr {
 	public gplx.xowa.xtns.wikias.Random_selection_xnde Xnde__random_selection()				{return new gplx.xowa.xtns.wikias.Random_selection_xnde();}
 	public gplx.xowa.xtns.wikias.Tabber_xnde Xnde__tabber()									{return new gplx.xowa.xtns.wikias.Tabber_xnde();}
 	public gplx.xowa.xtns.wikias.Tabview_xnde Xnde__tabview()								{return new gplx.xowa.xtns.wikias.Tabview_xnde();}
+	public gplx.xowa.xtns.template_styles.Template_styles_nde Xnde__template_styles()		{return new gplx.xowa.xtns.template_styles.Template_styles_nde();}
 
 	public gplx.xowa.xtns.translates.Xop_tvar_tkn Tvar(int tkn_bgn, int tkn_end, int key_bgn, int key_end, int txt_bgn, int txt_end, byte[] wikitext) {return new gplx.xowa.xtns.translates.Xop_tvar_tkn(tkn_bgn, tkn_end, key_bgn, key_end, txt_bgn, txt_end, wikitext);}
 //		public void Clear() {

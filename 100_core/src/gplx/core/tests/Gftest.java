@@ -21,6 +21,7 @@ public class Gftest {
 	public static void Eq__ary(int[] expd, int[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__int, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary(long[] expd, long[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__long, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary(byte[] expd, byte[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__byte, expd, actl, msg_fmt, msg_args);}
+	public static void Eq__ary__lines(String expd, String actl)												{Eq__ary__lines(expd, actl, "no_msg");}
 	public static void Eq__ary__lines(String expd, byte[] actl)												{Eq__ary__lines(expd, String_.new_u8(actl), "no_msg");}
 	public static void Eq__ary__lines(String expd, byte[] actl, String msg_fmt, Object... msg_args)	{Eq__ary__lines(expd, String_.new_u8(actl), msg_fmt, msg_args);}
 	public static void Eq__ary__lines(String expd, String actl, String msg_fmt, Object... msg_args)	{Eq__array(Type_ids_.Id__bry, Bry_split_.Split_lines(Bry_.new_u8_safe(expd)), Bry_split_.Split_lines(Bry_.new_u8_safe(actl)), msg_fmt, msg_args);}

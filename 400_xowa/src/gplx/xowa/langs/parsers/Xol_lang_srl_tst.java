@@ -17,7 +17,7 @@ package gplx.xowa.langs.parsers; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*; import gplx.core.strings.*;
 import gplx.core.intls.*;
 import gplx.xowa.apps.gfs.*;
-import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.specials.*;
+import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.specials.*; import gplx.xowa.langs.names.*;
 import gplx.xowa.wikis.nss.*;
 public class Xol_lang_srl_tst {
 	private Xol_lang_srl_fxt fxt = new Xol_lang_srl_fxt();
@@ -165,7 +165,7 @@ public class Xol_lang_srl_tst {
 	@Test  public void Fallback_circular() {	// PURPOSE: pt and pt-br cite each other as fallback in Messages*.php; DATE:2013-02-18
 		Io_mgr.Instance.SaveFilStr(Xol_lang_itm_.xo_lang_fil_(fxt.App().Fsys_mgr(), "pt")		, "fallback_load('pt-br');");
 		Io_mgr.Instance.SaveFilStr(Xol_lang_itm_.xo_lang_fil_(fxt.App().Fsys_mgr(), "pt-br")	, "fallback_load('pt');");
-		Xol_lang_itm lang = new Xol_lang_itm(fxt.App().Lang_mgr(), Bry_.new_a7("pt"));
+		Xol_lang_itm lang = Xol_lang_itm.New(fxt.App().Lang_mgr(), Bry_.new_a7("pt"));
 		lang.Init_by_load();
 	}
 	@Test  public void Num_fmt() {
@@ -201,7 +201,7 @@ public class Xol_lang_srl_tst {
 class Xol_lang_srl_fxt {
 	public void Clear() {
 		app = Xoa_app_fxt.Make__app__edit();
-		lang = new Xol_lang_itm(app.Lang_mgr(), Bry_.new_a7("fr"));
+		lang = Xol_lang_itm.New(app.Lang_mgr(), Bry_.new_a7("fr"));
 		Xoa_gfs_mgr.Msg_parser_init();	// required by fallback_load
 	}	GfsCtx ctx = GfsCtx.new_(); Xoa_gfs_bldr bldr = new Xoa_gfs_bldr(); //Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public Xoae_app App() {return app;} private Xoae_app app;

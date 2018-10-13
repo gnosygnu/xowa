@@ -17,6 +17,16 @@ package gplx.langs.phps; import gplx.*; import gplx.langs.*;
 public class Php_itm_kv implements Php_itm, Php_itm_sub {
 	public byte Itm_tid() {return Php_itm_.Tid_kv;}
 	public byte[] Val_obj_bry() {return null;}
-	public Php_key Key() {return key;} public Php_itm_kv Key_(Php_key v) {this.key = v; return this;} Php_key key;
-	public Php_itm Val() {return val;} public Php_itm_kv Val_(Php_itm v) {this.val = v; return this;} Php_itm val;
+	public Php_key Key() {return key;} public Php_itm_kv Key_(Php_key v) {this.key = v; return this;} private Php_key key;
+	public Php_itm Val() {return val;} public Php_itm_kv Val_(Php_itm v) {this.val = v; return this;} private Php_itm val;
+
+	private List_adp comments;
+	public int Comments__len() {return comments == null ? 0 : comments.Len();} 
+	public Php_tkn_comment Comments__get_at__or_null(int i) {return comments == null ? null : (Php_tkn_comment)comments.Get_at(0);} 
+	public void Comments__add(Php_tkn comment) {
+		if (comments == null) {
+			comments = List_adp_.New();
+		}
+		comments.Add(comment);
+	}
 }

@@ -19,7 +19,7 @@ import gplx.gfui.kits.core.*;
 import gplx.langs.gfs.*;
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.names.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.apps.*; import gplx.xowa.files.exts.*;
 import gplx.xowa.wikis.domains.*;
@@ -61,7 +61,7 @@ public class Xoa_app_fxt {
 		return rv;
 	}
 	public static Xowe_wiki Make__wiki__edit__nonwmf(Xoae_app app, String key) {
-		Xol_lang_itm lang = new Xol_lang_itm(app.Lang_mgr(), Xol_lang_itm_.Key_en).Kwd_mgr__strx_(true);
+		Xol_lang_itm lang = Xol_lang_itm.New(app.Lang_mgr(), Xol_lang_itm_.Key_en).Kwd_mgr__strx_(true);
 		Xol_lang_itm_.Lang_init(lang);
 		return Make__wiki__edit(app, key, lang);
 	}

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.jsonConfigs.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.jsonConfigs.*;
 import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.names.*;
 import gplx.langs.jsons.*;
 public class Jscfg_scrib_lib_tst {
 	private final    Jscfg_scrib_lib_fxt fxt = new Jscfg_scrib_lib_fxt();
@@ -150,7 +150,7 @@ class Jscfg_scrib_lib_fxt {
 		fxt.Parser_fxt().Init_page_create(commons_wiki, page, text);
 	}
 	public Xol_lang_itm Init__lang(String key, String fallbacks) {
-		Xol_lang_itm lang = new Xol_lang_itm(fxt.Core().App().Lang_mgr(), Bry_.new_u8(key));
+		Xol_lang_itm lang = Xol_lang_itm.New(fxt.Core().App().Lang_mgr(), Bry_.new_u8(key));
 		lang.Fallback_bry_(Bry_.new_a7(fallbacks));
 		return lang;
 	}

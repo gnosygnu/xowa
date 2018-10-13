@@ -130,6 +130,11 @@ public class Scrib_lib_language implements Scrib_lib {
 		return rslt.Init_obj(valid);
 	}
 	public boolean FetchLanguageName(Scrib_proc_args args, Scrib_proc_rslt rslt) {	
+		String lang_code = args.Pull_str(0);
+		byte[] inLanguage = args.Pull_bry(1);
+		String rv = core.App().Lang_mgr().Name_mgr().fetchLanguageName(lang_code, inLanguage, null);
+		return rslt.Init_obj(rv);
+		/*
 		byte[] lang_code = args.Pull_bry(0);
 		// byte[] trans_code = args.Get_bry_or_null(1);	// TODO_OLD: FetchLanguageName("en", "fr") -> Anglais; WHEN: needs global database of languages; cldr
 		Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(lang_code);
@@ -137,6 +142,7 @@ public class Scrib_lib_language implements Scrib_lib {
 			? ""											// unknown -> return ""; PAGE:en.w:United_States_Strategic_Bombing_Survey; DATE:2018-07-01
 			: String_.new_u8(lang_itm.Canonical_name());	// known   -> return canonical name
 		return rslt.Init_obj(rv);
+		*/
 	}
 	public boolean FetchLanguageNames(Scrib_proc_args args, Scrib_proc_rslt rslt) {	
 		// byte[] lang_code = args.Cast_bry_or_null(0);

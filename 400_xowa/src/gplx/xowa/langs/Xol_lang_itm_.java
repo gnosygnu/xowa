@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
 import gplx.core.intls.*; import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.gallery.*;
-import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.kwds.*;
+import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.names.*;
 import gplx.xowa.apps.fsys.*;
 public class Xol_lang_itm_ {
 	public static Io_url xo_lang_fil_(Xoa_fsys_mgr app_fsys_mgr, String lang_key) {return app_fsys_mgr.Cfg_lang_core_dir().GenSubFil(lang_key + ".gfs");}
@@ -45,7 +45,7 @@ public class Xol_lang_itm_ {
 	}
 	public static final    byte[] Key_en = Bry_.new_a7("en");
 	public static Xol_lang_itm Lang_en_make(Xoa_lang_mgr lang_mgr) {
-		Xol_lang_itm rv = new Xol_lang_itm(lang_mgr, Xol_lang_itm_.Key_en);
+		Xol_lang_itm rv = Xol_lang_itm.New(lang_mgr, Xol_lang_itm_.Key_en);
 		Xol_lang_itm_.Lang_init(rv);
 		rv.Evt_lang_changed();
 		return rv;

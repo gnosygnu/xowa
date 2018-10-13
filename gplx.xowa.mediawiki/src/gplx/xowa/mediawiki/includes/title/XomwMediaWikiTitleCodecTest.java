@@ -50,7 +50,7 @@ class XomwMediaWikiTitleCodecFxt {
 	}
 	public XomwLanguage Make_lang() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
-		Xol_lang_itm lang = new Xol_lang_itm(app.Lang_mgr(), Xol_lang_itm_.Key_en);
+		Xol_lang_itm lang = Xol_lang_itm.New(app.Lang_mgr(), Xol_lang_itm_.Key_en);
 		return new XomwLanguage(lang);
 	}
 	public void Test_splitTitleString(XomwMediaWikiTitleCodec codec, String src, XomwMediaWikiTitleCodecParts expd) {

@@ -15,12 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*; import gplx.xowa.langs.*;
-import gplx.core.intls.*; import gplx.xowa.langs.numbers.*;
+import gplx.core.intls.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.names.*;
 public class Pf_formatnum_es_tst {
 	private Xop_fxt fxt;
 	@Before public void init() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
-		Xol_lang_itm lang = new Xol_lang_itm(app.Lang_mgr(), Bry_.new_a7("es")).Init_by_load_assert();
+		Xol_lang_itm lang = Xol_lang_itm.New(app.Lang_mgr(), Bry_.new_a7("es")).Init_by_load_assert();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, "es.wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
 	}

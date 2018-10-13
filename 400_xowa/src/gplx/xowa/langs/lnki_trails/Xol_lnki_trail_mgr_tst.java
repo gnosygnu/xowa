@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.lnki_trails; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import org.junit.*;
+import gplx.xowa.langs.names.*;
 public class Xol_lnki_trail_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xol_lnki_trail_mgr_fxt fxt = new Xol_lnki_trail_mgr_fxt();
 	@Test   public void Add_bulk() {
@@ -25,7 +26,7 @@ class Xol_lnki_trail_mgr_fxt {
 	Xol_lang_itm lang; Xol_lnki_trail_mgr lnki_trail_mgr;
 	public void Clear() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
-		lang = new Xol_lang_itm(app.Lang_mgr(), Bry_.new_a7("fr"));
+		lang = Xol_lang_itm.New(app.Lang_mgr(), Bry_.new_a7("fr"));
 		lnki_trail_mgr = lang.Lnki_trail_mgr();
 	}
 	public void Test_add_bulk(String raw, String... expd_ary) {

@@ -22,13 +22,15 @@ NOTE: naive implementation of PHP parser; intended only for parsing Messages**.p
 - no functions are supported: EX: strlen('a') fails
 */
 public class Php_evaluator implements Php_tkn_wkr {
-	byte mode = Mode_key_bgn, next_tid = 0, next_mode = 0;
-	Php_line_assign cur_line; Php_itm_ary cur_ary; Php_key cur_kv_key;
-	List_adp frame_stack = List_adp_.New();
-	public Php_evaluator(Gfo_msg_log msg_log) {this.msg_log = msg_log;} Gfo_msg_log msg_log;
+	private byte mode = Mode_key_bgn, next_tid = 0, next_mode = 0;
+	private Php_line_assign cur_line; private Php_itm_ary cur_ary; private Php_key cur_kv_key;
+	private final    List_adp frame_stack = List_adp_.New();
+	public Php_evaluator(Gfo_msg_log msg_log) {this.msg_log = msg_log;} private Gfo_msg_log msg_log;
 	public void Init(Php_ctx ctx) {src = ctx.Src(); frame_stack.Clear();} private byte[] src;
-	public List_adp List() {return lines;} List_adp lines = List_adp_.New();
+	public List_adp List() {return lines;} private final    List_adp lines = List_adp_.New();
 	public Gfo_msg_log Msg_log() {return msg_log;}
+
+	public boolean Comments_for_kv() {return comments_for_kv;} public Php_evaluator Comments_for_kv_() {comments_for_kv = true; return this;} private boolean comments_for_kv;
 	public void Clear() {
 		lines.Clear(); msg_log.Clear();
 		cur_line = null;
@@ -40,7 +42,19 @@ public class Php_evaluator implements Php_tkn_wkr {
 	public void Process(Php_tkn tkn) {
 		byte tkn_tid = tkn.Tkn_tid();
 		switch (tkn_tid) {
-			case Php_tkn_.Tid_declaration: case Php_tkn_.Tid_comment: case Php_tkn_.Tid_ws:	// always discard, regardless of mode
+			case Php_tkn_.Tid_comment:
+				// ASSUME: comment is end-line comment for the last kv; EX: " a => b, // comment"
+				if (comments_for_kv && cur_ary != null) {
+					int subs_len = cur_ary.Subs_len();
+					if (subs_len > 0) {
+						Php_itm_kv kv = (Php_itm_kv)cur_ary.Subs_get(subs_len - 1); // get last itm
+						kv.Comments__add(tkn);
+					}
+				}
+				else
+					return;
+				break;
+			case Php_tkn_.Tid_declaration: case Php_tkn_.Tid_ws:	// always discard, regardless of mode
 				return;
 		}
 		switch (mode) {

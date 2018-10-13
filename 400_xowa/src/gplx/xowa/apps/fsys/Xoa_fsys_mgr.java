@@ -37,11 +37,11 @@ public class Xoa_fsys_mgr implements Gfo_invk {
 	public Io_url File_dir()					{return file_dir;} private final    Io_url file_dir;					// EX: /xowa/file/
 	public Io_url Css_dir()						{return css_dir;} private final    Io_url css_dir;						// EX: /xowa/user/anonymous/wiki/
 	public Io_url Bin_plat_dir()				{return bin_plat_dir;} private final    Io_url bin_plat_dir;			// EX: /xowa/bin/lnx_64/
-	public Io_url Bin_any_dir()					{return bin_any_dir;} private final    Io_url bin_any_dir;				// EX: /xowa/bin/any
-	public Io_url Bin_xowa_dir()				{return bin_xowa_dir;} private final    Io_url bin_xowa_dir;			// EX: /xowa/bin/any/xowa
+	public Io_url Bin_any_dir()					{return bin_any_dir;} private final    Io_url bin_any_dir;				// EX: /xowa/bin/any/
+	public Io_url Bin_xowa_dir()				{return bin_xowa_dir;} private final    Io_url bin_xowa_dir;			// EX: /xowa/bin/any/xowa/
 	public Io_url Bin_xowa_file_dir()			{return bin_xowa_file_dir;} private final    Io_url bin_xowa_file_dir;
 	public Io_url Bin_xtns_dir()				{return bin_xtns_dir;} private final    Io_url bin_xtns_dir;
-	public Io_url Bin_addon_dir()				{return bin_addon_dir;} private final    Io_url bin_addon_dir;
+	public Io_url Bin_addon_dir()				{return bin_addon_dir;} private final    Io_url bin_addon_dir;			// EX: /xowa/bin/any/xowa/xtns/
 	public Io_url Cfg_lang_core_dir()			{return cfg_lang_core_dir;} private final    Io_url cfg_lang_core_dir;
 	public Io_url Cfg_wiki_core_dir()			{return cfg_wiki_core_dir;} private final    Io_url cfg_wiki_core_dir;
 	public Io_url Cfg_site_meta_fil()			{return cfg_site_meta_fil;} private final    Io_url cfg_site_meta_fil;

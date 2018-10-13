@@ -29,8 +29,11 @@ public class Json_doc_wtr {
 	public Json_doc_wtr Str(byte[] v) {
 		if (v == null)
 			bfr.Add(Object_.Bry__null);
-		else
-			bfr.Add_byte(Byte_ascii.Quote).Add(v).Add_byte(Byte_ascii.Quote);
+		else {
+			bfr.Add_byte(Byte_ascii.Quote);
+			bfr.Add_bry_escape(Byte_ascii.Quote, Escaped__quote, v, 0, v.length);
+			bfr.Add_byte(Byte_ascii.Quote);
+		}
 		return this;
 	}
 	public Json_doc_wtr Int(int v) {bfr.Add_int_variable(v); return this;}
@@ -94,4 +97,5 @@ public class Json_doc_wtr {
 	}
 	public byte[] Bld() {return bfr.To_bry_and_clear();}
 	public String Bld_as_str() {return bfr.To_str_and_clear();}
+	private static final    byte[] Escaped__quote = Bry_.new_a7("\\\"");
 }

@@ -47,6 +47,7 @@ public class Xow_xtn_mgr implements Gfo_invk {
 		Add(app, new gplx.xowa.xtns.pfuncs.scribunto.Pfunc_xtn_mgr());
 		Add(app, new gplx.xowa.xtns.flaggedRevs.Flagged_revs_xtn_mgr());
 		Add(app, new gplx.xowa.xtns.jsonConfigs.scribunto.Jscfg_xtn_mgr());
+		Add(app, new gplx.xowa.xtns.cldrs.Cldr_name_xtn_mgr());
 		return this;
 	}
 	public Xow_xtn_mgr Ctor_by_wiki(Xowe_wiki wiki) {

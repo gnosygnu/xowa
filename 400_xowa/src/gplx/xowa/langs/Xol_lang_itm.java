@@ -172,4 +172,7 @@ public class Xol_lang_itm implements Gfo_invk {
 		return rv;
 	}
 	private static final    byte[][] Fallback_bry_ary__en = new byte[][] {Xol_lang_itm_.Key_en};
+	public static Xol_lang_itm New(Xoa_lang_mgr lang_mgr, byte[] key_bry) {
+		return new Xol_lang_itm(lang_mgr, key_bry);
+	}
 }
