@@ -233,7 +233,8 @@ public class Xol_name_mgr {
 		return returnMw;
 	}
 	public static Xol_name_mgr New(Io_url root_dir) {
-		return new Xol_name_mgr(new Cldr_name_loader(root_dir), new Language_name_loader(root_dir), root_dir);
+		Io_url cldr_dir = root_dir.GenSubDir_nest("bin", "any", "xowa", "xtns", "cldr", "CldrNames");
+		return new Xol_name_mgr(new Cldr_name_loader(cldr_dir), new Language_name_loader(root_dir), root_dir);
 	}
 }
 class Hash_kv_sorter implements gplx.core.lists.ComparerAble {

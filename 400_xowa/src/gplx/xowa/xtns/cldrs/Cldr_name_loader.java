@@ -18,26 +18,40 @@ import gplx.langs.jsons.*;
 public class Cldr_name_loader {
 	private final    Json_parser parser = new Json_parser();
 	private final    Io_url cldr_dir;
-	private final    Hash_adp hash = Hash_adp_.New();
+	private final    Hash_adp files_hash = Hash_adp_.New();
+	private Hash_adp urls_hash;
+	private static final    String Token_cldr_names = "CldrNames", Token_json_ext = ".json";
 
-	public Cldr_name_loader(Io_url root_dir) {
-		cldr_dir = root_dir.GenSubDir_nest("bin", "any", "xowa", "xtns", "cldr", "CldrNames");
+	public Cldr_name_loader(Io_url cldr_dir) {
+		this.cldr_dir = cldr_dir;
 	}
 
 	public Cldr_name_file Load(String lang_key) {
-		Cldr_name_file file = (Cldr_name_file)hash.Get_by(lang_key);
+		// normalize to lc; scrib will pass lower_case, but underlying files are Title_case
+		lang_key = String_.Lower(lang_key);
+
+		// return file if already exists
+		Cldr_name_file file = (Cldr_name_file)files_hash.Get_by(lang_key);
 		if (file != null) return file;
 
-		byte[] json = Io_mgr.Instance.LoadFilBry(cldr_dir.GenSubFil_ary("CldrNames", lang_key, ".json"));
+		// create urls_hash from dir if it doesn't exist
+		if (urls_hash == null)
+			urls_hash = Make_urls_hash(Io_mgr.Instance.QueryDir_fils(cldr_dir));
+
+		// get file
+		Io_url url = (Io_url)urls_hash.Get_by_or_fail(lang_key);
+		byte[] json = Io_mgr.Instance.LoadFilBry(url);
 		if (json == null) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "no cldrName file exists for lang; lang=~{lang}", lang_key);
 			return null;
 		}
-		file = Load(lang_key, json);
-		hash.Add(lang_key, file);
+
+		// parse, cache and return
+		file = Parse(lang_key, json);
+		files_hash.Add(lang_key, file);
 		return file;
 	}
-	public Cldr_name_file Load(String lang_key, byte[] json) {
+	public Cldr_name_file Parse(String lang_key, byte[] json) { // TEST
 		Cldr_name_file file = new Cldr_name_file(lang_key);
 
 		Json_doc jdoc = parser.Parse(json);
@@ -48,23 +62,45 @@ public class Cldr_name_loader {
 			String key = node.Key_as_str();
 			Json_nde val = node.Val_as_nde();
 
-			Ordered_hash hash = null;
-			if		(String_.Eq(key, Cldr_name_converter.Node_languageNames))	hash = file.Language_names();
-			else if	(String_.Eq(key, Cldr_name_converter.Node_currencyNames))	hash = file.Currency_names();
-			else if	(String_.Eq(key, Cldr_name_converter.Node_currencySymbols))	hash = file.Currency_symbols();
-			else if	(String_.Eq(key, Cldr_name_converter.Node_countryNames))	hash = file.Country_names();
-			else if	(String_.Eq(key, Cldr_name_converter.Node_timeUnits))		hash = file.Time_units();
+			Ordered_hash files_hash = null;
+			if		(String_.Eq(key, Cldr_name_converter.Node_languageNames))	files_hash = file.Language_names();
+			else if	(String_.Eq(key, Cldr_name_converter.Node_currencyNames))	files_hash = file.Currency_names();
+			else if	(String_.Eq(key, Cldr_name_converter.Node_currencySymbols))	files_hash = file.Currency_symbols();
+			else if	(String_.Eq(key, Cldr_name_converter.Node_countryNames))	files_hash = file.Country_names();
+			else if	(String_.Eq(key, Cldr_name_converter.Node_timeUnits))		files_hash = file.Time_units();
 			else throw Err_.new_unhandled_default(key);
-			Load_ary(file, hash, val);
+			Load_ary(file, files_hash, val);
 		}
 		return file; 
 	}
-	private void Load_ary(Cldr_name_file file, Ordered_hash hash, Json_nde nde) {
+	private void Load_ary(Cldr_name_file file, Ordered_hash files_hash, Json_nde nde) {
 		int len = nde.Len();
 		for (int i = 0; i < len; i++) {
 			Json_kv kv = (Json_kv)nde.Get_at(i);
 			String key = kv.Key_as_str();
-			hash.Add(key, Keyval_.new_(key, String_.new_u8(kv.Val_as_bry())));
+			files_hash.Add(key, Keyval_.new_(key, String_.new_u8(kv.Val_as_bry())));
 		}
+	}
+	private static Hash_adp Make_urls_hash(Io_url[] urls) {
+		// filenames will have format of CldrNamesEn.json; build a hash of (en, "CldrNamesEn.json"); needed for case-sensitive file-systems; DATE:2018-10-14
+		Hash_adp rv = Hash_adp_.New();
+		for (Io_url url : urls) {
+			String name = url.NameAndExt();
+			if (String_.Has_at_bgn(name, Token_cldr_names))
+				name = String_.Mid(name, String_.Len(Token_cldr_names), String_.Len(name));
+			else {
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "file name does not start with " + Token_cldr_names + " ; url=" + url.Raw());
+				continue;
+			}
+			if (String_.Has_at_end(name, Token_json_ext))
+				name = String_.Mid(name, 0, String_.Len(name) - String_.Len(Token_json_ext));
+			else {
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "file name does not end with " + Token_json_ext + " ; url=" + url.Raw());
+				continue;
+			}
+			name = String_.Lower(name);
+			rv.Add_if_dupe_use_1st(name, url);
+		}
+		return rv;
 	}
 }

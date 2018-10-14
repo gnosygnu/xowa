@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*; import gplx.core.tests.*;
-import gplx.langs.phps.*;
 public class Cldr_name_converter_tst {
 	private final    Cldr_name_converter_fxt fxt = new Cldr_name_converter_fxt();
 	@Test   public void Extract_key_or_fail() {
 		fxt.Test__Extract_key_or_fail("CldrNamesEn.php"	, "En");
+		fxt.Test__Extract_key_or_fail("CldrNamesEn.php"	, "en");
 		fxt.Test__Extract_key_or_fail("CldrNameEn.php"	, null);
 		fxt.Test__Extract_key_or_fail("CldrNamesEn.txt"	, null);
 	}
@@ -85,7 +85,7 @@ public class Cldr_name_converter_tst {
 		);
 		fxt.Test__To_json(file, expd);
 
-		file = fxt.Exec__To_file("En", expd);
+		file = fxt.Exec__Parse_json("En", expd);
 		Assert__parse_fil(file);
 	}
 	private void Assert__parse_fil(Cldr_name_file file) {
@@ -111,11 +111,10 @@ public class Cldr_name_converter_tst {
 			, Keyval_.new_("year-short-past-other", "{0} yr. ago")
 		);
 	}
-
-	@Test   public void Smoke() {
-		Cldr_name_converter bldr = new Cldr_name_converter();
-		bldr.Convert(Io_url_.new_dir_("C:\\000\\100_bin\\200_server\\200_http\\100_apache\\100_v2.4\\htdocs\\mediawiki\\v1.29.1\\extensions\\cldr\\CldrNames\\"), Io_url_.new_dir_("C:\\xowa\\bin\\any\\xowa\\xtns\\cldr\\"));
-	}
+//		@Test   public void Smoke() {
+//			Cldr_name_converter bldr = new Cldr_name_converter();
+//			bldr.Convert(Io_url_.new_dir_("C:\\000\\100_bin\\200_server\\200_http\\100_apache\\100_v2.4\\htdocs\\mediawiki\\v1.29.1\\extensions\\cldr\\CldrNames\\"), Io_url_.new_dir_("C:\\xowa\\bin\\any\\xowa\\xtns\\cldr\\"));
+//		}
 }
 class Cldr_name_converter_fxt {
 	private final    Cldr_name_converter bldr = new Cldr_name_converter();
@@ -151,10 +150,11 @@ class Cldr_name_converter_fxt {
 	public Cldr_name_file Exec__Parse_fil(String key, String src) {
 		return bldr.Parse_fil(key, Bry_.new_u8(src));
 	}
-	public Cldr_name_file Exec__To_file(String key, String json) {
-		Cldr_name_loader json_parser = new Cldr_name_loader(Io_url_.mem_dir_("mem/Cldr"));
-		return json_parser.Load(key, Bry_.new_u8(json));
+	public Cldr_name_file Exec__Parse_json(String key, String json) {
+		Cldr_name_loader loader = new Cldr_name_loader(Io_url_.mem_dir_("mem/Cldr"));
+		return loader.Parse(key, Bry_.new_u8(json));
 	}
+//
 	public void Test__node(Ordered_hash hash, Keyval... expd) {
 		Keyval[] actl = (Keyval[])hash.To_ary(Keyval.class);
 		Gftest.Eq__ary__lines(Keyval_.Ary_to_str(expd), Keyval_.Ary_to_str(actl), "cldr_names_comp_failed");
