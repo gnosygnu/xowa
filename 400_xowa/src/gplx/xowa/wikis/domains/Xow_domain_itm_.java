@@ -33,10 +33,8 @@ public class Xow_domain_itm_ {
 				: new_other(raw);
 		}
 		int dot_1 = Bry_find_.Find_fwd(raw, Byte_ascii.Dot, dot_0 + 1, raw_len);
-		if (dot_1 == Bry_find_.Not_found) {	// 1 dot; check for "wikimediafoundation.org"
-			return Bry_.Match(raw, 0, dot_0, Xow_domain_tid_.Bry__wmforg)
-				? Xow_domain_itm.new_(raw, Xow_domain_tid_.Tid__wmfblog, Xol_lang_stub_.Key__unknown)
-				: new_other(raw);
+		if (dot_1 == Bry_find_.Not_found) {	// 1 dot;
+			return new_other(raw);
 		}
 		// 2 dots
 		int seg_1_tid = Xow_domain_tid_.Get_type_as_tid(raw, dot_0 + 1, dot_1);	// parse middle; EX: ".wikipedia."
@@ -62,6 +60,7 @@ public class Xow_domain_itm_ {
 				}
 				switch (seg_0_tid) {
 					case Xow_domain_tid_.Tid__commons: case Xow_domain_tid_.Tid__species: case Xow_domain_tid_.Tid__meta: case Xow_domain_tid_.Tid__incubator:
+					case Xow_domain_tid_.Tid__wmfblog:
 						return Xow_domain_itm.new_(raw, seg_0_tid, Xol_lang_stub_.Key__unknown);						// NOTE: seg_tids must match wiki_tids; NOTE: lang_key is "en" (really, "multi" but making things easier)
 					default:
 						return new_other(raw);
@@ -131,7 +130,7 @@ public class Xow_domain_itm_ {
 	, Str__mediawiki							= "www.mediawiki.org"
 	, Str__meta									= "meta.wikimedia.org"
 	, Str__incubator							= "incubator.wikimedia.org"
-	, Str__wmforg								= "wikimediafoundation.org"
+	, Str__wmforg								= "foundation.wikimedia.org"
 	, Str__home									= "home"
 	;
 	public static final    byte[]

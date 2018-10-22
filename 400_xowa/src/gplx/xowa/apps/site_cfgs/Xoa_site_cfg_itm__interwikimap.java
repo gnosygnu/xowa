@@ -83,7 +83,7 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 	, "1|species;wikispecies|species.wikimedia.org"
 	, "1|d;wikidata|www.wikidata.org"
 	, "1|mw;mediawikiwiki|www.mediawiki.org"
-	, "1|wmf;wikimedia;foundation|wikimediafoundation.org"
+	, "1|wmf;wikimedia;foundation|foundation.wikimedia.org"
 	, "1|incubator|incubator.wikimedia.org"
 	, "0|oldwikisource|https://wikisource.org/wiki/~{0}|Old Wikisoure"
 	, "0|mail|https://lists.wikimedia.org/mailman/listinfo/~{0}|Wikitech Mailing List"

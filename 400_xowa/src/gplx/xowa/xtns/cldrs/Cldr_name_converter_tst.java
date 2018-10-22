@@ -19,7 +19,6 @@ public class Cldr_name_converter_tst {
 	private final    Cldr_name_converter_fxt fxt = new Cldr_name_converter_fxt();
 	@Test   public void Extract_key_or_fail() {
 		fxt.Test__Extract_key_or_fail("CldrNamesEn.php"	, "En");
-		fxt.Test__Extract_key_or_fail("CldrNamesEn.php"	, "en");
 		fxt.Test__Extract_key_or_fail("CldrNameEn.php"	, null);
 		fxt.Test__Extract_key_or_fail("CldrNamesEn.txt"	, null);
 	}

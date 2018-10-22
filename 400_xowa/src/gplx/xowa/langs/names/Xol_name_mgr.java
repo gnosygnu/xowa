@@ -70,7 +70,12 @@ public class Xol_name_mgr {
 			Byte_obj_val include_byte = (Byte_obj_val)fetchLanguageNamesUncachedEnum.Get_by(include_bry);
 			byte include = include_byte == null ? fetchLanguageNamesUncached__all : include_byte.Val();
 
-			Cldr_name_file cldr_file = cldr_loader.Load(String_.new_u8(inLanguage));
+			Cldr_name_file cldr_file = cldr_loader.Load_or_null(String_.new_u8(inLanguage));
+			if (cldr_file == null) {
+				ret = Ordered_hash_.New();
+				languageNameCache.Add(cacheKey, ret);
+				return ret;
+			}
 
 			if (lang_names_cached == null)
 				lang_names_cached = name_loader.Load_as_hash();
@@ -228,7 +233,7 @@ public class Xol_name_mgr {
 			return namesMwFile;
 		}
 
-		returnMw .Sort_by(Hash_kv_sorter.Instance);
+		returnMw.Sort_by(Hash_kv_sorter.Instance);
 		// # 'mw' option; default if it's not one of the other two options (all/mwfile)
 		return returnMw;
 	}

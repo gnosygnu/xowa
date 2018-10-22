@@ -31,7 +31,7 @@ class Cldr_name_loader_fxt {
 		Io_mgr.Instance.SaveFilStr(Io_url_.new_fil_(Dir_name + fil_name), txt);
 	}
 	public void Test__load_file_is_null(boolean expd, String lang_key) {
-		Cldr_name_file name_file = name_loader.Load(lang_key);
+		Cldr_name_file name_file = name_loader.Load_or_null(lang_key);
 		Gftest.Eq__bool(expd, name_file == null);
 	}
 }
