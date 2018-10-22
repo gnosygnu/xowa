@@ -82,7 +82,9 @@ public class Cldr_name_loader {
 		}
 	}
 	private static Hash_adp Make_urls_hash(Io_url[] urls) {
-		// filenames will have format of CldrNamesEn.json; build a hash of (en, "CldrNamesEn.json"); needed for case-sensitive file-systems; DATE:2018-10-14
+		// filenames will have format of "CldrNamesEn.json" but scrib will pass in "en";
+		// this is not an issue for case-insensitive file-systems (WNT), but fails for case-sensitive ones (LNX)
+		// build a hash of ("en", "CldrNamesEn.json"); DATE:2018-10-14
 		Hash_adp rv = Hash_adp_.New();
 		for (Io_url url : urls) {
 			String name = url.NameAndExt();

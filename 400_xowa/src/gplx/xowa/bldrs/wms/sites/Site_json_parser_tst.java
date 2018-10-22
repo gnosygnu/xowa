@@ -351,18 +351,20 @@ public class Site_json_parser_tst {
 		( "{ 'languages':"
 		, "  [ "
 		, "    { 'code': 'aa'"
+		, "    , 'bcp47': 'aa-bcp47'"
 		, "    , '*': 'Qaf\u00e1r af'"
 		, "    }"
 		, "  , "
 		, "    { 'code': 'ab'"
+		, "    , 'bcp47': 'ab-bcp47'"
 		, "    , '*': '\u0410\u04a7\u0441\u0448\u04d9\u0430'"
 		, "    }"
 		, "  ]"
 		, "}"
 		));
 		fxt.Test_language
-		( fxt.Make_language("aa"	, "Qafár af")
-		, fxt.Make_language("ab"	, "Аҧсшәа")
+		( fxt.Make_language("aa"	, "aa-bcp47", "Qafár af")
+		, fxt.Make_language("ab"	, "ab-bcp47", "Аҧсшәа")
 		);
 	}
 //		@Test   public void Smoke() {
@@ -409,7 +411,7 @@ class Site_json_parser_fxt {
 	public Site_skin_itm Make_skin(String code, boolean dflt, String name, boolean unusable) {return new Site_skin_itm(Bry_.new_u8_safe(code), dflt, Bry_.new_u8_safe(name), unusable);}
 	public Site_magicword_itm Make_magicword(String name, boolean case_match, String... aliases) {return new Site_magicword_itm(Bry_.new_u8_safe(name), case_match, Bry_.Ary(aliases));}
 	public Site_showhook_itm Make_showhook(String name, String scribunto, String... subscribers) {return new Site_showhook_itm(Bry_.new_u8_safe(name), Bry_.new_u8_safe(scribunto), Bry_.Ary(subscribers));}
-	public Site_language_itm Make_language(String code, String name) {return new Site_language_itm(Bry_.new_u8_safe(code), Bry_.new_u8_safe(name));}
+	public Site_language_itm Make_language(String code, String bcp47, String name) {return new Site_language_itm(Bry_.new_u8_safe(code), Bry_.new_u8(bcp47), Bry_.new_u8_safe(name));}
 	public void Test_general(Keyval... expd) {Tfds.Eq_ary_str(expd, (Keyval[])site_meta.General_list().To_ary(Keyval.class));}
 	public void Test_namespace(Site_namespace_itm... expd) {Tfds.Eq_ary_str(expd, (Site_namespace_itm[])site_meta.Namespace_list().To_ary(Site_namespace_itm.class));}
 	public void Test_statistic(Site_statistic_itm expd) {Tfds.Eq_str_intf(expd, site_meta.Statistic_itm());}

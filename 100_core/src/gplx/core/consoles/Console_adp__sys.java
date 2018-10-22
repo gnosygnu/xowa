@@ -34,7 +34,7 @@ public class Console_adp__sys implements Console_adp {
 		Clear_tmp();
 		if (String_.Has(s, "\r")) s = String_.Replace(s, "\r", " ");
 		if (String_.Has(s, "\n")) s = String_.Replace(s, "\n", " ");
-		if (String_.Len(s) >= chars_per_line_max) s = String_.Mid(s, 0, chars_per_line_max - String_.Len("...") - 1) + "...";	// NOTE: >= and -1 needed b/c line needs to be 1 less than max; ex: default cmd is 80 width, but writing 80 chars will automatically create lineBreak
+//			if (String_.Len(s) >= chars_per_line_max) s = String_.Mid(s, 0, chars_per_line_max - String_.Len("...") - 1) + "...";	// NOTE: >= and -1 needed b/c line needs to be 1 less than max; ex: default cmd is 80 width, but writing 80 chars will automatically create lineBreak
 		tmp_txt = s;
 		Write_str_lang(s);
 	}

@@ -252,7 +252,7 @@ class Site_meta_parser__showhook extends Json_parser__list_nde__base {
 class Site_meta_parser__language extends Json_parser__list_nde__base {
 	private Ordered_hash list;
 	public Site_meta_parser__language() {
-		this.Ctor("code", "*");
+		this.Ctor("code", "bcp47", "*");
 	}
 	public void Parse(String context, Ordered_hash list, Json_ary nde) {
 		this.list = list;
@@ -260,6 +260,6 @@ class Site_meta_parser__language extends Json_parser__list_nde__base {
 	}
 	@Override protected void Parse_hook_nde(Json_nde sub, Json_kv[] atrs) {
 		byte[] key = Kv__bry(atrs, 0);
-		list.Add(key, new Site_language_itm(key, Kv__bry(atrs, 1)));
+		list.Add(key, new Site_language_itm(key, Kv__bry(atrs, 1), Kv__bry(atrs, 2)));
 	}
 }
