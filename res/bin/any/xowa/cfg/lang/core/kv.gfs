@@ -1,0 +1,181 @@
+this
+.fallback_load('ru')
+.ns_names
+  .load_text(
+<:['
+-1|Отсасян
+1|Сёрнитанiн
+2|Пырысь
+3|Пырыськӧд сёрнитанiн
+6|Файл
+7|Файл донъялӧм
+8|МедиаВики
+9|МедиаВики донъялӧм
+10|Шаблон
+11|Шаблон донъялӧм
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-2|Медиа
+-1|Служебная
+1|Обсуждение
+2|Участник
+3|Обсуждение участника
+5|Обсуждение {{GRAMMAR:genitive\u007C$1}}
+6|Файл
+7|Обсуждение файла
+9|Обсуждение MediaWiki
+10|Шаблон
+11|Обсуждение шаблона
+12|Справка
+13|Обсуждение справки
+14|Категория
+15|Обсуждение категории
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|вежалун
+monday|выльлун
+tuesday|воторник
+wednesday|середа
+thursday|четверг
+friday|пекнича
+saturday|субöта
+january|тӧв шӧр тӧлысь
+february|урасьӧм тӧлысь
+march|рака тӧлысь
+april|кос му тӧлысь
+may_long|ода кора тӧлысь
+june|лӧддза-номъя тӧлысь
+july|сора тӧлысь
+august|моз тӧлысь
+september|кӧч тӧлысь
+october|йирым тӧлысь
+november|вӧльгым тӧлысь
+december|ӧшым тӧлысь
+january-gen|тӧв шӧр
+february-gen|урасьӧм
+march-gen|рака
+april-gen|кос му
+may-gen|ода кора
+june-gen|лӧддза-номъя
+july-gen|сора
+august-gen|моз
+september-gen|кӧч
+october-gen|йирым
+november-gen|вӧльгым
+december-gen|ӧшым
+otherlanguages|Мӧд кывъясӧн
+pagecategories|{{PLURAL:~{0}\u007C1=Категория\u007CКатегория}}
+article|Гижӧд
+cancel|Дугӧдны
+mytalk|Сёрнитан лист бокӧй
+qbfind|Корсьысьӧм
+qbedit|Веськӧдны
+namespaces|Ним пространствояс
+search|Корсьысьӧм
+searchbutton|Аддзыны
+searcharticle|Вуджны
+history_short|Важвылӧм
+printableversion|Лэдзӧм версия
+permalink|Вежласьтӧм ыстӧд
+edit|Вежны
+delete|Бырӧдны
+protect|Дорйыны
+newpage|Выль лист бок
+talkpagelinktext|сёрнитанін
+talk|Сёрнитанін
+toolbox|Инструментъяс
+jumptosearch|корсьысьӧм
+aboutsite|{{SITENAME}} йылысь
+currentevents|Быд лунся лоӧмтор
+mainpage|Медшӧр лист бок
+mainpage-description|Медшӧр лист бок
+portal|Йитчӧм
+portal-url|Project:Йитчӧм портал
+editsection|веськӧдны
+editold|веськӧдны
+editlink|вежны
+editsectionhint|«~{0}» секция веськӧдны
+red-link-title|~{0} (гижӧд абу)
+nstab-main|Гижӧд
+nstab-user|Пырысь
+nstab-project|Проект йылысь
+nstab-category|Категория
+yourname|Пырысьлӧн ним:
+login|Висьтасьны
+nav-login-createaccount|Висьтасьны / гижсьыны
+userlogin|Висьтасьны али гижсьыны
+logout|Сеанс эштӧдӧм
+userlogout|Сеанс эштӧдӧм
+gotaccountlink|Висьтасьӧй
+loginlanguagelabel|Кыв: ~{0}
+savearticle|Лист бокӧс гижны
+newarticle|(Выль)
+currentrev|Быд лунся версия
+search-result-size|~{0} ({{PLURAL:~{1}\u007C~{1} кыв}})
+timezonelegend|Час кытш
+recentchanges|Выль веськӧдӧмъяс
+hide|Дзебны
+newpageletter|В
+boteditletter|б
+recentchangeslinked-page|Гижӧдлӧн ним:
+upload|Файл сӧвтны
+uploadbtn|Файл сӧвтны
+filehist-datetime|Кадпас/кад
+filehist-user|Пырысь
+filehist-comment|Пасйӧд
+randompage|Кӧсйытӧг гижӧд
+newpages|Выль лист бокъяс
+move|Ним вежны
+specialloguserlabel|Пырысь:
+log|Журналъяс
+allarticles|Став гижӧдъяс
+mywatchlist|Видзӧдӧм лыддьӧгӧй
+deletepage|Лист бокӧс бырӧдны
+deletereason-dropdown|* Типовые причины удаления\n** вандализм\n** по запросу автора\n** нарушение авторских прав\n* MediaWiki\n** Дубликат сообщения с translatewiki.net
+protect-level-sysop|Администраторъяс сӧмын
+namespace|Ним пространство:
+contributions|Вӧлысьлӧн чӧжӧс
+mycontris|Чӧжӧсӧй
+whatlinkshere|Ыстӧдъяс татчӧ
+contribslink|чӧжӧс
+newtitle|Выль ним
+movepagebtn|Лист бокӧс ним вежны
+allmessages|Система юӧртӧмъяс
+tooltip-pt-userpage|Пырысьлӧн лист бокӧй
+tooltip-ca-talk|Гижӧдлӧн сёрнитӧм лист бокӧй али Википедиялӧн дӧнъялӧм лист бокӧй
+tooltip-ca-move|Лист боклӧн ним вежны
+specialpages|Торъя лист бокъяс
+']:>
+).lang
+;

@@ -1,0 +1,1902 @@
+numbers {
+  separators {
+    clear;
+    set('.', ',');
+    set(',', ' ');
+  }
+}
+this
+.ns_names
+  .load_text(
+<:['
+-2|Media
+-1|Maxsus
+1|Munozara
+2|Foydalanuvchi
+3|Foydalanuvchi munozarasi
+5|$1 munozarasi
+6|Fayl
+7|Fayl munozarasi
+8|MediaWiki
+9|MediaWiki munozarasi
+10|Andoza
+11|Andoza munozarasi
+12|Yordam
+13|Yordam munozarasi
+14|Turkum
+15|Turkum munozarasi
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-2|Mediya
+6|Tasvir
+7|Tasvir munozarasi
+8|MediyaViki
+9|MediyaViki munozarasi
+10|Shablon
+11|Shablon munozarasi
+14|Kategoriya
+15|Kategoriya munozarasi
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+redirect|0|#YOʻNALTIRISH~#YONALTIRISH~#REDIRECT~
+notoc|0|__ICHIDAGILARYOQ__~__NOTOC__~
+nogallery|0|__GALEREYAYOQ__~__NOGALLERY__~
+forcetoc|0|__ICHIDAGILARMAJBURIY__~__FORCETOC__~
+toc|0|__ICHIDAGILARI__~__ICHIDAGILAR__~__TOC__~
+noeditsection|0|__TAHRIRYOQ__~__TARTIBLASHYOQ__~__NOEDITSECTION__~
+currentmonth|1|JORIYOY~JORIYOY2~CURRENTMONTH~CURRENTMONTH2~
+currentmonth1|1|JORIYOY1~CURRENTMONTH1~
+currentmonthname|1|JORIYOYNOMI~CURRENTMONTHNAME~
+currentmonthnamegen|1|JORIYOYNOMIQARATQICH~CURRENTMONTHNAMEGEN~
+currentmonthabbrev|1|JORIYOYQISQARTMASI~CURRENTMONTHABBREV~
+currentday|1|JORIYKUN~CURRENTDAY~
+currentday2|1|JORIYKUN2~CURRENTDAY2~
+currentdayname|1|JORIYKUNNOMI~CURRENTDAYNAME~
+currentyear|1|JORIYYIL~CURRENTYEAR~
+currenttime|1|JORIYVAQT~CURRENTTIME~
+currenthour|1|JORIYSOAT~CURRENTHOUR~
+localmonth|1|MAHALLIYOY~MAHALLIYOY2~LOCALMONTH~LOCALMONTH2~
+localmonth1|1|MAHALLIYOY1~LOCALMONTH1~
+localmonthname|1|MAHALLIYOYNOMI~LOCALMONTHNAME~
+localmonthnamegen|1|MAHALLIYOYQARATQICH~LOCALMONTHNAMEGEN~
+localmonthabbrev|1|MAHALLIYOYQISQARTMASI~LOCALMONTHABBREV~
+localday|1|MAHALLIYKUN~LOCALDAY~
+localday2|1|MAHALLIYKUN2~LOCALDAY2~
+localdayname|1|MAHALLIYKUNNOMI~LOCALDAYNAME~
+localyear|1|MAHALLIYYIL~LOCALYEAR~
+localtime|1|MAHALLIYVAQT~LOCALTIME~
+localhour|1|MAHALLIYSOAT~LOCALHOUR~
+numberofpages|1|SAHIFASONI~NUMBEROFPAGES~
+numberofarticles|1|MAQOLASONI~NUMBEROFARTICLES~
+numberoffiles|1|FAYLSONI~NUMBEROFFILES~
+numberofusers|1|FOYDALANUVCHISONI~NUMBEROFUSERS~
+numberofactiveusers|1|FAOLFOYDALANUVCHISONI~NUMBEROFACTIVEUSERS~
+numberofedits|1|OZGARISHSONI~NUMBEROFEDITS~
+pagename|1|SAHIFANOMI~PAGENAME~
+namespace|1|NOMFAZO~NAMESPACE~
+gender|0|JINS~GENDER~
+currentweek|1|JORIYHAFTA~CURRENTWEEK~
+language|0|#TIL~#LANGUAGE~
+numberofadmins|1|ADMINISTRATORSONI~NUMBEROFADMINS~
+special|0|#maxsus~#special~
+tag|0|#yorliq~#tag~
+hiddencat|1|__YASHIRINTURKUM__~__HIDDENCAT__~
+pagesincategory|1|TURKUMDAGISAHIFALAR~PAGESINCATEGORY~PAGESINCAT~
+pagesize|1|SAHIFAHAJMI~PAGESIZE~
+index|1|__INDEKS__~__INDEX__~
+noindex|1|__INDEKSYOQ__~__NOINDEX__~
+formatdate|0|#formatdate~#dateformat~
+url_wiki|0|VIKI~WIKI~
+expr|0|#ifoda~#expr~
+if|0|#agar~#if~
+ifeq|0|#agarteng~#ifeq~
+ifexpr|0|#agarifoda~#ifexpr~
+iferror|0|#agarxato~#iferror~
+switch|0|#tanlov~#switch~
+default|0|#boshlangʻich~#default~
+ifexist|0|#agarbor~#ifexist~
+time|0|#vaqt~#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+len|0|#uzunlik~
+pos|0|#oʻrin~
+count|0|#miqdor~
+replace|0|#almashtirish~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Yakshanba
+monday|Dushanba
+tuesday|Seshanba
+wednesday|Chorshanba
+thursday|Payshanba
+friday|Juma
+saturday|Shanba
+sun|Yak
+mon|Dsh
+tue|Ssh
+wed|Chr
+thu|Pay
+fri|Jum
+sat|Shn
+january|Yanvar
+february|Fevral
+march|Mart
+april|Aprel
+may_long|May
+june|Iyun
+july|Iyul
+august|Avgust
+september|Sentabr
+october|Oktabr
+november|Noyabr
+december|Dekabr
+january-gen|Yanvar
+february-gen|Fevral
+march-gen|Mart
+april-gen|Aprel
+may-gen|May
+june-gen|Iyun
+july-gen|Iyul
+august-gen|Avgust
+september-gen|Sentabr
+october-gen|Oktabr
+november-gen|Noyabr
+december-gen|Dekabr
+jan|Yan
+feb|Fev
+mar|Mar
+apr|Apr
+may|May
+jun|Jyn
+jul|Iyl
+aug|Avg
+sep|Sen
+oct|Okt
+nov|Noy
+dec|Dek
+toc|Mundarija
+redirectedfrom|(~{0}dan yoʻnaltirildi)
+allpages|Barcha sahifalar
+prevpage|Avvalgi sahifa (~{0})
+nextpage|Keyingi sahifa (~{0})
+collapsible-collapse|Yigʻish
+collapsible-expand|Yoyish
+sort-descending|Kamayish boʻyicha tartiblash
+sort-ascending|Oʻsish boʻyicha tartiblash
+categories|Turkumlar
+lastmodifiedat|Bu sahifa oxirgi marta ~{0}, ~{1} da tahrirlangan.
+thumbnail-more|Kattalashtir
+otherlanguages|Boshqa tillarda
+blanknamespace|(asosiy)
+pagecategories|{{PLURAL:~{0}\u007CTurkum}}
+category_header|"~{0}" turkumidagi sahifalar
+subcategories|Ostturkumlar
+category-media-header|"~{0}" turkumidagi fayllar
+category-empty|''Ushbu turkumda hozircha sahifa yoki fayllar yoʻq.''
+category-subcat-count|{{PLURAL:~{1}\u007CUshbu turkumda faqat bitta ostturkum mavjud.\u007CQuyida ushbu turkumga kiruvchi ~{1} ta ostturkumdan ~{0} tasi koʻrsatilgan.}}
+category-subcat-count-limited|Ushbu turkumda ~{0} ta ostturkum mavjud.
+category-article-count|{{PLURAL:~{1}\u007CUshbu turkumda faqat bitta sahifa mavjud.\u007CQuyida ushbu turkumga kiruvchi ~{1} ta sahifadan ~{0} tasi koʻrsatilgan.}}
+category-article-count-limited|Ushbu turkumda ~{0} ta sahifa mavjud.
+category-file-count|{{PLURAL:~{1}\u007CUshbu turkumda faqat bitta fayl mavjud.\u007CQuyida ushbu turkumga kiruvchi ~{1} ta fayldan ~{0} tasi koʻrsatilgan.}}
+category-file-count-limited|Ushbu turkumda ~{0} ta fayl mavjud.
+nextn|keyingi {{PLURAL:~{0}\u007C~{0}}}
+prevn|oldingi {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|davomi
+bold_sample|Qalin matn
+bold_tip|Qalin matn
+italic_sample|Yotiq matn
+italic_tip|Yotiq matn
+link_sample|Ishorat nomi
+link_tip|Ichki ishorat
+headline_sample|Sarlavha
+headline_tip|2-darajadagi sarlavha
+wikieditor-toolbar-tool-ulist|Belgili roʻyxat
+wikieditor-toolbar-tool-ulist-example|Belgili roʻyxat qismi
+wikieditor-toolbar-tool-olist|Raqamlangan roʻyxat
+wikieditor-toolbar-tool-olist-example|Raqamlangan roʻyxat qismi
+hidden-category-category|Yashirin turkumlar
+statistics|Statistika
+statistics-header-pages|Sahifalar statistikasi
+statistics-articles|Maqolalar
+statistics-pages|Sahifalar
+statistics-pages-desc|Ushbu vikidagi barcha sahifalar, jumladan munozara, yoʻnaltirish va hk.
+categorytree-category|Turkum:
+proofreadpage_quality1_category|Tuzatilmadi
+proofreadpage_quality3_category|Ko'zdan kechirildi
+proofreadpage-section-tools|Tuzatish asboblari
+proofreadpage-group-other|Boshqa
+cite_article_link|Sahifadan matn parchasi ajratish
+wikieditor|Vikimatnni tahrirlashning kengaytirilgan interfeysi
+wikieditor-desc|Vikimatnni tahrirlashning kengaytirilgan interfeysi va modullar tomonidan taqdim qilinadigan koʻpchilik amallar bilan taʼminlaydi
+wikieditor-wikitext-tab|Vikimatn
+wikieditor-loading|Yuklash...
+wikieditor-preview-preference|«Yonma-yon» koʻrib chiqish funksiyasini yoqish
+wikieditor-preview-tab|Batafsil koʻrsatish
+wikieditor-preview-changes-tab|Oʻzgarishlar
+wikieditor-preview-loading|Yuklash...
+wikieditor-previewDialog-preference|Batafsil koʻrsatish dialogini yoqish
+wikieditor-previewDialog-tab|Batafsil koʻrsatish
+wikieditor-previewDialog-loading|Yuklash...
+wikieditor-publish-preference|Qadamba-qadam nashr qilishni yoqish
+wikieditor-publish-button-publish|Nashr qilish
+wikieditor-publish-button-cancel|Bekor qilish
+wikieditor-publish-dialog-title|{{SITENAME}} loyihasida nashr qilish
+wikieditor-publish-dialog-summary|Oʻzgarishlar tavsifi (qanday oʻzgarishlar sodir boʻlganini qisqacha koʻrsating):
+wikieditor-publish-dialog-minor|Kichik oʻzgarish
+wikieditor-publish-dialog-watch|Bu sahifani kuzatish
+wikieditor-publish-dialog-publish|Nashr qilish
+wikieditor-publish-dialog-goback|Orqaga
+wikieditor-template-editor-preference|Shakllar yordamida andozalarni tahrirlashni yoqish
+wikieditor-template-editor-dialog-title|Andozani oʻzgartirish
+wikieditor-template-editor-dialog-submit|Yangilash
+wikieditor-template-editor-dialog-cancel|Bekor qilish
+wikieditor-templates-preference|Andozalarni yigʻishni yoqish
+wikieditor-toc-preference|Oʻtish imkonini beruvchi mundarijani yoqish
+wikieditor-toc-show|Mundarijani koʻrsatish
+wikieditor-toc-hide|Mundarijani yashirish
+wikieditor-toolbar|Tahrirlash darchasi
+wikieditor-toolbar-desc|Foydalanishga qulayroq boʻlgan tahrirlash darchasi
+wikieditor-toolbar-preference|Yaxshilangan tahrirlash darchasini yoqish
+wikieditor-toolbar-dialogs-preference|Havolalar, jadvallar va boshqa obyektlarni qoʻyish uchun dialoglarni yoqish
+wikieditor-toolbar-hidesig|Asosiy nomfazodagi sahifalarda imzo tugmasini yashirish
+wikieditor-toolbar-loading|Yuklash...
+wikieditor-toolbar-tool-bold|Qalin
+wikieditor-toolbar-tool-bold-example|Qalin matn
+wikieditor-toolbar-tool-italic|Yotiq
+wikieditor-toolbar-tool-italic-example|Yotiq matn
+wikieditor-toolbar-tool-ilink|Ichki havola
+wikieditor-toolbar-tool-ilink-example|Havola sarlavhasi
+wikieditor-toolbar-tool-xlink|Tashqi ishorat (http:// prefiksini unutmang)
+wikieditor-toolbar-tool-xlink-example|http://www.example.com ishorat nomi
+wikieditor-toolbar-tool-link|Havola
+wikieditor-toolbar-tool-link-title|Havola qoʻyish
+wikieditor-toolbar-tool-link-int|Viki-sahifaga
+wikieditor-toolbar-tool-link-int-target|Moʻljal sahifa yoki URL:
+wikieditor-toolbar-tool-link-int-target-tooltip|Sahifa nomi yoki URL
+wikieditor-toolbar-tool-link-int-text|Koʻrsatiladigan matn:
+wikieditor-toolbar-tool-link-int-text-tooltip|Koʻrsatiladigan matnni kiriting
+wikieditor-toolbar-tool-link-ext|Tashqi veb-sahifaga
+wikieditor-toolbar-tool-link-ext-target|URL havolalar:
+wikieditor-toolbar-tool-link-ext-text|Havola matni:
+wikieditor-toolbar-tool-link-insert|Havola qoʻyish
+wikieditor-toolbar-tool-link-cancel|Bekor qilish
+wikieditor-toolbar-tool-link-int-target-status-exists|Sahifa mavjud
+wikieditor-toolbar-tool-link-int-target-status-notexists|Sahifa mavjud emas
+wikieditor-toolbar-tool-link-int-target-status-invalid|Mumkin boʻlmagan nom
+wikieditor-toolbar-tool-link-int-target-status-external|Tashqi havola
+wikieditor-toolbar-tool-link-int-target-status-loading|Sahifa mavjudligiga tekshirish
+wikieditor-toolbar-tool-link-int-invalid|Koʻrsatilgan nom mumkin emas.
+wikieditor-toolbar-tool-link-lookslikeinternal|Siz tomondan koʻrsatilgan URL boshqa viki-sahifaga havolaga oʻxshash. Siz mazkur havolani ichki qilishni xohlaysizmi?
+wikieditor-toolbar-tool-link-lookslikeinternal-int|Ichki havola
+wikieditor-toolbar-tool-link-lookslikeinternal-ext|Tashqi havola
+wikieditor-toolbar-tool-link-empty|Nimaga ishorat qilishni koʻrsatmadingiz
+wikieditor-toolbar-tool-file|Oʻrnatilgan fayl
+wikieditor-toolbar-tool-file-example|Example.jpg
+wikieditor-toolbar-tool-file-title|Fayl qoʻyish
+wikieditor-toolbar-file-target|Fayl nomi:
+wikieditor-toolbar-file-caption|Yozuv:
+wikieditor-toolbar-file-size|Oʻlchami
+wikieditor-toolbar-file-float|Tekislash:
+wikieditor-toolbar-file-default|(boshlangʻich)
+wikieditor-toolbar-file-format|Formati:
+wikieditor-toolbar-file-format-none|yoʻq
+wikieditor-toolbar-tool-file-insert|Qoʻyish
+wikieditor-toolbar-tool-file-cancel|Bekor qilish
+wikieditor-toolbar-tool-reference|Havola
+wikieditor-toolbar-tool-reference-example|Havola matnini bu yerga qoʻying
+wikieditor-toolbar-tool-reference-cancel|Bekor qilish
+wikieditor-toolbar-tool-reference-title|Havola qoʻyish
+wikieditor-toolbar-tool-reference-insert|Qoʻyish
+wikieditor-toolbar-tool-reference-text|Havola matni
+wikieditor-toolbar-tool-signature|Imzo va vaqt
+wikieditor-toolbar-section-advanced|Qoʻshimcha
+wikieditor-toolbar-tool-heading|Sarlavha
+wikieditor-toolbar-tool-heading-1|Daraja 1
+wikieditor-toolbar-tool-heading-2|Daraja 2
+wikieditor-toolbar-tool-heading-3|Daraja 3
+wikieditor-toolbar-tool-heading-4|Daraja 4
+wikieditor-toolbar-tool-heading-5|Daraja 5
+wikieditor-toolbar-tool-heading-example|Sarlavha matni
+wikieditor-toolbar-group-format|Formati
+wikieditor-toolbar-tool-indent|Xat boshi
+wikieditor-toolbar-tool-indent-example|Satr xat boshi bilan
+wikieditor-toolbar-tool-nowiki|Viki-formatlashga eʼtibor qilmaslik
+wikieditor-toolbar-tool-nowiki-example|Bu yerga formatlash zarur boʻlmagan matnni qoʻying
+wikieditor-toolbar-tool-redirect|Qayta yoʻnaltirish
+wikieditor-toolbar-tool-redirect-example|Moʻljal sahifa nomi
+wikieditor-toolbar-tool-big|Yirik
+wikieditor-toolbar-tool-big-example|Yirik matn
+wikieditor-toolbar-tool-small|Kichik
+wikieditor-toolbar-tool-small-example|Kichik matn
+wikieditor-toolbar-tool-superscript|Satrusti
+wikieditor-toolbar-tool-superscript-example|Satrusti matn
+wikieditor-toolbar-tool-subscript|Satrosti
+wikieditor-toolbar-tool-subscript-example|Satrosti matn
+wikieditor-toolbar-group-insert|Qoʻyish
+wikieditor-toolbar-tool-gallery|Rasmlar galereyasi
+wikieditor-toolbar-tool-gallery-example|~{0}:Example.jpg\u007CIzoh1\n~{0}:Example.jpg\u007CIzoh2
+wikieditor-toolbar-tool-newline|Yangi qator
+wikieditor-toolbar-tool-table|Jadval
+wikieditor-toolbar-tool-table-example-old|-\n! sarlavha 1\n! sarlavha 2\n! sarlavha 3\n\u007C-\n\u007C qator 1, katak 1\n\u007C qator 1, katak 2\n\u007C qator 1, katak 3\n\u007C-\n\u007C qator 2, katak 1\n\u007C qator 2, katak 2\n\u007C qator 2, katak 3
+wikieditor-toolbar-tool-table-example-cell-text|Katak matni
+wikieditor-toolbar-tool-table-example-header|Sarlavha matni
+wikieditor-toolbar-tool-table-title|Jadval qoʻyish
+wikieditor-toolbar-tool-table-dimensions-rows|Qatorlar
+wikieditor-toolbar-tool-table-dimensions-columns|Ustunlar
+wikieditor-toolbar-tool-table-dimensions-header|Sarlavha qatori qoʻshish
+wikieditor-toolbar-tool-table-wikitable|Chegaralar bilan bezash
+wikieditor-toolbar-tool-table-sortable|Jadvalni saralanadigan qilish
+wikieditor-toolbar-tool-table-example|Misol
+wikieditor-toolbar-tool-table-preview|Batafsil koʻrinishi
+wikieditor-toolbar-tool-table-insert|Qoʻyish
+wikieditor-toolbar-tool-table-cancel|Bekor
+wikieditor-toolbar-tool-table-toomany|Ushbu dialog 1000 ta katakdan katta hajmdagi jadvalni qoʻyish imkonini bermaydi.
+wikieditor-toolbar-tool-table-invalidnumber|Toʻgʻri qator yoki ustun miqdorini koʻrsatmadingiz.
+wikieditor-toolbar-tool-table-zero|Qatorlarsiz yoki ustunlarsiz jadval qoʻyib boʻlmaydi.
+wikieditor-toolbar-tool-replace|Qidirish va almashtirish
+wikieditor-toolbar-tool-replace-title|Qidirish va almashtirish
+wikieditor-toolbar-tool-replace-search|Qidirish:
+wikieditor-toolbar-tool-replace-replace|Quyidagiga almashtirish:
+wikieditor-toolbar-tool-replace-case|Registrni hisobga olish
+wikieditor-toolbar-tool-replace-regex|Qidiruv satrini muntazam ifoda deb hisoblash
+wikieditor-toolbar-tool-replace-button-findnext|Keyingisini qidirish
+wikieditor-toolbar-tool-replace-button-replace|Almashtirish
+wikieditor-toolbar-tool-replace-button-replaceall|Hammasini almashtirish
+wikieditor-toolbar-tool-replace-close|Yopish
+wikieditor-toolbar-tool-replace-nomatch|Sizning soʻrovingiz boʻyicha hech nima topilmadi.
+wikieditor-toolbar-tool-replace-success|~{0} ta almashtirish amalga oshirildi.
+wikieditor-toolbar-tool-replace-emptysearch|Nimani qidirishni koʻrsatmadingiz.
+wikieditor-toolbar-tool-replace-invalidregex|Siz kiritgan muntazam ifodada xatolik: ~{0}
+wikieditor-toolbar-section-characters|Maxsus belgilar
+wikieditor-toolbar-characters-page-latin|Lotin
+wikieditor-toolbar-characters-page-latinextended|Lotin kengaytirilgan
+wikieditor-toolbar-characters-page-ipa|XFA (MFA)
+wikieditor-toolbar-characters-page-symbols|Belgilar
+wikieditor-toolbar-characters-page-greek|Yunon
+wikieditor-toolbar-characters-page-cyrillic|Kirill
+wikieditor-toolbar-characters-page-arabic|Arab
+wikieditor-toolbar-characters-page-arabicextended|Arab kengaytirilgan
+wikieditor-toolbar-characters-page-persian|Forsiy
+wikieditor-toolbar-characters-page-hebrew|Yahudiy
+wikieditor-toolbar-characters-page-bangla|Bengal
+wikieditor-toolbar-characters-page-tamil|Tamil
+wikieditor-toolbar-characters-page-telugu|Telugu
+wikieditor-toolbar-characters-page-sinhala|Singal
+wikieditor-toolbar-characters-page-gujarati|Gujarati
+wikieditor-toolbar-characters-page-devanagari|Devanagari
+wikieditor-toolbar-characters-page-thai|Tay
+wikieditor-toolbar-characters-page-lao|Laos
+wikieditor-toolbar-characters-page-khmer|Kxmer
+wikieditor-toolbar-characters-emdash|uzun tire
+wikieditor-toolbar-characters-minus|minus belgisi
+wikieditor-toolbar-section-help|Yordam
+wikieditor-toolbar-help-heading-description|Taʼrif
+wikieditor-toolbar-help-heading-syntax|Nima kirityapsiz
+wikieditor-toolbar-help-heading-result|Nima olyapsiz
+wikieditor-toolbar-help-page-format|Formatlash
+wikieditor-toolbar-help-page-link|Havolalar
+wikieditor-toolbar-help-page-heading|Sarlavhalar
+wikieditor-toolbar-help-page-list|Roʻyxatlar
+wikieditor-toolbar-help-page-file|Fayllar
+wikieditor-toolbar-help-page-reference|Izohlar
+wikieditor-toolbar-help-page-discussion|Munozara
+wikieditor-toolbar-help-content-italic-description|Yotiq
+wikieditor-toolbar-help-content-italic-syntax|''Yotiq matn''
+wikieditor-toolbar-help-content-italic-result|<em>Yotiq matn</em>
+wikieditor-toolbar-help-content-bold-description|Qalin
+wikieditor-toolbar-help-content-bold-syntax|'''Qalin matn'''
+wikieditor-toolbar-help-content-bold-result|<strong>Qalin matn</strong>
+wikieditor-toolbar-help-content-bolditalic-description|Qalin yotiq
+wikieditor-toolbar-help-content-bolditalic-syntax|'''''Qalin yotiq'''''
+wikieditor-toolbar-help-content-bolditalic-result|<em><strong>Qalin yotiq</strong></em>
+wikieditor-toolbar-help-content-ilink-description|Ichki havola
+wikieditor-toolbar-help-content-ilink-syntax|[[Sahifa sarlavhasi\u007CHavola matni]]<br />[[Sahifa sarlavhasi]]
+wikieditor-toolbar-help-content-ilink-result|<a href='#'>Havola matni</a><br /><a href='#'>Sahifa sarlavhasi</a>
+wikieditor-toolbar-help-content-xlink-description|Tashqi havola
+wikieditor-toolbar-help-content-xlink-syntax|[http://www.example.org Havola matni]<br />[http://www.example.org]<br />http://www.example.org
+wikieditor-toolbar-help-content-xlink-result|<a href='#' class='external'>Havola matni</a><br /><a href='#' class='external autonumber'>[1]</a><br /><a href='#' class='external'>http://www.example.org</a>
+wikieditor-toolbar-help-content-heading2-description|2-darajadagi sarlavha
+wikieditor-toolbar-help-content-heading2-syntax|== Sarlavha matni ==
+wikieditor-toolbar-help-content-heading2-result|<h2>Sarlavha matni</h2>
+wikieditor-toolbar-help-content-heading3-description|3-darajadagi sarlavha
+wikieditor-toolbar-help-content-heading3-syntax|=== Sarlavha matni ===
+wikieditor-toolbar-help-content-heading3-result|<h3>Sarlavha matni</h3>
+wikieditor-toolbar-help-content-heading4-description|4-darajadagi sarlavha
+wikieditor-toolbar-help-content-heading4-syntax|==== Sarlavha matni ====
+wikieditor-toolbar-help-content-heading4-result|<h4>Sarlavha matni</h4>
+wikieditor-toolbar-help-content-heading5-description|5-darajadagi sarlavha
+wikieditor-toolbar-help-content-heading5-syntax|===== Sarlavha matni =====
+wikieditor-toolbar-help-content-heading5-result|<h5>Sarlavha matni</h5>
+wikieditor-toolbar-help-content-ulist-description|Belgili roʻyxat
+wikieditor-toolbar-help-content-ulist-syntax|* Roʻyxat qismi<br />* Roʻyxat qismi
+wikieditor-toolbar-help-content-ulist-result|<ul><li>Roʻyxat qismi</li><li>Roʻyxat qismi</li></ul>
+wikieditor-toolbar-help-content-olist-description|Raqamlangan roʻyxat
+wikieditor-toolbar-help-content-olist-syntax|# Roʻyxat qismi<br /># Roʻyxat qismi
+wikieditor-toolbar-help-content-olist-result|<ol><li>Roʻyxat qismi</li><li>Roʻyxat qismi</li></ol>
+wikieditor-toolbar-help-content-file-description|Oʻrnatilgan fayl
+wikieditor-toolbar-help-content-file-syntax|[[~{0}:Example.png\u007Cthumb\u007CIzohlovchi matn]]
+wikieditor-toolbar-help-content-file-result|<div style='width:104px;' class='thumbinner'><a title='\nIzohlovchi matn' class='image' href='#'><img height='50' width='100' border='0' class='thumbimage' src='~{1}/WikiEditor/modules/images/toolbar/example-image.png' alt=''/></a><div class='thumbcaption'><div class='magnify'><a title='Kattalashtirish' class='internal' href='#'><img height='11' width='15' alt='' src='~{0}/common/images/magnify-clip.png'/></a></div>\nIzohlovchi matn</div></div>
+wikieditor-toolbar-help-content-reference-description|Izoh
+wikieditor-toolbar-help-content-reference-syntax|Sahifa matni.&lt;ref name="test"&gt;[http://www.example.org Havola matni], qoʻshimcha matn.&lt;/ref&gt;
+wikieditor-toolbar-help-content-reference-result|Sahifa matni.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-rereference-description|Oʻsha havoladan qoʻshimcha foydalanish
+wikieditor-toolbar-help-content-rereference-result|Sahifa matni.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-showreferences-description|Izohlarni koʻrsatish
+wikieditor-toolbar-help-content-showreferences-result|<ol class='references'><li id='cite_note-test-0'><b><a title='' href='#'>^</a></b> <a rel='nofollow' title='http://www.example.org' class='external text' href='#'>Havola matni</a>, qoʻshimcha matn.</li></ol>
+wikieditor-toolbar-help-content-signaturetimestamp-description|Imzo vaqt bilan birga
+wikieditor-toolbar-help-content-signaturetimestamp-result|<a href='#' title='{{#special:mypage}}'>Foydalanuvchi nomi</a> (<a href='#' title='{{#special:mytalk}}'>munozara</a>) 15:54, 10 iyun 2009 (UTC)
+wikieditor-toolbar-help-content-signature-description|Imzo
+wikieditor-toolbar-help-content-signature-result|<a href='#' title='{{#special:mypage}}'>Foydalanuvchi nomi</a> (<a href='#' title='{{#special:mytalk}}'>munozara</a>)
+wikieditor-toolbar-help-content-indent-description|Xat boshi
+wikieditor-toolbar-help-content-indent-syntax|Odatiy matn<br />:Matn xat boshi bilan<br />::Matn xat boshi bilan
+wikieditor-toolbar-help-content-indent-result|Odatiy matn<dl><dd>Matn xat boshi bilan<dl><dd>Matn xat boshi bilan</dd></dl></dd></dl>
+wikibase-edit|tahrirlash
+wikibase-save|saqlash
+wikibase-cancel|bekor qilish
+wikibase-sitelink-page-edit-placeholder|maqola
+wikibase-remove|oʻchirish
+wikibase-itembytitle-lookup-page|Sahifa:
+wikibase-itembytitle-submit|Qidiruv
+wikibase-itemdisambiguation-lookup-language|Til kodi:
+wikibase-itemdisambiguation-submit|Qidiruv
+wikibase-newentity-submit|Yaratish
+wikibase-modifyterm-language|Til kodi:
+wikimediamessages-desc|Vikipediya maxsus xabarlari
+sitesupport|Loyihaga koʻmak
+tooltip-n-sitesupport|Bizni qoʻllab-quvvatlang
+specialpages-group-contribution|Hayr-ehson qilish/Mablagʻ yigʻish
+nstab-creator|Muallif
+nstab-institution|Muassasa
+nstab-sequence|Ketma-ketlik
+group-Ex_Administrator|Sobiq maʼmurlar
+group-Ex_Administrator-member|{{GENDER:~{0}\u007Csobiq maʼmur}}
+grouppage-Ex_Administrator|{{ns:project}}:Sobiq maʼmurlar
+group-Ex_Bureaucrat|Sobiq rasmiyatchilar
+group-Ex_Bureaucrat-member|{{GENDER:~{0}\u007Csobiq rasmiyatchi}}
+grouppage-Ex_Bureaucrat|{{ns:project}}:Sobiq rasmiyatchilar
+group-Image-reviewer|Tasvir tekshiruvchilari
+group-Image-reviewer-member|{{GENDER:~{0}\u007Ctasvir tekshiruvchisi}}
+grouppage-Image-reviewer|{{ns:project}}:Tasvir tekshiruvchilari
+group-OTRS-member|OTRS a’zolari
+group-OTRS-member-member|{{GENDER:~{0}\u007COTRS a’zosi}}
+grouppage-OTRS-member|{{ns:project}}:OTRS a’zolari
+group-abusefilter|Suisteʼmollar filtri muharrirlari
+group-abusefilter-member|{{GENDER:~{0}\u007Csuisteʼmollar filtri muharriri}}
+grouppage-abusefilter|{{ns:project}}:Suisteʼmollar filtri muharrirlari
+group-accountcreator|Hisob yozuvi yaratuvchilar
+group-accountcreator-member|{{GENDER:~{0}\u007CHisob yozuvi yaratuvchi}}
+grouppage-accountcreator|{{ns:project}}:Hisob yozuvi yaratuvchilar
+group-arbcom|Hakamlar qoʻmitasi aʼzolari
+group-arbcom-member|{{GENDER:~{0}\u007Chakamlar qoʻmitasi aʼzosi}}
+grouppage-arbcom|{{ns:project}}:Hakamlar qoʻmitasi aʼzolari
+group-autopatrolled|Avtopatrullanuvchilar
+group-autopatrolled-member|{{GENDER:~{0}\u007Cavtopatrullovchi}}
+grouppage-autopatrolled|{{ns:project}}:Avtopatrullovchilar
+group-autoreviewer|Avtonazoratchilar
+group-autoreviewer-member|{{GENDER:~{0}\u007Cavtonazoratchi}}
+grouppage-autoreviewer|{{ns:project}}:Avtonazoratchilar
+group-bigexport|Yirik eksportchilar
+group-bigexport-member|{{GENDER:~{0}\u007Cyirik eksportchi}}
+grouppage-bigexport|{{ns:project}}:Yirik eksportchilar
+group-botadmin|Maʼmurlik huquqiga ega botlar
+group-botadmin-member|{{GENDER:~{0}\u007Cmaʼmurlik huquqiga ega bot}}
+grouppage-botadmin|{{ns:project}}:Maʼmurlik huquqiga ega botlar
+group-confirmed|Tasdiqlangan foydalanuvchilar
+group-confirmed-member|{{GENDER:~{0}\u007Ctasdiqlangan foydalanuvchi}}
+grouppage-confirmed|{{ns:project}}:Tasdiqlangan foydalanuvchilar
+group-editprotected|Himoyalangan sahifalar muharrirlari
+group-editprotected-member|{{GENDER:~{0}\u007CHimoyalangan sahifalar muharriri}}
+grouppage-editprotected|{{ns:project}}:Himoyalangan sahifalar muharrirlari
+group-eliminator|Oʻchiruvchilar
+group-eliminator-member|{{GENDER:~{0}\u007Coʻchiruvchi}}
+grouppage-eliminator|{{ns:project}}:Oʻchiruvchilar
+group-filemover|Fayllarni nomlovchilar
+group-filemover-member|{{GENDER:~{0}\u007CFayl nomlovchi}}
+grouppage-filemover|{{ns:project}}:Fayllar nomlovchilar
+group-flood|Foydalanuvchilar-botlar
+group-flood-member|{{GENDER:~{0}\u007Cfoydalanuvchi-bot}}
+grouppage-flood|{{ns:project}}:Foydalanuvchilar-botlar
+group-founder|Asoschilar
+group-founder-member|{{GENDER:~{0}\u007Casoschi}}
+grouppage-founder|{{ns:project}}:Asoschilar
+group-import|Importchilar
+group-import-member|{{GENDER:~{0}\u007Cimportchi}}
+grouppage-import|{{ns:project}}:Importchilar
+group-interface_editor|Interfeys muharrirlari
+group-interface_editor-member|{{GENDER:~{0}\u007Cinterfeys muharriri}}
+grouppage-interface_editor|{{ns:project}}:Interfeys muharrirlari
+group-ipblock-exempt|IP-chetlashtirishlardan mustasnolar
+group-patroller|Patrullovchilar
+group-patroller-member|{{GENDER:~{0}\u007Cpatrullovchi}}
+grouppage-patroller|{{ns:project}}:Patrullovchilar
+group-researcher|Izlanuvchilar
+group-researcher-member|{{GENDER:~{0}\u007Cizlanuvchi}}
+grouppage-researcher|{{ns:project}}:Izlanuvchilar
+group-rollbacker|Eski holiga qaytaruvchilar
+group-rollbacker-member|{{GENDER:~{0}\u007Ceski holiga qaytaruvchi}}
+grouppage-rollbacker|{{ns:project}}:Eski holiga qaytaruvchilar
+group-transwiki|Wikilararo importchilar
+group-transwiki-member|{{GENDER:~{0}\u007Cwikilararo importchi}}
+grouppage-transwiki|{{ns:project}}:Wikilararo importchilar
+group-trusted|Ishonchli ishtirokchilar
+group-trusted-member|{{GENDER:~{0}\u007Cishonchli ishtirokchi}}
+grouppage-trusted|{{ns:project}}:Ishonchli ishtirokchilar
+group-Global_bot|Global botlar
+group-Global_bot-member|{{GENDER:~{0}\u007Cglobal bot}}
+group-Global_rollback|Global eski holiga qaytaruvchilar
+group-Global_rollback-member|{{GENDER:~{0}\u007Cglobal eski holiga qaytaruvchi}}
+group-Global_sysops|Global maʼmurlar
+group-Global_sysops-member|{{GENDER:~{0}\u007Cglobal ma’mur}}
+group-Ombudsmen|Ombudsmenlar
+group-Ombudsmen-member|{{GENDER:~{0}\u007Combudsmen}}
+group-Staff|Xodimlar
+group-Staff-member|{{GENDER:~{0}\u007Cxodim}}
+group-editinterface|Interfeys muharrirlari
+group-editinterface-member|{{GENDER:~{0}\u007Cinterfeys muharriri}}
+group-steward|Styuardlar
+group-steward-member|{{GENDER:~{0}\u007Cstyuard}}
+group-sysadmin|Tizim maʼmurlari
+group-sysadmin-member|{{GENDER:~{0}\u007Ctizim maʼmuri}}
+group-translationadmin|Tarjima maʼmurlari
+group-translationadmin-member|{{GENDER:~{0}\u007Ctarjima maʼmuri}}
+grouppage-translationadmin|{{ns:project}}:Tarjima maʼmurlari
+group-coder|Dasturlovchilar
+group-coder-member|{{GENDER:~{0}\u007Cdasturlovchi}}
+group-inactive|Nofaol ishtirokchilar
+group-inactive-member|{{GENDER:~{0}\u007Cnofaol foydalanuvchi}}
+grouppage-inactive|{{ns:project}}:Nofaol ishtirokchilar
+wikimedia-copyright|Matn <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.ru">Creative Commons Attribution/Share-Alike litsenziyasi</a> boʻyicha ommalashtirilmoqda; alohida holatlarda qoʻshimcha shartlar amal qilishi mumkin. Batafsil: <a href="https://wikimediafoundation.org/wiki/Terms_of_Use/ru">Foydalanish shartlari</a>.
+wikimedia-copyrightwarning|«{{int:savearticle}}» tugmasini bosgan holda, Siz [https://wikimediafoundation.org/wiki/Terms_of_Use foydalanish shartlariga] rozilik bildirasiz, va kiritilgan maʼlumotlar [https://creativecommons.org/licenses/by-sa/3.0/deed.ru Creative Commons Attribution/Share-Alike 3.0] va [https://www.gnu.org/copyleft/fdl.html GFDL] litsenziyalari boʻyicha qaytarishsiz nashr etilishiga rozilik bildirasiz. Shuningdek Creative Commons litsenziyasi shartlarining bajarilishi uchun maʼlumotlar olingan sahifa yoki uning URL-manziliga havola koʻrsatish yetarli boʻlishini tasdiqlaysiz.
+cant-delete-main-page|Siz bosh sahifani oʻchirishingiz yoki nomini oʻzgartirishingiz mumkin emas.
+upload-more-photos-of-this-monument|Ushbu obyektning yana boshqa suratlarini yuklash
+createacct-helpusername|[[{{MediaWiki:createacct-helpusername-url}}\u007C(tanlashda yordam)]]
+createacct-imgcaptcha-help|Suratdagi yozuvni tushunmayapsizmi? [[{{MediaWiki:createacct-captcha-help-url}}\u007CHisob yaratishga soʻrovlar]]
+tog-underline|Havolalarning tagiga chizish:
+tog-hideminor|Yangi oʻzgarishlar roʻyxatida kichik tahrirlarni yashirish
+tog-hidepatrolled|Yangi oʻzgarishlar roʻyxatida tekshirilgan tahrirlarni yashirish
+tog-newpageshidepatrolled|Yangi sahifalar roʻyxatidan tekshirilgan sahifalarni yashirish
+tog-extendwatchlist|Kengaytirilgan kuzatuv roʻyxati: faqat oxirgi paytdagi emas, barcha oʻzgarishlar koʻrsatiladi
+tog-usenewrc|Yangi oʻzgarishlar va kuzatuv roʻyxatidagi sahifalarni guruhlarga boʻlish (JavaScript orqali)
+tog-numberheadings|Sarlavhalarni avtomatik raqamlash
+tog-showtoolbar|Tahrirlash asboblarini koʻrsatish
+tog-editondblclick|Sichqonchaning chap tugmasini ikki marta bosib tahrirlashni boshlash
+tog-editsectiononrightclick|Boʻlim sarlavhasiga sichqonchaning oʻng tugmasini bosib tahrirlashni boshlash
+tog-watchcreations|Men yaratgan sahifalar va yuklagan fayllar kuzatuv roʻyxatimga qoʻshilsin
+tog-watchdefault|Men tahrirlagan sahifa va fayllar kuzatuv roʻyxatimga qoʻshilsin
+tog-watchmoves|Men nomini koʻchirgan sahifa va fayllar kuzatuv roʻyxatimga qoʻshilsin
+tog-watchdeletion|Men oʻchirgan sahifa va fayllarni kuzatuv roʻyxatimga qoʻsh
+tog-minordefault|Sukut boʻyicha barcha tahrirlarimni «kichik tahrir» etib belgilash
+tog-previewontop|Koʻrib chiqish imkoniyati tahrir oynasi tepasida boʻlsin
+tog-previewonfirst|Tahrirlashga oʻtgandayoq koʻrib chiqishni boshlash
+tog-enotifwatchlistpages|Kuzatuv roʻyxatimdagi sahifa yoki fayllar oʻzgartirilsa, menga bu haqda xat yuborilsin
+tog-enotifusertalkpages|Munozara sahifam oʻzgartirilsa, menga bu haqda xat yuborilsin
+tog-enotifminoredits|Kichik tahrir qilinsa ham e-pochtamga bu haqda xat yuborilsin
+tog-enotifrevealaddr|Xabar beruvchi xatlarda e-pochta manzilim koʻrsatilsin
+tog-shownumberswatching|Sahifani kuzatuv roʻyxatiga olgan foydalanuvchilar sonini koʻrsatish
+tog-oldsig|Joriy imzo:
+tog-fancysig|Imzoni viki-belgi qilib koʻrsatish (avtomatik ishoratsiz)
+tog-uselivepreview|Tez koʻrib chiqish (JavaScript orqali) (sinovda)
+tog-forceeditsummary|Qisqa tavsif oynasi toʻldirilmagani haqida ogohlantirish koʻrsatish
+tog-watchlisthideown|Oʻz tahrirlarim kuzatuv roʻyxatimda koʻrsatilmasin
+tog-watchlisthidebots|Botlar qilgan tahrirlar kuzatuv roʻyxatimda koʻrsatilmasin
+tog-watchlisthideminor|Kichik tahrirlar kuzatuv roʻyxatimda koʻrsatilmasin
+tog-watchlisthideliu|Tizimga kirgan foydalanuvchilar tahrirlari kuzatuv roʻyxatimda koʻrsatilmasin
+tog-watchlisthideanons|Anonim foydalanuvchilar tahrirlari kuzatuv roʻyxatimda koʻrsatilmasin
+tog-watchlisthidepatrolled|Tekshirilgan tahrirlar kuzatuv roʻyxatimda koʻrsatilmasin
+tog-ccmeonemails|Boshqa ishtirokchilarga yozgan xatimning nusxasi oʻzimga yuborilsin
+tog-diffonly|Versiyalar taqqoslanayotganda, pastda sahifa matni koʻrsatilmasin
+tog-showhiddencats|Yashirin turkumlarni koʻrsatish
+tog-norollbackdiff|Tahrir qaytarilganda, versiyalar taqqosi koʻrsatilmasin
+tog-useeditwarning|Oʻzgarishlarni saqlamay sahifadan chiqib ketayotganim haqida ogohlantirish
+tog-prefershttps|Doim himoyalangan holda kirish
+underline-always|Har doim
+underline-never|Hech qachon
+underline-default|Brauzer moslamari boʻyicha
+editfont-style|Tahrirlash maydonidagi shrift turi:
+editfont-default|Brauzer moslamari boʻyicha
+editfont-monospace|Teng enli shrift (Monospaced)
+editfont-sansserif|Kertiksiz shrift (Sans-serif)
+editfont-serif|Kertikli shrift (Serif)
+january-date|Yanvar ~{0}
+february-date|Fevral ~{0}
+march-date|Mart ~{0}
+april-date|Aprel ~{0}
+may-date|~{0}-may
+june-date|Iyun ~{0}
+july-date|Iyul ~{0}
+august-date|Avgust ~{0}
+september-date|Sentabr ~{0}
+october-date|Oktabr ~{0}
+november-date|Noyabr ~{0}
+december-date|Dekabr ~{0}
+hidden-categories|{{PLURAL:~{0}\u007CYashirin turkum}}
+index-category|Indekslanadigan sahifalar
+noindex-category|Indekslanmaydigan sahifalar
+broken-file-category|Ishlamaydigan fayl havolalari bor sahifalar
+about|Haqida
+article|Sahifa
+newwindow|(yangi oynada ochiladi)
+cancel|Bekor qilish
+moredotdotdot|Batafsil...
+morenotlisted|Boshqa hech nima yoʻq...
+mypage|Sahifa
+mytalk|Munozara
+anontalk|Ushbu IP-manzil munozarasi
+navigation|Saytda harakatlanish
+and| va
+qbfind|Topish
+qbbrowse|Koʻrib chiqish
+qbedit|Tahrirlash
+qbpageoptions|Ushbu sahifa moslamalari
+qbmyoptions|Mening sahifalarim
+faq|TSS
+faqpage|Loyiha:TSS
+actions|Amallar
+namespaces|Nomfazolar
+variants|Variantlar
+navigation-heading|Navigatsiya
+errorpagetitle|Xato
+returnto|~{0} sahifasiga qaytish.
+tagline|{{SITENAME}} dan olingan
+help|Yordam
+search|Qidiruv
+searchbutton|Qidirish
+go|Oʻtish
+searcharticle|O‘tish
+history|Sahifa tarixi
+history_short|Tarix
+updatedmarker|oxirgi tashrifimdan keyingi oʻzgarishlar
+printableversion|Bosma uchun versiya
+permalink|Doimiy ishorat
+print|Chop etish
+view|Koʻrish
+view-foreign|~{0}da koʻrish
+edit|Tahrirlash
+create|Yaratish
+create-local|Mahalliy tavsifini qoʻshish
+editthispage|Ushbu sahifani tahrirlash
+create-this-page|Ushbu sahifani yaratish
+delete|O‘chirish
+deletethispage|Ushbu sahifani o‘chirish
+undeletethispage|Ushbu sahifani tiklash
+undelete_short|{{PLURAL:~{0}\u007Cbitta tahrir\u007C~{0} ta tahrir}}ni tiklash
+viewdeleted_short|~{0} ta oʻchirilgan tahrirni koʻrish
+protect|Himoyalash
+protect_change|oʻzgartirish
+protectthispage|Ushbu sahifani himoyalash
+unprotect|Himoyadan chiqarish
+unprotectthispage|Ushbu sahifaning himoyasini oʻzgaritish
+newpage|Yangi sahifa
+talkpage|Bu sahifa haqida munozara
+talkpagelinktext|munozara
+specialpage|Maxsus sahifa
+personaltools|Shaxsiy uskunalar
+articlepage|Maqolani koʻrib chiqish
+talk|Munozara
+views|Qarashlar
+toolbox|Asboblar
+userpage|Foydalanuvchi sahifasini koʻrish
+projectpage|Loyiha sahifasini koʻrish
+imagepage|Fayl sahifasini koʻrish
+mediawikipage|Xabar sahifasini koʻrsatish
+templatepage|Andoza sahifasini koʻrish
+viewhelppage|Yordam olish
+categorypage|Turkum sahifasini koʻrish
+viewtalkpage|Munozarani koʻrish
+redirectpagesub|Yoʻnaltiruvchi sahifa
+redirectto|Qayta yoʻnaltirish:
+viewcount|Bu sahifaga {{PLURAL:~{0}\u007Cbir marta\u007C~{0} marta}} murojaat qilingan.
+protectedpage|Himoyalangan sahifa
+jumpto|Oʻtish:
+jumptonavigation|saytda harakatlanish
+jumptosearch|qidiruv
+view-pool-error|Uzr, ayni paytda serverlarga ortiqcha yuk tushgan.\nBu sahifaga birdaniga koʻpchilik kirmoqchi boʻldi.\nIltimos, biroz kutib turing va keyin yangitdan kirishga urinib koʻring.\n\n~{0}
+pool-timeout|Toʻsishni kutish vaqti tugadi
+pool-queuefull|Soʻrovlar jamlanmasi toʻldi
+pool-errorunknown|Nomaʼlum xato
+poolcounter-usage-error|Foydalanish xatosi: ~{0}
+aboutsite|{{SITENAME}} haqida
+aboutpage|Project:Haqida
+copyright|Keltirilgan maʼlumotlar ~{0} orqali tarqatilmoqda (agar aksinchasi koʻrsatilmagan boʻlsa).
+copyrightpage|{{ns:project}}:Mualliflik huquqlari
+currentevents|Joriy hodisalar
+currentevents-url|Project:Joriy hodisalar
+disclaimers|Masʼuliyatdan voz kechish
+disclaimerpage|Project:Masʼuliyatdan voz kechish
+edithelp|Tahrirlash yordami
+mainpage|Bosh sahifa
+mainpage-description|Bosh sahifa
+policy-url|Project:Qoida
+portal|Jamoa portali
+portal-url|Project:Jamoa portali
+privacy|Maxfiylik siyosati
+privacypage|Project:Maxfiylik siyosati
+badaccess|Ruxsatlilik xatosi
+badaccess-group0|Sizda soʻralgan amallarni bajarish huquqi yoʻq.
+badaccess-groups|Soʻralgan amallarni kamida ~{0} {{PLURAL:~{1}\u007Cguruhi\u007Cguruhlari}} foydalanuvchilari amalga oshirishi mumkin.
+versionrequired|~{0} versiyasidagi MediaWiki talab etiladi
+versionrequiredtext|Bu sahifada ishlash uchun MediaWikining ~{0}-versiyasi talab etiladi.\n[[Special:Version\u007CDasturiy taʼminot haqida axborot]]ni koʻring.
+ok|OK
+retrievedfrom| "~{0}" dan olindi
+youhavenewmessages|Sizga ~{0} keldi (~{1}).
+youhavenewmessagesfromusers|Siz {{PLURAL:~{2}\u007Cboshqa foydalanuvchidan\u007C~{2} ta foydalanuvchidan}} ~{0} oldingiz (~{1}).
+youhavenewmessagesmanyusers|Siz ko'p foydalanuvchilardan ~{0} oldingiz (~{1}).
+newmessageslinkplural|{{PLURAL:~{0}\u007Cyangi xabar\u007C999=yangi xabarlar}}
+newmessagesdifflinkplural|oxirgi {{PLURAL:~{0}\u007Coʻzgarish\u007Coʻzgarishlar}}
+youhavenewmessagesmulti|Siz ~{0}ga yangi xat oldingiz
+editsection|tahrirlash
+editold|tahrirlash
+viewsourceold|manbasini koʻrish
+editlink|tahrirlash
+viewsourcelink|manbasini koʻrish
+editsectionhint|Boʻlimni tahrirlash: ~{0}
+showtoc|koʻrsatish
+hidetoc|yashirish
+confirmable-confirm|Aminmisiz?
+confirmable-yes|Ha
+confirmable-no|Yoʻq
+thisisdeleted|~{0}ni koʻrib chiqasizmi yoki tiklaysizmi?
+viewdeleted|~{0}ni koʻrib chiqasizmi?
+restorelink|{{PLURAL:~{0}\u007COʻchirilgan tahrir\u007C~{0} ta oʻchirilgan tahrirlar}}
+feedlinks|Ko'rinishida:
+feed-invalid|Obuna uchun no'tog'ri turdagi kanal
+feed-unavailable|Sindikatsiya tasmalariga yoʻlash imkoni yoʻq
+site-rss-feed|~{0} — RSS-tasmasi
+site-atom-feed|~{0} — Atom-tasma
+page-rss-feed|"~{0}" — RSS-tasmasi
+page-atom-feed|«~{0}» — Atom-lenta
+red-link-title|~{0} (sahifa yaratilmagan)
+nstab-main|Maqola
+nstab-user|Foydalanuvchi
+nstab-media|Media sahifasi
+nstab-special|Maxsus sahifa
+nstab-project|Vikipediya
+nstab-image|Fayl
+nstab-mediawiki|Xabar
+nstab-template|Andoza
+nstab-help|Yordam
+nstab-category|Turkum
+nosuchaction|Bunday amal yoʻq
+nosuchspecialpage|Bunday maxsus sahifa yoʻq
+error|Xato
+databaseerror|Maʼlumotlar bazasida xatolik
+databaseerror-query|So‘rov: ~{0}
+databaseerror-function|Funktsiya: ~{0}
+databaseerror-error|Xato: ~{0}
+laggedslavemode|'''Diqqat:''' sahifada oxirgi yangilanishlar koʻrsatilmagan boʻlishi mumkin.
+readonly|Maʼlumotlar bazasiga yozish toʻsilgan
+missingarticle-rev|(versiya №: ~{0})
+missingarticle-diff|(Farq: ~{0}, ~{1})
+internalerror|Ichki xato
+internalerror_info|Ichki xato: ~{0}
+filecopyerror|"~{0}" fayl nusxasini "~{1}" fayliga koʻchirib boʻlmadi.
+filerenameerror|Fayl nomini «~{0}»dan «~{1}»ga o‘zgartirish imkoni yoʻq.
+filedeleteerror|"~{0}" faylini oʻchirib boʻlmadi.
+directorycreateerror|"~{0}" papkasini yaratish imkoni yoʻq.
+directoryreadonlyerror|"~{0}" katalogi faqat oʻqish uchun moʻljallangan.
+filenotfound|"~{0}" faylini topib boʻlmadi.
+unexpected|Kutilmagan qiymat: "~{0}"="~{1}".
+formerror|Xatolik: Formani jo‘natib bo‘lmadi.
+badarticleerror|Bu harakatni ushbu sahifada bajarib bo‘lmadi.
+cannotdelete-title|"~{0}" sahifasini oʻchirib boʻlmadi.
+badtitle|Notoʻgʻri sarlavha
+viewsource|Manbasini koʻrish
+viewsource-title|~{0} sahifasining manbasini koʻrish
+actionthrottled|Tezlik cheklovi
+protectedpagetext|Bu sahifa tahrirlash va boshqa oʻzgarishlar kiritishdan himoyalangan.
+viewsourcetext|Siz bu sahifaning manbasini koʻrishingiz va uni nusxasini olishingiz mumkin:
+protectedinterface|Ushbu sahifada dasturiy taʼminot interfeysi xabari mavjud. Bezoriliklardan saqlash uchun uni oʻzgartirish taʼqiqlangan.\nUshbu xabar tarjimasini qoʻshish yoki oʻzgartirish uchun, iltimos, MediaWikining [//translatewiki.net/ translatewiki.net] mahalliylashtirish saytidan foydalaning.
+editinginterface|'''Diqqat:''' Siz dasturiy taʼminot interfeysi matni mavjud boʻlgan sahifani tahrirlamoqdasiz.\nUning oʻzgartirilishi ushbu vikidagi boshqa foydalanuvchilar uchun ham interfeys oʻzgarishiga olib keladi.\nUshbu xabar tarjimasini qoʻshish yoki oʻzgartirish uchun, iltimos, MediaWikining [//translatewiki.net/ translatewiki.net] mahalliylashtirish saytidan foydalaning.
+namespaceprotected|Sizda '''~{0}''' nomfazosi sahifalarini tahrirlash huquqi yoʻq
+customcssprotected|Sizda uchbu CSS sahifani tahrirlash huquqi yoʻq, chunki bu yerda boshqa foydalanuvchining shaxsiy moslamalari saqlanadi.
+customjsprotected|Sizda uchbu JavaScript sahifani tahrirlash huquqi yoʻq, chunki bu yerda boshqa foydalanuvchining shaxsiy moslamalari saqlanadi.
+mycustomjsprotected|Sizda ushbu JavaScript sahifani tahrirlashga ruxsat mavjud emas.
+myprivateinfoprotected|Sizda shaxsiy maʻlumotlaringizni tahrirlashga ruxsat mavjud emas.
+mypreferencesprotected|Sizda afzalliklarni tahrirlashga ruxsat mavjud emas.
+ns-specialprotected|"{{ns:special}}" nomfazosi sahifalari tahrirlanishi mumkin emas.
+exception-nologin|Siz tizimda o'zingizni tanishtirmadingiz
+exception-nologin-text|Bu sahifani koʻrish yoki soʻralgan amalni bajarish uchun tizimga kirishingiz lozim.
+virus-badscanner|Moslamada xato. Noma'lum virus aniqlovchi: ''~{0}''
+virus-scanfailed|tekshirishda xatolik (kod ~{0})
+virus-unknownscanner|noma'lum antivirus:
+logouttext|<strong>Siz saytdan muvaffaqiyatli chiqdingiz.</strong>\n\nBrauzeringiz keshini tozalamaguningizgacha ayrim sahifalar tizimga kirganingizdek koʻrinishda davom etaverishi mumkin.
+welcomeuser|Xush kelibsiz, ~{0}!
+yourname|Foydalanuvchi nomi:
+userlogin-yourname|Foydalanuvchi nomi
+userlogin-yourname-ph|Foydalanuvchi nomingizni kiriting
+createacct-another-username-ph|Foydalanuvchi nomini kiriting
+yourpassword|Maxfiy soʻz:
+userlogin-yourpassword|Maxfiy soʻz
+userlogin-yourpassword-ph|Maxfiy soʻzni kiriting
+createacct-yourpassword-ph|Maxfiy soʻzni kiriting
+yourpasswordagain|Maxfiy so‘zni qayta kiriting:
+createacct-yourpasswordagain|Maxfiy soʻzni tasdiqlang
+createacct-yourpasswordagain-ph|Maxfiy soʻzni yana bir bor kiriting
+remembermypassword|Hisob ma’lumotlarim ushbu brauzerda eslab qolinsin (ko‘pi bilan ~{0} {{PLURAL:~{0}\u007Ckunga\u007Ckunga}})
+userlogin-remembermypassword|Kirgan deb esda saqla
+userlogin-signwithsecure|Himoyalangan holda kirish
+yourdomainname|Sizning domeningiz:
+password-change-forbidden|Siz bu vikida maxfiy soʻzni oʻzgartira olmaysiz.
+login|Kirish
+nav-login-createaccount|Kirish / Hisob yaratish
+userlogin|Kirish / Hisob yaratish
+userloginnocreate|Kirish
+logout|Chiqish
+userlogout|Chiqish
+notloggedin|Siz tizimga kirmagansiz
+userlogin-noaccount|Hisobingiz yoʻqmi?
+userlogin-joinproject|{{SITENAME}}ga aʼzo boʻlish
+nologin|Hisobingiz yoʻqmi? '''~{0}'''.
+nologinlink|Hisob yaratish
+createaccount|Hisob yaratish
+gotaccount|Hisobingiz bormi? '''~{0}'''.
+gotaccountlink|Kirish
+userlogin-resetlink|Kirish maʻlumotlaringiz esdan chiqdimi?
+userlogin-resetpassword-link|Maxfiy so‘zni unutib qoʻydingizmi?
+userlogin-helplink2|Kirish uchun yordam
+userlogin-loggedin|Siz {{GENDER:~{0}\u007C~{0}}} nomi bilan kirgansiz.\nBoshqa hisob raqami orqali kirish uchun quyidagi formadan foydalaning.
+userlogin-createanother|Boshqa hisob yaratish
+createacct-emailrequired|Elektron pochta manzilingiz
+createacct-emailoptional|Elektron pochta manzili (majburiy emas)
+createacct-email-ph|Elektron pochta manzilingizni kiriting
+createacct-another-email-ph|Elektron pochta manzilini kiriting
+createaccountmail|Tasodifan tanlab beriladigan vaqtinchalik maxfiy soʻzdan foydalanish (elektron pochta manzilingizga joʻnatiladi)
+createacct-realname|Haqiqiy ismi (ixtiyoriy)
+createaccountreason|Sabab:
+createacct-reason|Sabab
+createacct-reason-ph|Nimaga yana boshqa hisob yaratyapsiz
+createacct-captcha|Xavfsizlik tekshiruvi
+createacct-imgcaptcha-ph|Yuqoridagi yozuvni bu yerga kiriting
+createacct-submit|Hisob yaratish
+createacct-another-submit|Boshqa hisob yaratish
+createacct-benefit-heading|{{SITENAME}} Sizga oʻxshagan odamlar tomonidan yaratiladi
+createacct-benefit-body1|tahrirlar soni
+createacct-benefit-body2|sahifalar soni
+createacct-benefit-body3|soʻnggi paytdagi ishtirokchilar soni
+badretype|Siz tomondan kiritilgan maxfiy so'zlar mos kelmayapti.
+userexists|Bunday foydalanuvchi nomi avvalroq yaratilgan. Iltimos, boshqa nom tanlang.
+loginerror|Foydalanuvchini aniqlashda xatolik
+createacct-error|Hisob yaratishda xatolik
+createaccounterror|Hisob yozuvi yaratishning iloji yoʻq: ~{0}
+loginsuccesstitle|Kirish muvaffaqiyatli amalga oshdi
+loginsuccess|'''{{SITENAME}}ga "~{0}" foydalanuvchi nomi bilan kirdingiz.'''
+nosuchusershort|"~{0}" ismli foydalanuvchi yoʻq.\nIsm yozilishini tekshirib koʻring.
+nouserspecified|Siz foydalanuvchining ismini ko'rsatishingiz lozim.
+login-userblocked|Bu foydalanuvchi chetlatilgan. Tizimga kirishga ruxsat yoʻq.
+wrongpassword|Kiritgan mahfiy soʻzingiz notoʻgʻri. Iltimos, qaytadan kiritib koʻring.
+wrongpasswordempty|Maxfiy soʻz koʻrsatilmagan. Qaytadan urinib koʻring.
+mailmypassword|Maxfiy soʻzni yangilash
+passwordremindertitle|{{SITENAME}} uchun vaqtinchalik yangi maxfiy so'z
+noemailcreate|Siz haqiqiy elektron pochta manzilingizni taqdim qilishingiz kerak.
+mailerror|~{0} manziliga xat yuborishda xatolik
+emailauthenticated|Elektron pochta manzilingiz ~{1}, ~{2} da tasdiqlangan.
+emailconfirmlink|Elektron pochta manzilingizni tasdiqlash
+emaildisabled|Bu sayt elektron pochta xatlarini yubora olmaydi.
+accountcreated|Hisob yozuvi yaratildi
+createaccount-title|{{SITENAME}} da hisob yaratish
+login-abort-generic|Tizimga kirishga mufavvaqiyatsiz urinish
+loginlanguagelabel|Til: ~{0}
+pt-login|Kirish
+pt-login-button|Kirish
+pt-createaccount|Hisob yaratish
+pt-userlogout|Chiqish
+php-mail-error-unknown|PHPning mail() funksiyasida nomaʻlum xatolik.
+changepassword|Maxfiy soʻzni oʻzgartirish
+resetpass_header|Maxfiy soʻzni oʻzgartirish
+oldpassword|Eski mahfiy so'z:
+newpassword|Yangi mahfiy so'z:
+retypenew|Yangi mahfiy soʻzni qayta tering:
+resetpass_submit|Maxfiy so'zni o'rnatish va kirish
+changepassword-success|Maxfiy soʻzni oʻzgartirish muvaffaqiyatli oʻtdi!
+resetpass_forbidden|Maxfiy so'z o'zgartirilishi mumkin emas
+resetpass-no-info|Siz ushbu sahifaga toʻgʻridan toʻgʻri kirishingiz uchun tizimga kirgan boʻlishingiz kerak.
+resetpass-submit-loggedin|Maxfiy soʻzni oʻzgartirish
+resetpass-submit-cancel|Bekor
+resetpass-temp-password|Vaqtinchalik maxfiy soʻz
+passwordreset|Maxfiy soʻzni yangilash
+passwordreset-text-one|Mahfiy soʻzni tashlash uchun ushbu oynalarni toʻltiring.
+passwordreset-text-many|{{PLURAL:~{0}\u007CQuyidagi oynalardan birini toʻldirsangiz, elektron pochtangizga vaqtinchalik maxfiy soʻz joʻnatiladi.}}
+passwordreset-legend|Maxfiy soʻzni yangilash
+passwordreset-emaildisabled|Email xususiyatlari ushbu vikida oʻchirib qoʻyilgan.
+passwordreset-username|Foydalanuvchi nomi:
+passwordreset-domain|Domen:
+passwordreset-capture|Xatni koʻrmoqchimisiz?
+passwordreset-email|Elektron pochta manzilingiz:
+passwordreset-emailelement|Foydalanuvchi ismi: ~{0}\nVaqtinchalik maxfiy so'z: ~{1}
+changeemail|Elektron pochta manzilini oʻzgartirish
+changeemail-oldemail|Joriy elektron pochta manzili
+changeemail-newemail|Elektron pochtaning yangi manzili
+changeemail-none|(yoʻq)
+changeemail-password|Sizning {{SITENAME}}dagi maxfiy so‘zingiz:
+changeemail-submit|Manzilni o'zgartirish
+resettokens|Kalitlaringizni yangilash
+resettokens-legend|Kalitlaringizni yangilash
+resettokens-tokens|Kalitlar:
+resettokens-token-label|~{0} (joriy koʻrsatkich: ~{1})
+resettokens-done|Kalitlar yangilandi.
+resettokens-resetbutton|Belgilangan kalitlarni yangilash
+extlink_sample|http://www.example.com ishorat nomi
+extlink_tip|Tashqi ishorat (http:// prefiksini unutmang)
+nowiki_sample|Bu yerga formatlash zarur boʻlmagan matnni qoʻying
+nowiki_tip|Viki-formatlashga e'tibor qilmaslik
+image_tip|Fayl oʻrnatish
+media_tip|Faylga havola
+sig_tip|Imzoingiz va sana
+hr_tip|Yotiq (gorizontal) chiziq (ko'p ishlatmang)
+summary|Qisqa izoh:
+subject|Mavzu/sarlavha
+minoredit|Bu kichik tahrir
+watchthis|Sahifani kuzatish
+savearticle|Saqla
+preview|Ko‘rib chiqish
+showpreview|Koʻrib chiqish
+showdiff|Kiritilgan o‘zgarishlar
+anoneditwarning|'''Diqqat:''' Siz tizimga kirmagansiz. Ushbu sahifa tarixida Sizning IP manzilingiz yozib qolinadi.
+missingcommenttext|Iltimos sharh qoldiring.
+summary-preview|Tavsif bunday koʻrinishda boʻladi:
+subject-preview|Sarlavha bunday koʻrinishda boʻladi:
+blockedtitle|Foydalanuvchi chetlashtirildi
+blockedtext|'''Siz (foydalanuvchi nomingiz yoki IP manzilingiz) tahrir qilishdan chetlashtirildingiz.'''\n\nSizni ~{0} chetlashtirdi. Bunga sabab: ''~{1}''.\n\n* Chetlashtirish muddati boshi: ~{7}\n* Chetlashtirish muddati yakuni: ~{5}\n* Chetlashtirish maqsadi: ~{6}\n\nSiz ~{0} yoki boshqa [[{{MediaWiki:Grouppage-sysop}}\u007Cadministrator]] bilan bogʻlanib, arz qilishingiz mumkin.\nSiz «foydalanuvchiga maktub» xizmatidan foydalana olmaysiz, agarda: a) shaxsiy moslamalaringizda haqiqiy e-pochta manzilingiz koʻrsatilmagan yoki tasdiqlanmagan boʻlsa, b) chetlatish shartlarida bu xizmat toʻsilgan boʻlsa.\nSizning hozirgi IP manzilingiz - ~{2}, chetlashtirish raqamingiz - #~{4}. Arizaga bularni ilova qilishingiz mumkin.
+blockednoreason|sabab ko'rsatilmadi
+whitelistedittext|Siz sahifalarni oʻzgartirish uchun ~{0}.
+nosuchsectiontitle|Boʻlimni topishni iloji yoʻq
+nosuchsectiontext|Siz mavjud boʻlmagan boʻlimni tahrirlamoqchi boʻldingiz. Ushbu boʻlim Siz bu sahifani koʻrayotgan mahalda koʻchirilgan yoki yoʻqotilgan boʻlishi mumkin.
+loginreqtitle|Shaxsiyatni aniqlash talab etiladi
+loginreqlink|Kirish
+loginreqpagetext|Boshqa sahifalarni koʻrish uchun ~{0}
+accmailtitle|Maxfiy soʻz joʻnatildi
+newarticle|(Yangi)
+newarticletext|Bu sahifa hali mavjud emas.\nSahifani yaratish uchun quyida matn kiritishingiz mumkin (qoʻshimcha axborot uchun [~{0} yordam sahifasini] koʻring).\nAgar bu sahifaga xatolik sabab kelib qolgan boʻlsangiz brauzeringizning '''orqaga''' tugmasini bosing.
+anontalkpagetext|----\n<em>Ushbu munozara sahifasi hisob yozuvi yaratmagan (yoki yaratishni xohlamaydigan) anonim foydalanuvchiga tegishli.</em>\n\nShu sababli, uni aniqlash uchun raqamli IP-manzildan foydalaniladi.\nUshbu IP-manzil bir nechta foydalanuvchilarga tegishli boʻlishi mumkin.\nAgar siz anonim foydalanuvchi boʻlsangiz va qoldirilgan xabarlar sizga yoʻnaltirilmagan deb hisoblasangiz, iltimos, boshqa anonim foydalanuvchilar bilan adashtirib yubormasliklari uchun [[Special:UserLogin/signup\u007Chisob yozuvi yarating]] yoki [[Special:UserLogin\u007Ctizimga kiring]].
+noarticletext|Bu sahifada hozircha hech qanday matn yoʻq. Siz bu sarlavhani boshqa sahifalardan [[Special:Search/{{PAGENAME}}\u007Cqidirishingiz]], <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} tegishli qaydlarga qarashingiz] yoki bu sahifani [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} tahrirlashingiz]</span> mumkin.
+userpage-userdoesnotexist-view|"~{0}" foydalanuvchi hisobi roʻyxatga olinmagan.
+clearyourcache|'''Eslatma.''' Saqlaganingizdan so'ng o'zgarishlarni ko'rish uchun siz o'z brauzeringiz keshini tozalashingizga to'gri kelishi mumkin.\n* '''Firefox / Safari:''' ''Shift'' tugmasini bosgan holda, ''Yangilash'' unsurlar darchasini bosing, yoki ''Ctrl-F5'' yoki ''Ctrl-R'' (Macda ''⌘-R'') ni bosing\n* '''Google Chrome:''' ''Ctrl-Shift-R'' (Macda ''⌘-Shift-R'') ni bosing\n* '''Internet Explorer:''' ''Ctrl''ni bosgan holda, ''Yangilash''ni bosing, yoki ''Ctrl-F5''ni bosing\n* '''Opera:''' ''Asboblar → Moslamalar'' menyusidan keshni tozalashni tanlang
+updated|(Yangilandi)
+note|'''Izoh:'''
+previewnote|'''Bu shunchaki koʻrib chiqish.''' Oʻzgartirishlar hali saqlangani yoʻq!
+continue-editing|tahrirlashni davom ettirish
+session_fail_preview|<strong>Afsuski, sizning tahriringiz texnik nosozlik yuzaga kelgani sabab saqlanmadi.</strong>\nIltimos, yana bir bor urinib koʻring.\nAgar shu xato yana takrorlansa, hisob yozuvingizdan [[Special:UserLogout\u007Cchiqishni amalga oshiring]] va qaytadan kiring.
+session_fail_preview_html|<strong>Afsuski, sizning tahriringiz texnik nosozlik yuzaga kelgani sabab saqlanmadi.</strong>\n\n<em>Chunki {{SITENAME}}da faqat HTMLdan foydalanish mumkin, JavaScript-hujumlardan saqlanish maqsadida koʻrib chiqish imkoniyati oʻchirib qoʻyilgan.</em>\n\n<strong>Agar foydali tahrir kiritmoqchi boʻlgan boʻlsangiz, yana bir bor urinib koʻring.</strong>\nAgar shundayam xato takrorlansa, hisob yozuvingizdan [[Special:UserLogout\u007Cchiqishni amalga oshiring]] va qaytadan kiring.
+editing|Tahrirlanmoqda — ~{0}
+creating|«~{0}» sahifasini yaratish
+editingsection|Tahrirlanmoqda — ~{0} (boʻlimi)
+editingcomment|Yangi mavzu yaratilmoqda — ~{0}
+editconflict|Tahrirlash toʻqnashuvi: ~{0}
+explainconflict|Sahifani tahrirlayotgan mahalingizda boshqa birov unga oʻzgarish kiritib ulgurdi.\nYuqoridagi tahrir oynasida sahifaning joriy matnini koʻrishingiz mumkin.\nPastdagida esa siz kiritgan oʻzgarishlar koʻrsatilgan.\nKiritmoqchi boʻlgan oʻzgarishlaringizni pastdagi oynadan yuqoridagiga oʻtkazing.\n«{{int:savearticle}}» tugmasini bossangiz <strong>faqat</strong> yuqoridagi matn saqlanadi.
+yourtext|Sizning matningiz
+editingold|<strong>Ogohlantirish: Siz sahifaning eski nusxasini tahrirlayapsiz.</strong> Uni shunday holicha saqlasangiz, keyingi nusxalardagi oʻzgarishlar yoʻqotiladi.
+yourdiff|Farqlar
+copyrightwarning|Iltimos, {{SITENAME}}ga yuklangan har qanday axborot ~{1} ostida tarqatilishiga diqqat qiling (batafsil ma'lumot uchun ~{0}ni ko'ring).\nAgar yozganlaringiz keyinchalik tahrir qilinishi va qayta tarqatilishiga rozi bo'lmasangiz, u holda bu yerga yozmang.<br />\nSiz shuningdek bu yozganlaringiz sizniki yoki erkin litsenziya ostida ekanligini va'da qilmoqdasiz.\n'''MUALLIFLIK HUQUQLARI BILAN HIMOYALANGAN ISHLARNI ZINHOR BERUXSAT YUBORMANG!'''
+copyrightwarning2|Iltimos, shuni esda tutingki, {{SITENAME}} sahifalaridagi barcha matnlar boshqa foydalanuvchilar tomonidan tahrirlanishi, almashtirilishi yoki o'chirilishi mumkin. Agar siz yozgan ma'lumotlaringizni bunday tartibda tahrirlanishiga rozi bo'lmasangiz, unda uni bu yerga joylashtirmang.<br />\nBundan tashqari, siz ushbu ma'lumotlarni o'zingiz yozgan bo'lishingiz yoki ruxsat berilgan internet manzilidan yoki shu kabi erkin resursdan nusxa olgan bo'lishingiz lozim (Qo'shimcha ma'lumotlar uchun ~{0} sahifasiga murojaat qiling).\n'''MUALLIFLIK HUQUQI QO'YILGAN ISHLARNI RUXSATSIZ BU YERGA JOYLASHTIRMANG!'''
+protectedpagewarning|<strong>Ogohlantirish: Ushbu sahifa himoyalangan boʻlib, faqat administratorlar tomonidan tahrirlanishi mumkin.</strong>\nQuyida himoyalash jurnalidagi oxirgi qayd keltirilgan:
+semiprotectedpagewarning|<strong>Izoh:</strong> Ushbu sahifa himoyalangan boʻlib, faqat roʻyxatdan oʻtgan foydalanuvchilar tomonidan tahrirlanishi mumkin. Quyida himoyalash jurnalidagi oxirgi qayd keltirilgan:
+templatesused|Ushbu sahifada foydalanilgan {{PLURAL:~{0}\u007Candoza\u007Candozalar}}:
+templatesusedpreview|Ushbu sahifada foydalanilgan {{PLURAL:~{0}\u007Candoza\u007Candozalar}}:
+templatesusedsection|Ushbu bo'limda foydalanilgan {{PLURAL:~{0}\u007Candoza\u007Candozalar}}:
+template-protected|(himoyalangan)
+template-semiprotected|(yarim-himoyalangan)
+hiddencategories|Ushbu sahifa {{PLURAL:~{0}\u007C1 yashirin turkum\u007C~{0} yashirin turkumlar}}ga kiradi:
+nocreatetext|Ushbu saytda yangi sahifalar yaratish taʼqiqlagan.\nOrtga qaytib, mavjud sahifani tahrirlashingiz yoki [[Special:UserLogin\u007Ctizimga kirishingiz]] mumkin.
+nocreate-loggedin|Sizda yangi sahifalar yaratishga ruxsat yoʻq.
+sectioneditnotsupported-title|Boʻlimlarni tahrirlash imkoniyati yoʻq
+sectioneditnotsupported-text|Ushbu sahifada boʻlimlarni tahrirlash imkoniyati yoʻq.
+permissionserrors|Ruxsat huquqida xato
+permissionserrorstext-withaction|Sizda quyidagi {{PLURAL:~{0}\u007Csabab\u007Csabablar}}ga koʻra '''~{1}'''ga ruxsat mavjud emas:
+recreate-moveddeleted-warn|<strong>Diqqat: Siz avval yoʻqotilgan sahifani qaytadan yaratmoqchisiz.</strong>\n\nU avval nega yoʻqotilgani bilan qiziqib koʻring.\nQuyida ushbu sahifaga oid yoʻqotish va koʻchirish qaydlari keltirilgan:
+moveddeleted-notice|Bu sahifa oʻchirilgan.\nMaʼlumot uchun quyida oʻchirish va qayta nomlash jurnallaridan mos yozuvlar keltirilgan.
+log-fulllog|Qaydlarni toʻliq koʻrish
+edit-conflict|Tahrirlash toʻqnashuvi.
+postedit-confirmation-created|Sahifa yaratildi.
+postedit-confirmation-restored|Sahifa qayta tiklandi.
+postedit-confirmation-saved|Tahriringiz saqlandi.
+defaultmessagetext|Boshlang'ich matn
+content-model-text|quruq matn
+content-model-javascript|JavaScript
+content-model-css|CSS
+post-expand-template-inclusion-warning|'''Diqqat:''' Qo'llanilayotgan andozalarning jami hajmi juda katta.\nAyrim andozalar qo'shilmaydi.
+post-expand-template-inclusion-category|Qo'llaniladigan andozalarning mumkin bo'lgan miqdoridan oshgan sahifalar
+post-expand-template-argument-category|Andozalarning to'ldirilmagan o'zgaruvchilariga ega sahifalar
+undo-success|Tahrirni bekor qilish imkoniyati bor. Iltimos, solishtirish oynasini koʻrib chiqib, aynan shu oʻzgarishlarni bekor qilmoqchiligingizga ishonch hosil qiling va undan keyin «Saqla» tugmasini bosing.
+undo-summary|[[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007Cmun.]]) tomonidan qilingan ~{0}-sonli tahrir qaytarildi
+cantcreateaccounttitle|Ro‘yxatdan o‘tib bo‘lmadi
+cantcreateaccount-text|[[User:~{2}\u007C~{2}]] ushbu IP manzil (<strong>~{0}</strong>) orqali ro‘yxatdan o‘tishni bloklab qo‘ygan.\n\n~{2} <em>~{1}</em>ni sabab qilib ko‘rsatdi
+cantcreateaccount-range-text|[[User:~{2}\u007C~{2}]] '''~{0}''' sohaga tegishli IP manzillar, shu jumladan sizning IP manzilingiz ('''~{3}'''), orqali ro‘yxatdan o‘tishni bloklab qo‘ygan.\n\n~{2} ''~{1}''ni sabab qilib ko‘rsatdi
+viewpagelogs|Ushbu sahifaga doir qaydlarni koʻrsat
+nohistory|Ushbu sahifa uchun oʻzgarishlar tarixi mavjud emas.
+currentrev|Hozirgi koʻrinishi
+currentrev-asof|~{1}, ~{2} dagi (joriy) koʻrinishi
+revisionasof|~{1}, ~{2} dagi koʻrinishi
+revision-info|~{3}, ~{4} dagi ~{1} versiyasi
+previousrevision|←Avvalgi koʻrinishi
+nextrevision|Yangiroq koʻrinishi→
+currentrevisionlink|Hozirgi koʻrinishi
+cur|joriy
+next|keyingi
+last|oxirgi
+page_first|birinchi
+page_last|oxirgi
+histlegend|Farqlarni tanlash: solishtirish uchun kerakli radiobokslarni belgilang va '''{{int:compare-submit}}''' tugmasini bosing.<br />\nBu yerda: '''({{int:cur}})''' = hozirgi koʻrinish bilan farqi, '''({{int:last}})''' = avvalgi koʻrinish bilan farqi, '''{{int:minoreditletter}}''' = kichkina tahrir.
+history-fieldset-title|Tarixni koʻrish
+history-show-deleted|Faqat yoʻqotilganlari
+histfirst|eng eski
+histlast|eng yangi
+historysize|({{PLURAL:~{0}\u007C1 bayt\u007C~{0} bayt}})
+historyempty|(boʻsh)
+history-feed-title|Oʻzgarishlar tarixi
+history-feed-description|Vikidagi mazkur sahifaning oʻzgarishlar tarixi
+history-feed-item-nocomment|~{0} ~{1} da
+rev-deleted-comment|(tahrir izohi oʻchirilgan)
+rev-deleted-user|(muallif nomi oʻchirilgan)
+rev-deleted-event|(jurnal tafsilotlari o‘chirildi)
+rev-delundel|koʻrsatish/yashirish
+rev-showdeleted|koʻrsatish
+revdelete-show-file-submit|Ha
+revdelete-confirm|Iltimos, haqiqatdan ham shu harakatni amalga oshirmoqchiligingizni, uning oqibatlarini tushunib turganingizni va harakatingiz [[{{MediaWiki:Policy-url}}\u007Cqoidalarga]] asosanlanganini tasdiqlang.
+revdelete-hide-text|Sahifaning ushbu versiyasi matnini yashirish
+revdelete-radio-same|(o'zgartirilmasin)
+revdelete-radio-set|Ha
+revdelete-radio-unset|Yoʻq
+revdelete-log|Sabab:
+revdel-restore|Ko'rinuvchanlikni o'zgartirish
+revdelete-otherreason|Boshqa/qoʻshimcha sabab:
+revdelete-reasonotherlist|Boshqa sabab
+mergehistory|Tahrirlar tarixlarini birlashtirish
+mergehistory-box|Ikkita sahifa tahrirlari tarixini birlashtirish:
+mergehistory-from|Manba sahifa:
+mergehistory-into|Mo'ljal sahifa:
+mergehistory-list|Birlashtiriladigan tahrirlar tarixi
+mergehistory-go|Birlashtiriladigan tahrirlarni koʻrsatish
+mergehistory-submit|Tahrirlarni birlashtirish
+mergehistory-reason|Sabab:
+mergelog|Birlashtirish qaydlari
+revertmerge|Bo'lish
+history-title|~{0} — oʻzgarishlar tarixi
+difference-title|~{0} — versiyalar orasidagi farq
+difference-title-multipage|"~{0}" va "~{1}" sahifalar orasidagi farq
+difference-multipage|(Sahifalar orasidagi farq)
+lineno|Qator ~{0}:
+compareselectedversions|Solishtirish
+showhideselectedversions|Oʻzgartirish
+editundo|bekor qilish
+searchresults|Qidiruv natijalari
+searchresults-title|"~{0}" uchun qidiruv natijalari
+titlematches|Sahifalar nomlaridagi mos kelishlar
+textmatches|Sahifalar matnlaridagi mos kelishlar
+notextmatches|Bunday matn topilmadi
+prevn-title|Avvalgi ~{0} {{PLURAL:~{0}\u007Cnatija\u007Cnatijalar}}
+nextn-title|Keyingi ~{0} {{PLURAL:~{0}\u007Cnatija\u007Cnatijalar}}
+shown-title|Sahifada ~{0} ta natija koʻrsatish
+viewprevnext|Koʻrish (~{0} {{int:pipe-separator}} ~{1}) (~{2}).
+searchmenu-exists|'''Ushbu vikida "[[:~{0}]]" nomli sahifa mavjud.'''
+searchmenu-new|<strong>'''Ushbu vikida "[[:~{0}]]" sahifasini yarating!</strong> {{PLURAL:~{1}\u007C0=\u007CShuningdek qidiruvingiz orqali topilgan sahifani qarang.\u007CShuningdek topilgan qidiruv natijalarini qarang.}}
+searchprofile-articles|Maqolalar
+searchprofile-images|Multimedia
+searchprofile-everything|Hamma joyda
+searchprofile-advanced|Tanlangan joyda
+searchprofile-articles-tooltip|~{0}da qidirish
+searchprofile-images-tooltip|Fayllarni qidirish
+searchprofile-everything-tooltip|Barcha sahifalardan qidirish (munozara sahifalarinidan ham)
+searchprofile-advanced-tooltip|Belgilangan nomfazolardan qidirish
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 ta soʻz\u007C~{1} ta soʻz}})
+search-result-category-size|~{0} {{PLURAL:~{0}\u007Ca'zo\u007Ca'zolar}} (~{1} {{PLURAL:~{1}\u007Costturkum\u007Costturkumlar}}, ~{2} {{PLURAL:~{2}\u007Cfayl\u007Cfayllar}}).
+search-redirect|(yoʻnaltirish ~{0})
+search-section|(~{0} boʻlimi)
+search-suggest|Balki buni nazarda tutgandirsiz: ~{0}
+search-interwiki-caption|Aloqador loyihalar
+search-interwiki-default|~{0} natijalar:
+search-interwiki-more|(yana)
+search-relatedarticle|Bog'liq
+searchrelated|bogʻlangan
+searchall|barchasi
+showingresults|Quyida №'''~{1}'''dan boshlab {{PLURAL:~{0}\u007C'''bitta''' natija\u007C'''~{0}''' ta natija}} koʻrsatilgan.
+search-nonefound|Talabga javob beradigan natija topilmadi.
+powersearch-legend|Kengaytirilgan qidiruv
+powersearch-ns|Quyidagi nomfazolardan qidir:
+powersearch-togglelabel|Belgilash:
+powersearch-toggleall|Hammasini
+powersearch-togglenone|Hech qaysini
+search-external|Tashqi qidiruv
+preferences|Moslamalar
+mypreferences|Moslamalarim
+prefs-edits|Tahrirlar soni:
+prefsnologintext2|Iltimos, moslamalarni oʻzgartirish uchun tizimga kiring.
+prefs-skin|Tashqi ko‘rinishi
+skin-preview|Ko‘rib chiqish
+datedefault|Farqi yoʻq
+prefs-labs|Tajribaviy imkoniyatlar
+prefs-user-pages|Foydalanuvchi sahifalari
+prefs-personal|Shaxsiy ma’lumotlar
+prefs-rc|Yangi o‘zgarishlar
+prefs-watchlist|Kuzatuv roʻyxati
+prefs-watchlist-days|Kunlar soni:
+prefs-watchlist-days-max|Maksimum ~{0} kun
+prefs-watchlist-edits|Kengaytirilgan kuzatuv roʻyxatingizda koʻrsatiladigan oʻzgarishlar soni:
+prefs-watchlist-edits-max|Maksimum: 1000
+prefs-watchlist-token|Kuzatuv roʻyxatingiz tokeni:
+prefs-misc|Boshqa moslamalar
+prefs-resetpass|Maxfiy soʻzni oʻzgartirish
+prefs-changeemail|Elektron pochta manzilini oʻzgartirish
+prefs-email|Elektron pochta moslamalari
+prefs-rendering|Tashqi ko‘rinishi
+saveprefs|Saqlash
+restoreprefs|Barcha moslamalarni dastlabki holatiga qaytarish
+prefs-editing|Tahrirlash
+rows|Qatorlar soni:
+columns|Ustunlar soni:
+searchresultshead|Qidiruv
+stub-threshold|<a href="#" class="stub">Chala maqolalarga</a> ishorat keltirish uchun pastki chegara:
+stub-threshold-disabled|Oʻchirib qoʻyilgan
+recentchangesdays|Necha kunlik tahrirlar koʻrsatiladi:
+recentchangesdays-max|Maksimum ~{0} kun
+recentchangescount|Sukut boʻyicha koʻrsatiladigan tahrirlar soni:
+prefs-help-recentchangescount|Yangi oʻzgarishlar, sahifalar tarixi va qaydlar uchun
+prefs-help-watchlist-token2|Bu kuzatuv roʻyxatingizning veb-kanali uchun maxfiy kalit kodi.\nBu kodni biladigan har kim sizning kuzatuv roʻyxatingizni koʻrishi mumkin, shuning uchun boshqalarga uni oshkor qilmang. [[Special:ResetTokens\u007CTokenni yangilash]].
+savedprefs|Sizning moslamalaringiz saqlandi
+timezonelegend|Vaqt mintaqangiz:
+localtime|Mahalliy vaqt:
+timezoneuseserverdefault|Server moslamalaridan foydalanish (~{0})
+timezoneuseoffset|Boshqa (siljishni koʻrsating)
+servertime|Server vaqti:
+guesstimezone|Brauzerdan to'ldirish
+timezoneregion-africa|Afrika
+timezoneregion-america|Amerika
+timezoneregion-antarctica|Antarktika
+timezoneregion-arctic|Arktika
+timezoneregion-asia|Osiyo
+timezoneregion-atlantic|Atlantika okeani
+timezoneregion-australia|Avstraliya
+timezoneregion-europe|Yevropa
+timezoneregion-indian|Hind okeani
+timezoneregion-pacific|Tinch okeani
+allowemail|Boshqa foydalanuvchilardan elektron xat olishga ruxsat berish
+prefs-searchoptions|Qidiruv
+prefs-namespaces|Nomfazolar
+default|Sukut boʻyicha
+prefs-files|Fayllar
+prefs-custom-css|Shaxsiy CSS
+prefs-custom-js|Shaxsiy JavaScript
+prefs-common-css-js|Umumiy CSS/JavaScript (barcha tashqi koʻrinishlar uchun):
+prefs-emailconfirm-label|Elektron pochta manzilini tasdiqlash:
+youremail|E-mail:
+username|Foydalanuvchi nomi
+prefs-memberingroups|Qaysi {{PLURAL:~{0}\u007Cguruh\u007Cguruhlar}} aʼzosi:
+prefs-registration|Hisob yaratilgan vaqt:
+yourrealname|Haqiqiy ism *:
+yourlanguage|Til:
+yourvariant|Yozuv turi (lotin/kirill):
+prefs-help-variant|Ushbu vikidagi sahifalar qaysi tilda va yozuvda koʻrsatilishi.
+yournick|Yangi imzo:
+prefs-help-signature|Munozara sahifalarida imzo "<nowiki>~~~~</nowiki>" orqali qoʻyiladi, u sizning imzoingiz va joriy vaqtga aylantiriladi.
+yourgender|Jinsi:
+gender-unknown|Koʻrsatilmagan
+gender-male|Erkak
+gender-female|Ayol
+prefs-help-gender|Koʻrsatilishi majburiy emas: taʼminot xizmatining foydalanuvchi jinsiga qarab yuboradigan ayrim xabarlarida foydalaniladi.\nBu maʼlumot hammaga koʻrsatiladi.
+email|E-mail:
+prefs-help-realname|Haqiqiy ism (majburiy emas).\nAgar keltirsangiz, undan sahifa kim tomonidan tahrirlanganini koʻrsatish uchun foydalaniladi.
+prefs-help-email|Elektron pochta manzilini koʻrsatish majburiy emas, lekin u siz maxfiy soʻzni unutib qoʻysangiz kerak boʻladi.
+prefs-help-email-others|Shuningdek, u boshqa foydalanuvchilarga Siz bilan shaxsiy sahifangiz yoki munozara sahifangizdagi havola orqali bogʻlanish imkonini beradi. Bunda Siz bilan bogʻlanmoqchi boʻlgan foydalanuvchiga pochta manzilingiz koʻrsatilmaydi.
+prefs-help-email-required|E-mail manzilni koʻrsatish shart emas
+prefs-info|Asosiy maʼlumot
+prefs-i18n|Baynalmilallashtirish
+prefs-signature|Imzo
+prefs-dateformat|Sana formati
+prefs-timeoffset|Vaqt farqi
+prefs-advancedediting|Qoʻshimcha moslamalar
+prefs-advancedrc|Qoʻshimcha moslamalar
+prefs-advancedrendering|Qoʻshimcha moslamalar
+prefs-advancedsearchoptions|Qoʻshimcha moslamalar
+prefs-advancedwatchlist|Qoʻshimcha moslamalar
+prefs-displayrc|Tasvirlash moslamalari
+prefs-displaywatchlist|Tasvirlash moslamalari
+prefs-diffs|Versiyalar farqi
+userrights|Foydalanuvchining huquqlarini boshqarish
+userrights-user-editname|Foydalanuvchi nomi:
+editusergroup|Guruhlardagi aʼzoligini oʻzgartirish
+userrights-groupsmember|Aʼzolik:
+userrights-groupsmember-auto|Quyidagi guruhlarga kiradi:
+userrights-reason|Sabab:
+userrights-changeable-col|Siz o'zgartirishingiz mumkin bo'lgan guruhlar
+userrights-unchangeable-col|Siz o'zgartira olmaydigan guruhlar
+group|Guruh
+group-user|Foydalanuvchilar
+group-autoconfirmed|Tasdiqlangan foydalanuvchilar
+group-bot|Botlar
+group-sysop|Administratorlar
+group-bureaucrat|Rasmiyatchilar
+group-suppress|Tekshiruvchilar
+group-all|(hamma)
+group-user-member|{{GENDER:~{0}\u007Cfoydalanuvchi}}
+group-autoconfirmed-member|{{GENDER:~{0}\u007Cavtotasdiqlangan foydalanuvchi}}
+group-bot-member|{{GENDER:~{0}\u007Cbot}}
+group-sysop-member|{{GENDER:~{0}\u007Cadministrator}}
+group-bureaucrat-member|{{GENDER:~{0}\u007Crasmiyatchi}}
+group-suppress-member|{{GENDER:~{0}\u007Ctekshiruvchi}}
+grouppage-user|{{ns:project}}:Foydalanuvchilar
+grouppage-autoconfirmed|{{ns:project}}:Tasdiqlangan foydalanuvchilar
+grouppage-bot|{{ns:project}}:Botlar
+grouppage-sysop|{{ns:project}}:Administratorlar
+grouppage-bureaucrat|{{ns:project}}:Rasmiyatchilar
+grouppage-suppress|{{ns:project}}:Tekshiruvchilar
+right-read|Sahifalarni o'qish
+right-edit|Sahifalarni tahrirlash
+newuserlogpage|Foydalanuvchilarni roʻyxatga olish qaydlari
+newuserlogpagetext|Yaqinda roʻyxatdan oʻtgan foydalanuvchilar roʻyxati
+rightslog|Foydalanuvchi huquqlari koʻrsatilgan qaydlar
+rightslogtext|Foydalanuvchi huquqlarini oʻzgartirish qaydlari.
+action-edit|ushbu sahifani tahrirlash
+action-move|bu sahifani koʻchirish
+action-move-subpages|Bu sahifani va uning ostsahifalarini koʻchirish
+action-deletedhistory|ushbu sahifaning oʻchirilgan tarixini koʻrish
+action-sendemail|elektron xatlar jo'natish
+nchanges|~{0} {{PLURAL:~{0}\u007Coʻzgarish\u007Coʻzgarishlar}}
+enhancedrc-history|tarix
+recentchanges|Yangi oʻzgarishlar
+recentchanges-legend|Yangi oʻzgarishlar moslamalari
+recentchanges-summary|Bu sahifada siz {{SITENAME}}da sodir boʻlgan soʻnggi oʻzgarishlarni koʻrishingiz mumkin.
+recentchanges-noresult|Koʻrsatilgan muddatga va shartlarga oid oʻzgarishlar topilmadi.
+recentchanges-feed-description|Vikida mazkur oqimdagi oxirgi oʻzgarishlarni kuzatish
+recentchanges-label-newpage|Bu tahrir orqali yangi sahifa yaratilgan
+recentchanges-label-minor|Bu tahrir kichik deb belgilangan
+recentchanges-label-bot|Bu tahrirni bot bajargan
+recentchanges-label-unpatrolled|Bu tahrir hali tekshirilmagan
+recentchanges-label-plusminus|Sahifa vazni qanchaga oʻzgargani (bayt)
+recentchanges-legend-heading|'''Izoh:'''
+recentchanges-legend-newpage|{{int:recentchanges-label-newpage}} ([[Special:NewPages\u007Calohida roʻyxat]])
+rcnotefrom|Quyida <strong>~{2}, ~{3}</strong> dan keyin sodir boʻlgan oʻzgarishlar koʻrsatilgan (oxirgi <strong>~{0}</strong> tasi).
+rclistfrom|~{2}, ~{1} dan keyin sodir boʻlgan oʻzgarishlarni koʻrsat
+rcshowhideminor|Kichik tahrirlarni ~{0}
+rcshowhideminor-show|koʻrsat
+rcshowhideminor-hide|yashir
+rcshowhidebots|Botlarni ~{0}
+rcshowhidebots-show|koʻrsat
+rcshowhidebots-hide|yashir
+rcshowhideliu|Roʻyxatdan oʻtgan foydalanuvchilarni ~{0}
+rcshowhideliu-show|koʻrsat
+rcshowhideliu-hide|yashir
+rcshowhideanons|Anonim foydalanuvchilarni ~{0}
+rcshowhideanons-show|koʻrsat
+rcshowhideanons-hide|yashir
+rcshowhidepatr|Tekshirilgan tahrirlarni ~{0}
+rcshowhidepatr-hide|yashir
+rcshowhidemine|Oʻz tahrirlarimni ~{0}
+rcshowhidemine-show|koʻrsat
+rcshowhidemine-hide|yashir
+rclinks|Oxirgi ~{1} kun ichida sodir boʻlgan ~{0} ta oʻzgarish koʻrsatildi<br />~{2}
+diff|farq
+hist|tarix
+hide|yashir
+show|koʻrsat
+minoreditletter|k
+newpageletter|Y
+boteditletter|b
+newsectionsummary|/* ~{0} */ yangi mavzu
+rc-enhanced-expand|Tasfilotlarni koʻrsatish (JavaScript talab qilinadi)
+rc-enhanced-hide|Tafsilotlolarni yashirish
+rc-old-title|dastlab "~{0}" sifatida yaratilgan
+recentchangeslinked|Bogʻlangan oʻzgarishlar
+recentchangeslinked-feed|Bogʻliq oʻzgarishlar
+recentchangeslinked-toolbox|Bogʻliq oʻzgarishlar
+recentchangeslinked-title|"~{0}"ga aloqador oʻzgarishlar
+recentchangeslinked-summary|Ushbu maxsus sahifa unga bogʻlangan sahifalardagi soʻnggi oʻzgarishlarni koʻrsatadi. [[Special:Watchlist\u007CKuzatuv roʻyxatingizdagi]] sahifalar '''qalin''' qilib koʻrsatilgan.
+recentchangeslinked-page|Sahifa nomi:
+recentchangeslinked-to|Koʻrsatilgan sahifaga bogʻlangan sahifalardagi oʻzgarishlarni koʻrish
+upload|Fayl yuklash
+uploadbtn|Fayl yuklash
+uploaderror|Yuklashda xatolik
+upload-recreate-warning|<strong>Diqqat: bunday nomli fayl avval yoʻqotilgan yoki koʻchirilgan.</strong>\n\nQuyida bu sahifaga oid yoʻqotish va koʻchirish qaydlari keltirilgan:
+upload-permitted|Yuklash mumkin fayl turlari: ~{0}.
+uploadlogpage|Yuklash qaydlari
+filename|Fayl nomi
+filedesc|Qisqa izoh
+fileuploadsummary|Qisqa izoh:
+filereuploadsummary|Fayldagi oʻzgarishlar:
+filestatus|Tarqatish shartlari:
+filesource|Manba:
+ignorewarnings|Ogohlantirishlarga eʼtibor qilma
+upload-source|Yuklanayotgan fayl
+sourcefilename|Fayl nomi:
+destfilename|Fayl nomi:
+upload-maxfilesize|Faylning maksimal oʻlchami: ~{0}
+upload-description|Fayl tavsifi
+upload-options|Yuklash moslamalari
+watchthisupload|Bu faylni kuzatish
+license|Litsenziyalash:
+license-header|Litsenziyalash
+upload_source_file|(kompyuteringizdagi fayl)
+listfiles-summary|Ushbu maxsus sahifada barcha yuklangan fayllar koʻrsatilgan.
+imgfile|fayl
+listfiles|Fayllar roʻyxati
+listfiles_thumb|Miniatura
+listfiles_date|Sana
+listfiles_name|Nomi
+listfiles_user|Foydalanuvchi
+listfiles_size|Oʻlchami
+listfiles_description|Taʼrif
+listfiles_count|Versiyalar
+listfiles-latestversion-yes|Ha
+listfiles-latestversion-no|Yoʻq
+file-anchor-link|Fayl
+filehist|Fayl tarixi
+filehist-help|Faylning biror paytdagi holatini koʻrish uchun tegishli sana/vaqtga bosingiz.
+filehist-deleteall|barchasini oʻchirish
+filehist-deleteone|o‘chirish
+filehist-revert|qaytarish
+filehist-current|joriy
+filehist-datetime|Sana/Vaqt
+filehist-thumb|Miniatura
+filehist-thumbtext|~{0} dagi versiya uchun tasvir
+filehist-nothumb|Miniatyurasi yoʻq
+filehist-user|Foydalanuvchi
+filehist-dimensions|Oʻlchamlari
+filehist-filesize|Fayl hajmi
+filehist-comment|Izoh
+imagelinks|Fayllarga ishoratlar
+linkstoimage|Bu faylga quyidagi {{PLURAL:~{0}\u007Csahifa\u007C~{0} sahifalar}} bogʻlangan:
+nolinkstoimage|Bu faylga bogʻlangan sahifalar yoʻq.
+sharedupload|Ushbu fayl ~{0}ga yuklangan, shuning uchun boshqa loyihalarda ham qoʻllanilishi mumkin.
+sharedupload-desc-there|Ushbu fayl ~{0}ga yuklangan boʻlib, boshqa loyihalarda ham qoʻllanilishi mumkin.\nQoʻshimcha maʼlumotlarni uning [~{1} tavsif sahifasidan] topishingiz mumkin.
+sharedupload-desc-here|Ushbu fayl ~{0}ga yuklangan boʻlib, boshqa loyihalarda ham qoʻllanilishi mumkin.\nUning [~{1} tavsif sahifasidan] olingan maʼlumot quyida keltirilgan.
+sharedupload-desc-edit|Ushbu fayl ~{0}ga yuklangan boʻlib, boshqa loyihalarda ham qoʻllanilishi mumkin.\nUning tavsifini [~{1} mos sahifada] oʻzgartirishingiz mumkin.
+sharedupload-desc-create|Ushbu fayl ~{0}ga yuklangan boʻlib, boshqa loyihalarda ham qoʻllanilishi mumkin.\nUning tavsifini [~{1} mos sahifada] tahrirlashingiz mumkin.
+uploadnewversion-linktext|Bu faylning yangi versiyasini yuklash
+shared-repo-from|~{0}dan
+shared-repo|umumiy fayllar saqlanadigan joy
+shared-repo-name-wikimediacommons|Vikiombor
+filerevert-comment|Sabab:
+filedelete|~{0} — oʻchirish
+filedelete-intro|Siz ushbu faylni — <strong>[[Media:~{0}\u007C~{0}]]</strong> va uning tarixini butunlay oʻchirib tashlamoqchi boʻlyapsiz.
+filedelete-comment|Sabab:
+filedelete-submit|O‘chirish
+filedelete-reason-dropdown|* Umumiy sabablar\n** mualliflik huquqlari buzilyapti\n** mavjud faylning nusxasi
+mimetype|MIME-tur:
+download|yuklash
+unusedtemplates|Ishlatilinmagan andozalar
+randompage|Tasodifiy sahifa
+statistics-header-edits|Tahrirlar statistikasi
+statistics-header-users|Foydalanuvchilar statistikasi
+statistics-files|Yuklangan fayllar
+statistics-edits|{{SITENAME}}dagi tahrirlarning umumiy soni
+statistics-edits-average|Oʻrtacha tahrirlar soni (sahifa boshiga)
+statistics-users|Qayd etilgan [[Special:ListUsers\u007Cfoydalanuvchilar]]
+statistics-users-active|Faol foydalanuvchilar
+statistics-users-active-desc|Oxirgi ~{0} kun ichida kamida bitta amal qilgan foydalanuvchilar
+pageswithprop-prop|Xossa nomi:
+pageswithprop-submit|Oʻtish
+nbytes|~{0} {{PLURAL:~{0}\u007Cbayt}}
+ncategories|~{0} {{PLURAL:~{0}\u007Cturkum\u007Cturkumlar}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cta a'zo}}
+lonelypages|Yetim sahifalar
+uncategorizedpages|Turkumlashtirilmagan sahifalar
+uncategorizedcategories|Turkumlashtirilmagan turkumlar
+uncategorizedimages|Turkumlashtirilmagan fayllar
+uncategorizedtemplates|Turkumlashtirilmagan andozalar
+unusedcategories|Ishlatilmayotgan turkumlar
+unusedimages|Ishlatilinmagan fayllar
+wantedcategories|Talab qilinayotgan turkumlar
+mostcategories|Eng koʻp turkumli sahifalar
+prefixindex|Prefiksli barcha sahifalar
+protectedpages|Himoyalangan sahifalar
+listusers|Foydalanuvchilar roʻyxati
+usercreated|~{0}, ~{1} da {{GENDER:~{2}\u007Croʻyxatdan oʻtgan}}
+newpages|Yangi sahifalar
+move|Ko‘chirish
+movethispage|Bu sahifani koʻchirish
+pager-newer-n|{{PLURAL:~{0}\u007Cyangiroq 1\u007Cyangiroq ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Ceskiroq 1\u007Ceskiroq ~{0}}}
+suppress|Bekitish
+booksources|Kitob manbalari
+booksources-search-legend|Kitob haqida ma'lumot qidirish
+specialloguserlabel|Ijrochi:
+speciallogtitlelabel|Moʻljal:
+log|Qaydlar
+all-logs-page|Barcha ochiq qaydlar
+alllogstext|{{SITENAME}}dagi barcha jurnallar roʻyxati.\nNatijalarni jurnal nomi, foydalanuvchi nomi (harflar katta-kichikligi inobatga olinadi) yoki sahifa nomi boʻyicha saralashingiz mumkin.\n* Biror foydalanuvchi amalga oshirgan qaydni topish uchun uning foydalanuvchi nomini „Ijrochi“ oynasiga kiriting.\n* Biror foydalanuvchi yoki sahifaga nisbatan amalga oshirilgan qaydni topish uchun ulardan birining nomini „Moʻljal“ oynasiga kiriting.
+logempty|Talabga mos yozuvlar mavjud emas.
+log-title-wildcard|Shu matndan boshlanuvchi sarlavhalarni izlash
+showhideselectedlogentries|Tanlangan jurnal yozuvini oʻzgartirish
+allpagesfrom|Quyidagidan boshlanuvchi sahifalarni koʻrsatish:
+allarticles|Barcha sahifalar
+allpagessubmit|Oʻtish
+allpagesprefix|Shunday prefiksli sahifalarni koʻrsatish:
+allpages-hide-redirects|Yoʻnaltirishlarni yashirish
+cachedspecial-refresh-now|Oxirgi versiyasini koʻrish
+categoriespagetext|Quyidagi {{PLURAL:~{0}\u007Cturkumda\u007Cturkumlarda}} sahifa yoki media-fayllar mavjud.\n[[Special:UnusedCategories\u007CIshlatilmayotgan turkumlar]] bu yerda koʻrsatilmaydi.\nShuningdek qarang: [[Special:WantedCategories\u007Ctalab qilinayotgan turkumlar]].
+categoriesfrom|Quyidagidan boshlanuvchi turkumlarni koʻrsatish:
+special-categories-sort-count|miqdori bo‘yicha saralash
+special-categories-sort-abc|alifbo bo‘yicha saralash
+deletedcontributions|Foydalanuvchining o‘chirilgan hissasi
+deletedcontributions-title|O‘chirilgan foydalanuvchilar hissalari
+sp-deletedcontributions-contribs|hissa
+linksearch|Tashqi havolalarni qidirish
+linksearch-pat|Qidiruv uchun andaza
+linksearch-ns|Nomfazo:
+linksearch-ok|Qidirish
+linksearch-line|~{1} ichidan ~{0} ga havola
+listusersfrom|Quyidagidan boshlanuvchi foydalanuvchilarni koʻrsatish:
+listusers-submit|Koʻrsatish
+listusers-noresult|Foydalanuvchilar topilmadi.
+listusers-blocked|(chetlashtirilgan)
+activeusers|Faol foydalanuvchilar roʻyxati
+activeusers-from|Quyidagidan boshlanuvchi foydalanuvchilarni koʻrsatish:
+activeusers-hidebots|Botlarni yashirish
+activeusers-hidesysops|Maʼmurlarni yashirish
+activeusers-noresult|Foydalanuvchilar topilmadi.
+listgrouprights|Foydalanuvchilar guruhlari roʻyxati
+listgrouprights-summary|Har bir viki-loyihada boʻlgani kabi, Oʻzbekcha Vikipediyada ham foydalanuvchilar bir nechta guruhlarga boʻlingan boʻlib, quyida ularning roʻyxati va tegishli huquqlari keltirilgan. Alohida huquqlar haqida [[{{MediaWiki:Listgrouprights-helppage}}\u007Cqoʻshimcha maʼlumotlar]] boʻlishi mumkin.
+listgrouprights-key|Izohlar:\n* <span class="listgrouprights-granted">Amaldagi huquqlar</span>\n* <span class="listgrouprights-revoked">Bekor qilingan huquqlar</span>
+listgrouprights-group|Guruh
+listgrouprights-rights|Huquqlar
+listgrouprights-helppage|Help:Guruhlar huquqlari
+listgrouprights-members|(a’zolar ro‘yxati)
+emailuser|Foydalanuvchiga maktub
+emailuser-title-target|Ushbu {{GENDER:~{0}\u007Cfoydalanuvchi}}ga maktub joʻnatish
+emailuser-title-notarget|Foydalanuvchiga elektron maktub yozish
+emailpage|Foydalanuvchiga maktub
+defemailsubject|{{SITENAME}} — ~{0} tomonidan maktub
+usermaildisabled|Foydalanuvchi elektron pochtasi o‘chirilgan
+noemailtitle|Elektron pochta manzili mavjud emas
+noemailtext|Bu foydalanuvchi e-mail manzil koʻrsatgani yoʻq.
+emailtarget|Oluvchi ishtirokchining ismini kiriting
+emailusername|Foydalanuvchi nomi:
+emailusernamesubmit|Jo'natish
+email-legend|Boshqa {{SITENAME}} ishtirokchisiga xat jo'natish
+emailfrom|Kimdan:
+emailto|Kimga:
+emailsubject|Sarlavha:
+emailmessage|Xabar
+emailsend|Joʻnatish
+emailccme|Maktub nusxasi mening elektron pochtamga joʻnatilsin
+emailccsubject|~{0}ga maktubingizning nusxasi: ~{1}
+emailsent|Xat jo'natildi
+emailsenttext|Sizning elektron maktubingiz jo'natildi.
+usermessage-summary|Tizimli xabar qoldirish.
+usermessage-editor|Tizimli etkazish
+watchlist|Kuzatuv roʻyxatim
+mywatchlist|Kuzatuv roʻyxatim
+watchlistfor2|~{0} uchun ~{1}
+nowatchlist|Kuzatuv roʻyxatingizda hech nima yoʻq.
+watchnologin|Siz tizimda o'zingizni tanishtirmadingiz
+addwatch|Kuzatuv ro'yxatiga qo'shish
+addedwatchtext|"[[:~{0}]]" sahifasi sizning [[Special:Watchlist\u007Ckuzatuv roʻyxatingizga]] qoʻshildi. Bu sahifada va uning munozara sahifasida boʻladigan oʻzgarishlar u yerda koʻrsatiladi.
+removewatch|Kuzatuv roʻyxatidan oʻchirish
+removedwatchtext|"[[:~{0}]]" sahifasi [[Special:Watchlist\u007Ckuzatuv roʻyxatingizdan]] oʻchirildi.
+watch|Kuzatish
+watchthispage|Sahifani kuzatish
+unwatch|Kuzatmaslik
+unwatchthispage|Kuzatuvni to'xtatish
+notanarticle|Maqola emas
+watchlist-details|Sizning kuzatuv roʻyxatingizda hozirda {{PLURAL:~{0}\u007Cbitta sahifa\u007C~{0}ta sahifa}} mavjud (munozara sahifalarini hisobga olmaganda).
+wlheader-showupdated|Siz oxirgi marta kirganingizdan keyin oʻzgartirilgan sahifalar '''qalin''' yozuv bilan ajratib koʻrsatilgan.
+wlnote|Quyida oxirgi ~{1} soat ichida sodir boʻlgan {{PLURAL:~{0}\u007Coxirgi oʻzgarish\u007C<strong>~{0}</strong> ta oʻzgarishlar}} koʻrsatilgan. ~{2}, ~{3}.
+wlshowlast|Oxirgi ~{0} soatdagi ~{1} kundagi tahrirlarni koʻrsatish
+watchlist-options|Kuzatuv roʻyxati moslamalari
+watching|Kuzatish...
+unwatching|Kuzatuv roʻyxatidan oʻchirilmoqda...
+enotif_reset|Hammasini koʻrib chiqilgan deb belgilash
+enotif_impersonal_salutation|{{SITENAME}} ishtirokchisi
+enotif_subject_deleted|{{SITENAME}} loyihasining ~{0} nomli sahifasi foydalanuvchi {{gender:~{1}\u007C~{1}}} tomonidan o‘chirildi
+enotif_subject_created|{{SITENAME}} loyihasining ~{0} nomli sahifasi foydalanuvchi {{gender:~{1}\u007C~{1}}} tomonidan yaratildi
+enotif_subject_moved|{{SITENAME}} loyihasining ~{0} nomli sahifasi foydalanuvchi {{gender:~{1}\u007C~{1}}} tomonidan qayta nomlandi
+enotif_subject_restored|{{SITENAME}} loyihasining ~{0} nomli sahifasi foydalanuvchi {{gender:~{1}\u007C~{1}}} tomonidan tiklandi
+enotif_subject_changed|{{SITENAME}} loyihasining ~{0} nomli sahifasi foydalanuvchi {{gender:~{1}\u007C~{1}}} tomonidan oʻzgartirildi
+enotif_body_intro_deleted|{{SITENAME}} loyihasining ~{0} nomli sahifasi $PAGEEDITDATEda foydalanuvchi {{gender:~{1}\u007C~{1}}} tomonidan o‘chirildi, qarang: ~{2}.
+enotif_body_intro_created|{{SITENAME}} loyihasining ~{0} nomli sahifasi $PAGEEDITDATEda foydalanuvchi {{gender:~{1}\u007C~{1}}} tomonidan yaratildi, joriy variantini ko‘rish uchun ~{2} ga qarang.
+enotif_body_intro_moved|{{SITENAME}} loyihasining ~{0} nomli sahifasi $PAGEEDITDATEda foydalanuvchi {{gender:~{1}\u007C~{1}}} tomonidan qayta nomlandi, joriy variantini ko‘rish uchun ~{2} ga qarang.
+enotif_body_intro_restored|{{SITENAME}} loyihasining ~{0} nomli sahifasi $PAGEEDITDATEda foydalanuvchi {{gender:~{1}\u007C~{1}}} tomonidan tiklandi, joriy variantini ko‘rish uchun ~{2} ga qarang.
+enotif_body_intro_changed|{{SITENAME}} loyihasining ~{0} nomli sahifasi $PAGEEDITDATEda foydalanuvchi {{gender:~{1}\u007C~{1}}} tomonidan o‘zgartirildi, joriy variantini ko‘rish uchun ~{2} ga qarang.
+enotif_lastvisited|Oxirgi tashrifingizdan keyin sodir boʻlgan barcha oʻzgarishlarni koʻrish uchun ~{0} ga qarang.
+enotif_lastdiff|Oʻzgarishlar bilan tanishish uchun ~{0} ga qarang.
+enotif_anon_editor|anonim foydalanuvchi ~{0}
+enotif_body|Hurmatli $WATCHINGUSERNAME,\n\n$PAGEINTRO $NEWPAGE\n\nO‘zgarish bo‘yicha qisqacha izoh: $PAGESUMMARY $PAGEMINOREDIT\n\nTahrirlovchiga murojaat qilish:\nel. pochta: $PAGEEDITOR_EMAIL\nviki: $PAGEEDITOR_WIKI\n\nAgar siz sahifaga o‘tib ko‘rmasangiz, u holda uning keyingi o‘zgarishlari bo‘yicha boshqa bildirish xabarlari kelmaydi. Siz, shuningdek o‘z kuzatuv ro‘yxatingizda barcha sahifalar uchun xabar berish moslamasini o‘chirishingiz mumkin.\n\n{{SITENAME}}ning xabar berish tizimi\n\n--\nXabar berish moslamalarini o‘zgartirish uchun quyidagi havola bo‘yicha o‘ting\n{{canonicalurl:{{#special:Preferences}}}}\n\nOʻz kuzatuv roʻyxatingiz moslamalarini o‘zgartirish uchun quyidagi havola bo‘yicha o‘ting\n{{canonicalurl:{{#special:EditWatchlist}}}}\n\nOʻz kuzatuv roʻyxatingizdan sahifani o‘chirish uchun quyidagi havola bo‘yicha o‘ting\n$UNWATCHURL\n\nQayta aloqa va yordam\n$HELPPAGE
+created|yaratildi
+changed|o‘zgartirildi
+deletepage|Sahifani oʻchirish
+confirm|Tasdiqlash
+excontent|tarkibi: „~{0}“
+excontentauthor|tarkibi: „~{0}“ (faqat bitta muallifi bor edi: „[[Special:Contributions/~{1}\u007C~{1}]]“)
+exbeforeblank|tozalashdan oldingi tarkibi: „~{0}“
+delete-confirm|~{0} — oʻchirish
+delete-legend|Sahifani o‘chirish
+historywarning|<strong>Diqqat:</strong> Siz oʻchirmoqchi boʻlayotgan sahifaning tarixida ~{0} ta {{PLURAL:~{0}\u007Cversiyasi}} bor:
+confirmdeletetext|Siz ushbu sahifani va uning tarixini butunlay oʻchirib tashlamoqchi boʻlyapsiz. Iltimos, [[Special:Whatlinkshere/{{FULLPAGENAMEE}}\u007Cbogʻlangan sahifalar]] bilan tanishib chiqishni unutmang.
+actioncomplete|Bajarildi
+actionfailed|Jarayon amalga oshmadi
+deletedtext|"~{0}" yoʻqotildi.\nYaqinda sodir etilgan yoʻqotishlar uchun ~{1}ni koʻring.
+dellogpage|Yoʻqotish qaydlari
+dellogpagetext|Quyida oxirgi yoʻqotish qaydlari keltirilgan
+deletionlog|yoʻqotish qaydlari
+reverted|Eski holiga keltirildi
+deletecomment|Sababi:
+deleteotherreason|Boshqa/qoʻshimcha sabab:
+deletereasonotherlist|Boshqa sabab
+delete-edit-reasonlist|Sabablar roʻyxatini tahrirlash
+deleting-backlinks-warning|'''Ogohlantirish:''' [[Special:WhatLinksHere/{{FULLPAGENAME}}\u007CBaʼzi bir sahifalar]] siz oʻchirmoqchi boʻlayotgan sahifaga bogʻlangan.
+rollback|Oʻzgarishlarni ortga qaytarish
+rollbacklink|qaytarish
+rollbacklinkcount|~{0} {{PLURAL:~{0}\u007Ctahrirni}} qaytarish
+rollbacklinkcount-morethan|~{0} tadan koʻp {{PLURAL:~{0}\u007Ctahrirni}} qaytarish
+rollbackfailed|Eski holiga keltirishda xatolik
+revertpage|[[Special:Contributions/~{1}\u007C~{1}]] tahrirlari [[User:~{0}\u007C~{0}]] versiyasiga qaytarildi
+sessionfailure-title|Seansda xatolik
+protectlogpage|Himoyalash qaydlari
+protectedarticle|"[[~{0}]]" sahifasi himoyalandi
+modifiedarticleprotection|"[[~{0}]]" sahifasining himoya darajasini oʻzgartirdi
+movedarticleprotection|himoyalash moslamalarini "[[~{1}]]"dan "[[~{0}]]"ga o'tkazdi
+protect-title|"~{0}" uchun himoya darajasini oʻrnatish
+protect-legend|Himoya oʻrnatish
+protectcomment|Sabab:
+protectexpiry|Muddati:
+protect-unchain-permissions|Qoʻshimcha moslamalarni yoqish
+protect-text|Bu yerda siz <strong>~{0}</strong> sahifasining himoya darajasini koʻrishingiz va oʻzgartishingiz mumkin.
+protect-default|Barcha foydalanuvchilar
+protect-level-autoconfirmed|Faqat roʻyxatdan oʻtgan foydalanuvchilar
+protect-level-sysop|Faqat administratorlar
+protect-summary-cascade|pog‘onali
+protect-expiring-local|~{0}da tugaydi
+protect-expiry-indefinite|muddatsiz
+protect-cascade|Ushbu sahifaga bogʻlangan sahifalarni ham himoyalash (pogʻonali himoya)
+protect-othertime|Boshqa muddat:
+protect-othertime-op|boshqa muddat
+protect-existing-expiry|Joriy tugash vaqti: ~{1}, ~{2}
+protect-otherreason|Boshqa/qo‘shimcha sabab
+protect-otherreason-op|Boshqa sabab
+protect-edit-reasonlist|Sabablar roʻyxatini tahrirlash
+protect-expiry-options|1 soat:1 hours,1 kun:1 day,1 hafta:1 week,2 hafta:2 weeks,1 oy:1 month,3 oy:3 months,6 oy:6 months,1 yil:1 year,cheksiz:infinite
+restriction-type|Huquqlar:
+restriction-level|Ruxsat etilganlik darajasi:
+minimum-size|Eng kichik hajm
+maximum-size|Eng katta hajm:
+pagesize|(bayt)
+restriction-edit|Tahrirlash
+restriction-move|Koʻchirish
+restriction-create|Yaratish
+restriction-upload|Yuklash
+restriction-level-sysop|to'liq himoya
+restriction-level-autoconfirmed|qisman himoya
+restriction-level-all|barcha darajalar
+undelete|Oʻchirilgan sahifalarni koʻrish
+undeletepage|Oʻchirilgan sahifalarni koʻrish va tiklash
+viewdeletedpage|Oʻchirilgan sahifalarni koʻrish
+undelete-nodiff|Oldingi versiya topilmadi.
+undeletebtn|Tiklash
+undeletelink|ko‘rib chiqish/tiklash
+undeleteviewlink|koʻrib chiqish
+undeleteinvert|Tanlash tartibini almashtirish
+undeletecomment|Sababi:
+undelete-search-title|O'chirilgan sahifalarni qidirish
+undelete-search-box|O'chirilgan sahifalarni qidirish
+undelete-search-prefix|Bundan boshlangan sahifalarni koʻrsatish:
+undelete-search-submit|Qidirish
+undelete-show-file-submit|Ha
+namespace|Nomfazo:
+invert|Tanlash tartibini almashtirish
+namespace_association|Bogʻliq nomfazo
+contributions|{{GENDER:~{0}\u007CFoydalanuvchi}} hissasi
+contributions-title|{{GENDER:~{0}\u007CFoydalanuvchi}} ~{0} hissasi
+mycontris|Hissam
+contribsub2|~{0} uchun (~{1})
+nocontribs|Belgilangan shartlarga muvofiq oʻzgarishlar topilmadi.
+uctop|(joriy)
+month|Oydan (va avvalroq)
+year|Yildan (va avvalroq)
+sp-contributions-newbies|Faqatgina yangi foydalanuvchilarning hissalarini koʻrsat
+sp-contributions-newbies-sub|Yangi hisob yozuvlaridan
+sp-contributions-newbies-title|Yangi hisob yozuvlarining hissalari
+sp-contributions-blocklog|chetlatishlar
+sp-contributions-deleted|yoʻqotilgan tahrirlar
+sp-contributions-uploads|yuklamalar
+sp-contributions-logs|qaydlar
+sp-contributions-talk|munozara
+sp-contributions-userrights|foydalanuvchining huquqlarini boshqarish
+sp-contributions-blocked-notice|Ushbu foydalanuvchi hozirda tahrirlashdan chetlatilgan. Quyida chetlatish qaydlaridan soʻnggi yozuv keltirilgan:
+sp-contributions-search|Hissalarni qidirish
+sp-contributions-username|IP-manzil yoki foydalanuvchi nomi:
+sp-contributions-toponly|Faqat oxirgi deb hisoblangan tahrirlarni koʻrsat
+sp-contributions-submit|Qidirish
+whatlinkshere|Bu sahifaga bog'langan sahifalar
+whatlinkshere-title|"~{0}"ga bogʻlangan sahifalar
+whatlinkshere-page|Sahifa:
+linkshere|Quyidagi sahifalar '''[[:~{0}]]''' sahifasiga bogʻlangan:
+nolinkshere|'''[[:~{0}]]''' sahifasiga hech qaysi sahifa bog‘lanmagan.
+nolinkshere-ns|Tanlangan nomfazoda '''[[:~{0}]]'''ga bog‘langan sahifalar mavjud emas.
+isredirect|yoʻnaltiruvchi sahifa
+istemplate|qoʻshimcha
+isimage|faylli havola
+whatlinkshere-prev|{{PLURAL:~{0}\u007Coldingi}} ~{0}
+whatlinkshere-next|{{PLURAL:~{0}\u007Ckeyingi}} ~{0}
+whatlinkshere-links|← ishoratlar
+whatlinkshere-hideredirs|qayta yoʻnaltirishlarni ~{0}
+whatlinkshere-hidetrans|kiritmalarni ~{0}
+whatlinkshere-hidelinks|havolalarni ~{0}
+whatlinkshere-hideimages|faylga havolalarini ~{0}
+whatlinkshere-filters|Filtrlar
+autoblockid|Avtochetlashtirish #~{0}
+block|Foydalanuvchini chetlashtirish
+unblock|Foydalanuvchiga yo'l ochish
+blockip|{{GENDER:~{0}\u007CFoydalanuvchini}} chetlashtirish
+blockip-legend|Foydalanuvchini chetlashtirish
+ipaddressorusername|IP-manzil yoki foydalanuvchi nomi:
+ipbexpiry|Tugash muddati:
+ipbreason|Sabab:
+ipbreason-dropdown|* Chetlashtirishning odatiy sabablari\n** Yolgʻon maʼlumot kiritish\n** Sahifa matnini toʻliq oʻchirish\n** Tashqi saytlarga spam-havolalar\n** Maʼnosiz matn/axlat qoʻshish\n** Foydalanuvchilarga tahdid qilish, ularni taʼqib qilish\n** Bir nechta hisob yozuvlaridan oʻz manfaatlarida foydalanish\n** Nomaqbul foydalanuvchi nomi
+ipbsubmit|Ushbu foydalanuvchini chetlashtirish
+ipbother|Boshqa muddat:
+ipboptions|2 soat:2 hours,1 kun:1 day,3 kun:3 days,1 hafta:1 week,2 hafta:2 weeks,1 oy:1 month,3 oy:3 months,6 oy:6 months,1 yil:1 year,cheksiz:infinite
+ipb-edit-dropdown|Sabablar ro‘yxatini tahrirlash
+ipb-unblock-addr|~{0}dan toʻsiqni olish
+unblockip|Foydalanuvchidan to‘siqni olib tashlash
+ipusubmit|Ushbu chetlashtirishni olib tashlash
+unblocked|[[User:~{0}\u007C~{0}]]dan to‘siq olib tashlandi
+unblocked-range|~{0}dan to‘siq olib tashlandi
+blocklist|Chetlashtirilgan foydalanuvchilar
+ipblocklist|Chetlashtirilgan foydalanuvchilar
+blocklist-timestamp|Sana/vaqt
+blocklist-target|Maqsad
+blocklist-expiry|Tugaydi
+blocklist-by|Chetlashtirgan maʻmur
+blocklist-params|Chetlashtirish moslamalari
+blocklist-reason|Sabab
+ipblocklist-submit|Qidiruv
+ipblocklist-localblock|Mahalliy chetlashtirish
+ipblocklist-otherblocks|Boshqa {{PLURAL:~{0}\u007Cchetlashtirishlar}}
+infiniteblock|muddatsiz
+expiringblock|~{0}, ~{1} da tugaydi
+anononlyblock|faqat anonimlar
+noautoblockblock|avtochetlashtirish o‘chirilgan
+createaccountblock|hisob yozuvi yaratish taqiqlangan
+emailblock|xatlar jo'natish taqiqlandi
+blocklist-nousertalk|o‘zining munozara sahifasini tahrirlay olmaydi
+ipblocklist-empty|Toʻsiqlar roʻyxati boʻsh.
+blocklink|chetlashtirish
+unblocklink|toʻsiqni olib tashlash
+change-blocklink|toʻsiqni oʻzgartirish
+contribslink|hissa
+emaillink|e-maktub jo‘natish
+blocklogpage|Chetlatish qaydlari
+blocklogentry|~{1} muddatga [[~{0}]]ni chetlashtirdi ~{2}
+block-log-flags-nocreate|hisob ochish toʻxtatilgan
+block-log-flags-nousertalk|o'zining munozara sahifasini tahrirlay olmaydi
+move-page|~{0} — qayta nomlash
+move-page-legend|Sahifani qayta nomlash
+movearticle|Hozirgi nomi:
+newtitle|Yangi nom:
+move-watch|Ushbu sahifani kuzatuv roʻyxatingizga qoʻshish
+movepagebtn|Sahifani koʻchirish
+pagemovedsub|Sahifa qayta nomlandi
+movepage-moved|'''Sahifa nomi «~{0}»dan «~{1}»ga koʻchirildi'''
+movepage-moved-redirect|Qayta yo‘naltirish yaratildi.
+movetalk|Mos munozara sahifasini qayta nomlash
+move-subpages|Ostsahifalarni ham qayta nomlash (~{0} gacha)
+move-talk-subpages|Munozara sahifasining ostsahifalarini ham qayta nomlash (~{0} gacha)
+movepage-page-moved|Sahifa nomi «~{0}»dan «~{1}»ga koʻchirilgan edi.
+movelogpage|Koʻchirish qaydlari
+movesubpage|{{PLURAL:~{0}\u007COstsahifa\u007COstsahifalar}}
+movesubpagetext|Ushbu sahifaning ~{0} ta ostsahifasi bor.
+movenosubpage|Bu sahifa ostsahifalarga ega emas.
+movereason|Sabab:
+revertmove|qaytarish
+delete_and_move|O‘chirish va qayta nomlash
+delete_and_move_confirm|Ha, ushbu sahifa o‘chirilsin
+fix-double-redirects|Oldingi nomga yoʻnaltirishlarni toʻgʻrilash
+move-leave-redirect|Qayta yoʻnaltirish qoldirish
+protectedpagemovewarning|<strong>Ogohlantirish:</strong> Ushbu sahifa himoyalangan boʻlib, faqat administratorlar uning nomini oʻzgartirishi mumkin. Quyida himoyalash jurnalidagi oxirgi qayd keltirilgan:
+semiprotectedpagemovewarning|<strong>Izoh:</strong> Ushbu sahifa himoyalangan boʻlib, faqat roʻyxatdan oʻtgan foydalanuvchilar uning nomini oʻzgartirishi mumkin.\nQuyida himoyalash jurnalidagi oxirgi qayd keltirilgan:
+move-over-sharedrepo|== Fayl allaqachon mavjud ==\nUmumiy omborda [[:~{0}]] mavjud. Faylning bu nomga qayta nomlanishi faylning umumiy omborda to‘silishiga olib keladi.
+export|Sahifalar eksporti
+export-submit|Eksport
+export-addcattext|Shu turkumdan sahifalarni qo'shish:
+export-addcat|Qoʻshish
+export-addnstext|Shu nomfazodan sahifalarni qo'shish:
+export-addns|Qo'shish
+export-download|Fayl sifatida saqlash
+export-templates|Andozalarni kiritish
+export-pagelinks|Teranligi quyidagicha bo‘lgan bog‘langan sahifalarni kiritish:
+allmessages|Tizim xabarlari
+allmessagesname|Nomi
+allmessagesdefault|Boshlangʻich matn
+allmessagescurrent|Joriy xabar matni
+allmessages-filter-all|Barcha
+allmessages-language|Til:
+allmessages-filter-submit|Oʻtish
+thumbnail_error|Tasvir yaratishda xatolik: ~{0}
+importlogpage|Import qilish qaydlari
+tooltip-pt-userpage|Foydalanuvchi sahifangiz
+tooltip-pt-anonuserpage|Siznig ip manzilingiz foydalanuvchi sahifasi
+tooltip-pt-mytalk|Suhbat sahifangiz
+tooltip-pt-anontalk|Bu ip manzildan amalga oshirilgan tahrirlar munozarasi
+tooltip-pt-preferences|Moslamalaringiz
+tooltip-pt-watchlist|Siz kuzatib borayotgan sahifalardagi oʻzgarishlar roʻyxati
+tooltip-pt-mycontris|Hissalaringiz roʻyxati
+tooltip-pt-login|Bu majburiyat mavjud bo‘lmasa-da, kirishingiz taklif qilinadi.
+tooltip-pt-logout|Chiqish
+tooltip-ca-talk|Sahifa matni borasida munozara
+tooltip-ca-edit|Siz bu sahifani tahrirlashingiz mumkin. Iltimos, saqlashdan oldin koʻrib chiqish tugmasidan foydalaning
+tooltip-ca-addsection|Yangi boʻlim ochish
+tooltip-ca-viewsource|Bu sahifa himoyalangan. Siz uning manbasini koʻrishingiz mumkin.
+tooltip-ca-history|Bu sahifaning oʻzgarishlar tarixi
+tooltip-ca-protect|Bu sahifani himoyalash
+tooltip-ca-unprotect|Ushbu sahifaning himoyasini o'zgaritish
+tooltip-ca-delete|Ushbu sahifani o‘chirish
+tooltip-ca-undelete|Bu sahifa o'chirilmasdan oldin qilingan tahrirlarni tiklash
+tooltip-ca-move|Bu sahifani koʻchir
+tooltip-ca-watch|Bu sahifani kuzatuv roʻyxatingizga qoʻshish
+tooltip-ca-unwatch|Bu sahifani kuzatuv roʻyxatingizdan oʻchirish
+tooltip-search|{{SITENAME}}dan qidirish
+tooltip-search-go|Xuddi shu nomli sahifa bor boʻlsa, uni och
+tooltip-search-fulltext|Sahifalarda ushbu matnni izlash
+tooltip-p-logo|Bosh sahifaga o‘tish
+tooltip-n-mainpage|Bosh sahifaga oʻtish
+tooltip-n-mainpage-description|Bosh sahifaga o‘tish
+tooltip-n-portal|Loyiha haqida, nimalar qilishingiz mumkin, nimalarni qayerdan topish mumkin
+tooltip-n-currentevents|Joriy hodisalar haqida ma’lumot olish
+tooltip-n-recentchanges|Wikidagi eng so‘nggi o‘zgartirishlar ro‘yxati
+tooltip-n-randompage|Tasodifiy sahifaga oʻtish
+tooltip-n-help|Qisqa va loʻnda maʼlumotnoma
+tooltip-t-whatlinkshere|Ushbu sahifaga bogʻlangan sahifalar roʻyxati
+tooltip-t-recentchangeslinked|Bu sahifaga bogʻlangan sahifalardagi yangi oʻzgarishlar
+tooltip-feed-rss|Bu sahifa uchun RSS ta'minot
+tooltip-feed-atom|Bu sahifa uchun Atom ta'minot
+tooltip-t-contributions|Bu foydalanuvchinig qoʻshgan hissasini koʻrish
+tooltip-t-emailuser|Ushbu foydalanuvchiga xat jo‘natish
+tooltip-t-upload|Rasmlar yoki media fayllar yuklash
+tooltip-t-specialpages|Maxsus sahifalar ro‘yxati
+tooltip-t-print|Ushbu sahifaning bosma uchun versiyasi
+tooltip-t-permalink|Sahifaning ushbu versiyasiga doimiy ishorat
+tooltip-ca-nstab-main|Sahifani ko‘rish
+tooltip-ca-nstab-user|Foydalanuvchi sahifasini koʻrish
+tooltip-ca-nstab-media|Media sahifasini koʻrish
+tooltip-ca-nstab-special|Bu maxsus sahifa, uni tahrirlay olmaysiz.
+tooltip-ca-nstab-project|Loyiha sahifasini koʻrish
+tooltip-ca-nstab-image|Rasm sahifasini koʻrish
+tooltip-ca-nstab-mediawiki|MediaWiki tizimining xabarini koʻrish
+tooltip-ca-nstab-template|Andozani koʻrish
+tooltip-ca-nstab-help|Yordam sahifasini koʻrish
+tooltip-ca-nstab-category|Turkum sahifasini koʻrish
+tooltip-minoredit|Kichik o‘zgartirish sifatida belgilash
+tooltip-save|Oʻzgarishlarni saqlash
+tooltip-preview|Oʻzgarishlarni koʻrib chiqish; Iltimos, saqlashdan oldin undan foydalaning!
+tooltip-diff|Matnga qanday oʻzgarishlar kiritganligingizni koʻrish.
+tooltip-compareselectedversions|Bu sahifaning ikki tanlangan versiyalari orasidagi farqni koʻrish.
+tooltip-watch|Ushbu sahifani kuzatuv roʻyxatingizga qoʻshish
+tooltip-recreate|Bu sahifani u o'chirilgan bo'lishiga qaramasdan qayta yaratish
+tooltip-summary|Qisqa mazmun kiriting
+others|boshqalar
+pageinfo-title|"~{0}" sahifasi haqida maʼlumot
+pageinfo-header-basic|Asosiy maʼlumot
+pageinfo-header-edits|Oʻzgarishlar tarixi
+pageinfo-display-title|Koʻrsatiladigan sarlavha
+pageinfo-article-id|Sahifa identifikatori
+pageinfo-watchers|Sahifa kuzatuvchilari soni
+pageinfo-edits|Jami tahrirlar soni
+pageinfo-toolboxlink|Sahifa haqida maʼlumot
+pageinfo-redirectsto|Qayta yoʻnaltirish
+markaspatrolledtext|Bu sahifani tekshirilgan deb belgilash
+markedaspatrolledtext|[[:~{0}]] sahifasining ushbu versiyasi tekshirilgan deb belgilandi.
+markedaspatrollednotify|[[:~{0}]] sahifasidagi ushbu oʻzgarish tekshirilgan deb belgilandi.
+patrol-log-page|Patrullash qaydlari
+previousdiff|← Avvalgi tahrir
+nextdiff|Keyingi tahrir →
+imagemaxsize|Tasvir oʻlchamining chegarasi:<br />\n''(fayl taʼrifi sahifasi uchun)''
+thumbsize|Tasvirning kichiklashtirilgan versiyasining oʻlchami:
+file-info-size|~{0} × ~{1} piksel, fayl hajmi: ~{2}, MIME tipi: ~{3}
+file-nohires|Bundan kattaroq tasvir yoʻq.
+svg-long-desc|SVG fayl, asl oʻlchamlari ~{0} × ~{1} piksel, fayl hajmi: ~{2}
+show-big-image|Toʻliq hajmdagi tasvir
+noimages|Tasvir mavjud emas.
+ilsubmit|Qidirish
+variantname-uz-latn|lotincha
+variantname-uz-cyrl|кириллча
+metadata|Metama’lumot
+metadata-expand|Batafsil axborotni koʻrsatish
+metadata-collapse|Batafsil axborotni yashirish
+exif-imagewidth|Eni
+exif-imagelength|Boʻyi
+exif-artist|Muallif
+exif-source|Manba
+exif-iimcategory|Turkum
+exif-gpslatitude-n|Shimoliy kenglik
+exif-gpslatitude-s|Janubiy kenglik
+exif-gpslongitude-e|Sharqiy uzunlik
+exif-gpslongitude-w|Gʻarbiy uzunlik
+exif-gpsdestdistance-k|Kilometr
+exif-gpsdestdistance-m|Mil
+exif-iimcategory-clj|Jinoyat va qonun
+exif-iimcategory-dis|Halokatlar
+exif-iimcategory-fin|Iqtisodiyot va biznes
+exif-iimcategory-edu|Maʼrifat
+exif-iimcategory-evn|Atrofimizdagi olam
+exif-iimcategory-hum|Inson huquqlari
+exif-iimcategory-lab|Mehnat
+exif-iimcategory-lif|Turmush tarzi va hordiq
+exif-iimcategory-pol|Siyosat
+exif-iimcategory-rel|Din va imon
+exif-iimcategory-sci|Fan va texnologiyalar
+exif-iimcategory-spo|Sport
+exif-iimcategory-wea|Ob-havo
+namespacesall|Barchasi
+monthsall|barchasi
+confirmrecreate|Ushbu sahifa siz tahrir qilayotganingizda foydalanuvchi [[User:~{0}\u007C~{0}]] ([[User talk:~{0}\u007Cmunozara]]) tomonidan quyidagi sababga binoan yoʻqotilgan:\n: <em>~{1}</em>\nIltimos, sahifani qaytadan yaratmoqchi ekanligingizni tasdiqlang.
+confirmrecreate-noreason|Ushbu sahifa siz tahrir qilayotganingizda foydalanuvchi [[User:~{0}\u007C~{0}]] ([[User talk:~{0}\u007Cmunozara]]) tomonidan yoʻqotilgan. Iltimos, sahifani qaytadan yaratmoqchi ekanligingizni tasdiqlang.
+unit-pixel| piksel
+imgmultipageprev|← oldingi sahifa
+imgmultipagenext|keyingi sahifa →
+imgmultigoto|~{0} sahifasiga oʻtish
+table_pager_next|Keyingi sahifa
+table_pager_prev|Oldingi sahifa
+table_pager_first|Birinchi sahifa
+table_pager_last|Oxirgi sahifa
+table_pager_limit_label|Bir sahifadagi yozuvlar soni:
+autosumm-blank|Sahifa tozalandi
+autoredircomment|[[~{0}]]ga yoʻnaltirildi
+autosumm-new|"~{0}" yozuvi orqali yangi sahifa yaratildi
+size-bytes|~{0} bayt
+watchlisttools-view|Mos oʻzgarishlar
+watchlisttools-edit|Kuzatuv roʻyxatimni koʻrish/oʻzgartirish
+watchlisttools-raw|Kuzatuv roʻyxatimni tahrirlash
+signature|[[{{ns:user}}:~{0}\u007C~{1}]] ([[{{ns:user_talk}}:~{0}\u007Cmunozara]])
+duplicate-defaultsort|'''Diqqat:''' "~{1}" boshlang'ich saralash kaliti oldingi "~{0}" boshlang'ich saralash kalitini qayta aniqlayapti.
+version-specialpages|Maxsus sahifalar
+specialpages|Maxsus sahifalar
+tag-filter|[[Special:Tags\u007CNishonlar]] filtri:
+compare-submit|Solishtirish
+htmlform-reset|Oʻzgarishlarni bekor qilish
+htmlform-selectorother-other|Boshqa
+logentry-delete-delete|~{0} ~{2} sahifasini {{GENDER:~{1}\u007Coʻchirdi}}
+logentry-move-move|~{0} ~{2} sahifasini ~{3}ga koʻchirdi
+logentry-move-move-noredirect|~{0} ~{2} sahifasini ~{3}ga {{GENDER:~{1}\u007Ckoʻchirdi}}
+logentry-move-move_redir|~{0} sahifa nomini ~{2}dan ~{3}ga yoʻnaltirish ustidan {{GENDER:~{1}\u007Ckoʻchirdi}}
+logentry-move-move_redir-noredirect|~{0} sahifa nomini ~{2}dan ~{3}ga yoʻnaltirish ustidan {{GENDER:~{1}\u007Ckoʻchirdi}} va yoʻnaltirish qoldirmadi
+logentry-patrol-patrol-auto|~{0} ~{2} sahifasining ~{3} versiyasini avtomatik patrulladi
+logentry-newusers-newusers|~{0} hisob yozuvi {{GENDER:~{1}\u007Cyaratildi}}
+logentry-newusers-create|~{0} hisob yozuvi {{GENDER:~{1}\u007Cyaratildi}}
+logentry-newusers-autocreate|~{0} hisob yozuvi avtomatik ravishda {{GENDER:~{1}\u007Cyaratilgan}}
+logentry-rights-rights|~{0} ~{2}ning guruhlardagi aʼzoligini ~{3}dan ~{4}ga {{GENDER:~{1}\u007Coʻzgartirdi}}
+logentry-rights-rights-legacy|~{0} ~{2}ning guruhlardagi aʼzoligini oʻzgartirdi
+feedback-close|Bajarildi
+searchsuggest-search|Qidiruv
+searchsuggest-containing|ichida bu boʻlgan...
+api-error-unknown-code|Noaniq xato: "~{0}".
+api-error-unknownerror|Noaniq xato: "~{0}".
+limitreport-title|Tahlillagich maʼlumotlari:
+special-characters-group-latin|Lotin
+special-characters-group-latinextended|Lotin kengaytirilgan
+special-characters-group-ipa|XFA (MFA)
+special-characters-group-symbols|Belgilar
+special-characters-group-greek|Yunon
+special-characters-group-cyrillic|Kirill
+special-characters-group-arabic|Arab
+special-characters-group-arabicextended|Arab kengaytirilgan
+special-characters-group-persian|Forsiy
+special-characters-group-hebrew|Yahudiy
+special-characters-group-bangla|Bengal
+special-characters-group-tamil|Tamil
+special-characters-group-telugu|Telugu
+special-characters-group-sinhala|Singal
+special-characters-group-gujarati|Gujarati
+special-characters-group-devanagari|Devanagari
+special-characters-group-thai|Tay
+special-characters-group-lao|Laos
+special-characters-group-khmer|Kxmer
+special-characters-title-emdash|uzun tire
+special-characters-title-minus|minus belgisi
+contactpage-usermailererror|Elektron pochta xabarini joʻnatishda xatolik yuz berdi:
+']:>
+).lang
+;

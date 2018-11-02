@@ -1,0 +1,84 @@
+.xoimg_help_x24 {
+  display: inline-block;
+  background-repeat: no-repeat; background-position: center;   
+
+  width: 24px; height: 24px; min-width: 24px; min-height: 24px; background-size: 24px 24px;
+}
+
+  .xoimg_btn_x24
+, .xoimg_btn_x16
+, .xo_imgbtn_x16
+, .xo_imgbtn_x20
+, .xo_imgbtn_x24
+{
+  display: inline-block;
+  align-self: center;
+  background-repeat: no-repeat; background-position: center;   
+  cursor: pointer;
+}
+
+.xoimg_btn_x24 {
+  width: 24px; height: 24px; min-width: 24px; min-height: 24px; background-size: 24px 24px;
+  
+  padding: 10px;
+}
+.xoimg_btn_x16 {
+  width: 16px; height: 16px; min-width: 16px; min-height: 16px; background-size: 16px 16px;
+
+  margin: 2px 0px 0px 0px;
+}
+.xo_imgbtn_x16 {
+  width: 16px; height: 16px; min-width: 16px; min-height: 16px; background-size: 16px 16px;
+}
+.xo_imgbtn_x20 {
+  width: 20px; height: 20px; min-width: 20px; min-height: 20px; background-size: 20px 20px;
+}
+.xo_imgbtn_x24 {
+  width: 24px; height: 24px; min-width: 24px; min-height: 24px; background-size: 24px 24px;
+}
+
+.xoimg_xowa                        {background-image:url(./img/xowa.svg);}
+
+.xoimg_help_tip                 {background-image:url(./img/dialog-question-2.svg);}
+.xoimg_help_info               {background-image:url(./img/help-about-3.svg);}
+.xoimg_help_doc                 {background-image:url(./img/help-contents-5.svg);}
+
+.xoimg_list_add                 {background-image:url(./img/list-add-3.svg);}
+.xoimg_list_remove           {background-image:url(./img/list-remove-3.svg);}
+.xoimg_list_delete           {background-image:url(./img/edit-delete-6.svg);}
+.xoimg_list_refresh         {background-image:url(./img/view-refresh-5.svg);}
+.xoimg_list_save               {background-image:url(./img/document-save-5.svg);}
+.xoimg_list_undo               {background-image:url(./img/edit-undo-3.svg);}
+
+.xoimg_media_play             {background-image:url(./img/media-playback-start-8.svg);}
+.xoimg_media_pause           {background-image:url(./img/media-playback-pause-8.svg);}
+
+.xoimg_fsys_go_up             {background-image:url(./img/go-up-4.svg);}
+.xoimg_fsys_dir                 {background-image:url(./img/folder.svg);}
+.xoimg_fsys_fil_blank      {background-image:url(./img/application-x-zerosize.svg);}
+.xoimg_fsys_fil_log          {background-image:url(./img/text-x-log.svg);}
+.xoimg_fsys_trash             {background-image:url(./img/edit-delete-2.svg);}
+
+.xoimg_inet_download       {background-image:url(./img/go-bottom-3.svg);}
+.xoimg_inet_email            {background-image:url(./img/mail-message-new-2.svg);}
+.xoimg_inet_browser        {background-image:url(./img/applications-internet-2.svg);}
+
+.xoimg_misc_ok                  {background-image:url(./img/dialog-ok-5.svg);}
+.xoimg_misc_skip               {background-image:url(./img/user-away.svg);}
+.xoimg_misc_cancel          {background-image:url(./img/oojs/cancel.svg);}
+
+.xoimg_app_configure       {background-image:url(./img/configure-4.svg);}
+.xoimg_app_system            {background-image:url(./img/applications-system-4.svg);}
+.xoimg_app_install          {background-image:url(./img/archive-extract-2.svg);}
+
+.xoimg_doc_open               {background-image:url(./img/document-open-7.svg);}
+.xoimg_doc_import            {background-image:url(./img/document-import-2.svg);}
+
+.xoimg_paging_bwd            {background-image:url(./img/oojs/caret-ltr.svg);}
+.xoimg_paging_fwd            {background-image:url(./img/oojs/caret-rtl.svg);}
+.xoimg_toggle_show          {background-image:url(./img/oojs/expand.svg);}
+.xoimg_toggle_hide          {background-image:url(./img/oojs/collapse.svg);}
+
+.xoimg_ellipsis               {background-image:url(./img/oojs/ellipsis.svg);}
+.xoimg_cog                        {background-image:url(./img/oojs/advanced.svg);}
+.xoimg_search                   {background-image:url(./img/oojs/search-ltr.svg);}

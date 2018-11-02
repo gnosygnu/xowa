@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shirayuki",
+			"Thehelpfulone"
+		]
+	},
+	"wikibase-newitem-not-recognized-siteid": "The provided site identifier was not recognised.",
+	"wikibase-listdatatypes-quantity-body": "Literal data field for a quantity that relates to some kind of well-defined unit. The actual unit goes in the data values that is entered.\n* amount – implicit part of the string (mapping of unit prefix is unclear)\n* unit – implicit part of the string that defaults to \"1\" (mapping to standardising body is unclear)\n* upperbound - quantity's upper bound\n* lowerbound - quantity's lower bound"
+}

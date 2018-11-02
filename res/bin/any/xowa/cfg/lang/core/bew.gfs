@@ -1,0 +1,11 @@
+this
+.messages
+  .load_text(
+<:['
+vector-action-delete|Ngapus
+vector-action-move|Pindahin
+vector-action-undelete|Balikin nyang keapus
+vector-view-create|Bikin
+']:>
+).lang
+;

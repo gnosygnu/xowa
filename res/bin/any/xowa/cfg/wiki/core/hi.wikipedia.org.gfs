@@ -1,0 +1,45 @@
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+2|U
+2|स
+3|UT
+3|सवा
+4|WP
+4|Wikipedia
+4|वि
+5|WPT
+5|विवा
+6|Image
+7|Image_talk
+8|मी
+9|मीवा
+10|T
+10|सा
+11|सावा
+14|श्र
+15|CT
+15|श्रवा
+100|P
+100|प्र
+101|प्रवा
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(8).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(100).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(101).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end

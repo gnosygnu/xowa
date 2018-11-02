@@ -1,0 +1,71 @@
+== Overview ==
+
+This page describes how to set up {{language}} wikis on your machine.
+
+The following two options are available:
+
+=== Download pre-built wikis from archive.org ===
+* '''Faster''': The build process is skipped completely. All you have to do is download the wikis
+* '''Simpler''': The wikis are pre-compiled HTML, so you don't have to set-up Wikidata or other pre-requisites. Since the wiki is just being downloaded, not built, there are less things that can go wrong
+* '''Less recent''': The wikis need to be manually generated and uploaded by me. If you find that the wikis below are out of date, you can create an issue at github.org or try building them yourself.
+
+=== Build wikis using the database dumps at wikimedia.org ===
+* '''Slower''': It takes an extra few hours to build the wiki
+* '''Slightly harder''': These wikis work best with Wikidata on your machine. See [[App/Wiki types/Wikidata]]. In additon, the build process may not work on certain low-end machines like Raspberry Pi
+* '''Always recent''': The wikis will be built using the latest dump from Wikimedia at https://dumps.wikimedia.org/backup-index.html
+
+In addition, both options have an '''automatic''' and a '''manual''' route. More detail is provided below.
+
+__TOC__
+
+== Download pre-built wikis from archive.org ==
+=== Automatic ===
+* Go to [[Special:XowaDownloadCentral]]
+* In the '''Available''' table, add any of the following task names
+{{#wikis}}
+{{#tasks}}
+:: {{task_full_name}}
+{{/tasks}}
+{{/wikis}}
+* In the '''Queue''' table, click the Play button
+* Wait for the Queue to process. When it is done, enter the wiki URL in the bar. For example, <code>{{wikis__1st}}</code>
+
+=== Manual ===
+* Download the urls below. Note that they are listed in two formats:
+** Urls by wiki / type: In case you want only one wiki (wiktionary) or one type (articles)
+** All urls (for copying into a download manager)
+* Unzip them and move the .xowa file to the proper wiki directory. For example, for {{wikis__1st}}, move the files to <code>C:\xowa\wiki\{{wikis__1st}}</code>
+* Start XOWA and enter the wiki URL in the bar. For example, <code>{{wikis__1st}}</code>
+
+== Build wikis using the database dumps at wikimedia.org ==
+=== Automatic ===
+* Go to [[Dashboard/Import/Online]]
+* Find your wiki in the list
+* Click the <code>download</code> link.
+* Wait for the wiki to build. When it is done, it will automatically load the Main Page
+
+=== Manual ===
+* Download your dump from https://dumps.wikimedia.org/backup-index.html
+* Go to [[Dashboard/Import/Offline]]
+* Select the dump and import it
+
+----
+
+== URLS ==
+
+{{#wikis}}
+=== {{wiki_domain}} ===
+{{#tasks}}
+==== {{wiki_domain}} {{task_name}} ({{task_date}}) ====
+<ul>
+{{#files}}
+* {{file_href}}
+{{/files}}
+</ul>
+{{/tasks}}
+{{/wikis}}
+
+=== All links ===
+<pre style='height: 10pc; overflow-y: scroll;'>
+{{url_list}}
+</pre>

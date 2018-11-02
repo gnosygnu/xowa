@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bonevarluri",
+			"Mogoeilor"
+		]
+	},
+	"wikibase-save": "اماییه کردن",
+	"wikibase-sitelink-site-edit-placeholder": "سیلجا",
+	"wikibase-terms": "د زونيا هنی",
+	"wikibase-sitelinks-add": "یه گل هوم پیوند د هوم پیوند سیلجا اضاف بکید",
+	"wikibase-move-up": "رئتن بالا",
+	"wikibase-move-down": "رو وه هار",
+	"wikibase-propertyedittool-full": "نوم گه انازه یا کامل بیه",
+	"wikibase-copyrighttooltip-acknowledge": "مه ای قانونا نه سی ویرایشتیا نهایی م قوول کردم.دواره ای پیغوم نشو نئیه",
+	"wikibase-anonymouseditwarning": "زنئار:شما وامین نیومایته.\nنشونه آی پی تو سی ویرگار ویرایشت ای چی ضفظ بوئه.",
+	"wikibase-itembytitle-lookup-fieldset": "قلمیا نه سی سیلجا و نوم ون مئن جوری کو",
+	"wikibase-itembytitle-lookup-site": "سیلجا:",
+	"wikibase-itembytitle-submit": "پی جوری",
+	"wikibase-itemdisambiguation-submit": "پی جوری",
+	"wikibase-newitem-site": "سیلجا اولین بلگه هوم پیوند بیه",
+	"wikibase-newitem-page": "نوم اولین بلگه هوم پیوند بیه",
+	"special-setsitelink": "یه گل هوم پیوند سیلجا بنیت",
+	"wikibase-setsitelink-label": "هوم پیوند سیلجا:",
+	"wikibase-setsitelink-submit": "یه گل هوم پیوند سیلجا بنیت",
+	"wikibase-setsitelink-warning-remove": "آیا شما میهایت هوم پیوند سیل جا[[$1]] نه جا وه جا بکید؟",
+	"wikibase-setsitelink-add-failed": "چنو هوم پیوند سیلجایی نبوئه اماییه با",
+	"wikibase-setsitelink-remove-failed": "چنو هوم پیوند سیلجایی نبوئه جا وه جا بوئه.",
+	"wikibase-modifyterm-language": "زون:",
+	"wikibase-dispatchstats-changes": "آماریا آلشت دئن پهرستنومه",
+	"wikibase-dispatchstats-change-timestamp": "چسب ون وخت",
+	"wikibase-dispatchstats-site-id": "سیلجا",
+	"wikibase-dispatchstats-lag-time": "پتی وار",
+	"wikibase-entitieswithoutlabel-label-language": "زون:",
+	"wikibase-entitieswithoutlabel-submit": "فهمسن،جسن",
+	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" کد زون معتوری نئ.",
+	"special-itemswithoutsitelinks": "قلمیایی که هوم پیوندسیلجا نارن",
+	"special-mylanguagefallbackchain": "زنجیر زون دماگر مه",
+	"wikibase-api-no-such-sitelink": "چنو هوم پیوند سیلجایی پیدا نبوئه",
+	"wikibase-item-summary-clientsitelink-update": "بلگه د[$3] تا [$4] جا وه جا بیه",
+	"wikibase-listdatatypes-commonsmedia-head": "پرنمون یا رسانه",
+	"wikibase-listdatatypes-time-head": "وخت"
+}

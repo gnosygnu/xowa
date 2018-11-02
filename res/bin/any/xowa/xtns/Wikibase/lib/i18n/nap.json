@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"C.R.",
+			"Chelin"
+		]
+	},
+	"wikibase-error-unexpected": "Sbaglio: $1",
+	"wikibase-timedetails-time": "Tiempo",
+	"wikibase-timedetails-isotime": "Ora e data ISO",
+	"wikibase-timedetails-timezone": "Fuso orario",
+	"wikibase-timedetails-calendar": "Calannario",
+	"wikibase-timedetails-precision": "Precisiona",
+	"wikibase-timedetails-before": "Apprimma",
+	"wikibase-timedetails-after": "Aroppo",
+	"wikibase-globedetails-longitude": "Longitudine",
+	"wikibase-globedetails-latitude": "Latitudine",
+	"wikibase-globedetails-precision": "Precisiona",
+	"wikibase-globedetails-globe": "Globbo"
+}

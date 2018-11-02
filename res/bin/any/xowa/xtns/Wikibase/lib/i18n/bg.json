@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Spiritia"
+		]
+	},
+	"wikibase-entity-item": "обект",
+	"wikibase-entity-property": "свойство",
+	"wikibase-entity-query": "заявка",
+	"wikibase-error-unexpected": "Възникна неочаквана грешка.",
+	"wikibase-error-save-generic": "Промените не могат да бъдат завършени, поради възникнала грешка при опита за съхраняване.",
+	"wikibase-error-remove-generic": "Промените не могат да бъдат завършени, поради възникнала грешка при опита за изтриване.",
+	"wikibase-error-save-connection": "Промените не могат да бъдат завършени, поради възникнал проблем с интернет връзката при опита за съхраняване. Проверете интернет връзката си.",
+	"wikibase-error-remove-connection": "Промените не могат да бъдат завършени, поради възникнал проблем с интернет връзката при опита за изтриване. Проверете интернет връзката си.",
+	"wikibase-error-save-timeout": "Поради възникнали технически трудности съхраняването не можа да бъде завършено.",
+	"wikibase-error-remove-timeout": "Поради възникнали технически трудности изтриването не можа да бъде завършено.",
+	"wikibase-error-autocomplete-connection": "Възникна проблем със заявката към API интерфейса на Уикипедия. Опитайте по-късно.",
+	"wikibase-error-autocomplete-response": "Отговор на сървъра: $1",
+	"wikibase-error-ui-no-external-page": "Посочената статия не беше намерена в съответния сайт.",
+	"wikibase-error-ui-cant-edit": "Нямате права да извършите това действие.",
+	"wikibase-error-ui-no-permissions": "Нямате необходимите права да извършите това действие.",
+	"wikibase-error-ui-link-exists": "Свързването с тази страница е невъзможно. С нея вече е свързан друг обект от Уикиданни.",
+	"wikibase-error-ui-session-failure": "Сесията ви е изтекла. Влезте отново в системата.",
+	"wikibase-error-ui-edit-conflict": "Настъпил е конфликт на редакции. Презаредете и съхранете отново.",
+	"wikibase-replicationnote": "Може да отнеме няколко минути, докато промените се отразят във всички уикита.",
+	"wikibase-sitelinks-sitename-columnheading": "Език",
+	"wikibase-sitelinks-siteid-columnheading": "Езиков код",
+	"wikibase-sitelinks-link-columnheading": "Свързана статия",
+	"wikibase-tooltip-error-details": "Подробности",
+	"datatypes-type-wikibase-item": "Обект",
+	"datatypes-type-commonsMedia": "Файл от Общомедия"
+}

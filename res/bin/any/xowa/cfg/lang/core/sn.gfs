@@ -1,0 +1,149 @@
+this
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Svondo
+monday|Muvhuro
+tuesday|Chipiri
+wednesday|Chitatu
+thursday|China
+friday|Chishanu
+saturday|Mugovera
+january|Ndira
+february|Kukadzi
+march|Kurume
+april|Kubvumbi
+may_long|Chivabvu
+june|Chikumi
+july|Chikunguru
+august|Nyamavhuvhu
+september|Gunyana
+october|Gumiguru
+november|Mbudzi
+december|Zvita
+january-gen|Ndira
+february-gen|Kukadzi
+march-gen|Kurume
+april-gen|Kubvumbi
+may-gen|Chivabvu
+june-gen|Chikumi
+july-gen|Chikunguru
+august-gen|Nyamavhuvhu
+september-gen|Gunyana
+october-gen|Gumiguru
+november-gen|Mbudzi
+december-gen|Zvita
+otherlanguages|Mimwe Mitauro
+cite_article_link|Ita cite nyaya iyi
+sitesupport|Zvipo
+cancel|Kanzura
+mytalk|Hurukuro dzangu
+navigation|Banguranyika
+qbedit|Chinja
+help|Rubatsiro
+search|Tsvaga
+searchbutton|Tsvaga
+go|Enda
+searcharticle|Enda
+history_short|Zvemakare
+printableversion|Rinoita kuprinta
+permalink|Zvikochekero Zvisingachinje
+edit|Chinja
+delete|Bharanura
+protect|Chengetedza
+talk|Hurukuro
+toolbox|Maturuzi
+currentevents|Zvirikuitika
+currentevents-url|Project:Zvirikuitika
+disclaimers|Matandanyadzi
+edithelp|Mashandurirwo
+mainpage|Peji Rekutanga
+mainpage-description|Peji Rekutanga
+portal|Mukova wegutse
+youhavenewmessagesmulti|Une mashoko matsva pa~{0}
+editsection|chinja
+editold|chinja
+nstab-main|Gani
+viewsource|Wona mabviro
+yourname|Zita:
+yourpassword|Password:
+yourpasswordagain|Nyorazve password:
+remembermypassword|Ndiyeuke (for a maximum of ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}})
+login|Gamuchirwa
+userlogin|Gamuchirwa / Gadzira Akaunzi
+logout|Chibuda
+userlogout|Chibuda
+notloggedin|Hauna kugamuchirwa
+createaccount|Gadzira Akaunzi
+summary|Muchidimbu:
+minoredit|Uku kushandurwa kudiki
+watchthis|Ringa peji rino
+savearticle|Kotsa peji
+showpreview|Ratidza chipandwa
+showdiff|Ratidza zvasandurwa
+mypreferences|Zvandinosarudza
+prefs-rc|Zvaba Kuchinjwa
+searchresultshead|Tsvaga
+youremail|E-mail:
+username|Zita:
+recentchanges|Zvaba Kuchinjwa
+recentchangeslinked|Zvinoenderana nezvachinjwa
+recentchangeslinked-feed|Zvinoenderana nezvachinjwa
+recentchangeslinked-toolbox|Zvinoenderana nezvachinjwa
+upload|Isa fayera
+uploadbtn|Isa fayera
+uploadnologin|Hauna kugamuchirwa
+watchthisupload|Ringa peji rino
+randompage|Peji nhemwa
+move|Chichinura
+movethispage|Chichinura kupeji iri
+watchlist|Zvandakarinda
+mywatchlist|Zvandakarinda
+watch|Rinda
+watchthispage|Ringa peji rino
+prot_1movedto2|[[~{0}]] rachichinurwa ku [[~{1}]]
+restriction-edit|Chinja
+restriction-move|Chichinura
+undelete-search-submit|Tsvaga
+contributions|Mushandisi Kanzatu
+mycontris|Kanzatu kangu
+sp-contributions-submit|Tsvaga
+whatlinkshere|Zvakakochekera pano
+move-page-legend|Chichinura peji
+movepagebtn|Chichinura peji
+movereason|Chikonzero
+allmessages|Mashoko esystem
+tooltip-pt-preferences|Zvandinosarudza
+tooltip-pt-logout|Chibuda
+tooltip-ca-move|Chichinura kupeji iri
+tooltip-p-logo|Peji Rekutanga
+table_pager_limit_submit|Enda
+specialpages|Mapeji akakosha
+']:>
+).lang
+;

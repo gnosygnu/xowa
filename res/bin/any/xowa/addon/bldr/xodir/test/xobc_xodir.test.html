@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <!-- 
+    NOTE: this page loads local files
+    - Chrome is the easiest browser for local files; Use "chrome.exe --disable-web-security"
+    - Change C:/xowa/ to wherever it is on your system
+    -->
+    <!-- base -->
+    <base href="file:///C:/xowa/" target="_blank">
+    
+    <!-- css -->
+  	<link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/lib/alertify/themes/alertify.core.css">
+  	<link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/lib/alertify/themes/alertify.bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/src/xowa/xocss/core/xocss_core-0.0.1.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/src/xowa/xocss/core/xoimg_core-0.0.1.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/src/xowa/xocss/help/xohelp-0.0.1.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/addon/bldr/xodir/bin/xobc_xodir.css">
+    
+    <!-- js -->
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/alertify/lib/alertify-0.3.11.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/alertify/lib/xo-alertify-0.0.1.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/mustache/mustache-2.2.1.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/jquery/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/src/xowa/xocss/help/xohelp-0.0.1.js"></script>
+    <script type="text/html" id="templates"></script>
+    <script type="text/javascript">
+      window.view = {
+        dirs :
+        [ 
+          { path         : '/storage/Android/717F-03BD/data/org.xowa'
+          , is_internal  : false
+          , is_custom    : false
+          }
+        , 
+          { path         : '/storage/emulated/0/Android/data/org.xowa'
+          , is_internal  : true
+          , is_custom    : false
+          }
+        , 
+          { path         : '/storage/emulated/1/Android/data/org.xowa'
+          , is_internal  : true
+          , is_custom    : false
+          }
+        , 
+          { path         : '(choose your own folder)'
+          , is_internal  : false
+          , is_custom    : true
+          }
+        ]
+      };
+    </script>
+    <script>
+      $("#templates").load("bin/any/xowa/addon/bldr/xodir/bin/xobc_xodir.mustache.html", function(response_txt, status_txt, xhr){
+        var template = response_txt;
+        var output = Mustache.render(template, window.view);
+        document.getElementById('main').innerHTML = output;
+      });
+    </script>
+  </head>
+  <body>
+    <div id='main' class='bldr_body'></div>
+  </body>
+</html>

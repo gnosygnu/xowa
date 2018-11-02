@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fohanno",
+			"Fulup",
+			"Y-M D"
+		]
+	},
+	"wikibase-edit": "kemmañ",
+	"wikibase-save": "enrollañ",
+	"wikibase-cancel": "nullañ",
+	"wikibase-add": "ouzhpennañ",
+	"wikibase-save-inprogress": "Oc'h enrollañ...",
+	"wikibase-remove-inprogress": "O tiverkañ...",
+	"wikibase-description-edit-placeholder": "ebarzhiñ un deskrivadur",
+	"wikibase-sitelink-site-edit-placeholder": "lec'hienn",
+	"wikibase-sitelink-page-edit-placeholder": "pajenn",
+	"wikibase-alias-edit-placeholder": "ebarzhiñ un alias",
+	"wikibase-remove": "Dilemel",
+	"wikibase-aliases-label": "Anvet ivez :",
+	"wikibase-entityselector-more": "muioc'h",
+	"wikibase-restrictionedit-tooltip-message": "Gwarezet eo ar bajenn-mañ. N'eo ket aotreet aozañ anezhi.",
+	"special-itembytitle": "Elfenn dre ditl",
+	"wikibase-itembytitle-lookup-site": "Lec'hienn :",
+	"wikibase-itembytitle-lookup-page": "Pajenn :",
+	"wikibase-itembytitle-submit": "Klask",
+	"special-gotolinkedpage": "Mont d'ar bajenn liammet",
+	"wikibase-gotolinkedpage-lookup-site": "Lec'hienn :",
+	"wikibase-gotolinkedpage-lookup-item": "ID an elfenn :",
+	"wikibase-gotolinkedpage-submit": "Mont",
+	"special-itemdisambiguation": "Disheñvelout an elfennoù",
+	"wikibase-itemdisambiguation-lookup-language": "Yezh :",
+	"special-newproperty": "Krouiñ ur perzh nevez",
+	"special-newitem": "Krouiñ un elfenn nevez",
+	"wikibase-newentity-description": "Deskrivadur :",
+	"wikibase-newentity-submit": "Krouiñ",
+	"wikibase-setdescription-label": "Deskrivadur :",
+	"wikibase-setaliases-label": "Aliasoù :",
+	"wikibase-modifyterm-language": "Yezh :",
+	"wikibase-entitieswithoutlabel-label-language": "Yezh :",
+	"wikibase-entitieswithoutlabel-label-type": "Seurt :",
+	"wikibase-entitieswithoutlabel-label-alltypes": "pep tra"
+}

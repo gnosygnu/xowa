@@ -1,0 +1,1718 @@
+this
+.ns_names
+  .load_text(
+<:['
+-2|Медиа
+-1|Атайын
+1|Баарлашуу
+2|Колдонуучу
+3|Колдонуучунун баарлашуулары
+5|$1 баарлашуу
+6|Файл
+8|MediaWiki
+10|Калып
+12|Жардам
+14|Категория
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Жекшемби
+monday|Дүйшөмбү
+tuesday|Шейшемби
+wednesday|Шаршемби
+thursday|Бейшемби
+friday|Жума
+saturday|Ишемби
+sun|Жк
+mon|Дш
+tue|Ше
+wed|Ша
+thu|Бш
+fri|Жм
+sat|Иш
+january|Январь (Үчтүн айы)
+february|Февраль (Бирдин айы)
+march|Март (Жалган куран)
+april|Апрель (Чын куран)
+may_long|Май (Бугу)
+june|Июнь (Кулжа)
+july|Июль (Теке)
+august|Август (Баш оона)
+september|Сентябрь (Аяк оона)
+october|Октябрь (Тогуздун айы)
+november|Ноябрь (Жетинин айы)
+december|Декабрь (Бештин айы)
+january-gen|Январь (Үчтүн айы)
+february-gen|Февраль (Бирдин айы)
+march-gen|Март (Жалган куран)
+april-gen|Апрель (Чын куран)
+may-gen|Май (Бугу)
+june-gen|Июнь (Кулжа)
+july-gen|Июль (Теке)
+august-gen|Август (Баш оона)
+september-gen|Сентябрь (Аяк оона)
+october-gen|Октябрь (Тогуздун айы)
+november-gen|Ноябрь (Жетинин айы)
+december-gen|Декабрь (Бештин айы)
+jan|Янв
+feb|Фев
+mar|Март
+apr|Апр
+may|Май
+jun|Июнь
+jul|Июль
+aug|Авг
+sep|Сент
+oct|Окт
+nov|Ноя
+dec|Дек
+toc|Мазмуну
+redirectedfrom|(~{0} барагынан багытталды)
+allpages|Бардык барактар
+prevpage|Мурунку барак (~{0})
+nextpage|Кийинки барак (~{0})
+collapsible-collapse|Түрүү
+collapsible-expand|жаюу
+sort-descending|Кемүү боюнча иргөө
+sort-ascending|Өсүү боюнча иргөө
+categories|Категориялар
+lastmodifiedat|Бул барак соңку жолу ~{0}, ~{1} өзгөртүлгөн.
+thumbnail-more|Чоңойтуу
+otherlanguages|Башка тилдерде
+blanknamespace|(Негизги)
+pagecategories|{{PLURAL:~{0}\u007CКатегория\u007CКатегориялар}}
+category_header|"~{0}" категориясындагы барактар
+subcategories|Ички категориялар
+category-media-header|"~{0}" категориясындагы медиафайлдар
+category-empty|''Бул категорияда азырынча эч бир барак же файл жок.''
+category-subcat-count|{{PLURAL:~{1}\u007CБул категория төмөнкү ички категорияны гана камтыйт.\u007CБул категорияда {{PLURAL:~{0}\u007Cички категория\u007C~{0} ички категориялар}} бар, ~{1} ичинен.}}
+category-subcat-count-limited|Бул категорияда {{PLURAL:~{0}\u007C~{0}\u007C~{0}\u007C~{0}}} ички категория бар.
+category-article-count|{{PLURAL:~{1}\u007CБул категория төмөнкү баракты камтыйт.\u007CБул категорияда жалпы ~{1}, төмөнкү {{PLURAL:~{0}\u007Cбарак\u007C~{0} барак}} бар.}}
+category-article-count-limited|Бул категорияда {{PLURAL:~{0}\u007C~{0} барак}} бар.
+category-file-count|{{PLURAL:~{1}\u007CБул категория төмөнкү файлды камтыйт.\u007CБул категорияда жалпы ~{1}, төмөнкү {{PLURAL:~{0}\u007Cфайл\u007C~{0} файл}} бар.}}
+category-file-count-limited|Бул категорияда {{PLURAL:~{0}\u007C~{0}\u007C~{0}\u007C~{0}}} файл бар.
+categorytree-member-counts|{{PLURAL:~{0}\u007C1 ички категорияны\u007C~{0} ички категорияларды}}, {{PLURAL:~{1}\u007C1 баракты\u007C~{1} баракты }}, жана {{PLURAL:~{2}\u007C1 файлды\u007C~{2} файлды}} камтыйт
+categorytree-num-categories|~{0} К
+categorytree-num-pages|~{0} Б
+categorytree-num-files|~{0} Ф
+nextn|соңку {{PLURAL:~{0}\u007C~{0}}}
+prevn|абалкы {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|уланд.
+bold_sample|Калың текст
+bold_tip|Калың текст
+italic_sample|жантык текст
+italic_tip|жантык текст
+link_sample|Шилтеменин аты
+link_tip|Ички шилтеме
+headline_sample|Башсөз тексти
+headline_tip|2-деңгээлдеги башсөз
+wikieditor-toolbar-tool-ulist|Белгиленген тизме
+wikieditor-toolbar-tool-ulist-example|Белгиленген тизме бирдиги
+wikieditor-toolbar-tool-olist|Санакталган тизме
+wikieditor-toolbar-tool-olist-example|Санакталган тизме бирдиги
+ago|~{0} мурда
+hidden-category-category|Жашыруун категориялар
+statistics|Статистика
+statistics-articles|Макалалар
+statistics-pages|Барактар
+categorytree|Категориялар бутагы
+categorytree-portlet|Категориялар
+categorytree-legend|Категориялардын бутагын көргөз
+categorytree-desc|[[Special:CategoryTree\u007Ccategory structure]]динамикада көрсөт
+categorytree-category|Категория:
+categorytree-go|Бутакты көргөз
+categorytree-parents|Башкы категория
+categorytree-mode-categories|Категориялар гана
+categorytree-mode-pages|файлдардан тышкары
+categorytree-mode-all|баардык барактар
+categorytree-collapse|бүктө
+categorytree-expand|жай
+categorytree-num-empty|бош
+categorytree-load|жүктө
+categorytree-loading|жүктөлүүдөө
+categorytree-nothing-found|эч нерсе табылган жок
+categorytree-no-subcategories|ички категориялар табылган жок
+categorytree-no-parent-categories|Башкы категориялар табылган жок
+categorytree-no-pages|макалалар же баш ийген категориялар жок
+categorytree-not-found|<i>~{0}</i> Категориясы табылган жок
+categorytree-error|Маалымат жүктөөдө ката кетти
+categorytree-retry|Кичине күтүп туруп, жаңы аракет кылыңыз
+proofreadpage_nextpage|кийинки барак
+proofreadpage_prevpage|мурунку барак
+wikieditor-loading|Жүктөлүүдө...
+wikieditor-preview-changes-tab|Өзгөртүүлөр
+wikieditor-preview-loading|Жүктөлүүдө...
+wikieditor-previewDialog-loading|Жүктөлүүдө...
+wikieditor-publish-button-cancel|Жокко чыгаруу
+wikieditor-publish-dialog-goback|Артка
+wikieditor-template-editor-dialog-cancel|Жокко чыгаруу
+wikieditor-toolbar-loading|Жүктөлүүдө...
+wikieditor-toolbar-tool-bold|Калың
+wikieditor-toolbar-tool-bold-example|Калың текст
+wikieditor-toolbar-tool-italic|Жантык
+wikieditor-toolbar-tool-italic-example|жантык текст
+wikieditor-toolbar-tool-ilink-example|Шилтеменин аты
+wikieditor-toolbar-tool-link|Шилтеме
+wikieditor-toolbar-tool-link-title|Шилтеме коюу
+wikieditor-toolbar-tool-link-ext-target|URL шилтемеси:
+wikieditor-toolbar-tool-link-ext-text|Шилтеменин тексти:
+wikieditor-toolbar-tool-link-insert|Шилтеме коюу
+wikieditor-toolbar-tool-link-cancel|Жокко чыгаруу
+wikieditor-toolbar-file-target|Файл аты:
+wikieditor-toolbar-file-size|Өлчөм:
+wikieditor-toolbar-file-float|Тегиздөө:
+wikieditor-toolbar-file-format-none|жок
+wikieditor-toolbar-tool-file-insert|Киргизүү
+wikieditor-toolbar-tool-file-cancel|Жокко чыгаруу
+wikieditor-toolbar-tool-reference-cancel|Жокко чыгаруу
+wikieditor-toolbar-tool-reference-insert|Киргизүү
+wikieditor-toolbar-section-advanced|Кеңейтилген
+wikieditor-toolbar-tool-heading|Баш сөз
+wikieditor-toolbar-tool-heading-1|1 Деңгээл
+wikieditor-toolbar-tool-heading-2|2 Деңгээл
+wikieditor-toolbar-tool-heading-3|3 Деңгээл
+wikieditor-toolbar-tool-heading-4|4 Деңгээл
+wikieditor-toolbar-tool-heading-5|5 Деңгээл
+wikieditor-toolbar-tool-heading-example|Баш сөздүн тексти
+wikieditor-toolbar-group-format|Жасалга
+wikieditor-toolbar-tool-indent|Жээк калтыр
+wikieditor-toolbar-tool-indent-example|Жээк калтырып башталган сап
+wikieditor-toolbar-tool-nowiki|Уики жасалгага көңүл бурба
+wikieditor-toolbar-tool-nowiki-example|Жасалгаланбоочу тексти бул жерге киргиз
+wikieditor-toolbar-tool-redirect|Багытта
+wikieditor-toolbar-tool-redirect-example|Керектүү барактын аты
+wikieditor-toolbar-tool-big|Чоң
+wikieditor-toolbar-tool-big-example|Чоң текст
+wikieditor-toolbar-tool-small|Майда
+wikieditor-toolbar-tool-small-example|Майда текст
+wikieditor-toolbar-tool-superscript|Сап үстүндө
+wikieditor-toolbar-tool-superscript-example|Сап үстүндөгү текст
+wikieditor-toolbar-tool-subscript|Саптан ылдый
+wikieditor-toolbar-tool-subscript-example|Саптан ылдый текст
+wikieditor-toolbar-group-insert|Киргиз
+wikieditor-toolbar-tool-gallery|Сүрөттөр галлереясы
+wikieditor-toolbar-tool-gallery-example|~{0}:Example.jpg\u007CБаяндама1\n~{0}:Example.jpg\u007CБаяндама2
+wikieditor-toolbar-tool-newline|Жаңы сап
+wikieditor-toolbar-tool-table|Жадыбал
+wikieditor-toolbar-tool-table-example-old|-\n! бөрк сөз 1\n! бөрк сөз 2\n! бөрк сөз 3\n\u007C-\n\u007C  1 сап, 1 көзөнөк \n\u007C  1 сап, 2 көзөнөк\n\u007C  1 сап, 3 көзөнөк\n\u007C-\n\u007C  2 сап, 1 көзөнөк\n\u007C  2 сап, 2 көзөнөк\n\u007C  2 сап, 3 көзөнөк
+wikieditor-toolbar-tool-table-example-cell-text|Көзөнөктүн тексти
+wikieditor-toolbar-tool-table-example-header|Бөрк сөздүн тексти
+wikieditor-toolbar-tool-table-title|Жадыбал киргиз
+wikieditor-toolbar-tool-table-dimensions-rows|Саптар
+wikieditor-toolbar-tool-table-dimensions-columns|Тилкелер
+wikieditor-toolbar-tool-table-dimensions-header|Аталыш сап кош
+wikieditor-toolbar-tool-table-wikitable|Чектери менен жасалга
+wikieditor-toolbar-tool-table-sortable|Жадыбал иреттелме болсун
+wikieditor-toolbar-tool-table-example|Мисал
+wikieditor-toolbar-tool-table-preview|Алдын ала көргөз
+wikieditor-toolbar-tool-table-insert|Киргиз
+wikieditor-toolbar-tool-table-cancel|Жокко чыгар
+wikieditor-toolbar-tool-table-toomany|Бул баарлашууда 1000ден ашык көзөнөгү бар жадыбал коюууга мүмкүн эмес.
+wikieditor-toolbar-tool-table-invalidnumber|Сиз саптардын же тилкелердин туура эмес санын көргөздүңүз
+wikieditor-toolbar-tool-table-zero|Сиз бир дагы сабы же тилкеси жок жадыбал киргизе албайсыз
+wikieditor-toolbar-tool-replace|Таап алмаштыр
+wikieditor-toolbar-tool-replace-title|Таап алмаштыр
+wikieditor-toolbar-tool-replace-search|Изде:
+wikieditor-toolbar-tool-replace-replace|Менен алмаштыр:
+wikieditor-toolbar-tool-replace-case|Баш тамганы айырмала
+wikieditor-toolbar-tool-replace-regex|Издөө көзөнөгүн регулярдуу айтылыш  катары эсепте
+wikieditor-toolbar-tool-replace-button-findnext|Ушуну тап
+wikieditor-toolbar-tool-replace-button-replace|Алмаштыр
+wikieditor-toolbar-tool-replace-button-replaceall|Баарын алмаштыр
+wikieditor-toolbar-tool-replace-close|Жап
+wikieditor-toolbar-tool-replace-nomatch|Сиздин талап боюнча эчтеке табылган жок
+wikieditor-toolbar-tool-replace-success|~{0} {{PLURAL:~{0}\u007Cөзгөртүү\u007Cөзгөртүүлөр}} аткарылды.
+wikieditor-toolbar-tool-replace-emptysearch|Сиз издегенге эч нерсе көргөзгөн жоксуз.
+wikieditor-toolbar-tool-replace-invalidregex|Сиз киргизген регулярдуу айтылыш туура эмес: ~{0}
+wikieditor-toolbar-section-characters|Атайын белгилер
+wikieditor-toolbar-characters-page-latin|Латынча
+wikieditor-toolbar-characters-page-latinextended|Латынча кеңейтилген
+wikieditor-toolbar-characters-page-ipa|ЭФА (IPA)
+wikieditor-toolbar-characters-page-symbols|Белгилер
+wikieditor-toolbar-characters-page-greek|Грек
+wikieditor-toolbar-characters-page-cyrillic|Кирилик
+wikieditor-toolbar-characters-page-arabic|Араб
+wikieditor-toolbar-characters-page-arabicextended|Арабча кеңейтилген
+wikieditor-toolbar-characters-page-persian|Перс
+wikieditor-toolbar-characters-page-hebrew|Иврит
+wikieditor-toolbar-characters-page-bangla|Бенгал
+wikieditor-toolbar-characters-page-tamil|Тамил
+wikieditor-toolbar-characters-page-telugu|Телугу
+wikieditor-toolbar-characters-page-sinhala|Сингала
+wikieditor-toolbar-characters-page-gujarati|Гужарати
+wikieditor-toolbar-characters-page-devanagari|Деванагари
+wikieditor-toolbar-characters-page-thai|Тай
+wikieditor-toolbar-characters-page-lao|Лаос
+wikieditor-toolbar-characters-page-khmer|Кхмер
+wikieditor-toolbar-section-help|Жардам
+wikieditor-toolbar-help-heading-description|Баяндамасы
+wikieditor-toolbar-help-heading-syntax|Сиз ушуну киргизсеңиз
+wikieditor-toolbar-help-heading-result|Ушул чыгат
+wikieditor-toolbar-help-page-format|Жасалгалоо
+wikieditor-toolbar-help-page-link|Шилтемелер
+wikieditor-toolbar-help-page-heading|Баш сөздөр
+wikieditor-toolbar-help-page-list|Тизмелер
+wikieditor-toolbar-help-page-file|Файлдар
+wikieditor-toolbar-help-page-reference|Шилтемелер
+wikieditor-toolbar-help-page-discussion|Талкуу
+wikieditor-toolbar-help-content-italic-description|Жантык
+wikieditor-toolbar-help-content-italic-syntax|''Жантык текст''
+wikieditor-toolbar-help-content-italic-result|<em>Жантык текст</em>
+wikieditor-toolbar-help-content-bold-description|Калың
+wikieditor-toolbar-help-content-bold-syntax|'''Калың текст'''
+wikieditor-toolbar-help-content-bold-result|<strong>Калың текст</strong>
+wikieditor-toolbar-help-content-bolditalic-description|Калың жана жантык
+wikieditor-toolbar-help-content-bolditalic-syntax|'''''Калың жана жантык текст'''''
+wikieditor-toolbar-help-content-bolditalic-result|<strong><em>Калың &amp; жантык текст</em></strong>
+wikieditor-toolbar-help-content-ilink-description|Ички шилтеме
+wikieditor-toolbar-help-content-ilink-syntax|[[Барактын баш сөзү\u007CШилтеменин тексти]]<br />[[Барактын баш сөзү]]
+wikieditor-toolbar-help-content-ilink-result|<a href='#'>Шилтеменин тексти</a><br /><a href='#'>Барактын баш сөзү</a>
+wikieditor-toolbar-help-content-xlink-description|Сырткы шилтеме
+wikieditor-toolbar-help-content-xlink-syntax|[http://www.example.org Шилтеменин тексти]<br />[http://www.example.org]<br />http://www.example.org
+wikieditor-toolbar-help-content-xlink-result|<a href='#' class='external'>Шилтеменин тексти</a><br /><a href='#' class='external autonumber'>[1]</a><br /><a href='#' class='external'>http://www.example.org</a>
+wikieditor-toolbar-help-content-heading2-description|2нчи деңгээлдеги баш сөз
+wikieditor-toolbar-help-content-heading2-syntax|==Баш сөздүн тексти==
+wikieditor-toolbar-help-content-heading2-result|<h2>Баш сөздүн тексти</h2>
+wikieditor-toolbar-help-content-heading3-description|3үнчү деңгээлдеги баш сөз
+wikieditor-toolbar-help-content-heading3-syntax|==== Баш сөздүн тексти ====
+wikieditor-toolbar-help-content-heading3-result|<h3>Баш сөздүн тексти</h3>
+wikieditor-toolbar-help-content-heading4-description|4үнчү деңгээлдеги баш сөз
+wikieditor-toolbar-help-content-heading4-syntax|==== Баш сөздүн тексти ====
+wikieditor-toolbar-help-content-heading4-result|<h4>Баш сөздүн тексти</h4>
+wikieditor-toolbar-help-content-heading5-description|5нчи деңгээлдеги баш сөз
+wikieditor-toolbar-help-content-heading5-syntax|==== Баш сөздүн тексти ====
+wikieditor-toolbar-help-content-heading5-result|<h5>Баш сөздүн тексти</h5>
+wikieditor-toolbar-help-content-ulist-description|Белгиленген тизме
+wikieditor-toolbar-help-content-ulist-syntax|* Тизме бирдиги<br />* Тизме бирдиги
+wikieditor-toolbar-help-content-ulist-result|<ul><li>Тизме бирдиги</li><li>Тизме бирдиги</li></ul>
+wikieditor-toolbar-help-content-olist-description|Санакталган тизме
+wikieditor-toolbar-help-content-olist-syntax|# Тизме бирдиги<br /># Тизме бирдиги
+wikieditor-toolbar-help-content-olist-result|<ol><li>Тизме бирдиги</li><li>Тизме бирдиги</li></ol>
+wikieditor-toolbar-help-content-file-description|Кыстарылган файл
+wikieditor-toolbar-help-content-file-syntax|[[~{0}:Example.png\u007Cthumb\u007CТүшүндүрмө текст]]
+wikieditor-toolbar-help-content-file-result|<div style='width:104px;' class='thumbinner'><a title='Түшүндүрмө текст' class='image' href='#'><img height='50' width='100' border='0' class='thumbimage' src='~{1}/WikiEditor/modules/images/toolbar/example-image.png' alt=''/></a><div class='thumbcaption'><div class='magnify'><a title='Чоңойт' class='internal' href='#'><img height='11' width='15' alt='' src='~{0}/common/images/magnify-clip.png'/></a></div>Түшүндүрмө текст</div></div>
+wikieditor-toolbar-help-content-reference-description|Шилтемелер
+wikieditor-toolbar-help-content-reference-syntax|Барактын тексти.&lt;ref name="test"&gt;[http://www.example.org Шилтеменин тексти], кошумча текст.&lt;/ref&gt;
+wikieditor-toolbar-help-content-reference-result|Барактын тексти.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-rereference-description|Ошол эле шилтемени кошумча колдонуу
+wikieditor-toolbar-help-content-rereference-result|Барактын тексти.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-showreferences-description|Шилтемелерди көргөз
+wikieditor-toolbar-help-content-showreferences-result|<ol class='references'><li id='cite_note-test-0'><b><a title='' href='#'>^</a></b> <a rel='nofollow' title='http://www.example.org' class='external text' href='#'>Шилтеменин тексти</a>, кошумча текст.</li></ol>
+wikieditor-toolbar-help-content-signaturetimestamp-description|Кол тамга менен убакыт мөөрүн бас
+wikieditor-toolbar-help-content-signaturetimestamp-result|<a href='#' title='{{#special:mypage}}'>Колдонуучунун аты</a> (<a href='#' title='{{#special:mytalk}}'>талкуу</a>) 15:54, 10 June 2009 (UTC)
+wikieditor-toolbar-help-content-signature-description|Кол тамга
+wikieditor-toolbar-help-content-signature-result|<a href='#' title='{{#special:mypage}}'>Колдонуучунун аты</a> (<a href='#' title='{{#special:mytalk}}'>талкуу</a>)
+wikieditor-toolbar-help-content-indent-description|Жээк калтыр
+wikieditor-toolbar-help-content-indent-syntax|Кадимки текст<br />:Жээк калтырган текст<br />::Жээк калтырган текст
+wikieditor-toolbar-help-content-indent-result|Кадимки текст<dl><dd>Жээк калтырган текст<dl><dd>Жээк калтырган текст</dd></dl></dd></dl>
+wikibase-save|сактоо
+wikibase-cancel|жокко чыгаруу
+wikibase-add|кошуу
+wikibase-sitelink-site-edit-placeholder|сайт
+wikibase-remove|өчүрүү
+wikibase-itembytitle-lookup-site|Сайт:
+wikibase-itembytitle-lookup-page|Барак:
+wikibase-itembytitle-submit|Табуу
+wikibase-itemdisambiguation-lookup-language|Тилдин коду:
+wikibase-itemdisambiguation-submit|Табуу
+wikibase-newentity-description|Баяндама:
+wikibase-modifyterm-language|Тилдин коду:
+wikibase-entitieswithoutlabel-label-language|Тилдин коду:
+wikibase-entitieswithoutlabel-submit|Издөө
+wikimedialicensetexts-desc|Уикимедианын лицензиялык билдирүүсү
+wm-license-attribution-with-author-text|Бул файлдын автордук укук ээси, ~{0}, автордук укук ээси тууралуу маалыматты сактоо "шартын аткарса, каалаган максатта" кимге болбосун колдонууга уруксат берет. Бул файлды жайылтуу, анын негизинде башка чыгармаларды жаратуу, ошондой эле коммерциялык жана башка максаттарда колдонууга уруксат берилет.
+wm-license-attribution-without-author-text|Бул файлдын автордук укук ээси анын автордук укук ээси тууралуу маалыматты сактоо "шартын аткарса, каалаган максатта" кимге болбосун колдонууга уруксат берет. Бул файлды жайылтуу, анын негизинде башка чыгармаларды жаратуу, ошондой эле коммерциялык жана башка максаттарда колдонууга уруксат берилет.
+wm-license-artwork-artist|Автор
+wm-license-artwork-title|Аталышы
+wm-license-artwork-medium|Техника
+wm-license-artwork-dimensions|Өлчөмдөрү
+wm-license-artwork-current-location|Азыркы орду
+wm-license-artwork-object-history|Ээлик кылуу тарыхы
+wm-license-artwork-credit-line|Кошумча маалымат
+wm-license-artwork-references|Шилтемелер
+wm-license-artwork-inscriptions|Сыртындагы жазуулар
+wm-license-artwork-notes|Эскертмелер
+wm-license-artwork-id|Каттоо номуру
+wm-license-artwork-source|Кайнар/Сүрөтчү
+wm-license-book-edition|Басылышы
+wm-license-book-editor|Редактор
+wm-license-book-illustrator|Кооздогон
+wm-license-book-language|Тили
+wm-license-book-page-overview|Барактын кыскача баяндамасы
+wm-license-book-place-of-publication|Чыккан жери
+wm-license-book-printer|Басмакана
+wm-license-book-publisher|Басмакана
+wm-license-book-series-title|Алкактын аталышы
+wm-license-book-start-this-book|Ушул китепти оку
+wm-license-book-translator|Котормочу
+wm-license-creator-description|Баяндама
+wm-license-information-description|Баяндама
+wm-license-information-source|Булак
+wm-license-information-date|Дата
+wm-license-information-author|Автор
+sitesupport|Колдоо
+tooltip-n-sitesupport|Бизди колдоңуз
+specialpages-group-contribution|Каражат чогултуу
+nstab-creator|Автор
+group-Staff|Эмгектештер
+group-coder|Прогрммалоочулар
+tog-underline|Шилтемелердин алдын сызуу:
+tog-hideminor|Соңку өзгөрүүлөрдүн тизмесинен майда өзгөрүүлөрдү жашыруу
+tog-hidepatrolled|Соңку өзгөрүүлөрдүн тизмесинен күзөттөлгөн оңдоолорду жашыруу
+tog-newpageshidepatrolled|Жаңы барактар тизмесинен күзөттөлгөн барактарды жашыруу
+tog-extendwatchlist|Бүт өзгөртүүлөрдү камтыган кеңири көзөмөл тизмеси, эң соңкуларды гана эмес
+tog-usenewrc|Өзгөртүүлөрдү соңку өзгөрүүлөргө жана көзөмөл тизмеме топтоо (JavaScript талап кылынат)
+tog-numberheadings|Башжазууларды автоматтык түрдө номердөө
+tog-showtoolbar|Оңдоо учурунда аспаптар тактасын көрсөтүү (JavaScript талап кылынат)
+tog-editondblclick|Эки басып баракты оңдоо (JavaScript талап кылынат)
+tog-editsectiononrightclick|Бөлүмдүн башжазуусун чычкандын оң баскычы менен басканда оңдоп-түзөө бөлүгүн ачуу (JavaScript талап кылынат)
+tog-watchcreations|Көзөмөл тизмеме мен жараткан барактарды жана мен жүктөгөн файлдарды кошуу
+tog-watchdefault|Мен өзгөрткөн барактарды жана файлдарды көзөмөл тизмеме кошуу
+tog-watchmoves|Мен атын өзгөрткөн барактарды жана файлдарды көзөмөл тизмеме кошуу
+tog-watchdeletion|Мен өчүргөн барактарды жана файлдарды көзөмөл тизмеме кошуу
+tog-minordefault|Жарыяланбасча бүт оңдоолорду майда деп белгилөө
+tog-previewontop|Оңдоо терезесинин алдына алдын ала көрсөтүүнү жайгаштыруу
+tog-previewonfirst|Оңдоого өтөөрдөн мурда алдын ала көрсөтүү
+tog-enotifwatchlistpages|Көзөмөл тизмемдеги барак же файл өзгөртүлгөндө мага эл. почта аркылуу билдирүү
+tog-enotifusertalkpages|Баарлашуу барагым өзгөртүлгөндө мага эл. почта аркылуу билдирүү
+tog-enotifminoredits|Барак же файлдардын майда өзгөртүүлөрүн дагы мага эл. почта аркылуу билдирүү
+tog-enotifrevealaddr|Кабарландыруу билдирүүлөрүндө менин электрондук дарегимди көрсөтүү
+tog-shownumberswatching|Көзөмөлдөп жаткан колдонуучулардын санын көрсөтүү
+tog-oldsig|Учурдагы кол тамга:
+tog-fancysig|Кол тамгамдын уики-белгиси гана (автоматтык шилтемесиз)
+tog-uselivepreview|Тез алдын ала көрсөтүүнү колдонуу (JavaScript талап кылынат) (эксперименталдык)
+tog-forceeditsummary|Оңдоо баяндоосунун көзөнөгү бош калган кезинде мага эскертүү
+tog-watchlisthideown|Көзөмөлдөө тизмесинен менин оңдоолорумду жашыруу
+tog-watchlisthidebots|Көзөмөлдөө тизмесинен боттун оңдоолорун жашыруу
+tog-watchlisthideminor|Көзөмөлдөө тизмесинен майда оңдоолорду жашыруу
+tog-watchlisthideliu|Көзөмөлдөө тизмесинен системага кирген катышуучулардын оңдоолорун жашыруу
+tog-watchlisthideanons|Көзөмөлдөө тизмесинен анонимдүү катышуучулардын оңдоолорун жашыруу
+tog-watchlisthidepatrolled|Көзөмөлдөө тизмесинен күзөттөлгөн оңдоолорду жашыруу
+tog-ccmeonemails|Башка колдонуучуларга жөнөтүп жаткан каттарымдын көчүрмөлөрүн дарегиме жөнөтүү
+tog-diffonly|Айырмаларды салыштыруунун астынан барактын мазмунун көрсөтпөө
+tog-showhiddencats|Жашыруун категорияларды көрсөтүү
+tog-norollbackdiff|Кетенчиктөөнү аткаргандан кийин версиялардын айырмасын көрсөтпөө
+tog-useeditwarning|Барактан өзгөртүүлөрүмдү сактабастан чыгып баратканымда эскертүү
+underline-always|Дайыма
+underline-never|Эч качан
+underline-default|Браузердин ырастоолорун колдонуу
+editfont-style|Оңдолуп жаткан жердин тамга жасалгасы:
+editfont-default|Браузер ырастоолорунун шрифти
+editfont-monospace|Моножазы шрифт
+editfont-sansserif|Кесүүсү жок шрифт
+editfont-serif|Кесүүсү бар шрифт
+january-date|Январь (Үчтүн айы) ~{0}
+february-date|~{0}-феврал
+march-date|~{0}-март
+april-date|Чын Куран ~{0}
+may-date|Бугу ~{0}
+june-date|Кулжа ~{0}
+july-date|Теке ~{0}
+august-date|Баш Оона ~{0}
+september-date|Аяк Оона ~{0}
+october-date|Тогуздун айы ~{0}
+november-date|Жетинин айы ~{0}
+december-date|Бештин айы ~{0}
+hidden-categories|{{PLURAL:~{0}\u007CЖашыруун категория\u007CЖашыруун категориялар}}
+index-category|Индекстелген барактар
+noindex-category|Индекстелбеген барактар
+broken-file-category|Файлдарга туура эмес шилтеме берген барактар
+about|Тууралуу
+article|Макала
+newwindow|(жаңы терезеде ачылат)
+cancel|Жокко чыгаруу
+moredotdotdot|Көбүрөөк...
+morenotlisted|Бул тизме толук эмес.
+mypage|Барак
+mytalk|Талкуу
+anontalk|Бул IP-дарек үчүн талкуулоо
+navigation|Навигация
+and| жана
+qbfind|Табуу
+qbbrowse|Карап чыгуу
+qbedit|Оңдоо
+qbpageoptions|Бул барак
+qbmyoptions|Барактарым
+faq|КБС
+faqpage|Project:КБС
+actions|Аракеттер
+namespaces|Аталыштар мейкиндиги
+variants|Варианттар
+navigation-heading|Навигация менюсу
+errorpagetitle|Ката
+returnto|~{0} барагына кайтуу.
+tagline|{{SITENAME}} дан
+help|Жардам
+search|Издөө
+searchbutton|Издөө
+go|Өтүү
+searcharticle|Алга
+history|Барактын тарыхы
+history_short|Тарыхы
+updatedmarker|менин акыркы жолу кирүүмдөн кийин жаңыртылган
+printableversion|Басма үлгүсү
+permalink|Туруктуу шилтеме
+print|Басып чыгаруу
+view|Кароо
+view-foreign|Көрүлдү ~{0}
+edit|Оңдоо
+edit-local|Локалдык баяндоону оңдоо
+create|Түзүү
+create-local|Локалдык баяндоо кошуу
+editthispage|Бул баракты оңдоо
+create-this-page|Бул баракты түзүү
+delete|Өчүрүү
+deletethispage|Бул баракты өчүрүү
+undeletethispage|Баракты калыбына келтирүү
+undelete_short|~{0} {{PLURAL:~{0}\u007Cоңдоону\u007C~{0} оңдоолорду}} калыбына келтирүү
+viewdeleted_short|Өчүрүлгөн {{PLURAL:~{0}\u007Cоңдоону\u007C~{0} оңдоолорду}} көрүү
+protect|Коргоо
+protect_change|өзгөртүү
+protectthispage|Бул баракты коргоо
+unprotect|Коргоону өзгөртүү
+unprotectthispage|Бул барактын коргоосун өзгөртүү
+newpage|Жаңы барак
+talkpage|Бул баракты талкууга алуу
+talkpagelinktext|Талкуулоо
+specialpage|Кызматтык барак
+personaltools|Жеке аспаптар
+articlepage|Макаланы кароо
+talk|Талкуу
+views|Көрсөтүүлөр
+toolbox|Аспаптар
+userpage|Катышуучунун барагын кароо
+projectpage|Долбоор барагын кароо
+imagepage|Файлдын барагын кароо
+mediawikipage|Билдирүүнүн  барагын кароо
+templatepage|Калыптын барагын кароо
+viewhelppage|Жардам алуу
+categorypage|Категория барагын кароо
+viewtalkpage|Талкууну кароо
+redirectpagesub|Багыттама барак
+viewcount|Бул барак {{PLURAL:~{0}\u007C~{0}\u007C~{0}}} жолу ачылды.
+protectedpage|Корголгон барак
+jumpto|Өтүү:
+jumptonavigation|навигация
+jumptosearch|издөө
+view-pool-error|Кечириңиз, азыркы учурда серверлер ашыра жүктөлгөн болуп турат.\nӨтө көп колдонуучулар бул баракты көрүүгө аракет кылып жатышат.\nБул баракка бир аздан соң кайра кайрылып көрүңүз.\n\n~{0}
+generic-pool-error|Кечиресиз, азыркы убакытта серверлер ашыкча жүктөлүүдө.\nКөптөгөн колдонуучулар да, бул ресурсту көргөнгө аракет кылып атышат.\nСураныч күтө туруңуз, бир аздан кийин кайра бул ресурска кире аласыз.
+pool-timeout|Бөгөттөөнүн күтүү убактысы аяктады
+pool-queuefull|Суроо жыйнагыч толгон
+pool-errorunknown|Белгисиз ката
+aboutsite|{{SITENAME}} тууралуу
+aboutpage|Project:Долбоор тууралуу
+copyright|~{0} лицензиясына ылайык жеткиликтүү мазмун.
+copyrightpage|{{ns:project}}:Автордук укуктар
+currentevents|Учурдагы окуялар
+currentevents-url|Project:Учурдагы окуялар
+disclaimers|Жоопкерчиликтен баш тартуу
+disclaimerpage|Project:Жоопкерчиликтен баш тартуу
+edithelp|Оңдоп-түзөөгө жардам
+mainpage|Баш барак
+mainpage-description|Баш барак
+policy-url|Project:Эрежелер
+portal|Жамаат порталы
+portal-url|Project:Жамаат порталы
+privacy|Купуялуулук саясаты
+privacypage|Project:Купуялуулук саясаты
+badaccess|Кирүү катасы
+badaccess-group0|Сиз сураган аракетти аткара албайсыз.
+versionrequired|MediaWiki'нин ~{0} версиясы керек
+versionrequiredtext|Бул барак менен иштөө үчүн MediaWiki ~{0} версиясы талап кылынат. Кара.[[Special:Version\u007Cversion page]].
+ok|OK
+retrievedfrom|"~{0}" булагынан алынды
+youhavenewmessages|Сизге ~{0} (~{1}) бар.
+youhavenewmessagesfromusers|Сиз {{PLURAL:~{2}\u007Cколдонуучудан\u007C~{2} колдонуучу}} ~{0} алдыңыз (~{1}).
+youhavenewmessagesmanyusers|Көп колдонуучулардан сиз ~{0} алдыңыз (~{1}).
+newmessageslinkplural|жаңы {{PLURAL:~{0}\u007Cбилдирүү\u007C билдирүүлөр}}
+newmessagesdifflinkplural|соңку {{PLURAL:~{0}\u007Cөзгөртүү\u007Cөзгөртүүлөр}}
+youhavenewmessagesmulti|Сизге ~{0} жаңы кат бар
+editsection|оңдоо
+editold|оңдоо
+viewsourceold|кайнарын кароо
+editlink|оңдоо
+viewsourcelink|кайнарды кара
+editsectionhint|~{0} бөлүмүн оңдоо
+showtoc|көрсөтүү
+hidetoc|жашыруу
+thisisdeleted|~{0} көрүү же калыбына келтирүү?
+viewdeleted|Көрүү ~{0}?
+restorelink|{{PLURAL:~{0}\u007C~{0} өчүрүлгөн оңдоо}}
+feedlinks|Дубал:
+feed-unavailable|Синдикация лентасы жеткиликтүү эмес
+site-rss-feed|~{0} RSS тилкеси
+site-atom-feed|~{0} Atom агымы
+page-rss-feed|«~{0}» — RSS-лента
+page-atom-feed|«~{0}» — Atom-лента
+red-link-title|~{0} (мындай барак жок)
+nstab-main|Макала
+nstab-user|Колдонуучу
+nstab-media|Мультимедиа
+nstab-special|Кызматтык барак
+nstab-project|Долбоор барагы
+nstab-image|Файл
+nstab-mediawiki|Билдирүү
+nstab-template|Калып
+nstab-help|Жардам
+nstab-category|Категория
+nosuchaction|Мындай аракет жок
+nosuchspecialpage|Мындай кызматтык барак жок
+error|Ката
+databaseerror|Маалымат базасынын катасы
+databaseerror-query|Талап: ~{0}
+databaseerror-function|Функция: ~{0}
+databaseerror-error|Ката: ~{0}
+laggedslavemode|'''Эскертүү:''' баракта акыркы жаңыртуулар жок болуп калышы мүмкүн.
+readonly|Маалымат базасы бөгөттөлгөн
+enterlockreason|Бөгөттөөнүн себебин жана мөөнөтүн көрсөтүңүз
+missing-article|Табылууга тийиш «~{0}» ~{1} деп аталган баракта текст маалыматтар базасында табылган жок.\n\nБул сыяктуу абал өчүрүлгөн барактын өзгөрүүлөрдүн тарыхына эски шилтеме менен өткөндө учурайт.\n\nЭгерде башка себеби бар болсо, анда Сиз программалык жабдууда ката таптыңыз. Кичи пейилдикке, ушул URL көрсөтүп [[Special:ListUsers/sysop\u007Cадминистраторлордун]] бирине кабарлап коюңуз.
+missingarticle-rev|(версия#: ~{0})
+missingarticle-diff|(айырмасы: ~{0}, ~{1})
+internalerror|Ички ката
+internalerror_info|Ички ката: ~{0}
+filecopyerror|"~{0}" файлы "~{1}" файлына көчүрүлбөдү.
+filerenameerror|«~{0}» файлын бул «~{1}» атка өзгөртүүгө мүмкүн эмес.
+filedeleteerror|"~{0}" файлын өчүрүүгө болбоду.
+directorycreateerror|"~{0}" каталогун түзүүгө болбоду.
+filenotfound|"~{0}" файлын табуу мүмкүн эмес.
+unexpected|Күтүлбөгөн маани: "~{0}"="~{1}".
+formerror|Ката: Форманы жөнөтүүгө болбоду.
+badarticleerror|Бул аракетти бул баракта аткарууга болбойт.
+cannotdelete-title|"~{0}" барагын өчүрүүгө болбойт
+badtitle|Туура эмес аталыш
+badtitletext|Талап кылынган барактын аталышы туура эмес, бош, же тилдер-аралык же уики-аралык аталышы туура эмес шилтемеленген.\nБалким аталышта колдонулбай турган бир же андан көп белги камтылган.
+viewsource|Кайнарын кароо
+viewsource-title|~{0} барагынын баштапкы кодун көрүү
+actionthrottled|Аралык боюнча чектөө
+viewsourcetext|Сиз бул барактын баштапкы кодун көрүп жана көчүрүп алсаңыз болот:
+ns-specialprotected|Кызматык барактарды оңдоого мүмкүн эмес.
+invalidtitle-unknownnamespace|Туура эмес баш сөз
+exception-nologin|Сиз системге кирген жоксуз
+exception-nologin-text|Сураныч бул баракка же аракетти аткаруу үчүн[[Special:Userlogin\u007Cкиршиңиз]]керек.
+virus-badscanner|Ырастоо катасы. Белгисиз вирус сканери: ''~{0}''
+virus-scanfailed|скандоо катасы (код ~{0})
+virus-unknownscanner|белгисиз антивирус:
+logouttext|'''Азыр сиз эсебиңизден тышкарысыз. '''\nСиз {{SITENAME}} аноним катары иштей берсеңиз болот,же ошол же башка ат менен <span class='plainlinks'>[~{0} кайра кириңиз]</span>. Кээ бир барактар интернет серепчинин кешин жаңыртмайын системага киргендей эле көрүнө берээрин эске алыңыз.
+welcomeuser|Кош келиңиз, ~{0}!
+welcomecreation-msg|Сиздин эсеп жазууңуз жаратылды.\n{{SITENAME}} сайтынын [[Special:Preferences\u007Cырастоолорун]] өзгөртүүнү унутпаңыз.
+yourname|Колдонуучу аты:
+userlogin-yourname|Колдонуучунун аты
+userlogin-yourname-ph|Колдонуучу атыңызды териңиз
+yourpassword|Сырсөз:
+userlogin-yourpassword|Сырсөз
+userlogin-yourpassword-ph|Сырсөзүңүздү териңиз
+createacct-yourpassword-ph|Сырсөздү териңиз
+yourpasswordagain|Сырсөздү кайра терүү:
+createacct-yourpasswordagain|Сырсөздү тастыктаңыз
+createacct-yourpasswordagain-ph|Сырсөздү кайра киргизиңиз
+remembermypassword|Бул браузерде колдонуучу атымды (~{0} {{PLURAL:~{0}\u007Cкүнгө}} чейин сактоо)
+userlogin-remembermypassword|Мени системге кирген боюнча калтыр
+userlogin-signwithsecure|Коопсуз байланышты колдонуу
+yourdomainname|Сиздин домен:
+password-change-forbidden|Сиз бул уикиден сырсөзүңүздү өзгөртө албайсыз.
+externaldberror|Маалымат базасында ката кетти же сизге сырткы эсебиңизди жаңыртууга уруксат берилген эмес.
+login|Кирүү
+nav-login-createaccount|Кирүү / Катталуу
+userlogin|Кирүү / Катталуу
+userloginnocreate|Кирүү
+logout|Чыгуу
+userlogout|Чыгуу
+notloggedin|Сиз системге кире элексиз
+userlogin-noaccount|Эсеп жазууңуз жокпу?
+userlogin-joinproject| {{SITENAME}} кошулуңуз
+nologin|Катталган эмессизби? ~{0}.
+nologinlink|Катталуу
+createaccount|Катталуу
+gotaccount|Катталгансызбы? '''~{0}'''.
+gotaccountlink|Кирүү
+userlogin-resetlink|Кирүүчү маалыматарыңызды эсиңизден чыгардыңызбы?
+userlogin-resetpassword-link|Сырсөздү алмаштыруу
+userlogin-loggedin|Сиз эчак эле {{GENDER:~{0}\u007C~{0}}} деп киргенсиз.\nБашка колдонуучунун атынан кириш үчүн асытдагы форманы колдонуңуз.
+createacct-emailrequired|Эмейл дарек
+createacct-emailoptional|Эмейл дарек (милдеттүү эмес)
+createacct-email-ph|Эмейл дарегиңизди киргизиңиз
+createaccountmail|Убактылуу түзүлгөн сырсөздү колдон жана аны көрсөтүлгөн эмейл дарекке жөнөт
+createacct-realname|Чыныгы ысымы (милдеттүү эмес)
+createaccountreason|Себеби:
+createacct-reason|Себеп
+createacct-reason-ph|Эмне үчүн башка эсеп жазуу түзүп жатасыз
+createacct-captcha|Коопсуздук текшерүүсү
+createacct-imgcaptcha-ph|Жогорудагы текстти териңиз
+createacct-submit|Катталыңыз
+createacct-benefit-heading|{{SITENAME}} сиз сыяктуу кишилер тарабынан түзүлгөн.
+createacct-benefit-body1|{{PLURAL:~{0}\u007Cоңдоо\u007Cоңдоолор}}
+createacct-benefit-body2|{{PLURAL:~{0}\u007Cбарак\u007Cбарактар}}
+createacct-benefit-body3|акыркы {{PLURAL:~{0}\u007Cсалым\u007Cсалымдар}}
+badretype|Сиз терген сырсөздөр дал келишпейт
+userexists|Сиз тандаган колдонуучу ат бош эмес.\nСураныч, башка атты тандаңыз.
+loginerror|Кирүү катасы
+createacct-error|Катталууда ката кетти
+createaccounterror|~{0} эсеп жазуусун түзүү мүмкүн эмес
+nocookiesnew|Колдонуучунун эсеби түзүлгөн, бирок сиз аны менен али кире элексиз. {{SITENAME}} колдонуучу кирүүсү үчүн куки колдонот. Сиздин кукилер өчүрүлгөн.\nАларды жандырып, анан жаңы колдонуучу атыңыз жана сырсөзүңүз менен кириңиз.
+nocookieslogin|{{SITENAME}} сайты катышуучуларды киргизүү үчүн кукилерди колдонот.\nСиздики азыр өчүп турат.\nСураныч, аларды күйгүзүп анан кайра аракет кылып көрүңүз.
+nocookiesfornew|Биз кайрылуунун кайнарын тактай албагандыктан катышуучунун эсебин түзүлгөн жок.\nКукилериңиз жандырылгандыгын текшериңиз, баракты жаңыртып туруп, кайрадан аракет кылыңыз.
+noname|Сиз колдонуучунун анык атын көрсөткөн жоксуз.
+loginsuccesstitle|Сиз ийгиликтүү кирдиңиз
+loginsuccess|'''Сиз азыр {{SITENAME}} сайтына "~{0}" болуп кирдиңиз.'''
+nosuchuser|"~{0}" аттуу колдонуучу катталган эмес.\nКолдонуучун аты регистирди айырмалайт.\nКатасын текшериңиз же [[Special:UserLogin/signup\u007Cжаңы эсеп түзүү]]
+nosuchusershort|"~{0}" аттуу колдонуучу жок.\nЖазылышын текшериңиз.
+nouserspecified|Сиз колдонуучу атын көрсөтүшүңүз керек.
+login-userblocked|Бул колдонуучу бөгөттөлгөн. Системага кирүүгө уруксат жок.
+wrongpassword|Ката сырсөз киргизилди. Кайрадан аракет кылып көрүңүз.
+wrongpasswordempty|Сырсөз киргизилген жок. Кайрадан аракет кылып көрүңүз.
+passwordtooshort|Сырсөз {{PLURAL:~{0}\u007C1 символдон}} кем эмес болушу керек.
+password-name-match|Сиздин сырсөзүңүз колдонуучу атыңыздан айырмаланышы керек.
+password-login-forbidden|Бул колдонуучунун атын жана сырсөзүн колдонууга тыюу салынган.
+mailmypassword|Жаңы сырсөздү эл. почта аркылуу жөнөтүү
+passwordremindertitle|{{SITENAME}} үчүн жаңы убактылуу сырсөз
+passwordremindertext|Бирөө (балким сиз, ~{0} IP адресинен) {{SITENAME}}(~{3}) жаңы сырсөз талап кылды. "~{1}" колдонуучу үчүн убактылуу сырсөз түзүлдү жана "~{2}" үчүн коюлду. Эгерде бул сиздин максат болсо, анда системге кирип жаңы сырсөз тандап алышыңыз шарт. Сиздин убактылуу сырсөз {{PLURAL:~{4}\u007Cбир күн\u007C~{4} күн}} жарактуу. \n\nЭгер муну башка киши кылса, же сиз сырсөзүңүздү эстесеңиз жана аны алмаштырууну каалабасаңыз, бул билдирүүнү этибар албай, эски сырсөзүңүздү колдоно берсеңиз болот.
+noemail|"~{0}" колдонуучу үчүн эмейл дареги катталган эмес.
+noemailcreate|Эл. почтанын анык дарегин көрсөтүшүңүз керек
+passwordsent|"~{0}" үчүн катталган эмейлге жаңы сырсөз жөнөтүлдү.\nАны алгандан кийин системге кайра кириңиз.
+blocked-mailpassword|Сиздин IP даректен оңдоого бөгөт коюлган, ошондуктан чырдын алдын алуу максатында сырсөздү калыбына келтирүү функциясына дагы тыюу салынган.
+eauthentsent|Аныктоочу эмейлге кат жөнөтүлдү. Эмейлдин сиздики экендигин далилдөө үчүн андагы жетектемелерди аткарыңыз.
+throttled-mailpassword|Бул эмейл сырсөздү алмаштырууну функциясын акыры {{PLURAL:~{0}\u007Cсаат\u007C~{0} саат}} ичинде колдонгон.\nКыянаттуулуктун алдын алуу максатында  бир эмейлге {{PLURAL:~{0}\u007Cсаат\u007C~{0} саат}} ичинде бир эстетүү суроого гана уруксат берилген.
+mailerror|Почтаны жөнөтүү кезиндеги ката: ~{0}
+emailauthenticated|Сиздин почта дарегиңиз аныкталды ~{1}/~{2}.
+emailconfirmlink|Электрондук дарегиңизди ырастаңыз
+emaildisabled|Бул сайт эл. почтанын билдирүүлөрүн жөнөтө албайт.
+accountcreated|Эсеп жазуусу түзүлдү
+createaccount-title|{{SITENAME}} үчүн эсеп жазуусун түзүү
+login-throttled|Сиз системге кирүүгө өтө көп аракет кылдыңыз. Сураныч, аракетиңизди бир аз тыныгуудан соң улантыңыз.
+login-abort-generic|Сиздин кирүүңүз ийгиликсиз болду - Үзүлдү
+loginlanguagelabel|Тили: ~{0}
+suspicious-userlogout|Сиздин чыгуу талабыңыз сиздин браузериңиздин туура эмес аткарылышынан же прокси кеширлөөсүнөн улам аткарылган жок.
+pt-login|Кирүү
+pt-userlogout|Чыгуу
+php-mail-error-unknown|PHP'нин mail() функциясындагы белгисиз ката.
+changepassword|Сырсөздү өзгөртүү
+resetpass_header|Эсеп жазуунун сырсөзүн өзгөртүү
+oldpassword|Эски сырсөз:
+newpassword|Жаңы сырсөз:
+retypenew|Жаңы сырсөздү кайра териңиз:
+resetpass_submit|Сырсөздү терип анан кирүү
+changepassword-success|Сиздин сырсөзүңүз ийгиликтүү өзгөртүлдү!\nСистемага кирүү аткарылып жатат...
+resetpass_forbidden|Сырсөздү өзгөртүүгө мүмкүн эмес
+resetpass-no-info|Бул баракка түз кайрылыш үчүн, сиз системага киришиңиз керек.
+resetpass-submit-loggedin|Сырсөздү өзгөртүү
+resetpass-submit-cancel|Жокко чыгаруу
+resetpass-temp-password|Убактылуу сырсөз:
+resetpass-expired|Сиздин сырсөзүңүз эскирген. Сураныч жаңы сырсөзүңүз менен кириңиз.
+passwordreset|Сырсөздү түшүрүү
+passwordreset-text-one|Сырсөздү алмаштыруу үчүн бул үлгүнү толтуруңуз.
+passwordreset-legend|Сырсөздү түшүрүү
+passwordreset-disabled|Бул уикиде сырсөздү түшүрүү мүмкүнчүлүгү өчүрүлгөн.
+passwordreset-username|Колдонуучу аты:
+passwordreset-domain|Домен:
+passwordreset-capture|Чыккан катты көрүү?
+passwordreset-email|E-mail дарек:
+passwordreset-emailtitle|{{SITENAME}} сайтындагы эсеп жазуусу жөнүндөгү маалымат
+passwordreset-emailelement|Колдонуучу аты: ~{0}\nУбактылуу сырсөз: ~{1}
+passwordreset-emailsent|Сырсөздү алмаштыруу эмейлге жөнөтүлдү.
+passwordreset-emailsent-capture|Төмөндө көрсөтүлгөн эмейлге сырсөздү алмаштыруучу кат жөнөтүлдү.
+passwordreset-emailerror-capture|Төмөндө көрсөтүлгөн дарекке сырсөздү алмаштыруу кат түзүлдү,бирок аны  {{GENDER:~{1}\u007Cкатышуучуга}} жөнөтүү оңунан чыккан жок: ~{0}
+changeemail|E-mail даректи өзгөртүү
+changeemail-text|Эмейл дарегиңизди алмаштыруу үчүн ушул үлгүнү толтуруңуз. Өзгөрүүнү аныктоо үчүн сырсөздү киргизүү талап кылынат.
+changeemail-no-info|Бул баракка түз кайрылыш үчүн, сиз системага киришиңиз керек.
+changeemail-oldemail|Учурдагы e-mail дарек:
+changeemail-newemail|Жаңы e-mail дарек:
+changeemail-none|(жок)
+changeemail-password|«{{SITENAME}}» долбоору үчүн сиздин сырсөзүңүз:
+changeemail-submit|E-mail'ди өзгөртүү
+extlink_sample|http://www.example.com шилтеме аталышы
+extlink_tip|Сырткы шилтемелерге (http:// префиксин койгонду унутпаңыз)
+nowiki_sample|Форматталбаган текстти бул жерге киргизиңиз
+nowiki_tip|Уики-форматтоого көңүл бурбоо
+image_tip|Кыстарылган файл
+media_tip|Файлга шилтеме
+sig_tip|Кол тамгаңыз жана убакыт мөөрү
+hr_tip|Туура сызык (жыш колдонбоңуз)
+summary|Жыйынтыгы:
+subject|Тема/баш аты:
+minoredit|Майда оңдоо
+watchthis|Бул баракты көзөмөлдөө
+savearticle|Баракты сактоо
+preview|Алдын ала көрүү
+showpreview|Алдын ала көрсөтүү
+showdiff|Өзгөртүүлөрдү көрсөтүү
+anoneditwarning|'''Эскертүү:''' Сиз системге кирген жоксуз.\nIP дарегиңиз бул барактын оңдоо тарыхына жазылат.
+anonpreviewwarning|"Сиз системге кирген жоксуз. Барактын тарыхында сиздин IP дарегиңиз жазылып калат."
+missingcommenttext|Сураныч, комментарийиңизди төмөн жака териңиз.
+blockedtitle|Колдонуучу бөгөттөлгөн
+blockedtext|Сиздин колдонуучу атыңыз же IP дарегиңиз тосмолонгон
+blockednoreason|себеби көрсөтүлгөн жок
+whitelistedittext|Баракты оңдоо үчүн сизге ~{0} керек.
+nosuchsectiontitle|Бөлүктү табуу мүмкүн эмес
+loginreqtitle|Авторизация талап кылынат
+loginreqlink|Кирүү
+accmailtitle|Сырсөз жөнөтүлдү.
+accmailtext| [[User talk:~{0}\u007C~{0}]] үчүн сырсөз ~{1} ге жөнөтүлдү.
+newarticle|(Жаңы)
+newarticletext|Сиз ачыла элек баракка шилтемени бастыңыз.\nБул баракты түзүү үчүн, ылдый жактагы терезеге жаза баштаңыз (кошумча маалымат алуу үчүн [~{0} жардам барагын] караңыз).\nЭгерде Сиз бул жерге жаңылыштык менен кирип калган болсоңуз, анда браузериңиздеги '''артка''' баскычын басыңыз.
+noarticletext|Азыр бул баракта текст жок.\nСиз [[Special:Search/{{PAGENAME}}\u007Cушул аталыш менен баракты изде]] башка барактарда \n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} тийиштүү жазууларды таба аласыз],\nже '''[{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} ошондой аталыш менен барак ача аласыз]'''</span>.
+noarticletext-nopermission|Азыр бул баракта текст жок.\nСиз [[Special:Search/{{PAGENAME}}\u007Cбул ат жөнүндө эскертүүлөрдү]] башка барактардан таба аласыз, же <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} тийиштүү журналдардын жазууларын таба аласыз]</span>. Бул баракты жаратууга укуктарыңыз жок.
+userpage-userdoesnotexist|"~{0}" Мындай колдонуучу катталган эмес. Сураныч, ушул баракты түзүүнү же оңдогонду каалганыңыз анык болсун
+updated|(Жаңыртылды)
+note|'''Эскертме:'''
+previewnote|'''Бул алдын ала көрүнүшү гана болгонун эсиңизге алыңыз.'''\nӨзгөртүүлөрүңүз али сактала элек!
+continue-editing|Өзгөртүүүлөрдү улантабыз
+session_fail_preview|Кечиресиз, байланыш үзүлгөндүктөн сиздин өзгөртүүлөр сакталган жок. Дагы бир жолу аракет кылып көрүңүз. Болбосо, [[Special:UserLogout\u007Clogging out]] аткарып, кайра кирип көрүңүз.
+editing|~{0} оңдоолууда
+creating|~{0} түзүлүүдө
+editingsection|~{0} (бөлүмү) оңдолууда
+editingcomment| ~{0} оңдолууда (жаңы бөлүм)
+editconflict|Оңдоо конфликти: ~{0}
+yourtext|Текстиңиз
+storedversion|Сакталган версия
+yourdiff|Айырмалар
+templatesused|Бул баракта колдонулган {{PLURAL:~{0}\u007Cкалып\u007Cкалыптар }}:
+templatesusedpreview|Бул алдын ала көрсөтүүдө колдонулган {{PLURAL:~{0}\u007Cкалып\u007Cкалыптар}}:
+template-protected|(корголгон)
+template-semiprotected|(жарым-жартылай корголгон)
+hiddencategories|Бул барак {{PLURAL:~{0}\u007C1 жашыруун категориянын\u007C~{0} жашыруун категориялардын}} мүчөсү:
+nocreate-loggedin|Жаңы барак түзүүгө сизде уруксат жок.
+permissionserrors|Кирүү укуктарынын каталары
+permissionserrorstext-withaction|Сизге ~{1}, төмөнкү {{PLURAL:~{0}\u007Cсебеп\u007Cсебептер}} менен уруксат жок:
+recreate-moveddeleted-warn|'''Эскертүү: Сиз мурда өчүрүлгөн баракты кайра баштап жатасыз.'''\nБул баракты кайра кайтаруу чындап керек экендигине көзүңүз жетсин.\nЫңгайлуулук үчүн төмөндө өчүрүүлөрдүн жана өзгөртүүлөрдүн тизмеси берилген:
+moveddeleted-notice|Бул барак өчүрүлгөн.\nМаалымат үчүн төмөндө өчүрүүлөрдүн жана өзгөртүүлөрдүн тизмеси берилген.
+log-fulllog|Журналды бүтүн бойдон көрүү
+edit-conflict|Оңдоолор конфликти
+postedit-confirmation-saved|Оңдооңуз сакталды
+edit-already-exists|Жаңы барак түзүү мүмкүн эмес. Мындай барак бар
+defaultmessagetext|Жарыяланбасча текст
+content-model-wikitext|уики-текст
+content-model-text|жөнөкөй текст
+content-model-javascript|JavaScript
+content-model-css|CSS
+post-expand-template-inclusion-warning|'''Эскертүү:''' Камтылган калыптардын өлчөмү өтө чоң.\nКээ бир калыптар камтылбайт.
+post-expand-template-inclusion-category|Камтылган калыптарынын өлчөмү ашып кеткен барактар
+post-expand-template-argument-warning|'''Эскертүү:''' Бул барак, жок дегенде, абдан чоң көлөмдүү калыптын бир жүйөсүн камтыйт жана  жайылганда өлчөмү абдан чоң болуп кетет. \nУшул сыяктуу жүйөлөр аттатылды.
+post-expand-template-argument-category|Калыптардын аттатылган жүйөлөрүн камтыган барактар
+parser-template-loop-warning|Калыптарда илмек бар:[[~{0}]]
+cantcreateaccounttitle|Эсеп жазуусун түзүү мүмкүн эмес
+viewpagelogs|Бул барактын журналдарын көрсөтүү
+nohistory|Бул барактын өзгөртүүлөр тарыхы жок
+currentrev|Соңку версиясы
+currentrev-asof|~{0} -га соңку версиясы
+revisionasof|~{0} -деги абалы
+revision-info|~{0} карата ~{1} тарабынан жасалган версия
+previousrevision|← Мурунку версиясы
+nextrevision|Жаңыраак версиясы →
+currentrevisionlink|Соңку версиясы
+cur|учрдг.
+next|кийинки
+last|мурунку
+page_first|биринчи
+page_last|акыркы
+histlegend|Айырмаларды тандоо: Салыштырыла турган версияларлын тушундагы тегеректерди белгилеп туруп "Enter"-ди же астындагы баскычты бас.<br />\nТүшүндүрүү: '''({{int:cur}})''' = соңку версиясынан айырма, '''({{int:last}})''' = мурунку версиясынан айырма, '''{{int:minoreditletter}}''' = майда оңдоо.
+history-fieldset-title|Тарыхын кароо
+history-show-deleted|Өчүрүлгөндөрдү гана
+histfirst|эскирээк
+histlast|жаңыраак
+historysize|({{PLURAL:~{0}\u007C1 байт}})
+historyempty|(бош)
+history-feed-title|Өзгөртүүлөр тарыхы
+history-feed-description|Уикидеги бул барактын өзгөртүү тарыхы
+history-feed-item-nocomment|~{0}, ~{1} карата
+rev-deleted-user|(колдонуучунун аты өчүрүлдү)
+rev-delundel|көрсөтүү/жашыруу
+rev-showdeleted|көрсөтүү
+revdelete-show-file-submit|Ооба
+revdelete-hide-text|Версия текстин жашыруу
+revdelete-hide-image|Файл мазмунун жашыруу
+revdelete-hide-name|Аракетин жана объектин жашыруу
+revdelete-hide-comment|Оңдоо баяндамасын жашыруу
+revdelete-hide-user|Редактордун катышуучу атын/IP-дарегин жашыруу
+revdelete-radio-same|(өзгөртпөө)
+revdelete-radio-set|Ооба
+revdelete-radio-unset|Жок
+revdelete-log|Себеби:
+revdel-restore|көрүнүшүн өзгөртүү
+pagehist|Барактын тарыхы
+deletedhist|Өчүрүүлөрдүн тарыхы
+revdelete-reason-dropdown|*Өчүрүүнүн стандарттуу себептери\n** Автордук укуктарды бузуу\n** Орунсуз комментарий же өздүк маалымат\n** Орунсуз катышуучу аты\n** Потенциалдуу ушактаган маалымат
+revdelete-otherreason|Башка/кошумча себеби:
+revdelete-reasonotherlist|Башка себеби
+revdelete-edit-reasonlist|Өчүрүү себептерин оңдоо
+revdelete-offender|Барак версиясынын автору:
+mergehistory|Барактардын тарыхын бириктирүү
+mergehistory-from|Баштапкы барак:
+mergehistory-into|Максаттык барак:
+mergehistory-submit|Версияларды бириктирүү
+mergehistory-invalid-source|Баштапкы барагынын башжазуусу туура болушу керек.
+mergehistory-invalid-destination|Максаттык барагынын башжазуусуу туура бар болуш керек.
+mergehistory-same-destination|Баштапкы жана максаттык барактары окшош эмес болуш керек
+mergehistory-reason|Себеби:
+mergelog|Бириктирүүлөрдүн журналы
+revertmerge|Ажыратуу
+history-title|"~{0}" өзгөрүүлөр тарыхы
+difference-title-multipage|«~{0}» менен «~{1}» барактарынын ортосундагы айырма
+difference-multipage|(Барактардын ортосундагы айырма)
+lineno|~{0} -сап:
+compareselectedversions|Тандалган версияларды салыштыруу
+showhideselectedversions|Тандалган версияларды көрсөтүү/жашыруу
+editundo|жокко чыгаруу
+searchresults|Издөө жыйынтыктары
+searchresults-title|"~{0}" үчүн издөө жыйынтыктары
+prevn-title|Абалкы ~{0} {{PLURAL:~{0}\u007Cжыйынтык}}
+nextn-title|Кийинки ~{0} {{PLURAL:~{0}\u007Cжыйынтык}}
+shown-title|Барактан ~{0} {{PLURAL:~{0}\u007Cжыйынтыкты}} көрсөтүү
+viewprevnext|(~{0} {{int:pipe-separator}} ~{1}) (~{2}) кароо
+searchmenu-exists|'''Бул Уикиде "[[:~{0}]]" деп аталган барак бар.'''
+searchmenu-new|'''Бул Уикиде "[[:~{0}]]" барагын түз!'''
+searchprofile-articles|Негизги барактар
+searchprofile-images|Мултимедиа
+searchprofile-everything|Баары
+searchprofile-advanced|Кеңейтилген
+searchprofile-articles-tooltip|~{0} -де издөө
+searchprofile-images-tooltip|Файлдарды издөө
+searchprofile-everything-tooltip|Баардык барактардан (талкуу барактарды кошо) издөө
+searchprofile-advanced-tooltip|Белгиленген аталыш мейкиндиктеринде издөө
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 сөз\u007C~{1} сөздөр}})
+search-result-category-size|{{PLURAL:~{0}\u007C1 мүчө\u007C~{0} мүчөлөр}} ({{PLURAL:~{1}\u007C1 ички категория\u007C~{1} ички категориялар}}, {{PLURAL:~{2}\u007C1 файл\u007C~{2} файлдар}})
+search-redirect|(~{0} багыттама)
+search-section|(~{0} бөлүмү)
+search-suggest|Балким, издегениңиз бул: ~{0}
+search-interwiki-caption|Тектеш долбоорлор
+search-interwiki-default|~{0} жыйын.:
+search-interwiki-more|(көбүрөөк)
+search-relatedarticle|Байланыштуу
+searchrelated|байланыштуу
+searchall|баары
+search-nonefound|Талапка төп маалымат табылган жок.
+powersearch-legend|Кеңейтилген издөө
+powersearch-ns|Аталыш мейкиндиктеринен издөө:
+powersearch-togglelabel|Белги салуу:
+powersearch-toggleall|Баары
+powersearch-togglenone|Эчнерсе
+search-external|Тышкы издөө
+preferences|Ырастоолор
+mypreferences|Ырастоолор
+prefs-edits|Өзгөртүүлөрдүн саны
+prefs-skin|Тема
+skin-preview|Алдын ала көрүү
+datedefault|Жарыяланбасча
+prefs-labs|Эксперименталдык мүмкүнчүлүктөр
+prefs-user-pages|Колдонуучунун барактары
+prefs-personal|Өздүк маалыматтар
+prefs-rc|Соңку өзгөрүүлөр
+prefs-watchlist|Көзөмөл тизмеси
+prefs-watchlist-days-max|Эң көп ~{0} {{PLURAL:~{0}\u007Cкүн}}
+prefs-watchlist-edits-max|Эң чоң сан: 1000
+prefs-watchlist-token|Көзөмөл тизмесинин токени:
+prefs-resetpass|Сырсөздү өзгөртүү
+prefs-changeemail|Эл. почта дарегин өзгөртүү
+prefs-setemail|Эл. почта дарегин терүү
+prefs-email|Электрондук почта параметрлери
+prefs-rendering|Сырткы көрүнүш
+saveprefs|Сактоо
+restoreprefs|Жарыяланбасча ырастоолорду калыбына келтирүү
+prefs-editing|Оңдоп-түзөө
+rows|Сап:
+columns|Тилке:
+searchresultshead|Издөө
+stub-threshold-disabled|Өчүрүлгөн
+recentchangesdays-max|Эң көп ~{0} {{PLURAL:~{0}\u007Cкүн}}
+timezonelegend|Сааттык алкак:
+localtime|Жергиликтүү убакыт:
+timezoneuseoffset|Башка (жылышты көрсөтүңүз)
+servertime|Сервер убактысы:
+timezoneregion-africa|Африка
+timezoneregion-america|Америка
+timezoneregion-antarctica|Антарктика
+timezoneregion-arctic|Арктика
+timezoneregion-asia|Азия
+timezoneregion-atlantic|Атлантикалык Океан
+timezoneregion-australia|Австралия
+timezoneregion-europe|Европа
+timezoneregion-indian|Индий Океаны
+timezoneregion-pacific|Тынч Океан
+prefs-searchoptions|Издөө
+prefs-namespaces|Ат мейкиндиктери
+default|жарыяланбасча
+prefs-files|Файлдар
+prefs-custom-css|Өз CSS
+prefs-custom-js|Өз JavaScript
+prefs-emailconfirm-label|Эл. почтаны аныктоо:
+youremail|Электрондук дарек:
+username|{{GENDER:~{0}\u007CКолдонуучу аты}}:
+prefs-memberingroups|{{GENDER:~{1}\u007CМүчөсү}} болгон {{PLURAL:~{0}\u007Cтоп\u007Cтоптор}}:
+prefs-registration|Катталуу убактысы:
+yourrealname|Өз ысымыңыз:
+yourlanguage|Тили:
+yourvariant|Мазмундун тил варианты:
+yournick|Жаңы кол тамгаңыз:
+badsig|Туура эмес кол тамга.\nHTML-тегдеринин тууралыгын текшериңиз.
+yourgender|Жыныс:
+gender-unknown|Айткым келген жок
+gender-male|Эркек
+gender-female|Аялзат
+email|Электрондук дарек
+prefs-help-email|Электрондук дарек милдетүү эмес, бирок сырсөзүңүздү унутуп калсаңыз ал сырсөздү жиберүүгө керек.
+prefs-help-email-others|Ошондой эле башкалар сиз менен колдонуучу же баарлашуу барактарыңыздагы шилтеме аркылуу байланыш түзүүгө уруксат берүүнү тандай аласыз.\nБайлашууңузда электрондук дарегиңиз башка кодонуучуларга  көрүнбөйт.
+prefs-help-email-required|Эл. почтанын дарегин көрсөтүү керек.
+prefs-info|Негизги маалыматтар
+prefs-i18n|Интернационализация
+prefs-signature|Кол тамга
+prefs-dateformat|Дата форматы
+prefs-timeoffset|Алкак убакытынын жылышы
+prefs-advancedediting|Кеңейтилген ырастоолор
+prefs-advancedrc|Кеңейтилген ырастоолор
+prefs-advancedrendering|Кеңейтилген ырастоолор
+prefs-advancedsearchoptions|Кеңейтилген ырастоолор
+prefs-advancedwatchlist|Кеңейтилген ырастоолор
+prefs-displayrc|Көрүнүштүн ырастоолору
+prefs-displaywatchlist|Көрүнүштүн ырастоолору
+email-address-validity-valid|Эл. почтанын дареги анык көрүнөт
+email-address-validity-invalid|Эл. почтанын анык дарегин киргизиңиз!
+userrights|Колдонуучулардын укуктарын башкаруу
+userrights-lookup-user|Колдонуучу топторун башкаруу
+userrights-user-editname|Колдонуучу атыңызды териңиз:
+editusergroup|Колдонуучулар топторун оңдоо
+userrights-editusergroup|Колдонуучулар топторун оңдоо
+saveusergroups|Колдонуучулар топторун сактоо
+userrights-groupsmember|Топтордо мүчө:
+userrights-reason|Себеби:
+userrights-changeable-col|Сиз өзгөртө алган топтор
+userrights-unchangeable-col|Сиз өзгөртө албаган топтор
+group|Топ:
+group-user|Колдонуучулар
+group-autoconfirmed|Автоаныкталган колдонуучулар
+group-bot|Боттор
+group-sysop|Администраторлор
+group-bureaucrat|Бюрократтар
+group-suppress|Ревизорлор
+group-all|(баары)
+group-user-member|{{GENDER:~{0}\u007Cколдонуучу}}
+group-autoconfirmed-member|{{GENDER:~{0}\u007Cавтоаныкталган колдонуучу}}
+group-bot-member|{{GENDER:~{0}\u007Cбот}}
+group-sysop-member|{{GENDER:~{0}\u007Cадминистратор}}
+group-bureaucrat-member|{{GENDER:~{0}\u007Cбюрократ}}
+group-suppress-member|{{GENDER:~{0}\u007Cревизор}}
+grouppage-user|{{ns:project}}:Колдонуучулар
+grouppage-autoconfirmed|{{ns:project}}:Автоаныкталган колдонуучулар
+grouppage-bot|{{ns:project}}:Боттор
+grouppage-sysop|{{ns:project}}:Администраторлор
+grouppage-bureaucrat|{{ns:project}}:Бюрократтар
+grouppage-suppress|{{ns:project}}:Ревизорлор
+right-read|барактарды карап чыгуу
+right-edit|Барактарды оңдоо
+right-move|барактардын атын өзгөртүү
+right-move-rootuserpages|катышуучулардын түпкү барактарынын атын өзгөртүү
+right-movefile|файлдардын атын өзгөртүү
+right-upload|Файлдарды жүктөө
+right-reupload|Бар болгон файлдардын үстүнөн жаздыруу
+right-delete|Барактарды өчүрүү
+right-browsearchive|Өчүрүлгөн барактарды издөө
+right-suppressionlog|Жеке журналдарды көрүү
+right-userrights|Бүткүл колдонуучулардын укуктарын оңдоо
+newuserlogpage|Колдонуучуларды каттоо журналы
+action-read|бул баракты окуу
+action-edit|бул баракты оңдоо
+action-createpage|барактарды түзүү
+action-createtalk|талкуулоо барагын түзүү
+action-createaccount|бул эсеп жазуусун түзүү
+action-upload|бул файлды жүктөө
+action-delete|бул баракты өчүрүү
+action-suppressionlog|бул жеке журналды көрүү
+action-userrights|бүткүл колдонуучулардын укуктарын оңдоо
+action-sendemail|электрондук каттарды жөнөтүү
+nchanges|~{0} {{PLURAL:~{0}\u007Cөзгөрүү\u007Cөзгөрүүлөр}}
+recentchanges|Соңку өзгөрүүлөр
+recentchanges-legend|Соңку өзгөртүүлөрдүн ырастоолору
+recentchanges-summary|Уикидеги соңку өзгөрүүлөрдү ушул барактан көзөмөлдө.
+recentchanges-feed-description|Ушул агымдагы уикидеги соңку өзгөрүүлөрдү көзөмөлдө.
+recentchanges-label-newpage|Бул оңдоодон жаңы барак түзүлдү
+recentchanges-label-minor|Бул майда оңдоо
+recentchanges-label-bot|Бул оңдоо бот тарабынан жасалды
+recentchanges-label-unpatrolled|Бул оңдоо күзөттөн өтө элек.
+rcnotefrom|'''~{1}''' -тан өзгөрүүлөр ылдый жакта ('''~{0}''' чейин көрсөтүлдү).
+rclistfrom|~{2} ~{1} күнүнөн баштап жаңы өзгөртүүлөрдү көрсөтүү
+rcshowhideminor|Майда оңдоолорду ~{0}
+rcshowhidebots|ботторду ~{0}
+rcshowhideliu|~{0} катталган колдонуучу
+rcshowhideanons|~{0} жашыруун колдонуучу
+rcshowhidepatr|Күзөттөө алдындагы оңдоолорду ~{0}
+rcshowhidemine|Оңдоолорумду ~{0}
+rclinks|Соңку ~{1} күндө жасалган акыркы ~{0} өзгөртүүлөрдү көрсөтүү<br />~{2}
+diff|айырма
+hist|тарыхы
+hide|Жашыруу
+show|Көрсөтүү
+minoreditletter|м
+newpageletter|Ж
+boteditletter|б
+rc_categories_any|Каалаган
+rc-enhanced-expand|Кошумча маалыматтарды көрсөтүү (JavaScript талап кылынат)
+rc-enhanced-hide|Кошумча маалыматтарды жашыруу
+recentchangeslinked|Байланыштуу өзгөрүүлөр
+recentchangeslinked-feed|Тиешелүү өзгөрүүлөр
+recentchangeslinked-toolbox|Байланыштуу өзгөрүүлөр
+recentchangeslinked-title|"~{0}" үчүн тийиштүү өзгөртүүлөр
+recentchangeslinked-summary|Бул көрсөтүлгөн (же көрсөтүлгөн категорияга кирген) барактан шилтемеленген барактардагы жакын арада жасалган өзгөрүүлөрдүн тизмеси.\n[[Special:Watchlist\u007CКөзөмөл тизмеңиз]]деги барактар калын арип менен белгиленген.
+recentchangeslinked-page|Барактын аталышы:
+recentchangeslinked-to|Белгиленген барактан шилтемеленген барактардын ордуна өзгөртүулөрдү көрсөтүү
+upload|Файлды жүктөө
+uploadbtn|Файлды жүктөө
+uploaderror|Жүктөө катасы
+uploadtext|'''Cүрөт жүктөш үчүн астыдагы форманы колдонуңуз'''.\nМурда жүктөлгөн сүрөттөрдү издеп көрүш үчүн  [[Special:FileList\u007Cжүктөлгөн сүрөттөрдүн тизмеси]]не кириңиз, кайра жүктөлгөндөр да [[Special:Log/upload\u007Cжүктөлгөндөр тизмеси]] журналында жазылат, өчүрүлгөндөр да [[Special:Log/delete\u007Cөчүрүлгөндөр тизмеси]] журналында сакталат.\n\nФайлды макалага кошуу үчүн, астыдагы формалардын биринин шилтемесин колдонсоңуз болот:\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code>''' файлдын толук версиясын колдонуу үчүн\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png\u007C200px\u007Cthumb\u007Cleft\u007Calt text]]</nowiki></code>''' туурасы 200 пикселдик кеңдиктеги үкөкчөдө сол талаада , "алтетрнативдик текст" менен чогуу жайгаштырганга \n* '''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code>''' файлдын өзү көрсөтүлбөгөн, түз шилтеме
+upload-permitted|Уруксат болгон файл типтери: ~{0}.
+uploadlogpage|Жүктөөлөр журналы
+filename|Файл аталышы
+filedesc|Жыйынтыгы
+fileuploadsummary|Кыскача баяндама:
+filereuploadsummary|Файлдагы өзгөрүүлөр:
+filesource|Булак:
+ignorewarnings|Болгон эскертүүлөрдү этибар албоо
+filetype-banned-type|'''".~{0}"''' {{PLURAL:~{3}\u007Cуруксат болбогон файл тиби\u007Cуруксат болбогон файл типтери}}.\nУруксат болгон {{PLURAL:~{2}\u007Cфайл тиби\u007Cфайл типтери}} ~{1}.
+savefile|Файлды сактоо
+upload-source|Баштапкы файл
+sourcefilename|Булактын файл аты:
+sourceurl|Булактын URL-дареги:
+destfilename|Файлдын аталышы:
+upload-maxfilesize|Максималдуу файл өлчөмү: ~{0}
+upload-description|Файл баяндамасы
+upload-options|Жүктөө варианты
+watchthisupload|Бул файлды көзөмөлгө алуу
+upload-success-subj|Ийгиликтүү жүктөлдү
+upload-failure-subj|Жүктөө көйгөйү
+upload-proto-error|Туура эмес протокол
+upload-file-error|Ички ката
+backend-fail-closetemp|Убактылуу файлды жабуу оңунан чыкпай жатат.
+http-invalid-url|Туура эмес URL: ~{0}
+license|Лицензиялоо:
+license-header|Лицензиялоо
+nolicense|Тандалган жок
+upload_source_file|сиздин компьютердеги файл өлчөмү
+imgfile|файл
+listfiles|Файлдар тизмеси
+listfiles_thumb|Миниатюра
+listfiles_date|Дата
+listfiles_name|Ат
+listfiles_user|Колдонуучу
+listfiles_size|Өлчөм
+listfiles_description|Баяндама
+listfiles_count|Версиялар
+file-anchor-link|Файл
+filehist|Файлдын тарыхы
+filehist-help|Файлдын ошол учурдагы көрүнүшүн көрүү үчүн күнү/сааты бөлүмүн басыңыз
+filehist-deleteall|баарын өчүрүү
+filehist-deleteone|өчүрүү
+filehist-revert|кайтаруу
+filehist-current|учурдагы
+filehist-datetime|Дата/Убакыт
+filehist-thumb|Миниатюра
+filehist-thumbtext|~{0} -дагы версиясы үчүн кичирейтилген сүрөтү
+filehist-nothumb|Миниатюра жок
+filehist-user|Колдонуучу
+filehist-dimensions|Өлчөмдөр
+filehist-filesize|Файл өлчөмү
+filehist-comment|Комментарий
+imagelinks|Файлды колдонуу
+linkstoimage|Бул файлга болгон {{PLURAL:~{0}\u007Cшилтеме\u007C~{0} шилтемелер}} :
+nolinkstoimage|Бул файлга шилтеме берген барак жок.
+sharedupload-desc-here|Бул файл ~{0} -дан  жана башка долбоорлордо пайдаланылышы мүмкүн.\nТөмөндө анын [~{1} файлды сыпаттоо барагы]нан сыпаттамасы көрсөтүлгөн.
+filerevert-comment|Себеби:
+filedelete|~{0} — өчүрүү
+filedelete-legend|Файлды өчүрүү
+filedelete-comment|Себеби:
+filedelete-submit|Өчүрүү
+filedelete-reason-otherlist|Башка себеби
+filedelete-maintenance-title|Файлды өчүрүү оңунан чыкпай жатат
+mimesearch|MIME боюнча издөө
+mimetype|MIME-түр:
+download|жүктөп алуу
+unusedtemplates|Колдонулбаган калыптар
+unusedtemplateswlh|башка шилтемелер
+randompage|Тушкелди макала
+statistics-header-users|Колдонуучулардын статистикасы
+statistics-header-hooks|Башка статистика
+statistics-files|Жүктөлгөн файлдар
+brokenredirects-edit|оңдоо
+brokenredirects-delete|өчүрүү
+withoutinterwiki-legend|Префикс
+withoutinterwiki-submit|Көрсөтүү
+nbytes|~{0} {{PLURAL:~{0}\u007Cбайт}}
+nmembers|~{0}{{PLURAL:~{0}\u007Cмүчө\u007Cмүчөлөр}}
+uncategorizedpages|Категорияланбаган барактар
+uncategorizedcategories|Категорияланбаган категориялар
+uncategorizedimages|Категорияланбаган файлдар
+uncategorizedtemplates|Категорияланбаган калыптар
+unusedcategories|Колдонулбаган категориялар
+unusedimages|Колдонулбаган файлдар
+wantedcategories|Керек болгон категориялар
+wantedpages|Керек болгон барактар
+wantedfiles|Керек болгон файлдар
+wantedtemplates|Керек болгон шаблондор
+prefixindex|Бардык барактар префикстери менен
+shortpages|Кыска макалалар
+listusers|Колдонуучулар тизмеси
+usercreated|~{0} күнү ~{1}'да {{GENDER:~{2}\u007Cкатталды}}.
+newpages|Жаңы барактар
+newpages-username|Колдонуучунун аты:
+ancientpages|Эң эски барактар
+move|Аталышын өзгөртүү
+movethispage|Бул барактын атын өзгөртүү
+pager-newer-n|{{PLURAL:~{0}\u007Cжаңыраак 1\u007Cжаңыраак ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Cэскирээк 1\u007Cэскирээк ~{0}}}
+booksources|Китеп тууралуу маалыматтар
+booksources-search-legend|Китеп тууралуу маалыматтарды издөө
+specialloguserlabel|Аткаруучу:
+speciallogtitlelabel|Максаты (аталышы же колдонуучу):
+log|Журналдар
+allpagesfrom|-дан башталган барактарды көрсөтүү:
+allarticles|Бардык барактар
+allinnamespace|«~{0}» ат мейкиндигинин бүт барактары
+allpagessubmit|Аткаруу
+allpagesprefix|- префикси менен барактарды көрсөтүү
+linksearch-ok|Издөө
+linksearch-line|~{0}-га ~{1}-дан шилтеме берилди
+listusers-submit|Көрсөтүү
+listusers-noresult|Колдонуучу табылган жок.
+listusers-blocked|(бөгөттөлгөн)
+activeusers|Активдүү колдонуучулардын тизмеси
+activeusers-hidebots|Ботторду жашыруу
+activeusers-hidesysops|Администраторлорду жашыруу
+activeusers-noresult|Колдонуучулар табылган жок.
+listgrouprights-group|Топ
+listgrouprights-rights|Укуктар
+listgrouprights-helppage|Help:Топтордун укуктары
+listgrouprights-members|(мүчөлөрдүн тизмеси)
+emailuser|Бул колдонуучуга кат жиберүү
+emailusername|Колдонуучунун аты:
+emailusernamesubmit|Жөнөтүү
+emailfrom|- дан
+emailto|Кимге:
+emailsubject|Тема:
+emailmessage|Билдирүү:
+emailsend|Жөнөтүү
+watchlist|Көзөмөл тизмем
+mywatchlist|Көзөмөл тизмеси
+watchlistfor2|~{0} үчүн ~{1}
+watchnologin|Катталган жок
+watch|Көзөмөлдөө
+unwatch|Көзөмөлдөбөө
+watchlist-details|Талкуу барактарын эсепке албаганда көзөмөл тизмеңизде {{PLURAL:~{0}\u007C~{0} барак\u007C~{0} барак}} бар.
+wlshowlast|Соңку ~{0} саат ~{1} күн  көрсөтүү.
+watchlist-options|Көзөмөл тизменин ырастоолору
+created|түзүлдү
+changed|өзгөртүлдү
+deletepage|Баракты өчүрүү
+confirm|Аныктоо
+delete-legend|Өчүрүү
+actioncomplete|Иш-аракет жыйынтыкталды
+actionfailed|Аракет натыйжасыз болду
+dellogpage|Өчүрүүлөр журналы
+deletecomment|Себеби:
+deletereasonotherlist|Башка себеби
+rollbacklink|кайтаруу
+protectlogpage|Коргоо тизмеси
+protectedarticle|"[[~{0}]]" корголгон
+protectcomment|Себеби:
+protect-level-sysop|Администраторлор гана уруксат
+protect-othertime|Башка убакыт:
+protect-othertime-op|башка убакыт
+restriction-type|Укуктар:
+pagesize|(байт)
+restriction-edit|Оңдоо
+restriction-move|Атын өзгөртүү
+restriction-create|Түзүү
+restriction-upload|Жүктөө
+restriction-level-all|бардык деңгээлдер
+undeletebtn|Калыбына келтирүү
+undeletelink|кароо/калыбына келтирүү
+undeleteviewlink|көрүнүшү
+undeletecomment|Себеп:
+undelete-search-submit|Издөө
+undelete-show-file-submit|Ооба
+namespace|Аталыштар мейкиндиги:
+invert|Белгиленгенди текскерилетүү
+contributions|{{GENDER:~{0}\u007CКолдонуучунун}} салымдары
+contributions-title|~{0} үчүн колдонуучунун салымдары
+mycontris|Салымдар
+contribsub2|~{0} үчүн (~{1})
+uctop|(учурдагы)
+month|Айынан (же андан мурдараак):
+year|Жылынан (же андан мурдараак):
+sp-contributions-newbies|Жаңы эсептерден кылынган салымдарды көрсөтүү
+sp-contributions-blocklog|бөгөттөөлөр журналы
+sp-contributions-uploads|жүктөөлөр
+sp-contributions-logs|журналдар
+sp-contributions-talk|талкуулоо
+sp-contributions-search|Салымдарымды издөө
+sp-contributions-username|IP-дарек же колдонуучунун аты:
+sp-contributions-toponly|Соңку версиялары болгон оңдоолорду гана көрсөтүү
+sp-contributions-submit|Издөө
+whatlinkshere|Шилтемелерди бул жакка
+whatlinkshere-title|"~{0}" -га шилтеме берген барактар
+whatlinkshere-page|Барак:
+linkshere|'''[[:~{0}]]''' барагына шилтеме берген барактар:
+nolinkshere|'''[[:~{0}]]''' барагына шилтеме берген барак жок.
+isredirect|Багыттама барак
+istemplate|бириктирүү
+isimage|файл шилтемеси
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cмурунку}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cкийинки}}
+whatlinkshere-links|← шилтемелер
+whatlinkshere-hideredirs|Багыттамаларды ~{0}
+whatlinkshere-hidetrans|~{0} бириктирүүлөр
+whatlinkshere-hidelinks|Шилтемелерди ~{0}
+whatlinkshere-hideimages|~{0} файл шилтемелери
+whatlinkshere-filters|Чыпкалар
+block|Колдонуучуну бөгөттөө
+blockip|Колдонуучуну бөгөттөө
+blockip-legend|Колдонуучуну бөгөттөө
+ipaddressorusername|IP-дарек же колдонуучунун аты:
+ipbreason|Себеп:
+ipbsubmit|Бул колдонуучуну бөгөттөө
+ipbother|Башка убакыт:
+ipboptions|2 саат:2 hours,1 күн:1 day,3 күн:3 days,1 жума:1 week,2 жума:2 weeks,1 ай:1 month,3 ай:3 months,6 ай:6 months,1 жыл:1 year,мөөнөтсүз:infinite
+ipblocklist|Бөгөттөлгөн колдонуучулар
+blocklist-target|Максат
+blocklist-reason|Себеп
+ipblocklist-submit|Издөө
+anononlyblock|анонимдер гана
+emailblock|кат жөнөтүүгө тыюу салынган
+ipblocklist-empty|Бөгөт тизмеси бош.
+blocklink|бөгөттөө
+unblocklink|бөгөттөн чыгаруу
+change-blocklink|бөгөттү өзгөртүү
+contribslink|салымдары
+emaillink|кат жиберүү
+blocklogpage|Бөгөттөөлөр журналы
+blocklogentry|[[~{0}]] бөгөттөлдү, бөгөттөө мөөнөтү: ~{1} ~{2}
+block-log-flags-anononly|аноним колдонуучулар гана
+block-log-flags-nocreate|эсеп жазуусун жаратуу өчүрүлгөн
+block-log-flags-noemail|кат жөнөтүүгө тыюу салынган
+block-log-flags-hiddenname|колдонуучу аты жашырылган
+proxyblocker|Проксини блокировкалоо
+lockdb|Маалымат базасын камоо
+lockbtn|Маалымат базасын камоо
+move-page|~{0} — атын өзгөртүү
+move-page-legend|Барактын атын өзгөртүү
+movearticle|Барактын атын өзгөртүү:
+newtitle|Жаңы аталышка:
+movepagebtn|Барактын атын өзгөртүү
+pagemovedsub|Барактын аты өзгөртүлдү
+movepage-moved-redirect|Багыттама түзүлдү.
+movelogpage|Аталыштарды өзгөртүү тарыхы
+movereason|Себеп:
+revertmove|кайтаруу
+delete_and_move|Өчүрүү же атын өзгөртүү
+delete_and_move_confirm|Ооба, бул баракты өчүрөм
+immobile-source-page|Бул барактын атын өзгөртүүгө болбойт.
+imageinvalidfilename|Максаттык файл аты туура эмес
+move-leave-redirect|Багыттаманы калтыруу
+export|Барактарды экспорттоо
+exportall|Бардык барактарды экспорттоо
+export-submit|Экспорттоо
+export-addcattext|Категориядан барактарды кошуу:
+export-addcat|Кошуу
+export-addnstext|Ат мейкиндигинен барактарды кошуу:
+export-addns|Кошуу
+export-download|Файлга ат коюп сактоо
+export-templates|Калыптарды камтуу
+allmessages|Системалык билдирүүлөр
+allmessagesname|Аталышы
+allmessagesdefault|Белгиленген билдирүүнүн тексти
+allmessagescurrent|Учурдагы текст
+allmessages-filter-legend|Чыпка
+allmessages-filter-unmodified|Өзгөртүлбөгөндөр
+allmessages-filter-all|Баардыгы
+allmessages-filter-modified|Өзгөртүлгөндөр
+allmessages-prefix|Префикси боюнча чыпкалоо:
+allmessages-language|Тили:
+allmessages-filter-submit|Өтүү
+filemissing|Файл табылган жок
+thumbnail_error|Кичирейтилген сүрөттү түзүүдөгү ката: ~{0}
+thumbnail_image-type|Сүрөт түрү колдолбойт
+import|Барактарды импорттоо
+importinterwiki|Уики аралык импорт
+import-interwiki-history|Бул барактын бүткүл өзгөртүү тарыхын көчүрүү
+import-interwiki-templates|Бардык калыптарды камтуу
+import-interwiki-submit|Импорттоо
+import-interwiki-namespace|Максаттык ат мейкиндиги:
+import-interwiki-rootpage|Максаттык түпкү барагы (сөзсүз эмес):
+import-upload-filename|Файл аты:
+import-comment|Эскертүү:
+importstart|Барактарды импорттоо...
+import-revision-count|~{0} {{PLURAL:~{0}\u007Cверсия}}
+importnopages|Импорттоого барактар жок.
+imported-log-entries|~{0} {{PLURAL:~{0}\u007Cжурнал жазуусу}} импорттолду.
+importfailed|Импорттоо оңунан чыккан жок: <nowiki>~{0}</nowiki>
+importunknownsource|Импорттолуп жаткан барактын белгисиз түрү
+importcantopen|Импорт файлын ачууга мүмкүн эмес
+importbadinterwiki|Туура эмес интеруики-шилтеме
+importsuccess|Импорттоо аяктады!
+importnofile|Импорттоо файлы жүктөлгөн жок.
+importuploaderrorpartial|Импорт файлын жүктөө оңунан чыккан жок.\nАл жарым-жартылай эле жүктөлдү.
+importuploaderrortemp|Импорт файлын жүктөө оңунан чыккан жок.\nУбактылуу папка жок.
+import-parse-failure|Импорттоо учурундагы XML'ди талдоо катасы
+import-noarticle|Импорттоого барактар жок!
+import-nonewrevisions|Бүт версиялар мурда импорттолгон.
+import-upload|XML-маалыматтарды жүктөө
+import-token-mismatch|Сеанстын маалыматтары жоготулду.\nДагы аракет кылып көрүңүз.
+import-invalid-interwiki|Көрсөтүлгөн уикиден импорттоого мүмкүн эмес.
+importlogpage|Импорт журналы
+import-logentry-upload-detail|~{0} {{PLURAL:~{0}\u007Cверсия}}
+javascripttest|JavaScript'ти текшерүү
+tooltip-pt-userpage|Колдонуучу барагыңыз
+tooltip-pt-mytalk|Баарлашуу барагыңыз
+tooltip-pt-anontalk|Бул IP дарекке арналган талкуулоо барагы
+tooltip-pt-preferences|Ырастоолоруңуз
+tooltip-pt-watchlist|Өзгөрүүлөрүн көзөмөлгө алган барактардын тизмеси
+tooltip-pt-mycontris|Салымдарыңыздын тизмеси
+tooltip-pt-login|Сизге системада катталууга сунуш кылынат, бирок милдеттүү эмес
+tooltip-pt-logout|Чыгуу
+tooltip-ca-talk|Барактын мазмунун талкуулоо
+tooltip-ca-edit|Сиз бул баракты оңдой аласыз. Кичи пейилдикке, сактоодон мурда алдын ала көрсөтүү баскычын колдонуңуз.
+tooltip-ca-addsection|Жаңы бөлүм баштоо
+tooltip-ca-viewsource|Бул барак корголгон.\nСиз анын кайнарын көрө аласыз
+tooltip-ca-history|Бул барактын мурунку оңдоолору
+tooltip-ca-protect|Бул баракты коргоо
+tooltip-ca-delete|Бул баракты өчүрүү
+tooltip-ca-move|Барактын атын өзгөртүү
+tooltip-ca-watch|Бул баракты көзөмөл тизмеңизге кошуңуз
+tooltip-ca-unwatch|Бул баракты көзөмөл тизмеңизден алып салыңыз
+tooltip-search|{{SITENAME}} издөө
+tooltip-search-go|Так ушундай аталыштагы баракты көрсөтүү
+tooltip-search-fulltext|Ушул текст бар барактарды издөө
+tooltip-p-logo|Башбаракка өтүү
+tooltip-n-mainpage|Башбаракка өтүү
+tooltip-n-mainpage-description|Башбаракка өтүү
+tooltip-n-portal|Долбоор тууралуу, эмне жасай аласыз, кайдан тапса болот
+tooltip-n-currentevents|Учурдагы окуялар тууралуу кошумча маалымат табуу
+tooltip-n-recentchanges|уикидеги соңку өзгөртүүлөрдүн тизмеси
+tooltip-n-randompage|Тушкелди баракты ачып кара
+tooltip-n-help|Маалымат алуу үчүн
+tooltip-t-whatlinkshere|Ушул жерге шилтемеси бар бардык уики барактардын тизмеси
+tooltip-t-recentchangeslinked|Бул барактан шилтеме берилген барактардагы соңку өзгөрүүлөр
+tooltip-feed-atom|Бул барак үчүн Atom агымы
+tooltip-t-contributions|Бул колдонуучунун салымдарынын тизмеси
+tooltip-t-emailuser|Бул колдонуучуга кат жиберүү
+tooltip-t-upload|Файлдарды жүктөө
+tooltip-t-specialpages|Бардык кызматтык барактардын тизмеги
+tooltip-t-print|Бул барактын басып чыгарууга ылайыктуу түрү
+tooltip-t-permalink|Барактын бул версиясына туруктуу шилтеме
+tooltip-ca-nstab-main|Барактын мазмунун кароо
+tooltip-ca-nstab-user|Колдонуучунун барагын көрсөтүү
+tooltip-ca-nstab-media|Медиа барагын көрүү
+tooltip-ca-nstab-special|Бул кызматтык барак, сиз аны оңдой албайсыз
+tooltip-ca-nstab-project|Долбоор барагы
+tooltip-ca-nstab-image|Файл барагын кароо
+tooltip-ca-nstab-mediawiki|Системалык билдирүүсүн кароо
+tooltip-ca-nstab-template|Калыпты кароо
+tooltip-ca-nstab-help|Жардам барагын кароо
+tooltip-ca-nstab-category|Категория барагын кароо
+tooltip-minoredit|Муну майда оңдоо деп белгилөө
+tooltip-save|Өзгөртүүлөрүңүздү сактоо
+tooltip-preview|Сураныч, сактоодон мурда өзгөртүүлөрдү алдын ала көрсөтүүнү  колдонуңуз!
+tooltip-diff|Текстке киргизилген өзгөртүүлөрүңүздү көрсөтүү
+tooltip-compareselectedversions|Бул барактын тандалган эки версиясынын айырмаларын кароо
+tooltip-watch|Бул баракты көзөмөл тизмеңизге кошуңуз
+tooltip-watchlistedit-raw-submit|Көзөмөл тизмесин жаңыртуу
+tooltip-upload|Жүктөөнү баштоо
+tooltip-rollback|"Кайтар" бир баскыч менен бул барактын соңку оңдоочусунун өзгөртүүлөрүн алып салат
+tooltip-undo|Киргизилген оңдоону алып салат жана жокко чыгаруунун себебин белгилөөгө мүмкүнчүлүк берип алдын ала көрсөтүүнү ачат
+tooltip-preferences-save|Ырастоолорду сактоо
+tooltip-summary|Кыска баяндаманы киргизиңиз
+others|башкалар
+anonusers|{{SITENAME}} аноним {{PLURAL:~{1}\u007Cколдонуучу}} ~{0}
+creditspage|Алкыштар
+pageinfo-title|«~{0}» үчүн маалымат
+pageinfo-header-basic|Негизги маалыматтар
+pageinfo-header-edits|Оңдоо тарыхы
+pageinfo-display-title|Көрүнүүчү башжазуу
+pageinfo-article-id|Барактын идентификатору
+pageinfo-redirects-name|Бул баракка багыттамалар
+pageinfo-firstuser|Барактын түзүүчүсү
+pageinfo-lastuser|Акыркы редактор
+pageinfo-toolboxlink|Барак жөнүндө маалымат
+pageinfo-redirectsto-info|маалыматтар
+pageinfo-contentpage-yes|Ооба
+pageinfo-protect-cascading-yes|Ооба
+patrol-log-page|Күзөттөө журналы
+previousdiff|← Эскирээк оңдоо
+nextdiff|Жаңыраак оңдоо →
+file-info-size|~{0} × ~{1} пиксель, файлдын көлөмү: ~{2}, MIME түрү: ~{3}
+file-nohires|Мындан чоңураак чечим жок.
+svg-long-desc|SVG файл, шарттуу түрдө ~{0} × ~{1} пиксел, файлдын көлөмү: ~{2}
+svg-long-error|туура эмес SVG-файл: ~{0}
+show-big-image|Толук чечими
+newimages|Жаңы файлдардын галереясы
+newimages-legend|Чыпка
+newimages-label|Файл аты (же анын жартысы):
+noimages|Көрүүгө эчтеке жок.
+ilsubmit|Издөө
+bydate|дата боюнча
+seconds|{{PLURAL:~{0}\u007C~{0} секунда}}
+minutes|{{PLURAL:~{0}\u007C~{0} мүнөт}}
+hours|{{PLURAL:~{0}\u007C~{0} саат}}
+days|{{PLURAL:~{0}\u007C~{0} күн}}
+just-now|азыр эле
+bad_image_list|Төмөнкү калыпта болуш керек:\n\nТизмедегилер гана окулат (* белги менен башталган саптар).\nСаптын биринчи шилтемеси койгонго тыюу салынган файлга шилтеме болуш керек.\nОшол саптагы кийинки шилтемелер айрыкча каралып, же файл киргизиле бере турган макалалар.
+metadata|Метамаалыматтар
+metadata-help|Бул файл адатта санарип камера же сканнер кошуучу маалыматтарды камтыйт. \nЭгерде файл баштапкы абалынан өзгөртүлсө, анда анын кээ бир сыпаттары толук чагылдырылбашы мүмкүн.
+metadata-fields|Төмөндө тизмеленген сүрөт метамаалыматтарынын саптары метамаалыматтардын жадыбалы түрүлүү учурда сүрөт барагына кошумчаланат.\nКалгандары баштапкы абалда (өзгөртүлбөсө) көргөзүлбөйт.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|Туурасы
+exif-imagelength|Бийиктиги
+exif-imagedescription|Сүрөт аты
+exif-artist|Автор
+exif-pixelydimension|Сүрөттүн туурасы
+exif-pixelxdimension|Сүрөттүн бийиктиги
+exif-usercomment|Колдонуучунун комментарийи
+exif-relatedsoundfile|Байланыштуу аудио-файл
+exif-fnumber|Диафрагманын саны
+exif-lightsource|Жарыктын булагы
+exif-flash|Жарк
+exif-filesource|Файлдын булагы
+exif-scenetype|Сахнанын түрү
+exif-contrast|Карама-каршылык
+exif-gpslatitude|Кеңдик
+exif-gpslongitude|Узундук
+exif-gpsaltitude|Бийиктик
+exif-gpstimestamp|GPS убакыты (атомдук саат)
+exif-gpsspeedref|Ылдамдыктын өлчөө бирдиги
+exif-gpsdatestamp|Дата
+exif-jpegfilecomment|JPEG-файл үчүн эскертүү
+exif-keywords|Ачкыч сөздөр
+exif-countrydest|Көрсөтүлгөн өлкө
+exif-citydest|Көрсөтүлгөн шаар
+exif-objectname|Кыска аталышы
+exif-source|Булак
+exif-contact|Байланыш маалыматы
+exif-writer|Тексттин автору
+exif-languagecode|Тили
+exif-iimversion|IIM версиясы
+exif-iimcategory|Категория
+exif-identifier|Идентификатор
+exif-label|Белги
+exif-rating|Баа (5тен)
+exif-copyrighted|Автордук-укуктук статус
+exif-copyrightowner|Автордук укуктардын ээси
+exif-usageterms|Колдонуу шарттары
+exif-pngfilecomment|PNG-файл үчүн эскертүү
+exif-disclaimer|Жоопкерчиликтен баш тартуу
+exif-contentwarning|Мазмун жөнүндө эскертүү
+exif-giffilecomment|GIF-файл үчүн эскертүү
+exif-intellectualgenre|Объекттин түрү
+exif-subjectnewscode|Теманын коду
+exif-compression-1|Кыстырылбаган
+exif-copyrighted-true|Автордук укук менен корголгон
+exif-copyrighted-false|Автордук укук абалы көрсөтүлгөн эмес
+exif-unknowndate|Белгисиз дата
+exif-orientation-1|Нормалдуу
+exif-exposureprogram-1|Кол менен
+exif-exposureprogram-2|Программалык режим (нормалдуу)
+exif-subjectdistance-value|~{0} метр
+exif-meteringmode-0|Белгисиз
+exif-meteringmode-1|Орточо
+exif-meteringmode-5|Матрицалуу
+exif-meteringmode-6|Жарым-жартылай
+exif-meteringmode-255|Башка
+exif-lightsource-0|Белгисиз
+exif-lightsource-4|Жарк
+exif-lightsource-11|Көлөкө
+exif-lightsource-255|Жарыктын башка булагы
+exif-flash-mode-3|автоматтык режим
+exif-focalplaneresolutionunit-2|дюйм
+exif-sensingmethod-1|Аныкталбаган
+exif-scenecapturetype-0|Стандарттуу
+exif-scenecapturetype-1|Ландшафт
+exif-scenecapturetype-2|Портрет
+exif-scenecapturetype-3|Түнкү тартуу
+exif-gaincontrol-0|Жок
+exif-contrast-0|Кадимки
+exif-contrast-1|Жумшак жогорулатуу
+exif-contrast-2|Катуу жогорулатуу
+exif-saturation-0|Кадимки
+exif-sharpness-0|Кадимки
+exif-sharpness-1|Жумшак жогорулатуу
+exif-sharpness-2|Катуулатуу
+exif-subjectdistancerange-0|Белгисиз
+exif-subjectdistancerange-1|Макротартуу
+exif-subjectdistancerange-2|Жакын аралыктагы тартуу
+exif-gpsdestdistance-k|Километр
+exif-gpsdestdistance-m|Миля
+exif-gpsdop-excellent|Мыкты (~{0})
+exif-gpsdop-good|Жакшы (~{0})
+exif-gpsdop-moderate|Орточо (~{0})
+exif-gpsdop-poor|Начар (~{0})
+exif-dc-contributor|Авторлоштор
+exif-dc-date|Дата(лар)
+exif-dc-publisher|Бастыруучу
+exif-dc-rights|Укуктар
+exif-dc-source|Баштапкы медиа
+exif-dc-type|Медианын түрү
+exif-iimcategory-fin|Экономика жана бизнес
+exif-iimcategory-edu|Билим
+exif-iimcategory-evn|Айлана чөйрө
+exif-iimcategory-hth|Ден соолук
+exif-iimcategory-lab|Эмгек
+exif-iimcategory-pol|Саясат
+exif-iimcategory-rel|Дин жана ишеним
+exif-iimcategory-sci|Илим жана техника
+exif-iimcategory-soi|Социалдык маселелер
+exif-iimcategory-spo|Спорт
+exif-iimcategory-wea|Аба-ырайы
+namespacesall|баары
+monthsall|баары
+confirmemail|Электрондук даректи аныктоо
+confirmemail_loggedin|Электрондук дарегиңиз аныкталды.
+recreate|Кайрадан түзүү
+confirm_purge_button|OK
+confirm-watch-button|ОК
+confirm-unwatch-button|ОК
+imgmultipageprev|← мурунку барак
+imgmultipagenext|кийинки барак →
+imgmultigo|Өтүү!
+imgmultigoto|~{0} барагына өтүү
+ascending_abbrev|өсүү
+descending_abbrev|кемүү
+table_pager_next|Кийинки барак
+table_pager_prev|Мурунку барак
+table_pager_first|Биринчи барак
+table_pager_last|Соңку барак
+table_pager_limit_submit|Аткаруу
+table_pager_empty|Табылган жок
+watchlistedit-raw-titles|Жазуулар:
+watchlistedit-raw-submit|Көзөмөл тизмесин жаңыртуу
+watchlisttools-view|Тийиштүү өзгөрүүлөрдү кароо
+watchlisttools-edit|Көзөмөл тизмесин кароо жана оңдоо
+watchlisttools-raw|Жетиле элек көзөмөл тизмени оңдоо
+duplicate-defaultsort|'''Эскертүү:''' "~{1}" белгиленген ылгоочу ачкыч "~{0}" мурунку белгиленген ылгоочу ачкычты жокко чыгарат.
+version|Версия
+version-extensions|Орнотулган кеңейтүүлөр
+version-skins|Темалар
+version-specialpages|Кызматтык барактар
+version-variables|Өзгөрмөлөр
+version-other|Башка
+version-version|(~{0})
+version-license|Лицензия
+version-software|Орнотулган программалык камсыздоо
+version-software-product|Продукт
+version-software-version|Версия
+version-entrypoints-header-url|URL
+fileduplicatesearch-filename|Файл аты:
+fileduplicatesearch-submit|Издөө
+specialpages|Кызмат барактары
+specialpages-group-other|Башка кызмат барактары
+specialpages-group-login|Кирүү / Каттоо
+specialpages-group-pagetools|Барак аспаптары
+specialpages-group-spam|Спам үчүн аспаптар
+blankpage|Бош барак
+external_image_whitelist| #Бул сапты болгондой калтыруу<pre>\n#Туруктуу айтылыштардын бөлүмдөрүн (// арасындагы бөлүмүн гана) астына жайгаштыру \n#Алар сырткы сүрөттөрдүн URL менен байланыштырылат\n#Ылайыктуулары сүрөт болуп көрсөтүлөт, калгандары сүрөттөргө шилтеме болуп көрсөтүлөт\n## менен башталган саптар, түшүндүрмө болуп эсептелет\n#Баш же кичине тамга айырмасыз\n\n#Туруктуу айтылыштардын бөлүмдөрүн ушул саптын үстүнө жайгаштыр. Бул сапты болгондой калтыруу.</pre>
+tag-filter|[[Special:Tags\u007CБелги]] элеги:
+tag-filter-submit|Фильтрдөө
+tags-title|Белгилер
+tags-tag|Белгинин аты
+tags-hitcount-header|Белгиленген өзгөрүүлөр
+tags-edit|оңдоо
+tags-hitcount|~{0} {{PLURAL:~{0}\u007Cөзгөрүү}}
+comparepages|Барактарды салыштыруу
+compare-page1|Биринчи барак
+compare-page2|Экинчи барак
+compare-rev1|Биринчи версия
+compare-rev2|Экинчи версия
+compare-submit|Салыштыруу
+htmlform-required|Бул чоңдук керек болот
+htmlform-submit|Жөнөтүү
+htmlform-reset|Өзгөртүүлөрдү жокко чыгаруу
+htmlform-selectorother-other|Башка
+logentry-delete-delete|~{0} колдонуучу ~{2} барагын өчүрдү
+revdelete-content-hid|мазмун жашырылган
+revdelete-summary-hid|оңдоонун баяндамасы жашырылган
+revdelete-uname-hid|катышуучу аты жашырылган
+revdelete-unrestricted|администраторлор үчүн чектөөлөр алынды
+logentry-newusers-newusers|~{0} эсеп жазуусу түзүлдү
+logentry-newusers-create|~{0} эсеп жазуусу түзүлдү
+logentry-newusers-create2|~{0} эсеп жазуусун түздү
+logentry-newusers-autocreate|Автоматтуу түрдө ~{0} эсеп жазуусу түзүлдү
+rightsnone|(жок)
+feedback-adding|Баракка пикирди кошуу…
+feedback-bugnew|Мен текшердим. Жаңы ката жөнүндө маалымдоо
+feedback-cancel|Жокко чыгаруу
+feedback-close|Даяр
+feedback-error1|Ката. API'ден белгисиз натыйжа
+feedback-error2|Ката: Оңдоо оңунан чыккан жок
+feedback-error3|Ката: API'ден жооп жок
+feedback-message|Билдирүү:
+feedback-subject|Тема:
+feedback-submit|Жөнөтүү
+searchsuggest-search|Издөө
+searchsuggest-containing|кармагандар...
+api-error-badtoken|Ички ката: анык эмес токен.
+api-error-file-too-large|Сиз жөнөткөн файл өтө чоң.
+api-error-filename-tooshort|Файл аты өтө кыска.
+api-error-filetype-banned|Бул файл түрүнө тыюу салынган.
+api-error-illegal-filename|Жарабай турган файл аты.
+api-error-unclassified|Белгисиз ката пайда болду.
+api-error-unknown-code|Белгисиз ката: "~{0}".
+api-error-unknown-warning|Белгисиз эскертүү: "~{0}".
+api-error-unknownerror|Белгисиз ката: «~{0}».
+api-error-uploaddisabled|Бул уикиде файлдарды жүктөө мүмкүнчүлүгү өчүрүлгөн.
+duration-seconds|~{0} {{PLURAL:~{0}\u007Cсекунда}}
+duration-minutes|~{0} {{PLURAL:~{0}\u007Cмүнөт}}
+duration-hours|~{0} {{PLURAL:~{0}\u007Cсаат}}
+duration-days|~{0} {{PLURAL:~{0}\u007Cкүн}}
+duration-weeks|~{0} {{PLURAL:~{0}\u007Cжума}}
+duration-years|~{0} {{PLURAL:~{0}\u007Cжыл}}
+duration-decades|~{0} {{PLURAL:~{0}\u007Cоң жылдык мөөнөт}}
+duration-centuries|~{0} {{PLURAL:~{0}\u007Cкылым}}
+duration-millennia|~{0} {{PLURAL:~{0}\u007Cмиң жылдык мөөнөт}}
+mediastatistics-table-count|Файлдар саны
+mediastatistics-table-totalbytes|Жалпы өлчөм
+mediastatistics-header-unknown|Белгисиз
+mediastatistics-header-audio|Аудио
+mediastatistics-header-video|Видеолор
+mediastatistics-header-office|Кеңсе
+mediastatistics-header-text|Тексттик
+special-characters-group-latin|Латынча
+special-characters-group-latinextended|Латынча кеңейтилген
+special-characters-group-ipa|ЭФА (IPA)
+special-characters-group-symbols|Белгилер
+special-characters-group-greek|Грек
+special-characters-group-cyrillic|Кирилик
+special-characters-group-arabic|Араб
+special-characters-group-arabicextended|Арабча кеңейтилген
+special-characters-group-persian|Перс
+special-characters-group-hebrew|Иврит
+special-characters-group-bangla|Бенгал
+special-characters-group-tamil|Тамил
+special-characters-group-telugu|Телугу
+special-characters-group-sinhala|Сингала
+special-characters-group-gujarati|Гужарати
+special-characters-group-devanagari|Деванагари
+special-characters-group-thai|Тай
+special-characters-group-lao|Лаос
+special-characters-group-khmer|Кхмер
+']:>
+).lang
+;

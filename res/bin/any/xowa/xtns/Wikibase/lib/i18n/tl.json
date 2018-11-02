@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"AnakngAraw",
+			"Jojit fb"
+		]
+	},
+	"wikibase-lib-desc": "Naghahawak ng karaniwang panunungkulan para sa mga pandugtong ng Wikibase at Wikibase Client",
+	"wikibase-error-save-generic": "Naganap ang isang kamalian habang sinusubukang isagawa ang pagsagip at dahil dito, hindi makumpleto ang mga pagbabago.",
+	"wikibase-error-remove-generic": "Naganap ang isang kamalian habang sinusubukang isagawa ang pagtanggal at dahil dito, hindi makukumpleto ang mga binago mo.",
+	"wikibase-error-save-connection": "Isang pagkakamali sa pagkakakabit habang sinusubukang isagawa ang pagsagip, at dahil dito hindi makukumpleto ang mga pagbabago mo. Paki siyasatin ang iyong pagkakakabit sa Internet.",
+	"wikibase-error-remove-connection": "Isang pagkakamali sa pagkakakabit habang sinusubukang isagawa ang pagtanggal, at dahil dito hindi makukumpleto ang mga pagbabago mo. Paki siyasatin ang iyong pagkakakabit sa Internet.",
+	"wikibase-error-save-timeout": "Nakakaranas kami ng mga suliraning teknikal, at dahil dito hindi mabuo ang iyong \"pagsagip\".",
+	"wikibase-error-remove-timeout": "Nakakaranas kami ng mga suliraning teknikal, at dahil dito hindi mabuo ang iyong \"pagtanggal\".",
+	"wikibase-error-autocomplete-connection": "Hindi masiyasat ang API ng Wikipedia. Paki subukan ulit mamaya.",
+	"wikibase-error-autocomplete-response": "Tumugon ang tagapaghain: $1",
+	"wikibase-error-ui-client-error": "Nabigo ang pagkakakabit sa pahina ng kliyente. Paki subukan ulit mamaya.",
+	"wikibase-error-ui-no-external-page": "Hindi matagpuan ang tinukoy na artikulo sa ibabaw ng kaukol na pook.",
+	"wikibase-error-ui-cant-edit": "Hindi ka pinapayagan na maisakatuparan ang galaw na ito.",
+	"wikibase-error-ui-no-permissions": "Wala kang sapat na mga karapatan upang maisagawa ang galaw na ito.",
+	"wikibase-error-ui-link-exists": "Hindi ka maaaring kumawing sa pahinang ito dahil mayroon nang ibang bagay na nakakawing dito.",
+	"wikibase-error-ui-session-failure": "Natapos na ang inilaang panahon sa iyo. Paki login muli.",
+	"wikibase-error-ui-edit-conflict": "Nagkaroon ng isang pagsasalungatan sa pamamatnugot. Paki muling ikarga at sagiping muli.",
+	"wikibase-sitelinks-sitename-columnheading": "Wika",
+	"wikibase-sitelinks-siteid-columnheading": "Kodigo",
+	"wikibase-sitelinks-link-columnheading": "Artikulong nakakawing",
+	"wikibase-tooltip-error-details": "Mga detalye"
+}

@@ -1,0 +1,18 @@
+.cur_head_text {
+  width: calc(100% - 47px);
+}
+.cur_head_btns {
+  width: 36px;
+}
+
+/* Detail Tbl */
+.cur_data_row {
+  height: 44px;
+  width: 100%;
+}
+.xdir_link_btn {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 36px);
+  height: 100%;
+}

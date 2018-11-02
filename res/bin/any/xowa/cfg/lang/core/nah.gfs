@@ -1,0 +1,1405 @@
+this
+.fallback_load('es')
+.ns_names
+  .load_text(
+<:['
+-2|Mēdiatl
+-1|Nōncuahquīzqui
+1|Tēixnāmiquiliztli
+2|Tlatequitiltilīlli
+3|Tlatequitiltilīlli tēixnāmiquiliztli
+5|$1 tēixnāmiquiliztli
+6|Īxiptli
+7|Īxiptli tēixnāmiquiliztli
+8|Huiquimedia
+9|Huiquimedia tēixnāmiquiliztli
+10|Nemachiyōtīlli
+11|Nemachiyōtīlli tēixnāmiquiliztli
+12|Tēpalēhuiliztli
+13|Tēpalēhuiliztli tēixnāmiquiliztli
+14|Neneuhcāyōtl
+15|Neneuhcāyōtl tēixnāmiquiliztli
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-2|Media
+-1|Especial
+1|Discusión
+2|Usuario
+3|Usuario Discusión
+4|Wikipedia
+5|Wikipedia Discusión
+6|Imagen
+7|Imagen Discusión
+8|MediaWiki
+9|MediaWiki Discusión
+10|Plantilla
+11|Plantilla Discusión
+12|Ayuda
+13|Ayuda Discusión
+14|Categoría
+15|Categoría Discusión
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Allpages|MochīntīnZāzaniltin~TodasPáginas
+Ancientpages|HuēhuehZāzaniltin~PáginasViejas
+Categories|Neneuhcāyōtl~Categorías
+Emailuser|EmailTlācatl~CorreoUsuario
+Longpages|HuēiyacZāzaniltin~PáginasLargas
+Mycontributions|Notlahcuilōl~MisContribuciones
+Mypage|Nozāzanil~MiPágina
+Mytalk|Notēixnāmiquiliz~MiDiscusión
+Newpages|YancuīcZāzaniltin~PáginasNuevas
+Search|Tlatēmōz~Buscar
+Shortpages|Zāzaniltōn~PáginasCortas
+Specialpages|NōncuahquīzquiĀmatl~PáginasEspeciales
+Upload|Quetza~Subir
+Userlogin|Tlacalaquiliztli~Registrarse
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|ic cemilhuitl
+monday|ic ōmilhuitl
+tuesday|ic ēyilhuitl
+wednesday|ic nāhuilhuitl
+thursday|ic mācuīlilhuitl
+friday|ic chicuacemilhuitl
+saturday|ic chicōmilhuitl
+sun|cemilhui
+mon|ōmilhui
+tue|ēyilhui
+wed|nāhuilhui
+thu|mācuīlilhui
+fri|chicuacemilhui
+sat|chicōmilhui
+january|Àtemòstli
+february|Iskalli
+march|Àtlakàwalo
+april|Tlàkaxipèwalistli
+may_long|Tosostli
+june|Toxkatl
+july|Tèkòilwitl
+august|Tlaxòchimàko
+september|Xokowetzi
+october|Teòtlêko
+november|Tepèilwitl
+december|Pànketzalistli
+january-gen|ic cē mētztli
+february-gen|ic ōme mētztli
+march-gen|ic ēyi mētztli
+april-gen|ic nāuhtetl mētztli
+may-gen|ic mācuīlli mētztli
+june-gen|ic chicuacen mētztli
+july-gen|ic chicōme mētztli
+august-gen|ic chicuēyi mētztli
+september-gen|ic chiucnāhui mētztli
+october-gen|ic mahtlāctetl mētztli
+november-gen|ic mahtlāctetl oncē mētztli
+december-gen|ic mahtlāctetl omōme mētztli
+jan|ic cē
+feb|ic ōme
+mar|ic ēyi
+apr|ic nāuh
+may|ic mācuīl
+jun|ic chicuacē
+jul|ic chicōme
+aug|ic chicuēyi
+sep|ic chiucnāuh
+oct|ic mahtlāc
+nov|ic mahtlāctli oncē
+dec|ic mahtlāctli omōme
+toc|Inīn tlahcuilōlco
+redirectedfrom|(Ōmotlacuep īhuīcpa ~{0})
+allpages|Mochīntīn zāzanilli
+prevpage|Achto zāzanilli (~{0})
+nextpage|Niman zāzanilli (~{0})
+collapsible-collapse|Motlàtìs
+collapsible-expand|Monèxtìs
+categories|Tlaìxmatkàtlàlilòmë
+lastmodifiedat|Inīn zāzanilli ōtlapatlac catca īpan ~{1}, ~{0}.
+thumbnail-more|Tiquihuēyiyāz
+otherlanguages|Occequīntīn tlahtōlcopa
+blanknamespace|(Tāchcāuh)
+pagecategories|{{PLURAL:~{0}\u007CTlaìxmatkàtlàlilòtl\u007CTlaìxmatkàtlàlilòmë}}
+category_header|Tlâkuilòlpiltin ìpan tlaìxmatkàtlàlilòtl "~{0}"
+subcategories|Tlaìxmatkàtlàlilòpilòmë
+category-media-header|Media "~{0}" neneuhcāyōc
+category-empty|''Cah ahtlein inīn neneuhcāyōc.''
+category-subcat-count|{{PLURAL:~{1}\u007CInìn tlaìxmatkàtlàlilòtl kipia san inìn tlaìxmatkàtlàlilòpilli.\u007CInìn tlaìxmatkàtlàlilòtl {{PLURAL:~{0}\u007Ckipia inìn tlaìxmatkàtlàlilòpilli\u007Ckimpia inìn ~{0} tlaìxmatkàtlàlilòpiltìn}}, ìpan ~{1}.}}
+category-subcat-count-limited|Inīn {{PLURAL:~{0}\u007Cneneuhcāyōtzintli cah\u007C~{0} neneuhcāyōtzintli cateh}} inīn neneuhcāyōc.
+category-article-count|{{PLURAL:~{1}\u007CInìn tlaìxmatkàtlàlilòtl san kipia\u007CInìn tlaìxmatkàtlàlilòtl kimpia {{PLURAL:~{0}\u007Cinìn tlaìxtlapalli\u007Cinîkë ~{0} tlaìxtlapaltìn}}, ìwikpa ~{1}.}}
+category-article-count-limited|Inīn {{PLURAL:~{0}\u007Czāzanilli cah\u007C~{0} zāzanilli cateh}} inīn neneuhcāyōc.
+category-file-count|{{PLURAL:~{1}\u007CInìn tlaìxmatkàtlàlilòtl san kipia\u007CInìn tlaìxmatkàtlalilòtl kimpia {{PLURAL:~{0}\u007Cinìn èwalli\u007Cinîkë ~{0} èwaltìn}}, ìwikpa ~{1}.}}
+category-file-count-limited|{{PLURAL:~{0}\u007CInìn tlâkuilòlèwalli kä\u007CInîkë ~{0} tlâkuilòlèwaltìn katêkë}} ìpan inìn tlaìxmatkàtlàlilòtl.
+categorytree-member-counts|kipia {{PLURAL:~{0}\u007Csè tlaìxmatkàtlàlilòpilòtl\u007C~{0} tlaìxmatkàtlàlilòpilòmë}}, {{PLURAL:~{1}\u007Ctlaìxtlapalli\u007C~{1} tlaìxtlapaltin}}, y {{PLURAL:~{2}\u007Csè èwalli\u007C~{2} èwaltin}}
+nextn|niman {{PLURAL:~{0}\u007C~{0}}}
+prevn|{{PLURAL:~{0}\u007C~{0}}} achtopa
+listingcontinuesabbrev|niman
+bold_sample|Tlīltic tlahcuilōlli
+bold_tip|Tlīltic tlahcuilōlli
+italic_sample|Cōliuhqui tlahcuilōliztli
+italic_tip|Cōliuhqui tlahcuilōliztli
+link_sample|Tzonhuiliztli ītōcā
+link_tip|Tlahtic tzonhuiliztli
+headline_sample|Cuātlahcuilōlli
+headline_tip|Iuhcāyōtl 2 tōcāyōtl
+hidden-category-category|Tlatlàtìlkàtlaìxmatkàtlàlilòmë
+statistics|Tlapōhualiztli
+statistics-header-pages|Zāzaniltin tlapōhualli
+statistics-articles|Tlapiyaliztli zāzanilli
+statistics-pages|Zāzaniltin
+statistics-pages-desc|Mochīntīn zāzaniltin huiquipan, mopiyah tēixnāmiquiliztli, tlacuepaliztli, etz.
+categorytree|Tlaìxmatkàtlàlilòmàmàyòtl
+categorytree-portlet|Tlaìxmatkàtlàlilòmë
+categorytree-legend|Mà monèxti tlaìxmatkàtlàlilòmàmàyòtl
+categorytree-desc|Nènemòwalòtiwétzìlistli ìpan in [[Special:CategoryTree\u007Ctlaìxmatkàtlàlilòtekpànyòtl]]
+categorytree-header|Xikîkuilo sè tlaìxmatkàtlàlilòtòkâtli, ìka tikỉtílìs in ìtlamàmàyòtekpànalpialòl.\nXikmauhtie, molwi yankuik JavaScript tekitìliskàyòtl tètech moneki, ìxmatkàyö kèn AJAX.\nIntlà molwi yi wêkàuhkáyòtl in monetzànìltzòwîkàuh, nòso tiksewîtok in JavaScript, awel tlen monèxtis.
+categorytree-category|Tlaìxmatkàtlàlilòtl:
+categorytree-go|Mà monèxti màmàyòtl
+categorytree-parents|Achkàuhkàtlaìxmatkàtlàlilòmë
+categorytree-mode-categories|San tlaìxmatkàtlàlilòmë mà monèxtìkàn
+categorytree-mode-pages|tlaìxpaltin âmìwàn ìxiptin
+categorytree-mode-all|Nochtin in tlaìxpaltin
+categorytree-collapse|motlàtis
+categorytree-expand|monèxtis
+categorytree-load|motémòwis
+categorytree-loading|wàltémòtíkä...
+categorytree-nothing-found|âmò tlen òmâsik
+categorytree-no-subcategories|âmìnwàn tlaìxmatkàtlàlilòpilòmë
+categorytree-no-parent-categories|ayàkë achkàuhkàtlaìxmatkàtlàlilòmë
+categorytree-no-pages|ayàkë tlaìxtlapaltin nòso tlaìxmatkàtlàlilòpilòmë
+categorytree-not-found|Tlaìxmatkàtlàlilòtl <i>~{0}</i> âmò tlâxìli
+categorytree-error|Âwel témò in tlamatilisèwalli
+categorytree-retry|Timitztlatlauhtiä, ximochia chîtòn kàn oksepa xikyêyeko.
+proofreadpage_image|īxiptli
+proofreadpage_nextpage|Niman zāzanilli
+proofreadpage_prevpage|Achto zāzanilli
+cite_article_link|Tlahtoa inīn tlahcuilōltechcopa
+cite|Titēnōtzaz
+cite_page|Zāzanilli:
+cite_submit|Titēnōtzaz
+wikieditor|Wel senka yankuik netzòwilìxtlâtli in tlenìk moyêyèktlàlia in wikitlâkuilòlmantli
+wikieditor-desc|Tèwàlmàktia sè mìxmankànetzòwilìxtlâtli kàmpa wìtz in wikitlâkuilòlmantli tlèn moyêyèktlàlis ìwàn kèski ìyànalòwan kàmpa mowàlnèxtia in ìntlâtlamảtilis
+wikieditor-wikitext-tab|Wikitlâkuilòlmantli
+wikieditor-loading|Motlamàmaltîtỉka
+wikieditor-preview-preference|Motekitìltìs in tlanênektikàyö achtỏpaỉtalistli
+wikieditor-preview-tab|Achtỏpaỉtalistli
+wikieditor-preview-changes-tab|Tlapảtlalistli
+wikieditor-preview-loading|Motlamàmaltîtỉka....
+wikieditor-previewDialog-preference|Motekitìltìs ìyachtỏpaỉtalis in nenônòtzalistli
+wikieditor-previewDialog-tab|Tlachtỏpaỉtalòs
+wikieditor-previewDialog-loading|Tlamàmâtỉka...
+wikieditor-publish-preference|Motekitìltìs tlasêsêsèntèìxmảchìltìstli
+wikieditor-publish-button-publish|Motèìxmảchìltìs
+wikieditor-publish-button-cancel|Moxỉtìnìs
+wikieditor-publish-dialog-title|Motèìxmảchìltìs ìpan {{SITENAME}}
+wikieditor-publish-dialog-summary|Ìpòpòwilis tlayèktlàlilòtl (xikỉto ìka kèski tlatòlli in tlapảtlalistli tlèn òtikchìuh):
+wikieditor-publish-dialog-minor|Tepỉtzìn tlayèktlàlilòtl
+wikieditor-publish-dialog-watch|Mopanỉtas inìn tlaìxtlapalli
+wikieditor-publish-dialog-publish|Motèìxmảchìltìs
+wikieditor-publish-dialog-goback|Ximokuẻpa
+wikieditor-template-editor-preference|Motekitìltìs in ìntlayêyèktlàlilis wikinemachiòmë ìka tlaìyỏkàyêkàyẻyàntli
+wikieditor-template-editor-dialog-title|Xitlanemachiòyèktlàli
+wikieditor-template-editor-dialog-submit|Tlayankuilỉlòs
+wikieditor-template-editor-dialog-cancel|Moxỉtìnìs
+wikieditor-templates-preference|Motekitìltìs nemachiòxitìnalli
+wikieditor-toc-preference|Motekitìltìs nènemòni tlapialpalli
+wikieditor-toc-show|Monèxtìs in tlapialli
+wikieditor-toc-hide|Motlàtìs in tlapialli
+wikieditor-toolbar|Tlayêyèktlàlilòkàtekitiâpalli
+wikieditor-toolbar-desc|Ìtekitiâpal in tlayêyèktlàlilòkàtlaìxtlapalli ìwàn okảchi kuâkualli tlamantli tlatekitiliskàyòtl
+wikieditor-toolbar-preference|Motekitìltìs in okảchi kualli tekitiâpalli tlèn ìka tlayêyèktlàlilo
+wikieditor-toolbar-dialogs-preference|Motekitìltìs tlanônòtzaliskàyòtl tlèn ìnka tlatzòtzòwìltlàlilòs, tlatlapaltlàlilòs wàn oksẻki îtlàtlèn monẻkis motlàlìs
+wikieditor-toolbar-hidesig|Motlàtìs in machiòpàchitl ìwikpa ìtlaìxtlapalwàn in achkàuhtòkâyẻyàntli
+wikieditor-toolbar-loading|Motlamàmaltîtỉka....
+wikieditor-toolbar-tool-bold|Tlìltik
+wikieditor-toolbar-tool-bold-example|Tlìltik tlâkuilòlmantli
+wikieditor-toolbar-tool-italic|Ìxtèktli
+wikieditor-toolbar-tool-italic-example|Ìxtèktli tlâkuilòlmantli
+wikieditor-toolbar-tool-ilink|Tlâtektzòwistli
+wikieditor-toolbar-tool-ilink-example|Tzòwistòkâtli
+wikieditor-toolbar-tool-xlink|Panitzòwistli (mà molnàmiki in tlaìxpantlâkuilòlli http://)
+wikieditor-toolbar-tool-xlink-example|http://www.example.com tzòwistòkâtli
+wikieditor-toolbar-tool-link|Tzòwistli
+wikieditor-toolbar-tool-link-title|Motzòwilyòtìs
+wikieditor-toolbar-tool-link-int|Ìpan sè wikitlaìxtlapalli
+wikieditor-toolbar-tool-link-int-target|In tlaìxtlapalli tlèn motèmowa noso in URL:
+wikieditor-toolbar-tool-link-int-target-tooltip|Tlaìxtlapaltòkâtli noso URL
+wikieditor-toolbar-tool-link-int-text|Ìtòka in tzòwistli
+wikieditor-toolbar-tool-link-int-text-tooltip|In tlâkuilòlmantli tlèn monèxtìs
+wikieditor-toolbar-tool-link-ext|Ìpan sè panika tlàltikpaktzànìllaìxtlapalli
+wikieditor-toolbar-tool-link-ext-target|ÌyURL in tzòwistli:
+wikieditor-toolbar-tool-link-ext-text|Tzòwistòkâtli
+wikieditor-toolbar-tool-link-insert|Motzòwilyòtìs
+wikieditor-toolbar-tool-link-cancel|Moxỉtìnìs
+wikieditor-toolbar-tool-link-int-target-status-exists|Ka in tlaìxtlapalli
+wikieditor-toolbar-tool-link-int-target-status-notexists|Ayàk in tlaìxtlapalli
+wikieditor-toolbar-tool-link-int-target-status-invalid|Âmò kualli tòkâtli
+wikieditor-toolbar-tool-link-int-target-status-external|Panikàtzòwistli
+wikieditor-toolbar-tool-link-int-target-status-loading|Motztỉka intlà kox kä in tlaìxtlapalli
+wikieditor-toolbar-tool-link-int-invalid|Âmò kualli in tòkâtli tlèn òtimîkuilwili.
+wikieditor-toolbar-tool-link-lookslikeinternal|In URL tlèn timonekiltia mîtòs kineki mochìwas ìtzòwilòka oksè wikitlaìxtlapalli.\n¿Timonekiltia mà mokuẻpa sè tlatlâtek tzòwìlli?
+wikieditor-toolbar-tool-link-lookslikeinternal-int|Tlâtektzòwistli
+wikieditor-toolbar-tool-link-lookslikeinternal-ext|Panikàtzòwistli
+wikieditor-toolbar-tool-link-empty|Âmò tikîkuilôtika in tlèn kàmpa tlatzòwilòs.
+wikieditor-toolbar-tool-file|Tlatlatzèkòltìlèwálli
+wikieditor-toolbar-tool-file-example|Neìxkuitìlli.jpg
+wikieditor-toolbar-tool-reference|Ànálòtl
+wikieditor-toolbar-tool-reference-example|Mà motlàli nikàn in tlakxỉpanáwatilòtl
+wikieditor-toolbar-tool-reference-cancel|Moxỉtìnìs
+wikieditor-toolbar-tool-reference-title|Motlalìs sè ànálòtl
+wikieditor-toolbar-tool-reference-insert|Motlàlìs
+wikieditor-toolbar-tool-reference-text|Tlâkuilòlmanànálòtl
+wikieditor-toolbar-tool-signature|Netèìxmachìtìlmachiòtl wàn tlapảnolpòwálli
+wikieditor-toolbar-section-advanced|Tlèkànki
+wikieditor-toolbar-tool-heading|Tòkâtlàlistli
+wikieditor-toolbar-tool-heading-1|Tlàlilòkâtli 1
+wikieditor-toolbar-tool-heading-2|Tlàlilòkâtli 2
+wikieditor-toolbar-tool-heading-3|Tlàlilòkâtli 3
+wikieditor-toolbar-tool-heading-4|Tlàlilòkâtli 4
+wikieditor-toolbar-tool-heading-5|Tlàlilòkâtli 5
+wikieditor-toolbar-tool-heading-example|Tòkâtlàlistlâkuilòlmantli
+wikieditor-toolbar-group-format|Chîchìwilòkâtli
+wikieditor-toolbar-tool-nowiki|Âmò tlawikichîchìwilòkàyö
+wikieditor-toolbar-tool-nowiki-example|Xikmotlàlili nikàn in âmò tlachîchìuhtli tlâkuilòlmantli
+wikieditor-toolbar-tool-redirect|Tlaôwitilistli
+wikieditor-toolbar-tool-redirect-example|Ìtòka in tlâsiànkôyàntlaìxpalli
+wikieditor-toolbar-tool-big|Wèyi
+wikieditor-toolbar-tool-big-example|Wèyi tlâkuilòlmantli
+wikieditor-toolbar-tool-small|Tepỉtòn
+wikieditor-toolbar-tool-small-example|Tepỉtòn tlâkuilòlmantli
+wikieditor-toolbar-tool-superscript|Tlapanîkuilòlli
+wikieditor-toolbar-tool-superscript-example|Tlapanîkuilòlyo tlâkuilòlmantli
+wikieditor-toolbar-tool-subscript|Tlanitlahcuilōlli
+wikieditor-toolbar-tool-subscript-example|Tlanitlahcuilōliztli
+wikieditor-toolbar-tool-gallery|Īxiptlahtēcpāntiliztli
+wikieditor-toolbar-tool-newline|Yancuīc pāntli
+wikieditor-toolbar-tool-table-example-old|-\n! cuāitl 1\n! cuāitl 2\n! cuāitl 3\n\u007C-\n\u007C pāntli 1, cochiyāntli 1\n\u007C pāntli 1, cochiyāntli 2\n\u007C pāntli 1, cochiyāntli 3\n\u007C-\n\u007C pāntli 2, cochiyāntli 1\n\u007C pāntli 2, cochiyāntli 2\n\u007C pāntli 2, cochiyāntli 3
+wikieditor-toolbar-tool-table-example-cell-text|Cochiyāntlahcuilōliztli
+wikieditor-toolbar-tool-table-example-header|Cāitl tlahcuilōliztli
+wikieditor-toolbar-tool-table-dimensions-rows|Pāntli
+wikieditor-toolbar-tool-table-dimensions-columns|Tlaquetzalli
+wikieditor-toolbar-tool-table-example|Machiyōtl
+wikieditor-toolbar-tool-table-cancel|Ticcuepāz
+wikieditor-toolbar-tool-replace|Tictēmōz īhuān ticpatlāz
+wikieditor-toolbar-tool-replace-title|Tictēmōz īhuān ticpatlāz
+wikieditor-toolbar-tool-replace-search|Tictēmōz:
+wikieditor-toolbar-tool-replace-replace|Ticpatlāz ic:
+wikieditor-toolbar-tool-replace-regex|Ticnōtzāz in tlatēmolizmecatl iuhquin nāhuatīlmatillahtōliztli
+wikieditor-toolbar-tool-replace-button-replaceall|Ticpatlāz mochi
+wikieditor-toolbar-tool-replace-close|Tiquitzacuāz
+wikieditor-toolbar-tool-replace-nomatch|Âmò tlèn òkâsik in motlatemòlistzìn
+wikieditor-toolbar-tool-replace-invalidregex|In nāhuatīlmatillahtōliztli tlein ōtitlahcuiloh ahtlaceliāni ca: ~{0}
+wikieditor-toolbar-characters-page-latin|Latintlahcuilōlli
+wikieditor-toolbar-characters-page-latinextended|Mantoc latintlahcuilōlli
+wikieditor-toolbar-characters-page-greek|Greciatlahcuilōlli
+wikieditor-toolbar-characters-page-cyrillic|Cirilotlahcuilōlli
+wikieditor-toolbar-characters-page-arabic|Arabiatlahcuilōlli
+wikieditor-toolbar-characters-page-persian|Persiatlahcuilōlli
+wikieditor-toolbar-characters-page-hebrew|Hebreotlahcuilōlli
+wikieditor-toolbar-characters-page-bangla|Banglatlahcuilōlli
+wikieditor-toolbar-characters-page-telugu|Telugutlahcuilōlli
+wikieditor-toolbar-characters-page-sinhala|Cingalatlahcuilōlli
+wikieditor-toolbar-characters-page-gujarati|Guyaratitlahcuilōlli
+wikieditor-toolbar-characters-page-thai|Taitlahcuilōlli
+wikieditor-toolbar-characters-page-lao|Laotlahcuilōlli
+wikieditor-toolbar-characters-page-khmer|Jemertlahcuilōlli
+wikieditor-toolbar-section-help|Tēpalēhuiliztli
+wikieditor-toolbar-help-page-link|Tzòtzòwistìn
+wikieditor-toolbar-help-page-heading|Tòkâtlàlistìn
+wikieditor-toolbar-help-page-file|Èwáltìn
+wikieditor-toolbar-help-page-reference|Ànálòmë
+wikieditor-toolbar-help-page-discussion|Tēixnāmiquiliztli
+wikieditor-toolbar-help-content-italic-description|Cōliuhqui
+wikieditor-toolbar-help-content-italic-syntax|''Cōliuhqui tlahcuilōliztli''
+wikieditor-toolbar-help-content-italic-result|<em>Cōliuhqui tlahcuilōliztli</em>
+wikieditor-toolbar-help-content-bold-description|Tlīltic
+wikieditor-toolbar-help-content-bold-syntax|'''Tlīltic tlahcuilōliztli'''
+wikieditor-toolbar-help-content-bold-result|<strong>Tlīltic tlahcuilōliztli</strong>
+wikieditor-toolbar-help-content-bolditalic-description|Tlīltic &amp; cōliuhqui
+wikieditor-toolbar-help-content-bolditalic-syntax|'''''Tlīltic &amp; cōliuhqui tlahcuilōliztli'''''
+wikieditor-toolbar-help-content-bolditalic-result|<strong><em>Tlīltic &amp; cōliuhqui tlahcuilōliztli</em></strong>
+wikieditor-toolbar-help-content-ilink-description|Tlâtek tzòwistli
+wikieditor-toolbar-help-content-xlink-description|Calān tzonhuiliztli
+wikieditor-toolbar-help-content-file-syntax|[[~{0}:Ejemplo.png\u007Cthumb\u007CTlatòkâyòtilisyòtl]]
+wikieditor-toolbar-help-content-file-result|<div style='width:104px;' class='thumbinner'><a title='Caption text' class='image' href='#'><img height='50' width='100' border='0' class='thumbimage' src='~{1}/WikiEditor/modules/images/toolbar/example-image.png' alt=''/></a><div class='thumbcaption'><div class='magnify'><a title='Enlarge' class='internal' href='#'><img height='11' width='15' alt='' src='~{0}/common/images/magnify-clip.png'/></a></div>Tlatòkâyòtilisyòtl</div></div>
+wikieditor-toolbar-help-content-reference-description|Tlànalòyàntli
+wikieditor-toolbar-help-content-reference-syntax|Tlaìxtlapallâkuilòlmantli.&lt;ref name="test"&gt;[http://www.example.org Tzòwistlâkuilòlmantli], tlâxitìllâkuilòlmantli.&lt;/ref&gt;
+wikieditor-toolbar-help-content-reference-result|Tlaìxtlapallâkuilòlmantli.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-rereference-description|Ìtlâtlatekitìltilis in yi yë tlànalòyàntli
+wikieditor-toolbar-help-content-rereference-result|Tlaìxtlapallâkuilòlmantli.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-showreferences-description|Monèxtis tlànalòyàntli
+wikieditor-toolbar-help-content-showreferences-result|<ol class='references'><li id='cite_note-test-0'><b><a title='' href='#'>^</a></b> <a rel='nofollow' title='http://www.example.org' class='external text' href='#'>Tzòwistlâkuilòlmantli</a>, tlâxitìllâkuilòlmantli.</li></ol>
+wikieditor-toolbar-help-content-signaturetimestamp-description|Netèìxmachìtìlmachiòtl wàn tlapảnolpòwálli
+wikieditor-toolbar-help-content-signaturetimestamp-result|<a href='#' title='{{#special:mypage}}'>Tekitkàtòkâtli</a> (<a href='#' title='{{#special:mytalk}}'>nenônòtzalistli</a>) 15:54, 10 June 2009 (UTC)
+wikieditor-toolbar-help-content-signature-description|Netèìxmachìtìlmachiòtl
+wikieditor-toolbar-help-content-signature-result|<a href='#' title='{{#special:mypage}}'>Tekitkàtòkâtli</a> (<a href='#' title='{{#special:mytalk}}'>nenônòtzalistli</a>)
+wikieditor-toolbar-help-content-indent-description|Tlâtlapouhki
+wikieditor-toolbar-help-content-indent-syntax|Sâsanỉman tlâkuilòlmantli<br />:Tlâtlapouhki tlakuilòlmantli<br />::Tlâtlapouhki tlâkuilòlmantli
+wikieditor-toolbar-help-content-indent-result|Sâsanỉman tlâkuilòlmantli<dl><dd>Tlâtlapouhki tlakuilòlmantli<dl><dd>Tlâtlapouhki tlâkuilòlmantli</dd></dl></dd></dl>
+wm-license-cc-by-1.0-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/deed.nah Achcauh Tētlaīxcoyantiliztli 1.0] tēmācāhualiztli.
+wm-license-cc-by-1.0-fi-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/fi/deed.nah Tētlaīxcoyantiliztli 1.0 Fintlālpan] tēmācāhualiztli.
+wm-license-cc-by-1.0-il-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/il/deed.nah Tētlaīxcoyantiliztli 1.0 Israel] tēmācāhualiztli.
+wm-license-cc-by-1.0-nl-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/nl/deed.nah Tētlaīxcoyantiliztli 1.0 Tlanitlālpan] tēmācāhualiztli.
+wm-license-cc-by-2.0-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/deed.nah Achcauh Tētlaīxcoyantiliztli 2.0] tēmācāhualiztli.
+wm-license-cc-by-2.0-at-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/at/deed.nah Tētlaīxcoyantiliztli 2.0 Austria] tēmācāhualiztli.
+wm-license-cc-by-2.0-au-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/au/deed.nah Tētlaīxcoyantiliztli 2.0 Australia] tēmācāhualiztli.
+wm-license-cc-by-2.0-be-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/be/deed.nah Tētlaīxcoyantiliztli 2.0 Belgica] tēmācāhualiztli.
+wm-license-cc-by-2.0-br-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/br/deed.nah Tētlaīxcoyantiliztli 2.0 Brasil] tēmācāhualiztli.
+wm-license-cc-by-2.0-ca-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/ca/deed.nah Tētlaīxcoyantiliztli 2.0 Canada] tēmācāhualiztli.
+wm-license-cc-by-2.0-cl-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/cl/deed.nah Tētlaīxcoyantiliztli 2.0 Chile] tēmācāhualiztli.
+wm-license-cc-by-2.0-de-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/de/deed.nah Tētlaīxcoyantiliztli 2.0 Alemania] tēmācāhualiztli.
+wm-license-cc-by-2.0-es-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/es/deed.nah Tētlaīxcoyantiliztli 2.0 Caxtillān] tēmācāhualiztli.
+wm-license-cc-by-2.0-fr-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/fr/deed.nah Tētlaīxcoyantiliztli 2.0 Francia] tēmācāhualiztli.
+wm-license-cc-by-2.0-hr-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/hr/deed.nah Tētlaīxcoyantiliztli 2.0 Croacia] tēmācāhualiztli.
+wm-license-cc-by-2.0-it-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/it/deed.nah Tētlaīxcoyantiliztli 2.0 Italia] tēmācāhualiztli.
+wm-license-cc-by-2.0-jp-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/jp/deed.nah Tētlaīxcoyantiliztli 2.0 Xapon] tēmācāhualiztli.
+wm-license-cc-by-2.0-kr-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/kr/deed.nah Tētlaīxcoyantiliztli 2.0 Corea] tēmācāhualiztli.
+wm-license-cc-by-2.0-nl-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/nl/deed.nah Tētlaīxcoyantiliztli 2.0 Tlanitlālpan] tēmācāhualiztli.
+wm-license-cc-by-2.0-pl-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/pl/deed.nah Tētlaīxcoyantiliztli 2.0 Polonia] tēmācāhualiztli.
+wm-license-cc-by-2.0-tw-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/tw/deed.nah Tētlaīxcoyantiliztli 2.0 Taihuan] tēmācāhualiztli.
+wm-license-cc-by-2.0-uk-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/uk/deed.nah Tētlaīxcoyantiliztli 2.0 Inglatlālpan īhuān Gales] tēmācāhualiztli.
+wm-license-cc-by-2.0-za-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/za/deed.nah Tētlaīxcoyantiliztli 2.0 Africa Huitztlāmpa] tēmācāhualiztli.
+wm-license-cc-by-2.1-au-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/au/deed.nah Tētlaīxcoyantiliztli 2.1 Australia] tēmācāhualiztli.
+wm-license-cc-by-2.1-es-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/es/deed.nah Tētlaīxcoyantiliztli 2.1 Caxtillān] tēmācāhualiztli.
+wm-license-cc-by-2.1-jp-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/jp/deed.nah Tētlaīxcoyantiliztli 2.1 Xapon] tēmācāhualiztli.
+wm-license-cc-by-2.5-text|Inīn zāzanilli tlatēctli tlani in [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/deed.nah Achcauh Tētlaīxcoyantiliztli 2.5] tēmācāhualiztli.
+wm-license-cc-free|Tihuelitiz:
+wikimedialicensetexts-desc|Huiquimedia tēmācāhualiztli tītlantlahtōlli
+wm-license-book-language|Tlâtòlli
+wm-license-information-source|Īhuīcpa
+wm-license-information-permission-see-below|Xiquitta tlani.
+wm-license-own-work|Nonehhuiyān notlachīhual
+wikimediamessages-desc|San Wikimedia ìtlanawatiliswàn
+sitesupport|Tēyocatiliztli
+tooltip-n-sitesupport|Xitèchmopalèwilìkàn
+grouppage-eliminator|{{ns:project}}:Tlaìxpôpolowàni
+group-filemover-member|{{GENDER:~{0}\u007Ctlahcuilōlolīniāni}}
+grouppage-filemover|{{ns:project}}:Tlaèwalîkuàniàni
+grouppage-flood|{{ns:project}}:Tlatepostekitkàuhtekìuhtiànimë
+group-founder-member|{{GENDER:~{0}\u007Ctlatzintiāni}}
+group-patroller|Tlapîpiànimë
+group-uploader|Tlaquetzalōnih
+group-Staff|Olōlli
+group-Staff-member|Olōllācatl
+tog-underline|Mokìnxòîkuilòtzàswis tzòwilistìn:
+tog-hideminor|Motlàtìs tepỉtzìn tlayèktlàlilistli ìpan welok tlapảtlalistli
+tog-hidepatrolled|Motlàtìs tlapîpialli tlayèktlàlilistli ìpan welok tlapảtlalistli
+tog-newpageshidepatrolled|Mokintlàtis tlapîpialtlaìxtlapaltìn ìwikpa ìtlapòpòwaltekpànal in yâyankuik tlaìxtlapaltìn
+tog-extendwatchlist|Mìxmảnas in tlapòpòwaltekpàntlachialli ìka mỏtas nochi in tlapảtlalistli, âmò in san okachi yankuik.
+tog-usenewrc|Molōloāzqueh in tlapatlaliztli in yancuīc tlapatlaliztli āmapan īhuān in tlachiyaliztli tlapōhualāmapan (monequi JavaScript)
+tog-showtoolbar|Motlaīxtlatīz in tlachihchīhualōni pāntli
+tog-editondblclick|Tiquimpatlāz in zāzanilli intlā ōme tiquimpachoa
+tog-watchcreations|Moaquiāz in āmatl mā niquinyōcoya īhuān in tlahcuilōlli mā niquinquetza īpan notlachiyaliz
+tog-watchdefault|Moaquiāz āmatl īhuān tlahcuilōlli mā niquinpatla in notlachiyaliz
+tog-watchmoves|Moaquiāz āmatl īhuān tlahcuilōlli mā niquinzaca in notlachiyaliz
+tog-watchdeletion|Moaquiāz āmatl īhuān tlahcuilōlli mā niquimpolo in notlachiyaliz
+tog-minordefault|Ticmachiyōtīz mochīntīn tlapatlalitzintli ic default
+tog-previewontop|Tiquittāz achtochīhualiztli achtopa tlapatlaliztli caxitl
+tog-previewonfirst|Xiquitta achtochīhualiztli inic cē tlapatlalizpan
+tog-enotifwatchlistpages|Notech moēhualtia cē maltzinteyōtl netitlaniztli ihcuāc mopatla zāzanilli in notlachiyaliz.
+tog-enotifusertalkpages|Nēchihtoa ihcuāc tlecpatla motēixnāmiquiliz
+tog-enotifminoredits|Notech moēhualtia cē maltzinteyōtl netitlaniztli nō ihcuāc mopatla tepitōn zāzanilli in notlachiyaliz.
+tog-enotifrevealaddr|Ticnēxtīz mo e-mailcān āxcāncayōtechcopa āmatlacuilizpan
+tog-shownumberswatching|Tiquinttāz tlatequitiltilīlli tlein tlachiyacateh
+tog-forceeditsummary|Xinēchnōtzāz ihcuāc ahmo niquihtōz inōn ōnitlapatlac
+tog-watchlisthideown|Tiquintlātīz mopatlaliz motlachiyalizpan
+tog-watchlisthidebots|Tiquintlātīz tepozpatlaliztli motlachiyalizpan
+tog-watchlisthideminor|Tiquintlātīz tlapatlalitzintli motlachiyalizpan
+tog-watchlisthideliu|Tiquintlātīz tlācah ōmocalacqueh īntlapatlaliz motlachiyalizpan
+tog-watchlisthideanons|Tiquintlātīz tlācah ahtōcāitl īntlapatlaliz motlachiyalizpan
+tog-ccmeonemails|Nō xinēch-mailīz ihcuāc nitē-mailīz tlatequitiltilīlli
+tog-diffonly|Ahmo tiquittāz zāzanilli ītlapiyaliz ahneneuhquilitzīntlan
+tog-showhiddencats|Mà monèxtìkàn in tlatlatìltìn tlaìxmatkàtlàlilòmë
+underline-always|Mochipa
+underline-never|Aīcmah
+editfont-monospace|Cencoyāhualiztli machiyōtlahtōliztli
+editfont-sansserif|Sans-serif machiyōtlahtōliztli
+editfont-serif|Serif machiyōtlahtōliztli
+hidden-categories|{{PLURAL:~{0}\u007Ctlatlàtìlli tlaìxmatkàtlàlilòtl\u007Ctlatlàtìltìn tlaìxmatkàtlàlilòmë}}
+about|Ītechpa
+article|Tlâkuilòpilli
+newwindow|(Motlapoāz cē yancuīc tlanexillōtl)
+cancel|Ticcuepāz
+moredotdotdot|Huehca ōmpa...
+mypage|Noāmauh
+mytalk|Notēixnāmiquiliz
+anontalk|Inīn IP ītēixnāmiquiliz
+navigation|Nènemòwalistli
+and| īhuān
+qbfind|Tlatēmōz
+qbbrowse|Titlatēmōz
+qbedit|Ticpatlāz
+qbpageoptions|Inīn zāzanilli
+qbmyoptions|Nozāzanil
+faq|Zan īc tētlatlanīliztli
+faqpage|Project:FAQ
+actions|Āyiliztli
+namespaces|Tòkâyeyàntìn
+errorpagetitle|Aiuhcāyōtl
+returnto|Timocuepāz īhuīc ~{0}.
+tagline|Īhuīcpa {{SITENAME}}
+help|Tēpalēhuiliztli
+search|Tlatēmōz
+searchbutton|Tlatēmōz
+go|Yāuh
+searcharticle|Yāuh
+history|tlahcuilōlloh
+history_short|Tlahcuilōlloh
+updatedmarker|ōmoyancuīx īhuīcpa xōcoyōc notlahpololiz
+printableversion|Tepoztlahcuilōlli
+permalink|Mochipa tzonhuiliztli
+print|Tictepoztlahcuilōz
+view|Mà mỏta
+edit|Ticpatlāz
+create|Ticchīhuāz
+editthispage|Ticpatlāz inīn zāzanilli
+create-this-page|Ticchīhuāz inīn zāzanilli
+delete|Ticpolōz
+deletethispage|Ticpolōz inīn zāzanilli
+undelete_short|Ahticpolōz {{PLURAL:~{0}\u007Ccē tlapatlaliztli\u007C~{0} tlapatlaliztli}}
+viewdeleted_short|Mà mỏta {{PLURAL:~{0}\u007Cse tlatlaìxpôpolòlli tlayèktlàlilistli\u007C~{0} tlatlaìxpôpolòltin tlayèktlàlilistin}}
+protect|Ticquīxtīz
+protect_change|ticpatlāz
+protectthispage|Ticquīxtiāz inīn zāzanilli
+unprotect|Ticpatlaz in tlaquīxtīliztli
+unprotectthispage|Ticpatlaz inīn āmatl ītlaquīxtīliz
+newpage|Yancuīc zāzanilli
+talkpage|Tictlahtōz inīn zāzaniltechcopa
+talkpagelinktext|Tèìxnàmikilistli
+specialpage|Nònkuâkìskàtlaìxtlapalli
+personaltools|In tlein nitēquitiltilia
+articlepage|Xiquittaz in tlahcuilōlli
+talk|tēixnāmiquiliztli
+views|Tlachiyaliztli
+toolbox|Tlachihchīhualōni
+userpage|Xiquitta tlatequitiltilīlli zāzanilli
+projectpage|Xiquitta tlachīhualiztli zāzanilli
+imagepage|Tiquittaz in zāzanilli īāma
+mediawikipage|Xiquitta tlahcuilōltzin zāzanilli
+templatepage|Tiquittāz nemachiyōtīlli zāzanilli
+viewhelppage|Xiquitta tēpalēhuiliztli zāzanilli
+categorypage|Mà mỏta in tlaìxmatkàtlàlilòtlaìxtlapalli
+viewtalkpage|Xiquitta tēixnāmiquiliztli zāzanilli
+redirectpagesub|Ōmotlacuep zāzanilli
+viewcount|Inīn zāzanilli quintlapōhua {{PLURAL:~{0}\u007Ccē tlahpololiztli\u007C~{0} tlahpololiztli}}.
+protectedpage|Ōmoquīxtix zāzanilli
+jumpto|Īhuīcpa ticholōz:
+jumptonavigation|nènemòwalistli
+jumptosearch|tlatēmoliztli
+aboutsite|Ītechcopa {{SITENAME}}
+aboutpage|Project:Ītechcopa
+copyright|In tlahcuilōlli cah tlacēcencāhuani īpan ~{0} tel ahmo intlā īcuepca motēnēhua.
+copyrightpage|{{ns:project}}:Tlachīhualōni ītlapiyaliz
+currentevents|Āxcāncāyōtl
+currentevents-url|Project:Āxcāncāyōtl
+disclaimers|Nahuatīllahtōl
+edithelp|Tlapatlaliztechcopa tēpalēhuiliztli
+mainpage|Achkàuhìxtlapalli
+mainpage-description|Achkàuhìxtlapalli
+policy-url|Project:Nahuatīltōn
+portal|Calīxcuātl tocalpōl
+portal-url|Project:Calīxcuātl tocalpōl
+privacy|Tlahcuilōlli piyaliznahuatīlli
+privacypage|Project:Tlahcuilōlpiyaliztechcopa nahuatīltōn
+badaccess|Tlahuelītiliztechcopa ahcuallōtl
+badaccess-group0|Tehhuātl ahmo tiquichīhua inōn tiquiēlēhuia.
+badaccess-groups|Inōn tiquiēlēhuia zan quichīhuah tlatequitiltilīlli {{PLURAL:~{1}\u007Concān}}: ~{0}.
+ok|Nopan iti
+retrievedfrom|Ōquīzqui ītech  "~{0}"
+youhavenewmessages|Tiquimpiya ~{0} (~{1}).
+youhavenewmessagesmulti|Tiquimpiya yancuīc tlahcuilōlli īpan ~{0}
+editsection|ticpatlāz
+editold|ticpatlāz
+viewsourceold|xiquitta tlahtōlcaquiliztilōni
+editlink|ticpatlāz
+viewsourcelink|tiquittāz tlahtōlcaquiliztilōni
+editsectionhint|Ticpatlacah: ~{0}
+showtoc|xiquitta
+hidetoc|tictlātīz
+thisisdeleted|¿Tiquittāz nozo ahticpolōz ~{0}?
+viewdeleted|¿Tiquiēlēhuia tiquitta ~{0}?
+restorelink|{{PLURAL:~{0}\u007Ccē tlapatlaliztli polotic\u007C~{0} tlapatlaliztli polotic}}
+feedlinks|Olōlpōl:
+site-rss-feed|~{0} RSS huelītiliztli
+site-atom-feed|~{0} Atom huelītiliztli
+page-rss-feed|"~{0}" RSS huelītiliztli
+page-atom-feed|"~{0}" RSS huelītiliztli
+red-link-title|~{0} (ayàk in tlaìxtlapalli)
+nstab-main|Tlaìxtlapalli
+nstab-user|Tlatequitiltilīlli
+nstab-media|Mēdiatl
+nstab-special|Nònkuâkìskàtlaìxtlapalli
+nstab-project|Ìtlaìxtlapal in tlayẻkàntekitl
+nstab-image|Īxiptli
+nstab-mediawiki|Tlahcuilōltzintli
+nstab-template|Nemachiòtl
+nstab-help|Tèpalèwilistli
+nstab-category|Tlaìxmatkàtlàlilòtl
+nosuchaction|Ahmo ia tlachīhualiztli
+nosuchspecialpage|Âmò ka inòn nònkuâkìskàtlaìxtlapalli
+nospecialpagetext|<strong>Tiknẻki sè nònkuâkìskàtlaìxtlapalli tlèn âmò kä.</strong>\n\nKualli tikỉtas sè ìntlapòpòwaltekpànal in nònkuâkìskàtlaìxtlapaltìn ìpan [[Special:SpecialPages\u007C{{int:specialpages}}]].
+error|Ahcuallōtl
+databaseerror|Tlahcuilōltzintlān īahcuallo
+laggedslavemode|Xiquitta: huel ahmo ia achi yancuīc in tlapatlaliztli inīn zāzanilco.
+missingarticle-rev|(tlachiyaliztli ītlapōhual: ~{0})
+missingarticle-diff|(Ahneneuh.: ~{0}, ~{1})
+internalerror|Ahcuallōtl tlahtic
+internalerror_info|Ahcuallōtl tlahtic: ~{0}
+filecopyerror|Ahmo ōmohuelītic tlacopīna "~{0}" īhuīc "~{1}".
+filerenameerror|Ahmo ōmohuelītic tlazaca "~{0}" īhuīc "~{1}".
+filedeleteerror|Ahmo ōmohuelītic tlapoloa "~{0}".
+filenotfound|Ahmo ōmohuelītic tlanāmiqui "~{0}".
+cannotdelete|Ahmo ōhuelītic mopoloa in zāzanilli "~{0}".\nHueli tlein āquin ōquipolo achtopa.
+badtitle|Ahcualli tōcāitl
+badtitletext|Zāzanilli ticnequi in ītōca cah ahcualli, ahtlein quipiya nozo ahcualtzonhuiliztli interwiki tōcāhuicpa.\nHueliz quimpiya tlahtōl tlein ahmo mohuelītih motequitiltia tōcāpan.
+viewsource|Tiquittāz tlahtōlcaquiliztilōni
+actionthrottled|Tlachīhualiztli ōmotzacuili
+viewsourcetext|Tihuelīti tiquitta auh ticcopīna inīn zāzanilli ītlahtōlcaquiliztilōni:
+namespaceprotected|Ahmo tiquihuelīti tiquimpatla zāzaniltin īpan '''~{0}'''.
+ns-specialprotected|In nònkuâkìskàtlaìxtlapaltìn awel ìmpan nemàtilòs mokinyèktlàlis.
+titleprotected|Inīn zāzanilli ōmoquīxti ic tlachīhualiztli ic [[User:~{0}\u007C~{0}]].\nŌquihto: ''~{1}''
+virus-unknownscanner|ahmatic antivirus:
+yourname|Motlatequitiltilīltōca:
+yourpassword|Motlahtōlichtacāyo
+yourpasswordagain|Motlahtōlichtacāyo occeppa
+remembermypassword|Ticpiyāz motlacalaquiliz inīn chīuhpōhualhuazco (īxquich {{PLURAL:~{0}\u007Ctōnalli}})
+yourdomainname|Moāxcāyō
+login|Ximomachiyōmaca/Ximocalaqui
+nav-login-createaccount|Ximocalaqui / ximomachiyōmaca
+userlogin|Ximomachiyōmaca/Ximocalaqui
+userloginnocreate|Ximocalaqui
+logout|Tiquīzāz
+userlogout|Tiquīzāz
+notloggedin|Ahmo ōtimocalac
+nologin|¿Ahmo ticpiya cuentah? '''~{0}'''.
+nologinlink|Ticchīhuāz cē cuentah
+createaccount|Ticchīhuāz cē cuentah
+gotaccount|¿Ye ticpiya cē cuentah? '''~{0}'''.
+gotaccountlink|Ximocalaqui
+createaccountmail|Ticnemītīz ahmo cemihcac zāzoichtacātlahtōlli nō in tiquēhualtīz in maltzinteyōtl monetitlanizyeyān
+createaccountreason|Tlèka:
+badretype|Ahneneuhqui motlahtōlichtacāyo.
+userexists|In tlatequitiltilīltōcāitl in ōquipehpen ye ia.\nTimitztlātlauhtiah xicpehpena occē.
+loginerror|Ahcuallōtl tlacalaquiliztechcopa
+noname|Ahmo ōtiquihto cualli tlatequitiltilīlli tōcāitl.
+loginsuccesstitle|Cualli calaquiliztli
+loginsuccess|'''Ōticalac {{SITENAME}} quemeh "~{0}".'''
+nosuchuser|Ayāc tlatequitiltilīlli motōcāitia "~{0}".\nIn tlatequitiltilīltōcāitl quimati in huēyimachiyōtlahtōliztli.\nXiquitta in yēquihcuilōlli, ahnozo [[Special:UserLogin/signup\u007Cxicchīhua yancuīc cuenta]].
+nosuchusershort|Ayāc tlatequitiltilīlli motōcāitia "~{0}". Xiquitta in tlein ōtitlahcuiloh melāhuacā cah.\nXiquitta moyēquihcuilōl.
+nouserspecified|Mohuīquilia tiquihtoa cualli tlatequitiltilīltōcāitl.
+wrongpassword|Ahcualli motlahtōlichtacāyo.\nTimitztlātlauhtia xicchīhua occeppa.
+wrongpasswordempty|Ayāc motlahtōlichtacāyo.\nTimitztlātlauhtia xicchīhua occeppa.
+mailmypassword|Motlacuepilīz mochtacātlahtōl
+noemail|"~{0}" ahmo quipiya īe-mailcān.
+passwordsent|Ōmoihuah yancuīc motlahtōlichtacāyo īhuīc mo e-mail ("~{0}").\nOcceppa xicalaqui niman ticmatīz.
+mailerror|Ahcuallōtl e-mailcopa: ~{0}
+emailconfirmlink|Ticchicāhua mo e-mail
+accountcreated|Cuentah ōmochīuh
+accountcreatedtext|In ītlatequitiltilīllapōhual in [[{{ns:User}}:~{0}\u007C~{0}]] ([[{{ns:User talk}}:~{0}\u007Ctalk]]) ōquiyōcoyalo.
+createaccount-title|Cuentah ītlachīhualiz ic {{SITENAME}}
+loginlanguagelabel|Tlâtòlli: ~{0}
+changepassword|Ticpatlāz motlahtōlichtacāyo
+resetpass_header|Xicpatlāz motlahtōlichtacāyo
+oldpassword|Huēhueh motlahtōlichtacayo:
+newpassword|Yancuīc motlahtōlichtacayo:
+retypenew|Occeppa xiquihcuiloa yancuīc motlahtōlichtacayo:
+resetpass_submit|Xicpatlāz motlahtōlichtacāyo auh xicalaquīz
+changepassword-success|Mochtacātlahtōl cualli ōtlapatlalo.
+resetpass_forbidden|Tlahtōlichtacayōtl ahmo mohuelītih mopatlah
+resetpass-submit-loggedin|Ticpatlāz motlahtōlichtacāyo
+resetpass-submit-cancel|Ticcuepāz
+passwordreset-username|Tlatequitiltilīltōcāitl:
+extlink_sample|http://www.machiyōtl.com Tzonhuiliztōcāitl
+extlink_tip|Calān tzonhuiliztli (xiquilnamiqui ticaquiāz in http://)
+image_sample|Machiyōtl.jpg
+media_sample|Machiyōtl.ogg
+media_tip|Mēdiahuīc tzonhuiliztli
+sig_tip|Motōcā īca cāhuitl
+hr_tip|Pāntli
+summary|Mopatlaliz:
+subject|Tōcāitl/Āmoxmachiyōtl:
+minoredit|Inīn tlapatlaliztli tepitōn
+watchthis|Tictlachiyāz inīn zāzanilli
+savearticle|Ticpiyāz
+preview|Xiquitta achtochīhualiztli
+showpreview|Xiquitta achtochīhualiztli
+showdiff|Tiquinttāz tlapatlaliztli
+missingcommenttext|Timitztlātlauhtiah xitlanitlahcuiloa.
+summary-preview|Tlahcuilōltōn achtochīhualiztli:
+blockedtitle|Ōmotzacuili tlatequitiltilīlli
+blockednoreason|ahmo cah īxtlamatiliztli
+whitelistedittext|Tihuīquilia ~{0} ic ticpatla zāzaniltin.
+nosuchsectiontitle|In xeliuhcāyōtl ahmo ōquināmic
+loginreqtitle|Ximocalaqui
+loginreqlink|ximocalaqui
+loginreqpagetext|Tihuīquilia ~{0} ic tiquintta occequīntīn zāzaniltin.
+accmailtitle|Tlahtōlichtacāyōtl ōmoihuah.
+accmailtext|Ōquiyōcox zāzochtacātlahtōlli in [[User talk:~{0}\u007C~{0}]] auh ōmoquitītlan īhuīc ~{1}. Tihueliti ticpatlaz īpan ''[[Special:ChangePassword\u007CTicpatlaz in ]]'' in ōticalaco achtopa.
+newarticle|(Yancuīc)
+newarticletext|Ōtictocac cētiliztli cē zāzanilhuīc oc ahmo ia. Intlā quiēlēhuia quichīhua, xitlahcuiloa niman (nō xiquitta [~{0} tēpalēhuiliztli zāzanilli] huehca ōmpa tlapatlaliztli). Intlā ahmo, yāuh achtopa zāzanilli.
+noarticletext|In āxcān, ahmō onca tlahcuilōlli inīn zāzanilpan.\nTihuelīti [[Special:Search/{{PAGENAME}}\u007Ctictēmoa inīn zāzaniltōcācopa]] occequīntīn zāzanilpan,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} machiyōmacalpan], ahnozo [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} ticpatla inīn zāzanilli]</span>.
+userpage-userdoesnotexist|Ahmo ia cuentah "<nowiki>~{0}</nowiki>" ītōca. Timitztlātlauhtiah xitēchquinōtza intlā ticchīhuāz intlā nozo ticpatlāz inīn zāzanilli.
+usercsspreview|'''Ca inīn moachtochīhualiz ītechcopa moCSS.'''\n'''¡Ahmo ōmochīuh nozan!'''
+userjspreview|'''Ca inīn moachtochīhualiz ītechcopa moJavaScript.'''\n'''¡Ahmo ōmochīuh nozan!'''
+updated|(Ōmoyancuīli)
+note|'''Tlahtōlcaquiliztilōni:'''
+previewnote|'''Xiquilnamiqui tein inīn zan tlaachtopaittaliztli.'''\n¡Motlapatlaliz ayamo ōquinpix!
+editing|Ticpatlacah ~{0}
+editingsection|Ticpatlacah ~{0} (tlahtōltzintli)
+editingcomment|Ticpatlacah ~{0} (tlahtōltzintli)
+editconflict|Tlapatlaliztli yāōyōtōn: ~{0}
+yourtext|Motlahcuilōl
+yourdiff|Ahneneuhquiliztli
+copyrightwarning|<small>Timitztlātlauhtiah xiquitta mochi mopatlaliz cana {{SITENAME}} tlatzayāna īpan ~{1} (huēhca ōmpa xiquitta ~{0}). Āqueh tlācah quipatlazqueh in motlahcuilōl auh tlatzayāna occeppa; intlā ahmō ticnequi, zātēpan ahmō titlahcuilōz nicān. Nō mitzihtoah in ōtitlahcuiloh ahmō quipiya in copyright nozo in yōllōxoxouhqui tlahcuilōlli. '''¡AHMŌ XITĒQUITILTIA AHYŌLLŌXOXOUHQUI TLAHCUILŌLLI!'''</small>
+copyrightwarning2|<small>Āqueh tlācah quipatlazqueh in motlahcuilōl auh tlatzayāna occeppa; intlā ahmō ticnequi, zātēpan ahmō titlahcuilōz nicān {{SITENAME}}. Nō mitzihtoah in ōtitlahcuiloh ahmō quipiya in copyright nozo in yōllōxoxouhqui tlahcuilōlli (huēhca ōmpa xiquitta ~{0}). '''¡AHMŌ TIQUINTEQUITILTIA AHYŌLLŌXOXOUHQUI TLAHCUILŌLLI!'''</small>
+longpageerror|'''Aiuhcāyōtl: In tlahcuilōlli tlein ōtiquihuah tlatamachīhua {{PLURAL:~{0}\u007Ccē kilobyte\u007C~{0} kilobyte}}, tzonēhua {{PLURAL:~{1}\u007Ccē kilobyte\u007C~{1} kilobyte}}. Ahmo mopiyāz.'''
+templatesused|{{PLURAL:~{0}\u007CNemachiòtl tlèn motekìuhtia\u007CNemachiòmë tlèn mokìntekìuhtiä}} ìpan inìn tlaìxtlapalli:
+templatesusedpreview|{{PLURAL:~{0}\u007CNemachiòtl tlèn motekìuhtia\u007CNemachiòmë tlèn mokìntekìuhtiä}} ìpan inìn achtochìwalistli:
+templatesusedsection|{{PLURAL:~{0}\u007CNemachiòtl tlèn motekìuhtia\u007CNemachiòmë tlèn mokìntekìuhtiä}} ìpan inìn tlaxélòlistli:
+template-protected|(ōmoquīxti)
+hiddencategories|Inīn zāzanilli mopiya {{PLURAL:~{0}\u007C1 neneuhcāyōc ōmotlāti\u007C~{0} neneuhcāyōc ōmotlāti}}:
+nocreatetext|Inīn huiqui ōquitzacuili tlahuelītiliztli ic tlachīhua yancuīc zāzaniltin. Tichuelīti ticcuepa auh ticpatla cē zāzanilli, [[Special:UserLogin\u007Cxicalaqui nozo xicchīhua cē cuentah]].
+nocreate-loggedin|Ahmo tihuelīti tiquinchīhua yancuīc zāzaniltin.
+permissionserrors|Tēmācāhualiztli aiuhcāyōtl
+permissionserrorstext|Ahmo tihuelīti quichīhua inōn, inīn {{PLURAL:~{0}\u007Cīxtlamatilizpampa}}:
+permissionserrorstext-withaction|Ahmo tiquihuelīti ~{1} inīn {{PLURAL:~{0}\u007Cīxtlamatilizpampa}}:
+moveddeleted-notice|Inīn zāzanilli ōmopolo.\nIn tlapololiztli īhuān in tlazacaliztli tlahcuilōlloh cah tlani.
+edit-gone-missing|Ahmo huelīti yancuīya zāzanilli.\nHueliz ōmopolo.
+edit-conflict|Tlapatlaliztli yāōyōtōn
+edit-already-exists|Ahmo mohuelīti mochīhua yancuīc zāzanilli.\nYe ia.
+cantcreateaccounttitle|Ahmo huelītih mochīhua cuentah
+cantcreateaccount-text|[[User:~{2}\u007C~{2}]] ōcquīxti cuentah tlachīhualiztli īpal inīn IP ('''~{0}''').\n\nĪxtlamatiliztli īpal ~{2} cah ''~{1}''
+viewpagelogs|Tiquinttāz tlahcuilōlloh inīn zāzaniltechcopa
+nohistory|Ahmo cah tlapatlaliztechcopa tlahcuilōlloh inīn zāzaniltechcopa.
+currentrev|Āxcān tlapatlaliztli
+currentrev-asof|Āxcān tlachiyaliztli īpan ~{0}
+revisionasof|Tlachiyaliztli īpan ~{0}
+revision-info|Tlachiyaliztli īpan ~{0}; ~{1}
+previousrevision|← Huēhueh tlapatlaliztli
+nextrevision|Yancuīc tlapatlaliztli →
+currentrevisionlink|Āxcān tlapatlaliztli
+cur|āxcān
+next|niman
+last|xōcoyōc
+page_first|achto
+page_last|xōcoyōc
+history-fieldset-title|Tictēmōz īpan tlahcuilōlloh
+history-show-deleted|Zan tlapolōlli
+histfirst|in achto
+histlast|in tlatzaucticah
+historysize|({{PLURAL:~{0}\u007C1 byte\u007C~{0} byte}})
+historyempty|(iztāc)
+history-feed-title|Tlachiyaliztli tlahcuilōlloh
+history-feed-description|Tlachiyaliztli tlahcuilōlloh inīn zāzaniltechcopa huiquipan
+history-feed-item-nocomment|~{0} īpan ~{1}
+history-feed-empty|In zāzanilli tiquiēlēhuia ahmo ia.\nHueliz ōmopolo huiqui nozo ōmozacac.\n[[Special:Search\u007CXitēmoa huiquipan]] yancuīc huēyi zāzaniltin.
+rev-delundel|tiquittāz/tictlātīz
+revisiondelete|Tiquimpolōz/ahtiquimpolōz tlachiyaliztli
+revdelete-show-file-submit|Quēmah
+revdelete-hide-text|In tlahtlachiyaliztli ītlahcuilōl
+revdelete-hide-image|Tictlātīz tlahcuilōlli ītlapiyaliz
+revdelete-radio-set|Tlaīnāyalli
+revdelete-radio-unset|Ittalōni
+revdel-restore|Ticpatlāz tlattaliztli
+pagehist|Zāzanilli tlahcuilōlloh
+deletedhist|Ōtlapolo tlahcuilōlloh
+revdelete-edit-reasonlist|Tiquimpatlāz īxtlamatiliztli tlapoloaliztechcopa
+mergehistory-from|Zāzanilhuīcpa:
+mergehistory-into|Zāzanilhuīc:
+mergehistory-no-source|Zāzanilhuīcpa ~{0} ahmo ia.
+mergehistory-no-destination|Zāzanilhuīc ~{0} ahmo ia.
+mergehistory-autocomment|Ōmocēntili [[:~{0}]] īpan [[:~{1}]]
+mergehistory-comment|Ōmocēntili [[:~{0}]] īpan [[:~{1}]]: ~{2}
+revertmerge|Tiquīxipehuaz
+history-title|«~{0}» tlahcuilōlloh ītlaihittaliz
+lineno|Pāntli ~{0}:
+editundo|Tichuelōz
+searchresults|Tlatēmoliztli
+searchresults-title|«~{0}» tlatēmōliztli īmochīhualiz
+shown-title|Quinēxiltīz ~{0} {{PLURAL:~{0}\u007Cmochīhualiztli}} cece āmac
+viewprevnext|Xiquintta (~{0} {{int:pipe-separator}} ~{1}) (~{2}).
+searchmenu-exists|'''Ye ia zāzanilli ītōca "[[~{0}]]" inīn huiquipan'''
+searchmenu-new|'''Tihuelīti ticchīhuāz zāzanilli ītōca "[[:~{0}]]" inīn huiquipan'''
+searchprofile-articles|Tlapiyaliztli zāzanilli
+searchprofile-images|Nepapan media
+searchprofile-everything|Mochi
+searchprofile-advanced|Huehca ōmpa
+searchprofile-articles-tooltip|Tictēmōz īpan ~{0}
+searchprofile-images-tooltip|Tiquintēmōz tlahcuilōlli
+searchprofile-everything-tooltip|Tictēmōz mochi tlapiyalizpan (mopiyah tēixnāmiquiliztli zāzanilli)
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 tlahtōl\u007C~{1} tlahtōltin}})
+search-redirect|(tlacuepaliztli ~{0})
+search-section|(tlahtōltzintli ~{0})
+search-suggest|Ahnōceh tiquihtōznequiya: ~{0}
+search-interwiki-caption|Tlachīhualiztli īcnīhuān
+search-interwiki-more|(huehca ōmpa)
+search-relatedarticle|Ītechcopa
+searchrelated|ītechcopa
+searchall|mochīntīn
+powersearch-legend|Chicāhuac tlatēmoliztli
+powersearch-ns|Tlatēmōz tōcātzimpan:
+powersearch-toggleall|Mochi
+powersearch-togglenone|Ahtlein
+search-external|Tlatēmotiliztli calāmpa
+preferences|Tlaēlēhuiliztli
+mypreferences|Notlaēlēhuiliz
+prefs-edits|Tlapatlaliztli tlapōhualli:
+skin-preview|Xiquitta quemeh yez
+datedefault|Ayāc tlanequiliztli
+prefs-labs|Ìntlâtlamảtilis in tlayêyẻkòyàntìn
+prefs-personal|Motlācatlanōnōtzaliz
+prefs-rc|Yancuīc tlapatlaliztli
+prefs-watchlist|Tlachiyaliztli
+prefs-watchlist-days|Tōnaltin tiquinttāz tlachiyalizpan:
+prefs-watchlist-edits|Tlapatlaliztli tiquintta tlachiyalizpan:
+prefs-misc|Zāzo
+prefs-resetpass|Ticpatlāz motlahtōlichtacāyo
+saveprefs|Ticpiyāz
+prefs-editing|Tlapatlaliztli
+rows|Pāntli:
+searchresultshead|Tlatēmoliztli
+recentchangesdays|Tōnaltin tiquinttāz yancuīc tlapatlalizpan:
+localtime|Cāhuitl nicān:
+timezoneregion-africa|Africa
+timezoneregion-america|Ixachitlān
+timezoneregion-antarctica|Antártida
+timezoneregion-arctic|Ártico
+timezoneregion-asia|Asia
+timezoneregion-atlantic|Atlántico Ilhuicaātl
+timezoneregion-australia|Australia
+timezoneregion-europe|Europan
+timezoneregion-indian|Índico Ilhuicaātl
+timezoneregion-pacific|Pacífico Ilhuicaātl
+prefs-searchoptions|Titlatēmōz
+prefs-namespaces|Tōcātzin
+default|ic default
+prefs-files|Tlahcuilōlli
+youremail|Maltzinteyōtl netitlanizyeyāntli:
+username|{{GENDER:~{0}\u007CTlatequitiltilīltōcāitl}}:
+prefs-memberingroups|{{GENDER:~{1}\u007CTlacotōncayōtl}} in {{PLURAL:~{0}\u007Ctēolōlolli\u007Ctēolōloltin}}
+yourrealname|Melāhuac motōcā:
+yourlanguage|Tlâtòlli:
+yournick|Motōcātlaliz:
+badsiglength|Motōcātlaliz cah ocachi huēyac.\nAhmo quihuīquilia quimpiya achi ~{0} {{PLURAL:~{0}\u007Cmachiyōtlahtōliztli}}.
+gender-male|Oquichtli
+gender-female|Cihuātl
+email|E-mail
+prefs-help-realname|Melāhuac motōca.\nIntlā ticnequi, tlācah quimatīzqueh motequi.
+prefs-help-email-required|Tihuīquilia quihcuiloa mo e-mailcān.
+userrights-user-editname|Xihcuiloa cē tlatequitiltilīltōcāitl:
+editusergroup|Tiquimpatlāz tlatequitiltilīlli olōlli
+userrights-editusergroup|Tiquimpatlāz tlatequitiltilīlli olōlli
+saveusergroups|Tiquimpiyāz tlatequitiltilīlli olōlli
+userrights-groupsmember|Olōlco:
+userrights-reason|Īxtlamatiliztli:
+userrights-no-interwiki|Ahmo tihuelīti ticpatla tlatequitiltilīlli huelītiliztli occequīntīn huiquipan.
+group|Olōlli:
+group-user|Tlatequitiltilīlli
+group-bot|Tepoztlācah
+group-sysop|Tlahcuilōlpixqueh
+group-all|(mochīntīn)
+group-user-member|{{GENDER:~{0}\u007Ctlatequitiltilīlli}}
+group-bot-member|{{GENDER:~{0}\u007Ctepozcuāyōllōtl}}
+group-sysop-member|{{GENDER:~{0}\u007Ctētlamahmacani}}
+grouppage-user|{{ns:project}}:Tlatequitiltilīlli
+grouppage-bot|{{ns:project}}:Tepoztlācah
+grouppage-sysop|{{ns:project}}:Tlahcuilōlpixqueh
+right-read|Tiquimpōhuāz zāzaniltin
+right-edit|Tiquimpatlāz zāzaniltin
+right-createpage|Ticchīhuāz zāzaniltin (ahmo tēixnāmiquiliztli zāzaniltin)
+right-createtalk|Ticchīhuāz tēixnāmiquiliztli zāzaniltin
+right-createaccount|Tiquinchīhuāz yancuīc cuentah
+right-minoredit|Ticpatlāz quemeh tlapatlalitzintli
+right-move|Tiquinzacāz zāzaniltin
+right-move-subpages|Tiquinzacāz zāzaniltin auh īzāzaniltōn
+right-suppressredirect|Ahmo ticchīhuāz tlacuepaliztli huēhueh tōcāhuīc ihcuāc ticzacāz cē zāzanilli
+right-upload|Tiquinquetzāz tlahcuilōlli
+right-upload_by_url|Ticquetzāz cē tlahcuilōlli īhuīcpa URL
+right-delete|Tiquimpolōz zāzaniltin
+right-bigdelete|Tiquimpolōz zāzaniltin īca huēiyac tlahcuilōlloh
+right-browsearchive|Tlatēmōz zāzaniltin ōmopoloh
+right-undelete|Ahticpolōz cē zāzanilli
+right-suppressionlog|Tiquinttāz ichtatlahcuilōlloh
+right-block|Tiquintzacuilīz occequīntīn tlatequitiltilīlli
+right-blockemail|Titēquīxtīz tlatequitiltilīlli ic tēch-e-mailīz
+right-hideuser|Ticquīxtīz cē tlatequitiltilīltōcāitl, āuh ichtac
+right-import|Ticcōhuāz zāzaniltin occequīntīn huiquihuīcpa
+right-importupload|Tiquincōhuāz zāzaniltin tlahcuilōlquetzalizhuīcpa
+right-patrolmarks|Tiquinttāz tlapiyalizmachiyōtl īpan yancuīc tlapatlaliztli
+right-unwatchedpages|Tiquinttāz mochi zāzanilli tlein ahmo mochiya
+right-userrights|Tiquimpatlāz mochīntīn tlatequitiltilīlli huelītiliztli
+right-userrights-interwiki|Tiquimpatlāz tlatequitiltilīlli huelītiliztli occequīntīn huiquipan
+rightslog|Tlatequitiltilīlli huelītiliztli tlahcuilōlloh
+action-read|ticpōhuāz inīn zāzanilli
+action-edit|ticpatlāz inīn zāzanilli
+action-createpage|tiquinchīhuāz zāzaniltin
+action-createtalk|tiquinchīhuāz tēixnāmiquiliztli zāzaniltin
+action-createaccount|ticchīhuaz inīn tlatequitiltilīlli īcuentah
+action-move|ticpatlāz inīn zāzanilli
+action-move-subpages|tiquimpatlāz inīn zāzanilli īhuān zāzaniltōn
+action-upload|ticquetzāz inīn tlahcuilōlli
+action-writeapi|tictequitiltīz API tlahcuilōliztli
+action-delete|ticpolōz inīn zāzanilli
+action-deleterevision|ticpolōz inīn tlachiyaliztli
+action-deletedhistory|tiquittāz inīn zāzanilli ītlahcuilōlloh tlein ōmopolo
+action-browsearchive|tiquintēmōz zāzanilli tlein ōmopoloh
+action-undelete|ahticpolōz inīn zāzanilli
+action-suppressionlog|tiquittāz inīn ichtac tlahcuilōlloh
+action-block|tiquitzacuilīz inīn tlatequitiltilīlli
+action-userrights|tiquimpatlāz mochi tlatequitiltilīlli huelītiliztli
+nchanges|~{0} {{PLURAL:~{0}\u007Ctlapatlaliztli}}
+recentchanges|Yancuīc tlapatlaliztli
+recentchanges-legend|Yancuīc tlapatlaliztechcopa tlanequiliztli
+recentchanges-summary|Xiquinttāz in achi yancuīc ahmo occequīntīn tlapatlaliztli huiquipan inīn zāzanilpan.
+recentchanges-label-newpage|Inīn tlapatlaliztli ōquiyōcox cē yancuīc āmatl
+recentchanges-label-minor|Inīn tlapatlaliztli tepitōn
+rclistfrom|Xiquinttāz yancuīc tlapatlaliztli īhuīcpa ~{2} ~{1}
+rcshowhideminor|~{0} tlapatlalitzintli
+rcshowhidebots|~{0} tepoztlācah
+rcshowhideliu|~{0} tēmachiyōmacalli tlatequitiltilīltin
+rcshowhideanons|~{0} ahtōcā tlatequitiltilīlli
+rcshowhidepatr|~{0} tlapatlaliztli mochiyahua
+rcshowhidemine|~{0} notlahcuilōl
+rclinks|Xiquintta xōcoyōc ~{0} tlapatlaliztli xōcoyōc ~{1} tōnalpan.<br />~{2}
+diff|ahneneuh
+hist|tlahcuil
+hide|Tiquintlātīz
+show|Tiquinttāz
+minoreditletter|p
+newpageletter|Y
+boteditletter|T
+number_of_watching_users_pageview|[~{0} tlatequitiltilīlli {{PLURAL:~{0}\u007Ctlachiya\u007Ctlachiyah}}]
+rc_categories_any|Zāzo
+newsectionsummary|Yancuīc tlahtōltzintli: /* ~{0} */
+recentchangeslinked|Tlapatlaliztli tzonhuilizpan
+recentchangeslinked-feed|Tlapatlaliztli tzonhuilizpan
+recentchangeslinked-toolbox|Tlapatlaliztli tzonhuilizpan
+recentchangeslinked-title|Tlapatlaliztli "~{0}" ītechcopa
+recentchangeslinked-page|Zāzanilli ītōcā:
+upload|Tlahcuilōlquetza
+uploadbtn|Tlahcuilōlquetza
+uploadnologin|Ahmo ōtimocalac
+uploaderror|Tlaquetzaliztli ahcuallōtl
+uploadlogpage|Tlaquetzaliztli tlahcuilōlloh
+filename|Tlahcuilōlli ītōcā
+filedesc|Tlahcuilōltōn
+fileuploadsummary|Tlahcuilōltōn:
+filestatus|Copyright:
+filesource|Īhuīcpa:
+minlength1|Tlahcuilōltōcāitl quihuīlquilia huehca ōmpa cē tlahtōl.
+badfilename|Īxiptli ītōcā ōmopatlac īhuīc "~{0}".
+filetype-unwanted-type|'''".~{0}"''' ahmo moēlēhuia quemeh tlahcuilōlli iuhcāyōtl.\nTlahcuilōlli iuhcāyōtl {{PLURAL:~{2}\u007Cmoēlēhuia cah\u007Cmoēlēhuiah cateh}} ~{1}.
+filetype-missing|Tlahcuilōlli ahmo quipiya huēiyaquiliztli (quemeh ".jpg").
+large-file|Mā tlahcuilōlli ahmo achi huēiyac ~{0}; inīn cah ~{1}.
+fileexists-extension|Tlahcuilōlli zan iuh tōcātica ia: [[~{1}\u007Cthumb]]\n* Tlahcuilōlli moquetzacah: <strong>[[:~{0}]]</strong>\n* Tlahcuilōlli tlein ia ītōca: <strong>[[:~{1}]]</strong>\nTimitztlātlauhtiah, xitlahcuiloa occē tōcāitl.
+savefile|Quipiyāz tlahcuilōlli
+uploaddisabled|Ahmo mohuelīti tlahcuilōlquetzā
+uploaddisabledtext|Ahmo huelīti moquetzazqueh tlahcuilōlli.
+sourcefilename|Tōcāhuīcpa:
+destfilename|Tōcāhuīc:
+watchthisupload|Tictlachiyāz inīn zāzanilli
+upload-success-subj|Cualli quetzaliztli
+upload_source_file| (cē tlahcuilōlli mochīuhpōhualhuazco)
+listfiles_search_for|Tlatēmōz mēdiatl tōcācopa:
+imgfile|īxiptli
+listfiles|Mochīntīn īxiptli
+listfiles_name|Tōcāitl
+listfiles_user|Tlatequitiltilīlli
+listfiles_size|Octacayōtl (bytes)
+file-anchor-link|Īxiptli
+filehist|Tlahcuilōlli tlahcuilōlloh
+filehist-deleteall|tiquimpolōz mochīntīn
+filehist-deleteone|ticpolōz
+filehist-revert|tlacuepāz
+filehist-current|āxcān
+filehist-datetime|Tlapōhualpan/Cāhuitl
+filehist-thumb|Īxiptlahtōn
+filehist-user|Tlatequitiltilīlli
+filehist-dimensions|Octacayōtl
+filehist-comment|TlahtōIcaquiliztīlōni
+imagelinks|Tlahcuilōlli tlanemītīliztli
+linkstoimage|Inīn {{PLURAL:~{0}\u007Czāzanilli motzonhuilia\u007C~{0} zāzanilli motzonhuiliah}} inīn tlahcuilōlhuīc:
+nolinkstoimage|Ahmo cateh zāzaniltin tlein tzonhuiliah inīn tlahcuilōlhuīc.
+morelinkstoimage|Tiquinttāz [[Special:WhatLinksHere/~{0}\u007Cachi tzonhuiliztli]] inīn tlahcuilōlhuīc.
+duplicatesoffile|Inōn {{PLURAL:~{0}\u007Ctlahcuilōlli cah\u007C~{0} tlahcuilōlli cateh}} ōntiah inīn zāzanilli ([[Special:FileDuplicateSearch/~{1}\u007Cocahci]]):
+sharedupload|Inīn ~{0} zāzanilli huelīti motequitiltia zāzocāmpa.
+uploadnewversion-linktext|Ticquetzāz yancuīc tlahcuilōlli
+filerevert|Ticcuepāz ~{0}
+filerevert-legend|Tlahcuilōlli tlacuepaliztli
+filerevert-comment|Tlèka:
+filerevert-submit|Tlacuepāz
+filedelete|Ticpolōz ~{0}
+filedelete-legend|Ticpolōz tlahcuilōlli
+filedelete-comment|Īxtlamatiliztli:
+filedelete-submit|Ticpolōz
+filedelete-success|Ōmopolo '''~{0}'''.
+filedelete-nofile|'''~{0}''' ahmo ia.
+filedelete-otherreason|Occē īxtlamatiliztli:
+filedelete-reason-otherlist|Occē īxtlamatiliztli
+filedelete-edit-reasonlist|Tiquimpatlāz īxtlamatiliztli tlapoloaliztechcopa
+mimesearch|MIME tlatēmoliztli
+mimetype|MIME iuhcāyōtl:
+download|tictemōz
+unwatchedpages|Zāzaniltin ahmo motlachiya
+listredirects|Tlacuepaliztli
+unusedtemplates|Nemachiyōtīlli ahmotequitiltiah
+unusedtemplateswlh|occequīntīn tzonhuiliztli
+randompage|Zāzozāzanilli
+randompage-nopages|Ahmo oncah zāzanilli īpan inīn {{PLURAL:~{1}\u007Ctōcāitl}}: ~{0}.
+randomredirect|Zāzotlacuepaliztli
+statistics-header-edits|Tlapatlaliztli tlapōhualli
+statistics-header-users|Tlatequitiltilīlli ītlapōhualiz
+statistics-files|Tlahcuilōlli ōmoquetz
+doubleredirects|Ōntetl tlacuepaliztli
+brokenredirects|Tzomoc tlacuepaliztli
+brokenredirects-edit|ticpatlāz
+brokenredirects-delete|ticpolōz
+withoutinterwiki|Zāzaniltin ahtle tzonhuiliztli
+withoutinterwiki-submit|Tiquittāz
+nbytes|~{0} {{PLURAL:~{0}\u007Cbyte}}
+ncategories|~{0} {{PLURAL:~{0}\u007Ctlaìxmatkàtlàlilòtl\u007Ctlaìxmatkàtlàlilòmë}}
+nlinks|~{0} {{PLURAL:~{0}\u007Ctzòwilistli\u007Ctzòwilistìn}}
+nmembers|~{0} {{PLURAL:~{0}\u007Ctlâkuilòpilli\u007Ctlâkuilòpiltìn}}
+nrevisions|~{0} {{PLURAL:~{0}\u007Ctlapiyaliztli}}
+nimagelinks|Motekìuhtia ìpan ~{0} {{PLURAL:~{0}\u007Ctlaìxtlapalli\u007Ctlaìxtlapaltìn}}
+ntransclusions|motekìuhtia ìpan ~{0} {{PLURAL:~{0}\u007Ctlaìxtlapalli\u007Ctlaìxtlapaltìn}}
+uncategorizedpages|Zāzaniltin ahmoneneuhcāyōtiah
+uncategorizedcategories|Tlaìxmatkàtlàlilòmë âmò tlatlaìxmatkàtlàlìltìn
+uncategorizedimages|Ìxiptìn âmò tlatlaìxmatkàtlàlìltìn
+uncategorizedtemplates|Nemachiòmë âmò tlatlaìxmatkàtlàlìltìn
+unusedcategories|Tlaìxmatkàtlàlilòmë tlèn âmò mokìntekìuhtia
+unusedimages|Ìxiptìn tlèn âmò mokìntekìuhtia
+wantedcategories|Ìtech kineki tlaìxmatkàtlàlilòtl
+wantedpages|Zāzaniltin moēlēhuiah
+wantedfiles|Ìpan moneki èwaltìn
+wantedtemplates|Ìtech moneki nemachiòmë
+mostlinked|Tlâkuilòlpiltìn tlèn okachi tlatzòtzòwìllôkë
+mostlinkedcategories|Tlaìxmatkàtlàlilòmë tlèn okachi tlatzòtzòwìllôkë
+mostlinkedtemplates|Nemachiòmë tlèn okachi tlatzòtzòwìllôkë
+mostcategories|Tlaìxtlapaltìn ìwàn okachi mièk tlaìxmatkàtlàlilòmë
+mostimages|Īxiptli tlein in achi motzonhuilia
+shortpages|Ahhuēiyac zāzaniltin
+longpages|Huēiyac zāzaniltin
+deadendpages|Ahtlaquīzaliztli zāzaniltin
+protectedpages|Zāzaniltin ōmoquīxti
+protectedpages-indef|Zan ahcāhuitl tlaquīxtiliztli
+protectedtitles|Tōcāitl ōmoquīxtih
+listusers|Tlatequitiltilīlli
+newpages|Yancuīc zāzaniltin
+newpages-username|Tlatequitiltilīltōcāitl:
+ancientpages|Huēhuehzāzanilli
+move|Ticzacāz
+movethispage|Ticzacāz inīn zāzanilli
+pager-newer-n|{{PLURAL:~{0}\u007C1 yancuīc\u007C~{0} yancuīc}}
+pager-older-n|{{PLURAL:~{0}\u007C1 huēhuetl\u007C~{0} huēhueh}}
+booksources|āmoxmēyalli
+specialloguserlabel|Tlatequitiltilīlli:
+speciallogtitlelabel|Tōcāitl:
+log|Tlahcuilōlloh
+all-logs-page|Mochīntīn tlācah īntlahcuilōlloh
+allarticles|Mochīntīn tlahcuilōlli
+allinnamespace|Mochīntīn zāzanilli (īpan ~{0})
+allpagessubmit|Tiquittāz
+categoriespagetext|{{PLURAL:~{0}\u007CInìn tlaìxmatkàtlàlilòtl kimpia\u007CInîkë tlaìxmatkàtlàlilòmë kimpiâkë}} tlaìxtlapaltìn noso medios.\nÂmò monèxtiâkë nikàn in [[Special:UnusedCategories\u007Ctlaìxmatkàtlàlilòmë tlèn âmò mokìntekitìltia]].\nNò mà mỏta in tlèn [[Special:WantedCategories\u007Cìpan kineki tlaìxmatkàtlàlilòtl]].
+categoriesfrom|Mà monèxtìkàn tlaìxmatkàtlàlilòmë tlèn pèwâkë ìka:
+special-categories-sort-count|tlapōhualcopa
+special-categories-sort-abc|tlahtōlcopa
+linksearch|Calān tzonhuiliztli tlatemoliztli
+linksearch-ns|Tōcātzin:
+linksearch-ok|Tictēmōz
+linksearch-line|~{0} tzonhuīlo īxquichca ~{1}
+listusers-submit|Tiquittāz
+listgrouprights-group|Olōlli
+listgrouprights-rights|Huelītiliztli
+emailuser|Tiquēhualtlīz maltzinteyōtl netitlaniztli inīn tlatequitiltilīlli
+defemailsubject|{{SITENAME}} correo tlatequitiltilīlhuīc ~{0}
+emailfrom|Īhuīcpa:
+emailto|Īhuīc:
+emailmessage|Tlahcuilōltzintli:
+emailsend|Ticquihuāz
+emailsent|E-mail ōmoihuah
+watchlist|Notlachiyaliz
+mywatchlist|Notlachiyaliz
+watchnologin|Ahmo ōtimocalac
+removedwatchtext|Zāzanilli "[[:~{0}]]" ōmopolo [[Special:Watchlist\u007Cmotlachiyalizco]].
+watch|Tictlachiyāz
+watchthispage|Tictlachiyāz inīn zāzanilli
+unwatch|Ahtictlachiyāz
+watchlist-details|{{PLURAL:~{0}\u007C~{0} zāzanilli\u007C~{0} zāzaniltin}} motlachiyaliz, ahmo mopōhua tēixnāmiquiliztli.
+wlshowlast|Tiquinttāz tlapatlaliztli īhuīcpa achto ~{0} yēmpohualminuhtli, ~{1} tōnaltin
+watching|Tlachiyacah...
+unwatching|Ahtlachiyacah...
+enotif_impersonal_salutation|tlatequitiltilīlli īpan {{SITENAME}}
+enotif_anon_editor|ahtōcātlatequitiltilīlli ~{0}
+enotif_body|Māhuiztic $WATCHINGUSERNAME,\n\n$PAGEINTRO $NEWPAGE\n\nTlapatlani ītlahtōlpehuallo:  $PAGESUMMARY $PAGEMINOREDIT\n\nXicnotzāz in tlapatlani:\nīnetitlanizyeyān:$PAGEEDITOR_EMAIL\nīhuiqui:$PAGEEDITOR_WIKI\n\nAhmo occēppa mitztlamachiztīz intlā yancuīc tlapatlaliztli, zā mā tiquittaz inīn āmatl. Tihueliti ticcencahulīz in tēmachiztīlizpāmitl in mochintin motlachixāmatl in motlachiyaliz.\n\nIn {{SITENAME}} icnīuhtīliztica motēmachiztīliztlacentetilīz.\n\nIntlā ticnequi ticpatlaz in maltzinteyōtl monetitlanizyeyān, xiquihitta:\n{{canonicalurl:{{#special:Preferences}}}}\n\n\nIntlā ticnequi ticpatlaz in motlachiyaliz tlaēlēhuiliztli, xiquihitta:\n{{canonicalurl:{{#special:EditWatchlist}}}}\n\nIntlā ticnequi ticpolōz in āmatl ītech motlachiyaliz, xiquihitta:\n$UNWATCHURL\n\nMotlahtōlcaquiliztīlōni īhuān ocachi tēpalēhuiliztli, xiquihitta:\n$HELPPAGE
+created|ōmochīuh
+changed|ōmotlacuep
+deletepage|Ticpolōz inīn zāzanilli
+excontent|Tlapiyaliztli ōcatca: '~{0}'
+excontentauthor|Tlapiyaliztli ōcatca: '~{0}' (auh zancē ōquipatlac ōcatca '[[Special:Contributions/~{1}\u007C~{1}]]')
+delete-confirm|Ticpolōz "~{0}"
+delete-legend|Ticpolōz
+actioncomplete|Cēntetl
+deletedtext|"~{0}" ōmopolo.\nXiquitta ~{1} ic yancuīc tlapololiztli.
+dellogpage|Tlapololiztli tlahcuilōlloh
+deletionlog|tlapololiztli tlahcuilōlloh
+deletecomment|Īxtlamatiliztli:
+deleteotherreason|Occē īxtlamatiliztli:
+deletereasonotherlist|Occē īxtlamatiliztli
+delete-edit-reasonlist|Tiquimpatlāz īxtlamatiliztli tlapoloaliztechcopa
+rollback_short|Tlacuepāz
+rollbacklink|tlacuepāz
+rollback-success|Ōmotlacuep ~{0} ītlahcuilōl; āxcān achto ~{1} ītlahcuilōl.
+protectedarticle|ōmoquīxti "[[~{0}]]"
+unprotectedarticle|ōahmoquīxtih «[[~{0}]]»
+prot_1movedto2|[[~{0}]] ōmozacac īhuīc [[~{1}]]
+protectexpiry|Tlamiliztli:
+protect_expiry_invalid|Ahcualli tlamiliztli cāhuitl.
+protect-default|Ticmācāhuaz mochintin in tlatequitiltilīltin
+protect-fallback|Zan momācāhuazqueh tlatequitiltilīltin in tēmācāhualiztica «~{0}»
+protect-level-autoconfirmed|Zan momācāhuaz moneltilīlli tlatequitiltilīltin
+protect-level-sysop|Zan momācāhuaz tētlamahmacanimeh
+protect-expiring|motlamīz ~{0} (UTC)
+protect-expiry-options|1 hora:1 hour,1 tōnalli:1 day,1 chicuēyilhuitl:1 week,2 chicuēyilhuitl:2 weeks,1 mētztli:1 month,3 mētztli:3 months,6 mētztli:6 months,1 xihuitl:1 year,mochipa:infinite
+restriction-type|Mācāhualiztli:
+restriction-edit|Ticpatlāz
+restriction-move|Ticzacāz
+restriction-create|Ticchīhuāz
+restriction-upload|Tlahcuilōlquetza
+undelete|Tiquinttāz zāzaniltin ōmopolōzqueh
+viewdeletedpage|Tiquinttāz zāzaniltin ōmopolōzqueh
+undelete-revision|Tlapoloc ~{0} ītlachiyaliz (īpan ~{3}, ~{4}) īpal ~{2}:
+undeletebtn|Ahticpolōz
+undeletelink|tiquittaz/ticpahtīz
+undeleteviewlink|tiquittāz
+undelete-search-box|Tiquintlatēmōz zāzaniltin ōmopolōz
+undelete-search-prefix|Tiquittāz zāzaniltin mopēhua īca:
+undelete-search-submit|Tlatēmōz
+undelete-error-short|Ahcuallōtl ihcuāc momāquīxtiya: ~{0}
+undelete-show-file-submit|Quemah
+namespace|Tōcātlacāuhtli:
+invert|Tlacuepāz motlahtōl
+contributions|In {{GENDER:~{0}\u007Ctlatequitiltilīlli}} ītlahcuilōl
+contributions-title|Tlatequitiltilīlli ~{0} ītlahcuilōl
+mycontris|Notlahcuilōl
+contribsub2|~{0} (~{1})
+uctop|(āxcān tlapatlaliztli)
+month|Īhuīcpa mētztli (auh achtopa):
+year|Xiuhhuīcpa (auh achtopa):
+sp-contributions-newbies|Tiquinttāz zan yancuīc tlatequitiltilīlli īntlapatlaliz
+sp-contributions-newbies-sub|Ic yancuīc
+sp-contributions-newbies-title|Yancuīc tlatequitiltilīlli ītlahcuilōl
+sp-contributions-blocklog|Tlatzacuiliztli tlahcuilōlloh
+sp-contributions-uploads|tlahcuilōlquetzaliztli
+sp-contributions-talk|tēixnāmiquiliztli
+sp-contributions-search|Tiquintlatēmōz tlapatlaliztli
+sp-contributions-username|IP nozo tlatequitiltilīlli ītōcā:
+sp-contributions-submit|Tlatēmōz
+whatlinkshere|In tlein quitzonhuilia nicān
+whatlinkshere-title|Zāzaniltin quitzonhuiliah ~{0}
+whatlinkshere-page|Zāzanilli:
+linkshere|Inīn zāzaniltin quitzonhuiliah '''[[:~{0}]]''' īhuīc:
+nolinkshere|Ahtle quitzonhuilia '''[[:~{0}]]''' īhuīc.
+isredirect|ōmotlacuep zāzanilli
+isimage|īxiptlahtli tzonhuiliztli
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cachtopa\u007C~{0} achtopa}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cniman\u007C~{0} niman}}
+whatlinkshere-links|← tzòwilistìn
+whatlinkshere-hideredirs|~{0} tlacuepaliztli
+whatlinkshere-hidelinks|~{0} tzòwilistìn
+whatlinkshere-hideimages|~{0} tlahcuilōltzonhuīliztli
+blockip|Tiquitzacuilīz tlatequitiltilīlli
+blockip-legend|Tiquitzacuilīz tlatequitiltilīlli
+ipaddressorusername|IP nozo tlatequitiltilīlli ītōcā:
+ipbexpiry|Motlamia:
+ipbreason|Īxtlamatiliztli:
+ipbsubmit|Tiquitzacuilīz inīn tlatequitiltilīlli
+ipbother|Occē cāuhpan:
+ipboptions|2 cāhuitl:2 hours,1 tōnalli:1 day,3 tōnaltin:3 days,1 chicuēyilhuitl:1 week,2 chicuēyilhuitl:2 weeks,1 mētztli:1 month,3 mētztli:3 months,6 mētztli:6 months,1 xihuitl:1 year,mochipa:infinite
+ipbwatchuser|Tiquinchiyāz inīn tlatequitiltilīlli in ītlatequitiltilīlzāzanil auh in ītēixnāmiquiliz
+badipaddress|Ahcualli IP
+blockipsuccesssub|Cualli tlatzacuiliztli
+ipb-unblock-addr|Ahtiquitzacuilīz ~{0}
+ipb-unblock|Ahtiquitzacuilīz IP nozo tlatequitiltilīlli
+unblockip|Ahtiquitzacuilīz tlatequitiltilīlli
+ipblocklist|Tlatequitiltilīltzacualli
+ipblocklist-submit|Tlatēmōz
+infiniteblock|ahtlamic
+expiringblock|tlami īpan ~{0} īpan ~{1}
+anononlyblock|zan ahtōcā
+blocklink|tiquitzacuilīz
+unblocklink|ahtiquitzacuilīz
+change-blocklink|Ticpatlaz tlatzacualli
+contribslink|tlapatlaliztli
+blocklogpage|Tlatequitiltilīlli ōmotzacuili
+move-page|Ticzacāz ~{0}
+move-page-legend|Ticzacāz zāzanilli
+movepagetext|Nicān mohcuiloa quemeh ticzacāz cē zāzanilli auh mochi in ītlahcuillōloh īhuīc occē yancuīc ītōca.\nHuēhuehtōcāitl yez tlacuepaliztli yancuīc tōcāhuīc.\nTzonhuiliztli huēhuehzāzanilhuīc ahmo mopatlāz.\nXiquitta ic māca xicchīhua [[Special:DoubleRedirects\u007Cōntlacuepaliztli]] ahnozo [[Special:BrokenRedirects\u007Ctzomoc]].\nTitzonhuilizpiyāz.\n\nXicmati in zāzanilli ahmo mozacāz intlā ye ia cē zāzanilli tōcātica, zan cah iztāc zāzanilli ahnozo tlacuepaliztli īca ahmo tlahcuilōlloh.\nQuihtōznequi tihuelītīz ticuepāz cē zāzanilli īhuīc ītlācatōca intlā ahcuallōtl ticchīhuāz, tēl ahmo tihuelītīz occeppa tihcuilōz īpan zāzanilli tlein ia.\n\n'''¡XICPŌHUA!'''\nHueliz cah inīn huēyi tlapatlaliztli. Timitztlātlauhtia ticmatīz cuallōtl auh ahcuallōtl achtopa ticzacāz.
+movearticle|Ticzacāz tlahcuilōlli
+movenotallowed|Ahmo tihuelīti tiquinzaca zāzaniltin.
+newtitle|Yancuīc tōcāhuīc
+move-watch|Tictlachiyāz inīn zāzanilli
+movepagebtn|Ticzacāz zāzanilli
+pagemovedsub|Cualli ōmozacac
+movepage-moved|'''"~{0}" ōmotlacuep īhuīc "~{1}".'''
+movetalk|Ticzacāz nō tēixnāmiquiliztli tlahcuilōltechcopa.
+movepage-page-moved|Zāzanilli ~{0} ōmozacac īhuīc ~{1}.
+movepage-page-unmoved|Ahmo huelīti ~{0} mozaca īhuīc ~{1}.
+movelogpage|Tlazacaliztli tlahcuilōlloh
+movereason|Īxtlamatiliztli:
+revertmove|tlacuepāz
+delete_and_move|Ticpolōz auh ticzacāz
+delete_and_move_confirm|Quēmah, ticpolōz in zāzanilli
+immobile-source-namespace|Ahmo huelīti mozaca zāzanilli tōcātzimpan "~{0}"
+immobile-target-namespace|Ahmo huelīti mozaca zāzanilli tōcātzinhuīc "~{0}"
+immobile-source-page|Ahmo huelīti mozacāz zāzanilli.
+move-leave-redirect|Ticcāhuāz cē tlacuepaliztli
+export|Tiquinnamacāz zāzaniltin
+export-submit|Ticnamacāz
+export-addcattext|Mà tlatlaìxtlapalwilo ìwikpa tlatlaìxmatkàtlàlilòpa:
+export-addcat|Ticcētilīz
+export-download|Ticpiyāz quemeh tlahcuilōlli
+export-templates|Tiquimpiyāz nemachiyōtīlli
+allmessages|Mochīntīn Huiquimedia tlahcuilōltzintli
+allmessagesname|Tōcāitl
+allmessagescurrent|Āxcān tlahcuilōlli
+allmessages-filter-all|Mochi
+allmessages-language|Tlâtòlli:
+allmessages-filter-submit|Yāuh
+thumbnail_error|Aiuhcāyōtl ihcuāc mochīhuaya tepitōntli: ~{0}
+import|Tiquincōhuāz zāzaniltin
+import-interwiki-submit|Tiquicōhuāz
+import-upload-filename|Tlahcuilōltōcāitl:
+importstart|Motlacōhua zāzaniltin...
+import-revision-count|~{0} {{PLURAL:~{0}\u007Ctlachiyaliztli}}
+importbadinterwiki|Ahcualli interhuiqui tzonhuiliztli
+import-upload|Tiquinquetzāz XML tlahcuilōlli
+importlogpage|Tiquincōhuāz tlahcuilōlloh
+tooltip-pt-userpage|Notlatequitiltilīlzāzanil
+tooltip-pt-mytalk|Notēixnāmiquiliz
+tooltip-pt-preferences|Notlaēlēhuiliz
+tooltip-pt-watchlist|Zāzaniltin tiquintlachiya ic tlapatlaliztli
+tooltip-pt-mycontris|Notlahcuilōl
+tooltip-pt-login|Tihuelīti timocalaqui, tēl ahmo tihuīquilia.
+tooltip-pt-logout|Tiquīzāz
+tooltip-ca-talk|Inīn tlahcuilōlli ītēixnāmiquiliz
+tooltip-ca-edit|Tihuelīti ticpatla inīn zāzanilli. Timitztlātlauhtiah, tiquiclica achtochīhualizpan achtopa ticpiya.
+tooltip-ca-addsection|Tictzintīz yancuīc xeliuhcāyōtl.
+tooltip-ca-viewsource|Inīn zāzanilli ōmoquīxti. Tihuelīti tiquitta ītlahtōlcaquiliztilōni.
+tooltip-ca-history|Achtopa āxcān zāzanilli īhuān in tlatequitiltilīlli ōquinchīuhqueh
+tooltip-ca-protect|Ticquīxtiāz inīn zāzanilli
+tooltip-ca-delete|Ticpolōz inīn zāzanilli
+tooltip-ca-undelete|Ahticpolōz inīn zāzanilli
+tooltip-ca-move|Ticzacāz inīn zāzanilli
+tooltip-ca-watch|Ticcēntilīz inīn zāzanilli motlachiyalizhuīc
+tooltip-ca-unwatch|Ahtictlachiyāz inīn zāzanilli
+tooltip-search|Tlatēmōz īpan {{SITENAME}}
+tooltip-search-go|Tiyaz in zāzanilhuīc īca inīn huel melāhuac tōcaitl intlā yez
+tooltip-search-fulltext|Tictemōz inīn tlahcuilōlli in āmac
+tooltip-p-logo|Calīxatl
+tooltip-n-mainpage|Tiquittaz in calīxatl
+tooltip-n-mainpage-description|Tiquittaz in calīxatl
+tooltip-n-portal|Tlachīhualiztechcopa, inōn tihuelīti titlachīhua, tlatēmoyān
+tooltip-n-recentchanges|Yancuīc tlapatlaliztli huiquipan
+tooltip-n-randompage|Tiquittāz cē zāzotlein zāzanilli
+tooltip-n-help|In tēmachtīlōyān
+tooltip-t-whatlinkshere|Mochīntīn zāzaniltin huiquipan quitzonhuiliah nicān
+tooltip-t-recentchangeslinked|Yancuīc tlapatlaliztli inīn zāzanilhuīcpa moquintzonhuilia
+tooltip-feed-rss|RSS tlachicāhualiztli inīn zāzaniltechcopa
+tooltip-feed-atom|Atom tlachicāhualiztli inīn zāzaniltechcopa
+tooltip-t-contributions|Xiquitta inīn tlatequitiltilīlli ītlahcuilōl
+tooltip-t-emailuser|Tiquihcuilōz inīn tlatequitiltililhuīc
+tooltip-t-upload|Tiquinquetzāz tlahcuilōlli
+tooltip-t-specialpages|Ìntlapòpòwaltekpànal mochtìn in nònkuâkìskàtlaìxtlapaltìn
+tooltip-t-print|Tepoztlahcuilōlli
+tooltip-ca-nstab-main|Xiquitta in tlahcuilōlli
+tooltip-ca-nstab-user|Xiquitta tlatequitiltilīlli īzāzanil
+tooltip-ca-nstab-special|Inìn sè nònkuâkìskàtlaìxtlapalli, yêìka awel nemàtilòs moyêyèktlàlis in tlaìxtlapalli
+tooltip-ca-nstab-project|Xiquitta tlachīhualiztli īzāzanil
+tooltip-ca-nstab-image|Xiquittāz īxipzāzanilli
+tooltip-ca-nstab-mediawiki|Xiquitta in tlahcuilōltzin
+tooltip-ca-nstab-template|Xiquitta in nemachiyōtīlli
+tooltip-ca-nstab-help|Xiquitta in tēpalēhuiliztli zāzanilli
+tooltip-ca-nstab-category|Mà mỏta ìtlaìxtlapal in tlaìxmatkàtlàlilòtl
+tooltip-minoredit|Ticmachiyōz quemeh tlapatlalitzintli
+tooltip-save|Ticpiyāz mopatlaliz
+tooltip-preview|Xachtopaitta mopatlaliz ¡Timitztlahtlauhtiliah, xicchīhua yēppa mā tiquimpiya!
+tooltip-diff|Xiquitta in tlein ōticpatlāz tlahcuilōlco.
+tooltip-compareselectedversions|Tiquinttāz ahneneuhquiliztli ōme zāzanilli tlapatlaliznepantlah.
+tooltip-watch|Ticcēntilīz inīn zāzanilli motlachiyalizhuīc
+tooltip-upload|Ticpēhua quetzaliztli
+tooltip-summary|Xicaquilia tepitōn tlahcuilōltōntli
+anonymous|Ahtōcāitl {{PLURAL:~{0}\u007Ctlatequitiltilīlli}} īpan {{SITENAME}}
+siteuser|~{0} tlatequitiltilīlli īpan {{SITENAME}}
+lastmodifiedatby|Inīn zāzanilli ōtlapatlac catca īpan ~{1}, ~{0} īpal ~{2}.
+others|occequīntīn
+siteusers|~{0} {{PLURAL:~{1}\u007Ctlatequitiltilīlli}} īpan {{SITENAME}}
+spam_reverting|Mocuepacah īhuīc xōcoyōc tlapatlaliztli ahmo tzonhuilizca īhuīc ~{0}
+spam_blanking|Mochi tlapatlaliztli quimpiyah tzonhuiliztli īhuīc ~{0}, iztāctiliacah
+previousdiff|← Achtopa
+nextdiff|Oc ye cencah yancuīc tlapatlaliztli →
+widthheightpage|~{0} × ~{1}, ~{2} {{PLURAL:\u007Czāzanilli\u007Czāzanilli}}
+file-info-size|~{0} × ~{1} pixel; zāzanilli octacayōtl: ~{2}; machiyōtl MIME: ~{3}
+file-nohires|Ahmo ia achi cualli ahmo occē īxiptli.
+show-big-image|Mochi cuallōtl
+newimages|Yancuīc īxipcān
+imagelisttext|Nicān {{PLURAL:~{0}\u007Cmopiya\u007Cmopiyah}} '''~{0}''' īxiptli ~{1} iuhcopa.
+noimages|Ahtlein ic tlatta.
+ilsubmit|Tlatēmōz
+bydate|tōnalcopa
+metadata|Metadata
+metadata-expand|Tiquittāz tlanōnōtzaliztli huehca ōmpa
+metadata-collapse|Tictlātīz tlanōnōtzaliztli huehca ōmpa
+exif-photometricinterpretation|Pixel tlachīhualiztli
+exif-imagedescription|Īxiptli ītōcā
+exif-software|Software ōmotēquitilti
+exif-artist|Chīhualōni
+exif-usercomment|Quihtoa tlatequitiltilīlli
+exif-exposuretime|Cāuhcāyōtl
+exif-fnumber|F Tlapōhualli
+exif-isospeedratings|ISO iciuhquiliztli tlapōhualcāyōtl
+exif-flash|Flax
+exif-flashenergy|Flax chicāhualiztli
+exif-gpslatituderef|Mictlāmpa ahnozo huitztlāmpa āncāyōtl
+exif-gpslatitude|Āncāyōtl
+exif-gpslongituderef|Tlāpcopa ahnozo cihuātlāmpa huehtlatzīncāyōtl
+exif-gpslongitude|Huehtlatzīncāyōtl
+exif-gpsaltitude|Huehcapancayōtl
+exif-gpstimestamp|GPS cāhuitl (atomic tepozcāhuitl)
+exif-orientation-1|Yēctli
+exif-meteringmode-255|Occē
+exif-lightsource-1|Tōnameyōtl
+exif-lightsource-2|Nāltic
+exif-lightsource-4|Flax
+exif-lightsource-10|Mixxoh
+exif-lightsource-11|Ecahuīlli
+exif-lightsource-12|Nāltic tōnallāhuīlli (D 5700 – 7100K)
+exif-lightsource-13|Nāltic iztāc tōnallāhuīlli (N 4600 – 5400K)
+exif-lightsource-14|Nāltic cecec iztāc (W 3900 – 4500K)
+exif-lightsource-15|Nāltic iztāc (WW 3200 – 3700K)
+exif-lightsource-17|Yēctli tlāhuīlli A
+exif-lightsource-18|Yēctli tlāhuīlli B
+exif-lightsource-19|Yēctli tlāhuīlli C
+exif-lightsource-255|Occequīntīn tlāhuīlli
+exif-scenecapturetype-3|Yohualcopa
+exif-gaincontrol-0|Ahtlein
+exif-contrast-0|Yēctli
+exif-saturation-0|Yēctli
+exif-sharpness-0|Yēctli
+exif-subjectdistancerange-0|Ahmatic
+exif-subjectdistancerange-1|Huēyi
+exif-subjectdistancerange-2|Ahhuehca tlattaliztli
+exif-subjectdistancerange-3|Huehca tlattaliztli
+exif-gpslatitude-n|Ayamictlān
+exif-gpslatitude-s|Huiztlān
+exif-gpslongitude-e|Tlāpcopa huehtlatzīncāyōtl
+exif-gpslongitude-w|Cihuātlāmpa huehtlatzīncāyōtl
+namespacesall|mochīntīn
+monthsall|(mochīntīn)
+confirmemail|Ticchicāhuāz e-mail
+confirmemail_needlogin|Tihuīquilia ~{0} ic ticchicāhua mo e-mail.
+confirmemail_success|Mocorreo ōmotlahtōlneltilih\nNiman tihuelīti [[Special:UserLogin\u007Ctimocalaqui]] auh ticpactiāz huiquitica.
+confirmemail_loggedin|Mo e-mailcān ōmochicāuh.
+confirmemail_subject|e-mailcān {{SITENAME}} ītlachicāhualiz
+scarytranscludetoolong|[In URL achi huel huēiyac ca]
+recreate|Ticchīhuāz occeppa
+confirm_purge_button|Cualli
+imgmultipageprev|← achto zāzanilli
+imgmultipagenext|niman zāzanilli →
+imgmultigo|¡Yāuh!
+imgmultigoto|Yāuh ~{0} zāzanilhuīc
+ascending_abbrev|quetza
+descending_abbrev|temoa
+table_pager_next|Niman zāzanilli
+table_pager_prev|Achto zāzanilli
+table_pager_first|Achtopa zāzanilli
+table_pager_last|Xōcoyōc zāzanilli
+table_pager_limit_submit|Yāuh
+table_pager_empty|Ahtlein
+autosumm-blank|Tlaiztāctilīlli zāzanilli
+autoredircomment|Mocuepahua īhuīc [[~{0}]]
+autosumm-new|Tlachīhualli zāzanilli īca: "~{0}"
+size-bytes|~{0} B
+size-kilobytes|~{0} KB
+size-megabytes|~{0} MB
+size-gigabytes|~{0} GB
+watchlistedit-normal-title|Ticpatlāz motlachiyaliz
+watchlistedit-raw-added|{{PLURAL:~{0}\u007CŌmocentili cē zāzanilli\u007CŌmocentilih ~{0} zāzaniltin}}:
+watchlisttools-view|Tiquinttāz huēyi tlapatlaliztli
+watchlisttools-edit|Tiquittāz auh ticpatlāz motlachiyaliz
+version|Machiyōtzin
+version-specialpages|Nònkuâkìskàtlaìxtlapaltìn
+version-other|Occē
+version-version|(~{0})
+version-software-version|Machiyōtzin
+fileduplicatesearch-filename|Tlahcuilōlli ītōcā:
+fileduplicatesearch-submit|Tlatēmōz
+fileduplicatesearch-info|~{0} × ~{1} pixelli<br />Tlahcuilōlli īxquichiliz: ~{2}<br />MIME iuhcāyōtl: ~{3}
+specialpages|Nònkuâkìskàtlaìxtlapaltìn
+specialpages-note|* Yeliztli nōncuahquīzqui āmatl.\n* <span class="mw-specialpagerestricted">Tlaquīxtīlli nōncuahquīzqui āmatl.</span>\n* <span class="mw-specialpagecached">Tlatlātīlli nōncuahquīzqui āmatl (aocmo monemitīa).</span>
+specialpages-group-other|Oksẻki nònkuâkìskàtlaìxtlapaltìn
+specialpages-group-login|Ximocalaqui / ximomachiyōmaca
+specialpages-group-changes|Yancuīc tlapatlaliztli īhuān tlahcuilōlloh
+specialpages-group-users|Tlatequitiltilīlli īhuān huelītiliztli
+specialpages-group-highuse|Zāzaniltin tlatequitiliztechcopa
+specialpages-group-pages|Mochīntīn zāzaniltin
+specialpages-group-redirects|Tlatēmoliztli īhuān  tlacuepaliztli
+blankpage|Iztāc zāzanilli
+htmlform-selectorother-other|Occē
+rightsnone|ahtlein
+revdelete-summary|ticpatlāz tlahcuilōltōn
+searchsuggest-search|Tlatēmoliztli
+api-error-ok-but-empty|Tlâtek îtlakawilistli: Âmò tènankilia in tlatèmakani.
+api-error-overwrite|Awel motlâkuilnepanòltis sè èwalli tlèn yi katki.
+api-error-stashfailed|Tlâtek îtlakawilistli: In tlatèmakani awel òkeuh in èwalpanòni.
+api-error-timeout|In tlatèmakani âmò òwalnàwat kèn òmochìxtikatka.
+api-error-unclassified|Òpanòk sè âmò ìxmatkàyo îtlakawilistli.
+api-error-unknown-code|Âmò ìxmatkàyo îtlakawilistli: "~{0}".
+api-error-unknown-error|Tlâtek îtlakawilistli: Îtlâtlèn òîtlakauh îkuàk òmonekià motilànas in èwalli.
+api-error-unknown-warning|Âmò ìxmatkàyo tlanawatilistli: "~{0}".
+api-error-unknownerror|Âmò ìxmatkàyo îtlakawilistli: "~{0}".
+api-error-uploaddisabled|Sèuhtok in êkawilistli ìpan inìn wiki.
+api-error-verification-error|Inìn èwalli welis îtlakauhtok, noso âmò kualli motzòwîtok.
+expand_templates_ok|Cualli
+expand_templates_preview|Xiquitta achtochīhualiztli
+contactpage-legend|Tiquihuāz e-mail
+contactpage-subject-and-sender|~{0} (īhuīcpa ~{1})
+contactpage-fromname|Motōca: *
+contactpage-fromaddress|Mo e-mail: **
+']:>
+).lang
+;

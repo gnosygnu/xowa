@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Teslaton",
+			"KuboF",
+			"Sudo77(new)"
+		]
+	},
+	"wikibase-replicationnote": "Môže trvať niekoľko minút, než sa zmeny prejavia na všetkých wiki.",
+	"wikibase-sitelinks-wikipedia": "Stránky Wikipédie prepojené s touto položkou",
+	"wikibase-sitelinks-sitename-columnheading": "Jazyk",
+	"wikibase-sitelinks-link-columnheading": "Prepojená stránka",
+	"wikibase-snakview-snaktypeselector-somevalue": "neznáma hodnota"
+}

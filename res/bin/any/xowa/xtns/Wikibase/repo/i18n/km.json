@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sovichet"
+		]
+	},
+	"wikibase-addreference": "បន្ថែម​ឯកសារ​យោង",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ឯកសារ​យោង|ឯកសារ​យោង}}",
+	"wikibase-statementview-referencesheading-pendingcountertooltip": "មិន​ទាន់​បាន​រក្សា​ទុក {{PLURAL:$1|ឯកសារ​យោង​មួយ|ឯកសារ​យោង $1}}"
+}

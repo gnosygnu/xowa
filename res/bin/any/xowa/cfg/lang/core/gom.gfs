@@ -1,0 +1,9 @@
+this
+.messages
+  .load_text(
+<:['
+sitesupport|Dan di
+contactpage|Sompork pan
+']:>
+).lang
+;

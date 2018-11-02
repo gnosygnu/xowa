@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <!-- 
+    NOTE: this page loads local files
+    - Chrome is the easiest browser for local files; Use "chrome.exe --disable-web-security"
+    - Change C:/xowa/ to wherever it is on your system
+    -->
+    <!-- base -->
+    <base href="file:///C:/xowa/" target="_blank">
+    
+    <!-- css -->
+  	<link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/lib/alertify/themes/alertify.core.css">
+  	<link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/lib/alertify/themes/alertify.bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/src/xowa/xocss/core/xocss_core-0.0.1.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/src/xowa/xocss/core/xoimg_core-0.0.1.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/src/xowa/xocss/help/xohelp-0.0.1.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/addon/app/help/log/bin/xolog.css">
+    
+    <!-- js -->
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/alertify/lib/alertify-0.3.11.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/alertify/lib/xo-alertify-0.0.1.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/mustache/mustache-2.2.1.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/jquery/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/src/xowa/xocss/help/xohelp-0.0.1.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/addon/app/help/log/bin/xolog.js"></script>
+    
+    <!-- mustache -->
+    <script type="text/html" id="templates"></script>
+    <script type="text/javascript">
+      window.view = {
+        log_files: 
+        [
+          {name:'2016-03-06 01:02:03', file:'20160306_010203'},
+          {name:'2016-03-05 01:02:03', file:'20160305_010203'},
+        ],
+        log_name:'2016-03-06 01:02:03',
+        log_file:'20160306_010203',
+        log_data:'test data',
+      };
+    </script>
+    <script type="text/javascript">
+      $("#templates").load("bin/any/xowa/addon/app/help/log/bin/xolog.mustache.html", function(response_txt, status_txt, xhr){
+        var template = response_txt;
+        var output = Mustache.render(template, window.view);
+        document.getElementById('main').innerHTML = output;
+      });
+    </script>
+  </head>
+  <body>
+    <div id="main"></div>
+  </body>
+    <script>
+    xo.alertify.log_by_str('{"msg":"test", "type":"success", "wait":3000}');
+    </script>
+</html>

@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"An13sa",
+			"Joxemai",
+			"Xabier Armendaritz",
+			"පසිඳු කාවින්ද"
+		]
+	},
+	"wikibase-edit": "aldatu",
+	"wikibase-save": "gorde",
+	"wikibase-cancel": "utzi",
+	"wikibase-add": "gehitu",
+	"wikibase-remove": "kendu",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|iturri|iturri}}",
+	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Iturri bat ez da|$1 iturri ez dira}} gorde oraindik",
+	"wikibase-snakview-property-input-placeholder": "ezaugarri",
+	"wikibase-itembytitle-lookup-page": "Orria:",
+	"wikibase-itembytitle-submit": "Bilatu",
+	"wikibase-itemdisambiguation-lookup-language": "Hizkuntza:",
+	"wikibase-itemdisambiguation-submit": "Bilatu",
+	"wikibase-newentity-submit": "Sortu",
+	"wikibase-setlabel-label": "Etiketa:",
+	"wikibase-modifyentity-id": "ID:",
+	"wikibase-restoreold": "leheneratu"
+}

@@ -1,0 +1,586 @@
+this
+.fallback_load('fa')
+.dir_rtl_('y')
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|یکشنبه
+monday|دوشنبه
+tuesday|سه‌شنبه
+wednesday|چهارشنبه
+thursday|پنجشنبه
+friday|جمعه
+saturday|شنبه
+sun|یکشنبه
+mon|دوشنبه
+tue|سه‌شنبه
+wed|چهارشنبه
+thu|پنجشنبه
+fri|جمعه
+sat|شنبه
+january|ژانویه
+february|فوریه
+march|مارس
+april|آوریل
+may_long|مه
+june|ژوئن
+july|ژوئیه
+august|اوت
+september|سپتامبر
+october|اکتبر
+november|نوامبر
+december|دسامبر
+january-gen|ژانویه
+february-gen|فوریه
+march-gen|مارس
+april-gen|آوریل
+may-gen|مه
+june-gen|ژوئن
+july-gen|ژوئیه
+august-gen|اوت
+september-gen|سپتامبر
+october-gen|اکتبر
+november-gen|نوامبر
+december-gen|دسامبر
+jan|ژانویه
+feb|فوریه
+mar|مارس
+apr|آوریل
+may|مه
+jun|ژوئن
+jul|ژوئیه
+aug|اوت
+sep|سپتامبر
+oct|اکتبر
+nov|نوامبر
+dec|دسامبر
+toc|محتواها
+redirectedfrom|(تصحیح مجدداز~{0})
+allpages|همه صفحات
+prevpage|صفحه قبلی(~{0})
+nextpage|صفحه بعدی (~{0})
+categories|دسته آ
+lastmodifiedat|این صفحه اخیرا تغییر واصلاح شددر ~{0}, در ~{1}.
+thumbnail-more|گپ کردن
+otherlanguages|درزبانهای دیگر
+blanknamespace|(اصلی)
+pagecategories|{{PLURAL:~{0}\u007Cدسته\u007Cدسته ها}}
+category_header|صفحات دردسته "~{0}"
+subcategories|دسته های فرعی
+category-media-header|مدیا دردسته "~{0}"
+category-empty|ای دسته درحال حاضر دارای هیچ صفحه یا مدیایی نه
+category-subcat-count|{{PLURAL:~{1}\u007Cای دسته فقط دسته های فرعی زیر راداره.\u007Cای دسته چیزهای زیر راداره {{PLURAL:~{0}\u007Cدسته فرعی\u007C~{0} دسته های فرعی}}, بیشتراز~{1} کل.}}
+category-subcat-count-limited|ای دسته چیزهای زیر راداره {{PLURAL:~{0}\u007Cدسته فرعی\u007C~{0} دسته های فرعی}}.
+category-article-count|{{PLURAL:~{1}\u007Cای دسته فقط دارای صفحات زیره.\u007Cذیل الذکر{{PLURAL:~{0}\u007Cصفحه است\u007C~{0} صفحات هستند}} دراین دسته, بیشترزه~{1} کل.}}
+category-article-count-limited|ذیل الذکر {{PLURAL:~{0}\u007Cصفحه است\u007C~{0} صفحات هستند}} درآن دسته جریانی.
+category-file-count|{{PLURAL:~{1}\u007Cای دسته فقط فایلهای زیر راداره.\u007Cذیل الذکر{{PLURAL:~{0}\u007Cفایل است\u007C~{0} فایلهاهستند}} درای دسته, بیشترزه~{1} کل.}}
+category-file-count-limited|ذیل الذکر {{PLURAL:~{0}\u007Cفایل است\u007C~{0} فایلها هستند}} درآن دسته جریانی.
+nextn|بعدی {{PLURAL:~{0}\u007C~{0}}}
+prevn|قبلی {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|دنباله
+bold_sample|متن گپ نما
+bold_tip|متن گپ نما
+italic_sample|متن شکسته
+italic_tip|متن شکسته
+link_sample|عنوان لینک
+link_tip|لینک داخلی
+headline_sample|سرخط متن
+headline_tip|2سرخط یکسان
+hidden-category-category|دسته های قایم
+statistics|آمار
+wikimediamessages-desc|پیام‌های مخصوص ویکی‌مدیا
+sitesupport-url|https://donate.wikimedia.org/?utm_source=donate&utm_medium=sidebar&utm_campaign=spontaneous&uselang=bqi
+sitesupport|کمک مالی
+tooltip-n-sitesupport|حمایت زه ایما
+tog-underline|لینکهای خط به زیر
+tog-hideminor|من ته نبیدن تغییرات کوچیک
+tog-extendwatchlist|گپ کردن نوم گه آ مو سی دیئن همه آلشتا نه فقط هونو که بیشتر ز همه انجوم ابون.
+tog-usenewrc|گپ کردن تغییرات آخری - جاوااسکریپت
+tog-numberheadings|شماره وندن خودکار سی سرخط ها
+tog-showtoolbar|نشو دادن تغییرات  تولبار  یا   جای نشودادن ابزارها- جاوااسکریپت
+tog-editondblclick|اصلاح صفحات با دوبار کلیک - جاوااسکریپت
+tog-editsectiononrightclick|امکان اصلاح یه قسمت زه راه راست کلیک کردن رو عنوان  اوقسمت- جاوااسکریپت
+tog-watchcreations|اضاف کردن اوصفحاتی که خوم درست کردم به فهرست نمایشی
+tog-watchdefault|اضاف کردن اوصفحاتی که خوم اصلاح کردم به فهرست نمایشی
+tog-watchmoves|اضاف کردن صفحاتی که خوم جابجا کردم به فهرست نمایشی
+tog-watchdeletion|اضاف کردن صفحاتی که خوم پاک کردم به فهرست نمایشی خوم
+tog-minordefault|علامت نهادن به اصلاحات ناقص
+tog-previewontop|نشودادن پیش نمایش قبل از یوکه جعبه یا کادر اصلاح بوه
+tog-previewonfirst|نشو دادن پیش نمایش  دراصلاح اول
+tog-enotifwatchlistpages|امیل به مو وقتی که  صفحه ای که منه فهرست نمایش مونه تغییر کرد
+tog-enotifusertalkpages|امیل به مو وقتی که صفحه گفتگوی مو تغییر کرد
+tog-enotifminoredits|امیل به مو سی صفحات ناقص اصلاح شده
+tog-enotifrevealaddr|نشودادن امیل مو درامیلهای آگاهی-خبری
+tog-shownumberswatching|نشودادن شماره کاربران درحال کار یاتماشا
+tog-fancysig|امضاهای ناتمام - بدون لینکهای اتوماتیک
+tog-uselivepreview|استفاده زه پیش نمایش زنده(جاوااسکریپ) (تجربی )
+tog-forceeditsummary|یادآوری سریع به مو هنگام اصلاح عقیم وخلاصه
+tog-watchlisthideown|قایم کردن اصلاحات مو  زه لیست پیگیریها
+tog-watchlisthidebots|قایم کردن اصلاحات بوت زه لیست پیگیریها
+tog-watchlisthideminor|قایم کردن اصلاحات ریز زه لیست پیگیریها
+tog-watchlisthideliu|قایم کردن اصلاحات انجام وابیده  بوسیله کاربران داخل سیستم وابیده زه لیست پیگیریها
+tog-watchlisthideanons|قایم کردن اصلاحات انجام شده بوسیله کاربران داخل سیستم نشده زه لیست پیگیری
+tog-ccmeonemails|ارسال کپی امیلهایی که مو به  کاربران دیه ارسال کردم به مو
+tog-diffonly|نشو نده صفحه ای که دارای محتوای متفاوت زیره
+tog-showhiddencats|نشودادن دسته بندیهای قایم شده
+underline-always|همیشه
+underline-never|هرگز
+underline-default|پیش نمایش مرورگر
+hidden-categories|{{PLURAL:~{0}\u007Cدسته قایم\u007Cدسته های قایم}}
+about|درباره
+newwindow|(پنجره تازه واز کن)
+cancel|لغو
+mytalk|صحبت مو
+qbfind|پیدا کردن
+qbedit|اصلاح
+faq|اف ای کیو
+faqpage|Project:اف ای کیو
+errorpagetitle|خطا
+returnto|بازگشت به ~{0}.
+tagline|از {{SITENAME}}
+help|راهنما
+search|جستن
+searchbutton|جستن
+searcharticle|برو
+history|گزارش صفحه
+history_short|گزارش تاریخی
+printableversion|نسخه قابل چاپ
+permalink|لینک دایمی
+edit|اصلاح
+editthispage|اصلاح ای صفحه
+delete|حذف
+protect|حفاظت وحمایت
+newpage|صفحه تازه
+talkpage|بحث ای صفحه
+talkpagelinktext|صحبت
+specialpage|صفحه مخصوص
+personaltools|ابزارهای شخصی
+articlepage|دیدن صفحه محتوا
+talk|بحث
+views|مشاهدات
+toolbox|اوزار گه
+userpage|دیدن صفحه کاربر
+projectpage|دیدن صفحه پروژه
+imagepage|دیدن صفحه مدیا
+mediawikipage|دیدن صفحه پیام
+templatepage|دیدن صفحه قالب
+viewhelppage|دیدن صفحه کمک
+categorypage|دیدن صفحه طبقه بندی
+viewtalkpage|دیدن بحث ها
+redirectpagesub|صفحه تصحیح وهدایت مجدد
+viewcount|این صفحه قابل دسترسی شده است {{PLURAL:~{0}\u007Conce\u007C~{0} times}}.
+protectedpage|صفحه حمایت شده
+jumpto|پریدن به:
+jumptonavigation|راندن یا هدایت کردن
+jumptosearch|جستن
+aboutsite|درباره {{SITENAME}}
+aboutpage|Project:درباره
+copyright|محتوا باای شماره قابل دسترسیه\n ~{0}.
+copyrightpage|{{ns:project}}:کپی رایت
+currentevents|اتفاقات جاری
+currentevents-url|Project:اتفاقات جاری
+disclaimers|انکار کننده ها
+disclaimerpage|Project:انکار کاربران
+edithelp|کمک برای اصلاح
+mainpage|صفحه اصلی
+mainpage-description|صفحه اصلی
+policy-url|Project:خط مشی
+portal|درگاه کاربران
+portal-url|Project:درگاه کاربران
+privacy|خط مشی رازداری
+privacypage|Project:خط مشی رازداری
+badaccess|خطا :اجازه بگیر
+badaccess-group0|ایسا اجازه انجام کاری که خواستین را ندارین
+badaccess-groups|او کاری که ایسا درخواست کردین فقط سی کاربرانیه که من ای  گروهن\n{{PLURAL:~{1}\u007Cآن گروه\u007Cیکی زه گروهها}}: ~{0}.
+versionrequired|یه نسخه زه نیازمندیهای ویکی مدیا\n~{0}
+versionrequiredtext|یه نسخه زه ویکی مدیا(~{0}) نیازمند ه به استفاده زه ای صفحه\nبوین :[[Special:Version\u007Cversion page]].
+ok|خووه
+pagetitle-view-mainpage|سرصفحه
+retrievedfrom|بازیافت از"~{0}"
+youhavenewmessages|پیام تاره داری ~{0} (~{1}).
+youhavenewmessagesmulti|ایسا پیام تازه دارین منه\n~{0}
+editsection|اصلاح
+editold|اصلاح
+viewsourceold|دیدن منبع
+editsectionhint|اصلاح یه قسمت: ~{0}
+showtoc|نمایش
+hidetoc|قایم
+thisisdeleted|دیدن یا اعاده ~{0}?
+viewdeleted|دیدن~{0}?
+restorelink|{{PLURAL:~{0}\u007Cپاک کردن یه اصلاح\u007C~{0} پاک کردن اصلاحات}}
+feedlinks|تغذیه:
+feed-invalid|اشتراک  زه راه  تایپ باطله
+site-rss-feed|خبرخو RSS سی ~{0}
+site-atom-feed|خبرخو Atom سی ~{0}
+page-rss-feed|خبرخو RSS سی «~{0}»
+nstab-user|صفحه کاربر
+nstab-project|صفحه پروژه
+nstab-image|فایل
+nstab-template|قالب یا الگو
+nstab-category|دسته
+badtitle|عنوان بد
+badtitletext|عنوان درخواستی نامعتبر، خالی، یا عنوانی بین زبانی یا بین‌ویکی‌ای با پیوند نادرسته\nو ممکنه دارای یک یا چند کاراکتر بوه که در عنوان مربوط نوا زش استفاده کنین
+viewsource|مشاهده منبع
+viewsourcetext|ایسا ترین بوینین وکپی کنین منبع ای صفحه را:
+yourname|نام کاربر:
+yourpassword|رمز:
+remembermypassword|رمز اویدن به سیستم را دراین رایانه به خاطر بسپار (for a maximum of ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}})
+login|اویدن به سیستم
+nav-login-createaccount|اویدن به سیستم
+userlogin|اویدن به سیستم / درست کردن حساب کاربری
+logout|رهدن زه سیستم
+userlogout|رهدن زه سیستم
+nologin|آیا ایسا حساب کاربری ندارین? '''~{0}'''.
+nologinlink|درست کردن یه حساب کاربری
+createaccount|درست کردن حساب کاربری
+gotaccount|آیا تقریبا یه حساب کاربری دارین? '''~{0}'''.
+gotaccountlink|اویدن به
+loginsuccesstitle|اویدن با بخت وتوفیق به سیستم
+loginsuccess|''' ایسا اویدن به داخل سایت {{SITENAME}} بعنوان "~{0}".'''
+nosuchuser|کاربری به ای نام وجود نداره "~{0}".\nحروف نام را چک کنین, یا [[Special:UserLogin/signup\u007Cدرست کنین یه حساب کاربری تازه]].
+nosuchusershort|کاربری به ای نام وجود نداره"~{0}".\nحروف نام راچک کنین.
+nouserspecified|ایسا دارین یه نام کاربر ذکر اکنین.
+wrongpassword|رمز وارد وابیده درست نه.\nلطفا دوباره سعی کنین.
+wrongpasswordempty|رمز وارد وابیده عقیم یامبهم بی.\nلطفا دوباره سعی کنین.
+passwordtooshort|رمز ایسا غیر معتبر یا کوتاه هده.\nآن وا داشته بوه حداقل {{PLURAL:~{0}\u007C1 کاراکتر\u007C~{0} کاراکترها}} همچنین وا زه نام کاربریتو متفاوت بوه.
+mailmypassword|امیل رمز تازه
+passwordremindertitle|رمز موقتی تازه سی {{SITENAME}}
+passwordremindertext|یه نفر (شاید خودتو, زه نشانی آی پی~{0}) درخواست یه رمز تازه کرده سی {{SITENAME}} (~{3}). یه رمز موقتی سی کاربر\n"~{1}" درست شده وگذاشته وابیده به"~{2}". ایر مطابق میل ایسا بوه, نیازه که داخل سیستم بوین ویه رمز تازه انتخاب کنین.\n\nایر آن فرد همچنین درخواست کرده بوه  یونه, یا ایر ایسا رمزتو را به خاط داشته این ,\nوسی مدت طولانی نه خوین هونه تغییر بدین, ایسا وا نادیده بگیرین ای پیام  را وهمچنان زه رمز قدیمی خوتو استفاده کنین
+noemail|وجود نداره نشانی امیل ضبط وابده زه کاریر "~{0}".
+passwordsent|یه رمز تازه ارسال وابید به نشانی امیل ثبت وابده سی "~{0}".\nلطفا بعد از دریافت آن داخل سیستم بوین.
+eauthentsent|یه نامه الکترونیکی سی تایید نشانی پست الکترونیکی به نشانی مورنظر ارسال وابید. قبل زه یو که نامه دیگری قابل ارسال به این نشانی بوه، وا دستورهایی که در آن نامه اویده را جهت تأیید ای مساله که ای نشانی مال ایسانه اجرا کنین.
+retypenew|تایپ دوباره رمز:
+extlink_sample|http://www.example.com عنوان لینک
+extlink_tip|(به خاطر بسپار http:// prefix)\nلینک خارجی
+nowiki_sample|متن شکل نداده یافرمت نوابیده را ایچو بنین
+nowiki_tip|زه فرمت کردن یا شکل دادن ویکی چشم پوشی کن
+image_tip|فایل محاط وابید
+media_tip|لینک فایل
+sig_tip|امضای ایسا و برچسب زمان
+hr_tip|خط افقی (کم استفاده کنین)
+summary|خلاصه:
+subject|موضوع/سرخط:
+minoredit|ای یه اصلاح ریزه-رز
+watchthis|پیگیری ای صفحه
+savearticle|صفحه ضبط بوه
+preview|پیش نمایش
+showpreview|پیش‌نمایش
+showdiff|نشودادن تغییرات
+anoneditwarning|'''توجه:''' ایسا داخل سیستم نوابیدین.\nآی پی آدرستو درگزارش اصلاح صفحه ضبط ابوه.
+summary-preview|پیش نمایش - خلاصه:
+blockedtext| "'''دسترسی نام کاربری یا نشانی اینترنتی ایسا بسته وابیده.'''\nای کار توسط ~{0} انجام شده‌است.\nدلیلی که گده اینه: ~{1}''\n* آغاز قطع دسترسی: ~{7}\n* زمان اتمام ای قطع دسترسی: ~{5}\n* کاربری که قطع دسترسی‌اش در نظر بیده: ~{6}\nایساترین با ~{0} یا یکی از [[{{MediaWiki:Grouppage-sysop}}\u007Cمدیران]] تماس بگیرین و در ای باره صحبت کنین.\nتوجه کنین که ایسا نترین زه امکان «ارسال پست الکترونیکی به ای کاربر» استفاده کنین مگر این که نشانی پست الکترونیکی معتبری در [[Special:Preferences\u007Cاولویتهای کاربری]]خود ثبت کرده بوین.\nنشانی IP ایسا ~{2} و شماره قطع دسترسی ایسا ~{4} است. لطفاً ای شماره‌ها را در همه کاوشهاتون ذکر کنین.\nایسا ترین با ~{0} یا یکی دیه زه [[{{MediaWiki:Grouppage-sysop}}\u007Cمدیران]] تماس بگیرین، تا در باره ای قطع دسترسی صحبت کنین.\nدقت کنین که سی ارسال پست الکترونیکی در ویکی، وا پست الکترونیکی خود را زه طریق صفحه[[Special:Preferences\u007Cتنظیمات]] فعال کرده بوین، و نیز، وا امکان استفاده زه ای ویژگی سی ایساقطع نبوه.\nنشانی اینترنتی الان ایسا ~{2} است و شماره قطع دسترسی ~{4} است.\nلطفاً ای شماره را در هر درخواستی که در ای مورد مطرح اکنین ذکر کنین
+newarticle|(تازه)
+newarticletext|ایسا لینکی را دنبال کردین و به صفحه‌ای رسیدین که هنی درست نوابیده.\nسی ایجاد صفحه، داخل مستطیل زیر شروع به تایپ کنین (سی اطلاعات بیشتر به [[{{ns:project}}:راهنما\u007Cصفحه راهنما] برین).\nایر اشتباهی ایچو اویدین دکمه «برگشت» مرورگرتو را بزنین.
+noarticletext| الان ای صفحه متنی نداره، ایسا ترین [[Special:Search/{{PAGENAME}}عنوان ای صفحه را در صفحه‌های دیگر جستجو کنین]] یا [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} ای صفحه را اصلاح کنین].
+previewnote|'''ای فقط یه پیش نمایشه;\nتغییراتی که ایسا دادین هنی ضبط نوابیده!'''
+editing|درحال اصلاح ~{0}
+editingsection|درحال اصلاح ~{0} (قسمت)
+copyrightwarning|لطفاً دقت کنین که درنظر گریده ابوه که همه شراکتهای ایسا  {{SITENAME}} تحت «~{1}» منتشر ابون ).\n\n\n(سی دیدن  جزئیات بیشتر به ~{0} برین\n\nایر نه خوین نوشته‌هاتو بی‌رحمانه اصلاح بوه و به دلخواه ارسال بوه، ایچو نفرستن.<br />\nدرضمن ایسادارین به ایما قول ادین که خودتو یونه نوشتین یا هونه زه یک منبع آزاد با مالکیت عمومی یا مثل هو ورداشتین. '''کارهای دارای کارهای دارای حق کپی رایت را بی‌اجازه نفرستین!'''',
+templatesused|قالبهای استفاده شده من ای صفحه:
+templatesusedpreview|قالبها  یا الگوهای استفاده وابیده در ای پیش نمایش:
+template-protected|(تحت حمایت)
+template-semiprotected|(نیمه حمایت وابیده)
+nocreatetext|{{SITENAME}}قابلیت درست کردن صفحات تازه را محدود کرده‌. ترین برگردین و صفحه‌ موجود را اصلاح کنین یا اینکه  [[Special:UserLogin\u007Cبه سیستم داخل بوین یا حساب کاربری درست کنین]].
+recreate-moveddeleted-warn|'''هشدار: ایسا در حال درست کردن دوباره صفحه‌ای هدین که قبلاً حذف وابیده '''در نظر داشته بوین که ادامه اصلاح ای صفحه کار درستی هده یا نه. نمایه حذف مربوط به ای صفحه سی راحتی کار در ادامه اویده
+viewpagelogs|نشودادن نمایه ها سی ای صفحه
+currentrev|نسخه جاری
+revisionasof|اصلاح ~{0}
+revision-info|یه نسخه اصلاح شده درتاریخ  ~{0} بوسیله ~{1}
+previousrevision|← اصلاح قبلی
+nextrevision|نسخه بعدی →
+currentrevisionlink|نسخه جاری
+cur|فعلی
+last|قبلی
+page_first|اولین
+page_last|آخری
+histlegend|انتخاب متفاوت: علامت بنین رو رادیو جعبه ها زه آن نسخه ها سی مقایسه وامتیاز دادن ویا داخل تکمه های زیر سی مسابقه بوین  .<br />\n'شرح: (فعلی) = تفاوت با نسخه جاری\n(قبلی) = تفاوت با نسخه قبلی، جز = ویرایش جزئی',
+histfirst|کهنه ترین
+histlast|تازه ترین
+history-feed-item-nocomment|~{0} در ~{1}
+history-title|گزارش تاریخی نسخه زه "~{0}"
+lineno|سطر ~{0}:
+compareselectedversions|مقایسه نسخه‌های انتخاب‌ وابیده
+editundo|لغو اصلاح آخر
+viewprevnext|مشاهده (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+preferences|اولویتها
+mypreferences|اولویتهای مو
+yourrealname|نام واقعی:
+prefs-help-realname|ذکر نام واقعی اختیاریه ایر تصمیم به گدن بگیرین هنگام ارجاع به آثارتو و انتساب هونو به ایسا زه نام واقعیتو استفاده ابوه
+grouppage-sysop|{{ns:project}}:مدیران
+rightslog|نمایه حقوق کاربر
+nchanges|~{0} {{PLURAL:~{0}\u007Cتغییر\u007Cتغییرات}}
+recentchanges|تغییرات اخیر
+recentchanges-feed-description|ردیابی آخرین تغییرات  ویکی در ای خورد
+rcnotefrom|در زیر تغییرات زه تاریخ <b>~{1}</b> آمده‌اند (تا <b>~{0}</b> مورد نشو داده ابوه).
+rclistfrom|نشودادن تغییرات تازه با شروع زه ~{2} ~{1}
+rcshowhideminor|اصلاحات کوچیک ~{0}
+rcshowhidebots|~{0} ربات‌ها یا بوتها
+rcshowhideliu|~{0} کاربران داخل وابیده
+rcshowhideanons|~{0} کاربران داخل نوابیده
+rcshowhidepatr|~{0} اصلاحات پاسداری شده
+rcshowhidemine|~{0} اصلاحات مو
+rclinks|نشودادن آخرین ~{0} تغییر در ~{1} روز اخیر؛ ~{2}
+diff|تفاوت
+hist|گزارش
+hide|قایم شدن
+show|نشودادن
+minoreditletter|رز
+newpageletter|تا
+boteditletter|ر
+recentchangeslinked|تغییرات مرتبط
+recentchangeslinked-feed|تغییرات مرتبط
+recentchangeslinked-toolbox|تغییرات مرتبط
+recentchangeslinked-title|تغییرهای مرتبط با ~{0}
+recentchangeslinked-summary| ای صفحه خاص تغییرات اخیر در صفحه‌های لینک داده شده به این صفحه را نشو اده.\nصفحه‌هایی که در لیست پی‌گیریهای ایسا بون به شکل '''سیاه''' نشو داده ابون.
+upload|آپلود فایل
+uploadbtn|آپلود فایل
+uploadlogpage|نمایه آپلود
+listfiles|لیست فایل
+file-anchor-link|فایل
+filehist|گزارش تاریخی فایل
+filehist-help|رو تاریخ‌ها کلیک کنید تا نسخه مرتبط را ببینین.
+filehist-current|جاری
+filehist-datetime|تاریخ/زمان
+filehist-user|کاربر
+filehist-dimensions|ابعاد
+filehist-filesize|اندازه فایل
+filehist-comment|توضیح
+imagelinks|لینکها
+linkstoimage|ذیل الذکر {{PLURAL:~{0}\u007Cلینکهای صفحه\u007C~{0} لینک صفحات}} به ای فایل:
+nolinkstoimage|هیچ صفحه ای نه که لینک وابیده بوه به ای فایل
+sharedupload|ای فایل یک آپلود اشتراکی هده و ممکنه زه طریق  پروژه‌های دیگه  هم قابل دسترسی بوه
+uploadnewversion-linktext|آپلود کردن یه نسخه تازه زه ای فایل
+mimesearch|MIME جستجو رو پایه
+listredirects|لیست تغییر مسیرها
+unusedtemplates|قالبها یا الگوهای استفاده نوابیده
+randompage|صفحه اتفاقی
+randomredirect|تغییر مسیر اتفاقی
+doubleredirects|تغییر مسیر دوبله
+brokenredirects|تغییرمسیرهای اشکسته وخراو
+withoutinterwiki|صفحات بدون لینک های زبانی میان ویکی
+fewestrevisions|صفحات با کمترین تعداداصلاحات وتجدیدنظرها
+nbytes|~{0} {{PLURAL:~{0}\u007Cبایت\u007Cبایت}}
+nlinks|~{0} {{PLURAL:~{0}\u007Cلینک\u007Cلینکها}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cعضو\u007Cاعضا}}
+lonelypages|صفحات یتیم وابیده
+uncategorizedpages|صفحات دسته بندی نوابیده
+uncategorizedcategories|دسته های دسته بندی نوابیده
+uncategorizedimages|فایلهای تصویری دسته بندی نوابیده
+uncategorizedtemplates|قالبها یا الگوهای دسته بندی نوابیده
+unusedcategories|دسته های استفاده نوابیده
+unusedimages|فایلهای استفاده نوابیده
+wantedcategories|دسته های  درخواستی
+wantedpages|صفحات درخواستی
+mostlinked|صفحاتی که بیشتر زه همه به هونو لینک داده وابیده
+mostlinkedcategories|دسته هایی که بیشتر زه همه به هونو لینک داده وابیده
+mostlinkedtemplates|قالبها یا الگوهایی که بیشتر زه همه به هونو لینک داده وابیده
+mostcategories|صفحات با بیشترین تعداد دسته بندی
+mostimages|تصاویری که بیشتر زه همه به هونو لینک داده وابیده
+mostrevisions|صفحات با تعداد اصلاحات زیاد
+prefixindex|نمایه پیشوندی
+shortpages|صفحات کوتاه
+longpages|صفحات بلند
+deadendpages|صفحات بن بست ولاینحل
+protectedpages|صفحات حفاظت وحمایت وابیده
+listusers|لیست کاربر
+newpages|صفحات تازه
+ancientpages|کهنه ترین صفحات
+move|جابجا کردن
+movethispage|جابجایی ای صفحه
+booksources|منابع کتاب
+specialloguserlabel|کاربر:
+speciallogtitlelabel|عنوان:
+log|نمایه ها
+all-logs-page|همه نمایه ها
+allpagesfrom|نمایش دادن صفحات با شروع زه:
+allarticles|همه صفحات
+allpagessubmit|برو
+allpagesprefix|نشو دادن صفحات همراه با پیشوند:
+emailuser|امیل ای کاربر
+watchlist|لیست پیگیریهای مو
+mywatchlist|لیست پیگیریهای مو
+addedwatchtext|صفحه «<nowiki>~{0}</nowiki>» به [[Special:Watchlist\u007Cلیست پی‌گیری‌های ]] ایسا\nاضاف وابید.\nتغییرات این صفحه و صفحه صحبت مر بوطه اش در آینده ایچو لیست ابوه. به‌علاوه، ای صفحه، سی واضح‌تر دیده وابیدن در [[Special:RecentChanges\u007Cفهرست تغییرات اخیر]] به شکل <b>سیاه</b> ایا.\n\nایر بعدا خواستین ای  صفحه زه لیست پی‌گیریهاتو ورداشته بوه، رو «'''عدم پی‌گیری'''» در بالای صفحه کلیک کنین.
+removedwatchtext|آن صفحه"[[:~{0}]]" جابجا وابیده زه[[Special:لیست پیگیری\u007Cلیست پیگیری ایسا]].
+watch|پی‌گیری
+watchthispage|پیگیری ای صفحه
+unwatch|پيگري نبيڎه
+watchlist-details|{{PLURAL:~{0}\u007C~{0} صفحه\u007C~{0} صفحات}} درلیست پیگیری ایسا, صفحات صحبت حساب نیبوه.
+wlshowlast|نمایش آخرین ~{0} ساعت ~{1} روز
+watching|مئن حالت پي جوري
+unwatching|درحالت عدم پیگیری...
+deletepage|حذف صفحه
+historywarning|توجه: آن صفحه ای که ایسا اخوین حذف کنین گزارش تاریخی داره:
+confirmdeletetext|ایسا اخوین یه صفحه بلند با همه گزارش تاریخی هونه حذف کنین.\nلطفا کانفیرم یا تائید کنین که تمایل وقصد ای کار را دارین, وایسا دوین یا می دانید نتایج وآثار ای کار را, و ایسا انجام ادین ای کار را مطابق با [[{{MediaWiki:Policy-url}}\u007Cسیاست‌ها]].
+actioncomplete|عمل  مربوطه راکامل کن
+deletedtext|"~{0}" حذف وابیده.\nبوین ~{1} سی ثبت حذف آخر.
+dellogpage|نمایه _ حذف
+deletecomment|دلیل:
+deleteotherreason|دیه/دلیل اضافی:
+deletereasonotherlist|دلیل دیه
+rollbacklink|عقب گرد
+protectlogpage|نمایه حفاظت وحمایت
+prot_1movedto2|[[~{0}]] جابجا وابید به[[~{1}]]
+protectcomment|دلیل:
+protectexpiry|سپری وابیڎه ا:
+protect_expiry_invalid|با سپری وابیدن وقت غیر معتبره.
+protect_expiry_old|سپری وابیدن وقت مربوط به گذشته.
+protect-text|ایسا ممکنه بوینین وتغییر بدین سطح حمایت زه ای صفحه'''~{0}'''.
+protect-locked-access|حساب کاربری ایسا اجازه تغییر سطح حمایت ای صفحه را نداره.\nای چونه تنظیمات جاری سی آن صفحه '''~{0}''':
+protect-cascadeon|ای صفحه  در حال حاضر حفاظت وحمایت وابیده چون که در {{PLURAL:~{0}\u007Cصفحه\u007Cصفحات}}\nزیر که گزینه حفاظت وحمایت موجی {{PLURAL:~{0}\u007Cآن\u007Cآن‌ها}} فعال هده ،\nایسا ترین سطح حفاظت ای صفحه را تغییر بدین اما ای کارنتره تاثیری رو\nحفاظت وحمایت موجی صفحه داشته بوه.
+protect-default|(پیش فرض)
+protect-fallback|درخواست"~{0}" اجازه
+protect-level-autoconfirmed|بستن کاربران ثبت نام نوابیده
+protect-level-sysop|Sysops فقط
+protect-summary-cascade|موجی کردن
+protect-expiring|سپری وابیده ~{0} (UTC)
+protect-cascade|حمایت صفحات دربرگیرنده در ای صفحه (cascading protection)
+protect-cantedit|ایسا نترین تغییر بدین سطوح حمایتی ای صفحه را, زیرا ایسا اجازه اصلاح آن را ندارین.
+protect-expiry-options|۱ ساعت:1 hour,۱ روز:1 day,۱ هفته:1 week,۲ هفته:2 weeks,۱ ماه:1 month,۳ ماه:3 months,۶ ماه:6 months,۱ سال:1 year,بی‌نهایت:infinite
+restriction-type|اجازه:
+restriction-level|سطح محدودیت:
+undeletebtn|بازیافت
+namespace|فضای نام:
+invert|انتخاب برعکس بوه
+contributions|شراکتهای کاربر
+mycontris|شراکتهای مو
+contribsub2|سی ~{0} (~{1})
+uctop|(بالا)
+month|در این ماه (و قبل زه آن):
+year|در ای سال (وقبل زه آن):
+sp-contributions-newbies-sub|سی حسابهای کاربری تازه
+sp-contributions-blocklog|نمایه بسته وابیده ها
+sp-contributions-talk|صحبت
+whatlinkshere|لینک های ای صفحه
+whatlinkshere-title|صفحات آن لینک به "~{0}"
+linkshere|لینک صفحات ذیل الذکر به '''[[:~{0}]]''':
+nolinkshere|هیچ صفحه ای پیوند نداردبه '''[[:~{0}]]'''.
+isredirect|صفحه تغییر مسیر
+istemplate|استفاده‌ وابیده داخل صفحه
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cقبلی \u007Cمورد قبلی~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cبعدی \u007Cمورد بعدی ~{0}}}
+whatlinkshere-links|← لینکها
+blockip|بستن کاربر
+ipboptions|۲ ساعت:2 hours,۱ روز:1 day,۳ روز:3 days,۱ هفته:1 week,۲ هفته:2 weeks,۱ ماه:1 month,۳ ماه:3 months,۶ ماه:6 months,۱ سال:1 year,بی‌نهایت:infinite
+ipblocklist|آدرسهای  آی پی وکاربران بسته وابیدند
+blocklink|بسته بوه !
+unblocklink|باز بوه
+contribslink|شراکت
+blocklogpage|نمایه _ بسته‌وابیده‌ها
+blocklogentry|بسته وابید [[~{0}]] با سپری وابیدن وقت زه ~{1} ~{2}
+movepagetext|با استفاده زه فرم زیر نام صفحه تغییر اکنه و همه گزارش تاریخی هو به نام تازه جابجا ابوه.\nعنوان کهنه تبدیل به یک صفحه تغییر مسیر به عنوان جدید ابوه.\nایسا ترین بطور اتوماتیک تغییر مسیر های مربوط به عنوان اصلی رو به روز رسانی کنین. ایر ایسا مطمئن نهدین با دیدن یونو مطمئن بوین:\n[[Special:تغییر مسیر دوبل\u007Cدوبل ]] یا[[Special:تغییرمسیر خروا یا اشکسته\u007Cتغییرمسیرهای خراو یا اشکسته]].\n\nلینکهایی که به عنوان صفحه قدیمی هدن تغییر نه کنن حتماً تغییر مسیرهای دوبل یا اشکسته و خراو را بررسی کنین.\n'''ایسا''' مسئول اطمینان زه یو هدین که لینکها هنی به همان‌جایی که قرار هده برن.\n\nتوجه کنین که ایر زه قبل صفحه‌ای در عنوان تازه وجود داشته بوه صفحه منتقل '''نه بوه'''،\nمیر یو که آن صفحه خالی یا تغییر مسیر بوه و گزارش تاریخی اصلاح نداشته بوه.\n یعنی ایر اشتباه کردین ترین صفحه را به همان جایی که زه هو جابجا وابیدین برگردانین، و  نترین رو صفحات موجود بنویسین\n\n'''هشدار!'''\nجابجایی صفحات به نام تازه ممکنه  تغییر کلی و غیرمنتظره‌ای سی\n صفحات دوست داشتنی داشته بوه ؛\nلطفاً مطمئن بوین که قبل زه جابجا کردن صفحه، عواقب ای کار را درک اکنین.
+movepagetalktext|صفحه صحبت مربوط، ایر وجود داشته بوه، بطور اتوماتیک همراه با صفحه اصلی\n جابجا ابوه '''میر یو که''' :\n* در حال جابجایی صفحه زه ای فضای نام به فضای نام دیگری بوین،\n* یه صفحه صحبت غیرخالی تحت ای نام تازه وجود داشته بوه، یا\n* کادر زیر را تیک نزده بوین.\n\nدر ای موارد، وا صفحه را بطور دستی جابجا کرده و یا محتویات دو صفحه را با اصلاح ادغام کنین.
+movearticle|جابجایی صفحه:
+newtitle|به عنوان تازه:
+move-watch|پیگیری ای صفحه
+movepagebtn|جابجایی صفحه
+pagemovedsub|جابجایی با بخت وتوفیق انجام وابید
+movepage-moved|'''"~{0}" جابجا وابیده به "~{1}"'''
+articleexists|یه صفحه زه ای  نوم تقریبا موجوده, یا نومی که ایسا انتخاب کردین غیر  معتبره\nلطفا نوم دیه انتخاب کنین.
+movetalk|جابجایی صفحه صحبت مربوطه
+movelogpage|نمایه جابجایی
+movereason|دلیل:
+revertmove|واگردانی
+export|صفحات صادره
+allmessages|پیامهای سیستم
+thumbnail_error|خطا سی درست کردن ناخن دانه: ~{0}
+importlogpage|داخل نمایه کردن
+tooltip-pt-userpage|صفحه کاربری مو
+tooltip-pt-mytalk|صفحه صحبت مو
+tooltip-pt-preferences|اولویت های مو
+tooltip-pt-watchlist|لیست صفحه‌هایی که ایسا تغییرات هونو  دنبال اکنین
+tooltip-pt-mycontris|لیست شراکتهای مو
+tooltip-pt-login|توصیه ابوه که به سیستم داخل بوین اما اجباری نه.
+tooltip-pt-logout|رهدن زه سیستم
+tooltip-ca-talk|صحبت درباره صفحه محتوا
+tooltip-ca-edit|ایسا ترین ای  صفحه را اصلاح کنین. لطفاً قبل  ذخیره کردن زه دکمه پیش‌ نمایش استفاده کنین
+tooltip-ca-addsection|اضاف کردن یه توضیح به ای مبحث
+tooltip-ca-viewsource|ای صفحه  تحت حمایته ایساترین منبعسه بوینین
+tooltip-ca-protect|حفاظت وحمایت زه ای صفحه
+tooltip-ca-delete|حذف ای صفحه
+tooltip-ca-move|جابجاکردن ای صفحه
+tooltip-ca-watch|اضاف کردن ای صفحه به لیست پیگیریهاتو
+tooltip-ca-unwatch|حذف ای صفحه زه لیست پی‌گیری‌های ایسا
+tooltip-search|جستن {{SITENAME}}
+tooltip-n-mainpage|دیدن صفحه اصلی
+tooltip-n-portal|درباره ای پروژه چه ترین  کنین و  کیه  ترین آن جیزها رو پیدا کنین
+tooltip-n-currentevents|پیداکردن اطلاعات زمینه یاسابقه اطلاعات در اتفاقات جاری
+tooltip-n-recentchanges|فهرست  تغییرات آخری درویکی
+tooltip-n-randompage|لود کردن یه صفحه بطور اتفاقی
+tooltip-n-help|محلی برای کشف کردن
+tooltip-t-whatlinkshere|فهرست همه صفحات ویکی که ایچو لینک دارن
+tooltip-t-recentchangeslinked|تغییرات آخری  درصفحاتی که لینک شده اند به ای صفحه
+tooltip-feed-rss|تغذیه آراس اس برای ای صفحه
+tooltip-feed-atom|تغذیه کوچیک ترین جزء  ای صفحه
+tooltip-t-contributions|دیدن فهرست مشارکت کننده ها ومقاله دهنده های ای صفحه
+tooltip-t-emailuser|ارسال یه امیل به ای کاربر
+tooltip-t-upload|آپلودکردن فایلها
+tooltip-t-specialpages|فهرست همه صفحات مخصوص
+tooltip-t-print|نسخه فابل پرینت ای صفحه
+tooltip-t-permalink|لینک دایمی به ای نسخه از صفحه
+tooltip-ca-nstab-main|دیدن آن صفحه محتوا
+tooltip-ca-nstab-user|دیدن صفحه کاربر
+tooltip-ca-nstab-media|دیدن صفحه مدیا
+tooltip-ca-nstab-special|ای صفحه مخصوصه وایسا نترین خود ای صفحه رااصلاح کنین
+tooltip-ca-nstab-project|دیدن صفحه پروژه
+tooltip-ca-nstab-image|دیدن صفحه فایل
+tooltip-ca-nstab-mediawiki|دیدن پیام سیستم
+tooltip-ca-nstab-template|دیدن قالب قابل تغییر
+tooltip-ca-nstab-help|دیدن صفحه کمک
+tooltip-ca-nstab-category|دیدن صفحه طبقه بندی
+tooltip-minoredit|علامت نهادن به این به عنوان اصلاح حداقل یاکم
+tooltip-save|ضبط کردن تغییرات
+tooltip-preview| زه قبل دیدن تغییرات قبل از ضبط کردن سی مطمئن وابیدن لطفا استفاده کنید قبل از ضبط کردن
+tooltip-diff|دیدن تغییراتی که ایسا من ای متن انجام دادین
+tooltip-compareselectedversions|دیدن تفاوتهای بین دونسخه انتخاب وابیده زه ای صفحه
+tooltip-watch|اضاف کردن ای صفحه به فهرست مشاهداتتان
+tooltip-recreate|دوباره درست کردن صفحه ای که زه رو کینه وغرض پاک وابیده
+tooltip-upload|شروع آپلود
+tooltip-rollback|"اعاده" برگرداندن به وضع اولیه سی ای صفحه که بخاطر مشارکت  آخر اصلاح وابیده بایک کلیک
+previousdiff|← اصلاح قدیمی
+nextdiff|تفاوت بعدی→
+file-info-size|~{0} × ~{1} پیکسل, اندازه فایل: ~{2}, MIME نوع: ~{3}
+file-nohires|قابلیت تفکیک بالاتری در دسترس نه.
+svg-long-desc|SVG فایل, تقریبا~{0} × ~{1} پیکسل, اندازه فایل: ~{2}
+show-big-image|تصویر با قابلیت تفکیک کامل
+newimages|گالری فایلهای تازه
+bad_image_list|اطلاعات را وا به ای شکل وارد کنین:\n\nفقط سطرهایی که با * آغاز ابون در نظر گریده ابون. اولین لینک در هر سطر، باید لینکی به یک تصویر بد باشد.\nلینکهای بعدی در همان سطر، به عنوان موارد استثنا در نظر گریده ابون
+metadata|فراداده
+metadata-help| ای فایل دارای اطلاعات اضافه‌ای است که احتمالاً با دوربین دیجیتالی‌ یا پویشگری که سی ایجاد یا دیجیتالی‌کردن آن به کار رهده اضاف وابیده . ایر فایل زه وضعیت اولیه اس تغییر داده وابیده بوه ممکنه همه توضیحات موجود اطلاعات عکس را منعکس نکنه
+metadata-expand|نشودادن جزئیات تفصیلی
+metadata-collapse|قایم کردن جزئیات تفصیلی
+metadata-fields|فراداده EXIF نشو داده وابیده در این پیام وقتی جدول فراداده‌های تصویر جمع وابیده بوه هم نمایش داده ابوه.\nبقیه موارد فقط وقتی نشوداده ابوه که جدول یادشده واز بوه.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+namespacesall|همه
+monthsall|همه ماهها
+watchlisttools-view|نشودادن تغییرات مربوطه
+watchlisttools-edit|نشودادن واصلاح کردن لیست پیگیریها
+watchlisttools-raw|اصلاح لیست خام پی‌گیری‌ها
+version|ترجمه یا تفسیر
+specialpages|صفحات ویژه
+']:>
+).lang
+;

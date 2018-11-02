@@ -1,0 +1,571 @@
+this
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Lahadi
+monday|Litinin
+tuesday|Talata
+wednesday|Laraba
+thursday|Alhamis
+friday|Jumma'a
+saturday|Asabar
+sun|Lah
+mon|Lit
+tue|Tal
+wed|Lar
+thu|Alh
+fri|Jum
+sat|Asa
+january|Janairu
+february|Faburairu
+march|Maris
+april|Afirilu
+may_long|Mayu
+june|Yuni
+july|Yuli
+august|Agusta
+september|Satumba
+october|Oktoba
+november|Nuwamba
+december|Disamba
+january-gen|Janairu
+february-gen|Faburairu
+march-gen|Maris
+april-gen|Afirilu
+may-gen|Mayu
+june-gen|Yuni
+july-gen|Yuli
+august-gen|Agusta
+september-gen|Satumba
+october-gen|Oktoba
+november-gen|Nuwamba
+december-gen|Disamba
+jan|Jan
+feb|Fab
+mar|Mar
+apr|Afi
+may|May
+jun|Yun
+jul|Yul
+aug|Agu
+sep|Sat
+oct|Okt
+nov|Nuw
+dec|Dic
+toc|Kanun bayannai
+redirectedfrom|(an turo daga ~{0})
+allpages|Duka shafuna
+prevpage|Shafi na baya (~{0})
+lastmodifiedat|Gyaran baya na wannan shafi ran ~{0}, a ~{1}.
+thumbnail-more|Faɗaɗa
+otherlanguages|A wasu harsuna
+blanknamespace|(Babba)
+pagecategories|{{PLURAL:~{0}\u007CRukuni\u007CRukunoni}}
+category_header|Shafuna na cikin rukunin "~{0}"
+subcategories|Ƙananan rukunoni
+category-subcat-count|{{PLURAL:~{1}\u007CWannan rukuni ya ƙumshi wannan ƙaramin rukuni kawai.\u007CWannan rukuni ya ƙumshi {{PLURAL:~{0}\u007Cwannan ƙaramin rukuni\u007C~{0} wanɗannan ƙananan rukunoni}}, daga cikin jimlar ~{1}.}}
+category-article-count|{{PLURAL:~{1}\u007CWannan rukuni ya ƙumshi wannan shafi kawai.\u007C{{PLURAL:~{0}\u007Cshafi na gaba yana\u007C~{0} shafuna na gaba suna}} cikin wannan rukuni, daga cikin jimlar ~{1}.}}
+nextn|gaba {{PLURAL:~{0}\u007C~{0}}}
+prevn|baya {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|ci-gaba
+bold_sample|Rubutu mai gwaɓi
+bold_tip|Rubutu mai gwaɓi
+italic_sample|Rubutun tsutsa
+italic_tip|Rubutun tsutsa
+link_sample|Sunan mahaɗi
+link_tip|Mahaɗin ciki
+headline_sample|Sunan kai
+headline_tip|Kan mataki na 2
+statistics|Alƙalumma
+categorytree-category|Rukuni:
+proofreadpage_namespace|Shafi
+cite_page|Shafi:
+wikieditor-template-editor-dialog-cancel|Soke
+wikieditor-toolbar-tool-bold-example|Rubutu mai gwaɓi
+wikieditor-toolbar-tool-italic-example|Rubutun tsutsa
+wikieditor-toolbar-tool-ilink|Mahaɗin ciki
+wikieditor-toolbar-tool-ilink-example|Sunan mahaɗi
+wikieditor-toolbar-tool-xlink|Mahaɗi mai zuwa waje (a tuna da zagin http://)
+wikieditor-toolbar-tool-xlink-example|http://www.example.com sunan mahaɗi
+wikieditor-toolbar-tool-link-cancel|Soke
+wikieditor-toolbar-tool-reference-cancel|Soke
+wikieditor-toolbar-tool-table-cancel|Soke
+wm-license-information-permission|Izini
+tog-underline|A shaya zaruruwa
+tog-hideminor|A ɓoye ƙananan gyare-gyare na baya-bayan nan
+tog-hidepatrolled|A ɓoye gyare-gyaren kan ido a cikin gyare-gyare bayan-bayan nan
+tog-newpageshidepatrolled|A ɓoye shafuna kan ido a cikin sabbin shafuna
+tog-extendwatchlist|A faɗaɗa jerin kan ido ya nuna duka gyare-gyare, ba na baya-bayan nan kawai ba
+tog-usenewrc|A yi amfani da kyautattun gyare-gyare na baya-bayan nan (ana buƙatar Javascript)
+tog-numberheadings|A lambace kanun matani kai tsaye
+tog-showtoolbar|A nuna sandar kayan aiki ta gyarawa (ana buƙatar JavaScript)
+tog-editondblclick|A gyara shafuna da dabar-kiliki (ana buƙatar JavaScript)
+tog-editsectiononrightclick|A lamunta gyara shashe da kilikin dama a kan kanun shashe (ana buƙatar JavaScript)
+tog-watchcreations|A daɗa shafunan da na ƙirƙira a cikin jerina na kan ido
+tog-watchdefault|A daɗa shafunan da na gyara a cikin jerina na kan ido
+tog-watchmoves|A daɗa shafunan da na gusar a cikin jerina na kan ido
+tog-watchdeletion|A daɗa shafunan da na shafe a cikin jerina na kan ido
+tog-minordefault|A alamta gyare-gyarena a matsayin ƙanana bisa manufa
+tog-previewontop|A nuna filin rigya-gani sama ga filin gyare-gyare
+tog-previewonfirst|A nuna rigya-gani tun gyaran farin
+tog-enotifwatchlistpages|A shaida mani ta Imel idan wani shafin jeerina na bin-sau ya sauya
+tog-enotifusertalkpages|A shaida mani ta Imel idan shafina na muhawara ya sauya
+tog-enotifminoredits|A shaida mani ta Imel game da ko da ƙaramin gyara ne
+tog-enotifrevealaddr|A bayyana Imel kina a cikin sak'wanni na shaidarwa
+tog-shownumberswatching|A nuna adadin ma'aikata masu bin sawun wannan shafi
+tog-oldsig|Rigya-ganin sa-hannu da ake da shi
+tog-fancysig|A ɗauki matanin sa-hannu a matsayin matanin Wiki (ba tare da mahaɗin otomatik ba)
+tog-uselivepreview|A yi amfani da rigya-gani mai sauƙi (ana buƙatar JavaScript) (hajar gwaji)
+tog-forceeditsummary|A gargaɗe ni idan na ajiye kangon fili na taƙaitawa
+tog-watchlisthideown|A ɓoye sauye-sauyena daga jerin bin sawu
+tog-watchlisthidebots|A ɓoye sauye-sauye da rabuwatoci suka daga jerin bin sawu
+tog-watchlisthideminor|A ɓoye ƙananen sauye-sauye daga jerin bin sau
+tog-watchlisthideliu|A ɓoye sauye-sauyen da logaggin ma'aikata suka yi daga jerin bin sau
+tog-watchlisthideanons|A ɓoye sauye-sauyen da ma'aikata maras suna suka yi daga jerin bin sau
+tog-watchlisthidepatrolled|A ɓoye sauye-sauye da ke kan lura daga jerin bin sau
+tog-ccmeonemails|A aika mini kwafi na duk imel da nike aikawa wasu ma'aikata
+tog-diffonly|Kada a nuna tsarabar shafuna a ƙarƙashin sakamakon kwatance
+tog-showhiddencats|A nuna rukunonin ɓoye
+tog-norollbackdiff|Kada a nuna sauyi da aka yi idan aka banye shi
+underline-always|Kullum
+underline-never|Ko kaɗan
+underline-default|Manufar buroza
+editfont-style|Salon fanti na filin gyara
+editfont-default|Manufar buroza
+editfont-monospace|Fanti mai tsayayyen faɗi
+editfont-sansserif|Fanti maras sarif
+editfont-serif|Fanti mai sarif
+hidden-categories|{{PLURAL:~{0}\u007CƁoyayyen rukuni\u007CƁoyayyun rukunoni}}
+newwindow|(buɗa cikin sabuwar taga)
+cancel|Soke
+mytalk|Mahawarata
+navigation|Shawagi
+qbfind|Nemo
+qbedit|Gyarawa
+errorpagetitle|Tangarɗa
+returnto|Koma ~{0}
+tagline|Daga {{SITENAME}}
+help|Taimako
+search|Nema
+searchbutton|Binciko
+searcharticle|Mu je
+history|Tarihin shafi
+history_short|Tarihi
+printableversion|Sufar bugawa
+permalink|Dawwamammen mahaɗi
+edit|Gyarawa
+create|Ƙirƙira
+editthispage|Gyara wanna shafi
+delete|Soke
+protect|A kare
+protect_change|sauyawa
+newpage|Sabon shafi
+talkpage|Muhawara kan wannan shafi
+talkpagelinktext|Hira
+personaltools|Zaɓaɓɓin kayan aiki
+talk|Mahawara
+views|Hange
+toolbox|Akwatin kayan aiki
+redirectpagesub|Shafin turawa
+jumpto|A tsallaka zuwa:
+jumptonavigation|Shawagi
+jumptosearch|nema
+aboutsite|Game da {{SITENAME}}
+aboutpage|Project:Game da
+copyright|Bayannai sun samu a ƙarƙashin ~{0}.
+copyrightpage|{{ns:project}}:Hakkin Mallaka
+disclaimers|Hattara
+disclaimerpage|Project:Babban gargaɗi
+edithelp|Taimako kan gyara
+mainpage|Marhabin
+privacy|Manufar kare sirri
+privacypage|Project:Manufar kare sirri
+badaccess|Tangarɗar lamuncewa
+retrievedfrom|Daga "~{0}"
+youhavenewmessages|Kuna da ~{0} (~{1}).
+editsection|gyarawa
+editold|gyarawa
+editlink|gyarawa
+viewsourcelink|duba tushe
+editsectionhint|Gyara sashe: ~{0}
+showtoc|nuna
+hidetoc|ɓoye
+site-rss-feed|Kwararen RSS na ~{0}
+site-atom-feed|Kwararen Atom na ~{0}
+page-rss-feed|Kwararen RSS na "~{0}"
+page-atom-feed|Kwararen Atom na "~{0}"
+red-link-title|~{0} (babu wannan shafi)
+nstab-main|Shafi
+nstab-user|Shafin ma'aikaci
+nstab-special|Shafi na musamman
+nstab-project|Shafin shiri
+nstab-image|Fayil
+nstab-template|Mulu
+nstab-category|Rukuni
+missing-article|Taskar bayannai ba ta samo matanin wani shafin da ya kamata ta samo ba, mai suna "~{0}" ~{1}.\n\nMafarin haka yawanci shi ne mahaɗi mai zuwa ga shafin da aka soke ko aka gusar.\n\nIn ba haka ba ne, to kun takalo wata tangarɗa a safuwai kin.\nDon Allah a aika ruhoto zuwa ga [[Special:ListUsers/sysop\u007Cadministrator]], tare da nuna URL kin.
+missingarticle-rev|(lambar zubi: ~{0})
+badtitletext|Kan shafin da aka nema bai da ma'ana, ko kango ne, ko kuma wani kai ne na tsakanin harsuna ko shire-shire da bai da mahaɗi mai kyau.\nTana yiyuwa yana da harafi ko haruffa da ba su karɓuwa cikin kanu.
+viewsource|Duba tushe
+yourname|Sunan ma'aikaci:
+yourpassword|Kalmar sirri:
+remembermypassword|Adana bayannan logina a wannan kwafyuta (for a maximum of ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}})
+login|Logi
+nav-login-createaccount|logi / sabon akwanti
+userlogin|Logi / sabon akwanti
+logout|Ban kwana
+userlogout|Ban kwana
+nologinlink|Buɗa sabon akwanti
+createaccountreason|Dalili:
+mailmypassword|Aiken kalmar sirri ta Imel
+resetpass-submit-cancel|Soke
+extlink_sample|http://www.example.com sunan mahaɗi
+extlink_tip|Mahaɗi mai zuwa waje (a tuna da zagin http://)
+nowiki_sample|shigar da ɗanyen rubutu a nan
+nowiki_tip|Kawar da sufantawar Wiki
+image_tip|Ƙumsashen fayil
+media_tip|Mahaɗi zuwa fayil
+sig_tip|Sa-hannunku da dagin rana
+hr_tip|Layin kwance
+summary|Taƙaici:
+subject|Jigo/Kai:
+minoredit|Ƙaramin gyara
+watchthis|Bi sawun wannan shafi
+savearticle|Adana shafi
+preview|Rigya-gani
+showpreview|Sufar rigya-gani
+showdiff|Nuna sauye-sauye
+anoneditwarning|'''Hattara:''' Ba ku yi logi ba.\nZa a rubuta adireshinku na IP a cikin tarihin sauye-sauyen wannan shafi.
+summary-preview|Rigya-gani na taƙaici:
+newarticle|(Sabo)
+newarticletext|Kun latsa mahaɗi zuwa shafin da babu shi tukuna.\nDomin ƙirƙiro wannan shafin, ku fara rubutu a cikin fage na ƙasa (duba [~{0} shafin taimako] don ƙarin bayani).\nIdan kun ɓata ne cikin shawaginku, to ku latsa maɓallin '''baya''' na safuwayan shawaginku.
+noarticletext|A halin yanzu babu matani a kan wannan shafi.\nKuna iya [[Special:Search/{{PAGENAME}}\u007Cnemo kan wannan shafi]] cikin wasu shafuna,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} bincika rajistan ayyukan],\nko [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} gyara wannan shafi]</span>.
+previewnote|'''Kada ku manta, wannan rigya-gani ne kawai.'''\nBa a adana sauye-sauyenku ba tukuna!
+editing|Gyaran ~{0}
+editingsection|Gyaran ~{0} (sashe)
+copyrightwarning|Lura cewa ana wallafa duk gudummuwa ga {{SITENAME}} a kan ƙa'idojin ~{1} (duba ~{0} don ƙarin bayani). Idan ba kwa son a sauya ko a rarraba ayyukanku yadda aka ga dama, to kada ku ajiye su a nan.<br />\nKuma kuna mana alƙawarin cewa ku ne kuka rubuta aikin, ko kun juyo shi daga hajar kowa (wato "public domain"), ko kuma aikin hajar kyauta (wato "free resource") ne. '''Kada ku ajiye ayyuka masu hakkin mallaka ba tare da izini ba!'''
+templatesused|{{PLURAL:~{0}\u007CMulun da aka yi amfani da shi\u007CMulayen da aka yi amfani da su}} a wannan shafi:
+templatesusedpreview|{{PLURAL:~{0}\u007CMulun da aka yi amfani da shi\u007CMulayen da aka yi amfani da su}} cikin wannan rigya-gani:
+template-protected|(mai kariya)
+template-semiprotected|(da kariya gwalgwado)
+hiddencategories|Wannan shafi yana cikin {{PLURAL:~{0}\u007Cɓoyayyen rukuni 1\u007Cɓoyayyun rukunoni ~{0}}}:
+permissionserrorstext-withaction|Ba kwa da izinin ~{1}, don saboda {{PLURAL:~{0}\u007Cwannan dalili\u007Cwaɗannan dalillai}}:
+viewpagelogs|Duba rajistan ayyukan wannan shafi
+currentrev-asof|Zubin ƙarshe ga ~{0}
+revisionasof|Zubi na ~{0}
+previousrevision|← Tsohon zubi
+nextrevision|Zubi na gaba →
+currentrevisionlink|Zubi na yanzu
+cur|na yanzu
+last|baya
+histlegend|Don nuna bambanci: a shaida zube-zuben da ake so a kwatanta sannan a latsa maɓallin da ke ƙasa.<br />\nFasali: '''({{int:cur}})''' = bambanci da zubi na yanzu, '''({{int:last}})''' = bambanci da zubi na baya, '''{{int:minoreditletter}}''' = ƙaramin gyara.
+history-fieldset-title|Shawagi cikin tarihi
+histfirst|Na gaba
+histlast|Na baya
+rev-delundel|nuna/ɓoye
+rev-showdeleted|nuna
+revdelete-log|Dalili:
+revdel-restore|sauya haske
+revdelete-reasonotherlist|Wani dalili
+mergehistory-reason|Dalili:
+revertmerge|Ware
+history-title|Tarihin sauye-sauyen "~{0}"
+lineno|Layi ~{0}:
+compareselectedversions|Kwatanta zaɓaɓɓun zubi
+editundo|Janyewa
+searchresults|Sakamakon bincike
+searchresults-title|Sakamakon bincike na "~{0}"
+notextmatches|Babu wani matanin da ya dace
+viewprevnext|Duba (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 kalma\u007C~{1} kalmomi}})
+search-redirect|(turawa daga ~{0})
+search-section|(sashe ~{0})
+search-suggest|Kuna nufin: ~{0}
+search-interwiki-caption|Shire-shire masu dangantaka
+search-interwiki-default|Sakamakon ~{0}:
+search-interwiki-more|(ƙari)
+searchall|duka
+powersearch-legend|Sahihin nema
+powersearch-ns|Binciki sararen sunaye:
+powersearch-toggleall|Duka
+preferences|Saituttuka
+mypreferences|Saituttukana
+searchresultshead|Nema
+userrights-reason|Dalili:
+group-sysop|Masu hukunci
+grouppage-sysop|{{ns:project}}:Masu hukunci
+newuserlogpage|Rajistan sabbin akwantoci
+rightslog|Rajistan bayar da izini ga ma'aikata
+action-edit|gyara wannan shafi
+nchanges|{{PLURAL:~{0}\u007Csauyi\u007Csauye-sauye}} ~{0}
+recentchanges|Sauye-sauyen baya-bayan nan
+recentchanges-legend|Zaɓi na sauye-sauyen baya-bayan nan
+recentchanges-feed-description|Bi sawun sauye-sauyen ƙarshe na wikin da ke cikin wannan kwarare
+rclistfrom|Nuna sabbin sauye-sauye tun daga ~{2} ~{1}
+rcshowhideminor|~{0} ƙananen sauye-sauye
+rcshowhidebots|Rabuwat ~{0}
+rcshowhideliu|~{0} Ma'aikata logaggi
+rcshowhideanons|~{0} ma'aikata masu ɓoyayye suna
+rcshowhidemine|~{0} sauye-sauyena
+rclinks|Nuna sauye-sauye ~{0} na ƙarshe a cikin kwanaki ~{1} na baya<br />~{2}
+diff|bamban
+hist|Tarihi
+hide|Ɓoye
+show|Nuna
+minoreditletter|m
+newpageletter|N
+boteditletter|b
+rc-enhanced-expand|Nuna ƙananan bayannai (ana buƙatar JavaScript)
+rc-enhanced-hide|Ɓoye ƙananan bayannai
+recentchangeslinked|Sauye-sauye masu dangantaka
+recentchangeslinked-title|Bin sawun shafuna masu dangantaka da "~{0}"
+recentchangeslinked-summary|Wannan jerin sauye-sauye ne da aka yi kan shafuna masu mahaɗi. Shafunan da ke cikin [[Special:Watchlist\u007Cjerin kan idonku]] an haɓaka su da '''gwaɓi'''
+recentchangeslinked-page|Sunan shafi:
+recentchangeslinked-to|Nuna sauye-sauyen shafunan da ke da mahaɗi da wannan shafin
+upload|Girke fayil
+uploadlogpage|Rajistan girke fayiloli
+filedesc|Taƙaici
+fileuploadsummary|Taƙaici:
+filehist|Tarihin fayil
+filehist-help|ku Latsa rana/lokaci ku ga fayil yadda yake a wannan lokaci
+filehist-deleteone|soke
+filehist-current|na yanzu
+filehist-datetime|Rana/Lokaci
+filehist-thumb|Wadar sufa
+filehist-thumbtext|Wadar sufa ta zubin ~{0}
+filehist-user|Ma'aikaci
+filehist-dimensions|Kusurwowi
+filehist-comment|Bahasi
+imagelinks|Amfani da fayil
+linkstoimage|{{PLURAL:~{0}\u007CWannan shafi yana\u007Cwanɗannan shafuna ~{0} suna}} amfani da wannan fayil:
+sharedupload|Wannan fayil na da tushe daga ~{0} kuma wasu shire-shire suna iya amfani da shi.
+uploadnewversion-linktext|Ɗauki sabon zubi na wannan fayil
+filerevert-comment|Dalili:
+filedelete-comment|Dalili:
+filedelete-submit|Soke
+filedelete-reason-otherlist|Wani dalili
+brokenredirects-delete|soke
+withoutinterwiki-submit|Nuna
+nbytes|{{PLURAL:~{0}\u007Cbayit\u007Cbayit}} ~{0}
+nmembers|{{PLURAL:~{0}\u007Cmamba\u007Cmambobi}} ~{0}
+prefixindex|Duka shafuna masu ɗafa-goshi
+newpages|Sabbin shafuna
+move|Gusarwa
+movethispage|Gusar da wannan shafi
+pager-newer-n|{{PLURAL:~{0}\u007Csabo 1\u007Csabbi ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Ctsoho 1\u007Ctsoffi ~{0}}}
+booksources|Littattafai maƙiblata
+booksources-search-legend|Nemo tushen littattafai
+log|Rajistoci ayyuka
+allpagesfrom|Nuna shafuna farawa daga:
+allpagesto|Nuna shafuna har:
+allarticles|Duka shafuna
+allpagessubmit|Mu je
+linksearch|Mahaɗan waje
+linksearch-ns|Sararin suna:
+linksearch-ok|Nema
+listusers-submit|Nuna
+listgrouprights-members|(jerin mambobi)
+emailuser|Aika wa wannan ma'aikaci imel
+watchlist|Jerina na bin sawu
+mywatchlist|Jerina na bin sawu
+addedwatchtext|An daɗa shafin "[[:~{0}]]" a cikin [[Special:Watchlist\u007Cjerinku na bin sawu]].\nA nan ne kuma za a yi rajistan dukkan sauye-sauye ga shafin ko shafinsa na muhawara, kuma sunan shafin zai kasance '''mai gwaɓi''' a cikin [[Special:RecentChanges\u007Cjerin sauye-sauyen baya-bayan nan]] don sauƙin gani.
+removedwatchtext|An fitar da shafin "[[:~{0}]]" daga [[Special:Watchlist\u007Cjerinku na bin sawu]].
+watch|Bin sawu
+watchthispage|Bin sawun wannan shafi
+unwatch|Daina bin sawu
+watchlist-details|{{PLURAL:~{0}\u007C~{0} shafi\u007C~{0} shafuna}} kan jerinku na bin sawu, banda shafunan mahawara.
+wlshowlast|Nuna awowi ~{0} kwanaki ~{1} na ƙarshe
+watchlist-options|Saituttukan jerin bin sawu
+watching|Bin sawun...
+unwatching|Daina bin sawu...
+deletepage|Soke shafin
+delete-legend|Soke
+confirmdeletetext|Kuna kan hanyar soke wani shafi tare da duk tarihinsa. Ku tabbatar lalle kuna son yin hakan, tare da cewa kun fahimci sakamakon yin haka, kuma kuna yi ne da la'akari da [[{{MediaWiki:Policy-url}}\u007Cmanufofi]].
+actioncomplete|Aiki cikakke
+deletedtext|An soke "~{0}".\nKu duba ~{1} ku ga rajistan soke-soke na baya-bayan nan.
+dellogpage|Rajistan sauye-sauye
+deletecomment|Dalili:
+deleteotherreason|Wani dalilin:
+deletereasonotherlist|Wani dalili
+rollbacklink|banyewa
+protectlogpage|Rajistan ayyukan kariya
+protectedarticle|an kare "[[~{0}]]"
+modifiedarticleprotection|an sauya matakin kariya na "[[~{0}]]"
+protectcomment|Dalili:
+protectexpiry|Wa'adi:
+protect_expiry_invalid|Lokacin wa'adi bai da tasiri.
+protect_expiry_old|Lokacin wa'adi ya wuce.
+protect-text|Kuna iya duba tare da sauya matakin kariya na shafin '''~{0}'''.
+protect-locked-access|Akwantinku bai da izinin sauya matakan kariya na shafuna.\nGa dai matakan kariya na yanzu na shafin '''~{0}''':
+protect-cascadeon|A yanzu an kiyaye wannan shafi saboda yana cikin {{PLURAL:~{0}\u007Cwannan shafi mai\u007Cwaɗannan shafuna masu}} kariya mai zuzzubowa.\nKuna iya sake wa wannan shafi matakin kariya, amma hakan ba zai yi tasiri ga kariya mai zuzzubowa ba.
+protect-default|Lamunce wa duka ma'aikata
+protect-fallback|Ana buƙatar izinin "~{0}"
+protect-level-autoconfirmed|Hana sabbin ma'aikata da ma'aikata maras akwanti
+protect-level-sysop|Mahukunta kawai
+protect-summary-cascade|zuzzubawa
+protect-expiring|Wa'adi ran ~{0} (UTC)
+protect-cascade|A kiyaye shafunan da aka haɗa cikin wannan shafi (kariya mai zuzzubowa)
+protect-cantedit|Ba ku iya sauya matakan kariya na wannan shafi, saboda ba ku da izinin yi masa gyara.
+protect-otherreason-op|Wani dalili
+restriction-type|Izini:
+restriction-level|Matakin kangewa:
+restriction-move|Gusarwa
+restriction-create|Ƙirƙira
+undeletelink|duba/maido da
+undeletecomment|Dalili:
+undelete-search-submit|Nema
+namespace|Sararin suna:
+invert|Jirkita kamu
+contributions|Gudummuwar ma'aikaci
+contributions-title|Jerin gudummuwar ma'aikaci ~{0}
+mycontris|Gudummawata
+contribsub2|Na ~{0} (~{1})
+uctop|(sama)
+month|Tun daga wata (da gabansa):
+year|Tun daga shekara (da gabanta):
+sp-contributions-newbies|Nuna gudummuwar sabbin akwantoci kawai
+sp-contributions-blocklog|rajistan hani
+sp-contributions-search|Nemo gudummuwa
+sp-contributions-username|Adireshin IP ko sunan ma'aikaci:
+sp-contributions-submit|Nemo
+whatlinkshere|Mahaɗan wannan shafi
+whatlinkshere-title|Shafuna masu mahaɗi da "~{0}"
+whatlinkshere-page|Shafi:
+linkshere|Waɗannan shafuna sun haɗu da '''[[:~{0}]]''':
+isredirect|shafin turawa
+istemplate|gami
+isimage|majigi shigagge
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cna baya\u007Cna baya ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cna gaba\u007Cna gaba ~{0}}}
+whatlinkshere-links|← mahaɗai
+whatlinkshere-hideredirs|~{0} turawa
+whatlinkshere-hidetrans|~{0} game-game
+whatlinkshere-hidelinks|~{0} mahaɗai
+whatlinkshere-filters|Matatai
+blockip|Hana ma'aikaci
+ipbreason|Dalili:
+ipboptions|awa 2:2 hours,kwana 1:1 day,kwana 3:3 days,mako 1:1 week,mako 2:2 weeks,wata 1:1 month,wata 3:3 months,wata 6:6 months,shekara 1:1 year,illa masha allahu:infinite
+ipblocklist|Adireshin IP da ma'aikatan da aka hana
+ipblocklist-submit|Nema
+blocklink|Hanawa
+unblocklink|karɓa
+change-blocklink|Canza hanawa
+contribslink|Gudummuwa
+blocklogpage|Rajistan hani
+blocklogentry|an hana [[~{0}]] da wa'adin ~{1} ~{2}
+unblocklogentry|an lamunce wa ~{0}
+block-log-flags-nocreate|babu damar buɗa sabon akwanti
+movepagetext|Ku yi amfani da fom na ƙasa don sake sunan shafin, tare da mayar da duka tarihinsa ga sabon sunan.\nTsohon sunan zai nuna sabon sunan.\nKuna iya sabunta dukan mahaɗai da ke nuna tsohon sunan otomatikali.\nIdan ba ku yi haka ba, ku duba [[Special:DoubleRedirects\u007Crikitattun mahaɗai]] ko [[Special:BrokenRedirects\u007Ckatsattsun mahaɗai]].\nKu ke da nauyin tabbatar dukan mahaɗai suna nuna inda ya kamata.\n\nWannan shafi '''ba''' za a sake masa suna ba idan akwai wani shafi mai sabon sunan, sai fa idan shafin kwango ne ko yana da mahaɗi kuma bai da tarihin sauye-sauye.\nHaka yana nufin za ku iya mayar wa wani shafi tsohon sunansa idan kuka yi kwata, kuma ba za ku iya kwatse wani tsayayyan shafi ba.\n\n'''Hattara!'''\nYin haka na iya zama wani gagarumin sauyi ga shafi mai farin jini;\nDon Allah ku tabbatar kun fahimci sakamakon yin hakan.
+movepagetalktext|Za a gusar da dangantaccen shafin muhawara otomatikali tare da '''sai fa idan''' kinta.\n*Akwai wani shafin muhawara wanda ba kango ba a ƙarƙashin sabon sunan, ko\n*Kun soke zaɓen ɗan ɗaki na ƙasa.\n\nA waɗannan halaye, dole ku gusar ko ku game shafin da hannu, idan kuna so.
+movearticle|Gusar da shafin:
+newtitle|Zuwa sabon kai:
+move-watch|Bin sawun wannan shafi
+movepagebtn|Gusar da shafin
+pagemovedsub|Gusarwa ta cika
+movepage-moved|'''"~{0}" an gusar da shi zuwa "~{1}"'''
+articleexists|Akwai wani shafi mai wannan suna, koko sunan da kuka zaɓa ba shi da tasiri.\nDon Allah ku zaɓi wani suna.
+movetalk|Gusar da shafin mahawara mai alaƙa
+movelogpage|Rajistan gushe-gushe
+movereason|Dalili:
+revertmove|koma
+export|Tsamo shafuna
+tooltip-pt-userpage|Shafinku na marhabin
+tooltip-pt-mytalk|Shafinku na mahawara
+tooltip-pt-preferences|Saituttukanku
+tooltip-pt-watchlist|Jerin shafunan da kuke bin sawun sauye-sauyensu
+tooltip-pt-mycontris|Jerin gudummuwarku
+tooltip-pt-login|Ana shawarar ku shiga akwantinku, amma ba dole ba ne
+tooltip-pt-logout|Ban kwana
+tooltip-ca-talk|Mahawara kan shafin bayannai
+tooltip-ca-edit|Ana iya gyara wannan shafi\nA yi amfani da maɓallin rigya-gani kafin a adina
+tooltip-ca-addsection|Fara sabon sashe
+tooltip-ca-viewsource|Wannan shafi yana da kariya.\nKuna iya duba tushensa.
+tooltip-ca-history|Tsoffin sufofin wannan shafi
+tooltip-ca-protect|Kare wannan shafi
+tooltip-ca-delete|Soke wannan shafi
+tooltip-ca-move|Gusar da wannan shafi
+tooltip-ca-watch|A daɗa wannan shafi cikin jerina na bin sawu
+tooltip-ca-unwatch|Ku soke wannan shafi daga jerinku na bin sawu
+tooltip-search|Binciko {{SITENAME}}
+tooltip-search-go|A je ga shafi mai wannan suna idan akwai shi
+tooltip-search-fulltext|Binciki shafuna masu wannan matani
+tooltip-n-mainpage|Duba shafin Marhabin
+tooltip-n-mainpage-description|Duba shafin marhabin
+tooltip-n-portal|A game da wannan shiri, abinda za a iya yi, ina za a samu abubuwa
+tooltip-n-currentevents|Nemo bayannai kan yanayin labarun yau
+tooltip-n-recentchanges|Jerin sabin sauye-sauye a wannan Wiki
+tooltip-n-randompage|Nuno wani shafi da ka
+tooltip-n-help|Nuno taimako
+tooltip-t-whatlinkshere|Jerin duk shafunan Wiki da ke da mahaɗi a nan
+tooltip-t-recentchangeslinked|Sauye-sauyen baya-bayan nan a shafuna masu mahaɗi daga wannan shafi
+tooltip-feed-rss|Kwararen RSS na wannan shafi
+tooltip-feed-atom|Kwararen Atom na wannan shafi
+tooltip-t-contributions|Duba jerin gudummuwar wannan ma'aikaci
+tooltip-t-emailuser|Aika wa wannan ma'aikaci imel
+tooltip-t-upload|Girke fayiloli
+tooltip-t-specialpages|Jerin duk shafuna na musamman
+tooltip-t-print|Wannan shafi a sufar bugawa
+tooltip-t-permalink|Mahaɗin dindindin zuwa ga zubin baya na wannan shafi
+tooltip-ca-nstab-main|Duba shafin bayannai
+tooltip-ca-nstab-user|Duba shafin ma'aikaci
+tooltip-ca-nstab-special|Wannan shafi ne na musamman, ba za ku iya yi masa gyara ba
+tooltip-ca-nstab-project|Duba shafin shirin
+tooltip-ca-nstab-image|Duba shafin fayil
+tooltip-ca-nstab-template|Duba mulun
+tooltip-ca-nstab-category|Duba shafin rukuni
+tooltip-minoredit|Alamta wannan a matsayin ƙaramin gyara
+tooltip-save|Ku adana sauye-sauyenku
+tooltip-preview|Ku tantance sauye-sauyenku, don Allah ku yi amfani da wannan kafin ku adana su:
+tooltip-diff|Na nuna sauye-sauyen da kuka yi wa matanin
+tooltip-compareselectedversions|Duba bambanci tsakanin zaɓaɓɓun zubi biyu na wannan shafi
+tooltip-watch|Ku daɗa wannan shafi cikin jerinku na bin sawu
+tooltip-rollback|"Banyewa" tana soke sauye-sauyen da mutunen baya ya yi da kiliki guda
+tooltip-undo|"Janyewa" tana soke wannan gyaran ta kuma buɗa fom kin gyara mai rigya-gani.\nTana ba da damar bayyana dalilin soke gyaran.
+previousdiff|Sauyin baya
+nextdiff|Gyaran gaba →
+file-info-size|pikisal ~{0} × ~{1}, girman fayil: ~{2}, irin MIME: ~{3}
+file-nohires|Babu wata babbar saƙa.
+svg-long-desc|Fayil kin SVG, saƙar fikisal ~{0} x ~{1}, girman fayil: ~{2}
+show-big-image|Cikakkar saƙa
+ilsubmit|Nema
+bad_image_list|Fasalin yana kamar haka:\n\nZa a lura da layukan jeri kawai (masu farawa da *).\nZaren farko a kan layi ya kamata ya nuna fayil maras kyau.\nSauran mahaɗai a kan layin keɓaɓɓu ne, wato zuwa ga shafuna inda fayil kin zai iya kasancewa.
+metadata|bayannan meta
+metadata-help|Wannan fayil ya ƙumshi ƙarin bayani daga kyamarar dijita ko sikanan da aka yi amfani da su.\nIdan an sauya fayil kin, to wasu bayannan na ainahi ba za su fito ba sosai a cikin sabon fayil kin.
+metadata-expand|Nuna ƙananan bayannai
+metadata-collapse|Ɓoye ƙananan bayannai
+metadata-fields|Gurabun bayannan meta na EXIF da ke jere cikin wannan saƙo, za a saka su ne cikin shafin zayyana majigin, idan aka taƙaita jadawalin bayannan metan.\n Wasu gurabun za a ɓoye su bisa manufa.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+namespacesall|duka
+monthsall|duka
+watchlisttools-view|Duba sauye-sauyen da suka dace
+watchlisttools-edit|Duba kuma gyara jerin bin sawu
+watchlisttools-raw|Gyara jerin bin sawu
+fileduplicatesearch-submit|Nema
+specialpages|Shafuna na musamman
+']:>
+).lang
+;

@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Incelemeelemani",
+			"Rapsar"
+		]
+	},
+	"wikibase-sitelinks-wikipedia": "Bu ögeye bağlı Vikipedi sayfaları",
+	"wikibase-sitelinks-sitename-columnheading": "Dil",
+	"wikibase-sitelinks-siteid-columnheading": "Kod",
+	"wikibase-sitelinks-link-columnheading": "Bağlantılı madde",
+	"wikibase-validator-no-such-entity": "$1 bulunamadı",
+	"wikibase-validator-no-such-property": "$1 özelliği bulunamadı"
+}

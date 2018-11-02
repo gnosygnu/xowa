@@ -1,0 +1,303 @@
+this
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|ᓴᓇᑦᑕᐃᓕ
+monday|ᓇᒡᒐᔭᖅ
+wednesday|ᐱᖓᔪᐊ
+friday|ᐸᒐᐃᑖᒃ
+sun|ᓴᓇ
+mon|ᓇᒡ
+tue|ᐱᖃ
+wed|ᐱᖓ
+thu|ᕿᑎ
+fri|ᐅᓪᓗ
+sat|ᓯᕙᑕ
+january|ᔭᓐᓄᐊᓕ
+february|ᕕᐳᐊᕆ
+march|ᒫᕐᓯ
+april|ᐊᐃᐳᕆᓪ
+may_long|ᒪᐃ
+june|ᔪᓂ
+july|ᔪᓚᐃ
+august|ᐊᐅᒍᔅ
+september|ᓯᑎᒻᐳᕆ
+october|ᐅᒃᑐᐳᕆ
+november|ᓄᕕᒻᐳᕆ
+december|ᑎᓯᒻᐳᕆ
+january-gen|ᔭᓐᓄᐊᓕ
+february-gen|ᕕᐳᐊᕆ
+march-gen|ᒫᕐᓯ
+april-gen|ᐊᐃᐳᕆᓪ
+may-gen|ᒪᐃ
+june-gen|ᔪᓂ
+july-gen|ᔪᓚᐃ
+august-gen|ᐊᐅᒍᔅ
+september-gen|ᓯᑎᒻᐳᕆ
+october-gen|ᐅᒃᑐᐳᕆ
+november-gen|ᓄᕕᒻᐳᕆ
+december-gen|ᑎᓯᒻᐳᕆ
+jan|ᔭᓐᓄ
+feb|ᕕᐳᐊ
+mar|ᓇᑦᓯ
+apr|ᐊᐃᐳ
+may|ᒪᐃ
+jun|ᔪᓂ
+jul|ᔪᓚᐃ
+aug|ᐊᐅᒍ
+sep|ᓯᑎᒻ
+oct|ᐅᒃᑐ
+nov|ᓄᕕ
+dec|ᑎᓯᒻ
+redirectedfrom|(ᖃᓂᖓᓂ ᑲᒪᒋᔭᖅ ᐋᓯᑦ ᓇᑭᑦ ~{0})
+allpages|ᓱᓇᒥᑦᑐᖅ ᒪᑉᐱᑕᖅ
+nextpage|ᑕᒡᒐ ᒪᑉᐱᑕᖅ (~{0})
+categories|ᓄᐊᑉᐳᑦ
+otherlanguages|ᑭᓪᓗᒧᑦ ᐅᐃᑭ
+blanknamespace|(ᐊᒥᖅ)
+nextn|ᑕᒡᒐ {{PLURAL:~{0}\u007C~{0}}}
+bold_sample|ᐃᔾᔪᔪᒡ ᑕᖅᓴᓕᖅᐹ
+bold_tip|ᐃᔾᔪᔪᒡ ᑕᖅᓴᓕᖅᐹ
+statistics|ᑭᓯᑦᓯᓯᖕᖑᕐᓗᒋᑦ ᐹᓯᔅᓱᑎᔅᓴᑦ
+sitesupport|ᑐᓐᓂᖅᑯᓯᐊᑦ ᑮᓇᐅᔭᐃᑦ
+about|ᒥᒃᓵᓂ
+article|ᐃᓗᓕᒃ ᒪᑉᐱᑕᖅ
+newwindow|(ᐅᐃᑦᑐᖅ ᖃᕋᓴᐅᔭᖅ ᐃᑭᐊᖅ ᐱᒋᕗᖅ ᐃᒐᓛᖅ)
+cancel|ᐃᓂᖅᑎᐹ
+moredotdotdot|ᐱᓪᓗᐊᕆᕚ...
+mypage|ᐊᒥ ᒪᑉᐱᑕᖅ
+mytalk|ᐊᓪᓚᖁᑎᒃᑲ
+navigation|ᒥᐊᓂᕆᕚ
+and| ᐊᒻᒪ
+qbedit|ᓱᖁᓯᖅᐹ
+errorpagetitle|ᑕᒻᒪᓇᖅᑐᖅ
+help|ᖃᔭᓕᑉᐹ
+search|ᐃᕚᖅᐳᖅ
+searchbutton|ᐃᕚᖅᐳᖅ
+go|ᐊᐃᕗᖅ
+searcharticle|ᐊᐃᕗᖅ
+history_short|ᒪᑉᐱᑕᖅ ᑭᖑᓂᑦᑎᓐᓂ
+edit|ᓱᖁᓯᖅᐹ
+editthispage|ᓱᖁᓯᖅᐹ ᒪᑉᐱᑕᖅ
+delete|ᓂᐸᖅᑎᐹ
+protect|ᓴᐳᒻᒥᕚ
+unprotect|ᐃᖅ ᓴᐳᒻᒥᕚ
+unprotectthispage|ᐃᖅ ᓴᐳᒻᒥᕚ ᒪᑉᐱᑕᖅ
+newpage|ᐱᒋᕗᖅ ᒪᑉᐱᑕᖅ
+talkpagelinktext|ᐅᖃᓕᒪᔪᖅ
+specialpage|ᐱᔨ ᒪᑉᐱᑕᖅ
+articlepage|ᐅᕝᕙ ᐃᓗᓕᒃ ᒪᑉᐱᑕᖅ
+talk|ᐅᖃᓕᒪᔪᖅ
+toolbox|ᓴᓇᕐᖁᑎᖃᐅᑎ
+redirectpagesub|ᖃᓂᖓᓂ ᑲᒪᒋᔭᖅ ᐋᓯᑦ ᓇᑭᑦ ᒪᑉᐱᑕᖅ
+jumptonavigation|ᒥᐊᓂᕆᕚ
+jumptosearch|ᐃᕚᖅᐳᖅ
+aboutsite|ᒥᒃᓵᓂ {{SITENAME}}
+aboutpage|Project:ᒥᒃᓵᓂ
+currentevents|ᐱᒋᕗᖅ ᐱᐅᓯᖅ
+currentevents-url|Project:ᐱᒋᕗᖅ ᐱᐅᓯᖅ
+edithelp|ᓱᖁᓯᖅᐹ ᐃᑯᕐᕆᐹ
+mainpage|ᐊᒥᖅ
+mainpage-description|ᐊᒥᖅ
+portal|ᖃᒡᒋᖅ
+portal-url|Project:ᖃᒡᒋᖅ
+privacy|ᓇᒻᒥᓂᖅ ᐱᓕᕆᕝᕕᖃᐅᖅᑐᓄᑦ ᐊᐅᓚᑕᐅᔪᑦ ᐊᑐᐊᒐᖅ, ᐱᓇᓱᐊᕐᓂᖅ
+privacypage|Project:ᓇᒻᒥᓂᖅ ᐱᓕᕆᕝᕕᖃᐅᖅᑐᓄᑦ ᐊᐅᓚᑕᐅᔪᑦ ᐊᑐᐊᒐᖅ, ᐱᓇᓱᐊᕐᓂᖅ
+youhavenewmessages|ᐃᓕᔅᓯ ᐱᒋᕚ ~{0} (~{1}).
+editsection|ᓱᖁᓯᖅᐹ ᐃᓚ
+editold|ᓱᖁᓯᖅᐹ
+editsectionhint|ᓱᖁᓯᖅᐹ ᐃᓚᖏᐅᑎᑎᑦᓯᒍᑎ: ~{0}
+showtoc|ᐊᓚᒃᑲᑎᖅᐹ
+hidetoc|ᐃᔨᖅᐳᖅ
+site-rss-feed|~{0} ᕐᔅᔅ ᒥᐊᓂᕆᕚ
+site-atom-feed|~{0} ᐊᑐᒻ ᒥᐊᓂᕆᕚ
+page-rss-feed|"~{0}" ᕐᔅᔅ ᒥᐊᓂᕆᕚ
+page-atom-feed|"~{0}" ᐊᑐᒻ ᒥᐊᓂᕆᕚ
+nstab-main|ᒪᑉᐱᑕᖅ
+nstab-user|ᐃᓄᒃ ᒪᑉᐱᑕᖅ
+nstab-special|ᐱᔨ
+nstab-project|ᐱᓕᕆᐊᒃᓴᐃᑦ ᐱᕙᓪᓕᐊᔾᔪᑎᒃᓴᓄᑦ ᒪᑉᐱᑕᖅ
+nstab-image|ᐊᒋᐅᑦ
+nstab-mediawiki|ᑭᒡᒐᐹ
+nstab-template|ᒥᐊᓂᕆᕚ-ᕿᔪᖁᑦ
+nstab-category|ᓄᐊᑉᐳᑦ
+badtitle|ᐊᔪᖅᑐᖅ ᐊᑎᖅ
+editinginterface|'''ᐃᓂᖅᑎᕈᑎ—''' ᐋᕼᐊ ᓱᖁᓯᖅᐹ ᐃᑭᐊᖅ ᒪᑉᐱᑕᖅ ᐊᑐᐃᓐᓇᓯᕗᖅ ᐄᔭᑦᓴᖅ ᖃᕋᓴᐅᔭᖅ ᑕᖅᓴᓕᖅᐹ ᐃᑭᐊᖅ ᐊᕿᑦᑐᖅ ᖃᕆᑕᐅᔭᐅᑉ ᑎᑎᕋᕐᕕᖓ. ᐊᓯᐊᙳᑐᖅ ᐃᑭᐊᖅ ᒪᑉᐱᑕᖅ ᐃᓄᒃᑎᑐᑦ ᐅᐃᑭᐱᑎᐊ ᐊᓪᓚᖑᖅᑐᐊᖅ ᓇᑭᒪᖅᐳᖅ ᖃᑕᙳᑎ.
+yourname|ᐅᐃᑭᐱᑎᐊ ᐊᑎᖅ
+yourpassword|ᐅᐃᑭᐱᑎᐊ ᐸᓚᙵᓴᐅᑎ
+yourpasswordagain|ᑕᒪᑐᒪᓃᖅᐹ ᐃᒃᓯᒐᖅᑐᖅ ᐅᐃᑭᐱᑎᐊ ᐸᓚᙵᓴᐅᑎ
+remembermypassword|ᐃᖅᑑ ᐅᐃᑭᐱᑎᐊ ᐊᑎᖅ ᖃᑯᒍᖅ ᐊᑐᐃᓐᓇᓯᕗᖅ ᐅᕙᓗᒪᔪᖅ ᖃᕆᑕᐅᔭᖅ (for a maximum of ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}})
+login|ᐊᑯᓐᓇᐳᖅ
+userlogin|ᐊᑯᓐᓇᐳᖅ / ᐱᕐᖄᐹ ᑮᓇᐅᔭᒃᑯᕕᖕᒥ ᑐᖅᑯᖅᓯᕕᒃ
+logout|ᐊᓂᕝᕕᒃ
+userlogout|ᐊᓂᕝᕕᒃ
+nologin|ᐊᔪᐃᓐᓈᖅ ᐃᓄᖁᑎ? '''~{0}'''.
+nologinlink|ᐱᕐᖄᐹ ᑮᓇᐅᔭᒃᑯᕕᖕᒥ ᑐᖅᑯᖅᓯᕕᒃ
+gotaccountlink|ᐊᑯᓐᓇᐳᖅ
+mailmypassword|ᕿᓪᓗᑐᖅ ᐅᐃᑭᐱᑎᐊ ᐸᓚᙵᓴᐅᑎ ᑭᒍᑎᐅᑉ ᓯᑎᓂᖅᐹᖓ
+summary|ᓱᕕᑦ:
+minoredit|ᐅᑭᐅᑭᓗᐊᖅᑐᖅ ᐊᓯᐊᙳᑐᖅ
+watchthis|ᐅᕝᕙ
+savearticle|ᐅᖃᐅᓯᓪᓚᕆᖏᑕ ᑎᑎᕋᖅᑕᐅᓂᖏᑦ
+preview|ᐅᕝᕙ ᖃᖓᓵᖑᓕᖅᑐᖅ
+showpreview|ᓱᖁᓯᖅᐹ ᐊᓚᒃᑲᐅᑎᕗᖅ ᓯᕗᓕᐅᖅᐹ ᐅᖃᐅᓯᓪᓚᕆᖏᑕ ᑎᑎᕋᖅᑕᐅᓂᖏᑦ
+showdiff|ᐊᓚᒃᑲᑎᑉᐹ ᐊᓯᐊᙳᑐᖅ
+summary-preview|ᓱᕕᑦ:
+blockedtitle|ᐋᖅᑭᒃᓱᐃᔨ ᐅᒥᙵᓯᓯᔪᖅ
+loginreqlink|ᐊᑯᓐᓇᐳᖅ
+newarticle|(ᐱᒋᕗᖅ)
+editing|ᐊᓯᐊᙳᑐᖅ ~{0}
+editingsection|ᓱᖁᓯᖅᐹ ᐃᓚ ~{0} (ᖏᐅᑎᑎᑦᓯᒍᑎ)
+editingcomment|ᓱᖁᓯᖅᐹ ~{0} (ᐅᔾᔨᕆᔭᖅ)
+editconflict|ᓱᖁᓯᖅᐹ ᐊᑲᐅᙱᓕᐅᕈᑎᓂᖅ: ~{0}
+currentrev|ᒫᓐᓇ ᑎᑎᕋᖅᑕᐅᒋᐊᕐᖓᕈᑦ
+previousrevision|←ᐅᑐᖃᖅ  ᑎᑎᕋᖅᑕᐅᒋᐊᕐᖓᕈᑦ
+nextrevision|ᐱᓪᓗᐊᕆᕚ ᐱᒋᕗᖅ ᑎᑎᕋᖅᑕᐅᒋᐊᕐᖓᕈᑦ→
+currentrevisionlink|ᒫᓐᓇ ᑎᑎᕋᖅᑕᐅᒋᐊᕐᖓᕈᑦ
+next|ᑕᒡᒐ
+last|ᐊᓐᓂᑐᔪᖅ
+history-feed-title|ᑎᑎᕋᖅᑕᐅᒋᐊᕐᖓᕈᑦ ᒪᑉᐱᑕᖅ ᑭᖑᓂᑦᑎᓐᓂ
+history-feed-description|ᑎᑎᕋᖅᑕᐅᒋᐊᕐᖓᕈᑦ ᒪᑉᐱᑕᖅ ᑭᖑᓂᑦᑎᓐᓂ ᐃᑭᐊᖅ ᐅᐃᑭ
+history-title|ᑎᑎᕋᖅᑕᐅᒋᐊᕐᖓᕈᑦ ᒪᑉᐱᑕᖅ ᑭᖑᓂᑦᑎᓐᓂ "~{0}"
+lineno|ᑐᑭᖅᓯᖅ ~{0}:
+editundo|ᐃᐱᐅᑦᔮᐹ
+mypreferences|ᐊᒥ ᐱᒃᑯᒪᓂᖅᐹᖅ
+prefs-rc|ᐱᒋᕗᖅ ᐊᓯᐊᙳᑐᖅ
+searchresultshead|ᐃᕚᖅᐳᖅ
+youremail|ᑭᒍᑎᐅᑉ ᓯᑎᓂᖅᐹᖓ:
+username|ᐅᐃᑭᐱᑎᐊ ᐊᑎᖅ:
+yourrealname|ᐃᓄᓪᓚᕆᒃ ᐊᑎᖅ:
+email|ᑭᒍᑎᐅᑉ ᓯᑎᓂᖅᐹᖓ
+prefs-help-email|ᑭᒍᑎᐅᑉ ᓯᑎᓂᖅᐹᖓ (ᐱᒃᑲᓪᓚᕗᖅ) — ᖃᑯᒍ ᓇᓗᓇᙱᓚᖅ ᐃᓕᔅᓯ ᐱᔪᖕᓇᖅᑐᖅ ᐱᒋᕚ ᑲᙳᓇᖅᑐᖅ ᐋᔩᖃᑎᒋᖏᖅ
+editinguser|ᓱᖁᓯᖅᐹ ᖃᑕᙳᑎ '''[[User:~{0}\u007C~{0}]]''' ([[User talk:~{0}\u007C{{int:talkpagelinktext}}]] \u007C [[Special:Contributions/~{0}\u007C{{int:contribslink}}]])
+recentchanges|ᐱᒋᕗᖅ ᐊᓯᐊᙳᑐᖅ
+hide|ᐃᔨᖅᐳᖅ
+show|ᐊᓚᒃᑲᑎᖅᐹ
+minoreditletter|ᐅ
+newpageletter|ᐱ
+boteditletter|ᑉ
+recentchangeslinked|ᐊᓯᐊᙳᑐᖅ ᒥᑦᓵᓯᔪᖅ
+recentchangeslinked-feed|ᐊᓯᐊᙳᑐᖅ ᒥᑦᓵᓯᔪᖅ
+recentchangeslinked-toolbox|ᐊᓯᐊᙳᑐᖅ ᒥᑦᓵᓯᔪᖅ
+upload|ᒪᑉᐱᐹ ᓇᓗᓇᐃᔭᐅᑎᑦ
+uploadbtn|ᒪᑉᐱᐹ ᓇᓗᓇᐃᔭᐅᑎᑦ
+filedesc|ᐱᓕᕆᐊᒃᓴᑦ ᐱᕕᒡᔪᐊᖑᓂᖏᑦ
+fileuploadsummary|ᓱᕕᑦ:
+watchthisupload|ᐅᕝᕙ
+file-anchor-link|ᐊᒋᐅᑦ
+listredirects|ᓂᐱ ᖃᓂᖓᓂ ᑲᒪᒋᔭᖅ ᐋᓯᑦ ᓇᑭᑦ
+randompage|ᓇᑭᑐᐃᓐᓇᖅ ᖃᐅᔨᓴᕐᓂᖅ ᒪᑉᐱᑕᖅ
+randomredirect|ᓇᑭᑐᐃᓐᓇᖅ ᖃᐅᔨᓴᕐᓂᖅ ᖃᓂᖓᓂ ᑲᒪᒋᔭᖅ ᐋᓯᑦ ᓇᑭᑦ
+statistics-header-users|ᖃᑕᙳᑎ ᑭᓯᑦᓯᓯᖕᖑᕐᓗᒋᑦ ᐹᓯᔅᓱᑎᔅᓴᑦ
+doubleredirects|ᑕᐱᕐᖃᓕᒃ ᖃᓂᖓᓂ ᑲᒪᒋᔭᖅ ᐋᓯᑦ ᓇᑭᑦ
+brokenredirects|ᓇᐱᕚ ᖃᓂᖓᓂ ᑲᒪᒋᔭᖅ ᐋᓯᑦ ᓇᑭᑦ
+brokenredirects-edit|ᓱᖁᓯᖅᐹ
+brokenredirects-delete|ᓂᐸᖅᑎᐹ
+listusers|ᖃᑕᙳᑎ ᓂᐱ
+newpages-username|ᐅᐃᑭᐱᑎᐊ ᐊᑎᖅ:
+ancientpages|ᒪᑉᐱᑕᖅ ᐃᑦᑐᓴᖅ ᐅᑐᖃᖅ
+move|ᐅᐊᔪᖅ
+allpagessubmit|ᐊᐃᕗᖅ
+emailuser|ᑭᒍᑎᐅᑉ ᓯᑎᓂᖅᐹᖓ ᐃᓄᒃ
+emailfrom|ᓇᑭᑦ
+emailmessage|ᑭᒡᒐᐹ
+emailsend|ᕿᐅᑦᓴᕕᒋᕚ
+watchlist|ᐅᕝᕙ ᒪᑉᐱᑕᖅ
+mywatchlist|ᓂᐱ ᐊᒥ
+watch|ᐅᕝᕙ
+watchthispage|ᐅᕝᕙ
+unwatch|ᐃᖅ ᐅᕝᕙ
+enotif_impersonal_salutation|{{SITENAME}} ᖃᑕᙳᑎ
+created|ᒪᑉᐱᑕᖅ ᐊᓂᕗᖅ
+dellogpage|ᓂᐸᖅ ᓂᐱ
+deletionlog|ᓂᐸᖅ ᓂᐱ
+prot_1movedto2|[[~{0}]] ᓱᕐᕋᒪᔪᖅ [[~{1}]]
+protect-legend|ᐸᑎᒻᒥᕚ ᓴᐳᒻᒥᕚ
+protect-level-sysop|ᓯᕐᓚᒃ ᑎᑎᕋᖅᓯᒪᔪᓂᒃ ᑐᖅᑯᖅᑎᕆᔨ
+restriction-move|ᐅᐊᔪᖅ
+undelete-search-submit|ᐃᕚᖅᐳᖅ
+mycontris|ᑕᓕᐊᖅ
+sp-contributions-talk|ᐅᖃᓕᒪᔪᖅ
+sp-contributions-submit|ᐃᕚᖅᐳᖅ
+whatlinkshere|ᐅᖅᓯᖅ ᒪᐅᖓ
+isredirect|ᑕᐱᑕᕇᒃ ᐅᖅᓯᖅ ᒪᑉᐱᑕᖅ
+blockip|ᐃᖅ ᐋᖅᑭᒃᓱᐃᔨ
+badipaddress|ᐃᓪᓕᑐᖅ ᖃᕆᓴᐅᔭᒃᑯᑦ ᑎᑎᕋᖅᓯᒪᔪᑦ ᒪᓕᒐᑎᒍᑦ ᐊᖏᕈᑕᐅᓯᒪᔪᖅ ᐅᓂᒃᑳᕆᔭᖃᕐᓂᖅ
+blockipsuccesssub|ᐅᒥᙵᓯᓯᔪᖅ ᓈᔪᖅ
+ipblocklist-submit|ᐃᕚᖅᐳᖅ
+anononlyblock|ᓯᕐᓚᒃ ᐃᓕᓴᕐᓇᙱᑎᑦᑐᖅ
+blocklink|ᐃᖅ
+contribslink|ᖃᑕᙳᑎ ᓱᖁᓯᖅᐹ
+blocklogpage|ᐅᒥᙵᓯᓯᔪᖅ/ᐃᖅ ᑎᑎᖅᑲᖁᑎᑦ ᑐᖅᑯᖅᓯᒪᔭᐃᑦ
+block-log-flags-anononly|ᐃᓕᓴᕐᓇᙱᑎᑦᑐᖅ ᐋᖅᑭᒃᓱᐃᔨ ᑭᓯᐊᓂ
+block-log-flags-nocreate|ᑮᓇᐅᔭᖃᕐᕕᒃ ᐃᓄᐃᕈᑎᕚ ᐃᓂᖅᑎᐹ ᐱᒋᕗᖅ
+block-log-flags-noemail|ᑭᒍᑎᐅᑉ ᓯᑎᓂᖅᐹᖓ
+move-page-legend|ᐅᐊᔪᖅ ᒪᑉᐱᑕᖅ
+movearticle|ᐅᐊᔪᖅ ᒪᑉᐱᑕᖅ
+movelogpage|ᐅᐊᔪᖅ ᓂᐱ
+movereason|ᐃᓱᒪᒃᓴᖅᓯᐅᕈᓐᓇᑦᑎᐊᕐᓂᖅ:
+delete_and_move|ᓂᐸᖅᑎᐹ  ᐊᒻᒪ ᐅᐊᔪᖅ
+allmessagesname|ᐊᑎᖅ
+import-logentry-upload-detail|~{0} {{PLURAL:~{0}\u007Cᑎᑎᕋᖅᑕᐅᒋᐊᕐᖓᕈᑦ\u007Cᑎᑎᕋᖅᑕᐅᒋᐊᕐᖓᕈᑦ}}
+import-logentry-interwiki-detail|~{0} {{PLURAL:~{0}\u007Cᑎᑎᕋᖅᑕᐅᒋᐊᕐᖓᕈᑦ\u007Cᑎᑎᕋᖅᑕᐅᒋᐊᕐᖓᕈᑦ}} ᐃᑭᐊᖅ ~{1}
+tooltip-pt-mytalk|ᐊᓪᓚᖁᑎᒃᑲ
+tooltip-pt-preferences|ᐊᒥ ᐱᒃᑯᒪᓂᖅᐹᖅ
+tooltip-pt-logout|ᐊᓂᕝᕕᒃ
+tooltip-ca-protect|ᓴᐳᒻᒥᕚ ᒪᑉᐱᑕᖅ
+tooltip-search|ᐃᕚᖅᐳᖅ {{SITENAME}}
+tooltip-minoredit|ᑐᐊᐸᖅ ᐊᓯᐊᙳᑐᖅ
+tooltip-diff|ᓱᕐᕋᐹ ᖃᑕᙳᑎ
+tooltip-compareselectedversions|ᐅᕝᕙ ᐊᓯᐊᙳᑐᖅ ᒪᑉᐱᑕᖅ ᐊᑯᓐᓂᖓᓐᓂ ᒪᕐᕉᒃ ᑎᑎᕋᖅᑕᐅᒋᐊᕐᖓᕈᑦ
+anonymous|ᐃᓕᓴᕐᓇᙱᑎᑦᑐᖅ ᖃᑕᙳᑎ ᓇᑭᑦ {{SITENAME}}
+deletedrevision|ᓂᐸᖅ ᐅᑐᖃᖅ ᑎᑎᕋᖅᑕᐅᒋᐊᕐᖓᕈᑦ ~{0}
+previousdiff|← ᑐᓄᓪᓕᐹᖅ ᐊᓯᐊᙳᑐᖅ
+nextdiff|ᑕᒡᒐ ᐊᓯᐊᙳᑐᖅ ᒪᑉᐱᑕᖅ →
+ilsubmit|ᐃᕚᖅᐳᖅ
+bydate|ᐱᑖᕈᑦᑐᖅ ᐃᓅᓕᕐᕕᒃ
+variantname-ike-cans|ᑎᑎᕋᐅᓯᖅ ᓄᑖᖅ
+variantname-ike-latn|ilisautik
+variantname-iu|disable
+exif-imagelength|ᖁᑦᓯᖕᓂᖅ
+exif-imagedescription|ᐃᓄᙳᐊᖅ ᐊᑎᖅ
+exif-colorspace|ᒥᖑᐊᕈᑎᒥᑎᖅᐹ
+exif-datetimeoriginal|ᖃᑦᓯᐹ ᐊᒪᒻ ᑎᑭᐅᑎ ᓴᕐᕿᐹ ᐃᓱᐃᓪᓕᖓᐃᑦᔭᐹ
+exif-datetimedigitized|ᖃᑦᓯᐹ ᐊᒪᒻ ᑎᑭᐅᑎ ᓴᕐᕿᐹ ᖃᕋᓴᐅᔭᖅ
+exif-exposuretime-format|~{0} ᐊᐃᑉᐸᖅ (~{1})
+exif-brightnessvalue|ᖃᐅᒻᒪᐹ ᐊᒃᑭᐅᑕᖅ
+monthsall|ᓱᓇᒥᑦᑐᖅ
+confirm_purge_button|ᐊᑲᐅᔪᖅ
+imgmultipageprev|← ᑐᓄᓪᓕᐹᖅ  ᒪᑉᐱᑕᖅ
+imgmultipagenext|ᑕᒡᒐ ᒪᑉᐱᑕᖅ →
+imgmultigo|ᐊᐃᕗᖅ!
+table_pager_limit_submit|ᐊᐃᕗᖅ
+autoredircomment|ᖃᓂᖓᓂ ᑲᒪᒋᔭᖅ ᐋᓯᑦ ᓇᑭᑦ [[~{0}]]
+autosumm-new|ᐱᒋᕗᖅ ᒪᑉᐱᑕᖅ: ~{0}
+specialpages|ᐱᔨ ᒪᑉᐱᑕᖅ
+']:>
+).lang
+;

@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Basharh"
+		]
+	},
+	"wikibase-edit": "ܫܚܠܦ",
+	"wikibase-save": "ܠܒܘܟ",
+	"wikibase-cancel": "ܒܛܘܠ",
+	"wikibase-addreference": "ܐܘܣܦ ܡܒܘܥܐ",
+	"wikibase-statements": "ܓܠܝܬ̈ܐ",
+	"wikibase-aliases-label": "ܐܦ ܐܬܝܕܥܬ ܒܫܡ:",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ܡܒܘܥܐ|ܡܒܘܥ̈ܐ}}",
+	"wikibase-itemdisambiguation-lookup-language": "ܠܫܢܐ:",
+	"wikibase-modifyterm-language": "ܠܫܢܐ:"
+}

@@ -1,0 +1,1569 @@
+this
+.fallback_load('it')
+.messages
+  .load_text(
+<:['
+sunday|Dumènica
+monday|lunedé
+tuesday|Martedé
+wednesday|Mercordé
+thursday|Giovedé
+friday|Venerdé
+saturday|Sâbet
+sun|Dum
+mon|Lun
+tue|Mar
+wed|Mer
+thu|Giu
+fri|Ven
+sat|Sab
+january|Znêr
+february|Fervêr
+march|Mêrs
+april|Avrîl
+may_long|Mâg
+june|Zógn
+july|Lój
+august|Agòst
+september|Setèmber
+october|Utòber
+november|Novèmber
+december|Dicèmber
+january-gen|Znêr
+february-gen|Fervêr
+march-gen|Mêrs
+april-gen|Avrîl
+may-gen|Mâg
+june-gen|Zógn
+july-gen|Lój
+august-gen|Agòst
+september-gen|Setèmber
+october-gen|Utòber
+november-gen|Novèmber
+december-gen|Dicèmber
+jan|Znê
+feb|Fer
+mar|Mêrz
+apr|Avr
+may|Mâg
+jun|Zóg
+jul|Lój
+aug|Agò
+sep|Set
+oct|Utò
+nov|Nov
+dec|Dic
+toc|Argumèint
+redirectedfrom|(Tót còst al deşvîn da <b>~{0}</b>)
+allpages|Tót al pàgini.
+collapsible-collapse|Stréca
+collapsible-expand|Şlêrga
+sort-descending|Ōrdin in calêr
+sort-ascending|Ōrdin in crèser
+categories|Categoréi
+lastmodifiedat|Ûltmi mudéfichi 'dla pàgina: ~{1}, ~{0}.
+thumbnail-more|Ingrandés
+otherlanguages|In êtri léngvi
+blanknamespace|(Principêl)
+pagecategories|{{PLURAL:~{0}\u007CCategoréia\u007CCategoréi}}
+category_header|Pàgini 'd la categoréia ~{0}
+subcategories|Sòt-categoréi
+category-media-header|File int la categoréia ''~{0}''
+category-empty|"Al mumèint la categoréia l'an ghà mìa nisóna pàgina o file multimediêl."
+category-subcat-count|{{PLURAL:~{1}\u007CIn cla categoréia ché a gh'é sōl 'n'ónica sòt-categoréia.\u007C In cla categoréia ché a gh'é {{PLURAL:~{0}\u007Cla sòt-categoréia sgnêda\u007Cal ~{0} sòt-categoréi sgnêdi}} ed sègvit, só 'n totêl ed ~{1}.}}
+category-subcat-count-limited|In cla categoréia ché a gh'é{{PLURAL:~{0}\u007C'na sòt-categoréia, nutêda\u007C~{0} sòt-categoréi, nutêdi}}ché 'd sègvit.
+category-article-count|{{PLURAL:~{1}\u007CIn cla categoréia ché a gh'é sōl 'na pàgina, sgnêda ché.\u007CCla categoréia ché la gh'à {{PLURAL:~{0}\u007Cla pàgina sgnêda\u007C al pàgini ~{0} sgnêdi}} ed sègvit, in un totêl ed ~{1}.}}
+category-article-count-limited|In cla categoréia ché a gh'é {{PLURAL:~{0}\u007Cla pàgina nutêda\u007Cal  ~{0} pàgini nutêdi ch'é 'd sègvit.}}
+category-file-count|{{PLURAL:~{1}\u007CIn cla categoréia ché a gh'é sōl un file, sgnê ché.\u007CIn cla categoréia ché gh'é{{PLURAL:~{0}\u007Cun file sgnê ché\u007C~{0} file , sgnê}} ed sègvit, in un totêl ed ~{1}.}}
+category-file-count-limited|In cla categoréia ché a gh'é {{PLURAL:~{0}\u007Cal file nutê\u007Ci ~{0} file nutê}} ché 'd sègvit.
+categorytree-num-categories|~{0} C
+categorytree-num-pages|~{0} P
+categorytree-num-files|~{0} F
+nextn|{{PLURAL:~{0}\u007Cal seguèint\u007Ci seguèint ~{0}}}
+prevn|{{PLURAL:~{0}\u007Ccòl préma\u007Cquî préma ~{0}}}
+listingcontinuesabbrev|cunt.
+bold_sample|Grasèt
+bold_tip|Grasèt
+italic_sample|Cursîv
+italic_tip|Cursîv
+link_sample|Tétol dal colegamèint
+link_tip|Colegamèint intêren
+headline_sample|Intestasiòun
+headline_tip|Intestasiòun ed 2° livèl
+ago|~{0} fa
+hidden-category-category|Categoréi lughêdi
+statistics|Statéstichi
+categorytree-portlet|Categorie
+categorytree-category|Categorie:
+tog-underline|Tîra 'na rîga sòta i colegamèint.
+tog-hideminor|Lōga 'l mudéfichi pió céchi int al j ûltmi mudéfichi.
+tog-hidepatrolled|Lōga 'l mudéfichi verifichêdi int al j ûltmi mudéfichi
+tog-newpageshidepatrolled|Lōga al pàgini verifichêdi da l'elèinch dal pàgini pió nōvi.
+tog-extendwatchlist|Fà vèder tót' al mudéfichi fât a i tgnû sòt ôc, mìa sōl l'ûltma.
+tog-usenewrc|Unés al mudéfichi per pàgina int al j ûltmi mudéfichi e in quî tgnû sòt' ôc.
+tog-numberheadings|Cûnta automâtica di tétol ed sesiòun.
+tog-showtoolbar|Fà vèder la bâra di strumèint ed mudéfica.
+tog-editondblclick|Mudéfica 'l pàgini cun un cléch dòpi.
+tog-editsectiononrightclick|Mudéfica dal sesiòun per mèz dal cléch a dréta insém al tétol.
+tog-watchcreations|Zûnta al pàgini fâti e i file carghê int i tgnû 'd ôc specêl.
+tog-watchdefault|Zûnta al pàgini e i file mudifichê int i tgnû 'd ôc specêl.
+tog-watchmoves|Zûnta al pàgini e i file spustê int i tgnû 'd ôc specêl.
+tog-watchdeletion|Zûnta al pàgini e i file scanşlê int i tgnû 'd ôc specêl.
+tog-watchrollback|Zûta al pàgini in dóv' ó fât al ritōren a la pàgina 'd préma a i tgnû 'd ôc specêl
+tog-minordefault|Sègna ògni mudéfica cme céca (sōl cme pre-stabilî)
+tog-previewontop|Fà vèder còl ch' ò fât sōver la caşèla ed mudéfica e mìa sòta.
+tog-previewonfirst|Fà vèder còl ch' ò fât almēno 'na vôlta préma 'd salvêr
+tog-enotifwatchlistpages|Mândon un avîş cun la pôsta eletrônica quând a vîn cambiê 'na pàgina o un file preşèint int i tgnû 'd ôc specêl
+tog-enotifusertalkpages|Mândon un avîş cun la pôsta eletrônica quând a vîn cambiê la mé pàgina 'd discusiòun
+tog-enotifminoredits|Mândom un avîş ânca p'r al mudéfichi céchi ed pàgini e file
+tog-enotifrevealaddr|Fà vèder al mé indirés ed la pôsta eletrônica int i mesâg 'd avîş
+tog-shownumberswatching|Fà vèder al nómer ed j utèint che gh'àn la pàgina sòta uservasiòun
+tog-oldsig|La fîrma 'd adèsa
+tog-fancysig|Trâta la fîrma cme wikitèst (sèinsa colegamèint avtomâtich)
+tog-uselivepreview|Permèt la funsiòun "Live preview" (guêrda préma 'd salvêr in dirèta)
+tog-forceeditsummary|Dmânda s'l'è vèira che al câmp argumèint l' é vōd
+tog-watchlisthideown|Lōga al mé mudéfichi int i  tgnû 'd ôc specêl
+tog-watchlisthidebots|Lōga al mudéfichi di bot int i tgnû 'd ôc specêl
+tog-watchlisthideminor|Lōga al mudéfichi céchi int i tgnû 'd ôc specêl
+tog-watchlisthideliu|Lōga al mudéfichi 'd j utèint registrê int i tgnû 'd ôc specêl
+tog-watchlisthideanons|Lōga al mudéfichi 'd j utèint sèinsa nòm int i tgnû 'd ôc specêl
+tog-watchlisthidepatrolled|Lōga al mudéfichi verifichêdi int i tgnû 'd ôc specêl
+tog-ccmeonemails|Mândom 'na côpia di mesâg spidî a chiêter utèint
+tog-diffonly|An fêr mia vèder còl che gh'é dèinter int la pàgina dôp al cunfrûnt tr'al versiòun
+tog-showhiddencats|Fà vèder al categoréi lughêdi
+tog-norollbackdiff|An fêr mia vèder al cunfrûnt tr' al versiòun dôp avèir fât un "rollback"
+tog-useeditwarning|Avîşom quând a vâgh fōra da 'na pàgina d' mudéfica e an n'ò mìa salvê al mudéfichi fâti
+tog-prefershttps|Drōva sèimper un colegamèint sicûr quând ét fê l'ingrès
+underline-always|Sèimper
+underline-never|Mài
+underline-default|Mantî al j impustasiòun dal navigadōr o 'd la skin
+editfont-style|Stîl dal carâter int la caşèla 'd mudéfica:
+editfont-default|Pre-stabilî dal navigadōr
+editfont-monospace|Carâter a larghésa fésa
+editfont-sansserif|Carâter sans-serif
+editfont-serif|Carâter serif
+january-date|Znêr ~{0}
+february-date|Fervêr ~{0}
+march-date|Mêrs ~{0}
+april-date|Avrîl ~{0}
+may-date|Mâg ~{0}
+june-date|Zógn ~{0}
+july-date|Lój ~{0}
+august-date|Agòst ~{0}
+september-date|Setèmber ~{0}
+october-date|Otòber ~{0}
+november-date|Novèmber ~{0}
+december-date|Dicèmber ~{0}
+hidden-categories|{{PLURAL:~{0}\u007CCategoréia lughêda\u007CCategoréi lughêdi}}
+index-category|Pàgini gancêdi
+noindex-category|Pàgini mìa gancêdi
+broken-file-category|Pàgini cun dèinter di file ch' an gh'în mìa.
+about|Infumasiòun
+article|Còl che gh'é int la pàgina
+newwindow|(a s'arvés 'na fnèstra nōva)
+cancel|Scanşèla
+moredotdotdot|Êter...
+morenotlisted|Cl'elèinch ché an n'é mìa finî.
+mypage|Pàgina
+mytalk|Al mē discusiòun
+anontalk|Discusiòun per cl' IP ché
+navigation|Navigasiòun
+and| e
+qbfind|Câta
+qbbrowse|Sfòja
+qbedit|Mudéfica
+qbpageoptions|Siēlti 'd la pàgina
+qbmyoptions|Al mē pàgini
+faq|Dmândi fâti
+faqpage|Project:Dmândi fâti despès
+actions|Asiòun
+namespaces|Spâsi di nòm
+variants|Mudéfichi
+navigation-heading|Lésta 'd navigasiòun
+errorpagetitle|Erōr
+returnto|Tōrna a ~{0}
+tagline|Da {{SITENAME}}
+help|Ajót
+search|Sèirca
+searchbutton|Sèirca
+go|Và
+searcharticle|Và
+history|Stòria 'd la pàgina
+history_short|Stôria
+updatedmarker|cambiêda da la mé ûltma vişita
+printableversion|Stâmpa la pàgina ch' ét vèd.
+permalink|Colegamèint fés
+print|Stâmpa
+view|Guêrda
+view-foreign|Guardêr in séma ~{0}
+edit|Mudéfichi
+edit-local|Mudéfica la spiegasiòun lochêla
+create|Invèinta
+create-local|Zûnta spiegasiòun lochêla
+editthispage|Mudéfica cla pàgina ché
+create-this-page|Fà cla pàgina ché
+delete|Scanşéla
+deletethispage|Scanşéla cla pàgina ché
+undeletethispage|Fà 'l recóper ed cla pàgina ché
+undelete_short|Recóper ed {{PLURAL:~{0}\u007C'na versiòun\u007C~{0} versiòun}}
+viewdeleted_short|Guèrda {{PLURAL:~{0}\u007C'na mudéficha scanşlêda\u007C~{0} mudéfichi scanşlêdi}}
+protect|Prutēz
+protect_change|Câmbia
+protectthispage|Prutēz cla pàgina ché
+unprotect|Câmbia la prutesiòun
+unprotectthispage|Câmbia la prutesiòun per cla pàgina ché
+newpage|Pàgina nōva
+talkpage|Pàgina 'd discusiòun
+talkpagelinktext|Discusiòun
+specialpage|Pàgina specêla
+personaltools|Strumèint persunêl
+articlepage|Guêrda la pàgina
+talk|Discusiòun
+views|Vîşiti
+toolbox|Strumèint
+userpage|Guêrda la pàgina utèint
+projectpage|Guêrda la pàgina dal prugèt
+imagepage|Guêrda la pàgina dal file
+mediawikipage|Guêrda al mesâg
+templatepage|Guêrda 'l mudèl
+viewhelppage|Guêrda la pàgina 'd ajót
+categorypage|Guêrda la categuréia
+viewtalkpage|Guêrda la discusiòun
+redirectpagesub|Pàgina 'd partèinsa
+redirectto|Rimânda a:
+viewcount|Cla pàgina ché l'é stêda lişûda {{PLURAL:~{0}\u007C'na vôlta\u007C~{0} vôlti}}.
+protectedpage|Pàgina sòta prutesiòun
+jumpto|Và a:
+jumptonavigation|Navigasiòun
+jumptosearch|Sērca
+view-pool-error|A s' în deşpiêş mó in cól mumèint ché i terminêl în trôp câregh.\nTrôp utèint în drē serchêr ed vèder cla pàgina ché.\nSpèta soquânt minût préma ed pruvêr incòra a carghêr la pàgina.\n\n~{0}
+generic-pool-error|A s' în deşpiêş mó in cól mumèint ché i terminêl în trôp câregh.\nTrôp utèint în drē serchêr ed vèder cla risōrsa ché.\nSpèta soquânt minût préma ed pruvêr incòra a carghêr la risōrsa.
+pool-timeout|Tèimp che gh'é da spetêr préma dal sblôch.
+pool-queuefull|A ghé la fîla, trôpa gînta a vōl vèder la pàgina, prōva tra soquânt minût
+pool-errorunknown|Erōr mìa cgnusû
+pool-servererror|Al servési cuntadōr di pool an n'é mìa léber per èser druvê
+poolcounter-usage-error|Erōr 'd ûş:~{0}
+aboutsite|Infurmasiòun só {{SITENAME}}
+aboutpage|Project:Infurmasiòun
+copyright|Còl che gh' é che dèinter a 's pōl druvêr sòta licèinsa ~{0}, s' an gh'é mia scrét diversamèint.
+copyrightpage|{{ns:project}}:Dirét 'd avtōr
+currentevents|Fât e prugèt ed tót
+currentevents-url|Project:Prugèt_ed_tót
+disclaimers|Avertèinsi
+disclaimerpage|Project:Avertèinsi generêli
+edithelp|Léber dal spiegasiòun
+helppage-top-gethelp|Ajót
+mainpage|Préma pàgina
+mainpage-description|Pàgina principêla
+policy-url|Project:Léni 'd cundòta
+portal|Discóter e quistiunêr
+portal-url|Project:Discóter e quistiunêr
+privacy|Infurmasiòun só la véta privêda
+privacypage|Project:Règoli só la secretèsa dal j infurmasiòun personêli.
+badaccess|I permès în mìa asê
+badaccess-group0|An 't gh'è mìa i permès necesâri per fêr còl che t'é dmandê.
+badaccess-groups|La funsiòun dmandêda l'é riservêda a j utèint che fân pêrt {{PLURAL:~{1}\u007Cal gróp\u007Ca ûn di gróp ché sòta}}: ~{0}
+versionrequired|L'é necesâria la versiòun ~{0} ed MediaWiki
+versionrequiredtext|Per druvê cla pàgina ché l'é necesâri avèir la versiòun ~{0} dal prugrâma MediaWiki. Guêrda [[Special:Version\u007Cla pàgina apôsta]].
+ok|Va bèin
+retrievedfrom|Tôt da "~{0}".
+youhavenewmessages|{{PLURAL:~{2}\u007CT'ê}} ~{0} (~{1})
+youhavenewmessagesfromusers|{{PLURAL:~{3}\u007CÉt ghê}} ~{0} da {{PLURAL:~{2}\u007Cun êter utèint\u007C~{2} utèint}} (~{1}).
+youhavenewmessagesmanyusers|Ét gh'ê ~{0} da dimòndi utèint ~{1}.
+newmessageslinkplural|{{PLURAL:~{0}\u007Cun nōv mesâg\u007C999=nōv mesâg}}
+newmessagesdifflinkplural|{{PLURAL:~{0}\u007Cûltma mudéfica\u007C999=ûltmi mudéfichi}}
+youhavenewmessagesmulti|Ét gh'ê di mesâg nōv insém a ~{0}
+editsection|Mudéfica
+editold|mudéfica
+viewsourceold|guêrda la surzéia
+editlink|mudéfica
+viewsourcelink|guêrda la surzéia
+editsectionhint|Mudéfica la sesiòn: ~{0}
+showtoc|fà vèder
+hidetoc|Lōga
+confirmable-confirm|Ét {{GENDER:~{0}\u007Csicûr\u007Csicûra}}?
+confirmable-yes|Sé
+confirmable-no|No
+thisisdeleted|Guêrda e tōrna a mèter ~{0}?
+viewdeleted|Guêrda ~{0}?
+restorelink|{{PLURAL:~{0}\u007C'na mudéfica scanşlêda\u007C~{0} mudéfichi scanşlêdi}}
+feedlinks|Feed:
+feed-invalid|Al môd ed sotoscrisiòun dal feed an n'é mìa vâlid
+feed-unavailable|An gh'é mìa di feed léber
+site-rss-feed|Feed RSS ed ~{0}
+site-atom-feed|Feed Atom ed ~{0}
+page-rss-feed|Feed RSS per ~{0}
+page-atom-feed|Feed Atom per ~{0}
+red-link-title|~{0} (la pàgina l'an gh'é mìa)
+nstab-main|Pàgina
+nstab-user|Pàgina utèint
+nstab-media|File multimediêl
+nstab-special|Pàgina specêla
+nstab-project|Pàgina 'd servési
+nstab-image|File
+nstab-mediawiki|Mesâg
+nstab-template|Mudèl
+nstab-help|Pàgina 'd ajót
+nstab-category|Categoréia
+nosuchaction|Operasiòun mìa arcgnusûda
+nosuchactiontext|Còl che t'é scrét int l' URL an n'é mìa vâlid.\nL'é anca pusébil che la URL la sia stêda scréta şbaliêda o che sia stê fât un colegamèint mìa vâlid.\nCòst al pré ânca dîr che gh'é un bug in {{SITENAME}}.
+nosuchspecialpage|La pàgina specêla l'an gh'é mìa.
+nospecialpagetext|<strong>La pàgina specêla serchêda an n'é mìa stêda arcgnusûda</strong>\n\nL'elèinch dal pàgini specêli vâlidi a 's câta in [[Special:SpecialPages\u007CElèinch dal pàgini specêli]].
+error|Erōr
+databaseerror|Erōr dal 'database'
+databaseerror-text|È sucès un erōr de dmânda insém al databêş.\nA pré ânch èser un bug int al prugrâma.
+databaseerror-textcl|È sucès un erōr de dmânda insém al databêş.
+databaseerror-query|Istrusiòun SQL: ~{0}
+databaseerror-function|Funsiòun: ~{0}
+databaseerror-error|Erōr: ~{0}
+laggedslavemode|'''Atèinti:''' la pàgina la pré avèir mìa al revisiòun pió nōv.
+readonly|'Database' bluchê
+enterlockreason|Scréver al mutîv dal blôch, precişêr quând a 's pèinsa che 'l vègna tôt via.
+readonlytext|In cól mumèint ché al databêş l'é bluchê e an 's pōlen fêr né zûnti né mudéfichi. Al blôch ed sôlit l'é lighê a 'na revişiòun normêla e quând la srà finîda al gnirà sbluchê. \n\nL'aminitradōr dal sistēma ch' al l'à bluchê l'à dê cla spiegasiòun ché: ~{0}
+missing-article|Al datebêş an n'à mìa catê al tèst ed 'na pàgina ch' l' aré duvû catêres sòt' al nòm "~{0}" ~{1}. Ed sôlit còst a sucēd quând a vîn arciamê, a partîr da la stòria dal mudéfichi o dal cunfrûnt tra versiòun, un colegamèint a 'na pàgina scanşlêda, a un cunfrûnt tra versiòun che gh'în mìa o a un cunfrûnt tra versiòun cun la stòria dal mudéfichi scanşlêda. In chês cuntrâri, a s'é pubabilmèint catê un erōr int al prugrâma ed Media Wiki. A se dmânda al piaşèir ed comunichêr còl ch'é sucès a un [[Special:ListUsers/sysop\u007Camministadōr]] e comunichêregh l'indirés (URL) in quistiòun.
+missingarticle-rev|(nómer ed la versiòun: ~{0})
+missingarticle-diff|(Diff: ~{0}, ~{1})
+readonly_lag|Al databêş l'é stê bluchê in avtomàtich per permèter a i terminêl cun al databêş schiêv ed mètres in pâs cun al master
+internalerror|Erōr intêren
+internalerror_info|Erōr intêren: ~{0}
+internalerror-fatal-exception|Erōr ch' an pōl mìa èser corèt dal gener "~{0}"
+filecopyerror|An n'é mìa pusébil cupiêr al file "~{0}" in "~{1}".
+filerenameerror|An n'é mìa pusébil cambiêr al nòm ed "~{0}" in "~{1}".
+filedeleteerror|An n'é mìa pusébil scanşlêr al file "~{0}".
+directorycreateerror|An n'é mìa pusébil fêr la directory "~{0}".
+directoryreadonlyerror|La cartèla "~{0}" la 's pōl sōl lēşer.
+directorynotreadableerror|La cartèla "~{0}" la 's pōl mìa lēşer.
+filenotfound|An n'é mìa pusébil catêr al file "~{0}".
+unexpected|Valōr mìa pervést "~{0}"="~{1}".
+formerror|Erōr: an n'é ma pusébil spidîr al môdul.
+badarticleerror|Operasiòun mìa permésa per cla pàgina ché.
+cannotdelete|An n'é mìa stê pusébil scanşlêr la pàgina o al file "~{0}".\nAl pré èser bèle stê scanşlê da quelchidûn êter.
+cannotdelete-title|Impusébil scanşlêr la pàgina "~{0}".
+delete-hook-aborted|L' hook an n'à mia permés la scanşladûra.\nAn n'é mìa stê dê la spiegasiòun.
+no-null-revision|An pōl èser fât 'na versiòun mìa vâlida per la pàgina "~{0}"
+badtitle|Tétol mìa curèt.
+badtitletext|Al tétol ed la pàgina serchêda l'é vōd, şbaliê opór al deşvîn da 'n erōr int i colegamèint di côdis o int i colegamèint druvê in wiki. In pió al pré avèir ûn o pió carâter ch'an pōlen mìa èser druvê int i tétol.
+perfcached|Al j infurmasiòun ché sòta vînen registrêdi int la "cache" dal databêş e an pōlen mìa èser arnuvê. Int la "cache" a gh'é  un mâsim ed {{PLURAL:~{0}\u007Cun rişultêt \u007C~{0} rişultêt}} ch' es pōlen druvêr.
+perfcachedts|Al j infurmasiòun ché sòta vînen registrêdi int la cache dal databêş e l'ûltma vôlta l' è stê arnuvê al  ~{0}. Int la cache a gh'é  un mâsim ed {{PLURAL:~{3}\u007Cun rişultêt \u007C~{3} rişultêt}} ch' es pōlen druvêr.
+querypage-no-updates|J arnuvamèint ed la pàgina în p'r al mumèint fērom. Al j infurmasiòun dèinter a la pàgina a gnirân mia arnuvêdi.
+viewsource|Guêrda la surzéia
+viewsource-title|Guêrda la surzéia 'd ~{0}
+actionthrottled|L'asiòun la vîn tardêda.
+actionthrottledtext|Cme mişûra 'd sicurèsa cûnt'r al spam soquânti operasiòun a vînen limitêdi a 'n nómer mâsim ed vôlti in un precîş peréiod ed tèimp, in cól chêş ché a s'é bèle andê d'ed là 'd cól lémit. A se dmânda ed turnêr a pruvêr tra soquânt minût.
+protectedpagetext|Cla pàgina ché l'é stêda prutèta per impidîr la mudéfica o êtri operasiòun.
+viewsourcetext|L'é pusébil vèder e cupiêr al côdis surzéia ed cla pàgina ché.
+viewyourtext|L'é pusébil vèder e cupiêr al côdis surzéia dal "tō mudéfichi" ed cla pàgina ché:
+protectedinterface|Cla pàgina ché la gh'à 'n elemèint ch' al fa pêrt dal colegamèint tra utèint e al progrâma 'd cól sît ché e l'é prutèta per schivşêr pusébil abûş. Per zuntêr o mudufichêr tradusiòun per tót i sistēma wiki druvêr [//translatewiki.net/ translatewiki.net], al prugèt 'd adatamèint a ògni léngva 'd MediaWiki.
+editinginterface|<strong>Atèinti:</strong> Al tèst ed cla pàgina ché 'l fa pêrt dal colegamèint tra utèint e 'l prugrâma dal sît.  Tót' al modéfichi fâti a cla pàgina ché a se spècen in sém a i mesâg vést per tót j utèint ed cól wiki ché.
+translateinterface|Per zuntêr o mudifichêr al tradusiòun vâlidi in sém a tót i wiki, drōva [//translatewiki.net/ translatewiki.net], al prugèt Media Wiki p'r al léngui di divêrs pôst.
+cascadeprotected|Insém a cla pàgina ché an n'é mìa pusébil fêr dal mudéfichi perchè l'é dèinter {{PLURAL:~{0}\u007Cint la pàgina sgnêda ché  'd sègvit, ch' l'é stêda prutèta\u007Cint al pàgini sgnêdi ché  'd sègvit, ch' în stêdi prutèti}} cun la prutesiòun ch' la 's arfà in cuntinvasiòun:\n~{1}
+namespaceprotected|An 's gh'à mìa i permès necesâri per mudifichêr al pàgini dal spâsi di nòm <strong>~{0}</strong>.
+customcssprotected|An 's gh'à mìa i permès necesâri per mudifichêr cla pàgina CSS ché, perchè la gh'à dèinter al j impustasiòun personêli 'd n' êter utèint.
+customjsprotected|An 's gh'à mìa i permès necesâri per mudifichêr cla pàgina JavaScript ché, perchè la gh'à dèinter al j impustasiòun personêli 'd n' êter utèint.
+mycustomcssprotected|An 's gh'à mìa i permès necesâri per mudifichêr cla pàgina CSS ché.
+mycustomjsprotected|An 's gh'à mìa i permès necesâri per mudifichêr cla pàgina JavaScript ché .
+myprivateinfoprotected|An 's gh'à mìa i permès necesâri per cambiê 'l j infurmasiòun personêli.
+mypreferencesprotected|An 's gh'à mìa i permès necesâri per cambiêr al preferèinsi personêli.
+ns-specialprotected|An n'é mìa pusébil mudifichêr al pàgini specêli.
+titleprotected|Al tétol ed cla pagina ché l'é stê bluchê da [[User:~{0}\u007C~{0}]].\nCòst l'é al mutîv:"~{1}".
+filereadonlyerror|An n'é mìa stê pusébil mudifichêr al file "~{0}" perchè al depôsit di file "~{1}" a 's pōl sōl lēzer.\n\nL'aministradōr ch' al l'à bluchê l'à dê cla spiegasiòun ché:"~{2}".
+invalidtitle-knownnamespace|Tétol mìa vâlid cme spâsi di nòm "~{1}" e tèst "~{2}"
+invalidtitle-unknownnamespace|Tétol mìa vâlid cun spâsi di nòm mìa cgnusû "~{0}" e tèst "~{1}"
+exception-nologin|An t'é mìa gnû dèinter
+exception-nologin-text|Per andêr dèinter a cla pàgina ché o fêr còl ch'ét pèins ét gh'ê da fêr l'ingrès.
+exception-nologin-text-manual|Per prèir andêr dèinter a cla pàgina ché o fêr còl ch'ét pèins ét gh'ê da "~{0}".
+virus-badscanner|Erōr 'd impustasiòun: antivîrus mìa cgnusû:"~{0}"
+virus-scanfailed|Al cuntròl antivìrus l'é andê mêl (côdis ~{0})
+virus-unknownscanner|Antivìrus scgnusû:
+logouttext|'''An t'é pió coleghê.'''\n\nGuêrda che soquânti pàgini a prén vèdres incòra cme s'ét fós incòra coleghê, còst fintânt ch' an vîn mìa pulî la memôria dal tó navigadōr.
+welcomeuser|Beinvgnû, ~{0}
+welcomecreation-msg|Al j infurmasiòun per l'ingrès în stêdi dêdi  'n mōd gióst. An scurdêret mìa 'd dîr quèl' în al [[Special:Preferences\u007Cpreferèinsi in {{SITENAME}}]].
+yourname|Nòm utèint:
+userlogin-yourname|Nòm utèint
+userlogin-yourname-ph|Mèt dèinter al tó nòm utèint
+createacct-another-username-ph|Mèt dèinter al nòm utèint
+yourpassword|Cêva 'd ingrès:
+userlogin-yourpassword|Cêva 'd ingrès
+userlogin-yourpassword-ph|Mèt dèinter la tó cêva 'd ingrès
+createacct-yourpassword-ph|Mèt dèinter 'na cêva 'd ingrès
+yourpasswordagain|Scrév incòra la cêva 'd ingrès:
+createacct-yourpasswordagain|Cunfērma la cêva 'd ingrès
+createacct-yourpasswordagain-ph|Tōrna mèter dèinter la cêva 'd ingrès
+remembermypassword|Tîn a mèint la cêva 'd ingrès insém a cól navigadōr ché (per un mâsim ed ~{0}{{PLURAL:~{0}\u007Cdé}}).
+userlogin-remembermypassword|Sèimper coleghê
+userlogin-signwithsecure|Drōva un colegamèint sicûr
+yourdomainname|Precişêr al duméni:
+password-change-forbidden|An n'é mìa pusébil mudifichêr la cêva 'd ingrès insém a sté wiki.
+externaldberror|È sucès un erōr cun al terminêl ed certificasiòun ed validitê d'ed fōra, opór an 's gh'à mìa al j autorişasiòun necesâri per arnuvêr l' ingrès d'ed fōra.
+login|Và dèinter
+nav-login-createaccount|Và dèinter / Fà la tó inscrisiòun
+userlogin|Và dèinter / Fà la tó inscrisiòun
+userloginnocreate|Và dèinter
+logout|Và fōra
+userlogout|Và fōra
+notloggedin|An t'é mìa gnû dèinter
+userlogin-noaccount|Ét mìa incòra fât la registrasiòun?
+userlogin-joinproject|Da {{SITENAME}}
+nologin|An gh'èt mìa incòra un ingrès? ~{0}
+nologinlink|Fà la tó inscrisiòun
+createaccount|Fà la tó inscrisiòun
+gotaccount|Gh'èt bèle un ingrès? ~{0}
+gotaccountlink|Và dèinter
+userlogin-resetlink|T'ét e-scurdê la cêva p'r al tó ingrès?
+userlogin-resetpassword-link|T' ét scurdê la cêva 'd ingrès?
+userlogin-helplink2|Ajót per l'ingrès
+userlogin-loggedin|T'ét bèle coleghê {{GENDER:~{0}\u007C~{0}}}. \nDrōva al mōdul ché sòta cme un êter utèint.
+userlogin-createanother|Fà 'n' êtra utèinsa.
+createacct-emailrequired|Indirés pôsta eletrônica
+createacct-emailoptional|Indirés pôsta eletrônica (se 's vōl)
+createacct-email-ph|Scrév al tó indirés ed pôsta eletrônica
+createacct-another-email-ph|Scrév l'indirés ed pôsta eletrônica
+createaccountmail|Drōva 'na cêva 'd ingrès a chêş pruvişôria e spidésla a l'indirés ed pôsta eletrônica sgnê.
+createacct-realname|Al nòm vèira (se 's vōl)
+createaccountreason|Mutîv:
+createacct-reason|Mutîv
+createacct-reason-ph|Perchè ét drē fêr 'n' êtra utèinsa
+createacct-captcha|Cuntròl 'd sicurèsa
+createacct-imgcaptcha-ph|Mèt dèinter al tèst ch'é vèd ché sōver
+createacct-submit|Fà la tó utèinsa
+createacct-another-submit|Fà 'n' êtra utèinsa.
+createacct-benefit-heading|{{SITENAME}} crès grâsia a persòuni cme té.
+createacct-benefit-body1|{{PLURAL:~{0}\u007Cmudéfica\u007Cmudéfichi}}
+createacct-benefit-body2|{{PLURAL:~{0}\u007Cpàgina\u007Cpàgini}}
+createacct-benefit-body3|{{PLURAL:~{0}\u007Ciscrét nōv}}
+badretype|Al cêvi 'd ingrès scréti an cumbînen tra 'd lōr.
+userexists|Al nòm utèint scrét l'é bèle druvê.\nSiēlier 'n' êter nòm utèint.
+loginerror|Erōr 'd ingrès
+createacct-error|A gh'é stê un erōr ind al fêr l'utèinsa.
+createaccounterror|Imposébil fêr l'iscrisiòun: ~{0}
+nocookiesnew|La registrasiòun  an n' é mìa finîda, e an n'é mìa stê pusébil andêr dèinter a {{SITENAME}} perchè i cookie în blûchê. Tōrna fêr l'ingrès cun al nòm e la cêva 'd ingrès apèina fât dôp avèir şbluchê i cookie int al tó navigadōr.
+nocookieslogin|Per fêr l'ingrès a {{SITENAME}} a 's dēv druvêr i cookie che rişûlten bluchê. Tōrna fêr l'ingrès dôp avèir şbluchê i cookie int al tó navigadōr.
+nocookiesfornew|L'iscrisiòun utèint an n'é mìa stêda fâta, perchè òm mìa prû cunfermêr la só urégin. Veréfica 'd avèir şbluchê i cookie, tōrna carghêr cla pàgina ché e prōva incòra.
+noname|Al nòm utèint scrét an n'é mìa vâlid.
+loginsuccesstitle|Ingrès fât.
+loginsuccess|''' T'é stê coleghê al terminêl {{SITENAME}} cun al nòm utèint '''~{0}'''.
+nosuchuser|An n'é mìa registrê nisûn utèint cun al nòm "~{0}". I nòm utèin în sensébil al lètri grândi. Veréfica al nòm scrét o [[Special:UserLogin/signup\u007Cfà un nōv ingrès]].
+nosuchusershort|An gh'é mìa registrê un utèint ciamê ''~{0}''. Veréfica al nòm scrét.
+nouserspecified|L'é necesâri precişêr un nòm utèint.
+login-userblocked|Cl'utèinsa ché l'é bluchêda. An n'é pusébil fêr l'ingrès.
+wrongpassword|La cêv 'd ingrès e-scréta an n'é mìa giósta. Tōrna a pruvêr.
+wrongpasswordempty|An n'é mìa stê scrét nisóna cêva 'd ingrès. Tōrna pruvêr.
+passwordtooshort|La cêva 'd ingrès la dēv avèir almēno {{PLURAL:~{0}\u007C1 carâter\u007C~{0} carâter}}
+passwordtoolong|La cêva 'd ingrès la 'n pōl mìa avèir pió 'd {{PLURAL:~{0}\u007C1 carâter\u007C~{0} carâter}}
+password-name-match|La cêva 'd ingrès l'an dēv mìa èser cumpâgn al nòm utèint.
+password-login-forbidden|L'ûş de sté nòm e cêva 'd ingrès l'é stê pruibî.
+mailmypassword|Tōrna mèter la cêva 'd ingrès
+passwordremindertitle|Nōva cêva 'd ingrès pruvişôria per {{SITENAME}}
+passwordremindertext|Quelchiûn (prubabilmèit té, cun l'indirés IP ~{0}) l'à dmandê de spidîregh 'na nōva cêva 'd ingrès a {{SITENAME}} (~{3}). 'Na nōva cêva 'd ingrès pruvişôria per l'utèint "~{1}" l'é stêda impustêda a "~{2}". L'é necesâri fêr un ingrès al pió prèst e cambiêr la cêva 'd ingrès subét. La cêva 'd ingrès pruvişôria la scadrà dôp {{PLURAL:~{4}un dé\u007C~{4} dé}}. S' an t'é mia stê té a fêr la dmânda, opór t'é turnê a catêr la vècia cêva 'd ingrès e an 't vō pió cambiêrla, ét pō trascurêr cól mesâg ché e cuntinvêr a druvêr la vècia cêva 'd ingrès.
+noemail|Nisûn indirés ed pôsta eletrônica registrê per l'utèint ~{0}.
+noemailcreate|L'é necesâri dêr un 'indirés ed pôsta eletrônica vâlid.
+passwordsent|'Na nōva cêva 'd ingrès l'é stêda spidîda a l'indiré ed pôsta eletrônica per l'utèint "~{0}". Per piaşèir, fà un ingrès apèina 't la ricēv.
+blocked-mailpassword|Per pervèder abûş, an n'é mìa permès druvêr la funsiòun "spidés 'na nōva cêva 'd ingrès" da un indirés IP bluchê.
+eauthentsent|Un mesâg ed cunfèirma l'é stê spidî a l'indirés ed pôsta eletrônica sgnê ché. L'utèint per prèir inviêr di mesâg ed pôsta eletrônica al dēv andêr a drē al j istrusiòun scréti, in môd da cunfermêr ch' l'é ló al legétim proprietâri 'd l'indirés.
+throttled-mailpassword|Un mesâg ed pôsta eletrônica 'd arnōv ed la cêva 'd ingrès l'é bèle stê inviê da mēno 'd {{PLURAL:~{0}\u007C1 ōra\u007C~{0} ōri}}. Per pervèder abûş, la funziòun 'd arnōv ed la cêva 'd ingrès la pōl èser druvêda sōl 'na vôlta ògni {{PLURAL:~{0}\u007C1 ōra\u007C~{0} ōri}}.
+mailerror|Erōr int la spedisiòun dal mesâg ~{0}
+acct_creation_throttle_hit|{{PLURAL:~{0}\u007C1 registrasiòun l'é bèle stêda fâta \u007C~{0} registrasiòun în bèle stêdi fâti}} da quelchidûn cun al tó 'stès indirés IP int l'ûltem dé: l'é al mâsim permés in cól peréiod ed tèimp ché. Per còst j utèint che drōven cl 'indirés IP ché, p'r al mumèint,  an 's pōl mìa registrêr.
+emailauthenticated|L'indirés ed pôsta eletrônica l'é stê cunfermê al ~{1} al ~{2}.
+emailnotauthenticated|L'indirés ed pôsta eletrônica an n'é mìa incòra stê cunfermê.\nA gnirâ mìa spidî mesâg ed pôsta eletrônica p'r al funsiòun in elèinch ché sòta.
+noemailprefs|Scréver un indirés ed pôsta eletrônica per fêr funsionêr st' al funsiòun.
+emailconfirmlink|Cunfèirma al tó indirés ed pôsta eletrônica
+invalidemailaddress|L'indirés ed pôsta eletrônica scrét in 'na manēra mìa vâlida.\nScrév un indirés vâlid o vōda la caşèla.
+cannotchangeemail|In cól wiki ché j indiré ed pôsta eletrônica an pōlen mìa èser cambiê.
+emaildisabled|Cól sît ché an pōl mia spidîr mesâg ed pôsta eletrônica.
+accountcreated|Ingrès fât
+accountcreatedtext|È stê fât 'n'utèisa per [[{{ns:User}}:~{0}\u007C~{0}]] ([[{{ns:User talk}}:~{0}\u007Cmsg]]).
+createaccount-title|Per fêr un inscrisiòun a {{SITENAME}}
+createaccount-text|Quelchidûn l'à fât un inscrisiòun a  {{SITENAME}} (~{3}) a nòm ed ~{1} coleghê a cl'indirés ed pôsta eletrônica ché. La cêva 'd ingrès per l'utèint "~{1}" l'é  impustêda a "~{2}". \nÉ necesâri fêr un ingrès préma ch' es pôl e cambiêr subét la cêva 'd ingrès. \nSe l'inscrisiòun l'é stêda fâta per şbâli, es pōl scanşlêr sté mesâg.
+login-throttled|În stê fât trôp tentatîv 'd ingrès in pôch tèimp. Spèta ~{0} e pó tōrna pruvêr.
+login-abort-generic|An t'é mìa stê arcgnusû - Scanşlê
+login-migrated-generic|La tó utèinsa l'é stêda spustêda, e al tó nòm utèint al gh'é mìa pió in sém a cla wiki ché.
+loginlanguagelabel|Léngva: ~{0}
+suspicious-userlogout|La tó dmânda per destachêret l'é stēda rifiutêda perchè la sèmbra spidîda da un navigadōr ch' al funsiòuna mìa o da un proxy di caching.
+createacct-another-realname-tip|Druvêr al nòm vèira l'é 'na siēlta personêla; s' es pèinsa 'd druvêrel al gnirâ uşê per dêr la paternitê di lavōr spidî.
+pt-login|Và dèinter
+pt-login-button|Và dèinter
+pt-createaccount|Fà la tó inscrisiòun
+pt-userlogout|Và fōra
+php-mail-error-unknown|Erōr mìa cngusû int la funsiòun PHP mail().
+user-mail-no-addy|T'é serchê de spidîr un mesâg cun la pôsta eletrônica sèinsa 'n indirés.
+user-mail-no-body|A s'é serchê de spidîr un mesâg ed pôsta eltrônica vōd o dimòndi cûrt.
+changepassword|Câmbia la cêva 'd ingrès
+resetpass_announce|Per finîr l'ingrès, l'é necesâri impustêr 'na nōva cêva 'd ingrès.
+resetpass_header|Câmbia la cêva 'd ingrès ed l'inscrisiòun.
+oldpassword|Cêva 'd ingès vècia:
+newpassword|Nōva cêva 'd ingrès:
+retypenew|Scrév incòra la nōva cêva 'd ingrès:
+resetpass_submit|Scrév la cêva 'd ingrès e và dèinter al sît
+changepassword-success|La cêva 'd ingrès l'é stêda nudifichêda!
+changepassword-throttled|În stê fât trôp tentatîv 'd ingrès in pôch tèimp. Spèta ~{0} e pó tōrna pruvêr.
+resetpass_forbidden|An 'né mìa pusébil mudifichêr la cêva 'd ingrès
+resetpass-no-info|Per andêr dèinter a cla pàgina ché 't gh'ê da fêr l'ingrès.
+resetpass-submit-loggedin|Câmbia la cêva 'd ingrès
+resetpass-submit-cancel|Scanşèla
+resetpass-wrong-oldpass|Cêva 'd ingrès pruvişôria o còla 'd adès mìa vâlida.\nLa cêva 'd ingrès la pré èser stêda bèle cambiêda, opór n'in pré èser stê dmandê 'na nōva pruvişôria.
+resetpass-recycled|Mèt dèinter 'na cêva 'd ingrès divêrsa da còla 'd adès.
+resetpass-temp-emailed|L'ingrès l'é stê fât cun un côdis pruvişôri. Per finîr la registrasiòun, l'é necesâri impustêr 'na nōva cêva 'd ingrès ché:
+resetpass-temp-password|Cêva 'd ingrès pruvişôria:
+resetpass-abort-generic|La mudéfica 'd la cêva 'd ingrès l'é stêda fermêda da un şlungamèint.
+resetpass-expired|La cêva 'd ingrès l'é scadûda. Mèt dèinter 'na cêva 'd ingrès nōva per fêr l'ingrès.
+resetpass-expired-soft|La tó cêva 'd ingrès l'é scadûda. T'é perghê ed siēlier 'na nōva o clichêr insém a "{{int:resetpass-submit-cancel}}" per turnêrla a mèter dèinter in sègvit.
+resetpass-validity-soft|La tó cêva 'd ingrès an n'è mìa vâlida:~{0}. \n\nT'é perghê ed siēlier 'na nōva o clichêr insém a "{{int:resetpass-submit-cancel}}" per turnêrla a impustêr in sègvit.
+passwordreset|Câmbia la cêva 'd ingrès
+passwordreset-text-one|Impés cól môdul ché per  turnêr a impustêr la tó cêva 'd ingrès.
+passwordreset-text-many|{{PLURAL:~{0}\u007CImpés ûn di câmp per ricēver 'na cêva 'd ingrès pruvişôria per mèz ed la pôsta eletrônica}}
+passwordreset-legend|Tōrna mèter la cêva 'd ingrès
+passwordreset-disabled|In cla wiki ché an pōlen mia turnêr impustêr al cêvi 'd ingrès
+passwordreset-emaildisabled|In cla wiki ché è stê bluchê al funsiòun ed la pôsta eletrônica.
+passwordreset-username|Nòm utèint:
+passwordreset-domain|Proprietê:
+passwordreset-capture|Vōt vèder còl che dèinter int al mesâg ed pôsta eletrônica?
+passwordreset-capture-help|S' es sernés cla caşèla ché, l'indirés ed pôsta eletrônica (cun la cêva 'd ingrès pruvişôria), év vîn fâ vèder, d'ed là 'd èser spidî a l'utèint.
+passwordreset-email|Indirés pôsta eletrônica
+passwordreset-emailtitle|Particulêr ed l'utèint só {{SITENAME}}
+passwordreset-emailtext-ip|Quelchidûn (prubabilmèint té, cun l'indirés IP ~{0}) l'à dmandê de spidîregh 'na nōva cêva 'd ingrès per andêr dèinter a {{SITENAME}} (~{3}). {{PLURAL:~{2}\u007CL'utèint inscrét\u007C J utèint inscrét}} a sté indirés ed pôsta eletrônica în:\n \n~{1} \n\n{{PLURAL:~{2}\u007CCla cêva 'd ingrès pruvişôria la scadrà\u007C St' al cêvi 'd ingrès pruvişôri ché scadrân}} dôp {{PLURAL:~{4}\u007Cûn dé\u007C~{4} dé}}. Ét duvrés andêr dèinter e sernîr 'na cêva 'd ingrès nōva adès. \n\nSe t'é mìa stê té a fêr la dmânda, o s' ét t'é ricurdê la cêva 'd ingrès uriginêla e an 't vō mia pió cambiêrla, ét pō scanşlêr cól mesâg ché e cuntinvêr a druvêr la tó cêva 'd ingrès vècia.
+passwordreset-emailtext-user|L'utèint ~{0} ed {{SITENAME}} l'à dmandê de spidîregh 'na nōva cêva 'd ingrès per andêr dèinter a {{SITENAME}} (~{3}). {{PLURAL:~{2}\u007CL'utèint inscrét\u007C J utèint inscrét}} a sté indirés ed pôsta eletrônica în:\n\n~{1} \n\n{{PLURAL:~{2}\u007CCla cêva 'd ingrès pruvişôria ché la scadrà\u007C St' al cêvi 'd ingrès pruvişôri ché scadrân}} dôp {{PLURAL:~{4}\u007Cûn dé\u007C~{4} dé}}. Ét duvrés andêr dèinter e sernîr 'na cêva 'd ingrès nōva adès. \n\nSe t'é mìa stê té a fêr la dmânda, o s' ét t'é ricurdê la cêva 'd ingrès uriginêla e an 't vō mia pió cambiêrla, ét pō scanşlêr cól mesâg ché e cuntinvêr a druvêr la tó cêva 'd ingrès vècia
+passwordreset-emailelement|Nòm utèint: ~{0}.\nCêva 'd ingrès pruvişôria: ~{1}
+passwordreset-emailsent|É stê spidî un mesâg ed pôsta eletrônica per turnêr a impustêr la cêva 'd ingrès.
+passwordreset-emailsent-capture|É stê spidî un mesâg ed pôsta eletrônica per turnêr a impustêr la cêva 'd ingrès, ché sòta a gh'é al tèst che gh'é scrét.
+passwordreset-emailerror-capture|É stê fât un mesâg ed pôsta eletrônica per turnêr a impustêr la cêva 'd ingrès, scréta ché 'd sègvit. La spedisiòun {{GENDER:~{1}\u007Ca l'utèint}} an n'é mia 'riusîda:~{0}
+changeemail|Câmbia l'indirés ed la pôsta eletrônica
+changeemail-text|Impés sté mòdul per cambiêr al tó indirés ed pòsta eletrônica. A srà necesâri mèter dèinter la cêva 'd ingrès per cunfermêr la mudéfica.
+changeemail-no-info|Per andêr dèinter diretamèint a cla pàgina ché 't gh'ê da fêr l'ingrès.
+changeemail-oldemail|L'indirés ed la pôsta eletrànica 'd adès.
+changeemail-newemail|Nōv indirés ed pàsta eletrônica:
+changeemail-none|(nisûn)
+changeemail-password|La cêva 'd ingrès só {{SITENAME}}:
+changeemail-submit|Cambiêr l'indirés ed pôsta eletrônica
+changeemail-throttled|În stê fât trôp tentatîv 'd ingrès in pôch tèimp. Spèta ~{0} e pó tōrna pruvêr dôp.
+resettokens|Tōrna 'd impustêr la cêva
+resettokens-text|Ché 't pō turnêr a impustêr al cêvi ch'ét permèten l'ingrès a precîşi infurmasiòun privêdi lighêdi a la tó utèinsa. Ét duvrés fêrel se per chêş ét j ê spartîdi cun quelchidûn o se al j infurmasiòun ed la tó utèinsa în  in perécol.
+resettokens-no-tokens|An gh'é mìa di token da turnêr a impustêr.
+resettokens-legend|Tōrna 'd impustêr la cêva
+resettokens-tokens| Token:
+resettokens-token-label|~{0} (valōr 'd adèsa: ~{1})
+resettokens-watchlist-token|Token p'r al feed web (Atom/RSS) dal [[Special:Watchlist\u007Cmudéfichi al pàgini ch'ét tîn sòt' ôc]]
+resettokens-done|Token turnê a impustêr.
+resettokens-resetbutton|Més a zēro i token sernî
+extlink_sample|http://www.example.com tétol dal colegamèint
+extlink_tip|Colegamèin d'ed fōra (ricôrdet ed mèter préma http://)
+nowiki_sample|Mèt dèinter ché al tèst mìa furmatê
+nowiki_tip|An badêr mìa la furmatasiòun wiki
+image_tip|Mèt dèinter al file
+media_tip|Colegamèint al file
+sig_tip|Fîrma cun la dâta e l'ōra
+hr_tip|Rîga spiâna (drōva cun giudési)
+summary|Ogèt:
+subject|Argumèint (tétol):
+minoredit|Còsta l'é 'na mudéfica céca
+watchthis|Tîn adrē a cla pàgina ché
+savearticle|Sêlva la pàgina
+preview|Guêrda préma
+showpreview|Guêrda préma 'd salvêr
+showdiff|Guêrda i cambiamèint
+blankarticle|<strong>Atèinti:</strong>la pàgina che t'é drē fêr la gh'à gnînto dèinter. S' ét tōren a schisêr in sém a "{{int:savearticle}}", la pàgina la srà fât sèinsa gnînto dèinter.
+anoneditwarning|<strong>Atèinti:</strong> An n'é mìa stê fât l'ingrès. S' ét farê dal mudéfichi al tó indirés IP al srà vést da tót. Se <strong>[~{0} và dèinter]</strong> o <strong>[~{1} fà 'n' utèinsa]</strong>, al tô mudéfichi a srân sgnêdi al tó nòm utèint, insèm a êter benefési.
+anonpreviewwarning|"An n'é mìa stê fât l'ingrès. Mèinter es sêlva la pàgina, l'indirés IP al srà sgnê int la stòria 'd la pàgina."
+missingsummary|'''Atensiòun:''' an n'é mìa stê precişê al mutîv de sté mudéfica. S'es tōrna a clichêr insém a "{{int:savearticle}}" la mudéfica la gnirà salvêda cun al mutîv vōd.
+selfredirect|<strong>Ateinti:</strong>t'é drē fêr un rinvéi a l'istèsa pàgina. Ét prés avèir şbaliê sgnêr al pôst dal rinvéi o t'é drē mudifichêr la pàgina şbaliêda. S'ét fê cléch incòra in sém a "{{int:savearticle}}", al rinvéi al gnirà fât in tót' al manēri.
+missingcommenttext|Scréver un cumèint ché sòta.
+missingcommentheader|'''Atensiòun:''' an n'é mìa stê precişê al mutîv/al tétol de sté mudéfica. S'es tōrna a clichêr insém a "{{int:savearticle}}" la mudéfica la gnirà salvêda sèinsa tétol.
+summary-preview|Guêrda préma sûnt:
+subject-preview|Guêrda préma argumèint/tétol:
+previewerrortext|A gh'é stê 'n erōr mèinter a s'é serchê ed guardêr al lavōr préma 'd salvêrel.
+blockedtitle|Utèint bluchê
+blockedtext| '''Al tō nòm utèint o indirés IP l'é stê bluchê.'''\n\nAl blôch l'é stê fât da ~{0}. Al mutîv dal blôch l'é còst:  ''~{1}''.\n\n*Inési dal blôch: ~{7}\n*Scadèinsa dal blôch: ~{5}\n*Intervâl ed blôch: ~{6}\n\nS' ét vō, l'é pusébil mètres in cuntât cun ~{0} o 'n êter [[{{MediaWiki:Grouppage-sysop}}\u007Caministradōr]] per discóter dal blôch.\n\nGuêrda che la funsiòun 'Scrév a l'utèint' an n'é mìa in ôvra s' an n'é mìa stê registrtê un indirés ed pôsta eletrônica vâlid int al tō [[Special:Preferences\u007C preferèinsi]] o se sté funsiòun l'é stêda bluchêda. L'indirés IP 'd adèsa l'é ~{2}, al nóme ID dal blôch l'é #~{4}. T'é perghê ed precişêr tót j elemèint ed préma per ògni dmânda de spiegasiòun
+autoblockedtext|Cl'indirés IP ché l'è stê bluchê in avtomâtich perché spartî cun 'n êter utèint, bluchê ânca ló da ~{0}. Al mutîv dal blôch l'é còst:\n\n''~{1}''\n \n*Inési dal blôch: ~{7} \n*Scadèinsa dal blôch: ~{5} \n*Intervâl ed blôch: ~{6}\n \nS' ét vō, l'é pusébil mètres in cuntât cun ~{0} o 'n êter [[{{MediaWiki:Grouppage-sysop}}\u007Caministradōr]] per dmandêr spiegasiòun insém al blôch. Guêrda che la funsiòun 'Scrév a l'utèint' an n'é mìa in ôvra s' an n'é mìa stê registrtê un indirés ed pôsta eletrônica vâlid int al tō [[Special:Preferences\u007C preferèinsi]] e, in tót al manēri, se int al tachêr al blôch, sté funsiòun l'é stêda bluchêda. L'indirés IP 'd adèsa l'é ~{2}, al nóme ID dal blôch l'é #~{4}. T'é perghê ed precişêr tót j elemèint ed préma per ògni dmânda de spiegasiòun
+blockednoreason|nisûn mutîv sgnê
+whitelistedittext|Per mudifichêr al pàgini è necesâri ~{0}.
+confirmedittext|Per avèir al permès ed mudufichêr dal pàgini l'è necesâri cunfermêr al tó indirés ed pôsta eletrônica.\nPer impustêr e cunfermêr l'indirés dervîres dal [[Special:Preferences\u007Cpreferèinsi]].
+nosuchsectiontitle|Impusébil catêr la sesiòun
+nosuchsectiontext|A  t' é pruvê 'd mudifichêr 'na sesiòun ch' l' an gh'è mìa. La pré èser stêda spustêda e scanşlêda mèinter t'ēr adrē vèder la pàgina.
+loginreqtitle|Ingrès e-dmandê
+loginreqlink|fêr l'ingrès
+loginreqpagetext|Per vèder dal j êtri pàgini è necesâri ~{0}.
+accmailtitle|Cêva 'd ingrès spidîda.
+accmailtext|'Na cêva 'd ingrés l'è stêda fâta a chêş per [[User talk:~{0}\u007C~{0}]] e l'è stêda spidîda a ~{1}. Cla cêva 'd ingrès ché la pōl èser cambiêda int la pàgina per ''[[Special:ChangePassword\u007Ccambiêr la cêva 'd ingrès]]'' subét dôp avèir fât l'ingrès.
+newarticle|(Nōv)
+newarticletext|Al colegamèint apèina fât al cumbîna cun 'na pàgina ch' an n'é mìa incòra stêda fâta. S'ét vō fêr la pàgina adès, l'é asê cumincêr a scréver al tèst int la caşèla ché sòt (per vedèr infurmasiòun pió precîşi guêrda la [~{0} pàgina 'd ajót]). Se al colegamèint  l'é stê avêrt per erōr, l'é asê clichêr al pulsânt "Indrē" dal tó navigadōr.
+anontalkpagetext|----'' Còsta l'è la pàgina 'd discusiòun ed 'n utèint sèinsa nòm, ch' an n' à mìa incòra fât 'n' utèinsa o in tót al manēri an n'è mìa drē druvêrla. Per arcgnòsrel l'è dòunca necesâri druvê al só indirés IP. J indirés IP a pōlen èser spartî cun êter utèint. Se t'è un utèint sèinsa nòm e 't pèins che i cumèint in cla pàgina ché an riguêrden mìa tè, [[Special:UserLogin/signup\u007Cfa 'n' utèinsa nōva]] o [[Special:UserLogin\u007Cvîn dèinter cun còla ch' ét gh'ê bèle]] per schivşêr, in futûr,  'd èser cunfûş cun 'd j êter utèint sèinsa nòm.''
+noarticletext|In cól mumèint ché la pàgina serchêda l'é vōda. L'é pusébil [[Special:Search/{{PAGENAME}}\u007Cserchêr sté tétol]] int al j êtri pàgini dal sît, <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} serchêr int i regéster coleghê] opór  [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} mudifichêr la pàgina adèsa]</span>.
+noarticletext-nopermission|In cól mumèint ché la pàgina serchêda l'é vōda. L'é pusébil [[Special:Search/{{PAGENAME}}\u007Cserchêr sté tétol]] int al j êtri pàgini dal sît o<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} serchêr int i regéster coleghê] <span>, mó an 't gh'ê mìa al permès ed fêr cla pàgina ché.
+missing-revision|La revişiòun #~{0} 'd la pagina "{{FULLPAGENAME}}" l' an gh'è mìa. Còst, ed sôlit, a sucēd mèint'r as va drē a 'n colegamèint a 'na pàgina scanşlêda, in 'na stòria, di lavōr fât, mìa arnuvêda. I particulêr a 's pōlen catêr int al [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} regéster dal scanşladûri].
+userpage-userdoesnotexist|L'inscrisiòun "<nowiki>~{0}</nowiki>" la cumbîna mìa cun 'n utèint registrê. Ét sicûr ed vrèir fêr o mudifichêr cla pàgina ché.
+userpage-userdoesnotexist-view|L'utèin "~{0}" an n'à mìa fât l'inscrisiòun.
+blocked-notice-logextract|Cl'utèint ché adèsa l'é bluchê. \nPer infurmasiòun l'ûltem elemèint dal regéster di blôch l'é scrét ché sòta:
+clearyourcache|'''Nôta:''' dôpa vèir salvê a pré èser necesâri pulîr la memôria pruvişôria dal navigadôr per vèder i cambiamèint.\n*'''Firefox / Safari''': tgnîr cucê al tâst dal lètri grândi e clichêr insém a "Ricarica" opór cucêr i tâst ''Ctrl-F5'' o ''Ctrl-R'' (''⌘-R'' insém a un Mac)\n*'''Google Chrome''': cucêr i tâst ''Ctrl-Shift-R'' (''⌘-Shift-R'' insém a un Mac) \n*'''Internet Explorer''': tgnîr cucê al tâst ''Ctrl'' mènter es fà cléch insém a ''Refresh'', opór cucêr ''Ctrl-F5'' \n*'''Opera''': svudêr dal tót la memôria pruvişôria 'd la lésta ''Strumenti → Preferenze''
+usercssyoucanpreview|'''Cunséli:''' drōva al tâst 'Guêrda préma' per pruvêr al tó nōv CSS préma 'd salvêrel'''
+userjsyoucanpreview|'''Cunséli:''' drōva al tâst 'Guêrda préma' per pruvêr al tó nōv  JavaScript préma 'd salvêrel'''
+usercsspreview|'''Còsta l'é sōl 'na guardêda al tó CSS préma 'd salvêr al mudéfichi ch'în stêdi fâti.Ricôrdet che al mudéfichi în mìa incòra stêdi salvêdi!'''
+userjspreview|'''Còsta l'é sōl 'na guardêda préma 'd salvêr al mudéfichi per pruvêr al tó JavaScript personêl. Ricôrdet che al mudéfichi în mìa incòra stêdi salvêdi!'''
+sitecsspreview|'''Còsta l'é sōl 'na guardêda 'l CSS préma 'd salvêrel. Ricôrdet che al mudéfichi în mìa incòra stêdi salvêdi!'''
+sitejspreview|'''Còsta l'é sōl 'na guardêda préma per pruvêr al JavaScript. Ricôrdet che al mudéfichi în mìa incòra stêdi salvêdi!'''
+userinvalidcssjstitle|'''Atensiòun:''' An gh'é nisóna skin cun al nòm "~{0}". As fà nutêr che al pàgini per i .css e .js personêl a gh'àn la préma lètra dal tétol in céch, per eşèimpi {{ns:user}}:Eşèimpi/vector.css e non {{ns:user}}:Eşèimpi/Vector.css.
+updated|(Arnuvê)
+note|'''Nôta:'''
+previewnote|'''Ricôrdet che còsta l'é sōl 'na guardêda préma 'd salvêr.'''\nAl tō mudéfichi în MIA incòra stêdi salvêdi.
+continue-editing|Và int la zôna 'd mudéfica
+previewconflict|La vésta la cumbîna cun al tèst int la zôna 'd mudéfica tèst ché d'ed sōver e l'é cme la srà la pàgina s'ed decéd ed clichêr insém a "Sêlva la pàgina" in cól mumèint ché.
+session_fail_preview|'''An n'é mìa stê pusébil registrêr la mudéfica perchè a s' în pêrsi al j infurmasiòun relatîvi a la sesiòun. Tōrna a pruvêr. Se al prublēma al cunténva, a 's pōl pruvêr [[Special:UserLogout\u007Ced coleghêres]] e fêr un ingrès nōv.'''
+session_fail_preview_html|'''An n'é mìa stê pusébil registrêr la mudéfica perchè în andêdi persi al j infurmasiòun relatîvi a la sesiòun.'''\n\n''Pôst che in {{SITENAME}} a gh'é al permès ed druvêr l' HTML sèinsa lémit, an 's pōl mìa guardêr préma la pàgina mudifichêda; a 's trâta ed 'n'amzûra 'd sicurèsa cûntra j atâch JavaScript.''\n\n''' Se còst l'é un tentatîv legétim ed mudéfica, pruvêr incòra. Se al prublēma l'armâgn, a 's pōl pruvêr a [[Special:UserLogout\u007Csarêr al colegamèint]] e fêr un nōv ingrès.'''
+token_suffix_mismatch|'''La mudéfica an n'é mìa stêda salvêda perchè al ''client'' l'à fât vèder ed gestîr in môd e-sbaliê i carâter di pûn e dal virgûli int al ''token'' lighê a la mudéfica. Per schivşêr di pusébil erōr int al tèst ed la pàgina, è stê rifiutê tóta la mudéfica. Dla vôlti cla situasiòun ché la pōl sucēder quând a vînen druvê soquânt servési ''proxy'' sèinsa nòm via internèt che preşèinten di ''bug''.'''
+edit_form_incomplete|'''Soquânti pêrt dal môdul ed mudéfica în mìa rivêdi al ''server''; controlêr che al mudéfichi sién intâti e turnêr a pruvêr'''
+editing|Mudéfica ed ~{0}
+creating|T'é drē fêr ~{0}
+editingsection|Mudéfica ed ~{0} (sesiòun)
+editingcomment|Mudéfica e ~{0} (sesiòun nōva)
+editconflict|Cuntrâst 'd edisiòun só ~{0}
+explainconflict|Un êter utèint l'à salvê 'na nōva versiòun ed la pàgina mèinter t'ēr adrē fêr dal mudéfichi. Int la caşèla 'd mudéfica ché 'd sōver a gh'é al tèst ed la pàgina che adès l'é in lénia, acsé cme l'é stêda salvêda da cl'êter utèint. La versiòun cun al tō mudéfichi invēci l'é int la caşèla dal mudéfichi ché sòta. S' ét vō cunfermêri, ét dēv purtêr al tō mudéfichi int al tèst che gh'é bèle (caşèla ché 'd sōver). Se té schés al ptòun '{{int:savearticle}}', a gnirà salvê '''sōl''' al tèst dèinter a la caşèla 'd mudéfica ché 'd sōver.
+yourtext|Al tó tèst
+storedversion|La versiòun in memôria
+nonunicodebrowser|'''Atèinti: a s'é drē druvêr un navigadōr ch' al và mìa d' acôrdi cun i carâter ''Unicode''. Per permèter la mudéfica dal pàgini sèinsa fêr d' incunveniĵnt, int la caşèla ed mudéfica i carâter mia ASCII a vînen fât vèder cme côdis eşadecimêl.'''
+editingold|<strong>Atèinti: a s'é drē mudifichêr 'na versiòun mìa arnuvêda 'd la pàgina.</strong> \nS'es pèinsa ed salvêrla, tót i cambiamèint fât dōp cla mudéfica ché andrân pêrs.
+yourdiff|Diferèinsi
+copyrightwarning|Per piaşèir tîn cûnt che tót al colaborasiòun a {{SITENAME}} a vînen cunsidrêdi publichêdi sòta la licèinsa ~{1} (per i particulêr guêrda ~{0}). S' an 't vō mìa che i tō tèst a pôsen èser cambiê e turnê a publichêr da tót sèinsa lémit, an publichêri mìa ché.<br /> In pió, se 't  i póblich ché, a 't dichiâr, sòta la tó responsabilitê, che còl ch' è stê scrét a 't l'ê scrét té personalmèint opór l'é ste cupiê da documèint sèinsa ch' al sìa quacê da nisûn dirét 'd autōr. <strong> Ché insém an pubblichêr mìa materiêl quacê da dirét 'd autōr sèinsa autorişâsiòun! </strong>
+copyrightwarning2|Per piaşèir tîn cûnt che tót al colaborasiòun a {{SITENAME}} a pōlen èser mudifichê, arversê o scanşlê da êtra gînta cla dà 'na mân. S' an 't vō mìa che i tō tèst a pôsen èser cambiê alōra an publichêri mìa ché.<br />In pió, se 't  i póblich ché, a 't dichiâr, sòta la tó responsabilitê, che còl ch' è stê scrét a 't l'ê scrét té personalmèint opór l'é ste cupiê da documèint sèinsa ch' al sìa quacê da nisûn dirét 'd autōr (per i particulêr guêrda ~{0}). <strong> Ché insém an pubblichêr mìa materiêl quacê da dirét 'd autōr sèinsa autorişâsiòun! </strong>
+longpageerror|<strong> Erōr: al tèst spidî l'é lòngh {{PLURAL:~{0}\u007C1\u007C~{0}}} kilobyte, ch'l'é pió grôs ed l'amzûra mâsima permésa ({{PLURAL:~{1}\u007C1\u007C~{1}}} kilobyte). </strong> Al tèst al pôl mìa èser salvê.
+readonlywarning|<strong>Atensiòun: al databêş l'é stê bluchê per justadûri e dòunca l'é impusébil salvê al mudéfichi in cól mumèint ché.</strong> P'r an pêrdi mìa, l'é pusébil cupiêri còl ch' é stê més dèinter fîn a dès int la caşèla di cambiamèint, incolêrel in un prugrâma tèst e salvêrel per spetêr al şblôch dal databêş. \n\nL'aministradōr ch' l'à bluchê al databêş l'à dê cla spiegasiòun ché: ~{0}
+protectedpagewarning|<strong> Atensiòun: cla pàgina ché l'é stêda bluchêda in môd che sōl j utèint cun i privilèg 'd aministradōr a pôsen cambiêrla.</strong> \nPer infurmasiòun ché 'd sègvit a vîn scrét l'ûltem elemèint dal regéster:
+semiprotectedpagewarning|<strong>Nôta:</strong> cla pàgina ché l'é stêda bluchê in môd che sōl j utèint registrê a pôsen cambiêrla. \nPer infurmasiòun ché 'd sègvit è scrét l'ûltem elemèint dal regéster.
+cascadeprotectedwarning|<strong> Atensiòun: </strong>cla pàgina ché l'é stêda bluchêda in môd che sōl j utèint cun i privilèg 'd aministradō a pôsen cambiêrla. Còst a sucēd perchè la pàgina l'é dèinter in cl'elèinch sòta protesiòun ché 'd sègvit {{PLURAL:~{0}\u007Cpàgina\u007Cpàgini}}
+titleprotectedwarning|<strong> Atensiòun: cla pàgina ché l'é stêda bluchêda in môd che, per fêrla, sién necesâri [[Special:ListGroupRights\u007Cdirét specêl]] </strong> \nPer infurmasiòun ché 'd sègvit è scrét l'ûltem elemèint dal regéster.
+templatesused|{{PLURAL:~{0}\u007CMudèl druvê\u007CMudē druvê}} in cla pàgina ché:
+templatesusedpreview|{{PLURAL:~{0}\u007CMudèl druvê\u007CMudē druvê}} in cla pàgina 'd contròl ché:
+templatesusedsection|{{PLURAL:~{0}\u007CMudèl druvê\u007CMudē druvê}} in cla sesiòun ché:
+template-protected|(prutèt)
+template-semiprotected|(mèz-prutèt)
+hiddencategories|Cla pàgina ché l' é 'd {{PLURAL:~{0}\u007C'na categoréia lughêda\u007C~{0} categoréi lughêdi}}:
+nocreatetext|La pusibilitê ed fêr dal pàgini nōvi insém a {{SITENAME}} l'é stêda limitêda a sōl j utèint registrê. L'é pusébil turnê indrē e mudifichêr 'na pògina ch la gh'é bèle,opór [[Special:UserLogin\u007Candêr dèinter o registrêres]].
+nocreate-loggedin|An 's gh'à mìa i permès necesâri per fêr dal pàgini nōvi.
+sectioneditnotsupported-title|Mudéfica dal sesiòun mìa sustgnûda.
+sectioneditnotsupported-text|Mudéfica dal sesiòun mìa sustgnûda in cla pàgina ché.
+permissionserrors|I permès în mìa asê
+permissionserrorstext|An 's gh'à mìa i permès necesâri per fêr còl ch'es pèinsa ed fêr per{{PLURAL:~{0}\u007Ccól mutîv ché\u007Cchi mutîv ché}}:
+permissionserrorstext-withaction|An 's gh'à mìa i permès necesâri per ~{1}, per {{PLURAL:~{0}\u007Ccól mutîv ché\u007Cchi mutîv ché}}:
+recreate-moveddeleted-warn|'''Atensiòun: a s'é drē serchêr ed fêr 'na pàgina bèle scanşlêda tèimp fa'''. \n\nAsicurêres che sìa dabòun necesâri cuntinvêr a mudifichêr cla pàgina ché.\nPer cumditê còst l'é l'èlèinch dal scanşladûri e di spustamèint relatîv a la pàgina.
+moveddeleted-notice|Cla pàgina ché l'é stêda scanşlêda. Per infurmasiòun  còst l'é l'èlèinch relatîv dal scanşladûri e di spustemèint fât.
+log-fulllog|Guêrda la stòria dal registrasiòun
+edit-hook-aborted|La mudéfica l'é stêda scanşlêda da l' hook.\nAn n'é mìa stê dê nisóna spiegasiòun.
+edit-gone-missing|Impusébil arnuvêr la pàgina. \nA sèmbra ch'la sìa stêda scanşlêda.
+edit-conflict|Cuntrâst 'd edisiòun.
+edit-no-change|La mudéfica an n'é mìa stêda cunsidrêda perchè an n'é mìa stê fât di cambiamèint al tèst.
+postedit-confirmation-created|La pàgina l'é stêda fâta
+postedit-confirmation-restored|La pàgina l'é stêda turnêda a mèter
+postedit-confirmation-saved|La mudéfica l'é stêda salvêda.
+edit-already-exists|L'é impusébil fêr 'na pàgina nōva.\nLa ghé bèle.
+defaultmessagetext|Tèst pre-stabilî
+content-failed-to-parse|L'é impusébil cunsidrêr ~{1} p'r al mudèl ~{0}:~{2}
+invalid-content-data|Al j infurmasiòn ché dèinter în mìa vâlidi.
+content-not-allowed-here|Còl che gh'é dèinter a"~{0}" an n'é mìa permés int al pàgini [[~{1}]]
+editwarning-warning|Bandunêr cla pàgina ché a 's pré pêrder tóti 'l mudéfichi fâti. Se t'é fât l'ingrès, ét pō bluchêr cl' avîş ché int la sesiòun "{{int:prefs-editing}}" dal tō preferèinsi.
+editpage-notsupportedcontentformat-title|Cla fōrma ché an n'é mìa sostgnûda.
+editpage-notsupportedcontentformat-text|La fōrma dal scrét in ~{0} la rispèta mìa al mudèl scrét in ~{1}.
+content-model-wikitext|wikitèst
+content-model-text|tèst normêl
+content-model-javascript|linguâg JavaScript
+content-model-css|fòj de stîl CSS
+content-json-empty-object|L'é vōd
+content-json-empty-array|Array vōd
+duplicate-args-category|Pàgini che drōven argumèint dópiê in ciamêdi a i mudē
+duplicate-args-category-desc|La pàgina la gh'à dèinter ciamêdi a mudē che drōven argumèint dupiê,cme per eşèimpi <code><nowiki>{{foo\u007Cbar=1\u007Cbar=2}}</nowiki></code> o <code><nowiki>{{foo\u007Cbar\u007C1=baz}}</nowiki></code>.
+expensive-parserfunction-warning|'''Atensiòun:''' cla pàgina ché la gh'à trôpi ciamêdi ala funsiòun parse. A n' in duvré avèir mēno 'd ~{1}, adèsa a {{PLURAL:~{0}\u007C'gh n'é ~{0}}}.
+expensive-parserfunction-category|Pàgini cun trôpi ciamêdi a la funsiòun parser.
+post-expand-template-inclusion-warning|'''Atensiòun:''' la grandèsa di mudē més dèinter l'é trôp grôsa. Soquânt mudē gnirâ mìa més dèinter.
+post-expand-template-inclusion-category|Pàgini in dó la grandèsa di mudē més dèinter la và d'ed sōver dal lémit permés.
+post-expand-template-argument-warning|'''Atensiòun:''' cla pàgina ché la gh'à ûn o pió argumèint ed mudē trôp grôs per èser şlarghê. Chi argomèint ché a gnirân saltê.
+post-expand-template-argument-category|Pàgini cun mudē sèinsa argumèint.
+parser-template-loop-warning|Catê sucesiòun dal mudèl: [[~{0}]]
+parser-template-recursion-depth-warning|A s'é rivê al lémit 'd arciâm int al mudèl (~{0})
+language-converter-depth-warning|A s'é pasê 'l lémit ed fònd dal cunvertidōr ed léngua (~{0})
+node-count-exceeded-category|Pàgin in dó vîn pasê 'l nómer ed nōd
+node-count-exceeded-category-desc|La pàgina la và d'ed sōver al nómer di nōd.
+node-count-exceeded-warning|Cla pàgina ché l'à pasê 'l nómer di nōd
+expansion-depth-exceeded-category|Pàgini 'n dó vî pasê al fònd de şlargamèint
+expansion-depth-exceeded-category-desc|La pàgina la và d'ed là dal fònd mâsim de slarghêda.
+expansion-depth-exceeded-warning|Cla pàgina ché la pasê al fònd de şlargamèint
+parser-unstrip-loop-warning|Catê sèria 'd Unistrip
+parser-unstrip-recursion-limit|A s'é pasê i lémit 'd arciâm 'd Unstrip (~{0})
+converter-manual-rule-error|È stê catê un erōr int la règola a mân ed cambiamèint ed la léngua
+undo-success|Cla mudéfica ché la pō, èser scanşlêda., Cuntròla che sòta al diferèinsi che gh'é tr' al dō versiòun per èser sicûr che còl che gh'é scrét al cumbîna cun còl ch'ét vō, e dòunca salvêr al mudéfici per finîr la scanşladûra.
+undo-failure|Imposébil scanşlêr la mudéfica a câşva 'd un cuntrâst cun dal mudéfichi fâti dôp.
+undo-norev|La mudéfica l'an pōl mìa èser scanşlêda perchè l' an gh'é pió o l'é bèle stêda scanşlêda.
+undo-nochange|A sèmbra che la mudéfica la sìa bèle stêda scanşlêda.
+undo-summary|Scanşlê la mudéfica ~{0} ed [[Special:Contributions/~{1}\u007C~{1}]]\n([[User talk:~{1}\u007Cdiscusiòun]])
+undo-summary-username-hidden|Scanşlê la modéfica ~{0} ed 'n utèin lughê
+cantcreateaccounttitle|Impusébil registrêr un utèint
+cantcreateaccount-text|La registrasiòun ed cl'indirés IP ché ('''~{0}''') l'é stêda bluchêda da [[User:~{2}\u007C~{2}]]. \n\nAl mutîv dal blôch dê da ~{2} l'é còst: ''~{1}''.
+cantcreateaccount-range-text|La registrasiòun da indirés IP int l'intervâl '''~{0}''', in dó gh'é dèinter al tó  ('''~{3}'''), l'é stêda bluchêda da [[User:~{2}\u007C~{2}]]. \n\nAl mutîv dê da ~{2} l'é ''~{1}''
+viewpagelogs|Guêrda la stòria 'd cla pàgina ché
+nohistory|L'elèinch ed la stôria dal versiòun ed cla pàgina ché an 's câta mìa.
+currentrev|Ûltma versiòun
+currentrev-asof|Ûltma versiòun dal ~{0}
+revisionasof|Versiòun dal ~{0}
+revision-info|Versiòun dal ~{3} al ~{4} ed {{GENDER:~{5}\u007C~{1}}}~{6}
+previousrevision|← Versiòun pió vècia
+nextrevision|Versiòun pió nōva →
+currentrevisionlink|Ûltma versiòun
+cur|adès
+next|Còl dôp
+last|préma
+page_first|préma
+page_last|ûltem
+histlegend|Cunfrûnt tra 'l versiòun:  sernés al caşèli cumpâgni al versiòun vrûdi e schésa Invio o al ptòun in bâs. Spiegasiòun: : '''({{int:cur}})''' = diferèinsi cun la versiòun d' adèsa, '''({{int:last}})''' = diferèinsi cun la versiòun ed préma, '''{{int:minoreditletter}}''' = mudéfica céca.
+history-fieldset-title|Nâviga int la stòria 'd la pàgina
+history-show-deleted|Sōl quî scanşlê
+histfirst|préma
+histlast|ûltma
+historysize|({{PLURAL:~{0}\u007C1 byte\u007C~{0} bytes}})
+historyempty|(vōda)
+history-feed-title|Stòria dal mudéfichi
+history-feed-description|Stòria 'd la pàgina in sém a cól sî ché
+history-feed-item-nocomment|~{0} al ~{1}
+history-feed-empty|La pàgina serchêda l'an gh'é mìa; la pré èser stēda scanşlêda dal sît o gh'é stê cambiê nòm. Verifichêr cun [[Special:Search\u007Cpàgina 'd sèirca]] se gh'é dal pàgini nōvi.
+rev-deleted-comment|(argumèint ed la mudéfica armôs)
+rev-deleted-user|(nòm utèint armôs)
+rev-deleted-event|(particulêr dal log armôs)
+rev-deleted-user-contribs|(nòm utèint o indirés IP armôs - mudéfica lughêda da la stòria)
+rev-deleted-text-permission|Cla versiòun ché 'd la pàgina l'é stêda <strong> scanşlêda </strong>. \nConsultêr al [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{PAGENAMEE}}}} log dal canşladûri] per nōv particulêr.
+rev-suppressed-text-permission|Cla versiòun ché 'd la pàgina l'é stêda <strong> scanşlêda </strong>. Consultêr al [{{fullurl:{{#Special:Log}}/ suppress \u007Cpage={{ FULLPAGENAMEE }}}} log dal canşladûri] per nōv particulêr.
+rev-deleted-text-unhide|Cla versiòun ché 'd la pàgina l'é stêda <strong> scanşlêda </strong>. Consultêr al [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{PAGENAMEE}}}} log dal canşladûri] per nōv particulêr.\nS' l' é necesâri a j aministradōr a gh'é incòra permés [~{0} ed guardêr cla versiòun ché].
+rev-suppressed-text-unhide|Cla versiòun ché 'd la pàgina l'é stêda <strong> scanşlêda </strong>. Consultêr al [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{PAGENAMEE}}}} log dal canşladûri] per nōv particulêr.\nS' l' é necesâri a j aministradōr a gh'é incòra permés [~{0} ed guardêr cla versiòun ché].
+rev-deleted-text-view|Cla versiòun ché 'd la pàgina l'é stêda <strong> scanşlêda </strong>. J aministradōr a pōlen incòra guardêrla; \nconsultêr al [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{PAGENAMEE}}}} log dal canşladûri] per nōv particulêr.
+rev-suppressed-text-view|Cla versiòun ché 'd la pàgina l'é stêda <strong> scanşlêda </strong>. J aministradōr a pōlen incòra guardêrla; \nconsultêr al [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{PAGENAMEE}}}} log dal canşladûri] per nōv particulêr.
+rev-deleted-no-diff|An n'é mìa pusébil guardêr cól cunfrûnt ché tra 'l versiòun perchè óna dal revisiòun l'é stêda <strong> scanşlêda </strong>. Consûlta al [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} log dal scanşladûri] per i particulêr.
+rev-suppressed-no-diff|An n'é mìa pusébil guardêr cól cunfrûnt ché tra 'l versiòun perchè óna dal revisiòun l'é stêda <strong> scanşlêda </strong>.
+rev-deleted-unhide-diff|Óna dal revisiòun de sté cunfrûnt l'é stêda <strong> scanşlêda </strong>. Consultêr al [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{PAGENAMEE}}}} log dal scanşladûri] per i particulêr.\nS' l' é necesâri a j aministradōr a gh'é incòra permés [~{0} ed guardêr cla versiòun ché].
+rev-suppressed-unhide-diff|Óna dal revisiòun de sté cunfrûnt ed versiòun l'é stêda <strong> scanşlêda </strong>. \nA pré èsregh di particulêr int al {{#Special:Log}}/delete\u007Cpage={{PAGENAMEE}}}} log dal scanşladûri]. \nSét vō cme aministradōr ét pō incòra [~{0} guardêr sté cunfrûnt ed versiòun].
+rev-deleted-diff-view|Óna dal revisiòun de sté cunfrûnt ed versiòun l'é stêda <strong> scanşlêda </strong>. \nCme aministradōr ét pō guardêr sté cunfrûnt ed versiòun; a prén èsregh di particulêr int al {{#Special:Log}}/delete\u007Cpage={{PAGENAMEE}}}} log dal scanşladûri].
+rev-suppressed-diff-view|Óna dal revisiòun de sté cunfrûnt ed versiòun l'é stêda <strong> spustêda </strong>. \nCme aministradōr ét pō guardêr sté cunfrûnt ed versiòun; a prén èsregh di particulêr int al {{#Special:Log}}/delete\u007Cpage={{PAGENAMEE}}}} log dal scanşladûri].
+rev-delundel|Guêrda/nascònd
+rev-showdeleted|fà vèder
+revisiondelete|Scanşèla o tōrna a mèter versiòun
+revdelete-nooldid-title|Versiòun mìa precişêda
+revdelete-nooldid-text|An n'é mìa stê precişê nisóna versiòun 'd la pàgina in dó fêr cla funsiòun ché, la versiòun precişêda l' an gh'é mìa opór a s' é drē pruvêr ed lughêr la vèrsiòun 'd adèsa.
+revdelete-no-file|Al file precişê an gh'é mìa.
+revdelete-show-file-confirm|A 's vōl vèder la versiòun scanşlêda dal file "<nowiki>~{0}</nowiki>" dal ~{1} al ~{2}?
+revdelete-show-file-submit|Sé
+revdelete-selected-text|{{PLURAL:~{0}\u007CVersiòun sernîda\u007C Versiòun sernîdi}} ed [[:~{1}]]:
+revdelete-selected-file|{{PLURAL:~{0}\u007CVersiòun sernîda\u007C Versiòun sernîdi}} dal file ed [[:~{1}]]:
+logdelete-selected|{{PLURAL:~{0}\u007CFât dal regéster sernî}}:
+revdelete-text-text|Al versiòun scanşlêdi as vèden incòra int la stòria 'd la pàgina, mó pcòun ed còl che gh'é dèinter al srà mìa vést dal póblich.
+revdelete-text-file| Al versiòun di file scanşlê as vèden incòra int la stòria dal file, mó pcòun ed còl che gh'é dèinter al srà mìa vést dal póblich.
+logdelete-text|I fât scanşlê as vèden incòra int la stòria 'd la pàgina, mó pcòun ed còl che gh'é dèinter al srà mìa vést dal póblich.
+revdelete-text-others|Êter aministradōr ed {{SITENAME}} a srân incòra bòun ed vèder j argomèint lughê e prân a turnêri a mèter incòra ed nōv, se în mìa stê impustê di nōv lémit.
+revdelete-confirm|Per piaşèir cunfèirma che còst l'é còl ch'ét vō fêr, che t'é infurmê dal cunseguèinsi, e che t'é drē fêr còst int al rispèt dal [[{{MediaWiki:Policy-url}}\u007Cléni guîda]].
+revdelete-suppress-text|La scanşlêda la duvré èser druvêda <strong>sōl</strong> in chi chêş ché:\n* infurmasiòun che prén èser calónij \n* infurmasiòun personêli cme \n*: <em>indirés, nómer ed telèfon, côdis fischêl, e via acsé.</em>
+revdelete-legend|Impôsta i lémit seguèint al versiòun scanşlêdi:
+revdelete-hide-text|Tèst ed la versiòun
+revdelete-hide-image|Lōga j argumèint dal file
+revdelete-hide-name|Lōga l'intensiòun e i critèri
+revdelete-hide-comment|Elemèint ed la mudéfica o spiegasiòun ed l'asiòun
+revdelete-hide-user|Nòm o indirés IP ed l'avtōr
+revdelete-hide-restricted|Lōga al j infurmasiòun sgnêdi ânch a j aministradōr
+revdelete-radio-same|(an cambiêr mìa)
+revdelete-radio-set|Nascònd
+revdelete-radio-unset|Fà vèder
+revdelete-suppress|Lōga al j infurmasiòun sgnêdi ânch a j aministradōr
+revdelete-unsuppress|Tó via i lémit al revisiòun armési
+revdelete-log|Mutîv:
+revdelete-submit|Drōva {{PLURAL:~{0}\u007Cint la revisiòun sernîda\u007Cint al revisiòun sernîdi}}
+revdelete-success|Vésta ed la revisòun arnuvêda int al môd gióst.
+revdelete-failure|La vésta 'd la versiòun l'an pōl mìa èser arnuvêda:\n~{0}
+logdelete-success|Vésta dal fât impustêda int al môd gióst.
+logdelete-failure|La vésta dal fât l'an pōl mìa èser impustêda:\n~{0}
+revdel-restore|Câmbia la vidûda.
+pagehist|Stòria 'd la pàgina
+deletedhist|Stòria scanşlêda
+revdelete-hide-current|Imposébil lughêr l'elemèint cun dâta ~{0} ~{1} perchè l'é la revişiòun'd adès.
+revdelete-show-no-access|Imposébil fêr vèder l'elemèint perché l'é stê arcgnusû cme ''riservê''  e an 's gh'à mìa al permès ed fêrel.
+revdelete-modify-no-access|Imposébil fêr vèder l'elemèint cun dâta ~{0} ~{1} perché l'é stê arcgnusû cme "riservê"  e an 's gh'à mìa al permès ed fêrel.
+revdelete-modify-missing|Imposébil fêr vèder l'elemèint cun ID ~{0} perché an gh'é mìa int al databêş.
+revdelete-no-change|<strong>Atèinti:</strong> l'elemèint cun dâta ~{0} ~{1} al gh'îva bèle al j impustasiòun  ed vésta dmandê.
+revdelete-concurrent-change|Imposébil mudifichêr l'elemèint cun dâta ~{0} ~{1} perché la só cundisiòun l'é stêda cambiêda da 'n êter utèint mèinter a 's tintêva ed fêr la mudéfica.
+revdelete-only-restricted|Erōr int al lughêr l'elemèint cun dâta ~{0} ~{1}: an n'é mìa pusébil lughêr j elemèint a la vésta ed j aministradōr sèinsa sernîr almēno 'n êtra siēlta de spustamèint.
+revdelete-reason-dropdown|*Mutîv pió cumûn per la scanşladûra\n**Mìa rispèt dal dirét 'd avtōr\n**Cumèint o infurmasiòun personêli mìa adâti\n**Nòm utèint mìa adât\n**Infurmasiòun ch'la pré ufènder
+revdelete-otherreason|Êter mutîv o mutîv zuntê:
+revdelete-reasonotherlist|Êtra ragiòun
+revdelete-edit-reasonlist|Câmbia i mutîv per la scanşladûra
+revdelete-offender|Avtōr ed la versiòun:
+suppressionlog|Tâj
+suppressionlogtext|Ed sègvit a gh'é l'elèinch dal saccnşladûri e i blôch cun 'd j elemèint lughê a j aministradōr. Guêrda l'[[Special:BlockList\u007Celèinch di blôch]] per l'elèinch ed j avîş e di blôch in funsiòun adès.
+mergehistory|Unîr al stôri
+mergehistory-header|Cla pàgina ché la permèt 'd unîr al versiòun che fân pêrt ed la stòria 'd 'na pàgina (ciamêda pàgina 'd urégin) a la stòria ed 'na pàgina pió nōva. L'é necesâri sicurêres che la cuntinvasiòun stòrica 'd la pàgina l'an vègna mìa falsêda.
+mergehistory-box|Unés la stòria ed dō pàgini:
+mergehistory-from|Pàgina 'd urégin:
+mergehistory-into|Pàgina in dó la gh'à d' andêr:
+mergehistory-list|Stòria in dó 's pōl tachêr l'uniòun
+mergehistory-merge|L' é pusébil unîr al versiòun ed [[:~{0}]] sgnêdi ed sègvit al la stòria ed [[:~{1}]]. Druvêr la clòuna cun i ptòun ed siēlta per unîr tót al versiòun fîn a la dâta e ōra sgnêdi. Da nutêr che se vînen druvê i ptòun ed navigasiòun, la clòuna cun i ptòun ed siēlta l' an pōl mìa èsere druvêda.
+mergehistory-go|Fà vèder al mudéfichi che pōlen èser unîdi
+mergehistory-submit|Unés al versiòun
+mergehistory-empty|Nisòna versiòun da unîr
+mergehistory-success|{{PLURAL:~{2}\u007C'Na versiòun ed [[:~{0}]] l'é stêda unîda\u007C~{2} versiòn ed [[:~{0}]] în stêdi unîdi}} al la stòria ed [[:~{1}]].
+mergehistory-fail|Impusébil unîr al stòri. Verifichêr la pàgina e al règoli dal mumèint.
+mergehistory-fail-toobig|Imposébil fêr l'uniòun ed la stòria cun pió 'd ~{0}{{PLURAL:~{0}\u007Crevisiòun}} da spustêr
+mergehistory-no-source|La pàgina 'd urégin ~{0} l'an gh'é mìa.
+mergehistory-no-destination|La pàgina 'd arîv ~{0} l'an gh'é mìa.
+mergehistory-invalid-source|La pàgina 'd urégin la gh'à 'd avèir un tétol curèt.
+mergehistory-invalid-destination|La pàgina 'd arîv la gh'à 'd avèir un tétol curèt.
+mergehistory-autocomment|Uniòun 'd [[:~{0}]]in [[:~{1}]]
+mergehistory-comment|Uniòun ed [[:~{0}]] in [[:~{1}]]:~{2}
+mergehistory-same-destination|Al pàgini 'd urégin e 'd arîv an pōlen mìa cumbinêr
+mergehistory-reason|Mutîv:
+mergelog|Uniòun
+revertmerge|Scanşèla l'uniòun
+mergelogpagetext|Ed sègvit în elenchêdi la j ûltmi operasiòun 'd uniòun ed la stòria ed dō pàgini.
+history-title|~{0} stòria dal mudéfichi
+difference-title|~{0}: diferèinsi tr' al versiòun
+difference-title-multipage|~{0} e ~{1}:diferèinsi tr' al pàgini
+difference-multipage|(Diferèinsi tr' al pàgini)
+lineno|Rîga ~{0}:
+compareselectedversions|Cunfrûnta al versiòun sernîdi.
+showhideselectedversions|Fà vèder/lōga versiòun sernîdi
+editundo|scanşèla
+diff-empty|(Nisóna diferèinsa)
+diff-multi-sameuser|({{PLURAL:~{0}\u007C'Na versiòun ed mèz\u007C~{0} versiòun ed mèz }} 'd un stès uitèint în mìa mustrêdi)
+diff-multi-otherusers|({{PLURAL:~{0}\u007C'Na versiòun ed mèz\u007C~{0} versiòun ed mèz }} ed {{PLURAL:~{1}\u007C'n êter utèint\u007C~{1} utèint}} mìa fâti vèder)
+diff-multi-manyusers|({{PLURAL:~{0}\u007C'Na versiòun ed mèz\u007C~{0} versiòun ed mèz }} pió in là ed ~{1}{{PLURAL:~{1}\u007Cutèint}} mìa {{PLURAL:~{0}\u007Cmustrêda\u007Cmustrêdi}})
+difference-missing-revision|{{PLURAL:~{1}\u007C'Na versiòun\u007C~{1} versiòun}} ed cla diferèinsa ché (~{0}) {{PLURAL:~{1}\u007Can n'é mìa stêda catêda\u007Cîn mìa stêdi catêdi}}. \n\nCòst a sucēd ed sôlit quând a's và adrē a un colegamèint vèc ed 'na diff a 'na pàgina scanşlêda. I particulêr a pōlen èser catê int al [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} regéster dal scanşladûri].
+searchresults|Rişultê 'd la sērca
+searchresults-title|Rişultê 'd la sērca ed "~{0}"
+titlematches|Rapôrt int al tétol dal pàgini
+textmatches|Rapôrt int al tèst dal pàgini
+notextmatches|Nisóna relasiòun int al tèst dal pàgini
+prev-page|pàgina 'd préma
+next-page|pàgina dôp
+prevn-title|{{PLURAL:~{0}\u007CAl rişultêt ed préma\u007C~{0} i rişultêt ed préma}}
+nextn-title|{{PLURAL:~{0}\u007CAl rişultêt ed préma\u007C~{0} i rişultêt ed préma}}
+shown-title|Fà vèder {{PLURAL:~{0}\u007Cun rişultêt\u007C~{0} di rişultêt}}
+viewprevnext|Guêrda (~{0} {{int:pipe-separator}} ~{1}) (~{2}).
+searchmenu-exists|'''Int al sît a gh'é 'na pàgina cun al nòm [[:~{0}]].'''\n{{PLURAL:~{1}\u007C0=\u007CGuêrda ânca chiêter ch'în stê catê.}}
+searchmenu-new|<strong>Şvilópa la pàgina "[[:~{0}]]" insém a cól sît ché!</strong> {{PLURAL:~{1}\u007C0=\u007CGuêrda ânch la pàgina che t'é serchê\u007CGuêrda ânch i rişultêt catê}}.
+searchprofile-articles|Pàgini 'd j argumèint
+searchprofile-images|Multimèdia
+searchprofile-everything|Tót
+searchprofile-advanced|Specêla
+searchprofile-articles-tooltip|Sèirca in ~{0}
+searchprofile-images-tooltip|Sèirca file
+searchprofile-everything-tooltip|Sērca dapertót (ânch int al pàgini 'd discusuòun).
+searchprofile-advanced-tooltip|Sērca int i spâsi di nòm fât só mzûra.
+search-result-size|~{0} ({{PLURAL:~{1}\u007C'na parôla\u007C~{1} parôli}})
+search-result-category-size|{{PLURAL:~{0}\u007C1 utèint\u007C~{0} utèint}} ({{PLURAL:~{1}\u007C1 sotcategoréia\u007C~{1} sotcategoréi}},{{PLURAL:~{2}\u007C1 file\u007C~{2} files}})
+search-redirect|(redirect ~{0})
+search-section|(sesiòun ~{0})
+search-category|(categoréia ~{0})
+search-file-match|(relasiòun dèinter al file)
+search-suggest|Fōrsi 't serchêv ~{0}
+search-interwiki-caption|Prugèt fradē
+search-interwiki-default|Rişultêt da ~{0}:
+search-interwiki-more|(êter)
+search-relatedarticle|Rişultêt coleghê
+searchrelated|coleghê
+searchall|tót
+showingresults|Ed sègvit {{PLURAL:~{0}\u007Ca vîn preşentê al mâsim <strong>1</strong> rişultêt\u007C a vînen preşentê al mâsim <strong>~{0}</strong> rişultêt}} a partîr dal nómer #<strong>~{1}</strong>.
+showingresultsinrange|{{PLURAL:~{0}\u007CSòt a vîn mustrê\u007C Sòt a vînen mustrê}}  {{PLURAL:~{0}\u007C<strong>1</strong> rişultêt\u007C<strong>~{0}</strong> rişultêt}} dal <strong>~{1}</strong> al <strong>~{2}</strong>.
+search-showingresults|{{PLURAL:~{3}\u007CRişultêt <strong>~{0}</strong> ed <strong>~{2}</strong>\u007CRişultêt <strong>~{0} - ~{1}</strong> ed <strong>~{2}</strong>}}
+search-nonefound|La sērca an n'à mìa dê di rişultê.
+powersearch-legend|Sèirca specêla
+powersearch-ns|Sērca int al spâsi di nòm:
+powersearch-togglelabel|Sernés:
+powersearch-toggleall|Tót
+powersearch-togglenone|Nisûn
+powersearch-remember|Arcôrda la siēlta per êtri sèirchi ch'é vō fêr
+search-external|Sèirca fâta fōra
+searchdisabled|La sèirca intêrna ed {{SITENAME}} l'a funsiòuna mìa; int al mèinter a s' pōl pruvêr a druvêr un mutōr ed sèirca d'ed fōra cme Google. (A gh' è da nutêr però che còl che gh'é dèinter in {{SITENAME}} che es câten in chi mutōr a prém èser mìa arnuvê.)
+search-error|É sucès un erōr mèinter a's fêva la sèirca:~{0}
+preferences|Preferèinsi
+mypreferences|Preferèinsi
+prefs-edits|Mudéfichi fâti:
+prefsnologintext2|Es prèiga ed l'ingres per impustêr al tō  preferèinsi 'd utèint.
+prefs-skin|Aspèt grâfich (skin)
+skin-preview|Guêrda préma
+datedefault|Nisóna preferèinsa
+prefs-labs|Funsiòun adâti in sperimèint
+prefs-user-pages|Pàgini utèint
+prefs-personal|Prufîl utèint
+prefs-rc|Ûltmi mudéfichi
+prefs-watchlist|Tgnîr sòt ôc
+prefs-editwatchlist|Mudéfica la lésta 'd qui da tgnîr sòt ôc
+prefs-editwatchlist-label|Mudéfica dal pàgini ed la lésta ch' a' s tîn sòt ôc:
+prefs-editwatchlist-edit|Guêrda e tó via i tétol int la lésta ch'ét tîn sòt ôc
+prefs-editwatchlist-raw|Mudéfica la lésta in furmê tèst
+prefs-editwatchlist-clear|Scanşèla la tó lésta di tgnû 'd ôc
+prefs-watchlist-days|Nómer ed dé da fêr vèder int i tgnû 'd ôc specêl:
+prefs-watchlist-days-max|Mâsim ~{0} {{PLURAL:~{0}\u007Cdé}}
+prefs-watchlist-edits|Nómer 'd mudéfichi da fêr vèder cun al funsiòun pió şvilupêdi:
+prefs-watchlist-edits-max|Nómer mâsim:1000
+prefs-watchlist-token|Token tgnî d'ôc specêl:
+prefs-misc|Divêrs
+prefs-resetpass|Câmbia la cêva 'd ingrès
+prefs-changeemail|Câmbia l'indirés ed la pôsta eletrônica
+prefs-setemail|Impôsta un indirés ed pôsta eletrônica
+prefs-email|Siēlta pôsta eletrônica
+prefs-rendering|Aspèt
+saveprefs|Sêlva
+restoreprefs|Turnêr a mèter al j impustasiòun ed partèinsa (in tót al sesiòun)
+prefs-editing|Caşèla 'd mudéfica
+rows|Rîghi
+columns|Clòuni:
+searchresultshead|Sērca
+stub-threshold|Valōr ménim per i <a href="#" class="stub">colegamèint a i stub</a>, in byte:
+stub-threshold-disabled|Bluchê
+recentchangesdays|Nómer di dé da fêr vèder int al j ûltmi mudéfichi:
+recentchangesdays-max|Mâsim ~{0} {{PLURAL:~{0}\u007Cdé}}
+recentchangescount|Nómer ed mudéfichi da fêr vèder per default:
+prefs-help-recentchangescount|A gh'é dèinter al j ûltmi mudéfichi, stôri, e regéster.
+prefs-help-watchlist-token2|Còsta l'é la cêva secrēta p'r al flós web di tō tgnû 'd ôc specêl. Tót quî che la cgnòsen a sràn bòun ed lēşer i tō tgnû 'd ôc specêl, per còst an spartîrla mìa cun nisûn. [[Special:ResetTokens\u007CCléca ché s'ét ghê bişògn ed turnêrla impustêr]].
+savedprefs|Al preferèinsi în stêdi salvêdi.
+timezonelegend|Fûş urâri:
+localtime|Ōra lochêla:
+timezoneuseserverdefault|Drōva l'ōra stabilîda dal wiki (~{0})
+timezoneuseoffset|Êter (spieghêr la diferèinsa)
+servertime|Ōra dal server:
+guesstimezone|Drōva l'ōra dal navigadōr
+timezoneregion-africa|Âfrica
+timezoneregion-america|Amèrica
+timezoneregion-antarctica|Antârtide
+timezoneregion-arctic|Ârtide
+timezoneregion-asia|Âsia
+timezoneregion-atlantic|Ocèan Atlântich
+timezoneregion-australia|Austrâlia
+timezoneregion-europe|Eurôpa
+timezoneregion-indian|Ocèan Indiân
+timezoneregion-pacific|Ocèan Pacéfich
+allowemail|Permèt a chiêter utèin ed mandêret ed la pōsta eletrônica
+prefs-searchoptions|Sērca
+prefs-namespaces|Spâsi di nòm
+default|Stabilî préma
+prefs-files|File
+prefs-custom-css|Adâta al CSS al tō necesitê
+prefs-custom-js|Adâta al JavaScript al tō necesitê
+prefs-common-css-js|CSS/JavaScript in comûn per tóti 'l skin:
+prefs-reset-intro|Es pōl druvêr cla pàgina ché per turnêr a impustêr al preferèinsi e cambiêr còli dichiarêdi int al sît. \nL'operasiòun l'an pōl mìa èser scanşlêda.
+prefs-emailconfirm-label|Cunfèirma ed la pôsta eletrônica:
+youremail|E-mail:
+username|{{GENDER:~{0}\u007CNòm utèint}}
+prefs-memberingroups|{{GENDER:~{1}\u007CElemèint}}{{PLURAL:~{0}\u007Cdal gróp\u007Cdi gróp}}:
+prefs-registration|Dâta 'd registrasiòun:
+yourrealname|Nòm vèira:
+yourlanguage|Léngua
+yourvariant|Câmbi 'd la léngua:
+prefs-help-variant|La versiòun o l'ortograféia ch' ét preferés vèder al pàgini ed cla wiki ché.
+yournick|Scutmâj (nikname):
+prefs-help-signature|I cumèint int al pàgini 'd discusiòun a dēven èser firmê cun "<nowiki>~~~~</nowiki>" ch' al gnirà cambiê cun la tó fîrma cun dôp la dâta.
+badsig|Erōr int la fîrma mìa standard, verifichêr i tag HTML.
+badsiglength|La fîrma siēlta l'é trôp lònga, l'an dēv mìa andêr d'ed sōver di ~{0} {{PLURAL:~{0}\u007Ccarâter}}.
+yourgender|Cme arfêres a té?
+gender-unknown|Indiferèint
+gender-male|L'é registrê in sém a {{SITENAME}}
+gender-female|L'é registrêda in sém a {{SITENAME}}
+prefs-help-gender|L'impustasiòun ed cla preferèinsa ché l'é a siēlta. Al progrâma al drōva cól valōr ché per parlêr cun tè e numinêret cun chiêter cun al druvêr al gèner ed gramâtica gióst. Cl'infurmasiòun ché la srà póblica.
+email|E-mail
+prefs-help-realname|Al nòm vèira l'é da druvêr a piaşèir. Se druvê, al pōl èser uşê per dêr la paternitê al lavōr fât.
+prefs-help-email|Mèter l'indéris ed la tó pôsta eletrônica an n'é mia necesâri, mó al permèt ed ricêver la cêva 'd ingrès se per chêş ét la scurdés.
+prefs-help-email-others|Ét pō ânca sernîr ed lasêr che chiêter a 's mèten in cuntât  tēgh cun la pôsta eletrônica cun al colegamèint da la tó pàgina utèint o da còla 'd discusiòun.  Al tó indirés al vîn mìa fât savèir a quî ch'ét 's mèten in cuntât tēgh.
+prefs-help-email-required|L'indirés ed pôsta eletrônica l'é ubligatôri.
+prefs-info|Infurmasiòun necesâri
+prefs-i18n|Internalişasiòun
+prefs-signature|Fîrma
+prefs-dateformat|Fōrma 'd la dâta
+prefs-timeoffset|Ōri 'd diferèinsa
+prefs-advancedediting|Siēlti generêli
+prefs-editor|Editōr
+prefs-preview|Guêrda préma
+prefs-advancedrc|Siēlti pió şvilupêdi
+prefs-advancedrendering|Siēlti pió şvilupêdi
+prefs-advancedsearchoptions|Siēlti pió şvilupêdi
+prefs-advancedwatchlist|Siēlti pió şvilupêdi
+prefs-displayrc|Siēlti ed vidûda
+prefs-displaywatchlist|Siēlti ed vidûda
+prefs-tokenwatchlist|Token
+prefs-diffs|Diferèinsi
+prefs-help-prefershttps|Cla diferèinsa ché la gh'à efèt dal st'êter ingrès.
+prefswarning-warning|T'é fât dal mudéfichi al tō preferèinsi ch'în mìa stêdi salvêdi. S'ét vê fōra da cla pàgina ché sèinsa clichêr "~{0}" al preferèinsi a gnîran mìa arnuvêdi.
+prefs-tabs-navigation-hint|Sugerimèint: è pusébil druvêr i tâst frècia a mansèina e a dréta per spustêres tr'al schēdi int l'elèinch dal schēdi.
+email-address-validity-valid|L'indirès ed pôste eletrônica a sèmbra vâlid
+email-address-validity-invalid|Mèt un indirés ed pôsta eletrônica vâlid
+userrights|Gestiòun di permès relatîv a j utèint
+userrights-lookup-user|Gestiòun di gróp utèint
+userrights-user-editname|Mèt dèinter al nòm utèint:
+editusergroup|Mudéfica gróp utèint
+editinguser|Mudéfica i dirét utèint ed l' utèint <strong>[[User:~{0}\u007C~{0}]]</strong> ~{1}
+userrights-editusergroup|Mudéfica gróp utèint
+saveusergroups|Sêlva gróp utèint
+userrights-groupsmember|Al fà pêrt {{PLURAL:~{0}\u007Cal gróp\u007Cai gróp}}:
+userrights-groupsmember-auto|Al fà pêrt ed sicûr a:
+userrights-groups-help|L'é pusébil mudifichêr i gróp in dó fà pêrt l'utèint. \n*'Na caşèla sernîda la sègna a che gróp al fà pêrt l'utèint. \n*'Na caşèla mìa serrnîda la sègna che l'utèin al fà mìa pêrt al gróp. \n*Al sègn * al sègna ch' an n'é m'a pusébil scanşlêr che l'utèin al fà pêrt al gróp dōp avèirel sgnê (o invicivêrsa).
+userrights-reason|Mutîv:
+userrights-no-interwiki|An es gh'à mìa i permès necesâri per cambiêr i dirét ed j utèint in sém a êter sît.
+userrights-nodatabase|Al databēş ~{0} al gh'é mìa o an n' mìa un databêş lochêl.
+userrights-nologin|Per dêr i dirét a j utèint l'é necesâri [[Special:UserLogin\u007Cfêr l'ingrès]] cme aministardōr.
+userrights-notallowed|An 't gh'ê mìa al permès per zuntêr o tōr via i permès utèint.
+userrights-changeable-col|Gróp ch'es pōlen mudifichêr.
+userrights-unchangeable-col|Gróp ch'an 's pōlen mìa mudifichêr.
+userrights-conflict|Cuntrâst ed mudéfica di dirét utèint! Cuntròla e cunfērma al tó mudéfichi.
+userrights-removed-self|T'é tôt via cun sucès i tō dirét. E dòunca, an 't prê pió andêr dèinter a cla pàgina ché.
+group|Gróp:
+group-user|Utèint
+group-autoconfirmed|Utèint cunvalidê da per ló
+group-bot|Bot
+group-sysop|Aministradōr
+group-bureaucrat|Funsionâri
+group-suppress|Oversight
+group-all|(tót)
+group-user-member|{{GENDER:~{0}\u007Cutèint}}
+group-autoconfirmed-member|{{GENDER:~{0}\u007Cutèint convalidê da per ló}}
+group-bot-member|{{GENDER:~{0}\u007Cbot}}
+group-sysop-member|{{GENDER:~{0}\u007Caministradōr}}
+group-bureaucrat-member|{{GENDER:~{0}\u007Cfunsionâri}}
+group-suppress-member|{{GENDER:~{0}\u007Coversight}}
+grouppage-user|{{ns:project}}:Utèint
+grouppage-autoconfirmed|{{ns:project}}:Utèint convalidê da per ló
+grouppage-bot|{{ns:project}}:Bot
+grouppage-sysop|{{ns:project}}:Aministradōr
+grouppage-bureaucrat|{{ns:project}}:Funsionâri
+grouppage-suppress|{{ns:project}}:Oversight
+right-read|Al lēş al pàgini
+right-edit|Mudéfica pàgini
+right-createpage|Ét pō fêr al pàgini (fōra che 'l pàgini 'd discusiòun).
+right-createtalk|Fà 'l pàgini 'd discusiòun.
+right-createaccount|Fà dal j utèinsi nōvi.
+right-minoredit|Sègna 'l mudéfichi cme céchi.
+right-move|Spôsta 'l pàgini
+right-move-subpages|Spôsta 'l pàgini insèm al relatîvi sòt pàgini
+right-move-rootuserpages|Spôsta 'l pàgini principêli 'd j utèint
+right-move-categorypages|Spôsta 'l categoréi
+right-movefile|Spôsta i file
+right-suppressredirect|An fà mìa un indirés nōv in atvomâtich quând a se spôsta 'na pàgina
+right-upload|Cârga un file
+right-reupload|Al scré in sém a 'n file ch' al gh'é bèle
+right-reupload-own|Al scré in sém a 'n file ch' al gh'é bèle carghê da l'istès utèint
+right-reupload-shared|Al souvrascrév int al pôst file ch' în int l'archévi spartî
+right-upload_by_url|Cârga un file da un indirés URL
+right-purge|Al pulés la memôria pruvişôria dal sît sèinsa cunfērma.
+right-autoconfirmed|An n'é mìa ublighê al lémit 'd asiòun per IP
+right-bot|Da tratêr cme şvilóp avtomâtich
+right-nominornewtalk|Al fa in môd che al mudéfichi céchi al pàgini 'd discussiòun an fâghen mìa vèder l'avîş 'd un mesâg nōv
+right-apihighlimits|Drōva di lémit pió êlt p'r al j interugasiòun API
+right-writeapi|Drōva l' API in scritûra
+right-delete|Scanşèla pàgini
+right-bigdelete|Scanşèla pàgini cun la stòria 'd la pàgina lònghi
+right-deletelogentry|Al scanşèla e al tōrna mèter vōş ed regéster bèin precîşi
+right-deleterevision|Al lōga versiòun precîşi dal pàgini
+right-deletedhistory|Al fà vèder al versiòun ed la stòria scanşlêdi sèinsa al tèst che gh'é unî
+right-deletedtext|Al fà veder al tèst scanşlê e al mudéfichi tr'al versiòun scanşlêdi
+right-browsearchive|Al sêrca int al pàgini scanşlêdi
+right-undelete|Recópra 'na pàgina
+right-suppressrevision|Al vèd, al lōga e al tōra mèter versiòun precîşi dal pàgini a utèint bast' ech sìa
+right-viewsuppressed|Al vèd versiòun lughêdi a utèint bast' ech sìa
+right-suppressionlog|Al fà vèder i regéster privê
+right-block|Blôca al mudéfichi da pêrta 'd êter utèint
+right-blockemail|L'impidés a 'n utèint de spidîr la pôsta eletrônica
+right-hideuser|Blôca un nòm utèint, e 'l lōga al póblich
+right-ipblock-exempt|Al vèd mìa i blôch 'd IP, i blôch avtomâtich e i blôch ed range IP
+right-proxyunbannable|An vèder mìa i blôch avtomâtich di proxi
+right-unblockself|A şblôca ló 'stès
+right-protect|Câmbia i livē 'd prutesiòun e mudéfica 'l pàgini prutèti in ripetisiòun
+right-editprotected|Mudéfica 'l pàgini prutèti cun "{{int:protect-level-sysop}}"
+right-editsemiprotected|Mudéfica 'l pàgini prutèti cun "{{int:protect-level-autoconfirmed}}"
+right-editcontentmodel|Mudéfica al mudèl ed còl ché dèinter int 'na pàgina.
+right-editinterface|Mudéfica al colegamèint tra sistēma e utèint
+right-editusercssjs|Mudéfica i file CSS e JS 'd êter utèint
+right-editusercss|Mudéfica i file CSS 'd êter utèint
+right-edituserjs|Mudéfica i file JS 'd êter utèint
+right-editmyusercss|Mudéfica i file CSS dal só utèint
+right-editmyuserjs|Mudéfica i file JavaScript dal só utèint
+right-viewmywatchlist|Guêrda la lésta di tō tgnû 'd ôc specêl
+right-editmywatchlist|Mudéfica i tō tgnu 'd ôc. Da nutêr che soquânti asiòun a prân incòra zuntêr dal pàgini ânca sèinsa avèiren al dirét.
+right-viewmyprivateinfo|Guêrda al tō infurmasiòun personêli (per eşèimpi: indirés ed pôsta eletrônica, nòm vèira)
+right-editmyprivateinfo|Câmbia 'l tō infurmasiòun personêli (per eşèimpi: indirés ed pôsta eletrônica, nòm vèira)
+right-editmyoptions|Câmbia al tō preferèinsi
+right-rollback|Scanşèla a la şvêlta al mudéfichi ed l'ûltem utèint ch'l'à mudifichê 'na pàgina particulêra
+right-markbotedits|Sègna al mudéfichi da turnêr a mèter cme préma cme fâti da 'na mâchina in avtomâtich
+right-noratelimit|An n'é mìa ublighê al lémit 'd asiòun
+right-import|Côpia dal pàgini da 'd j êter wiki
+right-importupload|Zuntêr dal pàgini da un file carghê.
+right-patrol|Sègna al mudéfichi 'd j êter utèint cme verifichêdi
+right-autopatrol|Sègna in avtomâtich al mudéfichi che t'é fât cme verifichêdi
+right-patrolmarks|Drōva la funsiòun ed veréfica dal j ûltmi mudéfichi
+right-unwatchedpages|Fa vèder un elèinch ed pàgini mìa guardêdi
+right-mergehistory|Al mèt insèm la stôria dal pàgini
+right-userrights|Mudéfica i dirét ed l'utèint
+right-userrights-interwiki|Mudéfica i dirét ed j êter utèint 'd êtri wiki
+right-siteadmin|Blōca e şblōca al databêş
+right-override-export-depth|Pôrta fōra al pàgini cun insèm al pàgini coleghêdi per 'na larghèsa ed 5
+right-sendemail|Spidés pôsta eletrônica a êter utèint
+right-passwordreset|A vèd i mesâg 'd arnōv ed la cêva 'ed ingrès
+right-managechangetags|Fà e tó via i [[Special:Tags\u007Ctag]] dal databêş
+newuserlogpage|Utèint nōv
+newuserlogpagetext|Ché sòt a gh' é la lésta di nōv utèint.
+rightslog|Diré ed j utèint
+rightslogtext|Ché sòt a gh' é la lésta dal mudéfichi a i dirét dê a j utèint.
+action-read|lēzer cla pàgina ché
+action-edit|Mudifichêr cla pàgina ché
+action-createpage|inventêr pàgini
+action-createtalk|fêr 'l pàgini 'd discusiòun.
+action-createaccount|fêr cla registrasiòun ché
+action-history|vèder la stôria 'd cla pàgina ché
+action-minoredit|sgnêr cla mudéfica che cme céca
+action-move|spustêr cla pàgina ché
+action-move-subpages|spustêr cla pàgina ché e al relatîvi sòt pàgini
+action-move-rootuserpages|Spustêr 'l pàgini principêli 'd j utèint
+action-move-categorypages|spustêr 'l categoréi
+action-movefile|spustêr cól file ché
+action-upload|carghêr cól file ché
+action-reupload|scréver in sém a cól file ché ch' al gh'é bèle
+action-reupload-shared|scréver insém a cól file ché preşèint int l'archévi spartî
+action-upload_by_url|carghêr cól file ché da 'n indirés URL
+action-writeapi|drōva al j API in scritûra
+action-delete|scanşlêr cla pàgina ché
+action-deleterevision|scanşlêr cla versiòun ché
+action-deletedhistory|guêrda la stòria scanşlêda de sté pàgina
+action-browsearchive|serchêr pàgini scanşlêdi
+action-undelete|tōr indrê cla pàgina ché
+action-suppressrevision|turnêr a vèder e mèter al mudéfichi lughêdi
+action-suppressionlog|guardêr sté regéster privê
+action-block|bluchê sté utèint in scritûra
+action-protect|cambiêr i livē 'd prutesiòun per cla  pàgina ché
+action-rollback|scanşèla a la şvêlta al mudéfichi ed l'ûltem utèint ch'l'à mudifichê 'na pàgina particulêra
+action-import|côpia dal pàgini da 'n' êtra wiki
+action-importupload|zuntêr dal pàgini da un file carghê
+action-patrol|sgnêr al mudéfichi 'd j êter utèint cme verifichêdi
+action-autopatrol|sgnêr al tō mudéfichi cme verifichêdi
+action-unwatchedpages|vèder un elèinch ed pàgini mìa guardêdi
+action-mergehistory|unîr la stôria 'd cla pàgina ché
+action-userrights|mudefichêr tót i dirét ed j utèint
+action-userrights-interwiki|mudefichêr i dirét ed j utèint insém a êtri wiki
+action-siteadmin|bluchêr e şbluchêr al databêş
+action-sendemail|spidîr pôsta eletrônica
+action-editmywatchlist|mudéfica i tō tgnû sòt ôc
+action-viewmywatchlist|Guêrda i tō tgnû 'd ôc specêl
+action-viewmyprivateinfo|guêrda al tō infurmasiòun personêli
+action-editmyprivateinfo|mudéfica al tō infurmasiòun personêli
+action-editcontentmodel|câmbia al mudèl dèinter a 'na pàgina
+action-managechangetags|fà e tó via i tag dal databêş
+nchanges|~{0}\n{{PLURAL:~{0}\u007Cmudéfica\u007Cmudéfichi}}
+enhancedrc-since-last-visit|~{0} {{PLURAL:~{0}\u007Cda l'ûltma vîşita}}
+enhancedrc-history|stòria
+recentchanges|Ûltmi mudéfichi
+recentchanges-legend|Siēlti ûltmi mudéfichi.
+recentchanges-summary|Cla pàgina ché la preşèinta al mudéfichi piô nōvi a còl che gh'é dèinter al sît.
+recentchanges-noresult|Nisóna mudéfica dèinter al peréiod scrét ch'la sudésfa chi critèri ché.
+recentchanges-feed-description|Cól feed ché 'l arpôrta al mudéfichi piô frèschi a còl che gh'é dèinter al sît.
+recentchanges-label-newpage|Cun cla mudéfica ché t'é fât 'na pàgina nōva.
+recentchanges-label-minor|Còsta l'é 'na mudéfica céca
+recentchanges-label-bot|Cla mudéfica ché l'é stêda fâta da un bot.
+recentchanges-label-unpatrolled|Cla mudéfica ché an n'é mìa incòra stêda verifichêda.
+recentchanges-label-plusminus|Cambiamèint ed la pàgina in nómer ed byte
+recentchanges-legend-heading|'''Spiegasiòun:'''
+recentchanges-legend-newpage|{{int:recentchanges-label-newpage}} (guêrda [[Special:NewPages\u007Cal pàgini nōvi]])
+rcnotefrom|Ché sòt a {{PLURAL:~{4}\u007Cgh'é la mudéfica fâta\u007Cgh'în al mudéfichi fâti}} a partîr da<strong>~{2},~{3}</strong>(fîn a <strong>~{0}</strong>).
+rclistfrom|Fà vèder al mudéfichi fâti a partîr da ~{2} ~{1}
+rcshowhideminor|~{0} al mudéfichi céchi
+rcshowhideminor-show|Fà vèder
+rcshowhideminor-hide|Lōga
+rcshowhidebots|~{0} i bot
+rcshowhidebots-show|Fà vèder
+rcshowhidebots-hide|Lōga
+rcshowhideliu|~{0} j utèint registrê
+rcshowhideliu-show|Fà vèder
+rcshowhideliu-hide|Lōga
+rcshowhideanons|~{0} j utèint sèinsa nòm.
+rcshowhideanons-show|Fà vèder
+rcshowhideanons-hide|Lōga
+rcshowhidepatr|~{0} al mudéfichi verifichêdi
+rcshowhidepatr-show|Fà vèder
+rcshowhidepatr-hide|Lōga
+rcshowhidemine|~{0} al mē mudéfichi
+rcshowhidemine-show|Fà vèder
+rcshowhidemine-hide|Lōga
+rclinks|Fà vèder al ~{0} ûltmi mudéfichi fâti int j ûltem ~{1} dé<br />~{2}
+diff|dif
+hist|stòria
+hide|Lōga
+show|Fà vèder
+minoreditletter|m
+newpageletter|N
+boteditletter|b
+number_of_watching_users_pageview|[vésta da {{PLURAL:~{0}\u007Cun utèint\u007C~{0} utèint}}]
+rc_categories|Lémita al categoréi (divîşi da "\u007C")
+rc_categories_any|Bast' ech sia
+rc-change-size-new|~{0} {{PLURAL:~{0}\u007Cbyte\u007Cbyte}} dôp la mudéfica
+newsectionsummary|/* ~{0} */ sesiòn nōva
+rc-enhanced-expand|Fà vèder i particulêr.
+rc-enhanced-hide|Lōga i particulêr.
+rc-old-title|in urégin fâta cme "~{0}"
+recentchangeslinked|Mudéfichi coleghêdi
+recentchangeslinked-feed|Mudéfichi coleghêdi
+recentchangeslinked-toolbox|Mudéfichi coleghêdi
+recentchangeslinked-title|Mudéfichi coleghêdi a ~{0}.
+recentchangeslinked-summary|Cla pàgina specêla ché la fà vèder al j ûltmi mudéfichi al pàgini coleghêdi da còla sgnêda (o dèinter int la categoréia sgnêda). Al pàgini dèint a la tó lésta 'd j [[Special:Watchlist\u007Ctgnû sòt ôc specêl]] în sgnêdi in '''grasèt'''.
+recentchangeslinked-page|Nòm ' d la pàgina.
+recentchangeslinked-to|Fà vèder sōl al mudéfichi fâti al pàgini coleghêdi a còla sgnêda.
+upload|Cârga un file
+uploadbtn|Cârga un file
+reuploaddesc|Tōrna al modèl p'r al cargamèint.
+upload-tryagain|Spidés la spiegasiòun dal file mudifichê
+uploadnologin|An t'é mìa gnû dèinter
+uploadnologintext|Per carghêr al file è necesâri ~{0}.
+upload_directory_missing|La cartèla 'd cargamèint dal j infurmasiòun (~{0}) l'an gh'é mìa e l'an pōl mìa èser fâta dal prugrâma dal sît.
+upload_directory_read_only|Al prugrâma dal sît an n'é bòun de scréver int la cartèla 'd cargamèint dal j infurmasiòun (~{0}).
+uploaderror|Erōr int al cargamèint
+upload-recreate-warning|<strong>Atèint: un file cun cól nòm ché l'é stê scanşlê o spustê. </strong> L' elèinch dal scanşladûri e di spustamèint ed cla pàgina ché al vîn scrét ché sòta per cumditê:
+uploadtext|Druvêr al mudèl ché sòta per scarghêr di file nōv. Per guardêr o serchêr i file bèle scarghê, consultêr la [[Special:FileList\u007C lésta di file scarghê]]. Al câregh di file e dal versiòun nōvi di file în registrê int la [[Special:Log/upload\u007Clésta di file salvê]], al scanşladûri in còl [[Special:Log/delete\u007Capôsta]].\n\nPer mèter un file dèinter 'na pàgina, fêr un colegamèint ed cól gèner ché:\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code>''' per druvêr la versiòun intēra dal file\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png\u007C200px\u007Cthumb\u007Cleft\u007Ctèst divêrs]]</nowiki></code>''' per druvêr 'na versiòun lêrga 200pixel dèinter int 'na scâtla, in rîga a mansèina e cun 'tèst divêrs' cme tétol\n* '''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code>''' per fêr un colegamèint dirèt al file sèinsa vèdrel
+upload-permitted|{{PLURAL:~{1}\u007CGèner ed file permés}}: ~{0}.
+upload-preferred|{{PLURAL:~{1}\u007C Gèner ed file cunsiliê}}: ~{0}.
+upload-prohibited|{{PLURAL:~{1}\u007CGèner ed file mìa permés}}: ~{0}.
+uploadlogpage|Fil carghê
+uploadlogpagetext|Ed sègvit a gh'é lelèinch ed j ûltem file carghê. Consultêr la [[Special:NewFiles\u007Cgaleréia di file nōv]] per vèdri tót.
+filename|Nòm dal file
+filedesc|Particulêr.
+fileuploadsummary|Sûnt:
+filereuploadsummary|Cambiamèint al file:
+filestatus|Infurmasiòun inséma 'l dirét 'd avtōr:
+filesource|Surzéia
+ignorewarning|Trascûra l'avîş e a tóti 'l manēri sêlva al file
+ignorewarnings|An badêr mìa a i mesâg dal sistēma
+minlength1|Al nòm dal file al dēv èser fât d' almēno 'na lètra.
+illegalfilename|Al nòm "~{0}" al gh'à dèinter di carâter mìa permés int i tétol dal pàgini. \nDêr al file un nòm divêrs e pruvêr a carghêrel ed nōv.
+filename-toolong|I nòm di file an pōlen mìa andêr d'ed sōver î 240 byte.
+badfilename|Al nòm dal file l'é stê cunvertî in "~{0}".
+filetype-mime-mismatch|La zûnta dal file ".~{0}" an n'é m'a cumpâgna 'l gèner MIME vésta dal file (~{1}).
+filetype-badmime|An n'é mìa permés carghê file 'd gèner MIME "~{0}".
+filetype-bad-ie-mime|Impusébil carghêr al file perché Internet Explorer  l'al vedré cme "~{0}", ch'lé un gèner ed file mìa permés e al pré èser ânca periculōş.
+filetype-unwanted-type|Carghêr un file dal gèner '''''.~{0}''''' l'é scunsiliê. {{PLURAL:~{2}\u007CAl gèner ed file cunsiliê l'é\u007CI gèner di file cunsiliê în }} ~{1}.
+filetype-banned-type|'''".~{0}"''' {{PLURAL:~{3}\u007Can n'é mìa un gèner ed file permés\u007C în mìa gèner ed file permés}}.\n{{PLURAL:~{2}\u007CAl gèner ed file permés l'é\u007CI gèner ed file permés în}} ~{1}.
+filetype-missing|Al file l'é sèinsa la zûnta (per es. ".jpg").
+empty-file|Al file che t'é spidî l'é vōd.
+file-too-large|Al file che t'é spidî l'é trôp grôs.
+filename-tooshort|Al nòm dal file l'é trôp cûrt.
+filetype-banned|Cól gèner ed file ché an n'é mìa permés.
+verification-error|Cól file ché an n'à mìa pasê la veréfica.
+hookaborted|La mudéfica che s'é pruvê ed fêr l'é stêda fermêda da un gânc ed 'na zûnta a la fîn dal nòm dal file .
+illegal-filename|Al nòm dal file an n'é mia acetê.
+overwrite|Scréver inséma 'n file che al gh'é bèle an n'é mìa permés.
+unknown-error|É sucès un erōr mìa cgnusû.
+tmp-create-error|L'é impusébil fêr un file pruvişôri.
+tmp-write-error|Erōr de scritûra dal file pruvişôri.
+large-file|A 's arcmânda d' andêr d'ed sōver la larghèsa ed ~{0} per ógni file; còst l'é grôs ~{1}.
+largefileserver|Al file al và fōra dal j amzûri permési da l'impustasiòun dal prugrâma.
+emptyfile|Al file apèina carghê al sèmbra vōd. \nCòst al pré èser duvû a un erōr int al nòm dal file. Verifichêr ch'es vōl dabòun carghêr cól file ché.
+windows-nonascii-filename|Cla wiki ché l'an permèt mìa i nòm di file cun i carâter specêl.
+fileexists|Un file cun cól nòm ché al gh'é bèle. Verifichêr préma <strong>[[:~{0}]]</strong> s' an s'é mìa sicûr ed vrèir scrévregh inséma. \n[[~{0}\u007Cthumb]]
+filepageexists|La pàgina de spiegasiòun de sté file l'é bèle stêda fâta a l'indirés <strong>[[:~{0}]]</strong>, anca s' an gh'é mìa incòra un file cun sté nòm. La spiegasiòun ed l'elemèint mésa da carghêr l'an gnirà mìa fâta vèder inséma la pàgina de spiegasiòun. Per fêr in môd che l'elemèint a 's vèda inséma la pàgina de spiegasiòun, a srà necesâri mudifichêrla a mân. [[~{0}\u007Cthumb]]
+fileexists-extension|Un file cun l'istès nòm al ghé bèle: [[~{1}\u007Cthumb]]\n*Nòm dal file carghê: <strong>[[:~{0}]]</strong>\n*Nòm dal file che gh'é: <strong>[[:~{1}]]</strong>  \nVōt fōrsi siēlier un nòm pió carateréstich?
+fileexists-thumbnail-yes|Al file carghê al sèmbra èsere 'na miniadûra ''(thumbnail)''. [[~{0}\u007Cthumb]] Verifichêr, per cunfròunt, al file <strong>[[:~{0}]]</strong>. Se 's trâta ed l'istèsa figûra, int al j amzûri uriginêli, an n'é mìa necesâri carghêr êtri miniadûri.
+file-thumbnail-no|Al nòm dal file al cumincia cun <strong>~{0}</strong>; la sèmbra dòunca èser 'na miniadûra ''(thumbnail)''. Se 's gh'à la figûra int la qualitê uriginêla, as prèiga 'd carghêrla. In chêş contrâri, as prèiga 'd cambiêr al nòm dal file.
+fileexists-forbidden|Un file cun un nòm cumpâgn al gh'é bèle e an 's pōl mìa scrévregh inséma. Tunêr indrē e cambiêr al nòm cun al nòm ch'es vōl carghêr al file. [[File:~{0}\u007Cthumb\u007Ccenter\u007C~{0}]]
+fileexists-shared-forbidden|Un file cun un nòm cumpâgn al gh'é bèle int l'archévi dal risórsi multimediêli spartîdi. S' es vōl incòra carghêr al file, tunêr indrē e cambiêr al nòm cun al nòm ch'es vōl carghêr al file. [[File:~{0}\u007Cthumb\u007Ccenter\u007C~{0}]]
+file-exists-duplicate|Cōl file ché l'é 'na côpia {{PLURAL:~{0}\u007Cdal segvèint\u007Cdi segvèint}} file:
+file-deleted-duplicate|Un file cumpâgn a còst ([[:~{0}]]) l'é stê scanşlê tèimp fa. Verifichêr la stôria dal scanşladûri préma 'd carghêrel incòra ed nōv.
+file-deleted-duplicate-notitle|Un file cumpâgn a còst l'é stê scanşlê tèimp fa, e al tétol l'é stê tôt via. Dmânda a quelchidûn  ch' al gh'à la pusibilitê ed vèdeer i file scanşlê 'd verifichêr la situasiòun préma 'd andêr avânti cun al carghêrel incòra 'd nōv.
+uploadwarning|Avîş che s'é drē carghêr
+uploadwarning-text|Per piaşèir câmbia ché sòta la spiegasiòun dal file e prōv' incòra.
+savefile|Sêlva 'l file
+uploaddisabled|La cârga dal file l'é bluchêda.
+copyuploaddisabled|La cârga per mèz  'd URL l'é blucêda.
+uploaddisabledtext|La cârga di file an n'é mìa atîva.
+php-uploaddisabledtext|La cârga dal file cun PHP l'é bluchêda. Cuntròla che 'l file_uploads al sìa bèin impustê.
+uploadscripted|Cól file ché al gh'à un côdis o di script, che prén èser mìa capî bèin da un navigadōr internèt.
+uploadscriptednamespace|Cól file SVG ché al gh'à un namespace '~{0}' mìa permés.
+uploadinvalidxml|Al côdis XML int al file al pōl mìa èser lavurê bèin.
+uploadvirus|Cól fil ché al ghè un 'virus'! Particulêr: ~{0}
+uploadjava|Cól file ché l'é un file ZIP che 'l gh'à dèinter un file .class Java. Carghêr i file Java an n'é mìa permés, perché pōlen schivşêr i lémit ed sicurèsa.
+upload-source|File 'd urégin
+sourcefilename|Nòm dal file 'd urégin:
+sourceurl|URL 'd urégin:
+destfilename|Nòm dal file in dó 'l gh'à d'andêr:
+upload-maxfilesize|Grandèsa mâsima dal file:~{0}
+upload-description|Spiegasiòun dal file
+upload-options|Siēlti per carghêr
+watchthisupload|Zûnta a i tgnu  'd ôc
+filewasdeleted|Un file cun cól nòm ché l'é bèle stê carghê e scanşlê tèimp indrē. Verifichêr la stôria dal ~{0} préma 'd carghêrel incòra.
+filename-bad-prefix|Al nòm dal file che s'é drē carghêr al cumîncia cun <strong>"~{0}"</strong>, ch'l'é un nòm genèrich cumpâgn a quî dê in avtomâtich dal mâchini fotogrâfichi digitêli. As prèiga ed sernîr un nòm pió precîş p'r al fîle.
+upload-success-subj|Carghê cun sucès
+upload-success-msg|La cârga da [~{1}] l'é andêda bèin. Al file a's pōl catêr ché: [[:{{ns:file}}:~{0}]]
+upload-failure-subj|A gh'é un problēma carghêr
+upload-failure-msg| A s'é verifiche un problēma cun la cârga da [~{1}]:\n\n\n~{0}
+upload-warning-subj|Avîş che s'é drē carghêr
+upload-warning-msg|A gh'é stê un problēma mèinter 's carghêva da [~{1}]. A ' spōl turnêr al [[Special:Upload/stash/~{0}\u007Cform di upload]] per justêr al problēma.
+upload-proto-error|Protocôl şbagliê
+upload-proto-error-text|Per carghêr da terminêl luntân druvêr URL che cumîncen cun code>http://</code> opór <code>ftp://</code>.
+upload-file-error|Erōr intêren
+upload-file-error-text|É sucès un erōr intêren mèinter a s' ēra drê fêr un file pruvişôri inséma 'l servèint. Cuntatêr un [[Special:ListUsers/sysop\u007Caministradōr]].
+upload-misc-error|Erōr in cârga mia cgnusû
+upload-misc-error-text|S'é verifichê un erōr mìa cgnusû mèinter a 's carghêva al file. Verifichêr che la URL la sia giósta e ch'es pôsa druvêr. Se al problēma al gh'é incòra, cuntatêr un [[Special:ListUsers/sysop\u007Caministradōr]].
+upload-too-many-redirects|L'URL al gh'îva dèinter trôp redirect
+upload-http-error|A s'é verifichê un erōr HTTP: ~{0}
+upload-copy-upload-invalid-domain|An n'é mìa permés carghêr dal côpi da cl'indirés ché.
+backend-fail-stream|An n'é mìa pusébil traşmèter al file "~{0}".
+backend-fail-backup|An n'é mìa pusébil fêr 'na côpia 'd sicurèsa dal file ~{0}.
+backend-fail-notexists|Al file ~{0} al gh'é mìa.
+backend-fail-hashes|An n'é mìa pusébil utgnîr la divisiòun di file per cunfrûnt.
+license|Licèinsa:
+license-header|Licèinsa
+nolicense|Nisóna licèinsa sgnêda
+listfiles_date|Dâta
+listfiles_name|Nòm
+listfiles_user|Utèint
+file-anchor-link|File
+filehist|Stòria 'd la pàgina
+filehist-help|Fà cléch insém a 'n gróp dâta/ōra per vèder al file cm'é l'ēra int al mumèint e-sgnê
+filehist-revert|armèt
+filehist-current|(adès)
+filehist-datetime|Dâta/Ōra
+filehist-thumb|Miniadûra
+filehist-thumbtext|Miniadûra ed la versiòundal ~{0}.
+filehist-user|Utèint
+filehist-dimensions|Amzûri
+filehist-comment|Cumèint
+imagelinks|Ûş dal file
+linkstoimage|{{PLURAL:~{0}\u007CInt la pàgina seguèint a gh'é\u007CInt al seguèinti ~{0} pàgini a gh'é}} colegamèint al file:
+nolinkstoimage|Nisóna pàgina la gh'à colegamèint al file
+sharedupload-desc-here|Cól file ché al deşvîn da ~{0} e al pōl èser druvê da êter prugèt. Ed sègvit a vîn fât vèder la spiegasiòun che gh'é int la [~{1} pàgina de spiegasiòun dal file].
+filedelete-submit|Scanşela
+randompage|'Na pàgina a chêş
+brokenredirects-edit|Mudéfica
+nbytes|~{0} {{PLURAL:~{0}\u007Cbyte\u007Cbyte}}
+nmembers|~{0} {{PLURAL:~{0}\u007Celemèint}}
+prefixindex|Elèinch per lètri dal pàgini
+usercreated|{{GENDER:~{2}\u007CFât/fâta}} al ~{0} a ~{1}
+newpages|Pàgini pió nōvi
+move|Spôsta
+pager-newer-n|{{PLURAL:~{0}\u007C1 còl pió frèsch\u007C~{0} i pió frèsch}}
+pager-older-n|{{PLURAL:~{0}\u007C1 al pió vèc\u007C~{0} i pió vèc}}
+booksources|Tèst o documèint da léber.
+booksources-search-legend|Sērca 'd documèint insém a di léber
+log|Regéster
+allarticles|Tót al pàgini.
+allpagessubmit|Và
+linksearch-line|~{0} preşèint int la pàgina ~{1}
+listusers-submit|Fà vèder
+listgrouprights-group|Gróp:
+listgrouprights-members|(elèinch 'd j inscrét)
+emailuser|Scrév a l'utèint
+emailfrom|Da:
+emailto|A:
+emailsubject|Argumèint:
+emailmessage|Mesâg
+watchlist|Tgnîr sòt ôc
+mywatchlist|Tgnîr sòt ôc
+watchlistfor2|Da l'utèint ~{0} ~{1}
+watchnologin|An t'é mìa gnû dèinter
+watch|Và adrē
+watchthispage|Và adrē a cla pàgina ché
+unwatch|Andêr mìa adrē
+watchlist-details|La lésta 'd quî tgnû 'd ôc specêl la gh'à {{PLURAL:~{0}\u007C'na pàgina (e la relatîva pàgina 'd discusiòun)\u007C~{0} pagine (e al relatîvi  pàgini 'd discusiòun)}}.
+wlshowlast|Fà vèder al j ûltmi ~{0} ōri ~{1} dé
+watchlist-options|Siēlti di tgnû sòt ôc specêl.
+created|creät
+changed|mudifegat
+delete-confirm|Scanşela "~{0}"
+delete-legend|Scanşela
+actioncomplete|Asiòun cumpîda
+actionfailed|Asiòun falîda
+dellogpage|Scanşladûri
+rollbacklink|tōrna préma dal mudéfichi
+rollbackfailed|An t'é mia turnê indrē
+protectlogpage|Al prutesiòun
+protectedarticle|l'à prutèt "[[~{0}]]"
+pagesize|(byte)
+restriction-edit|Mudéfichi
+restriction-move|Spôsta
+restriction-create|Invèinta
+restriction-upload|Cârga
+undeletelink|guêrda/recóper
+undeleteviewlink|Guêrda
+undelete-show-file-submit|Sé
+namespace|Spâsi di nòm
+invert|scâmbia 'l pêrti siēlta
+contributions|Lavōr fât da {{GENDER:~{0}\u007Cl'utèint}}
+contributions-title|Lavōr ed ~{0}
+mycontris|I mē lavōr
+contribsub2|Per {{GENDER:~{2}\u007C~{0}}}(~{1})
+uctop|(adès)
+month|Dal mèiş (e quî préma):
+year|Da l'ân (e quî préma):
+sp-contributions-newbies|Fà vèder sōl i lavōr fât da j utèint nōv.
+sp-contributions-blocklog|blôch
+sp-contributions-uploads|fil carghê
+sp-contributions-logs|Regéster
+sp-contributions-talk|discusiòun
+sp-contributions-search|Sērca i lavōr fât
+sp-contributions-username|Indirés IP o nòm utèint
+sp-contributions-toponly|Fà vèder sōl i lavōr ch' în al j ûltmi versiòun per la pàgina.
+sp-contributions-submit|Sērca
+whatlinkshere|A pûnten ché
+whatlinkshere-title|Pàgini che pûnten a "~{0}"
+whatlinkshere-page|Pàgina:
+linkshere|Al pàgini segvèinti a gh'àn di colegamèint a '''[[:~{0}]]'''.
+nolinkshere|Nisóna pàgina la gh'à dèinter colegamèint che pûnten a '''[[:~{0}]]'''.
+isredirect|Pàgina redirect
+istemplate|uniòun
+isimage|Colegamèint vêrs al file
+whatlinkshere-prev|{{PLURAL:~{0}\u007Ccòl préma\u007Cquî préma ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Ccòl dôp\u007Cquî dôp ~{0}}}
+whatlinkshere-links|← colegamèint
+whatlinkshere-hideredirs|~{0}redirect
+whatlinkshere-hidetrans|~{0} uniòun
+whatlinkshere-hidelinks|~{0} colegamèint
+whatlinkshere-hideimages|~{0} colegamèint da file
+whatlinkshere-filters|Fîlter
+block|Blôca l'utèint
+unblock|Şblôcä l'utèint
+blockip|Blôcä {{GENDER:~{0}\u007Cutèint}}
+blockip-legend|Blôcä l'utèint
+ipboptions|2 ōri:2 hours,1 dé:1 day,3 dé:3 days,1 stmâna:1 week,2 stâni:2 weeks,1 mèiş:1 month,3 mèiş:3 months,6 mèiş:6 months,1 ân:1 year,infinito:infinite
+ipb-unblock-addr|Şblôcä ~{0}
+unblockip|Şblôcä l'utèint
+blocklist|Utèint bluchê
+ipblocklist|Utèint bluchê
+ipblocklist-submit|Sērca
+ipblocklist-otherblocks|Êter {{PLURAL:~{0}\u007Cblôch}}
+blocklink|blôca
+unblocklink|şblôca
+change-blocklink|câmbia blôch
+contribslink|lavōr fât
+blocklogpage|Blôch
+blocklogentry|t'é bluchê [[~{0}]] per un peréiod ed ~{1} ~{2}
+unblocklogentry|l'à şbluchê ~{0}
+block-log-flags-nocreate|Registrasiòun bluchêda
+move-page|Spustamèint ed ~{0}
+move-page-legend|Spustamèint ed pàgina
+movearticle|Spôsta la pàgina:
+movepagebtn|Spôsta la pàgina
+movelogpage|Spustamèint
+revertmove|armèt
+export|Pôrta fōra 'l pàgini.
+export-submit|Pôrta fōra
+allmessagesname|Nòm.
+allmessagesdefault|Tèst pre-stabilî
+allmessages-filter-all|Tót
+allmessages-language|Léngua:
+allmessages-filter-submit|Và
+thumbnail_error|Erōr mèinter ét fêv la miniadûra:~{0}
+import-upload-filename|Nòm dal file:
+import-comment|Argumèint:
+import-upload|Cârga infurmasiòun XML
+tooltip-pt-userpage|La tó pàgina utèint
+tooltip-pt-mytalk|La tó pàgina 'd discusiòun.
+tooltip-pt-preferences|Al mē preferèinsi.
+tooltip-pt-watchlist|Elèinch dal pàgini che t'é drē tgnîr sòt ôc.
+tooltip-pt-mycontris|Elèinch di tō lavōr.
+tooltip-pt-login|A 's cunsélia 'd fêr la registrasiòun, ânca s' an n'é mia ubligatôri.
+tooltip-pt-logout|Và fōra
+tooltip-ca-talk|Guêrda al discusiòun relatîvi a cla pàgina chè.
+tooltip-ca-edit|Ét pō mudifiche cla pàgina ché. Per piaşèir drōva al ptòun "Guêrda préma 'd salvêr" per vèder còl che t'é fât.
+tooltip-ca-addsection|Cumîncia 'na sesiòun nōva.
+tooltip-ca-viewsource|Cla pàgina ché l'é sòta prutesiòun, mó 't pō vèder al só côdis surzéia.
+tooltip-ca-history|Versiòun ed préma fâti a cla pàgina ché.
+tooltip-ca-protect|Prutēz cla pàgina ché
+tooltip-ca-delete|Scanşéla cla pàgina ché
+tooltip-ca-move|Spôsta cla pàgina ché (câmbia tétol)
+tooltip-ca-watch|Zûnta cla pàgina ché a la tó lésta di tgnû 'd ôc specêl.
+tooltip-ca-unwatch|Tó via cla pàgina ché da la tó lésta di tgnû 'd ôc specêl.
+tooltip-search|Sērca dèinter ed {{SITENAME}}
+tooltip-search-go|Và a'na pàgina cun al tétol sgnê, s' al gh'é.
+tooltip-search-fulltext|Sērca int al pàgini al tèst e-sgnê.
+tooltip-p-logo|Guêrda la pàgina principêla
+tooltip-n-mainpage|Guêrda la pàgina principêla
+tooltip-n-mainpage-description|Guêrda la pàgina principêlal
+tooltip-n-portal|Spiegasiòun dal prugèt, còl ch'ét pō fêr, in dó catêr al côşi.
+tooltip-n-currentevents|Infurmasiòun só i fât 'd adèsa.
+tooltip-n-recentchanges|Elèinch dal j ûltmi mudéfichi dal sît
+tooltip-n-randompage|Fà vèder 'na pàgina a chêş
+tooltip-n-help|Pàgini 'd ajót
+tooltip-t-whatlinkshere|Elèinch ed tót' al pàgini ch'în coleghêdi a còsta.
+tooltip-t-recentchangeslinked|Elèinch dal j ûltmi mudéfichi al pàgini coleghêdi a còsta.
+tooltip-feed-atom|Feed Atom per cla pàgina ché.
+tooltip-t-contributions|Lèsta di lavōr fât da cl'utèint ché.
+tooltip-t-emailuser|Mânda un mesâg cun la pòsta eletrônica a cl'utèint ché
+tooltip-t-upload|Cârga un file
+tooltip-t-specialpages|Elèinch ed tót al pàgini specêli
+tooltip-t-print|Per stampêr cla pàgina ché.
+tooltip-t-permalink|Colegamèint fés a cla versiòun ché 'd  la pàgina.
+tooltip-ca-nstab-main|Guêrda la pàgina
+tooltip-ca-nstab-user|Guêrda la pàgina utèint
+tooltip-ca-nstab-special|Còsta ché l'é 'na pàgina specêlal l'an pōl mìa èser mudifichêda
+tooltip-ca-nstab-project|Guêrda la pàgina dal prugèt
+tooltip-ca-nstab-image|Guêrda la pàgina dal file
+tooltip-ca-nstab-template|Guêrda 'l mudèl
+tooltip-ca-nstab-help|Guêrda la pàgina d'ajót
+tooltip-ca-nstab-category|Guêrda la pàgina 'd la categoréia
+tooltip-minoredit|Sègna cme 'na mudéfica céca
+tooltip-save|Sêlva al mudéfichi
+tooltip-preview|Guêrda al mudéfichi préma 'd salvêr (cunsiliê préma 'd salvêr)
+tooltip-diff|Guêrda 'l mudéfichi fâti al tèst
+tooltip-compareselectedversions|Guêrda al diferèinsi tr' al dō versiòun sernîdi ed cla pàgina ché.
+tooltip-watch|Zûnta cla pàgina ché a la tó lésta di tgnû 'd ôc specêl.
+tooltip-rollback|"Rollback" al scanşèla cun un cléch tót' al mudéfichi fâti a cla pàgina ché da l'ûltem ch' al gh'à més al mân.
+tooltip-undo|"Scanşèla" al permèt de scanşlêr cla mudéfica ché e l'arvés al mudèl ed mudéfica in môd "Guerda préma". E al permèt ed mèter dèinter 'na spiegasiòun int l' elemèint ed la mudéfica.
+tooltip-summary|Mèt dèinter un sût cèch.
+others|êter
+pageinfo-header-edits|Stòria dal mudéfichi
+pageinfo-watchers|Nómer  'd utèint che gh'àn la pàgina sòt ôc.
+pageinfo-edits|Nómer totêl dal mudéfichi
+pageinfo-authors|Nómer totêl di divêrs avtôr
+previousdiff|← Diferèinsa 'd préma
+nextdiff|Diferèinsa dôp →
+file-info-size|~{0} × ~{1} pixel, amzûra dal file:~{2}, gèner MIME: ~{3}
+file-nohires|An gh'é mìa la manēra ed vèder pió cêr de csé.
+svg-long-desc|file in furmê SVG, grandèsa teôrica ~{0} x ~{1} pixel, grandèsa dal file: ~{2}
+show-big-image|File uriginêl
+file-info-gif-looped|A ripetisiòun
+file-info-png-looped|A ripetisiòun
+newimages-legend|Fîltra
+ilsubmit|Sērca
+bydate|per dâta
+bad_image_list|La manēra l'é còsta:\n\na vînen cunsidrê sōl j elèinch puntê (ríghi che cumîncen cun al carâter *). Al prém colegamèint só ògni rîga al dēv èser un colegamèint a un file mìa vrû. I colegamèint che vînen dôp, int l'istèsa rîga, în cunsidrê cme un chêş (oséia, pàgini in dó al file al pōl èser arciamê normalmèint).
+metadata|Metadati
+metadata-help|In cól file ché agh'é dal j infurmasiòun zuntêdi, prubabilmèint zuntêdi da la mâchina fotogrâfica o dal scàner druvê per fotografêrel o per fêrel dvintêr digitêl. Se al file l'é stê mudfifichê, soquânt particulêr a prén cumbinêr mìa cun la realtê.
+metadata-fields|I câmp relatîv a i metadati ed la figûra, in lésta in cól mesâg ché, a gnirân més int la pàgina ed la figûra quând la tabèla di metadati l'é mustrêda int la fōrma cûrta. Per impustasiòun pre-stabilîda, chiêter câmp a gnirân lughê. \n* make \n* model \n* datetimeoriginal \n* exposuretime \n* fnumber \n* isospeedratings \n* focallength \n* artist \n* copyright \n* imagedescription \n* gpslatitude \n* gpslongitude \n* gpsaltitude
+exif-exposuretime-format|~{0} s (~{1})
+exif-gpsareainformation|Nòm ed la zôna GPS
+exif-gpsdatestamp|Dâta GPS
+exif-source|Surzéia
+exif-languagecode|Léngva
+exif-iimcategory|Categoréia
+exif-identifier|Identificatîv
+namespacesall|tót
+monthsall|tót
+recreate|Tōrna a fêr
+confirm_purge_button|Va bèin
+confirm-watch-button|Va bèin
+confirm-unwatch-button|Va bèin
+imgmultigo|Và!
+imgmultigoto|Và a la pàgina ~{0}
+ascending_abbrev|crès
+descending_abbrev|câl
+table_pager_first|Préma pàgina
+table_pager_last|Ûltma pàgina
+table_pager_limit_submit|Và
+watchlistedit-raw-titles|Tétol:
+watchlisttools-view|Guêrda al mudéfichi relatîvi.
+watchlisttools-edit|Fa vèder e mudéfica la lést quî di tgnû 'd ôc specêl.
+watchlisttools-raw|Mudéfica la lésta in furmê tèst.
+duplicate-defaultsort|Atensiòun la cêva per urdnêr pre-stabilîda ''~{0}'' la vîn cambiêda cun la ''~{1}''.
+version|Versiòun
+version-specialpages|Pàgina specêla
+version-other|Êter
+version-version|(~{0})
+version-license|Licèinsa Media Wiki
+version-poweredby-others|êter
+fileduplicatesearch-filename|Nòm dal file:
+fileduplicatesearch-submit|Sērca
+specialpages|Pàgini specêli
+external_image_whitelist|#Lasêr cla pàgina ché acsé cme l'é<pre>\n#Mèter dèinter i pès dal j espresiòun regolêri (sōl la pêrta cla va fra //) ed sègvit\n#Còsti gnirân més a cunfrûnt cun j indirés URL dal figûri d'ed fōra (hotlinked) \n#Al cunbinasiòun asrân fât vèder cme figûri, se no a gnirà fât vèder sōl al colegamèint\n#Al rîghi che cumîncen cun # în cunsidrêdi di cumèint\n#La diferèinsa tr' al lètri grândi e al lètri céchi an gh'à mìa impurtânsa\n\n#Mèter sōver cla rîga ché tót i pès di regex. Lasêr cla rîga ché acsé cme l'é</pre>
+tag-filter|Fîltra per  [[Special:Tags\u007Cetichèta]]
+tags-edit|mudéfica
+compare-page1|Pàgina 1
+compare-page2|Pàgina 2
+compare-rev1|Revişiòn 1
+compare-rev2|Revişiòn 2
+htmlform-reset|Scanşèla 'l mudéfichi
+htmlform-selectorother-other|Êter
+rightsnone|(nisûn)
+feedback-cancel|Scanşela
+feedback-message|Mesâg
+feedback-subject|Argomèint:
+']:>
+).lang
+;

@@ -1,0 +1,814 @@
+this
+.ns_names
+  .load_text(
+<:['
+-2|Media
+-1|Espesiál
+1|Diskusaun
+2|Uza-na\\'in
+3|Diskusaun Uza-na\\'in
+5|Diskusaun $1
+6|Imajen
+7|Diskusaun Imajen
+8|MediaWiki
+9|Diskusaun MediaWiki
+10|Template
+11|Diskusaun Template
+12|Ajuda
+13|Diskusaun Ajuda
+14|Kategoria
+15|Diskusaun Kategoria
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+14|Kategoría
+15|Diskusaun Kategoría
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Allmessages|Mensajen_hotu
+Allpages|Pájina_hotu
+Block|Blokeiu
+Categories|Kategoria
+Contributions|Kontribuisaun
+CreateAccount|Rejista
+Emailuser|Haruka_korreiu_eletróniku
+Export|Esporta
+Import|Importa
+BlockList|Lista_ema_sira-ne\\'ebé_blokeiu_tiha
+Listadmins|Lista_administradór
+Listfiles|Lista_imajen
+Listusers|Lista_uza-na\\'in
+Longpages|Pájina_naruk
+Movepage|Book_pájina~Book
+Mypage|Ha\\'u-nia_pájina
+Newimages|Imajen_foun
+Preferences|Preferénsia
+Protectedpages|Pájina_sira-ne\\'ebé_proteje_tiha
+Randompage|Pájina_ruma
+Recentchanges|Mudansa_foufoun_sira
+Search|Buka
+Shortpages|Pájina_badak
+Specialpages|Pájina_espesiál_sira
+Statistics|Estatístika
+Undelete|Restaurar
+Upload|Tau_iha_arkivu_laran
+Userrights|Priviléjiu
+Version|Versaun
+Watchlist|Lista_hateke
+Whatlinkshere|Pájina_sira_ne\\'ebé_bá_iha_ne\\'e
+Withoutinterwiki|Laiha_interwiki
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Loron-domingu
+monday|Loron-segunda
+tuesday|Loron-tersa
+wednesday|Loron-kuarta
+thursday|Loron-kinta
+friday|Loron-sesta
+saturday|Loron-sábadu
+sun|Dom
+mon|Seg
+tue|Ter
+wed|Kua
+thu|Kin
+fri|Ses
+sat|Sáb
+january|Janeiru
+february|Fevereiru
+march|Marsu
+april|Abríl
+may_long|Maiu
+june|Juñu
+july|Jullu
+august|Agostu
+september|Setembru
+october|Outubru
+november|Novembru
+december|Dezembru
+january-gen|Janeiru nian
+february-gen|Fevereiru nian
+march-gen|Marsu nian
+april-gen|Abríl nian
+may-gen|Maiu nian
+june-gen|Juñu nian
+july-gen|Jullu nian
+august-gen|Agostu nian
+september-gen|Setembru nian
+october-gen|Outubru nian
+november-gen|Novembru nian
+december-gen|Dezembru nian
+jan|Jan.
+feb|Fev.
+mar|Mar.
+apr|Abr.
+may|Maiu
+jun|Jun.
+jul|Jul.
+aug|Ago.
+sep|Set.
+oct|Out.
+nov|Nov.
+dec|Dez.
+toc|Tabela konteúdu
+allpages|Pájina hotu
+prevpage|Pájina molok (~{0})
+nextpage|Pájina oinmai (~{0})
+categories|Kategoria sira
+lastmodifiedat|Mudansa ba dala ikus pájina ne'e nian iha ~{0}, ~{1}.
+otherlanguages|Iha lian seluk
+blanknamespace|(Prinsipál)
+pagecategories|{{PLURAL:~{0}\u007CKategoria\u007CKategoria}}
+category_header|Artigu iha kategoría "~{0}"
+subcategories|Sub-kategoria sira
+category-empty|''Kategoria ne'e agora la iha pájina sira.''
+nextn|oinmai {{PLURAL:~{0}\u007C~{0}}}
+prevn|molok {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|kont.
+link_tip|Ligasaun ba laran
+statistics|Estatístika
+categorytree|Ai-hun kategoria
+categorytree-portlet|Kategoria sira
+categorytree-category|Kategoria:
+categorytree-go|Hatudu ai-hun
+categorytree-mode-categories|hatudu de'it kategoria
+categorytree-mode-all|pájina hotu
+imagemap_description|Kona-ba imajen ne'e
+proofreadpage_nextpage|Pájina oinmai
+proofreadpage_prevpage|Pájina molok
+proofreadpage_pages|{{PLURAL:~{0}\u007Cpájina ida\u007Cpájina ~{1}}}
+cite_article_desc|Kria pájina espesíal ba [[Special:Cite\u007Csitasaun]] ho ligasaun iha kaixa besi nian
+cite_article_link|Sita pájina ne'e
+tooltip-cite-article|Informasaun kona-ba sita pájina ne'e
+cite|Sita
+cite_page|Pájina:
+cite_submit|Sita
+wm-license-information-date|Tempu
+wm-license-information-author|Autór
+sitesupport|Fó donativu ida
+tooltip-n-sitesupport|Tulun ami
+group-steward|Steward sira
+group-steward-member|{{GENDER:~{0}\u007CSteward}}
+grouppage-steward|{{ns:project}}:Steward sira
+tog-underline|Subliña ligasaun sira:
+tog-hideminor|Lá'os hatudu muda ki-ki'ik iha mudansa foufoun sira
+tog-usenewrc|Iha lista "mudansa foufoun sira" no "lista hateke": Hatudu mudansa iha grupu sira - grupu ida ba pájina ida (presiza JavaScript)
+tog-showtoolbar|Hatudu kaixa edita (presiza JavaScript)
+tog-watchcreations|Hateke pájina no imajen sira-ne'ebé ha'u kria/tau iha arkivu laran
+tog-watchdefault|Hateke pájina sira-ne'ebé ha'u edita
+tog-watchmoves|Hateke pájina sira-ne'ebé ha'u book
+tog-watchdeletion|Hateke pájina sira-ne'ebé ha'u halakon
+tog-minordefault|Edita hotu-hotu "ki'ik"
+tog-oldsig|Asinatura atuál
+tog-watchlisthideown|La hatudu ha'u-nia edita iha lista hateke
+tog-watchlisthidebots|Hamsumik bot iha lista hateke
+tog-watchlisthideminor|Hamsumik muda ki-ki'ik iha lista hateke
+tog-watchlisthideliu|La hatudu edita ema rejista nian iha lista hateke
+tog-watchlisthideanons|La hatudu edita ema anónimu nian iha lista hateke
+tog-watchlisthidepatrolled|Hamsumik muda patrolada iha lista hateke
+tog-ccmeonemails|Haruka ba ha'u kopia korreiu eletróniku nian ne'ebé ha'u korreia
+tog-showhiddencats|Hatudu kategoria sira-ne'ebé subar
+underline-always|Sempre
+underline-never|Nunka
+about|Kona-ba
+article|Pájina
+cancel|Para
+moredotdotdot|Barak liu...
+mypage|Ha'u-nia pájina
+mytalk|Diskusaun
+anontalk|Diskusaun ba IP ne'e
+navigation|Hatudu-dalan
+and| ho
+qbfind|Hetan
+qbedit|Edita
+qbpageoptions|Pájina ne'e
+qbmyoptions|Ha'u-nia pájina sira
+faq|FAQ
+faqpage|Project:FAQ
+actions|Aksaun sira
+errorpagetitle|Sala
+returnto|Fali ba ~{0}.
+tagline|Husi {{SITENAME}}
+help|Ajuda
+search|Buka
+searchbutton|Buka
+go|Bá
+searcharticle|Pájina
+history|Istória pájina
+history_short|Istória
+printableversion|Versaun ba impresaun
+permalink|Ligasaun mahelak
+print|Imprime
+edit|Edita
+create|Kria
+editthispage|Edita pájina ne'e
+create-this-page|Kria pájina ne'e
+delete|Halakon
+deletethispage|Halakon pájina ne'e
+undelete_short|Restaurar {{PLURAL:~{0}\u007Cversaun ida\u007Cversaun ~{0}}}
+protect|Proteje
+protect_change|muda
+protectthispage|Proteje pájina ne'e
+unprotect|Muda protesaun
+unprotectthispage|Muda protesaun pájina ne'e nian
+newpage|Pájina foun
+talkpage|Diskusaun kona-ba pájina ne'e
+talkpagelinktext|Diskusaun
+specialpage|Pájina espesiál
+talk|Diskusaun
+toolbox|Kaixa besi nian
+userpage|Haree pájina uza-na'in
+projectpage|Haree pájina projetu nian
+imagepage|Haree pájina imajen nian
+mediawikipage|Haree pájina mensajen nian
+viewhelppage|Haree pájina ajuda
+categorypage|Haree pájina kategoría nian
+viewtalkpage|Haree diskusaun
+protectedpage|Pájina maka ema ruma proteje tiha
+jumpto|Bá:
+jumptonavigation|hatudu-dalan
+jumptosearch|buka
+aboutsite|Kona-ba {{SITENAME}}
+aboutpage|Project:Kona-ba
+copyright|Testu pájina nian iha ~{0} okos.
+copyrightpage|{{ns:project}}:Direitu_autór_nian
+currentevents|Mamosuk atuál sira
+currentevents-url|Project:Mamosuk atuál sira
+disclaimers|Avisu legál
+disclaimerpage|Project:Avisu legál
+edithelp|Ajuda kona-ba edita
+mainpage|Pájina Mahuluk
+mainpage-description|Pájina Mahuluk
+portal|Portál komunidade nian
+portal-url|Project:Portál komunidade nian
+privacy|Polítika privasidade nian
+privacypage|Project:Polítika privasidade nian
+badaccess|Ita la iha permisaun...
+badaccess-group0|Ó la bele halo ne'e.
+badaccess-groups|De'it uza-na'in sira-ne'ebé iha {{PLURAL:~{1}\u007Cgrupu\u007Cgrupu ida husi}} ~{0} bele halo ne'e.
+versionrequired|Presiza MediaWiki versaun ~{0}
+versionrequiredtext|Presiza MediaWiki versaun ~{0} ba uza pájina ne'e. Haree [[Special:Version\u007Cpájina versaun]].
+ok|OK
+retrievedfrom|Husi "~{0}"
+youhavenewmessages|Ó iha ~{0} (~{1}).
+youhavenewmessagesmulti|Ó iha mensajen foun sira iha ~{0}
+editsection|edita
+editold|edita
+viewsourceold|lee testu
+editlink|edita
+viewsourcelink|lee testu
+editsectionhint|Edita parte ~{0} pájina nian
+showtoc|hatudu
+hidetoc|subar
+thisisdeleted|Haree ka restaurar ~{0}?
+viewdeleted|Haree ~{0}?
+site-rss-feed|Feed RSS ~{0}
+site-atom-feed|Feed Atom ~{0}
+red-link-title|~{0} (pájina la iha)
+nstab-main|Pájina
+nstab-user|Pájina uza-na'in
+nstab-special|Pájina espesiál
+nstab-project|Pájina projetu nian
+nstab-image|Fail
+nstab-mediawiki|Mensajen
+nstab-help|Pájina ajuda
+nstab-category|Kategoria
+nosuchspecialpage|Pájina espesiál ne'e la iha
+nospecialpagetext|<strong>Pájina espesiál ne'e la iha.</strong>\n\nLista ida pájina espesiál nian [[Special:SpecialPages\u007Ciha ne'e]].
+error|Sala
+missingarticle-rev|(version#: ~{0})
+missingarticle-diff|(Dif.: ~{0}, ~{1})
+viewsource|Lee testu
+viewsourcetext|Ó bele lee no kopia testu pájina nian:
+namespaceprotected|Ó la iha priviléjiu ba edita pájina sira iha espasu '''~{0}'''.
+ns-specialprotected|La ema ida bele edita pájina espesiál sira.
+yourname|Naran uza-na'in:
+login|Log in
+nav-login-createaccount|Log in / kriar konta ida
+userlogin|Log in / kriar konta ida
+logout|Husik
+userlogout|Husik
+nologin|La iha konta ida? '''~{0}'''.
+nologinlink|Registrar
+createaccount|Registrar uza-na'in
+gotaccount|Ó iha konta ona? '''~{0}'''.
+gotaccountlink|Log in
+userexists|Naran uza-na'in ne'e ona iha wiki.\nFavór ida lori naran seluk.
+nosuchuser|Konta uza-na'in (naran "~{0}") la iha.\nUser names are case sensitive.\nCheck your spelling, ka [[Special:UserLogin/signup\u007Ckria konta foun]].
+nouserspecified|Ó tenke espesífiku naran uza-na'in ida.
+accountcreated|Registrar tiha uza-na'in
+loginlanguagelabel|Lian: ~{0}
+resetpass_text|<!-- Hakerek testu iha ne'e -->
+passwordreset-username|Naran uza-na'in:
+passwordreset-email|Diresaun korreiu eletróniku:
+extlink_sample|http://www.example.com ligasaun ba li'ur
+extlink_tip|Ligasaun ba li'ur (tau tan http://)
+image_sample|Ezemplu.jpg
+media_sample|Ezemplu.ogg
+sig_tip|Ita-nia asinatura ho data/oras
+summary|Rezumu:
+minoredit|Ne'e muda ki'ik
+watchthis|Hateke pájina ne'e
+savearticle|Muda pájina
+showdiff|Hatudu diferensa sira
+anoneditwarning|Ó lá'os "log-in" iha momentu.
+blockedtitle|Uza-na'in la bele edita (blokeiu)
+blockednoreason|laiha motivu
+whitelistedittext|Ó tenke ~{0} ba edita pájina sira.
+loginreqpagetext|Ó tenke ~{0} ba haree pájina seluk.
+newarticle|(Foun)
+noarticletext|Iha momentu lá'os testu iha pájina ne'e, bele [[Special:Search/{{PAGENAME}}\u007Cbuka naran pájina nian]] iha pájina seluk, <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} search the related logs], ka [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} edita pájina ne'e]</span>.
+previewnote|'''Ne'e de'it pájina ba kontrola.'''\nIta-nia mudansa la armazenadu seidauk!
+editing|Edita ~{0}
+editingsection|Edita ~{0} (seksaun)
+editingcomment|Edita ~{0} (seksaun foun)
+yourtext|Ó-nia testu
+yourdiff|Diferensa sira
+template-protected|(proteje tiha)
+template-semiprotected|(proteje tiha balun)
+hiddencategories|Pájina ne'e iha {{PLURAL:~{0}\u007Ckategoria ida-ne'ebé subar\u007Ckategoria ~{0} sira-ne'ebé subar}}:
+nocreatetext|Ó la bele kria pájina foun iha {{SITENAME}}.\nÓ bele edita pájina sira-ne'ebé {{SITENAME}} iha ona ka [[Special:UserLogin\u007Clog in ka kria konta uza-na'in]].
+nocreate-loggedin|Ó la bele kria pájina foun.
+permissionserrorstext|Ó la bele halo ne'e; {{PLURAL:~{0}\u007Cmotivu\u007Cmotivu sira}}:
+permissionserrorstext-withaction|Ita la bele ~{1}. {{PLURAL:~{0}\u007CRazaun\u007CRazaun sira}}:
+cantcreateaccounttitle|La bele registrar uza-na'in
+currentrev|Versaun atuál
+revisionasof|Versaun ~{0} nian
+revision-info|Revisaun loron ~{3}, tempu ~{4}, husi ~{1}
+previousrevision|←Versaun tuan liu
+nextrevision|Versaun foun liu→
+currentrevisionlink|Versaun atuál
+cur|atuál
+next|oinmai
+last|molok
+page_first|uluk
+page_last|ikus
+histfirst|sedu liu hotu
+histlast|Foun liu hotu
+historyempty|(mamuk)
+history-feed-item-nocomment|~{0} iha ~{1}
+rev-delundel|hatudu/subar
+rev-showdeleted|hatudu
+revisiondelete|Halakon/restaurar versaun
+revdelete-show-file-submit|Sin
+revdelete-hide-text|Testu versaun nian
+revdelete-hide-user|Naran edita-na'in/diresaun IP
+revdelete-radio-set|Sin
+revdelete-radio-unset|Lae
+revdelete-edit-reasonlist|Edita lista motivu nian
+lineno|Liña ~{0}:
+searchresults|Rezultadu sira
+searchresults-title|Rezultadu sira ba buka "~{0}"
+shown-title|Hatudu {{PLURAL:~{0}\u007Crezultadu\u007Crezultadu}} ~{0} kada pájina
+viewprevnext|Haree (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|'''Iha pájina ho naran "[[:~{0}]]".'''
+searchmenu-new|'''Kria pájina "[[:~{0}]]" iha wiki ne'e!'''
+searchprofile-everything|Hotu
+searchprofile-articles-tooltip|Buka iha ~{0}
+search-result-size|~{0} ({{PLURAL:~{1}\u007Cliafuan ida\u007Cliafuan ~{1}}})
+search-section|(seksaun ~{0})
+search-suggest|Parese Ita buka: ~{0}
+search-interwiki-caption|Projetu seluseluk sira
+searchall|hotu
+powersearch-toggleall|Hotu
+preferences|Preferénsia
+mypreferences|Preferénsia
+prefs-rc|Mudansa foufoun sira
+prefs-watchlist|Lista hateke
+prefs-editing|Edita
+searchresultshead|Buka
+timezoneregion-africa|Áfrika
+timezoneregion-america|Amérika
+timezoneregion-antarctica|Antártika
+timezoneregion-asia|Ázia
+timezoneregion-australia|Austrália
+timezoneregion-europe|Europa
+youremail|Korreiu eletróniku:
+username|Naran uza-na'in:
+yourlanguage|Lian:
+gender-male|Mane
+gender-female|Feto
+email|Korreiu eletróniku
+prefs-help-email-required|Haruka diresaun korreiu eletróniku.
+userrights|Muda priviléjiu uza-na'in sira
+userrights-lookup-user|Muda grupu uza-na'in
+userrights-user-editname|Fó naran uza-na'in ida:
+editusergroup|Muda grupu uza-na'in
+editinguser|Muda grupu '''[[User:~{0}\u007C~{0}]]''' nian ~{1}
+userrights-editusergroup|Muda grupu uza-na'in
+userrights-groupsmember|Membru iha:
+userrights-reason|Motivu:
+userrights-no-interwiki|Ó la bele muda priviléjiu uza-na'in iha wiki seluk.
+group|Grupu:
+group-user|Uza-na'in sira
+group-bot|Bot sira
+group-sysop|Administradór sira
+group-bureaucrat|Burokrata sira
+group-suppress|Oversight-na'in sira
+group-all|(hotu)
+group-user-member|{{GENDER:~{0}\u007CUza-na'in}}
+group-bot-member|{{GENDER:~{0}\u007CBot}}
+group-sysop-member|{{GENDER:~{0}\u007CAdministradór\u007CAdministradóra}}
+group-bureaucrat-member|{{GENDER:~{0}\u007CBurokrata}}
+group-suppress-member|{{GENDER:~{0}\u007COversight-na'in}}
+grouppage-user|{{ns:project}}:Uza-na'in sira
+grouppage-bot|{{ns:project}}:Bot sira
+grouppage-sysop|{{ns:project}}:Administradór sira
+grouppage-bureaucrat|{{ns:project}}:Burokrata sira
+grouppage-suppress|{{ns:project}}:Oversight
+right-read|Lee pájina
+right-edit|Edita pájina sira
+right-createpage|Kria pájina (sira-ne'ebé pájina diskusaun lá'os)
+right-createtalk|Kria pájina diskusaun sira
+right-createaccount|Kria konta uza-na'in foun sira
+right-move|Book pájina sira
+right-delete|Halakon pájina sira
+right-bigdelete|Halakon pájina sira-ne'ebé iha istória boot
+right-undelete|Restaurar pájina ida
+right-userrights|Edita priviléjiu uza-na'in hotu
+right-userrights-interwiki|Edita priviléjiu uza-na'in iha wiki seluk sira
+newuserlogpage|Lista kria uza-na'in
+newuserlogpagetext|Ne'e lista kria uza-na'in.
+rightslog|Lista mudansa priviléjiu uza-na'in
+rightslogtext|Ne'e lista mudansa priviléjiu uza-na'in sira nian.
+action-read|lee pájina ne'e
+action-edit|edita pájina ne'e
+action-createpage|kria pájina sira
+action-createtalk|kria pájina diskusaun sira
+action-move|book pájina ne'e
+action-move-subpages|book pájina ne'e ho sub-pájina
+action-delete|halakon pájina ne'e
+action-undelete|restaurar pájina ne'e
+action-userrights|edita priviléjiu uza-na'in hotu
+action-userrights-interwiki|edita priviléjiu uza-na'in iha wiki seluk sira
+nchanges|~{0} {{PLURAL:~{0}\u007Cdiferensa\u007Cdiferensa}}
+recentchanges|Mudansa foufoun sira
+recentchanges-label-newpage|Pájina foun
+recentchanges-label-minor|Ne'e mudansa ki'ik
+recentchanges-label-bot|Edita husi prosesu automátiku ("bot")
+rcshowhideminor|~{0} muda ki-ki'ik
+rcshowhideminor-show|Hatudu
+rcshowhidebots|~{0} bot sira
+rcshowhidebots-show|Hatudu
+rcshowhideliu|~{0} ema rejista
+rcshowhideliu-show|Hatudu
+rcshowhideanons|~{0} ema anónimu
+rcshowhideanons-show|Hatudu
+rcshowhideanons-hide|Subar
+rcshowhidepatr-show|Hatudu
+rcshowhidemine|~{0} ha'u-nia edita
+rcshowhidemine-show|Hatudu
+diff|diferensa
+hist|istória
+hide|Hamsumik
+show|Hatudu
+minoreditletter|k
+newpageletter|F
+boteditletter|b
+rc-enhanced-expand|Hatudu detalle (presiza JavaScript)
+recentchangeslinked|Muda sira
+recentchangeslinked-feed|Muda sira
+recentchangeslinked-toolbox|Muda sira
+recentchangeslinked-title|Mudansa iha pájina sira-ne'ebé iha ligasaun husi "~{0}"
+recentchangeslinked-page|Naran pájina nian:
+upload|Tau iha arkivu laran
+uploadbtn|Tau iha arkivu laran
+fileuploadsummary|Rezumu:
+watchthisupload|Hateke pájina ne'e
+license|Lisensa:
+license-header|Lisensa:
+imgfile|fail
+listfiles_date|Tempu
+listfiles_name|Naran
+listfiles_user|Uza-na'in
+file-anchor-link|Fail
+filehist-deleteall|halakon hotu
+filehist-deleteone|halakon
+filehist-current|atuál
+filehist-datetime|Loron/Tempu
+filehist-user|Uza-na'in
+filehist-comment|Komentáriu
+imagelinks|Pájina iha ne'ebá fixeiru ne'e
+uploadnewversion-linktext|Tau versaun foun imajen nian
+filerevert-comment|Razaun:
+filedelete|Halakon ~{0}
+filedelete-comment|Motivu:
+filedelete-submit|Halakon
+filedelete-otherreason|Motivu seluk/ida tan:
+filedelete-reason-otherlist|Motivu seluk
+filedelete-edit-reasonlist|Edita lista motivu nian
+randompage|Pájina ruma
+brokenredirects-edit|edita
+brokenredirects-delete|halakon
+withoutinterwiki|Pájina sira-ne'ebé la iha ligasaun ba lian seluk
+nbytes|~{0} {{PLURAL:~{0}\u007Cbyte\u007Cbyte sira}}
+nlinks|{{PLURAL:~{0}\u007CLigasaun\u007CLigasaun}} ~{0}
+nmembers|~{0} {{PLURAL:~{0}\u007Cmembru\u007Cmembru}}
+nrevisions|~{0} {{PLURAL:~{0}\u007Cversaun\u007Cversaun}}
+unusedcategories|Kategoria sira-ne'ebé la uza
+prefixindex|Pájina hotu ho prefiksu
+shortpages|Pájina badak
+longpages|Pájina naruk
+listusers|Lista uza-na'in
+usercreated|{{GENDER:~{2}\u007Cregistradu}} loron ~{0}, oras ~{1}
+newpages|Pájina foun
+newpages-username|Naran uza-na'in:
+ancientpages|Pájina tuan liu hotu sira
+move|Book
+movethispage|Book pájina ne'e
+specialloguserlabel|Uza-na'in ne'ebé halo:
+speciallogtitlelabel|Objetivu (títulu ka uza-na'in):
+allpagesfrom|Hatudu pájina sira; hahú iha:
+allpagesto|Hatudu pájina sira; para iha:
+allarticles|Pájina hotu
+allinnamespace|Pájina hotu (iha espasu ~{0})
+allpagessubmit|Bá
+allpagesprefix|Hatudu pájina sira ho prefiksu:
+special-categories-sort-abc|tau tuir alfabetu
+linksearch-ns|Espasu pájina nian:
+linksearch-ok|Buka
+listusers-submit|Hatudu
+activeusers-hidebots|Subar bot sira
+activeusers-hidesysops|Subar administradór sira
+listgrouprights-group|Grupu
+listgrouprights-rights|Priviléjiu
+listgrouprights-members|(lista membru nian)
+emailuser|Haruka korreiu eletróniku ba uza-na'in ne'e
+defemailsubject|{{SITENAME}} - korreiu eletróniku husi uza-na'in "~{0}"
+noemailtitle|Lá'os diresaun korreiu eletróniku
+emailusername|Naran uza-na'in:
+emailsend|Haruka
+watchlist|Lista hateke
+mywatchlist|Lista hateke
+removedwatchtext|La hateke pájina "[[:~{0}]]" ona (haree [[Special:Watchlist\u007C"lista hateke"]]).
+watch|Hateke
+watchthispage|Hateke pájina ne'e
+unwatch|La hateke ona
+watchlist-details|{{PLURAL:~{0}\u007CPájina ida (1)\u007CPájina ~{0}}} iha Ita-nia "lista hateke" (la ho pájina diskusaun).
+wlshowlast|Hatudu ~{0} hora ~{1} loron ikus
+watching|Hateke...
+unwatching|La hateke...
+enotif_impersonal_salutation|Uza-na'in {{SITENAME}} nian
+created|kria ona
+changed|muda ona
+deletepage|Halakon pájina
+excontent|testu iha pájina: '~{0}'
+excontentauthor|testu iha pájina: '~{0}' (no ema ida de'it ne'ebé kontribui '[[Special:Contributions/~{1}\u007C~{1}]]')
+delete-legend|Halakon
+actioncomplete|operasaun remata
+actionfailed|Asaun la konsege
+deletedtext|Ita foin halakon pájina "~{0}". Haree ~{1} ba "operasaun halakon" seluk.
+dellogpage|Lista halakon
+deletionlog|lista halakon
+deletecomment|Motivu:
+deleteotherreason|Motivu seluk/ida tan:
+deletereasonotherlist|Motivu seluk
+delete-edit-reasonlist|Edita lista motivu nian
+protectedarticle|proteje "[[~{0}]]"
+prot_1movedto2|book tiha [[~{0}]] ba [[~{1}]]
+protectcomment|Motivu:
+protectexpiry|to'o:
+protect-fallback|Presiza priviléjiu "~{0}"
+protect-level-autoconfirmed|Blokeiu ema anónimu ho uza-na'in foun
+protect-level-sysop|de'it administradór
+protect-expiring|to'o ~{0} (UTC)
+protect-cantedit|Ó la bele filak proteje pájina ne'e nian, tan ba ó la bele edita pájina ne'e.
+protect-othertime|Tempu seluk:
+protect-othertime-op|tempu seluk
+protect-otherreason|Motivu seluk/ida tan:
+protect-otherreason-op|Motivu seluk
+protect-edit-reasonlist|Edita lista motivu nian
+protect-expiry-options|1 oras:1 hour,1 loron:1 day,1 semana:1 week,2 semana:2 weeks,1 fulan:1 month,3 fulan:3 months,6 fulan:6 months,1 tinan:1 year,infinite:infinite
+restriction-type|Permisaun:
+restriction-edit|Edita
+restriction-move|Book
+restriction-create|Kria
+undelete|Haree pájina halakon tiha
+undeletebtn|Restaurar
+undeletelink|lee/restaurar
+undeleteviewlink|haree
+undeletecomment|Razaun:
+undeletedrevisions|restaurar {{PLURAL:~{0}\u007Cversaun\u007Cversaun}} ~{0}
+undelete-search-submit|Buka
+undelete-show-file-submit|Sin
+namespace|Espasu pájina nian:
+contributions|{{GENDER:~{0}\u007CKontribuisaun uza-na'in}}
+contributions-title|Kontribuisaun "~{0}" nian
+mycontris|Kontribuisaun
+contribsub2|Ba ~{0} (~{1})
+uctop|(versaun atuál)
+month|Fulan (ho molok):
+year|Tinan (ho molok):
+sp-contributions-newbies|Hatudu de'it kontribuisaun uza-na'in foun sira-nia
+sp-contributions-talk|diskusaun
+sp-contributions-search|Buka kontribuisaun
+sp-contributions-username|Diresaun IP ka naran uza-na'in:
+sp-contributions-submit|Buka
+whatlinkshere|Artigu sira ne'ebé bá iha ne'e
+whatlinkshere-title|Pájina sira ne'ebé bá "~{0}".
+whatlinkshere-page|Pájina:
+linkshere|Pájina sira ne'e link ba '''[[:~{0}]]''':
+isimage|ligasaun ba fixeiru
+whatlinkshere-prev|{{PLURAL:~{0}\u007Coinmai\u007Coinmai ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cmolok\u007Cmolok ~{0}}}
+whatlinkshere-links|← ligasaun
+whatlinkshere-hidelinks|~{0} ligasaun
+block|Blokeiu uza-na'in
+blockip|Blokeiu uza-na'in
+blockip-legend|Blokeiu uza-na'in
+ipaddressorusername|Diresaun IP ka naran uza-na'in:
+ipbexpiry|Tempu:
+ipbreason|Motivu:
+ipbcreateaccount|La bele kria konta foun
+ipbemailban|La bele haruka korreiu eletróniku
+ipbsubmit|Blokeiu uza-na'in ne'e
+ipbother|Tempu seluk:
+ipboptions|2 hours:2 hours,1 loron:1 day,3 Loron:3 days,1 semana:1 week,2 semana:2 weeks,1 fulan:1 month,3 fulan:3 months,6 fulan:6 months,1 tinan:1 year,infinite:infinite
+ipbhidename|Subar naran uza-na'in (iha kontribuisaun no lista seluk)
+ipbwatchuser|Hateke pájina uza-na'in nian (hamutuk ho pájina diskusaun)
+ipb-disableusertalk|La bele edita ninia pájina diskusaun
+ipblocklist|Uza-na'in sira-ne'ebé la bele edita
+blocklist-reason|Razaun
+ipblocklist-submit|Buka
+anononlyblock|ema anónimu de'it
+blocklink|blokeiu
+unblocklink|la blokeiu
+contribslink|kontribuisaun
+blocklogentry|blokeiu [[~{0}]] ba tempu ~{1} ~{2}
+block-log-flags-nocreate|la bele kria konta foun
+block-log-flags-noemail|korreiu eletróniku blokeiu
+block-log-flags-nousertalk|la bele edita pájina diskusaun rasik
+ipb_already_blocked|Ema ruma blokeiu "~{0}" tiha ona
+move-page|Book ~{0}
+move-page-legend|Book pájina
+movearticle|Book pájina:
+movenotallowed|Ó la bele book pájina sira.
+newtitle|Naran foun:
+move-watch|Hateke pájina ne'e
+movepagebtn|Book pájina
+movetalk|Book pájina diskusaun mós
+movelogpage|Lista book
+movereason|Motivu:
+delete_and_move|Halakon ho book
+delete_and_move_confirm|Sin, halakon pájina
+export|Esporta pájina sira
+export-submit|Esporta
+export-addcat|Tau tan
+export-addns|Tau tan
+allmessagesname|Naran
+allmessagescurrent|Testu atuál
+allmessages-filter-all|Hotu
+allmessages-language|Lian:
+import-interwiki-submit|Importa
+import-comment|Komentáriu:
+import-revision-count|{{PLURAL:~{0}\u007Cversaun ida\u007Cversaun ~{0}}}
+import-logentry-interwiki-detail|~{0} {{PLURAL:~{0}\u007Cversaun\u007Cversaun}} husi ~{1}
+tooltip-pt-userpage|Ó-nia pájina uza-na'in
+tooltip-pt-mytalk|Ó-nia pájina diskusaun
+tooltip-pt-preferences|Ha'u-nia preferénsia
+tooltip-pt-mycontris|Ó-nia kontribuisaun (lista)
+tooltip-pt-login|Ami rekomenda identifikasaun ("log in"), maibé Ita-Boot la presiza halo ne'e
+tooltip-pt-logout|Husik
+tooltip-ca-talk|Diskusaun kona-ba konteúdu pájina nian
+tooltip-ca-edit|Ita bele edita pájina ne'e. Please use the preview button before saving.
+tooltip-ca-addsection|Tau tan seksaun foun ida.
+tooltip-ca-viewsource|Ema ruma proteje tiha pájina ne'e.\nÓ bele lee testu.
+tooltip-ca-history|Versaun tuan pájina nian
+tooltip-ca-protect|Proteje pájina ne'e
+tooltip-ca-delete|Halakon pájina ne'e
+tooltip-ca-move|Book pájina ne'e
+tooltip-ca-watch|Tau pájina ne'e ba Ita-nia "lista hateke"
+tooltip-ca-unwatch|Hasai pájina ne'e husi Ita-nia "lista hateke"
+tooltip-search|Buka iha {{SITENAME}}
+tooltip-search-go|Bá pájina ho naran ne'e (se iha)
+tooltip-search-fulltext|Buka pájina sira-ne'ebé iha testu ne'e iha laran
+tooltip-p-logo|Pájina Mahuluk
+tooltip-n-mainpage|Vizita Pájina Mahuluk
+tooltip-n-mainpage-description|Vizita Pájina Mahuluk
+tooltip-n-portal|Kona-ba projetu, ne'ebé ó bele halo, iha ne'ebé ó hetan saida
+tooltip-n-recentchanges|Lista mudansa foufoun sira iha wiki ne'e.
+tooltip-n-randompage|Hola pájina ruma
+tooltip-n-help|Hatudu pájina ajuda.
+tooltip-t-whatlinkshere|Lista pájina nian ne'ebé bá iha ne'e
+tooltip-t-contributions|Haree lista kontribuisaun uza-na'in ne'e nian
+tooltip-t-emailuser|Haruka korreiu eletróniku
+tooltip-t-upload|Tau iha arkivu laran
+tooltip-t-specialpages|Lista pájina espesiál hotu nian
+tooltip-t-print|Versaun pájina ne'e nian ba imprime/prin
+tooltip-ca-nstab-main|Haree konteúdu pájina nian
+tooltip-ca-nstab-user|Haree pájina uza-na'in
+tooltip-ca-nstab-special|Ne'e pájina espesiál – Ita la bele edita
+tooltip-ca-nstab-project|Haree pájina projetu nian
+tooltip-ca-nstab-category|Lee pájina kategoria
+tooltip-minoredit|Marka ne'e hanesan muda ki'ik
+tooltip-watch|Tau pájina ne'e ba Ita-nia "lista hateke"
+siteuser|uza-na'in {{SITENAME}} nian ~{0}
+lastmodifiedatby|Pájina ne'e ~{2} mak muda ba dala ikus iha ~{0}, ~{1}.
+siteusers|{{PLURAL:~{1}\u007Cuza-na'in\u007Cuza-na'in}} {{SITENAME}} nian ~{0}
+previousdiff|←Versaun molok
+nextdiff|Versaun oinmai→
+show-big-image|Boot liu
+ilsubmit|Buka
+bad_image_list|Formatu:\n\nLiña hotu tenke komesa ho *\nLigasaun uluk iha liña tenke ligasaun bá imajen aat.\nLigasaun seluk iha liña - ne'e pájina sira iha ne'ebé bele inklui imajen aat.
+exif-make|Fabrikante kámara nian
+exif-model|Kámara
+exif-artist|Autór
+exif-flash|Flax
+exif-languagecode|Lian
+exif-iimcategory|Kategoria
+exif-meteringmode-255|Seluk
+exif-gpsspeed-k|km iha oras
+exif-gpsdestdistance-k|kilómetru
+exif-gpsdop-good|Di'ak (~{0})
+exif-dc-date|Data
+exif-iimcategory-clj|Krime no lei
+exif-iimcategory-edu|Edukasaun
+exif-iimcategory-evn|Meiu ambiente
+exif-iimcategory-hth|Saúde
+exif-iimcategory-lab|Traballu
+exif-iimcategory-pol|Polítika
+exif-iimcategory-rel|Relijiaun no fiar
+exif-iimcategory-sci|Siénsia i teknolojia
+exif-iimcategory-spo|Desportu
+exif-iimcategory-war|Funu no konflitu
+exif-iimcategory-wea|Tempu
+exif-urgency-normal|Normál (~{0})
+exif-urgency-low|Kraik (~{0})
+exif-urgency-high|Aas (~{0})
+namespacesall|hotu
+monthsall|hotu
+confirm_purge_button|OK
+imgmultipageprev|← pájina molok
+imgmultipagenext|pájina oinmai →
+imgmultigo|Bá!
+table_pager_next|Pájina oinmai
+table_pager_prev|Pájina molok
+table_pager_first|Pájina uluk
+table_pager_limit_submit|Bá
+autosumm-new|Pájina foun: '~{0}'
+watchlistedit-normal-title|Edita lista hateke
+watchlistedit-raw-titles|Títulu sira:
+watchlistedit-raw-added|{{PLURAL:~{0}\u007CTítulu ida\u007CTítulu ~{0}}} tau tan tiha:
+watchlistedit-raw-removed|{{PLURAL:~{0}\u007CTítulu ida\u007CTítulu ~{0}}} hasai tiha:
+watchlisttools-edit|Haree no edita lista hateke
+version|Versaun
+version-specialpages|Pájina espesiál
+version-other|Seluk
+version-version|(~{0})
+version-license|Lisensa
+version-poweredby-others|ema seluk
+version-software-product|Produtu
+version-software-version|Versaun
+fileduplicatesearch-submit|Buka
+specialpages|Pájina espesiál sira
+specialpages-group-other|Pájina espesiál seluk
+specialpages-group-login|Login / kria konta
+specialpages-group-changes|Mudansa foufoun sira no lista sira
+specialpages-group-users|Uza-na'in no priviléjiu sira
+specialpages-group-pages|Lista pájina nian
+blankpage|Pájina mamuk
+tags-edit|edita
+compare-page1|Pájina 1
+compare-page2|Pájina 2
+compare-rev1|Versaun 1
+compare-rev2|Versaun 2
+compare-submit|Halo komparasaun
+rightsnone|(mamuk)
+searchsuggest-search|Buka
+expand_templates_ok|OK
+']:>
+).lang
+;

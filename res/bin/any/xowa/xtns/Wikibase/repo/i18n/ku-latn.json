@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"George Animal"
+		]
+	},
+	"wikibase-edit": "biguherîne",
+	"wikibase-save": "tomar bike",
+	"wikibase-cancel": "betal bike",
+	"wikibase-add": "lê zêde bike",
+	"wikibase-save-inprogress": "Tê tomarkirin...",
+	"wikibase-remove-inprogress": "Tê jêbirin...",
+	"wikibase-description-edit-placeholder": "danasînekê binivîse",
+	"wikibase-sitelink-page-edit-placeholder": "gotar",
+	"wikibase-description-input-help-message": "Danasîneka kurt têkeve $1",
+	"wikibase-statements": "Vegotin",
+	"wikibase-terms": "Bi zimanên din",
+	"wikibase-remove": "jê bibe",
+	"wikibase-aliases-label": "Herwiha tê zanîn wek:",
+	"wikibase-itembytitle-lookup-page": "Rûpel:",
+	"wikibase-itembytitle-submit": "Lêgerîn",
+	"wikibase-itemdisambiguation-lookup-language": "Ziman:",
+	"wikibase-itemdisambiguation-submit": "Lêgerîn",
+	"wikibase-newentity-description": "Danasîn:",
+	"wikibase-newentity-submit": "Çêke",
+	"wikibase-setdescription-label": "Danasîn:",
+	"wikibase-modifyterm-language": "Ziman:",
+	"wikibase-entitieswithoutlabel-label-language": "Ziman:",
+	"wikibase-entitieswithoutlabel-label-type": "Cure:",
+	"wikibase-entitieswithoutlabel-label-alltypes": "hemû",
+	"wikibase-item-summary-wbsetsitelink-add": "Girêdanê li [$2] zêde bike"
+}

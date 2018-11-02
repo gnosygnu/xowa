@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Papuass"
+		]
+	},
+	"wikibase-entity-item": "ieraksts",
+	"wikibase-entity-property": "īpašība",
+	"wikibase-entity-query": "vaicājums",
+	"wikibase-deletedentity-item": "Dzēsts ieraksts",
+	"wikibase-deletedentity-property": "Dzēsta īpašība",
+	"wikibase-deletedentity-query": "Dzēsts vaicājums",
+	"wikibase-diffview-reference": "atsauce",
+	"wikibase-diffview-rank": "rangs",
+	"wikibase-diffview-qualifier": "ierobežotājs",
+	"wikibase-diffview-label": "nosaukums",
+	"wikibase-diffview-alias": "citi nosaukumi",
+	"wikibase-diffview-description": "apraksts",
+	"wikibase-diffview-link": "saites",
+	"wikibase-error-unexpected": "Radās neparedzēta kļūda: $1.",
+	"wikibase-error-autocomplete-response": "Servera atbilde: $1",
+	"wikibase-sitelinks-sitename-columnheading": "Valoda",
+	"wikibase-sitelinks-siteid-columnheading": "Kods",
+	"wikibase-sitelinks-link-columnheading": "Saistītā lapa",
+	"wikibase-snakview-snaktypeselector-somevalue": "nezināma vērtība",
+	"wikibase-snakview-snaktypeselector-novalue": "nav vērtības",
+	"wikibase-validator-not-allowed": "Neatļauta vērtība: $1",
+	"datatypes-type-wikibase-item": "Ieraksts",
+	"datatypes-type-commonsMedia": "Commons multivides fails"
+}

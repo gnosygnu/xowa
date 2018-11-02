@@ -1,0 +1,9 @@
+this
+.messages
+  .load_text(
+<:['
+vector-action-delete|horo'i
+vector-view-edit|Haka titika
+']:>
+).lang
+;

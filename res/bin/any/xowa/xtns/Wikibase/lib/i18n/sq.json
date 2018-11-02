@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"GretaDoci"
+		]
+	},
+	"wikibase-timedetails-time": "Koha",
+	"wikibase-timedetails-timezone": "Zona kohore:",
+	"wikibase-timedetails-calendar": "Kalendari",
+	"wikibase-timedetails-precision": "Saktësi",
+	"wikibase-timedetails-before": "Para",
+	"wikibase-timedetails-after": "Pas",
+	"wikibase-globedetails-longitude": "Gjatësia gjeografike",
+	"wikibase-globedetails-latitude": "Gjerësia gjeografike",
+	"wikibase-globedetails-precision": "Saktësi",
+	"wikibase-globedetails-globe": "Globit"
+}

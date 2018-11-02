@@ -1,0 +1,28 @@
+.cur_head_text {
+  width: calc(100% - 83px);
+}
+.cur_head_btns {
+  width: 72px;
+}
+
+/* Detail Tbl */
+.cur_data_row {
+  padding: 4px 0px 4px;
+}
+.cur_data_row label {
+  display: inline-block;
+  width: 50px;
+  margin: 0px 4px 0px 10px;
+  vertical-align: top;
+          align-self: flex-start;
+  -webkit-align-self: flex-start;
+  
+  font-weight: bold;
+}
+.cur_data_row label::after {
+    content: ":";
+}
+.cur_data_row span {
+  display: inline-block;
+  width: calc(100% - 70px);
+}

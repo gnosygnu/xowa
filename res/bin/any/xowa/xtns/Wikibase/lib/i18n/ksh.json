@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Purodha"
+		]
+	},
+	"wikibase-lib-desc": "Jemeinsamme Fungxjuhne för di Projramm-Zohsäz <i lang=\"en\">Wikibase</i> un <i lang=\"en\">Wikibase Client</i>.",
+	"wikibase-entity-item": "dä Jääjeschtand",
+	"wikibase-entity-property": "di Eijeschaff",
+	"wikibase-entity-query": "Frooch",
+	"wikibase-sitelinks-sitename-columnheading": "Schprooch",
+	"wikibase-sitelinks-siteid-columnheading": "Köözel",
+	"wikibase-tooltip-error-details": "Einzelheite",
+	"datatypes-type-wikibase-item": "Jääjeschtand",
+	"datatypes-type-commonsMedia": "Meedijedattei vun Wikkimeedija Commons"
+}

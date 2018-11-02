@@ -1,0 +1,9 @@
+this
+.messages
+  .load_text(
+<:['
+vector-view-history|دیئن تاریخچه
+vector-view-view|هوندن
+']:>
+).lang
+;

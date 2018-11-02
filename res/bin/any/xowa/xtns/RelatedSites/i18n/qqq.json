@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Raymond",
+			"Shirayuki"
+		]
+	},
+	"relatedsites-title": "Link in the sidebar to go to related sites",
+	"relatedsites-desc": "{{desc|name=Related Sites|url=http://www.mediawiki.org/wiki/Extension:RelatedSites}}"
+}

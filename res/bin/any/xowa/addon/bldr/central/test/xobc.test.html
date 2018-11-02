@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <!-- 
+    NOTE: this page loads local files
+    - Chrome is the easiest browser for local files; Use "chrome.exe --disable-web-security"
+    - Change C:/xowa/ to wherever it is on your system
+    -->
+    <!-- base -->
+    <base href="file:///C:/xowa/" target="_blank">
+    
+    <!-- css -->
+  	<link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/lib/alertify/themes/alertify.core.css">
+  	<link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/lib/alertify/themes/alertify.bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/src/xowa/xocss/core/xocss_core-0.0.1.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/src/xowa/xocss/core/xoimg_core-0.0.1.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/src/xowa/xocss/help/xohelp-0.0.1.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/addon/bldr/central/js/xo.log.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/addon/bldr/central/bin/xobc.css">
+    
+    <!-- js -->
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/alertify/lib/alertify-0.3.11.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/alertify/lib/xo-alertify-0.0.1.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/mustache/mustache-2.2.1.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/jquery/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/src/xowa/xocss/help/xohelp-0.0.1.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/notifyjs/notifyjs-0.3.1.js"></script>
+  </head>
+  <body>
+    <div id='bldr_body' class='bldr_body'></div>
+  </body>
+  <!-- js -->
+  <script type="text/javascript" src="bin/any/xowa/addon/bldr/central/js/xo.log.js"></script>
+  <script type="text/javascript" src="bin/any/xowa/addon/bldr/central/js/xo.app.js"></script>
+  <script type="text/javascript" src="bin/any/xowa/addon/bldr/central/js/xo.app.swt.js"></script>
+  <script type="text/javascript" src="bin/any/xowa/addon/bldr/central/js/xo.elem.js"></script>
+  <script type="text/javascript" src="bin/any/xowa/addon/bldr/central/js/xo.tmpl.js"></script>
+  <script type="text/javascript" src="bin/any/xowa/addon/bldr/central/js/xo.notify.js"></script>
+  <script type="text/javascript" src="bin/any/xowa/addon/bldr/central/js/xo.server.js"></script>
+  <script>
+  xo.app.mode = 'swt';
+  </script>
+  <script type="text/javascript" src="bin/any/xowa/addon/bldr/central/js/xobc.util.js"></script>
+  <script type="text/javascript" src="bin/any/xowa/addon/bldr/central/js/xobc.localfile.js"></script>
+  <script>
+    xo.mode_is_debug = true;
+    xo.tmpl.load_many('bin/any/xowa/addon/bldr/central/bin/', 'xobc.main', 'xobc.row');
+    setTimeout(function() {
+      xo.tmpl.fmt('xobc.main', xo.elem.get('bldr_body'), {});
+    }, 0);
+    setTimeout(function() {
+    xo.bldr.core.reload__send();
+      // xo.bldr.todo.add_work__send('s.w-2016.03-file');
+    }, 600);
+  </script>
+  <script type="text/javascript" src="bin/any/xowa/addon/bldr/central/js/xobc.js"></script>
+</html>

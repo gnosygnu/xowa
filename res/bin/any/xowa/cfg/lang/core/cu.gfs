@@ -1,0 +1,1021 @@
+numbers {
+  separators {
+    clear;
+    set(',', '.');
+    set('.', ',');
+  }
+}
+this
+.ns_names
+  .load_text(
+<:['
+-2|Срѣдьства
+-1|Нарочьна
+1|Бєсѣда
+2|Польꙃєватєл҄ь
+3|Польꙃєватєлꙗ бєсѣда
+5|{{GRAMMAR:genitive\u007C$1}} бєсѣда
+6|Дѣло
+7|Дѣла бєсѣда
+8|MediaWiki
+9|MediaWiki бєсѣда
+10|Обраꙁьць
+11|Обраꙁьца бєсѣда
+12|Помощь
+13|Помощи бєсѣда
+14|Катигорїꙗ
+15|Катигорїѩ бєсѣда
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-2|Срѣдьства
+-1|Нарочьна
+1|Бесѣда
+2|Польѕевател҄ь
+3|Польѕевател бесѣда
+5|{{grammar:genitive\u007C$1}} бесѣда
+6|Ви́дъ
+6|Видъ
+7|Ви́да бєсѣ́да
+7|Вида бесѣда
+9|MediaWiki бесѣда
+10|Образьць
+11|Образьца бесѣда
+12|Помощь
+13|Помощи бесѣда
+14|Катигорї
+15|Катигорїѩ бесѣда
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Allpages|Вьсѩ_страницѧ
+Categories|Катигорїѩ
+Contributions|Добродѣꙗниꙗ
+Preferences|Строи
+Recentchanges|Послѣдьнѩ_мѣнꙑ
+Search|Исканиѥ
+Statistics|Статїстїка
+Upload|Положєниѥ_дѣла
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+redirect|0|#ПРѢНАПРАВЛЄНИѤ~#REDIRECT~
+language|0|#ѨꙀꙐКЪ~#LANGUAGE~
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|нєдѣлꙗ
+monday|понедѣл҄ьникъ
+tuesday|въторьникъ
+wednesday|срѣда
+thursday|чєтврьтъкъ
+friday|пѧтъкъ
+saturday|сѫбота
+sun|н҃д
+mon|п҃н
+tue|в҃т
+wed|с҃р
+thu|ч҃т
+fri|п҃т
+sat|с҃б
+january|їаноуарїи
+february|фєвроуарїи
+march|мартїи
+april|апрїлїи
+may_long|маїи
+june|їоунїи
+july|їоулїи
+august|аѷгоустъ
+september|сєптємврїи
+october|октѡврїи
+november|ноємврїи
+december|дєкємврїи
+january-gen|їаноуарїꙗ
+february-gen|фєвроуарїꙗ
+march-gen|мартїꙗ
+april-gen|апрїлїꙗ
+may-gen|маїꙗ
+june-gen|їоунїꙗ
+july-gen|їоулїꙗ
+august-gen|аѷгоуста
+september-gen|сєптємврїꙗ
+october-gen|октѡврїꙗ
+november-gen|ноємврїꙗ
+december-gen|дєкємврїꙗ
+jan|ꙗ҃н
+feb|фє҃в
+mar|ма҃р
+apr|ап҃р
+may|маїи
+jun|їо҃ун
+jul|їо҃ул
+aug|аѵ҃г
+sep|сє҃п
+oct|ок҃т
+nov|но҃є
+dec|дє҃к
+toc|каталогъ
+redirectedfrom|(прѣнаправлѥниѥ отъ ⁖ ~{0} ⁖)
+allpages|вьсѩ страницѧ
+categories|катигорїѩ
+lastmodifiedat|страницѧ послѣдьнꙗ мѣна сътворѥна ~{1} · ~{0} бѣ ⁙
+otherlanguages|дроугꙑ ѩꙁꙑкꙑ
+blanknamespace|(главьно)
+pagecategories|{{PLURAL:~{0}\u007CКатигорїꙗ\u007CКатигорїи\u007CКатигорїѩ\u007CКатигорїѩ}}
+category_header|катигорїѩ ⁖ ~{0} ⁖ страницѧ
+subcategories|подъкатигорїѩ
+category-media-header|катигорїѩ ⁖ ~{0} ⁖ дѣла
+category-empty|''си катигорїи нꙑнѣ страницѧ и дѣлъ нѣстъ''
+category-subcat-count|{{PLURAL:~{1}\u007CСѥи катигорїи тъкъмо сꙗ подъкатигорїꙗ ѥстъ\u007CСѥи катигорїи {{PLURAL:~{0}\u007Cѥдина подъкатигорїꙗ ѥстъ\u007C2 подъкатигорїи ѥстє\u007C~{0} подъкатигорїѩ сѫтъ}} · а вьсѩ жє подъкатигорїѩ число ~{1} ѥстъ}}
+listingcontinuesabbrev|· вѧщє
+link_sample|съвѧꙁи имѧ
+link_tip|вънѫтрьнꙗ съвѧꙁь
+hidden-category-category|съкрꙑтꙑ катигорїѩ
+statistics|статїстїка
+statistics-header-pages|страницѧ статїстїка
+statistics-articles|истиньнꙑ члѣни
+statistics-pages|страницѧ
+statistics-pages-desc|вьсѩ страницѧ въкоупомь съ бѣсєдꙑ · прѣнаправлѥниꙗ и инꙑ
+categorytree|катигорїи дрѣво
+categorytree-portlet|катигорїѩ
+categorytree-category|катигорїꙗ :
+categorytree-mode-all|вьсѩ страницѧ
+cite_references_link_many_format_backlink_labels|а б в г д є ж ꙃ ꙁ и і к л м н о п р с т ф х ѡ ц ч ш щ ъ ꙑ ь ѣ ю ꙗ ѥ ѧ ѫ ѩ ѭ ѯ ѱ ѳ ѵ ѷ аа аб ав аг ад ає аж аꙁ аꙃ аи аі ак ал ам ан ао ап ар ас ат аф ах аѡ ац ач аш ащ аъ аꙑ аь аѣ аю аꙗ аѥ аѧ аѫ аѩ аѭ аѯ аѱ аѳ аѵ аѷ
+proofreadpage_specialpage_label_key|исканиѥ :
+cite_article_link|привєдєниѥ члѣна словєсъ
+cite_page|страница :
+wikieditor-preview-changes-tab|мѣнꙑ
+wikieditor-publish-button-publish|съхранѥниѥ
+wikieditor-publish-dialog-minor|малаꙗ мѣна
+wikieditor-publish-dialog-watch|си страницѧ блюдєниѥ
+wikieditor-publish-dialog-publish|съхранѥниѥ
+wikieditor-template-editor-dialog-title|обраꙁьца исправлѥниѥ
+wikieditor-toolbar-tool-ilink-example|съвѧꙁи имѧ
+wikieditor-toolbar-tool-xlink-example|http://www.example.com съвѧꙁи имѧ
+wikieditor-toolbar-tool-link|съвѧꙁь
+wikieditor-toolbar-tool-link-title|съвѧꙁи приложєниѥ
+wikieditor-toolbar-tool-link-insert|съвѧꙁи приложєниѥ
+wikieditor-toolbar-tool-link-int-target-status-notexists|страницѧ нѣстъ
+wikieditor-toolbar-tool-link-lookslikeinternal-ext|вънѣщьнꙗ съвѧꙁь
+wikieditor-toolbar-tool-file-example|Прикладъ.jpg
+wikieditor-toolbar-tool-signature|аѵтографъ и нꙑнѣшьна врѣмѧ и дьнь
+wikieditor-toolbar-tool-redirect|прѣнаправлѥниѥ
+wikieditor-toolbar-tool-big|вєликъ
+wikieditor-toolbar-tool-small|малъ
+wikieditor-toolbar-tool-newline|новъ рѧдъ
+wikieditor-toolbar-tool-table|та́влїѥ
+wikieditor-toolbar-tool-table-dimensions-rows|рѧдꙑ
+wikieditor-toolbar-tool-table-example|прикладъ
+wikieditor-toolbar-tool-replace-close|ꙁакрꙑи
+wikieditor-toolbar-section-characters|допльнитєл҄ьнꙑ сѷмволи
+wikieditor-toolbar-characters-page-latin|латиньска аꙁъбоукꙑ
+wikieditor-toolbar-characters-page-latinextended|латиньскꙑ аꙁъбоукьвє доложєниѥ
+wikieditor-toolbar-characters-page-ipa|М҃ФА
+wikieditor-toolbar-characters-page-symbols|сѷмволи
+wikieditor-toolbar-characters-page-greek|грьчьска аꙁъбоукꙑ
+wikieditor-toolbar-characters-page-cyrillic|климєнтовица / гражданьска аꙁъбоукꙑ
+wikieditor-toolbar-characters-page-arabic|аравьска аꙁъбоукꙑ
+wikieditor-toolbar-characters-page-hebrew|єврєиска аꙁъбоукꙑ
+wikieditor-toolbar-characters-page-bangla|бангальска аꙁъбоукꙑ
+wikieditor-toolbar-characters-page-telugu|тєлоужьска аꙁъбоукꙑ
+wikieditor-toolbar-characters-page-sinhala|синхальска аꙁъбоукꙑ
+wikieditor-toolbar-section-help|помощь
+wikieditor-toolbar-help-page-link|съвѧꙁи
+wikieditor-toolbar-help-page-file|дѣла
+wikieditor-toolbar-help-page-discussion|бєсѣда
+wikieditor-toolbar-help-content-signaturetimestamp-description|аѵтографъ и нꙑнѣшьна врѣмѧ и дьнь
+wikieditor-toolbar-help-content-signature-description|аѵтографъ
+wikibase-edit|исправи
+wikibase-save|съхранѥниѥ
+wikibase-save-inprogress|съхранѥниѥ···
+wikibase-remove-inprogress|поничьжєниѥ···
+wikibase-description-empty|опьсаниꙗ ѥщє нѣстъ
+wikibase-sitelink-site-edit-placeholder|мѣсто
+wikibase-sitelink-page-edit-placeholder|страница
+wikibase-terms|дроугꙑ ѩꙁꙑкꙑ
+wikibase-remove|поничьжєниѥ
+wikibase-aliases-label|вѣдомъ ѥстъ такождє ꙗко :
+wikibase-statementview-referencesheading-pendingcountersubject|{{PLURAL:~{0}\u007Cкладѧꙃь\u007Cкладѧꙃꙗ\u007Cкладаꙃь}}
+wikibase-entityselector-more|вѧщє
+wikibase-itembytitle-lookup-site|мѣсто :
+wikibase-itembytitle-lookup-page|страница :
+wikibase-itembytitle-submit|ищи
+wikibase-itemdisambiguation-lookup-language|ѩꙁꙑчьнъ кодъ :
+wikibase-itemdisambiguation-submit|ищи
+wikibase-newentity-submit|сътворѥниѥ
+wikibase-modifyterm-language|ѩꙁꙑчьнъ кодъ :
+wikibase-entitieswithoutlabel-label-language|ѩꙁꙑчьнъ кодъ :
+wikibase-entitieswithoutlabel-label-type|тѷпъ :
+wikibase-entitieswithoutlabel-label-alltypes|вьсꙗ
+wikibase-listdatatypes-time-head|врѣмѧ
+wm-license-cc-by-1.0-text|сѥ дѣло подъ прощєниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/ Attribution 1.0 Generic] положєно ѥстъ
+wm-license-cc-by-1.0-fi-text|сѥ дѣло подъ прощєниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/fi/ Attribution 1.0 Finland] положєно ѥстъ
+wm-license-cc-by-1.0-il-text|сѥ дѣло подъ прощєниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/il/ Attribution 1.0 Israel] положєно ѥстъ
+wm-license-cc-by-1.0-nl-text|сѥ дѣло подъ прощєниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/nl/ Attribution 1.0 Netherlands] положєно ѥстъ
+wm-license-cc-by-2.0-text|сѥ дѣло подъ прощєниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/ Attribution 2.0 Generic] положєно ѥстъ
+wm-license-cc-by-2.0-at-text|сѥ дѣло подъ прощєниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/at/ Attribution 2.0 Austria] положєно ѥстъ
+wm-license-cc-by-2.0-au-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/au/ Attribution 2.0 Australia] положєно ѥ́стъ
+wm-license-cc-by-2.0-be-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/be/ Attribution 2.0 Belgium] положєно ѥ́стъ
+wm-license-cc-by-2.0-br-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/br/ Attribution 2.0 Brazil] положєно ѥ́стъ
+wm-license-cc-by-2.0-ca-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/ca/ Attribution 2.0 Canada] положєно ѥ́стъ
+wm-license-cc-by-2.0-cl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/cl/ Attribution 2.0 Chile] положєно ѥ́стъ
+wm-license-cc-by-2.0-de-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/de/ Attribution 2.0 Germany] положєно ѥ́стъ
+wm-license-cc-by-2.0-es-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/es/ Attribution 2.0 Spain] положєно ѥ́стъ
+wm-license-cc-by-2.0-fr-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/fr/ Attribution 2.0 France] положєно ѥ́стъ
+wm-license-cc-by-2.0-hr-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/hr/ Attribution 2.0 Croatia] положєно ѥ́стъ
+wm-license-cc-by-2.0-it-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/it/ Attribution 2.0 Italy] положєно ѥ́стъ
+wm-license-cc-by-2.0-jp-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/jp/ Attribution 2.0 Japan] положєно ѥ́стъ
+wm-license-cc-by-2.0-kr-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/kr/ Attribution 2.0 Korea] положєно ѥ́стъ
+wm-license-cc-by-2.0-nl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/nl/ Attribution 2.0 Netherlands] положєно ѥ́стъ
+wm-license-cc-by-2.0-pl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/pl/ Attribution 2.0 Poland] положєно ѥ́стъ
+wm-license-cc-by-2.0-tw-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/tw/ Attribution 2.0 Taiwan] положєно ѥ́стъ
+wm-license-cc-by-2.0-uk-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/uk/ Attribution 2.0 UK: England & Wales] положєно ѥ́стъ
+wm-license-cc-by-2.0-za-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/za/ Attribution 2.0 South Africa] положєно ѥ́стъ
+wm-license-cc-by-2.1-au-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/au/ Attribution 2.1 Australia] положєно ѥ́стъ
+wm-license-cc-by-2.1-es-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/es/ Attribution 2.1 Spain] положєно ѥ́стъ
+wm-license-cc-by-2.1-jp-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/jp/ Attribution 2.1 Japan] положєно ѥ́стъ
+wm-license-cc-by-2.5-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/ Attribution 2.5 Generic] положєно ѥ́стъ
+wm-license-cc-by-2.5-au-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/au/ Attribution 2.5 Australia] положєно ѥ́стъ
+wm-license-cc-by-2.5-bg-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/bg/ Attribution 2.5 Bulgaria] положєно ѥ́стъ
+wm-license-cc-by-2.5-br-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/br/ Attribution 2.5 Brazil] положєно ѥ́стъ
+wm-license-cc-by-2.5-ca-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/ca/ Attribution 2.5 Canada] положєно ѥ́стъ
+wm-license-cc-by-2.5-ch-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/ch/ Attribution 2.5 Switzerland] положєно ѥ́стъ
+wm-license-cc-by-2.5-cn-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/cn/ Attribution 2.5 China Mainland] положєно ѥ́стъ
+wm-license-cc-by-2.5-co-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/co/ Attribution 2.5 Colombia] положєно ѥ́стъ
+wm-license-cc-by-2.5-dk-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/dk/ Attribution 2.5 Denmark] положєно ѥ́стъ
+wm-license-cc-by-2.5-es-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/es/ Attribution 2.5 Spain] положєно ѥ́стъ
+wm-license-cc-by-2.5-hr-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/hr/ Attribution 2.5 Croatia] положєно ѥ́стъ
+wm-license-cc-by-2.5-hu-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/hu/ Attribution 2.5 Hungary] положєно ѥ́стъ
+wm-license-cc-by-2.5-il-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/il/ Attribution 2.5 Israel] положєно ѥ́стъ
+wm-license-cc-by-2.5-in-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/in/ Attribution 2.5 India] положєно ѥ́стъ
+wm-license-cc-by-2.5-it-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/it/ Attribution 2.5 Italy] положєно ѥ́стъ
+wm-license-cc-by-2.5-mk-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/mk/ Attribution 2.5 Macedonia] положєно ѥ́стъ
+wm-license-cc-by-2.5-mt-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/mt/ Attribution 2.5 Malta] положєно ѥ́стъ
+wm-license-cc-by-2.5-mx-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/mx/ Attribution 2.5 Mexico] положєно ѥ́стъ
+wm-license-cc-by-2.5-my-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/my/ Attribution 2.5 Malaysia] положєно ѥ́стъ
+wm-license-cc-by-2.5-nl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/nl/ Attribution 2.5 Netherlands] положєно ѥ́стъ
+wm-license-cc-by-2.5-pe-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/pe/ Attribution 2.5 Peru] положєно ѥ́стъ
+wm-license-cc-by-2.5-pl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/pl/ Attribution 2.5 Poland] положєно ѥ́стъ
+wm-license-cc-by-2.5-pt-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/pt/ Attribution 2.5 Portugal] положєно ѥ́стъ
+wm-license-cc-by-2.5-scotland-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/scotland/ Attribution 2.5 UK: Scotland] положєно ѥ́стъ
+wm-license-cc-by-2.5-se-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/se/ Attribution 2.5 Sweden] положєно ѥ́стъ
+wm-license-cc-by-2.5-si-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/si/ Attribution 2.5 Slovenia] положєно ѥ́стъ
+wm-license-cc-by-2.5-tw-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/tw/ Attribution 2.5 Taiwan] положєно ѥ́стъ
+wm-license-cc-by-2.5-za-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/za/ Attribution 2.5 South Africa] положєно ѥ́стъ
+wm-license-cc-by-3.0-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/ Attribution 3.0 Unported] положєно ѥ́стъ
+wm-license-cc-by-3.0-2.5-2.0-1.0-text|сѥ́ дѣ́ло по́дъ прощє́ниѩ [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] Attribution [//creativecommons.org/licenses/by/3.0/ 3.0 Unported] · [//creativecommons.org/licenses/by/2.5/ 2.5 Generic] · [//creativecommons.org/licenses/by/2.0/ 2.0 Generic] и [//creativecommons.org/licenses/by/1.0/ 1.0 Generic] положєно ѥ́стъ
+wm-license-cc-by-3.0-at-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/at/ Attribution 3.0 Austria] положєно ѥ́стъ
+wm-license-cc-by-3.0-cz-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/cz/ Attribution 3.0 Czech Republic] положєно ѥ́стъ
+wm-license-cc-by-3.0-de-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/de/ Attribution 3.0 Germany] положєно ѥ́стъ
+wm-license-cc-by-3.0-es-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/es/ Attribution 3.0 Spain] положєно ѥ́стъ
+wm-license-cc-by-3.0-gr-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/gr/ Attribution 3.0 Greece] положєно ѥ́стъ
+wm-license-cc-by-3.0-gt-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/gt/ Attribution 3.0 Guatemala] положєно ѥ́стъ
+wm-license-cc-by-3.0-hk-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/hk/ Attribution 3.0 Hong Kong] положєно ѥ́стъ
+wm-license-cc-by-3.0-hr-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/hr/ Attribution 3.0 Croatia] положєно ѥ́стъ
+wm-license-cc-by-3.0-lu-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/lu/ Attribution 3.0 Luxembourg] положєно ѥ́стъ
+wm-license-cc-by-3.0-nl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/nl/ Attribution 3.0 Netherlands] положєно ѥ́стъ
+wm-license-cc-by-3.0-no-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/no/ Attribution 3.0 Norway] положєно ѥ́стъ
+wm-license-cc-by-3.0-nz-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/nz/ Attribution 3.0 New Zealand] положєно ѥ́стъ
+wm-license-cc-by-3.0-ph-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/ph/ Attribution 3.0 Philippines] положєно ѥ́стъ
+wm-license-cc-by-3.0-pl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/pl/ Attribution 3.0 Poland] положєно ѥ́стъ
+wm-license-cc-by-3.0-pr-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/pr/ Attribution 3.0 Puerto Rico] положєно ѥ́стъ
+wm-license-cc-by-3.0-ro-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/ro/ Attribution 3.0 Romania] положєно ѥ́стъ
+wm-license-cc-by-3.0-rs-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/rs/ Attribution 3.0 Serbia] положєно ѥ́стъ
+wm-license-cc-by-3.0-sg-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/sg/ Attribution 3.0 Singapore] положєно ѥ́стъ
+wm-license-cc-by-3.0-th-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/th/ Attribution 3.0 Thailand] положєно ѥ́стъ
+wm-license-cc-by-3.0-tw-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/tw/ Attribution 3.0 Taiwan] положєно ѥ́стъ
+wm-license-cc-by-3.0-us-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/us/ Attribution 3.0 United States] положєно ѥ́стъ
+wm-license-cc-by-sa-1.0-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/1.0/ Attribution-Share Alike 1.0 Generic] положєно ѥ́стъ
+wm-license-cc-by-sa-1.0-fi-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/1.0/fi/ Attribution-Share Alike 1.0 Finland] положєно ѥ́стъ
+wm-license-cc-by-sa-1.0-il-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/1.0/il/ Attribution-Share Alike 1.0 Israel] положєно ѥ́стъ
+wm-license-cc-by-sa-1.0-nl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/1.0/nl/ Attribution-Share Alike 1.0 Netherlands] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/ Attribution-Share Alike 2.0 Generic] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-at-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/at/ Attribution-Share Alike 2.0 Austria] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-au-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/au/ Attribution-Share Alike 2.0 Australia] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-be-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/be/ Attribution-Share Alike 2.0 Belgium] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-br-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/br/ Attribution-Share Alike 2.0 Brazil] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-ca-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/ca/ Attribution-Share Alike 2.0 Canada] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-cl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/cl/ Attribution-Share Alike 2.0 Chile] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-de-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/de/ Attribution-Share Alike 2.0 Germany] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-es-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/es/ Attribution-Share Alike 2.0 Spain] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-fr-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/fr/ Attribution-Share Alike 2.0 France] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-hr-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/hr/ Attribution-Share Alike 2.0 Croatia] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-it-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/it/ Attribution-Share Alike 2.0 Italy] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-jp-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/jp/ Attribution-Share Alike 2.0 Japan] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-kr-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/kr/ Attribution-Share Alike 2.0 Korea] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-nl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/nl/ Attribution-Share Alike 2.0 Netherlands] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-pl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/pl/ Attribution-Share Alike 2.0 Poland] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-tw-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/tw/ Attribution-Share Alike 2.0 Taiwan] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-uk-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/uk/ Attribution-Share Alike 2.0 UK: England & Wales] положєно ѥ́стъ
+wm-license-cc-by-sa-2.0-za-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/za/ Attribution-Share Alike 2.0 South Africa] положєно ѥ́стъ
+wm-license-cc-by-sa-2.1-au-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.1/au/ Attribution-Share Alike 2.1 Australia] положєно ѥ́стъ
+wm-license-cc-by-sa-2.1-es-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.1/es/ Attribution-Share Alike 2.1 Spain] положєно ѥ́стъ
+wm-license-cc-by-sa-2.1-jp-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.1/jp/ Attribution-Share Alike 2.1 Japan] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/ Attribution-Share Alike 2.5 Generic] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-ar-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/ar/ Attribution-Share Alike 2.5 Argentina] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-au-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/au/ Attribution-Share Alike 2.5 Australia] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-bg-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/bg/ Attribution-Share Alike 2.5 Bulgaria] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-br-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/br/ Attribution-Share Alike 2.5 Brazil] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-ca-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/ca/ Attribution-Share Alike 2.5 Canada] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-ch-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/ch/ Attribution-Share Alike 2.5 Switzerland] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-cn-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/cn/ Attribution-Share Alike 2.5 China Mainland] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-co-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/co/ Attribution-Share Alike 2.5 Colombia] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-dk-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/dk/ Attribution-Share Alike 2.5 Denmark] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-es-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/es/ Attribution-Share Alike 2.5 Spain] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-hr-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/hr/ Attribution-Share Alike 2.5 Croatia] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-hu-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/hu/ Attribution-Share Alike 2.5 Hungary] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-il-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/il/ Attribution-Share Alike 2.5 Israel] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-in-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/in/ Attribution-Share Alike 2.5 India] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-it-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/it/ Attribution-Share Alike 2.5 Italy] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-mk-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/mk/ Attribution-Share Alike 2.5 Macedonia] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-mt-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/mt/ Attribution-Share Alike 2.5 Malta] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-mx-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/mx/ Attribution-Share Alike 2.5 Mexico] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-my-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/my/ Attribution-Share Alike 2.5 Malaysia] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-nl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/nl/ Attribution-Share Alike 2.5 Netherlands] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-pe-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/pe/ Attribution-Share Alike 2.5 Peru] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-pl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/pl/ Attribution-Share Alike 2.5 Poland] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-pt-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/pt/ Attribution-Share Alike 2.5 Portugal] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-scotland-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/scotland/ Attribution-Share Alike 2.5 UK: Scotland] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-se-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/se/ Attribution-Share Alike 2.5 Sweden] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-si-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/si/ Attribution-Share Alike 2.5 Slovenia] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-tw-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/tw/ Attribution-Share Alike 2.5 Taiwan] положєно ѥ́стъ
+wm-license-cc-by-sa-2.5-za-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/za/ Attribution-Share Alike 2.5 South Africa] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/ Attribution-Share Alike 3.0 Unported] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-2.5-2.0-1.0-text|сѥ́ дѣ́ло по́дъ прощє́ниѩ [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] Attribution-Share Alike [//creativecommons.org/licenses/by-sa/3.0/ 3.0 Unported] · [//creativecommons.org/licenses/by-sa/2.5/ 2.5 Generic] · [//creativecommons.org/licenses/by-sa/2.0/ 2.0 Generic] и [//creativecommons.org/licenses/by-sa/1.0/ 1.0 Generic] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-at-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/at/ Attribution-Share Alike 3.0 Austria] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-cz-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/cz/ Attribution-Share Alike 3.0 Czech Republic] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-de-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/de/ Attribution-Share Alike 3.0 Germany] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-es-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/es/ Attribution-Share Alike 3.0 Spain] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-gr-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/gr/ Attribution-Share Alike 3.0 Greece] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-gt-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/gt/ Attribution-Share Alike 3.0 Guatemala] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-hk-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/hk/ Attribution-Share Alike 3.0 Hong Kong] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-hr-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/hr/ Attribution-Share Alike 3.0 Croatia] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-lu-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/lu/ Attribution-Share Alike 3.0 Luxembourg] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-nl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/nl/ Attribution-Share Alike 3.0 Netherlands] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-no-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/no/ Attribution-Share Alike 3.0 Norway] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-nz-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/nz/ Attribution-Share Alike 3.0 New Zealand] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-ph-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/ph/ Attribution-Share Alike 3.0 Philippines] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-pl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/pl/ Attribution-Share Alike 3.0 Poland] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-pr-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/pr/ Attribution-Share Alike 3.0 Puerto Rico] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-ro-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/ro/ Attribution-Share Alike 3.0 Romania] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-rs-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/rs/ Attribution-Share Alike 3.0 Serbia] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-sg-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/sg/ Attribution-Share Alike 3.0 Singapore] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-th-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/th/ Attribution-Share Alike 3.0 Thailand] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-tw-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/tw/ Attribution-Share Alike 3.0 Taiwan] положєно ѥ́стъ
+wm-license-cc-by-sa-3.0-us-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/us/ Attribution-Share Alike 3.0 United States] положєно ѥ́стъ
+wm-license-cc-sa-1.0-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/sa/1.0/ Share Alike 1.0 Generic] положєно ѥ́стъ
+wm-license-cc-sa-1.0-fi-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/sa/1.0/fi/ Share Alike 1.0 Finland] положєно ѥ́стъ
+wm-license-cc-sa-1.0-nl-text|сѥ́ дѣ́ло по́дъ прощє́ниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/sa/1.0/nl/ Share Alike 1.0 Netherlands] положєно ѥ́стъ
+wm-license-cc-sa-2.0-jp-text|сѥ дѣло подъ прощєниѥмь [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/sa/2.0/jp/ Share Alike 2.0 Japan] положєно ѥстъ
+wm-license-cc-free|тꙑ можєши :
+wm-license-book-language|ѩꙁꙑкъ
+wm-license-information-author|творьць
+sitesupport|даꙗниꙗ
+wikimedia-copyright|подъ прощєниѥмь <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike License</a> пьсано ѥстъ · доплънитєл҄ьнꙑ оуставлєниꙗ тако жє могѫтъ бꙑти ⁙\nꙀьри <a href="https://wikimediafoundation.org/wiki/Terms_of_Use/cu">польꙃєваниꙗ оуставъ</a> пльна расъмощрѥниꙗ дѣл̑ьма
+wikimedia-copyrightwarning|ащє жьмєши ⁖ {{int:savearticle}} ⁖ · тъ бѫди съгласьнъ съ [https://wikimediafoundation.org/wiki/Terms_of_Use польꙃєваниꙗ оуставомь] · и сътворѥниѥмь твоꙗ добродѣꙗнии подъ прощєнии [https://creativecommons.org/licenses/by-sa/3.0/ CC-BY-SA 3.0] и [https://www.gnu.org/copyleft/fdl.html GFDL] ⁙\nсъгласьнь бѫди бо съвѧꙁь (URL) добро оукаꙁаниѥ творьца прощєниꙗ Creative Commons дѣлꙗ ѥстъ
+tog-oldsig|нꙑнѣшьн҄ь аѵтографъ :
+underline-always|вьсѥгда
+underline-never|никъгда
+january-date|ꙗноуарїꙗ ~{0} числа
+february-date|фєвроуарїꙗ ~{0} числа
+march-date|мартїꙗ ~{0} числа
+april-date|апрїлїꙗ ~{0} числа
+may-date|маїꙗ ~{0} числа
+june-date|їоунїꙗ ~{0} числа
+july-date|їоулїꙗ ~{0} числа
+august-date|аѷгоуста ~{0} числа
+september-date|сєптємврїꙗ ~{0} числа
+october-date|октѡврїꙗ ~{0} числа
+november-date|ноємврїꙗ ~{0} числа
+december-date|дєкємврїꙗ ~{0} числа
+hidden-categories|{{PLURAL:~{0}\u007Cсъкрꙑта катигорїꙗ\u007Cсъкрꙑти катигорїи\u007Cсъкрꙑтꙑ катигорїѩ}}
+about|опьсаниѥ
+article|члѣнъ
+newwindow|(иномь окънѣ)
+moredotdotdot|вѧщє ···
+mypage|страница
+mytalk|бєсѣда
+navigation|плаваниѥ
+and| и
+qbedit|исправи
+qbpageoptions|сꙗ страница
+qbmyoptions|моꙗ страницѧ
+faq|чѧстꙑ въпроси
+faqpage|Project:Чѧстꙑ въпроси
+actions|дѣиства
+namespaces|имєнъ просторꙑ
+navigation-heading|плаваниѥ
+errorpagetitle|блаꙁна
+tagline|{{grammar:genitive\u007C{{SITENAME}}}} страница
+help|помощь
+search|исканиѥ
+searchbutton|ищи
+go|прѣиди
+searcharticle|прѣиди
+history|страницѧ їсторїꙗ
+history_short|їсторїꙗ
+printableversion|пєчатьнъ обраꙁъ
+permalink|въиньна съвѧꙁь
+print|пєчатаниѥ
+edit|исправи
+create|сътворѥниѥ
+editthispage|си страницѧ исправлѥниѥ
+create-this-page|си страницѧ сътворѥниѥ
+delete|поничьжєниѥ
+deletethispage|си страницѧ поничьжєниѥ
+protect|ꙁабранѥниѥ
+protect_change|иꙁмѣнѥниѥ
+protectthispage|си страницѧ ꙁабранєниѥ
+unprotect|ꙁабранѥниꙗ обраꙁа иꙁмѣнѥниѥ
+newpage|нова страница
+talkpage|си страницѧ бєсѣда
+talkpagelinktext|бєсѣда
+specialpage|нарочьна страница
+personaltools|моꙗ орѫдиꙗ
+talk|бєсѣда
+toolbox|орѫдиꙗ
+redirectpagesub|прѣнаправлѥниѥ
+jumpto|прѣиди къ :
+jumptonavigation|плаваниѥ
+jumptosearch|исканиѥ
+pool-errorunknown|нєвѣдома блаꙁна
+aboutsite|О {{grammar:instrumental\u007C{{SITENAME}}}}
+aboutpage|Project:О сѥмь опꙑтьствовании
+copyright|подъ прощєниѥмь ~{0} пьсано ѥстъ · ащє ино нє каꙁано ѥстъ
+copyrightpage|{{ns:project}}:Творьцъ права
+currentevents|сѫщѧѩ вѣщи
+currentevents-url|Project:Сѫщѧѩ вѣщи
+edithelp|помощь по исправлѥниѭ
+mainpage|главьна страница
+mainpage-description|главьна страница
+policy-url|Project:Полїтїка
+portal|обьщєниꙗ съвѣтъ
+portal-url|Project:Обьщєниꙗ съвѣтъ
+pagetitle|~{0} · {{SITENAME}}
+retrievedfrom|поѩто иꙁ ⁖ ~{0} ⁖
+youhavenewmessages|~{0} тєбѣ напьсанꙑ сѫтъ (~{1})
+newmessageslinkplural|{{PLURAL:~{0}\u007Cново напьсаниѥ\u007Cнова напьсании\u007C999=новꙑ напьсаниꙗ}}
+newmessagesdifflinkplural|{{PLURAL:~{0}\u007Cпослѣдьнꙗ мѣна\u007Cпослѣдьни мѣни\u007C999=послѣдьн҄ь мѣнъ}}
+editsection|исправи
+editold|исправи
+viewsourceold|страницѧ источьнъ обраꙁъ
+editlink|исправи
+viewsourcelink|страницѧ источьнъ обраꙁъ
+editsectionhint|исправлѥниѥ чѧсти : ~{0}
+showtoc|виждь
+hidetoc|съкрꙑи
+viewdeleted|~{0} видєти хощєши ;
+red-link-title|~{0} (си страницѧ нѣстъ)
+nstab-main|члѣнъ
+nstab-user|польꙃєватєл҄ь
+nstab-media|срѣдьства
+nstab-special|нарочьна
+nstab-project|съвѣтъ
+nstab-image|дѣло
+nstab-mediawiki|напьсаниѥ
+nstab-template|обраꙁьць
+nstab-help|страница помощи
+nstab-category|катигорїꙗ
+nosuchspecialpage|си нарочнꙑ страницѧ нѣстъ
+error|блаꙁна
+internalerror|вънѫтрѣнꙗ блаꙁна
+badtitle|ꙁъло имѧ
+viewsource|страницѧ источьнъ обраꙁъ
+viewsource-title|вижьдь страницѧ ⁖ ~{0} ⁖ источьнъ обраꙁъ
+welcomeuser|Добрѣ прити · ~{0}!
+welcomecreation-msg|твоѥ польꙃєватєльско мѣсто сътворєно ѥстъ ⁙\nнꙑнѣ иꙁмѣнити [[Special:Preferences\u007C{{GRAMMAR:genitive\u007C{{SITENAME}}}} строи]] можєши
+yourname|твоѥ имѧ
+userlogin-yourname|польꙃєватєлꙗ имѧ
+userlogin-yourname-ph|твоѥ польꙃєватєлꙗ имѧ напьши
+yourpassword|таино слово напиши
+userlogin-yourpassword|таино слово
+userlogin-yourpassword-ph|твоѥ таино слово напьши
+createacct-yourpassword-ph|таино слово напьши
+yourpasswordagain|опакꙑ таиноѥ слово напиши
+createacct-yourpasswordagain|таина слова оувѣрѥниѥ
+createacct-yourpasswordagain-ph|опакꙑ жє таино слово напьши
+login|въниди
+nav-login-createaccount|въниди / съꙁижди си мѣсто
+userlogin|въниди / съꙁижди си мѣсто
+userloginnocreate|въниди
+logout|ис̾ходъ
+userlogout|ис̾ходъ
+userlogin-noaccount|мѣсто ти нѣстъ ли ?
+nologin|мѣсто ти нѣстъ ли ? ~{0}
+nologinlink|съꙁижди си мѣсто
+createaccount|съꙁижди си мѣсто
+gotaccount|мѣсто ти ѥстъ ли? ~{0}
+gotaccountlink|въниди
+createaccountreason|какъ съмꙑслъ :
+createacct-reason|какъ съмꙑслъ
+createacct-submit|съꙁижди си мѣсто
+createacct-benefit-heading|{{SITENAME}} съꙁьдаѥтъ сѧ чьловѣкꙑ · ижє ꙗко тꙑ сѫтъ
+createacct-benefit-body1|{{PLURAL:~{0}\u007Cмѣна\u007Cмѣнꙑ\u007Cмѣнъ}}
+createacct-benefit-body2|{{PLURAL:~{0}\u007Cстраница\u007Cстраници\u007Cстраницѧ}}
+userexists|сѫщє польꙃєватєлꙗ имѧ пьса ⁙\nбѫди добръ · ино сѥ иꙁобрѧщи
+loginerror|въхода блаꙁна
+createacct-error|мѣста сътворѥниꙗ блаꙁна
+loginsuccess|'''нꙑнѣ тꙑ {{GENDER\u007Cвъшьлъ\u007Cвъшьла}} въ {{grammar:locative\u007C{{SITENAME}}}} подь имьньмъ ⁖ ~{0} ⁖.'''
+mailmypassword|посъли ново таино слово
+accountcreated|мѣсто сътворєно ѥстъ
+accountcreatedtext|польꙃєватєльско мѣсто [[{{ns:User}}:~{0}\u007C~{0}]] ([[{{ns:User talk}}:~{0}\u007Cбєсѣда]]) сътворєно бѣ
+loginlanguagelabel|ѩꙁꙑкъ : ~{0}
+pt-login|въниди
+pt-login-button|въниди
+pt-createaccount|съꙁижди си мѣсто
+pt-userlogout|ис̾ходъ
+changepassword|таина словєсє иꙁмѣнѥниѥ
+resetpass_header|таина слова иꙁмѣнѥниѥ
+oldpassword|старо таино слово :
+newpassword|ново таино слово :
+retypenew|опакꙑ ново таиноѥ слово напиши :
+resetpass-submit-loggedin|таина словєсє иꙁмѣнѥниѥ
+passwordreset-username|польꙃєватєлꙗ имѧ :
+changeemail-none|(нѣстъ)
+extlink_sample|http://www.example.com съвѧꙁи имѧ
+extlink_tip|вънѣщьнꙗ съвѧꙁь (помьни о http://)
+media_tip|дѣла съвѧꙁь
+sig_tip|твои аѵтографъ и нꙑнѣшьна врѣмѧ и дьнь
+summary|опьсаниѥ :
+minoredit|малаꙗ мѣна
+watchthis|си страницѧ блюдєниѥ
+savearticle|съхранѥниѥ
+showpreview|мѣнꙑ поꙁьрѣниѥ (бєꙁ съхранѥниꙗ)
+blockedtitle|польꙃєватєл҄ь ꙁаграждєнъ ѥстъ
+loginreqlink|въниди
+newarticle|(новъ)
+noarticletext|нꙑнѣ с̑ьдє ничєсожє нє напьсано ѥстъ ⁙\n[[Special:Search/{{PAGENAME}}\u007Cси страницѧ имѧ искати]] дроугꙑ страницѧ ·\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} съвѧꙁанꙑ їсторїѩ видѣти] ·\nили [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} ѭжє исправити]</span> можєши
+noarticletext-nopermission|нꙑнѣ с̑ьдє ничєсожє нє напьсано ѥстъ ⁙\n[[Special:Search/{{PAGENAME}}\u007Cси страницѧ имѧ искати]] дроугꙑ страницѧ или\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} съвѧꙁанꙑ їсторїѩ видѣти]</span> можєши ⁙ сътворити жє си страницѧ нє можєши
+userpage-userdoesnotexist|польꙃєватєльска мѣста ⁖ ~{0} ⁖ нꙑнѣ нѣстъ ⁙\nпрѣдъ сътворѥниѥмь или исправлѥниѥмь си страницѧ помꙑсли жє ащє исто тъ дѣиство ноуждьно ли
+userpage-userdoesnotexist-view|польꙃєватєльско мѣсто ⁖ ~{0} ⁖ сътворєно нѣстъ
+clearyourcache|'''НАРОЧИТО''': По съхранѥнии можєши обити своѥго съмотрила съхранъ да видѣлъ би мѣнꙑ\n* '''Mozilla ли Firefox ли Safari''' ли жьмꙑи ''Shift'' а мꙑшиѭ жьми ''Reload'' или жьми ''Ctrl-F5'' ꙗко жє ''Ctrl-R'' (⌘-R вън Apple Mac)\n* '''Google Chrome:''' ли жьмꙑи ''Ctrl-Shift-R'' (⌘-Shift-R въ Mac)\n* '''Internet Explorer''' ли жьмꙑи ''Ctrl'' а мꙑшиѭ жьми ''Refresh'' или жьми ''Ctrl-F5'' \n* '''Опєрꙑ''' польꙃєватєльмъ можєть бꙑти ноужда пльнѣ поничьжити ихъ съмотрила съхранъ въ ''Tools → Preferences'' ⁙
+updated|(оновлѥно ѥстъ)
+note|'''НАРОЧИТО:'''
+editing|исправлѥниѥ: ~{0}
+creating|сътворѥниѥ ⁖ ~{0} ⁖
+editingsection|исправлѥниѥ ⁖ ~{0} ⁖ (чѧсть)
+editingcomment|исправлѥниѥ ⁖ ~{0} ⁖ (нова чѧсть)
+yourtext|твоѥ напьсаниѥ
+templatesused|сѥѩ страницѧ {{PLURAL:~{0}\u007Cсь обраꙁьць польꙃоуѥтъ сѧ ѥстъ\u007Cс҄и обраꙁьца польꙃоуѭтъ сѧ ѥстє\u007Cс҄и обраꙁьци польꙃоуѭтъ сѧ сѫтъ}} :
+template-protected|(ꙁабранєно ѥстъ)
+template-semiprotected|(чѧстьно ꙁабранѥно)
+hiddencategories|сꙗ страница въ {{PLURAL:~{0}\u007C1 съкрꙑтѣи катигорїи\u007C~{0} съкрꙑтѣхъ катигорїѩ}} сѧ авлꙗѥтъ :
+moveddeleted-notice|сꙗ страница поничьжєна ѥстъ ⁙\nпоничьжєниꙗ и прѣимєнованиꙗ їстории си страницѧ нижѣ видѣти можєши
+postedit-confirmation-saved|твоꙗ мѣна съхранѥна ѥстъ
+viewpagelogs|си страницѧ їсторїѩ
+cur|нꙑ҃н
+last|пс҃лд
+page_first|прьва страница
+page_last|послѣдьнꙗ страница
+history-fieldset-title|виждь мѣнъ їсторїѭ
+history-show-deleted|тъкъмо поничьжєнꙑ мѣнꙑ
+histfirst|прьвꙑ
+histlast|послѣдьнꙗ
+historysize|{{PLURAL:~{0}\u007C1 баитъ\u007C~{0} баита\u007C~{0} баитъ}}
+historyempty|(поусто)
+history-feed-title|мѣнъ їсторїꙗ
+history-feed-item-nocomment|~{0} при ~{1}
+rev-deleted-comment|(мѣнꙑ опьсаниѥ съкрꙑто ѥстъ)
+rev-deleted-user|(польꙃєватєлꙗ имѧ съкрꙑто ѥстъ)
+rev-delundel|каꙁаниѥ / съкрꙑтиѥ
+rev-showdeleted|виждь
+revdelete-show-file-submit|да
+revdelete-radio-set|съкрꙑто
+revdelete-radio-unset|каꙁано
+revdelete-log|какъ съмꙑслъ :
+pagehist|страницѧ їсторїꙗ
+deletedhist|поничьжєна їсторїꙗ
+revdelete-otherreason|инъ или допльнитєл҄ьнъ съмꙑслъ :
+revdelete-reasonotherlist|инъ съмꙑслъ
+mergehistory-reason|какъ съмꙑслъ :
+searchresults|исканиꙗ слѣдьствиѥ
+searchresults-title|исканиꙗ ⁖ ~{0} ⁖ слѣдьствиѥ
+viewprevnext|виждь (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|'''страница имєньмь ⁖ [[:~{0}]] ⁖ ѥстъ створѥна ю'''
+searchmenu-new|<strong>страницѫ "⁖ [[:~{0}]] ⁖" сътворити можєши</strong> {{PLURAL:~{1}\u007C0=\u007Cꙁъри такождє страница ижє по искании авлєна ѥстъ\u007Cꙁьри такождє исканиꙗ слѣдьствиꙗ}}
+searchprofile-articles|члѣни
+searchprofile-images|дѣла
+searchprofile-everything|вьсѩ страницѧ
+searchprofile-articles-tooltip|ищи въ ~{0}
+searchprofile-images-tooltip|исканиѥ дѣлъ
+searchprofile-everything-tooltip|ищи вьсѩ страницѧ въкоупомь съ бѣсєдꙑ
+search-result-size|~{0} ({{PLURAL:~{1}\u007C~{1} слово\u007C~{1} слова\u007C~{1} словєсъ}})
+search-redirect|(прѣнаправлєниѥ ~{0})
+search-section|(чѧсть ~{0})
+search-suggest|⁖ ~{0} ⁖ мьниши ли
+search-interwiki-caption|родьствьна опꙑтьствованиꙗ
+search-interwiki-more|(вѧщє)
+searchall|вьсꙗ
+search-nonefound|исканиѥ сꙗ слова ничєсо жє нє авило ѥстъ
+preferences|строи
+mypreferences|строи
+prefs-edits|мѣнъ число :
+prefs-rc|послѣдьнѩ мѣнꙑ
+prefs-watchlist|блюдєниꙗ
+prefs-resetpass|таина словєсє иꙁмѣнѥниѥ
+saveprefs|съхранѥниѥ
+prefs-editing|исправлѥниѥ
+rows|рѧдꙑ :
+searchresultshead|исканиѥ
+savedprefs|твои строи иꙁмѣнєнъ ѥстъ
+localtime|мѣстьно врѣмѧ :
+guesstimezone|иꙁ твоѥго жє съмотрила врѣмєни обраꙁа поѩтиѥ
+timezoneregion-africa|Афрїка
+timezoneregion-america|Амєрїка
+timezoneregion-antarctica|Антарктїка
+timezoneregion-arctic|Арктїка
+timezoneregion-asia|Асїꙗ
+timezoneregion-atlantic|Атлантїчьскъ ѡкєанъ
+timezoneregion-australia|Аѵстралїꙗ
+timezoneregion-europe|Єѵрѡпа
+timezoneregion-indian|Їндїискъ ѡкєанъ
+timezoneregion-pacific|Тихꙑи ѡкєанъ
+prefs-searchoptions|исканиѥ
+prefs-namespaces|имєнъ просторꙑ
+prefs-files|дѣла
+username|{{GENDER:~{0}\u007Cпольꙃєватєлꙗ имѧ}} :
+prefs-memberingroups|{{GENDER:~{1}\u007Cпольꙃєватєлꙗ}} {{PLURAL:~{0}\u007Cчинъ\u007Cчина\u007Cчинꙑ}} :
+yourrealname|истиньно имѧ :
+yourlanguage|ѩꙁꙑкъ :
+yournick|новъ аѵтографъ :
+yourgender|ꙗко жє о тєбѣ пьсати ;
+gender-male|онъ исправитъ страницѧ
+gender-female|она исправитъ страницѧ
+prefs-signature|аѵтографъ
+userrights|чина польꙃєватєлꙗ строи
+userrights-reason|какъ съмꙑслъ :
+group|чинъ :
+group-user|польꙃєватєлє
+group-bot|аѵтомати
+group-sysop|съмотритєлє
+group-bureaucrat|чинодатєлє
+group-user-member|{{GENDER:~{0}\u007Cпольꙃєватєл҄ь\u007Cпольꙃєватєл҄ьница}}
+group-bot-member|{{GENDER:~{0}\u007Cаѵтоматъ}}
+group-sysop-member|{{GENDER:~{0}\u007Cсъмотритєл҄ь}}
+group-bureaucrat-member|{{GENDER:~{0}\u007Cчинодатєл҄ь}}
+grouppage-user|{{ns:project}}:Польꙃєватєлє
+grouppage-bot|{{ns:project}}:Аѵтомати
+grouppage-sysop|{{ns:project}}:Съмотритєлє
+grouppage-bureaucrat|{{ns:project}}:Чинодатєлє
+right-createaccount|новъ польꙃєватєльскъ мѣстъ сътворѥниѥ
+right-move|прѣимєнованиѥ страницѧ
+right-movefile|прѣимєнованиѥ дѣлъ
+right-upload|положєниѥ дѣлъ
+right-delete|страницѧ поничьжєниѥ
+newuserlogpage|новъ мѣстъ сътворѥниꙗ їсторїꙗ
+rightslog|чинодатєльства їсторїꙗ
+action-edit|си страницѧ исправлєниѥ
+nchanges|~{0} {{PLURAL:~{0}\u007Cмѣна\u007Cмѣнꙑ\u007Cмѣнъ}}
+enhancedrc-history|їсторїꙗ
+recentchanges|послѣдьнѩ мѣнꙑ
+recentchanges-legend|послѣдьн҄ь мѣнъ строи
+recentchanges-summary|с҄ьдє послѣдьнѩ мѣнꙑ сѥѩ викиопꙑтьствованиꙗ видѣти можєши
+recentchanges-label-newpage|по сѥи мѣнꙑ нова страница сътворѥна ѥстъ
+recentchanges-label-minor|малаꙗ мѣна
+recentchanges-label-bot|сѭ мѣноу аѵтоматъ сътворилъ
+rcshowhideminor|~{0} малꙑ мѣнꙑ
+rcshowhideminor-show|каꙁаниѥ
+rcshowhideminor-hide|съкрꙑтиѥ
+rcshowhidebots|~{0} аѵтоматъ
+rcshowhidebots-show|каꙁаниѥ
+rcshowhidebots-hide|съкрꙑтиѥ
+rcshowhideliu|~{0} польꙃєватєлъ · ѩжє съꙁижьдє сѥ мѣсто · мѣнꙑ
+rcshowhideliu-hide|съкрꙑтиѥ
+rcshowhideanons|~{0} анѡнѷмьнъ польꙃєватєлъ мѣнꙑ
+rcshowhideanons-show|каꙁаниѥ
+rcshowhideanons-hide|съкрꙑтиѥ
+rcshowhidemine|~{0} моꙗ мѣнꙑ
+rcshowhidemine-show|каꙁаниѥ
+rcshowhidemine-hide|съкрꙑтиѥ
+rclinks|~{0} послѣдьн҄ь  мѣнъ · ѩжє ~{1} послѣдьни дьни створѥнꙑ сѫтъ · каꙁаниѥ<br />~{2}
+diff|ра҃ꙁн
+hist|їс҃т
+hide|съкрꙑи
+show|виждь
+minoreditletter|м҃л
+newpageletter|н҃в
+boteditletter|а҃ѵ
+rc-change-size-new|~{0} {{PLURAL:~{0}\u007Cбаитъ\u007Cбаита\u007Cбаитъ}} послѣди мѣнꙑ
+rc-old-title|напрьва страница створѥна ꙗко ⁖ ~{0} ⁖
+recentchangeslinked|съвѧꙁанꙑ страницѧ
+recentchangeslinked-feed|съвѧꙁанꙑ страницѧ
+recentchangeslinked-toolbox|съвѧꙁанꙑ страницѧ
+recentchangeslinked-page|страницѧ имѧ :
+upload|положєниѥ дѣла
+uploadbtn|положєниѥ дѣла
+uploadlogpage|дѣлъ положєниꙗ їсторїꙗ
+filename|дѣла имѧ
+filedesc|опьсаниѥ
+fileuploadsummary|опьсаниѥ:
+savefile|дѣла съхранѥниѥ
+upload-source|источьно дѣло
+sourcefilename|источьна дѣла имꙗ :
+watchthisupload|си дѣла блюдєниѥ
+upload-success-subj|дѣло положєно ѥстъ
+license|прощєниѥ :
+license-header|прощєниѥ
+imgfile|дѣло
+listfiles|дѣлъ каталогъ
+listfiles_name|имѧ
+listfiles_user|польꙃєватєл҄ь
+listfiles_size|мѣра
+file-anchor-link|дѣло
+filehist|дѣла їсторїꙗ
+filehist-deleteone|поничьжєниѥ
+filehist-current|нꙑнѣщьн҄ь обраꙁъ
+filehist-datetime|дьнь / врѣмѧ
+filehist-thumb|малъ обраꙁъ
+filehist-user|польꙃєватєл҄ь
+filehist-dimensions|мѣра
+filehist-filesize|дѣла мѣра
+filehist-comment|опьсаниѥ
+imagelinks|дѣла польꙃєваниѥ
+sharedupload|сѥ дѣло въ ~{0} съхранѥно ѥстъ дѣла · ѥгожє дроугꙑ опꙑтьствованиѩ польꙃєвати могѫтъ
+filerevert-comment|какъ съмꙑслъ :
+filedelete|поничьжєниѥ ~{0}
+filedelete-legend|дѣла поничьжєниѥ
+filedelete-comment|какъ съмꙑслъ :
+filedelete-submit|поничьжєниѥ
+mimetype|MIME тѷпъ :
+download|поѩти
+listredirects|прѣнаправлѥниꙗ
+randompage|страница въ нєꙁаапѫ
+randomredirect|прѣнаправлѥниє въ нєꙁаапѫ
+statistics-header-edits|мѣнъ статїстїка
+statistics-header-users|польꙃєватєлъ статїстїка
+statistics-files|положєнꙑ дѣла
+statistics-users-active|дѣꙗтєльнꙑ польꙃєватєлє
+brokenredirects-edit|исправи
+brokenredirects-delete|поничьжєниѥ
+nbytes|~{0} {{PLURAL:~{0}\u007Cбаитъ\u007Cбаита\u007Cбаитъ}}
+ncategories|~{0} {{PLURAL:~{0}\u007Cкатигорїꙗ\u007Cкатигорїи\u007Cкатигорїѩ}}
+nlinks|~{0} {{PLURAL:~{0}\u007Cсъвѧꙁь\u007Cсъвѧꙁи\u007Cсъвѧꙁии}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cчлѣнъ\u007Cчлѣна\u007Cчлѣни\u007Cчлѣнъ}}
+shortpages|кратъкꙑ страницѧ
+listusers|польꙃєватєлъ каталогъ
+usereditcount|~{0} {{PLURAL:~{0}\u007Cмѣна\u007Cмѣнꙑ\u007Cмѣнъ}}
+usercreated|{{GENDER:~{2}\u007Cсътворилъ\u007Cсътворила}} мѣсто ~{0} въ ~{1}
+newpages|нови члѣни
+newpages-username|польꙃєватєлꙗ имѧ :
+ancientpages|давьни страницѧ
+move|прѣимєнованиѥ
+movethispage|си страницѧ прѣимєнованиѥ
+pager-newer-n|{{PLURAL:~{0}\u007Cнова 1\u007Cновꙑ ~{0}\u007Cновъ ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Cдавьнꙗ 1\u007Cдавьни ~{0}\u007Cдавьн҄ь ~{0}}}
+booksources-search|исканиѥ
+specialloguserlabel|испльнитєл҄ь :
+speciallogtitlelabel|страницѧ или польꙃєватєлꙗ имѧ :
+log|їсторїѩ
+all-logs-page|вьсѩ обьщѧ їсторїѩ
+allpagesfrom|страницѧ видѣти хощѫ съ начѧльнами боукъвами :
+allarticles|вьсѩ страницѧ
+allpagessubmit|прѣиди
+deletedcontributions|поничьжєнꙑ добродѣꙗниꙗ
+deletedcontributions-title|поничьжєнꙑ добродѣꙗниꙗ
+sp-deletedcontributions-contribs|добродѣꙗниꙗ
+linksearch|вънѣщьн҄ь съвѧꙁь исканиѥ
+linksearch-ns|имєнъ просторъ :
+linksearch-ok|ищи
+listusers-submit|виждь
+listgrouprights-members|(польꙃєватєлъ каталогъ)
+emailuser|посъли єпїстолѫ
+emailusername|польꙃєватєлꙗ имѧ :
+emailfrom|отъ :
+emailto|къ :
+emailsubject|ѳєма :
+emailmessage|напьсаниє :
+emailsend|посъли
+watchlist|блюдєниꙗ
+mywatchlist|блюдєниꙗ
+watchlistfor2|дѣлꙗ ⁖ ~{0} ⁖ ~{1}
+addedwatchtext|страница ⁖ [[:~{0}]] ⁖ нꙑнѣ подъ твоимь [[Special:Watchlist\u007Cблюдєниѥмь]] ѥстъ ⁙\nвсꙗ ѥѩ и ѥѩжє бєсѣдꙑ страницѧ мѣнꙑ твоꙗ блюдєнии каталоꙃѣ покаꙁанꙑ бѫдѫтъ
+removedwatchtext|страница ⁖ [[:~{0}]] ⁖ нꙑнѣ твоѥго [[Special:Watchlist\u007Cблюдєниꙗ]] иꙁнєсєна ѥстъ
+watch|блюдєниѥ
+watchthispage|си страницѧ блюдєниѥ
+unwatch|остави блюдєниѥ
+watchlist-options|блюдєниѩ строи
+watching|блюдєниѥ ...
+unwatching|оставьлєниѥ блюдєниꙗ ...
+created|сътворѥнъ ѥстъ
+deletepage|поничьжєниѥ
+excontent|вънѫтри бѣ: '~{0}'
+excontentauthor|вънѫтри бѣ : '~{0}' (и послѣдьн҄ии дѣтєл҄ь бѣ '[[Special:Contributions/~{1}\u007C~{1}]]')
+delete-legend|поничьжєниѥ
+actioncomplete|дѣиство сътворєно ѥстъ
+deletedtext|страница ⁖ ~{0} ⁖ поничьжєна ѥстъ ⁙\nвиждь ⁖ ~{1} ⁖ послѣдьнъ поничьжєниѩ дѣлꙗ
+dellogpage|поничьжєниꙗ їсторїꙗ
+deletionlog|поничьжєниꙗ їсторїꙗ
+deletecomment|какъ съмꙑслъ :
+protectlogpage|ꙁабранѥниꙗ їсторїꙗ
+protectedarticle|⁖ [[~{0}]] ⁖ ꙁабранѥна ѥстъ
+prot_1movedto2|⁖ [[~{0}]] ⁖ нарєчєнъ ⁖ [[~{1}]] ⁖ ѥстъ
+protectcomment|какъ съмꙑслъ :
+protect-level-sysop|толико съмотритєлє
+protect-othertime|ино врѣмѧ :
+protect-othertime-op|ино врѣмѧ
+protect-otherreason-op|инъ съмꙑслъ
+protect-expiry-options|1 часъ:1 hour,1 дьнь:1 day,1 сєдмица:1 week,2 сєдмици:2 weeks,1 мѣсѧць:1 month,3 мѣсѧць:3 months,6 мѣсѧць:6 months,1 лѣто:1 year,вѣчьно:infinite
+pagesize|(баитъ)
+restriction-edit|исправи
+restriction-move|прѣимєнованиѥ
+restriction-upload|положєниѥ
+undeletecomment|какъ съмꙑслъ :
+undelete-search-submit|ищи
+undelete-show-file-submit|да
+namespace|имєнъ просторъ:
+invert|обрати иꙁборъ
+namespace_association|съвѧꙁанꙑ имєнъ просторꙑ
+contributions|{{GENDER:~{0}\u007Cпольꙃєватєлꙗ}} добродѣꙗниꙗ
+contributions-title|польꙃєватєлꙗ ⁖ ~{0} ⁖ добродѣꙗниꙗ
+mycontris|добродѣꙗниꙗ
+contribsub2|польꙃєватєлꙗ имѧ ⁖ {{GENDER:~{2}\u007C~{0}}} ⁖ ѥстъ (~{1})
+uctop|(нꙑнѣщьн҄ь обраꙁъ)
+sp-contributions-blocklog|ꙁаграждєниꙗ їсторїꙗ
+sp-contributions-deleted|поничьжєнꙑ добродѣꙗниꙗ
+sp-contributions-uploads|положєнꙑ дѣла
+sp-contributions-logs|їсторїѩ
+sp-contributions-talk|бєсѣда
+sp-contributions-username|IP число или польꙃєватєлꙗ имѧ :
+sp-contributions-submit|ищи
+whatlinkshere|дос҄ьдєщьнѩ съвѧꙁи
+whatlinkshere-title|страницѧ ижє съ ⁖ ~{0} ⁖ съвѧꙁи имѫтъ
+whatlinkshere-page|страница :
+isredirect|прѣнаправлѥниѥ
+istemplate|внѫтри страницѧ
+isimage|дѣла съвѧꙁь
+whatlinkshere-links|← съвѧꙁи
+whatlinkshere-hideredirs|~{0} прѣнаправлѥниꙗ
+whatlinkshere-hidelinks|~{0} съвѧꙁи
+whatlinkshere-filters|ситꙑ
+block|ꙁагради польꙃєватєл҄ь
+blockip|ꙁагради {{GENDER:~{0}\u007Cпольꙃєватєл҄ь}}
+blockip-legend|ꙁагради польꙃєватєл҄ь
+ipaddressorusername|IP число или польꙃєватєлꙗ имѧ :
+ipbreason|какъ съмꙑслъ :
+ipbother|ино врѣмѧ :
+ipboptions|2 часа:2 hours,1 дьнь:1 day,3 дьни:3 days,1 сєдмица:1 week,2 сєдмици:2 weeks,1 мѣсѧць:1 month,3 мѣсѧць:3 months,6 мѣсѧць:6 months,1 лѣто:1 year,вѣчьно:infinite
+ipblocklist|ꙁаграждєнꙑ польꙃєватєлє
+blocklist-reason|какъ съмꙑслъ
+ipblocklist-submit|исканиѥ
+infiniteblock|вѣчьно
+anononlyblock|тъкъмо анѡнѷмꙑ
+blocklink|ꙁагради
+contribslink|добродѣꙗниꙗ
+blocklogpage|ꙁаграждєниꙗ їсторїꙗ
+blocklogentry|ꙁаградилъ [[~{0}]] на врѣмѧ ~{1} ~{2}
+block-log-flags-anononly|тъкъмо анѡнѷмьнꙑ польꙃєватєлє
+move-page|прѣимєнованиѥ ⁖ ~{0} ⁖
+move-page-legend|страницѧ прѣимєнованиѥ
+movearticle|страница :
+newtitle|ново имѧ :
+move-watch|си страницѧ блюдєниѥ
+movepagebtn|прѣимєнованиѥ
+pagemovedsub|прѣимєнованиѥ сътворѥно ѥстъ
+movepage-moved|'''⁖ ~{0} ⁖ нарєчєнъ ⁖ ~{1}⁖ ѥстъ'''
+movepage-moved-redirect|прѣнаправлѥниѥ сътворѥно бѣ
+movetalk|си страницѧ бєсѣдꙑ прѣимєнованиѥ
+movelogpage|прѣимєнованиꙗ їсторїꙗ
+movereason|какъ съмꙑслъ :
+move-leave-redirect|прѣнаправлѥниꙗ сътворѥниѥ
+allmessages|сѷстимьнꙑ напьсаниꙗ
+allmessagesname|имѧ
+allmessages-language|ѩꙁꙑкъ :
+allmessages-filter-submit|прѣиди
+import-upload-filename|дѣла имѧ :
+javascripttest|искоушєниѥ ⁖ JavaScript ⁖
+tooltip-pt-userpage|твоꙗ польꙃєватєл҄ьска страница
+tooltip-pt-mytalk|твоꙗ бєсѣдꙑ страница
+tooltip-pt-preferences|твои строи
+tooltip-pt-mycontris|твоѩ добродѣꙗнии каталогъ
+tooltip-pt-logout|ис̾ходъ
+tooltip-ca-talk|си страницѧ бєсѣда
+tooltip-ca-viewsource|си страница ꙁабранєна ѥстъ ⁙\nѥѩ источьнъ обраꙁъ видєти можєши
+tooltip-ca-protect|си страницѧ ꙁабранєниѥ
+tooltip-ca-delete|си страницѧ поничьжєниѥ
+tooltip-ca-move|си страницѧ прѣимєнованиѥ
+tooltip-ca-watch|си страницѧ блюдєниѥ
+tooltip-search|ищи {{{grammar:genitive\u007C{{SITENAME}}}}} страницѧ
+tooltip-p-logo|главьна страница
+tooltip-n-mainpage|виждь главьноу страницѫ
+tooltip-n-mainpage-description|виждь главьноу страницѫ
+tooltip-n-recentchanges|послѣдьн҄ь мѣнъ каталогъ
+tooltip-t-contributions|виждь польꙃєватєлꙗ добродѣꙗнии каталогъ
+tooltip-t-upload|положєниѥ дѣлъ
+tooltip-t-specialpages|вьсѣѩ нарочьнъ страницѧ каталогъ
+tooltip-t-print|сѥѩ страницѧ пєчатьнъ обраꙁъ
+tooltip-ca-nstab-special|си нарочьна страница ѥстъ · ѥѩжє иꙁмѣнꙗти нє можєши
+tooltip-ca-nstab-image|виждь дѣла страницѫ
+tooltip-ca-nstab-category|виждь катигорїѩ страницѫ
+tooltip-minoredit|оꙁначи ꙗко малоу мѣноу
+tooltip-save|твоѩ мѣнъ съхранѥниѥ
+tooltip-watch|си страницѧ блюдєниѥ
+pageinfo-header-edits|мѣнъ їсторїꙗ
+pageinfo-header-restrictions|страницѧ ꙁабранѥниѥ
+pageinfo-firstuser|страницѧ творьць
+pageinfo-toolboxlink|страницѧ плирофорїꙗ
+pageinfo-contentpage-yes|да
+pageinfo-protect-cascading-yes|да
+pageinfo-category-pages|страницѩ число
+pageinfo-category-files|дѣлъ число
+previousdiff|← давьнꙗ мѣна
+nextdiff|нова мѣна →
+file-info-size|~{0} × ~{1} п҃ѯ · дѣла мѣра : ~{2} · MIME тѷпъ : ~{3}
+svg-long-desc|дѣло SVG · обꙑчьнъ обраꙁъ : ~{0} × ~{1} п҃ѯ · дѣла мѣра : ~{2}
+show-big-image|источьнъ дѣла обраꙁъ
+show-big-image-size|~{0} × ~{1} пиѯєлъ
+ilsubmit|ищи
+monday-at|понєдѣл҄ьникъ · ~{0}
+tuesday-at|въторьникъ · ~{0}
+wednesday-at|срѣда · ~{0}
+thursday-at|чєтврьтъкъ · ~{0}
+friday-at|пѧтъкъ · ~{0}
+saturday-at|сѫбота · ~{0}
+sunday-at|нєдѣлꙗ · ~{0}
+yesterday-at|вьчєра · ~{0}
+exif-artist|творьць
+exif-languagecode|ѩꙁꙑкъ
+exif-iimcategory|катигорїꙗ
+exif-gpsspeed-k|хїлїомєтрꙑ ꙁа часъ
+exif-gpsdestdistance-k|хїлїомєтрꙑ
+exif-iimcategory-edu|навꙑканиѥ
+exif-iimcategory-hth|съдравиѥ
+exif-iimcategory-pol|полїтїка
+exif-iimcategory-rel|вѣра
+exif-iimcategory-sci|оучєниѥ и тєхнологїꙗ
+exif-iimcategory-spo|аѳлитїка
+namespacesall|вьсꙗ
+monthsall|вьсѩ
+unit-pixel|п҃ѯ
+imgmultigo|прѣиди
+table_pager_limit_submit|прѣиди
+autosumm-new|нова страница ⁖ ~{0} ⁖ сътворєна  ѥстъ
+size-bytes|~{0} Б҃
+size-kilobytes|~{0} Х҃Б
+signature|[[{{ns:user}}:~{0}\u007C~{1}]] ([[{{ns:user_talk}}:~{0}\u007Cбєсѣда]])
+version|MediaWiki обраꙁъ
+version-specialpages|нарочьнꙑ страницѧ
+version-version|(~{0})
+version-license|MediaWiki прощєниѥ
+version-software-version|обраꙁъ
+redirect-submit|прѣиди
+redirect-file|дѣла имѧ
+fileduplicatesearch-filename|дѣла имѧ :
+fileduplicatesearch-submit|ищи
+specialpages|нарочьнꙑ страницѧ
+tag-filter|[[Special:Tags\u007Cмѣтъць]] сито :
+tags-edit|исправи
+htmlform-no|нѣтъ
+htmlform-yes|да
+logentry-delete-delete|~{0} {{GENDER:~{1}\u007Cпоничьжилъ\u007Cпоничьжила}} страницѫ ⁖ ~{2} ⁖
+logentry-move-move|~{0} {{GENDER:~{1}\u007Cнарєчє}} страницѫ ⁖ ~{2} ⁖ имєньмь ⁖ ~{3} ⁖
+logentry-move-move-noredirect|~{0} {{GENDER:~{1}\u007Cнарєчє}} страницѫ ⁖ ~{2} ⁖ имєньмь ⁖ ~{3} ⁖ бєꙁ прѣнаправлєниꙗ сътворѥниꙗ
+logentry-newusers-create|польꙃєватєльско мѣсто ⁖ ~{0} ⁖ {{GENDER:~{1}\u007Cсътворѥно}} ѥстъ
+logentry-upload-upload|~{0} {{GENDER:~{1}\u007Cположишє}} ~{2}
+revdelete-summary|мѣнꙑ опьсаниѥ
+searchsuggest-search|исканиѥ
+searchsuggest-containing|сѥ дрьжащи···
+api-error-unknownerror|нєвѣдома блаꙁна : ⁖ ~{0} ⁖
+special-characters-group-latin|латиньска аꙁъбоукꙑ
+special-characters-group-latinextended|латиньскꙑ аꙁъбоукьвє доложєниѥ
+special-characters-group-ipa|М҃ФА
+special-characters-group-symbols|сѷмволи
+special-characters-group-greek|грьчьска аꙁъбоукꙑ
+special-characters-group-cyrillic|климєнтовица / гражданьска аꙁъбоукꙑ
+special-characters-group-arabic|аравьска аꙁъбоукꙑ
+special-characters-group-hebrew|єврєиска аꙁъбоукꙑ
+special-characters-group-bangla|бангальска аꙁъбоукꙑ
+special-characters-group-telugu|тєлоужьска аꙁъбоукꙑ
+special-characters-group-sinhala|синхальска аꙁъбоукꙑ
+wikibase-sitelinks-special|инꙑ мєждоусѣтьнꙑ мѣста
+']:>
+).lang
+;

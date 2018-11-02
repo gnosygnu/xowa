@@ -1,0 +1,540 @@
+this
+.messages
+  .load_text(
+<:['
+sunday|Aitar
+monday|Somar
+tuesday|Munglar
+wednesday|Budhwar
+thursday|Birestar
+friday|Sukrar
+saturday|Sonvar
+sun|Ait
+mon|Som
+tue|Mung
+wed|Budh
+thu|Bres
+fri|Sukr
+sat|Son
+january|Janer
+february|Febrer
+march|Mars
+april|Abril
+may_long|Mai
+june|Jun
+july|Julai
+august|Agost
+september|Setembr
+october|Otubr
+november|Novembr
+december|Dezembr
+january-gen|Janer
+february-gen|Febrer
+march-gen|Mars
+april-gen|Abril
+may-gen|Mai
+june-gen|Jun
+july-gen|Julai
+august-gen|Agost
+september-gen|Setembr
+october-gen|Otubr
+november-gen|Novembr
+december-gen|Dezembr
+jan|Jan
+feb|Feb
+mar|Mar
+apr|Abr
+may|Mai
+jun|Jun
+jul|Jul
+aug|Ago
+sep|Set
+oct|Otu
+nov|Nov
+dec|Dez
+toc|Suchi potr
+redirectedfrom|(~{0} savn porot dixent)
+allpages|Sogllim panam
+prevpage|Ad'dlem pan (~{0})
+nextpage|Mukklem pan (~{0})
+categories|Vorg
+lastmodifiedat|Hem pan xevtim ~{0} disa, ~{1} vazta bodolelem.
+thumbnail-more|vaddoi
+otherlanguages|Dusrea bhasanim
+blanknamespace|(Mukhel)
+pagecategories|{{PLURAL:~{0}\u007CVorg\u007CVorgam}}
+category_header|"~{0}" vorgantlim panam
+subcategories|Upvorg
+category-media-header|"~{0}" hea vorgan madheom'ma
+category-empty|''Hea vorgan sodhea ekui pan vo madheom na''
+category-subcat-count|{{PLURAL:~{1}\u007CHea vorgan fokot hi ek upvorg asa.\u007CHea vorgan {{PLURAL:~{0}\u007Chi upvorg asa\u007Cheo ~{0} upvorg asat}}, beriz ~{1} upvorga modem.}}
+category-article-count|{{PLURAL:~{1}\u007CHea vorgan fokot hi ek pan asa.\u007CHea vorgan {{PLURAL:~{0}\u007Chi pan asa\u007Chim ~{0} panam asat}} beriz ~{1} panam modem.}}
+category-file-count|{{PLURAL:~{1}\u007CHea vorgan fokot hi ek fail asa.\u007CHea vorgan {{PLURAL:~{0}\u007Chi fail asa\u007Cheo ~{0} faili asat}}, beriz ~{1} faili modem.}}
+nextn|fuddlem {{PLURAL:~{0}\u007C~{0}}}
+prevn|adlem {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|chalu
+bold_sample|Datt mozkur
+bold_tip|Datt mozkur
+italic_sample|Palso mozkur
+italic_tip|Palso mozkur
+link_sample|Zoddachem nanv
+link_tip|Bhitorlem zoddop
+headline_sample|Mathalleacho mozkur
+headline_tip|Dusrea patllicho mathallo
+statistics|Ankddevari
+sitesupport|Dan di
+underline-always|Soddankal
+underline-never|Kednach na
+january-date|~{0} Janer
+february-date|~{0} Febrer
+march-date|~{0} Mars
+april-date|~{0} Abril
+may-date|~{0} Mai
+june-date|~{0} Jun
+july-date|~{0} Julai
+august-date|~{0} Agost
+september-date|~{0} Setembr
+october-date|~{0} Otubr
+november-date|~{0} Novembr
+december-date|~{0} Dezembr
+hidden-categories|{{PLURAL:~{0}\u007CLipoilolo vorg\u007CLipoilole vorg}}
+index-category|Suchi-potran zodlelim panam
+noindex-category|Suchi-potran zoddunk-naslelim panam
+about|Hea vixoiavoir
+article|Vixoi sombondhi pan
+newwindow|(novea zonelant uktem zata)
+cancel|Rod'd kor
+mytalk|Bhasabhas
+navigation|Dixa-niontronn
+and| ani
+qbfind|Sod
+qbedit|Bodol
+faq|Choddxe vicharlole prosn
+actions|Karvaio
+namespaces|Nanv-thollam
+variants|Dusre
+errorpagetitle|Chuk
+returnto|~{0} hanga porot voch.
+tagline|{{SITENAME}} savn
+help|Adar
+search|Sod
+searchbutton|Sod
+go|Pavl mar
+searcharticle|Fuddem voch
+history|Panacho itihas
+history_short|Itihas
+printableversion|Chapp'pachi avruti
+permalink|Togpi zodd
+print|Chap
+view|Poloi
+edit|Sudar
+create|Roch
+editthispage|Hem pan bodol
+create-this-page|Ho pan roch
+delete|Vogllai
+deletethispage|Hem pan kad
+protect|Rakh
+protect_change|bodol
+protectthispage|Hem pan rakh
+newpage|Novem pan
+talkpage|Hea panachem bhasabhas kor
+talkpagelinktext|Bhasabhas
+specialpage|Khaxhel pan
+personaltools|Khasgi avtam
+articlepage|Vixoi sombondhi pan poloi
+talk|Bhasabhas
+views|Niall
+toolbox|Avtam
+userpage|Vangddiacho pan poloi
+imagepage|Imazichem pan poloi
+viewhelppage|Adar pan poloi
+categorypage|Vorgachem pan poloi
+redirectpagesub|Punornirdexan pan
+jumpto|Hangachean voch
+jumptonavigation|Dixa-niontronn
+jumptosearch|sod
+aboutsite|{{SITENAME}} babtint
+aboutpage|Project:Vixoiavixim
+copyrightpage|{{ns:project}}:Prat-hokk
+currentevents|Chalu ghoddnneo
+currentevents-url|Project:Chalu ghoddneo
+disclaimers|Chotraio
+disclaimerpage|Project:Sadeo chotraio
+edithelp|Sudarunk palov
+mainpage|Mukhel Pan
+mainpage-description|Mukhel Pan
+portal|Somudaik proves-dar
+portal-url|Project:Somudaik proves-dar
+privacy|Gupitaiechem dhoronn
+privacypage|Project:Gupitachem dhoronn
+badaccess-group0|Tumi tillson kel'lem kary korunk tumkam permissanv na.
+badaccess-groups|Tumi tillson kel'lem kary mat {{PLURAL:~{1}\u007Cthe group\u007Cone of the groups}}: ~{0} -ak permissanv asa.
+versionrequired|MediaWikichem ~{0} version zai
+versionrequiredtext|Hem pan vaprunk MediaWikichem ~{0} version zai.\n[[Special:Version\u007Cversion page]] pan poloea.
+ok|Zait
+retrievedfrom|"~{0}" savn prapt kelam
+youhavenewmessages|Tumkam ~{0} (~{1}) asat.
+editsection|sudar
+editold|sudar
+viewsourceold|mull poloi
+editlink|sudar
+viewsourcelink|mull polloi
+editsectionhint|khondd sudar: ~{0}
+showtoc|dakhoi
+hidetoc|lipoi
+site-atom-feed|~{0} Atom purvoi
+page-atom-feed|"~{0}" Atom purvonn
+red-link-title|~{0} (hea nanvachem pan na)
+nstab-main|Pan
+nstab-user|Vapuddpeachem pan
+nstab-special|Kherit pan
+nstab-project|Project-ache pan
+nstab-image|Fail
+nstab-mediawiki|Sondex
+nstab-template|Saacho
+nstab-category|Vorg
+error|Chuk
+missing-article|Totv-kox (Database) hantun mellunk zai aslem tem mozkur "~{0}" ~{1} mellunk-nam.\n\nHorxim, oxem ek pornem frk vo eka panachem itihasachem zodd vogllailem, tedna zata.\n\nOxem nhoi zalear, tuka softwer-an chuk sampodlam zait.\nUpkar korun eka [[Special:ListUsers/sysop\u007Ckarbhari]]chea nodrek hadd, Internet Zago Sodpi (URL) hachi nond gheun.
+missingarticle-rev|(uzollnni#: ~{0})
+missingarticle-diff|(Frk: ~{0}, ~{1})
+badtitle|Chukichem nanv
+badtitletext|Tuven maglelem panache nanv chukichem, rintem, vo ek sarkem zodunk-naslelem bhase-modlem vo wiki-modlem nanv.\n\nTantun ek vo sabaar okxor asot jenka nanvanim uzar korunk zainan.
+viewsource|Mull polloi
+welcomeuser|Ievkar, ~{0}!
+yourname|Vapuddpeachem nanv:
+yourpassword|Gupitutor:
+userlogin-yourpassword|Gupitutor
+yourpasswordagain|Gupit utor porot boroi:
+remembermypassword|Hea internet browseran mhojem sotrachem ugdas dovor (chodan chod ~{0} {{PLURAL:~{0}\u007Cdisak\u007Cdisank}})
+login|Sotrromb kor
+nav-login-createaccount|Sotrrombh kor / khato roch
+userlogin|Sotrrombh kor / khatem roch
+logout|Bhair podd
+userlogout|Sotracho xevott
+nologin|Tuje kodde khatem na? ~{0}.
+nologinlink|Novem khatem ughodd
+createaccount|Khatem roch
+gotaccount|Tuje kodem khatem asa? ~{0}.
+gotaccountlink|Sotrorombh kor
+userlogin-resetlink|Sotrorombh korpacheo bariksai visorlai?
+mailmypassword|Novem gupitutor
+loginlanguagelabel|Bhas: ~{0}
+extlink_sample|http://www.udaronn.in zoddachem nanv
+extlink_tip|Bhailem site (survatek http:// visronakai)
+nowiki_sample|Sworup diunk naslelem mozkur hanga ghal
+nowiki_tip|Wiki sworup durlokx kor
+image_tip|Bosoileli fail
+media_tip|Failichem zodd
+sig_tip|Tuji soi, vell-chaap soit
+hr_tip|Adhvem rang (Komi uzar kor)
+summary|Sar:
+subject|Vishoy:
+minoredit|Hem ek dhaktem sudarop
+watchthis|Hea panar nodor dovor
+savearticle|Pan samball
+preview|Zholok
+showpreview|Zholok dakhoi
+showdiff|Bodolpam dakhoi
+anoneditwarning|'''Chotrai:''' Tuven sotrorombh korunk nai.\nTuzo internet potteachi nond panachem itihasan zatelem.
+newarticle|(Novem)
+newarticletext|Tuven ek zoddache patlav kelai, zachem pan azun rochunk na.\nPan rochunk, khallchea chovkottan boroi (anik mahitik [~{0} adar pan] polloi).\nTu hangasor chukin pavlai zalear tujea internet browser-achi '''Fatim'' vo '''Back''' butao dab.
+noarticletext|Sodheak hem pan rinte asa.\nTujean dusrea panani [[Special:Search/{{PAGENAME}}\u007Chea panache nanv sodunk zata]], <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} sombondhi sotrani sodunk zata], vo [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} hem pan sudharunk zata]</span>.
+noarticletext-nopermission|Sodheak hem pan rinte asa.\nTujean dusrea panani [[Special:Search/{{PAGENAME}}\u007Chea panache nanv sodunk zata]], vo <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} sombondhi sotrani sodunk zata], pun tuka hem pan rochunk porvangi na.
+previewnote|'''Hi fokot ek zholok mhonn ugddas dhor.'''\nTujim bodolpam azun sambhallun dovrunk nant!
+editing|~{0} sudarop
+editingsection|(Vibhag) ~{0} sudar
+templatesused|Hea panant uzar {{PLURAL:~{0}\u007Ckel'lo sancho\u007Ckel'le sanche}}:
+template-protected|(rakhlelem)
+template-semiprotected|(ordhem rakhun dovorlelem)
+hiddencategories|Hem pan {{PLURAL:~{0}\u007C1 lipoilelea vorgacho vangddi\u007C~{0} lipoileleam vorgancho vangddi}}:
+permissionserrorstext-withaction|~{1}, hem korpak tuka porvangi na, {{PLURAL:~{0}\u007Chea karnnak lagon\u007Chea karnnank lagun}}:
+recreate-moveddeleted-warn|'''Xittkavnni: Tum ek pan porot rochtai jem fattim vogllailelem .'''\n\nPanacho sudar korop sarkem zalear dhean di.\nPan vogllavpachem ani sotr halovpachem, sovloti khatir hangasor dilelem asa:
+moveddeleted-notice|Hem pan vogllailem asa.\nPanachea vogllaonechi ani hallonechi sotr mahiti khatir sokoil sondorba khatir dilea.
+post-expand-template-inclusion-warning|'''Chotrai:''' Sacho zoddpacho akar chod vhodlem asa.\nThodde sache zoddchenant
+post-expand-template-inclusion-category|Zea panani sache zoddpachem akarachem merakin chod zala
+post-expand-template-argument-warning|'''Chotrai:''' Hea panan ek tori oslo sacheacho parametro asa zacho patlloylea uprant akar chod vhoddlo zata.\nHeo parametrank durlokx keleat.
+post-expand-template-argument-category|Sacheache parametro zoddunknan osle panam
+viewpagelogs|Hea panachim sotram polloi
+currentrev-asof|~{0}, hachi halinchi uzollnni
+revisionasof|~{0} hachi uzollnni
+revision-info|~{0} porian, ~{1} hannem kelli uzollnni
+previousrevision|← Adli uzollnni
+nextrevision|Novi uzolnni →
+currentrevisionlink|Sogleanvon novi uzollnni
+cur|chal
+last|adl
+page_first|poilem
+page_last|akhirchem
+histlegend|Frk nivoddni: Jeo uzollneo tuka comparar korunk zai, tenche fudle ''radio'' butao petoi\nVivron: '''({{int:cur}})''' = halinchi uzollnie borobor forok, '''({{int:last}})''' = adli uzollnie borobor forok, '''{{int:minoreditletter}}''' = dhaktem sudharop.
+history-fieldset-title|Itihas chall
+history-show-deleted|Fokot vogllailelem
+histfirst|sogleavon adhlem
+histlast|sogleavon novem
+history-feed-item-nocomment|~{0} hannem ~{3}, ~{2} hea vellar
+rev-delundel|dakhoi/lipoi
+revdel-restore|Disnnem bodol
+revertmerge|Doxim kor
+history-title|"~{0}" hachea uzollnnecho itihas
+lineno|Line ank ~{0}:
+compareselectedversions|Nivodloleo uzollneo comparar kor
+editundo|rod'd kor
+searchresults|Sodacho nikal
+searchresults-title|"~{0}" -khatir sodacho nikal
+prevn-title|{{PLURAL:~{0}\u007CFattlem ~{0} porinnam\u007CFattlem ~{0} porinam}}
+nextn-title|{{PLURAL:~{0}\u007CFuddlem ~{0} porinnam\u007CFudnlim ~{0} porinnam}}
+shown-title|Dor panar {{PLURAL:~{0}\u007Cporinam\u007Cporinam}} dakhoi
+viewprevnext|(~{0} {{int:pipe-separator}} ~{1}) (~{2}) poloi
+searchmenu-exists|'''Hea Wikicher "[[:~{0}]]" nanvanche pan asa.'''
+searchmenu-new|<strong>"[[:~{0}]]" hem pan hea vikint roch!<strong> {{PLURAL:~{1}\u007C0=\u007CTujea sodan mellelem panui polloi.\u007CTujea sodan mellelem panamui polloi.}}
+searchprofile-articles|Mozkurachim panam
+searchprofile-images|Bhovmadhiom
+searchprofile-everything|Sogllem
+searchprofile-advanced|Sodpache poryay
+searchprofile-articles-tooltip|~{0} hantunt sod
+searchprofile-images-tooltip|Faili sod
+searchprofile-everything-tooltip|Akhea sitin sod (Bhasabhas panant'ui)
+searchprofile-advanced-tooltip|chalu nanvthollancher sod
+search-result-size|~{0} {{PLURAL:~{1}\u007C1 utor\u007C~{1} utram}}
+search-result-category-size|{{PLURAL:~{0}\u007C1 vangddi\u007C~{0} vangddi}} ({{PLURAL:~{1}\u007C1 upvorg\u007C~{1} upvorg}}, {{PLURAL:~{2}\u007C1 fichier\u007C~{2} fichieri}})
+search-redirect|(~{0} porot dixen dhaddop)
+search-section|(vibhag ~{0})
+search-suggest|mhonnunk sodi: ~{0}
+searchrelated|sombondit
+searchall|soglle
+search-nonefound|Tujea sodak mell khata toslem kai porinam nan.
+preferences|Posondeo
+mypreferences|Posonti
+youremail|Tuzo email potto
+yourrealname|Khorem nanv:
+prefs-help-email|Email potto sokticho na, pun tum gupitutor visroxi zalear gupitutor punorsthapon korunk email pottechi goroz podta.
+prefs-help-email-others|Tujean dusreank tujea vapurpeacho panar vo bhasabhasache panar aslele eke email zodde vorvim tuje xim sompork korunk diunk zata.\nDusre tuje xim sompork kortat tednam tuzo email potto tankam kollchenam.
+group-all|(soglle)
+newuserlogpage|Vapurpi rochnnechem sotr
+action-edit|hem pan sudar
+nchanges|~{0} {{PLURAL:~{0}\u007Cbodlop\u007Cbodlopam}}
+recentchanges|Halincho bodol
+recentchanges-legend|Hallinch zalleo bodlopancheo poryay
+recentchanges-feed-description|Wiki'k kel'le halinche bodlopancher hea vhawa vorvim nodor dovor.
+recentchanges-label-newpage|Hea sudaran ek novem pan rochlam
+recentchanges-label-minor|Ho ek dhaktto sudar
+recentchanges-label-bot|Hem bodlop eka robotan kel'lem
+recentchanges-label-unpatrolled|Hem sudharop azun topasunk nam
+rcnotefrom|Sokoil <strong>~{1}<strong> savn zalelim bodolpam dileant ( <strong>~{0}<strong> meren dakhoileant).
+rclistfrom|~{2} ~{1} savn suru zatelim novim bodolpam dakhoi
+rcshowhideminor|~{0} dhaktteo sudarnneo
+rcshowhidebots|~{0} robot
+rcshowhideliu|~{0} nond zalele vapuddpi
+rcshowhideanons|~{0} nanv-naslelim vapurpi
+rcshowhidepatr|~{0} topaslele sudharop
+rcshowhidemine|Mhojem sudarop ~{0}
+rclinks|Xevtiche ~{1} disanim zal'le ~{0} bodlopam dakhoi<br />~{2}
+diff|frk
+hist|iti
+hide|Lipoi
+show|Dakhoi
+minoreditletter|d
+newpageletter|N
+boteditletter|r
+rc-enhanced-expand|Bariksann dakhoi
+rc-enhanced-hide|Bariksann lipoi
+recentchangeslinked|Sombondit bodolpam
+recentchangeslinked-toolbox|Sombondit bodolpam
+recentchangeslinked-title|"~{0}" sombondit zalelim bodolpam
+recentchangeslinked-summary|Hem zaun asa eke panaksun vo eka voraksun, halinch kel'lim bodlopanchi suchi.\n\n[[Special:Watchlist\u007CTujea sadurvollerint]] aslelim panam 'datt' asat.
+recentchangeslinked-page|Panache nanv:
+recentchangeslinked-to|Dil'em panache bodlek haka zodlelem panank kel'lim bodlopam dakhoi
+upload|Fail upload kor
+uploadlogpage|Uploadachem sotr
+filedesc|Sar
+watchthisupload|Hea faylar dixtt dovor
+license|Porvangi
+license-header|Porvangi
+file-anchor-link|Fail
+filehist|Failicho itihas
+filehist-help| Tea vellar aslelea rupan pollonvk tarikh/vellar koll mar
+filehist-revert|Nimanea avruttik porot vor
+filehist-current|chalont
+filehist-datetime|Tarikh/Vell
+filehist-thumb|Lhan-imaz
+filehist-thumbtext|~{0} avrute khatir lhan-imaz
+filehist-user|Vaporpi
+filehist-dimensions|Akar
+filehist-comment|vivek
+imagelinks|Failicho vapor
+linkstoimage|{{PLURAL:~{0}\u007CHem pan\u007C~{0} Him panam}} hea failik {{PLURAL:~{0}\u007Czoddtta\u007Czoddttat}}
+nolinkstoimage|Hea failik zoddpi panam nant
+sharedupload-desc-here|Hi fail ~{0}, hachi ani dusreo projectanim haka uzar korunk zata.\nHachem [~{1} failichem vivron panan] asleli vivron khala dilea:
+filedelete-otherreason|Dusrem/aniki karon:
+randompage|Khoincheim pan
+nbytes|~{0} {{PLURAL:~{0}\u007Cbyte\u007Cbytesi}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cvangddi}}
+prefixindex|Panam jenche nanvache survatek asa...
+shortpages|Dhaktim panam
+longpages|Lamb panam
+usercreated|~{2} hannem ~{0} disa ~{1} vaztam rochlelem
+newpages|Novim panam
+move|Zago bodol
+pager-newer-n|{{PLURAL:~{0}\u007Cnovem 1\u007Cnovim ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Cadlem 1\u007Cadlim ~{0}}}
+booksources|Pustokachem mull
+booksources-search-legend|Pustokachim mullam sod
+speciallogtitlelabel|Vishoi vo vapurpi:
+log|Sotram
+allpagesfrom|Hanga thavn suru zatelea panank dakhoi:
+allarticles|Sogllim panam
+allpagessubmit|Fuddem voch
+linksearch-line|~{0} ~{1} savn zoddlelem asa
+listgrouprights-members|(vapuddpeanchi suchi)
+emailuser|Email dhadd
+watchlist|Sadurachi volleri
+mywatchlist|Sadurachi volleri
+watchlistfor2|~{0} hache khatir ~{1}
+watch|Sadur rav
+watchthispage|Hea panar dixtt dovor
+unwatch|Nodor kadd
+watchlist-details|Tujea sadurvollerint {{PLURAL:~{0}\u007C~{0} pan asa\u007C~{0} panam asat}}, ulovpachim panam veglim mezonastanam.
+wlheader-showupdated|Tujea fatle bhette san bodol'lean tim panam '''datt''' dakhoileant.
+wlshowlast|Xevottchim ~{0} voram ~{1} dis  dakhoi
+watchlist-options|Sadurvollericheo poryay
+watching|Disht dovortanv...
+unwatching|Disht kaddthanv...
+actioncomplete|Karvai sompurnn
+actionfailed|Karvai oiesiesvi
+dellogpage|Vogllaoneche sotr
+deleteotherreason|Dusrem/aniki karon:
+rollbacklink|kovoll
+protectlogpage|Surokxitechem sotr
+protectedarticle|rakhlelem "[[~{0}]]"
+protect-otherreason|Dusrem/aniki karon:
+protect-otherreason-op|Dusrem karon
+undeletelink|polloi/adlea zagear hadd
+undeleteviewlink|polloi
+namespace|Nanv-tholl
+invert|Nonddni urfattoi
+contributions|{{GENDER:~{0}\u007CVapuddpi}} borovpam
+contributions-title|~{0} hea vapuddpean kelelim borovpam
+mycontris|Borovpam
+contribsub2|{{GENDER:~{2}\u007C~{0}}} hacheo (~{1})
+uctop|(atachem)
+month|Mhoinea savn (ani adichem):
+year|Hea vorsa savn (ani adichem):
+sp-contributions-newbies|Fokot novea khateachim borovpam dakhoi
+sp-contributions-blocklog|addavnniache sotr
+sp-contributions-uploads|upload
+sp-contributions-logs|sotr
+sp-contributions-talk|bhasabhas
+sp-contributions-search|Borovpam sod
+sp-contributions-username|Antorzall namo vo vapuddpeachem nanv:
+sp-contributions-toponly|Fokot halincheo uzollnneo dakhoi
+sp-contributions-submit|Sod
+whatlinkshere|Hanga kitem zoddta
+whatlinkshere-title|"~{0}" haka zoddlelim panam
+whatlinkshere-page|Pan:
+linkshere|Sokoilim panam '''[[:~{0}]]''' ak zoddtat:
+nolinkshere|Khoincheim pan '''[[:~{0}]]''' ak zoddna.
+isredirect|Porot dixen pan dhadd
+istemplate|Durasth-somaves
+isimage|failichem zoddop
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cadlem\u007Cadlem ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cfuddlem\u007Cfuddlim ~{0}}}
+whatlinkshere-links|← zoddpam
+whatlinkshere-hideredirs|~{0} porot dixen
+whatlinkshere-hidetrans|~{0} durasth-somaves
+whatlinkshere-hidelinks|~{0} zoddpam
+whatlinkshere-hideimages|Failinchim zoddpam ~{0}
+whatlinkshere-filters|Challnio
+ipboptions|2 voram:2 hours,1 dis:1 day,3 dis:3 days,1 satollo:1 week,2 satolle:2 weeks,1 mhoino:1 month,3 mhoine:3 months,6 mhoine:6 months,1 voros:1 year,sasnnank:infinite
+ipblocklist|Addhailele vapuddpi
+blocklink|addavnnni
+unblocklink|Addavnni kadd
+change-blocklink|Addavnnni bodol
+contribslink|borovp
+blocklogpage|addavnnechem sotr
+blocklogentry|[[~{0}]] addailelem ~{1} asun vellacho ont: ~{2}
+block-log-flags-nocreate|Khatem rochop opatr kelam
+move-watch|Hea panar disht dovor
+movelogpage|Sotr bodol
+movereason|Karonn:
+revertmove|porti
+export|Panank niryat kor
+allmessagesname|Nanv
+allmessagesdefault|Falta sondex mozkur
+thumbnail_error|Lhan-imaz toiar kortana chuk zali. Karonn: ~{0}
+tooltip-pt-userpage|Tujem vapuddpachem pan
+tooltip-pt-mytalk|Tumchem ulovpachem pan
+tooltip-pt-preferences|Tumcheo avddi
+tooltip-pt-watchlist|Bodlachea dekhrekh korpachea panachi volleri
+tooltip-pt-mycontris|Tujea borovpanchi suchi
+tooltip-pt-login|Tumkam sotrrombh korunk protsavan asa; em soktichem nhoi
+tooltip-pt-logout|Sotracho xevott
+tooltip-ca-talk|Mozkurachea vixoiavoir bhasabhas
+tooltip-ca-edit|Tumchean hem pan sudarunk zata. Upkar korun sambhallche adim zholok butanv vapor
+tooltip-ca-addsection|Novo vibhag suru kor
+tooltip-ca-viewsource|Hem pan rakhun dovorlam.\nTujean tachem mull pollonv ieta
+tooltip-ca-history|Hea panacheo adleo uzollnneo
+tooltip-ca-protect|Hem pan rakh
+tooltip-ca-delete|Hem pan vogllai
+tooltip-ca-move|Hem pan fuddem vhor
+tooltip-ca-watch|Hem pan tujea sadurvollerint zodd
+tooltip-ca-unwatch|Hem pan tumchea sadurtaievelean kadd
+tooltip-search|{{SITENAME}}  sod
+tooltip-search-go|Hea just nanvachem pan asa zalear tea panar voch
+tooltip-search-fulltext|Hea utarea khatir pana sod
+tooltip-p-logo|Mukhel panak bhett di
+tooltip-n-mainpage|Mukhel panak bhett di
+tooltip-n-mainpage-description|Mukhel Panak bhett di
+tooltip-n-portal|Hea prokolpa vixim, tumchean kitem korum ieta, khoim kitem sodchem
+tooltip-n-currentevents|Chalu ghoddneachea fattbhuichi mahiti sod
+tooltip-n-recentchanges|Wikint halinch bodol keleleachi volleri
+tooltip-n-randompage|Khoincheim ek pan uktem kor
+tooltip-n-help|sodpachem tholl
+tooltip-t-whatlinkshere|Hanga zoddlelea sogllea wiki pananchi volleri
+tooltip-t-recentchangeslinked|Hea panak zoddlelea panachim halinchim bodolpam
+tooltip-feed-atom|Hea panak Atom purovnni
+tooltip-t-contributions|Hea vapuddpeachea borovpanchi suchi
+tooltip-t-emailuser|Hea vapuddpeak email patthoi
+tooltip-t-upload|Faili upload kor
+tooltip-t-specialpages|Kherit pananchi volleri
+tooltip-t-print|Hea panachem chhapunk ietelem rupantor
+tooltip-t-permalink|Hea panache uzollnnek togpi zodd
+tooltip-ca-nstab-main|Suchi pan polloi
+tooltip-ca-nstab-user|Vapuddpeachem pan polloi
+tooltip-ca-nstab-special|Hem ek kherit pan, tujeam hem pan sudarunk zaina
+tooltip-ca-nstab-project|Project-achem pan polloi
+tooltip-ca-nstab-image|Failichem pan polloi
+tooltip-ca-nstab-template|Saacho polloi
+tooltip-ca-nstab-category|Vorgachem pan polloi
+tooltip-minoredit|Haka ek kirkoll sudharop mhunn khunnay
+tooltip-save|Tujim bodolpam sambhall
+tooltip-preview|Bodlopanchi zholok polloi, upkar hem samballche adim vapor!
+tooltip-diff|Tumi hea mozkurant kelelo bodol dakhoiat
+tooltip-compareselectedversions|Hea panacheo don nivoddleleo uzollneo modem forok polloi
+tooltip-watch|Hem pan tujea xadurvollerint zodd
+tooltip-rollback|"Kovllop" hea panachea xevttachea borovpa kodde kea kollant portota.
+tooltip-undo|"Rodd' kor" sudharop portita ani sudharopak Zholok ritin ukodta. Tem saran karon zoddunk dita.
+tooltip-summary|Mottvo sar ghal
+pageinfo-toolboxlink|Panachi mahiti
+previousdiff|←  Adlo sudar
+nextdiff|Fuddlem bodlop →
+file-info-size|~{0} × ~{1} pixelam, failicho akar: ~{2}, MIME prokar: ~{3}
+file-nohires|Odhik bariksai na.
+svg-long-desc|SVG fail, nanvak ~{0} × ~{1} pixeli, failcho akar: ~{2}
+show-big-image|Mull fail
+bad_image_list|Akar oso asa:\n\nFokot suchicheo vostu (*-chean suru zateleo) dheanant ghevcheo\nTech vollir, uprantli zoddnni opvad dhorpant ieta,mhonnche zoim pana failichea ek vollint asunk xoktat.
+metadata|Metadata
+metadata-help|Hea failin anikui mahiti asa, hi fail korunk uzar kel'le digital camera vo scanner sun tem aila zait.\nZori tor hi failik bodol'lam zalear kai mahiti bodololem failik sarkem mell khaina zait.
+metadata-fields|Metadata chovkott konsollttoch, hea sondexant metadata molleantlea murtipanachea dakhovnnent aspav astolo.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+namespacesall|sogllem
+monthsall|sogllem
+watchlisttools-view|Sombondhi bodlopam polloi
+watchlisttools-edit|Sadurvolleri polloi ani sudar
+watchlisttools-raw|Sadurvollerichi mull-an bodol kor
+duplicate-defaultsort|'''Chotrai:''' Falta anukraman mukhel ''~{1}'' rodd korta adhlem falta anukraman mukhel ''~{0}'', haka.
+specialpages|Khaxelim Panam
+external_image_whitelist| #Hi voll asa toxich dovor<pre>\n#Khala sodpache sache (''regular expressions'') ghal (fokot // modem voita poi tem bhag)\n#Hanche borobor bhaile zodlele murt comparar kel'le zatele\n#Mell khatat tim murt koxeo distele, na zalear fokot mortek ek zodd distele\n#Jeo voll #-an suru zatele tem vivek mhunn manlele zatele\n#Hanga vhodle and dhakte okxora modem forok podona\n\n#Soglle sodpache sache hea volla voir ghal. Hi voll asa toxich dovor</pre>
+tag-filter|[[Special:Tags\u007CDospi]] challni:
+searchsuggest-search|Sod
+contactpage|Sompork pan
+']:>
+).lang
+;

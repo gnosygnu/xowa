@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shanmugamp7",
+			"மதனாஹரன்"
+		]
+	},
+	"wikibase-entity-item": "உருப்படி",
+	"wikibase-entity-query": "வினவல்",
+	"wikibase-error-autocomplete-response": "வழங்கி பதிலளித்தது: $1",
+	"wikibase-sitelinks-sitename-columnheading": "மொழி",
+	"wikibase-sitelinks-siteid-columnheading": "குறியீடு",
+	"wikibase-sitelinks-link-columnheading": "இணைத்த கட்டுரை",
+	"wikibase-tooltip-error-details": "விவரங்கள்",
+	"datatypes-type-wikibase-item": "உருப்படி",
+	"datatypes-type-commonsMedia": "பொதுவூடகக் கோப்பு"
+}

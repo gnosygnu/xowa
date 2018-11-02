@@ -1,0 +1,1716 @@
+this
+.dir_rtl_('y')
+.ns_names
+  .load_text(
+<:['
+-2|ܡܝܕܝܐ
+-1|ܕܝܠܢܝܐ
+1|ܡܡܠܠܐ
+2|ܡܦܠܚܢܐ
+3|ܡܡܠܠܐ ܕܡܦܠܚܢܐ
+5|ܡܡܠܠܐ ܕ$1
+6|ܠܦܦܐ
+7|ܡܡܠܠܐ ܕܠܦܦܐ
+8|ܡܝܕܝܐܘܝܩܝ
+9|ܡܡܠܠܐ ܕܡܝܕܝܐܘܝܩܝ
+10|ܩܠܒܐ
+11|ܡܡܠܠܐ ܕܩܠܒܐ
+12|ܥܘܕܪܢܐ
+13|ܡܡܠܠܐ ܕܥܘܕܪܢܐ
+14|ܣܕܪܐ
+15|ܡܡܠܠܐ ܕܣܕܪܐ
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+2|ܡܬܚܫܚܢܐ
+3|ܡܡܠܠܐ ܕܡܬܚܫܚܢܐ
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Activeusers|ܡܦܠܚܢ̈ܐ_ܙܪ̈ܝܙܐ
+Allmessages|ܟܠܗܝܢ_ܐܓܪ̈ܬܐ
+Allpages|ܟܠܗܝܢ_ܦܐܬܬ̈ܐ
+Ancientpages|ܦܐܬܬ̈ܐ_ܥܬܝܩ̈ܬܐ
+Badtitle|ܟܘܢܝܐ_ܠܐ_ܛܒܐ
+Blankpage|ܦܐܬܐ_ܣܦܝܩܬܐ
+BrokenRedirects|ܨܘܝܒ̈ܐ_ܬܒܝܪ̈ܐ
+Categories|ܣܕܪ̈ܐ
+ChangeEmail|ܫܚܠܦ_ܒܝܠܕܪܐ_ܐܠܩܛܪܘܢܝܐ
+ComparePages|ܦܚܡ_ܒܝܢܬ_ܦܐܬܬ̈ܐ
+Confirmemail|ܫܪܪ_ܒܝܠܕܪܐ_ܐܠܩܛܪܘܢܝܐ
+Contributions|ܫܘܬܦܘ̈ܬܐ
+CreateAccount|ܒܪܝ_ܚܘܫܒܢܐ
+Deadendpages|ܦܐܬܬ̈ܐ_ܥܡ_ܚܪܬܐ_ܡܝܬܬܐ
+DeletedContributions|ܫܘܬܦܘ̈ܬܐ_ܫܝ̈ܦܬܐ
+DoubleRedirects|ܨܘܝܒ̈ܐ_ܥܦܝ̈ܦܐ
+EditWatchlist|ܫܚܠܦ_ܪ̈ܗܝܬܐ
+Emailuser|ܫܕܪ_ܒܝܠܕܪܐ_ܐܠܩܛܪܘܢܝܐ_ܠܡܦܠܚܢܐ
+Fewestrevisions|ܬܢܝ̈ܬܐ_ܒܨܝܪ_ܡܢ_ܟܠ
+Filepath|ܫܒܝܠܐ_ܕܦܐܬܐ
+Log|ܣܓܠܐ~ܣܓܠ̈ܐ
+Lonelypages|ܦܐܬܬ̈ܐ_ܝܬܡ̈ܬܐ
+Longpages|ܦܐܬܬ̈ܐ_ܐܪ̈ܝܟܬܐ
+Mostlinkedcategories|ܣܕܪ̈ܐ_ܐܣܝܪ̈ܐ_ܝܬܝܪ_ܡܢ_ܟܠ~ܣܕܪ̈ܐ_ܦܠܝܚ̈ܐ_ܝܬܝܪ_ܡܢ_ܟܠ
+Mostlinkedtemplates|ܩܠܒ̈ܐ_ܐܣܝܪ̈ܐ_ܝܬܝܪ_ܡܢ_ܟܠ~ܩܠܒ̈ܐ_ܦܠܝܚ̈ܐ_ܝܬܝܪ_ܡܢ_ܟܠ
+Mostrevisions|ܬܢܝ̈ܬܐ_ܝܬܝܪ_ܡܢ_ܟܠ
+Movepage|ܫܢܝ_ܦܐܬܐ
+Mycontributions|ܫܘܬܦܘ̈ܬܝ
+MyLanguage|ܠܫܢܐ_ܕܝܠܝ
+Mypage|ܦܐܬܐ_ܕܝܠܝ
+Mytalk|ܡܡܠܠܐ_ܕܝܠܝ
+Myuploads|ܐܣܩ̈ܬܐ_ܕܝܠܝ
+Newimages|ܠܦܦ̈ܐ_ܚܕ̈ܬܐ~ܨܘܪ̈ܬܐ_ܚܕ̈ܬܬܐ
+Newpages|ܦܐܬܬ̈ܐ_ܚܕ̈ܬܬܐ
+PermanentLink|ܐܣܘܪܐ_ܦܝܘܫܐ
+Popularpages|ܦܐܬܬ̈ܐ_ܡܫܡܗ̈ܐ
+Preferences|ܨܒܝܢܝܘ̈ܬܐ
+Protectedpages|ܦܐܬܬ̈ܐ_ܢܛܝܪ̈ܬܐ
+Protectedtitles|ܟܘܢܝ̈ܐ_ܢܛܝܪ̈ܐ
+Recentchanges|ܫܘܚܠܦ̈ܐ_ܚܕ̈ܬܐ
+Search|ܒܨܝܐ
+Shortpages|ܦܐܬܬ̈ܐ_ܟܪ̈ܝܬܐ
+Specialpages|ܦܐܬܬ̈ܐ_ܕ̈ܝܠܢܝܬܐ
+Statistics|ܚܒܝܫܘܬ_ܡܢܝܢܐ
+Uncategorizedcategories|ܣܕܪ̈ܐ_ܠܐ_ܣܕܝܪ̈ܐ
+Uncategorizedimages|ܠܦܦ̈ܐ_ܠܐ_ܣܕܝܪ̈ܐ~ܨܘܪ̈ܬܐ_ܠܐ_ܣܕܝܪ̈ܬܐ
+Uncategorizedpages|ܦܐܬܬ̈ܐ_ܠܐ_ܣܕܝܪ̈ܬܐ
+Uncategorizedtemplates|ܩܠܒ̈ܐ_ܠܐ_ܣܕܝܪ̈ܐ
+Unusedcategories|ܣܕܪ̈ܐ_ܠܐ_ܦܠܝܚ̈ܐ
+Unusedimages|ܠܦܦ̈ܐ_ܠܐ_ܦܠܝܚ̈ܐ~ܨܘܪ̈ܬܐ_ܠܐ_ܦܠܝܚܬ̈ܐ
+Unusedtemplates|ܩܠܒ̈ܐ_ܠܐ_ܦܠܝܚ̈ܐ
+Unwatchedpages|ܦܐܬܬ̈ܐ_ܠܐ_ܣܢܝܩ̈ܬܐ
+Upload|ܐܣܩ
+Userlogin|ܥܠܠܐ_ܕܡܦܠܚܢܐ
+Userlogout|ܦܠܛܐ_ܕܡܦܠܚܢܐ
+Userrights|ܙܕ̈ܩܐ_ܕܡܦܠܚܢܐ~ܥܒܕ_ܡܕܒܪܢܐ_ܕܛܟܣܐ~ܥܒܕ_ܒܘܛ
+Version|ܡܦܩܬܐ
+Wantedcategories|ܣܕܪ̈ܐ_ܣܢܝܩ̈ܐ
+Wantedfiles|ܠܦܦ̈ܐ_ܣܢܝܩ̈ܐ
+Wantedpages|ܦܐܬܬ̈ܐ_ܣܢܝܩ̈ܬܐ~ܐܣܘܪ̈ܐ_ܬܒܝܪ̈ܐ
+Wantedtemplates|ܩܠܒ̈ܐ_ܣܢܝܩ̈ܐ
+Watchlist|ܪ̈ܗܝܬܐ
+Whatlinkshere|ܡܐ_ܐܣܪ_ܠܗܪܟܐ
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+redirect|0|#ܨܘܝܒܐ~#REDIRECT~
+numberofpages|1|ܡܢܝܢܐ_ܕܦܐܬܬ̈ܐ~NUMBEROFPAGES~
+numberofarticles|1|ܡܢܝܢܐ_ܕܡܠܘܐ̈ܐ~NUMBEROFARTICLES~
+numberoffiles|1|ܡܢܝܢܐ_ܕܠܦܦ̈ܐ~NUMBEROFFILES~
+pagename|1|ܫܡܐ_ܕܦܐܬܐ~PAGENAME~
+pagenamee|1|ܟܘܢܝܐ_ܕܦܐܬܐ~PAGENAMEE~
+namespace|1|ܚܩܠܐ~NAMESPACE~
+msg|0|ܐܓܪܬܐ~MSG~
+img_thumbnail|1|ܙܥܘܪܬܐ~thumbnail~thumb~
+img_manualthumb|1|ܙܥܘܪܬܐ=$1~thumbnail=$1~thumb=$1~
+img_border|1|ܬܚܘܡܐ~border~
+img_page|1|ܦܐܬܐ=$1~ܦܐܬܐ $1~page=$1~page $1~
+img_none|1|ܠܐ_ܡܕܡ~none~
+img_right|1|ܝܡܝܢܐ~right~
+img_center|1|ܡܨܥܐ~center~centre~
+img_left|1|ܣܡܠܐ~left~
+img_baseline|1|ܣܪܛܐ_ܫܪܫܝܐ~baseline~
+img_sub|1|ܦܪܥܝܐ~sub~
+grammar|0|ܬܘܪܨ_ܡܡܠܠܐ~GRAMMAR~
+gender|0|ܓܢܣܐ~GENDER~
+language|0|#ܠܫܢܐ~#LANGUAGE~
+special|0|#ܕܝܠܢܝܐ~#special~
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+url_path|0|ܫܒܝܠܐ~PATH~
+url_wiki|0|ܘܝܩܝ~WIKI~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|ܚܕܒܫܒܐ
+monday|ܬܪܝܢܒܫܒܐ
+tuesday|ܬܠܬܒܫܒܐ
+wednesday|ܐܪܒܥܒܫܒܐ
+thursday|ܚܡܫܒܫܒܐ
+friday|ܥܪܘܒܬܐ
+saturday|ܫܒܬܐ
+sun|ܚܕܒܫܒܐ
+mon|ܬܪܝܢܒܫܒܐ
+tue|ܬܠܬܒܫܒܐ
+wed|ܐܪܒܥܒܫܒܐ
+thu|ܚܡܫܒܫܒܐ
+fri|ܥܪܘܒܬܐ
+sat|ܫܒܬܐ
+january|ܒܟܢܘܢ ܐܚܪܝ
+february|ܒܫܒܛ
+march|ܒܐܕܪ
+april|ܒܢܝܣܢ
+may_long|ܒܐܝܪ
+june|ܒܚܙܝܪܢ
+july|ܒܬܡܘܙ
+august|ܒܐܒ
+september|ܒܐܝܠܘܠ
+october|ܒܬܫܪܝܢ ܩܕܡ
+november|ܒܬܫܪܝܢ ܐܚܪܝ
+december|ܒܟܢܘܢ ܩܕܡ
+january-gen|ܟܢܘܢ ܐܚܪܝ
+february-gen|ܫܒܛ
+march-gen|ܐܕܪ
+april-gen|ܢܝܣܢ
+may-gen|ܐܝܪ
+june-gen|ܚܙܝܪܢ
+july-gen|ܬܡܘܙ
+august-gen|ܐܒ
+september-gen|ܐܝܠܘܠ
+october-gen|ܬܫܪܝܢ ܩܕܡ
+november-gen|ܬܫܪܝܢ ܐܚܪܝ
+december-gen|ܟܢܘܢ ܩܕܡ
+jan|ܟܢܘܢ ܐܚܪܝ
+feb|ܫܒܛ
+mar|ܐܕܪ
+apr|ܢܝܣܢ
+may|ܐܝܪ
+jun|ܚܙܝܪܢ
+jul|ܬܡܘܙ
+aug|ܐܒ
+sep|ܐܝܠܘܠ
+oct|ܬܫܪܝܢ ܩܕܡ
+nov|ܬܫܪܝܢ ܐܚܪܝ
+dec|ܟܢܘܢ ܩܕܡ
+toc|ܚܒܝܫܬ̈ܐ
+redirectedfrom|(ܨܝܒ ܡܢ ~{0})
+allpages|ܟܠ ܦܐܬܬ̈ܐ
+prevpage|ܦܐܬܐ ܕܩܕܡ (~{0})
+nextpage|ܦܐܬܐ ܕܒܬܪ (~{0})
+collapsible-collapse|ܐܟܪܟ
+collapsible-expand|ܐܪܘܚ
+sort-descending|ܣܘܕܪܐ ܡܚܬܐܝܬ
+sort-ascending|ܣܘܕܪܐ ܡܣܩܐܝܬ
+categories|ܣܕܪ̈ܐ
+lastmodifiedat|ܫܘܚܠܦܐ ܐܚܪܝܐ ܕܦܐܬܐ ܗܕܐ ܗܘܐ ܒܣܝܩܘܡ ~{0}, ~{1}.
+thumbnail-more|ܐܘܪܒ
+otherlanguages|ܠܫܢ̈ܐ ܐܚܪ̈ܢܐ
+blanknamespace|(ܪܫܝܬܐ)
+pagecategories|{{PLURAL:~{0}\u007Cܣܕܪܐ\u007Cܣܕܪ̈ܐ}}
+category_header|ܦܐܬܬ̈ܐ ܒܣܕܪܐ ܕ "~{0}"
+subcategories|ܣܕܪ̈ܐ ܦܪ̈ܥܝܐ
+category-media-header|ܡܝܕܝܐ ܒܣܕܪܐ ܕ "~{0}"
+category-empty|''ܗܢܐ ܣܕܪܐ ܗܫܐܝܬ ܠܝܬ ܒܗ ܦܐܬܬ̈ܐ ܐܘ ܡܝܕܝܐ.''
+category-subcat-count|{{PLURAL:~{1}\u007Cܣܕܪܐ ܗܢܐ ܐܝܬ ܒܗ ܗܢܐ ܣܕܪܐ ܦܪܥܝܐ ܕܐܬܐ ܒܠܚܘܕ.\u007Cܣܕܪܐ ܗܢܐ ܐܝܬ ܒܗ {{PLURAL:~{0}\u007Cܣܕܪܐ ܦܪܥܝܐ ܕܐܬܐ\u007C~{0} ܣܕܪ̈ܐ ܦܪ̈ܥܝܐ ܕܐܬܝܢ}}، ܡܢ ܣܘܝܟܐ ܕ ~{1}.}}
+category-subcat-count-limited|ܣܕܪܐ ܗܢܐ ܐܝܬ ܒܗ {{PLURAL:~{0}\u007Cܣܕܪܐ ܦܪܥܝܐ ܗܢܐ\u007C~{0} ܣܕܪ̈ܐ ܦܪ̈ܥܝܐ ܗܠܝܢ}}.
+category-article-count|{{PLURAL:~{1}\u007Cܣܕܪܐ ܗܢܐ ܠܝܬ ܒܗ ܦܐܬܐ.\u007C{{PLURAL:~{0}\u007C\u007Cܣܕܪܐ ܗܢܐ ܐܝܬ ܒܗ ܦܐܬܐ ܗܕܐ ܒܠܚܘܕ\u007Cܣܕܪܐ ܗܢܐ ܐܝܬ ܒܗ ܗܠܝܢ ~{0} ܦܐܬܬ̈ܐ}} ܡܢ ܣܘܝܟܐ ܕ ~{1}.}}
+category-article-count-limited|{{PLURAL:~{0}\u007Cܦܐܬܐ ܗܕܐ\u007C~{0} ܦܐܬܬ̈ܐ ܗܠܝܢ}} ܒܣܕܪܐ ܗܢܐ.
+category-file-count|{{PLURAL:~{1}\u007Cܣܕܪܐ ܗܢܐ ܐܝܬ ܒܗ ܠܦܦܐ ܕܐܬܐ ܒܠܚܘܕ.\u007C{{PLURAL:~{0}\u007Cܠܦܦܐ ܕܐܬܐ ܐܝܬܘܗܝ\u007C~{0} ܠܦܦ̈ܐ ܕܐܬܝܢ ܐܝܬܝܗܘܢ}} ܒܣܕܪܐ ܗܢܐ، ܡܢ ܣܘܝܟܐ ܕ ~{1}.}}
+category-file-count-limited|ܐܝܬ {{PLURAL:~{0}\u007Cܠܦܦܐ ܕܐܬܐ\u007C~{0} ܠܦܦ̈ܐ ܕܐܬܝܢ}} ܒܣܕܪܐ ܗܫܝܐ.
+categorytree-member-counts|ܚܒܫ ܥܠ {{PLURAL:~{0}\u007C1 ܣܕܪܐ ܦܪܥܝܐ\u007C~{0} ܣܕܪ̈ ܦܪ̈ܥܝܐ}}، {{PLURAL:~{1}\u007C1 ܦܐܬܐ\u007C~{1} ܦܐܬܬ̈ܐ}}، ܘ{{PLURAL:~{2}\u007C1 ܠܦܦܐ\u007C~{2} ܠܦܦ̈ܐ}}
+categorytree-num-categories|~{0} ܣ
+categorytree-num-pages| ~{0} ܦ
+categorytree-num-files|~{0} ܠ
+nextn|{{PLURAL:~{0}\u007C~{0}}} ܕܒܬܪ
+prevn|{{PLURAL:~{0}\u007C~{0}}} ܕܩܕܡ
+listingcontinuesabbrev|(ܫܘܠܡܐ)
+bold_sample|ܟܬܒܬܐ ܥܒܝܬܐ
+bold_tip|ܟܬܒܬܐ ܥܒܝܬܐ
+italic_sample|ܟܬܒܬܐ ܦܠܝܡܬܐ
+italic_tip|ܟܬܒܬܐ ܦܠܝܡܬܐ
+link_sample|ܟܘܢܝܐ ܕܐܣܘܪܐ
+link_tip|ܐܣܘܪܐ ܓܘܝܐ
+headline_sample|ܨܚܚܐ ܕܦܪܫܓܢܐ ܪܫܝܐ
+ago|ܩܕܡ ~{0}
+hidden-category-category|ܣܕܪ̈ܐ ܛܘܫܝ̈ܐ
+statistics|ܚܒܝܫܘܬ ܡܢܝܢܐ
+statistics-header-pages|ܚܒܝܫܘܬ ܡܢܝܢ̈ܐ ܕܦܐܬܐ
+statistics-articles|ܦܐܬܬ̈ܐ ܕܚܒܝܫܬ̈ܐ
+statistics-pages|ܦܐܬܬ̈ܐ
+categorytree|ܐܝܠܢܐ ܕܣܕܪܐ
+categorytree-portlet|ܣܕܪ̈ܐ
+categorytree-legend|ܚܘܝ ܐܝܠܢܐ ܕܣܘܕܪܐ
+categorytree-category|ܣܕܪܐ:
+categorytree-go|ܚܘܝ ܐܝܠܢܐ
+categorytree-mode-categories|ܣܕܪ̈ܐ ܒܠܚܘܕ
+categorytree-mode-pages|ܦܐܬܬ̈ܐ ܫܒܘܩ ܕܠܦܦ̈ܐ
+categorytree-mode-all|ܟܠ ܦܐܬܬ̈ܐ
+categorytree-collapse|ܐܟܪܟ
+categorytree-expand|ܪܘܚ
+categorytree-num-empty|ܣܦܝܩܐ
+categorytree-load|ܛܥܢ
+categorytree-loading|ܛܘܥܢܐ...
+categorytree-no-subcategories|ܠܝܬ ܣܕܪ̈ܐ ܦܪ̈ܥܝܐ
+categorytree-not-found|ܣܕܪܐ <i>~{0}</i> ܠܐ ܐܫܟܚܬ
+cite_error|ܦܘܕܐ ܒܡܣܗܕܢܘܬܐ: ~{0}
+proofreadpage_image|ܨܘܪܬܐ
+proofreadpage_index|ܩܘܕܝܟܘܣ
+proofreadpage_indexdupe|ܐܣܘܪܐ ܥܦܝܦܐ
+proofreadpage_nologin|ܠܐ ܥܠܝܠܐ
+proofreadpage_nextpage|ܦܐܬܐ ܕܒܬܪ
+proofreadpage_prevpage|ܦܐܬܐ ܕܩܕܡ
+proofreadpage_quality0_category|ܕܠܐ ܟܬܒܬܐ
+proofreadpage_quality1_category|ܟܬܒܬܐ ܠܐ ܢܘܩܕܬܐ
+proofreadpage_quality3_category|ܟܬܒܬܐ ܢܘܩܕܬܐ
+proofreadpage_index_listofpages|ܡܟܬܒܘܬܐ ܕܦܐܬܬ̈ܐ
+proofreadpage_pages|~{1} {{PLURAL:~{0}\u007Cܦܐܬܐ\u007Cܦܐܬܬܐ}}
+proofreadpage_source|ܡܒܘܥܐ
+proofreadpage-section-tools|ܡܐܢ̈ܐ ܕܢܩܕܘܬܐ
+proofreadpage-group-zoom|ܡܩܪܒ/ܡܙܥܪ
+proofreadpage-group-other|ܐܚܪܢܐ
+proofreadpage-button-zoom-out-label|ܡܙܥܪ
+proofreadpage-button-reset-zoom-label|ܥܓܪܐ ܫܪܫܝܐ
+proofreadpage-button-zoom-in-label|ܡܩܪܒ
+cite_article_link|ܡܣܗܕ ܥܠ ܗܕܐ ܦܐܬܐ
+tooltip-cite-article|ܝܕ̈ܥܬܐ ܥܠ ܐܝܟܢܐ ܕܡܣܗܕ ܥܠ ܦܐܬܐ
+cite|ܡܣܗܕ
+cite_page|ܦܐܬܐ:
+cite_submit|ܡܣܗܕ
+cite_text|__NOTOC__\n<div class="mw-specialcite-bibliographic">\n\n== ܐܪ̈ܝܟܬܐ ܕܦܘܓܪܦܐ ܕ {{FULLPAGENAME}} ==\n\n* ܫܡܐ ܕܦܐܬܐ: {{FULLPAGENAME}}\n* ܣܝܘܡܐ: ܫܘܬܦܢ̈ܐ ܕ {{SITENAME}}\n* ܡܦܪܣܐ: ''{{SITENAME}}, {{int:sitesubtitle}}''.\n* ܣܝܩܘܡܐ ܕܬܢܝܬܐ ܐܚܪܝܬܐ: {{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}} {{CURRENTTIME}} UTC\n* ܣܝܩܘܡܐ ܕܡܬܦܢܝܢܘܬܐ: <citation>{{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}} {{CURRENTTIME}} UTC</citation>\n* ܐܣܘܪܐ ܦܝܘܫܐ: {{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}\n* ܗܝܝܘܬܐ ܕܨܚܚܐ ܕܦܐܬܐ: {{REVISIONID}}\n\n</div>\n<div class="plainlinks mw-specialcite-styles">\n\n== ܙܢܝ̈ܐ ܕܡܣܗܕܬܐ ܕ {{FULLPAGENAME}} ==\n\n=== [[ܙܢܐ ܕ APA]] ===\n{{FULLPAGENAME}}. ({{CURRENTYEAR}}, {{CURRENTMONTHNAME}} {{CURRENTDAY}}). ''{{SITENAME}}, {{int:sitesubtitle}}''. Retrieved <citation>{{CURRENTTIME}}, {{CURRENTMONTHNAME}} {{CURRENTDAY}}, {{CURRENTYEAR}}</citation> from {{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}.\n\n=== [[The MLA style manual\u007Cܙܢܐ ܕ MLA]] ===\n"{{FULLPAGENAME}}." ''{{SITENAME}}, {{int:sitesubtitle}}''. {{CURRENTDAY}} {{CURRENTMONTHABBREV}} {{CURRENTYEAR}}, {{CURRENTTIME}} UTC. <citation>{{CURRENTDAY}} {{CURRENTMONTHABBREV}} {{CURRENTYEAR}}, {{CURRENTTIME}}</citation> &lt;{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}&gt;.\n\n=== [[MHRA Style Guide\u007Cܙܢܐ ܕ MHRA]] ===\n{{SITENAME}} contributors, '{{FULLPAGENAME}}', ''{{SITENAME}}, {{int:sitesubtitle}},'' {{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}}, {{CURRENTTIME}} UTC, &lt;{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}&gt; [accessed <citation>{{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}}</citation>]\n\n=== [[The Chicago Manual of Style\u007C ܙܢܐ ܕ Chicago]] ===\n{{SITENAME}} contributors, "{{FULLPAGENAME}}," ''{{SITENAME}}, {{int:sitesubtitle}},'' {{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}} (accessed <citation>{{CURRENTMONTHNAME}} {{CURRENTDAY}}, {{CURRENTYEAR}}</citation>).\n\n=== [[Council of Science Editors\u007Cܙܢܐ ܕ CBE/CSE]] ===\n{{SITENAME}} contributors. {{FULLPAGENAME}} [Internet]. {{SITENAME}}, {{int:sitesubtitle}}; {{CURRENTYEAR}} {{CURRENTMONTHABBREV}} {{CURRENTDAY}}, {{CURRENTTIME}} UTC [cited <citation>{{CURRENTYEAR}} {{CURRENTMONTHABBREV}} {{CURRENTDAY}}</citation>]. Available from:\n{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}.\n\n=== [[Bluebook\u007Cܙܢܐ ܕ Bluebook]] ===\n{{FULLPAGENAME}}, {{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}} (last visited <citation>{{CURRENTMONTHNAME}} {{CURRENTDAY}}, {{CURRENTYEAR}}</citation>).\n\n=== ܡܥܠܬܐ ܕ [[BibTeX]] ===\n\n  @misc{ wiki:xxx,\n    author = "{{SITENAME}}",\n    title = "{{FULLPAGENAME}} --- {{SITENAME}}{,} {{int:sitesubtitle}}",\n    year = "{{CURRENTYEAR}}",\n    url = "{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}",\n    note = "[Online; accessed <citation>{{CURRENTDAY}}-{{CURRENTMONTHNAME}}-{{CURRENTYEAR}}</citation>]"\n  }\n\nWhen using the [[LaTeX]] package url (<code>\\usepackage{url}</code> somewhere in the preamble) which tends to give much more nicely formatted web addresses, the following may be preferred:\n\n  @misc{ wiki:xxx,\n    author = "{{SITENAME}}",\n    title = "{{FULLPAGENAME}} --- {{SITENAME}}{,} {{int:sitesubtitle}}",\n    year = "{{CURRENTYEAR}}",\n    url = "'''\\url{'''{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}'''}'''",\n    note = "[Online; accessed <citation>{{CURRENTDAY}}-{{CURRENTMONTHNAME}}-{{CURRENTYEAR}}</citation>]"\n  }\n\n\n</div> <!--closing div for "plainlinks"-->
+wikieditor-preview-tab|ܚܝܪܐ ܩܕܡܝܐ
+wikieditor-preview-changes-tab|ܫܘܚܠܦ̈ܐ
+wikieditor-previewDialog-tab|ܚܝܪܐ ܩܕܡܝܐ
+wikieditor-publish-button-cancel|ܒܛܘܠ
+wikieditor-publish-dialog-minor|ܫܘܚܠܦܐ ܙܥܘܪܐ
+wikieditor-publish-dialog-watch|ܪܗܝ ܦܐܬܐ ܗܕܐ
+wikieditor-template-editor-dialog-title|ܫܚܠܦ ܩܠܒܐ
+wikieditor-template-editor-dialog-submit|ܚܕܬ
+wikieditor-template-editor-dialog-cancel|ܒܛܘܠ
+wikieditor-toc-show|ܚܘܝ ܚܒܝܫܬ̈ܐ
+wikieditor-toc-hide|ܛܫܝ ܚܒܝܫܬ̈ܐ
+wikieditor-toolbar-tool-bold|ܥܒܝܬܐ
+wikieditor-toolbar-tool-bold-example|ܟܬܒܬܐ ܥܒܝܬܐ
+wikieditor-toolbar-tool-italic|ܦܠܝܡܬܐ
+wikieditor-toolbar-tool-italic-example|ܟܬܒܬܐ ܦܠܝܡܬܐ
+wikieditor-toolbar-tool-ilink|ܐܣܘܪܐ ܓܘܝܐ
+wikieditor-toolbar-tool-ilink-example|ܟܘܢܝܐ ܕܐܣܘܪܐ
+wikieditor-toolbar-tool-xlink|ܐܣܘܪܐ ܒܪܝܐ (ܕܟܘܪ http:// ܩܕܡܝܬܐ)
+wikieditor-toolbar-tool-xlink-example|http://www.example.com ܟܘܢܝܐ ܕܐܣܘܪܐ
+wikieditor-toolbar-tool-link|ܐܣܘܪܐ
+wikieditor-toolbar-tool-link-title|ܣܢܘܦ ܐܣܘܪܐ
+wikieditor-toolbar-tool-link-int|ܠܦܐܬܐ ܕܘܝܩܝ
+wikieditor-toolbar-tool-link-int-text|ܟܬܒܬܐ ܠܚܘܘܝܐ
+wikieditor-toolbar-tool-link-ext|ܠܦܐܬܐ ܕܢܘܠܐ ܒܪܝܬܐ
+wikieditor-toolbar-tool-link-insert|ܣܢܘܦ ܐܣܘܪܐ
+wikieditor-toolbar-tool-link-cancel|ܒܛܘܠ
+wikieditor-toolbar-tool-link-int-target-status-exists|ܦܐܬܐ ܗܕܐ ܐܝܬ
+wikieditor-toolbar-tool-link-int-target-status-notexists|ܦܐܬܐ ܗܕܐ ܠܝܬ
+wikieditor-toolbar-tool-link-int-target-status-invalid|ܟܘܢܝܐ ܠܐ ܬܪܝܨܐ
+wikieditor-toolbar-tool-link-int-target-status-external|ܐܣܘܪܐ ܒܪܝܐ
+wikieditor-toolbar-tool-link-lookslikeinternal-int|ܐܣܘܪܐ ܓܘܝܐ
+wikieditor-toolbar-tool-link-lookslikeinternal-ext|ܐܣܘܪܐ ܒܪܝܐ
+wikieditor-toolbar-tool-file|ܠܦܦܐ ܛܡܝܪܐ
+wikieditor-toolbar-tool-file-example|Example.jpg
+wikieditor-toolbar-tool-reference|ܡܒܘܥܐ
+wikieditor-toolbar-tool-reference-cancel|ܒܛܘܠ
+wikieditor-toolbar-tool-reference-title|ܣܢܘܦ ܡܒܘܥܐ
+wikieditor-toolbar-tool-reference-insert|ܣܢܘܦ
+wikieditor-toolbar-tool-reference-text|ܟܬܒܬܐ ܕܡܒܘܥܐ
+wikieditor-toolbar-tool-signature|ܪܡܝ ܐܝܕܐ ܥܡ ܚܬܡܐ ܕܙܒܢܐ
+wikieditor-toolbar-section-advanced|ܡܬܩܕܡܢܐ
+wikieditor-toolbar-tool-heading|ܪܘܫܢܐ
+wikieditor-toolbar-tool-heading-1|ܫܘܝܐ 1
+wikieditor-toolbar-tool-heading-2|ܫܘܝܐ 2
+wikieditor-toolbar-tool-heading-3|ܫܘܝܐ 3
+wikieditor-toolbar-tool-heading-4|ܫܘܝܐ 4
+wikieditor-toolbar-tool-heading-5|ܫܘܝܐ 5
+wikieditor-toolbar-tool-heading-example|ܟܬܒܬܐ ܕܪܘܫܢܐ
+wikieditor-toolbar-group-format|ܣܕܝܪܘܬܐ
+wikieditor-toolbar-tool-redirect|ܨܘܝܒܐ
+wikieditor-toolbar-tool-redirect-example|ܫܡܐ ܕܦܐܬܐ ܕܢܘܦܐ
+wikieditor-toolbar-tool-big|ܪܒܐ
+wikieditor-toolbar-tool-big-example|ܟܬܒܬܐ ܪܒܬܐ
+wikieditor-toolbar-tool-small|ܙܥܘܪܐ
+wikieditor-toolbar-tool-small-example|ܟܬܒܬܐ ܙܥܘܪܬܐ
+wikieditor-toolbar-tool-superscript|ܐܬܘܬܐ ܪܡܬܐ
+wikieditor-toolbar-tool-superscript-example|ܟܬܒܬܐ ܕܐܬܘܬܐ ܪܡܬܐ
+wikieditor-toolbar-tool-subscript|ܐܬܘܬܐ ܬܚܬܝܬܐ
+wikieditor-toolbar-tool-subscript-example|ܟܬܒܬܐ ܕܐܬܘܬܐ ܬܚܬܝܬܐ
+wikieditor-toolbar-group-insert|ܣܢܘܦ
+wikieditor-toolbar-tool-gallery|ܒܝܬ ܓܠܚܐ ܕܨܘܪ̈ܬܐ
+wikieditor-toolbar-tool-newline|ܣܪܛܐ ܚܕܬܐ
+wikieditor-toolbar-tool-table|ܠܘܚܝܬܐ
+wikieditor-toolbar-tool-table-title|ܣܢܦܐ ܕܠܘܚܝܬܐ
+wikieditor-toolbar-tool-table-dimensions-rows|ܨ̈ܦܐ
+wikieditor-toolbar-tool-table-dimensions-columns|ܥܡܘܕ̈ܐ
+wikieditor-toolbar-tool-table-example|ܛܘܦܣܐ
+wikieditor-toolbar-tool-table-preview|ܚܝܪܐ ܩܕܡܝܐ
+wikieditor-toolbar-tool-table-insert|ܣܢܘܦ
+wikieditor-toolbar-tool-table-cancel|ܒܛܘܠ
+wikieditor-toolbar-tool-replace-button-findnext|ܐܫܟܚ ܕܒܬܪ
+wikieditor-toolbar-section-characters|ܐܬܘܬ̈ܐ ܕܝܠܢܝܬ̈ܐ
+wikieditor-toolbar-characters-page-latin|ܠܐܛܝܢܐܝܬ
+wikieditor-toolbar-characters-page-latinextended|ܠܐܛܝܢܐܝܬ ܡܬܝܚܐ
+wikieditor-toolbar-characters-page-ipa|ܐܠܒܝܬ ܩܠܝܬܐ ܬܒܝܠܝܬܐ (IPA)
+wikieditor-toolbar-characters-page-symbols|ܪ̈ܡܙܐ
+wikieditor-toolbar-characters-page-greek|ܝܘܢܐܝܬ
+wikieditor-toolbar-characters-page-cyrillic|ܩܝܪܝܠܐܝܬ
+wikieditor-toolbar-characters-page-arabic|ܥܪܒܐܝܬ
+wikieditor-toolbar-characters-page-arabicextended|ܥܪܒܐܝܬ ܡܬܝܚܐ
+wikieditor-toolbar-characters-page-persian|ܦܪܣܐܝܬ
+wikieditor-toolbar-characters-page-hebrew|ܥܒܪܐܝܬ
+wikieditor-toolbar-characters-page-bangla|ܒܢܓܐܠܐܝܬ
+wikieditor-toolbar-characters-page-tamil|ܛܡܝܠ
+wikieditor-toolbar-characters-page-telugu|ܛܝܠܘܓܘܐܝܬ
+wikieditor-toolbar-characters-page-sinhala|ܣܢܗܐܠܐܝܬ
+wikieditor-toolbar-characters-page-gujarati|ܓܘܓܐܪܐܛܝܐܝܬ
+wikieditor-toolbar-characters-page-thai|ܛܝܠܢܕܐܝܬ
+wikieditor-toolbar-characters-page-lao|ܠܐܘܐܝܬ
+wikieditor-toolbar-characters-page-khmer|ܟܡܝܪܐܝܬ
+wikieditor-toolbar-section-help|ܥܘܕܪܢܐ
+wikieditor-toolbar-help-heading-description|ܫܘܡܗܐ
+wikieditor-toolbar-help-heading-syntax|ܡܕܡ ܟܬܒ ܐܢܬ
+wikieditor-toolbar-help-heading-result|ܡܕܡ ܐܬܐ ܠܟ
+wikieditor-toolbar-help-page-format|ܣܕܝܪܘܬܐ
+wikieditor-toolbar-help-page-link|ܐܣܪ̈ܐ
+wikieditor-toolbar-help-page-heading|ܪ̈ܘܫܢܐ
+wikieditor-toolbar-help-page-list|ܡܟܬܒܘܬ̈ܐ
+wikieditor-toolbar-help-page-file|ܠܦܦ̈ܐ
+wikieditor-toolbar-help-page-reference|ܡܒܘܥ̈ܐ
+wikieditor-toolbar-help-page-discussion|ܡܡܠܠܐ
+wikieditor-toolbar-help-content-italic-description|ܦܠܝܡܬܐ
+wikieditor-toolbar-help-content-italic-syntax|''ܟܬܒܬܐ ܦܠܝܡܬܐ''
+wikieditor-toolbar-help-content-italic-result|<em>ܟܬܒܬܐ ܦܠܝܡܬܐ</em>
+wikieditor-toolbar-help-content-bold-description|ܥܒܝܬܐ
+wikieditor-toolbar-help-content-bold-syntax|'''ܟܬܒܬܐ ܥܒܝܬܐ'''
+wikieditor-toolbar-help-content-bold-result|<strong>ܟܬܒܬܐ ܥܒܝܬܐ</strong>
+wikieditor-toolbar-help-content-bolditalic-description|ܦܠܝܡܬܐ &amp; ܥܒܝܬܐ
+wikieditor-toolbar-help-content-bolditalic-syntax|ܦܠܝܡܬܐ &amp; ܟܬܒܬܐ ܥܒܝܬܐ
+wikieditor-toolbar-help-content-bolditalic-result|<strong><em>ܦܠܝܡܬܐ &amp; ܥܒܝܬܐ text</em></strong>
+wikieditor-toolbar-help-content-ilink-description|ܐܣܘܪܐ ܓܘܝܐ
+wikieditor-toolbar-help-content-xlink-description|ܐܣܘܪܐ ܒܪܝܐ
+wikieditor-toolbar-help-content-file-description|ܠܦܦܐ ܛܡܝܪܐ
+wikieditor-toolbar-help-content-reference-description|ܡܒܘܥܐ
+wikieditor-toolbar-help-content-showreferences-description|ܚܘܝ ܡܒܘܥܐ
+wikieditor-toolbar-help-content-signature-description|ܪܡܝ ܐܝܕܐ
+wikibase-edit|ܫܚܠܦ
+wikibase-save|ܠܒܘܟ
+wikibase-cancel|ܒܛܘܠ
+wikibase-addreference|ܐܘܣܦ ܡܒܘܥܐ
+wikibase-statements|ܓܠܝܬ̈ܐ
+wikibase-aliases-label|ܐܦ ܐܬܝܕܥܬ ܒܫܡ:
+wikibase-statementview-referencesheading-pendingcountersubject|{{PLURAL:~{0}\u007Cܡܒܘܥܐ\u007Cܡܒܘܥ̈ܐ}}
+wikibase-itemdisambiguation-lookup-language|ܪܡܙܐ ܕܠܫܢܐ:
+wikibase-modifyterm-language|ܪܡܙܐ ܕܠܫܢܐ:
+wm-license-book-language|ܠܫܢܐ
+wm-license-information-source|ܡܒܘܥܐ
+wm-license-information-date|ܣܝܩܘܡܐ
+wm-license-information-author|ܣܝܘܡܐ
+sitesupport|ܕܒܘܚ ܠܢ
+group-confirmed|ܡܦܠܚܢ̈ܐ ܡܫܪܪ̈ܐ
+grouppage-confirmed|{{ns:project}}:ܡܦܠܚܢ̈ܐ ܡܫܪܪ̈ܐ
+group-founder-member|{{GENDER:~{0}\u007Cܫܬܐܣܢܐ\u007Cܫܬܐܣܢܬܐ}}
+grouppage-founder|{{ns:project}}:ܫܬܐܣܢ̈ܐ
+grouppage-import|{{ns:project}}:ܡܥܠܢ̈ܐ
+group-uploader-member|{{GENDER:~{0}\u007Cܡܣܩܢܐ\u007Cܡܣܩܢܬܐ}}
+grouppage-uploader|{{ns:project}}:ܡܣܩܢ̈ܐ
+group-sysadmin|ܡܕܒܪ̈ܢܐ ܕܛܟܣܐ
+group-inactive|ܡܦܠܚܢ̈ܐ ܠܐ ܙܪ̈ܝܙܐ
+wikimedia-copyright|ܓܘܫܡܐ ܕܡܟܬܒܢܘܬܐ ܐܝܬ ܬܚܝܬ <a href="https://creativecommons.org/licenses/by-sa/3.0/">ܦܣܣܘܬܐ ܕܡܬܟܝܢܢܘܬܐ ܕܬܘܩܢܐ ܓܘܢܝܐ܇ܫܘܬܦܘܬܐ-ܡܬܚܝܢܢܬܐ</a>.\nܬܢܘ̈ܝ ܐܚܪ̈ܢܝܬܐ ܒܙܒܢ ܡܬܩܪܒܘ.\nܚܙܝ <a href="https://wikimediafoundation.org/wiki/Terms_of_use">ܬܢܘ̈ܝ ܕܡܬܚܫܚܢܘܬܐ</a> ܠܐܪ̈ܝܟܬܐ.
+wikimedia-copyrightwarning|ܒܟܒܫܬܐ ܕܬܪܘܩܬܐ "{{int:savearticle}}" ܐܘܝܘ ܐܢܬ ܥܠ [https://wikimediafoundation.org/wiki/Terms_of_Use ܫܪ̈ܛܐ ܕܡܦܠܚܬܐ] ܘܦܣ ܫܘܬܦܘܬܟ ܒܠܥܕ ܗܦܟܬܐ [https://creativecommons.org/licenses/by-sa/3.0/ ܒܦܣܣܐ ܓܘܢܝܐ ܕܒܪܝܬܐ :ܢܣܒܬܐ-ܦܣܣܐ ܒܛܘܣܐ 3.0] ܘ[https://www.gnu.org/copyleft/fdl.html ܒܦܣܣܐ ܕGNU ܠܐܫܛܪ̈ܐ ܚܐܪ̈ܐ].\nܐܘܝܘ ܐܢܬ ܕܫܘܡܠܝܬܝܠܗ̇ ܒܟܘܢܝܐ ܒܓܘ ܒܦܣܣܐ ܓܘܢܝܐ ܕܒܪܝܬܐ ܒܝܕ hyperlink ܐܘ URL.
+createacct-helpusername|[[{{MediaWiki:createacct-helpusername-url}}\u007C(ܥܕܪ ܠܝ ܒܓܘܒܝܐ)]]
+wikimedia-developers|ܡܛܘܪ̈ܢܐ
+tog-underline|ܪܫܘܡ ܣܪܛܐ ܬܚܝܬ ܐܣܪܐ:
+tog-hideminor|ܛܫܝ ܫܘܚܠܦ̈ܐ ܙܥܘܪ̈ܐ ܒܫܘܚܠܦ̈ܐ ܚܕ̈ܬܐ
+tog-hidepatrolled|ܛܫܝ ܫܘܚܠܦ̈ܐ ܟܪ̈ܝܟܐ ܒܫܘܚܠܦ̈ܐ ܚܕ̈ܬܐ
+tog-newpageshidepatrolled|ܛܫܝ ܦܐܬܬ̈ܐ ܟܪ̈ܝܟܬܐ ܡܢ ܡܟܬܒܘܬܐ ܕܦܐܬܐ ܚܕܬܐ
+tog-extendwatchlist|ܐܪܘܚ ܪ̈ܗܝܬܐ ܠܚܘܘܝܐ ܕܟܠܗܘܢ ܫܘܚܠܦ̈ܐ، ܠܐ ܚܕ̈ܬܐ ܒܠܚܘܕ
+tog-editondblclick|ܫܚܠܦ ܦܐܬܬ̈ܐ ܒܢܩܪܐ ܙܘܓܢܝܐ
+tog-watchcreations|ܐܘܣܦ ܦܐܬܬ̈ܐ ܕܒܪܐ ܐܢܐ ܘܠܠܦ̈ܐ ܕܐܣܩ ܐܢܐ ܠܪ̈ܗܝܬܝ
+tog-watchdefault|ܐܘܣܦ ܦܐܬܬ̈ܐ ܘܠܦܦ̈ܐ ܕܫܚܠܦ ܐܢܐ ܠܪ̈ܗܝܬܝ
+tog-watchmoves|ܐܘܣܦ ܦܐܬܬ̈ܐ ܘܠܦܦ̈ܐ ܕܫܢܐ ܐܢܐ ܠܪ̈ܗܝܬܝ
+tog-watchdeletion|ܐܘܣܦ ܦܐܬܬ̈ܐ ܘܠܦܦ̈ܐ ܕܫܐܦ ܐܢܐ ܠܪ̈ܗܝܬܝ
+tog-oldsig|ܪܡܝ ܐܝܕܐ ܗܫܝܐ:
+tog-watchlisthideown|ܛܫܝ ܫܘܚܠܦ̈ܝ ܡܢ ܪ̈ܗܝܬܐ
+tog-watchlisthidebots|ܛܫܝ ܫܘܚܠܦ̈ܐ ܕܒܘܬ ܡܢ ܪ̈ܗܝܬܐ
+tog-watchlisthideminor|ܛܫܝ ܫܘܚܠܦ̈ܐ ܙܥܘܪ̈ܐ ܡܢ ܪ̈ܗܝܬܐ
+tog-watchlisthideliu|ܛܫܝ ܫܘܚܠܦ̈ܐ ܕܡܦܠܚܢ̈ܐ ܥܠܝܠ̈ܐ ܡܢ ܪ̈ܗܝܬܐ
+tog-watchlisthideanons|ܛܫܝ ܫܘܚܠܦ̈ܐ ܕܡܦܠܚܢ̈ܐ ܠܐ ܝܕ̈ܝܥܐ ܡܢ ܪ̈ܗܝܬܐ
+tog-ccmeonemails|ܫܕܪ ܠܝ ܨܚܚ̈ܐ ܕܒܝܠܕܪ̈ܐ ܐܠܩܛܪ̈ܘܢܝܐ ܕܫܕܪ ܐܢܐ ܠܡܦܠܚܢ̈ܐ ܐܚܪ̈ܢܐ
+tog-showhiddencats|ܚܘܝ ܣܕܪ̈ܐ ܛܘܫܝ̈ܐ
+tog-useeditwarning|ܙܗܪ ܠܝ ܐܡܬܝ ܫܒܩ ܐܢܐ ܦܐܬܐ ܕܫܘܚܠܦܐ ܕܐܝܬ ܒܗ ܫܘܚܠܦ̈ܐ ܠܐ ܠܒܝܟ̈ܐ
+underline-always|ܐܡܝܢ
+underline-never|ܠܐ ܡܡܬܘܡ
+hidden-categories|{{PLURAL:~{0}\u007Cܣܕܪܐ ܛܘܫܝܐ\u007Cܣܕܪ̈ܐ ܛܘܫܝܐ}}
+about|ܡܢܘ
+article|ܡܓܠܬܐ
+newwindow|(ܦܬܚ ܒܟܘܬܐ ܚܕܬܐ)
+cancel|ܒܛܘܠ
+moredotdotdot|ܝܬܝܪ...
+mypage|ܦܐܬܐ
+mytalk|ܡܡܠܠܐ
+anontalk|ܡܡܠܠܐ ܕܗܢܐ ܐܝ ܦܝ (IP)
+navigation|ܐܠܦܪܘܬܐ
+and| ܘ
+qbfind|ܐܫܟܚ
+qbbrowse|ܡܦܐܬ
+qbedit|ܫܚܠܦ
+qbpageoptions|ܗܕܐ ܦܐܬܐ
+qbmyoptions|ܦܐܬܬ̈ܐ ܕܝܠܝ
+faq|ܫܘܐܠ̈ܐ ܬܢܝ̈ܐ
+faqpage|Project:ܫܘܐܠ̈ܐ ܬܢܝ̈ܐ
+actions|ܥܒܕ̈ܐ
+namespaces|ܚܩܠܬ̈ܐ
+variants|ܡܫܬܚܠܦܢܘ̈ܬܐ
+navigation-heading|ܡܟܬܒܘܬܐ ܕܐܠܦܪܘܬܐ
+errorpagetitle|ܦܘܕܐ
+returnto|ܕܥܘܪ ܠ~{0}.
+tagline|ܡܢ {{SITENAME}}
+help|ܥܘܕܪܢܐ
+search|ܒܨܝܐ
+searchbutton|ܒܨܝ
+go|ܙܠ
+searcharticle|ܙܠ
+history|ܬܫܥܝܬܐ ܕܦܐܬܐ
+history_short|ܬܫܥܝܬܐ
+updatedmarker|ܐܬܚܕܬ ܗܐ ܡܢ ܙܒܢܐ ܕܣܘܥܪܢܝ ܐܚܪܝܐ
+printableversion|ܨܚܚܐ ܡܬܛܒܥܢܐ
+permalink|ܐܣܘܪܐ ܦܝܘܫܐ
+print|ܛܒܘܥ
+view|ܚܘܝ
+edit|ܫܚܠܦ
+create|ܒܪܝ
+editthispage|ܫܚܠܦ ܦܐܬܐ ܗܕܐ
+create-this-page|ܒܪܝ ܗܕܐ ܦܐܬܐ
+delete|ܫܘܦ
+deletethispage|ܫܘܦ ܦܐܬܐ ܗܕܐ
+undelete_short|ܠܐ ܫܘܦ {{PLURAL:~{0}\u007Cܚܕ ܫܘܚܠܦܐ\u007C~{0} ܫܘܚܠܦ̈ܐ}}
+viewdeleted_short|ܚܙܝ {{PLURAL:~{0}\u007Cܚܕ ܫܘܚܠܦܐ ܫܝܦܐ\u007C~{0} ܫܘܚܠܦ̈ܐ ܫܝܦ̈ܐ}}
+protect|ܛܪ
+protect_change|ܫܚܠܦ
+protectthispage|ܛܪ ܠܗܕܐ ܦܐܬܐ
+unprotect|ܫܚܠܦ ܢܛܝܪܘܬܐ
+unprotectthispage|ܫܚܠܦ ܢܛܝܪܘܬܐ ܕܗܕܐ ܦܐܬܐ
+newpage|ܦܐܬܐ ܚܕܬܐ
+talkpage|ܕܪܘܫ ܗܕܐ ܦܐܬܐ
+talkpagelinktext|ܡܡܠܠܐ
+specialpage|ܦܐܬܐ ܕܝܠܢܝܬܐ
+personaltools|ܡܐܢ̈ܐ ܦܪ̈ܨܘܦܝܐ
+articlepage|ܚܘܝܝܐ ܕܦܐܬܐ ܕܚܒܝܫܬ̈ܐ
+talk|ܡܡܠܠܐ
+views|ܚܙܝܬ̈ܐ
+toolbox|ܡܐܢ̈ܐ
+userpage|ܚܙܝ ܦܐܬܐ ܕܡܦܠܚܢܐ
+projectpage|ܚܙܝ ܦܐܬܐ ܕܬܪܡܝܬܐ
+imagepage|ܚܙܝ ܦܐܬܐ ܕܠܦܦܐ
+mediawikipage|ܚܙܝ ܦܐܬܐ ܕܐܓܪܬܐ
+templatepage|ܚܙܝ ܦܐܬܐ ܕܩܠܒܐ
+viewhelppage|ܚܙܝ ܦܐܬܐ ܕܥܘܕܪܢܐ
+categorypage|ܚܙܝ ܦܐܬܐ ܕܣܕܪܐ
+viewtalkpage|ܚܙܝ ܡܡܠܠܐ
+redirectpagesub|ܦܐܬܐ ܕܨܘܝܒܐ
+viewcount|ܐܬܓܠܚܬ ܗܕܐ ܦܐܬܐ {{PLURAL:~{0}\u007Cܙܒܢܬܐ ܚܕ\u007C~{0} ܙܒܢܝ̈ܢ}}.
+protectedpage|ܦܐܬܐ ܢܛܝܪܬܐ
+jumpto|ܫܘܪ ܠ:
+jumptonavigation|ܐܠܦܪܘܬܐ
+jumptosearch|ܒܨܝܐ
+view-pool-error|ܫܘܒܩܢܐ، ܬܫܡܫܬ̈ܐ ܐܢܘܢ ܠܐ̈ܝܐ ܗܫܐܝܬ\nܣܓܝ ܡܦܠܚܢ̈ܐ ܢܣܝܢ ܠܚܙܝܐ ܕܦܐܬܐ ܗܕܐ\nܦܝܣܐ ܡܢܟ ܣܟܝ ܩܠܝܠ ܡܢ ܩܕܡ ܕܬܢܣܐ ܠܡܛܝܐ ܠܦܐܬܐ ܗܕܐ ܙܒܢܬܐ ܐܚܪܬܐ.\n\n~{0}
+pool-timeout|ܫܠܡ ܥܕܢܐ ܣܒܪܬܐ ܠܚܠܩܐ
+pool-queuefull|ܣܕܪܐ ܕܦܘܣܣܐ ܡܠܝܐ
+pool-errorunknown|ܦܘܕܐ ܠܐ ܝܕܝܥܐ
+aboutsite|ܡܢܘ {{SITENAME}}
+aboutpage|Project:ܡܢܘ
+copyright|ܚܒܝܫܬ̈ܐ ܐܝܬ ܬܚܝܬ ~{0} ܐܢ ܠܝܬ ܠܩܘܒܠܐ.
+copyrightpage|{{ns:project}}:ܙܕ̈ܩܐ ܕܚܬܡܐ
+currentevents|ܓܕ̈ܫܐ ܗܫܝ̈ܐ
+currentevents-url|Project:ܓܕ̈ܫܐ ܗܫܝ̈ܐ
+disclaimers|ܠܐ ܡܫܬܐܠܢܘܬܐ
+disclaimerpage|Project:ܠܐ ܡܫܬܐܠܢܘܬܐ ܓܘܢܝܬܐ
+edithelp|ܥܘܕܪܢܐ ܠܫܚܠܦܬܐ
+mainpage|ܦܐܬܐ ܪܝܫܝܬܐ
+mainpage-description|ܦܐܬܐ ܪܝܫܝܬܐ
+policy-url|Project:ܦܘܪܢܣܐ
+portal|ܬܪܥܐ ܕܟܢܫܐ
+portal-url|Project:ܬܪܥܐ ܕܟܢܫܐ
+privacy|ܦܘܪܢܣܐ ܕܕܝܠܢܝܘܬܐ
+privacypage|Project:ܦܘܪܢܣܐ ܕܕܝܠܢܝܘܬܐ
+badaccess|ܦܘܕܐ ܒܦܣܣܐ
+badaccess-group0|ܠܬ ܠܟ ܦܣܣܐ ܠܚܘܩܩܐ ܕܥܒܕܐ ܕܐܢܬ ܫܐܠܬܝ.
+ok|ܛܒ
+youhavenewmessages|ܐܝܬ ܠܟ ~{0} (~{1}).
+youhavenewmessagesfromusers|ܐܝܬ ܠܟ ~{0} ܡܢ {{PLURAL:~{2}\u007Cܡܦܠܚܢܐ ܐܚܪܢܐ\u007C~{2} ܡܦܠܚܢ̈ܐ}} (~{1}).
+youhavenewmessagesmanyusers|ܐܝܬ ܠܟ ~{0} ܡܢ ܡܦܠܚܢ̈ܐ ܣܓܝܐ̈ܐ (~{1}).
+newmessageslinkplural|{{PLURAL:~{0}\u007Cܐܓܪܬܐ ܚܕܬܐ\u007C999=ܐܓܪ̈ܬܐ ܚܕ̈ܬܬܐ}}
+newmessagesdifflinkplural|{{PLURAL:~{0}\u007Cܫܘܚܠܦܐ ܐܚܪܝܐ\u007C999=ܫܘܚܠܦ̈ܐ ܐܚܪ̈ܝܐ}}
+youhavenewmessagesmulti|ܐܝܬ ܠܟ ܐܓܪ̈ܬܐ ܚܕ̈ܬܬܐ ܒ ~{0}
+editsection|ܫܚܠܦ
+editold|ܫܚܠܦ
+viewsourceold|ܚܙܝ ܡܒܘܥܐ
+editlink|ܫܚܠܦ
+viewsourcelink|ܚܙܝ ܡܒܘܥܐ
+editsectionhint|ܫܚܠܦ ܡܢܬܐ: ~{0}
+showtoc|ܚܘܝ
+hidetoc|ܛܫܝ
+viewdeleted|ܚܙܝ ~{0}؟
+restorelink|{{PLURAL:~{0}\u007Cܚܕ ܫܘܚܠܦܐ ܫܝܦܐ\u007C~{0} ܫܘܚܠܦ̈ܐ ܫܝܦ̈ܐ}}
+site-atom-feed|~{0} ܛܥܝܡܘܬܐ ܕܐܛܘܡ
+page-atom-feed|"~{0}" ܛܥܝܡܘܬܐ ܕܐܛܘܡ
+feed-atom|ܐܛܘܡ
+red-link-title|~{0} (ܦܐܬܐ ܗܕܐ ܠܝܬ)
+nstab-main|ܦܐܬܐ
+nstab-user|ܦܐܬܐ ܕܡܦܠܚܢܐ
+nstab-media|ܦܐܬܐ ܕܡܝܕܝܐ
+nstab-special|ܦܐܬܐ ܕܝܠܢܝܬܐ
+nstab-project|ܦܐܬܐ ܕܬܪܡܝܬܐ
+nstab-image|ܠܦܦܐ
+nstab-mediawiki|ܐܓܪܬܐ
+nstab-template|ܩܠܒܐ
+nstab-help|ܦܐܬܐ ܕܥܘܕܪܢܐ
+nstab-category|ܣܕܪܐ
+nosuchaction|ܠܝܬ ܗܟܘܬ ܥܒܕܐ
+nosuchspecialpage|ܠܝܬ ܗܟܘܬ ܦܐܬܐ ܕܝܠܢܝܬܐ
+error|ܦܘܕܐ
+databaseerror|ܦܘܕܐ ܒܐܣ ܝܕ̈ܥܬܐ
+missingarticle-rev|(ܡܢܝܢܐ ܕܬܢܝܬܐ: ~{0})
+missingarticle-diff|(ܦܘܪܫܐ: ~{0}, ~{1})
+internalerror|ܦܘܕܐ ܓܘܝܐ
+internalerror_info|ܦܘܕܐ ܓܘܝܐ: ~{0}
+badtitle|ܟܘܢܝܐ ܠܐ ܛܒܐ
+perfcached|ܓܠܝܬ̈ܐ ܗܠܝܢ ܐܣܢܝܢ ܐܢܘܢ ܘܡܬܡܨܝܢܬܐ ܐܝܬܝܗܝ ܕܠܐ ܢܗܘܢ ܚܘ̈ܕܬܐ. ܡܬܚܐ ܥܠܝܐ ܕ {{PLURAL:~{0}\u007Cܚܕ ܦܠܛܐ\u007C~{0} ܦܠܛ̈ܐ}} ܐܝܬ ܒܐܣܢܐ.
+perfcachedts|ܓܠܝܬ̈ܐ ܗܠܝܢ ܐܣܢܝܢ ܐܢܘܢ ܘܚܘܕܬܐ ܐܚܪܝܐ ܗܘܐ ܒ ~{0}. ܡܬܚܐ ܥܠܝܐ ܕ {{PLURAL:~{3}\u007Cܚܕ ܦܠܛܐ\u007C~{3} ܦܠܛ̈ܐ}} ܐܝܬ ܒܐܣܢܐ.
+querypage-no-updates|ܚܘܕ̈ܬܐ ܕܗܕܐ ܦܐܬܐ ܠܐ ܙܪ̈ܝܙܐ ܐܢܘܢ.\nܝܕ̈ܥܬܐ ܗܪܟܐ ܠܐ ܡܬܚܕܬܝܢ ܗܫܐ.
+viewsource|ܚܙܝ ܡܒܘܥܐ
+viewsource-title|ܚܙܝ ܡܒܘܥܐ ܕ ~{0}
+actionthrottled|ܠܐ ܡܬܡܨܝܢܬܐ ܐܝܬܝܗܝ ܠܡܥܒܕ ܝܬܝܪ ܡܢ ܗܢܐ ܥܒܕܐ
+viewsourcetext|ܡܨܐ ܐܢܬ ܕܬܚܙܐ ܘܬܢܣܚ ܠܡܒܘ̈ܥܐ ܕܗܕܐ ܦܐܬܐ:
+protectedinterface|ܗܕܐ ܦܐܬܐ ܡܘܬܪܐ ܟܬܝܒܬܐ ܕܦܐܬܐ ܠܚܘܪܙܐ ܒܗܢܐ ܘܝܩܝ, ܘܐܝܬܝܗܝ ܢܛܪܬܐ ܠܡܘܢܥ ܚܘܒܠܐ.\nܠܡܘܣܦ ܐܘ ܫܘܚܠܦ ܬܘܪ̈ܓܡܐ ܕܟܠܗܘܢ ܘܝܩܝ، ܐܦܠܚ [//translatewiki.net/ translatewiki.net]، ܬܪܡܝܬܐ ܕܬܘܪܓܡܐ ܕܡܝܕܝܐܘܝܩܝ.
+editinginterface|'''ܙܘܗܪܐ:''' ܐܢܬ ܬܫܚܠܦ ܦܐܬܐ ܕܡܬܦܠܚܬ ܒܚܙܝܐ ܟܬܝܒܝܐ ܕܬܚܪܙܬܐ.\nܟܠ ܫܘܚܠܦܐ ܒܦܐܬܐ ܗܕܐ ܢܗܘܐ ܠܗ ܡܥܒܕܢܘܬܐ ܥܠ ܐܣܟܡ ܦܐܬܐ ܕܡܦܠܚܢܐ ܕܡܦܠܚܢ̈ܐ ܐܚܪ̈ܢܐ ܒܘܝܩܝ ܗܢܐ.\nܠܡܘܣܦ ܐܘ ܫܘܚܠܦ ܬܘܪ̈ܓܡܐ ܕܟܠܗܘܢ ܘܝܩܝ، ܐܦܠܚ [//translatewiki.net/ translatewiki.net]، ܬܪܡܝܬܐ ܕܬܘܪܓܡܐ ܕܡܝܕܝܐܘܝܩܝ.
+namespaceprotected|ܠܝܬ ܠܟ ܦܣܣܐ ܠܫܚܠܦܬܐ ܕܦܐܬܬ̈ܐ ܒܚܩܠܐ ܕ'''~{0}'''.
+exception-nologin|ܠܝܬܝܟ ܥܠܝܠܐ
+logouttext|'''ܗܫܐ ܦܠܛܠܟ ܡܢ ܚܘܫܒܢܟ.'''\n\nܡܨܬ ܐܦܠܚܬ {{SITENAME}} ܐܝܟ ܡܦܠܚܢܐ ܠܐ ܝܕܝܥܐ ܐܘ ܡܨܬ ܕ<span class='plainlinks'>[~{0} ܬܥܘܠ]</span> ܒܚܘܫܒܢܐ ܥܝܢܗ ܐܘ ܐܝܟ ܡܦܠܚܢܐ ܐܚܪܢܐ.\n\nܚܕ ܟܡܐ ܡܢ ܦܐܬܬ̈ܐ ܡܬܚܙܝܢ ܐܝܟ ܕܗܘ ܐܢܬ ܥܠܝܠܐ ܐܝܬܝܟ ܥܕܡܐ ܕܐܣܦܩܬ ܠܦܐܬܬ̈ܐ ܠܒܝܟܬ̈ܐ ܕܡܦܐܬܢܐ ܕܝܠܟ.
+welcomeuser|ܒܫܝܢܐ ~{0}!
+yourname|ܫܡܐ ܕܡܦܠܚܢܐ:
+userlogin-yourname|ܫܡܐ ܕܡܦܠܚܢܐ
+userlogin-yourname-ph|ܐܥܠ ܫܡܐ ܕܡܦܠܚܢܐ ܕܝܠܟ
+yourpassword|ܡܠܬܐ ܕܥܠܠܐ:
+userlogin-yourpassword|ܡܠܬܐ ܕܥܠܠܐ
+userlogin-yourpassword-ph|ܐܥܠ ܡܠܬܐ ܕܥܠܠܐ ܕܝܠܟ
+createacct-yourpassword-ph|ܐܥܠ ܡܠܬܐ ܕܥܠܠܐ
+yourpasswordagain|ܟܬܘܒ ܡܠܬܐ ܕܥܠܠܐ ܙܒܢܬܐ ܐܚܪܬܐ:
+createacct-yourpasswordagain|ܫܪܪ ܡܠܬܐ ܕܥܠܠܐ
+createacct-yourpasswordagain-ph|ܐܥܠ ܡܠܬܐ ܕܥܠܠܐ ܙܒܢ ܐܚܪܝܢ
+remembermypassword|ܕܟܘܪ ܥܠܠܬܝ ܥܠ ܡܦܐܬܢܐ ܗܢܐ (ܠܡܬܚܐ ܥܠܝܐ ܕ ~{0} {{PLURAL:~{0}\u007Cܝܘܡܐ\u007Cܝܘܡܬ̈ܐ}})
+userlogin-remembermypassword|ܫܒܘܩ ܠܝ ܥܠܝܠܐ ܒܚܘܫܒܢܝ
+userlogin-signwithsecure|ܐܚܫܚ ܕܒܝܩܘܬܐ ܡܫܝܢܢܬܐ
+login|ܥܘܠ
+nav-login-createaccount|ܥܘܠ / ܒܪܝ ܚܘܫܒܢܐ
+userlogin|ܥܘܠ / ܒܪܝ ܚܘܫܒܢܐ
+userloginnocreate|ܥܘܠ
+logout|ܦܠܘܛ
+userlogout|ܦܠܘܛ
+notloggedin|ܠܝܬܝܟ ܥܠܝܠܐ
+userlogin-noaccount|ܠܝܬ ܠܟ ܚܘܫܒܢܐ؟
+userlogin-joinproject|ܢܩܦ ܥܡ {{SITENAME}}
+nologin|ܠܝܬ ܠܟ ܚܘܫܒܢܐ؟ '''~{0}'''.
+nologinlink|ܒܪܝ ܚܘܫܒܢܐ
+createaccount|ܒܪܝ ܚܘܫܒܢܐ
+gotaccount|ܐܝܬ ܠܟ ܚܘܫܒܢܐ؟ '''~{0}'''.
+gotaccountlink|ܥܘܠ
+userlogin-resetlink|ܐܬܢܫܝܬ ܝܕ̈ܥܬܐ ܕܥܠܠܐ؟
+userlogin-resetpassword-link|ܢܫܬ ܡܠܬܐ ܕܥܠܠܐ؟
+createacct-emailrequired|ܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ
+createaccountmail|ܐܦܠܚ ܡܠܬܐ ܕܥܠܠܐ ܙܒܢܢܝܬܐ ܘܫܕܪ ܠܗ ܥܠ ܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ ܬܘܚܡܐ ܠܬܚܬ
+createaccountreason|ܥܠܬܐ
+createacct-submit|ܒܪܝ ܚܘܫܒܢܐ ܕܝܠܟ
+createacct-benefit-heading|ܝܬܒܐ ܕ{{SITENAME}} ܐܣܬܝܡ ܒܝܕ ܐܢܫ̈ܐ ܐܟܘܬܟ.
+createacct-benefit-body1|{{PLURAL:~{0}\u007Cܫܘܚܠܦܐ\u007Cܫܘܚܠܦ̈ܐ}}
+createacct-benefit-body2|{{PLURAL:~{0}\u007Cܦܐܬܐ\u007Cܦܐܬܬ̈ܐ}}
+createacct-benefit-body3|{{PLURAL:~{0}\u007Cܫܘܬܦܢܐ ܚܕܬܐ\u007Cܫܘܬܦܢ̈ܐ ܚܕ̈ܬܐ}}
+badretype|ܡܠܬܐ ܕܥܠܠܐ ܟܬܒܬ ܐܢܬ ܠܐ ܐܘܝܢܬܐ.
+userexists|ܫܡܐ ܕܡܦܠܚܢܐ ܕܐܥܠܬ ܫܩܝܠܐ ܐܝܬܘܗܝ.\nܫܦܝܪܐܝܬ ܓܒܝ ܫܡܐ ܐܚܪܢܐ.
+loginerror|ܦܘܕܐ ܒܥܠܠܐ
+createaccounterror|ܠܐ ܡܫܟܚ ܠܒܪܝܐ ܚܘܫܒܢܐ: ~{0}
+noname|ܠܐ ܦܪܫ ܐܢܬ ܫܡܐ ܕܡܦܠܚܢܐ ܬܪܝܨܐ
+loginsuccesstitle|ܥܠܠܐ ܓܡܪ
+loginsuccess|'''ܗܫܐ ܥܠܝܠܐ ܐܢܬ ܒ{{SITENAME}} ܒܫܡ "~{0}".'''
+nouserspecified|ܘܠܐ ܠܟ ܕܬܚܡ ܫܡܐ ܕܡܦܠܚܢܐ
+wrongpassword|ܡܠܬܐ ܕܥܠܠܐ ܠܐ ܬܪܝܨܬܐ ܐܥܠܬ.\nܒܒܥܘ ܡܢܟ ܕܬܢܣܐ ܙܒܢ ܐܚܪܝܢ.
+wrongpasswordempty|ܡܠܬܐ ܕܥܠܠܐ ܕܐܥܠܬ ܣܦܝܩܬܐ ܐܝܬܝܗ.\nܒܒܥܘ ܡܢܟ ܕܬܢܣܐ ܙܒܢ ܐܚܪܝܢ.
+passwordtooshort|ܡܠܬܐ ܕܥܠܠܐ ܘܠܐ ܕܬܗܘܐ ܕܠܐ ܒܨܪ ܡܢ{{PLURAL:~{0}\u007Cܐܬܘܬܐ ܚܕ\u007C~{0} ܐܬܘ̈ܬܐ}}.
+mailmypassword|ܣܘܡ ܡܠܬܐ ܕܥܠܠܐ ܙܒܢ ܐܚܪܝܢ
+passwordremindertitle|ܡܠܬܐ ܕܥܠܠܐ ܙܒܢܢܝܬܐ ܚܕܬܐ ܠ{{SITENAME}}
+noemail|ܠܝܬ ܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ ܠܡܦܠܚܢܐ "~{0}".
+mailerror|ܦܘܕܐ ܒܫܘܕܪܐ ܕܒܝܠܕܪܐ: ~{0}
+emailconfirmlink|ܫܪܪ ܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ ܕܝܠܟ
+accountcreated|ܚܘܫܒܢܐ ܒܪܐ
+accountcreatedtext|ܐܬܒܪܝ ܚܘܫܒܢܐ ܕܡܦܠܚܢܐ ܠ ~{0}.
+createaccount-title|ܒܪܝܐ ܕܚܘܫܒܢܐ ܒ {{SITENAME}}
+loginlanguagelabel|ܠܫܢܐ: ~{0}
+pt-login|ܥܘܠ
+pt-login-button|ܥܘܠ
+pt-createaccount|ܒܪܝ ܚܘܫܒܢܐ
+pt-userlogout|ܦܠܘܛ
+changepassword|ܫܚܠܦ ܡܠܬܐ ܕܥܠܠܐ
+resetpass_header|ܫܚܠܦ ܡܠܬܐ ܕܥܠܠܐ ܕܚܘܫܒܢܐ
+oldpassword|ܡܠܬܐ ܕܥܠܠܐ ܥܬܝܩܬܐ:
+newpassword|ܡܠܬܐ ܕܥܠܠܐ ܚܕܬܐ:
+retypenew|ܟܬܘܒ ܡܠܬܐ ܕܥܠܠܐ ܙܒܢܬܐ ܐܚܪܬܐ:
+resetpass_submit|ܛܝܒ ܡܠܬܐ ܕܥܠܠܐ ܘܥܘܠ
+resetpass-submit-loggedin|ܫܚܠܦ ܡܠܬܐ ܕܥܠܠܐ
+resetpass-submit-cancel|ܒܛܘܠ
+resetpass-temp-password|ܡܠܬܐ ܕܥܠܠܐ ܙܒܢܢܝܬܐ:
+passwordreset|ܣܘܡ ܡܠܬܐ ܕܥܠܠܐ ܙܒܢ ܐܚܪܝܢ
+passwordreset-legend|ܣܘܡ ܡܠܬܐ ܕܥܠܠܐ ܙܒܢ ܐܚܪܝܢ
+passwordreset-username|ܫܡܐ ܕܡܦܠܚܢܐ:
+passwordreset-domain|ܪܘܚܬܐ:
+passwordreset-email|ܡܘܢܥܐ ܕܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ:
+passwordreset-emailsent|ܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ ܐܫܬܕܪ ܠܣܘܝܡ ܡܠܬܐ ܕܥܠܠܐ ܙܒܢ ܐܚܪܝܢ
+changeemail|ܫܚܠܦ ܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ
+extlink_tip|ܐܣܘܪܐ ܒܪܝܐ (ܕܟܘܪ http:// ܩܕܡܝܬܐ)
+nowiki_sample|ܣܢܘܦ ܟܬܒܬܐ ܕܠܐ ܣܕܝܪܘܬܐ ܗܪܟܐ
+nowiki_tip|ܒܣܝ ܣܕܝܪܘܬܐ ܕܘܝܩܝ
+image_tip|ܠܦܦܐ ܛܡܝܪܐ
+media_tip|ܐܣܘܪܐ ܕܠܦܦܐ
+sig_tip|ܪܡܝ ܐܝܕܟ ܥܡ ܙܒܢܐ ܘܣܝܩܘܡܐ
+summary|ܦܣܝܩܬ̈ܐ ܕܫܘܚܠܦܐ:
+subject|ܡܠܘܐܐ/ܡܘܢܥܐ ܪܫܝܐ:
+minoredit|ܗܢܐ ܗܘ ܫܘܚܠܦܐ ܙܥܘܪܐ
+watchthis|ܪܗܝ ܦܐܬܐ ܗܕܐ
+savearticle|ܠܒܘܟ ܦܐܬܐ
+preview|ܚܝܪܐ ܩܕܡܝܐ
+showpreview|ܚܘܝ ܚܝܪܐ ܩܕܡܝܐ
+showdiff|ܚܘܝ ܫܘܚܠܦ̈ܐ
+anoneditwarning|'''ܙܘܗܪܐ:''' ܠܐ ܐܝܬܝܟ ܥܠܝܠܐ.\nܐܝ ܦܝ (IP) ܕܝܠܟ ܢܬܟܬܒ ܒܬܫܥܝܬܐ ܕܦܐܬܐ.
+anonpreviewwarning|"ܠܐ ܐܝܬܝܟ ܥܠܝܠܐ. ܠܒܟܬܐ ܕܦܐܬܐ ܢܬܟܬܒ ܐܝ ܦܝ (IP) ܕܝܠܟ ܒܬܫܥܝܬܐ ܕܫܘܚܠܦܐ ܕܦܐܬܐ."
+summary-preview|ܚܝܪܐ ܩܕܡܝܐ ܕܦܣܝܩܬ̈ܐ :
+blockedtitle|ܡܦܠܚܢܐ ܗܘ ܡܚܪܡܐ
+blockednoreason|ܠܝܬ ܥܠܬܐ ܝܗܝܒܬܐ
+nosuchsectiontitle|ܠܐ ܡܨܐ ܐܫܟܚ ܡܢܬܐ
+loginreqlink|ܥܘܠ
+accmailtitle|ܡܠܬܐ ܕܥܠܠܐ ܫܕܪܬ
+newarticle|(ܚܕܬܐ)
+newarticletext|ܐܬܬ ܒܬܪ ܐܣܪܐ ܕܦܐܬܐ ܕܠܐ ܐܬܬܣܝܡܬ ܥܕܡܫ.\nܠܣܘܝܡܐ ܕܦܐܬܐ ܗܕܐ، ܫܪܝ ܠܟܬܒܬܐ ܒܣܢܕܘܩܐ ܠܬܚܬ (ܚܙܝ [~{0} ܦܐܬܐ ܕܥܘܕܪܢܐ] ܠܐܚܪܢܐ ܝܕ̈ܥܬܐ).\nܐܢ ܐܬܬ ܠܗܪܟܐ ܦܘܕܐܝܬ، ܟܒܘܫ ܥܠ ܦܪܡܝܬܐ ܕ '''ܠܒܣܬܪ back''' ܒܡܦܐܬܢܐ ܕܝܠܟ.
+updated|(ܐܬܚܕܬ)
+note|'''ܡܥܝܪܢܘܬܐ:'''
+previewnote|'''ܕܟܪ ܕܗܢܘ ܚܝܪܐ ܩܕܡܝܐ ܒܠܚܘܕ'''.\nܫܘܚܠܦ̈ܐ ܕܝܠܟ ܠܐ ܐܬܠܒܟܘ ܥܕܡܐ ܠܗܫܐ!
+continue-editing|ܙܠ ܠܝܬܒܐ ܕܫܘܚܠܦܐ
+editing|ܫܚܠܦܬܐ ܕ ~{0}
+creating|ܣܘܝܡܐ ܕ ~{0}
+editingsection|ܫܚܠܦܬܐ ܕ ~{0} (ܡܢܬܐ)
+editingcomment|ܫܚܠܦܬܐ ܕ ~{0} (ܡܢܬܐ ܚܕܬܐ)
+yourtext|ܟܬܒܬܐ ܕܝܠܟ
+storedversion|ܬܢܝܬ̈ܐ ܐܣܝܢ̈ܐ
+editingold|'''ܙܘܗܪܐ: ܫܚܠܦ ܐܢܬ ܬܢܝܬܐ ܥܬܝܩܬܐ ܕܦܐܬܐ ܗܕܐ.'''\nܐܢ ܠܒܟ ܐܢܬ ܦܐܬܐ ܗܕܐ, ܟܠ ܫܘ̈ܚܠܦܐ ܕܐܬܥܒܕܘ ܒܬܪ ܗܕܐ ܬܢܝܬܐ ܢܬܛܠܩܘܢ.
+yourdiff|ܦܪ̈ܝܫܘܝܬܐ
+templatesused|{{PLURAL:~{0}\u007Cܩܠܒܐ\u007Cܩܠܒ̈ܐ}} ܒܦܐܬܐ ܗܕܐ:
+template-protected|(ܢܛܝܪܐ)
+template-semiprotected|(ܕܡܘܬ ܢܛܝܪܐ)
+nocreate-loggedin|ܠܝܬ ܠܟ ܦܣܣܐ ܕܒܪܝܐ ܕܦܐܬܐ ܗܕܐ.
+permissionserrors|ܦܘܕܐ ܕܦܣܣܐ
+permissionserrorstext-withaction|ܠܝܬ ܠܟ ܦܣܣܐ ܠ~{1}, ܒ{{PLURAL:~{0}\u007Cܥܠܬܐ\u007Cܥܠܬ̈ܐ}} ܕ:
+log-fulllog|ܚܙܝ ܣܓܠܐ ܓܡܝܪܐ
+postedit-confirmation-saved|ܫܘܚܠܦܟ ܐܬܠܒܟ.
+edit-already-exists|ܒܪܝܐ ܕܦܐܬܐ ܚܕܬܐ ܠܐ ܡܬܡܨܝܢܐ.\nܗܕܐ ܦܐܬܐ ܐܝܬ ܡܢ ܟܕܘ.
+editwarning-warning|ܐܢ ܫܒܩܬ ܦܐܬܐ ܗܕܐ ܡܬܡܨܝܢܬܐ ܐܝܬܝܗ ܕܚܣܪܬ ܟܠ ܫܘܚܠܦ̈ܐ ܕܥܒܝܕܬ ܗܪܟܐ.\nܡܨܬ ܕܬܒܛܠ ܙܘܗܪܐ ܗܢܐ ܐܢ ܥܠܝܠܐ ܐܝܬܝܟ ܒܡܢܬܐ ܕ"ܫܚܠܦܬܐ" ܒܨܒܝܢܝܘܬ̈ܐ.
+undo-summary|ܠܐ ܬܥܒܕ ~{0} ܒܝܕ [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007Cܡܡܠܠܐ]])
+cantcreateaccounttitle|ܒܪܝܐ ܕܚܘܫܒܢܐ ܠܐ ܡܬܡܨܝܢܐ
+viewpagelogs|ܚܙܝ ܣܓܠ̈ܐ ܕܦܐܬܐ ܗܕܐ
+nohistory|ܠܝܬ ܬܫܥܝܬܐ ܕܫܘܚܠܦ̈ܐ ܠܦܐܬܐ ܗܕܐ
+currentrev|ܬܢܝܬܐ ܗܫܝܬܐ
+currentrev-asof|ܬܢܝܬܐ ܗܫܝܬܐ ܒܣܝܩܘܡ ~{0}
+revisionasof|ܬܢܝܬܐ ܒܣܝܩܘܡ ~{0}
+revision-info|ܬܢܝܬܐ ܒܣܝܩܘܡ ~{0} ܒܝܕ ~{1}
+previousrevision|← ܬܢܝܬܐ ܕܩܕܡ
+nextrevision|ܬܢܝܬܐ ܕܒܬܪ →
+currentrevisionlink|ܬܢܝܬܐ ܗܫܝܬܐ
+cur|ܗܫܝܐ
+next|ܕܒܬܪ
+last|ܕܩܕܡ
+page_first|ܩܕܡܝܐ
+page_last|ܐܚܪܝܐ
+histlegend|ܓܒܝܐ ܕܦܘܪܫܐ: ܓܒܝ ܣܢܕ̈ܘܩܐ ܕܬܢܝܬ̈ܐ ܠܦܘܚܡܐ ܘܕܘܫ '''Enter''' ܐܘ '''ܦܚܘܡ ܒܝܢܝ ܬܪܝܢ ܬܢܝܬ̈ܐ ܓܒܝܬ̈ܐ'''.<br />\nܩܠܝܕܐ: '''({{int:cur}})''' = ܦܘܪܫܐ ܥܡ ܬܢܝܬܐ ܗܫܝܬܐ,\n'''({{int:last}})''' = ܦܘܪܫܐ ܥܡ ܬܢܝܬܐ ܩܕܝܡܬܐ, '''{{int:minoreditletter}}''' = ܫܘܚܠܦܐ ܙܥܘܪܐ.
+history-fieldset-title|ܡܦܐܬ ܬܫܥܝܬܐ
+history-show-deleted|ܫܝܦܬ̈ܐ ܒܠܚܘܕ
+histfirst|ܩܕܝܡ ܡܢ ܟܠ
+histlast|ܚܕܬ ܡܢ ܟܠ
+historyempty|(ܣܦܝܩܐ)
+history-feed-title|ܬܫܥܝܬܐ ܕܬܢܝܬܐ
+history-feed-description|ܬܫܥܝܬܐ ܕܬܢܝܬܐ ܕܗܕܐ ܦܐܬܐ ܥܠ ܘܝܩܝ
+history-feed-item-nocomment|~{0} ܒ ~{1}
+rev-delundel|ܚܘܝ/ܛܫܝ
+rev-showdeleted|ܚܘܝ
+revisiondelete|ܫܘܦ/ܠܐ ܫܘܦ ܬܢܝܬ̈ܐ
+revdelete-show-file-submit|ܐܝܢ
+revdelete-hide-text|ܟܬܒܬܐ ܕܬܢܝܬܐ
+revdelete-hide-image|ܛܫܝ ܚܒܝܫܬ̈ܐ ܕܠܦܦܐ
+revdelete-hide-name|ܛܫܝ ܥܒܕܐ ܘܢܘܦܐ
+revdelete-hide-comment|ܫܚܠܦ ܟܪܝܘܬܐ ܕܫܘܚܠܦܐ
+revdelete-hide-user|ܫܡܐ ܕܡܦܠܚܢܐ ܕܡܫܚܠܦܢܐ/ܐܝ ܦܝ (IP)
+revdelete-radio-same|(ܠܐ ܬܫܚܠܦ)
+revdelete-radio-set|ܛܫܝܐ
+revdelete-radio-unset|ܓܠܝܐ
+revdelete-log|ܥܠܬܐ:
+revdel-restore|ܫܚܠܦ ܚܙܝܬܐ
+pagehist|ܬܫܥܝܬܐ ܕܦܐܬܐ
+deletedhist|ܬܫܥܝܬܐ ܫܝܦܬܐ
+revdelete-otherreason|ܥܠܬܐ ܐܚܪܬܐ/ܢܩܝܦܬܐ:
+revdelete-reasonotherlist|ܥܠܬܐ ܐܚܪܬܐ
+revdelete-edit-reasonlist|ܫܚܠܦ ܥܠܠܬ̈ܐ ܕܫܝܦܐ
+revdelete-offender|ܣܝܘܡܐ ܕܬܢܝܬܐ:
+mergehistory|ܚܒܘܛ ܬܫܥܝܬ̈ܐ ܕܦܐܬܐ
+mergehistory-box|ܚܒܘܛ ܬܢܝܬ̈ܐ ܕܬܪܬܝܢ ܦܐܬܬ̈ܐ
+mergehistory-from|ܦܐܬܐ ܕܡܒܘܥܐ:
+mergehistory-into|ܦܐܬܐ ܕܢܘܦܐ:
+mergehistory-submit|ܚܒܘܛ ܬܢܝܬ̈ܐ
+mergehistory-no-source|ܦܐܬܐ ܕܡܒܘܥܐ ~{0} ܠܝܬ.
+mergehistory-autocomment|ܚܒܛ [[:~{0}]] ܒ [[:~{1}]]
+mergehistory-comment|ܚܒܛ [[:~{0}]] ܒ [[:~{1}]]: ~{2}
+mergehistory-reason|ܥܠܬܐ:
+mergelog|ܣܓܠܐ ܕܚܒܛܐ
+revertmerge|ܒܛܘܠ ܚܒܛܐ
+history-title|"~{0}": ܬܫܥܝܬܐ ܕܬܢܝܬܐ
+difference-title|«~{0}»: ܦܘܪܫܐ ܒܝܢܝ ܬܢܝܬ̈ܐ
+difference-title-multipage|«~{0}» ܘ«~{1}»: ܦܘܪܫܐ ܒܝܢܝ ܬܢܝܬ̈ܐ
+difference-multipage|(ܦܘܪܫܐ ܒܝܢܝ ܦܐܬܬ̈ܐ)
+lineno|ܣܪܛܐ ~{0}:
+compareselectedversions|ܦܚܘܡ ܒܝܢܝ  ܬܪܝܢ ܬܢܝܬ̈ܐ ܓܒܝܬ̈ܐ
+showhideselectedversions|ܚܘܝ/ܛܫܝ ܬܢܝܬ̈ܐ ܓܒܝܬ̈ܐ
+editundo|ܠܐ ܬܥܒܕ
+diff-multi-manyusers|({{PLURAL:~{0}\u007Cܚܕܐ ܬܢܝܬܐ ܡܨܥܝܬܐ ܠܐ ܓܠܝܚܬܐ\u007C~{0} ܬܢܝܬ̈ܐ ܡܨܥܝܬ̈ܐ ܠܐ ܓܠܝܚܬ̈ܐ}} ܒܝܕ ܝܬܝܪ ܡܢ ~{1} {{PLURAL:~{1}\u007Cܚܕ ܡܦܠܚܢܐ\u007Cܡܦܠܚܢ̈ܐ}})
+searchresults|ܦܠܛ̈ܐ ܕܒܨܝܐ
+searchresults-title|ܦܠܛ̈ܐ ܕܒܨܝܐ ܥܠ "~{0}"
+titlematches|ܫܡܐ ܕܦܐܬܐ ܐܘܝܢܐ
+textmatches|ܟܬܒܬܐ ܐܘܝܢܬܐ
+notextmatches|ܠܝܬ ܟܬܒܬܐ ܐܘܝܢܬܐ
+prevn-title|~{0} {{PLURAL:~{0}\u007Cܦܠܛܐ\u007Cܦܠܛ̈ܐ}} ܕܩܕܡ
+nextn-title|~{0} {{PLURAL:~{0}\u007Cܦܠܛܐ\u007Cܦܠܛ̈ܐ}} ܕܒܬܪ
+shown-title|ܚܘܝ ~{0} {{PLURAL:~{0}\u007Cܦܠܛܐ\u007Cܦܠܛ̈ܐ}} ܠܟܠ ܦܐܬܐ
+viewprevnext|ܚܘܝ (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|'''ܐܝܬ ܦܐܬܐ ܒܫܡ "[[:~{0}]]" ܥܠ ܗܢܐ ܘܝܩܝ'''
+searchmenu-new|'''ܒܪܝ ܦܐܬܐ "[[:~{0}]]" ܥܠ ܗܢܐ ܘܝܩܝ!'''
+searchprofile-articles|ܦܐܬܬ̈ܐ ܕܚܒܝܫܬ̈ܐ
+searchprofile-images|ܡܝܕ̈ܝܐ ܣܓܝܐ̈ܐ (Multimedia)
+searchprofile-everything|ܟܠ ܡܕܡ
+searchprofile-advanced|ܡܬܩܕܡܢܐ
+searchprofile-articles-tooltip|ܒܨܝ ܒܓܘ ~{0}
+searchprofile-images-tooltip|ܒܨܝ ܥܠ ܠܦܦ̈ܐ
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 ܡܠܬܐ\u007C~{1} ܡܠ̈ܐ}})
+search-redirect|(ܨܝܒ ~{0})
+search-section|(ܡܢܬܐ ~{0})
+search-suggest|ܐܪܐ ܣܟܠܬ ܗܘܐ: ~{0}
+search-interwiki-caption|ܬܪ̈ܡܝܬܐ ܐܚܘܬ̈ܐ
+search-interwiki-default|ܦܠܛ̈ܐ ܕ ~{0}:
+search-interwiki-more|(ܝܬܝܪ)
+search-relatedarticle|ܐܚܝܢܝ̈ܐ
+searchrelated|ܐܚܝܢܝ̈ܐ
+searchall|ܟܠ
+showingresults|ܚܘܘܝܐ ܠܬܚܬ {{PLURAL:~{0}\u007C'''1''' ܦܠܛܐ\u007C'''~{0}''' ܦܠܛ̈ܐ}} ܫܪܐ ܡܢ ܡܢܝܢܐ '''~{1}'''.
+search-nonefound|ܠܝܬ ܦܠܛ̈ܐ ܐܘܝܢ̈ܐ ܠܗܢܐ ܒܨܝܐ.
+powersearch-legend|ܒܨܝܐ ܡܬܩܕܡܢܐ
+powersearch-ns|ܒܨܝ ܒܚܩܠܬ̈ܐ:
+powersearch-togglelabel|ܓܒܝ:
+powersearch-toggleall|ܟܠ
+powersearch-togglenone|ܠܐ ܡܕܡ
+search-external|ܒܨܝܐ ܒܪܝܐ
+preferences|ܨܒܝܢܝܘܬ̈ܐ
+mypreferences|ܨܒܝܢܝܘܬ̈ܐ
+prefs-edits|ܡܢܝܢܐ ܕܫܘܚܠܦ̈ܐ:
+prefs-skin|ܓܠܕܐ
+skin-preview|ܚܝܪܐ ܩܕܡܝܐ
+datedefault|ܠܐ ܨܒܝܢܝܘܬܐ
+prefs-personal|ܦܘܓܪܦܐ ܕܡܦܠܚܢܐ
+prefs-rc|ܫܘܚܠܦ̈ܐ ܚܕ̈ܬܐ
+prefs-watchlist|ܪ̈ܗܝܬܐ
+prefs-watchlist-days|ܝܘܡܬ̈ܐ ܠܚܙܝܐ ܒܪ̈ܗܝܬܐ:
+prefs-watchlist-days-max|ܠܡܬܚܐ ܥܠܝܐ ܕ ~{0} {{PLURAL:~{0}\u007Cܝܘܡܐ\u007Cܝܘܡܬ̈ܐ}}
+prefs-misc|ܦܪ̈ܝܫܬܐ
+prefs-resetpass|ܫܚܠܦ ܡܠܬܐ ܕܥܠܠܐ
+prefs-changeemail|ܫܚܠܦ ܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ
+prefs-email|ܓܒܝܬ̈ܐ ܕܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ
+prefs-rendering|ܐܣܟܝܡܐ
+saveprefs|ܠܒܘܟ
+prefs-editing|ܫܚܠܦܬܐ
+rows|ܨ̈ܦܐ
+columns|ܥܡܘܕ̈ܐ:
+searchresultshead|ܒܨܝ
+recentchangesdays|ܝܘܡܬ̈ܐ ܠܚܙܝܐ ܒܫܘܚܠܦ̈ܐ ܚܕ̈ܬܐ:
+recentchangescount|ܡܢܝܢܐ ܕܫܘܚܠܦ̈ܐ ܠܚܙܝܐ ܪܫܐܝܬ:
+savedprefs|ܨܒܝܢܝܘܬ̈ܟ ܐܬܠܒܟܘ.
+timezonelegend|ܙܘܢܐ ܙܒܢܝܐ:
+localtime|ܥܕܢܐ ܕܘܟܬܝܐ:
+timezoneregion-africa|ܐܦܪܝܩܐ
+timezoneregion-america|ܐܡܪܝܩܐ
+timezoneregion-antarctica|ܐܢܛܐܪܩܛܝܩܐ
+timezoneregion-asia|ܐܣܝܐ
+timezoneregion-atlantic|ܐܘܩܝܢܘܣ ܐܛܠܢܛܝܐ
+timezoneregion-australia|ܐܘܣܛܪܠܝܐ
+timezoneregion-europe|ܐܘܪܘܦܐ
+timezoneregion-indian|ܐܘܩܝܢܘܣ ܗܢܕܘܝܐ
+timezoneregion-pacific|ܐܘܩܝܢܘܣ ܫܩܛܝܐ
+prefs-searchoptions|ܒܨܝܐ
+prefs-namespaces|ܚܩܠܬ̈ܐ
+prefs-files|ܠܦܦ̈ܐ
+prefs-emailconfirm-label|ܫܘܪܪܐ ܕܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ:
+youremail|ܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ:
+username|{{GENDER:~{0}\u007Cܫܡܐ ܕܡܦܠܚܢܐ\u007Cܫܡܐ ܕܡܦܠܚܢܬܐ}}:
+prefs-memberingroups|{{GENDER:~{1}\u007Cܗܕܡܐ}} ܕ{{PLURAL:~{0}\u007Cܟܢܘܫܬܐ\u007Cܟܢܘܫܬ̈ܐ}}:
+prefs-registration|ܙܒܢܐ ܕܣܘܓܠܐ:
+yourrealname|ܫܡܐ ܫܪܝܪܐ:
+yourlanguage|ܠܫܢܐ:
+yournick|ܪܡܝ ܐܝܕܐ:
+badsiglength|ܪܡܝ ܐܝܕܟ ܣܓܝ ܐܪܝܟܬܐ.\nܐܠܨܐ ܠܟ ܠܐ ܝܬܝܪ ܡܢ ~{0} {{PLURAL:~{0}\u007Cܐܬܘܬܐ\u007Cܐܬܘܬ̈ܐ}} ܐܪܝܟܬܐ ܗܘܬ.
+yourgender|ܐܝܟܢܐ ܬܨܒܐ ܕܬܫܬܡܗ؟
+gender-unknown|ܐܘܬܪ ܕܠܐ ܐܗܒ ܐܪ̈ܝܟܬܐ
+gender-male|ܗܘ ܫܚܠܦ ܦܐܬܬ̈ܐ ܕܘܝܩܝ
+gender-female|ܗܝ ܫܚܠܦܬ ܦܐܬܬ̈ܐ ܕܘܝܩܝ
+prefs-help-gender|ܨܒܝܢܝܐ: ܐܬܦܠܚ ܠܡܬܡܠܠ ܒܓܢܣܐ ܬܪܝܨܐ ܒܝܕ ܬܚܪܙܬܐ.\nܝܕܥܬܐ ܗܕܐ ܬܗܘܐ ܓܠܝܬܐ ܠܥܠܡܐ.
+email|ܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ
+prefs-info|ܝܕ̈ܥܬܐ ܪ̈ܫܝܬܐ
+prefs-i18n|ܬܘܪܓܡܐ
+prefs-signature|ܪܡܝ ܐܝܕܐ
+prefs-dateformat|ܚܫܠܬܐ ܕܣܝܩܘܡܐ
+prefs-advancedediting|ܓܒܝܬ̈ܐ ܓܘܢܝܬ̈ܐ
+prefs-advancedrc|ܓܒܝܬ̈ܐ ܡܬܩܕ̈ܡܢܐ
+prefs-advancedrendering|ܓܒܝܬ̈ܐ ܡܬܩܕ̈ܡܢܐ
+prefs-advancedsearchoptions|ܓܒܝܬ̈ܐ ܡܬܩܕ̈ܡܢܐ
+prefs-advancedwatchlist|ܓܒܝܬ̈ܐ ܡܬܩܕ̈ܡܢܐ
+prefs-displayrc|ܓܒܝܬ̈ܐ ܕܚܘܘܝܐ
+prefs-displaywatchlist|ܓܒܝܬ̈ܐ ܕܚܘܘܝܐ
+prefs-diffs|ܦܪ̈ܝܫܘܝܬܐ
+userrights|ܡܕܒܪܢܘܬܐ ܕܙܕ̈ܩܐ ܕܡܦܠܚܢܐ
+userrights-lookup-user|ܕܒܪ ܟܢܘܫܝ̈ܐ ܕܡܦܠܚܢܐ
+userrights-user-editname|ܐܥܠ ܫܡܐ ܕܡܦܠܚܢܐ:
+editusergroup|ܫܚܠܦ ܟܢܘܫܝ̈ܐ ܕܡܦܠܚܢܐ
+userrights-editusergroup|ܫܚܠܦ ܟܢܘܫܝ̈ܐ ܕܡܦܠܚܢܐ
+saveusergroups|ܠܒܘܟ ܟܢܘܫܝ̈ܐ ܕܡܦܠܚܢܐ
+userrights-groupsmember|ܗܕܡܐ ܒ:
+userrights-reason|ܥܠܬܐ:
+group|ܟܢܘܫܬܐ:
+group-user|ܡܦܠܚܢ̈ܐ
+group-autoconfirmed|ܡܦܠܚܢ̈ܐ ܡܫܪܪ̈ܐ ܝܬܐܝܬ
+group-bot|ܒܘܬ̈ܐ
+group-sysop|ܡܕܒܪ̈ܢܐ
+group-bureaucrat|ܒܝܪܘܩܪ̈ܛܐ
+group-suppress|ܚܝܘܪ̈ܐ
+group-all|(ܟܠ)
+group-user-member|{{GENDER:~{0}\u007Cܡܦܠܚܢܐ\u007Cܡܦܠܚܢܬܐ}}
+group-autoconfirmed-member|{{GENDER:~{0}\u007Cܡܦܠܚܢܐ ܡܫܪܪܐ ܝܬܐܝܬ\u007Cܡܦܠܚܢܬܐ ܡܫܪܪܬܐ ܝܬܐܝܬ}}
+group-bot-member|{{GENDER:~{0}\u007Cܒܘܬ (Bot)}}
+group-sysop-member|{{GENDER:~{0}\u007Cܡܕܒܪܢܐ\u007Cܡܕܒܪܢܬܐ}}
+group-bureaucrat-member|{{GENDER:~{0}\u007Cܒܝܪܘܩܪܛܐ}}
+group-suppress-member|{{GENDER:~{0}\u007Cܚܝܘܪܐ\u007Cܚܝܘܪܬܐ}}
+grouppage-user|{{ns:project}}:ܡܦܠܚܢ̈ܐ
+grouppage-autoconfirmed|{{ns:project}}:ܡܦܠܚܢ̈ܐ ܡܫܪܪ̈ܐ ܝܬܐܝܬ
+grouppage-bot|{{ns:project}}:ܒܘܬ̈ܐ
+grouppage-sysop|{{ns:project}}:ܡܕܒܪ̈ܢܐ
+grouppage-bureaucrat|{{ns:project}}:ܒܝܪܘܩܪ̈ܛܐ
+grouppage-suppress|{{ns:project}}:ܚܝܘܪܐ
+right-read|ܩܪܝ ܦܐܬܬ̈ܐ
+right-edit|ܫܚܠܦ ܦܐܬܬ̈ܐ
+right-createtalk|ܒܪܝ ܦܐܬܬ̈ܐ ܕܡܡܠܠܐ
+right-createaccount|ܒܪܝ ܚܘܫܒܢ̈ܐ ܕܡܦܠܚܢܐ ܚܕܬܐ
+right-minoredit|ܫܘܕܥ ܥܠ ܫܘܚܠܦ̈ܐ ܐܝܟ ܙܥܘܪܐ
+right-move|ܫܢܝ ܦܐܬܬ̈ܐ
+right-move-subpages|ܫܢܝ ܦܐܬܬ̈ܐ ܥܡ ܦܐܬܬ̈ܐ ܦܪ̈ܥܝܐ ܕܝܠܗܘܢ
+right-movefile|ܫܢܝ ܠܦܦ̈ܐ
+right-upload|ܐܣܩ ܠܦܦ̈ܐ
+right-delete|ܫܘܦ ܦܐܬܬ̈ܐ
+right-bigdelete|ܫܘܦ ܦܐܬܬ̈ܐ ܥܡ ܬܫܥܝܬ̈ܐ ܪ̈ܒܬܐ
+right-browsearchive|ܒܨܝ ܦܐܬܬ̈ܐ ܫܝܦܬ̈ܐ
+right-undelete|ܠܐ ܫܘܦ ܦܐܬܬ̈ܐ
+right-suppressionlog|ܚܙܝ ܣܓܠ̈ܐ ܦܪ̈ܨܘܦܝܐ
+right-block|ܚܪܘܡ ܡܦܠܚܢ̈ܐ ܐܚܪ̈ܢܐ ܡܢ ܫܚܠܦܬܐ
+right-mergehistory|ܚܒܘܛ ܬܫܥܝܬܐ ܕܦܐܬܬ̈ܐ
+right-userrights|ܫܚܠܦ ܟܠ ܙܕ̈ܩܐ ܕܡܦܠܚܢܐ
+newuserlogpage|ܣܓܠܐ ܕܒܪܝܬܐ ܕܡܦܠܚܢܐ
+newuserlogpagetext|ܗܢܘ ܣܓܠܐ ܕܒܪܝܐ ܕܡܦܠܚܢ̈ܐ
+rightslog|ܣܓܠܐ ܕܙܕ̈ܩܐ ܕܡܦܠܚܢܐ
+rightslogtext|ܗܢܘ ܣܓܠܐ ܕܫܘܚܠܦ̈ܐ ܕܙܕ̈ܩܐ ܕܡܦܠܚܢܐ.
+action-read|ܩܪܝ ܦܐܬܐ ܗܕܐ
+action-edit|ܫܚܠܦܬܐ ܕܦܐܬܐ ܗܕܐ
+action-createpage|ܒܪܝܬܐ ܕܦܐܬܬ̈ܐ
+action-createtalk|ܒܪܝܬܐ ܕܦܐܬܬ̈ܐ ܕܡܡܠܠܐ
+action-createaccount|ܒܪܝܬܐ ܕܚܘܫܒܢܐ ܕܗܢܐ ܡܦܠܚܢܐ
+action-minoredit|ܫܘܕܥܬܐ ܥܠ ܫܘܚܠܦܐ ܗܢܐ ܐܝܟ ܙܥܘܪܐ
+action-move|ܫܢܝܬܐ ܕܦܐܬܐ ܗܕܐ
+action-move-rootuserpages|ܫܢܝܬܐ ܕܦܐܬܬ̈ܐ ܫܪ̈ܫܝܬܐ ܕܡܦܠܚܢܐ
+action-movefile|ܫܢܝܬܐ ܕܗܢܐ ܠܦܦܐ
+action-upload|ܐܣܩܬܐ ܕܗܢܐ ܠܦܦܐ
+action-delete|ܫܝܦܬܐ ܕܦܐܬܐ ܗܕܐ
+action-deleterevision|ܫܝܦܬܐ ܕܬܢܝܬܐ ܗܕܐ
+action-deletedhistory|ܚܙܝܬܐ ܕܬܫܥܝܬܐ ܫܝܦܬܐ ܕܦܐܬܐ ܗܕܐ
+action-browsearchive|ܒܨܝܐ ܥܠ ܦܐܬܬ̈ܐ ܫܝܦܬ̈ܐ
+action-undelete|ܠܐ ܫܘܦ ܦܐܬܐ ܗܕܐ
+action-suppressionlog|ܚܙܝܬܐ ܕܗܢܐ ܣܓܠܐ ܦܪܨܘܦܝܐ
+action-block|ܚܪܡܬܐ ܕܡܦܠܚܢܐ ܗܢܐ ܡܢ ܫܚܠܦܬܐ
+action-mergehistory|ܚܒܛܬܐ ܕܬܫܥܝܬܐ ܕܦܐܬܐ ܗܕܐ
+action-userrights|ܫܚܠܦܬܐ ܕܟܠ ܙܕ̈ܩܐ ܕܡܦܠܚܢܐ
+nchanges|~{0} {{PLURAL:~{0}\u007Cܫܘܚܠܦܐ\u007Cܫܘܚܠܦ̈ܐ}}
+recentchanges|ܫܘܚܠܦ̈ܐ ܚܕ̈ܬܐ
+recentchanges-legend|ܓܒܝܬ̈ܐ ܕܫܘܚܠܦ̈ܐ ܚܕ̈ܬܐ
+recentchanges-summary|ܥܩܒ ܫܘܚܠܦ̈ܐ ܚܕܬ ܡܢ ܟܠ ܕܘܝܩܝ ܒܦܐܬܐ ܗܕܐ.
+recentchanges-feed-description|ܥܩܒ ܫܘܚܠܦ̈ܐ ܚܕܬ ܡܢ ܟܠ ܕܘܝܩܝ ܒܝܕ ܗܕܐ ܬܪܣܝܬܐ.
+recentchanges-label-newpage|ܫܘܚܠܦܐ ܗܢܐ ܐܬܬܣܝܡ ܦܐܬܐ ܚܕܬܐ
+recentchanges-label-minor|ܗܢܘ ܫܘܚܠܦܐ ܙܥܘܪܐ
+recentchanges-label-bot|ܒܘܬ (bot) ܥܒܕ ܗܢܐ ܫܘܚܠܦܐ
+recentchanges-label-unpatrolled|ܫܘܚܠܦܐ ܗܢܐ ܠܐ ܗܘ ܟܪܝܟܐ ܠܗܫܐ
+recentchanges-label-plusminus|ܥܓܪܐ ܕܦܐܬܐ ܐܫܬܚܠܦ ܒܗܢܐ ܡܢܝܢܐ ܡܢ ܒܝܛ̈
+recentchanges-legend-heading|'''ܦܘܫܩܐ:'''
+recentchanges-legend-newpage|{{int:recentchanges-label-newpage}} (ܐܦ ܚܙܝ [[Special:NewPages\u007Cܡܟܬܒܘܬܐ ܕܦܐܬܬ̈ܐ ܚܕ̈ܬܬܐ]])
+rcnotefrom|ܠܬܚܬ ܫܘܚܠܦ̈ܐ ܕܡܢ '''~{1}''' (ܥܕ '''~{0}''' ܡܬܚܙܝܢ̈ܐ).
+rclistfrom|ܚܘܝ ܫܘܚܠܦ̈ܐ ܚܕ̈ܬܐ ܡܢ ~{2} ~{1}
+rcshowhideminor|~{0} ܫܘܚܠܦ̈ܐ ܙܥܘܪ̈ܐ
+rcshowhideminor-show|ܚܘܝ
+rcshowhideminor-hide|ܛܫܝ
+rcshowhidebots|~{0} ܒܘܬ̈ܐ (Bots)
+rcshowhidebots-show|ܚܘܝ
+rcshowhidebots-hide|ܛܫܝ
+rcshowhideliu|~{0} ܡܦܠܚܢ̈ܐ ܡܣܓܠ̈ܐ
+rcshowhideliu-show|ܚܘܝ
+rcshowhideliu-hide|ܛܫܝ
+rcshowhideanons|~{0} ܡܦܠܚܢܐ ܠܐ ܝܕܝܥܐ
+rcshowhideanons-show|ܚܘܝ
+rcshowhideanons-hide|ܛܫܝ
+rcshowhidepatr|~{0} ܫܘܚܠܦ̈ܐ ܬܢܝ̈ܐ
+rcshowhidepatr-show|ܚܘܝ
+rcshowhidepatr-hide|ܛܫܝ
+rcshowhidemine|~{0} ܫܘܚܠܦ̈ܝ
+rcshowhidemine-show|ܚܘܝ
+rcshowhidemine-hide|ܛܫܝ
+rclinks|ܚܘܝ ~{0} ܫܘܚܠܦ̈ܐ ܐܚܪ̈ܝܐ ܒ ~{1} ܝܘܡܬ̈ܐ ܐܚܪ̈ܝܐ<br />~{2}
+diff|ܦܘܪܫܐ
+hist|ܬܫܥܝܬܐ
+hide|ܛܫܝ
+show|ܚܘܝ
+minoreditletter|ܙ
+newpageletter|ܚ
+boteditletter|ܒ
+rc_categories_any|ܐܝܢܐ ܕܗܘ
+rc-change-size-new|~{0} {{PLURAL:~{0}\u007Cܒܐܝܛ\u007Cܒܐܝܛ̈ܐ}} ܒܬܪ ܫܘܚܠܦܐ
+newsectionsummary|/* ~{0} */ ܡܢܬܐ ܚܕܬܐ
+rc-enhanced-expand|ܚܘܝ ܐܪ̈ܝܟܬܐ
+rc-enhanced-hide|ܛܫܝ ܐܪ̈ܝܟܬܐ
+rc-old-title|ܐܬܒܪܝ ܫܪܫܐܝܬ ܐܝܟ "~{0}"
+recentchangeslinked|ܫܘܚܠܦ̈ܐ ܕ̈ܡܝܐ
+recentchangeslinked-feed|ܫܘܚܠܦ̈ܐ ܕ̈ܡܝܐ
+recentchangeslinked-toolbox|ܫܘܚܠܦ̈ܐ ܕ̈ܡܝܐ
+recentchangeslinked-page|ܫܡܐ ܕܦܐܬܐ:
+upload|ܐܣܩ ܠܦܦܐ
+uploadbtn|ܐܣܩ ܠܦܦܐ
+uploadnologin|ܠܝܬܝܟ ܥܠܝܠܐ
+uploaderror|ܦܘܕܐ ܒܡܣܩܬܐ
+uploadlogpage|ܣܓܠܐ ܕܣܠܩܐ
+filename|ܫܡܐ ܕܠܦܦܐ
+filedesc|ܦܣܝܩܬ̈ܐ
+fileuploadsummary|ܦܣܝܩܬ̈ܐ:
+filereuploadsummary|ܫܘܚܠܦ̈ܐ ܕܠܦܦܐ:
+filestatus|ܐܝܟܢܝܘܬܐ ܕܙܕ̈ܩܐ ܕܛܒܥܐ
+filesource|ܡܒܘܥܐ:
+minlength1|ܫܡܗ̈ܐ ܕܠܦܦܐ ܘܠܐ ܕܢܗܘܐ ܒܪܝܐ ܡܢ ܐܬܘܬܐ ܚܕܐ ܟܕ ܙܥܘܪ
+uploadwarning|ܐܣܩ ܙܘܗܪܐ
+savefile|ܠܒܘܟ ܠܦܦܐ
+uploadvirus|ܠܦܦܐ ܐܝܬ ܒܗ ܒܝܪܘܣ!\nܐܪ̈ܝܟܬܐ: ~{0}
+upload-source|ܡܒܘܥܐ ܕܠܦܦܐ
+sourcefilename|ܫܡܐ ܕܠܦܦܐ ܡܒܘܥܐ
+sourceurl|URL ܡܒܘܥܐ:
+upload-maxfilesize|ܡܬܚܐ ܥܠܝܐ ܕܥܓܪܐ ܕܠܦܦܐ: ~{0}
+upload-description|ܫܘܡܗܐ ܕܠܦܦܐ
+upload-options|ܓܒܝܬ̈ܐ ܕܐܣܩܬܐ ܕܠܦܦܐ
+watchthisupload|ܪܗܝ ܗܢܐ ܠܦܦܐ
+upload-success-subj|ܠܦܦܐ ܐܣܩܬ ܢܨܝܚܐܝܬ
+upload-failure-subj|ܩܛܪܐ ܒܐܣܩܬܐ ܕܠܦܦܐ
+upload-failure-msg|ܐܝܬ ܗܘܐ ܩܛܪܐ ܒܠܦܦܐ ܕܐܣܩܬ ܡܢ [~{1}]:\n\n~{0}
+upload-warning-subj|ܙܘܗܪܐ ܥܠ ܐܣܩܬܐ ܕܠܦܦܐ
+upload-proto-error|ܦܪܘܛܘܩܘܠ ܠܐ ܬܪܝܨܐ
+upload-file-error|ܦܘܕܐ ܓܘܝܐ
+upload-misc-error|ܦܘܕܐ ܠܐ ܝܕܝܥܐ ܒܐܣܩܬܐ ܕܠܦܦܐ
+img-auth-nofile|ܠܦܦܐ "~{0}" ܠܝܬ ܠܗ ܐܝܬܘܬܐ.
+http-read-error|HTTP ܦܘܕܐ ܒܩܪܝܬܐ.
+http-curl-error|ܦܘܕܐ ܒܫܟܚܐ ܕURL: ~{0}
+license|ܦܣܣܐ:
+license-header|ܦܣܣܐ
+license-nopreview|(ܠܝܬ ܚܝܪܐ ܩܕܡܝܐ)
+upload_source_file| (ܠܦܦܐ ܥܠ ܚܫܘܒܬܐ ܕܝܠܟ)
+listfiles-summary|ܦܐܬܐ ܕܝܠܢܝܬܐ ܗܕܐ ܬܓܠܚ ܟܠ ܠܦܦ̈ܐ ܡܣܩ̈ܐ.
+listfiles_search_for|ܒܨܝ ܥܠ ܫܡܐ ܕܡܝܕܝܐ:
+imgfile|ܠܦܦܐ
+listfiles|ܡܟܬܒܘܬܐ ܕܠܦܦ̈ܐ
+listfiles_thumb|ܙܘܥܪܐ
+listfiles_date|ܣܝܩܘܡܐ
+listfiles_name|ܫܡܐ
+listfiles_user|ܡܦܠܚܢܐ
+listfiles_size|ܥܓܪܐ
+listfiles_description|ܫܘܡܗܐ
+listfiles_count|ܨܚܚ̈ܐ
+file-anchor-link|ܠܦܦܐ
+filehist|ܬܫܥܝܬܐ ܕܠܦܦܐ
+filehist-deleteall|ܫܘܦ ܟܠ
+filehist-deleteone|ܫܘܦ
+filehist-revert|ܐܦܢܝ
+filehist-current|ܗܫܝܐ
+filehist-datetime|ܣܝܩܘܡܐ/ܙܒܢܐ
+filehist-thumb|ܨܘܪܬܐ ܙܥܘܪܬܐ
+filehist-nothumb|ܠܐ ܙܥܘܪܬܐ
+filehist-user|ܡܦܠܚܢܐ
+filehist-dimensions|ܩܝܡ̈ܐ
+filehist-filesize|ܥܓܪܐ ܕܠܦܦܐ
+filehist-comment|ܥܘܩܒܐ
+imagelinks|ܡܦܠܚܬܐ ܕܠܦܦܐ
+linkstoimage|{{PLURAL:~{0}\u007Cܦܐܬܐ ܗܕܐ ܐܣܪ\u007C~{0} ܦܐܬܬ̈ܐ ܗܠܝܢ ܐܣܪܝܢ}} ܥܡ ܗܢܐ ܠܦܦܐ:
+nolinkstoimage|ܠܝܬ ܦܐܬܐ ܕܐܣܪ ܠܗܢܐ ܠܦܦܐ.
+uploadnewversion-linktext|ܐܣܩ ܨܚܚܐ ܚܕܬܐ ܡܢ ܗܢܐ ܠܦܦܐ
+shared-repo-from|ܡܢ ~{0}
+filerevert-comment|ܥܠܬܐ:
+filedelete|ܫܘܦ ~{0}
+filedelete-legend|ܫܘܦ ܠܦܦܐ
+filedelete-comment|ܥܠܬܐ:
+filedelete-submit|ܫܘܦ
+filedelete-success|'''~{0}''' ܐܫܬܝܦ.
+filedelete-nofile|'''~{0}''' ܠܝܬ.
+filedelete-otherreason|ܥܠܬܐ ܐܚܪܬܐ:
+filedelete-reason-otherlist|ܥܠܬܐ ܐܚܪܬܐ
+filedelete-edit-reasonlist|ܫܚܠܦ ܥܠܠܬ̈ܐ ܕܫܝܦܐ
+mimesearch|MIME ܒܨܝܐ
+mimetype|MIME ܐܕܫܐ:
+download|ܐܚܬ
+unwatchedpages|ܦܐܬܬ̈ܐ ܠܐ ܪ̈ܗܝܬܐ
+listredirects|ܡܟܬܒܘܬܐ ܕܨܘܝܒ̈ܐ
+unusedtemplates|ܩܠܒ̈ܐ ܠܐ ܦܠܝܚ̈ܐ
+unusedtemplateswlh|ܐܣܘܪ̈ܐ ܐܚܪ̈ܢܐ
+randompage|ܡܓܠܬܐ ܚܘܝܚܬܐ
+randompage-nopages|ܠܝܬ ܦܐܬܬ̈ܐ ܒ{{PLURAL:~{1}\u007Cܚܩܠܐ ܕ\u007Cܚܩܠܬ̈ܐ ܕ}}: ~{0}.
+randomredirect|ܨܘܝܒ̈ܐ ܚܘܝܚ̈ܐ
+randomredirect-nopages|ܠܝܬ ܨܘܝܒ̈ܐ ܒܚܩܠܐ ܕ"~{0}".
+statistics-header-edits|ܚܒܝܫܘܬ ܡܢܝܢܐ ܕܫܘܚܠܦ̈ܐ
+statistics-header-users|ܚܒܝܫܘܬ ܡܢܝܢܐ ܕܡܦܠܚܢܐ
+statistics-header-hooks|ܚܒܝܫܘܬ ܡܢܝܢܐ ܐܚܪܢܐ
+statistics-edits|ܫܘܚܠܦ̈ܐ ܕܦܐܬܬ̈ܐ ܡܢ ܫܘܪܝܐ ܕ {{SITENAME}}
+statistics-edits-average|ܡܨܥܐ ܕܫܘܚܠܦ̈ܐ ܠܟܠ ܦܐܬܐ
+statistics-users|[[Special:ListUsers\u007Cܡܦܠܚܢ̈ܐ]] ܡܣܓܠ̈ܐ
+statistics-users-active|ܡܦܠܚܢ̈ܐ ܙܪ̄ܝܙܐ
+pageswithprop|ܦܐܬܬ̈ܐ ܥܡ ܕܝܠܝܬܐ ܕܦܐܬܐ
+pageswithprop-legend|ܦܐܬܬ̈ܐ ܥܡ ܕܝܠܝܬܐ ܕܦܐܬܐ
+pageswithprop-prop|ܫܡܐ ܕܕܝܠܝܬܐ
+pageswithprop-submit|ܙܠ
+doubleredirects|ܨܘܝܒ̈ܐ ܥܦܝܦ̈ܐ
+double-redirect-fixed-move|[[~{0}]] ܐܫܬܢܝܬ.\nܗܫܐ ܐܝܬܝܗܝ  ܨܘܝܒܐ ܠ [[~{1}]].
+brokenredirects|ܨܘܝܒ̈ܐ ܬܒܝܪ̈ܐ
+brokenredirectstext|ܨܘ̈ܝܒܐ ܗܠܝܢ ܡܛܝܢ ܠܦܐܬܬ̈ܐ ܕܠܝܬܠܗܝܢ ܐܝܬܘܬܐ:
+brokenredirects-edit|ܫܚܠܦ
+brokenredirects-delete|ܫܘܦ
+withoutinterwiki|ܦܐܬܬ̈ܐ ܕܠܐ ܐܣܘܪ̈ܐ ܕܠܫܢ̈ܐ ܐܚܪ̈ܢܐ
+withoutinterwiki-summary|ܦܐܬܬ̈ܐ ܗܠܝܢ ܠܐ ܡܛܝܢ ܠܨ̈ܚܚܐ ܕܠܫܢ̈ܐ ܐܚܪ̈ܢܐ.
+withoutinterwiki-legend|ܫܪܘܝܐ
+withoutinterwiki-submit|ܚܘܝ
+fewestrevisions|ܦܐܬܬ̈ܐ ܥܡ ܬܢܝܬ̈ܐ ܒܨܝܪ ܡܢ ܟܠ
+nbytes|~{0} {{PLURAL:~{0}\u007Cܒܐܝܛ\u007Cܒܐܝܛ̈ܐ}}
+ncategories|~{0} {{PLURAL:~{0}\u007Cܣܕܪܐ\u007Cܣܕܪ̈ܐ}}
+nlinks|~{0} {{PLURAL:~{0}\u007Cܐܣܘܪܐ\u007Cܐܣܘܪ̈ܐ}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cܗܕܡܐ\u007Cܗܕ̈ܡܐ}}
+nrevisions|~{0} {{PLURAL:~{0}\u007Cܬܢܝܬܐ\u007Cܬܢܝܬ̈ܐ }}
+nviews|~{0} {{PLURAL:~{0}\u007Cܚܘܘܝܐ\u007Cܚܘܘܝ̈ܐ}}
+specialpage-empty|ܠܝܬ ܦܠܛ̈ܐ ܒܬܫܪܪܐ ܗܢܐ.
+lonelypages|ܦܐܬܬ̈ܐ ܝܬܡܬ̈ܐ
+uncategorizedpages|ܦܐܬܬ̈ܐ ܠܐ ܣܕܝܪ̈ܬܐ
+uncategorizedcategories|ܣܕܪ̈ܐ ܠܐ ܣܕܝܪ̈ܐ
+uncategorizedimages|ܠܦܦ̈ܐ ܠܐ ܣܕܝܪ̈ܐ
+uncategorizedtemplates|ܩܠܒ̈ܐ ܠܐ ܣܕܝܪ̈ܐ
+unusedcategories|ܣܕܪ̈ܐ ܠܐ ܦܠܝܚ̈ܐ
+unusedimages|ܠܦܦ̈ܐ ܠܐ ܦܠܝܚ̈ܐ
+wantedcategories|ܣܕܪ̈ܐ ܒܥܝ̈ܐ
+wantedpages|ܦܐܬܬ̈ܐ ܣܢܝܩܬ̈ܐ
+wantedfiles|ܠܦܦ̈ܐ ܣܢܝܩ̈ܐ
+wantedtemplates|ܩܠܒ̈ܐ ܣܢܝܩ̈ܐ
+mostlinked|ܦܐܬܬ̈ܐ ܐܣܝܪ̈ܬܐ ܝܬܝܪ ܡܢ ܟܠ
+mostlinkedcategories|ܣܕܪ̈ܐ ܐܣܝܪ̈ܐ ܝܬܝܪ ܡܢ ܟܠ
+mostlinkedtemplates|ܩܠܒ̈ܐ ܐܣܝܪ̈ܐ ܝܬܝܪ ܡܢ ܟܠ
+mostcategories|ܦܐܬܬ̈ܐ ܣܕܝܪ̈ܬܐ ܝܬܝܪ ܡܢ ܟܠ
+mostimages|ܠܦܦ̈ܐ ܐܣܝܪ̈ܐ ܝܬܝܪ ܡܢ ܟܠ
+mostinterwikis|ܦܐܬܬ̈ܐ ܕܐܝܬܠܗܘܢ ܐܣܘܪ̈ܐ ܕܐܢܛܪܘܝܩܝ ܝܬܝܪ ܡܢ ܟܠ
+mostrevisions|ܦܐܬܬ̈ܐ ܥܡ ܫܘܚܠܦ̈ܐ ܝܬܝܪ ܡܢ ܟܠ
+prefixindex|ܟܠ ܦܐܬܬ̈ܐ ܥܡ ܫܪܘܝܐ
+prefixindex-namespace|ܟܠ ܦܐܬܬ̈ܐ ܥܡ ܫܪܘܝܐ (~{0} ܚܩܠܐ)
+shortpages|ܦܐܬܬ̈ܐ ܟܪ̈ܝܬܐ
+longpages|ܦܐܬܬ̈ܐ ܐܪ̈ܝܟܬܐ
+deadendpages|ܦܐܬܬ̈ܐ ܥܡ ܚܪܬܐ ܡܝܬܬܐ
+protectedpages|ܦܐܬܬ̈ܐ ܢܛܝܪ̈ܬܐ
+protectedtitles|ܟܘܢܝ̈ܐ ܢܛܝܪ̈ܐ
+protectedtitlesempty|ܠܝܬ ܟܘܢܝ̈ܐ ܢܛܝܪ̈ܐ ܗܫܐܝܬ ܥܡ ܗܠܝܢ ܦܪ̈ܘܫܝܐ
+listusers|ܡܟܬܒܘܬܐ ܕܗܕ̈ܡܐ
+listusers-editsonly|ܚܘܝ ܡܦܠܚܢ̈ܐ ܥܡ ܫܘܚܠܦ̈ܐ ܒܠܚܘܕ
+listusers-creationsort|ܛܟܣ ܐܝܟ ܣܝܩܘܡܐ ܕܒܪܝܐ
+usereditcount|~{0} {{PLURAL:~{0}\u007Cܫܘܚܠܦܐ\u007Cܫܘܚܠܦ̈ܐ}}
+usercreated|{{ܓܢܣܐ:~{2}\u007Cܒܪܐ}} ܒܣܝܩܘܡ ~{0} ܒܫܥܬܐ ~{1}
+newpages|ܦܐܬܬ̈ܐ ܚܕ̈ܬܬܐ
+newpages-username|ܫܡܐ ܕܡܦܠܚܢܐ:
+ancientpages|ܦܐܬܬ̈ܐ ܥܬܝܩ ܡܢ ܟܠ
+move|ܫܢܝ
+movethispage|ܫܢܝ ܦܐܬܐ ܗܕܐ
+notargettitle|ܕܠܐ ܢܘܦܐ
+nopagetitle|ܠܝܬ ܗܟܘܬ ܦܐܬܐ ܕܢܘܦܐ
+nopagetext|ܦܐܬܐ ܕܢܘܦܐ ܕܬܬܚܡܬ ܠܝܬ ܠܗ ܐܝܬܘܬܐ.
+pager-newer-n|{{PLURAL:~{0}\u007C1 1 ܚܕܬܐ\u007C~{0} ܚܕ̈ܬܐ}}
+pager-older-n|{{PLURAL:~{0}\u007C1 ܥܬܝܩܐ\u007C~{0} ܥܬܝܩ̈ܐ}}
+suppress|ܚܝܘܪܐ
+booksources|ܙܠ
+booksources-search-legend|ܒܨܝ ܥܠ ܡܒܘܥ̈ܐ ܕܟܬܒ̈ܐ
+specialloguserlabel|ܡܦܩܢܐ:
+speciallogtitlelabel|ܢܘܦܐ (ܟܘܢܝܐ ܐܘ ܡܦܠܚܢܐ):
+log|ܣܓܠ̈ܐ
+all-logs-page|ܟܠ ܣܓܠ̈ܐ ܓܘܢܝ̈ܐ
+alllogstext|ܓܠܚܐ ܟܠܢܝܐ ܠܟܠ ܣܓܠ̈ܐ ܡܪ ܐܝܬܘܬܐ ܒ{{SITENAME}}.\nܡܨܬ ܕܬܙܥܪ ܠܦܠܛܐ ܒܓܒܝܬܐ ܕܐܕܫܐ ܕܣܓܠܐ ܐܘ ܫܡܐ ܕܡܦܠܚܢܐ (ܪܓܫܬܢܐ ܠܐܕܫܐ ܕܐܬܘܬܐ) ܐܘ ܦܐܬܐ ܬܘܥܒܕܬܐ (ܐܦ ܪܓܫܬܢܐ ܠܐܕܫܐ ܕܐܬܘܬܐ).
+logempty|ܠܝܬ ܡܠܘܐ̈ܐ ܠܐ̈ܝܡܐ ܒܣܓܠܐ ܗܢܐ.
+log-title-wildcard|ܒܨܝ ܥܠ ܟܘܢܝ̈ܐ ܕܫܪܝܢ ܥܡ ܟܬܒܬܐ ܗܕܐ
+showhideselectedlogentries|ܚܘܝ/ܛܫܝ ܣܓܠ̈ܐ ܕܥܠܠܐ ܓܒܝ̈ܐ
+allpagesfrom|ܚܘܝ ܦܐܬܬ̈ܐ ܕܫܪܐ ܥܡ:
+allpagesto|ܚܘܝ ܦܐܬܬ̈ܐ ܕܫܠܡ ܥܡ:
+allarticles|ܟܠ ܡܓܠ̈ܐ
+allinnamespace|ܟܠ ܦܐܬܬ̈ܐ (ܚܩܠܐ ܕ ~{0})
+allpagessubmit|ܙܠ
+allpagesprefix|ܚܘܝ ܦܐܬܬ̈ܐ ܕܫܪܝܢ ܒ:
+allpages-bad-ns|{{SITENAME}} ܠܝܬ ܠܗ ܚܩܠܐ "~{0}".
+allpages-hide-redirects|ܛܫܝ ܨܘܝܒ̈ܐ
+cachedspecial-refresh-now|ܚܙܝ ܐܚܪܝ ܟܠ
+categoriesfrom|ܚܘܝ ܣܕܪ̈ܐ ܕܫܪܝܢ ܒ:
+special-categories-sort-count|ܛܟܣ ܒܡܢܝܢܐ
+special-categories-sort-abc|ܛܟܣ ܗܓܝܢܐܝܬ
+deletedcontributions|ܫܘܬܦܘ̈ܬܐ ܫܝ̈ܦܬܐ ܕܡܦܠܚܢܐ
+deletedcontributions-title|ܫܘܬܦܘ̈ܬܐ ܫܝ̈ܦܬܐ ܕܡܦܠܚܢܐ
+sp-deletedcontributions-contribs|ܫܘܬܦܘ̈ܬܐ
+linksearch|ܐܣܘܪ̈ܐ ܒܪ̈ܝܐ ܒܨܝܐ
+linksearch-pat|ܙܢܐ ܕܒܨܝܐ:
+linksearch-ns|ܚܩܠܐ:
+linksearch-ok|ܒܨܝ
+linksearch-line|~{0} ܝܨܝܪܐ ܡܢ ~{1}
+listusersfrom|ܚܘܝ ܡܦܠܚܢ̈ܐ ܕܫܪܝܢ ܒ:
+listusers-submit|ܚܘܝ
+listusers-noresult|ܠܐ ܐܫܬܟܚ ܡܦܠܚܢܐ ܚܕ.
+listusers-blocked|(ܚܪܝܡܐ)
+activeusers|ܡܟܬܒܘܬܐ ܕܗܕ̈ܡܐ ܙܪ̄ܝܙܐ
+activeusers-count|~{0} {{PLURAL:~{0}\u007Cܥܒܕܐ\u007Cܥܒܕ̈ܐ}} ܒ {{PLURAL:~{2}\u007Cܝܘܡܐ ܐܚܪܝܐ\u007C~{2} ܝܘܡܬ̈ܐ ܐܚܪ̈ܝܐ}}
+activeusers-from|ܚܘܝ ܡܦܠܚܢ̈ܐ ܕܫܪܐ ܥܡ:
+activeusers-hidebots|ܛܫܝ ܒܘܬ̈ܐ (bots)
+activeusers-hidesysops|ܛܫܝ ܡܕܒܪ̈ܢܐ
+activeusers-noresult|ܠܐ ܐܫܬܟܚ ܡܦܠܚܢ̈ܐ ܐܢܫ̈ܝܢ.
+listgrouprights|ܙܕ̈ܩܐ ܕܟܢܘܫܬܐ ܕܡܦܠܚܢ̈ܐ
+listgrouprights-group|ܟܢܘܫܬܐ
+listgrouprights-rights|ܙܕ̈ܩܐ
+listgrouprights-helppage|Help:ܙܕ̈ܩܐ ܕܟܢܘܫܬܐ
+listgrouprights-members|(ܡܟܬܒܘܬܐ ܕܗܕ̈ܡܐ)
+listgrouprights-addgroup|ܐܘܣܦ {{PLURAL:~{1}\u007Cܟܢܘܫܬܐ\u007Cܟܢܘܫܬ̈ܐ}}: ~{0}
+listgrouprights-removegroup|ܠܚܝ {{PLURAL:~{1}\u007Cܟܢܘܫܬܐ\u007Cܟܢܘܫܬ̈ܐ}}: ~{0}
+listgrouprights-addgroup-all|ܐܘܣܦ ܟܠ ܟܢܘܫܬ̈ܐ
+listgrouprights-removegroup-all|ܠܚܝ ܟܠ ܟܢܘܫܬ̈ܐ
+listgrouprights-removegroup-self|ܠܚܝ {{PLURAL:~{1}\u007Cܟܢܘܫܬܐ\u007Cܟܢܘܫܬ̈ܐ}} ܡܢ ܚܘܫܒܢܗ ܕܝܠܢܝܐ: ~{0}
+listgrouprights-removegroup-self-all|ܠܚܝ ܟܠ ܟܢܘܫܬ̈ܐ ܡܢ ܚܘܫܒܢܗ ܕܝܠܢܝܐ
+mailnologin|ܠܝܬ ܡܘܢܥܐ ܠܫܘܕܪܐ
+emailuser|ܫܕܪ ܐܓܪܬܐ ܠܗܢܐ ܡܦܠܚܢܐ
+emailpage|ܫܕܪ ܐܓܪܬܐ ܒܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ ܠܡܦܠܚܢܐ
+defemailsubject|ܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ  ܡܢ ܡܦܠܚܢܐ "~{0}"
+noemailtitle|ܠܝܬ ܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ
+emailusername|ܫܡܐ ܕܡܦܠܚܢܐ:
+emailusernamesubmit|ܫܕܪ
+email-legend|ܫܕܪ ܐܓܪܬܐ ܠܡܦܠܚܢܐ ܕ {{SITENAME}} ܐܚܪܢܐ
+emailfrom|ܡܢ:
+emailto|ܠ:
+emailsubject|ܡܠܘܐܐ:
+emailmessage|ܐܓܪܬܐ:
+emailsend|ܫܕܪ
+emailccme|ܫܕܪ ܠܝ ܨܚܚܐ ܡܢ ܐܓܪ̈ܬܐ ܕܝܠܝ.
+emailccsubject|ܨܚܚܐ ܕܐܓܪܬܟ ܠ ~{0}: ~{1}
+emailsent|ܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ ܐܫܬܕܪ
+usermessage-summary|ܫܒܩܐ ܐܓܪܬܐ ܕܛܟܣܐ
+usermessage-editor|ܡܫܕܪܢܐ ܕܛܟܣܐ
+watchlist|ܪ̈ܗܝܬܐ
+mywatchlist|ܪ̈ܗܝܬܐ
+watchlistfor2|ܕ ~{0} ~{1}
+nowatchlist|ܠܝܬ ܠܟ ܡܕܡ ܒܪ̈ܗܝܬܐ ܕܝܠܟ
+watchlistanontext|~{0} ܠܚܙܝܐ ܐܘ ܫܚܠܦܬܐ ܕܦܐܬܬ̈ܐ ܒܪ̈ܗܝܬܟ.
+watchnologin|ܠܝܬܝܟ ܥܠܝܠܐ
+addwatch|ܐܘܣܦ ܥܠ ܪ̈ܗܝܬܝ
+addedwatchtext|ܦܐܬܐ ܕ"[[:~{0}]]" ܐܬܬܘܣܦܬ ܠ[[Special:Watchlist\u007Cܪ̈ܗܝܬܟ]].\nܐܝܢܐ ܫܘܚܠܦܐ ܥܠ ܦܐܬܐ ܗܕܐ ܒܕܥܬܝܕ ܬܬܓܠܚ ܥܡ ܦܐܬܐ ܕܡܡܠܠܐ ܕܝܠܗ ܬܡܢ.
+removewatch|ܫܩܘܠ ܡܢ ܪ̈ܗܝܬܝ
+removedwatchtext|ܦܐܬܐ ܕ "[[:~{0}]]" ܐܫܬܩܠܬ ܡܢ [[Special:Watchlist\u007Cܪ̈ܗܝܬܟ]].
+watch|ܪܗܝ
+watchthispage|ܪܗܝ ܗܕܐ ܦܐܬܐ
+unwatch|ܠܐ ܪܗܝ
+unwatchthispage|ܟܠܝ ܪܗܝܐ
+watchlist-details|{{PLURAL:~{0}\u007C~{0} ܦܐܬܐ\u007C~{0} ܦܐܬܬ̈ܐ}} ܒܪ̈ܗܝܬܟ, ܫܒܘܩ ܡܢ ܦܐܬܬ̈ܐ ܕܡܡܠܠܐ.
+wlheader-showupdated|ܦܐܬܬ̈ܐ ܕܐܫܬܚܠܦܢ ܡܢ ܒܬܪ ܣܘܥܪܢܐ ܐܚܪܝܐ ܠܗܝܢ ܡܬܓܠܚܢ ܒܣܪܛܐ '''ܚܠܝܡܐ'''
+wlnote|ܠܬܚܬ {{PLURAL:~{0}\u007Cܫܘܚܠܦܐ ܐܚܪܝܐ\u007C '''~{0}''' ܫܘܚܠܦ̈ܐ ܐܚܪ̈ܝܐ}} {{PLURAL:~{1}\u007Cܒܫܥܬܐ ܐܚܪܝܬܐ\u007C'''~{1}''' ܒܫܥܬ̈ܐ ܐܚܪ̈ܝܬܐ}}, ܠܦܘܬ ~{2}, ~{3}.
+wlshowlast|ܚܘܝ ~{0} ܫܥܬ̈ܐ ~{1} ܝܘܡܬ̈ܐ ܐܚܪ̈ܝܐ
+watchlist-options|ܨܒܝܢܝܘܬ̈ܐ ܕܪ̈ܗܝܬܐ
+watching|ܪܗܝܐ...
+unwatching|ܠܚܝ ܪܗܝܐ...
+enotif_reset|ܫܘܕܥ ܟܠ ܦܐܬܬ̈ܐ ܐܝܟ ܣܥܝܪ̈ܬܐ
+enotif_impersonal_salutation|ܡܦܠܚܢܐ {{SITENAME}}
+enotif_lastvisited|ܚܙܝ ~{0} ܠܟܠ ܫܘܚܠܦ̈ܐ ܡܢ ܐܡܬܝ ܕܣܘܥܪܢܐ ܐܚܪܝܐ ܕܝܠܟ.
+enotif_lastdiff|ܚܙܝ ~{0} ܠܚܙܝܐ ܕܫܘܚܠܦܐ ܗܢܐ.
+enotif_anon_editor|ܡܦܠܚܢܐ ܠܐ ܝܕܝܥܐ ~{0}
+created|ܒܪܐ
+changed|ܐܫܬܚܠܦܬ
+deletepage|ܫܘܦ ܦܐܬܐ
+confirm|ܫܪܪ
+excontent|ܚܒܝܫܬ̈ܐ ܗܘ̈ܝ: '~{0}'
+excontentauthor|ܚܒܝܫܬ̈ܐ ܗܘ̈ܝ: '~{0}' (ܘܫܘܬܦܢܐ ܝܚܝܕܝܐ ܗܘܐ '[[Special:Contributions/~{1}\u007C~{1}]]')
+delete-confirm|ܫܘܦ "~{0}"
+delete-legend|ܫܘܦ
+actioncomplete|ܥܡܠܝܬܐ ܓܡܪܬ
+actionfailed|ܥܡܠܝܬܐ ܠܐ ܢܨܚܬ
+dellogpage|ܣܓܠܐ ܕܫܝܦܐ
+dellogpagetext|ܠܬܚܬ ܡܟܬܒܘܬܐ ܕܦܐܬܬ̈ܐ ܫܝܦܬ̈ܐ ܚܕ̈ܬܬܐ.
+deletionlog|ܣܓܠܐ ܕܫܝܦܐ
+deletecomment|ܥܠܬܐ:
+deleteotherreason|ܥܠܬܐ ܐܚܪܬܐ/ܝܬܝܪܬܐ:
+deletereasonotherlist|ܥܠܬܐ ܐܚܪܬܐ
+delete-edit-reasonlist|ܫܚܠܦ ܥܠܠܬ̈ܐ ܕܫܝܦܐ
+rollbacklink|ܐܦܢܝ
+editcomment|ܦܣܝܩܬ̈ܐ ܕܫܘܚܠܦܐ ܗܘܐ: "''~{0}''".
+revertpage|ܐܗܦܟ ܫܘܚܠܦ̈ܐ ܒܝܕ [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007Cܡܡܠܠܐ]]) ܠܬܢܝܬܐ ܐܚܪܝܬܐ ܒܝܕ [[User:~{0}\u007C~{0}]]
+sessionfailure-title|ܡܘܬܒܐ ܠܐ ܢܨܚܬ
+protectlogpage|ܣܓܠܐ ܕܢܛܪܐ
+protectedarticle|ܢܛܪ "[[~{0}]]"
+modifiedarticleprotection|ܫܚܠܦ ܫܘܝܐ ܕܢܛܪܐ ܕ"[[~{0}]]"
+unprotectedarticle|ܫܩܘܠ ܢܛܝܪܘܬܐ ܡܢ "[[~{0}]]"
+movedarticleprotection|ܫܢܐ ܛܘܝܒ̈ܐ ܕܢܛܪܐ ܡܢ "[[~{1}]]" ܠ "[[~{0}]]"
+protect-title|ܫܚܠܦ ܫܘܝܐ ܕܢܛܪܐ ܕ"~{0}"
+protect-title-notallowed|ܚܘܝ ܫܘܝܐ ܕܢܛܪܐ ܕ"~{0}"
+prot_1movedto2|[[~{0}]] ܐܬܫܢܝܬ ܠ [[~{1}]]
+protect-legend|ܫܪܪ ܢܘܛܪܐ
+protectcomment|ܥܠܬܐ:
+protect-default|ܦܣܣܐ ܠܟܠ ܡܦܠܚܢ̈ܐ
+protect-fallback|ܦܣܣ ܠܡܦܠܚܢ̈ܐ ܥܡ "~{0}" ܦܣܣܐ ܒܠܚܘܕ
+protect-level-autoconfirmed|ܦܣܣ ܠܡܦܠܚܢ̈ܐ ܚܬܝܬ̈ܐ ܝܬܐܝܬ ܒܠܚܘܕ
+protect-level-sysop|ܦܣܣ ܠܡܕܒܪ̈ܢܐ ܒܠܚܘܕ
+protect-expiring|ܬܦܪܘܩ ܒ ~{0} (UTC)
+protect-expiring-local|ܬܦܪܘܩ ܒ ~{0}
+protect-expiry-indefinite|ܠܥܠܡ
+protect-othertime|ܥܕܢܐ ܐܚܪܢܐ:
+protect-othertime-op|ܥܕܢܐ ܐܚܪܢܐ
+protect-otherreason|ܥܠܬܐ ܐܚܪܬܐ/ܢܩܝܦܬܐ:
+protect-otherreason-op|ܥܠܬܐ ܐܚܪܬܐ
+protect-edit-reasonlist|ܫܚܠܦ ܥܠܬܐ ܕܢܛܪܐ
+protect-expiry-options|1 ܫܥܐ:1 hour,1 ܝܘܡ:1 day,1 ܫܒܘܥ:1 week,2 ܫܒܘܥ̈ܝܢ:2 weeks,1 ܝܪܚ:1 month,3 ܝܪ̈ܚܝܢ:3 months,6 ܝܪ̈ܚܝܢ:6 months,1 ܫܢܐ:1 year,ܠܥܠܡ:infinite
+restriction-type|ܦܣܣܐ:
+restriction-level|ܫܘܝܐ ܕܣܘܝܟܐ:
+minimum-size|ܡܬܚܐ ܬܚܬܝܐ  ܕܥܓܪܐ
+maximum-size|ܡܬܚܐ ܥܠܝܐ ܕܥܓܪܐ
+pagesize|(ܒܐܝܛ)
+restriction-edit|ܫܚܠܦ
+restriction-move|ܫܢܝ
+restriction-create|ܒܪܝ
+restriction-upload|ܐܣܩ
+restriction-level-sysop|ܢܛܝܪܘܬܐ ܓܡܝܪܬܐ
+restriction-level-autoconfirmed|ܕܡܘܬ ܢܛܝܪܘܬܐ
+restriction-level-all|ܐܝܢܐ ܫܘܝܐ
+undelete|ܚܙܝ ܦܐܬܬ̈ܐ ܫܝܦܬ̈ܐ
+undeletepage|ܚܙܝ ܘܐܦܢܝ ܦܐܬܬ̈ܐ ܫܝܦܬ̈ܐ
+viewdeletedpage|ܚܙܝ ܦܐܬܬ̈ܐ ܫܝܦܬ̈ܐ
+undelete-fieldset-title|ܐܦܢܝ ܬܢܝܬ̈ܐ
+undelete-revision|ܫܦ ܬܢܝܬܐ ܕ ~{0} (ܒܣܝܩܘܡ ~{3}, ܒ ~{4}) ܒܝܕ ~{2}:
+undelete-nodiff|ܠܝܬ ܬܢܝܬܐ ܥܬܝܩܬܐ.
+undeletebtn|ܐܦܢܝ
+undeletelink|ܚܙܝ/ܐܦܢܝ
+undeleteviewlink|ܚܙܝ
+undeleteinvert|ܐܗܦܟ ܠܓܘܒܝܐ
+undeletecomment|ܥܠܬܐ:
+undeletedrevisions|{{PLURAL:~{0}\u007C1 ܬܢܝܬܐ\u007C~{0} ܬܢܝܬ̈ܐ}} ܐܦܢܝܬ
+undeletedrevisions-files|{{PLURAL:~{0}\u007C1 ܬܢܝܬܐ\u007C~{0} ܬܢܝܬ̈ܐ}} and {{PLURAL:~{1}\u007C1 ܠܦܦܐ\u007C~{1} ܠܦܦܐ}} ܐܦܢܝܬ
+undeletedfiles|{{PLURAL:~{0}\u007C1 ܠܦܦܐ\u007C~{0} ܠܦܦ̈ܐ}} ܐܦܢܝܬ
+undelete-header|ܚܙܝ [[Special:Log/delete\u007Cܣܓܠܐ ܕܫܝܦܐ]] ܠܚܙܝܐ ܕܦܐܬܬ̈ܐ ܫܝܦܬ̈ܐ ܚܕ̈ܬܬܐ.
+undelete-search-title|ܒܨܝ ܦܐܬܬ̈ܐ ܫܝܦܬ̈ܐ
+undelete-search-box|ܒܨܝ ܦܐܬܬ̈ܐ ܫܝܦܬ̈ܐ
+undelete-search-prefix|ܚܘܝ ܦܐܬܬ̈ܐ ܫܪܝܢ ܒ:
+undelete-search-submit|ܒܨܝ
+undelete-error-short|ܦܘܕܐ ܒܦܢܝܐ ܕܠܦܦܐ: ~{0}
+undelete-show-file-submit|ܐܝܢ
+namespace|ܚܩܠܐ:
+invert|ܐܗܦܟ ܠܓܘܒܝܐ
+namespace_association|ܚܩܠܐ ܠܐܝܡܐ
+contributions|ܫܘܬܦܘ̈ܬܐ {{GENDER:~{0}\u007Cܕܡܦܠܚܢܐ\u007Cܕܡܦܠܚܢܬܐ}}
+contributions-title|ܫܘܬܦܘ̈ܬܐ ܕܡܦܠܚܢܐ ܠ~{0}
+mycontris|ܫܘܬܦܘ̈ܬܐ
+contribsub2|ܠ{{GENDER:~{2}\u007C~{0}}} (~{1})
+uctop|(ܗܫܝܐ)
+month|ܡܢ ܝܪܚܐ ܕ (ܘܡܢ ܩܕܡ ܗܝܕܝܢ):
+year|ܡܢ ܫܢܬ (ܘܡܢ ܩܕܡ ܗܝܕܝܢ):
+sp-contributions-newbies|ܚܘܝ ܫܘܬܦܘ̈ܬܐ ܕܚܘܫܒܢ̈ܐ ܚܕ̈ܬܐ ܒܠܚܘܕ
+sp-contributions-newbies-sub|ܠܚܘܫܒܢ̈ܐ ܚܕ̈ܬܐ
+sp-contributions-newbies-title|ܫܘܬܦܘ̈ܬܐ ܕܡܦܠܚܢܐ ܠܚܘܫܒܢ̈ܐ ܚܕ̈ܬܐ
+sp-contributions-blocklog|ܣܓܠܐ ܕܚܪܡܐ
+sp-contributions-deleted|ܫܘܬܦܘ̈ܬܐ ܫܝ̈ܦܬܐ ܕܡܦܠܚܢܐ
+sp-contributions-uploads|ܡܣܩܬ̈ܐ
+sp-contributions-logs|ܣܓܠ̈ܐ
+sp-contributions-talk|ܡܡܠܠܐ
+sp-contributions-userrights|ܕܘܒܪܐ ܕܙܕ̈ܩܐ ܕܡܦܠܚܢܐ
+sp-contributions-search|ܒܨܝ ܫܘܬܦܘ̈ܬܐ
+sp-contributions-username|ܐܝ ܦܝ (IP) ܐܘ ܫܡܐ ܕܡܦܠܚܢܐ:
+sp-contributions-toponly|ܚܘܝ ܫܘܚܠܦ̈ܐ ܕܗܢܘܢ ܬܢܝܬ̈ܐ ܐܚܪ̈ܝܬܐ ܒܠܚܘܕ
+sp-contributions-submit|ܒܨܝ
+whatlinkshere|ܡܐ ܐܣܪ ܠܗܪܟܐ
+whatlinkshere-title|ܦܐܬܬ̈ܐ ܕܐܣܝܪܝܢ ܥܡ "~{0}"
+whatlinkshere-page|ܦܐܬܐ:
+linkshere|ܦܐܬܬ̈ܐ ܗܠܝܢ ܐܣܝܪܝܢ ܥܡ '''[[:~{0}]]''':
+nolinkshere|ܠܝܬ ܦܐܬܬ̈ܐ ܐܣܪܝܢ ܥܡ '''[[:~{0}]]'''.
+nolinkshere-ns|ܠܝܬ ܦܐܬܬ̈ܐ ܐܣܪܝܢ ܥܡ '''[[:~{0}]]''' ܒܚܩܠܐ ܓܒܝܐ.
+isredirect|ܦܐܬܐ ܕܨܘܝܒܐ
+istemplate|ܚܒܝܫܬܐ
+isimage|ܐܣܘܪܐ ܕܠܦܦܐ
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cܕܩܕܡ\u007C~{0} ܕܩܕܡ}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cܕܒܬܪ\u007C~{0} ܕܒܬܪ}}
+whatlinkshere-links|← ܐܣܘܪ̈ܐ
+whatlinkshere-hideredirs|~{0} ܨܘܝܒ̈ܐ
+whatlinkshere-hidetrans|~{0} ܡܬܚܪ̈ܙܢܘܬܐ
+whatlinkshere-hidelinks|~{0} ܐܣܘܪ̈ܐ
+whatlinkshere-hideimages|~{0} ܐܣܘܪܐ ܕܠܦܦܐ
+whatlinkshere-filters|ܡܨܦܝܢܝܬ̈ܐ
+autoblockid|ܚܪܡܐ ܝܬܢܝܐ #~{0}
+block|ܚܪܘܡ ܡܦܠܚܢܐ
+unblock|ܫܩܘܠ ܚܪܡܐ ܡܢ ܡܦܠܚܢܐ
+blockip|ܚܪܘܡ ܡܦܠܚܢܐ
+blockip-legend|ܚܪܘܡ ܡܦܠܚܢܐ
+ipaddressorusername|ܐܝ ܦܝ (IP) ܐܘ ܫܡܐ ܕܡܦܠܚܢܐ:
+ipbexpiry|ܡܬܚܐ ܕܚܪܡܐ:
+ipbreason|ܥܠܬܐ:
+ipbsubmit|ܚܪܘܡ ܡܦܠܚܢܐ ܗܢܐ
+ipbother|ܥܕܢܐ ܐܚܪܢܐ
+ipboptions|2 ܫܥ̈ܝܢ:2 hours,1 ܝܘܡ:1 day,3 ܝܘܡ̈ܝܢ:3 days,1 ܫܒܘܥ:1 week,2 ܫܒܘܥ̈ܝܢ:2 weeks,1 ܝܪܚ:1 month,3 ܝܪ̈ܚܝܢ:3 months,6 ܝܪ̈ܚܝܢ:6 months,1 ܫܢܐ:1 year,ܠܥܠܡ:infinite
+ipbhidename|ܛܫܝ ܫܡܐ ܕܡܦܠܚܢܐ ܡܢ ܫܘܚܠܦ̈ܐ ܘܡܟܬܒܘܬ̈ܐ
+badipaddress|ܐܝ ܦܝ (IP) ܠܐ ܬܪܝܨܐ:
+blockipsuccesssub|ܚܪܡܐ ܓܡܪ
+ipb-edit-dropdown|ܫܚܠܦ ܥܠܠܬ̈ܐ ܕܚܪܡܐ
+ipb-unblock-addr|ܫܩܘܠ ܚܪܡܐ ܡܢ ~{0}
+ipb-unblock|ܫܩܘܠ ܚܪܡܐ ܡܢ ܐܝ ܦܝ (IP) ܐܘ ܫܡܐ ܕܡܦܠܚܢܐ
+ipb-blocklist-contribs|ܫܘܬܦܘ̈ܬܐ ܕ~{0}
+unblockip|ܫܩܘܠ ܚܪܡܐ ܡܢ ܡܦܠܚܢܐ
+ipusubmit|ܫܩܘܠ ܚܪܡܐ ܗܢܐ
+unblocked|ܐܫܬܩܠ ܚܪܡܐ ܡܢ [[User:~{0}\u007C~{0}]]
+blocklist|ܡܦܠܚܢ̈ܐ ܡܚܪ̈ܡܐ
+ipblocklist|ܡܦܠܚܢ̈ܐ ܡܚܪ̈ܡܐ
+ipblocklist-legend|ܐܫܟܚ ܡܦܠܚܢܐ ܡܚܪܡܐ
+blocklist-reason|ܥܠܬܐ
+ipblocklist-submit|ܒܨܝ
+ipblocklist-localblock|ܚܪܡܐ ܕܘܟܬܢܝܐ
+infiniteblock|ܠܥܠܡ
+anononlyblock|ܠܐ ܝܕ̈ܝܥܐ ܒܠܚܘܕ
+ipblocklist-empty|ܣܓܠܐ ܕܚܪܡܐ ܣܦܝܩܐ.
+blocklink|ܚܪܘܡ
+unblocklink|ܫܩܘܠ ܚܪܡܐ
+change-blocklink|ܫܚܠܦ ܚܪܡܐ
+contribslink|ܫܘܬܦܘ̈ܬܐ
+blocklogpage|ܣܓܠܐ ܕܚܪܡܐ
+blocklogentry|ܚܪܡ [[~{0}]] ܠܡܬܚܐ ܕ ~{1} ~{2}
+blocklogtext|ܗܢܘ ܣܓܠܐ ܕܥܡܠܝܬ̈ܐ ܕܚܪܡܐ ܘܫܩܠ ܚܪܡܐ.\nܡܘܢܥ̈ܐ ܕܐܝ ܦܝ (IP) ܚܪ̈ܝܡܐ ܝܬܐܝܬ ܠܐ ܓܠܝܚܝܢ ܐܢܘܢ.\nܚܙܝ [[Special:BlockList\u007Cܡܟܬܒܘܬܐ ܕܚܪܡܐ ܕܐܝ ܦܝ (IP)]]ܠܚܙܝܐ ܕܥܡܠܝܬ̈ܐ ܕܚܪܡܐ ܬܘܦܥܠ̈ܐ ܗܫܐܝܬ.
+unblocklogentry|ܫܩܠ ܚܪܡܐ ܡܢ ~{0}
+block-log-flags-anononly|ܡܦܠܚܢ̈ܐ ܠܐ ܝܕ̈ܝܥܐ ܒܠܚܘܕ
+block-log-flags-nocreate|ܒܪܝܬܐ ܕܚܘ̈ܫܒܢܐ ܠܐ ܐܝܬܝܗ ܡܬܩܒܠܢܐ
+block-log-flags-hiddenname|ܫܡܐ ܕܡܦܠܚܢܐ ܛܘܫܝܐ
+ipb_already_blocked|"~{0}" ܡܚܪܡܐ ܗܘ ܡܢ ܟܕܘ
+ipb-needreblock|"~{0}" ܡܚܪܡܐ ܗܘ ܡܢ ܟܕܘ\nDo you want to change the settings?
+move-page|ܫܢܝ ~{0}
+move-page-legend|ܫܢܝ ܦܐܬܐ
+movearticle|ܫܢܝ ܦܐܬܐ:
+newtitle|ܠܫܡܐ ܚܕܬܐ:
+move-watch|ܪܗܝ ܦܐܬܐ ܗܕܐ
+movepagebtn|ܫܢܝ ܦܐܬܐ
+pagemovedsub|ܫܘܢܝܐ ܓܡܪ
+movepage-moved|'''"~{0}" ܐܫܬܢܝܬ ܠ "~{1}"'''
+movepage-moved-redirect|ܨܘܝܒܐ ܐܬܒܪܝ
+move-subpages|ܫܢܝ ܦܐܬܬ̈ܐ ܦܪ̈ܥܝܬ̈ܐ (ܥܕܡܐ ܠ ~{0})
+move-talk-subpages|ܫܢܝ ܦܐܬܬ̈ܐ ܦܪ̈ܥܝܬ̈ܐ ܕܦܐܬܐ ܕܕܘܪܫܐ (ܥܕܡܐ ܠ ~{0})
+movelogpage|ܣܓܠܐ ܕܫܘܢܝܐ
+movereason|ܥܠܬܐ:
+revertmove|ܐܦܢܝ
+delete_and_move|ܫܘܦ ܘܫܢܝ
+delete_and_move_confirm|ܐܝܢ, ܫܘܦ ܦܐܬܐ
+move-leave-redirect|ܫܒܘܩ ܨܘܝܒܐ ܒܬܪܟ
+export|ܐܦܩ ܦܐܬܬ̈ܐ
+exportall|ܐܦܩ ܟܠ ܦܐܬܬ̈ܐ
+export-submit|ܐܦܩ
+export-addcattext|ܐܘܣܦ ܦܐܬܬ̈ܐ ܡܢ ܣܕܪܐ:
+export-addcat|ܐܘܣܦ
+export-addnstext|ܐܘܣܦ ܦܐܬܬ̈ܐ ܡܢ ܚܩܠܐ:
+export-addns|ܐܘܣܦ
+export-download|ܠܒܘܟ ܐܝܟ ܠܦܦܐ
+allmessages|ܐܓܪ̈ܬܐ ܕܛܟܣܐ
+allmessagesname|ܫܡܐ
+allmessagesdefault|ܐܓܪܬܐ ܕܟܬܒܬܐ ܡܬܚܫܒܢܝܬܐ
+allmessagescurrent|ܟܬܒܬܐ ܗܫܝܬܐ ܕܐܓܪܬܐ
+allmessages-filter-legend|ܡܨܦܝܢܝܬܐ
+allmessages-filter|ܨܦܝ ܐܝܟ ܐܝܟܢܝܘܬܐ ܕܡܬܕܝܠܢܘܬܐ:
+allmessages-filter-unmodified|ܠܐ ܫܘܓܢܝܐ
+allmessages-filter-all|ܟܠ
+allmessages-filter-modified|ܫܘܓܢܝܐ
+allmessages-prefix|ܡܨܦܝܢܝܬܐ ܐܝܟ ܫܘܪܝܐ
+allmessages-language|ܠܫܢܐ:
+allmessages-filter-submit|ܙܠ
+thumbnail_error|ܦܘܕܐ ܒܒܪܝܐ ܕܨܘܪܬܐ ܙܥܘܪܬܐ: ~{0}
+import|ܐܥܠ ܦܐܬܬ̈ܐ
+import-interwiki-submit|ܐܥܠ
+import-upload-filename|ܫܡܐ ܕܠܦܦܐ:
+import-revision-count|~{0} {{PLURAL:~{0}\u007Cܬܢܝܬܐ \u007Cܬܢܝܬ̈ܐ}}
+importnopages|ܠܝܬ ܦܐܬܬ̈ܐ ܠܡܥܠܢܘܬܐ.
+importsuccess|ܡܥܠܢܘܬܐ ܓܡܪܬ
+import-noarticle|ܠܝܬ ܦܐܬܬ̈ܐ ܠܡܥܠܢܘܬܐ!
+import-upload|ܐܣܩ ܓܠܝܬ̈ܐ  ܕ XML
+importlogpage|ܣܓܠܐ ܕܡܥܠܢܘܬܐ
+import-logentry-upload-detail|~{0} {{PLURAL:~{0}\u007Cܬܢܝܬܐ \u007Cܬܢܝܬ̈ܐ}}
+import-logentry-interwiki-detail|~{0} {{PLURAL:~{0}\u007Cܬܢܝܬܐ \u007Cܬܢܝܬ̈ܐ}} ܡܢ ~{1}
+tooltip-pt-userpage|ܦܐܬܐ ܕܡܦܠܚܢܐ ܕܝܠܟ
+tooltip-pt-mytalk|ܦܐܬܐ ܕܡܡܠܠܐ ܕܝܠܟ
+tooltip-pt-preferences|Your preferences
+tooltip-pt-watchlist|ܡܟܬܒܢܘܬܐ ܕܦܐܬܬ̈ܐ ܕܬܪܗܝ ܐܢܬ ܫܘܚܠܦ̈ܐ ܕܬܗܘܐ ܒܗܘܢ
+tooltip-pt-mycontris|ܡܟܬܒܢܘܬܐ ܕܫܘܬܦܘܝܬ̈ܟ
+tooltip-pt-login|ܢܠܒܒ ܠܟ ܕܣܓܠ ܐܢܬ ܥܠܠܐ ܕܝܠܟ، ܐܠܐ ܗܢܐ ܠܐ ܐܝܬܝܗܝ ܐܠܨܝܐ
+tooltip-pt-logout|ܦܠܛܐ
+tooltip-ca-talk|ܡܡܠܠܐ ܥܠ ܚܒܝܫܬܐ ܕܦܐܬܐ
+tooltip-ca-addsection|ܫܪܝ ܡܢܬܐ ܚܕܬܐ
+tooltip-ca-viewsource|ܗܢܐ ܦܐܬܐ ܢܛܪܬܐ ܐܝܬܝܗܝ.\nܡܨܐ ܐܢܬ ܕܬܚܙܐ ܡܒܘܥܐ ܕܝܠܗ
+tooltip-ca-protect|ܛܪ ܠܗܕܐ ܦܐܬܐ
+tooltip-ca-delete|ܫܘܦ ܦܐܬܐ ܗܕܐ
+tooltip-ca-move|ܫܢܝ ܦܐܬܐ ܗܕܐ
+tooltip-search|ܒܨܝ ܒܓܘ {{SITENAME}}
+tooltip-search-fulltext|ܒܨܝ ܒܓܘ ܦܐܬܬ̈ܐ ܥܠ ܗܢܐ ܟܬܝܒܬܐ
+tooltip-p-logo|ܦܐܬܐ ܪܝܫܝܬܐ
+tooltip-n-mainpage|ܣܥܪ ܦܐܬܐ ܪܝܫܝܬܐ
+tooltip-n-mainpage-description|ܬܪܘܩܬܐ ܕܦܐܬܐ ܪܝܫܝܬܐ
+tooltip-n-portal|ܚܕܪ ܬܪܡܝܬܐ، ܡܢܐ ܡܫܟܚ ܐܢܬ ܠܥܒܕܐ، ܐܝܟܐ ܬܚܙܝ ܟܠ ܡܐ ܕܣܢܝܩ ܐܢܬ ܠܗ
+tooltip-n-recentchanges|ܡܟܬܒܢܘܬܐ ܒܫܘܚܠܦ̈ܐ ܚܕ̈ܬܐ ܒܓܘ ܘܝܩܝ.
+tooltip-n-randompage|ܐܛܥܢ ܡܓܠܬܐ ܚܕ ܚܘܝܚܬܐ
+tooltip-n-help|ܕܘܟܐ ܠܥܘܕܪܢܐ
+tooltip-feed-atom|ܛܥܝܡܘܬܐ ܕܐܛܘܡ ܠܦܐܬܬܐ ܗܕܐ
+tooltip-t-contributions|ܡܟܬܒܢܘܬܐ ܒܫܘܬܦ̈ܐ ܕܗܢܐ ܡܦܠܚܢܐ
+tooltip-t-emailuser|ܫܕܪ ܐܓܪܬܐ ܠܗܢܐ ܡܦܠܚܢܐ
+tooltip-t-upload|ܐܣܩ ܠܦܦ̈ܐ
+tooltip-t-specialpages|ܡܟܬܒܢܘܬܐ ܒܟܠ ܦܐܬܬ̈ܐ ܕ̈ܝܠܢܝܬܐ
+tooltip-ca-nstab-main|ܚܘܝ ܦܐܬܐ ܕܚܒ̈ܝܫܬܐ
+tooltip-ca-nstab-user|ܚܘܝ ܦܐܬܐ ܕܡܦܠܚܢܐ
+tooltip-ca-nstab-image|ܚܘܝ ܦܐܬܐ ܕܠܦܦܐ
+tooltip-ca-nstab-category|ܚܘܝ ܦܐܬܐ ܕܣܕܪܐ
+tooltip-save|ܠܒܘܟ ܫܘܚܠܦܟ
+tooltip-watch|ܐܘܣܦ ܦܐܬܐ ܗܕܐ ܠܡܟܬܒܢܘܬܐ ܕܪ̈ܗܝܬܟ
+anonymous|{{PLURAL:~{0}\u007Cܡܦܠܚܢܐ ܠܐ ܝܕܝܥܐ\u007Cܡܦܠܚܢ̈ܐ ܠܐ ܝܕ̈ܝܥܐ}} ܕ {{SITENAME}}
+siteuser|{{SITENAME}} ܡܦܠܚܢܐ ~{0}
+others|ܐܚܪ̈ܢܐ
+siteusers|{{SITENAME}} {{PLURAL:~{1}\u007Cܡܦܠܚܢܐ\u007Cܡܦܠܚܢ̈ܐ}} ~{0}
+anonusers|{{SITENAME}} {{PLURAL:~{1}\u007Cܡܦܠܚܢܐ ܠܐ ܝܕܝܥܐ\u007Cܡܦܠܚܢ̈ܐ ܠܐ ܝܕ̈ܝܥܐ}} ~{0}
+creditspage|ܙܕ̈ܩܐ ܕܦܐܬܐ
+pageinfo-title|ܝܕ̈ܥܬܐ ܥܠ "~{0}"
+pageinfo-header-basic|ܝܕ̈ܥܬܐ ܪ̈ܫܝܬܐ
+pageinfo-header-edits|ܬܫܥܝܬܐ ܕܫܘܚܠܦ̈ܐ
+pageinfo-header-restrictions|ܢܘܛܪܐ ܕܦܐܬܐ
+pageinfo-header-properties|ܕ̈ܝܠܝܬܐ ܕܦܐܬܐ
+pageinfo-display-title|ܚܘܘܝܐ ܕܟܘܢܝܐ
+pageinfo-default-sort|ܩܠܝܕܐ ܕܛܘܟܣܐ ܡܬܚܫܒܢܝܐ
+pageinfo-length|ܥܓܪܐ ܕܦܐܬܐ (ܒܒܐܝܛ)
+pageinfo-article-id|ܗܝܝܘܬܐ ܕܦܐܬܐ
+pageinfo-robot-policy|ܫܘܘܕܥܐ ܒܝܕ ܪ̈ܘܒܘܛܐ
+pageinfo-robot-index|ܡܬܦܣܣܢܐ
+pageinfo-robot-noindex|ܠܐ ܡܬܦܣܣܢܐ
+pageinfo-watchers|ܡܢܝܢܐ ܕܪ̈ܗܝܐ
+pageinfo-redirects-name|ܡܢܝܢܐ ܕܨܘܝܒ̈ܐ ܠܦܐܬܐ ܗܕܐ
+pageinfo-subpages-name|ܦܐܬܬ̈ܐ ܦܪ̈ܥܝܐ ܕܦܐܬܐ ܗܕܐ
+pageinfo-firstuser|ܒܪܝܢܐ ܕܦܐܬܐ
+pageinfo-firsttime|ܣܝܩܘܡܐ ܕܒܪܝܬܐ ܕܦܐܬܐ
+pageinfo-lastuser|ܫܚܠܦܢܐ ܐܚܪܝܐ
+pageinfo-lasttime|ܣܝܩܘܡܐ ܕܫܘܚܠܦܐ ܐܚܪܝܐ
+pageinfo-edits|ܡܢܝܢܐ ܕܫܘܚܠܦ̈ܐ
+pageinfo-authors|ܡܢܝܢܐ ܕܡܫܚܠܦܢ̈ܐ ܡܫܚܠܦ̈ܐ
+pageinfo-recent-edits|ܡܢܝܢܐ ܕܫܘܚܠܦ̈ܐ ܐܚܪ̈ܝܐ (ܒ ~{0} ܕܕܥܒܪ)
+pageinfo-recent-authors|ܡܢܝܢܐ ܕܡܫܚܠܦܢ̈ܐ ܡܫܚܠܦ̈ܐ ܐܚܪ̈ܝܐ
+pageinfo-toolboxlink|ܝܕ̈ܥܬܐ ܥܠ ܦܐܬܐ
+pageinfo-contentpage-yes|ܐܝܢ
+pageinfo-protect-cascading-yes|ܐܝܢ
+markaspatrolleddiff|ܫܘܕܥ ܐܝܟ ܟܪܝܟܬܐ
+markaspatrolledtext|ܫܘܕܥ ܦܐܬܐ ܗܕܐ ܐܝܟ ܟܪܝܟܬܐ
+markedaspatrolled|ܫܘܕܥܬ ܐܝܟ ܟܪܝܟܬܐ
+markedaspatrollednotify|ܫܘܚܠܦܐ ܗܢܐ ܥܠ ~{0} ܐܫܬܘܕܥ ܐܝܟ ܟܪܝܟܐ.
+markedaspatrollederrornotify|ܠܐ ܐܬܢܨܚ ܫܘܘܕܥܐ ܐܝܟ ܟܪܝܟܬܐ
+patrol-log-page|ܣܓܠܐ ܕܟܪܟܐ
+log-show-hide-patrol|~{0} ܣܓܠܐ ܕܟܪܟܐ
+filedeleteerror-short|ܦܘܕܐ ܒܫܝܦܐ ܕܠܦܦܐ: ~{0}
+filedeleteerror-long|ܦܘܕ̈ܐ ܐܫܟܚܬ ܟܕ ܫܝܦܐ ܠܦܦܐ:\n\n~{0}
+previousdiff|← ܫܘܚܠܦܐ ܕܩܕܡ
+nextdiff|ܫܘܚܠܦܐ ܕܒܬܪ →
+thumbsize|ܥܓܪܐ ܕܨܘܪܬܐ ܙܥܘܪܬܐ:
+widthheightpage|~{0} × ~{1}, ~{2} {{PLURAL:~{2}\u007Cܦܐܬܐ\u007Cܦܐܬܬ̈ܐ}}
+file-info|ܥܓܪܐ ܕܠܦܦܐ: ~{0}, MIME ܐܕܫܐ: ~{1}
+file-info-size|~{0} × ~{1} ܦܩܣܠ، ܥܓܪܐ ܕܠܦܦܐ: ~{2}، ܐܕܫܐ ܕ MIME: ~{3}
+file-info-size-pages|~{0} × ~{1} ܦܩܣܠ, ܥܓܪܐ ܕܠܦܦܐ: ~{2}, ܐܕܫܐ ܕ MIME: ~{3}, ~{4} {{PLURAL:~{4}\u007Cܦܐܬܐ\u007Cܦܐܬܬ̈ܐ}}
+file-nohires|ܠܝܬ ܢܩܕܘܬܐ ܝܬܝܪ ܡܢ ܗܢܐ.
+show-big-image|ܠܦܦܐ ܫܪܫܝܐ
+show-big-image-preview|ܥܓܪܐ ܕܓܠܚܐ: ~{0}.
+show-big-image-size|~{0} × ~{1} ܦܩܣܠ
+newimages|ܒܝܬ ܓܠܚܐ ܕܠܦܦ̈ܐ ܚܕܬ̈ܐ
+newimages-legend|ܡܨܦܝܢܝܬܐ
+newimages-label|ܫܡܐ ܕܠܦܦܐ (ܐܘ ܡܢܬܐ ܡܢܗ)
+noimages|ܠܝܬ ܡܕܡ ܠܚܙܝܐ.
+ilsubmit|ܒܨܝ
+bydate|ܒܣܝܩܘܡܐ
+sp-newimages-showfrom|ܚܘܝ ܠܦܦ̈ܐ ܚܕ̈ܬܐ ܕܫܪܝ ܡܢ ~{1}, ~{0}
+seconds|{{PLURAL:~{0}\u007C~{0} ܪܦܦܐ\u007C~{0} ܪ̈ܦܦܐ}}
+minutes|{{PLURAL:~{0}\u007C~{0} ܩܛܝܢܬܐ\u007C~{0} ܩܛܝܢܬ̈ܐ}}
+hours|{{PLURAL:~{0}\u007C~{0} ܫܥܬܐ\u007C~{0} ܫܥܬ̈ܐ}}
+days|{{PLURAL:~{0}\u007C~{0} ܝܘܡܐ\u007C~{0} ܝܘܡܬ̈ܐ}}
+just-now|ܗܫܐ ܒܪ ܫܥܬܗ
+metadata|ܓܠܝܬ̈ܐ ܕܡܝܛܐ
+metadata-expand|ܚܘܝ ܐܪ̈ܝܟܬܐ ܪ̈ܘܝܚܬܐ
+metadata-collapse|ܛܫܝ ܐܪ̈ܝܟܬܐ ܪ̈ܘܝܚܬܐ
+exif-imagewidth|ܦܬܘܐ
+exif-imagelength|ܐܘܪܟܐ
+exif-xresolution|ܢܩܕܘܬܐ ܐܘܦܩܝܬܐ
+exif-yresolution|ܢܩܕܘܬܐ ܥܡܘܕܝܬܐ
+exif-imagedescription|ܟܘܢܝܐ ܕܨܘܪܬܐ
+exif-artist|ܣܝܘܡܐ
+exif-exposuretime-format|~{0} ܪܦܦܐ (~{1})
+exif-filesource|ܡܒܘܥܐ ܕܠܦܦܐ
+exif-gpsspeedref|ܚܕܝܘܬܐ ܕܩܠܘܠܘܬܐ
+exif-gpstrack|ܨܘܒܐ ܕܫܘܢܝܐ
+exif-gpsimgdirectionref|ܡܒܘܥܐ ܕܨܘܒܐ ܕܨܘܪܬܐ
+exif-gpsimgdirection|ܨܘܒܐ ܕܨܘܪܬܐ
+exif-languagecode|ܠܫܢܐ
+exif-unknowndate|ܣܝܩܘܡܐ ܠܐ ܝܕܝܥܐ
+exif-orientation-1|ܟܝܢܝܐ
+exif-exposureprogram-1|ܐܝܕܝܐ
+exif-exposureprogram-2|ܬܚܪܙܬܐ ܟܝܢܝܬܐ
+exif-meteringmode-0|ܠܐ ܝܕܝܥܐ
+exif-meteringmode-255|ܐܚܪܢܐ
+exif-lightsource-0|ܠܐ ܝܕܝܥܐ
+exif-lightsource-9|ܨܚܘܐ
+exif-lightsource-10|ܐܬܝܪܐ ܥܝܒܝܐ
+exif-lightsource-11|ܛܠܐ
+exif-focalplaneresolutionunit-2|ܐܝܢܟ̰
+exif-customrendered-0|ܥܡܠܝܬܐ ܟܝܢܝܬܐ
+exif-gaincontrol-0|ܠܐ ܡܕܡ
+exif-contrast-0|ܟܝܢܝܐ
+exif-contrast-1|ܪܟܝܟܐ
+exif-contrast-2|ܩܫܝܐ
+exif-saturation-0|ܟܝܢܝܐ
+exif-sharpness-0|ܟܝܢܝܐ
+exif-sharpness-1|ܪܟܝܟܐ
+exif-sharpness-2|ܩܫܝܐ
+exif-subjectdistancerange-0|ܠܐ ܝܕܝܥܐ
+exif-subjectdistancerange-2|ܚܝܪܐ ܩܪܝܒܐ
+exif-subjectdistancerange-3|ܚܝܪܐ ܪܚܘܩܐ
+exif-gpsspeed-k|ܟܝܠܘܡܬܪ ܒܫܥܬܐ
+exif-gpsspeed-m|ܡܝܠܐ ܒܫܥܬܐ
+exif-gpsspeed-n|ܩܛܪ̈ܐ
+exif-gpsdestdistance-m|ܡܝܠ̈ܐ
+exif-gpsdirection-t|ܨܘܒܐ ܬܪܝܨܐ
+exif-gpsdirection-m|ܨܘܒܐ ܡܓܢܛܝܣܝܐ
+exif-dc-contributor|ܫܘܬܦܢ̈ܐ
+namespacesall|ܟܠ
+monthsall|ܟܠ
+confirmemail|ܫܪܪ ܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ
+confirmemail_subject|ܫܘܪܪܐ ܕܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ ܡܢ {{SITENAME}}
+confirmemail_invalidated|ܫܘܪܪܐ ܕܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ ܐܬܒܛܠ
+invalidateemail|ܒܛܘܠ ܫܘܪܪܐ ܕܒܝܠܕܪܐ ܐܠܩܛܪܘܢܝܐ
+recreate|ܒܪܝ ܙܒܢܬܐ ܐܚܪܬܐ
+confirm_purge_button|ܛܒ
+imgmultipageprev|← ܫܘܚܠܦܐ ܕܩܕܡ
+imgmultipagenext|← ܫܘܚܠܦܐ ܕܒܬܪ
+imgmultigo|ܙܠ!
+imgmultigoto|ܙܠ ܠܦܐܬܐ ~{0}
+ascending_abbrev|ܡܣܩܐܝܬ
+descending_abbrev|ܡܚܬܐܝܬ
+table_pager_next|ܦܐܬܐ ܕܒܬܪ
+table_pager_prev|ܦܐܬܐ ܕܩܕܡ
+table_pager_first|ܦܐܬܐ ܩܕܡܝܬܐ
+table_pager_last|ܦܐܬܐ ܐܚܪܝܬܐ
+table_pager_limit_label|ܡܕ̈ܡܐ ܠܟܠ ܦܐܬܐ:
+table_pager_limit_submit|ܙܠ
+table_pager_empty|ܠܝܬ ܦܠܛ̈ܐ
+autosumm-blank|ܐܣܦܩ ܦܐܬܐ
+autoredircomment|ܦܐܬܐ ܨܝܒܬ ܠ [[~{0}]]
+autosumm-new|ܒܪܐ ܦܐܬܐ ܥܡ '~{0}'
+watchlistedit-normal-title|ܫܚܠܦ ܪ̈ܗܝܬܐ
+watchlistedit-normal-legend|ܠܚܝ ܟܘܢܝ̈ܐ ܡܢ ܪ̈ܗܝܬܟ
+watchlistedit-normal-explain|ܟܘܢܝ̈ܐ ܒܪ̈ܗܝܬܟ ܡܬܚܘܝܢ ܠܬܚܬ.\nܠܠܚܝܐ ܕܟܘܢܝܐ, ܫܘܕܥ ܥܠ ܣܢܕܘܩܐ ܕܕܦܢܗ, ܘܕܘܫ "{{int:Watchlistedit-normal-submit}}".\nܡܨܬ ܕ[[Special:EditWatchlist/raw\u007Cܬܫܚܠܦܬ ܪ̈ܗܝܬܐ ܦܛܝܪ̈ܬܐ]].
+watchlistedit-normal-submit|ܠܚܝ ܟܘܢܝܐ
+watchlistedit-normal-done|{{PLURAL:~{0}\u007Cܚܕ ܟܘܢܝܐ ܐܬܠܚܝ\u007C~{0} ܟܘܢܝ̈ܐ ܐܬܠܚܘܢ}} ܡܢ ܪ̈ܗܝܬܟ:
+watchlistedit-raw-title|ܫܚܠܦ ܪ̈ܗܝܬܐ ܦܛܝܪ̈ܬܐ
+watchlistedit-raw-legend|ܫܚܠܦ ܪ̈ܗܝܬܐ ܦܛܝܪ̈ܬܐ
+watchlistedit-raw-titles|ܟܘܢܝ̈ܐ:
+watchlistedit-raw-submit|ܚܕܬ ܪ̈ܗܝܬܐ
+watchlisttools-view|ܚܘܝ ܫܘܚܠܦ̈ܐ ܕ̈ܡܝܐ
+watchlisttools-edit|ܚܙܝ ܘܫܚܠܦ ܪ̈ܗܝܬܐ
+watchlisttools-raw|ܫܚܠܦ ܪ̈ܗܝܬܐ ܦܛܝܪ̈ܬܐ
+version|ܨܚܚܐ
+version-specialpages|ܦܐܬܬ̈ܐ ܕ̈ܝܠܢܝܬܐ
+version-other|ܐܚܪܢܐ
+version-version|(~{0})
+version-poweredby-others|ܐܚܪ̈ܢܐ
+version-software-version|ܨܚܚܐ
+fileduplicatesearch|ܒܨܝ ܥܠ ܠܦܦ̈ܐ ܥܦܝܦ̈ܐ
+fileduplicatesearch-legend|ܒܨܝܐ ܥܠ ܥܘܦܦܐ
+fileduplicatesearch-filename|ܫܡܐ ܕܠܦܦܐ:
+fileduplicatesearch-submit|ܒܨܝ
+fileduplicatesearch-info|~{0} × ~{1} ܦܩܣܠ<br /> ܥܓܪܐ ܕܠܦܦܐ: ~{2}<br /> ܐܕܫܐ ܕ MIME: ~{3}
+specialpages|ܦܐܬܬ̈ܐ ܕ̈ܝܠܢܝܬܐ
+specialpages-note|* ܦܐܬܬ̈ܐ ܕ̈ܝܠܢܝܬܐ ܥܝܕ̈ܝܬܐ.\n* <span class="mw-specialpagerestricted">ܦܐܬܬ̈ܐ ܕ̈ܝܠܢܝܬܐ ܕܩܝܘܡ̈ܐ.</span>
+specialpages-group-maintenance|ܬܫܪܪ̈ܐ ܕܚܕܬܘܬܐ
+specialpages-group-other|ܦܐܬܬ̈ܐ ܕ̈ܝܠܢܝܬܐ ܐܚܪ̈ܢܝܬܐ
+specialpages-group-login|ܥܘܠ / ܒܪܝ ܚܘܫܒܢܐ
+specialpages-group-changes|ܫܘܚܠܦ̈ܐ ܚܕ̈ܬܐ ܘܣܓܠ̈ܐ
+specialpages-group-media|ܬܫܪܪ̈ܐ ܕܡܝܕܝܐ ܘܐܣܩܬ̈ܐ
+specialpages-group-users|ܡܦܠܚܢ̈ܐ ܘܙܕ̈ܩܐ
+specialpages-group-highuse|ܦܐܬܬ̈ܐ ܕܡܬܚܫܚܢܘܬܐ ܥܠܝܬܐ
+specialpages-group-pages|ܡܟܬܒܘܬ̈ܐ ܕܦܐܬܬ̈ܐ
+specialpages-group-pagetools|ܡܐܢ̈ܐ ܕܦܐܬܐ
+specialpages-group-wiki|ܓܠܝܬ̈ܐ ܘܡܐܢ̈ܐ
+specialpages-group-redirects|ܨܘܝܒܐ ܕܦܐܬܐ ܕܝܠܢܝܬܐ
+blankpage|ܦܐܬܐ ܣܦܝܩܬܐ
+tags|ܚܬ̈ܡܐ ܕܫܘܚܠܦܐ ܬܪܝܨܐ
+tag-filter|ܡܨܦܝܢܝܬܐ ܕ[[Special:Tags\u007Cܪܘܫܡܐ]]:
+tag-filter-submit|ܡܨܦܝܢܝܬܐ
+tags-title|ܪ̈ܘܫܡܐ
+tags-intro|ܦܐܬܐ ܗܕܐ ܬܓܠܚ ܪ̈ܘܫܡܐ ܕܬܚܪܙܬܐ ܪܒܬ ܫܘܕܥ ܫܘܚܠܦܐ ܒܗ، ܘܣܘܟܠܝܗܝܢ.
+tags-tag|ܫܡܐ ܕܪܘܫܡܐ
+tags-display-header|ܡܬܓܠܝܢܘܬܐ ܒܡܟܬܒܘܬ̈ܐ ܕܫܘܚܠܦܐ
+tags-description-header|ܫܘܡܗܐ ܓܡܝܪܐ ܕܣܘܟܠܐ
+tags-hitcount-header|ܫܘܚܠܦ̈ܐ ܪ̈ܫܝܡܐ
+tags-edit|ܫܚܠܦ
+tags-hitcount|~{0} {{PLURAL:~{0}\u007Cܫܘܚܠܦܐ\u007Cܫܘܚܠܦ̈ܐ}}
+comparepages|ܦܚܘܡ ܒܝܢܝ ܦܐܬܬ̈ܐ
+compare-page1|ܦܐܬܐ 1
+compare-page2|ܦܐܬܐ 2
+compare-rev1|ܬܢܝܬܐ 1
+compare-rev2|ܬܢܝܬܐ 2
+compare-submit|ܦܚܘܡ
+htmlform-submit|ܫܕܪ
+htmlform-reset|ܠܐ ܬܥܒܕ ܫܘܚܠܦ̈ܐ
+htmlform-selectorother-other|ܐܚܪܢܐ
+logentry-delete-delete|~{0} {{GENDER:~{1}\u007Cܫܦ}} ܦܐܬܐ ܕ ~{2}
+logentry-move-move|~{0} {{GENDER:~{1}\u007Cܫܢܐ}} ܦܐܬܐ ܕ ~{2} ܠ ~{3}
+logentry-move-move-noredirect|~{0} {{GENDER:~{1}\u007Cܫܢܐ}} ܦܐܬܐ ܕ ~{2} ܠ ~{3} ܘܠܐ ܫܒܩ ܦܐܬܐ ܕܨܘܝܒܐ
+logentry-move-move_redir|~{0} {{GENDER:~{1}\u007Cܫܢܐ}} ܦܐܬܐ ܕ ~{2} ܠ ~{3} ܕܐܝܬܘܗܝ ܦܐܬܐ ܕܨܘܝܒܐ
+logentry-move-move_redir-noredirect|~{0} {{GENDER:~{1}\u007Cܫܢܐ}} ܦܐܬܐ ܕ ~{2} ܠ ~{3} ܕܐܝܬܘܗܝ ܦܐܬܐ ܕܨܘܝܒܐ ܘܠܐ ܫܒܩ ܦܐܬܐ ܕܨܘܝܒܐ
+logentry-patrol-patrol|~{0} {{GENDER:~{1}\u007Cܫܘܕܥ}} ܬܢܝܬܐ ~{3} ܕܦܐܬܐ ~{2} ܟܪܝܟܬܐ
+logentry-patrol-patrol-auto|~{0} ܝܬܐܝܬ {{GENDER:~{1}\u007Cܫܘܕܥ}} ܬܢܝܬܐ ~{3} ܕܦܐܬܐ ~{2} ܟܪܝܟܬܐ
+logentry-newusers-newusers|ܚܘܫܒܢܐ ܕܡܦܠܚܢܐ ~{0} {{GENDER:~{1}\u007Cܐܬܬܟܝܢ}}
+logentry-newusers-create|ܚܘܫܒܢܐ ܕܡܦܠܚܢܐ ~{0} {{GENDER:~{1}\u007Cܐܬܬܟܝܢ}}
+logentry-newusers-create2|ܚܘܫܒܢܐ ܕܡܦܠܚܢܐ ~{2} {{GENDER:~{1}\u007Cܐܬܬܟܝܢ}} ܒܝܕ ~{0}
+logentry-newusers-autocreate|ܚܘܫܒܢܐ ܕܡܦܠܚܢܐ ~{0} {{GENDER:~{1}\u007Cܐܬܬܣܝܡ}} ܝܬܐܝܬ
+rightsnone|(ܠܐ ܡܕܡ)
+revdelete-summary|ܫܚܠܦ ܦܣܝܩܬ̈ܐ
+feedback-cancel|ܒܛܘܠ
+feedback-message|ܐܓܪܬܐ:
+feedback-subject|ܡܠܘܐܐ:
+searchsuggest-search|ܒܨܝ
+searchsuggest-containing|ܬܚܒܘܫ...
+expandtemplates|ܐܪܘܚ ܩܠܒ̈ܐ
+expand_templates_output|ܦܠܛܐ
+expand_templates_ok|ܛܒ
+expand_templates_preview|ܚܝܪܐ ܩܕܡܝܐ
+contactpage-subject-and-sender|~{0} (ܡܢ ~{1})
+contactpage-fromname|ܫܡܐ ܕܝܠܟ:
+']:>
+).lang
+;

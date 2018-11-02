@@ -1,0 +1,52 @@
+ul.tabbernav {
+    margin: 0;
+    padding: 3px 0;
+    border-bottom: 1px solid #CCC;
+    font: bold 12px Verdana, sans-serif;
+}
+
+ul.tabbernav li {
+    list-style: none;
+    margin: 0;
+    display: inline;
+}
+
+ul.tabbernav li a {
+    padding: 3px .5em;
+    margin-left: 3px;
+    border: 1px solid #CCC;
+    border-bottom: none;
+    background: #F2F7FF;
+    text-decoration: none;
+}
+
+ul.tabbernav li a:link {
+    color: #448;
+}
+
+ul.tabbernav li a:visited {
+    color: #667;
+}
+
+ul.tabbernav li a:hover {
+    color: #000;
+    background: #FFF9F2;
+    border-color: #CCC;
+}
+
+ul.tabbernav li.tabberactive a {
+    background-color: #FFF;
+    border-bottom: 1px solid #FFF;
+}
+
+ul.tabbernav li.tabberactive a:hover {
+    color: #000;
+    background: #FFF;
+    border-bottom: 1px solid #FFF;
+}
+
+.tabber .tabbertab {
+    padding: 5px;
+    border: 1px solid #CCC;
+    border-top: 0;
+}

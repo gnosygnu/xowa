@@ -1,0 +1,14 @@
+this
+.messages
+  .load_text(
+<:['
+cite_article_link|Zidier dän ardiggl hier
+cite|Zidierhilfe
+cite_submit|Zidierhilfe
+sitesupport|Schbändn
+group-steward|Schdewards
+group-steward-member|Schdeward
+grouppage-steward|{{ns:project}}:Schdewards
+']:>
+).lang
+;

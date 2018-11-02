@@ -1,0 +1,975 @@
+this
+.fallback_load('ar')
+.dir_rtl_('y')
+.messages
+  .load_text(
+<:['
+sunday|Il-Eḩed
+monday|Il-Iŧnîn
+tuesday|Iŧ-Ŧlêŧ
+wednesday|Il-Irbģe
+thursday|Il-Xmîs
+friday|Ij-Jimģe
+saturday|Is-Sibt
+sun|Il-Eḩed
+mon|el ithnaine
+tue|ethlath
+wed|elirb3a
+thu|el5mis
+fri|ejjom3a
+sat|essibt
+january|Jânfi
+february|Fîvrî
+march|Mâris
+april|Avrîl
+may_long|Mêy
+june|Jweñ
+july|Jwîlye
+august|Ût
+september|Siptombir
+october|Uktobir
+november|Nuvombir
+december|Disombir
+january-gen|Janvi
+february-gen|Fîvrî
+march-gen|Mars
+april-gen|Avril
+may-gen|Mai
+june-gen|Juin
+july-gen|Juilia
+august-gen|Août
+september-gen|Septembre
+october-gen|Octobre
+november-gen|Novembre
+december-gen|Décembre
+jan|Jan.
+feb|.Fiv
+mar|Mâris
+apr|Avr.
+may|Mêy
+jun|Jweñ
+jul|Jwi.
+aug|Ût
+sep|Sep.
+oct|Okt.
+nov|.Nov
+dec|Des.
+toc|Contenu
+redirectedfrom|(Tħawwelt men ~{0})
+allpages|kol ess'afa7at
+collapsible-collapse|Tʾabbes
+collapsible-expand|Wassegħ
+sort-descending|ترتيب تنازلي
+sort-ascending|ترتيب تصاعدي
+categories|تصنيفات
+lastmodifiedat|Il-pâj hêđî tbadlit êxir merre nhâr ~{0}, mģa ~{1}.
+thumbnail-more|Kabbir
+otherlanguages|B-lûğât okhrîne
+blanknamespace|(Ra'îsî)
+pagecategories|{{PLURAL:Catégorie weħed\u007CZouz catégories\u007C~{0} catégories\u007C~{0} en catégorie}}
+category_header|صفحات تصنيف "~{0}"
+subcategories|التصنيفات الفرعية
+category-media-header|الوسائط في التصنيف "~{0}"
+category-empty|''هذا التصنيف لا يحتوي حاليا على صفحات أو وسائط.''
+category-subcat-count|{{PLURAL:~{1}\u007Cلا تصانيف فرعية في هذا التصنيف\u007Cهذا التصنيف فيه التصنيف الفرعي التالي فقط.\u007Cهذا التصنيف فيه {{PLURAL:~{0}\u007C\u007Cهذا التصنيف الفرعي\u007Cهذين التصنيفين الفرعيين\u007Cهذه ال~{0} تصانيف الفرعية\u007Cهذه ال~{0} تصنيفا فرعيا\u007Cهذه ال~{0} تصنيف فرعي}}، من إجمالي ~{1}.}}
+category-subcat-count-limited|هذا التصنيف فيه {{PLURAL:~{0}\u007C\u007Cالتصنيف الفرعي التالي\u007Cالتصنيفين الفرعيين التاليين\u007C~{0} تصانيف فرعية تالية\u007C~{0} تصنيفا فرعيا تاليا\u007C~{0} تصنيف فرعي تالي}}.
+category-article-count|{{PLURAL:~{1}\u007Cلا يحتوي هذا التصنيف أي صفحات.\u007Cهذا التصنيف يحتوي على الصفحة التالية فقط.\u007C{{PLURAL:~{0}\u007C\u007Cالصفحة التالية\u007Cالصفحتان التاليتان\u007Cال~{0} صفحات التالية\u007Cال~{0} صفحة التالية\u007Cال~{0} صفحة التالية}} في هذا التصنيف، من إجمالي ~{1}.}}
+category-article-count-limited|{{PLURAL:~{0}\u007C\u007Cالصفحة التالية\u007Cالصفحتان التاليتان\u007Cال~{0} صفحات التالية\u007Cال~{0} صفحة التالية\u007Cال~{0} صفحة التالية}} في التصنيف الحالي.
+category-file-count|{{PLURAL:~{1}\u007Cلا يحتوي هذا التصنيف أي صفحات.\u007Cهذا التصنيف يحتوي على الصفحة التالية فقط.\u007C{{PLURAL:~{0}\u007C\u007Cالصفحة التالية\u007Cالصفحتان التاليتان\u007Cال~{0} صفحات التالية\u007Cال~{0} صفحة التالية\u007Cال~{0} صفحة التالية}} في هذا التصنيف، من إجمالي ~{1}.}}
+category-file-count-limited|{{PLURAL:~{0}\u007Cالملف التالي\u007Cالملفان التاليان\u007Cال~{0} ملفات التالية\u007Cال~{0} ملفًا تاليًا\u007Cال~{0} ملف تالٍ}} في التصنيف الحالي.
+nextn|{{PLURAL:~{0}\u007C~{0}}} التالية
+prevn|{{PLURAL:~{0}\u007C~{0}}} السابقة
+listingcontinuesabbrev|متابعة
+bold_sample|نص غليظ
+bold_tip|نص غليظ
+italic_sample|نص مائل
+italic_tip|نص مائل
+link_sample|عنوان وصلة
+link_tip|وصلة داخلية
+headline_sample|نص عنوان رئيسي
+headline_tip|عنوان من المستوى الثاني
+hidden-category-category|تصنيفات مخفية
+statistics|إحصاءات
+indexpages|قائمة صفحات الفهرس
+pageswithoutscans|صفحات من دون تفحص
+proofreadpage_desc|يسمح بمقارنة سهلة للنص مع المسح الأصلي
+proofreadpage_image|صورة
+proofreadpage_index|فهرس
+proofreadpage_index_expected|خطأ: فهرس تم توقعه
+proofreadpage_nosuch_index|خطأ: لا فهرس كهذا
+proofreadpage_nosuch_file|خطأ: لا ملف كهذا
+proofreadpage_badpage|تنسيق خاطئ
+proofreadpage_badpagetext|تنسيق الصفحة التي تحاول حفظها غير صحيح.
+proofreadpage_indexdupe|رابط نظير
+proofreadpage_indexdupetext|لا يمكن سرد الصفحة أكثر من في صفحة الفهرس.
+proofreadpage_nologin|غير مسجل الدخول
+proofreadpage_nologintext|يجب أن تكون [[Special:UserLogin\u007Cمُسجلًا الدخول]] لتعدّل حالة تدقيق الصفحات.
+proofreadpage_notallowed|التغيير غير مسموح به
+proofreadpage_notallowedtext|لا يسمح لك بتغيير حالة تدقيق هذه الصفحة.
+proofreadpage_number_expected|خطأ: قيمة عددية تم توقعها
+proofreadpage_interval_too_large|خطأ: الفترة كبيرة جدا
+proofreadpage_invalid_interval|خطأ: فترة غير صحيحة
+proofreadpage_nextpage|الصفحة التالية
+proofreadpage_prevpage|الصفحة السابقة
+proofreadpage_header|العنوان (غير مضمن):
+proofreadpage_body|جسم الصفحة (للتضمين):
+proofreadpage_footer|ذيل (غير مضمن):
+proofreadpage_toggleheaders|تغيير رؤية أقسام noinclude
+proofreadpage_quality0_category|بدون نص
+proofreadpage_quality1_category|ليست مُدقّقة
+proofreadpage_quality2_category|به مشاكل
+proofreadpage_quality3_category|مُدقّقة
+proofreadpage_quality4_category|مُصحّحة
+proofreadpage_quality0_message|لا تحتاج هذه الصفحة إلى تدقيق
+proofreadpage_quality1_message|لم تدقّق هذه الصفحة
+proofreadpage_quality2_message|ثمة مشكلة عند تدقيق هذه الصفحة
+proofreadpage_quality3_message|دُقّقت هذه الصفحة
+proofreadpage_quality4_message|صُحّحت هذه الصفحة
+proofreadpage_index_listofpages|قائمة الصفحات
+proofreadpage_image_message|وصلة إلى صفحة الفهرس
+proofreadpage_page_status|حالة الصفحة
+proofreadpage_js_attributes|المؤلف العنوان السنة الناشر
+proofreadpage_index_attributes|المؤلف\nالعنوان\nالسنة\u007Cسنة النشر\nالناشر\nالمصدر\nالصورة\u007Cصورة الغلاف\nالصفحات\u007C\u007C20\nالملاحظات\u007C\u007C10
+proofreadpage_pages|~{1} {{PLURAL:~{0}\u007Css'af7a\u007Css'afa7at}}
+proofreadpage_specialpage_legend|بحث صفحات الفهرس
+proofreadpage_source|المصدر
+proofreadpage_source_message|الإصدارة المفحوصة المستخدمة لإنشاء هذا النص
+right-pagequality|عدل علامة جودة الصفحة
+proofreadpage-section-tools|أدوات تدقيق
+proofreadpage-group-zoom|kabber
+proofreadpage-group-other|غير ذلك
+proofreadpage-button-toggle-visibility-label|أظهر أو أخف ترويسة الصفحة وتذييلتها
+proofreadpage-button-zoom-out-label|تصغير
+proofreadpage-button-reset-zoom-label|رد التكبير
+proofreadpage-button-zoom-in-label|تكبير
+proofreadpage-button-toggle-layout-label|تخطيط أفقي أو رأسي
+proofreadpage-preferences-showheaders-label|warri plaiss' el entête wel pied de page wa9t il edition fil faragh mte3 el page {{ns:page}}
+proofreadpage-preferences-horizontal-layout-label|ista3mel i5raj ofo9i wa9t tekteb fil misse7a mte3 ess'af7a {{ns:page}}
+tog-underline|Ħotʾ stʾar taħt errabtʾa:
+tog-hideminor|Khabbi ettabdilàt essʾgħàr m ettabdilàt lekhrànìn
+tog-hidepatrolled|Khabbi ettabdilàt elmagħsous għlihom m ettabdilàt lekhrànìn
+tog-newpageshidepatrolled|Khabbi elpàjàt elmagħsous għlihom m ellista mtagħ elpàjàt ejjdida
+tog-extendwatchlist|Wassegħ ellista mtagħ elgħassa bech twarri ettabdilàt elkoll, w mouch lekhrànìn kahaw
+tog-usenewrc|)جمّع التعديلات حسب الصفحة في أحدث التغييرات وقائمة المراقبة (يتطلب جافاسكربت
+tog-numberheadings|Nwàmer otomatik l ettitrouàt mtagħ esseksyon
+tog-showtoolbar|أظهر شريط التحرير (يتطلب جافاسكربت)
+tog-editondblclick|عدل الصفحات عند الضغط المزدوج (جافاسكربت)
+tog-editsectiononrightclick|فعل تعديل الأقسام بواسطة كبسة الفأرة اليمين على عناوين الأقسام (جافاسكريبت)
+tog-watchcreations|Zid elpàjàt elli għmalt'hom w elfichyéàt elli tʾallagħt'hom l ellista mtagħ elgħassa mtagħi
+tog-watchdefault|Zid elpàjàt w elfichyéàt elli nbaddelhom l ellista mtagħ elgħassa mtagħi
+tog-watchmoves|Zid elpàjàt w elfichyéàt elli nhezzhom, l ellista mtagħ elgħassa mtagħi
+tog-watchdeletion|Zid elpàjàt w elfichyéàt elli nnaħħihom l ellista mtagħ elgħassa mtagħi
+tog-minordefault|Marki ettabdilàt essʾghàr elkoll par défo
+tog-previewontop|Warri tʾalla għla chsʾàr qbal ħokket ettabdil
+tog-previewonfirst|Warri tʾalla għla chsʾàr f ettabdila lawlàniya
+tog-enotifwatchlistpages|Abgħethli mail waqtelli pàj wella fichyé m ellista mtagħ elgħassa mtagħi tbaddel
+tog-enotifusertalkpages|Abgħethli mail watelli elpàj mtagħ leħdith mtagħi tetbaddel
+tog-enotifminoredits|Abgħethli mail zàda għattabdilàt essʾghàr mtagħ elpàjàt w elfichyéàt
+tog-enotifrevealaddr|Warri ladrisa mail mtagħi f elmailàt mtagħ ennotifikasyon
+tog-shownumberswatching|Warri għdad lutilizateuràt elgħassàsa
+tog-oldsig|Ettosʾħàħa elmawjouda:
+tog-fancysig|عامل التوقيع كنص ويكي (بدون وصلة أوتوماتيكية)
+tog-uselivepreview|استخدم الاستعراض السريع (جافاسكريبت) (تجريبي)
+tog-forceeditsummary|نبهني عند إدخال ملخص تعديل فارغ
+tog-watchlisthideown|أخف تعديلاتي من قائمة المراقبة
+tog-watchlisthidebots|أخف تعديلات البوت من قائمة المراقبة
+tog-watchlisthideminor|أخف التعديلات الطفيفة من قائمة المراقبة
+tog-watchlisthideliu|أخف تعديلات المستخدمين المسجلين من قائمة المراقبة
+tog-watchlisthideanons|أخف تعديلات المستخدمين المجهولين من قائمة المراقبة
+tog-watchlisthidepatrolled|أخف التعديلات المراجعة من قائمة المراقبة
+tog-ccmeonemails|أرسل لي نسخا من رسائل البريد الإلكتروني التي أرسلها للمستخدمين الآخرين
+tog-diffonly|لا تعرض محتوى الصفحة أسفل الفروقات
+tog-showhiddencats|أظهر التصنيفات المخفية
+tog-norollbackdiff|أزل الفرق بعد القيام باسترجاع
+underline-always|Dima
+underline-never|Jemla
+underline-default|تبعا لإعدادات المتصفح
+editfont-style|نمط خط منطقة التحرير:
+editfont-default|تبعا لإعدادات المتصفح
+editfont-monospace|خط ثابت العرض
+editfont-sansserif|خط بلا زوائد
+editfont-serif|خط بزوائد
+hidden-categories|{{PLURAL:Catégorie mkhabia waħda\u007CZouz catégories mkhabbin\u007C~{0} catégories mkhabbin\u007C~{0} en catégorie mkhabia}}
+index-category|صفحات مفهرسة
+noindex-category|صفحات غير مفهرسة
+broken-file-category|صفحات تحتوي وصلات ملفات معطوبة
+about|عن
+article|صفحة محتوى
+newwindow|(تفتح في نافذة جديدة)
+cancel|ifsa5
+moredotdotdot|Akther...
+mypage|صفحتي
+mytalk|نقاشي
+anontalk|Tħaddeth mgħa ladrisa IP hadhi
+navigation|Ḩawwis
+and| w
+qbfind|Lawwej
+qbbrowse|Navigi
+qbedit|Baddel
+qbpageoptions|Elpàj hadhi
+qbmyoptions|Pàjàti
+faq|FAQ
+faqpage|Project:FAQ
+actions|Aksyonàt
+namespaces|Blâyiş il-asêmî
+variants|Tanwîģât
+navigation-heading|il-mënü mtêģ in-navigâsyioñ
+errorpagetitle|Għaltʾa
+returnto|Arjagħ l ~{0}.
+tagline|Min {{SITENAME}}
+help|Mģâwne
+search|Lawwij
+searchbutton|Lawwij
+go|Emchi
+searcharticle|Imcî
+history|Listorik mtagħ elpàj
+history_short|Il-istorîk
+updatedmarker|tbaddlet melli jit àkher marra
+printableversion|Kopî bêc tiţbaģhê
+permalink|lieñ yoqģod dîme dîme
+print|Atʾbagħ
+view|Aqra
+edit|Baddil
+create|Agħmel
+editthispage|Baddel f elpàj hadhi
+create-this-page|Agħmel elpàj hadhi
+delete|Afsakh
+deletethispage|Afsakh elpàj hadhi
+undelete_short|Rajjagħ{{PLURAL:~{0}\u007Ctabdila waħda\u007C~{0} tabdila}}
+viewdeleted_short|Warri {{PLURAL:~{0}\u007Ctabdila waħda mafsoukha\u007C~{0} tabdila mafsoukha}}
+protect|Ħàmi
+protect_change|baddel
+protectthispage|Ħàmi għal pàj hadhi
+unprotect|Baddel elħimàya
+unprotectthispage|Baddel elħimàya mtagħ elpàj hadhi
+newpage|Pàj jdida
+talkpage|Tħaddeth għal pàj hadhi
+talkpagelinktext|Ḩdîŧ
+specialpage|Sʾafħa spesyàl
+personaltools|Mêģûnik
+articlepage|Warri elpàj mtagħ elkontenu
+talk|Ḩdiŧ
+views|Manḑer
+toolbox|Mêģûn
+userpage|Chour elpàj mtagħ lutilizateur
+projectpage|Chouf elpàj mtagħ leprojé
+imagepage|Chouf elpàj mtagħ elfichyé
+mediawikipage|Chouf elpàj mtagħ elmessàj
+templatepage|Chouf elpàj mtagħ elmodàl
+viewhelppage|Chouf elpàj mtagħ lemgħàwna
+categorypage|Chouf elpàj mtagħ elkatégori
+viewtalkpage|Chouf leħdith
+redirectpagesub|Pàj mtagħ taħwil
+viewcount|Elpàj hadhi dakhloulha {{PLURAL:~{0}\u007Cmarra waħda\u007C~{0} marra}}.
+protectedpage|Pàj protéjé
+jumpto|Imcî l-:
+jumptonavigation|Ḩawwis
+jumptosearch|Lawwij
+view-pool-error|Pardon, esserveuràt tàgħba tawwa.\nBarcha għbàd yħebbou ychoufou nafs elpàj.\nYgħaychek estanna chway qbal ma tjarreb bech todkhel l elpàj hadhi marra okhra.\n\n\n~{0}
+pool-timeout|Waqt esstennya wfa
+pool-queuefull|Essʾaf mgħabbi
+pool-errorunknown|Ghaltʾa ma nagħrfouhàch
+aboutsite|Fîme yxoş {{SITENAME}}
+aboutpage|Project:Fîme yxoş
+copyright|المحتوى متوفر تحت ~{0}.
+copyrightpage|{{ns:project}}:Copyrights
+currentevents|Elli sʾàyer tawwa
+currentevents-url|Project:Elli sʾàyer tawwa
+disclaimers|Tambîhêt
+disclaimerpage|Project:Tambîhêt ģâmme
+edithelp|Mgħàwna f elktiba
+mainpage|Il-pâj il-ewelêniye
+mainpage-description|Il-Pâj il-ewelêniye
+policy-url|Project:Elpolitik
+portal|Daxlit il-mujtamaģ
+portal-url|Project:Mujtamaģ
+privacy|Is-siyêse mteģ il-konfîdonsyalîtê
+privacypage|Project:Il-polîtîk mtêģ il-konfîdoñsyalîtê
+badaccess|خطأ في السماح
+badaccess-group0|ليس من المسموح لك تنفيذ الفعل الذي طلبته.
+badaccess-groups|الفعل الذي طلبته مقصور على المستخدمين في {{PLURAL:~{1}\u007C\u007Cمجموعة\u007Cواحدة من مجموعتي\u007Cواحدة من مجموعات}}: ~{0}.
+versionrequired|تلزم نسخة ~{0} من ميدياويكي
+versionrequiredtext|تلزم النسخة ~{0} من ميدياويكي لاستعمال هذه الصفحة. انظر [[Special:Version\u007Cصفحة النسخة]]
+ok|ok
+retrievedfrom|Tixđêt min- "~{0}"
+youhavenewmessages|توجد لديك ~{0} (~{1}).
+youhavenewmessagesmulti|لديك رسائل جديدة على ~{0}
+editsection|Baddil iş-şafḩa
+editold|Baddil
+viewsourceold|Warri essours
+editlink|baddil
+viewsourcelink|Warri is-sûrs
+editsectionhint|Baddil is-sêksyioñ: ~{0}
+showtoc|Warri
+hidetoc|Khabbi
+thisisdeleted|Warri wella rajjagħ ~{0}؟
+viewdeleted|Warri ~{0}؟
+restorelink|{{PLURAL:~{0}\u007C~{0} تعديل محذوف\u007Cتعديلا واحدا محذوفا\u007Cتعديلين محذوفين\u007C~{0} تعديلات محذوفة\u007C~{0} تعديلا محذوفا\u007C~{0} تعديلا محذوفا}}
+feedlinks|التغذية:
+feed-invalid|نوع اشتراك التلقيم غير صحيح.
+feed-unavailable|التلقيمات غير متوفرة
+site-rss-feed|~{0} تلقيم أر إس إس
+site-atom-feed|Flü Atom mtêģ ~{0}
+page-rss-feed|"~{0}" تلقيم أر إس إس
+page-atom-feed|~{0} تلقيم أتوم
+red-link-title|~{0} (Iş-Şafḩa mûc mawjûde)
+nstab-main|Şafḩa
+nstab-user|صفحة مستخدم
+nstab-media|صفحة وسيط
+nstab-special|Safḩa spêsyâl
+nstab-project|صفحة مشروع
+nstab-image|Fichier
+nstab-mediawiki|Messàj
+nstab-template|قالب
+nstab-help|صفحة مساعدة
+nstab-category|تصنيف
+nosuchaction|لا يوجد فعل كهذا
+nosuchactiontext|الفعل المحدد بواسطة المسار غير صحيح.\nربما تكون قد كتبت المسار بطريقة غير صحيحة، أو اتبعت وصلة غير صحيحة.\nهذا ربما يشير أيضا إلى علة في {{SITENAME}}.
+nosuchspecialpage|لا توجد صفحة خاصة بهذا الاسم
+nospecialpagetext|<strong>لقد طلبت صفحة خاصة غير صحيحة.</strong>\n\nقائمة بالصفحات الخاصة الصحيحة يمكن إيجادها في [[Special:SpecialPages\u007C{{int:specialpages}}]].
+error|ghalath
+databaseerror|خطأ في قاعدة البيانات
+laggedslavemode|'''تحذير:''' الصفحة قد لا تحتوي على أحدث التحديثات.
+readonly|قاعدة البيانات مغلقة
+enterlockreason|أدخل سببا للغلق، متضمنا تقديرا لوقت رفع الغلق
+readonlytext|قاعدة البيانات مغلقة حاليا أمام المدخلات الجديدة والتعديلات الأخرى، السبب غالبا ما يكون الصيانة، وستعود قاعدة البيانات للوضع الطبيعي قريبا.\n\nالإداري الذي أغلق قاعدة البيانات أعطى التفسير التالي: ~{0}
+missing-article|Elbase de données malqatech ettexte mtaε essafħa elli supposée talqaha, welli esmha "~{0}" ~{1}.\n\nHedha elli ysir elεada waqtelli tħel farq qdim walla lien mtaε l'historique mtaε safħa tnaħħat.\n\nIdha ken mouch hedheka li sar, rak momken lqit mochkla fel programme.\nAman qoul elweħeb mel les [[Special:ListUsers/sysop\u007Cadministrateurs]], waεtih ellien elli ħabit temchilou.
+missingarticle-rev|(رقم المراجعة: ~{0})
+missingarticle-diff|(فرق: ~{0}، ~{1})
+readonly_lag|تم إغلاق قاعدة البيانات تلقائيا حتى تستطيع الخواديم التابعة ملاحقة الخادوم الرئيسي
+internalerror|خطأ داخلي
+internalerror_info|خطأ داخلي: ~{0}
+filecopyerror|لم يمكن نسخ الملف "~{0}" إلى "~{1}".
+filerenameerror|لم يمكن إعادة تسمية الملف "~{0}" إلى "~{1}".
+filedeleteerror|لم يمكن حذف الملف "~{0}".
+directorycreateerror|لم يمكن إنشاء المجلد "~{0}".
+filenotfound|لم يمكن إيجاد الملف "~{0}".
+unexpected|قيمة غير متوقعة: "~{0}"="~{1}".
+formerror|خطأ: لم يمكن تنفيذ الاستمارة
+badarticleerror|لا يمكن إجراء هذا الفعل على هذه الصفحة.
+cannotdelete|تعذر حذف الصفحة أو الملف "~{0}".\nربما حذفها شحص آخر.
+cannotdelete-title|لا يمكن حذف الصفحة "~{0}"
+delete-hook-aborted|faskhan wa9fou flash.\nmahouwech mobarrar
+badtitle|عنوان سيء
+badtitletext|عنوان الصفحة المطلوب إما غير صحيح أو فارغ، وربما الوصلة بين اللغات أو بين المشاريع خاطئة.\nومن الممكن وجود رموز لا تصلح للاستخدام في العناوين.
+perfcached|البيانات التالية مختزنة وقد لا تكون محدثة. {{PLURAL:~{0}\u007C\u007Cنتيجة واحدة\u007Cنتيجتان\u007C~{0} نتائج\u007C~{0} نتيجة}} على الأكثر {{PLURAL:~{0}\u007C\u007Cمختزنة\u007Cمختزنتان\u007Cمختزنة}}.
+perfcachedts|البيانات التالية مختزنة وكان آخر تحديث لها في ~{0}. {{PLURAL:~{3}\u007C\u007Cنتيجة واحدة\u007Cنتيجتان\u007C~{3} نتائج\u007C~{3} نتيجة}} على الأكثر {{PLURAL:~{3}\u007C\u007Cمختزنة\u007Cمختزنتان\u007Cمختزنة}}.
+querypage-no-updates|التحديثات لهذه الصفحة معطلة حاليا.\nالبيانات هنا لن يتم تحديثها حاليا.
+viewsource|اعرض المصدر
+viewsource-title|إظهار مصدر ~{0}
+actionthrottled|لا يمكن عمل المزيد من هذا الفعل
+actionthrottledtext|كإجراء ضد السبام، أنت ممنوع من إجراء هذا الفعل عدد كبير من المرات في فترة زمنية قصيرة، ولقد تجاوزت هذا الحد.\nمن فضلك حاول مرة ثانية خلال عدة دقائق.
+protectedpagetext|هذه الصفحة تمت حمايتها لمنع التعديل.
+viewsourcetext|يمكنك رؤية ونسخ مصدر هذه الصفحة:
+viewyourtext|يمكنك رؤية ونسخ مصدر ''' تعديلاتك ''' في هذه الصفحة:
+protectedinterface|هذه الصفحة توفر نص الواجهة للبرنامج، وهي مقفلة لمنع التخريب.
+editinginterface|'''تحذير:''' أنت تقوم بتحرير صفحة تستخدم في الواجهة النصية للبرنامج.\nسوف تؤثر التغييرات على هذه الصفحة على مظهر واجهة المستخدم للمستخدمين الآخرين.\nللترجمات، من فضلك استخدم مشروع ترجمة ميدياويكي [//translatewiki.net/wiki/Main_Page?setlang=ar translatewiki.net].
+cascadeprotected|تمت حماية هذه الصفحة من التعديل لأنها مدمجة في {{PLURAL:~{0}\u007C\u007Cالصفحة التالية، والتي\u007Cالصفحتين التاليتين، واللتين\u007Cالصفحات التالية، والتي}} تم استعمال خاصية "حماية الصفحات المدمجة" {{PLURAL:~{0}\u007C\u007Cبها\u007Cبهما\u007Cبها}}:\n~{1}
+namespaceprotected|لا تمتلك الصلاحية لتعديل الصفحات في نطاق '''~{0}'''.
+customcssprotected|أنت لا تمتلك السماح لتعديل صفحة الCSS هذه، لأنها تحتوي على الإعدادات الشخصية لمستخدم آخر.
+customjsprotected|أنت لا تمتلك السماح لتعديل صفحة الجافاسكريبت هذه، لأنها تحتوي على الإعدادات الشخصية لمستخدم آخر.
+ns-specialprotected|الصفحات الخاصة لا يمكن تعديلها.
+titleprotected|{{GENDER:~{0}\u007Cحمى\u007Cحمت}} [[User:~{0}\u007C~{0}]] هذا العنوان من الإنشاء.\nالسبب المعطى هو ''~{1}''.
+filereadonlyerror|تعذر تعديل الملف "~{0}" لأن مستودع الملف "~{1}" في وضع القراءة فقط. \n\nالمدير الذي قام بغلقه قدم التفسير التالي: "~{2}".
+invalidtitle-knownnamespace|عنوان غير صالح في النطاق «~{1}» مع نص «~{2}»
+invalidtitle-unknownnamespace|عنوان غير صالح ذو نطاق غير معروف رقم ~{0} ونص «~{1}»
+exception-nologin|غير مسجل الدخول
+exception-nologin-text|hedhi ess'af7a wa 2ella el action te7tej mennek bech etloginni il hedha el wiki
+virus-badscanner|ضبط سيء: ماسح فيروسات غير معروف: ''~{0}''
+virus-scanfailed|فشل المسح (كود ~{0})
+virus-unknownscanner|مضاد فيروسات غير معروف:
+logouttext|'''أنت الآن غير مسجل الدخول.'''\n\nتستطيع المتابعة باستعمال {{SITENAME}} كمجهول، أو <span class='plainlinks'>[~{0} الدخول مرة أخرى]</span> بنفس الاسم أو باسم آخر.\nمن الممكن أن ترى بعض الصفحات كما لو أنك مسجل الدخول، وذلك حتى تقوم بإفراغ الصفحات المختزنة في المتصفح لديك.
+yourname|اسم المستخدم:
+yourpassword|كلمة السر:
+yourpasswordagain|أعد كتابة كلمة السر:
+remembermypassword|تذكر دخولي على هذا الحاسوب (إلى {{PLURAL:~{0}\u007C\u007Cيوم واحد\u007Cيومين\u007C~{0} أيام\u007C~{0} يومًا\u007C~{0} يوم}} كحد أقصى)
+yourdomainname|نطاقك:
+externaldberror|هناك إما خطأ في دخول قاعدة البيانات الخارجية أو أنه غير مسموح لك بتحديث حسابك الخارجي.
+login|ادخل
+nav-login-createaccount|Connecti / aεmel compte
+userlogin|ادخل / أنشئ حسابا
+userloginnocreate|دخول
+logout|اخرج
+userlogout|خروج
+notloggedin|غير مسجل الدخول
+nologin|ألا تمتلك حسابا؟ '''~{0}'''.
+nologinlink|أنشئ حسابا
+createaccount|أنشئ حسابا
+gotaccount|تمتلك حسابا بالفعل؟ '''~{0}'''.
+gotaccountlink|ادخل
+userlogin-resetlink|أنسيت بيانات الولوج؟
+createaccountmail|بواسطة البريد الإلكتروني
+createaccountreason|السبب:
+badretype|كلمات السر التي أدخلتها لا تتطابق.
+userexists|اسم المستخدم الذي تم إدخاله مستعمل بالفعل.\nالرجاء اختيار اسم مختلف.
+loginerror|خطأ في الدخول
+createaccounterror|تعذر إنشاء حساب المستخدم: ~{0}
+nocookiesnew|تم إنشاء حساب المستخدم، ولكنك لست مسجل الدخول بعد.\nيستخدم {{SITENAME}} كوكيز لتسجيل الدخول.\nلديك الكوكيز معطلة.\nمن فضلك فعلها، ثم سجل الدخول باسم المستخدم وكلمة السر الجديدين.
+nocookieslogin|يستخدم {{SITENAME}} الكوكيز لتسجيل الدخول.\nالكوكيز معطلة لديك.\nمن فضلك فعلها ثم حاول مرة أخرى.
+nocookiesfornew|لم يتم إنشاء حساب المستخدم، لأننا لم نستطع تأكيد مصدره. \nتأكد من أن ملفات تعريف الارتباط (الكوكيز) مفعلة عندك، ثم أعد تحميل الصفحة وحاول مرة أخرى.
+noname|لم تحدد اسم مستخدم صحيح.
+loginsuccesstitle|تم الدخول بشكل صحيح
+loginsuccess|'''لقد قمت بتسجيل الدخول ل{{SITENAME}} باسم "~{0}".'''
+nosuchuser|لا يوجد مستخدم بالاسم "~{0}".\nأسماء المستخدمين حساسة لحالة الحروف.\nتأكد من إملاء الاسم، أو [[Special:UserLogin/signup\u007Cقم بإنشاء حساب جديد]].
+nosuchusershort|لا يوجد مستخدم باسم ~{0}".\nتأكد من إملاء الاسم.
+nouserspecified|يجب عليك تحديد اسم مستخدم.
+login-userblocked|هذا المستخدم ممنوع. لا يسمح بالولوج.
+wrongpassword|كلمة السر التي أدخلتها غير صحيحة.\nمن فضلك حاول مرة أخرى.
+wrongpasswordempty|كلمة السر المدخلة كانت فارغة.\nمن فضلك حاول مرة أخرى.
+passwordtooshort|يجب أن تتكون كلمة السر على الأقل من {{PLURAL:~{0}\u007Cحرف واحد\u007Cحرفين\u007C~{0} حروف\u007C~{0} حرفا\u007C~{0} حرف}}.
+password-name-match|يجب أن تكون كلمة المرور مختلفة عن اسم المستخدم.
+password-login-forbidden|تم منع استخدام اسم المستخدم هذا وكلمة السر.
+mailmypassword|أرسل لي كلمة سر جديدة
+passwordremindertitle|كلمة سر مؤقتة جديدة ل{{SITENAME}}
+passwordremindertext|لقد طلب شخص ما (غالبا أنت، من عنوان الآيبي ~{0}) كلمة سر جديدة ل{{SITENAME}} (~{3}).\nأنشئت كلمة سر مؤقتة للمستخدم "~{1}" وجعلت "~{2}".\nلو أن هذا ما تريده، فعليك أن تقوم بتسجيل الدخول واختيار كلمة سر جديدة الآن.\nسوف تنتهي مدة صلاحية كلمة سرك المؤقتة في غضون {{PLURAL:~{4}\u007Cأقل من يوم واحد\u007Cيوم واحد\u007Cيومين\u007C~{4} أيام\u007C~{4} يوما\u007C~{4} يوم}}.\n\nإذا كان الذي قام بهذا الطلب شخص آخر أو إذا تذكرت كلمة سرك ولا ترغب  في تغييرها، فبإمكانك أن تتجاهل هذه الرسالة وأن تستمر في استخدام كلمة سرك القديمة.
+noemail|لا يوجد عنوان بريد إلكتروني مسجل للمستخدم "~{0}".
+noemailcreate|عليك تقديم عنوان بريد إلكتروني صالح
+passwordsent|تم إرسال كلمة سر جديدة إلى عنوان البريد الإلكتروني المسجل للمستخدم "~{0}".\nمن فضلك حاول تسجيل الدخول مرة ثانية بعد استلامها.
+blocked-mailpassword|تم منع عنوان الأيبي الخاص بك من التحرير، ولمنع التخريب لا يمكنك أن تستخدم خاصية استرجاع كلمة السر.
+eauthentsent|تم إرسال رسالة تأكيد إلكترونية إلى العنوان المسمى.\nحتى ترسل أي رسالة أخرى لذلك الحساب عليك أن تتبع التعليمات الواردة في الرسالة لتأكيد أن هذا الحساب هو لك بالفعل.
+throttled-mailpassword|تم بالفعل إرسال تذكير بكلمة السر، في ال{{PLURAL:~{0}\u007C\u007Cساعة الماضية\u007Cساعتين الماضيتين\u007C~{0} ساعات الماضية\u007C~{0} ساعة الماضية}}.\nلمنع التخريب، سيتم إرسال تذكير واحد كل {{PLURAL:~{0}\u007C\u007Cساعة\u007Cساعتين\u007C~{0} ساعات\u007C~{0} ساعة}}.
+mailerror|خطأ أثناء إرسال البريد: ~{0}
+acct_creation_throttle_hit|أنشأ زوار هذه الويكي باستخدام عنوان آيبيك {{PLURAL:~{0}\u007C\u007Cحسابا واحدا\u007Cحسابين\u007C~{0} حسابات\u007C~{0} حسابا\u007C~{0} حساب}} في اليوم الماضي، وهو الحد الأقصى المسموح به في هذه الفترة الزمنية.\nوكنتيجة لذلك، لن يتمكن الزوار الذين يستخدمون عنوان الأيبي هذا من إنشاء أي حسابات أخرى حاليا.
+emailauthenticated|تم تأكيد بريدك الإلكتروني في ~{1} الساعة ~{2}.
+emailnotauthenticated|لم يتم التحقق من بريدك الإلكتروني.\nلن يتم إرسال رسائل لأي من الميزات التالية.
+noemailprefs|حدد عنوان بريد إلكتروني في تفضيلاتك لهذه الخصائص لتعمل.
+emailconfirmlink|أكد عنوان بريدك الإلكتروني
+invalidemailaddress|لا يمكن قبول عنوان البريد الإلكتروني حيث تبدو صيغته خاطئة.\nضع عنوانا مضبوطا أو أفرغ هذا الحقل.
+cannotchangeemail|تغيير عنوان البريد الإلكتروني لهذا الحساب غير ممكن على هذا الويكي
+emaildisabled|لا يمكن إرسال رسائل البريد الإلكتروني من هذا الموقع.
+accountcreated|تم إنشاء الحساب
+accountcreatedtext|تم إنشاء الحساب الخاص ب~{0}.
+createaccount-title|إنشاء حساب في {{SITENAME}}
+createaccount-text|شخص ما أنشأ حسابا لعنوان بريدك الإلكتروني في {{SITENAME}} (~{3}) بالاسم "~{1}"، كلمة السر "~{2}".\nينبغي عليك تسجيل الدخول وتغيير كلمة السر الخاصة بك الآن.\n\nيمكنك تجاهل هذه الرسالة، لو تم إنشاء هذا الحساب بالخطأ.
+login-throttled|لقد قمت بمحاولات دخول كثيرة جدا مؤخرا.\nمن فضلك انتظر قبل المحاولة مرة أخرى.
+login-abort-generic|لم ينجح ولوجك - إجهاض
+loginlanguagelabel|اللغة: ~{0}
+suspicious-userlogout|رفض طلب خروجك لأنه يبدو كأنه أرسل عن طريق متصفح معطوب أو وسيط تخزين.
+pt-login|Odkul
+pt-createaccount|Aģmil koñt
+php-mail-error-unknown|خطأ غير معروف في وظيفة البريد PHP's mail()
+user-mail-no-addy|لقد حاولت إرسال بريد إلكتروني دون عنوان بريد إلكتروني.
+resetpass_announce|تم تسجيل دخولك بكلمة سر مؤقتة.\nللدخول بشكل نهائي، يجب عليك ضبط كلمة سر جديدة هنا:
+resetpass_header|غير كلمة سر الحساب
+oldpassword|كلمة السر القديمة:
+newpassword|كلمة السر الجديدة:
+retypenew|أعد كتابة كلمة السر الجديدة:
+resetpass_submit|ضبط كلمة السر والدخول
+changepassword-success|تم تغيير كلمة السر الخاصة بك بنجاح! يتم تسجيل دخولك الآن...
+resetpass_forbidden|كلمات السر لا يمكن تغييرها
+resetpass-no-info|يجب أن تكون مسجل الدخول للوصول إلى هذه الصفحة مباشرة.
+resetpass-submit-loggedin|تغيير كلمة السر
+resetpass-submit-cancel|ifsa5
+resetpass-wrong-oldpass|كلمة سر حالية أو مؤقتة غير صحيحة.\nربما تكون غيرت كلمة السر الخاصة بك بنجاح أو طلبت كلمة سر مؤقتة جديدة.
+resetpass-temp-password|كلمة سر مؤقتة:
+passwordreset|إعادة ضبط كلمة السر
+passwordreset-legend|إعادة تعيين كلمة السر
+passwordreset-disabled|عُطّلت إعادة تعيين كلمة السر على هذه الويكي.
+passwordreset-username|اسم المستخدم:
+passwordreset-domain|النطاق:
+passwordreset-capture|أأعرض البريد الإلكتروني الناتج؟
+passwordreset-capture-help|إذا علّمت هذا الصندوق فسيعرض لك البريد الإلكتروني (الذي يحتوي كلمة سر مؤقتة) وسيرسل أيضا للمستخدم.
+passwordreset-email|عنوان البريد الإلكتروني:
+passwordreset-emailtitle|تفاصيل حساب {{SITENAME}}
+passwordreset-emailtext-ip|احد ما (قد يكون انت~{0})طلب مذكرة تفاصيل الحساب ل{{SITENAME}} (~{3}).المستخدم الاتي {{PLURAL:~{2}\u007Cالحساب هو\u007Cالحسابات هي}} قد قرن بهذا العنوان :\n\n~{1}\n\n{{PLURAL:~{2}\u007Cكلمة المرور المؤقتة\u007Cكلمات المرور المؤقة}}سينتهي في {{PLURAL:~{4}\u007Cيوم\u007Cايام~{4} }}\nمن الافضل ان تسجل الدخول وتختار كلمة مرور جديدة الان .\nإذا قام شخص آخر بهذا الطلب، أو إذا  تذكرت كلمة المرور الأصلية الخاصة بك،ولم تعد ترغب في تغييره، يمكنك تجاهل هذه الرسالة ومتابعة استخدام  كلمة المرورالقديمة.
+passwordreset-emailtext-user|احد ما (قد يكون انت~{0})طلب مذكرة تفاصيل الحساب ل{{SITENAME}} (~{3}).المستخدم الاتي {{PLURAL:~{2}\u007Cالحساب هو\u007Cالحسابات هي}} قد قرن بهذا العنوان :\n\n~{1}\n\n{{PLURAL:~{2}\u007Cكلمة المرور المؤقتة\u007Cكلمات المرور المؤقة}}سينتهي في {{PLURAL:~{4}\u007Cيوم\u007Cايام~{4} }}\nمن الافضل ان تسجل الدخول وتختار كلمة مرور جديدة الان .\nإذا قام شخص آخر بهذا الطلب، أو إذا  تذكرت كلمة المرور الأصلية الخاصة بك،ولم تعد ترغب في تغييره، يمكنك تجاهل هذه الرسالة ومتابعة استخدام  كلمة المرورالقديمة.
+passwordreset-emailelement|اسم المستخدم: ~{0}\nكلمة السر المؤقتة: ~{1}
+passwordreset-emailsent|أرسل بريد إلكتروني تذكيري
+passwordreset-emailsent-capture|أرسل بريد إلكتروني تذكيري وهو معروض بالأسفل.
+passwordreset-emailerror-capture|ولّد بريد إلكتروني تذكيري وهو معروض بالأسفل لكن فشل إرساله للمستخدم: ~{0}
+changeemail|تغيير عنوان البريد الإلكتروني
+changeemail-text|أكمل هذا النموذج لتغيير عنوان البريد الإلكتروني. سوف تحتاج إلى إدخال كلمة السر الخاصة بك لتأكيد هذا التغيير.
+changeemail-no-info|يجب تسجيل الدخول للوصول إلى هذه الصفحة مباشرة.
+changeemail-oldemail|عنوان البريد الإلكتروني الحالي:
+changeemail-newemail|عنوان البريد الإلكتروني الجديد:
+changeemail-none|(لا شيء)
+changeemail-submit|غيّر البريد الإلكتروني
+extlink_sample|http://www.example.com عنوان الوصلة
+extlink_tip|وصلة خارجية (تذكر بادئة http://)
+nowiki_sample|أدخل النص غير المنسق هنا
+nowiki_tip|أهمل تهيئة الويكي
+image_tip|ملف مدرج
+media_tip|وصلة ملف
+sig_tip|توقيعك مع الساعة والتاريخ
+hr_tip|خط أفقي (تجنب الاستخدام بكثرة)
+summary|ملخص:
+subject|موضوع/عنوان:
+minoredit|هذا تعديل طفيف
+watchthis|راقب هذه الصفحة
+savearticle|احفظ الصفحة
+preview|معاينة
+showpreview|أظهر معاينة
+showdiff|أظهر التغييرات
+anoneditwarning|'''تحذير:''' لم تقم بالدخول.\nسيسجل عنوان الآيبي خاصتك في تاريخ هذه الصفحة.
+anonpreviewwarning|''أنت غير مسجل الدخول. الحفظ سيسجل عنوان الأيبي الخاص بك في تاريخ هذه الصفحة.''
+missingsummary|'''تنبيه:''' لم تقم بكتابة ملخص للتعديل.\nإذا قمت بضغط حفظ الصفحة مرة أخرى، فيتم حفظ تعديلك بدون ملخص.
+missingcommenttext|من فضلك أدخل تعليقا في الأسفل.
+missingcommentheader|'''تنبيه:''' لم تقم بوضع موضوع/عنوان لهذا التعليق.\nإذا قمت بالضغط على "{{int:savearticle}}" مجددا، سيتم حفظ تعليقك بدون عنوان.
+summary-preview|معاينة الملخص:
+subject-preview|معاينة للموضوع/العنوان:
+blockedtitle|المستخدم ممنوع
+blockedtext|'''اسم المستخدم أو عنوان الأيبي الخاص بك تم منعه.'''\n\nقام بالمنع ~{0}.\nسبب المنع هو: ''~{1}''.\n\n* بداية المنع: ~{7}\n* انتهاء المنع: ~{5}\n* الممنوع المقصود: ~{6}\n\nيمكنك الاتصال ب~{0} أو مع أحد [[{{MediaWiki:Grouppage-sysop}}\u007Cالإداريين]] للنقاش حول المنع.\nلا يمكنك استخدام خاصية 'مراسلة هذا المستخدم' إلا إذا كنت قد وضعت عنوان بريدي صحيح في [[Special:Preferences\u007Cتفضيلات حسابك]] ولم يتم منعك من استخدامها.\nعنوان الأيبي الخاص بك حاليا هو ~{2}، ورقم المنع هو #~{4}.\nمن فضلك اذكر كل التفاصيل بالأعلى في أي استعلامات تقوم بها.
+autoblockedtext|تم منع عنوان آيبيك تلقائيا لأن مستخدما آخرا ممنوعا بواسطة ~{0} استخدمه.\nالسبب الممنوح هو التالي:\n\n:''~{1}''\n\n* بداية المنع: ~{7}\n* انتهاء المنع: ~{5}\n* الممنوع المقصود: ~{6}\n\nيمكنك أن تتصل ب ~{0} أو أحد [[{{MediaWiki:Grouppage-sysop}}\u007Cالإداريين]] الآخرين لمناقشة المنع.\n\nلاحظ أنه لا يمكنك استخدام خاصية "إرسال رسالة لهذا المستخدم" إلا لو كان لديك عنوان بريد إلكتروني صحيح مسجل في [[Special:Preferences\u007Cتفضيلاتك]] ولم يتم منعك من استخدامه.\n\nعنوان آيبيك الحالي ~{2}، ورقم المنع #~{4}.\nمن فضلك اذكر كل التفاصيل بالأعلى في أي استعلامات تقوم بها.
+blockednoreason|لا سبب معطى
+whitelistedittext|يجب عليك ~{0} لتتمكن من تعديل الصفحات.
+confirmedittext|يجب عليك تأكيد بريدك الإلكتروني قبل تعديل الصفحات.\nمن فضلك اكتب وأكد بريدك الإلكتروني من خلال [[Special:Preferences\u007Cتفضيلاتك]].
+nosuchsectiontitle|تعذر إيجاد القسم
+nosuchsectiontext|لقد حاولت تحرير قسم غير موجود.\nربما يكون قد تم نقله أو حذفه أثناء مشاهدتك للصفحة.
+loginreqtitle|تسجيل الدخول مطلوب
+loginreqlink|الولوج
+loginreqpagetext|يجب عليك ~{0} لتشاهد صفحات أخرى.
+accmailtitle|تم إرسال كلمة السر.
+accmailtext|كلمة سر مولدة عشوائيا ل [[User talk:~{0}\u007C~{0}]] تم إرسالها إلى ~{1}.\n\nكلمة السر لهذا الحساب الجديد يمكن تغييرها في صفحة ''[[Special:ChangePassword\u007Cتغيير كلمة السر]]'' عند تسجيل الدخول.
+newarticle|(جديد)
+newarticletext|لقد تبعت وصلة لصفحة لم يتم إنشائها بعد.\nلإنشاء هذه الصفحة ابدأ الكتابة في الصندوق بالأسفل (انظر في [~{0} صفحة المساعدة] للمزيد من المعلومات).\nإذا كانت زيارتك لهذه الصفحة بالخطأ، اضغط على زر ''رجوع'' في متصفح الإنترنت لديك.
+anontalkpagetext|----''هذه صفحة نقاش لمستخدم مجهول لم يقم بإنشاء حساب بعد أو لا يستعمل ذلك الحساب.\nلذا فيجب علينا استعمال رقم الأيبي للتعرف عليه/عليها.\nمثل هذا العنوان يمكن أن يشترك فيه عدة مستخدمين.\nلو كنت مستخدما مجهولا وتشعر بأن تعليقات لا تخصك تم توجيهها إليك، من فضلك [[Special:UserLogin/signup\u007Cأنشئ حسابا]] أو [[Special:UserLogin\u007Cسجل الدخول]] لتجنب الارتباك المستقبلي مع مستخدمين مجهولين آخرين.''
+noarticletext|Mefamme ḩatte têkst tawwe fiş-şafḩa hêđi.\nTnijjim [[Special:Search/{{PAGENAME}}\u007Ctfarkis ģal-tîtr mtêģ iş-şafħa]] fi safḩat okhrîne, <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} tfarkis fil-istorîk illi ģandhom ģalêqa], \nwallê [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} tbaddil iş-şafħa hêđi]</span>
+noarticletext-nopermission|لا يوجد حاليا أي نص في هذه الصفحة.يمكنك [[Special:Search/{{PAGENAME}}\u007Cالبحث عن عنوان هذه الصفحة]] في الصفحات الأخرى,أو <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} بحث السجلات المتصلة]</span>.
+userpage-userdoesnotexist|حساب المستخدم "<nowiki>~{0}</nowiki>" غير مسجل.\nمن فضلك تأكد أنك تريد إنشاء/تعديل هذه الصفحة.
+userpage-userdoesnotexist-view|حساب المستخدم "~{0}" غير مسجل.
+blocked-notice-logextract|هذا المستخدم ممنوع حاليا.\nآخر مدخلة في سجل المنع موفرة بالأسفل كمرجع:
+clearyourcache|'''ملاحظة:''' بعد الحفظ, أنت ربما تحتاج إلى إفراغ كاش متصفحك لرؤية التغييرات.\n* '''فيرفكس / سفاري:''' اضغط ''Shift'' أثناء ضغط ''Reload'', أو اضغط أيا من ''Ctrl-F5'' أو ''Ctrl-R'' (''⌘-R'' على ماك)\n* '''جوجل كروم:''' اضغط ''Ctrl-Shift-R'' (''⌘-Shift-R'' على ماك)\n* '''إنترنت إكسبلورر:''' اضغط ''Ctrl'' أثناء ضغط ''Refresh''، أو اضغط ''Ctrl-F5''\n* '''كنكرر:''' اضغط ''Reload'' أو اضغط ''F5''\n* '''أوبرا:''' أفرغ الكاش في ''Tools → Preferences''
+usercssyoucanpreview|'''ملاحظة:''' استعمل زر "{{int:showpreview}}" لتجربة CSS الجديد قبل حفظ الصفحة.
+userjsyoucanpreview|'''ملاحظة:''' استعمل زر "{{int:showpreview}}" لتجربة جافاسكربت الجديدة قبل حفظ الصفحة.
+usercsspreview|'''تذكر أنك تقوم بعرض الأنماط المتراصة (CSS) الخاصة بك فقط\nلم يتم حفظها بعد!'''
+userjspreview|'''تذكر أنك فقط تجرب/تعاين جافاسكربت.'''\n'''لم يتم الحفظ بعد!'''
+sitecsspreview|''' تذكر أنك فقط في وضع المعاينة لهذا CSS ''' \n''' ولم يتم حفظ الصفحة بعد! '''
+sitejspreview|''' تذكر أنك فقط في وضع المعاينة لكود JavaScript هذا''' \n''' ولم يتم حفظه بعد! '''
+userinvalidcssjstitle|'''تحذير:''' لا توجد واجهة  "~{0}".\nتذكر أن ملفات ال.css و ال.js تستخدم حروف صغيرة في العنوان ، كمثال {{ns:user}}:Foo/vector.css و ليس {{ns:user}}:Foo/Vector.css.
+updated|(محدثة)
+note|'''ملاحظة:'''
+previewnote|'''تذكر أن هذه مجرد معاينة أولية.'''\nلم تحفظ تغييراتك إلى الآن!
+continue-editing|أكمل التحرير
+previewconflict|هذا العرض يوضح النص الموجود في صندوق التحرير العلوي والذي سيظهر إذا اخترت الحفظ.
+session_fail_preview|'''عذرا! لم نتمكن من حفظ التعديلات التي قمت بها نتيجة لضياع بيانات هذه الجلسة.\nمن فضلك حاول مرة أخرى.\nفي حال استمرار المشكلة حاول أن تقوم [[Special:UserLogout\u007Cبالخروج]] ومن ثم الولوج مرة أخرى.'''
+session_fail_preview_html|'''عذرا! لم نستطع معالجة تعديلك بسبب فقدان بيانات الجلسة.'''\n\n''لأن {{SITENAME}} بها HTML الخام مفعلة، العرض المسبق مخفي كاحتياط ضد هجمات الجافا سكريبت.''\n\n'''إذا كانت هذه محاولة تعديل صادقة، من فضلك حاول مرة أخرى.\nإذا كانت مازالت لا تعمل، حاول [[Special:UserLogout\u007Cتسجيل الخروج]] ثم تسجيل الدخول مجددا.'''
+token_suffix_mismatch|'''تعديلك تم رفضه لأن عميلك أخطأ في علامات الترقيم\nفي نص التعديل. تم رفض التعديل لمنع فساد نص المقالة.\nهذا يحدث أحيانا عندما تستخدم خدمة بروكسي مجهول معيبة مبنية على الوب.'''
+edit_form_incomplete|'''بعض أجزاء من نموذج التعديل لم تصل إلى الخادم؛ تأكد من أن تعديلاتك لم تمس وحاول مجددا.'''
+editing|تحرير ~{0}
+creating|إنشاء «~{0}»
+editingsection|تحرير ~{0} (قسم)
+editingcomment|تعديل ~{0} (قسم جديد)
+editconflict|تضارب في التحرير: ~{0}
+explainconflict|لقد عدل شخص آخر هذه الصفحة بعد أن بدأت أنت بتحريرها.\nصندوق النصوص العلوي يحتوي على النص الموجود حاليا في الصفحة.\nوالتغييرات التي قمت أنت بها موجودة في الصندوق في أسفل الصفحة.\nيجب أن تقوم بدمج تغييراتك في النص الموجود حاليا.\n'''فقط''' ما هو موجود في الصندوق العلوي هو ما سيتم حفظه عند الضغط على زر "حفظ الصفحة".
+yourtext|نصك
+storedversion|النسخة المخزنة
+nonunicodebrowser|'''تحذير: متصفحك لا يتوافق مع الترميز الموحد.\nتمت معالجة هذا لكي تتمكن من تحرير الصفحات بأمان: الحروف التي ليست ASCII سوف تظهر في صندوق التحرير كأكواد سداسي عشرية.'''
+editingold|''' تحذير: أنت تقوم الآن بتحرير نسخة قديمة من هذه الصفحة.\nإذا قمت بحفظها، ستفقد كافة التغييرات التي حدثت بعد هذه النسخة. '''
+yourdiff|الفروق
+copyrightwarning|من فضلك لاحظ أن جميع المساهمات ل {{SITENAME}} خاضعة وصادرة تحت ترخيص ~{1} (انظر في ~{0} للمزيد من التفاصيل)\nإذا لم ترد أن تخضع كتابتك للتعديل والتوزيع الحر، لا تضعها هنا<br />.\nكما أنك تتعهد بأنك قمت بكتابة ما هو موجود بنفسك، أو قمت بنسخها من مصدر يخضع ضمن الملكية العامة، أو مصدر حر آخر.\n'''لا ترسل أي عمل ذي حقوق محفوظة بدون الإذن من صاحب الحق'''.
+copyrightwarning2|من فضلك لاحظ أن جميع المساهمات في {{SITENAME}} يمكن أن تعدل أو تتغير أو تزال من قبل المساهمين الآخرين.\nإذا لم تكن ترغب أن تعدل مشاركاتك بهذا الشكل، لا تضعها هنا.<br />\nأنت تقر أيضا أنك كتبت هذا بنفسك، أو نسخته من مصدر يخضع للملكية العامة، أو مصدر حر آخر (انظر ~{0} للتفاصيل).\n'''لا تضف أي عمل ذي حقوق محفوظة بدون تصريح!'''
+longpageerror|'''خطأ: النص الذي قمت بإدخاله {{PLURAL:~{0}\u007Cواحد كيلوبايت\u007C~{0} كيلوبيات}} أطول, وهو أطول من الحد الأقصى {{PLURAL:~{1}\u007Cواحد كيلوبايت\u007C~{1} كيلوبايت}}.'''\nو يتعذر حفظه.
+readonlywarning|'''تحذير: لقد أغلقت قاعدة البيانات للصيانة، لذلك لن تتمكن من حفظ التعديلات التي قمت بها حاليا.\nإذا رغبت بإمكانك أن تنسخ النص الذي تعمل عليه وتحفظه في ملف نصي إلى وقت لاحق.'''\n\nالإداري الذي أغلقها أعطى هذا التفسير: ~{0}
+protectedpagewarning|'''تحذير: تمت حماية هذه الصفحة حتى يمكن للمستخدمين ذوي الصلاحيات الإدارية فقط تعديلها.'''\nآخر مدخلة سجل موفرة بالأسفل كمرجع:
+semiprotectedpagewarning|'''ملاحظة:''' تمت حماية هذه الصفحة بحيث يمكن للمستخدمين المسجلين فقط تعديلها.\nآخر مدخلة سجل موفرة بالأسفل كمرجع:
+cascadeprotectedwarning|'''تحذير:''' تمت حماية هذه الصفحة بحيث يستطيع المستخدمون ذوو الصلاحيات الإدارية فقط تعديلها، وذلك لأنها مدمجة في {{PLURAL:~{0}\u007C\u007Cالصفحة التالية والتي تمت حمايتها\u007Cالصفحتين التاليتين واللتين تمت حمايتها\u007Cالصفحات التالية والتي تمت حمايتها}} بخاصية "حماية الصفحات المدمجة":
+titleprotectedwarning|'''تحذير:  هذه الصفحة تمت حمايتها بحيث أن [[Special:ListGroupRights\u007Cصلاحيات معينة]] مطلوبة لإنشائها.'''\nآخر مدخلة سجل موفرة بالأسفل كمرجع:
+templatesused|{{PLURAL:~{0}\u007C\u007Cالقالب المستخدم\u007Cالقالبان المستخدمان\u007Cالقوالب المستخدمة}} في هذه الصفحة:
+templatesusedpreview|{{PLURAL:~{0}\u007C\u007Cالقالب المستخدم\u007Cالقالبان المستخدمان\u007Cالقوالب المستخدمة}} في هذه المعاينة:
+templatesusedsection|{{PLURAL:~{0}\u007C\u007Cالقالب المستخدم\u007Cالقالبان المستخدمان\u007Cالقوالب المستخدمة}} في هذا القسم:
+template-protected|(protégé)
+template-semiprotected|(حماية جزئية)
+hiddencategories|{{PLURAL:~{0}\u007Cهذه الصفحة غير موجودة في أي تصنايف مخفية\u007Cهذه الصفحة موجودة في تصنيف مخفي واحد\u007Cهذه الصفحة موجودة في تصنيفين مخفيين\u007Cهذه الصفحة موجودة في ~{0} تصانيف مخفية\u007Cهذه الصفحة موجودة في ~{0} تصنيفا مخفيا\u007Cهذه الصفحة موجودة في ~{0} تصنيف مخفي}}:
+nocreatetext|قام {{SITENAME}} بتحديد القدرة على إنشاء صفحات جديدة.\nيمكنك العودة وتحرير صفحة موجودة بالفعل، أو [[Special:UserLogin\u007Cالدخول أو تسجيل حساب]].
+nocreate-loggedin|أنت لا تمتلك الصلاحية لإنشاء صفحات جديدة.
+sectioneditnotsupported-title|تعديل الأقسام غير مدعوم
+sectioneditnotsupported-text|تعديل الأقسام غير مدعوم في هذه الصفحة
+permissionserrors|أخطاء السماحات
+permissionserrorstext|لا تمتلك الصلاحية لفعل هذا، {{PLURAL:~{0}\u007C\u007Cللسبب التالي\u007Cللسببين التاليين\u007Cللأسباب التالية}}:
+permissionserrorstext-withaction|لا تملك الصلاحيات ل~{1}، لل{{PLURAL:~{0}\u007C\u007Cسبب التالي\u007Cسببين التاليين\u007Cأسباب التالية}}:
+recreate-moveddeleted-warn|'''تحذير: أنت تقوم بإعادة إنشاء صفحة سبق حذفها.'''\n\nيجب عليك التيقن من أن الاستمرار بتحرير هذه الصفحة ملائم.\nسجلا الحذف والنقل لهذه الصفحة معروضان هنا للتيسير:
+moveddeleted-notice|هذه الصفحة تم حذفها.\nسجلا الحذف والنقل للصفحة معروضان بالأسفل كمرجع.
+log-fulllog|أظهر السجل الكامل
+edit-hook-aborted|التعديل تم تركه بواسطة الخطاف.\nلم يعط تفسيرا.
+edit-gone-missing|لم يمكن تحديث الصفحة.\nيبدو أنه تم حذفها.
+edit-conflict|تضارب تحريري.
+edit-no-change|تعديلك تم تجاهله، لأنه لم يحدث أي تعديل للنص.
+edit-already-exists|لم يمكن إنشاء صفحة جديدة.\nهي موجودة بالفعل.
+defaultmessagetext|نص الرسالة الافتراضي
+expensive-parserfunction-warning|'''تحذير:''' هذه الصفحة تحتوي على استدعاءات دالة محلل كثيرة مكلفة.\n\nينبغي أن تكون أقل من {{PLURAL:~{1}\u007C\u007Cاستدعاء واحد\u007Cاستدعاءين\u007C~{1} استدعاءات\u007C~{1} استدعاء}}، يوجد الآن {{PLURAL:~{0}\u007Cاستدعاء واحد\u007Cاستدعاءان\u007C~{1} استدعاءات\u007C~{1} استدعاء}}.
+expensive-parserfunction-category|صفحات يوجد بها استدعاءات دوال محلل كثيرة ومكلفة
+post-expand-template-inclusion-warning|'''تحذير:''' حجم تضمين القالب كبير جدا.\nبعض القوالب لن تضمن.
+post-expand-template-inclusion-category|الصفحات حيث تم تجاوز حجم تضمين القالب
+post-expand-template-argument-warning|'''تحذير:''' هذه الصفحة تحتوي على عامل قالب واحد على الأقل له حجم تمدد كبير جدا.\nهذه العوامل تم حذفها.
+post-expand-template-argument-category|صفحات تحتوي مدخلات القالب المحذوفة
+parser-template-loop-warning|تم كشف حلقة قالب: [[~{0}]]
+parser-template-recursion-depth-warning|تم تجاوز حد عمق فرد القوالب (~{0})
+language-converter-depth-warning|تم تخطي حد عمق محول اللغة (~{0})
+node-count-exceeded-category|الصفحات التي حدث فيها تجاوز تعداد العقد
+node-count-exceeded-warning|تجاوزت هذه الصفحة تعداد العقد
+expansion-depth-exceeded-category|الصفحات التي حدث فيها تجاوز عمق التوسيع
+expansion-depth-exceeded-warning|الصفحة تجاوزت عمق التوسيع
+parser-unstrip-loop-warning|حلقة معراة تم الكشف عنها
+parser-unstrip-recursion-limit|تعدى حد العودية Unstrip  (~{0})
+undo-success|يمكن استرجاع التعديل.\nمن فضلك تحقق من المقارنة بالأسفل للتأكد من أن هذا هو ما تريد أن تفعله، وبعد ذلك احفظ التغييرات بالأسفل للانتهاء من استرجاع التعديل.
+undo-failure|لم يمكن استرجاع التعديل بسبب تعديلات متعارضة تمت على الصفحة.
+undo-norev|فشل في الرجوع عن التعديل حيث أنه غير موجود أو تم حذفه.
+undo-summary|الرجوع عن التعديل ~{0} بواسطة [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007Cنقاش]])
+cantcreateaccounttitle|لا يمكن إنشاء حساب
+cantcreateaccount-text|إنشاء الحسابات من عنوان الأيبي هذا ('''~{0}''') تم منعه بواسطة [[User:~{2}\u007C~{2}]].\n\nالسبب المعطى بواسطة ~{2} هو ''~{1}''
+viewpagelogs|اعرض سجلات هذه الصفحة
+nohistory|لا يوجد تاريخ للتعديلات لهذه الصفحة.
+currentrev|المراجعة الحالية
+currentrev-asof|المراجعة الحالية بتاريخ ~{0}
+revisionasof|Version mtaε ~{0}
+revision-info|مراجعة ~{0} بواسطة ~{1}
+previousrevision|→ مراجعة أقدم
+nextrevision|مراجعة أحدث ←
+currentrevisionlink|المراجعة الحالية
+cur|الحالي
+next|التالي
+last|السابق
+page_first|الأولى
+page_last|الأخيرة
+histlegend|اختيار الفرق: علم على صناديق النسخ للمقارنة واضغط قارن بين النسخ المختارة أو الزر بالأسفل.<br />\nمفتاح: (الحالي) = الفرق مع النسخة الحالية\n(السابق) = الفرق مع النسخة السابقة، ط = تغيير طفيف
+history-fieldset-title|تصفح التاريخ
+history-show-deleted|المحذوفة فقط
+histfirst|أول
+histlast|آخر
+historysize|({{PLURAL:~{0}\u007C1 بايت\u007C~{0} بايت}})
+historyempty|(فارغ)
+history-feed-title|تاريخ المراجعة
+history-feed-description|تاريخ التعديل لهذه الصفحة في الويكي
+history-feed-item-nocomment|~{0} في ~{1}
+history-feed-empty|الصفحة المطلوبة غير موجودة.\nمن المحتمل أن تكون هذه الصفحة قد حذفت من الويكي، أو نقلت.\nحاول [[Special:Search\u007Cالبحث في الويكي]] عن صفحات جديدة ذات صلة.
+rev-deleted-comment|(أزيل ملخص التعديل)
+rev-deleted-user|(اسم المستخدم تمت إزالته)
+rev-deleted-event|(فعل السجل تمت إزالته)
+rev-deleted-user-contribs|[اسم المستخدم أو عنوان الأيبي تمت إزالته - التعديل مخفي من المساهمات]
+rev-deleted-text-permission|'''حُذِفت''' مراجعة هذه الصفحة.\nيمكنك العثور على التفاصيل في [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} سجل الحذف].
+rev-deleted-text-unhide|'''حُذِفت''' مراجعة الصفحة هذه.\nيمكن العثور على تفاصيل في [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} سجل الحذف].\nمازال بإمكانك [~{0} رؤية هذه المراجعة] إذا أردت المتابعة.
+rev-suppressed-text-unhide|'''أُخفيت''' مراجعة الصفحة هذه.\nيمكنك العثور على التفاصيل في [{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{FULLPAGENAMEE}}}} سجل الإخفاء].\nبإمكانك [~{0} رؤية هذه المراجعة] إذا أردت المتابعة.
+rev-deleted-text-view|'''حُذِفت''' مراجعة هذه الصفحة.\nيمكنك رؤيتها؛ ويمكنك العثور على التفاصيل في [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} سجل الحذف].
+rev-suppressed-text-view|'''أُخفيت''' مراجعة الصفحة هذه.\nيمكنك رؤيتها؛ ويمكنك العثور على التفاصيل في  [{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{FULLPAGENAMEE}}}} سجل الإخفاء].
+rev-deleted-no-diff|لا يمكنك رؤية هذا الفرق لأن إحدى المراجعات '''حُذِفت'''.\nيمكنك العثور على التفاصيل في [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} سجل الحذف].
+rev-suppressed-no-diff|ليس بإمكانك مشاهدة هذا الفرق لأن إحدى المراجعات '''حذفت'''.
+rev-deleted-unhide-diff|'''حُذِفت''' إحدى مراجعتي هذا الفرق.\nيمكن العثور على التفاصيل في [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} سجل الحذف].\nبإمكانك [~{0} رؤية هذا الفرق] إذا أردت المتابعة.
+rev-suppressed-unhide-diff|'''أُخفيت''' إحدى مراجعتي هذا الفرق.\nيمكنك العثور على التفاصيل في [{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{FULLPAGENAMEE}}}} سجل الإخفاء].\nبإمكانك [~{0} رؤية هذا الفرق] إذا أردت المتابعة.
+rev-deleted-diff-view|'''حُذِفت''' إحدى مراجعتي هذا الفرق.\nيمكنك رؤية الفرق؛ ويمكنك العثور على التفاصيل في [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} سجل الحذف].
+rev-suppressed-diff-view|'''أُخفيت''' إحدى مراجعتي هذا الفرق.\nيمكنك رؤية هذا الفرق؛ ويمكنك العثور على التفاصيل في [{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{FULLPAGENAMEE}}}} سجل الإخفاء].
+rev-delundel|أظهر/أخف
+rev-showdeleted|أظهر
+revisiondelete|حذف/استرجاع المراجعات
+revdelete-nooldid-title|مراجعة هدف غير صحيحة
+revdelete-nooldid-text|إما أنك لم تحدد مراجعة (أو مراجعات) معينة هدفا لهذه الوظيفة، أو أن المراجعة المحددة غير موجودة، أو أنك تحاول إخفاء المراجعة الحالية.
+revdelete-no-file|الملف المحدد غير موجود.
+revdelete-show-file-confirm|هل أنت متأكد أنك تريد رؤية مراجعة محذوفة للملف "<nowiki>~{0}</nowiki>" بتاريخ ~{1} الساعة ~{2}؟
+revdelete-show-file-submit|نعم
+logdelete-selected|{{PLURAL:~{0}\u007Cحدث السجل المختار\u007Cأحداث السجل المختارة}}:
+revdelete-confirm|الإداريون الآخرون في {{SITENAME}} سيظل بإمكانهم رؤية المحتوى المخفي ويمكنهم استرجاعه مجددا من خلال هذه الواجهة نفسها، مالم يتم وضع قيود إضافية.\nمن فضلك أكد أنك تنوي فعل هذا، وأنك تفهم العواقب، وأنك تفعل هذا بالتوافق مع [[{{MediaWiki:Policy-url}}\u007Cالسياسة]].
+revdelete-suppress-text|الإخفاء ينبغي أن يتم استخدامه '''فقط''' في الحالات التالية:\n* معلومات شخصية غير ملائمة\n*: ''عناوين المنازل وأرقام التليفونات، أرقام الضمان الاجتماعي، إلى آخره.''
+revdelete-legend|وضع ضوابط رؤية
+revdelete-hide-text|أخف نص المراجعة
+revdelete-hide-image|أخف محتوى الملف
+revdelete-hide-name|أخف الفعل والهدف
+revdelete-hide-comment|أخف تعليق التعديل
+revdelete-hide-user|أخف اسم/آيبي المستخدم
+revdelete-hide-restricted|أخف البيانات عن الإداريين إضافة إلى الآخرين
+revdelete-radio-same|(لا تغير)
+revdelete-radio-set|نعم
+revdelete-radio-unset|لا
+revdelete-suppress|أخف البيانات عن مديري النظام والبقية
+revdelete-unsuppress|إزالة الضوابط من المراجعات المسترجعة
+revdelete-log|السبب:
+revdelete-submit|طبق على {{PLURAL:~{0}\u007C\u007Cالمراجعة المختارة\u007Cالمراجعتين المختارتين\u007Cالمراجعات المختارة}}
+revdelete-success|'''تم تحديث رؤية المراجعات بنجاح.'''
+revdelete-failure|'''تعذر تحديث رؤية المراجعة:'''\n~{0}
+logdelete-success|'''تم ضبط رؤية السجلات بنجاح.'''
+logdelete-failure|'''تعذر ضبط رؤية السجل:'''\n~{0}
+revdel-restore|تغيير الرؤية
+pagehist|تاريخ صفحة
+deletedhist|التاريخ المحذوف
+revdelete-hide-current|خطأ عند إحفاء العنصر المؤرخ في ~{1} ~{0}: هذه هي المراجعة الحالية.\nلا يمكن إخفاؤها.
+revdelete-show-no-access|خطأ في إظهار العنصر ذا التاريخ ~{1} ~{0}: هذا العنصر معلم ك"مقيد".\nليس لك صلاحية الوصول إليه.
+revdelete-modify-no-access|خطأ في تعديل العنصر ذا التاريخ ~{1} ~{0}: هذا العنصر معلم ك"مقيد".\nليس لك صلاحية الوصول إليه.
+revdelete-modify-missing|خطأ في تعديل العنصر ذا الهوية ~{0}: العنصر مفقود من قاعدة البيانات!
+revdelete-no-change|'''تحذير:''' العنصر ذو التاريخ ~{1} ~{0} لديه أصلا إعدادات الظهور المطلوبة.
+revdelete-concurrent-change|خطأ في تعديل العنصر ذي التاريخ ~{1} ~{0}: تظهر حالته أن شخصا آخر عدله أثناء محاولتك تعديله.\nمن فضلك راجع السجلات.
+revdelete-only-restricted|خطأ إخفاء العنصر المؤرخ ~{1}, ~{0}: لا تستطيع تنحية العناصر من عرض الإداريين بدون أن تحدد أيضا إحدى خيارات التنحية الأخرى.
+revdelete-reason-dropdown|* أسباب حذف عامة\n** خرق لحقوق النشر\n** معلومات شخصية غير ملائمة\n**معلومات تشهيرية محتملة
+revdelete-otherreason|سبب آخر/إضافي:
+revdelete-reasonotherlist|سبب آخر
+revdelete-edit-reasonlist|عدل أسباب الحذف
+revdelete-offender|مؤلف المراجعة:
+suppressionlog|سجل الإخفاء
+suppressionlogtext|بالأسفل قائمة بعمليات الحذف والمنع التي تتضمن محتوى مخفيا عن الإداريين.\nانظر [[Special:BlockList\u007Cقائمة منع الآيبي]] لترى عمليات المنع القائمة الآن.
+mergehistory|دمج تواريخ الصفحة
+mergehistory-header|هذه الصفحة تسمح لك بدمج نسخ تاريخ صفحة ما إلى صفحة أخرى.\nتأكد من أن هذا التغيير سيحافظ على استمرار تاريخ الصفحة.
+mergehistory-box|دمج مراجعات صفحتين:
+mergehistory-from|الصفحة المصدر:
+mergehistory-into|الصفحة الهدف:
+mergehistory-list|تاريخ التعديل القابل للدمج
+mergehistory-merge|المراجعات التالية من [[:~{0}]] يمكن دمجها إلى [[:~{1}]].\nاستخدم عامود الصناديق لدمج المراجعات التي تم إنشاؤها في وقبل الوقت المحدد.\nلاحظ أن استخدام وصلات التصفح سيعيد ضبط هذا العامود.
+mergehistory-go|عرض التعديلات القابلة للدمج
+mergehistory-submit|دمج المراجعات
+mergehistory-empty|لا مراجعات يمكن دمجها.
+mergehistory-success|~{2} {{PLURAL:~{2}\u007Cمراجعة\u007Cمراجعة}} من [[:~{0}]] تم دمجها بنجاح في [[:~{1}]].
+mergehistory-fail|غير قادر على عمل دمج التاريخ، من فضلك أعد التحقق من محددات الصفحة والزمن.
+mergehistory-no-source|الصفحة المصدر ~{0} غير موجودة.
+mergehistory-no-destination|الصفحة الهدف ~{0} غير موجودة.
+mergehistory-invalid-source|الصفحة المصدر يجب أن تكون عنوانا صحيحا.
+mergehistory-invalid-destination|الصفحة الهدف يجب أن تكون عنوانا صحيحا.
+mergehistory-autocomment|دمج [[:~{0}]] في [[:~{1}]]
+mergehistory-comment|دمج [[:~{0}]] في [[:~{1}]]: ~{2}
+mergehistory-same-destination|صفحتا المصدر والهدف لا يمكن أن تكونا نفس الشيء
+mergehistory-reason|السبب:
+mergelog|سجل الدمج
+revertmerge|إلغاء الدمج
+mergelogpagetext|بالأسفل قائمة بأحدث عمليات الدمج لتاريخ صفحة ما إلى أخرى.
+history-title| «~{0}»: تاريخ المراجعة
+difference-title|«~{0}»: الفرق بين المراجعتين
+difference-title-multipage|«~{0}» و«~{1}»: الفرق بين الصفحتين
+difference-multipage|(الفرق بين الصفحتين)
+lineno|Sţar ~{0}:
+compareselectedversions|قارن بين النسختين المختارتين
+showhideselectedversions|أظهر/أخف المراجعات المختارة
+editundo|Rajjaģ
+diff-multi-manyusers|({{PLURAL:~{0}\u007C\u007Cمراجعة واحدة متوسطة غير معروضة أجراها\u007Cمراجعتان متوسطتان غير معروضتان أجراهما\u007C~{0} مراجعات متوسطة غير معروضة أجراها\u007C~{0} مراجعة متوسطة غير معروضة أجراها}} أكثر من {{PLURAL:~{1}\u007C\u007Cمستخدم واحد\u007Cمستخدمين\u007C~{1} مستخدمين\u007C~{1} مستخدمًا\u007C~{1} مستخدم}}.)
+searchresults|Ir-rêzultâ mtêģ it-talwîj
+searchresults-title|Ir-rêzultâ mtêģ it-talwîj ģlâ "~{0}"
+prevn-title|~{0} {{PLURAL:~{0}\u007Cنتيجة\u007Cنتيجة}} سابقة
+nextn-title|~{0} {{PLURAL:~{0}\u007Cنتيجة\u007Cنتيجة}} سابقة
+shown-title| Warri{{PLURAL:Résultat weħed\u007CZouz résultats\u007C~{0}  résultats\u007C~{0} en résultat}} men kol safħa
+viewprevnext|Chouf (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|'''famma ss'af7a ismha "[[:~{0}]]" fi hedha el wiki.'''
+searchmenu-new|'''أنشئ الصفحة "[[:~{0}]]" في هذا الويكي!'''
+searchprofile-articles|Safħat mtaε contenu
+searchprofile-images|Multimédia
+searchprofile-everything|Kol chay
+searchprofile-advanced|Avancé
+searchprofile-articles-tooltip|Farkes fi ~{0}
+searchprofile-images-tooltip|Farkes f'elfichiers
+searchprofile-everything-tooltip|Farkes kol chay (ħatta safħat leħdith)
+searchprofile-advanced-tooltip|Ekhtar les espaces de noms elli bech tfarkes εlihom
+search-result-size|~{0} ({{PLURAL:Ħatta kelma\u007CKelma waħda\u007CKelmtin\u007C~{1} kelmat\u007C~{1} en kelma}})
+search-result-category-size|{{PLURAL:~{0}\u007Cلا أعضاء\u007Cعضو واحد\u007Cعضوان\u007C~{0} أعضاء\u007C~{0} عضوًا\u007C~{0} عضو}} ({{PLURAL:~{1}\u007Cلا تصانيف فرعية\u007Cتصنيف فرعي واحد\u007Cتصنيفان فرعيان\u007C~{1} تصنيفات فرعية\u007C~{1} تصنيفًا فرعيًا\u007C~{1} تصنيف فرعي}} و{{PLURAL:~{2}\u007Cلا ملفات\u007Cملف واحد\u007Cملفان\u007C~{2} ملفات\u007C~{2} ملفًا\u007C~{2} ملف}})
+search-redirect|(تحويلة ~{0})
+search-section|(section ~{0})
+search-suggest|هل كنت تقصد: ~{0}
+searchrelated|مرتبطة
+searchall|Elkol
+search-nonefound|لا توجد نتائج تطابق الاستعلام.
+mypreferences|تفضيلاتي
+youremail|البريد:
+yourrealname|الاسم الحقيقي:
+prefs-help-email|عنوان البريد الإلكتروني هو أمر اختياري، ولكن ستحتاج لإعادة تعيين كلمة المرور، إن نسيت كلمة المرور الخاصة بك.
+prefs-help-email-others|يمكنك أيضا اختيار للسماح للآخرين الاتصال بك عن طريق صفحة المستخدم أو نقاش المستخدم الخاص بك دون الحاجة إلى الكشف عن الهوية الخاصة بك.
+newuserlogpage|سجل إنشاء المستخدمين
+action-edit|modifi hal page
+nchanges|{{PLURAL:~{0}\u007Cلا تغييرات\u007Cتغيير واحد\u007Cتغييران\u007C~{0} تغييرات\u007C~{0} تغييرا\u007C~{0} تغيير}}
+recentchanges|Ajadd tabdîlêt
+recentchanges-legend|خيارات أحدث التغييرات
+recentchanges-summary|تابع أحدث التغييرات للويكي عبر هذه التلقيمة.
+recentchanges-feed-description|تابع أحدث التغييرات للويكي عبر هذه التلقيمة.
+recentchanges-label-newpage|أنشأ هذا التعديل صفحة جديدة
+recentchanges-label-minor|هذا تعديل طفيف
+recentchanges-label-bot|أجرى هذا التعديل بوت
+recentchanges-label-unpatrolled|لم يراجع هذا التعديل إلى الآن
+rcnotefrom|بالأسفل التغييرات منذ '''~{1}''' (إلى '''~{0}''' معروضة).
+rclistfrom|أظهر التغييرات بدءا من ~{2} ~{1}
+rcshowhideminor|~{0} التعديلات الطفيفة
+rcshowhidebots|~{0} البوتات
+rcshowhideliu|~{0} المستخدمين المسجلين
+rcshowhideanons|~{0} المستخدمين المجهولين
+rcshowhidepatr|~{0} التعديلات المراجعة
+rcshowhidemine|~{0} تعديلاتي
+rclinks|أظهر آخر ~{0} تعديل في آخر ~{1} يوم<br />~{2}
+diff|Farq
+hist|Hîst
+hide|أخف
+show|اعرض
+minoreditletter|thafif
+newpageletter|jadid
+boteditletter|bot
+rc-change-size-new|~{0} {{PLURAL:~{0}\u007Coktê}} baģd it-tabdîl
+rc-enhanced-expand|عرض التفاصيل (يتطلب جافاسكريبت)
+rc-enhanced-hide|أخفِ التفاصيل
+recentchangeslinked|تغييرات ذات علاقة
+recentchangeslinked-toolbox|Tabdilet them
+recentchangeslinked-title|التغييرات المرتبطة ب "~{0}"
+recentchangeslinked-summary|هذه قائمة بالتغييرات التي تمت حديثا للصفحات الموصولة من صفحة معينة (أو إلى الأعضاء ضمن تصنيف معين).\nالصفحات في [[Special:Watchlist\u007Cقائمة مراقبتك]] '''عريضة'''
+recentchangeslinked-page|اسم الصفحة:
+recentchangeslinked-to|أظهر التغييرات للصفحات الموصولة للصفحة المعطاة عوضا عن ذلك
+upload|Abεeth des fichiers l'esserveur
+uploadlogpage|سجل الرفع
+filedesc|ملخص:
+license|ترخيص:
+license-header|licence
+file-anchor-link|milaf (Fichier)
+filehist|Têrîx il-mîlaf
+filehist-help|اضغط على وقت/زمن لرؤية الملف كما بدا في هذا الزمن.
+filehist-revert|استرجع
+filehist-current|حالي
+filehist-datetime|وقت/زمن
+filehist-thumb|صورة مصغرة
+filehist-thumbtext|تصغير للنسخة بتاريخ ~{0}
+filehist-user|مستخدم
+filehist-dimensions|الأبعاد
+filehist-comment|ta3li9at
+imagelinks|استخدام الملف
+linkstoimage|{{PLURAL:~{0}\u007C\u007Cالصفحة التالية تصل\u007Cالصفحتان التاليتان تصلان\u007Cال~{0} صفحات التالية تصل\u007Cال~{0} صفحة التالية تصل}} إلى هذا الملف:
+nolinkstoimage|لا توجد صفحات تصل لهذا الملف.
+sharedupload-desc-here|هذا الملف من ~{0} ويمكن استخدامه بواسطة المشاريع الأخرى.\nالوصف على [~{1} صفحة وصف الملف] هناك معروض بالأسفل.
+randompage|Şafħa kîmê tjî
+nbytes|{{PLURAL:Octet weħed\u007CZouz octets\u007C~{0} octets\u007C~{0} en octet}}
+nmembers|{{PLURAL:~{0}\u007Cلا أعضاء\u007Cعضو واحد\u007Cعضوان\u007C~{0} أعضاء\u007C~{0} عضوا\u007C~{0} عضو}}
+prefixindex|كل الصفحات بالبادئة
+usercreated|{{GENDER:~{2}\u007Cأنشأه\u007Cأنشأته}} في ~{0} الساعة ~{1}
+newpages|Safħat jdod
+move|انقل
+pager-newer-n|{{PLURAL:~{0}\u007Cأقدم 1\u007Cأقدم ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Cأقدم 1\u007Cأقدم ~{0}}}
+booksources|مصادر كتاب
+booksources-search-legend|البحث عن مصادر الكتب
+log|سجلات
+allarticles|kol ess'afa7at
+allpagessubmit|اذهب
+linksearch-line|~{0} موصولة من ~{1}
+listgrouprights-members|(قائمة الأعضاء)
+emailuser|إرسال رسالة لهذا المستخدم
+watchlist|قائمة مراقبتي
+mywatchlist|قائمة مراقبتي
+watchlistfor2|ل~{0} ~{1}
+watch|راقب
+unwatch|أوقف المراقبة
+watchlist-details|{{PLURAL:~{0}\u007C\u007Cصفحة واحدة\u007Cصفحتان\u007C~{0} صفحات\u007C~{0} صفحة}} في قائمة مراقبتك، بدون عد صفحات النقاش.
+wlshowlast|عرض آخر ~{0} ساعات ~{1} أيام
+watchlist-options|خيارات قائمة المراقبة
+actioncomplete|انتهاء العملية
+actionfailed|الفعل فشل
+dellogpage|سجل الحذف
+rollbacklink|rajjaε
+protectlogpage|سجل الحماية
+protectedarticle|حمى "[[~{0}]]"
+undeletelink|اعرض/استعد
+undeleteviewlink|اعرض
+namespace|النطاق
+invert|اعكس الاختيار
+contributions|مساهماتي
+contributions-title|مساهمات المستخدم ~{0}
+mycontris|مساهماتي
+contribsub2|ل~{0} (~{1})
+uctop|(top)
+month|من سنة (وأقدم):
+year|من سنة (وأقدم):
+sp-contributions-newbies|اعرض مساهمات الحسابات الجديدة فقط
+sp-contributions-blocklog|سجل المنع
+sp-contributions-uploads|مرفوعات
+sp-contributions-logs|سجلات
+sp-contributions-talk|نقاش
+sp-contributions-search|بحث عن مساهمات
+sp-contributions-username|عنوان أيبي أو اسم مستخدم:
+sp-contributions-toponly|أظهر أعلى المراجعات فقط
+sp-contributions-submit|lawwej
+whatlinkshere|Cnûwwe illi ywassil l-hûnî
+whatlinkshere-title|الصفحات التي تصل إلى "~{0}"
+whatlinkshere-page|ss'af7a:
+linkshere|الصفحات التالية تصل إلى '''[[:~{0}]]''':
+nolinkshere|لا توجد صفحات تصل إلى '''[[:~{0}]]'''.
+isredirect|صفحة تحويل
+istemplate|مضمن
+isimage|وصلة ملف
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cprevious\u007Cprevious ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cالقادمة\u007Cال~{0} القادمة}}
+whatlinkshere-links|← وصلات
+whatlinkshere-hideredirs|~{0} التحويلات
+whatlinkshere-hidetrans|~{0} التضمينات
+whatlinkshere-hidelinks|~{0} الوصلات
+whatlinkshere-hideimages|~{0} وصلة صورة
+whatlinkshere-filters|مرشحات
+ipboptions|ساعتين:2 hours,يوم واحد:1 day,3 أيام:3 days,أسبوع واحد:1 week,أسبوعين:2 weeks,شهر واحد:1 month,3 أشهر:3 months,6 أشهر:6 months,سنة واحدة:1 year,دائم:infinite
+ipblocklist|المستخدمون الممنوعون
+blocklink|Bloqui
+unblocklink|ارفع المنع
+change-blocklink|تغيير المنع
+contribslink|Mûsêhmêt
+blocklogpage|سجل المنع
+blocklogentry|منع "[[~{0}]]" لفترة زمنية مدتها ~{1} ~{2}
+block-log-flags-nocreate|إنشاء الحسابات ممنوع
+movelogpage|سجل النقل
+revertmove|استرجع
+export|تصدير صفحات
+allmessagesname|الاسم
+allmessagesdefault|النص الافتراضي
+thumbnail_error|خطأ في إنشاء صورة مصغرة: ~{0}
+tooltip-pt-userpage|صفحة المستخدم الخاصة بك
+tooltip-pt-mytalk|صفحة نقاشك
+tooltip-pt-preferences|تفضيلاتي
+tooltip-pt-watchlist|قائمة الصفحات التي تراقب التغييرات التي تحدث بها
+tooltip-pt-mycontris|قائمة مساهماتك
+tooltip-pt-login|Međebîne kên itkoññektî, eme mûc bis-sîf
+tooltip-pt-logout|خروج
+tooltip-pt-createaccount|Međebîne law kên taģmil koñt w todxul, Lêkin mêkc maţlûb bêc taģmil hêđê.
+tooltip-ca-talk|Disküsyioñ ģal-koñtënü mtêģ il-pâj
+tooltip-ca-edit|Tnejjem tbaddil iş-şafḩa hêđi. Amân inzil ģal-bûtoñ mtêģ il-vû il-msebqa qbal mê tsijjil.
+tooltip-ca-addsection|ابدأ قسما جديدا
+tooltip-ca-viewsource|Essʾafħa protéjé.\nTnajjem tchouf essours mtaħħa.
+tooltip-ca-history|Copiet qdom mtaε essafħa hedhi
+tooltip-ca-protect|احم هذه الصفحة
+tooltip-ca-delete|احذف هذه الصفحة
+tooltip-ca-move|علم هذه الصفحة
+tooltip-ca-watch|أضف هذه الصفحة إلى قائمة مراقبتك
+tooltip-ca-unwatch|أزل هذه الصفحة من قائمة مراقبتك
+tooltip-search|Lawwij fî- {{SITENAME}}
+tooltip-search-go|Imcî l-pâj b-nafs il-ism îđê lqîthê
+tooltip-search-fulltext|Farkis fiş-şafḩât ģat-têkst hêđa
+tooltip-p-logo|Emchi lil-pâj il-ewelêniye
+tooltip-n-mainpage|Imchi lil-pâj il-ewelêniye
+tooltip-n-mainpage-description|Imchi lil-pâj il-ewelêniye
+tooltip-n-portal|Ģal-macrûģ, cnûwwe tnijjim taģmil, wîn tilqâ illi ḩajtik bîh
+tooltip-n-currentevents| Alqa information εla aham laħdeth mtaε tawa
+tooltip-n-recentchanges|Lîste mtêģ ajadd it-tabdîlêt fil-wiki
+tooltip-n-randompage|Ḩil iş-şafḩe illî tjî
+tooltip-n-help|Il-blâşa bêc tilqâ fîhe
+tooltip-t-whatlinkshere|Lîste mtêģ iş-şafḩât il-wiki il-kul illi twassil l-hûni
+tooltip-t-recentchangeslinked|Aham ettabldilet f'essafħat elli ywaslou l'essafħa hedhi
+tooltip-feed-atom|تلقيم أتوم لهذه الصفحة
+tooltip-t-contributions|رؤية قائمة مساهمات هذا المستخدم
+tooltip-t-emailuser|أرسل رسالة لهذا المستخدم
+tooltip-t-upload|Abεeth des fichiers l'esserveur
+tooltip-t-specialpages|Lîste mtêģ iş-şafħât is-spêsyal il-kul
+tooltip-t-print|Vêrsyoñ titiţbaģ min hal-pâj..
+tooltip-t-permalink|Lien dayem l'elversion hedhi mtaε essafħa
+tooltip-ca-nstab-main|Chouf elcontenu mtaε essafħa
+tooltip-ca-nstab-user|اعرض صفحة المستخدم
+tooltip-ca-nstab-special|هذه صفحة خاصة، لا تستطيع أن تعدل الصفحة نفسها
+tooltip-ca-nstab-project|رؤية صفحة المحتوى
+tooltip-ca-nstab-image|رؤية صفحة الملف
+tooltip-ca-nstab-template|رؤية القالب
+tooltip-ca-nstab-category|رؤية صفحة التصنيف
+tooltip-minoredit|علم على هذا كتعديل طفيف
+tooltip-save|احفظ تغييراتك
+tooltip-preview|اعرض تغييراتك، من فضلك استخدم هذا قبل الحفظ!
+tooltip-diff|اعرض التغييرات التي قمت بها للنص.
+tooltip-compareselectedversions|شاهد الفروق بين النسختين المختارتين من هذه الصفحة.
+tooltip-watch|أضف هذه الصفحة إلى قائمة مراقبتك
+tooltip-rollback|"Rajjaģ" yrajjiģ it-tabdîlêt f'hassafħa el'ekher weħed baddel fi nazla waħda.
+tooltip-undo|"رجوع" تسترجع هذا التعديل وتفتح نافذة التعديل في نمط العرض المسبق. تسمح بإضافة سبب في الملخص.\n"Annuler" trajjeε eltabdila lekhra w tħel fenêtre mtaε  el tabdil mtaε elvue el msabqa. Tnajjem tqoul εlech f'ettalkhis.
+tooltip-summary|أدخل ملخصا قصيرا
+pageinfo-toolboxlink|Maģlûmêt ģalâ hal-pâj
+previousdiff|→ التعديل السابق
+nextdiff|التعديل اللاحق ←
+file-info-size|~{0} × ~{1} بكسل حجم الملف: ~{2}، نوع MIME: ~{3}
+file-nohires|لا توجد دقة أعلى متوفرة.
+svg-long-desc|ملف SVG، أبعاده ~{0} × ~{1} بكسل، حجم الملف: ~{2}
+show-big-image|il-fîcyê il-aşlî
+bad_image_list|Elformat kima hakka:\nLes élements mtaε lista (lostra elli yabdew b' *) yetħesbou.\nEllien lowel fi star yelzmou ykoun lien el fichier khayeb.\nAy lien ekher fi nafs estar yetħseb exception, maħneha des pages win elfichier ynajem ykoun fi star.
+metadata|بيانات ميتا
+metadata-help|هذا الملف يحتوي على معلومات إضافية، غالبا ما تكون أضيفت من قبل الكاميرا الرقمية أو الماسح الضوئي المستخدم في إنشاء الملف.\nإذا كان الملف قد عدل عن حالته الأصلية، فبعض التفاصيل قد لا تعبر عن الملف المعدل.
+metadata-fields|حقول معطيات الميتا الموجودة في هذه الرسالة سوف تعرض في صفحة الصورة عندما يكون جدول معطيات الميتا مضغوطا.\nالحقول الأخرى ستكون مخفية افتراضيا.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+namespacesall|الكل
+monthsall|الكل
+watchlistedit-clear-explain|Elɛanawin lkol bech yetnaħaw mel'lista mteɛek
+watchlistedit-clear-titles|Elɛanawin
+watchlistedit-too-many|Famma barcha pajet w'manajmouch nħotouhom lkol lahné
+watchlisttools-view|اعرض التغييرات المرتبطة
+watchlisttools-edit|اعرض قائمة المراقبة وعدلها
+watchlisttools-raw|عدل قائمة المراقبة الخام
+duplicate-defaultsort|'''تحذير:''' مفتاح الترتيب الافتراضي "~{1}" يتجاوز مفتاح الترتيب الافتراضي السابق "~{0}".
+specialpages|Safḩât spêsyâl
+external_image_whitelist| #<pre>اترك هذا السطر تماما كما هو\n#ضع منثورات التعبيرات المنتظمة (فقط الجزء الذي يذهب بين //) بالأسفل\n#هذه ستتم مطابقتها مع مسارات الصور الخرجية (الموصولة بشكل مباشر)\n#هذه التي تطابق سيتم عرضها كصور، غير ذلك فقط وصلة إلى الصورة سيتم عرضها\n#السطور التي تبدأ ب# تتم معاملتها كتعليقات\n#هذا لا يتأثر بحالة الحروف\n\n#ضع كل منثورات التعبيرات المنتظمة فوق هذا السطر. اترك هذا السطر تماما كما هو</pre>
+tag-filter|مرشح [[Special:Tags\u007Cالوسوم]]:
+searchsuggest-search|Lawwij
+']:>
+).lang
+;

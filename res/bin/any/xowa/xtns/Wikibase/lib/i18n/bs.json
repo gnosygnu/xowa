@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"Edinwiki",
+			"CERminator",
+			"KWiki"
+		]
+	},
+	"wikibase-lib-desc": "Sadrži zajedničku funkcionalnost za Wikibazu i proširenje za Wikibaza klijent.",
+	"wikibase-entity-item": "stavka",
+	"wikibase-entity-property": "svojstvo",
+	"wikibase-entity-query": "upit",
+	"wikibase-diffview-label": "oznaka",
+	"wikibase-diffview-description": "opis",
+	"wikibase-diffview-link": "veze",
+	"wikibase-error-save-generic": "Greška je se desila tokom sačuvanja vaše izmjene. Zbog ovoga se vaše izmjene nisu mogle izvršiti.",
+	"wikibase-error-remove-generic": "Greška je se desila tokom brisanja. Zbog ovoga se vaše izmjene nisu mogle izvršiti.",
+	"wikibase-error-save-connection": "Desila je se greška sa konekcijom tokom sačuvanja. Zbog ovoga se vaše izmjene nisu mogle izvršiti. Provjerite vašu konekciju.",
+	"wikibase-error-remove-connection": "Desila je se greška sa konekcijom tokom brisanja. Zbog ovoga se vaše izmjene nisu mogle izvršiti. Provjerite vašu konekciju.",
+	"wikibase-error-save-timeout": "Trenutno imamo tehničkih poteškoća i zbog toga se ništa nije moglo sačuvati.",
+	"wikibase-error-remove-timeout": "Trenutno imamo tehničkih poteškoća i zbog toga se ništa nije moglo izbrisati.",
+	"wikibase-error-autocomplete-connection": "Nije bilo moguće poslati upit prema Wikipedija API. Pokušajte kasnije ponovo.",
+	"wikibase-error-autocomplete-response": "Odgovor servera: $1",
+	"wikibase-error-ui-client-error": "Konekcija sa klijent stranicom je prekinuta. Pokušajte kasnije ponovo.",
+	"wikibase-error-ui-no-external-page": "Navedeni članak nije pronađen na odgovarajućoj stranici.",
+	"wikibase-error-ui-cant-edit": "Niste ovlašteni da izvršite ovo djelo.",
+	"wikibase-error-ui-no-permissions": "Nemate dovoljno prava da izvršite ovo djelo.",
+	"wikibase-error-ui-link-exists": "Nemožete povezivati ovu stranicu zato što već druga stavka ima vezu prema njoj.",
+	"wikibase-error-ui-session-failure": "Vaša sesija je istekla. Prijavite se ponovo.",
+	"wikibase-error-ui-edit-conflict": "Došlo je do sukoba između izmjena. Osvježite stranicu i pokušajte ponovo sačuvati vaše izmjene.",
+	"wikibase-replicationnote": "Budite svjesni da može potrajati nekoliko minuta dok izmjene budu vidljive na svim wiki strancima",
+	"wikibase-sitelinks-wikipedia": "Wikipedia stranice koje su povezane uz ovu stavku",
+	"wikibase-sitelinks-sitename-columnheading": "Jezik",
+	"wikibase-sitelinks-siteid-columnheading": "Kod",
+	"wikibase-sitelinks-link-columnheading": "Povezana stranica",
+	"wikibase-snakview-snaktypeselector-novalue": "nema vrijednosti",
+	"wikibase-tooltip-error-details": "Detalji",
+	"datatypes-type-wikibase-item": "Stavka",
+	"datatypes-type-commonsMedia": "Commons medijska datoteka",
+	"version-wikibase": "Wikibase"
+}

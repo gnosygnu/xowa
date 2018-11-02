@@ -1,0 +1,44 @@
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+1|トーク
+3|利用者・トーク
+5|Wikipedia・トーク
+6|Image
+6|画像
+7|Image_talk
+7|ファイル・トーク
+7|画像‐ノート
+9|MediaWiki・トーク
+10|テンプレート
+11|テンプレート・トーク
+12|ヘルプ
+13|ヘルプ・トーク
+14|カテゴリ
+15|カテゴリ・トーク
+101|Portal・トーク
+101|ポータル‐ノート
+103|プロジェクト・トーク
+829|モジュール・トーク
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(8).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(100).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(101).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(102).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(103).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end

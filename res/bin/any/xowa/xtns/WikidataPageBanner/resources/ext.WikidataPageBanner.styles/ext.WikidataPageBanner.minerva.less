@@ -1,0 +1,16 @@
+/**
+ * Style tweaks for page-wide Banner in WikidataPageBanner extension for Skin Minerva.
+ */
+@import "mediawiki.mixins";
+
+// mobile 62.5 corresponds to @wgMFDeviceWidthDesktop in MobileFrontend
+// FIXME: Use less variable when https://phabricator.wikimedia.org/T93675 resolved
+@media (max-width: 62.5em) {
+	.ext-wpb-pagebanner.pre-content {
+		margin: 0;
+	}
+}
+
+.ext-wpb-pagebanner {
+	clear: both;
+}

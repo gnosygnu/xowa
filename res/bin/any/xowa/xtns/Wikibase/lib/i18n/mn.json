@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mongol"
+		]
+	},
+	"wikibase-timedetails-time": "Хугацаа",
+	"wikibase-timedetails-isotime": "ISO хугацааны тамга",
+	"wikibase-timedetails-timezone": "Цагийн бүс",
+	"wikibase-timedetails-calendar": "Календарь",
+	"wikibase-timedetails-precision": "Нарийвчлал",
+	"wikibase-timedetails-before": "Өмнө",
+	"wikibase-timedetails-after": "Дараа",
+	"wikibase-globedetails-longitude": "Уртраг",
+	"wikibase-globedetails-latitude": "Өргөрөг",
+	"wikibase-globedetails-precision": "Нарийвчлал",
+	"wikibase-globedetails-globe": "Бөмбөрцөг"
+}

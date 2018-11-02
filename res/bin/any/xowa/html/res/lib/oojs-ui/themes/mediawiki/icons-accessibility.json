@@ -1,0 +1,26 @@
+{
+	"selectorWithoutVariant": ".oo-ui-icon-{name}",
+	"selectorWithVariant": ".oo-ui-image-{variant}.oo-ui-icon-{name}",
+	"intro": "@import '../../../../src/styles/common';",
+	"variants": {
+		"invert": {
+			"color": "#ffffff",
+			"global": true
+		}
+	},
+	"images": {
+		"bright": { "file": "images/icons/bright.svg" },
+		"halfBright": { "file": "images/icons/halfBright.svg" },
+		"notBright": { "file": "images/icons/notBright.svg" },
+		"moon": { "file": "images/icons/moon.svg" },
+		"largerText": { "file": {
+			"ltr": "images/icons/largerText-ltr.svg",
+			"rtl": "images/icons/largerText-rtl.svg"
+		} },
+		"smallerText": { "file": {
+			"ltr": "images/icons/smallerText-ltr.svg",
+			"rtl": "images/icons/smallerText-rtl.svg"
+		} },
+		"visionSimulator": { "file": "images/icons/visionSimulator.svg" }
+	}
+}

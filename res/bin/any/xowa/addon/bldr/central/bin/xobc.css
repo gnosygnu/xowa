@@ -1,0 +1,73 @@
+.cur_head_text {
+  width: calc(100% - 32px);
+}
+.cur_head_btns {
+  width: 32px;
+}
+.cur_head_text_2 {
+  width: calc(100% - 64px);
+}
+.cur_head_btns_2 {
+  width: 64px;
+}
+.cur_head_text__available__caption {
+  width: calc(100% - 32px);
+}
+.cur_head_text__available__combo {
+  width: calc(100% - 120px);  
+}
+
+.task_tbl {
+  width: 100%;
+  margin: 0px 0px 8px; /* vertical-space inbetween tables */
+  
+  font-size: .85em;/* needed for kit-kat else text will overflow */
+}
+.head_name {
+  display: inline-block;
+  width: calc(100% - 32px);
+
+  font-weight: bold;
+}
+.task_name {
+  display: inline-block;
+  width: calc(100% - 32px);
+}
+
+.work_row  {
+  display:block !important;
+  height: 100%;
+}
+.work_btn_disabled {opacity: .2;}
+
+
+/* pbar */
+.pbar_row {  
+  width:  100%;
+  height: 100%;  /* depend on auto-size */
+  padding: 2px 0 2px;
+}
+.pbar_row_1 {
+  margin: -4px 0px 2px;
+}
+.pbar_step {
+  padding: 0px 0px 0px 44px;
+}
+.pbar_proc {
+  padding: 0px 0px 0px 44px;
+  font-variant: small-caps;
+}
+.pbar_div {
+  height: 2px;
+  margin: 2px 4px 2px 44px;
+  width: calc(100% - 50px);
+
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+.pbar_bar {
+  width: 0%;
+  height: 100%;
+  background-color: #5cb85c;
+  border-radius: 4px;
+}

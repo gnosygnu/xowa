@@ -1,0 +1,10 @@
+this
+.messages
+  .load_text(
+<:['
+vector-view-edit|增改
+vector-view-history|履歷
+vector-view-view|讀
+']:>
+).lang
+;

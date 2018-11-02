@@ -1,0 +1,36 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eitvys200",
+			"Hugo.arg"
+		]
+	},
+	"wikibase-edit": "redaguoti",
+	"wikibase-save": "išsaugoti",
+	"wikibase-cancel": "atšaukti",
+	"wikibase-add": "pridėti",
+	"wikibase-addqualifier": "pridėti kvalifikatorių",
+	"wikibase-addreference": "pridėti šaltinį",
+	"wikibase-save-inprogress": "Saugoma...",
+	"wikibase-remove-inprogress": "Šalinama...",
+	"wikibase-label-empty": "Dar nėra žymos",
+	"wikibase-label-edit-placeholder": "įvesti žymą",
+	"wikibase-description-empty": "Dar nėra aprašo",
+	"wikibase-description-edit-placeholder": "įvesti aprašą",
+	"wikibase-sitelink-site-edit-placeholder": "svetainė",
+	"wikibase-sitelink-page-edit-placeholder": "straipsnis",
+	"wikibase-statements": "Faktinė informacija",
+	"wikibase-terms": "Kitomis kalbomis",
+	"wikibase-remove": "pašalinti",
+	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|įvestis|įvestys|įvesčių}}",
+	"wikibase-aliases-label": "Taip pat žinomas kaip:",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|šaltinis|šaltiniai|šaltinių}}",
+	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Vienas šaltinis|$1 šaltiniai}} dar neišsaugoti",
+	"wikibase-snakview-property-input-placeholder": "savybė",
+	"wikibase-shortcopyrightwarning": "Paspausdamas \"$1\", jūs sutinkate su [[$2|naudojimo taisyklėmis]] ir neatšaukiamai sutinkate savo indėlį platinti pagal $3.",
+	"wikibase-copyrighttooltip-acknowledge": "Aš sutinku su šiomis taisyklėmis darydamas keitimus ateityje. Daugiau nerodykite šio pranešimo.",
+	"wikibase-entityselector-more": "daugiau",
+	"wikibase-anonymouseditwarning": "Dėmesio: Jūs neprisijungęs.\nJūsų IP adresas bus įrašytas į šio $1 keitimų istoriją.",
+	"wikibase-restrictionedit-tooltip-message": "Puslapis apsaugotas. Keitimai negalimi.",
+	"wikibase-restoreold": "perkrauti"
+}

@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"MKar",
+			"ଶିତିକଣ୍ଠ ଦାଶ"
+		]
+	},
+	"wikibase-addreference": "ଆଧାର ଯୋଡନ୍ତୁ",
+	"wikibase-remove": "ବାହାର କରିବା",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ଆଧାର|ଆଧାର ଗୁଡ଼ିକ}}",
+	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|ଆଧାରଟି|$1 ଆଧାର ଗୁଡ଼ିକ}} ବର୍ତ୍ତମାନ ସୁଦ୍ଧା ସାଇତାଯାଇ ନାହିଁ"
+}

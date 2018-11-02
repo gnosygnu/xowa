@@ -1,0 +1,1557 @@
+this
+.ns_names
+  .load_text(
+<:['
+-2|Media
+-1|Maxsus
+1|Bäxäs
+2|Qullanuçı
+3|Qullanuçı bäxäse
+5|$1 bäxäse
+6|Fayl
+7|Fayl bäxäse
+8|MediaWiki
+9|MediaWiki bäxäse
+10|Ürnäk
+11|Ürnäk bäxäse
+12|Yärdäm
+13|Yärdäm bäxäse
+14|Törkem
+15|Törkem bäxäse
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+2|Äğzä
+3|Äğzä bäxäse
+6|Räsem
+7|Räsem bäxäse
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+redirect|0|#YÜNÄLTÜ~#REDIRECT~
+notoc|0|__ETYUQ__~__NOTOC__~
+forcetoc|0|__ETTIQ__~__FORCETOC__~
+toc|0|__ET__~__TOC__~
+noeditsection|0|__BÜLEMTÖZÄTÜYUQ__~__NOEDITSECTION__~
+currentmonth|1|AĞIMDAĞI_AY~CURRENTMONTH~CURRENTMONTH2~
+currentmonthname|1|AĞIMDAĞI_AY_İSEME~CURRENTMONTHNAME~
+currentmonthnamegen|1|AĞIMDAĞI_AY_İSEME_GEN~CURRENTMONTHNAMEGEN~
+currentday|1|AĞIMDAĞI_KÖN~CURRENTDAY~
+currentdayname|1|AĞIMDAĞI_KÖN_İSEME~CURRENTDAYNAME~
+currentyear|1|AĞIMDAĞI_YIL~CURRENTYEAR~
+currenttime|1|AĞIMDAĞI_WAQIT~CURRENTTIME~
+numberofarticles|1|MÄQÄLÄ_SANI~NUMBEROFARTICLES~
+pagename|1|BİTİSEME~PAGENAME~
+namespace|1|İSEMARA~NAMESPACE~
+subst|0|TÖPÇEK:~SUBST:~
+img_none|1|yuq~none~
+img_right|1|uñda~right~
+img_left|1|sulda~left~
+int|0|EÇKE~INT~
+sitename|1|SÄXİFÄİSEME~SITENAME~
+ns|0|İA~NS~
+localurl|0|URINLIURL~LOCALURL~
+localurle|0|URINLIURLE~LOCALURLE~
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Yäkşämbe
+monday|Düşämbe
+tuesday|Sişämbe
+wednesday|Çärşämbe
+thursday|Pänceşämbe
+friday|Comğa
+saturday|Şimbä
+sun|Yäk
+mon|Düş
+tue|Siş
+wed|Çär
+thu|Pän
+fri|Com
+sat|Şim
+january|ğinvar
+february|fevral
+march|mart
+april|aprel
+may_long|may
+june|iün
+july|iül
+august|avgust
+september|sentäber
+october|oktäber
+november|noyäber
+december|dekaber
+january-gen|ğinvar
+february-gen|fevral
+march-gen|mart
+april-gen|aprel
+may-gen|may
+june-gen|iün
+july-gen|iül
+august-gen|avgust
+september-gen|sentäber
+october-gen|oktäber
+november-gen|noyäber
+december-gen|dekaber
+jan|ğin
+feb|fev
+mar|mar
+apr|apr
+may|may
+jun|iün
+jul|iül
+aug|avg
+sep|sen
+oct|okt
+nov|noy
+dec|dek
+toc|Eçtälek
+redirectedfrom|(~{0} bitennän yünältelde)
+allpages|Barlıq bitlär
+prevpage|Aldağı bit (~{0})
+nextpage|Aldağı bit (~{0})
+categories|Törkemnär
+lastmodifiedat|Bu bitne soñğı üzgärtü: ~{1}, ~{0}.
+thumbnail-more|Zuraytu
+otherlanguages|Başqa tellärdä
+blanknamespace|(Töp)
+pagecategories|{{PLURAL:~{0}\u007CTörkem\u007CTörkemnär}}
+category_header|«~{0}» törkemendäge bitlär
+subcategories|Törkemçälär
+category-media-header|«~{0}» törkemendäge fayllar
+category-empty|''Bu törkem älegä buş.''
+category-subcat-count|{{PLURAL:~{1}\u007CBu törkemdä tübändäge törkemçä genä bar.\u007C~{1} törkemçädän {{PLURAL:~{0}\u007C~{0} törkemçä kürsätelgän}}.}}
+category-subcat-count-limited|Bu törkemdä {{PLURAL:~{0}\u007C~{0} törkemçä}} bar.
+category-article-count|{{PLURAL:~{1}\u007CBu törkemdä ber genä bit bar.\u007CTörkemdäge ~{1} bitneñ {{PLURAL:~{0}\u007C~{0} bite kürsätelgän}}.}}
+category-article-count-limited|Bu törkemdä {{PLURAL:~{0}\u007C~{0} bit}} bar.
+category-file-count|{{PLURAL:~{1}\u007CBu törkemdä ber genä fayl bar.\u007CTörkemdäge ~{1} faylnıñ {{PLURAL:~{0}\u007C~{0} faylı kürsätelgän}}.}}
+category-file-count-limited|Bu törkemdä {{PLURAL:~{0}\u007C~{0} fayl}} bar.
+nextn|çirattağı {{PLURAL:~{0}\u007C~{0}}}
+prevn|aldağı {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|däwamı
+bold_sample|Qalın yazılış
+bold_tip|Qalın yazılış
+italic_sample|Kursiv yazılış
+italic_tip|Kursiv yazılış
+link_sample|Sıltama iseme
+link_tip|Eçke sıltama
+headline_sample|Başisem
+headline_tip|2 nçe däräcäle isem
+hidden-category-category|Yäşeren törkemnär
+statistics|Xisapnamä
+statistics-header-pages|Bitlär xisapnamäse
+statistics-articles|Mäqälälär sanı
+statistics-pages|Bitlär sanı
+statistics-pages-desc|Barlıq wiki, bäxäs, küçerü häm başqa bitlärne dä istä totıp.
+wm-license-information-source|Çığanağı
+sitesupport|İğänä
+wikimedia-copyright|Tekst <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike</a> litsenziäse astında birelä, ayırım oçraqlarda östämä şartlar eşlärgä mömkin. Östämä mäğlümat öçen <a href="https://wikimediafoundation.org/wiki/Terms_of_Use/ru">Qullanu şartların</a> qarağız.
+wikimedia-copyrightwarning|Üzgärtülärne saqlağan waqıtta, sez alarnıñ [https://creativecommons.org/licenses/by-sa/3.0/ Creative Commons Attribution/Share-Alike License 3.0] häm [https://www.gnu.org/copyleft/fdl.html GFDL] litsenziäläre taläpläre buyınça publikatsiäläwenä riza bulasız. Bu bitne qullanğanda, sezgä iñ kime gipersıltama yäki bit URL'ı aşa sıltama quyıluğa riza bulasız. Tulıraq mäğlümat öçen [https://wikimediafoundation.org/wiki/Terms_of_Use Qullanu şartları] biten qarağız.
+tog-underline|Sıltamalarnıñ astına sızu:
+tog-hideminor|Soñğı üzgärtülär isemlegendä keçe üzgärtülär yäşerelsen
+tog-hidepatrolled|Tikşerelgän üzgärtülär yaña üzgärtülär isemlegennän yäşerelsen.
+tog-newpageshidepatrolled|Tikşerelgän bitlär yaña bitlär isemlegennän yäşerelsen
+tog-extendwatchlist|Soñğıların ğına tügel, ä barlıq üzgärtülärne eçenä alğan, kiñäytelgän küzätü isemlege
+tog-usenewrc|Yaxşırtılğan soñğı üzgärtülär isemlege qullanılsın (JavaScript kiräk)
+tog-numberheadings|Atamalar avtomat räweştä nomerlansın
+tog-showtoolbar|Üzgärtü waqıtında qorallarnıñ öske panele kürsätelsen (JavaScript kiräk)
+tog-editondblclick|Bitlärgä ike çirtterü belän üzgärtü bite açılsın (JavaScript kiräk)
+tog-editsectiononrightclick|Bülek isemenä tıçqannıñ uñ çirttermäse belän törtkäç üzgärtü bite açılsın (JavaScript kiräk)
+tog-watchcreations|Tözegän bitlärem küzätü isemlegemä östälsen
+tog-watchdefault|Üzgärtkän bitlärem küzätü isemlegemä östälsen
+tog-watchmoves|Küçergän bitlärem küzätü isemlegemä östälsen
+tog-watchdeletion|Beterelgän bitläremne küzätü isemlegemgä östäw
+tog-minordefault|Barlıq üzgärtülärne kileşü buyınça keçe dip bilgelänsen
+tog-previewontop|Üzgärtü täräzäsennän östäräk bitne aldan qaraw ölkäsen kürsätelsen
+tog-previewonfirst|Üzgärtü bitenä küçkändä başta aldan qaraw bite kürsätelsen
+tog-enotifwatchlistpages|Küzätü isemlegemdäge bit üzgärtelü turında elektron poçtağa xäbär cibärelsen
+tog-enotifusertalkpages|Bäxäs bitem üzgärtelü turında elektron poçtağa xäbär cibärelsen
+tog-enotifminoredits|Keçe üzgärtülär turında da elektron poçtağa xäbär cibärelsen
+tog-enotifrevealaddr|Xäbärlärdä e-mail adresım kürsätelsen
+tog-shownumberswatching|Bitne küzätü isemleklärenä östägän qullanuçılar sanın kürsätelsen
+tog-oldsig|Xäzerge imzanı aldan qaraw:
+tog-fancysig|İmzanıñ şäxsi wiki-bilgelämäse (avtomatik sıltamasız)
+tog-uselivepreview|Tiz qarap alu qullanılsın (JavaScript, eksperimental)
+tog-forceeditsummary|Üzgärtülärne taswirlaw yulı tutırılmağan bulsa, kisätü
+tog-watchlisthideown|Minem üzgärtülärem küzätü isemlegennän yäşerelsen
+tog-watchlisthidebots|Bot üzgärtüläre küzätü isemlegennän yäşerelsen
+tog-watchlisthideminor|Keçe üzgärtülär küzätü isemlegennän yäşerelsen
+tog-watchlisthideliu|Avtorizatsiäne uzğan qullanuçılarnıñ üzgärtüläre küzätü isemlegennän yäşerelsen
+tog-watchlisthideanons|Anonim qullanuçılarnıñ üzgärtüläre küzätü isemlegennän yäşerelsen
+tog-watchlisthidepatrolled|Tikşerelgän üzgärtülär küzätü isemlegennän yäşerelsen
+tog-ccmeonemails|Başqa qullanuçılarğa cibärgän xatlarımnıñ kopiäläre miña da cibärelsen
+tog-diffonly|Yurama çağıştıru astında bit eçtälege kürsätelmäsen
+tog-showhiddencats|Yäşeren törkemnär kürsätelsen
+tog-norollbackdiff|Kire qaytaru yasağaç yuramalar ayırması kürsätelmäsen
+underline-always|Härwaqıt
+underline-never|Berwaqıtta da
+underline-default|Brauzer köylänmäläre qullanılsın
+editfont-style|Üzgärtü ölkäsendäge şrift tibı:
+editfont-default|Brauzer köylänmälärennän bulsın
+editfont-monospace|Kiñäytelgän şrift
+editfont-sansserif|Kirteksez şrift
+editfont-serif|Kirtekle şrift
+hidden-categories|{{PLURAL:~{0}\u007CYäşeren törkem\u007CYäşeren törkemnär}}
+index-category|İndekslanğan bitlär
+noindex-category|İndekslanmağan bitlär
+about|Taswirlama
+article|Mäqälä
+newwindow|(yaña täräzädä açıla)
+cancel|Baş tartu
+moredotdotdot|Däwamı…
+mypage|Şäxsi bitem
+mytalk|Bäxäsem
+anontalk|Bu IP adresı öçen bäxäs bite
+navigation|Küçü
+and| häm
+qbfind|Ezläw
+qbbrowse|Qaraw
+qbedit|Üzgärtü
+qbpageoptions|Bu bit
+qbmyoptions|Bitlärem
+faq|YBS
+faqpage|Project:YBS
+actions|Xäräkät
+namespaces|İsemnär mäydanı
+variants|Törlär
+errorpagetitle|Xata
+returnto|~{0} bitenä qaytu.
+tagline|{{SITENAME}} proyektınnan
+help|Yärdäm
+search|Ezläw
+searchbutton|Ezläw
+go|Küçü
+searcharticle|Küçü
+history|Bitneñ tarixı
+history_short|Tarix
+updatedmarker|soñğı kerüemnän soñ yañartılğan
+printableversion|Bastıru versiäse
+permalink|Daimi sıltama
+print|Bastıru
+edit|Üzgärtü
+create|Tözü
+editthispage|Bu bitne üzgärtü
+create-this-page|Bu bitne tözü
+delete|Beterü
+deletethispage|Bu bitne beterü
+undelete_short|~{0} {{PLURAL:~{0}\u007Cüzgärtmäne}} torğızu
+protect|Yaqlaw
+protect_change|üzgärtü
+protectthispage|Bu bitne yaqlaw
+unprotect|Yaqlawnı beterü
+unprotectthispage|Bu bitneñ yaqlawın beterü
+newpage|Yaña bit
+talkpage|Bit turında fiker alışu
+talkpagelinktext|Bäxäs
+specialpage|Maxsus bit
+personaltools|Şäxsi qorallar
+articlepage|Mäqäläne qaraw
+talk|Bäxäs
+views|Qarawlar
+toolbox|Qorallar
+userpage|Qullanuçı biten qaraw
+projectpage|Proyekt biten qaraw
+imagepage|Fayl biten qaraw
+mediawikipage|Xäbär biten qaraw
+templatepage|Ürnäk biten qaraw
+viewhelppage|Yärdäm biten qaraw
+categorypage|Törkem biten qaraw
+viewtalkpage|Bäxäs biten qaraw
+redirectpagesub|Başqa bitkä yünältü bite
+viewcount|Bu bitkä ~{0} {{PLURAL:~{0}\u007Ctapqır}} möräcäğät ittelär.
+protectedpage|Yaqlanğan bit
+jumpto|Moña küçü:
+jumptonavigation|navigatsiä
+jumptosearch|ezläw
+view-pool-error|Ğafu itegez, xäzerge waqıtta serverlar buş tügel.\nBu bitne qararğa teläwçelär artıq küp.\nBu bitkä soñaraq kerüegez sorala.\n\n~{0}
+pool-timeout|Qısılunıñ  waqıtı uzdı
+pool-queuefull|Sorawlarnı saqlaw  bite tulı
+pool-errorunknown|Bilgesez  xata
+aboutsite|{{SITENAME}} turında
+aboutpage|Project:Taswirlama
+copyright|Mäğlümat ~{0} buyınça taratıla.
+copyrightpage|{{ns:project}}:Avtorlıq xoquqları
+currentevents|Xäzerge waqıyğalar
+currentevents-url|Project:Xäzerge waqıyğalar
+disclaimers|Cawaplılıqtan baş tartu
+disclaimerpage|Project:Cawaplılıqtan baş tartu
+edithelp|Üzgärtü buyınça yärdäm
+mainpage|Baş bit
+mainpage-description|Baş bit
+policy-url|Project:Qäğidälär
+portal|Cämğiät üzäge
+portal-url|Project:Cämğiät üzäge
+privacy|Yäşerenlek säyäsäte
+privacypage|Project:Yäşerenlek säyäsäte
+badaccess|Kerü xatası
+badaccess-group0|Sez sorağan ğämälne başqara almıysız.
+badaccess-groups|Soralğan ğämälne ~{0} {{PLURAL:~{1}\u007Ctörkemeneñ\u007Ctörkemeneñ}} qullanuçıları ğına başqara ala.
+versionrequired|MediaWikinıñ ~{0} versiäse taläp itelä
+versionrequiredtext|Bu bit belän eşläw öçen MediaWikinıñ ~{0} versiäse kiräk. [[Special:Version\u007CQullanıluçı programma versiäse turında mäğlümat biten]] qara.
+ok|OK
+pagetitle|~{0} — {{SITENAME}}
+pagetitle-view-mainpage|{{SITENAME}}
+retrievedfrom|Çığanağı — "~{0}"
+youhavenewmessages|Sezdä ~{0} bar (~{1}).
+youhavenewmessagesmulti|Sezgä monda yaña xäbärlär bar: ~{0}
+editsection|üzgärtü
+editold|üzgärtü
+viewsourceold|başlanğıç kodnı qaraw
+editlink|üzgärtü
+viewsourcelink|başlanğıç kodnı qaraw
+editsectionhint|~{0} bülegen üzgärtü
+showtoc|kürsätü
+hidetoc|yäşerü
+thisisdeleted|~{0} qararğa yäki torğızırğa telisezme?
+viewdeleted|~{0} qararğa telisezme?
+restorelink|{{PLURAL:~{0}\u007C1 beterelgän üzgärtüne\u007C~{0} beterelgän üzgärtüne}}
+feedlinks|Şuşılay:
+feed-invalid|Yazılu qanalı tibı yalğış
+feed-unavailable|Sindikatsiä tasması yabıq
+site-rss-feed|~{0} — RSS tasması
+site-atom-feed|~{0} — Atom tasması
+page-rss-feed|«~{0}» — RSS tasması
+page-atom-feed|«~{0}» — Atom tasması
+feed-atom|Atom-tasması
+feed-rss|RSS-tasması
+red-link-title|~{0} (mondıy bit yuq)
+nstab-main|Bit
+nstab-user|Qullanuçı bite
+nstab-media|Multimedia
+nstab-special|Maxsus bit
+nstab-project|Proyekt bite
+nstab-image|Fayl
+nstab-mediawiki|Xäbär
+nstab-template|Ürnäk
+nstab-help|Yärdäm
+nstab-category|Törkem
+nosuchaction|Mondıy ğämäl yuq
+nosuchactiontext|URLda kürsätelgän ğämäl xatalı.\nSez URLnı xatalı cıyğan yäisä xatalı sıltamadan küçkän bulırğa mömkinsez.\nBu şulay uq {{SITENAME}} proyektındağı xata säbäple dä bulırğa mömkin.
+nosuchspecialpage|Mondıy maxsus bit yuq
+nospecialpagetext|<strong>Sez sorıy torğan maxsus bit yuq.</strong>\n\nMaxsus bitlär isemlegen qarağız: [[Special:SpecialPages\u007C{{int:specialpages}}]].
+error|Xata
+databaseerror|Mäğlümatlar bazasında xata
+laggedslavemode|İğtibar: bittä soñğı yañartular kürsätelmägän bulırğa mömkin.
+readonly|Mäğlümatlar bazasına yazu yabılğan
+enterlockreason|Yabılu säbäben häm waqıtın kürsätegez.
+readonlytext|Mäğlümat bazası xäzerge waqıtta yaña bitlär yasawdan häm başqa üzgärtülärdän yabılğan. Bu planlaştırılğan xezmät kürsätü säbäple bulırğa mömkin.\nYabuçı operator tübändäge añlatmanı qaldırğan:\n~{0}
+missing-article|Mäğlümatlar bazasında «~{0}» ~{1} biteneñ soralğan tekstı tabılmadı.\n\nBu, ğädättä, iskergän sıltama buyınça beterelgän bitneñ üzgärtü tarixına küçkändä kilep çığa.\n\nÄgär xata monda tügel ikän, sez programmada xata tapqan bulırğa mömkinsez.\nZinhar öçen, URLnı kürsätep, bu turıda [[Special:ListUsers/sysop\u007Cidaräçegä]] xäbär itegez.
+missingarticle-rev|(yurama № ~{0})
+missingarticle-diff|(ayırma: ~{0}, ~{1})
+readonly_lag|Mäğlümatlar bazası, östämä server töp server belän sinxronizatsiäläşkänçe, üzgärülärdän avtomat räweştä yabıldı.
+internalerror|Eçke xata
+internalerror_info|Eçke xata: ~{0}
+filecopyerror|«~{1}» faylına «~{0}» faylınıñ kopiäsen yasap bulmıy.
+filerenameerror|«~{0}» faylınıñ isemen «~{1}» isemenä alıştırıp bulmıy.
+filedeleteerror|«~{0}» faylın beterep bulmıy.
+directorycreateerror|«~{0}» direktoriäsen yasap bulmıy.
+filenotfound|«~{0}» faylın tabıp bulmıy.
+unexpected|Kötelmägän qimät: «~{0}»=«~{1}».
+formerror|Xata: forma mäğlümatların tapşırıp bulmıy
+badarticleerror|Bu bittä mondıy ğämäl başqarıp bulmıy.
+cannotdelete|«~{0}» isemle bitne yäki faylnı beterep bulmıy. Anı bütän qullanuçı betergän bulırğa mömkin.
+badtitle|Yaraqsız isem
+badtitletext|Bitneñ soralğan iseme döres tügel, buş yäisä telara yäki interwiki iseme döres kürsätelmägän. İsemdä tıyılğan simvollar qullanılğan bulırğa mömkin.
+perfcached|Bu mäğlümatlar keştan alınğan, alarda soñğı üzgärtülär bulmasqa mömkin. A maximum of {{PLURAL:~{0}\u007Cone result is\u007C~{0} results are}} available in the cache.
+perfcachedts|Bu mäğlümatlar keştan alınğan, ul soñğı tapqır ~{0} yañartıldı. A maximum of {{PLURAL:~{3}\u007Cone result is\u007C~{3} results are}} available in the cache.
+querypage-no-updates|Xäzer bu bitne yañartıp bulmıy. Monda kürsätelgän mäğlümatlar qabul itelmäyäçäk.
+viewsource|Qaraw
+actionthrottled|Tizlek kimetelgän
+actionthrottledtext|Spamğa qarşı köräş öçen az waqıt eçendä bu ğämälne yış qullanu tıyılğan. Zinhar, soñaraq qabatlağız.
+protectedpagetext|Bu bit üzgärtü öçen yabıq.
+viewsourcetext|Sez bu bitneñ başlanğıç tekstın qarıy häm küçerä alasız:
+protectedinterface|Bu bittä programma interfeysı xäbärläre bar. Vandalizmğa qarşı köräş säbäple, bu bitne üzgärtü tıyıla.
+editinginterface|'''İğtibar:''' Sez MediaWiki sistemasınıñ interfeys biten üzgärtäsez. Bu başqa qullanuçılarğa da tä'sir itäçäk. Tärcemä öçen [//translatewiki.net/wiki/Main_Page?setlang=tt-latn translatewiki.net] lokalizatsiäläw proyektın qullanığız.
+cascadeprotected|Bu bit üzgärtülärdän saqlanğan, çönki ul kaskadlı saqlaw qabul itelgän {{PLURAL:~{0}\u007Cbitkä\u007Cbitlärgä}} östälgän:\n~{1}
+namespaceprotected|'''~{0}''' isem kiñlegendäge bitlärne üzgärtü öçen sezneñ röxsätegez yuq.
+ns-specialprotected|Maxsus bitlärne üzgärtep bulmıy.
+titleprotected|Bu isem belän bit yasaw [[User:~{0}\u007C~{0}]] tarafınnan tıyılğan.\nUl kürsätkän säbäp: ''~{1}''.
+virus-badscanner|Köyläw xatası. Bilgesez viruslar skanerı: ''~{0}''
+virus-scanfailed|skanerlaw xatası (~{0} kodı)
+virus-unknownscanner|bilgesez antivirus:
+logouttext|'''Sez xisap yazmağızdan çıqtığız.'''\n\nSez {{SITENAME}} proyektında anonim räweştä qala yäisä şul uq yäki başqa isem belän yañadan <span class='plainlinks'>[~{0} kerä]</span> alasız.\nQayber bitlär Sez kergän kebek kürsätelergä mömkin. Monı beterü öçen brauzer keşın çistartığız.
+yourname|Qullanuçı iseme:
+yourpassword|Sersüz:
+yourpasswordagain|Sersüzne qabat kertü:
+remembermypassword|Xisap yazmamnı bu brauzerda saqlansın (iñ küp ~{0} {{PLURAL:~{0}\u007Ckön\u007Ckön\u007Ckön}}gä qädär)
+yourdomainname|Sezneñ domenığız:
+externaldberror|Tışqı mäğlümat bazası yärdämendä awtentifikatsiä ütkändä xata çıqtı, yäisä tışqı xisap yazmağızğa üzgäreşlär kertü xoquqığız yuq.
+login|Kerü
+nav-login-createaccount|Kerü / terkälü
+userlogin|Kerü / terkälü
+userloginnocreate|Kerü
+logout|Çığu
+userlogout|Çığu
+notloggedin|Sez xisap yazmağızğa kermägänsez
+nologin|Qullanuçı isemeñ yuqmı? '''~{0}'''
+nologinlink|Xisap yazması tözegez
+createaccount|Yaña qullanuçı terkäw
+gotaccount|Sez inde terkäldegezme? '''~{0}'''.
+gotaccountlink|Kerü
+createaccountmail|elektron poçta aşa
+createaccountreason|Säbäp:
+badretype|Kertelgän sersüzlär ber ük tügel.
+userexists|Kertelgän isem qullanıla.\nZinhar, başqa isem saylağız.
+loginerror|Kerü xatası
+createaccounterror|Xisap yazmasın tözep bulmıy: ~{0}
+nocookiesnew|Qullanuçı terkälgän, läkin üz xisap yazması belän kermägän. {{SITENAME}} qullanuçını tanu öçen «cookies» qullana. Sezdä «cookies» tıyılğan. Zinhar, başta alarnı röxsät itegez, annan isem häm sersüz belän keregez.
+nocookieslogin|{{SITENAME}} qullanuçını tanu öçen «cookies» qullana. Sez alarnı sündergänsez. Zinhar, alarnı qabızıp, yañadan keregez.
+noname|Sez qullanuçı isemegezne kürsätergä tieşsez.
+loginsuccesstitle|Kerü uñışlı ütte
+loginsuccess|'''Sez {{SITENAME}} proyektına ~{0} iseme belän kerdegez.'''
+nosuchuser|~{0} isemle qullanuçı yuq.\nQullanuçı isemeneñ döreslege registrğa bäyle.\nYazılışığıznı tikşeregez yäki [[Special:UserLogin/signup\u007Cyaña xisap yazması tözegez]].
+nosuchusershort|~{0} isemle qullanuçı yuq. Yazılışığıznı tikşeregez.
+nouserspecified|Sez terkäw ismegezne kürsätergä tieşsez.
+login-userblocked|Bu qullanuçı tıyıldı. Kerü tıyılğan.
+wrongpassword|Yazılğan sersüz döres tügel. Tağın ber tapqır sınağız.
+wrongpasswordempty|Sersüz yulı buş bulırğa tieş tügel.
+passwordtooshort|Sezsüz ~{0} {{PLURAL:~{0}\u007Csimvoldan}} torırğa tieş.
+password-name-match|Kertelgän sersüz qullanuçı isemennän ayırılırğa tieş.
+mailmypassword|Elektron poçtağa yaña sersüz cibärü
+passwordremindertitle|{{SITENAME}} qullanuçısına waqıtlı sersüz tapşıru
+passwordremindertext|Kemder (bälki, sezder, IP adresı: ~{0}) {{SITENAME}} (~{3}) öçen yaña sersüz sorattı. ~{1} öçen yaña sersüz: ~{2}. Ägär bu sez bulsağız, sistemağa keregez häm sersüzne almaştırığız. Yaña sersüz ~{4} {{PLURAL:~{4}\u007Ckön}} ğämäldä bulaçaq.\n\nÄgär sez sersüzne almaştırunı soramağan bulsağız yäki, onıtqan oçraqta, isegezgä töşergän bulsağız, bu xäbärgä iğtibar birmiçä, iske sersüzegezne qullanunı däwam itegez.
+noemail|~{0} isemle qullanuçı öçen elektron poçta adresı yazılmağan.
+noemailcreate|Sez döres e-mail adresı kürsätergä tieş
+passwordsent|Yaña sersüz ~{0} isemle qullanuçınıñ elektron poçta adresına cibärelde.\n\nZinhar, sersüzne alğaç, sistemağa yañadan keregez.
+blocked-mailpassword|Sezneñ IP adresığız belän bitlär üzgärtep häm sersüzne yañartıp bulmıy.
+eauthentsent|Adres üzgärtüne dälilläw öçen aña maxsus xat cibärelde. Xatta yazılğannarnı ütäwegez sorala.
+throttled-mailpassword|Sersüzne elektron poçtağa cibärü ğämälen sez {{PLURAL:~{0}\u007Csoñğı ~{0} säğät}} eçendä qullandığız inde. Bu ğämälne yawızlarça qullanunı kisätü maqsatınnan anı ~{0} {{PLURAL:~{0}\u007Csäğät}} aralığında ber genä tapqır başqarıp bula.
+mailerror|Xat cibärü xatası: ~{0}
+acct_creation_throttle_hit|Sezneñ IP adresınnan bu täwlek eçendä {{PLURAL:~{0}\u007C~{0} xisap yazması}} tözelde inde. Şunlıqtan bu ğämäl sezneñ öçen waqıtlıça yabıq.
+emailauthenticated|Elektron poçta adresığız raslandı: ~{2}, ~{1}.
+emailnotauthenticated|Elektron poçta adresığız äle dälillänmägän, şuña wikinıñ elektron poçta belän eşläw ğämälläre sünderelde.
+noemailprefs|Elektron poçta adresığız kürsätelmägän, şuña wikinıñ elektron poçta belän eşläw ğämälläre sünderelgän.
+emailconfirmlink|Elektron poçta adresığıznı dälillägez.
+invalidemailaddress|Elektron poçta adresı qabul itelä almıy, çönki ul döres formatqa turı kilmi. Zinhar, döres adres kertegez yäki yulnı buş qaldırığız.
+accountcreated|Xisap yazması tözelde
+accountcreatedtext|~{0} isemle qullanuçı öçen xisap yazması tözelde.
+createaccount-title|{{SITENAME}}: terkälü
+createaccount-text|Kemder, elektron poçta adresığıznı kürsätep, {{SITENAME}} (~{3}) proyektında «~{2}» sersüze belän «~{1}» isemle xisap yazması terkäde. Sez kerergä häm sersüzegezne üzgärtergä tieş.\n\nXisap yazması tözü xata bulsa, bu xatnı onıtığız.
+login-throttled|Sez artıq küp tapqır kerergä tırıştığız.\nYañadan qabatlağançı beraz kötüegez sorala.
+loginlanguagelabel|Tel: ~{0}
+suspicious-userlogout|Sezneñ eşçänlekne beterü sorawığız kire qağıldı, çönki ul yalğış brauzer yäisä keşlawçı proksi aşa cibärelerge mömkin.
+changepassword|Sersüzne üzgärtü
+resetpass_announce|Sez elektron poçta aşa waqıtlıça birelgän sersüz yärdämendä kerdegez. Sistemağa kerüne tögälläw öçen yaña sersüz tözegez.
+resetpass_text|<!-- Monda tekst östägez -->
+resetpass_header|Xisap yazması sersüzen üzgärtü
+oldpassword|İske sersüz:
+newpassword|Yaña sersüz:
+retypenew|Yaña sersüzne qabatlağız:
+resetpass_submit|Sersüz quyıp kerü
+changepassword-success|Sezneñ sersüz uñışlı üzgärtelde! Sistemağa kerü başqarıla...
+resetpass_forbidden|Sersüz üzgärtelä almıy
+resetpass-no-info|Bu bitne qaraw öçen sez sistemağa üz xisap yazmağız yärdämendä kerergä tieş.
+resetpass-submit-loggedin|Sersüzne üzgärtü
+resetpass-submit-cancel|Kire qağu
+resetpass-wrong-oldpass|Yalğış sersüz.\nSez sersüzegezne üzgärtkän yäisä yaña waqıtlı sersüz soratqan bulırğa mömkinsez.
+resetpass-temp-password|Waqıtlı sersüz:
+extlink_sample|http://www.example.com sıltama iseme
+extlink_tip|Tışqı sıltama (http:// alquşımçası turında onıtmağız)
+nowiki_sample|Formatlanmağan tekstnı monda östägez
+nowiki_tip|Wiki-formatlawnı isäpkä almaw
+image_sample|Misal.jpg
+image_tip|Quyılğan fayl
+media_sample|Mísal.ogg
+media_tip|Media-faylğa sıltama
+sig_tip|İmza häm waqıt
+hr_tip|Gorizontal sızıq (yış qullanmağız)
+summary|Üzgärtülär taswirlaması:
+subject|Tema/başisem:
+minoredit|Bu keçe üzgärtü
+watchthis|Bu bitne küzätü
+savearticle|Bitne saqlaw
+preview|Aldan qaraw
+showpreview|Aldan qaraw
+showdiff|Kertelgän üzgärtülär
+anoneditwarning|'''İğtibar''': Sez sistemağa kermägänsez. IP adresığız bu bitneñ tarixına yazılaçaq.
+anonpreviewwarning|''Sez sistemada terkälmädegez.Sezneñ taraftan eşlängän barlıq üzgärtülär dä sezneñ IP-yullamağıznı saqlawğa kiterä.''
+missingsummary|'''İskärtü.''' Sez üzgärtügä qısqaça taswirlaw yazmadığız. Sez «Bitne saqlaw» töymäsenä tağın ber tapqır bassağız, üzgärtülär taswirlamasız saqlanaçaq.
+missingcommenttext|Asqa taswirlama yazuığız sorala.
+missingcommentheader|''İskärtü:''' Sez taswirlamağa isem birmädegez.\n«{{int:savearticle}}» töymäsenä qabat bassağız, üzgärtülär isemsez yazılaçaq.
+summary-preview|Taswirlamanı aldan qaraw:
+subject-preview|Başisemne aldan qaraw:
+blockedtitle|Qullanuçı tıyıldı
+blockedtext|'''Sezneñ xisap yazmağız yäki IP adresığız tıyılğan.'''\n\nTıyuçı idaräçe: ~{0}.\nKürsätelgän säbäp: ''~{1}''.\n\n* Tıyu başlanğan waqıt: ~{7}\n* Tıyu axırı: ~{5}\n* Tıyılular sanı: ~{6}\n\nSez ~{0} yäki başqa [[{{MediaWiki:Grouppage-sysop}}\u007Cidaräçegä]] tıyu buyınça sorawlarığıznı cibärä alasız.\nİsegezdä totığız: ägär sez terkälmägän häm elektron poçta adresığıznı dälillämägän bulsağız ([[Special:Preferences\u007Cdälilläw öçen şäxsi köyläwlär monda]]), idaräçegä xat cibärä almıysız. Şulay uq tıyu waqıtında sezneñ xat cibärü mömkinlegegezne çiklägän bulırğa da mömkinnär.\nSezneñ IP adresı — ~{2}, tıyu identifikatorı — #~{4}.\nXatlarda bu mäğlümatnı kürsätergä onıtmağız.
+autoblockedtext|Sezneñ IP adresığız, anıñ tıyılğan qullanuçı tarafınnan qullanıluı säbäple, avtomat räweştä tıyıldı.\nUl qullanuçını tıyuçı idaräçe: ~{0}. Kürsätelgän säbäp:\n\n:''~{1}''\n\n* Tıyu başlanğan waqıt: ~{7}\n* Tıyu axırı: ~{5}\n* Tıyılular sanı: ~{6}\n\nSez ~{0} yäki başqa [[{{MediaWiki:Grouppage-sysop}}\u007Cidaräçegä]] tıyu buyınça sorawlarığıznı cibärä alasız.\nİsegezdä totığız: ägär sez terkälmägän häm elektron poçta adresığıznı dälillämägän bulsağız ([[Special:Preferences\u007Cdälilläw öçen şäxsi köyläwlär monda]]), idaräçegä xat cibärä almıysız. Şulay uq tıyu waqıtında sezneñ xat cibärü mömkinlegegezne çiklägän bulırğa da mömkinnär.\nSezneñ IP adresı — ~{2}, tıyu identifikatorı — #~{4}.\nXatlarda bu mäğlümatnı kürsätergä onıtmağız.
+blockednoreason|säbäp kürsätelmägän
+whitelistedittext|Sez bitlärne üzgärtü öçen ~{0} tieş.
+confirmedittext|Bitlärne üzgärtü aldınnan sez elektron poçta adresığıznı dälillärgä tieş.\nSez monı [[Special:Preferences\u007Cköyläwlär bitendä]] başqara alasız.
+nosuchsectiontitle|Mondıy bülekne tabıp bulmıy.
+nosuchsectiontext|Sez bulmağan bülekne tözätergä telisez.\nSez bu säxifäne qarağanda ul beterelä aldı.
+loginreqtitle|Kerü kiräk
+loginreqlink|kerü
+loginreqpagetext|Sez başqa bitlär qaraw öçen ~{0} tieş.
+accmailtitle|Sersüz cibärelde.
+accmailtext|[[User talk:~{0}\u007C~{0}]] qullanuçısı öçen tözelgän sersüz ~{1} adresına cibärelde.\n\nSaytqa kergäç sez ''[[Special:ChangePassword\u007Csersüzegezne üzgärtä alasız]]''.
+newarticle|(Yaña)
+newarticletext|Sez älegä yazılmağan bitkä kerdegez.\nYaña bit yasaw öçen astağı täräzädä mäqälä tekstın cıyığız ([~{0} yärdäm biten] qarıy alasız).\nÄgär sez bu bitkä yalğışlıq belän eläkkän bulsağız, brauzerığıznıñ '''artqa''' töymäsenä basığız.
+anontalkpagetext|----''Bu bäxäs bite sistemada terkälmägän yäisä üz iseme belän kermägän qullanuçınıqı.\nAnı tanu öçen IP adresı faydalanıla.\nÄgär sez anonim qullanuçı häm sezgä yullanmağan xäbärlär aldım dip sanıysız ikän (ber IP adresı küp qullanuçı öçen bulırğa mömkin), başqa mondıy añlaşılmawçanlıqlar kilep çıqmasın öçen [[Special:UserLogin\u007Csistemağa keregez]] yäisä [[Special:UserLogin/signup\u007Cterkälegez]].''
+noarticletext|Xäzerge waqıtta bu bittä tekst yuq.\nSez [[Special:Search/{{PAGENAME}}\u007Cbu isem kergän başqa mäqälälärne]],\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} köndäleklärdäge yazmalarnı] taba\nyäki '''[{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} şuşındıy isemle yaña bit tözi]'''</span> alasız.
+noarticletext-nopermission|Xäzerge waqıtta bu bittä tekst yuq.\nSez [[Special:Search/{{PAGENAME}}\u007Cbu isem kergän başqa mäqälälärne]],\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} köndäleklärdäge yazmalarnı] taba alasız.</span>
+userpage-userdoesnotexist|«<nowiki>~{0}</nowiki>» isemle xisap yazması yuq. Sez çınlap ta bu bitne yasarğa yäisä üzgärtergä telisezme?
+userpage-userdoesnotexist-view|"~{0}" isemle xisap yazması yuq.
+blocked-notice-logextract|Bu qullanuçı xäzergä tıyıldı.\nTübändä tıyu köndälegeneñ soñğı yazu birelgän:
+clearyourcache|'''İskärmä:''' Bitne saqlağannan soñ üzgärtülär kürensen öçen brauzerığıznıñ keşın çistartığız.\nMonı '''Mozilla / Firefox''': ''Ctrl+Shift+R'', '''Safari''': ''Cmd+Shift+R'', '''IE:''' ''Ctrl+F5'', '''Konqueror''': ''F5'', '''Opera''': ''Tools→Preferences'' aşa eşläp bula.
+usercssyoucanpreview|'''Yärdäm:''' "{{int:showpreview}} töymäsenä basıp, yaña CSS-faylnı tikşerep bula.
+userjsyoucanpreview|'''Yärdäm:''' "{{int:showpreview}}" töymäsenä basıp, yaña JS-faylnı tikşerep bula.
+usercsspreview|'''Bu barı tik CSS-faylnı aldan qaraw ğına, ul äle saqlanmağan!'''
+userjspreview|'''Bu barı tik JavaScript faylın aldan qaraw ğına, ul äle saqlanmağan!'''
+userinvalidcssjstitle|'''İğtibar:''' "~{0}" bizäw teması tabılmadı. Qullanuçınıñ .css häm .js bitläre isemnäre barı tik keçkenä (yul) xäreflärdän genä torırğa tieş ikänen onıtmağız. Misalğa: {{ns:user}}:Foo/vector.css, ä {{ns:user}}:Foo/Vector.css tügel!
+updated|(Yañartıldı)
+note|'''İskärmä:'''
+previewnote|'''Bu fäqät aldan qaraw ğına, üzgärtüläregez äle saqlanmağan!'''
+previewconflict|Älege aldan qaraw bitendä saqlanaçaq tekstnıñ niçek kürenäçäge kürsätelä.
+session_fail_preview|'''Qızğanıçqa, sezneñ sessiä identifikatorığız yuğaldı. Näticädä server üzgärtüläregezne qabul itä almıy.\nTağın ber tapqır qabatlawığız sorala.\nBu xata tağın qabatlansa, [[Special:UserLogout\u007Cçığığız]] häm yañadan keregez.'''
+session_fail_preview_html|'''Qızğanıçqa, sezneñ sessiä turında mäğlümatlar yuğaldı. Näticädä server üzgärtüläregezne qabul itä almıy.'''\n\n''{{SITENAME}} çista HTML qullanırğa röxsät itä, ä bu üz çiratında JavaScript-ataqalar oyıştıru öçen qullanılırğa mömkin. Şul säbäple sezneñ öçen aldan qaraw mömkinlege yabıq.''\n\n'''Ägär sez üzgärtüne yaxşı niät belän başqarasız ikän, tağın ber tapqır qabatlap qarağız. Xata qabatlansa, sayttan [[Special:UserLogout\u007Cçığığız]] häm yañadan keregez.'''
+token_suffix_mismatch|'''Sezneñ üzgärtü qabul itelmäde.'''\nSäbäbe: brauzerığız üzgärtü ölkäsendäge punktuatsiäne döres kürsätmi, näticädä tekst bozılırğa mömkin.\nMondıy xatalar anonim web-proksilar qullanğanda kilep çığarğa mömkin.
+editing|«~{0}» biten üzgärtü
+editingsection|«~{0}» bitendä bülek üzgärtüe
+editingcomment|«~{0}» biten üzgärtü (yaña bülek)
+editconflict|Üzgärtü konfliktı: ~{0}
+explainconflict|Sez bu bitne tözätkän waqıtta kemder aña üzgäreşlär kertte.\nÖstäge täräzädä Sez xäzerge tekstnı küräsez.\nAstağı täräzädä Sezneñ wariant urnaşqan.\nEşlägän üzgärtüläregezne astağı täräzädän östägenä küçeregez.\n«{{int:savearticle}}» töymäsenä basqaç östäge bitneñ tekstı saqlanayaçaq.
+yourtext|Sezneñ tekst
+storedversion|Saqlanğan yurama
+nonunicodebrowser|'''Kisätü: Sezneñ brauzer Yünikod kodlawın tanımıy.'''\nÜzgärtü waqıtında ASCII bulmağan simvollar maxsus unaltılı kodlarğa alıştırılaçaq.
+editingold|'''Kisätü: Sez bitneñ iskergän yuramasın üzgärtäsez.'''\nSaqlaw töymäsenä basqan oçraqta yaña yuramalardağı üzgärtülär yuğalaçaq.
+yourdiff|Aermalar
+copyrightwarning|Böten östämälär häm üzgärtülär ~{1} (qarağız: ~{0}) litsenziäse şartlarında başqarıla dip sanala.\nÄgär alarnıñ irekle taratıluın häm üzgärtelüen telämäsägez, monda östämäwegez sorala.<br />\nSez östämälärneñ avtorı bulırğa yäisä mäğlümatnıñ irekle çığanaqlardan alınuın kürsätergä tieş.<br />\n'''MAXSUS RÖXSÄTTÄN BAŞQA AVTORLIQ XOQUQI BUYINÇA SAQLANUÇI MÄĞLÜMATLAR URNAŞTIRMAĞIZ!'''
+copyrightwarning2|Sezneñ üzgärtülär başqa qullanuçılar tarafınnan üzgärtelä yäisä beterelä ala.\nÄgär alarnıñ üzgärtelüen telämäsägez, monda östämäwegez sorala.<br />\nSez östämälärneñ avtorı bulırğa yäisä mäğlümatnıñ irekle çığanaqlardan alınuın kürsätergä tieş (qarağız: ~{0}).\n'''MAXSUS RÖXSÄTTÄN BAŞQA AVTORLIQ XOQUQI BUYINÇA SAQLANUÇI MÄĞLÜMATLAR URNAŞTIRMAĞIZ!'''
+longpageerror|'''XATA: saqlanuçı tekst zurlığı - ~{0} kilobayt, bu ~{1} kilobayt çigennän kübräk. Bit saqlana almıy.'''
+readonlywarning|'''Kisätü: mäğlümatlar bazasında texnik eşlär başqarıla, sezneñ üzgärtülär xäzer ük saqlana almıy.\nTekst yuğalmasın öçen anı kompyuterığızğa saqlap tora alasız.'''\n\nİdaräçe kürsätkän säbäp: ~{0}
+protectedpagewarning|'''Kisätü: sez bu bitne üzgärtä almıysız, bu xoquqqa idaräçelär ğına iä.'''\nTübändä köndälekneñ  soñğı yazuı birelgän:
+semiprotectedpagewarning|'''Kisätü:''' bu bit yaqlanğan. Anı terkälgän qullanuçılar ğına üzgärtä ala.\nAsta bu bitne küzätü köndälege birelgän:
+cascadeprotectedwarning|'''Kisätü:''' Bu bitne idaräçelär ğına üzgärtä ala. Säbäbe: ul {{PLURAL:~{0}\u007Ckaskadlı yaqlaw isemlegenä kertelgän}}:
+titleprotectedwarning|'''Kisätü: Mondıy isemle bit yaqlanğan, anı üzgärtü öçen [[Special:ListGroupRights\u007Ctieşle xoquqqa]] iä bulu zarur.'''\nAsta küzätü köndälegendäge soñğı yazma birelgän:
+templatesused|Bu bittä qullanılğan {{PLURAL:~{0}\u007Cürnäk\u007Cürnäklär}}:
+templatesusedpreview|Aldan qaraluçı bittä qullanılğan {{PLURAL:~{0}\u007Cürnäk\u007Cürnäklär}}:
+templatesusedsection|Bu bülektä qullanılğan {{PLURAL:~{0}\u007Cürnäk\u007Cürnäklär}}:
+template-protected|(yaqlanğan)
+template-semiprotected|(öleşçä yaqlanğan)
+hiddencategories|Bu bit ~{0} {{PLURAL:~{0}\u007Cyäşeren törkemgä}} kerä:
+nocreatetext|{{SITENAME}}: saytta yaña bitlär tözü çiklängän.\nSez artqa qaytıp, tözelgän bitne üzgärtä alasız. [[Special:UserLogin\u007CKerergä yäisä terkälergä]] täğdim itelä.
+nocreate-loggedin|Sezgä yaña bitlär tözü xoquqı birelmägän.
+sectioneditnotsupported-title|Büleklärne üzgärtü röxsät itelmi.
+sectioneditnotsupported-text|Bu bittä büleklärne üzgärtü röxsät itelmi.
+permissionserrors|Kerü xoquqı xataları
+permissionserrorstext|Tübändäge {{PLURAL:~{0}\u007Csäbäp\u007Csäbäplär}} arqasında sez bu ğämälne başqara almıysız:
+permissionserrorstext-withaction|~{1} ğämälen başqara almıysız. {{PLURAL:~{0}\u007CSäbäbe\u007CSäbäpläre}}:
+recreate-moveddeleted-warn|'''İğtibar: Sez beterelgän bit urınına yaña bit yasamaqçı bulasız.'''\n\nSezgä çınnan da bu bitne yañadan yasaw kiräkme?\nTübändä bitneñ beterü häm küçerü köndälege kiterelä:
+moveddeleted-notice|Bu bit beterelgän ide.\nTübändä beterelü häm küçerelü köndälekne kiterelä.
+log-fulllog|Köndälekne tulısınça qaraw
+edit-hook-aborted|Üzgärtü maxsus protsedura tarafınnan kire qağıla.\nSäbäpläre kiterelmi.
+edit-gone-missing|Bitne yañartıp bulmıy.\nUl beterelgän bulırğa mömkin.
+edit-conflict|Üzgärtülär konfliktı.
+edit-no-change|Tekstta üzgäeşlär yasalmaw säbäple, sezneñ üzgärtü kire qağıla.
+edit-already-exists|Yaña bit tözep bulmıy.\nUl inde bar.
+expensive-parserfunction-warning|'''İğtibar:''' bu bittä xäterne yış qullanuçı funksiälär artıq küp.\n\nÇikläw: ~{1} {{PLURAL:~{1}\u007Cqullanu}}, bu oçraqta {{PLURAL:~{0}\u007C~{0} tapqır}} başqarırğa röxsät itelä.
+expensive-parserfunction-category|Xäterne yış qullanuçı funksiälär küp bulğan bitlär
+post-expand-template-inclusion-warning|'''İğtibar:''' Qullanıluçı ürnäklär artıq zur.\nQayberläre qabızılmayaçaq.
+post-expand-template-inclusion-category|Röxsät itelgän külämnän artıq bulğan ürnäkle bitlär
+post-expand-template-argument-warning|'''İğtibar:''' Bu bit açu öçen zur bulğan kimendä ber ürnäk argumentına iä.\nMondıy argumentlar töşerep qaldırıldı.
+post-expand-template-argument-category|Töşerep qaldırılğan ürnäk argumentlı bitlär
+parser-template-loop-warning|Ürnäklärdä yomıq sıltama tabıldı: [[~{0}]]
+parser-template-recursion-depth-warning|(~{0}) ürnägen rekursiä itep qullanu çige röxsät itelgännän artıp kitkän
+language-converter-depth-warning|Tellärne üzgärtüläre artıq yuğarığa kitkän (~{0})
+undo-success|Üzgärtüdän baş tartıp bula.\nYuramalaranı çağıştırunı qarağız häm, üzgärtülär Sez telägänçä bulsa, bitne saqlağız.
+undo-failure|Aralıqtağı üzgärtülär turı kilmäw säbäple, üzgärtüdän baş tartıp bulmıy.
+undo-norev|Üzgärtü yuq yäisä ul beterelgän, şuña annan baş tartıp bulmıy.
+undo-summary|[[Special:Contributions/~{1}\u007C~{1}]] qullanuçısınıñ ([[User talk:~{1}\u007Cbäxäs]]) ~{0} üzgärtüennän baş tartu
+cantcreateaccounttitle|Xisap yazmasın tözep bulmıy
+cantcreateaccount-text|Bu IP adresınnan (<b>~{0}</b>) xisap yazmaları tözü tıyıla. Tıyuçı: [[User:~{2}\u007C~{2}]].\n\n~{2} kürsätkän säbäp: ''~{1}''
+viewpagelogs|Bu bitneñ köndäleklären qaraw
+nohistory|Bu bitneñ üzgärtülär tarixı yuq.
+currentrev|Xäzerge yurama
+currentrev-asof|Xäzerge yurama, ~{0}
+revisionasof|~{0} yuraması
+revision-info|Yurama: ~{0}; ~{1}
+previousrevision|← Aldağı yurama
+nextrevision|Çirattağı yurama →
+currentrevisionlink|Xäzerge yurama
+cur|xäzerge
+next|kiläse
+last|baya.
+page_first|berençe
+page_last|soñğı
+histlegend|Añlatmalar: '''({{int:cur}})''' = xäzerge yuramadan ayırımlıqlar, '''({{int:last}})''' = bayağı yuramadan ayırımlıqlar, '''{{int:minoreditletter}}''' = keçe üzgärtülär.
+history-fieldset-title|Tarixın qaraw
+history-show-deleted|Barı tik beterü
+histfirst|Elekkege
+histlast|Soñğı
+historysize|(~{0} {{PLURAL:~{0}\u007Cbayt}})
+historyempty|(buş)
+history-feed-title|Üzgärtülär tarixı
+history-feed-description|Bu bitneñ wikidağı üzgärtülär tarixı
+history-feed-item-nocomment|~{0}, ~{1}
+history-feed-empty|Soratılğan bit yuq.\nUl beterelgän yäisä bütän urınğa küçerelgän (başqa isem alğan) bulırğa mömkin.\n[[Special:Search\u007CEzlätep]] qarağız.
+rev-deleted-comment|(fiker beterelgän)
+rev-deleted-user|(avtor iseme beterelgän)
+rev-deleted-event|(yazma beterelgän)
+rev-deleted-user-contribs|[qullanuçınıñ iseme yäki  IP-yullaması beterelgän  — üzgärtü kertem bitennän yäşerelgän]
+rev-deleted-text-permission|Bitneñ bu yuraması '''beterelgän'''.\n[{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} Beterülär köndälegendä] añlatmalar qaldırılğan bulırğa mömkin.
+rev-deleted-text-unhide|Bitneñ bu yuraması '''beterelgän'''.\n[{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} Beterülär köndälegendä]  añlatmalar qaldırılğan bulırğa mömkin.\nSez idaräçe bulu säbäple, [~{0} birelgän yuramanı qarıy alasız].
+rev-suppressed-text-unhide|Bitneñ bu yuraması '''yäşerelgän'''.\n[{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{FULLPAGENAMEE}}}} Yäşerülär köndälegendä] añlatmalar birelgän bulırğa mömkin.\nSez idaräçe bulu säbäple, [~{0} birelgän yuramanı qarıy alasız].
+rev-deleted-text-view|Bitneñ bu yuraması '''beterelgän'''.\nSez idaräçe bulu säbäple, anı qarıy alasız. [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} Beterülär köndälegendä] añlatmalar birelgän bulırğa mömkin.
+rev-suppressed-text-view|Bitneñ bu yuraması '''yäşerelgän'''.\nSez idaräçe bulu säbäple, anı qarıy alasız. [{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{FULLPAGENAMEE}}}} Yäşerülär köndälegendä] añlatmalar birelgän bulırğa mömkin.
+rev-deleted-no-diff|Sez yuramalar arasındağı ayırmalarnı qarıy almıysız. Säbäbe: qaysıdır yurama '''beterelgän'''.\n[{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} Beterülär köndälegendä] tulıraq mäğlümat tabıp bula.
+rev-suppressed-no-diff|Sez yuramalar  arasındağı üzgärtülärne qarıy almıysız, çönki alarnıñ berse '''beterelgän'''.
+rev-deleted-unhide-diff|Bitneñ qaysıdır yuraması '''beterelgän'''.\n[{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} Beterülär köndälegendä] tulıraq mäğlümat tabıp bula.\nSez idaräçe bulu säbäple, [~{0} birelgän yuramanı qarıy alasız]
+rev-suppressed-unhide-diff|Bitneñ qaysıdır yuraması '''yäşerelgän'''.\n[{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{FULLPAGENAMEE}}}} Yäşerülär köndälegendä] tulıraq mäğlümat tabıp bula.\nSez idaräçe bulu säbäple, [~{0} yäşerelgän yuramanı qarıy alasız]
+rev-delundel|kürsätü/yäşerü
+rev-showdeleted|kürsätü
+revisiondelete|Bitneñ yuramasın beterü / qaytaru
+revdelete-nooldid-title|Axırğı yurama bilgelänmägän
+revdelete-nooldid-text|Bu funksiäne başqaru öçen sez axırğı yuramanı (yäki yuramalarnı) bilgelämädegez.
+revdelete-show-file-submit|Äye
+revdelete-legend|Çikläwlär urnaştır:
+revdelete-hide-text|Bitneñ bu yuraması tekstın yäşer
+revdelete-hide-image|Fayl eçendägelärne qaçır
+revdelete-radio-same|(üzgärtmäw)
+revdelete-radio-set|Äye
+revdelete-radio-unset|Yuq
+revdel-restore|kürenüçänlekne üzgärtü
+pagehist|bitneñ tarixı
+deletedhist|Beterülär tarixı
+revdelete-reasonotherlist|Başqa säbäp
+revdelete-edit-reasonlist|Säbäplär isemlegen üzgärtü
+revdelete-offender|Älege yuramalı bitneñ avtorı:
+suppressionlog|Yäşerü köndälege
+mergehistory|Üzgärtülär tarixın berläşterü
+mergehistory-box|İke bitneñ üzgärtülär tarixın berläşterergä:
+mergehistory-from|Çığanaq:
+mergehistory-into|Töp bit:
+mergehistory-reason|Säbäp:
+mergelog|Berläşterülär köndälege
+revertmerge|Bülü
+history-title|~{0} biteneñ üzgärtü tarixı
+lineno|~{0} yul:
+compareselectedversions|Saylanğan yuramalarnı çağıştıru
+showhideselectedversions|Saylanğan yuramalarnı kürsätü/yäşerü
+editundo|ütkärmäw
+searchresults|Ezläw näticäläre
+searchresults-title|«~{0}» öçen ezläw näticäläre
+titlematches|Mäqälä başlığı kileşä
+notextmatches|Tiñdäş tekstlı bitlär yuq
+viewprevnext|Kürsätelüe: (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-new|'''«[[:~{0}]]»  isemle yaña bit yasaw'''
+searchprofile-articles|Töp bitlär
+searchprofile-images|Multimedia
+searchprofile-everything|Härqayda
+searchprofile-advanced|Kiñäytelgän
+searchprofile-articles-tooltip|~{0} dä ezläw
+searchprofile-images-tooltip|Fayllar ezläw
+searchprofile-everything-tooltip|Barlıq bitlärdä dä ezläw
+searchprofile-advanced-tooltip|Birelgän isemnär mäydanında ezläw
+search-result-size|~{0} ({{PLURAL:~{1}\u007C~{1} süz}})
+search-redirect|(yünältü ~{0})
+search-section|(~{0} bülege)
+search-suggest|Bälki, sez monı ezlisez: ~{0}
+search-interwiki-caption|Tuğandaş proyektlar
+search-interwiki-default|~{0} näticä:
+search-interwiki-more|(tağın)
+search-relatedarticle|Bäylängän
+searchrelated|bäylängän
+searchall|barlıq
+showingresults|Asta № '''~{1}''' {{PLURAL:~{0}\u007Cbaşlap}} '''~{0}''' {{PLURAL:~{0}\u007Crezultat}} kürsätelgän.
+search-nonefound|Sorawğa turı kilgän cawaplar tabılmadı.
+powersearch-legend|Östämä ezläw
+powersearch-ns|isemnärendä ezläw
+powersearch-togglelabel|Kire qağıw:
+powersearch-toggleall|Barısı
+powersearch-togglenone|Birni dä yuq
+search-external|Tışqı ezläw
+preferences|Köylänmälär
+mypreferences|Köylänmälärem
+prefs-edits|Üzgärtülär isäbe:
+prefs-skin|Küreneş
+skin-preview|Aldan qaraw
+datedefault|Baştağı köylänmälär
+prefs-personal|Şäxsi mäğlümatlar
+prefs-rc|Soñğı üzgärtülär
+prefs-watchlist|Küzätü isemlege
+prefs-watchlist-days|Küzätü isemlegendä kürsätelgän kön sanı:
+prefs-watchlist-days-max|Maximum ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}}
+prefs-watchlist-edits|Kiñäytelgän küzätü isemlegendä üzgärtülärneñ iñ yuğarı isäbe:
+prefs-watchlist-edits-max|Maksimum san: 1000
+prefs-watchlist-token|Küzätü isemlege toqenı:
+prefs-misc|Başqa köylänmälär
+prefs-resetpass|Sersüzne üzgärtü
+prefs-email|E-mail köyläwläre
+prefs-rendering|Küreneş
+saveprefs|Saqlaw
+restoreprefs|Baştağı köylänmälärne kire qaytaru
+prefs-editing|Üzgärtü
+rows|Yullar:
+columns|Bağanalar:
+searchresultshead|Ezläw
+stub-threshold|<a href="#" class="stub">Yasalma sıltamalarnıñ</a> bizäleşe buyınça çikläwlär (baytlarda):
+stub-threshold-disabled|Yabılğan
+recentchangesdays|Soñğı üzgärtülärne kürsätüçe könnär sanı:
+recentchangesdays-max|( ~{0} {{PLURAL:~{0}\u007Ckönnän}} dä artıq bulmasqa tieş)
+recentchangescount|Töp bularaq qullanuçı üzgärtülär sanı:
+prefs-help-recentchangescount|Üz öçenä üzgärtülärne, bitlärneñ tarixın häm yazlu köndälegen dä kertä.
+savedprefs|Köylänmäläregez saqlandı.
+timezonelegend|Säğät poyası:
+localtime|Cirle waqıt
+timezoneuseserverdefault|Serverneñ köylänmäläre qullanılsın
+timezoneuseoffset|Başqa (küçerelüne kürsätegez)
+servertime|Servernıñ waqıtı:
+guesstimezone|Brauzerdan tutıru
+timezoneregion-africa|Afrika
+timezoneregion-america|Amerika
+timezoneregion-antarctica|Antarktika
+timezoneregion-arctic|Arktika
+timezoneregion-asia|Aziä
+timezoneregion-atlantic|Atlantik okean
+timezoneregion-australia|Awstraliä
+timezoneregion-europe|Awrupa
+timezoneregion-indian|Hind okeanı
+timezoneregion-pacific|Tın okean
+allowemail|Başqa qullanuçılardan xatlar alırğa röxsät itelsen
+prefs-searchoptions|Ezläw köylänmäläre
+prefs-namespaces|İsemnär mäydanı
+default|kileşü buyınça
+prefs-files|Fayllar
+prefs-custom-css|Üzemneñ CSS
+prefs-custom-js|Üzemneñ JS
+prefs-common-css-js|Barlıq bizäleşlär öçen ğomumi CSS/JS:
+prefs-reset-intro|Bu bit sezneñ köylänmäläregezne beterü öçen qullanıla. Bu eşne başqaru näticäsendä sez yañadan üz köylänmälärne yañadan qaytara almıysız.
+prefs-emailconfirm-label|E-mail raslaw
+youremail|Elektron poçta:
+username|Qullanuçı iseme:
+prefs-memberingroups|Törkem {{PLURAL:~{0}\u007Cäğzası}}:
+prefs-memberingroups-type|~{0}
+prefs-registration|Terkälü waqıtı:
+prefs-registration-date-time|~{0}
+yourrealname|Çın isem:
+yourlanguage|Tel:
+yourvariant|Telneñ törläre:
+yournick|Yaña imzağız:
+prefs-help-signature|Bäxäslek bitlärendä sezneñ yazmalarığıznı qaldıru «<nowiki>~~~~</nowiki>» tamğaları quyılu näticäsendä bulırğa tieş.
+badsig|İmza döres tügel. HTML tegları tikşeregez.
+badsiglength|İmzağız bigräk ozın.\nUl ~{0} {{PLURAL:~{0}\u007Cxäreftän}} kübräk bulırğa tieş tügel.
+yourgender|Cenes:
+gender-unknown|bilgesez
+gender-male|İr
+gender-female|Xatın
+prefs-help-gender|Qätği tügel: Ul barı tik qayber xatlarda ğına kürenäçäk häm bu mäğlümat barlıq qullanuçılarğa da bilgele bulaçaq.
+email|Elektron poçta
+prefs-help-realname|Çın isemegez (kiräkmi): anı kürsätsägez, ul bitne üzgärtüçe kürsätü öçen faydalayaçaq.
+prefs-help-email|Elektron poçta adresın kürsätü qätği tügel, läkin ägärdä sez üzegezneñ sersüzne onıtsağız bu sezgä anı yañadan qaytarırğa yärdäm itäçäk.
+prefs-help-email-required|Elektron poçta adresı kiräk.
+prefs-info|Ğomumi mäğlümat
+prefs-i18n|İnternatsionalizatsiä
+prefs-signature|İmza
+prefs-dateformat|Waqıtıñ formatı
+prefs-timeoffset|Waqıt bilgeläneşe
+prefs-advancedediting|Kiñäytelgän köyläwlär
+prefs-advancedrc|Kiñäytelgän köyläwlär
+prefs-advancedrendering|Kiñäytelgän köyläwlär
+prefs-advancedsearchoptions|Kiñäytelgän köyläwlär
+prefs-advancedwatchlist|Kiñäytelgän köyläwlär
+prefs-displayrc|Kürsätü köylänmäläre
+prefs-displaywatchlist|Kürsätü köylänmäläre
+prefs-diffs|Yuramalar ayırması
+userrights|Qullanuçı xoquqları belän idarä itü
+userrights-lookup-user|Qullanuçı törkemnäre belän idarä itü
+userrights-user-editname|Qullanuçınıñ isemen kertegez:
+editusergroup|Qullanuçınıñ törkemnären almaştıru
+editinguser|'''[[User:~{0}\u007C~{0}]]''' qullanuçısınıñ xoquqların üzgärtü ([[User talk:~{0}\u007C{{int:talkpagelinktext}}]]{{int:pipe-separator}}[[Special:Contributions/~{0}\u007C{{int:contribslink}}]])
+userrights-editusergroup|Qullanuçınıñ törkemnären almaştıru
+saveusergroups|Qullanuçı törkemnären saqlaw
+userrights-groupsmember|Äğza:
+userrights-groupsmember-auto|Bilgesez äğza:
+userrights-groups-help|Sez bu qullanuçınıñ xoquqların üzgärtä almıysız.\n*Ägär dä qullanuçı iseme yanda tamğa torsa, dimäk bu qullanuçı birelgän törkemneñ äğzası.\n*Ägär dä qullanuçı iseme yanda tamğa tormasa, dimäk bu qullanuçı birelgän törkemneñ äğzası tügel.\n*"*" tamğası torsa sez bu qullanuçını bu törkemnän beterä almıysız.
+userrights-reason|Säbäp:
+userrights-no-interwiki|Sezneñ başqa wikilarda qullanuçılarnıñ xoquqların üzgärtergä xoquqlarığız yuq.
+userrights-nodatabase|Birelgän ~{0} bazası yuq yäisä  lokal bulıp tormıy.
+userrights-changeable-col|Sezneñ taraftan üzgärtä ala torğan törkemnär
+userrights-unchangeable-col|Sezneñ taraftan üzgärtä almıy torğan törkemnär
+userrights-irreversible-marker|~{0}*
+group|Törkem:
+group-user|Qullanuçılar
+group-autoconfirmed|Avtoraslanğan qullanuçı
+group-bot|Botlar
+group-sysop|İdaräçelär
+group-bureaucrat|Byurokratlar
+group-suppress|Tikşerüçelär
+group-all|(barlıq)
+group-user-member|Qullanuçı
+group-autoconfirmed-member|Avtoraslanğan qullanuçı
+group-bot-member|Bot
+group-sysop-member|İdaräçe
+group-bureaucrat-member|Byurokrat
+group-suppress-member|Tikşerüçe
+grouppage-user|{{ns:project}}:Qullanuçılar
+grouppage-autoconfirmed|{{ns:project}}:Avtoraslanğan qullanuçılar
+grouppage-bot|{{ns:project}}:Botlar
+grouppage-sysop|{{ns:project}}:İdaräçelär
+grouppage-bureaucrat|{{ns:project}}:Byurokratlar
+grouppage-suppress|{{ns:project}}:Tikşerüçelär
+right-read|Bitlärne qaraw
+right-edit|Bitlärne üzgärtü
+right-createpage|bitlär yasaw (bäxäs bulmağannarın)
+right-createtalk|bäxäs biten yasaw
+right-createaccount|yaña qullanuçı biten yasaw
+right-move|Bitlärne küçerü
+right-movefile|fayllarnıñ isemen almaştıru
+right-upload|fayllarnı yökläw
+right-delete|bitlärne beterü
+right-editinterface|Qullanuçı interfeysın üzgärtü
+newuserlogpage|Qullanuçılarnı terkäw köndälege
+newuserlogpagetext|Yaña terkälgän qullanuçılar isemlege
+rightslog|Qullanuçınıñ xoquqları köndälege
+action-edit|bu bitne üzgärtergä
+action-createpage|bitlärne yazırğa
+action-createtalk|bäxäs biten yasarğa
+action-move|bu bitne küçererge
+nchanges|~{0} {{PLURAL:~{0}\u007Cüzgärtü\u007Cüzgärtü}}
+recentchanges|Soñğı üzgärtülär
+recentchanges-legend|Soñğı üzgärtülär köyläwläre
+recentchanges-summary|Bu bittä {{grammar:genitive\u007C{{SITENAME}}}} proyektınıñ soñğı üzgärtüläre kürsätelä.
+recentchanges-feed-description|Bu ağımda soñğı üzgärtülärne küzätü.
+recentchanges-label-newpage|Bu üzgärtü belän yaña bit tözelde
+recentchanges-label-minor|Bu keçe üzgärtü
+rcnotefrom|Astaraq '''~{1}''' başlap ('''~{0}''' qädär) üzgärtülär kürsätelgän.
+rclistfrom|~{2} ~{1} başlap yaña üzgärtülärne kürsät
+rcshowhideminor|keçe üzgärtülärne ~{0}
+rcshowhidebots|botlarnı ~{0}
+rcshowhideliu|kergän qullanuçılarnı ~{0}
+rcshowhideanons|kermägän qullanuçılarnı ~{0}
+rcshowhidepatr|tikşerergän üzgärtülärne ~{0}
+rcshowhidemine|minem üzgärtüläremne ~{0}
+rclinks|Soñğı ~{1} kön eçendä soñğı ~{0} üzgärtüne kürsät<br />~{2}
+diff|ayırma
+hist|tarix
+hide|yäşer
+show|kürsät
+minoreditletter|k
+newpageletter|Y
+boteditletter|b
+number_of_watching_users_pageview|[~{0} {{PLURAL:~{0}\u007Cküzätep tora qullanuçı}}]
+rc_categories|Törkemnärdä genä tora («\u007C» bülüçe)
+rc_categories_any|Härber
+newsectionsummary|/* ~{0} */ yaña bülek
+rc-enhanced-expand|Waqlıqlarnı kürsätü (JavaScript kiräk)
+rc-enhanced-hide|Waqlıqlarnı yäşerü
+recentchangeslinked|Bäyläneşle üzgärtülär
+recentchangeslinked-feed|Bäyläneşle üzgärtülär
+recentchangeslinked-toolbox|Bäyläneşle üzgärtülär
+recentchangeslinked-title|"~{0}" bitenä bäyläneşle üzgärtülär
+recentchangeslinked-summary|Bu kürsätelgän bit belän sıltalğan (yä kürsätelgän törkemgä kertkän) bitlärneñ üzgärtelmäläre isemlege.\n[[Special:Watchlist\u007CKüzätü isemlegegezgä]] kerä torğan bitlär '''qalın'''.
+recentchangeslinked-page|Bitneñ iseme:
+recentchangeslinked-to|Monıñ urınına bu bitkä bäyle bulğan bitlärdäge üzgärtülärne kürsätü
+upload|Faylnı yökläw
+uploadbtn|Faylnı yökläw
+reuploaddesc|Faylnı yökläwgä kire qatu
+upload-tryagain|Yañartılğan faylnı cibärü
+uploadnologin|Sez xisap yazmağızğa kermägänsez
+uploadnologintext|Faylnı yökläw öçen sez bu bitkä [[Special:UserLogin\u007Ckerergä]] tieşsez.
+upload_directory_missing|~{0} Yöklänü direktoriäse yuq
+upload_directory_read_only|Moña Sezneñ xoquqlarığız yuq häm web-server ~{0} papqasını yökli almıy.
+uploaderror|Faylnı yökläwdä xata
+upload-recreate-warning|'''İğtibar: Mondıy isemle fayl beterelgän yäki iseme almaştırılğan '''
+uploadtext|Bu formanı qullanıp serverğa fayllar yökli alasız. Elegräk yöklänelgän fayllarnı qaraw öçen [[Special:FileList\u007CYöklänelgän fayllar isemlegenä]] märäcäğät itegez. Şulay uq ul [[Special:Log/upload\u007Cyöklänmälär isemlegenä]] häm [[Special:Log/delete\u007Cbeterelgän fayllar]] isemlegenä dä yazıla.\n\nFaylnı mäqälägä yökläw öçen Sez menä bu ürnäklärne qullana alasız:\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Räsem.jpg]]</nowiki></code>''' faylnıñ tulı yuramasın quyu öçen;\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Räsem.png\u007C200px\u007Cthumb\u007Cleft\u007Ctaswirlaması]]</nowiki></code>'''  200 pikselğa qädär kiñlektäge  häm tekstnıñ sul yağında, taswirlaması belän;\n* '''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code>'''bittä faylnı sürätlämiçä, barı tik sıltamasın ğına quyu.
+upload-permitted|Röxsät itelgän fayl törläre:~{0}
+upload-preferred|Mömkin bulğan fayl törläre:~{0}
+upload-prohibited|Tıyılğan fayl törläre:~{0}
+uploadlogpage|Yökläw köndälege
+uploadlogpagetext|Asta yaña yöklänelgän fayllar isemlege birelä.\nŞulay uq [[Special:NewFiles\u007Cyaña fayllar ğällereyäsın]] qarağız
+filename|Fayl iseme
+filedesc|Qısqa taswirlama
+fileuploadsummary|Üzgärtülär taswirlaması:
+filereuploadsummary|Fayldağı üzgärtülär:
+filestatus|Taratu xoquqları:
+filesource|Çığanağı:
+ignorewarning|Belderüne kire qağu häm faylnı saqlaw
+ignorewarnings|Belderüne kire qağu
+minlength1|Faylnıñ iseme ber genä xäreftän bulsa da torırğa tieş.
+illegalfilename|faylnıñ iseme  «~{0}»  qullanuğa yaramağan simvollardan tora. Zinhar, faylnıñ isemen alıştırığız häm yañadan quyıp qarağız.
+badfilename|Faylnıñ iseme ~{0} isemenä üzgärtelde.
+filetype-mime-mismatch|Faylnıñ kinäytelmäse anıñ MIME-törenä turı kilmi.
+filetype-badmime|MIME-töre «~{0}» bulğan fayllar, yöklänmäyäçäk.
+filetype-bad-ie-mime|Faylnı yöklärgä mömkin tügel, çönki Internet Explorer anı «~{0}» dip qabul itäçäk.
+filetype-unwanted-type|'''".~{0}"''' — tıyılğan fayl töre.\n{{PLURAL:~{2}\u007CMömkin bulğan fayl töre bulıp\u007CMömkin bulğan fayl töre:}} ~{1}.
+filetype-banned-type|'''".~{0}"''' — tıyılğan fayl töre.\n{{PLURAL:~{2}\u007CKiñäytelgän fayl töre bulıp\u007CKiñäytelgän  fayl töre:}} ~{1}.
+filetype-missing|Faylnıñ kiñäytelmäse yuq ''(mäsälän,«.jpg»)''.
+empty-file|Sezneñ taraftan cibärelgän fayl buş.
+file-too-large|Sezneñ taraftan cibärelgän fayl artıq zur.
+filename-tooshort|Faylnıñ iseme artıq qısqa.
+filetype-banned|Bu fayl töre tıyılğan.
+verification-error|Bu fayl älegä tikşerü uzmağan.
+uploadwarning|Yökläw kisätmäse
+savefile|Faylnı saqlaw
+uploaddisabled|Yökläw tıyılğan
+copyuploaddisabled|URL adresı buyınça yökläw yabılğan.
+uploaddisabledtext|Fayllarnı yökläw yabılğan.
+upload-source|Faylnıñ çığanağı
+sourcefilename|Faylnıñ çığanağı:
+sourceurl|Çığanaqnıñ URL adresı:
+destfilename|Faylnıñ yaña iseme:
+upload-maxfilesize|Faylnıñ maksimal zurlığı: ~{0}
+upload-description|Faylnıñ taswirlaması
+upload-options|Yökläw parametrları
+watchthisupload|Bu faylnı küzätü
+filewasdeleted|Mondıy isemle fayl beterelgän bulğan inde. Zinhar,yañadan yökläw aldınnan ~{0} qarağız
+filename-bad-prefix|Faylnıñ iseme '''«~{0}»''' dip başlana. Zinhar, faylnı taswirlawçı isem biregez.
+filename-prefix-blacklist| #<!-- niçek bar şulay qaldırığız --> <pre>\n# Sintaksis töbändägeçä:\n#   *  «#» dip başlanğan barlıq närsä dä qömmentariy dip atalaçaq\n#   * Härber buş rät — faylnıñ isemeneñ prefiksı, sifrlı kamera birüçe isem\nCIMG # Casio\nDSC_ # Nikon\nDSCF # Fuji\nDSCN # Nikon\nDUW # qaysıber käräzle telefonnar\nIMG # barlıq\nJD # Jenoptik\nMGP # Pentax\nPICT # törle\n #</pre> <!-- niçek bar şulay qaldırığız -->
+upload-success-subj|Yökläw äybät ütte
+license|Litsenziäse:
+license-header|Litsenziäse
+nolicense|Yuq
+license-nopreview|(Aldan qaraw mömkin tügel)
+upload_source_file|(sezneñ sanaqtağı fayl)
+imgfile|fayl
+listfiles|Sürätlär isemlege
+listfiles_date|Waqıt
+listfiles_name|At
+listfiles_user|Qullanuçı
+listfiles_size|Ülçäm
+listfiles_description|Taswir
+listfiles_count|Yuramalar
+file-anchor-link|Fayl
+filehist|Faylnıñ tarixı
+filehist-help|Datağa/säğätkä, şul waqıtta bitneñ nindi bulğanlığın kürü öçen basığız.
+filehist-deleteall|Barısın da yuq it
+filehist-deleteone|beterü
+filehist-revert|qaytaru
+filehist-current|xäzerge
+filehist-datetime|Data/waqıt
+filehist-thumb|Eskiz
+filehist-thumbtext|~{0} könne bulğan versiäneñ eskizı
+filehist-nothumb|Miniatyurası yuq
+filehist-user|Qullanuçı
+filehist-dimensions|Zurlıq
+filehist-filesize|Faylnıñ zurlığı
+filehist-comment|İskärmä
+imagelinks|Faylğa sıltamalar
+linkstoimage|Bu faylğa älege {{PLURAL:~{0}\u007Cbit\u007C~{0} bit}} sıltıy:
+nolinkstoimage|Bu faylğa sıltağan bitlär yuq.
+duplicatesoffile|{{PLURAL:~{0}\u007CÄlege ~{0} fayl }} astağı faylnıñ küçerelmäse bulıp tora ([[Special:FileDuplicateSearch/~{1}\u007Ctulıraq]]):
+sharedupload|Bu fayl ~{0}'dan häm başqa proyektlarda qullanırğa mömkin.
+sharedupload-desc-here|Bu fayl ~{0}'dan häm başqa proyektlarda qullanırğa mömkin. Fayl turında [~{1} mäğlümat ] asta birelgän.
+filepage-nofile|Mondıy isemle fayl yuq.
+filepage-nofile-link|Mondıy isemle fayl  yuq. Sez anı [~{0} yökli alasız].
+uploadnewversion-linktext|Bu faylnıñ yaña yuramasın yökläw
+shared-repo-from|~{0} dän
+filerevert|~{0} yuramasına kire qaytu
+filerevert-legend|Faylnıñ iske yuramasın kire qaytaru
+filerevert-comment|Säbäp:
+filerevert-submit|Kire qaytaru
+filedelete|~{0} —  beterü
+filedelete-legend|Faylnı beterü
+filedelete-comment|Säbäp:
+filedelete-submit|Beterü
+filedelete-reason-otherlist|Başqa säbäp
+filedelete-reason-dropdown|*Beterergä tüp säbäp\n** Qälämxaqq buzılışı\n** Qabatlanğan birem
+mimesearch|MIME ezläw
+download|yökläw
+unwatchedpages|Berkemdä küzätmäwçe  bitlär
+listredirects|Yünältülär isemlege
+unusedtemplates|Qullanılmağan ürnäklär
+randompage|Oçraqlı bit
+randomredirect|Oçraqlı bitkä küçü
+statistics-header-edits|Üzgärtülär xisapnamäse
+statistics-header-users|Qullanuçılar buyınça xisapnamä
+statistics-header-hooks|Başqa xisapnamälär
+statistics-files|Yöklänelgän fayllar
+statistics-edits|{{grammar:genitive\u007C{{SITENAME}}}} proyektı açılğannan birle bulğan barlıq üzgärtülär isäbe
+statistics-edits-average|Ber bitkä urtaça üzgärtülär isäbe
+statistics-users|Terkälgän [[Special:ListUsers\u007Cqullanuçılar]]
+statistics-users-active|Aktiv qullanuçılar
+statistics-users-active-desc|{{PLURAL:~{0}\u007C~{0} kön }} öçendä nindi dä bulsa üzgärtülär kertkän qullanuçılar
+doubleredirects|İkelätä yünältülär
+brokenredirects|Bäyläneşsez yünältülär
+brokenredirectstext|Bu yünältülär bulmağan bitlärgä sıltıylar:
+brokenredirects-edit|üzgärtü
+brokenredirects-delete|beterü
+withoutinterwiki|Tellärara sıltamasız bitlär
+withoutinterwiki-legend|Östälmä
+withoutinterwiki-submit|Kürsätü
+fewestrevisions|Az üzgärtülär belän bitlär
+nbytes|~{0} {{PLURAL:~{0}\u007Cbayt}}
+ncategories|~{0} {{PLURAL:~{0}\u007Ctörkem}}
+nlinks|~{0} {{PLURAL:~{0}\u007Csıltama}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cäğza}}
+lonelypages|Üksez bitlär
+uncategorizedpages|Törkemlänmägän bitlär
+uncategorizedcategories|Törkemlänmägän törkemnär
+uncategorizedimages|Törkemlänmägän sürätlär
+uncategorizedtemplates|Törkemlänmägän ürnäklär
+unusedcategories|Qullanmağan törkemnär
+unusedimages|Qullanmağan sürätlär
+wantedcategories|Zarur törkemnär
+wantedpages|Zarur bitlär
+wantedfiles|Kiräkle fayllar
+wantedtemplates|Kiräkle ürnäklär
+mostlinked|Küp üzenä sıltamalı bitlär
+mostlinkedcategories|Küp üzenä sıltamalı törkemnär
+mostlinkedtemplates|İñ küp qullanılğan ürnäklär
+mostcategories|Küp törkemlärgä kertelgän bitlär
+mostimages|İñ qullanğan sürätlär
+mostrevisions|Küp üzgärtülär belän bitlär
+prefixindex|Barlıq alquşımça belän bitlär
+shortpages|Qısqa bitlär
+longpages|Ozın bitlär
+deadendpages|Tupik bitläre
+protectedpages|Yaqlanğan bitlär
+protectedtitles|Tıyılğan isemnär
+listusers|Qullanuçılar isemlege
+newpages|Yaña bitlär
+newpages-username|Qullanuçı:
+ancientpages|İñ iske bitlär
+move|Küçerü
+movethispage|Bu bitne küçerü
+notargettitle|Maqsatsız
+nopagetitle|Mondıy bit yuq
+nopagetext|Kürsätelgän bit yuq.
+pager-newer-n|{{PLURAL:~{0}\u007C1 yañaraq\u007C~{0} yañaraq}}
+pager-older-n|{{PLURAL:~{0}\u007C1 iskeräk\u007C~{0} iskeräk}}
+suppress|Yäşerü
+booksources|Kitap çığanaqları
+booksources-search-legend|Kitap çığanaqlarını ezläw
+booksources-text|Älege bittä kürsätelgän sıltamalar yärämendä sezneñ qızıqsındırğan kitap buyınça östämä mäğlümatlar tabarğa mömkin. Bolar internet-kibetlär häm kitapxanä cıyıntığında ezläwçe sistemalar.
+booksources-invalid-isbn|Birelgän ISBN sanı bälki xataldır. Zinhar, birelgän sannarnı yañadan tikşeregez.
+specialloguserlabel|Qullanuçı:
+speciallogtitlelabel|Başlam:
+log|Köndäleklär
+all-logs-page|Barlıq köndäleklär
+alllogstext|{{SITENAME}} säxifäseneñ ğomumi köndälekläre isemlege.\nSez näticälärne köndälek töre, qullanuçı iseme (xäref zurlığın istä totığız) yäki quzzallağan bit (şulay uq xäref zurlığın istä totığız) buyınça tärtipkä salırğa mömkin.
+logempty|Kiräkle yazmalar köndälektä yuq.
+allpagesfrom|Moña başlanuçı bitlärne çığaru:
+allpagesto|Monda çığarunı tuqtatu:
+allarticles|Barlıq bitlär
+allpagessubmit|Başqaru
+allpagesprefix|Alquşımçalı bitlärne kürsätü:
+categoriespagetext|{{PLURAL:~{0}\u007CÄlege törkem üz öçenä\u007CÄlege törkemnär  üz öçenä}}   bitlärne häm media-fayllarnı ala.\nAsta [[Special:UnusedCategories\u007Cqullanılmağan törkemnär]] kärsätelgän.\nŞulay uq  [[Special:WantedCategories\u007Ckiräkle törkemnär isemlegendä]] qarağız.
+special-categories-sort-count|isäp buyınça tärtipläw
+special-categories-sort-abc|älifba buyınça tärtipläw
+sp-deletedcontributions-contribs|kertem
+linksearch|Tışqı sıltamalar
+linksearch-pat|Ezläw öçen ürnäk:
+linksearch-ns|İsemnär mäydanı:
+linksearch-ok|Ezläw
+listusers-submit|Kürsätü
+listusers-noresult|Qullanuçılarnı tabılmadı.
+listusers-blocked|(tıyılğan)
+activeusers|Aktiv qullanuçılar isemlege
+activeusers-hidebots|Botlarnı yäşer
+activeusers-hidesysops|İdaräçelärne yäşer
+activeusers-noresult|Qullanuçılar tabılmadı.
+listgrouprights|Qullanuçı törkemnäreneñ xoquqları
+listgrouprights-group|Törkem
+listgrouprights-rights|Xoquqlar
+listgrouprights-helppage|Help:Törkemnärneñ xoquqları
+listgrouprights-members|(törkem isemlege)
+emailuser|Bu qullanuçığa xat
+emailpage|Qullanuçığa xat cibärü
+defemailsubject|{{SITENAME}}: xat
+noemailtitle|Elektron poçta adresı yuq
+emailfrom|Kemnän:
+emailto|Kemgä:
+emailsubject|Tema:
+emailmessage|Xäbär:
+emailsend|Cibärü
+emailccme|Miña xäbärneñ küçermäsene cibärelsen.
+emailccsubject|~{0} öçen xäbäregezneñ küçermäse: ~{1}
+emailsent|Xat cibärelgän
+emailsenttext|E-mail xatığız ciberelde.
+watchlist|Küzätü isemlegem
+mywatchlist|Küzätü isemlegem
+nowatchlist|Küzätü isemlegegezdä bitlär yuq.
+watchnologin|Kermädegez
+addedwatchtext|"[[:~{0}]]" bite [[Special:Watchlist\u007Cküzätü isemlegegezgä]] östälde.\nBu bittä häm anıñ bäxäslegendä barlıq bulaçaq üzgärtülär şunda kürsäteler, häm, [[Special:RecentChanges\u007Csoñğı üzgärtülär]] isemlegendä bu bitne ciñelräk tabu öçen, ul '''qalın mäten''' belän kürsäteler.
+removedwatchtext|«[[:~{0}]]» bite [[Special:Watchlist\u007Csezneñ küzätü isemlegennän]] beterelde.
+watch|Küzätü
+watchthispage|Bu bitne küzätü
+unwatch|Küzätmäw
+notanarticle|Mäqälä tügel
+watchlist-details|Küzätü isemlegegezdä, bäxäs bitlären sanamıyça, {{PLURAL:~{0}\u007C~{0} bit\u007C~{0} bit}} bar.
+wlshowlast|Bayağı ~{0} säğät ~{1} kön eçendä yäki nı kürsät
+watchlist-options|Küzätü isemlege köyläwläre
+watching|Küzätü isemlegemä östäwe…
+unwatching|Küzätü isemlegemnän çığaruı…
+enotif_impersonal_salutation|{{SITENAME}} qullanuçı
+enotif_lastvisited|Soñğı kerüegezdän soñ bulğan barlıq üzgärtülärne kürer öçen, bu sıltama aşa uzığız: ~{0}
+enotif_body|Xörmätle $WATCHINGUSERNAME,\n\n«{{SITENAME}}» proyektınıñ «$PAGETITLE» bite  $PAGEEDITOR  tarafınnan  $PAGEEDITDATE  könne  $CHANGEDORCREATED. Bitne qarar öçen $PAGETITLE_URL  buyınça uzığız.\n\n$NEWPAGE\n\nÜzgärtüneñ qısqa eçtälege: $PAGESUMMARY $PAGEMINOREDIT\n\nÜzgärtüçegä yazu:\nel. poçta $PAGEEDITOR_EMAIL\nwiki $PAGEEDITOR_WIKI\n\nBu bitkä kermäsägez, anıñ başqa üzgärtüläre turında xat cibärelmäyäçäk. Şulay uq sez küzätü isemlegegezdä bulğan bitlär öçen xäbär birü flağın alıp quya alasız.\n\n             {{SITENAME}} xäbär birü sisteması\n\n--\nKüzätü isemlege köyläwlären üzgärtü:\n{{canonicalurl:{{#special:EditWatchlist}}}}\n\nBitne sezneñ küzätü isemlegezdän beterü:\n$UNWATCHURL\n\nElemtä häm yärdäm:\n$HELPPAGE
+created|tözergän
+changed|üzgärtelde
+deletepage|Bitne beterü
+confirm|Raslaw
+excontent|eçtälek: «~{0}»
+excontentauthor|eçtälege: "~{0}" (berdänber üzgärtüçe "[[Special:Contributions/~{1}\u007C~{1}]]" ide)
+delete-confirm|«~{0}» beterü
+delete-legend|Beterü
+historywarning|'''Kisätü''': sez beterergä telägän bittä üzgärtü tarixı bar, ul ~{0}dän {{PLURAL:~{0}\u007Cyuramalar}}:
+confirmdeletetext|Sez bu bitneñ (yäki räsemneñ) tulısınça beterelüen soradığız.\nZinhar, monı çınnan da eşlärgä telägänegezne, monıñ näticälären añlağanığıznı häm [[{{MediaWiki:Policy-url}}]] bülegendäge qäğeydälär buyınça eşlägänegezne raslağız.
+actioncomplete|Ğämäl başqarğan
+deletedtext|«~{0}» beterelgän inde.<br />\nSoñğı beterelgän bitlärne kürer öçen, ~{1} qarağız.
+dellogpage|Beterü köndälege
+deletionlog|beterü köndälege
+reverted|Aldağı yuramanı qaytart
+deletecomment|Säbäp:
+deleteotherreason|Başqa/östämä säbäp:
+deletereasonotherlist|Başqa säbäp
+deletereason-dropdown|* Beterüneñ säbäpläre\n** vandallıq\n** avtor sorawı buyınça\n** avtor xoquqların bozu
+delete-edit-reasonlist|Säbäplär isemlegen üzgärtü
+rollbacklink|kire qaytaru
+editcomment|Üzgärtü öçen taswir: "''~{0}''".
+revertpage|[[Special:Contributions/~{1}\u007C~{1}]] üzgärtüläre ([[User talk:~{1}\u007Cbäxäs]])  [[User:~{0}\u007C~{0}]] yuramasına kire qaytarıldı
+protectlogpage|Yaqlanu köndälege
+protectedarticle|«[[~{0}]]» yaqlanğan
+modifiedarticleprotection|"[[~{0}]]" bite öçen yaqlaw däräcäse üzgärtelde
+unprotectedarticle|«[[~{0}]]» inde yaqlanmağan
+movedarticleprotection|yaqlaw köylänmälären «[[~{1}]]» bitennän «[[~{0}]]» bitenä küçerde
+protect-title|«~{0}» öçen yaqlaw däräcäsen bilgeläw
+prot_1movedto2|«[[~{0}]]» bite «[[~{1}]]» bitenä küçerelde
+protect-legend|Bitne yaqlaw turında raslağız
+protectcomment|Säbäp:
+protectexpiry|Betä:
+protect_expiry_invalid|Yaqlaw betü waqıtı döres tügel.
+protect_expiry_old|Yaqlaw betü köne uzğan köngä quyılğan.
+protect-unchain-permissions|Östämä yaqlaw çaraların açu
+protect-text|Biredä sez '''~{0}''' bite öçen yaqlaw däräcäsene qarıy häm üzgärä alasız.
+protect-locked-access|Xisap yazmağızğa bitlärneñ yaqlaw däräcäsen üzgärtü öçen xaq citmi. '''~{0}''' biteneñ xäzerge köyläwläre:
+protect-cascadeon|Bu bit yaqlanğan, çönki ul älege kaskadlı yaqlawlı {{PLURAL:~{0}\u007Cbitkä\u007Cbitlärgä}} kerä. Sez bu bitneñ yaqlaw däräcäsen üzgärtä alasız, ämma kaskadlı yaqlaw üzgärmäyäçäk.
+protect-default|Yaqlawsız
+protect-fallback|«~{0}»neñ röxsäte kiräk
+protect-level-autoconfirmed|Yaña häm terkälmägän qullanuçılarnı qısu
+protect-level-sysop|İdaräçelär genä
+protect-summary-cascade|kaskadlı
+protect-expiring|~{0} ütä (UTC)
+protect-expiry-indefinite|Waqıt çiklänmägän
+protect-cascade|Bu bitkä kergän bitlärne yaqlaw (kaskadlı yaqlaw)
+protect-cantedit|Sez bu bitneñ yaqlaw däräcäsene üzgärä almıysız, çönki sezdä anı üzgärtergä röxsätegez yuq.
+protect-othertime|Başqa waqıt:
+protect-othertime-op|başqa waqıt
+protect-otherreason-op|Başqa säbäp
+protect-expiry-options|1 säğät:1 hour,1 kön:1 day,1 atna:1 week,2 atna:2 weeks,1 ay:1 month,3 ay:3 months,6 ay:6 months,1 yıl:1 year,waqıtsız:infinite
+restriction-type|Röxsät:
+restriction-level|Mömkinlek däräcäse:
+minimum-size|İñ keçkenä zurlıq
+maximum-size|İñ yuğarı zurlıq:
+pagesize|(bayt)
+restriction-edit|Üzgärtü
+restriction-move|Küçerü
+restriction-create|Tözü
+restriction-upload|Yökläw
+restriction-level-sysop|tulı yaqlaw
+restriction-level-autoconfirmed|öleşçä yaqlaw
+restriction-level-all|barlıq däräcälär
+undelete|Beterelgän bitlärne qaraw
+undeletepage|Beterelgän bitlärne qaraw häm torğızu
+viewdeletedpage|Beterelgän bitlärne qaraw
+undelete-fieldset-title|Yuramalarnı qaytaru
+undeletehistory|Bu bitne torğızsağız, anıñ üzgärtü tarixı da tulısınça torğızılaçaq.\nBeterelüdän soñ şundıy uq isemle bit tözelgän bulsa, torğızılğan üzgärtülär yaña üzgärtülär aldına quyılaçaq.
+undeletebtn|Torğızu
+undeletelink|qaraw/torğızu
+undeleteviewlink|qaraw
+undeleteinvert|Kiresen saylaw
+undeletecomment|Säbäp:
+undelete-search-submit|Ezläw
+undelete-error-long|Faylnı torğızu waqıtında xatalar çıqtı:\n\n~{0}
+undelete-show-file-submit|Äye
+namespace|İsemnär mäydanı:
+invert|Kiresen saylaw
+contributions|Qullanuçınıñ kerteme
+contributions-title|~{0} isemle qullanuçınıñ kerteme
+mycontris|Kertemem
+contribsub2|~{0} (~{1}) öçen
+uctop|(axırğı)
+month|Aydan başlap (häm elegräk):
+year|Yıldan başlap (häm elegräk):
+sp-contributions-newbies|Yaña xisap yazmalarınnan yasalğan kertemne genä qaraw
+sp-contributions-newbies-sub|Yaña xisap yazmaları öçen
+sp-contributions-blocklog|tıyu köndälege
+sp-contributions-logs|köndäleklär
+sp-contributions-talk|bäxäs
+sp-contributions-search|Kertemne ezläw
+sp-contributions-username|Qullanuçınıñ IP adresı yäki iseme:
+sp-contributions-submit|Ezlärgä
+whatlinkshere|Biregä närsä sıltıy
+whatlinkshere-title|~{0} bitenä sıltıy torğan bitlär
+whatlinkshere-page|Bit:
+linkshere|'''[[:~{0}]]''' bitenä çirattağı bitlär sıltıy:
+nolinkshere|'''[[:~{0}]]''' bitenä başqa bitlär sıltamıylar.
+isredirect|yünältü bite
+istemplate|kertülär
+isimage|räsem öçen sıltama
+whatlinkshere-prev|{{PLURAL:~{0}\u007Caldağı\u007Caldağı ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cçirattağı\u007Cçirattağı ~{0}}}
+whatlinkshere-links|← sıltamalar
+whatlinkshere-hideredirs|yünältülärne ~{0}
+whatlinkshere-hidetrans|kertülärne ~{0}
+whatlinkshere-hidelinks|sıltamalarnı ~{0}
+whatlinkshere-hideimages|räsem sıltamaların ~{0}
+whatlinkshere-filters|Filtrlar
+blockip|Qullanuçını tıyu
+blockip-legend|Qullanuçını tıyu
+ipaddressorusername|IP adresı yäki qullanuçı iseme:
+ipbexpiry|Betä:
+ipbreason|Säbäp:
+ipbreason-dropdown|* Qısunıñ ğädättäge säbäpläre\n** Yalğan mäğlümat kertü\n** Bitlärneñ eçtälegen sörtü\n** Tışqı saytlarğa spam-sıltamalar\n** Mäğnäsez tekst/çüp östäw\n** Qullanuçılarnı ezärlekläw/yanawlar\n** Berniçä xisap yazması belän isäpläşmäw\n** Qullanuçı isemeneñ yaraqsız buluı
+ipbenableautoblock|Qullanuçı qullanğan IP adresların avtomatik räweştä tıyu
+ipbsubmit|Bu qullanuçını tıyu
+ipbother|Başqa waqıt:
+ipboptions|2 säğät:2 hours,1 kön:1 day,3 kön:3 days,1 atna:1 week,2 atna:2 weeks,1 ay:1 month,3ay:3 months,6 ay:6 months,1 yıl:1 year,çiklänmägän:infinite
+badipaddress|Yalğış IP adresı
+blockipsuccesssub|Tıyu başqarılğan
+ipb-unblock-addr|~{0} qullanuçısın tıyudan azat itü
+ipb-unblock|Qullanuçı yäki IP adresı tıyudan azat itü
+unblockip|Qullanuçını tıyudan azat itü
+ipusubmit|Bu tıyunı tuqtatu
+ipblocklist|Tıyılğan IP adresları häm qullanuçı isemnäre
+ipblocklist-submit|Ezläw
+infiniteblock|bilgele ber waqıtsız
+blocklink|tıyu
+unblocklink|tıyudan azat itü
+change-blocklink|tıyunı üzgärtü
+contribslink|kertem
+blocklogpage|Tıyu köndälege
+blocklogentry|[[~{0}]] ~{1} waqıtqa tıyıldı ~{2}
+unblocklogentry|~{0} qullanuçısınıñ tıyılu waqıtı bette
+block-log-flags-nocreate|yaña xisap yazması terkäw tıyılğan
+block-log-flags-noemail|xat cibärü tıyılğan
+block-log-flags-hiddenname|qullanuçınıñ iseme yäşerelgän
+ipb_expiry_invalid|İskärü waqıtı xatalı.
+ip_range_invalid|Xatalı IP arası.
+proxyblocker|Proksi tıyu
+sorbsreason|Sezneñ IP adresığız DNSBLda açıq proksi dip sanala.
+lockdb|Biremlekne yozaqlaw
+unlockdb|Biremlek irekläw
+lockconfirm|Äye, min mäğlümatlar bazasın çınlap ta yozaqlarğa buldım.
+lockbtn|Mäğlümatlar bazasın yozaqlaw
+unlockbtn|Mäğlümatlar bazasına yazu mömkinlegen qaytaru
+lockdbsuccesssub|Mäğlümatlar bazası yozaqlandı
+unlockdbsuccesssub|Mäğlümatlar bazası yozağı salındı
+unlockdbsuccesstext|Bu mäğlümatlar bazası yozağı salındı.
+move-page|~{0} — isemen almaştıru
+move-page-legend|Bitne küçerü
+movepagetext|Astağı formanı qullanu bitneñ isemen alıştırıp, anıñ barlıq tarixın yaña isemle bitkä küçerer.\nİske isemle bit yaña isemle bitkä yünältü bulıp qalır.\nSez iske isemgä yünältülärne avtomatik räweştä yaña isemgä küçerä alasız.\nÄgär monı eşlämäsägez, [[Special:DoubleRedirects\u007Cikele]] häm [[Special:BrokenRedirects\u007Cözelgän yünältülärne]] tikşeregez.\nSez barlıq sıltamalarnıñ kiräkle cirgä sıltawına cawaplı.\n\nKüzdä totığız: ägär yaña isem urınında bit bulsa inde, häm ul buş yäki yünältü tügel isä, bit '''küçerelmäyäçäk'''.\nBu şunı añlata: sez yalğışıp küçersägez, bitne qaytara alasız, ämma inde bulğan bitne beterä almıysız.\n\n'''İğtibar!'''\nPopulyar bitlärne küçerü zur häm kötelmägän näticälärgä kiterä ala.\nDäwam itkänçe, barlıq näticälärne añlawığıznı tağın ber qat uylağız.
+movepagetalktext|Bu bitneñ bäxäs bite dä küçereläçäk, '''bu oçraqlardan tış''':\n*Andıy isemle buş bulmağan bäxäs bite bar inde, yäisä\n*Sez astağı flajoqnı quymağansız.\n\nBu oçraqlarda sezgä bitlärne üz qulığız belän küçerergä yäki quşarğa turı kiler.
+movearticle|Bitne küçerü:
+movenotallowed|Sezdä mäqälälärne küçerü xoquqları yuq.
+newtitle|Yaña başlam:
+move-watch|Bu bitne küzätü
+movepagebtn|Bitne küçerü
+pagemovedsub|Bit küçerelde
+movepage-moved|'''«~{0}» bite «~{1}» bitenä küçerelde'''
+movepage-moved-redirect|Yünältü yasaldı.
+movepage-moved-noredirect|Yünältüne yasaw tıyıldı
+articleexists|Mondıy isemle bit bar inde, yäisä mondıy isem röxsät itelmi.\nZinhar başqa isem saylağız.
+movetalk|Bäyläneşle bäxäs biten küçerü
+movelogpage|Küçerü köndälege
+movereason|Säbäp:
+revertmove|kire qaytu
+delete_and_move|Beterü häm isemen almaştıru
+delete_and_move_reason|Küçerüne mömkin itär öçen beterelde
+move-leave-redirect|Yünältü qaldırılsın
+export|Bitlärne çığaruı
+export-submit|Eksportlaw
+export-addcattext|Bu törkemnän bitlär östäw:
+export-addcat|Östäw
+export-addns|Östäw
+export-download|Fayl bularaq saqlaw
+allmessages|Sistema xäbärläre
+allmessagesname|İsem
+allmessagesdefault|Töpcay yazma
+allmessagescurrent|Eligi yazma
+allmessagestext|Bu isemlek MediaWiki isemnär mäydanında bulğan sistema xäbärläreneñ isemlege.\nĞomumi MediaWiki lokalizatsiäsendä qatnaşırğa teläsägez, zinhar [https://www.mediawiki.org/wiki/Special:MyLanguage/Localisation MediaWiki Lokalizatsiäse] häm [//translatewiki.net translatewiki.net] säxifälärne qullanığız.
+allmessages-filter-legend|Filtr
+allmessages-filter-unmodified|Üzgärtelmägän
+allmessages-filter-all|Barısı
+allmessages-filter-modified|Üzgärtelgän
+allmessages-language|Tel:
+allmessages-filter-submit|Küçü
+filemissing|Fayl tabılmadı
+thumbnail_error|Keçkenä sürät tözüe xatası: ~{0}
+import|Bitlärne yökläw
+import-interwiki-submit|İmportlaw
+import-upload-filename|Fayl iseme:
+import-comment|İskärmä:
+importstart|Bitlärne importlaw...
+importfailed|İmportlaw xatası: <nowiki>~{0}</nowiki>
+importsuccess|İmportlaw uñışlı buldı!
+importlogpage|Kertü köndälege
+import-logentry-interwiki|«~{0}» — wikiara  importlaw
+tooltip-pt-userpage|Qullanuçı bitegez
+tooltip-pt-mytalk|Bäxäs bitegez
+tooltip-pt-preferences|Köylänmäläregez
+tooltip-pt-watchlist|Sez küzätelgän tözätmäle bitlär isemlege
+tooltip-pt-mycontris|Sezneñ kertemengezne isemlege
+tooltip-pt-login|Sez xisap yazması tözi alır idegez, ämma bu mäcbüri tügel.
+tooltip-pt-logout|Çığu
+tooltip-ca-talk|Bitneñ eçtälege turında bäxäs
+tooltip-ca-edit|Sez bu bit üzgärtä alasız. Zinhar, saqlağançı qarap alunı qullanığız.
+tooltip-ca-addsection|Yaña bülek başlaw
+tooltip-ca-viewsource|Bu bit üzgärtüdän yaqlanğan. Sez anıñ çığanaq tekstın ğına qarıy alasız.
+tooltip-ca-history|Bitneñ tözätmälär isemlege
+tooltip-ca-protect|Bu bitne yaqlaw
+tooltip-ca-delete|Bu bitne beterü
+tooltip-ca-move|Bu bitne küçerü
+tooltip-ca-watch|Bu bitne sezneñ küzätü isemlegezgä östäw
+tooltip-ca-unwatch|Bu bitne sezneñ küzätü isemlegezdä beterü
+tooltip-search|{{SITENAME}} eçendä ezläw
+tooltip-search-go|Näk şundıy iseme belän bitkä küçärü
+tooltip-search-fulltext|Bu tekst belän bitlärne tabu
+tooltip-p-logo|Baş bit
+tooltip-n-mainpage|Baş bitne kerep çığu
+tooltip-n-mainpage-description|Baş bitkä küçü
+tooltip-n-portal|Proyekt turında, sez närsä itä alasız häm närsä qayda bula dip turında.
+tooltip-n-currentevents|Ağımdağı waqıyğalar turında mäğlümatnı tabu
+tooltip-n-recentchanges|Soñğı üzgärtülär isemlege
+tooltip-n-randompage|Oçraqlı bitne qaraw
+tooltip-n-help|«{{SITENAME}}» proyektınıñ beleşmälek
+tooltip-t-whatlinkshere|Biregä sıltağan barlıq bitlärneñ isemlege
+tooltip-t-recentchangeslinked|Bu bittän sıltağan bitlärdä axırğı üzgärtülär
+tooltip-feed-rss|Bu bit öçen RSS translyatsiäse
+tooltip-feed-atom|Bu bit öçen Atom translyatsiäse
+tooltip-t-contributions|Qullanuçı kertemeneñ isemlegene qaraw
+tooltip-t-emailuser|Bu qullanuçığa xat cibärü
+tooltip-t-upload|Fayllarnı yökläw
+tooltip-t-specialpages|Barlıq maxsus bitlär isemlege
+tooltip-t-print|Bu bitneñ bastıru versiäse
+tooltip-t-permalink|Bitneñ bu yuramasına daimi sıltama
+tooltip-ca-nstab-main|Mäqäläneñ eçtälege
+tooltip-ca-nstab-user|Qullanuçınıñ şäxsi bite
+tooltip-ca-nstab-media|Media-fayl
+tooltip-ca-nstab-special|Bu maxsus bit, sez anı üzgärtü almıysız
+tooltip-ca-nstab-project|Proyektnıñ bite
+tooltip-ca-nstab-image|Sürätneñ bite
+tooltip-ca-nstab-mediawiki|MediaWiki - xat bite
+tooltip-ca-nstab-template|Ürnäk bite
+tooltip-ca-nstab-help|Yärdäm biten qaraw
+tooltip-ca-nstab-category|Törkem biten qaraw
+tooltip-minoredit|Bu üzgärtüne keçe dip bilgelü
+tooltip-save|Üzgärtüläregezne saqlaw
+tooltip-preview|Sezneñ üzgärtüläregezneñ aldan qarawı, saqlawdan qädär monı qullanığız äle!
+tooltip-diff|Sezneñ üzgärtüläregezne kürsätü.
+tooltip-compareselectedversions|Bu bitneñ saylanğan ike yuraması arasında ayırmanı qaraw
+tooltip-watch|Bu bitne küzätü isemlegemä östäw
+tooltip-recreate|Bu bitne kire qaytaru
+tooltip-upload|Yökläwne başlaw
+tooltip-rollback|"Kire qaytaru" soñğı qullanuçınıñ bu bittä yasağan '''barlıq''' üzgärtülären beterä.
+tooltip-undo|Bu üzgärtüne aldan qarap ütkärmäw. Şulay uq ütkärmäwneñ säbäben yazıp bula.
+tooltip-preferences-save|Köylänmäläregezne saqlaw
+tooltip-summary|Qısqa isemen kertü
+common.css|/*  Monda urnaştırılğan CSS başqalarında da urnaşaçaq */
+anonymous|{{SITENAME}} saytınıñ anonim {{PLURAL:~{0}\u007Cqullanuçısı\u007Cqullanuçıları}}
+siteuser|{{SITENAME}} qullanuçısı ~{0}
+othercontribs|«~{0}» eşenä nigezlänä.
+others|başqalar
+siteusers|{{SITENAME}} {{PLURAL:~{1}\u007Cqullanuçısı\u007Cqullanuçıları}} ~{0}
+creditspage|Räxmätlär
+spamprotectiontitle|Spam filtrı
+markaspatrolledtext|Bu mäqäläne tikşerelgän dip tamğalaw
+markedaspatrolled|Tikşerelgän dip tamğalandı
+markedaspatrolledtext|Saylanğan [[:~{0}]] mäqäläseneñ älege yuraması tikşerelgän dip tamğalandı.
+patrol-log-page|Tikşerü köndälege
+patrol-log-header|Bu tikşerelgän bitlärneñ köndälege.
+log-show-hide-patrol|~{0} tikşerü köndälege
+deletedrevision|~{0} biteneñ iske yuraması beterelde
+filedeleteerror-short|Faylnı beterü xatası: ~{0}
+filedeleteerror-long|Faylnı beterü waqıtında xatalar çıqtı:\n\n~{0}
+filedelete-missing|«~{0}» isemle faylnı beterergä mömkin tügel, çönki ul yuq.
+previousdiff|← Aldağı üzgärtü
+nextdiff|Çirattağı üzgärtü →
+imagemaxsize|Räsemneñ zurlığına çikläwlär:<br />''(taswirlaw bite öçen)''
+thumbsize|Räsemneñ keçeräytelgän yuraması öçen:
+widthheight|~{0} × ~{1}
+widthheightpage|~{0} × ~{1}, ~{2}{{PLURAL:~{0}\u007Cbit\u007Cbitlär}}
+file-info|fayl zurlığı: ~{0}, MIME-tip: ~{1}
+file-info-size|~{0} × ~{1} noqta, faylnıñ zurlığı: ~{2}, MIME tibı: ~{3}
+file-nohires|Yuğarı açıqlıq belän yurama yuq.
+svg-long-desc|SVG faylı, şartlı ~{0} × ~{1} noqta, faylnıñ zurlığı: ~{2}
+show-big-image|Tulı açıqlıq
+newimages|Yaña sürätlär cıyılması
+newimages-legend|Filtr
+ilsubmit|Ezläw
+bydate|waqıt buyınça
+bad_image_list|Kiläçäk räweş kiräk:\n\nİsemlek kisäkläre genä (* simvolınnan başlanuçı yullar) sanalırlar.\nYulnıñ berençe sıltaması quyma öçen tıyılğan räsemgä sıltama bulırğa tieş.\nŞul uq yulnıñ kiläçäk sıltamaları çığarmalar, räsemgä tıyılmağan bitläre, sanalırlar.
+metadata|Meta mäğlümatlar
+metadata-help|Bu faylda ğädättä sanlı kamera yäki skaner tarafınnan östälgän mäğlümat bar. Ägär bu fayl tözü waqıtınnan soñ üzgärtelgän bulsa, anıñ qayber parametrları döres bulmasqa mömkin.
+metadata-expand|Östämä mäğlümatlarnı kürsätü
+metadata-collapse|Östämä mäğlümatlarnı yäşerü
+metadata-fields|Bu isemlekkä kergän metabirelmälär qırları räsem bitendä kürsäteler, qalğannarı isä kileşü buyınça yäşereler.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|Kiñlek
+exif-imagelength|Bieklek
+exif-imagedescription|Räsemneñ iseme
+exif-make|Kameranıñ citeşterüçese
+exif-model|Kameranıñ töre
+exif-software|Programmalı tä'min iteleş
+exif-artist|Avtor
+exif-copyright|Avtor xoquqları xucası
+exif-exifversion|Exif versiäse
+exif-flashpixversion|FlashPix yuramasın tä'min itü
+exif-colorspace|Töslär tirälege
+exif-componentsconfiguration|Töslär tözeleşeneñ konfiguratsiäse
+exif-compressedbitsperpixel|Qısıludan soñ tösneñ tiränlege
+exif-pixelydimension|Räsemneñ tulı bieklege
+exif-pixelxdimension|Räsemneñ tulı kiñlege
+exif-usercomment|Östämä cawap
+exif-relatedsoundfile|Tawış faylı cawabı
+exif-datetimeoriginal|Çın waqıtı
+exif-datetimedigitized|Sanlaştıru waqıtı
+exif-subsectime|Faylnı üzgärtüneñ öleşle sekund waqıtı
+exif-subsectimeoriginal|Çın yasalu waqıtınıñ öleş sekundı
+exif-subsectimedigitized|Sanlaştıru waqıtınıñ öleş sekundı
+exif-exposuretime|Ekspozitsiä waqıtı
+exif-exposuretime-format|~{0} s (~{1})
+exif-fnumber|Diafragmanıñ sanı
+exif-fnumber-format|f/~{0}
+exif-exposureprogram|Ekspozitsiä programması
+exif-spectralsensitivity|Spektral sizüçänlek
+exif-isospeedratings|ISO yaqtılıq sizüçänlege
+exif-shutterspeedvalue|Saqlaw
+exif-aperturevalue|Diafragma
+exif-brightnessvalue|Yaqtılıq
+exif-exposurebiasvalue|Ekspozitsiä kompensatsiäse
+exif-maxaperturevalue|Diafragmanıñ minimal sanı
+exif-subjectdistance|Cisemgä qädär yıraqlıq
+exif-meteringmode|Ekspozitsiäne ülçäw rejimı
+exif-lightsource|Yaqtılıq çığanağı
+exif-flash|Yaqtılıq statusı
+exif-focallength|Foqus yıraqlığı
+exif-focallength-format|~{0} mm
+exif-subjectarea|Töşerü cisemeneñ urnaşuı häm mäydanı
+exif-flashenergy|Yaqtılıq energiäse
+exif-focalplanexresolution|X foqäl yassılıq kiñäytelüe
+exif-focalplaneyresolution|Y foqäl yassılıq kiñäytelüe
+exif-focalplaneresolutionunit|Foqäl yassılıq kiñäytelüen isäpläw berämlege
+exif-subjectlocation|Cisemneñ sul yaqqa qarata torışı
+exif-exposureindex|Ekspozitsiä sanı
+exif-sensingmethod|Sensor töre
+exif-filesource|Faylnıñ çığanağı
+exif-scenetype|Tirälekneñ töre
+exif-customrendered|Östämä üzgärtü
+exif-exposuremode|Ekspozitsiä saylaw rejimı
+exif-whitebalance|Aq tösneñ balansı
+exif-digitalzoomratio|Sanlı zuraytu koeffitsientı
+exif-focallengthin35mmfilm|Ekvivalentlı foqus yıraqlığı (35 mm tasma öçen)
+exif-scenecapturetype|Töşerü waqıtındağı tirälek töre
+exif-gaincontrol|Yaqtılıqnı arttıru
+exif-contrast|Qarañğılıq
+exif-saturation|Törlelege
+exif-sharpness|Açıqlığı
+exif-devicesettingdescription|Kameranıñ köyläwlär taswirlaması
+exif-subjectdistancerange|Töşerü cisemenä qädär yıraqlıq
+exif-imageuniqueid|Räsemneñ sanı (ID)
+exif-gpsversionid|GPS mäğlümatı bloğınıñ versiäse
+exif-gpslatituderef|Kiñlek indeksı
+exif-gpslatitude|Kiñlek
+exif-gpslongituderef|Ozınlıq indeksı
+exif-gpslongitude|Ozınlıq
+exif-gpsaltituderef|Bieklek indeksı
+exif-gpsaltitude|Bieklek
+exif-gpstimestamp|UTC buyınça waqıt
+exif-gpssatellites|Qullanılğan iärçennär taswirlaması
+exif-gpsstatus|Alğıçnıñ statusı häm töşerü waqıtı
+exif-gpsmeasuremode|Urnaşunı bilgeläw ısulı
+exif-gpsdop|Bilgeläwneñ döreslege
+exif-gpsspeedref|Tizlekne isäpläw berämlege
+exif-gpsspeed|Xäräkät tizlege
+exif-gpsdatestamp|Data
+exif-meteringmode-255|Başqa
+exif-lightsource-0|Bilgesez
+exif-gaincontrol-0|Yuq
+exif-contrast-0|Normal
+exif-contrast-1|Az ğına kütärü
+exif-contrast-2|Küp itterep kütärü
+exif-saturation-0|Normal
+exif-saturation-1|Az ğına tuyındırılu
+exif-saturation-2|Küp itterep tuyındırılu
+exif-sharpness-0|Normal
+exif-sharpness-1|Az ğına kütärü
+exif-sharpness-2|Küp itterep kütärü
+exif-subjectdistancerange-0|Bilgesez
+exif-subjectdistancerange-1|Makrotöşerü
+exif-subjectdistancerange-2|Yaqınnan töşerü
+exif-subjectdistancerange-3|Yıraqtan töşerü
+exif-gpsspeed-k|km/säğ
+exif-gpsspeed-m|milya/säğ
+namespacesall|barlıq
+monthsall|barlıq
+recreate|Yañadan yasaw
+confirm_purge_button|OK
+imgmultipageprev|← aldağı bit
+imgmultipagenext|aldağı bit →
+imgmultigo|Küçü!
+imgmultigoto|~{0} bitenä küçü
+ascending_abbrev|üsü
+descending_abbrev|kimü
+table_pager_next|Kiläse bit
+table_pager_prev|Aldağı bit
+table_pager_first|Berençe bit
+table_pager_last|Axırğı bit
+table_pager_limit_submit|Başqaru
+table_pager_empty|Näticä yuq
+autoredircomment|[[~{0}]] bitenä yünältü
+autosumm-new|Yaña bit: «~{0}»
+watchlistedit-raw-titles|Yazmalar:
+watchlisttools-view|Soñğı üzgärtülärne kürsätü
+watchlisttools-edit|Küzätü isemlegene qaraw häm üzgärtü
+watchlisttools-raw|Tekst sıman üzgärtü
+hijri-calendar-m1|Möxärräm
+hijri-calendar-m7|Racäb
+hijri-calendar-m9|Ramazan
+version|Yurama
+version-other|Başqa
+version-license|Litsenziä
+version-software|Urnaştırılğan programma belän tä'min iteleşne
+version-software-product|Produkt
+version-software-version|Versiä
+fileduplicatesearch-submit|Ezläw
+specialpages|Maxsus bitlär
+specialpages-note|* Ğädi maxsus bitlär.\n* <strong class="mw-specialpagerestricted">Çiklänelgän ğädi maxsus bitlär</strong>
+specialpages-group-maintenance|Texnik qaraw xisapnamäse
+specialpages-group-other|Başqa maxsus bitlär
+specialpages-group-login|Kerü / terkälü
+specialpages-group-changes|Soñğı üzgärtülär
+specialpages-group-media|Yökläw häm media-fayllar xisapnamäse
+specialpages-group-users|Qullanuçılar häm alarnıñ xoquqları
+specialpages-group-highuse|Yış qullanıluçı bitlär
+specialpages-group-pages|Bitlär isemlege
+specialpages-group-pagetools|Bit öçen cihazlar
+specialpages-group-wiki|Wiki-mäğlümat häm cihazlar
+specialpages-group-redirects|Küçerelüçe maxsus bitlär
+specialpages-group-spam|Spamğa qarşı qorallar
+blankpage|Buş bit
+intentionallyblankpage|Bu bit maxsus buş qaldırılğan
+tag-filter-submit|Filtrlaw
+tags-edit|üzgärtü
+compare-submit|Çağıştır
+dberr-problems|Ğafu itegez! Saytta texnik qıyınlıqlar çıqtı.
+htmlform-submit|Cibärü
+htmlform-reset|Üzgärtülärne kire qaytaru
+htmlform-selectorother-other|Başqa
+revdelete-restricted|çikläwlär idaräçelärgä dä qullanıla
+rightsnone|(yuq)
+revdelete-summary|üzgärtülär taswirlaması
+']:>
+).lang
+;

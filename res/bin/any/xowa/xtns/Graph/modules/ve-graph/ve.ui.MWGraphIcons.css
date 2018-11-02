@@ -1,0 +1,11 @@
+/*!
+ * VisualEditor UserInterface Graph icon styles.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.oo-ui-icon-graph {
+	/* @embed */
+	background-image: url( graph.svg );
+}

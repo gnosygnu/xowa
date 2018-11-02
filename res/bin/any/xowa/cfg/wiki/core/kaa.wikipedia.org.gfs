@@ -1,0 +1,57 @@
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+-2|Таспа
+-2|تاسپا
+-1|Арнайы
+-1|ارنايى
+1|Талқылау
+1|تالقىلاۋ
+2|Қатысушы
+2|قاتىسۋشى
+3|Қатысушы_талқылауы
+3|قاتىسۋشى_تالقىلاۋى
+5|Wikipedia_талқылауы
+5|Wikipedia_تالقىلاۋى
+6|Image
+6|Сурет
+6|سۋرەت
+7|Image_talk
+7|Сурет_талқылауы
+7|سۋرەت_تالقىلاۋى
+8|МедиаУики
+8|مەدياۋيكي
+9|МедиаУики_талқылауы
+9|مەدياۋيكي_تالقىلاۋى
+10|Үлгі
+10|ٴۇلگٴى
+10|ٷلگٸ
+11|Үлгі_талқылауы
+11|ٴۇلگٴى_تالقىلاۋى
+11|ٷلگٸ_تالقىلاۋى
+12|Анықтама
+12|انىقتاما
+13|Анықтама_талқылауы
+13|انىقتاما_تالقىلاۋى
+14|Санат
+14|سانات
+15|Санат_талқылауы
+15|سانات_تالقىلاۋى
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(8).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end

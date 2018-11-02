@@ -1,0 +1,10 @@
+this
+.messages
+  .load_text(
+<:['
+sitesupport-url|x
+sitesupport|x
+tooltip-n-sitesupport|x
+']:>
+).lang
+;

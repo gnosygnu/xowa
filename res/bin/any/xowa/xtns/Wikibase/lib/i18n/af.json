@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Naudefj",
+			"Robby"
+		]
+	},
+	"wikibase-entity-item": "item",
+	"wikibase-entity-property": "eienskap",
+	"wikibase-entity-query": "soekopdrag",
+	"wikibase-diffview-reference": "verwysing",
+	"wikibase-diffview-rank": "rang",
+	"wikibase-diffview-qualifier": "kwalifiseerder",
+	"wikibase-diffview-alias": "aliasse",
+	"wikibase-error-unexpected": "'n Onverwagte fout het voorgekom.",
+	"wikibase-error-autocomplete-connection": "Die Wikipedia-API kon die bereik word nie. Probeer asseblief later weer.",
+	"wikibase-error-autocomplete-response": "Antwoord van bediener: $1",
+	"wikibase-error-ui-client-error": "Die verbinding na die eksterne bladsy het gefaal. Probeer asseblief later weer.",
+	"wikibase-error-ui-no-external-page": "Die gespesifiseerde bladsy kon nie op die ooreenkomende webwerf gevind word nie.",
+	"wikibase-error-ui-cant-edit": "U mag nie hierdie handeling uitvoer nie.",
+	"wikibase-error-ui-no-permissions": "U het nie die nodige regte om hierdie handeling uit te voer nie.",
+	"wikibase-error-ui-link-exists": "U kan nie na die bladsy skakel nie omdat 'n ander item reeds hieraan gekoppel is.",
+	"wikibase-error-ui-session-failure": "U sessie het uitgeloop. Meld asseblief weer aan.",
+	"wikibase-error-ui-edit-conflict": "Twee wysigings bots met mekaar. Laai asseblief oor en stoor weer.",
+	"wikibase-replicationnote": "Let daarop dat dit verskeie minute dan duur voor die wysigings op alle wiki's sigbaar sal wees.",
+	"wikibase-sitelinks-sitename-columnheading": "Taal",
+	"wikibase-sitelinks-siteid-columnheading": "Kode",
+	"wikibase-sitelinks-link-columnheading": "Geskakelde artikel",
+	"wikibase-tooltip-error-details": "Details",
+	"datatypes-type-wikibase-item": "Item",
+	"datatypes-type-commonsMedia": "Medialêer van Commons",
+	"version-wikibase": "Wikibase"
+}

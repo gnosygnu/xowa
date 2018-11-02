@@ -1,0 +1,142 @@
+this
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Tshipi
+monday|Mosupologo
+tuesday|Labobedi
+wednesday|Laboraro
+thursday|Labone
+friday|Labotlhano
+saturday|Matlhatso
+january|Firikgong
+february|Tlhakole
+march|Mopitlo
+april|Moranang
+may_long|Motsheganong
+june|Seetebosigo
+july|Phukwi
+august|Phatwe
+september|Lwetse
+october|Phalane
+november|Ngwanatsele
+december|Sedimonthole
+january-gen|Firikgong
+february-gen|Tlhakole
+march-gen|Mopitlo
+april-gen|Moranang
+may-gen|Motsheganong
+june-gen|Seetebosigo
+july-gen|Phukwi
+august-gen|Phatwe
+september-gen|Lwetse
+october-gen|Phalane
+november-gen|Ngwanatsele
+december-gen|Sedimonthole
+otherlanguages|Ka dipuo di sele
+cite_article_link|Nopola mokwalo o
+sitesupport|Dimpho
+cancel|Sutlha
+mytalk|Puo yame
+navigation|Tsweletso
+help|Thuso
+search|Senka
+searchbutton|Senka
+go|Tsamaya
+searcharticle|Tsamaya
+history_short|Ditso
+printableversion|Mokwalo o o ka gatisiwang motlhofo
+permalink|Kgolagano ya sennelaruri
+edit|Baakanya
+delete|Sutlha
+protect|Sireletsa
+talk|Puisano
+toolbox|Lebokoso la dithulusu
+currentevents|Ditiragalo tsa sešeng
+disclaimers|Tlhapa diatla
+edithelp|Thuso ya go fetola
+mainpage|Tsebe ya konokono
+mainpage-description|Tsebe ya konokono
+portal|Patlelo ya setšhaba
+portal-url|Project:Patlelo ya setšhaba
+privacy|Melawana ya sephiri
+youhavenewmessages|O na le ~{0} (~{1}).
+youhavenewmessagesmulti|O na le molaetsa o moša mo ~{0}
+editsection|baakanya
+editold|baakanya
+nstab-main|Mokwalo
+nstab-mediawiki|Molaetsa
+viewsource|Lebelela motswedi
+yourname|Leina la modirisi:
+yourpassword|Selotlolo sa sephiri:
+yourpasswordagain|Kwala selotlolo sa gago sa sephiri gape:
+remembermypassword|Gakologelwa ikwadiso yame mo khompiutareng e (for a maximum of ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}})
+login|Ikwadise
+userlogin|Ikwadise / ipulela tsebe
+logout|Tswala
+userlogout|Tswala
+notloggedin|Ga o a ikwadisa
+createaccount|Ipulela tsebe
+summary|Tshoboko:
+minoredit|Se ke paakanyo e potlana
+watchthis|Lebelela tsebe e
+savearticle|Boloka tsebe
+showpreview|Supa gore go tlaa lebega jang
+showdiff|Supa diphetogo
+currentrev|Dipaakanyo tsa sešeng
+currentrevisionlink|Dipaakanyo tsa sešeng
+mypreferences|Dikgatlhegelo tsa me
+youremail|E-mail:
+username|Leina la modirisi:
+recentchanges|Diphetogo tsa sešeng
+recentchangeslinked|Diphetogo tse di tsamaelanang
+recentchangeslinked-feed|Diphetogo tse di tsamaelanang
+recentchangeslinked-toolbox|Diphetogo tse di tsamaelanang
+upload|Tsenya mokwalo o o tswang kwantle
+uploadbtn|Tsenya mokwalo o o tswang kwantle
+watchthisupload|Lebelela tsebe e
+randompage|Tsebe e e sa tlhomamang
+move|Suta
+movethispage|Sutisa tsebe e
+mywatchlist|Mafoko a ke a etseng tlhoko
+watchnologin|Ga o a ikwadisa
+watch|Lebelela
+watchthispage|Lebelela tsebe e
+prot_1movedto2|[[~{0}]] o sutisediwa kwa go [[~{1}]]
+undelete-search-submit|Senka
+mycontris|Seabe same
+whatlinkshere|Ke eng se se gokaganang fa
+move-page-legend|Sutisa tsebe
+movearticle|Sutisa tsebe:
+movepagebtn|Sutisa tsebe
+movereason|Lebaka:
+allmessages|Melaetsa ya maranyane
+specialpages|Diphetogo tse di faphegileng
+']:>
+).lang
+;

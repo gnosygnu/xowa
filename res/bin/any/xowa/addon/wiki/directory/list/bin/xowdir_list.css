@@ -1,0 +1,12 @@
+.cur_head_text {
+  width: calc(100% - 40px);
+}
+.cur_head_btns {
+  width: 40px;
+}
+
+.domain_name {
+  display: inline-block;
+  width: calc(100% - 64px);
+  padding: 0px 0px 0px 10px;
+}

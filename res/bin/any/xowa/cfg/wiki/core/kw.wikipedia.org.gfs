@@ -1,0 +1,44 @@
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+-1|Arbednek
+1|Cows
+1|Kescows
+3|Cows_Devnydhyer
+3|Kescows_Devnydhyer
+5|Cows_Wikipedia
+5|Kescows_Wikipedia
+6|Image
+7|Cows_Restren
+7|Image_talk
+7|Kescows_Restren
+9|Cows_MediaWiki
+9|Kescows_MediaWiki
+10|Scantlyn
+11|Cows_Scantlyn
+11|Kescows_Skantlyn
+13|Cows_Gweres
+13|Kescows_Gweres
+14|Class
+15|Cows_Class
+15|Kescows_Class
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(8).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(100).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(101).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end

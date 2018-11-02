@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"VASANTH S.N."
+		]
+	},
+	"wikibase-diffview-rank": "ಶ್ರೇಣಿ",
+	"wikibase-diffview-label": "ಗುರುತು ಪಟ್ಟಿ",
+	"wikibase-diffview-description": "ವಿವರ",
+	"wikibase-diffview-link": "ಕೊಂಡಿಗಳು",
+	"wikibase-error-unexpected": "ಅನಿರೀಕ್ಷಿತ ದೋಷ ಸಂಭವಿಸಿದೆ:$1.",
+	"wikibase-quantitydetails-amount": "ಮೊತ್ತ",
+	"wikibase-timedetails-time": "ಸಮಯ",
+	"wikibase-timedetails-timezone": "ಸಮಯ ವಲಯ",
+	"wikibase-timedetails-calendar": "ಪಂಚಾಂಗ",
+	"wikibase-globedetails-longitude": "ರೇಖಾಂಶ",
+	"wikibase-globedetails-latitude": "ಅಕ್ಷಾಂಶ",
+	"wikibase-sitelinks-sitename-columnheading": "ಭಾಷೆ",
+	"wikibase-tooltip-error-details": "ವಿವರಗಳು",
+	"wikibase-validator-bad-value": "ದತ್ತಾಂಶದ ಮೌಲ್ಯ ಕೆಟ್ಟುಹೋದ: $1"
+}

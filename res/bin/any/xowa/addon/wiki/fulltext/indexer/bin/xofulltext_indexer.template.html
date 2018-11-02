@@ -1,0 +1,40 @@
+<!-- message div -->
+<div id='xo_msg_box' style='width:100%; color:red'>&nbsp;</div>
+
+<!-- help div -->
+<div id='cur_help_div' class='xohelp_div'>
+  <div id='cur_help_msg' class='xohelp_msg'>
+    <div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_media_play'>&nbsp;</span><span class='xohelp_row_text'>Run index</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- main div -->
+<div id='main_div' style='width:100%'> 
+  <div class='cur_data_row' style='height:40px'>
+    <label style='vertical-align:middle'>Index</label>
+    <input id='wikis_box' type='text' value='{{wikis}}' style='width:80%' onkeydown='xo.fulltext_indexer.index_keydown(event)' accesskey="m" placeholder='Enter a wiki domain (For example: en.wikipedia.org)'></input>
+    <a class='xoimg_btn_x24 xoimg_media_play' title='index'     href='javascript:void(0)' onclick='return xo.fulltext_indexer.index()' id='index_btn'>&nbsp;</a>
+    <a class='xoimg_btn_x24 xoimg_help_tip'   title='view help' href='javascript:void(0)' onclick='return xo.help.toggle("cur")'>&nbsp;</a>      
+  </div>
+  <div class='cur_data_row'>
+    <label style='vertical-align:middle'>Namespaces</label>
+    <input id='ns_ids_box' type='text' value='{{ns_ids}}' style='width:80%' onkeydown='xo.fulltext_indexer.index_keydown(event)' placeholder='Enter a list of namespaces to index (For example: 0|4|14)'></input>
+  </div>
+  <div class='cur_data_row'>
+    <label style='vertical-align:middle'>Index options</label>
+    <select id='idx_opt' name='idx_opt' size='4' data-select-selected='{{idx_opt}}'>
+      <option value='d'>Documents</option>
+      <option value='df'>Documents / Frequencies</option>
+      <option value='dfp'>Documents / Frequencies / Positions</option>
+      <option value='dfpo'>Documents / Frequencies / Positions / Offsets</option>
+    </select>    
+  </div>
+  <div id='status_div' style='width:100%'>
+    <div id='prog_div'></div>
+    <div id='note_div'>
+      <div id='note_last_div'>&nbsp;</div>
+    </div>
+  </div>
+</div>

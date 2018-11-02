@@ -1,0 +1,2142 @@
+numbers {
+  separators {
+    clear;
+    set(',', ' ');
+  }
+}
+this
+.ns_names
+  .load_text(
+<:['
+-1|Specialis
+1|Disputatio
+2|Usor
+3|Disputatio Usoris
+5|Disputatio {{GRAMMAR:genitive\u007C$1}}
+6|Fasciculus
+7|Disputatio Fasciculi
+8|MediaWiki
+9|Disputatio MediaWiki
+10|Formula
+11|Disputatio Formulae
+12|Auxilium
+13|Disputatio Auxilii
+14|Categoria
+15|Disputatio Categoriae
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+6|Imago
+7|Disputatio Imaginis
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Allmessages|Nuntia_systematis
+Allpages|Paginae_omnes~Omnes_paginae
+Ancientpages|Paginae_veterrimae
+Blankpage|Pagina_vacua
+Block|Usorem_obstruere
+Booksources|Librorum_fontes
+BrokenRedirects|Redirectiones_fractae
+Categories|Categoriae
+ChangePassword|Tesseram_novam_creare
+Confirmemail|Inscriptionem_electronicam_confirmare
+Contributions|Conlationes~Conlationes_usoris
+CreateAccount|Rationem_creare
+Deadendpages|Paginae_sine_nexu
+DeletedContributions|Conlationes_deletae~Conlationes_usoris_deletae
+DoubleRedirects|Redirectiones_duplices
+Emailuser|Litteras_electronicas_usori_mittere~Littera_electronica
+ExpandTemplates|Formulas_resolvere
+Export|Exportare~Paginas_exportare
+Fewestrevisions|Paginae_minime_mutatae
+FileDuplicateSearch|Quaerere_fasciculos_duplices~Quaerere_imagines_duplices
+Import|Importare~Paginas_importare
+Invalidateemail|Adfimationem_inscriptionis_electronicae_abrogare
+BlockList|Usores_obstructi
+LinkSearch|Quaerere_nexus_externos
+Listadmins|Magistratus
+Listbots|Automata
+Listfiles|Fasciculi~Imagines
+Listgrouprights|Gregum_usorum_potestates~Iura_gregum
+Listredirects|Redirectiones
+Listusers|Usores
+Lockdb|Basem_datorum_obstruere
+Log|Acta
+Lonelypages|Paginae_non_annexae
+Longpages|Paginae_longae
+MergeHistory|Historias_paginarum_confundere
+MIMEsearch|Quaerere_per_MIME
+Mostcategories|Paginae_plurimis_categoriis
+Mostimages|Fasciculi_maxime_annexi~Imagines_maxime_annexae
+Mostlinked|Paginae_maxime_annexae
+Mostlinkedcategories|Categoriae_maxime_annexae
+Mostlinkedtemplates|Formulae_maxime_annexae
+Mostrevisions|Paginae_plurimum_mutatae
+Movepage|Paginam_movere~Movere
+Mycontributions|Conlationes_meae
+Mypage|Pagina_mea
+Mytalk|Disputatio_mea
+Newimages|Fasciculi_novi~Imagines_novae
+Newpages|Paginae_novae
+Popularpages|Paginae_saepe_monstratae
+Preferences|Praeferentiae
+Prefixindex|Praefixa~Quaerere_per_praefixa
+Protectedpages|Paginae_protectae
+Protectedtitles|Tituli_protecti
+Randompage|Pagina_fortuita
+Randomredirect|Redirectio_fortuita
+Recentchanges|Nuper_mutata~Mutationes_recentes
+Recentchangeslinked|Nuper_mutata_annexorum
+Redirect|Redirectio
+Revisiondelete|Emendationem_delere
+Search|Quaerere
+Shortpages|Paginae_breves
+Specialpages|Paginae_speciales
+Statistics|Census
+Uncategorizedcategories|Categoriae_sine_categoriis
+Uncategorizedimages|Fasciculi_sine_categoriis~Imagines_sine_categoriis
+Uncategorizedpages|Paginae_sine_categoriis
+Uncategorizedtemplates|Formulae_sine_categoriis
+Undelete|Paginam_restituere
+Unlockdb|Basem_datorum_deobstruere
+Unusedcategories|Categoriae_non_in_usu~Categoriae_vacuae
+Unusedimages|Fasciculi_non_in_usu~Imagines_non_in_usu
+Unusedtemplates|Formulae_non_in_usu
+Unwatchedpages|Paginae_incustoditae
+Upload|Fasciculos_onerare~Imagines_onerare
+Userlogin|Conventum_aperire
+Userlogout|Conventum_concludere
+Userrights|Usorum_potestates~Iura_usorum
+Version|Versio
+Wantedcategories|Categoriae_desideratae
+Wantedfiles|Fasciculi_desiderati~Imagines_desideratae
+Wantedpages|Paginae_desideratae~Nexus_fracti
+Wantedtemplates|Formulae_desideratae
+Watchlist|Paginae_custoditae
+Whatlinkshere|Nexus_ad_paginam
+Withoutinterwiki|Paginae_sine_nexibus_ad_linguas_alias~Paginae_sine_nexibus_intervicis
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|dies Solis
+monday|dies Lunae
+tuesday|dies Martis
+wednesday|dies Mercurii
+thursday|dies Iovis
+friday|dies Veneris
+saturday|dies Saturni
+sun|Sol
+mon|Lun
+tue|Mar
+wed|Mer
+thu|Iov
+fri|Ven
+sat|Sat
+january|Ianuarius
+february|Februarius
+march|Martius
+april|Aprilis
+may_long|Maius
+june|Iunius
+july|Iulius
+august|Augustus
+september|September
+october|October
+november|November
+december|December
+january-gen|Ianuarii
+february-gen|Februarii
+march-gen|Martii
+april-gen|Aprilis
+may-gen|Maii
+june-gen|Iunii
+july-gen|Iulii
+august-gen|Augusti
+september-gen|Septembris
+october-gen|Octobris
+november-gen|Novembris
+december-gen|Decembris
+jan|Ian
+feb|Feb
+mar|Mar
+apr|Apr
+may|Mai
+jun|Iun
+jul|Iul
+aug|Aug
+sep|Sep
+oct|Oct
+nov|Nov
+dec|Dec
+toc|Index
+redirectedfrom|(Redirectum de ~{0})
+allpages|Paginae omnes
+prevpage|Pagina superior (~{0})
+nextpage|Pagina proxima (~{0})
+collapsible-collapse|Collabi
+collapsible-expand|Dilatare
+categories|Categoriae
+lastmodifiedat|Ultima mutatio: ~{1}, ~{0}.
+thumbnail-more|Augere
+otherlanguages|Linguis aliis
+blanknamespace|(principale)
+pagecategories|{{PLURAL:~{0}\u007CCategoria\u007CCategoriae}}
+category_header|Paginae in categoria "~{0}"
+subcategories|Subcategoriae
+category-media-header|Media in categoria "~{0}"
+category-empty|''Huic categoriae non sunt paginae vel fasciculi.''
+category-subcat-count|{{PLURAL:~{1}\u007CHuic categoriae est solum una subcategoria.\u007CHuic categoriae {{PLURAL:~{0}\u007Cest haec subcategoria\u007Csunt hae ~{0} subcategoriae}} ex omnino ~{1} subcategoriis.}}
+category-subcat-count-limited|Huic categoriae {{PLURAL:~{0}\u007Cest haec subcategoria\u007Csunt hae ~{0} subcategoriae}}.
+category-article-count|{{PLURAL:~{1}\u007CHuic categoriae est solum una pagina.\u007CHuic categoriae {{PLURAL:~{0}\u007Cest haec pagina\u007Csunt hae ~{0} paginae}} ex omnino ~{1} paginis.}}
+category-article-count-limited|Huic categoriae {{PLURAL:~{0}\u007Cest haec pagina\u007Csunt hae ~{0} paginae}}.
+category-file-count|{{PLURAL:~{1}\u007CHuic categoriae est solum unus fasciculus.\u007CHuic categoriae {{PLURAL:~{0}\u007Cest hic fasciculus\u007Csunt hi ~{0} fasciculi}} ex omnino ~{1} fasciculis.}}
+category-file-count-limited|Huic categoriae {{PLURAL:~{0}\u007Cest hic fasciculus\u007Csunt hi ~{0} fasciculi}}.
+categorytree-member-counts|continet {{PLURAL:~{0}\u007C1 subcategoriam\u007C~{0} subcategorias}}, {{PLURAL:~{1}\u007C1 paginam\u007C~{1} paginas}} et {{PLURAL:~{2}\u007C1 fasciculum\u007C~{2} fasciculos}}
+nextn|{{PLURAL:~{0}\u007C~{0} proxima\u007C~{0} proximae}}
+prevn|{{PLURAL:~{0}\u007C~{0}}} superiores
+listingcontinuesabbrev|cont.
+bold_sample|Litterae pingues
+bold_tip|Litterae pingues
+italic_sample|Textus litteris Italicis scriptus
+italic_tip|Textus litteris Italicis scriptus
+link_sample|Titulum nexere
+link_tip|Nexus internus
+headline_sample|Textus capituli
+headline_tip|Linea capitalis scalae 2
+hidden-category-category|Categoriae celatae
+statistics|Census
+statistics-header-pages|Census paginarum
+statistics-articles|Paginae in spatio nominali principali
+statistics-pages|Paginae
+statistics-pages-desc|Omnes paginae. Hic numerus includit paginas disputationum, redirectiones, etc.
+categorytree|Categoriarum arbor
+categorytree-portlet|Categoriae
+categorytree-legend|Categoriarum arborem monstrare
+categorytree-header|Titulum categoriae inscribe ad categoriam hanc quasi arborem videndum. JavaScript et AJAX necesse sunt. Si navigatrum veterrimum habes vel si JavaScript potestatem non fecisti, hac pagina non uti poteris.
+categorytree-category|Categoria
+categorytree-go|Arborem monstrare
+categorytree-parents|Parentes
+categorytree-mode-categories|modo categoriae
+categorytree-mode-pages|paginae nisi fasciculi
+categorytree-mode-all|omnes paginae
+categorytree-collapse|collabi
+categorytree-expand|dilatare
+categorytree-num-empty|vacua
+categorytree-load|depromere
+categorytree-loading|depromens…
+categorytree-nothing-found|nullum inventum
+categorytree-no-subcategories|nullae subcategoriae
+categorytree-no-parent-categories|nullae supercategoriae
+categorytree-no-pages|nec paginae nec subcategoriae
+categorytree-not-found|Categoria <i>~{0}</i> non inventa
+imagemap_description|De hac imagine
+proofreadpage_image|Fasciculus
+proofreadpage_index|Liber
+proofreadpage_quality0_category|Vacuus
+proofreadpage_quality1_category|Nondum emendata
+proofreadpage_quality2_category|Emendatio difficilis
+proofreadpage_quality3_category|Emendata
+proofreadpage_quality4_category|Bis lecta
+proofreadpage_quality0_message|Haec pagina emendanda non est
+proofreadpage_quality1_message|Haec pagina nondum emendata est
+proofreadpage_quality2_message|Emendatio difficilis
+proofreadpage_quality3_message|Haec pagina emendata est
+proofreadpage_quality4_message|Haec pagina emendata et bis lecta est
+proofreadpage_page_status|Paginae status
+proofreadpage_pages|~{1} {{PLURAL:~{0}\u007Cpagina\u007Cpaginae}}
+proofreadpage_source|Fons
+cite_article_desc| Addet [[Special:Cite\u007Ccitation]] specialem paginam et arcam instrumenti
+cite_article_link|Hanc paginam citare
+tooltip-cite-article|Institutiones de hanc pagina citanda
+cite|Paginam citare
+cite_page|Pagina:
+cite_submit|Citare
+wikieditor-preview-tab|Praevisum
+wikieditor-preview-changes-tab|Mutata
+wikieditor-preview-loading|Depromens...
+wikieditor-previewDialog-tab|Praevisum
+wikieditor-previewDialog-loading|Depromens...
+wikieditor-toolbar-loading|Depromens…
+wikieditor-toolbar-tool-bold|Litterae pingues
+wikieditor-toolbar-tool-bold-example|Textus litteris pinguibus scriptus
+wikieditor-toolbar-tool-italic|Litterae italicae
+wikieditor-toolbar-tool-italic-example|Textus litteris Italicis scriptus
+wikieditor-toolbar-tool-ilink|Nexus internus
+wikieditor-toolbar-tool-ilink-example|Titulus nexus
+wikieditor-toolbar-tool-xlink|Nexus externus (memento praefixi http://)
+wikieditor-toolbar-tool-xlink-example|http://www.example.com titulus nexus externi
+wikieditor-toolbar-tool-link|Nexus
+wikieditor-toolbar-tool-link-title|Nexum addere
+wikieditor-toolbar-tool-link-int|Ad paginam vici
+wikieditor-toolbar-tool-link-insert|Nexum addere
+wikieditor-toolbar-tool-link-int-target-status-exists|Pagina iam est
+wikieditor-toolbar-tool-link-int-target-status-notexists|Pagina non est
+wikieditor-toolbar-tool-link-int-target-status-external|Nexus externus
+wikieditor-toolbar-tool-link-lookslikeinternal-int|Nexus internus
+wikieditor-toolbar-tool-link-lookslikeinternal-ext|Nexus externus
+wikieditor-toolbar-tool-file|Fasciculus in pagina impositus
+wikieditor-toolbar-tool-file-example|Exemplum.jpg
+wikieditor-toolbar-tool-reference|Referentia bibliographica
+wikieditor-toolbar-tool-reference-title|Referentiam bibliographicam addere
+wikieditor-toolbar-tool-signature|Subscriptio tua cum indicatione temporis
+wikieditor-toolbar-section-advanced|Plura
+wikieditor-toolbar-tool-heading-1|Planities 1
+wikieditor-toolbar-tool-big|Magna
+wikieditor-toolbar-tool-big-example|Textus magnus
+wikieditor-toolbar-tool-small|Parva
+wikieditor-toolbar-tool-small-example|Textus parvus
+wikieditor-toolbar-tool-superscript|Superscriptum
+wikieditor-toolbar-tool-superscript-example|Textus superscriptus
+wikieditor-toolbar-tool-subscript|Subscriptum
+wikieditor-toolbar-tool-subscript-example|Textus subscriptus
+wikieditor-toolbar-group-insert|Inserere
+wikieditor-toolbar-tool-gallery|Pinacotheca
+wikieditor-toolbar-tool-gallery-example|~{0}:Exemplum.jpg\u007CDescriptio 1\n~{0}:Exemplum.jpg\u007CDescriptio 2
+wikieditor-toolbar-tool-newline|Nova linea
+wikieditor-toolbar-tool-table|Tabula
+wikieditor-toolbar-section-characters|Characteres speciales
+wikieditor-toolbar-characters-page-latin|Latinum
+wikieditor-toolbar-characters-page-latinextended|Latinum extensum
+wikieditor-toolbar-characters-page-ipa|API
+wikieditor-toolbar-characters-page-symbols|Symbola
+wikieditor-toolbar-characters-page-greek|Graecum
+wikieditor-toolbar-characters-page-cyrillic|Cyrillicum
+wikieditor-toolbar-characters-page-arabic|Arabicum
+wikieditor-toolbar-characters-page-hebrew|Hebraicum
+wikieditor-toolbar-characters-page-telugu|Telugu
+wikieditor-toolbar-section-help|Adiutatum
+wikieditor-toolbar-help-heading-description|Descriptio
+wikieditor-toolbar-help-heading-syntax|Quod scribis
+wikieditor-toolbar-help-heading-result|Quod accipies
+wikieditor-toolbar-help-page-format|Formatio
+wikieditor-toolbar-help-page-link|Nexus
+wikieditor-toolbar-help-page-heading|Tituli
+wikieditor-toolbar-help-page-list|Indices
+wikieditor-toolbar-help-page-file|Fasciculi
+wikieditor-toolbar-help-page-reference|Referentiae bibliographicae
+wikieditor-toolbar-help-page-discussion|Disputatio
+wikieditor-toolbar-help-content-italic-description|Litterae italicae
+wikieditor-toolbar-help-content-italic-syntax|''Textus litteris Italicis scriptus''
+wikieditor-toolbar-help-content-italic-result|<em>Textus litteris Italicis scriptus</em>
+wikieditor-toolbar-help-content-bold-description|Litterae pingues
+wikieditor-toolbar-help-content-bold-syntax|'''Textus litteris pinguibus scriptus'''
+wikieditor-toolbar-help-content-bold-result|<strong>Textus litteris pinguibus scriptus</strong>
+wikieditor-toolbar-help-content-bolditalic-description|Pingues &amp; Italicae
+wikieditor-toolbar-help-content-bolditalic-syntax|'''''Textus litteris pinguibus &amp; italicis scriptus'''''
+wikieditor-toolbar-help-content-bolditalic-result|<strong><em>Textus litteris pinguibus &amp; italicis scriptus</em></strong>
+wikieditor-toolbar-help-content-ilink-description|Nexus internus
+wikieditor-toolbar-help-content-ilink-syntax|[[Titulus paginae\u007CTitulus nexus]]<br />[[Titulus paginae]]
+wikieditor-toolbar-help-content-ilink-result|<a href='#'>Titulus nexus</a><br /><a href='#'>Titulus paginae</a>
+wikieditor-toolbar-help-content-xlink-description|Nexus externus
+wikieditor-toolbar-help-content-xlink-syntax|[http://www.example.org Titulus nexus]<br />[http://www.example.org]<br />http://www.example.org
+wikieditor-toolbar-help-content-xlink-result|<a href='#' class='external'>Titulus nexus</a><br /><a href='#' class='external autonumber'>[1]</a><br /><a href='#' class='external'>http://www.example.org</a>
+wikieditor-toolbar-help-content-heading2-description|Secundi ordinis titulus
+wikieditor-toolbar-help-content-heading2-syntax|== Textus tituli ==
+wikieditor-toolbar-help-content-heading2-result|<h2>Textus tituli</h2>
+wikieditor-toolbar-help-content-heading3-description|Tertii ordinis titulus
+wikieditor-toolbar-help-content-heading3-syntax|=== Textus tituli ===
+wikieditor-toolbar-help-content-heading3-result|<h3>Textus tituli</h3>
+wikieditor-toolbar-help-content-heading4-description|Quarti ordinis titulus
+wikieditor-toolbar-help-content-heading4-syntax|==== Textus tituli ====
+wikieditor-toolbar-help-content-heading4-result|<h4>Textus tituli</h4>
+wikieditor-toolbar-help-content-heading5-description|Quinti ordinis titulus
+wikieditor-toolbar-help-content-heading5-syntax|===== Textus tituli =====
+wikieditor-toolbar-help-content-heading5-result|<h5>Textus tituli</h5>
+wikieditor-toolbar-help-content-ulist-description|Index globosus
+wikieditor-toolbar-help-content-ulist-syntax|* Res indicata<br />* Res indicata
+wikieditor-toolbar-help-content-ulist-result|<ul><li>Res indicata</li><li>Res indicata</li></ul>
+wikieditor-toolbar-help-content-file-description|Fasciculus in pagina impositus
+wikieditor-toolbar-help-content-file-syntax|[[~{0}:Exemplum.png\u007Cthumb\u007CDescriptio fasciculi]]
+wikieditor-toolbar-help-content-file-result|<div style='width:104px;' class='thumbinner'><a title='Descriptio fasciculi' class='image' href='#'><img height='50' width='100' border='0' class='thumbimage' src='~{1}/WikiEditor/modules/images/toolbar/example-image.png' alt=''/></a><div class='thumbcaption'><div class='magnify'><a title='Augere' class='internal' href='#'><img height='11' width='15' alt='' src='~{0}/common/images/magnify-clip.png'/></a></div>Descriptio fasciculi</div></div>
+wikieditor-toolbar-help-content-reference-description|Referentia bibliographica
+wikieditor-toolbar-help-content-reference-syntax|Textus paginae.&lt;ref name="test"&gt;[http://www.example.org Textus nexus], textus additus.&lt;/ref&gt;
+wikieditor-toolbar-help-content-reference-result|Textus paginae.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-rereference-description|Eiusdem referentiae usus additus
+wikieditor-toolbar-help-content-rereference-result|Textus paginae.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-showreferences-description|Referentias bibliographicas monstrare
+wikieditor-toolbar-help-content-showreferences-result|<ol class='references'><li id='cite_note-test-0'><b><a title='' href='#'>^</a></b> <a rel='nofollow' title='http://www.example.org' class='external text' href='#'>Textus nexus</a>, textus additus.</li></ol>
+wikieditor-toolbar-help-content-signaturetimestamp-description|Subscriptio tua cum indicatione temporis
+wikieditor-toolbar-help-content-signaturetimestamp-result|<a href='#' title='{{#special:mypage}}'>Nomen usoris</a> (<a href='#' title='{{#special:mytalk}}'>disputatio</a>) 15:54, 10 Iunii 2009 (UTC)
+wikieditor-toolbar-help-content-signature-description|Subscriptio
+wikieditor-toolbar-help-content-signature-result|<a href='#' title='{{#special:mypage}}'>Nomen usoris</a> (<a href='#' title='{{#special:mytalk}}'>disputatio</a>)
+wm-license-cc-attribution|Attributio
+wm-license-cc-by-1.0-text|Hic fasciculus sub licentia [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/deed.en Attribution 1.0 Generic] praebetur.
+wm-license-cc-free|Tibi licet:
+wm-license-cc-free-to-share-header|communicare
+wm-license-cc-free-to-share-text|copiare, distribuere et committere hoc opus
+wm-license-cc-conditions|His condicionibus:
+wm-license-cc-conditions-attribution-header|attributio
+wikimedialicensetexts-desc|Nuntia permissionis Vicimediana
+wm-license-artwork-artist|Artifex
+wm-license-artwork-title|Titulus
+wm-license-artwork-notes|Notae
+wm-license-book-edition|Editio
+wm-license-book-language|Lingua
+wm-license-book-page-overview|Conspectus paginae
+wm-license-book-place-of-publication|Locus divulgationis
+wm-license-book-series-title|Titulus seriei
+wm-license-book-start-this-book|Hunc librum incipere
+wm-license-book-title|Titulus
+wm-license-book-volume|Volumen
+wm-license-book-year-of-publication|Annus divulgationis
+wm-license-creator-alternative-names|Alia nomina
+wm-license-creator-description|Descriptio
+wm-license-creator-date-of-birth|Dies natalis
+wm-license-creator-date-of-birth-and-death|Dies natalis/mortis
+wm-license-creator-location-of-birth|Locus natalis
+wm-license-creator-location-of-birth-and-death|Locus natalis/mortis
+wm-license-gfdl-1.2-and-later|Licet hoc documentum exscribere vel distribuere vel demutare sub '''[[{{int:wm-license-gfdl-wiki-link}}\u007CGNU Liberarum Litterarum Licentiae]]''' conditionibus in editione 1.2 aut in ulla editione recentiori a [[{{int:wm-license-fsf-wiki-link}}\u007CFundatione Liberarum Programmationis Partium]] publicata; praeterquam Sectiones Immutabiles et Verba Involucra Adversa et Aversa. Licentiae exemplar praesto est in sectione intitulata ''[[{{int:wm-license-gfdl-full-1.2-link}}\u007CGNU Free Documentation License]]''.
+wm-license-information-description|Descriptio
+wm-license-information-description-missing|Hic fasciculus caret descriptione.
+wm-license-information-source|Fons
+wm-license-information-author|Auctor
+wm-license-information-author-missing|Hic fasciculus caret descriptione auctoris.
+wm-license-information-permission|Permissio
+wm-license-information-permission-see-below|Vide infra.
+wm-license-own-work|Opus proprium
+wm-license-pd-usgov-military-air-force-wiki-link|w:la:Civitatum Foederatarum Americae Aeris Exercitus
+wm-license-pd-usgov-military-army-wiki-link|w:la:Exercitus Civitatum Foederatarum
+wm-license-pd-wiki-link|w:la:Dominium publicum
+wm-license-self-multiple-licenses-select|Tibi typum permissionis ligere licet.
+sitesupport|Donationes
+group-rollbacker|Revertores
+group-rollbacker-member|{{GENDER:~{0}\u007Crevertor}}
+grouppage-rollbacker|{{ns:project}}:Revertores
+shared-repo-name-shared|Vicimedia Communia
+wikimedia-copyrightwarning|Confirmando pressorium "{{int:savearticle}}" [https://wikimediafoundation.org/wiki/Terms_of_use conventionem utendi] nostram approbas. Praeterea consentis conlationem tuam sub licentia [https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License CC BY-SA 3.0 License] et [https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_GNU_Free_Documentation_License GFDL] publicari.\n\nEtiam confirmas nexum vel URL contributioni sufficere sub Creative Commons licentia.
+wikimedia-developers|Elaboratores
+tog-underline|Versores linea denotandi:
+tog-hideminor|Celare recensiones minores in indice nuper mutatorum
+tog-hidepatrolled|Redactiones censae inter nuper mutatas celandae
+tog-newpageshidepatrolled|Paginae censae inter nouissime creatas celandae
+tog-extendwatchlist|Indicem paginarum obseruandarum cunctas mutatas praeter nouissimas includere decet
+tog-usenewrc|Indice nuper mutatarum excelsa uti
+tog-numberheadings|Subtituli numeris adornandi
+tog-showtoolbar|Affigere trabem redigentem
+tog-editondblclick|Percussus duplex redactionem hortetur
+tog-editsectiononrightclick|Paginarum segmenta dextero percussu in titulis redigenda
+tog-watchcreations|Paginas quas creo et fasciculos quos impono in paginarum observatarum indicem addere
+tog-watchdefault|Paginas et fasciculos quos recenseo in paginarum observatarum indicem addere
+tog-watchmoves|Paginas et fasciculos quos moveo in paginarum observatarum indicem addere
+tog-watchdeletion|Paginas et fasciculos quos deleo in paginarum observatarum indicem addere
+tog-minordefault|Notare omnes recensiones quasi minores
+tog-previewontop|Monstrare praevisum ante capsam recensiti, non post ipsam
+tog-previewonfirst|Praevisum monstrare recensione incipiente
+tog-enotifwatchlistpages|Mittere mihi litteras electronicas si pagina a me observata vel fasciculus a me observatus mutatur
+tog-enotifusertalkpages|Mittere mihi litteras electronicas si mea disputatio mutatur
+tog-enotifminoredits|Mittere mihi litteras electronicas etiam pro recensionibus minoribus
+tog-enotifrevealaddr|Monstrare inscriptio mea electronica in nuntiis notificantibus
+tog-shownumberswatching|Numerum usorum observantium monstrare
+tog-oldsig|Subscriptio ad tempus adhibita:
+tog-fancysig|Subscriptio vicitext (sine nexu automatico)
+tog-uselivepreview|Praevisum viventem adhibere (experimentalis)
+tog-forceeditsummary|Si recensionem non summatim descripsero, me roga si continuare velim
+tog-watchlisthideown|Celare recensiones meas in paginarum observatarum indice
+tog-watchlisthidebots|Celare recensiones automatarias in paginarum observatarum indice
+tog-watchlisthideminor|Celare recensiones minores in paginarum observatarum indice
+tog-watchlisthideliu|Celare recensiones usorum notorum in paginarum observatarum indice
+tog-watchlisthideanons|Celare recensiones usorum ignotorum in paginarum observatarum indice
+tog-watchlisthidepatrolled|Recensiones vigilatae paginas custoditas celare
+tog-ccmeonemails|Mitte mihi transcriptiones litterarum quas ad alios usores mitto
+tog-diffonly|Noli monstrare contenta paginae infra dissimilitudinem
+tog-showhiddencats|Categorias celatas monstrare
+tog-norollbackdiff|Noli monstrare dissimilitudinem post reversionem paginae
+underline-always|Semper
+underline-never|Numquam
+underline-default|Defalta navigatri interretialis
+january-date|~{0} Ianuarii
+february-date|~{0} Februarii
+march-date|~{0} Martii
+april-date|~{0} Aprilis
+may-date|~{0} Maii
+june-date|~{0} Iunii
+july-date|~{0} Iulii
+august-date|~{0} Augusti
+september-date|~{0} Septembris
+october-date|~{0} Octobris
+november-date|~{0} Novembris
+december-date|~{0} Decembris
+hidden-categories|{{PLURAL:~{0}\u007CCategoria celata\u007CCategoriae celatae}}
+index-category|Paginae quae in indice sunt
+noindex-category|Paginae quae non in indice sunt
+broken-file-category|Paginae cum nexibus ad fasciculos ruptis
+about|De hoc
+article|Pagina contenta continens
+newwindow|(in fenestra nova aperietur)
+cancel|Abrogare
+moredotdotdot|Plus...
+morenotlisted|Hic index mancus est.
+mypage|Pagina
+mytalk|Disputatio
+anontalk|Disputatio huius IP
+navigation|Navigatio
+and| et
+qbfind|Invenire
+qbbrowse|Perspicere
+qbedit|Recensere
+qbpageoptions|Optiones paginae
+qbmyoptions|Paginae meae
+faq|Quaestiones frequentes
+faqpage|Project:Quaestiones frequentes
+actions|Actiones
+namespaces|Spatia nominalia
+variants|Variantes
+errorpagetitle|Erratum
+returnto|Redire ad ~{0}.
+tagline|E {{grammar:ablative\u007C{{SITENAME}}}}
+help|Adiutatum
+search|Quaerere
+searchbutton|Quaerere
+go|Ire
+searcharticle|Ire
+history|Historia paginae
+history_short|Historia
+updatedmarker|mutata postquam vidi
+printableversion|Forma impressibilis
+permalink|Nexus perpetuus
+print|Imprimere
+view|Legere
+view-foreign|Legere apud {{grammar:accusative\u007C~{0}}}
+edit|Recensere
+create|Creare
+editthispage|Recensere hanc paginam
+create-this-page|Creare hanc paginam
+delete|Delere
+deletethispage|Delere hanc paginam
+undeletethispage|Hanc paginam restituere
+undelete_short|Restituere {{PLURAL:~{0}\u007Cunam emendationem\u007C~{0} emendationes}}
+viewdeleted_short|Inspicere {{PLURAL:~{0}\u007Cunam emendationem deletam\u007C~{0} emendationes deletas}}
+protect|Protegere
+protect_change|mutare
+protectthispage|Protegere hanc paginam
+unprotect|Protectionem mutare
+unprotectthispage|Protectionem huius paginae mutare
+newpage|Nova pagina
+talkpage|Disputare hanc paginam
+talkpagelinktext|Disputatio
+specialpage|Pagina specialis
+personaltools|Instrumenta personalia
+articlepage|Videre rem
+talk|Disputatio
+views|Visae
+toolbox|Arca ferramentorum
+userpage|Videre paginam usoris
+projectpage|Videre consilium
+imagepage|Videre paginam fasciculi
+mediawikipage|Videre nuntium
+templatepage|Videre formulam
+viewhelppage|Videre auxilium
+categorypage|Videre categoriam
+viewtalkpage|Videre disputationem
+redirectpagesub|Pagina redirectionis
+viewcount|Haec pagina iam vista est {{PLURAL:~{0}\u007Csemel\u007C~{0} vices}}.
+protectedpage|Pagina protecta
+jumpto|Salire ad:
+jumptonavigation|navigationem
+jumptosearch|quaerere
+pool-errorunknown|Error ignotus
+aboutsite|De {{grammar:ablative\u007C{{SITENAME}}}}
+aboutpage|Project:De {{GRAMMAR:ablative\u007C{{SITENAME}}}}
+copyright|Res ad manum sub ~{0} nisi aliter denuntiatum est.
+copyrightpage|{{ns:project}}:Verba privata
+currentevents|Novissima
+currentevents-url|Project:Novissima
+disclaimers|Repudiationes
+disclaimerpage|Project:Repudiationes
+edithelp|Opes recensendi
+mainpage|Pagina prima
+mainpage-description|Pagina prima
+policy-url|Project:Consilium
+portal|Porta communis
+portal-url|Project:Porta communis
+privacy|Consilium de secreto
+privacypage|Project:Consilium de secreto
+badaccess|Permissus erratum
+badaccess-group0|Non licet tibi actum quod petivisti agere.
+badaccess-groups|Actum quod petivisti solum potest agi ab usoribus ex {{PLURAL:~{1}\u007Cgrege\u007Cuno gregum}}: ~{0}.
+versionrequired|MediaWiki versio ~{0} necesse
+versionrequiredtext|MediaWiki versio ~{0} necesse est ad hanc paginam videndum.\nVide [[Special:Version\u007Cpaginam versionis]].
+ok|Age
+retrievedfrom|Receptum de "~{0}"
+youhavenewmessages|Habes ~{0} (~{1}).
+youhavenewmessagesfromusers|Habes ~{0} ab {{PLURAL:~{2}\u007Cuno usore alio\u007Cusoribus ~{2}}} (~{1}).
+youhavenewmessagesmanyusers|Habes ~{0} a multis usoribus (~{1}).
+newmessageslinkplural|{{PLURAL:~{0}\u007Cnuntium novum\u007C999=nuntia nova}}
+newmessagesdifflinkplural|{{PLURAL:~{0}\u007Cdissimilitudo\u007C999=dissimilitudines}} post mutationem ultimam
+youhavenewmessagesmulti|Habes nuntia nova in ~{0}
+editsection|recensere
+editold|recensere
+viewsourceold|fontem inspicere
+editlink|recensere
+viewsourcelink|fontem inspicere
+editsectionhint|Recensere partem: ~{0}
+showtoc|monstrare
+hidetoc|celare
+thisisdeleted|Videre aut restituere ~{0}?
+viewdeleted|Visne conspicere ~{0}?
+restorelink|{{PLURAL:~{0}\u007Cunam emendationem deletam\u007C~{0} emendationes deletas}}
+feedlinks|Fluxus:
+feed-invalid|Typus subscriptionis fluxus invalidus.
+feed-unavailable|Fluxus syndicationis non praestiti
+site-rss-feed|~{0} Fluxus RSS
+site-atom-feed|~{0} Fluxus Atom
+page-rss-feed|"~{0}" Fluxus RSS
+page-atom-feed|"~{0}" Fluxus Atom
+red-link-title|~{0} (non est haec pagina)
+nstab-main|Res
+nstab-user|Pagina usoris
+nstab-media|Media
+nstab-special|Pagina specialis
+nstab-project|Consilium
+nstab-image|Fasciculus
+nstab-mediawiki|Nuntium
+nstab-template|Formula
+nstab-help|Auxilium
+nstab-category|Categoria
+nosuchaction|Actio non est
+nosuchactiontext|Actio in URL designata non agnoscitur a hoc vici.
+nosuchspecialpage|Pagina specialis non est
+nospecialpagetext|<strong>Paginam specialem invalidam petivisti.</strong>\n\nPro indice paginarum specialum validarum, vide [[Special:SpecialPages\u007C{{int:specialpages}}]].
+error|Erratum
+databaseerror|Erratum in basi datorum
+readonly|Basis datorum obstructa
+missingarticle-rev|(numerus emendationis: ~{0})
+missingarticle-diff|(Diss: ~{0}, ~{1})
+internalerror|Erratum internum
+internalerror_info|Erratum internum: ~{0}
+filecopyerror|Non potuit fasciculus "~{0}" ad "~{1}" transcribi.
+filerenameerror|Transnominare "~{0}" in "~{1}" non contigit.
+filedeleteerror|Non potuit deleri fasciculus "~{0}".
+directorycreateerror|Non potuit directorium "~{0}" creari.
+filenotfound|Non potuit fasciculus "~{0}" inveniri.
+unexpected|Valor improvisus: "~{0}"="~{1}".
+badarticleerror|Haec actio non perfici potest in hac pagina.
+cannotdelete|Pagina vel fasciculus "~{0}" deleri non potuit.\nFortasse usor alius iam deleverat.
+cannotdelete-title|Paginam "~{0}" delere non contigit
+badtitle|Titulus malus
+badtitletext|Nomen paginae quaestae fuit invalidum, vacuum, aut praeverbium interlingualem vel intervicialem habuit. Fortasse insunt una aut plus litterarum quae in titulis non possunt inscribier.
+viewsource|Fontem inspicere
+viewsource-title|Fontem paginae ~{0} inspicere
+actionthrottled|Actio strangulata
+protectedpagetext|Haec pagina protecta est, ut emendationes prohibeantur.
+viewsourcetext|Fontem videas et exscribeas:
+protectedinterface|Haec pagina dat textum interfaciei pro logiciali, et est protecta ad vandalismum vetandum.
+editinginterface|'''Caveat censor:''' Emendas iam paginam quae textum interfaciei logicialem dat. Mutationes vultum {{grammar:genitive\u007C{{SITENAME}}}} omnibus usoribus afficient. In nuntia MediaWiki vertendo, quaesumus te uti [//translatewiki.net/wiki/Main_Page?setlang=la translatewiki.net].
+namespaceprotected|Tibi non licet paginas spatii nominalis '''~{0}''' recensere.
+ns-specialprotected|Paginae speciales recenseri non possunt.
+titleprotected|Hic titulus protectus est ab usore [[User:~{0}\u007C~{0}]] ne creetur.\nRatio data est "''~{1}''".
+exception-nologin|Conventum non apertum
+exception-nologin-text|Ad hanc paginam recensendam conventum aperire oportet
+virus-badscanner|Configuratio mala: scrutator virorum ignotus: ''~{0}''
+virus-scanfailed|scrutinium fefellit (codex ~{0})
+virus-unknownscanner|antivirus incognitus:
+logouttext|'''Conventum tuum conclusum est.'''\n\nNota bene paginas fortasse videantur quasi tuum conventum esset apertum, priusquam navigatrum purgaveris.
+welcomeuser|Salve, ~{0}!
+welcomecreation-msg|Ratio tua creata est.\nNoli oblivisci [[Special:Preferences\u007Cpraeferentias]] tuas apud {{grammar:accusative\u007C{{SITENAME}}}} mutare.
+yourname|Nomen usoris:
+userlogin-yourname|Nomen usoris
+userlogin-yourname-ph|Nomen usoris tuum inscribe
+createacct-another-username-ph|Nomen usoris inscribe
+yourpassword|Tessera:
+userlogin-yourpassword|Tessera
+userlogin-yourpassword-ph|Tesseram tuam inscribe
+createacct-yourpassword-ph|Tesseram inscribe
+yourpasswordagain|Tesseram adfirmare:
+createacct-yourpasswordagain|Tesseram confirmare
+createacct-yourpasswordagain-ph|Tesseram iterum inscribe
+remembermypassword|Tesseram meam hoc in navigatro inter conventa memento ({{PLURAL:~{0}\u007Cdie\u007Cdiebus}} ~{0} tenus)
+yourdomainname|Regnum tuum:
+login|Conventum aperire
+nav-login-createaccount|Conventum aperire / conventum creare
+userlogin|Conventum aperire / conventum creare
+userloginnocreate|Conventum aperire
+logout|Conventum concludere
+userlogout|Conventum concludere
+notloggedin|Conventum non est apertum
+userlogin-noaccount|Num rationem non habes?
+nologin|Num rationem non habes? ~{0}.
+nologinlink|Eam crea
+createaccount|Rationem novam creare
+gotaccount|Habesne iam rationem? '''~{0}'''.
+gotaccountlink|Conventum aperi
+userlogin-resetlink|Num tesserae tuae oblitus es?
+userlogin-resetpassword-link|Num tesserae oblivisceris?
+createacct-emailrequired|Inscriptio electronica
+createacct-emailoptional|Inscriptio electronica (non necesse)
+createacct-email-ph|Inscriptionem electronicam tuam inscribe
+createacct-another-email-ph|Inscriptionem electronicam inscribe
+createaccountmail|Use a temporary random password and send it to the email address specified below
+createacct-realname|Nomen rectum (non necesse)
+createaccountreason|Causa:
+createacct-reason|Causa
+createacct-reason-ph|Cur aliam rationem creas
+createacct-imgcaptcha-ph|Textum quem supra vidis inscribe
+createacct-submit|Rationem tuam creare
+createacct-another-submit|Aliam rationem creare
+createacct-benefit-body1|{{PLURAL:~{0}\u007Crecensio\u007Crecensiones}}
+createacct-benefit-body2|{{PLURAL:~{0}\u007Cpagina\u007Cpaginae}}
+badretype|Tesserae quas scripsisti inter se non congruunt.
+userexists|Nomen usoris quod selegisti iam est.\nNomen usoris alium selige.
+loginerror|Error factus est in aperiendo conventum
+createacct-error|Error in ratione creanda
+createaccounterror|Rationem creare non potuit: ~{0}
+nocookiesnew|Ratio usoris creata est, sed conventum non apertum est. {{SITENAME}} ''Cookies'' utitur in usorum conventa aperiendo. Cookies tua debiles sunt. Eis potestatem fac, tum conventum aperi cum nomine usoris tesseraque tua nova.
+nocookieslogin|{{SITENAME}} ''Cookies'' utitur in usorum conventa aperiendo. Cookies tua debiles sunt. Eis potestatem fac, tum conare denuo.
+noname|Nomen usoris ratum non designavisti.
+loginsuccesstitle|Conventum prospere apertum est
+loginsuccess|'''Apud {{grammar:accusative\u007C{{SITENAME}}}} agnosceris nomine "~{0}".'''
+nosuchuser|Usor "~{0}" non est.\nConfirma orthographiam (cave litteras maiusculas minusculasque), aut [[Special:UserLogin/signup\u007Cnovam rationem crea]].
+nosuchusershort|Usor "~{0}" non est.\nConfirma orthographiam.
+nouserspecified|Nomen usoris indicare debes.
+wrongpassword|Tessera quam scripsisti non constat. Conare denuo.
+wrongpasswordempty|Tesseram vacuam scripsisti. Conare denuo.
+mailmypassword|Tesseram novam per litteras electronicas petere
+passwordremindertitle|Nova tessera apud {{grammar:accusative\u007C{{SITENAME}}}}
+passwordremindertext|Aliquis (tu probabiliter, ex loco IP ~{0})\ntesseram novam petivit pro {{grammar:ablative\u007C{{SITENAME}}}} (~{3}).\nTessera temporaria usoris "~{1}" creata est: "~{2}".\nSi vis, conventum aperias et statim tesseram tuam mutes.\nTessera temporaria exibit {{PLURAL:~{4}\u007Cunam diem\u007C~{4} dies}}.\n\nSi non ipse hanc petitionem fecisti, aut si tesserae tuae\nmeministi et etiam nolis eam mutare, potes hunc nuntium\nignorare, et tessera seni uti continuare.
+noemail|Nulla inscriptio electronica invenitur per usorem "~{0}".
+mailerror|Error in litteras electronicas inmittendas: ~{0}
+acct_creation_throttle_hit|Ex loco IP tuo, die proximo iam {{PLURAL:~{0}\u007Cuna ratio creata est\u007Crationes ~{0} creatae sunt}}.\nPlurimas non licet creare. Ergo, ex hoc loco IP rationes plurimas hodie creari non possunt.
+emailauthenticated|Tua inscriptio electronica recognita est ~{2}, ~{1}.
+emailconfirmlink|Inscriptionem tuam electronicam adfirmare
+emaildisabled|Huic paginae litteras electronicas mittere non licet.
+accountcreated|Ratio creata
+accountcreatedtext|Ratio pro usore [[{{ns:User}}:~{0}\u007C~{0}]] ([[{{ns:User talk}}:~{0}\u007Cdisputatio]]) creata est.
+createaccount-title|Ratio creata apud {{grammar:accusative\u007C{{SITENAME}}}}
+createaccount-text|Aliquis creavit rationem pro inscriptione electronica tua apud {{grammar:accusative\u007C{{SITENAME}}}} (~{3}). Nomen usoris est "~{1}" et tessera est "~{2}". Conventum aperias et statim tesseram tuam mutes.\n\nHunc nuntium ignorare potes, si nolis hac ratione uti.
+login-abort-generic|Conventum aperire non contigit - Desitum
+loginlanguagelabel|Lingua: ~{0}
+pt-login|Conventum aperire
+pt-login-button|Conventum aperire
+pt-createaccount|Conventum creare
+pt-userlogout|Conventum concludere
+changepassword|Tesseram mutare
+resetpass_header|Tesseram rationis mutare
+oldpassword|Tessera vetus:
+newpassword|Tessera nova:
+retypenew|Adfirmare tesseram novam:
+resetpass_submit|Tesseram mutare et conventum aperire
+changepassword-success|Tessera tua prospere mutata est.
+resetpass_forbidden|Tesserae mutari non possunt
+resetpass-no-info|Necesse est conventum aperire ad hanc paginam adhibendum.
+resetpass-submit-loggedin|Tesseram mutare
+resetpass-submit-cancel|Dimittere
+resetpass-temp-password|Tessera temporaria:
+passwordreset-username|Nomen usoris:
+passwordreset-email|Inscriptio electronica:
+passwordreset-emailelement|Nomen usoris: ~{0}\nMomentarius Tessera: ~{1}
+changeemail-none|(nulla)
+changeemail-submit|Inscriptionem electronicam mutare
+extlink_sample|http://www.example.com titulus nexus externi
+extlink_tip|Nexus externus (memento praefixi http://)
+nowiki_sample|Adde textum (sine indiciis)
+nowiki_tip|Indicia neglige
+image_sample|Exemplum.jpg
+image_tip|Fasciculus in pagina impositus
+media_sample|Exemplum.ogg
+media_tip|Nexus ad fasciculum
+sig_tip|Subscriptio tua cum indicatione temporis
+hr_tip|Linea horizontalis (noli saepe uti)
+summary|Summarium:
+subject|Res/titulus:
+minoredit|Haec est recensio minor
+watchthis|Observare hanc paginam
+savearticle|Servare hanc rem
+preview|Praevidere
+showpreview|Monstrare praevisum
+showdiff|Mutata ostendere
+anoneditwarning|'''Monitio:''' Conventum tuum non apertum. Locus IP tuus in historia huius paginae notabitur.
+anonpreviewwarning|''Conventum tuum non apertum. Si servas, locus IP tuus in historia huius paginae notabitur.''
+missingcommenttext|Sententiam subter inscribe.
+summary-preview|Praevisum summarii:
+subject-preview|Praevisum rei/tituli:
+blockedtitle|Usor obstructus est
+blockedtext|'''Nomen usoris aut locus IP tuus obstructus est''' a magistratu ~{0}.\n\nRatio data est: ''~{1}''.\n\n* Initium obstructionis: ~{7}\n* Finis obstructionis: ~{5}\n* Obstructus destinatus: ~{6}\n\nPotes ad ~{0} aut [[{{MediaWiki:Grouppage-sysop}}\u007Cmagistratum]] alium nuntium mittere ad impedimentum disputandum.\nNota bene te non posse proprietate "Litteras electronicas usori mittere" uti, nisi tibi est inscriptio electronica confirmata apud [[Special:Preferences\u007Cpraeferentias usoris tuas]] vel si tibi etiam litterae electronicae obstructi sunt.\nLocus IP tuus temporarius est ~{2}, et numerus obstructionis est #~{4}. Quaesumus te eos scripturum si quaestiones ullas roges.
+autoblockedtext|Locus IP tuus automatice obstructus est quia usor alius, qui a magistratu ~{0} obstructus est, eum adhiberat.\nRatio data est:\n\n:''~{1}''\n\n* Initium obstructionis: ~{7}\n* Finis obstructionis: ~{5}\n* Obstructus destinatus: ~{6}\n\nPotes ad ~{0} aut [[{{MediaWiki:Grouppage-sysop}}\u007Cmagistratum]] alium nuntium mittere ad impedimentum disputandum.\n\nNota bene te non posse proprietate "Litteras electronicas usori mittere" uti, nisi tibi est inscriptio electronica confirmata apud [[Special:Preferences\u007Cpraeferentias usoris tuas]].\n\nLocus IP tuus temporarius ~{2} est et numerus obstructionis tuus est #~{4}. Quaesumus te eos scripturum si quaestiones ullas roges.
+blockednoreason|nulla causa data
+whitelistedittext|Necesse est tibi ~{0} priusquam paginas recenseas.
+confirmedittext|Tua inscriptio electronica est adfirmanda priusquam paginas recenseas. Quaesumus eam selige et adfirma per tuas [[Special:Preferences\u007Cpraeferentias]].
+nosuchsectiontitle|Haec pars inveniri non potest
+nosuchsectiontext|Partem inexistentem recensere conaris.\nFortasse aliquis hanc partem movit vel delevit.
+loginreqtitle|Conventum aperiendum
+loginreqlink|conventum aperire
+loginreqpagetext|Necesse est tibi ~{0} priusquam paginas alias legas.
+accmailtitle|Tessera missa est.
+accmailtext|Tessera nova usoris [[User talk:~{0}\u007C~{0}]] ad ~{1} missa est. Convento aperto, tessera hic potest mutari: ''[[Special:ChangePassword\u007Ctesseram mutare]]''.
+newarticle|(Nova)
+newarticletext|Per nexum progressus es ad paginam quae nondum exsistit.\nNovam paginam si vis creare, in capsam infra praebitam scribe.\n(Vide [~{0} paginam auxilii] si plura cognoscere vis.)\nSi hic es propter errorem, solum '''Retrorsum''' in navigatro tuo preme.
+anontalkpagetext|----''Haec est pagina disputationis usoris anonymi, solum a loco IP suo noti. Memento locos IP aliquando mutaturos, et a usoribus multis fortasse adhibitos. Si es usor ignotus, et tibi querulae sine causa datae sunt, conventum [[Special:UserLogin/signup\u007Ccrea]] vel [[Special:UserLogin\u007Caperi]] ad confusionem futuram evitendam.''
+noarticletext|Hac in pagina non sunt litterae.\nPotes [[Special:Search/{{PAGENAME}}\u007Chanc rem in aliis paginis quaerere]],\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} acta huius paginae videre]\naut [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} hanc paginam creare]</span>.
+noarticletext-nopermission|Hac in pagina non sunt litterae.\nPotes [[Special:Search/{{PAGENAME}}\u007Chanc rem in aliis paginis quaerere]] aut <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} acta huius paginae videre], sed tibi non licet hanc paginam creare.
+userpage-userdoesnotexist|Usor "<nowiki>~{0}</nowiki>" non est. Visne re vera hanc paginam creare vel recensere?
+updated|(Novata)
+note|'''Nota:'''
+previewnote|'''Memento hanc paginam solum praevisam esse, neque iam servatam!'''
+editing|Recensio paginae "~{0}"
+creating|Creans ~{0}
+editingsection|Recensens ~{0} (partem)
+editingcomment|Recensens ~{0} (nova pars)
+editconflict|Contentio recensionis: ~{0}
+explainconflict|Alius hanc paginam mutavit postquam eadem recensere incipiebas.\nCapsa superior paginae verba recentissima continet.\nMutationes tuae in capsa inferiore monstrantur.\nMutationes tuae in verba superiora adiungare debes.\n'''Solum''' verba capsae superioris servabuntur quando "{{int:savearticle}}" premes.
+yourtext|Sententia tua
+storedversion|Emendatio recentissima
+nonunicodebrowser|'''CAVETO: Navigatorium retiale tuum systemati UNICODE morem non gerit. Modum habemus quo commentationes sine damno recenseas: litterae non-ASCII in capsa sub veste hexadecimali ostendentur.'''
+editingold|'''MONITIO: Emendationem obsoletam huius paginae mutas.\nSi eam servaveris, omnes mutationes recentiores obrogatae peribunt!'''
+yourdiff|Dissimilitudo
+copyrightwarning|Nota bene omnia contributa divulgari sub ''~{1}'' (vide singula apud ~{0}).\nNisi vis verba tua crudelissime recenseri, mutari, et ad libidinem redistribui, noli ea submittere.<br />\nNobis etiam spondes te esse ipsum horum verborum scriptorem primum, aut ex opere in "dominio publico" exscripsisse.\n'''NOLI OPERIBUS SUB IURE DIVULGANDI UTI SINE POTESTATE!'''
+copyrightwarning2|Nota bene omnia contributa apud {{grammar:accusative\u007C{{SITENAME}}}} ab aliis recenseri, mutari vel removi posse.\nNisi vis verba tua crudelissime recenseri, noli ea submittere.<br />\nNobis etiam spondes te esse ipsum horum verborum scriptorem primum, aut ex opere in "dominio publico" vel ex libere fonte simili exscripsisse (vide singula apud ~{0}).\n'''NOLI OPERIBUS SUB IURE DIVULGANDI UTI SINE POTESTATE!'''
+protectedpagewarning|'''CAVE: Haec pagina protecta est ut magistratus soli eam recenseant.'''
+templatesused|{{PLURAL:~{0}\u007CFormula hac in pagina adhibita:\u007CFormulae hac in pagina adhibitae:}}
+templatesusedpreview|{{PLURAL:~{0}\u007CFormula hoc in praeviso adhibita:\u007CFormulae hoc in praeviso adhibitae:}}
+templatesusedsection|{{PLURAL:~{0}\u007CFormula hac in parte adhibita:\u007CFormulae hac in parte adhibitae:}}
+template-protected|(protecta)
+template-semiprotected|(semi-protecta)
+hiddencategories|Haec pagina ad {{PLURAL:~{0}\u007Cunam categoriam celatam\u007C~{0} categorias celatas}} pertinet:
+nocreate-loggedin|Tibi non licet paginas novas creare.
+sectioneditnotsupported-title|Recensio partis non praebetur
+permissionserrors|Error permissionis
+permissionserrorstext-withaction|Tibi non licet ~{1}, ex {{PLURAL:~{0}\u007Cratione\u007Crationibus}}:
+recreate-moveddeleted-warn|'''Cave: paginam quae antea iam deleta est creas.'''\n\nTibi oportet meditari utrum hanc paginam creare tamen convenit. Commodule notatio paginarum deletarum motarumque hic datur:
+moveddeleted-notice|Haec pagina deleta est.\nCommodule notatio paginarum deletarum motarumque huius paginae subter datur.
+log-fulllog|Inspicere acta plenissima
+edit-hook-aborted|Recensio a hamo abrogata est.\nHamus nullam causam dedit.
+edit-gone-missing|Non potui paginam modificare.\nHaec pagina deleta esse videtur.
+edit-conflict|Contentio recensionis.
+edit-no-change|Recensio tua non servata est, quia contenta paginae non mutavisti.
+postedit-confirmation-created|Pagina creata est.
+postedit-confirmation-restored|Pagina restituta est.
+postedit-confirmation-saved|Recensio tua servata est.
+edit-already-exists|Non potui paginam novam creare\nquia haec pagina iam est.
+content-model-wikitext|vicitextum
+parser-template-loop-warning|Ansa formulae detecta: [[~{0}]]
+undo-norev|Recensio abrogari non potuit quia non est aut deleta est.
+undo-summary|Abrogans recensionem ~{0} ab usore [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007CDisputatio]])
+cantcreateaccounttitle|Ratio creari non potest
+cantcreateaccount-text|Creatio rationum ab hoc loco IP ('''~{0}''') obstructa est ab usore [[User:~{2}\u007C~{2}]].\n\nIlle hanc causam dedit: ''~{1}''
+viewpagelogs|Vide acta huius paginae
+nohistory|Huic paginae non est historia.
+currentrev|Emendatio recentissima
+currentrev-asof|Emendatio recentissima ex ~{0}
+revisionasof|Emendatio ex ~{0}
+revision-info|Emendatio ex ~{0} ab ~{1}~{6}
+previousrevision|← Emendatio senior
+nextrevision|Emendatio novior →
+currentrevisionlink|Emendatio currens
+cur|nov
+next|seq
+last|prox
+page_first|prim
+page_last|ult
+histlegend|Selige pro dissimilitudine: indica emendationes in botones radiales et "intrare" in claviatura vel "comparatio" imprime ut conferas.<br />\nTitulus: '''({{int:cur}})''' = dissimilis ab emendatione novissima,\n'''({{int:last}})''' = dissimilis ab emendatione proxima, '''{{int:minoreditletter}}''' = recensio minor.
+history-fieldset-title|Quaerere in paginae historia
+history-show-deleted|Solum recensiones deletas monstrare
+histfirst|veterrima
+histlast|novissima
+historysize|({{PLURAL:~{0}\u007C1 octetus\u007C~{0} octeti}})
+historyempty|(vacua)
+history-feed-title|Historia
+history-feed-description|Historia emendationum huius paginae
+history-feed-item-nocomment|~{0} ad ~{1}
+rev-deleted-comment|(summarium celatum)
+rev-deleted-user|(nomen usoris celatum est)
+rev-deleted-event|(perscriptio celata)
+rev-delundel|monstrare/celare
+rev-showdeleted|monstrare
+revisiondelete|Emendationem delere
+revdelete-nooldid-title|Emendatio-scopus invalida
+revdelete-show-file-submit|Sic
+revdelete-selected-text|{{PLURAL:~{0}\u007CEmendatio selecta\u007CEmendationes selectae}} paginae [[:~{1}]]:
+revdelete-selected-file|{{PLURAL:~{0}\u007CEmendatio selecta\u007CEmendationes selectae}} fasciculi [[:~{1}]]:
+revdelete-legend|Modificare cohibitiones visibilitatis
+revdelete-hide-text|Textus emendationis
+revdelete-hide-image|Celare contentum fasciculi
+revdelete-hide-comment|Summarium emendationis
+revdelete-hide-user|Nomen usoris/locus IP
+revdelete-radio-same|non mutare
+revdelete-radio-set|Celare
+revdelete-radio-unset|Visibiles/visibilia
+revdelete-log|Causa:
+revdel-restore|visibilitatem mutare
+pagehist|Historia paginae
+deletedhist|Historia deleta
+revdelete-otherreason|Causa alia vel explicatio:
+revdelete-reasonotherlist|Causa alia
+revdelete-edit-reasonlist|Causas deletionum recensere
+revdelete-offender|Auctor emendationis:
+suppressionlog|Acta suppressionum
+mergehistory|Historias paginarum confundere
+mergehistory-box|Emendationes duarum paginarum confundere:
+mergehistory-from|Pagina imponenda:
+mergehistory-into|Pagina petita:
+mergehistory-list|Historia recensionum confusibilis
+mergehistory-go|Monstrare recensiones confusibiles
+mergehistory-submit|Confundere emendationes
+mergehistory-empty|Nullae emendationes confusibiles.
+mergehistory-autocomment|confundavit [[:~{0}]] cum [[:~{1}]]
+mergehistory-comment|confundavit [[:~{0}]] cum [[:~{1}]]: ~{2}
+mergehistory-reason|Causa:
+mergelog|Acta confundendi
+revertmerge|Inconfundere
+history-title|~{0}: Historia paginae
+lineno|Linea ~{0}:
+compareselectedversions|Conferre emendationes selectas
+showhideselectedversions|Monstrare/celare emendationes selectas
+editundo|abrogare
+diff-empty|(Nulla dissimilitudo)
+searchresults|Eventum investigationis
+searchresults-title|Responsa de "~{0}"
+titlematches|Exaequata indicibus rerum
+textmatches|Textus paginarum adaequat
+notextmatches|Nihil verbis quaesitis congruit
+prevn-title|{{PLURAL:~{0}\u007CEventus prior\u007CEventus priores}} ~{0}
+nextn-title|{{PLURAL:~{0}\u007CEventus proximus\u007CEventus proximi}} ~{0}
+shown-title|Monstrare ~{0} {{PLURAL:~{0}\u007Ceventum\u007Ceventus}} per paginam
+viewprevnext|Videre (~{0} {{int:pipe-separator}} ~{1}) (~{2}).
+searchmenu-exists|'''Iam est pagina "[[:~{0}]]"'''
+searchmenu-new|'''Creare paginam "[[:~{0}]]"'''
+searchprofile-articles|Paginae contentorum
+searchprofile-images|Multimedia
+searchprofile-everything|Omnia
+searchprofile-advanced|Callidissime
+searchprofile-articles-tooltip|Quaerere in ~{0}
+searchprofile-images-tooltip|Fasciculos quaerere
+searchprofile-everything-tooltip|Omnia perscrutari (etiam paginae disputationis)
+searchprofile-advanced-tooltip|In spatiis nominalibus accommotis quaerere
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 verbum\u007C~{1} verba}})
+search-redirect|(redirectio ~{0})
+search-section|(pars ~{0})
+search-suggest|Nonne dicere voluisti: ~{0}
+search-interwiki-caption|Alia incepta
+search-interwiki-default|~{0} eventus:
+search-interwiki-more|(plus)
+search-relatedarticle|Relata
+searchrelated|relata
+searchall|omnia
+showingresults|Subter monstrans {{PLURAL:~{0}\u007C'''1''' eventu\u007C'''~{0}''' eventibus}} tenus incipiens ab #'''~{1}'''.
+search-nonefound|Nullae paginae quaesitionem tuam adaequant.
+powersearch-legend|Quaerere callidissime
+powersearch-ns|Quaerere in spatiis nominalibus:
+powersearch-togglelabel|Selegere:
+powersearch-toggleall|Omnia
+powersearch-togglenone|Nullum
+search-external|Inquisitio externalis
+searchdisabled|Per {{grammar:accusative\u007C{{SITENAME}}}} ad tempus non potes quaerere. Interea per [http://www.google.com Googlem] quaeras. Nota indices {{grammar:genitive\u007C{{SITENAME}}}} contentorum apud Googlem fortasse antiquiores esse.
+search-error|Error in quaerendo: ~{0}
+preferences|Praeferentiae
+mypreferences|Praeferentiae
+prefs-edits|Numerus recensionum:
+prefs-skin|Aspectum
+skin-preview|Praevisum
+datedefault|Nullum praeferentiae
+prefs-user-pages|Paginae usoris
+prefs-personal|Minutiae rationis
+prefs-rc|Nuper mutata
+prefs-watchlist|Paginae observatae
+prefs-watchlist-days|Numerus dierum displicandus in paginis tuis observatis:
+prefs-watchlist-days-max|Numerus maximus: ~{0} {{PLURAL:~{0}\u007Cdies\u007Cdies}}
+prefs-watchlist-edits|Numerus recensionum displicandus in paginis tuis observatis extensis:
+prefs-watchlist-edits-max|Numerus maximus: 1000
+prefs-misc|Misc
+prefs-resetpass|Tesseram mutare
+prefs-email|Optiones inscriptionis electronicae
+prefs-rendering|Conspectus
+saveprefs|Servare praeferentias
+prefs-editing|Mensura capsae verbi
+rows|Lineae:
+columns|Columnae:
+searchresultshead|Figuratio eventorum investigationis
+recentchangesdays|Quot dies in nuper mutatis monstrandi:
+recentchangescount|Quantum rerum in nuper mutatis, historiis et actis:
+savedprefs|Praeferentiae tuae servatae sunt.
+timezonelegend|Zona temporis:
+localtime|Hora indigena:
+timezoneuseoffset|Alia (da dissimilitudinem cinguli horae)
+servertime|Hora moderatri:
+guesstimezone|Hora ex navigatro scribere
+timezoneregion-africa|Africa
+timezoneregion-america|America
+timezoneregion-antarctica|Antarctica
+timezoneregion-arctic|Arctica
+timezoneregion-asia|Asia
+timezoneregion-atlantic|Oceanus Atlanticus
+timezoneregion-australia|Australia
+timezoneregion-europe|Europa
+timezoneregion-indian|Oceanus Indicus
+timezoneregion-pacific|Oceanus Pacificus
+allowemail|Sinere litteras electronicas inscriptioni electronicae meae mittere
+prefs-searchoptions|Quaerere
+prefs-namespaces|Spatia nominalia
+default|praedeterminatum
+prefs-files|Fasciculi
+prefs-custom-css|CSS proprium
+prefs-custom-js|JS proprium
+prefs-emailconfirm-label|Adfirmatio inscriptionis electronicae:
+youremail|Inscriptio electronica:
+username|Nomen usoris:
+prefs-registration|Dies creationis rationis:
+yourrealname|Nomen verum:
+yourlanguage|Lingua:
+yourvariant|Differentia linguae contentorum:
+yournick|Subscriptio nova:
+prefs-help-signature|Cum in paginis disputationum scribas, "<nowiki>~~~~</nowiki>" conscribe, quod in subscriptionem tuam et indicationem temporis convertetur.
+badsig|Subscriptio cruda non est valida; scrutina affixa HTML.
+badsiglength|Subscriptio tua nimis longa est.\n{{PLURAL:~{0}\u007CUna littera est\u007C~{0} litterae sunt}} longitudo maxima.
+yourgender|Sexus:
+gender-unknown|Indefinitus
+gender-male|Masculinum
+gender-female|Femina
+email|Litterae electronicae
+prefs-help-realname|Nomen verum non necesse est.\nSi vis id dare, opera tua tibi ascribentur.
+prefs-help-email|Inscriptio electronica non necesse est, sed sinit tesseram novam tibi mitti si eae oblitus es.
+prefs-help-email-others|Si vis, sinit etiam aliis tecum loqui per tuam paginam usoris vel disputationis, nisi te reveles.
+prefs-help-email-required|Inscriptio electronica necesse est.
+prefs-info|Informatio basica
+prefs-i18n|Internationalizatio
+prefs-signature|Subscriptio
+prefs-preview|Praevisum
+prefs-advancedwatchlist|Praeferentiae monstrare
+prefs-displayrc|Praeferentiae vultus
+prefs-displaywatchlist|Praeferentiae vultus
+prefs-diffs|Differentiae
+userrights|Usorum potestates
+userrights-lookup-user|Greges usorum regere
+userrights-user-editname|Nomen usoris inscribe:
+editusergroup|Greges usorum recensere
+editinguser|Modificare potestates usoris '''[[User:~{0}\u007C~{0}]]''' ~{1}
+userrights-editusergroup|Greges usorum recensere
+saveusergroups|Greges usorum servare
+userrights-groupsmember|{{PLURAL:~{0}\u007CIn grege\u007CIn gregibus}}:
+userrights-reason|Causa:
+userrights-changeable-col|Greges quos tibi oportet mutare
+userrights-unchangeable-col|Greges quos tibi non oportet mutare
+group|Grex:
+group-user|Usores
+group-autoconfirmed|Usores adfirmati automaticale
+group-bot|Automata
+group-sysop|Magistratus
+group-bureaucrat|Grapheocrates
+group-suppress|Censurae
+group-all|(omnes)
+group-user-member|{{GENDER:~{0}\u007CUsor}}
+group-autoconfirmed-member|{{GENDER:~{0}\u007CUsor adfirmatus automaticale}}
+group-bot-member|{{GENDER:~{0}\u007CAutomaton}}
+group-sysop-member|{{GENDER:~{0}\u007CMagistratus}}
+group-bureaucrat-member|{{GENDER:~{0}\u007CGrapheocrates}}
+group-suppress-member|{{GENDER:~{0}\u007CCensura}}
+grouppage-user|{{ns:project}}:Usores
+grouppage-autoconfirmed|{{ns:project}}:Usores adfirmati automaticale
+grouppage-bot|{{ns:project}}:Automata
+grouppage-sysop|{{ns:project}}:Magistratus
+grouppage-bureaucrat|{{ns:project}}:Grapheocrates
+grouppage-suppress|{{ns:project}}:Observator
+right-read|Paginas legere
+right-edit|Paginas recensere
+right-createpage|Paginas creare (sine paginis disputationis)
+right-createtalk|Paginas disputationis creare
+right-createaccount|Rationes usorum novas creare
+right-minoredit|Recensiones minores designare
+right-move|Paginas movere
+right-move-subpages|Paginas una cum subpaginis movere
+right-move-rootuserpages|Paginas usorum movere
+right-movefile|Fasciculos movere
+right-suppressredirect|Non creare redirectiones ex titulis veteribus paginas movendo
+right-upload|Fasciculos imponere
+right-upload_by_url|Fasciculum imponere ex inscriptione URL
+right-autoconfirmed|Paginas semiprotectas recensere
+right-delete|Paginas delere
+right-bigdelete|Paginas magnarum historiarum delere
+right-deleterevision|Emendationes paginarum delere vel restituere
+right-browsearchive|Paginas deletas quaerere
+right-undelete|Paginam restituere
+right-suppressrevision|Emendationes magistratus celatas inspicere vel restituere
+right-suppressionlog|Acta privata inspicere
+right-block|Usores alios obstruere ne recensere possunt
+right-blockemail|Usorem obstruere ne litteras electronicas mittere potest
+right-hideuser|Celare nomen usoris hunc usorem obstruendo
+right-protect|Protectionem mutare vel paginas protectas recensere
+right-editprotected|Paginas protectas recensere (sine protectione defluente quasi cataracta)
+right-editusercssjs|Paginas CSS vel JS aliorum usorum recensere
+right-editusercss|Paginas CSS aliorum usorum recensere
+right-edituserjs|Paginas JS aliorum usorum recensere
+right-rollback|Cito reverti recensiones proximas usoris cuiuslibet paginae
+right-import|Paginas ex vicis aliis importare
+right-importupload|Paginas ex fasciculo imponendo importare
+right-unwatchedpages|Indicem paginarum non observatarum inspicere
+right-mergehistory|Historias paginarum confundere
+right-userrights|Omnes potestates usorum recensere
+right-userrights-interwiki|Potestates usorum aliis in vicis recensere
+right-siteadmin|Basem datorum obstruere vel deobstruere
+newuserlogpage|Index rationum novarum creatarum
+newuserlogpagetext|Hic est index rationum novarum creatarum.
+rightslog|Index mutationum iuribus usorum
+rightslogtext|Haec est index mutationum iuribus usorum.
+action-read|hanc paginam legere
+action-edit|hanc paginam recensere
+action-createpage|paginas creare
+action-createtalk|paginas disputationis creare
+action-createaccount|hanc rationem usoris creare
+action-minoredit|hanc recensionem minorem designare
+action-move|hanc paginam movere
+action-move-subpages|hanc paginam una cum subpaginis movere
+action-move-rootuserpages|paginas usorum movere
+action-movefile|hunc fasciculum movere
+action-upload|hunc fasciculum imponere
+action-upload_by_url|hunc fasciculum imponere ex inscriptione URL
+action-writeapi|API scripturae usere
+action-delete|hanc paginam delere
+action-deleterevision|hanc emendationem delere
+action-browsearchive|paginas deletas quaerere
+action-undelete|hanc paginam restituere
+action-suppressrevision|hanc emendationem magistratus celatam inspicere vel restituere
+action-suppressionlog|haec acta privata inspicere
+action-block|hunc usorem obstruere ne recensere potest
+action-protect|protectionem huius paginae mutare
+action-import|paginas ex vico alio importare
+action-importupload|paginas ex fasciculo imponendo importare
+action-unwatchedpages|indicem paginarum non observatarum inspicere
+action-mergehistory|historiam huius paginae confundere
+action-userrights|omnes potestates usorum recensere
+action-userrights-interwiki|potestates usorum aliis in vicis recensere
+action-siteadmin|basem datorum obstruere vel deobstruere
+action-editmywatchlist|indicem tuum paginarum observatarum recensere
+action-viewmywatchlist|indicem tuum paginarum observatarum inspicere
+nchanges|~{0} {{PLURAL:~{0}\u007Cmutatio\u007Cmutationes}}
+enhancedrc-history|Historia
+recentchanges|Nuper mutata
+recentchanges-legend|Indicis paginarum nuper mutatarum praeferentiae
+recentchanges-summary|Inspice mutationes recentes huic vici in hac pagina.
+recentchanges-feed-description|Nuper mutata Viciae hoc in fluxu observare.
+recentchanges-label-newpage|Haec recensio paginam novam creavit
+recentchanges-label-minor|Haec est recensio minor
+recentchanges-label-bot|Hanc recensionem automaton fecit
+recentchanges-label-unpatrolled|Haec recensio nondum est examinata
+recentchanges-label-plusminus|Magnitudo paginae per istam copiam octetorum mutata est
+recentchanges-legend-newpage|{{int:recentchanges-label-newpage}} (vide etiam [[Special:NewPages\u007Cindicem paginarum novarum]])
+rcnotefrom|Subter sunt '''~{0}''' nuperrime mutata in proxima '''~{1}''' die.
+rclistfrom|Monstrare mutata nova incipiens ab ~{2} ~{1}
+rcshowhideminor|~{0} recensiones minores
+rcshowhideminor-show|Monstrare
+rcshowhideminor-hide|Celare
+rcshowhidebots|~{0} automata
+rcshowhidebots-show|Monstrare
+rcshowhidebots-hide|Celare
+rcshowhideliu|~{0} usores notos
+rcshowhideliu-show|Monstrare
+rcshowhideliu-hide|Celare
+rcshowhideanons|~{0} usores ignotos
+rcshowhideanons-show|Monstrare
+rcshowhideanons-hide|Celare
+rcshowhidepatr|~{0} recensiones circumitae
+rcshowhidepatr-show|Monstrare
+rcshowhidepatr-hide|Celare
+rcshowhidemine|~{0} conlationes meas
+rcshowhidemine-show|Monstrare
+rcshowhidemine-hide|Celare
+rclinks|Monstrare ~{0} nuperrime mutata in ~{1} diebus proximis.<br />~{2}
+diff|diss
+hist|hist
+hide|celare
+show|monstrare
+minoreditletter|m
+newpageletter|N
+boteditletter|a
+number_of_watching_users_pageview|[~{0} {{PLURAL:~{0}\u007Cusor observans\u007Cusores observantes}}]
+rc_categories_any|Ulla
+rc-change-size-new|~{0} {{PLURAL:~{0}\u007Coctetus\u007Cocteti}} post recensionem
+newsectionsummary|/* ~{0} */ nova pars
+rc-enhanced-expand|Minima monstrare
+rc-enhanced-hide|Minima celare
+recentchangeslinked|Nuper mutata annexorum
+recentchangeslinked-feed|Nuper mutata annexorum
+recentchangeslinked-toolbox|Nuper mutata annexorum
+recentchangeslinked-title|Nuper mutata in paginis quibus pagina "~{0}" nectit
+recentchangeslinked-summary|Ecce mutationes recentissimas commentationum quae aut paginae cuidam adnectuntur, aut in categoria quadam includuntur. Paginae a [[Special:Watchlist\u007Cte observatae]] '''litteris pinguibus''' monstrantur.
+recentchangeslinked-page|Titulus paginae:
+recentchangeslinked-to|Mutationes commentationum quae huic paginae adnectuntur monstrare
+upload|Fasciculum imponere
+uploadbtn|Fasciculum imponere
+reuploaddesc|Siste imponere et ad imponendi formam redi
+uploadnologin|Conventum non est apertum
+uploadnologintext|Necesse est tibi ~{0} priusquam fasciculos imponas.
+uploaderror|Imponendi erratum
+uploadtext|Utere formam subter ad fasciculos imponendos.\nUt fasciculos antea impositos videas aut quaeras, adi ad [[Special:FileList\u007Cindicem fasciculorum impositorum]]. Fasciculi impositi et deleti quoque in [[Special:Log/upload\u007Cnotatione fasciculorum impositorum]] notantur.\n\nAd fasciculum in pagina includendum, utere nexu:\n*'''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Fasciculus.jpg]]</nowiki></code>''' aut\n*'''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Fasciculus.png\u007Cverba alia]]</nowiki></code>''' aut\n*'''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:Fasciculus.ogg]]</nowiki></code>''' pro nexum ad fasciculum directum.
+upload-permitted|Genera fasciculorum licita: ~{0}.
+upload-preferred|Genera fasciculorum suasa: ~{0}.
+upload-prohibited|Typi fasciculorum vetiti: ~{0}.
+uploadlogpage|Notatio fasciculorum impositorum
+uploadlogpagetext|Subter est index fasciculorum recentissimorum impositorum.\nVide etiam [[Special:NewFiles\u007Cpinacothecam fasciculorum recentissimorum impositorum]].
+filename|Nomen fasciculi
+filedesc|Summarium
+fileuploadsummary|Summarium:
+filereuploadsummary|Mutationes fasciculi:
+filestatus|Locus verborum privatorum:
+filesource|Fons:
+ignorewarning|Ignorare monita et servare fasciculum
+ignorewarnings|Ignorare monita omnia
+minlength1|Nomina fasciculorum saltem unam litteram habere debent.
+badfilename|Nomen fasciculi ad "~{0}" mutatum est.
+filetype-missing|Fasciculus extensionem non habet (sicut e. g. ".jpg").
+large-file|Suasum est ut fasciculi ~{0} magnitudine non excedant; magnitudo huius fasciculi est ~{1}.
+uploadwarning|Monitus imponendi
+savefile|Servare fasciculum
+uploaddisabled|Fasciculos imponere prohibitum est
+uploaddisabledtext|Fasciculos imponere prohibitum est.
+uploadvirus|Fasciculi huic est virus! Singula: ~{0}
+sourcefilename|Fasciculi imponendi nomen:
+destfilename|Nomen fasciculi petitum:
+upload-maxfilesize|Maxima fasciculi magnitudo: ~{0}
+watchthisupload|Observare hunc fasciculum
+upload-success-subj|Impositum est perfectum
+upload-proto-error|Protocollum incorrectum
+upload-file-error|Erratum internum
+upload-misc-error|Erratum impositionis ignotum
+license|Typus permissionis:
+license-header|Potestas usoris
+nolicense|Nulla selecta
+license-nopreview|(Praevisum monstrari non potest)
+imgfile|fasciculus
+listfiles|Fasciculorum index
+listfiles_thumb|Minutio
+listfiles_date|Dies
+listfiles_name|Nomen
+listfiles_user|Usor
+listfiles_size|Magnitudo
+listfiles_description|Descriptio
+listfiles_count|Emendationes
+file-anchor-link|Fasciculus
+filehist|Historia fasciculi
+filehist-help|Ad emendationem fasciculi inspiciendum, preme in diem/tempus.
+filehist-deleteall|delere omnes emendationes
+filehist-deleteone|delere
+filehist-revert|revertere
+filehist-current|recentissima
+filehist-datetime|Dies/Tempus
+filehist-thumb|Minutio
+filehist-thumbtext|Minutio emendationis ex ~{0}
+filehist-nothumb|Nulla minutio
+filehist-user|Usor
+filehist-dimensions|Dimensiones
+filehist-filesize|Magnitudo fasciculi
+filehist-comment|Sententia
+imagelinks|Nexus ad fasciculum
+linkstoimage|{{PLURAL:~{0}\u007CHaec pagina ad hunc fasciculum nectit:\u007CPaginae sequentes ad hunc fasciculum nectunt:}}
+nolinkstoimage|Nullae paginae ad hunc fasciculum nectunt.
+morelinkstoimage|Videre [[Special:WhatLinksHere/~{0}\u007Cplures nexus]] ad hunc fasciculum.
+sharedupload|Hic fasciculus apud {{grammar:accusative\u007C~{0}}} iacet; in aliis inceptis adhiberi potest.
+sharedupload-desc-there|Hic fasciculus apud {{grammar:accusative\u007C~{0}}} iacet; in aliis inceptis adhiberi potest.\nVide [~{1} paginam descriptionis fasciculi].
+sharedupload-desc-here|Hic fasciculus apud {{grammar:accusative\u007C~{0}}} iacet; in aliis inceptis adhiberi potest.\nContenta [~{1} paginae descriptionis fasciculi] subter monstrantur.
+sharedupload-desc-edit|Hic fasciculus apud {{grammar:accusative\u007C~{0}}} iacet; in aliis inceptis adhiberi potest.\nFortasse [~{1} paginam descriptionis fasciculi] ibi sitam recensere vis.
+sharedupload-desc-create|Hic fasciculus apud {{grammar:accusative\u007C~{0}}} iacet; in aliis inceptis adhiberi potest.\nFortasse [~{1} paginam descriptionis fasciculi] ibi sitam recensere vis.
+filepage-nofile|Fasciculus huius nominis non est.
+filepage-nofile-link|Fasciculus huius nominis non est, sed [~{0} fasciculum imponere] potes.
+uploadnewversion-linktext|Emendationem novam huius fasciculi imponere
+shared-repo-from|apud {{grammar:accusative\u007C~{0}}}
+shared-repo|repositorium commune
+shared-repo-name-wikimediacommons|Vicimedia Communia
+filerevert|Revertere ~{0}
+filerevert-legend|Reverti fasciculum
+filerevert-intro|Reverteris '''[[Media:~{0}\u007C~{0}]]''' ad [emendationem ~{3} ex ~{2}, ~{1}].
+filerevert-comment|Causa:
+filerevert-defaultcomment|Reverti ad emendationem ex ~{1}, ~{0}
+filerevert-submit|Revertere
+filerevert-success|'''[[Media:~{0}\u007C~{0}]]''' reversum est ad [emendationem ~{3} ex ~{2}, ~{1}].
+filedelete|Delere ~{0}
+filedelete-legend|Fasciculum delere
+filedelete-intro|Deles fasciculum '''[[Media:~{0}\u007C~{0}]]''' una cum tota eius historia.
+filedelete-intro-old|Deles fasciculi '''[[Media:~{0}\u007C~{0}]]''' emendationem [~{3} ex ~{2}, ~{1}].
+filedelete-comment|Causa:
+filedelete-submit|Delere
+filedelete-success|'''~{0}''' deletum est.
+filedelete-success-old|Emendatio fasciculi '''[[Media:~{0}\u007C~{0}]]''' ex ~{2}, ~{1} deletum est.
+filedelete-nofile|'''~{0}''' non existit.
+filedelete-otherreason|Causa alia vel explicatio:
+filedelete-reason-otherlist|Causa alia
+filedelete-edit-reasonlist|Causas deletionum fasciculorum recensere
+mimesearch|Quaerere per MIME
+mimetype|Typus MIME:
+download|depromere
+unwatchedpages|Paginae incustoditae
+listredirects|Redirectiones
+unusedtemplates|Formulae non in usu
+unusedtemplateswlh|nexus alii
+randompage|Pagina fortuita
+randompage-nopages|Non est ulla pagina {{PLURAL:~{1}\u007Choc in spatio nominale\u007Cin his spatiis nominalibus}}: ~{0}.
+randomredirect|Redirectio fortuita
+randomredirect-nopages|Non est ulla redirectio in spatio nominali "~{0}".
+statistics-header-edits|Census recensionum
+statistics-header-users|Census usorum
+statistics-header-hooks|Alia statistica
+statistics-files|Fasciculi impositi
+statistics-edits|Recensiones paginarum factae ab initio {{grammar:genitive\u007C{{SITENAME}}}}
+statistics-edits-average|Recensiones per paginam
+statistics-users|[[Special:ListUsers\u007CUsores]] relati
+statistics-users-active|Usores activi
+statistics-users-active-desc|Usores qui {{PLURAL:~{0}\u007Cproxima die\u007Cproximis ~{0} diebus}} actionem perfecerunt
+pageswithprop-submit|Pergere
+doubleredirects|Redirectiones duplices
+double-redirect-fixed-move|[[~{0}]] mota est et nunc redirigit ad [[~{1}]]
+double-redirect-fixer|Rectificator redirectionum
+brokenredirects|Redirectiones fractae
+brokenredirectstext|Hae redirectiones ad paginas inexistentes nectunt:
+brokenredirects-edit|recensere
+brokenredirects-delete|delere
+withoutinterwiki|Paginae sine nexibus ad linguas alias
+withoutinterwiki-summary|Paginae sequentes non ad paginas in linguis aliis nectunt.
+withoutinterwiki-legend|Praefixum
+withoutinterwiki-submit|Monstrare
+fewestrevisions|Paginae minime mutatae
+nbytes|~{0} {{PLURAL:~{0}\u007Coctetus\u007Cocteti}}
+ncategories|~{0} {{PLURAL:~{0}\u007Ccategoria\u007Ccategoriae}}
+nlinks|~{0} {{PLURAL:~{0}\u007Cnexus\u007Cnexus}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cinest\u007Cinsunt}}
+nrevisions|~{0} {{PLURAL:~{0}\u007Cemendatio\u007Cemendationes}}
+nviews|~{0} {{PLURAL:~{0}\u007Cvisa\u007Cvisae}}
+lonelypages|Paginae non annexae
+uncategorizedpages|Paginae sine categoriis
+uncategorizedcategories|Categoriae sine categoriis
+uncategorizedimages|Fasciculi sine categoriis
+uncategorizedtemplates|Formulae sine categoriis
+unusedcategories|Categoriae non in usu
+unusedimages|Fasciculi non in usu
+wantedcategories|Categoriae desideratae
+wantedpages|Paginae desideratae
+wantedfiles|Fasciculi desiderati
+wantedtemplates|Formulae desideratae
+mostlinked|Paginae maxime annexae
+mostlinkedcategories|Categoriae maxime annexae
+mostlinkedtemplates|Formulae maxime annexae
+mostcategories|Paginae plurimis categoriis
+mostimages|Fasciculi maxime annexi
+mostrevisions|Paginae plurimum mutatae
+prefixindex|Paginae omnes cum praefixo
+shortpages|Paginae breves
+longpages|Paginae longae
+deadendpages|Paginae sine nexu
+deadendpagestext|Paginae subter non nectunt ad alias paginas ullas in {{grammar:ablative\u007C{{SITENAME}}}}.
+protectedpages|Paginae protectae
+protectedpages-indef|Solum protectiones infinitas
+protectedpages-cascade|Solum protectiones defluentes quasi cataracta
+protectedtitles|Tituli protecti
+listusers|Usores
+listusers-editsonly|Monstrare solum usores qui recensuerunt
+listusers-creationsort|Ordinare secundum diem creationis rationis
+usereditcount|~{0} {{PLURAL:~{0}\u007Crecensio\u007Crecensiones}}
+usercreated|Ratio creata ~{1}, ~{0}
+newpages|Paginae novae
+newpages-username|Nomen usoris:
+ancientpages|Paginae veterrimae
+move|Movere
+movethispage|Movere hanc paginam
+notargettitle|Nullus scopus
+notargettext|Paginam aut usorem non notavisti.
+pager-newer-n|{{PLURAL:~{0}\u007Cnovior 1\u007Cnoviores ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Csenior 1\u007Cseniores ~{0}}}
+suppress|Censura
+booksources|Librorum fontes
+booksources-search-legend|Fontes impressas quaerere
+specialloguserlabel|Usor:
+speciallogtitlelabel|Destinatum (titulus aut usor):
+log|Acta
+all-logs-page|Acta publica omnia
+alllogstext|Ostentantur omnia acta {{grammar:genitive\u007C{{SITENAME}}}}.\nAdspectum graciliorem potes facere modum indicum, nomen usoris (cave litteras maiusculas minusculasque), vel titulum paginae (cave etiam litteras maiusculas minusculasque) seligendo.
+log-title-wildcard|Quaerere titulos qui incipiunt litteris
+allpagesfrom|Monstrare paginas ab:
+allpagesto|Monstrare paginas usque ad:
+allarticles|Omnes paginae
+allinnamespace|Omnes paginae (in spatio nominali ~{0})
+allpagessubmit|Adhibere
+allpagesprefix|Monstrare paginas quibus est praeverbium:
+allpagesbadtitle|Nomen paginae datum fuit invalidum aut praverbium interlinguale vel interviciale habuit. Fortasse insunt una aut plus litterarum quae in titulis non possunt inscribier.
+allpages-bad-ns|Non est spatium nominale "~{0}" apud {{grammar:accusative\u007C{{SITENAME}}}}.
+allpages-hide-redirects|Celare redirectiones
+cachedspecial-refresh-now|Recentissima vide.
+categoriespagetext|{{PLURAL:~{0}\u007CCategoria subter paginas vel fasciculos continet.\u007CCategoriae subter paginas vel fasciculos continent.}}\n[[Special:UnusedCategories\u007CCategoriae non in usu]] non monstrantur.\nVide etiam [[Special:WantedCategories\u007Ccategorias desideratas]].
+special-categories-sort-count|ordinare secundum numerum
+special-categories-sort-abc|ordinare secundum abecedarium
+deletedcontributions|Conlationes usoris deletae
+deletedcontributions-title|Conlationes usoris deletae
+sp-deletedcontributions-contribs|conlationes
+linksearch|Quaerere nexus externos
+linksearch-pat|Quaerere per exemplar:
+linksearch-ns|Spatium nominale:
+linksearch-ok|Quaerere
+linksearch-line|~{0} necta est a ~{1}
+listusers-submit|Monstrare
+listusers-noresult|Nullus usor inventus.
+listusers-blocked|(obstructus)
+activeusers|Index usorum activorum
+activeusers-count|{{PLURAL:~{0}\u007Cuna recensio recens\u007C~{0} recensiones recentes}} {{PLURAL:~{2}\u007Cdie proximo\u007Cin diebus ~{2} proximis}}
+activeusers-hidebots|Celare automata
+activeusers-hidesysops|Celare magistratus
+activeusers-noresult|Nullus usor inventus.
+listgrouprights|Gregum usorum potestates
+listgrouprights-group|Grex
+listgrouprights-rights|Potestates
+listgrouprights-helppage|Help:Gregum potestates
+listgrouprights-members|(index rationum)
+listgrouprights-addgroup|Addere {{PLURAL:~{1}\u007Cgregem\u007Cgreges}}: ~{0}
+listgrouprights-removegroup|Removere {{PLURAL:~{1}\u007Cgregem\u007Cgreges}}: ~{0}
+listgrouprights-addgroup-all|Addere omnes greges
+listgrouprights-removegroup-all|Removere omnes greges
+listgrouprights-addgroup-self|Addere {{PLURAL:~{1}\u007Cgregem\u007Cgreges}} ad rationem propriam: ~{0}
+listgrouprights-removegroup-self|Removere {{PLURAL:~{1}\u007Cgregem\u007Cgreges}} ex ratione propria: ~{0}
+listgrouprights-addgroup-self-all|Addere omnes greges ad rationem propriam
+listgrouprights-removegroup-self-all|Removere omnes greges ex ratione propria
+emailuser|Litteras electronicas usori mittere
+emailpage|Mittere litteras electronicas huic usori
+emailpagetext|Forma subter nuntium ad usorem mittet.\nInscriptio electronica quam in [[Special:Preferences\u007Cpraeferentiis tuis]] dedis ut "Ab" inscriptione apparebit. Hoc modo usor tibi directe respondere poterit.
+defemailsubject|{{SITENAME}} - Litterae electronicae ab usore "~{0}"
+noemailtitle|Nulla inscriptio electronica
+noemailtext|Hic usor inscriptionem electronicam ratam non dedit.
+nowikiemailtext|Hic usor litteras electronicas ab aliis usoribus non vult.
+emailusername|Nomen usoris:
+emailusernamesubmit|Conferre
+email-legend|Litteras electronicas usori {{grammar:genitive\u007C{{SITENAME}}}} mittere
+emailfrom|Ab:
+emailto|Ad:
+emailsubject|Res:
+emailmessage|Nuntium:
+emailsend|Mittere
+emailsent|Litterae electronicae missae sunt
+emailsenttext|Nuntium tuum missum est.
+emailuserfooter|Has litteras electronicas ~{0} ad ~{1} misit per "Litteras electronicas usori mittere" in {{grammar:ablative\u007C{{SITENAME}}}}.
+usermessage-editor|Nuntius systematis
+watchlist|Paginae observatae
+mywatchlist|Paginae observatae
+watchlistfor2|Pro ~{0} ~{1}
+nowatchlist|Sunt nullas paginas in indice tuo paginarum observatarum.
+watchlistanontext|Necesse est conventum aperire ad indicem paginarum observatarum inspiciendum vel recensendum.
+watchnologin|Conventum non est apertum
+addedwatchtext|Pagina "[[:~{0}]]" in [[Special:Watchlist\u007Cpaginas tuas observatas]] addita est.\nMutationes posthac huic paginae et paginae disputationis ibi notabuntur.
+removedwatchtext|Pagina "[[:~{0}]]" ex [[Special:Watchlist\u007Cindice paginarum observatarum]] remota est.
+watch|Observare
+watchthispage|Observare hanc paginam
+unwatch|Non iam observare
+unwatchthispage|Non iam observare
+notanarticle|Res non est
+notvisiblerev|Emendatio deleta est
+watchlist-details|{{PLURAL:~{0}\u007C~{0} pagina\u007C~{0} paginae}} in indice paginarum observatarum tuarum, sine paginis disputationis.
+wlnote|Subter {{PLURAL:~{0}\u007Cest mutatio proxima\u007Csunt '''~{0}''' mutationes proximae}} in {{PLURAL:~{1}\u007Cproxima hora\u007Cproximis '''~{1}''' horis}} ex ~{3}, ~{2}.
+wlshowlast|Monstrare proximas ~{0} horas ~{1} dies
+watchlist-options|Indicis paginarum observatarum praeferentiae
+watching|Custodiens...
+unwatching|Decustodiens...
+enotif_reset|Indicare omnes paginas visitatas
+enotif_impersonal_salutation|Usor {{grammar:genitive\u007C{{SITENAME}}}}
+enotif_lastdiff|Vide ~{0} ad hanc recensionem inspiciendum.
+enotif_anon_editor|usor ignotus ~{0}
+enotif_body|\nSalve $WATCHINGUSERNAME,\n\nPagina {{grammar:genitive\u007C{{SITENAME}}}} $PAGETITLE ab $PAGEEDITOR die $PAGEEDITDATE $CHANGEDORCREATED est, vide emendationem currentem apud $PAGETITLE_URL\n\n$NEWPAGE\n\nAuctor hunc summarium dedit: $PAGESUMMARY $PAGEMINOREDIT\n\nContact the editor:\nlitterae electronicae: $PAGEEDITOR_EMAIL\nvici: $PAGEEDITOR_WIKI\n\nThere will be no other notifications in case of further changes unless you visit this page.\nYou could also reset the notification flags for all your watched pages on your watchlist.\n\n             Your friendly {{SITENAME}} notification system\n\n--\nTo change your watchlist settings, visit\n{{canonicalurl:{{#special:EditWatchlist}}}}\n\nFeedback and further assistance:\n$HELPPAGE
+created|creata
+changed|mutata
+deletepage|Delere paginam
+confirm|Adfirmare
+excontent|contenta erant: '~{0}'
+excontentauthor|contenta erant: '~{0}' (et contributor unicus erat '[[Special:Contributions/~{1}\u007C~{1}]]')
+exbeforeblank|contenta priusquam pagina facta vacua erant: '~{0}'
+delete-confirm|Delere "~{0}"
+delete-legend|Delere
+historywarning|'''Monitio:''' Pagina quam delere vis historiam {{PLURAL:~{0}\u007Cunius fere emendationis\u007C~{0} fere emendationum}} habet:
+confirmdeletetext|Paginam cum tota historia eius delebis.\nAdfirma quaesumus te paginam re vera delere velle, te consequentias intellere, et actionem tuam [[{{MediaWiki:Policy-url}}\u007Cconsilio]] congruere.
+actioncomplete|Actum perfectum
+actionfailed|Actum non feliciter evenit
+deletedtext|"~{0}" deletum est. Vide ~{1} pro indice deletionum recentum.
+dellogpage|Index deletionum
+dellogpagetext|Subter est index deletionum recentissimarum.
+deletionlog|index deletionum
+reverted|Reversum ad emendationem proximam
+deletecomment|Causa:
+deleteotherreason|Causa alia vel explicatio:
+deletereasonotherlist|Causa alia
+deletereason-dropdown|*Causae deletionum communes\n** Spam\n** Vandalismus\n** Violatio verborum privatorum\n** Desiderium auctoris\n** Redirectio fracta
+delete-edit-reasonlist|Causas deletionum recensere
+rollback|Reverti mutationes
+rollbacklink|reverti
+rollbacklinkcount|reverti {{PLURAL:~{0}\u007Cunam recensionem\u007C~{0} recensiones}}
+rollbacklinkcount-morethan|reverti plus quam {{PLURAL:~{0}\u007Cunam recensionem\u007C~{0} recensiones}}
+rollbackfailed|Reversum defecit
+cantrollback|Haec non potest reverti; conlator proximus solus auctor huius rei est.
+alreadyrolled|Ad emendationem proximam paginae [[:~{0}]] ab usore [[User:~{1}\u007C~{1}]] ([[User talk:~{1}\u007CDisputatio]]{{int:pipe-separator}}[[Special:Contributions/~{1}\u007C{{int:contribslink}}]]) reverti non potest; alius paginam iam recensuit vel revertit.\n\nEmendatio proxima ab usore [[User:~{2}\u007C~{2}]] ([[User talk:~{2}\u007CDisputatio]]{{int:pipe-separator}}[[Special:Contributions/~{2}\u007C{{int:contribslink}}]]) effecta est.
+editcomment|Summarium erat: "''~{0}''".
+revertpage|Reverti recensiones ab usore [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007CDisputatio]]) ad emendationem proximam ab [[User:~{0}\u007C~{0}]]
+rollback-success|Reverti recensiones ab usore ~{0}\nad emendationem proximam ab ~{1}.
+protectlogpage|Index protectionum
+protectlogtext|Subter est index protectionum et deprotectionum paginarum. Vide [[Special:ProtectedPages\u007Cindicem paginarum nunc protectarum]].
+protectedarticle|protegit "[[~{0}]]"
+modifiedarticleprotection|mutavit protectionem paginae "[[~{0}]]"
+unprotectedarticle|deprotegit "[[~{0}]]"
+protect-title|Mutare protectionem paginae "~{0}"
+prot_1movedto2|movit [[~{0}]] ad [[~{1}]]
+protect-legend|Protectionem adfirmare
+protectcomment|Causa:
+protectexpiry|Exitus:
+protect_expiry_invalid|Tempus post quod res exitur est invalidum.
+protect_expiry_old|Tempus est praeteritus.
+protect-text|Hic tibi licet protectiones legere et mutare paginae '''~{0}'''.
+protect-locked-access|Tibi non licet protectionem paginarum mutare.\nEcce protectiones paginae '''~{0}''':
+protect-cascadeon|Hanc paginam, in {{PLURAL:~{0}\u007Cpagina seriatim protecta\u007Cpaginis seriatim protectis}} inclusam, potes deprotegere; manebit autem protectio serialis.
+protect-default|Usoribus omnibus licet
+protect-fallback|Sinere solum usores permissu "~{0}"
+protect-level-autoconfirmed|Sinere solum usores adfirmati automaticale
+protect-level-sysop|Sinere solum magistratus
+protect-summary-cascade|defluens
+protect-expiring|exit ~{0} (UTC)
+protect-expiry-indefinite|infinita
+protect-cascade|Formulas aliasque paginas hac in pagina adhibitas protegere (protectio defluens quasi cataracta)
+protect-cantedit|Tibi non licet hanc paginam recensere; ergo protectionem paginae non potes mutare.
+protect-othertime|Exitus alius:
+protect-othertime-op|exitus alius
+protect-existing-expiry|Exitus: ~{2}, ~{1}
+protect-otherreason|Causa alia vel explicatio:
+protect-otherreason-op|Causa alia
+protect-edit-reasonlist|Causas protectionum recensere
+protect-expiry-options|1 horam:1 hour,1 diem:1 day,1 hebdomadem:1 week,2 hebdomades:2 weeks,1 mensem:1 month,3 menses:3 months,6 menses:6 months,1 annum:1 year,infinite:infinite
+restriction-type|Permissus:
+restriction-level|Gradus cohibitionis:
+minimum-size|Magnitudo minima
+maximum-size|Magnitudo maxima:
+pagesize|(octeti)
+restriction-edit|Recensio
+restriction-move|Motio
+restriction-create|Creatio
+restriction-upload|Imponere
+restriction-level-sysop|protecta
+restriction-level-autoconfirmed|semi-protecta
+restriction-level-all|quislibet scala
+undelete|Paginas deletas inspicere
+undeletepage|Videre et restituere paginas deletas
+viewdeletedpage|Paginas deletas inspicere
+undeletepagetext|{{PLURAL:~{0}\u007CPagina sequens deleta est sed tabulis manens restitui potest.\u007CPaginae ~{0} sequentes deletae sunt sed tabulis manentes restitui possunt.}}\nTabulae nonnumquam deletae sunt.
+undelete-fieldset-title|Emendationes restituere
+undeleterevisions|~{0} {{PLURAL:~{0}\u007Cemendatio servata\u007Cemendationes servatae}}
+undeletehistory|Si paginam restituis, omnes emendationes restituentur ad historiam.\nSi pagina nova cum ipso nomine post deletionem creata est, emendationes restitutae in historia priori apparebunt.
+undelete-revision|Emendatio deleta paginae ~{0} (ex ~{4}, ~{3}) ab usore ~{2}:
+undelete-nodiff|Nulla emendatio prior inventa.
+undeletebtn|Restituere
+undeletelink|inspicere/restituere
+undeleteviewlink|inspicere
+undeleteinvert|Selectionem invertere
+undeletecomment|Causa:
+undeletedrevisions|{{PLURAL:~{0}\u007C1 emendatio recuperata\u007C~{0} emendationes recuperatae}}
+undeletedrevisions-files|{{PLURAL:~{0}\u007C1 emendatio recuperata\u007C~{0} emendationes recuperatae}} et {{PLURAL:1 fasciculus recuperatus\u007C~{1} fasciculi recuperati}}
+undeletedfiles|{{PLURAL:~{0}\u007C1 fasciculus recuperatus\u007C~{0} fasciculi recuperati}}
+cannotundelete|Abrogatio deletionis fefellit; fortasse aliquis iam paginam restituit.
+undelete-header|Pro paginis nuper deletis, vide [[Special:Log/delete\u007Cindicem deletionum]].
+undelete-search-box|Quaerere inter paginas iam deletas
+undelete-search-prefix|Monstrare paginas quibus est praeverbium:
+undelete-search-submit|Quaerere
+undelete-no-results|Nullae paginae inventae sunt ex his indicibus deletionum.
+undelete-show-file-submit|Sic
+namespace|Spatium nominale:
+invert|Selectionem invertere
+namespace_association|Spatium nominale pertinens
+contributions|Conlationes {{GENDER:~{0}\u007Cusoris}}
+contributions-title|Conlationes usoris ~{0}
+mycontris|Conlationes
+contribsub2|Pro ~{0} (~{1})
+nocontribs|Nullae mutationes inventae sunt ex his indiciis.
+uctop|(vertex)
+month|Ab mense (et prior):
+year|Ab anno (et prior):
+sp-contributions-newbies|Monstrare solum conlationes rationum novarum
+sp-contributions-newbies-sub|Conlationes rationum novarum
+sp-contributions-newbies-title|Conlationes rationum novarum
+sp-contributions-blocklog|acta obstructionum
+sp-contributions-deleted|conlationes usoris deletae
+sp-contributions-uploads|Fasciculi impositi
+sp-contributions-logs|acta
+sp-contributions-talk|disputatio
+sp-contributions-userrights|usorum potestates
+sp-contributions-search|Conlationes usoris quaerere
+sp-contributions-username|Locus IP aut nomen usoris:
+sp-contributions-submit|Quaerere
+whatlinkshere|Nexus ad paginam
+whatlinkshere-title|Paginae quae ad "~{0}" nectunt
+whatlinkshere-page|Pagina:
+linkshere|Paginae sequentes ad '''[[:~{0}]]''' nectunt:
+nolinkshere|Nullae paginae ad '''[[:~{0}]]''' nectunt.
+nolinkshere-ns|Nullae paginae spatii nominalis selecti ad '''[[:~{0}]]''' nectunt.
+isredirect|pagina redirectionis
+istemplate|inclusio
+isimage|nexus fasciculi
+whatlinkshere-prev|{{PLURAL:~{0}\u007Csuperior\u007C~{0} superiores}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cproxima\u007Cproximae ~{0}}}
+whatlinkshere-links|← nexus
+whatlinkshere-hideredirs|~{0} redirectiones
+whatlinkshere-hidetrans|~{0} inclusiones alia in pagina
+whatlinkshere-hidelinks|~{0} nexus
+whatlinkshere-hideimages|~{0} nexus fasciculi
+whatlinkshere-filters|Filtra
+blockip|Usorem obstruere
+blockip-legend|Usorem vel locum IP obstruere
+blockiptext|Forma infera utere ut quendam usorem vel locum IP obstruas ne plus scribere potest.\nHoc non nisi secundum [[{{MediaWiki:Policy-url}}\u007Cconsilium]] fieri potest.\nRationem certam subscribe (exempli gratia titulos paginarum quas iste usor modo vandalorum recensuit).
+ipaddressorusername|Locus IP aut nomen usoris:
+ipbexpiry|Exitus:
+ipbreason|Causa:
+ipbreason-dropdown|*Rationes crebriter adductae\n** Ob scripta falsa\n** Ob textum remotum\n** Ob nexus externos multiplicatos\n** Ob scripta sensu sive et Latinitate carentia\n** Ob scripta inurbana\n** Ob rationes perniciose multiplicatas\n** Ob nomen inurbanum sive inconveniens
+ipbcreateaccount|Creationem rationum obstruere
+ipbemailban|Litteras electronicas vetare
+ipbsubmit|Obstruere hunc locum
+ipbother|Exitus alius:
+ipboptions|2 horas:2 hours,1 diem:1 day,3 dies:3 days,1 hebdomadem:1 week,2 hebdomades:2 weeks,1 mensem:1 month,3 menses:3 months,6 menses:6 months,1 annum:1 year,infinite:infinite
+ipbwatchuser|Paginam usoris disputationisque huius usoris observare
+ipb-change-block|Obstructionem usoris modificare
+badipaddress|Locus IP male formatus
+blockipsuccesssub|Locus prospere obstructus est
+blockipsuccesstext|[[Special:Contributions/~{0}\u007C~{0}]] obstructus est.\n<br />Vide [[Special:BlockList\u007Cindicem usorum obstructorum]] ut obstructos revideas.
+ipb-edit-dropdown|Causas obstructionum recensere
+ipb-unblock-addr|Deobstruere ~{0}
+ipb-unblock|Deobstruere nomen usoris vel locum IP
+ipb-blocklist-contribs|Conlationes usoris ~{0}
+unblockip|Deobstruere locum IP
+unblockiptext|Formam inferam usere ut locum IP deobstruere.
+ipusubmit|Hanc obstructionem removere
+unblocked|[[User:~{0}\u007C~{0}]] deobstructus est
+unblocked-id|Obstructio numeri ~{0} abrogata est
+ipblocklist|Usores obstructi
+ipblocklist-legend|Usorem obstructum quaerere
+ipblocklist-submit|Quaerere
+infiniteblock|infinita
+expiringblock|exit ~{1}, ~{0}
+anononlyblock|solum usores ignoti
+noautoblockblock|obstructio automatica prohibita
+createaccountblock|Creatio rationum obstructa
+emailblock|Litterae electronicae obstructae
+blocklist-nousertalk|non potest paginam disputationis suam recensere
+blocklink|obstruere
+unblocklink|deobstruere
+change-blocklink|protectionem mutare
+contribslink|conlationes
+autoblocker|Obstructus es automatice quia "[[User:~{0}\u007C~{0}]]" nuper tuum locum IP adhibuit. Ratio data ob obstructionem usoris ~{0} est: "~{1}"
+blocklogpage|Index obstructionum
+blocklog-showlog|Hic usor antea obstructus est.\nCommodule notatio obstructionum subter datur.
+blocklog-showsuppresslog|Hic usor antea obstructus est celatus est.\nCommodule notatio obstructionum subter datur.
+blocklogentry|obstruxit [[~{0}]], exire ~{1} ~{2}
+reblock-logentry|modificavit obstructionem usoris [[~{0}]], exire ~{1} ~{2}
+blocklogtext|Hic est index actorum obstructionis deobstructionisque. Loci IP qui automatice obstructi sunt non enumerantur. Vide [[Special:BlockList\u007Cindicem usorum locorumque IP obstructorum]] pro indice toto.
+unblocklogentry|deobstruxit ~{0}
+block-log-flags-anononly|solum usores anonymi
+block-log-flags-nocreate|creatio rationum prohibita
+block-log-flags-noautoblock|obstructio automatica prohibita
+block-log-flags-noemail|Litterae electronicae obstructae
+block-log-flags-nousertalk|non potest paginam disputationis suam recensere
+block-log-flags-hiddenname|nomen usoris celatum
+ipb_expiry_invalid|Tempus exeundo invalidum fuit.
+ipb_already_blocked|"~{0}" iam obstructus est
+ipb-needreblock|~{0} iam obstructus est. Visne obstructionem modificare?
+ip_range_invalid|Latitudo IP irrita.
+proxyblocker|Instrumentum obstructionis moderatorum
+lockdb|Basem datorum obstruere
+unlockdb|Basem datorum deobstruere
+lockdbtext|Obstructio basis datorum potestatem omnium usorum suspendebit paginas recensendi et praeferentiarum earum et indicem paginarum custoditarum mutandi.\nAdfirma te basem datorum obstruere velle, et te dein basem datorum deobstruendum.
+lockconfirm|Ita, vere basem datorum obstruere volo.
+unlockconfirm|Ita, vere basem datorum deobstruere volo.
+lockbtn|Basem datorum obstruere
+unlockbtn|Basem datorum deobstruere
+locknoconfirm|Capsam non notavis.
+lockdbsuccesssub|Basis datorum prospere obstructa est
+unlockdbsuccesssub|Basis datorum prospere deobstructa est
+lockdbsuccesstext|Basis datorum obstructa est.\n<br />Memento eam dein [[Special:UnlockDB\u007Cdeobstruere]].
+unlockdbsuccesstext|Basis datorum deobstructa est.
+databasenotlocked|Basis datorum non obstructa est.
+move-page|Movere ~{0}
+move-page-legend|Paginam movere
+movepagetext|Formam inferam utere ad paginam renominandum et ad historiam eius ad nomen novum movendum.\nTitulus vetus paginam redirectionis ad titulum novum fiet.\nNexus ad paginam veterem non mutabuntur;\nredirectiones [[Special:DoubleRedirects\u007Cduplices]] vel [[Special:BrokenRedirects\u007Cfractas]] quaerere et figere debebis.\n\nPagina '''non''' movebitur si pagina sub titulo novo iam est, nisi est vacua aut pagina redirectionis et nullam historiam habet.\n\n'''MONITUM!'''\nHaec mutatio vehemens et improvisa potest esse pro pagina populare;\nadfirma te consequentias intellegere antequam procedis.
+movepagetalktext|Pagina disputationis huius paginae, si est, etiam necessario motabitur '''nisi''':\n\n*Disputatio sub paginae novae nomine contenta habet, aut\n*Capsam subter non nota.\n\nErgo manu necesse disputationes motare vel contribuere erit, si vis.
+movearticle|Paginam movere:
+moveuserpage-warning|'''Monitio:''' Si paginam usoris moves, solum pagina movetur, usor '''non''' renominatur.
+movenologintext|Rationem usoris habere et [[Special:UserLogin\u007Cconventum aperire]] debes ad movendum paginam.
+movenotallowed|Tibi non licet paginas movere.
+movenotallowedfile|Tibi non licet fasciculos movere.
+cant-move-user-page|Tibi non licet paginas usorum movere (solum eorum subpaginas).
+cant-move-to-user-page|Tibi non licet paginam ad paginam usoris movere (solum ad paginae usoris subpaginam).
+newtitle|Ad titulum novum:
+move-watch|Observare et titulum veterem et titulum novum
+movepagebtn|Paginam movere
+pagemovedsub|Pagina mota est
+movepage-moved|'''"~{0}" mota est ad "~{1}"'''
+movepage-moved-redirect|Redirectio creata est.
+movepage-moved-noredirect|Redirectio non creata est.
+articleexists|Pagina huius tituli iam est, aut invalidum est nomen electum.\nQuaesumus, titulum alterum elige.
+cantmove-titleprotected|Tibi non licet paginam ad hunc titulum movere, quia hic titulus protectus est ne creetur
+movetalk|Movere etiam paginam disputationis
+move-subpages|Movere subpaginas (tenus ~{0})
+move-talk-subpages|Movere subpaginas paginae disputationis (tenus ~{0})
+movepage-page-moved|Pagina ~{0} mota est ad ~{1}.
+movepage-page-unmoved|Pagina ~{0} ad ~{1} moveri non potuit.
+movelogpage|Acta motionum
+movesubpage|{{PLURAL:~{0}\u007CSubpagina\u007CSubpaginae}}
+movesubpagetext|Huic paginae {{PLURAL:~{0}\u007Cest una subpagina subter monstrata\u007Csunt ~{0} subpaginae subter monstratae}}.
+movenosubpage|Huic paginae non sunt subpaginae.
+movereason|Causa:
+revertmove|reverti
+delete_and_move|Delere et movere
+delete_and_move_text|==Deletio necesse est==\nPaginae nomen petitum "[[:~{0}]]" iam existit. Vin tu eam delere ut pagina illic moveatur?
+delete_and_move_confirm|Ita, paginam delere
+delete_and_move_reason|Deleta ut moveatur ex "[[~{0}]]"
+immobile-source-namespace|Paginae spatii nominalis "~{0}" moveri non possunt.
+immobile-target-namespace|Paginae in spatium nominale "~{0}" moveri non possunt.
+immobile-source-page|Haec pagina moveri non potest.
+immobile-target-page|Ad hunc titulum moveri non potest.
+imageinvalidfilename|Nomen fasciculi invalidum est
+fix-double-redirects|Rectificare redirectiones ad titulum veterem
+move-leave-redirect|Redirectionem creare ab titulo vetere ad titulum novum
+export|Paginas exportare
+export-submit|Exportare
+export-addcattext|Addere paginas ex categoria:
+export-addcat|Addere
+export-addnstext|Addere paginas ex spatio nominale:
+export-addns|Addere
+export-download|Servare qua fasciculum
+export-templates|Includere formulas
+allmessages|Nuntia systematis
+allmessagesname|Nomen
+allmessagesdefault|Textus originalis nuntii
+allmessagescurrent|Textus recens nuntii
+allmessagestext|Hic est index omnium nuntiorum in MediaWiki.
+allmessagesnotsupportedDB|Haec pagina non adhiberi potest, quia '''$wgUseDatabaseMessages''' non iam agitur.
+allmessages-filter-legend|Filtrum
+allmessages-filter-all|Omnia
+allmessages-language|Lingua:
+allmessages-filter-submit|Ire
+filemissing|Fasciculus absens
+thumbnail_error|Error in minutione creanda: ~{0}
+djvu_page_error|Pagina DjVu extra latitudinem
+import|Paginas importare
+importinterwiki|Adportatio transvici
+import-interwiki-submit|Importare
+import-interwiki-namespace|Spatium nominale destinatum:
+import-upload-filename|Nomen fasciculi:
+import-comment|Sententia:
+importstart|Adportare paginas...
+import-revision-count|~{0} {{PLURAL:~{0}\u007Cemendatio\u007Cemendationes}}
+importbadinterwiki|Nexus intervicius malus
+importsuccess|Adportatio finita!
+import-noarticle|Nulla pagina importanda!
+xml-error-string|~{0} in linea ~{1} et columna ~{2} (octetus ~{3}): ~{4}
+import-upload|XML imponere et importare
+importlogpage|Acta adportationum
+import-logentry-upload-detail|~{0} {{PLURAL:~{0}\u007Cemendatio\u007Cemendationes}}
+import-logentry-interwiki-detail|~{0} {{PLURAL:~{0}\u007Cemendatio\u007Cemendationes}} ex ~{1}
+tooltip-pt-userpage|Pagina usoris tua
+tooltip-pt-mytalk|Pagina disputationis tua
+tooltip-pt-preferences|Praeferentiae tuae
+tooltip-pt-watchlist|Paginae quas observas ut earum mutationes facilius videas
+tooltip-pt-mycontris|Index conlationum tuarum
+tooltip-pt-login|Te conventum aperire hortamur, non autem requisitum
+tooltip-pt-logout|Conventum concludere
+tooltip-ca-talk|Disputatio de hac pagina
+tooltip-ca-edit|Hanc paginam recensere potes. Quaesumus praevisum inspice antequam servas.
+tooltip-ca-addsection|Novam partem creare
+tooltip-ca-viewsource|Haec pagina protecta est. Fontem inspicere potes.
+tooltip-ca-history|Emendationes veteres huius paginae
+tooltip-ca-protect|Protegere hanc paginam
+tooltip-ca-delete|Delere hanc paginam
+tooltip-ca-undelete|Restituere emendationes huic paginae conlatas antequam haec pagina deleta esset
+tooltip-ca-move|Movere hanc paginam
+tooltip-ca-watch|Addere hanc paginam tuis paginis observatis
+tooltip-ca-unwatch|Removere hanc paginam ex tuis paginis observatis
+tooltip-search|Quaerere aliquid in {{grammar:ablative\u007C{{SITENAME}}}}
+tooltip-search-go|I ad paginam cum hoc titulo exacto, si est
+tooltip-search-fulltext|Hunc textum in paginis quaerere
+tooltip-p-logo|Ire ad paginam primam
+tooltip-n-mainpage|Ire ad paginam primam
+tooltip-n-mainpage-description|Ire ad paginam primam
+tooltip-n-portal|De hoc incepto
+tooltip-n-currentevents|Eventus novissimi
+tooltip-n-recentchanges|Index nuper mutatorum in hac vici
+tooltip-n-randompage|Ire ad paginam fortuitam
+tooltip-n-help|Adiutatum de hoc vici
+tooltip-t-whatlinkshere|Index paginarum quae hic nectunt
+tooltip-t-recentchangeslinked|Nuper mutata in paginis quibus haec pagina nectit
+tooltip-feed-rss|Fluxus RSS huius paginae
+tooltip-feed-atom|Atom feed
+tooltip-t-contributions|Videre conlationes huius usoris
+tooltip-t-emailuser|Mittere litteras electronicas huic usori
+tooltip-t-upload|Fasciculos imponere
+tooltip-t-specialpages|Index paginarum specialium
+tooltip-t-print|Forma impressibilis huius paginae
+tooltip-t-permalink|Nexus perpetuus ad hanc emendationem paginae
+tooltip-ca-nstab-main|Videre paginam
+tooltip-ca-nstab-user|Videre paginam usoris
+tooltip-ca-nstab-special|Haec est pagina specialis. Pagina ipsa recenseri non potest.
+tooltip-ca-nstab-project|Videre paginam inceptorum
+tooltip-ca-nstab-image|Videre paginam fasciculi
+tooltip-ca-nstab-mediawiki|Videre nuntium systematis
+tooltip-ca-nstab-template|Videre formulam
+tooltip-ca-nstab-help|Videre paginam adiutatam
+tooltip-ca-nstab-category|Videre paginam categoriae
+tooltip-minoredit|Indicare hanc recensionem minorem
+tooltip-save|Servare mutationes tuas
+tooltip-preview|Praevidere mutationes tuas, quaesumus hoc utere antequam servas!
+tooltip-diff|Monstrare mutationes textui tuas
+tooltip-compareselectedversions|Videre dissimilitudinem inter ambas emendationes selectas huius paginae
+tooltip-watch|Addere hanc paginam tuis paginis observatis
+tooltip-recreate|Recreare hanc paginam etiamsi deleta est
+tooltip-upload|Incipere imponere
+tooltip-rollback|"Revertere" omnes ultimi editoris in hac pagina recensiones statim revertit
+tooltip-undo|"Abrogare" fenestram recensionis aperit (hac recensione reversa). Summarium addere licet.
+tooltip-summary|Summarium breve addere
+anonymous|{{PLURAL:~{0}\u007CUsor ignotus\u007CUsores ignoti}} {{grammar:genitive\u007C{{SITENAME}}}}
+siteuser|{{SITENAME}} usor ~{0}
+lastmodifiedatby|Ultima mutatio: ~{1}, ~{0} ab ~{2}.
+others|alii
+siteusers|{{PLURAL:~{1}\u007Cusor\u007Cusores}} {{grammar:genitive\u007C{{SITENAME}}}} ~{0}
+creditspage|Auctores paginae
+pageinfo-title|Res quae ad "~{0}" pertinent
+pageinfo-header-basic|De hac pagina
+pageinfo-header-edits|Conspectus recensionum
+pageinfo-display-title|Titulus ut in pagina ipsa monstratur
+pageinfo-length|Magnitudo paginae (octeti)
+pageinfo-article-id|Identificatio paginis
+pageinfo-language|Lingua verborum in pagina
+pageinfo-firstuser|Creator paginae
+pageinfo-firsttime|Dies et tempus creationis paginae
+pageinfo-lastuser|Usor qui ultimam recensionem fecit
+pageinfo-lasttime|Dies ultimae emendationis
+pageinfo-recent-edits|Praesens numerus recensionum (intra praeterita ~{0})
+pageinfo-hidden-categories|{{PLURAL:~{0}\u007CCategoria celata\u007CCategoriae celatae}} (~{0})
+pageinfo-toolboxlink|De hac pagina
+markaspatrolleddiff|Indicare hanc paginam qua circumita
+markaspatrolledtext|Indicare hanc paginam qua circumita
+markedaspatrolled|Indicare hanc paginam qua circumita
+patrol-log-page|Acta emendationum circumitarum
+log-show-hide-patrol|~{0} acta emendationum circumitarum
+deletedrevision|Delevit emendationem ~{0} veterem
+previousdiff|← Dissimilitudo senior
+nextdiff|Dissimilitudo novior →
+imagemaxsize|Magnitudo maxima fasciculorum:<br />\n''(in pagina descriptionis fasciculi)''
+thumbsize|Magnitudo minutionis:
+widthheightpage|~{0} × ~{1}, ~{2} {{PLURAL:~{2}\u007Cpagina\u007Cpaginae}}
+file-info|magnitudo fasciculi: ~{0}, typus MIME: ~{1}
+file-info-size|~{0} × ~{1} elementa imaginalia, magnitudo fasciculi: ~{2}, typus MIME: ~{3}
+file-nohires|Nulla maior resolutio exstat.
+svg-long-desc|fasciculus SVG, nominale ~{0} × ~{1} elementa imaginalia, magnitudo fasciculi: ~{2}
+show-big-image|Resolutio completa
+show-big-image-size|~{0} × ~{1} elementa imaginalia
+file-info-gif-frames|~{0} {{PLURAL:~{0}\u007Creplum\u007Crepla}}
+newimages|Fasciculi novi
+imagelisttext|Subter est index {{PLURAL:~{0}\u007C'''unius''' fasciculi\u007C'''~{0}''' fasciculorum}} digestus ~{1}.
+newimages-summary|Haec pagina specialis monstrat fasciculos impositos ultimos.
+newimages-legend|Filtrum
+newimages-label|Nomen fasciculi (vel pars eius):
+noimages|Nullum videndum.
+ilsubmit|Quaerere
+bydate|ex die
+metadata|Metadata
+metadata-help|Hic fasciculus alias res continet, saepius a machina originatore additas, et (si fasciculus postea recensus sit) fortasse corrigendas.
+metadata-expand|Plura ostende
+metadata-collapse|Partim celare
+exif-imagewidth|Amplitudo
+exif-imagelength|Altitudo
+exif-bitspersample|Biti per componentem
+exif-compression|Schema compressionis
+exif-photometricinterpretation|Compositio elementorum imaginalium
+exif-orientation|Orientatio
+exif-samplesperpixel|Numerus componentum
+exif-ycbcrsubsampling|Ratio subexemplationis Y / C
+exif-ycbcrpositioning|situatio Y et C
+exif-xresolution|Resolutio horizontalis
+exif-yresolution|Resolutio verticalis
+exif-jpeginterchangeformatlength|Chiliocteti datorum JPEG
+exif-whitepoint|Chromaticitas puncti albi
+exif-primarychromaticities|Chromaticitates primariae
+exif-imagedescription|Descriptio imaginis
+exif-model|Typus photomachinae
+exif-artist|Auctor
+exif-exifversion|Emendatio Exif
+exif-colorspace|Spatium colorimetricum
+exif-pixelydimension|Amplitudo imaginis
+exif-pixelxdimension|Altitudo imaginis
+exif-usercomment|Adnota usoris
+exif-relatedsoundfile|Fasciculus soni relatus
+exif-datetimeoriginal|Dies et tempus creationis
+exif-exposuretime|Tempus expositionis
+exif-exposuretime-format|~{0} sec (~{1})
+exif-fnumber|Numerus F
+exif-exposureprogram|Programma expositionis
+exif-spectralsensitivity|Sensitivitas spectralis
+exif-shutterspeedvalue|Celeritas foriculae APEX
+exif-aperturevalue|Apertura APEX
+exif-brightnessvalue|Luminositas APEX
+exif-exposurebiasvalue|Obliquitas expositionis
+exif-meteringmode|Modus mensurae
+exif-lightsource|Fons lucis
+exif-flash|Organum fulminescens
+exif-subjectarea|Area subiecti
+exif-flashenergy|Energia organi fulminescentis
+exif-focalplanexresolution|Resolutio horizontalis plani focalis
+exif-focalplaneyresolution|Resolutio verticalis plani focalis
+exif-subjectlocation|Localizatio subiecti
+exif-exposureindex|Index expositionis
+exif-sensingmethod|Methodus sensationis
+exif-filesource|Fons fasciculi
+exif-scenetype|Typus scaenae
+exif-exposuremode|Modus expositionis
+exif-whitebalance|Compensatio Alba
+exif-gaincontrol|Censura campi
+exif-contrast|Contentio
+exif-saturation|Saturatio
+exif-sharpness|Exacerbatio
+exif-imageuniqueid|Identificatio imaginis unica
+exif-gpslatitude|Latitudo
+exif-gpslongitude|Longitudo
+exif-gpsaltituderef|Notatio altitudinis
+exif-gpsaltitude|Altitudo
+exif-gpstimestamp|Tempus GPS (horologium atomicum)
+exif-gpssatellites|Satellites in mensura adhibiti
+exif-gpsstatus|Status receptoris
+exif-gpsmeasuremode|Modus mensurae
+exif-gpsdop|Amussis mensurae
+exif-gpsspeedref|Unitum celeritatis
+exif-gpsspeed|Celeritas receptoris GPS
+exif-gpstrack|Directio motus
+exif-gpsimgdirection|Directio imaginis
+exif-gpsmapdatum|Data percensionis geodaeticae adhibita
+exif-gpsdestlatitude|Latitudo destinationis
+exif-gpsdestlongitude|Longitudo destinationis
+exif-gpsareainformation|Nomen areae GPS
+exif-gpsdatestamp|Dies GPS
+exif-gpsdifferential|Correctio differentialis GPS
+exif-source|Fons
+exif-compression-1|Incompressus
+exif-unknowndate|Dies ignota
+exif-orientation-1|Normalis
+exif-orientation-3|Converta 180°
+exif-planarconfiguration-1|formatio dilatata
+exif-planarconfiguration-2|formatio planaris
+exif-componentsconfiguration-0|non existit
+exif-exposureprogram-0|Infinita
+exif-exposureprogram-1|Manuale
+exif-exposureprogram-2|Programma normale
+exif-exposureprogram-3|Prioritas aperturae
+exif-subjectdistance-value|~{0} metra
+exif-meteringmode-0|Ignotus
+exif-meteringmode-1|Media
+exif-meteringmode-2|Centrogravata mediocre
+exif-meteringmode-3|Unipunctualis
+exif-meteringmode-4|Multipunctualis
+exif-meteringmode-5|Exemplar
+exif-meteringmode-6|Partialis
+exif-meteringmode-255|Alia
+exif-lightsource-0|Ignota
+exif-lightsource-1|Lumen diei
+exif-lightsource-2|Fluorescens
+exif-lightsource-3|Wolframium (lumen incandescens)
+exif-lightsource-4|Organum fulminescens
+exif-lightsource-11|Umbra
+exif-lightsource-15|Fluorescentia alba (WW 3200 – 3700K)
+exif-lightsource-17|Lumen accommodum A
+exif-lightsource-18|Lumen accommodum B
+exif-lightsource-19|Lumen accommodum C
+exif-lightsource-24|Wolframium studiorii normalizatum per ISO
+exif-lightsource-255|Alius fons luminis
+exif-flash-fired-0|Organum fulminescens non accendit
+exif-flash-fired-1|Organum fulminescens accendit
+exif-flash-return-0|nullum stroboscopium functionem detectionis reddat
+exif-flash-return-2|stroboscopium lumen detectum non reddat
+exif-flash-return-3|stroboscopium lumen detectum reddat
+exif-flash-mode-1|lumen organi fulminescentis necessarium
+exif-flash-mode-2|suppressio organi fulminescentis necessaria
+exif-flash-mode-3|Modus automaticus
+exif-flash-function-1|Nulla functio fulminescens
+exif-focalplaneresolutionunit-2|unciae
+exif-sensingmethod-1|Infinitus
+exif-sensingmethod-7|Sensor trilinearis
+exif-exposuremode-0|Expositio automatica
+exif-exposuremode-1|Expositio manualis
+exif-exposuremode-2|Latitudo expositionis
+exif-whitebalance-0|Compensatio alba automatica
+exif-whitebalance-1|Compensatio alba manualis
+exif-scenecapturetype-0|Commoda
+exif-scenecapturetype-3|Nocturna
+exif-gaincontrol-0|Nullum
+exif-gaincontrol-1|Augmentum demisse positivum
+exif-gaincontrol-2|Augmentum alte positivum
+exif-gaincontrol-3|Augmentum demisse negativum
+exif-gaincontrol-4|Augmentum alte negativum
+exif-contrast-0|Normalis
+exif-saturation-0|Normalis
+exif-saturation-1|Saturatio demissa
+exif-saturation-2|Saturatio alta
+exif-sharpness-0|Normalis
+exif-subjectdistancerange-0|Ignota
+exif-subjectdistancerange-1|Macro
+exif-gpslatitude-n|Latitudo borealis
+exif-gpslatitude-s|Latitudo australis
+exif-gpslongitude-e|Longitudo orientalis
+exif-gpslongitude-w|Longitudo occidentalis
+exif-gpsstatus-a|Mensura in progressu
+exif-gpsstatus-v|Interoperabilitas mensurae
+exif-gpsmeasuremode-2|Mensura 2-dimensionalis
+exif-gpsmeasuremode-3|Mensura 3-dimensionalis
+exif-gpsspeed-k|Chiliometra per horam
+exif-gpsspeed-m|Milia per horam
+exif-gpsspeed-n|Nodi
+exif-gpsdestdistance-k|Kilometra
+exif-gpsdestdistance-m|Milia
+exif-gpsdestdistance-n|Milia nautica
+exif-gpsdirection-t|Directio vera
+exif-gpsdirection-m|Directio magnetica
+namespacesall|omnia
+monthsall|omnes
+confirmemail|Inscriptionem electronicam adfirmare
+confirmemail_noemail|Non est tibi inscriptio electronica valida in [[Special:Preferences\u007Ctuis praeferentiis]] posita.
+confirmemail_text|{{SITENAME}} te postulat inscriptionem tuam electronicam adfirmare priusquam proprietatibus litterarum electronicarum fruaris. Imprime botonem subter ut nuntium adfirmationis tibi mittatur. Nuntio nexus inerit quod est scribendus in tuo navigatro interretiali ut validum adfirmes tuam inscriptionem electronicam.
+confirmemail_send|Mittere codicem adfirmationis
+confirmemail_sent|Missae sunt litterae electronicae adfirmationis.
+confirmemail_sendfailed|Litteras electronicas adfirmationis non potuimus mittere.\nInspice inscriptionem tuam electronicam ut litteras prohibitas invenias.\n\nNuntius reddidit: ~{0}
+confirmemail_invalid|Codex adfirmationis invalidus. Fortasse id exitum est.
+confirmemail_needlogin|Necesse est tibi ~{0} ut inscriptionem tuam electronicam adfirmes.
+confirmemail_success|Tua inscriptio electronica adfirmata est.\nLibenter [[Special:UserLogin\u007Cconventum aperias]] utarisque {{grammar:ablative\u007C{{SITENAME}}}}.
+confirmemail_loggedin|Inscriptio tua electronica iam adfirmata est.
+confirmemail_subject|{{SITENAME}} - Adfirmatio inscriptionis electronicae
+confirmemail_body|Aliquis (probabiliter tu, ex loco IP ~{0})\nrationem "~{1}" creavit sub hac inscriptione electronica apud {{grammar:accusative\u007C{{SITENAME}}}}.\n\nUt adfirmas te esse ipsum et proprietates inscriptionum electronicarum licere fieri apud {{grammar:accusative\u007C{{SITENAME}}}}, hunc nexum aperi in tuo navigatro interretiali:\n\n~{2}\n\nSi *non* tu hoc fecisti, hunc nexum sequere\nad adfirmationem inscriptionis electronicae abrogandum:\n\n~{4}\n\nHic codex adfirmationis exibit ~{3}.
+confirmemail_invalidated|Adfirmatio inscriptionis electronicae abrogata est
+invalidateemail|Adfimationem inscriptionis electronicae abrogare
+deletedwhileediting|'''Monitio:''' Haec pagina deleta est postquam inceperis eam recensere!
+confirmrecreate|Usor [[User:~{0}\u007C~{0}]] ([[User talk:~{0}\u007Cdisputatio]]) delevit hanc paginam postquam eam emendare inceperis cum ratione:\n: ''~{1}''\nQuaesumus, adfirma ut iterum hanc paginam crees.
+recreate|Recreare
+confirm_purge_button|Licet
+imgmultipageprev|← pagina superior
+imgmultipagenext|pagina proxima →
+imgmultigo|I!
+imgmultigoto|Ire ad paginam ~{0}
+ascending_abbrev|asc
+descending_abbrev|desc
+table_pager_next|Pagina proxima
+table_pager_prev|Pagina superior
+table_pager_first|Prima pagina
+table_pager_last|Ultima pagina
+table_pager_limit_submit|Ire
+table_pager_empty|Nulli eventus
+autosumm-blank|Paginam vacuavit
+autosumm-replace|multa contenta ex pagina removit, contenta nova: '~{0}'
+autoredircomment|Redirigens ad [[~{0}]]
+autosumm-new|Paginam instituit, scribens '~{0}'
+size-bytes|~{0} octeti
+size-kilobytes|~{0} chiliocteti
+size-megabytes|~{0} megaocteti
+size-gigabytes|~{0} gigaocteti
+watchlistedit-normal-title|Indicem paginarum observatarum recensere
+watchlistedit-normal-submit|Removere titulos
+watchlistedit-raw-title|Indicem paginarum observatarum quasi textum recensere
+watchlistedit-raw-legend|Indicem paginarum observatarum quasi textum recensere
+watchlistedit-raw-titles|Tituli:
+watchlisttools-view|Mutationes paginarum observatarum inspicere
+watchlisttools-edit|Indicem paginarum observatarum inspicere vel recensere
+watchlisttools-raw|Indicem paginarum observatarum quasi textum recensere
+signature|[[{{ns:user}}:~{0}\u007C~{1}]] ([[{{ns:user_talk}}:~{0}\u007Cdisputatio]])
+version|Versio
+version-specialpages|Paginae speciales
+version-parserhooks|Extensiones programmatis analysis lexicalis
+version-variables|Variabilia
+version-other|Alia
+version-hooks|Extensiones
+version-parser-function-hooks|Extensiones functionum programmatis analysis lexicalis
+version-hook-name|Nomen extensionis
+version-hook-subscribedby|Subscriptum ab
+version-version|(~{0})
+version-license|Permissio
+version-software-product|Productum
+version-software-version|Versio
+fileduplicatesearch-legend|Duplicatum quaerere
+fileduplicatesearch-filename|Fasciculi nomen:
+fileduplicatesearch-submit|Quaerere
+fileduplicatesearch-info|~{0} × ~{1} elementa imaginalia<br />Magnitudo fasciculi: ~{2}<br />Typus MIME: ~{3}
+specialpages|Paginae speciales
+specialpages-group-other|Aliae paginae speciales
+specialpages-group-login|Conventum aperire / creare
+specialpages-group-users|Usores eorumque potestates
+specialpages-group-pages|Indices paginarum
+specialpages-group-pagetools|Instrumenta paginarum
+specialpages-group-wiki|Data et instrumenta
+specialpages-group-redirects|Paginae speciales redirigentes
+specialpages-group-spam|Instrumenta contra praeconia incommoda
+blankpage|Pagina vacua
+tags|Affixa mutationum validarum
+tag-filter|[[Special:Tags\u007CTag]] Colum:
+tag-filter-submit|Filtrum
+tags-title|Affixa
+tags-edit|recensere
+tags-hitcount|~{0} {{PLURAL:~{0}\u007Cmutatum\u007Cmutata}}
+compare-page1|Pagina 1
+compare-page2|Pagina 2
+compare-rev1|Emendatio 1
+compare-rev2|Emendatio 2
+htmlform-submit|Submittere
+htmlform-reset|Mutationes abrogare
+htmlform-selectorother-other|Aliud
+logentry-delete-delete|~{0} delevit paginam ~{2}
+logentry-delete-restore|~{0} restituit paginam ~{2}
+logentry-move-move|~{0} movit paginam ~{2} ad ~{3}
+logentry-move-move-noredirect|~{0} movit paginam ~{2} ad ~{3} sine redirectione
+logentry-move-move_redir|~{0} movit paginam ~{2} ad ~{3} praeter redirectionem
+logentry-move-move_redir-noredirect|~{0} movit paginam ~{2} ad ~{3} praeter redirectionem sine redirectione
+logentry-newusers-newusers|Ratio usoris ~{0} creata est
+logentry-newusers-create|Ratio usoris ~{0} creata est
+logentry-newusers-create2|Ratio usoris ~{2} creata est ab usore ~{0}
+logentry-newusers-autocreate|Ratio usoris ~{0} automatice creata est
+rightsnone|(nullus)
+revdelete-summary|summarium recensionis
+feedback-cancel|Dimittere
+feedback-close|Factum
+feedback-error2|Error: Recensio non additur
+feedback-message|Nuntius:
+searchsuggest-search|Quaerere
+searchsuggest-containing|continens...
+api-error-empty-file|Fasciculus inmissus vacuus est.
+api-error-emptypage|Vacuas novas paginas creare non licet.
+api-error-filename-tooshort|Nomen fasciculi brevius est.
+api-error-filetype-banned|Talia genera fasciculorum permissa non sunt.
+api-error-illegal-filename|Nomen fasciculi permissum non est.
+api-error-mustbeloggedin|Ad fasciculos inmittendos conventum aperire necesse est.
+api-error-unknownerror|Error incognitus: "~{0}".
+expandtemplates|Formulas resolvere
+special-characters-group-latin|Latinum
+special-characters-group-latinextended|Latinum extensum
+special-characters-group-ipa|API
+special-characters-group-symbols|Symbola
+special-characters-group-greek|Graecum
+special-characters-group-cyrillic|Cyrillicum
+special-characters-group-arabic|Arabicum
+special-characters-group-hebrew|Hebraicum
+special-characters-group-telugu|Telugu
+contactpage-subject-and-sender|~{0} (ex ~{1})
+contactpage-fromname|Nomen tuum: *
+wikibase-edit|recensere
+wikibase-add|addere
+']:>
+).lang
+;

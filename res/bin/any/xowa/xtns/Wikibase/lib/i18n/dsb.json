@@ -1,0 +1,37 @@
+{
+	"@metadata": {
+		"authors": [
+			"Michawiki"
+		]
+	},
+	"wikibase-lib-desc": "Stoj powšyknu funkcionalnosć za rozšyrjeni Wikibase a Wikibase Client k dispoziciji",
+	"wikibase-entity-item": "element",
+	"wikibase-entity-property": "kakosć",
+	"wikibase-entity-query": "wótpšašanje",
+	"wikibase-diffview-reference": "referenca",
+	"wikibase-diffview-rank": "rěd",
+	"wikibase-diffview-qualifier": "kwalifikator",
+	"wikibase-error-unexpected": "Njewócakowana zmólka jo nastała.",
+	"wikibase-error-save-generic": "Pśi składowanju jo zmólka nastała, a togodla njedaju se změny pśewjasć.",
+	"wikibase-error-remove-generic": "Pśi wótpóranju jo zmólka nastała, a togodla njedaju se změny pśewjasć.",
+	"wikibase-error-save-connection": "Zwiskowa zmólka jo pśi składowanju namakała a twóje změny njedaju se togodla pśewjasć. Pšosym pśeglědaj swój internetowy zwisk.",
+	"wikibase-error-remove-connection": "Zwiskowa zmólka jo pśi wótporanju namakała a twóje změny njedaju se togodla pśewjasć. Pšosym pśeglědaj swój internetowy zwisk.",
+	"wikibase-error-save-timeout": "Mamy techniske śěžkosći a togodla njedajo se nic składowaś.",
+	"wikibase-error-remove-timeout": "Mamy techniske śěžkosći a togodla njedajo se nic wótpóraś.",
+	"wikibase-error-autocomplete-connection": "API sedła njedajo se napšašowaś. Pšosym wopytaj pózdźej hyšći raz.",
+	"wikibase-error-autocomplete-response": "Serwer jo wótegronił: $1",
+	"wikibase-error-ui-client-error": "Zwisk k eksternemu webbokoju jo se njeraźił. Pšosym wopytaj pózdźej hyšći raz.",
+	"wikibase-error-ui-no-external-page": "Pódany nastawk njedajo se na wótpowědujucem sedle namakaś.",
+	"wikibase-error-ui-cant-edit": "Njesmějoš toś tu akciju wuwjasć.",
+	"wikibase-error-ui-no-permissions": "Njamaš dosć pšawow, aby toś tu akciju wuwjadł.",
+	"wikibase-error-ui-link-exists": "Njamóžoš k toś tomu bokoju wótkazowaś, dokulaž drugi element južo k njomu wótkazujo.",
+	"wikibase-error-ui-session-failure": "Twójo pósejźenje jo se pśepadnuło. Pšosym pśizjaw se hyšći raz.",
+	"wikibase-error-ui-edit-conflict": "Jo wobźěłowański konflikt dał. Pšosym zacytuj a składuj znowego.",
+	"wikibase-replicationnote": "Pšosym źiwaj na to, až móžo někotare minuty traś, až změny njejsu widobne na wšych wikijach.",
+	"wikibase-sitelinks-sitename-columnheading": "Rěc",
+	"wikibase-sitelinks-siteid-columnheading": "Kod",
+	"wikibase-sitelinks-link-columnheading": "Wótkazany bok",
+	"wikibase-tooltip-error-details": "Drobnostki",
+	"datatypes-type-wikibase-item": "Element",
+	"datatypes-type-commonsMedia": "Medijowa dataja na Wikimedia Commons"
+}

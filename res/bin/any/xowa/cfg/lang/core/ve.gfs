@@ -1,0 +1,46 @@
+this
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+search|Ṱolani
+searchbutton|Ṱolani
+talk|Ambani
+mainpage|Hayani
+mainpage-description|Hayani
+nstab-mediawiki|Mulaedza
+error|Vhukhakhi
+yourname|Dzina ḽa mushumisi:
+yourpassword|Phasiwede:
+changepassword|Shandukisani phasiwede
+username|Dzina ḽa mushumisi:
+newpages-username|Dzina ḽa mushumisi:
+exif-meteringmode-255|Zwiṅwe
+version-other|Zwiṅwe
+']:>
+).lang
+;

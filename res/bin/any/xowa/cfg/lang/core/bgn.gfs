@@ -1,0 +1,2933 @@
+this
+.fallback_load('fa')
+.dir_rtl_('y')
+.ns_names
+  .load_text(
+<:['
+-2|رسانگ
+-1|ۆێک
+1|گپ
+2|کارمرزۆک
+3|کارمرزۆک ئی گپ
+5|$1 ئی گپ
+6|ورق
+7|ورق ئی گپ
+8|میڈیاویکی
+9|میڈیاویکی ئی گپ
+10|تراشوان
+11|تراشوان ئی گپ
+12|کومک
+13|کومک ئی گپ
+14|تهر
+15|تهر ئی گپ
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-2|میڈیا
+6|اکس
+7|اکس ئی گپ
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Activeusers|پئالین_کارمرزوکان
+Allmessages|موچین_پیامان
+AllMyUploads|نی_موچین_ایرگیج_ئآن~نی_موچین_وّرک_ئآن
+Allpages|موچین_تاکدیمان
+ApiHelp|ای_پی_آی_کومک
+Ancientpages|کوهنگین_تاکدیمان
+Badtitle|خرابین_ئینوان
+Blankpage|خالین_دیم
+Block|بستین~آی_پی_بستین~کارمرزوکی_بستین
+Booksources|کتاب_ئی_بُن
+BrokenRedirects|خرابین_تغیرمسیر
+Categories|تهرئان
+ChangeEmail|ایمیل_ئی_گردینتین
+ChangePassword|چیهرگال_ئی_پاک_کورتین~چیهرگال_ئی_ٹگل
+ComparePages|تاکدیمانی_موقایسه_کورتین
+Confirmemail|ایمیل_ئی_تائید_کورتین
+Contributions|شراکت_ئان
+CreateAccount|کارمرزوکین_هیساب_ئی_جۆڑ_کورتین
+Deadendpages|بن_بست_ئین_تاکدیمان
+DeletedContributions|پاک_بوته_ئین_شراکت_ئان
+Diff|پرک
+DoubleRedirects|دوئین_تغیرمسیرئان
+EditWatchlist|پێ_گیری_ئی_لیستی_دستکاری_کورتین
+Emailuser|په_کارمرزوکا_ایمیل_دیم_داتین
+ExpandTemplates|تراشوانی_پراخ_کورتین
+Export|دیمی_ڈنا_بورتین
+Fewestrevisions|کمتیرین_نخسه
+FileDuplicateSearch|گشتین_په_تکرارین_وّرک_ئا
+Filepath|وّرک_ئی_مسیر
+Import|ورق_ئانی_ریتین
+Invalidateemail|ایمیلی_باتل_کورتین
+JavaScriptTest|جاوا_سکریپت_ئی_تست
+BlockList|بسته_بوته_ئآنی_لیست~آی_پی_نشانی_بستینی_لیست
+LinkSearch|گشتین_په_لینکا
+Listadmins|مدیرئانی_لیست
+Listbots|روباٹ_ئانی_لیست
+Listfiles|پایل_ئانی_لیست~اکس_ئانی_لیست
+Listgrouprights|کارمرزوکین_گروپانی_اختیاران
+Listredirects|تغیرمسیرئانی_لیست
+ListDuplicatedFiles|تکرارین_پایلانی_لیست
+Listusers|کارمرزوکانی_لیست
+Lockdb|مالوماتین_بانکی_قُلپ_کورتین
+Log|سیاهه_ئان
+Lonelypages|آتیمین_دیمان
+Longpages|بُرزین_دیمان
+MediaStatistics|رسانگ_ئانی_سرجم
+MergeHistory|تاریخی_ادغام_کورتین
+MIMEsearch|MIME_ئی_گشتین
+Mostcategories|بازتیرین_تهر
+Mostimages|بازتیرین_اکس
+Mostinterwikis|بازتیرین_مانجین_ویکی
+Mostlinked|بازتیرین_لینک
+Mostlinkedcategories|تهر_گۆ_بازتیرین_لینکا
+Mostlinkedtemplates|تراشوان_گۆ_بازتیرین_لینکا
+Mostrevisions|بازتیرین_نخسه
+Movepage|دیمی_لڈّّینتین
+Mycontributions|نی_شراکت_ئان
+MyLanguage|نی_زبان_ئان
+Mypage|نی_ورق
+Mytalk|نی_گپ
+Myuploads|نی_بُرز_بوته_ئین_پایلان
+Newimages|نۆکین_اکس
+Newpages|نۆکین_وَرق_ئان
+PagesWithProp|وّرق_ئانی_خاسی_ئت_گۆ
+PageLanguage|وّرق_ئی_زبان
+PasswordReset|چیهرگالی_نادینتین
+PermanentLink|دایمین_لینک
+Popularpages|مشهورین_وّرق_ئان
+Preferences|تنزیمات
+Prefixindex|دیمۆندین_نمایگ
+Protectedpages|قُلپ_بوته_ئین_ورق_ئان
+Protectedtitles|قُلپ_بوته_ئین_ئینوان_ئان
+Randompage|تسادوپین_وّرق
+RandomInCategory|تسادوپی_بئ_تهری_تا
+Randomredirect|تسادوپین_تغیرمیسر
+Recentchanges|آخیرئین_تغیران
+Recentchangeslinked|مربوتین_تغیران
+Redirect|تغیرمسیر
+ResetTokens|نشانگ_ئانی_پدا_نادینتین
+Revisiondelete|نخسه_ئی_پاک_کورتین
+RunJobs|کارێ_کورتین
+Search|گشتین
+Shortpages|گۆنڈین_تاکدیمان
+Specialpages|خاسین_تاکدیمان
+Statistics|سرجم
+Tags|برچسپ_ئان~تگ_ئان
+TrackingCategories|ودی_کنۆکین_تهرئان
+Unblock|پاچ_کورتین
+Uncategorizedcategories|دسته_بندی_نه_بوته_ئین_تهر_ئان
+Uncategorizedimages|دسته_بندی_نه_بوته_ئین_اکس_ئان
+Uncategorizedpages|دسته_بندی_نه_بوته_ئین_تاکدیمان
+Uncategorizedtemplates|دسته_بندی_نه_بوته_ئین_تراشوانان
+Undelete|پاک_بوته_ئین_وّرق_ئی_بجا_آورتین
+Unlockdb|مالوماتین_بانکی_قُلپی_پاچ_کورتین
+Unusedcategories|ایستیپاده_نه_بوته_ئین_تهر_ئان
+Unusedimages|ایستیپاده_نه_بوته_ئین_اکس_ئان
+Unusedtemplates|ایستیپاده_نه_بوه_ئین_تراشوانان
+Unwatchedpages|پدگیری_نه_بوته_ئین_وّرق_ئان
+Upload|پایلی_ئی_بُرز_کورتین
+UploadStash|بَزین_بُرز_کورتین
+Userlogin|داخل_بوتین_بئ_سایٹ_ئی_تا
+Userlogout|دَر_بوتین_شه_سایٹ_ئا
+Userrights|کارمرزوک_ئی_اختیار_ئان
+Version|نخسه
+Wantedcategories|زَرورتین_تهر_ئان
+Wantedfiles|زَرورتین_اکس_ئان
+Wantedpages|زَرورتین_وّرق_ئان
+Wantedtemplates|زَرورتین_تراشوانان
+Watchlist|پدگیر_ئی_لیست
+Whatlinkshere|لینک_په_ای_دیما
+Withoutinterwiki|بئ_شه_مانیجین_ویکی_ئا
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|یکشمی
+monday|دوشمی
+tuesday|سه شمی
+wednesday|چار شمی
+thursday|پنچشمی
+friday|جوما
+saturday|شمی
+sun|یکشمی
+mon|دوشمی
+tue|سه شمی
+wed|چار شمی
+thu|پنچشمی
+fri|جوما
+sat|شمی
+january|جنوری
+february|فیبروری
+march|مارچ
+april|اپریل
+may_long|می
+june|جون
+july|جولای
+august|اگوست
+september|سیپٹمبر
+october|اکتوبر
+november|نوامبر
+december|ڈسمبر
+january-gen|جنوری
+february-gen|فیبروری
+march-gen|مارچ
+april-gen|اپریل
+may-gen|می
+june-gen|جون
+july-gen|جولای
+august-gen|اگوست
+september-gen|سیپٹمبر
+october-gen|اکتوبر
+november-gen|نوامبر
+december-gen|ڈ\tسمبر
+jan|جنوری
+feb|فیبروری
+mar|مارچ
+apr|اپریل
+may|می
+jun|جون
+jul|جولای
+aug|اگوست
+sep|سیپٹمبر
+oct|اکتوبر
+nov|نوامبر
+dec|ڈ\tسمبر
+toc|محتویات
+redirectedfrom|(تغییرمسیر داتین شه ~{0})
+allpages|موچین تاکدیمان
+prevpage|دیمی تاکدیم (~{0})
+nextpage|بعدین تاکدیم (~{0})
+collapsible-collapse|بستین
+collapsible-expand|پراخ کورتین
+sort-descending|نزولین ترتیب کورتین
+sort-ascending|صعودی ترتیب کورتین
+categories|تهرئان
+lastmodifiedat|ای تاکدیم آخرین‌ وارا بی ~{0} سائت ~{1} تا تغییر بوته.
+thumbnail-more|ٹُوه کورتین
+otherlanguages|بی دیگه زبانانی تا
+blanknamespace|(بُنیادی)
+pagecategories|{{PLURAL:~{0}\u007Cتهر\u007Cتهرئان}}
+category_header|تهرِ تاکدیمان «~{0}»
+subcategories|گونڈ\t تهرئان
+category-media-header|میڈ\tیا بی تهری تا «~{0}»
+category-empty|<em>ای تهر بی انون وختا هیچ تاکدیمئ یا میڈ\tیاین دیمی نه اینت.</em>
+category-subcat-count|{{PLURAL:~{1}\u007Cای تهر تانا جئلگین مطالبانا داریت.\u007C{{PLURAL:~{0}\u007Cای گوُنڈ\t تهر\u007Cای ~{0} گوُنڈ\t تهر}} بی ای تهر ئی تا {{PLURAL:~{0}\u007Cداریت\u007Cدارنت}}؛ بی ای تهر تا مجموئان  ~{1} گوُنڈ\t تهر انت.}}
+category-subcat-count-limited|ای تهر شامل شه جهلگین{{PLURAL:~{0}\u007Cیک\u007C~{0}}} گونڈ\tتهر ئه انت .
+category-article-count|{{PLURAL:~{1}\u007Cای تهر فقط جهلگی همی یکین تاکدیمانا داریت.\u007C{{PLURAL:~{0}\u007Cای تاکدیم\u007Cای ~{0} تاکدیم}} بی ای تهرئ تا قرار {{PLURAL:~{0}\u007Cداریت\u007Cدارنت}}؛ ای تهر موچاموچ ~{1} تاکدیم داریت.}}
+category-article-count-limited|{{PLURAL:~{0}\u007Cجهلگی تاکدیم\u007C~{0} جهلگی تاکدیمان}} بی انونین تهرئ تا قرار دارنت.
+category-file-count|{{PLURAL:~{1}\u007Cای تهر تانا ای جهلگین فایلا داریت .\u007C{{PLURAL:~{0}\u007Cای فایل\u007Cای ~{0} فایل}} بی ای تهرئ تا جاه {{PLURAL:~{0}\u007Cداریت\u007Cدارنت}}؛ ای تهر تا موچاموچ ~{1} فایل انت.}}
+category-file-count-limited|{{PLURAL:~{0}\u007Cجهلگین فایل\u007C~{0} جهلگین فایلان}} بی انونین تهرئ تا قرار دارنت.
+nextn|{{PLURAL:~{0}\u007C~{0}}}پدتیری
+prevn|{{PLURAL:~{0}\u007C~{0}}}دیمتیری
+listingcontinuesabbrev|(ادامه)
+bold_sample|پر رنگین متن
+bold_tip|پر رنگین متن
+italic_sample|مورب متن
+italic_tip|مورب متن
+link_sample|خرابین ئنوان
+link_tip|داخلین لینک
+headline_sample|متنئ سر ئنوان
+headline_tip|ئنوان سطح ۲
+ago|~{0}دیما
+hidden-category-category|چیهرین تهرئان
+statistics|ارقام
+statistics-header-pages|ای تاکدیمئ ارقام
+statistics-articles|تاکدیمانی محتوا
+statistics-pages|تاکدیمان
+statistics-pages-desc|ای ویکی ئی موچین تاکدیمان ٬ هبر و گپ ئی تاکدیمان ٬ و تغیر مسیر و دیگرین
+tog-underline|لینکانی جهلگا خط کشیتین
+tog-hideminor|کمین تغیرات شه آخیرین تغیراتانی لڑلیستا چیهر داته بئینت
+tog-hidepatrolled|گشت وارته گین ایڈ\tیٹان شه آخیرین ایڈ\tیٹانی لڑلیستا چیهر داته بئینت
+tog-newpageshidepatrolled|گشت وارته ئین تاکدیمان شه نی نوکین تاکدیمانی لڑ لیستا زیان بیئنت
+tog-extendwatchlist|پراخ کورتین واچلیستی لڑلیست په موچین تغیراتان،نه فقط آخرینان
+tog-usenewrc|گروپ بندی تغیراتانئ بی اساسئ تاکدیمانئ اخیر ئین تغیران و واچلیستئ لڑ لیستا
+tog-numberheadings|ئنوانانئ اتوماتیکین شماره گذاری
+tog-showtoolbar|نشان داتین ایڈیٹی نوارئ
+tog-editondblclick|تاکدیمانی ایڈیٹ کورتین گو دو کلیک ئا
+tog-editsectiononrightclick|پئال کورتین بخشانی ایڈیٹی گو راست کلیکا بی ئنوانی سرا
+tog-watchcreations|تاکدیمان که من جوڑ ئه کنین یا فایلان که بُرز ( ڈ\tانلوڈ\t) ئه کنین بی نئ واچلیست ئا اضافه بیئنت
+tog-watchdefault|تاکدیمان و فایلان که من ایڈ\tیٹ ئه کنین بی نئ واچلیست ئا اضافه بیئنت
+tog-watchmoves|تاکدیمان و فایلان که من جابجا ئه کنین بی نئ واچلیست ئا اضافه بیئنت
+tog-watchdeletion|تاکدیمان و فایلان که من ڈ\tیلیٹ ئه کنین بی نئ واچلیست ئا اضافه بیئنت
+tog-watchrollback|تاکدیمان  که من بیر گردینته ئون بی نئ واچلیست ئا اضافه بیئنت
+tog-minordefault|مارک یا ئلامت جتین موچین ایڈ\tیٹانی بی جزئی رقما
+tog-previewontop|پیش نمایش دیم شه ایڈ\tیٹ باکس ئه نشان داته بیئت
+tog-previewonfirst|پیش نمایش اولین ایڈ\tیٹئ وختا  نشان داته بیئت
+tog-enotifwatchlistpages|اگه شه نئ واچلیستا گوجام تاکدیم یا فایل ایڈ\tیٹ ئه بیئت په من ایمیل دیم داته بیئت
+tog-enotifusertalkpages|اگه شه نئ کار زوروکین تاکدیم ( یوزیر تاک) ایڈ\tیٹ ئه بیئت په من ایمیل دیم داته بیئت
+tog-enotifminoredits|په گوُنڈین ایڈ\tیٹان  تاکدیمانی یا فایلان خاتیرا په من ایمیل دیم داته بیئت
+tog-enotifrevealaddr|نی ایمیل ادرس بی ایمیلئ ناٹیپیشن ئانی تا نشان داته بیئت
+tog-shownumberswatching|دیستوکین کارزورکانی اندازه نشان داته بیئت
+tog-oldsig|انونین امضاء:
+tog-fancysig|امضا باید بی  ویکی‌متنئ رکما بی نظر گیپته بیئت (بدون شه اتوماتیکین لینکی درج کورتینا)
+tog-uselivepreview|استفاده شه زنده ئین پیش نمایش ئا
+tog-forceeditsummary|وختی که من ئنوانئ خلاصه ئا نیوشته نه کورته اون په گوشته بیئت
+tog-watchlisthideown|نی ایڈیٹ شه واچلیستی تا چیهر بیئنت
+tog-watchlisthidebots|رباتئ ایڈیٹ شه واچلیستی تا چیهر بیئنت
+tog-watchlisthideminor|کم ئین ایڈیٹ شه واچلیستی تا چیهر بیئنت
+tog-watchlisthideliu|لوگین بوته ئین کار زوروکانی ایڈیٹ شه نی واچلیست چیهر بیئنت
+tog-watchlisthideanons|نا دروستي ئین کار زوروکانی ایڈیٹ شه نی واچلیست چیهر بیئنت
+tog-watchlisthidepatrolled|گشت وارته ئین ایڈیٹ شه واچلیستی تا چیهر بیئنت
+tog-ccmeonemails|په من یک کاپی شه آ ایمیلان که من په دیگران دیم ئه دهین ، دیم داته بیئت
+tog-diffonly|جهلگی تاکدیمی محتوا تفاوت نشان داته مه بئینت
+tog-showhiddencats|چیهرین تهرئانه نشان دهی
+tog-norollbackdiff|بئد شه بیئرگردینتینا تفاوت نشان داته مه بیئت
+tog-useeditwarning|در بوتینی وختا شه ایڈ\tیٹی دیما اگر نی ایڈ\tیٹ تا هنگه ذخیره نه بوتتن ، په من هشدار دیم داته بیئت
+tog-prefershttps|بی داخل بوتینی وختا باید موچین وختا شه امنین اتصال ئا استفاده بیئت
+underline-always|موچین وختا
+underline-never|هیچ وخت
+underline-default|پیش فرضین پوسته یا بروزیر
+editfont-style|ایڈ\tیٹی جئبه ئی قلمی سبک:
+editfont-default|پیش فرضین بروزیر
+editfont-monospace|گو ثابیتین اندزه ئی قلم ئا
+editfont-sansserif|قلم بی شه گوشه ئا
+editfont-serif|گوشه دارین قلم
+january-date|~{0} جنوری
+february-date|~{0} فیبروری
+march-date|~{0} مارچ
+april-date|~{0} اپریل
+may-date|~{0} می
+june-date|~{0} جون
+july-date|~{0} جولای
+august-date|~{0} اگوست
+september-date|~{0} سیپٹ\tمبر
+october-date|~{0} اکتوبر
+november-date|~{0} نوامبر
+december-date|~{0} ڈ\tسمبر
+hidden-categories|{{PLURAL:~{0}\u007Cچیهرین تهر\u007Cچیهرین تهرئان}}
+index-category|آ تاکدیمان که دیسته بوته گنت
+noindex-category|آ تاکدیمان که دیسته نه بوته گنت
+broken-file-category|تاکدیمان گو خرابین لینکان بی فایلا
+about|بی باره ها
+article|محتوائین تاکدیم
+newwindow|(نوکین دَروازگی تا پاچ بیئت)
+cancel|کنسیل
+moredotdotdot|گیشتیر...
+morenotlisted|ای لڑ\t لیست کامل نه اینت.
+mypage|تاکدیم
+mytalk|گپ
+anontalk|ای آی پی نشانی ئی باره ئا گپ
+navigation|ناوبری
+and| و
+qbfind|ودی کورتین
+qbbrowse|مرور
+qbedit|ایڈیٹ
+qbpageoptions|ای تاکدیم
+qbmyoptions|نئ تاکدیمان
+faq|متداولین سوالان
+faqpage|Project:متداولین سوالان
+actions|عملکردهان
+namespaces|نامانی فضاهان
+variants|لهجه ئان
+navigation-heading|ناوبری مینو
+errorpagetitle|خطا
+returnto|بیئرگشت بئ ~{0}.
+tagline|شه {{SITENAME}}
+help|کومک
+search|گشتین
+searchbutton|گشتین
+go|برا
+searcharticle|برا
+history|تاکدیمی تاریخچه
+history_short|تاریخچه
+updatedmarker|نئ آخرین آپڈیٹا نشان داتین
+printableversion|چاپ وڑی ویرژن
+permalink|ثابتین لبنک
+print|چاپ
+view|نمایش
+view-foreign|دیستین بی ~{0}
+edit|ایڈیٹ
+edit-local|محل و جای توضیئانی ایڈ\tیٹ کورتین
+create|جوڑ\t کورتین
+create-local|محل و جای توضیئانی اضافه کورتین
+editthispage|ایڈ\tیٹ کورتین ای تاکدیمئ
+create-this-page|جوڑ کورتین ای تاکدیمئ
+delete|پاک کورتین
+deletethispage|پاک کورتین ای تاکدیمئ
+undeletethispage|بی جاه آورتین ای تاکدیمئ
+undelete_short|بی جاه آورتین {{PLURAL:~{0}\u007Cیک ایڈیٹ\u007C~{0} ایڈیٹ}}
+viewdeleted_short|نشان داتین {{PLURAL:~{0}\u007Cیکین ڈ\tیلیٹ بوتگین ایڈ\tیٹئ \u007C~{0} ڈ\tیلیٹ بوتگین ایڈ\tیٹئ}}
+protect|ساتیتئن
+protect_change|تغیر
+protectthispage|ای تاکدیمئ قُلپ کورتین
+unprotect|قُلپئ ٹگل داتین
+unprotectthispage|ای تاکدیمی قُلپئ ٹگل داتین
+newpage|نوکین تاکدیم
+talkpage|ای تاکدیم باره ئا هبر و گپ
+talkpagelinktext|گپ
+specialpage|خاصین تاکدیم
+personaltools|شخصین وسایل
+articlepage|تاکدیمی محتوائانی نمایش
+talk|هبر و گپ
+views|دیستینین
+toolbox|وسایللان
+userpage|کارزوروکین تاکدیمی دیستین
+projectpage|پروژه ئی تاکدیمی دیستین
+imagepage|فایلی تاکدیما نشان داتین
+mediawikipage|پیامی تاکدیما نشان داتین
+templatepage|تراشوانئ تاکدیما نشان داتین
+viewhelppage|کومکی تاکدیما نشان داتین
+categorypage|دیستین تهری تاکدیمی
+viewtalkpage|گپ تاکدیمی نشان داتین
+redirectpagesub|تاکدیمی تغییرمسیر داتین
+redirectto|تغییر مسیر بی:
+viewcount|شه ای تاکدیما کسی {{PLURAL:~{0}\u007Cیکوار\u007C~{0}ور}} دیدن کورته.
+protectedpage|قُلپ بوتگین تاکدیم
+jumpto|جوپ کورتین بی:
+jumptonavigation|ناوبری
+jumptosearch|گشتین
+view-pool-error|متاسفانه موچین سرویس بی انونین وختا باز مشغول انت.\nبازین شه کار گیروکان لوٹنت که ای تاکدیما بگیندنت. \nمهربانی بکنیت دیم شه ایشی که پدا په ای تاکدیمی دیستینا کوشش بکنیت یک کمی صبر بکنیت.\n\n~{0}
+generic-pool-error|متاسفانه موچین سرویس بی انونین وختا باز مشغول انت.\nبازین شه کار گیروکان لوتنت که ای تاکدیما بگیندنت. \nمهربانی بکنیت دیم شه ایشی که پدا په ای تاکدیمی دیستینا کوشش بکنیت یک کمی صبر بکنیت.
+pool-timeout|تمام بوتین انتظارمهلتئ په قُلپ کورتینئ خاتیرا
+pool-queuefull|مخزن ئی صف پر اینت
+pool-errorunknown|ناشناخته ئین خطا
+pool-servererror|پول سنتر سرویس بی دسترس ئا نه اینت ( ~{0} ).
+poolcounter-usage-error|خطا استفاده شه: ~{0}
+aboutsite|بی بارها {{SITENAME}}
+aboutpage|Project:بی بارها
+copyright|محتوایات بی  ~{0} اجازه نامه ئا هستنت مگه ای که آی خلاف ئا ذکر بوته بیئنت .
+copyrightpage|{{ns:project}}:کاپی رایت یا باز کورتینی حق
+currentevents|انونین واقئات
+currentevents-url|Project:انونین واقئاتان
+disclaimers|تکذیب‌ نامه‌هان
+disclaimerpage|Project:ئمومی ئین تکذیب‌ نامه
+edithelp|کومک په ایدیت ئی خاتیرا
+helppage-top-gethelp|کومک
+mainpage|بُنیادی تاکدیم
+mainpage-description|بُنیادی تاکدیم
+policy-url|Project:سیاست‌ئان
+portal|کار زوروکانئ داخل بوتین
+portal-url|Project:کار زوروکانئ داخل بوتین
+privacy|سیاست محرمانگی
+privacypage|Project:سیاست محرمانگی
+badaccess|دسترسی ئی خطا
+badaccess-group0|شما اجازه په ای ئملی اجرائا که درخواست کورته ئیت نداریت.
+badaccess-groups|ای ئملی که شما درخواست کورته ئیت مخصوص بی  {{PLURAL:~{1}\u007Cای گروپ\u007Cای گروپ ئان}} شه کار زوروکان اینت: ~{0}.
+versionrequired|نخسه ~{0} شه میڈ\tیا ویکی ئی نرم افزار ئا لازم اینت
+versionrequiredtext|په ای تاکدیمی دیستینی خاتیرا بی نخسه ئی  ~{0} تا شه میڈ\tیا ویکی ئی نرم افزار ئا ضرورت اینت .\nبی [[Special:Version\u007Cای تاکدیما]] برویت.
+ok|قبول داشتین
+retrievedfrom|گیپته بوته شه  «~{0}»
+youhavenewmessages|~{0} داریت (~{1}).
+youhavenewmessagesfromusers|شما شه {{PLURAL:~{2}\u007Cیک دیگه کار زوروکئ\u007C~{2}  کار زوروک}} ~{0} داریت (~{1}).
+youhavenewmessagesmanyusers|شما شه تعدادی کار زوروک ~{0} داریت (~{1}).
+newmessageslinkplural|{{PLURAL:~{0}\u007Cنوکین پیام\u007C999=نوکین پیامان}}
+newmessagesdifflinkplural|{{formatnum:~{0}}} {{PLURAL:~{0}\u007Cٹگل\u007C999=ٹگل}} اخیر
+youhavenewmessagesmulti|نوکین پیام بی  ~{0} تاداریت.
+editsection|ایڈیٹ
+editold|ایڈیٹ
+viewsourceold|نشان داتین مبدائی
+editlink|ایڈیٹ
+viewsourcelink|نشان داتین مبدائی
+editsectionhint|ایدیت کورتین : ~{0} بخشی
+showtoc|نشان داتین
+hidetoc|چیهر داتین
+confirmable-confirm|{{GENDER:~{0}\u007Cشما}} مطمئن هستیت؟
+confirmable-yes|هان
+confirmable-no|نه
+thisisdeleted|نشان داتین یا جوڑ\t کورتین ~{0} ئی؟
+viewdeleted|نشان داتین ~{0}؟
+restorelink|{{PLURAL:~{0}\u007Cیک\u007C~{0}}} ڈ\tیلیٹ بوتگینئ ایڈ\tیٹ
+feedlinks|حبر وان:
+feed-invalid|هبر وانی وراک ئی قیسم جواز نداریت.
+feed-unavailable|هبر وانی وراک ئان بی دسترس نه انت
+site-rss-feed|آراس‌اس وراک په ~{0}
+site-atom-feed|اتومئ وراک په ~{0}
+page-rss-feed|آراس‌اس وراک په "~{0}"
+page-atom-feed|اتومي وراک په «~{0}»
+red-link-title|~{0} ( دیم موجود نه اینت)
+nstab-main|تاکدیم
+nstab-user|کار زوروکی تاکدیم
+nstab-media|میڈ\tیای تاکدیم
+nstab-special|خاصین تاکدیم
+nstab-project|پروژه ئی تاکدیم
+nstab-image|فایل
+nstab-mediawiki|پیام
+nstab-template|تراشوان
+nstab-help|کومکین تاکدیم
+nstab-category|تهر
+nosuchaction|ایرنگین ئملی وجود نداریت
+nosuchactiontext|ای ئملی که شما مشخص کورته ئیت بی انترنیتئین ادرسی تا جواز نداریت .\nممکن اینت که انترنتین ادرسا جوان وارد نه کورته ئیت یا مشکل والا ئین لینک ئیا وارد کوره ئیت .\nیا امکان داریت که شه نرم افزاری که شما بی{{SITENAME}} تا استفاده کورته ئیت مشکل داشته بیئت.
+nosuchspecialpage|ای رقمین ویژه ئین تاکدیمی موجود نه اینت
+nospecialpagetext|<strong>شما په یک نامجازین تاکدیمی خاتیرا درخواست کورته ئیت.</strong>\n\nمجازین تاکدیمانی لڑ لیست بی  [[Special:SpecialPages\u007C{{int:specialpages}}]] تا وجود داریت.
+error|خطا
+databaseerror|مئلوماتین بانکئ خطا
+databaseerror-text|مشکلی بی مئلوماتین بانکی تا رخ داته. \nای ممکن اینت شه مشکلا بی نرم افزاری تا بیئت .
+databaseerror-textcl|مشکلی بی مئلوماتین بانکی تا رخ داته.
+databaseerror-query|پرس‌وجو: ~{0}
+databaseerror-function|تابع: ~{0}
+databaseerror-error|خطا: ~{0}
+laggedslavemode|'''هشدار:''' امکان داریت که تاکدیم آخرین اپدیت ئا شامل مه بیئت .
+readonly|مئلوماتئ بانک قُلپ بوت
+enterlockreason|یک دلیلی په قُلپ کورتینا بیاریت، که آیی تا نشان داته بوته بیئت که چی وختی قُلپ پاچه ئه بیئت
+readonlytext|انون مئلوماتئ بانک په تغیراتان و جوڑ\t کورتینئ تاکدیمانیا قُلپ بوته؛ای حالت احتمالآ په خاتیری تئمیراتان است و پدا شه آیی وضیئت بی حالت اول ئا بیئر ئه گردید.\n\nمدیری که آیرا قُلپ کورته وتی توضیئاتانا پیش کورته است : ~{0}
+missing-article|مئلوماتین بانک تاکدیمی متنا گو «~{0}» ~{1} ئی ناما که باید ودي کورتین ، ودي کورته نه توانت.\n\nاین مشکل معمولاً وختی ئه کیت که شما یک کهنگین لینک ئی و یا پاک بوتگین تاکدیمیا پدا بگردیت.\n\nیا دیگه شاید بی سافٹ ایر تا مشکل بیئت.\nمهربانی بکنیت ای مشکلا گو انترنتی ئین ادرسئ گوشتینا بی یکی شه [[Special:ListUsers/sysop\u007Cمدیرئان]] راپور دهیت.
+missingarticle-rev|(شمارهٔ نسخه: ~{0})
+missingarticle-diff|(تفاوت: ~{0}، ~{1})
+readonly_lag|مئلوماتین بانک بی انونین وختا اتوماتیکین رکما قُلپ بوته تا که پشتوانی ئی و بُنیادی ئین نخسه گو وت هماهنگ بیئنت
+internalerror|داخلین خطا
+internalerror_info|داخلین خطا: ~{0}
+internalerror-fatal-exception|خرابکارین استسنائین نمونه "~{0}"
+filecopyerror|نه شه فایل «~{0}» بی «~{1}» کاپی بیئت.
+filerenameerror|نه شه فایل «~{0}» بی «~{1}» تغیر نام بیئت.
+filedeleteerror|نه بوت فایل «~{0}» پاک بیئت.
+directorycreateerror|نه بوت مسیر ~{0} ئا جوڑ کورت.
+directoryreadonlyerror|دایرکتوری "~{0}" فقط وانتینئ اینت.
+directorynotreadableerror|دایرکتوری "~{0}" وانتینئ نه اینت.
+filenotfound|فایل «~{0}» ودی نه بوت.
+unexpected|غیرمنتظرئین اندازه: «~{0}»=«~{1}».
+formerror|خطا: نه توانن فرم ئا دیم دی ین.
+badarticleerror|نه توانن ای ئملا په ای تاکدیما انجام دی ین .
+cannotdelete|«~{0}» ئی تاکدیم یا اکسئ پاک کورتینی امکان نه اینت .\nممکن اینت دیمتیرا دیگه کسی آیرا پاک کورته بیئت.
+cannotdelete-title|نه توانیت که «~{0}» ئی تاکدیما ئا پاک کنیت
+delete-hook-aborted|پاک بوتین شه قلاب ئی نیمگاه لغو بوت.\nبی ای باره ئا هیچ توضیحی داته نه بوته.
+no-null-revision|پوچ ئین نخسه ئی جوڑ کورتینئ امکان  په  «~{0}» ئی تاکدیما موجود نه اینت
+badtitle|خرابین ئنوان
+badtitletext|شمی درخواستین ئنوان نا موتبر،خالی،یا میان زبانین یا میان ویکی ئین ئنوان و یا شه خرابین لینکی ات.\nممکن اینت که یک یا چینکه نویسگ داشته بیئت که نتوانن آوانا بی ئنوانی تا استفاده کنن.
+perfcached|همراهی کنوکین دیتا شه نهانی ئین حافظهٔ ئا فراخوانی بوته و ممکن اینت کاملاً اپڈیٹ نه بوته. حداکثر {{PLURAL:~{0}\u007Cیک نتیجه\u007C ~{0} نتیجه}} بي نهانی ئین حافظهٔ تا دسترس ئی وڈ اینت.
+perfcachedts|همرای کنوکین دیتا شه نهانی ئین حافظه ئا فرخوانی بوته و آخرین وار  بئ  ~{0} ئی تا اپڈیٹ بوته. حداکثر {{PLURAL:~{3}\u007Cیک نتیجه\u007C~{3} نتیجه}} بئ نهانی ئین حافظه تا دسترس ئی وڈ اینت.
+querypage-no-updates|ای تاکدیمی اپڈیٹ کورتین انون غیر فئال بوته.\nای تاکدیمی مئلومات ممکن اینت که نوک نه بوته انت.
+viewsource|نشان داتین مبدائی
+viewsource-title|مبدا ئی نشان داتین په ~{0}
+actionthrottled|شمی ئملی دیم گیپته بوت
+actionthrottledtext|په دیمگیری شه اسپم شینک بوتینی خاتیرا، په شما اجازه نه اینت که ایرنگین ئملی ئا چینکه وار بی یک کمین وختی تا انجام دهیت.\nمهربانی بکنیت پد شه چینکه دقیقه ئا کوشش بکنیت.
+protectedpagetext|ای تاکدیم په دیمگیری شه ایڈیٹ و یا دیگرین فئالیئتان قُلپ بوته.
+viewsourcetext|شما ئه توانیت ای تاکدیمی مبدائا بگیندیت و یا کاپی بکنیت:
+viewyourtext|شما ئه تونیت که  '''وتئ ایڈیٹانی'''  منشاء ئا بی ای تاکدیمی تا بگیندیت و کاپی بکنیت:
+protectedinterface|ای تاکدیم یک متنی ئا ارایه ئه کنت که ای ویکی ئی تا یک سافٹ ایرئ  په واسط بی کار زوروکانی مانجینا اینت و په دیمگیری ئا شه خرابکاری ئی  خاتیرا قُلپ بوته.\nپه اضافه کورتین یا تغیر داتین ترجمه په موچین ویکی ئان ، مهربانی بکنیت شه [//translatewiki.net/ translatewiki.net]، میڈیا ویکی ئی محلی کورتینی پروژه ئا ، استفاده بکنیت.
+editinginterface|<strong>هشدار:</strong> تاکدیمی که ایڈیٹ ئه کنیت متنی ئا شامل ئه بیئت که بی ای کار زوروکئ واسط ئی سافت ایر تا به کار گیپته بوته.\nای تاکدیمی تغییر  منجر بئ کار زوروکئ واسط ئی  ظاهر ئین تغیر ای سافت ایر په دیگه کار زوروکان ئه بیئت.
+translateinterface|په اضافه کورتین یا تغیر داتین ترجمه ئی په موچین ویکی ئان،مهربانی بکنیت شه [//translatewiki.net/ translatewiki.net]، مییڈیا ویکی  محلی کورتینی پروژه ئا، استفاده بکنیت.
+cascadeprotected|ای تاکدیم بئ ایڈیٹتانی مقابلا قُلپ بوته چونکه بی جهلگین قُلپ بوته ئین  {{PLURAL:~{0}\u007Cتاکدیم\u007Cتاکدیمانئ}} تا بئ {{PLURAL:~{0}\u007Cآوان\u007Cآوانئ}} تا «آپشاری» ئی گزینه انتخاب بوته:\n~{1}
+namespaceprotected|شما '''~{0}''' ئی تاکدیمانئ فضای نامئ ایڈیٹ کورتین ئی اجازه ئا  نداریت.
+customcssprotected|شما ای سی اس اس ئی تاکدیمئ ایڈیٹ ئی اجازه ئا نداریت، په خاتیریکه ایشی تا یک کار زوروکئ شخصی ئین تنظیمات هستنت.
+customjsprotected|شما ای جاوااسکریپت ئی تاکدیمئ ایڈیٹ ئی اجازه ئا نداریت، په خاتیریکه ایشی تا یک کار زوروکئ شخصی ئین تنظیمات هستنت.
+mycustomcssprotected|شما ای سی اس اس ئی تاکدیمی ایڈیٹ ئی اجازه ئه نداریت.
+mycustomjsprotected|شما ای جاوااسکریپت ئی ایڈیٹ ئی اجازه ئه نداریت.
+myprivateinfoprotected|شما په وتئ شخصین مئلوماتانئ ایڈیٹ ئی اجازه ئه نداریت.
+mypreferencesprotected|شما په وتئ تنظیماتانئ ایڈیٹ ئی خاتیرا اجازه نداریت.
+ns-specialprotected|خاصین تاکدیم موچ غیر پئال انت.
+titleprotected|ای ئنوان شه [[User:~{0}\u007C~{0}]] نیمگا په جوڑ کورتینئ مقابلا قُلپ بوته.\nوتئ دلیل ئا پیش کورته ایش اینت : «''~{1}''».
+filereadonlyerror|«~{0}» ئی فایلئ تغیر داتین ممکن نه اینت چون ه «~{1}» ئی فایلي مخزن فقط بی وانتینی ئین  حالت ئی تا قرار داریت.\n\nمدیری که آیرا قُلپ کورته ایرنگ توضیح داته:  «~{2}».
+invalidtitle-knownnamespace|نا موتبرین ئنوان گو نامئ فضای  «~{1}» و متن ئی  «~{2}»
+invalidtitle-unknownnamespace|ناموتبرین ئنوان گو نا زاتین نامئ فضای شماره  ~{0} و متن ئی «~{1}»
+exception-nologin|لاگین نه بوته ئیت
+exception-nologin-text|مهربانی بئ [[Special:Userlogin\u007Cتا داخل بیئت]] تا بتوانیت بئ ای تاکدیما دسترسی داشته بئیت.
+exception-nologin-text-manual|مهربانئ بکنیت  ~{0}  تا بتوانیت بئ ای تاکدیم یا عمل ئا دسترسی داشته بئیت .
+virus-badscanner|بدین پیکربندی: نازانتین ویروس ئی سکن کورتین: ''~{0}''
+virus-scanfailed|ناکامین سکن  (کود ~{0})
+virus-unknownscanner|نامئلومین انتی ویروس:
+logouttext|'''انون شما ثبت دَر بوتین کورته ئیت.'''\nتوجه داشته بئیت که وتي بروزیر ئی چیهرین حافظهٔ ئا پاک مه کنیت، بعضی شه دیمان ممکن اینت که بئ یک رقم ئی نشان داته بیئنت که بگوشی ته آوانی تا داخل بوته ئی.
+welcomeuser|وش آتیت ~{0}!
+welcomecreation-msg|شمی کار زوروکین حساب جوڑ بوت.\nبی هوش مکنیت که وتئ [[Special:Preferences\u007Cتنظیماتان ئا {{SITENAME}}]] تغیر بدهیت.
+yourname|کار زوروکین نام:
+userlogin-yourname|کار زوروکین نام
+userlogin-yourname-ph|وتئ کار زوروکین ناما داخل بکنیت
+createacct-another-username-ph|کار زوروکین ناما داخل بکنیت
+yourpassword|چیهر گال یا پاسورد:
+userlogin-yourpassword|چیهر گال یا پاسورد
+userlogin-yourpassword-ph|وتئ پاسوردا داخل بکنیت
+createacct-yourpassword-ph|پاسوردا داخل بکنیت
+yourpasswordagain|پاسوردی تکرار کورتین
+createacct-yourpasswordagain|پاسوردا تایید کورتین
+createacct-yourpasswordagain-ph|پاسوردا پدا داخل کورتین دومین وارا
+remembermypassword|پاسورد یا چیهرگال ئا (تا حداکثر ~{0} {{PLURAL:~{0}\u007Cروچ\u007Cروچ}}) بئ ای بروزیري تا بسات
+userlogin-remembermypassword|نا داخل بوتگ بسات
+userlogin-signwithsecure|شه امنیت ئا استفاده بکنیت
+yourdomainname|شمی دامنهٔ:
+password-change-forbidden|شما ئا نه توانیت که بی ای ویکی تا پاسوردا تغیر بدهیت
+externaldberror|بئ مئلوماتین بانکی تا یک اوتوماتیکین خطا ئی رخ داته و یا ایکه شما وتئ خارجی ئین حسابئ شما اپڈیٹ کورتینی ئی اجازه ئا نداریت.
+login|داخل بوتین
+nav-login-createaccount|داخل بوتین  / کار زوروکین حسابي جوڑ کورتین
+userlogin|داخل بوتین  / کار زوروکین حسابي جوڑ کورتین
+userloginnocreate|داخل بوتین
+logout|در بوتین
+userlogout|در بوتین
+notloggedin|لاگین نه بوته ئیت
+userlogin-noaccount|شما کار زوروکین حسابئ نداریت؟
+userlogin-joinproject|بی  {{SITENAME}} تا نام‌نویسی کنیت!
+nologin|شما کار زوروکین حسابئ نداریت ؟ ~{0}.
+nologinlink|یک نوکین کار زوروکین حسابئ جوڑ کنیت
+createaccount|نوکین کار زوروکین حسابئ جوڑ کورتین
+gotaccount|شما کار زوروکین حسابئ داریت ؟ ~{0}.
+gotaccountlink|داخل بوتین
+userlogin-resetlink|وتئ داخل بوتینئ مئلوماتان شه هوشا بورته ئیت؟
+userlogin-resetpassword-link|شمی پاسورد شه شمی دهوشا شُوته؟
+userlogin-helplink2|کومک گو داخل بوتینا
+userlogin-loggedin|شما انون بی ئنوان {{GENDER:~{0}\u007C~{0}}} داخل بوته ئیت .\nشه جهلگین فورما په داخل بوتینا بی ئنوان دیگرین کار زوروکا استفاده بکنیت .
+userlogin-createanother|دیگرین کار زوروکین حسابئ جوڑ کورتین
+createacct-emailrequired|ایمیل ادرس
+createacct-emailoptional|ایمیل ادرس (اختیاری)
+createacct-email-ph|وتئ ایمیل ادرسا داخل بکنیت
+createacct-another-email-ph|ایمیل ادرسی داخل کورتین
+createaccountmail|استفاده شه تصادفین پاسوردا و آیی دیم داتین بی مشخصین ایمیل ادرسیا
+createacct-realname|واقئین نام (اختیاری)
+createaccountreason|دلیل:
+createacct-reason|دلیل
+createacct-reason-ph|پچی شما لوٹیت که دیگرین کار زوروکین حساب جوڑ کنیت؟
+createacct-captcha|امنیتئ چیک کورتین
+createacct-imgcaptcha-ph|په بُرزه گین اکسا کی گیندیت متنی داخل کنیت
+createacct-submit|وتئ کار زوروکین حسابا جوڑ کنیت
+createacct-another-submit|دیگرین کار زوروکین حسابئ جوڑ کورتین
+createacct-benefit-heading|ای {{SITENAME}} چو شمیا همیرنگین مردمانی واسطه ئا جوڑ بوته
+createacct-benefit-body1|{{PLURAL:~{0}\u007Cایڈیٹ}}
+createacct-benefit-body2|{{PLURAL:~{0}\u007Cتاکدیم}}
+createacct-benefit-body3|آخیرین {{PLURAL:~{0}\u007Cشریکان}}
+badretype|پاسوردانا که شما داخل کورته ئیت یکرنگ نه انت.
+userexists|ای کار زوروکین ناما که شما داخل کورته ئیت دیمتیرا استفاده بوته.\nمهربانی بکنیت یک دیگه نامئ بیلیئت .
+loginerror|خطا بی داخل بوتینی تا
+createacct-error|کار زوروکین حسابئ جوڑ کورتینی خطا
+createaccounterror|ای حسابئ جوڑ کورتین امکان نداریت: ~{0}
+nocookiesnew|کارزوروکی هیساب جۆڑ بوت، اما تا انون لوگین نه بوته ایت.\n{{SITENAME}} په کارزوروکانی لوگین بوتین ئا شه کوکی ئا ایستیپاده ئا کننت.\nشما کوکی ئانه شه کار پرینته ایت.\nمهربانی بکنیت کوکی ئانه په کار بگیریت، و پدا گۆ وتی نۆکین کارزوروکی ناما و چیهرگال ئا لوگین به ایت.
+nocookieslogin|{{SITENAME}} په کارزوروکانی لوگین بوتینا شه کوکی ئان ایستیپاده ئه کننت.\nشما کوکی ئانه شه کار پرینته ایت.\nمهربانی بکنیت کوکی ئانه په کار بگریت و پدا کوشش بکنیت.
+nocookiesfornew|کارزوروکی هیساب جۆڑ نه بوت، په خاتیریکه نتوانتن آیی منبه ئا تایید بکنن.\nموتمه ئین به یت که کوکی په ئال انت، آ وختا شه سری ن\tۆک بارگیری بکینت و پدا امتیهان بکنیت .
+noname|شما یک موتبرین کار زوروکی ئین نامی ئا مشخص نه کورته ئیت.
+loginsuccesstitle|کامیابین لوگین
+loginsuccess|'''شما انون گو «~{0}» ئی نا بی {{SITENAME}} ئی تا داخل بوته ایت.'''
+nosuchuser|کار زوروکئ گۆ «~{0}» ئی ناما موجود نه اینت.\nکار زورکئ نام گۆ گۆنڈی یا توُهی ئا هوروپ ئان هساس اینت.\nنامی املا ئا بگنیدیت، یا [[Special:UserLogin/signup\u007Cیک نوکین کار زورکی هسابئ جۆڑ بکنیت]].
+nosuchusershort|هیچ کار زوروکئ بی نامئ  ''~{0}'' ئا وجود نداریت.\nوتئ املا ئا چیک بکنیت.
+nouserspecified|باید یک کار زوروکئ نام مشخص بکنیت.
+login-userblocked|ای کار زوروک بلاک بوته، په داخل بوتینا اجازه نه اینت.
+wrongpassword|ای پاسورد یا چیهر گالا که داخل کورته ایت صحیح نه اینت.\nمهربانی بکنیت، پدا امتحان بکینت.
+wrongpasswordempty|ای پاسورد یا چیهر گالا که داخل کورته ایت ، خالی اینت.\nمهربانی پدا کوشش بکنیت.
+passwordtooshort|پاسورد باید کم شه کم {{PLURAL:~{0}\u007C۱ حرف\u007C~{0} حرف}} داشته بیئت.
+passwordtoolong|پاسورد نه باید گیشتیر شه {{PLURAL:~{0}\u007C۱ حرف\u007C~{0} حرفا}}  داشته بیئت.
+password-name-match|شمی چیهرگال یا پاسورد باید شه شمی کار زورکی ئین ناما فرق داشته بیئت.
+password-login-forbidden|استفاده شه ای کار زوروکی ناما و شه ای چیهرگالا اجازه نه اینت.
+mailmypassword|پاک کورتین پاسوردئ
+passwordremindertitle|نوکین موقتی ئین چیهرگال یا پاسورد په  {{SITENAME}}
+noemail|هیچ ایمیل ادرسئ په  «~{0}» کار زوروکا ثبت نه بوته.
+noemailcreate|باید یک موتبرین ایمیل ادرسئ داخل بکنیت
+passwordsent|نوکین چیهرگال بئ سبت بوته ئین ایمیل ادرس ئا په «~{0}» ئا دیم داته بوت.\nمهربانی بکنیت شه آیی گیپتین ئا پد لوگین به ییت.
+mailerror|خطا بی ایمیلی داتینی تا: ~{0}
+emailauthenticated|شمی ایمیلی ادرس بی ~{1} سائت ~{2}  تا تصدیق ئه بیئت.
+emailnotauthenticated|شمی ایمیلئ ادرس تا انون قبول نه بوته.\nایمیل په هیچ یک شه ویژه گی ئان دیم داته ئه نه بیئت.
+noemailprefs|په ای قابلیت ئانی دیمبورتینا یک ایمیل ادرسئ مشخص بکنیت.
+emailconfirmlink|وتئ ایمیل ادرسی تائید کورتین
+cannotchangeemail|شمی حسابئ ایمیلئ تغیر داتین بی ای ویکی ئی تا تغیری وڈ نه اینت.
+emaildisabled|ای ویبسایت ایمیل ئا دیم داته ئه نه کنت.
+accountcreated|کار زوروکین حساب جوڑ بوت
+accountcreatedtext|کار زوروکئ حساب په [[{{ns:User}}:~{0}\u007C~{0}]] ([[{{ns:User talk}}:~{0}\u007Cهبر و گپ]]) جوڑ بوته.
+createaccount-title|کار زوروکئ حساب جوڑ کورتین بی {{SITENAME}}
+createaccount-text|یک نفری په شمی ایمیلا یک کار زوروکین حسابئ  بی {{SITENAME}} تا گو «~{1}» ناما جوڑ کورته (~{3})، که آیی پاسورد ایش اینت : ~{2}\nشما باید همی انون وتئ حسابئ تا داخل بئیت و وتئ پاسوردا تغیر بدهیت .\n\nاگه ای حساب اشتباهی جوڑ بوته ، ای پیام ئا نادیستگ بگیریت.
+login-abort-generic|شمی لوگین ناکام ات - ساکت بوت
+login-migrated-generic|شمی کار زوروکین نام انتقال بوته، و شمی کار زوروکین نام دیگه بی ای ویکی ئی تا وجود نداریت.
+loginlanguagelabel|زبان: ~{0}
+suspicious-userlogout|شمی ریکویست په دربوتینی خاتیرا رد بوت، بی خاتیریکه بی نظر ئه رسیئت که ای درخواست شه  خراب و یا پروکسی ئین بروزیرئ نیمگا دیم داته بوته.
+createacct-another-realname-tip|واقئین نام اختیاری اینت.\nاگه آیی را بنویسیت شه شما بی قدردانی ئی وختا شه شمی واقئین ناما استفاده بیئت
+pt-login|داخل بوتین
+pt-login-button|داخل بوتین
+pt-createaccount|کار زوروکین حسابئ جوڑ کورتین
+pt-userlogout|در بوتین
+php-mail-error-unknown|نا زانتین خطابی تابع  mail()‎ پی‌اچ‌پی
+user-mail-no-addy|کوشش په دیم داتین یک خط بی شه گوجام ایمیل ادرسئ  ئا.
+user-mail-no-body|کوشش په دیم داتین ئا یک گونڈین یا خالی ئین ایمیل ئی ئا.
+changepassword|پاسوردی تغیر داتین
+resetpass_announce|شما باید په لوگین ئی الاسی ئا، نۆکین چیهرگالی ئی تنظیم بکنیت.
+resetpass_header|پاسوردئ تغیر داتین
+oldpassword|دیمئ پاسورد:
+newpassword|نوکین پاسورد:
+retypenew|نوکین پاسوردا پدا داخل کورتین
+resetpass_submit|پاسوردی تنظیم و داخل بوتین
+changepassword-success|شمی پاسوردئ تغیر کامیاب بوت و پاسورد تغیر کورت
+changepassword-throttled|شما بیخی باز وار په لوگین بوتینا کوشش کورته ایت.\nمهربانئ بکنیت دیم شه آیی که پدا کوشش بکنیت ~{0} صبر کنیت.
+resetpass_forbidden|نه توانیت که پاسوردا تغیر بدهیت
+resetpass-no-info|په ای تاکدیمی دسترسی ئی خاتیرا داخل بئیت.
+resetpass-submit-loggedin|پاسوردی تغیر داتین
+resetpass-submit-cancel|کنسیل
+resetpass-recycled|مهربانی بکینت دیگه پاسورد یا چیهرگالی غیر شه انونین چیهرگال ئا تنظیم بکنیت.
+resetpass-temp-emailed|شما گۆ یک موقتین ایمیل بوته ئین کود ئا لوگین بوته ئیت.\nپه لوگین ئی الاسی ئا شما باید نوکین چیهرگالی ایدا داخل بکنیت:
+resetpass-temp-password|موقیئتین پاسورد:
+resetpass-abort-generic|چیهرگالی ٹگل شه یک توسئ ئه گری نیمگا شه کار پرینته بوت.
+resetpass-expired|شمی چیهرگالی ئی وخت الاس بوته. مهربانی په لوگین بوتینا نۆکین چیهرگالی تنظیم بکنیت.
+passwordreset|پاک کورتین پاسوردئ
+passwordreset-text-one|په پدا نادینتین ایمیلی پاسوردی خاتیرا ای فرم ئا پر کنیت.
+passwordreset-text-many|{{PLURAL:~{0}\u007Cپه موقتی ئین چیهرگال ئی گیپتین شه ایمیلئ راه ئا، یکی شه زمینه‌هان ئا پر کنیت.}}
+passwordreset-legend|پاک کورتین پاسوردئ
+passwordreset-disabled|ای ویکی ئی تا پاسورد یا چیهرگالی پدا بیئر گردینتین غیر پئال اینت.
+passwordreset-emaildisabled|ایمیلی گزینه بی ای یکی ئی تا پئال نه ونت.
+passwordreset-username|کار زوروکین نام:
+passwordreset-domain|دامنه:
+passwordreset-capture|ایمیلی آخیر نشان داته بیئت؟
+passwordreset-capture-help|اگه ای گزینه ئا بگیندیت ، ایمیل (گو موقتین پاسوردا) بی شما نشان داته ئه بیئت و په کار زوروکا هم دیم داته ئه بیئت.
+passwordreset-email|ایمیل ادرس:
+passwordreset-emailtitle|حسابئ مئلومات بی {{SITENAME}}
+passwordreset-emailelement|کار زوروکئ نام: ~{0}\nموقت ئین چیهرگال: ~{1}
+passwordreset-emailsent|یک ایمیل په چیهر گالئ  پاک بوتین  خاتیرا دیم داته بوت.
+passwordreset-emailsent-capture|یک ایمیلئ په بیئرگردینتین ئا پاسوردئ خاتیرا، دیم داته بوت.
+changeemail|ایمیل ادرسی تغیر داتین
+changeemail-no-info|په ای تاکدیمی دسترسی ئی خاتیرا داخل بئیت.
+changeemail-oldemail|انونین ایمیل ادرس:
+changeemail-newemail|نوکین ایمیل ادرس:
+changeemail-none|(هیچ)
+changeemail-password|شمی {{SITENAME}} ئی پاسورد یا چیهرگال:
+changeemail-submit|ایمیل ادرسی تغیر
+changeemail-throttled|شما بیخی باز وار په لوگین بوتینا کوشش کورته ایت.\nمهربانئ بکنیت دیم شه آیی که پدا کوشش بکنیت ~{0} صبر کنیت.
+resettokens|بیئر گردینتین نشانگ ئانی
+resettokens-no-tokens|هیچ نشانگ ئی په ریست کورتین ئا وجود نداریت.
+resettokens-legend|بیئر گردینتین نشانگ ئانی
+resettokens-tokens|نشانگان:
+resettokens-token-label|~{0} (انونین اندازه گ: ~{1})
+resettokens-done|بیئر گردینتین نشانگ ئان.
+resettokens-resetbutton|نشانی بوته ئین وسایلانی بیئرگردینتین.
+extlink_sample|http://www.example.com خرابین ئنوان
+extlink_tip|لینک په ڈنا (دیموند http://‎ ئا شه هوشا مه به ریت)
+nowiki_sample|ایدا چوکاٹ بندی نه بوته ئین متن ئه داخل کنیت
+nowiki_tip|نادیده گیپتین ویکی ئی چوکاٹ بندیا
+image_tip|متنی تئ اکس
+media_tip|فایل لینک
+sig_tip|شمی دستنام گو وختئ مهرئا
+hr_tip|افقی ئین خط (په مصرفئ کم کورتینا استفاده بیئت)
+summary|خلاصه:
+subject|موضو/ئنوان:
+minoredit|ای یک گونڈین ایڈیٹئ است
+watchthis|دیستین ای تاکدیمی
+savearticle|ای تاکدیم ذخیره بیئت
+preview|دیم دیست
+showpreview|دیم دیست
+showdiff|تغیراتانئ نشان داتین
+blankarticle|<strong>هشدار:</strong> شما انون یک خالین تاکدیمی جوڑ کورتینی حالا وَیت .\nاگر «{{int:savearticle}}» ئا پدا  کلیک کنیت، یک تاکدیمی بدون شه محتوائا جوڑ ئه بیئت.
+anoneditwarning|<strong>هشدار:</strong> شما داخل نه بوته ئیت. شمی آی‌پی نشانگ ئا موچی ئه تواننت بگیندنت اگر شما هر تغیری بیاریت . اگر <strong>[~{0} داخل بئیت]</strong> یا <strong>[~{1} یک کار زوروکین حساب جوڑ بکنیت]</strong>، شمی ایڈیٹ\t بی شمی کار زوروکین ناما شینک ئه بیئنت و گون گو دیگرین مزایان .
+anonpreviewwarning|<em>شما لوگین نه بوته ئیت. ذخیره کورتین باعث ئه بیئت که شمی آی پی ادرس بی ای تاکدیمی تاریخچه ئی تا ثبت بیئت.</em>
+missingcommenttext|مهربانی بکنیت جهلگا توضیح دهیت.
+summary-preview|دیم دیست ئی خلاصه:
+subject-preview|موضو ئی دیم دیست/ئنوان:
+blockedtitle|کار زوروک بسته بوته
+blockednoreason|دلیلی مشخص نه بوته
+whitelistedittext|په مقاله ئانی ایڈیٹ ئا باید ~{0}.
+nosuchsectiontitle|ایرنگی بخشئ ودئ نه بوت
+loginreqtitle|لوگین بوتین ضروری اینت
+loginreqlink|داخل بوتین
+loginreqpagetext|په دیگه تاکدیمانئ دیستینا باید  ~{0}.
+accmailtitle|پاسورد دیم داته بوت.
+newarticle|(نوکین)
+newarticletext|شما یک لینک ئی پدا گیپته ئیت و بي ورّق ئی رسیته ئيت که تا انون موجود نه اینت .\nپه ای ورّق ئی جۆڑ کورتینی خاتیرا، به جهلگین چارگوش ئی تا په نیوشیتین ئا شرو بکنیت (په گیشتیرین مالوماتان [~{0} کومک ئی ورّق  ] ئا بگیندیت).\nاگه نالوٹگ ایدا آته ئیت، وتی بروزیر تا «بێرگشت» ئی کیلی ئا پرینچیت.
+noarticletext|ای تاکدیم همی انون هیچ متنئ نداریت .\nشما ئه توانیت که بئ دیگه تاکدیمانئ [[Special:Search/{{PAGENAME}}\u007Cای تاکدیمی ئنوانا بگردیت]]،\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} مربوطین سیاه چال ئا هم بگردیت ]،\nیا [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} ای تاکدیما ایڈیٹ بکنیت]</span>.
+noarticletext-nopermission|ای تاکدیم همی انون هیچ متنی نداریت.\nشما ئه توانیت که دیگه تاکدیمانئ تا [[Special:Search/{{PAGENAME}}\u007Cای ئنوانئ پدا بگردیت ]]،\nیا <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} مرتبطین سیاه چال ئانئ پدا بگردیت ]</span> ولی شما په ای تاکدیمئ جوڑ کورتینا اجازه نداریت.
+missing-revision|#~{0} ئی ایڈیٹ شه  «{{FULLPAGENAME}}» ئی تاکدیما موجود نه اینت.\n\nمعمولاً بئ اثر لینک بئ تاریخچهٔ ئا اپڈیٹ نه بوته و تاکدیم پاک بوته.\nتوانیت ایدت مئلومات بئ  [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} پاک بوته ئین سیاه چال ئی] تا بگیندیت.
+userpage-userdoesnotexist|«<nowiki>~{0}</nowiki>» ئی کار زوروکین حساب راجستر نه بوته.\nمهربانی بکنیت مطمائین بئیت که لوٹیت ای تاکدیما جوڑ یا ایڈیٹ بکنیت.
+userpage-userdoesnotexist-view|«~{0}» ئی کار زوروکین حساب راجستر نه بوته.
+blocked-notice-logextract|ای کار زوروکئ دسترسی بی انونین وختا بسته بوته.\nآخرین مورد شه دسترسی ئی سیستین به جهلگا آته:
+clearyourcache|<strong>نکته:</strong> پد شه تغیراتان شاید په دیستینا ضرورت بیئت که بروزیزی نهانی ئین حافظه ئا پاک بکنیت.\n*<strong>په فایرفاکس / سافاری:</strong> خاتیرا <em>Shift</em> کیلی ئانه بساتیت و  <em>Reload</em> دکمه ئی سرا کلیک بکینت، یا  <em>Ctrl-F5</em> کیلی ئانه یا <em>Ctrl-R</em> ئا یکجا پرینچیت (بئ اپل مکینتاش ئی کامپیوتراني تا <em>⌘-R</em>) کیلی ئانه\n*<strong>گوگل کروم:</strong> خاتیرا <em>Ctrl+Shift+R</em> کیلی ئانه گو وت یکجا پرینچیت (بئ  اپل مکینتاش ئی کامپیوتراني تا  <em>⌘-Shift-R</em>) کیلی ئانه\n*<strong>اینترنت اکسپلورر:</strong> خاتیرا <em>Ctrl</em> کیلی ئانه  بساتیت و بئ <em>Refresh</em> دکمه یا کوچکئ سرا کلیک بکینت، <em>Ctrl-F5</em> ئی کیلی ئانه گو وت یکجا پرینچیت\n*<strong>اپرا:</strong> بروزیری نهانی ئین حافظهٔ ئا شه  <em>Tools &rarr; Preferences</em> ئی مینوی طریقه پاک بکینت
+usercssyoucanpreview|'''نکته:''' پد شه وتئ سی‌اس‌اس ئی فایلی ذخیره کورتینا، گو '''{{int:showpreview}}''' ئی دکمه ئا آیرا امتحان بکنیت .
+userjsyoucanpreview|'''نکته:''' پد شه وتئ جاوااسکریپت ئی ذخیره کورتینا،گو '''{{int:showpreview}}''' ئی دکمه ئا آیرا امتحان بکنیت.
+usercsspreview|'''شه هوشا بورته ایت که شما فقط وتئ کار زوروکئ سی اس اس ئی دیم دیست ئا گیندیت.'''\n'''ای سی‌اس‌اس تا انون ذخیره نه بوته!'''
+sitecsspreview|'''شه هوشا مه بَریت که شما فقط وتئ کار زوروکئ سی اس اس ئی دیم دیست ئا گیندیت.'''\n'''ای سی‌اس‌اس تا انون ذخیره نه بوته!'''
+sitejspreview|'''شه هوشا مه بَریت که شما فقط جاوااسکریپت ئی دیم دیست ئا گیندیت.'''\n'''ای جاوااسکریپت تا انون ذخیره نه بوته!'''
+updated|(نوک بوته ئین)
+note|'''نکته:'''
+previewnote|'''بئ هوش ئا داشته بیئت که ای په قت دیم اینت.'''\nشمی تغیرات تا انون زه خیره نه بوته انت!
+continue-editing|شوتین بی ایڈ\tیٹ\tی نیمگا
+editing|بی ایڈ\tیٹ\t کورتینی حالا ~{0}
+creating|بی جوڑ کورتینی حالا ~{0}
+editingsection|بئ ~{0} ئی ایڈیٹ کورتینئ حالا (بخش)
+editingcomment|بئ ~{0} ئی ایڈیٹ کورتینئ حالا (نوکین بخش)
+editconflict|هجومین ایڈیٹ: ~{0}
+yourtext|شمی متن
+storedversion|ذخیره بوته ئین نخسه
+yourdiff|تفاوت‌هان
+templatesused|{{PLURAL:~{0}\u007Cتراشوان\u007Cتراشوانان}} استفاده بوته انت بی ای تاکدیمئ تا:
+templatesusedpreview|ای دیم دیست ئی تا استفاده بوته ئین {{PLURAL:~{0}\u007Cتراشوان\u007Cتراشوانان}} :
+templatesusedsection|ای بخش ئی تا استفاده بوته ئین {{PLURAL:~{0}\u007Cتراشوان\u007Cتراشوانان}} :
+template-protected|(قُلپ بوته)
+template-semiprotected|(نیمه‌ گ قُلپ بوته)
+hiddencategories|ای تاکدیم بی {{PLURAL:~{0}\u007Cیک چیهرین تهر\u007C~{0} چیهرین تهر}} تا قرار داریت:
+nocreate-loggedin|شما نوکین دیم ئی جۆڑ کورتین ئی اجازه ئا نداریت.
+sectioneditnotsupported-title|بخش ئانی ایڈیٹ پشتیوانی ئه نه بیئنت
+sectioneditnotsupported-text|ای تاکدیم شه بخشانی ایڈیٹ ئا پُشتوانی ئه نه کنت.
+permissionserrors|دسترسی ئی خطا
+permissionserrorstext|شما ای کارئ اجازه ئا په ای {{PLURAL:~{0}\u007Cدلیلا\u007Cدلیلان}} نداریت:
+permissionserrorstext-withaction|شما اجازهٔ ~{1} ئا بی ای {{PLURAL:~{0}\u007Cدلیلا\u007Cدلیلان}} نداریت:
+recreate-moveddeleted-warn|<strong>هشدار: شما یک تاکدیمی ئا جوڑ\t ئه کنیت که دیمتیرا پاک کورته بوته.</strong>\n\nبی نظر داشته بئیت که آیا ایڈ\tیٹ ای تاکدیمی جوانین کاری است یانه.\nای تاکدیمی پاک بوتینئ و انتقالئ کورم ئا جهلگا توانیت بگیندیت:
+moveddeleted-notice|ای تاکدیم پاک بوته.\nای تاکدیمی پاک بوتینئ و انتقالئ کورم ئا جهلگا توانیت بگیندیت.
+log-fulllog|دیستین کامیلین کورمئ
+edit-hook-aborted|ایڈیٹ شه قلاب ئی نیمگاه لغو بوت.\nبی ای باره ئا هیچ توضیحی داته نه بوته.
+edit-gone-missing|اپڈیٹ ئی امکان وجود نداریت.\nبی نظر ئه رسیت که تاکدیم پاک بوته.
+edit-conflict|هجومئ ایڈیٹ\t.
+edit-no-change|شمی ایڈیٹ مهم گیپته نه بوته، بی خاتیریکه متنئ تا هیچ تغیرئ داته نه بوتتت.
+postedit-confirmation-created|ای تاکدیم جوڑ بوته.
+postedit-confirmation-restored|ای تاکدیم بیئرگردینته بوته.
+postedit-confirmation-saved|شمی ایڈ\tیٹ ذخیره بوت.
+edit-already-exists|نوکین تاکدیمئ جوڑ کورتین امکان نه داریت.\nای تاکدیم شه دیما وجود داشتت.
+defaultmessagetext|پیامی پیش فرضین متن
+content-failed-to-parse|~{1} مهتوایی تجزیه کار نه کورت په ~{0} مدل ئا: ~{2}
+invalid-content-data|ناموتبرین دیتایی کانتکت
+content-not-allowed-here|«~{0}» ئی محتوا بئ [[~{1}]] ئی دیمی تا جایز نه اینت
+editwarning-warning|شه ای دیما دَر بوتین ممکن اینت که هر آنچه که شما بوجود آورته ئیت آوانا شه دست ب دهیت.\nاگر شما سایٹ ئی داخل بوته ئیت، توانیت که ای هشدار ئا بئ تنزیماتانی «{{int:prefs-editing}}» ئی بخشی تا بند کنیت .
+editpage-notsupportedcontentformat-title|پشتیوانی نه بوته ئین دیتا کانتکت ئی فورمت کورتین
+editpage-notsupportedcontentformat-text|~{0} ئی مهتوائین پورمت گۆ ~{1} ئی مهتوائین مدل ئا پُشتیوانی نه بوته انت.
+content-model-wikitext|ویکی‌متن
+content-model-text|ساده گین متن
+content-model-javascript|جاوااسکریپت
+content-json-empty-object|خالین چیز
+content-json-empty-array|خالین صف
+duplicate-args-category|تاکدیمان گو تکرارین آرگومینتان بی تراشونئ لوٹیتنا
+duplicate-args-category-desc|تاکدیمان که تکرارین آرگومینت دارنت ، چو <code><nowiki>{{foo\u007Cbar=1\u007Cbar=2}}</nowiki></code> یا <code><nowiki>{{foo\u007Cbar\u007C1=baz}}</nowiki></code>.
+expensive-parserfunction-warning|'''هشدار:''' ای تاکدیم باز تجزیه گرین فراخوانئ دستور داریت .\n\nآوانئ اندازه گ باید کمتر شه ~{1} {{PLURAL:~{1}\u007Cلوٹیتین\u007Cلوٹیتین}} ئا بیئت، و اینک {{PLURAL:~{0}\u007C~{0} لوٹیتین\u007C~{0} لوٹیتین}} اینت.
+expensive-parserfunction-category|تاکدیمان که باز سکین تجزیه گرین فراخوانئ دستور دارنت
+post-expand-template-inclusion-warning|هشدار: تراشوان بی شه اندزه ئا ٹوو اینت.\nبرخی شه تراشوانان شاید شامل مه بیئنت.
+post-expand-template-inclusion-category|آ تاکدیمان که آوانئ تا تراشوانانئ اندزه گ شه حد ئا گیشتیر اینت.
+post-expand-template-argument-warning|'''هشدار:''' ای تاکدیم یک تراشوانئ پارامیتر اینت که شه اندازه ئا ٹوو.\nای پارامیتران نادیسته گیپته بوتنت.
+post-expand-template-argument-category|تاکدیمان که حاوی تراشوانان گو پارامیتران نادیده گیپته بوته انت
+parser-template-loop-warning|حلقه بی تراشوان ئا تا ودی نه بوت: [[~{0}]]
+parser-template-recursion-depth-warning|تراشوانئ بیئرگشتی عمق رد بوت (~{0})
+language-converter-depth-warning|مبدل زبانی ئی محدودیت عمق  رد بوت (~{0})
+node-count-exceeded-category|تاکدیمان که شه حداکثر گروپ ئا تجاوز کورته انت
+node-count-exceeded-category-desc|ای تاکدیم شه حداکثر پرابلمان گیشتیر بوته
+node-count-exceeded-warning|تاکدیم شه حداکثر گرینان گیشتیر بوته
+expansion-depth-exceeded-category|تاکدیمان که شه حداکثر بسط داتین عمق ئا تجاوز کورته انت
+expansion-depth-exceeded-category-desc|تاکدیم که که آیی پراخئ جُهلئ شه اندازه گ ئا گیشتیر بوته.
+expansion-depth-exceeded-warning|تاکدیم شه حداکثر بسط داتین عمق ئا تجاوز کورت
+parser-unstrip-loop-warning|حلقه بی دستور unstrip ئی تا ودی نه بوت
+parser-unstrip-recursion-limit|شه حداکثر ارجاع بئ دستور unstrip ئی تا تجاوز بوت (~{0})
+converter-manual-rule-error|خطا بئ زانئ دستی ئین بدل کورتینی قوانین ئی تا
+undo-success|ای ایڈیٹ ئا توانیت شه بین بَریت.\nمهربانی بکنیت جهلگی فرق ئا بگنیدیت و قبول بکنیت که آ چیزی است که شما ئه لوٹیت انجام دهیت،پدا جهلگئ تغیراتانا ذخیره بکنیت تا که ایڈیٹ ئی شه بین بورتینئ کار الاس بکنیت.
+undo-failure|ایڈیٹ ئا نتوانتیت شه بین بَریت، بی خاتیرئ بعضی تعرض ئان یا میانئ ئین ایڈیٹان.
+undo-norev|ای ایڈیٹ ئا نتوانتیت شه بین بَریت بخاتیریکه یا اصلان وجود نداریت یا که پاک بوته.
+undo-nochange|بئ نظر ئه رسیئت که ایڈیٹ بیئرگردینته بوته.
+undo-summary| ~{0} ئی ایڈیٹ شه [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007Cحبر و گپ]]) نیمگا شه بَیْن بورته بوت
+undo-summary-username-hidden| ~{0} نخسه ئی شه بین بورتین بی یک کار زوروکئ دستا چیهر بوته
+cantcreateaccounttitle|نه توانیت حسابئ پاچ کنیت
+cantcreateaccount-text|کار زوروکئ هیساب ئی جۆڑ کورتین ئی هه ق گۆ ای آی‌پی  ('''~{0}''') ادرس ئا، شه [[User:~{2}\u007C~{2}]] نیمگا گیپته بوته.\n\nشه ~{2} ئی نیمگا دلیل ایرنگ بیان بوته: ~{1}
+viewpagelogs|ای تاکدیمئ سیاه چال ئی دیستین
+nohistory|ای تاکدیم ایڈیٹ ئی تاریخچه نداریت.
+currentrev|انونین نخسه یی نشان داتین
+currentrev-asof|انونین نسخه تا ~{0}
+revisionasof|نسخهٔ ~{0}
+revision-info|تاریخ  ~{0} نسخه بی واسطه {{GENDER:~{5}\u007C~{1}}}~{6}
+previousrevision|→ قدیمین نخسه
+nextrevision|نوکین نخسه ←
+currentrevisionlink|انونین نخسه یی نشان داتین
+cur|فعلی
+next|بعدی
+last|دیمتیرین
+page_first|اولین
+page_last|آخیرین
+history-fieldset-title|تاریخچه ئی مرور کورتین
+history-show-deleted|فقط پاک بوته ئین
+histfirst|کهنگتیرین
+histlast|نوکتیرین
+historysize|({{PLURAL:~{0}\u007C۱ بایٹ\u007C~{0} بایٹ}})
+historyempty|(خالی)
+history-feed-title|ایڈ\tیٹانئ دپتر یا تاریخچه گ
+history-feed-description|ای تاکدیمی ایڈیٹ ئی تاریخچه بئ ویکی ئی تا
+history-feed-item-nocomment|~{0} بی ~{1}
+history-feed-empty|لۆٹیته بوته ئین دیم موجود نه اینت.\nممکن اینت که شه ویکی ئی تا پاک بوته بیئت یا که نامی تغیر بوته.\nنوکین تاکدیمانا په مربوتین موریدان بئ ای ویکی ئی تا [[Special:Search\u007Cبگردیت]].
+rev-deleted-comment|(ایڈیٹ ئی خلاصه پاک بوت)
+rev-deleted-user|(کار زوروکین نام پاک بوت)
+rev-deleted-event|(سیاه چال ئی جزئیات پاک بوته انت)
+rev-deleted-user-contribs|[کار زوروکئ نام یا آی پی ادرس پاک بوته - چیهر بوته ئین ایڈیٹ بئ مشارکتانئ تا]
+rev-deleted-text-permission|ای ایڈیٹ شه ای تاکدیما '''پاک بوته'''.\nممکن اینت آیی باره ها مئلومات بئ [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} پاک بوته ئین سیاه چال] ئی تا موجود بیئت.
+rev-suppressed-text-permission|ای ایڈیٹ شه ای تاکدیما '''پاک بوته'''.\nشما توانیت آیرا بگیندیت؛ ممکن اینت آی باره ئا مئلومات بئ [{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{FULLPAGENAMEE}}}} پاک بوته ئین سیاه چال] ئی تا موجود بیئت.
+rev-deleted-text-unhide|ای دستکاری شه ای دیما '''پاک بوته'''.\nممکن اینت که آیی مربوتین مه لوماتانا بئ [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} پاک بوته ئانی سیاهه] ئی تا موجود به ینت.\nشما اگه لوتیته به ییت توانیت که [ای نخسه ئی ~{0} ئا بگیندیت ].
+rev-deleted-text-view|ای ایڈیٹ شه ای تاکدیما '''پاک بوته'''.\nشما توانیت آیرا بگیندیت؛ ممکن اینت آیی مربوتین مئلوماتانا بئ [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} پاک بوته ئین سیاه چال ] تا ودئ بکنیت.
+rev-delundel|نمایش/نهفتن
+rev-showdeleted|نشان داتین
+revisiondelete|پاک کورتین/نخسه ئی پدا جۆڑ کورتین
+revdelete-nooldid-title|هدف ئی نامجازین نخسه
+revdelete-no-file|مشخص بوته ئین فایل موجود نه اینت.
+revdelete-show-file-confirm|آیا شما مطمئن وێت که لوٹیت یک پاک بوته ئین نخسه شه فایل "<nowiki>~{0}</nowiki>" مورخ ~{1} سائت ~{2} ئا بگیندیت؟
+revdelete-show-file-submit|هان
+revdelete-selected-text|{{PLURAL:~{0}\u007Cانتخاب بوته ئین نخسه هان\u007Cانتخابین نخسه هان}} [[:~{1}]]:
+revdelete-selected-file|{{PLURAL:~{0}\u007Cانتخاب بوته ئین نخسه\u007Cانتخابین نخسه}} [[:~{1}]]:
+logdelete-selected|شه سیاه چال ئا {{PLURAL:~{0}\u007Cمورد\u007Cمورد هان}} انتخاب بوته:
+revdelete-text-others|دیگه مدیرهان تا انون هم ئه تواننت که چیهرین محتواهانه بگیندینت و شه همی راه ئا تواننت پاک بوته ئین مواردانا بیئرگردیننت، مگر ای که دیگه محدودیت ئی آته بیئت.
+revdelete-legend|پیدای ئین محدودیت ئانی تنظیم
+revdelete-hide-text|نخسه ئی متن
+revdelete-hide-image|فایلی محتویاتانئ چیهرداتین
+revdelete-hide-name|چیهر داتین متغیر هانی و هدف
+revdelete-hide-comment|ایڈیٹانی خلاصه
+revdelete-hide-user|کار زوروکئ نام/آی‌پی ادرس
+revdelete-hide-restricted|مئلوماتئ سرکوب په مدیران گو دیگران لۆڑ
+revdelete-radio-same|(بی شه تغیر ئا)
+revdelete-radio-set|چیهر داتین
+revdelete-radio-unset|نمایان
+revdelete-suppress|مدیرانئ دسترسی په دتا ئا چو دیگه کار زوروکان بسته بیئت.
+revdelete-unsuppress|محدودیتانئ پاک بوتین بئ پدا دیستین ئی تا ترمیم بوته
+revdelete-log|دلیل:
+revdelete-submit|اعمال بئ {{PLURAL:~{0}\u007Cنخسه\u007Cنخسه هان}} ئی سرا انتخاب بوته
+revdelete-success|'''نخسه ئی ودی بوتین گو کامیابیا اپڈیٹ بوت.'''
+revdelete-failure|'''نخسه ئی ودی بوتینئ اپڈیٹ بوتن امکان وجود نداریت :'''\n~{0}
+logdelete-success|لوگین ئی قابلیت دیست گو کامیابیا انجام بوت.
+logdelete-failure|'''لوگین ئی قابلیت دیست تنظیم ئه نه بیئنت:'''\n~{0}
+revdel-restore|نمایش/نهفتن
+pagehist|تاکدیمی تاریخچه
+deletedhist|پاک بوتگینانی تاریخچه
+revdelete-no-change|'''هشدار:''' ~{1} تاریخ ئی و سائت ~{0} مورد شه دیما پیدائین ریکویست ئی  تنظیمات ئا داشت.
+revdelete-otherreason|دیگرین دلیل/اضافی:
+revdelete-reasonotherlist|دیگرین دلیل
+revdelete-edit-reasonlist|پاک بوتینئ دلیلانئ ایڈیٹ
+revdelete-offender|نخسه ئی نویسوک:
+suppressionlog|سیاه چالئ نادینتین
+mergehistory|تاکدیمانئ تاریخچه ئی ادغام
+mergehistory-box|دو تاکدیمئ نخسه ئانی ادغام:
+mergehistory-from|تاکدیمئ منشا:
+mergehistory-into|تاکدیمئ مخصد:
+mergehistory-list|قابل ادغامئ تاریخچه
+mergehistory-go|قابل ادغامئ تاریخچه ئی نشان داتین
+mergehistory-submit|نخسه ئانی ادغام
+mergehistory-empty|هیچ یک شه نخسه ئان ادغامی ئی وڈ نه ونت.
+mergehistory-success|~{2} ئی نخسه  شه [[:~{0}]]  ئا گو کامیابیا بی  [[:~{1}]] تا ادغام {{PLURAL:~{2}\u007Cبوت}}.
+mergehistory-fail|تاریخچه ئی ادغام ممکن نه اینت، مهربانی بکنیت تاکدیمئ گزینه ئانه و وختا بگیندیت.
+mergehistory-no-source| ~{0} منشائی تاکدیم موجود نه اینت.
+mergehistory-no-destination|~{0} مخصدی تاکدیم موجود نه اینت .
+mergehistory-invalid-source|منشائی تاکدیم باید یک موتبرین ئنوان ئی داشته بیئت.
+mergehistory-invalid-destination|مخصدئ تاکدیم باید یک موتبرین ئنوان داشته بیئت
+mergehistory-autocomment|[[:~{0}]] ئا بی [[:~{1}]] ادغام کورت
+mergehistory-comment|[[:~{0}]] ئا بی  [[:~{1}]] ادغام کورت: ~{2}
+mergehistory-same-destination|منشاء و مخصد ئی تاکدیمان نه تواننت که یک رقم بیئنت
+mergehistory-reason|دلیل:
+mergelog|سیاههٔ ادغام
+revertmerge|ادغام ئی بیئرگشتینتین
+history-title|~{0}: ایڈیٹانی تاریخچه
+difference-title|~{0}: نخسه ئانی مانجینا فرق
+difference-title-multipage|~{0} و ~{1}:تاکدیمانئ مانجینی فرق
+difference-multipage|(تاکدیمانی مانجینا فرق)
+lineno|سطر ~{0}:
+compareselectedversions|انتخاب بوته ئین نخسه ئانی مقایسه
+showhideselectedversions|انتخاب بوته ئین نخسه ئانی پدیداری تغیر
+editundo|خنثی‌ کورتین
+diff-empty|(بدون تفاوت)
+diff-multi-sameuser|(ای کار زوروکئ {{PLURAL:~{0}\u007Cیک میانی نخسه\u007C~{0} میانی نخسه}}ِ نمایش داته بوته)
+searchresults|گشتین ئی  نتیجه
+searchresults-title|گشتینئ نتایج په «~{0}»
+titlematches|مقاله ئی ئنوانئ یکی کورتین
+textmatches|مقاله ئی متنئ یکی کورتین
+notextmatches|هیچ یک شه مقاله ئانی متن مطابقت ندارنت
+prevn-title|~{0} {{PLURAL:~{0}\u007Cنتیجهٔ\u007Cنتیجهٔ}} دیمی
+nextn-title|~{0} {{PLURAL:~{0}\u007Cنتیجهٔ\u007Cنتیجهٔ}} پدئ
+shown-title|نشان داتین ~{0} ئی {{PLURAL:~{0}\u007Cنتیجه\u007Cنتیجه}} بی هر تاکدیمی تا
+viewprevnext|نشان داتین (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|'''تاکدیمئ گو «[[:~{0}]]» ئی ئنوانا بی ای ویکی تا وجود داریت .'''
+searchmenu-new|<strong> «[[:~{0}]]» ئی تاکدیما بی ای ویکی تا جوڑ بکنیت!</strong> {{PLURAL:~{1}\u007C0=همچنان آ تاکدیما کی گو وتئ گشتینا ودئ کورته ایت، بگیندیت.\u007Cو همچنان وتئ گشتینئ ودئ بوته ئین نتیجه ئانا بگیندیت.}}
+searchprofile-articles|تاکدیمانی محتوا
+searchprofile-images|چینکه رسانه ئی
+searchprofile-everything|موچی چیز
+searchprofile-advanced|پیشرفته
+searchprofile-articles-tooltip|گشتین بی ~{0}
+searchprofile-images-tooltip|گشتین په فایلان
+searchprofile-everything-tooltip|گشتین په موچین محتوا ئان (شاملئ گپ ئی تاکدیمان)
+searchprofile-advanced-tooltip|گشتین بی فضای نام دلخواه
+search-result-size|~{0} ({{PLURAL:~{1}\u007Cیک کلیمه\u007C~{1} کلیمه}})
+search-redirect|(تغییرمسیر ~{0})
+search-section|(بخش ~{0})
+search-category|(تهر  ~{0})
+search-file-match|(فایلی محتوایی یکرنگی)
+search-suggest|آیا شمی منظور ایش ات: ~{0}
+search-interwiki-caption|گوارین پروژه ئان
+search-interwiki-default|نتایج شه ~{0} :
+search-interwiki-more|(گیشتیر)
+search-relatedarticle|مرتبط
+searchrelated|مرتبط
+searchall|موچ
+showingresults|نشان داتین حداکثر {{PLURAL:~{0}\u007C'''۱''' نتیجه\u007C'''~{0}''' نتیجه}} بی جهلگا، شرو شه شماره ئی  '''~{1}'''.
+showingresultsinrange|نمایش بی جهلگا {{PLURAL:~{0}\u007C<strong>1</strong> نتیجه\u007C<strong>~{0}</strong> نتیجه}} بی محدودهٔ ئی #<strong>~{1}</strong> تا #<strong>~{2}</strong>.
+search-showingresults|{{PLURAL:~{3}\u007Cنتیجه ئان <strong>~{0}</strong> شه <strong>~{2}</strong>\u007Cنتیجه ئان <strong>~{0} - ~{1}</strong> شه <strong>~{2}</strong>}}
+search-nonefound|نتیجه په چیزی که شما لوٹیته تیت بی دست نه یات.
+powersearch-legend|پیشرفته ئین گشتین
+powersearch-ns|گشتین بی نامئ فضائان:
+powersearch-togglelabel|چیک کورتین:
+powersearch-toggleall|موچ
+powersearch-togglenone|هیچ‌گوجام
+powersearch-remember|اتنخاب په دیگرین گشتین ئان بی خاتیر داشته بئیت
+search-external|خارجی ئین گشتین
+searchdisabled|گشتین بی {{SITENAME}} ئی تا فعال نه اینت.\nموقتاً توانیت شه Google ئی گردگ ئا استفاده کنیت.\nتوجه کنیت که بدست آته ئین نتایج شه گردگا بی آ ممکینین طریقه ئا مه بیئنت.
+search-error|یک خطایی بی گردگئ وختا رخ داته : ~{0}
+preferences|تنظیمات
+mypreferences|تنظیمات
+prefs-edits|ایڈ\tیٹانی اندازه گ:
+prefsnologintext2|مهربانی بکنیت په وتئ تنظیماتانی ٹگل داتینا خاتیرا لوگین بئیت.
+prefs-skin|پوست
+skin-preview|دیم دیست
+datedefault|بی شه تنظیماتا
+prefs-labs|آزمایشی ئین ویژگی ئان
+prefs-user-pages|کار زوروکی تاکدیمان
+prefs-personal|کار زوروکی پروفایل
+prefs-rc|آخیرین تغیراتان
+prefs-watchlist|واچلیست
+prefs-editwatchlist|واچلیستی ایڈیٹ کورتین
+prefs-editwatchlist-label|وتئ واچلیست ئی موچین لڑلیستانئ ایڈیٹ:
+prefs-editwatchlist-edit|پاک کورتین و دیستین ئنوانانئ شه وتئ واچلیستا
+prefs-editwatchlist-raw|واچلیستئ آمگین لیستانی ایڈیٹ
+prefs-editwatchlist-clear|وتئ واچلیستئ پاک کورتین
+prefs-watchlist-days|روچانئ اندازه گ که باید بئ دیدارلیست ئی تا نشان داته بیئنت:
+prefs-watchlist-days-max|حداکثر ~{0} {{PLURAL:~{0}\u007Cروچ}}
+prefs-watchlist-edits|شمی ایڈیٹانئ اندازه گ بئ واچلیست ئي تا پراخ بوته:
+prefs-watchlist-edits-max|حداکثر اندازه گ: ۱۰۰۰
+prefs-watchlist-token|واچلیستئ کوڈ:
+prefs-misc|متفرقه
+prefs-resetpass|پاسوردی تغیر داتین
+prefs-changeemail|ایمیل ادرسی تغیر داتین
+prefs-setemail|ایمیل ادرسی تنظیم کورتین
+prefs-email|ایملی آپشن ئان
+prefs-rendering|نمایشی تاکدیم
+saveprefs|ذخیره
+restoreprefs|بیر گردینتین موچین تنظیمان بی اولی ئین رقما
+prefs-editing|ایڈیٹ کورتین
+rows|تعداد سطرها:
+columns|تعداد ستون‌ها:
+searchresultshead|گشتین
+stub-threshold|ایڈیٹانئ لینک <a href="#" class="stub">ناقص</a> (بایٹ):
+stub-threshold-disabled|غیرفعال
+recentchangesdays|روچانی اندازه گ بئ آخیر ئین تغیراتانئ تا نشان داته بوته انت:
+recentchangesdays-max|حداکثر ~{0} {{PLURAL:~{0}\u007Cروچ}}
+recentchangescount|پیش پرزین نشان داته بوته ئین ایڈیٹ ئانی اندازه گ:
+prefs-help-recentchangescount|ای شامیل آخیرئین تغیرانی،تاکدیمانی تاریخچه ئی و سیاهه ئانی است.
+savedprefs|شمی تنظیمات ذخیره بوتنت.
+timezonelegend|منطقهٔ زمانی:
+localtime|محلی ئن وخت:
+timezoneuseserverdefault|استفاده شه  پیش‌فرض ئین ویکی (~{0})
+timezoneuseoffset|دیگر (اختلاف ئا مشخص کنیت)
+servertime|سرور ئی وخت:
+guesstimezone|شه بروزیر ئه گیپته بیئت
+timezoneregion-africa|آفریقا
+timezoneregion-america|آمریکا
+timezoneregion-antarctica|جنوبی ئین قطب
+timezoneregion-arctic|قطب شمالی
+timezoneregion-asia|آسیا
+timezoneregion-atlantic|بحر اتلانتیک
+timezoneregion-australia|استرالیا
+timezoneregion-europe|اروپا
+timezoneregion-indian|بحر هند
+timezoneregion-pacific|بحر آرام
+allowemail|آتین ایملئ شه دیگه کار زوروکان
+prefs-searchoptions|گشتین
+prefs-namespaces|نامانی فضاهان
+default|پیش‌فرض
+prefs-files|فایل ئان
+prefs-custom-css|سی‌اس‌اس شخصی
+prefs-custom-js|شخصی ئین جاوااسکریپت
+prefs-common-css-js|سی‌اس‌اس/جاوااسکریپت مشترک په موچین پوسته‌ئان:
+prefs-emailconfirm-label|ایمیلئ تائید کورتین:
+youremail|ایمیل:
+username|{{GENDER:~{0}\u007Cکار زوروکئ نام}}:
+prefs-memberingroups|{{GENDER:~{1}\u007Cعضو}} {{PLURAL:~{0}\u007Cگروپ\u007Cگروپ}}:
+prefs-registration|راجیسترئ وخت
+yourrealname|واقیئین نام:
+yourlanguage|زبان:
+yourvariant|گوشتین محتوائی زبانی:
+yournick|نوکین دستنام:
+prefs-help-signature|نیوشته بوته ئین نظرئان باید بی گپ و حبر ئی تاکدیمئ تا گو «<nowiki>~~~~</nowiki>» ئا دستنام یا امضا بیئنت ؛ ای علامت بی اوتوماتیکین رقما بی شمی دستنام یا امضا آ و تاریخ آ بدل ئه بیت.
+badsig|حامگین یا خرابین دستنام یا امضا.\nمهربانی بکنیت اچ‌تی‌ام‌ال ئا بگیندیت.
+badsiglength|شمی دستنام شه اندازه ئا مزن و تچک اینت.\nدستنام باید کمتر شه ~{0} {{PLURAL:~{0}\u007Cنویسه}} ئا طول داشته بیئت.
+yourgender|لوٹیت که شما را چون بزاننت؟
+gender-unknown|لوٹین که هیچ ئی مه گوشین
+gender-male|مردینزاگ
+gender-female|جنینزاگ
+email|ایمیل
+prefs-help-realname|واقئین نام اختیاری اینت.\nاگه وتئ واقئین ناما بنوسیت ممکن اینت شه شمی کار و خدمتان ئی نام گیپتینی وختا شه شمی واقئین ناما استفاده بیئت.
+prefs-help-email-required|ایمیل ادرس ضروری اینت.
+prefs-info|بُنادین مئلومات
+prefs-i18n|بین المللی کورتین
+prefs-signature|دست خط
+prefs-dateformat|تاریخ فورمت
+prefs-timeoffset|وختی فاصله
+prefs-advancedediting|ئمومین تنظیمات
+prefs-editor|ایڈیٹور
+prefs-preview|دیم دیست
+prefs-advancedrc|پیشرفته ئین کیلی ئان
+prefs-advancedrendering|پیشرفته ئین کیلی ئان
+prefs-advancedsearchoptions|پیشرفته ئین کیلی ئان
+prefs-advancedwatchlist|پیشرفته ئین کیلی ئان
+prefs-displayrc|نمایش ئین کیلی ئان
+prefs-displaywatchlist|نمایش ئین کیلی ئان
+prefs-tokenwatchlist|نشانه گ
+prefs-diffs|تفاوت‌ئان
+prefs-help-prefershttps|ای تنظیمی تاثیر پد شه لوگین بوتینا بی شما اعمال ئه بیئت.
+prefswarning-warning|شمی تغیرات بی تنظیماتانی تا تا انون ذخیره نه بوته انت.\nاگه ای تاکدیما بي شه کلیک کورتین به  «~{0}» ئا بیلیئت شمی تنظیمات ذخیره ئه نه بیئنت.
+email-address-validity-valid|شمی ایمیلئ ادرس موتبر بی نظر ئه رسیت
+email-address-validity-invalid|موتبرین ایمیل ادرسی داخل بکنیت
+userrights|کار گیروکی اختیارانی مدیریت
+userrights-lookup-user|کار گیروکی گروپانی مدیریت
+userrights-user-editname|کار زوروکین ناما داخل بکنیت:
+editusergroup|کار زوروکی گروپانی ایڈیٹ
+editinguser|کار زوروکئ اختیارانی تغییر  '''[[User:~{0}\u007C~{0}]]''' ~{1}
+userrights-editusergroup|کار زوروکی گروپانی ایڈیٹ
+saveusergroups|کار زوروکی گروپانی ثبت کورتین
+userrights-groupsmember|عضو:
+userrights-groupsmember-auto|ضمنی ئین عضو:
+userrights-reason|دلیل:
+userrights-no-interwiki|شما دیگه ویکی هانی کار زوروکانئ اختیارانی تغیر داتینی اجازه ئا نداریت.
+userrights-nodatabase| ~{0} مئلوماتئ بانک وجود نداریت یا محلی نه اینت.
+userrights-nologin|شما باید گو یک مدیرئی  [[Special:UserLogin\u007Cکار زوروکین حسابا لوگین بیئیت]] تا که بتوانیت دیگه کار زوروکانئ اختیارانا تعین بکنیت.
+userrights-notallowed|شما په کار زوروکئ حقوق ئی پاک کورتین یا افاضه کورتینی اجازه ئه نداریت.
+userrights-changeable-col|ئا گروپان که شما توانیت آوانا ٹگل بدهیت
+userrights-unchangeable-col|ئا گروپان که شما نتوانیت آوانا ٹگل بدهیت
+userrights-conflict|حمله بئ کار زوروکئ حقان! مهربانی بکنیت بگیندیت و تغیرانا تائید بکنیت.
+userrights-removed-self|شما وتئ دسترسی ئانه سیستیت. انون شما دیگه بئ ای تاکدیما دسترسی نداریت.
+group|گروپ:
+group-user|کار زوروکان
+group-autoconfirmed|تائید بُوته ئین کار زوروکان
+group-bot|ربات‌هان
+group-sysop|مدیر ئان
+group-bureaucrat|دیوان‌سالار ئان
+group-suppress|گیندوک ئان
+group-all|(موچ)
+group-user-member|{{GENDER:~{0}\u007Cکار زوروک}}
+group-autoconfirmed-member|{{GENDER:~{0}\u007Cتائید بَوته ئین کار زوروک}}
+group-bot-member|ربات
+group-sysop-member|{{GENDER:~{0}\u007Cمدیر}}
+group-bureaucrat-member|{{GENDER:~{0}\u007Cدیوان‌سالار}}
+group-suppress-member|{{GENDER:~{0}\u007Cنظارت}}
+grouppage-user|{{ns:project}}:کارزورک ئان
+grouppage-autoconfirmed|{{ns:project}}:تائید بُوته ئین کار زوروک ئان
+grouppage-bot|{{ns:project}}:ربات‌ ئان
+grouppage-sysop|{{ns:project}}:مدیر ئان
+grouppage-bureaucrat|{{ns:project}}:دیوان‌سالار ئان
+grouppage-suppress|{{ns:project}}:نظارت
+right-read|وانتین تاکدیمی
+right-edit|ایڈ\tیٹ کورتین تاکدیمی
+right-createpage|تاکدیمی جوڑ\t کورتین (بی غیر گپ ئین موردی تاکدیمان )
+right-createtalk|گپ ئی تاکدیمی جوڑ\t کورتین
+right-createaccount|کار زوروکئ حسابئ جوڑ\t کورتین
+right-minoredit|نشانی کورتین ایڈیٹانی بئ ئنوان کم ئین
+right-move|تاکدیمی انتقال
+right-move-subpages|تاکدیمانئ انتقال گو آوان گونڈدیم ئان
+right-move-rootuserpages|کار زوروکین سرشاخه ئین تاکدیمانئ انتقال
+right-move-categorypages|تهر تاکدیمئ انتکال
+right-movefile|فایلی انتقال
+right-suppressredirect|تاکدیمئ انتقال بیدون شه دیمین نامی تغیرمسیر ئی جوڑ کورتین
+right-upload|فایلی بُرز کورتین
+right-reupload|پدا نیویشتین موجودین فایلئ
+right-reupload-own|آ فایلی پدا بُرز کورتین که دیمتیرا هم شه هما کار زوروکی نیمگا یک وار بُرز بوتت
+right-reupload-shared|مشترکین فایلانئ محلی ئین باطل کورتین
+right-upload_by_url|یک فایلئ بُرز کورتین یا اپلوڈ شه اینٹرنٹ ئا
+right-purge|میانگیرین تاکدیمی پاک کورتین بی شه تائیدی تاکدیمی دیستینا
+right-autoconfirmed|شه آی پی ئی محدودیت تیزی ئا محور تاسیر ئه نه گیت
+right-bot|تلقی بوته بئ ئنوان اوتوماتیکین پروسه ئا
+right-nominornewtalk|گپ و حبر ئی تاکدیمانی گونڈ ایڈیٹ ، بئ رکمی که نوکین پیام ئا جار مه جنت
+right-apihighlimits|بُرز تیرین سقف استفاده شه API
+right-writeapi|استفاده شه نیویشتینی API
+right-delete|تاکدیمی پاک کورتین
+right-bigdelete|ٹوهین تاریخچه والا ئین تاکدیمانئ پاک کورتین
+right-deletelogentry|پاک کورتین و پداجۆڑ کورتین خاصین دروچه شه سیاهه ئان
+right-deleterevision|پاک کورتین و پدا جۆڑ کورتین خاصین نخسه ئان شه تاکدیما
+right-deletedhistory|شه تاریخچه ئا پاک بوته ئین مواریدانی دیستین، بیدون شه آوانی متنی دستینا
+right-deletedtext|دیستین پاک بوته ئین متن ئان و تغیر ئان پاک بوته ئین نخسه ئانی مانجینا
+right-browsearchive|گشتین په پاک بوته ئین تاکدیمان
+right-undelete|بی جاه آورتین  تاکدیمانئ
+right-suppressrevision|دیستین و پداجۆڑ کورتین آ ایڈیٹانی که شه کار زوروکان چیهر داته بوته انت
+right-viewsuppressed|آ نخسه هانی دیستین که شه کار زوروکان چیهر داته بوته انت
+right-suppressionlog|دیستین شخصین سیاه چال ئانی
+right-block|دیگه کار زوروکانئ بلاک کورتین شه ایڈیٹ ئان
+right-blockemail|دیگه کار زوروکانئ بلاک کورتین شه ایمیل ئی دیم داتین ئا
+right-hideuser|کار زوروکئ بلاک کورتین و چیهر داتین شه عمومی ئی دیدا
+right-ipblock-exempt|تاسیر نه گیپتین شه آی پی ئین بلاک ئی ، وتکارین یا پاسیله ئین بلاکان
+right-proxyunbannable|تاسیر نه گیپتین شه وتکارین پروکسی ئی بلاک بوتین ئان
+right-unblockself|وتي دسترسی ئی پاچ کورتین
+right-protect|قُلپ بوته تاکدیمانئ قلپی میزانی تغیر داتین و آوانی ایڈیٹ کورتین
+right-editprotected|ایڈیٹ کورتین قُلپ بوته ئین تاکدیمانی بئ ئنوانئ «{{int:protect-level-sysop}}»
+right-editsemiprotected|ایڈیٹ کورتین قُلپ بوته ئین تاکدیمانی بئ ئنوانی "{{int:protect-level-autoconfirmed}}"
+right-editcontentmodel|یک تاکدیمی محتوایی مدل یی ایڈیٹ کورتین
+right-editinterface|ای\tڈیٹ کورتین کار زوروکانئ رابطه
+right-editusercssjs|ایڈیٹ کورتین دیگه کار زوروکانئ  CSS و JS ئی تاکدیمانئ
+right-editusercss|ایڈیٹ کورتین دیگه کار زوروکانئ  CSS ئی تاکدیمانئ
+right-edituserjs|ایڈیٹ کورتین دیگه کار زوروکانئ  JS ئی تاکدیمانئ
+right-editmyusercss|وتئ  سی‌اس‌اس کار زوروکئ فایلانا ایڈیٹ بکینت
+right-editmyuserjs|وتئ جاوااسکریپت کار زوروکي فایلانا ایڈیٹ بکنیت
+right-viewmywatchlist|وتئ واچلیست ئا بگیندیت
+right-viewmyprivateinfo|وتي خصوصین دیتا ئه بگیندیت (چو ایمیل و واقئین ناما)
+right-editmyprivateinfo|وتي حصوثین دیتا ئه ایڈیٹ بکنیت (چو ایمیل و واقئین ناما)
+right-editmyoptions|وتئ تنظیماتانا ایڈیٹ بکنیت
+right-rollback|عاجل ئین بیئرگردینتین آخیر ئین کار زوروکئ ایڈیٹانئ که ای تاکدیما ایڈیٹ کورته
+right-markbotedits|ای بیئرگردینته بوته ئین ایڈیٹانی علامت جتین بئ ئنوانئ رباتئ ایڈیٹا
+right-noratelimit|تاثیر نه گیپتین شه سرعتئ محدودیت ئا
+right-import|تاکدیمئ داخل کورتین شه دیگه ویکی ئا
+right-importupload|تاکدیمئ داخل کورتین شه فایلئ اپلوڈ کورتین ئا
+right-patrol|دیگرانئ ایڈیٹانی مارک جتین
+right-autopatrol|اوتوماتیکین مارک وارتین ایڈیٹ ئانی
+right-patrolmarks|آخیرئین گشت وارته ئین برچسپ ئی دیستین
+right-unwatchedpages|دیستین آ دیمانی لیستی که پدگیری ئه نه بیئنت
+right-mergehistory|تاکدیمانی تاریخچه ئی ادغام کورتین
+right-userrights|ایڈیٹ کورتین کار زوروکئ موچین اختیارانئ
+right-userrights-interwiki|دیگه ویکی ئی کار زوروکانئ اختیارانی ایڈیٹ کورتین
+right-siteadmin|مئلومات ئین بانکئ قُلپ و یا پاچ کورتین
+right-sendemail|دیم داتین ایمل په دیگه کار زوروکان
+right-passwordreset|پاسوردی نوک تنظیم کورتینی ایمیل
+right-managechangetags|[[Special:Tags\u007Cبرچسپ ئانی]] جۆڑ و پاک کورتین مه لوماتین بانکا
+newuserlogpage|کار زوروکئ جوڑ کورتینی سیاه چال
+newuserlogpagetext|ای سیاه چال شه نوکین کار زوروکئ ناما جوڑ بوته.
+rightslog|کار زوروکی اختیارانئ سیاه چال
+rightslogtext|ای سیاه چال کار زوروکئ تغیراتانی اینت.
+action-read|وانتین ای تاکدیمئ
+action-edit|ایڈ\tیٹ کورتین ای تاکدیمئ
+action-createpage|تاکدیم جوڑ کورتین
+action-createtalk|گپ ئی تاکدیمانی جوڑ\t کورتین
+action-createaccount|ای کار زوروکئ حسابئ جوڑ\t کورتین
+action-history|ای تاکدیمی تاریخچه ئی دیستین
+action-minoredit|ای ایڈیٹ ئی نشانی کورتین بئ ئنوانئ کم ئین
+action-move|ای تاکدیمی انتقال
+action-move-subpages|ای تاکدیمئ و آیی گونڈدیمانی انتقال
+action-move-rootuserpages|کار زوروکین سرشاخه ئین تاکدیمانئ انتقال
+action-move-categorypages|تهر تاکدیمئ انتکال
+action-movefile|ای فایلی انتقال داتین
+action-upload|ای فایلی اپلود یا بُرز کورتین
+action-reupload|ای موجودین فایلئ سرا نیویشتین
+action-reupload-shared|ای فایل ئی باطل کورتین شه یک مشترکین مخزن ئا
+action-upload_by_url|ای فایلئ بُرز کورتین شه یک انترنتین ادرسا
+action-writeapi|استفاده شه نیویشتینی API
+action-delete|پاک کورتین ای تاکدیمئ
+action-deleterevision|ای نخسه یی پاک کورتین
+action-deletedhistory|ای تاکدیمی پاک بوتینئ تاریخچه ئی دیستین
+action-browsearchive|گشتین په پاک بوته ئین تاکدیمان
+action-undelete|بی جاه آورتین ای تاکدیمئ
+action-suppressrevision|بی جاه آورتین و دیستین پاک بوته ئین ایڈیٹانئ
+action-suppressionlog|ای خصوصین سیاه چالی دیستین
+action-block|ای کار زوروکئ دسترسی ئی قطع کورتین شه ایڈیٹ ئا
+action-protect|ای تاکدیمی ساتیتینئ رکم
+action-rollback|عاجل ئین بیئرگردینتین آخیر ئین کار زوروکئ ایڈیٹانئ که ای تاکدیما ایڈیٹ کورته
+action-import|تاکدیمئ داخل کورتین شه دیگه ویکی ئا
+action-importupload|تاکدیمئ داخل کورتین شه فایلئ اپلوڈ کورتین ئا
+action-patrol|دیگرانئ ایڈیٹانی مارک جتین
+action-autopatrol|وتئ ایڈیٹانئ نشاني کورتین
+action-unwatchedpages|دیسته نه بوته ئین تاکدیمانئ دیستین
+action-mergehistory|ای تاکدیمی تاریخچه ئی ادغام
+action-userrights|ایڈیٹ کورتین کار زوروکئ موچین اختیارانئ
+action-userrights-interwiki|یک دیگه ویکی ئی کار زوروکانئ اختیارانی ایڈیٹ کورتین
+action-siteadmin|مئلومات ئین بانکئ قُلپ و یا پاچ کورتین
+action-sendemail|ایمیلی دیم داتین
+action-editmywatchlist|وتئ واچلیستا ایڈیٹ بکنت
+action-viewmywatchlist|وتئ واچلیست ئا بگیندیت
+action-viewmyprivateinfo|وتئ خصوصین مئلوماتانا بگیندیت
+action-editmyprivateinfo|وتئ خصوصین مئلوماتانا ایڈیٹ بکنیت
+action-editcontentmodel|یک تاکدیمی محتوائین مدل ئی ایڈیٹ کورتین
+action-managechangetags|تگ ئانی جۆڑ و پاک کورتین شه مه لوماتین بانکا
+nchanges|~{0} {{PLURAL:~{0}\u007Cٹگل\u007Cٹگل}}
+enhancedrc-since-last-visit|~{0} {{PLURAL:~{0}\u007Cشه اخر ئین دیستینا}}
+enhancedrc-history|تاریخچه
+recentchanges|آخیرین تغیراتان
+recentchanges-legend|آخیر ئین تغیراتانئ آپشن
+recentchanges-summary|ویکی ئی آخیر ئین تغیرانا بئ تاکدیمی تا بچاریت.
+recentchanges-noresult|هیچ تغیری بئ تعین بوته ئین دوره ئی تا گۆ ای معیاران هموانی نداشت.
+recentchanges-feed-description|ای ویکی ئی آخیر ئین تغیرانا بئ ای وارگ ئی تا بچاریت.
+recentchanges-label-newpage|ای ایڈیٹ نوکین تاکدیمی ئا جوڑ کورت
+recentchanges-label-minor|ای یک گونڈین ایڈیٹئ است
+recentchanges-label-bot|ای ایڈیٹا یک ربات ئی کورته
+recentchanges-label-unpatrolled|ای ایڈیٹ تا انون گشت وارته نه بوته
+recentchanges-label-plusminus|تاکدیمئ حجم بئ ای اندازگ بایٹ ئا تغیر کورته
+recentchanges-legend-heading|'''اختصارئان:'''
+recentchanges-legend-newpage|{{int:recentchanges-label-newpage}} (همیرنگ بی [[Special:NewPages\u007Cنوکین تاکدیمانئ لڑ لیست]] ئا سیل بکنیت)
+rcnotefrom|بئ جهلگا تغیرات شه <strong>~{2}, ~{3}</strong> (تا <strong>~{0}</strong> {{PLURAL:~{4}\u007Cنشان داته بوته\u007Cنشان داته انت}}).
+rclistfrom|نوکین تغیراتانئ نشان داتین شرو شه ~{2} ~{1}
+rcshowhideminor|~{0} ئی کمین ایڈیٹان
+rcshowhideminor-show|نشان داتین
+rcshowhideminor-hide|چیهر داتین
+rcshowhidebots|~{0} ربات‌هان
+rcshowhidebots-show|نشان داتین
+rcshowhidebots-hide|چیهر داتین
+rcshowhideliu|~{0} راجستر بوته ئین کار زوروکان
+rcshowhideliu-show|نشان داتین
+rcshowhideliu-hide|چیهر داتین
+rcshowhideanons|~{0} نادروستئ ئین کار زوروکان
+rcshowhideanons-show|نشان داتین
+rcshowhideanons-hide|چیهر داتین
+rcshowhidepatr|~{0} گشت وارته ئین ایڈیٹ ئان
+rcshowhidepatr-show|نشان داتین
+rcshowhidepatr-hide|چیهر داتین
+rcshowhidemine|~{0} نی ایڈیٹان
+rcshowhidemine-show|نشان داتین
+rcshowhidemine-hide|چیهر داتین
+rclinks|نشان داتین ~{0} آخیر ئین تغییر بئ ~{1} اخیرین روچا<br />~{2}
+diff|تفاوت
+hist|تاریخچه
+hide|چیهر داتین
+show|نشان داتین
+minoreditletter|جز
+newpageletter|نوک
+boteditletter|ر
+number_of_watching_users_pageview|[~{0} {{PLURAL:~{0}\u007Cکار زوروک}} دیستینوک]
+rc_categories|ای تهرهانی حد ئا (گۆ «\u007C» ئا جیتا کنیت)
+rc_categories_any|هر گوجام
+rc-change-size-new|~{0} {{PLURAL:~{0}\u007Cبایٹ}} پد شه تغیرا
+newsectionsummary|/* ~{0} */ نوکین بخش
+rc-enhanced-expand|جزئیات ئی نشان داتین
+rc-enhanced-hide|جزئیات ئی چیهر داتین
+rc-old-title|جوڑ بوته گو بُنیادی ئنوانا «~{0}»
+recentchangeslinked|مربوتین تغیراتان
+recentchangeslinked-feed|مربوتین تغیراتان
+recentchangeslinked-toolbox|مربوتین تغیراتان
+recentchangeslinked-title|مربوتین تغیراتان گو ~{0}
+recentchangeslinked-summary|بئ جهلگا یک لڑلیست ئی شه آخیرئین ٹگلان گیندیت که بئ تاکدیما لینک بوته انت (یا چَمّی چیهری شریکین تهر) ئانه گیندیت .\nآ تاکدیمان که [[Special:Watchlist\u007Cشمی پدگیری لیست]] ئی تا به ینت '''پررنگ''' نشان داته ئه به ینت.
+recentchangeslinked-page|تاکدیم نام:
+recentchangeslinked-to|نشان داتین تاکدیماني تغیرات که گۆ ای تاکدیما لینک دارنت
+upload|فایلی بُرز کورتین
+uploadbtn|فایلی بُرز کورتین
+reuploaddesc|بُرز کورتیني کنسیل و بیئرگشت په بُرز کورتیني فرما
+upload-tryagain|فایلئ تغیر ئی شرح ئی دیم داتین
+uploadnologin|لوگین نه بوته بی
+uploadnologintext|په فایلي بُرز کورتینا باید ~{0}.
+upload_directory_missing|(~{0}) ئی بُرز کنۆکین شاخه موجود نه اینت و جۆڑ بوتینئ وڑ نه اینت .
+upload_directory_read_only|(~{0}) بُرز کنۆکین شاخه شه ویت سرور نیمگا نیویشتین ئی وڑ نه اینت.
+uploaderror|خطا بی اپلودی تا
+upload-recreate-warning|'''هشدار:فایلی گۆ\t ای ناما یا پاک بوته یا دیگه جای جابجا بوته.'''\n\nپه آسانی خاتیرا، ای تاکدیمی پاک بوتین و جابجایی سیاهه بئ جهلگا آته:
+uploadtext|شه جهلگین فرما په نوکین فایلانئ بُرز کورتینا استفاده بکنیت.\nپه آ فایلان که دیمتیرا بُرز کورته بوته انت بئ  [[Special:FileList\u007Cفایلانئ لڑ لیست]] ئی تا برَۆیت. شه سري نوکین بُرز کورتین  بئ [[Special:Log/upload\u007Cبُرز کنۆکین کۆرم]] و پاک کورتین فایلانئ بئ [[Special:Log/delete\u007Cdeletion log]] ئی تا راجستر ئه بیئنت.\n\nپد شه آیی که یک فایلئ ئا بُرز کورتیت، بئ ای سه رقم توانیت آیرا بئ تاکدیمانئ تا استفاده بکنیت:\n*'''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code>''' په فایلئ کامیلین نخسه ئی استفاده کورتینی خاتیرا\n*'''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png\u007C200px\u007Cthumb\u007Cleft\u007Calt text]]</nowiki></code>''' په استفاده کورتین شه یک ۲۰۰ پیکسیل ئین نخسه شه فایل بی یک بکس ئی تا بئ چپ ئین نیمگا یک متن که آیی تا alt text بئ ئنوان شرح استفاده بوته\n*'''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code>''' په جۆڑ کورتین یک یک مستقیمین لینک بئ فایلا بی شه آیی که فایل نشان داته بیئت
+upload-permitted|مجاز ئین فایل ئی {{PLURAL:~{1}\u007Cنوع\u007Cانواع}}: ~{0}.
+upload-preferred|ترجیح داته بوته ئین فایل ئی {{PLURAL:~{1}\u007Cنوع\u007Cانواع}} : ~{0}.
+upload-prohibited|نا مجاز ئین فایل ئی {{PLURAL:~{1}\u007Cنوع\u007Cانواع}}: ~{0}.
+uploadlogpage|بُرز کورتینئ سیاه چاله
+uploadlogpagetext|جهلگی لڑلیست آخیرین لڑلیست شه بُرز بوته ئین فایلان اینت.\nپه دیدارین مرواریدا [[Special:NewFiles\u007Cنوکین فایلانی نگارخانه]] ئا بگیندیت.
+filename|فایلئ نام
+filedesc|خلاصه
+fileuploadsummary|خلاصه:
+filereuploadsummary|فایلی تغیرات:
+filestatus|کاپی رایٹ ئی وضیعت
+filesource|منبع:
+ignorewarning|چشم چیهرداتین شه هشدارا و ذخیره کورتین فایلئ.
+ignorewarnings|چم پوشی شه موچین هشداران
+minlength1|فایلئ نام باید کم شه کم یک حرف بیئت.
+filename-toolong|پائیل نام نه باید شه ۲۴۰ بایت ئا تچکتیر بیئت.
+badfilename|پائیل نام بئ «~{0}» ئا تغییر کورت.
+filetype-missing|ای فایل پدوندی (مثلاً «‎.jpg») نداریت.
+empty-file|فایلی که دیم داته بوت خالی ات.
+file-too-large|فایلی که دیم داتیت بئ حد ٹوو ات.
+filename-tooshort|فایلی نام بئ شه اندازگ ئا گۆنڈ ات.
+filetype-banned|ایرنگین فایل ئی اجازه نه اینت.
+verification-error|فایل شه تائید ئی امتحانا در نه بوت.
+hookaborted|تغیر که شما لۆٹیت جۆڑ کنیت شه یک جنگک یی نیمگا بند بوت.
+illegal-filename|فایل ئی نام غیرمجاز اینت.
+overwrite|یک موجودین فایلی سرا نیویشتین ئی اجازه نه اینت.
+unknown-error|یک نا زانتین خطائی رخ دات.
+tmp-create-error|موقتین فایلی جۆڑ کورتین ممکن نه اینت.
+tmp-write-error|خطا بئ موقتین فایلی نیویشتینا.
+windows-nonascii-filename|ای ویکی پایل ئی ناما گۆ خاسین نۆیسگ ئان پُشتیوانی ئه نه کنت.
+fileexists|پایل ئی گۆ ای ناما شه دیما موجود اینت، اگه موتمئین {{GENDER:\u007Cنه ۆیت}} که لوٹیت ای پایل ئا تغیر ب دهیت، مهربانی بکنیت <strong>[[:~{0}]]</strong> ئا بگیندیت.\n[[~{0}\u007Cthumb]]
+uploadwarning|بُرز کورتینئ هشدار
+savefile|فایلی ذخیره کورتین
+uploaddisabled|بُرز کورتین غیر پئال اینت.
+copyuploaddisabled|بُرز کورتین شه اینترنیتی ادرسا غیرفعال اینت.
+uploaddisabledtext|فایل ئی بُرز کورتین غیر فعال اینت.
+uploadscriptednamespace|این اس‌وی‌جی ئی پوشه شامل غیرقانونی ئین  '~{0}' ئی پزای نام ئا اینت
+uploadinvalidxml|XML بئ بُرز بوته ئین پایل تا نتوانت تجزیه بیئت.
+uploadvirus|ای پایل ویروس داریت!\nگیشتیرین مه لومات : ~{0}
+upload-source|فایلی منشا
+sourcefilename|منشائی فایلی نام:
+sourceurl|منشائی ادرس:
+destfilename|فایلئ مخصدی نام:
+upload-maxfilesize|فایلی حداکثر اندازه گ: ~{0}
+upload-description|فایلی توضیحات
+upload-options|بُرز کورتین یا آپلوڈئ اپشن
+watchthisupload|دیستین ای فایلی
+upload-success-subj|بُرز کورتین یا آپلوڈ گو کامیابی ئا انجام بوت
+upload-success-msg|شمی بُرز کورتین شه [~{1}] ئا کامیاب ات. توانیت که ای پایل ئا ایدا : [[:{{ns:file}}:~{0}]] بگیندیت
+upload-failure-subj|بُرز کنوکی پرابلم
+upload-failure-msg|یک مشکل بئ بُرز کورتینا شه [~{1}] ئا وجود داشت:\n\n~{0}
+upload-warning-subj|بُرز کورتینئ هشدار
+upload-proto-error|نادروستین پروتوکول
+upload-proto-error-text|بُرز کورتین شه دوردستا به ادرس ئان که گو <code dir=ltr>http://</code> یا <code dir=ltr>ftp://</code>  ئی شرو بیئنت ضرورت داریت .
+upload-file-error|داخلین خطا
+upload-misc-error|نامئلومین خطا بی بُرزکورتینئ تا
+upload-too-many-redirects|انترنیتی ادرس به شه اندازه ئا تغیرمسیر داریت
+upload-http-error|یک  اچ‌تی‌تی‌پی خطا رخ داته: ~{0}
+upload-copy-upload-invalid-domain|بُرز بوته فایلانی کاپی کورتین شه ای ڈومین ئا امکان نداریت.
+backend-fail-stream|نه توانن ~{0} ئی فایلا دیم دهین.
+backend-fail-backup|نتنوانن پُشتوانی نخسه یی په ~{0} فایلا جۆڑ کنن.
+backend-fail-notexists| ~{0} ئی فایل وجود نداریت.
+backend-fail-hashes|پایل ئانی هیش ئانی گیپتین په موقایسه ئا ناکام ات.
+backend-fail-notsame|غیر یکرنگی فایل بئ ~{0} ئی تا وجود نداریت.
+backend-fail-invalidpath|~{0} ئی ذخیره کنۆکی مسیر موتبر نه اینت.
+backend-fail-delete|نه توان که ~{0} ئی فایل پاک کورت.
+backend-fail-describe|نه توان که «~{0}» ئی فایلی میتادیتا ئا تغییر دات.
+backend-fail-alreadyexists|~{0} ئی فایل شه دیما وجود داشت.
+backend-fail-store|نه توان که  ~{0} ئی فایلا بئ ~{1} ئی تا ذخیره کورت.
+backend-fail-copy|نه توانن که ~{0} ئی فایلا به  ~{1}  کاپی کنن.
+backend-fail-move|نه توانن که ~{0} ئی فایلا به ~{1} انتقال دئین.
+backend-fail-opentemp|نه توان که موقتین فایلا پاچ کورت.
+backend-fail-writetemp|نیویشتین بی موقتین فایلئ سرا امکان نه داریت.
+backend-fail-closetemp|نه توان که موقتین فایلا ئا بست.
+backend-fail-read|~{0} ئی فایلا نه توان وانت.
+backend-fail-create|نه توانن بئ  ~{0} ئی فایلی سرا مئلومات نیویشته کنن.
+backend-fail-maxsize|نه توان که  ~{0} ئی فایلی سرا مئلومات نیویشته کورت چون که شه {{PLURAL:~{1}\u007Cیک بایٹ ئا\u007C~{1} بایٹ ئا}} ٹوو اینت.
+backend-fail-readonly|«~{0}» پُشتوانی انون په قت بی وانتین ئی هالا اینت . پیش بوته ئین دلیل ایرنگ گوشته بوته: «~{1}»
+backend-fail-connect|ارتباط گۆ «~{0}» ئی ذخیره ئی پُشتیوانا برقرار نه بوت.
+backend-fail-internal|نامئلومین خطایی بئ «~{0}» ئی ذخیره پُشتیوانی تا رخ دات.
+lockmanager-notlocked|نه توان که «~{0}» ئی قُلپا پاچ کورت؛ چون که قُلپ نه بوته.
+lockmanager-fail-closelock|"~{0}" ئی قُلپ بوته ئین فایلی بستین امکان نه داریت.
+lockmanager-fail-deletelock|"~{0}" ئی قُلپ بوته ئین فایلی پاک کورتین،امکان نداریت.
+lockmanager-fail-acquirelock|نه توانیت «~{0}» ئی قُلپ ئا کسب کنیت.
+lockmanager-fail-openlock|"~{0}" ئی قُلپ بوته ئین فایلی پاچ کورتین امکان نه داریت.
+lockmanager-fail-releaselock|نه توانیت «~{0}» ئی قُلپ ئا پاچ کنیت.
+lockmanager-fail-db-release|~{0} ئی مئلوماتی بانکی قُلپئ پاچ کورتین امکان نه داریت.
+lockmanager-fail-svr-acquire|~{0} ئی سرور ئی قُلپانی گیپتین امکان نه داریت.
+lockmanager-fail-svr-release|~{0} ئی سرور ئی قُلپانی پاچ کورتین ئی امکان نه اینت.
+zip-file-open-error|بئ زیپ ئی فایلی پاچ کورتینی وختا، په آیی محتوایی دیستینی خاتیرا، یک خطا ئی رخ دات.
+zip-wrong-format|مشخص بوته ئین فایل، زیپ ئی یک فایلی نه اینت.
+uploadstash|بُرز کورتین انبار ئی
+uploadstash-clear|پاک کورتین انبارشده ئین فایلانئ
+uploadstash-nofiles|شما هیچ انبارشده ئین فایلئ نداریت.
+uploadstash-errclear|فایلانئ پاک کورتین ناکام ات.
+uploadstash-refresh|فایلانئ لڑلیستئ نوک کورتین
+invalid-chunk-offset|قطعه ئی ناموتبرین جابجايی
+img-auth-accessdenied|دسترسی ئی منشا
+img-auth-badtitle|یک مجازین ئینوانی جۆڑ کورتین ئی امکان شه «~{0}» ئا وجود نداریت.
+img-auth-nologinnWL|شما لوگین نه بوته ایت و بئ  «~{0}» ئی سپیتین لیست ئی تا وێت.
+img-auth-nofile|«~{0}» ئی فایل موجود نه اینت.
+img-auth-isdir|شما کوشش کورته ئیت که بئ «~{0}» ئی شاخه ئا دسترسی ودی بکنیت.\nتانا په فایل ئا دسترسی جایز اینت.
+img-auth-streaming|بئ حال جاری کورتینی «~{0}» ئا.
+img-auth-noread|کار زوروک «~{0}» ئی وانتین ئی دسترسی ئا نداریت.
+http-invalid-url|انترنیتی ادرس ناموتبر اینت: ~{0}
+http-invalid-scheme|انترنیتی ئین نخسه گۆ «~{0}» ئی پیشنهادا پُشتیوانی ئه نه بیئنت.
+http-request-error|اچ‌تی‌تی‌پی ئی ریکویست گۆ نامئلومین خطائا، ناکام ات.
+http-read-error|اچ‌تی‌تی‌پی ئی وانتینئ خطا.
+http-timed-out|اچ‌تی‌تی‌پی ئی ریکویست ئی وخت الاس بوت.
+http-curl-error|خطا بئ انترنیتی ادرسی آورتینی تا: ~{0}
+http-bad-status|بئ اچ‌تی‌تی‌پی ئی ریکویست ئی وختا خطایی رخ دات: ~{0} ~{1}
+upload-curl-error6|په انترنیتی ئین ادرس ئا دسترسی ممکن نه بوت
+upload-curl-error6-text|انترنیتی ئین ادرس که شما لوٹیته ئیت قابل دسترس نه اینت.\nمهربانی بکنیت آیی جۆانئ سرا وترا متمئین بکنیت و پدا کوشش بکنیت.
+upload-curl-error28|بُرز کورتین ئی وخت الاس بوت
+license|اجازه‌نامه:
+license-header|اجازه‌نامه
+nolicense|هیچگوجام انتخاب نه بوته
+licenses-edit|ایڈیٹ ئی  مجوزین آپشن ئان
+license-nopreview|(دیم دیست ئی وجود نداریت)
+upload_source_url|(شما شه یک موتبرین و جۆانین URL ئا فایل ئی انتخاب کورته ایت، که موچانی دسترس ئا توانت بیئت)
+upload_source_file|(شمی انتخابی ئین فایل شه شمی کامپیوتیرا)
+listfiles-delete|پاک کورتین
+listfiles-summary|ای خاصین تاکدیم موچین بُرز بوته ئین فایلانه نشان ئه دنت.
+listfiles_search_for|گشتین په میڈیا نام ئا:
+imgfile|فایل
+listfiles|فایل لیست
+listfiles_thumb|ناحُننک
+listfiles_date|تاریخ
+listfiles_name|نام
+listfiles_user|کار زوروک
+listfiles_size|اندازه
+listfiles_description|توضیح
+listfiles_count|نخسه ئان
+listfiles-show-all|اکسانی قدیمین نخسه ئان
+listfiles-latestversion|انونین نخسه( ویرژن )
+listfiles-latestversion-yes|هان
+listfiles-latestversion-no|نه
+file-anchor-link|فایل
+filehist|فایلی تاریخچه
+filehist-help|تاریخ/وخت ئانی سرا کلیک کنیت تا آ وختی مربوتین نخسه ئانه بگیندیت.
+filehist-deleteall|موچانی پاک کورتین
+filehist-deleteone|پاک کورتین
+filehist-revert|بیرگردینتین
+filehist-current|انونین نسخه
+filehist-datetime|تاریخ/ساعت
+filehist-thumb|ناحُننک
+filehist-thumbtext|ناحُنین اکس شه مورخ ~{0} ئی نخسه ئا
+filehist-nothumb|بی ناحُننک
+filehist-user|کار زوروک
+filehist-dimensions|ابعاد
+filehist-filesize|فایلی اندازه
+filehist-comment|کومنیت
+imagelinks|بی کار گیپتین فایلئ
+linkstoimage|{{PLURAL:~{0}\u007Cتاکدیم\u007Cتاکدیمان}} جهلگین بی اکسا لینک {{PLURAL:~{0}\u007Cداریت\u007Cدارنت}}:
+linkstoimage-more|گیشتیر شه ~{0} تاکدیم گۆ ای فایلا لینک {{PLURAL:~{0}\u007Cداریت\u007Cدارنت}}.\nجهلگی لڑ تانا {{PLURAL:~{0}\u007Cاولین لینک\u007Cاولین ~{0} لینک}} گۆ ای دیما نشان ئا دنت.\n[[Special:WhatLinksHere/~{1}\u007Cکامیلین لیست]] هم موجود اینت.
+nolinkstoimage|ای فایل بئ هیچ تاکدیمی تا بئ کار گیپته نه بوته.
+morelinkstoimage|ای فایلئ [[Special:WhatLinksHere/~{0}\u007Cدیگرین لینکانا]] بگیندیت.
+linkstoimage-redirect|~{0} (فایلی تغیرمسیر) ~{1}
+duplicatesoffile|جهلگی{{PLURAL:~{0}\u007Cفایل\u007Cفایلان}} تکرارین نخسه شه ای فایلا  {{PLURAL:~{0}\u007Cاست\u007Cهستنت}} ([[Special:FileDuplicateSearch/~{1}\u007Cگیشتیرین مئلومات]]):
+sharedupload-desc-here|ای فایل بئ ~{0} ئی تا قرار داریت و ممکن اینت که بئ دیگه پروژه‌هانئ تا هم استفاده بیئت.\nموجودین شرح بئ [~{1} فایلی دیمی شرح بئ آ جای تا]، جهلگا نشان داته بوته.
+filepage-nofile|فایلی گۆ ای ناما موجود نه اینت.
+filepage-nofile-link|فایلی گۆ ای ناما موجود نه اینت، اما شما ئه توانیت آیرا [~{0} بُرز کنیت].
+uploadnewversion-linktext|نوکین نخسه ئی بُرز کورتین شه فایلا
+shared-repo-from|شه ~{0}
+shared-repo|یک مشترکین مخزن
+upload-disallowed-here|شما نه توانیت ای فایلا بازنویسی بکنیت.
+filerevert|بیئرگردینتین ~{0}
+filerevert-legend|بیئرگردینتین فایلی
+filerevert-intro|شما بی حالی بیئرگردینتینا '''[[Media:~{0}\u007C~{0}]]''' بی [~{3} نخسه تاریخ ~{1} سائت ~{2}] هستیت.
+filerevert-comment|دلیل:
+filerevert-defaultcomment|بیئرگردینتین بئ ~{0} ئی نخسه ئا سائت ~{1}
+filerevert-submit|بیئرگشت
+filerevert-success|<strong>[[Media:~{0}\u007C~{0}]]</strong> بی [~{3} نخسه ئی بی تاریخی ~{1} سائت ~{2}] ئا بیئرگشتینته بوت.
+filerevert-badversion|قدیمیتیرین نخسه شه ای فایلا موجود نه اینت.
+filedelete|پاک کورتین ~{0}
+filedelete-legend|فایلی پاک کورتین
+filedelete-intro-old|شما بئ حال پاک کورتین نخسه ئی '''[[Media:~{0}\u007C~{0}]]''' مورخ [~{3} ~{1} سائت ~{2}] هستیت.
+filedelete-comment|دلیل:
+filedelete-submit|پاک کورتین
+filedelete-success|'''~{0}''' پاک بوت.
+filedelete-success-old|نخسه  '''[[Media:~{0}\u007C~{0}]]''' مورخ ~{1} سائت ~{2} پاک بوت.
+filedelete-nofile|'''~{0}''' موجود نه اینت.
+filedelete-nofile-old|ارشیف  بوته ئین نخسه شه  '''~{0}''' گۆ داته بوته ئین مشخصاتان، موجود نه اینت.
+filedelete-otherreason|دیگرین دلیل/اضافی:
+filedelete-reason-otherlist|دیگرین دلیل
+filedelete-reason-dropdown|*پاک بوتین ئی مشترکین دلیلان\n** کاپی رایٹ پُروشه گ\n** تکرارین پایل
+filedelete-edit-reasonlist|پاک بوتینئ دلیلانئ ایڈیٹ
+filedelete-maintenance-title|نه توانیت فایلا پاک بکنیت
+mimesearch|گشتین بی اساس MIME
+mimetype|MIME ئی رکم:
+download|ائیر کورتین
+unwatchedpages|دیسته نه یوته ئین تاکدیمان
+listredirects|تغیرمسیر ئی تاکدیمانی لڑ
+listduplicatedfiles|موچین فایل ئانی لڑ ، لۆڑ گۆ تکراری ئان
+listduplicatedfiles-entry|[[:File:~{0}\u007C~{0}]][[~{2}\u007C{{PLURAL:~{1}\u007Cیک تکرار\u007C~{1} تکرار}}]] داریت.
+unusedtemplates|استفاده نه بوته ئین تراشوانان
+unusedtemplateswlh|دیگه لینک ئان
+randompage|تصادفی مقاله
+randomincategory|تصادفین تاکدیم بئ تهر ئی تا
+randomincategory-invalidcategory|«~{0}» یک موتبرین نامئ په تهر ئان نه اینت.
+randomincategory-nopages|هیچ تاکدیمی بئ  [[:Category:~{0}\u007C~{0}]] ئی تهری تا موجود نه اینت.
+randomincategory-category|تهر:
+randomincategory-legend|تصادفین تاکدیم بئ تهرئی تا
+randomredirect|تغییرمسیر تصادفی
+randomredirect-nopages|هیج تغیر مسیر بئ  «~{0}» ئی نامی فضای تا موجود نه اینت.
+statistics-header-edits|ایڈیٹانی ارقام
+statistics-header-users|کار زوروکانئ ارقام
+statistics-header-hooks|دیگرین ارقام
+statistics-files|بُرز بوته ئین فایلان
+statistics-edits|تاکدیمانی ایڈیٹ شه وخت که {{SITENAME}} جۆڑ بوته انت
+statistics-edits-average|متوسطین ایڈیٹ شه هر یکین تاکدیما
+statistics-users|راجستر بوته ئین [[Special:ListUsers\u007Cکار زوروکان]]
+statistics-users-active|پئال ئین کار زوروکان
+statistics-users-active-desc|آ کار زوروکان که بئ {{PLURAL:~{0}\u007Cرۆچ\u007C~{0} رۆچ}} دیما پئالیت شه وت نشان داته انت
+pageswithprop|تاکدیم گۆ تاکدیمانئ خاصیتا
+pageswithprop-legend|تاکدیم گۆ تاکدیمانئ خاصیتا
+pageswithprop-prop|خاصیت ئی نام:
+pageswithprop-submit|برا
+pageswithprop-prophidden-long|(~{0}) ئی تچکین متنی چیهرین جزییات
+pageswithprop-prophidden-binary|(~{0}) ئی باینری چیهرین اندازگ ئی جزییات
+doubleredirects|دوتائین تغیرمسیرئان
+double-redirect-fixer|تغیرمسیرئانی تئمیرکار
+brokenredirects|خرابین تغیرمسیر
+brokenredirectstext|جهلگین تغییرمسیرئان بئ یک ناموجودین دیمی لینک دارنت:
+brokenredirects-edit|ایڈیٹ
+brokenredirects-delete|پاک کورتین
+withoutinterwiki|تاکدیمان بی شه زبانئ لینک ئان
+withoutinterwiki-legend|دیموند
+withoutinterwiki-submit|نشان داتین
+fewestrevisions|مقاله ئان گۆ کم ئین ایڈیٹ ئی اندازگ ئا
+nbytes|~{0} {{PLURAL:~{0}\u007Cبایٹ\u007Cبایٹ}}
+ncategories|~{0} {{PLURAL:~{0}\u007Cتهر\u007Cتهرئان}}
+ninterwikis|~{0} {{PLURAL:~{0}\u007Cمیان‌ویکی\u007Cمیان‌ویکی}}
+nlinks|~{0} {{PLURAL:~{0}\u007Cلینک\u007Cلینک}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cعضو\u007Cعضو}}
+nmemberschanged|~{0} → ~{1}   {{PLURAL:~{1}\u007C عضو\u007Cعضو}}
+nrevisions|~{0} {{PLURAL:~{0}\u007Cنخسه\u007Cنخسه}}
+nviews|~{0} {{PLURAL:~{0}\u007Cدیست\u007Cدیست}}
+nimagelinks|استفاده بوته بی  ~{0} {{PLURAL:~{0}\u007Cتاکدیم\u007Cتاکدیم}} ئی تا
+ntransclusions|استفاده بوته بی  ~{0} {{PLURAL:~{0}\u007Cتاکدیم\u007Cتاکدیم}} ئی تا
+specialpage-empty|نتیجه په راپور ئا موجود نه اینت.
+lonelypages|آتیمین تاکدیمان
+uncategorizedpages|تاکدیمان که کتیگوری بندی نه بوته انت
+uncategorizedcategories|تهرهان که کتیگوری بندی نه بوته انت
+uncategorizedimages|کتیگوری بندی نه بوته ئین فایلان
+uncategorizedtemplates|کتیگوری بندی نه بوته ئین تراشوانان
+unusedcategories|استفاده نه بوته ئین تهرهان
+unusedimages|استفاده نه بوته ئین فایلان
+wantedcategories|ضرورتین تهرهان
+wantedpages|ضرورتین تاکدیمان
+wantedpages-badtitle|نامجازین ئنوانی بی مجموعه نتایج: ~{0}
+wantedfiles|ضرورتین فایلان
+wantedfiletext-nocat-noforeign|جهلگین پایل ایستیپاده ئه به ینت مگه موجود نه انت.
+wantedtemplates|ضرورتین تراشوانان
+mostlinked|تاکدیمان که گیشتیر شه دیگران بئ آوان لینک داته بوته
+mostlinkedcategories|تهرهان که گیشتیر شه دیگران بئ آوان لینک داته بوته
+mostlinkedtemplates|تاکدیمان که گیشتیر ترانسکلوڈ بوته انت
+mostcategories|تاکدیمان گۆ بازین تهرهان
+mostimages|فایلان که گیشتیر شه دیگران بئ آوان لینک داته بوته
+mostinterwikis|تاکدیمان گۆ بازین میان ویکی هان
+mostrevisions|تاگدیمان گۆ بازێن نخسه ئان
+prefixindex|موچین تاکدیمان گۆ پدوندی
+prefixindex-namespace|موچین تاکدیمان گۆ (~{0} ئی پزایی ناما)
+prefixindex-strip|دیموندین نوار بئ لیست ئی تا
+shortpages|گونڈ\tین تاکدیمان
+longpages|تچکین تاکدیمان
+deadendpages|بن بستین تاکدیمان
+deadendpagestext|جهلگین تاکدیمان گۆ هیچگوجام تاکدیما بئ  {{SITENAME}} ئی تا لینک نه دارنت.
+protectedpages|قُلپ بوتگین تاکدیمان
+protectedpages-indef|فقط بی پایانین قُلپ ئان
+protectedpages-cascade|په قت آبشارین قُلپ هان
+protectedpages-noredirect|تغیرمسیرانی چیهرداتین
+protectedpagesempty|بئ انونین وختا هیچ دیمی قُلپ نه بوته.
+protectedpages-timestamp|وختی برچسپ
+protectedpages-page|تاکدیم
+protectedpages-expiry|الاسی وخت
+protectedpages-performer|قُلپ کنۆوکین کار زوروک
+protectedpages-params|قُلپ بوته ئین پارامیتران
+protectedpages-reason|دلیل
+protectedpages-unknown-timestamp|نامئلوم
+protectedpages-unknown-performer|نادروستئ ئین کار زوروک
+protectedtitles|قُلپ بوته ئین ئنوانان
+protectedtitles-summary|ای تاکدیم ، لیست ئی شه آ تاکدیمان اینت که شه جۆڑ کورتین ئا قُلپ بوته انت. په قُلپ بوته ئین  ئنوانانی لیستا که شه ایڈیٹ ئا ساتیته بوته انت، بئ ایدا  [[{{#special:ProtectedPages}}\u007C{{int:protectedpages}}]] برویت.
+protectedtitlesempty|بئ انونین وختا هیچ ئنوانی قُلپ نه بوته گۆ ای پارامیترا.
+listusers|کار زوروکانئ لڑلیست
+listusers-editsonly|فقط آ کار زوروکان که ایڈیٹ کورته انت نشان ب دئ
+listusers-creationsort|مرتب کورتین بئ اساس جۆڑ کورتینی تاریخا
+listusers-desc|نزولی ترتیب
+usereditcount|~{0} {{PLURAL:~{0}\u007Cایڈیٹ\u007Cایڈیٹ}}
+usercreated|{{GENDER:~{2}\u007Cجوڑ بوته}} بئ تاریخ ~{0} بئ سائت ~{1}
+newpages|نوکین تاکدیم
+newpages-username|کار زوروکین نام:
+ancientpages|کهنگین تاکدیمان
+move|انتقال
+movethispage|ای تاکدیمی انتقال
+notargettitle|بی شه هدفا
+nopagetitle|ایرنگی تاکدیمئ وجود نداریت
+pager-newer-n|{{PLURAL:~{0}\u007Cیک نوکتیرین مورد\u007C~{0} نوکتیرین مورد}}
+pager-older-n|{{PLURAL:~{0}\u007Cیک دیمتیرین مورد\u007C~{0} دیمتیرین مورد}}
+suppress|گیندوک ئان
+apihelp|API کومک
+apihelp-no-such-module|موڈیل " ~{0} " ودی نه بوت.
+booksources|کتابئ منبه ئان
+booksources-search-legend|په کتایئ منابی ئان خاتیرا گشتین
+booksources-search|گشتین
+specialloguserlabel|مجری:
+speciallogtitlelabel|هدف (ئنوان یا کار زوروک):
+log|سیاهه‌ها
+all-logs-page|عمومین موچین سیاه چال هان
+logempty|شمی منطبقین آیتم بی سیاه چالئ تا ودی نه بوت.
+log-title-wildcard|آ تاکدیمیانی پدا بگرد که آوانی ئنوان که گۆ ای ئبارت ئا شرو ئه بیئت
+allpagesfrom|تاکدیمانئ نشان داتین شرو شه:
+allpagesto|تاکدیمانئ نشان داتین الاسئ گو:
+allarticles|موچین تاکدیمان
+allinnamespace|موچین تاکدیمان (~{0} نامی فضا)
+allpagessubmit|برا
+allpagesprefix|تاکدیمانی نمایش گۆ دیمۆندا:
+allpagesbadtitle|شمی درخواستین ئنوان ناموتبر،خالی،یا میان زبانین یا میان ویکی ئین ئنوان و یا شه خرابین لینکی است.\nممکن اینت که یک یا چینکه نویسگ داشته بیئت که نتوانن آوانا بئ تاکدیمانی ئنوانانی تا استیپاده کنن.
+allpages-bad-ns|{{SITENAME}} ، «~{0}» ئی نامی فضا ئا نداریت.
+allpages-hide-redirects|تغیرمسیرانی چیهرداتین
+cachedspecial-refresh-now|دیستین آخرین ئانی.
+categoriesfrom|تهرهانئ نشان داتین شرو شه:
+special-categories-sort-count|ترتیت کورتین بئ اساس اندازگ
+special-categories-sort-abc|ترتیب کورتین سیاهگانی
+deletedcontributions|پاک بوته ئین مشارکتانی
+deletedcontributions-title|پاک بوته ئین مشارکتانی
+sp-deletedcontributions-contribs|مشارکت ئان
+linksearch|گشتین په ڈنئ لینکا
+linksearch-pat|گشتین په نمونه ئا:
+linksearch-ns|نامی فضا:
+linksearch-ok|گشتین
+linksearch-line|~{0} شه ~{1} ئا لینک داریت
+linksearch-error|نشانگ فقط بئ انترنیتی میزبانی اولی نامی تا تواننت استفاده بیئنت.
+listusersfrom|نمایش داتین کار زوروکان شرو شه:
+listusers-submit|نشان داتین
+listusers-noresult|هیچ کار زوروکئ ودی نه بوت.
+listusers-blocked|(بلاک بوته)
+activeusers|پئالین کار زوروکانئ لڑ لیست
+activeusers-intro|جهلگا یک لڑئ شه کار زوروکان ئه گیندیت که بئ ~{0} {{PLURAL:~{0}\u007Cروچ\u007Cروچ}} دیمتیرا پئالیت داشته انت.
+activeusers-count|~{0} {{PLURAL:~{0}\u007Cپئالیت\u007Cپئالیت}} بئ {{PLURAL:~{2}\u007Cرۆچ\u007C~{2} رۆچ}} اخیرا
+activeusers-from|نمایش داتین کار زوروکان شرو شه:
+activeusers-hidebots|رباتانی چیهر داتین
+activeusers-hidesysops|مدیرانئ چیهرداتین
+activeusers-noresult|هیچ کار زوروکئ ودی نه بوت.
+listgrouprights|کار زوروکین گروپانئ اختیاران
+listgrouprights-key|* <span class="listgrouprights-granted">داته بوته ئین اختیاران</span>\n* <span class="listgrouprights-revoked">کیپته بوته ئین اختیاران</span>
+listgrouprights-group|گروپ
+listgrouprights-rights|حقوق
+listgrouprights-helppage|Help:گروپانئ حقوق
+listgrouprights-members|(اعضائانی لڑلیست)
+listgrouprights-addgroup|توانیت ای {{PLURAL:~{1}\u007Cگروپ\u007Cگروپ ئان}} ئا اضافه بکینت: ~{0}
+listgrouprights-removegroup|توانیت ای {{PLURAL:~{1}\u007Cگروپ\u007Cگروپ ئان}} ئه پاک بکنیت: ~{0}
+listgrouprights-addgroup-all|توانیت موچین گروپانا اضافه بکنیت
+listgrouprights-removegroup-all|توانیت موچین گروپانا پاک بکنیت
+listgrouprights-addgroup-self|توانیت وتئ حسابا بی ای  {{PLURAL:~{1}\u007Cگروپ\u007Cگروپان}} ئی تا اضافه بکنیت: ~{0}
+listgrouprights-removegroup-self|توانیت وتئ حسابا شه ای  {{PLURAL:~{1}\u007Cگروپ\u007Cگروپان}} پاک بکنیت: ~{0}
+listgrouprights-addgroup-self-all|توانیت وتئ حسابا بی موچین گروپان اضافه بکینت
+listgrouprights-removegroup-self-all|توانیت وتئ حسابا شه موچین گروپان پاک بکنیت
+listgrouprights-namespaceprotection-header|فضای نام ئی محدودیت
+listgrouprights-namespaceprotection-namespace|نامی فضا
+listgrouprights-namespaceprotection-restrictedto|مجازین هه قوق (هان) په دستکاری ئا
+trackingcategories|ردیابی کنۆکین تهرهان
+trackingcategories-msg|ردیابئ تهر
+trackingcategories-name|پیامی نام
+trackingcategories-desc|تهرئ کنجایش ئی معیاران
+trackingcategories-nodesc|هیچ توضیحی موجود نه اینت.
+trackingcategories-disabled|تهر غیر پئال بوته
+mailnologin|ادرسئ شه دیم دهۆک ئا موجود نه اینت
+emailuser|ای کار زوروکئ ایمیل
+emailuser-title-target|ایمیل په {{GENDER:~{0}\u007Cکار زوروکا}}
+emailuser-title-notarget|کار زوروکی ایمیل
+emailpage|کار زوروکی ایمیل
+defemailsubject|{{SITENAME}} ایمیل شه کار زوروکئ نیمگا «~{0}»
+usermaildisabled|کار زوروکئ ایمیل غیر پئال اینت
+usermaildisabledtext|شما نه توانیت ای ویکی تا په دیگه رین کارزوروکان ایمیل دیم دهیت.
+noemailtitle|ایمیل ئی ادرس موجود نه اینت
+noemailtext|ای کار زوروک موتبرین ایمیل ئی مشخص نه کورته.
+nowikiemailtext|ای کار زوروک انتخاب کورته که شه دیگه کار زوروکان په آیی ایمیل مه آینت.
+emailnotarget|کار زورکین نام موجود نه اینت یا ناموتبر په گیرنده ئا.
+emailtarget|گیرنده ئی کار زوروکین ناما وارد بکنیت
+emailusername|کار زوروکین نام:
+emailusernamesubmit|ثبت کورتین
+email-legend|یک ایمیلی داتین په دیگرین {{SITENAME}} کار زوروکا
+emailfrom|شه:
+emailto|بی:
+emailsubject|ئنوان:
+emailmessage|پیام:
+emailsend|دیم دئ
+emailccme|پیامی رونیویشت ئا په من دیم دی.
+emailccsubject|شمی پیامی رونیویشت په ~{0}: ~{1}
+emailsent|ایمیل دیم دئ
+emailsenttext|شمی ایمیل پیام دیم داته بوت
+usermessage-summary|سیستم یی پیامی ایشتین.
+usermessage-editor|سیستم یی پیام رسان
+watchlist|واچلیست
+mywatchlist|واچلیست
+watchlistfor2|په ~{0} ~{1}
+nowatchlist|شمی واچلیست ئی تا هیچ موردی نه اینت.
+watchlistanontext|په وتي واچلیستئ دستین و ایڈیٹ ئی خاتیرا شه ~{0} ئا استفاده بکنیت.
+watchnologin|داخل نه بوته ئیت
+addwatch|افاضه کورتین بئ واچلیستا
+addedwatchtext-short|" ~{0} " ئی دیم بئ شمی واچلیست ئا ایزاپه بوته.
+removewatch|پاک کورتین شه واچلیستا
+removedwatchtext|«[[:~{0}]]» دیم شه  [[Special:Watchlist\u007Cشمی واچلیستا]] زورته بوت.
+removedwatchtext-short|"~{0}" ئی دیم شه شمی واچلیستا پاک بوته.
+watch|دیستین
+watchthispage|دیستین ای تاکدیمی
+unwatch|اوشتارین تین دیستینی
+unwatchthispage|اوشتارینتین چارگ ئی
+notanarticle|تاکدیم محتوایی نه اینت
+notvisiblerev|آخرین نخسه شه دیگه کار زوروکئ نیمگا پاک بوته.
+wlheader-enotif|ایمیل ئی ناتیپشن پئال اینت.
+wlheader-showupdated|تاکدیمان که شه شمی آخیرین دیستینا پد تغیر بوته انت '''پررنگ''' نشان داته بیئنت.
+wlnote|بئ جهلگا {{PLURAL:~{0}\u007Cتغییری\u007C<strong>~{0}</strong> تغییری}} که بئ {{PLURAL:~{1}\u007Cسائت\u007C<strong>~{1}</strong> سائت}} دیمتیرا انجام بوته موجود اینت، آخیرین بازیابی تاریخ: ~{2}، ~{3}
+wlshowlast|نشان داتین آخیرئین ~{0} سائت ~{1} روچئ
+watchlist-options|واچلیستئ آپشن
+watching|بئ دیستینئ حالا...
+unwatching|دیستینئ اوشتارینتین...
+watcherrortext|مشکل بئ شمی واچلیستئ تنظماتانی بدل کورتینی وختا په «~{0}» ئا رخ دات.
+enotif_reset|نشان گذاری کورتین موچین تاکدیمانی گۆ دیسته بوته ئین ئنوانا
+enotif_impersonal_salutation|کار زوروک {{SITENAME}}
+enotif_subject_deleted|{{SITENAME}} تاکدیم ~{0} شه {{gender:~{1}\u007C~{1}}} نیمگا پاک بوت.
+enotif_subject_created|{{SITENAME}} تاکدیم ~{0} شه {{gender:~{1}\u007C~{1}}} نیمگا جوڑ بوته.
+enotif_subject_moved|{{SITENAME}} تاکدیم ~{0} شه {{gender:~{1}\u007C~{1}}} نیمگاانتقال بوت.
+enotif_subject_restored|{{SITENAME}} تاکدیم ~{0} شه {{gender:~{1}\u007C~{1}}} نیمگا نوک بوت.
+enotif_subject_changed|{{SITENAME}} تاکدیم ~{0} شه {{gender:~{1}\u007C~{1}}} نیمگا تغیر بوت.
+enotif_body_intro_deleted|~{0} تاکدیم {{SITENAME}} $PAGEEDITDATE بی تاریخی شه{{gender:~{1}\u007C~{1}}} نیمگا پاک بُوت ، ~{2} ئا بگیندیت .
+enotif_body_intro_created|{{SITENAME}} ~{0} ئی تاکدیم بئ تاریخ $PAGEEDITDATE شه {{gender:~{1}\u007C~{1}}} ئی نیمگا جۆڑ بوت، ~{2} ئا په انونین نخسه ئا بگیندیت.
+enotif_body_intro_moved|{{SITENAME}} ~{0} ئی تاکدیم بئ تاریخ $PAGEEDITDATE شه {{gender:~{1}\u007C~{1}}} ئی نیمگا انتقال بوت، ~{2} ئا په انونین نخسه ئا بگیندیت.
+enotif_body_intro_restored|{{SITENAME}} ~{0} تاکدیم بئ تاریخ $PAGEEDITDATE شه {{gender:~{1}\u007C~{1}}} ئی نیمگا پدا جۆڑ بوت، ~{2} ئا په انونین نخسه ئا بگیندیت.
+enotif_body_intro_changed|{{SITENAME}} ~{0} ئی تاکدیم بئ تاریخ $PAGEEDITDATE شه {{gender:~{1}\u007C~{1}}} ئی نیمگا تغیر داته بوت، ~{2} ئا په انونین نخسه ئا بگیندیت.
+enotif_lastvisited|په موچین تغیران شه آخیرئین واری که سر جته ئیت  ایدا ~{0} بگنیت.
+enotif_lastdiff|په ای تغیری دیستینا ~{0} ئا بگیندیت.
+enotif_anon_editor|~{0} نا دروستی ئین کار زوروک
+enotif_body|$WATCHINGUSERNAME گرامی،\n\n$PAGEINTRO $NEWPAGE\n\n\nایڈیٹ کنۆکێ توضیحات: $PAGESUMMARY $PAGEMINOREDIT\n\nتماس گۆ ایڈیٹ کنۆکا:\nایمیل: $PAGEEDITOR_EMAIL\nویکی: $PAGEEDITOR_WIKI\n\nتا وختی که بئ ای دیما سر نه جته ئیت ، بئ شمی احتمالی ئین فعالیتی گیشتیرین بوتین ئی سورتا، تا وختی که گۆ وتئ کار زوروکین حسابا بی سایت تا وێت ، شما جار دیم داته ئه نه بیێت.\nشما همچنین توانتیت وتئ چاریێتین لیست ئی تا موچین بیراکانه سیپر کنیت و هم توانیت آوانا پدا بیئرگردی نیت.\n\nشمی دوستدارۆک، {{SITENAME}} ئی نوتیپیشن ئی سیستم\n\n--\nپه ای ایمیل ئی مئلومات رسانی ئی تنظیماتانی تغیری خاتیرا بئ {{canonicalurl:{{#special:EditWatchlist}}}} ئی تا برۆیت.\n\nپه وتئ واچلیستی تنظماتانی تغیر بئ  {{canonicalurl:{{#special:EditWatchlist}}}} ئی تا برۆیت\n\nپه دیمی پاک کورتین ئی خاتیرا شه وتئ واچلیستا بئ $UNWATCHURL ئی تا برۆیت.\n\nپه گیشتیرین کومک ئی خاتیرا:\n$HELPPAGE
+deletepage|تاکدیمی پاک کورتین
+confirm|تأیید کورتین
+excontent|تاکدیمی محتوا ایش ات: «~{0}»
+excontentauthor|تاکدیمی محتوا ایش ات: «~{0}» (و تانا مشارکت کنۆک «[[Special:Contributions/~{1}\u007C~{1}]]» ات)
+exbeforeblank|تاکدیمی محتوا دیم شه خالی کورتینا ایش ات: «~{0}»
+delete-confirm|پاک کورتین «~{0}»
+delete-legend|پاک کورتین
+historywarning|<strong>هشدار:</strong> تاکدیمی ئا که پاک ئه کنیت تاریخچه داریت گۆ  ~{0} {{PLURAL:~{0}\u007Cپدا دیسته بوتین\u007Cپدا دیسته بوتین ئان}} اینت:
+actioncomplete|کار بوت
+actionfailed|کار نه بوت
+deletedtext|«~{0}» پاک بوت.\nپه آخیرین پاک بوتینین سابقه ئا بئ ~{1} ئی تا مراجعه بکنیت.
+dellogpage|سیاه چال ئی پاک کورتین
+dellogpagetext|جهلگین لڑلیست شه آخیرین پاک بوته ئین ئانی لڑا اینت.\nموچین ئانی نشان داته بته ئین وخت خادم وخت (گرینویچ ئی وخت) انت.
+deletionlog|سیاه چال ئی پاک کورتین
+reverted|بی دیمتیرین نخسه ئا بیئرگردینته بوت
+deletecomment|دلیل:
+deleteotherreason|دیگرین دلیل/اضافی:
+deletereasonotherlist|دیگرین دلیل
+deletereason-dropdown|*پاک بوتینئ متدوالین دلیل\n** سپم\n** خرابکاری\n** کاپی رایت ئی نقض\n** کار زوروکئ خواهش\n** پروشته ئین تغیر میسر
+delete-edit-reasonlist|پاک بوتینئ دلیلانئ ایڈیٹ
+deleteprotected|شما نه توانیت که ای تاکدیما پاک کنیت چون که شه آیی محافظت بوته.
+deleting-backlinks-warning|''' هشدار:''' [[Special:WhatLinksHere/{{FULLPAGENAME}}\u007Cدیگرین تاکدیم]] هستنت که گۆ ای تاکدیما که شما ئه لوٹیت آیرا پاک بکنیت لینک بوته انت.
+rollback|ایڈیٹئ بیئرگردینتین
+rollbacklink|بیجا آورتین
+rollbacklinkcount|بیئرگردینتین ~{0} {{PLURAL:~{0}\u007Cایڈیٹ\u007Cایڈیٹ هانئ}}
+rollbacklinkcount-morethan|بیئرگردینتین گیشتیر شه ~{0} ایڈیٹا
+rollbackfailed|بیئرگردینته نه بوت
+cantrollback|نه توانیت که ایڈیٹ ئا بیئرگردینیت؛\nآخرین مشارکت‌کنۆک ای مقاله ئی تانائین مولف اینت.
+editcomment|ایڈیٹ ئی خلاصه ایش ات: «''~{0}''».
+rollback-success|~{0} ئی ایڈیٹ بیئرگردینته بوتنت؛\nتاکدیم بئ اخیرین ایڈیٹ شه ~{1} ئا بیئرگردینته بوت.
+sessionfailure-title|کار زوروکئ نشست ئی خطا
+protectlogpage|سیاهگئ قُلپ
+protectedarticle|«[[~{0}]]» ئا قُلپ کورت
+modifiedarticleprotection|«[[~{0}]]» قُلپ ئی وزيیتا گردینت
+unprotectedarticle|«[[~{0}]]» ئی تاکدیمئ قُلپ يا پاچ کورت
+movedarticleprotection|قُلپ ئی تنظیماتاشه «[[~{1}]]» ئا بئ  «[[~{0}]]» ئا جابجا کورت
+protect-title|«~{0}»  ئی قُلپ ئی وزئتئ گردینتین
+protect-title-notallowed|" ~{0} " ئی قُلپ ئی سطح دیستین
+prot_1movedto2|[[~{0}]] بئ [[~{1}]] ئا جابجا بوت
+protect-badnamespace-title|نام فضا بی شه قُلپا
+protect-badnamespace-text|ای فضای نامی تا موجودین تاکدیمان نه توانن قُلپ کنن.
+protect-norestrictiontypes-title|غیر قابل قُلپ ئین تاکدیم
+protect-legend|قُلپ کورتین ئی تائیدی
+protectcomment|دلیل:
+protectexpiry|الاسی وخت:
+protect_expiry_invalid|الاسی وخت صحیح نه اینت.
+protect_expiry_old|الاسی وخت بئ دیما.
+protect-unchain-permissions|قُلپی دیگرین بخشانی پاچ کورتین
+protect-default|اجازه داتین بئ موچین کار زوروکان
+protect-fallback|فقط بئ آ کار زوروکان که بئ  «~{0}» ئا دسترسی دارنت، اجازه داته ئه بیئت
+protect-level-autoconfirmed|تانا اجازه په تائید بوته ئین کار زوروکان
+protect-level-sysop|فقط مدیر هان
+protect-summary-cascade|آپشاری
+protect-expiring|پوره بوتین ئی وخت ~{0} (UTC)
+protect-expiring-local|پوره بوته ئین ~{0}
+protect-expiry-indefinite|بی‌پایان
+protect-cantedit|شما ئه نه توانیت ای تاکدیمی قُلپئ وضیعتا تغیر بدهیت، چون که شما آیی ایڈیٹ ئی اجازه ئا نداریت.
+protect-othertime|دیگه وخت:
+protect-othertime-op|دیگه وخت
+protect-existing-expiry|موجودین انقضای وخت: ~{1}، ~{2}
+protect-existing-expiry-infinity|موجودین انقضای وخت: بی‌نهایت
+protect-otherreason|دیگرین دلیل/اضافی:
+protect-otherreason-op|دیگرین دلیل
+protect-edit-reasonlist|قُلپی دلیلانی ایڈیٹ کورتین
+protect-expiry-options|۱ سائت:1 hour,۱ روچ:1 day,۱ هپتگ:1 week,۲ هپتگ:2 weeks,۱ ماه:1 month,۳ ماه:3 months,۶ ماه:6 months,۱ سال:1 year,بی‌پایان:infinite
+restriction-type|دسترسی:
+restriction-level|محدودیت ئی سطح:
+minimum-size|حداقل اندازه
+maximum-size|حداکثر اندازه:
+pagesize|(بایٹ)
+restriction-edit|ایڈیٹ
+restriction-move|انتقال
+restriction-create|جوڑ\t کورتین
+restriction-upload|بُرز کورتین
+restriction-level-sysop|کاملآ قُلپ بوته
+restriction-level-autoconfirmed|نیمه‌ گ قُلپ بوته
+restriction-level-all|هر سطحی
+undelete|پاک بوته ئین تاکدیمانی دیستین
+undeletepage|پاک بوته ئین تاکدیمانی دیستین و پدا جۆڑ کورتین
+undeletepagetitle|'''آن چه که دیمتیرا کاینت شامل شه [[:~{0}\u007C~{0}]] ئی پاک بوته ئین نخسه ئان انت'''.
+viewdeletedpage|پاک بوته ئین تاکدیمانی دیستین
+undelete-fieldset-title|نخسه ئانی پدا جۆڑ کورتین
+undeleterevisions|~{0} آرشیف {{PLURAL:~{0}\u007Cبوته\u007Cبوته انت}}
+undelete-revision|~{0} ئی پاک بوته ئین نخسه (بئ تاریخ ~{3} سائت ~{4}) شه ~{2} ئی نیمگا:
+undelete-nodiff|قدیمیتیرین نخسه ئی ودئ نه بوت.
+undeletebtn|احیا
+undeletelink|نمایش/احیا
+undeleteviewlink|دیستین
+undeleteinvert|انتخاب سرچپی بیئت
+undeletecomment|دلیل:
+undeletedrevisions|~{0} ئی نخسه احیا {{PLURAL:~{0}\u007Cبوت}}
+undeletedrevisions-files|~{0} نخسه و ~{1} فایل پداجۆڑ {{PLURAL:~{0}\u007Cبوت\u007Cبوتنت}}.
+undeletedfiles|~{0} ئی فایل پدا جۆڑ {{PLURAL:~{0}\u007Cبوت\u007Cبوتنت}}.
+cannotundelete|پدا جۆڑ کورتین ناکام ات:\n~{0}
+undeletedpage|'''~{0} پدا جۆڑ بوت'''\n\nپه پاک بوته ئین و پدا جۆڑ بوته ئین سیاهه ئی خاتیرا بئ [[Special:Log/delete\u007Cپاک بوته ئین ئانی سیاهه]] ئی تا برۆیت.
+undelete-header|په آ دیما که بئ ای آخیرا پاک بوته انت بئ   [[Special:Log/delete\u007Cپاک بوته ئین ئانی سیاهه]] ئا بگیندیت.
+undelete-search-title|گشتین په پاک بوته ئین تاکدیمان
+undelete-search-box|گشتین په پاک بوته ئین تاکدیمان
+undelete-search-prefix|نشان داتین تاکدیمانی شرو شه:
+undelete-search-submit|گشتین
+undelete-no-results|هیچ مطابقت ئی تاکدیمی بئ پاک بوته ئین ئانی آرشیف ئی تا ودئ نه بوت.
+undelete-cleanup-error|خطا بئ «~{0}» پاک بوتین ئانی تاریخچه ئی تا استفاده نه بوته.
+undelete-error|خطا تاکدیم غیر قابل پاک کورتین اینت
+undelete-error-short|خطا پدا جۆڑ کورتین بئ فایل: ~{0}
+undelete-error-long|بی پدا  جۆڑ کورتین ئی وختا خطا رخ دات:\n\n~{0}
+undelete-show-file-confirm|آیا شما مطمئن وێت که لوٹیت یک پاک بوته ئین نخسه شه فایل "<nowiki>~{0}</nowiki>" مورخ ~{1} سائت ~{2} ئا بگیندیت؟
+undelete-show-file-submit|هان
+namespace|نامی فضا:
+invert|انتخاب سرچپی بیئت
+tooltip-invert|ای جئبه ئا ئلامت بجنیت تا که پزای نام تا ئین انتخاب بوته ئین تاکدیمانی تغیرات (و دیگرین ئلامت جته بوته ئین پزای نام ئان) چیهر به ینت
+namespace_association|Associated namespace
+tooltip-namespace_association|ای جئبه ئا ئلامت بجنیت تا که مربوتین موزو ئی پزای نامی گپ گۆ\nانتخاب بوته ئین پزای ناما شامل بیت
+contributions|{{GENDER:~{0}\u007Cکار زوروک}} ئی شراکت ئان
+contributions-title|~{0} ئی کار زوروکئ شراکت ئان
+mycontris|شراکت ئان
+contribsub2|په {{GENDER:~{2}\u007C~{0}}} (~{1})
+contributions-userdoesnotexist|«~{0}» ئی کار زوروکین حساب راجستر نه بوته.
+nocontribs|هیچ تغیری گۆ ای مشخصات ئان ودێ نه بوت
+uctop|(انونین نخسه)
+month|بی ای ماه ئی تا (و دیمتیر شه آیی):
+year|بی ای سال ئی تا (و دیمتیر شه آیی):
+sp-contributions-newbies|فقط نوکین مشارکتان نشان داته بیئنت
+sp-contributions-newbies-sub|په نوک کاران
+sp-contributions-newbies-title|په نوک کارین حسابانی خاتیرا کار زوروکئ شراکت ئان
+sp-contributions-blocklog|بلاک بوته ئین ئانی سیاهه
+sp-contributions-suppresslog|کار زوروکئ کومک اوشتاته انت
+sp-contributions-deleted|کار زوروکئ پاک بوئین شراکت ئان
+sp-contributions-uploads|بُرز بوته هان
+sp-contributions-logs|سیاهه‌ها
+sp-contributions-talk|گپ
+sp-contributions-userrights|کار گیروکی اختیارانی مدیریت
+sp-contributions-blocked-notice|ای کار زوروکئ دسترسی بی انونین وختا بسته بوته.\nآخرین مورد شه دسترسی ئی سیستین به جهلگا آته:
+sp-contributions-blocked-notice-anon|ای کار زوروکئ دسترسی بی انونین وختا بسته بوته.\nآخرین مورد شه دسترسی ئی سیستین به جهلگا آته:
+sp-contributions-search|گشتین په شراکتان
+sp-contributions-username|آی‌پی ادرس یا کار زوروکئ نام:
+sp-contributions-toponly|فقط آخیرین نخسه ئانی  ایڈیٹ نشان داته بئنت
+sp-contributions-newonly|فقط نشان داتین آ ایڈیٹانی که دیمی جۆڑ کورتینی هستنت
+sp-contributions-submit|گشتین
+whatlinkshere|لینک بئ ای تاکدیما
+whatlinkshere-title|تاکدیمان که گو  «~{0}» لینک دارنت
+whatlinkshere-page|تاکدیم:
+linkshere|جهلگین دیم بئ  '''[[:~{0}]]''' ئا لینک داریت:
+nolinkshere|هیچ دیمی بئ  '''[[:~{0}]]''' ئا لینک نه داریت.
+nolinkshere-ns|هیچ دیمی شه انتخاب بوته ئین نامی فضائان بئ  '''[[:~{0}]]''' ئا لینک نداریت.
+isredirect|تاکدیمی تغییرمسیر داتین
+istemplate|تراگنجانش‌هان
+isimage|فایل لینک
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cدیمئ\u007C~{0} دیمئ مورد}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cپدئ\u007C~{0} پدئ مورد}}
+whatlinkshere-links|→ لینک
+whatlinkshere-hideredirs|~{0} تغییرمسیر
+whatlinkshere-hidetrans|~{0} تراگنجانش‌هان
+whatlinkshere-hidelinks|~{0} لینک
+whatlinkshere-hideimages|~{0} فایلی لینکان
+whatlinkshere-filters|فیلتر ئان
+autoblockid|#~{0} ئی اوتو بلاک
+block|کار زوروکئ بلاک کورتین
+unblock|کار زوروکئ انبلاک یا پاچ کورتین
+blockip|{{GENDER:~{0}\u007Cکار زورکئ}} بستین
+blockip-legend|کار زوروکئ بلاک کورتین
+ipaddressorusername|آی‌پی ادرس یا کار زوروکئ نام:
+ipbexpiry|الاسی وخت:
+ipbreason|دلیل:
+ipb-hardblock|دیمگیری شه ایڈیٹ کورتین ئا کار زوروکانئ که شه آی پی نیمگا راجستر بوته انت
+ipbcreateaccount|دیمگیری شه حسابئ جوڑ کورتینا
+ipbemailban|دیمگیری شه ایمیلی دیم داتینا
+ipbsubmit|ای کار زوروک بسته بیئت
+ipbother|دیگه وخت:
+ipboptions|۲ سائت:2 hours,۱ روچ:1 day,۳ روچ:3 days,۱ هپتگ:1 week,۲ هپتگ:2 weeks,۱ ماه:1 month,۳ ماه:3 months,۶ ماه:6 months,۱ سال:1 year,بی‌پایان:infinite
+ipbhidename|چیهرداتین کار زوروکئ ناما شه ایڈیٹان و لیستا
+ipbwatchuser|ای کار زوروکئ ، کارزوروکین و حبر وگپ ئی دیمانی دیستین
+ipb-disableusertalk|دیمگیری کورتین شه ایڈیٹ کورتین ئا گپ و حبر ئی تاکدیمئ شه کار زوروکئ جیندئ نیمگا وختی که آ بلاک اینت
+ipb-change-block|کار زوروکئ پدا بلاک کورتین گۆ ای تنظیماتان
+ipb-confirm|بستینئ تائید کورتین
+badipaddress|آی‌پی نامجازین ادرس
+blockipsuccesssub|بستین گو کامیابیا انجام بوت
+blockipsuccesstext|[[Special:Contributions/~{0}\u007C~{0}]] بسته بوت.<br />\nپه بلاک یا بسته بوته ئین نانی خاتیرا [[Special:BlockList\u007Cای جاه]] ئا بگیندیت.
+ipb-blockingself|شما وترا بئ بلاک کورتین ئی حالا هستیت! آیا شما موتمئین هستیت که لۆٹیت ایرنگین کاری بکنیت؟
+ipb-edit-dropdown|بلاک ئی دلیلانی ایڈیٹ کورتین
+ipb-unblock-addr| ~{0} پاچ کورتین
+ipb-unblock|کار زوروکئ یا آی پی ادرس ئی بلاک ئی پاچ کورتین
+ipb-blocklist|موجودین بلاک ئی دیستین
+ipb-blocklist-contribs|مشارکتان په {{GENDER:~{0}\u007C~{0}}}
+unblockip|کار زوروکئ انبلاک یا پاچ کورتین
+ipusubmit|ای بلاک ئی پاک کورتین
+unblocked|[[User:~{0}\u007C~{0}]] ئی دسترسی پدا پئال بوت
+unblocked-range|~{0} پاچ بوت
+unblocked-id|بلاک شماره ~{0} الاس بوت
+unblocked-ip|[[Special:Contributions/~{0}\u007C~{0}]] انبلاک بوت.
+blocklist|بلاک بوته ئین کار زوروکان
+ipblocklist|بلاک بوته ئین کار زوروکان
+ipblocklist-legend|گشتین په بلاک بوته ئین کار زوروکا
+blocklist-userblocks|چیهرداتین بسته بوتین ئانی حسابئ
+blocklist-tempblocks|موقتین بستینانی چیهرداتین
+blocklist-addressblocks|چیهرداتین یک آی پی بسته بوته ئین
+blocklist-rangeblocks|رینج ئی بلاک هانئ چیهرداتین
+blocklist-timestamp|وختی برچسپ
+blocklist-target|هدف
+blocklist-expiry|الاسی وخت
+blocklist-by|بلاک کورتین ئی مدیر
+blocklist-params|بلاک ئی پارامیتران
+blocklist-reason|دلیل
+ipblocklist-submit|گشتین
+ipblocklist-localblock|محلین دسترسی ئی بستین
+ipblocklist-otherblocks|دیگرین {{PLURAL:~{0}\u007Cبستین‌هان\u007Cبستین‌هان}}
+infiniteblock|بی‌پایان
+expiringblock|بئ ~{0} سائت ~{1} ئا الاس ئه بێت
+anononlyblock|فقط زیان نامین کار زوروکان
+noautoblockblock|اوتوماتیکبلاک غیرفعال اینت
+createaccountblock|حسابئ جوڑ کورتینئ قابلیت غیر پئال بوت
+emailblock|ایمیل بسته بوته
+blocklist-nousertalk|وتئ گپ ئی تاکدیما نتوان ایڈیٹ کورت
+ipblocklist-empty|بسته بوته ئین ئانی لیست خالی اینت.
+blocklink|بلاک یا بستین
+unblocklink|پاچ یا انبلاک بێت
+change-blocklink|بلاک ئی تغیرداتین
+contribslink|مشارکت ئان
+emaillink|ایمیلی دیم داتین
+blocklogpage|کورمئ بستین
+blocklogentry|«[[~{0}]]» ئا تا ~{1} بست ~{2}
+unblocklogentry|~{0} ئا پاچ کورت
+block-log-flags-anononly|فقط زیان نامین کار زوروکان
+block-log-flags-nocreate|حسابئ جوڑ کورتینئ قابلیت غیر پئال بوت
+block-log-flags-noautoblock|اوتوماتیکبلاک غیرفعال اینت
+block-log-flags-noemail|ایمیل بسته بوته
+block-log-flags-nousertalk|وتئ گپ ئی تاکدیما نتوان ایڈیٹ کورت
+block-log-flags-angry-autoblock|پیشرفته ئین اتوماتیکین بلاک فعال بوت
+block-log-flags-hiddenname|چیهرین کار زوروکئ نام
+ipb_expiry_invalid|الاسی وخت صحیح نه اینت.
+ipb_expiry_temp|چیهرین کارزوروکانی دسترسی قه تی کورتین یا بلاک باید همیشگی بیئت .
+ipb_hide_invalid|ای هیساب ئی سرکوب کورتین امکان نداریت; ای گیشتیر شه {{PLURAL:~{0}\u007Cیک ایڈیٹ\u007C~{0} ایڈیٹان}} داریت.
+ipb_already_blocked|«~{0}» همی انون بسته بوته
+ipb-needreblock| ~{0} ئی دسترسی شه دیما بسته بسته بوته . آیا لوٹیت که آیی تنزیماتان تغیر ب دهیت؟
+ipb-otherblocks-header|دیگرین {{PLURAL:~{0}\u007Cبلاک\u007Cبلاک ئان}}
+unblock-hideuser|په ای خاتیرا که ای کار زوروکی هیساب چیهرداته بوته شما ئه نه توانیت آیرا پاچ بکنیت.
+ipb_cant_unblock|خه تا:  ~{0} ئی بلاک آی ڈی ودی نه بوت . ممکن اینت که دیمتیرا پاچ بوته بیت.
+ip_range_invalid|ناموتبرین آی پی ئی رینج
+ip_range_toolarge|بلاک کورتین ئی رینج ٹوُتیر شه /~{0} ئا مجاز نه اینت.
+proxyblocker|پروکسی ئی بلاک کنۆک
+ipbnounblockself|شما په وتی آنبلاک یا پاچ کورتین ئا اجازه نه داریت.
+lockdb|مئلوماتئ بانکی قُلپ کورتین
+unlockdb|مئلوماتئ بانکی قُلپئ پروشتێن
+lockconfirm|هان، من جدآن لوٹین که مئلومانئ بانکا قُلپ کنین.
+unlockconfirm|هان، من جدآن لوٹین که مئلوماتئ بانکی قُلپا پاچ کنین.
+lockbtn|مئلوماتئ بانکی قُلپ کورتین
+unlockbtn|مئلوماتئ بانکی قُلپئ پروشتێن
+locknoconfirm|شما بئ تائیدی جئبه ئی تا چیک مه جنیت
+lockdbsuccesssub|مئلوماتئ بانک قُلپ بوت
+unlockdbsuccesssub|مئلوماتئ بانکئ قُلپ پاچ بوت
+lockdbsuccesstext|مئلوماتئ بانک قُلپ بوت.\n<br />شه هوشا مه برێیت که پد شه الاس بوتینا قُلپا پاچ بکنیت.
+unlockdbsuccesstext|مئلوماتئ بانکی قُلپ پاچ بوت.
+databasenotlocked|مئلوماتئ بانک قُلپ نه اینت.
+lockedbyandtime|(بواسطه ~{0} ئا بئ ~{1} سائت ~{2})
+move-page|انتقال ~{0}
+move-page-legend|تاکدیمی انتقال
+movearticle|تاکدیمی انتقال:
+movenotallowed|شما په تاکدیمانی جابجا کورتین ئی اجازه ئا نداریت.
+movenotallowedfile|شما په پایل ئانی جابجا کورتین ئی اجازه ئا نداریت.
+cant-move-category-page|شما په تهرئانی تاکدیمانی جابجا کورتین ئا اجازه  نداریت.
+cant-move-to-category-page|شما په تهری یک دیم په دیگه دیمی جابیجا کورتینا اجازه نداریت.
+newtitle|گۆ نوکین ئنوانا:
+move-watch|دیستین مخسد و زهی دیمانی
+movepagebtn|تاکدیمی انتقال
+pagemovedsub|جابجایی گۆ کامیابیا بوت
+movepage-moved|'''«~{0}» بئ «~{1}» انتقال بوت'''
+movepage-moved-redirect|یک تغیرمسیر جۆڑ بوت.
+movepage-moved-noredirect|شه تغیرمسیر ئا دیمگیری بوت.
+articleexists|یک دیمی گۆ ای ناما شه دیما موجود اینت، یا نامی که شما انتخاب کورته ایت موتبر نه اینت.\nمهربانی بکنیت دیگه نامی انتخاب بکنیت.
+movetalk|حبر و گپ ئی دیم جابجا بیئت
+move-subpages|گۆنڈ دیمانی انتقال (تا ~{0} دیم)
+move-talk-subpages|حبر وگپ ئی گۆنڈ دیمانی انتقال (تا ~{0} دیما)
+movepage-page-exists|~{0} ئی تاکدیم شه دیما موجود اینت ، نه توان که آیرا بئ اوتوماتیکین رقما جایگیر بکنت.
+movepage-page-moved|~{0} ئی دیم بئ ~{1} ئا انتکا بوت.
+movepage-page-unmoved|~{0} ئی دیما نتوان که بئ  ~{1} ئا جابجا کورت.
+movelogpage|انتقال ئی سیاهه
+movelogpagetext|بئ جهلگا لیستی شه انتقال ئی دیمانی آته.
+movesubpage|{{PLURAL:~{0}\u007Cگۆنڈدیم\u007Cگۆنڈدیم هان}}
+movenosubpage|ای تاکدیم هیچ گۆنڈدیم ئی نداریت.
+movereason|دلیل:
+revertmove|بیرگردینتین
+delete_and_move|پاک کورتین یا جابیجا
+delete_and_move_confirm|هان،تاکدیم پاک بیئت
+delete_and_move_reason|پاک کورتین  «[[~{0}]]» جابجایی امکانا
+immobile-source-page|ای دیم جابیجا ئه نه بیئت.
+immobile-target-page|انتقال ئی امکان په ای ئنوانا موجود نه اینت.
+move-leave-redirect|بئ جا ایشتین یک تغیری مسیر ئی
+export|ڈن کورتین  تاکدیمانئ
+exportall|ڈن کورتین موچین تاکدیمانئ
+exportcuronly|فقط انونین نخسه شامل بیئت، نه موچین تاریخچه
+export-submit|دَر کورتین
+export-addcattext|افاضه کورتین تاکدیمان شه تهر ئا:
+export-addcat|اڈ\tڈ\t کورتین
+export-addnstext|تاکدیمانی ایزاپه کورتین شه نامی فصای:
+export-addns|اڈ\tڈ\t کورتین
+export-download|ذخیره کورتین بئ فایلئ رقما
+export-templates|شامل بوتین تراشوانانئ
+export-pagelinks|شامل بوتین لینک بوته ئین تاکدیمان تا ای جُهلی ئا:
+allmessages|سیستم ئی پیام
+allmessagesname|نام
+allmessagesdefault|پیامی پیش فرضین متن
+allmessagescurrent|پیامی انونین متن
+allmessages-filter-legend|فیلتر
+allmessages-filter|فیلترکورتین بئ اساس ئی شخصی کورتین ئی وزیئتا:
+allmessages-filter-unmodified|تغیر نه کورته
+allmessages-filter-all|موچ
+allmessages-filter-modified|تغیر نه کورته
+allmessages-prefix|فیلتر کورتین بئ اساس پدوند:
+allmessages-language|زبان:
+allmessages-filter-submit|برا
+allmessages-filter-translate|ترجمه
+filemissing|فایل وجود نداریت
+thumbnail_error|خطا بئ ناحُنی ئی جۆڑ کورتین ئی وختا: ~{0}
+thumbnail_error_remote|خطای پیام ~{0} :\n~{1}
+djvu_page_error|DjVu دیم خارج مجازین محدوده ئا
+djvu_no_xml|XML ئی فایلی ودی کورتین ئی امکان په DjVu ئی استفاده کورتین ئا وجود نداشت.
+thumbnail-temp-create|نتوان که موقتین ناحُنی ئین فایلی جۆڑ کورت
+thumbnail-dest-create|نه توان که ناحُنی ئین اکس ئا بئ وتي مخصد ئی جاه تا ذخیره کورت
+thumbnail_image-missing|بی نظر ئه رسیت فایل زیان بوته: ~{0}
+import|تاکدیمانێ بێ تێ کورتین
+importinterwiki|بي تئ رییتین ترانس ویکی ئی
+import-interwiki-sourcewiki|ویکی زێ منشا:
+import-interwiki-sourcepage|تاکدیمئ منشا:
+import-interwiki-history|ای تاکدیمی موچین تاریخچه ئی نخسه انتقال داته بوتنت
+import-interwiki-templates|موچین تراشوانانا شامل بیئت
+import-interwiki-submit|بێ تێ کورتین
+import-interwiki-namespace|نامی فضای مخصد:
+import-interwiki-rootpage|مخصدی دیمی ریشگ (اختیاری):
+import-upload-filename|فایلئ نام:
+import-comment|کومنیت:
+importstart|تاکدیمانی بي  تئ ریتینی حالا...
+import-revision-count|~{0} {{PLURAL:~{0}\u007Cنخسه\u007Cنخسه}}
+importnopages|هیچ تاکدیمی په ایمپورت ئا نه اینت.
+importfailed|ایمپورت شکست وارت: <nowiki>~{0}</nowiki>
+importunknownsource|بُنریچی ئی رقم مئلوم نه اینت
+importbadinterwiki|بدئین انتیرویکی ئی لینک
+importsuccess|بي تی ریتین یا ایمپورت بوت!
+import-upload|اکس ام ال ئی دیتای بُرز کورتین
+importlogpage|ایمپورت لوگ
+import-logentry-upload-detail|~{0} {{PLURAL:~{0}\u007Cنسخه\u007Cنسخه}} وارد بوته
+import-logentry-interwiki-detail|~{0} {{PLURAL:~{0}\u007Cنسخه\u007Cنسخه}} داخل بوته شه ~{1}
+javascripttest|جاوا اسکریپتی آزمایش
+javascripttest-pagetext-noframework|ای تاکدیم په جاوا اسکریپتی آزمایشی خاتیرا ایشته بوته.
+javascripttest-pagetext-unknownaction|نازانتین اکشن "~{0}".
+javascripttest-pagetext-skins|پوسته‌ای ئا په آزمایشانی اجرا ئا انتخاب کنیت:
+javascripttest-qunit-intro|[~{0} آزمایشی مشتندانا] بئ mediawiki.org تا بگیندیت.
+tooltip-pt-userpage|شمی کار زوروکئ تاکدیم
+tooltip-pt-mytalk|شمی هبر و گپئ تاکدیم
+tooltip-pt-preferences|نئ تنظیمات
+tooltip-pt-watchlist|آ دیمانی لیست که شما آوانی تغیرانا پدگیری ئا کنیت
+tooltip-pt-mycontris|شمی شراکت ئانی لیست
+tooltip-pt-login|توصیه ئه کنن که بئ سایٹ ئی تا داخل بئیت. اگرچه که ای کار په جبر و زور نه اینت
+tooltip-pt-logout|در بوتین
+tooltip-pt-createaccount|شه شما ئه لوٹن که په وت یک کار زوروکئ حساب ئی جۆڑ بکنیت و بئ سایٹ ئی تا داخل بئیت؛هرچینکه که ای کار جبری نه اینت
+tooltip-ca-talk|ای دیمی محتوا ئانی باره ئا حبر و گپ
+tooltip-ca-edit|شما ئا توانیت که ای دیما ایڈیٹ بکنیت. مهربانی بکنیت دیم شه ایشی که ای دیما ذخیره بکنیت، شه دیم دیست ئا استفاده بکنیت.
+tooltip-ca-addsection|نوکین بخشی جۆڑ بکنیت
+tooltip-ca-viewsource|ای تاکدیم قُلپ بوته.\nفقط توانیت که آیی زي و منشائا بگیندیت
+tooltip-ca-history|ای تاکدیمی دیمین نخسه ئان
+tooltip-ca-protect|ای تاکدیمئ قُلپ کورتین
+tooltip-ca-unprotect|ای تاکدیمی قُلپئ ٹگل داتین
+tooltip-ca-delete|پاک کورتین ای تاکدیمئ
+tooltip-ca-undelete|بیئرگردینتین ڈیلیٹ بوته ئین تاکدیمی نسخه ئانی
+tooltip-ca-move|ای تاکدیمی انتقال
+tooltip-ca-watch|اضافه کورتین ای تاکدیمی بی نی واچلیستی تا
+tooltip-ca-unwatch|ڈیلیٹ کورتین ای تاکدیمی شه نی واچلیستی لڑ لیستا
+tooltip-search|گشتین بی {{SITENAME}}
+tooltip-search-go|اگه امکان داشته بیئت تاکدیمی تا گو ای ناما برا
+tooltip-search-fulltext|گشتین په ای کلمه ئی خاتیرا بی تاکدیمانی تا
+tooltip-p-logo|بُنیاد ئین تاکدیمی دیستین
+tooltip-n-mainpage|بُنیاد ئین تاکدیمی دیستین
+tooltip-n-mainpage-description|بُنیاد ئین تاکدیمی دیستین
+tooltip-n-portal|بی پروژه ئی موریدا٬ آنچه که توانیت انجام دهیت و ای که چی چیزی ئا شه گوجا ودی بکنیت
+tooltip-n-currentevents|پدزمینه ئین مئلوماتئ بدست آورتین شه انونین رویداد ئان
+tooltip-n-recentchanges|ویکی ئی آخیرین تغیرايانی لڑ لیست
+tooltip-n-randompage|یک تصادفی ئین دیمی آورتین
+tooltip-n-help|جای په ودی کورتین ئا
+tooltip-t-whatlinkshere|موچین تاکدیمانی لڑ لیست که گۆ ای دیما لینک وارته انت
+tooltip-t-recentchangeslinked|تاکدیمانئ آخیرین تغیران که ای دیم گۆ آوان لینک داریت
+tooltip-feed-atom|اتم ئی حبرنامه په ای دیما
+tooltip-t-contributions|ای کار زوروکئ شراکتانی لڑ لیست
+tooltip-t-emailuser|په ای کار زوروکا ایمیل ئی دیم داتین
+tooltip-t-info|ای دیمی باره ئا گیشتیرین مئلومات
+tooltip-t-upload|فایلی بُرز کورتین
+tooltip-t-specialpages|لیستئ شه موچین خاصین تاکدیمانی
+tooltip-t-print|ای دیمی چاپ ئی وڑ ئین نخسه
+tooltip-t-permalink|شه تاکدیما ثابت ئین لینک په ای نخسه ئا
+tooltip-ca-nstab-main|تاکدیمێ محتویاتێ دیستین
+tooltip-ca-nstab-user|کارزوروکین تاکدیمی دیستین
+tooltip-ca-nstab-media|میدیایی تاکدیمێ دیستین
+tooltip-ca-nstab-special|ای یک خاصین تاکدیمی است٬ شما ئه توانیت که ای تاکدیما ایڈیٹ بکنیت
+tooltip-ca-nstab-project|پروژه ئی تاکدیمی دیستین
+tooltip-ca-nstab-image|دیستین فایلی تاکدیمی
+tooltip-ca-nstab-mediawiki|سیستم ئی پیامانی دیستین
+tooltip-ca-nstab-template|دیستین تراشوانئ
+tooltip-ca-nstab-help|دیستین کومکی تاکدیمئ
+tooltip-ca-nstab-category|دیستین تهری تاکدیمی
+tooltip-minoredit|ای ایڈیٹ ئا گۆنڈ ایڈیٹ نشانگ کن
+tooltip-save|وتئ تغیرانا ذخیره بکنیت
+tooltip-preview|شمی تغیرانی دیم دیست، مهربانی بکنیت دیما شه تاکدیمی ذخیره کورتینا شه ای کیلی ئا استفاده بکنیت.
+tooltip-diff|شمی تغیرانی نمایش که شما بئ متن ئی تا داته ایت.
+tooltip-watchlistedit-normal-submit|ئنوانانی پاک کورتین
+tooltip-watchlistedit-raw-submit|واچلیست ئی اپڈیٹ
+tooltip-recreate|پداجۆڑ کورتین تاکدیمی نه دیستین ایشیرا که ای تاکدیم دیما پاک بوته
+tooltip-upload|بُرز کورتینی شرو
+tooltip-rollback|«بیئرگردینتین» ای دیمی آخیرئین ایڈیٹ کنۆک ئی ایڈیٹ(هان) گۆ یک کلیک ئا.
+tooltip-undo|«خنثی‌کورتین» این دستکاری ئا  خنثی ئه کنیت و دستکاری جئبه ئا بي پیش نمایش ئی رقما پاچ ئه کنیت تا که دلیل ئی ایزاپه کورتین بئ دستکاری خولاسه ئی تا مومکن بیت.
+tooltip-preferences-save|تنظیماتانی ذخیره کورتین
+tooltip-summary|خلاصه ئا داخل بکنیت
+anonymous|زیان نامین {{PLURAL:~{0}\u007Cکار زوروک\u007Cکار زوروکان}} شه {{SITENAME}}
+siteuser|~{0}، کار زوروک {{SITENAME}}
+anonuser|~{0} نا دروست ئین کار زوروک {{SITENAME}}
+lastmodifiedatby|ای تاکدیم  آخرین وارا  بی ~{1}، ~{0} بی ~{2} دستا تغییر داته بوته.
+othercontribs|بئ اساس اثر ئی شه ~{0} ئا
+others|دیگران
+siteusers|~{0}، {{PLURAL:~{1}\u007Cکار زوروک\u007Cکار زوروکان}} {{SITENAME}}
+anonusers| {{SITENAME}} نادروست ئین {{PLURAL:~{1}\u007Cکار زوروک\u007Cکار زوروکان}} ~{0}
+creditspage|ای تاکدیمی کریدیت ئان
+nocredits|ای تاکدیمی جۆڑ کنۆک ئی مئلومات موجود نه انت.
+spamprotectiontitle|سپم ئانی فیلترینگ
+spambot_username|میدیا ویکی ئی تمیزکاری شه سپم هان
+spam_reverting|بیئرگردینتین آخیرین نخسه ئی که بئ ~{0} ئا لینک نداریت.
+spam_deleting|موچین نخسه ئان که گۆ\t  ~{0} ئا لینک انتت، بئ پاک کورتین حالا
+simpleantispam-label|انتی-سپم ئی چیک .\nای قسمت ئا پُر  '''مه کنیت'''!
+pageinfo-title|مئلومات په «~{0}» ئا
+pageinfo-header-basic|بُنادین مئلومات
+pageinfo-header-edits|تاریخچه ئی ایڈیٹ
+pageinfo-header-restrictions|ساتیتین تاکدیمئ
+pageinfo-header-properties|تاکدیمی خاص ئین ئان
+pageinfo-display-title|ئنوان ئی نشان داتین
+pageinfo-default-sort|پیش فرضین مرتب کنوکین کیلی
+pageinfo-length|تاکدیمی حجم (بایٹ)
+pageinfo-article-id|تاکدیمی آی دی
+pageinfo-language|تاکدیمی محتوایی زبان
+pageinfo-content-model|تاکدیمی محتوایی جۆڑیشت
+pageinfo-robot-policy|لڑلیست کورتین شه رباتانی نیمگا
+pageinfo-robot-index|مجاز
+pageinfo-robot-noindex|نامجاز
+pageinfo-watchers|تاکدیمی دیدار کنۆکانی اندازگ
+pageinfo-few-watchers|کمتیر شه  ~{0} {{PLURAL:~{0}\u007C دیدار\u007Cدیدار}}
+pageinfo-redirects-name|تغیرمسیرانی اندازگ په ای تاکدیما
+pageinfo-subpages-name|ای گۆنڈ دیم ئی تاکدیمانی اندازه گ
+pageinfo-subpages-value|~{0} (~{1} {{PLURAL:~{1}\u007Cتغییرمسیر\u007Cتغییرمسیر}}; ~{2} {{PLURAL:~{2}\u007Cغیرتغییرمسیر\u007Cغیرتغییرمسیر}})
+pageinfo-firstuser|ای تاکدیمئ جوڑ کنوک
+pageinfo-firsttime|ای تاکدیمئ جوڑ کورتینی وخت
+pageinfo-lastuser|آخرین ایڈیٹ کنوک
+pageinfo-lasttime|آخرین ایڈیٹئ تاریخ
+pageinfo-edits|موچین ایڈیٹانئ اندازه گ
+pageinfo-authors|موچین نویسوکانئ اندازه گ
+pageinfo-recent-edits|آخیرئین ایڈیٹانی اندازگ (بئ ~{0} دیما)
+pageinfo-recent-authors|یکی ئین آخیرین نویسوکان اندازگ
+pageinfo-magic-words|{{PLURAL:~{0}\u007Cحرف\u007Cحروف}} جادویی (~{0})
+pageinfo-hidden-categories|چیهرین {{PLURAL:~{0}\u007C تهر\u007Cتهر هان}} ( ~{0} )
+pageinfo-templates|{{PLURAL:~{0}\u007Cتراشوان\u007Cتراشوان}} استفاده‌ بوته (~{0})
+pageinfo-transclusions|{{PLURAL:~{0}\u007Cتاکدیم\u007Cتاکدیمان}} ترانسکلوڈ بوتگ بئ (~{0}) تا
+pageinfo-toolboxlink|تاکدیمئ مئلومات
+pageinfo-redirectsto|تغییر مسیر بی
+pageinfo-redirectsto-info|مئلومات
+pageinfo-contentpage|هیساب بوته بئ ئنوان مهتوائین دیمی
+pageinfo-contentpage-yes|هان
+pageinfo-protect-cascading-yes|هان
+pageinfo-category-info|تهری مئلومات
+pageinfo-category-pages|تاکدیمانی نمبر
+pageinfo-category-subcats|گۆنڈ تهرئانی اندازه گ
+pageinfo-category-files|فایلانی اندازگ
+markaspatrolleddiff|گشت وارته ئین ئانی برچسپ جتین
+markaspatrolledtext|بئ دیما گشت وارته ئین ئی برچسپ بجن
+markedaspatrolled|گشت وارته ئی برچسپ جته بوت
+markedaspatrolledtext|بئ انتخاب بوته ئین نخسه شه  [[:~{0}]] ئا گشت وارته ئین مارک جه ته بوت.
+rcpatroldisabled|آخیرئین تغیرائانی مارک جه تین غیرپئال اینت
+markedaspatrollederror|گشت وارته ئی برچسپ جته نه بوت
+markedaspatrollederrortext|یک نخسه ئی را نشانی بکنیت تا مارک بۆارت.
+markedaspatrollederror-noautopatrol|شما توانیت وتي تغیرائانه مارک بجنیت.
+markedaspatrollednotify|ای تغیر بئ ~{0} سرا مارک وارت.
+markedaspatrollederrornotify|گشت وارته ئی برچسپ جتین ناکام ات.
+patrol-log-page|گشتئ سیاه چال
+patrol-log-header|ای سیاهه شه گشت وارته ئین ایڈیٹ ئان است.
+log-show-hide-patrol|~{0} گشت جنوکین سیاهه
+deletedrevision|~{0} قدیمی پاک بوته ئین نخسه ئی است
+filedeleteerror-short|خطا بئ فایلی پاک کورتین: ~{0}
+filedeleteerror-long|بی پدا  پاک کورتین ئی وختا خطا رخ دات:\n\n~{0}
+previousdiff|→دیمتیرین ئی فرق
+nextdiff|نۆکتیرین ئی فرق ←
+mediawarning|'''هشدار''': ای فایل ممکن اینت که شه خراب ئین کودئان داشته بئیت .\nگۆ آوانی اجرا کورتین ئا ممکن اینت که بئ شمی کمپیوترا تاوان برسیت.
+thumbsize|ناهُنی ئین بند ئی اندازه گ:
+widthheightpage|~{0}×~{1}، ~{2} {{PLURAL:~{2}\u007Cتاکدیم\u007Cتاکدیم}}
+file-info|فایلئ اندازه گ: ~{0}، نوع  MIME ~{1}
+file-info-size|<span dir="ltr">~{0} × ~{1}</span> پیکسل، فایلئ اندازه گ: ~{2}، نوع MIME فایلئ: ~{3}
+file-info-size-pages|<span style="direction:ltr">~{0} × ~{1}</span> نقطه، فایلئ حجم: ~{2}، نوع MIME فایل: ~{3}، ~{4} تاکدیم
+file-nohires|گیشتیرین تفکیک پذیری بئ دسترس ئا نه اینت.
+svg-long-desc|اس‌وی‌جی ئی فایل، گۆ\t ابئاد <span dir="ltr">~{0} × ~{1}</span> پیکسل، فایل اندازه گ: ~{2}
+svg-long-error|SVG ئی فایل ناجایز اینت: ~{0}
+show-big-image|اورجینال ئین فایل
+show-big-image-preview|ای دیم دیست ئی اندازه گ: ~{0}.
+show-big-image-other|دیگرین {{PLURAL:~{1}\u007Cکیفیت\u007Cکیفیت‌هان}}: ~{0}.
+show-big-image-size|<span dir="ltr">~{0} × ~{1}</span> پیکسل
+file-info-gif-looped|چرخش‌دار
+file-info-gif-frames|~{0} {{PLURAL:~{0}\u007Cقاب\u007Cقاب}}
+file-info-png-looped|چرخش‌دار
+file-info-png-repeat|~{0} {{PLURAL:~{0}\u007Cوار\u007Cوار}} پخش بوت
+file-info-png-frames|~{0} {{PLURAL:~{0}\u007Cقاب\u007Cقاب}}
+newimages|نوکین فایلانی البوم
+newimages-summary|ای تاکدیم خاص په آخیرئین فایلان اینت که بُرز بوته انت.
+newimages-legend|فیلتر
+newimages-label|فایلی نام (یا قسمتی شه آیی):
+newimages-showbots|نشان داتین بُرز بوته ئین گۆ روبات ئا
+noimages|چیزی په دیستینا نه اینت.
+ilsubmit|گشتین
+bydate|شه تاریخی رُوگا
+sp-newimages-showfrom|نشان‌داتین نۆکین اکسانی شه ~{1}، ~{0} بئ بعد
+seconds|{{PLURAL:~{0}\u007C~{0}ثانیه\u007C ~{0}  ثانیه}}
+minutes|{{PLURAL:~{0}\u007Cدقیقه\u007Cدقیقه}}
+hours|{{PLURAL:~{0}\u007Cسائت\u007Cسائت}}
+days|{{PLURAL:~{0}\u007Cروچ\u007Cروچ}}
+weeks|{{PLURAL:~{0}\u007C~{0} هپتگ\u007C~{0} هپتگ ئان}}
+months|{{PLURAL:~{0}\u007C~{0} ماه\u007C}}
+years|{{PLURAL:~{0}\u007C~{0} سال\u007C~{0} سال ئان}}
+just-now|همی انون
+hours-ago|~{0} سائت دیما
+minutes-ago|~{0} دقیقه دیما
+seconds-ago|~{0} {{PLURAL:~{0}\u007Cثانیه\u007Cثانیه}} دیما
+monday-at|دوشنبی ~{0}
+tuesday-at|سه‌شنبی ~{0}
+wednesday-at|چهارشنبی ~{0}
+thursday-at|پنج‌شنبی ~{0}
+friday-at|جوما ~{0}
+saturday-at|بی شنبی ~{0}
+sunday-at|یک‌شنبی ~{0}
+yesterday-at|زئ  بی ~{0}
+metadata|فرادیتا
+metadata-help|ای ورّک شه وت ایزاپه ئین مالومات داریت که احتمالان گۆ دیجیتالین کامره ئی گیپته بوته یا په ایشی سکن وجۆڑ کورتین ئا شه دیجیتال ئا کار گیپته بوته. اگه ورّک شه وتی اولی ئین حالا تغیرداته داته بوته بیت، مومکن اینت که بي ایشی باره ئا موچین مالومات ئانه نشان مه دنت.
+metadata-expand|تپسیلی ئین مالوماتی نشان داتین
+metadata-collapse|تپسیلی ئین مالوماتی چیهرداتین
+metadata-fields|ای پیامی تا اکس ئی میتادیتا نشان داته بوته و وختی که میتادیتا ئی لیست جم بیئت هم نشان داته ئه بیئت . دیگه موارید تانا وختی نشان داته ئه بیئنت که جدول پاچ بیئت.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|گوور، عرض
+exif-imagelength|تَچکي
+exif-bitspersample|نقطه بئ هر جز ئی تا
+exif-compression|پرینچیتینوکین شیما
+exif-photometricinterpretation|ٹیک ئانی ترکیب
+exif-orientation|نیمگ ، جهت
+exif-samplesperpixel|اجزائانی اندازه گ
+exif-planarconfiguration|دیتا ئی آرایش
+exif-ycbcrsubsampling|جه هل نمونگ نسبت  Y بئ C
+exif-ycbcrpositioning|Y و C موقیعتان
+exif-xresolution|افقی ئین تفکیک پذیری
+exif-yresolution|عمودین تفکیک پذیری
+exif-stripoffsets|اکس ئی دیتای جاگه
+exif-rowsperstrip|ردیپ هانی اندازگ بئ هر نواری تا
+exif-stripbytecounts|بایت بئ هر پریننچیته بوته ئین نواری تا
+exif-jpeginterchangeformat|جابه‌جایی نسبت بئ JPEG SOI
+exif-jpeginterchangeformatlength|بایٹ  JPEG ئی دیتایی
+exif-whitepoint|سپیتین ٹیکئ رنگینی
+exif-primarychromaticities|اولویتانی رنگیری
+exif-ycbcrcoefficients|ماتریس ئی زرایب تبدیل رنگین په زایی
+exif-referenceblackwhite|سیاه و سپیتین مرجه ئانی اندازهگ
+exif-datetime|فایلی تغیر ئی وخت و تاریخ
+exif-imagedescription|اکسئ ئنوان
+exif-make|کامره ئی جۆڑ کنۆکین شرکت
+exif-model|کامره ئی موڈیل
+exif-software|استفاده بوته ئین ساپٹ ایر
+exif-artist|اکس گيروک/هنرمند
+exif-copyright|کاپی رایٹ ئی واوُند
+exif-exifversion|exif ئی نخسه
+exif-flashpixversion|Flashpix ئی پُشتیوانی بوته ئین نخسه
+exif-colorspace|رنگانئ فضا
+exif-componentsconfiguration|هریک شه مووله په ئانی مانا
+exif-compressedbitsperpixel|اکس ئی پشرده ئی هالت
+exif-pixelydimension|اکسئ گۆر
+exif-pixelxdimension|اکسئ بُرزی
+exif-usercomment|کار زوروکئ توضیحات
+exif-relatedsoundfile|مربوتین توارین پایل
+exif-datetimeoriginal|دیتائانی ودئ بوتین ئی تاریخ و وخت
+exif-datetimedigitized|دیجیتالی بوتین ئی وخت و تاریخ
+exif-subsectime|تاریخ و وختی کسر سانیه
+exif-subsectimeoriginal|اسلی ین وختی کسر سانیه
+exif-subsectimedigitized|دیجیتالین وختی کسر سانیه
+exif-exposuretime|نوردهگی وخت
+exif-exposuretime-format|~{0} ثانیه (~{1})
+exif-fnumber|اف ئی نمبر
+exif-exposureprogram|نوردهئ پروگرام
+exif-spectralsensitivity|طیفئ ئین حساسیت
+exif-isospeedratings|ایزو ئی سرعت ئی درجه بندی
+exif-shutterspeedvalue|شاتر ئی آپکس ئی سرعت
+exif-aperturevalue|دیافراگم آپکس ئی اندازه گ
+exif-brightnessvalue|آپکس روشنائی
+exif-exposurebiasvalue|نوردهئ خطا
+exif-maxaperturevalue|ڈگاری پراخی هد اکسه ر
+exif-subjectdistance|سوژه ئی فاصله
+exif-meteringmode|روشنایی سنجیش هالت
+exif-lightsource|نور ئی منشا
+exif-flash|پلاش
+exif-focallength|ئدسی ئی کانونین پاسیله
+exif-subjectarea|جسم ئی مساحت
+exif-flashenergy|پلاش ئی قدرت
+exif-focalplanexresolution|تفکیک‌پذیری X کانونی دیم
+exif-focalplaneyresolution|تفکیک‌پذیری Y کانونین دیم
+exif-focalplaneresolutionunit|کانونی دیمی تپکیک زورتین ئی واهید
+exif-subjectlocation|سوژه ئی مکان
+exif-exposureindex|نوردهگی شاخس
+exif-sensingmethod|هسگری روش
+exif-filesource|فایلئ منشا
+exif-scenetype|سه هنه ئی ره کم
+exif-customrendered|سه پاریشی ئی اکس ئی زوهور
+exif-exposuremode|نوردهگی هالت
+exif-whitebalance|سپیت ئین رنگی ته هادول (white balance)
+exif-digitalzoomratio|دیجیتالین نه زیننکی ئی نیسبت
+exif-focallengthin35mmfilm|کانونین پاسیله په ۳۵ میلی میترین پیلم ئا
+exif-scenecapturetype|سکن ئی کاپی تور ئی ره قم
+exif-gaincontrol|سه هنه ئی تنزیم
+exif-contrast|کنتراست
+exif-saturation|رنگئ بَزئ
+exif-sharpness|وضوح
+exif-devicesettingdescription|دستگاه ئی تنظیماتانی شرح
+exif-subjectdistancerange|سوژه پاسیله مهدوده
+exif-imageuniqueid|اکس ئی یونیک ئین آی ڈی
+exif-gpsversionid|جی‌پی‌اس ئی نخسه برچسپ
+exif-gpslatituderef|جوگراپیایین گۆور شمالی یا جنوبی
+exif-gpslatitude|جوگرافیایی ئین گۆر
+exif-gpslongituderef|جوگراپیایین تچکی روچ درات یا روچ کپت
+exif-gpslongitude|جوگرافیایی ئین تچکی
+exif-gpsaltituderef|ارتقائی مرجئهی ٹیک
+exif-gpsaltitude|بُرزئ
+exif-gpstimestamp|جی‌پی‌اس ئی وخت (اتمی ئین سائت)
+exif-gpssatellites|ایستیپاده بوته ئین ماهواره په اندازه گیری ئا
+exif-gpsstatus|گیرۆکی وزی ئت
+exif-gpsmeasuremode|اندازه گیری هالت
+exif-gpsdop|اندازه گیری ئی د قت
+exif-gpsspeedref|سورئت ئی یونی\tٹ
+exif-gpsspeed|جی پی اس ئی گیروکی سور ئه ت
+exif-gpstrackref|مرجه په هه رکت ئی نیمگا
+exif-gpstrack|هه رکت ئی نیمگ
+exif-gpsimgdirectionref|مرجه په اکس ئی نیمگا
+exif-gpsimgdirection|اکس ئی نیمه گ
+exif-gpsmapdatum|جیودیستک ئی نخشه برداری ئی مه لومات
+exif-gpsdestlatituderef|مرجه ئی په جوگراپیایین گۆور مخسدا
+exif-gpsdestlatitude|جوگراپیایی مخسدی گۆور
+exif-gpsdestlongituderef|مرجه ئی په جوگراپیایین تچکی مخسدا
+exif-gpsdestlongitude|مخسه د ئی جوغراپیائی تچکی
+exif-gpsdestbearingref|مرجه ئی په مخسدی نیمگا
+exif-gpsdestbearing|مخسدی نیمگ
+exif-gpsdestdistanceref|مرجه په پاسیله تا مخسدا
+exif-gpsdestdistance|پاسیله تا مخسه د ئا
+exif-gpsprocessingmethod|GPS ئی پروسیس ئی میتود ئی نام
+exif-gpsareainformation|جی‌پی‌اس ئی ناحیه ئی نام
+exif-gpsdatestamp|جی پی اس ئی تاریخ
+exif-gpsdifferential|جی‌پی‌اس کمی ئی تسهی کورتین
+exif-jpegfilecomment|JPEG ئی فایل ئی توزی ئات
+exif-keywords|کیبورد
+exif-worldregioncreated|منتیکه شه جهانا که اکس آدا گیپته بوته
+exif-countrycreated|ملکی نام که اکس آدا گیپته بوته
+exif-countrycodecreated|ملکی کود که اکس آدا گیپته بوته
+exif-provinceorstatecreated|ولایت یا ایالت که اکس آد گیپته بوته
+exif-citycreated|شاری که اکس آدا گیپته بوته
+exif-sublocationcreated|شاری یک بخش که اکس آدا گیپته بوته
+exif-worldregiondest|جهانئ منطقه نشان داته بوته
+exif-countrydest|مُلک نشان داته بوته
+exif-countrycodedest|مُلکی کود نشان داته بوته
+exif-provinceorstatedest|ولایت یا ایالت نشان داته بوته
+exif-citydest|شار نشان داته بوته
+exif-sublocationdest|شاری یک بخش نشان داته بوته
+exif-objectname|گۆنڈین ئینوان
+exif-specialinstructions|خاسین دستورئان
+exif-headline|ئنوان
+exif-credit|امتیاز يی واوند/پیش داروک
+exif-source|منشا
+exif-editstatus|اکسی تهریریه ئین وزی ئت
+exif-urgency|پوریت
+exif-fixtureidentifier|نشریه ئی ستون ئی نام
+exif-locationdest|اکس بوته ئین مئل
+exif-locationdestcode|اکس بوته ئین مئلی کود
+exif-objectcycle|ای روچی وخت که ای می\tڈیا په آیی بی نه زر گیپته بوته
+exif-contact|ته ماس ئی مه لومات
+exif-writer|نویسوک
+exif-languagecode|زبان
+exif-iimversion|IIM ئی نخسه
+exif-iimcategory|تهر
+exif-iimsupplementalcategory|تکمیلین تهر ئان
+exif-datetimeexpires|ایستیپاده شه تاریخ ئا
+exif-datetimereleased|منتشر بوته بی
+exif-originaltransmissionref|اسلی ئین مئل ئی جابجایی کود
+exif-identifier|شناسگ
+exif-lens|استفاده بوته ئین لینز
+exif-serialnumber|کامره ئی سریال نمبر
+exif-cameraownername|کامره ئی واوُند
+exif-label|برچسب
+exif-datetimemetadata|دی\tٹائی آخیرئین تغیرات
+exif-nickname|اکس ئی غیررسمی ئین نام
+exif-rating|امتیاز (شه 5)
+exif-rightscertificate|هه قوق ئی مدیریت ئی سه ر تیپی کی\tٹ
+exif-copyrighted|کاپی رایٹ ئی وزیئت
+exif-copyrightowner|کاپی رایٹ ئی واوُند
+exif-usageterms|استفاده ئی شرایط
+exif-webstatement|آنلاین کاپی رایت ئی جار
+exif-originaldocumentid|یونیک آی ڈی شه اسلین سندئان
+exif-licenseurl|انترنتی ادرس په کاپی رایٹی جواز ئا
+exif-morepermissionsurl|جایگزین ئین مالوماتانی جواز ئان
+exif-attributionurl|پدا ایستیپاده ئی وختا، مهربانی بکنیت لینک به دهیت په
+exif-preferredattributionname|پدا ایستیپاده ئی وختا، مهربانی بکنیت ائتیبار به دهیت په
+exif-pngfilecomment|PNG ئی فایلی شرح
+exif-disclaimer|تکذیب‌نامه
+exif-contentwarning|محتوایی هشدار
+exif-giffilecomment|GIF ئی فایلی شرح
+exif-intellectualgenre|مورید ئی رقم
+exif-subjectnewscode|موضو ئی کود
+exif-scenecode|IPTC سکن ئی کوڈ
+exif-event|هالت ئی که بئ اکس ئی تا نشان داته بوته
+exif-organisationinimage|نشان داته بوته ئین سازمان
+exif-personinimage|نشان داته بوته ئین شخس
+exif-originalimageheight|اکس ئی بُرزی دیم شه بوریتین ئا
+exif-originalimagewidth|اکس ئی گوور دیم شه بوریتین ئا
+exif-compression-1|غیرپشورده
+exif-compression-3|سی‌سی‌آی‌تی‌تی ئی نمبرئانی ۳ گروپ کودگذاری کورتین
+exif-compression-4|سی‌سی‌آی‌تی‌تی ئی نمبرئانی ۴ گروپ کودگذاری کورتین
+exif-copyrighted-true|کاپی رایت بوت
+exif-copyrighted-false|کاپی رایٹ ئی وزی ئت ته ئین نه بوته
+exif-unknowndate|نامئلومین تاریخ
+exif-orientation-1|نورمال
+exif-orientation-2|اوپۆکی ئین پۆشت و دیم بوته ئین
+exif-orientation-3|۱۸۰ درجه چرخ وارته
+exif-orientation-4|ئۆمودی ئین پۆشت و دیم بوته ئین
+exif-orientation-8|۹۰° سائتگرد چاوارته
+exif-planarconfiguration-1|په زورین قالب
+exif-planarconfiguration-2|دو دیمین پورمت
+exif-colorspace-65535|تنزیم نه بوته
+exif-componentsconfiguration-0|وجود نداریت
+exif-exposureprogram-0|تئریپ نه بوته
+exif-exposureprogram-1|دستی
+exif-exposureprogram-2|عادی ئین پروگرام
+exif-exposureprogram-3|دیاپراگم ئی اولویت
+exif-exposureprogram-4|شاتر ئی اولویت
+exif-subjectdistance-value|~{0} متر
+exif-meteringmode-0|نامئلوم
+exif-meteringmode-1|میانگین
+exif-meteringmode-2|میانگین گو سنگین ئین مرکزا
+exif-meteringmode-3|یک ٹیکی
+exif-meteringmode-4|چینکه ٹیکئ
+exif-meteringmode-5|طرح‌والا
+exif-meteringmode-6|کم ئین
+exif-meteringmode-255|دیگرین
+exif-lightsource-0|نامئلوم
+exif-lightsource-1|روچی روشنائی
+exif-lightsource-2|فلورسانت
+exif-lightsource-3|تنگستن (نور بی گرمی ئا)
+exif-lightsource-4|پلاش
+exif-lightsource-9|جوانین هوا
+exif-lightsource-10|جمری ئین آسمان
+exif-lightsource-11|سیاهیگ
+exif-lightsource-12|ماهتاپئ بی روچئ تا (D 5700 – 7100K)
+exif-lightsource-13|سپیتین ماهتاپئ بئ روچئ تا (N 4600 – 5400K)
+exif-lightsource-14|سپیتین ماهتاپئ سرد (W 3900 – 4500K)
+exif-lightsource-15|سپیتین ماهتاپئ (WW 3200 – 3700K)
+exif-lightsource-17|A سٹاندارتین نور
+exif-lightsource-18|B سٹاندارتین نور
+exif-lightsource-19|C سٹاندارتین نور
+exif-lightsource-24|ISO ئی کارخانه ئي تنگستن ئی لامپ
+exif-lightsource-255|نور ئی دیگه منشا ئان
+exif-flash-fired-0|پلاش جته نه بوت
+exif-flash-fired-1|گو پلاش جتینا
+exif-flash-return-2|انئی کاسین روشنایی ودی نه بوت
+exif-flash-return-3|انئی کاسین روشنایی ودی نه بوت
+exif-flash-mode-1|اجبارین پلاش جتین
+exif-flash-mode-2|دیمگیری شه اجبارین پلاش جتین ئا
+exif-flash-mode-3|اوتوماتیکین هاله ت
+exif-flash-function-1|پلاش ئی ئملکرد نه داریت
+exif-flash-redeye-1|چمانی سۆر ئی زیان کورتین
+exif-focalplaneresolutionunit-2|اینچ
+exif-sensingmethod-1|ته ریپ نه بوته
+exif-sensingmethod-2|نائیه ئی رنگین سنسور یک تراشه ئین
+exif-sensingmethod-3|نائیه ئی رنگین سنسور دو تراشه ئین
+exif-sensingmethod-4|نائیه ئی رنگین سنسور سه تراشه ئین
+exif-sensingmethod-5|نائیه ئی رنگین سنسور ترتیب
+exif-filesource-3|اکاسی دیجیتالین کامره
+exif-scenetype-1|اکس دیم په دیم اکاسی بوته
+exif-customrendered-0|عادین ظهور
+exif-customrendered-1|سفارشین ظهور
+exif-exposuremode-0|اوتوماتیکین نوردهی
+exif-exposuremode-1|دستئ نور دهی
+exif-exposuremode-2|Auto bracket
+exif-whitebalance-0|سپیت ئین رنگی ته هادل ئی اوتوماتیکین تنزیم (white balance)
+exif-whitebalance-1|سپیت ئین رنگی ته هادل ئی دستی ئین تنزیم (white balance)
+exif-scenecapturetype-0|سٹاندارت
+exif-scenecapturetype-1|چم چران
+exif-scenecapturetype-2|پرتره
+exif-scenecapturetype-3|شپئ چم گیند
+exif-gaincontrol-0|هیچ‌گوجام
+exif-gaincontrol-1|دریاپتی هدی آقلین باز کورتین
+exif-gaincontrol-2|دریاپتی هدی آکسرین باز کورتین
+exif-gaincontrol-3|هه دی آقل گیپتی نوکی کم کورتین
+exif-gaincontrol-4|هه دی اکسر گیپتی نوکی کم کورتین
+exif-contrast-0|نورمال
+exif-contrast-1|نرم
+exif-contrast-2|سک
+exif-saturation-0|نورمال
+exif-saturation-1|کم ئین اشباع
+exif-saturation-2|بازین اشباع
+exif-sharpness-0|ساددگ
+exif-sharpness-1|نرم
+exif-sharpness-2|سک
+exif-subjectdistancerange-0|نامئلوم
+exif-subjectdistancerange-1|ماکرو
+exif-subjectdistancerange-2|نزینک گیند
+exif-subjectdistancerange-3|دور گیند
+exif-gpslatitude-n|جوگراپیایی شمالی گ\tۆور
+exif-gpslatitude-s|جوگراپیایی جنوبی گ\tۆور
+exif-gpslongitude-e|جوگراپیایی روچ درات ئی تچکی
+exif-gpslongitude-w|جوگراپیایی روچ کپت ئی تچکی
+exif-gpsaltitude-above-sealevel|~{0} {{PLURAL:~{0}\u007Cمیتر\u007Cمیتر}} بُرزتیر شه دریابی روگا
+exif-gpsaltitude-below-sealevel|~{0} {{PLURAL:~{0}\u007Cمیتر\u007Cمیتر}} جهلتیر شه دریابی روگا
+exif-gpsstatus-a|بی اندازه گیری هالا
+exif-gpsstatus-v|اندازه گ ئی موقایسه گیری
+exif-gpsmeasuremode-2|دو بوئدین اندازه گیری
+exif-gpsmeasuremode-3|۳ بوئدین اندازه گیری
+exif-gpsspeed-k|کیلومیتر بئ سائت تا
+exif-gpsspeed-m|مایل بئ سائت
+exif-gpsspeed-n|گرین
+exif-gpsdestdistance-k|کیلومتر
+exif-gpsdestdistance-m|مایل
+exif-gpsdestdistance-n|دریا ئین مایل
+exif-gpsdop-excellent|باز جووان (~{0})
+exif-gpsdop-good|زبر (~{0})
+exif-gpsdop-moderate|متوسط (~{0})
+exif-gpsdop-fair|نه باز جووان (~{0})
+exif-gpsdop-poor|ضعیف (~{0})
+exif-objectcycle-a|تانا سوب
+exif-objectcycle-p|تانا دیگرونواشام
+exif-objectcycle-b|سوب و نواشام
+exif-gpsdirection-t|جوانین نیمگ
+exif-gpsdirection-m|آهنربائین نیمگ
+exif-ycbcrpositioning-1|مانجین بوتگ
+exif-ycbcrpositioning-2|اشتراکی
+exif-dc-contributor|شراکت کنۆک ئان
+exif-dc-date|تاریخ(ئان)
+exif-dc-publisher|ناشر
+exif-dc-relation|مربوتین میڈیاهان
+exif-dc-rights|حقوق
+exif-dc-source|بُنزهی ئین میڈیا
+exif-dc-type|میڈیایی رقم
+exif-rating-rejected|رد بوته ئین
+exif-isospeedratings-overflow|مزنتیر شه ۶۵۵۳۵
+exif-iimcategory-ace|هنر، فرهنگ و سرگرمی
+exif-iimcategory-clj|جنایت و قانون
+exif-iimcategory-dis|به لا و پیش آمدئان
+exif-iimcategory-fin|اقتصاد و تجارت
+exif-iimcategory-edu|یادگیپتین
+exif-iimcategory-evn|محیط زیست
+exif-iimcategory-hth|سلامت
+exif-iimcategory-hum|بشر ئی علاقه
+exif-iimcategory-lab|کار
+exif-iimcategory-lif|زنده گی ره قم و بیکاری وختان
+exif-iimcategory-pol|سیاست
+exif-iimcategory-rel|مذهب و باور
+exif-iimcategory-sci|علم و تخنیک
+exif-iimcategory-soi|اجتمائین مسائل
+exif-iimcategory-spo|سپورت
+exif-iimcategory-war|جنگ ، لٹ و کوٹ و ناآرامی
+exif-iimcategory-wea|آپ و هوا
+exif-urgency-normal|ئادی (~{0})
+exif-urgency-low|کم (~{0})
+exif-urgency-high|باز (~{0})
+exif-urgency-other|تاریپ بوته ئین اولویت شه (~{0}) کارزوروک ئی نیمه گا
+namespacesall|موچ
+monthsall|موچ
+confirmemail|ایمیل ادرسی تائید کورتین
+confirmemail_noemail|شما بئ وتی [[Special:Preferences\u007Cکارزوروکی تنزیماتئ ]] دیمی تا موته برین ایمیل ادرس ئی وارد نه کورته ایت.
+confirmemail_send|پُست‌کورتینن یک تاییدی کود ئی
+confirmemail_sent|یک تاییدین ایمیل ئی دیم داته بوت.
+confirmemail_needlogin|په وتي ایمیل ئی تائید بوتین ئا خاتیرا په ~{0} ئا زه رورت داریت.
+confirmemail_success|شمی ایمیل ادرس تائید بوته.\n\nهمی انون توانیت که [[Special:UserLogin\u007Cسایٹ تا داخل به ئیت]] و شه ویکی ئا لیزت به ریت.
+confirmemail_loggedin|شمی ایمیل ادرس انون تائید بوت.
+confirmemail_subject|شمی ایمیل ادرس ئی تأییدی {{SITENAME}}
+confirmemail_body|یک نپر، احتمالاً که شما وت ، شه ~{0} ئی آی پی ادرس ئا یک کار زوروکئ حساب گۆ «~{1}» ئی ناما بئ ای ایمیل ادرس ئی تا بئ  {{SITENAME}} ئی تا جۆڑ کورته است.\n\nپه تأیید کورتین ایشی  که ای حساب واقئاً بئ شما مربوت اینت و هم پئال کورتین {{SITENAME}} ایمیلی امکاناتانی خاتیرا ، جهلگی لینک ئا بئ وتي بروزیر ئی تا پاچ بکنیت:\n\n~{2}\n\nاگر شما ای کار زوروکین حساب ئا راجستر *نه کورته ئیت*، مهربانی بکنیت جهلگی لینک \nئی پدا بگیرێت تا که ای ایمیل ادرس ئی تایید بند بێت:\n\n~{4}\n\nای تاییدی ئی کوڈ بئ تاریخ ~{3} ئا شه بین ئه رۆت.\n</div>
+confirmemail_body_changed|یک نپر، احتمالاً که شما وت ، شه ~{0} ئی آی پی ادرس ئا یک کار زوروکئ حساب گۆ «~{1}» ئی ناما بئ ای ایمیل ادرس ئی تا بئ  {{SITENAME}} ئی تا تغیر داته است.\n\nپه تأیید کورتین ایشی  که ای حساب واقئاً بئ شما مربوت اینت و هم پئال کورتین {{SITENAME}} ایمیلی امکاناتانی خاتیرا ، جهلگی لینک ئا بئ وتي بروزیر ئی تا پاچ بکنیت:\n\n~{2}\n\nاگر شما ای کار زوروکین حساب ئا راجستر *نه کورته ئیت*، مهربانی بکنیت جهلگی لینک \nئی پدا بگیرێت تا که ای ایمیل ادرس ئی تایید بند بێت:\n\n~{4}\n\nای تاییدی ئی کوڈ بئ تاریخ ~{3} ئا شه بین ئه رۆت.
+confirmemail_body_set|یک نپر، احتمالاً که شما وت ، شه ~{0} ئی آی پی ادرس ئا یک کار زوروکئ حساب گۆ «~{1}» ئی ناما بئ ای ایمیل ادرس ئی تا بئ  {{SITENAME}} نشانی ئا تغیر دات.\n\nپه تأیید کورتین ایشی  که ای حساب واقئاً بئ شما مربوت اینت و هم پئال کورتین {{SITENAME}} ایمیلی امکاناتانی خاتیرا ، جهلگی لینک ئا بئ وتي بروزیر ئی تا پاچ بکنیت:\n\n~{2}\n\nاگر شما ای کار زوروکین حساب ئا راجستر *نه کورته ئیت*، مهربانی بکنیت جهلگی لینک \nئی پدا بگیرێت تا که ای ایمیل ادرس ئی تایید بند بێت:\n\n~{4}\n\nای تاییدی ئی کوڈ بئ تاریخ ~{3} ئا شه بین ئه رۆت.
+confirmemail_invalidated|ایمیل ادرس ئی تاییدی لگ بوت
+invalidateemail|ایمیل ادرس ئی لگ کورتین
+scarytranscludedisabled|[ترانسکلۆدینگ میان ویکی ئی په ئال نه اینت]
+scarytranscludetoolong|[انترنتی ئین ادرس (URL) شه اندازه ئا تچکتیر ات]
+deletedwhileediting|'''هشدار''': ای دیم پدا شه آیی که شما آیی ایڈیٹ ئا شرو کورته ئیت، پاک بوته!
+confirmrecreate|کار زوروک [[User:~{0}\u007C~{0}]] ([[User talk:~{0}\u007Cگپ و هبر]]) ای مه قاله ئا پد شه آیی که شوما بئ آیی ایڈی\tٹ کورتین ئا شورو کورتیت ای دلیل ئا پاک کورت :\n: ''~{1}''\nمهربانی بکنیت تائید بکنیت که شوما ئه لو\tٹیت ای مه قاله ئا پدا جۆڑ بکنیت .
+confirmrecreate-noreason|کار زوروک [[User:~{0}\u007C~{0}]] ([[User talk:~{0}\u007Cگپ و هبر]]) ای دیما پد شه شمئ ایڈی\tٹ ئی شرو ئا پاک کورت. مهربانی بکنیت تائید بکنیت که لو\tٹیت ای دیما پدا جۆڑ بکنیت.
+recreate|پدا جۆڑ کورتین
+confirm_purge_button|قبول داشتین
+confirm-purge-top|ای دیمی چیهرین هاپیزه ئی پاک کورتین ئا تائید ئه کنیت؟
+confirm-watch-button|قبول داشتین
+confirm-watch-top|ای دیم بئ شمی دیدارلیست ئا ایزاپه بیئت؟
+confirm-unwatch-button|قبول داشتین
+confirm-unwatch-top|ای دیم شه شمئ دیدارلیست ئا پاک بیئت؟
+quotation-marks|"~{0}"
+imgmultipageprev|&rarr; دیمتیری تاکدیم
+imgmultipagenext|بئدین تاکدیم &larr;
+imgmultigo|برا!
+imgmultigoto|شوتین بی ~{0} تاکدیمی تا
+img-lang-default|(پیش‌فرض ئین زبان)
+img-lang-info|ارایه کورتین ای اکسی بی  ~{0} .  ~{1}
+img-lang-go|برا
+ascending_abbrev|صعودی
+descending_abbrev|نزولی
+table_pager_next|دیگرین تاکدیم
+table_pager_prev|دیمتیرین تاکدیم
+table_pager_first|اولین تاکدیم
+table_pager_last|آخرین تاکدیم
+table_pager_limit|~{0} ئی نشان داتین بئ هر دیمئ تا
+table_pager_limit_label|مواریدئانی اندازه گ بی هر دیمی تا :
+table_pager_limit_submit|برا
+table_pager_empty|هیچ نتیجه
+autosumm-blank|تاکدیما خالی کورت
+autosumm-replace|تاکدیمی جابجایی گۆ '~{0}'
+autoredircomment|جهت یی تغیر بئ [[~{0}]]
+autosumm-new|نوکین دیمی گۆ «~{0}» ئا جۆڑ کورت
+autosumm-newblank|خالی ئین دیمی جۆڑ بوت
+watchlistedit-normal-title|دیدارلیست ئی ایڈیٹ کورتین
+watchlistedit-normal-legend|ئینوانانی پاک کورتین شه دیدارلیست ئا
+watchlistedit-normal-submit|ئنوانانی پاک کورتین
+watchlistedit-normal-done|~{0} ئینوان شه شمی دیدارلیست ئا پاک  {{PLURAL:~{0}\u007Cبوت\u007Cبوتنت}}:
+watchlistedit-raw-title|واچلیستئ آمگین لیستانی ایڈیٹ
+watchlistedit-raw-legend|واچلیستئ آمگین لیستانی ایڈیٹ
+watchlistedit-raw-titles|ئنوانان:
+watchlistedit-raw-submit|واچلیست ئی اپڈیٹ
+watchlistedit-raw-done|شمی دیدارلیست اپڈیٹ بوت.
+watchlistedit-raw-added|~{0} ئی ئنوان بئ دیدارلیست ئا ایزاپه {{PLURAL:~{0}\u007Cبوت\u007Cبوتنت}}:
+watchlistedit-raw-removed|~{0} ئی ئنوان پاک {{PLURAL:~{0}\u007Cبوت\u007Cبوتنت}}:
+watchlistedit-clear-title|دیدارلیست پاک بوته
+watchlistedit-clear-legend|دیدارلیست ئی پاک کورتین
+watchlistedit-clear-explain|موچین ئناوین شه شمی دیدارلیست ئا پاک ئه بئنت
+watchlistedit-clear-titles|ئنوانان:
+watchlistedit-clear-submit|دیداری ئانی پاک کورتین (ای دائم اینت!)
+watchlistedit-clear-done|شمی دیدارلیست پاک بوت.
+watchlistedit-clear-removed|~{0} ئی ئنوان پاک {{PLURAL:~{0}\u007Cبوت\u007Cبوتنت}}:
+watchlistedit-too-many|بازین دیم ایدا په نمایش ئی خاتیرا موجود انت.
+watchlisttools-clear|دیدارلیست ئی پاک کورتین
+watchlisttools-view|مربوتین تغیرانی دیستین
+watchlisttools-edit|دیدارلیست ئی دیستین و ایڈیٹ کورتین
+watchlisttools-raw|واچلیستئ آمگین لیستانی ایڈیٹ
+signature|[[{{ns:user}}:~{0}\u007C~{1}]] ([[{{ns:user_talk}}:~{0}\u007Cگپ و حبر]])
+version|نخسه
+version-extensions|لچیته گین اپزونه ئان
+version-skins|نصب بوته ئین پوسته ئانی
+version-specialpages|خاصین تاکدیمان
+version-parserhooks|تجزیه گرین چنگک ئان
+version-variables|موته غیرئان
+version-antispam|دیمگیری شه سپم ئان
+version-other|دیگرین
+version-mediahandlers|می\tڈیایی بئ دست گیروک ئان
+version-hooks|چنگک ئان
+version-parser-extensiontags|ایزاپه کنوکین تجزیه گر ئی برچسپ
+version-parser-function-hooks|ئه مل کنوکین تجزیه گرین چنگک
+version-hook-name|چنگک ئی نام
+version-hook-subscribedby|داخل بوته گ\tۆ
+version-no-ext-name|[بی نام]
+version-license|میڈیاویکی ئی اجازه نامه
+version-ext-license|اجازه نامه ئان
+version-ext-colheader-name|پراخئ ئان
+version-skin-colheader-name|پوست
+version-ext-colheader-version|نخسه
+version-ext-colheader-license|اجازه نامه ئان
+version-ext-colheader-description|توضیح
+version-ext-colheader-credits|مؤلفان
+version-license-title|مجوز په ~{0}
+version-license-not-found|ای سند ئی شه جواز ئی مالومات ئا په ای پراخ کن\tۆک ئا ودی نه بوت.
+version-credits-title|کریدیت په ~{0}
+version-credits-not-found|ای کریدیت ئی شه جواز ئی مالومات ئا په ای پراخ کن\tۆک ئا ودی نه بوت.
+version-poweredby-credits|ای ویکی شه '''[https://www.mediawiki.org/ میڈیا ویکی]''' ئی نیمگا پُشتیوانی ئه بیئت، موچین حقوق محفوظ انت © 2001-~{0} ~{1}.
+version-poweredby-others|دیگران
+version-poweredby-translators|translatewiki.net مترجم ئان
+version-credits-summary|جهلگین کس ئانه په خاتیرایڈی\tٹ بئ  [[Special:Version\u007Cمیڈیاویکی]] تا ماریپی ئه کنن.
+version-software|لچیته ئین نخسه هان
+version-software-product|محصول
+version-software-version|نخسه
+version-entrypoints|ورود ئی مئل ئی انترنتی ادرس
+version-entrypoints-header-entrypoint|داخل بوتین ئی ٹیک
+version-entrypoints-header-url|انترننئ ئین ادرس
+version-libraries|نصب بوته ئین کتابخانه
+version-libraries-library|کتابجاه
+version-libraries-version|نخسه
+redirect-legend|جابجا په یک پایل یا دیم ئی
+redirect-submit|برا
+redirect-lookup|گشتین:
+redirect-value|اندازه گ:
+redirect-user|کار زوروکی آی ڈی
+redirect-page|تاکدیمی آی ڈی
+redirect-revision|تاکدیمی نخسه
+redirect-file|فایلئ نام
+redirect-not-exists|اندازه گ ودی نه بوت
+fileduplicatesearch|گشتین په تکرارین فایلان
+fileduplicatesearch-summary|گشتین په تکرارین پایلان بي اساس آوانی درهم بوته اندازه گ ئا سورت ئه گیت.
+fileduplicatesearch-legend|گشتین په تکرارین موریدان
+fileduplicatesearch-filename|فایلئ نام:
+fileduplicatesearch-submit|گشتین
+fileduplicatesearch-info|<span dir="ltr">~{0} × ~{1}</span> پیکسل<br />فایلئ اندازه گ: ~{2}<br />نوع MIME: ~{3}
+fileduplicatesearch-result-1|«~{0}» ئی فایل تکرارین مورید نداریت.
+fileduplicatesearch-result-n| «~{0}» ئی فایل یک {{PLURAL:~{1}\u007Cتکراری موردئ\u007C~{1} تکرارئ مورئ}} داریت.
+fileduplicatesearch-noresults|فایلئ گو «~{0}» ئی ناما ودئ نه بوت.
+specialpages|خاصین تاکدیمان
+specialpages-note-top|شرح علائم
+specialpages-note|* عادی ئین خاصین تاکدیمان.\n* <span class="mw-specialpagerestricted">خاصین تاکدیمان محدود بوته انت.</span>
+specialpages-group-maintenance|ساتیتینئ راپور
+specialpages-group-other|دیگه خاصین تاکدیمان
+specialpages-group-login|داخل بوتین  / حسابي جوڑ کورتین
+specialpages-group-changes|آخیرئین تغیرئان و سیاهه ئان
+specialpages-group-media|میڈیایی بُرز کورتینوکین راپور
+specialpages-group-users|کار زوروکان و آوانی حقوق
+specialpages-group-highuse|باز گیندوکین دیمان
+specialpages-group-pages|تاکدیمانی لڑ\t لیست
+specialpages-group-pagetools|تاکدیمانئ وسایلان
+specialpages-group-wiki|دتا و وسایلان
+specialpages-group-redirects|مسیر ئی تغیری خاسین تاکدیمان
+specialpages-group-spam|سپم ئی وسایلان
+specialpages-group-developer|توسه ئه دهوکین وسایلان
+blankpage|خالی ئین دیم
+intentionallyblankpage|این دیم بئ قصدین رقما خالی ایشته بوته.
+tags|مجازین تغیرانئ برچسپ
+tag-filter|[[Special:Tags\u007Cبرچسپ هاني]] فیلتر:
+tag-filter-submit|فیلتر
+tag-list-wrapper|([[Special:Tags\u007C{{PLURAL:~{0}\u007Cبرچسپ\u007Cبرچسپ هان}}]]: ~{1})
+tags-title|برچسپ هان
+tags-tag|برچسپئ نام
+tags-display-header|نشان داتین بئ تعیراتانی لیست ئي تا
+tags-description-header|مانا ئی کامیلین ت\tۆزی
+tags-source-header|بُن زهی
+tags-active-header|پئال؟
+tags-hitcount-header|تغیرئانی برچسپ
+tags-actions-header|عملکردهان
+tags-active-yes|هان
+tags-active-no|نه
+tags-source-extension|تاریپ بوته بئ ایزاپه کن\tۆکین پایه ئا
+tags-source-manual|شه ربات ئانی یا کارزوروکانی نیمه گا دستی آسمال بوته
+tags-source-none|دیگه ایستیپاده ئه به بیت
+tags-edit|ایڈیٹ
+tags-delete|پاک کورتین
+tags-activate|پئال کورتین
+tags-deactivate|غیرپئال کورتین
+tags-hitcount|~{0} {{PLURAL:~{0}\u007Cٹگل\u007Cٹگل}}
+tags-manage-no-permission|شما په مدیریت ئی تگ ئی تغیرا اجازه  نداریت.
+tags-create-heading|نوکین برچسپ ئی ج\tۆر کورتین
+tags-create-tag-name|برچسپئ نام:
+tags-create-reason|دلیل:
+tags-create-submit|جوڑ\t کورتین
+tags-create-no-name|شما تگی نام باید مشخس بکنیت.
+tags-create-invalid-chars|تگ‌ئانی نام  نباید که کامه (<code>,</code>) یا مورب خت  (<code>/</code>) داشته بیئنت.
+tags-create-already-exists|"~{0}" ئی تگ همی انون موجود اینت.
+tags-create-warnings-above|"~{0}" ئی تگی جۆڑ کورتینی وختا جهگی {{PLURAL:~{1}\u007Cهشدار\u007Cهشدارئان}} آته انت:
+tags-create-warnings-below|آیا لوٹیت که تگ ئی جۆڑ کورتین ئا ایدامه دهیت؟
+tags-delete-title|تگ ئی پاک کورتین
+tags-delete-explanation-initial|شما بئ هالی پاک کورتینا «~{0}» ئی تگی شه مالوماتی بانکا هستیت.
+tags-delete-reason|دلیل:
+tags-delete-submit|ای تگ ئا غیرقابیل بیئرگشت پاک کن
+tags-delete-not-found|«~{0}» ئی تگ وجود نداریت.
+tags-delete-too-many-uses|"~{0}" ئی تگ گشتیر شه ~{1} {{PLURAL:~{1}\u007Cنخسه\u007Cنخسه ئانی}} سرا ایئمال بوته و نتوان که آیرا پاک کورت.
+tags-delete-warnings-after-delete|برچسب "~{0}" ئی تگ پاک بوت ، مه گه گۆ جهلگین  {{PLURAL:~{1}\u007Cخه تا\u007Cخه تا ئان}} گۆن ات:
+tags-activate-title|تگ ئی په ئال کورتین
+tags-activate-question|شما بئ هالی په هال کورتین  «~{0}» ئی تگ ویت.
+tags-activate-reason|دلیل:
+tags-activate-not-allowed|«~{0}» ئی تگی په هال کورتین ممکن نه اینت.
+tags-activate-not-found|«~{0}» ئی تگ وجود نداریت.
+tags-activate-submit|پئال کورتین
+tags-deactivate-title|تگ ئی غیر په ئال کورتین
+tags-deactivate-question|شما بئ هالی غیر په هال کورتین  «~{0}» ئی تگ ویت.
+tags-deactivate-reason|دلیل:
+tags-deactivate-not-allowed|«~{0}» ئی تگی غیر په هال کورتین ممکن نه اینت.
+tags-deactivate-submit|غیرپئال کورتین
+comparepages|تاکدیمانئ مقایسه
+compare-page1|تاکدیم ۱
+compare-page2|تاکدیم ۲
+compare-rev1|نخسه ۱
+compare-rev2|نخسه ۲
+compare-submit|مقایسه
+compare-invalid-title|ته ئین بوته ئین ئینوان ناموتبر اینت.
+compare-title-not-exists|مشخص بوته ئین ئینوان موجود نه اینت.
+compare-revision-not-exists|مشخس بوته پیلتر موجود نه اینت.
+dberr-problems|ئوزر لوٹن! ای سایٹ شه تخنیکی ئین مشکل ئان رنج ئه وارت.
+dberr-again|چینکه دقیقه سبر کنیت و پدا ای دیما بارگیری بکینت.
+htmlform-float-invalid|اندازه ئی که داخل کورته یک ئدد ئی نه ئینت.
+htmlform-int-toolow|اندازه ئی که داخل کورته ئیت کمتیر شه ~{0} ئا است.
+htmlform-int-toohigh|اندازه ئی که داخل کورته ئیت گیشتیر شه ~{0} ئا اینت.
+htmlform-required|ای اندازه گ ضرورت اینت
+htmlform-submit|ثبت کورتین
+htmlform-reset|تغیرانئ خنثا کورتین
+htmlform-selectorother-other|دیگرین
+htmlform-no|نه
+htmlform-yes|هان
+htmlform-chosen-placeholder|یک گذینه ئی انتخاب بکنیت
+htmlform-cloner-create|گیشتیر اضافه کورتین
+htmlform-cloner-delete|پاک کورتین
+htmlform-cloner-required|حداقل ضرورت انداره گ.
+sqlite-has-fts|~{0} گۆ پُشتیوانی شه گشتین ئا بئ کامیلین متن ئی تا
+sqlite-no-fts|~{0} بدون پُشتیوانی شه گشتین ئا بئ کاملین متن ئی تا
+logentry-delete-delete|~{0} ، ~{2} تاکدیما {{GENDER:~{1}\u007Cپاک کورت}}
+logentry-delete-restore|~{0} ، ~{2} ئی تاکدیما {{GENDER:~{1}\u007Cپدا جۆڑ کورت}}
+logentry-delete-event|~{0} پیدایی {{PLURAL:~{4}\u007Cیک مورد سیاه چال\u007C~{4} مورد سیاه چال}} ئا بئ ~{2} {{GENDER:~{1}\u007Cتا تغیر دات}}: ~{3}
+logentry-delete-revision|~{0} پیدایی {{PLURAL:~{4}\u007Cیک نخسه\u007C~{4} نخسه}} تاکدیم ~{2} ئا {{GENDER:~{1}\u007Cتغییر دات}}: ~{3}
+logentry-suppress-delete|~{0} ~{2} ئی تاکدیما {{GENDER:~{1}\u007C سرکوب کورت}}
+logentry-suppress-event|~{0} پیدایی {{PLURAL:~{4}\u007Cیک مورد سیاه چال\u007C~{4} مورد سیاه چال}} ئا بئ ~{2} {{GENDER:~{1}\u007Cتا چیهر دات}}: ~{3}
+logentry-suppress-revision|~{0} پیدایی {{PLURAL:~{4}\u007Cیک نخسه\u007C~{4} نخسه}} تاکدیم ~{2} ئا چیهراکائی {{GENDER:~{1}\u007Cتغییر دات}}: ~{3}
+revdelete-content-hid|محتوائانه چیهر کورت
+revdelete-summary-hid|ایڈیٹ ئی خلاصه ئا چیهر کورت
+revdelete-uname-hid|چیهرین کار زوروکئ نام
+revdelete-content-unhid|محتوائانه سر درا کورت
+revdelete-summary-unhid|ایڈیٹ ئی خلاصه ئا دررا کورت
+revdelete-uname-unhid|کار زوروکئ ناما سر درا کورت
+revdelete-restricted|مدیر ئانه محدود کورت
+revdelete-unrestricted|مدیرئانی محدودیت ئا پروشت
+logentry-merge-merge|~{0}  ~{2}  را بئ  ~{3} {{GENDER:~{1}\u007C ادغام کورت}} (نخسه تا  ~{4})
+logentry-move-move|~{0}، ~{2} ئی تاکدیما بئ ~{3} {{GENDER:~{1}\u007Cجابجا کورت}}
+logentry-newusers-newusers|~{0} ئی کار زوروکئ حساب {{GENDER:~{1}\u007Cجۆڑ بوت}}
+logentry-newusers-create|~{0} ئی کار زوروکئ حساب {{GENDER:~{1}\u007Cجۆڑ بوت}}
+logentry-newusers-create2|~{2} ئی کار زوروکئ حساب شه ~{0} ئی نیمگا {{GENDER:~{1}\u007Cجۆڑ بوت}}
+logentry-newusers-byemail|~{2} ئی کار زوروکئ حساب شه ~{0} ئی نیمگا {{GENDER:~{1}\u007Cجۆڑ بوت}} و چیهرگال یا پاسورد گو ایمیلا دیم داته بوت
+logentry-newusers-autocreate|~{0} ئی حساب بئ اتوماتیکین رکما {{GENDER:~{1}\u007Cجۆڑ بوت}}
+logentry-rights-rights|~{0} ، ~{2} ئی عضویتا شه ~{3} ئی گروپا بئ ~{4} {{GENDER:~{1}\u007Cتغییر دات}}
+logentry-rights-rights-legacy|~{0} عضویتئ گروپا بئ ~{2} ئا {{GENDER:~{1}\u007Cتغییر دات}}
+logentry-rights-autopromote|~{0} بئ اوتوماتیکین رکما وتر شه ~{3} بئ ~{4} {{GENDER:~{1}\u007Cارتقاء دات}}
+logentry-upload-upload|~{0} ~{2} ئا {{GENDER:~{1}\u007Cبُرز کورت}}
+logentry-upload-overwrite|~{0} نوکین نخسه ئی شه ~{2} ئا {{GENDER:~{1}\u007Cبُرز کورت}}
+logentry-upload-revert|~{0} {{GENDER:~{1}\u007Cبُرز کورت}} ~{2} ئا
+log-name-managetags|تگ ئی تاریخچه ئی مدیریت
+logentry-managetags-create|~{0} تگ «~{3}» ئا {{GENDER:~{1}\u007Cج\tۆڑ کورت}}
+rightsnone|(هیچ)
+revdelete-summary|ایڈیتی خاصه
+feedback-back|بیئرگشت
+feedback-bugnew|دیستونئ . نوکین مشکل ئی راپور دیئ
+feedback-cancel|کنسیل
+feedback-close|کار بوت
+feedback-external-bug-report-button|یک تخنیکی ئین کاری پایل
+feedback-dialog-title|یک پیڈبک ئی دیم داتین
+feedback-error-title|خطا
+feedback-error2|خطا: پروشت بئ ایڈیٹ ئی تا
+feedback-message|پیام:
+feedback-subject|ئنوان:
+feedback-submit|ثبت کورتین
+feedback-thanks|منتوارن! شمی فیدبک بئ «[~{0} ~{1}]» ئی دیمی تا ثبت بوت.
+feedback-thanks-title|منتوارن!
+feedback-useragent|کارزوروکی آگینت:
+searchsuggest-search|گشتین
+searchsuggest-containing|شامیلین دیمان...
+api-error-badaccess-groups|شما اجازه په پایلی ئی بُرز کورتین ئا بئ ای ویکی ای تا نداریت.
+api-error-badtoken|داخیلی ئین خه تا: امنیتی ئین کوڈ سه ئی نه اینت (Bad token).
+api-error-duplicate-popup-title|تکرارین {{PLURAL:~{0}\u007Cفایل\u007Cفایلان}}
+api-error-empty-file|فایلی که دیم داته بوت خالی ات.
+api-error-emptypage|خالی ئین دیمانی جۆڑ کورتین جایز نه اینت.
+api-error-file-too-large|فایلی که دیم داتیت بئ حد ٹوو ات.
+api-error-filename-tooshort|فایلی نام بئ شه اندازگ ئا گۆنڈ ات.
+api-error-filetype-banned|ایرنگین فایل ئی اجازه نه اینت.
+api-error-filetype-missing|فایل ئی نام فرمت نه داریت.
+api-error-hookaborted|تغیر که شما لۆٹیت جۆڑ کنیت شه یک جنگک یی نیمگا بند بوت.
+api-error-http|داخلین خطا:وصل بوتین بئ سرویس ئا ممکن نه اینت.
+api-error-illegal-filename|فایل ئی نام غیرمجاز اینت.
+api-error-invalid-file-key|داخلین خطا: فایل نام بئ موقت ئین حافظه ئی تا موجود نه اینت.
+api-error-missingparam|داخلین خطا: ناموجودین پارامیترئان بئ ریکویست ئی تا.
+api-error-mustbeloggedin|په فایلی بُرز کورتینا، شما باید بئ سایٹ ئی تا داخل بئیت.
+api-error-mustbeposted|داخلین خطا: ریکویست باید شه POST HTTP ئی روش ئا دیم داته بیئت.
+api-error-unclassified|یک نا زانتین خطائی رخ دات.
+api-error-unknown-code|نازانتین خطای: " ~{0} "
+api-error-unknown-warning|نادروستئ ئین ایختار: ~{0}
+api-error-unknownerror|نادروستئ ئین خه تا: «~{0}».
+api-error-uploaddisabled|پایلانی بُرز کورتین بئ ای ویکی تا غیر په هال اینت.
+duration-seconds|~{0} ثانیه
+duration-minutes|~{0} دقیقه
+duration-hours|~{0} سائت
+duration-days|~{0} روچ
+duration-weeks|~{0} هپتگ
+duration-years|~{0} سال
+duration-decades|~{0} دههگ
+duration-centuries|~{0} قرن
+duration-millennia|{{PLURAL:~{0}\u007Cهزار سال \u007C~{0} هزار سال}}
+limitreport-title|پروپایل ئی دیتا ئی تجزیه گر:
+limitreport-cputime|سی‌پی‌یو ئی مسرپ وخت
+limitreport-cputime-value|~{0} {{PLURAL:~{0}\u007Cسانیه\u007Cسانیه ئان}}
+limitreport-walltime|واقئین مصرفئ مدت
+limitreport-walltime-value|~{0} {{PLURAL:~{0}\u007Cثانیه\u007Cثانیه}}
+limitreport-postexpandincludesize-value|~{0}/~{1} {{PLURAL:~{1}\u007Cبایٹ\u007Cبایٹ}}
+limitreport-templateargumentsize|ارگومان ئی تراشوانی اندازگ
+limitreport-templateargumentsize-value|~{0}/~{1} {{PLURAL:~{1}\u007Cبایٹ\u007Cبایٹ}}
+limitreport-expansiondepth|گیشتیرین پراخی جُهلی
+expandtemplates|تراشوانی اکسپاند کورتین
+expand_templates_title|موضوع ئی ئنوان، په {{FULLPAGENAME}} ئا و غیره:
+expand_templates_input|ورودین متن:
+expand_templates_output|نتیجه
+expand_templates_xml_output|خروجی XML
+expand_templates_html_output|اچ‌تی‌ام‌ال حامگین خروجی
+expand_templates_ok|قبول داشتین
+expand_templates_remove_comments|ملاحظاتانئ پاک کورتین
+expand_templates_remove_nowiki|خنثی کورتین <nowiki> تگ هانی بئ  نتیجه ئی
+expand_templates_generate_xml|XML تجزیه ئی درختی نشان داتین
+expand_templates_generate_rawhtml|حامیگین اچ تی ام ال ئی نشان داتین
+expand_templates_preview|دیم دیست
+pagelanguage|زبانی انتخابی دیم
+pagelang-name|تاکدیم
+pagelang-language|زبان
+pagelang-use-default|استفاده کورتین شه پیش فرض ئین زبانا
+pagelang-select-lang|زبانی انتخاب
+right-pagelang|زبانی تاکدیم ئی تغیر
+action-pagelang|دیمی زبان ئی تغیر
+log-name-pagelang|لوگ ئی زبان تغیرداتین
+log-description-pagelang|ای سیاهه زبانانی تغیراتانی دیم اینت.
+default-skin-not-found-row-enabled|* <code>~{0}</code> / ~{1} (په ئال)
+default-skin-not-found-row-disabled|* <code>~{0}</code> / ~{1} ('''غیر په ئال''')
+mediastatistics|میڈیایی سرجم
+mediastatistics-nbytes|{{PLURAL:~{0}\u007C~{0} بایٹ}} (~{1}؛ ~{2}٪)
+mediastatistics-table-mimetype|مایم ئی رکم
+mediastatistics-table-extensions|موته ئمیلین اپزونه ئان
+mediastatistics-table-count|فایلانی اندازگ
+mediastatistics-table-totalbytes|ترکیبین حجم
+mediastatistics-header-unknown|نامئلوم
+mediastatistics-header-bitmap|بیت مپ ئی اکسان
+mediastatistics-header-drawing|طراحی‌هان (اکس برداری ئان)
+mediastatistics-header-audio|توار
+mediastatistics-header-video|ویدیوئان
+mediastatistics-header-multimedia|غنی ئین میڈ\tیا ئان
+mediastatistics-header-office|آفیس
+mediastatistics-header-text|متنی
+mediastatistics-header-executable|اجرایی
+mediastatistics-header-archive|پشورده ئین پورمت ئان
+json-warn-trailing-comma|~{0} ئی کاما بئ اخیرا شه جی‌سن ئا {{PLURAL:~{0}\u007Cپاک بوت}}.
+json-error-unknown|مشکلی گو جی‌سن ات. خطا: ~{0}
+json-error-state-mismatch|جن سن جووان نه اینت یا ناقض اینت
+json-error-syntax|نحوی ئین خطا
+json-error-inf-or-nan|INF یا NAN ئی مقادیر یک یا گیشتیر بی مقداری که کدگذاری ئا بیئنت
+json-error-unsupported-type|یک اندازه که نتوانت کد گذاری بیئت داته بوته
+headline-anchor-title|لینک بئ ای قیسمت ئا
+wikibase-edit|ایڈیٹ
+wikibase-add|اڈ کورتین
+wikibase-label-empty|تا انون نامی تئریپ نه بوته.
+wikibase-description-empty|تا انون شرح تئریپ نه بوته.
+wikibase-statements|اظهارهان
+wikibase-sitelinks-special|دیگرین سایٹ ئان
+wikibase-aliases-empty|هیچ نامی تئریپ نه بوته.
+wikibase-statementview-rank-normal|نورمالین رتبه
+wikibase-statementview-referencesheading-pendingcountersubject|{{PLURAL:~{0}\u007Cمنشا\u007Cمنشائان}}
+']:>
+).lang
+;

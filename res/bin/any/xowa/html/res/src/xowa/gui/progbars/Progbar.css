@@ -1,0 +1,31 @@
+/* pbar */
+.pbar_row {  
+  width:  100%;
+  height: 100%;  /* depend on auto-size */
+  padding: 2px 0 2px;
+  display: none;
+}
+.pbar_row_1 {
+  margin: -4px 0px 2px;
+}
+.pbar_step {
+  padding: 0px 0px 0px 0px;
+}
+.pbar_proc {
+  padding: 0px 0px 0px 0px;
+  font-variant: small-caps;
+}
+.pbar_div {
+  height: 2px;
+  margin: 2px 4px 2px 0px;
+  width: calc(100% - 10px);
+
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+.pbar_bar {
+  width: 0%;
+  height: 100%;
+  background-color: #5cb85c;
+  border-radius: 4px;
+}

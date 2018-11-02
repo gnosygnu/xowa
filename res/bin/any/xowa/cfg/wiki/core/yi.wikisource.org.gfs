@@ -1,0 +1,47 @@
+// wiki.xtns.pages.bgn
+parser.xtns.get('pages').ns_names_('Page', 'Page talk', 'Index', 'Index talk');
+// wiki.xtns.pages.end
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+-1|באזונדער
+2|באַניצערין
+2|באנוצער
+2|באניצער
+2|משתמש
+2|משתמשת
+3|באַניצערין_רעדן
+3|באנוצער_רעדן
+3|באניצער_רעדן
+3|שיחת_משתמש
+3|שיחת_משתמשת
+4|Wikisource
+4|וויקיביבליאטעק
+5|וויקיביבליאטעק_רעדן
+6|Image
+6|בילד
+7|Image_talk
+7|בילד_רעדן
+8|מעדיעוויקי
+9|מעדיעוויקי_רעדן
+14|קאטעגאריע
+15|קאטעגאריע_רעדן
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(0).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(14).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end

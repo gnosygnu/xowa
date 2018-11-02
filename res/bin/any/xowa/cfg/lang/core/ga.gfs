@@ -1,0 +1,1766 @@
+this
+.ns_names
+  .load_text(
+<:['
+-2|Meán
+-1|Speisialta
+1|Plé
+2|Úsáideoir
+3|Plé úsáideora
+5|Plé {{grammar:genitive\u007C$1}}
+6|Íomhá
+7|Plé íomhá
+8|MediaWiki
+9|Plé MediaWiki
+10|Teimpléad
+11|Plé teimpléid
+12|Cabhair
+13|Plé cabhrach
+14|Catagóir
+15|Plé catagóire
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+7|Plé í­omhá
+10|Múnla
+11|Plé múnla
+14|Rang
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+redirect|0|#athsheoladh~#REDIRECT~
+notoc|0|__GANCÁ__~__NOTOC__~
+forcetoc|0|__CÁGACHUAIR__~__FORCETOC__~
+toc|0|__CÁ__~__TOC__~
+noeditsection|0|__GANMHÍRATHRÚ__~__NOEDITSECTION__~
+currentmonth|1|MÍLÁITHREACH~CURRENTMONTH~CURRENTMONTH2~
+currentmonthname|1|AINMNAMÍOSALÁITHREAÍ~CURRENTMONTHNAME~
+currentmonthnamegen|1|GINAINMNAMÍOSALÁITHREAÍ~CURRENTMONTHNAMEGEN~
+currentmonthabbrev|1|GIORRÚNAMÍOSALÁITHREAÍ~CURRENTMONTHABBREV~
+currentday|1|LÁLÁITHREACH~CURRENTDAY~
+currentdayname|1|AINMANLAELÁITHRIGH~CURRENTDAYNAME~
+currentyear|1|BLIAINLÁITHREACH~CURRENTYEAR~
+currenttime|1|AMLÁITHREACH~CURRENTTIME~
+numberofarticles|1|LÍONNANALT~NUMBEROFARTICLES~
+numberoffiles|1|LÍONNAGCOMHAD~NUMBEROFFILES~
+pagename|1|AINMANLGH~PAGENAME~
+pagenamee|1|AINMANLGHB~PAGENAMEE~
+namespace|1|AINMSPÁS~NAMESPACE~
+msg|0|TCHT~MSG~
+subst|0|IONAD:~SUBST:~
+msgnw|0|TCHTFS~MSGNW~
+img_thumbnail|1|mionsamhail~mion~thumbnail~thumb~
+img_framed|1|fráma~frámaithe~framed~enframed~frame~
+img_none|1|faic~none~
+img_right|1|deas~right~
+img_center|1|lár~center~centre~
+img_left|1|clé~left~
+int|0|INMH~INT~
+sitename|1|AINMANTSUÍMH~SITENAME~
+ns|0|AS~NS~
+localurl|0|URLÁITIÚIL~LOCALURL~
+localurle|0|URLÁITIÚILB~LOCALURLE~
+server|0|FREASTALAÍ~SERVER~
+servername|0|AINMANFHREASTALAÍ~SERVERNAME~
+scriptpath|0|SCRIPTCHOSÁN~SCRIPTPATH~
+grammar|0|GRAMADACH~GRAMMAR~
+notitleconvert|0|__GANTIONTÚNADTEIDEAL__~__GANTT__~__NOTITLECONVERT__~__NOTC__~
+nocontentconvert|0|__GANTIONTÚNANÁBHAIR__~__GANTA__~__NOCONTENTCONVERT__~__NOCC__~
+currentweek|1|SEACHTAINLÁITHREACH~CURRENTWEEK~
+currentdow|1|LÁLÁITHREACHNAS~CURRENTDOW~
+revisionid|1|IDANLEASAITHE~REVISIONID~
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|an Domhnach
+monday|an Luan
+tuesday|an Mháirt
+wednesday|an Chéadaoin
+thursday|an Déardaoin
+friday|an Aoine
+saturday|an Satharn
+sun|Domh
+mon|Luan
+tue|Máirt
+wed|Céad
+thu|Déar
+fri|Aoine
+sat|Sath
+january|Eanáir
+february|Feabhra
+march|Márta
+april|Aibreán
+may_long|Bealtaine
+june|Meitheamh
+july|Iúil
+august|Lúnasa
+september|Meán Fómhair
+october|Deireadh Fómhair
+november|Samhain
+december|Nollaig
+january-gen|Eanáir
+february-gen|Feabhra
+march-gen|an Mhárta
+april-gen|an Aibreáin
+may-gen|na Bealtaine
+june-gen|an Mheithimh
+july-gen|Iúil
+august-gen|Lúnasa
+september-gen|Mheán Fómhair
+october-gen|Dheireadh Fómhair
+november-gen|na Samhna
+december-gen|na Nollag
+jan|Ean
+feb|Feabh
+mar|Márta
+apr|Aib
+may|Beal
+jun|Meith
+jul|Iúil
+aug|Lún
+sep|MFómh
+oct|DFómh
+nov|Samh
+dec|Noll
+toc|Clár ábhair
+redirectedfrom|(Athsheolta ó ~{0})
+allpages|Gach leathanach
+prevpage|Leathanach roimhe sin (~{0})
+nextpage|An leathanach a leanas (~{0})
+collapsible-collapse|Laghdaigh
+collapsible-expand|Leathnaigh
+categories|Catagóirí
+lastmodifiedat|Athraíodh an leathanach seo ag ~{1}, ~{0}.
+thumbnail-more|Méadaigh
+otherlanguages|I dteangacha eile
+blanknamespace|(Gnáth)
+pagecategories|{{PLURAL:~{0}\u007CCatagóir\u007CCatagóirí}}
+category_header|Ailt sa chatagóir "~{0}"
+subcategories|Fo-chatagóirí
+category-media-header|Meáin sa chatagóir "~{0}"
+category-empty|''Níl aon leathanaigh ná méid sa chatagóir ar an am seo.''
+category-subcat-count|{{PLURAL:~{1}\u007C Níl ach an fo-chatagóir seo a leanas ag an gcatagóir seo.\u007CTá {{PLURAL:~{0}\u007Cfo-chatagóir\u007Cfo-chatagóirí}} ag an gcatagóir seo, as ~{1} san iomlán.}}
+category-subcat-count-limited|Is {{PLURAL:~{0}\u007Cé an líon fochatagóir\u007C~{0} iad na líon fochatagóirí}} atá ag an gcatagóir seo ná: ~{0}.
+category-article-count|{{PLURAL:~{1}\u007CNíl sa chatagóir seo ach an leathanach seo a leanas.\u007CTá {{PLURAL:~{0}\u007C~{0} leathanach\u007C~{0} leathanaigh}} sa chatagóir seo, as iomlán de ~{1}.}}
+category-article-count-limited|Tá {{PLURAL:~{0}\u007Can leathanach\u007Cna ~{0} leathanaigh}} seo a leanas sa chatagóir reatha.
+category-file-count|{{PLURAL:~{1}\u007CTá ach an comhad a leanas sa chatagóir seo\u007CTá {{PLURAL:~{0}\u007Can comhad seo\u007C~{0} na comhaid seo}} a leanas sa chatagóir seo, as ~{1} san iomlán.}}
+category-file-count-limited|Tá {{PLURAL:~{0}\u007Can comhad seo\u007C~{0} na comhaid seo}} a leanas sa chatagóir reatha.
+categorytree-member-counts|tá {{PLURAL:~{0}\u007Cfo-chatagóir amháin\u007C~{0} fo-chatagóirí}}, {{PLURAL:~{1}\u007Cleathanach amháin\u007C~{1} leathanaigh}}, agus {{PLURAL:~{2}\u007Ccomhad amháin\u007C~{2} comhaid}} laistigh
+categorytree-num-categories|~{0} C
+categorytree-num-pages|~{0} P
+categorytree-num-files|~{0} F
+nextn|an {{PLURAL:~{0}\u007C~{0}}} i ndiadh
+prevn|na {{PLURAL:~{0}\u007C~{0}}} cinn roimhe seo
+listingcontinuesabbrev|ar lean.
+bold_sample|Cló trom
+bold_tip|Cló trom
+italic_sample|Cló iodálach
+italic_tip|Cló iodálach
+link_sample|Teideal an naisc
+link_tip|Nasc inmheánach
+headline_sample|Cló ceannlíne
+headline_tip|Ceannlíne Leibhéil 2
+hidden-category-category|Catagóirí folaithe
+statistics|Staidrimh
+statistics-pages|Leathanaigh
+categorytree|Crann na gCatagóirí
+categorytree-portlet|Catagóirí
+categorytree-legend|Taispeáin crann na gcatagóirí
+categorytree-desc|Giuirléid AJAX a thaispeánann an [[Special:CategoryTree\u007Cstruchtúr catagóirí]] i vicí
+categorytree-header|Cuir isteach ainm catagóra chun a hinneachar a thaispeáint i struchtúr crainn.\nTabhair faoi deara gur riachtanach ardfheidhmiúlacht JavaScript (AJAX) a bheith agat.\nMá tá do bhrabhsálaí róshean, nó má dhíchumasaigh tú JavaScript, ní oibreoidh sé.
+categorytree-category|Catagóir:
+categorytree-go|Taispeán an Crann
+categorytree-parents|Máthairnóid
+categorytree-mode-categories|catagóirí amháin
+categorytree-mode-pages|leathanaigh seachas comhaid
+categorytree-mode-all|gach leathanach
+categorytree-collapse|dún
+categorytree-expand|oscail
+categorytree-load|lódáil
+categorytree-loading|ag lódáil…
+categorytree-nothing-found|Ní bhfuarthas dada
+categorytree-no-subcategories|gan fho-chatagóir
+categorytree-no-parent-categories|níl aon máthairchatagóirí
+categorytree-no-pages|gan leathanach ná fo-chatagóir
+categorytree-not-found|Ní bhfuarthas Catagóir <i>~{0}</i>
+categorytree-error|Earráid agus sonraí dá lódáil.
+categorytree-retry|Fan nóiméad, le do thoil, roimh triail eile a bhaint as.
+proofreadpage_specialpage_label_key|Cuardaigh:
+proofreadpage_index_attributes|Údar\nTeideal\nBlian\u007CBlian foilseacháin\nFoilsitheoir\nFoinse\nÍomhá\u007CÍomhá clúdaigh\nLeathanaigh\u007C\u007C20\nNótaí
+proofreadpage_source|Foinse
+proofreadpage-group-other|Eile
+cite_article_desc|Cuir [[Special:Cite\u007Cdeismireacht]] leathanach speisíalta agus nasc bosca uirlisí
+cite_article_link|Luaigh an lch seo
+cite|Luaigh
+cite_page|Leathanach:
+cite_submit|Luaigh
+wikieditor-loading|Ag Lódáil....
+wikieditor-preview-tab|Réamhamharc
+wikieditor-preview-loading|Ag Lódáil....
+wikieditor-previewDialog-tab|Réamhamharc
+wikieditor-previewDialog-loading|Ag Lódáil....
+wikieditor-publish-button-cancel|Cealaigh
+wikieditor-template-editor-dialog-cancel|Cealaigh
+wikieditor-toolbar-loading|Ag Lódáil....
+wikieditor-toolbar-tool-link-cancel|Cealaigh
+wikieditor-toolbar-file-format|Formáid:
+wikieditor-toolbar-tool-file-cancel|Cealaigh
+wikieditor-toolbar-tool-reference-cancel|Cealaigh
+wikieditor-toolbar-group-format|Formáid
+wikieditor-toolbar-tool-table-preview|Réamhamharc
+wikieditor-toolbar-tool-table-cancel|Cealaigh
+wikieditor-toolbar-tool-replace-close|Dún
+wikieditor-toolbar-section-help|Cuidiú
+wikieditor-toolbar-help-page-file|Comhaid
+wikieditor-toolbar-help-page-discussion|Plé
+wikieditor-toolbar-help-content-signature-description|Síniú
+wikibase-edit|cur in eagar
+wikibase-save|Sábháil
+wikibase-cancel|Cealaigh
+wikibase-itembytitle-lookup-page|Leathanach:
+wikibase-itembytitle-submit|Cuardaigh
+wikibase-itemdisambiguation-lookup-language|Teanga:
+wikibase-itemdisambiguation-submit|Cuardaigh
+wm-license-cc-wiki-link|w:ga:Creative Commons
+wm-license-cc-attribution|Creidiúint
+wm-license-cc-by-1.0-text|Ceadaítear úsáid an chomhaid seo faoi thearmaí an cheadúnais [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0 Crediúint 1.0 Cineálach].
+wm-license-cc-free|Is féidir:
+wm-license-cc-free-to-share-header|an saothar seo a roinnt
+wm-license-cc-free-to-share-text|an saothar seo a chóipeáil, a dháil amach, agus a tharchur
+wm-license-cc-free-to-remix-header|an saothar seo a athmheascadh
+wm-license-cc-free-to-remix-text|an saothar seo a oiriúnú
+wm-license-cc-conditions|Ach amháin má leantar na coinníollacha seo a leanas:
+wm-license-cc-conditions-attribution-header|Crediúint
+wm-license-cc-conditions-attribution-text|Ní mor creidiúint a thabhairt leis an saothar, faoi mar a shonraigh an údar nó tabharthóir an ceadúnais (ach ná húsáid modh a thugann le fios go thacaíonn sé/sí tú féin nó an úsáid a bhaineann tú as an saothar).
+wm-license-cc-conditions-share_alike-header|comhroinn araon
+wm-license-cc-conditions-share_alike-text|Má athraíonn tú nó síneann tú amach an saothar seo, ní féidir é a dháileadh ach amhaín faoin gceadúnas céanna nó ceann cosúil leis an gceann seo.
+wikimedialicensetexts-desc|Teachtaireachtaí cheadúnas Wikimedia
+wm-license-attribution-with-author-text|Ceadaíonn sealbhóir cóipcheart an chomhaid seo, ~{0}, úsáid a bhaint as '''i gcomhair aidhm ar bith''' má aimnítear sealbhóir an chóipchirt. Is féidir é a athroinnt, obair díorthach a dhéanamh de, agus úsáid tráchtála a bhaint as, agus tá gach úsáid eile ceadaithe freisin.
+wm-license-attribution-without-author-text|Ceadaíonn sealbhóir cóipcheart an chomhaid seo úsáid a bhaint as '''i gcomhair aidhm ar bith''' má aimnítear sealbhóir an chóipchirt. Is féidir é a athroinnt, obair díorthach a dhéanamh de, agus úsáid tráchtála a bhaint as, agus tá gach úsáid eile ceadaithe freisin.
+wm-license-artwork-artist|Cumadóir
+wm-license-artwork-title|Teideal
+wm-license-artwork-dimensions|Toisí
+wm-license-artwork-current-location|Suíomh
+wm-license-artwork-credit-line|Fuarthas ó/Cnuasach
+wm-license-artwork-references|Tagairtí
+wm-license-artwork-id|Uimhir shealbú
+wm-license-artwork-source|Foinse/Grianghrafadóir
+wm-license-book-language|Teanga
+wm-license-book-title|Teideal
+wm-license-fsf-wiki-link|w:ga:Free Software Foundation
+wm-license-free-software-wiki-link|w:ga:Bogearraí saora
+wm-license-gfdl-1.2-and-later|Tugtar cead an doiciméad seo a chóipeáil, a dháil amach agus/nó a athrú de réir choinníollacha '''[[{{int:wm-license-gfdl-wiki-link}}\u007CCheadúnas GNU na nDoiciméad Saor]]''', Leagan 1.2 nó leagan ar bith níos nuaí a fhoilsítear ag an [[{{int:wm-license-fsf-wiki-link}}\u007CFree Software Foundation]]; gan Ranna Do-athraithe, gan Téacsanna an Chlúdaigh Tosaigh, gan Téacsanna an Chlúdaigh Deiridh.
+wm-license-gfdl-wiki-link|w:ga:Ceadúnas GNU do Dhoiciméadú Saor
+wm-license-information-table-summary|Seo tábla caighdeánaithe a sholáthraíonn faisnéis iomlán maidir leis an comhad, lena n-áirítear cur síos ar cad a léiríonn sé agus conas a bhí déanta aige, stádas cóipchirt agus foinse.
+wm-license-information-description|Tuairisc
+wm-license-information-description-missing|Níl aon '''cur síos''' ar an meán seo, agus a d'fhéadfadh faisnéis eile in easnamh.
+wm-license-information-description-missing-request|Tabhair cur síos chiallmhar ar an meán comhad seo, le do thoil.
+wm-license-information-source|Foinse
+wm-license-information-source-missing|Tá eolas '''foinse''' de dhíth ag an gcomhad seo.
+wm-license-information-source-missing-request|Cuir cur síos an chomhaid seo in eagar chun foinse a sholáthar, le do thoil.
+wm-license-information-date|Dáta
+wm-license-information-author|Údar
+wm-license-information-author-missing|Níl aon eolas faoin '''údar''' an meáin seo.
+wm-license-information-permission|Ceadúnas
+wm-license-information-permission-reusing-text|Athúsáid a bhaint as an gcomhad seo
+wm-license-information-permission-see-below|Féach thíos
+wm-license-information-other-versions|Leaganacha eile
+wm-license-own-work|Obair féin
+wm-license-pd-usgov-military-army-wiki-link|w:ga:Arm na Stát Aontaithe
+wm-license-self-one-license|Is mise sealbhóir cóipchirt an shaothair seo, agus foilsím é faoin gceadúnas seo a leanas:
+wm-license-self-one-license-with-author|Is mise ~{0}, sealbhóir cóipchirt an shaothair seo, agus foilsím é faoi na ceadúnais seo a leanas:
+wm-license-self-multiple-licenses|Is mise sealbhóir cóipchirt an shaothair seo, agus foilsím é faoi na ceadúnais seo a leanas:
+wm-license-self-multiple-licenses-with-author|Is mise ~{0}, sealbhóir cóipchirt an shaothair seo, agus foilsím é faoi na ceadúnais seo a leanas:
+wm-license-self-multiple-licenses-select|Is féidir leat a roghnú an ceadúnas do rogha
+wikimediamessages-desc|Teachtaireachtaí sainiúil an Viciméid
+sitesupport-url|https://donate.wikimedia.org/?utm_source=donate&utm_medium=sidebar&utm_campaign=spontaneous&uselang=ga
+sitesupport|Síntiúis
+tooltip-n-sitesupport|Tacaigh linn
+group-accountcreator|Cuntas cruthóirí
+group-accountcreator-member|cuntas cruthóir
+grouppage-accountcreator|{{ns:project}}:Cuntas cruthóirí
+group-autopatrolled-member|uathphatrólóir
+grouppage-autopatrolled|{{ns:project}}:Uathphatrólóirí
+group-founder|Bunaitheoirí
+group-founder-member|bunaitheoir
+grouppage-founder|{{ns:project}}:Bunaitheoirí
+group-import|Iompórtálaithe
+group-import-member|iompórtálaí
+grouppage-import|{{ns:project}}:Iompórtálaithe
+group-ipblock-exempt|Díolúintí coisc IP
+group-ipblock-exempt-member|Díolúine coisc IP
+grouppage-ipblock-exempt|{{ns:project}}:Díolúine coisc IP
+group-rollbacker|Tar-rolltóirí
+group-rollbacker-member|tar-rolltóir
+grouppage-rollbacker|{{ns:project}}:Tar-rolltóirí
+group-transwiki|Iompórtálaithe traisvicí
+group-transwiki-member|iompórtálaí traisvicí
+grouppage-transwiki|{{ns:project}}:Iompórtálaithe traisvicí
+group-uploader|Uaslódóirí
+group-uploader-member|uaslódóir
+grouppage-uploader|{{ns:project}}:Uaslódóirí
+group-Global_bot|Róbónna domhanda
+group-Global_bot-member|róbó domhanda
+group-Global_rollback|Tar-rolltóirí domhanda
+group-Global_rollback-member|tar-rolltóir domhanda
+group-Ombudsmen|Daoine an Phobail
+group-Ombudsmen-member|Duine an Phobail
+group-Staff|Foireann
+group-Staff-member|ball foirne
+group-steward|Maoir
+group-steward-member|maor
+group-sysadmin|Riarthóirí
+group-sysadmin-member|riarthóir
+group-coder|Códóirí
+group-coder-member|códóir
+shared-repo-name-shared|an Cómhaoin Vicíméid
+tog-underline|Folínte faoi naisc:
+tog-hideminor|Ná taispeáin mionathruithe i measc na n-athruithe is déanaí
+tog-hidepatrolled|Folaigh giotaí eagartha smachtaithe sna athruithe is déanaí
+tog-newpageshidepatrolled|Folaigh leathanaigh smachtaithe ó liosta leathanaigh úire
+tog-extendwatchlist|Leathnaigh an liosta faire chun gach athrú cuí a thaispeáint
+tog-usenewrc|Stíl nua do na hathruithe is déanaí (JavaScript riachtanach)
+tog-numberheadings|Uimhrigh ceannteidil go huathoibríoch
+tog-showtoolbar|Taispeáin an barra uirlisí eagair (JavaScript)
+tog-editondblclick|Déghliogáil chun leathanaigh a chur in eagar (JavaScript)
+tog-editsectiononrightclick|Cumasaigh mír-eagarthóireacht le deaschliceáil<br /> ar cheannteidil (JavaScript)
+tog-watchcreations|Cuir ar mo liosta faire leathanaigh a chruthaím
+tog-watchdefault|Déan faire ar leathanaigh a athraím
+tog-watchmoves|Cuir ar mo liosta faire leathanaigh a athainmnaím
+tog-watchdeletion|Cuir ar mo liosta faire leathanaigh a scriosaim
+tog-minordefault|Déan mionathruithe de gach aon athrú, mar réamhshocrú
+tog-previewontop|Cuir an réamhamharc os cionn an bhosca eagair, <br />agus ná cuir é taobh thíos de
+tog-previewonfirst|Taispeáin réamhamharc don chéad athrú
+tog-enotifwatchlistpages|Cuir ríomhphost chugam nuair a athraítear leathanaigh
+tog-enotifusertalkpages|Cuir ríomhphost chugam nuair a athraítear mo leathanach phlé úsáideora
+tog-enotifminoredits|Cuir ríomhphost chugam nuair a dhéantar mionathruithe chomh maith
+tog-enotifrevealaddr|Taispeáin mo sheoladh ríomhphoist i dteachtaireachtaí fógra
+tog-shownumberswatching|Taispeán an méid úsáideoirí atá ag faire
+tog-oldsig|Réamhamharc ar an síniú atá ann:
+tog-fancysig|Sínithe bunúsacha mar vicítéacs (gan nasc uathoibríoch)
+tog-uselivepreview|Bain úsáid as réamhamharc beo (JavaScript) (Turgnamhach)
+tog-forceeditsummary|Cuir in iúl dom nuair a chuirim isteach achoimre eagair folamh
+tog-watchlisthideown|Folaigh mo chuid athruithe ón liosta faire
+tog-watchlisthidebots|Folaigh athruithe de chuid róbat ón liosta faire
+tog-watchlisthideminor|Folaigh mionathruithe ón liosta faire
+tog-watchlisthideliu|Folaigh athruithe ó úsáideoirí logáilte isteach ón liosta faire
+tog-watchlisthideanons|Folaigh athruithe ó úsáideoirí gan ainm ón liosta faire
+tog-watchlisthidepatrolled|Folaigh athruithe patrólta ón liosta faire
+tog-ccmeonemails|Cuir cóip chugam de gach teactaireacht r-phoist a chuirim chuig úsáideoirí eile
+tog-diffonly|Ná taispeáin inneachar an leathanaigh faoi difríochteanna
+tog-showhiddencats|Taispeáin chatagóirí folaithe
+tog-norollbackdiff|Fág an difr ar lár tar éis athruithe a rolladh siar
+underline-always|I gcónaí
+underline-never|Riamh
+underline-default|Mar atá réamhshocraithe sa bhrabhsálaí
+editfont-default|Réamhshocrú an bhrabhsálaí
+editfont-monospace|Cló aonleithid
+editfont-sansserif|Cló gan trasmhíreanna
+editfont-serif|Cló le trasmhíreanna
+hidden-categories|{{PLURAL:~{0}\u007CCatagóir folaithe\u007CCatagóirí folaithe}}
+index-category|Leathanaigh innéacsaithe
+about|Maidir leis
+article|Leathanach ábhair
+newwindow|(a osclófar i bhfuinneog nua)
+cancel|Cealaigh
+moredotdotdot|Tuilleadh...
+mypage|Leathanach
+mytalk|Plé
+anontalk|Plé don seoladh IP seo
+navigation|Nascleanúint
+and| agus
+qbfind|Aimsigh
+qbbrowse|Brabhsáil
+qbedit|Cuir in eagar
+qbpageoptions|An leathanach seo
+qbmyoptions|Mo chuid leathanaigh
+faq|Ceisteanna Coiteanta
+faqpage|Project:Ceisteanna_Coiteanta
+actions|Gníomhartha
+namespaces|Ainmspásanna
+variants|Leaganacha Malartacha
+errorpagetitle|Earráid
+returnto|Fill ar ais go ~{0}.
+tagline|Ó {{SITENAME}}.
+help|Cabhair
+search|Cuardaigh
+searchbutton|Cuardaigh
+go|Gabh
+searcharticle|Gabh
+history|Stair an lch seo
+history_short|Stair
+updatedmarker|leasaithe (ó shin mo chuairt dheireanach)
+printableversion|Eagrán inphriontáilte
+permalink|Nasc buan
+print|Priontáil
+view|Amharc
+edit|Athraigh an lch seo
+create|Cruthaigh
+editthispage|Athraigh an lch seo
+create-this-page|Cruthaigh an lch seo
+delete|Scrios
+deletethispage|Scrios an lch seo
+undelete_short|Díscrios {{PLURAL:~{0}\u007Cathrú amháin\u007C~{0} athrú}}
+viewdeleted_short|Féach ar {{PLURAL:~{0}\u007Cathrú scriosta amháin\u007C~{0} athrú scriosta}}
+protect|Glasáil
+protect_change|athraigh
+protectthispage|Glasáil an lch seo
+unprotect|Díghlasáil
+unprotectthispage|Díghlasáil an lch seo
+newpage|Leathanach nua
+talkpage|Pléigh an lch seo
+talkpagelinktext|Plé
+specialpage|Leathanach Speisialta
+personaltools|Do chuid uirlisí
+articlepage|Féach ar an alt
+talk|Plé
+views|Radhairc
+toolbox|Bosca uirlisí
+userpage|Féach ar lch úsáideora
+projectpage|Féach ar lch thionscadail
+imagepage|Féach ar lch comhaid
+mediawikipage|Féach ar lch teachtaireacht
+templatepage|Féach ar leathanach an teimpléad
+viewhelppage|Féach ar lch chabhair
+categorypage|Féach ar lch chatagóir
+viewtalkpage|Féach ar phlé
+redirectpagesub|Lch athdhírithe
+viewcount|Rochtainíodh an leathanach seo {{PLURAL:~{0}\u007Cuair amháin\u007C~{0} uaire}}.
+protectedpage|Leathanach glasáilte
+jumpto|Léim go:
+jumptonavigation|nascleanúint
+jumptosearch|cuardaigh
+pool-timeout|Thar am ag feitheamh leis an nglas
+pool-errorunknown|Earráid anaithnid
+aboutsite|Maidir leis an {{SITENAME}}
+aboutpage|Project:Maidir leis
+copyright|Tá an t-ábhar le fáil faoin ~{0}.
+copyrightpage|{{ns:project}}:Cóipchearta
+currentevents|Cúrsaí reatha
+currentevents-url|Project:Cúrsaí reatha
+disclaimers|Séanadh
+disclaimerpage|Project:Séanadh_ginearálta
+edithelp|Cabhair eagarthóireachta
+mainpage|Príomhleathanach
+mainpage-description|Príomhleathanach
+policy-url|Project:Polasaí
+portal|Lárionad comhphobail
+portal-url|Project:Ionad pobail
+privacy|Polasaí príobháideachta
+privacypage|Project:Polasaí príobháideachta
+badaccess|Earráid ceada
+badaccess-group0|Níl cead agat an gníomh a roghnaigh tú a dhéanamh.
+badaccess-groups|Níl cead ag daoine é sin a dhéanamh ach amháin {{PLURAL:~{1}\u007Cduine sa ghrúpa\u007Cdaoine sna grúpaí}}: ~{0}.
+versionrequired|Tá leagan ~{0} de MediaWiki de dhíth
+versionrequiredtext|Tá an leagan ~{0} de MediaWiki riachtanach chun an leathanach seo a úsáid. Féach ar [[Special:Version]]
+ok|Déan
+pagetitle|~{0} - {{SITENAME}}
+pagetitle-view-mainpage|{{SITENAME}}
+retrievedfrom|Aisghabháil ó "~{0}"
+youhavenewmessages|Tá ~{0} agat (~{1}).
+youhavenewmessagesmulti|Tá teachtaireachtaí nua agat ar ~{0}
+editsection|athraigh
+editold|athraigh
+viewsourceold|féach ar foinse
+editlink|cur in eagar
+viewsourcelink|féach ar an foinse
+editsectionhint|Athraigh mír: ~{0}
+showtoc|taispeáin
+hidetoc|folaigh
+thisisdeleted|Breathnaigh nó cuir ar ais ~{0}?
+viewdeleted|Féach ar ~{0}?
+restorelink|{{PLURAL:~{0}\u007Cathrú scriosta amháin\u007C~{0} athruithe scriosta}}
+feedlinks|Fotha:
+feed-invalid|Cineál liostáil fotha neamhbhailí.
+feed-unavailable|Níl fotha sindeacáitiú ar fáil
+site-rss-feed|~{0} Fotha RSS
+site-atom-feed|~{0} Fotha Atom
+page-rss-feed|"~{0}" Fotha RSS
+page-atom-feed|"~{0}" Fotha Atom
+feed-atom|Atom
+feed-rss|RSS
+red-link-title|~{0} (níl an leathanach ann)
+nstab-main|Alt
+nstab-user|Lch úsáideora
+nstab-media|Lch meáin
+nstab-special|Leathanach speisialta
+nstab-project|Tionscadal
+nstab-image|Comhad
+nstab-mediawiki|Teachtaireacht
+nstab-template|Teimpléad
+nstab-help|Cabhair
+nstab-category|Catagóir
+nosuchaction|Níl a leithéid de ghníomh ann
+nosuchactiontext|Níl aithníonn an vicí an gníomh atá ann san URL.\nAn ndearna tú botún san URL, no ar lean tú nasc mícheart?\nAn bhfuil fadhb sna bogearraí atá in usáid ar {{SITENAME}}?
+nosuchspecialpage|Níl a leithéid de leathanach speisialta ann
+nospecialpagetext|<strong>Tá tú tar éis iarradh ar leathanach speisialta neamhbhailí.</strong>\n\nTá liosta de leathanaigh speisialta bhailí ar fáil ag [[Special:SpecialPages\u007C{{int:specialpages}}]].
+error|Earráid
+databaseerror|Earráid sa bhunachar sonraí
+laggedslavemode|Rabhadh: B'fhéidir nach bhfuil na nuashonrúcháin is déanaí le feiceáil ar an leathanach seo.
+readonly|Bunachar sonraí faoi ghlas
+enterlockreason|Iontráil cúis don glasáil, agus meastachán\nden uair a díghlasálfar an bunachar sonraí.
+readonlytext|Tá an bunachar sonraí {{GRAMMAR:genitive\u007C{{SITENAME}}}} glasáilte anois do iontráilí agus athruithe nua\n(is dócha go bhfuil sé do gnáthchothabháil).\nTar éis seo, díghlasálfar an bunachar sonraí arís.\nTugadh an míniú seo ag an riarthóir a ghlasáil é:\n~{0}
+missing-article|Ní bhfuarthas téacs an leathanaigh ceart, darbh ainm "~{0}" ~{1}.\n\nDe ghnáth, tarlaíonn sé seo nuair a leantar nasc stáire nó difr chuig leathanach a scriosadh.\n\nMurab fhíor é seo, is féidir go bhfuair tú fabht sa bhogearraí. Beimid buíoch duit é a chur in iúl do [[Special:ListUsers/sysop\u007Criarthóir]], chomh maith le URL an suíoimh.
+missingarticle-rev|(leagan#: ~{0})
+missingarticle-diff|(Dif: ~{0}, ~{1})
+readonly_lag|Glasáladh an bunachar sonraí go huathoibríoch, go dtiocfaidh na sclábhfhreastalaithe suas leis an máistirfhreastalaí.
+internalerror|Earráid inmhéanach
+internalerror_info|Earráid inmhéanach: ~{0}
+filecopyerror|Ní féidir an comhad "~{0}" a chóipeáil go "~{1}".
+filerenameerror|Ní féidir an comhad "~{0}" a athainmnigh mar "~{1}".
+filedeleteerror|Ní féidir an comhad "~{0}" a scriosaigh amach.
+directorycreateerror|Ní féidir an chomhadlann "~{0}" a chruth.
+filenotfound|Ní bhfuarthas an comhad "~{0}".
+unexpected|Luach gan súil leis: "~{0}"="~{1}".
+formerror|Earráid: ní féidir an foirm a tabhair isteach
+badarticleerror|Ní féidir an gníomh seo a dhéanamh ar an leathanach seo.
+cannotdelete|Ní féidir an leathanach nó comhad "~{0}" a scriosadh.\nB'fhéidir gur scrios duine eile é cheana féin.
+badtitle|Teideal neamhbhailí
+badtitletext|Bhí teideal an leathanaigh a d'iarr tú ar neamhbhailí, folamh, nó\nteideal idirtheangach nó idirvicí nasctha go mícheart.
+perfcached|Fuarthas na sonraí a leanas as taisce, agus is dócha go bhfuil siad as dáta. A maximum of {{PLURAL:~{0}\u007Cone result is\u007C~{0} results are}} available in the cache.
+perfcachedts|Tá na sonraí seo a leanas sa taisce, nuashonraithe ~{0}. A maximum of {{PLURAL:~{3}\u007Cone result is\u007C~{3} results are}} available in the cache.
+viewsource|Féach ar fhoinse
+actionthrottled|Gníomh scóigthe
+actionthrottledtext|Mar theicníc frithurscair, ní féidir lear an gníomh seo a dhéanamh barraíocht taobh istigh de thréimhse ghairid ama, agus tá an méid sáraithe agat.\nBain trial arís as i gcionn cúpla bomaite más é do thoil é.
+protectedpagetext|Tá an leathanach seo glasáilte chun coisc ar eagarthóireacht.
+viewsourcetext|Is féidir foinse an leathanach seo a fheiceáil ná a cóipeáil:
+editinginterface|'''Rabhadh:''' Tá tú ag athrú leathanaigh a bhfuil téacs comhéadain do na bogearraí air. Cuirfear athruithe ar an leathanach seo i bhfeidhm ar an gcomhéadan úsáideora.\nMás maith leat MediaWiki a aistriú, cuimhnigh ar [//translatewiki.net/wiki/Main_Page?setlang=ga translatewiki.net] (tionscadal logánaithe MediaWiki) a úsáid.
+namespaceprotected|Ní chead agat leathanaigh a chur in eagar san ainmspás '''~{0}'''.
+ns-specialprotected|Ní féidir leathanaigh speisialta a chur in eagar.
+titleprotected|Tá an teideal seo cosanta ar chruthú le [[User:~{0}\u007C~{0}]].\nAn fáth ná ''~{1}''.
+virus-scanfailed|theip an scan (cód ~{0})
+virus-unknownscanner|frithvíreas anaithnid:
+logouttext|'''Tá tú logáilte amach anois.'''\n\nIs féidir leat an {{SITENAME}} a úsáid fós gan ainm, nó is féidir leat <span class='plainlinks'>[~{0} logáil isteach arís]</span> mar an úsáideoir céanna, nó mar úsáideoir eile.\nTabhair faoi deara go taispeáinfear roinnt leathanaigh mar atá tú logáilte isteach fós, go dtí go ghlanfá amach do taisce líonleitheora.
+welcomeuser|Fáilte, ~{0}!
+welcomecreation-msg|Cruthaíodh do chuntas.
+yourname|D'ainm úsáideora
+userlogin-yourname|Ainm úsáideora
+yourpassword|D'fhocal faire
+yourpasswordagain|Athiontráil d'fhocal faire
+remembermypassword|Cuimhnigh ar m'fhocal faire ar an ríomhaire seo (ar feadh uastréimhse de ~{0} {{PLURAL:~{0}\u007Clá\u007Clá}})
+yourdomainname|D'fhearann
+externaldberror|Bhí earráid bhunachair sonraí ann maidir le fíordheimhniú seachtrach, nóThere was either an external authentication database error or you are not allowed to update your external account.
+login|Logáil isteach
+nav-login-createaccount|Logáil isteach
+userlogin|Logáil isteach / cruthaigh cuntas
+userloginnocreate|Logáil isteach
+logout|Logáil amach
+userlogout|Logáil amach
+notloggedin|Níl tú logáilte isteach
+nologin|Nach bhfuil logáil isteach agat? '''~{0}'''.
+nologinlink|Cruthaigh cuntas
+createaccount|Cruthaigh cuntas nua
+gotaccount|An bhfuil cuntas agat cheana féin? '''~{0}'''.
+gotaccountlink|Logáil isteach
+userlogin-resetlink|Sonraí logála isteach dearmadta agat?
+createacct-emailrequired|Seoladh ríomhphoist
+createacct-email-ph|Iontráil do sheoladh ríomhphoist
+createacct-another-email-ph|Iontráil seoladh ríomhphoist
+createaccountmail|le ríomhphost
+createaccountreason|Fáth:
+createacct-reason|Cúis
+createacct-submit|Cruthaigh do chuntas
+createacct-another-submit|Cruthaigh cuntas eile
+badretype|D'iontráil tú dhá fhocal faire difriúla.
+userexists|Tá an ainm úsáideora sin in úsáid cheana féin.<br />\nRoghnaigh ainm eile agus bain triail eile as.
+loginerror|Earráid leis an logáil isteach
+createaccounterror|Theip ar an cuntas a chruthú: ~{0}
+nocookiesnew|Cruthaíodh an cuntas úsáideora, ach níl tú logáilte isteach.\n\nÚsáideann {{SITENAME}} fianáin chun úsáideoirí a logáil isteach.\nTá fianáin díchumasaithe agat.\nCumasaigh iad le do thoil, agus ansin logáil isteach le d'ainm úsáideora agus d'fhocal faire úrnua.
+nocookieslogin|Úsáideann {{SITENAME}} fianáin chun úsáideoirí a logáil isteach.\nTá fianáin díchumasaithe agat.\nCumasaigh iad agus bain triail eile as, le do thoil.
+nocookiesforlogin|{{int:nocookieslogin}}
+noname|Níor thug tú ainm úsáideora bailí.
+loginsuccesstitle|Logáladh isteach thú
+loginsuccess|'''Tá tú logáilte isteach anois sa {{SITENAME}} mar "<nowiki>~{0}</nowiki>".'''
+nosuchuser|Níl aon úsáideoir ann leis an ainm "~{0}".\nTá ainmneacha úsáideoir cásíogair.\nCinntigh do litriú, nó [[Special:UserLogin/signup\u007Cbain úsáid as an foirm thíos]] chun cuntas úsáideora nua a chruthú.
+nosuchusershort|Níl aon úsáideoir ann leis an ainm "~{0}". Cinntigh do litriú.
+nouserspecified|Caithfidh ainm úsáideoir a shonrú.
+login-userblocked|Tá an t-úsáideoir seo faoi bhac. Níl cead aige/aici logáil isteach.
+wrongpassword|D'iontráil tú focal faire mícheart.<br />\nBain triail eile as.
+wrongpasswordempty|Níor iontráil tú focal faire. Bain triail eile as.
+passwordtooshort|Is riachtanach go bhfuil {{PLURAL:~{0}\u007Ccarachtar amháin\u007C~{0} carachtair}} ann ar a laghad i bhfocal faire.
+mailmypassword|Seol m'fhocal faire chugam.
+passwordremindertitle|Cuimneachán an fhocail faire ó {{SITENAME}}
+passwordremindertext|D'iarr duine éigin (tusa de réir cosúlachta, ón seoladh IP ~{0}) go sheolfaimis focal faire {{GRAMMAR:genitive\u007C{{SITENAME}}}} nua  (~{3}).\n"~{2}" an focal faire don úsáideoir "~{1}" anois. Ba chóir duit lógail isteach anois agus d'fhocal faire a athrú.\n\nRachaidh d'fhocail faire sealadach as feidhm i gceann {{PLURAL:~{4}\u007Clá amháin\u007C~{4} lae}}.
+noemail|Níl aon seoladh ríomhphoist i gcuntas don úsáideoir "~{0}".
+noemailcreate|Caithfidh tú ríomhphost bailí a thabhairt
+passwordsent|Cuireadh focal nua faire chuig an ríomhsheoladh atá cláraithe do "~{0}".\nNuair atá sé agat, logáil isteach arís chun fíordheimhniu a dhéanamh.
+eauthentsent|Cuireadh teachtaireacht ríomhphoist chuig an seoladh\nchun fíordheimhniú a dhéanamh. Chun fíordheimhniú a dhéanamh gur leatsa an cuntas, caithfidh tú glac leis an teachtaireacht sin nó ní sheolfar aon rud eile chuig do chuntas.
+throttled-mailpassword|Seoladh meabhrúchán fhocal faire cheana, níos lú ná {{PLURAL:~{0}\u007Cuair amháin\u007C~{0} uair}} ó shin.\nChun droch-úsáid a choscadh, ní sheolfar ach meabhrúchán fhocal faire amháin gach {{PLURAL:~{0}\u007Cuair\u007C~{0} uair}}.
+mailerror|Tharlaigh earráid leis an seoladh: ~{0}
+acct_creation_throttle_hit|Gabh ár leithscéal, ach tá {{PLURAL:~{0}\u007Ccuntas amháin\u007C~{0} cuntais}} a chruthaigh tú cheana féin.\nNí féidir leat níos mó ná an méid sin a chruthú.
+emailauthenticated|Fíordheimhníodh do sheoladh ríomhphoist ar an ~{1} ar ~{2}.
+emailnotauthenticated|Ní dhearna fíordheimhniú ar do sheoladh ríomhphoist fós, agu díchumasaítear na hardtréithe ríomhphoist go dtí go fíordheimhneofaí é (d.c.f.).\nChun fíordheimhniú a dhéanamh, logáil isteach leis an focal faire neamhbhuan atá seolta chugat, nó iarr ar ceann nua ar an leathanach logála istigh.
+noemailprefs|Is gá do sheoladh r-phoist a chur isteach chun na gnéithe seo a úsáid.
+emailconfirmlink|Deimhnigh do ríomhsheoladh
+invalidemailaddress|Ní féidir an seoladh ríomhphoist a ghlacadh leis mar is dócha go bhfuil formáid neamhbhailí aige.\nIontráil seoladh dea-fhormáidte le do thoil, nó glan an réimse sin.
+accountcreated|Cúntas cruthaithe
+accountcreatedtext|Cruthaíodh cúntas úsáideora le haghaidh ~{0}.
+createaccount-title|Cuntas cruthú le {{SITENAME}}
+createaccount-text|Chruthaigh duine éigin cuntas do do sheoladh ríomhphoist ar {{SITENAME}} (~{3}) leis an ainm "~{1}" agus pasfhocal "~{2}". Ba cheart duit logáil isteach agus do phasfhocal a athrú anois. Is féidir leat neamhaird a thabhairt don teachtaireacht seo má cruthaíodh trí earráid í.
+loginlanguagelabel|Teanga: ~{0}
+php-mail-error-unknown|Earráid anaithnid i bhfeidhm mail() de chuid PHP
+changepassword|Athraigh d'fhocal faire
+resetpass_announce|Tá tú logáilte isteach le cód sealadach a seoladh chugat i r-phost.\nChun d'iarratas logáil isteach a chríochnú, caithfidh tú focal faire nua a roghnú anseo:
+resetpass_text|<!-- Cur téacs anseo -->
+resetpass_header|Athraigh focal faire an chuntais
+oldpassword|Focal faire reatha:
+newpassword|Focal faire nua:
+retypenew|Athiontráil an focal nua faire:
+resetpass_submit|Roghnaigh focal faire agus logáil isteach
+resetpass_forbidden|Ní féidir focail faire a athrú
+resetpass-no-info|Caithfidh tú bheith logáilte istigh chun teacht ar an leathanach seo go díreach.
+resetpass-submit-loggedin|Athraigh d'fhocal faire
+resetpass-submit-cancel|Cealaigh
+resetpass-temp-password|Focal faire sealadach:
+passwordreset-username|Ainm úsáideora:
+passwordreset-email|Seoladh ríomhphoist:
+changeemail-none|(neamhní)
+changeemail-password|D'fhocal faire {{SITENAME}}:
+extlink_sample|http://www.example.com ainm naisc
+extlink_tip|Nasc seachtrach (cuimhnigh an réimír http://)
+nowiki_sample|Cuir téacs neamhfhormáidithe anseo
+nowiki_tip|Cuir vicífhormáidiú ar ceal
+image_sample|Sámpla.jpg
+image_tip|Íomhá leabaithe
+media_sample|Sámpla.ogg
+media_tip|Nasc do chomhad meáin
+sig_tip|Do shíniú le stampa ama
+hr_tip|Líne cothrománach (inúsáidte go coigilteach)
+summary|Achoimriú:
+subject|Ábhar/ceannlíne:
+minoredit|Mionathrú é seo
+watchthis|Déan faire ar an lch seo
+savearticle|Sábháil an lch
+preview|Réamhamharc
+showpreview|Taispeáin réamhamharc
+showdiff|Taispeáin athruithe
+anoneditwarning|'''Rabhadh:''' Níl tú logáilte isteach. Cuirfear do sheoladh IP i stair eagarthóireachta an leathanaigh seo.
+missingsummary|'''Cuimhneachán:''' Níor thug tú achoimriú don athrú. Má chliceáileann tú Sábháil arís, sábhálfar an t-athrú gan é a hachoimriú.
+missingcommenttext|Cuir nóta tráchta isteach faoi seo, le do thoil.
+summary-preview|Réamhamharc an achoimriú:
+blockedtitle|Tá an úsáideoir seo faoi chosc
+blockedtext|'''Chuir ~{0} cosc ar d’ainm úsáideora nó ar do sheoladh IP.'''\n\nIs í seo an chúis a thugadh:<br />''~{1}''.<p>Is féidir leat teagmháil a dhéanamh le ~{0} nó le duine eile de na [[{{MediaWiki:Grouppage-sysop}}\u007Criarthóirí]] chun an cosc a phlé.\n\n* Tús an choisc: ~{7}\n* Dul as feidhm: ~{5}\n* Sprioc an choisc: ~{6}\n<br />\nTabhair faoi deara nach féidir leat an gné "cuir ríomhphost chuig an úsáideoir seo" a úsáid mura bhfuil seoladh ríomhphoist bailí cláraithe i do [[Special:Preferences\u007Cshocruithe úsáideora]].\n\nIs é ~{2} do sheoladh IP agus #~{4} do ID coisc. Déan tagairt don seoladh seo le gach ceist a chuirfeá.
+blockednoreason|níl chúis a thugadh
+whitelistedittext|Ní mór duit ~{0} chun ailt a athrú.
+nosuchsectiontitle|Níl a leithéad de mhír ann
+loginreqtitle|Tá logáil isteach de dhíth ort
+loginreqlink|logáil isteach
+loginreqpagetext|Caithfidh tú ~{0} chun leathanaigh a amharc.
+accmailtitle|Seoladh an focal faire.
+accmailtext|Seoladh focal faire don úsáideoir '~{0}' go dtí '~{1}'.
+newarticle|(Nua)
+newarticletext|Lean tú nasc chuig leathanach nach bhfuil ann fós.\nChun an leathanach a chruthú, tosaigh ag clóscríobh sa bhosca thíos\n(féach ar an [~{0} leathanach cabhrach] chun a thuilleadh eolais a fháil).\nMá tháinig tú anseo as dearmad, brúigh an cnaipe '''ar ais''' ar do bhrabhsálaí.
+anontalkpagetext|---- ''Leathanach plé é seo a bhaineann le húsáideoir gan ainm nár chruthaigh cuntas fós, nó nach bhfuil ag úsáid an chuntais. Dá bhrí sin, caithfimid an seoladh IP a úsáid chun é/í a (h)ionannú. Is féidir le níos mó ná úsáideoir amháin an seoladh IP céanna a úsáid. Má tá tú i d'úsáideoir gan ainm agus má cheapann tú go bhfuil teachtaireachtaí nach mbaineann leat seolta chugat, [[Special:UserLogin\u007Ccruthaigh cuntas]] nó [[Special:UserLogin\u007Clogáil isteach]] chun mearbhall le húsáideoirí eile gan ainmneacha a éalú amach anseo.''
+noarticletext|Níl aon téacs ar an leathanach seo faoi láthair.\nIs féidir [[Special:Search/{{PAGENAME}}\u007Ccuardach a dhéanamh le haghaidh an teidil seo]] i leathanaigh eile, nó <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} cuardach a dhéanamh sna logaí gaolmhara],\nnó [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} an leathanach seo a chur in eagar].</span>
+userpage-userdoesnotexist-view|Níl cuntas úsáideora "~{0}" cláraithe.
+clearyourcache|'''Tugtar faoi deara:''' Tar éis duit athruithe a shábháil, caithfear gabháil thar thaisce do bhrabhsálaí chun iad a fheiceáil. '''Internet Explorer:''' cliceáil ar an gcnaipe ''Athnuaigh'' nó ''Athlódáil'', agus an eochair ''Ctrl'' á bhrú agat. '''Firefox:''' cliceáil ar ''Athlódáil'', agus an eochair ''Iomlaoid'' á bhrú agat (nó brúigh ''Ctrl-Iomlaoid-R''). '''Opera:''' caithfear d'úsáideoirí a dtaiscí a ghlanadh trí ''Uirlisí→Sainroghanna''. Ní mór d'úsáideoirí '''Konqueror''' nó '''Safari''' ach cliceáil ar an gcnaipe ''Athlódáil''.
+usercssyoucanpreview|'''Leid:''' Sula sábhálann tú, úsáid an cnaipe "{{int:showpreview}}" chun do CSS nua a thástáil.
+userjsyoucanpreview|'''Leid:''' Sula sábhálann tú, úsáid an cnaipe "{{int:showpreview}}" chun do JavaScript nua a thástáil.
+usercsspreview|'''Cuimhnigh nach bhfuil seo ach réamhamharc do CSS úsáideora -\nníor sábháladh é go fóill!'''
+userjspreview|'''Cuimhnigh nach bhfuil seo ach réamhamharc do JavaScript úsáideora\n- níor sábháladh é go fóill!'''
+userinvalidcssjstitle|'''Rabhadh:''' Níl an craiceann "~{0}" ann.\nCuimhnigh go n-úsáideann leathanaigh shaincheaptha .css agus .js teideal i gcás íochtar, m.sh. {{ns:user}}:Foo/vector.css i leapa {{ns:user}}:Foo/Vector.css.
+updated|(Leasaithe)
+note|'''Tabhair faoi deara:'''
+previewnote|'''Cuimhnigh nach bhfuil ach réamhamharc sa leathanach seo.'''\nNíl do chuid athruithe shábháilte fós!
+previewconflict|San réamhamharc seo, feachann tú an téacs dé réir an eagarbhosca\nthuas mar a taispeáinfear é má sábháilfear é.
+editing|Ag athrú ~{0}
+editingsection|Ag athrú ~{0} (mir)
+editingcomment|Ag athrú ~{0} (mír nua)
+editconflict|Coimhlint athraithe: ~{0}
+explainconflict|D'athraigh duine eile an leathanach seo ó thosaigh tú ar a athrú.\nTá téacs an leathanaigh mar atá sé faoi láthair le feiceáil thuas.\nTá do chuid athruithe le feiceáil thíos.\nCaithfidh tú do chuid athruithe a chumasc leis an leagan reatha.\nNí shábhálfar '''ach''' an téacs thuas nuair a bhrúnn tú ar an gcnaipe "{{int:savearticle}}".
+yourtext|Do chuid téacs
+storedversion|Leagan sábháilte
+editingold|'''Rabhadh: Tá tú ag athrú leagan an leathanaigh seo atá as dáta.\nMá shábhálfar é, caillfear gach athrú a rinneadh i ndiaidh an leagain seo.'''
+yourdiff|Difríochtaí
+copyrightwarning|Tabhair faoi deara go dtuigtear go bhfuil gach dréacht do {{SITENAME}} eisithe faoi ~{1} (féach ar ~{0} le haghaidh tuilleadh eolais).\nMurar mian leat go gcuirfí do chuid scríbhinne in eagar go héadrócaireach agus go n-athdálfaí gan teorainn í, ná cuir isteach anseo í.<br />\nIna theannta sin, geallann tú gur scríobh tú féin an dréacht seo, nó gur chóipeáil tú é ó fhoinse san fhearann poiblí nó acmhainn eile saor ó chóipcheart (féach ar ~{0} le haghaidh tuilleadh eolais).\n'''NÁ CUIR ISTEACH OBAIR LE CÓIPCHEART GAN CHEAD!'''
+copyrightwarning2|Tabhair faoi deara gur féidir le heagarthóirí eile gach dréacht do {{SITENAME}} a chur in eagar, a athrú agus a scriosadh.\nMurar mian leat go gcuirfí do chuid scríbhinne in eagar go héadrócaireach, ná cuir isteach anseo í.<br />\nIna theannta sin, geallann tú gur scríobh tú féin an dréacht seo, nó gur chóipeáil tú é ó fhoinse san fhearann poiblí nó acmhainn eile saor ó chóipcheart (féach ar ~{0} le haghaidh tuilleadh eolais).\n'''NÁ CUIR ISTEACH OBAIR LE CÓIPCHEART GAN CHEAD!'''
+longpageerror|'''EARRÁID: Tá an téacs a chuir isteach ~{0} cilibheart ar fad, sin níos faide ná ~{1} cilibheart, an uasmhéid.\nNí féidir é a shábháil.'''
+readonlywarning|'''Rabhadh: Glasáladh an bunachar sonraí chun cothabháil a dhéanamh, agus mar sin ní féidir leat do chuid athruithe a shábháil go díreach anois.\nB'fhéidir gur mhaith leat an téacs a ghearradh is ghreamú isteach i gcomhad téacs agus é a úsáid níos déanaí.'''\n\nAn fáth ar thug an riarthóir a ghlasáil é: ~{0}
+protectedpagewarning|'''Rabhadh: Glasáladh an leathanach seo. Is féidir le riarthóirí amháin é a athrú.'''
+templatesused|{{PLURAL:~{0}\u007CTeimpléad\u007CTeimpléid}} a úsáidtear ar an leathanach seo:
+templatesusedpreview|{{PLURAL:~{0}\u007CTeimpléad\u007CTeimpléid}} a úsáidtear sa réamhamharc seo:
+templatesusedsection|{{PLURAL:~{0}\u007CTeimpléad amháin\u007C~{0} Teimpléad}} in úsáid sa mhír seo:
+template-protected|(glasáilte)
+template-semiprotected|(leathghlasáilte)
+edittools|<!-- Taispeánfar an téacs seo faoi foirmeacha eagarthóireachta agus uaslódála. -->
+nocreatetext|Tá srianadh ar {{SITENAME}} faoin leathanaigh nua a cruthaidh.\nIs féidir leat dul ar ais chun leathanach láithreach a athrú, nó [[Special:UserLogin\u007Clog isteach nó cruthaigh cuntas nua]].
+nocreate-loggedin|Níl cead agat leathanaigh nua a chruthú.
+permissionserrors|Cead rochtana earráidí
+permissionserrorstext-withaction|Níl cead agat ~{1}, mar gheall ar {{PLURAL:~{0}\u007Can fáth\u007Cna fáthanna}} seo a leanas:
+recreate-moveddeleted-warn|'''Rabhadh: Tá tú ag athchruthú leathanaigh a scriosadh cheana.'''\n\nAn bhfuil tú cinnte go bhfuil sé oiriúnach an leathanach seo a cur in eagar?\nCuirtear an loga scriosta ar fáil anseo mar áis:
+log-fulllog|Féach ar an logchomhad iomlán
+undo-summary|Cealaíodh athrú ~{0} le [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007Cplé]])
+cantcreateaccounttitle|Ní féidir cuntas a chruthú
+viewpagelogs|Féach ar logaí faoin leathanach seo
+nohistory|Níl aon stáir athraithe ag an leathanach seo.
+currentrev|Leagan reatha
+currentrev-asof|Leagan reatha ó ~{0}
+revisionasof|Leagan ó ~{0}
+revision-info|Leagan ó ~{0} le ~{1}
+previousrevision|← An leasú roimhe seo
+nextrevision|An chéad leasú eile →
+currentrevisionlink|Leagan reatha
+cur|rth
+next|i ndiadh
+last|rmh
+page_first|céad
+page_last|deireanach
+histlegend|Chun difríochtaí a roghnú, marcáil na cnaipíní de na heagráin atá tú ag iarraidh comparáid a dhéanamh astu, agus brúigh Iontráil nó an cnaipe ag bun an leathanaigh.<br />\nTreoir: (rth) = difríocht ón leagan reatha, (rmh) = difríocht ón leagan roimhe, <b>m</b> = mionathrú.
+history-fieldset-title|Brabhsáil an stáir
+histfirst|An ceann is luaithe
+histlast|An ceann is déanaí
+historysize|({{PLURAL:~{0}\u007CBeart amháin\u007C~{0} bearta}})
+historyempty|(folamh)
+history-feed-title|Stáir leasú
+history-feed-description|Stair leasú an leathanach seo ar an vicí
+history-feed-item-nocomment|~{0} ag ~{1}
+rev-deleted-user|(ainm úsáideora dealaithe)
+rev-delundel|taispeáin/folaigh
+rev-showdeleted|taispeáin
+revisiondelete|Scrios/díscrios leagain
+revdelete-show-file-confirm|An bhfuil tú cinnte gur mhaith leat féach ar leasú scriosta don chomhad "<nowiki>~{0}</nowiki>" ó ~{1} ag ~{2}?
+revdelete-show-file-submit|Tá
+logdelete-selected|{{PLURAL:~{0}\u007CTeagmhas log roghnaithe\u007CTeagmhais log roghnaithe}}:
+revdelete-hide-text|Folaigh leagan téacs
+revdelete-radio-same|ná hathraigh
+revdelete-radio-set|Is ea
+revdelete-radio-unset|Ní
+revdel-restore|athraigh infheictheacht
+pagehist|Stair leathanach
+deletedhist|Stair scriosta
+mergehistory-from|Leathanach fhoinse:
+mergehistory-reason|Fáth:
+revertmerge|Díchumaisc
+history-title|Stair leasú "~{0}"
+lineno|Líne ~{0}:
+compareselectedversions|Cuir na leagain roghnaithe i gcomparáid
+editundo|cealaigh
+searchresults|Torthaí an chuardaigh
+searchresults-title|Torthaí an chuardaigh do "~{0}"
+titlematches|Fuarthas leathanaigh faoin teideal seo
+textmatches|Fuarthas an téacs ar leathanaigh
+notextmatches|Ní bhfuarthas an téacs ar leathanach ar bith
+shown-title|Taispeáin ~{0} {{PLURAL:~{0}\u007Cthoradh\u007Ctorthaí}} an leathanach
+viewprevnext|Taispeáin (~{0} {{int:pipe-separator}} ~{1}) (~{2}).
+searchmenu-new|'''Cruthaigh an leathanach "[[:~{0}]]" ar an vicí seo!'''
+searchprofile-articles|Leathanaigh ábhair
+searchprofile-images|Ilmheáin
+searchprofile-everything|Gach rud
+searchprofile-advanced|Casta
+searchprofile-articles-tooltip|Cuardaigh i ~{0}
+searchprofile-images-tooltip|Cuardaigh le comhaid
+searchprofile-everything-tooltip|Cuardaigh an t-ábhar ar fad (leathanaigh plé san áireamh)
+searchprofile-advanced-tooltip|Cuardaigh in ainmspásanna saincheaptha
+search-result-size|~{0} ({{PLURAL:~{1}\u007Cfhocal amháin\u007C~{1} focail}})
+search-redirect|(athsheoladh ~{0})
+search-section|(gearradh ~{0})
+search-suggest|An raibh ~{0} á lorg agat?
+search-interwiki-caption|Comhthionscadail
+search-interwiki-default|~{0} torthaí:
+search-interwiki-more|(níos mó)
+search-relatedarticle|Gaolmhar
+searchrelated|gaolmhara
+searchall|an t-iomlán
+showingresults|Ag taispeáint thíos {{PLURAL:~{0}\u007C'''toradh amháin'''\u007C'''~{0}''' torthaí}}, ag tosú le #'''~{1}'''.
+search-nonefound|Ní bhfuarthas toradh ar bith ar an iarratas.
+powersearch-legend|Cuardach casta
+powersearch-ns|Cuardaigh in ainmspásanna:
+powersearch-toggleall|Uile
+powersearch-togglenone|Tada
+searchdisabled|Tá brón orainn! Mhíchumasaíodh an cuardach téacs iomlán go sealadach chun luas an tsuímh a chosaint. Idir an dá linn, is féidir leat an cuardach Google anseo thíos a úsáid - b'fhéidir go bhfuil sé as dáta.
+preferences|Sainroghanna
+mypreferences|Sainroghanna
+prefs-skin|Craiceann
+skin-preview|Réamhamharc
+datedefault|Is cuma liom
+prefs-personal|Sonraí úsáideora
+prefs-rc|Athruithe is déanaí
+prefs-watchlist|Liosta faire
+prefs-watchlist-days|Líon na laethanta le taispeáint sa liosta faire:
+prefs-watchlist-days-max|Maximum ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}}
+prefs-watchlist-edits|Líon na n-athruithe le taispeáint sa liosta leathnaithe faire:
+prefs-watchlist-edits-max|Uasmhéid: 1000
+prefs-misc|Éagsúla
+prefs-resetpass|Athraigh focal faire
+saveprefs|Sábháil
+restoreprefs|Cuir ar ais gach sainrogha réamhshocraithe
+prefs-editing|Eagarthóireacht
+rows|Sraitheanna
+columns|Colúin
+searchresultshead|Cuardaigh
+stub-threshold-disabled|Díchumasaithe
+recentchangesdays|Méid laethanta le taispeáint sna hathruithe is déanaí:
+recentchangesdays-max|(uasmhéid ~{0} {{PLURAL:~{0}\u007Clá\u007Clá}})
+recentchangescount|Méid athrú le taispeáint:
+savedprefs|Sábháladh do chuid sainroghanna.
+timezonelegend|Crios ama:
+localtime|An t-am áitiúil:
+timezoneuseserverdefault|Úsáid am réamhshocraithe an fhreastalaí
+timezoneuseoffset|Eile (cuir isteach an difear)
+servertime|Am an fhreastalaí:
+guesstimezone|Líon ón mbrabhsálaí
+timezoneregion-africa|An Afraic
+timezoneregion-america|Meiriceá
+timezoneregion-antarctica|Antartaice
+timezoneregion-arctic|Artach
+timezoneregion-asia|an Áise
+timezoneregion-atlantic|An tAigéan Atlantach
+timezoneregion-australia|An Astráil
+timezoneregion-europe|An Eoraip
+timezoneregion-indian|An tAigéan Indiach
+timezoneregion-pacific|An tAigéan Ciúin
+allowemail|Tabhair cead d'úsáideoirí eile ríomhphost a sheoladh chugat.
+prefs-namespaces|Ainmspáis
+default|réamhshocrú
+prefs-files|Comhaid
+youremail|Do ríomhsheoladh:
+username|D'ainm úsáideora:
+prefs-memberingroups|Comhalta {{PLURAL:~{0}\u007Can ghrúpa\u007Cna ghrúpaí}}:
+yourrealname|D'fhíorainm **
+yourlanguage|Teanga
+yourvariant|Difríocht teanga:
+yournick|Do leasainm (mar a bheidh i sínithe)
+badsig|Amhsíniú neamhbhailí; scrúdaigh na clibeanna HTML.
+badsiglength|Tá do shíniú ró-fhada.<br />\nCaithfidh sé bheith níos giorra ná {{PLURAL:~{0}\u007Ccarachtar\u007Ccarachtair}}.
+yourgender|Inscne:
+gender-unknown|Gan sonrú
+gender-male|Fireann
+gender-female|Baineann
+prefs-help-gender|Roghnach: úsáidtear an rogha seo chun an t-inscne cheart a úsáid agus na bogearraí ag tagairt don úsaideoir.\nBeidh an t-eolas seo poiblí.
+email|Ríomhphost
+prefs-help-realname|* <strong>Fíorainm</strong> (roghnach): má toghaíonn tú é sin a chur ar fáil, úsáidfear é chun\ndo chuid dreachtaí a chur i leith tusa.
+prefs-help-email|Is roghnach seoladh ríomhphoist a thabhairt, ach is riachtanach é chun focal faire a athshocrú, má dhéanann tú dearmad air.
+prefs-help-email-required|Ní foláir seoladh ríomhpoist a thabhairt.
+prefs-info|Buneolas
+prefs-i18n|Logánú
+prefs-signature|Síniú
+prefs-dateformat|Formáid dáta
+prefs-timeoffset|Difear ama
+prefs-advancedediting|Ardroghanna
+prefs-advancedrc|Ardroghanna
+prefs-advancedrendering|Ardroghanna
+prefs-advancedsearchoptions|Ardroghanna
+prefs-advancedwatchlist|Ardroghanna
+userrights|Bainistíocht cearta úsáideora
+userrights-user-editname|Iontráil ainm úsáideora:
+editusergroup|Cuir Grúpái Úsáideoirí In Eagar
+editinguser|Ag athrú ceart don úsáideoir '''[[User:~{0}\u007C~{0}]]''' ([[User talk:~{0}\u007C{{int:talkpagelinktext}}]]{{int:pipe-separator}}[[Special:Contributions/~{0}\u007C{{int:contribslink}}]])
+userrights-editusergroup|Cuir grúpaí na n-úsáideoirí in eagar
+saveusergroups|Sabháil cnuasach úsáideora
+userrights-groupsmember|Ball de:
+userrights-reason|Fáth:
+userrights-notallowed|Níl cead ag do chuntas ceartanna úsáideora a athrú.
+group|Grúpa:
+group-user|Úsáideoirí
+group-bot|Róbónna
+group-sysop|Riarthóirí
+group-bureaucrat|Maorlathaigh
+group-all|(iad uile)
+group-user-member|{{GENDER:~{0}\u007CÚsáideoir}}
+group-bot-member|Róbó
+group-sysop-member|Riarthóir
+group-bureaucrat-member|Maorlathach
+grouppage-bot|{{ns:project}}:Róbónna
+grouppage-sysop|{{ns:project}}:Riarthóirí
+grouppage-bureaucrat|{{ns:project}}:Maorlathaigh
+right-upload|Uaslódáil comhaid
+right-delete|Scrios leathanaigh
+right-undelete|Díscrios leathanach
+right-userrights|Cur gach cearta usáideoira in eagar
+newuserlogpage|Log cruthú úsáideoira
+rightslog|Log cearta úsáideoira
+action-edit|an leathanach seo a athrú
+action-createpage|cruthaigh leathanaigh
+action-createaccount|an cuntas seo a chruthú
+action-minoredit|an athrú seo a mharcáil mar mionathrú
+action-upload|uaslódáil an comhad
+nchanges|{{PLURAL:~{0}\u007CAthrú amháin\u007C~{0} athruithe}}
+recentchanges|Athruithe is déanaí
+recentchanges-legend|Roghanna do na hathruithe is déanaí
+recentchanges-summary|Déan faire ar na hathruithe is déanaí sa vicí ar an leathanach seo.
+recentchanges-feed-description|Rianaigh na n-athruite vicí is déanaí sa fotha seo.
+recentchanges-label-minor|Mionathrú é seo
+recentchanges-label-bot|Chomhlíon róbó an t-athrú seo
+recentchanges-legend-newpage|~{0} - leathanach nua
+rcnotefrom|Is iad seo a leanas na hathruithe ó <b>~{1}</b> (go dti <b>~{0}</b> taispeánaithe).
+rclistfrom|Taispeáin athruithe nua ó ~{2} ~{1} anuas
+rcshowhideminor|~{0} mionathruithe
+rcshowhidebots|~{0} róbónna
+rcshowhideliu|~{0} úsáideoirí atá logáilte isteach
+rcshowhideanons|~{0} úsáideoirí gan ainm
+rcshowhidepatr|~{0} athruithe faoi phatról
+rcshowhidemine|~{0} mo chuid athruithe
+rclinks|Taispeáin an ~{0} athrú is déanaí sa ~{1} lá seo caite<br />~{2}
+diff|difr
+hist|stair
+hide|Folaigh
+show|Taispeáin
+minoreditletter|m
+newpageletter|N
+boteditletter|r
+number_of_watching_users_pageview|[{{PLURAL:~{0}\u007Cúsáideoir amháin\u007C~{0} úsáideoirí}} ag faire]
+rc_categories_any|Aon chatagóir
+newsectionsummary|/* ~{0} */ mír nua
+rc-enhanced-expand|Taispeáin mionsonraithe (JavaScript riachtanach)
+rc-enhanced-hide|Folaigh shonraí
+recentchangeslinked|Athruithe gaolmhara
+recentchangeslinked-feed|Athruithe gaolmhara
+recentchangeslinked-toolbox|Athruithe gaolmhara
+recentchangeslinked-title|Athruithe gaolmhara le "~{0}"
+recentchangeslinked-summary|Seo liosta na n-athruithe atá deanta is déanaí le leathanaigh atá naiscthe as leathanach sonraithe (nó baill an chatagóir sonraithe).\nTá na leathanaigh ar do [[Special:Watchlist\u007Cliosta faire]] i '''gcló trom'''.
+recentchangeslinked-page|Ainm leathanaigh:
+recentchangeslinked-to|Taispeáin athruithe do leathanaigh nasctha leis an leathanach áirithe sin ina áit.
+upload|Uaslódaigh comhad
+uploadbtn|Uaslódaigh comhad
+reuploaddesc|Dul ar ais chuig an fhoirm uaslódála.
+uploadnologin|Nil tú logáilte isteach
+uploadnologintext|Ní mór duit [[Special:UserLogin\u007Clogáil isteach]] chun comhaid a huaslódáil.
+uploaderror|Earráid uaslódála
+uploadtext|Bain úsáid as an bhfoirm thíos chun comhaid a uaslódáil.\nChun comhaid atá ann cheana a fheiceáil nó a chuardach téigh chuig an [[Special:FileList\u007Cliosta comhad uaslódáilte]]. Gheobhaidh tú liosta de chomhaid uaslódáilte sa [[Special:Log/upload\u007Cloga uaslódála]] agus liosta de chomhaid scriosta sa [[Special:Log/delete\u007Cloga scriosta]] freisin.\n\nChun comhad a úsáid ar leathanach, cuir isteach nasc mar seo:\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:comhad.jpg]]</nowiki></code>''' chun leagan iomlán an chomhad a úsáid\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:comhad.png\u007C200px\u007Cthumb\u007Cleft\u007Ctéacs eile]]</nowiki></code>''' chun comhad le 200 picteillín ar leithead i mbosca san imeall clé le 'téacs eile' mar tuairisc\n* '''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:comhad.ogg]]</nowiki></code>''' más comhad fuaime atá i gceist
+upload-permitted|Cineálacha comhaid ceadaithe: ~{0}.
+uploadlogpage|Stair_uaslódála
+uploadlogpagetext|Is liosta é seo a leanas de na uaslódáil comhad is deanaí.\nIs am an freastalaí iad na hamanna atá anseo thíos.
+filename|Comhadainm
+filedesc|Achoimriú
+fileuploadsummary|Achoimre:
+filestatus|Stádas cóipchirt:
+filesource|Foinse:
+ignorewarning|Déan neamhaird den rabhadh agus sábháil an comhad ar an chor
+ignorewarnings|Déan neamhaird aon rabhaidh
+illegalfilename|Tá litreacha san comhadainm  "~{0}" nach ceadaítear in ainm leathanaigh. Athainmnigh\nan comhad agus déan athiarracht, más é do thoil é.
+badfilename|D'athraíodh an ainm íomhá bheith "~{0}".
+filetype-badmime|Ní ceadaítear comhaid den saghas MIME "~{0}" a uaslódáil.
+emptyfile|De réir a chuma, ní aon rud san chomhad a d'uaslódáil tú ach comhad folamh. Is dócha gur\nmíchruinneas é seo san ainm chomhaid. Seiceáil más é an comhad seo atá le huaslódáil agat.
+fileexists-forbidden|Tá comhad eile leis an ainm seo ann fós, agus ní féidie é a forscríobh.\nMá theastáilann uait do chomhad a uaslódáil fós, téigh ar ais agus úsáid ainm nua, le do thoil. [[File:~{0}\u007Cthumb\u007Ccenter\u007C~{0}]]
+uploadwarning|Rabhadh suaslódála
+savefile|Sábháil comhad
+uploaddisabled|Tá brón orainn, ní féidir aon rud a uaslódáil faoi láthair.
+uploaddisabledtext|Tá cosc ar uaslódáil comhad.
+uploadvirus|Tá víreas ann sa comhad seo! Eolas: ~{0}
+sourcefilename|Comhadainm foinse:
+destfilename|Comhadainm sprice:
+upload-maxfilesize|Méad comhad is mó: ~{0}
+watchthisupload|Déan faire ar an leathanach seo
+upload-success-subj|D'éirigh leis an uaslódáil
+upload-proto-error|Prótacal mícheart
+upload-file-error|Earráid inmheánach
+license|Ceadúnas:
+license-header|Ceadúnú
+nolicense|Níl aon cheann roghnaithe
+upload_source_url| (URL bailí is féidir a rochtain go poiblí)
+upload_source_file| (comhad ar do riomhaire)
+listfiles_search_for|Cuardaigh le íomhá ab ainm:
+imgfile|comhad
+listfiles|Liosta íomhánna
+listfiles_date|Dáta
+listfiles_name|Ainm
+listfiles_user|Úsáideoir
+listfiles_size|Méid
+listfiles_description|Tuairisc
+file-anchor-link|Comhad
+filehist|Stair comhad
+filehist-help|Clic ar dáta/am chun an comhad a radharc mar a bhí sé ar an am.
+filehist-deleteone|scrios
+filehist-current|reatha
+filehist-datetime|Dáta/Am
+filehist-thumb|Mionsamhail
+filehist-thumbtext|Mionsamhail do leagan ó ~{0}
+filehist-user|Úsáideoir
+filehist-dimensions|Toisí
+filehist-filesize|Méid an comhad
+filehist-comment|Nóta tráchta
+imagelinks|Úsáid comhaid
+linkstoimage|Tá nasc chuig an gcomhad seo ar {{PLURAL:~{0}\u007Cna leathanaigh\u007C~{0} an leathanach}} seo a leanas:
+nolinkstoimage|Níl nasc ó aon leathanach eile don íomhá seo.
+sharedupload|Is uaslodáil roinnte atá ann sa comhad seo, as ~{0}, agus is féidir le tionscadail eile é a úsáid.
+uploadnewversion-linktext|Uaslódáil leagan nua den comhad seo
+shared-repo|comhstóráil
+shared-repo-name-wikimediacommons|an Cómhaoin Vicíméid
+filerevert|Fill ~{0} ar ais
+filerevert-legend|Fill comhad ar ais
+filerevert-comment|Nóta tráchta:
+filerevert-defaultcomment|Filleadh ar ais go leagan ó ~{1}, ~{0}
+filerevert-submit|Athúsáid
+filerevert-success|Filleadh '''[[Media:~{0}\u007C~{0}]]''' go leagan [~{3} ó ~{2}, ~{1}].
+filedelete|Scrios ~{0}
+filedelete-legend|Scrios comhad
+filedelete-submit|Scrios
+filedelete-success|'''~{0}''' a bheith scriosta.
+filedelete-success-old|An leagan '''[[Media:~{0}\u007C~{0}]]''' as ~{2}, ~{1} a bheith scriosta.
+filedelete-reason-otherlist|Fáth eile
+mimesearch|Cuardaigh MIME
+download|íoslódáil
+unwatchedpages|Leathanaigh gan faire
+listredirects|Liosta athsheoltaí
+unusedtemplates|Teimpléid nach n-úsáidtear
+unusedtemplateswlh|naisc eile
+randompage|Leathanach fánach
+randompage-nopages|Níl aon leathanaigh san ainmspás "~{0}".
+randomredirect|Atreorú randamach
+statistics-header-users|Staidreamh úsáideora
+doubleredirects|Athsheoltaí dúbailte
+doubleredirectstext|<b>Tabhair faoi deara:</b> B'fheidir go bhfuil toraidh bréagacha ar an liosta seo.\nDe ghnáth cíallaíonn sé sin go bhfuil téacs breise le naisc thíos sa chéad #REDIRECT no #ATHSHEOLADH.<br />\n Sa\ngach sraith tá náisc chuig an chéad is an dara athsheoladh, chomh maith le chéad líne an dara téacs athsheolaidh. De\nghnáth tugann sé sin an sprioc-alt "fíor".
+brokenredirects|Atreoruithe briste
+brokenredirectstext|Is iad na athsheolaidh seo a leanas a nascaíonn go ailt nach bhfuil ann fós:
+brokenredirects-edit|athraigh
+brokenredirects-delete|scrios
+withoutinterwiki|Leathanaigh gan naisc idirvicí
+withoutinterwiki-legend|Réimír
+withoutinterwiki-submit|Taispeáin
+fewestrevisions|Leathanaigh leis na leasaithe is lú
+nbytes|~{0} {{PLURAL:~{0}\u007Cbheart amháin\u007Cbearta}}
+ncategories|~{0} {{PLURAL:~{0}\u007Cchatagóir amháin\u007Ccatagóirí}}
+nlinks|{{PLURAL:~{0}\u007Cnasc amháin\u007C~{0} naisc}}
+nmembers|{{PLURAL:~{0}\u007Cball amháin\u007C~{0} baill}}
+nrevisions|{{PLURAL:~{0}\u007CLeagan amháin\u007C~{0} leagain}}
+nviews|{{PLURAL:~{0}\u007Cradharc amháin\u007C~{0} radhairc}}
+lonelypages|Leathanaigh aonair
+uncategorizedpages|Leathanaigh gan chatagóir
+uncategorizedcategories|Catagóirí gan chatagórú
+uncategorizedimages|Íomhánna gan chatagóir
+uncategorizedtemplates|Teimpléid gan chatagóir
+unusedcategories|Catagóirí nach n-úsáidtear
+unusedimages|Íomhánna nach n-úsáidtear
+wantedcategories|Catagóirí agus iarraidh ag gabháil leis
+wantedpages|Leathanaigh de dhíth
+mostlinked|Leathanaigh is mó naisc chucu
+mostlinkedcategories|Catagóirí is mó naisc chucu
+mostlinkedtemplates|Na teimpléid naiscthe is mó
+mostcategories|Leathanaigh is mó catagóirí acu
+mostimages|Na comhaid naiscthe is mó
+mostrevisions|Leathanaigh leis na leasaithe is mó
+prefixindex|Gach leathanach le réimír
+shortpages|Leathanaigh ghearra
+longpages|Leathanaigh fhada
+deadendpages|Leathanaigh chaocha
+protectedpages|Leathanaigh chosanta
+protectedtitles|Teidil chosanta
+listusers|Liosta úsáideoirí
+newpages|Leathanaigh nua
+newpages-username|Ainm úsáideora:
+ancientpages|Na leathanaigh is sine
+move|Athainmnigh
+movethispage|Athainmnigh an leathanach seo
+unusedimagestext|Tá na comhaid a leanas ann ach níl siad leabaithe i leathanach ar bith.\nTabhair faoi deara gur féidir le suímh eile nasc a dhéanamh le comhad trí URL díreach, agus mar sin bheadh siad ar an liosta seo fós cé go bhfuil siad in úsáid faoi láthair.
+unusedcategoriestext|Tá na leathanaigh catagóire seo a leanas ann, cé nach n-úsáidtear iad in aon alt eile nó in aon chatagóir eile.
+notargettitle|Níl aon cuspóir ann
+notargettext|Níor thug tú leathanach nó úsáideoir sprice\nchun an gníomh seo a dhéanamh ar.
+pager-newer-n|{{PLURAL:~{0}\u007C1 níos nuaí\u007C~{0} níos nuaí}}
+pager-older-n|{{PLURAL:~{0}\u007C1 níos sine\u007C~{0} níos sine}}
+booksources|Leabharfhoinsí
+booksources-search-legend|Cuardaigh le foinsí leabhar
+specialloguserlabel|Úsáideoir:
+speciallogtitlelabel|Teideal:
+log|Logaí
+all-logs-page|Gach loga poiblí
+alllogstext|Bailiúchán cuimsitheach de gach loga {{SITENAME}}.\nIs féidir leat an méid ar taispeáint a chúngú trí roghnú an saghas loga, an t-ainm úsáideora (cásíogair), nó an leathanach (cásíogair freisin) atá i gceist agat.
+allpagesfrom|Taispeáin leathanaigh ó:
+allpagesto|Go:
+allarticles|Gach alt
+allinnamespace|Gach leathanach (ainmspás ~{0})
+allpagessubmit|Gabh
+allpagesprefix|Taispeáin leathanaigh leis an réimír:
+allpages-bad-ns|Níl an t-ainmspás "~{0}" ar {{SITENAME}}
+categoriespagetext|Tá leathanaigh nó meáin {{PLURAL:~{0}\u007Csa chatagóir\u007Csna catagóirí}} seo a leanas.\nNí thaispeántar [[Special:UnusedCategories\u007Ccatagóiri neamhúsáidte]] anseo.\nFéach freisin ar [[Special:WantedCategories\u007Ccatagóirí faoi iarraidh]].
+deletedcontributions|Dréachtaí úsáideora scriosta
+deletedcontributions-title|Dréachtaí úsáideora scriosta
+linksearch|Naisc eachtraigh
+linksearch-ns|Ainmspás:
+linksearch-ok|Cuardaigh
+linksearch-line|~{0} naiscthe as ~{1}
+listusers-submit|Taispeáin
+listgrouprights-group|Ghrúpa
+listgrouprights-rights|Cearta
+listgrouprights-members|(liostaigh baill)
+mailnologin|Níl aon seoladh maith ann
+mailnologintext|Ní mór duit bheith  [[Special:UserLogin\u007Clogáilte isteach]]\nagus bheith le seoladh ríomhphoist bhailí i do chuid [[Special:Preferences\u007Csainroghanna]]\nmás mian leat ríomhphost a sheoladh chuig úsáideoirí eile.
+emailuser|Cuir ríomhphost chuig an úsáideoir seo
+emailpage|Seol ríomhphost
+emailpagetext|Má d'iontráil an úsáideoir seo seoladh ríomhphoist bhailí ina chuid sainroghanna úsáideora, cuirfidh an foirm anseo thíos teachtaireacht amháin do.\nBeidh do seoladh ríomhphoist a d'iontráil tú i [[Special:Preferences\u007Cdo chuid sainroghanna úsáideora]] sa bhosca "Seoltóir" an riomhphoist, agus mar sin ba féidir léis an faighteoir ríomhphost eile a chur leatsa.
+defemailsubject|Ríomhphost {{GRAMMAR:genitive\u007C{{SITENAME}}}}
+noemailtitle|Níl aon seoladh ríomhphoist ann
+noemailtext|Níor thug an úsáideoir seo seoladh ríomhphoist bhailí.
+emailusername|Ainm úsáideora:
+emailfrom|Seoltóir:
+emailto|Chuig:
+emailsubject|Ábhar:
+emailmessage|Teachtaireacht:
+emailsend|Seol
+emailsent|Ríomhphost seolta
+emailsenttext|Seoladh do theachtaireacht ríomhphoist go ráthúil.
+watchlist|Liosta faire
+mywatchlist|Liosta faire
+watchlistfor2|Do ~{0} (~{1})
+nowatchlist|Níl aon rud ar do liosta faire.
+watchlistanontext|~{0}, le d'thoil, chun míreanna ar do liosta faire a fheiceáil ná a athrú.
+watchnologin|Níl tú logáilte isteach
+addedwatchtext|Cuireadh an leathanach "<nowiki>~{0}</nowiki>" le do [[Special:Watchlist\u007Cliosta faire]].\nAmach anseo liostálfar athruithe don leathanach seo agus dá leathanach plé ansin,\nagus beidh '''cló trom''' ar a theideal san [[Special:RecentChanges\u007Cliosta de na hathruithe is déanaí]] sa chaoi go bhfeicfeá iad go héasca.
+removedwatchtext|Baineadh an leathanach "[[:~{0}]]" as [[Special:Watchlist\u007Cdo liosta faire]].
+watch|Déan faire
+watchthispage|Déan faire ar an leathanach seo
+unwatch|Ná fair
+unwatchthispage|Ná fair fós
+notanarticle|Níl alt ann
+notvisiblerev|Scriosadh an leagan
+watchlist-details|Tá tú ag faire ar {{PLURAL:~{0}\u007Cleathanach amháin\u007C~{0} leathanaigh}}, gan leathanaigh phlé a chur san áireamh.
+wlheader-enotif|Cumasaíodh fógraí riomhphoist.
+wlheader-showupdated|Tá '''cló trom''' ar leathanaigh a athraíodh ón uair is deireanaí a d'fhéach tú orthu.
+wlnote|Is {{PLURAL:~{0}\u007Cé seo thíos an t-athrú deireanach\u007Ciad seo thíos na '''~{0}''' athruithe deireanacha}} {{PLURAL:~{1}\u007Csan uair deireanach\u007Csna '''~{1}''' uaire deireanacha}}.
+wlshowlast|Líon na n-uair is déanaí le taispeáint: ~{0}. Líon na laethanta is déanaí le taispeáint: ~{1}. Taispeáin .
+watchlist-options|Roghanna don liosta faire
+watching|Ag faire...
+unwatching|Á bhaint de do liosta faire...
+enotif_reset|Marcáil gach leathanach bheith tadhlaithe
+enotif_impersonal_salutation|úsáideoir {{SITENAME}}
+enotif_lastvisited|Féach ar ~{0} le haghaidh gach athrú a rinneadh ó thús na cuairte seo caite a rinne tú.
+enotif_anon_editor|úsáideoir gan ainm ~{0}
+enotif_body|A $WATCHINGUSERNAME, a chara,\n\n$CHANGEDORCREATED $PAGEEDITOR an leathanach $PAGETITLE  ag {{SITENAME}} ar $PAGEEDITDATE, féach ar $PAGETITLE_URL chun an leagan reatha a fháil.\n\n$NEWPAGE\n\nAthchoimriú an úsáideora a rinne é: $PAGESUMMARY $PAGEMINOREDIT\n\nSonraí teagmhála an úsáideora:\nr-phost: $PAGEEDITOR_EMAIL\nvicí: $PAGEEDITOR_WIKI\n\nI gcás athruithe eile, ní bheidh aon fhógra eile muna dtéann tú go dtí an leathanach seo.\nIs féidir freisin na bratacha fógartha a athrú do gach leathanach ar do liosta faire.\n\n\t     Is mise le meas,\n\t     Fógrachóras cairdiúil {{GRAMMAR:genitive\u007C{{SITENAME}}}}\n\n--\nChun socruithe do liosta faire a athrú, tabhair cuairt ar\n{{canonicalurl:Special:Watchlist/edit}}\n\nChun an leathanach a bhaint de do liosta faire, tabhair cuairt ar\n$UNWATCHURL\n\nAiseolas agus a thuilleadh cabhrach:\n$HELPPAGE
+created|Chruthaigh
+changed|D'athraigh
+deletepage|Scrios an leathanach
+confirm|Cinntigh
+excontent|téacs an lch: '~{0}'
+excontentauthor|seo a bhí an t-inneachar: '~{0}' (agus ba é '[[Special:Contributions/~{1}\u007C~{1}]]' an t-aon dhréachtóir)
+exbeforeblank|is é seo a raibh an ábhar roimh an folmhadh: '~{0}'
+delete-confirm|Scrios "~{0}"
+delete-legend|Scrios
+historywarning|'''Rabhadh:''' Tá stair (tuairim is {{PLURAL:~{0}\u007Cleagan amháin\u007C~{0} leaganacha}}) ag an leathanach a bhfuil tú ar tí é a scriosadh:
+confirmdeletetext|Tá tú ar tí leathanach, agus a chuid staire, a scriosadh.\nDeimhnigh, le do thoil, gur mhian leat é seo a dhéanamh, go dtuigeann tú torthaí an ghnímh seo agus go bhfuil tú dá dhéanamh de réir [[{{MediaWiki:Policy-url}}\u007Can pholasaí]].
+actioncomplete|Gníomh críochnaithe
+deletedtext|scriosadh "~{0}".\nFéach ar ~{1} chun cuntas na scriosiadh deireanacha a fháil.
+dellogpage|Loga scriosta
+dellogpagetext|Seo é liosta de na scriosaidh is déanaí.
+deletionlog|cuntas scriosaidh
+reverted|Tá eagrán níos luaithe in úsáid anois
+deletecomment|Fáth:
+deleteotherreason|Fáth eile/breise:
+deletereasonotherlist|Fáth eile
+deletereason-dropdown|*Fáthanna coitianta scriosta\n** Iarratas ón údar\n** Sárú cóipchirt\n** Loitiméireacht
+rollback|Athruithe a rolladh siar
+rollbacklink|roll siar
+rollbacklinkcount|Roll siar ~{0} {{PLURAL:~{0}\u007Cathrú\u007Cathruithe}}
+rollbackfailed|Theip an rolladh siar
+cantrollback|Ní féidir an athrú a athúsáid; ba é údar an ailt an t-aon duine a rinne athrú dó.
+alreadyrolled|Ní féidir eagrán níos luaí an leathanaigh [[:~{0}]] le [[User:~{1}\u007C~{1}]] ([[User talk:~{1}\u007CPlé]]{{int:pipe-separator}}[[Special:Contributions/~{1}\u007C{{int:contribslink}}]]) a athúsáid; d'athraigh duine eile é cheana fein, nó d'athúsáid duine eile eagrán níos luaí cheana féin.\n\n[[User:~{2}\u007C~{2}]] ([[User talk:~{2}\u007CPlé]]{{int:pipe-separator}}[[Special:Contributions/~{2}\u007C{{int:contribslink}}]]) an té a rinne an athrú is déanaí.
+editcomment|Seo a raibh an achoimre eagarthóireacht: "''~{0}''".
+revertpage|Cealaíodh athruithe [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007CPlé]]); ar ais chuig leagan le [[User:~{0}\u007C~{0}]]
+protectlogpage|Log cosanta
+protectlogtext|Seo é liosta de glais a cuireadh ar / baineadh de leathanaigh.\nFéach ar [[Special:ProtectedPages\u007CLeathanach glasáilte]] chun a thuilleadh eolais a fháil.
+protectedarticle|glasáladh "[[~{0}]]"
+modifiedarticleprotection|tar éis an leibhéal cosanta a athrú do "[[~{0}]]"
+unprotectedarticle|díghlasáladh "[[~{0}]]"
+protect-title|Ag glasáil "~{0}"
+prot_1movedto2|Athainmníodh ~{0} mar ~{1}
+protect-legend|Cinntigh an glasáil
+protectcomment|Fáth:
+protectexpiry|As feidhm:
+protect_expiry_invalid|Am éaga neamhbhailí.
+protect_expiry_old|Am éaga san am atá thart.
+protect-text|Is féidir leat an leibhéal glasála a athrú anseo don leathanach '''~{0}'''.
+protect-locked-access|Ní chead ag do chuntas chun athraigh leibhéal cosaint an leathanach.\nSeo iad na socruithe reatha faoin leathanach '''~{0}''':
+protect-cascadeon|Tá an leathanach seo ghlasáil le athrú mar tá se iniata ar {{PLURAL:~{0}\u007Can leathanach seo\u007Cna leathanaigh seo}} a leanas, agus iad ghlasáil le glasáil cascáideach.\nIs féidir an leibhéal glasála a athrú, ach ní féidir cur isteach ar an ghlasáil cascáideach.
+protect-default|Ceadaigh gach úsáideoir
+protect-fallback|Ceadúnas "~{0}" riachtanach
+protect-level-autoconfirmed|Cuir cosc ar úsáideoirí neamhchláraithe/nua
+protect-level-sysop|Riarthóirí amháin
+protect-summary-cascade|cascáidithe
+protect-expiring|as feidhm ~{0} (UTC)
+protect-expiry-indefinite|gan teorainn
+protect-cascade|Coisc leathanaigh san áireamh an leathanach seo (cosanta cascáideach)
+protect-cantedit|Ní féidir leat na leibhéil cosanta a athrú faoin leathanach seo, mar níl cead agat é a cur in eagar.
+protect-othertime|Am eile:
+protect-othertime-op|am eile
+protect-expiry-options|uair amháin:1 hour,lá amháin:1 day,seachtain amháin:1 week,2 sheachtain:2 weeks,mí amháin:1 month,3 mhí:3 months,6 mhí:6 months,bliain amháin:1 year,gan teorainn:infinite
+restriction-type|Ceadúnas:
+restriction-level|Leibhéal srianadh:
+pagesize|(bearta)
+restriction-edit|Cuir in eagar
+restriction-create|Cruthaigh
+restriction-upload|Uaslódaigh
+restriction-level-autoconfirmed|leathghlasáil
+undelete|Díscrios leathanach scriosta
+undeletepage|Féach ar leathanaigh scriosta agus díscrios iad
+viewdeletedpage|Féach ar leathanaigh scriosta
+undeletepagetext|Scriosaíodh {{PLURAL:~{0}\u007Can leathanach\u007Cna ~{0} leathanaigh}} seo a leanas cheana féin, ach tá síad sa cartlann fós agus is féidir iad a dhíscrios.\nÓ am go ham, is féidir an cartlann a fholmhú.
+undelete-fieldset-title|Díscrios leagain
+undeleterevisions|Cuireadh {{PLURAL:~{0}\u007Cleagan amháin\u007C~{0} leagain}} sa chartlann
+undeletehistory|Dá díscriosfá an leathanach, díscriosfar gach leasú i stair an leathanaigh.\nDá gcruthaíodh leathanach nua leis an teideal céanna ó shin an scriosadh, taispeáinfear na sean-athruithe san stair roimhe seo, agus ní athshuífear leagan láithreach an leathanaigh go huathoibríoch.
+undeletehistorynoadmin|Tá an leathanach seo scriosta.\nAn fáth scriosadh ná a leanas san achoimre faoi bhun, agus le sonraí na úsáideoirí é a chur in eagar roimh scriosadh.\nIs an téacs as na leagan scriosta seo ar fáil do riarthóirí amháin.
+undelete-revision|Leagan scriosta ~{0} (ó ~{3}, ar ~{4}) le ~{2}:
+undeletebtn|Díscrios!
+undeletelink|féach/díscrios
+undeleteviewlink|Amharc
+undeleteinvert|Cuir an roghnú bun os cionn
+undeletecomment|Tuairisc:
+undeletedrevisions|{{PLURAL:~{0}\u007CLeagan amháin\u007C~{0} leagain}} díscriosta
+undeletedrevisions-files|{{PLURAL:~{0}\u007CLeagan amháin\u007C~{0} leagain}} agus {{PLURAL:~{1}\u007Ccomhad amháin\u007C~{1} comhaid}} a chur ar ais
+undeletedfiles|{{PLURAL:~{0}\u007CComhad amháin\u007C~{0} comhaid}} díscriosta
+undelete-search-box|Cuardaigh leathanaigh scriosta
+undelete-search-submit|Cuardaigh
+namespace|Ainmspás:
+invert|Iompaigh rogha bunoscionn
+contributions|Dréachtaí {{GENDER:~{0}\u007Cúsáideora}}
+contributions-title|Dréachtaí úsáideora do ~{0}
+mycontris|Dréachtaí
+contribsub2|Do ~{0} (~{1})
+nocontribs|Ní bhfuarthas aon athrú a bhí cosúil le na crítéir seo.
+uctop| (barr)
+month|Ón mhí seo (agus níos luaithe):
+year|Ón bhliain seo (agus níos luaithe):
+sp-contributions-newbies|Taispeáin dréachtaí ó chuntais nua amháin
+sp-contributions-newbies-sub|Le cuntais nua
+sp-contributions-newbies-title|Dréachtaí úsáideora do chuntasaí nua
+sp-contributions-blocklog|Log coisc
+sp-contributions-deleted|dréachtaí úsáideora scriosta
+sp-contributions-uploads|uaslódálacha
+sp-contributions-logs|logaí
+sp-contributions-talk|plé
+sp-contributions-userrights|bainistíocht cearta úsáideora
+sp-contributions-search|Cuardaigh dréachtaí
+sp-contributions-username|Seoladh IP nó ainm úsáideora:
+sp-contributions-submit|Cuardaigh
+whatlinkshere|Naisc leis an lch seo
+whatlinkshere-title|Naisc le ~{0}
+whatlinkshere-page|Leathanach:
+linkshere|Tá nasc chuig '''[[:~{0}]]''' ar na leathanaigh seo a leanas:
+nolinkshere|Níl leathanach ar bith ann a bhfuil nasc chuig '''[[:~{0}]]''' air.
+nolinkshere-ns|Níl leathanach ar bith ann san ainmspás roghnaithe a bhfuil nasc chuig '''[[:~{0}]]''' air.
+isredirect|Leathanach athsheolaidh
+istemplate|iniamh
+isimage|nasc comhad
+whatlinkshere-prev|{{PLURAL:~{0}\u007Croimhe\u007C~{0} roimhe}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Car aghaidh\u007C~{0} ar aghaidh}}
+whatlinkshere-links|← naisc
+whatlinkshere-hideredirs|~{0} athsheolaidh
+whatlinkshere-hidetrans|~{0} trasiamh
+whatlinkshere-hidelinks|~{0} nasc
+whatlinkshere-hideimages|~{0} naisc comhad
+whatlinkshere-filters|Scagairí
+blockip|Coisc úsáideoir
+blockip-legend|Coisc úsáideoir
+blockiptext|Úsáid an foirm anseo thíos chun bealach scríofa a chosc ó\nseoladh IP nó ainm úsáideora áirithe.\nIs féidir leat an rud seo a dhéanamh amháin chun an chreachadóireacht a chosc, de réir\nmar a deirtear sa [[{{MediaWiki:Policy-url}}\u007Cpolasaí {{GRAMMAR:genitive\u007C{{SITENAME}}}}]].\nLíonaigh cúis áirithe anseo thíos (mar shampla, is féidir leat a luaigh\nleathanaigh áirithe a rinne an duine damáiste ar).
+ipaddressorusername|Seoladh IP nó ainm úsáideora:
+ipbexpiry|Am éaga
+ipbreason|Fáth:
+ipbreason-dropdown|*Fáthanna coitianta\n** Loitiméaracht\n** Naisc turscar\n** Fadhbanna cóipcheart\n** Ag iarraidh ciapadh daoine eile\n** Drochúsáid as cuntais iolrach\n** Fadhbanna idirvicí\n** Feallaire\n** Seachfhreastalaí Oscailte
+ipbsubmit|Coisc an úsáideoir seo
+ipbother|Méid eile ama
+ipboptions|2 uair:2 hours,1 lá amháin:1 day,3 lá:3 days,1 sheachtain amháin:1 week,2 sheachtain:2 weeks,1 mhí amháin:1 month,3 mhí:3 months,6 mhí:6 months,1 bhliain amháin:1 year,gan teorainn:infinite
+badipaddress|Níl aon úsáideoir ann leis an ainm seo.
+blockipsuccesssub|D'éirigh leis an cosc
+blockipsuccesstext|Choisceadh [[Special:Contributions/~{0}\u007C~{0}]].\n<br />Féach ar an g[[Special:BlockList\u007Cliosta coisc IP]] chun coisc a athbhreithniú.
+ipb-unblock-addr|Díchoisc ~{0}
+ipb-unblock|Díchosc ainm úsáideora ná seoladh IP
+unblockip|Díchoisc úsáideoir
+unblockiptext|Úsáid an foirm anseo thíos chun bealach scríofa a thabhairt ar ais do seoladh\nIP nó ainm úsáideora a raibh faoi chosc roimhe seo.
+ipusubmit|Bain an chosc seo
+unblocked|Díchoisceadh [[User:~{0}\u007C~{0}]]
+ipblocklist|Úsáideoirí atá coiscthe
+ipblocklist-legend|Aimsigh úsáideoir coiscthe
+ipblocklist-submit|Cuardaigh
+infiniteblock|gan teorainn
+anononlyblock|úsáideoirí gan ainm agus iad amháin
+ipblocklist-empty|Tá an liosta coisc folamh.
+blocklink|coisc
+unblocklink|bain an cosc
+change-blocklink|athraigh cosc
+contribslink|dréachtaí
+autoblocker|Coisceadh go huathoibríoch thú dá bharr gur úsáid an t-úsáideoir "[[User:~{0}\u007C~{0}]]" do sheoladh IP le déanaí.\nIs é seo an chúis don chosc ar ~{0}: "~{1}".
+blocklogpage|Cuntas_coisc
+blocklogentry|coisceadh [[~{0}]]; am éaga ~{1}. ~{2}
+blocklogtext|Seo é cuntas de gníomhartha coisc úsáideoirí agus míchoisc úsáideoirí. Ní cuirtear\nseoltaí IP a raibh coiscthe go huathoibríoch ar an liosta seo. Féach ar an\n[[Special:BlockList\u007CLiosta coisc IP]] chun\nliosta a fháil de coisc atá i bhfeidhm faoi láthair.
+unblocklogentry|díchoisceadh ~{0}
+block-log-flags-nocreate|cuntas chruthú díchumasaithe
+block-log-flags-noemail|cosc ar ríomhphost
+range_block_disabled|Faoi láthair, míchumasaítear an cumas riarthóra chun réimsechoisc a dhéanamh.
+ipb_expiry_invalid|Am éaga neamhbhailí.
+ipb_already_blocked|Tá cosc ar "~{0}" cheana féin
+ip_range_invalid|Réimse IP neamhbhailí.
+proxyblocker|Cosc ar seachfhreastalaithe
+proxyblockreason|Coisceadh do sheoladh IP dá bharr gur seachfhreastalaí\nneamhshlándála is ea é. Déan teagmháil le do chomhlacht idirlín nó le do lucht cabhrach teicneolaíochta\ngo mbeidh 'fhios acu faoin fadhb slándála tábhachtach seo.
+sorbsreason|Liostalaítear do sheoladh IP mar sheachfhreastalaí oscailte sa DNSBL.
+lockdb|Glasáil an bunachar sonraí
+unlockdb|Díghlasáil bunachar sonraí
+lockdbtext|Dá nglasálfá an bunachar sonraí, ní beidh cead ar aon úsáideoir\nleathanaigh a chur in eagar, a socruithe a athrú, a liostaí faire a athrú, nó rudaí eile a thrachtann le\nathruithe san bunachar sonraí.\nCinntigh go bhfuil an scéal seo d'intinn agat, is go díghlasálfaidh tú an bunachar sonraí nuair a bhfuil\ndo chuid cothabháile críochnaithe.
+unlockdbtext|Dá díghlasálfá an bunachar sonraí, beidh ceat ag gach úsáideoirí aris\nna leathanaigh a chur in eagar, a sainroghanna a athrú, a liostaí faire a athrú, agus rudaí eile\na dhéanamh a thrachtann le athruithe san bunachar sonraí.\nCinntigh go bhfuil an scéal seo d'intinn agat.
+lockconfirm|Sea, is mian liom an bunachar sonraí a ghlasáil.
+unlockconfirm|Sea, is mian liom an bunachar sonraí a dhíghlasáil.
+lockbtn|Glasáil an bunachar sonraí
+unlockbtn|Díghlasáil an bunachar sonraí
+locknoconfirm|Níor mharcáil tú an bosca daingnithe.
+lockdbsuccesssub|D'éirigh le glasáil an bhunachair sonraí
+unlockdbsuccesssub|D'éirigh le díghlasáil an bhunachair sonraí
+lockdbsuccesstext|Glasáladh an bunachar sonraí {{GRAMMAR:genitive\u007C{{SITENAME}}}}.\n<br />Cuimhnigh nach mór duit é a dhíghlasáil tar éis do chuid cothabháil.
+unlockdbsuccesstext|Díghlasáladh an bunachar sonraí {{GRAMMAR:genitive\u007C{{SITENAME}}}}.
+databasenotlocked|Níl an bunachar sonraí faoi ghlas.
+move-page|Athainmnigh ~{0}
+move-page-legend|Athainmnigh an leathanach
+movepagetext|Úsáid an fhoirm seo thíos chun leathanach a athainmniú. Aistreofar a chuid staire go léir chuig an teideal nua.\nDéanfar leathanach atreoraithe den sean-teideal chuig an teideal nua.\nIs féidir atreoruithe don bhunteideal a nuashonrú go huathoibríoch.\nMura ndéanfaidh tú sin, bí cinnte go ndéanfaidh tú cuardach ar atreoruithe [[Special:DoubleRedirects\u007Cdúbailte]] nó [[Special:BrokenRedirects\u007Cbriste]].\nTá dualgas ort bheith cinnte go rachaidh na naisc chuig an áit is ceart.\n\nTabhair faoi deara '''nach''' n-athainmneofar an leathanach má tá leathanach ann cheana féin faoin teideal nua, ach amháin más folamh nó atreorú é nó mura bhfuil aon stair athraithe aige cheana.\nMar sin, is féidir leathanach a athainmniú ar ais chuig an teideal a raibh air roimhe má tá botún déanta agat, agus ní féidir leathanach atá ann cheana a fhorscríobh.\n\n'''Rabhadh!'''\nIs féidir gur dianbheart gan choinne é athrú a dhéanamh ar leathanach móréilimh;\ncinntigh go dtuigeann tú na hiarmhairtí go léir roimh dul ar aghaigh.
+movepagetalktext|Aistreofar an leathanach plé go huathoibríoch '''ach ní tharlófar sin''':\n* má tá leathanach plé neamhfholamh ann cheana leis an teideal nua, nó\n* má bhaineann tú an tic den bhosca thíos.\n\nSna cásanna sin, caithfidh tú an leathanach a aistrigh nó a chumasc tú féin más maith leat.
+movearticle|Athainmnigh an leathanach
+movenologintext|Ní mór duit bheith i d'úsáideoir cláraithe agus [[Special:UserLogin\u007Clogáilte isteach]] chun leathanach a hathainmniú.
+movenotallowed|Níl cead agat leathanaigh a athainmniú.
+newtitle|Go teideal nua
+move-watch|Déan faire an leathanach seo
+movepagebtn|Athainmnigh an leathanach
+pagemovedsub|D'éirigh leis an athainmniú
+movepage-moved|'''Athainmníodh "~{0}" mar "~{1}"'''
+articleexists|Tá leathanach leis an teideal seo ann cheana féin, nó níl an teideal a roghnaigh tú ina theideal bailí. Roghnaigh teideal eile le do thoil.
+movetalk|Athainmnigh an leathanach plé freisin.
+movelogpage|Log athainmnithe
+movelogpagetext|Liosta is ea seo thíos de leathanaigh athainmnithe.
+movereason|Fáth:
+revertmove|athúsáid
+delete_and_move|Scrios agus athainmnigh
+delete_and_move_text|==Tá scriosadh riachtanach==\nTá an leathanach sprice ("[[:~{0}]]") ann cheana féin.\nAr mhaith leat é a scriosadh chun áit a dhéanamh don athainmniú?
+delete_and_move_confirm|Tá, scrios an leathanach
+delete_and_move_reason|Scriosta chun áit a dhéanamh d'athainmniú
+selfmove|Tá an ainm céanna ag an bhfoinse mar atá ar an ainm sprice; ní féidir leathanach a athainmniú bheith é féin.
+export|Easportáil leathanaigh
+exporttext|Is féidir an téacs agus an stair athraithe de leathanach áirithe nó sraith leathanach a easpórtáil, fillte i bpíosa XML.\nIs féidir é seo a iompórtáil i vicí eile MediaWiki trí úsáid an [[Special:Import\u007Cleathanach iompórtála]].\n\nChun leathanaigh a easpórtáil, cuir isteach na teidil sa bhosca thíos, gach teideal ar a líne féin, agus roghnaigh an leagan reatha in éineacht leis na sean-leaganacha agus stair an leathanaigh, nó an leagan reatha in éineacht le faisnéis faoin athrú deireanach.\n\nSa dara cás, is féidir leat nasc a úsáid, mar shampla [[{{#Special:Export}}/{{MediaWiki:Mainpage}}]] le haghaidh an leathanaigh "[[{{MediaWiki:Mainpage}}]]".
+exportcuronly|Ná cuir san áireamh ach an leagan láithreach; ná cuir an stair iomlán ann
+export-submit|Easportáil
+export-download|Sábháil mar comhad
+allmessages|Teachtaireachtaí córais
+allmessagesname|Ainm
+allmessagesdefault|Téacs réamhshocraithe
+allmessagescurrent|Téacs reatha
+allmessagestext|Is liosta é seo de theachtaireachtaí córais atá le fáil san ainmspás MediaWiki.\nTabhair cuairt ar [https://www.mediawiki.org/wiki/Special:MyLanguage/Localisation MediaWiki Localisation] agus [//translatewiki.net translatewiki.net] le do thoil más mian leat cur leis an logánú ginearálta MediaWiki.
+allmessagesnotsupportedDB|Ní féidir an leathanach seo a úsáid dá bharr gur díchumasaíodh '''$wgUseDatabaseMessages'''.
+allmessages-filter-all|Uile
+allmessages-language|Teanga:
+allmessages-filter-submit|Gabh
+filemissing|Comhad ar iarraidh
+thumbnail_error|Earráid agus mionsamhail a chruthú: ~{0}
+import|Iompórtáil leathanaigh
+importinterwiki|Iompórtáil trasna vicithe
+import-interwiki-submit|iompórtáil
+import-comment|Nóta tráchta:
+importtext|Easportáil an comhad ón vici-fhoinse (le húsáid na [[Special:Export\u007Ctréithe easportáil]]), sábháil ar do dhíosca é agus uaslódáil anseo é.
+import-revision-count|{{PLURAL:~{0}\u007CLeagan amháin\u007C~{0} leagain}}
+importnopages|Níl aon leathanaigh chun iompórtáil
+importfailed|Theip ar an iompórtáil: ~{0}
+importsuccess|D'eirigh leis an iompórtáil!
+importnosources|Níl aon fhoinse curtha i leith d'iompórtáil trasna vicíonna, agus\nní féidir uaslódála staire díreacha a dhéanamh faoi láthair.
+xml-error-string|~{0} ag líne ~{1}, col ~{2} (~{3} bearta): ~{4}
+import-upload|Uaslódaigh sonraí XML
+import-token-mismatch|Sonraí seisiún a bheith caillte. Déan iarracht arís.
+importlogpage|Log iompórtáil
+import-logentry-interwiki|traisvicithe ~{0}
+tooltip-pt-userpage|Do leathanach úsáideora
+tooltip-pt-anonuserpage|Leathanach úsáideora don IP ina dhéanann tú do chuid athruithe
+tooltip-pt-mytalk|Do leathanach phlé
+tooltip-pt-anontalk|Plé maidir le na hathruithe a dhéantar ón seoladh IP seo
+tooltip-pt-preferences|Mo chuid sainroghanna
+tooltip-pt-watchlist|Liosta de na leathanaigh a bhfuil tú á bhfaire ar athruithe
+tooltip-pt-mycontris|Liosta do chuid dréachtaí
+tooltip-pt-login|Moltar duit logáil isteach, ach níl sé riachtanach.
+tooltip-pt-logout|Logáil amach
+tooltip-ca-talk|Plé maidir leis an leathanach ábhair
+tooltip-ca-edit|Is féidir leat an leathanach seo a athrú. Más é do thoil é, bain úsáid as an cnaipe réamhamhairc roimh sábháil a dhéanamh.
+tooltip-ca-addsection|Cur tús le alt nua
+tooltip-ca-viewsource|Tá an leathanach seo glasáilte. Is féidir leat a fhoinse a fheiceáil.
+tooltip-ca-history|Leagain stairiúla den leathanach seo.
+tooltip-ca-protect|Glasáil an leathanach seo
+tooltip-ca-delete|Scrios an leathanach seo
+tooltip-ca-undelete|Díscrios na hathruithe a rinneadh don leathanach seo roimh a scriosadh é
+tooltip-ca-move|Athainmnigh an leathanach
+tooltip-ca-watch|Cuir an leathanach seo le do liosta faire
+tooltip-ca-unwatch|Bain an leathanach seo de do liosta faire
+tooltip-search|Cuardaigh sa vicí seo
+tooltip-search-go|Téigh chuig leathanach den ainm cruinn seo má tá sé ann
+tooltip-search-fulltext|Cuardaigh an téacs seo sna leathanaigh
+tooltip-p-logo|Príomhleathanach
+tooltip-n-mainpage|Tabhair cuairt ar an bPríomhleathanach
+tooltip-n-mainpage-description|Tabhair cuairt ar an bpríomhleathanach
+tooltip-n-portal|Maidir leis an tionscadal, cad is féidir leat a dhéanamh, conas achmhainní a fháil
+tooltip-n-currentevents|Faigh eolas cúlrach maidir le chursaí reatha
+tooltip-n-recentchanges|Liosta de na hathruithe is déanaí sa vicí
+tooltip-n-randompage|Lódáil leathanach fánach
+tooltip-n-help|An áit chun cabhair a fháil.
+tooltip-t-whatlinkshere|Liosta de gach leathanach sa vicí ina bhfuil nasc chuig an leathanach seo
+tooltip-t-recentchangeslinked|Na hathruithe is déanaí ar leathanaigh a nascaíonn chuig an leathanach seo
+tooltip-feed-rss|Fotha RSS don leathanach seo
+tooltip-feed-atom|Fotha Atom don leathanach seo
+tooltip-t-contributions|Féach ar an liosta dréachtaí a rinne an t-úsáideoir seo
+tooltip-t-emailuser|Cuir teachtaireacht chuig an úsáideoir seo
+tooltip-t-upload|Comhaid íomhá nó meáin a uaslódáil
+tooltip-t-specialpages|Liosta de gach leathanach speisialta
+tooltip-t-print|Leagan inphriontáilte an leathanaigh seo
+tooltip-t-permalink|Nasc buan do leasú seo an leathanaigh
+tooltip-ca-nstab-main|Féach ar an leathanach ábhair
+tooltip-ca-nstab-user|Féach ar an leathanach úsáideora
+tooltip-ca-nstab-media|Féach ar an leathanach meáin
+tooltip-ca-nstab-special|Is leathanach speisialta é seo, ní féidir leat an leathanach é fhéin a athrú.
+tooltip-ca-nstab-project|Féach ar an leathanach thionscadail
+tooltip-ca-nstab-image|Féach ar an leathanach íomhá
+tooltip-ca-nstab-mediawiki|Féach ar an teachtaireacht córais
+tooltip-ca-nstab-template|Féach ar an teimpléad
+tooltip-ca-nstab-help|Féach ar an leathanach cabhrach
+tooltip-ca-nstab-category|Féach ar an leathanach catagóire
+tooltip-minoredit|Déan mionathrú den athrú seo
+tooltip-save|Sábháil do chuid athruithe
+tooltip-preview|Réamhamharc ar do chuid athruithe; úsáid an gné seo roimh a shábhálaíonn tú!
+tooltip-diff|Taispeáin na difríochtaí áirithe a rinne tú don téacs
+tooltip-compareselectedversions|Féach na difríochtaí idir an dhá leagain roghnaithe den leathanach seo.
+tooltip-watch|Cuir an leathanach seo le do liosta faire
+tooltip-rollback|Fill ar leagan an leathanaigh seo roimh athruithe an eagarthóra dheireanaigh in aon chlic amháin
+tooltip-undo|Cuirtear "Cealaigh" an t-athrú seo ar cheal agus osclaítear an fhoirm eagair i mód réamhamhairc. Is féidir cúis na hathruithe a chur san achoimre.
+tooltip-summary|Cuir isteach achoimre ghearr
+anonymous|{{PLURAL:~{0}\u007CÚsáideoir\u007CÚsáideoirí}} gan ainm ar {{SITENAME}}
+siteuser|Úsáideoir ~{0} ag {{SITENAME}}
+lastmodifiedatby|Leasaigh ~{2} an leathanach seo go déanaí ag ~{1}, ~{0}.
+othercontribs|Bunaithe ar saothair le ~{0}.
+others|daoine eile
+siteusers|{{PLURAL:~{1}\u007CÚsáideoirí\u007CÚsáideoir}} ag {{SITENAME}} ~{0}
+creditspage|Creidiúintí leathanaigh
+nocredits|Níl aon eolas creidiúna le fáil don leathanach seo.
+spamprotectiontitle|Scagaire in aghaidh ríomhphost dramhála
+spamprotectiontext|Chuir an scagaire dramhála bac ar an leathanach a raibh tú ar\niarradh sábháil. Is dócha gur nasc chuig suíomh seachtrach ba chúis leis.
+spamprotectionmatch|Truicear ár scagaire dramhála ag an téacs seo a leanas: ~{0}
+spambot_username|MediaWiki turscar glanadh
+pageinfo-toolboxlink|Faoin leathanach seo
+markaspatrolleddiff|Comharthaigh mar patrólta.
+markaspatrolledtext|Comharthaigh an t-alt seo mar patrólta
+markedaspatrolled|Comharthaithe mar patrólta
+markedaspatrolledtext|Marcáladh an t-athrú roghnaithe de [[:~{0}]] "patrólaithe".
+rcpatroldisabled|Mhíchumasaíodh Patról na n-Athruithe is Déanaí
+rcpatroldisabledtext|Tá an tréith Patról na n-Athruithe is Déanaí míchumasaithe faoi láthair.
+patrol-log-page|Log phatról
+log-show-hide-patrol|~{0} log phatról
+deletedrevision|Scriosadh an seanleagan ~{0}
+filedeleteerror-short|Earráid comhad a scriosadh: ~{0}
+previousdiff|← Gabh chuig an difear roimhe seo
+nextdiff|An chéad dhifear eile →
+mediawarning|'''Rabhadh''': Tá seans ann go bhfuil cód mailíseach sa chineál comhaid seo.\nB'fheidir go gcuirfear do chóras i gcontúirt dá rithfeá é.
+imagemaxsize|Teorainn mhéid íomhá:<br />''(leathanaigh thuarascáil chomhaid)''
+thumbsize|Méid mionsamhlacha:
+file-info|méid comhad : ~{0}, saghas MIME: ~{1}
+file-info-size|~{0} × ~{1} picteilín, méid comhaid: ~{2}, cineál MIME: ~{3}
+file-nohires|Níl aon taifeach is mó ar fáil.
+svg-long-desc|Comhad SVG, ainmniúil ~{0} × ~{1} picteilíni, méid comhaid: ~{2}
+show-big-image|Taispeáin leagan ardtaifigh den íomhá
+newimages|Gailearaí na n-íomhánna nua
+imagelisttext|Tá liosta thíos de {{PLURAL:~{0}\u007Ccomhad amháin\u007C~{0} comhaid ~{1}}}.
+newimages-label|Comhadainm (nó cuid de):
+noimages|Tada le feiceáil.
+ilsubmit|Cuardaigh
+bydate|de réir dáta
+sp-newimages-showfrom|Taispeáin íomhánna nua as ~{1}, ~{0}
+bad_image_list|Is é seo a leanas an formáid:\n\nNíl ach míreanna liosta amháin (línte ag tosú le *) san áireamh.\nIs riachtanach gur nasc do dhrochchomhad é an chéad nasc ar líne.\nIs eisceachtaí iad na naisc eile ar an líne céanna, .i. leathanaigh gur féidir an comhad a bheith orthu go hinlíne.
+metadata|Meiteasonraí
+metadata-help|Tá breis eolais sa comhad seo, curtha, is dócha, as ceamara digiteach ná scanóir a chruthaigh ná a digitigh é.\nMá tá an comhad mionathraithe as an bunleagan, b'fhéidir nach mbeidh ceann de na sonraí fágtha sa comhad atá athruithe.
+metadata-expand|Taispeáin sonraí síneadh
+metadata-collapse|Folaigh sonraí síneadh
+metadata-fields|Beidh na meiteasonraí EXIF seo a leanas dá dtaispeáint ar an leathanach íomhá nuair atá an clár meiteasonraí ceilte.\nBeidh na cinn eile ceilte de réir réamhshocraithe.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|Leithead
+exif-imagelength|Airde
+exif-bitspersample|Gíotáin sa chomhpháirt
+exif-compression|Scéim comhbhrúite
+exif-photometricinterpretation|Comhbhrú picteilíní
+exif-orientation|Treoshuíomh
+exif-samplesperpixel|Líon na gcomhpháirt
+exif-planarconfiguration|Eagar na sonraí
+exif-ycbcrsubsampling|Cóimheas foshamplála de Y i gcoinne C
+exif-ycbcrpositioning|Suí Y agus C
+exif-xresolution|Taifeach íomhá i dtreo an leithid
+exif-yresolution|Taifeach íomhá i dtreo an airde
+exif-stripoffsets|Suíomh na sonraí íomhá
+exif-rowsperstrip|Líon na rónna sa stráice
+exif-stripbytecounts|Bearta sa stráice comhbhrúite
+exif-jpeginterchangeformat|Aischló don SOI JPEG
+exif-jpeginterchangeformatlength|Bearta sonraí JPEG
+exif-whitepoint|Crómatacht na bpointí bán
+exif-primarychromaticities|Crómatachta na bpríomhacht
+exif-ycbcrcoefficients|Comhéifeachtaí mhaitrís trasfhoirmithe an dathspáis
+exif-referenceblackwhite|Péire luachanna tagartha don dubh is don bán
+exif-datetime|Dáta agus am athrú an chomhaid
+exif-imagedescription|Íomhátheideal
+exif-make|Déantóir an ceamara
+exif-model|Déanamh an ceamara
+exif-software|Na bogearraí a úsáideadh
+exif-artist|Údar
+exif-copyright|Úinéir an chóipchirt
+exif-exifversion|Leagan EXIF
+exif-flashpixversion|Leagan Flashpix atá á thacú
+exif-colorspace|Dathspás
+exif-componentsconfiguration|Ciall le gach giota
+exif-compressedbitsperpixel|Modh chomhbhrú na n-íomhánna
+exif-pixelydimension|Leithead bailí don íomhá
+exif-pixelxdimension|Airde bailí don íomhá
+exif-usercomment|Nótaí an úsáideora
+exif-relatedsoundfile|comhad gaolmhara fuaime
+exif-datetimeoriginal|Dáta agus am ghiniúint na sonraí
+exif-datetimedigitized|Dáta agus am digitithe
+exif-subsectime|Foshoicindí DateTime
+exif-subsectimeoriginal|Foshoicindí DateTimeOriginal
+exif-subsectimedigitized|Foshoicindí DateTimeDigitized
+exif-exposuretime|Am nochta
+exif-exposuretime-format|~{0} soic (~{1})
+exif-fnumber|Uimhir F
+exif-exposureprogram|Clár nochta
+exif-spectralsensitivity|Íogaireacht an speictrim
+exif-isospeedratings|Grádú ISO luais
+exif-shutterspeedvalue|Luas nochta
+exif-aperturevalue|Cró
+exif-brightnessvalue|Gile
+exif-exposurebiasvalue|Laobh nochta
+exif-maxaperturevalue|Cró tíre uasmhéideach
+exif-subjectdistance|Fad ón ábhar
+exif-meteringmode|Modh meadarachta
+exif-lightsource|Foinse solais
+exif-flash|Splanc
+exif-focallength|Fad fócasach an lionsa
+exif-subjectarea|Achar an ábhair
+exif-flashenergy|Splancfhuinneamh
+exif-focalplanexresolution|Taifeach an plána fócasaigh X
+exif-focalplaneyresolution|Taifeach an plána fócasaigh Y
+exif-focalplaneresolutionunit|Aonad taifigh an plána fócasaigh
+exif-subjectlocation|Suíomh an ábhair
+exif-exposureindex|Innéacs nochta
+exif-sensingmethod|Modh braite
+exif-filesource|Foinse comhaid
+exif-scenetype|Cineál radhairc
+exif-customrendered|Íomháphróiseáil saincheaptha
+exif-exposuremode|Modh nochta
+exif-whitebalance|Bánchothromaíocht
+exif-digitalzoomratio|Cóimheas zúmála digiteaí
+exif-focallengthin35mmfilm|Fad fócasach i scannán 35 mm
+exif-scenecapturetype|Cineál gabhála radhairc
+exif-gaincontrol|Rialú radhairc
+exif-contrast|Codarsnacht
+exif-saturation|Sáithiú
+exif-sharpness|Géire
+exif-devicesettingdescription|Cur síos ar socruithe gléis
+exif-subjectdistancerange|Raon fada ón ábhar
+exif-imageuniqueid|Aitheantas uathúil an íomhá
+exif-gpsversionid|Leagan clibe GPS
+exif-gpslatituderef|Domhan-leithead Thuaidh no Theas
+exif-gpslatitude|Domhan-leithead
+exif-gpslongituderef|Domhanfhad Thoir nó Thiar
+exif-gpslongitude|Domhanfhad
+exif-gpsaltituderef|Tagairt airde
+exif-gpsaltitude|Airde
+exif-gpstimestamp|Am GPS (clog adamhach)
+exif-gpssatellites|Satailítí úsáidte don tomhas
+exif-gpsstatus|Stádas an ghlacadóra
+exif-gpsmeasuremode|Modh tomhais
+exif-gpsdop|Beachtas tomhais
+exif-gpsspeedref|Aonad luais
+exif-gpsspeed|Luas an ghlacadóra GPS
+exif-gpstrackref|Tagairt don treo gluaiseachta
+exif-gpstrack|Treo gluaiseachta
+exif-gpsimgdirectionref|Tagairt do treo an íomhá
+exif-gpsimgdirection|Treo an íomhá
+exif-gpsmapdatum|Sonraí suirbhéireachta geodasaí a úsáideadh
+exif-gpsdestlatituderef|Tagairt don domhan-leithead sprice
+exif-gpsdestlatitude|Domhan-leithead sprice
+exif-gpsdestlongituderef|Tagairt don domhanfhad sprice
+exif-gpsdestlongitude|Domhanfhad sprice
+exif-gpsdestbearingref|Tagairt don treo-uillinn sprice
+exif-gpsdestbearing|Treo-uillinn sprice
+exif-gpsdestdistanceref|Tagairt don fad ón áit sprice
+exif-gpsdestdistance|Fad ón áit sprice
+exif-gpsprocessingmethod|Ainm an modha próiseála GPS
+exif-gpsareainformation|Ainm an cheantair GPS
+exif-gpsdatestamp|Dáta GPS
+exif-gpsdifferential|Ceartú difreálach GPS
+exif-source|Foinse
+exif-languagecode|Teanga
+exif-iimcategory|Catagóir
+exif-compression-1|Neamh-chomhbhrúite
+exif-unknowndate|Dáta anaithnid
+exif-orientation-1|Gnáth
+exif-orientation-2|Iompaithe go cothrománach
+exif-orientation-3|Rothlaithe trí 180°
+exif-orientation-4|Iompaithe go hingearach
+exif-orientation-5|Rothlaithe trí 90° CCW agus iompaithe go hingearach
+exif-orientation-6|Rothlaithe trí 90° CW
+exif-orientation-7|Rothlaithe trí 90° CW agus iompaithe go hingearach
+exif-orientation-8|Rothlaithe trí 90° CCW
+exif-planarconfiguration-1|Formáid shmutánach
+exif-planarconfiguration-2|Formáid phlánach
+exif-componentsconfiguration-0|níl a leithéid ann
+exif-exposureprogram-0|Gan sainiú
+exif-exposureprogram-1|Leis na lámha
+exif-exposureprogram-2|Gnáthchlár
+exif-exposureprogram-3|Tosaíocht nochta
+exif-exposureprogram-4|Tosaíocht cró
+exif-exposureprogram-5|Clár cúise (laofa do doimhneacht réimse)
+exif-exposureprogram-6|Clár gnímh (laofa do cróluas tapaidh)
+exif-exposureprogram-7|Modh portráide (do grianghraif i ngar don ábhar,\nle cúlra as fócas)
+exif-exposureprogram-8|Modh tírdhreacha (do grianghraif tírdhreacha le\ncúlra i bhfócas)
+exif-subjectdistance-value|~{0} méadair
+exif-meteringmode-0|Anaithnid
+exif-meteringmode-1|Meán
+exif-meteringmode-2|MeánUalaitheDonLár
+exif-meteringmode-3|Spota
+exif-meteringmode-4|Ilspotach
+exif-meteringmode-5|Patrún
+exif-meteringmode-6|Páirteach
+exif-meteringmode-255|Eile
+exif-lightsource-0|Anaithnid
+exif-lightsource-1|Solas lae
+exif-lightsource-2|Fluaraiseach
+exif-lightsource-3|Tungstan (solas gealbhruthach)
+exif-lightsource-4|Splanc
+exif-lightsource-9|Aimsir breá
+exif-lightsource-10|Aimsir scamallach
+exif-lightsource-11|Scáth
+exif-lightsource-12|Solas lae fluaraiseach (D 5700 â€“ 7100K)
+exif-lightsource-13|Solas bán lae fluaraiseach (N 4600 â€“ 5400K)
+exif-lightsource-14|Solas fuar bán fluaraiseach (W 3900 â€“ 4500K)
+exif-lightsource-15|Solas bán fluaraiseach (WW 3200 â€“ 3700K)
+exif-lightsource-17|Gnáthsholas A
+exif-lightsource-18|Gnáthsholas B
+exif-lightsource-19|Gnáthsholas C
+exif-lightsource-24|Tungstan stiúideó ISO
+exif-lightsource-255|Foinse eile solais
+exif-focalplaneresolutionunit-2|orlaigh
+exif-sensingmethod-1|Gan sainiú
+exif-sensingmethod-2|Braiteoir aonshliseach ceantair datha
+exif-sensingmethod-3|Braiteoir dháshliseach ceantair datha
+exif-sensingmethod-4|Braiteoir tríshliseach ceantair datha
+exif-sensingmethod-5|Braiteoir dathsheicheamhach ceantair
+exif-sensingmethod-7|Braiteoir trílíneach
+exif-sensingmethod-8|Braiteoir dathsheicheamhach línte
+exif-scenetype-1|Grianghraf a rinneadh go díreach
+exif-customrendered-0|Gnáthphróiseas
+exif-customrendered-1|Próiseas saincheaptha
+exif-exposuremode-0|Nochtadh uathoibríoch
+exif-exposuremode-1|Nochtadh láimhe
+exif-exposuremode-2|Brac uathoibríoch
+exif-whitebalance-0|Bánchothromaíocht uathoibríoch
+exif-whitebalance-1|Bánchothromaíocht láimhe
+exif-scenecapturetype-0|Gnáth
+exif-scenecapturetype-1|Tírdhreach
+exif-scenecapturetype-2|Portráid
+exif-scenecapturetype-3|Radharc oíche
+exif-gaincontrol-0|Dada
+exif-gaincontrol-1|Íosneartúchán suas
+exif-gaincontrol-2|Uasneartúchán suas
+exif-gaincontrol-3|Íosneartúchán síos
+exif-gaincontrol-4|Uasneartúchán síos
+exif-contrast-0|Gnáth
+exif-contrast-1|Bog
+exif-contrast-2|Crua
+exif-saturation-0|Gnáth
+exif-saturation-1|Sáithiúchán íseal
+exif-saturation-2|Ard-sáithiúchán
+exif-sharpness-0|Gnáth
+exif-sharpness-1|Bog
+exif-sharpness-2|Crua
+exif-subjectdistancerange-0|Anaithnid
+exif-subjectdistancerange-1|Macra
+exif-subjectdistancerange-2|Radharc teann
+exif-subjectdistancerange-3|Cianradharc
+exif-gpslatitude-n|Domhan-leithead thuaidh
+exif-gpslatitude-s|Domhan-leithead theas
+exif-gpslongitude-e|Domhanfhad Thoir
+exif-gpslongitude-w|Domhanfhad Thiar
+exif-gpsstatus-a|Tomhas ar siúl
+exif-gpsstatus-v|Tomhas dodhéanta
+exif-gpsmeasuremode-2|Tomhas déthoiseach
+exif-gpsmeasuremode-3|Tomhas tríthoiseach
+exif-gpsspeed-k|Ciliméadair san uair
+exif-gpsspeed-m|Mílte san uair
+exif-gpsspeed-n|Muirmhílte
+exif-gpsdirection-t|Fíorthreo
+exif-gpsdirection-m|Treo maighnéadach
+namespacesall|iad uile
+monthsall|gach mí
+confirmemail|Deimhnigh do ríomhsheoladh
+confirmemail_text|Tá sé de dhíth an an vicí seo do ríomhsheoladh a bhailíochtú sula n-úsáideann tú na gnéithe ríomhphoist. Brúigh an cnaipe seo thíos chun teachtaireacht deimhnithe a sheoladh chuig do chuntas ríomhphoist. Beidh nasc ann sa chomhad ina mbeidh cód áirithe; lódáil an nasc i do bhrabhsálaí chun deimhniú go bhfuil do ríomhsheoladh bailí.
+confirmemail_send|Seol cód deimhnithe
+confirmemail_sent|Teachtaireacht deimhnithe seolta chugat.
+confirmemail_sendfailed|Ní féidir {{SITENAME}} do theachtaireacht deimhnithe a sheoladh.\nFéach an bhfuil carachtair neamh-bhailí ann sa seoladh.\n\nD'fhreagair an clár ríomhphoist: ~{0}
+confirmemail_invalid|Cód deimhnithe neamh-bhailí. B'fhéidir gur chuaidh an cód as feidhm.
+confirmemail_success|Deimhníodh do ríomhsheoladh. Is féidir leat logáil isteach anois agus sult a bhaint as an vicí!
+confirmemail_loggedin|Deimhníodh do sheoladh ríomhphoist.
+confirmemail_subject|Deimhniú do ríomhsheoladh ar an {{SITENAME}}
+confirmemail_body|Chláraigh duine éigin (tusa is dócha) an cuntas "~{1}" ar {{SITENAME}}\nagus rinneadh é seo ón seoladh IP ~{0}, ag úsáid an ríomhsheolta seo.\n\nChun deimhniú gur leatsa an cuntas seo, agus chun gnéithe ríomhphoist\na chur i ngníomh ag {{SITENAME}}, oscail an nasc seo i do bhrabhsálaí:\n\n~{2}\n\n<nowiki>*</nowiki>Mura* tusa a chláraigh an cuntas, lean an nasc seo chun\ndeimhniú an ríomhsheolta a chur ar cheal:\n\n~{4}\n\nRachaidh an cód deimhnithe seo as feidhm ag ~{3}.
+scarytranscludedisabled|[Díchumasaíodh trasáireamh idir vicíonna]
+scarytranscludefailed|[Theip leis an iarradh teimpléid do ~{0}]
+scarytranscludetoolong|[Tá an URL ró-fhada]
+deletedwhileediting|'''Aire''': scriosadh an leathanach seo nuair a bhí tu ag athrú é!
+recreate|Athchruthaigh
+confirm_purge_button|Tá
+confirm-purge-top|An bhfuil tú cinnte go dteastaíonn uait taisce an leathanaigh seo a bhánú?
+imgmultipageprev|'← leathanach roimhe sin
+imgmultipagenext|leathanach a leanas →
+imgmultigoto|Téigh go leathanach ~{0}
+table_pager_next|Leathanach a leanas
+table_pager_prev|Leathanach roimhe
+table_pager_first|Céad leathanach
+table_pager_last|Deireadh leathanach
+table_pager_limit_submit|Gabh
+table_pager_empty|Folamh
+autoredircomment|Ag athdhíriú go [[~{0}]]
+autosumm-new|Leathanach cruthaithe le '~{0}'
+watchlistedit-normal-title|Athraigh do liosta faire
+watchlistedit-normal-legend|Bain teideail as do liosta faire
+watchlistedit-normal-submit|Bain Teideail as
+watchlistedit-raw-title|Athraigh do amhliosta faire
+watchlistedit-raw-legend|Athraigh do amhliosta faire
+watchlistedit-raw-titles|Teideail:
+watchlistedit-raw-submit|Nuashonraigh do liosta faire
+watchlistedit-raw-done|Tá do liosta faire nuashonraithe.
+watchlisttools-view|Féach ar na hathruithe ábhartha
+watchlisttools-edit|Féach ar do liosta faire ná cuir in eagar é
+watchlisttools-raw|Cuir do amhliosta faire in eagar
+version|Leagan
+version-other|Eile
+version-version|(~{0})
+version-license|Ceadúnas
+version-software|Bogearraí suiteáilte
+version-software-version|Leagan
+version-entrypoints-header-url|URL
+fileduplicatesearch-filename|Ainm comhaid:
+fileduplicatesearch-submit|Cuardaigh
+fileduplicatesearch-info|~{0} × ~{1} picteillín<br />Méid comhad: ~{2}<br />Saghas MIME: ~{3}
+specialpages|Leathanaigh speisialta
+specialpages-group-other|Leathanaigh speisialta eile
+specialpages-group-login|Logáil isteach / cruthaigh cuntas
+specialpages-group-changes|Athruithe is déanaí agus logaí
+specialpages-group-users|Úsáideoirí agus cearta
+specialpages-group-pages|Liostaí leathanaigh
+specialpages-group-pagetools|Uirslí leathanach
+specialpages-group-wiki|Sonraí vicí agus uirslí
+specialpages-group-spam|Uirlisí turscar
+blankpage|Leathanach bán
+htmlform-selectorother-other|Eile
+feedback-cancel|Cealaigh
+feedback-message|Teachtaireacht:
+searchsuggest-search|Cuardaigh
+expand_templates_remove_comments|Scrios nótaí tráchta
+expand_templates_preview|Réamhamharc
+contactpage-usermailererror|Earráid leis an píosa ríomhphoist:
+']:>
+).lang
+;

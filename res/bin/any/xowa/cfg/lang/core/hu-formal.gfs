@@ -1,0 +1,8 @@
+this
+.messages
+  .load_text(
+<:['
+categorytree-retry|Várjon egy kicsit, majd próbálja újra!
+']:>
+).lang
+;

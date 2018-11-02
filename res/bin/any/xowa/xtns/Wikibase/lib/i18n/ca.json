@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Alvaro Vidal-Abarca",
+			"Arnaugir",
+			"Grondin",
+			"Qllach",
+			"Toniher",
+			"පසිඳු කාවින්ද"
+		]
+	},
+	"wikibase-lib-desc": "Té la funcionalitat comuna per les extensions de Wikibase i de Wikibase Client",
+	"wikibase-entity-item": "element",
+	"wikibase-entity-property": "propietat",
+	"wikibase-entity-query": "consulta",
+	"wikibase-error-autocomplete-response": "El servidor ha respost: $1",
+	"wikibase-error-ui-cant-edit": "No teniu permís per dur a terme aquesta acció.",
+	"wikibase-error-ui-no-permissions": "No teniu els drets necessaris per a dur a terme aquesta acció.",
+	"wikibase-error-ui-link-exists": "No podeu enllaçar a aquesta pàgina perquè ja hi ha un altre element que hi enllaça.",
+	"wikibase-error-ui-edit-conflict": "S'ha produït un conflicte d'edició. Si us plau, recarregueu la pàgina i torneu-la a desar.",
+	"wikibase-sitelinks-wikipedia": "Pàgines de la Viquipèdia vinculades a aquest element",
+	"wikibase-sitelinks-sitename-columnheading": "Llengua",
+	"wikibase-sitelinks-siteid-columnheading": "Codi",
+	"wikibase-sitelinks-link-columnheading": "Pàgina enllaçada",
+	"wikibase-tooltip-error-details": "Detalls",
+	"datatypes-type-wikibase-item": "Element",
+	"datatypes-type-commonsMedia": "Fitxer multimèdia de Commons"
+}

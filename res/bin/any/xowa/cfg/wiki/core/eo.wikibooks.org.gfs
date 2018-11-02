@@ -1,0 +1,41 @@
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+-1|Speciala
+2|Uzantino
+2|Uzulo
+2|Vikipediisto
+3|Uzanta_diskuto
+3|Uzantino-Diskuto
+3|Uzula_diskuto
+3|Vikipediista_diskuto
+4|Wikibooks
+5|Vikilibroj_diskuto
+6|Image
+7|Dosiera_diskuto
+7|Image_talk
+8|MediaVikio
+9|MediaVikia_diskuto
+9|MediaWiki_diskuto
+11|Ŝablona_diskuto
+13|Helpa_diskuto
+15|Kategoria_diskuto
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(0).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(14).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end

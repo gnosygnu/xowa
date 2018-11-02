@@ -1,0 +1,89 @@
+/* general */
+a {
+  text-decoration: none;  
+}
+a:hover, a:visited, a:link, a:active {
+  text-decoration: none;  
+}
+.clear_fix {
+  clear: both;
+  height: 0px;
+}
+.main_div {
+  width: 100%;
+}
+
+/* flex */
+.flex_div {
+  display:         flex;
+  display: -webkit-flex;
+          align-items: center;
+  -webkit-align-items: center;
+}
+.xo_flex_div {
+  display:         flex;
+  display: -webkit-flex;
+          align-items: center;
+  -webkit-align-items: center;
+}
+.xo_flex_text {
+          align-items: center;
+  -webkit-align-items: center;
+}
+
+/* xotbl */
+.xotbl_head_row  {
+  display:         flex;
+  display: -webkit-flex;
+          align-items: center;
+  -webkit-align-items: center;
+
+  width: 100%;
+  height: 50px;
+  
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+}
+.xotbl_head_text {
+  display: inline-block;
+  font-size: 2em;
+  margin-left: 10px;  /* match img_btn padding */
+}
+.xotbl_head_btns {
+  display:         flex;
+  display: -webkit-flex;
+
+          justify-content: flex-end;
+  -webkit-justify-content: flex-end;
+}
+.xotbl_data_row {
+  display:         flex;
+  display: -webkit-flex;
+          align-items: center;
+  -webkit-align-items: center;
+
+  width: 100%;
+
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+
+/* button link */
+.link_btn_y {
+  color: black;
+  cursor: pointer;
+}
+.link_btn_n {
+  color: gray;
+  cursor: not-allowed;
+}
+.link_btn_y:active { /* turn anchor blue when pressed */
+  background-color: #2098d1;
+  color: white;
+  outline: none;
+}
+/* hide rectangle on focus */
+.link_btn_y:focus, .link_btn_n:focus {outline: none;} /*chrome*/
+.link_btn_y::-moz-focus-inner, .link_btn_n::-moz-focus-inner {border: 0;} /*firefox*/

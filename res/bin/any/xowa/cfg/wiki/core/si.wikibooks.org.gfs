@@ -1,0 +1,34 @@
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+4|Wikibooks
+5|Wikibooks_talk
+6|Image
+6|රූපය
+7|Image_talk
+7|රූපය_සාකච්ඡාව
+8|විකිමාධ්‍ය
+9|විකිමාධ්‍ය_සාකච්ඡාව
+13|උදව_සාකච්ඡාව
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(0).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(112).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(113).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(114).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(115).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end

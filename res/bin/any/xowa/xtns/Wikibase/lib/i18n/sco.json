@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"John Reid"
+		]
+	},
+	"wikibase-timedetails-time": "Time",
+	"wikibase-timedetails-isotime": "ISO Timestamp",
+	"wikibase-timedetails-timezone": "Timezone",
+	"wikibase-timedetails-calendar": "Calendair",
+	"wikibase-timedetails-precision": "Preceesion",
+	"wikibase-timedetails-before": "Afore",
+	"wikibase-timedetails-after": "Efter",
+	"wikibase-globedetails-longitude": "Langitude",
+	"wikibase-globedetails-latitude": "Latitude",
+	"wikibase-globedetails-precision": "Preceesion",
+	"wikibase-globedetails-globe": "Globe",
+	"wikibase-parse-error": "Malformed value."
+}

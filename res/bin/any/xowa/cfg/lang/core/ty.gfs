@@ -1,0 +1,138 @@
+this
+.fallback_load('fr')
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|tāpati
+monday|monirē
+tuesday|mahana piti
+wednesday|mahana toru
+thursday|mahana maha
+friday|mahana pae
+saturday|mahana mā’a
+sun|tāpati
+mon|monirē
+tue|mahana piti
+wed|mahana toru
+thu|mahana maha
+fri|mahana pae
+sat|mahana mā’a
+january|nō tēnuare
+february|nō fepuare
+march|nō māti
+april|nō ’ēperēra
+may_long|nō mē
+june|nō tiunu
+july|nō tiurai
+august|nō ʻātete
+september|nō tetepa
+october|nō ’ātopa
+november|nō novema
+december|nō tītema
+january-gen|nō tēnuare
+february-gen|nō fepuare
+march-gen|nō māti
+april-gen|nō ’ēperēra
+may-gen|nō mē
+june-gen|nō tiunu
+july-gen|nō tiurai
+august-gen|nō ʻātete
+september-gen|nō tetepa
+october-gen|nō ’ātopa
+november-gen|nō novema
+december-gen|nō tītema
+jan|nō tēnuare
+feb|nō fepuare
+mar|nō māti
+apr|nō ’ēperēra
+may|nō mē
+jun|nō tiunu
+jul|nō tiurai
+aug|nō ʻātete
+sep|nō tetepa
+oct|nō ’ātopa
+nov|nō novema
+dec|nō tītema
+categories|Te mau huru o te ’api
+sitesupport|Pūpū i te ō
+about|Nō
+article|Parau pāpa’i
+navigation|Arata’i
+qbedit|Fa’ahuru ’ē
+qbmyoptions|ta’u ’api
+help|Tauturu
+search|Roromā’imi
+searchbutton|Roromā’imi
+searcharticle|Haere
+history_short|Parau tuatāpapa
+edit|Fa’ahuru ’ē
+delete|Fa’a’ore
+protect|Pāruru
+specialpage|’Api ta’a ’ē
+talk|Paraparaura’a
+jumptonavigation|arata’i
+jumptosearch|haere
+aboutsite|Nō {{SITENAME}}
+aboutpage|Project:Nō
+edithelp|Tauturu
+mainpage|Fa’ari’ira’a
+mainpage-description|Fa’ari’ira’a
+portal|Fare auhoa
+editsection|fa’ahuru ’ē
+editold|fa’ahuru ’ē
+nstab-main|Parau pāpa’i
+nstab-user|Ta’ata
+nstab-special|Ta’a ’ē
+nstab-image|Hōho’a
+nstab-mediawiki|Poro’i
+nstab-template|Hōho’a fāito
+nstab-help|Tauturu
+nstab-category|Huru
+history-feed-title|Parau tuatāpapa
+prefs-rc|Te mau fa’ahuru-’ē-ra’a ’āpī
+prefs-files|Te mau putu’ite
+youremail|Tā’u ’āfata rata uira
+yourlanguage|Te reo:
+email|’Imere
+recentchanges|Te mau fa’ahuru-’ē-ra’a ’āpī
+listfiles_user|Ta’ata fa’a’ohipa
+file-anchor-link|Hōho’a
+filehist-user|Ta’ata
+randompage|’Api mā’iti-haere-noa
+specialloguserlabel|Ta’ata fa’a’ohipa :
+allpagessubmit|Haere
+watch|Ha’apa’o
+prot_1movedto2|’Ua tāhitihia te ’api [[~{0}]] e ana i te ’api ’āpī [[~{1}]]
+restriction-edit|Fa’ahuru ’ē
+restriction-move|Tāhiti
+whatlinkshere|Te mau ’api i tū’atihia mai
+tooltip-search|Roromā’imi {{SITENAME}}
+specialpages|Te mau ’api ta’a ’ē
+']:>
+).lang
+;

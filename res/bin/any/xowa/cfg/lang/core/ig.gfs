@@ -1,0 +1,1599 @@
+this
+.ns_names
+  .load_text(
+<:['
+-2|Midia
+-1|Ihü kárírí
+1|Okwu
+2|Ọbanife
+3|Okwu ọbanife
+5|Okwu $1
+6|Usòrò
+7|Okwu usòrò
+8|MidiaWiki
+9|Okwu MidiaWiki
+10|Àtụ
+11|Okwu àtụ
+12|Nkwadọ
+13|Okwu nkwadọ
+14|Òtù
+15|Okwu òtù
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-2|Nká
+2|Ọ\\'bànifé
+3|Okwu ọ\\'bànifé
+6|Ákwúkwó orünotu
+7|Okwu ákwúkwó orünotu
+8|NkáWiki
+9|Okwu NkáWiki
+12|Nkwádọ
+13|Okwu nkwádọ
+14|Ébéonọr
+15|Okwu ébéonọr
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Allpages|IhüNílé
+Blankpage|HịcháIhü
+Export|MēKọFùtá
+Filepath|UzọrAkwúkwóOrünotu
+Import|BàÍfé
+Mypage|IhüNkèm
+Mytalk|OkwuNkèm
+Preferences|Ọtúm_dọsẹrẹ_ihem
+Specialpages|IhüKá
+Undelete|Ábàkàshịkwàlà
+Upload|TinyéIheNélú
+Userlogin|Ọ\\'bàniféÍBànyé
+Userlogout|Ọ\\'bàniféÍFụtá
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+redirect|0|#KÚFÙ~#REDIRECT~
+fullpagename|1|ÁHÀNÍLÉNKÈIHÜ~FULLPAGENAME~
+msg|0|OZI~MSG~
+img_right|1|áká_ịkẹngạ~right~
+img_left|1|áká_èkpè~left~
+img_top|1|élú~top~
+img_middle|1|ẹtítì~middle~
+img_text_bottom|1|okpúrù-ede~text-bottom~
+displaytitle|1|ZIÍSHÍ~DISPLAYTITLE~
+tag|0|#tag~
+pagesize|1|ÀSÁIHÜ~PAGESIZE~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#ȯ_bú~#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#ógè~#time~
+timel|0|#ógèl~#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Sondè
+monday|Mondè
+tuesday|Tusdè
+wednesday|Wensdè
+thursday|Torsdè
+friday|Fridè
+saturday|Satorde
+sun|Son
+mon|Mon
+tue|Tus
+wed|Wen
+thu|Tor
+fri|Fri
+sat|Sat
+january|Önwa Mbú
+february|Önwa Abụọ
+march|Önwa Atọ
+april|Önwa Anọ
+may_long|Önwa Ise
+june|Önwa Isii
+july|Önwa Asaa
+august|Önwa Asáto
+september|Önwa Itolu
+october|Önwa Iri
+november|Önwa Iri na otu
+december|Önwa Iri na abụọ
+january-gen|Önwa Mbú
+february-gen|Önwa Abụọ
+march-gen|Önwa Atọ
+april-gen|Önwa Anọ
+may-gen|Önwa Ise
+june-gen|Önwa Isii
+july-gen|Önwa Asaa
+august-gen|Önwa Asatọ
+september-gen|Önwa Itolu
+october-gen|Önwa Iri
+november-gen|Önwa Iri na otu
+december-gen|Önwa Iri na abụọ
+jan|ÖMbú
+feb|ÖAbụ
+mar|ÖAtọ
+apr|ÖAnọ
+may|ÖIse
+jun|ÖIsi
+jul|ÖAsa
+aug|ÖAsọ
+sep|ÖIto
+oct|ÖIri
+nov|ÖIrinotu
+dec|ÖIrinabụọ
+toc|Ihe dị ime
+redirectedfrom|(Kufùrù shi ~{0})
+allpages|Ihü níle
+prevpage|Ihü nke búzọr (~{0})
+nextpage|Ihü sò (~{0})
+collapsible-collapse|Zekpùdo
+collapsible-expand|Gbásà
+sort-descending|Dozi shí àlà
+sort-ascending|Dozi shí élú
+categories|Ébéanọr
+lastmodifiedat|Há rüchàrà na ihü nka na ~{0}, mgbe ~{1}
+thumbnail-more|Me ko bu ibù
+otherlanguages|Na asụsụ ndị ozó
+blanknamespace|(Ḿkpà)
+pagecategories|{{PLURAL:~{0}\u007CÉbéonọr\u007CÉbéonọr}}
+category_header|Ihü nọr ime ébéonọr "~{0}"
+subcategories|Ébéonọr ime ime
+category-media-header|Nka nọr ime ébéonọr "~{0}"
+category-empty|"Ébéonọr nke enwéghị ihü ma nkà ímé ya."
+category-subcat-count|{{PLURAL:~{1}\u007CÉbéanọr nka nwerechạ ébéanọr-ime nkeá.\u007CÉbéanọr nka nwere {{PLURAL:~{0}\u007Cébéanọr-ime\u007C~{0} ébéanọr-ime}}, guru nke ~{1} total.}}
+category-subcat-count-limited|Ébéonọr nke á nwèrè {{PLURAL:~{0}\u007Címéébéanọr\u007Címéébéanọr ~{0}}} nke á.
+category-article-count|{{PLURAL:~{1}\u007CÉbéonọr nke nwèrè náni ihü nke.\u007CNke {{PLURAL:~{0}\u007Cihü nke\u007C~{0} ihü ndi a}} nọr na ébéonọr nke a, shí haníle dí ~{1}.}}
+category-article-count-limited|Nkeá {{PLURAL:~{0}\u007Cihü dị\u007Cihü ~{0} dị}} na ébéanọr nkeá.
+category-file-count|{{PLURAL:~{1}\u007CÉbéonọr nka nwèrè náni usòrò nka.\u007C{{PLURAL:~{0}\u007CUsòrò nka\u007CUsòrò nke ~{0}}} di na ímé ébéonọr nga, shí háníle di ~{1}.}}
+category-file-count-limited|Nkeá {{PLURAL:~{0}\u007Cusòrò dị\u007Cusòrò ~{0} dị}} na ébéanọr nkeá.
+nextn|{{PLURAL:~{0}\u007C~{0}}} nke ozor
+prevn|{{PLURAL:~{0}\u007C~{0}}} nke àzú
+listingcontinuesabbrev|mewá.
+bold_sample|Mkpúrù èdè íke
+bold_tip|Mkpúrù èdè íke
+italic_sample|Mkpurụ okwu sélénsé
+italic_tip|Mkpurụ okwu sélénsé
+link_sample|Ishi edemede nke jikodo
+link_tip|Jikodo nke ímé
+headline_sample|Ahiri ishi mkpurụ edemede
+headline_tip|Larri 2 ishiahiri
+hidden-category-category|Ébéanọr zonari a zonari
+statistics|Olìlé ọtụ ihe dị
+statistics-header-pages|Ọmúmú-nà-ńlé ihü
+statistics-articles|Ihü ihe dị
+statistics-pages|Ihü
+categorytree|Egbü nke ébéanọr
+categorytree-portlet|Ébéanọr
+categorytree-legend|Zi egbü nke ébéanọr
+categorytree-category|Ébéonọr:
+categorytree-go|Zí oshíshí
+categorytree-parents|Ndi mụrụ
+categorytree-mode-categories|Náni ébéanọr
+categorytree-mode-all|Ihü nílé
+categorytree-collapse|zekpùdo
+categorytree-expand|Sá àsáá
+categorytree-load|mẹ kó byá
+categorytree-loading|ó byáwálá...
+categorytree-no-subcategories|ébéonọr-ime àdíghị
+categorytree-no-pages|ihü ma ébéonọr-ímé àdíghị
+cite-desc|Tikwá <nowiki><ref[ áhà=id]></nowiki> and <nowiki><references/></nowiki> ndö, maka ntabi okwu
+proofreadpage_image|Nhuunuche
+proofreadpage_nextpage|Ihü sò
+proofreadpage_prevpage|Ihü na àzú
+proofreadpage_index_listofpages|Ndétu ihü
+proofreadpage_source|Mkpọlọ́gwụ̀
+cite_article_desc|Nè tí [[Special:Cite\u007Cndéputà]] ihü kárírí na jikodo ngwa ọru
+cite_article_link|Députà ihüa
+tooltip-cite-article|Ùmà màkà otụ ha shi députà ihe na ihüa
+cite|Ndéputà
+cite_page|Ihü:
+cite_submit|Ndéputà
+wikieditor-loading|Ọ na biá
+wikieditor-preview-changes-tab|Ihe gbanwere
+wikieditor-preview-loading|Ọ biágó...
+wikieditor-previewDialog-tab|Lètú
+wikieditor-publish-button-publish|Bìpụta
+wikieditor-publish-button-cancel|Kàchá
+wikieditor-publish-dialog-minor|Orü ntà
+wikieditor-publish-dialog-publish|Bìpụta
+wikieditor-publish-dialog-goback|Gá na àzú
+wikieditor-template-editor-dialog-title|Rüwa àtụ
+wikieditor-template-editor-dialog-submit|Dịnwanye mmā
+wikieditor-template-editor-dialog-cancel|Kàchá
+wikieditor-toc-show|Zí ihe di ímé
+wikieditor-toc-hide|Zonari ihe di ímé
+wikieditor-toolbar-loading|Ọ biágó...
+wikieditor-toolbar-tool-bold|Shí íke
+wikieditor-toolbar-tool-bold-example|Mkpúrù èdè íke
+wikieditor-toolbar-tool-italic|Édémédé nsem
+wikieditor-toolbar-tool-italic-example|Mkpurụ okwu sélénsé
+wikieditor-toolbar-tool-ilink|Jikodo nke ímé
+wikieditor-toolbar-tool-ilink-example|Ishi edemede nke jikodo
+wikieditor-toolbar-tool-link|Jikodo
+wikieditor-toolbar-tool-link-title|Tìnyé jikodo
+wikieditor-toolbar-tool-link-ext-target|Jikodo URL:
+wikieditor-toolbar-tool-link-ext-text|Jikodo mkpúrù èdè:
+wikieditor-toolbar-tool-link-cancel|Kàchá
+wikieditor-toolbar-tool-link-int-target-status-exists|Ihü dị
+wikieditor-toolbar-tool-link-int-target-status-external|Jikodo di èzí
+wikieditor-toolbar-tool-reference-cancel|Kàchá
+wikieditor-toolbar-tool-reference-insert|Tìnyé
+wikieditor-toolbar-tool-heading-1|Ọtú 1
+wikieditor-toolbar-tool-heading-2|Ọtú 2
+wikieditor-toolbar-tool-heading-3|Ọtú 3
+wikieditor-toolbar-tool-heading-4|Ọtú 4
+wikieditor-toolbar-tool-heading-5|Ọtú 5
+wikieditor-toolbar-tool-heading-example|Mkpụrụ édé íshí
+wikieditor-toolbar-tool-big|Ukwu
+wikieditor-toolbar-tool-big-example|Mkpụrụ okwu nke ukwu
+wikieditor-toolbar-tool-small|Ntàkiri
+wikieditor-toolbar-tool-small-example|Mkpụrụ okwu nke ntàkịrị
+wikieditor-toolbar-tool-newline|Áhịrị ohürù
+wikieditor-toolbar-tool-table|Agada
+wikieditor-toolbar-tool-table-dimensions-rows|Ǹdịlị
+wikieditor-toolbar-tool-table-dimensions-columns|Ogìdì
+wikieditor-toolbar-tool-table-cancel|Kàchá
+wikieditor-toolbar-tool-replace-search|Chọwa màkà:
+wikieditor-toolbar-tool-replace-close|Mèchí
+wikieditor-toolbar-characters-page-latin|Latin
+wikieditor-toolbar-characters-page-latinextended|Latin dọrọ
+wikieditor-toolbar-characters-page-ipa|IPA
+wikieditor-toolbar-characters-page-symbols|Nkárí
+wikieditor-toolbar-characters-page-greek|Greek
+wikieditor-toolbar-characters-page-cyrillic|Cyrillic
+wikieditor-toolbar-characters-page-arabic|Arabiki
+wikieditor-toolbar-characters-page-persian|Asụsụ Persia
+wikieditor-toolbar-characters-page-hebrew|Asụsụ Hebrew
+wikieditor-toolbar-characters-page-bangla|Bangla
+wikieditor-toolbar-characters-page-telugu|Telugu
+wikieditor-toolbar-characters-page-sinhala|Sinhala
+wikieditor-toolbar-characters-page-gujarati|Gujarati
+wikieditor-toolbar-characters-page-thai|Asụsụ Thai
+wikieditor-toolbar-characters-page-lao|Asụsụ Laos
+wikieditor-toolbar-characters-page-khmer|Khmer
+wikieditor-toolbar-section-help|Nkwádo
+wikieditor-toolbar-help-heading-description|Nkówká ihe ȯ bụ
+wikieditor-toolbar-help-page-link|Jikodo
+wikieditor-toolbar-help-page-heading|Íshí édé
+wikieditor-toolbar-help-page-list|Ndetu
+wikieditor-toolbar-help-page-file|Usòrò
+wikieditor-toolbar-help-page-discussion|Ákíkó
+wikieditor-toolbar-help-content-italic-description|Édémédé nsem
+wikieditor-toolbar-help-content-bold-description|Shí íke
+wikieditor-toolbar-help-content-bold-syntax|'''Édémédé shírí íké'''
+wikieditor-toolbar-help-content-ilink-description|Jikodo nke ímé
+wikieditor-toolbar-help-content-xlink-description|Jikodo di èzí
+wikieditor-toolbar-help-content-heading2-syntax|== Édémédé íshí ==
+wikieditor-toolbar-help-content-heading2-result|<h2>Íshí edemede</h2>
+wikieditor-toolbar-help-content-heading3-syntax|=== Édémédé íshí ===
+wikieditor-toolbar-help-content-heading3-result|<h3>Íshí edemede</h3>
+wikieditor-toolbar-help-content-heading4-syntax|==== Édémédé íshí ====
+wikieditor-toolbar-help-content-heading4-result|<h4>Íshí edemede</h4>
+wikieditor-toolbar-help-content-heading5-syntax|===== Édémédé íshí =====
+wikieditor-toolbar-help-content-heading5-result|<h5>Íshí edemede</h5>
+wikieditor-toolbar-help-content-signature-description|Áhà gi
+wikieditor-toolbar-help-content-indent-description|Tụ atụ
+wm-license-cc-attribution|Í-kpó-áhà
+wm-license-cc-by-1.0-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/1.0/ Í kpó áhà nke Ñkịtị 1.0].
+wm-license-cc-by-1.0-fi-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/1.0/fi/ Í kpó áhà nke Finland 1.0].
+wm-license-cc-by-1.0-il-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/1.0/il/ Í kpó áhà nke Israel 1.0].
+wm-license-cc-by-1.0-nl-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/1.0/nl/ Í kpó áhà nke Netherlands 1.0].
+wm-license-cc-by-2.0-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/ Í kpó áhà nke Ñkịtị 2.0].
+wm-license-cc-by-2.0-at-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/at/ Í kpó áhà nke Ostria 2.0].
+wm-license-cc-by-2.0-au-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/au/ Í kpó áhà nke Ostraliya 2.0].
+wm-license-cc-by-2.0-be-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/be/ Í kpó áhà nke Belgium 2.0].
+wm-license-cc-by-2.0-br-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/br/ Í kpó áhà nke Brazil 2.0].
+wm-license-cc-by-2.0-ca-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/ca/ Í kpó áhà nke Kanada 2.0].
+wm-license-cc-by-2.0-cl-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/cl/ Í kpó áhà nke Chile 2.0].
+wm-license-cc-by-2.0-de-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/de/ Í kpó áhà nke Jémanị 2.0].
+wm-license-cc-by-2.0-es-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/es/ Í kpó áhà nke Spain 2.0].
+wm-license-cc-by-2.0-fr-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/fr/ Í kpó áhà nke France 2.0].
+wm-license-cc-by-2.0-hr-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/hr/ Í kpó áhà nke Croatia 2.0].
+wm-license-cc-by-2.0-it-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/it/ Í kpó áhà nke Italy 2.0].
+wm-license-cc-by-2.0-jp-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/jp/ Í kpó áhà nke Japan 2.0].
+wm-license-cc-by-2.0-kr-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/kr/ Í kpó áhà nke Korea 2.0].
+wm-license-cc-by-2.0-nl-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/nl/ Í kpó áhà nke Netherlands 2.0].
+wm-license-cc-by-2.0-pl-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/pl/ Í kpó áhà nke Poland 2.0].
+wm-license-cc-by-2.0-tw-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/tw/ Í kpó áhà nke Taiwan 2.0].
+wm-license-cc-by-2.0-uk-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/uk/ Í kpó áhà nke UK: England na Wales 2.0].
+wm-license-cc-by-2.0-za-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.0/za/ Í kpó áhà nke South Africa 2.0].
+wm-license-cc-by-2.1-au-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.1/au/ Í kpó áhà nke Ostraliya 2.1].
+wm-license-cc-by-2.1-es-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.1/es/ Í kpó áhà nke Spain 2.1].
+wm-license-cc-by-2.1-jp-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.1/jp/ Í kpó áhà nke Japan 2.1].
+wm-license-cc-by-2.5-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/ Í kpó áhà nke Ñkịtị 2.5].
+wm-license-cc-by-2.5-au-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/au/ Í kpó áhà nke Ostraliya 2.5].
+wm-license-cc-by-2.5-bg-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/bg/ Í kpó áhà nke Bulgaria 2.5].
+wm-license-cc-by-2.5-br-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/br/ Í kpó áhà nke Brazil 2.5].
+wm-license-cc-by-2.5-ca-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/ca/ Í kpó áhà nke Kanada 2.5].
+wm-license-cc-by-2.5-ch-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/ch/ Í kpó áhà nke Switzerland 2.5].
+wm-license-cc-by-2.5-cn-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/cn/ Í kpó áhà nke Àlà ukwu China 2.5].
+wm-license-cc-by-2.5-co-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/co/ Í kpó áhà nke Colombia 2.5].
+wm-license-cc-by-2.5-dk-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/dk/ Í kpó áhà nke Denmark 2.5].
+wm-license-cc-by-2.5-es-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/es/ Í kpó áhà nke Spain 2.5].
+wm-license-cc-by-2.5-hr-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/hr/ Í kpó áhà nke Croatia 2.5].
+wm-license-cc-by-2.5-hu-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/hu/ Í kpó áhà nke Hungary 2.5].
+wm-license-cc-by-2.5-il-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/il/ Í kpó áhà nke Israel 2.5].
+wm-license-cc-by-2.5-in-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/in/ Í kpó áhà nke Ndia 2.5].
+wm-license-cc-by-2.5-it-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/it/ Í kpó áhà nke Italy 2.5].
+wm-license-cc-by-2.5-mk-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/mk/ Í kpó áhà nke Macedonia 2.5].
+wm-license-cc-by-2.5-mt-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/mt/ Í kpó áhà nke Malta 2.5].
+wm-license-cc-by-2.5-mx-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/mx/ Í kpó áhà nke Meksico 2.5].
+wm-license-cc-by-2.5-my-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/my/ Í kpó áhà nke Malaysia 2.5].
+wm-license-cc-by-2.5-nl-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/nl/ Í kpó áhà nke Netherlands 2.5].
+wm-license-cc-by-2.5-pe-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/pe/ Í kpó áhà nke Peru 2.5].
+wm-license-cc-by-2.5-pl-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/pl/ Í kpó áhà nke Poland 2.5].
+wm-license-cc-by-2.5-pt-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/pt/ Í kpó áhà nke Portugal 2.5].
+wm-license-cc-by-2.5-scotland-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/scotland/ Í kpó áhà nke UK: Scotland 2.5].
+wm-license-cc-by-2.5-se-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/se/ Í kpó áhà nke Sweden 2.5].
+wm-license-cc-by-2.5-si-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/si/ Í kpó áhà nke Slovenia 2.5].
+wm-license-cc-by-2.5-tw-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/tw/ Í kpó áhà nke Taiwan 2.5].
+wm-license-cc-by-2.5-za-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/2.5/za/ Í kpó áhà nke South Africa 2.5].
+wm-license-cc-by-3.0-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/ Í kpó áhà nke ádịghị na úlò 3.0].
+wm-license-cc-by-3.0-at-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/at/ Í kpó áhà nke Ostria 3.0].
+wm-license-cc-by-3.0-cz-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/cz/ Í kpó áhà nke Czech Republic 3.0].
+wm-license-cc-by-3.0-de-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/de/ Í kpó áhà nke Jémanị 3.0].
+wm-license-cc-by-3.0-es-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/es/ Í kpó áhà nke Spain 3.0].
+wm-license-cc-by-3.0-gr-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/gr/ Í kpó áhà nke Greece 3.0].
+wm-license-cc-by-3.0-gt-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/gt/ Í kpó áhà nke Gwatamala 3.0].
+wm-license-cc-by-3.0-hk-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/hk/ Í kpó áhà nke Hong Kong 3.0].
+wm-license-cc-by-3.0-hr-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/hr/ Í kpó áhà nke Croatia 3.0].
+wm-license-cc-by-3.0-lu-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/lu/ Í kpó áhà nke Loksembourg 3.0].
+wm-license-cc-by-3.0-nl-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/nl/ Í kpó áhà nke Netherlands 3.0].
+wm-license-cc-by-3.0-no-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/no/ Í kpó áhà nke Norway 3.0].
+wm-license-cc-by-3.0-nz-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/nz/ Í kpó áhà nke New Zealand 3.0].
+wm-license-cc-by-3.0-ph-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/ph/ Í kpó áhà nke Philippines 3.0].
+wm-license-cc-by-3.0-pl-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/pl/ Í kpó áhà nke Poland 3.0].
+wm-license-cc-by-3.0-pr-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/pr/ Í kpó áhà nke Puerto Rico 3.0].
+wm-license-cc-by-3.0-ro-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/ro/ Í kpó áhà nke Romania 3.0].
+wm-license-cc-by-3.0-rs-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/rs/ Í kpó áhà nke Serbia 3.0].
+wm-license-cc-by-3.0-sg-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/sg/ Í kpó áhà nke Singapore 3.0].
+wm-license-cc-by-3.0-th-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/th/ Í kpó áhà nke Thailand 3.0].
+wm-license-cc-by-3.0-tw-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/tw/ Í kpó áhà nke Taiwan 3.0].
+wm-license-cc-by-3.0-us-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by/3.0/us/ Í kpó áhà nke Njikota Obodo 3.0].
+wm-license-cc-by-sa-1.0-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/1.0/ Í kpó áhà-Í gbàsáa nke Ñkịtị 1.0].
+wm-license-cc-by-sa-1.0-fi-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/1.0/fi/ Í kpó áhà-Í gbàsáa nke Finland 1.0].
+wm-license-cc-by-sa-1.0-il-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/1.0/il/ Í kpó áhà-Í gbàsáa nke Israel 1.0].
+wm-license-cc-by-sa-1.0-nl-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/1.0/nl/ Í kpó áhà-Í gbàsáa nke Netherlands 1.0].
+wm-license-cc-by-sa-2.0-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/ Í kpó áhà-Í gbàsáa nke Ñkịtị 2.0].
+wm-license-cc-by-sa-2.0-at-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/at/ Í kpó áhà-Í gbàsáa nke Ostria 2.0].
+wm-license-cc-by-sa-2.0-au-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/au/ Í kpó áhà-Í gbàsáa nke Ostraliya 2.0].
+wm-license-cc-by-sa-2.0-be-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/be/ Í kpó áhà-Í gbàsáa nke Belgium 2.0].
+wm-license-cc-by-sa-2.0-br-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/br/ Í kpó áhà-Í gbàsáa nke Brazil 2.0].
+wm-license-cc-by-sa-2.0-ca-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/ca/ Í kpó áhà-Í gbàsáa nke Kanada 2.0].
+wm-license-cc-by-sa-2.0-cl-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/cl/ Í kpó áhà-Í gbàsáa nke Chile 2.0].
+wm-license-cc-by-sa-2.0-de-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/de/ Í kpó áhà-Í gbàsáa nke Jémanị 2.0].
+wm-license-cc-by-sa-2.0-es-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/es/ Í kpó áhà-Í gbàsáa nke Spain 2.0].
+wm-license-cc-by-sa-2.0-fr-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/fr/ Í kpó áhà-Í gbàsáa nke France 2.0].
+wm-license-cc-by-sa-2.0-hr-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/hr/ Í kpó áhà-Í gbàsáa nke Croatia 2.0].
+wm-license-cc-by-sa-2.0-it-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/it/ Í kpó áhà-Í gbàsáa nke Italy 2.0].
+wm-license-cc-by-sa-2.0-jp-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/jp/ Í kpó áhà-Í gbàsáa nke Japan 2.0].
+wm-license-cc-by-sa-2.0-kr-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/kr/ Í kpó áhà-Í gbàsáa nke Korea 2.0].
+wm-license-cc-by-sa-2.0-nl-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/nl/ Í kpó áhà-Í gbàsáa nke Netherlands 2.0].
+wm-license-cc-by-sa-2.0-pl-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/pl/ Í kpó áhà-Í gbàsáa nke Poland 2.0].
+wm-license-cc-by-sa-2.0-tw-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/tw/ Í kpó áhà-Í gbàsáa nke Taiwan 2.0].
+wm-license-cc-by-sa-2.0-uk-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/uk/ Í kpó áhà-Í gbàsáa nke UK: England na Wales 2.0].
+wm-license-cc-by-sa-2.0-za-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.0/za/ Í kpó áhà-Í gbàsáa nke South Africa 2.0].
+wm-license-cc-by-sa-2.1-au-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.1/au/ Í kpó áhà-Í gbàsáa nke Ostraliya 2.1].
+wm-license-cc-by-sa-2.1-es-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.1/es/ Í kpó áhà-Í gbàsáa nke Spain 2.1].
+wm-license-cc-by-sa-2.1-jp-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.1/jp/ Í kpó áhà-Í gbàsáa nke Japan 2.1].
+wm-license-cc-by-sa-2.5-ar-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/ar/ Í kpó áhà-Í gbàsáa nke Argentina 2.5].
+wm-license-cc-by-sa-2.5-au-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/au/ Í kpó áhà-Í gbàsáa nke Ostralitya 2.5].
+wm-license-cc-by-sa-2.5-bg-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/bg/ Í kpó áhà-Í gbàsáa nke Bulgaria 2.5].
+wm-license-cc-by-sa-2.5-br-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/br/ Í kpó áhà-Í gbàsáa nke Brazil 2.5].
+wm-license-cc-by-sa-2.5-ca-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/ca/ Í kpó áhà-Í gbàsáa nke Kanada 2.5].
+wm-license-cc-by-sa-2.5-ch-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/ch/ Í kpó áhà-Í gbàsáa nke Switzerland 2.5].
+wm-license-cc-by-sa-2.5-cn-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/cn/ Í kpó áhà-Í gbàsáa nke Àlà ukwu China 2.5].
+wm-license-cc-by-sa-2.5-co-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/co/ Í kpó áhà-Í gbàsáa nke Colombia 2.5].
+wm-license-cc-by-sa-2.5-dk-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/dk/ Í kpó áhà-Í gbàsáa nke Denmark 2.5].
+wm-license-cc-by-sa-2.5-es-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/es/ Í kpó áhà-Í gbàsáa nke Spain 2.5].
+wm-license-cc-by-sa-2.5-hr-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/hr/ Í kpó áhà-Í gbàsáa nke Croatia 2.5].
+wm-license-cc-by-sa-2.5-hu-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/hu/ Í kpó áhà-Í gbàsáa nke Hungary 2.5].
+wm-license-cc-by-sa-2.5-il-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/il/ Í kpó áhà-Í gbàsáa nke Israel 2.5].
+wm-license-cc-by-sa-2.5-in-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/in/ Í kpó áhà-Í gbàsáa nke Ndia 2.5].
+wm-license-cc-by-sa-2.5-it-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/it/ Í kpó áhà-Í gbàsáa nke Italy 2.5].
+wm-license-cc-by-sa-2.5-mk-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/mk/ Í kpó áhà-Í gbàsáa nke Macedonia 2.5].
+wm-license-cc-by-sa-2.5-mt-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/mt/ Í kpó áhà-Í gbàsáa nke Malta 2.5].
+wm-license-cc-by-sa-2.5-mx-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/mx/ Í kpó áhà-Í gbàsáa nke Mecsiko 2.5].
+wm-license-cc-by-sa-2.5-my-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/my/ Í kpó áhà-Í gbàsáa nke Malaysia 2.5].
+wm-license-cc-by-sa-2.5-nl-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/nl/ Í kpó áhà-Í gbàsáa nke Netherlands 2.5].
+wm-license-cc-by-sa-2.5-pe-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/pe/ Í kpó áhà-Í gbàsáa nke Peru 2.5].
+wm-license-cc-by-sa-2.5-pl-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/pl/ Í kpó áhà-Í gbàsáa nke Poland 2.5].
+wm-license-cc-by-sa-2.5-pt-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/pt/ Í kpó áhà-Í gbàsáa nke Portugal 2.5].
+wm-license-cc-by-sa-2.5-scotland-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/scotland/ Í kpó áhà-Í gbàsáa nke UK: Scotland 2.5].
+wm-license-cc-by-sa-2.5-se-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/se/ Í kpó áhà-Í gbàsáa nke Sweden 2.5].
+wm-license-cc-by-sa-2.5-si-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/si/ Í kpó áhà-Í gbàsáa nke Slovenia 2.5].
+wm-license-cc-by-sa-2.5-tw-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/tw/ Í kpó áhà-Í gbàsáa nke Taiwan 2.5].
+wm-license-cc-by-sa-2.5-za-text|Usòrò nke á di okpúrù ákwúkwó íwú nke [[{{int:wm-license-cc-wiki-link}}\u007CMmẹ Òkike Tu ụta Ñkịtị]] édé íwú nke [//creativecommons.org/licenses/by-sa/2.5/za/ Í kpó áhà-Í gbàsáa nke South Africa 2.5].
+wm-license-cc-free|I wepulara nóru:
+wm-license-cc-free-to-share-header|i nye
+wm-license-cc-free-to-remix-header|i dowaria
+wm-license-cc-conditions-attribution-header|í-kpó-áhà
+wm-license-cc-conditions-share_alike-header|gbásàa kà
+wikimedialicensetexts-desc|Ozi nkwènyé Wikimedia
+wm-license-gfdl-1.2-and-later|Í nwèrèíkí jé, gbạsáa na/ma í mezí akwukwo nka na okpúrù íwú '''[[{{int:wm-license-gfdl-wiki-link}}\u007CGNU Ákwúkwó Íwú nke Owéré]]''', Nké 1.2 ma nke íchè ndi [[{{int:wm-license-fsf-wiki-link}}\u007CFree Software Foundation]]; wéfùtàrà; na adighi nkejị di íchẹ, adighi édé nke Ihú-Ihü Ákwúkwó, na adighi Ázú-Ihü Ákwúkwó. Ákwúkwó iwu hé jéré jé di na nkeji kpóró ''[[{{int:wm-license-gfdl-full-1.2-link}}\u007CGNU Ákwúkwó Íwú nke Owéré]]".
+wm-license-gfdl-wiki-link|w:ig:GNU Free Documentation License
+wm-license-information-description|Nkówá
+wm-license-information-source|Mkpọlọ́gwụ̀
+wm-license-information-date|Ǹgụ́ụ̀bọ̀chị̀
+wm-license-information-author|Odé ákwụ́kwọ́
+wm-license-information-permission|Ọdà
+wm-license-information-permission-reusing-text|Í jí kwá usòrò nke
+wm-license-information-permission-see-below|Lé na àlà.
+wm-license-information-other-versions|Nke ya ozor
+wm-license-own-work|Orü ọnwé
+wm-license-pd-wiki-link|w:ig:Public domain
+sitesupport|Nyeturuanyi ihe
+tooltip-n-sitesupport|Nye anyi ike
+group-confirmed|Ézíbóté ọ'bànifé
+group-confirmed-member|ézíbóté ọ'bànifé
+group-filemover|Ndi npáfù usòrò
+group-filemover-member|onye npáfù usòrò
+grouppage-filemover|{{ns:project}}:Ndi mpáfù usòrò
+group-flood|Ndi ne ji bot
+group-flood-member|onye na ji bot emé ihe
+grouppage-flood|{{ns:project}}:Ọ'bànifé bot
+group-founder|Ndi buzọr
+group-founder-member|onye buzọr
+grouppage-founder|{{ns:project}}:Ndi mbídó
+group-import|Ndi na wete ihe
+group-import-member|onye na wete ihe
+group-patroller-member|onye na léfuru ihe anyà
+group-researcher|Ndi-nchékàsí-ọmúmú
+group-researcher-member|onye-nchékàsí-ọmúmú
+group-rollbacker|Ọ'fifie-nà-àzú
+group-rollbacker-member|ọ'fifie-nà-àzú
+group-trusted-member|ọ'bànifé nchèkwube
+grouppage-trusted|{{ns:project}}:Ọ'bànifé nchèkwube
+group-Staff-member|ndi na rüoru nga
+group-steward|Ò'dózí
+group-steward-member|ò'dózí
+wikimedia-copyright|Édé nọr okpúrù <a href="https://creativecommons.org/licenses/by-sa/3.0/">Mmẹ Òkike Tu ụta Ñkịtị</a>; ihe ejị ẹ kwenye nọr kwa.\nLé <a href="https://wikimediafoundation.org/wiki/Terms_of_Use">Nkwenye maka Í me ihe</a> maka ihe ozor Í gi má.
+wikimedia-copyrightwarning|Na Í donyé, Í kwè na Í gi nyé ihe Í mèrè na nke I nweriki wefụ na okpúrù [https://creativecommons.org/licenses/by-sa/3.0/ Mmẹ Òkike Tu ụta Ñkịtị/Gbásaa-Kà Édéíwu 3.0] na [https://www.gnu.org/copyleft/fdl.html GFDL].\nÍ kwèrè na ndi madu na rürü gi nye gi kpó áhà gi, na nke ntà há gí me, shí njikodo intanet ma URL Í gi ga ihü Í rürü nà.\nLé [https://wikimediafoundation.org/wiki/Terms_of_Use Nkwenye maka Í me ihe] maka ihe ozor Í gi má.
+tog-underline|Okpürụ ahiri jikodo:
+tog-hideminor|Zonari orü ntàkírí na nwerue mẹrẹ ogẹ nsó
+tog-hidepatrolled|Zonari orü ha hụrụ na nwerue mẹrẹ ogẹ nsó
+tog-newpageshidepatrolled|Zonari orü ha hụrụ shí ndetu ihü ohúrù
+tog-extendwatchlist|Gbasa ndetu ihe ánà elé ka ó zi gbanwere nke níle, o bughi nani nke isi nso
+tog-usenewrc|Ji ihe gbanwere nso níguélé élu (ö chọrọ JavaScript)
+tog-numberheadings|Onuogụgụ-otu anyi mere ya maka ishi edemede
+tog-showtoolbar|Zi igbe orü (Í gí nwere JavaScript)
+tog-editondblclick|Rüwá na élu ihü mgbe I kpạtạrạ (ö chọrọ JavaScript)
+tog-editsectiononrightclick|Kpa na áká nri Í gbanyé orürü nkeji na ishi nkeji (ö chọrọ JavaScript)
+tog-watchcreations|Tinyé ihüm na eké na ndetu ihem ne lé
+tog-watchdefault|Tinyé ihü m na rüoru élu na ndetu ihem ne lé
+tog-watchmoves|Tinyé ihü m na puzié na ndetu ihe m ne lé
+tog-watchdeletion|Tinyé ihü m na kàcha na ndetu ihe m ne lé
+tog-minordefault|Me ka nhoro da na orü ntakịrị níle
+tog-previewontop|Zitú ntàkịrị mgbe opuzọr zi igbe orü
+tog-previewonfirst|Zitú nke takírí orü mbu
+tog-enotifwatchlistpages|Türüm e-mail mgbe ihü nor na ndetu ihem ne lé gbanwere
+tog-enotifusertalkpages|Türüm e-mail ngbe ébé okwu ndi na banife nkem gbanwere
+tog-enotifminoredits|Türüm e-mail maka orü ntakịrị ihüá
+tog-enotifrevealaddr|Zifór áhàebeíbị e-mail m na e-mail okwuókà
+tog-shownumberswatching|Zi onuogụgụ ndi na banife nke ne lé
+tog-oldsig|Létu ntakiri ndẹlu ejị a ma gí:
+tog-fancysig|Mesò ka nkábi nwéré édé wiki (nké énwéghị jikodo nke nọr na onwe)
+tog-uselivepreview|Jí nlé ntàkírí dí ndụ (Í gí nwé JavaScript) (mmètú kanyí lé)
+tog-forceeditsummary|Gwam mgbè okwu nsem màkà orüm rürü a díghị
+tog-watchlisthideown|Zonari orüm fwuör ndetu ihem ne lé
+tog-watchlisthidebots|Zonari orü bot fwuör ndetu ihem ne lé
+tog-watchlisthideminor|Zonari orü ntakịrị fwuör ndetu ihem ne lé
+tog-watchlisthideliu|Zonari orü ndi na banife nke ndi banyèrè a banyé, fwuör ndetu ihem ne lé
+tog-watchlisthideanons|Zonari orü ndi na banife nke ndi ámághị, fwuör ndetu ihem ne lé
+tog-watchlisthidepatrolled|Zonari orü ha nè léfù ányá fwuör ndetu ihem ne lé
+tog-ccmeonemails|Sipu iye e-mail m na sipu ndi ozor
+tog-diffonly|É zìkwàlà ihe nọr na ihü di okpúrù íchiè
+tog-showhiddencats|Zi ébéonọr zonari a zonari
+tog-norollbackdiff|Kwà diff mgbe byárá na mgbe láázú mèchàrà
+underline-always|Ngbẹowula
+underline-never|Anáobulạ
+underline-default|Ndatụ ihü njikota
+editfont-style|Rüwa ámá udị mkpúrù èdè:
+editfont-default|Ndatụ ihü njikota
+editfont-monospace|Otụ ihe ná kechí mkpúrù èdè
+editfont-sansserif|Mkpúrù èdè sans-serif
+editfont-serif|Mkpúrù èdè Serif
+hidden-categories|{{PLURAL:~{0}\u007CÉbéonọr zonari\u007CÉbéonọr zonari}}
+index-category|Ẹdẹle Ihü
+noindex-category|Ihü ẹdẹlebu
+broken-file-category|Ihü nwere jkọdọ na ga fail gbajírí
+about|Màkà
+article|Ihü ihe dị
+newwindow|(o na mepo na onyonyo ohúrù)
+cancel|Kàchá
+moredotdotdot|Ozókwá...
+mypage|Ihü
+mytalk|Okwu
+anontalk|Owu màkà IP nká
+navigation|Otú Uzọr
+and| ná
+qbfind|Tüo
+qbbrowse|Garia
+qbedit|Mèzi
+qbpageoptions|Ihü nka
+qbmyoptions|Ihüm
+faq|FAQ
+faqpage|Project:FAQ
+actions|Mmèmé
+namespaces|Ámááhà
+variants|Nke ichè ichè
+errorpagetitle|Nsogbú
+returnto|Ganata na ~{0}.
+tagline|Oshị {{SITENAME}}
+help|Inyeáká
+search|Chọwa
+searchbutton|Chọwa
+go|Gá
+searcharticle|Gá
+history|Ịta ihüá
+history_short|Ịta
+updatedmarker|ihe gáráníru ké mgbe m byàrà nga mbu
+printableversion|Nkè I nweríkí dotié
+permalink|Jikodo ekechịrị
+print|Dotié
+view|Lèzí
+edit|Mèzi
+create|Ké
+editthispage|Rüwa na ihü nka
+create-this-page|Ké ihü nka
+delete|Kàcha
+deletethispage|Kàcha ihü nkea
+undelete_short|A gbakashikwala {{PLURAL:~{0}\u007Corü otù\u007C~{0} orü}}
+viewdeleted_short|Zi {{PLURAL:~{0}\u007Corü otụ bakashịrị\u007Corü ~{0} bakashịrị}}
+protect|Cẹdolu
+protect_change|gbanwe
+protectthispage|Cẹdolu ihü nka
+unprotect|Nchẹdo mgbanwe
+unprotectthispage|Nchẹdo mgbanwe ihü nka
+newpage|Ihü ohúrù
+talkpage|Kuwa akíkó maka ihüá
+talkpagelinktext|Okwu
+specialpage|Ihü mkpà
+personaltools|Ngwa nkem
+articlepage|Zi ihü iheníle
+talk|Akíkó
+views|Há hụrụ ya olé
+toolbox|Ngwa Oru
+userpage|Zi ihü ọ'bànifé
+projectpage|Zi ihü orü
+imagepage|Zi ihü usòrò
+mediawikipage|Zi ihü ozi
+templatepage|Zi ihü nkpurụ ihü
+viewhelppage|Zi ihü I nye áká
+categorypage|Zi ébé ihü nọr
+viewtalkpage|Zi akíkó
+redirectpagesub|Kufù ebe ihü nka na ga
+viewcount|Ha banyere ihü nka na {{PLURAL:~{0}\u007Cotu\u007C~{0} mgbe ole}}.
+protectedpage|Ihü a cẹdolu a cẹdo
+jumpto|Wuá ébé:
+jumptonavigation|otú uzọr
+jumptosearch|chọwa
+view-pool-error|Ndó, ihe na enye juchàrà ejucha oge nka.\nMadu kachạrạ ndi choro ihu ihü nka.\nBiko chetukwa oge kà oruo mgbe I choro I banyé ihü nka ozor.\n\n~{0}
+pool-timeout|Ógè e zuole Í ché ncedọ
+pool-queuefull|Pool kyu zùrù
+pool-errorunknown|Nsogbu nke námaghi
+aboutsite|Maka {{SITENAME}}
+aboutpage|Project:Ihe owù
+copyright|Ihe di ime nọr okpúrụ ~{0}
+copyrightpage|{{ns:project}}:Iwu maka ijë ihe
+currentevents|Ihe ne me ubuwá
+currentevents-url|Project:I ne me ubüwá
+disclaimers|Ihe anyí chọrọ ki ma
+disclaimerpage|Project:Ihe I kweshiri ma
+edithelp|Inyetuáká I rüwa
+mainpage|Ihü Mbu
+mainpage-description|Ihü Mbu
+policy-url|Project:Iwu
+portal|Ogbako ọtú
+portal-url|Project:Ogbako Ọtú
+privacy|Iwu maka ndi ichi ichie
+privacypage|Project:Iwu maka ndi ichi ichie
+badaccess|Nsogbu ébé ha na nyé ike I bàtá
+badaccess-group0|I nwéghị ọdà Í kpárá ihe Í chọrí mė.
+badaccess-groups|Ihe Í chọrí me bu ihe ndi ọ'bànifé nke ntàkírí nọr na {{PLURAL:~{1}\u007Cthe group\u007Cótù ọtú}} ne me náni: ~{0}
+versionrequired|MediaWiki nke ~{0} gi nọkwạ
+versionrequiredtext|Ụdì ~{0} nke MediaWiki gi dị ma Í chȯrí ji ihüá.\nLé [[Special:Version\u007Cụdì ihü]].
+ok|Ngwanu
+retrievedfrom|Wefụtàrà ya shí ''~{0}''
+youhavenewmessages|I nwèrè ~{0} (~{1}).
+youhavenewmessagesmulti|Inwere eziohu na ~{0}
+editsection|mèzi
+editold|mèzi
+viewsourceold|zi mkpurụ
+editlink|mèzi
+viewsourcelink|zi mkpurụ
+editsectionhint|Rüwa na élu nkeji: ~{0}
+showtoc|zi
+hidetoc|zonari
+thisisdeleted|Lé ma tinyechárá ~{0}?
+viewdeleted|Lé ~{0}?
+restorelink|{{PLURAL:~{0}\u007Corü otụ bakashịrị\u007Corü ~{0} bakashịrị}}
+feedlinks|Bwa ume:
+feed-invalid|Nke ntá nzèlè adíghì.
+feed-unavailable|Ntáwá ụkọ àdíghị
+site-rss-feed|~{0} ntabì RSS
+site-atom-feed|~{0} ntabì Atom
+page-rss-feed|''~{0}'' ntabì RSS
+page-atom-feed|''~{0}'' ntabì Atom
+red-link-title|~{0} (ihü a di gì)
+nstab-main|Ihü
+nstab-user|Ihü ọ'bànifé
+nstab-media|Ihü nkà
+nstab-special|Ihü mkpà
+nstab-project|Ihü orürü
+nstab-image|Usòrò
+nstab-mediawiki|Ozi
+nstab-template|Àtụ
+nstab-help|Ihü ebe ha na nye áká
+nstab-category|Ébéonọr
+nosuchaction|Mmèmé adighi
+nosuchactiontext|Ihe URL chọrọ Í me àdíghị ézíbóté.\nÍ nwèríkí dèfié URL è dèfie, ma ó nwèríkí bụ nà Í sọrọ jikodo nke àdíghị mma.\nIhe a nwèríkí bu ihe ne zi bug di na ngwa nsónùsòrò nke {{SITENAME}} jì à rü.
+nosuchspecialpage|Ihü mkpà nka a nogị
+nospecialpagetext|<strong>Í chọrọ ihü mkpà nke à díghị ézíbóté.</strong>\n\nNdetu màkà ihü mkpà nke à díghị ézíbóté nọ nà [[Special:SpecialPages\u007C{{int:specialpages}}]].
+error|Nsogbú
+databaseerror|Nsogbu nọr na njikota ómárí
+laggedslavemode|'''Gé ntị:''' Ihüá nwèríkí bu na o nwéghị ihe gáránirú na ógè nso.
+readonly|Njikota ómárí gbachịrị
+missing-article|Njidé uche nsónùsòrò ènwéghịki tuó mkpụrụ edemede nke ihü nke áhù o kwèshírí hü, nke ha gùrù "~{0}" ~{1}.\n\nIhe méré na mgbe ndiá bu ihe diff dáfùrù na ógè ndụ ya ma jikodo ákíkó mbu nke ótù ihü à gbákáshíálá.\n\nÓ bú nà ọ búghị ihe mèrè, ȯ nwèríkí bu Í gbákọtàrà àkà na áká nsónùsòrò.\nBiko chi ihe á na áká [[Special:ListUsers/sysop\u007Conye íshí]], dètú URL.
+missingarticle-rev|(nlèwáriá#: ~{0})
+missingarticle-diff|(Íchè: ~{0}, ~{1})
+internalerror|Nsogbu ime ime
+internalerror_info|Nsogbu ime ime: ~{0}
+filecopyerror|enwerịkị jë usòrò "~{0}" ko bu "~{1}".
+filerenameerror|Enwerịkị guwaria áhạ usòrò "~{0}" ko bu "~{1}".
+filedeleteerror|Enwerịkị kàchafu usòrò ''~{0}''.
+directorycreateerror|Enwerịkị ké usoro ''~{0}''.
+filenotfound|Enwerịkị tü usòrò ''~{0}''.
+unexpected|Onuogụgụ amághị o ga fụtá: ''~{0}''=''~{1}''.
+formerror|Nsogbu di: a nwere I ki nyefwuör edemede nka
+badarticleerror|Áká nke ènwèghịkị mẹ nà ihü nke.
+badtitle|Ishi edemede öjö
+badtitletext|Íshí ihü Í chọrọ à díghị ézíbóté, efù, mà ȯ dị jikodo di jikodo nke ojö na nke íshí asụsụ-mmékotárí ma wiki-mmékotárí.\nO nwèríkí nwé édé ótù ma nke ozor nke ékwéghị na íshí ihü.
+perfcached|Ómárí á kachẹrẹ na o nwẹrẹ ki a kugwaghị ya na ogẹ di nso. A maximum of {{PLURAL:~{0}\u007Cone result is\u007C~{0} results are}} available in the cache.
+viewsource|Zi mkpurụ
+actionthrottled|Mmèmé a puziélé
+protectedpagetext|Ihüá cedolụ maka orürü ạ gáa bá.
+viewsourcetext|Í nwèríkí lé na Í jé mkpurụ ihüá:
+protectedinterface|Ihü nè nyé édé nke mkpátá màkà ngwa nsónùsòrò, na ó cẹdolu gbò mmelụ.
+editinginterface|'''Okwu egú:''' I na rü ihü né nyé ihu maka mkpurụ edemede nke eji-a-rü nka.\nGbanwere më ihüa ga mètú ihu élélé nke onye-na-banife maka ndi ozor.\nMaka ikuwaria na asụsụ nke ozor, biko chetu I ji [//translatewiki.net/wiki/Main_Page?setlang=ig translatewiki.net], ihe orü MediaWiki di na ama ama.
+namespaceprotected|I weghị ike I rüwa élu ihü nor na '''~{0}''' áháama.
+ns-specialprotected|Ihü mkpà, a nweriki ru na ya.
+virus-badscanner|Ndose ojọ: amaghị ólélé obubu onyá: ''~{0}''
+virus-scanfailed|ojëjë orunotụ dàrà (edemede ~{0})
+virus-unknownscanner|amaghị obubu onyá:
+logouttext|'''I fwuóla ubwá.'''\n\nI nwèríkí jíwá {{SITENAME}} na nke ẹnwéghi áhà, mànà Í nwèríkí <span class='plainlinks'>[~{0} bátá òzọr]</span> na áhà Í shị fwüo ma áhà ozọr.\nMàkwá na o dị ihü gi zi kà Í nor kwa ímé, o gi kwüshí mgbe Í sáfùrù cache ihe ishi a gá intanet gi.
+yourname|Áhà ọ'bànifé:
+yourpassword|Okwúngáfè:
+yourpasswordagain|Detuari mkpurụ okwu ejị a gafẹ:
+remembermypassword|Chetá edemede éjim a banyé na orunótuá (nke ukwu nke rürü {{PLURAL:~{0}\u007Cchi\u007Cchi}} ~{0})
+yourdomainname|Obí gi:
+login|Banyé
+nav-login-createaccount|Banyé / ké buwá
+userlogin|Banyé / ké buwá
+userloginnocreate|Banyé
+logout|Fwuör
+userlogout|Fwuör
+notloggedin|I bátà bò
+nologin|I nwegị buwa? ~{0}.
+nologinlink|ké otụ buwa
+createaccount|Ké otụ buwa
+gotaccount|I nwerecha buwa? ~{0}.
+gotaccountlink|Banyé
+createaccountmail|na e-mail
+createaccountreason|Mgbaghaputa:
+badretype|Mkpurụ okwu ejị a gafẹ é jëghị.
+userexists|Áhè ọ'bànifé tírí di na áká onye ozor.\nBíkó nwèré áhà nke ozor.
+loginerror|Nsogbu ngbe I choro I bata
+createaccounterror|O nweriki ké buwa: ~{0}
+noname|I nyétubọ áhạ buwa di mkpà.
+loginsuccesstitle|I batala nke oma
+loginsuccess|'''Í bátálá nke ọma na ime {{SITENAME}} na áhà "~{0}".'''
+nosuchusershort|Ọ díghị ọ'bànifé nwéré áhà nke "~{0}".\nLèmá òtú Í dèrè ya.
+nouserspecified|I kweshiri nyetu áhà gi iji a rüoru.
+login-userblocked|Ha gbachịrị onye á ezi. Anaá kweté kör banyé.
+wrongpassword|Mkpurụ okwu ejị a gafẹ á dighi nke ómá.\nBiko meríáríá ya.
+wrongpasswordempty|Mkpurụ okwu ejị a gafẹ á dighi.\nBiko meríáríá ya.
+passwordtooshort|Okwúngáfè gí nwé mkpụrụ édé na ntà gi rü {{PLURAL:~{0}\u007C1\u007C~{0}}}.
+mailmypassword|Me e-mail okwúngáfè nke ohúrù
+passwordremindertitle|Okwúngáfè nke ohürù màkà {{SITENAME}} nke ógè ntàkírí
+mailerror|Nsogbú mẹrẹ mgbe ozi nke chorí gá: ~{0}
+emailconfirmlink|Lé ka I hü ma ihià bu ézíbóté e-mail gi
+accountcreated|Ndoté è mepólé
+createaccount-title|Okìké bùwá màkà {{SITENAME}}
+loginlanguagelabel|Asụsụ: ~{0}
+changepassword|Gbanwe okwu éjị à gáfe
+resetpass_header|Gbanwe okwúngáfè nke bùwá
+oldpassword|Mkpurụ okwu ejị a gafẹ ochië:
+newpassword|Mkpurụ okwu ejị a gafẹ nke ohúrù
+retypenew|Dechákwari mkpurụ okwu ejị a gafẹ nke ohúrù:
+resetpass_submit|Bá okwu éjị gáfè na áhà Í bànyè
+changepassword-success|Mkpurụ okwu ejị a gafẹ a gbanwere nke oma!\nI na á banye...
+resetpass_forbidden|Okwu éjị à gáfè enwéghịkị gabnwe
+resetpass-submit-loggedin|Gbanwe okwu éjị à gáfe
+resetpass-submit-cancel|Kàchá
+resetpass-temp-password|mkpurụ okwu ejị a gafẹ I gi kushi ngwa ngwa:
+passwordreset|Nkuwaria okwúngáfè
+passwordreset-emailelement|Áhà Ọ'banife: ~{0}\nPasswod nke gi gbanwe: ~{1}
+changeemail-none|(efù)
+extlink_sample|http://www.example.com ishi jikodo
+extlink_tip|Jikodo nọr na ẹzí (chètá íshí http://)
+nowiki_sample|Tinyé mkụrụ edemede enweghị ihe ọbula na ya ti ya nga
+nowiki_tip|É gekwàlà otu wiki shi edé
+image_tip|Njikota édé a pọrọgwụla
+media_tip|Jikodo usòrò
+sig_tip|Nkábị gị nwéré nkábị nke ógè
+hr_tip|Áhìrì na ga nà àlà (jí ya nke ntàkírí)
+summary|Mmẹkụwátá:
+subject|Ihe gbasara/Ishi ahiri
+minoredit|Ihe bu orü ntakírí
+watchthis|Lèwá ihüá
+savearticle|Domá ihüa
+preview|Lètú
+showpreview|Létu ntakìrí
+showdiff|Zi ihe gbanwere
+anoneditwarning|'''Kpàchákwá anya:''' Ị bághị bo.\nIP gi gí détụ na ákíkó mbu ihü a.
+missingcommenttext|Biko tinyé ótù okwu na àlà nga.
+summary-preview|Hutukwá mmẹkotá:
+subject-preview|Ihe gbasara/Ishi ahiri I hütü ntakịrị:
+blockedtitle|Há gbachiri onye á ezí
+autoblockedtext|Há kwàchịrị IP gi màkà ọ'bànifé nke ozor nè ji ya, nke ~{0} kwàchịrị.\nMgbághapụtà màkà ihe á bu nke:\n\n:''~{1}''\n\n* Mbìdó nkwàchì: ~{7}\n* Mgbà óka màkà nkwàchị: ~{5}\n* Onye ha chọrí kwáchí: ~{6}\n\nÍ nwèríkí kpó ~{0} mà [[{{MediaWiki:Grouppage-sysop}}\u007Cndi íshí]] nke ozor ma ọ bu Í chȯrí kpa okwu maka nkwàchi nke ā.\n\nLè mákwá na Ì gágị jí "me ọ'bànifé nkeá e-mail", mà Í  nwéré e-mail di ézíbóté di na [[Special:Preferences\u007Còtù ọ'bànifé ne dósé ihe]] na ha kwáchịghị ya, Í nwèríkí.\n\nIP gi bu ~{2}, na ID nkwàchi bu #~{4}.\nBiko tinyé cha ihe ńdía na ájújú nkeówulà I gi me.
+blockednoreason|amaghi ihe omẹrẹ ya maka
+whitelistedittext|Í gi ~{0} Í rü na ihü.
+nosuchsectiontitle|Aná a hu nkeji
+loginreqtitle|I kweshiri banyé eba
+loginreqlink|Banyé
+loginreqpagetext|I keshiri ~{0} I cho ki hü ihü ndi ozor.
+accmailtitle|mkpurụ okwu ejị a gafẹ a sipuole.
+newarticle|(Nke ohúrù)
+newarticletext|Í sòrò jikodo na ihü nke adíghị bòdì.\nÍ chȯrí ké ihü nke áhù, bìdó Í pị áka nà igbé nȯr nà àlà ngá (lé [~{0} ihü nkwádo] màkà ụmà ozor).\nȮ bú nà Í byàrà ngá na aghọ, piá mpiá otúzor-intanet gi nke '''àzú'''.
+noarticletext|Mkpụrụ edemede à díghị na ihü nke.\nÍ nwèríkí [[Special:Search/{{PAGENAME}}\u007Ctuó íshí ihü nke á]] na ihü ndi ozor,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} chọwa na ndetu nchètá di nwanne],\nmà [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} Í nwèríkí rü nà ihü á]</span>.
+userpage-userdoesnotexist-view|Bùwá ọ'bànifé "~{0} à díghị na nsónùsòrò.
+blocked-notice-logextract|Ha gbàchìrì ọ'bànifé nke.\nNdetu nchèta mbgàchì ǹkè ógè nso di na àlà màkà ádià má àmá:
+usercssyoucanpreview|'''Lè kwá:''' Jí mpiá "{{int:showpreview}}" Í létú òtù CSS gí di mgbe Í donyèrè ya.
+userjsyoucanpreview|'''Lè kwá:''' Jí mpiá "{{int:showpreview}}" Í létú òtù JavaScript gí di mgbe Í donyèrè ya.
+updated|(Kuwariala)
+note|'''Ndetụrụ:'''
+previewnote|'''Chètá na iheá bu ńlé náni.'''\nIhe Í gbànwèrè e donyè bòdì!
+editing|I rüwa ~{0}
+editingsection|I rüwa ~{0} (nkeji)
+editingcomment|I rüwa ~{0} (nkeji ohúrù)
+editconflict|Orü ná lüogù: ~{0}
+yourtext|Mkpurụ edemede gi
+storedversion|Ihe gbanwere nke dosèrè a dose
+yourdiff|Ihedichiè
+copyrightwarning|Biko gè kwá na orü nílw gárá {{SITENAME}} di na nchétá na ȯ nà gá na okpúrù ~{1} (lé ~{0} màkà okwu ozor).\nÓ bú nà Ì chóghị ka ihe Í dèrè Í gi di nà áká ndi ozor Í ghi rübwó ya na Í gi gbásà ya na mgbe há chọrọ, é tìkwàrà ya nga.<br />\nÍ nà me nkwà ányị na Í dèrè ihe á na onwe gi, ma Í dépùtàrà ya shí ihe akwukwo nọr na ámá owere ma ihe owere ozor.\n'''É nyè kwàrà ihe íwú kèchịrị na mgbe Ì nwéghị òdạ!'''
+semiprotectedpagewarning|'''Lè kwá:''' Ha gbachịrị Ihü nke ka nání ndi íshí bu ndi nwéríkí rü na élú ya.\nNdetu banyéré nkè ogẹ nso di na okpúrụ màkà ádịamámá:
+templatesused|{{PLURAL:~{0}\u007CÀtụ\u007CÀtụ}} hé jịrị rü ihüá:
+templatesusedpreview|{{PLURAL:~{0}\u007CÀtụ\u007CÀtụ}} hé jịrị na nlétú nke:
+templatesusedsection|{{PLURAL:~{0}\u007CÀtụ\u007CÀtụ}} hé jịrị na nkeji nke:
+template-protected|(cẹdoluecẹdo)
+template-semiprotected|(cẹdolu-ntakiri)
+hiddencategories|Ihü a dị nà nke ótù {{PLURAL:~{0}\u007Cébéonọr zọnàrì nke 1\u007Cébéonọr zọnàrì nke ~{0}}}:
+nocreate-loggedin|Í nwéghi ọdà Í ké ihü ohụrụ.
+permissionserrors|Nsobgu na ỏdà
+permissionserrorstext-withaction|Í nwéghi ọdà Í ~{1}, {{PLURAL:~{0}\u007Cmàkà\u007Cmàkà}} ihe ha detùrù na àlà nga:
+log-fulllog|Zìchá ndétu ncheta
+edit-conflict|Orü ná lüogù.
+edit-no-change|Ha túfùghị orü gi ónú, màkà ọ díghì ihe gbanwere na edemede.
+edit-already-exists|Ènwéghịkị ké ihü nke ọhúrù.\nỌ di kwa.
+content-model-wikitext|wikitext
+parser-template-loop-warning|Etemete àtụ dị: [[~{0}]]
+undo-summary|Emekwàlà orübà ~{0} shí [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007Ctalk]])
+cantcreateaccounttitle|Enwéghịkị ke buwá
+viewpagelogs|Zi ndetu ncheta màkà ihü a
+nohistory|Ákíkó mbu màkà orü àdíghị màkà ihüá.
+currentrev|Kuwaria nke ubüwạ
+currentrev-asof|Kuwaria shi mgbe ~{0}
+revisionasof|Orübà nà ógè ~{0}
+revision-info|Orübà na nke ~{0} shí ~{1}
+previousrevision|Orübà di kwa nke ichié
+nextrevision|Orübà di kwa ohúrù →
+currentrevisionlink|Orübà nke ubwa
+cur|nke I nor
+next|na nke ozor
+last|nke gafèrè
+page_first|nke buzọr
+page_last|nke lara azu
+histlegend|Mkpátá íche: ká igbé radio nke orüma Í lèmá otụ hámá abụọ ditù nà Í gi tié mkpátá bànyé nà àlà.<br />\nOkwu ụmà: '''({{int:cur}})''' = gbánwe na nké orü mbu, '''({{int:last}})''' = ihe íchè na nké orü di gbárá mbu, '''{{int:minoreditletter}}''' = orü ntà.
+history-fieldset-title|Akíkó mbu maka a garacha I garachara
+history-show-deleted|Nani nke gbakashiala
+histfirst|Nke buzọr
+histlast|Nke ohúrù
+historysize|({{PLURAL:~{0}\u007Cbyte 1\u007Cbyte ~{0} di}})
+historyempty|(kwapụrụ)
+history-feed-title|Akíkó mbu maka elélé orü
+history-feed-description|Ákíkó mbu màkà orübà nke ihüá na wiki
+history-feed-item-nocomment|~{0} ngbe ~{1}
+rev-deleted-comment|(okwu e wefụolé)
+rev-deleted-user|(áhá onye na ké a wefụolé)
+rev-delundel|zi/zonari
+rev-showdeleted|zi
+revdelete-show-file-submit|Eeh
+revdelete-hide-text|Zonari mkpụrụ edemede nke orübà
+revdelete-hide-image|Zonari ihe no ime usòrò
+revdelete-hide-name|Zonari mmèmé na ntido
+revdelete-hide-comment|Zonari ihe okwu orü
+revdelete-hide-user|Zonari áhà ọ'bànifé nke onye na rü/áhàebeíbị IP ya
+revdelete-radio-same|(e mesukwàlà)
+revdelete-radio-set|Eeh
+revdelete-radio-unset|Mbà
+revdelete-log|Mgbághapụtà:
+revdel-restore|gbanwe ọtù ọ gị zí
+pagehist|Ịta ihüá
+deletedhist|Ákíkó mbu bakashịrị
+revdelete-reasonotherlist|Mgbághàpụtá ozor
+revdelete-edit-reasonlist|Rüwa mgbághapụtà nkàchafu
+revdelete-offender|Ọde akwukwo nke orübà:
+mergehistory|Tìkȯtá ákíkó mbu nke ihü ndiá
+mergehistory-from|Ihü mkpòlógwụ:
+mergehistory-into|Ihü ȯ na gá:
+mergehistory-submit|Tìkótá orürü
+mergehistory-empty|Ọ díghị orübà nwéríkí tíkȯtá.
+mergehistory-no-source|Mkpọlógwù ihü ~{0} nóghị.
+mergehistory-no-destination|Nnákpu ihü ~{0} nóghị.
+mergehistory-autocomment|Tìkọtàrà [[:~{0}]] ga na ímé [[:~{1}]]
+mergehistory-comment|Tìkọtàrà [[:~{0}]] ga na ímé [[:~{1}]]: ~{2}
+mergehistory-reason|Mgbághapụtà:
+mergelog|Tìkȯtá ndétu-nchèta
+revertmerge|Emẹkotala
+history-title|Ákíkó mbu màkà orü nọr na élú "~{0}"
+lineno|Ahiri ~{0}:
+compareselectedversions|Sikwụ orü áká dị
+editundo|mẹ̀rí àzụ́
+searchresults|Ndọfùtà nchọwa
+searchresults-title|Ihe futárá nchowá màkà ''~{0}''
+titlematches|Íshí ihü dàbànyèrè
+textmatches|Mkpụrụ édémédé nwèrè ihü ȯ dị na
+notextmatches|Mkpụrụ édémédé enwéghị ihü ȯ dị na
+prevn-title|{{PLURAL:~{0}\u007CIhe fútárá\u007CIhe fútárá}} nke àzú nke ~{0}
+nextn-title|{{PLURAL:~{0}\u007CIhe fútárá\u007CIhe fútárá}} nke sò nke ~{0}
+shown-title|Zí ~{0} {{PLURAL:~{0}\u007Cihe fútárá\u007Cihe fútárá}} na ótù ihü
+viewprevnext|Lé (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-new|'''Ké ihü "[[:~{0}]]" na wiki nke á!'''
+searchprofile-articles|Ihü ihe dị
+searchprofile-images|Nkaníle
+searchprofile-everything|Iheníle
+searchprofile-advanced|Nke kárí
+searchprofile-articles-tooltip|Chọwa na ~{0}
+searchprofile-images-tooltip|Chọwa màkà usòrò
+searchprofile-everything-tooltip|Tùwé ihe nile (na okwu ihü)
+searchprofile-advanced-tooltip|Chọwa na ímé áhàámá nke gí Í kèrè
+search-result-size|~{0} ({{PLURAL:~{1}\u007Cmkpurụ edemede 1\u007C~{1} mkpurụ edemede}})
+search-redirect|(kúfù ~{0})
+search-section|(nkeji ~{0})
+search-suggest|Ị̀ kwèshirí dé: ~{0}
+search-interwiki-caption|Orürü nwanne nwanyị
+search-interwiki-default|~{0} nke ziri:
+search-interwiki-more|(dikarírí)
+search-relatedarticle|Nwanne
+searchrelated|nke kọlu
+searchall|nke níle
+powersearch-legend|Nchöwá nkè íshí
+powersearch-ns|Tuo na ímé:
+powersearch-togglelabel|Lechányá:
+powersearch-toggleall|Haníle
+powersearch-togglenone|Efù
+preferences|Otu ha dosẹrẹ ihe
+mypreferences|Otú m shị na dose ihem
+prefs-skin|Akpụkpọ
+skin-preview|Lètú
+datedefault|Otú é shị na dose ihe efù
+prefs-user-pages|Ihü ọ'bànifé
+prefs-personal|Nkówá ọ'bànifé
+prefs-rc|Mgbánwè ógè nso
+prefs-watchlist|Ndétụnlé
+prefs-watchlist-days-max|Maximum ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}}
+prefs-misc|Mcheta-ma-mchetaghim
+prefs-resetpass|Gbanwe okwu éjị à gáfe
+prefs-email|Màkà e-mail
+prefs-rendering|Ọdịdị
+saveprefs|Domá
+prefs-editing|Írüwa
+rows|Ǹdịlị:
+columns|Ogìdì:
+searchresultshead|Chọwa
+stub-threshold-disabled|Ápụgị òkò
+timezonelegend|Nkeji ogẹ:
+localtime|Ogẹ ebeanọr:
+servertime|Ógè nsónùsòrò òdìbọ:
+timezoneregion-africa|Afrikạ
+timezoneregion-america|Amirikạ
+timezoneregion-antarctica|Antarktikạ
+timezoneregion-arctic|Arktik
+timezoneregion-asia|Azia
+timezoneregion-atlantic|Abwädi Ukwu
+timezoneregion-australia|Ostraliya
+timezoneregion-europe|Alá Bèke
+timezoneregion-indian|Abwädi Ukwu India
+timezoneregion-pacific|Òrìmìlì Pasifik
+prefs-searchoptions|Màkà nchöwa
+prefs-namespaces|Áhàámá
+default|nke éjị bịdó
+prefs-files|Usòrò
+prefs-custom-css|CSS nà áká mádu
+prefs-custom-js|JavaScript na áká mádu
+youremail|E-mail:
+username|Áhà ọ'bànifé:
+prefs-memberingroups|Onyé otu nke {{PLURAL:~{0}\u007Cọtú\u007Cọtú}}:
+yourrealname|Ézíbóté áhà:
+yourlanguage|Ásụ̀sụ̀:
+yournick|Ndè áhà gi òhúrù:
+yourgender|Nwayi/okpoho ma o nwoke:
+gender-unknown|Ámákwàghị
+gender-male|Òkò
+gender-female|Ányị̀
+email|ozi e-mail
+prefs-help-email-required|Áhàebeíbị e-mail gí di.
+prefs-signature|Áhà gi
+prefs-timeoffset|Nwopù ógè
+prefs-diffs|Íchè
+userrights-user-editname|Tìnyé áhà ọ'bànifé:
+editusergroup|Mèzí ọtú nke ọ'bànifé
+userrights-editusergroup|Mèzí ọtú nke ọ'bànifé
+saveusergroups|Domá ọtú nke ọ'bànifé
+userrights-groupsmember|Onye ọtú nke:
+userrights-reason|Mgbághapụtà:
+group|Ọtú:
+group-user|Ọ'bànifé
+group-bot|Bot
+group-sysop|Ndi íshí
+group-bureaucrat|Ọdọzị'obodo
+group-suppress|Aghọ
+group-all|(háníle)
+group-user-member|ọ'bànifé
+group-autoconfirmed-member|ọ'bànifé kwé'nà'áká
+group-bot-member|bot
+group-sysop-member|onye íshí
+group-bureaucrat-member|ọdọzị'obodo
+group-suppress-member|aghọ
+grouppage-user|{{ns:project}}:Ọ'bànifé
+grouppage-bot|{{ns:project}}:Bot
+grouppage-sysop|{{ns:project}}:Ndi Íshí wiki
+right-read|Gụwá ihü
+right-edit|Rüwa ihü
+right-createpage|Ké ihü (nke nadíghị na ihü okwu)
+right-move|Páfù ihü
+right-movefile|Páfù usòrò
+right-upload|Tịnyé ihe na nsónùsòrò
+right-delete|Kàchafu ihü
+right-bigdelete|Kàcha ihü nwéré ákíkó mbu dí ógólógó
+right-undelete|Ágbakashia ótù ihü
+newuserlogpage|Ndétu nchétá ihe ọ'bànifé kèrè
+rightslog|Ndetu échìchè íwú ọ'bànifé
+action-read|guwa ihüá
+action-edit|rüo élu ihüá
+action-createpage|ké ihü
+action-move|puzié ihü nke
+action-movefile|puzié usòrò
+action-upload|tinyé njikota èdèa
+action-reupload|tinyé ihe ozor élu njikota èdèa
+action-delete|kàcha ihü nka
+nchanges|~{0} {{PLURAL:~{0}\u007Cgbanwere\u007Cgbanwere}}
+recentchanges|Mgbánwè ógè nso
+recentchanges-legend|Nràlụ màkà Ihe gbanwere ubwá
+recentchanges-feed-description|Chóputà ihe ógẹ ǹsò na wiki ímé órírí nke á.
+recentchanges-label-minor|Ihe bu orü ntakírí
+recentchanges-legend-newpage|~{0} - ihü ohúrù
+rclistfrom|Zìrí ihe gbanwere ọhúrù shí ~{2} ~{1}
+rcshowhideminor|orü ntákírí ~{0}
+rcshowhidebots|bot ~{0}
+rcshowhideliu|Ndi né ké dị ~{0} di íme
+rcshowhideanons|~{0} ndi ọ'bànifé nke amághị
+rcshowhidepatr|~{0} orü hä lèrè
+rcshowhidemine|~{0} ihe m rürü
+rclinks|Zí nke mbu ~{0} gbawere na ubochi gárá nke ~{1}<br />~{2}
+diff|Íchè
+hist|akíkómbu
+hide|Zonari
+show|Zi
+minoreditletter|m
+newpageletter|N
+boteditletter|b
+number_of_watching_users_pageview|[~{0} {{PLURAL:~{0}\u007Cọ'bànifé\u007Cọ'bànifé}} ne lé anya]
+rc_categories_any|Nkówụlà
+newsectionsummary|/* ~{0} */ nkeji ohúrù
+rc-enhanced-expand|Zi ihe di ime (Í gí nwere JavaScript)
+rc-enhanced-hide|Zonari ihe di ime
+recentchangeslinked|Gbanwèrè gbásírí ya
+recentchangeslinked-feed|Gbanwèrè gbásírí ya
+recentchangeslinked-toolbox|Gbanwèrè gbásírí ya
+recentchangeslinked-title|Gbanwere bu nwanne "~{0}"
+recentchangeslinked-summary|Ndétu nkeá nwèrè ihe gbanwere na ógè nso nke jikodọrọ ótù ihü (ma nke na ga ọ'bànifé nọr na ótù ébéonọr).\nIhü nọr na [[Special:Watchlist\u007Cndétu ihe Í ne lé]] di na mkpụrụ edemede '''shírí íke'''.
+recentchangeslinked-page|Áhà ihü:
+recentchangeslinked-to|Zí íhé gbanwéré na ihü jikodòrò ihü nke na ọnọdù
+upload|Tịnyé ihe na nsónùsòrò
+uploadbtn|Tịnyé ihe na nsónùsòrò
+upload-permitted|Usòrò hé kwèrè: ~{0}.
+upload-preferred|Usòrò há ne tú: ~{0}.
+upload-prohibited|Usòrò chȯghị: ~{0}.
+uploadlogpage|Tìnyé ntinyé na élú
+filename|Áhà usòrò
+filedesc|Mmẹkụwátá
+fileuploadsummary|Mmẹkụwátá:
+filereuploadsummary|Gbanwere maka usòrò:
+filesource|Mkpọlọ́gwụ̀:
+savefile|Domá usòrò
+upload-source|Usòrò mkpọlógwù
+sourcefilename|Áhà usòrò mkpọlógwù:
+sourceurl|URL mkpọlógwù:
+upload-description|Nkówá usòrò
+watchthisupload|Lèwá ákwúkwó orunotunị
+upload-warning-subj|Ndọ ntị màkà ntínyé
+http-read-error|Nsogbu Í gü HTTP.
+upload-curl-error6|Ènwéghịkị ruó URL
+license|Nkwényé:
+license-header|Nkwényé
+nolicense|Ọ dígì nke áká di.
+imgfile|usòrò
+listfiles|Ndétu usòrò
+listfiles_thumb|Nvọáká
+listfiles_date|Ǹgụ́ụ̀bọ̀chị̀
+listfiles_name|Áhà
+listfiles_user|Ọ'bànifé
+listfiles_size|Ívụ
+listfiles_description|Nkówá
+listfiles_count|Ùdị
+file-anchor-link|Usòrò
+filehist|Ịta nke usòrò
+filehist-help|Kpàtá na úbochi/ógè Í zí usòrò ọtụ ȯ dị mgbe áhù.
+filehist-deleteall|kàcha hanílé
+filehist-deleteone|kàcha
+filehist-revert|gbanwe lá àzú
+filehist-current|nka
+filehist-datetime|Afọ/Ogẹ
+filehist-thumb|Nvọáká
+filehist-thumbtext|NvóÁká màkà otù ȯ dị nà ~{0}
+filehist-nothumb|Nvọáká adịghị
+filehist-user|Ọ'bànifé
+filehist-dimensions|Ógólógó na asaá
+filehist-filesize|Ívù usòrò
+filehist-comment|Okwu-nokwu
+imagelinks|Mgbanwe usòrò
+linkstoimage|{{PLURAL:~{0}\u007CIhü nká\u007CIhü nke ~{0}}} na jikodo gá usòrò nká:
+nolinkstoimage|Àdíghị ihü na jikodo usòrò nke.
+sharedupload|Ákwúkwó runotu nke shì ~{0} na ó nwèríkí di na orürü nke ndi ozor.
+uploadnewversion-linktext|Tinyé usòrò di òhúrù na élú nke
+shared-repo-from|shí ~{0}
+filerevert|Gbanwe na àzú ~{0}
+filerevert-legend|Lá na àzú usòrò
+filerevert-comment|Mgbághapụtà:
+filerevert-submit|Gbanwe lá àzú
+filedelete|Kàcha ~{0}
+filedelete-legend|Kàcha usòrò
+filedelete-comment|Mgbághapụtà:
+filedelete-submit|Kàcha
+filedelete-otherreason|Màkà ihe ozor kwa:
+filedelete-reason-otherlist|Mgbághàpụtá ozor
+mimesearch|nchöwa MIME
+mimetype|Ùdị MIME:
+download|danwèré
+unwatchedpages|Ihü hanéléghị
+listredirects|Ndétu nke nkúfù
+unusedtemplates|Àtụ hè jí gị
+unusedtemplateswlh|jikodo ndi ozor
+randompage|Edemede nkeówúlạ
+statistics-header-edits|Rüwá ọmúmú-nà-ńlé
+statistics-header-users|Ọmúmú-nà-ńlé nke ọ'bànifé
+statistics-files|Usòrò hé tinyèrè
+statistics-users-active|Ọ'bànifé di galagala
+double-redirect-fixed-move|[[~{0}]] a puziele.\nUbwa, o na ga [[~{1}]].
+brokenredirects|Nkúfù gbàjịrị
+brokenredirects-edit|mèzi
+brokenredirects-delete|kàcha
+withoutinterwiki|Ihü nke enweghi jikodo rúrú asụsụ
+withoutinterwiki-legend|Na íshí mkpụrụ okwu
+withoutinterwiki-submit|Zi
+nbytes|~{0} {{PLURAL:~{0}\u007Cbyte\u007Cbyte di}}
+ncategories|{{PLURAL:~{0}\u007Cébéonọr\u007Cébéonọr}} ~{0}
+nlinks|{{PLURAL:~{0}\u007Cjikodo\u007Cjikodo}} ~{0}
+nmembers|{{PLURAL:~{0}\u007Cọ'bànifé\u007CNdi n'bànifé}} ~{0}
+nrevisions|{{PLURAL:~{0}\u007Corübà\u007Corübà}} ~{0}
+nviews|{{PLURAL:~{0}\u007Che lèrè nke\u007Che lèrè nke}} ~{0}
+lonelypages|Ihü nke ogbènyè
+wantedpages|Ihü há chọrọ
+prefixindex|Ihü nílé jírí mkpụrụ édémédé nke mbu
+shortpages|Ihü mkpümkpü
+longpages|Ihü ógólógó
+protectedtitles|Íshí édé cẹdolu
+listusers|Ndetu ọ'bànifé
+usereditcount|~{0} {{PLURAL:~{0}\u007Crüwá\u007Corürü}}
+usercreated|Kéré na ~{0} mgbe ~{1}
+newpages|Ihü ohúrù
+newpages-username|Áhà ọ'bànifé:
+ancientpages|Ihü díkárí íchié
+move|Páfụ
+movethispage|Páfù ihüá
+notargettitle|Ntido adighị
+pager-newer-n|{{PLURAL:~{0}\u007C1 nke ohúrù\u007C~{0} nke ohúrù}}
+pager-older-n|{{PLURAL:~{0}\u007C1 nke ichié \u007C~{0} nke ichié}}
+suppress|Aghọ
+booksources|Ébé ákwúkwó shị
+booksources-search-legend|Tuó íshí akwúkwó shì
+specialloguserlabel|Ọ'bànifé:
+speciallogtitlelabel|Ishi:
+log|Ndetu-nchétá
+allpagesfrom|Zi ihü bídóró na:
+allpagesto|Zi na ihu ihü ná kwúshí nà:
+allarticles|Ihü níle
+allinnamespace|Ihü níle (ámááhạ ~{0})
+allpagessubmit|Gá
+sp-deletedcontributions-contribs|ihe rürü di mkpa
+linksearch|Òtú jikodo di èzí
+linksearch-ns|Áhàámá:
+linksearch-ok|Chọwa
+linksearch-line|~{0} jikọdọ shí ~{1}
+listusers-submit|Zi
+listusers-noresult|Ọ hügị ọ'bànifé.
+listusers-blocked|(kwàchịrị)
+activeusers-hidebots|Zonari bot
+activeusers-hidesysops|Zonari ndi íshí
+activeusers-noresult|Ọ hügị ọ'bànifé.
+listgrouprights-group|Ọtú
+listgrouprights-rights|Nkwènyé
+listgrouprights-members|(ndetu ndi nọr nga)
+listgrouprights-addgroup|Gbàkọ {{PLURAL:~{1}\u007Cọtú\u007Cọtú}}: ~{0}
+listgrouprights-addgroup-all|Tìnyé ọtú nílé
+emailuser|Zi onye á ózí-nsónùsòrò
+emailpage|Mé ọ'bànifé e-mailù
+defemailsubject|e-mail {{SITENAME}}
+emailfrom|Onye banyere ya:
+emailto|Onye o gi ru:
+emailsubject|Gbàsịrị:
+emailmessage|Ozi:
+emailsend|Zí ozi
+emailsent|E-mail zìrì
+watchlist|Ndetu ihem ne lé
+mywatchlist|Ndetu ihem ne lé
+watchlistfor2|Maka ~{0} ~{1}
+addedwatchtext|Ihü "[[:~{0}]]" à bányéré [[Special:Watchlist\u007Cndétu ihe Í ne lé]].\nIhe gi gbanwe na ógè gi bya nà ihüá na ihü okwu ya gi di ndétu ngáhù, na ihü gi da na mkpụrụ édé '''sírí íke''' ímé [[Special:RecentChanges\u007Cndétu gbanwere méré na ogè nso]] ka ȯ dí òfelè Í hü ya.
+removedwatchtext|Ihü "[[:~{0}]]" à fwüó lá [[Special:Watchlist\u007Cihe ndétu ihe Í ne lé]].
+watch|Hü
+watchthispage|Lèwá ihüá
+unwatch|A hükwàlà
+notanarticle|Búghị ihü ihe nọr
+watchlist-details|{{PLURAL:~{0}\u007Cihü ~{0}\u007Cihü ~{0}}} nọr na ndétu ihe Í ne lé, nke à gúgị ihü okwu.
+wlshowlast|Zi nke mbu àmànị ~{0} chi ~{1}
+watchlist-options|Nrọta ndetu nlènlé
+watching|O na hü...
+unwatching|O mele ka o na á hü kwagi...
+enotif_impersonal_salutation|ọ'bànifé {{SITENAME}}
+enotif_anon_editor|ọ'bànifé ézíghị ihu ~{0}
+created|kèrè
+changed|gbanwere
+deletepage|Kàchafu ihü
+confirm|Kwèré
+excontent|ihe nọr na ímé ya mbu bụ: "~{0}"
+delete-confirm|Kàcha "~{0}"
+delete-legend|Kàcha
+confirmdeletetext|Í gálá Í gbákashiá ihü na ákíkó mbu ya.\nBiko sí nà ọ bụ ihe Í chọrọ, na Í mà ihe gi mè, na Í nè me ya kà yá na [[{{MediaWiki:Policy-url}}\u007Còtù há nè mé ihe]] di óma.
+actioncomplete|Ọ méchá
+actionfailed|Òmùmẹ́ à daala
+deletedtext|"~{0}" à gbákáshíálá.\nLé ~{1} màkà okwu gbásárá ihe ọ gbakashiri màkà.
+dellogpage|Ntínyé ngbákashị
+deletecomment|Màkà:
+deleteotherreason|Màkà ihe ozor kwa:
+deletereasonotherlist|Mgbághàpụtá ozor
+rollbacklink|fifié àzú
+rollbackfailed|Fifié na àzú dàrà
+protectlogpage|Ntínyé nke ncẹdolu
+protectedarticle|chédòlù "[[~{0}]]"
+modifiedarticleprotection|gbánwèrè íshí ncẹdolu màkà "[[~{0}]]"
+protectcomment|Mgbághapụtà:
+protectexpiry|Gbá ọ́kà:
+protect_expiry_invalid|Ógẹ mgbe ó gị gbá ùkà adíghị ómá.
+protect_expiry_old|Ógẹ mgbe ȯ gbàrà úkà à gafele.
+protect-text|Í nwèríkí lá mà Í gbanwe ncẹdolu ihü '''~{0}''' nke.
+protect-locked-access|Bùwá gi ènwéghị òdạ Í gbanwe ncẹdolu ihü.\nNgá bu ihe hé mèkwàrà nà ihü '''~{0}''':
+protect-cascadeon| Ihüá cẹdolu màkà ȯ dị nà {{PLURAL:~{0}\u007Cihü, nwéré\u007Cihü, ndi nwéré}} cẹdolu mgbàwéré dí.\nÍ nwèríkí gbanwe cẹdolu ihüá, mànà ȯ gi métú ncẹdolu mgbàwéré.
+protect-default|Kwèré ọ'bànifé nílé
+protect-fallback|Gí jí ọdà "~{0}"
+protect-level-autoconfirmed|Kwàchí ndi ohürù na ndi ọ'bànifé a bághị
+protect-level-sysop|Ndi íshí nani
+protect-summary-cascade|mgbàwéré
+protect-expiring|nà gbá ókà na ~{0} (UTC)
+protect-expiring-local|gbáọ́kà na ~{0}
+protect-expiry-indefinite|àghọ́ta
+protect-cascade|Ihü ha cẹdolu di na ime ihüá (ncẹdolu mgbàwéré)
+protect-cantedit|Ì nwéghịkí gbanwe ncẹdolu ihü á, màkà Ì nwéghị ọdà Í rü ya.
+protect-othertime|Ógẹ ozor
+protect-othertime-op|ógẹ ozor
+protect-otherreason-op|Mgbághàpụtá ozor
+protect-expiry-options|àmànì 1:1 hour,chi 1:1 day,izù 1:1 week,izù 2:2 weeks,önwa1:1 month,önwa 3:3 months,önwa 6:6 months,afọr 1:1 year,ógè énwéghị ùbe:infinite
+restriction-type|Ọdà:
+restriction-level|Nke mgbáchí rùrù:
+minimum-size|Ívù nke ntà
+maximum-size|Ívù nke ukwu:
+pagesize|(byte)
+restriction-edit|Mèzi
+restriction-move|Páfụ
+restriction-create|Ké
+restriction-upload|Tinyénélú
+restriction-level-all|ọtú nke ȯbulà
+undeletebtn|Dòmárí àzụ́
+undeletelink|lé/dosimá
+undeleteviewlink|lé
+undeletecomment|Mgbághapụtà:
+undelete-search-submit|Chọwa
+undelete-show-file-submit|Eeh
+namespace|Áhàámá:
+invert|kwùtúárí ihe áká nọr
+contributions|Ihe ọ'bànifé rürü
+contributions-title|Orü ọ'bànifé nà ~{0}
+mycontris|Ihem mẹtụrụ na orürü
+contribsub2|Maka ~{0} (~{1})
+uctop|(ishi)
+month|Shi önwa (na nke ndi mbu):
+year|Shi afọr (na ndi nke mbu):
+sp-contributions-newbies|Zí orü áká ọ'bànifé ohúru náni
+sp-contributions-blocklog|kwụchi ntinyé
+sp-contributions-deleted|orü ọ'bànifé gbakashịrị
+sp-contributions-uploads|tinyere na élu.
+sp-contributions-logs|ndetu-nchétá
+sp-contributions-talk|okwu
+sp-contributions-search|Tuó ihe há rürü
+sp-contributions-username|IP mà ọ bu áhà ọ'bànifé:
+sp-contributions-submit|Chọwa
+whatlinkshere|Ihe na bia nga
+whatlinkshere-title|Ihü ná gá "~{0}" shí jikodo
+whatlinkshere-page|Ihü:
+linkshere|Ihüá na gá '''[[:~{0}]]''':
+nolinkshere|Ọ díghị ihü na jikodo gá '''[[:~{0}]]'''.
+nolinkshere-ns|Ọ díghị ihü na jikodo gá '''[[:~{0}]]''' na áhàámá nke Í chọrọ.
+isredirect|ihü nke nkúfù
+istemplate|ọ jè ákwúkwó usòrò
+isimage|jikodo nnunuuche
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cnke dí nà àzú\u007C~{0} nke dí nà àzú}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cnke sọrọ\u007C~{0} nke sọrọ}}
+whatlinkshere-links| jikodo
+whatlinkshere-hideredirs|~{0} nke kufùrù
+whatlinkshere-hidetrans|~{0} ọ jè ákwúkwó usòrò
+whatlinkshere-hidelinks|Jikodo ~{0}
+whatlinkshere-hideimages|jikodo nhuunuche ~{0}
+whatlinkshere-filters|Nzàtà
+block|Gbàchí ọ'bànifé
+blockip|Gbàchí ọ'bànifé
+blockip-legend|Gbàchí ọ'bànifé
+ipaddressorusername|IP mà ọ bu áhà ọ'bànifé:
+ipbexpiry|Gbá okà:
+ipbreason|Mgbághapụtà:
+ipbsubmit|Kwàchí ọ'bànifé nkèá
+ipbother|Ógẹ ozor
+ipboptions|àmànì 2:2 hours,chi 1:1 day,chi 3:3 days,izù 1:1 week,izù 2:2 weeks,önwa1:1 month,önwa 3:3 months,önwa 6:6 months,afọr 1:1 year,ógè énwéghị ùbe:infinite
+ipb-confirm|Kwé mgbáchí
+ipb-unblock-addr|Ákwàchịrị ~{0}
+ipb-unblock|Ákwàchịrị áhà ọ'bànifé ma IP
+unblockip|Ákwàchịrị ọ'bànifé
+unblocked|há kwàchịrị [[User:~{0}\u007C~{0}]]
+ipblocklist|Ọ'bànifé kwáchírí
+blocklist-target|Ẹ́té
+blocklist-expiry|Gbá ọ́kà
+ipblocklist-submit|Chọwa
+infiniteblock|ébìébì ùdìdì
+anononlyblock|anon. náni
+emailblock|ha kwàchịrị e-mail
+blocklink|mèché
+unblocklink|a kwadokwàlà
+change-blocklink|gbanwe ngwùgwù
+contribslink|orürü
+blocklogpage|Ndetù échìchè nke mbàchì
+blocklogentry|kwụchi [[~{0}]] jí ógè ne ~{1} ~{2}
+unblocklogentry|àkwáchị gị ~{0}
+block-log-flags-nocreate|Í ké ọ'bànifé bàchìrì
+block-log-flags-noemail|ha kwàchịrị e-mail
+lockdb|Gbàchí uche nsónùsòrò
+unlockbtn|Ágbàchịkwàlà uche nsónùsòrò
+move-page|Páfụ ~{0}
+move-page-legend|Páfù ihü
+movepagetext|Í jí ákwúkwó òchá nke di na àlà gi gȯwá ótù ihü áhà ozor, na ȯ gi kwáfu ákíkó mbu ya na áhà nke ohürù.\nÍshí ihü nke ichié gi bu zi nkúfù gi gá áhà ohürù nke áhụ.\nÍ nwèríkí kúwárí nkúfù nke na ga áhà nke mbu na áká ya.\nȮ bu na Í chȯgị, kpàchákwá ánya Í lé má màkà nkúfù na gbá [[Special:DoubleRedirects\u007Cabụọ]] ma [[Special:BrokenRedirects\u007Cnkúfù gbájírí]].\nȮ dị na áká gi Í kpáchá ánya na jikodo na gá ébé o kwèshírí ga.\n\nChètákwá na ihü nke áhù '''ágághị''' a pú ȯ bu na ȯ dị ihü nwéré áhà áhù, bèelụ mà ȯ díghị ihe nọr ya na ímé ma ȯ bu nkúfù na onwé ya nke enweghị orürü nke mbu.\nIhe á fùtàrà na Í nwèríkí gọwáríá áhà ihü na nke mbu ya ȯ bu na Í gọrọ ọghọm, na Ì nwéghíkí dé na élú ihü di kwa.\n\n'''Kpàchákwá Ntị!'''\nIhe á nwèríkí bu ngbanwe ukwu mákà ihü ne wu;\nBiko kpàchá kwa ánya Í mà na ihe í ne mé na ógè gbárá mbu mgbè Í gí mé ya.
+movepagetalktext|Ihü owu ya gi fwüor na áká ya na ihü nke gárá '''bèelụ mà:'''\n*Ihü okwu nke énwéghị ihe nọr na ímé ya na ȯ dị nà áhà ohürù nke áhù, mà\n*Í piáfù igbé nọr nà àlà ngá.\n\nNa nke, Í gi páfù na Í mékȯtá ihü nà onwé gi ọ bu nà Í chọrọ.
+movearticle|Páfù ihü:
+newtitle|Gá íshí édémédé nke:
+move-watch|Lèmá ihü ó shị na ihü ȯ na gá
+movepagebtn|Páfù ihü
+pagemovedsub|Mpúzié ẹ meelá
+movepage-moved|'''"~{0}" páfùrù Í gá "~{1}"'''
+articleexists| Ihü ótù nwèkwàrà áhà nke áhù, mà áhà Í chọrọ à búghị ézíboté.\nBiko wèré áhà ozor.
+movetalk|Páfù ihü okwu nke ya
+move-subpages|Páfù ihü-n-ímé (nè rú ~{0})
+move-talk-subpages|Páfù ihü-n-ímé nke ihü okwu (nè rú ~{0})
+movepage-page-moved|Ihü ~{0} a páfùrù gá ~{1}.
+movepage-page-unmoved|Ihü ~{0} énweghịkị páfù gá ~{1}.
+movelogpage|Páfù ntínyé
+movereason|Mgbághapụtà:
+revertmove|gbanwe lá àzú
+delete_and_move|Bakahia na puzie
+delete_and_move_text|== I kachafu gi me ==\nEbe ihü gé rú "[[:~{0}]]" di kwa.\nI chorí kàchafu ya ka uzor mepo maka mpuzie ne me?
+delete_and_move_confirm|Eeh, kàchafu ihüa
+immobile-source-page|Enwerịkị puzie ihüá.
+move-leave-redirect|Háfụ nkufù na azu
+export|Wefutárá ihü ime ihe ozor
+exportcuronly|Tinyé nke mere ubüwá, o wughi akíkó mbu níle
+export-submit|Dọwá fú
+export-addcattext|Tinyé ihü shi ébéanọr:
+export-addcat|Tinyé
+export-addnstext|Tinyé ihü shi amaáhà:
+export-addns|Tinyé
+export-download|Domá kà usòrò
+allmessagesname|Áhà
+allmessages-filter-legend|Nzàtà
+allmessages-filter-unmodified|Rübàlà
+allmessages-filter-all|Haníle
+allmessages-filter-modified|Mèrìrì
+allmessages-language|Ásụ̀sụ̀:
+allmessages-filter-submit|Gá
+filemissing|Usòrò è fwuólé
+import|Gọbàtá ihü
+importinterwiki|Ngọbàtá Transwiki
+import-interwiki-templates|Bàtụcha átụ́ nile
+import-interwiki-submit|Dọwá bànyé
+import-upload-filename|Áhà usòrò:
+import-comment|Okwu-nokwu:
+importstart|Ógbȯbàtàlà ihü...
+import-revision-count|{{PLURAL:~{0}\u007Corübà\u007Corübà}} ~{0}
+importnopages|Ihü á díghị Í gọbàtá.
+import-token-mismatch|Ogẹ a fwuólé.\nBiko meríáríá ozor.
+importlogpage|Hubàtà ndetu
+tooltip-pt-userpage|Ihü ọ'bànifé gi
+tooltip-pt-mytalk|Ihü akíkó gi
+tooltip-pt-preferences|Otú Í shị na dose ihe gi
+tooltip-pt-watchlist|Ndetu ihü Í ne lé màkà ihe gị gbanwe
+tooltip-pt-mycontris|Ndetù ihe Í rürü
+tooltip-pt-login|Anyi si ka Í gbanyé; chetákwá na nsogbu adighi I gbanye ma Í chógị gbànyé
+tooltip-pt-logout|Fwuör
+tooltip-ca-talk|Akíkó maka ihe di na ihü nka
+tooltip-ca-edit|Í nwẹríkí rü na ihü nka. Biko jí mkpátá nlélé mgbe Í na domá ihüá
+tooltip-ca-addsection|Binyíte nkeji ohúrù
+tooltip-ca-viewsource|Ihü nke cẹdolu.\nÍ nwèríkí lé mkpụrụ ya
+tooltip-ca-history|Orü ichié na ihüá
+tooltip-ca-protect|Cẹdolu ihüá
+tooltip-ca-unprotect|Gbánwe ncẹdo ihüá
+tooltip-ca-delete|Bakashia ihüá
+tooltip-ca-move|Puzie ihüá
+tooltip-ca-watch|Tìnyé ihü á na ndétu ihe Í ne lé
+tooltip-ca-unwatch|Kwáfụ ihüá shí ndetu ihe m ne lé
+tooltip-search|Chọwa {{SITENAME}}
+tooltip-search-go|Gá na ihü nwere kwa áhà nke ma o di
+tooltip-search-fulltext|Chọwa na ihü maka mpkurụ okwu á
+tooltip-p-logo|Ga na ihü mbu
+tooltip-n-mainpage|Ga na ihü mbu
+tooltip-n-mainpage-description|Ga na ihü mbu
+tooltip-n-portal|Maka orürü, gi ka Í nweríkí mé, ébé ha na tú ihe
+tooltip-n-currentevents|Tuó ákíkó mbu màkà ihe ne me ubwá
+tooltip-n-recentchanges|Ndetu ihe gbanwere na oge nsó na wiki
+tooltip-n-randompage|Banyé ihü otu enweghi ishi
+tooltip-n-help|Ébé e shị amárá
+tooltip-t-whatlinkshere|Détụ ihü wiki nílé na ga ngà
+tooltip-t-recentchangeslinked|Ihe gbanwere na ihü jikodọrọ na ihü nke nà ógè nso
+tooltip-feed-rss|Ntá RSS maka ihüá
+tooltip-feed-atom|Nta Atom maka ihüá
+tooltip-t-contributions|Zí ndétu ihe ọ'bànifé nke rürü
+tooltip-t-emailuser|Zìrí ọ'bànifé nkeá ozi e-mail
+tooltip-t-upload|Tịnyé ihe na nsónùsòrò
+tooltip-t-specialpages|Ndetu ihü mkpà níle
+tooltip-t-print|Ihü nka nke Í nweríkí dótù
+tooltip-t-permalink|Jikodo nke dìrì e dí nke na gá ngbàzì ihü nka
+tooltip-ca-nstab-main|Zi ihe nor na ihüá
+tooltip-ca-nstab-user|Zi ihü ọ'bànifé
+tooltip-ca-nstab-special|Ihü mkpà, a nweriki ru na ya onwe ya
+tooltip-ca-nstab-project|Lé ihü hé chèdòlù
+tooltip-ca-nstab-image|Zi ihü usòrò
+tooltip-ca-nstab-template|Zi mkpurụ ihü
+tooltip-ca-nstab-help|Zi ihü nkwádo
+tooltip-ca-nstab-category|Zi ihü ébéanọr
+tooltip-minoredit|Ká nke kà orü ntàkírí
+tooltip-save|Domá ihe í gbanwere
+tooltip-preview|Lètú ihe Í gbànwèrè, bíkó búzọr jí ihe á mgbe Í gi dọnyé!
+tooltip-diff|Zi ihe Í gbanwere na édémédé
+tooltip-compareselectedversions|Lé ihe di ichè na orü nke áká di na nke méré na ihü a
+tooltip-watch|Tìnyé ihü á na ndétu ihe Í ne lé
+tooltip-rollback|"Láázu" né kúfù orü dí na élú ihü á nke ọ'bànifé onye ozor na mgbe Í kpàràrá mkpárá áhu
+tooltip-undo|"Emekwàlà" nà kúfù orü nke na ȯ nè mépó akwukwo orü na ébé nlétū. Ȯ nè kwé ka Í tí ihe éjì èmé ya na édé ntà na àlà.
+siteuser|ọ'bànifé ~{0} {{SITENAME}}
+others|nke ndi ozor
+creditspage|Nkó áhà ihüá
+spamprotectiontitle|Ihe na zata maka cẹdolu ụrú
+pageinfo-header-edits|Mèzí ịta
+pageinfo-length|Ogologo ihü (na baitusu)
+pageinfo-article-id|ID Ihü
+pageinfo-redirectsto-info|ọ́márí
+pageinfo-contentpage-yes|Eeh
+pageinfo-protect-cascading-yes|Eeh
+filedeleteerror-short|Nsògbú í kàcha usòrò: ~{0}
+previousdiff|Orü nke ichie
+nextdiff|Orü nke ohúrù →
+file-info-size|~{0} × ~{1} pixel, ívù akwukwo orunótu: ~{2}, MIME nke: ~{3}
+file-nohires|Nke káchá mmá na ányá àdíghị.
+svg-long-desc|usòrò SVG, nà áhà pixel ~{0} × ~{1}, ívụ usòrò: ~{2}
+show-big-image|Hü ya ka o dị
+file-info-gif-looped|etemte
+newimages-legend|Nzàtà
+noimages|Ọ díghì ihe di ngá Í lé.
+ilsubmit|Chọwa
+bydate|shi afọ
+just-now|ùgbú ùgbúa
+bad_image_list|Ọtụ ȯ dị détùrù ngá:\n\nNání ndétu ihe (áhirí jí * bídó) dị na ihe ȯ chọrọ.\nJikodo bu nke mbu na áhìrì gí jikodo ya nà ȧkwúkwó orünotu di njö.\nJikodo nke gị byá àzú na áhìrì nke òfu á bu nke nwéríkí gáfè, díkà ihü ébé ȧkwúkwó orünotu áhu di ímé áhìrì ya.
+metadata|Ómárí nso
+metadata-help|Usòrò á nwèrè ụmà nke ozor, ọ ga dí na ȯ byàrà shí nsé nhuunuche nsónùsòrò mà ihe njè nsónùsòrò nke kéré mà nké tonyèrè ya na nsónùsòrò.\nȮ bụ nà usòrò à gabnwere shí òtù ȯ di nà mgbe mbu, ótù ụmà àgághị è zí ya.
+metadata-expand|Zi nkówá di ógólógó
+metadata-collapse|Zonari nkówá di ógólógó
+metadata-fields|Ómárí nso nke nkeji nke nhuunuche détùrù na ozi nká gí banyé na nlé ihü nhuunuche mgbè ómárí nso mgbe àgàdà gi dátù.\nNke ozor gí zonari na áká onwe ha.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|Àsáa
+exif-imagelength|Ógólógó
+exif-orientation|Ívú nà àsáa
+exif-imagedescription|Íshí nhuunuche
+exif-artist|Odé ákwụ́kwọ́
+exif-exifversion|Ùdị Exif
+exif-colorspace|Ámá àgwà
+exif-exposuretime-format|sec ~{0} (~{1})
+exif-fnumber|Ónúọgụgụ F
+exif-brightnessvalue|Ọ̀chạ́ APEX
+exif-lightsource|Mkpọlógwù ìfè
+exif-flash|Gbu fịàfịà
+exif-filesource|Mkpọ̀lọ́gwụ̀ usòrò
+exif-citydest|Ámá ukwu ziri
+exif-writer|Òdìdè
+exif-languagecode|Ásụ̀sụ̀
+exif-iimcategory|Ébéonọr
+exif-label|Ọdụ
+exif-orientation-1|Nkịtị
+exif-exposureprogram-1|Ònyèmáká
+exif-subjectdistance-value|meter ~{0}
+exif-meteringmode-0|Nke námaghị
+exif-meteringmode-1|Nà nke ñkịtị
+exif-meteringmode-3|Ntụpọ
+exif-meteringmode-5|Nnòmi
+exif-meteringmode-6|Mmẹtụ
+exif-meteringmode-255|Nke ozor
+exif-lightsource-0|Nke námaghị
+exif-lightsource-1|Nta ubochi
+exif-lightsource-4|Gbu fịàfịà
+exif-lightsource-9|Iru igwē di ómá
+exif-lightsource-10|Iru igwē di ulùkpù ulùkpù
+exif-lightsource-11|Ǹdò
+exif-focalplaneresolutionunit-2|inch
+exif-scenecapturetype-1|Mkpọlógwù'àlà
+exif-gaincontrol-0|Efù
+exif-contrast-0|Nkịtị
+exif-contrast-1|Bịàlịị
+exif-contrast-2|Kàràká
+exif-saturation-0|Nkịtị
+exif-sharpness-0|Nkịtị
+exif-sharpness-1|Bịàlịị
+exif-sharpness-2|Kàràká
+exif-subjectdistancerange-0|Nke námaghị
+exif-subjectdistancerange-2|Mèchí ǹyò
+exif-gpslatitude-n|Asá olile anyanwu
+exif-gpslatitude-s|Asá nleda anyanwu
+exif-gpslongitude-e|Ógólógó owuwa anyanwu
+exif-gpslongitude-w|Ógólógó odida anyanwu
+exif-gpsspeed-n|Knot
+exif-gpsdestdistance-k|Kilomitas
+exif-gpsdestdistance-m|Maisu
+exif-gpsdop-good|Ọma (~{0})
+exif-gpsdop-moderate|Dịtụnma (~{0})
+exif-gpsdop-fair|Òzú (~{0})
+exif-dc-date|Ngụụ̀bọ̀chì
+exif-dc-publisher|Ọ̀má ákwụ́kwọ́
+exif-dc-rights|Nkwènyé
+exif-rating-rejected|Gbụ́fụ̀rụ̀
+exif-iimcategory-clj|Nsọ na iwú
+exif-iimcategory-edu|Ńkúzí
+exif-iimcategory-evn|Èzí
+exif-iimcategory-hth|Wíké
+exif-iimcategory-hum|Mmasịrị madu
+exif-iimcategory-lab|Íké aka
+exif-iimcategory-pol|Ọ́chị́
+exif-iimcategory-spo|Ụ̀gbàmà
+exif-iimcategory-war|Ághá, ọ̀gụ̀ na ághàrà
+exif-iimcategory-wea|Ihü ígwe
+exif-urgency-normal|Nkịtị (~{0})
+exif-urgency-low|Nàlà (~{0})
+exif-urgency-high|Nélú (~{0})
+namespacesall|nke níle
+monthsall|nke níle
+recreate|Ké ya ohúrù
+confirm_purge_button|Ngwanu
+confirm-watch-button|Ngwanu
+confirm-unwatch-button|Ngwanu
+imgmultipageprev|ihü na àzú
+imgmultipagenext|ihü nke di nso →
+imgmultigo|Gá!
+imgmultigoto|Gá na ihü ~{0}
+ascending_abbrev|heé élu
+descending_abbrev|ndạtạ
+table_pager_next|Ihü sò
+table_pager_prev|Ihü na àzú
+table_pager_first|Ihü mbu
+table_pager_last|Ihü lara azu
+table_pager_limit|Zí nke ~{0} màkà ihe na ótù ihü
+table_pager_limit_label|Ihe ga di na ótù ihü:
+table_pager_limit_submit|Gá
+table_pager_empty|Odígị ihe fútárá
+autosumm-blank|Melá ihü ochá
+autosumm-new|Jiri '~{0}' kere ihü
+watchlistedit-normal-title|Rüó na ndétu ihe Í nè lé
+watchlistedit-raw-titles|Ishi edemede:
+watchlistedit-raw-submit|Kuwaria ndetu ihem ne lé
+watchlisttools-view|Zi ihe gbanwere dí mkpà na ngá
+watchlisttools-edit|Lé na rü na ndetù ńlé
+watchlisttools-raw|Rüo ndetù nlènlé mèpòrò
+version|Ùdị
+version-skins|Akpụkpọ
+version-specialpages|Ihü mkpà
+version-other|Nke ozor
+version-hooks|Nyazo
+version-hook-name|Áhà nyazo
+version-hook-subscribedby|Dọkpụrụ shì
+version-version|(~{0})
+version-license|Íwú Ǹkwé
+version-poweredby-others|nke ndi ozor
+version-software-product|Nfófụtá
+version-software-version|Ùdị
+version-entrypoints-header-entrypoint|Ébé ọ̀bụ̀bà
+version-entrypoints-header-url|URL
+fileduplicatesearch-filename|Áhà usòrò:
+fileduplicatesearch-submit|Chọwa
+specialpages|Ihü mkpà
+specialpages-group-other|Ihü mkpà nke ozor
+specialpages-group-login|Banyé / ké buwa
+specialpages-group-users|Ọ'bànifé na íwú ihe nkwé
+specialpages-group-highuse|Ihü éjị áká nke ukwu
+specialpages-group-pages|Ndétu nke ihü
+specialpages-group-pagetools|Ngwa ihü
+specialpages-group-wiki|Ùmá Wiki na ngwa ọru ya
+specialpages-group-redirects|Na kufù ihü mkpà
+specialpages-group-spam|Ngwa ụrú
+blankpage|Ihü ochá
+tags|Ọdụ gbanwere di ndu
+tag-filter|[[Special:Tags\u007CỌdọ]] nzata:
+tag-filter-submit|Nzàtà
+tags-title|Ọdụ
+tags-tag|Áhà ọdụ
+tags-display-header|Ọdịdị na ndétu ngbanwe
+tags-description-header|Nkȯwá nke ukwu màkà íshí na ọdụ
+tags-hitcount-header|Gbanwere nwéré ọdụ
+tags-edit|mèzi
+tags-hitcount|~{0} {{PLURAL:~{0}\u007Cgbanwere\u007Cgbanwere}}
+comparepages|Má àtù ihü
+compare-page1|Ihü 1
+compare-page2|Ihü 2
+compare-rev1|Orübà 1
+compare-rev2|Orübà 2
+compare-submit|Má àtù
+dberr-problems|Ndó! Ámá nka nwere nsogbu ime ime.
+htmlform-required|Ọgụgụ nke gi dị
+htmlform-submit|Dànyé
+htmlform-reset|Emekwàlà gbanwere
+htmlform-selectorother-other|Nke ozor
+revdelete-content-hid|ihe zọ̀nàri
+rightsnone|(efù)
+revdelete-summary|mmẹkotá orü
+feedback-close|Ọméchá.
+feedback-message|Ozi:
+searchsuggest-search|Chọwa
+expand_templates_ok|Ngwanu
+']:>
+).lang
+;

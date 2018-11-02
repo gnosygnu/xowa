@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chaduvari",
+			"Ravichandra",
+			"Veeven"
+		]
+	},
+	"wikibase-edit": "సవరించు",
+	"wikibase-save": "భద్రపరచు",
+	"wikibase-cancel": "రద్దుచేయి",
+	"wikibase-add": "చేర్చు",
+	"wikibase-save-inprogress": "భద్రమవుతూంది…",
+	"wikibase-remove-inprogress": "తొలగిస్తున్నాం…",
+	"wikibase-description-edit-placeholder": "వివరణను ఇవ్వండి",
+	"wikibase-sitelink-site-edit-placeholder": "సైటు",
+	"wikibase-sitelink-page-edit-placeholder": "పుట",
+	"wikibase-alias-edit-placeholder": "మారుపేరును ఇవ్వండి",
+	"wikibase-terms": "వేరే భాషలలో",
+	"wikibase-remove": "తొలగించు",
+	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|పద్దు|పద్దులు}}",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|మూలం|మూలాలు}}",
+	"wikibase-itembytitle-submit": "వెతుకు",
+	"wikibase-itemdisambiguation-lookup-language": "భాష:",
+	"wikibase-itemdisambiguation-submit": "వెతుకు",
+	"wikibase-newentity-description": "వివరణ:",
+	"wikibase-setlabel-submit": "లేబులు తగిలించు",
+	"wikibase-setdescription-label": "వివరణ:",
+	"wikibase-setdescription-submit": "వివరణను ఇవ్వండి",
+	"wikibase-setaliases-label": "మారుపేర్లు:",
+	"wikibase-setaliases-submit": "మారుపేర్లు ఇవ్వండి",
+	"wikibase-modifyterm-language": "భాష",
+	"special-mergeitems": "రెండు అంశాల విలీనం",
+	"wikibase-mergeitems-submit": "అంశాలను విలీనం చెయ్యి",
+	"wikibase-entitieswithoutlabel-label-language": "భాష:",
+	"wikibase-entitieswithoutlabel-label-type": "రకం:",
+	"wikibase-entitieswithoutlabel-label-alltypes": "అన్నీ",
+	"wikibase-listdatatypes-time-head": "సమయం"
+}

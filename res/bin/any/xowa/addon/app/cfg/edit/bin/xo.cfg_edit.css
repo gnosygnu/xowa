@@ -1,0 +1,203 @@
+/*----------------------------------
+ user agent stylesheet overrides
+----------------------------------*/
+input, select, textarea {
+  /* remove 3d border; also, use softer color */
+  border: 1px solid #ddd;  
+}
+input[type="text"] {
+  /* add a little padding else text will be too close to borders */
+  padding: 2px;  
+}
+select{
+  /* better vertical alignment (see Gui- Shortcuts) */
+          box-sizing: content-box;
+     -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+}
+
+/*----------------------------------
+ page-level
+----------------------------------*/
+#xocfg_body {
+  /* use entire width */
+  width:100%;
+  
+  /* auto-center */
+  margin:0 auto;
+  
+  /* reset line-height; mw-body-content sets line-height to 1.6 which throws off vertical centering */
+  line-height: initial;
+}
+#xocfg_err {
+  color:red;
+  /* add v-space to give space for nav_select */
+  margin: 10px 0px 10px;
+}
+#xocfg_nav_select {
+  /* 28px to offset for help.toggle_all */
+  width: calc(100% - 28px);
+}
+#xocfg_page_help {
+  /* use same margin-top as h2 to symmetrically align vertically between dropdown above and h2 below */
+  margin-top: 20px;
+}
+
+/*----------------------------------
+ help row: note that this overrides the xohelp.css
+----------------------------------*/
+.xohelp_div {
+  /*
+    remove all borders except bottom for aesthetic reasons
+  */
+  border: 0px;
+  border-bottom: 1px solid #ddd;
+}
+.xohelp_msg {
+  /* 
+    add bottom-spacer to center vertically
+  */
+  margin-bottom: 10px;
+}
+
+/*----------------------------------
+ cfg row
+----------------------------------*/
+.xoimg_btn_x16 {
+  /* 
+    remove margins which only exist because other pages do not correct "line-height:1.6" and use manual-pixel nudging
+    note that this overrides the xocss.css
+  */
+  margin: initial;
+}
+
+.xocfg_row {
+  /* take up 100% */
+  width: 100%;
+  
+  /* add some v-space between rows */
+  margin: 2px 0px 2px;
+
+  /* add bottom border */
+  border-bottom: 1px solid rgb(230,230,230);
+  
+  /* add padding to give space for bottom border */
+  padding: 0px 0px 4px;
+}
+.xocfg_itm_help {}
+.xocfg_itm_name {
+  /* set width; will be used by data below */
+  width: 120px; /* DRD.narrow */
+
+  /* add margins to separate from buttons on either side */
+  margin: 0px 8px 0px 8px;  
+
+  /* make bold; align-right*/ 
+  font-weight: bold;
+  text-align: right;
+}
+.xocfg_itm_delete {
+  /* add right margin to give space from data */
+  margin: 0px 4px 0px 0px;
+}
+.xocfg_itm_hide {
+  /* marker class to hide delete button */
+  visibility: hidden;
+}
+.xocfg_itm_data {
+  /* set width to use rest of page; note +40 for two buttons */
+  width: calc(100% - 200px); /* DRD.narrow */
+}
+@media only screen and (min-width: 768px) {
+  .xocfg_itm_name {
+    /* set width; will be used by data below */
+    width: 220px; /* DRD.narrow */
+  }
+  .xocfg_itm_data {
+    /* set width to use rest of page; note +40 for two buttons */
+    width: calc(100% - 300px); /* DRD.narrow */
+  }
+}
+/*----------------------------------
+ data
+----------------------------------*/
+.xocfg_data__str {
+  width: 100%;
+}
+.xocfg_data__int {
+  width: 75px;
+
+  text-align: right;
+}
+.xocfg_data__list {
+  width: 200px;
+}
+.xocfg_data__memo {
+  width: 100%;
+}
+@media only screen and (min-width: 768px) {
+  .xocfg_data__str {
+    width: 40%;
+  }
+  .xocfg_data__memo {
+    width: 40%;
+  }
+}
+
+.xocfg_data__io_cmd__exe__txt {
+  width: 400px;
+  /* add space to bottom to separate from arg_box */
+  margin-bottom: 4px;
+}
+.xocfg_data__io_cmd__arg__txt {
+  width: 400px;
+}
+.xocfg_data__io_cmd__exe__btn {}
+
+.xocfg_data__gui_binding__box {
+  width: 120px;
+  /* add padding to make it same size as nearby text box */
+  padding: 1px;
+}
+.xocfg_data__gui_binding__ipt {
+  width: 200px;
+}
+
+.xocfg_data__readonly {
+  background-color:#F9F9F9;
+}
+
+/*----------------------------------
+ xocfg_pulse effect for confirm icon
+----------------------------------*/
+.xocfg_pulse {
+  display: block;
+  border-radius: 50%;
+  box-shadow: 0 0 0 rgba(0, 128, 0, 0.8);
+  animation: xocfg_pulse 2s;
+}
+@-webkit-keyframes xocfg_pulse {
+    0% {
+    -webkit-box-shadow: 0 0 0 0   rgba(0, 128, 0, 0.8);
+  }
+   70% {
+    -webkit-box-shadow: 0 0 0 2px rgba(0, 128, 0, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0   rgba(0, 128, 0, 0);
+  }
+}
+@keyframes xocfg_pulse {
+    0% {
+       -moz-box-shadow: 0 0 0 0   rgba(0, 128, 0, 0.8);
+            box-shadow: 0 0 0 0   rgba(0, 128, 0, 0.4);
+  }
+   70% {
+       -moz-box-shadow: 0 0 0 2px rgba(0, 128, 0, 0);
+            box-shadow: 0 0 0 2px rgba(0, 128, 0, 0);
+  }
+  100% {
+       -moz-box-shadow: 0 0 0 0   rgba(0, 128, 0, 0);
+            box-shadow: 0 0 0 0   rgba(0, 128, 0, 0);
+  }
+}

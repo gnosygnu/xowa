@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Goelujjwal",
+			"Pooja 1810",
+			"Siddhartha Ghai",
+			"Vivek Rai",
+			"Wikiuser13"
+		]
+	},
+	"wikibase-edit": "संपादन",
+	"wikibase-save": "सहेजें",
+	"wikibase-cancel": "रद्द करें",
+	"wikibase-add": "जोड़ें",
+	"wikibase-addreference": "स्रोत जोड़ें",
+	"wikibase-save-inprogress": "सहेजा जा रहा है…",
+	"wikibase-remove-inprogress": "हटाया जा रहा है…",
+	"wikibase-description-edit-placeholder": "विवरण दर्ज करें",
+	"wikibase-sitelink-site-edit-placeholder": "साइट",
+	"wikibase-sitelink-page-edit-placeholder": "पृष्ठ",
+	"wikibase-remove": "ह्टाना",
+	"wikibase-propertyedittool-full": "मानों की सूची पूर्ण है.",
+	"wikibase-entityselector-more": "ज़्यादा",
+	"wikibase-itembytitle-lookup-page": "पृष्ठ:",
+	"wikibase-itembytitle-submit": "खोजे",
+	"wikibase-itemdisambiguation-submit": "खहोजे",
+	"special-newitem": "एक नया सामान बानाए",
+	"wikibase-item-summary-wblinktitles-create": "पन्नों से कनेक्ट करने के लिए इस आइटम बनाया",
+	"wikibase-item-summary-wblinktitles-connect": "पन्नों से कनेक्ट करने के लिए एक भाषा लिंक जोड़े",
+	"wikibase-listdatatypes-wikibase-item-body": "इस परियोजना में अन्य मदों के लिए लिंक। प्रविष्टि के दौरान Wikidata के \"आइटम\" नाम स्थान को मेल खाती प्रविष्टियों के लिए खोजा जाएगा। यह एक एकल पाठ प्रविष्टि क्षेत्र होते हैं।",
+	"wikibase-listdatatypes-commonsmedia-body": "विकिमीडिया कॉमन्स पर संग्रहीत फ़ाइलों के लिए लिंक। प्रविष्टि के दौरान मेल खाती प्रविष्टियां \"फ़ाइल\" नामस्थान कॉमन्स पर खोजी जाएँगी।"
+}

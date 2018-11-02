@@ -1,0 +1,35 @@
+{
+	"@metadata": {
+		"authors": [
+			"Emperyan",
+			"Incelemeelemani",
+			"Rapsar",
+			"Marmase",
+			"Sayginer",
+			"Sucsuzz"
+		]
+	},
+	"wikibase-edit": "değiştir",
+	"wikibase-save": "kaydet",
+	"wikibase-cancel": "iptal",
+	"wikibase-add": "ekle",
+	"wikibase-save-inprogress": "Kaydediliyor...",
+	"wikibase-label-edit-placeholder": "etiket girin",
+	"wikibase-description-edit-placeholder": "açıklama girin",
+	"wikibase-sitelink-page-edit-placeholder": "madde",
+	"wikibase-description-input-help-message": "$1 dilinde kısa bir açıklama girin",
+	"wikibase-statements": "İfadeler",
+	"wikibase-sitelinks-input-help-message": "Bu ögeyle ilgili olan bir sayfanın bağlantsını ekle.",
+	"wikibase-remove": "kaldır",
+	"wikibase-aliases-label": "Şu şekilde de bilinir:",
+	"wikibase-shortcopyrightwarning": "\"$1\" düğmesine tıkladığınızda, [[$2|kullanım şartlarını]] kabul ederek katkınızı, $3 kapsamında geri döndürülemez bir biçimde sağlamış olacaksınız.",
+	"special-itembytitle": "Başlığına göre öge",
+	"wikibase-gotolinkedpage-lookup-site": "Site:",
+	"wikibase-itemdisambiguation-lookup-language": "Dil:",
+	"wikibase-newproperty-invalid-datatype": "Geçersiz veri türü belirtildi.",
+	"special-newitem": "Yeni bir öge oluştur",
+	"wikibase-newitem-summary": "Ögenin [[Special:ItemByTitle|halihazırda var olup olmadığından]] emin olun!<br />Oluşturulan her bir öge için birer [[Help:Label|etiket]] ve [[Help:Description|tanımlama]] da oluşturmanız gerekmektedir.",
+	"wikibase-newitem-fieldset": "Yeni bir öge oluştur",
+	"special-listdatatypes": "Kullanılabilen tüm veri türleri listesi",
+	"wikibase-api-target-is-redirect": "Yönlendirmenin hedefi başka bir yönlendirme olmamalıdır."
+}

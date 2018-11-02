@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"G.Hagedorn",
+			"Geitost",
+			"Kghbln"
+		]
+	},
+	"wikibase-label-input-help-message": "Geben Sie den Namen für diesen Datensatz in $1 an.",
+	"wikibase-description-input-help-message": "Geben Sie eine kurze Beschreibung in $1 an.",
+	"wikibase-sitelinks-add": "fügen Sie eine Verknüpfung zu einer Seitenverknüpfung hinzu",
+	"wikibase-sitelinks-input-help-message": "Legen Sie eine Verknüpfung zu einer diesem Datenobjekt entsprechenden Seite fest.",
+	"wikibase-aliases-input-help-message": "Sofern dieser Datensatz unter mehr als einem bestimmten Namen bekannt ist, können Sie Aliasse und Synonyme eingeben, damit er auch unter seinen alternativen Namen gefunden werden kann.",
+	"wikibase-blockeduser-tooltip-message": "Sie wurden gesperrt und können daher keine Bearbeitungen machen.",
+	"wikibase-move-error": "Sie können keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.",
+	"wikibase-wikibaserepopage-invalid-langcode": "Der Sprachcode „$1“ ist unbekannt. Bitte nutzen Sie einen gültige Sprachcode, wie bspw. „de“.",
+	"wikibase-wikibaserepopage-invalid-id": "Die Kennung „$1“ ist unbekannt. Bitte nutzen Sie eine gültige Objektkennung.",
+	"wikibase-itembytitle-nothing-found": "Mit der vorherigen Suche konnte kein Datenobjekt ermittelt werden. Bitte verfeinern Sie die Abfrage indem Sie die externe Seite besser beschreiben.",
+	"wikibase-itembytitle-invalid-site": "Die vorherige Abfrage konnte nicht zum Suchen eingesetzt werden. Sie müssen eine gültige Websitekennung angeben.",
+	"wikibase-itembytitle-create": "Sie können auch [{{fullurl:Special:NewItem|site=$1&page=$2}} ein Datenobjekt erstellen].",
+	"wikibase-itemdisambiguation-nothing-found": "Mit der vorherigen Suche konnte kein Datenobjekt ermittelt werden. Bitte verfeinern Sie die Abfrage.",
+	"wikibase-itemdisambiguation-create": "Sie können auch [{{fullurl:Special:NewItem|label=$1}} ein Datenobjekt erstellen].",
+	"wikibase-itemdisambiguation-invalid-langcode": "Die angegebene Sprachkennung ist dem System leider nicht bekannt. Bitte verwenden Sie eine gültige Kennung, wie bspw. „de“.",
+	"wikibase-setlabel-introfull": "Sie legen die Bezeichnung für [[$1]] in der Sprache $2 fest.",
+	"wikibase-setlabel-intro": "Dieses Formular ermöglicht es Ihnen, die Bezeichnungen eines Objektes festzulegen. Sie müssen eine Kennung für dieses Objekt (z. B. „Q23“), einen Sprachcode (z. B. „de“) und die festzulegende Bezeichnung angeben.",
+	"wikibase-noentity": "Dieser Datensatz ist nicht vorhanden. Sie können die <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen]</span>, um herauszufinden, was mit ihm passiert ist.",
+	"wikibase-noentity-createone": "Sie können auch [[$1|einen neuen erstellen]]."
+}

@@ -1,0 +1,37 @@
+.xohelp_div {  
+  display: flex; align-items: center;
+  width: 100%;
+  height: 0px;
+  opacity: 0;
+  
+  border: 1px solid #ddd;
+
+  overflow: hidden;  
+  -webkit-transition: height .5s ease-in, opacity 1s;
+     -moz-transition: height .5s ease-in, opacity 1s;
+       -o-transition: height .5s ease-in, opacity 1s;
+          transition: height .5s ease-in, opacity 1s;
+}
+.xohelp_msg {
+  padding: 4px;
+}
+.xohelp_row {
+  display: flex; align-items: center;
+  margin: 2px 0px 2px;
+}
+.xohelp_row_text {
+  padding-left: 4px;
+}
+.xohelp_bullet {
+  /* mediawiki li disc */
+  display: inline-block; /* need for OS X else width becomes 2px: DATE:2016-06-21*/
+  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAANCAIAAADuXjPfAAAABnRSTlMA/wD/AP83WBt9AAAAHklEQVR4AWP4jwrowWcI6oEgEBtIISNCfFT9mOYDACO/lbNIGC/yAAAAAElFTkSuQmCC);
+  width: 24px; height: 24px; min-width: 24px; min-height: 24px; /* background-size: 24px 24px; */
+  background-repeat: no-repeat; background-position: 10px 2px;
+}
+.xohelp_link {
+  display: inline-block; /* need for OS X else width becomes 2px: DATE:2016-06-21*/
+  background:url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20standalone%3D%22no%22%3F%3E%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%3E%3Cpath%20fill%3D%22%23fff%22%20stroke%3D%22%2306c%22%20d%3D%22M1.5%204.518h5.982V10.5H1.5z%22%2F%3E%3Cpath%20d%3D%22M5.765%201H11v5.39L9.427%207.937l-1.31-1.31L5.393%209.35l-2.69-2.688%202.81-2.808L4.2%202.544z%22%20fill%3D%22%2306f%22%2F%3E%3Cpath%20d%3D%22M9.995%202.004l.022%204.885L8.2%205.07%205.32%207.95%204.09%206.723l2.882-2.88-1.85-1.852z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E);
+  width: 24px; height: 24px; min-width: 24px; min-height: 24px; /* background-size: 24px 24px; */
+  background-repeat: no-repeat; background-position: 7px 6px;
+}

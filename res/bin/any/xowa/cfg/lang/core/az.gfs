@@ -1,0 +1,2981 @@
+numbers {
+  separators {
+    clear;
+    set(',', '.');
+    set('.', ',');
+  }
+}
+this
+.ns_names
+  .load_text(
+<:['
+-1|Xüsusi
+1|Müzakirə
+2|İstifadəçi
+3|İstifadəçi müzakirəsi
+5|$1 müzakirəsi
+6|Şəkil
+7|Şəkil müzakirəsi
+8|MediaWiki
+9|MediaWiki müzakirəsi
+10|Şablon
+11|Şablon müzakirəsi
+12|Kömək
+13|Kömək müzakirəsi
+14|Kateqoriya
+15|Kateqoriya müzakirəsi
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-2|Mediya
+8|MediyaViki
+9|MediyaViki müzakirəsi
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Activeusers|Aktivİstifadəçilər
+Allpages|BütünSəhifələr
+Contributions|Fəaliyyətlər
+CreateAccount|HesabAç
+Longpages|UzunSəhifələr
+Mycontributions|MənimFəaliyyətlərim
+Mypage|MənimSəhifəm
+Mytalk|MənimDanışıqlarım
+Newpages|YeniSəhifələr
+Preferences|Nizamlamalar
+Recentchanges|SonDəyişikliklər
+Search|Axtar
+Shortpages|QısaSəhifələr
+Specialpages|XüsusiSəhifələr
+Statistics|Statistika
+Undelete|Pozma
+Version|Versiya
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+redirect|0|#İSTİQAMƏTLƏNDİRMƏ~#İSTİQAMƏTLƏNDİR~#REDIRECT~
+notoc|0|__MÜNDƏRİCATYOX__~__NOTOC__~
+nogallery|0|__QALEREYAYOX__~__NOGALLERY__~
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Bazar
+monday|Bazar ertəsi
+tuesday|Çərşənbə axşamı
+wednesday|Çərşənbə
+thursday|Cümə axşamı
+friday|Cümə
+saturday|Şənbə
+sun|Bazar
+mon|Bazar ertəsi
+tue|Çərşənbə axşamı
+wed|Çərşənbə
+thu|Cümə axşamı
+fri|Cümə
+sat|Şənbə
+january|yanvar
+february|fevral
+march|mart
+april|aprel
+may_long|may
+june|iyun
+july|iyul
+august|avqust
+september|sentyabr
+october|oktyabr
+november|noyabr
+december|dekabr
+january-gen|yanvar
+february-gen|fevral
+march-gen|mart
+april-gen|aprel
+may-gen|may
+june-gen|iyun
+july-gen|iyul
+august-gen|avqust
+september-gen|sentyabr
+october-gen|oktyabr
+november-gen|noyabr
+december-gen|dekabr
+jan|Yanvar
+feb|Fevral
+mar|Mart
+apr|Aprel
+may|May
+jun|İyun
+jul|İyul
+aug|Avqust
+sep|Sentyabr
+oct|Oktyabr
+nov|Noyabr
+dec|Dekabr
+toc|Mündəricat
+redirectedfrom|(~{0} səhifəsindən yönləndirilmişdir)
+allpages|Bütün səhifələr
+prevpage|Əvvəlki səhifə (~{0})
+nextpage|Sonrakı səhifə (~{0})
+collapsible-collapse|Gizlə
+collapsible-expand|Göstər
+sort-descending|Azalan ardıcıllıq
+sort-ascending|Artan ardıcıllıq
+categories|Kateqoriyalar
+lastmodifiedat|Bu səhifə sonuncu dəfə ~{1}, ~{0} tarixində redaktə edilib.
+thumbnail-more|Böyüt
+otherlanguages|Başqa dillərdə
+blanknamespace|(Ana)
+pagecategories|~{0} {{PLURAL:~{0}\u007CKateqoriya\u007CKateqoriya}}
+category_header|"~{0}" kateqoriyasındakı məqalələr
+subcategories|Alt kateqoriyalar
+category-media-header|"~{0}" kateqoriyasında mediya
+category-empty|"Bu kateqoriya hal-hazırda boşdur."
+category-subcat-count|{{PLURAL:~{1}\u007CBu kateqoriya yalnız aşağıdakı altkateqoriyadan ibarətdir.\u007CCəmi ~{1} kateqoriyadan {{PLURAL:~{0}\u007Caltkateqoriya\u007C~{0} altkateqoriya}} göstərilmişdir.}}
+category-subcat-count-limited|Bu kateqoriyada {{PLURAL:~{0}\u007C~{0} alt kateqoriya}} var.
+category-article-count|{{PLURAL:~{1}\u007CBu kateqoriya yalnız aşağıdakı səhifədən ibarətdir.\u007CCəmi ~{1} səhifədən aşağıdakı {{PLURAL:~{0}\u007Csəhifə\u007C~{0} səhifə}} bu kateqoriyadadır.}}
+category-article-count-limited|Bu kateqoriyada {{PLURAL:~{0}\u007C~{0} səhifə}} var.
+category-file-count|{{PLURAL:~{1}\u007CBu kateqoriya yalnız aşağıdakı fayldan ibarətdir.\u007CCəmi ~{1} fayldan {{PLURAL:~{0}\u007Cfayl\u007C~{0} fayl}} bu kateqoriyadadır.}}
+category-file-count-limited|Bu kateqoriyada {{PLURAL:~{0}\u007C~{0} fayl}} var.
+categorytree-member-counts|{{PLURAL:~{0}\u007C1 altkategoriya\u007C~{0} altkategoriya}}, {{PLURAL:~{1}\u007C1 səhifə\u007C~{1} səhifə}}, ve {{PLURAL:~{2}\u007C1 şəkil\u007C~{2} şəkil}}dən ibarətdir
+categorytree-num-categories|~{0} C
+categorytree-num-pages|~{0} P
+categorytree-num-files|~{0} F
+nextn|sonrakı {{PLURAL:~{0}\u007C~{0}}}
+prevn|əvvəlki {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|(davam)
+bold_sample|Qalın mətn
+bold_tip|Qalın mətn
+italic_sample|Kursiv mətn
+italic_tip|Kursiv mətn
+link_sample|Bağlantı başlığı
+link_tip|Daxili bağlantı
+headline_sample|Başlıq mətni
+headline_tip|2. səviyyə başlıq
+ago|~{0} əvvəl
+hidden-category-category|Gizli kateqoriyalar
+statistics|Statistika
+statistics-header-pages|Səhifə statistikası
+statistics-articles|Məqalələr
+statistics-pages|Səhifələr
+statistics-pages-desc|Vikidə olan bütün səhifələr, istifadəçi müzakirələri, istiqamətləndirmə səhifələri və s. daxil olmaqla
+categorytree|Kateqoriya ağacı
+categorytree-portlet|Kateqoriyalar
+categorytree-legend|Kateqoriya ağacını göstər.
+categorytree-desc|[[Special:CategoryTree\u007CKategori sistemini]] dinamik idarə et
+categorytree-header|Kategoriya adını girib, içerisini ierarxik şəkildə görə bilərsiniz. Bu özəllik AJAX adıyla biliən JavaScript ilə oşləyər. əgər operatorunuz köhnə isə ya da JavaScript istifadəsi mümkün deyilsə, işləməz.
+categorytree-category|Kateqoriya:
+categorytree-go|Yüklə
+categorytree-parents|Üst kateqoriyalar
+categorytree-mode-categories|sadəcə kateqoriyaları göstər
+categorytree-mode-pages|Fayllardan əlavə səhifələr
+categorytree-mode-all|bütün səhifələr
+categorytree-collapse|gizlə
+categorytree-expand|genişləndir
+categorytree-num-empty|boş
+categorytree-load|yüklə
+categorytree-loading|yüklənir…
+categorytree-nothing-found|Təəsüf edirik, nəticə yoxdur.
+categorytree-no-subcategories|alt kateqoriyalar yoxdur
+categorytree-no-parent-categories|Üst kateqoriya yoxdur.
+categorytree-no-pages|Alt kateqoriya və məqalə yoxdur.
+categorytree-not-found|<i>"~{0}"</i> adlı kateqoriya tapılmadı.
+categorytree-error|Məlumat bazasında problem var.
+categorytree-retry|Xahiş edirik bir az gözləyin və yenidən yoxlayın.
+cite_reference_link_key_with_num|~{0}_~{1}
+cite_reference_link_prefix|sitat_istinad-
+cite_references_link_prefix|sitat_qeyd-
+cite_reference_link|<sup id="~{0}" class="reference">[[#~{1}\u007C<nowiki>[</nowiki>~{2}<nowiki>]</nowiki>]]</sup>
+cite_references_link_many_format|<sup>[[#~{0}\u007C~{1}]]</sup>
+cite_references_link_many_sep| 
+cite_references_link_many_and| 
+imagemap_desc_types|yuxarı-sağ, aşağı-sağ, aşağı-sol, yuxarı-sol, heç nə
+poem-desc|Şeirlərin formatlaşdırılması üçün <code>&lt;poem&gt;</code> teqini əlavə edir
+proofreadpage_image|Şəkil
+proofreadpage_index|İndeks
+proofreadpage_badpage|Yanlış format
+proofreadpage_nextpage|Növbəti səhifə
+proofreadpage_source|Mənbə
+proofreadpage-button-reset-zoom-label|Orijinal ölçü
+cite|Sayt
+cite_page|Səhifə:
+cite_submit|Sayt
+wikieditor-wikitext-tab|Vikimətn
+wikieditor-loading|Yüklə
+wikieditor-preview-tab|Sınaq görüntüsü
+wikieditor-preview-changes-tab|Dəyişikliklər
+wikieditor-preview-loading|Yüklənir…
+wikieditor-previewDialog-tab|Sınaq görüntüsü
+wikieditor-previewDialog-loading|Yüklənir…
+wikieditor-publish-button-publish|Yeniləmə
+wikieditor-publish-button-cancel|Ləğv et
+wikieditor-publish-dialog-minor|Kiçik dəyişiklik
+wikieditor-publish-dialog-watch|Bu səhifəni izlə
+wikieditor-publish-dialog-publish|Publish
+wikieditor-publish-dialog-goback|Geriyə
+wikieditor-template-editor-dialog-title|Şablonu redaktə et
+wikieditor-template-editor-dialog-submit|Yenilə
+wikieditor-template-editor-dialog-cancel|Ləğv et
+wikieditor-toc-show|Möhtəviyyata bax
+wikieditor-toc-hide|Möhtəviyyatı gizlət
+wikieditor-toolbar-loading|Yüklənir…
+wikieditor-toolbar-tool-bold|Qalın
+wikieditor-toolbar-tool-bold-example|Qalın mətn
+wikieditor-toolbar-tool-italic|Kursiv
+wikieditor-toolbar-tool-italic-example|Kursiv mətn
+wikieditor-toolbar-tool-ilink|Daxili keçid
+wikieditor-toolbar-tool-ilink-example|Keçidin başlığı
+wikieditor-toolbar-tool-xlink-example|http://www.example.com başlıq
+wikieditor-toolbar-tool-link|Keçid
+wikieditor-toolbar-tool-link-title|Keçid yerləşdir
+wikieditor-toolbar-tool-link-int-target-tooltip|URL üçün səhifə başlığı
+wikieditor-toolbar-tool-link-ext-target|URL linki:
+wikieditor-toolbar-tool-link-cancel|Ləğv et
+wikieditor-toolbar-tool-link-int-target-status-notexists|Səhifə mövcud deyil
+wikieditor-toolbar-tool-link-int-target-status-invalid|Yanlış başlıq
+wikieditor-toolbar-tool-link-lookslikeinternal-int|Daxili keçid
+wikieditor-toolbar-tool-link-lookslikeinternal-ext|Xarici keçid
+wikieditor-toolbar-tool-file|Şəkil əlavə etmə
+wikieditor-toolbar-tool-file-example|Misal.jpg
+wikieditor-toolbar-tool-reference|İstinad
+wikieditor-toolbar-tool-reference-cancel|Ləğv et
+wikieditor-toolbar-tool-reference-insert|Yerləşdirmək
+wikieditor-toolbar-tool-reference-text|İstinad mətn
+wikieditor-toolbar-tool-signature|İmza və vaxt qeydi
+wikieditor-toolbar-section-advanced|Ətraflı
+wikieditor-toolbar-tool-heading|Başlıq
+wikieditor-toolbar-tool-heading-1|Səviyyə 1
+wikieditor-toolbar-tool-heading-2|Səviyyə 2
+wikieditor-toolbar-tool-heading-3|Səviyyə 3
+wikieditor-toolbar-tool-heading-4|Səviyyə 4
+wikieditor-toolbar-tool-heading-5|Səviyyə 5
+wikieditor-toolbar-tool-heading-example|Başlıq mətni
+wikieditor-toolbar-group-format|Format
+wikieditor-toolbar-tool-redirect|Yönləndirmə
+wikieditor-toolbar-tool-redirect-example|Səhifə adını əlavə et
+wikieditor-toolbar-tool-big|Böyük
+wikieditor-toolbar-tool-big-example|Böyük mətn
+wikieditor-toolbar-tool-small|Kiçik
+wikieditor-toolbar-tool-small-example|Kiçik mətn
+wikieditor-toolbar-tool-subscript|Subscript
+wikieditor-toolbar-group-insert|Yerləşdirmək
+wikieditor-toolbar-tool-gallery|Şəkil qalereyası
+wikieditor-toolbar-tool-newline|Yeni xətt
+wikieditor-toolbar-tool-table|Cədvəl
+wikieditor-toolbar-tool-table-example-old|-\n! başlıq 1\n! başlıq 2\n! başlıq 3\n\u007C-\n\u007C sıra 1, sütun 1\n\u007C sıra 1, sütun 2\n\u007C sıra 1, sütun 3\n\u007C-\n\u007C sıra 2, sütun 1\n\u007C sıra 2, sütun 2\n\u007C sıra 2, sütun 3
+wikieditor-toolbar-tool-table-example-header|Başlıq mətni
+wikieditor-toolbar-tool-table-title|Cədvəl yerləşdir
+wikieditor-toolbar-tool-table-dimensions-rows|Sətirlər:
+wikieditor-toolbar-tool-table-dimensions-columns|Sütunlar:
+wikieditor-toolbar-tool-table-example|Nümunə
+wikieditor-toolbar-tool-table-preview|Sınaq görüntüsü
+wikieditor-toolbar-tool-table-insert|Yerləşdirmək
+wikieditor-toolbar-tool-table-cancel|Ləğv et
+wikieditor-toolbar-tool-replace|Axtar və dəyiş
+wikieditor-toolbar-tool-replace-title|Axtar və dəyiş
+wikieditor-toolbar-tool-replace-search|Axtar:
+wikieditor-toolbar-tool-replace-replace|Bununla dəyiş:
+wikieditor-toolbar-tool-replace-button-findnext|Növbətini axtar
+wikieditor-toolbar-tool-replace-button-replaceall|Hamısını dəyiş
+wikieditor-toolbar-tool-replace-close|Bağla
+wikieditor-toolbar-section-characters|Xüsusi işarələr
+wikieditor-toolbar-characters-page-latin|Latın
+wikieditor-toolbar-characters-page-latinextended|Latın genişləndirilmiş
+wikieditor-toolbar-characters-page-ipa|IPA
+wikieditor-toolbar-characters-page-symbols|Simvollar
+wikieditor-toolbar-characters-page-greek|Yunan
+wikieditor-toolbar-characters-page-cyrillic|Kiril
+wikieditor-toolbar-characters-page-arabic|Ərəb
+wikieditor-toolbar-characters-page-persian|Fars
+wikieditor-toolbar-characters-page-hebrew|İvrit
+wikieditor-toolbar-characters-page-bangla|Benqal
+wikieditor-toolbar-characters-page-telugu|Teluqu
+wikieditor-toolbar-characters-page-sinhala|Sinqal
+wikieditor-toolbar-characters-page-gujarati|Qucarat
+wikieditor-toolbar-characters-page-thai|Tay
+wikieditor-toolbar-characters-page-lao|Lao
+wikieditor-toolbar-characters-page-khmer|Khmer
+wikieditor-toolbar-section-help|Kömək
+wikieditor-toolbar-help-heading-description|Təsvir
+wikieditor-toolbar-help-heading-syntax|Yazdığınız
+wikieditor-toolbar-help-heading-result|Aldığınız
+wikieditor-toolbar-help-page-format|Formatlaşdırmaq
+wikieditor-toolbar-help-page-link|Keçidlər
+wikieditor-toolbar-help-page-heading|Başlıqlar
+wikieditor-toolbar-help-page-list|Siyahılar
+wikieditor-toolbar-help-page-file|Fayllar
+wikieditor-toolbar-help-page-reference|İstinadlar
+wikieditor-toolbar-help-page-discussion|Müzakirə
+wikieditor-toolbar-help-content-italic-description|Kursiv
+wikieditor-toolbar-help-content-italic-syntax|''Kursiv mətn''
+wikieditor-toolbar-help-content-italic-result|<em>Kursiv mətn</em>
+wikieditor-toolbar-help-content-bold-description|Qalın
+wikieditor-toolbar-help-content-bold-syntax|'''Qalın mətn'''
+wikieditor-toolbar-help-content-bold-result|<strong>Qalın mətn</strong>
+wikieditor-toolbar-help-content-bolditalic-description|Qalın və kursiv
+wikieditor-toolbar-help-content-bolditalic-syntax|'''''Qalın və kursiv mətn'''''
+wikieditor-toolbar-help-content-bolditalic-result|<strong><em>Qalın və kursiv mətn</em></strong>
+wikieditor-toolbar-help-content-ilink-description|Daxili keçid
+wikieditor-toolbar-help-content-ilink-syntax|[[Səhifənin adı\u007CKeçidin adı]]<br />[[Səhifənin adı]]
+wikieditor-toolbar-help-content-ilink-result|<a href='#'>Keçidin adı</a><br /><a href='#'>Səhifənin adı</a>
+wikieditor-toolbar-help-content-xlink-description|Xarici keçid
+wikieditor-toolbar-help-content-xlink-syntax|[http://www.example.org Keçidin adı]<br />[http://www.example.org]<br />http://www.example.org
+wikieditor-toolbar-help-content-xlink-result|<a href='#' class='external'>Keçidin adı</a><br /><a href='#' class='external autonumber'>[1]</a><br /><a href='#' class='external'>http://www.example.org</a>
+wikieditor-toolbar-help-content-heading2-description|2-ci səviyyəlı başlıq
+wikieditor-toolbar-help-content-heading2-syntax|== Başlıq mətn ==
+wikieditor-toolbar-help-content-heading2-result|<h2>Başlıq mətn</h2>
+wikieditor-toolbar-help-content-heading3-description|3-cü səviyyəli başlıq
+wikieditor-toolbar-help-content-heading3-syntax|=== Başlıq mətn ===
+wikieditor-toolbar-help-content-heading3-result|<h3>Başlıq mətn</h3>
+wikieditor-toolbar-help-content-heading4-description|4-cü səviyyəli başlıq
+wikieditor-toolbar-help-content-heading4-syntax|==== Başlıq mətn ====
+wikieditor-toolbar-help-content-heading4-result|<h4>Başlıq mətn</h4>
+wikieditor-toolbar-help-content-heading5-description|5-ci səviyyəlı başlıq
+wikieditor-toolbar-help-content-heading5-syntax|===== Başlıq mətn =====
+wikieditor-toolbar-help-content-heading5-result|<h5>Başlıq mətn</h5>
+wikieditor-toolbar-help-content-ulist-description|Markalanmış siyahı
+wikieditor-toolbar-help-content-ulist-syntax|* Siyahı bəndi<br />* Siyahı bəndi
+wikieditor-toolbar-help-content-ulist-result|<ul><li>Siyahı bəndi</li><li>Siyahı bəndi</li></ul>
+wikieditor-toolbar-help-content-olist-description|Nömrələnən siyahı
+wikieditor-toolbar-help-content-olist-syntax|# Siyahı bəndi<br /># Siyahı bəndi
+wikieditor-toolbar-help-content-olist-result|<ol><li>Siyahı bəndi</li><li>Siyahı bəndi</li></ol>
+wikieditor-toolbar-help-content-file-description|Şəkil əlavə etmə
+wikieditor-toolbar-help-content-file-syntax|[[~{0}:Example.png\u007Cthumb\u007CMövzu mətni]]
+wikieditor-toolbar-help-content-file-result|<div style='width:104px;' class='thumbinner'><a title='Mövzu mətni' class='image' href='#'><img height='50' width='100' border='0' class='thumbimage' src='~{1}/WikiEditor/modules/images/toolbar/example-image.png' alt=''/></a><div class='thumbcaption'><div class='magnify'><a title='Böyüt' class='internal' href='#'><img height='11' width='15' alt='' src='~{0}/common/images/magnify-clip.png'/></a></div>Mövzu mətni</div></div>
+wikieditor-toolbar-help-content-reference-description|İstinad
+wikieditor-toolbar-help-content-reference-syntax|Səhifənin mətni.&lt;ref name="test"&gt;[http://www.example.org Keçidin mətni], əlavə mətnt.&lt;/ref&gt;
+wikieditor-toolbar-help-content-reference-result|Səhifənin mətni.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-rereference-description|Eyni istinaddan istifadənin əlavəsi
+wikieditor-toolbar-help-content-rereference-result|Səhifə mətni.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-showreferences-description|İstinadları göstər
+wikieditor-toolbar-help-content-showreferences-result|<ol class='references'><li id='cite_note-test-0'><b><a title='' href='#'>^</a></b> <a rel='nofollow' title='http://www.example.org' class='external text' href='#'>Keçid mətni</a>, əlavə mətn.</li></ol>
+wikieditor-toolbar-help-content-signaturetimestamp-description|Vaxt qeydi ilə imza
+wikieditor-toolbar-help-content-signaturetimestamp-result|<a href='#' title='{{#special:mypage}}'>İstifadəçi adı</a> (<a href='#' title='{{#special:mytalk}}'>müzakirə</a>) 15:54, 10 iyun 2009 (UTC)
+wikieditor-toolbar-help-content-signature-description|İmza
+wikieditor-toolbar-help-content-signature-result|<a href='#' title='{{#special:mypage}}'>İstifadəçi adı</a> (<a href='#' title='{{#special:mytalk}}'>müzakirə</a>)
+wikieditor-toolbar-help-content-indent-description|Abzas
+wikieditor-toolbar-help-content-indent-syntax|Normal mətn<br />:Abzasla mətn<br />::Abzasla mətn
+wikieditor-toolbar-help-content-indent-result|Normal mətn<dl><dd>Abzasla mətn<dl><dd>Abzasla mətn</dd></dl></dd></dl>
+wikibase-sitelink-page-edit-placeholder|səhifə
+wm-license-cc-wiki-link|w:en:Creative Commons
+wm-license-cc-attribution|İstinad
+wm-license-cc-by-1.0-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/deed.az Attribution 1.0 Generic] lisenziyası altında yayımlanır.
+wm-license-cc-by-1.0-fi-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/fi/deed.az Attribution 1.0  Finlandiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-1.0-il-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/fi/deed.az Attribution 1.0  İsrail] lisenziyası altında yayımlanır.
+wm-license-cc-by-1.0-nl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/fi/deed.az Attribution 1.0  Niderland] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/deed.az Attribution 2.0 Generic] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-at-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/at/deed.az Attribution 2.0 Avstriya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-au-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/au/deed.az Attribution 2.0 Avstraliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-be-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/be/deed.az Attribution 2.0 Belçika] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-br-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/br/deed.az Attribution 2.0 Braziliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-ca-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/ca/deed.az Attribution 2.0 Kanada] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-cl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/cl/deed.az Attribution 2.0 Çili] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-de-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/de/deed.az Attribution 2.0 Almaniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-es-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/es/deed.az Attribution 2.0 İspaniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-fr-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/fr/deed.az Attribution 2.0 Fransa] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-hr-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/hr/deed.az Attribution 2.0 Xorvatiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-it-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/it/deed.az Attribution 2.0 İtaliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-jp-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/jp/deed.az Attribution 2.0 Yaponiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-kr-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/kr/deed.az Attribution 2.0 Koreya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-nl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/nl/deed.az Attribution 2.0 Niderland] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-pl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/pl/deed.az Attribution 2.0 Polşa] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-tw-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/tw/deed.az Attribution 2.0 Tayvan] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-uk-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/uk/deed.az Attribution 2.0 Birləşmiş Krallıq və Uels] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.0-za-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/za/deed.az Attribution 2.0 Cənubi Afrika] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.1-au-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/au/deed.az Attribution 2.1 Avstraliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.1-es-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/es/deed.az Attribution 2.1 İspaniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.1-jp-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/jp/deed.az Attribution 2.1 Yaponiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/deed.az Attribution 2.5 Generik] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-au-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/au/deed.az Attribution 2.5 Avstraliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-bg-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/bg/deed.az Attribution 2.5 Bolqarıstan] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-br-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/br/deed.az Attribution 2.5 Braziliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-ca-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/ca/deed.az Attribution 2.5 Kanada] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-ch-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/ch/deed.az Attribution 2.5 İsveçrə] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-cn-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/cn/deed.az Attribution 2.5 Çin] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-co-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/co/deed.az Attribution 2.5 Kolumbiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-dk-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/dk/deed.az Attribution 2.5 Danimarka] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-es-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/es/deed.az Attribution 2.5 ispaniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-hr-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/hr/deed.az Attribution 2.5 Xorvatiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-hu-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/hu/deed.az Attribution 2.5 Macarıstan] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-il-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/il/deed.az Attribution 2.5 İsrail] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-in-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/in/deed.az Attribution 2.5 Hindistan] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-it-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/it/deed.az Attribution 2.5 İtaliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-mk-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/mk/deed.az Attribution 2.5 Makedoniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-mt-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/mt/deed.az Attribution 2.5 Malta] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-mx-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/mx/deed.az Attribution 2.5 Meksika] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-my-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/my/deed.az Attribution 2.5 Malayziya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-nl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/deed.az Attribution 2.5 Niderland] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-pe-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/pe/deed.az Attribution 2.5 Peru] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-pl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/pl/deed.az Attribution 2.5 Polşa] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-pt-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/pt/deed.az Attribution 2.5 Portuqaliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-se-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/se/deed.az Attribution 2.5 İsveç] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-si-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/si/deed.az Attribution 2.5 Sloveniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-tw-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/tw/deed.az Attribution 2.5 Tayvan] lisenziyası altında yayımlanır.
+wm-license-cc-by-2.5-za-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/za/deed.az Attribution 2.5 Cənubi Afrika] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-at-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/at/deed.az Attribution 3.0 Avstriya] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-au-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/au/deed.az Attribution 3.0 Avstraliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-br-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/br/deed.az Attribution 3.0 Braziliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-cz-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/cz/deed.az Attribution 3.0 Çexiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-de-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/de/deed.az Attribution 3.0 Almaniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-ec-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/ec/deed.az Attribution 3.0 Ekvador] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-ee-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/at/deed.az Attribution 3.0 Estoniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-es-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/es/deed.az Attribution 3.0 İspaniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-gr-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/gr/deed.az Attribution 3.0 Yunanıstan] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-gt-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/gt/deed.az Attribution 3.0 Qvatemala] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-hk-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/hk/deed.az Attribution 3.0 Honkonq] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-hr-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/hr/deed.az Attribution 3.0 Xorvatiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-it-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/it/deed.az Attribution 3.0 İtaliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-lu-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/lu/deed.az Attribution 3.0 Lüksemburq] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-nl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/nl/deed.az Attribution 3.0 Niderland] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-no-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/no/deed.az Attribution 3.0 Norveç] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-nz-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/nz/deed.az Attribution 3.0 Yeni Zellandiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-ph-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/ph/deed.az Attribution 3.0 Filippin] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-pl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/pl/deed.az Attribution 3.0 Polşa] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-pr-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/pr/deed.az Attribution 3.0 Puerto-Riko] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-ro-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/ro/deed.az Attribution 3.0 Rumıniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-rs-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/rs/deed.az Attribution 3.0 Serbiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-sg-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/sg/deed.az Attribution 3.0 Sunqapur] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-th-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/th/deed.az Attribution 3.0 Tayland] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-tw-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/tw/deed.az Attribution 3.0 Tayvan] lisenziyası altında yayımlanır.
+wm-license-cc-by-3.0-us-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/us/deed.az Attribution 3.0 ABŞ] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-1.0-fi-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/fi/deed.az Attribution-Share Alike 1.0 Finlandiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-1.0-il-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/il/deed.az Attribution-Share Alike 1.0 İsrail] lisenziyası altında yayımlanır.\nil
+wm-license-cc-by-sa-1.0-nl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/nl/deed.az Attribution-Share Alike 1.0 Niderland] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-at-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/at/deed.az Attribution-Share Alike 2.0 Avstriya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-au-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/au/deed.az Attribution-Share Alike 2.0 Avstraliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-be-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/be/deed.az Attribution-Share Alike 2.0 Belçika] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-br-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/br/deed.az Attribution-Share Alike 2.0 Braziliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-ca-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/ca/deed.az Attribution-Share Alike 2.0 Kanada] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-cl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/cl/deed.az Attribution-Share Alike 2.0 Çili] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-de-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/de/deed.az Attribution-Share Alike 2.0 Almaniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-es-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/es/deed.az Attribution-Share Alike 2.0 İspaniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-fr-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/fr/deed.az Attribution-Share Alike 2.0 Fransa] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-hr-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/hr/deed.az Attribution-Share Alike 2.0 Xorvatiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-it-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/it/deed.az Attribution-Share Alike 2.0 İtaliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-jp-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/jp/deed.az Attribution-Share Alike 2.0 Yaponiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-kr-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/kr/deed.az Attribution-Share Alike 2.0 Koreya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-nl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/nl/deed.az Attribution-Share Alike 2.0 Niderland] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-pl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/pl/deed.az Attribution-Share Alike 2.0 Polşa] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-tw-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/tw/deed.az Attribution-Share Alike 2.0 Tayvan] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-uk-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/uk/deed.az Attribution-Share Alike 2.0 Birləşmiş Krallıq və Uels] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.0-za-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/za/deed.az Attribution-Share Alike 2.0 Cənubi Afrika] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.1-au-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/au/deed.az Attribution-Share Alike 2.1 Avstraliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.1-es-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/es/deed.az Attribution-Share Alike 2.1 İspaniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.1-jp-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/jp/deed.az Attribution-Share Alike 2.1 Yaponliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-ar-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/ar/deed.az Attribution-Share Alike 2.5 Argentina] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-au-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/au/deed.az Attribution-Share Alike 2.5 Avstraliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-bg-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/bg/2.5/ar/deed.az Attribution-Share Alike 2.5 Bolqarıstan] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-br-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/br/2.5/ar/deed.az Attribution-Share Alike 2.5 Braziliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-ca-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/ca/deed.az Attribution-Share Alike 2.5 Kanada] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-ch-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/ch/deed.az Attribution-Share Alike 2.5 İsveçrə] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-cn-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/cn/deed.az Attribution-Share Alike 2.5 Çin] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-co-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/co/deed.az Attribution-Share Alike 2.5 Kolumbiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-dk-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/dk/deed.az Attribution-Share Alike 2.5 Danimarka] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-es-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/es/deed.az Attribution-Share Alike 2.5 İspaniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-hr-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/hr/deed.az Attribution-Share Alike 2.5 Xorvatiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-hu-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/hu/deed.az Attribution-Share Alike 2.5 Macarıstan] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-il-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/il/deed.az Attribution-Share Alike 2.5 İsrail] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-in-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/in/deed.az Attribution-Share Alike 2.5 Hindistan] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-it-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/it/deed.az Attribution-Share Alike 2.5 İtaliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-mk-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/mk/deed.az Attribution-Share Alike 2.5 Makedoniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-mt-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/mt/deed.az Attribution-Share Alike 2.5 Malta] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-mx-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/mx/deed.az Attribution-Share Alike 2.5 Meksika] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-my-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/my/deed.az Attribution-Share Alike 2.5 Malayziya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-nl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/nl/deed.az Attribution-Share Alike 2.5 Niderland] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-pe-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/pe/deed.az Attribution-Share Alike 2.5 Peru] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-pl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/pl/deed.az Attribution-Share Alike 2.5 Polşa] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-pt-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/pt/deed.az Attribution-Share Alike 2.5 Portuqaliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-se-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/se/deed.az Attribution-Share Alike 2.5 İsveç] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-si-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/si/deed.az Attribution-Share Alike 2.5 Sloveniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-tw-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/tw/deed.az Attribution-Share Alike 2.5 Tayvan] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-2.5-za-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/za/deed.az Attribution-Share Alike 2.5 Cənubi Afrika] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-at-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/at/deed.az Attribution-Share Alike 3.0 Avstriya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-au-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/au/deed.az Attribution-Share Alike 3.0 Avstraliya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-cz-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/cz/deed.az Attribution-Share Alike 3.0 Çexiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-de-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/de/deed.az Attribution-Share Alike 3.0 Almaniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-es-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/es/deed.az Attribution-Share Alike 3.0 İspaniya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-gr-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/gr/deed.az Attribution-Share Alike 3.0 Yunanıstan] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-gt-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/gt/deed.az Attribution-Share Alike 3.0 Qvatemala] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-hk-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/hk/deed.az Attribution-Share Alike 3.0 Honkonq] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-hr-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/hr/deed.az Attribution-Share Alike 3.0 Xorvatiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-lu-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/lu/deed.az Attribution-Share Alike 3.0 Lüksemburq] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-nl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/nl/deed.az Attribution-Share Alike 3.0 Niderland] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-no-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/no/deed.az Attribution-Share Alike 3.0 Norveç] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-nz-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/nz/deed.az Attribution-Share Alike 3.0 Yeni Zelandiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-ph-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/ph/deed.az Attribution-Share Alike 3.0 Filippin] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-pl-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/pl/deed.az Attribution-Share Alike 3.0 Polşa] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-pr-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/pr/deed.az Attribution-Share Alike 3.0 Puerto-Riko] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-rs-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/rs/deed.az Attribution-Share Alike 3.0 Serbiya] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-sg-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/sg/deed.az Attribution-Share Alike 3.0 Sinqapur] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-th-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/th/deed.az Attribution-Share Alike 3.0 Tayland] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-tw-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/tw/deed.az Attribution-Share Alike 3.0 Tayvan] lisenziyası altında yayımlanır.
+wm-license-cc-by-sa-3.0-us-text|Bu fayl [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/us/deed.az Attribution-Share Alike 3.0 ABŞ] lisenziyası altında yayımlanır.
+wm-license-cc-free|Azadsınız:
+wm-license-cc-free-to-share-header|bölüşmək
+wm-license-cc-free-to-share-text|əsər paylaşma və çatdırılması
+wm-license-cc-free-to-remix-header|dəyişdirə bilərsiniz
+wm-license-cc-free-to-remix-text|əsər adaptasiyası
+wm-license-cc-conditions-attribution-header|İstinad
+wm-license-cc-conditions-share_alike-header|bənzər paylaşma
+wikimedialicensetexts-desc|Wikimedia lisenziya ismarıcları
+wm-license-artwork-artist|Artist
+wm-license-artwork-title|Başlıq
+wm-license-artwork-medium|Orta
+wm-license-artwork-dimensions|Ölçülər
+wm-license-artwork-object-history|Obyekt tarixi
+wm-license-artwork-credit-line|Credit line
+wm-license-artwork-references|İstinadlar
+wm-license-artwork-inscriptions|Yazılar
+wm-license-artwork-notes|Qeydlər
+wm-license-book-edition|Nəşr
+wm-license-book-editor|Redaktor
+wm-license-book-illustrator|İllüstrator
+wm-license-book-language|Dil
+wm-license-book-page-overview|Səhifəyə baxış
+wm-license-book-place-of-publication|Nəşr yeri
+wm-license-book-printer|Printer
+wm-license-book-publisher|Naşir
+wm-license-book-series-title|Seriyanın adı
+wm-license-book-start-this-book|Bu kitaba başla
+wm-license-book-subtitle|Altbaşlıq
+wm-license-book-title|Başlıq
+wm-license-book-translator|Tərcüməçi
+wm-license-book-volume|Cild
+wm-license-book-year-of-publication|Nəşr ili
+wm-license-cecill-wiki-link|w:en:CeCILL
+wm-license-creator-alternative-names|Alternativ adlar
+wm-license-creator-description|İzah
+wm-license-creator-date-of-birth|Təvəllüdü
+wm-license-creator-date-of-birth-and-death|Doğum/ölüm tarixi
+wm-license-creator-location-of-birth|Doğum yeri
+wm-license-creator-location-of-birth-and-death|Doğum/ölüm yeri
+wm-license-creator-work-period|Yaradıcılıq illəri
+wm-license-creator-work-location|Yaradıcılıq məkanı
+wm-license-fal-wiki-link|w:en:Free Art license
+wm-license-free-software-wiki-link|w:az:Azad proqram təminatı
+wm-license-gfdl-1.2-only-header|1.2 yalnız
+wm-license-information-description|İzah
+wm-license-information-source|Mənbə
+wm-license-information-date|Tarix
+wm-license-information-author|Müəllif
+wm-license-information-permission|İcazə
+wm-license-information-permission-reusing-text|Faylın təkrar istifadəsi
+wm-license-information-permission-see-below|Aşağıya baxın.
+wm-license-information-other-versions|Digər versiyalar
+wm-license-original-upload-log|Orijinal yükləmə gündəliyi
+wm-license-own-work|Yükləyənin öz işi
+wm-license-pd-usgov-military-navy-wiki-link|w:az:ABŞ hərbi donanması
+wm-license-self-multiple-licenses-select|İstədiyiniz lisenziyanı seçə bilərsiniz.
+sitesupport-url|https://donate.wikimedia.org/?utm_source=donate&utm_medium=sidebar&utm_campaign=spontaneous&uselang=az
+sitesupport|Maddi kömək
+tooltip-n-sitesupport|Bizə dəstək verin
+nstab-creator|Yaradıcı
+group-Ex_Administrator|Keçmiş idarəçilər
+group-Ex_Administrator-member|{{GENDER:~{0}\u007CKeçmiş bürokrat}}
+grouppage-Ex_Administrator|{{ns:layihə}}: Keçmiş idarəçilər
+group-Ex_Bureaucrat-member|{{GENDER:~{0}\u007Ckeçmiş bürokrat}}
+grouppage-Ex_Bureaucrat|{{ns:layihə}}:Keçmiş bürokrat
+group-OTRS-member|OTRS üzvləri
+group-OTRS-member-member|{{GENDER:~{0}\u007COTRS üzvü}}
+grouppage-OTRS-member|{{ns:project}}:OTRS üzvləri
+group-accountcreator-member|{{GENDER:~{0}\u007Chesab yaradan}}
+grouppage-accountcreator|{{ns:project}}:Hesab yaradanlar
+group-arbcom|Arbitraj Komitəsinin üzvləri
+group-arbcom-member|{{GENDER:~{0}\u007Carbitraj komitəsinin üzvü}}
+grouppage-arbcom|{{ns:project}}:Arbitraj komitə üzvləri
+group-autopatrolled|Avtopatrullar
+group-autopatrolled-member|{{GENDER:~{0}\u007Cavtopatrul}}
+grouppage-autopatrolled|{{ns:project}}:Avtopatrullar
+group-autoreviewer-member|{{GENDER:~{0}\u007Cautoreviewer}}
+group-botadmin-member|{{GENDER:~{0}\u007Cidarəçi hüququna malik bot}}
+grouppage-botadmin|{{ns:layihə}}:İdarəçi hüququ olan bot
+group-confirmed|Təsdiqlənmiş istifadəçilər
+group-confirmed-member|{{GENDER:~{0}\u007CTəsdiqlənmiş istifadəçi}}
+grouppage-confirmed|{{nslayihə}}:Təsdiqlənmiş istifadəçilər
+group-editprotected|Mühafizə olunmuş səhifə redaktorları
+group-eliminator-member|{{GENDER:~{0}\u007Celiminator}}
+grouppage-eliminator|{{ns:project}}:Eliminator
+group-filemover-member|{{GENDER:~{0}\u007Cfile mover}}
+group-flood|Bot istifadəçilər
+group-flood-member|{{GENDER:~{0}\u007Cbot}}
+grouppage-flood|{{ns:project}}:Botlar
+group-founder|Banilər
+group-founder-member|{{GENDER:~{0}\u007CBani}}
+grouppage-founder|{{ns:project}}:Banilər
+group-import|Çıxaranlar
+grouppage-import|{{ns:project}}:Çıxaranlar
+group-interface_editor|İnterfeys redaktoru
+group-interface_editor-member|{{GENDER:~{0}\u007Cinterfeys redaktoru}}
+grouppage-interface_editor|{{ns:project}}: İnterfeys redaktorları
+group-ipblock-exempt|IP blokundan azad olma
+group-ipblock-exempt-member|{{GENDER:~{0}\u007CIP blokundan azad olma}}
+grouppage-ipblock-exempt|{{ns:project}}:IP blokundan azad olma
+group-patroller|Patrullar
+group-patroller-member|{{GENDER:~{0}\u007Cpatrul}}
+group-researcher|Araşdırıcılar
+group-researcher-member|{{GENDER:~{0}\u007Ctədqiqatçı}}
+grouppage-researcher|{{ns:project}}:Araşdırmaçılar
+group-rollbacker|Rolbakerlər
+group-rollbacker-member|{{GENDER:~{0}\u007Crolbaker}}
+grouppage-rollbacker|{{ns:project}}:Rolbakerlər
+group-trusted|İnanılmış tistifadəçilər
+group-trusted-member|{{GENDER:~{0}\u007Cinanılmış istifadəçi}}
+grouppage-trusted|{{ns:project}}:İnanılmış istifadəçilər
+group-Global_bot|Qlobal bot
+group-Global_bot-member|{{GENDER:~{0}\u007Cqlobal bot}}
+grouppage-Global_bot|m:Qlobal bot
+group-Global_rollback|Qlobal rolbakerlər
+group-Global_rollback-member|{{GENDER:~{0}\u007Cqlobal rolbaker}}
+group-Global_sysops|Qlobal idarəçi
+group-Global_sysops-member|{{GENDER:~{0}\u007Cqlobal idarəçi}}
+grouppage-Global_sysops|Qlobal idarəçilər
+group-Ombudsmen|Ombudsman
+group-Ombudsmen-member|{{GENDER:~{0}\u007Combudsman}}
+group-Staff|Əməkdaşlar
+group-Staff-member|əməkdaşlar
+group-editinterface|İnterfeys redaktoru
+group-editinterface-member|{{GENDER:~{0}\u007Cinterfeys redaktoru}}
+group-steward|Stüardlar
+group-steward-member|{{GENDER:~{0}\u007Cstüard}}
+grouppage-steward|m:Stüardlar
+group-sysadmin|Sistem idarəçiləri
+group-sysadmin-member|{{GENDER:~{0}\u007CSistem idarəçisi}}
+grouppage-sysadmin|m:Sistem idarəçisiləri
+group-coder|Coderlər
+group-coder-member|{{GENDER:~{0}\u007Ccoder}}
+group-inactive|Qeyri-aktiv istifadəçilər
+group-inactive-member|{{GENDER:~{0}\u007Cqeyri-aktiv istifadəçi}}
+grouppage-inactive|{{ns:project}}:Qeyri-aktiv istifadəçilər
+shared-repo-name-shared|Wikimedia Commons
+wikimedia-copyright|Mətn <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike Lisenziyası</a> altındadır;\nəlavə şərtlər tətbiq oluna bilər.\nƏtraflı məlumat üçün <a href="https://wikimediafoundation.org/wiki/Terms_of_Use">İstifadə Şərtlərinə</a> baxın.
+tog-underline|Keçidlərin altını xətlə:
+tog-hideminor|Son dəyişikliklər siyahısında kiçik redaktələri gizlə
+tog-hidepatrolled|Son dəyişikliklər siyahısında yoxlanılmış redaktələri gizlə
+tog-newpageshidepatrolled|Yeni səhifələr siyahısında yoxlanılmış səhifələri gizlə
+tog-extendwatchlist|Yalnız son dəyişiklikləri yox, bütün dəyişiklikləri göstərmək üçün izləmə siyahısını genişlət
+tog-usenewrc|Son dəyişikliklərdəki və izləmə siyahısındakı dəyişiklikləri qruplaşdır
+tog-numberheadings|Başlıqları avtomatik nömrələ
+tog-showtoolbar|Redaktə zamanı üstdəki alətlər qutusunu göstər
+tog-editondblclick|Səhifələri iki kliklə redaktə et
+tog-editsectiononrightclick|Bölmə başlığı üzərində siçanın sağ düyməsini klikləməklə bölmələri redaktə et
+tog-watchcreations|Yaratdığım səhifələri və yüklədiyim faylları izlədiyim səhifələrə əlavə et
+tog-watchdefault|Redaktə etdiyim səhifələri və faylları izlədiyim səhifələrə əlavə et
+tog-watchmoves|Adlarını dəyişdiyim səhifələri və faylları izlədiyim səhifələrə əlavə et
+tog-watchdeletion|Sildiyim səhifələri və faylları izlədiyim səhifələrə əlavə et
+tog-minordefault|Standart olaraq bütün redaktələri kiçik redaktə kimi nişanla
+tog-previewontop|Sınaq göstərişi yazma sahəsindən əvvəl göstər
+tog-previewonfirst|İlkin redaktədə sınaq göstərişi
+tog-enotifwatchlistpages|İzləmə siyahısında olan məqalə redaktə olunsa, mənə e-məktub göndər
+tog-enotifusertalkpages|Müzakirə səhifəm redaktə olunsa, mənə e-məktub göndər
+tog-enotifminoredits|Səhifələrdə kiçik dəyişikliklər olsa belə, mənə e-məktub göndər
+tog-enotifrevealaddr|Xəbərdarlıq e-məktublarında mənim e-poçt ünvanımı göstər
+tog-shownumberswatching|İzləyən istifadəçilərin sayını göstər
+tog-oldsig|İndiki imza:
+tog-fancysig|Vikimətn şəklində imza (avtomatik keçid yaratmadan)
+tog-uselivepreview|Canlı sınaq baxışını istifadə et
+tog-forceeditsummary|Qısa məzmunu boş saxladıqda mənə bildir
+tog-watchlisthideown|Mənim redaktələrimi izləmə siyahısında gizlət
+tog-watchlisthidebots|Bot redaktələrini izləmə siyahısında gizlət
+tog-watchlisthideminor|İzləmə səhifəmdə kiçik redaktələri gizlət
+tog-watchlisthideliu|Qeydiyyatlı istifadəçilərin redaktələrini izləmə siyahısında gizlət
+tog-watchlisthideanons|Qeydiyyatdan keçməmiş istifadəçilərin redaktələrini izləmə siyahısında gizlət
+tog-watchlisthidepatrolled|Yoxlanılmış redaktələri izləmə siyahısında gizlət
+tog-ccmeonemails|Göndərdiyim e-məktubun nüsxələrini mənə göndər
+tog-diffonly|Versiyaların müqayisəsi zamanı səhifənin məzmununu göstərmə
+tog-showhiddencats|Gizli kateqoriyaları göstər
+tog-norollbackdiff|Geri qaytardıqdan sonra, edilmiş dəyişikikləri dəyişikliklər siyahısından sil
+tog-useeditwarning|Qeyd edilməmiş dəyişikliyə sahib bir dəyişiklik səhifəsindən çıxarkən məni xəbərdar et
+tog-prefershttps|Sessiya açarkən hər zaman etibarlı bağlantıdan istifadə et.
+underline-always|Həmişə
+underline-never|Heç vaxt
+underline-default|Susmaya görə brouzer
+editfont-style|Redaktə sahəsinin şrift növü:
+editfont-default|Brauzerin tənzimləmələrində təsdiq olunmuş şrift
+editfont-monospace|Bərabərenli şrift
+editfont-sansserif|Sans-serif şrifti
+editfont-serif|Serif şrifti
+january-date|~{0} Yanvar
+february-date|~{0} Fevral
+march-date|~{0} Mart
+april-date|~{0} Aprel
+may-date|~{0} May
+june-date|~{0} İyun
+july-date|~{0} İyul
+august-date|~{0} Avqust
+september-date| ~{0} Sentyabr
+october-date|~{0} Oktyabr
+november-date|~{0} Noyabr
+december-date|~{0} Dekabr
+hidden-categories|{{PLURAL:~{0}\u007CGizli kateqoriya\u007CGizli kateqoriyalar}}
+index-category|İndeksləşdirilmiş səhifələr
+noindex-category|İndeksləşdirilməyən səhifələr
+broken-file-category|İşləməyən fayl keçidləri olan səhifələr
+about|Haqqında
+article|Mündəricat
+newwindow|(yeni pəncərədə açılır)
+cancel|Ləğv et
+moredotdotdot|Daha...
+morenotlisted|Bu siyahı tam deyil.
+mypage|Səhifə
+mytalk|Müzakirə
+anontalk|Bu IP-yə aid müzakirə
+navigation|Naviqasiya
+and| və
+qbfind|Tap
+qbbrowse|Gözdən keçir
+qbedit|Redaktə
+qbpageoptions|Bu səhifə
+qbmyoptions|Mənim səhifələrim
+faq|TSS
+faqpage|Project:TSS
+actions|Hərəkətlər
+namespaces|Adlar fəzası
+variants|Variantlar
+navigation-heading|Naviqasiya menyusu
+errorpagetitle|Xəta
+returnto|~{0} səhifəsinə qayıt.
+tagline|{{SITENAME}} saytından
+help|Kömək
+search|Axtar
+searchbutton|Axtar
+go|Keç
+searcharticle|Keç
+history|Səhifənin tarixçəsi
+history_short|Tarixçə
+updatedmarker|son dəfə mən nəzərdən keçirəndən sonra yenilənib
+printableversion|Çap variantı
+permalink|Daimi bağlantı
+print|Çap
+view|Görünüş
+view-foreign|~{0} üzərindən baxış
+edit|Redaktə
+edit-local|Lokal izahı redaktə et
+create|Yarat
+create-local|Lokal izah əlavə et
+editthispage|Bu səhifəni redaktə et
+create-this-page|Bu səhifəni yarat
+delete|Sil
+deletethispage|Bu səhifəni sil
+undeletethispage|Bu səhifənin silmə əməliyyatını geri qaytar
+undelete_short|~{0} {{PLURAL:~{0}\u007Cdəyişikliyi\u007Cdəyişiklikləri}} bərpa et
+viewdeleted_short|{{PLURAL:~{0}\u007Cbir silinmiş redaktəyə\u007C~{0} silinmiş redaktəyə}}
+protect|Mühafizə et
+protect_change|dəyiş
+protectthispage|Bu səhifəni mühafizə et
+unprotect|Mühafizəni kənarlaşdır
+unprotectthispage|Bu səhifənin mühafizəsini kənarlaşdır
+newpage|Yeni səhifə
+talkpage|Bu səhifəni müzakirə et
+talkpagelinktext|Müzakirə
+specialpage|Xüsusi səhifə
+personaltools|Şəxsi alətlər
+articlepage|Məqaləni nəzərdən keçir
+talk|Müzakirə
+views|Görünüş
+toolbox|Alətlər
+userpage|İstifadəçi səhifəsini göstər
+projectpage|Layihə səhifəsini göstər
+imagepage|Fayl səhifəsini göstər
+mediawikipage|Mesaj səhifəsini göstər
+templatepage|Şablon səhifəsini göstər
+viewhelppage|Kömək səhifəsini göstər
+categorypage|Kateqoriya səhifəsini göstər
+viewtalkpage|Müzakirəni göstər
+redirectpagesub|Yönləndirmə səhifəsi
+redirectto|İstiqamətləndirilir:
+viewcount|Bu səhifəyə ~{0} {{PLURAL:~{0}\u007Cdəfə}} müraciət olunub.
+protectedpage|Mühafizəli səhifə
+jumpto|Keçid et:
+jumptonavigation|naviqasiya
+jumptosearch|axtar
+view-pool-error|Üzr istəyirik, hazırda serverlər artıq yüklənməyə məruz qalmışdır.\nBu səhifəyə baxmaq üçün həddən artıq müraciət daxil olmuşdur.\nZəhmət olmasa, bir müddət sonra yenidən cəhd edin.\n\n~{0}
+pool-timeout|Blokun gözləmə müddəti bitdi
+pool-queuefull|Çıxarış səhifəsi doludur
+pool-errorunknown|naməlum xəta
+aboutsite|{{SITENAME}} haqqında
+aboutpage|Project:İzah
+copyright|Bu məzmun ~{0} əhatəsindədir.
+copyrightpage|{{ns:project}}:Müəllif
+currentevents|Güncəl hadisələr
+currentevents-url|Project:Güncəl hadisələr
+disclaimers|Məsuliyyətdən imtina
+disclaimerpage|Project:Məsuliyyətdən imtina
+edithelp|Redaktə kömək
+mainpage|Ana Səhifə
+mainpage-description|Ana Səhifə
+policy-url|Project:Qaydalar
+portal|İctimai portal
+portal-url|Project:Kənd meydanı
+privacy|Məxfilik siyasəti
+privacypage|Project:Gizlilik prinsipi
+badaccess|İcazə xətası
+badaccess-group0|Bu fəaliyyəti icra etmək səlahiyyətiniz yoxdur.
+badaccess-groups| Bu fəaliyyəti, yalnız ~{0} {{PLURAL:~{1}\u007Cqrupundakı\u007Cqruplarındakı}} istifadəçilər icra edə bilərlər.
+versionrequired|MediyaViki ~{0} versiyası lazımdır
+versionrequiredtext|Bu səhifəni istifadə etmək üçün MediaWikinin ~{0} versiyası tələb olunur.\nBax: [[Special:Version\u007CVersiyalar]].
+ok|OK
+pagetitle|~{0} - {{SITENAME}}
+pagetitle-view-mainpage|{{SITENAME}}
+retrievedfrom|Mənbə — "~{0}"
+youhavenewmessages|{{PLURAL:~{2}\u007C~{2}}} ~{0} var (~{1}).
+youhavenewmessagesfromusers|{{PLURAL:~{2}\u007CBaşqa bir istifadəçidən\u007C~{2} istifadəçidən}} ~{0} var (~{1}).
+youhavenewmessagesmanyusers|Bir neçə istifadəçidən ~{0} var (~{1}).
+newmessageslinkplural|{{PLURAL:~{0}\u007Cyeni mesaj\u007Cyeni mesaj}}
+newmessagesdifflinkplural|son {{PLURAL:~{0}\u007Cdəyişiklik\u007Cdəyişikliklər}}
+youhavenewmessagesmulti|"~{0}"da yeni mesajınız var.
+editsection|redaktə
+editold|redaktə
+viewsourceold|başlanğıc kodu nəzərdən keçir
+editlink|redaktə
+viewsourcelink|başlanğıc kodu nəzərdən keçir
+editsectionhint|~{0} bölməsini redaktə et
+showtoc|göstər
+hidetoc|gizlə
+confirmable-yes|Bəli
+confirmable-no|Xeyr
+thisisdeleted|~{0} bax və ya bərpa et?
+viewdeleted|~{0} göstərilsin?
+restorelink|{{PLURAL:~{0}\u007Cbir silinmiş redaktəyə\u007C~{0} silinmiş redaktəyə}}
+feedlinks|Kanal növü:
+feed-invalid|Yanlış qeydiyyat kanalı növü.
+feed-unavailable|Sindikasiya xətləri etibarsızdır
+site-rss-feed|~{0} — RSS-lent
+site-atom-feed|~{0} — Atom-lent
+page-rss-feed|"~{0}" — RSS-lent
+page-atom-feed|"~{0}" — Atom-lent
+feed-atom|Atom
+feed-rss|RSS
+red-link-title|~{0} (səhifə mövcud deyil)
+nstab-main|Məqalə
+nstab-user|İstifadəçi səhifəsi
+nstab-media|Media səhifəsi
+nstab-special|Xüsusi səhifə
+nstab-project|Layihə səhifəsi
+nstab-image|Fayl
+nstab-mediawiki|Məlumat
+nstab-template|Şablon
+nstab-help|Kömək
+nstab-category|Kateqoriya
+nosuchaction|Bu cür fəaliyyət mövcud deyil.
+nosuchactiontext|URL-də göstərilən əməliyyat düzgün deyil.\nOla bilsin ki, URL-i səhv daxil etmisiniz və ya düzgün olmayan keçiddən istifadə etmisiniz.\nBu həmçinin, {{SITENAME}} saytındakı xətanın göstəricisi ola bilər.
+nosuchspecialpage|Bu adda xüsusi səhifə mövcud deyil
+nospecialpagetext|<strong>Axtardığınız xüsusi səhifə mövcud deyil.</strong>\n\nMövcud xüsusi səhifələrin siyahısı: [[Special:SpecialPages\u007CXüsusi səhifələr]].
+error|Xəta
+databaseerror|Verilənlər bazası xətası
+databaseerror-text|Bir verilənlər bazası sorğu xətası baş verdi.\nBu proqramdan qaynaqlanan bir xətanı göstərmiş ola bilər.
+databaseerror-textcl|Bir verilənlər bazası sorğu xətası baş verdi.
+databaseerror-query|Sorğu: ~{0}
+databaseerror-function|Funksiya: ~{0}
+databaseerror-error|Xəta: ~{0}
+laggedslavemode|'''Xəbərdarlıq:''' Səhifə son əlavələri əks etdirməyə bilər.
+readonly|Verilənlər bazası bloklanıb
+enterlockreason|Bloklamanın səbəbini və nəzərdə tutulan müddətini qeyd edin
+readonlytext|Verilənlər bazası ehtimal ki, adi təmir işləri ilə əlaqədar müvəqqəti olaraq yeni məqalələr və dəyişikliklər üçün bağlanmışdır.\nVerilənlər bazasını bloklayan operatorun izahatı: ~{0}
+missing-article|Məlumat bazası, tapılması istənən "~{0}" ~{1} adlı səhifəyə aid mətni tapa bilmədi.\n\nBu vəziyyət səhifənin, silinmiş bir səhifənin keçmiş versiyası olmasından qaynaqlana bilər.\n\nƏgər niyə bu deyilsə, proqramda bir səhv ilə qarşılaşmış ola bilərsiniz.\nXahiş edirik bunu bir [[Special:ListUsers/sysop\u007Cİdarəçilərə]], URL not edərək göndərin.
+missingarticle-rev|(versiya №: ~{0})
+missingarticle-diff|(fərq: ~{0}, ~{1})
+readonly_lag|Məlumatlar bazasının ikinci dərəcəli serveri əsas serverlə əlaqə yaradanadək məlumatlar bazası avtomatik olaraq bloklanmışdır
+internalerror|Daxili xəta
+internalerror_info|Daxili xəta: ~{0}
+filecopyerror|"~{0}" faylı "~{1}" faylına kopyalanmır.
+filerenameerror|"~{0}" faylının adını "~{1}"-yə dəyişmək mümkün deyil
+filedeleteerror|"~{0}" fayılını silə bilmədi.
+directorycreateerror|"~{0}" direktoriyasını yaratmaq mümkün deyil
+filenotfound|"~{0}" faylını tapa bilmədi.
+unexpected|Uyğunsuzluq: "~{0}"="~{1}".
+formerror|Xəta: Formanın məlumatlarını əks etdirmək qeydi-mümkündür
+badarticleerror|Yerinə yetirmək istədiyiniz fəaliyyətin icrası bu səhifədə mümkün deyil.
+cannotdelete|İstədiyiniz "~{0}" səhifə və ya faylını silmək mümkün deyil.\nBu səhifə və ya fayl başqa bir istifadəçi tərəfindən silinmiş ola bilər.
+cannotdelete-title|"~{0}" səhifəsinin silinməsi mümkünsüzdür.
+delete-hook-aborted|Silmə əməliyyatı qarmaq tərəfindən dayandırıldı. \nHeç bir açıqlama edilmədi.
+no-null-revision|"~{0}" səhifəsi üçün yeni boş bir versiya yaradıla bilmədi
+badtitle|Səhv başlıq
+badtitletext|Axtarılan səhifə adı səhvdir və ya boşdur, ya da düzgün olmayan dillərarası, yaxud vikilərarası keçid istifadə edilib.\nBaşlıqlarda istifadə edilməsi qadağan olunan bir və ya daha çox simvol istifadə edilmiş ola bilər.
+perfcached|Aşağıdakı məlumatlar keş yaddaşdan götürülmüşdür və bu səbəbdən aktual olmaya bilər. A maximum of {{PLURAL:~{0}\u007Cone result is\u007C~{0} results are}} available in the cache.
+perfcachedts|Aşağıdakı məlumatlar keş yaddaşdan götürülmüşdür və sonuncu dəfə ~{0} tarixində yenilənmişdir. A maximum of {{PLURAL:~{3}\u007Cone result is\u007C~{3} results are}} available in the cache.
+querypage-no-updates|Bu an üçün güncəlləmələr sıradan çıxdı. Buradakı məlumat dərhal yenilənməyəcək.
+viewsource|Mənbə göstər
+viewsource-title|~{0} üçün mənbəyə bax
+actionthrottled|Sürət məhdudiyyəti
+actionthrottledtext|Anti-spam hərəkətləri səbəbilə, bir hərəkəti qısa bir zaman aralığında çoxetməniz əngəlləndi, və siz həddi aşmısınız. Lütfən bir neçə dəqiqə sonra yenidən yoxlayın.
+protectedpagetext|Bu səhifə redaktə üçün bağlıdır.
+viewsourcetext|Siz bu səhifənin məzmununu görə və köçürə bilərsiniz:
+viewyourtext|Bu səhifəyə '''etdiyiniz dəyişikliklərin''' mənbəyini görüntüləyib köçürə bilərsiniz:
+protectedinterface|Bu səhifədə proqram təminatı üçün sistem məlumatları var və sui-istifadənin qarşısını almaq üçün mühafizə olunmalıdır.
+editinginterface|<strong>Diqqət:</strong> Siz proqram təminatı üçün interfeys mətni olan səhifəni redaktə edirsiniz.\nOnun dəyişdirilməsi digər istifadəçilərin interfeysinin xarici görünüşünə təsir göstərəcək.
+cascadeprotected|Səhifə mühafizə olunub, çünki o kaskad mühafizə olunan {{PLURAL:~{0}\u007Cnövbəti səhifəyə\u007Cnövbəti səhifələrə}} qoşulub:\n~{1}
+namespaceprotected|Sizin adlarında ~{0} olan məqalələrdə redaktə etməyə icazəniz yoxdur.
+customcssprotected|Bu səhifəni redaktə etmə izniniz yoxdur, çünki bu səhifə başqa bir istifadəçinin fərdi parametrlərinə sahibdir.
+customjsprotected|Bu Java Script səhifəsini redaktə etmə izniniz yoxdur, çünki bu səhifə başqa bir istifadəçinin fərdi parametrlərinə sahibdir.
+mycustomcssprotected|Bu CSS ssəhifəsini redaktə etmək səlahiyyətiniz yoxdur.
+mycustomjsprotected|Bu JavaScript səhifəsini redaktə etmək səlahiyyətiniz yoxdur.
+myprivateinfoprotected|Sizin şəxsi məlumatlarınızı redaktə etmək səlahiyyətiniz yoxdur.
+mypreferencesprotected|Seçimlərinizi redaktə etmək üçün izniniz yoxdur.
+ns-specialprotected|Xüsusi səhifələr redaktə oluna bilməz.
+titleprotected|Bu adda səhifənin yaradılması istifadəçi [[User:~{0}\u007C~{0}]] tərəfindən qadağan edilmişdir.\nGöstərilən səbəb: "''~{1}''".
+filereadonlyerror|"~{1}" fayl deposundakı "~{0}" faylı ancaq oxunula bilən rejimdə olduğuna görə dəyişdirmək üçün açıla bimir.\n\nRejimi qoyan nəzarətçinin izahı: "~{2}".
+invalidtitle-knownnamespace|"~{1}" sahə adı üçün "~{2}" mətni keçərsiz bir başlıq
+invalidtitle-unknownnamespace|Naməlum ~{0} ad sahəsi miqdarı və keçərsiz "~{1}" başlıq
+exception-nologin|Giriş edilməmişdir
+exception-nologin-text|Bu səhifəyə daxil olmaq və ya fəaliyyəti icra etmək üçün özünüzü sistemə təqdim edin.
+exception-nologin-text-manual| bu səhifəyə və ya hərəkətə daxil olmaq üçün ~{0} lazımdır.
+virus-badscanner|Düzgün olmayan konfiqurasiya: naməlum ''~{0}'' virus yoxlayanı
+virus-scanfailed|Yoxlama başa çatmadı (kod ~{0})
+virus-unknownscanner|naməlum antivirus
+logouttext|<strong>Sistemdən çıxdınız.</strong>\n\nVeb-brauzerin keş yaddaşını təmizləyənədək bəzi səhifələr hələ də sistemdəymişsiniz kimi görünə bilər.
+welcomeuser|Xoş gəldin ~{0}!
+welcomecreation-msg|Hesabınız yaradıldı.\n[[Special:Preferences\u007C{{SITENAME}} nizamlamalarınızı]] dəyişdirməyi unutmayın.
+yourname|İstifadəçi adı
+userlogin-yourname|İstifadəçi adı
+userlogin-yourname-ph|İstifadəçi adınızı daxil edin
+createacct-another-username-ph|İstifadəçi adınızı daxil edin:
+yourpassword|Parol:
+userlogin-yourpassword|Parol
+userlogin-yourpassword-ph|Parolunuzu daxil edin
+createacct-yourpassword-ph|Parol daxil edin
+yourpasswordagain|Parolu təkrar daxil edin:
+createacct-yourpasswordagain|Parolu təsdiqlə
+createacct-yourpasswordagain-ph|Parolu təkrar daxil edin
+remembermypassword|Məni bu kompyuterdə xatırla (maksimum ~{0} {{PLURAL:~{0}\u007Cgün\u007Cgün}})
+userlogin-remembermypassword|Sistemdə qal
+userlogin-signwithsecure|Etibarlı bağlantıdan istifadə edin
+yourdomainname|Sizin domeniniz:
+password-change-forbidden|Bu vikidə parolunuzu dəyişdirə bilməzsiniz.
+externaldberror|Verilənlər bazasının doğruluğunu yoxlamada xəta baş verib və yaxud sizin xarici istifadəçi qeydiyyatını yeniləmək hüququnuz yoxdur.
+login|Daxil ol
+nav-login-createaccount|Daxil ol / hesab yarat
+userlogin|Daxil ol və ya qeydiyyatdan keç
+userloginnocreate|Daxil ol
+logout|Çıxış
+userlogout|Çıxış
+notloggedin|Daxil olmamısınız
+userlogin-noaccount|İstifadəçi hesabınız yoxdur?
+userlogin-joinproject|{{SITENAME}} layihəsinə qoşulun
+nologin|İstifadəçi hesabınız yoxdur? ~{0}.
+nologinlink|Hesab yarat
+createaccount|Hesab yarat
+gotaccount|İstifadəçi hesabınız varmı? '''~{0}'''.
+gotaccountlink|Daxil olun
+userlogin-resetlink|Daxilolma məlumatlarınızı unutmusunuz?
+userlogin-resetpassword-link|Parolunuzu unutmusunuz?
+userlogin-helplink2|Qeydiyyat barədə köməklik
+userlogin-loggedin|Siz artıq {{GENDER:~{0}\u007C~{0}}} kimi daxil olmusunuz.\nAşağıdakı formadan istifadə edərək, başqa bir istifadəçi kimi daxil ola bilərsiniz.
+userlogin-createanother|Başqa bir istifadəçi hesabı yarat
+createacct-emailrequired|E-poçt ünvanı
+createacct-emailoptional|E-poçt ünvanı (məcburi deyil)
+createacct-email-ph|E-poçt ünvanınızı daxil edin
+createacct-another-email-ph|E-poçt ünvanını daxil edin
+createaccountmail|Müvəqqəti təsadüfi bir paroldan istifadə edə bilər və bu parolu göstərilən e-poçt ünvanına göndərə bilərsiniz
+createacct-realname|Əsl adınız (məcburi deyil)
+createaccountreason|Səbəb:
+createacct-reason|Səbəb
+createacct-reason-ph|Niyə başqa bir hesab yaradırsınız
+createacct-captcha|Təhlükəsizlik nəzarəti
+createacct-imgcaptcha-ph|Yuxarıda gördüyünüz mətni daxil edin
+createacct-submit|İstifadəçi hesabı yarat
+createacct-another-submit|Başqa bir istifadəçi hesabı yarat
+createacct-benefit-heading|{{SITENAME}} sizin kimi insanlar tərəfindən yaradılır.
+createacct-benefit-body1|~{0} {{PLURAL:~{0}\u007Credaktə}}
+createacct-benefit-body2|{{PLURAL:~{0}\u007Csəhifə\u007Csəhifə}}
+createacct-benefit-body3|ən son {{PLURAL:~{0}\u007Ciştirakçılar\u007Ciştirakçılar}}
+badretype|Daxil etdiyiniz parol uyğun gəlmir.
+userexists|Daxil edilmiş ad artıq istifadədədir.\nLütfən başqa ad seçin.
+loginerror|Daxil olma xətası
+createacct-error|Hesab yaratma xətası
+createaccounterror|Bu istifadəçi adını yaratmaq mümkün olmadı: ~{0}
+nocookiesnew|İstifadəçi qeydiyyatı yaradıldı, lakin daxil ola bilmədiniz.\n{{SITENAME}} iştirakçıların təqdim olunması üçün "cookie"lərdən istifadə edir.\nSiz "cookie"lərin qəbuluna qadağa qoymusunuz.\nLütfən, onları qəbul etməyə icazə verdikdən sonra yeni istifadəçi adı və parolunuzla daxil olun.
+nocookieslogin|{{SITENAME}} istifadəçilərin daxil ola bilməsi üçün "cookie"lərdən istifadə edir. Siz "cookie"lərin qəbuluna qadağa qoymusunuz. Lütfən, onların qəbuluna icazə verin və bir daha daxil olmağa cəhd edin.
+nocookiesfornew|İstifadəçinin akkauntu yaradılmayıb, ona görə də biz onun mənbəsini təsdiqləyə bilmədik.\nKukların qoşulmasına əmin olduqdan sonra səhifəni yeniləyib bir daha sınayın.
+nocookiesforlogin|{{int:nocookieslogin}}
+noname|Siz mövcud olan istifadəçi adı daxil etməmisiniz.
+loginsuccesstitle|Daxil oldunuz
+loginsuccess|'''"~{0}" adı ilə sistemə daxil oldunuz.'''
+nosuchuser|"~{0}" adlı istifadəçi mövcud deyil.\nİstifadəçi adları hərflərin böyük və ya kiçik olmasına həssasdırlar.\nDüzgün yazdığınıza əmin olun, yaxud [[Special:UserLogin/signup\u007Cyeni hesab açın]].
+nosuchusershort|"~{0}" adında istifadəçi mövcud deyil.\nDüzgün yazdığına əmin ol.
+nouserspecified|İstifadəçi adı daxil etməlisiniz.
+login-userblocked|Bu istifadəçi bloklanıb. Sistemə giriş üçün icazə verilmir.
+wrongpassword|Səhv parol. Təkrar yazın.
+wrongpasswordempty|Parol boş. Təkrar yazın.
+passwordtooshort|Parolda ən azı {{PLURAL:~{0}\u007C1 hərf yaxud simvol\u007C~{0} hərf yaxud simvol}} olmalıdır.
+password-name-match|Parol adınızdan fərqli olmalıdır.
+password-login-forbidden|Bu istifadəçi adından və paroldan istifadə qadağan olunub.
+mailmypassword|E-mail ilə yeni parol göndər
+passwordremindertitle|{{SITENAME}} parol xatırladıcı
+passwordremindertext|Birisi (yəqin ki siz, ~{0} IP ünvanından) {{SITENAME}} (~{3}) üçün yeni bir parol göndərilməsini istədi. "~{1}" istifadəçisinə müvəqqəti olaraq "~{2}" parolu yaradıldı. Əgər bu sizin istyinizdirsə, hesab açıb yeni bir parol yaratmağınız vacibdir. Müvəqqəti parolunuzun müddəti {{PLURAL:~{4}\u007C1 gün\u007C~{4} gün}} içində dolacaqdır.\n\nParol dəyişdirməni siz istəməmisinizsə və ya parolunuzu xatırladınızsa və artıq parolunuzu dəyişdirmək isteəmirsinizsə; bu mesaja əhəmiyyət vermədən əski parolunuzdan istifadə etməyə davam edə bilərsiniz.
+noemail|"~{0}" adlı istifadəçi e-poçt ünvanını qeyd etməmişdir.
+noemailcreate|Düzgün e-poçt ünvanı qeyd etməlisiniz
+passwordsent|Yeni parol "~{0}" üçün qeydiyyata alınan e-poçt ünvanına göndərilmişdir.\nXahiş edirik, e-məktubu aldıqdan sonra yenidən daxil olasınız.
+blocked-mailpassword|İP ünvanınız bloklu olduğuna görə, yeni parol göndərmə mümkün deyil.
+eauthentsent|Göstərilən e-poçt ünvanına məktub göndərildi. \nGələcəkdə həmin ünvana e-məktub ala bilmək üçün, ünvanın sizə aid olmasının təsdiq edilməsi ilə bağlı məktubda verilən göstərişlərə riayət etməlisiniz.
+throttled-mailpassword|Bir parol sıfırlama e-poçtu son {{PLURAL:~{0}\u007Cbir saat\u007C~{0} saat}} içində zatən göndərildi. Xidməti pis niyyətlə istifadə etməyi önləmək üçün, hər {{PLURAL:~{0}\u007Cbir saatda\u007C~{0} saatda}} sadəcə bir parol sıfırlama e-poçtu göndəriləcəkdir.
+mailerror|Məktub göndərmə xətası: ~{0}
+acct_creation_throttle_hit|Sizin IP ünvanınızdan bu viki-də son bir gün ərzində {{PLURAL:~{0}\u007C1 hesab\u007C~{0} hesab}} açılmışdır. Bu bir gün ərzində icazə verilən maksimum say olduğu üçün, indiki anda daha çox hesab aça bilməzsiniz.
+emailauthenticated|E-poçt ünvanınız ~{1} saat ~{2} tarixində təsdiq edilib.
+emailnotauthenticated|E-poçt ünvanınız təsdiq edilməyib.\nAşağıdakı xidmətlərin heç biri üçün Sizə e-məktub göndərilməyəcək.
+noemailprefs|Bu xidmətlərdən yararlanmaq üçün nizamlamalarında E-məktub ünvanını göstər.
+emailconfirmlink|E-poçt ünvanını təsdiq et
+invalidemailaddress|E-poçt ünvanınızı qeyri-düzgün formatda olduğu üçün qəbul edə bilmirik.\nXahiş edirik düzgün formatlı ünvan daxil edin və ya bu sahəni boş qoyun.
+cannotchangeemail|Hesabın e-poçt ünvanı bu wiki üzərindən dəyişdirilə bilməz.
+emaildisabled|Bu saytdan e-poçt göndərə bilməzsiniz.
+accountcreated|Hesab yaradıldı
+accountcreatedtext|[[{{ns:User}}:~{0}\u007C~{0}]] ([[{{ns:User talk}}:~{0}\u007Ctalk]]) üçün istifadəçi hesabı yaradıldı.
+createaccount-title|{{SITENAME}} hesabın yaradılması
+createaccount-text|Biriləri {{SITENAME}} saytında (~{3}) sizin e-poçt ünvanınızdan istifadə edərək, parolu "~{2}" olan, "~{1}" adlı bir hesab yaratdı.\n\nSayta daxil olmalı və parolunuzu dəyişdirməlisiniz.\n\nƏgər istifadəçi hesabını səhvən yaratmısınızsa, bu mesajı gözardı edə bilərsiniz.
+login-throttled|Sistemə daxil olmaq üçün həddən artıq cəhd etmisiniz.\nYeni cəhd etməzdən əvvəl ~{0} gözləyin.
+login-abort-generic|Giriş uğursuz alındı - Rədd
+loginlanguagelabel|Dil: ~{0}
+suspicious-userlogout|Sizin çıxış üçün cəhdiniz uğursuz alındı. Bu, brouzerin yaxud proksi-keşləmənin düzgün işləməməsindən qaynaqlanır.
+createacct-another-realname-tip|Gərçək adınız istəyə bağlıdır.\nƏgər gərçək adınızı göstərsəniz, çalışmalarınıza müraciət etmək üçün istifadə ediləcəkdir.
+pt-login|Daxil ol
+pt-login-button|Daxil ol
+pt-createaccount|Hesab yarat
+pt-userlogout|Çıxış
+php-mail-error-unknown|PHP-nin mail() funksiyasında naməlum xəta
+user-mail-no-addy|Bir e-poçt ünvanı olmadan e-poçt göndərməyə çalışdı.
+user-mail-no-body|Boş və ya keçərli olmayan bir şəkildə e-poçt göndərilməyə çalışıldı.
+changepassword|Parolu dəyiş
+resetpass_announce|Siz sistemə müvəqqəti elektron poçt kodu ilə daxil olmusunuz.\nSistemə daxil olmanı yekunlaşdırmaq üçün yeni parolu bura yazmalısınız:
+resetpass_text|<!-- Şərhinizi bura daxil edin -->
+resetpass_header|İstifadəçi parolunu dəyiş
+oldpassword|Köhnə parol:
+newpassword|Yeni parol:
+retypenew|Yeni parolu təkrar yazın:
+resetpass_submit|Parol yaradın və sistemə daxil olun
+changepassword-success|Sizin parol uğurla dəyişdirildi!
+resetpass_forbidden|Parolu dəyişmək mümkün deyil
+resetpass-no-info|Bu səhifəni birbaşa açmaq üçün sistemə daxil olmalısınız.
+resetpass-submit-loggedin|Parolu dəyiş
+resetpass-submit-cancel|Ləğv et
+resetpass-wrong-oldpass|Müvəqqəti və ya daimi parolda yanlışlıq var.\nOla bilər siz parolu müvəffəqiyyətlə dəyişmisiniz yaxud müvəqqəti parol üçün müraciət etmisiniz.
+resetpass-temp-password|Müvəqqəti parol:
+resetpass-abort-generic|Parol dəyişikliyi bir genişlənmə tərəfindən ləğv edildi.
+passwordreset|Parolu yenilə
+passwordreset-text-one|Parolunuzu sıfırlamaq üçün bu formanı doldurun.
+passwordreset-text-many|{{PLURAL:~{0}\u007CParolunuzu sıfırlamaq üçün sahələrdən birini doldurun.}}
+passwordreset-legend|Parolu yenilə
+passwordreset-disabled|Yenidən qurulma parolu bu vikidə işləmir
+passwordreset-emaildisabled|Bu wiki-dəki e-poçt özəllikləri bağlandı.
+passwordreset-username|İstifadəçi adı:
+passwordreset-domain|Domen:
+passwordreset-email|E-mail ünvanı:
+passwordreset-emailtitle|{{SITENAME}} hesabın yaradılması
+passwordreset-emailelement|İstifadəçi adı: ~{0}\nMüvəqqəti parol: ~{1}
+passwordreset-emailsent|Xəbərdarlıq məktubu e-maillə göndərildi.
+changeemail|E-məktub ünvanını dəyiş
+changeemail-oldemail|Hazırkı e-poçt ünvanı:
+changeemail-newemail|Yeni e-poçt ünvanı:
+changeemail-none|(yoxdur)
+changeemail-submit|E-poçtu dəyiş
+extlink_sample|http://www.example.com başlıq
+extlink_tip|Xarici səhifə (http:// ekini unutma)
+nowiki_sample|Formatlaşdırılmamış mətni bura daxil edin
+nowiki_tip|Viki formatını sayma
+image_sample|Misal.jpg
+image_tip|Şəkil əlavə etmə
+media_sample|Misal.ogg
+media_tip|Media-fayla keçid
+sig_tip|İmza və vaxt
+hr_tip|Horizontal cizgi
+summary|Qısa məzmun:
+subject|Mövzu/başlıq:
+minoredit|Kiçik redaktə
+watchthis|Bu səhifəni izlə
+savearticle|Səhifəni qeyd et
+preview|Sınaq görüntüsü
+showpreview|Sınaq göstərişi
+showdiff|Dəyişiklikləri göstər
+anoneditwarning|<strong>Diqqət:</strong> Siz sistemə daxil olmamısınız. Hər hansı dəyişiklik etsəniz, sizin IP-ünvanınız hamıya görünəcək. Əgər <strong>[~{0} daxil olsanız]</strong> və ya <strong>[~{1} hesab yaratsanız]</strong>, redaktələriniz sizin istifadəçi adınıza yazılacaq və digər üstünlüklər də qazanacaqsınız.
+anonpreviewwarning|Sistemə daxil olmamısınız. "Səhifəni qeyd et" düyməsini bassanız IP ünvanınız səhifənin tarixçəsində qeyd olunacaq.
+missingsummary|'''Xatırlatma.''' Siz dəyişikliklərin qısa şərhini verməmisiniz. "Səhifəni qeyd et" düyməsinə təkrar basandan sonra sizin dəyişiklikləriniz şərhsiz qeyd olunacaq.
+missingcommenttext|Zəhmət olmasa, aşağıda şərhinizi yazın.
+summary-preview|Xülasə baxış
+subject-preview|Sərlövhə belə olacaq:
+blockedtitle|İstifadəçi bloklanıb
+blockednoreason|səbəb göstərilməyib
+whitelistedittext|Dəyişiklik edə bilmək üçün ~{0}.
+confirmedittext|Siz elektron ünvanınızı səhifədə dəyişiklik etməzdən əvvəl göstərməlisiniz.\nZəhmət olmasa elektron ünvanınızı [[Special:Preferences\u007Cistifadəçi nizamlaması]] səhifənizdə göstərib təsdiq ediniz.
+nosuchsectiontitle|Belə bölmə yoxdur.
+nosuchsectiontext|Siz mövcud olmayan alt səhifəni redaktə etməyə çalışırsınız.\nHəmin alt səhifə ola bilsin siz səhifəyə baxan zaman silinib.
+loginreqtitle|Daxil olmalısınız
+loginreqlink|daxil olmalısınız
+loginreqpagetext|Digər səhifələri görmək üçün ~{0} olmalısınız.
+accmailtitle|Parol göndərildi.
+accmailtext|[[User talk:~{0}\u007C~{0}]] üçün təsadüfi yolla yaradılmış parol ~{1} ünvanına göndərildi.\nHesabınıza daxil olduqdan sonra, parolunuzu ''[[Special:ChangePassword\u007Cparolu dəyiş]]'' səhifəsində dəyişdirə bilərsiniz.
+newarticle|(Yeni)
+newarticletext|Mövcud olmayan səhifəyə olan keçidi izlədiniz. Aşağıdakı sahəyə məzmununu yazaraq bu səhifəni '''siz''' yarada bilərsiniz. (əlavə məlumat üçün [~{0} kömək səhifəsinə] baxın). Əgər bu səhifəyə səhvən gəlmisinizsə sadəcə olaraq brauzerin '''geri''' düyməsinə vurun.
+anontalkpagetext|----''Bu səhifə qeydiyyatdan keçməmiş və ya daxil olmamış anonim istifadəçiyə aid müzakirə səhifəsidir.\nOna görə bu istifadəçini rəqəmlərdən ibarət IP ünvanı ilə müəyyən etmək məcburiyyətindəyik.\nBelə IP ünvan bir neçə fərd tərəfindən istifadədə ola bilər.\nƏgər siz anonim istifadəçisinizsə və bu mesajın sizə aid olmadığını düşünürsünüzsə, onda  [[Special:UserLogin/signup\u007Cqeydiyyatdan keçin]] və ya [[Special:UserLogin\u007Cdaxi olun]].''
+noarticletext|Hal-hazırda bu səhifə boşdur. Başqa səhifələrdə eyni adda səhifəni [[Special:Search/{{PAGENAME}}\u007C axtara]], əlaqəli qeydlərə\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} baxa],\nvə ya səhifəni [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} redaktə]</span> edə bilərsiniz.
+noarticletext-nopermission|Hal-hazırda bu səhifə boşdur. Başqa səhifələrdə eyni adlı səhifəni [[Special:Search/{{PAGENAME}}\u007C axtara]], <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} əlaqəli qeydlərə baxa],\nvə ya səhifəni [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} redaktə edə bilərsiniz]</span>, lakin sizin bu məqaləni yaratmaq hüququnuz yoxdur.
+userpage-userdoesnotexist|"<nowiki>~{0}</nowiki>" istifadəçi adı qeydiyyata alınmayıb.\nƏgər siz bu səhifəni yaratmaq/redaktə etmək istəyirsinizsə, xahiş edirik bunu yoxlayın.
+userpage-userdoesnotexist-view|"~{0}" istifadəçi hesabı qeydiyyatda deyil
+blocked-notice-logextract|Bu istifadəçi hal-hazırda bloklanmışdır.\nBloklama qeydlərinin sonuncusu aşağıda göstərilmişdir:
+usercssyoucanpreview|'''İpucu:''' Qeyd etmədən əvvəl "{{int:showpreview}}"ə klikləyərək yeni CSSinizi yoxlayın.
+userjsyoucanpreview|'''İpucu:''' Qeyd etmədən əvvəl "{{int:showpreview}}"ə klikləyərək yeni JavaScriptinizi yoxlayın.
+usercsspreview|''Xatırladırıq ki, siz yalnız CSS-də sınaq göstərişi etmisiniz.'''\n'''Bu hələ yaddaşda saxlanılmayıb!'''
+userjspreview|''Xatırladırıq ki, siz yalnız JavaScript-də test/sınaq göstərişi etmisiniz.'''\n'''Bu hələ yaddaşda saxlanılmayıb!'''
+sitecsspreview|''Xatırladırıq ki, siz yalnız CSS-də sınaq göstərişi etmisiniz.'''\n'''Bu hələ yaddaşda saxlanılmayıb!'''
+sitejspreview|''Xatırladırıq ki, siz yalnız JavaScript kodunda sınaq göstərişi etmisiniz.'''\n'''Bu hələ yaddaşda saxlanılmayıb!'''
+updated|(yeniləndi)
+note|'''Qeyd:'''
+previewnote|<strong>Unutmayın ki, bu yalnız sınaq göstərişidir.</strong> Dəyişiklikləriniz hal-hazırda qeyd edilməmişdir!
+continue-editing|Redaktə sahəsinə qayıt
+previewconflict|Bu sınaq göstərişidir və yaddaşda saxlayacağınız təqdirdə mətnin redaktə səhifəsinin yuxarı hissəsində nəticənin necə olacağını göstərir.
+session_fail_preview|'''Üzr istəyirik! Sizin redaktəniz saxlanılmadı. Serverdə identifikasiyanızla bağlı problemlər yaranmışdır. Lütfən bir daha təkrar edin. Problem həll olunmazsa hesabınızdan çıxın və yenidən daxil olun.'''
+editing|Redaktə ~{0}
+creating|Qurulur ~{0}
+editingsection|Redaktə ~{0} (bölmə)
+editingcomment|Redaktə et ~{0} (yeni bölmə)
+editconflict|Eyni vaxtda redaktə: ~{0}
+yourtext|Mətniniz
+storedversion|Qeyd edilmiş versiya
+editingold|'''DİQQƏT! Siz bu səhifənin köhnə versiyasını redaktə edirsiniz. Məqaləni yaddaşda saxlayacağınız halda bu versiyadan sonra edilmiş hər bir dəyişiklik itiriləcək.'''
+yourdiff|Fərqlər
+copyrightwarning|Xahiş olunur diqqətə alasınız ki, {{SITENAME}}dakı bütün fəaliyyətləriniz ~{1} lisenziyasına tabe olduğu hesab edilir (təfərrüat üçün bax: ~{0}). Əgər yazdıqlarınızın əsaslı şəkildə redaktə edilməsini və istənildiyi vaxt başqa yerə ötürülməsini istəmirsinizsə, yazılarınızı burada dərc etməyin.\n<br />\nSiz eyni zamanda söz verirsiniz ki, bu yazıları siz özünüz yazmısınız və ya onları hamıya açıq mühitdən ya da buna bənzər mənbədən köçürmüsünüz.\n\n----\n\n<div style="font-weight: bold; font-size: 110%; color:red;">MÜƏLLİF HÜQUQLARI İLƏ QORUNMUŞ HEÇ BİR İŞİ İCAZƏSİZ DƏRC ETMƏYİN!</div>
+semiprotectedpagewarning|'''Qeyd:''' Bu səhifə mühafizəli olduğu üçün yalnız qeydiyyatdan keçmiş istifadəçilər redaktə edə bilərlər.
+titleprotectedwarning|'''DİQQƏT! Bu səhifə mühafizəlidir, yalnız [[Special:ListGroupRights\u007Cicazəsi olan]] istifadəçilər onu redaktə edə bilərlər.'''
+templatesused|Bu səhifədə istifadə edilmiş {{PLURAL:~{0}\u007Cşablon\u007Cşablonlar}}:
+templatesusedpreview|Bu sınaq göstərişində istifadə edilmiş {{PLURAL:~{0}\u007Cşablon\u007Cşablonlar}}:
+templatesusedsection|Bu bölmədə istifadə edilmiş {{PLURAL:~{0}\u007Cşablon\u007Cşablonlar}}
+template-protected|(mühafizə)
+template-semiprotected|(yarım-mühafizə)
+hiddencategories|Bu səhifə {{PLURAL:~{0}\u007C1 gizli kateqoriyaya\u007C~{0} gizli kateqoriyaya}} aiddir:
+edittools|<!-- Buradakı mətn redaktə və quraşdırma formalarının altında göstəriləcək. -->
+edittools-upload|-
+nocreatetext|{{SITENAME}} saytında yeni səhifələrin yaradılması imkanları məhdudlaşdırılıb.\nSiz geri qayıdıb mövcud səhifəni və ya  [[Special:UserLogin\u007Csistemə təqdim olunma və ya yeni hesab açmaq]] səhifəsini redaktə edə bilərsiniz.
+nocreate-loggedin|Sizin yeni səhifələr yaratmaq üçün icazəniz yoxdur.
+sectioneditnotsupported-title|Bölüm redaktəsi dəstəklənmir
+sectioneditnotsupported-text|Bölüm redaktəsi bu səhifədə dəstəklənmir.
+permissionserrors|İcazə xətası
+permissionserrorstext|Siz, bunu aşağıdakı {{PLURAL:~{0}\u007Csəbəbə\u007Csəbəblərə}} görə edə bilməzsiniz:
+permissionserrorstext-withaction|Aşağıdakı {{PLURAL:~{0}\u007Csəbəbə\u007Csəbəblərə}} görə, ~{1} hüququnuz yoxdur:
+recreate-moveddeleted-warn|'''Diqqət! Siz əvvəllər silinmiş səhifəni bərpa etmək istəyirsiz.'''\n\nBu səhifəni yenidən yaratmağın nə qədər zəruri olduğunu bir daha yoxlayın.\nBu səhifə üçün silmə qeydləri aşağıda göstərilmişdir:
+moveddeleted-notice|Bu səhifə silinmişdir.\nMəlumat üçün aşağıda bu səhifənin tarixçəsindən müvafiq silmə qeydləri göstərilmişdir.
+log-fulllog|Bütöv məlumatı göstər
+edit-hook-aborted|Düzəlişlər qarmaq-prosedur tərəfindən geri qaytarılıb.\nƏlavə izahat verilməyib.
+edit-gone-missing|Səhifəni yeniləmək mümkün deyil.\nÇox güman ki, səhifə silinmişdir.
+edit-conflict|Düzəlişlər münaqişəsi
+edit-no-change|Sizin redaktələr qeydə alınmamışdır. Belə ki, mətndə heç bir düzəliş edilməmişdir.
+postedit-confirmation-saved|Redaktəniz qeyd edildi.
+edit-already-exists|Yeni səhifəni yaratmaq mümkün deyil.\nBelə ki, bu adda səhifə artıq mövcuddur.
+content-not-allowed-here|"~{0}" tərkibi [[~{1}]] səhifəsi üçün icazə verilmir.
+content-model-wikitext|vikimətn
+content-model-text|adi mətn
+content-model-javascript|JavaScript
+expensive-parserfunction-category|Kifayət qədər böyük sayda genişresurslu funksiyaların müraciət olunduğu səhifələr
+post-expand-template-inclusion-warning|'''DİQQƏT!''' Daxil edilən şablonların həcmi həddindən artıq böyükdür.\nBəzi şablonlar əlavə olunmayacaq.
+post-expand-template-inclusion-category|Şablonun daxil olduğu səhifələrin ölçüsü böyükdür.
+post-expand-template-argument-warning|<strong>Diqqət:</strong> bu səhifədə açılma ölçüsü həddən artıq böyük olan ən azı bir şablon arqumenti var. Həmin arqumentlər buraxılıb.
+post-expand-template-argument-category|Şablonlarda buraxılmış arqumentlərin mövcud olduğu səhifələr
+parser-template-loop-warning|[[~{0}]]: Şablonda düyün tapıldı
+parser-template-recursion-depth-warning|(~{0}) Şablonda dərinlik limiti keçildi
+language-converter-depth-warning|(~{0}) Dil konvertorunun limiti keçildi
+undo-failure|Dəyişikliklərin toqquşması nəticəsində geriyə qaytarma işi uğursuz oldu.
+undo-norev|Düzəlişlər geri qaytarıla bilinmir, çünki onlar ya mövcüd deyil, ya da silinib.
+undo-summary|~{0} dəyişikliyi [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007CMüzakirə]]) tərəfindən geri alındı.
+cantcreateaccounttitle|Hesab açılmır.
+cantcreateaccount-text|Bu IP ünvanından ('''~{0}''') istifadəçi hesabı yaradılması [[User:~{2}\u007C~{2}]] tərəfindən əngəllənmişdir.\n\n~{2} tərəfindən verilən səbəb ''~{1}''
+viewpagelogs|Bu səhifə ilə bağlı qeydlərə bax
+nohistory|Bu səhifənin dəyişikliklər tarixçəsi mövcud deyil.
+currentrev|Hal-hazırkı versiya
+currentrev-asof|Səhifəsinin ~{0} tarixinə olan son halı
+revisionasof|~{0} versiyası
+revision-info|~{1}~{6} tərəfindən edilmiş ~{0} tarixli dəyişiklik
+previousrevision|←Əvvəlki versiya
+nextrevision|Sonrakı versiya→
+currentrevisionlink|Hal-hazırkı versiya
+cur|hh
+next|sonrakı
+last|son
+page_first|birinci
+page_last|sonuncu
+histlegend|Fərqləri seç: müqayisə etmək istədiyiniz versiyaların yanındakı dairəyə işarə qoyun və Enter və ya '''{{int:compare-submit}}''' düyməsinə basın.<br />İzah: <strong>({{int:cur}})</strong> = hal-hazırkı versiya ilə olan fərqlər, <strong>({{int:last}})</strong> = əvvəlki versiya ilə olan fərqlər, <strong>{{int:minoreditletter}}</strong> = kiçik redaktələr.
+history-fieldset-title|Tarixçəni nəzərdən keçir
+history-show-deleted|Yalnız silinənlər
+histfirst|Ən əvvəlki
+histlast|Ən sonuncu
+historysize|({{PLURAL:~{0}\u007C1 bayt\u007C~{0} bayt}})
+historyempty|(boş)
+history-feed-title|Redaktə tarixçəsi
+history-feed-description|Vikidə bu səhifənin dəyişikliklər tarixçəsi
+history-feed-item-nocomment|~{0} ~{1}-də
+history-feed-empty|Axtardığınız səhifə mövcud deyil.\nÇox guman ki, bu səhifə silinib və ya onun adı dəyişdirilib.\nVikidə buna bənzər səhifələri [[Special:Search\u007Caxtarmağa]] cəhd edin.
+rev-deleted-comment|(şərhlər silindi)
+rev-deleted-user|(İstifadəçi adı silindi)
+rev-deleted-event|(qeydiyyat detalları silindi)
+rev-deleted-user-contribs|[istifadəçi adı və ya IP ünvanı silindi - dəyişiklik fəaliyyətlərdən çıxarıldı]
+rev-deleted-text-permission|Səhifənin bu versiyası''' silinib'''.\nMümkündür ki, bunun səbəbi [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} silmə qeydlərində] göstərilmişdir.
+rev-suppressed-text-unhide|Səhifənin bu versiyası''' silinib'''.\nMümkündür ki, bunun səbəbi [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} silmə qeydlərində] göstərilmişdir.\nSiz idarəçi olduğunuza görə silinən [~{0} bu versiyanı] nəzərdən keçirə bilərsiniz.
+rev-deleted-text-view|Səhifənin bu versiyası''' silinib'''.\nSiz idarəçi olduğunuza görə silinən bu versiyanı nəzərdən keçirə bilərsiniz. Mümkündür ki, silinmənin səbəbi [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} silmə qeydlərində] göstərilmişdir.
+rev-deleted-no-diff|Siz versiyalar arasındakı fərqi nəzərdən keçirə bilməzsiniz. Belə ki, versiyalardan biri '''silinib'''.\nMümkündür ki, bununla bağlı təfərrüatlar [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} silmə qeydlərində] göstərilmişdir.
+rev-suppressed-no-diff|Əvvəlki redaktələrin biri '''silinmiş''' fərqi görə bilməzsiniz.
+rev-delundel|göstər/gizlət
+rev-showdeleted|Göstər
+revisiondelete|Səhifənin versiyalarını sil/bərpa et
+revdelete-nooldid-title|Hədəf dəyişikliyi keçərsizdir
+revdelete-no-file|Axtarılan fayl mövcud deyil
+revdelete-show-file-confirm|"<nowiki>~{0}</nowiki>" faylının ~{1} ~{2} tarixli silinmiş bir redaktəsini görmək istədiyinizdən əminsizinizmi?
+revdelete-show-file-submit|Bəli
+logdelete-selected|Jurnalın {{PLURAL:~{0}\u007Cseçilmiş qeydi\u007Cseçilmiş qeydləri}}:
+revdelete-legend|Məhdudiyyətləri müəyyənləşdir:
+revdelete-hide-text|Dəyişikliyin mətni
+revdelete-hide-image|Faylın məzmununu gizlə
+revdelete-hide-name|Məqsədi və parametrləri gizlə
+revdelete-hide-comment|Dəyişikliklərin təsviri
+revdelete-hide-user|Redaktə müəllifinin istifadəçi adı/IP-ünvanı
+revdelete-hide-restricted|Məlumatları idarəçilərdən də gizlə
+revdelete-radio-same|(dəyişdirmə)
+revdelete-radio-set|Gizli
+revdelete-radio-unset|Görünür
+revdelete-suppress|Məlumatları idarəçilərdən də gizlə
+revdelete-unsuppress|Bərpa olunan versiyalar üzərindən məhdudiyyətləri qaldır
+revdelete-log|Səbəb:
+revdelete-submit|Seçilmiş {{PLURAL:~{0}\u007Cversiyaya\u007Cversiyayalara}} tətbiq et
+revdelete-success|'''Versiyanın görünüşü yeniləndi.'''
+revdelete-failure|'''Versiyanın görünüşü dəyişdirilə bilməz:'''\n~{0}
+logdelete-success|''' Gündəlik görünüşü uğurla tamamlandı.'''
+logdelete-failure|'''Jurnalın görünüşü tənzimlənməyib:'''\n~{0}
+revdel-restore|Görünüşü dəyiş
+pagehist|Səhifənin tarixçəsi
+deletedhist|Silmə qeydləri
+revdelete-reason-dropdown|*Əsas silmə səbəbləri\n** Müəllif hüquqları pozuntusu\n** Uyğun olmayan şəxsi məlumat\n** Uyğun olmayan istifadəçi adı\n** Potensial böhtan xarakterli məlumat
+revdelete-otherreason|Digər/əlavə səbəb:
+revdelete-reasonotherlist|Digər səbəb
+revdelete-edit-reasonlist|Silmə səbəblərini redaktə et
+revdelete-offender|Təftiş müəllifi:
+suppressionlog|Qadağa qedi
+mergehistory|Səhifə tarixçələrinin birləşdirilməsi
+mergehistory-box|İki səhifənin tarixçəsini birləşdir
+mergehistory-from|Mənbə səhifəsi:
+mergehistory-into|Hədəf səhifəsi:
+mergehistory-list|Birləşdirilə bilən redaktə keçmişi
+mergehistory-go|Birləşdirilə bilən redaktələri göstər
+mergehistory-submit|Qarışıq düzəlişlər
+mergehistory-empty|Birləşdiriləcək redaktələr tapılmamışdır.
+mergehistory-success|[[:~{0}]] səhifəsinin ~{2} {{PLURAL:~{2}\u007Crevizyonu\u007Cdəyişikliyi}} uğurla [[:~{1}]] -yə birləşdirildi.
+mergehistory-no-source|Mənbə ~{0} yoxdur.
+mergehistory-no-destination|Mənbə səhifəsi ~{0} mövcud deyil.
+mergehistory-invalid-source|Mənbənin düzgün başlığı olmalıdır.
+mergehistory-invalid-destination|Hədəf səhifəsinin düzgün başlığı olmalıdır.
+mergehistory-autocomment|[[:~{0}]] səhifəsi [[:~{1}]] səhifəsinə birləşdirildi
+mergehistory-comment|~{2} [[:~{0}]] səhifəsi [[:~{1}]] səhifəsinə birləşdirildi
+mergehistory-same-destination|Mənbə və hədəf səhifələri eyni ola bilməz
+mergehistory-reason|Səbəb:
+mergelog|Birləşdirmə qeydi
+revertmerge|Ayır
+history-title|"~{0}" səhifəsinin tarixçəsi
+difference-title|"~{0}" səhifəsinin versiyaları arasındakı fərqlər
+difference-multipage|(Səhifələr arasında fərq)
+lineno|Sətir ~{0}:
+compareselectedversions|Seçilən versiyaları müqayisə et
+showhideselectedversions|Seçilən versiyaları göstər/gizlə
+editundo|əvvəlki halına qaytar
+diff-multi-sameuser|(Eyni istifadəçi tərəfindən edilmiş {{PLURAL:~{0}\u007Cbir dəyişiklik\u007C~{0} bir neçə dəyişiklik}} göstərilmir)
+diff-multi-manyusers|({{PLURAL:~{1}\u007CBir istifadəçi\u007C~{1} istifadəçi}} tərəfindən edilən {{PLURAL:~{0}\u007Cbir ara redaktə\u007C~{0} ara redaktə}} göstərilmir)
+difference-missing-revision|Səhifənin  {{PLURAL:~{1}\u007Cbu versiyasının\u007C~{1} versiyalarının}} müqayisəsi (~{0}) tapılmadı.\nBu xəta adətən, köhnəlmiş səhifələrin müqayisə versiyalarından keçid edildikdə baş verir.\nDaha ətraflı məlumat üçün [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} silmə qeydlərinə] baxın.
+searchresults|Axtarış nəticələri
+searchresults-title|''~{0}'' üçün axtarış nəticələri
+titlematches|Səhifə adı eynidir
+textmatches|Mətn eynidir
+notextmatches|Məqalələrdə uyğun məzmun tapılmadı
+prevn-title|Əvvəlki bir ~{0} {{PLURAL:~{0}\u007Cnəticə\u007Cnəticə}}
+nextn-title|Əvvəlki bir ~{0} {{PLURAL:~{0}\u007Cnəticə\u007Cnəticə}}
+shown-title|Səhifə üçün ~{0} {{PLURAL:~{0}\u007Cnəticə\u007Cnəticəyə}} bax
+viewprevnext|Göstər (~{0} {{int:pipe-separator}} ~{1}) (~{2}).
+searchmenu-exists|'''Bu vikidə "[[:~{0}]]" adında səhifə mövcuddur'''
+searchmenu-new|<strong>Bu vikidə "[[:~{0}]]" səhifəsini yarat!</strong> {{PLURAL:~{1}\u007C0=\u007CHəmçinin, axtarışınız əsasında çıxan səhifəyə baxın.\u007CHəmçinin, axtarışınız əsasında çıxan nəticələrə baxın.}}
+searchprofile-articles|Məqalələr
+searchprofile-images|Multimedia
+searchprofile-everything|Hər şey
+searchprofile-advanced|Ətraflı
+searchprofile-articles-tooltip|Axtarış ~{0}
+searchprofile-images-tooltip|Fayllar üçün axtarış
+searchprofile-everything-tooltip|Bütün daxili axtar (müzakirə səhifəsi daxil olmaqla)
+searchprofile-advanced-tooltip|Ad aralığında axtar
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 söz\u007C~{1} söz}})
+search-result-category-size|{{PLURAL:~{0}\u007C~{0} element\u007C~{0} elementlər}} ({{PLURAL:~{1}\u007C~{1} alt kateqoriya\u007C~{1} alt kateqoriyalar}}, {{PLURAL:~{2}\u007C~{2} fayl\u007C~{2} fayllar}})
+search-redirect|(yönləndirmə ~{0})
+search-section|(bölmə ~{0})
+search-suggest|Bəlkə, bunu nəzərdə tuturdunuz: ~{0}
+search-interwiki-caption|Qardaş layihələr
+search-interwiki-default|~{0} nəticələri:
+search-interwiki-more|(yenə)
+search-relatedarticle|əlaqədar
+searchrelated|əlaqəli
+searchall|bütün
+showingresults|Aşağıda #'''~{1}''' ilə başlayan {{PLURAL:~{0}\u007C'''~{0}'''-ə qədər}} nəticə göstərilib.
+search-nonefound|Sorğunuza uyğun nəticə tapılmadı.
+powersearch-legend|Təkmil axtarış
+powersearch-ns|Ad aralığında axtar:
+powersearch-togglelabel|Yoxla:
+powersearch-toggleall|Hamısı
+powersearch-togglenone|Heç biri
+search-external|Xarici axtarış
+preferences|Nizamlamalar
+mypreferences|Nizamlamalar
+prefs-edits|Redaktələrin sayı:
+prefs-skin|Cild
+skin-preview|Sınaq görüntüsü
+datedefault|Seçim yoxdur
+prefs-labs|eksperimental imkanlar
+prefs-personal|İstifadəçi profili
+prefs-rc|Son dəyişikliklər
+prefs-watchlist|İzləmə siyahısı
+prefs-watchlist-days|İzləmə siyahısında göstərilən maksimal günlərin sayı:
+prefs-watchlist-days-max|Maksimum ~{0} {{PLURAL:~{0}\u007Cgün\u007Cgün}}
+prefs-watchlist-edits|İzləmə siyahısında göstərilən maksimal redaktələrin sayı:
+prefs-watchlist-edits-max|Maksimum say: 1000
+prefs-watchlist-token|İzləmə siyahısı nişanı:
+prefs-misc|Digər seçimlər
+prefs-resetpass|Parolu dəyiş
+prefs-changeemail|E-poçtu dəyiş
+prefs-setemail|E-poçt ünvanının nizamlanması
+prefs-email|E-mailin parametrləri
+prefs-rendering|Görünüş
+saveprefs|Qeyd et
+restoreprefs|Bütün nizamlamaları bərpa et (bütün bölmələrdə)
+prefs-editing|Redaktə
+rows|Sıralar:
+columns|Sütunlar:
+searchresultshead|Axtar
+stub-threshold|<a href="#" class="stub">Keçidsiz linki</a> format etmək üçün hüdud (baytlarla):
+stub-threshold-disabled|Kənarlaşdırılıb
+recentchangesdays|Son dəyişiklərdə göstərilən günlərin miqdarı:
+recentchangesdays-max|Maksimum ~{0} {{PLURAL:~{0}\u007Cgün\u007Cgün}}
+recentchangescount|Son dəyişikliklərdə başlıq sayı:
+prefs-help-recentchangescount|Buraya yeni dəyişikliklər, səhifələrin və jurnalların tarixçəsi daxildir.
+savedprefs|Seçiminiz qeyd edildi.
+timezonelegend|Vaxt zonası:
+localtime|Yerli vaxt:
+timezoneuseserverdefault|Susmaya görə serverdən istifadə (~{0})
+timezoneuseoffset|Digər (fərqi göstərmək)
+servertime|Server vaxtı:
+guesstimezone|Brouzerdən götür
+timezoneregion-africa|Afrika
+timezoneregion-america|Amerika
+timezoneregion-antarctica|Antarktika
+timezoneregion-arctic|Arktik
+timezoneregion-asia|Asiya
+timezoneregion-atlantic|Atlantik Okean
+timezoneregion-australia|Avstraliya
+timezoneregion-europe|Avropa
+timezoneregion-indian|Hind Okeanı
+timezoneregion-pacific|Sakit Okean
+allowemail|Digər istifadəçilər mənə e-məktub göndərə bilər
+prefs-searchoptions|Axtar
+prefs-namespaces|Adlar fəzası
+default|boş
+prefs-files|Fayllar
+prefs-custom-css|Xüsusi CSS
+prefs-custom-js|Xüsusi JavaScript
+prefs-common-css-js|Bütün skinlər üçün ümumi CSS/JavaScript:
+prefs-emailconfirm-label|E-poçtun təsdiqlənməsi:
+youremail|E-məktub:
+username|{{GENDER:~{0}\u007Cİstifadəçi adı}}:
+prefs-memberingroups|{{GENDER:~{1}\u007CÜzv}} olduğu {{PLURAL:~{0}\u007Cqrup}}:
+prefs-memberingroups-type|~{0}
+prefs-registration|Qeydiyyat vaxtı:
+prefs-registration-date-time|~{0}
+yourrealname|Əsl adınız:
+yourlanguage|Dil:
+yourvariant|Dil variant;:
+yournick|Ləqəb:
+badsig|Səhv xam imza.\nHTML kodu yoxla.
+badsiglength|İmzanız çox uzundur. İmza ~{0} {{PLURAL:~{0}\u007Csimvoldan\u007Csimvoldan}} uzun olmamalıdır.
+yourgender|Hansı təsvir sizə daha uyğundur?
+gender-unknown|Bildirmək istəmirəm
+gender-male|Bu kişi istifadəçi viki-səhifələri redaktə edir
+gender-female|Bu qadın istifadəçi viki-səhifələri redaktə edir
+email|E-məktub
+prefs-help-realname|Həqiqi adınızı daxil etmək məcburi deyil.\nDaxil etsəniz, adınız redaktələrinizin müəllifliyinin təyin edilməsi üçün istifadə edilə bilər.
+prefs-help-email|E-poçt ünvanınızı daxil etmək məcburi deyil.\nBu, parolunuzu unutduğunuz halda, sizə yeni parol göndərməyə imkan verir.
+prefs-help-email-others|Həmçinin, istifadəçi və ya müzakirə səhifənizdəki link vasitəsilə başqa istifadəçilərin sizinlə əlaqə yaratmasını seçə bilərsiniz. Bu halda sizin e-poçt ünvanınız heç kimə görünməyəcək.
+prefs-help-email-required|Elektron ünvan tələb olunur.
+prefs-info|Əsas məlumatlar
+prefs-i18n|Beynəlxalqlaşdırma
+prefs-signature|İmza
+prefs-dateformat|Tarix formatı
+prefs-timeoffset|Saat qurşağının fərqi
+prefs-advancedediting|Ümumi parametrlər
+prefs-advancedrc|Ətraflı variantlar
+prefs-advancedrendering|Ətraflı variantlar
+prefs-advancedsearchoptions|Ətraflı variantlar
+prefs-advancedwatchlist|Ətraflı variantlar
+prefs-displayrc|Görüntü variantları
+prefs-displaywatchlist|Görüntü variantları
+prefs-diffs|Fərqlər
+email-address-validity-valid|E-poçt ünvanı düzgündür
+email-address-validity-invalid|Düzgün e-poçt ünvanı daxil edin
+userrights|İstifadəçi hüququ idarəsi
+userrights-lookup-user|İstifadəçi qruplarını idarə et
+userrights-user-editname|İstifadəçi adınızı yazın:
+editusergroup|İstifadəçi qruplarını redaktə et
+editinguser|İstifadəçi '''[[User:~{0}\u007C~{0}]]''' ~{1} üçün istifadəçi hüquqları dəyişdirilir
+userrights-editusergroup|İstifadəçi qruplarını redaktə et
+saveusergroups|İstifadəçi qrupunu qeyd et
+userrights-groupsmember|Daxil olduğu qruplar:
+userrights-groupsmember-auto|Güman edilən üzv:
+userrights-reason|Səbəb:
+userrights-no-interwiki|Sizə başqa vikilayihələrdəki istifadəçilərin statusunu dəyişməyə icazə verilməyib
+userrights-nodatabase|~{0} verilənlər bazası ya mövcud deyil, ya da lokal deyil.
+userrights-nologin|Siz istifadəçilərin hüquqlarını dəyişmək üçün sistemə idarəçi olaraq [[Special:UserLogin\u007Cdaxil olmalısınız]].
+userrights-notallowed|Sizin digər istifadəçilərə hüquqlar vermək və ya almaq icazəniz yoxdur.
+userrights-changeable-col|Dəyişdirə bildiyiniz qruplar
+userrights-unchangeable-col|Dəyişdirə bilmədiyiniz qruplar
+userrights-irreversible-marker|~{0}*
+group|Qrup:
+group-user|İstifadəçilər
+group-autoconfirmed|Avtotəsdiqlənmiş istifadəçilər
+group-bot|Botlar
+group-sysop|İdarəçilər
+group-bureaucrat|Bürokratlar
+group-suppress|Müfəttişlər
+group-all|(bütün)
+group-user-member|{{GENDER:~{0}\u007Cistifadəçi}}
+group-autoconfirmed-member|Avtotəsdiqlənmiş istifadəçilər
+group-bot-member|{{GENDER:~{0}\u007Cbot}}
+group-sysop-member|{{GENDER:~{0}\u007Cidarəçi}}
+group-bureaucrat-member|{{GENDER:~{0}\u007Cbürokrat}}
+group-suppress-member|{{GENDER:~{0}\u007Coversight}}
+grouppage-user|{{ns:project}}:İstifadəçilər
+grouppage-autoconfirmed|{{ns:project}}:Avtotəsdiqlənmiş istifadəçilər
+grouppage-bot|{{ns:project}}:Botlar
+grouppage-sysop|{{ns:project}}:İdarəçilər
+grouppage-bureaucrat|{{ns:project}}:Bürokratlar
+grouppage-suppress|{{ns:project}}:Müfəttişlər
+right-read|Səhifələrin oxunması
+right-edit|Səhifələrin redaktəsi
+right-createpage|Səhifələr yaratmaq (müzakirə səhifələrindən əlavə səhifələr nəzərdə tutulur)
+right-createtalk|Müzakirə səhifələri yaratmaq
+right-createaccount|Yeni istifadəçi hesabları açmaq
+right-minoredit|Redaktələri kiçik redaktə kimi nişanlamaq
+right-move|Səhifənin adını dəyişdir
+right-move-subpages|Səhifələrin adını onların alt səhifələrinin adları ilə birlikdə dəyişdir
+right-move-rootuserpages|əsas istifadəçi səhifələrinin adını dəyişmək
+right-movefile|Faylın adını dəyişdir
+right-suppressredirect|Səhifənin adını dəyişən zaman kohnə addan istiqamətlənmə yaradıla bilinmir
+right-upload|Fayl yüklə
+right-reupload|Mövcud faylın yeni versiyasının yüklənməsi
+right-reupload-own|Mövcud faylın yeni versiyasının həmin istifadəçi tərəfindən yüklənməsi
+right-reupload-shared|ümumi anbarda olan faylın adının lokal adla dəyişdirilməsi
+right-upload_by_url|URL-dən fayl yüklə
+right-autoconfirmed|IP-ünvana görə sürət məhdudiyyəti yoxdur
+right-bot|Avtomatik proses hesab edilir
+right-apihighlimits|API sorğularında yüksək həddən istifadə et
+right-writeapi|Redaktələrdən zamanı API-dən (İnterfeys proqramlaşdıran proqram) istifadə
+right-delete|Səhifələrin silinməsi
+right-bigdelete|Uzun tarixçəsi olan səhifələrin silinməsi
+right-deleterevision|səhifənin konkret versiyasının silinməsi və bərpası
+right-deletedhistory|Silinmiş mətni görmədən silinmiş səhifələrin tarixçələrinə baxmaq
+right-browsearchive|Silinmiş səhifələri axtar
+right-undelete|Silinmiş səhifələrin bərpası
+right-suppressrevision|Səhifələrin gizli versiyalarına bax, gizlə və göstər
+right-suppressionlog|Şəxsi qeydlərə bax
+right-block|Digər istifadəçilərin redaktə etməsinə qadağa qoy
+right-blockemail|İstifadəçinin e-poçt göndərməsinə qadağa qoy
+right-hideuser|İstifadəçi adına qadağa qoy və adın görünməsinin qarşısını al
+right-ipblock-exempt|IP bloklanmalarını, avtobloklanmalarını və diapazon bloklanmalarını keç
+right-proxyunbannable|Proksilərin avtomatik bloklanmalarını keç
+right-unblockself|Öz blokunuzun açılması
+right-protect|Mühafizə səviyyəsinin dəyişilməsi və kaskad mühafizə olunan səhifələrin redaktə edilməsi
+right-editprotected|"{{int:protect-level-sysop}}" mühafizə səviyyəsinə malik səhifələrin redaktə edilməsi
+right-editinterface|İstifadəçi interfeysini dəyişmək
+right-editusercssjs|Digər istifadəçilərin CSS və JavaScript fayllarını redaktə
+right-editusercss|Digər istifadəçilərin CSS faylını redaktə
+right-edituserjs|Digər istifadəçilərin JavaScript faylını redaktə
+right-markbotedits|Geri qaytarılan dəyişikliklərin bot dəyişiklikləri kimi işarələnməsi
+right-noratelimit|Sürət limiti yoxdur
+right-import|Digər vikilərdən səhifələrin idxalı
+right-importupload|fayl yükləmə vasitəsilə səhifələrin idxalı
+right-patrol|Digərlərinin dəyişikliklərini patrullanmış olaraq işarələ
+right-autopatrol|Dəyişikliklər avtomatik patrullanmış kimi işarələnir
+right-patrolmarks|Bütün patrullanmış son dəyişikliklərə bax
+right-unwatchedpages|Müşahidə olunmayan səhifələrin siyahısına baxış
+right-mergehistory|Səhifələrin tarixini birləşdirmək
+right-userrights|Bütün istifadəçi hüquqlarının redaktə edilməsi
+right-userrights-interwiki|Digər vikilərdəki istifadəçilərin istifadəçi hüquqlarını dəyişdir
+right-siteadmin|Məlumatlar bazasının bloklanması və blokun götürülməsi
+right-sendemail|Digər istifadəçilərə elektron poçt göndər
+newuserlogpage|Yeni istifadəçilərin qeydiyyatı
+newuserlogpagetext|Yeni qeydiyyatdan keçmiş istifadəçilərin siyahısı.
+rightslog|İstifadəçi hüquqları qeydləri
+rightslogtext|İstifadəçi hüquqları dəyişikliyi qeydləri.
+action-read|bu səhifənin oxunması
+action-edit|bu səhifəni redaktə etmək
+action-createpage|səhifələrin yaradılması
+action-createtalk|müzakirə səhifələrinin yaradılması
+action-createaccount|bu istifadəçi hesabını yaratmaq
+action-minoredit|bunu kiçik redaktə kimi nişanla
+action-move|bu səhifənin adını dəyişmək
+action-move-subpages|bu səhifənin və onun altsəhifələrinin adını dəyişmək
+action-move-rootuserpages|əsas istifadəçi səhifələrinin adını dəyişmək
+action-movefile|bu faylın adını dəyişmək
+action-upload|bu faylı yüklə
+action-reupload|Mövcud faylın yeni versiyasının yüklənməsi
+action-upload_by_url|URL ünvanından bu faylı yükləmək
+action-writeapi|API yazıdan istifadə
+action-delete|bu səhifəni sil
+action-deleterevision|bu yoxlamaı ləğv et
+action-deletedhistory|səhifənin silinmə tarixinə baxmaq
+action-browsearchive|Silinmiş səhifələri axtar
+action-undelete|bu səhifəni silmə
+action-suppressrevision|bu gizli redaktəyə bax və bərpa et
+action-suppressionlog|xüsusi gündəliyə baxış
+action-block|bu istifadəçinin redaktə etməsinə qadağa qoymaq
+action-protect|bu səhifənin mühafizə səviyyəsini dəyişmək
+action-import|başqa vikidən səhifələrin idxalı
+action-importupload|fayl yükləmə vasitəsilə səhifələrin idxalı
+action-patrol|Digərlərinin dəyişikliklərini patrullanmış olaraq işarələ
+action-autopatrol|öz redaktələrinizi patrullanmış olarq işarələmək
+action-unwatchedpages|müşahidə olunmayan səhifələrin siyahısına baxış
+action-mergehistory|Bu səhifənin tarixini birləşdirmək
+action-userrights|Bütün istifadəçi hüquqlarını redaktə et
+action-userrights-interwiki|Digər vikilərdəki istifadəçilərin istifadəçi hüquqlarını dəyişdir
+action-siteadmin|Məlumatlar bazasının bloklanması və blokun götürülməsi
+action-sendemail|e-məktub göndər
+nchanges|~{0} {{PLURAL:~{0}\u007Cdəyişiklik\u007Cdəyişiklik}}
+enhancedrc-history|tarixçə
+recentchanges|Son dəyişikliklər
+recentchanges-legend|Son dəyişiklik seçimləri
+recentchanges-summary|'''Ən son dəyişiklikləri bu səhifədən izləyin:'''
+recentchanges-feed-description|Vikidəki ən son dəyişiklikləri bu yayım kanalından izləyin.
+recentchanges-label-newpage|Bu dəyişiklik yeni səhifə yaratdı
+recentchanges-label-minor|Bu kiçik redaktədir
+recentchanges-label-bot|Bu redaktə bot tərəfindən edilmişdir
+recentchanges-label-unpatrolled|Bu redaktə hələ nəzərdən keçirilməmişdir
+recentchanges-label-plusminus|Səhifənin ölçüsü bayt miqdarı ilə təyin edilir
+recentchanges-legend-heading|'''Legenda:'''
+recentchanges-legend-newpage|{{int:recentchanges-label-newpage}} (həmçinin bax: [[Special:NewPages\u007Cyeni səhifələrin siyahısı]])
+rcnotefrom|Aşağıda <strong>~{1}</strong>-dən bu yana olan dəyişikliklər göstərilib (<strong>~{0}</strong>-dən çox olmayaraq).
+rclistfrom|~{2} ~{1} vaxtından başlayaraq yeni dəyişiklikləri göstər
+rcshowhideminor|Kiçik redaktələri ~{0}
+rcshowhideminor-show|Göstər
+rcshowhideminor-hide|Gizlət
+rcshowhidebots|Botları ~{0}
+rcshowhidebots-show|Göstər
+rcshowhidebots-hide|Gizlət
+rcshowhideliu|Qeydiyyatlı istifadəçiləri ~{0}
+rcshowhideliu-hide|Gizlət
+rcshowhideanons|Anonim istifadəçiləri ~{0}
+rcshowhideanons-show|Göstər
+rcshowhideanons-hide|Gizlət
+rcshowhidepatr|Yoxlanılmış redaktələri ~{0}
+rcshowhidemine|Mənim redaktələrimi ~{0}
+rcshowhidemine-show|Göstər
+rcshowhidemine-hide|Gizlət
+rclinks|Son ~{1} gün ərzindəki son ~{0} dəyişikliyi göstər <br />~{2}
+diff|fərq
+hist|tarixçə
+hide|Gizlə
+show|Göstər
+minoreditletter|k
+newpageletter|Y
+boteditletter|b
+number_of_watching_users_pageview|[~{0} izləyən istifadəçi]
+rc_categories|Kateqoriyalara limit qoy ("\u007C" ilə ayır)
+rc_categories_any|Hər
+rc-change-size|~{0}
+rc-change-size-new|~{0} üçün dəyişiklikdən sonrakı həcm: {{PLURAL:~{0}\u007Cbayt\u007Cbayt\u007Cbayt}}
+newsectionsummary|/* ~{0} */ yeni bölmə
+rc-enhanced-expand|Ətraflı göstər
+rc-enhanced-hide|Redaktələri gizlət
+rc-old-title|Əvvəlcə "~{0}" kimi yaradılmış
+recentchangeslinked|Əlaqəli redaktələr
+recentchangeslinked-feed|Əlaqəli redaktələr
+recentchangeslinked-toolbox|Əlaqəli redaktələr
+recentchangeslinked-title|''~{0}'' ilə əlaqəli dəyişikliklər
+recentchangeslinked-summary|Aşağıdakı siyahı, qeyd olunan səhifəyə (və ya qeyd olunan kateqoriyadakı səhifələrə) daxili keçid verən səhifələrdə edilmiş son dəyişikliklərin siyahısıdır.\n[[Special:Watchlist\u007Cİzləmə siyahınızdakı]] səhifələr '''qalın''' şriftlə göstərilmişdir.
+recentchangeslinked-page|Səhifə adı:
+recentchangeslinked-to|Qeyd olunan səhifədəki deyil, ona daxili keçid verən səhifələrdəki dəyişiklikləri göstər
+upload|Fayl yüklə
+uploadbtn|Sənəd yüklə
+reuploaddesc|Return to the upload form.
+upload-tryagain|Dəyşdirilmiş fayl izahını göndər
+uploadnologin|Daxil olmamısınız
+uploadnologintext|Fayl yükləmək üçün [[Special:UserLogin\u007Cdaxil olmalısınız]].
+upload_directory_missing|(~{0}) yükləmə qaydası axtarılır və vebserverdə yaradılması qeyri-mümkündür.
+upload_directory_read_only|"~{0}" kataloqunun arxivi veb-server yazıları üçün qapalıdır.
+uploaderror|Yükləmə xətası
+upload-recreate-warning|'''Diqqət: Bu adda fayl silinib, yaxud adı dəyişdirilib.'''\n\nBu səhifənin silinmə və addəyişmə jurnalı aşağıda göstərilmişdir:
+uploadtext|Fayl yükləmək üçün aşağıdakı formadan istifadə edin.\nƏvvəllər yüklənmiş fayllara baxmaq üçün [[Special:FileList\u007Cyüklənmiş fayllar siyahısına]] keçin, həmçinin (təkrar) yüklənmiş fayllara [[Special:Log/upload\u007Cyükləmə jurnalında]], silinmiş fayllara [[Special:Log/delete\u007Csilinmə jurnalında]] baxa bilərsiniz.\n\nMəqaləyə fayl yerləşdirmək üçün aşağıdaki formalardan birini istifadə edin:\n* Faylın tam versiyasını yerləşdirmək üçün: '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code>''';\n* Faylın 200 pikselədək kiçildilmiş versiyasını mətndən solda, altında izahla yerləşdirmək üçün: '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png\u007C200px\u007Cthumb\u007Cleft\u007Ctəsvir]]</nowiki></code>''';\n* Səhifədə faylın özünü göstərmədən ona birbaşa keçid yerləşdirmək üçün: '''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code>'''.
+upload-permitted|İcazə verilən fayl tipləri: ~{0}.
+upload-preferred|İcazə verilən fayl tipləri: ~{0}.
+upload-prohibited|İcazə verilməyən fayl tipləri: ~{0}.
+uploadlogpage|Yükləmə qeydləri
+uploadlogpagetext|Aşağıda ən yeni yükləmə jurnal qeydləri verilmişdir.
+filename|Fayl adı
+filedesc|Xülasə
+fileuploadsummary|İzahat:
+filereuploadsummary|Fayl dəyişiklikləri:
+filestatus|Müəllif statusu:
+filesource|Mənbə:
+ignorewarning|Xəbərdarlıqlara əhəmiyyət vermə və faylı saxla
+ignorewarnings|Bütün xəbərdarlıqlara məhəl qoymamaq
+minlength1|Fayl adı ən azı bir hərfdən ibarət olmalıdır.
+illegalfilename|"~{0}" fayl adında səhifə adlarında istifadəsinə yol verilməyən simvollar var. Lütfən faylın adını dəyişin və yenidən yükləməyə cəhd edin.
+filename-toolong|Fayl adı 240 baytdan uzun ola bilməz.
+badfilename|Faylın adı dəyişildi. Yeni adı: "~{0}".
+filetype-mime-mismatch|".~{0}" fayl uzantısı faylın MIME tipinə (~{1}) uyğun gəlmir.
+filetype-badmime|"~{0}" MIME tipindəki faylların yüklənməsinə icazə verilmir.
+filetype-banned-type|'''".~{0}"''' {{PLURAL:~{3}\u007Cicazə verilən fayl formatı deyil}}. İcazə verilən {{PLURAL:~{2}\u007Cfayl formatı\u007Cfayl formatı bunlardır:}} ~{1}.
+filetype-missing|Faylın heç bir uzantısı yoxdur (məsələn, ".jpg").
+empty-file|Göndərdiyiniz fayl boşdur.
+file-too-large|Göndərdiyiniz fayl çox böyükdür.
+filename-tooshort|Fayl adı qısadır.
+filetype-banned|Bu tip fayllar qadağandır.
+verification-error|Fayl təsdiqi baş tutmadı.
+illegal-filename|Fayl adına icazə yoxdur.
+unknown-error|Bilinməyən bir xəta yarandı.
+tmp-create-error|Müvəqqəti fayl yaradıla bilmədi.
+tmp-write-error|Müvəqqəti fayl yazılarkən xəta.
+largefileserver|Faylın ölçüsü yol verilən həddi aşır.
+emptyfile|Yüklədiyiniz fayl boşdur. Bu faylın adında olan hərf səhvi ilə bağlı ola bilər. Xahiş olunur ki, doğurdan da bu faylı yükləmək istədiyinizi yoxlayasınız.
+fileexists|Yükləmək istədiyiniz adda fayl mövcuddur.\nLütfən <strong>[[:~{0}]]</strong> keçidini yoxlayın və bu faylı yükləmək istədiyinizdən əmin olun.\n[[~{0}\u007Cthumb]]
+fileexists-extension|Bu adda başqa bir fayl mövcuddur: [[~{1}\u007Cthumb]]\n* Yüklənilən faylın adı: <strong>[[:~{0}]]</strong>\n* Mövcud faylın adı: <strong>[[:~{1}]]</strong>\nXahiş edirik, başqa ad seçin.
+uploadwarning|Yükləmə xəbərdarlığı
+savefile|Faylı qeyd et
+uploaddisabled|Yükləmə baş tutmadı
+copyuploaddisabled|URL-dən yükləmə baş tutmadı.
+uploaddisabledtext|Fayl yüklənməsi baş tutmadı.
+uploadvirus|Faylda virus var! \nDetallar: ~{0}
+upload-source|Mənbə faylı
+sourcefilename|Fayl adı mənbələri
+sourceurl|URL mənbəsi:
+destfilename|Fayl adı
+upload-maxfilesize|Faylın maksimum həcmi: ~{0}
+upload-description|Faylın izahı
+upload-options|Yükləmə parametrləri
+watchthisupload|Bu faylı izlə
+filename-bad-prefix|Yüklədiyiniz faylın adı, çox güman ki, rəqəmsal kameralar tərəfindən avtomatik olaraq əlavə edilən və heç bir açıqlaması olmayan '''"~{0}"''' ilə başlayır.\nXahiş edirik faylın adını daha düzgün seçin.
+filename-prefix-blacklist| #<!-- Bu sətrə toxunmayın --> <pre>\n# Sintaksis aşağıdakı kimi görünür:\n#   * "#" simvolundan sətrin sonuna kimi yazılar şərhdir\n#   * Tipik fayl adları üçün olan prefiksdəki hər bir boş olmayan sətir rəqəmli kamera trəfindən avtomatik qeydə alınır\nCIMG # Casio\nDSC_ # Nikon\nDSCF # Fuji\nDSCN # Nikon\nDUW # digər mobil telefonlar\nIMG # generic\nJD # Jenoptik\nMGP # Pentax\nPICT # misc.\n #</pre> <!-- Bu sətrə toxunmayın -->
+upload-success-subj|Yükləmə tamamlandı
+upload-failure-subj|Yükləmə problemi
+upload-failure-msg|Yüklədiyiniz [~{1}] forması ilə bağlı problem yaranıb:\n\n~{0}
+upload-warning-subj|Yükləmə xəbərdarlığı
+upload-proto-error|Yanlış protokol
+upload-file-error|Daxili xəta
+upload-misc-error|Naməlum yükləmə xətası
+upload-too-many-redirects|URL-də xeyli yönləndirmə var
+upload-http-error| HTTP xətası var : ~{0}
+backend-fail-notexists|"~{0}" faylı mövcud deyil
+backend-fail-delete|"~{0}" faylı sililmədi.
+backend-fail-copy|"~{0}" faylı "~{1}" faylına kopyalanmır.
+backend-fail-read|"~{0}" faylı oxunmadı.
+backend-fail-create|"~{0}" faylı yazıla bilmədi.
+uploadstash|Gizli yükləmə
+uploadstash-clear|Müvəqqəti faylları təmizlə
+uploadstash-refresh|Fayl siyahısını yenilə
+img-auth-accessdenied|Giriş qadağandır
+img-auth-nofile|Fayl "~{0}" mövcud deyil.
+img-auth-streaming|"~{0}" axını.
+img-auth-noread|İstifadəçinin "~{0}"i oxumaq hüququ yoxdur.
+http-invalid-url|Səhv URL: ~{0}
+http-read-error|HTTP oxuma xətası
+http-timed-out|HTTP istəyinin vaxtı bitdi.
+http-curl-error|URL-ə yanlış müraciət: ~{0}
+http-bad-status|HTTP müraciətin yoxlanması zamanı problem aşkarlanmışdır: ~{0} ~{1}
+upload-curl-error6|URL-ə çatmaq olmadı
+upload-curl-error28|Yükləmə vaxtı bitdi
+license|Lisenziya
+license-header|Lisenziya
+nolicense|Heç biri seçilməmişdir
+upload_source_url|(siz düzgün, hər kəsin daxil ola biləcəyi URL seçdiniz)
+upload_source_file|(siz kompüterinizdəki faylı seçdiniz)
+listfiles_search_for|Media adı üçün axtar:
+imgfile|fayl
+listfiles|Fayl siyahısı
+listfiles_thumb|Kiçik şəkil
+listfiles_date|Tarix
+listfiles_name|Ad
+listfiles_user|İstifadəçi
+listfiles_size|Həcm
+listfiles_description|İzah
+listfiles_count|Versiya
+file-anchor-link|Fayl
+filehist|Faylın tarixçəsi
+filehist-help|Faylın əvvəlki versiyasını görmək üçün gün/tarix bölməsindəki tarixləri tıqlayın.
+filehist-deleteall|hamısını sil
+filehist-deleteone|sil
+filehist-revert|geri qaytar
+filehist-current|indiki
+filehist-datetime|Tarix/Vaxt
+filehist-thumb|Kiçik şəkil
+filehist-thumbtext|~{0} tarixindəki versiyanın kiçildilmiş görüntüsü
+filehist-nothumb|Miniatür yoxdur
+filehist-user|İstifadəçi
+filehist-dimensions|Ölçülər
+filehist-filesize|Faylın həcmi
+filehist-comment|Şərh
+imagelinks|Fayl keçidləri
+linkstoimage|{{PLURAL:~{0}\u007Csəhifə\u007C~{0} səhifə}} bu fayla istinad edir:
+nolinkstoimage|Bu fayla keçid verən səhifə yoxdur.
+linkstoimage-redirect|~{0} (fayl istiqamətləndirilir) ~{1}
+sharedupload|Bu fayl ~{0}-dandır və ola bilsin ki, başqa layihələrdə də istifadə edilir.
+sharedupload-desc-here|Bu fayl ~{0}dandır və başqa layihələrdə də istifadə edilə bilər.\nFaylın [~{1} təsvir səhifəsindəki] məlumat aşağıda göstərilib.
+filepage-nofile|Bu adda fayl mövcud deyil.
+filepage-nofile-link|Bu adda fayl mövcud deyil, amma bu faylı siz [~{0} yükləyə bilərsiz]
+uploadnewversion-linktext|Bu faylın yeni versiyasını yüklə
+shared-repo-from|~{0}-dən
+shared-repo|ümumi fayl anbarı
+shared-repo-name-wikimediacommons|Wikimedia Commons
+upload-disallowed-here|Siz bu faylı yenidən yükləyə bilməzsiniz.
+filerevert|~{0} faylını əvvəlki vəziyyətinə qaytar
+filerevert-legend|Faylı əvvəlki vəziyyətinə qaytar
+filerevert-comment|Səbəb:
+filerevert-submit|Əvvəlki vəziyyətinə
+filedelete|~{0} adlı faylı sil
+filedelete-legend|Faylı sil
+filedelete-intro|'''[[Media:~{0}\u007C~{0}]]''' faylını və onunla bağlı bütün tarixçəni silmək ərəfəsindəsiniz.
+filedelete-intro-old|'''[[Media:~{0}\u007C~{0}]]''' faylının [~{3} ~{2}, ~{1}] tarixli versiyasını silirsiz.
+filedelete-comment|Səbəb:
+filedelete-submit|Sil
+filedelete-success|'''~{0}''' silinmişdir.
+filedelete-success-old|<span class="plainlinks">'''[[Media:~{0}\u007C~{0}]]'''-nin  ~{2} və ~{1} versiyaları silinmişdir.</span>
+filedelete-nofile|'''~{0}''' mövcud deyil.
+filedelete-otherreason|Başqa/əlavə səbəb:
+filedelete-reason-otherlist|Başqa səbəb
+filedelete-reason-dropdown|*Əsas silmə səbəbi\n** Müəllif hüququ pozuntusu\n** Dublikat fayl\n** Keyfiyyətsiz şəkil\n** İstifadəsiz fayl\n** Qeyri-ensiklopedik şəxs\n** Lisenziyasız fayl\n** Azad şəkillə əvəz olundu\n** Müəllif istəyi
+filedelete-edit-reasonlist|Silmə səbəblərini redaktə et
+filedelete-maintenance|Texniki işlər səbəbindən faylların silinməsi və bərpası müvəqqəti olaraq bağlanmışdır.
+filedelete-maintenance-title|Faylı silmək mümkün olmadı.
+mimesearch|MIME axtar
+mimetype|MIME tipi:
+download|Yüklə
+unwatchedpages|İzlənməyən səhifələr
+listredirects|İstiqamətləndirmə siyahısı
+unusedtemplates|İstifadəsiz şablonlar
+unusedtemplateswlh|digər keçidlər
+randompage|İxtiyari səhifə
+randomredirect|İxtiyari istiqamətləndirmə
+randomredirect-nopages|"~{0}" ad sahəsində heç bir yönləndirmə yoxdur.
+statistics-header-edits|Redaktə statistikası
+statistics-header-users|İstifadəçi statistika
+statistics-header-hooks|Digər statistikalar
+statistics-files|Yüklənmiş fayllar
+statistics-edits|{{SITENAME}} yaranandan bəri edilən səhifə dəyişiklikləri
+statistics-edits-average|Hər səhifədəki orta hesabla dəyişiklik
+statistics-users|Qeydiyyatdan keçmiş [[Special:ListUsers\u007Cistifadəçilər]]
+statistics-users-active|Aktiv istifadəçilər
+statistics-users-active-desc|Son {{PLURAL:~{0}\u007Cgün\u007C~{0} gündə}} iş görən istifadəçilər
+doubleredirects|İkiqat istiqamətləndirmələr
+double-redirect-fixed-move|[[~{0}]] səhifəsinin yeri dəyişdirilib.\nO avtomatik yenilənib və [[~{1}]] səhifəsinə yönləndirilib.
+double-redirect-fixed-maintenance|[[~{0}]] səhifəsindən [[~{1}]] səhifəsinə ikiqat yönləndirmə avtomatik düzəldilir.
+double-redirect-fixer|Yönləndirmə səhvdir
+brokenredirects|Xətalı istiqamətləndirmə
+brokenredirectstext|Aşağıdakı istiqamətləndirmələr mövcud olmayan səhifələrə keçid verir:
+brokenredirects-edit|redaktə
+brokenredirects-delete|sil
+withoutinterwiki|Dil keçidləri olmayan səhifələr
+withoutinterwiki-legend|Prefiks
+withoutinterwiki-submit|Göstər
+fewestrevisions|Az dəyişiklik edilmiş məqalələr
+nbytes|~{0} {{PLURAL:~{0}\u007Cbayt\u007Cbayt}}
+ncategories|~{0} {{PLURAL:~{0}\u007Ckateqoriya\u007Ckateqoriya}}
+nlinks|~{0} {{PLURAL:~{0}\u007Ckeçid\u007Ckeçidlər}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cüzv\u007Cüzv}}
+nrevisions|~{0} dəyişiklik
+nviews|~{0} baxış
+nimagelinks|~{0} səhifədə istifadə olunmur
+ntransclusions|~{0} səhifədə istifadə olunur
+specialpage-empty|Bu səhifə boşdur.
+lonelypages|Yetim səhifələr
+uncategorizedpages|Kateqoriyasız səhifələr
+uncategorizedcategories|Kateqoriyasız kateqoriyalar
+uncategorizedimages|Kateqoriyasız şəkillər
+uncategorizedtemplates|Kateqoriyasız şablonlar
+unusedcategories|İstifadə edilməmiş kateqoriyalar
+unusedimages|İstifadə edilməmiş fayllar
+wantedcategories|Təlabat olunan kateqoriyalar
+wantedpages|Tələb olunan səhifələr
+wantedpages-badtitle|Müraciət zamantı yanlış başlıq: ~{0}
+wantedfiles|Tələb olunan fayllar
+wantedtemplates|Tələb olunan şablonlar
+mostlinked|Ən çox keçidlənən səhifələr
+mostlinkedcategories|Ən çox məqaləsi olan kateqoriyalar
+mostlinkedtemplates|Ən çox istifadə olunan səhifələr
+mostcategories|Kateqoriyası ən çox olan məqalələr
+mostimages|Ən çox istifadə edilmiş şəkillər
+mostrevisions|Ən çox nəzərdən keçirilmiş (versiyalı) məqalələr
+prefixindex|Prefiks indeksli bütün səhifələr
+shortpages|Qısa səhifələr
+longpages|Uzun səhifələr
+deadendpages|Keçid verməyən səhifələr
+deadendpagestext|Aşağıdakı səhifələrdən bu Vikipediyadakı digər səhifələrə heç bir keçid yoxdur.
+protectedpages|Mühafizəli səhifələr
+protectedpages-indef|Yalnız müddətsiz mühafizələr
+protectedpages-cascade|Yalnız kaskad mühafizələr
+protectedpagesempty|Hal-hazırda bu parametrə uyğun heç bir mühafizəli səhifə yoxdur
+protectedtitles|Mühafizəli başlıqlar
+listusers|İstifadəçi siyahısı
+listusers-editsonly|Yalnız redaktələri olan istifadəçiləri göstər
+listusers-creationsort|Yaranma tarixinə görə sırala
+usereditcount|~{0} {{PLURAL:~{0}\u007Credaktə}}
+usercreated|Saat ~{1}, ~{0} tarixində {{GENDER:~{2}\u007Cqeydiyyatdan keçib}}
+newpages|Yeni səhifələr
+newpages-username|İstifadəçi adı:
+ancientpages|Ən köhnə səhifələr
+move|Adını dəyiş
+movethispage|Bu səhifənin adını dəyiş
+notargettitle|Verilməyib
+nopagetitle|Belə hədəf səhifəsi yoxdur
+pager-newer-n|{{PLURAL:~{0}\u007C1 daha yeni\u007C~{0} daha yeni}}
+pager-older-n|{{PLURAL:~{0}\u007C1 daha köhnə\u007C~{0} daha köhnə}}
+suppress|Təftişçi
+booksources|Kitab mənbələri
+booksources-search-legend|Kitab mənbələri axtar
+booksources-isbn|ISBN:
+booksources-search|Axtar
+booksources-text|Aşağıda yeni və işlənmiş kitablar satan xarici keçidlərdə siz axtardığınız kitab haqqında əlavə məlumat ala bilərsiz:
+specialloguserlabel|İcraçı:
+speciallogtitlelabel|Məqsəd (başlıq və ya istifadəçi):
+log|Qeydlər
+all-logs-page|Bütün ictimai qeydlər
+alllogstext|{{SITENAME}} üçün bütün mövcud qeydlərin birgə göstərişi.\nQeyd növü, istifadəçi adı və ya təsir edilmiş səhifəni seçməklə daha spesifik ola bilərsiniz.
+logempty|Jurnalda uyğun qeyd tapılmadı.
+log-title-wildcard|Bu mətnlə başlayan başlıqları axtar
+allpagesfrom|Bu hərflə başlayan səhifələri göstər:
+allpagesto|Bu hərflə başlayan səhifələrədək göstər:
+allarticles|Bütün məqalələr
+allinnamespace|Bütün səhifələr (~{0} səhifələri)
+allpagessubmit|Seç
+allpagesprefix|Bu prefiksli səhifələri göstər:
+allpages-hide-redirects|Yönləndirmələri gizlət
+categoriespagetext|Aşağıdakı {{PLURAL:~{0}\u007Ckateqoriyada\u007Ckateqoriyalarda}} səhifələr, yaxud media-fayllar var.\n[[Special:UnusedCategories\u007Cİstifadə olunmayan kateqoriyalar]] burada göstərilməyib.\nHəmçinin, [[Special:WantedCategories\u007Ctələb olunan kateqoriyalara]] baxın.
+special-categories-sort-count|miqdara görə tənzimlə
+special-categories-sort-abc|əlifba sırası ilə düz
+deletedcontributions|Silinmiş istifadəçi fəaliyyətləri
+deletedcontributions-title|Silinmiş istifadəçi fəaliyyətləri
+sp-deletedcontributions-contribs|fəaliyyət
+linksearch|Xarici keçid axtar
+linksearch-pat|Axtarış sxemi:
+linksearch-ns|Adlar fəzası:
+linksearch-ok|Axtar
+linksearch-line|~{1}-dən ~{0} keçid verilib
+listusers-submit|Göstər
+listusers-noresult|İstifadəçi tapılmadı.
+listusers-blocked|(bloklanıb)
+activeusers|Aktiv istifadəçilərin siyahısı
+activeusers-count|Son {{PLURAL:~{2}\u007Cgündə\u007C~{2} gündə}} ~{0} {{PLURAL:~{0}\u007Credaktə\u007Credaktə}}
+activeusers-hidebots|Botları gizlə
+activeusers-hidesysops|İdarəçiləri gizlə
+activeusers-noresult|İstifadəçi tapılmadı.
+listgrouprights|İstifadəçi qruplarının hüquqları
+listgrouprights-summary|Bu vikidə olan istifadəçi siyahıları və onların hüquqları aşağıda göstərilmişdir.\nFərdi hüquqlar haqqında əlavə məlumatı [[{{MediaWiki:Listgrouprights-helppage}}]] səhifəsində tapa bilərsiniz
+listgrouprights-key|İzah:\n* <span class="listgrouprights-granted">Verilmiş hüquqlar</span>\n* <span class="listgrouprights-revoked">Geri alınmış hüquqlar</span>
+listgrouprights-group|Qrup
+listgrouprights-rights|Hüquqlar
+listgrouprights-helppage|Help:Qrup hüquqları
+listgrouprights-members|(üzvlər)
+listgrouprights-right-display|<span class="listgrouprights-granted">~{0} <code>(~{1})</code></span>
+listgrouprights-right-revoked|<span class="listgrouprights-revoked">~{0} <code>(~{1})</code></span>
+listgrouprights-addgroup|{{PLURAL:~{1}\u007CQrupu}} əlavə et: ~{0}
+listgrouprights-removegroup|{{PLURAL:~{1}\u007CQrupu}} sil: ~{0}
+listgrouprights-addgroup-all|Bütün qrupları əlavə et
+listgrouprights-removegroup-all|Bütün qrupları sil
+listgrouprights-addgroup-self|Öz hesabına ~{0} {{PLURAL:~{1}\u007Cqrupunu\u007Cqruplarını}} əlavə et
+listgrouprights-removegroup-self|Öz hesabından ~{0} {{PLURAL:~{1}\u007Cqrupunu\u007Cqruplarını}} sil
+listgrouprights-addgroup-self-all|Bütün qrupları öz hesabına əlavə edə bilər
+listgrouprights-removegroup-self-all|Bütün qrupları öz hesabından çıxara bilər
+mailnologin|Ünvan yoxdur
+emailuser|İstifadəçiyə e-məktub göndər
+emailpage|İstifadəçiyə e-məktub yolla
+defemailsubject|"~{0}" adlı istifadəçidən {{SITENAME}} e-məktubu
+usermaildisabled|İstifadəçi e-maili işləmir
+noemailtitle|E-məktub ünvanı yoxdur
+noemailtext|Bu istifadəçi işlək e-məktub ünvanını qeyd etməmişdir.
+emailtarget|Qəbul edən istifadəçinin adını daxil edin
+emailusername|İstifadəçi adı:
+emailusernamesubmit|Göndər
+email-legend|Digər {{SITENAME}} istifadəçilərinə ismarıc yollamaq
+emailfrom|Kimdən:
+emailto|Kimə
+emailsubject|Mövzu:
+emailmessage|Mesaj:
+emailsend|Göndər
+emailccme|Məktubun surətini elektron ünvanıma göndər.
+emailccsubject| ~{0}: ~{1}-yə olan ismarıclarınızın surəti
+emailsent|E-məktub göndərildi
+emailsenttext|E-məktub mesajınız göndərildi.
+usermessage-summary|Sistem mesajı qoyun.
+usermessage-editor|Sistem məlumatları
+usermessage-template|MediaWiki:İstifadəçi müzakirəsi
+watchlist|İzləmə siyahısı
+mywatchlist|İzləmə siyahısı
+watchlistfor2|~{0} ~{1} üçün
+nowatchlist|İzləmə siyahınız böşdur.
+watchlistanontext|Lütfən, izlədiyiniz səhifələri görmək və ya redaktə etmək üçün sistemə daxil olun.
+watchnologin|Daxil olmamısınız
+addwatch|İzləmə siyahısına əlavə et
+addedwatchtext|"[[:~{0}]]" səhifəsi [[Special:Watchlist\u007Cizlədiyiniz səhifələr]] siyahısına əlavə edildi. Bu səhifədə və əlaqəli müzakirə səhifəsindəki bütün dəyişikliklər orada göstəriləcək və səhifə asanlıqla seçiləbilmək üçün [[Special:RecentChanges\u007Cson dəyişikliklərdə]] qalın şriftlərlə görünəcəkdir. <p> Səhifəni izləmə siyahınızdan çıxarmaq üçün yan lövhədəki "izləmə" düyməsinə vurun.
+removewatch|Bu səhifəni İzlədiyim səhifələr siyahısından çıxar
+removedwatchtext|"[[:~{0}]]" səhifəsi [[Special:Watchlist\u007Cizləmə siyahınızdan]] çıxarıldı.
+watch|İzlə
+watchthispage|Bu səhifəni izlə
+unwatch|İzləmə
+unwatchthispage|İzləmə
+notanarticle|Səhifə boşdur
+notvisiblerev|Başqa istifadıçinin son dəyişikliyi silinib
+watchlist-details|İzləmə siyahınızda, müzakirə səhifələrini çıxmaq şərtilə, {{PLURAL:~{0}\u007C~{0} səhifə\u007C~{0} səhifə}} var.
+wlheader-enotif| E-məktubla bildiriş aktivdir.
+wlheader-showupdated|Son ziyarətinizdən sonra edilən dəyişikliklər '''qalın şriftlərlə''' göstərilmişdir.
+wlnote|Aşağıdakı {{PLURAL:~{0}\u007C'''~{0}''' dəyişiklik\u007C'''~{0}''' dəyişiklik}} son {{PLURAL:~{1}\u007Csaatda\u007C'''~{1}''' saatda}} edilmişdir.
+wlshowlast|Bunları göstər: son ~{0} saatı ~{1} günü
+watchlist-options|İzləmə siyahısının nizamlamaları
+watching|İzlənilir...
+unwatching|İzlənilmir...
+enotif_reset|Baxılmış bütün səhifələri işarələ.
+enotif_impersonal_salutation|{{SITENAME}} istifadəçisi
+enotif_lastvisited|Sonuncu ziyarətinizdən indiyədək olan bütün dəyişiklikləri görmək üçün baxın: ~{0}.
+enotif_lastdiff|Bu dəyişikliyi görmək üçün ~{0} səhifəsinə baxın.
+enotif_anon_editor|qeydiyyatsız istifadəçi ~{0}
+enotif_body|Hörmətli $WATCHINGUSERNAME,\n\n{{SITENAME}} veb-saytındakı $PAGETITLE adlı səhifə $PAGEEDITDATE tarixində $PAGEEDITOR tərəfindən $CHANGEDORCREATED. Səhifənin sonuncu versiyasına baxmaq üçün $PAGETITLE_URL keçidindən istifadə edin.\n\n$NEWPAGE\n\nDəyişikliyi edən istifadəçinin izahı: $PAGESUMMARY $PAGEMINOREDIT\n\nSəhifəni dəyişdirən istifadəçinin əlaqə məlumatları:\ne-poçt: $PAGEEDITOR_EMAIL\nviki: $PAGEEDITOR_WIKI\n\nSiz haqqında söhbət gedən səhifəyə baxanadək səhifədəki digər dəyişikliklərlə bağlı başqa bildiriş məktubu almayacaqsınız. Siz həmçinin, izləmə siyahınızdakı bütün səhifələrlə bağlı bildiriş məlumatlarını silə bilərsiniz.\n\n               {{SITENAME}} saytının xəbərdarlıq sistemi.\n\n--\nİzləmə siyahısının tənzimləmələrini dəyişmək üçün:\n{{canonicalurl:Special:Watchlist/edit}}\n\nYardım və təklifləriniz üçün:\n$HELPPAGE
+created|yaradıldı
+changed|dəyişdi
+deletepage|Səhifəni sil
+confirm|Təsdiq et
+excontent|Köhnə məzmun: '~{0}'
+excontentauthor|tərkib: '~{0}' (və '[[Special:Contributions/~{1}\u007C~{1}]]' tarixçədə fəaliyyəti qeyd edilən yeganə istifadəçidir)
+exbeforeblank|Silinmədən əvvəlki məzmun: '~{0}'
+delete-confirm|Silinən səhifə: "~{0}"
+delete-legend|Sil
+historywarning|'''Xəbərdarlıq:''' Silinəcək səhifənin tarixçəsində qeyd olunmuş ~{0} {{PLURAL:~{0}\u007Credaktə\u007Credaktə}} var:
+confirmdeletetext|Bu səhifə və ya fayl bütün tarixçəsi ilə birlikdə birdəfəlik silinəcək. Bunu [[{{MediaWiki:Policy-url}}\u007Cqaydalara]] uyğun etdiyinizi və əməliyyatın nəticələrini başa düşdüyünüzü təsdiq edin.
+actioncomplete|Fəaliyyət tamamlandı
+actionfailed|Əməliyyat yerinə yetirilmədi
+deletedtext|"~{0}" silindi.\nSonuncu silinmələrə bax: ~{1}.
+dellogpage|Silmə qeydləri
+dellogpagetext|Ən son silinmiş səhifələrin siyahısı.
+deletionlog|Silmə jurnal qeydləri
+reverted|Daha əvvəlki versiya bərpa edildi
+deletecomment|Səbəb:
+deleteotherreason|Digər/əlavə səbəb:
+deletereasonotherlist|Digər səbəb
+deletereason-dropdown|*Əsas silmə səbəbi\n** Müəllif istəyi\n** Müəllif hüququ pozuntusu\n** Vandalizm
+delete-edit-reasonlist|Silmə səbəblərinin redaktəsi
+rollback|əvvəlki halına qaytar
+rollbacklink|əvvəlki halına qaytar
+rollbacklinkcount|~{0} {{PLURAL:~{0}\u007Cdəyişikliyi\u007Cdəyişikliyi}} geri qaytar
+rollbackfailed|Geri qaytarma uğursuzdur
+cantrollback|Redaktə geri qaytarıla bilməz; axırıncı redaktə səhifədə olan yeganə fəaliyyətdir.
+revertpage|[[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007CMüzakirə]]) tərəfindən edilmiş dəyişikliklər [[User:~{0}\u007C~{0}]] tərəfindən edilmiş dəyişikliklərə qaytarıldı.
+revertpage-nouser|(istifadəçi adı çıxarılmış) tərəfindən edilən dəyişikliklər [[User:~{0}\u007C~{0}]] tərəfindən edilən son dəyişikliyə geri alındı
+rollback-success|~{0} tərəfindən edilmiş redaktələr geri qaytarıldı; ~{1} tərəfindən yaradılmış son versiya bərpa olundu.
+sessionfailure-title|Giriş səhvi
+protectlogpage|Mühafizə etmə qeydləri
+protectedarticle|"[[~{0}]]" səhifəsi mühafizə edildi
+modifiedarticleprotection|"[[~{0}]]" səhifəsi üçün mühafizə səviyyəsi dəyişildi
+unprotectedarticle|mühafizə kənarlaşdırıldı "[[~{0}]]"
+protect-title|"~{0}" üçün mühafizə səviyyəsinin dəyişdirilməsi
+prot_1movedto2|[[~{0}]] adı dəyişildi. Yeni adı: [[~{1}]]
+protect-legend|Qorumayı təsdiq et
+protectcomment|Səbəb:
+protectexpiry|Vaxtı bitib
+protect_expiry_invalid|Mühafizənin bitmə vaxtı səhvdir.
+protect_expiry_old|Bitmə vaxtı keçmişdir.
+protect-unchain-permissions|Mühafizənin əlavə parametrlərini açmaq
+protect-text|Siz '''~{0}''' səhifəsinin mühafizə səviyyəsini görə və dəyişə bilərsiniz.
+protect-locked-blocked|Səhifənin bloklu olduğu müddətdə siz mühafizə səviyyəsini dəyişə bilməzsiniz.\n'''~{0}''' səhifəsində hal-hazırda edə biləcəyiniz əməliyyatlar bunlardır:
+protect-locked-dblock|Verilənlər bazası kilidli olduğu üçün mühafizə səviyyəsi dəyişilə bilməz.\n'''~{0}''' səhifəsində hal-hazırda edə biləcəyiniz əməliyyatlar bunlardır:
+protect-locked-access|Sizin hesabınızın mühafizə səviyyəsini dəyişməyə ixtiyarı yoxdur.\n'''~{0}''' səhifəsində hal-hazırda edə biləcəyiniz əməliyyatlar bunlardır:
+protect-cascadeon|Bu səhifə mühafizəlidir, çünki bu səhifə {{PLURAL:~{0}\u007Cbaşqa bir\u007Cbaşqa bir}} səhifədən kaskad mühafizə edilmişdir. Siz bu səhifənin mühafizə səviyyəsini dəyişdirə bilərsiniz, bu kaskad mühafizəyə təsir etməyəcək.
+protect-default|Bütün istifadəçilərə icazə ver
+protect-fallback|"~{0}" icazəsi tələb olunur
+protect-level-autoconfirmed|Yeni və anonim istifadəçiləri blokla
+protect-level-sysop|Yalnız idarəçilərə icazə verilir
+protect-summary-cascade|kaskad mühafizə
+protect-expiring|~{0} (UTC)- tarixində vaxtı bitir
+protect-expiring-local|~{0}-də bitir
+protect-expiry-indefinite|müddətsiz
+protect-cascade|Kaskad mühafizəsi - bu səhifəyə daxil bütün səhifələri mühafizə et
+protect-cantedit|Bu səhifənin mühafizə dərəcəsini dəyişdirə bilməzsiniz, çünki bu dəyişiklik üçün hüququnuz yoxdur.
+protect-othertime|Başqa vaxt:
+protect-othertime-op|Başqa vaxt
+protect-existing-expiry|Mövcud bitiş zamanı: ~{2}, ~{1}
+protect-otherreason|Digər/əlavə səbəb:
+protect-otherreason-op|Digər səbəb
+protect-edit-reasonlist|Mühafizə səbəblərinin redaktəsi
+protect-expiry-options|1 saat:1 hour,1 gün:1 day,1 həftə:1 week,2 həftə:2 weeks,1 ay:1 month,3 ay:3 months,6 ay:6 months,1 il:1 year,Müddətsiz:infinite
+restriction-type|Hüquqlar:
+restriction-level|Məhdudiyyət dərəcəsi:
+minimum-size|Minimum həcm
+maximum-size|Maksimum həcm
+pagesize|(baytlar)
+restriction-edit|Redaktə
+restriction-move|Adını dəyiş
+restriction-create|Yarat
+restriction-upload|Yüklə
+restriction-level-sysop|tam mühafizə
+restriction-level-autoconfirmed|(yarım-mühafizə)
+restriction-level-all|istənilən səviyyə
+undelete|Silinmiş səhifələri göstər
+undeletepage|Silinmiş səhifələri göstər və ya bərpa et
+undeletepagetitle|'''Aşağıdakı, [[:~{0}\u007C~{0}]] səhifəsinin silinmiş dəyişikliklərindən ibarətdir'''.
+viewdeletedpage|Silinmiş səhifələri göstər
+undelete-fieldset-title|Dəyişiklikləri geri yüklə
+undelete-revision|~{2} tərəfindən ~{0} səhifəsinin silinmiş redaktəsi (~{3} tarixinden bəri, ~{4} saatda):
+undelete-nodiff|Əvvəlki redaktə tapılmadı.
+undeletebtn|Bərpa et
+undeletelink|bax/bərpa et
+undeleteviewlink|görünüş
+undeleteinvert|Seçilən xaricindəkiləri
+undeletecomment|Səbəb:
+undeletedrevisions|Cəmi {{PLURAL:~{0}\u007C1 redaktə\u007C~{0} redaktə}} geri qaytarıldı.
+undeletedrevisions-files|{{PLURAL:~{0}\u007C1 versiya\u007C~{0} versiya}} və {{PLURAL:~{1}\u007C1 fayl\u007C~{1} fayl}} bərpa edildi
+undeletedfiles|{{PLURAL:~{0}\u007C1 fayl\u007C~{0} fayl}} bərpa olundu
+cannotundelete|Bərpaetmə xətası:\n~{0}
+undeletedpage|'''~{0} bərpa edildi'''\n\nMəqalələrin bərpa edilməsi və silinməsi haqqında son dəyişiklikləri nəzərdən keçirmək üçün [[Special:Log/delete\u007Csilmə qeydlərinə]] baxın.
+undelete-header|Son silinmiş səhifələrə baxmaq üçün [[Special:Log/delete\u007Csilmə qeydlərinə]] bax.
+undelete-search-title|Silinmiş səhifələri axtar
+undelete-search-box|Silinmiş səhifələri axtar.
+undelete-search-prefix|Bununla başlayan səhifəliri göstər:
+undelete-search-submit|Axtar
+undelete-no-results|Silmə arxivində birbiriylə örtüşən heç bir səhifə tapılmadı.
+undelete-filename-mismatch|Faylın ~{0} tarixli versiyasını bərpa etmək mümkün deyil: faylın adında uyğunsuzluq
+undelete-bad-store-key|Faylın ~{0} tarixli versiyasını bərpa etmək mümkün deyil: fayl silinməzdən əvvəl mövcud deyildi.
+undelete-cleanup-error|İstifadəsiz "~{0}" arxiv faylının silinmə xətası.
+undelete-missing-filearchive|~{0} nömrəli arxiv faylını bərpa etmək mümkün deyil, çünki o məlumat bazasında yoxdur. Ola bilər fayl artıq bərpa olunub.
+undelete-error|Səhifə bərpasında xəta
+undelete-error-short|Fayl silinərkən xəta: ~{0}
+undelete-error-long|Fayl silinərkən üzə çıxan xətalar:\n\n~{0}
+undelete-show-file-confirm|"<nowiki>~{0}</nowiki>" faylının ~{1} ~{2} tarixli silinmiş bir redaktəsini görmək istədiyinizdən əminsizinizmi?
+undelete-show-file-submit|Bəli
+namespace|Adlar fəzası:
+invert|Seçilən xaricindəkiləri
+tooltip-invert|Seçilmiş ad fəzasında (və ya göstərilmiş uyğunluqlarda olan adlar) olan səhifələrdəki dəyişiklikləri gizlətmək üçün bura işarə edin
+namespace_association|Əlaqəli ad sahəsi
+contributions|{{GENDER:~{0}\u007Cİstifadəçinin}} fəaliyyəti
+contributions-title|~{0} istifadəçi fəaliyyətləri
+mycontris|Fəaliyyətim
+contribsub2|{{GENDER:~{2}\u007C~{0}}} (~{1}) adlı istifadəçinin fəaliyyəti
+nocontribs|Bu kriteriyaya uyğun redaktələr tapılmadı
+uctop|(hal-hazırkı)
+month|Ay
+year|Axtarışa bu tarixdən etibarən başla:
+sp-contributions-newbies|Ancaq yeni istifadəçilərin fəaliyyətlərini göstər
+sp-contributions-newbies-sub|Yeni istifadəçilər üçün
+sp-contributions-newbies-title|Yeni hesablar üçün istifadəçi fəaliyyətləri
+sp-contributions-blocklog|bloklama qeydləri
+sp-contributions-deleted|silinmiş istifadəçi fəaliyyətləri
+sp-contributions-uploads|yüklənənlər
+sp-contributions-logs|qeydlər
+sp-contributions-talk|müzakirə
+sp-contributions-userrights|istifadəçi hüquqları idarəsi
+sp-contributions-blocked-notice|Bu istifadəçi hal-hazırda bloklanmışdır.\nBloklama qeydlərinin sonuncusu aşağıda göstərilmişdir:
+sp-contributions-blocked-notice-anon|Bu IP-ünvan hal-hazırda bloklanmışdır.\nBloklama qeydlərinin sonuncusu aşağıda göstərilmişdir:
+sp-contributions-search|Fəaliyyətləri axtar
+sp-contributions-username|IP-ünvanı və ya istifadəçi adı:
+sp-contributions-toponly|Son redaktə olan dəyişiklikləri göstər
+sp-contributions-newonly|Yalnız yeni səhifə yaradılan dəyişiklikləri göstər
+sp-contributions-submit|Axtar
+whatlinkshere|Bu səhifəyə bağlantılar
+whatlinkshere-title|"~{0}" məqaləsinə keçid verən səhifələr
+whatlinkshere-page|Səhifə:
+linkshere|'''[[:~{0}]]''' səhifəsinə istinad edən səhifələr:
+nolinkshere|<strong>[[:~{0}]]</strong> səhifəsinə keçid verən səhifə yoxdur.
+nolinkshere-ns|Seçilmiş ad aralığında heç bir səhifə '''[[:~{0}]]''' səhifəsinə keçid vermir.
+isredirect|İstiqamətləndirmə səhifəsi
+istemplate|daxil olmuş
+isimage|şəkil üçün keçid
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cəvvəlki\u007Cəvvəlki ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cnövbəti\u007Cnövbəti ~{0}}}
+whatlinkshere-links|← keçidlər
+whatlinkshere-hideredirs|yönləndirmələri ~{0}
+whatlinkshere-hidetrans|Əlavələri ~{0}
+whatlinkshere-hidelinks|keçidləri ~{0}
+whatlinkshere-hideimages|Şəkillərə keçidləri ~{0}
+whatlinkshere-filters|Filtrlər
+autoblockid|Avtoblok #~{0}
+block|İstifadəçini blokla
+unblock|İstifadəçinin blokunu götür
+blockip|{{GENDER:~{0}\u007Cİstifadəçini}} blokla
+blockip-legend|İstifadəçinin bloklanması
+ipaddressorusername|IP-ünvanı və ya istifadəçi adı
+ipbexpiry|Bitmə müddəti:
+ipbreason|Səbəb:
+ipbreason-dropdown|*Bloklama səbəbləri:\n** Yalan məlumatların əlavə edilməsi\n** Səhifənin məzmununun silinməsi\n** Xarici saytlara spam-keçidlər\n** Səhifəyə mənasız və yararsız əlavələrə görə\n** Hədə və təqiblərə görə\n** Təhqirə görə\n** Çoxsaylı hesabdan sui istifadəyə görə\n** Qadağan olunmuş istifadəçi adına görə
+ipbcreateaccount|Hesab açmanı məhdudlaşdır
+ipbsubmit|Bu istifadəçini blokla
+ipbother|Başqa vaxt
+ipboptions|2 saat:2 hours,1 gün:1 day,3 gün:3 days,1 həftə:1 week,2 həftə:2 weeks,1 ay:1 month,3 ay:3 months,6 ay:6 months,1 il:1 year,müddətsiz:infinite
+ipbhidename|İstifadəçi adını redaktələrdə və siyahılarda gizlət
+ipbwatchuser|Bu istifadəçinin müzakirə və istifadəçi səhifəsini izlə
+ipb-disableusertalk|Bu istifadəçi bloklu olarkən öz müzakirə səhifəsində redaktə etməsinə qadağa qoy
+ipb-change-block|Bu səbəblərlə istifadəçini yenidən blokla
+ipb-confirm|Bloku təsdiqlə
+badipaddress|Səhv IP
+blockipsuccesssub|Bloklandı
+blockipsuccesstext|[[Special:Contributions/~{0}\u007C~{0}]] bloklanıb.<br />\nBlokları yoxlamaq üçün [[Special:BlockList\u007Cbloklama siyahısına]] baxın.
+ipb-blockingself|Özünü bloklayacaqsınız.! Bunu etmək istədiyinizdən əminsinizmi?
+ipb-confirmhideuser|İstifadəçini bloklamaq və redaktə siyahısından onun adını silmək üzərəsiniz. Bunu etmək istədiyinizdən əminsinizmi?
+ipb-edit-dropdown|Bloklama səbəblərini redaktə et
+ipb-unblock-addr|~{0} üzərindəki blok götürüldü
+ipb-unblock|Bloku götür
+ipb-blocklist|Mövcud blokları göstər
+ipb-blocklist-contribs|{{GENDER:~{0}\u007C~{0}}} istifadəçi hesabının fəaliyyətləri
+unblockip|İstifadəçinin blokunu götür
+unblockiptext|Əvvəlcədən bloklanmış bir IP ünvanına və ya istifadəçi adına yazma geri vermek için aşağıdakı formadan istifadə edin.
+ipusubmit|Bu bloku götür
+unblocked|[[User:~{0}\u007C~{0}]] - nin bloku götürüldü
+unblocked-range|~{0}-nin bloku götürüldü
+unblocked-id|~{0}-nin bloku götürüldü
+blocklist|Bloklanmış istifadəçilər
+ipblocklist|Bloklanmış istifadəçilər
+ipblocklist-legend|Bloklanmış istifadəçini axtar
+blocklist-userblocks|Hesab bloklarını gizlət
+blocklist-tempblocks|Müvəqqəti blokları gizlə
+blocklist-addressblocks|Tək IP bloklarını gizlə
+blocklist-rangeblocks|Indiki blokları gizlə
+blocklist-timestamp|Vaxt
+blocklist-target|Hədəf
+blocklist-expiry|Bitiş tarixi
+blocklist-by|Bloklamış idarəçi
+blocklist-params|Blok parametrləri
+blocklist-reason|Səbəb
+ipblocklist-submit|Axtar
+ipblocklist-localblock|Yerli blok
+ipblocklist-otherblocks|Başqa {{PLURAL:~{0}\u007Cbloklama\u007Cbloklamalar}}
+infiniteblock|müddətsiz
+expiringblock|son tarix ~{0} saat ~{1}
+anononlyblock|yalnız anonim istifadəçi
+noautoblockblock|avtobloklama qeyri-mümkündür
+createaccountblock|Yeni hesab yaratma bloklanıb
+emailblock|E-mail bloklanıb
+blocklist-nousertalk|Müzakirə səhifəsini redaktə edə bilməz.
+ipblocklist-empty|Blok siyahısı boşdur.
+ipblocklist-no-results|Tələb olunan IP ünvanı və ya istifadəçi bloklanmadı.
+blocklink|blokla
+unblocklink|bloklamanı kənarlaşdır
+change-blocklink|bloklamanı dəyişdir
+contribslink|Köməklər
+emaillink|e-məktub göndər
+autoblocker|Avtomatik olaraq bloklanmısınız. Çünki, qısa müddət əvvəl sizin IP-ünvanınız "[[User:~{0}\u007C~{0}]]" tərəfindən istifadə edilmişdir.\n~{0} adlı istifadəçinin bloklanma səbəbi: "~{1}"
+blocklogpage|Bloklama qeydləri
+blocklog-showlog|Bu istifadəçi daha əvvəl bloklanmışdır. Bloklama gündəliyi referans üçün aşağıda göstərilib:
+blocklog-showsuppresslog|Bu istifadəçi daha əvvəl bloklanmışdır. Bloklama gündəliyi referans üçün aşağıda göstərilib:
+blocklogentry|tərəfindən [[~{0}]] bloklandı, blok müddəti: ~{1} ~{2}
+reblock-logentry|[[~{0}]] üçün bloklama parametrlərini, başa çatma tarixi ~{1} ~{2} olmaqla, dəyişdirdi
+blocklogtext|İstifadəçilərin bloklanması və blokun götürülməsi siyahısı.\nAvtomatik bloklanmış IP-ünvanlar burada göstərilmir.\nHazırkı [[Special:BlockList\u007Cqadağaların və bloklamaların siyahısına bax]].
+unblocklogentry|~{0} üzərindəki blok götürüldü
+block-log-flags-anononly|yalnız qeydiyyatsız istifadəçilər
+block-log-flags-nocreate|yeni hesab yaratma bloklanıb
+block-log-flags-noautoblock|avtobloklama qeyri-mümkündür
+block-log-flags-noemail|E-mail bloklanıb
+block-log-flags-nousertalk|Müzakirə səhifəsini redaktə edə bilməz.
+block-log-flags-angry-autoblock|Avtoblok qüvvədədir
+block-log-flags-hiddenname|İstifadəçi adı gizli
+range_block_disabled|İdarəçilərə diapazonu bloklamaq qadağandır.
+ipb_expiry_invalid|Bitmə vaxtı səhvdir
+ipb_expiry_temp|Gizli istifadəçi adı bloklamaları müddətsiz olmalıdır.
+ipb_hide_invalid|Bu istifadəçi hesabının gizlədilməsi mümkün deyil, onun töhfəsi {{PLURAL:~{0}\u007Cbir redaktədən\u007C~{0} redaktədən}} çoxdur.
+ipb_already_blocked|"~{0}" artıq bloklanıb
+ipb-needreblock|~{0} artıq bloklanıb.\nBloklama şərtlərini dəyişmək istəyirsiniz?
+ipb-otherblocks-header|Başqa {{PLURAL:~{0}\u007Cbloklama\u007Cbloklamalar}}
+unblock-hideuser|İstifadəçi adı gizli olduğu üçün, bi bloku götürə bilməzsiniz.
+ipb_cant_unblock|Xəta: Bloklama IDsi ~{0} tapılmadı. Bloklamanın götürülməsi mümkündür.
+ip_range_invalid|Yanlış IP
+proxyblocker|Proksi bloklayıcı
+sorbs|DNSBL
+lockdb|Verilənlər bazasını blokla
+unlockdb|Verilənlər bazasından bloku götür
+lockconfirm|Bəli, mən həqiqətən verilənlər bazasının bağlamaq istəyirəm.
+unlockconfirm|Bəli, mən həqiqətən verilənlər bazasının blokunu açmaq istəyirəm.
+lockbtn|Verilənlər bazasını blokla
+unlockbtn|Verilənlər bazasından bloku götür
+lockdbsuccesssub|Verilənlər bazası bloklanıb
+unlockdbsuccesssub|Bloklanma verilənlər bazası silinib
+unlockdbsuccesstext|Verilənlər bazası bağlanmış aola bilər.
+databasenotlocked|Verilənlər bazası bloklanmayıb.
+lockedbyandtime|(by {{GENDER:~{0}\u007C~{0}}} on ~{1} at ~{2})
+move-page|Dəyişdir ~{0}
+move-page-legend|Səhifənin adını dəyiş
+movepagetext|Aşağıdakı formadan istifədə etməklə səhifənin adını və bütün tarixçəsini yeni başlığa dəyişəcəksiniz.\nƏvvəlki başlıq yeni başlığa yönləndirmə səhifəsinə çevriləcək.\nKöhnə səhifəyə keçidləri avtomatik olaraq dəyişə bilərsiniz.\nBunu etməsəniz, zəhmət olmasa, [[Special:DoubleRedirects\u007Ctəkrarlanan]] və ya [[Special:BrokenRedirects\u007Cqırılmış istiqamətləndirmələri]] yoxlamağı unutmayın.\nKeçidlərin lazımi yerə istiqamətləndirilməsini təmin etmək sizin məsuliyyətinizdədir.\n\nNəzərə alın ki, hədəflədiyiniz adda bir səhifə artıq mövcuddursa, addəyişmə <strong>baş tutmayacaq</strong>. Lakin həmin səhifənin boş olması, istiqamətləndirmə səhifəsi olması və redaktə tarixçəsinin olmaması halları istisnadır. Bu o deməkdir ki, səhvən adını dəyişdiyiniz səhifələri geri qaytara bilər, amma artıq mövcud olan səhifənin üzərinə başqa səhifə yaza bilməzsiniz.\n\n<strong>XƏBƏRDARLIQ!</strong>\nPopulyar səhifələrin adlarının dəyişdirilməsi əsaslı və gözlənilməz nəticələrə səbəb ola bilər. Ona görə də bu dəyişikliyi yerinə yetirməzdən əvvəl, bunun mümkün nəticələrini başa düşdüyünüzdən əmin olun.
+movepagetalktext|Uyğun müzakirə səhifəsi avtomatik hərəkət edəcək '''əgər:'''\n* boş olmayan müzakirə səhifəsi yeni adla artıq mövcuddursa, və ya\n* Siz bayrağı aşağıdan götürsəniz.\n\nHəmin hallarda , ehtiyac yaranarsa siz səhifələri əllə birləşdirmək məcburiyyətində qalacaqsınız
+movearticle|Səhifənin adını dəyişdir
+movenotallowed|Siz səhifələrin adını dəyişə bilməzsiniz.
+movenotallowedfile|Siz faylların adını dəyişə bilməzsiniz.
+cant-move-user-page|İstifadəçi səhifələrinin adını dəyişə bilməzsiniz (başlıqlardan başqa).
+newtitle|Yeni başlıq
+move-watch|Bu səhifəni izlə
+movepagebtn|Səhifənin adını dəyiş
+pagemovedsub|Yerdəyişmə edilmişdir
+movepage-moved|'''"~{0}" səhifəsi "~{1}" səhifəsinə yerləşdirilmişdir'''
+movepage-moved-redirect|Yönləndirmə yaradıldı.
+movepage-moved-noredirect|Yönləndirmənin yaradılmasının qarşııs alındı.
+articleexists|Bu adda səhifə artıq mövcuddur və ya sizin seçdiyiniz ad uyğun deyil.\nZəhmət olmasa başqa ad seçin.
+movetalk|Bu səhifənin müzakirə səhifəsinin də adını dəyişdir.
+move-subpages|Yarımsəhifələri köçür (~{0}-ə qədər)
+move-talk-subpages|Müzakirə səhifəsinin alt səhifələrinin adını dəyiş (~{0}-ə qədər)
+movepage-page-moved|~{0} səhifəsi ~{1} səhifəsinə köçürülüb.
+movepage-page-unmoved|~{0} səhifəsi ~{1} səhifəsinə köçürülə bilinmir.
+movelogpage|Yerdəyişmə qeydləri
+movesubpage|{{PLURAL:~{0}\u007CAlt səhifə\u007CAlt səhifələr}}
+movesubpagetext|Bu səhifənin aşağıda göstərilən ~{0} {{PLURAL:~{0}\u007Calt səhifəsi\u007Calt səhifəsi}} var.
+movenosubpage|Bu səhifənin altsəhifəsi yoxdur.
+movereason|Səbəb:
+revertmove|Əvvəlki vəziyyətinə
+delete_and_move|Sil və apar
+delete_and_move_text|==Hazırki məqalənin silinməsi lazımdır==\n\n"[[~{0}]]" məqaləsi mövcuddur. Bu dəyişikliyin yerinə yetirilə bilməsi üçün həmin məqalənin silinməsini istəyirsinizmi?
+delete_and_move_confirm|Bəli, səhifəni sil
+delete_and_move_reason|[[~{0}]] Ad dəyişməyə yer açmaq üçün silinmişdir
+selfmove|Səhifənin hazırkı adı ilə dəyişmək istənilən ad eynidir. Bu əməliyyat yerinə yetirilə bilməz.
+immobile-source-namespace|"~{0}" ad aralığında səhifə adları dəyişmir.
+immobile-target-namespace|Səhilərin "~{0}" ad aralığına daşınması qeyri-mümkündür
+immobile-target-namespace-iw|İntervikilər səhifə adının dəyişməsi üçün əsas ola bilməz.
+immobile-source-page|Bu səhifənin adı dəyişdirilə bilməz.
+immobile-target-page|Bu hədəf başlığına daşınmır.
+bad-target-model|İstənilən hədəf fərqli bir məzmun modeli istifadə edir. ~{0} modelindən ~{1} modelinə çevrilmir.
+imageinvalidfilename|Seçilmiş fayl adı keçərsizdir.
+protectedpagemovewarning|'''Xəbərdarlıq:''' Bu səhifə mühafizə edildiyi üçün onun adını yalnız idarəçilər dəyişə bilərlər.
+export|Səhifələri ixrac et
+exportcuronly|Bütün tarixçəni deyil, yalnız hal-hazırkı versiyanı daxil et
+export-submit|İxrac
+export-addcattext|Səhifələri bu kateqoriyadan əlavə et:
+export-addcat|Əlavə et
+export-addnstext|Səhifələri adlar fəzasından əlavə et:
+export-addns|Əlavə et
+export-download|Faylı qeyd et
+export-templates|Şablonları daxil et
+allmessages|Sistem məlumatları
+allmessagesname|Ad
+allmessagesdefault|İlkin mətn
+allmessagescurrent|İndiki mətn
+allmessagestext|Bu MediaWiki-də olan sistem mesajlarının siyahısıdır. Əgər MediaWiki-ni lokallaşdırmaq işində kömək etmək isəyirsinizsə, lütfən [https://www.mediawiki.org/wiki/Special:MyLanguage/Localisation MediaWiki Localisation] və [//translatewiki.net translatewiki.net]-ə baş çəkin.
+allmessages-filter-legend|Filtr
+allmessages-filter-unmodified|Dəyişdirilməmiş
+allmessages-filter-all|Hamısı
+allmessages-filter-modified|Dəyişdirilmiş
+allmessages-language|Dil:
+allmessages-filter-submit|Keç
+filemissing|Şəkil gözlənilir
+thumbnail_error|Kiçik şəkil yaratma xətası: ~{0}
+djvu_page_error|DjVu səhifəsi əlçatmazdır
+djvu_no_xml|DjVu üçün XML faylı almaq mümkün deyil.
+thumbnail_image-missing|Belə görünür ki, ~{0} faylı yoxdur
+import|Səhifələri idxal et
+importinterwiki|Vikilərarası çıxarma
+import-interwiki-history|Səhifənin dəyişmə tarixçələrinin hamısını köçür
+import-interwiki-templates|Bütün şablonlarla birlikdə
+import-interwiki-submit|İdxal
+import-upload-filename|Fayl adı:
+import-comment|Şərh:
+importstart|Çıxarılacaq səhifələr...
+import-revision-count|~{0} {{PLURAL:~{0}\u007Crevision\u007Cdəyişiklik}}
+importnopages|Çıxarılacaq səhifə yoxdur.
+importfailed|Uğursuz çıxarış: <nowiki>~{0}</nowiki>
+importcantopen|Çıxarılacaq fayl açılmadı
+importbadinterwiki|Yanlış interviki keçidi
+importsuccess|Çıxarma başa çatdı!
+import-noarticle|Çıxarılacaq səhifə yoxdur!
+xml-error-string|~{0} ~{1} sətrində, ~{2} sütünunda (~{3} bayt): ~{4}
+import-upload|XML-veriləni yüklə
+import-token-mismatch|Seans məlumatlarının itirilməsi. Lütfən, yenidən cəhd edin.
+import-invalid-interwiki|Göstərilən vikidən köçürmək mümkün deyil
+import-error-edit|"~{0}" səhifəsi idxal edilmədi, çünki sizin onu dəyişmək səlahiyyətiniz yoxdur.
+import-error-create|"~{0}" səhifəsi idxal edilmədi, çünki sizin onu yaratmaq səlahiyyətiniz yoxdur.
+importlogpage|Çıxarılma gündəliyi
+importlogpagetext|Səhifələrin idarəçilər tərəfindən digər vikilərdən dəyişiklik tarixçəsi ilə birlikdə köçürülməsi
+import-logentry-upload-detail|~{0} {{PLURAL:~{0}\u007Cdəyişiklik\u007Cdəyişiklik}} idxal edildi.
+import-logentry-interwiki-detail|~{1} vikidən ~{0} {{PLURAL:~{0}\u007Cdəyişiklik\u007Cdəyişiklik}} idxal edildi
+tooltip-pt-userpage|İstifadəçi səhifəniz
+tooltip-pt-anonuserpage|The user page for the ip you
+tooltip-pt-mytalk|Danışıq səhifəm
+tooltip-pt-anontalk|Bu IP ünvanından redaktə olunmuş danışıqlar
+tooltip-pt-preferences|Mənim nizamlamalarım
+tooltip-pt-watchlist|İzləməyə götürdüyüm səhifələr
+tooltip-pt-mycontris|Etdiyim dəyişikliklərin siyahısı
+tooltip-pt-login|Daxil olmanız tövsiyə olunur, amma bu məcburi tələb deyil.
+tooltip-pt-logout|Sistemdən çıx
+tooltip-ca-talk|Məqalə haqqındə müzakirə edib, münasibətivi bildir
+tooltip-ca-edit|Bu səhifəni redaktə edə bilərsiniz. Lütfən əvvəlcə sınaq gostərişi edin.
+tooltip-ca-addsection|Yeni bölmə yarat
+tooltip-ca-viewsource|Bu səhifə dəyişikliklərdən mühafizə olunur. Amma siz onun mətninə baxa və mətnin surətini köçürə bilərsiniz.
+tooltip-ca-history|Bu səhifənin keçmiş nüsxələri.
+tooltip-ca-protect|Bu səhifəni mühafizə et
+tooltip-ca-unprotect|Bu səhifənin mühafizəsini kənarlaşdır
+tooltip-ca-delete|Bu səhifəni sil
+tooltip-ca-undelete|Bu səhifəni silinmədən əvvəlki halına qaytarın
+tooltip-ca-move|Səhifənin adını dəyiş
+tooltip-ca-watch|Bu səhifəni izlə
+tooltip-ca-unwatch|Bu səhifənin izlənməsini bitir
+tooltip-search|{{SITENAME}} səhifəsində axtar
+tooltip-search-go|Əgər varsa, eyni adı daşıyan səhifəyə keç
+tooltip-search-fulltext|Bu mətnin olduğu səhifələri axtar
+tooltip-p-logo|Ana səhifə
+tooltip-n-mainpage|Ana səhifəni ziyarət edin
+tooltip-n-mainpage-description|Ana Səhifəyə keç
+tooltip-n-portal|Layihə haqqında, nələr edəbilərsiniz, axtardıqlarınızı harda tapmaq olar
+tooltip-n-currentevents|Gündəlik xəbərlər ilə əlaqəli bilgilər
+tooltip-n-recentchanges|Vikidəki son dəyişikliklər siyahısı.
+tooltip-n-randompage|Təsadüfi məqaləyə keç
+tooltip-n-help|Yardım almaq üçün.
+tooltip-t-whatlinkshere|Vikidə bu məqaləyə bağlantılar
+tooltip-t-recentchangeslinked|Bu məqaləyə aid başqa səhifələrdə yeni dəyişikliklər
+tooltip-feed-rss|Bu səhifə üçün RSS yayımı
+tooltip-feed-atom|Bu səhifə üçün Atom yayımı
+tooltip-t-contributions|Bu istifadəçinin redaktə etdiyi səhifələrin siyahısı
+tooltip-t-emailuser|Bu istifadəçiyə e-məktub yolla
+tooltip-t-upload|Yeni şəkil və ya multimedia faylı yüklə
+tooltip-t-specialpages|Xüsusi səhifələrin siyahısı
+tooltip-t-print|Səhifənin çap versiyası
+tooltip-t-permalink|Səhifənin bu versiyasına daimi keçid
+tooltip-ca-nstab-main|Məqalənin məzmununu göstər
+tooltip-ca-nstab-user|İstifadəçi səhifəsinə bax
+tooltip-ca-nstab-media|Media-fayl
+tooltip-ca-nstab-special|Bu xüsusi səhifə olduğu üçün redaktə edilə bilməz
+tooltip-ca-nstab-project|Layihə səhifəsinə bax
+tooltip-ca-nstab-image|Faylın səhifəsinə bax
+tooltip-ca-nstab-mediawiki|Sistem məlumatına bax
+tooltip-ca-nstab-template|Şablona bax
+tooltip-ca-nstab-help|Kömək səhifəsi
+tooltip-ca-nstab-category|Kateqoriya səhifəsini göstər
+tooltip-minoredit|Bu dəyişikliyi kiçik redaktə kimi qeyd et
+tooltip-save|Dəyişiklikləri qeyd et [alt-s]
+tooltip-preview|Səhifəni qeyd etməzdən əvvəl bunu istifadə edib dəyişikliklərinizə baxın!
+tooltip-diff|Məqalədə etdiyiniz dəyişikliklərə baxın
+tooltip-compareselectedversions|Səhifənin seçilmiş iki versiyası arasındakı fərqi göstər
+tooltip-watch|Bu səhifəni izlədiyiniz səhifələrə əlavə et [alt-w]
+tooltip-watchlistedit-normal-submit|Başlığın silinməsi
+tooltip-watchlistedit-raw-submit|İzlədiyim səhifələrin siyahısının yenilənməsi
+tooltip-recreate|Əvvəl silinməsinə baxmayaraq səhifəni bərpa et
+tooltip-upload|Yükləməni başlat
+tooltip-rollback|Sonuncu istifadəçi tərəfindən edilmiş bütün dəyişiklikləri bir dəfəyə geri qaytar
+tooltip-undo|Edilmiş dəyişikliyi geri qaytar və geri qaytarma səbəbini qeyd etmək üçün sınaq göstərişini aç
+tooltip-preferences-save|Nizamlamaları saxla
+tooltip-summary|Qısa rezyume daxil edin
+common.css|/* Burada yerləşən CSS bütün skinlərə tətbiq olunur */
+group-autoconfirmed.css|/* Burada yerləşən CSS yalnız avtotəsdiqlənmiş istifadəçilərə şamil olunur */
+group-bot.css|/* Burada yerləşən CSS yalnız botlara şamil olunur */
+group-sysop.css|/* Burada yerləşən CSS yalnız idarəçilərə şamil olunur */
+group-bureaucrat.css|/* Burada yerləşən CSS yalnız bürokratlara şamil olunur */
+common.js|/* Burada istifadəçilərin hamısı üçün bütün səhifələrdə istənilən JavaScript yüklənəcək */
+group-autoconfirmed.js|/* Burada istənilən JavaScript yalnız avtotəsdiqlənmiş istifadəçilər üçün yüklənəcək */
+group-bot.js|/* Burada istənilən JavaScript yalnız botlar üçün yüklənəcək */
+group-sysop.js|/* Burada istənilən JavaScript yalnız idarəçilər üçün yüklənəcək */
+group-bureaucrat.js|/* Burada istənilən JavaScript yalnız bürokratlar üçün yüklənəcək */
+anonymous|{{SITENAME}} saytının anonim {{PLURAL:~{0}\u007Cistifadəçisi\u007Cistifadəçiləri}}
+siteuser|{{SITENAME}} istifadəçisi ~{0}
+anonuser|{{SITENAME}} anonim istifadəçisi ~{0}
+othercontribs|~{0}-in işinə əsaslanıb.
+others|digərləri
+siteusers|{{SITENAME}} {{PLURAL:~{1}\u007Cuser\u007Cistifadəçi}} ~{0}
+anonusers|{{SITENAME}} anonim {{PLURAL:~{1}\u007Cuser\u007Cistifadəçi}} ~{0}
+creditspage|Səhifə kreditleri
+spamprotectiontitle|Spam qoruma süzgəci
+spambot_username|MediaViki spam təmizləməsi
+simpleantispam-label|Anti-spam yoxlanılması.\nBuranı <strong>DOLDURMAYIN</strong>!
+pageinfo-title|"~{0}" üçün məlumat
+pageinfo-header-basic|Əsas məlumatlar
+pageinfo-header-edits|Redaktə tarixçəsi
+pageinfo-header-restrictions|Səhifə mühafizəsi
+pageinfo-header-properties|Səhifə xüsusiyyətləri
+pageinfo-display-title|Göstərilən başlıq
+pageinfo-default-sort|Susmaya görə çeşidləmə açarı
+pageinfo-length|Səhifənin ölçüsü (baytla)
+pageinfo-article-id|Səhifə ID-si
+pageinfo-language|Səhifənin dili
+pageinfo-content-model|Səhifə məzmunu modeli
+pageinfo-robot-policy|Robotlar tərəfindən indeksləşmə
+pageinfo-robot-index|İcazə verilir
+pageinfo-robot-noindex|İcazə verilmədi
+pageinfo-watchers|Səhifəyə baxışların sayı
+pageinfo-few-watchers|~{0} {{PLURAL:~{0}\u007Cizləyicidən\u007Cizləyicilərdən}} az
+pageinfo-firstuser|Səhifəni yaradan
+pageinfo-firsttime|Səhifənin yaranma tarixi
+pageinfo-lastuser|Sonuncu redaktor
+pageinfo-lasttime|Sonuncu redaktənin tarixi
+pageinfo-edits|Redaktələrin ümumi sayı
+pageinfo-authors|Fərqli müəlliflərin ümumi sayı
+pageinfo-recent-edits|Sonuncu redaktə sayı (~{0} ərzində)
+pageinfo-recent-authors|Sonuncu əhəmiyyətli dəyişiklik etmiş müəlliflər
+pageinfo-magic-words|Sehrli {{PLURAL:~{0}\u007C1=söz\u007Csözlər}} (~{0})
+pageinfo-templates|{{PLURAL:~{0}\u007CŞablon\u007CŞablonlar}} (~{0})
+pageinfo-toolboxlink|Əsas məlumatlar
+pageinfo-redirectsto|İstiqamətləndirmə
+pageinfo-redirectsto-info|məlumat
+pageinfo-contentpage|Məzmunlu səhifə kimi sayılır
+pageinfo-contentpage-yes|Bəli
+pageinfo-protect-cascading|Kaskad mühafizə burada qoşulub
+pageinfo-category-pages|Səhifələrin sayı
+pageinfo-category-subcats|Altkateqoriyaların sayı
+pageinfo-category-files|Faylların sayı
+markaspatrolleddiff|Yoxlanıldı
+markaspatrolledtext|Səhifəni patrullanmış kimi işarələ
+markedaspatrolled|Yoxlanıldı
+markedaspatrolledtext|[[:~{0}]] üçün seçilmiş versiya gözdən keçirilərək işarələndi.
+rcpatroldisabled|Son dəyişikliklərin patrullanması qadağandır
+rcpatroldisabledtext|Son dəyişikliklərin Yoxlanılması hal-hazırda mümkün deyil.
+markedaspatrollederror|Yoxlanmadı
+markedaspatrollederror-noautopatrol|Öz dəyişikliklərinizi yoxlayıb işarələyə bilməzsiniz.
+patrol-log-page|Patrul gündəliyi
+patrol-log-header|Bu yoxlanmış dəyişikliklərin gündəliyidir.
+log-show-hide-patrol|~{0} patrul gündəliyi
+deletedrevision|Köhnə versiyaları silindi ~{0}.
+filedeleteerror-short|Fayl silinərkən xəta: ~{0}
+filedeleteerror-long|Fayl silinərkən üzə çıxan xətalar:\n\n~{0}
+filedelete-missing|"~{0}" faylı mövcud olmadığından silinə bilinmir.
+filedelete-old-unregistered|Göstərilən faylın "~{0}" versiyası verilənlər bazasında mövcud deyil.
+filedelete-current-unregistered|Göstərilən "~{0}" faylı verilənlər bazasında yoxdur.
+filedelete-archive-read-only|"~{0}" kataloqunun arxivi veb-server yazıları üçün qapalıdır.
+previousdiff|← Əvvəlki redaktə
+nextdiff|Sonrakı redaktə →
+imagemaxsize|Şəkilin maksimal tutumu:<br />''(faylın təsviri səhifələri üçün)''
+thumbsize|Kiçik ölçü:
+widthheight|~{0} × ~{1}
+widthheightpage|~{0} × ~{1}, ~{2} {{PLURAL:~{2}\u007Csəhifə\u007Csəhifələr}}
+file-info|faylın ölçüsü: ~{0}, MIME tipi: ~{1}
+file-info-size|~{0} × ~{1} piksel, fayl həcmi: ~{2}, MIME növü: ~{3}
+file-info-size-pages|~{0} × ~{1} piksel, faylın ölçüsü: ~{2}, MIME-tipi: ~{3}, ~{4} {{PLURAL:~{4}\u007Csəhifə\u007Csəhifələr}}
+file-nohires|Daha dəqiq versiyası yoxdur.
+svg-long-desc|SVG fayl, nominal olaraq ~{0} × ~{1} piksel, faylın ölçüsü: ~{2}
+show-big-image|Faylın əsli
+show-big-image-preview|Sınaq göstərişi ölçüsü: ~{0}.
+show-big-image-other|Dig'r {{PLURAL:~{1}\u007Cnəticə\u007Cnəticələr}}: ~{0}.
+show-big-image-size|~{0} × ~{1} piksel
+file-info-gif-looped|ilmələnib
+file-info-gif-frames|~{0} {{PLURAL:~{0}\u007Cframe\u007Cçərçivə}}
+file-info-png-looped|ilmələnib
+file-info-png-frames|~{0} {{PLURAL:~{0}\u007Cframe\u007Cçərçivə}}
+file-no-thumb-animation|'''Qeyd. Texniki səbəblərdən bu fayl tipinin animasiyası mümkün deyil.'''
+file-no-thumb-animation-gif|'''Qeyd. Yüksək ayırdetmə dəqiqliyinə malik belə GIF-təsvirlərinin animasiyası texniki səbəblərdən mümkün deyil.'''
+newimages|Yeni faylların siyahısı
+newimages-legend|Filtrlər
+newimages-label|Faylın (və ya onun bir hissəsinin) adı:
+noimages|Heç nəyi görməmək.
+ilsubmit|Axtar
+bydate|tarixə görə
+video-dims|~{0}, ~{1}×~{2}
+seconds-abbrev|~{0}san
+minutes-abbrev|~{0}d
+hours-abbrev|~{0}saat
+seconds|{{PLURAL:~{0}\u007C~{0} saniyə\u007C~{0} saniyə}}
+minutes|{{PLURAL:~{0}\u007C~{0} dəqiqə\u007C~{0} dəqiqə}}
+hours|{{PLURAL:~{0}\u007C~{0} saat\u007C~{0} saat}}
+days|{{PLURAL:~{0}\u007C~{0} gün\u007C~{0} gün}}
+bad_image_list|Format bu şəkildə olmalıdır:\n\nYalnız siyahı bəndləri (* işarəsi ilə başlayan sətirlər) nəzərə alınır.\nSətirdəki ilk keçid, əlavə olunması qadağan olunmuş şəkilə keçid olmalıdır.\nHəmin sətirdəki növbəti keçidlər istisna hesab olunur. Məsələn, fayl məqalədə sətrin içində görünə bilər.
+variantname-zh-hans|hans
+variantname-zh-hant|hant
+variantname-zh-cn|cn
+variantname-zh-tw|tw
+variantname-zh-hk|hk
+variantname-zh-mo|mo
+variantname-zh-sg|sg
+variantname-zh|zh
+variantname-gan-hans|hans
+variantname-gan-hant|hant
+variantname-gan|gan
+variantname-kk-tr|kk-tr
+variantname-kk-cn|kk-cn
+variantname-ku-arab|ku-Arab
+metadata|Metaməlumatlar
+metadata-help|Bu faylda fotoaparat və ya skanerlə əlavə olunmuş məlumatlar var. Əgər fayl sonradan redaktə olunubsa, bəzi parametrlər bu şəkildə göstərilənlərdən fərqli ola bilər.
+metadata-expand|Ətraflı məlumatları göstər
+metadata-collapse|Ətraflı məlumatları gizlə
+metadata-fields|Bu səhifədə sıralanan EXIF metadata sahələri şəkil görünüş səhifələrində metadata cədvəli çökdüyündə istifadə edilir. Digərləri varsayılan olaraq gizlənəcəkdir.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|Genişlik
+exif-imagelength|Hündürlük
+exif-compression|Sıxılmamış
+exif-photometricinterpretation|Rəng modeli
+exif-orientation|Orientasiya
+exif-samplesperpixel|Rəng komponentlərinin sayı
+exif-ycbcrpositioning|Y və C komponetlərinə görə yerləşmə sırası
+exif-xresolution|Üfiqi xətt
+exif-yresolution|Şaquli xətt
+exif-rowsperstrip|Hər blokdakı sətirlərin sayı
+exif-jpeginterchangeformatlength|JPEG məlumat bazasının baytları
+exif-datetime|Faylın dəyişməsi tarixi və vaxtı
+exif-imagedescription|Şəkil başlığı
+exif-make|Kamera istehsalçısı
+exif-model|Kamera modeli
+exif-software|Proqram təminatı
+exif-artist|Müəllif
+exif-copyright|Sahibinin müəlliflik hüququ
+exif-exifversion|Exif versiyası
+exif-colorspace|Rəng sahəsi
+exif-pixelydimension|Şəkilin eni
+exif-pixelxdimension|Şəkilin hündürlüyü
+exif-usercomment|İstifadəçi şərhi
+exif-datetimeoriginal|Orijinal tarix və vaxt
+exif-datetimedigitized|Tarix və vaxt rəqəmləşdirilir
+exif-exposuretime-format|~{0} saniyə (~{1})
+exif-fnumber|F nömrəsi
+exif-exposureprogram|Ekspozisiya proqramı
+exif-spectralsensitivity|Spektral həssaslıq
+exif-isospeedratings|ISO sürət reytinqi
+exif-shutterspeedvalue|APEX shutter speed
+exif-aperturevalue|Obyektiv gözü
+exif-brightnessvalue|Parlaqlıq
+exif-exposurebiasvalue|APEX exposure bias
+exif-subjectdistance|Obyektə qədər məsafə
+exif-lightsource|İşıq mənbəsi
+exif-flash|Flaş
+exif-focallength|Fokus məsafəsi
+exif-subjectarea|Subyekt sahəsi
+exif-flashenergy|Flaş enerjisi
+exif-subjectlocation|Subyekt yeri
+exif-filesource|Fayl mənbəsi
+exif-scenetype|Səhnə tipi
+exif-whitebalance|Ağ balansı
+exif-gaincontrol|Səhnə idarəsi
+exif-contrast|Kontrast
+exif-saturation|Doymuşluq
+exif-sharpness|Kəskinlik
+exif-gpsversionid|GPS etiket versiyası
+exif-gpslatituderef|Şimal və ya cənub en dairəsi
+exif-gpslatitude|En dairəsi
+exif-gpslongituderef|Şəq və ya qərb uzunluq dairəsi
+exif-gpslongitude|Uzunluq dairəsi
+exif-gpsaltitude|Yüksəklik
+exif-gpstimestamp|GPS vaxtı (atom saatı)
+exif-gpsstatus|Statusu qəbul edən
+exif-gpsmeasuremode|Ölçmə üsulu
+exif-gpsdop|Ölçünün dəqiqliyi
+exif-gpsspeedref|Sürət uniti
+exif-gpsspeed|GPS qəbuledicinin sürəti
+exif-gpstrack|İdarəetmə mexanizmi
+exif-gpsimgdirection|Şəklin istiqaməti
+exif-gpsdestlatitude|En dairəsinin təyin olunması
+exif-gpsdestlongitude|Uzunluq dairəsinin təyin olunması
+exif-gpsdestbearing|Obyektin pelenqi
+exif-gpsdestdistance|Məsafə
+exif-gpsprocessingmethod|GPS prosesinin adı
+exif-gpsareainformation|GPS sahənin adı
+exif-gpsdatestamp|Zaman
+exif-gpsdifferential|GPS diferensial korreksiya
+exif-jpegfilecomment| JPEG şəkil şərhi
+exif-keywords|Açar sözlər
+exif-worldregioncreated|Şəklin çəkildiyi dünya regionu
+exif-countrycreated|Şəklin çəkildiyi ölkə
+exif-countrycodecreated|Şəklin çəkildiyi ölkənin kodu
+exif-provinceorstatecreated|Şəklin çəkildiyi əyalət, yaxud ştat
+exif-citycreated|Şəklin çəkildiyi şəhər
+exif-sublocationcreated|Şəklin çəkildiyi şəhər rayonu
+exif-worldregiondest|Təsvir edilmiş dünya bölgəsi
+exif-countrydest|Təsvir olunmuş ölkə
+exif-countrycodedest|Təsvir edilmiş ölkənin kodu
+exif-provinceorstatedest|Təsvir edilmiş bölgə yaxud ştat
+exif-citydest|Təsvir edilmiş şəhər
+exif-sublocationdest|Təsvie edilmiş şəhər bölgəsi
+exif-objectname|Qısa başlıq
+exif-specialinstructions|Xüsusi instruksiyalar
+exif-headline|Başlıq
+exif-credit|Təmin edici
+exif-source|Mənbə
+exif-editstatus|Şəklin redaktə statusu
+exif-urgency|Zərurilik
+exif-fixtureidentifier|Sütun adı
+exif-locationdest|Təsvir edilmiş ərazi
+exif-locationdestcode|Təsvir edilmiş yerin kodu
+exif-objectcycle|Şəklin nəzərdə tutulduğu sutka hissəsi
+exif-contact|Əlaqə məlumatı
+exif-writer|Yazıçı
+exif-languagecode|Dil
+exif-iimversion|IIM versiya
+exif-iimcategory|Kateqoriya
+exif-iimsupplementalcategory|Əlavə kateqoriyalar
+exif-datetimeexpires|Sonra işlətmə
+exif-datetimereleased|Çıxış tarixi
+exif-identifier|İdentifikator
+exif-lens|İstifadə olunmuş obyektiv
+exif-serialnumber|Kameranın serial nömrəsi
+exif-cameraownername|Kameranın sahibi
+exif-label|Nişan
+exif-nickname|Şəklin qeyri-rəsmi adı
+exif-rating|Qiymət (5 üzərində)
+exif-copyrighted|Statusun müəlliflik hüququ
+exif-copyrightowner|Sahibinin müəlliflik hüququ
+exif-usageterms|İstifadə qaydası
+exif-webstatement|İnternetdə müəlliflik hüquqları qaydaları
+exif-licenseurl|Müəllif hüququ lisenziyası üçün URL
+exif-morepermissionsurl|Alternativ lisenziya məlumatı
+exif-pngfilecomment|PNG şəkil şərhi
+exif-disclaimer|Məsuliyyətdən imtina
+exif-contentwarning|Mətn xəbərdarlığı
+exif-giffilecomment|GIF şəkil şərhi
+exif-intellectualgenre|Obyektin tipi
+exif-subjectnewscode|Mövzunun kodu
+exif-scenecode|IPTC səhnə kodu
+exif-event|təsvir edilmiş hadisə
+exif-organisationinimage|Təsvir edilmiş təşkilat
+exif-personinimage|Təsvir edilmiş şəxs
+exif-compression-1|Sıxılmış
+exif-copyrighted-true|Müəlliflik hüququ ilə qorunur
+exif-copyrighted-false|Müəlliflik hüququ göstərilməyib
+exif-unknowndate|Naməlum tarix
+exif-orientation-1|Normal
+exif-orientation-2|Üfüqi çevrilib
+exif-orientation-3|180° döndərilib
+exif-orientation-4|Şaquli çevrilib
+exif-orientation-5|Saat əqrəbinin əksi istiqamətində 90° döndərilib və şaquli çevrilib
+exif-orientation-6|Saat əqrəbinin əksi istiqamətində 90° döndərilib
+exif-orientation-7|Saat əqrəbi istiqamətində 90° döndərilib və şaquli çevrilib
+exif-orientation-8|Saat əqrəbi istiqamətində 90° döndərilib
+exif-planarconfiguration-1|chunky format
+exif-planarconfiguration-2|planar format
+exif-colorspace-65535|Fotoşəkildə rəng seçimi edilməmişdir.
+exif-componentsconfiguration-0|mövcud deyil
+exif-exposureprogram-0|Tanınmadı
+exif-exposureprogram-1|Əl ilə
+exif-exposureprogram-2|Normal proqram
+exif-exposureprogram-3|Açıqlıq üstünlüyü
+exif-subjectdistance-value|~{0} metr
+exif-meteringmode-0|Naməlum
+exif-meteringmode-1|Orta
+exif-meteringmode-3|Nöqtəli
+exif-meteringmode-4|Multi-Spot
+exif-meteringmode-5|Dizaynlı
+exif-meteringmode-6|Qismi
+exif-meteringmode-255|Digər
+exif-lightsource-0|Naməlum
+exif-lightsource-1|Sübh
+exif-lightsource-2|Flüorosensiya
+exif-lightsource-4|Flaş
+exif-lightsource-9|Gözəl hava
+exif-lightsource-10|Buludlu hava
+exif-lightsource-11|Kölgə
+exif-lightsource-12|D tipli gündüz işığı lampası (5700 − 7100K)
+exif-lightsource-13|N tipli gündüz işığı lampası (4600 – 5400K)
+exif-lightsource-14|W tipli gündüz işığı lampası (3900 – 4500K)
+exif-lightsource-15|WW tipli gündüz işığı lampası (3200 – 3700K)
+exif-lightsource-17|A tipi standart işıq
+exif-lightsource-18|B tipi standart işıq
+exif-lightsource-19|C tipi standart işıq
+exif-lightsource-24|ISO studiya lampası
+exif-lightsource-255|Digər işıq mənbəyi
+exif-flash-fired-0|Flaş yandırılmadı
+exif-flash-fired-1|Flaş yandırıldı
+exif-flash-mode-3|avtomatik rejim
+exif-flash-function-1|Fləş bağlıdır
+exif-focalplaneresolutionunit-2|düymlər
+exif-sensingmethod-1|Tanınmadı
+exif-sensingmethod-2|Birkristallı matrisli rəngli sensor
+exif-sensingmethod-3|İkikristallı matrisli rəngli sensor
+exif-sensingmethod-4|Üçkristallı matrisli rəngli sensor
+exif-sensingmethod-5|Rəngin ardıcıl ölçülməsilə birlikdə matrisli sensor
+exif-sensingmethod-7|Üçrəngli xətti sensor
+exif-sensingmethod-8|Rəngin ardıcıl ölçülməsilə birlikdə xətti sensor
+exif-filesource-3|Rəqəmsal fotoapparat
+exif-scenetype-1|Foto-təsvir birbaşa çəkilmişdir
+exif-customrendered-0|Normal proses
+exif-customrendered-1|Xüsusi proses
+exif-exposuremode-0|Avtomatik ekspozisiya
+exif-exposuremode-1|Əl ekspozisiyası
+exif-exposuremode-2|Avtomatik breketinq
+exif-whitebalance-0|Bəyaz balansın avtomatik tənzimlənməsi
+exif-whitebalance-1|Bəyaz balansın əllə tənzimlənməsi
+exif-scenecapturetype-0|Standart
+exif-scenecapturetype-1|Mənzərə
+exif-scenecapturetype-2|Portret
+exif-scenecapturetype-3|Gecə görünüşü
+exif-gaincontrol-0|Heç biri
+exif-gaincontrol-1|Bir az artırma
+exif-gaincontrol-2|Kəskin artırma
+exif-gaincontrol-3| Bir az azaltma
+exif-gaincontrol-4|Kəskin azaltma
+exif-contrast-0|Normal
+exif-contrast-1|Yumşaq
+exif-contrast-2|Ağır
+exif-saturation-0|Normal
+exif-saturation-1|Aşağı doyma dərəcəsi
+exif-saturation-2|Yuxarı doyma dərəcəsi
+exif-sharpness-0|Normal
+exif-sharpness-1|Yumşaq
+exif-sharpness-2|Ağır
+exif-subjectdistancerange-0|Naməlum
+exif-subjectdistancerange-1|Makro
+exif-subjectdistancerange-2|Bağlı görünüş
+exif-subjectdistancerange-3|Uzaq məsafədən çəkiliş
+exif-gpslatitude-n|Şimal en dairəsi
+exif-gpslatitude-s|Cənub en dairəsi
+exif-gpslongitude-e|Qərb uzunluq dairəsi
+exif-gpslongitude-w|Şərq uzunluq dairəsi
+exif-gpsaltitude-above-sealevel|~{0} {{PLURAL:~{0}\u007Cmeter\u007Cmetr}} dəniz səviyyəsindən yüksəkdə
+exif-gpsaltitude-below-sealevel|~{0} {{PLURAL:~{0}\u007Cmeter\u007Cmetr}} dəniz səviyyəsindən aşağıda
+exif-gpsstatus-a|Ölçmə yekunlaşmayıb
+exif-gpsstatus-v|Verilənləri ötürmək üçün hazırdır
+exif-gpsmeasuremode-2|2-ölçülü koordinat
+exif-gpsmeasuremode-3|3-ölçülü koordinat
+exif-gpsspeed-k|km/saat
+exif-gpsspeed-m|Saatda mil
+exif-gpsspeed-n|Dəniz mili
+exif-gpsdestdistance-k|Kilometr
+exif-gpsdestdistance-m|Millər
+exif-gpsdestdistance-n|Dəniz mili
+exif-gpsdop-excellent|Əla (~{0})
+exif-gpsdop-good|Yaxşı (~{0})
+exif-gpsdop-moderate|Zəif (~{0})
+exif-gpsdop-fair|Ədalətli (~{0})
+exif-gpsdop-poor|Pis (~{0})
+exif-objectcycle-a|Ancaq səhər
+exif-objectcycle-p|Ancaq axşam
+exif-objectcycle-b|Gündüzlər və axşamlar
+exif-gpsdirection-t|Doğru istiqamət
+exif-gpsdirection-m|Maqnit istiqaməti
+exif-ycbcrpositioning-1|Mərkəzləşdirilmiş
+exif-ycbcrpositioning-2|Co-sited
+exif-dc-contributor|Həmmüəlliflər
+exif-dc-coverage|Mediyanın məkan və zaman çərçivəsi
+exif-dc-date|Tarix(lər)
+exif-dc-publisher|Naşir
+exif-dc-relation|Əlaqəli media
+exif-dc-rights|Hüquqlar
+exif-dc-source|İlkin media
+exif-dc-type|Medianın tipi
+exif-rating-rejected|Rədd edildi
+exif-isospeedratings-overflow|65535-dən böyükdür
+exif-iimcategory-ace|İncəsənət, mədəniyyət və əyləncə
+exif-iimcategory-clj|Kriminal və qanun
+exif-iimcategory-dis|Faciə və qəzalar
+exif-iimcategory-fin|İqtisaqdiyyat və biznes
+exif-iimcategory-edu|Təhsil
+exif-iimcategory-evn|Ətraf mühit
+exif-iimcategory-hth|Səhiyyə
+exif-iimcategory-hum|İnsan maraqları
+exif-iimcategory-lab|Əmək
+exif-iimcategory-lif|Həyat tərzi və əyləncə
+exif-iimcategory-pol|Siyasət
+exif-iimcategory-rel|Din və iman
+exif-iimcategory-sci|Elm və texnologiya
+exif-iimcategory-soi|Sosial məsələlər
+exif-iimcategory-spo|İdman
+exif-iimcategory-war|Müharibə, münaqişə və iğtişaşlar
+exif-iimcategory-wea|Hava
+exif-urgency-normal|Normal (~{0})
+exif-urgency-low|Aşağı (~{0})
+exif-urgency-high|Yüksək (~{0})
+exif-urgency-other|İstifadəçi tərəfindən müəyyən olunmuş birincilik (~{0})
+namespacesall|hamısı
+monthsall|hamısı
+confirmemail|E-məktubunu təsdiq et
+confirmemail_send|Təsdiq kodu göndər
+confirmemail_sent|Təsdiq e-məktubu göndərildi.
+confirmemail_invalid|Səhv təsdiqləmə kodu. Kodun vaxtı keçmiş ola bilər.
+confirmemail_needlogin|E-poçt ünvanınızın təsdiqlənməsi üçün ~{0} lazımdır.
+confirmemail_success|E-poçt ünvanınız indi təsdiq edildi. Siz indi [[Special:UserLogin\u007Chesab açaraq]] vikidən həzz ala bilərsiz.
+confirmemail_loggedin|E-məktubunuz indi təsdiq edildi.
+confirmemail_subject|{{SITENAME}} e-məktub təsdiq etmə
+confirmemail_invalidated|E-mail təsdiqlənməsi dayandırıldı
+invalidateemail|E-mail təsdiqlənməsindən imtina
+scarytranscludedisabled|[«Interwiki transcluding»dən çıxılmışdır]
+scarytranscludetoolong|[URL uzundur]
+deletedwhileediting|'''Diqqət!''' Bu səhifə siz redaktə etməyə başladıqdan sonra silinmişdir!
+recreate|Yeniləmək
+confirm_purge_button|OK
+confirm-purge-top|Bu səhifə keşdən (cache) silinsin?
+confirm-watch-button|OK
+confirm-unwatch-button|OK
+imgmultipageprev|&larr; əvvəlki səhifə
+imgmultipagenext|sonrakı səhifə &rarr;
+imgmultigo|Seç!
+imgmultigoto|~{0} səhifəyə get
+ascending_abbrev|artma sırasına görə
+descending_abbrev|azalma sırasına görə
+table_pager_next|Sonrakı səhifə
+table_pager_prev|Əvvəlki səhifə
+table_pager_first|İlk səhifə
+table_pager_last|Son səhifə
+table_pager_limit|Səhifədə ~{0} mövqe sərgilə
+table_pager_limit_label|Səhifədəki mövqelər:
+table_pager_limit_submit|Seç
+table_pager_empty|Nəticə yoxdur
+autosumm-blank|Səhifənin məzmunu silindi
+autosumm-replace|Səhifənin məzmunu '~{0}' yazısı ilə dəyişdirildi
+autoredircomment|[[~{0}]] səhifəsinə istiqamətləndirilir
+autosumm-new|Səhifəni '~{0}' ilə yarat
+watchlistedit-normal-title|İzlədiyim səhifələri redaktə et
+watchlistedit-normal-legend|İzləmə siyahısından başlıqların silinməsi
+watchlistedit-normal-submit|Başlığın silinməsi
+watchlistedit-normal-done|{{PLURAL:~{0}\u007C~{0} səhifə}} izləmə səhifələrinizdən silindi:
+watchlistedit-raw-title|Mətn kimi redaktə et
+watchlistedit-raw-legend|Mətn kimi redaktə et
+watchlistedit-raw-titles|Başlıqlar:
+watchlistedit-raw-submit|İzlədiyim səhifələrin siyahısının yenilənməsi
+watchlistedit-raw-done|İzləmə səhifələriniz qeyd olundu.
+watchlistedit-raw-added|{{PLURAL:~{0}\u007C1 title was\u007C~{0} başlıq}} əlavə edildi:
+watchlistedit-raw-removed|{{PLURAL:~{0}\u007C1 title was\u007C~{0} başlıq}} çıxarıldı:
+watchlisttools-clear|İzləmə siyahısını təmizlə
+watchlisttools-view|Siyahıdakı səhifələrdə edilən dəyişikliklər
+watchlisttools-edit|İzlədiyim səhifələri göstər və redaktə et
+watchlisttools-raw|Adi mətn kimi redaktə et
+signature|[[{{ns:user}}:~{0}\u007C~{1}]] ([[{{ns:user_talk}}:~{0}\u007Cmüzakirə]])
+duplicate-defaultsort|<strong>Diqqət:</strong> Susmaya görə "~{1}" çeşidləmə açarı susmaya görə əvvəlki "~{0}" çeşidləmə açarını inkar edir.
+version|Versiya
+version-extensions|NIzamlanmış genişlənmələr
+version-skins|Yüklənmiş üzlüklər
+version-specialpages|Xüsusi səhifələr
+version-parserhooks|Parser hooks
+version-variables|Dəyişkənlər
+version-antispam|Spam önləmə
+version-other|Digər
+version-hooks|Çəngəllər
+version-hook-name|Çəngəlin adı
+version-hook-subscribedby|Abunə olan
+version-version|(~{0})
+version-license|MediaViki lisenziyası
+version-ext-license|Lisenziya
+version-ext-colheader-version|Versiya
+version-ext-colheader-license|Lisenziya
+version-ext-colheader-credits|Müəlliflər
+version-poweredby-credits|Bu wiki '''[https://www.mediawiki.org/ MediaWiki]''' proqramı istifadə edilərək yaradılmışdır, müəlliflik © 2001-~{0} ~{1}.
+version-poweredby-others|digərləri
+version-software-product|Məhsul
+version-software-version|Versiya
+version-entrypoints-header-url|URL
+fileduplicatesearch|Dublikat fayl axtarışı
+fileduplicatesearch-legend|Dublikatı axtar
+fileduplicatesearch-filename|Fayl adı:
+fileduplicatesearch-submit|Axtar
+fileduplicatesearch-result-1|"~{0}" faylı hər hansı eyni dublikata malik deyil.
+fileduplicatesearch-result-n|"~{0}" faylı  ~{1} {{PLURAL:~{1}\u007Ceyni duplikata\u007Ceyni duplikatlara}} malikdir.
+fileduplicatesearch-noresults|"~{0}" adında fayl tapılmadı.
+specialpages|Xüsusi səhifələr
+specialpages-group-maintenance|Cari məruzələr
+specialpages-group-other|Digər xüsusi səhifələr
+specialpages-group-login|Daxil ol / hesab yarat
+specialpages-group-changes|Son dəyişikliklər və qeydlər
+specialpages-group-media|Media məruzələri və yükləmələr
+specialpages-group-users|İstifadəçilər və hüquqlar
+specialpages-group-highuse|Ən çox istifadə edilən səhifələr
+specialpages-group-pages|Səhifələrin siyahıları
+specialpages-group-pagetools|Səhifə alətləri
+specialpages-group-wiki|Məlumatlar və alətlər
+specialpages-group-redirects|Xüsusi istiqamətləndirmə səhifələri
+specialpages-group-spam|Spam alətləri
+blankpage|Boş səhifə
+intentionallyblankpage|Bu səhifə xüsusilə boşdur.
+external_image_whitelist| #Bu sətiri olduğu kimi saxlayın<pre>\n#Burada ardıcıl ifadələrin fraqmentlərini yerləşdirin (// simvolları arasında yerləşən hissələri).\n#Onlar kənar şəkillərin URL ünvanları ilə tutuşdurulacaq.\n#Uyğun gələnlər şəkil kimi, yerdə qalanlar isə şəkillərə keçid kimi göstəriləcək.\n#Sətirlərdən # simvolu ilə başlayanlar şərh hesab ediləcək.\n#Sətirlər böyük-kiçik şriftə həsass deyillər.\n\n#Ardıcıl ifadələrin fraqmentlərini bu sətirdən yuxarıda yerləşdirin. Bu sətiri olduğu kimi saxlayın.</pre>
+tags|Mümkün dəyişiklik etiketləri
+tag-filter|[[Special:Tags\u007CEtiket]] süzgəci:
+tag-filter-submit|Filtrlər
+tags-title|Etiketlər
+tags-tag|Etiket adı
+tags-description-header|Anlamının tam açıqlaması
+tags-active-header|Aktiv?
+tags-hitcount-header|Etiketli dəyişikliklər
+tags-active-yes|Bəli
+tags-active-no|Xeyr
+tags-edit|redaktə
+tags-hitcount|~{0} {{PLURAL:~{0}\u007Cdəyişiklik\u007Cdəyişiklik}}
+comparepages|Səhifələri qarşılaşdır
+compare-page1|Səhifə 1
+compare-page2|Səhifə 2
+compare-rev1|Dəyişiklik 1
+compare-rev2|Dəyişiklik 2
+compare-submit|Qarşılaşdır
+dberr-problems|Üzr istəyirik! Bu saytda texniki problemlər var.
+dberr-info|(Məlumat bazası ilə əlaqə yoxdur: ~{0})
+htmlform-invalid-input|Girişinizin bir qismilə əlaqədəar problemlər var
+htmlform-select-badoption|İşarə etdiyiniz xüsus keçərli deyil.
+htmlform-int-invalid|Göstərdiyiniz ifadə tam ədəd deyil.
+htmlform-float-invalid|Göstərdiyiniz ifadə ədəd deyil.
+htmlform-int-toolow|Göstərdiyiniz ~{0} ifadəsi minimaldan aşağıdır.
+htmlform-int-toohigh|Göstərdiyiniz ~{0} ifadəsi maksimumdan yuxarıdır.
+htmlform-required|Bu məlumat əhəmiyyətlidir
+htmlform-submit|Təsdiq et
+htmlform-reset|Dəyişiklikləri geri qaytar
+htmlform-selectorother-other|Digər
+sqlite-has-fts|~{0} tam mətn axtarma ilə
+sqlite-no-fts|~{0} tam mətn axtarma olmadan
+logentry-delete-delete|~{0} ~{2} səhifəsini {{GENDER:~{1}\u007Csildi}}
+logentry-suppress-delete|~{0} ~{2} səhifəsini {{GENDER:~{1}\u007Cgizlətdi}}
+revdelete-content-hid|gizli mətn
+revdelete-summary-hid|gizli tarixçə
+revdelete-uname-hid| gizli istifadəçi adı
+revdelete-content-unhid|gizli mətn
+revdelete-summary-unhid|redaktələr gizli deyil
+revdelete-uname-unhid|İstifadəçi adı gizli deyil
+revdelete-restricted|məhdudiyyətlər idarəçilərə tətbiq olunur
+revdelete-unrestricted|idarəçilər üçün götürülmüş məhdudiyyətlər
+logentry-move-move|~{0} ~{2} səhifəsinin adını ~{3} olaraq {{GENDER:~{0}\u007Cdəyişdi\u007Cdəyişdi}}.
+logentry-move-move_redir|~{0} ~{2} səhifəsinin adını yönləndirmənin əksinə dəyişərək, ~{3} {{GENDER:~{1}\u007Cadlandırdı}}
+logentry-newusers-newusers|~{0} istifadəçi hesabı yaradıldı
+logentry-newusers-create|~{0} istifadəçi hesabı yaradıldı
+logentry-newusers-create2|~{2} istifadəçi hesabı ~{0} tərəfindən yaradıldı
+logentry-newusers-autocreate|~{0} istifadəçi hesabı avtomatik yaradıldı
+logentry-upload-upload|~{0} ~{2} faylını {{GENDER:~{1}\u007Cyüklədi}}.
+rightsnone|(yoxdur)
+revdelete-summary|redaktə xülasəsi
+feedback-bugnew|Mən yoxladım. Yeni xəta barədə xəbər ver
+feedback-cancel|İmtina
+feedback-close|Oldu
+feedback-error2|Xəta: Redaktə qeydə alınmadı
+feedback-message|Mesaj:
+feedback-subject|Mövzu:
+searchsuggest-search|Axtar
+api-error-filename-tooshort|Fayl adı qısadır.
+api-error-filetype-banned|Bu tip fayllar qadağandır.
+api-error-illegal-filename|Fayl adına icazə yoxdur.
+api-error-unknown-code|Naməlum xəta: "~{0}".
+api-error-unknown-warning|Naməlum xəbərdarlıq: "~{0}".
+api-error-unknownerror|Naməlum xəta: "~{0}".
+api-error-uploaddisabled|Bu vikidə fayl yükləmə mümkün deyil.
+duration-seconds|~{0} {{PLURAL:~{0}\u007Csaniyə\u007Csaniyə}}
+duration-minutes|~{0} {{PLURAL:~{0}\u007Cdəqiqə\u007Cdəqiqə}}
+duration-hours|~{0} {{PLURAL:~{0}\u007Csaat\u007Csaat}}
+duration-days|~{0} {{PLURAL:~{0}\u007Cgün\u007Cgün}}
+duration-weeks|~{0} {{PLURAL:~{0}\u007Chəftə\u007Chəftə}}
+duration-years|~{0} {{PLURAL:~{0}\u007Cil\u007Cil}}
+duration-decades|~{0} {{PLURAL:~{0}\u007Conillik\u007Conillik}}
+duration-centuries|~{0} {{PLURAL:~{0}\u007Cəsr\u007Cəsr}}
+duration-millennia|~{0} {{PLURAL:~{0}\u007Cminillik\u007Cminillik}}
+limitreport-cputime|CPU vaxt istifadəsi
+limitreport-walltime|Real vaxt istifadəsi
+expand_templates_output|Nəticə
+expand_templates_ok|OK
+special-characters-group-latin|Latın
+special-characters-group-latinextended|Latın genişləndirilmiş
+special-characters-group-ipa|IPA
+special-characters-group-symbols|Simvollar
+special-characters-group-greek|Yunan
+special-characters-group-cyrillic|Kiril
+special-characters-group-arabic|Ərəb
+special-characters-group-persian|Fars
+special-characters-group-hebrew|İvrit
+special-characters-group-bangla|Benqal
+special-characters-group-telugu|Teluqu
+special-characters-group-sinhala|Sinqal
+special-characters-group-gujarati|Qucarat
+special-characters-group-thai|Tay
+special-characters-group-lao|Lao
+special-characters-group-khmer|Khmer
+contactpage|Əlaqə səhifəsi
+contactpage-title|Əlaqə
+contactpage-legend|E-məktub göndər
+contactpage-fromname|Sizin adınız: *
+contactpage-fromaddress|Sizin e-poçtunuz: **
+contactpage-usermailererror|Elektron poçtla məlumat göndərilən zaman xəta baş vermişdir:
+wikibase-edit|redaktə
+wikibase-add|əlavə et
+wikibase-description-empty|İzahı yoxdur
+wikibase-statements|İddialar
+wikibase-sitelinks-special|Digər saytlar
+wikibase-aliases-empty|Alternativ adlar müəyyən deyil.
+wikibase-statementview-rank-normal|Normal dərəcə
+wikibase-statementview-referencesheading-pendingcountersubject|{{PLURAL:~{0}\u007Cmənbə\u007Cmənbələr}}
+']:>
+).lang
+;

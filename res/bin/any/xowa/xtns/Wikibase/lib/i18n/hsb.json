@@ -1,0 +1,37 @@
+{
+	"@metadata": {
+		"authors": [
+			"Michawiki"
+		]
+	},
+	"wikibase-lib-desc": "Steji powšitkownu funkcionalnosć za rozšěrjeni Wikibase a Wikibase Client k dispoziciji",
+	"wikibase-entity-item": "element",
+	"wikibase-entity-property": "kajkosć",
+	"wikibase-entity-query": "naprašowanje",
+	"wikibase-diffview-reference": "referenca",
+	"wikibase-diffview-rank": "rjad",
+	"wikibase-diffview-qualifier": "kwalifikator",
+	"wikibase-error-unexpected": "Njewočakowany zmylk je wustupił.",
+	"wikibase-error-save-generic": "Při składowanju je zmylk wustupił, a tohodla njedachu so změny přewjesć.",
+	"wikibase-error-remove-generic": "Při wotstronjenu je zmylk wustupił, a tohodla njedachu so twoje změny přewjesć.",
+	"wikibase-error-save-connection": "Zwiskowy zmylk je při składowanju wustupił a twoje změny njedadźa so tohodla přewjesć. Prošu přepruwuj swój internetowy zwisk.",
+	"wikibase-error-remove-connection": "Zwiskowy zmylk je při wotstronjenju wustupił a tohodla njedadźa so twoje změny přewjesć. Prošu přepruwuj swój internetowy zwisk.",
+	"wikibase-error-save-timeout": "Mamy techniske ćežkosće a tohodla njeda so ničo składować.",
+	"wikibase-error-remove-timeout": "Mamy techniske ćežkosće a tohodla njeda so ničo wotstronić.",
+	"wikibase-error-autocomplete-connection": "API sydła njeda so naprašować. Prošu spytaj pozdźišo hišće raz.",
+	"wikibase-error-autocomplete-response": "Serwer wotmołwi: $1",
+	"wikibase-error-ui-client-error": "Zwisk k eksternej webstronje je so njeporadźił. Prošu spytaj pozdźišo hišće raz.",
+	"wikibase-error-ui-no-external-page": "Podaty nastawk njeda so na wotpowědowacym sydle namakać.",
+	"wikibase-error-ui-cant-edit": "Njesměš tutu akciju wuwjesć.",
+	"wikibase-error-ui-no-permissions": "Nimaš dosć prawow, zo by tutu akciju wuwjedł.",
+	"wikibase-error-ui-link-exists": "Njemóžeš k tutej stronje wotkazować, dokelž druhi element hižo k njej wotkazuje.",
+	"wikibase-error-ui-session-failure": "Twoje posedźenje je spadnyło. Prošu přizjew so hišće raz.",
+	"wikibase-error-ui-edit-conflict": "Je wobdźěłowanski konflikt wustupił. Prošu začituj a składuj znowa.",
+	"wikibase-replicationnote": "Prošu dźiwaj na to, zo móže wjacore mjeńšiny trać, doniž změny na wšěch wikijach widźomne njejsu.",
+	"wikibase-sitelinks-sitename-columnheading": "Rěč",
+	"wikibase-sitelinks-siteid-columnheading": "Kod",
+	"wikibase-sitelinks-link-columnheading": "Wotkazana strona",
+	"wikibase-tooltip-error-details": "Podrobnosće",
+	"datatypes-type-wikibase-item": "Element",
+	"datatypes-type-commonsMedia": "Medijowa dataja na Wikimedia Commons"
+}

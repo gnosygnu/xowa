@@ -1,0 +1,82 @@
+<div id='xo_msg_box' style='width:100%; color:red'>
+</div>
+<div id='cur_help_div' class='xohelp_div'>
+  <div id='cur_help_msg' class='xohelp_msg'>
+    <b>Info</b>
+    <div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Domain</b>: Domain of your wiki. Used for the URL bar. For example: <code>wiki.me.org</code>. Cannot be changed after wiki is created</span></div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Name</b>: Friendly name for the wiki. Shown in list of wikis. For example: <code>My wiki</code></span></div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Folder</b>: Folder for the wiki. A file with the domain name will be created in the folder: For example: <code>C:\personal\wiki.me.org</code>. Note that this will create a file called <code>C:\personal\wiki.me.org\wiki.me.org.xowa</code></span></div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Main Page</b>: The default start page for the wiki. For example, entering in <code>wiki.me.org</code> will navigate directly to <code>Main_Page</code>. Cannot be changed after wiki is created</span></div>
+    For more info, see <a href='/site/home/wiki/App/Personal_wikis/New_wiki'>the new wiki help page</a>
+    </div>    
+    <b>Buttons</b>
+    <div>
+      {{#mode_is_new}}
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_list_save'>&nbsp;</span><span class='xohelp_row_text'>Creates the wiki</span></div>
+      {{/mode_is_new}}
+      {{^mode_is_new}}      
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_list_save'>&nbsp;</span><span class='xohelp_row_text'>Saves the current settings</span></div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_list_delete'>&nbsp;</span><span class='xohelp_row_text'>Deletes the wiki from the list. Note that the file itself will not be deleted.</span></div>
+      {{/mode_is_new}}
+    </div>
+   {{^mode_is_new}}      
+    <b>Commands</b>
+    <div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'>Reindex pages for search bar. See <a href='/site/home/wiki/App/Personal_wikis/Search'>the search help page</a></span></div>
+    </div>
+    {{/mode_is_new}}
+  </div>
+</div>
+<div class='main_body' id='main_body'>
+  <div class='xotbl_head_row'>
+    <div class='xotbl_head_text cur_head_text'>
+      {{#mode_is_new}}Create a wiki{{/mode_is_new}}
+      {{^mode_is_new}}Edit the wiki{{/mode_is_new}}
+    </div>
+    <a class='xoimg_btn_x24 xoimg_list_save' title='save changes' href='javascript:void(0)' accesskey='s'
+       onclick='xo.wiki_directory.item__save();'>&nbsp;</a>
+    {{^mode_is_new}}
+    <a class='xoimg_btn_x24 xoimg_list_delete' title='remove wiki' href='javascript:void(0)'
+       data_alertify_msg='Please confirm that you wish to remove the wiki from your list<br/>Note that the file itself will not be deleted'
+       data_alertify_ok='Remove'
+       data_alertify_cancel='Cancel'
+       data_alertify_func='xo.wiki_directory.item__delete();'
+       onclick='return xo.alertify.confirm_func(this);'>&nbsp;</a>
+    {{/mode_is_new}}
+    <a class='xoimg_btn_x24 xoimg_help_tip' title='view help' href='javascript:void(0)' onclick='return xo.help.toggle("cur")'>&nbsp;</a>
+  </div>
+  <div class="xotbl_data_row cur_data_row">
+    <label>Domain</label>
+    <input id='domain_box' type='text' accesskey='d' value='{{domain}}' class='cur_data_input'{{#mode_is_new}} placeholder='Enter a domain (For example: wiki.me.org)'{{/mode_is_new}}{{^mode_is_new}} readonly{{/mode_is_new}}></input>
+    <input id='id_lbl' type='hidden' value='{{id}}'></span> 
+  </div>
+  <div class="xotbl_data_row cur_data_row">
+    <label>Name</label>
+    <input id='name_box' type='text' value='{{name}}' class='cur_data_input'{{#mode_is_new}} placeholder='Enter a name (For example: My wiki)'{{/mode_is_new}}></input>
+  </div>
+  <div class="xotbl_data_row cur_data_row">
+    <label>Folder</label>
+    <input id='dir_box' type='text' value='{{dir}}' class='cur_data_input'{{#mode_is_new}} placeholder='Enter a folder (For example: C:\personal\wiki.me.org). You can also click on the wrench at the far-right'{{/mode_is_new}}></input>
+    <span class="xoimg_btn_x16 xoimg_app_configure cur_data_icon" onclick='xo.wiki_directory.io_cmd__select();'>&nbsp;</span>    
+  </div>
+  <div class="xotbl_data_row cur_data_row">
+    <label>Main Page</label>
+    <input id='mainpage_box' type='text' value='{{mainpage}}' class='cur_data_input'{{#mode_is_new}} placeholder='Enter the name for the Main Page. (For example: Main_Page)'{{/mode_is_new}}{{^mode_is_new}} readonly{{/mode_is_new}}></input>
+  </div>
+</div>
+<br/>
+{{^mode_is_new}}
+<div class='main_body' id='other_body'>
+  <div class='xotbl_head_row'>
+    <div class='xotbl_head_text cur_head_text'>
+      Other actions
+    </div>
+  </div>
+  <div class="xotbl_data_row">
+    <div class='cur_actions_row'>
+      <a class='' title='reindex' href='javascript:void(0)' accesskey='f' onclick='return xo.wiki_directory.item__reindex_search();'>Reindex pages for search bar</a>
+    </div>
+  </div>
+</div>
+{{/mode_is_new}}

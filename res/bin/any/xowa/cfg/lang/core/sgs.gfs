@@ -1,0 +1,1670 @@
+this
+.fallback_load('lt')
+.ns_names
+  .load_text(
+<:['
+-2|Medėjė
+-1|Specēlos
+1|Aptarėms
+2|Nauduotuos
+3|Nauduotuojė aptarėms
+5|$1 aptarėms
+6|Abruozdielis
+7|Abruozdielė aptarėms
+8|MediaWiki
+9|MediaWiki aptarėms
+10|Šabluons
+11|Šabluona aptarėms
+12|Pagelba
+13|Pagelbas aptarėms
+14|Kateguorėjė
+15|Kateguorėjės aptarėms
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-1|Specialus
+1|Aptarimas
+2|Naudotojas
+3|Naudotojo aptarimas
+5|$1 aptarimas
+6|Vaizdas
+7|Vaizdo aptarimas
+9|MediaWiki aptarimas
+10|Šablonas
+11|Šablono aptarimas
+12|Pagalba
+13|Pagalbos aptarimas
+14|Kategorija
+15|Kategorijos aptarimas
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|sekma dėina
+monday|pėrmadėinis
+tuesday|ontradėinis
+wednesday|trečiadėinis
+thursday|ketvėrtadėinis
+friday|pėnktadėinis
+saturday|subata
+sun|Sekm
+mon|Pėrm
+tue|Ontr
+wed|Treč
+thu|Ketv
+fri|Pėnk
+sat|Sub
+january|sausė
+february|vasarė
+march|kuova
+april|balondė
+may_long|gegožės
+june|bėrželė
+july|lėipas
+august|rogpjūtė
+september|siejės
+october|spalė
+november|lapkrėstė
+december|groudė
+january-gen|Sausis
+february-gen|Vasaris
+march-gen|Kuovs
+april-gen|Balondis
+may-gen|Gegožė
+june-gen|Bėrželis
+july-gen|Lėipa
+august-gen|Rogpjūtis
+september-gen|Siejė
+october-gen|Spalis
+november-gen|Lapkrėstis
+december-gen|Groudis
+jan|sau
+feb|vas
+mar|kuo
+apr|bal
+may|geg
+jun|bėr
+jul|lėi
+aug|rgp
+sep|sie
+oct|spa
+nov|lap
+dec|grd
+toc|Torėnīs
+redirectedfrom|(Nokreipta ėš ~{0})
+allpages|Vėsė straipsnē
+prevpage|Unkstesnis poslapis (~{0})
+nextpage|Kėts poslapis (~{0})
+collapsible-collapse|Sugōžtė
+collapsible-expand|Atsklēstė
+sort-descending|Palē alfabėto
+sort-ascending|Prīš alfabėto
+categories|Kateguorėjės
+lastmodifiedat|Šėts poslapis paskotini karta pakeists ~{0} ~{1}.
+thumbnail-more|Padėdintė
+otherlanguages|Kėtuom kalbuom
+blanknamespace|(Pagrėndinė)
+pagecategories|{{PLURAL:~{0}\u007CKateguorėjė\u007CKateguorėjės\u007CKateguorėju}}
+category_header|Kateguorėjės „~{0}“ straipsnē
+subcategories|Subkateguorėjės
+category-media-header|Abruozdielis kateguorėjuo „~{0}“
+category-empty|''Šėta kateguorėjė nūnā netor nė vėina straipsnė a faila.''
+category-subcat-count|{{PLURAL:~{1}\u007CTuo kateguorėjuo īr vėina subkateguorėjė.\u007C{{PLURAL:~{0}\u007CRuodoma\u007CRuodomas\u007CRuodoma}} ~{0} {{PLURAL:~{0}\u007Csubkateguorėjė\u007Csubkateguorėjės\u007Csubkateguorėju}} (ėš vėsa īr ~{1} {{PLURAL:~{1}\u007Csubkateguorėjė\u007Csubkateguorėjės\u007Csubkateguorėju}}).}}
+category-subcat-count-limited|Tuo kateguorėjuo īr {{PLURAL:~{0}\u007Csubkateguorėjė\u007Csubkateguorėjės\u007Csubkateguorėju}}.
+category-article-count|{{PLURAL:~{1}\u007CTuo kateguorėjuo īr vėins poslapis.\u007C{{PLURAL:~{0}\u007CRuodoms\u007CRuodomė\u007CRuodoma}} ~{0} tuos kateguorėjės {{PLURAL:~{0}\u007Cposlapis\u007Cposlapē\u007Cposlapiu}} (ėš vėsa kateguorėjuo īr ~{1} {{PLURAL:~{1}\u007Cposlapis\u007Cposlapē\u007Cposlapiu}}).}}
+category-article-count-limited|{{PLURAL:~{0}\u007CRuodoms\u007CRuodomė\u007CRuodom}} ~{0} tuos kateguorėjės {{PLURAL:~{0}\u007Cposlapis\u007Cposlapē\u007Cposlapiu}}.
+category-file-count|{{PLURAL:~{1}\u007CTuo kateguorėjuo īr vėins poslapis.\u007C{{PLURAL:~{0}\u007CRuodoms\u007CRuodomė\u007CRuodoma}} ~{0} tuos kateguorėjės {{PLURAL:~{0}\u007Cfails\u007Cfailā\u007Cfailu}} (ėš vėsa kateguorėjuo īr ~{1} {{PLURAL:~{1}\u007Cposlapis\u007Cposlapē\u007Cposlapiu}}).}}
+category-file-count-limited|{{PLURAL:~{0}\u007CRuodoms\u007CRuodomė\u007CRuodom}} ~{0} tuos kateguorėjės {{PLURAL:~{0}\u007Cfails\u007Cfailā\u007Cfailu}}.
+nextn|paskesnius {{PLURAL:~{0}\u007C~{0}}}
+prevn|onkstesnius {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|tes.
+bold_sample|Pastuorints teksts
+bold_tip|Pastuorintė teksta
+italic_sample|Teksts kursīvu
+italic_tip|Teksts kursīvu
+link_sample|Nūruodas pavadinėms
+link_tip|Vėdinė nūruoda
+headline_sample|Skīrė pavadėnėms
+headline_tip|Ontra līgė skīrė pavadėnėms
+hidden-category-category|Pakavuotas kateguorėjės
+statistics|Statėstėka
+statistics-header-pages|Poslapiu statėstėka
+statistics-articles|Torėnė poslapē
+statistics-pages|Poslapē
+statistics-pages-desc|Vėsė poslapē, terp anū: aptarėma, nukrėipėmu ė kėtė.
+categorytree|Kateguorėju medis
+categorytree-category|Kateguorėjė:
+categorytree-mode-all|vėsė poslapē
+cite|Citoutė
+cite_page|Poslapis:
+wm-license-information-description|Aprašīms
+sitesupport|Pagelba
+group-Global_bot|Gluobalūs buotā
+group-Global_bot-member|gluobalus buots
+group-steward|Gaspaduorē
+group-sysadmin|Sėstėmas admėnėstratuorē
+tog-underline|Pabrauktė nūruodas:
+tog-hideminor|Pakavuotė mažus pataisėmus vielībūju taisīmu sārašė
+tog-extendwatchlist|Ėšpliestė keravuojamu sāraša, kū ruodītu vėsus tėnkamus pakeitėmus
+tog-usenewrc|Grupoutė keitėmus vielībūsiūs pakeitėmūs ė keravuojamu poslapiu sārašė
+tog-numberheadings|Autuomatėškā numeroutė skėrsnelios
+tog-showtoolbar|Ruodītė redagavėma rakondinė (JavaScript)
+tog-editondblclick|Poslapiu redagavėms dvėgobu paspaudėmu (JavaScript)
+tog-editsectiononrightclick|Ijongtė skėrsneliu redagavėma paspaudos skėrsnelė pavadėnėma<br />dešėniouju pelies klavėšu (JavaScript)
+tog-watchcreations|Pridietė poslapius, katrūs sokorio, i keravuojamu sāraša
+tog-watchdefault|Pridietė poslapius, katrūs taisau, i keravuojamu sāraša
+tog-watchmoves|Pridietė poslapius, katrūs parkelio, i keravuojamu sāraša
+tog-watchdeletion|Pridietė poslapius, katrūs ėštrino, i keravuojamu sāraša
+tog-minordefault|Palē nutīliejėma pažīmietė redagavėmus kāp mažus
+tog-previewontop|Ruodītė parvaiza vėrš redagavėma lauka
+tog-previewonfirst|Ruodītė straipsnė parvėiza pėrmu redagavėmu
+tog-enotifwatchlistpages|Siōstė mon gromata, kūmet pakeitams poslapis, katra stebiu
+tog-enotifusertalkpages|Siōstė mon gromata, kūmet pakaitams mona nauduotuojė aptarėma poslapis
+tog-enotifminoredits|Siōstė mon gromata, kūmet poslapė keitėms īr mažos
+tog-enotifrevealaddr|Ruodītė mona el. pašta adresa primėnėma gromatuos
+tog-shownumberswatching|Ruodītė keravuojantiu nauduotuoju skatliu
+tog-oldsig|Esams parašos:
+tog-fancysig|Parašos kāp wiki tekstos (ba autuomatėniu nūruodu)
+tog-uselivepreview|Nauduotė tėisiogėne parvėiza (JavaScript) (Eksperimentėnis)
+tog-forceeditsummary|Klaustė, kumet palėiku toščē pakeitėma kuomentara
+tog-watchlisthideown|Kavuotė mona pakeitėmos keravuojamu sarašė
+tog-watchlisthidebots|Kavuotė robotu pakeitėmos keravuojamu sārašė
+tog-watchlisthideminor|Kavuotė mažos pakeitėmos keravuojamu sarašė
+tog-watchlisthideliu|Kavuotė prisėjongosium nauduotuojum keitėmus keravuojamu sārošė
+tog-watchlisthideanons|Kavuotė anonimėniu nauduotuoju keitėmus keravuojamu sarašė
+tog-watchlisthidepatrolled|Kavuotė parveizietos pakeitėmos keravuojamu sārašė
+tog-ccmeonemails|Siōstė mon gromatu kopėjės, katros siontiu kėtėims nauduotojams
+tog-diffonly|Neruodītė poslapė torėnė puo skėrtomās
+tog-showhiddencats|Ruodītė pakavuotas kateguorėjės
+tog-norollbackdiff|Nekrēptė diemesė i skėrtoma atlėkus atmetėma
+underline-always|Visumet
+underline-never|Nikumet
+underline-default|Palē naršīklės nostatīmos
+editfont-style|Redagavėma longa teksta stėlios:
+editfont-default|Palē naršīklės nostatīmos
+january-date|Sausė ~{0}
+february-date|Vasarė ~{0}
+march-date|Kuova ~{0}
+april-date|Balondė ~{0}
+may-date|Gegožė ~{0}
+june-date|Bėrželė ~{0}
+july-date|Lėipas ~{0}
+august-date|Rogpjūtė ~{0}
+september-date|Siejės ~{0}
+october-date|Spalė ~{0}
+november-date|Lapkrėstė ~{0}
+december-date|Groudė ~{0}
+hidden-categories|{{PLURAL:~{0}\u007CPakavuota kateguorėjė\u007CPakavuotas kateguorėjės}}
+index-category|Indeksoutė poslapē
+noindex-category|Neindeksoutė poslapē
+broken-file-category|Poslapē, katrėi tor neteisingas nūruodas i failus
+about|Aple
+article|Straipsnis
+newwindow|(īr atverams naujam longė)
+cancel|Nutrauktė
+moredotdotdot|Daugiau...
+morenotlisted|Tas sārošos užbengts nie.
+mypage|Poslapis
+mytalk|Aptarėms
+anontalk|Šėta IP aptarėms
+navigation|Naršīms
+and| ėr
+qbfind|Ėiškuotė
+qbbrowse|Naršītė
+qbedit|Taisītė
+qbpageoptions|Tas poslapis
+qbmyoptions|Mona poslapē
+faq|DOK
+faqpage|Project:DOK
+actions|Vēksmā
+namespaces|Vardū srėtīs
+variants|Variantā
+navigation-heading|Naršīma pasėrinkėmā
+errorpagetitle|Klaida
+returnto|Grīžtė i ~{0}.
+tagline|Straipsnis ėš {{SITENAME}}.
+help|Pagelba
+search|Ėiškuotė
+searchbutton|Ėiškuok
+go|Ēk
+searcharticle|Ēk
+history|Poslapė istuorėjė
+history_short|Istuorėjė
+updatedmarker|atnaujėnta nu paskotėnė mona apsėlonkīma
+printableversion|Versėjė spausdintė
+permalink|Nulatėnė nūruoda
+print|Spausdėntė
+view|Veizietė
+view-foreign|Perveiziet ~{0}
+edit|Taisītė
+edit-local|Taisītė vėitėni aprašīma
+create|Sokortė
+create-local|Prikergtė vėitėni aprašīma
+editthispage|Taisītė ton poslapė
+create-this-page|Sokortė ta poslapi
+delete|Trintė
+deletethispage|Trintė ton poslapė
+undeletethispage|Atkortė ta poslapi
+undelete_short|Atstatītė ~{0} {{PLURAL:~{0}:redagavėma\u007Credagavėmus\u007Credagavėmu}}
+viewdeleted_short|Veizietė ~{0} {{PLURAL:~{0}\u007Cėštrinta keitėma\u007Cėštrintus keitėmus\u007Cėštrintū keitėmu}}
+protect|Ožrakintė
+protect_change|pakeistė
+protectthispage|Ožrakintė šėta poslapi
+unprotect|Keistė apsauga
+unprotectthispage|Keistė tuo poslapė apsauga
+newpage|Naus poslapis
+talkpage|Aptartė šėta poslapi
+talkpagelinktext|Aptarėms
+specialpage|Specēlosis poslapis
+personaltools|Persuonalėnē rakondā
+articlepage|Veizietė straipsnė
+talk|Aptarėms
+views|Parveizėtė
+toolbox|Rakondā
+userpage|Ruodītė nauduotoja poslapi
+projectpage|Ruodītė pruojekta poslapi
+imagepage|Veizietė abruozdielė poslapi
+mediawikipage|Ruodītė pranešėma poslapi
+templatepage|Ruodītė šabluona poslapi
+viewhelppage|Ruodītė pagelbuos poslapi
+categorypage|Ruodītė kateguorėjės poslapi
+viewtalkpage|Ruodītė aptarėma poslapi
+redirectpagesub|Nokreipėma poslapis
+redirectto|Nukreipėms ont:
+viewcount|Tas poslapis bova atverts ~{0} {{PLURAL:~{0}\u007Cčiesa\u007Cčiesus\u007Cčiesu}}.
+protectedpage|Ožrakints poslapis
+jumpto|Paršuoktė i:
+jumptonavigation|navėgacėjė
+jumptosearch|paėiška
+view-pool-error|Atsėprašuom, bat serverē daba īr perkrautė.\nNuognē pardaug nauduotoju skait ton poslapi.\nPrašuom palaukat ė mieginkat i ton poslapi patekt vieliau.\n\n~{0}
+pool-errorunknown|Nežėnuoma klaida
+aboutsite|Aple {{SITENAME}}
+aboutpage|Project:Aple
+copyright|Turinīs pateikts so ~{0} licencėjė.
+copyrightpage|{{ns:project}}:Autuoriu teisės
+currentevents|** Vielībė̅jė ivīkē **
+currentevents-url|Project:Vielībė̅jė ivīkē
+disclaimers|Atsakuomībės aprėbuojims
+disclaimerpage|Project:Atsakuomībės aprėbuojims
+edithelp|Kāp redagoutė
+mainpage|Pėrms poslapis
+mainpage-description|Pėrms poslapis
+policy-url|Project:Puolitėka
+portal|Kuolektīvs
+portal-url|Project:Kuolektīvs
+privacy|Privatoma puolitėka
+privacypage|Project:Privatoma puolitėka
+badaccess|Privėlėju klaida
+badaccess-group0|Tomstā nelēdama ivīkdītė veiksma, katruo prašiet.
+ok|Gerā
+retrievedfrom|Gautė ėš „~{0}“
+youhavenewmessages|Tamsta toret ~{0} (~{1}).
+youhavenewmessagesfromusers|{{PLURAL:~{3}\u007CTamsta turėt}} ~{0} nū {{PLURAL:~{2}\u007Ckėta nauduotojė\u007C~{2} nauduotoju}} (~{1}).
+youhavenewmessagesmanyusers|Tamsta turėt ~{0} nū daug nauduotoju (~{1}).
+newmessageslinkplural|{{PLURAL:~{0}\u007Cnaus pranešėms\u007C999=naujė pranešėmā}}
+newmessagesdifflinkplural|paskiausis {{PLURAL:~{0}\u007Cpakeitėms\u007C999=pakeitėmā}}
+youhavenewmessagesmulti|Toret naujū žėnotiu ~{0}
+editsection|taisītė
+editold|taisītė
+viewsourceold|veizietė šaltėni
+editlink|keistė
+viewsourcelink|veizietė kuoda
+editsectionhint|Redagoutė skirsneli: ~{0}
+showtoc|ruodītė
+hidetoc|kavuotė
+confirmable-confirm|A tikslē tēp mīslėjat?
+confirmable-yes|Tēp
+confirmable-no|Ne
+thisisdeleted|Veizėtė a atkortė ~{0}?
+viewdeleted|Ruodītė ~{0}?
+restorelink|~{0} {{PLURAL:~{0}\u007Cėštrinta keitėma\u007Cėštrintos keitėmos\u007Cėštrintū keitėmu}}
+feedlinks|Šaltėnis:
+site-rss-feed|~{0} RSS šaltėnis
+site-atom-feed|~{0} Atom šaltėnis
+page-rss-feed|„~{0}“ RSS šaltėnis
+page-atom-feed|„~{0}“ Atom šaltėnis
+red-link-title|~{0} (poslapis da neparašīts)
+nstab-main|Poslapis
+nstab-user|Nauduotuojė poslapis
+nstab-media|Abruozdielė poslapis
+nstab-special|Specēlos poslapis
+nstab-project|Proujekta poslapis
+nstab-image|Fails
+nstab-mediawiki|Teksts
+nstab-template|Šabluons
+nstab-help|Pagelbuos poslapis
+nstab-category|Kateguorėjė
+nosuchaction|Nier tuokė veiksma
+nosuchspecialpage|Nier tuokė specēlėjė poslapė
+nospecialpagetext|Tamsta prašiet nelaistėna specēlė̄jė poslapė, laistėnū specēliūju poslapiu sōraša rasėt [[Special:SpecialPages\u007Cspecēliūju poslapiu sārošė]].
+error|Klaida
+databaseerror|Doumenū bazės klaida
+databaseerror-error|Klaida: ~{0}
+laggedslavemode|Diemesė: Poslapī gal nesmatītė naujausiu pakeitėmu.
+readonly|Doumenū bazė ožrakėnta
+enterlockreason|Iveskėt ožrakėnėma prižasti, tēpuogi kumet daugmaž bus atrokėnta
+readonlytext|Doumenū bazė daba īr ožrakėnta naujėm irašam a kėtėm keitėmam,\nmažo doumenū bazės techninē pruofilaktėkā,\npuo tuo vėsks griš i sava viežes.\nOžrakėnusiuojo admėnėstratuoriaus pateikts rakėnima paaiškėnims: ~{0}
+missing-article|Doumenū bazė nerada poslapė teksta, katra ana torietu rastė, pavadėnta „~{0}“ ~{1}.\n\nPaprastā tas būn dielē pasenosės skėrtoma vuo istuorėjės nūruodas i poslapi, katros bova ėštrėnts.\n\nJēgo tas nie šėts varėjants, Tamsta mažo raduot klaida pruogramėnė ironguo.\nPrašuom aple šėtā paskelbtė [[Special:ListUsers/sysop\u007Cadminėstratoriō]], nepamėršdamė nuruodītė nūruoda.
+missingarticle-rev|(versėjė#: ~{0})
+missingarticle-diff|(Skėrt.: ~{0}, ~{1})
+readonly_lag|Doumenū bazė bova autuomatėškā ožrakėnta, kuol pagelbinės doumenū bazės pasvīs pagrėndine
+internalerror|Vėdėnė klaida
+internalerror_info|Vėdėnė klaida: ~{0}
+filecopyerror|Nepavīkst kopėjoutė faila ėš „~{0}“ i „~{1}“.
+filerenameerror|Nepavīkst parvardėntė faila ėš „~{0}“ i „~{1}“.
+filenotfound|Nepavīkst rastė faila „~{0}“.
+unexpected|Natėkieta raikšmie: „~{0}“=„~{1}“.
+cannotdelete|Nepavīka ėštrintė nuruodīta poslapė a faila "~{0}". (Mažo kažkas padarė pėrmesnis šėta)
+cannotdelete-title|Negal ėštrintė poslapė "~{0}"
+badtitle|Bluogs pavadėnėms
+badtitletext|Nuruodīts poslapė pavadėnėms bova neleistėns, toščės a neteisėngā sojongts terpkalbinis a terppruojektėnis pavadėnėms. Anamė gal būtė vėins a daugiau sėmbuoliu, neleistėnū pavadėnėmūs
+perfcachedts|Ruodoma ėšsauguota doumenū kopėjė, katra bova atnaujėnta ~{0}. Daugiausē ~{3} {{PLURAL:~{3}\u007Crezoltats\u007Crezoltatā\u007Crezoltatu}} īr sauguoma.
+querypage-no-updates|Atnaujėnėmā tam poslapiō nūnā ėšjongtė īr. Doumenīs nūnā čė nebus atnaujėntė.
+viewsource|Veizėtė kuoda
+protectedpagetext|Šėts poslapis īr ožrakints, saugont anū nū taisīma.
+viewsourcetext|Tomsta galėt veizietė ėr kopėjoutė poslapė kuoda:
+protectedinterface|Šėtom poslapi īr pruogramėnės īronguos sasajuos teksts katros īr apsauguots, kū neprietelē anū nasogadėntu.
+editinginterface|<strong>Diemesė:</strong> Tamsta keitat poslapi, katros īr nauduojams programėnės irongas sōsajės tekstė. Pakeitėmā tamė poslapū tēpuogi pakeis nauduotuojė sōsajės ėšruoda ė kėtėims nauduotujams. Jēgo nuorėt pargoldītė, siūluom pasėnauduotė [//translatewiki.net „translatewiki.net“], „MediaWiki“ lokalėzacėjės pruojėktu.
+namespaceprotected|Tamsta netorėt teisiu keistė poslapiu '''~{0}''' srėtī.
+ns-specialprotected|Specēlė̅ jė poslapē negal būtė keitamė.
+exception-nologin|Nesat prėsėjongis
+logouttext|'''Daba Tamsta esat atsėjongės.'''\n\nGalat ė tuoliau nauduotė {{SITENAME}} anuonimėškā aba <span class='plainlinks'>[~{0} prisėjonkat]</span> ėš naujė šėtuo patiu a kėto nauduotuojė vardu.\nPastebiejims: katruos nekatruos poslapiuos ė tuoliau gal ruodītė būktā būtomiet prisėjongės lėgė tuol, kumet ėšvalīsėt sava naršīklės dietovė (''cache'').
+welcomeuser|Svēks, ~{0}!
+welcomecreation-msg|Tamstas paskīra jau padėrbta.\nNūnā galat pakeitė sava {{SITENAME}} [[Special:Preferences\u007Cnustatīmos]], jēgo tėktās nuorat.
+yourname|Nauduotuojė vards:
+userlogin-yourname|Nauduotuojė vards:
+userlogin-yourname-ph|Ožrašīkėt sava nauduotojė varda
+createacct-another-username-ph|Ožrašīkėt nauduotojė varda
+yourpassword|Slaptažuodis:
+userlogin-yourpassword|Slaptažuodis
+userlogin-yourpassword-ph|Ožrašīkėt sava slaptažuodi
+createacct-yourpassword-ph|Ožrašīkėt slaptažuodi
+yourpasswordagain|Pakartuoket slaptažuodė:
+createacct-yourpasswordagain|Čīstā tuokis slaptažuodis?
+createacct-yourpasswordagain-ph|Viel ožrašīkėt slaptažuodi
+remembermypassword|Atmintė prisėjongėma infuormacėjė šėtom kuompioteri (daugiausē ~{0} {{PLURAL:~{0}\u007Cdėina\u007Cdėinė\u007Cdėinas}})
+userlogin-remembermypassword|Ka liktō prisėjongis
+userlogin-signwithsecure|Apsauguots rīšīs
+yourdomainname|Tamstas domens:
+password-change-forbidden|Negalat tuo wiki keistė slaptažuodiu.
+login|Prisėjongtė
+nav-login-createaccount|Prėsėjongtė / sokortė paskīra
+userlogin|Prėsėjongtė / sokortė paskīra
+userloginnocreate|Prisėjongtė
+logout|Atsėjongtė
+userlogout|Atsėjongtė
+notloggedin|Neprisėjongis
+userlogin-noaccount|Netorėt paskīruos?
+userlogin-joinproject|Jonkėtėis pri {{SITENAME}}
+nologin|Netorėt prisėjongėma varda? '''~{0}'''.
+nologinlink|Sokorkėt paskīra
+createaccount|Sokortė paskīra
+gotaccount|Jau torėt paskīra? '''~{0}'''.
+gotaccountlink|Prisėjonkėt
+userlogin-resetlink|Ožmiršat sava prisėjongėma doumenis?
+userlogin-resetpassword-link|Pamiršuot slaptažuodi?
+userlogin-helplink2|Prisėjongėma pagelba
+userlogin-createanother|Padėrbtė kėta paskīra
+createacct-emailrequired|El. pašta adresos
+createacct-emailoptional|El. paštos (nie būtėns)
+createacct-email-ph|Ožrašīkėt sava el. pašta adresa
+createacct-another-email-ph|Ožrašīkėt el. pašta adresa
+createaccountmail|Nauduokėt laikėna slaptažuodi ė siōskėt nuruodėtō el. paštō
+createacct-realname|Tėkros vardos (nie būtėns)
+createaccountreason|Prīžastis:
+createacct-reason|Prīžastis
+createacct-captcha|Apsauguos patėkrėnėms
+createacct-imgcaptcha-ph|Ožrašīkėt ženklus, katrus veizėt viršō
+createacct-submit|Padėrbkėt sau paskīra
+createacct-another-submit|Padėrbtė kėta paskīra
+createacct-benefit-heading|{{SITENAME}} īr sokorta prietėliu, tuokiu, kāp Tamsta.
+createacct-benefit-body1|{{PLURAL:~{0}\u007Cpataisīms\u007Cpataisīmā\u007Cpataisīmu}}
+createacct-benefit-body2|{{PLURAL:~{0}\u007Cposlapis\u007Cposlapē\u007Cposlapiu}}
+createacct-benefit-body3|{{PLURAL:~{0}\u007Cvielībs nauduotuos\u007Cvielībė nauduotuojē\u007Cvielībū nauduotuoju}}
+badretype|Ivestė slaptažuodē nesotamp.
+userexists|Irašīts nauduotuojė vards jau īr nauduojams.\nPrašuom pasėrėnktė kėtuoki varda.
+loginerror|Prisėjongėma klaida
+createaccounterror|Neėšiejė sokortė paskīruos: ~{0}
+nocookiesnew|Nauduotuojė paskīra bova sokurta, ale Tamsta nēsot prisėjongis. {{SITENAME}} nauduo pakavukus, kū prijongtu nauduotuojus. Tamsta esot ėšjongis anūs. Prašuom ijongtė pakavukus, tumet prisėjonkėt so sava nauju nauduotuojė vardu ė slaptažuodiu.
+nocookieslogin|{{SITENAME}} nauduo pakavukus (''cookies''), kū prijongtu nauduotuojus. Tamsta esat ėšjongės anūs. Prašuom ijongtė pakavukus ė pamiegītė viel.
+loginsuccesstitle|Siekmingā prisėjongiet.
+loginsuccess|'''Nūnā Tamsta esot prisėjongės pri {{SITENAME}} kāp „~{0}“.'''
+nosuchuser|Nier anėjuokė nauduotuojė pavadėnta „~{0}“.\nPatikrėnkėt rašība, aba [[Special:UserLogin/signup\u007Csokorkėt naujė paskīra]].
+nosuchusershort|Nier juokė nauduotuojė, pavadėnta „~{0}“. Patėkrinkėt rašība.
+nouserspecified|Tamstā rēk nuruodītė nauduotuojė varda.
+login-userblocked|Nauduotuos ožblokouts. Prisėjongt nie galėma.
+wrongpassword|Ivests neteisings slaptažuodis. Pameginket dā karta.
+wrongpasswordempty|Ivests slaptažuodis īr tošts. Pameginket vielėk.
+passwordtooshort|Tamstas slaptažuodis nier laistėns aba par tromps īr. Ans tor būtė nuors {{PLURAL:~{0}\u007C1 sėmbuolė\u007C~{0} sėmbuoliu}} ėlgoma.
+password-name-match|Tamstas slaptažuodis tor skirtėis nu Tamstas nauduotuojė varda.
+password-login-forbidden|Tuo nauduotuojė varda ė slaptažuodė nauduojėms nie galėms.
+mailmypassword|Atkortė slaptažuodi
+passwordremindertitle|Laikėns {{SITENAME}} slaptažuodis
+passwordremindertext|Kažkastā (tėkriausē Tamsta, ėš IP adresa ~{0})\npaprašė, kū atsiōstomiet naujė slaptažuodi pruojektō {{SITENAME}} (~{3}).\nLaikėns slaptažuodis nauduotuojō „~{1}“ bova sokorts ėr nustatīts kāp „~{2}“.\nJēgo Tamsta nuoriejot ana pakeistė tūmet torietomiet prisėjongtė ė daba pakeistė sava slaptažuodi.\nTamstas laikėns slaptažuodis bengs galiuotė par {{PLURAL:~{4}\u007Cdėina\u007C~{4} dėinas}}.\n\nJēgo kažkas kėts atlėka ta prašīma aba Tamsta prisėmėniet sava slaptažuodi ė\nnebnuorėt ana pakeistė, Tamsta galėt tėisiuog nekreiptė diemiesė ė šėta gruomata ė tuoliau\nnauduotis sava senu slaptažuodžiu.
+noemail|Nier anėjuokė el. pašta adresa ivesta nauduotuojō „~{0}“.
+noemailcreate|Tamsta nuruodīkat elektruonėni pašta, katros vēk
+passwordsent|Naus slaptažuodis bova nusiōsts i el. pašta adresa,\nožregėstrouta nauduotuojė „~{0}“.\nPrašuom prisėjongtė vielē, kumet Tamsta gausėt anū.
+blocked-mailpassword|Tamstas IP adresos īr ožblokouts nū redagavėma, tudie neleidama nauduotė slaptažuodė priminėma funkcėjės, kū apsėsauguotomė nū pėktnaudžēvėma.
+eauthentsent|Patvėrtėnėma gruomata bova nusiōsta i paskėrta el. pašta adresa.\nPrīš ėšsiontiant kėta gruomata i Tamstas diežote, Tamsta torėt vīkdītė nuruodīmus gruomatuo, kū patvėrtėntomiet, kū diežotė tėkrā īr Tamstas.
+throttled-mailpassword|Slaptažuodžė priminims jau bova ėšsiōsts, par paskotėnes {{PLURAL:~{0}\u007Cadīna\u007C~{0} adīnas}}. Nuorint apsėsauguotė nū pėktnaudžēvėma, slaptažuodė priminims gal būt ėšsiōsts tėk kas {{PLURAL:~{0}\u007Cadīna\u007C~{0} adīnas}}.
+mailerror|Klaida siontiant pašta: ~{0}
+acct_creation_throttle_hit|Ton pruojekta lankītuojē, katrėi nauduo Tamstas IP adresa, padėrba {{PLURAL:~{0}\u007C~{0} paskīra\u007C~{0} paskīras\u007C~{0} paskīrū}} par paskotėnta dėina, a tas īr dėdliausis leidams skaitlios par ta čiesa.\nTudie šėton čieso lankītuojē, katrėi nauduo ta IP adresa, daugiau paskīrū dėrbt negal.
+emailauthenticated|Tamstas el. pašta adresos bova ožtvirtėnts ~{1} d. ~{2}.
+emailnotauthenticated|Tamstas el. pašta adresos da nier patvėrtėnts. Anėjuokės gruomatas\nnebus siontamas ni vėinam žemiau ėšvardėntam puoslaugiō.
+noemailprefs|Nuruodėkīt el. pašta adresa, kū vėiktu šėtos funkcėjės.
+emailconfirmlink|Patvėrtinkėt sava el. pašta adresa
+accountcreated|Nauduotuos sokorts
+accountcreatedtext|Paskīra nauduotojō [[{{ns:User}}:~{0}\u007C~{0}]] ([[{{ns:User talk}}:~{0}\u007Captarėms]]) bova padėrbta.
+createaccount-title|{{SITENAME}} paskīruos kūrėms
+loginlanguagelabel|Kalba: ~{0}
+pt-login|Prisėjongtė
+pt-login-button|Prisėjongtė
+pt-createaccount|Pasdėrbtė paskīra
+pt-userlogout|Atsėjongtė
+changepassword|Pakeistė slaptažuodė
+resetpass_announce|Ka ožbengtomėt jongtėis, torėt sokortė nauja slaptažuodi.
+resetpass_header|Keistė paskīruos slaptažuodi
+oldpassword|Sens slaptažuodis:
+newpassword|Naus slaptažuodis:
+retypenew|Pakartuokėt nauja slaptažuodi:
+resetpass_submit|Nostatītė slaptažuodi ė prėsėjongtė
+changepassword-success|Tamstas slaptažuodis pakeists siekmėngā!
+changepassword-throttled|Baisē daug čiesu mieginot prisėjongtė.\nDaba palaukėt ~{0} prīš mieginant vie.
+resetpass-submit-loggedin|Keistė slaptažuodi
+resetpass-submit-cancel|Nutrauktė
+resetpass-temp-password|Laikėns slaptažuodis:
+passwordreset-username|Nauduotuojė vards:
+passwordreset-domain|Domens:
+passwordreset-email|El. pašta adresos:
+changeemail|Keistė el. pašta adresa
+changeemail-none|(nie)
+changeemail-password|Tamstas {{SITENAME}} slaptažuodis:
+changeemail-submit|Keistė el. pašta
+extlink_sample|http://www.example.com nūruodas pavadėnėms
+extlink_tip|Ėšuorėnė nūruoda (nepamėrškėt http:// priraša)
+nowiki_sample|Iterpkėt nefuormouta teksta čė
+nowiki_tip|Ėgnoroutė wiki fuormata
+image_sample|Pavīzdīs.jpg
+image_tip|Idietė abruozdieli
+media_sample|Pavīzdīs.ogg
+media_tip|Nūruoda i media faila
+sig_tip|Tomstas parašos ėr čiesos
+hr_tip|Guorizuontali linėjė (nenauduokėt ba reikala)
+summary|Pāiškėnėms:
+subject|Tema/ontraštė:
+minoredit|Mažos pataisims
+watchthis|Keravuotė šėta poslapė
+savearticle|Ėšsauguotė poslapė
+preview|Parveiza
+showpreview|Ruodītė parveiza
+showdiff|Ruodītė skėrtomus
+anoneditwarning|'''Diemesė:''' Tomsta nesat prisėjungės. Jūsa IP adresos būs irašīts i šiuo poslapė istuorėjė.
+missingsummary|'''Priminėms:''' Tamsta nenuruodiet pakeitėma kuomentara. Jēgo viel paspausėt ''Ėšsauguotė'', Tamstas pakeitėms bus ėšsauguots ba anuo.
+missingcommenttext|Prašuom ivestė kuomentara.
+summary-preview|Kuomentara parvaiza:
+subject-preview|Skėrsnelė/ontraštės parvaiza:
+blockedtitle|Nauduotuos īr ožblokouts
+blockedtext|'''Tamstas nauduotuojė vards a IP adresos īr ožblokouts.'''\n\nOžbluokava ~{0}.\nNuruodīta prižastis īr ''~{1}''.\n\n* Bluokavėma pradžia: ~{7}\n* Bluokavėma pabenga: ~{5}\n* Numatīts bluokoujamasės: ~{6}\n\nTamsta galėt sosėsėiktė so ~{0} a kėtu\n[[{{MediaWiki:Grouppage-sysop}}\u007Cadminėstratuoriom]], kū aptartė ožbluokavėma.\nTamsta negalėt nauduotės funkcėjė „Rašītė laiška tam nauduotuojō“, jēgo nesot pateikis tėkra sava el. pašta adresa sava [[Special:Preferences\u007Cpaskīruos nustatīmūs]] ė nesot ožblokouts nu anuos nauduojėma.\nTamstas dabartėnis IP adresos īr ~{2}, a bluokavėma ID īr #~{4}. Prašuom nuruodītė šėtā, kumet kreipiatės diel atbluokavėma.
+autoblockedtext|Tamstas IP adresos bova autuomatėškā ožblokouts, kadongi ana nauduojė kėts nauduotuos, katra ožbluokava ~{0}.\nNuruodīta prīžastis īr tuokė:\n\n:''~{1}''\n\n* Bluokavėma pradžė: ~{7}\n* Bluokavėma pabenga: ~{5}\n* Numatuoms bluokavėma čiesos: ~{6}\n\nTamsta galėt sosėsėiktė so ~{0} aba kėtu [[{{MediaWiki:Grouppage-sysop}}\u007Cadminėstratuoriom]], kū aprokoutomėt biedas diel bluokavėma.\n\nTamsta negalėt nauduotės fonkcėjė „Rašītė gruomata tam nauduotuojō“, jēgo nesot nuruode tėkra el. pašta adresa sava [[Special:Preferences\u007Cnauduotuojė nustatīmūs]]. Tēpuogi Tamsta negalat nauduotės ta fonkcėjė, jēgo Tamstā ožblokouts anuos nauduojėms.\n\nTamstas IP adresos īr ~{2}, bluokavėma ID īr ~{4}.\nPrašuom nuruodītė šėtūs doumenis visūmet, kumet kreipiatės diel bluokavėma.
+blockednoreason|prīžastis nier nuruodīta
+whitelistedittext|Tamsta torėt ~{0}, kū keistomėt poslapius.
+nosuchsectiontitle|Nier tuokė skīrė
+loginreqlink|prisėjongtė
+accmailtitle|Slaptažuodis ėšsiūsts īr.
+accmailtext|Nauduotuojė '~{0}' slaptažuodis nusiūsts i ~{1} īr.
+newarticle|(Naus)
+newarticletext|Tamsta pakliovuot i nūnā neesoti poslapi.\nNuoriedamė sokortė poslapi, pradiekėt rašītė žemiau esontiamė ivedima pluotė\n(platiau [~{0} pagelbas poslapī]).\nJēgo pakliovuot čė netīčiuom, paprastiausē paspauskėt naršīklės mīgtoka '''atgal'''.
+anontalkpagetext|----''Tas īr anonimėnė nauduotuojė, katros nier sosėkūrės aba nenauduo paskīruos, aptarėmu poslapis.\nDielē tuo nauduojams IP adresos anuo atpažėnėmō.\nTas IP adresos gal būtė dalinams keletō nauduotuoju.\nJēgo Tamsta esat anonimėnis nauduotuos ėr veizėt, kū kuomentarā nier skėrtė Tamstā, [[Special:UserLogin/signup\u007Csokorkėt paskīra]] aba [[Special:UserLogin\u007Cprisėjonkėt]], ė nebūsėt maišuoms so kėtās anonimėnēs nauduotuojās.''
+noarticletext|Tuo čiesu tamė poslapī nier juokė teksta.\nTamsta galėt [[Special:Search/{{PAGENAME}}\u007Cėiškuotė šėta poslapė pavadėnėma]] kėtūs poslapiūs,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} ėiškuotė sosėjosiu regėstru],\naba [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} keistė ta poslapi]</span>.
+noarticletext-nopermission|Tuo čiesu tamė poslapī nier juokė teksta.\nTamsta galėt [[Special:Search/{{PAGENAME}}\u007Cėiškuotė šėta poslapė pavadėnėma]] kėtūs poslapiūs,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} ėiškuotė sosėjosiu regėstru]</span>.
+userpage-userdoesnotexist|Nauduotuojė paskīra „<nowiki>~{0}</nowiki>“ nier ožregėstrouta. Prašuom patikrėntė, a Tamsta nuorėt kortė/keistė ta poslapi.
+clearyourcache|'''Diemesė:''' ėšsauguojus Tamstā gal prireiktė ėšvalītė Tamstas naršīklės rėnktovė, kū paveizėtomėt pakeitėmus. '''Mozilla / Safari / Konqueror:''' laikīdami ''Shift'' pasėrinkėt ''Atsiōstė ėš nauja'', a paspauskėt ''Ctrl-Shift-R'' (sėstemuo Apple Mac ''Cmd-Shift-R''); '''IE:''' laikīdamė ''Ctrl'' paspauskėt ''Atnaujėntė'', o paspauskėt ''Ctrl-F5''; '''Konqueror:''' paprastiausē paspauskėt ''Perkrautė'' mīgtoka, o paspauskėt ''F5''; '''Opera''' nauduotuojam gal prireiktė pėlnā ėšvalītė anū rėnktovė ''Rakondā→Nustatīmā''.
+usercssyoucanpreview|'''Patarėms:''' Nauduokit „Ruodītė parvaiza“ mīgtoka, kū ėšmiegintomiet sava naujaji CSS priš ėšsaugont.
+userjsyoucanpreview|'''Patarėms:''' Nauduokit „Ruodītė parvaiza“ mīgtoka, kū ėšmiegintomiet sava naujaji JS priš ėšsaugont.
+usercsspreview|'''Napamirškėt, kū Tamsta tėk parveizėt sava nauduotoja CSS, ans da nabova ėšsauguots!'''
+userjspreview|'''Nepamirškėt, kū Tamsta tėk testoujat/parvaizėt sava nauduotoja ''JavaScript'', ans da nabova ėšsauguots!'''
+userinvalidcssjstitle|'''Diemesė:''' Nė juokės ėšruodos „~{0}“. Napamirškėt, kū sava .css ėr .js poslapē nauduo pavadėnėma mažuosiomės raidiemis, pvz., Nauduotuos:Foo/vector.css, o ne Nauduotuos:Foo/Vector.css.
+updated|(Atnaujėnta)
+note|'''Pastebiejims:'''
+previewnote|'''Nepamėrškėt, kū tas tėktās pervaiza, pakeitėmā da nier ėšsauguotė!'''
+continue-editing|Dėrbtė tuoliau
+previewconflict|Šėta parvaiza paruod teksta ėš vėršotinėjė teksta redagavėma lauka tēp, kāp ans bus ruodoms, jei pasirinksėt anū ėšsauguotė.
+session_fail_preview|'''Atsiprašuom! Mes nagalėm vīkdītė Tamstas keitėma diel sesėjės doumenū praradima.\nPrašuom pamiegintė vielēk. Jei šėtā napaded, pamieginkėt atsėjongtė ėr prėsėjongtė atgal.'''
+session_fail_preview_html|'''Atsėprašuom! Mes nagalėm apdoroutė Tamstas keitėma diel sesėjės doumenū praradėma.'''\n''Kadaogi šėtom pruojekte grīnasės HTML īr ijongts, parveiza īr pasliepta kāp atsargoma prėimonė priš JavaScript atakas.''\n'''Jei tā teisiets keitėma bandīms, prašuom pamiegint viel. Jei šėtā napaded, pamieginkėt atsėjongtė ėr prėsėjongtė atgal.'''
+editing|Taisuoms straipsnis - ~{0}
+creating|Dėrbama ~{0}
+editingsection|Taisuoms ~{0} (skėrsnelis)
+editingcomment|Taisuoms ~{0} (naus skīrius)
+editconflict|Ėšpreskėt kuonflėkta: ~{0}
+explainconflict|Kažėn kas kėts jau pakeitė poslapi nū tuo čiesa, kumet Tamsta pradiejuot ana redagoutė.\nVėršotėniamė tekstėniamė laukė pateikta šėtu čiesu esontė poslapė versėjė.\nTamstas pakeitėmā pateiktė žemiau esontiamė laukė.\nTamstā rēk sojongtė Tamstas pakeitėmus so esontė versėjė.\nKumet paspausėte „{{int:savearticle}}“, bus irašīts '''tėktās''' teksts vėršotėniam tekstėniam laukė.
+yourtext|Tamstas teksts
+storedversion|Ėšsauguota versėjė
+editingold|'''ISPIEJIMS: Tamsta keitat ne naujausė poslapė versėjė.\nJēgo ėšsauguosėt sava pakeitėmus, paskum darītė pakeitėmā prapols.'''
+yourdiff|Skėrtomā
+copyrightwarning|Primenam, kū vėsks, kas patenk i {{SITENAME}}, īr laikuoma pavėišėnto palē ~{1} (platiau - ~{0}). Jēgo nenuorit, kū Tamstas duovis būtou ba pasėgailiejėma keitams ė platėnams, nerašīkėt čė.<br />\nTamsta tēpuogi pasėžadat, kū tas īr Tamstas patėis rašīts torėnīs a kuopėjouts ėš vėišū a panašiū valnū šaltėniu.\n'''NEKOPĖJOUKĖT AUTUORĖNIEM TEISIEM APSAUGUOTU DARBŪ BA LEIDĖMA!'''
+copyrightwarning2|Primenam, kū vėsks, kas patenk i {{SITENAME}} gal būtė keitama, perdaruoma, a pašalėnama kėtū nauduotuoju. Jēgo nenuorėt, kū Tamstas duovis būtu ba pasėgailiejėma keitams, čiuonās nerašīkėt.<br />\nTēpuogi Tamsta pasėžadat, kū tas īr Tamstas rašīts teksts aba kuopėjouts\nėš vėišū liousū šaltėniu (detaliau - ~{0}).\n'''NEKUOPĖJOUKAT AUTUORĖNIEM TEISIEM APSAUGUOTU DARBŪ BA LEIDĖMA!'''
+readonlywarning|'''DIEMESĖ: Doumenū bazė bova ožrakėnta teknėnē pruofilaktėkā,\ntudie negaliesėt ėšsauguotė sava pakeitėmu daba. Tamsta galėt nosėkopėjoutė teksta i tekstėni faila\nė paskum ikeltė ana čė.'''
+protectedpagewarning|'''DIEMESĖ: Šėts poslapis īr ožrakints ėr anū redagoutė gal tėk admėnėstratuorė teises torėntīs prietelē.'''
+semiprotectedpagewarning|'''Pastebiejėms:''' Šėts poslapis bova ožrakėnts ėr anuo gal redagoutė tėk regėstroutė nauduotojā.
+titleprotectedwarning|'''DIEMESĖ: Tas poslapis bova ožrakėnts tēp, ka tėktās kāpkatrė nauduotuojē galietu ana sokortė.'''
+templatesused|{{PLURAL:~{0}\u007CŠabluons\u007CŠabluonā}}, katrėi īr nauduojamė poslapī:
+templatesusedpreview|{{PLURAL:~{0}\u007CŠabluons\u007CŠabluonā}}, nauduotė šėtuo parvaizuo:
+templatesusedsection|Šabluonā, nauduotė šėtom skėrsnelī:
+template-protected|(apsauguots)
+template-semiprotected|(posiau apsauguots)
+hiddencategories|Tas poslapis prėklausa ~{0} {{PLURAL:~{0}\u007Cpakavuotā kateguorėjē\u007Cpakavuotoms kateguorėjėms\u007Cpakavuotu kateguorėju}}:
+nocreatetext|{{SITENAME}} aprėbuojė galėmībe kortė naujus poslapius.\nTamsta galėt grīžtė ė redagoutė nūnā esonti poslapi, a [[Special:UserLogin\u007Cprėsėjongtė a sokortė paskīra]].
+permissionserrors|Teisiu klaida
+permissionserrorstext|Tamsta netorėt teisiu šėta darītė diel {{PLURAL:~{0}\u007Ctuos prīžastėis\u007Ctū prīžastiū}}:
+permissionserrorstext-withaction|Tamsta netorėt leidėma ~{1} dielē {{PLURAL:~{0}\u007Ctos prīžastėis\u007Ctū prīžastiu}}:
+recreate-moveddeleted-warn|'''Parspiejėms: Tamsta ikeliat faila, katros onkstiau bova ėštrėnts.'''\n\nTamsta torietomiet nusprēstė, a īr naudėnga tuoliau ikeldinietė ta faila.\nTuo faila pašalinėma istuorėjė īr pateikta dielē patuogoma:
+moveddeleted-notice|Tas poslapis bova ėštrėnts.\nĖštrėnta poslapė versėju sārašos īr pateikts paveiziejėmō žemiau.
+edit-conflict|Redagavėma kuonflėktos
+postedit-confirmation-created|Poslapis padėrbts.
+postedit-confirmation-restored|Poslapis atkorts.
+postedit-confirmation-saved|Tamstas padėrbts pakeitėms ėšsauguots īr.
+post-expand-template-inclusion-warning|Perspiejėms: Šabluonu īterpėma dėdoms īr par dėdelis.\nKāp katrėi šabluonā nebus ītrauktė.
+post-expand-template-inclusion-category|Poslapē, kur šabluonu īterpėma dėdoms viršėjams
+post-expand-template-argument-warning|Perspiejėms: Tas poslapis tor nuors vėina šabluona argomenta, katros tor per dėdli ėšplietėma dėdoma.\nTė argomentā bova praleistė.
+post-expand-template-argument-category|Poslapē, katrėi tor praleistū šabluona argomentu
+undo-success|Keitėms gal būtė atšaukts. Prašuom patėkrėntė palīgėnėma, asonti žemiau, kū patvėrtėntomiet, kū Tamsta šėta ė nuorėt padarītė, ė tumet ėšsauguokit pakeitėmos, asontios žemiau, kū ožbėngtomiet keitėma atšaukėma.
+undo-failure|Keitėms nagal būt atšaukts diel konflėktounantiu tarpėniu pakeitėmu.
+undo-summary|Atšauktė [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007CAptarėms]]) versėje ~{0}
+cantcreateaccount-text|Paskīrū kūrėma ėš šėta IP adresa ('''~{0}''') ožbluokava [[User:~{2}\u007C~{2}]].\n\n~{2} nuruodīta prīžastis īr ''~{1}''
+viewpagelogs|Ruodītė šėtuo poslapė specēliōsios vaiksmos
+nohistory|Šėts poslapis netor keitėmu istuorėjės.
+currentrev|Dabartėnė versėjė
+currentrev-asof|Dabartėnė ~{0} versėjė
+revisionasof|~{0} versėjė
+revision-info|~{0} versėjė nauduotuojė ~{1}
+previousrevision|←Onkstesnė versėjė
+nextrevision|Paskesnė versėjė→
+currentrevisionlink|Dabartėnė versėjė
+cur|dab
+next|kėts
+last|pask
+page_first|pėrm
+page_last|pask
+histlegend|Skėrtomā terp versėju: pažīmiekit līginamas versėjės ė spauskėt ''Enter'' klavėša a mīgtuka apatiuo.<br />\nŽīmiejimā: (dab) = palīginims so vielibiausė versėjė,\n(pask) = palīginims so priš ta bovosia versėjė, S = mažos pataisims.
+history-fieldset-title|Naršītė istuorėjuo
+history-show-deleted|Tėktās ėštrintė
+histfirst|Seniausė
+histlast|Vielibė̄jė
+historysize|(~{0} {{PLURAL:~{0}\u007Cbaits\u007Cbaitā\u007Cbaitu}})
+historyempty|(nieka nier)
+history-feed-title|Versėju istuorėjė
+history-feed-item-nocomment|~{0} ~{1}
+history-feed-empty|Prašuoms poslapis nēgzėstuo.\nAns galiejė būtė ėštrėnts ėš pruojekta, aba parvardėnts.\nPamiegīkėt [[Special:Search\u007Cėiškoutė pruojektė]] sosėjosiu naujū poslapiu.
+rev-delundel|ruodītė/kavuotė
+revisiondelete|Trintė/atkortė versėjės
+revdelete-show-file-submit|Tēp
+logdelete-selected|{{PLURAL:~{1}\u007CPasėrinkts\u007CPasėrinktė\u007CPasėrinktė}} ~{0} istuorėjės {{PLURAL:~{1}\u007Catėtėkims\u007Catsėtėkimā\u007Catsėtėkimā}}:
+revdelete-hide-comment|Keitėma pāiškėnėms
+revdelete-hide-user|Keitiejė nauduotojė vardos/IP adresos
+revdelete-unsuppress|Šalėntė apribuojėmos atkortuos versėjės
+revdel-restore|Keistė veizėmuma
+revdelete-edit-reasonlist|Keistė trīnėma prīžastis
+suppressionlog|Trīnėma istuorėjė
+mergehistory-success|~{2} [[:~{0}]] versėju siekmėngā sojongta so [[:~{1}]].
+revertmerge|Atskėrtė
+history-title|Poslapė „~{0}“ istuorėjė
+difference-title|~{0}: Skėrtoms terp redakcėju
+difference-title-multipage|~{0} ė ~{1}: Skėrtoms terp poslapiu
+lineno|Eilotė ~{0}:
+compareselectedversions|Palīgintė pasėrinktas versėjės
+editundo|atšauktė
+searchresults|Paėiškuos rezoltatā
+searchresults-title|Paėiškuos rezoltatā "~{0}"
+titlematches|Straipsniu pavadėnėmu atitėkmenīs
+textmatches|Poslapė torėnė atėtikmenīs
+notextmatches|Juokiū poslapė teksta atitikmenū
+prevn-title|{{PLURAL:~{0}\u007COnkstesnis ~{0} rezoltats\u007COnkstesnio ~{0} rezoltato\u007COnkstesni ~{0} rezoltatā}}
+nextn-title|{{PLURAL:~{0}\u007CKėts ~{0} rezoltats\u007CKėto ~{0} rezoltato\u007CKėti ~{0} rezoltatā}}
+shown-title|Ruodītė ~{0} {{PLURAL:~{0}\u007Crezoltata\u007Crezultato\u007Crezoltatus}} poslapī
+viewprevnext|Veizėtė (~{0} {{int:pipe-separator}} ~{1}) (~{2}).
+searchmenu-exists|'''Poslapis pavadėnts „[[~{0}]]“ šėtuo wiki'''
+searchmenu-new|'''Sokortė poslapi „[[:~{0}]]“ šėtuo wiki!'''
+searchprofile-articles|Torėnė poslapē
+searchprofile-images|Daugēlīpės terpės failā
+searchprofile-everything|Vėsks
+searchprofile-advanced|Prapliesta
+searchprofile-articles-tooltip|Ėiškuotė čiuonās: ~{0}
+searchprofile-images-tooltip|Ėiškuotė failu
+searchprofile-everything-tooltip|Ėiškuotė vėsuo torėnė (tuom patėm ėr aptarėma poslapiu)
+searchprofile-advanced-tooltip|Ėiškoutė skėrtingūsė vardū sėtīsė
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 žuodis\u007C~{1} žuodē\u007C~{1} žuodiu}})
+search-result-category-size|{{PLURAL:~{0}\u007C1 narīs\u007C~{0} nariū}} ({{PLURAL:~{1}\u007C1 subkateguorėjuo\u007C~{1} subkateguorėju}}, {{PLURAL:~{2}\u007C1 fails\u007C~{2} failu}})
+search-redirect|(paradresavėms ~{0})
+search-section|(skīrios ~{0})
+search-category|(kateguorėjė ~{0})
+search-file-match|(atėtėnk abruozdielė torėni)
+search-suggest|Mažo nuoriejot ~{0}
+search-interwiki-caption|Dokterėnē pruojektā
+search-interwiki-default|~{0} rezoltatā:
+search-interwiki-more|(daugiau)
+search-relatedarticle|Sosėjėn
+searchrelated|sosėjėn
+searchall|vėsė
+showingresults|Žemiau ruodoma lėgė '''~{0}''' {{PLURAL:~{0}\u007Crezoltata\u007Crezoltatu\u007Crezoltatu}} pradedont #'''~{1}'''.
+search-nonefound|Nier rezoltatu, katrėi atitėktu ožklausėma.
+powersearch-legend|Prapliesta paėiška
+powersearch-ns|Ėiškoutė vardū srėtīsė:
+powersearch-togglelabel|Pažīmietė:
+powersearch-toggleall|Vėskon
+powersearch-togglenone|Nieka
+search-external|Ėšuorėnė paėiška
+preferences|Nustatīmā
+mypreferences|Mona nustatīmā
+prefs-edits|Keitėmu skaitlius:
+prefs-skin|Ėšruoda
+skin-preview|Parveiza
+datedefault|Juokė pasėrėnkėma
+prefs-personal|Nauduotuojė pruopilis
+prefs-rc|Vielībė̅jė pakeitėmā
+prefs-watchlist|Keravuojamu sārašos
+prefs-watchlist-days|Kėik dėinū ruodītė keravuojamu sārašė:
+prefs-watchlist-days-max|Maximum ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}}
+prefs-watchlist-edits|Kėik pakeitėmu ruodītė ėšpliestiniam keravuojamu sārašė:
+prefs-watchlist-edits-max|(dėdliausias skaitlius: 1000)
+prefs-misc|Ivairė nustatīmā
+prefs-resetpass|Keistė slaptažuodi
+prefs-rendering|Ėšruoda
+saveprefs|Ėšsauguotė
+restoreprefs|Atstatītė vėsus numatītūsius nustatīmus
+prefs-editing|Redagavėms
+rows|Eilotės:
+columns|Štolpalē:
+searchresultshead|Paėiškuos nostatīmā
+stub-threshold|Minimums <a href="#" class="stub">nabėngta poslapė</a> fuormatavėmō:
+recentchangesdays|Ruodomas dėinas vielībūju pakeitėmu sārašė:
+recentchangesdays-max|(daugiausē ~{0} {{PLURAL:~{0}\u007Cdėina\u007Cdėinū\u007Cdėinas}})
+recentchangescount|Numatītasā keitėmu skaitlius, ruodoms vielībūju keitėmu, poslapiu istuorėjėsė ė notėkėmu sarašūsė:
+savedprefs|Nostatīmā siekmėngā ėšsauguotė.
+timezonelegend|Čiesa zuona
+localtime|Vėitinis čiesos:
+timezoneuseserverdefault|Nauduotė palē nutīliejėma ėš serverė
+timezoneuseoffset|Kėta (patikslėntė skėrtoma)
+servertime|Serverė čiesos:
+guesstimezone|Paimtė ėš naršīklės
+timezoneregion-africa|Afrėka
+timezoneregion-america|Amerėka
+timezoneregion-antarctica|Antarktėda
+timezoneregion-arctic|Arktės
+timezoneregion-asia|Azėjė
+timezoneregion-atlantic|Atlanta ondenīns
+timezoneregion-australia|Australėjė
+timezoneregion-europe|Euruopa
+timezoneregion-indian|Indėjės ondenīns
+timezoneregion-pacific|Ramosis ondenīns
+allowemail|Lēstė siūstė el. gramuotelės ėš kėtū nauduotuoju
+prefs-searchoptions|Ėiškuotė
+prefs-namespaces|Vardū srėtīs
+default|palē nūtīliejėma
+prefs-files|Failā
+youremail|El. pašts:
+username|Nauduotuojė vards:
+prefs-memberingroups|{{PLURAL:~{0}\u007CGropės\u007CGropiu}} narīs:
+prefs-registration|Ožsėregėstravėma čiesos:
+yourrealname|Tėkros vards:
+yourlanguage|Aplėnkuos kalba:
+yourvariant|Torėnė kalba:
+yournick|Pasėrinkts slapīvardis:
+badsig|Neteisings parašas; patėkrinkėt HTML žīmės.
+badsiglength|Tamstas parašos īr par ėlgs.\nAna gal sodarītė ne daugiau kāp ~{0} {{PLURAL:~{0}\u007Csėmbuolis\u007Csėmbuolē\u007Csėmbuoliu}}.
+yourgender|Lītis:
+gender-unknown|Nier nuruodīta
+gender-male|Vīrs
+gender-female|Muoterėška
+email|El. pašts
+prefs-help-realname|Tėkrs vards nier privaluoms, vuo jēgo Tamsta ana ivesėt, ons bus nauduojams Tamstas darba pažīmiejėmō.
+prefs-help-email|El. pašta adresos nier privaloms, ale uns leid Tamstā gautė nauja slaptažuodi, jēgo pamėršuot kuoks uns bova, ė tēpuogi Tamsta galėt leistė kėtėims pasėiktė Tamsta par Tamstas nauduotuojė a nauduotuojė aptarėma poslapi neatsklėidont Tamstas tapatoma.
+prefs-help-email-required|Rēk el. pašta adresa
+prefs-info|Glavnuojė infuormacėjė
+prefs-i18n|Kalbuos nustatīmā
+prefs-signature|Parašos
+prefs-dateformat|Datuos skvarma
+prefs-timeoffset|Čiesa skėrtoms
+prefs-advancedediting|Bendrė parametrā
+prefs-preview|Parveiza
+prefs-advancedrc|Papėlduomė nustatīmā
+prefs-advancedrendering|Papėlduomė nustatīmā
+prefs-advancedsearchoptions|Papėlduomė nustatīmā
+prefs-advancedwatchlist|Papėlduomė nustatīmā
+prefs-displayrc|Ruodītė nustatīmus
+prefs-displaywatchlist|Ruodītė nustatīmus
+prefs-diffs|Skėrtomā
+userrights|Nauduotuoju teisiu valdīms
+userrights-lookup-user|Tvarkītė nauduotuojė gropės
+userrights-user-editname|Iveskėt nauduotuojė varda:
+editusergroup|Redagoutė nauduotuojė gropes
+editinguser|Taisuoms nauduotuos '''[[User:~{0}\u007C~{0}]]''' ([[User talk:~{0}\u007C{{int:talkpagelinktext}}]]{{int:pipe-separator}}[[Special:Contributions/~{0}\u007C{{int:contribslink}}]])
+userrights-editusergroup|Keistė nauduotuoju gropes
+saveusergroups|Sauguotė nauduotuoju gropes
+userrights-groupsmember|Narīs:
+userrights-reason|Prīžastis:
+group|Gropė:
+group-user|Nauduotuojē
+group-autoconfirmed|Autuomatėškā patvirtėntė nauduotuojē
+group-bot|Buotā
+group-sysop|Adminėstratuorē
+group-bureaucrat|Biorokratā
+group-all|(vėsė)
+group-user-member|Nauduotuos
+group-autoconfirmed-member|Patvirtints nauduotuos
+group-bot-member|Buots
+group-sysop-member|Adminėstratuorios
+group-bureaucrat-member|Biorokrats
+group-suppress-member|Revėzorios
+grouppage-user|{{ns:project}}:Nauduotuojē
+grouppage-autoconfirmed|{{ns:project}}:Automatėškā patvėrtintė nauduotuojē
+grouppage-bot|{{ns:project}}:Robuotā
+grouppage-sysop|{{ns:project}}:Adminėstratuorē
+grouppage-bureaucrat|{{ns:project}}:Biorokratā
+right-read|Skaitītė poslapius
+right-edit|Keistė poslapius
+right-upload|Ikeltė failus
+right-delete|Trintė poslapius
+newuserlogpage|Nauduotuojė kūrėma regėstros
+rightslog|Nauduotuoju teisiu istuorėjė
+rightslogtext|Pateikiams nauduotuoju teisiu pakeitėmu sārašos.
+action-edit|redagoutė ta poslapi
+action-move|parvadintė šėta poslapi
+action-move-subpages|parvadintė šėta poslapi ėr anuo dalės
+action-move-categorypages|parvadintė kateguorėjes
+action-movefile|parvadintė šėta faila
+action-upload|ikeltė šėta faila
+action-delete|trintė ton poslapė
+action-undelete|atkortė ta poslapi
+action-patrol|pažīmietė kėtū keitėmus kāp patikrėntus
+action-userrights|keistė vėsū nauduotuoju teises
+nchanges|~{0} {{PLURAL:~{0}\u007Cpakeitėms\u007Cpakeitėmā\u007Cpakeitėmu}}
+enhancedrc-history|istuorėjė
+recentchanges|Vielībė̅jė pakeitėmā
+recentchanges-legend|Vielībuju pakeitėmu pasėrinkėmā
+recentchanges-summary|Keravuokėt patius vielībiausius wiki pakeitėmus tamė poslapī.
+recentchanges-feed-description|Keravuokėt patius vielībiausius pakeitėmus pruojektō tamė šaltėnī.
+recentchanges-label-newpage|Šėto keitėmo sukurts naus poslapis
+recentchanges-label-minor|Tas īr mažos pataisīms
+recentchanges-label-bot|Šėta keitėma padėrba autuomatėnė pruograma
+recentchanges-label-unpatrolled|Tas keitėms da nebova patikrints
+recentchanges-label-plusminus|Ton baitu skaitliom pakeists straipsnė apmiers
+recentchanges-legend-heading|'''Pāiškėnėmā:'''
+rcnotefrom|Žemiau īr pakeitėma pradedant nū <b>~{1}</b> (ruodom lėgė <b>~{0}</b> pakeitėmu).
+rclistfrom|Ruodītė naujus pakeitėmus pradedant nū ~{2} ~{1}
+rcshowhideminor|~{0} mažus pakeitėmus
+rcshowhideminor-show|Ruodītė
+rcshowhideminor-hide|Kavuotė
+rcshowhidebots|~{0} robuotus
+rcshowhidebots-show|Ruodītė
+rcshowhidebots-hide|Kavuotė
+rcshowhideliu|~{0} prėsėjongusiūm nauduotuojūm pakeitėmus
+rcshowhideliu-show|Ruodītė
+rcshowhideliu-hide|Kavuotė
+rcshowhideanons|~{0} anuonimėnius nauduotuojus
+rcshowhideanons-show|Ruodītė
+rcshowhideanons-hide|Kavuotė
+rcshowhidepatr|~{0} patikrėntus pakeitėmus
+rcshowhidepatr-show|Ruodītė
+rcshowhidepatr-hide|Kavuotė
+rcshowhidemine|~{0} mona pakeitėmus
+rcshowhidemine-show|Ruodītė
+rcshowhidemine-hide|Kavuotė
+rclinks|Ruodītė paskotėnius ~{0} pakeitėmu par paskotėnė̅sēs ~{1} dėinū<br />~{2}
+diff|skėrt
+hist|ist
+hide|Kavuotė
+show|Ruodītė
+minoreditletter|m
+newpageletter|N
+boteditletter|r
+number_of_watching_users_pageview|[~{0} {{PLURAL:~{0}\u007Ckeravuojontis nauduotuos\u007Ckeravuojontīs nauduotuojē\u007Ckeravuojontiu nauduotuoju}}]
+rc_categories|Ruodītė tėk šėtas kateguorėjės (atskirkit nauduodamė „\u007C“)
+rc_categories_any|Bikuokė
+rc-change-size-new|~{0} {{PLURAL:~{0}\u007Cbaits\u007Cbaitā\u007Cbaitu}} pu pakeitėma
+newsectionsummary|/* ~{0} */ naus skėrsnelis
+rc-enhanced-expand|Ruodītė detales
+rc-enhanced-hide|Kavuotė detales
+rc-old-title|pradiuo padėrbta kāp "~{0}"
+recentchangeslinked|Sosėjėn pakeitėmā
+recentchangeslinked-feed|Sosėjėn pakeitėmā
+recentchangeslinked-toolbox|Sosėjėn pakeitėmā
+recentchangeslinked-title|So ~{0} sosėje pakeitimā
+recentchangeslinked-summary|Šėtom specēliajam poslapi ruodomė vielībė̅jė pakeitėmā poslapiūs, i katrūs īr nuruodoma. Poslapē ėš Tamstas [[Special:Watchlist\u007Ckeravuojamu sāraša]] īr '''pastuorėntė'''.
+recentchangeslinked-page|Poslapė pavadinėms:
+recentchangeslinked-to|Ruodītė so doutu poslapiu sosėjosiu puslapiu pakeitėmus
+upload|Ikeltė faila
+uploadbtn|Ikeltė faila
+reuploaddesc|Sogrīžtė i ikielima fuorma.
+uploadnologin|Naprėsėjongis
+uploadnologintext|Nuoriedamė ikeltė faila, torėt būt [[Special:UserLogin\u007Cprėsėjongis]].
+upload_directory_read_only|Tėnklapė serveris nagal rašītė i ikielima papke (~{0}).
+uploaderror|Ikielima soklīdims
+uploadtext|Nauduokėtės žemiau pateikta skvarma kū ikeltomėt failus.\nNuoriedamė parveizietė ar ėiškuotė unkstiau ikeltū abruozdieliu, ēkėt i [[Special:FileList\u007Cikeltū failu saraša]], ikielėmā ėr ėštrīnėmā īr ožregėstroujamė [[Special:Log/upload\u007Cikielėmu istuorėjuo]], trīnėmā - [[Special:Log/delete\u007Ctrīnėmu istuorėjuo]].\n\nNuoriedamė panauduotė ikelta faila poslapī, nauduokėt tuokės nūoruodas:\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code>'''\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png\u007C200px\u007Cthumb\u007Cleft\u007Calt text]]</nowiki></code>''' aba\n* '''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code>''' tėisiuogėnē nūruodā i faila.
+upload-permitted|Laistėnė failu tėpā: ~{0}.
+upload-preferred|Pageidajamė failu tėpā: ~{0}.
+upload-prohibited|Oždraustė failu tėpā: ~{0}.
+uploadlogpage|Ikielimu istuorėjė
+uploadlogpagetext|Žemiau pateikiam paskotėniu failu ikielima istuorėjė.
+filename|Faila vards
+filedesc|Kuomentars
+fileuploadsummary|Kuomentars:
+filesource|Šaltėnis:
+ignorewarning|Nekrėiptė diemiesė i parspiejėma ėr ėšauguotė faila vėsvėin.
+ignorewarnings|Nekrėiptė diemesė i vėsuokius perspiejimos
+minlength1|Faila pavadinėms tor būtė nuors vėina raidie.
+illegalfilename|Faila vardė „~{0}“ īr sėmbuoliu, katrėi nier leidami poslapė pavadinėmūs. Prašuom parvadėntė faila ė miegītė ikeltė ana par naujė.
+badfilename|Faila pavadinėms pakeists i „~{0}“.
+filetype-missing|Fails netor galūnės (kāp pavīzdīs „.jpg“).
+unknown-error|Nutėka nežėnuoma klaida.
+emptyfile|Panašu, ka fails, katra ikieliet īr toščias. Tas gal būtė diel klaiduos faila pavadėnėmė. Pasėtėkrinkėt a tėkrā nuorėt ikeltė šėta faila.
+fileexists|Fails so tuokiu vardu jau īr, prašuom paveizėtė <strong>[[:~{0}]]</strong>, jēgo nesat ožtėkrėnts, a nuorit ana parrašītė.\n[[~{0}\u007Cthumb]]
+fileexists-extension|Fails so pavėdiu pavadinėmu jau īr: [[~{1}\u007Cthumb]]\n* Ikeliama faila pavadinėms: <strong>[[:~{0}]]</strong>\n* Jau esontė faila pavadinėms: <strong>[[:~{1}]]</strong>\nPrašuom ėšsėrėnktė kėta varda.
+file-exists-duplicate|Tas fails īr {{PLURAL:~{0}\u007Cšėta faila\u007Cšėtū failu}} doblėkats:
+uploadwarning|Diemesė
+savefile|Ėšsauguotė faila
+uploaddisabled|Ikielėmā oždraustė.
+uploaddisabledtext|Failu ikielėmā oždraustė īr.
+uploadscripted|Šėts failos tor HTML a programėni kuoda, katros gal būtė klaidėngā soprasts interneta naršīklės.
+uploadvirus|Šėtom faile īr virosas! Ėšsamiau: ~{0}
+upload-source|Faila šaltėnis
+sourcefilename|Ikeliams fails
+destfilename|Nuorims faila pavadinims
+upload-maxfilesize|Dėdliausias faila dėdoms: ~{0}
+upload-description|Abruozdielė aprašīms
+upload-options|Nostatīmā īkelėmō
+watchthisupload|Keravuotė šėta faila
+upload-success-subj|Ikelt siekmėngā
+upload-failure-subj|Ikielėma bieda
+upload-proto-error|Nateisėngs protuokols
+upload-proto-error-text|Nutuolinē ikielims raikalaun, kū URL prasėdietu <code>http://</code> o <code>ftp://</code>.
+upload-file-error|Vėdėnė klaida
+upload-file-error-text|Ivīka vėdėnė klaida bandont sokortė laikinaji faila serverī. Prašuom sosėsėiktė so sistemuos admėnėstratuoriom.
+upload-misc-error|Nažėnuoma ikielėma klaida
+upload-misc-error-text|Ivīka nežėnuoma klaida vīkstont ikielėmō. Prašuom patėkrėnt, kū URL teisėngs teipuogi pasėikiams ėr pamiegīkit viel. Jē bieda ėšlėik, sosėsėikėt so sistemuos admėnėstratuoriom.
+upload-curl-error6|Napavīkst pasėiktė URL
+upload-curl-error6-text|Pataikts URL nagal būt pasėikts. Prašuom patėkrėntė, kū URL īr teisings ėr svetainė veik.
+upload-curl-error28|Par ėlgā ikeliama
+upload-curl-error28-text|Atsakontė svetainė ožtronk par ėlgā. Patėkrėnkėt, a svetainė veik, palaukėt tropoti ė vielē pamiegīkit. Mažo Tamstā rēktu pamiegītė ne tuokio apkrauto čieso.
+license|Licensėjė
+license-header|Licensėjė
+nolicense|Nepasėrėnkt
+licenses-edit|Keistė lėcencėju parametrus
+license-nopreview|(Parveiza negalėma)
+upload_source_url| (tėkrs, vėišā priėinams URL)
+upload_source_file| (fails Tamstas kompioterī)
+listfiles-delete|trintė
+listfiles-summary|Tas specēlus poslapis ruod vėsus ikeltus failus.\nPalē numatīma paskiausē ikeltė failā īr ruoduomė sāroša vėršou.\nPaspaude ont štolpelė ontraštės pakeisėt ėšruokavėma.
+imgfile|fails
+listfiles|Failu sārašos
+listfiles_thumb|Somažints
+listfiles_date|Data
+listfiles_name|Pavadinėms
+listfiles_user|Nauduotuos
+listfiles_size|Dėdoms
+listfiles_description|Aprašīms
+listfiles_count|Versėjės
+listfiles-latestversion|Vielība atmaina
+listfiles-latestversion-yes|Tēp
+listfiles-latestversion-no|Ne
+file-anchor-link|Fails
+filehist|Abruozdielė istuorėjė
+filehist-help|Paspauskėt ont datas/čiesa, ka paveizietomėt faila tuoki, kokis ons bova tū čiesu.
+filehist-deleteall|trintė vėsus
+filehist-deleteone|trintė šėta
+filehist-revert|sogōžėntė
+filehist-current|dabartėnis
+filehist-datetime|Data/Čiesos
+filehist-thumb|Miniatiūra
+filehist-thumbtext|Versėjės ~{0} miniatiūra
+filehist-nothumb|Somažinima nie
+filehist-user|Nauduotuos
+filehist-dimensions|Mierā
+filehist-filesize|Faila dėdoms
+filehist-comment|Pāiškėnėms
+imagelinks|Failu nūruodas
+linkstoimage|{{PLURAL:~{0}\u007CŠėts poslapis\u007CŠėtė poslapē}} nuruod i šėta faila:
+nolinkstoimage|I faila neruod anėjuoks poslapis.
+morelinkstoimage|Veizietė [[Special:WhatLinksHere/~{0}\u007Cdaugiau nūruodu]] ton abruozdielėn.
+sharedupload|Tas fails īr ėš ~{0} ė gal būtė nauduojams kėtūs pruojektūs.
+sharedupload-desc-here|Tas fails īr ėš ~{0} ė gal būtė nauduojams kėtūsė pruojektūsė.\nInfuormacėjė ėš [~{1} faila aprašīma poslapė] īr pateikta žemiau.
+uploadnewversion-linktext|Ikeltė nauja faila versėje
+shared-repo-from|ėš ~{0}
+shared-repo|bendruos saugīklas
+upload-disallowed-here|Negalėt perrašītė ton faila.
+filerevert|Sogrōžėntė ~{0}
+filerevert-legend|Faila sogrōžinėms
+filerevert-intro|<span class="plainlinks">Tamsta grōžėnat '''[[Media:~{0}\u007C~{0}]]''' i versėje ~{3} (~{1}, ~{2}).</span>
+filerevert-comment|Pāiškėnėms:
+filerevert-submit|Grōžėntė
+filedelete|Trintė ~{0}
+filedelete-legend|Trintė faila
+filedelete-intro|Tamsta roušeties ėštrėntė faila '''[[Media:~{0}\u007C~{0}]]''' so vėsa anuo istuorėjė.
+filedelete-comment|Prīžastis:
+filedelete-submit|Trintė
+filedelete-success|'''~{0}''' bova ėštrints.
+filedelete-nofile|'''~{0}''' nēsa.
+filedelete-otherreason|Kėta/papėlduoma prīžastis:
+filedelete-reason-otherlist|Kėta prīžastis
+filedelete-reason-dropdown|*Dažnas trīnėma prīžastīs\n** Autorīstės teisiu pažeidėmā\n** Pasėkartuojontis fails
+filedelete-edit-reasonlist|Keistė trīnėma prīžastis
+mimesearch|MIME paėiška
+mimesearch-summary|Šėts poslapis laid ruodīti failus vagol anū MIME tipa. Iveskėt: torėnėtips/potipis, pvz. <code>image/jpeg</code>.
+mimetype|MIME tips:
+download|parsėsiūstė
+unwatchedpages|Nekeravuojėmė poslapē
+listredirects|Paradresavėmu sārašos
+unusedtemplates|Nenauduojamė šabluonā
+unusedtemplatestext|Šėts poslapis ruod sāraša poslapiu, esontiu šabluonu vardū srėtī, katrė nė iterptė i juoki kėta poslapi. Nepamėrškėt patėkrėntė kėtū nūruodu priš anūs ėštrėnont.
+unusedtemplateswlh|kėtas nūruodas
+randompage|Bikuoks poslapis
+randompage-nopages|Šėtuo vardū srėti nier anėjuokiu poslapiu.
+randomincategory|Bikuoks poslapis kateguorėjuo
+randomincategory-category|Kateguorėjė:
+randomredirect|Bikuoks paradresavėms
+randomredirect-nopages|Šėtuo vardū srėti nier anėjuokiū paradresavėmu.
+statistics-header-edits|Redagavėmu statėstėka
+statistics-header-users|Nauduotuoju statėstėka
+statistics-header-hooks|Kėta statėstėka
+statistics-files|Ikeltė failā
+statistics-edits|Poslapiu redagavėmu skaitlius nū {{SITENAME}} sokūrėma
+statistics-edits-average|Vėdotėnis keitėmu skaitlius poslapiō
+statistics-users|Ožsėregėstravosiu [[Special:ListUsers\u007Cnauduotuoju]]
+statistics-users-active|Aktīviu nauduotuoju
+statistics-users-active-desc|Nauduotuojē, katrėi par {{PLURAL:~{0}\u007Cpaskiausė dėina\u007Cpaskiausė 2 dėinė\u007Cpaskiausės ~{0} dėinas\u007Cpaskiausiu ~{0} dėinū}} padėrba keitėmu
+doubleredirects|Dvėgobė paradresavėmā
+doubleredirectstext|Tėi paradresavėmā ruod i kėtus paradresavėma poslapius. Kuožnuo eilotē pamėnavuots pėrmasā ėr ontrasā paradresavėmā, tēpuogi ontrojė paradresavėma paskėrtis, katra paprastā ė paruod i tėkraji poslapi, i katra pėrmasā paradresavėms ė torietu ruodītė.
+double-redirect-fixed-move|[[~{0}]] bova parkelts, daba tas īr paradresavėms i [[~{1}]]
+brokenredirects|Neveikiantīs paradresavėmā
+brokenredirectstext|Žemiau ėšvardintė paradresavėma poslapē ruod i nasontius poslapius:
+brokenredirects-edit|redagoutė
+brokenredirects-delete|trintė
+withoutinterwiki|Poslapē ba kalbū nūruodu
+withoutinterwiki-summary|Šėtė poslapē neruod i kėtū kalbū versėjės:
+withoutinterwiki-submit|Ruodītė
+fewestrevisions|Straipsnē so mažiausė pakeitėmu
+nbytes|~{0} {{PLURAL:~{0}\u007Cbaits\u007Cbaitā\u007Cbaitu}}
+ncategories|~{0} {{PLURAL:~{0}\u007Ckateguorėjė\u007Ckateguorėjės\u007Ckateguorėju}}
+nlinks|~{0} {{PLURAL:~{0}\u007Cnūruoda\u007Cnūruodas\u007Cnūruodu}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cnarīs\u007Cnarē\u007Cnariū}}
+nrevisions|~{0} {{PLURAL:~{0}\u007Cpakeitėms\u007Cpakeitėmā\u007Cpakeitėmu}}
+nviews|~{0} {{PLURAL:~{0}\u007Cparuodīms\u007Cparuodīmā\u007Cparuodīmu}}
+specialpage-empty|Šėtā ataskaitā nie rezoltatu.
+lonelypages|Vėinišė straipsnē
+lonelypagestext|I šėtuos poslapius nier nūruodu ėš kėtū šėta pruojekta poslapiu.
+uncategorizedpages|Poslapē, napriskėrtė juokē kateguorėjē
+uncategorizedcategories|Kateguorėjės, naprėskėrtas juokē kateguorėjē
+uncategorizedimages|Abruozdielē, nepriskėrtė juokē kateguorėjē
+uncategorizedtemplates|Šabluonā, nepriskėrtė juokē kateguorėjē
+unusedcategories|Nenauduojamas kateguorėjės
+unusedimages|Nenauduojamė failā
+wantedcategories|Nuorėmiausės kateguorėjės
+wantedpages|Nuorėmiausē poslapē
+wantedfiles|Nuorėmė failā
+wantedtemplates|Nuorėmė šabluonā
+mostlinked|Daugiausē ruodomė straipsnē
+mostlinkedcategories|Daugiausē ruodomas kateguorėjės
+mostlinkedtemplates|Daugiausē ruodomė šabluonā
+mostcategories|Straipsnē so daugiausē kateguorėju
+mostimages|Daugiausē ruodomė abruozdielē
+mostrevisions|Straipsnē so daugiausē keitėmu
+prefixindex|Vėsė poslapē so prīšdielio
+shortpages|Trompiausė poslapē
+longpages|Ėlgiausė poslapē
+deadendpages|Straipsnē-aklavėitės
+deadendpagestext|Tė poslapē netor nūruodu i kėtus poslapius šėtom pruojektė.
+protectedpages|Apsauguotė poslapē
+protectedpagesempty|Šėtu čiesu nier apsauguots anėjuoks fails so šėtās parametrās.
+protectedtitles|Apsauguotė pavadinėmā
+protectedtitlesempty|Šėtou čieso nier anėjuokė pavadinėma, katros apsauguots tās parametrās.
+listusers|Sārašos nauduotuoju
+listusers-editsonly|Ruodītė tėktās nauduotuojus katrėi īr atlėkė pakeitėmus
+usercreated|Paskīra īr padėrbta ~{0} ~{1}
+newpages|Naujausė straipsnē
+newpages-username|Nauduotuojė vards:
+ancientpages|Seniausė poslapē
+move|Parvadintė
+movethispage|Parvadintė šėta poslapi
+unusedimagestext|Primenam, kū kėtas svetainės gal būtė nuruodiosės i abruozdieli tėisiogėniu URL, no vėstėik gal būtė šėtom sārašė, nuors ėr īr aktīvē naudounams.
+unusedcategoriestext|Šėtū kateguorėju poslapē sokortė, nuors juoks kėts straipsnis a kateguorėjė ana nenauduo.
+notargettitle|Nenuruodīts objekts
+notargettext|Tamsta nenuruodiet nuorima poslapė a nauduotuojė,\nkatram ivīkdītė šėta funkcėjė.
+pager-newer-n|~{0} {{PLURAL:~{0}\u007Cpaskesnis\u007Cpaskesni\u007Cpaskesniū}}
+pager-older-n|{{PLURAL:~{0}\u007Csenesnis\u007Csenesni\u007Csenesniū}}
+booksources|Knīngu šaltinē
+booksources-search-legend|Knīngu šaltiniu paėiška
+specialloguserlabel|Nauduotuos:
+speciallogtitlelabel|Pavadėnims:
+log|Specēliūju veiksmū istuorėjė
+all-logs-page|Vėsos istuorėjės
+alllogstext|Bėndra idietu failu, ėštrīnėmu, ožrakėnėmu, bluokavėmu ė prėvėlėju soteikėmu istuorėjė.\nĪr galėmībė somažintė rezoltatu skaitliu patėkslėnont vēksma tėpa, nauduotuojė a sosėjosė poslapė.
+logempty|Istuorėjuo nier anėjuokiū atitinkontiu atsėtėkimu.
+log-title-wildcard|Ėiškuotė pavadinėmu, katrė prasėded šėtuo teksto
+showhideselectedlogentries|Ruodītė/kavuotė sāraša ponktus, katrūs pasėrėnkot
+allpagesfrom|Ruodītė poslapius pradedont nu:
+allpagesto|Ruodītė poslapius, basėbengėnčios so:
+allarticles|Vėsė straipsnē
+allinnamespace|Vėsė poslapē (srėtis - ~{0})
+allpagessubmit|Tink
+allpagesprefix|Ruodītė poslapios so prīdelēs:
+allpagesbadtitle|Douts poslapė pavadėnėms īr neteisings a tor terpkalbėnė a terppruojektėnė prīdielė. Anamė īr vėns a kelė žėnklā, katrū negal nauduotė pavadėnėmūs.
+allpages-bad-ns|{{SITENAME}} netor „~{0}“ vardū srėtėis.
+allpages-hide-redirects|Kavuotė nukrėipėmus
+categoriespagetext|Pruojekte īr šėtuos kateguorėjės.\n[[Special:UnusedCategories\u007CUnused categories]] are not shown here.\nAlso see [[Special:WantedCategories\u007Cwanted categories]].
+categoriesfrom|Ruodītė kateguorėjės pradedont nu:
+deletedcontributions|Panaikėnts nauduotuojė duovis
+deletedcontributions-title|Ėštrėnts nauduotuojė duovis
+linksearch|Ėšuorėnės nūruodas
+linksearch-ns|Vardū srėtis:
+linksearch-ok|Ėiškuotė
+linksearch-line|~{0} īr sosėits ėš ~{1}
+listusersfrom|Ruodītė nauduotuojus pradedont nū:
+listusers-submit|Ruodītė
+listusers-noresult|Nerast anėjuokiū nauduotuoju.
+listgrouprights|Nauduotuoju gropiu teisės
+listgrouprights-group|Gropė
+listgrouprights-members|(nariū sārašos)
+mailnologin|Nier adresa
+mailnologintext|Tamstā reik būtė [[Special:UserLogin\u007Cprisėjongosiam]]\nė tor būtė ivests teisings el. pašta adresos Tamstas [[Special:Preferences\u007Cnustatīmuos]],\nkū siōstomiet el. gruomatas kėtėm nauduotuojam.
+emailuser|Rašītė gruomata šėtam nauduotuojō
+emailpage|Siūstė el. gruomata nauduotuojui
+noemailtitle|Nier el. pašta adreso
+noemailtext|Šėts nauduotuos nier nuruodės teisėnga el.pašta adresa a īr pasėrinkės negautė el. pašta ėš kėtū nauduotuoju.
+email-legend|Siūstė elektruonėne gruomata kėtam {{SITENAME}} nauduotuojō
+emailfrom|Nū:
+emailmessage|Pranešėms:
+emailsend|Siōstė
+emailccme|Siōstė monei mona gruomatas kuopėjė.
+emailccsubject|Gruomatas kuopėjė nauduotuojō ~{0}: ~{1}
+emailsent|El. gruomata ėšsiōsta
+emailsenttext|Tamstas el. pašta žėnotė ėšsiōsta.
+watchlist|Keravuojamė straipsnē
+mywatchlist|Keravuojamė poslapē
+watchlistfor2|Nauduotuojė ~{0} (~{1})
+nowatchlist|Netorėt anėvėina keravuojama poslapė.
+watchlistanontext|Prašuom ~{0}, ka parveizietomėt a pakeistomiet elementus sava keravuojamu sārašė.
+watchnologin|Neprisėjongės
+addwatch|Prikergtė pri keravuojamu
+addedwatchtext|Poslapis "[[~{0}]]" idiets i [[Special:Watchlist\u007Ckeravuojamu sāraša]].\nBūsantīs poslapė ėr atėtinkama aptarėma poslapė pakeitėmā bus paruoduomė keravuojamu poslapiu sārašė,\ntēpuogi bus '''parīškintė''' [[Special:RecentChanges\u007Cvielībūju pakeitėmu sārašė]], kū ėšsėskėrtom ėš kėtū straipsniu.\nJēgo bikumet ožsėnuorietomiet liautėis keravuotė straipsnė, spauskat "nebkeravuotė" vėršotėniam meniū.
+removewatch|Ėšmestė ėš kieravuojamu
+removedwatchtext|Poslapis „[[:~{0}]]“ pašalėnts ėš [[Special:Watchlist\u007CTamstas keravuojamu sāraša]].
+removedwatchtext-short|Poslapis "~{0}" bova ėšmests ėš kieravuojamu.
+watch|Keravuotė
+watchthispage|Keravuotė šėta poslapė
+unwatch|Nebkeravuotė
+unwatchthispage|Nustuotė keravuotė
+notanarticle|Ne torėnė poslapis
+watchlist-details|Keravuojama ~{0} {{PLURAL:~{0}\u007Cposlapis\u007C~{0} poslapē\u007C~{0} poslapiu}} neskaitlioujant aptarėmu poslapiu.
+wlheader-enotif|El. pašta primėnėmā ijongtė īr.
+wlheader-showupdated|Poslapē, katrėi pakeistė nu Tamstas paskotėnė apsėlonkėma čiesa anūs, īr pažīmietė '''pastuorintā'''
+wlnote|Ruoduoma '''~{0}''' paskotėniu pakeitėmu, atlėktū par '''~{1}''' paskotėniu adīnu.
+wlshowlast|Ruodītė paskotėniu ~{0} adīnu, ~{1} dėinū a  pakeitėmus
+watchlist-options|Keravuojamu sāroša pasėrinkėmā
+watching|Itraukiama i keravuojamu sāraša...
+unwatching|Šalėnama ėš keravuojamu sāraša...
+enotif_reset|Pažīmietė vėsus poslapius kāp aplonkītus
+enotif_impersonal_salutation|{{SITENAME}} nauduotuos
+enotif_anon_editor|anuonėminis nauduotuos ~{0}
+created|sokūrė
+changed|pakeitė
+deletepage|Trintė poslapi
+confirm|Ožtvėrtinu
+excontent|boves torinīs: „~{0}“
+excontentauthor|boves torinīs: „~{0}“ (redagava tėktās „[[Special:Contributions/~{1}\u007C~{1}]]“)
+exbeforeblank|priš ėštrinant torinīs bova: „~{0}“
+delete-confirm|Ėštrėnta "~{0}"
+delete-legend|Trīnėms
+historywarning|Diemesė: Trėnams poslapis tor istuorėjė:
+confirmdeletetext|Tamsta pasėrėnkuot ėštrėntė poslapi a abruozdieli draugum so vėsa anuo istuorėjė.\nPrašuom patvėrtėntė, kū Tamsta tėkrā nuorėt šėtu padarītė, žėnuot aple galėmus padarėnius, ė kū Tamsta šėtā daruot atsėžvelgdamė i [[{{MediaWiki:Policy-url}}\u007Cpuolitėka]].
+actioncomplete|Vēksmos atlėkts īr
+actionfailed|Veiksmos atšaukts īr
+deletedtext|„~{0}“ ėštrints.\nPaskotiniu pašalinėmu istuorėjė - ~{1}.
+dellogpage|Pašalinėmu istuorėjė
+dellogpagetext|Žemiau īr pateikiams paskotiniu ėštrīnimu sārašos.
+deletionlog|pašalinėmu istuorėjė
+reverted|Atkorta i onkstesne versėje
+deletecomment|Prīžastis:
+deleteotherreason|Kėta/papėlduoma prižastis:
+deletereasonotherlist|Kėta prižastis
+deletereason-dropdown|*Dažnas trīnėma prižastīs\n** Autorė prašīms\n** Autorėniu teisiu pažeidėms\n** Vandalėzmos
+delete-edit-reasonlist|Keistė trėnėma prīžastis
+rollback|Atmestė pakeitėmos
+rollbacklink|atmestė
+rollbacklinkcount|atmestė ~{0} {{PLURAL:~{0}\u007Ckeitėms\u007Ckeitėmo\u007Ckeitėmus\u007Ckeitėmu}}
+rollbackfailed|Atmetims napavīka
+cantrollback|Negalėma atmestė redagavėma; paskotinis keitės nauduotuos īr tuo poslapė autorius.
+alreadyrolled|Nepavīka atmestė paskotėnė [[User:~{1}\u007C~{1}]] ([[User talk:~{1}\u007CAptarėms]]) darīta straipsnė [[~{0}]] keitėma;\nkažkas jau pakeitė straipsnė arba sospiejė pėrmiesnis atmestė keitėma.\n\nGalėnis keitėms dėrbts nauduotuojė [[User:~{2}\u007C~{2}]] ([[User talk:~{2}\u007CAptarėms]]).
+editcomment|Padėrbėma pāiškėnėms bova: „''~{0}''“.
+revertpage|Atmests [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007CAptarėms]]) pakeitėms; sogrōžėnta nauduotuojė [[User:~{0}\u007C~{0}]] versėjė
+rollback-success|Atmestė ~{0} keitėmā; grōžėnta i paskotėne ~{1} versėje.
+sessionfailure|Atruod kū īr biedū so Tamstas prėsėjongėma sesėjė; šėts veiksmos bova atšaukts kāp atsargoma prėimonė priš sesėjės vuogėma.\nPrašoum paspaustė „atgal“ ėr parkrautė poslapi ėš katruo atiejot, ė pamieginkėt vielē.
+protectlogpage|Rakinėmu istuorėjė
+protectlogtext|Žemiau īr poslapė ožrakinėmu tēpuogi atrakinėmu istuorėjė. Nūnā veikiantiu poslapiu apsaugū sāraša sorasėt [[Special:ProtectedPages\u007Capsauguotu poslapiu sarašė]].
+protectedarticle|ožrakina „[[~{0}]]“
+modifiedarticleprotection|pakeists „[[~{0}]]“ apsauguos līgis
+unprotectedarticle|atrakėna „[[~{0}]]“
+protect-title|Nustatuoms apsauguojėma līgis poslapiō „~{0}“
+prot_1movedto2|Straipsnis [[~{0}]] parvadints i [[~{1}]]
+protect-legend|Ožrakinėma patvėrtinėms
+protectcomment|Prīžastis:
+protectexpiry|Beng galiuotė:
+protect_expiry_invalid|Galiuojėma čiesos īr nateisėngs.
+protect_expiry_old|Galiuojėma čiesos īr praėitī.
+protect-text|Čė Tamsta galėt paveizėtė ė pakeistė apsauguos līgi šėtuo poslapio '''~{0}'''.
+protect-locked-access|Tamstas paskīra netor teisiu keistė poslapiu apsauguos līgiu.\nČė īr dabartėnē nustatīmā poslapiō '''~{0}''':
+protect-cascadeon|Tas poslapis nūnā īr apsauguots, kadongi ons īr itraukts i {{PLURAL:~{0}\u007Cta poslapi, apsauguota\u007Ctūs poslapiūs, apsauguotus}} „pakuopėnės apsauguos“ pasėrėnkėmu. Tamsta galėt pakeistė šėta poslapė apsauguos līgi, no tas nepaveiks pakuopėnės apsauguos.
+protect-default|Leistė vėsėms nauduotuojams
+protect-fallback|Rēkalautė „~{0}“ teisės
+protect-level-autoconfirmed|Blokoutė naujē prisėregėstravosius ė neregėstroutus nauduotuojus
+protect-level-sysop|Tėktās adminėstratuorē
+protect-summary-cascade|pakuopėnė apsauga
+protect-expiring|beng galiuotė ~{0} (UTC)
+protect-expiring-local|beng galiuotė ~{0}
+protect-expiry-indefinite|nerėbuotā
+protect-cascade|Apsaugotė poslapius, itrauktus i šėta poslapi (pakuopėnė apsauga).
+protect-cantedit|Tamsta negalėt keistė šėta poslapė apsauguojėma līgiu, kagongi netorėt teisiu anuo redagoutė.
+protect-othertime|Kėts čiesos:
+protect-othertime-op|kėts čiesos
+protect-existing-expiry|Esams rakėnėma ožsėbengėma čiesos: ~{2}, ~{1}
+protect-existing-expiry-infinity|Dabartėnis galiuojėma čiesos: omžiams
+protect-otherreason|Kėta/papėlduoma prīžastis:
+protect-otherreason-op|Kėta/papėlduoma prīžastis
+protect-dropdown|*Iprastas ožrakinėma prīžastīs\n** Intensīvus vandalėzmos\n** Intensīvus nūruodu reklamavėms\n** Neproduktīvi redagavėma vaina\n** Dėdlė svarboma poslapis
+protect-edit-reasonlist|Keistė ožrakinėma prīžastis
+protect-expiry-options|1 adīna:1 hour,1 dėina:1 day,1 nedielė:1 week,2 nedielės:2 weeks,1 mienou:1 month,3 mieniesē:3 months,6 mieniesē:6 months,1 metā:1 year,par omžius:infinite
+restriction-type|Laidėms:
+restriction-level|Aprėbuojėma līgis:
+minimum-size|Minėmalus dėdoms
+maximum-size|Dėdliausis dėdoms
+pagesize|(baitās)
+restriction-edit|Redagavėms
+restriction-move|Parvadėnėms
+restriction-create|Sokortė
+restriction-upload|Ikeltė
+restriction-level-sysop|pėlnā apsauguota
+restriction-level-autoconfirmed|posiau apsauguota
+restriction-level-all|bikuoks
+undelete|Atstatītė ėštrinta poslapi
+undeletepage|Ruodītė ė atkortė ėštrintos poslapios
+viewdeletedpage|Ruodītė ėštrintos poslapios
+undeletepagetext|Žemiau ėšvardėntė poslapē īr ėštrėntė, no da laikuomi\narkīve, tudie anie gal būt atstatītė. Arkīvs gal būt perēodėškā valuoms.
+undeleteextrahelp|Nuoriedamė atkortė vėsa poslapi, palikit vėsas varnales napažīmietas ėr\nspauskėt '''''Atkortė'''''. Nuoriedamiė atlėktė pasirėnktini atstatīma, pažīmiekit varnales šėtū versėju, katras nuorietomiet atstatītė, ėr spauskėt '''''Atkortė'''''. Paspaudus\n'''''Ėš naujė''''' bos ėšvalītuos vėsos varnalės ėr kuomentara lauks.
+undeleterevisions|~{0} {{PLURAL:~{0}\u007Cversėjė\u007Cversėjės\u007Cversėju}} soarkīvouta
+undeletehistory|Jē atstatīsėt straipsni, istuorėjuo bos atstatītuos vėsos versėjės.\nJē puo ėštrīnima bova sokuots straipsnis tuokiuo patio pavadėnėmo,\natstatītuos versėjės atsiras onkstesnie istuorėjuo, o dabartėnė\nversėjė lėks napakeista. Atkoriant īr prarondamė apribuojimā failu versėjuom.
+undeleterevdel|Atkorėms nebus ivīkdīts, jē šėtā nulems paskotėnės poslapė versėjės dalini ėštrīnima.\nTuokēs atvejās, Tamstā rēk atžīmietė a atkavuotė naujausēs ėštrintas versėjės.\nFailu versėjės, katrū netorėt teisiu veizėtė, nebus atkortas.
+undeletehistorynoadmin|Šėts straipsnis bova ėštrints. Trīnima prižastis\nruodoma žemiau, teipuogi kas redagava poslapi\nlėgė trīnima. Ėštrintū poslapiu tekstos īr galėmas tėk admėnėstratuoriam.
+undelete-revision|Ėštrėnta ~{0} versėjė, katra ~{3} d. ~{4} padėrba ~{2}:
+undeleterevision-missing|Neteisėnga a dėngosė versėjė. Tamsta mažo torėt bluoga nūruoda, a versėjė bova atkorta a pašalėnta ėš arkīva.
+undeletebtn|Atkortė
+undeletelink|veizietė/atstatītė
+undeleteviewlink|veizietė
+undeleteinvert|Žīmietė prīšėngā
+undeletecomment|Kuomentars:
+undeletedrevisions|atkorta ~{0} {{PLURAL:~{0}\u007Cversėjė\u007Cversėjės\u007Cversėju}}
+undeletedrevisions-files|atkorta ~{0} {{PLURAL:~{0}\u007Cversėjė\u007Cversėjės\u007Cversėju}} ėr ~{1} {{PLURAL:~{1}\u007Cfails\u007Cfailā\u007Cfailu}}
+undeletedfiles|atkorta ~{0} {{PLURAL:~{0}\u007Cfails\u007Cfailā\u007Cfailu}}
+undeletedpage|'''~{0} bova atkurts'''\nParveizėkiet [[Special:Log/delete\u007Ctrīnimu sāraša]], nuoriedamė rastė paskotėniu trīnimu ėr atkorėmu sāraša.
+undelete-header|Veizėkit [[Special:Log/delete\u007Ctrīnima istuorėjuo]] paskoteniausē ėštrintū poslapiu.
+undelete-search-box|Ėiškuotė ėštrintū poslapiu
+undelete-search-prefix|Ruodītė poslapios pradedant so:
+undelete-search-submit|Ėiškuotė
+undelete-no-results|Nabova rasta juokė atėtėnkontė poslapė ėštrīnima arkīve.
+undelete-show-file-confirm|A ėš tėkrā nuorėt parveizietė ėštrėnta faila „<nowiki>~{0}</nowiki>“ ~{1} ~{2} versėjė?
+undelete-show-file-submit|Tēp
+namespace|Vardū srėtis:
+invert|Žīmietė prīšėngā
+namespace_association|Sosėrėšos vardū srėtės
+contributions|Nauduotuojė duovis
+contributions-title|Nauduotuojė ~{0} duovis
+mycontris|Duovis
+contribsub2|Nauduotuojė ~{0} (~{1})
+uctop| (vielībs)
+month|Nu mienėsė (ėr onkstiau):
+year|Nu metu (ėr onkstiau):
+sp-contributions-newbies|Ruodītė tėk naujū prieteliu duovios
+sp-contributions-newbies-sub|Naujuoms paskīruoms
+sp-contributions-newbies-title|Nauduotuoju keitėmā naujuoms paskīruoms
+sp-contributions-blocklog|Bluokavėmu istuorėjė
+sp-contributions-suppresslog|panaikėnts nauduotuojė duovis
+sp-contributions-deleted|Panaikėnts nauduotuojė duovis
+sp-contributions-uploads|abruozdielē
+sp-contributions-logs|Specēliūju veiksmū istuorėjė
+sp-contributions-talk|Aptarėms
+sp-contributions-userrights|Nauduotuoju teisiu valdīms
+sp-contributions-search|Ėiškuotė duovė
+sp-contributions-username|IP adresos a nauduotuojė vards:
+sp-contributions-toponly|Ruodītė tėktās paskiausius keitėmus
+sp-contributions-submit|Ėiškuotė
+whatlinkshere|Sosėjėn straipsnē
+whatlinkshere-title|Poslapē, katrėi ruod i "~{0}"
+whatlinkshere-page|Poslapis:
+linkshere|Šėtė poslapē ruod i '''[[:~{0}]]''':
+nolinkshere|I '''[[:~{0}]]''' nūruodu nier.
+nolinkshere-ns|Nurodītuo vardū srėtī anė vėins poslapis neruod i '''[[:~{0}]]'''.
+isredirect|nukreipēmasės poslapis
+istemplate|iterpims
+isimage|faila nūruoda
+whatlinkshere-prev|~{0} {{PLURAL:~{0}\u007Conkstesnis\u007Conkstesni\u007Conkstesniū}}
+whatlinkshere-next|~{0} {{PLURAL:~{0}\u007Ckėts\u007Ckėtė\u007Ckėtū}}
+whatlinkshere-links|← nūruodas
+whatlinkshere-hideredirs|~{0} nukreipėmus
+whatlinkshere-hidetrans|~{0} itraukėmus
+whatlinkshere-hidelinks|~{0} nūruodas
+whatlinkshere-hideimages|~{0} abruozdieliu nūruodas
+whatlinkshere-filters|Fėltrā
+block|Ožblokoutė nauduotuoja
+unblock|Atblokoutė nauduotuoja
+blockip|Ožblokoutė nauduotuoja
+blockip-legend|Blokoutė nauduotuoja
+blockiptext|Nauduokėt šėta fuorma noriedamė oždraustė redagavėma teises nuruodīto IP adreso a nauduotuojo. Tas torietu būt atlėikama tam, kū sostabdītomiet vandalėzma, ė vagol [[{{ns:project}}:Puolitėka\u007Cpuolitėka]].\nŽemiau nuruodīkėt tėkslē prižastė.
+ipaddressorusername|IP adresos a nauduotuojė vards
+ipbexpiry|Galiuojėma čiesos
+ipbreason|Prīžastis:
+ipbreason-dropdown|*Dažniausės bluokavėma prižastīs\n** Melagėngas infuormacėjės rašīms\n** Torėnė trīnims ėš poslapiu\n** Spaminims\n** Zaunu/bikuo rašīms i poslapios\n** Gondinėmā/Pėktžuodiavėmā\n** Pėktnaudžiavėms paskėruomis\n** Netėnkams nauduotuojė vards
+ipbcreateaccount|Nelaistė kortė paskīrū
+ipbemailban|Nelaistė nauduotuojō siōstė el. gruomatas
+ipbenableautoblock|Autuomatėškā blokoutė tuo nauduotuojė paskiausē nauduota IP adresa, ė bikuokius paskesnius IP adresus, ėš katrū ons miegin redagoutė
+ipbsubmit|Blokoutė šėta nauduotuoja
+ipbother|Kėtuoks čiesos
+ipboptions|2 adīnas:2 hours,1 dėina:1 day,3 dėinas:3 days,1 nedielė:1 week,2 nedielės:2 weeks,1 mienou:1 month,3 mienesē:3 months,6 mienesē:6 months,1 metā:1 year,omžėms:infinite
+ipbwatchuser|Keravuotė tuo nauduotuojė poslapi ėr anuo aptarėma poslapi
+ipb-change-block|Parblokoutė ta nauduotuoja so šėtās nustatīmās
+ipb-confirm|Tėkrā blokoutė
+badipaddress|Nelaistėns IP adresos
+blockipsuccesssub|Ožblokavėms pavīka
+blockipsuccesstext|[[Special:Contributions/~{0}\u007C~{0}]] bova ožblokouts.\n<br />Aplonkīkėt [[Special:BlockList\u007CIP blokavėmu istuorėjė]] noriedamė ana parveizėtė.
+ipb-edit-dropdown|Redagoutė blokavėmu prīžastis
+ipb-unblock-addr|Atblokoutė ~{0}
+ipb-unblock|Atblokoutė nauduotuojė varda a IP adresa
+ipb-blocklist|Ruodītė asontius bluokavėmus
+ipb-blocklist-contribs|~{0} duovis
+unblockip|Atbluokoutė nauduotuoja
+unblockiptext|Nauduokėt šėta fuorma, kū atkortomiet rašīma teises\nonkstiau ožbluokoutam IP adresō a nauduotuojō.
+ipusubmit|Atblokoutė šėta adresa
+unblocked|[[User:~{0}\u007C~{0}]] bova atbluokouts
+unblocked-range|~{0} bova atblokouts.
+unblocked-id|Bluokavėms ~{0} bova pašalėnts
+unblocked-ip|[[Special:Contributions/~{0}\u007C~{0}]] bova atblokouts.
+blocklist|Ožblokoutė nauduotuojē
+ipblocklist|Ožblokoutė nauduotuojē
+ipblocklist-legend|Rastė ožblokouta nauduotuoja
+blocklist-expiry|Beng galiuotė
+blocklist-by|Blokoutuos
+blocklist-params|Blokavėma nustatīmā
+blocklist-reason|Prīžastis
+ipblocklist-submit|Ėiškuotė
+infiniteblock|neribuotā
+expiringblock|beng galiuotė ~{0} ~{1}
+anononlyblock|vėn anuonėmā
+noautoblockblock|autuomatinis blokavėms ėšjongts
+createaccountblock|paskīrū korėms oždrausts īr
+emailblock|el. pašts ožblokouts
+blocklist-nousertalk|negal rašītė sava aptarėmė
+ipblocklist-empty|Blokavėmu sarašos toščias.
+ipblocklist-no-results|Prašuoms IP adresos a nauduotuojė vards ožblokouts nier.
+blocklink|ožblokoutė
+unblocklink|atbluokoutė
+change-blocklink|keistė bluokavėma nustatīmus
+contribslink|duovis
+emaillink|siōstė pašta
+autoblocker|Autuomatėnis ožbluokavėms, nes dalėnaties IP adreso so nauduotuojo "~{0}". Prīžastės - "~{1}".
+blocklogpage|Ožblokavėmu istuorėjė
+blocklogentry|ožblokava „[[~{0}]]“, blokavėma čiesos - ~{1} ~{2}
+reblock-logentry|pakeistė [[~{0}]] bluokavėma nustatīmā, naus bluokavėma čiesos īr ~{1} ~{2}
+blocklogtext|Čė īr nauduotuoju blokavėma ėr atblokavėma sārašos. Autuomatėškā blokoutė IP adresā nier ėšvardėntė. Jeigu nuorėt paveizėtė nūnā blokoujamus adresus, veizėkėt [[Special:BlockList\u007CIP ožbluokavėmu istuorėjė]].
+unblocklogentry|atbluokava ~{0}
+block-log-flags-anononly|vėn anonėmėnē nauduotuojē
+block-log-flags-nocreate|privėlėju kūrėms ėšjungts
+block-log-flags-noautoblock|automatėnis blokavėms ėšjungts
+block-log-flags-noemail|e-pašts bluokouts īr
+ipb_expiry_invalid|Galiuojėma čiesos nelaistėns.
+ipb_already_blocked|„~{0}“ jau ožblokouts
+ipb-needreblock|~{0} jau īr ožblokouts. A nuorėt pakeistė nustatīmus?
+unlockdbtext|Atrakėnos doumenū baze grōžėns galimībe vėsėm\nnauduotuojam redagoutė poslapios, keistė anū nostatīmos, keistė anū keravuojamu sāraša ė\nkėtos dalīkos, rēkalaujontios pakeitėmu doumenū bazė.\nPrašuom patvėrtėntė šėtā, kū ketinat padarītė.
+locknoconfirm|Tamsta neoždiejot patvėrtinėma varnalės.
+unlockdbsuccesstext|Doumenū bazė bova atrakėnta.
+move-page|Pervadėntė ~{0}
+move-page-legend|Poslapė pervadėnims
+movepagetext|Nauduodamė žemiau pateikta fuorma, parvadinsėt poslapi neprarasdamė anuo istuorėjės.\nSenasā pavadinėms pataps nukrēpiamouju - ruodīs i naujīji.\nTamsta esat atsakėngs ož šėta, kū nūruodas ruodītu i ten, kor ė nuorieta.\n\nPrimenam, kū poslapis '''nebus''' parvadints, jēgo jau īr poslapis naujo pavadinėmo, nebent tas poslapis īr tuščės a nukreipēmasis ė netor redagavėma istuorėjės.\nTumet, Tamsta galėt parvadintė poslapi seniau nauduota vardu, jēgo priš šėta ons bova par klaida parvadints, a egzėstounantiu poslapiu sogadintė negalėt.\n\n'''DIEMESĖ!'''\nJēgo parvadinat puopoliaru poslapi, tas gal sokeltė nepagēdaunamu šalotiniu efektu, tudie šėta veiksma vīkdīkit tėk isitėkine,\nkū soprantat vėsas pasiekmes.
+movepagetalktext|Sosėits aptarėma poslapis bus autuomatėškā parkelts draugom so ano, '''ėšskīrus:''':\n*Poslapis nauju pavadinėmo tor netoštė aptarėma poslapi, a\n*Paliksėt žemiau asontė varnale nepažīmieta.\nŠėtās atviejās Tamsta sava nužiūra torėt parkeltė a apjongtė aptarėma poslapi.
+movearticle|Parvadintė poslapi:
+movenologintext|Nuoriedamė parvadintė poslapi, torėt būtė ožsėregėstravės nauduotuos ė tēpuogi būtė [[Special:UserLogin\u007Cprisėjongės]].
+newtitle|Naus pavadėnėms:
+move-watch|Keravuotė šėta poslapi
+movepagebtn|Parvadintė poslapė
+pagemovedsub|Parvadinta siekmingā
+movepage-moved|'''"~{0}" bova parvadints i "~{1}"'''
+movepage-moved-redirect|Nukreipims bova sokorts.
+articleexists|Straipsnis so tuokiu vardo jau īr\na parinktāsis vards īr bluogs.\nParinkat kėta varda.
+movetalk|Parkeltė sosėta aptarėma poslapi.
+movepage-page-moved|Poslapis ~{0} bova parvadints kāp ~{1}.
+movelogpage|Parvardinėmu istuorėjė
+movelogpagetext|Sārašos parvadintu poslapiu.
+movereason|Prīžastis:
+revertmove|atmestė
+delete_and_move|Ėštrintė ė parkeltė
+delete_and_move_text|==Rēkalings ėštrīnims==\nPaskėrties straipsnis „[[:~{0}]]“ jau īr. A nuorėt ana ėštrintė, kū galietomiet parvadintė?
+delete_and_move_confirm|Tēp, trintė poslapi
+delete_and_move_reason|Ėštrinta diel parkielima
+move-leave-redirect|Parvadėnant paliktė nukreipėma
+export|Ekspuortoutė poslapius
+exportcuronly|Eksportoutė tėktās dabartėne versėjė, neitraukiant istuorėjės
+export-submit|Eksportoutė
+export-addcattext|Pridietė poslapius ėš kateguorėjės:
+export-addcat|Pridietė
+export-download|Sauguotė kāp faila
+allmessages|Vėsė sėstemas tekstā ė pranešėmā
+allmessagesname|Pavadėnėms
+allmessagesdefault|Pradėnis teksts
+allmessagescurrent|Dabartėnis teksts
+allmessagestext|Čė pateikamė sėstemėniu pranešėmu sārašos, esontis MediaWiki srėtie.
+allmessagesnotsupportedDB|'''{{ns:special}}:Allmessages''' nepalaikuoms īr, nes nustatīms '''$wgUseDatabaseMessages''' ėšjungts īr.
+allmessages-filter-translate|Pargoldītė
+thumbnail_error|Klaida koriant somažėnta pavēkslieli: ~{0}
+thumbnail_invalid_params|Nalaistieni miniatiūras parametrā
+thumbnail_dest_directory|Nepavīkst sokortė paskėrtėis papkes
+import|Importoutė poslapius
+import-revision-count|~{0} {{PLURAL:~{0}\u007Cversėjė\u007Cversėjės\u007Cversėju}}
+importlogpage|Impuorta istuorėjė
+import-logentry-upload-detail|~{0} {{PLURAL:~{0}\u007Ckeitims\u007Ckeitimā\u007Ckeitimu}}
+import-logentry-interwiki-detail|~{0} {{PLURAL:~{0}\u007Ckeitims\u007Ckeitimā\u007Ckeitimu}} ėš ~{1}
+tooltip-pt-userpage|Tamstas nauduotuojė poslapis
+tooltip-pt-anonuserpage|Nauduotuojė poslapis Tamstas IP adresō
+tooltip-pt-mytalk|Tamstas aptarėma poslapis
+tooltip-pt-preferences|Mona nostatīmā
+tooltip-pt-watchlist|Poslapiu sārašos, katrūs Tamsta pasėrėnkuot keravuotė.
+tooltip-pt-mycontris|Tamstas darītu keitimu sārašos
+tooltip-pt-login|Rekuomendoujam prėsėjongtė, nuors tas nėr privaluoma.
+tooltip-pt-logout|Atsėjongtė
+tooltip-ca-talk|Poslapė torėnė aptarėms
+tooltip-ca-edit|Tamsta galėt keistė ta poslapi. Nepamėrškėt paspaustė parvaizuos mīgtoka priš ėšsauguodamė.
+tooltip-ca-addsection|Pradietė nauja skīriu
+tooltip-ca-viewsource|Poslapis īr ožrakints. Galėt parveizėt torini.
+tooltip-ca-history|Unkstesnės poslapė versėjės.
+tooltip-ca-protect|Ožrakintė šėta poslapi
+tooltip-ca-delete|Trėntė ta poslapi
+tooltip-ca-move|Parvadėntė poslapi
+tooltip-ca-watch|Pridietė poslapi i keravuojamu sāraša
+tooltip-ca-unwatch|Pašalėntė poslapi ėš keravuojamu sāraša
+tooltip-search|Ėiškuotė šėtom pruojektė
+tooltip-search-go|Ētė i poslapi su tuokiu pavadėnėmu jēgo tuoks īr
+tooltip-search-fulltext|Ėiškuotė poslapiu so tuokiu tekstu
+tooltip-p-logo|Pėrms poslapis
+tooltip-n-mainpage|Aplonkītė pėrma poslapi
+tooltip-n-mainpage-description|Ētė i pėrma poslapi
+tooltip-n-portal|Aple pruojekta, ka galėma vēktė, kamė ka rastė
+tooltip-n-currentevents|Raskėt naujausė infuormacėjė
+tooltip-n-recentchanges|Vielībūju pakeitėmu sārašos tamė projektė.
+tooltip-n-randompage|Atidarītė bikuoki straipsni
+tooltip-n-help|Vėita, katruo rasėt rūpėmus atsakīmus.
+tooltip-t-whatlinkshere|Poslapiu sārašos, ruodantiu i čė
+tooltip-t-recentchangeslinked|Paskotėnē pakeitėmā straipsnious, pasėikiamous ėš šėta straipsnė
+tooltip-feed-rss|Šėta poslapė RSS šaltėnis
+tooltip-feed-atom|Šėta poslapė Atom šaltėnis
+tooltip-t-contributions|Ruodītė šėta nauduotuojė keitėmu sāraša
+tooltip-t-emailuser|Siōstė gromata šėtom prietėliō
+tooltip-t-upload|Idietė abruozdielios a medėjės failos
+tooltip-t-specialpages|Specēliūju poslapiu sārašos
+tooltip-t-print|Šėta poslapė versėjė spausdėnėmō
+tooltip-t-permalink|Vėslaikėnė nūruoda i šėta poslapė versėje
+tooltip-ca-nstab-main|Ruodītė poslapė torėni
+tooltip-ca-nstab-user|Ruodītė nauduotuojė poslapi
+tooltip-ca-nstab-special|Šėts poslapis īr specēlosis - anuo nagalėm redagoutė.
+tooltip-ca-nstab-project|Ruodītė pruojekta poslapi
+tooltip-ca-nstab-image|Ruodītė abruozdielė poslapi
+tooltip-ca-nstab-mediawiki|Veizietė sėstėmas pranešėma
+tooltip-ca-nstab-template|Ruodītė šabluona
+tooltip-ca-nstab-help|Ruodītė pagelbas poslapi
+tooltip-ca-nstab-category|Ruodītė kateguorėjės poslapi
+tooltip-minoredit|Pažīmietė pakeitėma kāp maža
+tooltip-save|Ėšsauguotė pakeitėmos
+tooltip-preview|Pakeitėmu parveiza, prašuom parveizėt priš ėšsaugont!
+tooltip-diff|Ruod, kuokios pakeitėmos padariet tekste.
+tooltip-compareselectedversions|Veizėtė abodvėju pasėrėnktū poslapė versėju skėrtomos.
+tooltip-watch|Pridietė šėta poslapi i keravuojamu sāraša
+tooltip-recreate|Atkortė poslapi napaisant šėto, kū ans bova ėštrints
+tooltip-rollback|Atšauktė atmestus šėta poslapė keitėmus i vielībiause versėje par vėina paspaudėma
+tooltip-undo|"Anolioutė" atmeta ta keitėma ėr atidara unkstesnies versėjės redagavėma skvarma. Leid pridietė atmetėma prīžasti kuomentarūsė.
+tooltip-preferences-save|Sauguotė nustatīmus
+tooltip-summary|Īvestė trompa santrauka
+anonymous|Neregėstrouts nauduotuos
+siteuser|{{SITENAME}} nauduotuos ~{0}
+lastmodifiedatby|Šėta poslapi paskotini karta redagava ~{2} ~{1}, ~{0}.
+others|kėtė
+siteusers|{{SITENAME}} {{PLURAL:~{1}\u007Cnauduotuos\u007Cnauduotuojē}} ~{0}
+creditspage|Poslapė kūriejē
+spamprotectiontitle|Prišreklamėnis fėltros
+spamprotectiontext|Poslapis, katra nuoriejot ėšsauguotė bova ožblokouts prišreklamėnė fėltra. Šėtā tėkriausē sokielė nūruoda i kėta svetaine. Ėšėmkit nūruoda ė pamieginkėt viel.
+spamprotectionmatch|Šėts tekstos bova atpažėnts prišreklamėnė fėltra: ~{0}
+spambot_username|''MediaWiki'' reklamu šalėnėms
+spam_reverting|Atkoriama i onkstesne versėje, katra nator nūruodu i ~{0}
+spam_blanking|Vėsos versėjės toriejė nūruodu i ~{0}. Ėšvaluoma
+pageinfo-header-edits|Keitėma istuorėjė
+pageinfo-header-restrictions|Poslapė apsauga
+pageinfo-header-properties|Poslapė savībės
+pageinfo-article-id|Poslapė ID
+pageinfo-language|Poslapė kalba
+pageinfo-toolboxlink|Poslapė infuormacėjė
+markaspatrolleddiff|Žīmietė, kū patikrėnta
+markaspatrolledtext|Pažīmietė, ka poslapis patėkrėnts īr
+markedaspatrolled|Pažīmiets kāp patėkrints
+markedaspatrolledtext|Pasėrinkta versėjė siekmingā pažīmieta kāp patėkrinta
+patrol-log-page|Patikrinėma istuorėjė
+log-show-hide-patrol|~{0} patvirtėnėmu saraša
+deletedrevision|Ėštrinta sena versėjė ~{0}.
+filedeleteerror-short|Klaida trėnont faila: ~{0}
+previousdiff|← Onkstesnis pakeitėms
+nextdiff|Paskesinis pakeitėms →
+mediawarning|'''Diemesė''': Šėts fails gal torietė kenksmėnga kuoda, anū palaidus Tamstas sėstėma gal būtė sogadinta.
+imagemaxsize|Rėbuotė abruozdieliu dėdoma anū aprašīma poslapī lėgė:
+thumbsize|Somažėntu pavēkslieliu didums:
+widthheightpage|~{0} × ~{1}, ~{2} {{PLURAL:~{2}\u007Cposlapis\u007Cposlapē\u007Cposlapiu}}
+file-info|faila dėdoms: ~{0}, MIME tips: ~{1}
+file-info-size|~{0} × ~{1} taškū, faila dėdoms: ~{2}, MIME tips: ~{3}
+file-nohires|Geresnis ėšraiškėms negalėms.
+svg-long-desc|SVG fails, fuormalē ~{0} × ~{1} puškiu, faila dėdoms: ~{2}
+show-big-image|Pėlns ėšraiškėms
+show-big-image-preview|Parvaizos dėdoms: ~{0}.
+show-big-image-other|{{PLURAL:~{1}\u007CKėta rezoliocėjė\u007CKėtas rezoliocėjės}}: ~{0}.
+show-big-image-size|~{0} × ~{1} pikselē
+newimages|Naujausiu abruozdieliu galerėjė
+imagelisttext|Žemiau īr '''~{0}''' failu sārašos, sorūšiouts ~{1}.
+newimages-legend|Rietis
+newimages-label|Faila vards (ar anuo dalis):
+ilsubmit|Ėiškoutė
+bydate|palē data
+sp-newimages-showfrom|Ruodītė naujus abruozdielius pradedant nū ~{1}, ~{0}
+just-now|vuo tėk daba
+bad_image_list|Fuormats tuoks īr:\n\nTėk eilotės, prasėdedantės *, īr itraukiamas. Pėrmuojė nūruoda eilotie tor būtė nūruoda i bluoga abruozdieli.\nVėsas kėtas nūoruodas tuo patiuo eilotie īr laikomas ėšėmtim, tas rēšk ka poslapē, katrūs leidama iterptė abruozdieli.
+metadata|Metadoumenīs
+metadata-help|Šėtom failė īr papėlduomos infuormacėjės, tikriausē pridietos skaitmeninės kameruos a skanėrė, katros bova nauduots anam sokortė a parkeltė i skaitmenėni fuormata. Jēgo fails bova pakeists ėš pradėnės versėjės, katruos nekatruos datalės gal nepėlnā atspėndietė nauja faila.
+metadata-expand|Ruodītė ėšpliestinė infuormacėjė
+metadata-collapse|Kavuotė ėšpliestinė infuormacėjė
+metadata-fields|Abruozdielė metadoumenū laukā, nuruodītė tamė pranešėmė, bus itrauktė i abruozdielė poslapi, kumet metadoumenū lentelė bus suskleista. Palē nutīliejėma kėtė laukā bus pakavuotė.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|Platoms
+exif-imagelength|Aukštoms
+exif-orientation|Pasokims
+exif-xresolution|Gorizuontalus ėšraiškėms
+exif-datetime|Faila keitėma data ė čiesos
+exif-imagedescription|Abruozdielė pavadėnėms
+exif-make|Kameras gamėntuos
+exif-model|Kameras muodelis
+exif-artist|Autuorios
+exif-colorspace|Spalvū pristatīms
+exif-compressedbitsperpixel|Abruozdielė sospaudėma rėžėms
+exif-datetimeoriginal|Doumenū generavėma data ė čiesos
+exif-exposuretime|Ėšlaikīma čiesos
+exif-fnumber|F skaitlius
+exif-brightnessvalue|Švėisoms
+exif-lightsource|Švėisuos šaltėnis
+exif-flash|Blėcos
+exif-focallength|Žėdinė nutuolėms
+exif-flashenergy|Blėca energėjė
+exif-contrast|Kuontrasts
+exif-languagecode|Kalba
+exif-iimversion|IIM versėjė
+exif-iimcategory|Kateguorėjė
+exif-orientation-1|Standartėšks
+exif-xyresolution-i|~{0} puškē cuolī
+exif-xyresolution-c|~{0} puškē centėmetrė
+exif-componentsconfiguration-0|nēsa
+exif-exposureprogram-0|Nenūruodīta
+exif-lightsource-4|Blėcos
+exif-lightsource-9|Poikos uors
+exif-lightsource-10|Apniukė
+exif-lightsource-11|Šešielis
+exif-lightsource-255|Kėts švėisuos šaltėnis
+exif-flash-fired-0|Blėcos nesovēkė
+exif-flash-fired-1|Blėcos sovēkė
+exif-scenecapturetype-0|Paprasts
+exif-scenecapturetype-1|Kraštuovaizdis
+exif-scenecapturetype-2|Puortrets
+exif-scenecapturetype-3|Naktėnė puortegrapėjė
+exif-gaincontrol-0|Nie
+exif-contrast-0|Paprasts
+exif-contrast-1|Mažos
+exif-contrast-2|Dėdlis
+namespacesall|vėsas
+monthsall|vėsė
+confirmemail|Patvirtėnkėt el. pašta adresa
+confirmemail_noemail|Tamsta netorėt nuruodės teisėnga el. pašta adresa [[Special:Preferences\u007Csava nustatīmūs]].
+confirmemail_text|Šėtom pruojektė īr rēkalėnga patvirtėntė el. pašta adresa prīš nauduojont el. pašta funkcėjės. Spauskėt žemiau esonti mīgtoka,\nkū Tamstas el. pašta adresu būtom ėšsiōsts patvirtėnėma kods.\nGruomatuo bus atsiōsta nūruoda so kodu, katra nuējus, el. pašta adresos bus patvirtėnts.
+confirmemail_send|Ėšsiōstė patvirtėnėma koda
+confirmemail_sent|Patvirtėnėma gruomata ėšsiōsta.
+confirmemail_needlogin|Tamstā rēk ~{0}, kū patvirtėntomiet sava el. pašta adresa.
+confirmemail_loggedin|Tamstas el. pašta adresos ožtvėrtints īr.
+confirmemail_body|Kažėnkas, mosiet Tamsta IP adreso ~{0}, ožregėstrava\npaskīra „~{1}“ sosėita so šėtuom el. pašta adresu pruojektė {{SITENAME}}.\n\nKū patvirtėntomiet, kū ta diežotė ėš tėkrā prėklausa Tamstā, ėr aktīvoutomiet\nel. pašta puoslaugi pruojėktė {{SITENAME}}, atdarīkiet ta nūruoda sava naršīklie:\n\n~{2}\n\nJēgo paskīra regėstravuot *ne* Tamsta, tumet ēkėt ta nūruoda,\nkū atšauktomiet el. pašta adresa patvirtėnėma:\n\n~{4}\n\nPatvirtėnėma kods bengs galiuotė ~{3}.
+invalidateemail|El. pašta patvirtėnėma atšaukėms
+deletedwhileediting|Diemesė: Šėts poslapis ėštrints po šėta, kumet pradiejot redagoutė!
+recreate|Atkortė
+confirm_purge_button|Tink
+confirm-watch-button|Gerā
+confirm-watch-top|Pridietė šėta poslapi i keravuojamu sāraša?
+confirm-unwatch-button|Gerā
+imgmultipageprev|← unkstesnis poslapis
+imgmultipagenext|kėts poslapis →
+imgmultigo|Ētė!
+imgmultigoto|Ētė i poslapi ~{0}
+img-lang-default|(kalba kāp nustatīta)
+ascending_abbrev|dėdiejėma tvarka
+descending_abbrev|mažiejontė tvarka
+table_pager_next|Kėts poslapis
+table_pager_prev|Onkstesnis poslapis
+table_pager_first|Pėrms poslapis
+table_pager_last|Paskotėnis poslapis
+table_pager_limit|Ruodītė ~{0} elementu par poslapi
+table_pager_limit_submit|Ruodītė
+table_pager_empty|Juokiū rezoltatu
+autosumm-blank|Šalėnams ciels torėnīs ėš poslapė
+autosumm-replace|Poslapis keitams so '~{0}'
+autoredircomment|Nukreipama i [[~{0}]]
+autosumm-new|Naus poslapis: ~{0}
+autosumm-newblank|Sokorts toščias poslapis
+lag-warn-normal|Pakeitėmā, naujesnė kāp ~{0} {{PLURAL:~{0}\u007Csekondė\u007Csekondės\u007Csekondiu}}, tamė sārašė gal būtė neruodomė.
+lag-warn-high|Dielē dėdlė doumenū bazės pasėlikėma pakeitėmā, naujesnė nēgo ~{0} {{PLURAL:~{0}\u007Csekondė\u007Csekondės\u007Csekondiu}}, tamė sarašė gal būtė neruodomė.
+watchlistedit-normal-title|Keistė keravuojamu sāroša
+watchlistedit-normal-legend|Šalėntė poslapios ėš keravuojamu sāraša
+watchlistedit-normal-explain|Žemiau īr ruodomė poslapē Tamstas keravuojamu sārašė.\nNuoriedamė pašalėntė poslapi, pri anuo oždiekėt varnale ė paspauskėt „Šalėntė poslapios“.\nTamsta tēpuogi galėt [[Special:EditWatchlist/raw\u007Credagoutė grīnaji keravuojamu sāraša]].
+watchlistedit-normal-submit|Šalėntė poslapios
+watchlistedit-normal-done|~{0} {{PLURAL:~{0}\u007Cposlapis bova pašalėnts\u007Cposlapē bova pašalėntė\u007Cposlapiu bova pašalėnta}} ėš Tamstas keravuojamu saraša:
+watchlistedit-raw-title|Keistė grīnōjė keravuojamu sāraša
+watchlistedit-raw-legend|Keistė grīnōjė keravuojamu sāraša
+watchlistedit-raw-explain|Žemiau ruodomė poslapē Tamstas keravuojamu sārašė, ė gal būtė pridietė i a pašalėntė ėš sāraša; vėins poslapis eilotie. Bėngė paspauskėt „Atnaujėntė keravuojamu sāraša“. Tamsta tēpuogi galėt [[Special:EditWatchlist\u007Cnauduotė standartėni radaktuoriu]].
+watchlistedit-raw-titles|Poslapē:
+watchlistedit-raw-submit|Atnaujėntė keravuojamu sāraša
+watchlistedit-raw-done|Tamstas keravuojamu sārošos bova atnaujėnts.
+watchlistedit-raw-added|~{0} {{PLURAL:~{0}\u007Cposlapis bova pridiets\u007Cposlapē bova pridietė\u007Cposlapiu bova pridieta}}:
+watchlistedit-raw-removed|~{0} {{PLURAL:~{0}\u007Cposlapis bova pašalėnts\u007Cposlapē bova pašalėntė\u007Cposlapiu bova pašalėnta}}:
+watchlisttools-view|Veizietė sosėjosius pakeitėmus
+watchlisttools-edit|Veizietė ėr keistė keravuojamu straipsniu sāraša
+watchlisttools-raw|Keistė nebėngta keravuojamu straipsniu sāraša
+version|Versėjė
+version-license|Licenzėjė
+redirect-user|Nauduotojė ID
+redirect-page|Poslapė ID
+redirect-revision|Poslapė versėjė
+redirect-file|Abruozdėlė vards
+fileduplicatesearch|Ėiškuotė doblikoutu failu
+fileduplicatesearch-legend|Ėiškuotė doblėkatu
+fileduplicatesearch-filename|Faila vards:
+fileduplicatesearch-submit|Ėiškuotė
+fileduplicatesearch-info|~{0} × ~{1} pėkseliu<br />Faila dėdoms: ~{2}<br />MIME tėps: ~{3}
+specialpages|Specēlė̅jė poslapē
+specialpages-note-top|Pāiškėnėmā
+specialpages-note|* Normalūs specēlė̅jė puslapē.\n* <strong class="mw-specialpagerestricted">Apribuotė specēlė̅jė puslapē.</strong>
+specialpages-group-maintenance|Sėstemas palaikīma pranešėmā
+specialpages-group-other|Kėtė specēlė̅jė poslapē
+specialpages-group-login|Prisėjongėms / Registracėjė
+specialpages-group-changes|Vielībiė̅ jė pakeitėmā ė regėstrā
+specialpages-group-media|Infuormacėjė aple failus ėr anū pakruovėms
+specialpages-group-users|Nauduotuojē ė teisės
+specialpages-group-highuse|Platē nauduojamė poslapē
+specialpages-group-pages|Poslapiu sarašas
+specialpages-group-pagetools|Poslapiu rakondā
+specialpages-group-wiki|Wiki doumenīs ė rakondā
+specialpages-group-redirects|Specēlė̅jė nukreipėma poslapē
+specialpages-group-spam|Šlamšta valdīma rakondā
+blankpage|Toščias poslapis
+external_image_whitelist| #Palikėt ta eilotė, tuokė kāp īr <pre>\n#Īrašīkat standartėniu ėšraišku fragmentus (tėktās dali terp //)\n#Anūs bus miegėnama sotapatintė so ėšuorėniu abruozdieliu adresās\n#Tė, katrėi sotaps, bus ruodomė kāp abruozdielē, a kėtė bus ruodomė tėktās kāp nūoruodas\n#Raidiu dėdoms nier svarbos\n#Eilotės, katuos prasided # īr kuomentarā \n\n#Īterpkat vėsus standartiėniu ėšraišku fragmentus prīš šėta eilote. Palikat šėta eilote, tuokė kāp ana īr </pre>
+tag-filter|[[Special:Tags\u007CŽīmiejėmu]] filtros:
+tag-filter-submit|Rietis
+tags-edit|taisītė
+comparepages|Primestė poslapio
+logentry-delete-delete|~{0} ėštrīnė poslapi ~{2}
+logentry-delete-restore|~{0} atkūrė poslapi ~{2}
+revdelete-content-hid|torėnīs pakavuots
+logentry-move-move|~{0} pervadėna poslapi ~{2} i ~{3}
+logentry-move-move-noredirect|~{0} pervadėna poslapi ~{2} i ~{3}, nepalikdams nukreipėma
+logentry-move-move_redir|~{0} pervadėna poslapi ~{2} i ~{3}, vėituo buvosė nukreipėma
+logentry-move-move_redir-noredirect|~{0} pervadėna poslapi ~{2} i ~{3}, vėituo buvosė nukreipėma, bat nepadėrbdams naujė
+logentry-newusers-newusers|~{0} padėrba nauduotuojė paskīra
+logentry-newusers-create|~{0} padėrba nauduotuojė paskīra
+logentry-newusers-create2|~{0} padėrba nauduotuojė paskīra ~{2}
+logentry-newusers-autocreate|Paskīra ~{0} bova padėrbta autuomatėškā
+logentry-rights-rights|~{0} perkeitė ~{2} ėš ~{3} i ~{4}
+rightsnone|(juokiū)
+revdelete-summary|keitėma pāiškėnėms
+feedback-close|Padėrbt
+searchsuggest-search|Ėiškuotė
+searchsuggest-containing|katrėi tor...
+api-error-duplicate-popup-title|{{PLURAL:~{0}\u007CFaila\u007CFailu}} doblėkats.
+expandtemplates|Ėšskeistė šabluonus
+pagelang-name|Poslapis
+pagelang-language|Kalba
+pagelang-use-default|Nauduotė kalba kāp nustatīta
+pagelang-select-lang|Rinktėis kalba
+right-pagelang|Mainītė poslapė kalba
+mediastatistics-table-mimetype|MIME tips
+mediastatistics-header-unknown|Nežėnuoms
+json-error-syntax|Sintaksės klaida
+contactpage-usermailererror|Pašta objekts grōžėna klaida:
+']:>
+).lang
+;

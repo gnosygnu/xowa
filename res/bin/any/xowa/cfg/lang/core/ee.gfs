@@ -1,0 +1,487 @@
+this
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Kɔsiɖagbe
+monday|Dzoɖagbe
+tuesday|Brãɖagbe
+wednesday|Kuɖagbe
+thursday|Yawoɖagbe
+friday|Fiɖagbe
+saturday|Memleɖagbe
+sun|Kɔs
+mon|Dzo
+tue|Brã
+wed|Kuɖ
+thu|Yaw
+fri|Fiɖ
+sat|Mem
+january|Dzove
+february|Dzodze
+march|Tedoxe
+april|Afɔfiɛ
+may_long|Damɛ
+june|Masa
+july|Siamlɔm
+august|Dasiamime
+september|Anyɔnyɔ
+october|Kele
+november|Adeɛmekpɔxe
+december|Dzome
+january-gen|Dzove
+february-gen|Dzodze
+march-gen|Tedoxe
+april-gen|Afɔfiɛ
+may-gen|Damɛ
+june-gen|Masa
+july-gen|Siamlɔm
+august-gen|Dasiamime
+september-gen|Anyɔnyɔ
+october-gen|Kele
+november-gen|Adeɛmekpɔxe
+december-gen|Dzome
+jan|Dzov
+feb|Dzod
+mar|Ted
+apr|Afɔ
+may|Damɛ
+jun|Mas
+jul|Sia
+aug|Das
+sep|Any
+oct|Kel
+nov|Ade
+dec|Dzom
+toc|Emenyawo
+redirectedfrom|(Woɖo wò ɖe afii tso ~{0})
+allpages|Axawo katã
+prevpage|Axa do ŋgɔ (~{0})
+nextpage|Axa yometɔ (~{0})
+lastmodifiedat|Wó ɖɔ axa sia ɖo susue le ~{1} le ŋkeke ~{0} dzi.
+thumbnail-more|Ne lolo ɖe edzi
+otherlanguages|Le gbe bubuwo me
+nextn|{{PLURAL:~{0}\u007C~{0}}} yometɔwo
+prevn|{{PLURAL:~{0}\u007C~{0}}} do ŋgɔ
+listingcontinuesabbrev|yi dzi
+statistics|Akɔntawo
+categorytree-mode-all|axawo katã
+proofreadpage_namespace|Nuŋɔŋlɔ
+cite_page|Nuŋɔŋlɔ:
+wm-license-information-date|Ŋkeke
+wikimediamessages-desc|Wikimedia duwo ko
+sitesupport|Wɔ nunana
+tooltip-n-sitesupport|Kpe ɖe mía ŋu
+group-accountcreator|Ŋkɔ ŋlɔlawo
+group-accountcreator-member|ŋkɔ ŋlɔla
+group-flood|Bɔt zãlawo
+group-flood-member|{{GENDER:~{0}\u007Cbɔt zãla}}
+grouppage-flood|{{ns:project}}:Bɔt zãlawo
+group-founder|Eɖolawo
+group-founder-member|{{GENDER:~{0}\u007Ceɖola}}
+cant-delete-main-page|Wo mate ŋu tutu alo ɖe Axɔ do ŋgɔ o.
+tog-hideminor|Ɣla tɔtrɔ suewo le tɔtrɔ yeyeawo me
+tog-watchcreations|Tsɔ axa siwo gɔme medze kpakple axa siwo meda ɖe afisia la kpe ɖe axa siwo ŋu nyeƒe ŋku le la ŋu
+tog-watchdefault|Tsɔ axawo kpakple nutatawo siwo ŋu metrɔ asi le la kpe ɖe axa siwo ŋu nyeƒe ŋku le la ŋu
+tog-watchmoves|Tsɔ  axawo kpakple nutatawo siwo ƒe nɔƒe meɖɔli la kpe ɖe axa siwo ŋu nyeƒe ŋku le la ŋu
+tog-watchdeletion|Tsɔ  axawo kpakple nutatawo siwo metutu la kpe ɖe axa siwo ŋu nyeƒe ŋku le la ŋu
+tog-enotifwatchlistpages|Ɖo du nam ne axa aɖe alo nutata aɖe si ŋu nyeƒe ŋku le la trɔ
+tog-useeditwarning|Na nyanyam ne mele asiɖem le axa si ŋu wome dzra tɔtrɔwo ɖo vɔ la o.
+underline-always|Ɣesiaɣi
+underline-never|Gbeɖe
+january-date|Dzove ~{0}
+february-date|Dzodze ~{0}
+march-date|Tedoxe ~{0}
+april-date|Afɔfiɛ ~{0}
+may-date|Damɛ ~{0}
+june-date|Masa ~{0}
+july-date|Siamlɔm ~{0}
+august-date|Dasiamime ~{0}
+september-date|Anyɔnyɔ ~{0}
+october-date|Kele ~{0}
+november-date|Adeɛmekpɔxe ~{0}
+december-date|Dzome ~{0}
+about|Ŋutinya
+newwindow|(eʋua fesre yeye)
+cancel|Dzudzɔ etɔtrɔ
+mypage|Axa nye
+mytalk|Nyeƒe nyamedzroƒe
+navigation|Mɔtabiala
+and| kpakple
+qbfind|Di
+qbbrowse|To eme
+qbedit|Trɔ asi le eŋu
+qbpageoptions|Axa sia
+qbmyoptions|Nyeƒe axawo
+errorpagetitle|Vodada
+returnto|Gbugbɔ yi ~{0}.
+tagline|Tso {{SITENAME}}
+help|Kpekpeɖeŋu
+search|Dii
+searchbutton|Dii
+go|Yi
+searcharticle|Yi
+history|Axa sia ƒe tata xoxoawo
+history_short|Xoxoawo
+view|Tata
+edit|Trɔ asi le eŋu
+create|Dze egɔme
+editthispage|Ðɔ axa sia ɖo
+create-this-page|Dze axa sia gɔme
+delete|Tutui
+deletethispage|Tutu axa sia
+protect|Dzɔ eŋu
+protect_change|ɖɔlii
+protectthispage|Dzɔ axa sia ŋu
+newpage|Axa yeye
+talkpagelinktext|Nyamedzroƒe
+specialpage|Axa Tɔxe
+personaltools|Wòƒe dɔwɔnuwo
+talk|Nyamedzroƒe
+toolbox|Dɔwɔnuɖaka
+viewcount|Wokpɔ axa sia zi {{PLURAL:~{0}\u007Cɖeka\u007C~{0} sɔ̃}}.
+jumpto|Dzo yi:
+jumptonavigation|kuɖɔɖoɖo
+jumptosearch|dii
+aboutsite|{{SITENAME}} ŋutinya
+aboutpage|Project:Ŋutinya
+copyright|Nusiwo le afii le ~{0} mɔɖeɖea te.
+copyrightpage|{{ns:project}}:Mɔɖeɖewo
+currentevents|Amaneɛ
+currentevents-url|Project:Nusiwo le dzɔdzɔm
+disclaimers|Nuxlɔ̃amenyawo
+edithelp|Kpekpeɖeŋu na etɔtrɔ
+mainpage|Axa do Ŋgɔ
+mainpage-description|Axa do ŋgɔ
+portal|Takpekpewɔƒe
+portal-url|Project:Takpekpewɔƒe
+badaccess|Mɔɖeɖe vodada
+badaccess-group0|Se meɖe mɔ be nawɔ nusi wòle babiam be yeawɔ o.
+retrievedfrom|Nuŋɔŋlɔ sia tso "~{0}"
+youhavenewmessages|~{0} le asiwo (~{1}).
+youhavenewmessagesmulti|Du yeyewo le asiwo le ~{0}
+editsection|trɔ asi le eŋu
+editold|trɔ asi le eŋu
+viewsourceold|kpɔ alesi wó ŋlɔe
+editlink|trɔ asi le eŋu
+viewsourcelink|kpɔ alesi woŋlɔe
+editsectionhint|Trɔ akpa: ~{0}
+showtoc|fia
+hidetoc|ɣla
+thisisdeleted|Kpɔ ~{0} alo wòa gbugbɔe ve hã?
+viewdeleted|Wòa kpɔ ~{0} a?
+red-link-title|~{0} (womeŋlɔ axa sia haɖeke o)
+nstab-main|Axa
+nstab-user|Ezãla axa
+nstab-special|Axa tɔxe
+nstab-image|Agbalẽ
+nstab-mediawiki|Du
+error|Vodada
+badarticleerror|Wòmateŋu awɔ nusia le axa sia dzi o.
+cannotdelete|Womateŋu atutu axa sia alo axa "~{0}" o.\nƉewomahĩ ame aɖe tutui xoxo.
+badtitle|Tanya gbegblẽ
+viewsource|Kpɔ alesi wowɔe
+remembermypassword|Ɖo ŋku nyeƒe dzesi ŋkɔ dzi le mɔ sia dzi (vaseɖe {{PLURAL:~{0}\u007Cŋkeke\u007Cŋkeke}} ~{0} megbe)
+login|Ge ɖe eme
+nav-login-createaccount|Geɖe me / Ŋlɔ ŋkɔ
+userlogin|Ge ɖe eme / ŋlɔ ŋkɔ daɖi
+logout|Do le eme
+userlogout|Do le eme
+nologin|Wòmeŋlɔ ŋkɔ oa? '''~{0}'''.
+nologinlink|Ŋlɔ ŋkɔ daɖi
+createaccount|Ŋlɔ ŋkɔ daɖi
+gotaccount|Wò ŋlɔ ŋkɔ xoxoa? '''~{0}'''.
+gotaccountlink|Ge ɖe eme
+loginsuccesstitle|Wò ge ɖe eme azɔ̃.
+loginsuccess|'''Wò le {{SITENAME}} me fifia abe "~{0}" ene.'''
+nouserspecified|Elebe na ŋlɔ ŋkɔ si wò zãna
+acct_creation_throttle_hit|Wiki sia zãla aɖe tso wò ''IP address'' ŋlɔ {{PLURAL:~{0}\u007C1 ŋkɔ\u007C~{0} ŋkɔwo}} le ŋkeke si vayi me xoxo. Mɔɖeɖe le na ŋkɔ  ɖeka ko ŋɔŋlɔ le ŋkeke ɖeka me.<br />\nLe esiata la, ''IP address'' sia zãlawo mekpɔ mɔ aŋlɔ ŋkɔ bubuwo fifia o.
+loginlanguagelabel|Gbe: ~{0}
+sig_tip|Dzesiwò kple gaƒoƒoa
+subject|Ta nya:
+minoredit|Esia nye tɔtrɔ sue aɖe ko
+watchthis|Le ŋku ɖe axa sia ŋu
+savearticle|Dzra axa sia ɖo
+preview|Kpɔe do ŋgɔ
+showpreview|Fiae do ŋgɔ
+showdiff|Fia tɔtrɔwo
+newarticle|(Yeye)
+newarticletext|Eva ɖo axa si gɔme womedze haɖeke o. Ne wòadi be yeadze egɔme la, dze nuŋlɔm ɖe go sia me le afi sia ɖome (kpɔ [~{0} kpekpeɖeŋu nyawo] na kpekpeɖeŋu bubuwo). Ne wòme ɖoe be yeava afii hafi o la, ekema tia '''megbe''' eye wòa gbugbɔ ayi afisi wòtso va.
+previewnote|'''Ɖo ŋku edzi be wole afii fiam do ŋgɔ, wome dzrae ɖo haɖeke o!'''
+editing|~{0} na etɔtrɔ
+editingsection|Wòle ~{0} (ƒe akpa aɖe) trɔm
+yourtext|Wò nuŋɔŋlɔ
+yourdiff|Vovototowo
+copyrightwarning|Taflatse, mítsɔe be nusiwo katã netsɔ kpe ɖe {{SITENAME}} ŋu lii fãa le ~{1} la nu (kpɔ ~{0} me nyawo). Ne madze ŋuwò be amebubuwo natrɔ asi le nusiwo newɔ ŋuti o, eye woagbugbɔ dɔsiwo newɔ ama na amebubuwo fãa o la, mega dae ɖe afisia o.<br /> Wòle ŋugbe dom na mí bena wò ŋutɔe ŋlɔ nusiawo, alo etsɔe tso afisi mɔɖeɖe li fãa be amesiame na tsɔ nuwo tso afima fãa. '''Mega da nusiwo ŋu mɔɖeɖe meli na o la ɖe afisia o!'''
+permissionserrorstext-withaction|Se meɖe mɔ bena na ~{1} o, le {{PLURAL:~{0}\u007Cta\u007Cta}}:
+edit-already-exists|Wòmateŋu adze axa sia gɔme o.<br />\nWo ŋlɔe xoxo.
+currentrev-asof|Tata susue le ~{0} dzi
+revisionasof|Tataa le ~{0}
+revision-info|Tataa le ~{0} si ~{1} wɔ
+previousrevision|← Tata xoxoa
+nextrevision|Tata yeyea →
+currentrevisionlink|Tata susuea
+cur|yeyea
+next|eyome
+last|mamlea
+page_first|gbãtɔ
+page_last|mamlea
+histlegend|Vovo tatia: de dzesi tata siwo ƒe vovototowo wò di be yea kpɔ ɖa eye na tia 'enter' alo kpe si le eɖome.<br />\nGɔmeɖeɖe: '''({{int:cur}})''' = vovototo tso tata mamlea gbɔ, '''({{int:last}})''' = vovototo tso tata si do ŋgɔ gbɔ, '''{{int:minoreditletter}}''' = tɔtrɔ sue.
+history-show-deleted|Esiwo wotutu ko
+histfirst|Xoxoɔwu
+histlast|Yeyeɛwu
+history-feed-item-nocomment|~{0} le ~{1}
+history-feed-empty|Axa si dim wòle meli o.\nDewomahĩ, wotutui le wiki sia dzi alo wotrɔ eƒe ŋkɔ.\nZã [[Special:Search\u007Cnuwo didi le wiki sia dzi]] kpɔ na axa yeyeawo.
+rev-delundel|fia/ɣla
+rev-showdeleted|fia
+revdelete-radio-same|(megatrɔe o)
+revdelete-radio-set|Yo
+revdelete-radio-unset|Kpao
+history-title|"~{0}" ƒe tata xoxoawo
+lineno|Fli ~{0}:
+compareselectedversions|Kpɔ tata siwo wotia la
+searchresults|Nusiwo wòdi
+searchresults-title|Nusiwo wofɔ le "~{0}" didi me
+notextmatches|Axa aɖeke ƒe nyawo mesɔ kple nyasiawo o.
+viewprevnext|Kpɔ (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|'''Axa si ŋkɔ enye "[[:~{0}]]" le wiki sia dzi'''
+searchmenu-new|'''Dze axa "[[:~{0}]]" sia ŋlɔm ɖe wiki la dzi!'''
+searchprofile-everything|Nuɖesiaɖe
+searchprofile-articles-tooltip|Dii le ~{0}
+search-result-size|~{0} ({{PLURAL:~{1}\u007Cnya 1\u007Cnya ~{1}}})
+search-suggest|Ɖe wò be: ~{0}
+search-interwiki-more|(kɔ kpe ɖe eŋu)
+searchall|wokatã
+powersearch-toggleall|Wokatã
+preferences|Didiwo
+mypreferences|Nyeƒe didiwo
+skin-preview|Kpɔe do ŋgɔ
+prefs-watchlist-days-max|Maximum ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}}
+timezoneregion-africa|Afrika
+yourlanguage|Gbe:
+yournick|Dzesi
+gender-male|Ŋutsu
+gender-female|Nyɔnu
+group|Hame:
+group-bot|Bɔtwo
+group-sysop|Dɔdzikpɔlawo
+group-all|(wokatã)
+newuserlogpage|Ŋkɔŋlɔla yeyewo ƒe xexlẽme
+action-read|xlẽ axa sia
+action-edit|trɔ asi le axa sia ŋu
+recentchanges|Tɔtrɔ yeyewo
+recentchanges-legend|Tatiawo na tɔtrɔ yeyewo
+rcnotefrom|Tɔtrɔwo siwo wowɔ tso '''~{1}''' (wofia vaseɖe '''~{0}''') le afii.
+rclistfrom|Fia tɔtrɔ yeyewo tso ~{2} ~{1}
+rcshowhideminor|~{0} tɔtrɔ suewo
+rcshowhidebots|~{0} bɔtwo
+rcshowhideliu|~{0} ezãla siwo ŋlɔ ŋkɔ
+rcshowhideanons|~{0} ŋkɔ maŋlɔlawo
+rcshowhidemine|~{0} nyeƒe tɔtrɔwo
+rclinks|Fia tɔtrɔ ~{0} mamleawo le ŋkeke ~{1} siwo vayi me<br />~{2}
+diff|tɔtrɔ
+hist|xoxo
+hide|Ɣla
+show|Fia
+minoreditletter|s
+newpageletter|Y
+recentchangeslinked|Tɔtrɔ siwo kaa afii
+recentchangeslinked-feed|Tɔtrɔ siwo kaa afii
+recentchangeslinked-toolbox|Tɔtrɔ siwo kaa afii
+recentchangeslinked-title|Tɔtrɔ siwo ku ɖe "~{0}" ŋu
+recentchangeslinked-page|Axaa ƒe ŋkɔ
+upload|Ɖo agbalẽ ɖa
+uploadbtn|Ɖo agbalẽ ɖa
+file-anchor-link|Agbalẽ
+filehist|Axa sia ƒe tata xoxoawo
+filehist-help|Tia ŋkeke/gaƒoƒo ɖeka ne wòadi be yea kpɔ axa sia ƒe tata le ɣemaɣi
+filehist-deleteone|tutui
+filehist-datetime|Ŋkeke/Gaƒoƒo
+filehist-user|Ezãla
+linkstoimage|Axa {{PLURAL:~{0}\u007Csia\u007C~{0} siawo}} ku ɖe agbalẽ sia ŋu.
+sharedupload|Agbalɛ̃ sia tso ~{0} eye dɔ (''alo project'') bubuawo woateŋu azãe fãa.
+filedelete-submit|Tutui
+mimesearch|MIME me didi
+randompage|Axaa ɖe ko
+randompage-nopages|Axa aɖeke mele "~{0}" o.
+brokenredirects-edit|trɔ asi le eŋu
+brokenredirects-delete|tutui
+fewestrevisions|Axawo siwo womeɖɔɖo zã o
+wantedpages|Axawo siwo le hahĩam
+mostrevisions|Axawo siwo woɖɔɖo wu
+shortpages|Axa kpuiwo
+longpages|Axa didiwo
+protectedpages|Axawo siwo ŋu wole dzɔdzɔm
+listusers|Ezãlawo ƒe xexlẽme
+usercreated|Wodze egɔme le ŋkeke ~{0} dzi le gaƒoƒo ~{1} me.
+newpages|Axa yeyewo
+ancientpages|Axawo si wo do xoxo wu
+move|Ɖɔli eƒe nɔƒe
+movethispage|Ɖɔli axa sia ƒe nɔƒe
+pager-newer-n|{{PLURAL:~{0}\u007C1 yeyea\u007C~{0} yeyeawo}}
+pager-older-n|{{PLURAL:~{0}\u007C1 xoxoa\u007C~{0} xoxoawo}}
+booksources|Agbalɛ̃wo ƒe tsoƒe
+booksources-search-legend|Di agbalẽwo ƒe tsoƒewo
+specialloguserlabel|Ezãla:
+speciallogtitlelabel|Ta nya:
+allpagesfrom|Fia axawo tso:
+allpagesto|Fia axawo vaseɖe:
+allarticles|Axawo katã
+allinnamespace|Axawo katã (~{0} namespace)
+allpagessubmit|Yi
+linksearch-ok|Dii
+listgrouprights-group|Hame
+watch|Le ŋku ɖe eŋu
+watchthispage|Le ŋku ɖe axa sia ŋu
+wlnote|Afisia wofia {{PLURAL:~{0}\u007Ctɔtrɔ '''1''' mamlea\u007Ctɔtrɔ '''~{0}''' mamleawo}} le {{PLURAL:~{1}\u007Cgaƒoƒo mamlea si\u007Cgaƒoƒo '''~{1}''' mamleawo siwo}} vayi la me.
+wlshowlast|Fia gaƒoƒo ~{0} ŋkeke ~{1} mamleawo.
+deletepage|Tutu axa sia
+delete-confirm|Tutu "~{0}"
+delete-legend|Tutui
+actioncomplete|Wowɔe vɔ
+dellogpagetext|Afisia wofia axa mamleawo siwo wotutu la
+prot_1movedto2|[[~{0}]] wohee yi [[~{1}]]
+protect-default|Namɔ ezãlawo katã
+protect-level-autoconfirmed|Xemɔ na ame yeyewo kple ŋkɔmaŋlɔlawo
+protect-expiring|ewunu ~{0} (UTC)
+protect-existing-expiry|Nuwuwu gaƒoƒo: ~{2}, ~{1}"
+protect-expiry-options|gaƒoƒo 1:1 hour,ŋkeke 1:1 day,kɔsiɖa 1:1 week,kɔsiɖa 2:2 weeks,ɣleti 1:1 month,ɣleti 3:3 months,ɣleti 6:6 months,ƒe 1:1 year,tegbe:infinite
+restriction-type|Mɔɖeɖe:
+restriction-edit|Trɔ asi le eŋu
+restriction-move|Ɖɔli eƒe nɔƒe
+restriction-create|Dze egɔme
+undelete|Kpɔ axawo si wotutu
+viewdeletedpage|Kpɔ axawo si wotutu
+undeleteviewlink|kpɔe
+undelete-search-submit|Dii
+undelete-show-file-submit|Yo
+invert|Trɔ tatiawo tu
+contributions|Ezãla ƒe nuŋɔŋlɔwo
+contributions-title|~{0} ƒe nuŋɔŋlɔwo
+mycontris|Nyeƒe nuŋɔŋlɔwo
+contribsub2|Na ~{0} (~{1})
+uctop|(tametɔ)
+month|Tso ɣleti (kple do ŋgɔ):
+year|Tso ƒe (kple do ŋgɔ):
+sp-contributions-newbies|Fia ŋkɔŋlɔla yeyewo ƒe ɖɔɖɔɖowo ko.
+sp-contributions-talk|Nyamedzroƒe
+sp-contributions-search|Di nuŋɔŋlɔwo
+sp-contributions-submit|Dii
+whatlinkshere|Nusiwo kaa afii ŋu
+whatlinkshere-title|Axawo siwo ku ɖe "~{0}" ŋu
+whatlinkshere-page|Axa:
+linkshere|Axa siwo le afisia ku ɖe '''[[:~{0}]]''' ŋu:
+nolinkshere|Axa aɖeke meku ɖe '''[[:~{0}]]''' ŋu o.
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cdo ŋgɔ\u007C~{0} do ŋgɔ}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Ceyome\u007C~{0} eyome}}
+blockip|Xe mɔ na ezãla sia
+blockip-legend|Xe mɔ na ezãla sia
+ipbexpiry|Nuwuwu:
+ipboptions|gaƒoƒo 2:2 hours,ŋkeke 1:1 day,ŋkeke 3:3 days,kɔsiɖa 1:1 week,kɔsiɖa 2:2 weeks,ɣleti 1:1 month,ɣleti 3:3 months,ɣleti 6:6 months,ƒe 1:1 year,tegbe:infinite
+blockipsuccesssub|Mɔxexea dze edzi
+ipb-unblock-addr|Ɖe ~{0} ƒe mɔxexe ɖa
+ipb-blocklist|Kpɔ mɔxexe siwo li xoxo
+ipb-blocklist-contribs|~{0} ƒe nuŋɔŋlɔwo
+ipusubmit|Ɖe mɔxexe sia ɖa
+ipblocklist-submit|Dii
+infiniteblock|tegbee
+expiringblock|ewunu le gaƒoƒo ~{1} le ŋkeke ~{0} dzi
+createaccountblock|woxe mɔ na ŋkɔa ŋɔŋlɔ
+blocklink|xemɔ
+unblocklink|ɖe mɔxexe
+change-blocklink|ɖɔli mɔxexe
+contribslink|nuŋɔŋlɔ
+blocklogentry|xemɔ na [[~{0}]] vaseɖe ~{1} megbe ~{2}
+block-log-flags-nocreate|wo xemɔ na ŋkɔ ŋɔŋlɔ
+move-page-legend|Ɖɔli eƒe nɔƒe
+movearticle|Ɖɔli eƒe nɔƒe:
+newtitle|Yi ɖe tanya yeye la:
+move-watch|Le ŋku ɖe axa sia ŋu
+movepagebtn|Ɖɔli eƒe nɔƒe
+pagemovedsub|Axaa ƒe hehe dze edzi
+movepage-moved|'''Wohe "~{0}" vayi "~{1}"'''
+articleexists|Tanya alo ŋkɔ sia nye axa bubu aɖe tɔ xoxo, alo eda se dzi.\nTia ŋkɔ alo tanya bubu.
+cantmove-titleprotected|Wòmateŋu ahe axa aɖeke va afii o, elabena wo xemɔ na tanya sia ƒe ŋɔŋlɔ
+export|Ɖo axa siawo ɖa
+allmessages|Gbeƒãɖeɖewo
+allmessages-filter-all|Wokatã
+allmessages-filter-submit|Yi
+tooltip-pt-preferences|Nyeƒe didiwo
+tooltip-pt-mycontris|Wò nuŋɔŋlɔwo ƒe xexlẽme
+tooltip-pt-login|Togbɔ be menye ɖe wò hĩa o tse la, mía ve nuwò bena na ŋlɔ ŋkɔ
+tooltip-pt-logout|Do le eme
+tooltip-ca-edit|Wòateŋu aɖɔ axa sia ɖo.\nNe ewɔvɔ la, tia "Fiae do ŋgɔ" kpea gbã hafi na dzrae ɖo.
+tooltip-ca-addsection|Dze akpa yeye gɔme
+tooltip-ca-viewsource|Wo dokpɔ ɖe axa sia ŋu.\nWòateŋu akpɔ alesi woŋlɔe.
+tooltip-ca-history|Axa sia ƒe tata xoxoawo
+tooltip-ca-protect|Dzɔ axa sia ŋu
+tooltip-ca-delete|Tutu axa sia
+tooltip-ca-move|Ɖɔli axa sia ƒe nɔƒe
+tooltip-search|Dii {{SITENAME}}
+tooltip-search-go|Yi axa si ƒe ŋkɔ enye esia ne woŋlɔe xoxo
+tooltip-search-fulltext|Di nyasiawo le axawo me.
+tooltip-n-mainpage|Yi axa si do ŋgɔ
+tooltip-n-mainpage-description|Yi axa si do ŋgɔ
+tooltip-n-recentchanges|Tɔtrɔ yeyewo le wiki sia me.
+tooltip-n-randompage|Kpɔ axa ɖesiaɖe ko
+tooltip-n-help|Nuwo srɔ̃ƒe
+tooltip-t-whatlinkshere|Wiki nuŋɔŋlɔwo katã siwo ku ɖe afii ŋuti
+tooltip-t-recentchangeslinked|Tɔtrɔ yeyewo le axa siwo ku ɖe axa sia ŋuti
+tooltip-t-contributions|Kpɔ nusiwo amesia ŋlɔ
+tooltip-t-upload|Ɖo nutatawo kple nuƒoƒowo ɖa
+tooltip-t-specialpages|Axa tɔxewo ƒe xexlẽme
+tooltip-ca-nstab-main|Kpɔ axa si tanyawo le
+tooltip-ca-nstab-special|Axa sia nye axa tɔxe.  Wò mateŋu atrɔ nu aɖeke le edzi o.
+tooltip-minoredit|Esia nye tɔtrɔ sue aɖe ko
+tooltip-save|Dzra wòƒe tɔtrɔwo ɖo
+tooltip-preview|Kpɔ wò ɖɔɖɔɖowo do ŋgɔ, mía ve nuwo bena na zãe hafi na dzrae ɖo!
+tooltip-diff|Fia tɔtrɔ siwo newɔ le nuŋɔŋlɔa me
+tooltip-compareselectedversions|Kpɔ vovototwo le axa sia ƒe tata eve siwo wotia la me
+previousdiff|← Tata xoxoa
+nextdiff|Tɔtrɔ yeyea →
+newimages|Nutata yeyewo
+ilsubmit|Dii
+namespacesall|wokatã
+monthsall|wokatã
+imgmultipagenext|axa yometɔ
+imgmultigo|Yi!
+imgmultigoto|Yi axa ~{0}
+table_pager_next|Axa yometɔ
+table_pager_prev|Axa si do ŋgɔ
+table_pager_first|Axa gbãtɔ
+table_pager_last|Axa mamlea
+table_pager_limit|Fia nu ~{0} le axa sia axa dzi
+table_pager_limit_submit|Yi
+watchlisttools-view|Kpɔ tɔtrɔ siwo hiã la
+version|Tata
+fileduplicatesearch-submit|Dii
+specialpages|Axa tɔxewo
+tags-edit|trɔ asi le eŋu
+expand_templates_preview|Kpɔe do ŋgɔ
+']:>
+).lang
+;

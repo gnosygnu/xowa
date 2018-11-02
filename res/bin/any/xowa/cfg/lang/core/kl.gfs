@@ -1,0 +1,433 @@
+this
+.fallback_load('da')
+.ns_names
+  .load_text(
+<:['
+-1|Immikkut
+1|Oqallinneq
+2|Atuisoq
+3|Atuisup oqalliffia
+5|$1-p oqalliffia
+6|Fiileq
+7|Fiilip oqalliffia
+8|MediaWiki
+9|Mediawikip oqalliffia
+10|Ilisserut
+11|Ilisserummi oqallinneq
+12|Ikiuutit
+13|Ikiuutini oqallinneq
+14|Sumut atassuseq
+15|Sumut atassusermi oqallinneq
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-1|Speciel
+1|Diskussion
+2|Bruger
+3|Brugerdiskussion
+5|$1-diskussion
+5|$1ip oqalliffia
+6|Fil
+7|Fildiskussion
+6|Billede
+7|Billeddiskussion
+8|MediaWiki
+9|MediaWiki-diskussion
+10|Skabelon
+11|Skabelondiskussion
+12|Hjælp
+13|Hjælp-diskussion
+14|Kategori
+15|Kategoridiskussion
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Sapaat
+monday|Ataasinngorneq
+tuesday|Marlunngorneq
+wednesday|Pingasunngorneq
+thursday|Sisamanngorneq
+friday|Tallimanngorneq
+saturday|Arfininngorneq
+sun|Sap
+mon|Ata
+tue|Mar
+wed|Pin
+thu|Sis
+fri|Tal
+sat|Arf
+january|Jannuaari
+february|Februaari
+march|Martsi
+april|Apriili
+may_long|Maaji
+june|Juuni
+july|Juuli
+august|Aggusti
+september|Septemberi
+october|Oktoberi
+november|Novemberi
+december|Decemberi
+january-gen|Januaari
+february-gen|Februaari
+march-gen|Marsi
+april-gen|Apriili
+may-gen|Maaji
+june-gen|Juuni
+july-gen|Juuli
+august-gen|Aggusti
+september-gen|Septembari
+october-gen|Oktobari
+november-gen|Novembari
+december-gen|Decembari
+jan|Jan
+feb|Feb
+mar|Mar
+apr|Apr
+may|Maaji
+jun|Jun
+jul|Jul
+aug|Aug
+sep|Sep
+oct|Okt
+nov|Nov
+dec|Dec
+toc|Imarisai
+redirectedfrom|(~{0}-mit nuunneq)
+categories|Sunut atassusit
+lastmodifiedat|Una qupperneq kingullermik allanngortinneqarsimavoq ~{0} ~{1}
+thumbnail-more|Allisiguk
+otherlanguages|Oqaatsit allat
+blanknamespace|(Pingaarneq)
+pagecategories|{{PLURAL:~{0}\u007CSumut atassuseq\u007CSunut atassusit}}
+category_header|Quppernerit sumut atassusermi "~{0}"-miittut
+subcategories|Sunut atassuserni ataaniittut
+category-subcat-count|{{PLURAL:~{1}\u007CUna sumut atassuseq ataatsimik ataani ilaqarpoq.\u007CUna sumut atassuseq imarivai {{PLURAL:~{0}\u007Csumut atassuseq ataaniittoq\u007C~{0} sunut atassusit ataaniittut}}, ~{1}-suni.}}
+category-article-count|Una sumut atassuseq imarivaa {{PLURAL:~{1}\u007Cqupperneq ataaseq ataaniittoq\u007C{{PLURAL:~{0}\u007Cqupperneq ataaseq ataaniittoq\u007Cquppernerit ataaniittut ~{0}-it}} ~{1}-suni.}}
+nextn|tullii {{PLURAL:~{0}\u007C~{0}}}
+prevn|siulii {{PLURAL:~{0}\u007C~{0}}}
+statistics|Kisitsisinngorlugit paasissutissat
+cite_article_link|Una qupperneq issuaruk
+wikimedia-copyright|Allatat ilaatinneqarput <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike License</a>-ip ataani;\npiumasaqaatit atuutinneqarsinnaapput.\nTakuuk <a href="https://wikimediafoundation.org/wiki/Terms_of_Use">Atugassatut piumasaqaatit</a> paasissutissaanerusut.
+about|Pillugu
+newwindow|(nutaamut ammassaaq)
+cancel|Unitsiguk
+moredotdotdot|Suli...
+mytalk|Oqalliffikka
+navigation|Sumiissusersiuut
+qbfind|Naniuk
+qbedit|Aaqqissoruk
+errorpagetitle|Kukkuneq
+returnto|~{0} -mut uterit
+tagline|{{SITENAME}}-meersoq
+help|Ikiuutit
+search|Ujarlerit
+searchbutton|Ujarlerit
+go|Ikunnarit
+searcharticle|Tassunngarit
+history|Oqaluttuassartaa
+history_short|Oqaluttuassartaa
+printableversion|Naqikkuminartoq
+permalink|Ataavartumik innersuut
+edit|Aaqqissoruk
+create|Pilersiguk
+editthispage|Qupperneq aaqqissuuguk
+delete|Peeruk
+deletethispage|Qupperneq piiaruk
+protect|Illersoruk
+protect_change|allannguutit
+unprotect|Illersorunnaaruk
+newpage|Qupperneq nutaaq
+talkpagelinktext|Oqallinneq
+personaltools|Namminermut sannatit
+talk|Oqallinneq
+views|Takutitat
+toolbox|Atortut
+jumpto|Uunngarit:
+jumptonavigation|sumiissusersiuut
+jumptosearch|ujarlerit
+aboutsite|{{SITENAME}} pillugu
+aboutpage|Project:Pillugu
+currentevents|Maannakkut pisut
+disclaimers|Aalajangersagaq
+edithelp|Ikiuutit
+mainpage|Saqqaa
+mainpage-description|Saqqaa
+portal|Allattartup saqqaa
+privacy|Namminermut paasissutissat
+retrievedfrom|Uannga aaneqartoq "~{0}"
+youhavenewmessages|<!-- This sentence shall be empty because of kl grammar. --> ~{0} (~{1})
+editsection|aaqqissoruk
+editold|aaqqissoruk
+viewsourceold|toqqavia takuuk
+editlink|aaqqissoruk
+editsectionhint|Aaqqissuuguk immikkoortoq: ~{0}
+showtoc|saqqummeruk
+hidetoc|toqqoruk
+site-rss-feed|~{0} RSS Feed
+site-atom-feed|~{0} Atom Feed
+page-rss-feed|"~{0}" RSS Feed
+red-link-title|~{0} (Qupperneq suli allaffigineqanngilaq)
+nstab-main|Allaaserisaq
+nstab-user|Atuisup quppernera
+nstab-special|Immikkut
+nstab-project|Pillugu
+nstab-image|Assiliaq
+nstab-template|Ilisserut
+nstab-help|Ikiuutit
+nstab-category|Sumut atassuseq
+viewsource|Toqqavia takuuk
+protectedpagetext|Una qupperneq allaffigineqarnissamut illersugaavoq.
+viewsourcetext|Qupperneq takusinnaavat aamma sanarfia kopeersinnaavat:
+logouttext|'''Maanna anivutit.'''\n\n{{SITENAME}} atorlugu ingerlaqqissinnaavutit kinaanerit isertorlugu, iseqqissinnaavutilluunniit taamatut isissuteqarlutit imalt. allat iserfigisinnaanngorpaat.
+yourname|Atuisutut atit
+yourpassword|Isissutissaq:
+yourpasswordagain|Isissutissaq allaqqiguk
+remembermypassword|Iserfiga tullissaanut eqqaamalara (for a maximum of ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}})
+login|Iserit
+nav-login-createaccount|Konto-mik pilersitsigit imalt. iserit
+userlogin|Kontomik pilersitsigit / iserit
+logout|Anigit
+userlogout|Anigit
+nologin|Kontomik peqanngilatit? '''~{0}'''.
+nologinlink|Kontomik pilersitsigit
+createaccount|Kontomik nutaamik pilersitsigit
+gotaccount|Kontomik peqareerpit? '''~{0}'''.
+gotaccountlink|Iserit
+createaccountmail|e-mail-ikkut
+badretype|Isissutissat allanneqartut assigiinngillat.
+userexists|Atuisup atia atorneqareerpoq. Allamik qinersigit.
+loginerror|Iserniarnerlunneq
+loginsuccesstitle|Maanna isersimalerputit
+loginsuccess|Maanna {{SITENAME}} -mut isersimalerputit "~{0}" -itut taaguuserlutit.
+wrongpassword|Isissutissaq kukkusumik allanneqarsimavoq. Misileqqiuk.
+mailmypassword|E-mail-ikkut isissutissaq nutaaq nassiuguk
+acct_creation_throttle_hit|Konto-mik pilersitsereersimagavit pilersitseqqissinnaanngilatit, IP-adressit malillugu.\nTaamaattumik maannakkorpiaq kontomik pilersitsisinnaanngilatit.
+oldpassword|Isissutissatoqaq:
+newpassword|Isissutissaq nutaaq:
+retypenew|Isissutissaq nutaaq allaqqiuk
+summary|Allaaserinera:
+subject|Pineqartoq/qulequtaq:
+minoredit|Annikitsumik allannguutaavoq
+watchthis|Allaaserisaq ersersimatiguk
+savearticle|Toqqoruk
+preview|Isikkua
+showpreview|Isikkua takuuk
+showdiff|Allannguutit
+anoneditwarning|'''Mianersoqqussut:''' Isersimanak sulilerputit.\nIP adressit nuisassaaq massuma quppernerup oqaluttuassartaani.
+accmailtitle|Password-i nassiunneqarsimavoq.
+accmailtext|Password-i "~{0}" ~{1}-mut nassiunneqarsimavoq.
+newarticle|(Nuutaq)
+newarticletext|Maanga innersuunneqarsimavutit quppernermut suli pilersinneqarsimanngitsumut.\nQupperneq pilersissagukku, boks-ip iluani allagit (takuuk [~{0} ikiuutit] paasissutissaanerusut).\nMaanngarsimaguit kukkusumik, toortaat '''utimut''' tooruk.
+anontalkpagetext|---- ''Manna tassaavoq oqalliffik atuisumit anonym-iusumeersumit, konto-mik pilersitsisimanngitsumik imalt. atorneq ajugaanik.\nTaamaattumik IP-adressia kinaanerattut atortariaqassavarput.\nIP-adressi pigineqarsinnaavoq atuisunit arlalinnit.\nAtuisuuguit anonym-iusoq, isumaqarlutillu soqutiginngisannik oqaaseqarfigineqarlutit, qinnuigivatsigit [[Special:UserLogin/signup\u007Catuisutut pilersitsissallutit]] aamma [[Special:UserLogin\u007Ciserlutit]], taava siunissami paarlattoornernik atuisuni arlalinni pinaveersaartoqarniassammat.''
+noarticletext|Maannamut una qupperneq allaffigineqanngilaq.\nTaamatut oqaasilimmik quppernerni allani [[Special:Search/{{PAGENAME}}\u007Cujaasisinnaavutit]], <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} log-ini ujaasisinnavutillu] imaluunniit [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} qupperneq pilersissinnaavat]</span>.
+previewnote|Eqqaamallugu isikkua takutinneqaannarpoq, toqqorneqanngilaq suli!
+editing|Aaqqissorpaa ~{0}
+editingsection|Aaqqissorpaa ~{0} (immikkoortoq)
+editingcomment|Aaqqissorpaa ~{0} (immikkoortoq nutaaq)
+yourtext|Allatat
+editingold|'''Mianersoqqussut: Qupperneq pisoqaanerusoq aaqqissuutilerpat.'''\nToqqorukku quppernerup taamaannera taarserneqassaaq.
+protectedpagewarning|'''Mianersoqqussut: Una qupperneq illersugaavoq, administratorit kisimik aaqqissorsinnaavaat.'''
+semiprotectedpagewarning|'''Malugiuk:''' Qupperneq parnaaqqavoq, atuisutut nalunaarsimasut kisimik allanngortitersinnaavaat.
+templatesused|{{PLURAL:~{0}\u007CIlisserut\u007CIlisserutit}} quppernermi atorneqartoq/tut:
+permissionserrorstext-withaction|Pisinnaatitaaffeqanngilatit ~{1} atussallugu, {{PLURAL:~{0}\u007Cpeqqutigalugu\u007Cpeqqutigalugit}}:
+moveddeleted-notice|Una qupperneq peerneqarsimavoq.\nPeersinermut nuutsinermullu nalunaarsuutit ataani takuneqarsinnaapput.
+currentrev|Maanna taamaannera
+currentrev-asof|Maanna taamaannera ~{0}-meersoq
+revisionasof|Taamaannera ~{0}-meersoq
+previousrevision|← Pisoqaaneq
+nextrevision|Nutaaneq →
+currentrevisionlink|Massakkuunera takuuk
+cur|maanna
+last|siulia
+page_first|siulliit
+page_last|kingulliit
+histlegend|Nassuiaat: (maanna) = assigiinngissut maanna inneranut, (siulia) = assigiinngissut siulianut, M = annikitsumik allannguut
+history-fieldset-title|Oqaluttuassartaani qupperaagit
+histfirst|Pisoqaaneq
+histlast|Nutaaneq
+history-title|"~{0}"-p oqaluttuassartaa
+compareselectedversions|Qinikkat nalilersukkit
+editundo|peeruk
+searchresults|Ujaasinermi inernerit
+searchresults-title|Uuma ujarnera "~{0}"
+viewprevnext|Takuuk (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|'''Qupperneqarpoq "[[:~{0}]]" -mik atilimmik maani wikimi'''
+searchmenu-new|'''Qupperneq [[:~{0}]] pilersiguk maani wikimi'''
+searchprofile-articles|Imarisai
+searchprofile-everything|Tamarmik
+searchprofile-advanced|Ujaasiffik anneq
+search-result-size|~{0} ({{PLURAL:~{1}\u007Coqaaseq\u007C~{1} oqaatsit}})
+search-redirect|(nuunneq ~{0})
+search-suggest|Una piviuk: ~{0}
+search-nonefound|Ujaasineq inerneqanngilaq
+mypreferences|Inissiffissat
+prefs-rc|Allannguutit kingulliit
+saveprefs|Toqqukkit
+yourlanguage|Oqaatsit:
+group-sysop|Administratorit
+recentchanges|Allannguutit kingulliit
+recentchanges-legend|Inissisimaffiit allannguutini kingullerni
+recentchanges-summary|Uani quppernermi '''{{SITENAME}}'''-mi allannguutit kingulliit malinnaavigisinnaavatit.
+recentchanges-label-newpage|Tassaavoq qupperneq nutaaq
+recentchanges-label-minor|Tassaavoq allannguut annikitsoq
+recentchanges-label-bot|Bot-ip allannguutaa
+recentchanges-legend-newpage|~{0} - qupperneq nutaaq
+rclistfrom|Allannguutit kingulliit takukkit ~{2} ~{1} -nngaanniit
+rcshowhideminor|~{0} allannguutit annikitsut
+rcshowhidebots|~{0} robottit
+rcshowhideliu|~{0} atuisut nalunaarsimasut
+rcshowhideanons|~{0} atuisut anonymejusut
+rcshowhidepatr|~{0} allannguutit misissorneqarsimasut
+rcshowhidemine|~{0} nammineq tapit
+rclinks|Takutikkit ~{0} -it allannguutit kingulliit ulluni kingullerni ~{1} -ni<br />~{2}
+diff|assigiinng
+hist|oqalutt
+hide|Assequt
+show|Saqqummiuk
+minoreditletter|m
+newpageletter|N
+boteditletter|b
+recentchangeslinked|Allannguutit naleqqiussat
+recentchangeslinked-feed|Allannguutit naleqqiussat
+recentchangeslinked-toolbox|Allannguutit naleqqiussat
+upload|Fiilimik ilisigit
+listfiles_user|Atuisoq
+file-anchor-link|Assiliaq
+filehist-datetime|Ulloq/Piffissaq
+filehist-user|Atuisoq
+imagelinks|Innersuutit
+mimesearch|MIME ujaarlerit
+randompage|Nalaatsornermi qupperneq
+newpages|Quppernerit nutaat
+move|Nuuguk
+pager-newer-n|{{PLURAL:~{0}\u007Cnutaaneq 1\u007Cnutaanerit ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Cpisoqaaneq 1\u007Cpisoqaanerit ~{0}}}
+specialloguserlabel|Atuisoq:
+allarticles|Quppernerit tamarmik
+allpagessubmit|Tassunngarit
+categoriespagetext|Uku {{PLURAL:~{0}\u007Csumut atassuseq\u007Csunut atassusit}} imarivai quppernerit media-lluunniit.\n[[Special:UnusedCategories\u007CSunut atassusit]] atorneqanngitsut maani ilaanngillat.\nAamma takuuk [[Special:WantedCategories\u007Csunut atassusinut kissaatigineqartut]].
+categoriesfrom|Takuuk qanoq aallartiffianeersumiit:
+linksearch-ok|Ujaruk
+watchlist|Ersersimasut
+mywatchlist|Nuisatiffikka
+addedwatchtext|Una qupperneq "[[:~{0}]]" ersersimatitannut ilanngunneqarpoq. Siunissami allannguutit ilinnut malugeqquneqartassapput aamma [[Special:RecentChanges\u007Callannguutini kingullerni]] issusuumik allanneqartuusassallutik. Ersersimatikkusunngikkukku [[Special:Watchlist\u007Cpiiginnassavat]] ersersimasuutitanni.
+watch|Ersilli
+watchthispage|Qupperneq ersersimatiguk
+unwatch|Ersitsinnagu
+watching|Saqqumitiguk
+unwatching|Saqquminera peeruk
+excontent|imarivaa: '~{0}'
+excontentauthor|imarivaa: '~{0}' (allattutuaavorlu '[[Special:Contributions/~{1}\u007C~{1}]]')
+delete-confirm|Peeruk "~{0}"
+actioncomplete|Naammassivoq
+deletedtext|"~{0}" peerpoq. Takukkit ~{1} peerneqarsimasut kingulliit.
+revertpage|Inisseqqiineq [[User:~{0}\u007C~{0}]]-meersoq, peerneqarpoq [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007Cdiskussion]])-meersoq
+prot_1movedto2|[[~{0}]]-i nuunneqarsimavoq [[~{1}]]-mut
+protect-expiry-options|1 tiimi:1 hour,ulloq 1:1 day,sap akunn 1:1 week,sap akunn 2:2 weeks,qaammat 1:1 month,qaammatit 3:3 months,qaammatit 6:6 months,ukioq 1:1 year,killeqanngitsoq:infinite
+undeletebtn|Inisseqqiguk
+undelete-search-submit|Ujarlerit
+namespace|Quppernerup ilusia:
+invert|Quppernerup ilusia qinernagu
+contributions|Atuisup tapii
+mycontris|Tapikka
+contribsub2|~{0}-meersoq (~{1})
+uctop|(kingulleq)
+month|Qaammat:
+year|Ukioq:
+sp-contributions-newbies|Atuisut nutaaginnaat takukkit
+sp-contributions-talk|oqallinneq
+sp-contributions-search|Tapiisunik ujaasineq
+sp-contributions-username|IP adresse imalt. atuisoq:
+sp-contributions-submit|Ujaruk
+whatlinkshere|Suna maangamut innersuussisoq
+whatlinkshere-prev|{{PLURAL:~{0}\u007Csiulia\u007Csiulii ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Ctullia\u007Ctullii ~{0}}}
+blockip|Atuisoq asseruk
+blockip-legend|Atuisoq asseruk
+ipaddressorusername|IP adresse imalt. atuisoq:
+ipboptions|2 tiimit:2 hours,ulloq 1:1 day,ullut 3:3 days,sap akunn 1:1 week,sap akunn 2:2 weeks,qaammat 1:1 month,qaammatit 3:3 months,qaammatit 6:6 months,ukioq 1:1 year,killeqanngitsoq:infinite
+ipblocklist-submit|Ujarlerit
+infiniteblock|killeqanngitsoq
+expiringblock|atorunnaassaaq ~{0} ~{1}-nngoruni
+blocklink|assersoruk
+contribslink|tapikkat
+blocklogentry|asserpaa [[~{0}]] ~{1}-mik sivissusilimmik ~{2}
+movearticle|Qupperneq nuuguk
+move-watch|Qupperneq ersersimatiguk
+movepagebtn|Qupperneq nuuguk
+pagemovedsub|Nuunnera iluatsippoq
+movepage-moved|Qupperneq '''"~{0}" uunga nuuppoq "~{1}"'''
+allmessages-language|Oqaatsit:
+allmessages-filter-submit|Takuuk
+tooltip-pt-userpage|Atuisutut quppernerit
+tooltip-pt-mytalk|Oqalliffiit
+tooltip-pt-preferences|Inissiinikka
+tooltip-pt-mycontris|Tapikkatit
+tooltip-pt-login|Iseqquneqaraluarputit, pitsaanerussagaluarpoq
+tooltip-pt-logout|Aniffik
+tooltip-ca-talk|Quppernerup imaanik oqallinneq
+tooltip-ca-edit|Allanngortiterisinnaavutit. Isikkua takulaariuk
+tooltip-ca-history|Quppernerup siulii
+tooltip-ca-move|Qupperneq nuuguk
+tooltip-ca-watch|Saqqumitiguk
+tooltip-search|Ujaarlerit {{SITENAME}}
+tooltip-search-go|Tassunngarit nassaassappat
+tooltip-search-fulltext|Taanna ujaruk
+tooltip-n-mainpage|Saqqaa iseruk
+tooltip-n-mainpage-description|Saqqaa iseruk
+tooltip-n-portal|Suliaq, ilitsersuut, nassaassaasinnaasullu
+tooltip-n-currentevents|Maannakkut pisut tunuliaqutai takukkit
+tooltip-n-recentchanges|Wikimi allannguutit kingulliit
+tooltip-n-randompage|Allaaserisamukarit
+tooltip-n-help|Qanoq iliussaanga ...
+tooltip-t-whatlinkshere|Innersuussami saqqummiussat
+tooltip-t-recentchangeslinked|Massuma quppernerani allannguutit kingulliit
+tooltip-t-upload|Assinik mediafiilinilluunniit ilisigit
+tooltip-t-specialpages|Quppernerit immikkut ittut nassaassaasinnaasut
+tooltip-t-print|Quppernerup naqikkuminarnera
+tooltip-t-permalink|Massuma quppernerup taamaaqqaarnera
+tooltip-ca-nstab-main|Imarisaa takuuk
+tooltip-save|Allannguutitit toqqukkit
+tooltip-preview|Isikkua takuuk, toqqortinnaguk atortaruk!
+lastmodifiedatby|Una qupperneq kingullermik allanngortinneqarsimavoq ~{1}, ~{0} ~{2}-mit.
+previousdiff|← Assigiinngissut siulia
+nextdiff|Assigiinngissut tullia →
+ilsubmit|Ujarlerit
+namespacesall|tamarmik
+monthsall|tamarmik
+autosumm-new|Qupperneq pilersippaa '~{0}'
+specialpages|Quppernerit immikkut ittut
+searchsuggest-search|Ujarlerit
+']:>
+).lang
+;

@@ -1,0 +1,348 @@
+numbers {
+  separators {
+    clear;
+    set(',', '''');
+    set('.', ',');
+  }
+}
+this
+.fallback_load('de')
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+thumbnail-more|vergrössern
+category_header|Seiten in der Kategorie «~{0}»
+category-media-header|Medien in der Kategorie «~{0}»
+categorytree-mode-pages|Seiten ausser Dateien
+cite_error_references_invalid_parameters|Ungültige <tt>&lt;references&gt;</tt>-Verwendung: Es sind keine zusätzlichen Parameter erlaubt, verwende ausschliesslich <tt><nowiki><references /></nowiki></tt>.
+cite_error_included_ref|Es fehlt ein schliessendes <code>&lt;/ref&gt;</code>
+wikieditor-toolbar-dialogs-preference|Assistenten zum Einfügen von Links und Tabellen sowie die Funktion «Suchen und Ersetzen» aktivieren
+wikieditor-toolbar-tool-reference-example|Fussnotentext hier einfügen
+wikieditor-toolbar-tool-big|Gross
+wikieditor-toolbar-tool-big-example|Grosser Text
+wikieditor-toolbar-tool-newline|Zeilenumbruch erzwingen (nicht im Fliesstext verwenden)
+wikieditor-toolbar-tool-replace-case|Gross- und Kleinschreibung beachten
+wikieditor-toolbar-tool-replace-close|Schliessen
+wikieditor-toolbar-help-content-file-result|<div style='width:104px;' class='thumbinner'><a title='Beschreibung' class='image' href='#'><img height='50' width='100' border='0' class='thumbimage' src='~{1}/WikiEditor/modules/images/toolbar/example-image.png' alt=''/></a><div class='thumbcaption'><div class='magnify'><a title='Vergrössern' class='internal' href='#'><img height='11' width='15' alt='' src='~{0}/common/images/magnify-clip.png'/></a></div>Beschreibung</div></div>
+wm-license-attribution-with-author-text|Der Urheberrechtsinhaber dieser Datei, ~{0}, erlaubt es jedem, diese '''für jeden Zweck zu benutzen, vorausgesetzt, dass''' der Urheberrechtsinhaber ordnungsgemäss genannt wird. Weiterverbreitung, Abänderungen, kommerzielle Nutzung sowie jede andere Verwendung sind gestattet.
+wm-license-artwork-dimensions|Ausmasse
+wm-license-gfdl-1.3-only|Es ist erlaubt, dieses Dokument gemäss den Bedingungen der '''[[{{int:wm-license-gfdl-wiki-link}}\u007CGNU-Lizenz für freie  Dokumentation]],''' Version 1.3, veröffentlicht von der ''[[{{int:wm-license-fsf-wiki-link}}\u007CFree Software Foundation]],'' zu kopieren, zu verbreiten und/oder zu modifizieren; es gibt keine unveränderlichen Abschnitte, keinen vorderen und keinen hinteren Umschlagtext.\nDer vollständige Text der Lizenz ist auf der Seite ''[[{{int:wm-license-gfdl-full-1.3-link}}\u007CGNU-Lizenz für freie Dokumentation]]'' verfügbar.
+wm-license-information-description-missing-request|Bilder sollten eine Zusammenfassung besitzen, die den Betrachter über Inhalt, Quelle und wenn möglich Datum informiert.\nWenn du etwas davon weisst oder Zugang zu solchen Informationen hast, füge diese bitte der Bildbeschreibungsseite hinzu.
+group-bigexport|Grossexporteure
+group-bigexport-member|{{GENDER:~{0}\u007CGrossexporteur\u007CGrossexporteurin}}
+grouppage-bigexport|{{ns:project}}:Grossexporteure
+wikimedia-copyrightwarning|Mit dem Klick auf die Schaltfläche «{{int:savearticle}}» erklärst du dich mit den [https://wikimediafoundation.org/wiki/Terms_of_Use Nutzungsbedingungen] einverstanden und lizenzierst deine Bearbeitung unwiderruflich unter der Lizenz [https://creativecommons.org/licenses/by-sa/3.0/deed.de ''Creative Commons'' «Namensnennung / Weitergabe unter gleichen Bedingungen 3.0»] und der [https://de.wikipedia.org/wiki/Wikipedia:GNU_Free_Documentation_License GFDL].\nDu stimmst zu, dass ein Hyperlink oder eine URL zur Seite für die notwendige Zuschreibung, gemäss der ''Creative-Commons''-Lizenz, ausreichend ist.
+tog-hideminor|Kleine Änderungen in den «Letzten Änderungen» ausblenden
+tog-hidepatrolled|Kontrollierte Änderungen in den «Letzten Änderungen» ausblenden
+tog-newpageshidepatrolled|Kontrollierte Seiten bei den «Neuen Seiten» ausblenden
+tog-usenewrc|Seitenbezogene Gruppierung in den «Letzten Änderungen» und auf der Beobachtungsliste
+tog-minordefault|Eigene Änderungen standardmässig als minim markieren
+badaccess-groups|Diese Aktion ist auf Benutzer beschränkt, die {{PLURAL:~{1}\u007Cder Gruppe\u007Ceiner der Gruppen}} «~{0}» angehören.
+retrievedfrom|Von «~{0}»
+site-atom-feed|Atom-Feed für «~{0}»
+page-rss-feed|RSS-Feed für «~{0}»
+page-atom-feed|Atom-Feed für «~{0}»
+missing-article|Der Text von «~{0}» ~{1} wurde nicht in der Datenbank gefunden.\n\nDie Seite ist möglicherweise gelöscht oder verschoben worden.\n\nFalls dies nicht  zutrifft, hast du eventuell einen Fehler in der Software gefunden. Bitte melde dies einem [[Special:ListUsers/sysop\u007CAdministrator]] unter Nennung der URL.
+filecopyerror|Die Datei «~{0}» konnte nicht nach «~{1}» kopiert werden.
+filerenameerror|Die Datei «~{0}» konnte nicht nach «~{1}» umbenannt werden.
+filedeleteerror|Die Datei «~{0}» konnte nicht gelöscht werden.
+directorycreateerror|Das Verzeichnis «~{0}» konnte nicht angelegt werden.
+filenotfound|Die Datei «~{0}» wurde nicht gefunden.
+unexpected|Unerwarteter Wert: «~{0}» = «~{1}»
+cannotdelete|Die Seite oder Datei «~{0}» kann nicht gelöscht werden.\nMöglicherweise wurde sie bereits von jemand anderem gelöscht.
+cannotdelete-title|Seite «~{0}» kann nicht gelöscht werden
+actionthrottledtext|Im Rahmen einer Anti-Spam-Massnahme oder aufgrund eines Missbrauchsfilters kann diese Aktion in einem kurzen Zeitabstand nur begrenzt oft ausgeführt werden. Diese Grenze hast du überschritten.\nBitte versuche es in ein paar Minuten erneut.
+editinginterface|'''Warnung:''' Diese Seite enthält von der MediaWiki-Software genutzten Text.\nÄnderungen auf dieser Seite wirken sich auf die Benutzeroberfläche dieses Wikis aus.\nNutze bitte [//translatewiki.net/ translatewiki.net], das Lokalisierungsprojekt von MediaWiki, um Übersetzungen für alle Wikis hinzuzufügen oder zu ändern.
+titleprotected|Eine Seite mit diesem Namen kann nicht angelegt werden.\nDie Sperre wurde durch [[User:~{0}\u007C~{0}]] mit der Begründung ''«~{1}»'' eingerichtet.
+filereadonlyerror|Die Datei «~{0}» kann nicht verändert werden, da auf das Dateirepositorium «~{1}» nur Lesezugriff möglich ist.\n\nDer Administrator, der den Schreibzugriff sperrte, gab folgenden Grund an: «~{2}».
+createacct-realname|Richtiger Name (optional)
+loginsuccess|Du bist jetzt als «~{0}» bei {{SITENAME}} angemeldet.
+nosuchuser|Der Benutzername «~{0}» existiert nicht.\nÜberprüfe die Schreibweise (Gross-/Kleinschreibung beachten) oder [[Special:UserLogin/signup\u007Cmelde dich als neuer Benutzer an]].
+nosuchusershort|Der Benutzername «~{0}» ist nicht vorhanden. Bitte überprüfe die Schreibweise.
+passwordremindertext|Jemand mit der IP-Adresse ~{0}, wahrscheinlich du selbst, hat ein neues Passwort für die Anmeldung bei {{SITENAME}} (~{3}) angefordert.\n\nDas automatisch generierte Passwort für Benutzer «~{1}» lautet nun: ~{2}\n\nFalls du dies wirklich gewünscht hast, solltest du dich jetzt anmelden und das Passwort ändern.\nDas neue Passwort ist {{PLURAL:~{4}\u007C1 Tag\u007C~{4} Tage}} gültig.\n\nBitte ignoriere dieses E-Mail, falls du es nicht selbst angefordert hast. Das alte Passwort bleibt weiterhin gültig.
+noemail|{{GENDER:~{0}\u007CBenutzer\u007CBenutzerin\u007CBenutzer}} «~{0}» hat keine E-Mail-Adresse angegeben.
+passwordsent|Ein neues, temporäres Passwort wurde an die E-Mail-Adresse von Benutzer «~{0}» gesandt.\nBitte melde dich damit an, sobald du es erhalten hast. Das alte Passwort bleibt weiterhin gültig.
+eauthentsent|Ein Bestätigungs-E-Mail wurde an die angegebene Adresse verschickt.\n\nBevor ein E-Mail von anderen Benutzern über die E-Mail-Funktion empfangen werden kann, muss die Adresse und ihre tatsächliche Zugehörigkeit zu diesem Benutzerkonto erst bestätigt werden. Bitte befolge die Hinweise im Bestätigungs-E-Mail.
+throttled-mailpassword|Es wurde innerhalb der letzten {{PLURAL:~{0}\u007CStunde\u007C~{0} Stunden}} bereits ein Passwortzurücksetzungs-E-Mail angefordert. Um einen Missbrauch der Funktion zu verhindern, kann nur {{PLURAL:~{0}\u007Ceinmal pro Stunde\u007Calle ~{0} Stunden}} ein Passwortzurücksetzungs-E-Mail angefordert werden.
+mailerror|Fehler beim Senden des E-Mails: ~{0}
+createaccount-text|Es wurde für dich ein Benutzerkonto «~{1}» auf {{SITENAME}} (~{3}) erstellt. Das automatisch generierte Passwort für «~{1}» ist «~{2}». Du solltest dich nun anmelden und das Passwort ändern.\n\nFalls das Benutzerkonto irrtümlich angelegt wurde, kannst du diese Nachricht ignorieren.
+createacct-another-realname-tip|Der richtige Name ist optional.\nWenn du ihn angibst, wird er für die Zuordnung der Beiträge verwendet.
+user-mail-no-addy|Versuchte, ein E-Mail ohne Angabe einer E-Mail-Adresse zu versenden
+user-mail-no-body|Es wurde versucht, ein E-Mail mit einem leeren oder zu kurzen Textkörper zu versenden.
+resetpass_announce|Um die Anmeldung abzuschliessen, musst du ein neues Passwort festlegen.
+passwordreset-emailsent|Ein Passwortzurücksetzungs-E-Mail wurde versandt.
+passwordreset-emailsent-capture|Ein Passwortzurücksetzungs-E-Mail wurde versandt, das unten angezeigt wird.
+passwordreset-emailerror-capture|Die unten angezeigte Passwortzurücksetzungs-E-Mail wurde generiert, allerdings ist der Versand an {{GENDER:~{1}\u007Cden Benutzer\u007Cdie Benutzerin}} gescheitert: ~{0}
+missingsummary|'''Hinweis:''' Du hast keine Zusammenfassung angegeben. Wenn du erneut auf «{{int:savearticle}}» klickst, wird deine Änderung ohne Zusammenfassung übernommen.
+missingcommentheader|'''Achtung:''' Du hast kein Betreff/Überschrift eingegeben. Wenn du erneut auf «{{int:savearticle}}» klickst, wird deine Bearbeitung ohne Überschrift gespeichert.
+blockedtext|'''Dein Benutzername oder deine IP-Adresse wurde gesperrt.'''\n\nDie Sperrung wurde von ~{0} durchgeführt.\nAls Grund wurde ''~{1}'' angegeben.\n\n* Beginn der Sperre: ~{7}\n* Ende der Sperre: ~{5}\n* Sperre betrifft: ~{6}\n\nDu kannst ~{0} oder einen der anderen [[{{MediaWiki:Grouppage-sysop}}\u007CAdministratoren]] kontaktieren, um über die Sperre zu diskutieren.\nDu kannst die «E-Mail an diesen Benutzer»-Funktion nicht nutzen, solange keine gültige E-Mail-Adresse in deinen [[Special:Preferences\u007CBenutzerkonto-Einstellungen]] eingetragen ist oder diese Funktion für dich gesperrt wurde.\nDeine aktuelle IP-Adresse ist ~{2}, und die Sperr-ID ist ~{4}.\nBitte füge alle Informationen jeder Anfrage hinzu, die du stellst.
+autoblockedtext|Deine IP-Adresse wurde automatisch gesperrt, da sie von einem anderen Benutzer genutzt wurde, der von ~{0} gesperrt wurde.\nAls Grund wurde angegeben:\n\n:''~{1}''\n\n* Beginn der Sperre: ~{7}\n* Ende der Sperre: ~{5}\n* Sperre betrifft: ~{6}\n\nDu kannst ~{0} oder einen der anderen [[{{MediaWiki:Grouppage-sysop}}\u007CAdministratoren]] kontaktieren, um über die Sperre zu diskutieren.\n\nDu kannst die «E-Mail an diesen Benutzer»-Funktion nicht nutzen, solange keine gültige E-Mail-Adresse in deinen [[Special:Preferences\u007CBenutzerkonto-Einstellungen]] eingetragen ist oder diese Funktion für dich gesperrt wurde.\n\nDeine aktuelle IP-Adresse ist ~{2}, und die Sperr-ID ist ~{4}.\nBitte füge alle Informationen jeder Anfrage hinzu, die du stellst.
+confirmedittext|Du musst deine E-Mail-Adresse erst bestätigen, bevor du Bearbeitungen durchführen kannst. Bitte ergänze und bestätige dein E-Mail in den [[Special:Preferences\u007CEinstellungen]].
+accmailtext|Ein zufällig generiertes Passwort für [[User talk:~{0}\u007C~{0}]] wurde an ~{1} versandt. Es kann auf der Seite ''[[Special:ChangePassword\u007CPasswort ändern]]'' nach der Anmeldung geändert werden.
+userpage-userdoesnotexist|Das Benutzerkonto «<nowiki>~{0}</nowiki>» ist nicht vorhanden. Bitte prüfe, ob du diese Seite wirklich erstellen/bearbeiten willst.
+userpage-userdoesnotexist-view|Das Benutzerkonto «~{0}» ist nicht vorhanden.
+clearyourcache|'''Hinweis:''' Leere nach dem Speichern den Browser-Cache, um die Änderungen sehen zu können.\n* '''Firefox/Safari:''' ''Umschalttaste'' drücken und gleichzeitig ''Aktualisieren'' anklicken oder entweder ''Ctrl+F5'' oder ''Ctrl+R'' (''⌘+R'' auf dem Mac) drücken\n* '''Google Chrome:''' ''Umschalttaste+Ctrl+R'' (''⌘+Umschalttaste+R'' auf dem Mac) drücken\n* '''Internet Explorer:''' ''Ctrl+F5'' drücken oder ''Ctrl'' drücken und gleichzeitig ''Aktualisieren'' anklicken\n* '''Opera:''' ''Extras → Internetspuren löschen … → Individuelle Auswahl → Den kompletten Cache löschen''
+usercssyoucanpreview|'''Tipp:''' Benutze den «{{int:showpreview}}»-Button, um dein neues CSS vor dem Speichern zu testen.
+userjsyoucanpreview|'''Tipp:''' Benutze den «{{int:showpreview}}»-Button, um dein neues JavaScript vor dem Speichern zu testen.
+userinvalidcssjstitle|'''Achtung:''' Die Benutzeroberfläche «~{0}» existiert nicht. Bedenke, dass benutzerspezifische .css- und .js-Seiten mit einem Kleinbuchstaben anfangen müssen, also beispielsweise ''{{ns:user}}:Mustermann/vector.css'' an Stelle von ''{{ns:user}}:Mustermann/Vector.css''.
+editing|Bearbeiten von «~{0}»
+creating|Erstellen von «~{0}»
+editingsection|Bearbeiten von «~{0}» (Abschnitt)
+editingcomment|Bearbeiten von «~{0}» (Neuer Abschnitt)
+explainconflict|Jemand anders hat diese Seite geändert, nachdem du angefangen hast, sie zu bearbeiten.\nDas obere Textfeld enthält den aktuellen Bearbeitungsstand der Seite.\nDas untere Textfeld enthält deine Änderungen.\nBitte füge deine Änderungen in das obere Textfeld ein.\n'''Nur''' der Inhalt des oberen Textfeldes wird gespeichert, wenn du auf «{{int:savearticle}}» klickst.
+copyrightwarning|'''Bitte kopiere keine Webseiten, die nicht deine eigenen sind, benutze keine urheberrechtlich geschützten Werke ohne Erlaubnis des Urhebers!'''<br />\nDu gibst uns hiermit deine Zusage, dass du den Text '''selbst verfasst''' hast, dass der Text Allgemeingut '''(public domain)''' ist, oder dass der '''Urheber''' seine '''Zustimmung''' gegeben hat. Falls dieser Text bereits woanders veröffentlicht wurde, weise bitte auf der Diskussionsseite darauf hin.\n<i>Bitte beachte, dass alle {{SITENAME}}-Beiträge automatisch unter der «~{1}» stehen (siehe ~{0} für Einzelheiten). Falls du nicht möchtest, dass deine Arbeit hier von anderen verändert und verbreitet wird, dann drücke nicht auf «Seite speichern».</i>
+longpageerror|'''Fehler: Der Text, den du zu speichern versuchst, ist {{PLURAL:~{0}\u007Cein Kilobyte\u007C~{0} Kilobytes}} gross. Dies ist grösser als das erlaubte Maximum von {{PLURAL:~{1}\u007Cein Kilobyte\u007C~{1} Kilobytes}}.'''\nEr kann nicht gespeichert werden.
+post-expand-template-inclusion-warning|Warnung: Die Grösse eingebundener Vorlagen ist zu gross, einige Vorlagen können nicht eingebunden werden.
+post-expand-template-inclusion-category|Seiten, in denen die maximale Grösse eingebundener Vorlagen überschritten ist
+post-expand-template-argument-warning|'''Warnung:''' Diese Seite enthält mindestens einen Parameter in einer Vorlage, der expandiert zu gross ist. Diese Parameter werden ignoriert.
+histlegend|Zur Anzeige der Änderungen einfach die zu vergleichenden Versionen auswählen und die Schaltfläche «{{int:compareselectedversions}}» klicken.<br />\n* ({{int:cur}}) = Unterschied zur aktuellen Version, ({{int:last}}) = Unterschied zur vorherigen Version\n* Uhrzeit/Datum = Version zu dieser Zeit, Benutzername/IP-Adresse des Bearbeiters, {{int:minoreditletter}} = Kleine Änderung
+revdelete-show-file-confirm|Bist du sicher, dass du die gelöschte Version der Datei «<nowiki>~{0}</nowiki>» vom ~{1} um ~{2} Uhr ansehen willst?
+revdelete-show-no-access|Fehler beim Anzeigen des Eintrags vom ~{0}, ~{1} Uhr: Dieser Eintrag wurde als «eingeschränkt» markiert.\nDu hast darauf keinen Zugriff.
+revdelete-modify-no-access|Fehler beim Bearbeiten des Eintrags vom ~{0}, ~{1} Uhr: Dieser Eintrag wurde als «eingeschränkt» markiert.\nDu hast darauf keinen Zugriff.
+mergehistory-merge|Die folgenden Versionen von «[[:~{0}]]» können nach «[[:~{1}]]» übertragen werden. Markiere die Version, bis zu der (einschliesslich) die Versionen übertragen werden sollen. Bitte beachte, dass die Nutzung der Navigationslinks die Auswahl zurücksetzt.
+mergehistory-success|{{PLURAL:~{2}\u007C1 Version\u007C~{2} Versionen}} von «[[:~{0}]]» erfolgreich nach «[[:~{1}]]» vereinigt.
+mergehistory-no-source|Ursprungsseite «~{0}» ist nicht vorhanden.
+mergehistory-no-destination|Zielseite «~{0}» ist nicht vorhanden.
+mergehistory-autocomment|«[[:~{0}]]» vereinigt nach «[[:~{1}]]»
+mergehistory-comment|«[[:~{0}]]» vereinigt nach «[[:~{1}]]»: ~{2}
+history-title|~{0}: Versionsgeschichte
+searchresults-title|Suchergebnisse für «~{0}»
+searchmenu-exists|'''Es gibt eine Seite, die den Namen «[[:~{0}]]» hat.'''
+searchmenu-new|<strong>Erstelle die Seite «[[:~{0}]]» in diesem Wiki.</strong> {{PLURAL:~{1}\u007C0=\u007CSiehe auch die über deine Suche gefundene Seite.\u007CSiehe auch die gefundenen Suchergebnisse.}}
+search-redirect|(Weiterleitung von «~{0}»)
+search-suggest|Meintest du «~{0}»?
+prefs-watchlist-days|Anzahl der Tage, die die Beobachtungsliste standardmässig umfassen soll:
+prefs-watchlist-edits-max|Maximal 1'000 Einträge
+recentchangesdays|Anzahl der Tage, die die Liste der «Letzten Änderungen» standardmässig umfassen soll:
+recentchangescount|Anzahl der standardmässig angezeigten Bearbeitungen:
+yourrealname|Richtiger Name:
+prefs-help-signature|Beiträge auf Diskussionsseiten sollten mit «<nowiki>~~~~</nowiki>» signiert werden, was dann in die Signatur mit Zeitstempel umgewandelt wird.
+prefs-help-realname|Dies ist eine freiwillige Angabe. Damit kann dein richtiger Name deinen Beiträgen zugeordnet werden.
+right-createpage|Seiten erstellen (ausser Diskussionsseiten)
+right-nominornewtalk|Kleine Bearbeitungen an Diskussionsseiten führen zu keiner «Neue Nachrichten»-Anzeige
+right-bigdelete|Seiten mit grosser Versionsgeschichte löschen
+right-viewmyprivateinfo|Eigene private Daten ansehen (beispielsweise E-Mail-Adresse, richtiger Name)
+right-editmyprivateinfo|Eigene private Daten bearbeiten (beispielsweise E-Mail-Adresse, richtiger Name)
+right-override-export-depth|Exportiere Seiten einschliesslich verlinkter Seiten bis zu einer Tiefe von 5
+right-passwordreset|Passwort eines Benutzers zurücksetzen und das dazu verschickte E-Mail einsehen
+recentchanges-label-plusminus|Die Änderung der Seitengrösse in Bytes
+rc_categories|Nur Seiten aus den Kategorien (getrennt mit «\u007C»):
+rc-old-title|ursprünglich erstellt als «~{0}»
+recentchangeslinked-title|Änderungen an Seiten, die von «~{0}» verlinkt sind
+uploadtext|Benutze dieses Formular, um neue Dateien hochzuladen.\n\nGehe zu der [[Special:FileList\u007CListe hochgeladener Dateien]], um vorhandene Dateien zu suchen und anzuzeigen. Siehe auch das [[Special:Log/upload\u007CDatei-]] und [[Special:Log/delete\u007CLösch-Logbuch]].\n\nUm ein '''Bild''' in einer Seite zu verwenden, nutze einen Link in der folgenden Form:\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Datei.jpg]]</nowiki></code>''' – für ein Vollbild\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Datei.png\u007C200px\u007Cthumb\u007Cleft\u007CAlternativer Text]]</nowiki></code>''' – für ein 200px breites Bild innerhalb einer Box, mit «Alternativer Text» als Bildbeschreibung\n* '''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:Datei.ogg]]</nowiki></code>''' – für einen direkten Link auf die Datei, ohne Darstellung der Datei
+illegalfilename|Der Dateiname «~{0}» enthält mindestens ein nicht erlaubtes Zeichen. Bitte benenne die Datei um und versuche, sie erneut hochzuladen.
+filename-toolong|Dateinamen dürfen nicht grösser als 240 Byte sein.
+badfilename|Der Dateiname wurde in «~{0}» geändert.
+filetype-mime-mismatch|Dateierweiterung «.~{0}» stimmt nicht mit dem MIME-Typ (~{1}) überein.
+filetype-badmime|Dateien mit dem MIME-Typ «~{0}» dürfen nicht hochgeladen werden.
+filetype-bad-ie-mime|Diese Datei kann nicht hochgeladen werden, da der Internet Explorer sie als «~{0}» erkennt, welcher ein nicht erlaubter potentiell gefährlicher Dateityp ist.
+filetype-unwanted-type|'''«.~{0}»''' ist ein unerwünschtes Dateiformat. Erlaubt {{PLURAL:~{2}\u007Cist das Dateiformat\u007Csind die Dateiformate}}: ~{1}.
+filetype-banned-type|'''«.~{0}»''' {{PLURAL:~{3}\u007Cist ein nicht erlaubter Dateityp\u007Csind nicht erlaubte Dateitypen}}.\n{{PLURAL:~{2}\u007CErlaubter Dateityp ist\u007CErlaubte Dateitypen sind}} ~{1}.
+filetype-missing|Die hochzuladende Datei hat keine Erweiterung (z. B. «.jpg»).
+file-too-large|Die hochgeladene Datei war zu gross.
+large-file|Die Dateigrösse sollte nach Möglichkeit ~{0} nicht überschreiten. Diese Datei ist ~{1} gross.
+largefileserver|Die Datei ist grösser als die vom Server eingestellte Maximalgrösse.
+fileexists-extension|Eine Datei mit ähnlichem Namen existiert bereits: [[~{1}\u007Cthumb]]\n* Name der hochzuladenden Datei: <strong>[[:~{0}]]</strong>\n* Name der vorhandenen Datei: <strong>[[:~{1}]]</strong>\nNur die Dateiendung unterscheidet sich in Gross-/Kleinschreibung. Bitte prüfe, ob die Dateien inhaltlich identisch sind.
+fileexists-thumbnail-yes|Bei der Datei scheint es sich um ein Bild verringerter Grösse ''(thumbnail)'' zu handeln. [[~{0}\u007Cthumb]]\nBitte prüfe die Datei <strong>[[:~{0}]]</strong>.\nWenn es sich um das Bild in Originalgrösse handelt, so braucht kein separates Vorschaubild hochgeladen zu werden.
+file-thumbnail-no|Der Dateiname beginnt mit <strong>~{0}</strong>. Dies deutet auf ein Bild verringerter Grösse ''(thumbnail)'' hin.\nBitte prüfe, ob du das Bild in voller Auflösung vorliegen hast und lade dieses unter dem Originalnamen hoch.
+upload-maxfilesize|Maximale Dateigrösse: ~{0}
+filename-bad-prefix|Der Dateiname beginnt mit '''«~{0}»'''. Dies ist im allgemeinen der von einer Digitalkamera vorgegebene Dateiname und daher nicht sehr aussagekräftig.\nBitte gib der Datei einen Namen, der den Inhalt besser beschreibt.
+backend-fail-maxsize|Die Datei ~{0} konnte nicht gespeichert werden, da sie grösser als {{PLURAL:~{1}\u007Cein Byte\u007C~{1} Bytes}} ist.
+backend-fail-readonly|Das Speicher-Backend «~{0}» befindet sich derzeit im Lesemodus. Der angegebene Grund lautet: «~{1}»
+backend-fail-synced|Die Datei «~{0}» befindet sich, innerhalb des internen Speicher-Backends, in einem inkonsistenten Zustand.
+backend-fail-connect|Es konnte keine Verbindung zum Speicher-Backend «~{0}» hergestellt werden.
+backend-fail-internal|Im Speicher-Backend «~{0}» ist ein unbekannter Fehler aufgetreten.
+backend-fail-contenttype|Der Inhaltstyp, der im Pfad «~{0}» zu speichernden Datei, konnte nicht bestimmt werden.
+backend-fail-usable|Die Datei «~{0}» konnte entweder aufgrund eines nicht vorhandenen Verzeichnisses oder wegen unzureichender Berechtigungen weder abgerufen noch gespeichert werden.
+filejournal-fail-dbconnect|Es konnte keine Verbindung zur Journaldatenbank des Speicher-Backends «~{0}» hergestellt werden.
+filejournal-fail-dbquery|Die Journaldatenbank des Speicher-Backends «~{0}» konnte nicht aktualisiert werden.
+lockmanager-notlocked|«~{0}» konnte nicht entsperrt werden, da keine Sperrung besteht.
+lockmanager-fail-closelock|Die Sperrdatei für «~{0}» konnte nicht geschlossen werden.
+lockmanager-fail-deletelock|Die Sperrdatei für «~{0}» konnte nicht gelöscht werden.
+lockmanager-fail-acquirelock|Die Sperre für «~{0}» konnte nicht abgerufen werden.
+lockmanager-fail-openlock|Die Sperrdatei für «~{0}» konnte nicht geöffnet werden.
+lockmanager-fail-releaselock|Die Sperre für «~{0}» konnte nicht freigegeben werden.
+zip-bad|Die Datei ist beschädigt oder eine aus anderweitigen Gründen nicht lesbare ZIP-Datei.\nSie kann daher keiner ordnungsgemässen Sicherheitsüberprüfung unterzogen werden.
+zip-unsupported|Diese ZIP-Datei verfügt über Komprimierungseigenschaften, die nicht von MediaWiki unterstützt werden.\nSie kann daher keiner ordnungsgemässen Sicherheitsüberprüfung unterzogen werden.
+img-auth-badtitle|Aus «~{0}» kann kein gültiger Titel erstellt werden.
+img-auth-nologinnWL|Du bist nicht angemeldet und «~{0}» ist nicht in der weissen Liste.
+img-auth-nofile|Datei «~{0}» existiert nicht.
+img-auth-isdir|Du versuchst, auf ein Verzeichnis «~{0}» zuzugreifen.\nNur Dateizugriff ist erlaubt.
+img-auth-streaming|Lade «~{0}».
+img-auth-noread|Benutzer hat keine Berechtigung, «~{0}» zu lesen.
+http-invalid-scheme|URLs mit dem Schema «~{0}» werden nicht unterstützt
+listfiles-summary|Diese Spezialseite listet alle hochgeladenen Dateien auf.
+listfiles_size|Grösse
+filehist-dimensions|Masse
+filehist-filesize|Dateigrösse
+filerevert|Zurücksetzen von «~{0}»
+filedelete|Lösche «~{0}»
+filedelete-intro|Du löschst die Datei '''«[[Media:~{0}\u007C~{0}]]»''' inklusive ihrer Versionsgeschichte.
+filedelete-intro-old|Du löschst von der Datei '''«[[Media:~{0}\u007C~{0}]]»''' die [~{3} Version vom ~{1}, ~{2} Uhr].
+filedelete-success|'''«~{0}»''' wurde gelöscht.
+filedelete-success-old|Von der Datei '''«[[Media:~{0}\u007C~{0}]]»''' wurde die Version vom ~{1}, ~{2} Uhr gelöscht.
+filedelete-nofile|'''«~{0}»''' ist nicht vorhanden.
+filedelete-nofile-old|Es gibt von '''«~{0}»''' keine archivierte Version mit den angegebenen Attributen.
+randompage-nopages|Es sind keine Seiten {{PLURAL:~{1}\u007Cim folgenden Namensraum\u007Cin den folgenden Namensräumen}} enthalten: «~{0}»
+randomredirect-nopages|Im Namensraum «~{0}» sind keine Weiterleitungen vorhanden.
+alllogstext|Dies ist die kombinierte Anzeige aller in {{SITENAME}} geführten Logbücher.\nDie Ausgabe kann durch die Auswahl des Logbuchtyps, des Benutzers oder des Seitentitels eingeschränkt werden (Gross-/Kleinschreibung muss beachtet werden).
+allpages-bad-ns|Der Namensraum «~{0}» ist in {{SITENAME}} nicht vorhanden.
+linksearch-text|Diese Spezialseite ermöglicht die Suche nach Seiten, in denen bestimmte Weblinks enthalten sind. Dabei können Platzhalter wie beispielsweise <code>*.beispiel.ch</code> benutzt werden. Es muss mindestens eine Top-Level-Domain, z. B. «*.org». angegeben werden. <br />{{PLURAL:~{1}\u007CUnterstütztes Protokoll\u007CUnterstützte Protokolle}}: <code>~{0}</code> (Standard ist http, falls kein Protokoll angegeben ist.)
+post-expand-template-inclusion-category-desc|Nach dem Expandieren aller Vorlagen ist die Seitengrösse grösser als <code>$wgMaxArticleSize</code>, sodass einige Vorlagen nicht expandiert werden.
+post-expand-template-argument-category-desc|Nach dem Expandieren eines Vorlagenargumentes (etwas in dreifach geschweiften Klammern, z. B. <code>{{{Foo}}})</code> ist die Seite grösser als <code>$wgMaxArticleSize</code>.
+hidden-category-category-desc|Dies ist eine Kategorie mit <code><nowiki>__HIDDENCAT__</nowiki></code>, die standardmässig nicht auf Seiten im Kategorienbereich angezeigt wird.
+emailpagetext|Du kannst {{GENDER:~{0}\u007Cdem Benutzer\u007Cder Benutzerin}} mit dem unten stehenden Formular ein E-Mail senden.\nAls Absender wird die E-Mail-Adresse aus deinen [[Special:Preferences\u007CEinstellungen]] eingetragen, damit {{GENDER:~{0}\u007Cder Benutzer\u007Cdie Benutzerin}} dir direkt antworten kann.
+defemailsubject|{{SITENAME}} - E-Mail von Benutzer «~{0}»
+emailnotarget|Nicht vorhandener oder ungültiger Benutzername für den Empfang eines E-Mails.
+emailccme|Sende eine Kopie des E-Mails an mich
+emailsenttext|Dein E-Mail wurde verschickt.
+emailuserfooter|Dieses E-Mail wurde von {{SITENAME}}-Benutzer «~{0}» an «~{1}» gesendet.
+addedwatchtext|Die Seite «[[:~{0}]]» wurde zu deiner [[Special:Watchlist\u007CBeobachtungsliste]] hinzugefügt.\nSpätere Änderungen an dieser Seite und der zugehörigen Diskussionsseite werden dort gelistet.
+removedwatchtext|Die Seite «[[:~{0}]]» wurde von deiner [[Special:Watchlist\u007CBeobachtungsliste]] entfernt.
+watcherrortext|Beim Ändern der Beobachtungslisteneinstellungen für «~{0}» ist ein Fehler aufgetreten.
+excontent|Inhalt war: «~{0}»
+excontentauthor|Inhalt war: «~{0}» (einziger Bearbeiter: [[Special:Contributions/~{1}\u007C~{1}]])
+exbeforeblank|Inhalt vor dem Leeren der Seite: «~{0}»
+delete-confirm|Löschen von «~{0}»
+deletedtext|«~{0}» wurde gelöscht. Im ~{1} findest du eine Liste der letzten Löschungen.
+editcomment|Die Änderungszusammenfassung lautet: ''«~{0}»''.
+protectedarticle|schützte «[[~{0}]]»
+modifiedarticleprotection|änderte den Schutz von «[[~{0}]]»
+unprotectedarticle|hob den Schutz von «[[~{0}]]» auf
+movedarticleprotection|übertrug den Seitenschutz von «[[~{1}]]» auf «[[~{0}]]»
+protect-title|Schutz ändern von «~{0}»
+protect-title-notallowed|Schutz ansehen von «~{0}»
+protect-text|Hier kannst du den Schutzstatus der Seite «~{0}» einsehen und ändern.
+protect-locked-blocked|Du kannst den Seitenschutz nicht ändern, da dein Benutzerkonto gesperrt ist. Hier sind die aktuellen Seitenschutz-Einstellungen der Seite '''«~{0}»:'''
+protect-locked-dblock|Die Datenbank ist gesperrt, der Seitenschutz kann daher nicht geändert werden. Hier sind die aktuellen Seitenschutz-Einstellungen der Seite '''«~{0}»:'''
+protect-locked-access|Dein Benutzerkonto verfügt nicht über die notwendigen Rechte zur Änderung des Seitenschutzes. Hier sind die aktuellen Seitenschutzeinstellungen der Seite '''«~{0}»:'''
+protect-fallback|Nur Benutzern mit der «~{0}»-Berechtigung erlauben.
+minimum-size|Mindestgrösse
+maximum-size|Maximalgrösse:
+undeleteextrahelp|* Um die Seite mitsamt aller Versionen wiederherzustellen, wähle keine Version aus, gib eine Begründung an und klicke dann auf «{{int:undeletebtn}}».\n* Um lediglich bestimmte Versionen der Seite wiederherzustellen, wähle die betreffenden Versionen einzeln aus, gib eine Begründung an und klicke dann auf «{{int:undeletebtn}}».
+undeletedpage|'''«~{0}»''' wurde wiederhergestellt.\n\nIm [[Special:Log/delete\u007CLösch-Logbuch]] findest du eine Übersicht der gelöschten und wiederhergestellten Seiten.
+undelete-cleanup-error|Fehler beim Löschen der unbenutzten Archiv-Version «~{0}».
+undelete-show-file-confirm|Bist du sicher, dass du eine gelöschte Version der Datei «<nowiki>~{0}</nowiki>» vom ~{1}, ~{2} Uhr sehen willst?
+contributions-title|Benutzerbeiträge von «~{0}»
+whatlinkshere-title|Seiten, die auf «~{0}» verlinken
+linkshere|Die folgenden Seiten verlinken auf '''«[[:~{0}]]»''':
+nolinkshere|Keine Seite verlinkt auf '''«[[:~{0}]]»'''.
+nolinkshere-ns|Keine Seite verlinkt auf '''«[[:~{0}]]»''' im gewählten Namensraum.
+ipb-confirmhideuser|Du bist gerade dabei, einen Benutzer im Modus «Benutzer verstecken» zu sperren. Dies führt dazu, dass der Benutzername in allen Listen und Logbüchern unterdrückt wird. Möchtest du das wirklich tun?
+ipb-unblock-addr|«~{0}» freigeben
+ipb-blocklist-contribs|Benutzerbeiträge von «~{0}»
+autoblocker|Automatische Sperre, da du eine gemeinsame IP-Adresse mit [[User:~{0}\u007C~{0}]] benutzt.\nGrund der Benutzersperre: «~{1}»
+blocklogentry|sperrte «[[~{0}]]» für den Zeitraum: ~{1} ~{2}
+reblock-logentry|änderte die Sperre von «[[~{0}]]» für den Zeitraum: ~{1} ~{2}
+unblocklogentry|hob die Sperre von «~{0}» auf
+ipb_already_blocked|«~{0}» wurde bereits gesperrt.
+ipb-needreblock|«~{0}» ist bereits gesperrt. Möchtest du die Sperrparameter ändern?
+ip_range_toolarge|Adressbereiche, die grösser als /~{0} sind, sind nicht erlaubt.
+cant-see-hidden-user|Der Benutzer, den du versuchst zu sperren, wurde bereits gesperrt und verborgen. Da du das «hideuser»-Recht nicht hast, kannst du die Benutzersperre nicht sehen und nicht bearbeiten.
+move-page|Verschieben von «~{0}»
+movepage-moved|'''Die Seite «~{0}» wurde nach «~{1}» verschoben.'''
+movepage-page-exists|Die Seite «~{0}» ist bereits vorhanden und kann nicht automatisch überschrieben werden.
+movepage-page-moved|Die Seite «~{0}» wurde nach «~{1}» verschoben.
+movepage-page-unmoved|Die Seite «~{0}» konnte nicht nach «~{1}» verschoben werden.
+delete_and_move_text|== Löschung erforderlich ==\n\nDie Seite «[[:~{0}]]» existiert bereits. Möchtest du diese löschen, um die Seite verschieben zu können?
+delete_and_move_reason|gelöscht, um Platz für die Verschiebung von «[[~{0}]]» zu machen
+immobile-source-namespace|Seiten des «~{0}»-Namensraums können nicht verschoben werden
+immobile-target-namespace|Seiten können nicht in den «~{0}»-Namensraum verschoben werden
+djvu_page_error|DjVu-Seite ausserhalb des Seitenbereichs
+import-interwiki-templates|Alle Vorlagen einschliessen
+importuploaderrorsize|Das Hochladen der Importdatei ist fehlgeschlagen. Die Datei ist grösser als die maximal erlaubte Dateigrösse.
+import-error-edit|Die Seite «~{0}» wurde nicht importiert, da du nicht berechtigt bist, sie zu bearbeiten.
+import-error-create|Die Seite «~{0}» wurde nicht importiert, da du nicht berechtigt bist, sie zu erstellen.
+import-error-interwiki|Die Seite «~{0}» wurde nicht importiert, da deren Name für externe Links (Interwiki) reserviert ist.
+import-error-special|Die Seite «~{0}» wurde nicht importiert, da sie zu einem besonderen Namensraum gehört, in dem keine Seiten möglich sind.
+import-error-invalid|Seite «~{0}» wurde nicht importiert, da deren Name ungültig ist.
+import-logentry-upload|importierte «[[~{0}]]» von einer Datei
+import-logentry-interwiki|importierte «~{0}» (Transwiki)
+javascripttest-pagetext-unknownframework|Unbekanntes Framework «~{0}».
+tooltip-t-emailuser|Ein E-Mail an diesen Benutzer senden
+pageinfo-title|Informationen zu «~{0}»
+markedaspatrollederror|Markierung als «kontrolliert» nicht möglich.
+filedelete-missing|Die Datei «~{0}» kann nicht gelöscht werden, da sie nicht vorhanden ist.
+filedelete-old-unregistered|Die angegebene Datei-Version «~{0}» ist nicht in der Datenbank vorhanden.
+filedelete-current-unregistered|Die angegebene Datei «~{0}» ist nicht in der Datenbank vorhanden.
+filedelete-archive-read-only|Das Archiv-Verzeichnis «~{0}» ist für den Webserver nicht beschreibbar.
+imagemaxsize|Maximale Bildgrösse:<br />''(für Dateibeschreibungsseiten)''
+thumbsize|Standardgrösse der Vorschaubilder:
+file-info|Dateigrösse: ~{0}, MIME-Typ: ~{1}
+file-info-size|~{0} × ~{1} Pixel, Dateigrösse: ~{2}, MIME-Typ: ~{3}
+file-info-size-pages|~{0} × ~{1} Pixel, Dateigrösse: ~{2}, MIME-Typ: ~{3}, ~{4} {{PLURAL:~{4}\u007CSeite\u007C Seiten}}
+svg-long-desc|SVG-Datei, Basisgrösse: ~{0} × ~{1} Pixel, Dateigrösse: ~{2}
+show-big-image-preview|Grösse dieser Vorschau: ~{0}.
+metadata-fields|Die folgenden Felder der EXIF-Metadaten, die in diesem MediaWiki-Systemtext angegeben sind, werden auf Bildbeschreibungsseiten mit eingeklappter Metadatentabelle angezeigt.\nWeitere werden standardmässig nicht angezeigt.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-jpeginterchangeformatlength|Grösse der JPEG-Daten in Bytes
+exif-referenceblackwhite|Schwarz/Weiss-Referenzpunkte
+exif-maxaperturevalue|Grösste Blende
+exif-whitebalance|Weissabgleich
+exif-gpsdop|Masspräzision
+exif-lightsource-13|Tagesweiss fluoreszierend (N 4600–5400 K)
+exif-lightsource-14|Kaltweiss fluoreszierend (W 3900–4500 K)
+exif-lightsource-15|Weiss fluoreszierend (WW 3200–3700 K)
+exif-isospeedratings-overflow|Grösser als 65535
+confirmemail_text|{{SITENAME}} erfordert, dass du deine E-Mail-Adresse bestätigst (authentifizierst), bevor du die erweiterten E-Mail-Funktionen benutzen kannst. Klicke bitte auf die unten stehende, mit «Bestätigungscode zuschicken» beschriftete Schaltfläche, damit ein automatisch erstelltes E-Mail an die angegebene Adresse geschickt wird. Dieses E-Mail enthält eine Web-Adresse mit einem Bestätigungscode. Indem du diese Webseite in deinem Webbrowser öffnest, bestätigst du, dass die angegebene E-Mail-Adresse korrekt und gültig ist.
+confirmemail_pending|Es wurde dir bereits ein Bestätigungscode per E-Mail zugeschickt.\nWenn du dein Benutzerkonto erst vor kurzem erstellt hast, warte bitte noch ein paar Minuten auf das E-Mail, bevor du einen neuen Code anforderst.
+confirmemail_sent|Das Bestätigungs-E-Mail wurde verschickt.
+confirmemail_sendfailed|{{SITENAME}} konnte das Bestätigungs-E-Mail nicht an dich versenden.\nBitte prüfe die E-Mail-Adresse auf ungültige Zeichen.\n\nRückmeldung des Mailservers: ~{0}
+confirmemail_body|Hallo,\n\njemand mit der IP-Adresse ~{0}, wahrscheinlich du selbst, hat das Benutzerkonto «~{1}» bei {{SITENAME}} registriert.\n\nUm die E-Mail-Funktionen von {{SITENAME}} (wieder) zu aktivieren und um zu bestätigen,\ndass dieses Benutzerkonto wirklich zu deiner E-Mail-Adresse und damit zu dir gehört, öffne bitte folgenden Link in deinem Browser:\n\n~{2}\n\nWenn du das genannte Benutzerkonto *nicht* registriert hast, folge diesem Link, um den Bestätigungsprozess abzubrechen:\n\n~{4}\n\nDieser Bestätigungscode ist gültig bis zum ~{5}, ~{6} Uhr.
+confirmemail_body_changed|Jemand mit der IP-Adresse ~{0}, wahrscheinlich du selbst,\nhat die E-Mail-Adresse des Benutzerkontos «~{1}» zu dieser Adresse bei {{SITENAME}} geändert.\n\nUm zu bestätigen, dass dieses Benutzerkonto wirklich dir gehört,\nund um die E-Mail-Features bei {{SITENAME}} zu reaktivieren, öffne diesen Link in deinem Browser:\n\n~{2}\n\nFalls das Konto *nicht* dir gehört, folge diesem Link,\num die E-Mail-Bestätigung abzubrechen:\n\n~{4}\n\nDieser Bestätigungscode ist gültig bis ~{3}.
+confirmemail_body_set|Jemand mit der IP-Adresse ~{0}, wahrscheinlich du selbst,\nhat die E-Mail-Adresse des Benutzerkontos «~{1}» auf {{SITENAME}} zu dieser E-Mail-Adresse abgeändert.\n\nUm zu bestätigen, dass dieses Benutzerkonto wirklich zu dir gehört\nund um die E-Mail-Funktionen auf {{SITENAME}} wieder zu aktivieren, öffne bitte den folgenden Link in deinem Browser:\n\n~{2}\n\nFalls das Konto *nicht* zu dir gehört, bitte den nachfolgenden Link öffnen,\num die Bestätigung der E-Mail-Adresse abzubrechen:\n\n~{4}\n\nDieser Bestätigungscode ist gültig bis ~{3}.
+autosumm-replace|Der Seiteninhalt wurde durch einen anderen Text ersetzt: «~{0}»
+autosumm-new|Die Seite wurde neu angelegt: «~{0}»
+watchlistedit-normal-explain|Dies sind die Einträge deiner Beobachtungsliste. Um Einträge zu entfernen, markiere die Kästchen neben den Einträgen und klicke am Ende der Seite auf «{{int:Watchlistedit-normal-submit}}». Du kannst deine Beobachtungsliste auch im [[Special:EditWatchlist/raw\u007CListenformat bearbeiten]].
+watchlistedit-raw-explain|Dies sind die Einträge deiner Beobachtungsliste im Listenformat. Die Einträge können zeilenweise gelöscht oder hinzugefügt werden.\nPro Zeile ist ein Eintrag erlaubt. Sobald du fertig bist, klicke auf «{{int:Watchlistedit-raw-submit}}».\nDu kannst auch die [[Special:EditWatchlist\u007CStandardseite]] zum Bearbeiten benutzen.
+unknown_extension_tag|Unbekanntes Parsertag «~{0}»
+duplicate-defaultsort|Achtung: Der Sortierungsschlüssel «~{1}» überschreibt den vorher verwendeten Schlüssel «~{0}».
+version-license-info|MediaWiki ist freie Software, d. h. sie kann, gemäss den Bedingungen der von der Free Software Foundation veröffentlichten ''GNU General Public License'', weiterverteilt und/oder modifiziert werden. Dabei kann die Version 2, oder nach eigenem Ermessen, jede neuere Version der Lizenz verwendet werden.\n\nMediaWiki wird in der Hoffnung verteilt, dass es nützlich sein wird, allerdings OHNE JEGLICHE GARANTIE und sogar ohne die implizierte Garantie einer MARKTGÄNGIGKEIT oder EIGNUNG FÜR EINEN BESTIMMTEN ZWECK. Hierzu sind weitere Hinweise in der ''GNU General Public License'' enthalten.\n\nEine [{{SERVER}}{{SCRIPTPATH}}/COPYING Kopie der ''GNU General Public License''] sollte zusammen mit diesem Programm verteilt worden sein. Sofern dies nicht der Fall war, kann eine Kopie bei der Free Software Foundation Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA, schriftlich angefordert oder auf deren Website [//www.gnu.org/licenses/old-licenses/gpl-2.0.html online gelesen] werden.
+fileduplicatesearch-info|~{0} × ~{1} Pixel<br />Dateigrösse: ~{2}<br />MIME-Typ: ~{3}
+fileduplicatesearch-result-1|Die Datei «~{0}» hat keine identischen Duplikate.
+fileduplicatesearch-result-n|Die Datei «~{0}» hat {{PLURAL:~{1}\u007Cein identisches Duplikat\u007C~{1} identische Duplikate}}.
+fileduplicatesearch-noresults|Es wurde keine Datei namens «~{0}» gefunden.
+external_image_whitelist| #Diese Zeile nicht verändern.<pre>\n#Untenstehend können Fragmente regulärer Ausdrücke (der Teil zwischen den //) eingegeben werden.\n#Diese werden mit den URLs von Bildern aus externen Quellen verglichen.\n#Ein positiver Vergleich führt zur Anzeige des Bildes, andernfalls wird das Bild nur als Link angezeigt.\n#Zeilen, die mit einem # beginnen, werden als Kommentar behandelt.\n#Es wird nicht zwischen Gross- und Kleinschreibung unterschieden.\n\n#Fragmente regulärer Ausdrücke nach dieser Zeile eintragen. Diese Zeile nicht verändern.</pre>
+feedback-bugornote|Sofern Du detailliert ein technisches Problem beschreiben möchtest, melde bitte [~{0} einen Fehler].\nAnderenfalls kannst du auch das untenstehende einfache Formular nutzen. Dein Kommentar wird, zusammen mit deinem Benutzernamen und der Version des von Dir verwendeten Webbrowsers sowie Betriebssystems, auf der Seite «[~{2} ~{1}]» hinzugefügt.
+feedback-thanks|Vielen Dank. Deine Rückmeldung wurde auf der Seite «[~{1} ~{0}]» gespeichert.
+api-error-file-too-large|Die hochgeladene Datei war zu gross.
+api-error-hookaborted|Die von dir vorgesehene Anpassung kann nicht durchgeführt werden (Unterbruch durch eine Programmschnittstelle).
+api-error-unknown-code|Unbekannter Fehler: «~{0}»
+api-error-unknown-warning|Unbekannte Warnung: «~{0}»
+api-error-unknownerror|Unbekannter Fehler: «~{0}»
+']:>
+).lang
+;
+
+this.messages.load_text(
+<:['
+xowa-window-find_close_btn-tooltip|Suchleiste schliessen
+']:>
+);
+
+this.link_trail.add_range('a', 'z');
+this.link_trail.add_bulk('äöüß');

@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sahran"
+		]
+	},
+	"wikibase-edit": "تەھرىر",
+	"wikibase-add": "قوش",
+	"wikibase-sitelink-site-edit-placeholder": "site",
+	"wikibase-sitelink-page-edit-placeholder": "ماقالىلەر",
+	"wikibase-remove": "چىقىرىۋەت",
+	"wikibase-propertypage-datatype": "سانلىق-مەلۇمات تىپى",
+	"wikibase-itemlink-id-wrapper": "($1)",
+	"wikibase-itembytitle-lookup-site": "تور بېكەت:",
+	"wikibase-itembytitle-lookup-page": "بەت:",
+	"wikibase-itembytitle-submit": "ئىزدە",
+	"wikibase-itemdisambiguation-lookup-language": "تىل:",
+	"wikibase-itemdisambiguation-lookup-label": "ئەن:",
+	"wikibase-itemdisambiguation-submit": "ئىزدە",
+	"wikibase-newproperty-datatype": "سانلىق-مەلۇمات تىپى:",
+	"wikibase-newentity-label": "ئەن:",
+	"wikibase-newentity-description": "چۈشەندۈرۈش:",
+	"wikibase-newentity-submit": "قۇر",
+	"wikibase-setlabel-label": "ئەن",
+	"wikibase-modifyentity-id": "كىملىكى",
+	"wikibase-modifyterm-language": "تىل",
+	"wikibase-entitieswithoutlabel-label-language": "تىل:",
+	"wikibase-entitieswithoutlabel-submit": "ئىزدە:",
+	"wikibase-restoreold": "ئەسلىگە كەلتۈر"
+}

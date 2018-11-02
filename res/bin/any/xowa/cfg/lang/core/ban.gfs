@@ -1,0 +1,8 @@
+this
+.messages
+  .load_text(
+<:['
+indexpages|Daptar kaca indèks
+']:>
+).lang
+;

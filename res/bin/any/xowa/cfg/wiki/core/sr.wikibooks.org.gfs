@@ -1,0 +1,77 @@
+// lang.vnts.bgn
+lang.variants {
+  vnt_grp = 'sr';
+  cur_vnt = 'sr';
+}
+// lang.vnts.end
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+-2|Medij
+-2|Medija
+-2|Медија
+-1|Posebno
+1|Razgovor
+2|Korisnik
+3|Razgovor_sa_korisnikom
+3|Razgovor_sa_korisnikom
+3|Разговор_са_корисником
+4|Wikibooks
+5|Razgovor_o_Викикњиге
+5|Разговор_о_викикњигама
+6|Datoteka
+6|Image
+6|Slika
+6|Слика
+7|Image_talk
+7|Razgovor_o_datoteci
+7|Razgovor_o_slici
+7|Разговор_о_датотеци
+7|Разговор_о_слици
+8|MedijaViki
+8|Medijaviki
+8|МедијаВики
+9|Razgovor_o_MedijaVikiju
+9|Razgovor_o_Medijavikiju
+9|Разговор_о_МедијаВикију
+9|Разговор_о_Медијавикију
+10|Šablon
+11|Razgovor_o_šablonu
+11|Razgovor_o_šablonu
+11|Разговор_о_шаблону
+12|Pomoć
+13|Razgovor_o_pomoći
+13|Razgovor_o_pomoći
+13|Разговор_о_помоћи
+14|Kategorija
+15|Razgovor_o_kategoriji
+15|Razgovor_o_kategoriji
+15|Разговор_о_категорији
+103|Разговор_о_кувару
+828|Modul
+829|Razgovor_o_modulu
+829|Разговор_о_модулу
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(0).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(14).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(102).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(103).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end
+// wiki.ctgs.collations.bgn
+catpage_mgr.collation_('uca-sr');
+// wiki.ctgs.collations.end

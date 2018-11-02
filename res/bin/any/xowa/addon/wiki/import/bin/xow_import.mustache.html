@@ -1,0 +1,68 @@
+<div class='main_div'>
+  <div id='cur_help_div' class='xohelp_div'>
+    <div id='cur_help_msg' class='xohelp_msg'>
+      <div>
+        <b>Quick start</b>
+        <div>
+          <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'>Navigate to the directory containing the XOWA wiki. For example, choose 'storage' -> 'CARD-NAME' -> 'xowa' -> 'wiki' -> 'en.wikipedia.org'</span></div>
+        </div>
+        <b>Buttons</b>
+        <div>        
+          <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_fsys_go_up'>&nbsp;</span><span class='xohelp_row_text'>Go up to the parent folder</span></div>
+{{#dir_cmd_exists}}
+          <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_misc_ok'>&nbsp;</span><span class='xohelp_row_text'>Select current folder</span></div>
+{{/dir_cmd_exists}}
+          <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_fsys_dir'>&nbsp;</span><span class='xohelp_row_text'>Open the folder</span></div>
+          <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_xowa'>&nbsp;</span><span class='xohelp_row_text'>Import the XOWA wiki</span></div>
+          <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_fsys_fil_blank'>&nbsp;</span><span class='xohelp_row_text'>Does nothing. Indicates the file is unselectable</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='xotbl_head_row'>
+    <div class='xotbl_head_text cur_head_text'>{{path}}</div>
+    <div class='xotbl_head_btns cur_head_btns'>
+      <a class='xoimg_btn_x24 xoimg_fsys_go_up fsys_go_up_offset' href="/site/home/wiki/Special:XowaFileBrowser?path={{owner_dir_enc}}{{dir_cmd_arg}}">&nbsp;</a>
+      {{#dir_cmd_exists}}
+      <a class='xoimg_btn_x24 xoimg_misc_ok    fsys_go_up_offset' href="/site/home/wiki/Special:XowaFileBrowser?path={{path_enc}}{{dir_cmd_arg}}&selected=1">&nbsp;</a>
+      {{/dir_cmd_exists}}
+      <a class='xoimg_btn_x24 xoimg_help_tip'   href='javascript:void(0)' onclick='return xo.help.toggle("cur")' title='view help'>&nbsp;</a>
+    </div>
+  </div>
+  {{#subs}}
+  <div class='xotbl_data_row cur_data_row'>
+    {{#is_dir}}
+    <a
+      class="link_btn_y cur_link_btn"
+      href="/site/home/wiki/Special:XowaFileBrowser?path={{path_enc}}{{dir_cmd_arg}}"
+    >
+      <span class='xoimg_btn_x24 xoimg_fsys_dir'>&nbsp;</span>
+      <span class='fsys_dir_txt'>{{name}}</span>
+    </a>
+    {{/is_dir}}
+    {{^is_dir}}
+    {{#is_core_xowa}}
+    <a
+      class="link_btn_y cur_link_btn"
+      href='/site/home/wiki/Special:XowaWikis?cmd=add&file={{path_enc}}'
+    >
+      <span class='xoimg_btn_x24 xoimg_xowa'>&nbsp;</span>
+      <span class='fsys_fil_txt'>
+        <span>{{name}}</span>
+        <span class='fsys_meta_txt'>{{date}}&nbsp;[{{size}}]</span>
+      </span>
+    </a>
+    {{/is_core_xowa}}
+    {{^is_core_xowa}}
+    <div class="link_btn_n cur_link_btn">
+      <span class='xoimg_btn_x24 xoimg_fsys_fil_blank'>&nbsp;</span>
+      <span class='fsys_fil_txt'>
+        <span>{{name}}</span>
+        <span class='fsys_meta_txt'>{{date}}&nbsp;[{{size}}]</span>
+      </span>
+    </div>
+    {{/is_core_xowa}}
+    {{/is_dir}}
+  </div>
+  {{/subs}}  
+</div>

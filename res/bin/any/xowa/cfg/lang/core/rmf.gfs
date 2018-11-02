@@ -1,0 +1,15 @@
+this
+.messages
+  .load_text(
+<:['
+vector-action-addsection|Tilja topikos
+vector-action-delete|Tšuu nikki
+vector-action-undelete|Tšuu paale
+vector-view-create|Luona
+vector-view-edit|Muoka
+vector-view-history|Sik histores
+vector-view-view|Draba
+vector-view-viewsource|Sik navasiinako koodos
+']:>
+).lang
+;

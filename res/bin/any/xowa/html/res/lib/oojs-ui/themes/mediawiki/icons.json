@@ -1,0 +1,76 @@
+{
+	"selectorWithoutVariant": ".oo-ui-icon-{name}",
+	"selectorWithVariant": ".oo-ui-image-{variant}.oo-ui-icon-{name}",
+	"intro": "@import '../../../../src/styles/common';",
+	"variants": {
+		"invert": {
+			"color": "#fff",
+			"global": true
+		},
+		"progressive": {
+			"color": "#36c",
+			"global": true
+		},
+		"constructive": {
+			"color": "#36c"
+		},
+		"destructive": {
+			"color": "#d33"
+		},
+		"warning": {
+			"color": "#ff5d00"
+		}
+	},
+	"images": {
+		"add": { "file": "images/icons/add.svg", "variants": [ "constructive", "progressive" ] },
+		"advanced": { "file": "images/icons/advanced.svg" },
+		"alert": { "file": "images/icons/alert.svg", "variants": [ "warning" ] },
+		"cancel": { "file": "images/icons/cancel.svg", "variants": [ "destructive" ] },
+		"check": { "file": "images/icons/check.svg", "variants": [ "constructive", "progressive", "destructive" ] },
+		"circle": { "file": "images/icons/circle.svg", "variants": [ "constructive", "progressive" ] },
+		"close": { "file": {
+			"ltr": "images/icons/close-ltr.svg",
+			"rtl": "images/icons/close-rtl.svg"
+		} },
+		"code": { "file": "images/icons/code.svg" },
+		"collapse": { "file": "images/icons/collapse.svg" },
+		"comment": { "file": "images/icons/comment.svg" },
+		"ellipsis": { "file": "images/icons/ellipsis.svg" },
+		"expand": { "file": "images/icons/expand.svg" },
+		"help": { "file": {
+			"ltr": "images/icons/help-ltr.svg",
+			"rtl": "images/icons/help-rtl.svg",
+			"lang": {
+				"he,yi": "images/icons/help-ltr.svg"
+			}
+		} },
+		"history": { "file": "images/icons/history.svg" },
+		"info": { "file": "images/icons/info.svg" },
+		"menu": { "file": "images/icons/menu.svg" },
+		"next": { "file": {
+			"ltr": "images/icons/move-ltr.svg",
+			"rtl": "images/icons/move-rtl.svg"
+		} },
+		"notice": { "file": "images/icons/notice.svg" },
+		"previous": { "file": {
+			"ltr": "images/icons/move-rtl.svg",
+			"rtl": "images/icons/move-ltr.svg"
+		} },
+		"redo": { "file": {
+			"ltr": "images/icons/arched-arrow-ltr.svg",
+			"rtl": "images/icons/arched-arrow-rtl.svg"
+		} },
+		"remove": { "file": "images/icons/trash.svg", "variants": [ "destructive" ] },
+		"search": { "file": {
+			"ltr": "images/icons/search-ltr.svg",
+			"rtl": "images/icons/search-rtl.svg"
+		} },
+		"settings": { "file": "images/icons/settings.svg" },
+		"tag": { "file": "images/icons/tag.svg", "variants": [ "destructive", "warning", "constructive" ] },
+		"undo": { "file": {
+			"ltr": "images/icons/arched-arrow-rtl.svg",
+			"rtl": "images/icons/arched-arrow-ltr.svg"
+		} },
+		"window": { "file": "images/icons/window.svg" }
+	}
+}

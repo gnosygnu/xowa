@@ -1,0 +1,109 @@
+this
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Rātapu
+monday|Rāhina
+tuesday|Rātū
+wednesday|Rāapa
+thursday|Rāpare
+friday|Rāmere
+saturday|Rāhoroi
+january|Kohi-tātea
+february|Hui-tanguru
+march|Poutū-te-rangi
+april|Paenga-whāwhā
+may_long|Haratua
+june|Pipiri
+july|Hōngongoi
+august|Here-turi-kōkā
+september|Mahuru
+october|Whiringa-ā-nuku
+november|Whiringa-ā-rangi
+december|Hakihea
+toc|Rārangi kōrero
+allpages|Ngā whārangi katoa
+wm-license-gfdl-wiki-link|w:mi:GNU FDL
+sitesupport|Koha
+cancel|Whakakore
+mytalk|Karere mōku
+navigation|Huarahi
+help|Whakamārama
+search|Rapua
+go|Haere
+history|Kōrero nehe
+history_short|Tuhinga/kaituhi
+printableversion|Tāia
+permalink|Hononga toitū
+edit|Whakatika
+delete|tangohia
+protect|Whakangungua
+talkpagelinktext|Kōrerohia
+talk|Kōrerorero
+toolbox|Pouaka utauta
+aboutsite|Mo {{SITENAME}}
+currentevents|Kawepūrongo
+currentevents-url|Project:Kōrero
+mainpage|Hau Kāinga
+mainpage-description|Hau Kāinga
+portal|Tomokanga hapori
+portal-url|Project:Tomokanga hapori
+privacy|Tikanga tūmataiti
+privacypage|Project:Tikanga tūmataiti
+showtoc|whakakite
+hidetoc|hunaia
+nstab-main|tuhi pānui
+nstab-template|papa tauira
+nstab-help|Āwhina
+nstab-category|Wāhanga
+userlogout|Whakarere
+savearticle|Tiaki
+showdiff|Tiro rerekētanga
+preferences|Kōwhiringa
+recentchanges|Huringa hou
+hide|Hunaia
+show|Whakaaturia
+recentchangeslinked|Huringa pūtahi
+recentchangeslinked-feed|Rerekētanga pū tahi
+recentchangeslinked-toolbox|Huringa pūtahi - pouaka utauta
+upload|Tuku atu
+randompage|Tipihaere
+move|Nekehia
+allpagessubmit|Haere
+watchlist|Rārangi mātaki
+mywatchlist|Rārangi mātaki
+watch|Mātaki
+unwatch|kāti te mātaki
+contributions|Ngā mahi a tēnei mema
+mycontris|āku mahi
+whatlinkshere|Ngā hononga mai
+allmessages|Pānui pūnaha
+specialpages|Whārangi motuhake
+']:>
+).lang
+;

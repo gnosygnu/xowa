@@ -1,0 +1,67 @@
+.cur_head_text {
+  width: calc(100% - 40px);
+}
+.cur_head_btns {
+  width: 40px;
+}
+
+.cur_data_row {
+  padding: 4px 0px 4px;
+}
+.cur_data_cell0 {
+  display: inline-block;
+  width: 220px;
+  margin: 0px 4px 0px 10px;
+  vertical-align: top;
+          align-self: flex-start;
+  -webkit-align-self: flex-start;
+  
+  font-weight: bold;
+}
+.cur_data_cell1 {
+  display: inline-block;
+  width: calc(100% - 240px);
+}
+.release_is_major {
+  color: red;
+}
+.update_status {
+  margin: 10px 0px 10px;  
+}
+.update_status_anch {
+  font-weight: bold;
+  font-size: 125%;  
+}
+
+/* buttons */
+.buttons a, .buttons button{
+  display:block;
+  float:left;
+  margin:0 7px 0 0;
+  background-color:#f5f5f5;
+  border:1px solid #dedede;
+  border-top:1px solid #eee;
+  border-left:1px solid #eee;    font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+  font-size:100%;
+  line-height:130%;
+  text-decoration:none;
+  font-weight:bold;
+  color:#565656;
+  cursor:pointer;
+  padding:5px 10px 6px 7px; /* Links */
+}
+.buttons button{
+  width:auto;
+  overflow:visible;
+  padding:4px 10px 3px 7px; /* IE6 */
+}
+.buttons button[type]{
+  padding:5px 10px 5px 7px; /* Firefox */
+  line-height:17px; /* Safari */
+}
+*:first-child+html button[type]{
+  padding:4px 10px 3px 7px; /* IE7 */
+}
+.buttons button img, .buttons a img{
+  margin:-10px 0px;
+}

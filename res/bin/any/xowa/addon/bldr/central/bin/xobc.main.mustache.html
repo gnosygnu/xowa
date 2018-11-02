@@ -1,0 +1,128 @@
+<div id='cur_help_div' class='xohelp_div'>
+  <div id='cur_help_msg' class='xohelp_msg'>
+    <b>Quick start</b>
+    <div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_list_add'>&nbsp;</span><span class='xohelp_row_text'>Add <b>Simple Wikipedia - Articles</b> to the queue</span></div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_media_play'>&nbsp;</span><span class='xohelp_row_text'>Download <b>Simple Wikipedia - Articles</b></span></div>
+    {{#app_is_drd}}
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'>Choose XOWA from the menu and open "simple.wikipedia.org"</span></div>
+    {{/app_is_drd}}
+    {{^app_is_drd}}
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'>Reload the page, open the wikis menu in the left-hand nav and click "simple.wikipedia.org"</span></div>
+    {{/app_is_drd}}
+    </div>
+    <br/>
+    <b>Notes</b>
+    <div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'>Please make sure you are on Wi-Fi when downloading! Most wikis will be many MB or even GB.</span></div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'>Download Central supports pause and resume. Pause the task (or close the app) and resume later.</span></div>
+    </div>
+    <br/>
+    <b>Buttons</b>
+    <div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_fsys_dir'>&nbsp;</span><span class='xohelp_row_text'>Select a folder location for the wikis</span></div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_inet_download'>&nbsp;</span><span class='xohelp_row_text'>Download the latest list of wikis from archive.org</span></div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_list_add'>&nbsp;</span>
+        <span class='xohelp_row_text'>Move a task to the queue</span>
+      </div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_list_remove'>&nbsp;</span>
+        <span class='xohelp_row_text'>(In the queue table) Remove a task from the queue. All work will be lost</span>
+      </div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_list_remove'>&nbsp;</span>
+        <span class='xohelp_row_text'>(In the imported table) Remove the task from imported and place it back in the available table</span>
+      </div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_media_play'>&nbsp;</span>
+        <span class='xohelp_row_text'>Start the queue</span>
+      </div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_media_pause'>&nbsp;</span>
+        <span class='xohelp_row_text'>Pause the queue</span>
+      </div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_list_refresh'>&nbsp;</span>
+        <span class='xohelp_row_text'>Restart a failed task from the last known step</span>
+      </div>
+    </div>
+    {{^app_is_drd}}
+    <br/>
+    <b>Links</b>
+    <div>
+      <div class='xohelp_row'><span class='xohelp_link'>&nbsp;</span><span class='xohelp_row_text'><b>Help</b>: <a href='{{link_help}}'>Information about Download Central</a></span></div>
+    </div>
+    {{/app_is_drd}}
+  </div>
+</div>
+<div class='main_body' id='main_body'>
+  <div class='task_tbl' data-name='work__tbl'>
+    <div class='xotbl_head_row'>
+      <div class='xotbl_head_text cur_head_text_2'>Queue</div>
+      <div class='xotbl_head_btns cur_head_btns_2'> 
+        <a class='xoimg_btn_x24 xoimg_fsys_dir'      title='select xowa folder' href="/site/home/wiki/Special:XowaRootDir">&nbsp;</a>
+        <a class='xoimg_btn_x24 xoimg_help_tip'      title='view help'          href='javascript:void(0)' onclick='return xo.help.toggle("cur")'>&nbsp;</a>
+      </div>
+    </div>
+    <div id='head__row'></div>
+    <div id="work__tbl"></div>
+  </div>
+  <div class='task_tbl' data-name='todo__tbl'>
+    <div class='xotbl_head_row'>
+      <div class='xotbl_head_text cur_head_text__available__caption'>Available</div>
+      <div class='xotbl_head_btns cur_head_btns'> 
+        <a class='xoimg_btn_x24 xoimg_inet_download' title='download database' href='javascript:void(0)'
+           data_alertify_msg='Please confirm that you want to download the latest list of wikis from archive.org.<br/><br/>Please note that updates are usually released on a weekly basis.'
+           data_alertify_ok='Download'
+           data_alertify_cancel='Cancel'
+           data_alertify_func='xo.bldr.todo.download_db__send();'
+           onclick='return xo.alertify.confirm_func(this);'>&nbsp;</a>
+      </div>
+    </div>
+    <div class='xotbl_head_row'>
+      <div class='xotbl_head_text'>Lang:
+        <select id='filter_langs' href='javascript:void(0)' onchange='xo.bldr.todo.filter__send();'>
+          <option value='*' selected='selected'>All</option>
+          <option value='en'>English</option>
+          <option value='de'>German</option>
+          <option value='fr'>French</option>
+          <option value='pl'>Polish</option>
+          <option value='ar'>Arabic</option>
+          <option value='cs'>Czech</option>
+          <option value='ht'>Haitian</option>
+        </select>
+      </div>
+      <div class='xotbl_head_text'>Type:
+        <select id='filter_types' href='javascript:void(0)' onchange='xo.bldr.todo.filter__send();'>
+          <option value='*' selected='selected'>All</option>
+          <option value='wikipedia'>Wikipedia</option>
+          <option value='wiktionary'>Wiktionary</option>
+          <option value='wikisource'>Wikisource</option>
+          <option value='wikivoyage'>Wikivoyage</option>
+          <option value='wikiquote'>Wikiquote</option>
+          <option value='wikibooks'>Wikibooks</option>
+          <option value='wikiversity'>Wikiversity</option>
+          <option value='wikinews'>Wikinews</option>
+          <option value='wikimisc'>Others</option>
+        </select>
+      </div>
+    </div>
+    <div id='todo__tbl'></div>
+  </div>
+  <div class='task_tbl' data-name='done__tbl'>
+    <div class='xotbl_head_row'>
+      <div class='xotbl_head_text cur_head_text'>Imported</div>
+    </div>
+    <div id='done__tbl'></div>
+  </div>
+  <div style='display:none;' data-name='test panel'>
+    <div id='xowa_err_div'></div>
+    <div style='padding-bottom:5px;'>
+      <button class='admin_btn' accesskey='a' id='admin__add_work__btn'>add work</button>&nbsp;
+    </div>
+    <div>
+      <button class='admin_btn' accesskey='d' id='admin__del_work__btn'>del work</button>&nbsp;
+    </div>
+    <div>
+      <button class='admin_btn' accesskey='r' id='admin__run_next__btn'>run next</button>&nbsp;
+    </div>
+    <div>
+      <button class='admin_btn' accesskey='p' id='admin__stop_cur__btn'>stop all</button>&nbsp;
+    </div>
+  </div>
+</div>

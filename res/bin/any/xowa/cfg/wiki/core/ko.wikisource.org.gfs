@@ -1,0 +1,44 @@
+// wiki.xtns.pages.bgn
+parser.xtns.get('pages').ns_names_('페이지', '페이지토론', '색인', '색인토론');
+// wiki.xtns.pages.end
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+-1|특
+-1|특수기능
+4|Wikisource
+5|Wikisource_talk
+6|Image
+6|그림
+7|Image_talk
+7|그림토론
+9|MediaWiki토론
+100|Author
+100|글쓴이
+101|Author_talk
+101|글쓴이토론
+102|Portal
+103|Portal_talk
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(0).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(14).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(100).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(101).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(102).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(103).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end

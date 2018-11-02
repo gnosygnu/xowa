@@ -1,0 +1,3 @@
+// wiki.ctgs.collations.bgn
+catpage_mgr.collation_('uca-uk');
+// wiki.ctgs.collations.end

@@ -1,0 +1,38 @@
+.cur_head_text {
+  width: calc(100% - 72px);
+  
+  /* handle long paths */
+  font-size: 1em !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.cur_head_btns {
+  width: 72px;
+}
+.fsys_go_up_offset {
+  margin-top: -4px; /* nudge icon up to align with help */
+}
+
+.cur_data_row {
+  height: 50px;
+}
+.cur_link_btn {
+  display: flex; 
+  width: 100%;
+  height: 100%;
+}
+.fsys_dir_txt {
+  display: inline-block;
+  align-self: center;
+}
+.fsys_fil_txt {
+  display: inline-block;
+  align-self: center;
+}
+.fsys_meta_txt  {
+  display: block;  
+  color: #828282;
+  font-family: monospace;
+  font-size: .8em;
+}

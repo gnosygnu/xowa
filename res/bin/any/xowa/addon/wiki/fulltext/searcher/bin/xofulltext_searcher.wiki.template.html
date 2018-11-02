@@ -1,0 +1,47 @@
+<div id='results_wiki_{{wiki}}'>
+  <div class='xo_flex_div xo_results_wiki_div'>
+    <!-- TOGGLE:wiki -->
+    <span
+      id="results_wiki_{{wiki}}_img" 
+      class='xo_imgbtn_x20 {{expand_pages_icon}} xo_results_wiki_toggle' 
+      onclick='xo.fulltext_searcher.toggle_div("results_wiki_{{wiki}}_content", "results_wiki_{{wiki}}_img");'
+    >&nbsp;</span>
+    
+    <!-- HREF:wiki -->
+    <div class='xo_flex_div'>
+      <a href='/site/{{wiki}}/wiki/'>{{wiki}}</a>&nbsp;
+      <div
+        id='results_wiki_{{wiki}}_searched_div'
+        class='xo_flex_text'
+      >(<span id='results_wiki_{{wiki}}_searched'>0</span>&nbsp;searched)
+      </div>
+    </div>
+    
+    <!-- DIV:results -->
+    <div class='xo_flex_div xo_results_wiki_paging_div'>
+    
+      <!-- BTN:paging_bwd -->
+      <span
+        id="results_wiki_{{wiki}}_bwd"
+        class='xo_imgbtn_x20 xoimg_paging_bwd xo_results_wiki_paging_btn'
+        onclick='xo.fulltext_searcher.paging_bwd("{{wiki}}")'
+      >&nbsp;</span>
+      
+      <!-- TEXT:results; EX: "Results: 1 of 10" -->
+      <div class='xo_flex_div'>
+        Results: <div style='text-align:center;width:40px'>{{rng_bgn}}</div> - <div style='text-align:center;width:40px'>{{rng_end}}</div>
+      </div>
+
+      <!-- BTN:paging_fwd -->
+      <span
+        id="results_wiki_{{wiki}}_fwd"
+        class='xo_imgbtn_x20 xoimg_paging_fwd xo_results_wiki_paging_btn'
+        onclick='xo.fulltext_searcher.paging_fwd("{{wiki}}")'
+      >&nbsp;</span>
+    </div>
+  </div>
+  
+  <!-- DIV:page list -->
+  <div id='results_wiki_{{wiki}}_content' style='display:{{expand_pages_style}};'></div>
+</div>
+<div style='clear:both;display:none;'></div>

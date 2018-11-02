@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Erdemaslancan",
+			"Marmase",
+			"Mirzali"
+		]
+	},
+	"wikibase-entity-item": "unsur",
+	"wikibase-entity-query": "persen",
+	"wikibase-diffview-reference": "referans",
+	"wikibase-diffview-rank": "rêze",
+	"wikibase-diffview-qualifier": "kalifikator",
+	"wikibase-diffview-label": "etiket",
+	"wikibase-diffview-alias": "nameyê bini",
+	"wikibase-diffview-description": "şınasnayış",
+	"wikibase-diffview-link": "gırey",
+	"wikibase-quantitydetails-amount": "Miqdar",
+	"wikibase-quantitydetails-unit": "Lete",
+	"wikibase-timedetails-time": "Wext",
+	"wikibase-timedetails-timezone": "Wareyê saete",
+	"wikibase-timedetails-calendar": "Teqwim",
+	"wikibase-timedetails-precision": "Hesasiyet",
+	"wikibase-timedetails-before": "Ver",
+	"wikibase-timedetails-after": "Bahdo",
+	"wikibase-globedetails-longitude": "Derganiye",
+	"wikibase-globedetails-latitude": "Verıniye",
+	"wikibase-globedetails-precision": "Hesasiyet",
+	"wikibase-globedetails-globe": "Kure",
+	"wikibase-sitelinks-wikipedia": "Na ezaya gıre pelê Wikipedia",
+	"wikibase-sitelinks-sitename-columnheading": "Zıwan",
+	"wikibase-sitelinks-sitename-columnheading-special": "Sita",
+	"wikibase-sitelinks-siteid-columnheading": "Kod",
+	"wikibase-sitelinks-link-columnheading": "Pela gırebiyayiye",
+	"wikibase-snakview-snaktypeselector-novalue": "erc çıniyo",
+	"wikibase-tooltip-error-details": "Teferruati",
+	"datatypes-type-wikibase-item": "Obje",
+	"version-wikibase": "Wikibase"
+}

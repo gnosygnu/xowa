@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <!-- 
+    NOTE: this page loads local files
+    - Chrome is the easiest browser for local files; Use "chrome.exe --disable-web-security"
+    - Change C:/xowa/ to wherever it is on your system
+    -->
+    <!-- base -->
+    <base href="file:///C:/xowa/" target="_blank">
+    
+    <!-- css -->
+  	<link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/lib/alertify/themes/alertify.core.css">
+  	<link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/lib/alertify/themes/alertify.bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/src/xowa/xocss/core/xocss_core-0.0.1.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/src/xowa/xocss/core/xoimg_core-0.0.1.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/html/res/src/xowa/xocss/help/xohelp-0.0.1.css">
+    <link type="text/css" rel="stylesheet" href="bin/any/xowa/addon/wiki/import/bin/xow_import.css">
+    
+    <!-- js -->
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/alertify/lib/alertify-0.3.11.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/alertify/lib/xo-alertify-0.0.1.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/mustache/mustache-2.2.1.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/lib/jquery/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="bin/any/xowa/html/res/src/xowa/xocss/help/xohelp-0.0.1.js"></script>
+
+    <!-- mustache -->
+    <script type="text/html" id="templates"></script>
+    <script type="text/javascript">
+      window.view = {
+        path : '/storage/sdcard1/xowa/wiki/',
+        owner_dir_enc : 'owner',
+        subs: 
+        [
+          {is_dir:true , is_core_xowa:false, path_enc: 'a', name:'en.wikipedia.org'},
+          {is_dir:true , is_core_xowa:false, path_enc: 'b', name:'simple.wikipedia.org'},
+          {is_dir:false, is_core_xowa:true , path_enc: 'c', name:'simple.wikipedia.org-file-user.xowa' , date:'2015-12-20', size:'56 KB'},
+          {is_dir:false, is_core_xowa:false, path_enc: 'd', name:'simple.wikipedia.org-file-user1.xowa', date:'2015-12-20', size:'56 KB'},
+          {is_dir:false, is_core_xowa:false, path_enc: 'd', name:'simple.wikipedia.org-file-user2.xowa', date:'2015-12-20', size:'56 KB'},
+          {is_dir:false, is_core_xowa:false, path_enc: 'd', name:'simple.wikipedia.org-file-user3.xowa', date:'2015-12-20', size:'56 KB'},
+        ],
+      };
+    </script>
+    <script type="text/javascript">
+      $("#templates").load("bin/any/xowa/addon/wiki/import/bin/xow_import.mustache.html", function(response_txt, status_txt, xhr){
+        var template = response_txt;
+        var output = Mustache.render(template, window.view);
+        document.getElementById('main').innerHTML = output;
+      });
+    </script>
+  </head>
+  <body>
+    <div id="main"></div>
+  </body>
+</html>

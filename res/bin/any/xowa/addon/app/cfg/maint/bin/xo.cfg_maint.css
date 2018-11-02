@@ -1,0 +1,20 @@
+.cur_head_text {
+  width: calc(100% - 40px);
+}
+.cur_head_btns {
+  width: 40px;
+}
+
+.label {
+  display: inline-block;
+  padding: 0px 0px 0px 10px;
+}
+.data {
+  display: inline-block;
+  width: calc(100% - 94px);
+  padding: 0px 0px 0px 10px;
+}
+.button {
+  display: inline-block;
+  padding: 0px 10px 0px 10px;
+}

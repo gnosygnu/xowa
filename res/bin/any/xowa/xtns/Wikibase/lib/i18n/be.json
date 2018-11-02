@@ -1,0 +1,36 @@
+{
+	"@metadata": {
+		"authors": [
+			"Чаховіч Уладзіслаў"
+		]
+	},
+	"wikibase-lib-desc": "Утрымлівае агульны функцыянал пашырэнняў Wikibase і Wikibase Client.",
+	"wikibase-entity-item": "аб'ект",
+	"wikibase-entity-property": "уласцівасць",
+	"wikibase-entity-query": "запыт",
+	"wikibase-diffview-reference": "крыніца",
+	"wikibase-diffview-rank-deprecated": "Нерэкамендаваны ранг",
+	"wikibase-error-unexpected": "Узнікла нечаканая памылка.",
+	"wikibase-error-save-generic": "Падчас спробы захавання адбылася памылка, з-за чаго змены не былі ўнесеныя цалкам.",
+	"wikibase-error-remove-generic": "Падчас спробы выдалення адбылася памылка, з-за чаго змены не былі ўнесеныя цалкам.",
+	"wikibase-error-save-connection": "Падчас спробы захавання адбылася памылка злучэння, з-за чаго вашыя змены не былі захаваны. Калі ласка, праверце ваша злучэнне з Інтэрнэтам.",
+	"wikibase-error-remove-connection": "Пры выдаленні ўзнікла памылка сувязі, з-за гэтага вашы змены маглі не захавацца. Калі ласка, праверце ваша злучэнне з Інтэрнэтам.",
+	"wikibase-error-save-timeout": "Мы маем тэхнічныя праблемы, з-за чаго немагчыма завершыць захаванне.",
+	"wikibase-error-remove-timeout": "Мы маем тэхнічныя праблемы, з-за чаго немагчыма завершыць выдаленне.",
+	"wikibase-error-autocomplete-connection": "Не атрымалася запытаць Wikipedia API. Калі ласка, паспрабуйце пазней.",
+	"wikibase-error-autocomplete-response": "Адказ сервера: $1",
+	"wikibase-error-ui-client-error": "Знікла сувязь з кліенцкай старонкай. Калі ласка, паспрабуйце пазней.",
+	"wikibase-error-ui-no-external-page": "Не атрымалася знайсці ўказаную старонку на адпаведным праекце.",
+	"wikibase-error-ui-cant-edit": "Вы не можаце выканаць гэта дзеянне.",
+	"wikibase-error-ui-no-permissions": "У вас не хапае правоў для выканання гэтага дзеяння.",
+	"wikibase-error-ui-link-exists": "Вы не можаце спаслацца на гэту старонку, бо іншы аб'ект ужо на яе спасылаецца.",
+	"wikibase-error-ui-session-failure": "Вашая сесія скончылася. Калі ласка, увайдзіце ў сістэму зноў.",
+	"wikibase-error-ui-edit-conflict": "Адбыўся канфлікт правак. Калі ласка, абнавіце старонку і захавайце зноў.",
+	"wikibase-replicationnote": "Калі ласка, звернеце ўвагу, што можа прайсці некалькі хвілін, пакуль змены стануць бачнымі ва ўсіх вікі-праектах",
+	"wikibase-sitelinks-sitename-columnheading": "Мова",
+	"wikibase-sitelinks-siteid-columnheading": "Код",
+	"wikibase-sitelinks-link-columnheading": "Злучаны артыкул",
+	"wikibase-tooltip-error-details": "Падрабязнасці",
+	"datatypes-type-wikibase-item": "Элемент",
+	"datatypes-type-commonsMedia": "Медыяфайл з Вікісховішча"
+}

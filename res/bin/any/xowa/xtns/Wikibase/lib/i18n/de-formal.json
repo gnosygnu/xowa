@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"G.Hagedorn",
+			"Kghbln"
+		]
+	},
+	"wikibase-error-autocomplete-connection": "Die Wikipedia-API konnte nicht abgefragt werden. Bitte versuchen Sie es später noch einmal.",
+	"wikibase-error-ui-client-error": "Die Verbindung zur externen Webseite ist gescheitert. Bitte versuchen Sie es später noch einmal.",
+	"wikibase-error-ui-cant-edit": "Sie sind nicht berechtigt, diese Aktion auszuführen.",
+	"wikibase-error-ui-no-permissions": "Sie haben keine ausreichende Berechtigung, um diese Aktion auszuführen.",
+	"wikibase-error-ui-link-exists": "Sie können nicht auf diese Seite verlinken, da ein anderes Datenobjekt bereits auf sie verlinkt.",
+	"wikibase-error-ui-session-failure": "Ihre Sitzung ist abgelaufen. Sie müssen sich daher erneut anmelden.",
+	"wikibase-error-ui-edit-conflict": "Es gab einen Bearbeitungskonflikt. Bitte laden und speichern Sie die Seite erneut."
+}

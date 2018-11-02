@@ -1,0 +1,476 @@
+Welcome to your personal wiki!
+
+Personal wikis are new and will be in continual development! If you encounter issues, please report them through the [[xowa.home:Help/Feedback|Feedback page]].
+
+== Quick start ==
+=== Editing this page ===
+* Switch to edit mode by pressing <code>Edit</code> near the top-right of the page
+* Edit the text by typing directly in the text box. For this example, enter <code>Hello, world!</code> at the top of the text box.
+* Save the page by pressing the <code>Save page</code> button at the bottom of the text box
+
+Congratulations! You should see <code>Hello, world!</code> at the top of the page
+
+=== Creating a new page ===
+* Navigate to a page by entering a page title in the url bar. For this example, enter <code>Test</code>.
+* A blank page will open in edit mode. Enter in some text in the text box. For this example, enter <code>Some text for the page</code>
+* Save the page.
+
+Congratulations! You have just created a new page called <code>Test</code>
+
+=== Linking to a page ===
+* Switch to edit mode.
+* Enter a link by entering text into the text box. For this example, use <code><nowiki>[[Test]]</nowiki></code>.
+* Save the page. The word <code><nowiki>Test</nowiki></code> will show and be  highlighted in blue.
+* Click on the <code>Test</code> link. The <code>Test</code> page will open.
+
+Congratulations! You have just linked to a page called <code>Test</code>
+
+== Basic editing ==
+The best place to start is Wikipedia's guide for editing: https://en.wikipedia.org/wiki/Help:Getting_started
+
+The table below is provided for reference. Note the following columns:
+* '''function''': the name of the function
+* '''example''': an example of the function as shown in HTML
+* '''wikitext''': the actual wikitext used to render the function
+* '''html''': an alternative way of rendering the same wikitext, but only with html.
+
+=== HTML tags ===
+Most HTML tags are available.
+* '''HTML tags can be used as an alternative to wikitext.''': For example, <i>italicized text</i> can also be shown with <code><nowiki>&lt;i>italicized text&lt;/i></nowiki>
+* '''HTML tags are needed for other functions.''': For example, the following have no wikitext equivalent <code><nowiki>&lt;u>underline</u></nowiki></code>, <code><nowiki>&lt;s>strikethru</s></nowiki></code>, etc..
+
+However, there are some notable exceptions:
+* '''anchor tags are not allowed''': Any <code>&lt;a></code> will be rendered literally. Instead, use an internal / external link. For example, <code><nowiki>[[Test]]</nowiki></code>
+* '''image tags are not allowed''': Any <code>&lt;img></code> will be rendered literally. Instead, use an internal link in the file namespace. For example, <code><nowiki>[[File:Image.png]]</nowiki></code>
+* '''javascript / events are not allowed''': All javascript and "onevent" blocks are removed.
+
+{|class=wikitable style="background:white"
+|-
+! function
+! example
+! wikitext
+! html
+|-
+| italics
+| ''italicized text''
+| <code><nowiki>''italicized text''</nowiki></code>
+| <code><nowiki>&lt;i>italicized text</&lt;i></nowiki></code>
+|-
+| bold
+| '''bold text'''
+| <code><nowiki>'''bold text'''</nowiki></code>
+| <code><nowiki>&lt;b>bold text</&lt;b></nowiki></code>
+|-
+| bold and italics
+| '''''bold and italicized text'''''
+| <code><nowiki>'''''bold and italicized text'''''</nowiki></code>
+| <code><nowiki>&lt;b>&lt;i>bold and italicized text&lt;/i>&lt;/b></nowiki></code>
+|-
+| underline
+| <u>underlined text</u>
+| <code><nowiki>N/A</nowiki></code>
+| <code><nowiki>&lt;u>underlined text&lt;/u></nowiki></code>
+|-
+| strike-thru
+| <s>strike-thru text</s>
+| <code><nowiki>N/A</nowiki></code>
+| <code><nowiki>&lt;s>strike-thru text&lt;/s></nowiki></code>
+|-
+| color
+| <span style='color:green'>colored text</span>
+| <code><nowiki>N/A</nowiki></code>
+| <code><nowiki>&lt;span style='color:green'>colored text&lt;/span></nowiki></code>
+|-
+| external url: url only
+| http://xowa.org
+| <code><nowiki>http://xowa.org</nowiki></code>
+| <code>N/A</code>
+|-
+| external url: url with name
+| [http://xowa.org xowa web site]
+| <code><nowiki>[http://xowa.org xowa web site]</nowiki></code>
+| <code>N/A</code>
+|-
+| external url: numbered
+| [http://xowa.org]
+| <code><nowiki>[http://xowa.org]</nowiki></code>
+| <code>N/A</code>
+|-
+| internal url: page only
+| [[Test]]
+| <code><nowiki>[[Test]]</nowiki></code>
+| <code>N/A</code>
+|-
+| internal url: page with name
+| [[Test|My test page]]
+| <code><nowiki>[[Test|My test page]]</nowiki></code>
+| <code>N/A</code>
+|-
+| paragraph<br/>
+| 
+para 1
+
+para 2
+| 
+<pre>
+para 1
+
+para 2
+</pre>
+<ref group='basics'>enter a completely blank line between paragraphs</ref>
+| 
+<pre>
+<p>para 1</p>
+<p>para 2</p>
+</pre>
+|- 
+| preformatted blocks
+|
+ line 1
+ line 2 
+|
+<pre>
+ line 1
+ line 2 
+</pre>
+<ref group='basics'>start a line with a space</ref>
+|
+<pre>
+&lt;pre>
+line 1
+para 2
+&lt;/pre>
+</pre>
+|-
+| list: bulleted
+|
+* a
+** aa
+*** aaa
+* b
+* c
+** cc
+|
+<pre>
+* a
+** aa
+*** aaa
+* b
+* c
+** cc
+</pre>
+|
+<pre>
+<ul>
+  <li>a
+   <ul>
+     <li>aa
+       <ul>
+         <li>aaa</li>
+       </ul>
+     </li>
+   </ul>
+  </li>
+  <li>b</li>
+  <li>c
+   <ul>
+     <li>cc
+     </li>
+   </ul>
+  </li>
+</ul>
+</pre>
+</pre>
+|-
+| list: numbered
+|
+# a
+## aa
+### aaa
+# b
+# c
+## cc
+|
+<pre>
+# a
+## aa
+### aaa
+# b
+# c
+## cc
+</pre>
+| 
+<pre>
+<ol>
+  <li>a
+   <ol>
+     <li>aa
+       <ol>
+         <li>aaa</li>
+       </ol>
+     </li>
+   </ol>
+  </li>
+  <li>b</li>
+  <li>c
+   <ol>
+     <li>cc
+     </li>
+   </ol>
+  </li>
+</ol>
+</pre>
+|-
+| header
+|
+=== Basic editing: Test Level a3 ===
+==== Basic editing: Test Level a4 ====
+===== Basic editing: Test Level a5 =====
+=== Basic editing: Test Level b3 ===
+=== Basic editing: Test Level c3 ===
+==== Basic editing: Test Level c4 ====
+|
+<pre>
+=== Basic editing: Test Level a3 ===
+==== Basic editing: Test Level a4 ====
+===== Basic editing: Test Level a5 =====
+=== Basic editing: Test Level b3 ===
+=== Basic editing: Test Level c3 ===
+==== Basic editing: Test Level c4 ====
+</pre>
+|
+<pre>
+<h3> Basic editing: Test Level a3 </h3>
+<h4> Basic editing: Test Level a4 </h4>
+<h5> Basic editing: Test Level a5 </h5>
+<h3> Basic editing: Test Level b3 </h3>
+<h3> Basic editing: Test Level c3 </h3>
+<h4> Basic editing: Test Level c4 </h4>
+</pre>
+|-
+| table
+|
+{|class=wikitable
+|+ caption
+|-
+! header a
+! header b
+|-
+| cell 1a
+| cell 1b
+|-
+| cell 2a
+| cell 2b
+|}
+|
+<pre>
+{|class=wikitable
+|+ caption
+|-
+! header a
+! header b
+|-
+| cell 1a
+| cell 1b
+|-
+| cell 2a
+| cell 2b
+|}
+</pre>
+|
+<pre>
+<table class="wikitable">
+  <caption>caption</caption>
+  <tr>
+    <th>header a</th>
+    <th>header b</th>
+  </tr>
+  <tr>
+    <td>cell 1a</td>
+    <td>cell 1b</td>
+  </tr>
+  <tr>
+    <td>cell 2a</td>
+    <td>cell 2b</td>
+  </tr>
+</table>
+</pre>
+|}
+
+=== Notes for Basics editing ===
+<references group='basics'>
+</references>
+
+== Advanced editing ==
+=== Category ===
+Categories are supported. As a basic example, try the following:
+* Edit this page
+* Add the following text: <code><nowiki>[[Category:Test]]</nowiki></code>
+* Scroll down to the bottom of the page. You will see a <code><nowiki>Categories</nowiki></code> section and <code><nowiki>Test</nowiki></code> listed
+* Navigate to <code><nowiki>Category:Test</nowiki></code>. You will see the Main page listed
+
+For more info, see https://en.wikipedia.org/wiki/Help:Category
+
+=== Images ===
+Images are supported, but the process is slightly complicated due to the set-up of third-party software.
+
+Here is a broad overview:
+* Set up imagemagick and inkscape on your machine. For more instructions, see http://xowa.org/home/wiki/App/Wiki_types/Wikia.com#Part_3c:_Setup_Imagemagick_and_Inkscape
+* Place your images in your wiki directory. Assuming your wiki is set up in <code>C:\your_wiki</code>, then you need to copy an image to <code>C:\your_wiki\file\orig</code>. As an example, do the following:
+** Download the image from <code><nowiki>https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg</nowiki></code>
+** Move the image to <code>C:\your_wiki\file\orig\The_Earth_seen_from_Apollo_17.jpg</nowiki></code>
+** Edit the page, and add the following text: <code><nowiki>[[File:The_Earth_seen_from_Apollo_17.jpg]]</nowiki></code>
+* Preview the page. You should see the image.
+
+For more info, see https://en.wikipedia.org/wiki/Wikipedia:Picture_tutorial
+
+=== Table of contents ===
+Table of contents (TOC) are automatically generated by XOWA if you have 4 headers (a header being something like <code><nowiki>== header ==</nowiki></code>)
+
+If you have less than 4 headers, you can force a TOC by adding <code><nowiki>__TOC__</nowiki></code>
+
+=== Math ===
+LaT<sub>E</sub>X formatting is available. For example, the following is the formula for the Pythagorean theorem: <math>a^2 + b^2 = c^2</math>
+
+=== References ===
+Wikipedia-style references are supported. For example, this is a simple reference: <ref>Test footnote</ref>.
+
+Note that you can hover over the reference number to get a tooltip preview
+
+=== Sortable tables ===
+Wikipedia-style sortable tables are supported.
+
+{|class='wikitable sortable'
+|-
+! String
+! Int
+! Date - months
+|-
+| c
+| 3
+| Mar 1 2012
+|-
+| b
+| 22
+| Feb 2 2011
+|-
+| a
+| 111
+| Jan 3 2010
+|}
+
+=== Collapsible tables ===
+Wikipedia-style collapsible tables are supported.
+{| class="wikitable collapsible"
+! Data
+|-
+| A
+|-
+| B
+|-
+| C
+|}
+
+=== More ===
+Other features are supported, including Tabviews, Timelines, Graphs, Hieroglyphics and Musical scores. For examples, see [[xowa.home:Diagnostics]]
+
+== Expert editing ==
+=== Magic words ===
+Most magic words are supported, such as <code><nowiki>{{CURRENTTIME}}</nowiki></code> and <code><nowiki>{{lc:string}}</nowiki></code>. For more info, see https://en.wikipedia.org/wiki/Help:Magic_words
+
+=== Parser functions ===
+Most parser functions are supported, such as <code><nowiki>{{#expr:2 + 2}}</nowiki></code>. For more info, see https://www.mediawiki.org/wiki/Help:Extension:ParserFunctions
+
+=== Templates ===
+Templates are supported, such as <code><nowiki>{{my_template|arg_1|arg_2|etc...}}</nowiki></code>. For more info, see https://en.wikipedia.org/wiki/Help:A_quick_guide_to_templates
+
+Here's a brief example:
+* Create a page called <code>Template:Test</code> with the text <code><nowiki>Hello, from Template:Test -- {{{1|empty}}}</nowiki></code>
+* Edit any other page (like the <code>Main_Page</code>) and enter <code><nowiki>{{Test|argument 1}}</nowiki></code> in the text box.
+* Preview or Save the page. You will see <code>Hello, from Template:Test -- argument 1</code>
+
+=== Modules ===
+Modules are supported, such as <code><nowiki>{{#invoke:my_module|my_function|arg_1|arg_2|etc...}}</nowiki></code>. For more info, see https://en.wikipedia.org/wiki/Wikipedia:Lua
+
+Here's a brief example:
+* Create a page called <code>Module:Test</code> with the following text
+<pre>
+local p = {}
+
+function p.test( frame )  
+  return "Hello from Module:Test -- " .. frame.args[1];
+end
+
+return p
+</pre>
+* Edit any other page (like the <code>Main_Page</code>) and enter <code><nowiki>{{#invoke:Test|test|argument 1}}</nowiki></code> in the text box.
+* Preview or Save the page. You will see <code>Hello from Module:Test -- argument 1</code>
+
+== Developer editing ==
+<table class="metadata plainlinks ambox ambox-delete" style="">
+  <tr>
+    <td class="mbox-empty-cell">
+    </td>
+    <td class="mbox-text" style="">
+<span class="mbox-text-span">
+NOTE: The techniques in this section may change in future versions.
+
+If you use any of the editing techniques here, please check back occasionally to see if anything has changed.
+</span>
+    </td>
+  </tr>
+</table>
+
+=== CSS ===
+XOWA stores the CSS for each wiki in <code>/xowa/user/anonymous/wiki/your_wiki_name/html</code>. For example, if you're on Windows and your wiki is named <code>test</code>, then the CSS would be at <code>C:\xowa\user\anonymous\wiki\test\html\xowa_common.css</code>
+
+Note that the upper-lefthand icon is also stored there as <code>logo.png</code>
+
+You can change these files and XOWA will not overwrite them. However, as with any file, please make sure you always keep backups.
+
+=== Page template ===
+XOWA stores the page template in <code>/xowa/bin/any/xowa/cfg/app/xowa.gfs</code>. The actual template is marked in a section called <code>page_read</code>.
+
+Please note the following about changing the page:
+* The file is replaced on every application update. If you make updates to the file, they will be lost.
+** If you find that you need to edit this file, please contact me, and I will add a feature to make it configurable in a future release. Really, these instructions are only provided for users who want to experiment.
+* The file uses a custom language specific to XOWA called gfs. Always backup the file when making changes. If you make an invalid change, XOWA will not start
+* The file is only loaded at application start. Any changes will require a restart of the app
+
+=== Scripting ===
+XOWA allows custom hooks through Javascript or Lua. For detailed instructions see [[xowa.home:App/Xtn/Scripting]]
+
+== Keyboard shortcuts ==
+For a full list, see [[xowa.home:Special:XowaCfg?grp=xowa.gui.shortcuts]]
+{|class='wikitable'
+|-
+|  <b>Alt + Shift + E</b>         || Edit the page. Switches to edit mode
+|-
+|  <b>Ctrl + S</b>                || Quick save the page. Stays in edit mode
+|-
+|  <b>Alt + Shift + P</b>         || Preview the page. Stays in edit mode
+|-
+|  <b>Alt + Shift + S</b>         || Save the page. Switches to read mode
+|-
+|  <b>Ctrl + F</b>                || Find text in the page
+|-
+|
+<b>Ctrl + L</b> or <br/>
+<b>Alt + D</b>                    || Focus the URL bar
+|-
+|  <b>Ctrl + T</b>                || New tab
+|-
+|  <b>Ctrl + Tab</b>              || Switch to next tab
+|-
+|  <b>Ctrl + Shift + Tab</b>      || Switch to previous tab
+|-
+|  <b>Ctrl + W</b>                || Close tab
+|}
+
+== Useful links ==
+* Wikipedia's guide for editing: https://en.wikipedia.org/wiki/Help:Getting_started
+* XOWA page on personal wikis: [[xowa.home:App/Personal wikis]]
+* XOWA help page: [[xowa.home:Help/Contents|Contents page]]
+
+== Notes ==
+<references/>

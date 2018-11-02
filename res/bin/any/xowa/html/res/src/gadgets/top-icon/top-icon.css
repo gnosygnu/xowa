@@ -1,0 +1,15 @@
+/* mw:top_icon: REF:www.mediawiki.org/wiki/Snippets/Top_icons */
+.Top_icon_raw {
+  display: none;
+}
+/* With JavaScript */
+.Top_icon_dynamic {
+  float: right;
+  padding-left: 10px;
+  font-size: 50%;
+  width: auto !important;
+}
+.Top_icon_raw p, .Top_icon_dynamic p {
+  padding: 0;
+  margin: 0;
+}

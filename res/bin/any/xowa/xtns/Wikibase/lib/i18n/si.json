@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"පසිඳු කාවින්ද"
+		]
+	},
+	"wikibase-entity-item": "අයිතමය",
+	"wikibase-entity-property": "ගුණාංගය",
+	"wikibase-entity-query": "ප්‍රශ්නය",
+	"wikibase-error-autocomplete-response": "සර්වරය ප්‍රතිචාර දක්වන ලදී: $1",
+	"wikibase-error-ui-client-error": "සේවාදායක පිටුව වෙත සම්බන්ධය අසාර්ථකයි. කරුණාකර නැවත උත්සහ කරන්න.",
+	"wikibase-error-ui-cant-edit": "ඔබට මෙම ක්‍රියාව සිදු කිරීමට ඉඩ ලබා නොදේ.",
+	"wikibase-error-ui-no-permissions": "ඔබට මෙම ක්‍රියාව සිදු කිරීමට ප්‍රමාණවත් තරම් හිමිකම් නොමැත.",
+	"wikibase-error-ui-session-failure": "ඔබේ සැසිය ඉකුත් වී ඇත. කරුණාකර නැවත ප්‍රවිෂ්ට වන්න.",
+	"wikibase-error-ui-edit-conflict": "මෙය සංස්කරණ ගැටුමකි. කරුණාකර ප්‍රතිපූර්ණය කර නැවත සුරකින්න.",
+	"wikibase-sitelinks-sitename-columnheading": "භාෂාව",
+	"wikibase-sitelinks-siteid-columnheading": "කේතය",
+	"wikibase-sitelinks-link-columnheading": "සබැඳිගත ලිපිය",
+	"wikibase-tooltip-error-details": "විස්තර",
+	"datatypes-type-wikibase-item": "අයිතමය",
+	"datatypes-type-commonsMedia": "කොමන්ස් මාධ්‍ය ගොනුව"
+}

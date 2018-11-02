@@ -1,0 +1,277 @@
+this
+.fallback_load('ro')
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sun|Dum
+mon|Lun
+tue|Mar
+wed|Mie
+thu|Joi
+fri|Vin
+sat|Sam
+january|januari
+february|februari
+march|marti
+april|aprili
+may_long|mă
+june|juni
+july|juli
+august|august
+september|septembri
+october|oktombri
+november|nojembri
+december|decembri
+january-gen|januari
+february-gen|februari
+march-gen|marti
+april-gen|aprili
+may-gen|mai
+june-gen|juni
+july-gen|juli
+august-gen|august
+september-gen|septembri
+october-gen|oktombri
+november-gen|nojembri
+december-gen|decembri
+jan|jan
+feb|feb
+mar|mar
+apr|apr
+may|mai
+jun|jun
+jul|jul
+aug|aug
+sep|sep
+oct|okt
+nov|nov
+dec|dec
+toc|Kuprins
+redirectedfrom|(Redirecţionat de la ~{0})
+allpages|Toats paži
+thumbnail-more|ķsinde
+blanknamespace|(Principu)
+category_header|Pažus en kategoria "~{0}"
+subcategories|Subkategorii
+listingcontinuesabbrev|kontinu
+bold_sample|Eskrire aldin
+bold_tip|Eskrire aldin
+italic_sample|Eskrire kursive
+italic_tip|Eskrire kursive
+link_sample|Nom s'legătuls
+link_tip|Legătul internul
+headline_sample|Eskrire s'titlus
+headline_tip|Titlu de nivel 2
+sitesupport|Donacions
+tooltip-n-sitesupport|Supora-nostre
+tog-underline|Subliniaere legătuls:
+about|Dajpul
+cancel|renuntǎe
+mytalk|Maj diskuţu
+errorpagetitle|Eru
+tagline|De {{SITENAME}}
+help|ajutor
+search|kaută
+searchbutton|kaută
+searcharticle|Lie
+history|Historia pažus
+printableversion|vercion printablu
+permalink|Legătul permanentul
+edit|Edita
+editthispage|Edita ce pažu
+delete|Delăre
+protect|Ažatme
+newpage|Paži novi
+talkpagelinktext|Diskuţu
+personaltools|Alatki personalu
+talk|Diskuţu
+views|Vi
+toolbox|alatunikul
+jumpto|Lia a:
+jumptonavigation|navigacion
+jumptosearch|kaută
+aboutsite|Dajpul {{SITENAME}}
+aboutpage|Project:Dajpul {{SITENAME}}
+copyrightpage|{{ns:project}}:Prava d'autoru
+currentevents|Tebikoru
+currentevents-url|Project:Tebikoru
+disclaimers|tǎmenuls
+disclaimerpage|Project:tǎmenul
+edithelp|Ajutor pentru editaere
+mainpage|Pažu principu
+mainpage-description|Pažu principu
+privacy|Politikmus de ližitul
+privacypage|Project:Politikmus de ližitul
+retrievedfrom|Aduse de "~{0}"
+youhavenewmessages|Veses ~{0} (~{1}).
+editsection|Editaere
+editold|edita
+editsectionhint|Editaere ţisecion: ~{0}
+showtoc|arată
+hidetoc|askunde
+site-rss-feed|~{0} RSS fitul
+site-atom-feed|~{0} Atom fitul
+page-rss-feed|"~{0}" RSS Fitul
+page-atom-feed|"~{0}" Atom Fitul
+nstab-user|Pažu d'utilizatoru
+nstab-project|Projektu
+nstab-image|fişirul
+nstab-category|kategoria
+viewsource|Baganaere
+yourname|Nom d'utilizatoru:
+login|Prilasnaere
+nav-login-createaccount|Prilasnaere / Nažbe
+userlogin|Prilasnaere / kreare nutilizatoru
+userlogout|otlastaere
+extlink_sample|http://www.example.com nom s'legătuls
+extlink_tip|Legătul ķsternul (vec prefiks http://)
+nowiki_sample|Intorduca no-Wiki isi
+nowiki_tip|No-Wiki klaşu
+image_tip|Santigul inserat
+media_tip|Legătul fişirul de media
+sig_tip|Utilizatorunom et data et temp
+hr_tip|Linia orizontala (esnidivale)
+summary|Sumar:
+subject|Subjekt / titlur:
+minoredit|Aceasta este o editare minoră
+watchthis|klăaere ce pažu
+showpreview|Rată previzualizare
+showdiff|Arată şumbărae
+newarticle|(Nova)
+editing|o ~{0} editaere
+editingsection|Editaere ~{0} (sekcion)
+copyrightwarning|<!-- Gol deocamdată. Vertismentul se flă en MediaWiki:Summary -->\nTe rog notari la din kontribuţi al {{SITENAME}} sunt konsideraere relesavat supra ~{1} (suah ~{0} din detăs). Açteu nesav te se teksti sunt editaere denomerci det redistributaere din vent, hatae ici.<br /> Tu este nostre promisaere bonti us tu skrirste ce se, nega kopiaere din publik domen nega similari resorsua. '''NE SUBMITE KOPILEGRU SKRIE SAS PERMIŢION!'''
+template-protected|(ažatmat)
+template-semiprotected|(semi-ažatmat)
+currentrev|Vercion kurentu
+revisionasof|Vercion de data ~{0}
+previousrevision|←Versiunea nterioară
+cur|aktualu
+last|precedente
+history-title|Editaerehistoria pentru "~{0}"
+lineno|Linia ~{0}:
+compareselectedversions|Kompara vercion selektus
+editundo|anulizăe
+viewprevnext|Vu (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+mypreferences|Maj prefirenţu
+recentchanges|şumbărae recentae
+rcshowhideminor|~{0} modifikările minore
+rcshowhidebots|~{0} roboti
+rcshowhideliu|~{0} utilizatori prilasnaeri
+rcshowhideanons|~{0} utilizatori anonimi
+rcshowhidemine|~{0} mes modifikacions
+rclinks|Rată ultimele ~{0} modifikări din ultimele ~{1} zile.<br />\n~{2}
+diff|diferenţu
+hist|historia
+hide|askunde
+show|Arată
+minoreditletter|m
+newpageletter|N
+boteditletter|b
+recentchangeslinked|Modifikări korelate
+recentchangeslinked-feed|Modifikări korelate
+recentchangeslinked-toolbox|Modifikări korelate
+upload|trimiţe fişirul
+file-anchor-link|Fişirul
+filehist|Historia fişirulu
+filehist-current|kurentu
+filehist-datetime|Data/Temp
+filehist-user|Utilizatoru
+filehist-dimensions|Dimencions
+filehist-comment|komentarul
+imagelinks|Legătul fişirul de media
+linkstoimage|Ces {{PLURAL:~{0}\u007Cpaži legǎt\u007Cpaži legǎtent}} a ce fişirul:
+randompage|alaeţu
+nbytes|~{0} {{PLURAL:~{0}\u007Cbătul\u007Cbătuls}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cmembru\u007Cmembri}}
+newpages|Paži novi
+booksources|Surse de cărţi
+allarticles|Toats paži
+allpagessubmit|Treme
+watchlist|Maj klăaeru
+mywatchlist|Maj klăaere
+watch|klăaere
+unwatch|Deklăaera
+watching|O klăaere...
+unwatching|O deklăaere...
+rollbacklink|revenire
+namespace|lSpaţi:
+invert|Ķskluda spaţul
+contributions|Kontribuţi d'utilizatori
+mycontris|Mes kontribuţi
+contribsub2|Pentru ~{0} (~{1})
+uctop|(susverf)
+sp-contributions-talk|Diskuţu
+whatlinkshere|Legǎtul a ce pažu
+whatlinkshere-title|Paži legǎtulent a ~{0}
+nolinkshere|Paži ne legǎtent a '''[[:~{0}]]'''.
+istemplate|vikulabe
+whatlinkshere-links|← legătuls
+blocklink|blokuapǎe
+contribslink|kontribuţi
+revertmove|revenire
+export|Ķsporta paži
+thumbnail_error|Eru vec kreare de thumbnail: ~{0}
+tooltip-pt-userpage|Moj pažu d'utilizatoru
+tooltip-pt-mytalk|Maj pažu diskuţus
+tooltip-pt-preferences|Maj prefirenţu
+tooltip-pt-watchlist|Lista pažinilor pe care le monitorizez.
+tooltip-pt-mycontris|Lista de mes kontribucions
+tooltip-pt-login|Pute prilasnaere, ne l'est doist.
+tooltip-pt-logout|otlastaere
+tooltip-ca-talk|Diskuţie despre artikol
+tooltip-ca-edit|Poţi edita această pažină. Te rugăm se previzualizezi konţinutul enainte de salvare.
+tooltip-ca-protect|Ažatme ce pažu
+tooltip-ca-delete|Delăre ce pažu
+tooltip-search|Kaută en {{SITENAME}}
+tooltip-n-mainpage|Visita l'pažu principu
+tooltip-n-portal|Dajpul l'projectu, quelques pote faraere, o truves sabi.
+tooltip-n-currentevents|Găseşte informaţii despre evenimentiķ kurente
+tooltip-n-recentchanges|Lista des şumbǎrae recentae en l'wiki.
+tooltip-n-randompage|Donare npažu alaetoare
+tooltip-n-help|Ajutor truves isi.
+tooltip-t-whatlinkshere|Lista tuturor pažinilor wiki care konduc spre această pažină
+tooltip-t-contributions|Vu lista de kontribuţi de c'utilizatoru
+tooltip-t-upload|Tremer fişirul
+tooltip-t-specialpages|Lista de toat paži specialus
+tooltip-ca-nstab-user|Vu l'pažu d'utilizatoru
+tooltip-ca-nstab-project|Vu l'pažu de projektu
+tooltip-ca-nstab-category|Vu l'pažu de kategoria
+tooltip-minoredit|ce-est n'modifikacion minoru
+tooltip-save|Salvaere tes modifikacions
+tooltip-diff|Rată ce modifikări ai făcut tekstului.
+file-nohires|Ce-n-est n'resolucion mai mari.
+show-big-image|Mareşte resolucion
+bad_image_list|Formatul este următorul:\n\nNumai elementîle unei liste sunt luate en consideraere. (Açestea sunt linii ce encep cu *)\n\nPrima legătură de pe linie trebuie se fie spre un fişier defectuos.\n\nOrice legături ce urmează pe acenaşi linie sunt consideraete excepţii, dică paži unde fişierul poate părea inclus direct.
+metadata|Metadata
+namespacesall|toat
+monthsall|toat
+specialpages|Paži specalus
+']:>
+).lang
+;

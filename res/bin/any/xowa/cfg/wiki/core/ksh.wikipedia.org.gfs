@@ -1,0 +1,55 @@
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+-2|Medium
+-2|Meedije
+-2|Meedijum
+-1|Shpezjal
+-1|Spezial
+2|Medmaacher
+2|Medmaacheren
+2|Medmaacherin
+2|Metmaacheren
+2|Metmaacherin
+3|Medmaacher_Klaaf
+6|Beld
+6|Belld
+6|Image
+7|Belder_Klaaf
+7|Bellder_Klaaf
+7|Image_talk
+8|MedijaWikki
+9|MedijaWikki_Klaaf
+12|Hülp
+13|Hülp_Klaaf
+14|Kategorie
+14|Katejori
+14|Kattejori
+14|Saachjrop
+14|Saachjropp
+14|Sachjrop
+15|Kategorie_Klaaf
+15|Katejorije_Klaaf
+15|Kattejori_Klaaf
+15|Kattejorije_Klaaf
+15|Saachjroppe_Klaaf
+15|Saachjrupp_Klaaf
+15|Sachjrop_Klaaf
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(8).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end

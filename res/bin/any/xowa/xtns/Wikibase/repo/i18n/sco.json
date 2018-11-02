@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"John Reid",
+			"AmaryllisGardener"
+		]
+	},
+	"wikibase-claims": "Claims",
+	"wikibase-snakformat-invalid-value": "Onvalid value.",
+	"wikibase-snakformat-propertynotfound": "Propertie na foond.",
+	"wikibase-wikibaserepopage-not-itemid": "\"$1\" isna ae valid item id.",
+	"wikibase-setlabel-submit": "Set the label",
+	"wikibase-setdescription-submit": "Set descreeption",
+	"wikibase-setaliases-submit": "Set aliases",
+	"wikibase-setsitelink-not-badge": "The item $1 isna ae badge.",
+	"special-mergeitems": "Merge twa eitems",
+	"wikibase-mergeitems-intro": "Gif ye merge twa eetems, aw labels, descreeptions, aliases, sitelinks n statements will be muived fae yin eetem til the ither.",
+	"wikibase-mergeitems-fromid": "The id tae merge fae",
+	"wikibase-mergeitems-toid": "The id tae merge til",
+	"wikibase-mergeitems-submit": "Merge eitems",
+	"wikibase-listdatatypes-intro": "This is ae leet o aw datatypes available oan this instawation:",
+	"wikibase-api-target-is-incompatible": "Attempt tae redirect tae an entity o a different type.",
+	"wikibase-special-mergeitems-error-prefix": "The eetems coudna be merged. The follaein mistak occurred:",
+	"wikibase-item-summary-wbcreateredirect": "Redirectit tae $4",
+	"wikibase-item-summary-wblinktitles-create": "Cræftit this eetem fer tae connect pages",
+	"wikibase-item-summary-wblinktitles-connect": "Eikit ae leid airtin fer tae connect pages",
+	"wikibase-listdatatypes-wikibase-item-body": "Airt tae ither eetems at the waurk. Whan ae value is entert the waurks \"Eetem\" namespace oan Wikidata will be raket fer matchin eetems.",
+	"wikibase-listdatatypes-commonsmedia-body": "Airt tae files stored at Wikimedia Commons. Whan ae value is entert, the \"File\" namespace oan Commons will be raked fer matchin files.",
+	"wikibase-listdatatypes-globe-coordinate-body": "Literal data fer ae geographeecal poseetion gien aes ae lateetuid-langeetuid pair in gms or decimal degrees fer the gien stellair bodie. Defauts til \"Earth\" n then \"WGS84\". It eiks ae resolution n range.\n* lateetuid – impleecit first pairt (float, dms, dm, dd) o the coordinate string, direction is either gien bi prefixed sign or bi postfixed N/S\n* langeetuid – impleecit seicont pairt (float, dms, dm, dd) o the coordinate string, direction is either gien bi prefixed sign or bi postfixed E/W\n* globe – expleecit (?) data value, gien aes stellair bodie that defauts til the Yird  \"http://www.wikidata.org/entity/Q2\"\n* precesion - numereec preceesion o the coordinate",
+	"wikibase-listdatatypes-quantity-body": "Literal data field fer aen amoont that relates til some kyn o weel-defined unit. The actual unit gaes in the data values that ar entered.\n* amoont – impleecit pairt o the string (mappin o unit prefix is onclear)\n* unit – impleecit pairt o the string that defauts til \"1\" (mappin til staundairdizin bodie is onclear)\n* upperboond - amoont's upper boond\n* lowerboond - amoont's lower boond",
+	"right-item-term": "Chynge eetem terms (labels, descreeptions, aliases)",
+	"right-item-merge": "Merge eetems",
+	"right-property-term": "Chynge propertie terms (labels, descreeptions, aliases)"
+}

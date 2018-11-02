@@ -1,0 +1,838 @@
+this
+.ns_names
+  .load_text(
+<:['
+-2|Medja
+-1|Xususi
+1|Nopegət
+2|Okoədə
+3|Okoədəj nopegət
+5|$1 Nopegət
+6|Fajl
+7|Fajl nopegət
+8|MediaWiki
+9|MediaWiki nopegət
+10|Numunə
+11|Numunə nopegət
+12|Koməg
+13|Koməg nopegət
+14|Tispir
+15|Tispir nopegət
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+5|$1 Nopegətəti
+7|Fajli nopegət
+13|Koməgi nopegət
+15|Tispiron nopegət
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Allpages|Һәммәј_сәһифон
+Blankpage|Тәјлијә_сәһифә
+ChangeEmail|Е-номә_дәгиш_кардеј
+ChangePassword|Пароли_дәгиш_кардеј
+Emailuser|Бә_иштирокәкә_номә_вығандеј
+Longpages|Дырозә_сәһифон
+Movepage|Сәһифә_номи_дәгиш_кардеј
+MyLanguage|Чымы_зывон
+Mypage|Чымы_сәһифә
+Mytalk|Чымы_мызокирә
+Myuploads|Чымы_бо_жә_быә_чијон
+Newimages|Нујә_фајлон
+Newpages|Нујә_сәһифон
+PasswordReset|Пароли_ләғв_кардеј
+Protectedpages|Мыдофијә_кардә_быә_сәһифон
+Protectedtitles|Мыдофијә_кардә_быә_номон
+Randompage|Рајрастә_сәһифә._Рајрастә
+Recentchanges|Ән_нујә_дәгишон
+Recentchangeslinked|Ангыл_кардә_быә_дәгишон
+Revisiondelete|Рәдд_кардә_быә_дәгишон
+Search|Нәве
+Shortpages|Кыртә_сәһифон
+Tags|Нышонон
+Undelete|Бәрпо_кардеј
+Version|Рәвојәт
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+redirect|0|#ТОЖӘДӘН_ИСТИҒОМӘТ_ДОЈ~#REDIRECT~
+notoc|0|__БЕМЫНДӘРИҸОТ__~__NOTOC__~
+forcetoc|0|__МӘҸБУРИЈӘ_МЫНДӘРИҸОТ__~__FORCETOC__~
+toc|0|__МЫНДӘРИҸОТ__~__TOC__~
+currentmonth|1|ЕСӘТНӘ_МАНГ~ЕСӘТНӘ_МАНГ_2~CURRENTMONTH~CURRENTMONTH2~
+currentmonth1|1|ЕСӘТНӘ_МАНГ_1~CURRENTMONTH1~
+currentmonthname|1|ЕСӘТНӘ_МАНГИ_НОМ~CURRENTMONTHNAME~
+currentmonthnamegen|1|ЕСӘТНӘ_МАНГИ_НОМ_ҸИНС~CURRENTMONTHNAMEGEN~
+currentday|1|ЕСӘТНӘ_РУЖ~CURRENTDAY~
+currentday2|1|ЕСӘТНӘ_РУЖ_2~CURRENTDAY2~
+currentdayname|1|ЕСӘТНӘ_РУЖИ_НОМ~CURRENTDAYNAME~
+currentyear|1|ЕСӘТНӘ_СОР~CURRENTYEAR~
+currenttime|1|ЕСӘТНӘ_ВАХТ~CURRENTTIME~
+currenthour|1|ЕСӘТНӘ_СААТ~CURRENTHOUR~
+localmonth|1|БУМИНӘ_МАНГ~БУМИНӘ_МАНГ_2~LOCALMONTH~LOCALMONTH2~
+localmonth1|1|БУМИНӘ_МАНГ_1~LOCALMONTH1~
+localmonthname|1|БУМИНӘ_МАНГИ_НОМ~LOCALMONTHNAME~
+localmonthnamegen|1|БУМИНӘ_МАНГИ_НОМ_ҸИНС~LOCALMONTHNAMEGEN~
+localday|1|БУМИНӘ_РУЖ~LOCALDAY~
+localday2|1|БУМИНӘ_РУЖ_2~LOCALDAY2~
+localdayname|1|БУМИНӘ_РУЖИ_НОМ~LOCALDAYNAME~
+localyear|1|БУМИНӘ_СОР~LOCALYEAR~
+localtime|1|БУМИНӘ_ВАХТ~LOCALTIME~
+localhour|1|БУМИНӘ_СААТ~LOCALHOUR~
+numberofpages|1|СӘҺИФОН_ҒӘДӘР~NUMBEROFPAGES~
+numberofarticles|1|МӘҒОЛОН_ҒӘДӘР~NUMBEROFARTICLES~
+numberoffiles|1|ФАЈЛОН_ҒӘДӘР~NUMBEROFFILES~
+numberofusers|1|ИШТИРОКӘКОН_ҒӘДӘР~NUMBEROFUSERS~
+numberofactiveusers|1|ТИЛИКӘ_ИШТИРОКӘКОН_ҒӘДӘР~NUMBEROFACTIVEUSERS~
+numberofedits|1|ДӘГИШОН_ҒӘДӘР~NUMBEROFEDITS~
+pagename|1|СӘҺИФӘ_НОМ~PAGENAME~
+pagenamee|1|СӘҺИФӘ_НОМ_2~PAGENAMEE~
+namespace|1|НОМОН_МӘКОН~NAMESPACE~
+namespacee|1|НОМОН_МӘКОН_2~NAMESPACEE~
+talkspace|1|МЫЗОКИРОН_МӘКОН~TALKSPACE~
+talkspacee|1|МЫЗОКИРОН_МӘКОН_2~TALKSPACEE~
+subjectspace|1|МӘҒОЛОН_МӘКОН~SUBJECTSPACE~ARTICLESPACE~
+subjectspacee|1|МӘҒОЛОН_МӘКОН_2~SUBJECTSPACEE~ARTICLESPACEE~
+fullpagename|1|СӘҺИФӘ_ПУРӘ_НОМ~FULLPAGENAME~
+fullpagenamee|1|СӘҺИФӘ_ПУРӘ_НОМ_2~FULLPAGENAMEE~
+subpagename|1|ЖИНТОНӘДӘ_СӘҺИФӘ_НОМ~SUBPAGENAME~
+subpagenamee|1|ЖИНТОНӘДӘ_СӘҺИФӘ_НОМ_2~SUBPAGENAMEE~
+basepagename|1|СӘҺИФӘ_НОМИ_ӘСОС~BASEPAGENAME~
+basepagenamee|1|СӘҺИФӘ_НОМИ_ӘСОС_2~BASEPAGENAMEE~
+talkpagename|1|МЫЗОКИРӘ_СӘҺИФӘ_НОМ~TALKPAGENAME~
+talkpagenamee|1|МЫЗОКИРӘ_СӘҺИФӘ_НОМ_2~TALKPAGENAMEE~
+subjectpagename|1|МӘҒОЛӘ_СӘҺИФӘ_НОМ~SUBJECTPAGENAME~ARTICLEPAGENAME~
+subjectpagenamee|1|МӘҒОЛӘ_СӘҺИФӘ_НОМ_2~SUBJECTPAGENAMEE~ARTICLEPAGENAMEE~
+msg|0|ХӘБӘ~MSG~
+subst|0|ӘВӘЗ_КАРДЕ~SUBST~
+msgnw|0|БЕВИКИ_ХӘБӘ~MSGNW~
+img_thumbnail|1|миниатјур~thumbnail~thumb~
+img_manualthumb|1|миниатјур=$1~thumbnail=$1~thumb=$1~
+img_width|1|$1пкс~$1px~
+img_page|1|сәһифә=$1~сәһифә_$1~page=$1~page $1~
+img_none|1|бе~none~
+img_right|1|росто~right~
+img_center|1|мәрәнго~center~centre~
+img_left|1|чәпо~left~
+sitename|1|САЈТИ_НОМ~SITENAME~
+localurl|0|БУМИНӘ_УНВОН~LOCALURL~
+localurle|0|БУМИНӘ_УНВОН_2~LOCALURLE~
+currentweek|1|ЕСӘТНӘ_ҺАФТӘ~CURRENTWEEK~
+currentdow|1|ЕСӘТНӘ_ҺАФТӘ_РУЖ~CURRENTDOW~
+localweek|1|БУМИНӘ_ҺАФТӘ~LOCALWEEK~
+localdow|1|БУМИНӘ_ҺАФТӘ_РУЖ~LOCALDOW~
+revisionid|1|РӘВОЈӘТИ_ID~REVISIONID~
+revisionday|1|РӘВОЈӘТИ_РУЖ~REVISIONDAY~
+revisionday2|1|РӘВОЈӘТИ_РУЖ_2~REVISIONDAY2~
+revisionmonth|1|РӘВОЈӘТИ_МАНГ~REVISIONMONTH~
+revisionmonth1|1|РӘВОЈӘТИ_МАНГ_2~REVISIONMONTH1~
+revisionyear|1|РӘВОЈӘТИ_СОР~REVISIONYEAR~
+revisiontimestamp|1|РӘВОЈӘТИ_ВАХТИ_ҒЕЈД~REVISIONTIMESTAMP~
+revisionuser|1|ИШТИРОКӘКӘ_РӘВОЈӘТ~REVISIONUSER~
+fullurl|0|ПУРӘ_УНВОН~FULLURL~
+fullurle|0|ПУРӘ_УНВОН_2~FULLURLE~
+currentversion|1|ЕСӘТНӘ_РӘВОЈӘТ~CURRENTVERSION~
+currenttimestamp|1|ЕСӘТНӘ_ВАХТИ_ҒЕЈД~CURRENTTIMESTAMP~
+localtimestamp|1|БУМИНӘ_ВАХТИ_ҒЕЈД~LOCALTIMESTAMP~
+directionmark|1|НОМӘ_ИСТИҒОМӘТ~DIRECTIONMARK~DIRMARK~
+language|0|#ЗЫВОН~#LANGUAGE~
+contentlanguage|1|МЫҒДОРИ_ЗЫВОН~CONTENTLANGUAGE~CONTENTLANG~
+pagesinnamespace|1|СӘҺИФОН_БӘ_НОМОН_МӘКОНӘДӘ~PAGESINNAMESPACE~PAGESINNS~
+pagesize|1|СӘҺИФӘ_ПАМЈӘ~PAGESIZE~
+url_wiki|0|ВИКИ~WIKI~
+namespacenumber|1|НОМОН_МӘКОН_ҒӘДӘР~NAMESPACENUMBER~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Ишамбә
+monday|Дышанбә
+tuesday|Сешанбә
+wednesday|Чошанбә
+thursday|Ҹымә шәв
+friday|Әjнә
+saturday|Шанбә
+sun|Иша
+mon|Дыш
+tue|Сеш
+wed|Чош
+thu|Ҹым
+fri|Әјн
+sat|Шан
+january|Yanvar
+february|Fevral
+march|Mart
+april|Aprel
+may_long|May
+june|İyun
+july|İyul
+august|Avqust
+september|Sentyabr
+october|Oktyabr
+november|Noyabr
+december|Dekabr
+january-gen|Јанварә манги
+february-gen|Февралә манги
+march-gen|Мартә манги
+april-gen|Апрелә манги
+may-gen|Мајә манги
+june-gen|Ијунә манги
+july-gen|Ијулә манги
+august-gen|Августә манги
+september-gen|Сентјабрә манги
+october-gen|Октјабрә манги
+november-gen|Нојабрә манги
+december-gen|Декабрә манги
+jan|Јан
+feb|Фев
+mar|Мар
+apr|Апр
+may|Мај
+jun|Ијун
+jul|Ијул
+aug|Авг
+sep|Сен
+oct|Окт
+nov|Ној
+dec|Дек
+toc|Мындәриҹот
+redirectedfrom|(~{0} чыјо унвон дәгиш кардә быә)
+allpages|Һәммәј сәһифон
+collapsible-collapse|Бурмә кардеј
+collapsible-expand|Һовуж кардеј
+categories|Категоријон
+lastmodifiedat|Ын сәһифә охонә кәрә дәгиш беј: ~{1}, ~{0}.
+thumbnail-more|Һејве кардеј
+otherlanguages|Ҹо зывононәдә
+blanknamespace|(Әсос)
+pagecategories|{{PLURAL:~{0}\u007CКатегоријә\u007CКатегоријон}}
+category_header|Сәһифон бы категоријәдә "~{0}"
+subcategories|Категоријон жинтон
+category-media-header|Медијә бы категоријәдә "~{0}"
+category-empty|''Ын категоријә бы дәғиғәдә тәјлије.''
+category-subcat-count|{{PLURAL:~{1}\u007CЫм категоријә әнчәх жинтонә жинә категоријонку ибарәте.\u007CҸәми ~{1} категоријонку {{PLURAL:~{0}\u007Cжинә категоријә\u007C~{0} жинә категоријә}} нишо доә быә.}}
+category-article-count|{{PLURAL:~{1}\u007CБы категоријәдә әнҹәх иглә сәһифәје.\u007CҸәми ~{1} сәһифонку нишо доә быә {{PLURAL:~{0}\u007Cсәһифә\u007C~{0} сәһифә}} бы категоријәдә.}}
+category-article-count-limited|Ын категоријәдә {{PLURAL:~{0}\u007C~{0} сәһифә\u007C}} һесте.
+category-file-count|{{PLURAL:~{1}\u007CБы категоријәдә әнҹәх иглә фајле.\u007CҸәми ~{1} фајлонку нишо доә быә {{PLURAL:~{0}\u007Cфајл\u007C~{0} фајл}} бы категоријәдә.}}
+category-file-count-limited|Ын категоријәдә  {{PLURAL:~{0}\u007C~{0} фајл}} һесте.
+categorytree-member-counts|Дыләдә һестыше {{PLURAL:~{0}\u007C1 жинә категоријә\u007C~{0} жинә категоријә}}, {{PLURAL:~{1}\u007C1 сәһифә\u007C~{1} сәһифә}}, ијән {{PLURAL:~{2}\u007C1 фајл\u007C~{2} фајл}}
+categorytree-num-categories|~{0} К
+categorytree-num-pages|~{0} С
+categorytree-num-files|~{0} Ф
+nextn|думотоно шә {{PLURAL:~{0}\u007C~{0}}}
+prevn|навынәни {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|(дәвом)
+bold_sample|Нимәтындә шрифт
+bold_tip|Нимәтындә шрифт
+italic_sample|Курсивә мәтн
+italic_tip|Курсивә мәтн
+link_sample|Сәбони сәрловһә
+link_tip|Дыләтонә сәбон
+headline_sample|Сәрловһә мәтн
+headline_tip|2-нә сәвијјә сәрловһә
+hidden-category-category|Нијони категоријон
+statistics|Статистика
+categorytree|Категоријон до
+categorytree-portlet|Категоријон
+categorytree-legend|Категоријон до нишо дој
+categorytree-header|Категоријә номи бынывыштән, ијән ав нишо бәбе бәнә до.\nЫм мымкуне, гирәм шымә браузерәдә AJAX һесте.\nГирәм шымәку браузери канә рәвојәте ја JavaScript быријә быә, жинә категоријон нишо дој бәнә до әбыни.
+categorytree-category|Категоријә:
+categorytree-go|Бо жәј
+categorytree-parents|Пыә-моә категоријон
+categorytree-mode-categories|әнҹәх категоријон
+categorytree-mode-pages|сывој фајлон
+categorytree-mode-all|Һәммәј сәһифон
+categorytree-collapse|бурмә кардеј
+categorytree-expand|һовуж кардеј
+categorytree-num-empty|тәј
+categorytree-load|бо жәј
+categorytree-loading|бо карде...
+categorytree-nothing-found|Ым категоријәдә жинә категоријә ни.
+categorytree-no-subcategories|категоријон жинтон ни
+categorytree-no-parent-categories|пыә-моә категоријә ни
+categorytree-no-pages|нә мәғолә һесте, нә жинә категоријон
+categorytree-not-found|Категоријә «~{0}» пәјдо быәни.
+categorytree-error|Мәлумоти бо карде сәһве.
+categorytree-retry|Быһамијән, и тикә чәш быкан ијән икәрән осә быкан.
+cite_references_link_many_format_backlink_labels|a b c d e f g h i j k l m n o p q r s t u v w x y z aa ab ac ad ae af ag ah ai aj ak al am an ao ap aq ar as at au av aw ax ay az ba bb bc bd be bf bg bh bi bj bk bl bm bn bo bp bq br bs bt bu bv bw bx by bz ca cb cc cd ce cf cg ch ci cj ck cl cm cn co cp cq cr cs ct cu cv cw cx cy cz da db dc dd de df dg dh di dj dk dl dm dn do dp dq dr ds dt du dv dw dx dy dz ea eb ec ed ee ef eg eh ei ej ek el em en eo ep eq er es et eu ev ew ex ey ez fa fb fc fd fe ff fg fh fi fj fk fl fm fn fo fp fq fr fs ft fu fv fw fx fy fz ga gb gc gd ge gf gg gh gi gj gk gl gm gn go gp gq gr gs gt gu gv gw gx gy gz ha hb hc hd he hf hg hh hi hj hk hl hm hn ho hp hq hr hs ht hu hv hw hx hy hz ia ib ic id ie if ig ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb jc jd je jf jg jh ji jj jk jl jm jn jo jp jq jr js jt ju jv jw jx jy jz ka kb kc kd ke kf kg kh ki kj kk kl km kn ko kp kq kr ks kt ku kv kw kx ky kz la lb lc ld le lf lg lh li lj lk ll lm ln lo lp lq lr ls lt lu lv lw lx ly lz ma mb mc md me mf mg mh mi mj mk ml mm mn mo mp mq mr ms mt mu mv mw mx my mz na nb nc nd ne nf ng nh ni nj nk nl nm nn no np nq nr ns nt nu nv nw nx ny nz oa ob oc od oe of og oh oi oj ok ol om on oo op oq or os ot ou ov ow ox oy oz pa pb pc pd pe pf pg ph pi pj pk pl pm pn po pp pq pr ps pt pu pv pw px py pz qa qb qc qd qe qf qg qh qi qj qk ql qm qn qo qp qq qr qs qt qu qv qw qx qy qz ra rb rc rd re rf rg rh ri rj rk rl rm rn ro rp rq rr rs rt ru rv rw rx ry rz sa sb sc sd se sf sg sh si sj sk sl sm sn so sp sq sr ss st su sv sw sx sy sz ta tb tc td te tf tg th ti tj tk tl tm tn to tp tq tr ts tt tu tv tw tx ty tz ua ub uc ud ue uf ug uh ui uj uk ul um un uo up uq ur us ut uu uv uw ux uy uz va vb vc vd ve vf vg vh vi vj vk vl vm vn vo vp vq vr vs vt vu vv vw vx vy vz wa wb wc wd we wf wg wh wi wj wk wl wm wn wo wp wq wr ws wt wu wv ww wx wy wz xa xb xc xd xe xf xg xh xi xj xk xl xm xn xo xp xq xr xs xt xu xv xw xx xy xz ya yb yc yd ye yf yg yh yi yj yk yl ym yn yo yp yq yr ys yt yu yv yw yx yy yz za zb zc zd ze zf zg zh zi zj zk zl zm zn zo zp zq zr zs zt zu zv zw zx zy zz
+proofreadpage_image|Шикил
+proofreadpage_index|Индекс
+proofreadpage_nextpage|Думотоно шә сәһифә
+proofreadpage_specialpage_label_key|Нәве
+proofreadpage_pages|~{1} {{PLURAL:~{0}\u007Cбајт\u007Cбајтон}}
+proofreadpage_source|Сәвон
+proofreadpage-group-zoom|Мигјос
+proofreadpage-group-other|ҹо
+proofreadpage-button-reset-zoom-label|Сыфтәнә памјә
+cite_page|Сәһифә:
+wikieditor-toolbar-section-help|Арајиш
+tog-underline|Линки жинтоно ријә быкәш:
+tog-hideminor|Охоминә дәгишонәдә гәдә дәгишон нишо мәдә.
+tog-hidepatrolled|Нујә дәгишон сијоһијәдә дәвинә кардә быә дәгишон нишо мәкә.
+tog-newpageshidepatrolled|Нијони огәтеј ноғо доә быә сәһифон бә тожә сәһифон сијоһиәдә
+tog-usenewrc|Охоминә дәгишон сәһифәдә ијән ноғо доә сијоһијәдә дәгишон бә дәстон ҹо кардеј (гәрәке JavaScript)
+tog-numberheadings|Автоматик башлығон нумрәләмиш быкә
+tog-watchcreations|Зијод кардеј чымы офәјә быә сәһифон ијән фајлон бә ноғо доә сијоһи
+tog-watchdefault|Зијод кардеј демы дәгиш кардә быә сәһифон ијән фајлон бә ноғо доә сијоһи
+tog-watchmoves|Зијод кардеј фајлон ијән ном дәгиш кардә быә сәһифон бә ноғо доә сијоһи
+tog-watchdeletion|Зијод кардеј фајлон ијән сәһифон, комон аз рәдд кардәме бә ноғо доә сијоһи
+tog-enotifwatchlistpages|Ноғо доә сијоһиәдә кејнә сәһифон ја фајлон дәгиш бәбен бәмы е-номә бывығанд
+tog-watchlisthideown|Чымы дәгишон ноғо доә сијһиәдә нијо кардеј
+tog-watchlisthidebots|Нијо кардеј ботон дәгишон ноғо доә сијоһиәдә
+tog-watchlisthideminor|Нијо кардеј гәдә дәгишон ноғо доә сијоһиәдә
+underline-always|Һежо
+hidden-categories|{{PLURAL:~{0}\u007CНијони категоријә\u007CНијони категоријон}}
+index-category|Индекс быә сәһифон.
+noindex-category|İndeks nibıə səhifon
+broken-file-category|Сәһифон де ко ныкардә фајлинә сәбонон
+about|Тәсвир
+article|Мәғолә
+newwindow|(нујә пенҹәдә окардеј)
+cancel|Ләғв кардеј
+moredotdotdot|Веј...
+mypage|Сәһифә
+mytalk|Мызокирон
+anontalk|Бо ын IP-унвони мызокирә
+navigation|Navigasiyə
+and| ијән
+qbfind|Нәве
+qbbrowse|Дијә кардеј
+qbedit|Сәрост кардеј
+qbpageoptions|Ым сәһифә
+qbmyoptions|Чымы сәһифон
+faq|РАП
+faqpage|Project:РАП
+actions|Һәрәкәтон
+namespaces|Номон мәконон
+variants|Вариантон
+errorpagetitle|Сәһв
+returnto|Бә сәһифә огәрдеј ~{0}.
+tagline|Материал че {{SITENAME}}
+help|Арајиш
+search|Nəve
+searchbutton|Нәве
+go|Давардеј
+searcharticle|Давардеј
+history|Сәһифә тарых
+history_short|Тарых
+printableversion|Чап кардејро рәвојәт
+permalink|Еғрорә сәбон
+print|Чап
+view|Тәмшо кардеј
+edit|Сәрост кардеј
+create|Офәјеј
+editthispage|Ым сәһифә сәрост кардеј
+create-this-page|Ым сәһифә офәјеј
+delete|Рәдд кардеј
+deletethispage|Ым сәһифә рәдд кәрдеј
+undelete_short|Бәрпо кардеј ~{0} {{PLURAL:~{0}\u007Cдәгиши\u007Cдәгишон\u007C}}
+viewdeleted_short|Дијә карде {{PLURAL:~{0}\u007Cиглә рәдд кардә быә дәгиши\u007C~{0} рәдд кардә быә дәгишон}}
+protect|Мыдофијә кардеј
+protect_change|дәгиш кардеј
+protectthispage|Ым сәһифә мыдофијә кардеј
+unprotect|Мыдофијә дәгиш кардеј
+unprotectthispage|Ын сәһифә мыдофијә дәгиш кардеј
+newpage|Тожә сәһифә
+talkpage|Ым сәһифә мызокирә кардеј
+talkpagelinktext|Mızokirə
+specialpage|Хысусијә сәһифә
+personaltools|Шәхси диләгон
+articlepage|Мәғолә дијә кардеј
+talk|Mızokirə
+views|Тәмшо кардеј
+toolbox|Диләгон
+userpage|Иштирокәкә сәһифә дијә кардеј
+projectpage|Нәхши сәһифә дијә кардеј
+imagepage|Фајли сәһифә дијә кардеј
+mediawikipage|Мәктуби сәһифә нишо быдә.
+templatepage|Ғәлиби сәһифә нишо быдә.
+viewhelppage|Араијш сәј
+categorypage|Категоријон сәһифә дијә кардеј
+viewtalkpage|Мызокирә дијә кардеј
+redirectpagesub|Увони дәгиш кардә сәһифәје
+protectedpage|Мыдофијә кардә быә сәһифә
+jumpto|Дәвардеј бә:
+jumptonavigation|навигасијә
+jumptosearch|нәве
+pool-timeout|Че блоки чәш кардә вахт сәбе.
+pool-errorunknown|Номәлумә сәһв
+aboutsite|Təsvir {{SITENAME}}
+aboutpage|Project: Тәсвир
+copyrightpage|{{ns:project}}:Мыәллифә һуғуғ
+currentevents|Есәтнә һодисон
+currentevents-url|Project: Есәтнә һодисон
+disclaimers|Çe məsuliyyətiku imtino.
+disclaimerpage|Project:Дејни бә гиј ныгәтеј
+edithelp|Арајиш бо редактә кардеј
+mainpage|Əsosə səhifə
+mainpage-description|Әсосә сәһифә
+policy-url|Project:Ғајдон
+portal|Ҹәмјәт
+portal-url|Project:Ҹәмјәти портал
+privacy|Məxfiyəti siyosət
+privacypage|Project:Мәхфијәти сијосәт
+badaccess|Дастрәси ғәләт
+badaccess-group0|Ын фәалијјәти ичра карде әзынишон.
+ok|OK
+retrievedfrom|Сәвон "~{0}"
+youhavenewmessages|Шымә сәјоне ~{0} (~{1}).
+newmessagesdifflinkplural|~{0} {{PLURAL:~{0}\u007Cохонә дәгиши\u007Cохонә дәгишон}}
+editsection|Sərost kardey
+editold|Сәрост кардеј
+viewsourceold|бешемонә коди дијә кардеј
+editlink|Сәрост кардеј
+viewsourcelink|Бешемонә коди дијә кардеј
+editsectionhint|Im semonə sərost karde: ~{0}
+showtoc|нишо дој
+hidetoc|нијо кардеј
+thisisdeleted|Дијә кардеј јаанки бәрпо кардеј ~{0}?
+viewdeleted|Дијә кардеј ~{0}?
+restorelink|{{PLURAL:~{0}\u007Cиглә рәдд кардә быә дәгиши\u007C~{0} рәдд кардә быә дәгишон}}
+site-atom-feed|~{0} Atom лента
+page-atom-feed|"~{0}" Atom лента
+red-link-title|~{0} (jıqo səhifə ni)
+nstab-main|Məğolə
+nstab-user|Иштирокәкә сәһифә
+nstab-media|Медијә сәһифә
+nstab-special|Хысусијә сәһифә
+nstab-project|Нахшә бәрәдә
+nstab-image|Фајл
+nstab-template|Ғәлиб
+nstab-category|Тиспир
+error|Сәһв
+readonly|Бә база нывыште блок быә.
+missing-article|База мәлумотон дыләдә бә ахтар кардә быә саһифон «~{0}» ~{1} барәдә мәлумот пәјдо карде ныбе.\nЖыго вәзијјәт бе бәзне бә вахтики, ым сәһифә че рәдд кардә быә сәһифә канә рәвојәте.\nГирәм ым жыго ни, жәгәдә шымә програм тәминатијәдә сәһв пәјдо кардәјоне.\nХаһиш кардәмон че сәһифә URL-и бә [[Special:ListUsers/sysop\u007Cадминистратори]] бывғандәнән.
+missingarticle-rev|(рәвојәт#: ~{0})
+missingarticle-diff|(Фәрг: ~{0}, ~{1})
+internalerror|Дыләтонә ғәләт
+internalerror_info|Дыләтонә ғәләт: ~{0}
+formerror|Сәһв: Че формә мәлумотон әкс карде ғерри мымкуне.
+cannotdelete-title|Сәһифә әбыни рәдд кардеј "~{0}"
+badtitle|Роныдоә ном
+badtitletext|Ахтар кардә быә сәһифә ном сәһве, тәјлије, јаанки сәрост доә быәнин мијонзывонон ја мијонвики номон.\nБе бәзне ки кали рәмзон сәрловһәдә око дој әбыни.
+viewsource|Дијә кардеј
+exception-nologin|Ыштәни едаштәнијоне
+yourname|Иштирокәкә ном:
+yourpassword|Парол:
+yourpasswordagain|Пароли сәнибәтон гырдә карде:
+remembermypassword|Мыни ым компутерәдә јодәдә огәт (максимум ~{0} {{PLURAL:~{0}\u007Cруж\u007Cруж}})
+login|Ыштәни едаштеј
+nav-login-createaccount|Ыштәни едаштеј / ыштәни ғејд кардовнијеј
+userlogin|Ыштәни едаштеј / ыштәни ғејд кардовнијеј
+userloginnocreate|Ыштәни едаштеј
+logout|Системәдә кој орохнијеј
+userlogout|Системәдә кој орохнијеј
+notloggedin|Ыштәни едаштәнијоне
+nologin|Иштирок кардәкәси сәһифә ни? '''~{0}'''.
+nologinlink|Иштирокәкә сәһифә офәје
+createaccount|Нујә иштирокәкә ғејд кардеј
+gotaccount|Шымә ыштәни ғејд кардәјоне? ~{0}.
+gotaccountlink|Ыштәни едаштеј
+userlogin-resetlink|Бә системә дәше мәлумоти јодәдә бекардәјоне?
+createaccountmail|бә е-номә
+createaccountreason|Сәбәб:
+mailmypassword|Нујә парол вығандеј бә Е-номә.
+loginlanguagelabel|Зывон: ~{0}
+changepassword|Пароли дәгиш кардеј
+resetpass_header|Иштирокәкә пароли дәгиш карде
+oldpassword|Канә парол:
+newpassword|Нујә парол:
+resetpass_forbidden|Парол әзыни дәгиш бе
+resetpass-submit-loggedin|Пароли дәгиш кардеј
+resetpass-submit-cancel|Ләғв кардеј
+passwordreset-username|Иштирокәкә ном:
+passwordreset-email|Е-номә унвон:
+changeemail|Е-номә унвони дәгиш кардеј
+changeemail-newemail|Е-номә тожә унвон:
+changeemail-none|(ни)
+changeemail-submit|Е-номә дәгиш кардеј
+extlink_sample|http://www.example.com сәбони сәрловһә
+extlink_tip|Хариҹә сәбон (сыханәсә http:// јодәдә огәтән)
+nowiki_sample|Формат кардә ныбә мәтн дәғандән ијо
+nowiki_tip|Вики формат кардеј бә нәзә ныстәнеј
+image_tip|Дахыл кардә быә фајл
+media_tip|Сәбон бә медијә-фајл
+sig_tip|Шымә ғол ијән вахт
+hr_tip|Уфуғијә ријә (рә-рә истифодә мәкән)
+summary|Дәгишон тәсвир:
+subject|Мывзу/сәрловһә:
+minoredit|Ым гадә дәгишије
+watchthis|Ым сәһифә тәмшо кардеј
+savearticle|Сәһифә огәтеј
+preview|Сыфтәнә нишо дој
+showpreview|Сыфтәнә нишо дој
+showdiff|Дәғандә быә дәгишон
+anoneditwarning|'''Дығғәт.''' Шымә ыштәни едәштәнијоне системәдә.\nШымә IP-унвон бә ым сәһифә дәгишон тарых ғејд бәбе.
+loginreqlink|ыштәни едаштеј
+newarticle|(Нујә)
+newarticletext|Шымә давардијон де сәбони бә сәһифә, әмма жыго сәһифә ни.\nБо сәһифә офәјеј мәтн бынывыштән жиннә пенҹәдә (мыффәссәл дијә быкән [~{0} араијшә сәһифә]).\nГирәм шымә ијо де сәһви бешијон, һиччекәни ыштә браузери "думо" егәтән.
+noarticletext|Есәт бы сәһифәдә мәтн ни.\nШымә бәзынешон [[Special:Search/{{PAGENAME}}\u007Cпәјдо кардеј конҹо ым ном һесте]] бә ҹо мәғолонәдә,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} журналон ујғунә нывыштәјон пәјдо кардеј],\nјаанки '''[{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}}де жыго номи сәһифә офәјеј ]'''</span>.
+noarticletext-nopermission|Есәт бы сәһифәдә мәтн ни. \nШымә бәзынејон [[Special:Search/{{PAGENAME}}\u007Cпәјдо кардеј конҹо ым ном һесте]] бә ҹо мәғолонәдә,\nјаанки <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} журналон ујғунә нывыштәјон пәјдо кардеј].</span>, интаси шымәку изн ни ым сәһифә офәје.
+previewnote|'''Јодәдә огәтән ки ым һәлә сыфтәнә нишо доје.'''\nШымә дәгишон һәлә огәтә быәнин!
+editing|Редәктә кардеј ~{0}
+editingsection|Редактә кардеј ~{0} (ғысм)
+yourtext|Шымә мәтн
+templatesused|{{PLURAL:~{0}\u007CҒәлиб:\u007CҒәлибон}} есәтнә сәһифә истифодә кардејдә:
+template-protected|(Мыдофиә кардә быә)
+template-semiprotected|tiki muhafizə bıə
+hiddencategories|Ын сәһифә аидијотыш һесте бә {{PLURAL:~{0}\u007C1 нијони категоријә\u007C~{0} нијони категоријон}}:
+permissionserrorstext-withaction|Шымәку ни иҹозә ба ым һәрәкәти «'''~{1}'''», бә жыго {{PLURAL:~{0}\u007Cсәбәби\u007Cсәбәбон}} горнә:
+recreate-moveddeleted-warn|''Дыггәт! Шымә нафко позулмуш быә сәһифон бәрпа кардеон пидә.'''\n\nЫм сәһифә чоәдәнә дуз карде зәруријјәти јохләмишкәнән.\nЖинтоно нышу доә быә бычи ым сәһифә позулмуш быә.
+moveddeleted-notice|Ым сәһифә молә быә.\nАрајиши горнә жинтоно нишо доә быән че сәһифә молә ијән ном дәгиш кардә нывыштәјон.
+post-expand-template-inclusion-warning|'''Дығғәт:''' Дахыл кардә быә ғәлибон сәкыштә памјә ве јоле.\nХәјли ғәлибон дахыл ныбабен.
+post-expand-template-inclusion-category|Бо сәһифон дахыл кардә быә ғәлибон рәво зынә быә улгу бә кәно бешә
+post-expand-template-argument-warning|'''Дығғәт:''' Ым сәһифәдә ән ками иглә аргумент һесте, ә аргумент ки һәддиндән зијодә памјә һестыше бо окарде.\nЖыго аргументон вадоә быән.
+post-expand-template-argument-category|Вадо быә ғәлибон аргументон огәтә сәһифон
+viewpagelogs|Бо ым сәһифә журналон нишо дој
+currentrev-asof|Есәтнә рәвојәт бә ~{0}
+revisionasof|Рәвојәт ~{0}
+revision-info|Рәвојәти мәлумот: ~{0}; ~{1}
+previousrevision|← Навынәни
+nextrevision|Думотоно шә →
+currentrevisionlink|Есәтнә рәвојәт
+cur|есәт.
+next|думотоно шә
+last|навы.
+page_first|иминә
+page_last|охонә
+histlegend|Рәвојәтон выжнијеј: кон сәһифә рәвојәтон фәрғи виндеј пидәјоне нышон быжәнән ијән егәтән "Enter".<br />\nИзоһ: '''(исә)''' = де исәтнә рәвојәти фәрғ, '''(охо)''' = де навконә рәвојәти фәрғ, '''(г)''' = гәдә дәгиш.
+history-fieldset-title|Тарыхи дијә кардеј
+history-show-deleted|Әнҹәх рәдд кардә быән
+histfirst|Ән канә
+histlast|Охонәни
+historyempty|(тәјли)
+history-feed-title|Дәгишон тарых
+history-feed-description|Ым сәһифә дәгишон тарых викиәдә
+history-feed-item-nocomment|~{0} бә ~{1}-дә
+rev-delundel|нишо дој/нијо кардеј
+rev-showdeleted|нишо дој
+revdelete-show-file-submit|Бәле
+revdelete-radio-set|Бәле
+revdelete-radio-unset|Не
+revdelete-log|Сәбәб:
+revdel-restore|Винде дәрәҹә дәгиш карде
+pagehist|Сәһифә тарых
+revdelete-reasonotherlist|Ҹо сәбәб
+mergehistory-reason|Сәбәб:
+revertmerge|Бахш кардеј
+history-title|~{0}: Дәгишон тарых
+lineno|Сәтыр ~{0}:
+compareselectedversions|Сәчын кардә быә рәвојәтон мығојисә кардеј.
+editundo|ләғв кардеј
+searchresults|Нәве нәтиҹон
+searchresults-title|Нәве «~{0}»
+prevn-title|Навынәни ~{0} {{PLURAL:~{0}\u007Cнывыштәј\u007Cнывыштәјон}}
+nextn-title|Думотоно шә ~{0} {{PLURAL:~{0}\u007Cнывыштәј\u007Cнывыштәјон}}
+shown-title|Нишо дој ~{0} {{PLURAL:~{0}\u007Cнывыштәј\u007Cнывыштәјон}} сәһифәдә
+viewprevnext|Дијә кардеј (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|'''Бы вики-нәхшәдә һесте сәһифә «[[:~{0}]]»'''
+searchmenu-new|'''Сәһифә офәјеј «[[:~{0}]]» бә ым вики-нахшәдә!'''
+searchprofile-articles|Әсосә сәһифон
+searchprofile-images|Мултимедијә
+searchprofile-everything|Һар вырәдә
+searchprofile-advanced|һовуж
+searchprofile-articles-tooltip|Нәве бә ~{0}
+searchprofile-images-tooltip|Фајлон нәве
+searchprofile-everything-tooltip|Һәммәј сәһифонәдә нәве (мызокирә сәһифонәдән)
+searchprofile-advanced-tooltip|Бә асбардә быә номон мәкононәдә нәве
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 sıxan\u007C~{1} sıxanon}})
+search-result-category-size|{{PLURAL:~{0}\u007C~{0} елемент\u007C~{0} елементон}} ({{PLURAL:~{1}\u007C~{1} жинә категоријә~{1} жинә категоријон }}, {{PLURAL:~{2}\u007C~{2} фајл\u007C~{2} фајлон}})
+search-redirect|(Унвони дәгиш кардеј  ~{0})
+search-section|(семонә ~{0})
+search-suggest|Еһтимол шымә нәзәрәдә ым гәтејдәбијон: ~{0}
+search-interwiki-more|(һәнијән)
+searchrelated|ангыл кардә быә
+searchall|Һәммәј
+search-nonefound|Бә шымә хәбәсә ујғун омә сәкыштә пәјдо ныбе.
+powersearch-toggleall|Һәммәј
+preferences|Кукон
+mypreferences|Кукон
+skin-preview|Сыфтәнә нишо дој
+prefs-user-pages|Иштирокәкә сәһифон
+prefs-rc|Ән нујә дәгишон
+prefs-changeemail|Е-номә дәгиш кардеј
+prefs-email|Е-номә кукон
+saveprefs|Огәтеј
+rows|Сәтырон:
+searchresultshead|Нәве
+timezoneregion-america|Америка
+timezoneregion-europe|Авропа
+prefs-namespaces|Номон мәконон
+prefs-files|Фајлон
+prefs-custom-css|Хысуси CSS
+youremail|E-номә:
+username|{{GENDER:~{0}\u007CИштирокәкә ном}}:
+yourrealname|Шымә әсыл ном:
+yourlanguage|Зывон:
+email|E-номә
+prefs-help-email|Е-номә унвони нывыштеј һукман ни, интаси ав бә шымә гәрәк бәбе гирам шымә пароли виро бебәкардејон.
+prefs-help-email-others|Комәг бәка бә ҹо иштироәкон шымә е-номә унвони оныкарде, че шымә шәхси сәһифәдә быә линки де шымә әлогә огәтеј.
+userrights-reason|Сәбәб:
+group-user|Иштирокәкон
+newuserlogpage|Иштирокәкон ғеидијоти журнал
+action-edit|Ым сәһифә сәрост кардеј
+nchanges|~{0} {{PLURAL:~{0}\u007Cдәгиши\u007Cдәгишон}}
+recentchanges|Ән нујә дәгишон
+recentchanges-legend|Ән нујә дәгишон кукон
+recentchanges-summary|Тәмшо быкән бы сәһифәдә че вики охоминә дәгишон нишо доә быән.
+recentchanges-feed-description|Ым каналәдә быә охонә дәгишон дығғәтәдә огәт.
+recentchanges-label-newpage|Де ым дәгиши тожә сәһифә сохтә бе
+recentchanges-label-minor|Ым гадә дәгишије
+recentchanges-label-bot|Ым дәгиши бот кардәше
+recentchanges-label-unpatrolled|Im redaktə hələ nəzərədə dəvardəni
+rcnotefrom|Бә жиј доә быән дәгишон че вахтику '''~{1}''' (тосә '''~{0}''').
+rclistfrom|~{2} ~{1} вахтику дәгишон нишо быдә
+rcshowhideminor|~{0} гәдәлијә дәгишон
+rcshowhidebots|~{0} ботон
+rcshowhideliu|~{0} ыштәни едаштә иштирокәкон
+rcshowhideanons|~{0} әнәномә иштирокәкон
+rcshowhidepatr|~{0} осә кардә быә дәгишон
+rcshowhidemine|~{0} ыштә дәгишон
+rclinks|Нишо дој охонә ~{0} дәгишон бә охонәни ~{1} ружон<br />~{2}
+diff|фәрғ.
+hist|тарых
+hide|Нијо кардеј
+show|Нишо дој
+minoreditletter|г
+newpageletter|Т
+boteditletter|б
+rc_categories_any|Һар гылә
+newsectionsummary|/* ~{0} */ нујә мывзу
+rc-enhanced-expand|Тәфсилотон нишо дој (JavaScript истифодә бедә)
+rc-enhanced-hide|Тәфсилотон нијо кардеј
+recentchangeslinked|Ангыл кардә быә дәгишон
+recentchangeslinked-toolbox|Ангыл кардә быә дәгишон
+recentchangeslinked-title|Ангыл кардә быә дәгишон бо "~{0}"
+recentchangeslinked-summary|Бә ым сәһифонәдә охонә дәгишон сијоһије, бә кон сәһифон сәбон вардә ын сәһифә (јаанки дахыл кардә быән бә нишо доә быә категоријә).\n[[Special:Watchlist\u007CШымә ноғо доә сијоһиәдә]] быә сәһифон, де '''ғалинә''' шрифти нишо доә быән.
+recentchangeslinked-page|Сәһифә ном:
+recentchangeslinked-to|Бә нишо доә быә сәһифә сәбон вардә сәһифонәдә дәгишон нишо дој
+upload|Фајли бо жәј
+uploadlogpage|Бо кардә быә чијон журнал
+filedesc|Кыртә тәсвир
+license|Лисензијә:
+license-header|Лисензијә
+imgfile|фајл
+listfiles|Фајлон сијоһи
+listfiles_thumb|Гәдә шикил
+listfiles_name|Фајли ном
+listfiles_user|Иштирокәкә
+listfiles_size|Улгу
+listfiles_description|Тәсвир
+listfiles_count|Рәвојәт
+file-anchor-link|Фајл
+filehist|Фајли тарых
+filehist-help|Фајли сыфтә рәвојәти виндеј горә бә тарых/вахт егәтән.
+filehist-deleteall|һәммәј рәдд кардеј
+filehist-revert|Огард
+filehist-current|есәтнә
+filehist-datetime|Тарых/Вахт
+filehist-thumb|Гәдә шикил
+filehist-thumbtext|Миниатјур бо рәвојәти че вахтику ~{0}
+filehist-user|Иштирокәкә
+filehist-dimensions|Објекти улгу
+filehist-comment|Ғејд
+imagelinks|Фајли око доје
+linkstoimage|{{PLURAL:~{0}\u007Cсәһифә\u007C~{0} сәһифә}} сәбон вардә бә ын фајл:
+nolinkstoimage|Бә ым фајли сәбон вардә сәһифон нин.
+sharedupload-desc-here|Ым фајл чыјо пегәтә быә ~{0} ијән бәзыне истифодә бе бә ҹо нәхшонәдә.\nМәлумот чн әчәј [~{1} тәсвири сәһифәку] бә жиј доә быә.
+filedelete-comment|Сәбәб:
+filedelete-submit|Рәдд кардеј
+randompage|Рајрастә мәғолә
+nbytes|~{0} {{PLURAL:~{0}\u007Cбајт\u007Cбајтон}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cузв\u007Cузвон}}
+prefixindex|Һәммәј сәһифон де префикси
+usercreated|{{GENDER:~{2}\u007CОфәјеј быә}} ~{0} ~{1}
+newpages|Тожә сәһифон
+move|Ном дәгиш кардеј
+pager-newer-n|{{PLURAL:~{0}\u007Cән нујә1\u007Cән нујә ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007C1 тикиән канә\u007C~{0} ән канә}}
+booksources|Китобон сәвонон
+booksources-search-legend|Китоби барәдә мәлумоти нәве
+log|Журналон
+allarticles|Һәммәј сәһифон
+allpagessubmit|Бә вырә роснијеј
+linksearch-line|~{1}-ку сәбон вардә бә ~{0}
+listgrouprights-members|(иштирокәкон сијоһи)
+emailuser|Номә бә иштирокәкә
+watchlist|Ноғо доә сијоһи
+mywatchlist|Чәшәвәно кардә сијоһи
+watchlistfor2|Бо ~{0} ~{1}
+watch|Думотоно егыниеј
+unwatch|Думотоно ныегыниеј
+watchlist-details|Мызокирә сәһифон ныашмардеј, шымә ноғо доә сијоһиәдә {{PLURAL:~{0}\u007C~{0} сәһифәје\u007C~{0} сәһифәје}}.
+wlshowlast|Нишо дој бә охонә ~{0} саат ~{1} руж
+watchlist-options|Ноғо доә сијоһи пеғандон
+actioncomplete|Һәрәкәт иҹро кардә быә
+actionfailed|Һәрәкәт иҹро кардә бәни
+dellogpage|Рәдд кардә быә чијон журнал
+deletecomment|Сәбәб:
+rollbacklink|Окырнијеј
+protectlogpage|Мыдофијә журнал
+protectedarticle|мыдофијә быә "[[~{0}]]"
+protectcomment|Сәбәб:
+undeletelink|чәшику дәвонијеј/бәрпо кардеј
+undeleteviewlink|тәмшо кардеј
+undeletecomment|Сәбәб:
+undelete-search-submit|Нәве
+undelete-show-file-submit|Бәле
+namespace|Номон мәкон:
+invert|Выжнијә быәгылон дәгишкә
+contributions|{{GENDER:~{0}\u007CИштирокәкә}} гәнҹ
+contributions-title|Иштирокәкә гәнҹ ~{0}
+mycontris|Гәнҹ
+contribsub2|Гәнҹ ~{0} (~{1})
+uctop|(есәтнә)
+month|Че мангику (һәнијән рә):
+year|Че сорику (һәнијән рә):
+sp-contributions-newbies|Әнҹәх нујә иштирокәкон гәнҹи нишо дој
+sp-contributions-blocklog|бастә быә чијон
+sp-contributions-uploads|бо жә быә чијон
+sp-contributions-logs|журналон
+sp-contributions-talk|мызокирә
+sp-contributions-search|Гәнҹи нәве
+sp-contributions-username|IP-унвон јаанки иштироәкә ном:
+sp-contributions-toponly|Нишо дој дәгишон, ком гылә ән охонә рәвојәтонин
+sp-contributions-submit|Нәве
+whatlinkshere|Сәбонон ијо
+whatlinkshere-title|Сәһифон, сәбон вардән бә "~{0}"
+whatlinkshere-page|Сәһифә:
+linkshere|Ым сәһифон сәбон вардән ијо ''[[:~{0}]]''':
+nolinkshere|Бә ым сәһифә ҹо сәһифонку сәбонон нин '''[[:~{0}]]'''.
+isredirect|унвони дәгиш кардә сәһифәје
+istemplate|әловә
+isimage|фајлинә сәбон
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cнавынәни\u007Cнавынәни ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cдумотоно шә\u007Cдумотоно шә ~{0}}}
+whatlinkshere-links|← сәбонон
+whatlinkshere-hideredirs|~{0} бә тожә унвон вығандеј
+whatlinkshere-hidetrans|~{0} әловон
+whatlinkshere-hidelinks|~{0} сәбонон
+whatlinkshere-hideimages|~{0} фајлинә сәбонон
+whatlinkshere-filters|Филтрон
+ipbreason|Сәбәб:
+ipboptions|2 саат:2 hours,1 руж:1 day,3 руж:3 days,1 һафтә:1 week,2 һафтә:2 weeks,1 манг:1 month,3 манг:3 months,6 манг:6 months,1 сор:1 year,бемыһләт:infinite
+ipblocklist|Бастә быә иштирокәкон
+blocklist-reason|Сәбәб
+ipblocklist-submit|Нәве
+blocklink|Бә гырд гәтеј
+unblocklink|Ошко кардеј
+change-blocklink|Блок быә ҹо дәгиш кардеј
+contribslink|Koməqon
+blocklogpage|Блок быәјон
+blocklogentry|бастәше [[~{0}]] бә ын мыддәт ~{1} ~{2}
+block-log-flags-nocreate|нујә иштирокәкон ғејд карде ғәдәғәне
+move-page-legend|Сәһифә номи дәгиш карде
+newtitle|Нујә ном:
+movepagebtn|Сәһифә номи дәгиш кардеј
+movelogpage|Ном дәгиш кардә быә чијон журнал
+revertmove|Бә кәно окырније
+export|Сәһифон ихроҹ кардеј
+export-addcat|Зијод кардеј
+export-addns|Зијод кардеј
+allmessagesname|Хәбә
+allmessagesdefault|Иминә огәтә быә мәтн
+allmessages-filter-all|Һәммәј
+allmessages-filter-submit|Давард
+thumbnail_error|Гәдә шикили туму кардејәдә сәһв: ~{0}
+tooltip-pt-userpage|Шымә иштирокәкә сәһифә
+tooltip-pt-mytalk|Шымә мызокирон сәһифә
+tooltip-pt-preferences|Шымә кукон
+tooltip-pt-watchlist|Сәһифон сијоһи, конҹо шымә де дығғәти дијә кардејдәјон бә дәгишон
+tooltip-pt-mycontris|Шымә гәнҹон сијоһи
+tooltip-pt-login|Ијо бәбе ыштәни ғејд кардовнијеј системәдә, интаси ым һукман ни
+tooltip-pt-logout|Системәдә кој орохнијеј
+tooltip-ca-talk|Сәһифә мығдори бәрәдә мызокирә
+tooltip-ca-edit|Ым сәһифә бәбе дагиш кардеј. Быһамијән, огәтеј бә нав, "сыфтәнә нишо дој" истифодә быкән
+tooltip-ca-addsection|Нујә ғысм офәјеј
+tooltip-ca-viewsource|Ым сәһифә мыдофијә быә дагиш кардеку, әммә шымә бәзынешон дијә кардеј ијән сурәт бекардеј әчәј бешемонә мәтни
+tooltip-ca-history|Сәһифә дәгишон журнал
+tooltip-ca-protect|Ым сәһифә дагиш кардеку мыдофијә кардеј
+tooltip-ca-delete|Ым сәһифә рәдд кәрдеј
+tooltip-ca-move|Сәһифә номи дәгиш кардеј
+tooltip-ca-watch|Ым сәһифә зијод кардеј бә шымә нығо доә сијоһи
+tooltip-ca-unwatch|Рәдд кардеј ым сәһифә шымә ноғо доә сијоһиәдә
+tooltip-search|Nəve {{SITENAME}}
+tooltip-search-go|Гирәм һесте дырыст бәнә бы номи сәһифә бәврә дәвардеј
+tooltip-search-fulltext|Səhifon pəydo kardey de ın mətni
+tooltip-p-logo|Dəvardey bə əsosə səhifə
+tooltip-n-mainpage|Дәвардеј бә әсосә сәһифә
+tooltip-n-mainpage-description|Дәвардеј бә әсосә сәһифә
+tooltip-n-portal|Naxşə barədə, çiç şımə bəzneyon ıyo kardey, iyən konco çiç heste
+tooltip-n-currentevents|Есәтнә һодисон сијоһи
+tooltip-n-recentchanges|Oxonə dəqişon siyohi
+tooltip-n-randompage|Rayrastə səhifə diyə kardey
+tooltip-n-help|Arayişə kitobçə bo ın naxşə
+tooltip-t-whatlinkshere|Бә ым сәһифә сәбон вардә һәммәј вики сәһифон сијоһи
+tooltip-t-recentchangeslinked|Охонә дәгишон сәһифонәдә, бә ком сәһифон сәбон вардә ым сәһифә
+tooltip-feed-atom|Транслјасијә кардеј бә Atom бо ым сәһифә
+tooltip-t-contributions|Че иштирок кардәкәси дагиш кардә быә сәһифон сијоһи
+tooltip-t-emailuser|Бы иштироәкә номә вығәнде
+tooltip-t-upload|Шикилон јаанки мултимедијә фајлон бо жај
+tooltip-t-specialpages|Xıdmətə səhifon siyohi
+tooltip-t-print|Ым сәһифә рәвојәт бо чап кардеј
+tooltip-t-permalink|Бә ым сәһифә рәвојәти еғрорә сәбон
+tooltip-ca-nstab-main|Мәғолә мығдор
+tooltip-ca-nstab-user|Иштирок кардәкәси сәһифә
+tooltip-ca-nstab-media|Медиа-фајл
+tooltip-ca-nstab-special|Ым хыдмәтә сәһифәје бычыми горә дәгиш кардеј әбыни
+tooltip-ca-nstab-project|Нәхши сәһифә
+tooltip-ca-nstab-image|Фајли сәһифә
+tooltip-ca-nstab-template|Ғәлиби сәһифә
+tooltip-ca-nstab-category|Категоријон сәһифә
+tooltip-minoredit|Ым дәгиши бәнә беәһмијәт ғејд кардеј.
+tooltip-save|Шымә дәгишон огәтеј
+tooltip-preview|Сәһифә сыфтәнә нишо дој, быһамијән огәтеј бә нав истифодә быкән!
+tooltip-diff|Бешемонә мәтни һәхәдә сохтә быә дәгишон нишо дој.
+tooltip-compareselectedversions|Че ым сәһифә ды гылә выжнијә быә рәвојәтон мијонәдә фәрғи едјәсеј.
+tooltip-watch|Ым сәһифә зијод кардеј бә ыштә нығо доә сијоһи
+tooltip-upload|Бо жәј бино кардеј
+tooltip-rollback|Охонә редактори дәгиш кардә быә чијон де и гылә егәте ләғв кардеј
+tooltip-undo|Дәғандә дәгиши рәдд кардеј ијән "сыфтәнә нишо дој" окардеј, де ләғви сәбәби нышон дој имкони.
+tooltip-summary|Кыртә тәсвир бынывыштән
+pageinfo-header-edits|Дәгиш кардә быә чијон тарых
+pageinfo-redirects-value|~{0}
+previousdiff|← Навынәни дәгиши
+nextdiff|Думотоно шә дәгиши →
+file-info-size|~{0} × ~{1} пиксел, фајли памјә: ~{2}, MIME тип: ~{3}
+file-nohires|Ән барзә рәвојәт ни.
+svg-long-desc|SVG фајл, номинәләдә ~{0} × ~{1} пиксел, фајли памјә: ~{2}
+show-big-image|Тикәјән јолә кејфијјәтинә шикил
+ilsubmit|Нәве
+bad_image_list|Формат бәпе быбу жыго:\n\nБә һисоб сә быәбен әнҹәх сијоһи әсосон (де * рәмзи бино быә сәтырон).\nСәтыри иминә сәбон бәпе быбу сәбон бә ғәдәғән кардә быә бо дәғанде шикили.\nПешонә сәбонон бә һамонә сәтырәдә бәнә истино дијә кардә бәбен, јәни мәғолон, бә коврә шикил дахыл карде бәзне бе.
+metadata|Метамәлумотон
+metadata-help|Ым фајләдә фотоапарати јаанки сканери әловә кардә быә мәлумотон һестин. Гирәм фајл сохте бә пешто сәрост кардә быә, бе бәзнеки кали мәлумотон ијо нишо дојәдә фәрғ бәдон.
+metadata-fields|Кејнә шикили сәһифәдә метадата ҹәдвәл гырдә карда быә бәвәдә бы сијоһиәдә гылә-гылә ашмардә быә метадата шикили мәрон виндеј бәбе. \nӘмандәј мәрон нијони бәманден.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|Һовужи
+exif-imagelength|Былынди
+exif-source|Сәвон
+exif-languagecode|Зывон
+exif-gaincontrol-0|Ни
+exif-saturation-0|Ади
+exif-dc-publisher|Нәшрәкә
+namespacesall|һәммәј
+monthsall|һәммәј
+table_pager_limit_submit|Давард
+watchlisttools-view|Сәһифонәдә дәгишон сијоһику
+watchlisttools-edit|Дијә кардеј/сәрост кардеј сијоһи
+watchlisttools-raw|Сәрост кардеј бәнә мәтни
+duplicate-defaultsort|'''Дыггәт:''' Еһтимал кардә быә "~{1}" классификасијә ачари нафконә "~{0}" классификасијә ачари етиборсоз кардә
+version|Рәвојәт
+version-specialpages|Хысусијә сәһифон
+version-entrypoints-header-url|URL
+fileduplicatesearch-submit|Нәве
+specialpages|Хысусијә сәһифон
+external_image_whitelist| #Ым сәтри огәтәнән чокнәј әв һесте<pre>\n#Рә рә истифадә быә фрагментон ијо быдәнән (ә һиссә, че // мијонәдә бедә )\n#Әвон ды харичи шикили URL и дуз бәбен.\n#Дуз омә гылә бәнә шикили нишо бәбе, амандәни бәнә шикили линк нишо бәбе.\n#Сәтрон де # комментариј һисоб бедән.\n#Сәтрон бә регистри һәссос нин.\n\n#Рә рә око доә быә фрагментон че сәтри пентоно ијо быдәнән. Ым сәтри огәтәнән чокнәј һесте.</pre>
+tag-filter|[[Special:Tags\u007Cнышонон]] филтр:
+tags-title|Нышонон
+']:>
+).lang
+;

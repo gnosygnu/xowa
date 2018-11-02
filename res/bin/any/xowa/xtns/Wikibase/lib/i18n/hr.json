@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"MaGa"
+		]
+	},
+	"wikibase-error-unexpected": "Greška: $1",
+	"wikibase-replicationnote": "Molimo Vas, vodite računa da može proći nekoliko minuta dok izmjene ne budu vidljive na svim wikijima."
+}

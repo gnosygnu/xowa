@@ -1,0 +1,684 @@
+this
+.fallback_load('da')
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|søndåg
+monday|måndåg
+tuesday|tirsdåg
+wednesday|ønsdåg
+thursday|tårsdåg
+friday|fredåg
+saturday|lørsdåg
+sun|søn
+mon|mån
+tue|tir
+wed|øns
+thu|tår
+fri|fre
+sat|lør
+january|januar
+february|februar
+march|mårts
+april|åpril
+may_long|mæ
+june|juni
+july|juli
+august|ågust
+september|september
+october|oktober
+november|november
+december|desember
+january-gen|januars
+february-gen|februars
+march-gen|mårtses
+april-gen|åprils
+may-gen|mæs
+june-gen|juniis
+july-gen|juliis
+august-gen|ågusts
+september-gen|septembers
+october-gen|oktobers
+november-gen|novembers
+december-gen|desembers
+jan|jan
+feb|feb
+mar|mår
+apr|åpr
+may|mæ
+jun|jun
+jul|jul
+aug|ågu
+sep|sep
+oct|okt
+nov|nov
+dec|des
+toc|Endholtsførtegnelse
+redirectedfrom|(Åmstyret frå ~{0})
+allpages|Åle ertikler
+prevpage|Førge side (~{0})
+nextpage|Næste side (~{0})
+categories|Klynger
+lastmodifiedat|Denne side blev senest ændret den ~{1}, ~{0}.
+thumbnail-more|Førstør
+otherlanguages|Andre språĝ
+blanknamespace|(Ertikler)
+pagecategories|{{PLURAL:~{0}\u007CKlynge\u007CKlynger}}
+category_header|Ertikler i'n klynge "~{0}"
+subcategories|Underklynger
+category-media-header|Medier i'n klynge „~{0}“
+category-empty|''Denne klynge endeholter før øjeblikket æ verke sider æller medie-gøret.''
+nextn|nægste {{PLURAL:~{0}\u007C~{0}}}
+prevn|førge {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|førtgøte
+bold_sample|Fed skrevselenger
+bold_tip|Fed skrevselenger
+italic_sample|Skyn skrevselenger
+italic_tip|Skyn skrevselenger
+link_sample|Henvesnenge
+link_tip|Ensende henvesnenge
+headline_sample|Skrevselenger til åverskreft
+headline_tip|Skå 2 åverskreft
+hidden-category-category|Skjulte klynger
+statistics|Sensje
+categorytree|Klyngetræ
+categorytree-desc|AJAX based gadget til display a [[Special:CategoryTree\u007Cklynge struktur]] ener wiki
+categorytree-header|Indtast navnet på en kategori for at se indholdet som et træ. Bemærk at dette kræver avanceret JavaScript-funktionalitet kendt som AJAX, det verker ig'n hves du harst en meget gammel browser zller hves du harst slået JavaScript frå.
+categorytree-category|Klynge:
+categorytree-go|Henter
+categorytree-parents|Åverklynger
+categorytree-mode-categories|ves kun klynger
+categorytree-mode-pages|sider undtaget billeter
+categorytree-mode-all|ål sider
+categorytree-collapse|fold sammen
+categorytree-expand|fold ud
+categorytree-load|hent
+categorytree-loading|endlæser
+categorytree-nothing-found|Ig'n funder, desvære.
+categorytree-no-subcategories|Ig'n underklynger.
+categorytree-no-pages|Ig'n ertikler æller underklynger.
+categorytree-not-found|Æ klynge ''~{0}'' blev ekke fundet
+categorytree-error|Der åpstød et pråblæm under endlæsnenge åf data.
+categorytree-retry|Vent et øjeblek og prøv egen.
+cite_error|Fodnåtfejl: ~{0}
+cite_error_ref_numeric_key|Ugyldigt <code>&lt;ref&gt;</code>-tag; "name" kan ikke være et simpelt heltal, brug en beskrivende titel
+cite_error_ref_no_key|Ugyldigt <code>&lt;ref&gt;</code>-tag: Et <code>&lt;ref&gt;</code>-tag uden indhold skal have et navn
+cite_error_ref_too_many_keys|Ugyldigt <code>&lt;ref&gt;</code>-tag: Ugyldege navne, fx før mange
+cite_error_ref_no_input|Ugyldigt <code>&lt;ref&gt;</code>-tag: Et <code>&lt;ref&gt;</code>-tag uden navn skal have indhold
+cite_error_references_invalid_parameters|Ugyldig <code>&lt;references&gt;</code>-tag: Parametre er ikke tilladt, brug i stedet <code>&lt;references /&gt;</code>
+cite_error_references_no_backlink_label|For mange <code>&lt;ref&gt;</code>-tags har det samme "name", tillad flere i beskeden <nowiki>[[MediaWiki:Cite_references_link_many_format_backlink_labels]]</nowiki>
+cite_error_references_no_text|Ugyldigt <code>&lt;ref&gt;</code>-tag: Der er ikke specificeret nogen fodnotetekst til navnet <code>~{0}</code>
+poem-desc|Tilføje <code>&lt;poem&gt;</code> tag før digt formåter
+proofreadpage_desc|Kan semple ándrenger der tekst til æ original sken
+proofreadpage_image|Billet
+proofreadpage_index|Indeks
+proofreadpage_nextpage|Følgende pæge
+proofreadpage_prevpage|Førge pæge
+proofreadpage_header|Åverskreft (noinclude):
+proofreadpage_body|Pæge kåm (til være transkluded):
+proofreadpage_footer|Fåt (noinclude):
+proofreadpage_toggleheaders|toggle noinclude seksje sænhvårdeghed
+proofreadpage_quality1_category|Ekke sæn
+proofreadpage_quality2_category|Pråblæmåtisk
+proofreadpage_quality3_category|Sæn
+proofreadpage_quality4_category|Vålidærn
+proofreadpage_index_listofpages|Liste der pæger
+proofreadpage_image_message|Link til æ indeks pæge
+proofreadpage_page_status|Pægeståt
+proofreadpage_js_attributes|Skrever Titel År Udgæver
+proofreadpage_index_attributes|Skrever\nTitel\nÅr\u007CÅr der publikåsje\nUdgæver\nSårs\nBillet\u007CFørkåntsbillet\nStrøk\u007C\u007C20\nAnmarker\u007C\u007C10
+cite_article_link|Fodnåter denne ertikel
+cite|Fodnåt
+cite_page|Side:
+cite_submit|Fodnåt
+sitesupport|Støtside
+tooltip-n-sitesupport|Støt os
+tog-underline|Understreg henvesnenger
+tog-hideminor|Skjul mendre ændrenger i'n liste åver seneste ændrenger
+tog-extendwatchlist|Udvedet liste ve seneste ændrenger
+tog-usenewrc|Førbedret liste åver seneste ændrenger (JavaScript)
+tog-numberheadings|Åtåmatisk nåmererenge åf åverskrefter
+tog-showtoolbar|Ves værktøjslenje til redigærenge
+tog-editondblclick|Redigær sider ve dåbeltklik
+tog-editsectiononrightclick|Redigær åfsnet ve at klikke på deres titler
+tog-watchcreations|Tilføj sider a åpretter til miin åvervågnengsliste
+tog-watchdefault|Tilføj sider a redigærer til miin åvervågnengsliste
+tog-watchmoves|Tilføj sider a flytter til miin åvervågnengsliste
+tog-watchdeletion|Tilføj sider a sletter til miin åvervågnengsliste
+tog-minordefault|Markær søm standård ål redigærenge søm mendre
+tog-previewontop|Ves førhåndsvesnenge åver æ rædigerengsboks
+tog-previewonfirst|Ves førhåndsvesnenge når du stårtst ve at redigære
+tog-enotifwatchlistpages|Send mig en e-mail ve sideændrenger
+tog-enotifusertalkpages|Send mig en e-mail når miin brugerdiskusjeside ændres
+tog-enotifminoredits|Send mig også en e-mail ve mendre ændrenger åf åvervågede sider
+tog-enotifrevealaddr|Ves miin e-mail-adresse i mails ve besked ændrenger'm
+tog-shownumberswatching|Ves åntal brugere, der åvervåger
+tog-fancysig|Signaturer uden åtåmatisk henvesnenge
+tog-uselivepreview|Brug åtåmatisk førhåndsvesnenge (eksperimentel)
+tog-forceeditsummary|Advar, hves sammenfatnenge mangler ve gemnenge
+tog-watchlisthideown|Skjul egne ændrenger i'n åvervågnengsliste
+tog-watchlisthidebots|Skjul ændrenger frå bots i'n åvervågnengsliste
+tog-watchlisthideminor|Skjul mendre ændrenger i'n åvervågnengsliste
+tog-ccmeonemails|Send mig kopier åf e-mails, søm a sender til andre brugere.
+tog-diffonly|Ves ve versjesammenlegnenger kun førskelle, ekke'n hele side
+tog-showhiddencats|Ves skjulte klynger
+underline-always|åltid
+underline-never|åldreg
+underline-default|æfter brovserendstellenge
+hidden-categories|{{PLURAL:~{0}\u007CSkjult klynge\u007CSkjulte klynger}}
+about|Åm
+article|Ertikel
+newwindow|(åbner i et nyt vendue)
+cancel|Åfbryd
+moredotdotdot|Mære...
+mypage|Miin side
+mytalk|Min diskusje
+anontalk|Diskusjeside før denne IP-adresse
+navigation|Navigasje
+and| og
+qbfind|Søĝ
+qbbrowse|Gennemse
+qbedit|Redigær
+qbpageoptions|Endstellenger før side
+qbmyoptions|Miine endstellenger
+faq|VSF
+faqpage|Project:Vøl stellen fråĝer (VSF)
+errorpagetitle|Fejl
+returnto|Tilbage til ~{0}.
+tagline|Frå {{SITENAME}}
+help|Hjælp
+search|Søĝ
+searchbutton|Søĝ
+go|Gå til
+searcharticle|Gå til
+history|Skigt
+history_short|Skigte
+updatedmarker|(ændret)
+printableversion|Utskreftsvelig utgåf
+permalink|Permanent henvesnenge
+print|Udskrev
+edit|Redigær
+create|Skep
+editthispage|Redigær side
+create-this-page|Skep denne side
+delete|Slet
+deletethispage|Slet side
+undelete_short|Førtryd sletnenge åf {{PLURAL:~{0}\u007C~{0} versje\u007C~{0} versje}}
+protect|Beskyt
+protect_change|Ændret beskyttelse
+protectthispage|Beskyt side
+unprotect|Fjern beskyttelse
+unprotectthispage|Frigæv side
+newpage|Ny side
+talkpage|Diskusje
+talkpagelinktext|diskusje
+specialpage|Sonst side
+personaltools|Personlige værktø'r
+articlepage|Se'n ertikel
+talk|Diskusje
+views|Vesnenger
+toolbox|Værktø'r
+userpage|Se'n brugerside
+projectpage|Se'n projektside
+imagepage|Se'n billetside
+mediawikipage|Vese endholtsside
+templatepage|Vese skablånside
+viewhelppage|Vese hjælpeside
+categorypage|Vese klyngeside
+viewtalkpage|Se'n diskusje
+redirectpagesub|Åmstyrenge
+viewcount|Æ side er vest i alt ~{0} {{PLURAL:~{0}\u007Cgeng\u007Cgenger}}.
+protectedpage|Beskyttet side
+jumpto|Skeft til:
+jumptonavigation|navigasje
+jumptosearch|Søĝnenge
+aboutsite|{{SITENAME}}'m
+aboutpage|Project:Åm
+copyright|Endholtet er udgævet under ~{0}.
+copyrightpage|{{ns:project}}:Åphavsret
+currentevents|Nænte begevenheder
+currentevents-url|Project:Nænte begevenheder
+disclaimers|Førbeholt
+disclaimerpage|Project:Huses førbeholt
+edithelp|Hjælp til redigærenge
+mainpage|Førsit
+mainpage-description|Førsit
+policy-url|Project:Politik
+portal|Førside før skrebenter
+portal-url|Project:Førside før skrebenter
+privacy|Behandlenge åf personlige åplysnenger
+privacypage|Project:Behandlinge åf personlige åplysnenger
+badaccess|Manglende rettigheder
+badaccess-group0|Du harst ekke de nødvendege rettegheder til denne håndlenge.
+badaccess-groups|Denne håndlenge ken kun udføres åf brugere, søm tilhører en åf grupperne „~{0}“.
+versionrequired|Kræver versje ~{0} åf MediaWiki
+versionrequiredtext|Versje ~{0} åf MediaWiki er påkrævet, før at bruge denne side. Se'n [[Special:Version\u007Cversjeside]]
+ok|Er åkæ
+retrievedfrom|Hæntet frå "~{0}"
+youhavenewmessages|Du har ~{0} (~{1}).
+youhavenewmessagesmulti|Der er nye meddelelser til dig: ~{0}
+editsection|redigær
+editold|redigær
+viewsourceold|ves æ kelde
+editsectionhint|Redigær åfsnet: ~{0}
+showtoc|ves
+hidetoc|skjul
+thisisdeleted|Se æller gendan ~{0}?
+viewdeleted|Ves ~{0}?
+restorelink|{{PLURAL:~{0}\u007Cen slettet ændrenge\u007C~{0} slettede ændrenger}}
+feedlinks|Fiid:
+feed-invalid|Ugyldeg abånmentstype.
+feed-unavailable|RSS og Atåm fiid er ekke tilgængelege på {{SITENAME}}
+site-rss-feed|~{0} RSS-fiid
+site-atom-feed|~{0} Atom-fiid
+page-rss-feed|"~{0}" RSS-fiid
+page-atom-feed|"~{0}" Atom-fiid
+red-link-title|~{0} (ekke skrevet endnu)
+nstab-main|ertikel
+nstab-user|brugerside
+nstab-media|medie
+nstab-special|sonst
+nstab-project|åm
+nstab-image|billet
+nstab-mediawiki|besked
+nstab-template|skablån
+nstab-help|hjælp
+nstab-category|Klynge
+nosuchaction|Æ funksje fendes ekke
+nosuchactiontext|Funksje ångævet i'n URL ken ekke genkendes åf æ MediaWiki-softwær
+nosuchspecialpage|En sådan sonstside fendes ekke
+nospecialpagetext|Du harst bedt en sonstside'm, der ekke ken genkendes åf æ MediaWiki-softwær.
+error|Fejl
+databaseerror|Databasefejl
+laggedslavemode|Bemærk: Den veste side endholter mulegves ekke de nyeste ændrenger.
+readonly|Æ database er skrevebeskyttet
+enterlockreason|Skrev en begrundelse før æ skrevebeskyttelse, ve samt en vurderenge åf, hvornår æ skrevebeskyttelse åphæves ig'n
+readonlytext|Æ database er midlertedegt skrevebeskyttet. Førsøĝ venlegst senere.\n\nÅrsag til æ spærrenge: ~{0}
+readonly_lag|Æ database er åtåmatisk blevet låst mens slæfdatabaseserverne synkroniserer ve'n master database
+internalerror|Intern fejl
+internalerror_info|Intern fejl: ~{0}
+filecopyerror|Kan ekke kopiere'n file "~{0}" til "~{1}".
+filerenameerror|Kan ekke omdøbe'n file "~{0}" til "~{1}".
+filedeleteerror|Kan ekke slette'n file "~{0}".
+directorycreateerror|Kan ekke åprette katalåget "~{0}".
+filenotfound|Kan ekke finde'n file "~{0}".
+unexpected|Uventet værdi: "~{0}"="~{1}".
+formerror|Fejl: Kan ekke åfsende formulær
+badtitle|Førkert skrevselenger
+badtitletext|Den ønskede sides nav var ekke tilladt, tøm æller æ side er førkert henvest frå en {{SITENAME}} på et andet språĝ.
+viewsource|Ves æ kelde
+viewsourcetext|Du ken dog se og åfskreve'n keldekode til æ side:
+yourname|Dit brugernav
+yourpassword|Din adgangskode
+remembermypassword|Husk min adgangskode til næste gang (for a maximum of ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}})
+login|Loĝ på
+nav-login-createaccount|Åpret æ konto æller loĝ på
+userlogin|Åpret æ konto æller loĝ på
+logout|Loĝ åf
+userlogout|Loĝ åf
+nologin|Du har engen brugerkonto? ~{0}.
+nologinlink|Åpret ny brugerkonto
+createaccount|Åpret en ny konto
+gotaccount|Du har ålerede en brugerkonto? '''~{0}'''.
+gotaccountlink|Loĝ på
+loginsuccesstitle|Du er nu loĝget på
+loginsuccess|Du er nu loĝget på {{SITENAME}} søm "~{0}".
+nosuchuser|Der er ig'n bruger ve navnet "~{0}". Kontrollér æ stavemåde ig'n, æller brug æ formulår herunder til at åprette en ny brugerkonto.
+nosuchusershort|Der er ig'n bruger ve navn "~{0}". Tjek din stavnenge.
+nouserspecified|Angæv venlegst et brugernavn.
+wrongpassword|Den endtastede adgangskode var førkert. Prøv ig'n.
+wrongpasswordempty|Du glemte at endtaste password. Prøv ig'n.
+passwordtooshort|Dit kodeort er før kårt. Det skal være mendst ~{0} tegn langt.
+mailmypassword|Send et nyt adgangskode til min e-mail-adresse
+passwordremindertitle|Nyt password til {{SITENAME}}
+passwordremindertext|Nogen (sandsynlegves dig, frå'n IP-addresse ~{0})\nhar bedt at vi sender dig en ny adgangskode til at loĝge på {{SITENAME}} (~{3})'m.\nÆ adgangskode før bruger "~{1}" er nu "~{2}".\nDu bør loĝge på nu og ændre din adgangskode.,\n\nHves en anden har bestilt den nye adgangskode æller hves du er kåmet i tanke dit gamle password og ekke mære vil ændre det'm,\nkenst du bare ignorere denne mail og førtsætte ve at bruge dit gamle password.
+noemail|Der er ekke åplyst en e-mail-adresse før bruger "~{0}".
+passwordsent|En ny adgangskode er sendt til æ e-mail-adresse,\nsøm er registræret før "~{0}".\nDu bør loĝge på og ændre din adgangskode straks æfter du harst modtaget æ e-mail.
+eauthentsent|En bekrftelsesmail er sendt til den angævne e-mail-adresse.\n\nFør en e-mail ken modtages åf andre brugere åf æ {{SITENAME}}-mailfunksje, skel æ adresse og dens tilhørsførholt til denne bruger bekræftes. Følg venlegst anvesnengerne i denne mail.
+retypenew|Gentag ny adgangskode
+extlink_sample|http://www.example.com Skrevselenger på henvesnenge
+extlink_tip|Utsende henvesnenge (husk http:// førgøret)
+nowiki_sample|Endsæt skrevselenger her søm ekke skal redigær påke wikiskrevselenger
+nowiki_tip|Ekke wikiskrevselenger utse
+image_tip|Endlejret billet
+media_tip|Henvesnenge til multimediagøret
+sig_tip|Din håndstep ve tidsstep
+hr_tip|Plat lenje (brug den sparsåmt)
+summary|Beskrevelse:
+subject|Emne/åverskreft:
+minoredit|Dette'r en mendre æller lile ændrenge.
+watchthis|Åvervåg denne ertikel
+savearticle|Gem side
+preview|Førhåndsvesnenge
+showpreview|Førhåndsvesnenge
+showdiff|Ves ændrenger
+anoneditwarning|Du arbejder uden at være loĝget på. Estedet før brugernav veses så'n IP-adresse i'n hersenengerskigt.
+summary-preview|Førhåndsvesnenge åf beskrevelselejne:
+blockedtext|'''Dit brugernav æller din IP-adresse er blevet blokeret.'''\n\nÆ blokerenge er lavet åf ~{0}. Æ begrundelse er ''~{1}''.\n\nÆ blokerenge starter: ~{7}\nÆ blokerenge udløber: ~{5}\nÆ blokerenge er rettet mod: ~{6}\n\nDu ken kåle ~{0} æller en åf de andre [[{{MediaWiki:Grouppage-sysop}}\u007Cadministratårer]] før at diskutere æ blokerenge.\nDu ken ekke bruge æ funksje 'e-mail til denne bruger' vemendre der er ångevet en gyldig email-addresse i dine\n[[Special:Preferences\u007Ckontoendstellenger]]. Din nuværende IP-addresse er ~{2}, og blokerengs-ID er #~{4}. Ångev venlegst en æller begge i åle henvendelser.
+newarticle|(Ny)
+newarticletext|'''{{SITENAME}} har endnu ekke nogen {{NAMESPACE}}-side ve nav {{PAGENAME}}.'''<br /> Du ken begynde en side ve at skreve i'n boks herunder. (se'n [~{0} hjælp] før yderligere åplysnenger).<br /> Æller du ken [[Special:Search/{{PAGENAME}}\u007Csøĝe æfter {{PAGENAME}} i {{SITENAME}}].<br /> Ves det ekke var din meneng, så tryk på æ '''Tilbage'''- æller æ '''Back'''-knåp.
+noarticletext|'''{{SITENAME}} har ekke nogen side ve prånt dette nav.'''\n* Du ken '''[{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} starte æ side {{PAGENAME}}]'''\n* Æller [[Special:Search/{{PAGENAME}}\u007Csøĝe æfter {{PAGENAME}}]] i andre ertikler\n----\n* Ves du har åprettet denne ertikel endenfør de sedste få minutter, så ken de skyldes at der er ledt førsenkelse i'n åpdaterenge åf {{SITENAME}}s cache. Vent venligst og tjek igen senere'n ertikel'm dukker åp, enden du førsøĝer at åprette'n ertikel igen.
+previewnote|'''Husk at dette er kun en førhåndsvesnenge, æ side er ekke gemt endnu!'''
+editing|Redigærer ~{0}
+editingsection|Redigærer ~{0} (åfsnet)
+copyrightwarning|'''Husk: åpskrev engen websider, søm ekke tilhører dig selv, brug engen åphavsretsligt beskyttede værker uden tilladelse frå'n ejer!'''<br />\nDu lover os hermed, at du selv '''har skrevet skrevselenger''', at skrevselenger tilhører ålmenheden, er ('''åpværer hus'''), æller at æ '''åphavsrets-endehaver''' har gevet sen '''tilladelse'''. Ves denne skrevselenger ålerede er åfentliggkort andre steder, skrev det venligst på æ diskusjesside.\n<i>Bemærk venligst, at ål {{SITENAME}}-ertikler åtomatisk står under „~{1}“ (se ~{0} før lileskrevselenger). Ves du ekke vel, at dit arbejde her ændres og udbredes åf andre, så tryk ekke på „Gem“.</i>
+templatesused|Skablåner der er brugt på denne side:
+templatesusedpreview|Følgende skablåner bruges åf denne ertikelførhåndsvesnenge:
+template-protected|(skrevebeskyttet)
+template-semiprotected|(skrevebeskyttet før ekke ånmeldte og nye brugere)
+nocreatetext|Æ'n åpdiin har begrænset åprettelse åf nye sider. Bestående sider ken ændres æller [[Special:UserLogin\u007Cloĝge på]].
+recreate-moveddeleted-warn|'''Advarsel: Du er ve at genskabe en tidligere slettet side.'''\n\nÅvervej det'm er passende at genåprette'n side. De slettede hersenenger før\ndenne side er vest nedenfør:
+viewpagelogs|Ves loglister før denne side
+currentrev|Nuværende hersenenge
+revisionasof|Hersenenger frå ~{0}
+revision-info|Hersenenge frå ~{0} til ~{1}
+previousrevision|←Ældre hersenenge
+nextrevision|Nyere hersenenge→
+currentrevisionlink|se nuværende hersenenge
+cur|nuværende
+last|forrige
+page_first|Startem
+page_last|Enden
+histlegend|Førklårenge: (nuværende) = førskel til den nuværende\nhersenenge, (førge) = førskel til den førge hersenenge, l = lile til mendre ændrenge
+histfirst|Ældste
+histlast|Nyeste
+history-feed-item-nocomment|~{0} ve ~{1}
+history-title|Hersengsskigte før "~{0}"
+lineno|Lenje ~{0}:
+compareselectedversions|Sammenlign valgte hersenenger
+editundo|baĝgøt
+viewprevnext|Ves (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchall|ål
+preferences|Endstellenger
+mypreferences|Endstellenger
+skin-preview|Førhåndsvesnenge
+youremail|E-mail:
+yourrealname|Dit rigtege navn*
+prefs-help-realname|* <strong>Dit rigtege navn</strong> (valgfrit): Hves du vælger at åplyse dit navn hvil dette bleve brugt til at tilskreve dig dit arbejde.
+grouppage-sysop|{{ns:project}}:Administråtorer
+newuserlogpage|Brugeråprettelseslog
+newuserlogpagetext|Dett'er en log åver de senest åprettede brugere.
+rightslog|Rettigheds-logbåĝ
+nchanges|~{0} {{PLURAL:~{0}\u007Cændrenge\u007Cændrenger}}
+recentchanges|Seneste ændrenger
+recentchanges-feed-description|Ve dette fiid ken du følge de seneste ændrenger på {{SITENAME}}.
+rcnotefrom|Nedenfør ses ændrengerne frå '''~{1}''' til '''~{0}''' vest.
+rclistfrom|Ves nye ændrenger startende frå ~{2} ~{1}
+rcshowhideminor|~{0} lile ændrenger
+rcshowhidebots|~{0} råbotter
+rcshowhideliu|~{0} regestrerede brugere
+rcshowhideanons|~{0} anonyme brugere
+rcshowhidepatr|~{0} bekiiknurede ændrenger
+rcshowhidemine|~{0} egne bidråg
+rclinks|Ves seneste ~{0} ændrenger i de sedste ~{1} dåg<br />~{2}
+diff|førskel
+hist|skigte
+hide|skjul
+show|ves
+minoreditletter|l
+newpageletter|N
+boteditletter|b
+recentchangeslinked|Relaterede ændrenger
+recentchangeslinked-feed|Relaterede ændrenger
+recentchangeslinked-toolbox|Relaterede ændrenger
+recentchangeslinked-title|Ændrenger der vegånde til "~{0}"
+recentchangeslinked-summary|Denne sonstside beser de seneste ændrenger på de sider der henveses til. Sider på din åvervågnengsliste er vest ve '''fed''' skreft.
+upload|Læĝ æ billet åp
+uploadbtn|Læĝ æ gøret åp
+uploadlogpage|Åplægnengslog
+listfiles|Billetliste
+file-anchor-link|Billet
+filehist|Billetskigt
+filehist-help|Klik på'n dato/tid før at se den hersenenge åf gøret.
+filehist-current|nuværende
+filehist-datetime|Dato/tid
+filehist-user|Bruger
+filehist-dimensions|Treflåksjener
+filehist-filesize|Gøretstørrelse
+filehist-comment|Biskrevselenge
+imagelinks|Billethenvesnenger
+linkstoimage|De følgende sider henveser til dette billet:
+nolinkstoimage|Der er engen sider der henveser til dette billet.
+sharedupload|Denne gøret er en fælles læĝenge og ken bruges åf andre projekter.
+uploadnewversion-linktext|Læĝ en ny hersenenge åf denne gøret åp
+mimesearch|Søĝe æfter MIME-sårt
+listredirects|Henvesnengsliste
+unusedtemplates|Ekke brugte skablåner
+randompage|Tilfældig ertikel
+randomredirect|Tilfældige henvesnenger
+doubleredirects|Dåbbelte åmstyrenger
+brokenredirects|Bråken åmstyrenger
+withoutinterwiki|Sider uden henvesnenger til andre språĝ
+fewestrevisions|Sider ve de færreste hersenenger
+nbytes|~{0} {{PLURAL:~{0}\u007Cåg\u007Cåger}}
+nlinks|{{PLURAL:~{0}\u007C1 henvesnenge\u007C~{0} henvesnenger}}
+nmembers|- {{PLURAL:~{0}\u007C1 ertikel\u007C~{0} ertikler}}
+lonelypages|Førældreløse ertikler
+uncategorizedpages|Uklyngede sider
+uncategorizedcategories|Uklyngede klynger
+uncategorizedimages|Ekke klyngede gøret
+uncategorizedtemplates|Ekke klyngede skablåner
+unusedcategories|Ubrugte klynger
+unusedimages|Ubrugte billeter
+wantedcategories|Brugte men ekke ånlagte klynger
+wantedpages|Ønskede ertikler
+mostlinked|Sider ve flest henvesnenger
+mostlinkedcategories|Mest brugte klynger
+mostlinkedtemplates|Hyppigst brugte skablåner
+mostcategories|Mest brugte sider
+mostimages|Mest brugte gøret
+mostrevisions|Sider ve de fleste ændrenger
+prefixindex|Åle sider (ve førgøret)
+shortpages|Kårte ertikler
+longpages|Långe ertikler
+deadendpages|Blendgydesider
+protectedpages|Skrevebeskyttede sider
+listusers|Brugerliste
+newpages|Nyeste ertikler
+ancientpages|Ældste ertikler
+move|Flyt
+movethispage|Flyt side
+booksources|Boĝkelder
+specialloguserlabel|Bruger:
+speciallogtitlelabel|Skrevselenge:
+log|Loglister
+all-logs-page|Åle loglister
+allpagesfrom|Ves sider startende frå:
+allarticles|Åle ertikler
+allpagessubmit|Ves
+allpagesprefix|Ves sider ve førgøret:
+deletedcontributions|Slettede brugerbidråg
+deletedcontributions-title|Slettede brugerbidråg
+linksearch|Søĝ i weblinks
+linksearch-pat|Søĝ æfter links til:
+linksearch-ns|Navnerum:
+linksearch-ok|Søĝ
+linksearch-text|Wildkårter søm "*.wikipedia.org" ken benyttes.<br />Understøttede pråtåkoller: <code>~{0}</code>
+linksearch-line|~{1} linker til ~{0}
+linksearch-error|Wildkårter må ken benyttes i'n stårt åf håstnavnet.
+emailuser|E-mail til denne bruger
+watchlist|Åvervågnengsliste
+mywatchlist|Åvervågnengsliste
+addedwatchtext|Æ side "[[:~{0}]]" er blevet tilføjet til din [[Special:Watchlist\u007Cåvervågningsliste]]. Fremtidige ændrenger til denne side og den tilhørende diskusjeside hvil bleve listet der, og æ side hvil fremstå '''fremhævet''' i'n [[Special:RecentChanges\u007Cliste ve de seneste ændrenger]] før at gøre det lettere at finde den. Hves du senere hvilst fjerne'n side frå din åvervågningsliste, så klik "Fjern åvervågnenge".
+removedwatchtext|Æ side "[[:~{0}]]" er blevet fjernet frå din åvervågnengsliste.
+watch|Åvervåg
+watchthispage|Åvervåg side
+unwatch|Fjern åvervågnenge
+watchlist-details|Du har ~{0} {{PLURAL:~{0}\u007Cside\u007Csider}} på din åvervågnengsliste (øn diskusjesider).
+wlshowlast|Ves de seneste ~{0} têmer ~{1} dåg
+watching|Åvervåge …
+unwatching|Ekke åvervåge …
+deletepage|Slet side
+historywarning|Advarsel: Æ side du erst ve at slette har en skigte:
+confirmdeletetext|Du erst ve permanent at slette en side\næller et billet sammen ve hæle den tilhørende skigte frå'n database. Bekræft venlegst at du virkelg hvilst gøre dette, at du førstårst konsekvenserne, og at du gør dette i åverensstemmelse ve\n[[{{MediaWiki:Policy-url}}]].
+actioncomplete|Gennemført
+deletedtext|"~{0}" er slettet. Sæg ~{1} før en førtegnelse åver de nyeste sletnenger.
+dellogpage|Sletnengslog
+deletecomment|Begrundelse:
+deleteotherreason|Anden/uddybende begrundelse:
+deletereasonotherlist|Anden begrundelse
+rollbacklink|fjern redigærenge
+protectlogpage|Liste åver beskyttede sider
+prot_1movedto2|[[~{0}]] flyttet til [[~{1}]]
+protectcomment|Begrundelse:
+protectexpiry|Udløb:
+protect_expiry_invalid|Æ udløbstiid er ugyldeg.
+protect_expiry_old|Æ udløbstiid legger i'n førtiid.
+protect-text|Her ken beskyttelsesståt før æ side '''~{0}''' ses og ændres.
+protect-locked-access|Den brugerkonto har ekke de nødvendege rettegheder til at æ ændre sidebeskyttelse. Her er de aktuelle beskyttelsesendstellenger før æ side '''„~{0}“:'''
+protect-cascadeon|Denne side er del åf en nedarvet skrevebeskyttelse. Wen er endeholt i nedenstående {{PLURAL:~{0}\u007Cside\u007Csider}}, søm er skrevebeskyttet ve tilvalg åf "nedarvende sidebeskyttelse" Æ sidebeskyttelse ken ændres før denne side, det påverker dog ekke'n kaskadespærrenge:
+protect-default|Ål (standård)
+protect-fallback|Kræv "~{0}"-tilladelse
+protect-level-autoconfirmed|Spærrenge før ekke registrærede brugere
+protect-level-sysop|Kan administratårer
+protect-summary-cascade|nedarvende
+protect-expiring|til ~{0} (UTC)
+protect-cascade|Nedarvende spærrenge – ål skabelåner, søm er endbundet i denne side spærres også.
+protect-cantedit|Du kenst ekke ændre beskyttelsesnivå før denne side, da du ekke kenst redigære føden.
+protect-expiry-options|1 tême:1 hour,1 dåĝ:1 day,1 uge:1 week,2 uger:2 weeks,1 måned:1 month,3 måneder:3 months,6 måneder:6 months,1 år:1 year,ubegrænset:indefinite
+restriction-type|Beskyttelsesståt
+restriction-level|Beskyttelseshøjde
+undeletebtn|Gendan!
+namespace|Naverum:
+invert|Næbiiner udvalg
+contributions|Brugerbidråg
+mycontris|Mine bidråg
+contribsub2|Før ~{0} (~{1})
+uctop|(seneste)
+month|Måned:
+year|År:
+sp-contributions-newbies-sub|Før nybegyndere
+sp-contributions-blocklog|Blokerengslog
+sp-contributions-deleted|Slettede brugerbidråg
+sp-contributions-talk|diskusje
+whatlinkshere|Vat henveser hertil
+whatlinkshere-title|Sider der henveser til ~{0}
+linkshere|De følgende sider henveser til '''„[[:~{0}]]“''':
+nolinkshere|Engen sider henveser til '''„[[:~{0}]]“'''.
+isredirect|åmstyrsside
+istemplate|Skablånvetagnenge
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cførge\u007Cførge ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cnægste\u007Cnægste ~{0}}}
+whatlinkshere-links|← henvesnenger
+blockip|Bloker bruger
+ipboptions|1 tême:1 hour,2 têmer:2 hours,6 têmer:6 hours,1 dåĝ:1 day,3 dåĝ:3 days,1 uge:1 week,2 uger:2 weeks,1 måned:1 month,3 måneder:3 months,1 år:1 year,ubegrænset:indefinite
+ipblocklist|Blokerede IP-adresser og brugernave
+blocklink|blåker
+unblocklink|åphæv blokerenge
+contribslink|bidråĝ
+blocklogpage|Blokerengslog
+blocklogentry|blokerede "[[~{0}]]" ve'n udløbstid på ~{1} ~{2}
+movepagetext|Når du brugerst æ formulær herunder hvilst du få omdøbt en side og flyttet æ hæle side han skigte til det nye navn.\nDen gamle titel hvil bleve en omdirigærengsside til den nye titel.\nHenvesnenger til den gamle titel hvil ekke bleve ændret.\nSørg før at tjekke før dåbelte æller dårlege omdirigærenger.\nDu erst ansvarleg før, at ål henvesnenger stadeg pæger derhen, hvår det er æ mænenge de skal pæge.\n\nBemærk at æ side '''ekke''' ken flyttes hves der ålrede er en side ve den nye titel, medmendre den side er tøm æller er en omdirigærenge uden nogen skigte.\nDet betyder at du kenst flytte en side tilbåge hvår den kåm frå, hves du kåmer til at lave en fejl.\n\n'''ADVARSEL!'''\nDette ken være en drastisk og uventet ændrenge før en populær side; vær sekker på, at du førstår konsekvenserne åf dette før du førtsætter.
+movepagetalktext|Den tilhørende diskusjeside, hves der er en, hvil åtåmatisk bleve flyttet ve'n side '''medmendre:'''\n*Du flytter æ side til et andet navnerum,\n*En ekke-tøm diskusjeside ålrede eksisterer under det nye navn, æller\n*Du fjerner æ markærenge i'n boks nedenunder.\n\nI disse tilfælde er du nødt til at flytte æller sammenflette'n side manuelt.
+movearticle|Flyt side:
+newtitle|Til ny titel:
+move-watch|Denne side åvervåges
+movepagebtn|Flyt side
+pagemovedsub|Flytnenge gennemført
+movepage-moved|Æ side '''"~{0}" er flyttet til "~{1}"'''
+articleexists|En side ve det navn eksisterer ålrede, æller det\nnavn du harst valgt er ekke gyldegt. Vælg et andet navn.
+movetalk|Flyt også'n "diskusjeside", hves den eksisterer.
+movelogpage|Flyttelog
+movereason|Begrundelse:
+revertmove|gendan
+export|Utgøter sider
+allmessages|Åle beskeder
+thumbnail_error|Fejl ve åprettelse åf thumbnail: ~{0}
+importlogpage|Importlog
+tooltip-pt-userpage|Min brugersside
+tooltip-pt-mytalk|Min diskusjesside
+tooltip-pt-preferences|Min endstellenger
+tooltip-pt-watchlist|Æ liste åver sider du åvervåger før ændrenger.
+tooltip-pt-mycontris|Æ liste åver dine bidråg
+tooltip-pt-login|Du åpførdres til at loĝge på, men dat er ekke plechnenge.
+tooltip-pt-logout|Loĝ åf
+tooltip-ca-talk|Diskusje æ indholt'm på'n side
+tooltip-ca-edit|Du ken redigære denne side. Brug venligst førhåndsvesnenge før du gemmer.
+tooltip-ca-addsection|Tilføj en biskrevselenge til denne diskusje.
+tooltip-ca-viewsource|Denne side er beskyttet. Du ken kegge på'n keldekode.
+tooltip-ca-protect|Beskyt denne side
+tooltip-ca-delete|Slet denne side
+tooltip-ca-move|Flyt denne side
+tooltip-ca-watch|Sæt denne side på din åvervågnengsliste
+tooltip-ca-unwatch|Fjern denne side frå din åvervågnengsliste
+tooltip-search|Søĝ på {{SITENAME}}
+tooltip-n-mainpage|Besøĝ æ Førsit
+tooltip-n-portal|Æ projekt'm, vat du ken gøre, vår tenger fendes
+tooltip-n-currentevents|Find baĝgrundsinformasje nessende begivenheder'm
+tooltip-n-recentchanges|Æ liste åver de seneste ændrenger æ'n wiki.
+tooltip-n-randompage|Gå til æ tilfældig ertikel
+tooltip-n-help|Vordan gør a ...
+tooltip-t-whatlinkshere|Liste ve ål sider søm henveser hertil
+tooltip-t-contributions|Se denne brugers bidråg
+tooltip-t-emailuser|Send en e-mail til denne bruger
+tooltip-t-upload|Læĝ æ billet, æ sunnåm æller anden mediagøret åp
+tooltip-t-specialpages|Liste ve ål sonst sider
+tooltip-ca-nstab-user|Se'n brugerside
+tooltip-ca-nstab-project|Vese'n wiki'mside
+tooltip-ca-nstab-image|Se'n billetside
+tooltip-ca-nstab-template|Se'n skablån
+tooltip-ca-nstab-help|Se'n hjælpeside
+tooltip-ca-nstab-category|Se'n klyngeside
+tooltip-minoredit|Marker dette søm en mendre ændrenge
+tooltip-save|Gem dine ændrenger
+tooltip-preview|Førhånds dine ændrenger, brug venligst denne funksje enden du gemmer!
+tooltip-diff|Ves velke ændrenger du har lavet i æ skrevselenger.
+tooltip-compareselectedversions|Se førskellene imellem de to valgte hersenenger åf denne side.
+tooltip-watch|Tilføj denne side til din åvervågnengsliste
+previousdiff|← Gå til førge førskel
+nextdiff|Gå til næste førskel →
+file-info-size|~{0} × ~{1} pixel, gøretstørrelse: ~{2}, MIME-senenge: ~{3}
+file-nohires|Engen højere åpløsnenge fundet.
+svg-long-desc|SVG gøret, wønetstørrelse ~{0} × ~{1} pixel, gøretstørrelse: ~{2}
+show-big-image|Hersenenge i større åpløsnenge
+newimages|Liste ve de nyeste billeter
+bad_image_list|Æ førmåt er:\n\nKun endholtet åf æ liste (lenjer startende ve *) bliver brugt. Den første henvesnenge på'n lenje er til det uønskede billet. Æfterfølgende lenker på samme lenjer er undtagelser, dvs. sider vår æ billet må åptræde.
+metadata|Metadata
+metadata-help|Denne gøret endeholder yderligere informasje, der søm regel stammer frå lysnåmer æller den brugte skænner. Ve'n æfterføgende bearbejdnenge ken nogle data være ændret.
+metadata-expand|Ves udvedede data
+metadata-collapse|Skjul udvedede data
+metadata-fields|Æ følgende felter frå EXIF-metadata i denne MediaWiki-beskedskrevselenger veses på billetbeskrevelsessider; yderligere lileskrevselenger ken veses.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+namespacesall|åle
+monthsall|åle
+watchlisttools-view|Se ændrede sider i'n åvervågnengsliste
+watchlisttools-edit|Redigær åvervågnengsliste
+watchlisttools-raw|Redigær rå åvervågnengsliste
+version|Informasje MediaWiki'm
+specialpages|Sonst sider
+expandtemplates|Engråt templater
+expand_templates_title|Context titel, før {{SITENAME}}:
+expand_templates_input|Input skrevselenger:
+expand_templates_output|Resultåt
+expand_templates_xml_output|XML output
+expand_templates_ok|OK
+expand_templates_remove_comments|Slet kommentår
+expand_templates_generate_xml|Se XML parse træ
+expand_templates_preview|Førhåndsvesnenge
+']:>
+).lang
+;

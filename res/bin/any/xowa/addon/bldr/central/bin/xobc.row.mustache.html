@@ -1,0 +1,45 @@
+{{#row_is_work}}
+<div class='xotbl_data_row work_row' id='{{row_type}}:{{task_id}}:row' data-sort='{{task_sort}}'>
+  <div class='flex_div'>
+    <a id='{{row_type}}:{{task_id}}:del_work' class='xoimg_btn_x24 xoimg_list_remove' href='javascript:void(0)' onclick='xo.bldr.work.del_work__send("{{task_id}}");'>&nbsp;</a>
+    <div class='task_name' id='{{row_type}}:{{task_id}}:name'>{{{task_name}}}</div>
+  </div>
+  <div class='pbar_row flex_div pbar_row_1' id='{{row_type}}:{{task_id}}:step-row'>
+    <span class='pbar_step' id='{{row_type}}:{{task_id}}:step-name'>{{{step.step_name}}}</span>
+  </div>
+  <div class='pbar_row' id='{{row_type}}:{{task_id}}:pbar-row'>
+    <div class='pbar_proc' id='{{row_type}}:{{task_id}}:pbar-txt'>{{{prog_msg}}}</div>
+    <div class='pbar_div'>
+      <div class="pbar_bar" id='{{row_type}}:{{task_id}}:pbar-bar'>
+      </div>
+    </div>
+  </div>
+</div>
+{{/row_is_work}}
+{{^row_is_work}}
+<div class='xotbl_data_row flex_div' id='{{row_type}}:{{task_id}}:row' data-sort='{{task_sort}}'>
+  {{#row_is_head}}    
+  <a id='{{row_type}}:{{task_id}}:run_next' class='xoimg_btn_x24 xoimg_media_play work_btn_disabled' href='javascript:void(0)' onclick='xo.bldr.work.run_next__send("{{task_id}}");'>&nbsp;</a>
+  {{/row_is_head}}
+  {{#row_is_todo}}
+  <a id='{{row_type}}:{{task_id}}:add_work' class='xoimg_btn_x24 xoimg_list_add' href='javascript:void(0)' onclick='xo.bldr.todo.add_work__send("{{task_id}}");'>&nbsp;</a>
+  {{/row_is_todo}}
+  {{#row_is_done}}
+  <a id='{{row_type}}:{{task_id}}:del_done' class='xoimg_btn_x24 xoimg_list_remove' href='javascript:void(0)' onclick='xo.bldr.done.del_done__send("{{task_id}}");'>&nbsp;</a>
+  {{/row_is_done}}
+  {{#row_is_head}}
+  <div class="head_name">
+    <span id='{{row_type}}:{{task_id}}:name'>{{{task_name}}}</span>
+    <!--&nbsp;&middot;<span id='{{row_type}}:{{task_id}}:size'>{{prog_data_end_str}}</span>-->
+    <!--&middot;<span id='{{row_type}}:{{task_id}}:time'>{{prog_time_end_str}}</span>-->
+  </div>
+  {{/row_is_head}}
+  {{^row_is_head}}
+  <div class='task_name' id='{{row_type}}:{{task_id}}:name'>{{{task_name}}}</div>
+  {{#row_is_todo}}
+  <a id='{{row_type}}:{{task_id}}:add_work' class='xoimg_btn_x24 xoimg_list_remove' href='javascript:void(0)' onclick='xo.bldr.todo.del_todo__send("{{task_id}}");'>&nbsp;</a>
+  {{/row_is_todo}}
+  <a class='xoimg_btn_x24 xoimg_help_info' href='/site/home/wiki/Special:XowaDownloadCentralInfo?task_id={{task_id}}'>&nbsp;</a>
+  {{/row_is_head}}
+</div>
+{{/row_is_work}}

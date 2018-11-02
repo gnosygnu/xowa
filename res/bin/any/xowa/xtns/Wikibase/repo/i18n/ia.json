@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"wikibase-desc": "Repositorio de datos structurate",
+	"wikibase-edit": "modificar",
+	"wikibase-save": "salveguardar",
+	"wikibase-cancel": "cancellar",
+	"wikibase-add": "adder",
+	"wikibase-save-inprogress": "Salveguarda…",
+	"wikibase-remove-inprogress": "Remove…",
+	"wikibase-label-edit-placeholder": "scribe etiquetta",
+	"wikibase-description-edit-placeholder": "scribe description",
+	"wikibase-sitelink-site-edit-placeholder": "sito",
+	"wikibase-sitelink-page-edit-placeholder": "pagina",
+	"wikibase-alias-edit-placeholder": "scribe un alias",
+	"wikibase-label-input-help-message": "Entra le titulo de iste insimul de datos in $1.",
+	"wikibase-description-input-help-message": "Entra un curte description in $1.",
+	"wikibase-sitelinks-add": "adder un ligamine a un ligamine de sito",
+	"wikibase-sitelinks-empty": "Il non ha ancora un ligamine de sito pro iste elemento.",
+	"wikibase-sitelinks-input-help-message": "Definir un ligamine a un pagina que tracta de iste thema.",
+	"wikibase-remove": "remover",
+	"wikibase-propertyedittool-full": "Le lista de valores es complete.",
+	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Un valor|$1 valores}} non ancora salveguardate",
+	"wikibase-sitelinksedittool-full": "Ligamines a paginas es jam definite pro tote le sitos cognoscite.",
+	"wikibase-disambiguation-title": "Disambiguation pro \"$1\"",
+	"wb-special-newitem-new-item-notification": "Nove elemento $1 create e redirigite a su pagina. Retornar a $2.",
+	"wikibase-aliases-label": "Etiam cognoscite como:",
+	"wikibase-aliases-input-help-message": "Si iste gruppo de datos es cognoscite per plus de un particular nomine, tu pote specificar aliases e synonymos, a fin que illo pote esser trovate per su nomines alternative.",
+	"wikibase-aliases-empty": "Nulle alias definite.",
+	"wikibase-move-error": "Tu non pote renominar paginas que es in le spatio de nomines de datos, e tu non pote displaciar paginas a in illo.",
+	"wikibase-error-sitelink-already-used": "Le ligamine de sito [$1 $2] es jam includite in un altere elemento, [[$3]].",
+	"special-itembytitle": "Elemento per titulo",
+	"special-itemdisambiguation": "Disambiguation de elementos",
+	"special-newitem": "Crear un nove objecto",
+	"wikibase-restoreold": "reinitialisar"
+}

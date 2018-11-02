@@ -1,0 +1,51 @@
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+2|Uživatel
+2|Wikipedistka
+3|Diskuse_s_uživatelem
+3|Diskuse_s_wikipedistkou
+3|Uživatel_diskuse
+3|Uživatelka_diskuse
+3|Wikipedista_diskuse
+3|Wikipedistka_diskuse
+4|WP
+5|Wikipedie_diskuse
+6|Image
+7|Image_talk
+7|Soubor_diskuse
+9|MediaWiki_diskuse
+11|Šablona_diskuse
+13|Nápověda_diskuse
+15|Kategorie_diskuse
+100|Portal
+101|Portal_talk
+101|Portál_diskuse
+103|Rejstřík_diskuse
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(8).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(14).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(100).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(101).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(102).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(103).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(447).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end
+// wiki.ctgs.collations.bgn
+catpage_mgr.collation_('uca-cs');
+// wiki.ctgs.collations.end

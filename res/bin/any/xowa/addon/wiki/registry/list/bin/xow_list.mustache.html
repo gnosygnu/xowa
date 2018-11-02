@@ -1,0 +1,30 @@
+<div class='main_div'>
+  <div id='cur_help_div' class='xohelp_div'>
+    <div id='cur_help_msg' class='xohelp_msg'>
+      <div>
+        <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_fsys_dir'>&nbsp;</span><span class='xohelp_row_text'>Import wikis from your device or SD card using a file browser</span></div>
+        <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_inet_download'>&nbsp;</span><span class='xohelp_row_text'>Download wikis from archive.org</span></div>
+        <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_xowa'>&nbsp;</span><span class='xohelp_row_text'>Open the wiki and go to its Main Page</span></div>
+        <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_help_info'>&nbsp;</span><span class='xohelp_row_text'>View more information about the wiki</span></div>
+      </div>
+    </div>
+  </div>
+  <div class='xotbl_head_row'>
+    <div class='xotbl_head_text cur_head_text'>Wikis</div>
+    <div class='xotbl_head_btns cur_head_btns'>
+      <a class='xoimg_btn_x24 xoimg_fsys_dir'      title='add wiki'  href="/wiki/Special:XowaFileBrowser?path={{import_root}}">&nbsp;</a>
+      <a class='xoimg_btn_x24 xoimg_inet_download' title='download'  href="/wiki/Special:XowaDownloadCentral">&nbsp;</a>
+      <a class='xoimg_btn_x24 xoimg_help_tip'      title='view help' href='javascript:void(0)' onclick='return xo.help.toggle("cur")'>&nbsp;</a>
+    </div>
+  </div>
+  {{#subs}}
+  <div class="xotbl_data_row cur_data_row">
+    <a class="link_btn_y wiki_link_btn" href="/site/{{domain}}/wiki/">
+      <span class='xoimg_btn_x24 xoimg_xowa'>&nbsp;</span>
+      <span class='wiki_domain'>{{domain}}</span>
+      <span class='wiki_date'>{{date}}</span>
+    </a>
+    <a class='xoimg_btn_x24 xoimg_help_info' href="/wiki/Special:XowaWikiInfo?wiki={{domain}}" title="info">&nbsp;</a>
+  </div>
+  {{/subs}}
+</div>

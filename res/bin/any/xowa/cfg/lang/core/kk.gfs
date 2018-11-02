@@ -1,0 +1,59 @@
+this
+.fallback_load('kk-cyrl')
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+statistics-header-pages|Беттер бойынша статистика
+statistics-articles|Мақалалар саны
+statistics-pages|Беттер
+statistics-pages-desc|Уикидегі барлық беттер, талқылау беттерді, айдатқыштарды қосқандағы және тағы басқалары.
+grouppage-accountcreator|{{ns:project}}:Тіркелгі жасаушылар
+wikimedia-copyrightwarning|'''Авторлық құқықтарын''' бұзған мағлұмат дереу жойылады. Энциклопедиялық мазмұны талаптарға сай болуы керек. ''«Бетті сақта!»'' батырмасын басқаныңыз — үлесіңізді [//creativecommons.org/licenses/by-sa/3.0/ CC-BY-SA 3.0] және [//www.gnu.org/copyleft/fdl.html GFDL]  лицензиялары жүзінде жарияланғандығына келіскеніңіз болып табылады. Толығырақ қ.\n[//wikimediafoundation.org/wiki/Terms_of_Use қолдану шарттары].
+wikimedia-editpage-tos-summary|Егер сіз басқалар тарапынан жазуыңыздың түзетілуін не еркін көшірілуін қаламасаңыз, жазуыңызды мында ұсынбауыңыз жөн. Егер сiз жазған мәтініңіздің авторы болмасаңыз, онда ол [//wikimediafoundation.org/wiki/Terms_of_Use Қолдану шарттарына] лайықты болуы қажет және сiздің лицензиялаудың кез келген талаптарын орындауға келіскеніңіз болып табылады.
+nstab-main|Мақала
+edittools|<!-- Мындағы мәтін өңдеу және жүктеу пішіндердің астында көрсетіледі. -->
+editwarning-warning|Басқа бетке өтсеңіз сіздің жазған соңғы өңдемелеріңіз жойылуы мүмкін. \nЕгер сiз жүйеде тiркелсеңiз, онда сiз баптауларыңыздағы «{{int:prefs-editing}}» бөлігіне кіріп, бұл ескертуді өшіре аласыз.
+searchmenu-new|'''"[[:~{0}]]" осындай атпен бетті бастау'''
+statistics-header-edits|Өңдеулер статистикасы
+statistics-files|Жүктелген файлдар
+statistics-edits|Барлық өңдеулер саны
+statistics-edits-average|Әр бетке шаққанда өңдеулердің орташа саны
+statistics-users|Тіркелген қатысушылар
+statistics-users-active|Белсенді қатысушылар
+statistics-users-active-desc|Соңғы {{PLURAL:~{0}\u007Cкүнде\u007C~{0} күнде}} қандай да бір іс-әрекет жасаған қатысушылар
+variantname-kk-kz|disable
+variantname-kk-tr|disable
+variantname-kk-cn|disable
+variantname-kk-cyrl|Кирил
+variantname-kk-latn|Latın
+variantname-kk-arab|توتە
+variantname-kk|disable
+logentry-delete-delete|~{0} ~{2} бетін жойды
+']:>
+).lang
+;

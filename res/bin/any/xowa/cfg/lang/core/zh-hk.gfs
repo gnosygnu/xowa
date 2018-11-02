@@ -1,0 +1,106 @@
+this
+.fallback_load('zh-hant, zh-hans')
+.specials
+  .clear
+  .load_text(
+<:['
+ComparePages|頁面比較
+Unblock|解除封禁
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+january|一月
+february|二月
+march|三月
+april|四月
+may_long|五月
+june|六月
+july|七月
+august|八月
+september|九月
+october|十月
+november|十一月
+december|十二月
+wm-license-cc-by-3.0-gr-text|此檔案採用[[{{int:wm-license-cc-wiki-link}}\u007C共享創意]][//creativecommons.org/licenses/by/3.0/gr/deed.zh 署名 3.0 希臘]許可協議授權。
+wm-license-cc-by-3.0-hr-text|此檔案採用[[{{int:wm-license-cc-wiki-link}}\u007C共享創意]][//creativecommons.org/licenses/by/3.0/hr/deed.zh 署名 3.0 克羅地亞]許可協議授權。
+wm-license-cc-by-sa-3.0-nz-text|此檔案在[[{{int:wm-license-cc-wiki-link}}\u007C共享創意]] [//creativecommons.org/licenses/by-sa/3.0/nz/deed.zh 署名-相同方式共享 3.0 新西蘭]條款下發佈。
+wm-license-cecill-text|本作品是一個[[{{int:wm-license-free-software-wiki-link}}\u007C自由軟件]]，你可以在[[{{int:wm-license-cecill-wiki-link}}\u007CCeCILL]]授權許可條款下對其重製或修改。CeCILL授權許可條款可以在[{{int:wm-license-cecill-full-link}} www.cecill.info]找到。
+wm-license-gfdl-1.2-and-later|你被授權遵循[[{{int:wm-license-fsf-wiki-link}}\u007C自由軟件基金會]]發行的無固定段落、封面文字和封底文字的 '''[[{{int:wm-license-gfdl-wiki-link}}\u007CGNU 自由文件授權協議]]''' 1.2 版或任一後續版本條款，複製、分發和/或修改本檔案。協議副本包含在題為「[[{{int:wm-license-gfdl-full-1.2-link}}\u007CGNU Free Documentation License]]」的部分中。
+wm-license-gfdl-1.2-only|你被授權遵循[[{{int:wm-license-fsf-wiki-link}}\u007C自由軟件基金會]]發行的無固定段落、封面文字和封底文字的 '''[[{{int:wm-license-gfdl-wiki-link}}\u007CGNU 自由文件授權協議]]''' 1.2 版條款，複製、分發和/或修改本檔案。協議副本包含在題為「[[{{int:wm-license-gfdl-full-1.2-link}}\u007CGNU Free Documentation License]]」的部分中。
+wm-license-gfdl-1.3-and-later|你被授權遵循[[{{int:wm-license-fsf-wiki-link}}\u007C自由軟件基金會]]發行的無固定段落、封面文字和封底文字的 '''[[{{int:wm-license-gfdl-wiki-link}}\u007CGNU 自由文件授權協議]]''' 1.3 版或任一後續版本條款，複製、分發和/或修改本檔案。協議副本包含在標題為「[[{{int:wm-license-gfdl-full-1.3-link}}\u007CGNU Free Documentation License]]]」的部分中。
+wm-license-gfdl-1.3-only|你被授權遵循[[{{int:wm-license-fsf-wiki-link}}\u007C自由軟件基金會]]發行的無固定段落、封面文字和封底文字的 '''[[{{int:wm-license-gfdl-wiki-link}}\u007CGNU 自由文件授權協議]]''' 1.3 版本條款 (不包括後續條款)，複製、分發和/或修改本檔案。協議副本包含在標題為「[[{{int:wm-license-gfdl-full-1.3-link}}\u007CGNU Free Documentation License]]」的部分中。
+wm-license-gpl-text|本作品為[[{{int:wm-license-free-software-wiki-link}}\u007C自由軟件]]；您可依據[[{{int:wm-license-fsf-wiki-link}}\u007C自由軟件基金會]]所發表的 '''[[{{int:wm-license-gpl-wiki-link}}\u007CGNU 通用公共許可證]]'''，就本作品再為發布與／或修改；無論您依據的是本授權的第二版或（您自行選擇的）任一日後發行的版本。本作品是基於使用目的而加以發布，然而'''不負任何擔保責任'''；亦無對'''適售性'''或'''特定目的適用性'''所為的默示性擔保。詳情請參照 GNU 通用公共許可證[{{int:wm-license-gpl-2-full-link}} 第二版]和[{{int:wm-license-gpl-3-full-link}} 第三版]。
+wm-license-lgpl-text|本作品為[[{{int:wm-license-free-software-wiki-link}}\u007C自由軟件]]；您可依據[[{{int:wm-license-fsf-wiki-link}}\u007C自由軟件基金會]]所發表的 '''[[{{int:wm-license-lgpl-wiki-link}}\u007CGNU 較寬鬆公共許可證]]'''，就本作品再為發布與／或修改；無論您依據的是本許可證的 2.1 版或（您自行選擇的）任一日後發行的版本。本作品是基於使用目的而加以發布，然而'''不負任何擔保責任'''；亦無對'''適售性'''或'''特定目的適用性'''所為的默示性擔保。詳情請參照 GNU 較寬鬆公共許可證[{{int:wm-license-lgpl-2.1-full-link}} 2.1 版]和[{{int:wm-license-lgpl-3-full-link}} 第 3 版]。
+group-Global_bot|全域機械人
+group-Global_bot-member|全域機械人
+wikimedia-copyright|本站的全部文字在<a "href="{{localurle:Wikipedia:CC-by-sa-3.0協議文本}}"title="Wikipedia:CC-by-sa-3.0協議文本">共享創意 署名-相同方式共享 3.0</a>協議之條款下提供，同時或受附加條款約束。（請參閱 <a href="//wikimediafoundation.org/wiki/Terms_of_Use">使用條款</a>）
+tog-watchlisthidebots|監視列表中隱藏機械人的編輯
+mytalk|我的討論頁
+tagline|從 {{SITENAME}}
+search|搜尋
+printableversion|可打印版
+permalink|永久連接
+print|打印
+specialpage|特殊頁面
+jumpto|跳到：
+jumptosearch|搜尋
+aboutpage|Project:關於我們
+privacy|私隱政策
+privacypage|Project:私隱政策
+red-link-title|~{0} (頁面不存在)
+nstab-special|特殊頁面
+nav-login-createaccount|登入／創造帳戶
+userlogin|登入／創造帳戶
+editing|正在編輯 ~{0}
+rev-deleted-comment|（註釋已除）
+rev-deleted-event|（日誌已除）
+revdelete-suppress-text|壓制'''只'''應用於以下的情況:\n* 不合適的個人資料\n*: ''地址、電話號碼、身份證號碼等。''
+editundo|撤銷
+search-mwsuggest-disabled|沒有意見
+prefs-help-gender|可選：用於軟件中的性別指定。此項資料將會被公開。
+group-bot|機械人
+group-bot-member|機械人
+grouppage-bot|{{ns:project}}:機械人
+recentchanges-label-bot|這次編輯是由機械人進行
+rcshowhidebots|~{0}機械人的編輯
+activeusers-hidebots|隱藏機械人
+contribslink|貢獻
+tooltip-search|搜尋 {{SITENAME}}
+tooltip-search-go|若是真有其頁，則進入相同名字的頁面
+tooltip-search-fulltext|在此頁面內搜尋此文字
+tooltip-n-mainpage|回到首頁
+tooltip-n-mainpage-description|回到首頁
+tooltip-n-randompage|跳到一個隨機抽取的頁面
+tooltip-t-print|這個頁面的可打印版本
+showhidebots|(~{0}機械人)
+specialpages|特殊頁面
+']:>
+).lang
+;

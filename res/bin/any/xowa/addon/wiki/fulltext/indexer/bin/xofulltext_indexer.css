@@ -1,0 +1,20 @@
+.cur_data_row {
+  padding: 4px 0px 4px;
+}
+.cur_data_row label {
+  display: inline-block;
+  width: 120px;
+  margin: 0px 4px 0px 10px;
+  vertical-align: top !important; /* !important needed else label will default to bottom b/c of element.style */
+          align-self: flex-start;
+  -webkit-align-self: flex-start;
+  
+  font-weight: bold;
+}
+.cur_data_row label::after {
+    content: ":";
+}
+.cur_data_input {
+  display: inline-block;
+  width: calc(100% - 170px);
+}

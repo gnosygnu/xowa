@@ -1,0 +1,55 @@
+// wiki.xtns.pages.bgn
+parser.xtns.get('pages').ns_names_('পৃষ্ঠা', 'পৃষ্ঠা আলোচনা', 'সূচী', 'সূচী আলোচনা');
+// wiki.xtns.pages.end
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+-1|विशेष
+1|वार्ता
+1|বার্তা
+2|सदस्य
+3|सदस्य_वार्ता
+3|সদস্য_বার্তা
+4|Wikisource
+5|ৱিকিউৎস_वार्ता
+5|ৱিকিউৎস_বার্তা
+6|Image
+6|चित्र
+6|চিত্র
+7|Image_talk
+7|चित्र_वार्ता
+7|চিত্র_বার্তা
+8|মেডিয়াৱিকি
+9|MediaWiki_বার্তা
+9|মেডিয়াৱিকি_বাৰ্তা
+10|साँचा
+11|साँचा_वार्ता
+11|সাঁচ_বার্তা
+13|সহায়_বার্তা
+14|श्रेणी
+14|শ্রেণী
+15|श्रेणी_वार्ता
+15|শ্রেণী_বার্তা
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(0).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(14).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(104).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(105).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(106).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(107).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end

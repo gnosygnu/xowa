@@ -1,0 +1,1437 @@
+numbers {
+  separators {
+    clear;
+    set(',', ' ');
+    set('.', ',');
+  }
+}
+this
+.fallback_load('kk-latn, kk-cyrl')
+.ns_names
+  .load_text(
+<:['
+-2|Media
+-1|Arnawlı
+1|Sa\\'wbet
+2|Paydalanıwshı
+3|Paydalanıwshı sa\\'wbeti
+5|$1 sa\\'wbeti
+6|Su\\'wret
+7|Su\\'wret sa\\'wbeti
+8|MediaWiki
+9|MediaWiki sa\\'wbeti
+10|Shablon
+11|Shablon sa\\'wbeti
+12|Anıqlama
+13|Anıqlama sa\\'wbeti
+14|Kategoriya
+15|Kategoriya sa\\'wbeti
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Allmessages|Ha\\'mme xabarlar
+Allpages|Ha\\'mme betler
+Ancientpages|Eski betler
+BrokenRedirects|Jaramsız burıwshılar
+Categories|Kategoriyalar
+Contributions|Paydalanıwshı u\\'lesi
+Deadendpages|Hesh betke siltemeytug\\'ın betler
+DoubleRedirects|Qos burıwshılar
+Emailuser|Xat jiberiw
+Export|Eksport
+Fewestrevisions|Az du\\'zetilgenler
+Listadmins|Administratorlar
+Listfiles|Su\\'wretler dizimi
+Listredirects|Burıwshılar dizimi
+Listusers|Paydalanıwshılar~Paydalanıwshı dizimi
+Log|Jurnal~Jurnallar
+Lonelypages|Hesh betten siltelmegen betler
+Longpages|Uzın betler
+MIMEsearch|MIME izlew
+Mostcategories|Ko\\'p kategoriyalang\\'anlar
+Mostimages|Ko\\'p paydalanılg\\'an su\\'wretler
+Mostlinked|Ko\\'p siltelgenler
+Mostlinkedcategories|Ko\\'p paydalanılg\\'an kategoriyalar
+Mostlinkedtemplates|Ko\\'p paydalanılg\\'an shablonlar
+Mostrevisions|Ko\\'p du\\'zetilgenler
+Movepage|Betti ko\\'shiriw
+Mycontributions|Menin\\' u\\'lesim
+Mypage|Menin\\' betim
+Mytalk|Menin\\' sa\\'wbetim
+Newimages|Taza su\\'wretler
+Newpages|Taza betler
+Popularpages|Ko\\'p ko\\'rilgen betler
+Preferences|Sazlawlar
+Protectedpages|Qorg\\'alg\\'an betler
+Randompage|Qa\\'legen~Qa\\'legen bet
+Randomredirect|Qa\\'legen burıwshı
+Recentchanges|Aqırg\\'ı o\\'zgerisler
+Recentchangeslinked|Baylanıslı aqırg\\'ı o\\'zgerisler
+Revisiondelete|Nusqanı o\\'shiriw
+Search|İzlew
+Shortpages|Qqısqa betler
+Specialpages|Arnawlı betler
+Statistics|Statistika
+Uncategorizedcategories|Kategoriyasız kategoriyalar
+Uncategorizedimages|Kategoriyasız su\\'wretler
+Uncategorizedpages|Kategoriyasız betler
+Uncategorizedtemplates|Kategoriyasız shablonlar
+Unusedcategories|Paydalanılmag\\'an kategoriyalar
+Unusedimages|Paydalanılmag\\'an fayllar~Paydalanılmag\\'an su\\'wretler
+Unusedtemplates|Paydalanılmag\\'an shablonlar
+Unwatchedpages|Baqlanılmag\\'an betler
+Userlogin|Kiriw~Paydalanıwshı kiriw
+Userlogout|Shıg\\'ıw~Paydalanıwshı shıg\\'ıw
+Userrights|Paydalanıwshı huqıqları
+Version|Versiya
+Wantedcategories|Talap qılıng\\'an kategoriyalar
+Wantedpages|Talap qılıng\\'an betler~Jaramsız sıltewler
+Watchlist|Baqlaw dizimi
+Whatlinkshere|Siltelgen betler
+Withoutinterwiki|Hesh tilge siltemeytug\\'ın betler
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Ekshenbi
+monday|Du'yshenbi
+tuesday|Siyshenbi
+wednesday|Sa'rshenbi
+thursday|Piyshenbi
+friday|Juma
+saturday|Shenbi
+sun|Eks
+mon|Dsh
+tue|Ssh
+wed|Sa'r
+thu|Psh
+fri|Jum
+sat|Shn
+january|Yanvar
+february|Fevral
+march|Mart
+april|Aprel
+may_long|May
+june|İyun
+july|İyul
+august|Avgust
+september|Sentyabr
+october|Oktyabr
+november|Noyabr
+december|Dekabr
+january-gen|yanvardın'
+february-gen|fevraldın'
+march-gen|marttın'
+april-gen|apreldin'
+may-gen|maydın'
+june-gen|iyunnin'
+july-gen|iyuldin'
+august-gen|avgusttın'
+september-gen|sentyabrdin'
+october-gen|oktyabrdin'
+november-gen|noyabrdin'
+december-gen|dekabrdin'
+jan|Yan
+feb|Fev
+mar|Mar
+apr|Apr
+may|May
+jun|İun
+jul|İul
+aug|Avg
+sep|Sen
+oct|Okt
+nov|Noy
+dec|Dek
+toc|Mazmunı
+redirectedfrom|(~{0} degennen burılg'an)
+allpages|Ha'mme betler
+prevpage|Aldıng'ı bet (~{0})
+nextpage|Keyingi bet (~{0})
+categories|Kategoriyalar
+lastmodifiedat|Bul bettin' aqırg'ı ma'rte o'zgertilgen waqtı: ~{1}, ~{0}.
+thumbnail-more|U'lkeytiw
+otherlanguages|Basqa tillerde
+blanknamespace|(Baslı)
+pagecategories|{{PLURAL:~{0}\u007CKategoriya\u007CKategoriyalar}}
+category_header|"~{0}" kategoriyasindag'ı betler
+subcategories|Podkategoriyalar
+category-media-header|"~{0}" kategoriyasindag'ı media
+category-empty|''Bul kategoriyada ha'zir hesh bet yamasa media joq''
+category-subcat-count|{{PLURAL:~{1}\u007CBul kategoriyada tek to'mendegi podkategoriya bar.\u007CBul kategoriyada ~{0} podkategoriya bar (barlıg'ı ~{1}).}}
+category-subcat-count-limited|Bul kategoriyada to'mendegi {{PLURAL:~{0}\u007Cpodkategoriya\u007C~{0} podkategoriyalar}} bar.
+category-article-count|{{PLURAL:~{1}\u007CBul kategoriyada tek to'mendegi bet bar.\u007CBul kategoriyada to'mendegi ~{0} bet bar (barlıg'ı ~{1}).}}
+category-article-count-limited|Usı kategoriyada to'mendegi {{PLURAL:~{0}\u007Cbet\u007C~{0} bet}} bar.
+category-file-count|{{PLURAL:~{1}\u007CBul kategoriyada tek to'mendegi fayl bar.\u007CBul kategoriyada to'mendegi ~{0} fayl bar (barlıg'ı ~{1}).}}
+category-file-count-limited|Usı kategoriyada to'mendegi {{PLURAL:~{0}\u007Cfayl\u007C~{0} fayl}} bar.
+nextn|keyingi {{PLURAL:~{0}\u007C~{0}}}
+prevn|aldıng'ı {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|dawamı
+bold_sample|Yarım juwan tekst
+bold_tip|Yarım juwan tekst
+italic_sample|Kursiv tekst
+italic_tip|Kursiv tekst
+link_sample|Siltew ataması
+link_tip|İshki siltew
+headline_sample|Atama teksti
+headline_tip|2-shi da'rejeli atama
+hidden-category-category|Jasırın kategoriyalar
+statistics|Statistika
+statistics-header-pages|Bet statistikası
+statistics-articles|Maqalalar
+statistics-pages|Betler
+statistics-pages-desc|Wikidegi barlıw betler, sawbet, qayta bag'itlang'an h.t.b. betlerin qosqanda.
+categorytree|Kategoriyalar teregi
+wm-license-information-source|Fayl deregi
+sitesupport-url|https://donate.wikimedia.org/?utm_source=donate&utm_medium=sidebar&utm_campaign=spontaneous&uselang=kaa
+sitesupport|Ja'rdem berıw
+tooltip-n-sitesupport|Bizge ja'rdem berin'
+tog-underline|Siltewdin' astın sız:
+tog-hideminor|Aqırg'ı o'zgerislerden kishilerin jasır
+tog-extendwatchlist|Baqlaw dizimin barlıq o'zgerislerdi ko'rsetetug'ın qılıp ken'eyt (tek aqırg'ıların emes)
+tog-usenewrc|Jaqındag'ı o'zgerisler ha'm baqlaw dizimindegi o'zgerislerdi birlestiriw
+tog-numberheadings|Atamalardı avtomat nomerle
+tog-showtoolbar|O'zgertiw a'sbapların ko'rset
+tog-editondblclick|Betlerdi eki ma'rte basıp o'zgertiw
+tog-editsectiononrightclick|Bo'lim atamasın on' jaqqa basıp o'zgertiwdi qos
+tog-watchcreations|Men jaratqan betlerdi ha'm ju'klegen fayllardı baqlaw dizimime qos
+tog-watchdefault|Men o'zgeris kiritken betler ha'm fayllardı baqlaw dizimime qos
+tog-watchmoves|Men ko'shirgen betler ha'm fayllardı baqlaw dizimime qos
+tog-watchdeletion|Men o'shirgen betler ha'm fayllardı baqlaw dizimime qos
+tog-minordefault|Defolt boyınsha barlıq o'zgerislerdi kishi dep esaplaw
+tog-previewontop|O'zgertiw maydanınan aldın ko'rip shıg'ıw maydanın ko'rset
+tog-previewonfirst|Birinshi o'zgertiwdi ko'rip shıq
+tog-enotifwatchlistpages|Baqlaw dizimimdegi bet yamasa fayl o'zgertilgende mag'an xat jiber
+tog-enotifusertalkpages|Menin' sa'wbetim o'zgertilgende mag'an xat jiber
+tog-enotifminoredits|Bet ha'm fayllardag'ı kishi o'zgerisler haqqında da mag'an xat jiber
+tog-enotifrevealaddr|Eskertiw xatlarında e-mail adresimdi ko'rset
+tog-shownumberswatching|Baqlag'an paydalanıwshılar sanın ko'rset
+tog-fancysig|İmzalardı wikitext dep qabıl etiw (avtomat siltewsiz)
+tog-uselivepreview|Janlı ko'rip shıg'ıwdı qollan (Sınawda)
+tog-forceeditsummary|O'zgertiw juwmag'ı bos qalg'anda mag'an eskert
+tog-watchlisthideown|Baqlaw dizimindegi menin' o'zgertiwlerimdi jasır
+tog-watchlisthidebots|Baqlaw dizimindegi bot o'zgertiwlerin jasır
+tog-watchlisthideminor|Baqlaw diziminen kishi o'zgerislerdi jasır
+tog-watchlisthideliu|Baqlaw dizimindegi kirgen paydalanıwshılardın' o'zgerislerin jasır
+tog-watchlisthideanons|Baqlaw dizimindegi anonim paydalanıwshılardın' o'zgerislerin jasır
+tog-ccmeonemails|Basqa qollanıwshılarg'a jibergen xatlarımnın' ko'shirmesin mag'an da jiber
+tog-diffonly|Bet mag'lıwmatın parqlardan to'mengi jerde ko'rsetpe
+tog-showhiddencats|Jasırın kategoriyalardı ko'rset
+tog-norollbackdiff|Artqa qaytarıwdan keyin parqlardı ko'rsetpe
+underline-always|Ha'r dayım
+underline-never|Hesh qashan
+underline-default|Brawzerdin' sazlawları boyınsha
+hidden-categories|{{PLURAL:~{0}\u007CJasırın kategoriya\u007CJasırın kategoriyalar}}
+about|Haqqında
+article|Mag'lıwmat beti
+newwindow|(jan'a aynada)
+cancel|Biykar etiw
+moredotdotdot|Ja'ne...
+mypage|Bet
+mytalk|Sa'wbet
+anontalk|Usı IP sa'wbeti
+navigation|Navigatsiya
+and| ha'm
+qbfind|Tabıw
+qbbrowse|Ko'riw
+qbedit|O'zgertiw
+qbpageoptions|Usı bet
+qbmyoptions|Menin' betlerim
+faq|KBS
+faqpage|Project:KBS
+actions|Ha'reketler
+namespaces|İsimler ko'plikleri
+variants|Variantlar
+errorpagetitle|Qatelik
+returnto|~{0} betine qaytıw.
+tagline|{{SITENAME}} mag'lıwmatı
+help|Anıqlama
+search|İzlew
+searchbutton|İzle
+go|O'tiw
+searcharticle|O'tin'
+history|Bet tariyxı
+history_short|Tariyx
+updatedmarker|aqırg'ı kirgenimnen keyin jan'alang'anlar
+printableversion|Baspa nusqası
+permalink|Turaqlı siltew
+print|Baspag'a shıg'arıw
+edit|O'zgertiw
+create|Jaratıw
+editthispage|Usı betti o'zgertiw
+create-this-page|Bul betti jaratıw
+delete|O'shiriw
+deletethispage|Usı betti o'shiriw
+undelete_short|{{PLURAL:~{0}\u007C1 o'zgeristi\u007C~{0} o'zgerisin}} qayta tiklew
+protect|Qorg'aw
+protect_change|qorg'awdı o'zgertiw
+protectthispage|Bul betti qorg'aw
+unprotect|Qorg'awdı o'zgertiw
+unprotectthispage|Bul bettin' qorg'aw sazlawların o'zgertiw
+newpage|Taza bet
+talkpage|Bul betti diskussiyalaw
+talkpagelinktext|Sa'wbet
+specialpage|Arnawlı bet
+personaltools|Paydalanıwshı a'sbapları
+articlepage|Mag'lıwmat betin ko'riw
+talk|Diskussiya
+views|Ko'rinis
+toolbox|A'sbaplar
+userpage|Paydalanıwshı betin ko'riw
+projectpage|Proyekt betin ko'riw
+imagepage|Fayl betin ko'riw
+mediawikipage|Xabar betin ko'riw
+templatepage|Shablon betin ko'riw
+viewhelppage|Anıqlama betin ko'riw
+categorypage|Kategoriya betin ko'riw
+viewtalkpage|Diskussiyanı ko'riw
+redirectpagesub|Burıwshı bet
+viewcount|Bul bet {{PLURAL:~{0}\u007Cbir ma'rte\u007C~{0} ma'rte}} ko'rip shıg'ılg'an.
+protectedpage|Qorg'alg'an bet
+jumpto|Bug'an o'tiw:
+jumptonavigation|navigatsiya
+jumptosearch|izlew
+aboutsite|{{SITENAME}} haqqında
+aboutpage|Project:Haqqında
+copyright|Mag'lıwmat ~{0} litsenziyası boyınsha alıng'an (eger basqa sha'rtler ko'rsetilmese).
+copyrightpage|{{ns:project}}:Avtorlıq huquqları
+currentevents|Ha'zirgi ha'diyseler
+currentevents-url|Project:Ha'zirgi ha'diyseler
+disclaimers|Juwapkershilikten bas tartıw
+disclaimerpage|Project:Juwapkershilikten bas tartıw
+edithelp|O'zgertiw anıqlaması
+mainpage|Bas bet
+mainpage-description|Bas bet
+policy-url|Project:Qag'ıydalar
+portal|Ja'miyet portalı
+portal-url|Project:Ja'miyet Portalı
+privacy|Konfidentsiallıq qag'ıydası
+privacypage|Project:Konfidentsiallıq qag'ıydası
+badaccess|Ruxsatnama qateligi
+badaccess-group0|Soralıp atırg'an ha'reketin'izdi bejeriwge ruqsatın'ız joq.
+badaccess-groups|Soralıp atırg'an ha'reketin'iz to'mendegi {{PLURAL:~{1}\u007Ctopar\u007Ctoparlardın' birinin'}} paydalanıwshılarına sheklengen: ~{0}
+versionrequired|MediaWikidin' ~{0} nusqası kerek
+versionrequiredtext|Bul betti paydalanıw ushın MediaWikidin' ~{0} nusqası kerek. [[Special:Version\u007CNusqa beti]]n qaran'.
+ok|OK
+retrievedfrom|"~{0}" saytınan alıng'an
+youhavenewmessages|Sizge ~{0} bar (~{1}).
+youhavenewmessagesmulti|~{0} betinde sizge jan'a xabarlar bar
+editsection|o'zgertiw
+editold|o'zgertiw
+viewsourceold|deregin ko'riw
+editlink|o'zgertiw
+viewsourcelink|kodın ko'riw
+editsectionhint|~{0} bo'limin o'zgertiw
+showtoc|ko'rset
+hidetoc|jasır
+thisisdeleted|~{0}: ko'riw yamasa qayta tiklew?
+viewdeleted|~{0} ko'riw?
+restorelink|{{PLURAL:~{0}\u007Cbir o'shirilgen o'zgeris\u007C~{0} o'shirilgen o'zgeris}}
+feedlinks|Jolaq:
+feed-invalid|Natuwrı jazılıw jolaqsha tu'ri.
+feed-unavailable|Tarqatılatug'ın jolaqlar joq
+site-rss-feed|~{0} saytının' "RSS" jolag'ı
+site-atom-feed|~{0} saytının' "Atom" jolag'ı
+page-rss-feed|"~{0}" betinin' "RSS" jolag'ı
+page-atom-feed|"~{0}" betinin' "Atom" jolag'ı
+feed-atom|"Atom"
+feed-rss|"RSS"
+red-link-title|~{0} (bet ele jaratılmag'an)
+nstab-main|Bet
+nstab-user|Paydalanıwshı
+nstab-media|Media beti
+nstab-special|Arnawlı bet
+nstab-project|Proyekt beti
+nstab-image|Fayl beti
+nstab-mediawiki|Xabar
+nstab-template|Shablon
+nstab-help|Anıqlama beti
+nstab-category|Kategoriya
+nosuchaction|Bunday ha'reket joq
+nosuchactiontext|Bul URLda ko'rsetilgen ha'reket jaramsız\nSiz URLdi kiritiwde qa'te jibergenin'iz yamasa nadurıs siltewge o'tken bolıwın'ız mu'mkin\nBul sonday-aq {{SITENAME}} ta'repinen paydalanılg'an bag'darlamasında qa'te barlıg'ın bildiriwi mu'mkin
+nosuchspecialpage|Bunday arnawlı bet joq
+nospecialpagetext|<strong>Siz sorag'an bunday arnawlı bet joq.</strong>\n\nArnawlı betlerdin' dizimin [[Special:SpecialPages\u007C{{int:specialpages}}]] betinen tabıwın'ızg'a boladı.
+error|Qa'telik
+databaseerror|Mag'lıwmatlar bazası qa'tesi
+laggedslavemode|Esletpe: Bette aqırg'ı jan'alanıwlar bolmawı mu'mkin.
+readonly|Mag'lıwmatlar bazası qulplang'an
+enterlockreason|Qulıplawdın' sebebin ha'mde qansha waqıtqa esaplang'anlıg'ın ko'rsetin'
+readonlytext|Bul mag'lıwmatlar bazası ha'zirshe jan'a ha'm basqada o'zgerislerdi kiritiwden qulıplang'an, ba'lkim rejelestirilgen sazlawlar ushındır.\nQulıplag'an administratordın' qaldırg'an tu'sindirmesi: ~{0}
+missing-article|Bar bolıwı kerek bolg'an to'mendegi bet teksti mag'lıwmatlar bazasında tabılmadı: "~{0}" ~{1}.\n\nBul eskirgen parq siltewine yamasa o'shirilgen bettin' tariyx betine o'tkende sa'dir bolıwı mu'mkin.\n\nEger bular orınlı bolmasa, bag'darlamadag'ı qa'tege tuwrı kelgen bolıwın'ız mu'mkin.\nİltimas bul haqqında URL adresin ko'rsetip, [[Special:ListUsers/sysop\u007Cadministratorlarg'a]] xabar berin'.
+missingarticle-rev|(du'zetiw#: ~{0})
+missingarticle-diff|(Ayrm.: ~{0}, ~{1})
+readonly_lag|Ekilenshi mag'lıwmatlar bazası serveri baslısı menen sixronlasıw waqtında, mag'lıwmatlar bazası waqtınsha avtomatik halda o'zgerislerden bloklang'an
+internalerror|İshki qa'telik
+internalerror_info|İshki qa'telik: ~{0}
+filecopyerror|"~{0}" faylın "~{1}" faylına ko'shiriw a'melge aspadı.
+filerenameerror|"~{0}" faylı atı "~{1}" atına o'zgertilmedi.
+filedeleteerror|"~{0}" faylı o'shirilmedi.
+directorycreateerror|"~{0}" papkası jaratılmadı.
+filenotfound|"~{0}" faylı tabılmadı.
+unexpected|Ku'tilmegen ma'nis: "~{0}" = "~{1}".
+formerror|Qatelik: forma mag'lıwmatların jiberiw mu'mkin emes
+badarticleerror|Bunday ha'reket bul bette atqarılmaydı.
+cannotdelete|"~{0}" beti yamasa faylı o'shirilmedi. \nBunı basqa birew aldınlaw o'shigen bolıwı mu'mkin.
+badtitle|Jaramsız atama
+badtitletext|Sorag'an betin'izdin' ataması natuwrı, bos, tillerara yamasa inter-wiki ataması natuwrı ko'rsetilgen. Atamada qollanıwg'a bolmaytug'ın bir yamasa bir neshe simvollar bolıwı mu'mkin.
+perfcached|To'mendegi mag'lıwmat keshlengen ha'mde jan'alanbag'an bolıwı mu'mkin. Keshte en' ko'bi menen {{PLURAL:~{0}\u007Cjuwap\u007C~{0} juwap}} saqalanadı.
+perfcachedts|To'mendegi mag'lıwmat keshlengen, aqırg'ı keshlengen waqtı: ~{0}. Keshte en' ko'bi menen {{PLURAL:~{3}\u007Cjuwap\u007C~{3} juwap}} saqalanadı.
+querypage-no-updates|Bul bettin' jan'alanıwı ha'zirshe o'shirilgen.\nBul jerde keltirilgen mag'lıwmatlar o'zgertilmeydi.
+viewsource|Deregin ko'riw
+actionthrottled|Ha'reket toqtatıldı
+actionthrottledtext|Spamg'a qarsı gu'res esabında, bunday ha'reketti qısqa waqıtta dım ko'p ma'rte bejeriwin'iz sheklenedi, ha'mde siz usı limitten o'tip ketkensiz.\nBirneshe minuttan keyin qaytadan ha'reket qılıp ko'rin'.
+protectedpagetext|Bul bet o'zgertiwdin' ha'm basqa ha'reketlerdin' aldın alıw ushın qulplang'an.
+viewsourcetext|Bul bettin' deregin qarawın'ızg'a ha'mde ko'shirip alıwın'ızg'a boladı:
+editinginterface|'''Esletpe:''' Siz ishinde MediaWiki sistema xabarı bar bolg'an betti o'zgertip atırsız.\nBul bettin' o'zgeriwi basqa paydalanıwshılardın' sırtqı interfeysine ta'sir etedi.\nBul xabardın' awdarmasın qosıw yamasa o'zgertiw ushın,  MediaWiki programmasının' lokallastırıw [//translatewiki.net/wiki/Main_Page?setlang=kaa translatewiki.net proektinen] paydalanın'.
+namespaceprotected|'''~{0}''' isimler ko'pligindegi betlerdi o'zgertiwge ruxsatın'ız joq.
+ns-specialprotected|"{{ns:special}}:" isimler ko'pligindegi betler o'zgertilmeydi
+titleprotected|Bul atamanı jaratıw [[User:~{0}\u007C~{0}]] ta'repinen qorg'alg'an.\nKeltirilgen sebep: ''~{1}''.
+virus-unknownscanner|belgisiz antivirus:
+logouttext|'''Siz endi sayttan shıqtın'ız.'''\n\nSonı este saqlan', ayrım betler sizin' brauzerin'izdin' keshi tazalanbag'anlıg'ı sebebli sistemada kirgenin'izdey ko'riniste dawam ettire beriwi mu'mkin.
+yourname|Paydalanıwshı atı:
+yourpassword|Parol:
+yourpasswordagain|Paroldi qayta kiritin':
+remembermypassword|Menin' kirgenimdi usı kompyuterde saqlap qal (en' ko'bi menen ~{0} {{PLURAL:~{0}\u007Cku'nge\u007Cku'nge}} shekem)
+yourdomainname|Sizin' domen:
+login|Kiriw
+nav-login-createaccount|Kiriw / akkaunt jaratıw
+userlogin|Kiriw / akkaunt jaratıw
+logout|Shıg'ıw
+userlogout|Shıg'ıw
+notloggedin|Kirilmegen
+nologin|Akkauntın'ız joqpa? '''~{0}'''.
+nologinlink|Akkaunt jaratın'
+createaccount|Akkaunt jarat
+gotaccount|Akkauntın'ız barma? '''~{0}'''.
+gotaccountlink|Kir
+createaccountmail|Waqtınshalıq parol jaratıw ha'm onı ko'rsetilgen e-mail adresin jiber
+badretype|Siz kiritken parol tuwra kelmedi.
+userexists|Kiritken paydalanıwshı atı ba'nt. \nİltimas, basqa at saylan'.
+loginerror|Kiriwde qatelik
+nocookiesnew|Paydalanıwshı akkauntı jaratıldı, biraq ele kirmegensiz.\nPaydalanıwshılar kiriwi ushın {{SITENAME}} kukilerden paydalanadı.\nSizde kukiler o'shirilgen.\nKukilerdi qosıp, jan'a paydalanıwshı atın'ız ha'm parolin'iz arqalı kirin'.
+nocookieslogin|Paydalanıwshılar kiriwi ushın {{SITENAME}} kukilerden paydalanadı.\nSizde kukiler o'shirilgen.\nKukilerdi qosıp, qaytadan ko'rin'.
+noname|Siz kiritken paydalanıwshı atı qate.
+loginsuccesstitle|Kiriw tabıslı a'melge asırıldı
+loginsuccess|'''{{SITENAME}} saytına "~{0}" paydalanıwshı atı menen kirdin'iz.'''
+nosuchuser|"~{0}" atlı paydalanıwshı joq.\nTuwrı jazılg'anlıg'ın tekserin' yamasa [[Special:UserLogin/signup\u007Ctaza akkaunt jaratın']].
+nosuchusershort|"~{0}" atlı paydalanıwshı joq. Tuwrı jazılg'anlıg'ın tekserin'.
+nouserspecified|Siz paydalanıwshı atın ko'rsetpedin'iz.
+wrongpassword|Qate parol kiritlgen. Qaytadan kiritin'.
+wrongpasswordempty|Parol kiritilmegen. Qaytadan ha'reket etin'.
+passwordtooshort|Parolin'iz jaramsız yamasa dım qısqa.\nEn' keminde {{PLURAL:~{0}\u007C1 ha'rip\u007C~{0} ha'rip}} ha'mde paydalanıwshı atın'ızdan o'zgeshe bolıwı kerek.
+mailmypassword|Paroldi e-mailg'a jiberiw
+passwordremindertitle|{{SITENAME}} ushın taza waqtınsha parol
+passwordremindertext|Kimdir (IP adresi: ~{0}, ba'lkim o'zin'iz shıg'ar)\n{{SITENAME}} ushın bizden taza parol jiberiwimizdi sorag'an (~{3}).\nEndi «~{1}» paydalanıwshının' paroli «~{2}». Eger bul sizin' maqsetin'iz bolg'an bolsa,\nha'zir kirip parolin'izdi almastırıwın'ız kerek.\nSizin' waqtınshalıq parolin'iz {{PLURAL:~{4}\u007Cbir ku'nnen\u007C~{4} ku'nnen}} keyin o'z ku'shin jog'altadı.\n\nEger basqa birew bunı sorag'an bolsa yamasa parolin'izdi eslegen bolsan'ız,\nbul xabarg'a itibar bermey, aldıng'ı parolin'izdi qollanıwın'ızg'a boladı.
+noemail|"~{0}" paydalanıwshının' e-mailı joq.
+passwordsent|Taza parol «~{0}» ushın ko'rsetilgen e-mail\nadresine jiberildi.\nQabıl qılg'anın'ızdan keyin qaytadan kirin'.
+blocked-mailpassword|IP adresin'iz o'zgeris kiritiwden bloklang'an, so'nın' ushın paroldi tiklew funktsiyasın ha'm paydalana almaysız.
+eauthentsent|Tastıyıqlaw xatı e-mail adresin'izge jiberildi.\nBasqa e-mail jiberiwden aldın, akkaunt shın'ınan siziki ekenin\ntastıyıqlaw ushın xattag'ı ko'rsetpelerdi bejerin'.
+throttled-mailpassword|Aqırg'ı {{PLURAL:~{0}\u007Csaat\u007C~{0} saat}} ishinde parol eskertiw xatı jiberildi.\nJaman jolda paydalanıwdın' aldın alıw ushın, ha'r {{PLURAL:~{0}\u007Csaat\u007C~{0} saat}} sayın tek g'ana bir parol eskertiw xatı jiberiledi.
+mailerror|Xat jiberiwde qatelik juz berdi: ~{0}
+acct_creation_throttle_hit|Keshirersiz, siz aldın {{PLURAL:~{0}\u007C1 akkaunt\u007C~{0} akkaunt}} jaratqansız.\nBunnan artıq jaratıw mu'mkinshiligin'iz joq.
+emailauthenticated|Sizin' e-mail adresin'iz tastıyqlang'an waqtı: ~{2}, ~{1}.
+emailnotauthenticated|E-mail adresin'iz ele tastıyıqlanbag'an.\nTo'mendegi mu'mkinshilikler ushın hesh xat jiberilmeydi.
+noemailprefs|Usı mu'mkinshilikler islewi ushın e-mail adresin'izdi ko'rsetin'.
+emailconfirmlink|E-mail adresin'izdi tastıyıqlan'
+invalidemailaddress|E-mail adresin'iz nadurıs formatta bolg'anı ushın qabıl etile almaydı.\nDurıs formattag'ı adresin'izdi ko'rsetin', yamasa qatardı bos qaldırın'.
+accountcreated|Akkaunt jaratıldı
+accountcreatedtext|[[{{ns:User}}:~{0}\u007C~{0}]] ([[{{ns:User talk}}:~{0}\u007Ctalk]]) paydalanıwshısına akkaunt jaratıldı.
+createaccount-title|{{SITENAME}} ushın akkaunt jaratıw
+createaccount-text|Kimdir e-mail adresin'izdi paydalanıp {{SITENAME}} saytında (~{3}) "~{1}" atı menen, "~{2}" paroli menen akkaunt jaratqan.\nEndi saytqa kirip parolin'izdi o'zgertiwin'iz kerek.\n\nEger bul akkaunt nadurıs jaratılg'an bolsa, bul xabarg'a itibar bermesen'izde boladı.
+loginlanguagelabel|Til: ~{0}
+changepassword|Paroldi o'zgertiw
+resetpass_announce|Kiriw protsessin juwmaqlaw ushın jan'a parol jaratıwın'ız kerek.
+resetpass_header|Akkaunt parolin o'zgertiw
+oldpassword|Aldıng'ı parol:
+newpassword|Taza parol:
+retypenew|Taza paroldi qayta kiritin':
+resetpass_submit|Paroldi kirgizin'
+changepassword-success|Parolin'iz sa'tli o'zgertildi!
+resetpass_forbidden|Paroller o'zgertile almaydi
+resetpass-submit-loggedin|Paroldi o'zgertiw
+resetpass-temp-password|Waqtınshalıq parol:
+extlink_sample|http://www.example.com siltew ataması
+extlink_tip|Sırtqı siltew (http:// prefiksin kiritin')
+nowiki_sample|Formatlanbag'an tekstti usı jerge qoyın'
+nowiki_tip|Wiki formatlawın esapqa almaw
+image_tip|Jaylastırılg'an fayl
+media_tip|Fayl siltewi
+sig_tip|Sizin' imzan'iz ha'mde waqıt belgisi
+hr_tip|Gorizont bag'ıtındag'ı sızıq (dım ko'p paydalanban')
+summary|Juwmaq:
+subject|Ataması:
+minoredit|Bul kishi o'zgeris
+watchthis|Bul betti baqlaw
+savearticle|Betti saqla
+preview|Ko'rip shıg'ıw
+showpreview|Ko'rip shıq
+showdiff|O'zgerislerdi ko'rset
+anoneditwarning|'''Esletpe:''' Siz kirmedin'iz. Sizin' IP adresin'iz usi bettin' o'zgeris tariyxında saqlanıp qaladı.
+missingsummary|'''Esletpe:''' O'zgeristin' qısqasha mazmunın ko'rsetpedin'iz.\n"Saqlaw"dı ja'ne bassan'ız, o'zgerislerin'iz hesh qanday kommentariysiz saqlanadı.
+missingcommenttext|Kommentariydi to'mende kiritin'.
+missingcommentheader|'''Eskertpe:''' Bul kommentariy ushın atama ko'rsetpedin'iz.\nEger ja'ne "{{int:savearticle}}" bassan'ız, o'zgerislerin'iz olsız saqlanadı.
+summary-preview|Juwmag'ın ko'rip shıg'ıw:
+subject-preview|Atamanı aldınnan qaraw:
+blockedtitle|Paydalanıwshı bloklang'an
+blockedtext|'''Paydalaniwshı atın'ız yamasa IP adresin'iz bloklang'an.'''\n\nBloklawdı ~{0} a'melge asırg'an.\nKeltirilgen sebebi: ''~{1}''.\n\n* Bloklaw baslang'an: ~{7}\n* Bloklaw tamamlang'an: ~{5}\n* Bloklaw maqseti: ~{6}\n\nUsı bloklawdı diskussiya qılıw ushın ~{0} yamasa basqa [[{{MediaWiki:Grouppage-sysop}}\u007Cadministratorlar]] menen baylanısqa shıg'ıwın'ızg'a boladı.\nSiz [[Special:Preferences\u007Cakkaunt sazlawların'ızda]] haqıyqıy e-mailin'izdı ko'rsetpegenin'izshe ha'mde onı paydalanıwdan bloklang'an bolg'anısha "Usı paydalanıwshıg'a xat jazıw" qa'siyetinen qollana almaysız.\nSizin' ha'zirgi IP adresin'iz: ~{2}, bloklaw IDı: #~{4}.\nUsılardın' birewin yamasa ekewinde ha'r bir sorawın'ızg'a qosın'.
+blockednoreason|hesh sebep keltirilmegen
+whitelistedittext|Betterdi o'zgertiw ushın ~{0} sha'rt.
+confirmedittext|Betlerge o'zgeris kiritiwin'iz ushın aldın E-pochta adresin'izdi tastıyıqlawın'ız kerek.\nE-pochta adresin'izdi [[Special:Preferences\u007Cpaydalanıwshı sazlawları bo'limi]] arqalı ko'rsetin' ha'm jaramlılıg'ın tekserin'.
+nosuchsectiontitle|Bul bo'lim tabılmadı
+nosuchsectiontext|Ele jaratılmag'an bo'limdi o'zgerpekshi boldın'ız.\nSiz bul betti ko'rip atırg'an waqtın'ızda ol ko'shirilgen yamasa o'shirilgen bolıwı mu'mkin.
+loginreqtitle|Sistemag'a kiriw kerek
+loginreqlink|kiriw
+loginreqpagetext|Basqa betlerdi ko'riw ushın sizge ~{0} kerek.
+accmailtitle|Parol jiberildi.
+accmailtext|[[User talk:~{0}\u007C~{0}]] ushın qaytadan jaratılg'an parol ~{1} g'a jiberildi.\nSaytqa kirgenin'izden keyin, bul akkaunt parolin ''[[Special:ChangePassword\u007Cchange password]]'' betinde o'zgertiwge boladı.
+newarticle|(Taza)
+newarticletext|Siz ele jaratılmag'an betke siltew arqalı o'ttin'iz.\nBetti jaratıw ushın to'mendegi aynada tekstin'izdi kiritin' (qosımsha mag'lıwmat ushın [~{0} anıqlama betin] qaran').\nEger bul jerge aljasıp o'tken bolsan'ız, brauzerin'izdin' «Arqag'a» knopkasın basın'.
+noarticletext|Ha'zirgi waqıtta bul bette hesh qanday mag'lıwmat joq.\nBasqa betlerden usı bet atamasın [[Special:Search/{{PAGENAME}}\u007Cizlep ko'riwin'izge]],\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} tiyisli jurnallardı izlewin'izge],\nyamasa usı betti [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} jaratıwin'ızga']</span> boladi.
+userpage-userdoesnotexist|"<nowiki>~{0}</nowiki>" paydalanıwshı akkauntı registratsiya qılınbag'an. Bul betti jaratqın'ız yamasa o'zgertkin'iz kelse tekserip ko'rin'.
+updated|(Jan'alang'an)
+note|'''Eskertiw:'''
+previewnote|'''Bul ele tek aldınnan ko'rip shıg'ıw; o'zgerisler ele saqlanbadı!'''
+session_fail_preview|'''Keshirersiz! Sessiya mag'lıwmatlarının' jog'alıwı sebepli o'zgerislerin'izdi qabıl ete almaymız.\nQaytadan ha'reket qılıp ko'rin'. Eger bul payda bermese, [[Special:UserLogout\u007Cshıg'ıp]] qaytadan kirip ko'rin'.'''
+editing|~{0} o'zgertilmekte
+editingsection|~{0} (bo'limi) o'zgertilmekte
+editingcomment|~{0} (taza bo'lim) o'zgertilmekte
+editconflict|O'zgertiw konflikti: ~{0}
+yourtext|Sizin' tekst
+storedversion|Saqlang'an nusqası
+yourdiff|Parqlar
+copyrightwarning|Este tutın', {{SITENAME}} proyektinde jaylastırılg'an ha'm o'zgertilgen maqalalar tekstleri ~{1} sha'rt tiykarında qaraladı (tolıqraq mag'lıwmat ushın: ~{0}). Eger siz tekstin'izdin' erkin tarqatılıwın ha'mde qa'legen paydalanıwshı o'zgertiwin qa'lemesen'iz, bul jerge jaylastırmag'anın'ız maqul.<br />\nQosqan u'lesin'iz o'zin'izdin' jazg'anın'ız yamasa ashıq tu'rdegi derekten alıng'anlig'ına wa'de berin'.\n'''AVTORLIQ HUQUQI MENEN QORG'ALG'AN MAG'LIWMATLARDI RUXSATSIZ JAYLASTIRMAN'!'''
+copyrightwarning2|Este tutın', {{SITENAME}} proyektindegi barlıq u'lesler basqa paydalanıwshılar arqalı o'zgertiliwi yamasa o'shiriliwi mu'mkin. Eger siz tekstin'izdin' erkin tarqatılıwın ha'mde qa'legen paydalanıwshı o'zgertiwin qa'lemesen'iz, bul jerge jaylastırmag'anın'ız maqul.<br /> Qosqan u'lesin'iz o'zin'izdin' jazg'anın'ız yamasa ashıq tu'rdegi derekten alıng'anlig'ına wa'de berin' (qosımsha mag'lıwmat ushın ~{0} hu'jjetin qaran'). '''AVTORLIQ HUQUQI MENEN QORG'ALG'AN MAG'LIWMATLARDI RUXSATSIZ JAYLASTIRMAN'!'''
+semiprotectedpagewarning|'''Eskertiw:''' Bul bet qulplang'an, onı tek registratsiyadan o'tken paydalanıwshılar g'ana o'zgerte aladı.\nTo'mende en' aqırg'ı jurnal mag'lıwmatları berilgen.
+templatesused|Bul bette qollanılg'an {{PLURAL:~{0}\u007Cshablon\u007Cshablonlar}}:
+templatesusedpreview|Bul aldınnan ko'riw betinde qollanılg'an {{PLURAL:~{0}\u007Cshablon\u007Cshablonlar}}:
+templatesusedsection|Bul bo'limde qollanılg'an {{PLURAL:~{0}\u007Cshablon\u007Cshablonlar}}:
+template-protected|(qorg'alg'an)
+template-semiprotected|(yarım-qorg'alg'an)
+hiddencategories|Bul bet {{PLURAL:~{0}\u007C1 jasırın kategoriyasının'\u007C~{0} jasırın kategoriyalarının'}} ag'zası:
+nocreatetext|{{SITENAME}} saytında taza betlerdi jaratıw sheklengen.\nArqag'a qaytıp bar betti o'zgertiwin'izge yamasa [[Special:UserLogin\u007Ckiriwin'izge / akkaunt jaratıwın'ızg'a]] boladı.
+nocreate-loggedin|Taza betler jaratıwın'ızg'a ruxsatın'ız joq.
+permissionserrors|Ruxsatnama qateligi
+permissionserrorstext-withaction|~{1} ha'reketine ruxsatın'ız joq, to'mendegi {{PLURAL:~{0}\u007Csebep\u007Csebepler}} boyınsha:
+recreate-moveddeleted-warn|'''Esletpe: Aldın o'shirilgen betti qayta jaratajaqsız.'''\n\nUsi betti qaytadan jaratıw tuwrılıg'ın oylap ko'rin'.\nQolaylıq ushın to'mende o'shiriw jurnalı keltirilgen:
+moveddeleted-notice|Bul bet o'shirilgen.\nTo'mende mag'lıwmat ushın bettin' o'shiriw ha'm ko'shiriw jurnalı ko'rsetilgen.
+edit-conflict|O'zgerislerdegi konflikt.
+parser-template-loop-warning|Shablonlarda qaytalanıw tabıldı: [[~{0}]]
+cantcreateaccounttitle|Akkaunt jaratılmadı
+cantcreateaccount-text|[[User:~{2}\u007C~{2}]] usı IP adresten ('''~{0}''') akkaunt jaratıwın blokladı.\n\n~{2} keltirilgen sebebi: ''~{1}''
+viewpagelogs|Usı bettin' jurnalın ko'riw
+nohistory|Bul bettin' o'zgertiw tariyxı joq.
+currentrev|Ha'zirgi nusqa
+currentrev-asof|Bul nusqanın' waqtı: ~{0}
+revisionasof|~{0} waqtındagı nusqası
+revision-info|~{0} waqtındag'ı ~{1} istegen nusqası
+previousrevision|←Eskilew nusqası
+nextrevision|Jan'alaw nusqası→
+currentrevisionlink|Ha'zirgi nusqa
+cur|ha'z.
+next|keyin.
+last|aqır.
+page_first|birinshi
+page_last|aqırg'ı
+histlegend|Tu'sindirme: salıstırajaq nusqaların'ızdı saylan' ha'mde Enter knopkasın yamasa to'mendegi knopkani basın'.<br />\nSha'rtli belgiler: (ha'z.) = ha'zirgi nusqasi menen parqı,\n(aqır.) = aldıng'ı nusqasi menen parqı, k = kishi o'zgeris
+history-fieldset-title|Tariyxınan izlew
+histfirst|en' aldıng'ısı
+histlast|en' aqırg'ısı
+historysize|({{PLURAL:~{0}\u007C1 bayt\u007C~{0} bayt}})
+historyempty|(bos)
+history-feed-title|Nusqa tariyxı
+history-feed-description|Usı bettin' wikidegi nusqa tariyxı
+history-feed-item-nocomment|~{1} waqtındag'ı ~{0}
+rev-deleted-comment|(o'zgeris ta'ripi o'shirildi)
+rev-deleted-user|(paydalanıwshı atı o'shirildi)
+rev-deleted-event|(jurnal ha'reketi o'shirildi)
+rev-delundel|ko'rsetiw/jasırıw
+revdelete-legend|Ko'rinis sheklewlerin belgilew
+revdelete-hide-text|O'zgeris teksti
+revdelete-hide-image|Fayl mag'lıwmatın jasır
+revdelete-hide-name|Ha'reket ha'm onın' obyektin jasır
+revdelete-hide-comment|O'zgerisler ta'ripleri
+revdelete-hide-user|Paydalanıwshı atı/IP-adres
+revdelete-hide-restricted|Mag'lıwmatlardı administratorlar menen basqalardan da jasırıw
+revdelete-suppress|Mag'lıwmatlardı administratorlar menen basqalardan da jasırıw
+revdelete-unsuppress|Qayta tiklengen nusqalardan sheklewlerdi alıp taslaw
+revdelete-log|Sebep:
+revdelete-submit|Saylang'an {{PLURAL:~{0}\u007Cnusqag'a\u007Cnusqalarg'a}} qollaw
+revdelete-success|'''Nusqa ko'rinisi tabıslı jan'alandı.'''
+logdelete-success|'''Jurnal ko'rinisi tabıslı ornatıldı.'''
+revdel-restore|Ko'rinisin o'zgertiw
+pagehist|Bet tariyxı
+deletedhist|O'shirilgenler tariyxı
+suppressionlog|Jasırıw jurnalı
+mergehistory|Bet tariyxların qos
+mergehistory-box|Eki bettin' nusqaların biriktiriw:
+mergehistory-from|Derek bet:
+mergehistory-into|Belgilengen bet:
+mergehistory-list|O'zgerislerdin' biriktirilgen tariyxı
+mergehistory-go|Qosılıwı mu'mkin bolg'an oz'geriserdi ko'rset
+mergehistory-submit|Nusqalardı biriktiriw
+mergehistory-empty|Biriktiriwge nusqalar tabılmadı
+mergehistory-success|[[:~{0}]] betinin' ~{2} {{PLURAL:~{2}\u007Cnusqası\u007Cnusqaları}} [[:~{1}]] beti menen tabıslı biriktirildi.
+mergehistory-fail|Bet tariyxların biriktiriw a'melge aspadı, bet ha'm waqıt sazlawların ja'ne bir tekserip ko'rin'.
+mergehistory-no-source|~{0} derek beti ele jaratılmag'an.
+mergehistory-no-destination|~{0} aqırg'ı beti ele jaratılmag'an.
+mergehistory-invalid-source|Derek beti durıs atamag'a iye bolıwı sha'rt.
+mergehistory-invalid-destination|Aqırg'ı bet durıs atamag'a iye bolıwı sha'rt.
+mergehistory-autocomment|[[:~{0}]] degen [[:~{1}]] degenge biriktirildi
+mergehistory-comment|[[:~{0}]] degen [[:~{1}]] degenge biriktirildi: ~{2}
+mergehistory-same-destination|Derek ha'm aqırg'ı betler birdey bolmawı kerek
+mergelog|Biriktiriw jurnalı
+revertmerge|Ajırat
+mergelogpagetext|To'mende bir bet tariyxının' basqa betke biriktiriliwinin' en' aqırg'ı dizimi keltirilgen.
+history-title|"~{0}" betinin' nusqa tariyxı
+lineno|Qatar No ~{0}:
+compareselectedversions|Saylang'an nusqalardı salıstırıw
+editundo|qaytar
+searchresults|İzlew na'tiyjeleri
+searchresults-title|"~{0}" sorawnaması boyınsha tabılg'an na'tiyjeler
+titlematches|Bet ataması sa'ykes keledi
+textmatches|Bet tekstinin' tuwra kelgenleri
+notextmatches|Hesh qanday bet teksti tuwra kelmedi
+viewprevnext|Ko'riw: (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|'''Bul wikide "[[:~{0}]]" atamalı bet bar'''
+searchmenu-new|'''Bul wikide "[[:~{0}]]" betin jaratıw!'''
+searchprofile-articles|Mag'lıwmat betleri
+searchprofile-images|Multimediya
+searchprofile-everything|Barlıq jerde
+searchprofile-advanced|Ken'eytilgen
+searchprofile-articles-tooltip|~{0} izlew
+searchprofile-images-tooltip|Fayllardı izlew
+searchprofile-everything-tooltip|Barlıq betlerde izlew (sa'wbet betlerin qosıp)
+searchprofile-advanced-tooltip|Berilgen isimler ko'pliginde izlew
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 so'z\u007C~{1} so'z}})
+search-redirect|(qayta bag'ıtlandırıw ~{0})
+search-section|(bo'lim ~{0})
+search-suggest|Ba'lkim, siz bunı na'zerde tutqan shig'arsız: ~{0}
+search-interwiki-caption|Qarındas proektler
+search-interwiki-default|~{0} na'tiyje:
+search-interwiki-more|(ko'birek)
+search-relatedarticle|Baylanıslı
+searchrelated|baylanıslı
+searchall|barlıq
+showingresults|To'mende '''~{1}''' ornınan baslap {{PLURAL:~{0}\u007C'''1''' na'tiyje\u007C'''~{0}''' shekemgi na'tiyjeler}} ko'rsetilgen.
+search-nonefound|Sorawg'a sa'ykes na'tiyje tabılmadı.
+powersearch-legend|Ken'eytilgen izlew
+powersearch-ns|Usı isimler ko'pliginen izlew:
+search-external|Sırtqı izlewshi
+preferences|Sazlawlar
+mypreferences|Sazlawlar
+prefs-edits|O'zgertiwler sanı:
+prefs-skin|Sırtqı ko'rinis
+skin-preview|Korip al
+datedefault|Hesh sazlawlarsız
+prefs-personal|Paydalanıwshı profaylı
+prefs-rc|Aqırg'ı o'zgerisler
+prefs-watchlist|Baqlaw dizimi
+prefs-watchlist-days|Baqlaw dizimindegi ku'nlerdin' ko'rsetiw sanı:
+prefs-watchlist-days-max|Maksimum ~{0} {{PLURAL:~{0}\u007Cku'n\u007Cku'n}}
+prefs-watchlist-edits|Ken'eytilgen baqlaw dizimindegi o'zgeristerdin' en' ko'p ko'rsetiw sanı:
+prefs-watchlist-edits-max|Maksimum: 1000
+prefs-misc|Basqa
+prefs-resetpass|Paroldi o'zgertiw
+saveprefs|Saqla
+prefs-editing|O'zgertiw
+rows|Qatarlar:
+columns|Bag'analar:
+searchresultshead|İzlew
+recentchangesdays|Aqırg'ı o'zgerislerde ko'rsetiletug'ın ku'nler:
+recentchangesdays-max|(maksimum ~{0} {{PLURAL:~{0}\u007Cku'n\u007Cku'n}})
+recentchangescount|U'ndemeslik boyınsha ko'rsetiletug'ın o'zgerisler sanı:
+savedprefs|Sizin' sazlawların'ız saqlandı.
+timezonelegend|Waqıt zonası:
+localtime|Jergilikli waqıt:
+timezoneuseserverdefault|Serverdin' baslang'ısh sazlawların qollanıw: (~{0})
+timezoneuseoffset|Basqa (o'zgeristi ko'rsetin')
+servertime|Server waqtı:
+guesstimezone|Brauzerden alıp toltırıw
+allowemail|Basqalardan xat qabıllawdı qos
+prefs-searchoptions|İzlew
+prefs-namespaces|İsimler ko'plikleri
+default|defolt
+prefs-files|Fayllar
+youremail|E-mail:
+username|{{GENDER:~{0}\u007CPaydalanıwshı atı}}:
+prefs-memberingroups|Kirgen {{PLURAL:~{0}\u007Ctoparın'ız\u007Ctoparların'ız}}:
+yourrealname|Haqıyqıy isimin'iz:
+yourlanguage|Til:
+yourvariant|Tu'ri
+yournick|Laqabın'ız:
+badsig|Shala imzalar nadurıs; HTML teglerin tekserip ko'rin'.
+badsiglength|İmzan'ız dım uzın.\n{{PLURAL:~{0}\u007Csimvoldan\u007Csimvoldan}} aspawı kerek.
+email|E-mail
+prefs-help-realname|Haqıyqıy atın'ız (ma'jbu'riy emes): eger onı ko'rsetsen'iz, bet kim ta'repinen o'zgertilgenin ko'rsetiwde qollanıladı.
+prefs-help-email|E-mail adresin'izdi ko'rsetiw ma'jbu'riy emes, biraq bul eger siz parolin'izdi esten shig'arsan'iz usı e-mailge taza paroldi jiberiw mu'mkinshiligin jaratadı.
+prefs-help-email-required|E-mail adresi kerek.
+userrights|Paydalanıwshı huqıqların basqarıw
+userrights-lookup-user|Paydalanıwshı toparların basqarıw
+userrights-user-editname|Paydalanıwshı atın kiritin':
+editusergroup|Paydalanıwshı Toparların O'zgertiw
+editinguser|<b>~{0}</b> ([[User talk:~{0}\u007C{{int:talkpagelinktext}}]]{{int:pipe-separator}}[[Special:Contributions/~{0}\u007C{{int:contribslink}}]]) paydalanıwshısının' huquqları o'zgertilmekte
+userrights-editusergroup|Paydalanıwshı toparların o'zgertiw
+saveusergroups|Paydalanıwshı Toparların Saqlaw
+userrights-groupsmember|Ag'zalıq toparı:
+userrights-reason|Sebep:
+userrights-nodatabase|~{0} mag'lıwmatlar bazası ele jaratılmag'an yamasa jergilikli emes.
+userrights-nologin|Paydalanıwshılar huquqların belgilew ushın administrator akkauntı menen [[Special:UserLogin\u007Ckiriwin'iz]] kerek.
+userrights-notallowed|Sizin' akkauntın'ızda paydalanıwshılardın' huquqın belgilew imka'niyatı joq.
+userrights-changeable-col|O'zgerte alatug'ın toparların'ız
+userrights-unchangeable-col|O'zgerte almaytug'ın toparların'ız
+group|Topar:
+group-user|Paydalanıwshılar
+group-autoconfirmed|O'zi tastıyıqlang'anlar
+group-bot|Botlar
+group-sysop|Administratorlar
+group-bureaucrat|Byurokratlar
+group-all|(ha'mmesi)
+group-user-member|paydalanıwshı
+group-autoconfirmed-member|O'zi tastıyıqlang'an
+group-bot-member|Bot
+group-sysop-member|Administrator
+group-bureaucrat-member|Byurokrat
+grouppage-user|{{ns:project}}:Paydalanıwshılar
+grouppage-autoconfirmed|{{ns:project}}:O'zi tastıyıqlang'an paydalanıwshılar
+grouppage-bot|{{ns:project}}:Botlar
+grouppage-sysop|{{ns:project}}:Administratorlar
+grouppage-bureaucrat|{{ns:project}}:Byurokratlar
+right-read|Betlerdi oqıw
+right-edit|Betlerdi o'zgertiw
+right-createpage|Sa'wbet betleri bolmag'an betlerdi jaratıw
+right-createtalk|Sa'wbet betlerin jaratıw
+right-createaccount|Jan'a paydalanıwshı akkauntın jaratıw
+right-minoredit|O'zgerislerdi kishi dep belgilew
+right-move|Betlerdi ko'shiriw
+right-move-subpages|Betlerdi bag'ınıslıları menen birge ko'shiriw
+right-move-rootuserpages|Tiykarg'ı paydalanıwshı betlerin ko'shiriw
+right-suppressredirect|Betti ko'shirgende eski atamasınan qayta bag'ıtlawshı jaratpaw
+right-upload|Fayllardı aploud qılıw
+right-reupload|Bar fayldın' u'stine jazıw
+right-reupload-own|O'zi aploud qılg'an fayl u'stine jazıw
+right-reupload-shared|Media repozitariy ortalıg'ındag'ı fayllardı jergilikli jazıw
+right-upload_by_url|Fayldı URL adresinen aploud qılıw
+right-autoconfirmed|Yarım-qorg'alg'an betlerdi o'zgertiw
+right-apihighlimits|API sorawlarında joqarı sheklewlerdi paydalanıw
+right-writeapi|API jazıwın paydalanıw
+right-delete|Betlerdi o'shiriw
+right-bigdelete|Uzaq tariyxqa iye betlerdi o'shiriw
+right-deleterevision|Betlerdin' ayrıqsha nusqaların o'shiriw ha'm qayta tiklew
+right-browsearchive|O'shirilgen betlerdi izlew
+right-undelete|Betti qayta tiklew
+right-suppressrevision|Administratorlardan jasırılg'an nusqalardı qayta ko'riw ha'm qayta tiklew
+right-suppressionlog|Jeke jurnallardı qaraw
+right-block|Basqa paydalanıwshılardi o'zgertiwden bloklaw
+right-blockemail|Paydalanıwshının' xat jiberiw mu'mkinshiligin bloklaw
+right-hideuser|Ja'miyetten jasırg'an halda paydalanıwshı atın bloklaw
+right-ipblock-exempt|IP boyınsha bloklaw, avtomat bloklaw ha'mde diapazon bloklawların shetlep o'tiw
+right-proxyunbannable|Proksi serverlerdin' avtomat bloklawlarınan o'tiw
+right-protect|Qorg'aw da'relelerin o'zgertiw ha'm qorg'alg'an betlerdi o'zgertiw
+right-editprotected|Qorg'alg'an betlerdi o'zgertiw (kaskadlı qorg'awsız)
+right-editinterface|Paydalanıwshı interfeysin o'zgertiw
+right-editusercssjs|Basqa paydalanıwshılardın' CSS ha'm JS faylların o'zgertiw
+right-editusercss|Basqa paydalanıwshılardın' CSS faylların o'zgertiw
+right-edituserjs|Basqa paydalanıwshılardın' JS faylların o'zgertiw
+right-markbotedits|Qaytarılg'an o'zgerislerdi botlardiki dep belgilew
+right-import|Basqa wikilerden betlerdi import qılıw
+right-importupload|Fayldi aploud qılıw arqalı betlerdi import qılıw
+right-unwatchedpages|Baqlanbag'an betler dizimin qaraw
+right-mergehistory|Betlerdin' tariyxın birlestiriw
+right-userrights|Paydalanıwshılardın' barlıq huquqların o'zgertiw
+right-userrights-interwiki|Basqa wikilerdegi paydalanıwshının' huquqların o'zgertiw
+right-siteadmin|Mag'lıwmatlar bazasın qulıplaw ha'm qulıplawın o'shiriw
+newuserlogpage|Paydalanıwshılardı esapqa alıw jurnalı
+newuserlogpagetext|Bul paydalanıwshılardı esapqa alıw jurnalı
+rightslog|Paydalanıwshı huquqları jurnalı
+rightslogtext|Bul paydalanıwshı huquqların o'zgertiw jurnalı.
+action-read|bul betti oqıw
+action-edit|bul betti o'zgertiw
+action-createpage|betlerdi jaratıw
+action-createtalk|Sa'wbet betlerin jaratıw
+action-createaccount|bul paydalanıwshı akkauntın jaratıw
+action-minoredit|bul o'zgeristi kish dep esaplaw
+action-move|bul betti ko'shiriw
+action-move-subpages|bul bet ha'm onın' bag'ınıslıların ko'shiriw
+action-move-rootuserpages|tiykarg'ı paydalanıwshı betlerin ko'shiriw
+action-movefile|bul betti ko'shiriw
+action-upload|bul fayldı aploud qılıw
+action-reupload|usı fayldı u'stine jazıw
+action-reupload-shared|ortalıq repozitariyindegi usı fayldı u'stine jaz
+action-upload_by_url|bul fayldı URL adresinen aploud qılıw
+action-writeapi|o'zgerisler ushın APIdı paydalanıw
+action-delete|bul betti o'shiriw
+action-deleterevision|bul nusqanı o'shiriw
+action-deletedhistory|bul bettin' o'shirilgen tariyxın ko'riw
+action-browsearchive|o'shirilgen betlerdi izlew
+action-undelete|bul betti qayta tiklew
+action-suppressrevision|bul jasırın nusqanı qayta ko'riw ha'm qayta tiklew
+action-suppressionlog|bul jeke jurnaldı ko'riw
+action-block|bul paydalanıwshını o'zgerisler kiritiwden bloklaw
+action-protect|bul bettin' qorg'aw da'rejelerin o'zgertiw
+action-import|bul betti basqa wikiden import qılıw
+action-importupload|bul betti fayl aploudı arqalı aploud qılıw
+action-unwatchedpages|baqlanbaytug'ın betlerdin' dizimin ko'riw
+action-mergehistory|bul bettin' tariyxın birlestiriw
+action-userrights|paydalanıwshılardın barlıq huquqların o'zgertiw
+action-userrights-interwiki|basqa wikilerdegi paydalanıwshılar huquqların o'zgertiw
+action-siteadmin|mag'lıwmatlar bazasın bloklaw yamasa bloklawdan shıg'arıw
+nchanges|{{PLURAL:~{0}\u007C1 o'zgeris\u007C~{0} o'zgeris}}
+recentchanges|Aqırg'ı o'zgerisler
+recentchanges-legend|Aqırg'ı o'zgerisler sazlawları
+recentchanges-summary|Bul bette usı wikidegi ha'zirgi o'zgerisler baqlanadı.
+recentchanges-feed-description|Wikidin' usı ag'ımındag'ı en' aqırg'ı o'zgerislerin baqlaw.
+recentchanges-label-newpage|Bul o'zgeris arqalı taza bet jaratıldı
+recentchanges-label-minor|Bul kishi o'zgeris
+recentchanges-label-bot|Bul o'zgeristi bot kiritti
+recentchanges-label-unpatrolled|Bul o'zgeris ele baqlanbag'an
+recentchanges-legend-newpage|~{0} - taza bet
+rcnotefrom|To'mende '''~{1}''' baslap '''~{0}''' shekemgi o'zgerisler ko'rsetilgen.
+rclistfrom|~{2} ~{1} waqtınan baslap jan'a o'zgerisler ko'rset
+rcshowhideminor|Kishi o'zgerislerdi ~{0}
+rcshowhidebots|Botlardı ~{0}
+rcshowhideliu|Kirgenlerdi ~{0}
+rcshowhideanons|Anonim paydalanıwshılardı ~{0}
+rcshowhidepatr|Tekserilgen o'zgerislerdi ~{0}
+rcshowhidemine|O'zgertiwlerimdi ~{0}
+rclinks|Aqırg'ı ~{1} ku'ndegi aqırg'ı ~{0} o'zgeristi ko'rset<br />~{2}
+diff|parq
+hist|tar.
+hide|jasır
+show|ko'rset
+minoreditletter|k
+newpageletter|T
+boteditletter|b
+number_of_watching_users_pageview|[Baqlag'an {{PLURAL:~{0}\u007C1 paydalanıwshı\u007C~{0} paydalanıwshı}}]
+rc_categories|Kategoriyalarg'a sheklew ("\u007C" belgisi menen ajıratın')
+rc_categories_any|Ha'r qanday
+newsectionsummary|/* ~{0} */ taza bo'lim
+rc-enhanced-expand|Tolıq mag'lıwmattı ko'rsetiw (JavaScriptti talap etedi)
+rc-enhanced-hide|Tolıq mag'lıwmattı jasırıw
+recentchangeslinked|Baylanıslı o'zgerisler
+recentchangeslinked-feed|Baylanıslı o'zgerisler
+recentchangeslinked-toolbox|Baylanıslı o'zgerisler
+recentchangeslinked-title|"~{0}" ushın baylanıslı o'zgerisler
+recentchangeslinked-summary|Bul arnawlı bette siltelgen betlerdegi aqırg'ı o'zgerisler dizimi ko'rsetilgen. [[Special:Watchlist\u007CBaqlaw dizimin'izdegi]] betler '''juwan''' ha'ribi menen ko'rsetilgen.
+recentchangeslinked-page|Bet ataması:
+recentchangeslinked-to|Kerisinshe, berilgen betke silteytug'ın betlerdegi o'zgerislerdi ko'rset
+upload|Fayldı aploud qılıw
+uploadbtn|Aploud!
+reuploaddesc|Aploudtı biykar etiw ha'm aploud formasına qaytıw
+uploadnologin|Kirilmegen
+uploadnologintext|Fayllardı aploud qılıw ushın [[Special:UserLogin\u007Ckiriwin'iz]] kerek.
+uploaderror|Aploud qa'tesi
+upload-permitted|Ruxsat etilgen fayl tu'rleri: ~{0}.
+upload-preferred|Unamlı fayl tu'rleri: ~{0}.
+upload-prohibited|Ruxsat etilmegen fayl tu'rleri: ~{0}.
+uploadlogpage|Aploud jurnalı
+filename|Fayl atı
+filedesc|Juwmaq
+fileuploadsummary|Juwmaq:
+filestatus|Avtorlıq huqıqı statusı:
+filesource|Fayl deregi:
+ignorewarning|Eskertiwlerdi esapqa almay fayldı saqla
+ignorewarnings|Hesh qanday eskertiwdi esapqa alma
+minlength1|Fail atı keminde bir ha'ripten turıwı sha'rt.
+badfilename|Fayl atı bug'an o'zgertildi: "~{0}".
+filetype-badmime|"~{0}" MIME tu'rli fayllardı aploud qılıw ruxsat etilmeydi.
+filetype-missing|Bul faildın ken'eytpesi (mısalı ".jpg") joq.
+largefileserver|Bul faildın mo'lsheri serverdin' ruxsatınan u'lken.
+uploadwarning|Aploud eskertiwi
+savefile|Fayldı saqla
+uploaddisabled|Aploudqa ruxsat berilmegen
+uploaddisabledtext|Fayllardı aploud qılıw toqtatılg'an.
+uploadvirus|Bul failda virus bar! Mag'lıwmat: ~{0}
+sourcefilename|Derektin' fayl atı:
+destfilename|Belgilengen fail atı:
+upload-maxfilesize|Fayldın' maksimal ko'lemi: ~{0}
+watchthisupload|Bul fayldı baqlaw
+upload-success-subj|Tabıslı aploud
+upload-proto-error|Nadurıs protokol
+upload-file-error|İshki qa'telik
+upload-misc-error|Belgisiz aploud qatesi
+upload-curl-error6|URL tabılmadı
+upload-curl-error28|Aploudqa berilgen waqıt pitti
+license|Litsenziyalandırıwı:
+license-header|Licenziyalandırıwı
+nolicense|Hesh na'rse saylanbag'an
+license-nopreview|(Aldınnan ko'riw imkaniyatı joq)
+upload_source_url| (jaramlı, ha'mmege ashıq URL)
+upload_source_file| (sizin' kompyuterin'izdegi fayl)
+listfiles_search_for|Media atamasın izlew:
+imgfile|fayl
+listfiles|Fayllar dizimi
+listfiles_date|Sa'ne
+listfiles_name|Atama
+listfiles_user|Paydalnıwshı
+listfiles_size|Ha'jim
+listfiles_description|Kommentariy
+file-anchor-link|Fayl beti
+filehist|Fayl tariyxı
+filehist-help|Aldın usı fayl qanday ko'riniste bolg'anın ko'riw ushin ku'n-ay/waqıt degendi basın'.
+filehist-deleteall|ha'mmesin o'shir
+filehist-deleteone|o'shiriw
+filehist-revert|qaytarıw
+filehist-current|ha'zirgi
+filehist-datetime|Sa'ne/Waqıt
+filehist-thumb|Miniatyurası
+filehist-thumbtext|~{0} waqtındag'ı nusqanın' miniatyurası
+filehist-nothumb|Miniatyurası joq
+filehist-user|Paydalanıwshı
+filehist-dimensions|O'lshemleri
+filehist-filesize|Fayldın' ha'jmi
+filehist-comment|Kommentariy
+imagelinks|Fayldın' paydalanılıwı
+linkstoimage|To'mendegi {{PLURAL:~{0}\u007Cbet\u007C~{0} bet}} bul faylg'a siltelgen:
+nolinkstoimage|Bul faylg'a hesh bir bet siltelmegen.
+sharedupload|~{0} ortalıq faylı basqa proektlerde paydalanılsa boladı.
+uploadnewversion-linktext|Bul fayldın' jan'a nusqasın aploud qılıw
+filerevert|~{0} degendi qaytarıw
+filerevert-legend|Fayldı qaytarıw
+filerevert-comment|Sebep:
+filerevert-defaultcomment|~{1}, ~{0} waqtındag'ı nusqasına qaytarıldı
+filerevert-submit|Qaytar
+filedelete|~{0} degendi o'shiriw
+filedelete-legend|Fayldı o'shiriw
+filedelete-intro|Siz '''[[Media:~{0}\u007C~{0}]]''' faylın tariyxı menen birgelikte o'shirilmektesiz.
+filedelete-intro-old|[~{3} ~{2}, ~{1}] waqtındag'ı '''[[Media:~{0}\u007C~{0}]]''' nusqası o'shirilmekte.
+filedelete-comment|Sebep:
+filedelete-submit|O'shiriw
+filedelete-success|'''~{0}''' o'shirildi.
+filedelete-success-old|~{2}, ~{1} waqtındag'ı '''[[Media:~{0}\u007C~{0}]]''' nusqası o'shirildi.
+filedelete-nofile|'''~{0}''' haqqında mag'lıwmat joq.
+filedelete-otherreason|Basqa/qosımsha sebep:
+filedelete-reason-otherlist|Basqa sebep
+filedelete-edit-reasonlist|O'shiriw sebeplerin o'zgertiw
+mimesearch|MIME izlew
+mimetype|MIME tu'ri:
+download|koshirip alıw
+unwatchedpages|Baqlanbag'an betler
+listredirects|Burıwshılar dizimi
+unusedtemplates|Paydalanılmag'an shablonlar
+unusedtemplateswlh|basqa burıwshılar
+randompage|Qa'legen bet
+randompage-nopages|To'mendegi {{PLURAL:~{1}\u007Cisimler ko'pliginde\u007Cisimler ko'pliginde}} hesh bet joq: ~{0}
+randomredirect|Qa'legen burıwshı
+randomredirect-nopages|"~{0}" isimler ko'pliginde qayta bag'ıtlang'an betler joq.
+statistics-header-edits|Statistikanı o'zgertiw
+statistics-header-users|Paydalanıwshı statistikası
+statistics-files|Aploud qılıng'an fayllar
+statistics-edits|{{SITENAME}} ornatılg'anlı beri bettegi o'zgerisler sanı
+statistics-edits-average|Ha'r bir betke ortasha kiritilgen o'zgerisler sanı
+statistics-users|Registratsiyadan o'tken [[Special:ListUsers\u007Cpaydalanıwshılar]]
+statistics-users-active|Aktiv paydalanıwshılar
+doubleredirects|Qos burıwshılar
+double-redirect-fixer|Qayta bag'ıtlawshılardı du'zetiwshi
+brokenredirects|Hesh betke bag'ıtlamaytug'ın burıwshılar
+brokenredirectstext|To'mendegi qayta bag'ıtlawshı betler ha'zirgi waqıtta joq betlerge silteydi:
+brokenredirects-edit|o'zgertiw
+brokenredirects-delete|o'shiriw
+withoutinterwiki|Hesh tilge siltemeytug'ın betler
+withoutinterwiki-summary|To'mendegi betler basqa tillerdegi nusqalarına siltemeydi.
+withoutinterwiki-legend|Prefiks:
+withoutinterwiki-submit|Ko'rset
+fewestrevisions|En' az du'zetilgen betler
+nbytes|{{PLURAL:~{0}\u007C1 bayt\u007C~{0} bayt}}
+ncategories|{{PLURAL:~{0}\u007C1 kategoriya\u007C~{0} kategoriya}}
+nlinks|{{PLURAL:~{0}\u007C1 siltew\u007C~{0} siltew}}
+nmembers|{{PLURAL:~{0}\u007C1 ag'za\u007C~{0} ag'zalar}}
+nrevisions|{{PLURAL:~{0}\u007C1 nusqa\u007C~{0} nusqa}}
+nviews|{{PLURAL:~{0}\u007C1 ma'rte\u007C~{0} ma'rte}} ko'rip shıg'ılg'an
+specialpage-empty|Bul sorawg'a hesh qanday na'tiyje joq.
+lonelypages|Hesh betten siltelmegen betler
+lonelypagestext|To'mendegi betlerge {{SITENAME}} proektindegi basqa betler siltemeydi.
+uncategorizedpages|Kategoriyasız betler
+uncategorizedcategories|Kategoriyasız kategoriyalar
+uncategorizedimages|Kategoriyasız fayllar
+uncategorizedtemplates|Kategoriyasız shablonlar
+unusedcategories|Paydalanılmag'an kategoriyalar
+unusedimages|Paydalanılmag'an fayllar
+wantedcategories|Talap qılıng'an kategoriyalar
+wantedpages|Talap qılıng'an betler
+wantedfiles|Kerekli fayllar
+wantedtemplates|Kerekli shablonlar
+mostlinked|En' ko'p siltelgen betler
+mostlinkedcategories|En' ko'p paydalanılg'an kategoriyalar
+mostlinkedtemplates|En' ko'p paydalanılg'an shablonlar
+mostcategories|En' ko'p kategoriyalang'an betler
+mostimages|En' ko'p paydalanılg'an fayllar
+mostrevisions|En' ko'p du'zetilgen betler
+prefixindex|Prefiksi bar barlıq betler
+shortpages|En' qısqa betler
+longpages|En' uzın betler
+deadendpages|Hesh betke siltemeytug'ın betler
+deadendpagestext|To'mendegi betler {{SITENAME}} proyektindegi basqa betlerge siltelmegen.
+protectedpages|Qorg'alg'an betler
+protectedpages-indef|Tek belgisiz qorg'awlar
+protectedpages-cascade|Tek kaskadlı qorg'awlar
+protectedpagesempty|Usı parametrler menen ha'zir hesh bet qorg'almag'an
+protectedtitles|Qorg'alg'an atamalar
+listusers|Paydalanıwshı dizimi
+listusers-editsonly|Tek o'zgeris kiritken paydalanıwshılardı ko'rset
+usereditcount|~{0} {{PLURAL:~{0}\u007Co'zgeris\u007Co'zgeris}}
+newpages|En' taza betler
+newpages-username|Paydalanıwshı atı:
+ancientpages|En' eski betler
+move|Ko'shiriw
+movethispage|Bul betti ko'shiriw
+notargettitle|Nıshan ko'rsetilmegen
+pager-newer-n|{{PLURAL:~{0}\u007Cjan'alaw 1\u007Cjan'alaw ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Ceskilew 1\u007Ceskilew ~{0}}}
+booksources|Kitap derekleri
+booksources-search-legend|Kitap haqqında informatsiya izlew
+specialloguserlabel|Paydalanıwshı:
+speciallogtitlelabel|Atama:
+log|Jurnallar
+all-logs-page|Barlıq ashıq jurnallar
+log-title-wildcard|Usı tekstten baslang'an atamalardı izlew
+allpagesfrom|Mına betten baslap ko'rsetiw:
+allpagesto|Usı betke shekem ko'rsetiw:
+allarticles|Ha'mme betler
+allinnamespace|Ha'mme betler (~{0} isimler ko'pligi)
+allpagessubmit|O'tin'
+allpagesprefix|Mına prefiksten baslag'an betlerdi ko'rsetiw:
+allpages-bad-ns|{{SITENAME}} proyektinde "~{0}"  isimler ko'pligi joq.
+categoriespagetext|To'mendegi {{PLURAL:~{0}\u007Ckategoriya\u007Ckategoriyalar}} o'z ishine betler yamasa medialardı alg'an.\nBul jerde [[Special:UnusedCategories\u007Cpaydalanılmag'an kategoriyalar]] ko'rsetilmegen.\nJa'nede [[Special:WantedCategories\u007Ckerekli kategoriyalardı]] qarap ko'rin'.
+categoriesfrom|Kategoriyalardı to'mendegilerden baslap ko'rset:
+special-categories-sort-count|sanı boyınsha ta'rtiplew
+special-categories-sort-abc|a'lipbe boyınsha ta'rtiplew
+deletedcontributions|Paydalanıwshının' o'shiriw u'lesi
+linksearch|Sırtqı siltewler
+linksearch-pat|İzlew shablonı:
+linksearch-ns|İsimler ko'pligi:
+linksearch-ok|İzlew
+linksearch-line|~{1} degennen ~{0} siltegen
+listusersfrom|Mına paydalanıwshıdan baslap ko'rsetiw:
+listusers-submit|Ko'rset
+listusers-noresult|Paydalanıwshı tabılmadı.
+listgrouprights|Paydalanıwshılar toparı huqıqları
+listgrouprights-group|Topar
+listgrouprights-rights|Huquqları
+listgrouprights-helppage|Help:Topar huquqları
+listgrouprights-members|(ag'zalar dizimi)
+listgrouprights-addgroup|~{0} {{PLURAL:~{1}\u007Ctoparın\u007Ctoparların}} qosıwı mu'mkin
+listgrouprights-removegroup|~{0} {{PLURAL:~{1}\u007Ctoparın\u007Ctoparların}} o'shiriwi mu'mkin
+listgrouprights-addgroup-all|Barlıq toparlardı qosıwı mu'mkin
+listgrouprights-removegroup-all|Barlıq toparlardı o'shiriwi mu'mkin
+mailnologin|Jiberiwge adres tabılmadı
+emailuser|Xat jiberiw
+emailpage|Paydalanıwshıg'a e-mail jiberiw
+defemailsubject|{{SITENAME}} e-mail
+noemailtitle|E-mail adresi joq
+email-legend|Basqa {{SITENAME}} paydalanıwshısına xat jiberiw
+emailfrom|Kimnen:
+emailto|Kimge:
+emailsubject|Teması:
+emailmessage|Xat:
+emailsend|Jiber
+emailccme|Menin' xabarımnın' ko'shirmesin e-mailımg'a jiber.
+emailsent|Xat jiberildi
+emailsenttext|E-mail xatın'ız jiberildi.
+watchlist|Betlerdi baqlaw dizimi
+mywatchlist|Menin' baqlaw dizimim
+nowatchlist|Baqlaw dizimin'iz bos.
+watchlistanontext|Baqlaw dizimin'izdegilerdi qaraw yamasa o'zgertiw ushın ~{0} kerek.
+watchnologin|Kirilmegen
+addedwatchtext|"[[:~{0}]]" beti [[Special:Watchlist\u007Cbaqlaw dizimin'izge]] qosıldı.\nUsı ha'm og'an baylanıslı bolg'an sa'wbet betlerinde bolatug'ın keleshektegi o'zgerisler usı dizimde ko'rsetiledi ha'mde betti tabıwdı an'satlastırıw ushın [[Special:RecentChanges\u007Ctaza o'zgerisler diziminde]] '''juwan ha'ripte''' ko'rsetiledi.\nEger siz bul betti baqlaw dizimin'izden o'shirmekshi bolsan'ız bettin' joqarg'ı on' jag'ındag'ı "Baqlamaw" jazıwın basın'.
+removedwatchtext|"[[:~{0}]]" beti [[Special:Watchlist\u007Csizin' baqlaw dizimin'izden]] o'shirildi.
+watch|Baqlaw
+watchthispage|Bul betti baqlaw
+unwatch|Baqlamaw
+unwatchthispage|Baqlawdı toqtatıw
+notanarticle|Mag'lıwmat beti emes
+notvisiblerev|Nusqa o'shirildi
+watchlist-details|Baqlaw dizimin'izde (sa'wbet betlerin esapqa almag'anda) {{PLURAL:~{0}\u007C1 bet\u007C~{0} bet}} bar.
+wlheader-enotif|E-mail arqalı eskertiw qosılg'an.
+wlnote|To'mende aqırg'ı {{PLURAL:~{1}\u007Csaattag'ı\u007C'''~{1}''' saattag'ı}} {{PLURAL:~{0}\u007Caqırg'ı o'zgeris bar\u007Caqırg'ı '''~{0}''' o'zgeris bar}}.
+wlshowlast|Aqırg'ı ~{0} saat, ~{1} ku'n,  ko'rset
+watchlist-options|Baqlaw diziminin' sazlawları
+watching|Baqlaw...
+unwatching|Baqlamaw...
+enotif_reset|Barlıq betti ko'rip shıg'ıldı dep belgile
+enotif_impersonal_salutation|{{SITENAME}} paydalanıwshısı
+enotif_lastvisited|Son'g'ı kirwin'izden beri bolg'an o'zgerisler ushın ~{0} degendi ko'rin'iz.
+enotif_lastdiff|Usı o'zgeris ushın ~{0} degendi ko'rin'iz.
+enotif_anon_editor|anonim paydalanıwshı ~{0}
+created|jaratılg'an
+changed|o'zgertilgen
+deletepage|Betti o'shir
+confirm|Tastıyıqlaw
+excontent|bolg'an mag'lıwmat: '~{0}'
+excontentauthor|bolg'an mag'lıwmat: '~{0}' (tek '[[Special:Contributions/~{1}\u007C~{1}]]' u'lesi)
+delete-confirm|"~{0}" o'shiriw
+delete-legend|O'shiriw
+historywarning|'''Esletpe:''' Siz o'shireyin dep atırg'an betin'iz shama menen ~{0} {{PLURAL:~{0}\u007Cnusqanı\u007Cnusqanı}} o'z ishine alg'an tariyxı bar:
+confirmdeletetext|Siz bul betti yamasa su'wretti barliq tariyxı menen mag'lıwmatlar bazasınan o'shirejaqsız.\nBunın' aqıbetin tu'singenin'izdi ha'm [[{{MediaWiki:Policy-url}}]] siyasatına ılayıqlı ekenligin tastıyıqlan'.
+actioncomplete|Ha'reket tamamlandı
+deletedtext|"~{0}" o'shirildi.\nAqırg'ı o'shirilgenlerdin' dizimin ko'riw ushin ~{1} ni qaran'
+dellogpage|O'shiriw jurnalı
+dellogpagetext|To'mende en' aqırg'ı o'shirilgenlerdin' dizimi keltirilgen
+deletionlog|o'shiriw jurnalı
+reverted|Aldınraqtag'ı nusqasına qaytarılg'an
+deletecomment|Sebep:
+deleteotherreason|Basqa/qosımsha sebep:
+deletereasonotherlist|Basqa sebep
+rollback|O'zgerislerdi biykar etiw
+rollback_short|Biykar etiw
+rollbacklink|qaytarıw
+rollbackfailed|Biykar etiw sa'tsiz tamamlandı
+editcomment|O'zgertiwge qaldırılg'an kommentariy: "''~{0}''".
+protectlogpage|Qorg'aw jurnalı
+protectedarticle|"[[~{0}]]" qorg'alg'an
+modifiedarticleprotection|"[[~{0}]]" betinin' qorg'aw da'rejesi ozgertildi
+unprotectedarticle|"[[~{0}]]" qorg'almag'an
+protect-legend|Qorg'awdı tastıyıqlaw
+protectcomment|Sebep:
+protectexpiry|Ku'shin joytıw waqtı:
+protect_expiry_invalid|Nadurıs ku'shin joytıw waqtı.
+protect_expiry_old|Kushin joytıw waqtı o'tip ketken.
+protect-text|'''~{0}''' betinin' qorg'aw da'rejesin ko're yamasa o'zgerte alasız.
+protect-locked-access|Akkauntın'ızdın' bettın' qorg'aw da'rejesin o'zgertiwge ruxsatı joq.\n'''~{0}''' betinin' ha'zirgi sazlawları:
+protect-cascadeon|Bul bet ha'zirgi waqıtta qorg'alg'an, sebebi usı bet kaskadlı qorg'awı bar {{PLURAL:~{0}\u007Cbetke\u007Cbetlerine}} qosılg'an. Bul bettin' qorg'aw da'rejesin o'zgerte alasız, biraq bul kaskadlı qorg'awg'a ta'sir etpeydi.
+protect-default|Barlıq paydalanıwshılarg'a ruxsat etilgen
+protect-fallback|"~{0}" ruxsatı kerek
+protect-level-autoconfirmed|Taza ha'm dizimnen o'tpegen paydalanıwshılardı bloklaw
+protect-level-sysop|Tek administratorlar
+protect-summary-cascade|kaskadlang'an
+protect-expiring|pitiw waqtı: ~{0} (UTC)
+protect-expiry-indefinite|ma'ngi
+protect-cascade|Bul betke qosılg'an betlerdi qorg'aw (kaskadlı qorg'aw).
+protect-cantedit|Bul bettin' qorg'aw da'rejesin o'zgerte almaysız, sebebi oni o'zgertiwge sizin' ruxsatın'ız joq.
+protect-othertime|Basqa waqıt:
+protect-othertime-op|basqa waqıt
+protect-otherreason|Basqa/qosımsha sebep:
+protect-otherreason-op|Basqa sebep
+protect-edit-reasonlist|Qorg'aw sebeplerin o'zgertiw
+protect-expiry-options|1 saat:1 hour,1 ku'n:1 day,1 ha'pte:1 week,2 ha'pte:2 weeks,1 ay:1 month,3 ay:3 months,6 ay:6 months,1 jıl:1 year,ma'ngi:infinite
+restriction-type|Ruxsatnama:
+restriction-level|Sheklew da'rejesi:
+minimum-size|En' az o'lshemi
+maximum-size|En' ko'p o'lshemi:
+pagesize|(bayt)
+restriction-edit|O'zgertiw
+restriction-move|Ko'shiriw
+restriction-create|Jaratıw
+restriction-upload|Aploud qılıw
+restriction-level-sysop|tolıq qorg'alg'an
+restriction-level-autoconfirmed|yarım-qorg'alg'an
+restriction-level-all|ha'mme basqısh
+undelete|O'shirilgen betlerdi ko'riw
+undeletepage|O'shirilgen betlerdi ko'riw ha'm qayta tiklew
+viewdeletedpage|O'shirilgen betlerdi ko'riw
+undelete-revision|~{0} betinin' ~{3}, ~{4} waqtındag'ı ~{2} paydalanıwshı ta'repinen o'shirilgen nusqası:
+undelete-nodiff|Hesh aldıng'ı nusqa tabılmadı.
+undeletebtn|Qayta tiklew
+undeletelink|ko'riw/qayta tiklew
+undeletecomment|Sebep:
+undeletedrevisions|{{PLURAL:~{0}\u007C1 nusqa\u007C~{0} nusqa}} qayta tiklendi
+undeletedrevisions-files|{{PLURAL:~{0}\u007C1 nusqa\u007C~{0} nusqa}} ha'm {{PLURAL:~{1}\u007C1 fayl\u007C~{1} fayl}} qayta tiklendi
+undeletedfiles|{{PLURAL:~{0}\u007C1 fayl\u007C~{0} fayl}} qayta tiklendi
+undelete-search-box|O'shirilgen betlerdi izlew
+undelete-search-prefix|Mınadan baslag'an betlerdi ko'rsetiw:
+undelete-search-submit|İzle
+undelete-error-short|Faildı tilkewde qa'telik: ~{0}
+namespace|İsimler ko'pligi:
+invert|Saylaw ta'rtibin almastırıw
+contributions|Paydalanıwshı u'lesi
+contributions-title|~{0} paydalanıwshısının' qosqan u'lesi
+mycontris|Menin' u'lesim
+contribsub2|~{0} ushın (~{1})
+uctop|(joqarg'ı)
+month|Aydag'ı (ha'm onnanda erterek):
+year|Jıldag'ı (ha'm onnanda erterek):
+sp-contributions-newbies|Tek taza akkauntlar u'leslerin ko'rset
+sp-contributions-newbies-sub|Taza akkauntlar ushın
+sp-contributions-blocklog|Bloklaw jurnalı
+sp-contributions-userrights|paydalanıwshı huqıqların basqarıw
+sp-contributions-search|U'lesi boyınsha izlew
+sp-contributions-username|IP Adres yamasa paydalanıwshı atı:
+sp-contributions-submit|İzle
+whatlinkshere|Siltelgen betler
+whatlinkshere-title|"~{0}" betine siltelgen betler
+whatlinkshere-page|Bet:
+linkshere|To'mendegi betler mınag'an siltelgen: '''[[:~{0}]]''':
+nolinkshere|'''[[:~{0}]]''' degenge hesh bet siltemeydi.
+isredirect|burıwshı bet
+istemplate|qosıw
+isimage|fayl siltewi
+whatlinkshere-prev|{{PLURAL:~{0}\u007Caldıng'ı\u007Caldıng'ı ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Ckeyingi\u007Ckeyingi ~{0}}}
+whatlinkshere-links|← siltewler
+whatlinkshere-hideredirs|qayta bag'ıtlawshılardı ~{0}
+whatlinkshere-hidetrans|qosılg'anlardı ~{0}
+whatlinkshere-hidelinks|siltewlerdi ~{0}
+whatlinkshere-hideimages|su'wret siltewlerin ~{0}
+whatlinkshere-filters|Filtrler
+blockip|Paydalanıwshını bloklaw
+blockip-legend|Paydalanıwshını bloklaw
+ipaddressorusername|IP Adres yamasa paydalanıwshı atı:
+ipbexpiry|Ku'shin joytıw waqtı:
+ipbreason|Sebep:
+ipbcreateaccount|Akkaunt jaratıwdı qadag'an etiw
+ipbemailban|Paydalanıwshını e-mail jiberiwden qadag'alaw
+ipbsubmit|Bul paydalanıwshını bloklaw
+ipbother|Basqa waqıt:
+ipboptions|2 saat:2 hours,1 ku'n:1 day,3 ku'n:3 days,1 ha'pte:1 week,2 h'apte:2 weeks,1 ay:1 month,3 ay:3 months,6 ay:6 months,1 jil:1 year,sheksiz:infinite
+badipaddress|Jaramsız IP adres
+blockipsuccesssub|Tabıslı qulplaw
+blockipsuccesstext|[[Special:Contributions/~{0}\u007C~{0}]] bloklang'an.<br />\nBasqa bloklawlar ushın [[Special:BlockList\u007CIP bloklaw dizimin]] ko'rip shıg'ın'iz.
+ipb-edit-dropdown|Bloklaw sebeplerin o'zgertiw
+ipb-unblock-addr|~{0} degennin qulpın sheshiw
+ipb-unblock|Paydalanıwshının' yamasa IP adrestin' qulpın shesh
+unblockip|Paydalanıwshının' qulpın sheshiw
+ipusubmit|Bul bloklawdı biykar etiw
+unblocked-id|~{0} bloklawı o'shirildi
+ipblocklist|Bloklang'an paydalanıwshılar
+ipblocklist-legend|Bloklang'an paydalanıwshını tabıw
+ipblocklist-submit|İzle
+infiniteblock|sheksiz
+expiringblock|ku'shin joytıw waqtı: ~{0} ~{1}
+anononlyblock|tek anon.
+noautoblockblock|avtoqulplaw o'shirilgen
+createaccountblock|Akkaunt jaratıw qadag'alang'an
+emailblock|e-mail bloklang'an
+ipblocklist-empty|Bloklaw dizimi bos.
+blocklink|bloklaw
+unblocklink|bloklamaw
+change-blocklink|bloklawdı o'zgertiw
+contribslink|u'lesi
+blocklogpage|Bloklaw jurnalı
+blocklogentry|[[~{0}]] ~{1} waqıt aralıg'ına bloklandı ~{2}
+unblocklogentry|~{0} bloklawdı o'shirdi
+block-log-flags-anononly|tek anonim paydalanıwshılar
+block-log-flags-nocreate|Akkaunt jaratıw o'shirilgen
+block-log-flags-noautoblock|Avtoqulplaw o'shirilgen
+block-log-flags-noemail|e-mail bloklang'an
+ipb_expiry_invalid|Ku'shin joytıw waqtı nadurıs.
+ipb_already_blocked|"~{0}" a'lle qashan bloklang'an
+lockdb|Mag'lıwmatlar bazasın qulpla
+unlockdb|Mag'lıwmatlar bazasının' qulpın shesh
+lockconfirm|Awa, men mag'lıwmatlar bazasın qulplayman.
+unlockconfirm|Awa, men mag'lıwmatlar bazasının' qulpın sheshemen.
+lockbtn|Mag'lıwmatlar bazasın qulpla
+unlockbtn|Mag'lıwmatlar bazasının' qulpın shesh
+locknoconfirm|Tastıyıqlaw belgisin qoymadın'ız.
+lockdbsuccesssub|Mag'lıwmatlar bazasın qulplaw tabıslı tamamlandı
+unlockdbsuccesssub|Mag'lıwmatlar bazasının' qulpı sheshildi
+unlockdbsuccesstext|Mag'lıwmatlar bazasının' qulpı sheshildi
+databasenotlocked|Mag'lıwmatlar bazası qulplanbag'an
+move-page-legend|Betti ko'shiriw
+movepagetext|To'mendegi formanı qollanıw arqalı bettin' ataması o'zgeredi, onın' barlıq tariyxı da taza atamag'a ko'shiredi.\nBurıng'ı bet ataması taza atamag'a qayta bag'ıtlang'an bet bolıp qaladı.\nOriginal atamag'a siltewshi qayta bag'ıtlang'an betlerdi avtomatik halda o'zgertiwin'iz mu'mkin.\nEger buni qa'lemesen'iz, [[Special:DoubleRedirects\u007Cshınjırlı]] yamasa [[Special:BrokenRedirects\u007Cnatuwrı qayta bag'ıtlang'an betlerdin']] bar-joqlıg'ınj tekserip ko'rin'.\nSiltewlerdin' tuwrı islewine siz juwapker bolasız.\n\nItibar berin': eger taza atamalı bet aldınnan bar bolsa ha'm son'g'ı o'zgertiw tariyxısız bos bet yamasa qayta bag'ıtlandırıwshı bolg'anına deyin bet '''ko'shirilmeydi'''.\nBul degeni, eger betti aljasıp qayta atag'an bolsan'ız aldıng'ı atamag'a qaytıwın'ızg'a boladı, biraq bar bettin' u'stine jazıwın'ızg'a bolmaydi.\n\n'''ESTE TUTIN'!'''\nBul ko'p qaralatug'ın betke qatan' ha'm ku'tilmegen o'zgerisler alıp keliwi mu'mkin;\ndawam ettiriwden aldın qanday aqıbetlerge alıp keliwin oylap ko'rin'.
+movepagetalktext|To'mendegi sebepler bar '''bolg'anısha''', sa'wbet beti avtomatik halda ko'shiriledi:\n* Bos emes sa'wbet beti jan'a atamada bar bolg'anda yaki\n* To'mendegi qutını belgilemegen'izde.\n\nBul jag'daylarda eger qa'lesen'iz betti qoldan ko'shiriwin'iz yamasa qosıwın'izg'a boladı.
+movearticle|Ko'shiriletug'ın bet:
+newtitle|Taza atama:
+move-watch|Bul betti baqlaw
+movepagebtn|Betti ko'shir
+pagemovedsub|Tabıslı ko'shirildi
+movepage-moved|'''"~{0}" beti "~{1}" betine ko'shirildi'''
+articleexists|Bunday atamalı bet bar yamasa natuwrı atama sayladın'ız.\nBasqa atama saylan'
+movetalk|Baylanıslı sa'wbet betin ko'shiriw
+movelogpage|Ko'shiriw jurnalı
+movelogpagetext|To'mende ko'shirilgen betlerdin' dizimi keltirilgen.
+movereason|Sebep:
+revertmove|qaytarıw
+delete_and_move|O'shiriw ha'm ko'shiriw
+delete_and_move_confirm|Awa, bul betti o'shiriw
+delete_and_move_reason|Ko'shiriwge jol beriw ushın o'shirilgen
+export|Betlerdi eksport qılıw
+export-submit|Eksport
+export-addcattext|Mına kategoriyadan betlerdi qosıw:
+export-addcat|Qos
+allmessages|Sistema xabarları
+allmessagesname|Atama
+allmessagesdefault|Defolt tekst
+allmessagescurrent|Ha'zirgi tekst
+allmessagestext|Bul {{ns:mediawiki}} isimler ko'pligindegi bar bolg'an sistema xabarları dizimi.\nPlease visit [https://www.mediawiki.org/wiki/Special:MyLanguage/Localisation MediaWiki Localisation] and [//translatewiki.net translatewiki.net] if you wish to contribute to the generic MediaWiki localisation.
+filemissing|Fayl tabılmadı
+thumbnail_error|Miniatyura jaratıw qa'teligi: ~{0}
+thumbnail_invalid_params|Miniatyura sazlawları natuwrı
+import|Betlerdi import qılıw
+import-interwiki-submit|Import
+import-comment|Kommentariy:
+importstart|Betler import qılınbaqta...
+import-revision-count|{{PLURAL:~{0}\u007C1 nusqa\u007C~{0} nusqa}}
+importnopages|Import qılınatug'ın betler joq.
+importunknownsource|Import qılıw derek tu'ri belgisiz
+importlogpage|Import qılıw jurnalı
+import-logentry-upload-detail|{{PLURAL:~{0}\u007C1 nusqa\u007C~{0} nusqa}}
+import-logentry-interwiki-detail|~{1} degennen {{PLURAL:~{0}\u007C1 nusqa\u007C~{0} nusqa}}
+tooltip-pt-userpage|Sizin' paydalanıwshı betin'iz
+tooltip-pt-anonuserpage|Bul IP adres paydalanıwshı beti
+tooltip-pt-mytalk|Sizin' sa'wbet betin'iz
+tooltip-pt-anontalk|Bul IP adresten kiritilgen o'zgerisler haqqında diskussiya
+tooltip-pt-preferences|Menin' sazlawlarım
+tooltip-pt-watchlist|O'zgerislerin baqlap turg'an betler dizimi
+tooltip-pt-mycontris|Sizin' u'lesler dizimin'iz
+tooltip-pt-login|Kiriwin'iz usınıladı, biraq ma'jbu'riy bolmag'an xalda.
+tooltip-pt-logout|Shıg'ıw
+tooltip-ca-talk|Mag'lıwmat beti haqqında diskussiya
+tooltip-ca-edit|Siz bul betti o'zgertiwin'izge boladi. Iltimas betti saqlawdan aldın ko'rip shig'ıw knopkasın paydalanın'.
+tooltip-ca-addsection|Jan'a bo'lim jaratıw.
+tooltip-ca-viewsource|Bul bet qorg'alg'an. Biraq ko'rip shıg'ıwın'ızg'a boladı.
+tooltip-ca-history|Bul bettin' aqırg'ı nusqaları.
+tooltip-ca-protect|Bul betti qorg'aw
+tooltip-ca-delete|Bul betti o'shiriw
+tooltip-ca-undelete|Bul bettin' o'shiriwden aldın bolg'an o'zgertiwlerin qaytarıw
+tooltip-ca-move|Bul betti ko'shiriw
+tooltip-ca-watch|Bul betti menin' baqlaw dizimime qosiw
+tooltip-ca-unwatch|Bul betti menin' baqlaw dizimimnen alıp tasla
+tooltip-search|{{SITENAME}} saytınan izlew
+tooltip-search-go|Eger usı atamag'a iye bolg'an bet bolsa, tuwrı o'tip ketiw
+tooltip-search-fulltext|Usı tekst ushın betlerdi izlew
+tooltip-p-logo|Bas bet
+tooltip-n-mainpage|Bas betke o'tiw
+tooltip-n-mainpage-description|Bas betke o'tiw
+tooltip-n-portal|Proyekt haqqında, nelerdi islewin'izge boladi, qayaqtan tabıwın'ızg'a boladi
+tooltip-n-currentevents|Ha'zirgi ha'diyseler haqqında mag'lıwmat tabıw
+tooltip-n-recentchanges|Wikidegi aqırg'ı o'zgerislerdin' dizimi.
+tooltip-n-randompage|Qa'legen betti ju'klew
+tooltip-n-help|Anıqlama tabıw ornı.
+tooltip-t-whatlinkshere|Usı betke siltelgen barlıq betler dizimi
+tooltip-t-recentchangeslinked|Bul betten siltengen betlerdegi aqırg'ı o'zgerisler
+tooltip-feed-rss|Bul bettin' "RSS" jolag'ı
+tooltip-feed-atom|Bul bettin' "Atom" jolag'ı
+tooltip-t-contributions|Usı paydalanıwshının' u'lesler dizimin ko'riw
+tooltip-t-emailuser|Usı paydalanıwshıg'a e-mail jiberiw
+tooltip-t-upload|Fayllardı aploud qılıw
+tooltip-t-specialpages|Barlıq arnawlı betler dizimi
+tooltip-t-print|Bul bettin' baspa nusqası
+tooltip-t-permalink|Bul bettegi usı nusqasının' turaqlı siltewi
+tooltip-ca-nstab-main|Mag'lıwmat betin ko'riw
+tooltip-ca-nstab-user|Paydalanıwshı betin ko'riw
+tooltip-ca-nstab-media|Media betin ko'riw
+tooltip-ca-nstab-special|Bul arnawlı bet, onı o'zgerte almaysız.
+tooltip-ca-nstab-project|Proyekt betin ko'riw
+tooltip-ca-nstab-image|Fayl betin ko'riw
+tooltip-ca-nstab-mediawiki|Sistema xabarın ko'riw
+tooltip-ca-nstab-template|Shablondı ko'riw
+tooltip-ca-nstab-help|Anıqlama betin ko'riw
+tooltip-ca-nstab-category|Kategoriya betin ko'riw
+tooltip-minoredit|Kishi o'zgeris dep belgilew
+tooltip-save|O'zgertiwlerin'izdi saqla
+tooltip-preview|Saqlawdan aldın kiritken o'zgerislerin'izdi ko'rip shıg'ın'!
+tooltip-diff|Tekstke qanday o'zgeris kiritkenin'izdi ko'rsetiw
+tooltip-compareselectedversions|Bettin' eki nusqasının' ayırmashılıg'ın qaraw.
+tooltip-watch|Bul betti baqlaw dizimin'izge qosıw
+tooltip-upload|Aploudtı basla
+tooltip-rollback|"Biykar etiw" arqalı usı betke aqırg'ı u'les qosıwshının' kirgizgen o'zgerislerin qaytarıw mu'mkinshiligine iyesiz
+tooltip-undo|"Qaytarıw" arqalı bul o'zgeristi artqa qaytarıw ha'm onı aldınnan ko'riw formasında baqlaw menen birge qaytarıwdın' sebebin ko'rsetiw mu'mkinshiligine iyesiz.
+anonymous|{{SITENAME}} saytının' anonim {{PLURAL:~{0}\u007Cpaydalanıwshısı\u007Cpaydalanıwshıları}}
+siteuser|{{SITENAME}} paydalanıwshısı ~{0}
+lastmodifiedatby|Bul bettin' aqırg'ı ma'rte ~{2} o'zgertken waqtı: ~{1}, ~{0}.
+others|basqalar
+siteusers|{{SITENAME}} {{PLURAL:~{1}\u007Cpaydalanıwshı\u007Cpaydalanıwshıları}} ~{0}
+creditspage|Bet avtorları
+deletedrevision|~{0} eski nusqasın o'shirdi
+filedeleteerror-short|Fayl o'shiriw qateligi: ~{0}
+previousdiff|← Aldıng'ı parq
+nextdiff|Keyingi parq →
+thumbsize|Miniatyuranın' ha'jmi:
+widthheight|~{0} × ~{1}
+widthheightpage|~{0} × ~{1}, ~{2} {{PLURAL:~{2}\u007Cbet\u007Cbet}}
+file-info|fayldın' ha'jmi: ~{0}, MIME tu'ri: ~{1}
+file-info-size|~{0} × ~{1} piksel, fayldın' ha'jmi: ~{2}, MIME tu'ri: ~{3}
+file-nohires|Bunnan joqarı imkaniyatlı tabılmadı.
+svg-long-desc|SVG fayl, ~{0} × ~{1} piksel belgilengen, fayldın' ha'jmi: ~{2}
+show-big-image|Joqarı imkaniyatlı
+newimages|Taza fayllar galereyasi
+noimages|Ko'riwge su'wret joq.
+ilsubmit|İzle
+bydate|sa'ne boyınsha
+sp-newimages-showfrom|~{1}, ~{0} baslap taza fayllardı ko'rset
+video-dims|~{0}, ~{1} × ~{2}
+hours-abbrev|~{0}st
+bad_image_list|Formatı to'mendegishe:\n\nTek dizim elementleri (* menen baslanatug'ın qatarlar) esaplanadi.\nQatardın' birinshi siltewi natuwrı faylg'a siltewi sha'rt.\nSol qatardag'ı keyingi ha'r bir siltewler tısqarı qabıl etiledi, mısalı qatar ishindegi ushırasatug'ın faylı bar betler.
+metadata|Metamag'lıwmat
+metadata-help|Usı faylda a'dette sanlı kamera yamasa skaner arqalı qosılatug'ın qosımsha mag'lıwmat bar.\nEger fayl jaratılg'anınan keyin o'zgertilgen bolsa, geybir parametrleri o'zgertilgen faylg'a tuwra kelmewi mu'mkin.
+metadata-expand|Qosımsha mag'lıwmatlardı ko'rset
+metadata-collapse|Qosımsha mag'lıwmatlardi jasır
+metadata-fields|Usı xabarda ko'rsetilgen metamag'lıwmat qatarları metamag'lıwmat kestesi jasırılg'anda su'wret betinde ko'rsetiledi. Basqalar defolt boyınsha jasırılg'an.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|Yeni:
+exif-imagelength|Uzunlıg'ı
+exif-imagedescription|Su'wret ataması
+exif-artist|Avtor
+namespacesall|ha'mmesi
+monthsall|ha'mme
+confirmemail|E-mail adresin tastıyıqlaw
+confirmemail_send|Tastıyıqlaw kodın jiberiw
+confirmemail_sent|Tastıyıqlaw xatı jiberildi.
+confirmemail_oncreate|Tastıyıqlaw kodı e-mail adresin'izge jiberildi.\nBul kod kiriw ushın talap etilmeydi, biraq wikidin' e-mail mu'mkinshiliklerinen paydalanıwın'ız ushın kodtı ko'rsetiwin'iz kerek.
+confirmemail_sendfailed|{{SITENAME}} sizin' tastıyıqlaw xatın'ızdı jibere almadi.\nAdresin'izde jaramsız simvollar bolmawına tekserip shıg'ın'.\n\nXat jiberiwshinin' qaytarg'an mag'lıwmatı: ~{0}
+confirmemail_invalid|Tastıyıqlaw kodı nadurıs.\nKodtın' jaramlılıq waqtı pitken bolıwı mu'mkin.
+confirmemail_needlogin|E-mail adresin'izdi tastıyıqlaw ushın ~{0} kerek.
+confirmemail_success|Sizin' e-mail adresin'iz tastıyıqlandı. \nEndi wikige [[Special:UserLogin\u007Ckiriwin'iz]] mu'mkin.
+confirmemail_loggedin|Sizin' e-mail adresin'iz endi tastıyıqlandı.
+confirmemail_subject|{{SITENAME}} e-pochta adresi tastıyıqaw xatı
+confirmemail_body|Geybirew, ba'lkimiz o'zin'iz shıg'ar, ~{0} IP adresinen,\n{{SITENAME}} saytında bul E-pochta adresin qollanıp «~{1}» degen akkaunt jarattı.\n\nUsı akkaunt shın'ınan ha'm siziki ekenin tastıyıqlaw ushın ha'mde {{SITENAME}} saytının'\ne-pochta mu'mkinshiliklerin paydalanıw ushın, to'mendegi siltewdi brauzerin'izde ashın':\n\n~{2}\n\nEger bul akkauntti jaratpag'an bolsan'ız, to'mendegi siltewge o'tip\ne-pochta adresin'izdin' tastıyıqlawın o'shirsen'iz boladı:\n\n~{4}\n\nBul tastıyıqlaw kodının' pitetug'ın waqtı: ~{3}.
+recreate|Qaytadan jaratıw
+unit-pixel| px
+confirm_purge_button|OK
+imgmultipageprev|← aldıng'ı bet
+imgmultipagenext|keyingi bet →
+imgmultigo|O'tin'!
+ascending_abbrev|o's.
+descending_abbrev|kem.
+table_pager_next|Keyingi bet
+table_pager_prev|Aldıng'ı bet
+table_pager_first|Birinshi bet
+table_pager_last|Aqırg'ı bet
+table_pager_limit_submit|O'tin'
+table_pager_empty|Na'tiyjeler joq
+autosumm-blank|Bettin' barlıq mag'lıwmatı o'shirilgen
+autosumm-replace|Betti '~{0}' penen almastırıw
+autoredircomment|[[~{0}]] degenge burıw
+autosumm-new|Taza bet jaratıldı: "~{0}"
+lag-warn-normal|Usı dizimde ~{0} {{PLURAL:~{0}\u007Csekundtan\u007Csekundtan}} jan'alaw bolg'an o'zgerisler ko'rsetilmewi mu'mkin.
+watchlistedit-normal-title|Baqlaw dizimin o'zgertiw
+watchlistedit-normal-legend|Baqlaw diziminen atamalardi o'shıriw
+watchlistedit-normal-submit|Atamalardı O'shir
+watchlistedit-normal-done|Baqlaw dizimin'izden {{PLURAL:~{0}\u007C1 atama\u007C~{0} atama}} o'shirildi:
+watchlistedit-raw-title|"Shiyki" baqlaw dizimin o'zgertiw
+watchlistedit-raw-legend|"Shiyki" baqlaw dizimin o'zgertiw
+watchlistedit-raw-titles|Atamalar:
+watchlistedit-raw-submit|Baqlaw dizimin jan'ala
+watchlistedit-raw-done|Baqılaw dizimin'iz jan'alandı.
+watchlistedit-raw-added|{{PLURAL:~{0}\u007C1 atama\u007C~{0} atama}} qosilg'an:
+watchlistedit-raw-removed|{{PLURAL:~{0}\u007C1 atama\u007C~{0} atama}} o'shirildi:
+watchlisttools-view|Baylanıslı o'zgerislerdi qaraw
+watchlisttools-edit|Baqlaw dizimin ko'riw ha'm o'zgertiw
+watchlisttools-raw|"Shiyki" baqlaw dizimin o'zgertiw
+version|MediaWikidin' nusqası
+specialpages|Arnawlı betler
+specialpages-group-users|Paydalanıwshılar ha'm olardın' huqıqları
+revdelete-restricted|administratorlarg'a qollanılg'an sheklewler
+revdelete-unrestricted|administratorlardan alıp taslang'an sheklewler
+rightsnone|(hesh qanday)
+revdelete-summary|o'zgerislerdin' qısqasha mazmunı
+']:>
+).lang
+;

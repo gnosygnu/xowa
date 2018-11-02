@@ -1,0 +1,1 @@
+The Luaj files are not part of the official Scribunto distribution. They were developed for XOWA and the Luaj jar

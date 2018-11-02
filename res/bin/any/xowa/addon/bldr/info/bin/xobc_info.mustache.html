@@ -1,0 +1,54 @@
+<div id='cur_help_div' class='xohelp_div'>
+  <div id='cur_help_msg' class='xohelp_msg'>
+    <b>Info</b>
+    <div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Wiki URL</b>: Internet URL of the wiki</span></div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Wiki folder</b>: Location where the .xowa files should be placed. For example: <code>C:\xowa\wiki\simple.wikipedia.org\simple.wikipedia.org-core.xowa</code></span></div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Total size</b>: Total size of all files on disk (not downloaded size)</span></div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Torrent</b>: Torrent link for use in your torrent program. Note that you will need to manually exclude files</span></div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Download URLs</b>: URLs for use in your download manager / accelerator</span></div>
+    </div>    
+  </div>
+</div>
+<div class='main_body' id='main_body'>
+  <div class='xotbl_head_row'>
+    <div class='xotbl_head_text cur_head_text'>Task info</div>
+      <a class='xoimg_btn_x24 xoimg_help_tip' title='view help' href='javascript:void(0)' onclick='return xo.help.toggle("cur")'>&nbsp;</a>
+    </div>
+  </div>
+  <div class="xotbl_data_row cur_data_row">
+    <label>Wiki URL</label>
+    <span><a href='https://{{wiki_domain}}' class='external'>https://{{wiki_domain}}</a></span>
+  </div>
+  <div class="xotbl_data_row cur_data_row">
+    <label>Wiki folder</label>
+    <span>{{wiki_dir}}</span>
+  </div>
+  <div class="xotbl_data_row cur_data_row">
+    <label>Total size</label>
+    <span>{{task_size}}</span>
+  </div>
+  <div class="xotbl_data_row cur_data_row">
+    <label>Torrent</label>
+    <span><a href='{{torrent_fil}}'>{{torrent_fil}}</a></span>
+  </div>
+  <div class="xotbl_data_row cur_data_row">
+    <label>Files</label>
+    <span>
+      <table class='files_table' cellspacing='0' cellpadding='0'>
+      <tr>
+        <th>URL</th>
+        <th>Size</th>
+        <th>MD5</th>
+      </tr>
+      {{#urls}}
+      <tr>
+        <td class='files_table_url'><a href='{{url}}'>{{url}}</a></td>
+        <td class='files_table_size'>{{size}}</td>
+        <td class='files_table_md5'>{{md5}}</td>
+      </tr>
+      {{/urls}}
+      </table>
+    </span>
+  </div>
+</div>

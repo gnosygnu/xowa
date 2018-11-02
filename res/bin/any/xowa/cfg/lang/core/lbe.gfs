@@ -1,0 +1,102 @@
+numbers {
+  separators {
+    clear;
+    set(',', ' ');
+    set('.', ',');
+  }
+}
+this
+.fallback_load('ru')
+.ns_names
+  .load_text(
+<:['
+-2|Медиа
+-1|Къуллугъирал лажин
+1|Ихтилат
+2|Гьуртту хьума
+3|Гьуртту хьуминнал ихтилат
+5|$1лиясса ихтилат
+6|Сурат
+7|Суратраясса ихтилат
+8|MediaWiki
+9|MediaWikiлиясса ихтилат
+10|Шаблон
+11|Шаблондалиясса ихтилат
+12|Кумаг
+13|Кумаграясса ихтилат
+14|Категория
+15|Категориялиясса ихтилат
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+article|Тарих
+mytalk|На цӀухху-бусу байсса интернетрал лажин
+qbedit|Дакьин дуван
+history|Тарих
+history_short|Тарих
+edit|Дакьин дуван
+talkpagelinktext|Ихтилат
+talk|Ихтилат
+currentevents|Нанисса ишру
+currentevents-url|Project:Нанисса ишру
+mainpage|Агьаммур лажин
+mainpage-description|Агьаммур лажин
+editsection|дакьин дуван
+editold|дакьин дуван
+nstab-main|Тарих
+nstab-user|Гьуртту хьума
+nstab-special|Къуллугъирал лажин
+nstab-image|Сурат
+nstab-template|Шаблон
+nstab-category|Категория
+userlogin|Системалухь цу уссарав бусан
+logout|Уккаву
+userlogout|Уккаву
+minoredit|Мюрщсса дахханашиву
+watchthis|Ва лажин ябитаврил сияхӀравун ххи дан
+savearticle|Лажин ядан
+preview|Цалсса ххалбаву
+showpreview|Цалсса ххалбаву
+recentchanges|Махъсса дахханашивурту
+file-anchor-link|Сурат
+filehist-user|Гьурттучув
+move|ЦӀа даххана дан
+specialloguserlabel|Гьурттучув:
+emailuser|ГьурттучувначӀансса чагьар
+watchlist|Ябитаврил сияхӀ
+watch|Хъирив агьан
+unwatch|Хъирив къаагьан
+contributions|Гьурттучунал бутӀа
+mycontris|Ттул даву
+sp-contributions-talk|Ихтилат
+move-watch|Ва лажин ябитаврил сияхӀравун ххи дан
+']:>
+).lang
+;

@@ -1,0 +1,60 @@
+.cur_head_text {
+  width: calc(100% - 108px);
+}
+.cur_head_btns {
+  width: 108px;
+}
+
+/* Detail Tbl */
+.cur_data_row {
+  padding: 4px 0px 4px;
+}
+.cur_data_row label {
+  display: inline-block;
+  width: 90px;
+  margin: 0px 4px 0px 10px;
+  vertical-align: top;
+          align-self: flex-start;
+  -webkit-align-self: flex-start;
+  
+  font-weight: bold;
+}
+.cur_data_row label::after {
+    content: ":";
+}
+.cur_data_input {
+  display: inline-block;
+  width: calc(100% - 140px);
+}
+.cur_data_icon {
+  margin-left: 7px;  
+}
+.files_table th {
+  border-bottom: 1px solid #ddd;  
+}
+.files_table_url, .files_table_size, .files_table_md5 {
+  border-bottom: 1px solid #ddd;
+  padding: 4px;
+}
+.files_table_url {
+}
+.files_table_size {
+  text-align:right;
+  padding:0px 25px 0px 25px; /* use padding to add space between left and right cols */
+}
+.files_table_md5 {
+  font-family:Courier New;
+}
+input[readonly]
+{
+    background-color:#eff0f1;
+    border:1px solid #ddd;
+}
+
+.cur_actions_row  {
+  display: inline-block;
+  margin: 0px 4px 0px 10px;
+  vertical-align: top;
+          align-self: flex-start;
+  -webkit-align-self: flex-start;
+}

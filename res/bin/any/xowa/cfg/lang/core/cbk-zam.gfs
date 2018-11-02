@@ -1,0 +1,115 @@
+this
+.fallback_load('es')
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+january|Enero
+february|Febrero
+march|Marzo
+april|Abril
+may_long|Mayo
+june|Junio
+july|Julio
+august|Agosto
+september|Septiembre
+october|Octubre
+november|Noviembre
+december|Diciembre
+april-gen|Abril
+august-gen|Agosto
+december-gen|Diciembre
+apr|Abr
+aug|Ago
+dec|Dic
+categories|Maga categoria
+lastmodifiedat|Ya modifica con este pagina por ultimo vez en hora ~{1} del ~{0}.
+otherlanguages|na otro maga lenguaje
+category_header|Maga articulo na categoria "~{0}"
+categorytree|El pono de maga categoria
+categorytree-category|Categoria:
+categorytree-collapse|esconde
+categorytree-expand|extende
+about|Acerca de
+article|El laman del pagina
+tagline|Estava na {{SITENAME}}
+help|Ayuda
+search|Busqueda
+searchbutton|Busca
+searcharticle|Anda
+history_short|Historia
+printableversion|El version que puede imprenta
+edit|Revisa
+delete|Bora
+talkpagelinktext|Cuento
+personaltools|Maga herramientas personal
+articlepage|Mira con el laman del pagina
+views|Maga vista
+categorypage|Mira con el pagina de categoria
+aboutsite|Acerca de {{SITENAME}}
+aboutpage|Project:Acerca de
+copyright|Obtenible el maga texto de este Wikipedia bajo los terminos y maga condicion del <i>~{0}</i>.
+copyrightpage|{{ns:project}}:Maga derecho del autor
+currentevents|Maga sucesos actual
+currentevents-url|Project:Maga sucesos actual
+disclaimers|Maga aviso legal
+disclaimerpage|Project:El maga limitacion general de maga responsabilidad
+mainpage|El Primero Pagina
+mainpage-description|El Primero Pagina
+portal|Portal del Comunidad
+privacy|Policia na proteccion del maga informacion
+privacypage|Project:Policia na proteccion del maga informacion
+retrievedfrom|Obtenido de "~{0}"
+editsectionhint|Revisa el seccion: ~{0}
+site-rss-feed|~{0} Informacion de RSS
+site-atom-feed|~{0} Informacion de Atom
+red-link-title|~{0} (jendeh ta existi el pagina)
+acct_creation_throttle_hit|Ya crea ya {{PLURAL:~{0}\u007Cun cuenta registro\u007C~{0} maga cuenta registro}} el maga visita de este wiki usando el de uste direccion de IP  en el ultimo dia. Entonces, ya sobra ya na maximo numero que ta puede permiti el sistema para crea cuenta. Por causa de este razon, no puede mas crea nuevo cuenta usando el de uste direccion de IP este maga tiempo.
+accountcreated|El cuenta registro del usuario es creando
+accountcreatedtext|Creao ya el cuenta registro por usuario ~{0}.
+changepassword|Cambia con el contraseña
+blockedtitle|El usuario es prohibido o bloqueado
+accmailtitle|Enviao ya el contraseña.
+accmailtext|El contraseña que el sistema ya escogi automatico por usuario [[User talk:~{0}\u007C~{0}]] enviado ya a ~{1}.\n\nEl contraseña de este nuevo cuenta puede cambia na pagina ''[[Special:ChangePassword\u007Ccambia el contraseña]]'' despues el autenticacion.
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 palabra\u007C~{1} maga palabra}})
+recentchanges|Maga Reciente Cambio
+randompage|Pagina Escujido Automatico
+allarticles|Todo maga articulo
+categoriespagetext|El maga siguiente {{PLURAL:~{0}\u007Ccategoria tiene\u007Ccategoria tiene}} maga pagina o medio de comunicacion.\n\nEl maga [[Special:UnusedCategories\u007Ccategoria sin usando]] jendeh ta abuya aqui.\n\nPor favor mira tambien el maga [[Special:WantedCategories\u007Ccategoria requeridas]].
+watch|Vicia
+created|creao
+changed|cambiao
+actioncomplete|Completo el accion
+contributions|Maga contribuciones del usuario
+blockip|Usuario prohibido
+blockipsuccesssub|El prohibicion es confirmado con exito
+contribslink|Maga contribuciones
+tooltip-search|Busca na {{SITENAME}}
+tooltip-n-mainpage|Visita na Primero Pagina
+']:>
+).lang
+;

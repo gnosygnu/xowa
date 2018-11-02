@@ -1,0 +1,2361 @@
+this
+.fallback_load('ru')
+.ns_names
+  .load_text(
+<:['
+-2|Медиа
+-1|Махсус
+1|Бәхәс
+2|Кулланучы
+3|Кулланучы бәхәсе
+5|$1 бәхәсе
+6|Файл
+7|Файл бәхәсе
+8|МедиаВики
+9|МедиаВики бәхәсе
+10|Калып
+11|Калып бәхәсе
+12|Ярдәм
+13|Ярдәм бәхәсе
+14|Төркем
+15|Төркем бәхәсе
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-1|Служебная
+1|Обсуждение
+1|Фикер алышу
+2|Участница
+3|Обсуждение участницы
+2|Участник
+3|Обсуждение участника
+5|Обсуждение {{GRAMMAR:genitive\u007C$1}}
+6|Изображение
+7|Обсуждение изображения
+7|Обсуждение файла
+6|Рәсем
+7|Рәсем бәхәсе
+9|Обсуждение MediaWiki
+8|Медиа Вики
+9|Медиа Вики бәхәсе
+10|Үрнәк
+11|Үрнәк бәхәсе
+10|Шаблон
+11|Обсуждение шаблона
+11|Шаблон бәхәсе
+12|Справка
+13|Обсуждение справки
+14|Категория
+15|Обсуждение категории
+-1|Maxsus
+1|Bäxäs
+2|Äğzä
+3|Äğzä bäxäse
+5|$1 bäxäse
+6|Räsem
+7|Räsem bäxäse
+9|MediaWiki bäxäse
+10|Ürnäk
+11|Ürnäk bäxäse
+12|Yärdäm
+13|Yärdäm bäxäse
+14|Törkem
+15|Törkem bäxäse
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Activeusers|Актив_кулланучылар
+Allmessages|Барлык_хатлар
+Allpages|Барлык_битләр
+Ancientpages|Иске_битләр
+Booksources|Китап_чыганаклары
+BrokenRedirects|Өзелгән_күчеш
+Categories|Төркемнәр
+Confirmemail|Электрон_почтаны_раслау
+Contributions|Кертемнәр
+CreateAccount|Теркәлү
+DoubleRedirects|Икеле_күчеш
+Emailuser|Кулланучының_E-mail\\'лы
+Export|Экспорт
+Fewestrevisions|Кечкенә_үзгәртүләр
+Import|Импорт
+Listadmins|Идарәчеләр_исемлеге
+Listbots|Ботлар_исемлеге
+Listfiles|Файллар_исемлеге
+Listgrouprights|Төркемнәр_исемлеге
+Listusers|Кулланучылар_исемлеге
+Log|Көндәлек
+Longpages|Озын_битләр
+Mostcategories|Зур_төркемнәр
+Mostrevisions|Зур_үзгәртүләр
+Movepage|Битне_күчерү
+MyLanguage|Телем
+Mypage|Сәхифәм
+Mytalk|Бәхәсем
+Newimages|Яңа_файл
+Newpages|Яңа_бит
+Popularpages|Популяр_битләр
+Preferences|Көйләнмәләр
+Protectedpages|Якланган_битләр
+Protectedtitles|Якланган_башлыклар
+Randompage|Очраклы_мәкалә
+Recentchanges|Соңгы_үзгәртүләр
+Recentchangeslinked|Бәйләнгән_соңгы_үзгәртүләр
+Search|Эзләү
+Shortpages|Кыска_битләр
+Specialpages|Махсус_битләр
+Statistics|Статистика
+Tags|Теглар
+Uncategorizedcategories|Үзләштерелмәгән_бүлекләр
+Uncategorizedimages|Үзләштерелмәгән_файллар
+Uncategorizedpages|Үзләштерелмәгән_битләр
+Uncategorizedtemplates|Үзләштерелмәгән_үрнәкләр
+Unusedcategories|Кулланылмаган_төркемнәр
+Unusedimages|Кулланылмаучы_файллар
+Upload|Йөкләү
+Userlogin|Кулланучы_исеме
+Userlogout|Чыгу
+Version|Юрама
+Wantedcategories|Мондый_бүлек_юк
+Wantedfiles|Мондый_файл_юк
+Wantedpages|Мондый_бит_юк
+Wantedtemplates|Мондый_үрнәк_юк
+Watchlist|Күзәтү_исемлеге
+Whatlinkshere|Биткә_юнәлтүче_сылтамалар
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+redirect|0|#ЮНӘЛТҮ~#перенаправление~#перенапр~#REDIRECT~
+notoc|0|__БАШЛЫКЮК__~__БЕЗ_ОГЛАВЛЕНИЯ__~__БЕЗ_ОГЛ__~__NOTOC__~
+forcetoc|0|__ETTIQ__~__ОБЯЗ_ОГЛ__~__ОБЯЗАТЕЛЬНОЕ_ОГЛАВЛЕНИЕ__~__FORCETOC__~
+toc|0|__ЭЧТЕЛЕК__~__ОГЛАВЛЕНИЕ__~__ОГЛ__~__TOC__~
+noeditsection|0|__БҮЛЕКҮЗГӘРТҮЮК__~__БЕЗ_РЕДАКТИРОВАНИЯ_РАЗДЕЛА__~__NOEDITSECTION__~
+currentmonth|1|АГЫМДАГЫ_АЙ~АГЫМДАГЫ_АЙ2~ТЕКУЩИЙ_МЕСЯЦ~ТЕКУЩИЙ_МЕСЯЦ_2~CURRENTMONTH~CURRENTMONTH2~
+currentmonthname|1|АГЫМДАГЫ_АЙ_ИСЕМЕ~НАЗВАНИЕ_ТЕКУЩЕГО_МЕСЯЦА~CURRENTMONTHNAME~
+currentmonthnamegen|1|АГЫМДАГЫ_АЙ_ИСЕМЕ_GEN~НАЗВАНИЕ_ТЕКУЩЕГО_МЕСЯЦА_РОД~CURRENTMONTHNAMEGEN~
+currentday|1|АГЫМДАГЫ_КӨН~ТЕКУЩИЙ_ДЕНЬ~CURRENTDAY~
+currentday2|1|АГЫМДАГЫ_КӨН2~ТЕКУЩИЙ_ДЕНЬ_2~CURRENTDAY2~
+currentdayname|1|АГЫМДАГЫ_КӨН_ИСЕМЕ~НАЗВАНИЕ_ТЕКУЩЕГО_ДНЯ~CURRENTDAYNAME~
+currentyear|1|АГЫМДАГЫ_ЕЛ~ТЕКУЩИЙ_ГОД~CURRENTYEAR~
+currenttime|1|АГЫМДАГЫ_ВАКЫТ~ТЕКУЩЕЕ_ВРЕМЯ~CURRENTTIME~
+numberofarticles|1|МӘКАЛӘ_САНЫ~КОЛИЧЕСТВО_СТАТЕЙ~NUMBEROFARTICLES~
+pagename|1|БИТ_ИСЕМЕ~НАЗВАНИЕ_СТРАНИЦЫ~PAGENAME~
+namespace|1|ИСЕМНӘР_МӘЙДАНЫ~ПРОСТРАНСТВО_ИМЁН~NAMESPACE~
+msg|0|ХӘБӘР~СООБЩЕНИЕ~СООБЩ~MSG~
+subst|0|TÖPÇEK:~ПОДСТ:~ПОДСТАНОВКА:~SUBST:~
+img_width|1|$1пкс~$1px~
+img_none|1|юк~без~none~
+img_right|1|уңда~справа~right~
+img_center|1|үзәк~центр~center~centre~
+img_left|1|сулда~слева~left~
+int|0|ЭЧКЕ~ВНУТР~INT~
+sitename|1|СӘХИФӘ_ИСЕМЕ~НАЗВАНИЕ_САЙТА~SITENAME~
+ns|0|İA~ПИ~NS~
+localurl|0|URINLIURL~ЛОКАЛЬНЫЙ_АДРЕС~LOCALURL~
+localurle|0|URINLIURLE~ЛОКАЛЬНЫЙ_АДРЕС_2~LOCALURLE~
+language|0|#ТЕЛ~#ЯЗЫК~#LANGUAGE~
+special|0|#махсус~#служебная~#special~
+tag|0|#тамга~#метка~#тег~#тэг~#tag~
+noindex|1|__ИНДЕКССЫЗ__~__БЕЗ_ИНДЕКСА__~__NOINDEX__~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Якшәмбе
+monday|Дүшәмбе
+tuesday|Сишәмбе
+wednesday|Чәршәмбе
+thursday|Пәнҗешәмбе
+friday|Җомга
+saturday|Шимбә
+sun|Якш
+mon|Дүш
+tue|Сиш
+wed|Чәр
+thu|Пән
+fri|Җом
+sat|Шим
+january|гыйнвар
+february|февраль
+march|март
+april|апрель
+may_long|май
+june|июнь
+july|июль
+august|август
+september|сентябрь
+october|октябрь
+november|ноябрь
+december|декабрь
+january-gen|гыйнвар
+february-gen|февраль
+march-gen|март
+april-gen|апрель
+may-gen|май
+june-gen|июнь
+july-gen|июль
+august-gen|август
+september-gen|сентябрь
+october-gen|октябрь
+november-gen|ноябрь
+december-gen|декабрь
+jan|гый
+feb|фев
+mar|мар
+apr|апр
+may|май
+jun|июн
+jul|июл
+aug|авг
+sep|сен
+oct|окт
+nov|ноя
+dec|дек
+toc|Эчтәлек
+redirectedfrom|(~{0} битеннән юнәлтелде)
+allpages|Барлык битләр
+prevpage|Алдагы бит (~{0})
+nextpage|Алдагы бит (~{0})
+collapsible-collapse|Төрү
+collapsible-expand|Ачу
+sort-descending|Кимү буенча урнаштыру
+sort-ascending|Арту буенча урнаштыру
+categories|Төркемнәр
+lastmodifiedat|Бу битне соңгы үзгәртү: ~{1}, ~{0}.
+thumbnail-more|Зурайту
+otherlanguages|Башка телләрдә
+blanknamespace|(Төп)
+pagecategories|{{PLURAL:~{0}\u007C1=Төркем\u007CТөркемнәр}}
+category_header|«~{0}» төркемендәге битләр
+subcategories|Төркемчәләр
+category-media-header|«~{0}» төркемендәге файллар
+category-empty|''Бу төркем әлегә буш.''
+category-subcat-count|{{PLURAL:~{1}\u007CБу төркемдә түбәндәге төркемчә генә бар.\u007C~{1} төркемчәдән {{PLURAL:~{0}\u007C~{0} төркемчә күрсәтелгән}}.}}
+category-subcat-count-limited|Бу төркемдә {{PLURAL:~{0}\u007C~{0} төркемчә}} бар.
+category-article-count|{{PLURAL:~{1}\u007CБу төркемдә бер генә бит бар.\u007CТөркемдәге ~{1} биттән {{PLURAL:~{0}\u007C~{0} күрсәтелде}}.}}
+category-article-count-limited|Бу төркемдә {{PLURAL:~{0}\u007C~{0} бит}} бар.
+category-file-count|{{PLURAL:~{1}\u007CБу төркемдә бер генә файл бар.\u007CТөркемдәге ~{1} файлдан {{PLURAL:~{0}\u007C~{0} күрсәтелде}}.}}
+category-file-count-limited|Бу төркемдә {{PLURAL:~{0}\u007C~{0} файл}} бар.
+categorytree-member-counts|~{0} {{PLURAL:~{0}\u007Cтәркемчәне\u007Cтәркемчәләрне\u007Cтәркемчәләрдән}}, ~{1} {{PLURAL:~{1}\u007Cбитне\u007Cбитләрне\u007Cбитләрдән}} и ~{2} {{PLURAL:~{2}\u007Cфайл\u007Cфайл\u007Cфайллар}} ны үз эченә ала
+nextn|чираттагы {{PLURAL:~{0}\u007C~{0}}}
+prevn|алдагы {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|дәвамы
+bold_sample|Калын язылыш
+bold_tip|Калын язылыш
+italic_sample|Курсив язылыш
+italic_tip|Курсив язылыш
+link_sample|Сылтама исеме
+link_tip|Эчке сылтама
+headline_sample|Башисем
+headline_tip|2 нче дәрәҗәле исем
+wikieditor-toolbar-tool-ulist|Тамгалы исемлек
+wikieditor-toolbar-tool-ulist-example|Тамгалы исемлекнең элементы
+wikieditor-toolbar-tool-olist|Санлы исемлек
+wikieditor-toolbar-tool-olist-example|Санлы исемлекнең элементы
+hidden-category-category|Яшерен төркемнәр
+statistics|Хисапнамә
+statistics-header-pages|Битләр хисапнамәсе
+statistics-articles|Мәкаләләр саны
+statistics-pages|Битләр саны
+statistics-pages-desc|Барлык вики, бәхәс, күчерү һәм башка битләрне дә истә тотып.
+categorytree|Тәркемнәр "агачы".
+categorytree-portlet|Төркемнәр
+categorytree-legend|Төркемнәрнең шәҗәрәсен ачарга
+categorytree-desc|[[Special:CategoryTree\u007CТөркемнәрнең асылы]]н аңлату өчен төзелгән AJAX-бит
+categorytree-header|Төркемнең исемен кертегез һәм ул шәҗәрә рәвешендә күрсәтеләчәк.\nБу мөмкинчелек сезнең браузерның AJAX ны тәэмин итүдән генә торырга мөмкин.\nӘгәр дә сезнең браузерыгыз иске яки JavaScript сүндерелгән булса, бу мөмкинчелек эшләмәячәк.
+categorytree-category|Төркем:
+categorytree-go|Йөкләү
+categorytree-parents|Төп төркемнәр
+categorytree-mode-categories|бары тик төркемнәр генә урнаштырылган
+categorytree-mode-pages|файллардан башка
+categorytree-mode-all|барлык битләр
+categorytree-collapse|яшерү
+categorytree-expand|ачарга
+categorytree-load|йөкләү
+categorytree-loading|йөкләү бара…
+categorytree-nothing-found|бернидә табылмады
+categorytree-no-subcategories|мондый төркемчәләр юк
+categorytree-no-parent-categories|төп бүлекләр юк
+categorytree-no-pages|мондый бит яки төркемчә юк
+categorytree-not-found|<i>~{0}</i> бүлеге табылмады
+categorytree-error|Хата
+categorytree-retry|Зинһар бераз көтеп торыгыз һәм тагын бер кат йөкләүне башкарып карагыз.
+cite_error|Өземтә китерү хатасы: ~{0}
+proofreadpage_nextpage|алдагы бит
+cite_article_desc|Махсус [[Special:Cite\u007Cкүчермәләү]] битен һәм җиһазларга сылтамалар өсти
+cite_article_link|Бу битне күчермәләү
+tooltip-cite-article|Бу битне ничек күчермәләү турындагы мәгълүмат
+cite|Күчермәләү
+cite_page|Бит:
+cite_submit|Күчермәләү
+wikieditor|Викитекстны үзгәртү буенча киңәйтелгән интерфейс
+wikieditor-desc|Викитекстны үзгәртү буенча киңәйтелгән интефейс (модулляр тарафынна бирелә)
+wikieditor-wikitext-tab|Викитекст
+wikieditor-loading|Йөкләү
+wikieditor-preview-preference|Алдан карауны ачу
+wikieditor-preview-tab|Алдан карау
+wikieditor-preview-changes-tab|Үзгәртүләр
+wikieditor-preview-loading|Йөкләү...
+wikieditor-previewDialog-preference|Алдан карау диалогын ачу
+wikieditor-previewDialog-tab|Алдан карау
+wikieditor-previewDialog-loading|Йөкләү...
+wikieditor-publish-preference|Баскычлы куюны ачу
+wikieditor-publish-button-publish|Чыгарырга
+wikieditor-publish-button-cancel|Кире кагу
+wikieditor-publish-dialog-title| {{SITENAME}} проектына кертергә
+wikieditor-publish-dialog-summary|Үзгәртүләр тасвирламасы (барлык үзгәртүләрне кыска гына иттереп языгыз):
+wikieditor-publish-dialog-minor|Кече үзгәртү
+wikieditor-publish-dialog-watch|Бу битне күзәтү
+wikieditor-publish-dialog-publish|Чыгарырга
+wikieditor-publish-dialog-goback|Артка
+wikieditor-template-editor-preference|Үрнәкләрне үзгәртү мөмкинчелеген ачу
+wikieditor-template-editor-dialog-title|Үрнәкне үзгәртү
+wikieditor-template-editor-dialog-submit|Яңарту
+wikieditor-template-editor-dialog-cancel|Кире кагу
+wikieditor-templates-preference|Үрнәкләрнең яшерергә
+wikieditor-toc-preference|Башлыкны үзгәртү мөмкинлеген ачу
+wikieditor-toc-show|Башлыкны күрсәтү
+wikieditor-toc-hide|Башлыкны яшерү
+wikieditor-toolbar|Төзәтү панеле
+wikieditor-toolbar-desc|Яңартылган үзгәртү панеле
+wikieditor-toolbar-preference|Яңа үзгәртү панелен куллана башлау
+wikieditor-toolbar-dialogs-preference|Сылтамалар, табыннар һәм башка җисемнәрне кую
+wikieditor-toolbar-loading|Йөкләү...
+wikieditor-toolbar-tool-bold|Куе төс
+wikieditor-toolbar-tool-bold-example|Калын язылыш
+wikieditor-toolbar-tool-italic|Авышлы
+wikieditor-toolbar-tool-italic-example|Курсив язылыш
+wikieditor-toolbar-tool-ilink|Эчке сылтама
+wikieditor-toolbar-tool-ilink-example|Сылтама исеме
+wikieditor-toolbar-tool-xlink|Тышкы сылтама (http:// алкушымчасы турында онытмагыз)
+wikieditor-toolbar-tool-xlink-example|http://www.example.com сылтама исеме
+wikieditor-toolbar-tool-link|Сылтама
+wikieditor-toolbar-tool-link-title|Сылтама өстәү
+wikieditor-toolbar-tool-link-int|Викибиткә күчү
+wikieditor-toolbar-tool-link-int-target| URL-бит:
+wikieditor-toolbar-tool-link-int-target-tooltip|Битнең исеме яки  URL-бит
+wikieditor-toolbar-tool-link-int-text|Күрсәтелүче текст
+wikieditor-toolbar-tool-link-int-text-tooltip|Күрсәтелүче текстны өстәгез
+wikieditor-toolbar-tool-link-ext|Тышкы веб-сәхифәгә
+wikieditor-toolbar-tool-link-ext-target|Сылтамагның URL-бите:
+wikieditor-toolbar-tool-link-ext-text|Сылтаманың тексты:
+wikieditor-toolbar-tool-link-insert|Сылтама өстәү
+wikieditor-toolbar-tool-link-cancel|Кире кагу
+wikieditor-toolbar-tool-link-int-target-status-exists|Мондый бит бар
+wikieditor-toolbar-tool-link-int-target-status-notexists|Мондый бит юк
+wikieditor-toolbar-tool-link-int-target-status-invalid|Мөмкин булмаган исем
+wikieditor-toolbar-tool-link-int-target-status-external|Тышкы сылтама
+wikieditor-toolbar-tool-link-int-target-status-loading|Битнең барлыгын тикшерү...
+wikieditor-toolbar-tool-link-int-invalid|Бирелгән исем мөмкин түгел.
+wikieditor-toolbar-tool-link-lookslikeinternal|Сезнең тарафтан күрсәтелгән URL-бит вики-сәхифәнең сылтамасына ошаган. Сез аны эчке сылтама итәргә ризамы?
+wikieditor-toolbar-tool-link-lookslikeinternal-int|Эчке сылтама
+wikieditor-toolbar-tool-link-lookslikeinternal-ext|Тышкы сылтама
+wikieditor-toolbar-tool-link-empty|Сез нәрсәгә сылтама ясарга кирәк икәнлеген күрсәтмәдегез.
+wikieditor-toolbar-tool-file|Куелган файл
+wikieditor-toolbar-tool-file-example|Мисал.jpg
+wikieditor-toolbar-tool-reference|Искәрмә
+wikieditor-toolbar-tool-reference-example|Искәрмәнең текстын монда куегыз
+wikieditor-toolbar-tool-reference-cancel|Кире кагу
+wikieditor-toolbar-tool-reference-title|Искәрмәне өстәү
+wikieditor-toolbar-tool-reference-insert|Өстәү
+wikieditor-toolbar-tool-reference-text|Искәрмәнең тексты
+wikieditor-toolbar-tool-signature|Имза һәм ул куелган вакыт
+wikieditor-toolbar-section-advanced|Киңәйтелгән
+wikieditor-toolbar-tool-heading|Башлык
+wikieditor-toolbar-tool-heading-1|1 дәрәҗә
+wikieditor-toolbar-tool-heading-2|2 дәрәҗә
+wikieditor-toolbar-tool-heading-3|3 дәрәҗә
+wikieditor-toolbar-tool-heading-4|4 дәрәҗә
+wikieditor-toolbar-tool-heading-5|5 дәрәҗә
+wikieditor-toolbar-tool-heading-example|Башлыкның исеме
+wikieditor-toolbar-group-format|Форматы
+wikieditor-toolbar-tool-indent|Чикләнеш
+wikieditor-toolbar-tool-indent-example|Чикләнешле рәт
+wikieditor-toolbar-tool-nowiki|Вики-форматлауны исәпкә алмаска
+wikieditor-toolbar-tool-nowiki-example|Форматланмаган текстны монда өстәгез
+wikieditor-toolbar-tool-redirect|Күчерү
+wikieditor-toolbar-tool-redirect-example|Битнең исеме
+wikieditor-toolbar-tool-big|Зур
+wikieditor-toolbar-tool-big-example|Зур текст
+wikieditor-toolbar-tool-small|Кечкенә
+wikieditor-toolbar-tool-small-example|Кечкенә текст
+wikieditor-toolbar-tool-superscript|Дәрәҗәле юл
+wikieditor-toolbar-tool-superscript-example|Дәрәҗәле юл тексты
+wikieditor-toolbar-tool-subscript|Индекслы юл
+wikieditor-toolbar-tool-subscript-example|Индекслы юл тексты
+wikieditor-toolbar-group-insert|Өстәү
+wikieditor-toolbar-tool-gallery|Рәсемнәр җыентыгы
+wikieditor-toolbar-tool-gallery-example|~{0}:Мисал.jpg\u007CТасвирлама1\n~{0}:Мисал.jpg\u007CТасвирлама2
+wikieditor-toolbar-tool-newline|Яңа юл
+wikieditor-toolbar-tool-table|Табын
+wikieditor-toolbar-tool-table-example-old|-\n! башлык 1\n! башлык  2\n! башлык  3\n\u007C-\n\u007C юл 1, күзәнәк 1\n\u007C юл 1, күзәнәк 2\n\u007C юл 1, күзәнәк 3\n\u007C-\n\u007C юл 2, күзәнәк 1\n\u007C юл 2, күзәнәк 2\n\u007C юл 2, күзәнәк 3
+wikieditor-toolbar-tool-table-example-cell-text|Күзәнәкнең тексты
+wikieditor-toolbar-tool-table-example-header|Башлыкның исеме
+wikieditor-toolbar-tool-table-title|Табынны өстәү
+wikieditor-toolbar-tool-table-dimensions-rows|Юллар
+wikieditor-toolbar-tool-table-dimensions-columns|Баганалар
+wikieditor-toolbar-tool-table-dimensions-header|Башлык юлын өстәү
+wikieditor-toolbar-tool-table-wikitable|Чикләр белән ясау
+wikieditor-toolbar-tool-table-sortable|Эшкәртелүче табын иттереп ясау
+wikieditor-toolbar-tool-table-example|Күзәнәкнең тексты
+wikieditor-toolbar-tool-table-preview|Алдан карау
+wikieditor-toolbar-tool-table-insert|Өстәү
+wikieditor-toolbar-tool-table-cancel|Кире кагу
+wikieditor-toolbar-tool-table-toomany|Бу диалог табынга ~{0} күзәнәктән дә артык өстәүне чикли
+wikieditor-toolbar-tool-table-invalidnumber|Сез дөрес күләмдә баганаларны һәм юлларны күрсәтмәгәнсез.
+wikieditor-toolbar-tool-table-zero|Сез буш табын куя алмыйсыз.
+wikieditor-toolbar-tool-replace|Эзләү һәм алмаштыру
+wikieditor-toolbar-tool-replace-title|Эзләү һәм алмаштыру
+wikieditor-toolbar-tool-replace-search|Эзләү:
+wikieditor-toolbar-tool-replace-replace|Алмаштыру:
+wikieditor-toolbar-tool-replace-case|Зурлыкны исәпләү
+wikieditor-toolbar-tool-replace-regex|Эзләү тасмасын гади иттереп билгеләргә
+wikieditor-toolbar-tool-replace-button-findnext|Бирелгәнне эзләү
+wikieditor-toolbar-tool-replace-button-replaceall|Барысында алмаштыру
+wikieditor-toolbar-tool-replace-close|Ябу
+wikieditor-toolbar-tool-replace-nomatch|Сезнең соравыгыз буенча берни дә табылмады.
+wikieditor-toolbar-tool-replace-success|~{0} алмаштыру үткәрелде.
+wikieditor-toolbar-tool-replace-emptysearch|Сез нәрсә эзләргә  икәнлеген күрсәтмәдегез.
+wikieditor-toolbar-tool-replace-invalidregex|Сезнең тарафтан кертелгән ~{0} аңлатмасы дөрес түгел.
+wikieditor-toolbar-section-characters|Махсус тамгалар
+wikieditor-toolbar-characters-page-latin|Латин
+wikieditor-toolbar-characters-page-latinextended|Латин (киңәйтелгән)
+wikieditor-toolbar-characters-page-ipa|ХФӘ (IPA)
+wikieditor-toolbar-characters-page-symbols|Тамгалар
+wikieditor-toolbar-characters-page-greek|Грек
+wikieditor-toolbar-characters-page-cyrillic|Кирилл
+wikieditor-toolbar-characters-page-arabic|Гарәп
+wikieditor-toolbar-characters-page-persian|Фарсы
+wikieditor-toolbar-characters-page-hebrew|Яхүд
+wikieditor-toolbar-characters-page-bangla|Бенгаль
+wikieditor-toolbar-characters-page-telugu|Телугу
+wikieditor-toolbar-characters-page-sinhala|Сингаль
+wikieditor-toolbar-characters-page-gujarati|Гуҗарати
+wikieditor-toolbar-characters-page-thai|Таиланд
+wikieditor-toolbar-characters-page-lao|Лаос
+wikieditor-toolbar-characters-page-khmer|Кһмер
+wikieditor-toolbar-section-help|Ярдәм
+wikieditor-toolbar-help-heading-description|Тасвир
+wikieditor-toolbar-help-heading-syntax|Кертелгән
+wikieditor-toolbar-help-heading-result|Килеп чыккан
+wikieditor-toolbar-help-page-format|Форматлаштыру
+wikieditor-toolbar-help-page-link|Сылтамалар
+wikieditor-toolbar-help-page-heading|Башлыклар
+wikieditor-toolbar-help-page-list|Исемлекләр
+wikieditor-toolbar-help-page-file|Файллар
+wikieditor-toolbar-help-page-reference|Искәрмә
+wikieditor-toolbar-help-page-discussion|Бәхәс
+wikieditor-toolbar-help-content-italic-description|Авышлы
+wikieditor-toolbar-help-content-italic-syntax|''Авышлы кулъязма''
+wikieditor-toolbar-help-content-italic-result|<em>Авышлы кулъязма</em>
+wikieditor-toolbar-help-content-bold-description|Куе төс
+wikieditor-toolbar-help-content-bold-syntax|'''Куе төстәге кулъязма'''
+wikieditor-toolbar-help-content-bold-result|<strong>Куе төстәге кулъязма</strong>
+wikieditor-toolbar-help-content-bolditalic-description|Авышлы куе төстәге кулъязма
+wikieditor-toolbar-help-content-bolditalic-syntax|'''''Авышлы куе төстәге кулъязма'''''
+wikieditor-toolbar-help-content-bolditalic-result|<em><strong>Авышлы куе төстәге кулъязма</strong></em>
+wikieditor-toolbar-help-content-ilink-description|Эчке сылтама
+wikieditor-toolbar-help-content-ilink-syntax|[[Битнең башлыгы\u007CСылтама тексты]]<br />[[Битнең башлыгы]]
+wikieditor-toolbar-help-content-ilink-result|<a href='#'>Сылтаманың тексты</a><br /><a href='#'>Битнең башлыгы</a>
+wikieditor-toolbar-help-content-xlink-description|Тышкы сылтама
+wikieditor-toolbar-help-content-xlink-syntax|[http://www.example.org Сылтаманың тексты]<br />[http://www.example.org]<br />http://www.example.org
+wikieditor-toolbar-help-content-xlink-result|<a href='#' class='external'>Сылтаманың тексты</a><br /><a href='#' class='external autonumber'>[1]</a><br /><a href='#' class='external'>http://www.example.org</a>
+wikieditor-toolbar-help-content-heading2-description|2 баскыч башлыгы
+wikieditor-toolbar-help-content-heading2-syntax|== Башлыкның тексты ==
+wikieditor-toolbar-help-content-heading2-result|<h2>Башлыкның тексты</h2>
+wikieditor-toolbar-help-content-heading3-description|3 баскыч башлыгы
+wikieditor-toolbar-help-content-heading3-syntax|=== Башлыкның тексты ===
+wikieditor-toolbar-help-content-heading3-result|<h3>Башлыкның тексты</h3>
+wikieditor-toolbar-help-content-heading4-description|4 баскыч башлыгы
+wikieditor-toolbar-help-content-heading4-syntax|==== Башлыкның тексты ====
+wikieditor-toolbar-help-content-heading4-result|<h4>Башлыкның тексты</h4>
+wikieditor-toolbar-help-content-heading5-description|5 баскыч башлыгы
+wikieditor-toolbar-help-content-heading5-syntax|===== Башлыкның тексты =====
+wikieditor-toolbar-help-content-heading5-result|<h5>Башлыкның тексты</h5>
+wikieditor-toolbar-help-content-ulist-description|Тамгалы исемлек
+wikieditor-toolbar-help-content-ulist-syntax|* Исемлекнең тәртибе<br />* Исемлекнең тәртибе
+wikieditor-toolbar-help-content-ulist-result|<ul><li>Исемлекнең тәртибе</li><li>Исемлекнең тәртибе</li></ul>
+wikieditor-toolbar-help-content-olist-description|Санлы исемлек
+wikieditor-toolbar-help-content-olist-syntax|# Исемлекнең тәртибе<br /># Исемлекнең тәртибе
+wikieditor-toolbar-help-content-olist-result|<ol><li>Исемлекнең тәртибе</li><li>Исемлекнең тәртибе</li></ol>
+wikieditor-toolbar-help-content-file-description|Куелган файл
+wikieditor-toolbar-help-content-file-syntax|[[~{0}:Example.png\u007Cthumb\u007CАңлатмалы текст]]
+wikieditor-toolbar-help-content-file-result|<div style='width:104px;' class='thumbinner'><a title='\nАңлатмалы текст' class='image' href='#'><img height='50' width='100' border='0' class='thumbimage' src='~{1}/WikiEditor/modules/images/toolbar/example-image.png' alt=''/></a><div class='thumbcaption'><div class='magnify'><a title='Зурайтырга' class='internal' href='#'><img height='11' width='15' alt='' src='~{0}/common/images/magnify-clip.png'/></a></div>\nАңлатмалы текст</div></div>
+wikieditor-toolbar-help-content-reference-description|Искәрмә
+wikieditor-toolbar-help-content-reference-syntax|Битнең тексты.&lt;ref name="test"&gt;[http://www.example.org Сылтаманың тексты], өстәмә текст.&lt;/ref&gt;
+wikieditor-toolbar-help-content-reference-result|Битнең тексты.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-rereference-description|Бирелгән сылтаманы өстәмә куллану
+wikieditor-toolbar-help-content-rereference-result|Битнең тексты.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-showreferences-description|Искәрмәне күрсәтү
+wikieditor-toolbar-help-content-showreferences-result|<ol class='references'><li id='cite_note-test-0'><b><a title='' href='#'>^</a></b> <a rel='nofollow' title='http://www.example.org' class='external text' href='#'>Сылтаманың тексты</a>, өстәмә текст.</li></ol>
+wikieditor-toolbar-help-content-signaturetimestamp-description|Имза (куелган вакыт белән)
+wikieditor-toolbar-help-content-signaturetimestamp-result|<a href='#' title='{{#special:mypage}}'>Кулланучы исеме</a> (<a href='#' title='{{#special:mytalk}}'>бәхәс</a>) 15:54, 10 июнь 2009 (UTC)
+wikieditor-toolbar-help-content-signature-description|Имза
+wikieditor-toolbar-help-content-signature-result|<a href='#' title='{{#special:mypage}}'>Кулланучы исеме</a> (<a href='#' title='{{#special:mytalk}}'>бәхәс</a>)
+wikieditor-toolbar-help-content-indent-description|Чигенеш
+wikieditor-toolbar-help-content-indent-syntax|Гади текст<br />:Чигенешле текст<br />::Чигенешле текст
+wikieditor-toolbar-help-content-indent-result|Гади текст<dl><dd>Чигенешле текст<dl><dd>Чигенешле текст</dd></dl></dd></dl>
+wm-license-cc-attribution|Авторлыкны күрсәтү
+wm-license-cc-free|Сез ирекле рәвештә:
+wm-license-cc-free-to-share-header|файл белән уртаклаша аласыз
+wikimedialicensetexts-desc| Викимедианең лицензия турындагы җәбәрләре
+wm-license-information-description|Тасвир
+wm-license-information-source|Чыганагы
+wm-license-information-source-missing|Бирелгән медиа-файлда "чыганак" турында мәгълүмат бирелми.
+wm-license-information-source-missing-request|Зинһар, бу файлның тасвирламасын үзгәртегез һәм чыганагын күрсәтегез.
+wm-license-information-date|Вакыт
+wm-license-information-author|Автор
+wm-license-information-author-missing|Бирелгән мәгълүматта "авторлык" турында хәбәр бирелми.
+wm-license-information-permission|Рөхсәт
+wm-license-information-permission-reusing-text|Бу файлны кабат куллану
+wm-license-information-permission-see-below|Астан карагыз.
+wm-license-information-other-versions|Башка юрамалар
+wikimediamessages-desc|Викимедиа өчен шәхси булган хатлар
+sitesupport-url|https://donate.wikimedia.org/?utm_source=donate&utm_medium=sidebar&utm_campaign=spontaneous&uselang=tt-cyrl
+sitesupport|Иганә
+tooltip-n-sitesupport|Безгә ярдәм итегез
+specialpages-group-contribution|Иганә/Ярдәм җыю
+nstab-creator|Автор
+nstab-institution|Учреждение
+nstab-sequence|Эзлеклелек
+nstab-timedtext|Синхротекст
+group-Ex_Administrator|Элеккеге идарәчеләр
+group-Ex_Administrator-member|{{GENDER:~{0}\u007Cэлеккеге идарәче}}
+grouppage-Ex_Administrator|{{ns:project}}:Элеккеге идарәчеләр
+group-Ex_Bureaucrat|Элеккеге бюрократлар
+group-Ex_Bureaucrat-member|{{GENDER:~{0}\u007Cэлеккеге бюрократ}}
+grouppage-Ex_Bureaucrat|{{ns:project}}:Элеккеге бюрократлар
+group-Image-reviewer|Рәсемнәрне тикшерүчеләр
+group-Image-reviewer-member|{{GENDER:~{0}\u007Cрәсемнәрне тикшерүче}}
+grouppage-Image-reviewer|{{ns:project}}:Рәсемнәрне караучылар
+group-OTRS-member|OTRS әгъзалары
+group-OTRS-member-member|{{GENDER:~{0}\u007COTRS әгъзасы}}
+grouppage-OTRS-member|{{ns:project}}:OTRS әгъзалары
+group-abusefilter|Усаллык белән эш итүчеләрне тикшерүче мөхәррирләр
+group-abusefilter-member|{{GENDER:~{0}\u007Cявызлык фильтры мөхәррире}}
+grouppage-abusefilter|{{ns:project}}:Явызлык фильтры мөхәррирләре
+group-accountcreator|Хисап язмасы төзүчеләр
+group-accountcreator-member|{{GENDER:~{0}\u007Cхисап язмасы төзүче}}
+grouppage-accountcreator|{{ns:project}}:Кулланучы язмаларын ясаучылар
+group-arbcom|Арбитраж шурасы әгъзаләре
+group-arbcom-member|{{GENDER:~{0}\u007Cарбитраж шурасы әгъзасы}}
+grouppage-arbcom|{{ns:project}}:Арбитраж шурасы әгъзалары
+group-autopatrolled|Автотикшерүчеләр
+group-autopatrolled-member|{{GENDER:~{0}\u007Cавтотикшерүче}}
+grouppage-autopatrolled|{{ns:project}}:Автотикшерүчеләр
+group-autoreviewer|Алдан караучылар
+group-autoreviewer-member|{{GENDER:~{0}\u007Cалдан караучы}}
+grouppage-autoreviewer|{{ns:project}}:Алдан караучылар
+group-bigexport|Зур экспортерлар
+group-bigexport-member|{{GENDER:~{0}\u007Cзур экспортер}}
+grouppage-bigexport|{{ns:project}}:Зур экспортерлар
+group-botadmin|Идарәче хокуклары булган ботлар
+group-botadmin-member|{{GENDER:~{0}\u007Cидарәче хокуклары булган бот}}
+grouppage-botadmin|{{ns:project}}:Идарәче хокуклары булган ботлар
+group-confirmed|Расланган кулланучылар
+group-confirmed-member|{{GENDER:~{0}\u007Cрасланган кулланучы}}
+grouppage-confirmed|{{ns:project}}:Расланган кулланучылар
+group-editprotected|Якланган битнең мөхәррирләре
+group-editprotected-member|{{GENDER:~{0}\u007Cякланган битнең мөхәррире}}
+grouppage-editprotected|{{ns:project}}:Якланган битләрнең мөхәррирләре
+group-eliminator|Бетерүчеләр
+group-eliminator-member|{{GENDER:~{0}\u007Cбетерүче}}
+grouppage-eliminator|{{ns:project}}:Бетерүчеләр
+group-filemover|Исеме алмаштырулы битләр
+group-filemover-member|{{GENDER:~{0}\u007Cфайлның исемен алмаштыручы}}
+grouppage-filemover|{{ns:project}}:Файл исемнәрен үзгәртүчеләр
+group-flood|Ботлар
+group-flood-member|{{GENDER:~{0}\u007Cкулланучы-бот}}
+grouppage-flood|{{ns:project}}:Кулланучы-ботлар
+group-founder|Нигез салучылар
+group-founder-member|{{GENDER:~{0}\u007Cнигез салучы}}
+grouppage-founder|{{ns:project}}:Нигезчеләр
+group-import|Импортлаучы кулланучылар
+group-import-member|{{GENDER:~{0}\u007Cимпортлаучы кулланучы}}
+grouppage-import|{{ns:project}}:Импортчылар
+group-interface_editor|Интерфейс мөхәррирләре
+group-interface_editor-member|{{GENDER:~{0}\u007Cинтерфейс мөхәррире}}
+grouppage-interface_editor|{{ns:project}}:Интерфейс тәрҗемәчеләре
+group-ipblock-exempt|IP-кысылган кулланучылар
+group-ipblock-exempt-member|{{GENDER:~{0}\u007CIP-кысылганнан чыгару}}
+grouppage-ipblock-exempt|{{ns:project}}:IP-кысылудан чыгару
+group-patroller|Тикшерүче
+group-patroller-member|{{GENDER:~{0}\u007Cтикшерүче}}
+group-researcher|Тәҗрибә ясаучылар
+group-researcher-member|{{GENDER:~{0}\u007Cтәҗрибә ясаучы}}
+grouppage-researcher|{{ns:project}}:Тикшерүче
+group-rollbacker|Кире кайтаручылар
+group-rollbacker-member|{{GENDER:~{0}\u007Cкире кайтаручы}}
+grouppage-rollbacker|{{ns:project}}:Кире кайтаручылар
+group-transwiki|Викиара-күчерүчеләр
+group-transwiki-member|{{GENDER:~{0}\u007Cвикиара-күчерүче}}
+grouppage-transwiki|{{ns:project}}:Викиара-импортлаучылар
+group-trusted|Ышанычлы кулланучылар
+group-trusted-member|{{GENDER:~{0}\u007Cышанычлы кулланучы}}
+grouppage-trusted|{{ns:project}}:Ышанычлы кулланучылар
+group-Global_bot|Глобаль ботлар
+group-Global_bot-member|{{GENDER:~{0}\u007Cглобаль бот}}
+group-Global_rollback|Глобаль кире кайтаручылар
+group-Global_rollback-member|{{GENDER:~{0}\u007Cглобаль кире кайтаручы}}
+group-Global_sysops|Глобаль идарәчеләр
+group-Global_sysops-member|{{GENDER:~{0}\u007Cглобаль идарәче}}
+group-Ombudsmen|Омбудсменнар
+group-Ombudsmen-member|{{GENDER:~{0}\u007Cомбудсмен}}
+group-Staff|Хезмәткәрләр
+group-Staff-member|{{GENDER:~{0}\u007Cхезмәткәр}}
+group-editinterface|Интерфейс тәрҗемәчеләре
+group-editinterface-member|{{GENDER:~{0}\u007Cинтерфейс мөхәррире}}
+group-steward|Стюардлар
+group-steward-member|{{GENDER:~{0}\u007Cстюард}}
+group-sysadmin|Система идарәчеләре
+group-sysadmin-member|{{GENDER:~{0}\u007Cсистема идарәчесе}}
+group-translationadmin|Тәрҗемә идарәчеләре
+group-translationadmin-member|{{GENDER:~{0}\u007Cтәрҗемә идарәчесе}}
+grouppage-translationadmin|{{ns:project}}:Тәрҗемә идарәчеләре
+group-coder|Санакчы
+group-coder-member|{{GENDER:~{0}\u007Cсанакчы}}
+group-inactive|Актив булмаган кулланучылар
+group-inactive-member|{{GENDER:~{0}\u007Cактив булмаган кулланучы}}
+grouppage-inactive|{{ns:project}}:Актив булмаган кулланучылар
+shared-repo-name-shared|Викиҗыентык
+wikimedia-copyright|Текст <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike</a> лицензиясе астында бирелә, аерым очракларда өстәмә шартлар эшләргә мөмкин. Өстәмә мәгълүмат өчен <a href="https://wikimediafoundation.org/wiki/Terms_of_Use/ru">Куллану шартларын</a> карагыз.
+wikimedia-copyrightwarning|«{{int:savearticle}}» төймәсенә басып сез [https://wikimediafoundation.org/wiki/Terms_of_Use куллану шартлары] белән килешәсез, шулай ук сез үз эшләрегезне  [https://creativecommons.org/licenses/by-sa/3.0/deed.ru Creative Commons Attribution/Share-Alike 3.0] һәм [https://www.gnu.org/copyleft/fdl.html GFDL] лицензияләре таләпләре буенча нәшер итүенә риза буласыз. Бу битне кулланганда, сезгә иң киме Creative Commons  лицензиясенә гиперсылтама яки бит URL'ы аша сылтама куелуга риза буласыз.
+cant-delete-main-page|Сез баш битнең исемен яисә аны бетерә алмыйсыз.
+tog-underline|Сылтамаларның астына сызу:
+tog-hideminor|Соңгы үзгәртүләр исемлегендә кече үзгәртүләр яшерелсен
+tog-hidepatrolled|Тикшерелгән үзгәртүләр яңа үзгәртүләр исемлегеннән яшерелсен.
+tog-newpageshidepatrolled|Тикшерелгән битләр яңа битләр исемлегеннән яшерелсен
+tog-extendwatchlist|Соңгыларын гына түгел, ә барлык үзгәртүләрне эченә алган, киңәйтелгән күзәтү исемлеге
+tog-usenewrc|Соңгы үзгәртүләрдә һәм күзәтү исемлегендә үзгәрешләрне төркемләргә
+tog-numberheadings|Атамалар автомат рәвештә номерлансын
+tog-showtoolbar|Үзгәртү вакытында коралларның өске панеле күрсәтелсен
+tog-editondblclick|Битләргә ике чирттерү белән үзгәртү бите ачылсын
+tog-editsectiononrightclick|Бүлек исеменә тычканның уң чирттермәсе белән төрткәч үзгәртү
+tog-watchcreations|Мин төзегән битләр һәм йөкләгән файллар күзәтү исемлегемә өстәлсен
+tog-watchdefault|Мин үзгәрткән битләр һәм файллар күзәтү исемлегемә өстәлсен
+tog-watchmoves|Мин күчергән битләр һәм файллар күзәтү исемлегемә өстәлсен
+tog-watchdeletion|Мин бетергән битләр һәм файлларны күзәтү исемлегемгә өстәлсен
+tog-minordefault|Барлык үзгәртүләрне килешү буенча кече дип билгеләнсен
+tog-previewontop|Үзгәртү тәрәзәсеннән өстәрәк битне алдан карау өлкәсен күрсәтелсен
+tog-previewonfirst|Үзгәртү битенә күчкәндә башта алдан карау бите күрсәтелсен
+tog-enotifwatchlistpages|Күзәтү исемлегемдәге бит яки файл үзгәртелү турында электрон почтага хәбәр җибәрелсен
+tog-enotifusertalkpages|Бәхәс битем үзгәртелү турында электрон почтага хәбәр җибәрелсен
+tog-enotifminoredits|Кече үзгәртүләр турында да электрон почтага хәбәр җибәрелсен
+tog-enotifrevealaddr|Хәбәрләрдә e-mail адресым күрсәтелсен
+tog-shownumberswatching|Битне күзәтү исемлекләренә өстәгән кулланучылар санын күрсәтелсен
+tog-oldsig|Хәзерге имза:
+tog-fancysig|Имзаның шәхси вики-билгеләмәсе (автоматик сылтамасыз)
+tog-uselivepreview|Тиз карап алуны куллану
+tog-forceeditsummary|Үзгәртүләрне тасвирлау юлы тутырылмаган булса, кисәтү
+tog-watchlisthideown|Минем үзгәртүләрем күзәтү исемлегеннән яшерелсен
+tog-watchlisthidebots|Бот үзгәртүләре күзәтү исемлегеннән яшерелсен
+tog-watchlisthideminor|Кече үзгәртүләр күзәтү исемлегеннән яшерелсен
+tog-watchlisthideliu|Авторизацияне узган кулланучыларның үзгәртүләре күзәтү исемлегеннән яшерелсен
+tog-watchlisthideanons|Аноним кулланучыларның үзгәртүләре күзәтү исемлегеннән яшерелсен
+tog-watchlisthidepatrolled|Тикшерелгән үзгәртүләр күзәтү исемлегеннән яшерелсен
+tog-ccmeonemails|Башка кулланучыларга җибәргән хатларымның копияләре миңа да җибәрелсен
+tog-diffonly|Юрама чагыштыру астында бит эчтәлеге күрсәтелмәсен
+tog-showhiddencats|Яшерен төркемнәр күрсәтелсен
+tog-norollbackdiff|Кире кайтару ясагач юрамалар аермасы күрсәтелмәсен
+tog-useeditwarning|Битне сакламыйча китү вакытында мине кисәтергә
+underline-always|Һәрвакыт
+underline-never|Бервакытта да
+underline-default|Браузер көйләнмәләре кулланылсын
+editfont-style|Үзгәртү өлкәсендәге шрифт тибы:
+editfont-default|Браузер көйләнмәләреннән булсын
+editfont-monospace|Киңәйтелгән шрифт
+editfont-sansserif|Киртексез шрифт
+editfont-serif|Киртекле шрифт
+january-date|~{0} Гыйнвар
+february-date|~{0} Февраль
+march-date|~{0} Март
+april-date|~{0} Апрель
+may-date|~{0} Май
+june-date|~{0} Июнь
+july-date|~{0} Июль
+august-date|~{0} Август
+september-date|~{0} Сентябрь
+october-date|~{0} Октябрь
+november-date|~{0} Ноябрь
+december-date|~{0} Декабрь
+hidden-categories|{{PLURAL:~{0}\u007C1=Яшерен төркем\u007CЯшерен төркемнәр}}
+index-category|Индексланган битләр
+noindex-category|Индексланмаган битләр
+broken-file-category|Файлларга эшләми торган сылтамалар булган битләр
+about|Тасвирлама
+article|Мәкалә
+newwindow|(яңа тәрәзәдә ачыла)
+cancel|Баш тарту
+moredotdotdot|Дәвамы…
+morenotlisted|Башка берни дә юк...
+mypage|Бит
+mytalk|Бәхәс бите
+anontalk|Бу IP адресы өчен бәхәс бите
+navigation|Навигация
+and| һәм
+qbfind|Эзләү
+qbbrowse|Карау
+qbedit|Үзгәртү
+qbpageoptions|Бу бит
+qbmyoptions|Битләрем
+faq|ЕБС
+faqpage|Project:ЕБС
+actions|Хәрәкәт
+namespaces|Исемнәр мәйданы
+variants|Төрләр
+navigation-heading|Навигация
+errorpagetitle|Хата
+returnto|~{0} битенә кайту.
+tagline|{{SITENAME}} проектыннан
+help|Ярдәм
+search|Эзләү
+searchbutton|Эзләү
+go|Күчү
+searcharticle|Күчү
+history|Битнең тарихы
+history_short|Тарих
+updatedmarker|соңгы керүемнән соң яңартылган
+printableversion|Басма версиясе
+permalink|Даими сылтама
+print|Бастыру
+view|Карау
+view-foreign|~{0} сәхифәсендә карау
+edit|Үзгәртү
+edit-local|Локаль тасвирламаны үзгәртергә
+create|Төзү
+create-local|Локаль тасвирлама өстәргә
+editthispage|Бу битне үзгәртү
+create-this-page|Бу битне төзү
+delete|Бетерү
+deletethispage|Бу битне бетерү
+undeletethispage|Бу битне кайтарырга
+undelete_short|~{0} {{PLURAL:~{0}\u007Cтөзәтмәне\u007C~{0} төзәтмә}} торгызу
+viewdeleted_short|{{PLURAL:~{0}\u007C1=1 бетерелгән үзгәртүне\u007C~{0} бетерелгән үзгәртүне}} карау\n{{PLURAL:~{0}\u007Cбетерелгән төзәтмәне\u007C~{0} бетерелгән төзәтмәне}} карау
+protect|Яклау
+protect_change|үзгәртү
+protectthispage|Бу битне яклау
+unprotect|Яклауны үзгәртү
+unprotectthispage|Бу битнең яклауын үзгәртү
+newpage|Яңа бит
+talkpage|Бит турында фикер алышу
+talkpagelinktext|Бәхәс
+specialpage|Махсус бит
+personaltools|Шәхси кораллар
+articlepage|Мәкаләне карау
+talk|Бәхәс
+views|Караулар
+toolbox|Кораллар
+userpage|Кулланучы битен карау
+projectpage|Проект битен карау
+imagepage|Файл битен карау
+mediawikipage|Хәбәр битен карау
+templatepage|Үрнәк битен карау
+viewhelppage|Ярдәм битен карау
+categorypage|Төркем битен карау
+viewtalkpage|Бәхәс битен карау
+redirectpagesub|Башка биткә юнәлтү бите
+redirectto|Шунда юнәлтелә:
+viewcount|Бу биткә ~{0} {{PLURAL:~{0}\u007Cбер тапкыр\u007C~{0} тапкыр}} мөрәҗәгать иттеләр.
+protectedpage|Якланган бит
+jumpto|Моңа күчү:
+jumptonavigation|навигация
+jumptosearch|эзләү
+view-pool-error|Гафу итегез, хәзерге вакытта серверлар буш түгел.\nБу битне карарга теләүчеләр артык күп.\nБу биткә соңрак керүегез сорала.\n\n~{0}
+generic-pool-error|Гафу итегез, хәзерге вакытта серверлар буш түгел.\nБу битне карарга теләүчеләр артык күп.\nБу биткә соңрак керүегез сорала.
+pool-timeout|Кысылуның  вакыты узды
+pool-queuefull|Сорауларны саклау  бите тулы
+pool-errorunknown|Билгесез  хата
+poolcounter-usage-error|~{0}: куллану хатасы
+aboutsite|{{SITENAME}} турында
+aboutpage|Project:Тасвирлама
+copyright|Мәгълүмат ~{0} буенча таратыла (әгәр башкасы күрсәтелмәсә).
+copyrightpage|{{ns:project}}:Авторлык хокуклары
+currentevents|Хәзерге вакыйгалар
+currentevents-url|Project:Хәзерге вакыйгалар
+disclaimers|Җаваплылыктан баш тарту
+disclaimerpage|Project:Җаваплылыктан баш тарту
+edithelp|Үзгәртү буенча ярдәм
+helppage-top-gethelp|Ярдәм
+mainpage|Баш бит
+mainpage-description|Баш бит
+policy-url|Project:Кагыйдәләр
+portal|Җәмгыять үзәге
+portal-url|Project:Җәмгыять үзәге
+privacy|Яшеренлек сәясәте
+privacypage|Project:Яшеренлек сәясәте
+badaccess|Керү хатасы
+badaccess-group0|Сез сораган гамәлне башкара алмыйсыз.
+badaccess-groups|Соралган гамәлне ~{0} {{PLURAL:~{1}\u007C1=төркеме\u007Cтөркемнәренең}} кулланучылары гына башкара ала.
+versionrequired|MediaWikiның ~{0} версиясе таләп ителә
+versionrequiredtext|Бу бит белән эшләү өчен MediaWikiның ~{0} версиясе кирәк. [[Special:Version\u007CКулланылучы программа версиясе турында мәгълүмат битен]] кара.
+ok|OK
+pagetitle|~{0} — {{SITENAME}}
+pagetitle-view-mainpage|{{SITENAME}}
+retrievedfrom|Чыганагы — "~{0}"
+youhavenewmessages|Сездә ~{0} бар (~{1}).
+youhavenewmessagesfromusers|{{PLURAL:~{3}\u007CСезгә}} {{PLURAL:~{2}\u007C~{2} кулланучыдан}} ~{0} килде (~{1}).
+youhavenewmessagesmanyusers|Сез бик күп кулланучыдан ~{0} алдыгыз (~{1}).
+newmessageslinkplural|{{PLURAL:~{0}\u007Cяңа хәбәр\u007C999=яңа хәбәрләр}}
+newmessagesdifflinkplural|{{PLURAL:~{0}\u007C1=соңгы үзгәртү\u007Cсоңгы үзгәртүләр}}\nсоңгы {{PLURAL:~{0}\u007Cүзгәртү\u007C999=үзгәртү}}
+youhavenewmessagesmulti|Сезгә монда яңа хәбәрләр бар: ~{0}
+editsection|үзгәртү
+editold|үзгәртү
+viewsourceold|башлангыч кодны карау
+editlink|үзгәртү
+viewsourcelink|башлангыч кодны карау
+editsectionhint|~{0} бүлеген үзгәртү
+showtoc|күрсәтү
+hidetoc|яшерү
+confirmable-confirm|{{GENDER:~{0}\u007CШулаймы}}?
+confirmable-yes|Әйе
+confirmable-no|Юк
+thisisdeleted|~{0} карарга яки торгызырга телисезме?
+viewdeleted|~{0} карарга телисезме?
+restorelink|{{PLURAL:~{0}\u007Cбер бетерелгән үзгәртүне\u007C~{0} бетерелгән үзгәртүне}}
+feedlinks|Шушылай:
+feed-invalid|Язылу каналы тибы ялгыш
+feed-unavailable|Синдикация тасмасы ябык
+site-rss-feed|~{0} — RSS тасмасы
+site-atom-feed|~{0} — Atom тасмасы
+page-rss-feed|«~{0}» — RSS тасмасы
+page-atom-feed|«~{0}» — Atom тасмасы
+feed-atom|Atom-тасмасы
+feed-rss|RSS-тасмасы
+red-link-title|~{0} (мондый бит юк)
+nstab-main|Бит
+nstab-user|Кулланучы бите
+nstab-media|Мультимедиа
+nstab-special|Махсус бит
+nstab-project|Проект бите
+nstab-image|Файл
+nstab-mediawiki|Хәбәр
+nstab-template|Үрнәк
+nstab-help|Ярдәм
+nstab-category|Төркем
+nosuchaction|Мондый гамәл юк
+nosuchactiontext|URLда күрсәтелгән гамәл хаталы.\nСез URLны хаталы җыйган яисә хаталы сылтамадан күчкән булырга мөмкинсез.\nБу шулай ук {{SITENAME}} проектындагы хата сәбәпле дә булырга мөмкин.
+nosuchspecialpage|Мондый махсус бит юк
+nospecialpagetext|<strong>Сез сорый торган махсус бит юк.</strong>\n\nМахсус битләр исемлеген карагыз: [[Special:SpecialPages\u007C{{int:specialpages}}]].
+error|Хата
+databaseerror|Мәгълүматлар базасында хата
+databaseerror-textcl|Мәгълүмат базасында хата чыкты
+databaseerror-query|Сорату: ~{0}
+databaseerror-function|Функция: ~{0}
+databaseerror-error|Хата: ~{0}
+laggedslavemode|Игътибар: биттә соңгы яңартулар күрсәтелмәгән булырга мөмкин.
+readonly|Мәгълүматлар базасына язу ябылган
+enterlockreason|Ябылу сәбәбен һәм вакытын күрсәтегез.
+readonlytext|Мәгълүмат базасы хәзерге вакытта яңа битләр ясаудан һәм башка үзгәртүләрдән ябылган. Бу планлаштырылган хезмәт күрсәтү сәбәпле булырга мөмкин.\nЯбучы оператор түбәндәге аңлатманы калдырган:\n~{0}
+missing-article|Мәгълүматлар базасында «~{0}» ~{1} битенең соралган тексты табылмады.\n\nБу, гадәттә, искергән сылтама буенча бетерелгән битнең үзгәртү тарихына күчкәндә килеп чыга.\n\nӘгәр хата монда түгел икән, сез программада хата тапкан булырга мөмкинсез.\nЗинһар өчен, URLны күрсәтеп, бу турыда [[Special:ListUsers/sysop\u007Cидарәчегә]] хәбәр итегез.
+missingarticle-rev|(юрама № ~{0})
+missingarticle-diff|(аерма: ~{0}, ~{1})
+readonly_lag|Мәгълүматлар базасы, өстәмә сервер төп сервер белән синхронизацияләшкәнче, үзгәрүләрдән автомат рәвештә ябылды.
+internalerror|Эчке хата
+internalerror_info|Эчке хата: ~{0}
+filecopyerror|«~{1}» файлына «~{0}» файлының копиясен ясап булмый.
+filerenameerror|«~{0}» файлының исемен «~{1}» исеменә алыштырып булмый.
+filedeleteerror|«~{0}» файлын бетереп булмый.
+directorycreateerror|«~{0}» директориясен ясап булмый.
+directoryreadonlyerror|«~{0}» каталогы уку өчен генә.
+directorynotreadableerror|«~{0}» каталогы укылмый.
+filenotfound|«~{0}» файлын табып булмый.
+unexpected|Көтелмәгән кыймәт: «~{0}»=«~{1}».
+formerror|Хата: форма мәгълүматларын тапшырып булмый
+badarticleerror|Бу биттә мондый гамәл башкарып булмый.
+cannotdelete|«~{0}» исемле битне яки файлны бетереп булмый. Аны бүтән кулланучы бетергән булырга мөмкин.
+cannotdelete-title|«~{0}» битен бетереп булмый
+delete-hook-aborted|Үзгәртү махсус процедура тарафыннан кире кагыла.\nСәбәпләре китерелми.
+badtitle|Яраксыз исем
+badtitletext|Битнең соралган исеме дөрес түгел, буш яисә телъара яки интервики исеме дөрес күрсәтелмәгән. Исемдә тыелган символлар кулланылган булырга мөмкин.
+perfcached|Бу мәгълүматлар кэштан алынган, аларда соңгы үзгәртүләр булмаска мөмкин. Кэшта иң күбе {{PLURAL:~{0}\u007Cязма\u007C~{0} язмалар}}  саклана.
+perfcachedts|Бу мәгълүматлар кэштан алынган, ул соңгы тапкыр ~{0} яңартылды. Кэшта иң күбе {{PLURAL:~{3}\u007Cязма}} саклана
+querypage-no-updates|Хәзер бу битне яңартып булмый. Монда күрсәтелгән мәгълүматлар кабул ителмәячәк.
+viewsource|Карау
+viewsource-title|~{0} битенең яхма текстын карау
+actionthrottled|Тизлек киметелгән
+actionthrottledtext|Спамга каршы көрәш өчен аз вакыт эчендә бу гамәлне еш куллану тыелган. Зинһар, соңарак кабатлагыз.
+protectedpagetext|Бу бит үзгәртүләрдән һәм башка төрле гамәлләрдән якланган.
+viewsourcetext|Сез бу битнең башлангыч текстын карый һәм күчерә аласыз:
+viewyourtext|Сез '''үз төзәтмәләрегезне''' бу сәхифәдә карый һәм чыгарылма текстны күчермәли аласыз:
+protectedinterface|Бу биттә программа тәэминатының интерфейс хәбәрләре бар. Вандализмга каршы көрәш сәбәпле, бу битне үзгәртү тыела. Әлеге хәбәрнең тәрҗемәсен өстәү яки үзгәртү өчен, зинһар өчен, MediaWiki [//translatewiki.net/ translatewiki.net] тәрҗемәләү сайтын кулланыгыз.
+editinginterface|<strong>Игътибар:</strong> Сез программа тәэминатының интерфейс тексты булган битне үзгәртәсез. Бу башка кулланучыларга да тәэсир итәчәк.
+translateinterface|Бу хәбәрнең текстын үзгәртү өчен яки өстәмәләр кертү өчен MediaWiki җирләштерү сайтын кулланыгыз [//translatewiki.net/ translatewiki.net].
+cascadeprotected|Бу бит үзгәртүләрдән сакланган, чөнки ул каскадлы саклау кабул ителгән {{PLURAL:~{0}\u007C1=биткә\u007Cбитләргә}} өстәлгән:\n~{1}
+namespaceprotected|'''~{0}''' исем киңлегендәге битләрне үзгәртү өчен сезнең рөхсәтегез юк.
+customcssprotected|Сез бу CSS-сәхифәне үзгәртә алмыйсыз, чөнки монда башка кулланучының шәхси көйләнмәләре саклана
+customjsprotected|Сез бу JavaScript-сәхифәне үзгәртә алмыйсыз, чөнк монда башка кулланучының шәхси көйләнмәләре саклана
+mycustomcssprotected|Сезнең әлеге CSS битен үзгәртергә хокукыгыз юк.
+mycustomjsprotected|Сезнең биттә JavaScript үзгәртергә хокукларыгыз юк.
+ns-specialprotected|Махсус битләрне үзгәртеп булмый.
+titleprotected|Бу исем белән бит ясау [[User:~{0}\u007C~{0}]] тарафыннан тыелган.\nУл күрсәткән сәбәп: ''~{1}''.
+exception-nologin|Сез хисап язмагызга кермәгәнсез
+virus-badscanner|Көйләү хатасы. Билгесез вируслар сканеры: ''~{0}''
+virus-scanfailed|сканерлау хатасы (~{0} коды)
+virus-unknownscanner|билгесез антивирус:
+logouttext|'''Сез хисап язмагыздан чыктыгыз.'''\n\nСез {{SITENAME}} проектында аноним рәвештә кала яисә шул ук яки башка исем белән яңадан <span class='plainlinks'>[~{0} керә]</span> аласыз.\nКайбер битләр Сез кергән кебек күрсәтелергә мөмкин. Моны бетерү өчен браузер кэшын чистартыгыз.
+welcomeuser|Хуш килдегез, ~{0}!
+yourname|Кулланучы исеме:
+userlogin-yourname|Кулланучы исеме
+userlogin-yourname-ph|Хисап язмасының исемен кертегез
+createacct-another-username-ph|Хисап язмасының исемен кертегез
+yourpassword|Серсүз:
+userlogin-yourpassword|Серсүз
+userlogin-yourpassword-ph|Серсүзне языгыз
+createacct-yourpassword-ph|Серсүзне кертегез
+yourpasswordagain|Серсүзне кабат кертү:
+createacct-yourpasswordagain|Серсүзне раслагыз
+createacct-yourpasswordagain-ph|Серсүзне кабаттан кертегез
+remembermypassword|Хисап язмамны бу браузерда саклансын (иң күп ~{0} {{PLURAL:~{0}\u007Cкөн\u007Cкөн\u007Cкөн}}гә кадәр)
+userlogin-remembermypassword|Системада калырга
+userlogin-signwithsecure|Якланган кушылу
+yourdomainname|Сезнең доменыгыз:
+password-change-forbidden|Сез бу викидә серсүзне үзгәртә алмыйсыз.
+externaldberror|Тышкы мәгълүмат базасы ярдәмендә аутентификация үткәндә хата чыкты, яисә тышкы хисап язмагызга үзгәрешләр кертү хокукыгыз юк.
+login|Керү
+nav-login-createaccount|Керү / теркәлү
+userlogin|Керү / теркәлү
+userloginnocreate|Керү
+logout|Чыгу
+userlogout|Чыгу
+notloggedin|Сез хисап язмагызга кермәгәнсез
+userlogin-noaccount|Аккаунт юкмы?
+userlogin-joinproject|Проектка керү
+nologin|Кулланучы исемең юкмы? '''~{0}'''
+nologinlink|Хисап язмасы төзү
+createaccount|Яңа кулланучыны теркәү
+gotaccount|Сез инде теркәлдегезме? '''~{0}'''.
+gotaccountlink|Керү
+userlogin-resetlink|Серсүзегезне оныттыгызмы?
+userlogin-resetpassword-link|Серсүзне алыштырыргамы?
+userlogin-helplink2|Керү буенча ярдәм
+userlogin-createanother|Башка хисап язмасы төзү
+createacct-emailrequired|Электрон почта юлламагыз
+createacct-emailoptional|Электрон почта юлламагыз (мәҗбүри түгел)
+createacct-email-ph|Электрон почта юлламагызны языгыз
+createaccountmail|электрон почта аша
+createaccountreason|Сәбәп:
+createacct-submit|Хисап язмасы төзү
+createacct-benefit-heading|{{SITENAME}} — сезнең шикелле кешеләрнең хезмәте.
+createacct-benefit-body1|{{PLURAL:~{0}\u007Cтөзәтмә}}
+createacct-benefit-body2|{{PLURAL:~{0}\u007Cмәкалә}}
+createacct-benefit-body3|Соңгы вакытта {{PLURAL:~{0}\u007Cкулланучы}}
+badretype|Кертелгән серсүзләр бер үк түгел.
+userexists|Кертелгән исем кулланыла.\nЗинһар, башка исем сайлагыз.
+loginerror|Керү хатасы
+createaccounterror|Хисап язмасын төзеп булмый: ~{0}
+nocookiesnew|Кулланучы теркәлгән, ләкин үз хисап язмасы белән кермәгән. {{SITENAME}} кулланучыны тану өчен «cookies» куллана. Сездә «cookies» тыелган. Зинһар, башта аларны рөхсәт итегез, аннан исем һәм серсүз белән керегез.
+nocookieslogin|{{SITENAME}} кулланучыны тану өчен «cookies» куллана. Сез аларны сүндергәнсез. Зинһар, аларны кабызып, яңадан керегез.
+nocookiesfornew|Кулланучының хисап язмасы аның чыганагын тикшерү мөмкин булмаганга күрә ясалмады. "Cookies" кушылганлыгын тикшерегез, сәхифәне яңартыгыз һәм тагын теркәлеп карагыз.
+noname|Сез кулланучы исемегезне күрсәтергә тиешсез.
+loginsuccesstitle|Керү уңышлы үтте
+loginsuccess|'''Сез {{SITENAME}} проектына ~{0} исеме белән кердегез.'''
+nosuchuser|~{0} исемле кулланучы юк.\nКулланучы исеменең дөреслеге регистрга бәйле.\nЯзылышыгызны тикшерегез яки [[Special:UserLogin/signup\u007Cяңа хисап язмасы төзегез]].
+nosuchusershort|~{0} исемле кулланучы юк. Язылышыгызны тикшерегез.
+nouserspecified|Сез теркәү исмегезне күрсәтергә тиешсез.
+login-userblocked|Бу кулланучы тыелды. Керү тыелган.
+wrongpassword|Язылган серсүз дөрес түгел. Тагын бер тапкыр сынагыз.
+wrongpasswordempty|Серсүз юлы буш булырга тиеш түгел.
+passwordtooshort|Сезсүз ~{0} {{PLURAL:~{0}\u007Cсимволдан}} торырга тиеш.
+password-name-match|Кертелгән серсүз кулланучы исеменнән аерылырга тиеш.
+password-login-forbidden|Бу кулланучы исемен һәм серсүзне куллану тыелган
+mailmypassword|Электрон почтага яңа серсүз җибәрү
+passwordremindertitle|{{SITENAME}} кулланучысына вакытлы серсүз тапшыру
+passwordremindertext|Кемдер (бәлки, сездер, IP адресы: ~{0}) {{SITENAME}} (~{3}) өчен яңа серсүз соратты. ~{1} өчен яңа серсүз: ~{2}. Әгәр бу сез булсагыз, системага керегез һәм серсүзне алмаштырыгыз. Яңа серсүз ~{4} {{PLURAL:~{4}\u007Cкөн}} гамәлдә булачак.\n\nӘгәр сез серсүзне алмаштыруны сорамаган булсагыз яки, оныткан очракта, исегезгә төшергән булсагыз, бу хәбәргә игътибар бирмичә, иске серсүзегезне куллануны дәвам итегез.
+noemail|~{0} исемле кулланучы өчен электрон почта адресы язылмаган.
+noemailcreate|Сез дөрес e-mail адресы күрсәтергә тиеш
+passwordsent|Яңа серсүз ~{0} исемле кулланучының электрон почта адресына җибәрелде.\n\nЗинһар, серсүзне алгач, системага яңадан керегез.
+blocked-mailpassword|Сезнең IP адресыгыз белән битләр үзгәртеп һәм серсүзне яңартып булмый.
+eauthentsent|Адрес үзгәртүне дәлилләү өчен аңа махсус хат җибәрелде. Хатта язылганнарны үтәвегез сорала.
+throttled-mailpassword|Серсүзне электрон почтага җибәрү гамәлен сез {{PLURAL:~{0}\u007C1=соңгы ~{0} сәгать}} эчендә кулландыгыз инде. Бу гамәлне явызларча куллануны кисәтү максатыннан аны ~{0} {{PLURAL:~{0}\u007Cсәгать}} аралыгында бер генә тапкыр башкарып була.
+mailerror|Хат җибәрү хатасы: ~{0}
+acct_creation_throttle_hit|Сезнең IP адресыннан бу тәүлек эчендә {{PLURAL:~{0}\u007C~{0} хисап язмасы}} төзелде инде. Шунлыктан бу гамәл сезнең өчен вакытлыча ябык.
+emailauthenticated|Электрон почта адресыгыз расланды: ~{2}, ~{1}.
+emailnotauthenticated|Электрон почта адресыгыз әле дәлилләнмәгән, шуңа викиның электрон почта белән эшләү гамәлләре сүндерелде.
+noemailprefs|Электрон почта адресыгыз күрсәтелмәгән, шуңа викиның электрон почта белән эшләү гамәлләре сүндерелгән.
+emailconfirmlink|Электрон почта адресыгызны дәлилләгез.
+invalidemailaddress|Электрон почта адресы кабул ителә алмый, чөнки ул дөрес форматка туры килми. Зинһар, дөрес адрес кертегез яки юлны буш калдырыгыз.
+cannotchangeemail|Бу хисап язмасының электрон почта адресы бу викида үзгәртелә алмый
+accountcreated|Хисап язмасы төзелде
+accountcreatedtext|~{0} исемле кулланучы өчен хисап язмасы төзелде.
+createaccount-title|{{SITENAME}}: теркәлү
+createaccount-text|Кемдер, электрон почта адресыгызны күрсәтеп, {{SITENAME}} (~{3}) проектында «~{2}» серсүзе белән «~{1}» исемле хисап язмасы теркәде. Сез керергә һәм серсүзегезне үзгәртергә тиеш.\n\nХисап язмасы төзү хата булса, бу хатны онытыгыз.
+login-throttled|Сез артык күп тапкыр керергә тырыштыгыз.\nЯңадан кабатлаганчы бераз көтүегез сорала.
+login-abort-generic|Системага уңышсыз керү очрагы
+loginlanguagelabel|Тел: ~{0}
+suspicious-userlogout|Сезнең эшчәнлекне бетерү соравыгыз кире кагылды, чөнки ул ялгыш браузер яисә кэшлаучы прокси аша җибәрелергэ мөмкин.
+pt-login|Керү
+pt-login-button|Керү
+pt-createaccount|Яңа кулланучыны теркәү
+pt-userlogout|Чыгу
+php-mail-error-unknown|PHP mail() функциясендә билгесез хата
+user-mail-no-addy|Электрон почта адресыннан башка электрон хат җибәрмәкче булды
+changepassword|Серсүзне үзгәртү
+resetpass_announce|Сез электрон почта аша вакытлыча бирелгән серсүз ярдәмендә кердегез. Системага керүне төгәлләү өчен яңа серсүз төзегез.
+resetpass_text|<!-- Монда текст өстәгез -->
+resetpass_header|Хисап язмасы серсүзен үзгәртү
+oldpassword|Иске серсүз:
+newpassword|Яңа серсүз:
+retypenew|Яңа серсүзне кабатлагыз:
+resetpass_submit|Серсүз куеп керү
+changepassword-success|Сезнең серсүз уңышлы үзгәртелде! Системага керү башкарыла...
+resetpass_forbidden|Серсүз үзгәртелә алмый
+resetpass-no-info|Бу битне карау өчен сез системага үз хисап язмагыз ярдәмендә керергә тиеш.
+resetpass-submit-loggedin|Серсүзне үзгәртү
+resetpass-submit-cancel|Кире кагу
+resetpass-wrong-oldpass|Ялгыш серсүз.\nСез серсүзегезне үзгәрткән яисә яңа вакытлы серсүз сораткан булырга мөмкинсез.
+resetpass-temp-password|Вакытлы серсүз:
+passwordreset|Серсүзне бетерү
+passwordreset-legend|Серсүзне яңадан кую
+passwordreset-disabled|Бу викида серсүз бетереп булмый
+passwordreset-username|Кулланучы исеме:
+passwordreset-domain|Домен:
+passwordreset-capture|Килеп чыккан хатны күрсәтелсенме?
+passwordreset-capture-help|Әгәр сез бу тамганы куйсагыз, сезгә кулланучыга вакытлы серсүз белән җибәреләчәк хат күрсәтеләчәк.
+passwordreset-email|E-mail адресы:
+passwordreset-emailtitle|{{SITENAME}} хисап язмасы турында мәгълүматлар
+passwordreset-emailtext-ip|Кемдер (бәлки, сездер, ~{0} IP-адресыннан) {{SITENAME}} (~{3}) проектында сезнең серсүзне искә төшерүне сорады.\n{{PLURAL:~{2}\u007C1=Түбәндәге хисап язмасы\u007CТүбәндәге хисап язмалары}} бу электрон әрҗә адресы белән бәйле:\n\n~{1}\n\n{{PLURAL:~{2}\u007C1=Бу вакытлы серсүз\u007CБу вакытлы серсүзләр}} {{PLURAL:~{4}\u007C~{4} көн}} дәвамында эшлиячәкләр.\nСез системага керергә һәм яңа серсүз сайларга тиешсез.\nӘгәр сез серсүз сорамаган булсагыз яки элеккеге серсүзегезне искә төшерсәгез \nһәм аны үзгәртергә теләмәсәгез, бу хатка җавап бирмәгез\nһәм элеккеге серсүзегезне кулланыгыз.
+passwordreset-emailtext-user|{{SITENAME}} проектыннан ~{0} кулланучысы {{SITENAME}} (~{3}) проектында сезнең серсүзне искә төшерүне сорады.\n{{PLURAL:~{2}\u007C1=Түбәндәге хисап язмасы\u007CТүбәндәге хисап язмалары}} бу электрон әрҗә адресы белән бәйле:\n\n~{1}\n\n{{PLURAL:~{2}\u007C1=Бу вакытлы серсүз\u007CБу вакытлы серсүзләр}} {{PLURAL:~{4}\u007C~{4} көн}} дәвамында эшлиячәкләр.\nСез системага керергә һәм яңа серсүз сайларга тиешсез.\nӘгәр сез серсүз сорамаган булсагыз яки элеккеге серсүзегезне искә төшерсәгез \nһәм аны үзгәртергә теләмәсәгез, бу хатка җавап бирмәгез\nһәм элеккеге серсүзегезне кулланыгыз.
+passwordreset-emailelement|Кулланучы исеме: ~{0}\nВакытлыча серсүз: ~{1}
+passwordreset-emailsent|Электрон әрҗәгә искәртү җибәрелгән иде
+passwordreset-emailsent-capture|Җибәрелгән хат-искәртү түбәндә китерелә
+passwordreset-emailerror-capture|Түбәндә язылган хат-искәртү китерелгән, аны җибәрмәүнең сәбәбе:~{0}
+changeemail|Электрон әрҗә адресын үзгәртү
+changeemail-text|Электрон әрҗә адресын үзгәртү өчен, бу кырларны тутырыгыз. Үзгәртүне раслау өчен, сезгә серсүзне җыярга кирәк булыр
+changeemail-no-info|Бу сәхифәгә турыдан-туры мөрәҗәгать итәр өчен, сез системага керергә тиешсез
+changeemail-oldemail|Хәзерге электрон әрҗә адресы:
+changeemail-newemail|Яңа электрон почта адресы:
+changeemail-none|(юк)
+changeemail-password|«{{SITENAME}}» проекты өчен серсүзегез:
+changeemail-submit|E-mail адресын үзгәртү
+extlink_sample|http://www.example.com сылтама исеме
+extlink_tip|Тышкы сылтама (http:// алкушымчасы турында онытмагыз)
+nowiki_sample|Форматланмаган текстны монда өстәгез
+nowiki_tip|Вики-форматлауны исәпкә алмау
+image_sample|Мисал.jpg
+image_tip|Куелган файл
+media_tip|Медиа-файлга сылтама
+sig_tip|Имза һәм вакыт
+hr_tip|Горизонталь сызык (еш кулланмагыз)
+summary|Үзгәртүләр тасвирламасы:
+subject|Тема/башисем:
+minoredit|Бу кече үзгәртү
+watchthis|Бу битне күзәтү
+savearticle|Битне саклау
+preview|Алдан карау
+showpreview|Алдан карау
+showdiff|Кертелгән үзгәртүләр
+anoneditwarning|'''Игътибар''': Сез системага кермәгәнсез. IP адресыгыз бу битнең тарихына язылачак.
+anonpreviewwarning|''Сез системада теркәлмәдегез.Сезнең тарафтан эшләнгән барлык үзгәртүләр дә сезнең IP-юлламагызны саклауга китерә.''
+missingsummary|'''Искәртү.''' Сез үзгәртүгә кыскача тасвирлау язмадыгыз. Сез «Битне саклау» төймәсенә тагын бер тапкыр бассагыз, үзгәртүләр тасвирламасыз сакланачак.
+missingcommenttext|Аска тасвирлама язуыгыз сорала.
+missingcommentheader|''Искәртү:''' Сез тасвирламага исем бирмәдегез.\n«{{int:savearticle}}» төймәсенә кабат бассагыз, үзгәртүләр исемсез язылачак.
+summary-preview|Тасвирламаны алдан карау:
+subject-preview|Башисемне алдан карау:
+blockedtitle|Кулланучы тыелды
+blockedtext|'''Сезнең хисап язмагыз яки IP адресыгыз тыелган.'''\n\nТыючы идарәче: ~{0}.\nКүрсәтелгән сәбәп: ''~{1}''.\n\n* Тыю башланган вакыт: ~{7}\n* Тыю ахыры: ~{5}\n* Тыелулар саны: ~{6}\n\nСез ~{0} яки башка [[{{MediaWiki:Grouppage-sysop}}\u007Cидарәчегә]] тыю буенча сорауларыгызны җибәрә аласыз.\nИсегездә тотыгыз: әгәр сез теркәлмәгән һәм электрон почта адресыгызны дәлилләмәгән булсагыз ([[Special:Preferences\u007Cдәлилләү өчен шәхси көйләүләр монда]]), идарәчегә хат җибәрә алмыйсыз. Шулай ук тыю вакытында сезнең хат җибәрү мөмкинлегегезне чикләгән булырга да мөмкиннәр.\nСезнең IP адресы — ~{2}, тыю идентификаторы — #~{4}.\nХатларда бу мәгълүматны күрсәтергә онытмагыз.
+autoblockedtext|Сезнең IP адресыгыз, аның тыелган кулланучы тарафыннан кулланылуы сәбәпле, автомат рәвештә тыелды.\nУл кулланучыны тыючы идарәче: ~{0}. Күрсәтелгән сәбәп:\n\n:''~{1}''\n\n* Тыю башланган вакыт: ~{7}\n* Тыю ахыры: ~{5}\n* Тыелулар саны: ~{6}\n\nСез ~{0} яки башка [[{{MediaWiki:Grouppage-sysop}}\u007Cидарәчегә]] тыю буенча сорауларыгызны җибәрә аласыз.\nИсегездә тотыгыз: әгәр сез теркәлмәгән һәм электрон почта адресыгызны дәлилләмәгән булсагыз ([[Special:Preferences\u007Cдәлилләү өчен шәхси көйләүләр монда]]), идарәчегә хат җибәрә алмыйсыз. Шулай ук тыю вакытында сезнең хат җибәрү мөмкинлегегезне чикләгән булырга да мөмкиннәр.\nСезнең IP адресы — ~{2}, тыю идентификаторы — #~{4}.\nХатларда бу мәгълүматны күрсәтергә онытмагыз.
+blockednoreason|сәбәп күрсәтелмәгән
+whitelistedittext|Сез битләрне үзгәртү өчен ~{0} тиеш.
+confirmedittext|Битләрне үзгәртү алдыннан сез электрон почта адресыгызны дәлилләргә тиеш.\nСез моны [[Special:Preferences\u007Cкөйләүләр битендә]] башкара аласыз.
+nosuchsectiontitle|Мондый бүлекне табып булмый.
+nosuchsectiontext|Сез булмаган бүлекне төзәтергә телисез.\nСез бу сәхифәне караганда ул бетерелә алды.
+loginreqtitle|Керү кирәк
+loginreqlink|керү
+loginreqpagetext|Сез башка битләр карау өчен ~{0} тиеш.
+accmailtitle|Серсүз җибәрелде.
+accmailtext|[[User talk:~{0}\u007C~{0}]] кулланучысы өчен төзелгән серсүз ~{1} адресына җибәрелде.\n\nСайтка кергәч сез ''[[Special:ChangePassword\u007Cсерсүзегезне үзгәртә аласыз]]''.
+newarticle|(Яңа)
+newarticletext|Сез әлегә язылмаган биткә кердегез.\nЯңа бит ясау өчен астагы тәрәзәдә мәкалә текстын җыегыз ([~{0} ярдәм битен] карый аласыз).\nӘгәр сез бу биткә ялгышлык белән эләккән булсагыз, браузерыгызның '''артка''' төймәсенә басыгыз.
+anontalkpagetext|----''Бу бәхәс бите системада теркәлмәгән яисә үз исеме белән кермәгән кулланучыныкы.\nАны тану өчен IP адресы файдаланыла.\nӘгәр сез аноним кулланучы һәм сезгә юлланмаган хәбәрләр алдым дип саныйсыз икән (бер IP адресы күп кулланучы өчен булырга мөмкин), башка мондый аңлашылмаучанлыклар килеп чыкмасын өчен [[Special:UserLogin\u007Cсистемага керегез]] яисә [[Special:UserLogin/signup\u007Cтеркәлегез]].''
+noarticletext|Хәзерге вакытта бу биттә текст юк.\nСез [[Special:Search/{{PAGENAME}}\u007Cбу исем кергән башка мәкаләләрне]],\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} көндәлекләрдәге язмаларны] таба\nяки '''[{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} шушындый исемле яңа бит төзи]'''</span> аласыз.
+noarticletext-nopermission|Хәзерге вакытта бу биттә текст юк.\nСез [[Special:Search/{{PAGENAME}}\u007Cбу исем кергән башка мәкаләләрне]] башка битләрдә,\nяисә <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} көндәлекләрдәге язмаларны] таба аласыз.</span> Сезнең бу битне ясарга хакыгыз юк.
+userpage-userdoesnotexist|«<nowiki>~{0}</nowiki>» исемле хисап язмасы юк. Сез чынлап та бу битне ясарга яисә үзгәртергә телисезме?
+userpage-userdoesnotexist-view|"~{0}" исемле хисап язмасы юк.
+blocked-notice-logextract|Бу кулланучы хәзергә тыелды.\nТүбәндә тыю көндәлегенең соңгы язу бирелгән:
+clearyourcache|'''Искәрмә:''' Сез саклаган үзгәртүләр кулланышка керсен өчен браузерыгызның кешын чистартырга туры киләчәк. \n* '''Firefox/Safari''': Shift төймшсенә баскан килеш җиһазлар тасмасында ''Яңарту (Обновить)'' язуына басыгыз, яисә ''Ctrl-F5'' яки  ''Ctrl-R'' (Mac өчен ''Command-R'') төймәләренә басыгыз\n* '''Google Chrome.'''  ''Ctrl-Shift-R'' (Mac өчен ''Command-Shift-R'' ) төймәләренә басыгыз\n* '''Internet Explorer.''' ''Ctrl''  төймәсенә баскан килеш  ''Яңарту (Обновить)'' язуына, яисә ''Ctrl-F5'' басыгыз\n* '''Konqueror.''' ''Яңарту (Обновить)'' язуына, яисә ''F5'' басыгыз\n* '''Opera.''' Менюдан кеш чистартуны сайлагыз: ''Җиһазлар (Инструменты) → Көйләнмәләр (Настройки)''
+usercssyoucanpreview|'''Ярдәм:''' "{{int:showpreview}} төймәсенә басып, яңа CSS-файлны тикшереп була.
+userjsyoucanpreview|'''Ярдәм:''' "{{int:showpreview}}" төймәсенә басып, яңа JS-файлны тикшереп була.
+usercsspreview|'''Бу бары тик CSS-файлны алдан карау гына, ул әле сакланмаган!'''
+userjspreview|'''Бу бары тик JavaScript файлын алдан карау гына, ул әле сакланмаган!'''
+sitecsspreview|'''онытмагыз, бу бары тик CSS-файлны алдан карау гына.'''\n'''Ул әле сакланмаган!'''
+sitejspreview|'''Бу бары тик JavaScript файлын алдан карау гына.'''\n'''Ул әле сакланмаган!'''
+userinvalidcssjstitle|'''Игътибар:''' "~{0}" бизәү темасы табылмады. Кулланучының .css һәм .js битләре исемнәре бары тик кечкенә (юл) хәрефләрдән генә торырга тиеш икәнен онытмагыз. Мисалга: {{ns:user}}:Foo/vector.css, ә {{ns:user}}:Foo/Vector.css түгел!
+updated|(Яңартылды)
+note|'''Искәрмә:'''
+previewnote|'''Бу фәкать алдан карау гына, үзгәртүләрегез әле сакланмаган!'''
+previewconflict|Әлеге алдан карау битендә сакланачак текстның ничек күренәчәге күрсәтелә.
+session_fail_preview|'''Кызганычка, сезнең сессия идентификаторыгыз югалды. Нәтиҗәдә сервер үзгәртүләрегезне кабул итә алмый.\nТагын бер тапкыр кабатлавыгыз сорала.\nБу хата тагын кабатланса, [[Special:UserLogout\u007Cчыгыгыз]] һәм яңадан керегез.'''
+session_fail_preview_html|'''Кызганычка, сезнең сессия турында мәгълүматлар югалды. Нәтиҗәдә сервер үзгәртүләрегезне кабул итә алмый.'''\n\n''{{SITENAME}} чиста HTML кулланырга рөхсәт итә, ә бу үз чиратында JavaScript-атакалар оештыру өчен кулланылырга мөмкин. Шул сәбәпле сезнең өчен алдан карау мөмкинлеге ябык.''\n\n'''Әгәр сез үзгәртүне яхшы ният белән башкарасыз икән, тагын бер тапкыр кабатлап карагыз. Хата кабатланса, сайттан [[Special:UserLogout\u007Cчыгыгыз]] һәм яңадан керегез.'''
+token_suffix_mismatch|'''Сезнең үзгәртү кабул ителмәде.'''\nСәбәбе: браузерыгыз үзгәртү өлкәсендәге пунктуацияне дөрес күрсәтми, нәтиҗәдә текст бозылырга мөмкин.\nМондый хаталар аноним web-проксилар кулланганда килеп чыгарга мөмкин.
+edit_form_incomplete|'''Төзәтү кырларының кайбер өлешләре серверга барып ирешмәде. Сезнең үзгәртүләр бозылмаганмы - игътибар белән тикшерегез һәм яңадан җибәреп карагыз.'''
+editing|«~{0}» битен үзгәртү
+creating|«~{0}» битен ясау
+editingsection|«~{0}» битендә бүлек үзгәртүе
+editingcomment|«~{0}» битен үзгәртү (яңа бүлек)
+editconflict|Үзгәртү конфликты: ~{0}
+explainconflict|Сез бу битне төзәткән вакытта кемдер аңа үзгәрешләр кертте.\nӨстәге тәрәзәдә Сез хәзерге текстны күрәсез.\nАстагы тәрәзәдә Сезнең вариант урнашкан.\nЭшләгән үзгәртүләрегезне астагы тәрәзәдән өстәгенә күчерегез.\n«{{int:savearticle}}» төймәсенә баскач өстәге битнең тексты сакланаячак.
+yourtext|Сезнең текст
+storedversion|Сакланган юрама
+nonunicodebrowser|'''Кисәтү: Сезнең браузер Юникод кодлавын танымый.'''\nҮзгәртү вакытында ASCII булмаган символлар махсус уналтылы кодларга алыштырылачак.
+editingold|'''Кисәтү: Сез битнең искергән юрамасын үзгәртәсез.'''\nСаклау төймәсенә баскан очракта яңа юрамалардагы үзгәртүләр югалачак.
+yourdiff|Аермалар
+copyrightwarning|Бөтен өстәмәләр һәм үзгәртүләр ~{1} (карагыз: ~{0}) лицензиясе шартларында башкарыла дип санала.\nӘгәр аларның ирекле таратылуын һәм үзгәртелүен теләмәсәгез, монда өстәмәвегез сорала.<br />\nСез өстәмәләрнең авторы булырга яисә мәгълүматның ирекле чыганаклардан алынуын күрсәтергә тиеш.<br />\n'''МАХСУС РӨХСӘТТӘН БАШКА АВТОРЛЫК ХОКУКЫ БУЕНЧА САКЛАНУЧЫ МӘГЪЛҮМАТЛАР УРНАШТЫРМАГЫЗ!'''
+copyrightwarning2|Сезнең үзгәртүләр башка кулланучылар тарафыннан үзгәртелә яисә бетерелә ала.\nӘгәр аларның үзгәртелүен теләмәсәгез, монда өстәмәвегез сорала.<br />\nСез өстәмәләрнең авторы булырга яисә мәгълүматның ирекле чыганаклардан алынуын күрсәтергә тиеш (карагыз: ~{0}).\n'''МАХСУС РӨХСӘТТӘН БАШКА АВТОРЛЫК ХОКУКЫ БУЕНЧА САКЛАНУЧЫ МӘГЪЛҮМАТЛАР УРНАШТЫРМАГЫЗ!'''
+longpageerror|'''ХАТА: сакланучы текст зурлыгы - ~{0} килобайт, бу ~{1} килобайт чигеннән күбрәк. Бит саклана алмый.'''
+readonlywarning|'''Кисәтү: мәгълүматлар базасында техник эшләр башкарыла, сезнең үзгәртүләр хәзер үк саклана алмый.\nТекст югалмасын өчен аны компьютерыгызга саклап тора аласыз.'''\n\nИдарәче күрсәткән сәбәп: ~{0}
+protectedpagewarning|'''Кисәтү: сез бу битне үзгәртә алмыйсыз, бу хокукка идарәчеләр гына ия.'''\nТүбәндә көндәлекнең  соңгы язуы бирелгән:
+semiprotectedpagewarning|'''Кисәтү:''' бу бит якланган. Аны теркәлгән кулланучылар гына үзгәртә ала.\nАста бу битне күзәтү көндәлеге бирелгән:
+cascadeprotectedwarning|'''Кисәтү:''' Бу битне идарәчеләр гына үзгәртә ала. Сәбәбе: ул {{PLURAL:~{0}\u007Cкаскадлы яклау исемлегенә кертелгән}}:
+titleprotectedwarning|'''Кисәтү: Мондый исемле бит якланган, аны үзгәртү өчен [[Special:ListGroupRights\u007Cтиешле хокукка]] ия булу зарур.'''\nАста күзәтү көндәлегендәге соңгы язма бирелгән:
+templatesused|Бу биттә кулланылган {{PLURAL:~{0}\u007C1=калып\u007Cкалыплар}} :
+templatesusedpreview|Алдан каралучы биттә кулланылган {{PLURAL:~{0}\u007C1=үрнәк\u007Cүрнәкләр}}:
+templatesusedsection|Бу бүлектә кулланылган {{PLURAL:~{0}\u007C1=үрнәк\u007Cүрнәкләр}}:
+template-protected|(якланган)
+template-semiprotected|(өлешчә якланган)
+hiddencategories|Бу бит ~{0} {{PLURAL:~{0}\u007Cяшерен төркемгә\u007C~{0} яшерен төркемнәргә}} керә:
+nocreatetext|{{SITENAME}}: сайтта яңа битләр төзү чикләнгән.\nСез артка кайтып, төзелгән битне үзгәртә аласыз. [[Special:UserLogin\u007CКерергә яисә теркәлергә]] тәгъдим ителә.
+nocreate-loggedin|Сезгә яңа битләр төзү хокукы бирелмәгән.
+sectioneditnotsupported-title|Бүлекләрне үзгәртү рөхсәт ителми.
+sectioneditnotsupported-text|Бу биттә бүлекләрне үзгәртү рөхсәт ителми.
+permissionserrors|Керү хокукы хаталары
+permissionserrorstext|Түбәндәге {{PLURAL:~{0}\u007C1=сәбәп\u007Cсәбәпләр}} аркасында сез бу гамәлне башкара алмыйсыз:
+permissionserrorstext-withaction|~{1} гамәлен башкара алмыйсыз. {{PLURAL:~{0}\u007C1=Сәбәбе\u007CСәбәпләре}}:
+recreate-moveddeleted-warn|'''Игътибар: Сез бетерелгән бит урынына яңа бит ясамакчы буласыз.'''\n\nСезгә чыннан да бу битне яңадан ясау кирәкме?\nТүбәндә битнең бетерү һәм күчерү көндәлеге китерелә:
+moveddeleted-notice|Бу бит бетерелгән иде.\nТүбәндә бетерелү һәм күчерелү көндәлекне китерелә.
+log-fulllog|Көндәлекне тулысынча карау
+edit-hook-aborted|Үзгәртү махсус процедура тарафыннан кире кагыла.\nСәбәпләре китерелми.
+edit-gone-missing|Битне яңартып булмый.\nУл бетерелгән булырга мөмкин.
+edit-conflict|Үзгәртүләр конфликты.
+edit-no-change|Текстта үзгәешләр ясалмау сәбәпле, сезнең үзгәртү кире кагыла.
+edit-already-exists|Яңа бит төзеп булмый.\nУл инде бар.
+editwarning-warning|Башка биткә күчү вакытында бу мәкаләгә керткән үзгәрешләр югалырга мөмкин.\nӘгәрдә сез теркәлгән булсагыз, бу искәрмәне сез «Көйләнмәләрем» өлешендә үзгәртә аласыз.
+duplicate-args-category|Калыпны чакыруда кабатлап торган аргументларны кулланган битләр
+expensive-parserfunction-warning|'''Игътибар:''' бу биттә хәтерне еш кулланучы функцияләр артык күп.\n\nЧикләү: ~{1} {{PLURAL:~{1}\u007C1=куллану}}, бу очракта {{PLURAL:~{0}\u007C~{0} тапкыр}} башкарырга рөхсәт ителә.
+expensive-parserfunction-category|Хәтерне еш кулланучы функцияләр күп булган битләр
+post-expand-template-inclusion-warning|'''Игътибар:''' Кулланылучы үрнәкләр артык зур.\nКайберләре кабызылмаячак.
+post-expand-template-inclusion-category|Рөхсәт ителгән күләмнән артык булган үрнәкле битләр
+post-expand-template-argument-warning|'''Игътибар:''' Бу бит ачу өчен зур булган кимендә бер үрнәк аргументына ия.\nМондый аргументлар төшереп калдырылды.
+post-expand-template-argument-category|Төшереп калдырылган үрнәк аргументлы битләр
+parser-template-loop-warning|Үрнәкләрдә йомык сылтама табылды: [[~{0}]]
+parser-template-recursion-depth-warning|(~{0}) үрнәген рекурсия итеп куллану чиге рөхсәт ителгәннән артып киткән
+language-converter-depth-warning|Телләрне үзгәртүләре артык югарыга киткән (~{0})
+node-count-exceeded-warning|Биттә бәйләү өлешләре артып киткән
+expansion-depth-exceeded-category|Ачыклык тирәнлеге зур булган битләр
+expansion-depth-exceeded-warning|Биттә кертем чиге артып киткән
+undo-success|Үзгәртүдән баш тартып була.\nЮрамалараны чагыштыруны карагыз һәм, үзгәртүләр Сез теләгәнчә булса, битне саклагыз.
+undo-failure|Аралыктагы үзгәртүләр туры килмәү сәбәпле, үзгәртүдән баш тартып булмый.
+undo-norev|Үзгәртү юк яисә ул бетерелгән, шуңа аннан баш тартып булмый.
+undo-summary|[[Special:Contributions/~{1}\u007C~{1}]] кулланучысының ([[User talk:~{1}\u007Cбәхәс]]) ~{0} үзгәртүеннән баш тарту
+cantcreateaccounttitle|Хисап язмасын төзеп булмый
+cantcreateaccount-text|Бу IP адресыннан (<b>~{0}</b>) хисап язмалары төзү тыела. Тыючы: [[User:~{2}\u007C~{2}]].\n\n~{2} күрсәткән сәбәп: ''~{1}''
+viewpagelogs|Бу битнең көндәлекләрен карау
+nohistory|Бу битнең үзгәртүләр тарихы юк.
+currentrev|Хәзерге юрама
+currentrev-asof|Хәзерге юрама, ~{0}
+revisionasof|~{0} юрамасы
+revision-info|~{0} юрамасы; {{GENDER:~{5}\u007C~{1}}}~{6}
+previousrevision|← Алдагы юрама
+nextrevision|Чираттагы юрама →
+currentrevisionlink|Хәзерге юрама
+cur|хәзерге
+next|киләсе
+last|бая.
+page_first|беренче
+page_last|соңгы
+histlegend|Аңлатмалар: '''({{int:cur}})''' = хәзерге юрамадан аерымлыклар, '''({{int:last}})''' = баягы юрамадан аерымлыклар, '''{{int:minoreditletter}}''' = кече үзгәртүләр.
+history-fieldset-title|Тарихын карау
+history-show-deleted|Бары тик бетерү
+histfirst|иң иске
+histlast|иң яңа
+historysize|(~{0} {{PLURAL:~{0}\u007Cбайт}})
+historyempty|(буш)
+history-feed-title|Үзгәртүләр тарихы
+history-feed-description|Бу битнең викидагы үзгәртүләр тарихы
+history-feed-item-nocomment|~{0}, ~{1}
+history-feed-empty|Соратылган бит юк.\nУл бетерелгән яисә бүтән урынга күчерелгән (башка исем алган) булырга мөмкин.\n[[Special:Search\u007CЭзләтеп]] карагыз.
+rev-deleted-comment|(үзгәртүләрнең тасвиры бетерелгән)
+rev-deleted-user|(автор исеме бетерелгән)
+rev-deleted-event|(язма бетерелгән)
+rev-deleted-user-contribs|[кулланучының исеме яки  IP-юлламасы бетерелгән  — үзгәртү кертем битеннән яшерелгән]
+rev-deleted-text-permission|Битнең бу юрамасы '''бетерелгән'''.\n[{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} Бетерүләр көндәлегендә] аңлатмалар калдырылган булырга мөмкин.
+rev-deleted-text-unhide|Битнең бу юрамасы '''бетерелгән'''.\n[{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} Бетерүләр көндәлегендә]  аңлатмалар калдырылган булырга мөмкин.\nТеләгегез булса сез [~{0} бирелгән юраманы карый аласыз].
+rev-suppressed-text-unhide|Битнең бу юрамасы '''яшерелгән'''.\n[{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{FULLPAGENAMEE}}}} Яшерүләр көндәлегендә] аңлатмалар бирелгән булырга мөмкин.\nТеләгегез булса сез  [~{0} бирелгән юраманы карый аласыз].
+rev-deleted-text-view|Битнең бу юрамасы '''бетерелгән'''.\nСез аны карый аласыз. [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} Бетерүләр көндәлегендә] аңлатмалар бирелгән булырга мөмкин.
+rev-suppressed-text-view|Битнең бу юрамасы '''яшерелгән'''.\nСез аны карый аласыз. [{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{FULLPAGENAMEE}}}} Яшерүләр көндәлегендә] аңлатмалар бирелгән булырга мөмкин.
+rev-deleted-no-diff|Сез юрамалар арасындагы аермаларны карый алмыйсыз. Сәбәбе: кайсыдыр юрама '''бетерелгән'''.\n[{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} Бетерүләр көндәлегендә] тулырак мәгълүмат табып була.
+rev-suppressed-no-diff|Сез юрамалар  арасындагы үзгәртүләрне карый алмыйсыз, чөнки аларның берсе '''бетерелгән'''.
+rev-deleted-unhide-diff|Битнең кайсыдыр юрамасы '''бетерелгән'''.\n[{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} Бетерүләр көндәлегендә] тулырак мәгълүмат табып була.\nТеләгегез булса сез  [~{0} бирелгән юраманы карый аласыз]
+rev-suppressed-unhide-diff|Битнең кайсыдыр юрамасы '''яшерелгән'''.\n[{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{FULLPAGENAMEE}}}} Яшерүләр көндәлегендә] тулырак мәгълүмат табып була.\nТеләгегез булса сез  [~{0} яшерелгән юраманы карый аласыз]
+rev-deleted-diff-view|Бу юрамалар чагыштыруының бер юрамасы '''бетерелгән'''.\nСез  чагыштыруны карый аласыз, [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} бетерүләр көндәлегендә] тулырак мәгълүмат бирелгән булырга мөмкин.
+rev-suppressed-diff-view|Бу юрамалар чагыштыруының бер юрамасы '''яшерелгән'''.\nСез чагыштыруны карый аласыз, [{{fullurl:{{#Special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} яшерүләр көндәлегендә] тулырак мәгълүмат бирелгән булырга мөмкин.
+rev-delundel|күрсәтү/яшерү
+rev-showdeleted|күрсәтү
+revisiondelete|Битнең юрамасын бетерү / кайтару
+revdelete-nooldid-title|Ахыргы юрама билгеләнмәгән
+revdelete-nooldid-text|Бу функцияне башкару өчен сез ахыргы юраманы (яки юрамаларны) билгеләмәдегез.
+revdelete-no-file|Бу файл юк.
+revdelete-show-file-confirm|Сез чыннан да «<nowiki>~{0}</nowiki>» файлының бетерелгән  ~{1}, ~{2} версиясен карарга телисезме??
+revdelete-show-file-submit|Әйе
+logdelete-selected|Журналның {{PLURAL:~{0}\u007C1=Сайланган язма\u007Cсайланган язмалары}} :
+revdelete-legend|Чикләүләр урнаштыр:
+revdelete-hide-text|Битнең бу юрамасы текстын яшер
+revdelete-hide-image|Файл эчендәгеләрне качыр
+revdelete-hide-name|Гамәлне һәм объектны яшерү
+revdelete-hide-comment|Үзгәртүләр тасвирламасы яшерелсен
+revdelete-hide-user|Үзгәртүченең исемен/IP адресын яшер
+revdelete-hide-restricted|Мәгълүматлар идарәчеләрдән дә яшерелсен
+revdelete-radio-same|(үзгәртмәү)
+revdelete-radio-set|Яшеренлек
+revdelete-radio-unset|Күренүчәнлек
+revdelete-suppress|Мәгълүматлар идарәчеләрдән дә яшерелсен
+revdelete-log|Сәбәп:
+revdelete-submit|{{PLURAL:~{0}\u007Cсайланылган версиягә}} кулланырга
+revdelete-success|'''Версиянең күренүчәнлеге уңышлы рәвештә үзгәртелде'''
+revdelete-failure|'''Версиянең күренүчәнлеге үзгәртелә алмый:'''\n~{0}
+logdelete-success|Вакыйганың күренүчәнлеге үзгәртелде.
+logdelete-failure|'''Көндәлекнең күренүчәнлеге  куелмады:'''\n~{0}
+revdel-restore|күренүчәнлекне үзгәртү
+pagehist|битнең тарихы
+deletedhist|Бетерүләр тарихы
+revdelete-otherreason|Башка/өстәмә сәбәп:
+revdelete-reasonotherlist|Башка сәбәп
+revdelete-edit-reasonlist|Сәбәпләр исемлеген үзгәртү
+revdelete-offender|Әлеге юрамалы битнең авторы:
+suppressionlog|Яшерү көндәлеге
+mergehistory|Үзгәртүләр тарихын берләштерү
+mergehistory-box|Ике битнең үзгәртүләр тарихын берләштерү:
+mergehistory-from|Чыганак:
+mergehistory-into|Төп бит:
+mergehistory-reason|Сәбәп:
+mergelog|Берләштерүләр көндәлеге
+revertmerge|Бүлү
+history-title|~{0} битенең үзгәртү тарихы
+difference-title|~{0} — юрамалар арасындагы аермалар
+lineno|~{0} юл:
+compareselectedversions|Сайланган юрамаларны чагыштыру
+showhideselectedversions|Сайланган юрамаларны күрсәтү/яшерү
+editundo|үткәрмәү
+diff-multi-sameuser|(шул ук кулланучының {{PLURAL:~{0}\u007Cбер арадаш юрамасы\u007C~{0} арадаш юрамасы}} күрсәтелмәгән)
+diff-multi-otherusers|({{PLURAL:~{1}\u007CБашка бер кулланучының\u007C~{1} кулланучының}} {{PLURAL:~{0}\u007Cбер арадаш юрамасы\u007C~{0} арадаш юрамасы}} күрсәтелмәгән)
+diff-multi-manyusers|(~{1} күбрәк {{PLURAL:~{1}\u007Cкулланучының\u007Cкулланучының}} {{PLURAL:~{0}\u007CБер арадаш юрамасы\u007C~{0} арадаш юрамасы}} күрсәтелмәгән)
+searchresults|Эзләү нәтиҗәләре
+searchresults-title|«~{0}» өчен эзләү нәтиҗәләре
+notextmatches|Тиңдәш текстлы битләр юк
+prevn-title|Алдагы ~{0}  {{PLURAL:~{0}\u007Cязма}}
+nextn-title|Киләсе ~{0} {{PLURAL:~{0}\u007Cязма\u007Cязма}}
+shown-title|Сәхифәдә ~{0} {{PLURAL:~{0}\u007C1=язма\u007Cязма}} күрсәтелсен
+viewprevnext|Күрсәтелүе: (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|<strong>Бу вики-проектта «[[:~{0}]]» исемле бит бар инде</strong>{{PLURAL:~{1}\u007C0=\u007CБашка эзләү нәтиҗәләрен дә карап ал.}}
+searchmenu-new|'''«[[:~{0}]]»  исемле яңа бит ясау'''
+searchprofile-articles|Төп битләр (мәкаләләр)
+searchprofile-images|Мультимедиа
+searchprofile-everything|Һәркайда
+searchprofile-advanced|Киңәйтелгән
+searchprofile-articles-tooltip|~{0} дә эзләү
+searchprofile-images-tooltip|Файллар эзләү
+searchprofile-everything-tooltip|Барлык битләрдән эзләү
+searchprofile-advanced-tooltip|Бирелгән исемнәр мәйданында эзләү
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 сүз\u007C~{1} сүз}})
+search-result-category-size|{{PLURAL:~{0}\u007C1=1 әгъза\u007C~{0} әгъза}} ({{PLURAL:~{1}\u007C1=1 асттөркем\u007C~{1} асттөркем}}, {{PLURAL:~{2}\u007C1=1 файл\u007C~{2} файл}})
+search-redirect|(юнәлтү ~{0})
+search-section|(~{0} бүлеге)
+search-category|(~{0} категориясе)
+search-file-match|(файл эчтәлеге белән туры килә)
+search-suggest|Бәлки, сез моны эзлисез: ~{0}
+search-interwiki-caption|Тугандаш проектлар
+search-interwiki-default|~{0} нәтиҗә:
+search-interwiki-more|(тагын)
+search-relatedarticle|Бәйле
+searchrelated|бәйле
+searchall|барлык
+showingresults|Аста № '''~{1}''' {{PLURAL:~{0}\u007Cбашлап}} '''~{0}''' {{PLURAL:~{0}\u007Cрезультат}} күрсәтелгән.
+search-nonefound|Сорауга туры килгән нәтиҗәләр табылмады.
+powersearch-legend|Өстәмә эзләү
+powersearch-ns|исемнәрендә эзләү
+powersearch-togglelabel|Тамгаларга:
+powersearch-toggleall|Барысы
+powersearch-togglenone|Берни юк
+powersearch-remember|Сайланганны алдагы эзләүләр өчен истә калдырырга
+search-external|Читтән эзләү
+search-error|Эзләгән вакытта хата килеп чыкты:~{0}
+preferences|Көйләнмәләр
+mypreferences|Көйләнмәләр
+prefs-edits|Төзәтмәләр саны:
+prefsnologintext2|Көйләнмәләрне үзгәртү өчен хисап язмагыз белән керегез
+prefs-skin|Күренеш
+skin-preview|Алдан карау
+datedefault|Башлангыч көйләнмәләр
+prefs-labs|Сынаулы мөмкинчелекләр
+prefs-user-pages|Кулланучы битләре
+prefs-personal|Шәхси мәгълүмат
+prefs-rc|Соңгы төзәтмәләр
+prefs-watchlist|Күзәтү исемлеге
+prefs-editwatchlist|Күзәтү исемлеген үзгәртү
+prefs-editwatchlist-label|Күзәтү исемлеге язмаларын үзгәртү:
+prefs-editwatchlist-edit|Күзәтү исемлегеннән исемнәрне карау һәм сөртү
+prefs-editwatchlist-raw|Күзәтү исемлеген текстсыман үзгәртү
+prefs-editwatchlist-clear|Күзәтү исемлеген тазарту
+prefs-watchlist-days|Күзәтү исемлегендә көннәр санын күрсәтергә:
+prefs-watchlist-days-max|Иң күбе ~{0} {{PLURAL:~{0}\u007C1=көн\u007Cкөн}}
+prefs-watchlist-edits|Киңәйтелгән күзәтү исемлегендә күрсәтелүче төзәтмәләрнең максималь саны:
+prefs-watchlist-edits-max|Максимум сан: 1000
+prefs-watchlist-token|Күзәтү исемлеге токены:
+prefs-misc|Башка көйләнмәләр
+prefs-resetpass|Серсүзне үзгәртү
+prefs-email|E-mail көйләнмәләре
+prefs-rendering|Күренеш
+saveprefs|Саклау
+restoreprefs|Башлангыч көйләнмәләрне кире кайтару
+prefs-editing|Төзәтү
+rows|Юллар:
+columns|Баганалар:
+searchresultshead|Эзләү
+stub-threshold|<a href="#" class="stub">Ясалма сылтамаларның</a> бизәлеше буенча чикләүләр (байтларда):
+stub-threshold-disabled|Ябылган
+recentchangesdays|Соңгы үзгәртүләрне күрсәтүче көннәр саны:
+recentchangesdays-max|( ~{0} {{PLURAL:~{0}\u007Cкөннән}} дә артык булмаска тиеш)
+recentchangescount|Төп буларак кулланучы үзгәртүләр саны:
+prefs-help-recentchangescount|Үз өченә үзгәртүләрне, битләрнең тарихын һәм язлу көндәлеген дә кертә.
+savedprefs|Көйләнмәләрегез сакланды.
+timezonelegend|Сәгать поясы:
+localtime|Җирле вакыт
+timezoneuseserverdefault|Сервернең көйләнмәләре кулланылсын (~{0})
+timezoneuseoffset|Башка (күчерелүне күрсәтегез)
+servertime|Серверның вакыты:
+guesstimezone|Браузердан тутыру
+timezoneregion-africa|Африка
+timezoneregion-america|Америка
+timezoneregion-antarctica|Антарктика
+timezoneregion-arctic|Арктика
+timezoneregion-asia|Азия
+timezoneregion-atlantic|Атлантик океан
+timezoneregion-australia|Австралия
+timezoneregion-europe|Аурупа
+timezoneregion-indian|Һинд океаны
+timezoneregion-pacific|Тын океан
+allowemail|Башка кулланучылардан хатлар алырга рөхсәт ителсен
+prefs-searchoptions|Эзләү көйләнмәләре
+prefs-namespaces|Исемнәр мәйданы
+default|килешү буенча
+prefs-files|Файллар
+prefs-custom-css|Үземнең CSS
+prefs-custom-js|Үземнең JS
+prefs-common-css-js|Барлык бизәлешләр өчен гомуми CSS/JS:
+prefs-reset-intro|Бу бит сезнең көйләнмәләрегезне бетерү өчен кулланыла. Бу эшне башкару нәтиҗәсендә сез яңадан үз көйләнмәләрне яңадан кайтара алмыйсыз.
+prefs-emailconfirm-label|E-mail раслау
+youremail|Электрон почта:
+username|Кулланучы исеме:
+prefs-memberingroups|Төркем {{PLURAL:~{0}\u007Cәгъзасы}}:
+prefs-memberingroups-type|~{0}
+prefs-registration|Теркәлү вакыты:
+prefs-registration-date-time|~{0}
+yourrealname|Чын исем:
+yourlanguage|Тел:
+yourvariant|Эчтәлекнең тел варианты:
+yournick|Яңа имзагыз:
+prefs-help-signature|Бәхәслек битләрендә сезнең язмаларыгызны калдыру «<nowiki>~~~~</nowiki>» тамгалары куелу нәтиҗәсендә булырга тиеш.
+badsig|Имза дөрес түгел. HTML теглары тикшерегез.
+badsiglength|Имзагыз бигрәк озын.\nУл ~{0} {{PLURAL:~{0}\u007Cхәрефтән}} күбрәк булырга тиеш түгел.
+yourgender|Җенес:
+gender-unknown|билгесез
+gender-male|Ир
+gender-female|Хатын
+prefs-help-gender|Мәҗбүри түгел: Ул бары тик кайбер хатларда гына күренәчәк һәм бу мәгълүмат барлык кулланучыларга да билгеле булачак.
+email|Электрон почта
+prefs-help-realname|Чын исемегез (кирәкми): аны күрсәтсәгез, ул битне үзгәртүче күрсәтү өчен файдалаячак.
+prefs-help-email|Электрон почта адресын күрсәтү мәҗбүри түгел, ләкин әгәрдә сез үзегезнең серсүзне онытсагыз бу сезгә аны яңадан кайтарырга ярдәм итәчәк.
+prefs-help-email-others|Ул шулай ук сезгә башка кулланучылар белән аралашырга ярдәм итчәк, шул ук вакытта сезнең почтагызның юлламасы күрсәтелмәячәк.
+prefs-help-email-required|Электрон почта адресы кирәк.
+prefs-info|Гомуми мәгълүмат
+prefs-i18n|Интернационализация
+prefs-signature|Имза
+prefs-dateformat|Вакытың форматы
+prefs-timeoffset|Вакыт билгеләнеше
+prefs-advancedediting|Киңәйтелгән көйләүләр
+prefs-advancedrc|Киңәйтелгән көйләүләр
+prefs-advancedrendering|Киңәйтелгән көйләүләр
+prefs-advancedsearchoptions|Киңәйтелгән көйләүләр
+prefs-advancedwatchlist|Киңәйтелгән көйләүләр
+prefs-displayrc|Күрсәтү көйләнмәләре
+prefs-displaywatchlist|Күрсәтү көйләнмәләре
+prefs-diffs|Юрамалар аермасы
+userrights|Кулланучы хокуклары белән идарә итү
+userrights-lookup-user|Кулланучы төркемнәре белән идарә итү
+userrights-user-editname|Кулланучының исемен кертегез:
+editusergroup|Кулланучының төркемнәрен алмаштыру
+editinguser|Кулланучы <strong>[[User:~{0}\u007C~{0}]]</strong> ~{1} хокукларын үзгәртү
+userrights-editusergroup|Кулланучының төркемнәрен алмаштыру
+saveusergroups|Кулланучы төркемнәрен саклау
+userrights-groupsmember|Әгъза:
+userrights-groupsmember-auto|Билгесез әгъза:
+userrights-groups-help|Сез бу кулланучының хокукларын үзгәртә алмыйсыз.\n*Әгәр дә кулланучы исеме янда тамга торса, димәк бу кулланучы бирелгән төркемнең әгъзасы.\n*Әгәр дә кулланучы исеме янда тамга тормаса, димәк бу кулланучы бирелгән төркемнең әгъзасы түгел.\n*"*" тамгасы торса сез бу кулланучыны бу төркемнән бетерә алмыйсыз.
+userrights-reason|Сәбәп:
+userrights-no-interwiki|Сезнең башка викиларда кулланучыларның хокукларын үзгәртергә хокукларыгыз юк.
+userrights-nodatabase|Бирелгән ~{0} базасы юк яисә  локаль булып тормый.
+userrights-nologin|Кулланучыларга вәкаләтләр билгеләү өчен идарәче хисап язмасы белән [[Special:UserLogin\u007Cкерергә кирәк]]
+userrights-notallowed|Сезнең кулланучыларга вәкаләтләр тапшырырга яки кире алырга хокукы юк.
+userrights-changeable-col|Сезнең тарафтан үзгәртелми торган төркемнәр
+userrights-unchangeable-col|Сезнең тарафтан үзгәртелми торган төркемнәр
+userrights-irreversible-marker|~{0}*
+userrights-conflict|Кулланучы хокукларын үзгәртү конфликты! Төзәтмәләрегезне тикшерегез, аннары кабатлагыз.
+userrights-removed-self|Сез үзегезне хокукларыгыздан мәхрүм иттегез. Шул сәбәпле сез бу сәхифәгә башка керә алмыйсыз.
+group|Төркем:
+group-user|Кулланучылар
+group-autoconfirmed|Авторасланган кулланучы
+group-bot|Ботлар
+group-sysop|Идарәчеләр
+group-bureaucrat|Бюрократлар
+group-suppress|Назирләр
+group-all|(барлык)
+group-user-member|{{GENDER:~{0}\u007Cкулланучы}}
+group-autoconfirmed-member|{{GENDER:~{0}\u007Cавторасланган кулланучы}}
+group-bot-member|{{GENDER:~{0}\u007Cбот}}
+group-sysop-member|{{GENDER:~{0}\u007Cидарәче}}
+group-bureaucrat-member|{{GENDER:~{0}\u007Cбюрократ}}
+group-suppress-member|{{GENDER:~{0}\u007CНазир}}
+grouppage-user|{{ns:project}}:Кулланучылар
+grouppage-autoconfirmed|{{ns:project}}:Авторасланган кулланучылар
+grouppage-bot|{{ns:project}}:Ботлар
+grouppage-sysop|{{ns:project}}:Идарәчеләр
+grouppage-bureaucrat|{{ns:project}}:Бюрократлар
+grouppage-suppress|{{ns:project}}:Назирләр
+right-read|Битләрне карау
+right-edit|Битләрне үзгәртү
+right-createpage|битләр ясау (бәхәс булмаганнарын)
+right-createtalk|бәхәс битен ясау
+right-createaccount|яңа кулланучы хисап язмасын ясау
+right-minoredit|"кече төзәтмә" тамгасын кую
+right-move|Битләрне күчерү
+right-move-subpages|Битләрне асбитләр белән бергә күчерү
+right-move-categorypages|төркемдәге битләрне күчерү
+right-movefile|файлларның исемен алмаштыру
+right-suppressredirect|Элекке исемнән юнәлтү ясамыйча исемне алмаштыру
+right-upload|файлларны йөкләү
+right-reupload|Булган файллар өстеннән язарга
+right-delete|битләрне бетерү
+right-editinterface|Кулланучы интерфейсын үзгәртү
+newuserlogpage|Кулланучыларны теркәү көндәлеге
+newuserlogpagetext|Яңа теркәлгән кулланучылар исемлеге
+rightslog|Кулланучының хокуклары көндәлеге
+action-read|бу битне укырга
+action-edit|бу битне үзгәртергә
+action-createpage|битләрне язырга
+action-createtalk|бәхәс битен ясарга
+action-move|бу битне күчерерге
+nchanges|~{0} {{PLURAL:~{0}\u007C1=үзгәртү\u007Cүзгәртү}}
+recentchanges|Соңгы үзгәртүләр
+recentchanges-legend|Соңгы үзгәртүләр көйләүләре
+recentchanges-summary|Бу биттә {{grammar:genitive\u007C{{SITENAME}}}} проектының соңгы үзгәртүләре күрсәтелә.
+recentchanges-feed-description|Бу агымда соңгы үзгәртүләрне күзәтү.
+recentchanges-label-newpage|Бу үзгәртү белән яңа бит төзелгән
+recentchanges-label-minor|Бу кече үзгәртү
+recentchanges-label-bot|Бу үзгәртү бот белән эшләнгән
+recentchanges-label-unpatrolled|Үзгәртүне әлегә тикшермәгәннәр
+recentchanges-label-plusminus|Битнең зурлыгы шуның кадәрле байтка үзгәрде
+recentchanges-legend-newpage|{{int:recentchanges-label-newpage}} ([[Special:NewPages\u007Cяңа бит]])
+rcnotefrom|Астарак '''~{1}''' башлап ('''~{0}''' кадәр) үзгәртүләр күрсәтелгән.
+rclistfrom|~{2} ~{1} башлап яңа үзгәртүләрне күрсәт
+rcshowhideminor|кече үзгәртүләрне ~{0}
+rcshowhideminor-show|күрсәт
+rcshowhideminor-hide|яшер
+rcshowhidebots|ботларны ~{0}
+rcshowhidebots-show|күрсәт
+rcshowhidebots-hide|яшер
+rcshowhideliu|теркәлгән кулланучыларны ~{0}
+rcshowhideliu-show|күрсәт
+rcshowhideliu-hide|яшер
+rcshowhideanons|кермәгән кулланучыларны ~{0}
+rcshowhideanons-show|күрсәт
+rcshowhideanons-hide|яшер
+rcshowhidepatr|тикшерелгән үзгәртүләрне ~{0}
+rcshowhidepatr-hide|яшер
+rcshowhidemine|минем үзгәртүләремне ~{0}
+rcshowhidemine-show|күрсәт
+rcshowhidemine-hide|яшер
+rclinks|Соңгы ~{1} көн эчендә соңгы ~{0} үзгәртүне күрсәт<br />~{2}
+diff|аерма
+hist|тарих
+hide|яшер
+show|күрсәт
+minoreditletter|к
+newpageletter|Я
+boteditletter|б
+number_of_watching_users_pageview|[~{0} {{PLURAL:~{0}\u007Cкүзәтеп тора кулланучы}}]
+rc_categories|Төркемнәрдә генә тора («\u007C» бүлүче)
+rc_categories_any|Һәрбер
+rc-change-size-new|Төзәтмәдән соң күләме: ~{0} {{PLURAL:~{0}\u007Cбайт\u007Cбайт\u007Cбайт}}
+newsectionsummary|/* ~{0} */ яңа бүлек
+rc-enhanced-expand|Ваклыкларны күрсәтү
+rc-enhanced-hide|Ваклыкларны яшерү
+recentchangeslinked|Бәйләнешле үзгәртүләр
+recentchangeslinked-feed|Бәйләнешле үзгәртүләр
+recentchangeslinked-toolbox|Бәйләнешле үзгәртүләр
+recentchangeslinked-title|"~{0}" битенә бәйләнешле үзгәртүләр
+recentchangeslinked-summary|Бу күрсәтелгән бит белән сылталган (йә күрсәтелгән төркемгә керткән) битләрнең үзгәртелмәләре исемлеге.\n[[Special:Watchlist\u007CКүзәтү исемлегегезгә]] керә торган битләр '''калын'''.
+recentchangeslinked-page|Битнең исеме:
+recentchangeslinked-to|Моның урынына бу биткә бәйле булган битләрдәге үзгәртүләрне күрсәтү
+upload|Файлны йөкләү
+uploadbtn|Файлны йөкләү
+reuploaddesc|Файлны йөкләүгә кире кату
+upload-tryagain|Яңартылган файлны җибәрү
+uploadnologin|Сез хисап язмагызга кермәгәнсез
+uploadnologintext|Файлны йөкләү өчен сез бу биткә [[Special:UserLogin\u007Cкерергә]] тиешсез.
+upload_directory_missing|~{0} Йөкләнү директориясе юк
+upload_directory_read_only|Моңа Сезнең хокукларыгыз юк һәм веб-сервер ~{0} папкасыны йөкли алмый.
+uploaderror|Файлны йөкләүдә хата
+upload-recreate-warning|'''Игътибар: Мондый исемле файл бетерелгән яки исеме алмаштырылган '''
+uploadtext|Бу форманы кулланып серверга файллар йөкли аласыз. Элегрәк йөкләнелгән файлларны карау өчен [[Special:FileList\u007Cйөкләнелгән файллар исемлегенә]] мәрәҗәгать итегез. Шулай ук ул [[Special:Log/upload\u007Cйөкләнмәләр исемлегенә]] һәм [[Special:Log/delete\u007Cбетерелгән файллар]] исемлегенә дә языла.\n\nФайлны мәкаләгә йөкләү өчен Сез менә бу үрнәкләрне куллана аласыз:\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Рәсем.jpg]]</nowiki></code>''' файлның тулы юрамасын кую өчен;\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Räsem.png\u007C200px\u007Cthumb\u007Cleft\u007Cтасвирламасы]]</nowiki></code>'''  200 пиксельга кадәр киңлектәге  һәм текстның сул ягында, тасвирламасы белән;\n* '''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code>'''биттә файлны сүрәтләмичә, бары тик сылтамасын гына кую.
+upload-permitted|Рөхсәт ителгән файл төрләре:~{0}
+upload-preferred|Мөмкин булган файл төрләре:~{0}
+upload-prohibited|Тыелган файл төрләре:~{0}
+uploadlogpage|Йөкләү көндәлеге
+uploadlogpagetext|Аста яңа йөкләнелгән файллар исемлеге бирелә.\nШулай ук [[Special:NewFiles\u007Cяңа файллар галлереясын]] карагыз
+filename|Файл исеме
+filedesc|Кыска тасвирлама
+fileuploadsummary|Үзгәртүләр тасвирламасы:
+filereuploadsummary|Файлдагы үзгәртүләр:
+filestatus|Тарату хокуклары:
+filesource|Чыганагы:
+ignorewarning|Белдерүне кире кагу һәм файлны саклау
+ignorewarnings|Белдерүне кире кагу
+minlength1|Файлның исеме бер генә хәрефтән булса да торырга тиеш.
+illegalfilename|файлның исеме  «~{0}»  куллануга ярамаган символлардан тора. Зинһар, файлның исемен алыштырыгыз һәм яңадан куеп карагыз.
+badfilename|Файлның исеме ~{0} исеменә үзгәртелде.
+filetype-mime-mismatch|Файлның кинәйтелмәсе «.~{0}» аның MIME-төренә туры килми (~{1}).
+filetype-badmime|MIME-төре «~{0}» булган файллар, йөкләнмәячәк.
+filetype-bad-ie-mime|Файлны йөкләргә мөмкин түгел, чөнки Internet Explorer аны «~{0}» дип кабул итәчәк.
+filetype-unwanted-type|'''".~{0}"''' — тыелган файл төре.\n{{PLURAL:~{2}\u007C1=Мөмкин булган файл төре булып\u007CМөмкин булган файл төре:}} ~{1}.
+filetype-banned-type|'''".~{0}"''' — {{PLURAL:~{3}\u007C1=тыелган файл төре\u007Cтыелган файллар төре}}.\n{{PLURAL:~{2}\u007C1=Киңәйтелгән файл төре булып\u007CКиңәйтелгән  файл төрләре:}} ~{1}.
+filetype-missing|Файлның киңәйтелмәсе юк ''(мәсәлән,«.jpg»)''.
+empty-file|Сезнең тарафтан җибәрелгән файл буш.
+file-too-large|Сезнең тарафтан җибәрелгән файл артык зур.
+filename-tooshort|Файлның исеме артык кыска.
+filetype-banned|Бу файл төре тыелган.
+verification-error|Бу файл әлегә тикшерү узмаган.
+illegal-filename|Мондый файл исеменә рөхсәт юк
+savefile|Файлны саклау
+uploaddisabled|Йөкләү тыелган
+copyuploaddisabled|URL адресы буенча йөкләү ябылган.
+uploaddisabledtext|Файлларны йөкләү ябылган.
+upload-source|Файлның чыганагы
+sourcefilename|Файлның чыганагы:
+sourceurl|Чыганакның URL адресы:
+destfilename|Файлның яңа исеме:
+upload-maxfilesize|Файлның максималь зурлыгы: ~{0}
+upload-description|Файлның тасвирламасы
+upload-options|Йөкләү параметрлары
+watchthisupload|Бу файлны күзәтү
+filewasdeleted|Мондый исемле файл бетерелгән булган инде. Зинһар,яңадан йөкләү алдыннан ~{0} карагыз
+filename-bad-prefix|Файлның исеме '''«~{0}»''' дип башлана. Зинһар, файлны тасвирлаучы исем бирегез.
+filename-prefix-blacklist| #<!-- ничек бар шулай калдырыгыз --> <pre>\n# Синтаксис төбәндәгечә:\n#   *  «#» дип башланган барлык нәрсә дә комментарий дип аталачак\n#   * Һәрбер буш рәт — файлның исеменең префиксы, цифрлы камера бирүче исем\nCIMG # Casio\nDSC_ # Nikon\nDSCF # Fuji\nDSCN # Nikon\nDUW # кайсыбер кәрәзле телефоннар\nIMG # барлык\nJD # Jenoptik\nMGP # Pentax\nPICT # төрле\n #</pre> <!-- ничек бар шулай калдырыгыз -->
+upload-success-subj|Йөкләү әйбәт үтте
+http-read-error|HTTP укуда хата.
+license|Лицензиясе:
+license-header|Лицензиясе
+nolicense|Юк
+license-nopreview|(Алдан карау мөмкин түгел)
+upload_source_file|(сезнең санактагы файл)
+imgfile|файл
+listfiles|Сүрәтләр исемлеге
+listfiles_thumb|Миниатюра
+listfiles_date|Вакыт
+listfiles_name|Ат
+listfiles_user|Кулланучы
+listfiles_size|Үлчәм
+listfiles_description|Тасвир
+listfiles_count|Юрамалар
+file-anchor-link|Файл
+filehist|Файлның тарихы
+filehist-help|Датага/сәгатькә, шул вакытта битнең нинди булганлыгын күрү өчен басыгыз.
+filehist-deleteall|Барысын да юк ит
+filehist-deleteone|бетерү
+filehist-revert|кайтару
+filehist-current|хәзерге
+filehist-datetime|Дата/вакыт
+filehist-thumb|Миниатюра
+filehist-thumbtext|~{0} көнне булган версиянең эскизы
+filehist-nothumb|Миниатюрасы юк
+filehist-user|Кулланучы
+filehist-dimensions|Зурлык
+filehist-filesize|Файлның зурлыгы
+filehist-comment|Искәрмә
+imagelinks|Файлны куллану
+linkstoimage|Бу файлга әлеге {{PLURAL:~{0}\u007C1=бит\u007C~{0} бит}} сылтый:
+nolinkstoimage|Бу файлга сылтаган битләр юк.
+duplicatesoffile|{{PLURAL:~{0}\u007CӘлеге ~{0} файл }} астагы файлның күчерелмәсе булып тора ([[Special:FileDuplicateSearch/~{1}\u007Cтулырак]]):
+sharedupload|Бу файл ~{0}'дан һәм башка проектларда кулланырга мөмкин.
+sharedupload-desc-here|Бу файл ~{0}'дан һәм башка проектларда кулланырга мөмкин. Файл турында [~{1} мәгълүмат ] аста бирелгән.
+filepage-nofile|Мондый исемле файл юк.
+filepage-nofile-link|Мондый исемле файл  юк. Сез аны [~{0} йөкли аласыз].
+uploadnewversion-linktext|Бу файлның яңа юрамасын йөкләү
+shared-repo-from|~{0} дән
+shared-repo|гомуми саклагыч
+filerevert|~{0} юрамасына кире кайту
+filerevert-legend|Файлның иске юрамасын кире кайтару
+filerevert-comment|Сәбәп:
+filerevert-submit|Кире кайтару
+filedelete|~{0} —  бетерү
+filedelete-legend|Файлны бетерү
+filedelete-comment|Сәбәп:
+filedelete-submit|Бетерү
+filedelete-reason-otherlist|Башка сәбәп
+mimesearch|MIME эзләү
+mimetype|MIME-тип:
+download|йөкләү
+unwatchedpages|Беркемдә күзәтмәүче  битләр
+listredirects|Юнәлтүләр исемлеге
+unusedtemplates|Кулланылмаган үрнәкләр
+randompage|Очраклы бит
+randomredirect|Очраклы биткә күчү
+statistics-header-edits|Үзгәртүләр хисапнамәсе
+statistics-header-users|Кулланучылар буенча хисапнамә
+statistics-header-hooks|Башка хисапнамәләр
+statistics-files|Йөкләнелгән файллар
+statistics-edits|{{grammar:genitive\u007C{{SITENAME}}}} проекты ачылганнан бирле булган барлык үзгәртүләр исәбе
+statistics-edits-average|Бер биткә уртача үзгәртүләр исәбе
+statistics-users|Теркәлгән [[Special:ListUsers\u007Cкулланучылар]]
+statistics-users-active|Актив кулланучылар
+statistics-users-active-desc|{{PLURAL:~{0}\u007C~{0} көн }} өчендә нинди дә булса үзгәртүләр керткән кулланучылар
+doubleredirects|Икеләтә юнәлтүләр
+brokenredirects|Бәйләнешсез юнәлтүләр
+brokenredirectstext|Бу юнәлтүләр булмаган битләргә сылтыйлар:
+brokenredirects-edit|үзгәртү
+brokenredirects-delete|бетерү
+withoutinterwiki|Телләрара сылтамасыз битләр
+withoutinterwiki-legend|Өстәлмә
+withoutinterwiki-submit|Күрсәтү
+fewestrevisions|Аз үзгәртүләр белән битләр
+nbytes|~{0} {{PLURAL:~{0}\u007Cбайт}}
+ncategories|~{0} {{PLURAL:~{0}\u007Cтөркем}}
+nlinks|~{0} {{PLURAL:~{0}\u007Cсылтама}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cәгъза}}
+lonelypages|Үксез битләр
+uncategorizedpages|Төркемләнмәгән битләр
+uncategorizedcategories|Төркемләнмәгән төркемнәр
+uncategorizedimages|Төркемләнмәгән сүрәтләр
+uncategorizedtemplates|Төркемләнмәгән үрнәкләр
+unusedcategories|Кулланмаган төркемнәр
+unusedimages|Кулланмаган сүрәтләр
+wantedcategories|Зарур төркемнәр
+wantedpages|Зарур битләр
+wantedfiles|Кирәкле файллар
+wantedtemplates|Кирәкле үрнәкләр
+mostlinked|Күп үзенә сылтамалы битләр
+mostlinkedcategories|Күп үзенә сылтамалы төркемнәр
+mostlinkedtemplates|Иң күп кулланылган үрнәкләр
+mostcategories|Күп төркемләргә кертелгән битләр
+mostimages|Иң кулланган сүрәтләр
+mostrevisions|Күп үзгәртүләр белән битләр
+prefixindex|Барлык алкушымча белән битләр
+shortpages|Кыска битләр
+longpages|Озын битләр
+deadendpages|Тупик битләре
+protectedpages|Якланган битләр
+protectedtitles|Тыелган исемнәр
+listusers|Кулланучылар исемлеге
+usercreated|~{2} ~{0} көнне ~{1} вакытта {{GENDER:~{2}\u007Cтеркәлде}}
+newpages|Яңа битләр
+newpages-username|Кулланучы:
+ancientpages|Иң иске битләр
+move|Күчерү
+movethispage|Бу битне күчерү
+nopagetitle|Мондый бит юк
+nopagetext|Күрсәтелгән бит юк.
+pager-newer-n|{{PLURAL:~{0}\u007C1=1 яңарак\u007C~{0} яңарак}}
+pager-older-n|{{PLURAL:~{0}\u007C1=1 искерәк\u007C~{0} искерәк}}
+suppress|Яшерү
+booksources|Китап чыганаклары
+booksources-search-legend|Китап чыганакларыны эзләү
+booksources-search|Эзләү
+booksources-text|Әлеге биттә күрсәтелгән сылтамалар ярәмендә сезнең кызыксындырган китап буенча өстәмә мәгълүматлар табарга мөмкин. Болар интернет-кибетләр һәм китапханә җыентыгында эзләүче системалар.
+booksources-invalid-isbn|Бирелгән ISBN саны бәлки хаталдыр. Зинһар, бирелгән саннарны яңадан тикшерегез.
+specialloguserlabel|Кулланучы:
+speciallogtitlelabel|Башлам:
+log|Көндәлекләр
+all-logs-page|Барлык көндәлекләр
+alllogstext|{{SITENAME}} сәхифәсенең гомуми көндәлекләре исемлеге.\nСез нәтиҗәләрне көндәлек төре, кулланучы исеме (хәреф зурлыгын истә тотыгыз) яки куззаллаган бит (шулай ук хәреф зурлыгын истә тотыгыз) буенча тәртипкә салырга мөмкин.
+logempty|Кирәкле язмалар көндәлектә юк.
+allpagesfrom|Моңа башланучы битләрне чыгару:
+allpagesto|Монда чыгаруны туктату:
+allarticles|Барлык битләр
+allinnamespace|«~{0}» исемнәр мәйданындагы барлык битләр
+allpagessubmit|Башкару
+allpagesprefix|Алкушымчалы битләрне күрсәтү:
+allpages-hide-redirects|Юнәлтүләрне яшер
+categoriespagetext|{{PLURAL:~{0}\u007C1=Әлеге төркем үз өченә\u007CӘлеге төркемнәр  үз өченә}}   битләрне һәм медиа-файлларны ала.\nАста [[Special:UnusedCategories\u007Cкулланылмаган төркемнәр]] кәрсәтелгән.\nШулай ук  [[Special:WantedCategories\u007Cкирәкле төркемнәр исемлегендә]] карагыз.
+special-categories-sort-count|исәп буенча тәртипләү
+special-categories-sort-abc|әлифба буенча тәртипләү
+sp-deletedcontributions-contribs|кертем
+linksearch|Тышкы сылтамалар
+linksearch-pat|Эзләү өчен үрнәк:
+linksearch-ns|Исемнәр мәйданы:
+linksearch-ok|Эзләү
+linksearch-line|~{1} мәкаләсеннән ~{0} мәкаләгә сылтама
+listusers-submit|Күрсәтү
+listusers-noresult|Кулланучыларны табылмады.
+listusers-blocked|(тыелган)
+activeusers|Актив кулланучылар исемлеге
+activeusers-hidebots|Ботларны яшер
+activeusers-hidesysops|Идарәчеләрне яшер
+activeusers-noresult|Кулланучылар табылмады.
+listgrouprights|Кулланучы төркемнәренең хокуклары
+listgrouprights-group|Төркем
+listgrouprights-rights|Хокуклар
+listgrouprights-helppage|Help:Төркемнәрнең хокуклары
+listgrouprights-members|(төркем исемлеге)
+emailuser|Бу кулланучыга хат
+emailuser-title-target|{{GENDER:~{0}\u007CКулланучыга}} электрон хат язу
+emailuser-title-notarget|Кулланучыга хат җибәрү
+emailpage|Кулланучыга хат җибәрү
+emailpagetext|Әлеге форма ярдәмендә {{GENDER:~{0}\u007Cкулланучының}} электрон почта адресына хат җибәрергә мөмкин. Җибәрелгән адрес исемендә Сезнең [[Special:Preferences\u007Cкөйләнмәләрдә]] күрсәтелгән адресыгыз күрсәтеләчәк, шуның ярдәмендә Сез ул кулланучы белән турыдан-туры сөйләшә аласыз.
+defemailsubject|{{SITENAME}}: хат
+noemailtitle|Электрон почта адресы юк
+noemailtext|Бу кулланучы чын электрон әрҗә адресын күрсәтмәде.
+nowikiemailtext|Бу кулланучы башкалардан хат алырга теләмәвен белдерде.
+emailnotarget|Кулланучы-хатны алучының булмаган яки хаталы исеме.
+emailtarget|Кулланучы-хатны алучының исемен языгыз
+emailusername|Кулланучы исеме:
+emailusernamesubmit|Җибәрү
+emailfrom|Кемнән:
+emailto|Кемгә:
+emailsubject|Тема:
+emailmessage|Хәбәр:
+emailsend|Җибәрү
+emailccme|Миңа хәбәрнең күчермәсене җибәрелсен.
+emailccsubject|~{0} өчен хәбәрегезнең күчермәсе: ~{1}
+emailsent|Хат җибәрелгән
+emailsenttext|E-mail хатыгыз җиберелде.
+watchlist|Күзәтү исемлеге
+mywatchlist|Күзәтү исемлеге
+watchlistfor2|~{0} өчен ~{1}
+nowatchlist|Күзәтү исемлегегездә битләр юк.
+watchnologin|Кермәдегез
+addedwatchtext|"[[:~{0}]]" бите [[Special:Watchlist\u007Cкүзәтү исемлегегезгә]] өстәлде.\nБу биттә һәм аның бәхәслегендә барлык булачак үзгәртүләр шунда күрсәтелер, һәм, [[Special:RecentChanges\u007Cсоңгы үзгәртүләр]] исемлегендә бу битне җиңелрәк табу өчен, ул '''калын мәтен''' белән күрсәтелер.
+removedwatchtext|«[[:~{0}]]» бите [[Special:Watchlist\u007Cсезнең күзәтү исемлегеннән]] бетерелде.
+watch|Күзәтү
+watchthispage|Бу битне күзәтү
+unwatch|Күзәтмәү
+unwatchthispage|Күзәтүне туктат
+notanarticle|Мәкалә түгел
+watchlist-details|Күзәтү исемлегегездә, бәхәс битләрен санамыйча, {{PLURAL:~{0}\u007C1=~{0} бит\u007C~{0} бит}} бар.
+wlshowlast|Баягы ~{0} сәгать ~{1} көн эчендә яки ны күрсәт
+watchlist-options|Күзәтү исемлеге көйләүләре
+watching|Күзәтү исемлегемә өстәүе…
+unwatching|Күзәтү исемлегемнән чыгаруы…
+enotif_impersonal_salutation|{{SITENAME}} кулланучы
+enotif_lastvisited|Соңгы керүегездән соң булган барлык үзгәртүләрне күрер өчен, бу сылтама аша узыгыз: ~{0}
+enotif_body|Хөрмәтле $WATCHINGUSERNAME,\n\n«{{SITENAME}}» проектының «$PAGETITLE» бите  $PAGEEDITOR  тарафыннан  $PAGEEDITDATE  көнне  $CHANGEDORCREATED. Битне карар өчен $PAGETITLE_URL  буенча узыгыз.\n\n$NEWPAGE\n\nҮзгәртүнең кыска эчтәлеге: $PAGESUMMARY $PAGEMINOREDIT\n\nҮзгәртүчегә язу:\nэл. почта $PAGEEDITOR_EMAIL\nвики $PAGEEDITOR_WIKI\n\nБу биткә кермәсәгез, аның башка үзгәртүләре турында хат җибәрелмәячәк. Шулай ук сез күзәтү исемлегегездә булган битләр өчен хәбәр бирү флагын алып куя аласыз.\n\n             {{grammar:genitive\u007C{{SITENAME}}}} хәбәр бирү системасы\n\n--\nХәбәр итүләр көйләүләрен үзгәртү:\n{{canonicalurl:{{#special:Preferences}}}}\n\nКүзәтү исемлеге көйләүләрен үзгәртү:\n{{canonicalurl:{{#special:EditWatchlist}}}}\n\nБитне сезнең күзәтү исемлегездән бетерү:\n$UNWATCHURL\n\nЭлемтә һәм ярдәм:\n$HELPPAGE
+created|төзергән
+changed|үзгәртелде
+deletepage|Битне бетерү
+confirm|Раслау
+excontent|эчтәлек: «~{0}»
+excontentauthor|эчтәлеге: "~{0}" (бердәнбер үзгәртүче "[[Special:Contributions/~{1}\u007C~{1}]]" иде)
+exbeforeblank|чистартуга кадәр булган эчтәлек: «~{0}»
+delete-confirm|«~{0}» бетерү
+delete-legend|Бетерү
+historywarning|'''Кисәтү''': сез бетерергә теләгән биттә үзгәртү тарихы бар, ул ~{0}дән {{PLURAL:~{0}\u007Cюрамалар}}:
+confirmdeletetext|Сез бу битнең (яки рәсемнең) тулысынча бетерелүен сорадыгыз.\nЗинһар, моны чыннан да эшләргә теләгәнегезне, моның нәтиҗәләрен аңлаганыгызны һәм [[{{MediaWiki:Policy-url}}]] бүлегендәге кагыйдәләр буенча эшләгәнегезне раслагыз.
+actioncomplete|Гамәл башкарган
+actionfailed|Эш башкарылмаган
+deletedtext|«~{0}» бетерелгән инде.<br />\nСоңгы бетерелгән битләрне күрер өчен, ~{1} карагыз.
+dellogpage|Бетерү көндәлеге
+deletionlog|бетерү көндәлеге
+deletecomment|Сәбәп:
+deleteotherreason|Башка/өстәмә сәбәп:
+deletereasonotherlist|Башка сәбәп
+deletereason-dropdown|* Бетерүнең сәбәпләре\n** вандаллык\n** автор соравы буенча\n** автор хокукларын бозу
+delete-edit-reasonlist|Сәбәпләр исемлеген үзгәртү
+rollbacklink|кире кайтару
+rollbacklinkcount|~{0} {{PLURAL:~{0}\u007Cтөзәтмәне}} кире кагу
+editcomment|Үзгәртү өчен тасвир: "''~{0}''".
+revertpage|[[Special:Contributions/~{1}\u007C~{1}]] үзгәртүләре ([[User talk:~{1}\u007Cбәхәс]])  [[User:~{0}\u007C~{0}]] юрамасына кадәр кире кайтарылды
+protectlogpage|Яклану көндәлеге
+protectedarticle|«[[~{0}]]» якланган
+modifiedarticleprotection|"[[~{0}]]" бите өчен яклау дәрәҗәсе үзгәртелде
+unprotectedarticle|«[[~{0}]]» битеннән яклау алынды
+movedarticleprotection|яклау көйләнмәләрен «[[~{1}]]» битеннән «[[~{0}]]» битенә күчерде
+protect-title|«~{0}» өчен яклау дәрәҗәсен билгеләү
+prot_1movedto2|«[[~{0}]]» бите «[[~{1}]]» битенә күчерелде
+protect-legend|Битне яклау турында раслагыз
+protectcomment|Сәбәп:
+protectexpiry|Бетә:
+protect_expiry_invalid|Яклау бетү вакыты дөрес түгел.
+protect_expiry_old|Яклау бетү көне узган көнгә куелган.
+protect-unchain-permissions|Өстәмә яклау чараларын ачу
+protect-text|Биредә сез '''~{0}''' бите өчен яклау дәрәҗәсене карый һәм үзгәрә аласыз.
+protect-locked-access|Хисап язмагызга битләрнең яклау дәрәҗәсен үзгәртү өчен хак җитми. '''~{0}''' битенең хәзерге көйләүләре:
+protect-cascadeon|Бу бит якланган, чөнки ул әлеге каскадлы яклаулы {{PLURAL:~{0}\u007C1=биткә\u007Cбитләргә}} керә. Сез бу битнең яклау дәрәҗәсен үзгәртә аласыз, әмма каскадлы яклау үзгәрмәячәк.
+protect-default|Яклаусыз
+protect-fallback|«~{0}»нең рөхсәте кирәк
+protect-level-autoconfirmed|Яңа һәм теркәлмәгән кулланучыларны кысу
+protect-level-sysop|Идарәчеләр генә
+protect-summary-cascade|каскадлы
+protect-expiring|~{0} үтә (UTC)
+protect-expiry-indefinite|Вакыт чикләнмәгән
+protect-cascade|Бу биткә кергән битләрне яклау (каскадлы яклау)
+protect-cantedit|Сез бу битнең яклау дәрәҗәсене үзгәрә алмыйсыз, чөнки сездә аны үзгәртергә рөхсәтегез юк.
+protect-othertime|Башка вакыт:
+protect-othertime-op|башка вакыт
+protect-otherreason-op|Башка сәбәп
+protect-dropdown|* Гади яклау сәбәпләре\n** вандаллык\n** зур спам\n** кирәксез үзгәртүләр саны\n** популяр бит
+protect-edit-reasonlist|Сәбәпләр исемлеген үзгәртү
+protect-expiry-options|1 сәгать:1 hour,1 көн:1 day,1 атна:1 week,2 атна:2 weeks,1 ай:1 month,3 ай:3 months,6 ай:6 months,1 ел:1 year,вакытсыз:infinite
+restriction-type|Рөхсәт:
+restriction-level|Мөмкинлек дәрәҗәсе:
+minimum-size|Иң кечкенә зурлык
+maximum-size|Иң югары зурлык:
+pagesize|(байт)
+restriction-edit|Үзгәртү
+restriction-move|Күчерү
+restriction-create|Төзү
+restriction-upload|Йөкләү
+restriction-level-sysop|тулы яклау
+restriction-level-autoconfirmed|өлешчә яклау
+restriction-level-all|барлык дәрәҗәләр
+undelete|Бетерелгән битләрне карау
+undeletepage|Бетерелгән битләрне карау һәм торгызу
+viewdeletedpage|Бетерелгән битләрне карау
+undelete-fieldset-title|Юрамаларны кайтару
+undeletehistory|Бу битне торгызсагыз, аның үзгәртү тарихы да тулысынча торгызылачак.\nБетерелүдән соң шундый ук исемле бит төзелгән булса, торгызылган үзгәртүләр яңа үзгәртүләр алдына куелачак.
+undeletebtn|Торгызу
+undeletelink|карау/торгызу
+undeleteviewlink|карау
+undeleteinvert|Киресен сайлау
+undeletecomment|Сәбәп:
+undeletedrevisions|{{PLURAL:~{0}\u007C1=1 үзгәртү\u007C~{0} үзгәртү}} торгызылды
+undelete-search-submit|Эзләү
+undelete-error-long|Файлны торгызу вакытында хаталар чыкты:\n\n~{0}
+undelete-show-file-submit|Әйе
+namespace|Исемнәр мәйданы:
+invert|Киресен сайлау
+namespace_association|Бәйле тирәлек
+tooltip-namespace_association|Сайланган бәйле исемнәр тирәлегенә караган мәкаләләр исемлеген кабызу өчен элеге урынга тамганы куегыз
+contributions|{{GENDER:~{0}\u007CКулланучының}} кертеме
+contributions-title|~{0} исемле кулланучының кертеме
+mycontris|Кертем
+contribsub2|~{0} (~{1}) өчен
+uctop|(хәзерге)
+month|Айдан башлап (һәм элегрәк):
+year|Елдан башлап (һәм элегрәк):
+sp-contributions-newbies|Яңа хисап язмаларыннан ясалган кертемне генә карау
+sp-contributions-newbies-sub|Яңа хисап язмалары өчен
+sp-contributions-blocklog|тыю көндәлеге
+sp-contributions-uploads|йөкләүләр
+sp-contributions-logs|көндәлекләр
+sp-contributions-talk|бәхәс
+sp-contributions-search|Кертемне эзләү
+sp-contributions-username|Кулланучының IP адресы яки исеме:
+sp-contributions-toponly|Соңгы версия булган үзгәртүләрне генә күрсәтелсен
+sp-contributions-submit|Эзләү
+whatlinkshere|Бирегә нәрсә сылтый
+whatlinkshere-title|~{0} битенә сылтый торган битләр
+whatlinkshere-page|Бит:
+linkshere|'''[[:~{0}]]''' битенә чираттагы битләр сылтый:
+nolinkshere|'''[[:~{0}]]''' битенә башка битләр сылтамыйлар.
+isredirect|юнәлтү бите
+istemplate|кертүләр
+isimage|файл сылтамасы
+whatlinkshere-prev|{{PLURAL:~{0}\u007C1=алдагы\u007Cалдагы ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007C1=чираттагы\u007Cчираттагы ~{0}}}
+whatlinkshere-links|← сылтамалар
+whatlinkshere-hideredirs|юнәлтүләрне ~{0}
+whatlinkshere-hidetrans|кертүләрне ~{0}
+whatlinkshere-hidelinks|сылтамаларны ~{0}
+whatlinkshere-hideimages|~{0} файл сылтамалары
+whatlinkshere-filters|Фильтрлар
+blockip|Кулланучыны тыю
+blockip-legend|Кулланучыны тыю
+ipaddressorusername|IP адресы яки кулланучы исеме:
+ipbexpiry|Бетә:
+ipbreason|Сәбәп:
+ipbreason-dropdown|* Кысуның гадәттәге сәбәпләре\n** Ялган мәгълүмат кертү\n** Битләрнең эчтәлеген сөртү\n** Тышкы сайтларга спам-сылтамалар\n** Мәгънәсез текст/чүп өстәү\n** Кулланучыларны эзәрлекләү/янаулар\n** Берничә хисап язмасы белән исәпләшмәү\n** Кулланучы исеменең яраксыз булуы
+ipbenableautoblock|Кулланучы кулланган IP адресларын автоматик рәвештә тыю
+ipbsubmit|Бу кулланучыны тыю
+ipbother|Башка вакыт:
+ipboptions|2 сәгать:2 hours,1 көн:1 day,3 көн:3 days,1 атна:1 week,2 атна:2 weeks,1 ай:1 month,3ай:3 months,6 ай:6 months,1 ел:1 year,чикләнмәгән:infinite
+badipaddress|Ялгыш IP адресы
+blockipsuccesssub|Тыю башкарылган
+ipb-unblock-addr|~{0} кулланучысын тыюдан азат итү
+ipb-unblock|Кулланучы яки IP адресы тыюдан азат итү
+unblockip|Кулланучыны тыюдан азат итү
+ipusubmit|Бу тыюны туктату
+ipblocklist|Тыелган кулланучылар
+ipblocklist-submit|Эзләү
+infiniteblock|билгеле бер вакытсыз
+blocklink|тыю
+unblocklink|тыюдан азат итү
+change-blocklink|тыюны үзгәртү
+contribslink|кертем
+blocklogpage|Тыю көндәлеге
+blocklogentry|[[~{0}]] ~{1} вакытка тыелды ~{2}
+unblocklogentry|~{0} кулланучысының тыелу вакыты бетте
+block-log-flags-nocreate|яңа хисап язмасы теркәү тыелган
+block-log-flags-noemail|хат җибәрү тыелган
+block-log-flags-hiddenname|кулланучының исеме яшерелгән
+proxyblocker|Прокси тыю
+sorbsreason|Сезнең IP адресыгыз DNSBLда ачык прокси дип санала.
+unlockbtn|Мәгълүматлар базасына язу мөмкинлеген кайтару
+move-page|~{0} — исемен алмаштыру
+move-page-legend|Битне күчерү
+movepagetext|Астагы форманы куллану битнең исемен алыштырып, аның барлык тарихын яңа исемле биткә күчерер.\nИске исемле бит яңа исемле биткә юнәлтү булып калыр.\nСез иске исемгә юнәлтүләрне автоматик рәвештә яңа исемгә күчерә аласыз.\nӘгәр моны эшләмәсәгез, [[Special:DoubleRedirects\u007Cикеле]] һәм [[Special:BrokenRedirects\u007Cөзелгән юнәлтүләрне]] тикшерегез.\nСез барлык сылтамаларның кирәкле җиргә сылтавына җаваплы.\n\nКүздә тотыгыз: әгәр яңа исем урынында бит булса инде, һәм ул буш яки юнәлтү түгел исә, бит '''күчерелмәячәк'''.\nБу шуны аңлата: сез ялгышып күчерсәгез, битне кайтара аласыз, әмма инде булган битне бетерә алмыйсыз.\n\n'''Игътибар!'''\nПопуляр битләрне күчерү зур һәм көтелмәгән нәтиҗәләргә китерә ала.\nДәвам иткәнче, барлык нәтиҗәләрне аңлавыгызны тагын бер кат уйлагыз.
+movepagetalktext|Бу битнең бәхәс бите дә күчереләчәк, '''бу очраклардан тыш''':\n*Андый исемле буш булмаган бәхәс бите бар инде, яисә\n*Сез астагы флажокны куймагансыз.\n\nБу очракларда сезгә битләрне үз кулыгыз белән күчерергә яки кушарга туры килер.
+movearticle|Битне күчерү:
+movenotallowed|Сездә мәкаләләрне күчерү хокуклары юк.
+newtitle|Яңа башлам:
+move-watch|Бу битне күзәтү
+movepagebtn|Битне күчерү
+pagemovedsub|Бит күчерелде
+movepage-moved|'''«~{0}» бите «~{1}» битенә күчерелде'''
+movepage-moved-redirect|Юнәлтү ясалды.
+movepage-moved-noredirect|Юнәлтүне ясау тыелды
+articleexists|Мондый исемле бит бар инде, яисә мондый исем рөхсәт ителми.\nЗинһар башка исем сайлагыз.
+movetalk|Бәйләнешле бәхәс битен күчерү
+movelogpage|Күчерү көндәлеге
+movereason|Сәбәп:
+revertmove|кире кайту
+delete_and_move|Бетерү һәм исемен алмаштыру
+delete_and_move_reason|Күчерүне мөмкин итәр өчен бетерелде
+move-leave-redirect|Юнәлтү калдырылсын
+export|Битләрне чыгаруы
+export-submit|Экспортлау
+export-addcattext|Бу төркемнән битләр өстәү:
+export-addcat|Өстәү
+export-addns|Өстәү
+export-download|Файл буларак саклау
+allmessages|Система хәбәрләре
+allmessagesname|Исем
+allmessagesdefault|Баштан ук куелган текс
+allmessagestext|Бу исемлек MediaWiki исемнәр мәйданында булган система хәбәрләренең исемлеге.\nГомуми MediaWiki локализациясендә катнашырга теләсәгез, зинһар [https://www.mediawiki.org/wiki/Special:MyLanguage/Localisation MediaWiki Локализациясе] һәм [//translatewiki.net translatewiki.net] сәхифәләрне кулланыгыз.
+allmessages-filter-legend|Фильтр
+allmessages-filter-unmodified|Үзгәртелмәгән
+allmessages-filter-all|Барысы
+allmessages-filter-modified|Үзгәртелгән
+allmessages-language|Тел:
+allmessages-filter-submit|Күчү
+filemissing|Файл табылмады
+thumbnail_error|Кечкенә сүрәт төзүе хатасы: ~{0}
+import|Битләр кертү
+importinterwiki|Викиара кертү
+import-interwiki-text|Викины һәм кертелүче битнең исемен языгыз.\nҮзгәртүләр вакыты һәм аның авторлары сакланачак.\nБөтен викиара күчерүләр [[Special:Log/import\u007Cмахсус журналда]] сакланачак.
+import-interwiki-history|Бу битнең барлык үзгәртү тарихын күчермәләү
+import-interwiki-templates|Барлык үрнәкләрне кертү
+import-interwiki-submit|Импортлау
+import-interwiki-namespace|Исемнәр тирәлеге:
+import-upload-filename|Файл исеме:
+import-comment|Искәрмә:
+importtext|Зинһар өчен, битне күчерү өчен [[Special:Export\u007Cмахсус корал]] кулланыгыз. Файлны дискка саклагыз, аннан соң монда йөкләгез.
+importstart|Битләрне импортлау...
+import-revision-count|~{0} {{PLURAL:~{0}\u007Cюрама\u007Cюрама\u007Cюрама}}
+importnopages|Импортлау өчен битләр юк.
+importlogpage|Кертү көндәлеге
+tooltip-pt-userpage|Кулланучы битегез
+tooltip-pt-mytalk|Бәхәс битегез
+tooltip-pt-preferences|Көйләнмәләрегез
+tooltip-pt-watchlist|Сез күзәтелгән төзәтмәле битләр исемлеге
+tooltip-pt-mycontris|Сезнең кертеменгезне исемлеге
+tooltip-pt-login|Сез хисап язмасы төзи алыр идегез, әмма бу мәҗбүри түгел.
+tooltip-pt-logout|Чыгу
+tooltip-pt-createaccount|Сезгә аккаунт ясарга һәм системага керергә киңәш итәбез, әмма бу мәҗбүри түгел.
+tooltip-ca-talk|Битнең эчтәлеге турында бәхәс
+tooltip-ca-edit|Сез бу бит үзгәртә аласыз. Зинһар, саклаганчы карап алуны кулланыгыз.
+tooltip-ca-addsection|Яңа бүлек башлау
+tooltip-ca-viewsource|Бу бит үзгәртүдән якланган. Сез аның чыганак текстын гына карый аласыз.
+tooltip-ca-history|Битнең төзәтмәләр исемлеге
+tooltip-ca-protect|Бу битне яклау
+tooltip-ca-delete|Бу битне бетерү
+tooltip-ca-move|Бу битне күчерү
+tooltip-ca-watch|Бу битне сезнең күзәтү исемлегезгә өстәү
+tooltip-ca-unwatch|Бу битне сезнең күзәтү исемлегездә бетерү
+tooltip-search|{{SITENAME}} эчендә эзләү
+tooltip-search-go|Нәк шундый исеме белән биткә күчәрү
+tooltip-search-fulltext|Бу текст белән битләрне табу
+tooltip-p-logo|Баш бит
+tooltip-n-mainpage|Баш битне кереп чыгу
+tooltip-n-mainpage-description|Баш биткә күчү
+tooltip-n-portal|Проект турында, сез нәрсә итә аласыз һәм нәрсә кайда була дип турында.
+tooltip-n-currentevents|Агымдагы вакыйгалар турында мәгълүматны табу
+tooltip-n-recentchanges|Соңгы үзгәртүләр исемлеге
+tooltip-n-randompage|Очраклы битне карау
+tooltip-n-help|«{{SITENAME}}» проектының белешмәлек
+tooltip-t-whatlinkshere|Бирегә сылтаган барлык битләрнең исемлеге
+tooltip-t-recentchangeslinked|Бу биттән сылтаган битләрдә ахыргы үзгәртүләр
+tooltip-feed-rss|Бу бит өчен RSS трансляциясе
+tooltip-feed-atom|Бу бит өчен Atom трансляциясе
+tooltip-t-contributions|Кулланучы кертеменең исемлегене карау
+tooltip-t-emailuser|Бу кулланучыга хат җибәрү
+tooltip-t-upload|Файлларны йөкләү
+tooltip-t-specialpages|Барлык махсус битләр исемлеге
+tooltip-t-print|Бу битнең басма версиясе
+tooltip-t-permalink|Битнең бу юрамасына даими сылтама
+tooltip-ca-nstab-main|Мәкаләнең эчтәлеге
+tooltip-ca-nstab-user|Кулланучының шәхси бите
+tooltip-ca-nstab-media|Медиа-файл
+tooltip-ca-nstab-special|Бу махсус бит, сез аны үзгәртү алмыйсыз
+tooltip-ca-nstab-project|Проектның бите
+tooltip-ca-nstab-image|Сүрәтнең бите
+tooltip-ca-nstab-mediawiki|MediaWiki - хат бите
+tooltip-ca-nstab-template|Үрнәк бите
+tooltip-ca-nstab-help|Ярдәм битен карау
+tooltip-ca-nstab-category|Төркем битен карау
+tooltip-minoredit|Бу үзгәртүне кече дип билгелү
+tooltip-save|Үзгәртүләрегезне саклау
+tooltip-preview|Сезнең үзгәртүләрегезнең алдан каравы, саклаудан кадәр моны кулланыгыз әле!
+tooltip-diff|Сезнең үзгәртүләрегезне күрсәтү.
+tooltip-compareselectedversions|Бу битнең сайланган ике юрамасы арасында аерманы карау
+tooltip-watch|Бу битне күзәтү исемлегемә өстәү
+tooltip-recreate|Бу битне кире кайтару
+tooltip-upload|Йөкләүне башлау
+tooltip-rollback|"Кире кайтару" соңгы кулланучының бу биттә ясаган '''барлык''' үзгәртүләрен бетерә.
+tooltip-undo|Бу үзгәртүне алдан карап үткәрмәү. Шулай ук үткәрмәүнең сәбәбен язып була.
+tooltip-preferences-save|Көйләнмәләрегезне саклау
+tooltip-summary|Кыска исемен кертү
+common.css|/*  Монда урнаштырылган CSS башкаларында да урнашачак */
+anonymous|{{SITENAME}} сайтының аноним {{PLURAL:~{0}\u007C1=кулланучысы\u007Cкулланучылары}}
+siteuser|{{SITENAME}} кулланучысы ~{0}
+othercontribs|«~{0}» эшенә нигезләнә.
+siteusers|{{SITENAME}} {{PLURAL:~{1}\u007C1=кулланучысы\u007Cкулланучылары}} ~{0}
+creditspage|Рәхмәтләр
+spamprotectiontitle|Спам фильтры
+pageinfo-toolboxlink|Бит турында мәгълүмат
+markaspatrolledtext|Бу мәкаләне тикшерелгән дип тамгалау
+markedaspatrolled|Тикшерелгән дип тамгаланды
+markedaspatrolledtext|Сайланган [[:~{0}]] мәкаләсенең әлеге юрамасы тикшерелгән дип тамгаланды.
+patrol-log-page|Тикшерү көндәлеге
+patrol-log-header|Бу тикшерелгән битләрнең көндәлеге.
+log-show-hide-patrol|~{0} тикшерү көндәлеге
+deletedrevision|~{0} битенең иске юрамасы бетерелде
+filedeleteerror-short|Файлны бетерү хатасы: ~{0}
+filedeleteerror-long|Файлны бетерү вакытында хаталар чыкты:\n\n~{0}
+filedelete-missing|«~{0}» исемле файлны бетерергә мөмкин түгел, чөнки ул юк.
+previousdiff|← Алдагы үзгәртү
+nextdiff|Чираттагы үзгәртү →
+imagemaxsize|Рәсемнең зурлыгына чикләүләр:<br />''(тасвирлау бите өчен)''
+thumbsize|Рәсемнең кечерәйтелгән юрамасы өчен:
+widthheight|~{0} × ~{1}
+widthheightpage|~{0} × ~{1}, ~{2}{{PLURAL:~{0}\u007C1=бит\u007Cбитләр}}
+file-info|файл зурлыгы: ~{0}, MIME-тип: ~{1}
+file-info-size|~{0} × ~{1} нокта, файлның зурлыгы: ~{2}, MIME тибы: ~{3}
+file-nohires|Югары ачыклык белән юрама юк.
+svg-long-desc|SVG файлы, шартлы ~{0} × ~{1} нокта, файлның зурлыгы: ~{2}
+show-big-image|Тулы ачыклык
+show-big-image-size|~{0} × ~{1} пиксель
+newimages|Яңа сүрәтләр җыелмасы
+newimages-legend|Фильтр
+ilsubmit|Эзләү
+hours|{{PLURAL:~{0}\u007C~{0} cәгать\u007C~{0} cәгать}}
+hours-ago|~{0} cәгать элек
+minutes-ago|~{0} минут элек
+bad_image_list|Киләчәк рәвеш кирәк:\n\nИсемлек кисәкләре генә (* символыннан башланучы юллар) саналырлар.\nЮлның беренче сылтамасы куйма өчен тыелган рәсемгә сылтама булырга тиеш.\nШул ук юлның киләчәк сылтамалары чыгармалар, рәсемгә тыелмаган битләре, саналырлар.
+metadata|Мета мәгълүматлар
+metadata-help|Бу файлда гадәттә санлы камера яки сканер тарафыннан өстәлгән мәгълүмат бар. Әгәр бу файл төзү вакытыннан соң үзгәртелгән булса, аның кайбер параметрлары дөрес булмаска мөмкин.
+metadata-expand|Өстәмә мәгълүматларны күрсәтү
+metadata-collapse|Өстәмә мәгълүматларны яшерү
+metadata-fields|Бу исемлеккә кергән метабирелмәләр кырлары рәсем битендә күрсәтелер, калганнары исә килешү буенча яшерелер.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|Киңлек
+exif-imagelength|Биеклек
+exif-imagedescription|Рәсемнең исеме
+exif-make|Камераның җитештерүчесе
+exif-model|Камераның төре
+exif-software|Программалы тәэмин ителеш
+exif-artist|Автор
+exif-copyright|Автор хокуклары хуҗасы
+exif-exifversion|Exif версиясе
+exif-flashpixversion|FlashPix юрамасын тәэмин итү
+exif-colorspace|Төсләр тирәлеге
+exif-componentsconfiguration|Төсләр төзелешенең конфигурациясе
+exif-compressedbitsperpixel|Кысылудан соң төснең тирәнлеге
+exif-pixelydimension|Рәсемнең киңлеге
+exif-pixelxdimension|Рәсемнең биеклеге
+exif-usercomment|Өстәмә җавап
+exif-relatedsoundfile|Тавыш файлы җавабы
+exif-datetimeoriginal|Чын вакыты
+exif-datetimedigitized|Санлаштыру вакыты
+exif-subsectime|Файлны үзгәртүнең өлешле секунд вакыты
+exif-subsectimeoriginal|Чын ясалу вакытының өлеш секунды
+exif-subsectimedigitized|Санлаштыру вакытының өлеш секунды
+exif-exposuretime|Экспозиция вакыты
+exif-exposuretime-format|~{0} с (~{1})
+exif-fnumber|Диафрагманың саны
+exif-fnumber-format|f/~{0}
+exif-exposureprogram|Экспозиция программасы
+exif-spectralsensitivity|Спектраль сизүчәнлек
+exif-isospeedratings|ISO яктылык сизүчәнлеге
+exif-shutterspeedvalue|APEX саклау
+exif-aperturevalue|APEX диафрагма
+exif-brightnessvalue|APEX яктылык
+exif-exposurebiasvalue|Экспозиция компенсациясе
+exif-maxaperturevalue|Диафрагманың минималь саны
+exif-subjectdistance|Җисемгә кадәр ераклык
+exif-meteringmode|Экспозицияне үлчәү режимы
+exif-lightsource|Яктылык чыганагы
+exif-flash|Яктылык статусы
+exif-focallength|Фокус ераклыгы
+exif-focallength-format|~{0} мм
+exif-subjectarea|Төшерү җисеменең урнашуы һәм мәйданы
+exif-flashenergy|Яктылык энергиясе
+exif-focalplanexresolution|X фокаль яссылык киңәйтелүе
+exif-focalplaneyresolution|Y фокаль яссылык киңәйтелүе
+exif-focalplaneresolutionunit|Фокаль яссылык киңәйтелүен исәпләү берәмлеге
+exif-subjectlocation|Җисемнең сул якка карата торышы
+exif-exposureindex|Экспозиция саны
+exif-sensingmethod|Сенсор төре
+exif-filesource|Файлның чыганагы
+exif-scenetype|Тирәлекнең төре
+exif-customrendered|Өстәмә үзгәртү
+exif-exposuremode|Экспозиция сайлау режимы
+exif-whitebalance|Ак төснең балансы
+exif-digitalzoomratio|Санлы зурайту коэффициенты
+exif-focallengthin35mmfilm|Эквивалентлы фокус ераклыгы (35 мм тасма өчен)
+exif-scenecapturetype|Төшерү вакытындагы тирәлек төре
+exif-gaincontrol|Яктылыкны арттыру
+exif-contrast|Караңгылык
+exif-saturation|Төрлелеге
+exif-sharpness|Ачыклыгы
+exif-devicesettingdescription|Камераның көйләүләр тасвирламасы
+exif-subjectdistancerange|Төшерү җисеменә кадәр ераклык
+exif-imageuniqueid|Рәсемнең саны (ID)
+exif-gpsversionid|GPS мәгълүматы блогының версиясе
+exif-gpslatituderef|Киңлек индексы
+exif-gpslatitude|Киңлек
+exif-gpslongituderef|Озынлык индексы
+exif-gpslongitude|Озынлык
+exif-gpsaltituderef|Биеклек индексы
+exif-gpsaltitude|Биеклек
+exif-gpstimestamp|UTC буенча вакыт
+exif-gpssatellites|Кулланылган иярченнәр тасвирламасы
+exif-gpsstatus|Алгычның статусы һәм төшерү вакыты
+exif-gpsmeasuremode|Урнашуны билгеләү ысулы
+exif-gpsdop|Билгеләүнең дөреслеге
+exif-gpsspeedref|Тизлекне исәпләү берәмлеге
+exif-gpsspeed|Хәрәкәт тизлеге
+exif-gpsdatestamp|Дата
+exif-orientation-1|Нормаль
+exif-orientation-3|180° ка борылган
+exif-meteringmode-0|Билгесез
+exif-meteringmode-3|Нокталы
+exif-meteringmode-4|Мультинокталы
+exif-meteringmode-255|Башка
+exif-lightsource-0|Билгесез
+exif-lightsource-4|Яктылык
+exif-lightsource-9|Яхшы һава торышы
+exif-lightsource-11|Күләгә
+exif-sensingmethod-1|Билгесез
+exif-scenecapturetype-0|Стандарт
+exif-scenecapturetype-1|Ландшафт
+exif-scenecapturetype-2|Портрет
+exif-scenecapturetype-3|Төнге төшерү
+exif-gaincontrol-0|Юк
+exif-gaincontrol-1|Аз зурайту
+exif-gaincontrol-2|Күпләп зурайту
+exif-gaincontrol-3|Аз кечерәйтү
+exif-gaincontrol-4|Күпләп кечерәйтү
+exif-contrast-0|Нормаль
+exif-contrast-1|Аз гына күтәрү
+exif-contrast-2|Күп иттереп күтәрү
+exif-saturation-0|Нормаль
+exif-saturation-1|Аз гына туендырылу
+exif-saturation-2|Күп иттереп туендырылу
+exif-sharpness-0|Нормаль
+exif-sharpness-1|Аз гына күтәрү
+exif-sharpness-2|Күп иттереп күтәрү
+exif-subjectdistancerange-0|Билгесез
+exif-subjectdistancerange-1|Макротөшерү
+exif-subjectdistancerange-2|Якыннан төшерү
+exif-subjectdistancerange-3|Ерактан төшерү
+exif-gpslatitude-n|төньяк киңлек
+exif-gpslatitude-s|көньяк киңлек
+exif-gpslongitude-e|көнчыгыш озынлык
+exif-gpslongitude-w|көнбатыш озынлык
+exif-gpsstatus-a|Үлчәү тәмамланмаган
+exif-gpsstatus-v|Мәгълүматларны җибәрүгә әзер
+exif-gpsspeed-k|км/сәг
+exif-gpsspeed-m|миля/сәг
+namespacesall|барлык
+monthsall|барлык
+recreate|Яңадан ясау
+confirm_purge_button|OK
+confirm-purge-top|Бу битнең кэшы чистартылсынмы?
+confirm-purge-bottom|Кэшны чистартудан соң аның соңгы юрамасы күрсәтеләчәк.
+imgmultipageprev|← алдагы бит
+imgmultipagenext|алдагы бит →
+imgmultigo|Күчү!
+imgmultigoto|~{0} битенә күчү
+ascending_abbrev|үсү
+descending_abbrev|кимү
+table_pager_next|Киләсе бит
+table_pager_prev|Алдагы бит
+table_pager_first|Беренче бит
+table_pager_last|Ахыргы бит
+table_pager_limit_submit|Башкару
+table_pager_empty|Нәтиҗә юк
+autoredircomment|[[~{0}]] битенә юнәлтү
+autosumm-new|Яңа бит: «~{0}»
+watchlistedit-raw-titles|Язмалар:
+watchlisttools-view|Соңгы үзгәртүләрне күрсәтү
+watchlisttools-edit|Күзәтү исемлегене карау һәм үзгәртү
+watchlisttools-raw|Текст сыман үзгәртү
+hijri-calendar-m1|Мөхәррәм
+hijri-calendar-m7|Раҗәб
+hijri-calendar-m9|Рамазан
+signature|[[{{ns:user}}:~{0}\u007C~{1}]] ([[{{ns:user_talk}}:~{0}\u007Cбәхәс]])
+duplicate-defaultsort|Игътибар. Уйланма куелган "~{1}" бүлгәләү ачкычы элеккеге уйланма куелган "~{0}" бүлгәләү ачкычын үзгәртә.
+version|Юрама
+version-extensions|Куелган киңәйтүләр
+version-specialpages|Махсус битләр
+version-other|Башка
+version-hook-subscribedby|Түбәндәгеләргә язылган:
+version-license|Лицензия
+version-software|Урнаштырылган программа белән тәэмин ителешне
+version-software-product|Продукт
+version-software-version|Версия
+fileduplicatesearch|Бер үк файлларны эзләү
+fileduplicatesearch-submit|Эзләү
+specialpages|Махсус битләр
+specialpages-note|* Гади махсус битләр.\n* <strong class="mw-specialpagerestricted">Чикләнелгән махсус битләр.</strong>\n* <span class="mw-specialpagecached">Кешланган махсус битләр.</span>
+specialpages-group-maintenance|Техник карау хисапнамәсе
+specialpages-group-other|Башка махсус битләр
+specialpages-group-login|Керү / теркәлү
+specialpages-group-changes|Соңгы үзгәртүләр
+specialpages-group-media|Йөкләү һәм медиа-файллар хисапнамәсе
+specialpages-group-users|Кулланучылар һәм аларның хокуклары
+specialpages-group-highuse|Еш кулланылучы битләр
+specialpages-group-pages|Битләр исемлеге
+specialpages-group-pagetools|Бит өчен җиһазлар
+specialpages-group-wiki|Вики-мәгълүмат һәм җиһазлар
+specialpages-group-redirects|Күчерелүче махсус битләр
+specialpages-group-spam|Спамга каршы кораллар
+blankpage|Буш бит
+intentionallyblankpage|Бу бит махсус буш калдырылган
+external_image_whitelist|#Бу юлны ничек бар, шулаө калдырыгыз<pre>\n#Монда даими фразаларның фрагментларын куегыз (// арасында торган өлешен)\n#алар тышкы сурәтләрнең URL белән бәйләнерләр.\n#Туры килгәннәре сурәт буларак, туры килмәгәннәре сурәткә сылтама буларак күрсәтеләчәкләр.\n# # билгесе белән башланучы юллар шәрехнамә дип саналалар.\n#Юллар регистрга игътибар бирмиләр.\n\n#Даими фразаларның фрагментларын бу кыр өстендә куегыз. Бу кырны ничек бар, шулай калдырыгыз.</pre>
+tags|Гамәлдә булучы үзгәртүләр билгеләре
+tag-filter|[[Special:Tags\u007CTag]] фильтры:
+tag-filter-submit|Фильтрлау
+tags-title|Теглар
+tags-intro|Әлеге сәхифәдә төзәтүләрне билгеләгән, программа тәэмин итә торган теглар исемлеге һәм шул тегларның аңламнары китерелгән.
+tags-tag|Тег исеме
+tags-edit|үзгәртү
+comparepages|Битләрне чагыштыру
+compare-page1|Беренче сәхифә
+compare-page2|Икенче сәхифә
+compare-rev1|Беренче юрама
+compare-rev2|Икенче юрама
+compare-submit|Чагыштыр
+dberr-problems|Гафу итегез! Сайтта техник кыенлыклар чыкты.
+dberr-again|Сәхифәне берничә минуттан соң яңартып карагыз.
+dberr-info|(Мәгълүматлар базасы серверы белән тоташырга мөмкин түгел: ~{0})
+htmlform-submit|Җибәрү
+htmlform-reset|Үзгәртүләрне кире кайтару
+htmlform-selectorother-other|Башка
+revdelete-content-hid|эчтәлек яшерелгән
+revdelete-summary-hid|төзәтмәнең тасвирламасы яшерелгән
+revdelete-uname-hid|кулланучының исеме яшерелгән
+revdelete-content-unhid|эчтәлек ачылган
+revdelete-summary-unhid|төзәтмәнең тасвирламасы ачылган
+revdelete-uname-unhid|кулланучының исеме ачылган
+revdelete-restricted|чикләүләр идарәчеләргә дә кулланыла
+revdelete-unrestricted|чикләүләр идарәчеләр өчен бетерелгән
+logentry-move-move|~{0} {{GENDER:~{1}\u007Cитеп күчерде}} ~{2} сәхифәсен ~{3}
+logentry-move-move-noredirect|~{0} ~{2} сәхифәсен ~{3} итеп үзгәртте һәм юнәлтүне калдырмады
+logentry-move-move_redir|~{0} ~{2} сәхифәсен ~{3} юнәлтү аша үзгәртте
+logentry-move-move_redir-noredirect|~{0} ~{2} сәхифәсен ~{3} юнәлтү аша үзгәртте һәм юнәлтүне калдырмады
+logentry-patrol-patrol|~{0} ~{2} мәкаләсенең  ~{3} санлы версиясен тикшерде
+logentry-patrol-patrol-auto|~{0} ~{2} мәкаләсенең ~{3} санлы версиясен автоматик рәвештә тикшерде
+logentry-newusers-newusers|~{0} кулланучының хисап язмасын төзеде
+logentry-newusers-create|~{0} хисап язмасы төзеде
+logentry-newusers-create2|~{0} ~{2} кулланучы хисап язмасын төзеде
+logentry-newusers-autocreate|Автоматик рәвештә ~{0} хисап язмасы төзелде.
+logentry-upload-upload|~{0} {{GENDER:~{1}\u007Cйөкләде}} ~{2}
+rightsnone|(юк)
+revdelete-summary|үзгәртүләр тасвирламасы
+feedback-adding|Фикерне сәхифәгә өстәү ...
+feedback-bugnew|Мин тикшердем. Яңа хата турында хәбәр итү
+feedback-bugornote|Әгәр дә сез техник проблеманы җентекләп тасвирларга әзер икәнсез, зинһар өчен, [~{0} хата турында хәбәр итегез].\nБашка очракта сез түбәндәге гади форманы куллана аласыз. Сезнең шәрехләмә "[~{2} ~{1}]" сәхифәсенә сезнең кулланучы исеме һәм сез кулланган браузер исеме белән бергә өстәләчәк.
+feedback-cancel|Баш тарту
+feedback-close|Әзер
+feedback-error1|Хата. APIдан билгесез нәтиҗә
+feedback-error2|Хата: төзәтү уңышсыз килеп чыкты
+feedback-error3|Хата: APIдан җавап юк.
+feedback-message|Хәбәр:
+feedback-subject|Тема:
+feedback-submit|Җибәрү
+feedback-thanks|Рәхмәт! Сезнең фикер "[~{1} ~{0}]" сәхифәсенә куелды.
+searchsuggest-search|Эзләү
+searchsuggest-containing|эчтәлек...
+api-error-badaccess-groups|Сезгә бу викигә файллар өстәү рөхсәт ителмәгән
+api-error-badtoken|Эчке хата: дөрес булмаган токен.
+api-error-copyuploaddisabled|URL-адрес буенча йөкләү бу серверда сүндерелгән.
+api-error-duplicate|Мондый эчтәлекле {{PLURAL:~{0}\u007C[~{1} башка файл]}} да бар.
+api-error-duplicate-archive|Элек сайтта мондый эчтәлекле {{PLURAL:~{0}\u007C[~{1} башка файл]}} бар иде инде, ләкин {{PLURAL:~{0}\u007C1=аны бетерделәр\u007Cаларны бетерделәр}}.
+api-error-duplicate-archive-popup-title|Кайчандыр бетерелгән {{PLURAL:~{0}\u007C1=файлның\u007Cфайлларның}} дубликатлары.
+api-error-duplicate-popup-title|{{PLURAL:~{0}\u007Cфайлның}} дубликаты
+api-error-empty-file|Сезнең тарафтан җибәрелгән файл буш.
+api-error-emptypage|Яңа буш сәхифәләр төзү рөхсәт ителми
+api-error-unknown-code|Билгесез хата: "~{0}"
+api-error-unknown-error|Эчке хата: файлны йөкләргә тырышканда нәрсәдер ялгыш китте.
+api-error-unknown-warning|Билгесез кисәтү: ~{0}
+api-error-unknownerror|Билгесез хата: "~{0}".
+api-error-uploaddisabled|Бу викидә файллар йөкләү мөмкинлеге сүндерелгән.
+api-error-verification-error|Бәлки, бу файл бозылгандыр яки дөрес түгел киңәйтелмәгә ия.
+expandtemplates|Үрнәкләрне ачу
+expand_templates_ok|OK
+special-characters-group-latin|Латин
+special-characters-group-latinextended|Латин (киңәйтелгән)
+special-characters-group-ipa|ХФӘ (IPA)
+special-characters-group-symbols|Тамгалар
+special-characters-group-greek|Грек
+special-characters-group-cyrillic|Кирилл
+special-characters-group-arabic|Гарәп
+special-characters-group-persian|Фарсы
+special-characters-group-hebrew|Яхүд
+special-characters-group-bangla|Бенгаль
+special-characters-group-telugu|Телугу
+special-characters-group-sinhala|Сингаль
+special-characters-group-gujarati|Гуҗарати
+special-characters-group-thai|Таиланд
+special-characters-group-lao|Лаос
+special-characters-group-khmer|Кһмер
+contactpage|Элемтә бите
+contactpage-desc|[[Special:Contact\u007CКараучылар өчен форма]]
+contactpage-title|Элемтә
+contactpage-pagetext|Зинһар, астагы форманы безнең белән элемтәгә керү өчен кулланыгыз.
+contactpage-legend|Хат җибәрү
+contactpage-defsubject|Хат
+contactpage-subject-and-sender|~{0} (~{1} башлап)
+contactpage-subject-and-sender-withip|~{0} (~{1}  ~{2} юлламасыннан)
+contactpage-fromname|Сезнең исемегез: *
+contactpage-fromaddress|Сезнең эл. почта юлламагыз: **
+contactpage-formfootnotes|* мәҗбүри түгел<br />\n** мәҗбүри түгел, ләкин сезгә җавап бирү өчен кирәк
+contactpage-includeip|Минем IP-юлламаны бу хат белән җибәрергә.
+wikibase-label-empty|Исем (лейбл) әле куелмаган
+wikibase-statementview-rank-normal|Нормаль ранг
+']:>
+).lang
+;

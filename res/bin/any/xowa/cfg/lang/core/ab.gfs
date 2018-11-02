@@ -1,0 +1,244 @@
+this
+.fallback_load('ru')
+.ns_names
+  .load_text(
+<:['
+-2|Амедиа
+-1|Цастәи
+1|Ахцәажәара
+2|Алахәыла
+3|Алахәыла ахцәажәара
+5|$1 ахцәажәара
+6|Афаил
+7|Афаил ахцәажәара
+8|Амедиавики
+9|Амедиавики ахцәажәара
+10|Ашаблон
+11|Ашаблон ахцәажәара
+12|Ацхыраара
+13|Ацхыраара ахцәажәара
+14|Акатегориа
+15|Акатегориа ахцәажәара
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+2|Иалахә
+-2|Медиа
+-1|Служебная
+1|Обсуждение
+2|Участник
+3|Обсуждение участника
+5|Обсуждение $1
+6|Файл
+7|Обсуждение файла
+8|MediaWiki
+9|Обсуждение MediaWiki
+10|Шаблон
+11|Обсуждение шаблона
+12|Справка
+13|Обсуждение справки
+14|Категория
+15|Обсуждение категории
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Categories|Акатегориақәа
+Mycontributions|Архиарақәа
+Mypage|Садаҟьа
+Mytalk|Сахцәажәара
+Newimages|АфаилқәаҾыц
+Newpages|АдаҟьақәаҾыц
+Randompage|Машәырлатәи
+Recentchanges|АрҽеираҾыцқәа
+Search|Аҧшаара
+Specialpages|ЦастәиАдаҟьақәа
+Upload|Аҭагалара
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+language|0|#АБЫЗШӘА~#ЯЗЫК~#LANGUAGE~
+special|0|#цастәи~#служебная~#special~
+tag|0|#tag~
+index|1|__АИНДЕКС__~__ИНДЕКС__~__INDEX__~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|амҽыш
+monday|ашәахь
+tuesday|аҩаш
+wednesday|ахаш
+thursday|аҧшьаш
+friday|ахәуаш
+saturday|асабш
+january|ажьырныҳәа
+february|жәабран
+march|хәажәкыр
+april|мшаҧы
+may_long|лаҵара
+june|рашәара
+july|ҧхынгәы
+august|нанҳәа
+september|цәыббра
+october|жьҭаара
+november|абҵара
+december|ҧхынҷкәын
+january-gen|ажьырныҳәа
+february-gen|жәабран
+march-gen|хәажәкыра
+april-gen|мшаҧы
+may-gen|лаҵара
+june-gen|рашәара
+july-gen|ҧхынгәы
+august-gen|нанҳәа
+september-gen|цәыббра
+october-gen|жьҭаара
+november-gen|абҵара
+december-gen|ҧхынҷкәын
+jan|ажь
+feb|жәа
+mar|хәа
+apr|мша
+may|лаҵ
+jun|раш
+jul|ҧхг
+aug|нан
+sep|цәы
+oct|жьҭ
+nov|абҵ
+dec|ҧхҷ
+lastmodifiedat|Ацыхәтәантәи аҧсахрақәа абри адаҟьа аҟны: ~{1}, ~{0}.
+otherlanguages|Абызшәақәа
+pagecategories|{{PLURAL:~{0}\u007C1=Акатегориа\u007CАкатегориақәа}}
+wikieditor-toolbar-characters-page-latin|Алаҭын
+wikieditor-toolbar-characters-page-greek|Аберзентә
+wikieditor-toolbar-characters-page-cyrillic|Акирилица
+wikieditor-toolbar-characters-page-arabic|Араҧтә
+wikieditor-toolbar-section-help|Ацхыраара
+wikieditor-toolbar-help-page-file|Афаилқәа
+wikieditor-toolbar-help-page-discussion|Ахцәажәара
+wikieditor-toolbar-help-content-signature-result|<a href='#' title='Special:MyPage'> Алахәыла ахьʒ</a> (<a href='#' title='Special:MyTalk'> ахцәажәара </a>)
+sitesupport|Ацхыраара зылшо
+article|Адаҟьа
+mytalk|Сахцәажәара
+navigation|Анавигациа
+qbfind|Аҧшаара
+qbedit|Ариашара
+qbpageoptions|Ари адаҟьа
+help|Ацхыраара
+search|Аҧшаара
+searchbutton|Аҧшаара
+searcharticle|Адаҟьа
+history|Аҭоурых
+history_short|Аҭоурых
+printableversion|Акьыҧхьразы аверсиа
+permalink|Еисымшатәи ахьарҧш
+edit|Ариашамҭа
+create|Арҿиара
+create-this-page|Ариашара ари адаҟьа
+newpage|Адаҟьа Ҿыц
+talkpagelinktext|Ахцәажәара
+specialpage|Цастәи адаҟьа
+talk|Ахцәажәара
+toolbox|Амаҵыругақәа
+jumptonavigation|Анавигациа
+jumptosearch|Аҧшаара
+aboutsite|{{SITENAME}} иазкны
+currentevents|Ииасуа ахҭысқәа
+mainpage|Ихадоу Адаҟьа
+mainpage-description|Ихадоу адаҟьа
+privacy|Аконфиденциалтә аполитика
+privacypage|Project: Аконфиденциалтә аполитика
+youhavenewmessages|Уара ~{0} уауит (~{1}).
+editsection|ариашамҭа
+editold|ариашара
+editlink|ариашара
+nstab-main|Адаҟьа
+nstab-user|Алахәыла
+nstab-special|Цастәи адаҟьа
+nstab-image|Афаил
+nstab-template|Ашаблон
+nstab-help|Ацхыраара
+nstab-category|Акатегориа
+viewsource|Ахәаҧшра
+login|Урдырра
+nav-login-createaccount|Урдырра / Арегистрациара
+userlogin|Урдырра/Арегистрациара
+logout|Асеанс дәылҵра
+userlogout|Асеанс дәылҵра
+loginlanguagelabel|Абызшәа: ~{0}
+summary|Описание изменений:
+savearticle|Адаҟьа ахьчара
+editing|Ариашамҭа: ~{0}
+searchresults-title|Аҧшаара «~{0}»
+preferences|Архиарақәа
+mypreferences|Архиарақәа
+searchresultshead|Аҧшаара
+yourlanguage|Абызшәа:
+prefs-signature|Анапынҵамҭа
+group-user|Алахәылацәа
+group-user-member|{{GENDER:~{0}\u007Cалахәыла}}
+grouppage-sysop|{{ns:project}}:Администраторцәа
+recentchanges|Арҽеира ҿыцқәа
+recentchanges-legend-newpage|~{0} — адаҟьа ҿыц
+newpageletter|Ҿ
+recentchangeslinked|Еимадоу ариашарақәа
+recentchangeslinked-feed|Еимадоу ариашарақәа
+recentchangeslinked-toolbox|Еимадоу ариашарақәа
+upload|Афаил аҭагалара
+filehist-user|Алахәыла
+randompage|Машәырлатәи аҩымҭа
+brokenredirects-edit|ариашамҭа
+newpages-username|Алахәыла:
+move|Ахьӡ аҧсахра
+movethispage|Ахьӡ аҧсахра ари адаҟьа
+specialloguserlabel|Алахәыла:
+linksearch-ok|Аҧшаара
+watchlist|Ашклаҧшра асна
+mywatchlist|Ашклаҧшра асна
+restriction-edit|Ариашамҭа
+mycontris|Салагала
+contribsub2|Алагала ~{0} (~{1})
+sp-contributions-talk|ахцәажәара
+sp-contributions-submit|Аҧшаара
+whatlinkshere|Арахьтәи ахьарҧшқәа
+whatlinkshere-page|Адаҟьа:
+contribslink|алагала
+movearticle|Ахьӡ аҧсахра:
+allmessages-language|Абызшәа:
+ilsubmit|Аҧшаара
+namespacesall|зегьы
+monthsall|зегьы
+fileduplicatesearch-submit|Аҧшаара
+specialpages|Цастәи адаҟьақәа
+specialpages-group-login|Урдырра / Арегистрациара
+']:>
+).lang
+;

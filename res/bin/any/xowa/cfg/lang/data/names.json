@@ -1,0 +1,2527 @@
+[
+  {
+    "code":"aa"
+  , "name":"Qafár af"
+  , "note":"Afar"
+  }
+,
+  {
+    "code":"ab"
+  , "name":"Аҧсшәа"
+  , "note":"Abkhaz"
+  }
+,
+  {
+    "code":"ace"
+  , "name":"Acèh"
+  , "note":"Aceh"
+  }
+,
+  {
+    "code":"ady"
+  , "name":"адыгабзэ"
+  , "note":"Adyghe"
+  }
+,
+  {
+    "code":"ady-cyrl"
+  , "name":"адыгабзэ"
+  , "note":"Adyghe"
+  }
+,
+  {
+    "code":"aeb"
+  , "name":"تونسي/Tûnsî"
+  , "note":"Tunisian Arabic (multiple scripts - defaults to Arabic)"
+  }
+,
+  {
+    "code":"aeb-arab"
+  , "name":"تونسي"
+  , "note":"Tunisian Arabic (Arabic Script)"
+  }
+,
+  {
+    "code":"aeb-latn"
+  , "name":"Tûnsî"
+  , "note":"Tunisian Arabic (Latin Script)"
+  }
+,
+  {
+    "code":"af"
+  , "name":"Afrikaans"
+  , "note":"Afrikaans"
+  }
+,
+  {
+    "code":"ak"
+  , "name":"Akan"
+  , "note":"Akan"
+  }
+,
+  {
+    "code":"aln"
+  , "name":"Gegë"
+  , "note":"Gheg Albanian"
+  }
+,
+  {
+    "code":"als"
+  , "name":"Alemannisch"
+  , "note":"Alemannic -- not a valid code, for compatibility. See gsw."
+  }
+,
+  {
+    "code":"am"
+  , "name":"አማርኛ"
+  , "note":"Amharic"
+  }
+,
+  {
+    "code":"an"
+  , "name":"aragonés"
+  , "note":"Aragonese"
+  }
+,
+  {
+    "code":"ang"
+  , "name":"Ænglisc"
+  , "note":"Old English, bug 23283"
+  }
+,
+  {
+    "code":"anp"
+  , "name":"अङ्गिका"
+  , "note":"Angika"
+  }
+,
+  {
+    "code":"ar"
+  , "name":"العربية"
+  , "note":"Arabic"
+  }
+,
+  {
+    "code":"arc"
+  , "name":"ܐܪܡܝܐ"
+  , "note":"Aramaic"
+  }
+,
+  {
+    "code":"arn"
+  , "name":"mapudungun"
+  , "note":"Mapuche, Mapudungu, Araucanian (Araucano)"
+  }
+,
+  {
+    "code":"arq"
+  , "name":"جازايرية"
+  , "note":"Algerian Spoken Arabic"
+  }
+,
+  {
+    "code":"ary"
+  , "name":"Maġribi"
+  , "note":"Moroccan Spoken Arabic"
+  }
+,
+  {
+    "code":"arz"
+  , "name":"مصرى"
+  , "note":"Egyptian Spoken Arabic"
+  }
+,
+  {
+    "code":"as"
+  , "name":"অসমীয়া"
+  , "note":"Assamese"
+  }
+,
+  {
+    "code":"ase"
+  , "name":"American sign language"
+  , "note":"American sign language"
+  }
+,
+  {
+    "code":"ast"
+  , "name":"asturianu"
+  , "note":"Asturian"
+  }
+,
+  {
+    "code":"av"
+  , "name":"авар"
+  , "note":"Avar"
+  }
+,
+  {
+    "code":"avk"
+  , "name":"Kotava"
+  , "note":"Kotava"
+  }
+,
+  {
+    "code":"awa"
+  , "name":"अवधी"
+  , "note":"Awadhi"
+  }
+,
+  {
+    "code":"ay"
+  , "name":"Aymar aru"
+  , "note":"Aymara"
+  }
+,
+  {
+    "code":"az"
+  , "name":"azərbaycanca"
+  , "note":"Azerbaijani"
+  }
+,
+  {
+    "code":"azb"
+  , "name":"تۆرکجه"
+  , "note":"South Azerbaijani"
+  }
+,
+  {
+    "code":"ba"
+  , "name":"башҡортса"
+  , "note":"Bashkir"
+  }
+,
+  {
+    "code":"ban"
+  , "name":"Basa Bali"
+  , "note":"Balinese"
+  }
+,
+  {
+    "code":"bar"
+  , "name":"Boarisch"
+  , "note":"Bavarian (Austro-Bavarian and South Tyrolean)"
+  }
+,
+  {
+    "code":"bat-smg"
+  , "name":"žemaitėška"
+  , "note":"Samogitian (deprecated code, 'sgs' in ISO 693-3 since 2010-06-30 )"
+  }
+,
+  {
+    "code":"bbc"
+  , "name":"Batak Toba"
+  , "note":"Batak Toba (falls back to bbc-latn)"
+  }
+,
+  {
+    "code":"bbc-latn"
+  , "name":"Batak Toba"
+  , "note":"Batak Toba"
+  }
+,
+  {
+    "code":"bcc"
+  , "name":"جهلسری بلوچی"
+  , "note":"Southern Balochi"
+  }
+,
+  {
+    "code":"bcl"
+  , "name":"Bikol Central"
+  , "note":"Bikol: Central Bicolano language"
+  }
+,
+  {
+    "code":"be"
+  , "name":"беларуская"
+  , "note":"Belarusian normative"
+  }
+,
+  {
+    "code":"be-tarask"
+  , "name":"беларуская (тарашкевіца)\xE2\x80\x8E"
+  , "note":"Belarusian in Taraskievica orthography"
+  }
+,
+  {
+    "code":"be-x-old"
+  , "name":"беларуская (тарашкевіца)\xE2\x80\x8E"
+  , "note":"(be-tarask compat)"
+  }
+,
+  {
+    "code":"bg"
+  , "name":"български"
+  , "note":"Bulgarian"
+  }
+,
+  {
+    "code":"bgn"
+  , "name":"روچ کپتین بلوچی"
+  , "note":"Western Balochi"
+  }
+,
+  {
+    "code":"bh"
+  , "name":"भोजपुरी"
+  , "note":"Bihari macro language. Falls back to Bhojpuri (bho)"
+  }
+,
+  {
+    "code":"bho"
+  , "name":"भोजपुरी"
+  , "note":"Bhojpuri"
+  }
+,
+  {
+    "code":"bi"
+  , "name":"Bislama"
+  , "note":"Bislama"
+  }
+,
+  {
+    "code":"bjn"
+  , "name":"Bahasa Banjar"
+  , "note":"Banjarese"
+  }
+,
+  {
+    "code":"bm"
+  , "name":"bamanankan"
+  , "note":"Bambara"
+  }
+,
+  {
+    "code":"bn"
+  , "name":"বাংলা"
+  , "note":"Bengali"
+  }
+,
+  {
+    "code":"bo"
+  , "name":"བོད་ཡིག"
+  , "note":"Tibetan"
+  }
+,
+  {
+    "code":"bpy"
+  , "name":"বিষ্ণুপ্রিয়া মণিপুরী"
+  , "note":"Bishnupriya Manipuri"
+  }
+,
+  {
+    "code":"bqi"
+  , "name":"بختیاری"
+  , "note":"Bakthiari"
+  }
+,
+  {
+    "code":"br"
+  , "name":"brezhoneg"
+  , "note":"Breton"
+  }
+,
+  {
+    "code":"brh"
+  , "name":"Bráhuí"
+  , "note":"Brahui"
+  }
+,
+  {
+    "code":"bs"
+  , "name":"bosanski"
+  , "note":"Bosnian"
+  }
+,
+  {
+    "code":"bto"
+  , "name":"Iriga Bicolano"
+  , "note":"Rinconada Bikol"
+  }
+,
+  {
+    "code":"bug"
+  , "name":"ᨅᨔ ᨕᨘᨁᨗ"
+  , "note":"Buginese"
+  }
+,
+  {
+    "code":"bxr"
+  , "name":"буряад"
+  , "note":"Buryat (Russia)"
+  }
+,
+  {
+    "code":"ca"
+  , "name":"català"
+  , "note":"Catalan"
+  }
+,
+  {
+    "code":"cbk-zam"
+  , "name":"Chavacano de Zamboanga"
+  , "note":"Zamboanga Chavacano"
+  }
+,
+  {
+    "code":"cdo"
+  , "name":"Mìng-dĕ̤ng-ngṳ̄"
+  , "note":"Min Dong"
+  }
+,
+  {
+    "code":"ce"
+  , "name":"нохчийн"
+  , "note":"Chechen"
+  }
+,
+  {
+    "code":"ceb"
+  , "name":"Cebuano"
+  , "note":"Cebuano"
+  }
+,
+  {
+    "code":"ch"
+  , "name":"Chamoru"
+  , "note":"Chamorro"
+  }
+,
+  {
+    "code":"cho"
+  , "name":"Choctaw"
+  , "note":"Choctaw"
+  }
+,
+  {
+    "code":"chr"
+  , "name":"ᏣᎳᎩ"
+  , "note":"Cherokee"
+  }
+,
+  {
+    "code":"chy"
+  , "name":"Tsetsêhestâhese"
+  , "note":"Cheyenne"
+  }
+,
+  {
+    "code":"ckb"
+  , "name":"کوردیی ناوەندی"
+  , "note":"Central Kurdish"
+  }
+,
+  {
+    "code":"co"
+  , "name":"corsu"
+  , "note":"Corsican"
+  }
+,
+  {
+    "code":"cps"
+  , "name":"Capiceño"
+  , "note":"Capiznon"
+  }
+,
+  {
+    "code":"cr"
+  , "name":"Nēhiyawēwin / ᓀᐦᐃᔭᐍᐏᐣ"
+  , "note":"Cree"
+  }
+,
+  {
+    "code":"crh"
+  , "name":"qırımtatarca"
+  , "note":"Crimean Tatar (multiple scripts - defaults to Latin)"
+  }
+,
+  {
+    "code":"crh-latn"
+  , "name":"qırımtatarca (Latin)\xE2\x80\x8E"
+  , "note":"Crimean Tatar (Latin)"
+  }
+,
+  {
+    "code":"crh-cyrl"
+  , "name":"къырымтатарджа (Кирилл)\xE2\x80\x8E"
+  , "note":"Crimean Tatar (Cyrillic)"
+  }
+,
+  {
+    "code":"cs"
+  , "name":"čeština"
+  , "note":"Czech"
+  }
+,
+  {
+    "code":"csb"
+  , "name":"kaszëbsczi"
+  , "note":"Cassubian"
+  }
+,
+  {
+    "code":"cu"
+  , "name":"словѣньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ"
+  , "note":"Old Church Slavonic (ancient language)"
+  }
+,
+  {
+    "code":"cv"
+  , "name":"Чӑвашла"
+  , "note":"Chuvash"
+  }
+,
+  {
+    "code":"cy"
+  , "name":"Cymraeg"
+  , "note":"Welsh"
+  }
+,
+  {
+    "code":"da"
+  , "name":"dansk"
+  , "note":"Danish"
+  }
+,
+  {
+    "code":"de"
+  , "name":"Deutsch"
+  , "note":"German (\"Du\")"
+  }
+,
+  {
+    "code":"de-at"
+  , "name":"Österreichisches Deutsch"
+  , "note":"Austrian German"
+  }
+,
+  {
+    "code":"de-ch"
+  , "name":"Schweizer Hochdeutsch"
+  , "note":"Swiss Standard German"
+  }
+,
+  {
+    "code":"de-formal"
+  , "name":"Deutsch (Sie-Form)\xE2\x80\x8E"
+  , "note":"German - formal address (\"Sie\")"
+  }
+,
+  {
+    "code":"diq"
+  , "name":"Zazaki"
+  , "note":"Zazaki"
+  }
+,
+  {
+    "code":"dsb"
+  , "name":"dolnoserbski"
+  , "note":"Lower Sorbian"
+  }
+,
+  {
+    "code":"dtp"
+  , "name":"Dusun Bundu-liwan"
+  , "note":"Central Dusun"
+  }
+,
+  {
+    "code":"dty"
+  , "name":"डोटेली"
+  , "note":"Doteli"
+  }
+,
+  {
+    "code":"dv"
+  , "name":"ދިވެހިބަސް"
+  , "note":"Dhivehi"
+  }
+,
+  {
+    "code":"dz"
+  , "name":"ཇོང་ཁ"
+  , "note":"Dzongkha (Bhutan)"
+  }
+,
+  {
+    "code":"ee"
+  , "name":"eʋegbe"
+  , "note":"Éwé"
+  }
+,
+  {
+    "code":"egl"
+  , "name":"Emiliàn"
+  , "note":"Emilian"
+  }
+,
+  {
+    "code":"el"
+  , "name":"Ελληνικά"
+  , "note":"Greek"
+  }
+,
+  {
+    "code":"eml"
+  , "name":"emiliàn e rumagnòl"
+  , "note":"Emiliano-Romagnolo / Sammarinese"
+  }
+,
+  {
+    "code":"en"
+  , "name":"English"
+  , "note":"English"
+  }
+,
+  {
+    "code":"en-ca"
+  , "name":"Canadian English"
+  , "note":"Canadian English"
+  }
+,
+  {
+    "code":"en-gb"
+  , "name":"British English"
+  , "note":"British English"
+  }
+,
+  {
+    "code":"eo"
+  , "name":"Esperanto"
+  , "note":"Esperanto"
+  }
+,
+  {
+    "code":"es"
+  , "name":"español"
+  , "note":"Spanish"
+  }
+,
+  {
+    "code":"et"
+  , "name":"eesti"
+  , "note":"Estonian"
+  }
+,
+  {
+    "code":"eu"
+  , "name":"euskara"
+  , "note":"Basque"
+  }
+,
+  {
+    "code":"ext"
+  , "name":"estremeñu"
+  , "note":"Extremaduran"
+  }
+,
+  {
+    "code":"fa"
+  , "name":"فارسی"
+  , "note":"Persian"
+  }
+,
+  {
+    "code":"ff"
+  , "name":"Fulfulde"
+  , "note":"Fulfulde, Maasina"
+  }
+,
+  {
+    "code":"fi"
+  , "name":"suomi"
+  , "note":"Finnish"
+  }
+,
+  {
+    "code":"fit"
+  , "name":"meänkieli"
+  , "note":"Tornedalen Finnish"
+  }
+,
+  {
+    "code":"fiu-vro"
+  , "name":"Võro"
+  , "note":"Võro (deprecated code, 'vro' in ISO 639-3 since 2009-01-16)"
+  }
+,
+  {
+    "code":"fj"
+  , "name":"Na Vosa Vakaviti"
+  , "note":"Fijian"
+  }
+,
+  {
+    "code":"fo"
+  , "name":"føroyskt"
+  , "note":"Faroese"
+  }
+,
+  {
+    "code":"fr"
+  , "name":"français"
+  , "note":"French"
+  }
+,
+  {
+    "code":"frc"
+  , "name":"français cadien"
+  , "note":"Cajun French"
+  }
+,
+  {
+    "code":"frp"
+  , "name":"arpetan"
+  , "note":"Franco-Provençal/Arpitan"
+  }
+,
+  {
+    "code":"frr"
+  , "name":"Nordfriisk"
+  , "note":"North Frisian"
+  }
+,
+  {
+    "code":"fur"
+  , "name":"furlan"
+  , "note":"Friulian"
+  }
+,
+  {
+    "code":"fy"
+  , "name":"Frysk"
+  , "note":"Frisian"
+  }
+,
+  {
+    "code":"ga"
+  , "name":"Gaeilge"
+  , "note":"Irish"
+  }
+,
+  {
+    "code":"gag"
+  , "name":"Gagauz"
+  , "note":"Gagauz"
+  }
+,
+  {
+    "code":"gan"
+  , "name":"贛語"
+  , "note":"Gan (multiple scripts - defaults to Traditional)"
+  }
+,
+  {
+    "code":"gan-hans"
+  , "name":"赣语（简体）\xE2\x80\x8E"
+  , "note":"Gan (Simplified Han)"
+  }
+,
+  {
+    "code":"gan-hant"
+  , "name":"贛語（繁體）\xE2\x80\x8E"
+  , "note":"Gan (Traditional Han)"
+  }
+,
+  {
+    "code":"gd"
+  , "name":"Gàidhlig"
+  , "note":"Scots Gaelic"
+  }
+,
+  {
+    "code":"gl"
+  , "name":"galego"
+  , "note":"Galician"
+  }
+,
+  {
+    "code":"glk"
+  , "name":"گیلکی"
+  , "note":"Gilaki"
+  }
+,
+  {
+    "code":"gn"
+  , "name":"Avañe'ẽ"
+  , "note":"Guaraní, Paraguayan"
+  }
+,
+  {
+    "code":"gom"
+  , "name":"गोंयची कोंकणी / Gõychi Konknni"
+  , "note":"Goan Konkani"
+  }
+,
+  {
+    "code":"gom-deva"
+  , "name":"गोंयची कोंकणी"
+  , "note":"Goan Konkani (Devanagari script)"
+  }
+,
+  {
+    "code":"gom-latn"
+  , "name":"Gõychi Konknni"
+  , "note":"Goan Konkani (Latin script)"
+  }
+,
+  {
+    "code":"gor"
+  , "name":"Bahasa Hulontalo"
+  , "note":"Gorontalo"
+  }
+,
+  {
+    "code":"got"
+  , "name":"𐌲𐌿𐍄𐌹𐍃𐌺"
+  , "note":"Gothic"
+  }
+,
+  {
+    "code":"grc"
+  , "name":"Ἀρχαία ἑλληνικὴ"
+  , "note":"Ancient Greek"
+  }
+,
+  {
+    "code":"gsw"
+  , "name":"Alemannisch"
+  , "note":"Alemannic"
+  }
+,
+  {
+    "code":"gu"
+  , "name":"ગુજરાતી"
+  , "note":"Gujarati"
+  }
+,
+  {
+    "code":"gv"
+  , "name":"Gaelg"
+  , "note":"Manx"
+  }
+,
+  {
+    "code":"ha"
+  , "name":"Hausa"
+  , "note":"Hausa"
+  }
+,
+  {
+    "code":"hak"
+  , "name":"客家語/Hak-kâ-ngî"
+  , "note":"Hakka"
+  }
+,
+  {
+    "code":"haw"
+  , "name":"Hawaiʻi"
+  , "note":"Hawaiian"
+  }
+,
+  {
+    "code":"he"
+  , "name":"עברית"
+  , "note":"Hebrew"
+  }
+,
+  {
+    "code":"hi"
+  , "name":"हिन्दी"
+  , "note":"Hindi"
+  }
+,
+  {
+    "code":"hif"
+  , "name":"Fiji Hindi"
+  , "note":"Fijian Hindi (multiple scripts - defaults to Latin)"
+  }
+,
+  {
+    "code":"hif-latn"
+  , "name":"Fiji Hindi"
+  , "note":"Fiji Hindi (latin)"
+  }
+,
+  {
+    "code":"hil"
+  , "name":"Ilonggo"
+  , "note":"Hiligaynon"
+  }
+,
+  {
+    "code":"ho"
+  , "name":"Hiri Motu"
+  , "note":"Hiri Motu"
+  }
+,
+  {
+    "code":"hr"
+  , "name":"hrvatski"
+  , "note":"Croatian"
+  }
+,
+  {
+    "code":"hrx"
+  , "name":"Hunsrik"
+  , "note":"Riograndenser Hunsrückisch"
+  }
+,
+  {
+    "code":"hsb"
+  , "name":"hornjoserbsce"
+  , "note":"Upper Sorbian"
+  }
+,
+  {
+    "code":"ht"
+  , "name":"Kreyòl ayisyen"
+  , "note":"Haitian Creole French"
+  }
+,
+  {
+    "code":"hu"
+  , "name":"magyar"
+  , "note":"Hungarian"
+  }
+,
+  {
+    "code":"hy"
+  , "name":"Հայերեն"
+  , "note":"Armenian"
+  }
+,
+  {
+    "code":"hz"
+  , "name":"Otsiherero"
+  , "note":"Herero"
+  }
+,
+  {
+    "code":"ia"
+  , "name":"interlingua"
+  , "note":"Interlingua (IALA)"
+  }
+,
+  {
+    "code":"id"
+  , "name":"Bahasa Indonesia"
+  , "note":"Indonesian"
+  }
+,
+  {
+    "code":"ie"
+  , "name":"Interlingue"
+  , "note":"Interlingue (Occidental)"
+  }
+,
+  {
+    "code":"ig"
+  , "name":"Igbo"
+  , "note":"Igbo"
+  }
+,
+  {
+    "code":"ii"
+  , "name":"ꆇꉙ"
+  , "note":"Sichuan Yi"
+  }
+,
+  {
+    "code":"ik"
+  , "name":"Iñupiak"
+  , "note":"Inupiak (Inupiatun, Northwest Alaska / Inupiatun, North Alaskan)"
+  }
+,
+  {
+    "code":"ike-cans"
+  , "name":"ᐃᓄᒃᑎᑐᑦ"
+  , "note":"Inuktitut, Eastern Canadian (Unified Canadian Aboriginal Syllabics)"
+  }
+,
+  {
+    "code":"ike-latn"
+  , "name":"inuktitut"
+  , "note":"Inuktitut, Eastern Canadian (Latin script)"
+  }
+,
+  {
+    "code":"ilo"
+  , "name":"Ilokano"
+  , "note":"Ilokano"
+  }
+,
+  {
+    "code":"inh"
+  , "name":"ГӀалгӀай"
+  , "note":"Ingush"
+  }
+,
+  {
+    "code":"io"
+  , "name":"Ido"
+  , "note":"Ido"
+  }
+,
+  {
+    "code":"is"
+  , "name":"íslenska"
+  , "note":"Icelandic"
+  }
+,
+  {
+    "code":"it"
+  , "name":"italiano"
+  , "note":"Italian"
+  }
+,
+  {
+    "code":"iu"
+  , "name":"ᐃᓄᒃᑎᑐᑦ/inuktitut"
+  , "note":"Inuktitut (macro language, see ike/ikt, falls back to ike-cans)"
+  }
+,
+  {
+    "code":"ja"
+  , "name":"日本語"
+  , "note":"Japanese"
+  }
+,
+  {
+    "code":"jam"
+  , "name":"Patois"
+  , "note":"Jamaican Creole English"
+  }
+,
+  {
+    "code":"jbo"
+  , "name":"la .lojban."
+  , "note":"Lojban"
+  }
+,
+  {
+    "code":"jut"
+  , "name":"jysk"
+  , "note":"Jutish / Jutlandic"
+  }
+,
+  {
+    "code":"jv"
+  , "name":"Basa Jawa"
+  , "note":"Javanese"
+  }
+,
+  {
+    "code":"ka"
+  , "name":"ქართული"
+  , "note":"Georgian"
+  }
+,
+  {
+    "code":"kaa"
+  , "name":"Qaraqalpaqsha"
+  , "note":"Karakalpak"
+  }
+,
+  {
+    "code":"kab"
+  , "name":"Taqbaylit"
+  , "note":"Kabyle"
+  }
+,
+  {
+    "code":"kbd"
+  , "name":"Адыгэбзэ"
+  , "note":"Kabardian"
+  }
+,
+  {
+    "code":"kbd-cyrl"
+  , "name":"Адыгэбзэ"
+  , "note":"Kabardian (Cyrillic)"
+  }
+,
+  {
+    "code":"kg"
+  , "name":"Kongo"
+  , "note":"Kongo, (FIXME!) should probaly be KiKongo or KiKoongo"
+  }
+,
+  {
+    "code":"khw"
+  , "name":"کھوار"
+  , "note":"Khowar"
+  }
+,
+  {
+    "code":"ki"
+  , "name":"Gĩkũyũ"
+  , "note":"Gikuyu"
+  }
+,
+  {
+    "code":"kiu"
+  , "name":"Kırmancki"
+  , "note":"Kirmanjki"
+  }
+,
+  {
+    "code":"kj"
+  , "name":"Kwanyama"
+  , "note":"Kwanyama"
+  }
+,
+  {
+    "code":"kk"
+  , "name":"қазақша"
+  , "note":"Kazakh (multiple scripts - defaults to Cyrillic)"
+  }
+,
+  {
+    "code":"kk-arab"
+  , "name":"قازاقشا (تٴوتە)\xE2\x80\x8F"
+  , "note":"Kazakh Arabic"
+  }
+,
+  {
+    "code":"kk-cyrl"
+  , "name":"қазақша (кирил)\xE2\x80\x8E"
+  , "note":"Kazakh Cyrillic"
+  }
+,
+  {
+    "code":"kk-latn"
+  , "name":"qazaqşa (latın)\xE2\x80\x8E"
+  , "note":"Kazakh Latin"
+  }
+,
+  {
+    "code":"kk-cn"
+  , "name":"قازاقشا (جۇنگو)\xE2\x80\x8F"
+  , "note":"Kazakh (China)"
+  }
+,
+  {
+    "code":"kk-kz"
+  , "name":"қазақша (Қазақстан)\xE2\x80\x8E"
+  , "note":"Kazakh (Kazakhstan)"
+  }
+,
+  {
+    "code":"kk-tr"
+  , "name":"qazaqşa (Türkïya)\xE2\x80\x8E"
+  , "note":"Kazakh (Turkey)"
+  }
+,
+  {
+    "code":"kl"
+  , "name":"kalaallisut"
+  , "note":"Inuktitut, Greenlandic/Greenlandic/Kalaallisut (kal)"
+  }
+,
+  {
+    "code":"km"
+  , "name":"ភាសាខ្មែរ"
+  , "note":"Khmer, Central"
+  }
+,
+  {
+    "code":"kn"
+  , "name":"ಕನ್ನಡ"
+  , "note":"Kannada"
+  }
+,
+  {
+    "code":"ko"
+  , "name":"한국어"
+  , "note":"Korean"
+  }
+,
+  {
+    "code":"ko-kp"
+  , "name":"한국어 (조선)"
+  , "note":"Korean (DPRK)"
+  }
+,
+  {
+    "code":"koi"
+  , "name":"Перем Коми"
+  , "note":"Komi-Permyak"
+  }
+,
+  {
+    "code":"kr"
+  , "name":"Kanuri"
+  , "note":"Kanuri, Central"
+  }
+,
+  {
+    "code":"krc"
+  , "name":"къарачай-малкъар"
+  , "note":"Karachay-Balkar"
+  }
+,
+  {
+    "code":"kri"
+  , "name":"Krio"
+  , "note":"Krio"
+  }
+,
+  {
+    "code":"krj"
+  , "name":"Kinaray-a"
+  , "note":"Kinaray-a"
+  }
+,
+  {
+    "code":"krl"
+  , "name":"karjal"
+  , "note":"Karelian"
+  }
+,
+  {
+    "code":"ks"
+  , "name":"कॉशुर / کٲشُر"
+  , "note":"Kashmiri (multiple scripts - defaults to Perso-Arabic)"
+  }
+,
+  {
+    "code":"ks-arab"
+  , "name":"کٲشُر"
+  , "note":"Kashmiri (Perso-Arabic script)"
+  }
+,
+  {
+    "code":"ks-deva"
+  , "name":"कॉशुर"
+  , "note":"Kashmiri (Devanagari script)"
+  }
+,
+  {
+    "code":"ksh"
+  , "name":"Ripoarisch"
+  , "note":"Ripuarian"
+  }
+,
+  {
+    "code":"ku"
+  , "name":"Kurdî"
+  , "note":"Kurdish (multiple scripts - defaults to Latin)"
+  }
+,
+  {
+    "code":"ku-latn"
+  , "name":"Kurdî (latînî)\xE2\x80\x8E"
+  , "note":"Northern Kurdish (Latin script)"
+  }
+,
+  {
+    "code":"ku-arab"
+  , "name":"كوردي (عەرەبی)\xE2\x80\x8F"
+  , "note":"Northern Kurdish (Arabic script) (falls back to ckb)"
+  }
+,
+  {
+    "code":"kv"
+  , "name":"коми"
+  , "note":"Komi-Zyrian (Cyrillic is common script but also written in Latin script)"
+  }
+,
+  {
+    "code":"kw"
+  , "name":"kernowek"
+  , "note":"Cornish"
+  }
+,
+  {
+    "code":"ky"
+  , "name":"Кыргызча"
+  , "note":"Kirghiz"
+  }
+,
+  {
+    "code":"la"
+  , "name":"Latina"
+  , "note":"Latin"
+  }
+,
+  {
+    "code":"lad"
+  , "name":"Ladino"
+  , "note":"Ladino"
+  }
+,
+  {
+    "code":"lb"
+  , "name":"Lëtzebuergesch"
+  , "note":"Luxemburguish"
+  }
+,
+  {
+    "code":"lbe"
+  , "name":"лакку"
+  , "note":"Lak"
+  }
+,
+  {
+    "code":"lez"
+  , "name":"лезги"
+  , "note":"Lezgi"
+  }
+,
+  {
+    "code":"lfn"
+  , "name":"Lingua Franca Nova"
+  , "note":"Lingua Franca Nova"
+  }
+,
+  {
+    "code":"lg"
+  , "name":"Luganda"
+  , "note":"Ganda"
+  }
+,
+  {
+    "code":"li"
+  , "name":"Limburgs"
+  , "note":"Limburgian"
+  }
+,
+  {
+    "code":"lij"
+  , "name":"Ligure"
+  , "note":"Ligurian"
+  }
+,
+  {
+    "code":"liv"
+  , "name":"Līvõ kēļ"
+  , "note":"Livonian"
+  }
+,
+  {
+    "code":"lki"
+  , "name":"لەکی‎"
+  , "note":"Laki"
+  }
+,
+  {
+    "code":"lmo"
+  , "name":"lumbaart"
+  , "note":"Lombard"
+  }
+,
+  {
+    "code":"ln"
+  , "name":"lingála"
+  , "note":"Lingala"
+  }
+,
+  {
+    "code":"lo"
+  , "name":"ລາວ"
+  , "note":"Laotian"
+  }
+,
+  {
+    "code":"lrc"
+  , "name":"لۊری شومالی"
+  , "note":"Northern Luri"
+  }
+,
+  {
+    "code":"loz"
+  , "name":"Silozi"
+  , "note":"Lozi"
+  }
+,
+  {
+    "code":"lt"
+  , "name":"lietuvių"
+  , "note":"Lithuanian"
+  }
+,
+  {
+    "code":"ltg"
+  , "name":"latgaļu"
+  , "note":"Latgalian"
+  }
+,
+  {
+    "code":"lus"
+  , "name":"Mizo ţawng"
+  , "note":"Mizo/Lushai"
+  }
+,
+  {
+    "code":"luz"
+  , "name":"لئری دوٙمینی"
+  , "note":"Southern Luri"
+  }
+,
+  {
+    "code":"lv"
+  , "name":"latviešu"
+  , "note":"Latvian"
+  }
+,
+  {
+    "code":"lzh"
+  , "name":"文言"
+  , "note":"Literary Chinese, bug 8217"
+  }
+,
+  {
+    "code":"lzz"
+  , "name":"Lazuri"
+  , "note":"Laz"
+  }
+,
+  {
+    "code":"mai"
+  , "name":"मैथिली"
+  , "note":"Maithili"
+  }
+,
+  {
+    "code":"map-bms"
+  , "name":"Basa Banyumasan"
+  , "note":"Banyumasan"
+  }
+,
+  {
+    "code":"mdf"
+  , "name":"мокшень"
+  , "note":"Moksha"
+  }
+,
+  {
+    "code":"mg"
+  , "name":"Malagasy"
+  , "note":"Malagasy"
+  }
+,
+  {
+    "code":"mh"
+  , "name":"Ebon"
+  , "note":"Marshallese"
+  }
+,
+  {
+    "code":"mhr"
+  , "name":"олык марий"
+  , "note":"Eastern Mari"
+  }
+,
+  {
+    "code":"mi"
+  , "name":"Māori"
+  , "note":"Maori"
+  }
+,
+  {
+    "code":"min"
+  , "name":"Baso Minangkabau"
+  , "note":"Minangkabau"
+  }
+,
+  {
+    "code":"mk"
+  , "name":"македонски"
+  , "note":"Macedonian"
+  }
+,
+  {
+    "code":"ml"
+  , "name":"മലയാളം"
+  , "note":"Malayalam"
+  }
+,
+  {
+    "code":"mn"
+  , "name":"монгол"
+  , "note":"Halh Mongolian (Cyrillic) (ISO 639-3: khk)"
+  }
+,
+  {
+    "code":"mo"
+  , "name":"молдовеняскэ"
+  , "note":"Moldovan, deprecated"
+  }
+,
+  {
+    "code":"mr"
+  , "name":"मराठी"
+  , "note":"Marathi"
+  }
+,
+  {
+    "code":"mrj"
+  , "name":"кырык мары"
+  , "note":"Hill Mari"
+  }
+,
+  {
+    "code":"ms"
+  , "name":"Bahasa Melayu"
+  , "note":"Malay"
+  }
+,
+  {
+    "code":"mt"
+  , "name":"Malti"
+  , "note":"Maltese"
+  }
+,
+  {
+    "code":"mus"
+  , "name":"Mvskoke"
+  , "note":"Muskogee/Creek"
+  }
+,
+  {
+    "code":"mwl"
+  , "name":"Mirandés"
+  , "note":"Mirandese"
+  }
+,
+  {
+    "code":"my"
+  , "name":"မြန်မာဘာသာ"
+  , "note":"Burmese"
+  }
+,
+  {
+    "code":"myv"
+  , "name":"эрзянь"
+  , "note":"Erzya"
+  }
+,
+  {
+    "code":"mzn"
+  , "name":"مازِرونی"
+  , "note":"Mazanderani"
+  }
+,
+  {
+    "code":"na"
+  , "name":"Dorerin Naoero"
+  , "note":"Nauruan"
+  }
+,
+  {
+    "code":"nah"
+  , "name":"Nāhuatl"
+  , "note":"Nahuatl (not in ISO 639-3)"
+  }
+,
+  {
+    "code":"nan"
+  , "name":"Bân-lâm-gú"
+  , "note":"Min-nan, bug 8217"
+  }
+,
+  {
+    "code":"nap"
+  , "name":"Napulitano"
+  , "note":"Neapolitan, bug 43793"
+  }
+,
+  {
+    "code":"nb"
+  , "name":"norsk bokmål"
+  , "note":"Norwegian (Bokmal)"
+  }
+,
+  {
+    "code":"nds"
+  , "name":"Plattdüütsch"
+  , "note":"Low German ''or'' Low Saxon"
+  }
+,
+  {
+    "code":"nds-nl"
+  , "name":"Nedersaksies"
+  , "note":"aka Nedersaksisch: Dutch Low Saxon"
+  }
+,
+  {
+    "code":"ne"
+  , "name":"नेपाली"
+  , "note":"Nepali"
+  }
+,
+  {
+    "code":"new"
+  , "name":"नेपाल भाषा"
+  , "note":"Newar / Nepal Bhasha"
+  }
+,
+  {
+    "code":"ng"
+  , "name":"Oshiwambo"
+  , "note":"Ndonga"
+  }
+,
+  {
+    "code":"niu"
+  , "name":"Niuē"
+  , "note":"Niuean"
+  }
+,
+  {
+    "code":"nl"
+  , "name":"Nederlands"
+  , "note":"Dutch"
+  }
+,
+  {
+    "code":"nl-informal"
+  , "name":"Nederlands (informeel)\xE2\x80\x8E"
+  , "note":"Dutch (informal address (\"je\"))"
+  }
+,
+  {
+    "code":"nn"
+  , "name":"norsk nynorsk"
+  , "note":"Norwegian (Nynorsk)"
+  }
+,
+  {
+    "code":"no"
+  , "name":"norsk bokmål"
+  , "note":"Norwegian (falls back to nb)."
+  }
+,
+  {
+    "code":"nov"
+  , "name":"Novial"
+  , "note":"Novial"
+  }
+,
+  {
+    "code":"nrm"
+  , "name":"Nouormand"
+  , "note":"Norman"
+  }
+,
+  {
+    "code":"nso"
+  , "name":"Sesotho sa Leboa"
+  , "note":"Northern Sotho"
+  }
+,
+  {
+    "code":"nv"
+  , "name":"Diné bizaad"
+  , "note":"Navajo"
+  }
+,
+  {
+    "code":"ny"
+  , "name":"Chi-Chewa"
+  , "note":"Chichewa"
+  }
+,
+  {
+    "code":"oc"
+  , "name":"occitan"
+  , "note":"Occitan"
+  }
+,
+  {
+    "code":"olo"
+  , "name":"Livvinkarjala"
+  , "note":"Livvi-Karelian"
+  }
+,
+  {
+    "code":"om"
+  , "name":"Oromoo"
+  , "note":"Oromo"
+  }
+,
+  {
+    "code":"or"
+  , "name":"ଓଡ଼ିଆ"
+  , "note":"Oriya"
+  }
+,
+  {
+    "code":"os"
+  , "name":"Ирон"
+  , "note":"Ossetic, bug 29091"
+  }
+,
+  {
+    "code":"pa"
+  , "name":"ਪੰਜਾਬੀ"
+  , "note":"Eastern Punjabi (Gurmukhi script) (pan)"
+  }
+,
+  {
+    "code":"pag"
+  , "name":"Pangasinan"
+  , "note":"Pangasinan"
+  }
+,
+  {
+    "code":"pam"
+  , "name":"Kapampangan"
+  , "note":"Pampanga"
+  }
+,
+  {
+    "code":"pap"
+  , "name":"Papiamentu"
+  , "note":"Papiamentu"
+  }
+,
+  {
+    "code":"pcd"
+  , "name":"Picard"
+  , "note":"Picard"
+  }
+,
+  {
+    "code":"pdc"
+  , "name":"Deitsch"
+  , "note":"Pennsylvania German"
+  }
+,
+  {
+    "code":"pdt"
+  , "name":"Plautdietsch"
+  , "note":"Plautdietsch/Mennonite Low German"
+  }
+,
+  {
+    "code":"pfl"
+  , "name":"Pälzisch"
+  , "note":"Palatinate German"
+  }
+,
+  {
+    "code":"pi"
+  , "name":"पालि"
+  , "note":"Pali"
+  }
+,
+  {
+    "code":"pih"
+  , "name":"Norfuk / Pitkern"
+  , "note":"Norfuk/Pitcairn/Norfolk"
+  }
+,
+  {
+    "code":"pl"
+  , "name":"polski"
+  , "note":"Polish"
+  }
+,
+  {
+    "code":"pms"
+  , "name":"Piemontèis"
+  , "note":"Piedmontese"
+  }
+,
+  {
+    "code":"pnb"
+  , "name":"پنجابی"
+  , "note":"Western Punjabi"
+  }
+,
+  {
+    "code":"pnt"
+  , "name":"Ποντιακά"
+  , "note":"Pontic/Pontic Greek"
+  }
+,
+  {
+    "code":"prg"
+  , "name":"Prūsiskan"
+  , "note":"Prussian"
+  }
+,
+  {
+    "code":"ps"
+  , "name":"پښتو"
+  , "note":"Pashto"
+  }
+,
+  {
+    "code":"pt"
+  , "name":"português"
+  , "note":"Portuguese"
+  }
+,
+  {
+    "code":"pt-br"
+  , "name":"português do Brasil"
+  , "note":"Brazilian Portuguese"
+  }
+,
+  {
+    "code":"qu"
+  , "name":"Runa Simi"
+  , "note":"Southern Quechua"
+  }
+,
+  {
+    "code":"qug"
+  , "name":"Runa shimi"
+  , "note":"Kichwa/Northern Quechua (temporarily used until Kichwa has its own)"
+  }
+,
+  {
+    "code":"rgn"
+  , "name":"Rumagnôl"
+  , "note":"Romagnol"
+  }
+,
+  {
+    "code":"rif"
+  , "name":"Tarifit"
+  , "note":"Tarifit"
+  }
+,
+  {
+    "code":"rm"
+  , "name":"rumantsch"
+  , "note":"Raeto-Romance"
+  }
+,
+  {
+    "code":"rmy"
+  , "name":"Romani"
+  , "note":"Vlax Romany"
+  }
+,
+  {
+    "code":"rn"
+  , "name":"Kirundi"
+  , "note":"Rundi/Kirundi/Urundi"
+  }
+,
+  {
+    "code":"ro"
+  , "name":"română"
+  , "note":"Romanian"
+  }
+,
+  {
+    "code":"roa-rup"
+  , "name":"armãneashti"
+  , "note":"Aromanian (deprecated code, 'rup' exists in ISO 693-3)"
+  }
+,
+  {
+    "code":"roa-tara"
+  , "name":"tarandíne"
+  , "note":"Tarantino"
+  }
+,
+  {
+    "code":"ru"
+  , "name":"русский"
+  , "note":"Russian"
+  }
+,
+  {
+    "code":"rue"
+  , "name":"русиньскый"
+  , "note":"Rusyn"
+  }
+,
+  {
+    "code":"rup"
+  , "name":"armãneashti"
+  , "note":"Aromanian"
+  }
+,
+  {
+    "code":"ruq"
+  , "name":"Vlăheşte"
+  , "note":"Megleno-Romanian (multiple scripts - defaults to Latin)"
+  }
+,
+  {
+    "code":"ruq-cyrl"
+  , "name":"Влахесте"
+  , "note":"Megleno-Romanian (Cyrillic script) Megleno-Romanian (Cyrillic script)"
+  }
+,
+  {
+    "code":"ruq-latn"
+  , "name":"Vlăheşte"
+  , "note":"Megleno-Romanian (Latin script)"
+  }
+,
+  {
+    "code":"rw"
+  , "name":"Kinyarwanda"
+  , "note":"Kinyarwanda, should possibly be Kinyarwandi"
+  }
+,
+  {
+    "code":"sa"
+  , "name":"संस्कृतम्"
+  , "note":"Sanskrit"
+  }
+,
+  {
+    "code":"sah"
+  , "name":"саха тыла"
+  , "note":"Sakha"
+  }
+,
+  {
+    "code":"sat"
+  , "name":"Santali"
+  , "note":"Santali"
+  }
+,
+  {
+    "code":"sc"
+  , "name":"sardu"
+  , "note":"Sardinian"
+  }
+,
+  {
+    "code":"scn"
+  , "name":"sicilianu"
+  , "note":"Sicilian"
+  }
+,
+  {
+    "code":"sco"
+  , "name":"Scots"
+  , "note":"Scots"
+  }
+,
+  {
+    "code":"sd"
+  , "name":"سنڌي"
+  , "note":"Sindhi"
+  }
+,
+  {
+    "code":"sdc"
+  , "name":"Sassaresu"
+  , "note":"Sassarese"
+  }
+,
+  {
+    "code":"sdh"
+  , "name":"کوردی خوارگ"
+  , "note":"Southern Kurdish"
+  }
+,
+  {
+    "code":"se"
+  , "name":"sámegiella"
+  , "note":"Northern Sami"
+  }
+,
+  {
+    "code":"sei"
+  , "name":"Cmique Itom"
+  , "note":"Seri"
+  }
+,
+  {
+    "code":"ses"
+  , "name":"Koyraboro Senni"
+  , "note":"Koyraboro Senni"
+  }
+,
+  {
+    "code":"sg"
+  , "name":"Sängö"
+  , "note":"Sango/Sangho"
+  }
+,
+  {
+    "code":"sgs"
+  , "name":"žemaitėška"
+  , "note":"Samogitian"
+  }
+,
+  {
+    "code":"sh"
+  , "name":"srpskohrvatski / српскохрватски"
+  , "note":"Serbocroatian"
+  }
+,
+  {
+    "code":"shi"
+  , "name":"Tašlḥiyt/ⵜⴰⵛⵍⵃⵉⵜ"
+  , "note":"Tachelhit (multiple scripts - defaults to Latin)"
+  }
+,
+  {
+    "code":"shi-tfng"
+  , "name":"ⵜⴰⵛⵍⵃⵉⵜ"
+  , "note":"Tachelhit (Tifinagh script)"
+  }
+,
+  {
+    "code":"shi-latn"
+  , "name":"Tašlḥiyt"
+  , "note":"Tachelhit (Latin script)"
+  }
+,
+  {
+    "code":"shn"
+  , "name":"ၽႃႇသႃႇတႆး "
+  , "note":"Shan"
+  }
+,
+  {
+    "code":"si"
+  , "name":"සිංහල"
+  , "note":"Sinhalese"
+  }
+,
+  {
+    "code":"simple"
+  , "name":"Simple English"
+  , "note":"Simple English"
+  }
+,
+  {
+    "code":"sk"
+  , "name":"slovenčina"
+  , "note":"Slovak"
+  }
+,
+  {
+    "code":"sl"
+  , "name":"slovenščina"
+  , "note":"Slovenian"
+  }
+,
+  {
+    "code":"sli"
+  , "name":"Schläsch"
+  , "note":"Lower Selisian"
+  }
+,
+  {
+    "code":"sm"
+  , "name":"Gagana Samoa"
+  , "note":"Samoan"
+  }
+,
+  {
+    "code":"sma"
+  , "name":"Åarjelsaemien"
+  , "note":"Southern Sami"
+  }
+,
+  {
+    "code":"sn"
+  , "name":"chiShona"
+  , "note":"Shona"
+  }
+,
+  {
+    "code":"so"
+  , "name":"Soomaaliga"
+  , "note":"Somali"
+  }
+,
+  {
+    "code":"sq"
+  , "name":"shqip"
+  , "note":"Albanian"
+  }
+,
+  {
+    "code":"sr"
+  , "name":"српски / srpski"
+  , "note":"Serbian (multiple scripts - defaults to Cyrillic)"
+  }
+,
+  {
+    "code":"sr-ec"
+  , "name":"српски (ћирилица)\xE2\x80\x8E"
+  , "note":"Serbian Cyrillic ekavian"
+  }
+,
+  {
+    "code":"sr-el"
+  , "name":"srpski (latinica)\xE2\x80\x8E"
+  , "note":"Serbian Latin ekavian"
+  }
+,
+  {
+    "code":"srn"
+  , "name":"Sranantongo"
+  , "note":"Sranan Tongo"
+  }
+,
+  {
+    "code":"ss"
+  , "name":"SiSwati"
+  , "note":"Swati"
+  }
+,
+  {
+    "code":"st"
+  , "name":"Sesotho"
+  , "note":"Southern Sotho"
+  }
+,
+  {
+    "code":"stq"
+  , "name":"Seeltersk"
+  , "note":"Saterland Frisian"
+  }
+,
+  {
+    "code":"su"
+  , "name":"Basa Sunda"
+  , "note":"Sundanese"
+  }
+,
+  {
+    "code":"sv"
+  , "name":"svenska"
+  , "note":"Swedish"
+  }
+,
+  {
+    "code":"sw"
+  , "name":"Kiswahili"
+  , "note":"Swahili"
+  }
+,
+  {
+    "code":"szl"
+  , "name":"ślůnski"
+  , "note":"Silesian"
+  }
+,
+  {
+    "code":"ta"
+  , "name":"தமிழ்"
+  , "note":"Tamil"
+  }
+,
+  {
+    "code":"tcy"
+  , "name":"ತುಳು"
+  , "note":"Tulu"
+  }
+,
+  {
+    "code":"te"
+  , "name":"తెలుగు"
+  , "note":"Telugu"
+  }
+,
+  {
+    "code":"tet"
+  , "name":"tetun"
+  , "note":"Tetun"
+  }
+,
+  {
+    "code":"tg"
+  , "name":"тоҷикӣ"
+  , "note":"Tajiki (falls back to tg-cyrl)"
+  }
+,
+  {
+    "code":"tg-cyrl"
+  , "name":"тоҷикӣ"
+  , "note":"Tajiki (Cyrllic script) (default)"
+  }
+,
+  {
+    "code":"tg-latn"
+  , "name":"tojikī"
+  , "note":"Tajiki (Latin script)"
+  }
+,
+  {
+    "code":"th"
+  , "name":"ไทย"
+  , "note":"Thai"
+  }
+,
+  {
+    "code":"ti"
+  , "name":"ትግርኛ"
+  , "note":"Tigrinya"
+  }
+,
+  {
+    "code":"tk"
+  , "name":"Türkmençe"
+  , "note":"Turkmen"
+  }
+,
+  {
+    "code":"tl"
+  , "name":"Tagalog"
+  , "note":"Tagalog"
+  }
+,
+  {
+    "code":"tly"
+  , "name":"толышә зывон"
+  , "note":"Talysh"
+  }
+,
+  {
+    "code":"tn"
+  , "name":"Setswana"
+  , "note":"Setswana"
+  }
+,
+  {
+    "code":"to"
+  , "name":"lea faka-Tonga"
+  , "note":"Tonga (Tonga Islands)"
+  }
+,
+  {
+    "code":"tokipona"
+  , "name":"Toki Pona"
+  , "note":"Toki Pona"
+  }
+,
+  {
+    "code":"tpi"
+  , "name":"Tok Pisin"
+  , "note":"Tok Pisin"
+  }
+,
+  {
+    "code":"tr"
+  , "name":"Türkçe"
+  , "note":"Turkish"
+  }
+,
+  {
+    "code":"tru"
+  , "name":"Ṫuroyo"
+  , "note":"Turoyo"
+  }
+,
+  {
+    "code":"ts"
+  , "name":"Xitsonga"
+  , "note":"Tsonga"
+  }
+,
+  {
+    "code":"tt"
+  , "name":"татарча/tatarça"
+  , "note":"Tatar (multiple scripts - defaults to Cyrillic)"
+  }
+,
+  {
+    "code":"tt-cyrl"
+  , "name":"татарча"
+  , "note":"Tatar (Cyrillic script) (default)"
+  }
+,
+  {
+    "code":"tt-latn"
+  , "name":"tatarça"
+  , "note":"Tatar (Latin script)"
+  }
+,
+  {
+    "code":"tum"
+  , "name":"chiTumbuka"
+  , "note":"Tumbuka"
+  }
+,
+  {
+    "code":"tw"
+  , "name":"Twi"
+  , "note":"Twi, (FIXME!)"
+  }
+,
+  {
+    "code":"ty"
+  , "name":"reo tahiti"
+  , "note":"Tahitian"
+  }
+,
+  {
+    "code":"tyv"
+  , "name":"тыва дыл"
+  , "note":"Tyvan"
+  }
+,
+  {
+    "code":"tzm"
+  , "name":"ⵜⴰⵎⴰⵣⵉⵖⵜ"
+  , "note":"Tamazight"
+  }
+,
+  {
+    "code":"udm"
+  , "name":"удмурт"
+  , "note":"Udmurt"
+  }
+,
+  {
+    "code":"ug"
+  , "name":"ئۇيغۇرچە / Uyghurche"
+  , "note":"Uyghur (multiple scripts - defaults to Arabic)"
+  }
+,
+  {
+    "code":"ug-arab"
+  , "name":"ئۇيغۇرچە"
+  , "note":"Uyghur (Arabic script) (default)"
+  }
+,
+  {
+    "code":"ug-latn"
+  , "name":"Uyghurche"
+  , "note":"Uyghur (Latin script)"
+  }
+,
+  {
+    "code":"uk"
+  , "name":"українська"
+  , "note":"Ukrainian"
+  }
+,
+  {
+    "code":"ur"
+  , "name":"اردو"
+  , "note":"Urdu"
+  }
+,
+  {
+    "code":"uz"
+  , "name":"oʻzbekcha/ўзбекча"
+  , "note":"Uzbek (multiple scripts - defaults to Latin)"
+  }
+,
+  {
+    "code":"uz-cyrl"
+  , "name":"ўзбекча"
+  , "note":"Uzbek Cyrillic"
+  }
+,
+  {
+    "code":"uz-latn"
+  , "name":"oʻzbekcha"
+  , "note":"Uzbek Latin (default)"
+  }
+,
+  {
+    "code":"ve"
+  , "name":"Tshivenda"
+  , "note":"Venda"
+  }
+,
+  {
+    "code":"vec"
+  , "name":"vèneto"
+  , "note":"Venetian"
+  }
+,
+  {
+    "code":"vep"
+  , "name":"vepsän kel’"
+  , "note":"Veps"
+  }
+,
+  {
+    "code":"vi"
+  , "name":"Tiếng Việt"
+  , "note":"Vietnamese"
+  }
+,
+  {
+    "code":"vls"
+  , "name":"West-Vlams"
+  , "note":"West Flemish"
+  }
+,
+  {
+    "code":"vmf"
+  , "name":"Mainfränkisch"
+  , "note":"Upper Franconian, Main-Franconian"
+  }
+,
+  {
+    "code":"vo"
+  , "name":"Volapük"
+  , "note":"Volapük"
+  }
+,
+  {
+    "code":"vot"
+  , "name":"Vaďďa"
+  , "note":"Vod/Votian"
+  }
+,
+  {
+    "code":"vro"
+  , "name":"Võro"
+  , "note":"Võro"
+  }
+,
+  {
+    "code":"wa"
+  , "name":"walon"
+  , "note":"Walloon"
+  }
+,
+  {
+    "code":"war"
+  , "name":"Winaray"
+  , "note":"Waray-Waray"
+  }
+,
+  {
+    "code":"wo"
+  , "name":"Wolof"
+  , "note":"Wolof"
+  }
+,
+  {
+    "code":"wuu"
+  , "name":"吴语"
+  , "note":"Wu Chinese"
+  }
+,
+  {
+    "code":"xal"
+  , "name":"хальмг"
+  , "note":"Kalmyk-Oirat"
+  }
+,
+  {
+    "code":"xh"
+  , "name":"isiXhosa"
+  , "note":"Xhosan"
+  }
+,
+  {
+    "code":"xmf"
+  , "name":"მარგალური"
+  , "note":"Mingrelian"
+  }
+,
+  {
+    "code":"yi"
+  , "name":"ייִדיש"
+  , "note":"Yiddish"
+  }
+,
+  {
+    "code":"yo"
+  , "name":"Yorùbá"
+  , "note":"Yoruba"
+  }
+,
+  {
+    "code":"yue"
+  , "name":"粵語"
+  , "note":"Cantonese"
+  }
+,
+  {
+    "code":"za"
+  , "name":"Vahcuengh"
+  , "note":"Zhuang"
+  }
+,
+  {
+    "code":"zea"
+  , "name":"Zeêuws"
+  , "note":"Zeeuws/Zeaws"
+  }
+,
+  {
+    "code":"zh"
+  , "name":"中文"
+  , "note":"(Zhōng Wén) - Chinese"
+  }
+,
+  {
+    "code":"zh-classical"
+  , "name":"文言"
+  , "note":"Classical Chinese/Literary Chinese -- (see bug 8217)"
+  }
+,
+  {
+    "code":"zh-cn"
+  , "name":"中文（中国大陆）\xE2\x80\x8E"
+  , "note":"Chinese (PRC)"
+  }
+,
+  {
+    "code":"zh-hans"
+  , "name":"中文（简体）\xE2\x80\x8E"
+  , "note":"Mandarin Chinese (Simplified Chinese script) (cmn-hans)"
+  }
+,
+  {
+    "code":"zh-hant"
+  , "name":"中文（繁體）\xE2\x80\x8E"
+  , "note":"Mandarin Chinese (Traditional Chinese script) (cmn-hant)"
+  }
+,
+  {
+    "code":"zh-hk"
+  , "name":"中文（香港）\xE2\x80\x8E"
+  , "note":"Chinese (Hong Kong)"
+  }
+,
+  {
+    "code":"zh-min-nan"
+  , "name":"Bân-lâm-gú"
+  , "note":"Min-nan -- (see bug 8217)"
+  }
+,
+  {
+    "code":"zh-mo"
+  , "name":"中文（澳門）\xE2\x80\x8E"
+  , "note":"Chinese (Macau)"
+  }
+,
+  {
+    "code":"zh-my"
+  , "name":"中文（马来西亚）\xE2\x80\x8E"
+  , "note":"Chinese (Malaysia)"
+  }
+,
+  {
+    "code":"zh-sg"
+  , "name":"中文（新加坡）\xE2\x80\x8E"
+  , "note":"Chinese (Singapore)"
+  }
+,
+  {
+    "code":"zh-tw"
+  , "name":"中文（台灣）\xE2\x80\x8E"
+  , "note":"Chinese (Taiwan)"
+  }
+,
+  {
+    "code":"zh-yue"
+  , "name":"粵語"
+  , "note":"Cantonese -- (see bug 8217)"
+  }
+,
+  {
+    "code":"zu"
+  , "name":"isiZulu"
+  , "note":"Zulu"
+  }
+]

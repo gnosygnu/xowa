@@ -1,0 +1,343 @@
+this
+.fallback_load('id')
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Āha'
+monday|Asenéŋ
+tuesday|Salasa
+wednesday|Araba
+thursday|Kamisi'
+friday|Jumā
+saturday|Sattu
+sun|Āha
+mon|Ase
+tue|Sal
+wed|Ara
+thu|Kam
+fri|Jum
+sat|Sat
+january|Januari
+february|Fébruari
+march|Maré'
+april|April
+may_long|Méi
+june|Juni
+july|Juli
+august|Ogoso'
+september|September
+october|Oktober
+november|November
+december|Désémber
+january-gen|Januari
+february-gen|Fébruari
+march-gen|Maré'
+april-gen|April
+may-gen|Méi
+june-gen|Juni
+july-gen|Juli
+august-gen|Ogoso'
+september-gen|September
+october-gen|Oktober
+november-gen|November
+december-gen|Désémber
+redirectedfrom|(Riredirect polé ~{0})
+allpages|Maneng halamang
+categories|Maneŋ kategori
+blanknamespace|(Utama)
+category_header|Leppa rilaleŋ kategori "~{0}"
+subcategories|Subkategori
+bold_tip|Teks maumpek
+italic_tip|Teks Italik
+statistics-articles|Leppa liseë
+statistics-pages|Leppaë
+about|Atajangeng
+article|Lontara
+cancel|Rusa
+mypage|Leppana iya'
+mytalk|Bicarana iyya
+anontalk|Bicarana IP édé
+navigation|Navigasi
+and| na
+qbfind|Assapparang
+qbbrowse|Berowoso
+qbedit|Padécéŋ
+qbpageoptions|Édé leppa
+qbmyoptions|Leppana iya'
+faq|FAQ
+faqpage|Project:FAQ
+errorpagetitle|Asalaŋ
+returnto|Lisu ri ~{0}.
+tagline|Polé {{SITENAME}}
+help|Paŋinriŋ
+search|Assapparaŋ
+searchbutton|Sappa
+go|Lao
+searcharticle|Lao
+history|Versi riolo leppaë
+history_short|versi riolo
+permalink|Pranala permanen
+edit|Padécéŋ
+create|Ebbu
+editthispage|Padécéŋiki iyé leppa
+create-this-page|Ebbuiki leppa iyé
+delete|Peddé
+deletethispage|Peddé iyé leppa
+protect|Accalinruŋi
+protect_change|pinra
+protectthispage|Accalinruŋi leppa iyyé
+unprotect|Téccalinruŋi
+newpage|Leppa baru
+talkpage|Bicara iyé leppa
+talkpagelinktext|Bicara
+specialpage|Leppa spésiala
+personaltools|Tool sialé-alé
+articlepage|Ita lontara
+talk|Bicara
+toolbox|Toolbox
+userpage|Ita leppa papaké
+projectpage|Ita leppa proyék
+imagepage|Ita leppa rapaŋ
+mediawikipage|Ita leppa méséje
+templatepage|Ita leppa templata
+viewhelppage|Ita leppa panginriŋ
+categorypage|Ita leppa kategori
+viewtalkpage|Ita leppa bicara
+redirectpagesub|Leppa redirect
+jumpto|Luppe lao:
+jumptosearch|sappa
+aboutsite|Tentang {{SITENAME}}
+currentevents|Accanjingeŋ kokkoro
+currentevents-url|Project:Accanjingeŋ kokkoro
+disclaimers|Diseklaima
+edithelp|Paŋinriŋ mapadécéŋ
+mainpage|Leppa Indoë
+mainpage-description|Leppa Indoë
+portal|Portal komunitas
+editsection|padécéŋ
+editold|padécéŋ
+viewsourceold|ita sumber
+editlink|padécéŋ
+viewsourcelink|ita sumber
+editsectionhint|Padécéŋ kajuru: ~{0}
+nstab-main|Leppa
+nstab-user|Leppa papaké
+nstab-media|Leppa média
+nstab-special|Leppa spésiala
+nstab-project|Proyek
+nstab-image|Rapang
+nstab-mediawiki|Pappaseŋ
+nstab-template|Templata
+nstab-help|Paŋinriŋ
+nstab-category|Kategori
+nosuchspecialpage|Iyaro leppa spésiala dé'na eŋka
+error|Éro
+databaseerror|Éro databése
+readonly|Databése rikonci
+missingarticle-diff|(Beda: ~{0}, ~{1})
+internalerror|Éro internal
+internalerror_info|Éro internal: ~{0}
+badtitle|Judul dek essa
+viewsource|Ita sumber
+virus-unknownscanner|Antivirus dé' riisseŋ:
+yourname|Aseŋ papaké:
+yourpassword|Adacili:
+login|log attama
+nav-login-createaccount|Log attama / ebbu akun
+userlogin|Log attama / ebbu akun
+logout|Log essu
+userlogout|Log essu
+notloggedin|Déppa log attama
+nologin|Dé' gaga akaun? '''~{0}'''.
+nologinlink|Ebbu akun
+createaccount|Ebbu akun
+gotaccount|Purani eŋka akun? '''~{0}'''.
+gotaccountlink|Log attama
+loginerror|Éro log attama
+mailmypassword|E-mail adacili baru
+oldpassword|Pasewodo matoa:
+extlink_tip|Link risaliweŋ (jangan lupa awalan http:// )
+savearticle|Taro leppa
+preview|Pribiu
+showpreview|Ita pribiu
+showdiff|Mita perubahan
+summary-preview|Pribiu summary:
+blockedtitle|Papaké riblok
+accmailtitle|Ada sandi ni riantarak.
+accmailtext|Ada sandi "~{0}" riantarak ri ~{1}.
+anontalkpagetext|----''Ini adalah halaman diskusi untuk pengguna anonim yang belum membuat rekening atau tidak menggunakannya. Karena tidak membuat rekening, kami terpaksa memakai alamat IP untuk mengenalinya. Alamat IP seperti ini dapat dipakai oleh beberapa pengguna yang berbeda. Jika Anda adalah pengguna anonim dan merasa mendapatkan komentar-komentar yang tidak berkaitan dengan anda, kami anjurkan untuk [[Special:UserLogin\u007Cmembuat rekening atau masuk log]] untuk menghindari kerancuan dengan pengguna anonim lain.''
+editing|Mapadécéŋ ~{0}
+previousrevision|←Revisi riolo
+currentrevisionlink|Revisi tannapa
+page_first|séuwani
+histfirst|Poŋ loa
+histlast|Poŋ nappa
+historysize|(~{0} {{PLURAL:~{0}\u007Cbita\u007Cbita}})
+historyempty|(kapa)
+history-feed-item-nocomment|~{0} ri ~{1}
+rev-deleted-comment|(komentar ripeddé)
+rev-deleted-user|(ripeddéni aseŋna papakeë)
+rev-deleted-event|(log gau ripeddéni)
+rev-delundel|pakitaï/tapo'
+logdelete-selected|{{PLURAL:~{0}\u007CLog\u007CLog-log}} ripilé:
+revdelete-hide-text|Tapoïki text revisië
+revdelete-hide-comment|Tapo komentar mapadecéŋ
+revdelete-hide-user|Tapo aseŋ papakéna/IPna papadéceŋë
+revdelete-log|Saba:
+editundo|undo
+viewprevnext|Ita (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 ada\u007C~{1} ada}})
+search-redirect|(redirect ~{0})
+mypreferences|Bérékkeŋeŋna iyya
+prefs-watchlist|Watchlist
+prefs-misc|Misc
+saveprefs|Taro
+prefs-editing|Mapadécéŋ
+searchresultshead|Masappa
+youremail|E-mail:
+username|Aseŋ papaké:
+email|E-mail
+group-sysop|Puŋgawa
+group-all|(sininna)
+group-user-member|{{GENDER:~{0}\u007CPappaké}}
+group-sysop-member|Puŋgawa
+grouppage-user|{{ns:project}}:Pappaké
+grouppage-sysop|{{ns:project}}:Puŋgawa
+right-read|Mabbaca leppa
+right-edit|Mappadécéŋi leppa
+recentchanges|Pappakinra tanappa
+rcshowhidebots|~{0} bot
+rcshowhideliu|~{0} papaké mattama' log
+rcshowhideanons|~{0} papaké anon
+diff|beda
+hide|Tapok
+minoreditletter|k
+newpageletter|B
+boteditletter|b
+recentchangeslinked|Pappakapinra terkait
+recentchangeslinked-feed|Pappakapinra terkait
+recentchangeslinked-toolbox|Pappakapinra terkait
+upload|Lureng berkas
+uploadbtn|Lureng berkas
+listfiles_name|Aseŋ
+file-anchor-link|Rapang
+filehist-user|Papaké
+filehist-dimensions|Dimensi
+imagelinks|Liŋke
+filedelete|Mapeddé ~{0}
+filedelete-legend|Mapeddé berkas
+filedelete-intro|Iko purani mapeddé '''[[Media:~{0}\u007C~{0}]]'''.
+filedelete-submit|Peddé
+filedelete-success|'''~{0}''' purani ripeddé.
+filedelete-success-old|Berkas '''[[Media:~{0}\u007C~{0}]]''' versi ~{2}, ~{1} purani ripeddé.
+filedelete-nofile|'''~{0}''' dé'na eŋka.
+mimesearch|Assapparaŋ MIME
+mimetype|Tipe MIME:
+download|unduh
+randompage|Leppa random
+randompage-nopages|Degaga leppa rilaleŋ iyyé namespaceë.
+statistics-files|File-file nalise menré
+ancientpages|Leppa talloa
+move|Paleccé
+movethispage|Paleccé leppa iyyé
+specialloguserlabel|Papaké:
+log|Log
+all-logs-page|Maneŋ log
+allpagesfrom|Mappaitang halamang-halamang rimulai:
+allarticles|Sininna leppa
+allinnamespace|Maneŋ leppa (namespace ~{0})
+allpagessubmit|Lanre
+allpagesprefix|Mappaitang halamang-halamang éngkalinga awang:
+addedwatchtext|Halamang "[[:~{0}]]" ni ritamba ri ida [[Special:Watchlist\u007Cwatchlist]].\nHalamang bicara éréngé gabungan halamang bicara pada wettu depan didaftarkan koe,\néréngé halamang akan wessi '''umpek''' ri [[Special:RecentChanges\u007Cdaftar pinra tanappa]] barak lebih lemmak ita.\n\nApak ida ronnak mappedde halamang édé ri daftar jagaan, klik "Mangedda jaga" pada kolom ri sedde.
+watch|Ampi
+unwatch|Tenriampi
+actioncomplete|Proses makkapo
+dellogpage|Log peddé-peddé
+prot_1movedto2|[[~{0}]] ésuk ri [[~{1}]]
+sp-contributions-talk|Bicara
+whatlinkshere|Pranala ri leppa iyéwé
+whatlinkshere-page|Leppa:
+whatlinkshere-links|← liŋke
+ipblocklist-submit|Sappa
+blocklink|blok
+contribslink|kontrib
+articleexists|Leppa béla ida pile ni ujuk, a dek essa.\nSilakan pile aseng laing.
+movelogpage|Log leccé
+movereason|Saba:
+delete_and_move|Peddé nappa paleccé
+delete_and_move_text|==Mapeddé riperelu==\nLeppa destinasi "[[:~{0}]]" purani eŋka.\nEloko peddéï supaya weddiŋi mapalecé?
+delete_and_move_confirm|Iyé', peddé iyaro leppa
+delete_and_move_reason|Ripeddé supaya weddiŋi mapalecé
+immobile-source-namespace|Leppa-leppa rilaleŋna namespace "~{0}"ë de'na ullé ripaleccé
+immobile-source-page|Iyyedé leppaë de'na ullé ripaleccé.
+allmessages|Maneng pappaseng
+allmessagesname|Aseng
+allmessagesdefault|Teks totok
+allmessagescurrent|Teks kokkoro
+tooltip-pt-userpage|Leppa papaké iya'
+tooltip-pt-mytalk|Leppa bicara iya'
+tooltip-pt-preferences|Preferencena iya'
+tooltip-pt-logout|Log maessu
+tooltip-ca-talk|Pabicarana iyé leppa
+tooltip-ca-move|Paléccé leppa édé
+tooltip-search|Sappa ri {{SITENAME}}
+tooltip-search-go|Lao ri leppa aseŋna pappada iyyé rekko eŋkaï
+tooltip-n-mainpage|Lao ri Leppa Indoë
+tooltip-ca-nstab-special|Iyanaéwé séuwa leppa spésiala', dé'na idi' ullé padécéŋiki
+anonymous|Pabbuak anonim {{SITENAME}}
+imagemaxsize|Gangkai rapang pada keterangan rapang ri halamang hingga:
+ilsubmit|Sappa
+namespacesall|maneŋ
+monthsall|maneŋ
+imgmultigo|Lao!
+imgmultigoto|Lao ri leppa ~{0}
+ascending_abbrev|énré
+descending_abbrev|no
+table_pager_first|Leppa séuwani
+table_pager_limit_submit|Lao
+autosumm-replace|Masullé leppaë lao '~{0}'
+autosumm-new|Leppa baru: '~{0}'
+size-bytes|~{0} B
+size-kilobytes|~{0} KB
+size-megabytes|~{0} MB
+size-gigabytes|~{0} GB
+version-specialpages|Leppa spésiala
+specialpages|Leppa spésiala
+specialpages-note|* Leppa spésiala normal\n* <strong class="mw-specialpagerestricted">Leppa spésiala terbatas</strong>
+specialpages-group-other|Leppa spésiala laiŋë
+specialpages-group-login|Log attama / mendaftar
+specialpages-group-changes|Pinrana tanappaë sibawa logeë
+specialpages-group-users|Papaké sibawa hak-hak
+specialpages-group-pages|Sininna leppaë
+specialpages-group-pagetools|Tool leppaë
+specialpages-group-wiki|Data sibawa tool wiki
+specialpages-group-spam|Tool spam
+blankpage|Leppa kosoŋë
+']:>
+).lang
+;

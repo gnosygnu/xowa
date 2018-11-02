@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"ChrisPtDe"
+		]
+	},
+	"wikibase-entity-item": "èlèment",
+	"wikibase-entity-property": "propriètât",
+	"wikibase-entity-query": "demanda",
+	"wikibase-error-autocomplete-response": "Lo sèrvior at rèpondu : $1",
+	"wikibase-sitelinks-sitename-columnheading": "Lengoua",
+	"wikibase-sitelinks-siteid-columnheading": "Code",
+	"wikibase-sitelinks-link-columnheading": "Articllo liyê",
+	"wikibase-tooltip-error-details": "Dètalys",
+	"datatypes-type-wikibase-item": "Èlèment",
+	"datatypes-type-commonsMedia": "Fichiér mèdia de Commons"
+}

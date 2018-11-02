@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"ОйЛ"
+		]
+	},
+	"wikibase-edit": "исправи",
+	"wikibase-save": "съхранѥниѥ",
+	"wikibase-save-inprogress": "съхранѥниѥ···",
+	"wikibase-remove-inprogress": "поничьжєниѥ···",
+	"wikibase-description-empty": "опьсаниꙗ ѥщє нѣстъ",
+	"wikibase-sitelink-site-edit-placeholder": "мѣсто",
+	"wikibase-sitelink-page-edit-placeholder": "страница",
+	"wikibase-terms": "дроугꙑ ѩꙁꙑкꙑ",
+	"wikibase-remove": "поничьжєниѥ",
+	"wikibase-aliases-label": "вѣдомъ ѥстъ такождє ꙗко :",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|кладѧꙃь|кладѧꙃꙗ|кладаꙃь}}",
+	"wikibase-entityselector-more": "вѧщє",
+	"wikibase-itembytitle-lookup-site": "мѣсто :",
+	"wikibase-itembytitle-lookup-page": "страница :",
+	"wikibase-itembytitle-submit": "ищи",
+	"wikibase-itemdisambiguation-lookup-language": "ѩꙁꙑкъ :",
+	"wikibase-itemdisambiguation-submit": "ищи",
+	"wikibase-newentity-submit": "сътворѥниѥ",
+	"wikibase-modifyterm-language": "ѩꙁꙑкъ :",
+	"wikibase-entitieswithoutlabel-label-language": "ѩꙁꙑкъ :",
+	"wikibase-entitieswithoutlabel-label-type": "тѷпъ :",
+	"wikibase-entitieswithoutlabel-label-alltypes": "вьсꙗ",
+	"wikibase-listdatatypes-time-head": "врѣмѧ"
+}

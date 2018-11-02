@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"KartikMistry"
+		]
+	},
+	"wikibase-timedetails-time": "સમય",
+	"wikibase-timedetails-timezone": "સમયવિસ્તાર",
+	"wikibase-timedetails-before": "પહેલાં",
+	"wikibase-timedetails-after": "પછી",
+	"wikibase-globedetails-longitude": "રેખાંશ",
+	"wikibase-globedetails-latitude": "અક્ષાંસ",
+	"wikibase-globedetails-globe": "ગોળો"
+}

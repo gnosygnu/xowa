@@ -1,0 +1,129 @@
+this
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Sande
+monday|Mande
+tuesday|Tusde
+wednesday|Wenesde
+thursday|Tosde
+friday|Fraede
+saturday|Sarede
+sun|San
+mon|Man
+tue|Tu
+wed|Wen
+thu|To
+fri|Frae
+sat|Sar
+january|Januware
+february|Februari
+march|Maj
+april|Epril
+may_long|Mei
+june|Jun
+july|Julae
+august|Ogis
+september|Septemba
+october|Oktoba
+november|Novemba
+december|Desemba
+january-gen|Januware
+february-gen|Februari
+march-gen|Maj
+april-gen|Epril
+may-gen|Mei
+june-gen|Jun
+july-gen|Julae
+august-gen|Ogis
+september-gen|Septemba
+october-gen|Oktoba
+november-gen|Novemba
+december-gen|Desemba
+mar|Maj
+apr|Epr
+may|Mei
+aug|Ogis
+oct|Okt
+dec|Des
+underline-always|Oltaem
+underline-never|Neva
+mypage|Pej blong mi
+mytalk|Tingting blong mi
+and| mo
+qbedit|Jenisim hem
+qbpageoptions|Pej ia
+qbmyoptions|Ol pej blong mi
+search|Faenem samting
+history|Pej histri
+history_short|Histri
+edit|Jenisim hem
+newpage|Mekem niu pej
+talkpagelinktext|Toktok
+specialpage|Spesel Pej
+talk|Tingting
+mainpage|Nambawan Pej
+mainpage-description|Nambawan Pej
+portal|Haus blong toktok‎
+portal-url|Project:Haus blong toktok‎
+retrievedfrom|Kam long "~{0}"
+editsection|jenisim hem
+editold|jenisim hem
+red-link-title|~{0} (pej i no stap)
+nstab-main|Atikel
+nstab-special|Spesel pej
+nstab-project|Projek pej
+minoredit|Mi bin mekem wan smol jenis
+servertime|Taem blong server
+recentchanges|Niu jenis
+listfiles_name|Nem
+shortpages|Ol smol pej
+longpages|Ol big pej
+newpages|Ol niu pej
+allarticles|Olgeta atikel
+emailfrom|Kam long
+emailto|Go long:
+year|Yia:
+sp-contributions-talk|toktok
+move-page-legend|Muvum pej
+movearticle|Muvum pej:
+allmessagesname|Nem
+tooltip-pt-mytalk|Pej blong tingting blong mi
+tooltip-p-logo|Nambawan Pej
+tooltip-n-mainpage|Go long Nambawan Pej
+tooltip-minoredit|Em i stap wan smol jenis
+exif-imagedescription|Nem blong pikta
+exif-exposuretime-format|~{0} sek. (~{1})
+namespacesall|olgeta
+monthsall|olgeta
+table_pager_first|Nambawan pej
+autosumm-new|Niu pej: ~{0}
+specialpages|Spesel pej
+']:>
+).lang
+;

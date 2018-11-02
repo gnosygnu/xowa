@@ -1,0 +1,26 @@
+<div id='cfg_grps'>
+  <div>
+    <p id='page_help_para'>{{{page_help}}}</p>
+  </div>
+{{#grps}}
+  <h2>{{{name}}}</h2>
+
+  {{#itms}}
+  <div class="xocfg_row flex_div">
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("{{key}}")' title='view more info'>&nbsp;</span>
+    </div>
+    <div id='{{key}}__name' class='xocfg_itm_name'>{{{name}}}</div>
+    <div id='{{key}}__undo' data-xocfg-type='{{type}}' class='xocfg_itm_delete{{^edited}} xocfg_itm_hide{{/edited}}'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("{{key}}")' title="reset to &quot;{{{dflt}}}&quot;">&nbsp;</span>
+    </div>
+    <div class='xocfg_itm_data'>{{{html}}}</div>
+    <input type='hidden' id='{{key}}__key_box' value='{{key}}'></input>
+    <input type='hidden' id='{{key}}__ctx_box' value='{{{ctx}}}'></input>
+  </div>
+  <div id='{{key}}_help_div' class='xohelp_div'>
+    <div id='{{key}}_help_msg' class='xohelp_msg'>{{{help}}}</div>
+  </div>
+  {{/itms}}
+{{/grps}}
+</div>

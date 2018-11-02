@@ -1,0 +1,1062 @@
+this
+.fallback_load('ru')
+.ns_names
+  .load_text(
+<:['
+-2|Медиа
+1|веревирд авун
+2|Уртах
+3|Уртахдин веревирд авун
+5|$1 веревирд авун
+6|Файл
+7|Файл веревирд авун
+8|MediaWiki
+9|MediaWiki веревирд авун
+10|Шаблон
+11|Шаблон веревирд авун
+14|Категория
+15|Категория веревирд авун
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+1|Обсуждение
+2|Участник
+3|Обсуждение участника
+5|Обсуждение {{GRAMMAR:genitive\u007C$1}}
+7|Обсуждение файла
+9|Обсуждение MediaWiki
+11|Обсуждение шаблона
+12|Справка
+13|Обсуждение справки
+14|Категория
+15|Обсуждение категории
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Гьяд
+monday|Ислен
+tuesday|Саласа
+wednesday|Арбе
+thursday|Хемис
+friday|Жуьмя
+saturday|Киш
+sun|Гьяд
+mon|Исл
+tue|Сал
+wed|Aрб
+thu|Xем
+fri|Жум
+sat|Киш
+january|январь
+february|февраль
+march|март
+april|апрель
+may_long|май
+june|июнь
+july|июль
+august|август
+september|сентябрь
+october|октябрь
+november|ноябрь
+december|декабрь
+january-gen|январь
+february-gen|февраль
+march-gen|март
+april-gen|апрель
+may-gen|май
+june-gen|июнь
+july-gen|июль
+august-gen|август
+september-gen|сентябрь
+october-gen|октябрь
+november-gen|ноябрь
+december-gen|декабрь
+jan|янв
+feb|фев
+mar|мар
+apr|апр
+may|май
+jun|июн
+jul|июл
+aug|авг
+sep|сен
+oct|окт
+nov|ноя
+dec|дек
+toc|Къене авайбур
+redirectedfrom|(~{0}-кай рахкъурнава )
+allpages|Вири ччинар
+prevpage|Алатай чар (~{0})
+collapsible-collapse|Алчудрун
+collapsible-expand|Гегьеншрун
+categories|Категорияр
+lastmodifiedat|Ччинин эхиримжи масакӀа хьун:  ~{0},  ~{1}
+thumbnail-more|ЧIехи авун
+otherlanguages|Маса чӀаларал
+blanknamespace|(Асул)
+pagecategories|{{PLURAL:~{0}\u007C1=Категория\u007CКатегорияр}}
+category_header|«~{0}» категориядин ччинар
+subcategories|агъакатегорияр
+category-media-header|"~{0}" категориядин медиа
+category-empty|''Алай чӀава и категория ичӀи я."
+category-subcat-count|{{PLURAL:~{1}\u007CИ категорияда анжах гуьгъуьна авай подкатегория ава.\u007C~{1}-кай {{PLURAL:~{0}\u007C1=агъакатегория\u007C~{0} агъакатегорияр}} къалурнава }}
+category-subcat-count-limited|И категорияда {{PLURAL:~{0}\u007C1=агъакатегория\u007C~{0} агъакатегорияр}} ава.
+category-article-count|{{PLURAL:~{1}\u007CИ категорияда анжах гуьгъуьна авайди ччин ава \u007C~{1}-кай къалурнавай {{PLURAL:~{0}\u007C1=ччин\u007C~{0} ччин}} гьа а категориядин ччин я}}
+category-article-count-limited|И категорияда {{PLURAL:~{0}\u007C1=ччин\u007C~{0} ччин}} ава.
+category-file-count|{{PLURAL:~{1}\u007CИ категорияда анжах гуьгъуьна авайди файл ава \u007C~{1}-кай къалурнавай {{PLURAL:~{0}\u007C1=файл\u007C~{0} файлар}} гьа а категориядин файл я}}
+category-file-count-limited|И категорияда {{PLURAL:~{0}\u007C1=файл\u007C~{0} файлар}} ава.
+categorytree-num-categories|~{0} К
+categorytree-num-pages|~{0} Ч
+categorytree-num-files|~{0} Ф
+nextn|Гуьгъуьнин {{PLURAL:~{0}\u007C~{0}}}
+prevn|Вилик фейи  {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|(кьатӀ)
+bold_sample|ЯцIу текст
+bold_tip|Къалин текст
+italic_sample|Курсивдин текст
+italic_tip|Курсивдин текст
+link_sample|Элячlунин кьилин цlар
+link_tip|Къенепатан элячlун
+headline_sample|Кьилинцlарцlин текст
+headline_tip|2-й дережадин кьилин цlар
+hidden-category-category|Чуьнуьхай категорияр
+statistics|Статистика
+statistics-header-pages|Ччинрин статистика
+statistics-articles|Макъалаяр
+statistics-pages|Ччинар
+categorytree|Категориядин ттар
+categorytree-portlet|Категорияр
+categorytree-legend|Категориядин ттар къалурун
+categorytree-category|Klватlалар:
+categorytree-go|Ппарун
+categorytree-parents|Вини категорияр
+categorytree-mode-categories|анжах категорияр
+categorytree-mode-pages|файлар галачиз ччинар
+categorytree-mode-all|Вири ччинар
+categorytree-collapse|Алчудрун
+categorytree-expand|Гегьеншрун
+categorytree-num-empty|ичIи
+categorytree-load|ппарун
+categorytree-loading|ппарзава
+categorytree-nothing-found|затIни жагъурнавач
+categorytree-no-subcategories|агъакатегорияр авайд ттуш
+cite|Цитата гъин
+cite_page|Ччин:
+cite_submit|Цитата гъин
+tog-underline|ЭлячӀунрин кӀаникай цӀар чӀугун
+tog-hideminor|Мукьвара хьайи дегишвилера авай гъвечӀи дуьзар хъувунар чуьнуьхун
+tog-hidepatrolled|Мукьвара хьайи дегишвилера авай къаравулвал авунвай дуьзар хъувунар чуьнуьхун
+tog-newpageshidepatrolled|ЦӀийи ччинрин сиягьда къаравулвал авунвай ччинар чуьнуьхун
+tog-extendwatchlist|ЧӀехи сиягь килигунин, кутазвай вири дегишунар, амма са эхирбур туш
+tog-usenewrc|Мукьвара хьайи масакӀавилерин ччина ва вилив хуьнин сиягьда дуьзар хъувунар кӀеретӀриз ччара авун. (JavaScript герекзава)
+tog-numberheadings|Кьилин цӀарариз автоматдаказ номерар эцигун
+tog-showtoolbar|Дуьзар хъувунин алатрин кьвати къалура (JavaScript)
+tog-editondblclick|Ччинар кьве тӀампӀуналди дуьзар хъувун (JavaScript герекзава)
+tog-editsectiononrightclick|Пайдин кьилинцӀардиз эрчӀи патан тӀампӀ авуна пайдин дуьзар хъувуниз мумкинвал гун (JavaScript герекзава)
+tog-watchcreations|За туькӀуьрнавай ччинар зи гуьзетунин сиягьдиз алава авун
+tog-watchdefault|За дуьзар хъувунвай ччинар зи гуьзетунин сиягьдиз алава авун
+tog-watchmoves|За тӀвар эхцигай ччинар зи гуьзетунин сиягьдиз алава авун
+tog-watchdeletion|За алуднавай ччинар зи гуьзетунин сиягьдиз алава авун
+tog-minordefault|Авайвилелди, вири дуьзар хъувунар гъвечӀи дуьзар хъувунар хьиз лишан авун
+tog-previewontop|Сифтедин килигун дуьзар хъувундин дакӀардин вилик эцига
+tog-previewonfirst|Дуьзар хъувундиз эгечӀайла сифтедин килигун къалурун
+tog-enotifwatchlistpages|Зи гуьзетунин ччин масакӀа хьайила заз эмейл ракъура.
+tog-enotifusertalkpages|Кьилди жуван веревирдрин ччина хьанвай дегишвилерикай э-почтадиз чар ракъурун.
+tog-oldsig|Алай къул:
+tog-showhiddencats|Чуьнуьхай категорияр къалурун
+underline-always|Гьамиша
+underline-never|Садрани
+underline-default|Браузердин низамарунар кардик кутун
+editfont-style|Дуьзар хъувунин чкадин шрифтдин жуьре
+editfont-default|Браузердин низамарунрикай шрифт
+editfont-monospace|Моногьяркьуьвилер авай шрифт
+editfont-sansserif|КьацӀ авачир шрифт
+editfont-serif|КьацӀ авай кхьин
+hidden-categories|{{PLURAL:~{0}\u007C1=Чуьнуьхай категория\u007CЧуьнуьхай категорияр}}
+index-category|Индексавунвай ччинар
+noindex-category|Индекстежезвай ччин
+broken-file-category|ЧӀуру файлдин элячӀунар авай ччинар
+about|Гьакъиндай
+article|Макъала
+newwindow|(цӀийи дакӀарда ахъа жезва)
+cancel|Гьич авун
+moredotdotdot|Мад...
+mypage|Зин чар
+mytalk|Зи веревирдрин ччин
+anontalk|И IP-адресдиз талукь веревирд.
+navigation|Навигация
+and| ва
+qbfind|Жугъун
+qbbrowse|Килигун
+qbedit|Дегишарун
+qbpageoptions|Ччинин низамарунар
+qbmyoptions|Зи ччинар
+faq|Фад-фад гузвай жузунар (ФГЖ)
+faqpage|Project:ФГС
+actions|Крар
+namespaces|ТӀварарин генгвилер
+variants|Жуьреяр
+errorpagetitle|ГъалатӀ
+returnto|~{0} ччиниз элкъвена хтун
+tagline|{{SITENAME}} Cайтдихъай
+help|Куьмек
+search|Жугъурун
+searchbutton|Жагъурун
+go|ЭлячӀун
+searcharticle|ЭлячӀун
+history|Ччинин тарих
+history_short|Тарих
+updatedmarker|Зи эхиримжи гьахьун гуьгуьнлай цӀийи авунва
+printableversion|Басма авун патал жуьре
+permalink|Гьамишан элячӀун
+print|Басма авун
+view|Килигун
+edit|Дуьзар хъувун
+create|ТуькӀуьрун
+editthispage|И ччин дуьзар хъувун
+create-this-page|И ччин туькӀуьрун
+delete|Алудун
+deletethispage|И ччин алудун
+undelete_short|~{0} {{PLURAL:~{0}\u007C1=дуьзар хъувун\u007Cдуьзар хъувунар}} туьхкӀуьрун
+viewdeleted_short|{{PLURAL:~{0}\u007C1=дуьзар хъувуниз\u007C~{0} дуьзар хъувунриз}} килигун
+protect|Xуьн
+protect_change|масакӀа авун
+protectthispage|И ччин блокарун
+unprotect|Хуьн дегишарун
+unprotectthispage|И ччинин хуьн дегишарун
+newpage|ЦӀийи ччин
+talkpage|И ччин веревирдун
+talkpagelinktext|Рахун
+specialpage|Куьмекчи ччин
+personaltools|Кьилди вичин алатар
+articlepage|Къене авайбурун ччиндиз килигун
+talk|Веревирд авун
+views|Килигунар
+toolbox|Алатар
+userpage|Уртахдин ччиниз килигун
+projectpage|Проектдин ччиниз килигун
+imagepage|Файлдин ччиниз килигун
+mediawikipage|Чардин ччиниз килигун
+templatepage|Чешнедин ччиниз килигун
+viewhelppage|Куьмекдин ччиниз килигун
+categorypage|Категориядин ччиниз килигун
+viewtalkpage|Веревирдриз килигун
+redirectpagesub|Рахкъурунин ччин
+protectedpage|Хвенвай ччин
+jumpto|ЭлячӀун иниз:
+jumptonavigation|Навигация
+jumptosearch|Жугъурун
+pool-queuefull|ТӀалабар кӀватзавайди ацӀа я
+pool-errorunknown|Малумтушир гъалатӀ
+aboutsite| {{SITENAME}}кай
+aboutpage|Project:Гьакъиндай
+copyright|Къене авайбур ~{0} жугъуриз жеда.
+copyrightpage|{{ns:project}}:Автордин ихтияр
+currentevents|Алай вакъиаяр
+currentevents-url|Project:Алай вакъиаяр
+disclaimers|Жавабдарвал хивяй акъудун
+disclaimerpage|Project:Жавабдарвал хивяй акъудун
+edithelp|Дуьзар хъувун патал куьмек
+mainpage|Кьилин ччин
+mainpage-description|Кьилин ччин
+policy-url|Project:Къайдаяр
+portal|КӀапӀалдин портал
+portal-url|Project:КӀапӀалдин портал
+privacy|Чинебанвилин сиясат
+privacypage|Project:Чинебанвилин политика
+badaccess|Гьатунин гъалатӀдин
+ok|ОК
+retrievedfrom|Чешне "~{0}" я
+youhavenewmessages|Квез ~{0} (~{1}) атанва.
+youhavenewmessagesmulti|"~{0}"-да квез цӀийи чарар атанва.
+editsection|Дуьзар хъувун
+editold|Дуьзар хъувун
+viewsourceold|сифте кьилин коддиз килига
+editlink|Дуьзар хъувун
+viewsourcelink|Сифте кьилин коддиз килига
+editsectionhint|Пай дуьзар хъувун: ~{0}
+showtoc|къалурун
+hidetoc|чуьнуьхун
+thisisdeleted|~{0} килигун ва я туькӀуьр хъувун?
+viewdeleted|~{0} килигун?
+feedlinks|Хулан жуьре
+site-rss-feed|~{0} — RSS-зул
+site-atom-feed|~{0} - атом-зул
+page-rss-feed|"~{0}" RSS Xуьрек
+page-atom-feed|"~{0}" Атом-зул
+red-link-title|~{0} (ихьтин ччин авайди туш)
+nstab-main|Ччин
+nstab-user|Уртахдин ччин
+nstab-media|Медиа ччин
+nstab-special|Куьмекдин ччин
+nstab-project|Проектдин ччин
+nstab-image|Файл
+nstab-mediawiki|Малумат
+nstab-template|Чешне
+nstab-help|Куьмекдин ччин
+nstab-category|Категория
+nosuchaction|Ихьтин кар авайд ттуш
+nosuchspecialpage|Ихьтин куьмекчи ччин авайд ттуш
+error|ГъалатӀ
+databaseerror|Ганайбурун базадин гъалатӀ
+missing-article|Малуматрин базада, квез герек авай "~{0}" ~{1} тӀвар алай ччиндин текст жагъанвач\n\nИхьтин гьал адет яз алуднавай ччинин масакӀавилерин тарихдиз цӀуру рекьяй элячӀайла арадал къвезва.\n\nСебеб ам туштӀа, виридалайни мумкин тирди куьне программада гъалатӀ жугъурун я\nТавакъу ийида, URL къалурна адакай [[Special:ListUsers/sysop\u007Cадминистратордиз]] хабар це.
+missingarticle-rev|(жуьре#: ~{0})
+internalerror|Къенепатан гъалатӀ
+internalerror_info|Къенепатан гъалатI ~{0}
+filecopyerror|«~{0}» файл «~{1}» -з тӀвар эхцигиз жезвач.
+filerenameerror|«~{0}» файл «~{1}» -з тӀвар эхцигиз жезвач.
+badarticleerror|И ччина и кар кьилиз акъудиз мумкин ттуш.
+cannotdelete-title|"~{0}" ччин алудиз жезвач
+badtitle|Ииже текъвер тӀвар
+badtitletext|ТӀалабзавай ччин я вичел амал алачир я, ичӀи я, ва я чӀаларарадин ва я викиарадин кьилин цӀарар чӀурукӀа къалурнава. Мумкин я, кьилин цӀарара сад ва я адалай гзаф рехъ гун виже текъвер символар кардик кутунвайди я.
+viewsource|Килигун
+viewsource-title|~{0} патал чешмедиз килигун
+actionthrottled|Фадвилин сергьятар
+virus-scanfailed|Сканди гъалатӀ (кулег~{0})
+virus-unknownscanner|Малумтушир антивирус
+yourname|Уртахдин тӀвар
+yourpassword|Парол
+yourpasswordagain|Парол кхьин хъувун:
+remembermypassword|И браузерда зи логин рикӀел хуьхь (лап гзаф ~{0} {{PLURAL:~{0}\u007C1=югъ\u007Cйикъар}})
+yourdomainname|Куь домен
+login|Гьахьун
+nav-login-createaccount|Гьахьун/аккаунт туькӀуьрун
+userlogin|Гьахьун/аккаунт туькӀуьрун
+userloginnocreate|Гьахьун
+logout|ЭкъечӀун
+userlogout|ЭкъечӀун
+notloggedin|Куьн гьахьнавач
+nologin|Квез аккаунт авачни? ~{0}.
+nologinlink|Аккаунт туькӀуьрун
+createaccount|Аккаунт туькӀуьрун
+gotaccount|Квез аккаунт авани?~{0}
+gotaccountlink|Гьахьун
+userlogin-resetlink|Гьахьунин куьлуь-шуьлуьяр рикӀел алатнани?
+createaccountmail|Э-чар галаз
+createaccountreason|Себеб:
+loginerror|Гьахьунин гъалатӀ
+createaccounterror|И аккаунт туькӀуьриз мумкин ттуш: ~{0}
+loginsuccesstitle|Агалкьунралди гьахьун
+wrongpasswordempty|Тавакъу ийида, ичӀи тушир парол ттур.
+mailmypassword|Парол алудна гадрун
+mailerror|Чар ракъурунин гъалатӀ: ~{0}
+emailconfirmlink|Куь электрон почтунин адрес тестикьун.
+accountcreated|Аккаунт туькӀуьрнава
+loginlanguagelabel|ЧӀал: ~{0}
+changepassword|Парол дегишарун
+resetpass_header|Аккаунтдин парол дегишун
+oldpassword|ЦӀуру парол:
+newpassword|ЦӀийи парол:
+retypenew|Парол кхьин хъувун:
+resetpass_submit|Парол эцигун ва гьахьун
+resetpass_forbidden|Парол дегишиз мумкин ттуш
+resetpass-submit-loggedin|Парол дегишарун
+resetpass-submit-cancel|Гьич авун
+passwordreset|Парол алудна гадрун
+passwordreset-legend|Парол алудна гадрун
+passwordreset-username|Уртахдин тlвар:
+passwordreset-domain|Домен:
+passwordreset-email|E-mail адрес
+passwordreset-emailelement|Уртахдин тIвар: ~{0}\nВахтуналди тир пароль: ~{1}
+changeemail|Э-почта дегишарун
+changeemail-none|(садни)
+changeemail-submit|E-адрес дегишун
+extlink_sample|http://www.example.com элячlунин кьилин цlар
+extlink_tip|Къецепатан элячlун ( http:// префикс рикlел хуьх)
+nowiki_sample|Формат тавунвай текст иниз тур
+nowiki_tip|Викидин форматун гьисаба кьамир
+image_tip|Ттунвай файл
+media_tip|Файлдин элячlун
+sig_tip|Куь къулни вахт
+hr_tip|Къаткай цlар (фад-фад кардик кутумир )
+summary|Нетижа:
+subject|Тема/кьилинцIар
+minoredit|ГъвечIи дуьзар хъувун
+watchthis|И ччин гуьзетун
+savearticle|Ччин хуьн
+preview|Сифтедин килигун
+showpreview|Виликамаз килигун
+showdiff|МасакIавилер къалурун
+anoneditwarning|'''Дикъет:''' Куьне системадиз жув вуж ятIа лагьанвач. Куь IP-адрес и ччинин масакIавилерин тарихдиз  кхьида.
+summary-preview|Сифте килигун паталди:
+subject-preview|КьилинцIарцIин сифтедин килигун:
+blockedtitle|Иштиракчи блокарнава
+blockednoreason|Са себебни ганвач
+nosuchsectiontitle|Пай жугъуриз жезвач
+loginreqtitle|Логин герекзава
+loginreqlink|гьахьун
+accmailtitle|Парол ракъурнава.
+newarticle|(ЦIийи)
+newarticletext|Куьне гьеле авачир ччиниз элячlнава.  \nАм туькlуьрун патал агъадихъ галай дакlарда текст гьадра. (гегьеншдиз [~{0} куьмекдин ччина] килигиз жеда).\nКуьне инал гъалатlдин гъиляй элячlнаватlа, кьу браузердин "кьулухъ"" дуьгмедал илиса.
+noarticletext|Исятда и  ччинда са текстни авач.\nКвевай [[Special:Search/{{PAGENAME}}\u007C и тlвар алай ччин]] муькуь ччинра жугъуриз,\n<span class="plainlinks"> [{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} журналрин талукь тир кхьей затIар жугъуриз],\nва я [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} и тlвар алай ччин туькIуьриз жеда] </span>.
+noarticletext-nopermission|Исятда и ччина са текстни авач.\nКвевай [[Special:Search/{{PAGENAME}}\u007C и тӀвар алай ччин]] муькуь ччинра жугъуриз ва я\n<span class="plainlinks"> [{{fullurl: {{# Special:Log}} \u007C page = {{FULLPAGENAMEE}}}} журналрин талукь тир кхьей затӀар жугъуриз] жеда.
+blocked-notice-logextract|И уртах алайчIава блокарнава.\nАгъадихъ блокарунин журналдикай эхиримжи кхьинар къалурнава:
+previewnote|'''Рикlел хуьх хьи, им анжах сифтедин килигун я.'''  \nКуь масакIавилер гьеле хвенвач!
+editing|~{0} Дуьзар хъувун
+editingsection|Дуьзар хъувун ~{0}  (пай)
+editingcomment|~{0} дуьзар хъувун (цIийи пай)
+editconflict|Дуьзар хъувунрин акьунар: ~{0}
+yourtext|Зи текст
+yourdiff|Тафаватар
+copyrightwarning|Тавакъу ийида, фагьум ая хьи, {{SITENAME}}-диз кутунвай вири крариз ~{1} лицензиядин шартунал акъуднавайбур хьиз килигда. (гегьеншдиз ~{0}-з килига).\nКвез куьне кхьенвайбур азаддаказ чкӀун ва гьар са кас патахъай дуьзар хъувун кӀанзавачтӀа, а кхьенвайбур иниз эцигмир.<br />\nГьакӀни, куьне тестикьзава хьи, кутазвай алавайрин автор кьун я, я тахьайтӀа, куьне а алаваяр чпин къенеавайбур азад чкӀунни дегишун ихтияр гузвай чешмедикай ччин къачунва.<br />\n'''АВТОРДИН ИХТИЯР ХУЬЗВАЙ МАЛУМАТАР ИХТИЯР ГАЛАЧИЗ ЭЦИГМИР!'''
+templatesused|И ччина кардик кутунвай {{PLURAL:~{0}\u007C1=Чешне\u007CЧешнеяр}}:
+templatesusedpreview|{{PLURAL:~{0}\u007C1=Шаблон\u007CШаблонар}},илемишзавай дуьз клигунра:
+template-protected|(хвенвай)
+template-semiprotected|(са кьадар хвенва)
+hiddencategories|И ччин {{PLURAL:~{0} \u007C чуьнуьхай категориядиз \u007C ~{0} чуьнуьхай категорийриз}} талукь я:
+permissionserrors|ГЬахьнин гъалатlар
+permissionserrorstext-withaction|Квез и {{PLURAL:~{0}\u007C1=себебдалди\u007Cсебебралди}} ~{1} йиз ихтияр авайд туш:
+recreate-moveddeleted-warn|'''Дикъет! Куьне виликда алуднавай ччин туьхкlуьриз алахъзава.'''\nКвевай и ччинин туьхкlуьрунин гереквилиз килигиз тIалабзава.\nАгъадихъ и ччинин алудун ва тIвар эхцигунин журнал къалурнава.
+moveddeleted-notice|И ччин алуднава. \nАгъадихъ малумат патал и ччинин алудунин ва тIвар эхцигунин журнал къалурнава.
+log-fulllog|Вири журналдиз килигун
+edit-conflict|Дуьзар хъувунрин акьунар
+post-expand-template-inclusion-warning|'''Дикъет:''' Кутазвай чешнейрин кьадар гзаф чIехи я.\nБязи чешнеяр кутадач.
+post-expand-template-inclusion-category|Кутунай чешнейрин кьадардилай виниз экъечIнавай ччинар
+post-expand-template-argument-warning|'''Дикъет:''' И ччина ахъайна гегьеншрун патал гзаф чlехи кьадар авай гьич тахьайтIа са чешнедин аргумент ава.\n Ахьтин аргументар тагана элячIнава.
+post-expand-template-argument-category|Кими авунвай  чешнейрин аргументар авай ччинар
+viewpagelogs|И ччиниз талукь тир журналар къалура
+nohistory|И ччиниз талукь тир дуьзар хъувунин тарих авайд ттуш.
+currentrev|Алай жуьре
+currentrev-asof|~{0} тарихдиз талукь тир алай жуьре
+revisionasof|~{0} жуьре
+revision-info|~{1} патал авунвай ~{0} тарихдин масакIавал
+previousrevision|←Вилик алатай жуьре
+nextrevision|Мадни цlийи жуьре →
+currentrevisionlink|Алай жуьре
+cur|алай
+next|къведайди
+last|вилик алатай
+page_first|Садлагьайди
+page_last|эхиримжи
+histlegend|Тафаватдиз килигун: гекъигиз кlанзавайди жуьредин патав радио-кьватияр лишан ая ва  "ГЬалдун (Enter)"  ва я агъада авай дуьгмедиз илиса.<br />     \nГъавурда твазвайди: (алай)- алай жуьредикай тафават; (вилик фейи) - вилик фейи жуьредикай тафават; "гъ" - гъвечIи масакIавал.
+history-fieldset-title|Тарихдиз килигун
+history-show-deleted|Анжах алуднавайбур
+histfirst|Виридалайни цIуру
+histlast|Гилан цlийига
+historyempty|(ичIи)
+history-feed-title|Дуьзар хъувунрин тарих
+history-feed-item-nocomment|~{0}  ~{1}-аз
+rev-deleted-comment|Дуьзар хъувунин тегьерар кхьин алуднава
+rev-deleted-user|(уртахдин тӀвар алуднава)
+rev-deleted-event|(къейд алуднава)
+rev-delundel|къалурун/кIевирун
+rev-showdeleted|къалурун
+revdelete-show-file-submit|Эхь
+revdelete-hide-text|Ччинин и  жуьредин текст чуьнуьхун
+revdelete-hide-image|Файлдин къенеавайбур чуьнуьхун
+revdelete-hide-name|Карни адан объект чуьнуьхун
+revdelete-radio-set|Эхь
+revdelete-radio-unset|Ваъ
+revdelete-log|Кар
+revdel-restore|Аквадайвал масакIа авун
+pagehist|Ччинин тарих
+deletedhist|Алудунин тарих
+revdelete-reasonotherlist|Муькуь себеб
+revdelete-edit-reasonlist|Алудунин себебар дуьзар хъувун
+revdelete-offender|Автордин жуьре:
+suppressionlog|КIевирунин журнал
+mergehistory-from|Сифте кьилин ччин:
+mergehistory-into|Мураддин ччин
+mergehistory-submit|Дуьзар хъувунар сад авун
+mergehistory-reason|Себеб
+mergelog|Сад авунин журнал
+revertmerge|Ччара авун
+history-title|~{0} - масакӀавилерин тарих
+lineno|ЦIар ~{0}:
+compareselectedversions|Хкягъай жуьреяр гекъигун
+editundo|гьич авун
+searchresults|Къекъуьнрин нетижаяр
+searchresults-title|"~{0}" жугъура
+titlematches|Ччинрин тIварарин  ацалтунар
+textmatches|Ччинрин текстрин ацалтунар
+notextmatches|Авач чарчин кьил матчар
+prevn-title|Вилик фейи  ~{0} {{PLURAL:~{0}\u007C1=нетижа\u007Cнетижаяр}}
+nextn-title|КЪведай ~{0} {{PLURAL:~{0}\u007C1=нетижа\u007Cнетижаяр}}
+shown-title|Къалурин ~{0} {{PLURAL:~{0}\u007C1=нетижа\u007Cнетижаяр}} чъина
+viewprevnext|Килигун (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|'''И вики-проектда "[[:~{0}]]" тlвар алай ччин ава.'''
+searchmenu-new|'''И вики-проектда «[[:~{0}]]» ччин туькӀуьрун!'''
+searchprofile-articles|Асул ччинар
+searchprofile-images|Мультимедиа
+searchprofile-everything|Вири
+searchprofile-advanced|Гегьеншдиз
+searchprofile-articles-tooltip|~{0}-да къекъуьгъ
+searchprofile-images-tooltip|Файлар жугъура
+searchprofile-everything-tooltip|Вири ччинра къекъуьгъ (веревирдрин ччинар кваз)
+searchprofile-advanced-tooltip|Ганвай тlварарин генгвилера къекъуьгъ
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1=1 гаф\u007C~{1} гафap}})
+search-result-category-size|{{PLURAL:~{0}\u007C1=1 элемент\u007C~{0} элементар}} ({{PLURAL:~{1}\u007C1=1 агъакатегория\u007C~{1} агъакатегорияр}}, {{PLURAL:~{2}\u007C1=1 файл\u007C~{2} файлар}})
+search-redirect|(рахкъурун ~{0})
+search-section|(пай ~{0})
+search-suggest|Мумкин я хьи, куьне им фикирда кьуна: ~{0}
+search-interwiki-caption|Мукьва проект
+search-interwiki-default|~{0}(жавабар)
+search-interwiki-more|(мадни)
+search-relatedarticle|Галкlанавай
+searchrelated|Галкlанавай
+searchall|вири
+search-nonefound|Тlалабдив кьадай са нетижани жагъанвач.
+powersearch-legend|Гегьенш жугъурун
+powersearch-ns|Жугъурун тlварарин генгвилера:
+powersearch-togglelabel|Акун
+powersearch-toggleall|Вири
+powersearch-togglenone|Садни
+preferences|Туькlуьрун
+mypreferences|низамарунар
+prefs-edits|Дьузар хъувунрин кьадар
+prefs-skin|Къайдадиз ттунин тема
+skin-preview|Сифтедин килигун
+datedefault|Туькlуьрмир
+prefs-labs|Экспериментдин мумкинвилер
+prefs-personal|Уртахдин профил
+prefs-rc|Mукьвара хьайи дегишвилер
+prefs-watchlist|Гуьзетунин сиягь
+prefs-watchlist-edits-max|Максимум кьадар: 1000
+prefs-watchlist-token|Гуьзетунин сиягьдин лишан
+prefs-misc|Муькуь низамарунар
+prefs-resetpass|Парол дегишарун
+prefs-changeemail|Э-почта дегишарун
+prefs-setemail|Э-почта эцигна туькIуьрун
+prefs-email|E-mail туькlуьрунин кьадарар
+prefs-rendering|Къецепатан акунар
+saveprefs|Хуьн
+restoreprefs|Авайл хьиз кьунвай низамарунар туькIуьр хъувун
+prefs-editing|Дуьзар хъувун
+rows|ЦIарар
+columns|Гулар:
+searchresultshead|Ахтармишун
+stub-threshold-disabled|Галуднава
+timezonelegend|Вахтунин минзил
+localtime|Чкадин вахт
+servertime|Сервердир вахт:
+timezoneregion-africa|Африка
+timezoneregion-america|Америка
+timezoneregion-antarctica|Антарктида
+timezoneregion-arctic|Арктика
+timezoneregion-asia|Азия
+timezoneregion-atlantic|Атлантик чIехи гуьл
+timezoneregion-australia|Австралия
+timezoneregion-europe|Эуропа
+timezoneregion-indian|Индия чIехи гуьл
+timezoneregion-pacific|Секин чIехи гуьл
+prefs-files|Шикил
+youremail|Электрон почта:
+username|Уртахдин тӀвар
+yourrealname|Xалис тIвар:
+yourlanguage|ЧIалар
+yournick|ЦӀийи къул:
+yourgender|Жинс:
+gender-male|итимдин
+gender-female|папарин
+email|E-mail
+prefs-help-email|Электрон почтунин адрес кхьин  мажбури туш, амма куьне парол рикIелай ракъурдатIа, ам герек жеда.
+prefs-help-email-others|Квевай куь уртахдин, ва я куь веревирдрин ччина элячIун къалурна муькуь уртахар галаз электрон почтадин куькмедалди алакъа хуьз жеда.\nКвез электрон чар кхьидайла муькуь уртахриз куь электрон почтадин адрес аквадач.
+prefs-advancedediting|Гегьенш низамарунар
+prefs-advancedrc|Гегьенш низамарунар
+prefs-advancedrendering|Гегьенш низамарунар
+prefs-advancedwatchlist|Гегьенш низамарунар
+userrights-reason|Кар
+group|КIеретI
+group-user|Иштиракчияр
+group-autoconfirmed|Автотестикь хьанвай иштиракчияр
+group-bot|Ботар
+group-sysop|Къавха
+group-bureaucrat|Бюрократар
+group-suppress|Ревизорар
+group-all|(вири)
+group-user-member|{{GENDER:~{0}\u007Cиштиракчи}}
+group-bot-member|{{GENDER:~{0}\u007Cбот}}
+group-sysop-member|{{GENDER:~{0}\u007Cадминистратор}}
+group-bureaucrat-member|{{GENDER:~{0}\u007Cбюрократ}}
+grouppage-user|{{ns:project}}:Иштиракчияр
+grouppage-bot|{{ns:project}}:Бот
+grouppage-sysop|{{ns:project}}:Администраторар
+right-read|Ччинар кIелун
+right-edit|Дегишар хъувун
+right-move|Ччинрин тIварар эхцигун
+right-movefile|Файлрин тIварар эхцигун
+right-upload|Файлар ппарун
+right-delete|Ччинрин алудун
+right-browsearchive|Алуднавай ччинар жугъурун
+right-undelete|Алуднавай ччинар туькIуьр хъувун
+newuserlogpage|Уртахар регистрация авунин журнал
+rightslog|Эхтияр Ишлемишчидин дафтlар
+action-read|И ччин кIелун
+action-edit|И ччин дуьзар хъувун
+action-createpage|ччин туькIуьрун
+action-createtalk|веревирдрин ччин туькIуьрун
+action-createaccount|И иштиракчидин ччин туькIуьрун
+action-minoredit|и дуьзар хъувун гъвечIи хьиз лишан авун
+action-move|Ччинин тIвар эхцигун
+action-move-subpages|и ччинин адан агъаччинрин  тIварар эхцигун
+action-move-rootuserpages|дувулдин иштиракчийрин ччинрин тIварар эхцигун
+action-movefile|файлдин тIвар эхцигун
+action-upload|и файл ппарун
+action-reupload|авай файл цIийикIа ппарун
+action-delete|и ччин алудун
+action-deleterevision|ччинин и жуьре алудун
+action-undelete|и ччин туькIуьр хъувун
+nchanges|~{0} {{PLURAL:~{0}\u007C1=масакIавал\u007CмасакIавилер}}
+recentchanges|Mукьвара хьайи масакӀавилер
+recentchanges-legend|Цlийи масакIавилерин низамарунар
+recentchanges-summary|Викида хьанвай эхиримжи масакIавилер и ччина гуьзетун
+recentchanges-feed-description|И хвала викида хьанвай эхиримжи масакIавилер вилив хуьн
+recentchanges-label-newpage|И дуьзар хъувун  цlийи ччин туькlуьрна
+recentchanges-label-minor|Им гъвечlи дуьзар хъувун я
+recentchanges-label-bot|И дуьзар хъувун ботди авунвайд я
+recentchanges-label-unpatrolled|И дуьзар хъувундин винел патрулвал авунвач
+rcnotefrom|Агъадихъ '''~{1}'''-ай эгечIна масакIавилер къалурнава ( '''~{0}''' кьван  къалурнава).
+rclistfrom|~{2} ~{1}-й эгечIна цIийи масакIавилер къалурун
+rcshowhideminor|~{0} гъвечlи дуьзар хъувунар
+rcshowhideminor-show|Къалурун
+rcshowhideminor-hide|Чуьнуьхун
+rcshowhidebots|~{0} ботар
+rcshowhidebots-show|Къалурун
+rcshowhidebots-hide|Чуьнуьхун
+rcshowhideliu|~{0} чпин тӀвар къалурнавай уртахар
+rcshowhideliu-show|Къалурун
+rcshowhideliu-hide|Чуьнуьхун
+rcshowhideanons|~{0} чуьнуьхай уртахар
+rcshowhideanons-show|Къалурун
+rcshowhideanons-hide|Чуьнуьхун
+rcshowhidepatr|~{0} гуьзчивал авунвай дуьзар хъувунар
+rcshowhidemine|~{0} зи  дуьзар хъувунар
+rcshowhidemine-show|Къалурун
+rcshowhidemine-hide|Чуьнуьхун
+rclinks|Эхиримжи ~{1} йикъан къене ~{0} масакIавилер къалура <br />~{2}
+diff|тафават
+hist|тарих
+hide|Чуьнуьхун
+show|Къалурун
+minoreditletter|гъ
+newpageletter|Цl
+boteditletter|б
+rc_categories_any|ГЬар са
+rc-enhanced-expand|Куьлуь-шуьлуьяр къалурун (JavaScript герекзава)
+rc-enhanced-hide|Куьлуь-шуьлуьяр чуьнуьха
+recentchangeslinked|Галкlанвай дуьзар хъувунар
+recentchangeslinked-feed|Галкlанвай дуьзар хъувунар
+recentchangeslinked-toolbox|Галкlанвай масакIавилер
+recentchangeslinked-title|"~{0}" галаз галкlанавай масакIавилер
+recentchangeslinked-summary|Им къалурай ччиниз (ва я къалурай категориядиз гьатзавай ччинриз) элячӀзавай ччинра мукьвара хьайи масакӀавилерин сиягь я. Куь [[Special:Watchlist\u007Cвилив хуьнин сиягь диз]] гьатзавай ччинар яцӀу шрифтдал къалурнава.
+recentchangeslinked-page|Ччинин тlвар:
+recentchangeslinked-to|Аксина, къалурай ччиниз элячlзавай ччинра масакIавилер къалура
+upload|Файл ппарун
+uploadbtn|Файл ппарун
+uploaderror|Ппарунин гъалатI
+uploadlogpage|Ппарунин журнал
+filename|Файлдин тIвар
+filedesc|Нетижа
+fileuploadsummary|Нетижа:
+filereuploadsummary|Файлдин къене дегишвилер:
+filestatus|Автордин ихтиярдин статус:
+filesource|Чешме:
+upload-source|Чешмедин файл
+sourcefilename|Чешмедин тир файлдин тIвар:
+sourceurl|Чешмедин URL-адрес:
+destfilename|Файлдин цIийи тIвар:
+upload-maxfilesize|Файлдин лап виниз тир кьадар: ~{0}
+upload-description|Файлдин тегьерар кхьин
+upload-options|Ппарунин шартIар
+watchthisupload|И файл гуьзетун
+upload-file-error|Къенепатан гъалатӀ
+backend-fail-delete|~{0} файл алудиз хьанвач.
+uploadstash-refresh|Файлрин сиягь цIийи хъувун
+img-auth-accessdenied|Гьахьун къадагъа авунва
+license|Лицензиярун
+license-header|Лицензиярун
+nolicense|ЗатIни хкягънавач
+license-nopreview|(Сифтедин килигун авайд ттуш)
+upload_source_file| (куь компьютерда авай файл)
+imgfile|Файл
+listfiles|Файлдин сиягь
+listfiles_thumb|Бицlи суьрет
+listfiles_date|Нумра
+listfiles_name|ТIар
+listfiles_user|Иштиракчи
+listfiles_size|Кьадар
+listfiles_description|Тегьерар кхьин
+listfiles_count|Жуьреяр
+file-anchor-link|Файл
+filehist|Файлдин тарих
+filehist-help|Файлдин виликан жуьре килигун патал, гьа а жуьредин тарих/вахт илиса,
+filehist-deleteall|вири къакъудун
+filehist-deleteone|къакъудун
+filehist-revert|элкъуьрна хкун
+filehist-current|алай
+filehist-datetime|Тарих/вахт
+filehist-thumb|Бицlи шикил
+filehist-thumbtext|~{0} тарих алай жьуредин бицlи акунар
+filehist-nothumb|БицIи суьрет авайд ттуш
+filehist-user|Уртах
+filehist-dimensions|Кьадарар
+filehist-filesize|Файлдин кьадар
+filehist-comment|Веревирд
+imagelinks|Файл кардик кутун
+linkstoimage|Къведай {{PLURAL:~{0} \u007C ччин \u007C ~{0} ччинар}} гьа и файлдиз элячlзава
+nolinkstoimage|И файлдиз элячlзавай ччинар авайд туш
+sharedupload|И шикил ~{0} масса хакъидайра ишлемишатlа жезава.
+sharedupload-desc-here|И файл ~{0}-кай я ва ам маса проектра  кардик кутаз жеда.\nАдан [~{1} тегьерар кхьинин ччина авай малумат] агъуз къалурнава.
+uploadnewversion-linktext|Хтун хъувун цlийи жюреяр и шкилдин
+shared-repo-from|идай ~{0}
+filerevert-comment|Кар
+filerevert-submit|Элкъуьрна хкун
+filedelete|~{0} алудун
+filedelete-legend|Файл алудун
+filedelete-comment|Кар
+filedelete-submit|Къакъудун
+filedelete-reason-otherlist|Муькуь себеб
+mimesearch|MIME ахтармишун
+download|АцIун
+unusedtemplateswlh|муькуь элячIунар
+randompage|Дуьшуьшдин ччин
+statistics-header-edits|Дуьзар хъувунрин статистика
+statistics-header-users|Иштиракчидин статистика
+statistics-files|Ппарнавай файлар
+statistics-users-active|Актив уртахар
+brokenredirects-edit|дуьзар хъувун
+brokenredirects-delete|алудун
+withoutinterwiki-submit|Къалурун
+nbytes|~{0} {{PLURAL:~{0}\u007C1=байт\u007Cбайтар}}
+nmembers|~{0} {{PLURAL:~{0}\u007C1=уьзви\u007Cуьзвияр}}
+lonelypages|Eтим xъувун
+prefixindex|Префикс галай вири ччинар
+shortpages|Куьруь хъувун
+longpages|Яргъи хъувун
+protectedpages|Хвенвай ччинар
+listusers|Уртахрин сиягь
+usercreated|{{GENDER:~{2}\u007CCreated}} идав ~{0} идал ~{1}
+newpages|ЦӀийи ччинар
+newpages-username|Уртахдин тӀвар
+ancientpages|виридалайни цIуру ччинар
+move|ТӀвар эхцигун
+movethispage|Юзун и хъувун
+pager-newer-n|{{PLURAL:~{0}\u007C1=мадни цIийи 1\u007Cмадни цIийи ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007C1=мадни цIуру 1\u007Cмадни цIуру ~{0}}}
+suppress|Чуьнуьхун
+booksources|Ктабрин чешмеяр
+booksources-search-legend|Ктабдикай малумат жугъурун
+log|Журналар
+allpagesfrom|Къалур хъувун,идалай гатIунай:
+allpagesto|Акъудан чарар, куьтягь жезвай:
+allarticles|Вири ччинар
+allpagessubmit|ЭлячIун
+linksearch|Къецепатан элячӀунар жугъурун
+linksearch-ns|Тlварарин генгвал:
+linksearch-ok|Ахтармишун
+linksearch-line|~{1}-ай ~{0}-аз элячlун
+listusers-submit|КЪалурун
+listusers-noresult|Иштиракчияр жагъуриз хьанвач
+listusers-blocked|(блокарнава)
+listgrouprights-group|КIеретI
+listgrouprights-members|(уьзвийрин сиягь)
+emailuser|Уртахдиз чар кхьихь
+emailusername|Уртахдин тlвар:
+emailusernamesubmit|Ракъурун
+emailfrom|Идай
+emailto|Эхир:
+emailsubject|Тема:
+emailmessage|Хъагъаз
+emailsend|Ракъурун
+watchlist|Зи вилив хуьнин сиягь
+mywatchlist|Вилив хуьнин сиягь
+watchlistfor2|~{0} ~{1} патал
+addedwatchtext|Чар «[[:~{0}]]» тун хъувунай куьн [[Special:Watchlist\u007Cwatchlist]].\nКъвезмай дегишунар и чарчел ва галкӀанавай чарчихъ ихтилатар жеда инна, ахъатдава «сакӀус яцӀу» инна веревирд авун гьам кьизил авун.
+removedwatchtext|Чар «[[:~{0}]]» идай чӀурнай [[Special:Watchlist\u007Cахтармишунин цӀарар]].
+watch|Вилив хуьн
+watchthispage|Гелкъуьн и хъувун
+unwatch|Вилив хуьмир
+watchlist-details|Куь вилив хуьнин сиягьда {{PLURAL:~{0}\u007C1=~{0} ччин\u007C~{0} ччин}} авайди я, веревирдрин ччинар квачиз.
+wlshowlast|Эхиримжи ~{0} сят ~{1} югъ  къалура
+watchlist-options|Вилив хуьнин сиягьдин низамарунар
+watching|Килигун...
+unwatching|Амма клигнай
+created|туькIуьрнава
+changed|дегишнава
+deletepage|Къакъудун хъувун
+confirm|Тестикьун
+delete-confirm|«~{0}» алудун
+delete-legend|Къакъудун
+confirmdeletetext|Квез чlуриз кlанзани чарар гьадан вири тарихар галаз.                                                                                                                         Буюр, сидикъара,куьне чlурзатlа, куьн агъавурда автlа вуч ийизатlа ва куьне ийизатlа жуьреда [[{{MediaWiki:Policy-url}}\u007C политика]].
+actioncomplete|Кар авунва
+actionfailed|Кар йиз алакьнавач
+deletedtext|"~{0}" чlурнайтир.                                                                                                                                                       Килиг ~{1} эхиримжи  чlурунар ахтармишун.
+dellogpage|Алудунин журнал
+deletecomment|Кар
+deleteotherreason|Масса/ ва мад кар
+deletereasonotherlist|Маса себеб
+rollbacklink|Кьулухъди чIугун
+sessionfailure-title|Гьахьунин гъалатI
+protectlogpage|Хуьнин журнал
+protectedarticle|"[[~{0}]]" ччин хвенва
+modifiedarticleprotection|дегиш хьанахуьнун кьадар идаз "[[~{0}]]"
+protectcomment|Кар
+protectexpiry|Алатна
+protect_expiry_invalid|Вахтун кьадар дуьзди туш.
+protect_expiry_old|Вахтун кьадар алатай заманда.
+protect-text|Квевай клигайтlа ва дегишарайтlа жеза хуьнин къайда чарчин '''~{0}'''.
+protect-locked-access|Квез ахтияр авач дегишариз чарчин хуьн къайда.                                                                                                                             Ингье физвай туькlуьрунар чарчиз '''~{0}''':
+protect-cascadeon|Хуьн авун чарар къараул ийизвай алай вахтунда, гьама ктуна{{PLURAL:~{0}\u007C1=чар, гьама\u007Cчарар, гьабур}} галай галай хуьн куькlуьрна.Куьвай жеза дегишариз хуьнин кьадар чарчин, гьама кядач галай галай хуьнив.
+protect-default| Эхтияр гуз вири ишлемишчийриз
+protect-fallback|Тlалабун "~{0}" эхтияр
+protect-level-autoconfirmed|Къаб цlийи ва кхьитунавай ишлемишчияр
+protect-level-sysop|Гилан къавха
+protect-summary-cascade|къвалагай къвалагай
+protect-expiring|алатиз ~{0} (UTC)
+protect-cascade|Тажум чарчин куькlуьрнава и чарчел(пат пат тажум)
+protect-cantedit|Кевай дегиш жедач и чар, вучиз лагьайтlа квез ахтияр авач амма дегишариз.
+restriction-type|Ихтияр:
+restriction-level|Кьадардин кьадар
+restriction-edit|Дегишарун
+restriction-move|ТIвар эхцигун
+restriction-upload|Ппарун
+restriction-level-autoconfirmed|(са кьадар хвенва)
+restriction-level-all|гьар са дережа
+undeletebtn|ТуьхкIуьрун
+undeletelink|Килигун/гуьнгуьна хтун
+undeleteviewlink|Килигун
+undeletecomment|Кар
+undelete-search-submit|Жагъурун
+undelete-show-file-submit|Э
+namespace|Тlварарин генгвал:
+invert|Хкягънавайди элкъуьрун
+contributions|Уртахди кутур крар
+contributions-title|~{0} уртахди кутур крар
+mycontris|Кутур кар
+contribsub2|(~{0})-ин кутур пай  (~{1})
+uctop|алай
+month| Вацралай (ва адалай вилик)
+year|Иисалай (ва адалай вилик):
+sp-contributions-newbies|Анжах цlийи уртахрин кутур крар къалура
+sp-contributions-blocklog|Блокарунин журнал
+sp-contributions-uploads|ппарунар
+sp-contributions-logs|журналар
+sp-contributions-talk|Рахун
+sp-contributions-search|Кутунвай пай жугъура
+sp-contributions-username|IP -адрес ва я  уртахдин тlвар
+sp-contributions-toponly|Анжах эхиримжи жуьре тир дуьзар хъувунар къалура
+sp-contributions-submit|Жагъурун
+whatlinkshere|Иниз вуч элячIзава
+whatlinkshere-title|"~{0}" - даз элячlзавай ччинар
+whatlinkshere-page|Ччин:
+linkshere|Гуьгъуьнин ччинар '''[[:~{0}]]''': - даз  элячlзава
+nolinkshere|'''[[:~{0}]]''' ччиниз са ччинни элячIзавач.
+isredirect|Рахкъурунин ччин
+istemplate|кутун
+isimage|Файлдин элячlун
+whatlinkshere-prev|{{PLURAL:~{0}\u007C1=вилик фейи\u007Cвилик фейи ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007C1=гуьгъуьнин\u007Cгуьгъуьнин ~{0}}}
+whatlinkshere-links|← элячlунар
+whatlinkshere-hideredirs|~{0} рахкъурунар
+whatlinkshere-hidetrans|~{0} кутунар
+whatlinkshere-hidelinks|~{0} элячlунар
+whatlinkshere-hideimages|~{0} фаjлрин элачlунар
+whatlinkshere-filters|Куьзунагар
+block|Уртах блокарун
+unblock|Уртах блокдай хкудун
+blockip|Ишлемишзавайдан хара
+ipbreason|Себеб:
+ipbsubmit|И уртах блокарун
+ipboptions|2 сят:2 hours,1 югъ:1 day,3 югъ:3 days,1 никIи:1 week,2 никIи:2 weeks,1 варз:1 month,3 варз:3 months,6 варз:6 months,1 йис:1 year,вахт алачир:infinite
+ipb-confirm|Блок тестикьун
+ipblocklist|Блокарнавай уртахар
+blocklist-reason|Себеб
+blocklink|Блок авун
+unblocklink|Блок къахчун
+change-blocklink|блокарун масакIа авун
+contribslink|Кутур крар
+blocklogpage|Блокарунин журнал
+blocklogentry|[[~{0}]] блокарна,  ~{1} ~{2} чIав кьван
+unblocklogentry|Куьлегдай акъудун ~{0}
+block-log-flags-nocreate|Аккаунт туькIуьрдай изинар авач
+move-page|~{0} тӀвар эхцигун
+move-page-legend|Юзун хъувун
+movepagetext|Ишлемишиз кlеневай къаб,чарчин тlар дегишариp, кьиспесдин  чка дегишарун, цlийи тlар авун.\nИски тlарцlи ракъурда цlийи тlарцlел.\nКвевай жеда цlийи хъийиз ракъурун, къалурзай дуьз тlарцlел вуч вичиз.\nКвез кlанзаштlа,рекlел алудмир ахтармишиз инна [[Special:DoubleRedirects\u007Cdouble]] ва [[Special:BrokenRedirects\u007Cbroken redirects]].\nКуьне тухузва шаидвал,мадни гьабур гьамиша алукьдайвал, гьиниз гьабур фена кlанзатl.\n\nАхтармиша, чар ''ваъ''' ракъур хьун, гьахьтин тlар алай чар ава, гьама ичlиди ятlа, ракъурнатlа ва дегишарунин кьиспес авачтlа.\nКевай жеда гьа чар тlар дегишараз кьулукъ гьаниз элкъуьриз, гьина гьадан тlар дегиш авунатlа, куьне гъалатl авунатlа, куьне чин тийиз авай чарчик гъалатl тада.\n\n'''Килига!'''\nАмма бейхабар жеда гзаф герекзай чарариз;\nБуюр, килиг , куьне фикирзатlа вуч жезатlа, кхьин хъийидади.
+movepagetalktext|Ухшар авай чарар ихтилатдин, фида масса чкадал вуч вичиз ибур галаз''',амма:'''                                                                               *Эчlи чар ихтилатдин ава цlийи тlар алаз, ва                                                                                                                                           *Куьне иляйда пайдах кlеникай                                                                                                                                                                                  Гьа вахтунда, куьне чка дегишар авун или санал авуна чар гъилелди, кlанда
+movearticle|Юзун хъувун:
+newtitle|ЦӀийи тӀвар:
+move-watch|Гелкъуьн и хъувун
+movepagebtn|Юзун хъувун
+pagemovedsub|Рахъурун хьана
+movepage-moved|''"~{0}" рахъурнай "~{1}"'''
+articleexists|Ахьтин тlар алай чар ава, амма тlар, куьне хкянай дуьз туш.Башуьсте, масса тlар хкяй.
+movetalk|Югъун,галкlана рахун
+movelogpage|ТӀвар эхцигунрин журнал
+movereason|Фагьум:
+revertmove|Рахкъурун
+delete_and_move|Алудун ва тӀвар эхцигун
+export|Ччинрин экспорт
+export-addns|Алава авун
+export-download|Файл хьиз хуьн
+allmessagesname|Тlвар
+allmessagesdefault|Авайд хьиз кьунвай текст
+allmessages-filter-legend|Куьзунаг
+allmessages-filter-all|Вири
+allmessages-language|Чlал:
+allmessages-filter-submit|ЭлячIун
+thumbnail_error|Бицlи шикил  туькlуьрунин гъалатl:~{0}
+import-upload-filename|Шикилдинтlар:
+import-token-mismatch|Сеансдин  ганайбур квахьнава. Тавакъу ийида, мадни алахъун ая.
+tooltip-pt-userpage|Куьн (уртахдин) ччин
+tooltip-pt-mytalk|Куь веревирдрин ччин
+tooltip-pt-preferences|Куь низамарунар
+tooltip-pt-watchlist|Куьне вилив хуьзвай ччинрин сиягь
+tooltip-pt-mycontris|Куьне авунвай дуьзар хъувунрин сиягь
+tooltip-pt-login|Квез гьахьиз теклифзава, анжах им мажбури туш
+tooltip-pt-logout|ЭкъечIун
+tooltip-ca-talk|Къене авайбурун ччин веревирд авун
+tooltip-ca-edit|Квевай и ччин масакIа ийиз жеда. Ччин хуьдалди вилик, сифте килигундиз илис.
+tooltip-ca-addsection|Гатlунив цlийи кьил
+tooltip-ca-viewsource|И ччин хвенвайд я, амма квевай адан къене авайбуруз килигиз жеда.
+tooltip-ca-history|И ччинин алатай масакIавилерин журнал
+tooltip-ca-protect|И ччин хуьн
+tooltip-ca-delete|И ччин алудун
+tooltip-ca-move|Ччиндин тӀвар масакӀа авун
+tooltip-ca-watch|И ччин куь вилив хуьнин сиягьдиз алава авун
+tooltip-ca-unwatch|И ччин куь вилив хуьнин сиягьдай къахчун
+tooltip-search|{{SITENAME}} къекъуьн
+tooltip-search-go|АватIа, гьа и тIвар авай ччиниз элячIун
+tooltip-search-fulltext|Къалурай текст авай ччинар жугъурун
+tooltip-p-logo|Кьилин ччиниз элячIун
+tooltip-n-mainpage|Кьилин ччиниз элячIун
+tooltip-n-mainpage-description|Кьилин ччиндиз элячIун
+tooltip-n-portal|Проектдикай,  квевай вуч йийз алакьда, са вуч ятIани гьинай жугъурда
+tooltip-n-currentevents|Алай вакъийрин сиягь
+tooltip-n-recentchanges|Викида мукьвара хьайи масакIавилерин сиягь
+tooltip-n-randompage|Дуьшуьшдин чин ппарун
+tooltip-n-help|Жагъурун патал чка
+tooltip-t-whatlinkshere|Иниз элячIзавай викидин вири  ччинрин сиягь
+tooltip-t-recentchangeslinked|И ччиндиз элячIзавай ччинра  мукьвара хьайи масакIавилер
+tooltip-feed-rss|RSS  хуьрек и чарчиз
+tooltip-feed-atom|И ччиндин Atom -дин трансляция
+tooltip-t-contributions|И уртахдин кутур крарин сиягь
+tooltip-t-emailuser|И уртахдиз электрон чар ракъура
+tooltip-t-upload|Шикилар ва я мультимедиядин файлар ппарун
+tooltip-t-specialpages|Куьмекчи ччинрин сиягь
+tooltip-t-print|И ччиндин басма авун патал жьуре
+tooltip-t-permalink|Ччиндин и жуьредиз гьамишан элячIун
+tooltip-ca-nstab-main|Макъалада авайбриз килига
+tooltip-ca-nstab-user|Уртахдин ччиниз килигун
+tooltip-ca-nstab-special|Им куьмекдин ччин я, квевай и ччин дуьзар хъийиз жедач
+tooltip-ca-nstab-project|Проектдин ччиниз килигун
+tooltip-ca-nstab-image|Файлдин ччиндиз килигун
+tooltip-ca-nstab-template|Чешнедиз килигун
+tooltip-ca-nstab-category|Категориядин ччиниз килигун
+tooltip-minoredit|И масакIавал гъвечlи дуьзар хъувун хьиз лишан ая
+tooltip-save|Куь масакIавал хуьн
+tooltip-preview|Ччин хуьдалди вилик, сифте килигун кардик кутун тавакъу ийизва
+tooltip-diff|Сифте кьилин текстдиз талукь тир куьне авунвай масакIавилер къалурун
+tooltip-compareselectedversions|И ччинин кьве хкягъай жуьрейрин арада авай тафаватдиз килигун
+tooltip-watch|И ччин куь вилив хуьнин сиягьдиз алава авун
+tooltip-rollback|«Кьулухъди чӀугун» и ччиндиз эхиримжи кар кутазвайди патай авунвай дуьзар хъувунар са тӀампуналди paxкурзава
+tooltip-undo|«Гьич авун»  авунвай дуьзар хъувун paxкурзава ва сифтедин килигунин режимда  дуьзар хъувундин форма ахъа йийзва. Им нетижадиз себеб алава йийз мумкинвал гузва
+tooltip-summary|Куьруь нетижа гьадрун
+pageinfo-header-edits|Дуьзар хъувун
+pageinfo-edits|Дьузар хъувунрин кьадар
+previousdiff|Вилик алатай дуьзар хъувун
+nextdiff|ЦIийи масакIаяр
+file-info-size|~{0} × ~{1} пикселар, файлдин кьадар: ~{2}, MIME жуьре: ~{3}
+file-nohires|Идалайни хъсан ери авайд туш
+svg-long-desc|SVG файл, номилдаказ ~{0} ~{1} × пикселяр, файлдин кьадар: ~{2}
+show-big-image|ЦӀарафа хвена тунвай жергедай
+bad_image_list|Формат гьихьтинди хьана кlанда:\n\nCиягьда авай анжах (* лишандихъ галаз эгечIзавай цIарарин) элементар гьисабдиз къачуда.\nЦlарцIе авай сад лагьай элячIун ттун патал къадагъа алай шикилдиз элячIун хьана кlанзава.\nГьар са цlарцIе авай гьар са ахпагьан элячIунар кьетIендинбур хьиз кьабулда, мисал яз, суьрет тваз мумкинвал авай ччинар.
+metadata|Метамалуматар
+metadata-help|И файлдин къене гилигнавай адет яз камера ва я сканер куьмекдалди алава авунвай  малумат ава. Файл ахпа дуьзур хъувуначтlа, бязи параметрар алай суьретдив кьун тахьун мумкин я.
+metadata-expand|Къалурун дериндиз
+metadata-collapse|Кlевун дерин къалурунар
+metadata-fields|Метамалуматрин таблица чIур хьайла и сиягьда тlварар кьунвай суьретдин метамалуматрин чкаяр сутретдин ччина къалурда.  Муькуьбур авайдхьиз кьуна чуьнуьхда.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|Гьяркьуь
+exif-planarconfiguration|Ганайбур тешкил авун
+exif-ycbcrsubsampling| Y  ва C компонентрин кьадаррин нисбет
+exif-ycbcrpositioning| Y ва C компонентрин чкайрал эцигунин къайда
+exif-stripoffsets|Суьретдин ганайбурун авай чка
+exif-rowsperstrip|Са блокда  авай цIарарин кьадар
+exif-contrast|Рангар
+exif-keywords|Куьлегдин гафар
+exif-languagecode|Чlал
+exif-disclaimer|Жавабдарвал хивяй акъудун
+exif-contrast-1|Жими
+exif-sharpness-1|Жими
+namespacesall|вири
+monthsall|вири
+confirm_purge_button|ЭХь
+confirm-purge-top|И ччинин кэш алуддани?
+confirm-watch-button|ОК
+confirm-watch-top|И ччин куь гуьзетунин сиягьдиз алава ийидани?
+confirm-unwatch-button|ОК
+confirm-unwatch-top|И ччин куь гуьзетунин сиягьдал къахчудани?
+imgmultipageprev|← вилик алатай ччин
+imgmultipagenext|гуьгъуьнин ччин →
+imgmultigo|Ша!
+imgmultigoto| ~{0} ччиниз элячIун
+table_pager_next|Гуьгъуьнин ччин
+table_pager_prev|Вилик алатай ччин
+table_pager_first|Сад лагьай ччин
+table_pager_last|Эхиримжи ччин
+table_pager_limit|са ччина  ~{0} затIар къалурун
+table_pager_limit_label|Са ччиниз талукь тир затIар:
+table_pager_limit_submit|Фин
+table_pager_empty|Жагъанвач
+watchlistedit-normal-title|Гуьзетунин сиягь дуьзар хъувун
+watchlistedit-raw-title|Гуьзетунин сиягь текст хьиз дуьзар хъувун
+watchlistedit-raw-legend|Гуьзетунин сиягь текст хьиз дуьзар хъувун
+watchlistedit-raw-titles|КьилинцӀарар:
+watchlistedit-raw-submit|Гуьзетунин сиягь цIийи хъувун
+watchlisttools-view|Сиягьда авай ччинра масакIавилер
+watchlisttools-edit|Гьузетунин сиягь килигун ва дуьзар хъувун
+watchlisttools-raw|Текст хьиз дуьзар хъувун
+duplicate-defaultsort|'''Дикъет:''' Авайд хьиз кьунвай жуьрейриз ччара авунин "~{1}" куьлег  виликан "~{0}" жуьрейриз ччара авунин куьлег гьич йийзва.
+version|Жуьре
+version-skins|КЪайдадиз ттунин темаяр
+version-antispam|Спамдин вилик пад атIун
+version-other|Муькуьбур
+specialpages|КьетӀен ччинар
+external_image_whitelist| #И цӀар авайд хьиз тур<pre>\n#Агъада вахт акадар тийиз жезвай (гьамиша къайдадалди) лугьунрин кьатӀар эцига (// арада авай кӀус).\n#Ибур кьецепатан суьретрин URL галаз гекъигда.\n#Дуьзкъвезвайбур суьретар хьиз къалурда, муькуьбур суьретриз тухузвай элячӀунар хьиз къалурда.\n#«#» галаз эгечӀзавай цӀарариз къейдериз хьиз килигда.\n#ЦӀарар регистрдиз фад кьатӀудайбур я.\n\n#ЦӀарцин винел вири вахт акадар тийиз жезвай лугьунрин кьатӀар эцига. И цӀар авайд хьиз тур</pre>
+tag-filter|[[Special:Tags\u007CTag]] куьзунаг:
+tags-edit|дегишарун
+compare-page1|Чар 1
+logentry-move-move|~{0} ~{2} макъаладин тӀвар ~{3} -диз масакӀа хъувуна
+logentry-move-move-noredirect|~{0} ~{2} макъаладин тӀвар, ракъурунин винелай ~{3} -диз масакӀа хъувуна
+logentry-move-move_redir|~{0} ~{2} макъаладин тӀвар, ракъурун тун тавуна ~{3} -диз масакӀа хъувуна
+logentry-move-move_redir-noredirect|~{0} ~{2} макъаладин тӀвар, ракъурун тун тавуна ва ракъурунин винелай ~{3} -диз масакӀа хъувуна
+logentry-newusers-autocreate|Уртахдин ~{0} учётдин кхьин автоматиквилели туькӀуьр хьанва
+rightsnone|(садни)
+feedback-cancel|Гьич авун
+feedback-close|Авунва
+feedback-message|Чар:
+feedback-subject|Тема:
+expand_templates_xml_output|XML акъудун
+expand_templates_ok|ОК
+expand_templates_remove_comments|Баянар алудун
+']:>
+).lang
+;

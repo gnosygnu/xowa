@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"VASANTH S.N."
+		]
+	},
+	"wikibase-edit": "ಸಂಪಾದಿಸಿ",
+	"wikibase-save": "ಉಳಿಸಿ",
+	"wikibase-cancel": "ರದ್ಧುಮಾಡು",
+	"wikibase-add": "ಸೇರಿಸು",
+	"wikibase-sitelink-page-edit-placeholder": "ಪುಟ",
+	"wikibase-attributes": "ಗುಣ ವಿಷೇಶ",
+	"wikibase-remove": "ತೆಗೆ",
+	"wikibase-move-up": "ಮೇಲೆ ಕಳಿಸು",
+	"wikibase-move-down": "ಕೆಳಗೆ ಕಳಿಸು",
+	"wikibase-entityselector-more": "ಹೆಚ್ಚು",
+	"wikibase-itembytitle-lookup-page": "ಪುಟ:",
+	"wikibase-itembytitle-submit": "ಹುಡುಕು",
+	"wikibase-itemdisambiguation-lookup-language": "ಭಾಷೆ:",
+	"wikibase-itemdisambiguation-lookup-label": "ಗುರುತು ಪಟ್ಟಿ:",
+	"wikibase-itemdisambiguation-submit": "ಹುಡುಕು",
+	"wikibase-newentity-label": "ಗುರುತು ಪಟ್ಟಿ:",
+	"wikibase-newentity-description": "ವಿವರ:",
+	"wikibase-newentity-submit": "ಸೃಷ್ಟಿಸು",
+	"wikibase-setlabel-label": "ಗುರುತು ಪಟ್ಟಿ:",
+	"wikibase-setdescription-label": "ವಿವರ:",
+	"wikibase-modifyterm-language": "ಭಾಷೆ:"
+}

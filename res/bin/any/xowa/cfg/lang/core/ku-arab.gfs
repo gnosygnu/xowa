@@ -1,0 +1,61 @@
+numbers {
+  digits {
+    clear;
+    set('0', '٠');
+    set('1', '١');
+    set('2', '٢');
+    set('3', '٣');
+    set('4', '٤');
+    set('5', '٥');
+    set('6', '٦');
+    set('7', '٧');
+    set('8', '٨');
+    set('9', '٩');
+    set('.', '٫');
+    set(',', '٬');
+  }
+}
+this
+.fallback_load('ckb')
+.dir_rtl_('y')
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+january|کانوونی دووەم
+january-gen|کانوونی دووەم
+hidden-category-category|هاوپۆلە شاردراوەکان
+underline-never|Qet na
+talkpagelinktext|لێدوان
+aboutsite|دەربارەی {{SITENAME}}
+mainpage|دەستپێک
+mainpage-description|دەستپێک
+youhavenewmessagesmulti|شما یه گل پیغوم تازه د ~{0} داریتو
+red-link-title|~{0} (پەڕە بوونی نییە)
+']:>
+).lang
+;

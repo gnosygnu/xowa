@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ahmed-Najib-Biabani-Ibrahimkhel"
+		]
+	},
+	"wikibase-edit": "سمول",
+	"wikibase-save": "خوندي کول",
+	"wikibase-cancel": "ناگارل",
+	"wikibase-add": "ورگډول",
+	"wikibase-save-inprogress": "خوندي کېدنې کې دی...",
+	"wikibase-sitelink-site-edit-placeholder": "وېبځی",
+	"wikibase-sitelink-page-edit-placeholder": "ليکنه",
+	"wikibase-itembytitle-lookup-site": "وېبځی:",
+	"wikibase-itembytitle-lookup-page": "مخ:",
+	"wikibase-itembytitle-submit": "پلټل",
+	"wikibase-itemdisambiguation-lookup-language": "ژبه:",
+	"wikibase-itemdisambiguation-submit": "پلټل",
+	"wikibase-newentity-description": "څرگندونه:",
+	"wikibase-newentity-submit": "جوړول",
+	"wikibase-modifyentity-id": "پېژند:",
+	"wikibase-modifyterm-language": "ژبه:",
+	"wikibase-entitieswithoutlabel-label-language": "ژبه:",
+	"wikibase-entitieswithoutlabel-submit": "موندل",
+	"wikibase-restoreold": "بيازېرمل"
+}

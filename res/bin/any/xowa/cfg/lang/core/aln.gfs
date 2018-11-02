@@ -1,0 +1,1637 @@
+this
+.fallback_load('sq')
+.ns_names
+  .load_text(
+<:['
+-1|Speciale
+1|Diskutim
+2|Përdorues
+3|Përdoruesi diskutim
+5|$1 diskutim
+6|Skeda
+7|Skeda diskutim
+9|MediaWiki diskutim
+10|Stampa
+11|Stampa diskutim
+12|Ndihmë
+13|Ndihmë diskutim
+14|Kategoria
+15|Kategoria diskutim
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+2|Perdoruesi
+3|Perdoruesi diskutim
+2|Përdoruesi
+3|Përdoruesi diskutim
+6|Figura
+7|Figura diskutim
+14|Kategori
+15|Kategori Diskutim
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Popularpages|Faqe të famshme
+Search|Kërko
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+currentmonth|1|MUEJIAKTUAL~MUEJIAKTUAL2~MUAJIMOMENTAL~MUAJIMOMENTAL2~CURRENTMONTH~CURRENTMONTH2~
+currentmonth1|1|MUEJIAKTUAL1~MUAJIMOMENTAL1~CURRENTMONTH1~
+currentmonthname|1|EMNIMUEJITAKTUAL~EMRIIMUAJITMOMENTAL~CURRENTMONTHNAME~
+currenttime|1|KOHATASH~KOHATANI~CURRENTTIME~
+currenthour|1|ORATASH~ORATANI~CURRENTHOUR~
+localmonth|1|MUEJILOKAL~MUAJILOKAL~LOCALMONTH~LOCALMONTH2~
+img_center|1|qendër~qendrore~qëndër~qëndrore~center~centre~
+img_baseline|1|vijabazë~linjabazë~baseline~
+servername|0|EMNISERVERIT~EMRIISERVERIT~SERVERNAME~
+currentweek|1|JAVAAKTUALE~JAVAMOMENTALE~CURRENTWEEK~
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|E diel
+monday|E hâne
+tuesday|E marte
+wednesday|E mërkure
+thursday|E êjte
+friday|E premte
+saturday|E shtune
+sun|Dje
+mon|Hân
+tue|Mar
+wed|Mër
+thu|Êjt
+fri|Pre
+sat|Sht
+january|kallnor
+february|shkurt
+march|mars
+april|prill
+may_long|maj
+june|qershor
+july|korrik
+august|gusht
+september|shtator
+october|tetor
+november|nandor
+december|dhetor
+january-gen|kallnorit
+february-gen|shkurtit
+march-gen|marsit
+april-gen|prillit
+may-gen|majit
+june-gen|qershorit
+july-gen|korrikut
+august-gen|gushtit
+september-gen|shtatorit
+october-gen|tetorit
+november-gen|nândorit
+december-gen|dhetorit
+jan|Kall
+feb|Shk
+mar|Mar
+apr|Pri
+may|Maj
+jun|Qer
+jul|Korr
+aug|Gush
+sep|Sht
+oct|Tet
+nov|Nan
+dec|Dhe
+toc|Përmbajtja
+redirectedfrom|(Përcjellë nga ~{0})
+allpages|Tâna faqet
+prevpage|Faqja paraprake (~{0})
+categories|Kategori
+lastmodifiedat|Kjo faqe âsht ndryshue për herë të fundit me ~{1}, ~{0}.
+thumbnail-more|Zmadho
+otherlanguages|Në gjuhë tjera
+blanknamespace|(Artikujt)
+pagecategories|{{PLURAL:~{0}\u007CKategoria\u007CKategoritë}}
+category_header|Artikuj në kategorinë "~{0}"
+subcategories|Nënkategori
+category-media-header|Media në kategori "~{0}"
+category-empty|''Kjo kategori tashpërtash nuk përmban asnji faqe apo media.''
+category-subcat-count|{{PLURAL:~{1}\u007CKjo kategori ka vetëm këtë nënkategori.\u007CKjo kategori ka {{PLURAL:~{0}\u007Ckëtë nënkategori\u007C~{0} këto nënkategori}}, nga gjithsejt ~{1}.}}
+category-subcat-count-limited|Kjo kategori ka {{PLURAL:~{0}\u007Ckëtë nënkategori\u007C~{0} këto nënkategori}}.
+category-article-count|{{PLURAL:~{1}\u007CKjo kategori ka vetëm këtë faqe.\u007CKjo kategori ka {{PLURAL:~{0}\u007Ckëtë faqe\u007C~{0} faqe}} nga gjithsejt ~{1}.}}
+category-article-count-limited|{{PLURAL:~{0}\u007CFaqja âsht\u007C~{0} faqe janë}} në këtë kategori.
+category-file-count|{{PLURAL:~{1}\u007CKjo kategori ka vetëm këtë skedë.\u007C{{PLURAL:~{0}\u007Ckjo skedë âsht\u007C~{0} skeda janë}} në këtë kategori, prej gjithsejt ~{1}.}}
+category-file-count-limited|{{PLURAL:~{0}\u007CKjo skedë âsht\u007C~{0} skeda janë}} në këtë kategori.
+nextn|e ardhshme {{PLURAL:~{0}\u007C~{0}}}
+prevn|e përparme {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|vazh.
+bold_sample|Tekst i trashë
+bold_tip|Tekst i nximë
+italic_sample|Tekst i pjerrët
+italic_tip|Tekst kurziv
+link_sample|Titulli i vegzës
+link_tip|Vegëz e mbrendshme
+headline_sample|Teksti i kryetitullit
+headline_tip|Kryetitull i nivelit 2
+wikieditor-toolbar-tool-ulist|Lista e bulleted
+wikieditor-toolbar-tool-ulist-example|pika bulleted lista
+wikieditor-toolbar-tool-olist|Lista e Numëruar
+wikieditor-toolbar-tool-olist-example|pika Numëruar lista
+hidden-category-category|Kategori të mshefta
+statistics|Statistika
+wikieditor|redaktimi i avancuar wikitext interface
+wikieditor-desc|Siguron një ndërfaqe të vazhdohet redaktimi wikitext dhe module shumë me metrazh të siguruar
+wikieditor-wikitext-tab|Wikitext
+wikieditor-loading|Ngarkim
+wikieditor-preview-preference|Aktivizo-krah për krah preview
+wikieditor-preview-tab|Preview
+wikieditor-preview-changes-tab|Ndryshimet
+wikieditor-preview-loading|Loading ...
+wikieditor-previewDialog-tab|Preview
+wikieditor-previewDialog-loading|Loading ...
+wikieditor-publish-preference|Aktivizo-hap pas hapi botuese
+wikieditor-publish-button-publish|Publikoj
+wikieditor-publish-button-cancel|Anuloj
+wikieditor-publish-dialog-title|Publikimi në {{SITENAME}}
+wikieditor-publish-dialog-summary|përmbledhje Edit (përshkruaj shkurtimisht ndryshimet që keni bërë):
+wikieditor-publish-dialog-minor|Minor redakto
+wikieditor-publish-dialog-watch|Watch këtë faqe
+wikieditor-publish-dialog-publish|Publikoj
+wikieditor-publish-dialog-goback|Kthehem
+wikieditor-template-editor-preference|Lejo redaktimin e bazuar në formë të wiki templates
+wikieditor-template-editor-dialog-title|Edit template
+wikieditor-template-editor-dialog-submit|Update
+wikieditor-template-editor-dialog-cancel|Anuloj
+wikieditor-templates-preference|Aktivizo template kolaps
+wikieditor-toc-preference|Tabela e përmbajtjeve Aktivizo lundrueshëm
+wikieditor-toc-show|Përmbajtja Show
+wikieditor-toc-hide|Përmbajtja Hide
+wikieditor-toolbar|Editing toolbar
+wikieditor-toolbar-desc|toolbar Redakto faqe me të përdorshmërisë zgjeruar
+wikieditor-toolbar-preference|Lejo redaktimin zgjeruar toolbar
+wikieditor-toolbar-dialogs-preference|dialogs Aktivizo për futjen e lidhjeve, tavolina dhe më shumë
+wikieditor-toolbar-loading|Loading ...
+wikieditor-toolbar-tool-bold|Guximtar
+wikieditor-toolbar-tool-bold-example|Tekst i trashë
+wikieditor-toolbar-tool-italic|Kursiv
+wikieditor-toolbar-tool-italic-example|Teksti i pjerrët
+wikieditor-toolbar-tool-ilink|Lidhje të Brendshme
+wikieditor-toolbar-tool-ilink-example|Titulli Link
+wikieditor-toolbar-tool-xlink|Lidhje e jashtme (most harro prefiksin http://)
+wikieditor-toolbar-tool-xlink-example|Lidhje http://www.example.com Titulli
+wikieditor-toolbar-tool-link|Lidhje
+wikieditor-toolbar-tool-link-title|Vendos Lidhje
+wikieditor-toolbar-tool-link-int|Për një faqe wiki
+wikieditor-toolbar-tool-link-int-target|faqe synuar ose URL:
+wikieditor-toolbar-tool-link-int-target-tooltip|Titulli i faqes ose URL
+wikieditor-toolbar-tool-link-int-text|Tekst për të shfaqur:
+wikieditor-toolbar-tool-link-int-text-tooltip|Tekst për t'u shfaqur
+wikieditor-toolbar-tool-link-ext|Për një faqe të jashtme interneti
+wikieditor-toolbar-tool-link-ext-target|URL Link:
+wikieditor-toolbar-tool-link-ext-text|text Link:
+wikieditor-toolbar-tool-link-insert|Vendos Lidhje
+wikieditor-toolbar-tool-link-cancel|Anuloj
+wikieditor-toolbar-tool-link-int-target-status-exists|Page ekziston
+wikieditor-toolbar-tool-link-int-target-status-notexists|Faqja nuk ekziston
+wikieditor-toolbar-tool-link-int-target-status-invalid|Titulli i pavlefshëm
+wikieditor-toolbar-tool-link-int-target-status-external|Lidhje e jashtme
+wikieditor-toolbar-tool-link-int-target-status-loading|Kontrollit të ekzistencës faqe ...
+wikieditor-toolbar-tool-link-int-invalid|Titulli ju specifikuar është i pavlefshëm.
+wikieditor-toolbar-tool-link-lookslikeinternal|URL-in që të specifikuar duket si ajo ishte menduar si një lidhje në faqe të tjera wiki.\nA doni ta bërë atë një lidhje të brendshme?
+wikieditor-toolbar-tool-link-lookslikeinternal-int|Lidhje të Brendshme
+wikieditor-toolbar-tool-link-lookslikeinternal-ext|Lidhje e jashtme
+wikieditor-toolbar-tool-link-empty|Ju nuk kanë hyrë në ndonjë gjë për të link.
+wikieditor-toolbar-tool-file|Embedded file
+wikieditor-toolbar-tool-file-example|Example.jpg
+wikieditor-toolbar-tool-reference|Referim
+wikieditor-toolbar-tool-reference-example|Vendos tekst shënimin këtu
+wikieditor-toolbar-tool-reference-cancel|Anuloj
+wikieditor-toolbar-tool-reference-title|Fut referencë
+wikieditor-toolbar-tool-reference-insert|Kall
+wikieditor-toolbar-tool-reference-text|tekstit Referenca
+wikieditor-toolbar-tool-signature|Nënshkrimi dhe gjithë kohë
+wikieditor-toolbar-section-advanced|I avancuar
+wikieditor-toolbar-tool-heading|Titull
+wikieditor-toolbar-tool-heading-1|Niveli 1
+wikieditor-toolbar-tool-heading-2|Niveli 2
+wikieditor-toolbar-tool-heading-3|Niveli 3
+wikieditor-toolbar-tool-heading-4|Niveli 4
+wikieditor-toolbar-tool-heading-5|Niveli 5
+wikieditor-toolbar-tool-heading-example|Titull tekst
+wikieditor-toolbar-group-format|Format
+wikieditor-toolbar-tool-indent|Gjurmë
+wikieditor-toolbar-tool-indent-example|Shkarko prerë
+wikieditor-toolbar-tool-nowiki|Nuk formatimit wiki
+wikieditor-toolbar-tool-nowiki-example|Vendos tekst këtu nuk duhet të formatohet
+wikieditor-toolbar-tool-redirect|Përcjellëse
+wikieditor-toolbar-tool-redirect-example|Emri i synuar faqe
+wikieditor-toolbar-tool-big|I madh
+wikieditor-toolbar-tool-big-example|Big tekst
+wikieditor-toolbar-tool-small|I vogël
+wikieditor-toolbar-tool-small-example|tekstin e vogla
+wikieditor-toolbar-tool-superscript|Indeks i sipërm
+wikieditor-toolbar-tool-superscript-example|tekstit Sipërshkrim
+wikieditor-toolbar-tool-subscript|Subscript
+wikieditor-toolbar-tool-subscript-example|tekstit Subscript
+wikieditor-toolbar-group-insert|Kall
+wikieditor-toolbar-tool-gallery|galeri artesh
+wikieditor-toolbar-tool-gallery-example|~{0}: Example.jpg\u007CCaption1\n~{0}: Example.jpg\u007CCaption2
+wikieditor-toolbar-tool-newline|Linjë e re
+wikieditor-toolbar-tool-table|Tryezë
+wikieditor-toolbar-tool-table-example-old|-\n! header 1\n! header 2\n! header 3\n\u007C-\n\u007C rresht 1, qelizë 1\n\u007C rresht 1, qelizë 2\n\u007C rresht 1, qelizë 3\n\u007C -\n\u007C rresht 2, qelizë 1\n\u007C rresht 2, qelizë 2\n\u007C rresht 2, qelizë 3
+wikieditor-toolbar-tool-table-example-cell-text|tekstit qelizë
+wikieditor-toolbar-tool-table-example-header|tekstit Header
+wikieditor-toolbar-tool-table-title|Fut tabelë
+wikieditor-toolbar-tool-table-dimensions-rows|Rreshtave
+wikieditor-toolbar-tool-table-dimensions-columns|Kolumne
+wikieditor-toolbar-tool-table-dimensions-header|Shto rreshtit
+wikieditor-toolbar-tool-table-wikitable|Logo me kufij
+wikieditor-toolbar-tool-table-sortable|Bëni tryezë llojllojshme
+wikieditor-toolbar-tool-table-example|Shembull
+wikieditor-toolbar-tool-table-preview|Preview
+wikieditor-toolbar-tool-table-insert|Kall
+wikieditor-toolbar-tool-table-cancel|Anuloj
+wikieditor-toolbar-tool-table-toomany|Futur një tavolinë me shumë se qelizat e ~{0} nuk është e mundur me këtë dialog.
+wikieditor-toolbar-tool-table-invalidnumber|Ju nuk keni hyrë në një numër të vlefshme të rreshtave dhe kolonave.
+wikieditor-toolbar-tool-table-zero|Ju nuk mund të vendos një tabelë me zero rreshta ose kolona.
+wikieditor-toolbar-tool-replace|Kërkoni dhe zëvendësuar
+wikieditor-toolbar-tool-replace-title|Kërkoni dhe zëvendësuar
+wikieditor-toolbar-tool-replace-search|Kërko për:
+wikieditor-toolbar-tool-replace-replace|Replace me:
+wikieditor-toolbar-tool-replace-case|rast Match
+wikieditor-toolbar-tool-replace-regex|string Silleni kërkim si një shprehje e rregullt
+wikieditor-toolbar-tool-replace-button-findnext|Gjej të ardhshëm
+wikieditor-toolbar-tool-replace-button-replaceall|Zëvendësojnë të gjithë
+wikieditor-toolbar-tool-replace-close|Mshele
+wikieditor-toolbar-tool-replace-nomatch|Kërkimi juaj nuk u përputh me ndonjë gjë.
+wikieditor-toolbar-tool-replace-success|~{0} zëvendësimit (s) bëhet.
+wikieditor-toolbar-tool-replace-emptysearch|Ju nuk shkruani ndonjë gjë për të kërkuar për.
+wikieditor-toolbar-tool-replace-invalidregex|Shprehje e rregullt keni hyrë është i pavlefshëm: ~{0}
+wikieditor-toolbar-section-characters|karaktere të veçanta
+wikieditor-toolbar-characters-page-latin|Latinisht
+wikieditor-toolbar-characters-page-latinextended|Latine zgjeruar
+wikieditor-toolbar-characters-page-ipa|IPA
+wikieditor-toolbar-characters-page-symbols|Simbolet
+wikieditor-toolbar-characters-page-greek|Grek
+wikieditor-toolbar-characters-page-cyrillic|I sllavishtes së vjetër
+wikieditor-toolbar-characters-page-arabic|Arabisht
+wikieditor-toolbar-characters-page-hebrew|Hebraisht
+wikieditor-toolbar-characters-page-bangla|Shqip
+wikieditor-toolbar-characters-page-telugu|Telugu
+wikieditor-toolbar-characters-page-sinhala|Sinhala
+wikieditor-toolbar-characters-page-gujarati|Guxharati
+wikieditor-toolbar-section-help|Ndihmë
+wikieditor-toolbar-help-heading-description|Përshkrim
+wikieditor-toolbar-help-heading-syntax|Çfarë ju lloji
+wikieditor-toolbar-help-heading-result|Çfarë ju të merrni
+wikieditor-toolbar-help-page-format|Formatimi
+wikieditor-toolbar-help-page-link|Lidhje
+wikieditor-toolbar-help-page-heading|Titujt
+wikieditor-toolbar-help-page-list|Listat
+wikieditor-toolbar-help-page-file|Files
+wikieditor-toolbar-help-page-reference|Lidhje të jashtme
+wikieditor-toolbar-help-page-discussion|Diskutim
+wikieditor-toolbar-help-content-italic-description|Kursiv
+wikieditor-toolbar-help-content-italic-syntax|Teksti i pjerrët''''
+wikieditor-toolbar-help-content-italic-result|<em>Teksti i pjerrët</em>
+wikieditor-toolbar-help-content-bold-description|Guximtar
+wikieditor-toolbar-help-content-bold-syntax|'''Tekst i trashë'''
+wikieditor-toolbar-help-content-bold-result|<strong>Tekst i trashë</strong>
+wikieditor-toolbar-help-content-bolditalic-description|Bold & italic
+wikieditor-toolbar-help-content-bolditalic-syntax|'''''Bold &amp; tekst kursiv'''''
+wikieditor-toolbar-help-content-bolditalic-result|<strong><em>Bold & italic text</em></strong>
+wikieditor-toolbar-help-content-ilink-description|Lidhje të Brendshme
+wikieditor-toolbar-help-content-ilink-syntax|[[Page title\u007CLink emërtim]]<br />[[Page title]]
+wikieditor-toolbar-help-content-ilink-result|<a href='#'>Etiketa Link</a><br /><a href='#'>Titulli i faqes</a>
+wikieditor-toolbar-help-content-xlink-description|Lidhje e jashtme
+wikieditor-toolbar-help-content-xlink-syntax|Etiketa [http://www.example.org Link] <br /> [Http://www.example.org] <br /> http://www.example.org
+wikieditor-toolbar-help-content-xlink-result|<a href='#' class='external'>Etiketa Link</a> <br /> <a href='#' class='external autonumber'>[1]</a> <br /> <a href='#' class='external'>http://www.example.org</a>
+wikieditor-toolbar-help-content-heading2-description|Niveli 2 titull
+wikieditor-toolbar-help-content-heading2-syntax|Text == == Titull
+wikieditor-toolbar-help-content-heading2-result|<h2> Titull tekst </h2>
+wikieditor-toolbar-help-content-heading3-description|Niveli 3 titull
+wikieditor-toolbar-help-content-heading3-syntax|=== Tekst === Titull
+wikieditor-toolbar-help-content-heading3-result|<h3> Titull tekst </h3>
+wikieditor-toolbar-help-content-heading4-description|Niveli 4 titull
+wikieditor-toolbar-help-content-heading4-syntax|==== Tekst Titulli ====
+wikieditor-toolbar-help-content-heading4-result|<h4> Titull tekst </h4>
+wikieditor-toolbar-help-content-heading5-description|Niveli 5 titull
+wikieditor-toolbar-help-content-heading5-syntax|===== ===== Tekst Titulli
+wikieditor-toolbar-help-content-heading5-result|<h5> Titull tekst </h5>
+wikieditor-toolbar-help-content-ulist-description|Lista e bulleted
+wikieditor-toolbar-help-content-ulist-syntax|* Pika Lista <br /> * Pika Lista
+wikieditor-toolbar-help-content-ulist-result|<ul><li> pika Lista </li><li> pika Lista </li></ul>
+wikieditor-toolbar-help-content-olist-description|Lista e Numëruar
+wikieditor-toolbar-help-content-olist-syntax|pika # Lista <br /> pika # Lista
+wikieditor-toolbar-help-content-olist-result|<ol><li> pika Lista </li><li> pika Lista </li></ol>
+wikieditor-toolbar-help-content-file-description|Embedded file
+wikieditor-toolbar-help-content-file-syntax|[[~{0}:Example.png\u007Cthumb\u007CCaption teksti]]
+wikieditor-toolbar-help-content-file-result|<div style='width:104px;' class='thumbinner'> <a title="tekstit Legjenda" class='image' href='#'><img height='50' width='100' border='0' class='thumbimage' src='\\~{1}/WikiEditor/modules/images/toolbar/example-image.png' alt=''/></a> <div class='thumbcaption'><div class='magnify'> <a title="Zmadho" class='internal' href='#'><img height='11' width='15' alt='' src='\\~{0}/common/images/magnify-clip.png'/></a> </div> tekstit Legjenda </div></div>
+wikieditor-toolbar-help-content-reference-description|Referim
+wikieditor-toolbar-help-content-reference-syntax|Tekst faqesh. name="test"> <ref [http://www.example.org] teksti Link, teksti shtesë. </> ref
+wikieditor-toolbar-help-content-reference-result|Tekst faqesh. <a href='#'><sup>[1]</sup></a>
+wikieditor-toolbar-help-content-rereference-description|përdorimin shtesë të njëjtën referencë
+wikieditor-toolbar-help-content-rereference-result|Tekst faqesh. <a href='#'><sup>[1]</sup></a>
+wikieditor-toolbar-help-content-showreferences-description|referenca Display
+wikieditor-toolbar-help-content-showreferences-result|<ol class='references'><li id='cite_note-test-0'> <a title='' href='#'><b>^</b></a> <a rel='nofollow' title="http://www.example.org" class='external text' href='#'>Teksti Link</a> , teksti shtesë. </li></ol>
+wikieditor-toolbar-help-content-signaturetimestamp-description|Nënshkrimi me gjithë kohë
+wikieditor-toolbar-help-content-signaturetimestamp-result|<a href=\\'#\\' title="{{#special:mypage}}">Emri i përdoruesit</a> ( <a href=\\'#\\' title="{{#special:mytalk}}">të folur</a> ) 15:54, 10 Qershor 2009 (UTC)
+wikieditor-toolbar-help-content-signature-description|Nënshkrim
+wikieditor-toolbar-help-content-signature-result|<a href=\\'#\\' title="{{#special:mypage}}">Emri i përdoruesit</a> ( <a href=\\'#\\' title="{{#special:mytalk}}">të folur</a> )
+wikieditor-toolbar-help-content-indent-description|Porosit
+wikieditor-toolbar-help-content-indent-syntax|tekstit Normale <br /> : Teksti i prerë <br /> :: Teksti i prerë
+wikieditor-toolbar-help-content-indent-result|tekstit Normale <dl><dd> Teksti i prerë <dl><dd> Teksti i prerë </dd></dl></dd></dl>
+wm-license-cc-attribution|Pushtet
+wm-license-cc-by-1.0-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/ Attribution 1.0 Generic] licencës.
+wm-license-cc-by-1.0-fi-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/fi/ Attribution 1.0 Finlandë] licencës.
+wm-license-cc-by-1.0-il-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/il/ Attribution 1.0 Izrael] licencës.
+wm-license-cc-by-1.0-nl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/1.0/nl/ Attribution 1.0 Hollandë] licencës.
+wm-license-cc-by-2.0-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/ 2.0 Generic] licencës.
+wm-license-cc-by-2.0-at-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/at/ 2.0 Austri] licencës.
+wm-license-cc-by-2.0-au-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/au/ 2.0 Australi] licencës.
+wm-license-cc-by-2.0-be-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/be/ 2.0 Belgjikë] licencës.
+wm-license-cc-by-2.0-br-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/br/ 2.0 Brazil] licencës.
+wm-license-cc-by-2.0-ca-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/ca/ 2.0 Kanada] licencës.
+wm-license-cc-by-2.0-cl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/cl/ 2.0 Kili] licencës.
+wm-license-cc-by-2.0-de-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/de/ 2.0 Gjermani] licencës.
+wm-license-cc-by-2.0-es-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/es/ 2.0 Spanja] licencës.
+wm-license-cc-by-2.0-fr-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/fr/ 2.0 Franca] licencës.
+wm-license-cc-by-2.0-hr-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/hr/ 2.0 Kroacia] licencës.
+wm-license-cc-by-2.0-it-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/it/ 2.0 Itali] licencës.
+wm-license-cc-by-2.0-jp-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/jp/ 2.0 Japoni] licencës.
+wm-license-cc-by-2.0-kr-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/kr/ 2.0 Korea] licencës.
+wm-license-cc-by-2.0-nl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/nl/ 2.0 Hollandë] licencës.
+wm-license-cc-by-2.0-pl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/pl/ 2.0 Poloni] licencës.
+wm-license-cc-by-2.0-tw-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/tw/ 2.0 Tajvan] licencës.
+wm-license-cc-by-2.0-uk-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/uk/ 2.0 UK: Angli & Uells] licencës.
+wm-license-cc-by-2.0-za-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.0/za/ 2.0 Afrika e Jugut] licencës.
+wm-license-cc-by-2.1-au-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/au/ 2,1 Australi] licencës.
+wm-license-cc-by-2.1-es-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/es/ 2,1 Spanja] licencës.
+wm-license-cc-by-2.1-jp-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.1/jp/ 2,1 Japoni] licencës.
+wm-license-cc-by-2.5-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/ 2.5 Generic] licencës.
+wm-license-cc-by-2.5-au-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/au/ 2.5 Australi] licencës.
+wm-license-cc-by-2.5-bg-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/bg/ 2.5 Bullgaria] licencës.
+wm-license-cc-by-2.5-br-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/br/ 2.5 Brazil] licencës.
+wm-license-cc-by-2.5-ca-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/ca/ 2.5 Kanada] licencës.
+wm-license-cc-by-2.5-ch-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/ch/ 2.5 Zvicra] licencës.
+wm-license-cc-by-2.5-cn-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/cn/ 2.5 Kina kontinentale] licencës.
+wm-license-cc-by-2.5-co-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/co/ 2.5 Kolumbi] licencës.
+wm-license-cc-by-2.5-dk-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/dk/ 2.5 Danimarka] licencës.
+wm-license-cc-by-2.5-es-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/es/ 2.5 Spanja] licencës.
+wm-license-cc-by-2.5-hr-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/hr/ 2.5 Kroacia] licencës.
+wm-license-cc-by-2.5-hu-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/hu/ 2.5 Hungaria] licencës.
+wm-license-cc-by-2.5-il-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/il/ 2.5 Izrael] licencës.
+wm-license-cc-by-2.5-in-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/in/ 2.5 Indi] licencës.
+wm-license-cc-by-2.5-it-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/it/ 2.5 Itali] licencës.
+wm-license-cc-by-2.5-mk-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/mk/ 2.5 Maqedoni] licencës.
+wm-license-cc-by-2.5-mt-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/mt/ 2.5 Malta] licencës.
+wm-license-cc-by-2.5-mx-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/mx/ 2.5 Meksikë] licencës.
+wm-license-cc-by-2.5-my-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/my/ 2.5 Malajzia] licencës.
+wm-license-cc-by-2.5-nl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/nl/ 2.5 Hollandë] licencës.
+wm-license-cc-by-2.5-pe-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/pe/ 2.5 Peru] licencës.
+wm-license-cc-by-2.5-pl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/pl/ 2.5 Poloni] licencës.
+wm-license-cc-by-2.5-pt-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/pt/ 2.5 Portugali] licencës.
+wm-license-cc-by-2.5-scotland-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/scotland/ 2.5 Mbretëria e Bashkuar: Skoci] licencës.
+wm-license-cc-by-2.5-se-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/se/ 2.5 Suedia] licencës.
+wm-license-cc-by-2.5-si-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/si/ 2.5 Sllovenia] licencës.
+wm-license-cc-by-2.5-tw-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/tw/ 2.5 Tajvan] licencës.
+wm-license-cc-by-2.5-za-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/2.5/za/ 2.5 Afrika e Jugut] licencës.
+wm-license-cc-by-3.0-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/ 3.0 Unported] licencës.
+wm-license-cc-by-3.0-2.5-2.0-1.0-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons] Attribution] [//creativecommons.org/licenses/by/3.0/ 3.0 Unported] , [//creativecommons.org/licenses/by/2.5/ 2.5 Generic], [Generic http://creativecommons.org/licenses/by/2.0/ 2.0] dhe [http:// 1.0 creativecommons.org/licenses/by/1.0/ Generic] licencës.
+wm-license-cc-by-3.0-at-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/at/ 3.0 Austri] licencës.
+wm-license-cc-by-3.0-cz-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/cz/ 3.0 Republika Çeke] licencës.
+wm-license-cc-by-3.0-de-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/de/ 3.0 Gjermani] licencës.
+wm-license-cc-by-3.0-es-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/es/ 3.0 Spanja] licencës.
+wm-license-cc-by-3.0-gr-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/gr/ 3.0 Greqi] licencës.
+wm-license-cc-by-3.0-gt-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/gt/ 3.0 Guatemala] licencës.
+wm-license-cc-by-3.0-hk-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/hk/ 3.0 Hong Kong] licencës.
+wm-license-cc-by-3.0-hr-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/hr/ 3.0 Kroacia] licencës.
+wm-license-cc-by-3.0-lu-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/lu/ 3.0 Luksemburg] licencës.
+wm-license-cc-by-3.0-nl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/nl/ 3.0 Hollandë] licencës.
+wm-license-cc-by-3.0-no-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/no/ 3.0 Norvegji] licencës.
+wm-license-cc-by-3.0-nz-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/nz/ 3.0 Zelanda e Re] licencës.
+wm-license-cc-by-3.0-ph-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/ph/ 3.0 Filipinet] licencës.
+wm-license-cc-by-3.0-pl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/pl/ 3.0 Poloni] licencës.
+wm-license-cc-by-3.0-pr-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/pr/ 3.0 Porto Riko] licencës.
+wm-license-cc-by-3.0-ro-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/ro/ 3.0 Rumania] licencës.
+wm-license-cc-by-3.0-rs-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/rs/ 3.0 Serbi] licencës.
+wm-license-cc-by-3.0-sg-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/sg/ 3.0 Singapore] licencës.
+wm-license-cc-by-3.0-th-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/th/ 3.0 Tajlandë] licencës.
+wm-license-cc-by-3.0-tw-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/tw/ 3.0 Tajvan] licencës.
+wm-license-cc-by-3.0-us-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by/3.0/us/ 3.0 Shtetet e Bashkuara të] licencës.
+wm-license-cc-by-sa-1.0-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/1.0/ [Attribution- Share njësoj Attribution 1.0 Generic] licencës.
+wm-license-cc-by-sa-1.0-fi-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/1.0/fi/ Attribution-Share njësoj 1.0 Finlandë] licencës.
+wm-license-cc-by-sa-1.0-il-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/1.0/il/ Attribution-Share njësoj Attribution 1.0 Izrael] licencës.
+wm-license-cc-by-sa-1.0-nl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/1.0/nl/ Attribution-Share njësoj Attribution 1.0 Hollandë] licencës.
+wm-license-cc-by-sa-2.0-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/ [Attribution- Share njësoj 2.0 Generic] licencës.
+wm-license-cc-by-sa-2.0-at-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/at/ Attribution-Share njësoj 2.0 Austri] licencës.
+wm-license-cc-by-sa-2.0-au-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/au/ Attribution-Share njësoj 2.0 Australi] licencës.
+wm-license-cc-by-sa-2.0-be-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/be/ Attribution-Share njësoj 2.0 Belgjikë] licencës.
+wm-license-cc-by-sa-2.0-br-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/br/ Attribution-Share njësoj 2.0 Brazil] licencës.
+wm-license-cc-by-sa-2.0-ca-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/ca/ Attribution-Share njësoj 2.0 Kanada] licencës.
+wm-license-cc-by-sa-2.0-cl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/cl/ Attribution-Share njësoj 2.0 Kili] licencës.
+wm-license-cc-by-sa-2.0-de-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/de/ Attribution-Share njësoj 2.0 Gjermani] licencës.
+wm-license-cc-by-sa-2.0-es-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/es/ Attribution-Share njësoj 2.0 Spanjë] licencës.
+wm-license-cc-by-sa-2.0-fr-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/fr/ Attribution-Share njësoj 2.0 Francë] licencës.
+wm-license-cc-by-sa-2.0-hr-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/hr/ Attribution-Share njësoj 2.0 Kroaci] licencës.
+wm-license-cc-by-sa-2.0-it-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/it/ Attribution-Share njësoj 2.0 Itali] licencës.
+wm-license-cc-by-sa-2.0-jp-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/jp/ Attribution-Share njësoj 2.0 Japoni] licencës.
+wm-license-cc-by-sa-2.0-kr-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/kr/ Attribution-Share njësoj 2.0 Korea] licencës.
+wm-license-cc-by-sa-2.0-nl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/nl/ Attribution-Share njësoj 2.0 Hollandë] licencës.
+wm-license-cc-by-sa-2.0-pl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/pl/ Attribution-Share njësoj 2.0 Poloni] licencës.
+wm-license-cc-by-sa-2.0-tw-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/tw/ Attribution-Share njësoj 2.0 Tajvan] licencës.
+wm-license-cc-by-sa-2.0-uk-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/uk/ Attribution-Share njësoj 2.0 MB: Angli & Uells] licencës.
+wm-license-cc-by-sa-2.0-za-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.0/za/ Attribution-Share njësoj 2.0 Afrika e Jugut] licencës.
+wm-license-cc-by-sa-2.1-au-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.1/au/ Attribution-Share njësoj 2,1 Australi] licencës.
+wm-license-cc-by-sa-2.1-es-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.1/es/ Attribution-Share njësoj 2,1 Spanjë] licencës.
+wm-license-cc-by-sa-2.1-jp-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.1/jp/ Attribution-Share njësoj 2,1 Japoni] licencës.
+wm-license-cc-by-sa-2.5-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/ [Attribution- Share njësoj 2.5 Generic] licencës.
+wm-license-cc-by-sa-2.5-2.0-1.0-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] Attribution-Share njësoj [//creativecommons.org/licenses/by-sa/2.5/ 2.5 Generic], [Generic http://creativecommons.org/licenses/by-sa/2.0/ 2.0] dhe [//creativecommons.org/licenses/by-sa/1.0/ Attribution 1.0 Generic] licencës.
+wm-license-cc-by-sa-2.5-ar-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/ar/ Attribution-Share njësoj 2.5 Argjentinë] licencës.
+wm-license-cc-by-sa-2.5-au-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/au/ Attribution-Share njësoj 2.5 Australi] licencës.
+wm-license-cc-by-sa-2.5-bg-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/bg/ Attribution-Share njësoj 2.5 Bullgari] licencës.
+wm-license-cc-by-sa-2.5-br-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/br/ Attribution-Share njësoj 2.5 Brazil] licencës.
+wm-license-cc-by-sa-2.5-ca-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/ca/ Attribution-Share njësoj 2.5 Kanada] licencës.
+wm-license-cc-by-sa-2.5-ch-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/ch/ Attribution-Share njësoj 2.5 Zvicër] licencës.
+wm-license-cc-by-sa-2.5-cn-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/cn/ Attribution-Share njësoj 2.5 Kinës kontinentale] licencës.
+wm-license-cc-by-sa-2.5-co-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/co/ Attribution-Share njësoj 2.5 Kolumbi] licencës.
+wm-license-cc-by-sa-2.5-dk-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/dk/ Attribution-Share njësoj 2.5 Danimarkë] licencës.
+wm-license-cc-by-sa-2.5-es-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/es/ Attribution-Share njësoj 2.5 Spanjë] licencës.
+wm-license-cc-by-sa-2.5-hr-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/hr/ Attribution-Share njësoj 2.5 Kroaci] licencës.
+wm-license-cc-by-sa-2.5-hu-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/hu/ Attribution-Share njësoj 2.5 Hungari] licencës.
+wm-license-cc-by-sa-2.5-il-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/il/ Attribution-Share njësoj 2.5 Izrael] licencës.
+wm-license-cc-by-sa-2.5-in-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/in/ Attribution-Share njësoj 2.5 Indi] licencës.
+wm-license-cc-by-sa-2.5-it-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/it/ Attribution-Share njësoj 2.5 Itali] licencës.
+wm-license-cc-by-sa-2.5-mk-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/mk/ Attribution-Share njësoj 2.5 Maqedoni] licencës.
+wm-license-cc-by-sa-2.5-mt-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/mt/ Attribution-Share njësoj 2.5 Maltës] licencës.
+wm-license-cc-by-sa-2.5-mx-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/mx/ Attribution-Share njësoj 2.5 Meksikë] licencës.
+wm-license-cc-by-sa-2.5-my-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/my/ Attribution-Share njësoj 2.5 Malajzi] licencës.
+wm-license-cc-by-sa-2.5-nl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/nl/ Attribution-Share njësoj 2.5 Hollandë] licencës.
+wm-license-cc-by-sa-2.5-pe-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/pe/ Attribution-Share njësoj 2.5 Peru] licencës.
+wm-license-cc-by-sa-2.5-pl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/pl/ Attribution-Share njësoj 2.5 Poloni] licencës.
+wm-license-cc-by-sa-2.5-pt-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/pt/ Attribution-Share njësoj 2.5 Portugali] licencës.
+wm-license-cc-by-sa-2.5-scotland-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/scotland/ Attribution-Share njësoj 2.5 MB: Skoci] licencës.
+wm-license-cc-by-sa-2.5-se-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/se/ Attribution-Share njësoj 2.5 Suedi] licencës.
+wm-license-cc-by-sa-2.5-si-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/si/ Attribution-Share njësoj 2.5 Slloveni] licencës.
+wm-license-cc-by-sa-2.5-tw-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/tw/ Attribution-Share njësoj 2.5 Tajvan] licencës.
+wm-license-cc-by-sa-2.5-za-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/2.5/za/ Attribution-Share njësoj 2.5 Afrika e Jugut] licencës.
+wm-license-cc-by-sa-3.0-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/ [Attribution- Share njësoj 3.0 licencës Unported].
+wm-license-cc-by-sa-3.0-2.5-2.0-1.0-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] Attribution-Share njësoj [//creativecommons.org/licenses/by-sa/3.0/deed . sq 3.0] Unported, [//creativecommons.org/licenses/by-sa/2.5/ 2.5 Generic], http://creativecommons.org/licenses/by-sa/2.0/ 2.0 Generic] dhe [//creativecommons.org/licenses/by-sa/1.0/ Attribution 1.0 Generic] licencës.
+wm-license-cc-by-sa-3.0-at-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/at/ Attribution-Share njësoj 3.0 Austri] licencës.
+wm-license-cc-by-sa-3.0-cz-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/cz/ Attribution-Share njësoj 3.0 Republika Çeke] licencës.
+wm-license-cc-by-sa-3.0-de-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/de/ Attribution-Share njësoj 3.0 Gjermani] licencës.
+wm-license-cc-by-sa-3.0-es-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/es/ Attribution-Share njësoj 3.0 Spanjë] licencës.
+wm-license-cc-by-sa-3.0-gr-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/gr/ Attribution-Share njësoj 3.0 Greqi] licencës.
+wm-license-cc-by-sa-3.0-gt-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/gt/ Attribution-Share njësoj 3.0 Guatemala] licencës.
+wm-license-cc-by-sa-3.0-hk-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/hk/ Attribution-Share njësoj 3.0 Hong Kong] licencës.
+wm-license-cc-by-sa-3.0-hr-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/hr/ Attribution-Share njësoj 3.0 Kroaci] licencës.
+wm-license-cc-by-sa-3.0-lu-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/lu/ Attribution-Share njësoj 3.0 Luksemburg] licencës.
+wm-license-cc-by-sa-3.0-nl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/nl/ Attribution-Share njësoj 3.0 Hollandë] licencës.
+wm-license-cc-by-sa-3.0-no-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/no/ Attribution-Share njësoj 3.0 Norvegji] licencës.
+wm-license-cc-by-sa-3.0-nz-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/nz/ Attribution-Share njësoj 3.0 Zelanda e Re] licencës.
+wm-license-cc-by-sa-3.0-ph-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/ph/ Attribution-Share njësoj 3.0 Filipinet] licencës.
+wm-license-cc-by-sa-3.0-pl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/pl/ Attribution-Share njësoj 3.0 Poloni] licencës.
+wm-license-cc-by-sa-3.0-pr-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/pr/ Attribution-Share njësoj 3.0 Porto Riko] licencës.
+wm-license-cc-by-sa-3.0-ro-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/ro/ Attribution-Share njësoj 3.0 Rumani] licencës.
+wm-license-cc-by-sa-3.0-rs-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/rs/ Attribution-Share njësoj 3.0 Serbi] licencës.
+wm-license-cc-by-sa-3.0-sg-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/sg/ Attribution-Share njësoj 3.0 Singapore] licencës.
+wm-license-cc-by-sa-3.0-th-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/th/ Attribution-Share njësoj 3.0 Tajlandë] licencës.
+wm-license-cc-by-sa-3.0-tw-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/tw/ Attribution-Share njësoj 3.0 Tajvan] licencës.
+wm-license-cc-by-sa-3.0-us-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons]] [//creativecommons.org/licenses/by-sa/3.0/us/ Attribution-Share njësoj 3.0 Shtetet e Bashkuara të] licencës.
+wm-license-cc-sa-1.0-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons Share]] [//creativecommons.org/licenses/sa/1.0/deed.en njësoj Attribution 1.0 Generic] licencës.
+wm-license-cc-sa-1.0-fi-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons] [//creativecommons.org/licenses/sa/1.0/fi/deed.en] [Share njësoj Attribution 1.0 Finlandë] licencës.
+wm-license-cc-sa-1.0-nl-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons] [//creativecommons.org/licenses/sa/1.0/nl/deed.en] [Share njësoj Attribution 1.0 Hollandë] licencës.
+wm-license-cc-sa-2.0-jp-text|Kjo skedë është i liçensuar nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons] [//creativecommons.org/licenses/sa/2.0/jp/deed.en] [Share njësoj 2.0 Japoni] licencës.
+wm-license-cc-zero-text|Ky skedar është bërë në dispozicion nën [[{{int:wm-license-cc-wiki-link}}\u007CCreative Commons CC0]] [//creativecommons.org/publicdomain/zero/1.0/deed.en dokument i heqjes dorë] .
+wm-license-cc-zero-explanation|Personi i cili lidhur një punë me këtë dokument ka kushtuar të punojë për të Commons duke shmangur të gjitha të drejtat e tij apo të saj në të gjithë botën punojnë sipas ligjit të drejtën e autorit dhe të gjitha të lidhura ose të të drejtave fqinje ligjore që ai apo ajo e kishte në punë, në masën e lejuar me ligj. Punon me CC0 nuk kërkojnë pushtet. Kur duke përmendur punën, ju nuk duhet nënkuptuar përkrahje nga autori.
+wm-license-cc-free|Ju jeni të lirë:
+wm-license-cc-free-to-share-header|për të ndarë
+wm-license-cc-free-to-share-text|për kopjim, shpërndarje dhe përcjellë punën e
+wm-license-cc-free-to-remix-header|të remix
+wm-license-cc-free-to-remix-text|për të përshtatur punën
+wm-license-cc-conditions|Sipas kushteve të mëposhtme:
+wm-license-cc-conditions-attribution-header|pushtet
+wm-license-cc-conditions-attribution-text|Ju duhet të ia atribuojnë punës në mënyrën e përcaktuar nga autori ose licensor (por jo në çdo mënyrë që sugjeron se ata miratojë ju ose përdorimin tuaj të punës).
+wm-license-cc-conditions-share_alike-header|ndajnë njësoj
+wm-license-cc-conditions-share_alike-text|Nëse keni ndryshuar, transformuar, apo ndërtimin e kësaj pune, ju mund të shpërndani punën rezultuar vetëm nën licencën njëjta ose të ngjashme me këtë.
+wikimedialicensetexts-desc|Wikimedia licencës mesazhe
+wm-license-attribution-with-author-text|Copyright holder për këtë skedë, ~{0}, lejon askënd që të përdorin atë '''për çfarëdo qëllimi, me kusht që''' copyright holder i atribuohet si duhet. Rishpërndarjen, punë prejardhur, qëllime komerciale, dhe të gjitha të përdorni të tjera është e lejuar.
+wm-license-attribution-without-author-text|Copyright holder për këtë skedë lejon askënd që të përdorin atë '''për çfarëdo qëllimi, me kusht që''' copyright holder i atribuohet si duhet. Rishpërndarjen, punë prejardhur, qëllime komerciale, dhe të gjitha të përdorni të tjera është e lejuar.
+wm-license-cecill-text|Kjo punë është [[{{int:wm-license-free-software-wiki-link}}\u007Cfree software]], ju mund t'a rishpërndani ose ndryshoni atë sipas kushteve të [[{{int:wm-license-cecill-wiki-link}}\u007CCeCILL]]. Kushtet e licencës CeCILL janë në dispozicion në [{{int:wm-license-cecill-full-link}} www.cecill.info].
+wm-license-fal-text|"Copyleft": Kjo puna e artit është e lirë, ju mund t'a rishpërndani dhe / ose ndryshoni atë sipas kushteve të int'''[[{{int:wm-license-fal-full-link}}\u007CFree Arti License]] ' ''. Ju do të gjeni një mostër të kësaj licence në [{{int:wm-license-fal-wiki-link}} copyleft] Qëndrimi vend, si dhe në zona të tjera.
+wm-license-gfdl-1.2-and-later|Leje për kopjim, shpërndarje dhe / ose ndryshuar këtë dokument sipas kushteve të int'''[[{{int:wm-license-gfdl-wiki-link}}\u007CGNU Free Documentation License]]''', Version 1,2 ose cilitdo version të mëvonshëm botuar nga [[{{int:wm-license-fsf-wiki-link}}\u007CFree Software Foundation]], pa Ndarje të Pandryshueshme, pa Front-Cover Tekste, dhe nuk Back-Cover Tekste. Një kopje e kësaj license është përfshirë në ndarjen e titulluar''[[{{int:wm-license-gfdl-full-1.2-link}}\u007CGNU Free Documentation License ]]''.
+wm-license-gfdl-1.2-only|Leje për kopjim, shpërndarje dhe / ose ndryshuar këtë dokument sipas kushteve të int'''[[{{int:wm-license-gfdl-wiki-link}}\u007CGNU Free Documentation License ]]''', Version 1,2 vetëm botuar nga [[{{int:wm-license-fsf-wiki-link}}\u007CFree Software Foundation]], pa Ndarje të Pandryshueshme, nuk Tekste Front-Cover, dhe nuk Back-Cover Tekste. Një kopje e kësaj license është përfshirë në ndarjen e titulluar''[[{{int:wm-license-gfdl-full-1.2-link}}\u007CGNU Free Documentation License ]]''.
+wm-license-gfdl-1.3-and-later|Leje për kopjim, shpërndarje dhe / ose ndryshuar këtë dokument sipas kushteve të int'''[[{{int:wm-license-gfdl-wiki-link}}\u007CGNU Free Documentation License ]]''', Version 1,3 ose cilitdo version të mëvonshëm botuar nga [[{{int:wm-license-fsf-wiki-link}}\u007CFree Software Foundation]], pa Ndarje të Pandryshueshme, no Front-Cover Tekste, dhe nuk Back-Cover Tekste. Një kopje e kësaj license është përfshirë në ndarjen e titulluar''[[{{int:wm-license-gfdl-full-1.3-link}}\u007CGNU Free Documentation License ]]''.
+wm-license-gfdl-1.3-only|Leje për kopjim, shpërndarje dhe / ose ndryshuar këtë dokument sipas kushteve të int'''[[{{int:wm-license-gfdl-wiki-link}}\u007CGNU Free Documentation License ]]''', Version 1,3 vetëm botuar nga [[{{int:wm-license-fsf-wiki-link}}\u007CFree Software Foundation]], pa Ndarje të Pandryshueshme, nuk Tekste Front-Cover, dhe nuk Back-Cover Tekste. Një kopje e kësaj license është përfshirë në ndarjen e titulluar''[[{{int:wm-license-gfdl-full-1.3-link}}\u007CGNU Free Documentation License ]]''.
+wm-license-gpl-text|Kjo punë është [[{{int:wm-license-free-software-wiki-link}}\u007Cfree software]], ju mund t'a rishpërndani dhe / ose ndryshoni atë sipas kushteve të int'''[[{{int:wm-license-gpl-wiki-link}}\u007CGNU Public License Përgjithshëm ]]''' botuar nga [[{{int:wm-license-fsf-wiki-link}}\u007CFree Software Foundation]]; sipas versionit 2 të Liçencës, ose cilido version i mëvonshëm. Kjo punë shpërndahet me shpresën që do të jenë të dobishme, por'''pa ndonjë garanci'''; pa as garancinë e shprehur të'''''tregtimit' ose'''përshtatje për një qëllim të caktuar'''. Shih [{{int:wm-license-gpl-2-full-link}} version 2] dhe [{{int:wm-license-gpl-3-full-link}} version 3 të Përgjithshme GNU] Public License për më shumë detaje.
+wm-license-information-table-summary|Një tabelë standardizuar siguruar informacion të plotë në lidhje me dosjen, duke përfshirë edhe përshkrimin e asaj që tregon dhe se si u bë, statusi i autorit dhe burimi.
+wm-license-information-description|Përshkrim
+wm-license-information-description-missing|Kjo skedë ka asnjë '''përshkrim''', dhe mund të mungojnë të dhëna të tjera.
+wm-license-information-description-missing-request|Ju lutemi të japë një përshkrim kuptimplotë për këtë skedë.
+wm-license-information-source|Burim
+wm-license-information-source-missing|Kjo skedë është mungon '''burim''' informacioni.
+wm-license-information-source-missing-request|Ju lutemi redakto përshkrimin këtë fotografi dhe të sigurojë një burim.
+wm-license-information-date|Data
+wm-license-information-author|Autor
+wm-license-information-author-missing|Kjo skedë është mungon '''autorit''' informacion.
+wm-license-information-permission|Leje
+wm-license-information-permission-reusing-text|Ripërdorimin këtë fotografi
+wm-license-information-permission-see-below|Shih më poshtë.
+wm-license-information-other-versions|versione të tjera
+wm-license-lgpl-text|Kjo bibliotekë është [[{{int:wm-license-free-software-wiki-link}}\u007Cfree software]], ju mund t'a rishpërndani dhe / ose ndryshoni atë sipas kushteve të int'''[[{{int:wm-license-lgpl-wiki-link}}\u007CVogël Përgjithshme GNU Public License ]]''' botuar nga [[{{int:wm-license-fsf-wiki-link}}\u007CFree Software Foundation]] ; sipas versionit 2,1 të Liçencës, ose (sipas opinionit tuaj) çdo versioni të mëvonshëm. Kjo bibliotekë shpërndahet me shpresën që do të jenë të dobishme, por'''pa ndonjë garanci'''; pa as garancinë e shprehur të'''''tregtimit' ose'''përshtatje për një qëllim të caktuar'''. Shih [[{{int:wm-license-lgpl-2.1-full-link}} version 2,1] dhe [{{int:wm-license-lgpl-3-full-link}} versioni 3 i Vogël Përgjithshme GNU Public License ] për më shumë detaje.
+wm-license-original-upload-log|Original upload log
+wm-license-own-work|punë vetanake
+wm-license-self-one-license|Unë, copyright holder e kësaj pune, me anë të kësaj publikoj atë nën licencën e mëposhtme:
+wm-license-self-one-license-with-author|~{0}, copyright holder e kësaj pune, me anë të kësaj publikoj atë nën licencën e mëposhtme:
+wm-license-self-multiple-licenses|Unë, copyright holder e kësaj pune, me anë të kësaj publikoj atë nën licencat e mëposhtme:
+wm-license-self-multiple-licenses-with-author|~{0}, copyright holder e kësaj pune, me anë të kësaj publikoj atë nën licencat e mëposhtme:
+wm-license-self-multiple-licenses-select|Ju mund të zgjidhni licencën e zgjedhjes suaj.
+wikimediamessages-desc|Mesazhet specifike për wikimedia
+sitesupport-url|https://donate.wikimedia.org/?utm_source=donate&utm_medium=sidebar&utm_campaign=spontaneous&uselang=aln
+sitesupport|Jep donacion
+tooltip-n-sitesupport|Përkrahnani
+specialpages-group-contribution|Kontributi/fundraiser
+group-abusefilter|Redaktuesit e filtrave të keqpërdorimit
+group-abusefilter-member|redaktues i filtrave të keqpërdorimit
+grouppage-abusefilter|{{ns:project}}:Redaktuesit e filtrave të keqpërdorimit
+group-accountcreator|Krijuesit e llogarive
+group-accountcreator-member|krijues i llogarisë
+grouppage-accountcreator|{{ns:project}}:Krijues llogarish
+group-arbcom|Anëtarët e komisionit Arbitrazhi
+group-arbcom-member|komisioni arbitrazhi anëtar
+grouppage-arbcom|{{ns:project}}:anëtarët e komisionit arbitrazhit
+group-autopatrolled|Autopatrollers
+group-autopatrolled-member|autopatrulluesi
+grouppage-autopatrolled|{{ns:project}}:Autopatrullues
+group-autoreviewer|Autorishikuesit
+group-autoreviewer-member|autorishikues
+grouppage-autoreviewer|{{ns:project}}:Autorishikuesit
+group-bigexport|Eksportuesit e mëdhêj
+group-bigexport-member|eksportues i madh
+grouppage-bigexport|{{ns:project}}:Eksportuesit e mëdhêj
+group-confirmed|përdoruesit e konfirmuar
+group-confirmed-member|përdorues konfirmoi
+grouppage-confirmed|{{ns:project}}:përdoruesit e konfirmoi
+group-editprotected|Redaktorët e mbrojtura faqe
+group-editprotected-member|mbrojtur redaktor faqe
+grouppage-editprotected|{{ns:project}}:redaktorët e mbrojtura faqe
+group-filemover|Levizesit File
+group-filemover-member|file forcë lëvizëse
+grouppage-filemover|{{ns:project}}:Levizesit File
+group-flood|përdoruesit Bot
+group-flood-member|përdorues bot
+grouppage-flood|{{ns:project}}:përdoruesit Bot
+group-founder|Themeluesit
+group-founder-member|themelues
+grouppage-founder|{{ns:project}}:Themeluesit
+group-import|Importuesit
+group-import-member|importues
+grouppage-import|{{ns:project}}:Importuesit
+group-interface_editor|redaktorët Interface
+group-interface_editor-member|editor interface
+grouppage-interface_editor|{{ns:project}}:redaktorët Interface
+group-ipblock-exempt|Përjashtimet e bllokimeve të IP've
+group-ipblock-exempt-member|përjashtim nga bllokimi i IP've
+grouppage-ipblock-exempt|{{ns:project}}:përjashtim prej bllokimit të IP've
+group-patroller|Patrollers
+group-patroller-member|patroller
+group-rollbacker|Mbrapakthyesit
+group-rollbacker-member|mbrapakthyes
+grouppage-rollbacker|{{ns:project}}:Mbrapakthyesit
+group-transwiki|Importuesit transwiki
+group-transwiki-member|importues transwiki
+grouppage-transwiki|{{ns:project}}:Importuesit transwiki
+group-trusted|përdoruesit e Besuar
+group-trusted-member|përdorues besuar
+grouppage-trusted|{{ns:project}}:përdoruesit e Besuar
+group-uploader|Ngarkuesit
+group-uploader-member|ngarkues
+grouppage-uploader|{{ns:project}}:Ngarkuesit
+group-Global_bot|Botat global
+group-Global_bot-member|bot global
+group-Global_rollback|Mbrapakthyesit global
+group-Global_rollback-member|mbrapakthyes global
+group-Global_sysops|sysops Global
+group-Global_sysops-member|sysop globale
+group-Ombudsmen|Ombudspersonat
+group-Ombudsmen-member|ombudsperson
+group-Staff|Staffi
+group-Staff-member|antar i staffit
+group-editinterface|redaktorët Interface
+group-editinterface-member|editor interface
+group-steward|Përcjellësit
+group-steward-member|përcjellës
+group-sysadmin|Administruesit e sistemit
+group-sysadmin-member|administrues i sistemit
+group-coder|Programerat
+group-coder-member|programer
+group-inactive|Përdoruesit joaktiv
+group-inactive-member|përdorues joaktiv
+grouppage-inactive|{{ns:project}}:Përdoruesit joaktiv
+wikimedia-copyright|Ky tekst âsht vû në dispozicion nën licencën <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike License</a>;\nmundet me pasë klauzola shtesë që vijnë në shprehje.\nShih <a href="https://wikimediafoundation.org/wiki/Terms_of_Use">Kushtet e përdorimit</a> për mâ shumë detaje.
+wikimedia-copyrightwarning|Me t'regjistrue faqen, ju pajtoheni me lëshue kontributin tuej parevokueshëm nën [https://creativecommons.org/licenses/by-sa/3.0/ Licencën Creative Commons Attribution/Share-Alike 3.0] dhe [https://www.gnu.org/copyleft/fdl.html GFDL].\nPajtoheni që ri-përdoruesit mujnë me shprehë mirënjohjen së paku përmjet nji vegze apo URL'je te faqja, në të cilën po kontribuoni.\nShih [https://wikimediafoundation.org/wiki/Terms_of_Use Kushtet e përdorimit] për detaje.
+tog-underline|Nënvizoji vegzat
+tog-hideminor|Mshef redaktimet e vogla të bâme së voni
+tog-hidepatrolled|Mshef redaktimet e mbikëqyruna në ndryshimet e fundit
+tog-newpageshidepatrolled|Mshef redaktimet e mbikëqyruna prej listës së faqeve të reja
+tog-extendwatchlist|Zgjâno listën e mbikëqyrjeve që me i pa tâna ndryshimet, jo veç ato mâ të fresktat
+tog-usenewrc|Përdor ndryshimet e freskëta me vegla të përparueme (lyp JavaScript)
+tog-numberheadings|Numëro automatikisht mbititujt
+tog-showtoolbar|Trego butonat për redaktim (JavaScript)
+tog-editondblclick|Redakto faqet me klikim të dyfishtë (JavaScript)
+tog-editsectiononrightclick|Lejo redaktimin e seksioneve tue klikue me të djathtë mbi titull (JavaScript)
+tog-watchcreations|Shtoji në listë mbikëqyrëse faqet që i krijoj vetë
+tog-watchdefault|Shtoji në listë mbikëqyrëse faqet që i redaktoj
+tog-watchmoves|Shtoji në listë mbikëqyrëse faqet që i zhvendosi
+tog-watchdeletion|Shtoji në listë mbikëqyrëse faqet që i fshij
+tog-minordefault|Shêjoji fillimisht tâna redaktimet si të vogla
+tog-previewontop|Vendose parapamjen përpara kutisë redaktuese
+tog-previewonfirst|Shfaqe parapamjen në redaktimin e parë
+tog-enotifwatchlistpages|Njoftomë me email, kur ndryshojnë faqet e mbikëqyruna
+tog-enotifusertalkpages|Njoftomë me email kur ndryshon faqja ime e diskutimit
+tog-enotifminoredits|Njoftomë me email për redaktime të vogla të faqeve
+tog-enotifrevealaddr|Shfaqe adresën time në emailat njoftues
+tog-shownumberswatching|Shfaqe numrin e përdoruesve mbikëqyrës
+tog-oldsig|Parapamja e nënshkrimit ekzistues:
+tog-fancysig|Trajto nënshkrimin si tekst (pa vegëz automatike)
+tog-uselivepreview|Trego parapamjén meniheré (JavaScript) (Eksperimentale)
+tog-forceeditsummary|Pyetem kur e le përmbledhjen e redaktimit zbrazt
+tog-watchlisthideown|M'sheh redaktimet e mia nga lista mbikqyrëse
+tog-watchlisthidebots|Mshef redaktimet e robotave nga lista e vrojtimit
+tog-watchlisthideminor|Mshef redaktimet e vogla nga lista e vrojtimit
+tog-watchlisthideliu|Mshef redaktimet e përdoruesve t'kyçun prej listës së vrojtimit
+tog-watchlisthideanons|Mshef redaktimet e anonimëve prej listës së vrojtimit
+tog-watchlisthidepatrolled|Mshef redaktimet e mbikëqyruna prej listës së vrojtimit
+tog-ccmeonemails|Më ço kopje të mesazheve qi ua dërgoj të tjerëve
+tog-diffonly|Mos e trego përmbajtjen e faqes nën ndryshimin
+tog-showhiddencats|Trego kategoritë e mshefta
+tog-norollbackdiff|Trego ndryshimin mbas procedurës së kthimit mbrapa
+tog-useeditwarning|Paralajmëron mua kur unë të lë një redakto faqe me ndryshimet e para shpëtimit
+underline-always|gjithmonë
+underline-never|kurrë
+underline-default|njisoj si shfletuesi
+editfont-style|Redakto stilin e fontit të fushës:
+editfont-default|Parazgjedhja e browserit
+editfont-monospace|Font me hapësinë t'njitrajtshme
+editfont-sansserif|Font pa serifa
+editfont-serif|Font me serifa
+hidden-categories|{{PLURAL:~{0}\u007CKategori e msheftë\u007CKategori të mshefta}}
+index-category|Faqe e indeksume
+noindex-category|Faqe e paindeksume
+about|Rreth
+article|Artikulli
+newwindow|(çelet në nji dritare të re)
+cancel|Harroje
+moredotdotdot|Mâ shumë...
+mypage|Faqja jeme
+mytalk|Diskutimet e mija
+anontalk|Diskutimet për këtë IP
+navigation|Lundrimi
+and| dhe
+qbfind|Kërko
+qbbrowse|Shfleto
+qbedit|Redakto
+qbpageoptions|Kjo faqe
+qbmyoptions|Faqet e mija
+faq|Pyetjet e shpeshta
+faqpage|Project:Pyetjet e shpeshta
+actions|Veprimet
+namespaces|Hapësinat
+variants|Variantet
+errorpagetitle|Gabim
+returnto|Kthehu te ~{0}.
+tagline|Nga {{SITENAME}}
+help|Ndihmë
+search|Lyp
+searchbutton|Lype
+go|Shko
+searcharticle|Çele
+history|Historiku i faqes
+history_short|Të përparshmet
+updatedmarker|ndryshue nga vizita jeme e fundit
+printableversion|Version për shtyp
+permalink|Vegëz e përhershme
+print|Shtyp
+edit|Redakto
+create|Krijo
+editthispage|Redaktoje kët faqe
+create-this-page|Krijo këtë faqe
+delete|Fshij
+deletethispage|Fshije këtë faqe
+undelete_short|Kthe {{PLURAL:~{0}\u007Credaktimin e fshimë\u007C~{0} redaktime të fshime}}
+protect|Mbroj
+protect_change|ndrysho
+protectthispage|Mbroje këtë faqe
+unprotect|Hiq mbrojtjen
+unprotectthispage|Hiq mbrojtjen nga kjo faqe
+newpage|Faqe e re
+talkpage|Diskuto këtë faqe
+talkpagelinktext|Bisedo
+specialpage|Faqe speciale
+personaltools|Vegla vetjake
+articlepage|Shiko artikullin
+talk|Diskutimi
+views|Paraqitje
+toolbox|Veglat
+userpage|Shiko faqen e përdoruesit
+projectpage|Shiko faqen e projektit
+imagepage|Shiko faqen e skedës
+mediawikipage|Shiko faqen e mesazheve
+templatepage|Shiko faqen e shabllonit
+viewhelppage|Shiko faqen për ndihmë
+categorypage|Shiko faqen e kategorisë
+viewtalkpage|Shiko diskutimin
+redirectpagesub|Faqe përcjellëse
+viewcount|Kjo faqe âsht pâ {{PLURAL:~{0}\u007Cnji\u007C~{0}}} herë.
+protectedpage|Faqe e mbrojtun
+jumpto|Kce te:
+jumptonavigation|lundrim
+jumptosearch|lyp
+view-pool-error|Na vjen keq, serverat janë të stërngarkuem momentalisht.\nTepër shumë përdorues po tentojnë me pâ këtë faqe.\nJu lutem pritni pak para se me tentue me iu qasë faqes prap.\n\n~{0}
+aboutsite|Rreth {{SITENAME}}
+aboutpage|Project:Rreth
+copyright|Përmbajtja mundësohet simbas ~{0}.
+copyrightpage|{{ns:project}}:Të drejtat autoriale
+currentevents|Ndodhitë aktuale
+currentevents-url|Project:Ndodhitë aktuale
+disclaimers|Shfajsime
+disclaimerpage|Project:Shfajsimet e përgjithshme
+edithelp|Ndihmë për redaktim
+mainpage|Faqja kryesore
+mainpage-description|Faqja Kryesore
+policy-url|Project:Politika
+portal|Portali i komunitetit
+portal-url|Project:Portali i komunitetit
+privacy|Politika e privatsisë
+privacypage|Project:Politika e privatsisë
+badaccess|Gabim tagri
+badaccess-group0|Nuk keni tagër me ekzekutue veprimin e kërkuem.
+badaccess-groups|Në veprimin e kërkuem kanë tagër vetëm përdoruesit nga {{PLURAL:~{1}\u007Cgrupi\u007Cgrupet}}: ~{0}.
+versionrequired|Nevojitet verzioni ~{0} i MediaWikit
+versionrequiredtext|Lypet verzioni ~{0} i MediaWikit për me përdorë këtë faqe.\nShih [[Special:Version\u007Cfaqen e verzionit]].
+ok|OK
+retrievedfrom|Marrë nga "~{0}"
+youhavenewmessages|Keni ~{0} (~{1}).
+youhavenewmessagesmulti|Keni mesazhe të reja në ~{0}
+editsection|redakto
+editold|redakto
+viewsourceold|shih kodin
+editlink|redakto
+viewsourcelink|shih kodin
+editsectionhint|Redakto sekcionin: ~{0}
+showtoc|trego
+hidetoc|mshef
+thisisdeleted|Shiko ose rikthe ~{0}?
+viewdeleted|Shiko ~{0}?
+restorelink|{{PLURAL:~{0}\u007Cnji redaktim i fshimë\u007C~{0} redaktime të fshime}}
+feedlinks|Feed:
+feed-invalid|Lloji i abonimit të feedit âsht i gabuem.
+feed-unavailable|Feedsat Sindikal nuk pranohen
+site-rss-feed|~{0} RSS Feed
+site-atom-feed|~{0} Atom Feed
+page-rss-feed|"~{0}" RSS Feed
+page-atom-feed|"~{0}" Atom Feed
+feed-atom|Atom
+feed-rss|RSS
+red-link-title|~{0} (faqja nuk ekziston)
+nstab-main|Faqja
+nstab-user|Faqja e përdoruesit
+nstab-media|Faqja e mediave
+nstab-special|Faqja speciale
+nstab-project|Faqja e projektit
+nstab-image|Skeda
+nstab-mediawiki|Mesazhet
+nstab-template|Shablloni
+nstab-help|Faqja e ndihmës
+nstab-category|Kategoria
+nosuchaction|Ky veprim nuk ekziston
+nosuchactiontext|Veprimi i kërkuem me URL nuk âsht valid.\nNdoshta keni shkrue gabim URL'ën, ose keni përcjellë vegëz të gabueme.\nKjo gjithashtu mundet me tregue gabim në softwarein e {{SITENAME}}.
+nosuchspecialpage|Nuk ekziston kjo faqe speciale
+nospecialpagetext|<strong>Keni kërkue nji faqe speciale jovalide.</strong>\n\nLista e faqeve speciale valide gjindet te [[Special:SpecialPages\u007C{{int:specialpages}}]].
+error|Gabim
+databaseerror|Gabim në databazë
+laggedslavemode|'''Kujdes:''' Kjo faqe mundet mos me përmbajtë ndryshime të reja.
+readonly|Databaza âsht e bllokueme
+enterlockreason|Futni një arsye për bllokimin, gjithashtu futni edhe kohën se kur pritet të çbllokohet
+readonlytext|Databaza e {{SITENAME}} âsht e bllokueme dhe nuk lejon redaktime, me gjasë për mirëmbajtje rutinore, mbas së cillës do të kthehet në gjendje normale.\n\nAdministruesi, i cilli e ka bllokue dha këtë arsye: ~{0}
+missing-article|Databaza nuk e gjeti tekstin e faqes me emën "~{0}" ~{1}.\n\nKjo zakonisht ndodh nga përcjellja e nji ndryshimi të vjetëruem apo të nji vegze në faqe të fshime.\n\nNëse nuk âsht kështu, mund ta keni gjetë nji gabim në software. Ju lutemi, njoftoni nji [[Special:ListUsers/sysop\u007Cadministrues]], për këtë, tue tregue URL'ën.
+missingarticle-rev|(rishikimi#: ~{0})
+missingarticle-diff|(Ndryshimi: ~{0}, ~{1})
+readonly_lag|Databaza âsht bllokue automatikisht përderisa serverat e mvarun të skinkronizohen me kryesorin.
+internalerror|Gabim i mbrendshëm
+internalerror_info|Gabimi i mbrendshëm: ~{0}
+filecopyerror|Nuk mujta me kopjue skedën "~{0}" te "~{1}".
+filerenameerror|Nuk mujta me ndërrue emnin e skedës "~{0}" në "~{1}".
+filedeleteerror|Nuk mujta me fshî skedën "~{0}".
+directorycreateerror|Nuk mujta me krijue direktorinë "~{0}".
+filenotfound|Nuk mujta me gjetë skedën "~{0}".
+unexpected|Vlerë e papritun: "~{0}"="~{1}".
+formerror|Gabim: nuk mujta me dërgue formularin
+badarticleerror|Ky veprim nuk mundet me u ekzekutue në këtë faqe.
+cannotdelete|Nuk mujta me fshi faqen apo skedën "~{0}".\nNdodh që âsht fshi prej dikujt tjetër.
+badtitle|Titull i keq
+badtitletext|Titulli i faqes që kërkuet ishte jovalid, bosh, apo ishte nji vegëz gabim e lidhun ndërgjuhesisht apo ndër-wiki.\nNdodh që ka shêja që nuk munden me u përdorë në titull.
+perfcached|Informacioni i mâposhtëm âsht kopje e memorizueme, por mundet mos me qenë verzioni i fundit. A maximum of {{PLURAL:~{0}\u007Cone result is\u007C~{0} results are}} available in the cache.
+perfcachedts|Shenimi i mâposhtëm âsht kopje e memorizueme dhe âsht rifreskue së fundit me ~{0}. A maximum of {{PLURAL:~{3}\u007Cone result is\u007C~{3} results are}} available in the cache.
+querypage-no-updates|Redaktimi i kësaj faqeje âsht ndalue për momentin.\nShenimet këtu nuk do të rifreskohen.
+viewsource|Shih kodin
+actionthrottled|Veprimi âsht i kufizuem
+actionthrottledtext|Si masë kunder spamit, jeni të kufizuem me kry këtë veprim shumë herë për nji kohë shumë të shkurtë, dhe e keni tejkalue këtë kufizim.\nJu lutemi provoni prap mbas disa minutave.
+protectedpagetext|Kjo faqe âsht mbyllë për redaktim.
+viewsourcetext|Mundeni me pâ dhe kopjue kodin burimor të kësaj faqeje:
+protectedinterface|Kjo faqe përmban tekst të interfaceit të softwareit dhe âsht e mbrojtun për me pengue keqpërdorimin.
+editinginterface|'''Kujdes:''' Po redaktoni nji faqe që përdoret për me ofrue tekst të interfaceit të softwareit.\nNdryshimet në këtë faqe do të prekin pamjen e interfaceit për të gjithë përdoruesit tjerë.\nPër përkthim, konsideroni ju lutem përdorimin e [//translatewiki.net/wiki/Main_Page?setlang=en translatewiki.net], projektin e MediaWiki për përshtatje gjuhësore.
+cascadeprotected|Kjo faqe âsht e mbrojtun prej redaktimit, për shkak se âsht e përfshime në {{PLURAL:~{0}\u007Cfaqen, e cila âsht e mbrojtun\u007Cfaqet, të cilat janë të mbrojtuna}} me opcionin "zinxhir" të zgjedhun:\n~{1}
+namespaceprotected|Nuk keni tagër me redaktue faqe në hapësinën '''~{0}'''.
+ns-specialprotected|Faqet speciale nuk mujnë me u redaktue.
+titleprotected|Ky titull âsht i mbrojtun për krijim prej përdoruesit [[User:~{0}\u007C~{0}]].\nArsyeja e dhânë âsht "''~{1}''".
+virus-badscanner|Konfigurim i keq: scanner i panjoftun virusash: ''~{0}''
+virus-scanfailed|scanimi dështoi (code ~{0})
+virus-unknownscanner|antivirus i panjoftun:
+logouttext|'''Jeni çlajmërue.'''\n\nMundeni me vazhdue me shfrytëzue {{SITENAME}} në mënyrë anonime, apo mundeni <span class='plainlinks'>[~{0} me u kyçë]</span> si përdoruesi i njêjtë apo si nji tjetër.\nDisa faqe mujnë me u paraqitë prap si t'kishit qenë t'kyçun, derisa ta pastroni memorizimin e shfletuesit.
+yourname|Nofka:
+yourpassword|Fjalëkalimi:
+yourpasswordagain|Fjalëkalimi përsëdyti:
+remembermypassword|Mbaj mend fjalëkalimin tem në këtë shfletues (për ~{0} {{PLURAL:~{0}\u007Cditë\u007Cditë}})
+yourdomainname|Domena juej:
+externaldberror|Ose pat gabim në databazën e autentifikimit, ose nuk lejoheni me ndryshue llogarinë tuej të jashtme.
+login|Kyçu
+nav-login-createaccount|Kyçu / çel llogari
+userlogin|Kyçu / çel llogari
+userloginnocreate|Kyçu
+logout|Çkyçu
+userlogout|Çkyçu
+notloggedin|Nuk je i kyçun
+nologin|Nuk ke llogari? '''~{0}'''.
+nologinlink|Krijo llogari
+createaccount|Krijo llogari
+gotaccount|Ke llogari? '''~{0}'''.
+gotaccountlink|Kyçu
+createaccountmail|me email
+createaccountreason|Arsyeja:
+badretype|Fjalëkalimet nuk janë të njêjta.
+userexists|Nofka keni zgjedhë âsht në përdorim.\nZgjedh nji emën tjetër.
+loginerror|Gabim në kyçje
+createaccounterror|Nuk mund të hapni një llogari ~{0}
+nocookiesnew|Llogaria e përdoruesit u krijue, por ende nuk je i kyçun.\n{{SITENAME}} përdor keksa (cookies) për kyçje.\nKeksat i ke jasht funksionit.\nFuti keksat në funksion, mandej kyçu me nofkën dhe fjalëkalimin tând të ri.
+nocookieslogin|{{SITENAME}} përdor keksa (cookies) për kyçje.\nKeksat i ke jasht funksionit.\nTë lutem aktivizoji dhe provo prap.
+noname|Nuk ke dhânë nofkë valide.
+loginsuccesstitle|Kyçje e suksesshme
+loginsuccess|'''Je kyçë në {{SITENAME}} si "~{0}".'''
+nosuchuser|Nuk ka përdorues me emnin "~{0}".\nEmnat janë senzitiv në madhësi të germës.\nKontrollo drejtshkrimin ose [[Special:UserLogin/signup\u007Ckrijo llogari]].
+nosuchusershort|Nuk ka përdorues me emnin "~{0}".\nKontrollo drejtshkrimin.
+nouserspecified|Duhesh me dhânë nji nofkë.
+login-userblocked|Ky përdorues është bllokuar. Identifikohu nuk lejohet
+wrongpassword|Fjalëkalimi i pasaktë.\nProvo prap.
+wrongpasswordempty|Fjalëkalimi ishte i shprazët.\nProvo prap.
+passwordtooshort|Fjalëkalimi juej duhet me i pasë së paku {{PLURAL:~{0}\u007C1 shêjë\u007C~{0} shêja}}.
+password-name-match|Fjalëkalimi duhet me qenë i ndryshëm prej nofkës.
+mailmypassword|Çoma fjalëkalimin me postel
+passwordremindertitle|Fjalëkalim i ri i përkohshëm për {{SITENAME}}
+passwordremindertext|Dikush (me giasë ju vetë, nga adresa IP ~{0}) ka lypë nji\nfjalëkalim për {{SITENAME}} (~{3}). Nji fjalëkalim i përkohshëm për\n"~{1}" âsht krijue si vijon "~{2}". Nëse kjo ka qenë qëllimi juej\natëhere duheni me u kyçë tash dhe me zgjedhë nji fjalëkalim të ri.\nFjalëkalimi juej i përkohshëm skadon për {{PLURAL:~{4}\u007Cnji ditë\u007C~{4} ditë}}.\n\nNëse dikush tjetër e ka bâ këtë kërkesë, ose ju âsht kujtue fjalëkalimi,\ndhe nuk dëshironi me ndërrue fjalëkalimin, mundeni me injorue këtë mesazh\ndhe me vazhdue me përdorë fajlëkalimin e vjetër.
+noemail|Nuk ka adresë emaili për përdoruesin "~{0}".
+noemailcreate|Ju duhet të sigurojë një adresë të saktë-mail
+passwordsent|Nji fjalëkalim i ri u dërgue në adresën e emailit të "~{0}".\nJu lutem kyçuni mbasi ta keni marrë atê.
+blocked-mailpassword|Adresa juej IP âsht bllokue për redaktim, dhe nuk lejohet me përdorë funksionin e mëkâmbjes së fjalëkalimit për me parandalue keqpërdorimin.
+eauthentsent|Nji email konfirmues u dërgue në adresën e emnueme.\nPara se me u dërgue çfarëdo emaili tjetër në këtë llogari, duheni me i përcjellë udhëzimet në atë email, për me konfirmue se kjo llogari âsht e jueja.
+throttled-mailpassword|Nji përkujtim i fjalëkalimit âsht dërgue, para {{PLURAL:~{0}\u007Cnji ore\u007C~{0} orësh}}.\nPër me parandalue keqpërdorimin, mundet me u dërgue vetëm nji përkujtim i fjalëkalimit mbrenda {{PLURAL:~{0}\u007Cnji ore\u007C~{0} orësh}}.
+mailerror|Gabim në dërgimin e emailit: ~{0}
+acct_creation_throttle_hit|Vizitorët e këtij wiki që shfrytëzojnë adresën IP kanë krijue {{PLURAL:~{0}\u007C1 llogari\u007C~{0} llogari}} gjatë ditës së fundit, që âsht maksimumi për këtë periudhë kohore.\nSi rezultat, vizitorët nga kjo IP nuk mujnë me krijue llogari tjera tashpërtash.
+emailauthenticated|Adresa juej e emailit âsht vërtetue me ~{1} në ora ~{2}.
+emailnotauthenticated|Adresa juej e emailit nuk âsht vërtetue ende.\nNuk ka me u dërgue mâ asnji email për shërbimet në vazhdim.
+noemailprefs|Specifikoni nji adresë emaili në parapëlqimet tueja në mënyrë që t'funksionojnë shërbimet.
+emailconfirmlink|Konfirmonin adresën tuej te emailit
+invalidemailaddress|Adresa e emailit nuk pranohet meqenëse duket se ka format jovalid.\nJu lutemi jepeni nji adresë të formatueme mirë ose leni atë fushë të shprazët.
+accountcreated|Llogaria u krijue
+accountcreatedtext|Llogaria e përdoruesit për ~{0} u krijue
+createaccount-title|Krijimi i llogarive për {{SITENAME}}
+createaccount-text|Dikush ka krijue llogari me adresën tuej të emailit në {{SITENAME}} (~{3}) me nofkën "~{1}", dhe fjalëkalimin "~{2}".\nKyçuni tash dhe ndërroni fjalëkalimin.\n\nNëse kjo llogari âsht krijue gabimisht, mundeni me injorue këtë email.
+login-throttled|Keni bâ shumë tentime frik me u kyçë në kët llogari.\nJu lutemi pritni pak për me provue prap.
+loginlanguagelabel|Gjuha: ~{0}
+suspicious-userlogout|Kërkesa juaj për të shkëputet u mohua sepse duket sikur është dërguar nga një shfletues të thyer ose caching proxy
+changepassword|Ndërrimi i fjalëkalimit
+resetpass_announce|Jeni kyçë me nji kod të përkohshëm të dërguem me email.\nPër me krye kyçjen, specifikoni fjalëkalimin e ri këtu:
+resetpass_text|<!-- Shto tekst këtu -->
+resetpass_header|Ndrysho fjalëkalimin
+oldpassword|Fjalëkalimi i vjetër:
+newpassword|Fajlëkalimi i ri:
+retypenew|Fjalëkalimi i ri përsëdyti
+resetpass_submit|Vendos fjalëkalimin dhe kyçu
+changepassword-success|Fjalëkalimi juej u ndryshue me sukses! Tash po kyçeni...
+resetpass_forbidden|Fjalëkalimet nuk mujnë me u ndryshue
+resetpass-no-info|Duheni me qenë të kyçun për me iu qasë kësaj faqeje direkt.
+resetpass-submit-loggedin|Ndrysho fjalëkalimin
+resetpass-submit-cancel|Harroji
+resetpass-wrong-oldpass|Fjalëkalimi i përkohshëm apo ai aktual invalid.\nNdoshta tashmâ e keni ndryshue fjalëkalimin me sukses, apo keni kërkue nji fjalëkalim të përkohshëm.
+resetpass-temp-password|Fjalëkalimi i përkohshëm:
+passwordreset|reset Fjalëkalimi
+passwordreset-username|Emri i përdoruesit:
+extlink_sample|http://www.example.com Titulli i vegzës
+extlink_tip|Vegëz e jashtme (mos e harro prefiksin http://)
+nowiki_sample|Vendos tekst të paformatueshëm këtu
+nowiki_tip|Shpërfille formatimin wiki
+image_sample|Shembull.jpg
+image_tip|Skedë e ndërthurrun
+media_sample|Shembull.ogg
+media_tip|Vegëz në skedë
+sig_tip|Nënshkrimi juej me gjithë kohën
+hr_tip|Vijë horizontale (përdoreni rallë)
+summary|Përmbledhje:
+subject|Tema/kryetitulli:
+minoredit|Ky asht redaktim i vogël
+watchthis|Mbikëqyre kët faqe
+savearticle|Regjistro faqen
+preview|Parapâmje
+showpreview|Trego parapâmjen
+showdiff|Trego ndryshimet
+anoneditwarning|'''Kujdes:''' Ju nuk jeni i kyçun.\nAdresa juej IP do të regjistrohet në historikun e redaktimit të kësaj faqeje.
+anonpreviewwarning|''Nuk jeni i kyçun. Regjistrimi ka me marrë shenim IP adresën tuej në histori të faqes.''
+missingsummary|'''Vini re:''' Nuk keni specifikue përmbledhje të redaktimit.\nNëse klikoni prap në regjistro, redaktimi do të ruhet pa tê.
+missingcommenttext|Ju lutemi shtoni nji koment mâ poshtë.
+missingcommentheader|'''Vini re:''' Nuk keni dhânë temë/kryetitull për këtë koment.\nNëse klikoni në regjistro prap, redaktimi juej do të ruhet pa tê.
+summary-preview|Parapamja e përmbledhjes:
+subject-preview|Parapâmja e temës/kryetitullit:
+blockedtitle|Përdoruesi âsht i bllokuem
+blockedtext|'''Llogaria juej apo adresa IP âsht bllokue.'''\n\nBllokim âsht bâ prej ~{0}.\nArsyeja e dhânë âsht ''~{1}''.\n\n* Fillimi i bllokimit: ~{7}\n* Përfundimi i bllokimit: ~{5}\n* I bllokuemi i synuem: ~{6}\n\nMundeni me kontaktue ~{0} ose ndonji [[{{MediaWiki:Grouppage-sysop}}\u007Cadministrator]] për me diskutue bllokimin.\nNuk mundeni me shfrytëzue funksionin 'dërgo email këtij përdoruesi' përveç nëse keni specifikue adresë emaili në [[Special:Preferences\u007Cparapëlqimet e llogarisë]] dhe nuk jeni bllokue.\nAdresa juej aktuale e IP âsht ~{2}, dhe ID e bllokimit âsht #~{4}.\nJu lutemi përfshini këto shenime në të gjitha shkresat që i bâni.
+autoblockedtext|Adresa juej e IPs âsht bllokue automatikisht meqenëse âsht përdorë prej nji përdoruesi tjetër, i cili âsht bllokue prej ~{0}.\nArsyeja e dhânë âsht kjo:\n\n:''~{1}''\n\n* Fillimi i bllokimit: ~{7}\n* Përfundimi i bllokimit: ~{5}\n* I bllokuemi i synuem: ~{6}\n\nMundeni me kontaktue ~{0} ose ndonji [[{{MediaWiki:Grouppage-sysop}}\u007Cadministrator]] për me diskutue bllokimin.\n\nNuk mundeni me shfrytëzue funksionin 'dërgo email këtij përdoruesi' përveç nëse keni specifikue adresë emaili në [[Special:Preferences\u007Cparapëlqimet e llogarisë]] dhe nuk jeni bllokue.\n\nAdresa juej aktuale e IP âsht ~{2}, dhe ID e bllokimit âsht #~{4}.\nJu lutemi përfshini këto shenime në të gjitha shkresat që i bâni.
+blockednoreason|nuk âsht dhânë arsye
+whitelistedittext|Duheni me u ~{0} për me redaktue artikuj.
+confirmedittext|Duheni me vërtetue adresën tuej të emailit para se me redaktue.\nJu lutemi vërtetoni adresën tuej të emailit përmjet [[Special:Preferences\u007Cparapëlqimeve]] tueja.
+nosuchsectiontitle|Nuk ka kësi sekcioni
+nosuchsectiontext|Keni tentue me redaktue nji sekcion që nuk ekziston.
+loginreqtitle|Lypet kyçje
+loginreqlink|kyçë
+loginreqpagetext|Duheni me u ~{0} për me i pâ faqet tjera.
+accmailtitle|Fjalëkalimi u dërgue.
+accmailtext|Nji fjalëkalim i krijuem rastësisht për [[User talk:~{0}\u007C~{0}]] u dërgue në ~{1}.\n\nFjalëkalimi për këtë llogari mundet me u ndryshue në faqen ''[[Special:ChangePassword\u007Cndrysho fjalëkalimin]]'' mbas kyçjes.
+newarticle|(I ri)
+newarticletext|Ke ndjekë nji vegëz për te nji faqe që nuk ekziston.\nMe krijue kët faqe, shkruej në kutinë ma poshtë (shih [~{0} faqen e ndihmës] për ma shum udhzime).\nNëse ke hy këtu gabimisht, klikoje sustën '''mbrapa''' në shfletues.
+anontalkpagetext|----''Kjo âsht faqe diskutimi e nji përdoruesi anonim, i cili nuk ka krijue llogari, apo nuk e përdor atê.\nPrandej përdoret adresa numerike IP e tij për me identifikue.\nAdresa IP mundet me u shfrytëzue prej disa përdoruesve.\nNëse jeni përdorues anonim dhe keni përshtypjen se po ju drejtohen komente jorelevante, ju lutemi [[Special:UserLogin/signup\u007Ckrijoni nji llogari]] apo [[Special:UserLogin\u007Ckyçuni]] për me iu shmângë ngatërrimit me përdorues tjerë anonim.''
+noarticletext|Momentalisht nuk ka tekst në këtë faqe.\nJu mundeni [[Special:Search/{{PAGENAME}}\u007Cme kërkue këtë titull]] në faqe tjera,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} me kërkue në regjistrat tematikisht të afërm],\napo [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} me redaktue këtë faqe]</span>.
+userpage-userdoesnotexist|Llogaria e përdoruesit "<nowiki>~{0}</nowiki>" nuk âsht regjistrue.\nJu lutemi kontrolloni nëse doni me krijue/redaktue këtë faqe.
+clearyourcache|'''Shenim - Mbas ruejtjes, ka mundësi që duheni me shmângë memorizimin në cache për me i pâ ndryshimet.'''\n'''Mozilla / Firefox / Safari:''' mbani ''Shift'' tue klikue në ''Reload'', ose trusni ''Ctrl-F5'' ose ''Ctrl-R'' (''Command-R'' në Mac);\n'''Konqueror: '''klikoni ''Reload'' ose trusni ''F5'';\n'''Opera:''' fshini cachein në ''Tools → Preferences'';\n'''Internet Explorer:''' mbani ''Ctrl'' tue klikue në ''Refresh,'' ose trusni ''Ctrl-F5''.
+usercssyoucanpreview|'''Këshillë:''' Përdorni butonin 'Trego parapâmjen' për me testue CSS para se me i regjistrue ndryshimet.
+userjsyoucanpreview|'''Këshillë:''' Përdorni butonin 'Trego parapâmjen' për me testue JS para se me i regjistrue ndryshimet.
+usercsspreview|'''Vini re, jeni tue pâ veç parapâmjen e CSSit tuej.'''\n'''Ende nuk e keni ruejtë!'''
+userjspreview|'''Vini re, jeni tue testue/pâ veç parapâmjen e JavaScriptit tuej.'''\n'''Ende nuk e keni ruejtë!'''
+userinvalidcssjstitle|'''Kujdes:''' Nuk ka pâmje me emën "~{0}".\nVini re që faqet .css dhe .js përdorin vetëm titull me germa të vogla, psh. {{ns:user}}:Foo/vector.css për dallim prej {{ns:user}}:Foo/Vector.css.
+updated|(E ndryshueme)
+note|'''Shenim:'''
+previewnote|'''Kjo asht vetëm parapamje.'''\nNdryshimet e tua nuk janë ruejtë ende!
+previewconflict|Kjo parapâmje pasqyron tekstin në kutinë e sipërme të redaktimit, njashtu si do të duket nëse e rueni.
+session_fail_preview|'''Na vjen keq! Nuk mujtëm me ruejtë redaktimin tuej për shkak të hupjes së sesionit.'''\nJu lutemi provoni prap.\nNëse prap nuk funksionon, provoni me u [[Special:UserLogout\u007Cçkyçë]] dhe me u kyçë prap.
+session_fail_preview_html|'''Na vjen keq! Nuk mujtëm me i ruejtë ndryshimet tueja për shkak të hupjes së sesionit.'''\n\n''Tue qenë se {{SITENAME}} ka të aktivizuem HTML të papërpunuem, parapâmja âsht e msheftë si preventivë kundër sulmeve me JavaScript.''\n\n'''Nëse kjo ishte redaktim legjitim, ju lutemi provoni prap.'''\nNëse prap nuk funksionon, provoni me u [[Special:UserLogout\u007Cçkyçë]] edhe me u kyçë prap.
+token_suffix_mismatch|'''Redaktimi juej u refuzue meqenëse shfletuesi juej i ka përzî shêjat e pikësimit në tekstin e redaktuem.'''\nRedaktimi âsht refuzue për me parandalue korruptimin e tekstit.\nKjo ndodh nganjiherë, kur jeni tue përdorë shërbime ndërmjetësash anonimizues që përmbajnë gabime.
+editing|Tue redaktue ~{0}
+editingsection|Tue redaktue (sekcionin) ~{0}
+editingcomment|Tue redaktue (sekcionin e ri) ~{0}
+editconflict|Konflikt redaktues: ~{0}
+explainconflict|Dikush tjetër e ka ndryshue këtë faqe derisa e redaktojshit ju.\nKutia e sipërme tregon tekstin aktual të faqes.\nNdryshimet tueja gjinden në kutinë e poshtme redaktuese.\nJu duheni me i bashkue ndryshimet tueja në tekstin aktual.\n'''Vetëmse''' nëse shtypni "{{int:savearticle}}" ka me u ruejtë teksti në kutinë e sipërme redaktuese.
+yourtext|Teksti juej
+storedversion|Rishikim i ruejtun
+nonunicodebrowser|'''Kujdes: Shfletuesi juej nuk e përkrah unicodein.'''\nPër me ju lejue me redaktue faqen pa gabime aplikohet nji opcion shtesë: germat jashta ASCII kodit paraqiten me kod heksadecimal.
+editingold|'''Kujdes: Jeni tue redaktue nji verzion të vjetër të faqes.'''\nNëse e rueni, tâna rishikimet e mâvonshme të faqes kanë me hupë.
+yourdiff|Dallimet
+copyrightwarning|Ju lutemi vini re se tâna kontributet në {{SITENAME}} konsiderohen me qenë të lidhuna me licencën ~{1} (shih ~{0} për detaje).\nNëse nuk doni që shkrimet tueja me u redaktue pamëshirshëm dhe me u shpërnda arbitrarisht, atëherë mâ mirë mos publikoni këtu.<br />\nGjithashtu po premtoni se këtë e keni shkrue vetë, ose e keni kopjue prej domenës publike apo ndonji burimi tjetër të lirë.\n'''Mos publikoni vepra që janë e drejtë autoriale pa leje!'''
+copyrightwarning2|Ju lutemi vini re se tâna kontributet në {{SITENAME}} mujnë me u rishkrue, ndryshue, apo fshi prej kontribuusve tjerë.\nNëse nuk doni që shkrimet tueja me u redaktue pamëshirshëm dhe me u shpërnda arbitrarisht, atëherë mâ mirë mos publikoni këtu.<br />\nGjithashtu po premtoni se këtë e keni shkrue vetë, ose e keni kopjue prej domenës publike apo ndonji burimi tjetër të lirë (shih ~{0} për detaje).\n'''Mos publikoni vepra që janë e drejtë autoriale pa leje!'''
+longpageerror|'''Gabim: Teksti që po redaktoni i ka ~{0} kilobyte, që âsht mâ shumë se maksimumi prej ~{1} kilobytësh.'''\nNuk mundet me u ruejtë.
+readonlywarning|'''Kujdes: Baza e të dhânave âsht mshelë për mirëmbajtje, kështuqë tashpërtash nuk keni me mujtë me i ruejtë redaktimet tueja.'''\nMundeni me kopju dhe ruejtë tekstin në nji skedë për mâ vonë.\n\nAdministruesi që e ka mshelë e ka dhânë këtë shpjegim: ~{0}
+protectedpagewarning|'''Kujdes: Kjo faqe âsht mshelë ashtu që vetëm përdoruesit me tagër administrues mujnë me redaktue.'''
+semiprotectedpagewarning|'''Shenim:''' Kjo faqe âsht e mshelun dhe mundet me u redaktue vetëm prej përdoruesve të regjistruem.
+cascadeprotectedwarning|'''Veni re:''' Kjo faqe âsht e mshelun dhe vetëm përdoruesit me tagër administruesi munden me e redaktue, tue qenë se âsht e përfshime në mbrojtje mvarësie në {{PLURAL:~{0}\u007Cfaqen e\u007Cfaqet e}} mâposhtme:
+titleprotectedwarning|'''Veni re:  Kjo faqe âsht e mshelun dhe vetëm përdorues me [[Special:ListGroupRights\u007Ctagër të veçantë]] munden me e krijue.'''
+templatesused|{{PLURAL:~{0}\u007CStamp\u007CStampa}} janë përdorë në kët faqe:
+templatesusedpreview|{{PLURAL:~{0}\u007CShabllon\u007CShabllonet}} e përdoruna në kët parapamje:
+templatesusedsection|{{PLURAL:~{0}\u007CStamp\u007CStampa}} e përdoruna në këtë sekcion:
+template-protected|(e mbrojtme)
+template-semiprotected|(gjysë-mbrojtun)
+hiddencategories|Kjo faqe bân pjesë në {{PLURAL:~{0}\u007C1 kategori të msheftë\u007C~{0} kategori të mshefta}}:
+nocreatetext|{{SITENAME}} ka kufizue mundësinë e krijimit të faqeve të reja.\nMundeni me u kthy mbrapa edhe me redaktue faqen ekzistuese, apo [[Special:UserLogin\u007Cme u kyçë a me krijue nji llogari]].
+nocreate-loggedin|Nuk keni tagër me krijue faqe të reja.
+permissionserrors|Gabim tagri
+permissionserrorstext|Nuk keni tagër me bâ atë veprim, për {{PLURAL:~{0}\u007Carsyen\u007Carsyet}} vijuese:
+permissionserrorstext-withaction|Nuk keni tagër në ~{1}, për {{PLURAL:~{0}\u007Carsyen\u007Carsyet}} vijuese:
+recreate-moveddeleted-warn|'''Veni re: Jeni tue rikrijue nji faqe, e cila âsht fshi mâ herët.'''\n\nMendohuni nëse âsht e udhës me vazhdue me këtë veprim.\nRegjistrin e fshimjes dhe zhvendosjes e keni në vijim:
+moveddeleted-notice|Kjo faqe është grisur. Të dhënat e grisjes për këtë faqe gjenden më poshtë, për referencë.
+edit-gone-missing|Faqja nuk mund t freskohet.\nDuket se është grisur.
+edit-conflict|Konflikt në redaktim.
+edit-no-change|Redaktimi juaj është anashkaluar pasi që asnjë ndryshim nuk u bë në tekst.
+edit-already-exists|Faqja nuk mundej të hapet.\nAjo tanimë ekziston.
+editwarning-warning|Duke e lënë këtë faqe mund të bëjë që ju të humbni ndonjë ndryshim që keni bërë. Nëse ju jeni regjistruar, ju mund ta çaktivizoni këtë paralajmërim në "Tue redaktue" seksionin e preferencave tuaja.
+expensive-parserfunction-warning|Kujdes: Kjo faqe ka shumë kërkesa që kërkojnë analizë gramatikore të kushtueshme për sistemin.\n\nDuhet të ketë më pakë se ~{1}, {{PLURAL:~{1}\u007Ckërkesë\u007Ckërkesa}}, kurse tani {{PLURAL:~{0}\u007Cështë ~{0} kërkesë\u007Cjanë ~{0} kërkesa}}.
+expensive-parserfunction-category|Faqe me shumë shprehje të kushtueshmë për analizë gramatikore
+post-expand-template-inclusion-warning|Vini re: Stampa e përfshirë është shumë e madhe.\nDisa stampa s'do të përfshihen.
+post-expand-template-inclusion-category|Faqe ku stampat e përfshira kalojnë kufirin
+post-expand-template-argument-warning|Vini re: Kjo faqe ka të paktën një parametër stampe që është shumë i madh për t'u shpalosur.\nKëto parametra nuk janë përfshirë.
+post-expand-template-argument-category|Faqe që kanë parametra stampe të papërfshira
+undo-success|Redaktimi nuk mund të kthehej. Ju lutem kontrolloni ndryshimet e mëposhtëme për të vërtetuar dëshirën e veprimit dhe pastaj kryeni ndryshimet për të plotësuar kthimin e redaktimit.
+undo-failure|Redaktimi nuk mund të kthehej për shkak të përplasjeve të ndërmjetshme.
+undo-norev|S'mund të zhbëja këtë redaktim pasi nuk ekziston ose është grisur.
+undo-summary|U kthye versioni ~{0} i bërë nga [[Special:Contributions/~{1}]] ([[User talk:~{1}]])
+cantcreateaccounttitle|Nuk mundet të krijohet llogaria
+cantcreateaccount-text|Hapja e llogarive nga kjo adresë IP ('''~{0}''') është bllokuar nga [[User:~{2}\u007C~{2}]].\n\nArsyeja e dhënë nga ~{2} është ''~{1}''.
+viewpagelogs|Shih regjistrat për këtë faqe
+nohistory|Nuk ka histori redaktimesh për këtë faqe.
+currentrev|Versioni i tanishëm
+currentrev-asof|Redaktimi aktual i datës ~{0}
+revisionasof|Versioni i ~{0}
+revision-info|Versioni me ~{0} nga ~{1}
+previousrevision|← Verzion ma i vjetër
+nextrevision|Redaktimi mâ i ri →
+currentrevisionlink|Verzioni aktual
+cur|tash
+next|mbas
+last|fund
+page_first|Së pari
+page_last|Së fundmi
+histlegend|Përzgjedhja e dallimeve: shêjo kutijat rrethore të verzioneve që do me i krahasue dhe shtyp enter ose butonin në fund.<br />\nLegjenda: '''({{int:cur}})''' = dallimi me verzionin aktual,\n'''({{int:last}})''' = dallimi me verzionin para këtij, '''{{int:minoreditletter}}''' = redaktim i vogël.
+history-fieldset-title|Shfleto historikun
+histfirst|Mâ të hershmet
+histlast|Mâ të freskëtat
+historysize|({{PLURAL:~{0}\u007C1 B\u007C~{0} B}})
+historyempty|(bosh)
+history-feed-title|Historiku i versioneve
+history-feed-description|Historiku i versioneve për këtë faqe në wiki
+history-feed-item-nocomment|~{0} tek ~{1}
+history-feed-empty|Faqja që kërkuat nuk ekziston. Ajo mund të jetë grisur nga wiki ose mund të jetë zhvendosur nën një emër tjetër. Mund të provoni ta gjeni duke e [[Special:Search\u007Ckërkuar]].
+rev-deleted-comment|(kometi u largua)
+rev-deleted-user|(përdoruesi u largua)
+rev-deleted-event|(veprimi në regjistër është hequr)
+rev-deleted-text-permission|Ky version i faqes është shlyer nga arkivi publik i faqes.\nShiko tek [{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{FULLPAGENAMEE}}}} regjistri i grisjeve], ndoshta gjendet atje më shumë informacion rreth kësaj faqeje.
+rev-deleted-text-view|Ky version i faqes është shlyer nga arkivi publik i faqes. Ju si Administrator mund ta shikoni akoma këtë.\nShiko tek [{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{FULLPAGENAMEE}}}} regjistri i grisjeve], ndoshta gjenden atje më shumë informacione rreth kësaj.
+rev-delundel|trego/mshef
+rev-showdeleted|Trego
+revisiondelete|Fshij/kthe verzionet
+revdelete-nooldid-title|Version i dëshiruar i pavfleshëm
+revdelete-nooldid-text|Ose nuk keni përcaktuar një version(e) të dëshiruar për veprimin, ose versioni nuk ekziston, ose po mundoheni të fshihni versionin e tanishëm.
+revdelete-no-file|Skeda e dhënë nuk ekziston.
+logdelete-selected|{{PLURAL:~{0}\u007CVeprimi i zgjedhur në regjistër\u007CVeprimet e zgjedhura në regjistër}}:
+revdelete-legend|Vendosni kufizimet për versionin:
+revdelete-hide-text|Fshihe tekstin e versionit
+revdelete-hide-image|Fshih përmbajtjen skedare
+revdelete-hide-name|Fshihe veprimin dhe shënjestrën
+revdelete-hide-comment|fshih komentin e redaktimit
+revdelete-hide-user|Fshihe emrin/IP-në të redaktuesit
+revdelete-hide-restricted|Këto përkufizme vlejnë edhe për Admintratorët (jo vetëm për përdoruesit "normal")
+revdelete-suppress|Ndalo të dhëna nga administrues si dhe të tjerë
+revdelete-unsuppress|Hiq kufizimet nga versionet e restauruara
+revdelete-log|Arsyeja:
+revdelete-submit|Apliko te versionet e zgjedhura
+revdelete-success|'''Dukshmëria e versioneve u vendos me sukses.'''
+logdelete-success|'''Dukshmëria e regjistrave u vendos me sukses.'''
+revdel-restore|ndrro dukshmëninë
+pagehist|Historiku i faqes
+deletedhist|Historiku i grisjeve
+revdelete-edit-reasonlist|Arsye grisjeje për redaktimet
+suppressionlog|Regjistri i ndalimeve
+suppressionlogtext|Më poshtë jepet një listë grisjesh dhe bllokimesh që kanë të bëjnë me përmbatje të fshehur nga administruesit. Shikoni [[Special:IPBlockList\u007Clistën e IP bllokimeve]] për një listë të bllokimeve dhe përzënieve në fuqi.
+mergehistory|Bashko historikët e faqeve
+mergehistory-header|Kjo faqe ju lejon bashkimin e versionet e historikut të një faqeje "burim" në një faqe "mbledhje".\nSigurohuni që ky ndryshim do të ruajë rrjedhshmërinë e historikut të faqes.
+mergehistory-box|Bashkoni versionet e dy faqeve:
+mergehistory-from|Faqja burim:
+mergehistory-into|Faqja mbledhëse:
+mergehistory-list|Historik redaktimi i bashkueshëm
+mergehistory-merge|Versionet vijuese të [[:~{0}]] mund të bashkohen në [[:~{1}]].\nZgjidhni butonin rrethor në kolonë për të bashkuar vetëm versionet e krijuara aty dhe më parë kohës së përzgjedhur.\nKini kujdes se përdorimi i lidhjeve të shfletimit do të ndryshojë përzgjedhjen tuaj.
+mergehistory-go|Trego redaktimet e bashkueshme
+mergehistory-submit|Bashko versionet
+mergehistory-empty|Nuk ka versione të bashkueshme.
+mergehistory-success|~{2} {{PLURAL:~{2}\u007Cversion\u007Cversione}} të [[:~{0}]] janë bashkuar me sukses në [[:~{1}]].
+mergehistory-fail|Nuk munda të bashkoj historikun, ju lutem kontrolloni përzgjedhjen e faqes dhe të kohës.
+mergehistory-no-source|Faqja e burimit ~{0} nuk ekziston.
+mergehistory-no-destination|Faqja mbledhëse ~{0} nuk ekzsiton.
+mergehistory-invalid-source|Faqja e burimit duhet të ketë titull të vlefshëm.
+mergehistory-invalid-destination|Faqja mbledhëse duhet të ketë titull të vlefshëm.
+mergehistory-autocomment|U bashkua [[:~{0}]] në [[:~{1}]]
+mergehistory-comment|U bashkua [[:~{0}]] në [[:~{1}]]: ~{2}
+mergehistory-same-destination|Burimi dhe faqja e përcaktimit nuk mund të jenë të njëjta
+mergelog|Regjistri i bashkimeve
+revertmerge|Çkape
+mergelogpagetext|Më poshtë jepet një listë e bashkimeve së fundmi nga historiku i një faqeje në historikun e një faqeje tjetër.
+history-title|Historiku i redaktimeve për "~{0}"
+lineno|Rreshti ~{0}:
+compareselectedversions|Krahasoni versionet e zgjedhme
+editundo|ktheje
+searchresults|Rezultatet e kërkimit
+searchresults-title|Rezultatet e kërkimit për "~{0}"
+titlematches|Tituj që përputhen
+textmatches|Përputhje në tekst
+notextmatches|Nuk ka përputhje tekstuale në asnji faqe
+prevn-title|~{0} {{PLURAL:~{0}\u007Crezultat\u007Crezultate}} të mâhershme
+nextn-title|~{0} {{PLURAL:~{0}\u007Crezultat\u007Crezultate}} të ardhshme
+shown-title|Trego ~{0} {{PLURAL:~{0}\u007Crezultat\u007Crezultate}} për faqe
+viewprevnext|Shih (~{0} {{int:pipe-separator}} ~{1}) (~{2}).
+searchmenu-exists|'''Në këtë wiki âsht nji faqe me titullin "[[:~{0}]]"'''
+searchmenu-new|'''Krijo faqen "[[:~{0}]]" në këtë wiki!'''
+searchprofile-articles|Faqet me përmbajtje
+searchprofile-images|Multimedia
+searchprofile-everything|Gjithçka
+searchprofile-advanced|Detajshëm
+searchprofile-articles-tooltip|Kërko në ~{0}
+searchprofile-images-tooltip|Kërko skedarë
+searchprofile-everything-tooltip|Kërko krejt përmbajtjen (përfshi edhe faqet e diskutimit)
+searchprofile-advanced-tooltip|Kërkimi në hapësina
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 fjalë\u007C~{1} fjalë}})
+search-redirect|(përcjellje ~{0})
+search-section|(sekcioni ~{0})
+search-suggest|Mos menduet: ~{0}
+search-interwiki-caption|Projektet simotra
+search-interwiki-default|~{0} rezultate:
+search-interwiki-more|(mâ shumë)
+search-relatedarticle|Të ngjajshme
+searchrelated|të ngjajshme
+searchall|tâna
+showingresults|Mâ poshtë {{PLURAL:~{0}\u007Ctregohet '''1''' rezultat\u007Ctregohen '''~{0}''' rezultate}} që nisin me #'''~{1}'''.
+search-nonefound|Nuk ka rezultate që përputhen me kërkesën.
+powersearch-legend|Kërkimi i detajshëm
+powersearch-ns|Kërkimi në hapësina:
+powersearch-togglelabel|Zgjedh:
+powersearch-toggleall|Tâna
+powersearch-togglenone|Asnji
+search-external|Kërkim jashtë
+searchdisabled|{{SITENAME}} kërkimi âsht deaktivue.\nNdërkohë mundeni me lypë me Google.\nVini re se indeksat e tyne të përmbajtjes së {{SITENAME}} munden me qenë të vjetëruem.
+preferences|Parapëlqimet
+mypreferences|Parapëlqimet e mija
+prefs-edits|Numri i redaktimeve:
+prefs-skin|Doka
+skin-preview|Parapâmja
+datedefault|S'ka parapëlqim
+prefs-labs|Laboratorë karakteristika
+prefs-personal|Profili i përdoruesit
+prefs-rc|Ndryshimet e freskëta
+prefs-watchlist|Lista e mbikëqyrjeve
+prefs-watchlist-days|Numri i ditëve me i tregue në listën e mbikëqyrjeve:
+prefs-watchlist-days-max|Maximum ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}}
+prefs-watchlist-edits|Numri maksimal i ndryshimeve që tregohen në listën e zgjânueme të mbikëqyrjes:
+prefs-watchlist-edits-max|Numri maksimal: 1000
+prefs-misc|Të ndryshme
+prefs-resetpass|Ndryshimi i fjalëkalimit
+prefs-email|Opcionet për email
+prefs-rendering|Pâmja
+saveprefs|Regjistro
+restoreprefs|Kthe tâna përcaktimet si në fillim
+prefs-editing|Tue redaktue
+rows|Rreshta:
+columns|Kolona:
+searchresultshead|Kërkimi
+stub-threshold|Pragu për formatimin e <a href="#" class="stub">vegzave të cungueme</a> në (byte):
+recentchangesdays|Numri i ditëve për me i tregue te ndryshimet e freskëta:
+recentchangesdays-max|(maksimum ~{0} {{PLURAL:~{0}\u007Cditë\u007Cditë}})
+recentchangescount|Numri i redaktimeve me u tregue:
+prefs-help-recentchangescount|Kjo përfshin ndryshimet e freskëta, historikun e faqes dhe regjistrat.
+savedprefs|Parapëlqimet tueja janë ruejtë.
+timezonelegend|Zona kohore:
+localtime|Ora lokale:
+timezoneuseserverdefault|Përdor të paracaktuemen e serverit
+timezoneuseoffset|Tjetër (specifiko kcimin)
+servertime|Ora e serverit:
+guesstimezone|Mbush prej shfletuesit:
+timezoneregion-africa|Afrikë
+timezoneregion-america|Amerikë
+timezoneregion-antarctica|Antarktik
+timezoneregion-arctic|Arktik
+timezoneregion-asia|Azi
+timezoneregion-atlantic|Oqeani Atlantik
+timezoneregion-australia|Australi
+timezoneregion-europe|Europë
+timezoneregion-indian|Oqeani Indian
+timezoneregion-pacific|Oqeani Paqësor
+allowemail|Lejo emaila prej përdoruesve tjerë
+prefs-searchoptions|Opcionet e kërkimit
+prefs-namespaces|Hapësinat
+default|e paracaktueme
+prefs-files|Skedat
+prefs-custom-css|CSS i përpunuem
+prefs-custom-js|JavaScripti i përpunuem
+prefs-reset-intro|Mundeni me përdorë këtë faqe për me i kthy parapëlqimet tueja në ato të paracaktuemet e faqes.\nKjo nuk mundet me u zhbâ.
+prefs-emailconfirm-label|Konfirmimi i emailit:
+youremail|Adresa e email-it*
+username|Nofka e përdoruesit:
+prefs-memberingroups|Anëtar i {{PLURAL:~{0}\u007Cgrupit\u007Cgrupeve}}:
+yourrealname|Emri juej i vërtetë*
+yourlanguage|Ndërfaqja gjuhësore
+yournick|Nofka :
+badsig|Sintaksa e nënshkrimit asht e pavlefshme, kontrolloni HTML-n.
+badsiglength|Emri i zgjedhun asht shumë i gjatë; duhet me pas ma pak se ~{0} shkronja
+yourgender|Gjinia:
+gender-unknown|Pacaktue
+gender-male|Mashkull
+gender-female|Femën
+prefs-help-gender|Opcionale: përdoret për adresim korrekt në relacion me gjininë nga softwarei.\nKjo informatë del publike.
+email|Email
+prefs-help-realname|Emni i vërtetë âsht opcional.\nNëse zgjedhni me e dhânë, ky do të përdoret për me jua atribuue punën.
+prefs-help-email|Emaili âsht opcional, por mundëson që fjalëkalimi i ri me mujtë me ju dërgue me email nëse e harroni.\nMundeni me zgjedhe që të tjerët me ju kontaktue përmjet faqe së diskutimit pa e zbulue identitetin tuej të vërtetë.
+prefs-help-email-required|Adresa e emailit âsht e domosdoshme.
+prefs-info|Informatat bazike
+prefs-i18n|Internacionalizimi
+prefs-signature|Firma
+userrights|Ndrysho privilegjet e përdoruesve
+userrights-lookup-user|Ndrysho grupet e përdoruesit
+userrights-user-editname|Fusni emrin e përdoruesit:
+editusergroup|Redakto grupet e përdoruesve
+editinguser|Duke ndryshuar privilegjet e përdoruesit '''[[User:~{0}\u007C~{0}]]''' ([[User talk:~{0}\u007C{{int:talkpagelinktext}}]]{{int:pipe-separator}}[[Special:Contributions/~{0}\u007C{{int:contribslink}}]])
+userrights-editusergroup|Anëtarësimi tek grupet
+saveusergroups|Ruaj Grupin e Përdoruesve
+userrights-groupsmember|Anëtar i:
+userrights-groups-help|Mund të ndryshoni anëtarësimin e këtij përdoruesi në grupe:\n* Kutia e zgjedhur shënon që përdoruesi është anëtar në atë grup\n* Kutia e pazgjedhur shënon që përdoruesi nuk është anëtar në atë grup\n* Një * shënon që nuk mund ta hiqni grupin pasi ta keni shtuar (dhe anasjelltas).
+userrights-reason|Arsyeja:
+userrights-no-interwiki|Nuk keni leje për të ndryshuar privilegjet e përdoruesve në wiki të tjera.
+userrights-nodatabase|Regjistri ~{0} nuk ekziston ose nuk është vendor.
+userrights-nologin|Duhet të [[Special:UserLogin\u007Chyni brenda]] me një llogari administrative për të ndryshuar privilegjet e përdoruesve.
+userrights-notallowed|Llogaria juaj nuk ju lejon të ndryshoni privilegjet e përdoruesve.
+userrights-changeable-col|Grupe që mund të ndryshoni
+userrights-unchangeable-col|Grupe që s'mund të ndryshoni
+group|Grupi:
+group-user|Përdorues
+group-autoconfirmed|Përdorues të vërtetuar automatikisht
+group-bot|Robot
+group-sysop|Administruesit
+group-bureaucrat|Burokrat
+group-suppress|Kujdestari
+group-all|(të gjitha)
+group-user-member|{{GENDER:~{0}\u007CPërdorues}}
+group-autoconfirmed-member|Përdorues i vërtetuar automatikisht
+group-bot-member|Robot
+group-sysop-member|Administrues
+group-bureaucrat-member|Burokrat
+group-suppress-member|Kujdestari
+grouppage-user|{{ns:project}}:Përdorues
+grouppage-autoconfirmed|{{ns:project}}:Përdorues të vërtetuar automatikisht
+grouppage-bot|{{ns:project}}:Robotë
+grouppage-sysop|{{ns:project}}:Administruesit
+grouppage-bureaucrat|{{ns:project}}:Burokratë
+grouppage-suppress|{{ns:project}}:Kujdestari
+right-read|Lexo faqe
+right-edit|Redakto faqet
+right-createpage|Hap faqe (që nuk janë faqe diskutimi)
+right-createtalk|Hap faqe diskutimi
+right-createaccount|Hap llogari të re
+right-minoredit|Shëno redaktimet si të vogla
+right-move|Lëviz faqet
+right-move-subpages|Lëviz faqet me nënfaqet e tyre
+right-movefile|Lëviz skedarët
+right-suppressredirect|Mos krijo zhvendosje nga emri i vjetër kur lëvizë një faqe
+right-upload|Ngarko skedarë
+right-reupload|Ringarko skedën ekzistuese
+right-reupload-own|Ringarko skedën ekzistuese të ngarkuar vetë
+right-upload_by_url|Ngarko skedë nga ndonjë URL
+right-autoconfirmed|Redakto faqet gjysmë të mbrojtura
+right-bot|Trajtohu si një proces automatik
+right-delete|Gris faqet
+right-bigdelete|Gris faqet me histori të gjata
+right-deleterevision|Grisi dhe riktheji revizionet specifike të faqeve
+right-browsearchive|Kërko faqe të grisura
+right-undelete|Rikthe faqen
+right-block|Blloko përdoruesit tjerë nga editimi
+right-blockemail|Blloko përdoruesin që të mos dërgojë postë elektronike
+right-hideuser|Blloko përdorues, duke fshehur nga publiku
+right-protect|Ndrysho nivelin mbrojtës dhe redakto faqet e mbrojtura
+right-editprotected|Redakto faqet e mbrojtura (pa ndryshuar mbrojtjen)
+right-editinterface|Ndrysho parapamjen e përdoruesit
+right-editusercssjs|Redakto skedat CSS dhe JS të përdoruesve tjerë
+right-editusercss|Redakto skedat CSS të përdoruesve tjerë
+right-edituserjs|Redakto skedat JS të përdoruesve tjerë
+right-noratelimit|Mos u prek nga kufizimet e vlerësimit
+right-import|Importo faqe nga wiki tjera
+right-unwatchedpages|Shiko listën e faqeve të pa vëzhguara
+right-mergehistory|Bashko historinë e faqeve
+right-userrights|Redakto të gjitha të drejtat e përdoruesit
+right-passwordreset|Fjalëkalimi Reset e një përdoruesi ([[Special:PasswordReset\u007Cfaqe veçantë]])
+newuserlogpage|Regjistri i krijimit të përdoruesve
+rightslog|Regjsitri i tagrit të përdoruesve
+rightslogtext|Ky është një regjistër për ndryshimet e titujve të përdoruesve.
+action-read|lexo këtë faqe
+action-edit|redakto këtë faqe
+action-createpage|hapë faqe
+action-createtalk|hap faqe diskutimi
+action-createaccount|hapë këtë llogari
+action-minoredit|shëno këtë redaktim si të vogël
+action-move|lëviz këtë faqe
+action-move-subpages|zhvendos këtë faqe dhe nënfaqet që ka
+action-movefile|lëviz këtë skedë
+action-upload|ngarko këtë skedë
+action-reupload|rishkruaj këtë skedë ekzistuese
+action-upload_by_url|ngarko këtë skedë nga një URL
+action-delete|grise këtë faqe
+action-deleterevision|grise këtë revizion
+action-deletedhistory|shiko historinë e kësaj faqeje të grisur
+action-browsearchive|kërko faqe të grisura
+action-undelete|Restauro këtë faqe
+action-suppressrevision|rishiko dhe rikthe këtë revizion të fshehur
+action-block|blloko përdoruesin
+action-protect|ndrysho nivelin e mbrojtjes për këtë faqe
+action-import|importo këtë faqe nga një wiki tjetër
+action-patrol|shëno redaktimin e tjerëve si të patrulluar
+action-autopatrol|shëno redaktimet tua si të patrulluara
+action-unwatchedpages|shiko listën e faqeve të pa vrojtuara
+action-mergehistory|bashko historikun e kësaj faqeje
+action-userrights|ndrysho të gjitha të drejtat e përdoruesit
+action-userrights-interwiki|ndrysho të drejtat e përdoruesve në wiki-t tjera
+action-siteadmin|mbyll ose hap bazën e të dhënave
+nchanges|~{0} {{PLURAL:~{0}\u007Cndryshim\u007Cndryshime}}
+recentchanges|Ndryshimet e fundit
+recentchanges-legend|Opcionet e ndryshimeve të reja
+recentchanges-summary|Ndiqni ndryshime së fundmi tek kjo faqe.
+recentchanges-feed-description|Përcjelli ndryshimet mâ të reja të këtij wiki në këtë feed.
+recentchanges-label-newpage|Ky redaktim krijoi një faqe të re
+rclistfrom|Trego ndryshimet e reja tue fillue prej ~{2} ~{1}
+rcshowhideminor|~{0} redaktimet e vogla
+rcshowhidebots|botat në ~{0}
+rcshowhideliu|~{0} përdorues të kyçun
+rcshowhideanons|~{0} përdorues anonim
+rcshowhidepatr|~{0} redaktime të patrullueme
+rcshowhidemine|~{0} redaktimet e mija
+rclinks|Trego ~{0} ndryshime gjatë ~{1} ditëve<br />~{2}
+diff|ndrysh
+hist|hist
+hide|msheh
+show|kallzo
+minoreditletter|v
+newpageletter|R
+boteditletter|b
+rc-enhanced-expand|Trego detajet (lyp JavaScript)
+rc-enhanced-hide|Mshef detajet
+recentchangeslinked|Ndryshimet e ndërlidhuna
+recentchangeslinked-feed|Ndryshimet fqinje
+recentchangeslinked-toolbox|Ndryshimet fqinje
+recentchangeslinked-title|Ndryshimet në lidhje me "~{0}"
+recentchangeslinked-summary|Kjo âsht nji listë e ndryshimeve të fundit në faqe që lidhen në artikullin e dhânë (apo që janë në kategorinë e dhânë).\nFaqet në [[Special:Watchlist\u007Clistën tuej të mbikëqyrjes]] janë '''të theksueme'''.
+recentchangeslinked-page|Emni i faqes:
+recentchangeslinked-to|Trego ndryshimet në faqet që lidhen në këtë faqe
+upload|Ngarkoni skeda
+uploadlogpage|Regjistri i ngarkimeve
+file-anchor-link|Figura
+filehist|Historiku i dosjes
+filehist-help|Kliko në datë/orë për me pa skedën si âsht dukë në atë kohë.
+filehist-current|aktualisht
+filehist-datetime|Data/Ora
+filehist-thumb|Pamja e vogël
+filehist-thumbtext|Pâmja e vogël e verzionit të ~{0}
+filehist-user|Përdoruesi
+filehist-dimensions|Përmasat
+filehist-filesize|Madhësia e figurës/skedës
+filehist-comment|Koment
+imagelinks|Vegzat e skedave
+linkstoimage|{{PLURAL:~{0}\u007Cvegzat\u007C~{0} vegza}} në vijim lidhen me këtë skedë:
+sharedupload|Kjo skedë âsht preh ~{0} dhe ka mundësi që përdoret prej projekteve tjera.
+uploadnewversion-linktext|Ngarko verzion të ri të kësaj skede
+filedelete-reason-otherlist|Arsyje tjera
+download|shkarkim
+randompage|Artikull i rastit
+withoutinterwiki|Artikuj pa lidhje interwiki
+nbytes|~{0} {{PLURAL:~{0}\u007Cbyte\u007Cbyte}}
+nlinks|~{0} lidhje
+nmembers|~{0} {{PLURAL:~{0}\u007Cantar\u007Cantarë}}
+prefixindex|Tâna faqet me prefiks
+newpages|Faqe të reja
+move|Zhvendose
+movethispage|Zhvendos këtë faqe
+pager-newer-n|{{PLURAL:~{0}\u007Cmâ e re 1\u007Cmâ të reja ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Cmâ e vjetër 1\u007Cmâ të vjetra ~{0}}}
+booksources|Burime librash
+booksources-search-legend|Kërkim në burime librash
+log|Regjistrat
+allpagesfrom|Trego faqet tue fillue me:
+allpagesto|Trego faqet që mbarojnë me:
+allarticles|Tâna faqet
+allpagessubmit|Shko
+linksearch|Vegzat e jashtme
+listgrouprights-members|(lista e antarëve)
+emailuser|Çoji postel këtij përdoruesi
+watchlist|Mbikëqyrjet e mija
+mywatchlist|Lista mbikqyrëse
+addedwatchtext|Faqja "[[:~{0}]]" iu shtue [[Special:Watchlist\u007Clistës suej të mbikëqyrjes]].\nNdryshimet e ardhshme të kësaj faqeje dhe të faqes gjegjëse të diskutimit kanë me u listue këte, dhe faqja do të tregohet '''e theksueme''' në [[Special:RecentChanges\u007Clistën e ndryshimeve të fundit]] për me râ në sy.
+removedwatchtext|Faqja "[[:~{0}]]" âsht hjekë prej [[Special:Watchlist\u007Clistës së mbikëqyrjes]].
+watch|Mbikqyre
+watchthispage|Mbikëqyr këtë faqe
+unwatch|Çmbikqyre
+watchlist-details|{{PLURAL:~{0}\u007C~{0} faqe\u007C~{0} faqe}} në listën tuej të mbikëqyrjes, pa i numrue faqet e diskutimit.
+wlshowlast|Trego ~{0} orët ~{1} ditët  e fundit
+watchlist-options|Opcionet e listës së mbikëqyrjes
+watching|Tuj mbikqyrë...
+unwatching|Tuj çmbikqyrë...
+deletepage|Fshij faqen
+confirmdeletetext|Jeni tue fshi nji faqe bashkë me krejt historikun e saj.\nJu lutemi konfirmoni që kjo âsht ajo që deshtët me bâ, që i keni të njoftuna konsekuencat, dhe që këtë jeni tue e bâ në përputhje me [[{{MediaWiki:Policy-url}}\u007Cpolitikat]].
+actioncomplete|Veprimi u kry
+deletedtext|"~{0}" âsht fshi.\nShih ~{1} për regjistrin e fshimjeve të fundit.
+dellogpage|Regjistri i fshimjeve
+deletecomment|Arsyeja:
+deleteotherreason|Arsyet tjera/shtesë:
+deletereasonotherlist|Arsye tjetër
+rollbacklink|kthe mbrapsht
+protectlogpage|Regjistri i mbrojtjeve
+protectedarticle|"[[~{0}]]" i mbrojtun
+modifiedarticleprotection|ndryshue nivelin e mbrojtjes të "[[~{0}]]"
+protect-legend|Konfirmoni
+protectcomment|Arsyeja:
+protectexpiry|Afáti
+protect_expiry_invalid|Data e skadimit asht e pasaktë.
+protect_expiry_old|Data e skadimit asht në kohën kalueme.
+protect-text|Këtu muneni me shiku dhe me ndryshu nivelin e mbrojtjes për faqen '''~{0}'''.
+protect-locked-access|Llogaria juej nuk ka privilegjet e nevojitme për me ndryshu nivelin e mbrojtjes. Kufizimet e kësaj faqe janë '''~{0}''':
+protect-cascadeon|Kjo faqe aktualisht âsht e mbrojtun sepse përfshihet në {{PLURAL:~{0}\u007Cfaqen që ka\u007Cfaqet, të cilat kanë}} mbrojtje të përfshimjes.\nMundeni me ndryshue nivelin e mbrojtjes për këtë faqe, por kjo nuk ka me prekë mbrojtjen e përfshimjes.
+protect-default|Lejo krejt përdoruesit
+protect-fallback|Kushtëzo tagrin "~{0}"
+protect-level-autoconfirmed|Blloko përdoruesit e rij dhe të pakyçun
+protect-level-sysop|Lejo veç administruesit
+protect-summary-cascade|të mvaruna
+protect-expiring|skadon me ~{0} (UTC)
+protect-cascade|Mbrojtje e ndërlidhme - mbroj çdo faqe që përfshihet në këtë faqe.
+protect-cantedit|Nuk mund t'ia ndryshosh nivelin e mbrojtjes kësaj faqeje, sepse nuk ke leje me e redaktue.
+restriction-type|Lejet:
+restriction-level|Mbrojtjet:
+undeletelink|shih/kthe
+undeleteviewlink|shih
+namespace|Hapësira:
+invert|inverzo zgjedhjen
+contributions|Kontributet
+contributions-title|Kontributet e përdoruesit në ~{0}
+mycontris|Redaktimet e mia
+contribsub2|Për ~{0} (~{1})
+uctop|(në krye)
+month|Prej muejit (e mâ herët):
+year|Prej vjetit (e mâ herët):
+sp-contributions-newbies|Trego sall kontributet e përdoruesve të rij
+sp-contributions-blocklog|regjistri i bllokimeve
+sp-contributions-talk|Diskuto
+sp-contributions-search|Kërko te kontributet
+sp-contributions-username|Adresa IP ose përdoruesi:
+sp-contributions-submit|Lyp
+whatlinkshere|Vegzat me këtu
+whatlinkshere-title|Faqe që lidhen me "~{0}"
+whatlinkshere-page|Faqja:
+linkshere|Faqet e mâposhtme lidhen në '''[[:~{0}]]''':
+isredirect|faqe përcjellëse
+istemplate|përfshirë
+isimage|vegëz në figurë
+whatlinkshere-prev|~{0} {{PLURAL:~{0}\u007Ce përparme\u007Ctë përparme}}
+whatlinkshere-next|~{0} {{PLURAL:~{0}\u007Ce ardhshme\u007Ctë ardhshme}}
+whatlinkshere-links|← lidhje
+whatlinkshere-hideredirs|~{0} përcjelljet
+whatlinkshere-hidetrans|~{0} përfshimjet
+whatlinkshere-hidelinks|~{0} vegzat
+whatlinkshere-filters|Filterat
+blockip|Ndaloje përdoruesin
+ipboptions|2 orë:2 hours,1 ditë:1 day,3 ditë:3 days,1 javë:1 week,2 javë:2 weeks,1 muej:1 month,3 muej:3 months,6 muej:6 months,1 vjet:1 year,pa kufi:infinite
+ipblocklist|Përdoruesit dhe adresat IP të bllokueme
+blocklink|bllokoje
+unblocklink|çblloko
+change-blocklink|ndrro bllokun
+contribslink|Ndihmesa
+blocklogpage|Regjistri i bllokimeve
+blocklogentry|bllokue [[~{0}]] për kohëzgjatje prej ~{1} ~{2}
+unblocklogentry|zhbllokue ~{0}
+block-log-flags-nocreate|krijimi i llogarive âsht pamundësue
+movepagetext|Me formularin e maposhtëm mund ta ndërrosh titullin e faqes, tue zhvendosë krejt prapavijën e saj te titulli i ri.\n\nTitulli i vjetër do të bahet faqe përcjellëse te titulli e ri.\n\nMundesh t'i freskosh automatikisht përcjelljet që tregojnë në titullin e kryehershëm.\n\nNëse zgjedhë mos me i freskue, sigurohu që i ke kontrollue [[Special:DoubleRedirects\u007Cpërcjelljet e dyfishta]] apo [[Special:BrokenRedirects\u007Ctë damtueme]].\n\nTi je përgjegjës që vegzat me çue atje ku duhet.\n\n\nVeneroje që faqja '''nuk''' do të zhvendoset nëse nji faqe me të njejtin titull tashma ekziston, përveç nëse asht e shprazët apo vetëm përcjellëse dhe nuk ka histori të redaktimit.\n\nKjo domethanë që mund ta rikthesh titullin e faqes aty ku ka qenë nëse ke ba gabim dhe nuk mund ta mbishkruesh nji faqe ekzistuese.\n\n\n'''Kujdes!'''\n\nKy mund të jetë ndryshim drastik dhe i papritun për nji faqe të popullarizueme;\n\ntë lutem, sigurohu që i ke parasysh pasojat para se të vazhdosh.
+movepagetalktext|Faqja e diskutimit që lidhet me këtë faqe do të zhvendoset automatikisht '''përveç:'''\n*Nëse ekziston nji faqe e diskutimit nën titullin e ri, apo\n*E shêjoni të pazgjedhun kutinë e mâposhtme.\n\nNë këto raste, duheni me i bashkue manualisht këto faqe nëse dëshironi.
+movearticle|Zhvendose faqen
+newtitle|Te titulli i ri
+move-watch|Mbikqyre kët faqe
+movepagebtn|Zhvendose faqen
+pagemovedsub|Zhvendosja u kry
+movepage-moved|'''"~{0}" âsht zhvendosë te "~{1}"'''
+articleexists|Nji faqe me këtë titull tashmâ ekziston, apo keni zgjedhë nji titull të pavlefshëm.\nJu lutemi zgjedhni nji titull tjetër.
+movetalk|Zhvendos faqen gjegjëse të diskutimeve
+movelogpage|Regjistri i zhvendosjeve
+movereason|Arsyeja:
+revertmove|kthe mbrapsht
+export|Eksporto faqet
+thumbnail_error|Gabim gjatë krijimit të figurës përmbledhëse: ~{0}
+tooltip-pt-userpage|Faqja juej e përdoruesit
+tooltip-pt-mytalk|Faqja juej e diskutimeve
+tooltip-pt-preferences|Parapëlqimet tuaja
+tooltip-pt-watchlist|Lista e faqeve nën mbikqyrjen tuej.
+tooltip-pt-mycontris|Lista e kontributeve tueja
+tooltip-pt-login|Të këshillojmë me u kyçë; mirëpo, nuk asht e detyrueshme
+tooltip-pt-logout|Dalje
+tooltip-ca-talk|Diskuto për përmbajtjen e faqes
+tooltip-ca-edit|Mund ta redaktosh kët faqe. Përdore pullën >>Shfaqe parapamjen<< para se t'i krysh ndryshimet.
+tooltip-ca-addsection|Nis nji sekcion të ri.
+tooltip-ca-viewsource|Kjo faqe asht e mbrojtun. Mundesh veç me pa burimin e tekstit.
+tooltip-ca-history|Verzionet e mâhershme të këtij artikulli
+tooltip-ca-protect|Mbroje këtë faqe
+tooltip-ca-delete|Fshije këtë faqe
+tooltip-ca-undelete|Ktheji mbrapsht redaktimet e këtij artikulli para fshimjes
+tooltip-ca-move|Zhvendose faqen
+tooltip-ca-watch|Shtoje këtë faqe në lisën e mbikëqyrjes
+tooltip-ca-unwatch|Hiqe këtë faqe prej listës së mbikëqyrjes
+tooltip-search|Kërko në {{SITENAME}}
+tooltip-search-go|Shko te faqja me emën të njejtë nëse ekziston
+tooltip-search-fulltext|Lypi faqet me kët tekst
+tooltip-p-logo|Shko te faqja kryesore
+tooltip-n-mainpage|Shko te faqja kryesore
+tooltip-n-mainpage-description|Shihe faqen kryesore
+tooltip-n-portal|Rreth projektit, çka mundesh me ba, ku me i gjetë gjanat
+tooltip-n-currentevents|Informacion mâ i thukët rreth ndodhive aktuale
+tooltip-n-recentchanges|Lista e ndryshimeve të freskëta në wiki
+tooltip-n-randompage|Çele nji faqe rastësisht
+tooltip-n-help|Vendi ku mundeni me gjetë ndihmë.
+tooltip-t-whatlinkshere|Lista e faqeve të wikit që lidhen këtu
+tooltip-t-recentchangeslinked|Ndryshimet e freskëta në faqet që lidhen nga kjo faqe
+tooltip-feed-rss|RSS feed për këtë faqe
+tooltip-feed-atom|Atom feed për këtë faqe
+tooltip-t-contributions|Shiko listën e kontributeve të këtij përdoruesi
+tooltip-t-emailuser|Çoji postel këtij përdoruesi
+tooltip-t-upload|Ngarko skeda
+tooltip-t-specialpages|Lista e tana faqeve të posaçme
+tooltip-t-print|Version për shtyp i qësaj faqeje
+tooltip-t-permalink|Vegza e përhershme te ky verzion i faqes
+tooltip-ca-nstab-main|Shihe përmbajtjen e atikullit
+tooltip-ca-nstab-user|Shih faqen e përdoruesit
+tooltip-ca-nstab-media|Shih faqen e mediave
+tooltip-ca-nstab-special|Kjo âsht faqe speciale. Nuk mundeni me redaktue këtë faqe
+tooltip-ca-nstab-project|Shih faqen e projektit
+tooltip-ca-nstab-image|Shih faqen e skedës
+tooltip-ca-nstab-mediawiki|Shih mesazhin e sistemit
+tooltip-ca-nstab-template|Shih stampën
+tooltip-ca-nstab-help|Shih faqen e ndihmës
+tooltip-ca-nstab-category|Shih faqen e kategorisë
+tooltip-minoredit|Shêjoje si redaktim të vogël
+tooltip-save|Rueji ndryshimet
+tooltip-preview|Shih parapâmjen e ndryshimeve, ju lutemi përdoreni këtë para se me i ruejtë ndryshimet!
+tooltip-diff|Trego ndryshimet që i keni bâ Ju në tekst.
+tooltip-compareselectedversions|Shih dallimet midis dy verzioneve të zgjedhuna të kësaj faqeje.
+tooltip-watch|Mbikqyre këtë faqe
+tooltip-recreate|Rikrijo faqen edhe nëse âsht fshi mâ herët
+tooltip-upload|Nis ngarkimin
+tooltip-rollback|"Kthe mbrapa" i kthen mbrapsht redaktimet e faqes aktuale prej kontribuuesit të fundit me nji klik
+tooltip-undo|"Zhbâne" kthen mbrapsht këtë redaktim dhe çelë formularin e redaktimit në parapâmje.\nLejon dhânien e arsyes në përmbledhje.
+common.css|/* CSSi i vendosun këtu ka me u zbatue në tâna dukjet */
+print.css|/* CSSi i vednosun këtu ka me e prekë pamjen e shtypjes */
+common.js|/* Çdo JavaScript këtu ka me u ngarkue për të gjithë përdoruesit në secilën thirrje të faqes. */
+anonymous|{{PLURAL:~{0}\u007CPërdorues\u007CPërdorues}} anonim të {{SITENAME}}
+siteuser|Përdoruesi ~{0} i {{SITENAME}}
+lastmodifiedatby|Kjo faqe âsht redaktue së fundi me ~{1}, ~{0} prej ~{2}.
+othercontribs|Bazue në punën e ~{0}.
+others|tjerët
+siteusers|{{SITENAME}} {{PLURAL:~{1}\u007Cpërdorues\u007Cpërdorues}} ~{0}
+creditspage|Kreditat e faqes
+simpleantispam-label|Anti-spam kontrolloni. A'''''NUK' plotësoni këtë!
+previousdiff|← Redaktim mâ i vjetër
+nextdiff|Redaktim ma i ri →
+file-info-size|~{0} × ~{1} pixela, madhësia e skedës: ~{2}, tipi MIME: ~{3}
+file-nohires|Rezolucioni i plotë.
+svg-long-desc|skeda SVG, ~{0} × ~{1} pixela, madhësia: ~{2}
+show-big-image|Rezolucion i plotë
+bad_image_list|Formati asht si vijon:\n\nMerren parasysh vetëm elementet e radhituna (rreshtat që fillojnë me *).\nVegza e parë në rresht lidhet patjetër me nji skedë të keqe.\nKrejt vegzat tjera në të njejtin rresht do të bajnë përjashtim, d.m.th. faqe ku skeda paraqitet mbrenda rreshtit.
+variantname-zh-hans|hans
+variantname-zh-hant|hant
+variantname-zh-cn|cn
+variantname-zh-tw|tw
+variantname-zh-hk|hk
+variantname-zh-mo|mo
+metadata|Metadata
+metadata-help|Kjo skedë përmban hollësira tjera të cilat munen qi jan shtue nga kamera ose skaneri dixhital që është përdorur për ta krijuar. Nëse se skeda asht ndryshue nga gjendja origjinale, disa hollësira munen mos me pasqyru skedën e tashme.
+metadata-expand|Tregoji detajet
+metadata-collapse|Mshefi detajet
+metadata-fields|Fushat EXIF metadata që listohen në këtë mesazh do të përfshihen në faqen e figurës kur palohet tabela e metadatave.\nTjerat kanë me mbetë të mshefuna.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+namespacesall|krejt
+monthsall|krejt
+watchlisttools-view|Shihi ndryshimet përkatëse
+watchlisttools-edit|Shih dhe redakto listën e mbikëqyrjes.
+watchlisttools-raw|Redakto listën e mbikëqyrjes në kod
+specialpages|Faqet e posaçme
+revdelete-restricted|u vendosën kufizime për administruesit
+revdelete-unrestricted|u hoqën kufizimet për administruesit
+rightsnone|(asgjë)
+revdelete-summary|përmbledhja redaktimit
+searchsuggest-search|Kërkim
+searchsuggest-containing|përmban ...
+contactpage-title|Kontakt
+contactpage-pagetext|Ju lutem përdorni formularin e mëposhtëm për të na kontaktoni.
+contactpage-legend|Dergo e-mail
+contactpage-defsubject|mesazh Kontakt
+contactpage-subject-and-sender|~{0} (nga ~{1})
+contactpage-subject-and-sender-withip|~{0} (prej ~{1} në ~{2})
+contactpage-fromname|Emri juaj: *
+contactpage-fromaddress|Your e-mail: **
+contactpage-formfootnotes|* Opcionale <br /> ** Dëshirë por e nevojshme qoftë se dëshironi një përgjigje
+contactpage-includeip|Përfshini IP adresa ime ne kete mesazh.
+']:>
+).lang
+;

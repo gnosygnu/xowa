@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Karthi.dr",
+			"Logicwiki",
+			"Shanmugamp7",
+			"கௌசிக் பிரபு",
+			"மதனாஹரன்"
+		]
+	},
+	"wikibase-edit": "தொகு",
+	"wikibase-save": "சேமி",
+	"wikibase-cancel": "ரத்து செய்",
+	"wikibase-add": "சேர்",
+	"wikibase-save-inprogress": "சேமிக்கப்படுகிறது...",
+	"wikibase-remove-inprogress": "நீக்கப்படுகிறது...",
+	"wikibase-description-edit-placeholder": "விவரங்களை உள்ளிடவும்",
+	"wikibase-sitelink-site-edit-placeholder": "தளம்",
+	"wikibase-sitelink-page-edit-placeholder": "பக்கம்",
+	"wikibase-remove": "நீக்கு",
+	"wikibase-disambiguation-title": "\"$1\" க்கான பக்க நெறிப்படுத்தல்",
+	"wikibase-propertypage-datatype": "தரவு வகை",
+	"wikibase-restrictionedit-tooltip-message": "இந்தப் பக்கம் காக்கப்பட்டுள்ளது. தொகுப்பது அனுமதிக்கப்படவில்லை.",
+	"wikibase-blockeduser-tooltip-message": "நீங்கள் தொகுப்பதிலிருந்து தடுக்கப்பட்டுள்ளீர்கள்.",
+	"special-itembytitle": "தலைப்பு வாரியாக உருப்படி",
+	"wikibase-itembytitle-lookup-site": "தளம்:",
+	"wikibase-itembytitle-lookup-page": "பக்கம்:",
+	"wikibase-itembytitle-submit": "தேடு",
+	"wikibase-itemdisambiguation-lookup-language": "மொழி:",
+	"wikibase-itemdisambiguation-submit": "தேடு",
+	"wikibase-newproperty-datatype": "தரவு வகை:",
+	"special-newitem": "ஒரு புது உருப்படியை உருவாக்குக",
+	"wikibase-newitem-fieldset": "ஒரு புது உருப்படியை உருவாக்குக",
+	"wikibase-newentity-description": "விளக்கம்:",
+	"wikibase-modifyentity-id": "அடையாளவிலக்கம்",
+	"wikibase-modifyterm-language": "மொழி",
+	"wikibase-entitieswithoutlabel-label-language": "மொழி:",
+	"wikibase-entitieswithoutlabel-submit": "கண்டுபிடி",
+	"wikibase-item-summary-wbsetitem": "ஒரு புதிய உருப்படி உருவாக்கப்பட்டது",
+	"wikibase-item-summary-wbeditentity": "ஒரு புதிய உருப்படி உருவாக்கப்பட்டது",
+	"wikibase-item-summary-wbsetdescription-set": "[$2] விளக்கம் மாற்றப்பட்டது",
+	"wikibase-item-summary-wbsetdescription-remove": "[$2] விளக்கம் நீக்கப்பட்டது"
+}

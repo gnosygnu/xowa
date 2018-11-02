@@ -1,0 +1,82 @@
+<div id='cur_help_div' class='xohelp_div'>
+  <div id='cur_help_msg' class='xohelp_msg'>
+    <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_app_system'   >&nbsp;</span><span class='xohelp_row_text'>Go to the options page</span></div>
+    <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_help_doc'     >&nbsp;</span><span class='xohelp_row_text'>Go to the docs page</span></div>    
+    <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_app_install'  >&nbsp;</span><span class='xohelp_row_text'>Install latest XOWA update</span></div>
+    <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_misc_skip'    >&nbsp;</span><span class='xohelp_row_text'>Skip reminders for this update</span></div>
+  </div>
+</div>
+
+<div class='main_body' id='main_body'>
+  <div class='xotbl_head_row'>
+    <div class='xotbl_head_text cur_head_text'>XOWA Version: {{current_version}} ({{current_date}})</div>
+    <div class='xotbl_head_btns cur_head_btns'> 
+      <a class='xoimg_btn_x24 xoimg_app_system'    title='go to options'                 href='/wiki/Special:XowaCfg?grp=xowa.app.update'>&nbsp;</a>
+      <a class='xoimg_btn_x24 xoimg_help_doc'      title='go to docs'                    href='/wiki/App/Setup/Update/In-app'>&nbsp;</a>
+      <a class='xoimg_btn_x24 xoimg_help_tip'      title='view help'                     href='javascript:void(0)' onclick='return xo.help.toggle("cur")'>&nbsp;</a>
+    </div>
+  </div>  
+  {{#web_access_enabled}}
+  {{#itms_exist}}
+  <div class="xotbl_data_row cur_data_row">
+    <span class='cur_data_cell0'>&nbsp;</span>
+    <div class='cur_data_cell1 update_status'>
+      <div class='buttons'>
+      <a class='update_status_anch' title='download latest update' href='javascript:void(0)'
+         data_alertify_msg='Please confirm that you want to update to the latest XOWA version:<br/>{{version}} ({{date}}): {{summary}}'
+         data_alertify_ok='Download and update'
+         data_alertify_cancel='Cancel'
+         data_alertify_func='xo.app_updater.update("{{version}}");'
+         accesskey='d'
+         onclick='return xo.alertify.confirm_func(this);'><img class='xoimg_btn_x16 xoimg_app_install' />&nbsp;Install latest
+      </a>
+      </div>
+      <div class='buttons'>
+      <a class='update_status_anch' title='skip current update' href='javascript:void(0)'
+         data_alertify_msg='Please confirm that you want to ignore this update.<br/><br/>You can always return to this page by going to Help -> Update XOWA or navigating to <code>Special:XowaAppUpdate</code>'
+         data_alertify_ok='Skip update'
+         data_alertify_cancel='Cancel'
+         data_alertify_func='xo.app_updater.skip("{{version}}");'
+         accesskey='d'
+         onclick='return xo.alertify.confirm_func(this);'><img class='xoimg_btn_x16 xoimg_misc_skip' />&nbsp;Skip this update
+      </a>
+      </div>
+      <div class='pbar_row' id='pbar-row' style='float:right'>
+        <div class='pbar_proc' id='pbar-txt'>downloading app update</div>
+        <div class='pbar_div'>
+          <div class="pbar_bar" id='pbar-bar'>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  {{#itms}}
+  <div class="xotbl_data_row cur_data_row">
+    <span class='cur_data_cell0'>{{date}}: {{version}}</span>
+    <div class='cur_data_cell1'><span {{#priority_is_major}} class='release_is_major'{{/priority_is_major}}>({{priority}}) {{summary}}</span><br/>
+    {{{details}}}
+    </div>
+  </div>
+  {{/itms}}
+  {{/itms_exist}}
+  {{^itms_exist}}
+  <div class="xotbl_data_row cur_data_row">
+    <span class='cur_data_cell0'>&nbsp;</span>
+    <span class='cur_data_cell1 update_status'>No updates available as of {{check_date}}</span>
+  </div>  
+  {{/itms_exist}}
+  {{/web_access_enabled}}
+  {{^web_access_enabled}}
+  <div class="xotbl_data_row cur_data_row">
+    <span class='cur_data_cell0'>&nbsp;</span>
+    <div class='cur_data_cell1'>
+    <span style='color:red'>Web access disabled.</span><br/>
+    In order to use this page, please do the following:
+    <ul>
+      <li>Enable web access at <a href='/site/home/wiki/Options/Security'>Options/Security</a></li>
+      <li>Reload this page</li>
+    </ul>
+    </div>
+  </div>
+  {{/web_access_enabled}}
+</div>

@@ -1,0 +1,48 @@
+<div id='cur_help_div' class='xohelp_div'>
+  <div id='cur_help_msg' class='xohelp_msg'>
+    <b>Info</b>
+    <div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'>Select the default folder to save your Download Central wikis</span></div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'>Note that XOWA tries to default to your external SD card, but you may need to manually choose it</span></div>
+    </div>    
+    <b>Buttons</b>
+    <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_fsys_dir'>&nbsp;</span><span class='xohelp_row_text'>Select a custom folder for XOWA</span></div>
+    <b>Debug info</b>
+    <div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'>Current app root: {{app_root_dir}}</span></div>
+    </div>
+  </div>
+</div>
+<div class='main_body' id='main_body'>
+  <div class='xotbl_head_row'>
+    <div class='xotbl_head_text cur_head_text'>Select XOWA Folder</div>
+    <div class='xotbl_head_btns cur_head_btns'> 
+      <a class='xoimg_btn_x24 xoimg_help_tip'      title='view help' href='javascript:void(0)' onclick='return xo.help.toggle("cur")'>&nbsp;</a>
+    </div>
+  </div>
+  {{#dirs}}
+  <div class='xotbl_data_row cur_data_row'>
+  <!--
+    <a
+      class="link_btn_y xdir_link_btn"
+      href="/site/home/wiki/Special:XowaRootDir?path={{path}}"
+    >
+    -->
+    <a
+      class="link_btn_y xdir_link_btn"
+      data_alertify_msg='Please confirm you wish to change the folder.<br/><b>Note that you must restart the app in order for the changes to take effect.</b>'
+      data_alertify_ok='Select'
+      data_alertify_cancel='Cancel'
+      data_alertify_href="/site/home/wiki/Special:XowaRootDir?path={{path}}"
+      onclick='return xo.alertify.confirm_href(this);'>
+      <span class='xoimg_btn_x24 {{#is_selected}}xoimg_misc_ok{{/is_selected}}'      title='view help' href='javascript:void(0)' onclick='return xo.help.toggle("cur")'>&nbsp;</span>
+      <span class='dir_text'>{{path}}</span>
+    </a>
+    {{#is_custom}}
+    <a class='xoimg_btn_x24 xoimg_fsys_dir link_btn_y' title='select custom folder' 
+       href="/site/home/wiki/Special:XowaFileBrowser?dir_cmd=xodir&path={{import_root}}"
+    >&nbsp;</a>
+    {{/is_custom}}
+  </div>
+  {{/dirs}}
+</div>

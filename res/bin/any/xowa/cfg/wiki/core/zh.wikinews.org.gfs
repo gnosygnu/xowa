@@ -1,0 +1,98 @@
+// lang.vnts.bgn
+lang.variants {
+  vnt_grp = 'zh|zh-hans|zh-hant|zh-cn|zh-hk|zh-mo|zh-sg|zh-tw';
+  cur_vnt = 'zh-cn';
+}
+// lang.vnts.end
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+-2|媒体
+-2|媒体文件
+-2|媒體
+-1|特殊
+1|对话
+1|對話
+1|討論
+1|讨论
+2|使用者
+2|用戶
+2|用户
+3|使用者討論
+3|用戶對話
+3|用戶討論
+3|用户对话
+3|用户讨论
+5|Wikinews討論
+5|Wikinews讨论
+6|Image
+6|图像
+6|圖像
+6|文件
+6|档案
+6|檔案
+7|Image_talk
+7|图像对话
+7|图像讨论
+7|圖像對話
+7|圖像討論
+7|文件对话
+7|文件對話
+7|文件討論
+7|文件讨论
+7|档案对话
+7|档案讨论
+7|檔案對話
+7|檔案討論
+9|MediaWiki討論
+9|MediaWiki讨论
+10|样板
+10|模板
+10|樣板
+11|样板对话
+11|样板讨论
+11|模板对话
+11|模板對話
+11|模板討論
+11|模板讨论
+11|樣板對話
+11|樣板討論
+12|使用說明
+12|帮助
+12|幫助
+13|使用說明討論
+13|帮助对话
+13|帮助讨论
+13|幫助對話
+13|幫助討論
+14|分类
+14|分類
+15|分类对话
+15|分类讨论
+15|分類對話
+15|分類討論
+100|頻道
+101|頻道討論
+101|频道讨论
+828|模組
+829|模組討論
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(8).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(100).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(101).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end

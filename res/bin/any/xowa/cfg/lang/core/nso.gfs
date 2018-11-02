@@ -1,0 +1,972 @@
+this
+.ns_names
+  .load_text(
+<:['
+-2|Media
+-1|Special
+1|Bolediša
+2|Mošomi
+3|Boledišana le Mošomi
+5|$1 Poledišano
+6|Seswantšho
+7|Poledišano ya Seswantšho
+8|MediaWiki
+9|Poledišano ya MediaWiki
+10|Template
+11|Poledišano ya Template
+12|Thušo
+13|Poledišano ya Thušo
+14|Setensele
+15|Poledišano ya Setensele
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+currentmonth|1|KGWEDI_BJALE~CURRENTMONTH~CURRENTMONTH2~
+currentmonthname|1|LEINA_KGWEDI_BJALE~CURRENTMONTHNAME~
+currentday|1|LEHONO_LETSATSI~CURRENTDAY~
+currentday2|1|LEHONO_LETSATSI2~CURRENTDAY2~
+currentdayname|1|LEHONO_LETSATSILEINA~CURRENTDAYNAME~
+currentyear|1|NGWAGA_BJALE~CURRENTYEAR~
+currenttime|1|NAKO_BJALE~CURRENTTIME~
+currenthour|1|IRI_BJALE~CURRENTHOUR~
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Sontaga
+monday|Mošupologo
+tuesday|Labobedi
+wednesday|Laboraro
+thursday|Labone
+friday|Labohlano
+saturday|Mokibelo
+sun|Sontaga
+mon|Mošupologo
+tue|Labobedi
+wed|Laboraro
+thu|Labone
+fri|Labohlano
+sat|Mokibelo
+january|Pherekgong
+february|Dibokwane
+march|Hlakola
+april|Moranang
+may_long|Mopitlo
+june|Phupu
+july|Mosegamanye
+august|Phato
+september|Lewedi
+october|Diphalane
+november|Dibatsela
+december|Manthole
+january-gen|Pherekgong
+february-gen|Dibokwane
+march-gen|Hlakola
+april-gen|Moranang
+may-gen|Mopitlo
+june-gen|Phupu
+july-gen|Mosegamanye
+august-gen|Phato
+september-gen|Lewedi
+october-gen|Diphalane
+november-gen|Dibatsela
+december-gen|Manthole
+jan|Pherekgong
+feb|Dibokwane
+mar|Hlakola
+apr|Moranang
+may|Mopitlo
+jun|Phupu
+jul|Mosegamanye
+aug|Phato
+sep|Lewedi
+oct|Diphalane
+nov|Dibatsela
+dec|Manthole
+toc|Mateng
+redirectedfrom|(''Redirect'' go tšwa ~{0})
+allpages|Matlakala ka moka
+prevpage|Letlakala la go feta (~{0})
+nextpage|Letlakala lago latela (~{0})
+categories|Dihlopha
+lastmodifiedat|Letlakala le  fetotšwe la mafelelo ka ~{1}, ~{0}.
+thumbnail-more|Godiša/Atologa
+otherlanguages|Ka dipolelo tše dingwe
+blanknamespace|(Hlogo)
+pagecategories|{{PLURAL:~{0}\u007CSehlopha\u007CDihlopha}}
+category_header|Matlakala go sehlopha "~{0}"
+subcategories|Dihlophana
+category-media-header|Matlakala goba difaele go sehlopha "~{0}"
+category-empty|''Sehlopha se, ga se na matlakala goba difaele.''
+category-subcat-count|{{PLURAL:~{1}\u007C"Category" ye, e nale "subcategory" ye fela.\u007C"Category" ye, e nale {{PLURAL:~{0}\u007Csubcategory\u007C~{0} subcategories}}, go tše ~{1} ka palo.}}
+category-article-count|{{PLURAL:~{1}\u007CSehlopha se, se na le letlakala le fela.\u007C {{PLURAL:~{0}\u007CLetlakala le, le \u007C~{0} ya matlakala a}} go sehlopha "category" se, go ~{1} ya matlakala.}}
+category-file-count|{{PLURAL:~{1}\u007CSehlopha se, se na le letlakala le fela.\u007C {{PLURAL:~{0}\u007CLetlakala le, le \u007C~{0} ya matlakala a}} go sehlopha "category" se, go ~{1} ya matlakala.}}
+nextn|latela {{PLURAL:~{0}\u007C~{0}}}
+prevn|gofeta {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|tšweletša
+bold_sample|Mongwalo wa '''Bold'''
+bold_tip|Ditlhaka tše Bold
+italic_sample|Ditlhaka tše Italic
+italic_tip|Mongwala wa Italic
+link_sample|Thaetlele ya hlomaganyo
+link_tip|Hlomaganyo ya kagare
+headline_sample|Tlhaka ya hlogotaba
+headline_tip|Hlogotaba ya boemo ba 2
+statistics|Dipalopalo
+categorytree-category|Sehlopha:
+categorytree-go|Bontsha Sehlare
+categorytree-parents|Batswadi
+categorytree-mode-all|matlakala kamoka
+categorytree-collapse|tswalela
+categorytree-expand|bula
+categorytree-no-pages|gago matlakala goba dihlophana
+categorytree-not-found|Sehlopha <i>~{0}</i> ga se humanege
+proofreadpage_nextpage|Letlakala lago latela
+proofreadpage_prevpage|Letlaka lago feta
+cite_page|Letlakala:
+wikieditor-loading|Laiša
+wikieditor-preview-changes-tab|Diphetogo
+wikieditor-preview-loading|Laiša...
+wikieditor-publish-button-cancel|Khansela
+wikieditor-publish-dialog-goback|Boela morago
+wikieditor-template-editor-dialog-cancel|Khansela
+wikieditor-toolbar-loading|Laiša...
+wikieditor-toolbar-tool-xlink|Hlomaganyo ya kantle (gopola go thoma ka http://)
+wikieditor-toolbar-tool-link|Hlomaganyo
+wikieditor-toolbar-tool-link-title|Lokela hlomaganyo
+wikieditor-toolbar-tool-link-cancel|Khansela
+wikieditor-toolbar-tool-link-int-target-status-exists|Letlakala le gona
+wikieditor-toolbar-tool-link-int-target-status-notexists|Letlakala ga le hwetšagale
+wikieditor-toolbar-tool-link-int-target-status-invalid|Hlogo gaya dumelwa
+wikieditor-toolbar-tool-link-int-target-status-external|Hhlomaganyo ya kantle
+wikieditor-toolbar-tool-link-lookslikeinternal-ext|Hhlomaganyo ya kantle
+wikieditor-toolbar-tool-reference-cancel|Khansela
+wikieditor-toolbar-tool-heading|Hlogo-taba
+wikieditor-toolbar-tool-table-example|Mohlala
+wikieditor-toolbar-tool-table-cancel|Khansela
+wikieditor-toolbar-help-page-link|Dihlomaganyo
+wikieditor-toolbar-help-content-xlink-description|Hhlomaganyo ya kantle
+wikieditor-toolbar-help-content-heading2-syntax|== Ditlhaka tša hlogo-taba ==
+wikieditor-toolbar-help-content-heading3-syntax|== Ditlhaka tša hlogo-taba ==
+wikieditor-toolbar-help-content-heading4-syntax|== Ditlhaka tša hlogo-taba ==
+wikieditor-toolbar-help-content-heading5-syntax|== Ditlhaka tša hlogo-taba ==
+wm-license-information-source|Mothopo
+sitesupport|Dineelo
+tooltip-n-sitesupport|Re thekge
+tog-underline|Tsenya mothalafase go dihlomaganyo:
+tog-hideminor|Fihla diphetogo tše nnyenyane
+tog-showtoolbar|Bontšha ''toolbar'' yago fetola
+tog-editondblclick|Fetola matlakala ka go thathapa gabedi
+tog-editsectiononrightclick|Dumella go fetola sekgao ka thathapa ka lagoja thaetlele ya sekgao
+tog-watchcreations|Tsenya matlaka a mafsa ao ke a ngwalago go lenano laka la ditlhapetšo
+tog-watchdefault|Tsenya matlaka ao ke a fetolago go lenano laka la ditlhapetšo
+tog-watchmoves|Tsenya matlaka ao ke a hudušago go lenano laka la ditlhapetšo
+tog-watchdeletion|Tsenya matlaka ao ke a phumulago go lenano laka la ditlhapetšo
+tog-minordefault|Swaya diphetogo ka moka bjalo ka diphetogo tše nnyenyane
+tog-previewontop|Bontšha Ponopele pele ga lepokisi la diphetogo
+tog-previewonfirst|Bontšha Ponopeleka phetogo ya pele
+tog-enotifwatchlistpages|Nthomele molaetša ge letlaka leo ke le tlhapetšego le eba le diphetogo
+tog-enotifusertalkpages|Nromele molaetša ge letlakala la Dipoledišano laka le fetoga
+tog-enotifminoredits|Ethomele e-mail ge goba le diphetogo tše nnyenyane go matlakala
+tog-enotifrevealaddr|Bonagatša email atrese go temošo tša poso
+tog-shownumberswatching|Laetša palo bašomiši bao ba tlhapetšego
+tog-fancysig|Tsaeno ya gose fihliwe
+tog-forceeditsummary|Ntaetše ge kesa tsenye mongwalo go kakaretšo ya dithetogo
+tog-watchlisthideown|Fihla diphetogo tšeo di direlego ke nna go lenano la ditlhapetšo.
+tog-watchlisthideminor|Fihla diphetogo tše nyenyane tšeo di direlego ke nna go lenano la ditlhapetšo
+tog-ccmeonemails|Nromele kopi ya melaetša yeo ke romelago bašumiši ba bangwe
+underline-always|Kamehla
+underline-never|Le ga tee
+hidden-categories|{{PLURAL:~{0}\u007CSehlopha sago huta\u007CDihlopha tšago huta}}
+noindex-category|Matlakala a go hloka "index"
+about|Mabapi
+article|Letlakala la mateng
+newwindow|(e bula lefastere le lempsha)
+cancel|Khansela
+moredotdotdot|Tše dingwe...
+mypage|Letlakala
+mytalk|Bolela
+anontalk|Poledišano ya IP ye
+navigation|Tšwelotšo
+and| le
+qbfind|Humana
+qbedit|Fetola
+qbpageoptions|Letlakala le
+qbmyoptions|Matlakala a ka
+faq|"FAQ"
+actions|Ditiro
+namespaces|Di-"namespace"
+variants|Di-"variant"
+errorpagetitle|Phošo
+returnto|Boela go ~{0}.
+tagline|Gotšwa go {{SITENAME}}
+help|Thušo
+search|Fetleka
+searchbutton|Fetleka
+go|Sepela
+searcharticle|Eya
+history|Histori ya letlakala
+history_short|Histori
+updatedmarker|fetotšwe esale ketelo yaka ya mafelelo
+printableversion|''Version'' ya go gatišega
+permalink|Hlomaganyo yao e tiišeditšwego
+edit|Fetola
+create|Tlhoma
+editthispage|Fetola letlakala  le
+create-this-page|Tlhoma letlakala le
+delete|Phumula
+deletethispage|Phumula letlakala le
+protect|Lota
+protect_change|Fetola go lotega
+protectthispage|Lota letlakala le
+unprotect|Fetola go lota
+unprotectthispage|Fetola go lota letlakaleng
+newpage|Letlakala le lempsha
+talkpage|Rêrišana ka letlakala le
+talkpagelinktext|Bolela
+specialpage|Matlaka a itšeng
+personaltools|Dithulusu tša gago (''personal'')
+articlepage|Nyakoretša letlakala la mateng
+talk|Poledišano
+views|Dinyakorêtšo
+toolbox|Dithulusu
+userpage|Nyakorela letlakala la mošomiši
+projectpage|Nyakoretša letlakala la tirotherwa
+imagepage|Nyakoretša letlakala la ''file''
+mediawikipage|Nyakoretša letlakala la melaetša
+templatepage|Nyakoretša letlakala la ''template''
+viewhelppage|Nyakoretša letlakala la thušo
+categorypage|Nyakoretša letlakala la sehlopha
+viewtalkpage|Nyakoretša dipoledišano
+redirectpagesub|''Redirect'' letlakala
+viewcount|Letlakala le le butšwe ga {{PLURAL:~{0}\u007Ctee\u007C~{0}}}.
+protectedpage|Letlakala la go lotiwa
+jumpto|Taboga go:
+jumptonavigation|Tšweletšo
+jumptosearch|fetleka
+pool-errorunknown|Phošo yago setsebege
+aboutsite|Mabapi le {{SITENAME}}
+aboutpage|Project:Mabapi
+copyright|Mateng a hwetšagala tlase ga ~{0}.
+copyrightpage|{{ns:project}}:Tomello ya Mongwadi
+currentevents|Ditirago tša bjale
+currentevents-url|Project:Ditiragalo tša bjale
+disclaimers|Hlapa-matsogo
+disclaimerpage|Project:Hlapa-Matsogo
+edithelp|Thušo ya go fetola
+mainpage|Letlakala la Pele
+mainpage-description|Letlakala la Pele
+policy-url|Project:Melao
+portal|''Portal'' ya badudi
+portal-url|Project:Portal ya Badudi
+privacy|Melao ya praebesi
+privacypage|Project:Polisi ya praefesi
+badaccess|Thušo ya tumello
+badaccess-group0|Ga wa dumelwa go dira seo o lekago go se dira.
+badaccess-groups|Seo o lekago go se dira se dumelwetše go bašomiši bao balego {{PLURAL:~{1}\u007Cdihlopeng tša\u007Csehlopheng sa}}: ~{0}.
+versionrequired|Version ~{0} ya MediaWiki ea hlokega
+versionrequiredtext|Version ~{0} ya MediaWiki ea hlokega go šomiša letlakala le. Lebelela [[Special:Version\u007Cletlakala la version]].
+retrievedfrom|Le tšwa go "~{0}"
+youhavenewmessages|O na le ~{0} (~{1}).
+newmessagesdifflinkplural|{{PLURAL:~{0}\u007CPhetogo tša\u007CDiphetogo ya}} go feta
+youhavenewmessagesmulti|O nale melaetša ye mefsa go ~{0}
+editsection|lokiša
+editold|fetola
+viewsourceold|nyakorela mothopo
+editlink|Fetola
+viewsourcelink|nyakorela mothopo
+editsectionhint|Fetola sekgao: ~{0}
+showtoc|bontšha
+hidetoc|fihla
+thisisdeleted|Nyakorela goba hlaphola ~{0}?
+viewdeleted|Nyakorela ~{0}?
+restorelink|{{PLURAL:~{0}\u007Ce tee phetogo ye phumutšwego\u007Cphetogo tše ~{0} tše phumutšwego}}
+site-rss-feed|~{0} RSS Feed
+site-atom-feed|~{0} Atom Feed
+page-rss-feed|"~{0}" RSS Feed
+page-atom-feed|"~{0}" Atom feed
+red-link-title|~{0} (ga e hwetšagale)
+nstab-main|Letlakala
+nstab-user|Letlakala la mošomiši
+nstab-special|Letlakala le le kgethegilego
+nstab-project|Letlakala la tirotherwa
+nstab-image|Faele
+nstab-mediawiki|Molaetša
+nstab-template|Template
+nstab-help|Letlakala la thuso
+nstab-category|Sehlopha
+nosuchspecialpage|Gago letlaka le itšego le bjalo
+error|Phošo
+databaseerror|Phošo ya Database
+readonly|''Database'' e notletšwe
+enterlockreason|Fana la lebaka la go notlela, o fana le tekanyetšo yage senotlolo se tlogo tlošwa
+missing-article|"Database" ga ya humana  dihlaka tša letlakala tšeo e bego e swanela go di humana, tša maina  "~{0}" ~{1}.\n\nSe, gantši se hlolwa ke ge o latela hlomanyo goba history ya kgale goya letlakaleng leo le phumitšego.\n\n\nGaeba lebaka e se leo, go ka be go na le tšhikidi go "software".\nBega se go  [[Special:ListUsers/sysop\u007Cadministrator]], o fana ka URL.
+missingarticle-rev|(Thumeletšo#: ~{0})
+internalerror|Phošo ya ka gare
+internalerror_info|Phošo ya ka gare :~{0}
+filecopyerror|Gara kgona go ngwalolla faele "~{0}" go "~{1}".
+filerenameerror|Gara kgona go fetola leina la faele "~{0}" goba "~{1}".
+filedeleteerror|Gara kgona go phumula faele "~{0}".
+filenotfound|Gara kgona go humana faele "~{0}".
+badtitle|Taetlile ya bošula
+badtitletext|Letlakala le ga la dumelelwa, ga le na ditlhaka, goba hlomaganyo ya bogare-dipolelo goba bogare-wiki taetlele ga ya loka. Ekaba mohlomong taetlele enale hlaka goba dihlaka tšago sedumelelwe.
+viewsource|Lebelela mothopo
+protectedpagetext|Letlakala le le notletšwe go thibela diphetogo.
+viewsourcetext|O ka lebelela goba wa kôpiša mothapo wa letlakala le:
+namespaceprotected|Ga ona tokelo ya go fetola matlakala  go  '''~{0}''' .
+yourname|Leina la mošomiši:
+yourpassword|Ditlhaka-tša-siphiri:
+yourpasswordagain|Tlanya ditlhaka-tša-siphiri gape:
+remembermypassword|Gopola sedi yaka ya go tsena khomphutha ye (bogolo bja  ~{0} ya {{PLURAL:~{0}\u007C letšatši le\u007Cmatšatši a}})
+login|Tsena
+nav-login-createaccount|Tsena / Tlhola tšhupaleloko (''account'')
+userlogin|Tsena / tlhola tšhupaleloko (''account'')
+logout|Etšwa/Tswalela
+userlogout|Etšwa/Tswalela
+notloggedin|Ga wa tsena
+nologin|A  o nale sedi ya go tsena? '''~{0}'''.
+nologinlink|Bula tšhupaleloko (''account'')
+createaccount|Bula tšhupaleloko
+gotaccount|O šetše o nale tšhupaleloko? '''~{0}'''.
+gotaccountlink|Tsena
+userlogin-resetlink|O lebetše dintlha tšago tsena?
+createaccountmail|Re šomiše ditlhaka-tša-siphiri tša sebakanyana tšeo re di kgethilego re di romele ka e-mail
+createaccountreason|Lebaka:
+badretype|Ditlhaka-tša-siphiri tše o di šomišitšego ga di swane.
+noname|Gawa fana ka leina la mošomiši la go loka.
+loginsuccesstitle|O tsene ka katlego
+loginsuccess|'''Bjale o tsene go {{SITENAME}} bjalo ka "~{0}".'''
+nosuchuser|Ga gona mošomiši wa leina la "~{0}".\nMaina a huduetša ke ditlhaka.\nLebele mopeleto wa gago goba [[Special:UserLogin/signup\u007Co tlhome mošomiši yo mophsa]].
+nosuchusershort|Ga gona mošomiši wa leina la "~{0}". Hlokomela mopeleto wa gago.
+nouserspecified|O swanela ke go fana ka leina la mošomiši.
+wrongpassword|O loketše ditlhaka-tša-siphiri tšeo e sego tšona. Ka kgopelo, leka gape.
+wrongpasswordempty|Ga wa lokela ditlhaka-tša-siphiri. Ka kgopelo, leka gape.
+passwordtooshort|Ditlhaka-tša-siphiri tša gago ga tša dumelega goba di kopana.\nGo nyakega gore e be le {{PLURAL:~{0}\u007Ctlhaka ye tee\u007C~{0} ya ditlhaka}} gape  e seke ya swana le leina la gago (''username'').
+mailmypassword|Fetola ditlhaka-tša-siphiri
+passwordremindertitle|''Password'' ye mphsa ya nakonyana go {{SITENAME}}
+passwordremindertext|Motho yo mongwe (goba wena, gotšwa IP atrese ~{0}) o\nkgopetše gore re moromele Ditlhaka-tša-siphiri tše mfsa tša {{SITENAME}} (~{3}).\n\nDitlhaka-tša-siphiri tša  mošomiši "~{1}" go tloga bjale ke  "~{2}".\n\nDitlhaka-tša-siphiri di tla šoma {{PLURAL:~{4}\u007Cletšatši\u007Cmatšatši a ~{4}}}.\n\nGa eba motho yo mongwe esego wena o dirile kgopelo ye, goba o gopola Ditlhaka-tša-siphiri gomme ga o sa\nhloka gore e fetolwe, hlokomologa molaetša wo, o tšwele pele o šumiše Ditlhaka-tša-siphiri tša kgale.
+noemail|Ga gona e-mail atrese ya mošomiši "~{0}".
+passwordsent|\nDihlaka tša siphiri (''password'') tše mphsa di rometšwe go e-mail atrese ya "~{0}".\nRe kgopela gore o tsene ge fetša go e hwetša.
+blocked-mailpassword|IP atrese ya gago e thibetšwe go dira diphetogo, ka fao ga wa dumellwa\ngo šomiša thulusu ya go hwetša Ditlhaka-tša-siphiri go thibela go hlapanya.
+eauthentsent|Molaetša wa go tiišetša o  rometšwe go e-mail atrese.\n\nPele re romela melaetša ye mengwe go atrese ye, o kgopelwa go latela ditaelo tšeo dilego molaetšeng go tiišetša gore atrese ke ya gago.
+throttled-mailpassword|Kgopelo ya go fetola ditlhaka-tša-siphiri e rometšwe {{PLURAL:~{0}\u007Ciring\u007Cdiiring tše ~{0}}} tša gofeta.\nGo thibela go hlapanya/kgobošo, kgopotšo e tee ka {{PLURAL:~{0}\u007Ciri\u007Cdiiri tše ~{0}}} e tla romellwa.
+mailerror|Gobile le phošo go romeleng molaetša  : ~{0}
+acct_creation_throttle_hit|Ka maswabi, IP Aterese ya gago e tlhomile {{PLURAL:~{0}\u007Ctšhupaleloko\u007C~{0} tša ditšhupaleloko}} e se kgale.\nGa wa dumelwa go tlhoma tše dingwe ka se sebaka.
+emailauthenticated|E-mail atrese ya gago e kgonthišitšwe ka ~{1}  ~{2}.
+accountcreated|Tšhupaleloko (Account) e tlhodilwe
+accountcreatedtext|Tšhupaleloko (account) ya modiri [[{{ns:User}}:~{0}\u007C~{0}]] ([[{{ns:User talk}}:~{0}\u007Ctalk]]) e tlhodilwe.
+loginlanguagelabel|Polelo: ~{0}
+changepassword|Fetola ditlhaka-tša-siphiri
+resetpass_text|<!-- Tsenya ditlhaka mo -->
+oldpassword|Ditlhaka-tša-siphiri tša kgale:
+newpassword|Ditlhaka-tša-siphiri tše mpsha:
+retypenew|Tlanya ditlhaka tše mphsa tša siphiri gape:
+changepassword-success|Ditlhaka tša siphiri di fetotšwe ka katlego!
+extlink_sample|http://www.example.com hlomaganyo thaetlele
+extlink_tip|Hlomaganyo ya ka ntle (gopola go thoma ka http://)
+nowiki_sample|Tsenya ditlhaka tša go sebe le ''format'' mo
+nowiki_tip|Hlokomologa tselangwalo (''formatting'') ya  wiki
+image_sample|Mohlala.jpg
+image_tip|Seswantšho/Faele yago dikanelwa (''embedded'')
+media_sample|Mohlala.ogg
+media_tip|Hlomaganyo ya Faele
+sig_tip|Tshaeno ya gago le nako ya phetogo
+hr_tip|Mothalo wago ya faase/papamela (šomiša ka hloko)
+summary|Kakaretšo:
+subject|Tabataba/Hlogo ya taba:
+minoredit|Ye ke phetogo ye nnyenyane
+watchthis|Tlhapetša letlakala le
+savearticle|Boloka letlakala
+preview|Lebelela
+showpreview|Laetša sebopego sa letlaka
+showdiff|Laetša diphetogo
+anoneditwarning|<strong>Temošo:</strong> Gawa ''tsena'', IP ya gago e tla šumišwa go histori ya diphetogo tša letlakala. Ge o ka <strong>[~{0} tsena]</strong> goba wa  <strong>[~{1} tlhoma tšhupaleloko]</strong>,diphetogo tša gago di tla šumiša leina la gago.
+summary-preview|Lebelela kakaretšo:
+blockedtitle|Mošomiši o thibilwe
+blockedtext|'''Leina la gago la mošomiši goba IP atrese e thibilwe.'''\n\nO thibilwe ke ~{0}. Makaba a go thiba ke ''~{1}''.\n\n* Go thoma gago thiba: ~{7}\n* Fetatšatši yago thiba: ~{5}\n* Mothibiwa: ~{6}\n\nO ka leka go boledišana le ~{0} goba [[{{MediaWiki:Grouppage-sysop}}\u007Cmolaudi]] ka go thibiwa go.\nO ka se kgone go šumiša thulusu ya 'romela mošomiši molaetša' ka ntle gage o loketše e-mail ya gago go\n[[Special:Preferences\u007Cdikgatlhegelo]] gape ge o sa thibelwa go e šomiša.\nIP atrese ya gago ke ~{2}, ge ID ya go thiba ele #~{4}. Ka kgopelo šumiša ID le IP go dipoledišano ka moka tšeo dilego mabapi le go go thiba.
+blockednoreason|gago lebaka leo le filwego
+whitelistedittext|O swanela ke go ~{0} go fetola matlakala.
+confirmedittext|E-mail e swanetše ke go tiišetšwa pele ge o ka fetola matlakala. Ka kgopelo, tiišetša e-mail atrese ya gago go [[Special:Preferences\u007Cdikgatlhego tša mošomiši]].
+nosuchsectiontitle|Sekgao ga se humanege
+nosuchsectiontext|O lekile go fetola sekgao seo se sego gona. \nSe, se ka hlolwa ke ge letlakala le phumulwa goba la hudušwa ge wena o sa le lebeletše.
+loginreqtitle|Go tsena goa hlokega
+loginreqlink|tsena
+loginreqpagetext|O swanela ke go  ~{0} go nyakorela matlakala a mangwe.
+accmailtitle|Ditlhaka tša siphiri di rometšwe.
+accmailtext|Ditlhaka-tša-siphiri tša  [[User talk:~{0}\u007C~{0}]]  di rometšwe go ~{1}. Di ka fetolwa go letlaka la <em>[[Special:ChangePassword\u007Cgo fetola ditlhaka-tša-siphiri ]]</em> ge o tsena.
+newarticle|(mpsha)
+newarticletext|O latetše hlomaganyo go letlakala leo le sego gona ka se sebaka.\nGo tlhola letlakala, thoma go ngwalo lepokising le letelago\n(lebelela [~{0} letlakala la thušo] go hwetša šedi).\nGa eba o le fa ka phošo, o ka boela morago ka go šumiša konopo ya '''back''' go ''browser'' ya gago.
+noarticletext|Ga gona ditlhaka letlakaleng le, oka [[Special:Search/{{PAGENAME}}\u007Cfetleka leina la letlakala]] matlakaleng a mangwe, <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} fetleka "logs"], goba [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} wa fetola letlakala le]</span>.
+noarticletext-nopermission|Ga gona ditlhaka letlakaleng le, \noka [[Special:Search/{{PAGENAME}}\u007Cfetleka leina la letlakala]] matlakaleng a mangwe,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} fetleka "logs"],\n goba [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} wa fetola letlakala le]</span>.
+note|'''Ela hloko:'''
+previewnote|'''Elelwa gore ye ke taetšo ya sebopego sa letlakala fela.'''\nDiphetogo tša gago ga šetšo di bolokwa!
+editing|O fetola ~{0}
+editingsection|Phetolo ya ~{0} (sekgoba)
+editingcomment|O fetola ~{0} (sekgao se sempsha)
+editconflict|Tholano ya diphetogo: ~{0}
+yourtext|Mongwalo wa gago
+storedversion|Version yeo e bolokilwego
+yourdiff|Diphapang
+copyrightwarning|Diabe kamoka go {{SITENAME}} di akanywa go ngwadiwa tlase ga ~{1} (lebelela ~{0} go hwetša taba ka bophara). Ge o sa nyake gore mengwalo ya gago e fetolwe ntle le kgaugelo goba e phatlalatšwe ntle le tumello ya gago, o seke wa fana ka mengwalo mo.<br />\nGape o re holofetša  gore mengwalo ye e ngwadile ke wena, goba o e kopiša mothapong wa pepeneneng goba  ke mahala.\n'''O SE TSENYE MEŠOMO YA BATHO BA BANGWE NTLE LE TUMELLO YA BONA!'''
+templatesused|"{{PLURAL:~{0}\u007CTemplate yeo e\u007CDi-Template tšeo di}}'' šomišitšwego letlakaleng le:
+templatesusedpreview|{{PLURAL:~{0}\u007C"Template" yeo e\u007C"DiTemplate" tšeo di}} šomišitšwego go taetšo ya sebopego sa letlakala:
+template-protected|(e lotilwe)
+template-semiprotected|(lota-ka-seripa)
+hiddencategories|Letlakala le, ke setho sa {{PLURAL:~{0}\u007C1 sehlopha sago uta\u007C~{0} dihlopha tšago uta}}:
+nocreatetext|{{SITENAME}} e nale dithibelo tše itšego go tlholeng ga matlakala a maphsa.\nO ka boela morago wa felola matlakala a lego gona, goba o [[Special:UserLogin\u007Ctsene]].
+nocreate-loggedin|Ga ona tumello ya go tlhola matlakala a mampsha.
+permissionserrors|Phošo ya ditumello
+permissionserrorstext|Gawa dumelwa go pheta seo,ka {{PLURAL:~{0}\u007Clebaka\u007Cmabaka}} a latelago:
+permissionserrorstext-withaction|Ga ona tumello ya go ~{1}, {{PLURAL:~{0}\u007Clebala le\u007Cmabaka a}} latelago:
+recreate-moveddeleted-warn|'''Temošo: O leka go tlhoma letlakala le gape, ka ge le ile la phumulwa.'''\n\nSekaseka gore letlakala le lephumutšwe ka mabaka afe pele o leka go le fetola.\nSedi ya phumulo le go huduga ga letlakala e re:
+moveddeleted-notice|Letlakala le le phumitšwe.\nDi-"log" tšago phumula le dikhudušo di tla latela.
+post-expand-template-inclusion-warning|'''Hlokomela:''' Bogolo bja "Template include" bo feta tekano.\nDi-"template" tše dingwe ditla leswa kantle.
+post-expand-template-inclusion-category|Matlakala a goba le "template include" ya bogolo bja go feta tekano
+post-expand-template-argument-warning|'''Hlokomela:''' Letlakala le nale "template argument"  "expansion size" ya bogolo bja go feta tekano.\nDi "arguments" tše di tlogetšwe ntle.
+post-expand-template-argument-category|Matlaka a goba le di-"template" tšago ba le "omitted arguments"
+viewpagelogs|Nyakoretša di-''log'' tša letlakala le
+currentrev|Poeletšo tša bjale
+currentrev-asof|Thumeletšo tša seswa go tloga ka ~{0}
+revisionasof|Thumeletšo go tloga ka ~{0}
+revision-info|Poeletšo go tloga ~{0} ka {{GENDER:~{5}\u007C~{1}}}~{6}
+previousrevision|←Poeletšo tša kgalenyana
+nextrevision|Peletšo tše dimphsanyana→
+currentrevisionlink|Poeletšo ya bjale
+cur|bjale
+next|latela
+last|bofelo
+page_first|mathomo
+page_last|mafelelo
+histlegend|Tlhaolo ya diphapano: swaya lepokisi la phetogo go bapetša ke moka o thwanye ''enter'' tlase-tlase<br />\nNane: (bjale) = phapang le diphetogo tša bjale,\n(mafelelo) = phapang le diphetogo tša pele, M = diphetogo tše nyenyane.
+history-fieldset-title|Laotša histori
+history-show-deleted|Tša go phumulwa fela
+histfirst|Pelepeleng
+histlast|Ntshwantshwa
+historysize|({{PLURAL:~{0}\u007C1 byte\u007C~{0} bytes}})
+history-feed-title|Histori ya poeletšo
+history-feed-description|History ya poeletšo ya letlakala le go wiki
+history-feed-item-nocomment|~{0} go ~{1}
+history-feed-empty|Letlakala lewe ga le gona.\nMohlomongwe le phumutšwe go wiki, goba le fetotšwe leina.\nLeka [[Special:Search\u007Cgo fetleka wikii]] go humana matlakala a mapsha.
+rev-delundel|Bontšha/Fihla
+revdelete-hide-text|Dihlaka tša poeletšo
+revdelete-log|Lebaka:
+revdel-restore|\nfetola tshenolo
+pagehist|Histori ya letlakala
+mergehistory-from|Letlakala la mothopo:
+mergehistory-into|Letlakala la boyo:
+mergehistory-reason|Lebaka:
+revertmerge|Tloša kopaganyo
+history-title|Poeletšo ya diphetogo tša "~{0}"
+lineno|Mothalo ~{0}:
+compareselectedversions|Bapetša diphapang tšeo di kgethilwego
+editundo|dirolla
+searchresults|Sephetho sa go fetleka
+searchresults-title|Diphetho tša go fetleka "~{0}"
+notextmatches|Gago mangwalo letlakaleng a go swana
+prevn-title| ~{0} {{PLURAL:~{0}\u007Csepheto\u007C tša dipheto}} tšago latela
+nextn-title| ~{0} {{PLURAL:~{0}\u007Csepheto\u007C tša dipheto}} tšago latela
+shown-title|Laetša ~{0} {{PLURAL:~{0}\u007Csepheto\u007C tša dipheto}} ka letlakala
+viewprevnext|Lebelela (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|'''Go ena le letlaka la leina la "[[:~{0}]]" go wiki ye.'''
+searchmenu-new|<strong>Hlola letlakala "[[:~{0}]]" go wiki ye!</strong>
+searchprofile-articles|Matlakala a diteng
+searchprofile-images|Diphatlalatši tša "multi"
+searchprofile-everything|Ka moka
+searchprofile-advanced|Maemo-godimo
+searchprofile-articles-tooltip|Fetleka gare ga ~{0}
+searchprofile-images-tooltip|Fetleka difaele
+searchprofile-everything-tooltip|Fetleka matlakala ka moka (le matlakala a dipoledišano)
+searchprofile-advanced-tooltip|Fetleka go di-"namespace" tša "custom"
+search-result-size|~{0} ya ({{PLURAL:~{1}\u007Clentswi\u007C~{1} mantswi}})
+search-result-category-size|{{PLURAL:~{0}\u007C1 mošumiši\u007C~{0} bašumiši}} ({{PLURAL:~{1}\u007C1 subcategory\u007C~{1} di-subcategory}}, {{PLURAL:~{2}\u007C1 faele\u007C~{2} difaele}})
+search-redirect|(redirect ~{0})
+search-section|(sekga ~{0})
+search-suggest|O be o nyaka gore: ~{0}
+search-interwiki-caption|Diprojeke tša moloko
+search-interwiki-default|Dipheto gotšwa ~{0}:
+search-interwiki-more|(gape)
+searchrelated|tswalana
+searchall|tšohle
+search-nonefound|Gago dipheto tšago sepelelana le "query".
+powersearch-legend|Fetleka ya tšwetše
+powersearch-ns|Fetleka go di "namespace"
+preferences|Dikgatlhegelo
+mypreferences|Dikgatlhegelo
+prefs-edits|Palo ya diphetogo:
+skin-preview|Ponopele
+prefs-rc|Diphetogo tša bjale
+prefs-watchlist|Lenano la tlhapetšo
+saveprefs|Boloka
+prefs-editing|Fetola
+searchresultshead|Fetleka
+savedprefs|Dikgatlhegelo tša gago di bolokilwe.
+allowemail|Dumella melaetša ya e-mail go tšwa go bašomiši ba bangwe
+prefs-files|Difaele
+youremail|E-Poso
+username|{{GENDER:~{0}\u007CMošomiši}}:
+prefs-memberingroups|{{GENDER:~{1}\u007CLeloko}} la {{PLURAL:~{0}\u007Cya sehlopha\u007Cya dihlopha}}:
+yourrealname|Leina la mmakgonthe:
+yourlanguage|Polelo:
+yournick|Tshaeno:
+badsiglength|Leina la boreelo le letelele kudu.\nLe swanela goba fase ga ~{0} {{PLURAL:~{0}\u007Cya tlhaka\u007Ctša ditlhaka}}
+prefs-help-realname|Leina la nnete gale gapeletšwe, efela ge o kgetha go fana ka lona, le tla šomišwa go bontšha diabe mešomong ya gago.
+prefs-help-email|Aterese ya E-poso gae hlokagale, efela e ka hlokagala ge dihlaka tša sephiri di fetolwa, ge o ka lebala dihlaka tša gago tša sephiri
+prefs-help-email-others|O ka kgetha gore batho ba bangwe ba bolele le wena ka  e-poso ga kgokaganyo letlakala la gago goba letlakala la dipoledišano.\nGa re fane ka e-poso ya gago go bašumiši ba bangwe ge ba polela le wena ka yona.
+prefs-help-email-required|E-mail atrese eya nyakega.
+editusergroup|Fetola sehlopha sa bašomiši
+editinguser|O fetola mošomiši '''[[User:~{0}\u007C~{0}]]''' ~{1}
+userrights-editusergroup|Fetola sehlopha sa bašomiši
+saveusergroups|Boloko Dihlopha tša bašomiši
+userrights-groupsmember|Leloko la:
+userrights-reason|Lebaka:
+userrights-no-interwiki|Gawa dumelwa go fetola di dumello tša mošumiši go di wiki tše dingwe.
+group|Sehlopha:
+group-sysop|Bahlapetši
+group-all|(ka moka)
+grouppage-sysop|{{ns:project}}:Balaudi
+right-read|Bala matlakala
+right-edit|Fetola matlakala
+right-move|Huduša matlakala
+newuserlogpage|"Log" yago hlola mošumiši
+rightslog|''log'' ya ditumello tša mošomiši
+action-edit|Fetola letlakala  le
+nchanges|~{0} {{PLURAL:~{0}\u007Cphetogo\u007Cdiphetogo}}
+recentchanges|Diphetogo tša bjale
+recentchanges-legend|Dikgetho tša diphetogo tša bjale
+recentchanges-summary|Lebalana diphetogo tše di mphsa-mphsa go wiki  letlakaleng le.
+recentchanges-feed-description|Lebalana diphetogo tše di mphsa-mphsa go wiki  ka ''feed'' ye.
+recentchanges-label-newpage|Phetogo ye e hlomile letlala le lefsa
+recentchanges-label-minor|Ye ke phetogo ye nnyenyane
+recentchanges-label-bot|Phetogo ye e dirilwe ke "bot"
+recentchanges-label-unpatrolled|Phetogo ye ga ese e "patrollwe"
+rcnotefrom|Tlase ke diphetogo go tloga ka <strong>~{2}, ~{3}</strong> (go  fihla ka <strong>~{0}</strong>).
+rclistfrom|Laêtša dipheto tše mfsa go thoma go ~{2} ~{1}
+rcshowhideminor|~{0} ya diphetogo tše nnyenyane
+rcshowhidebots|~{0} bots
+rcshowhideliu|~{0} bašumiši bao batsebjawago
+rcshowhideanons|~{0} bašumiši bago se tsebege
+rcshowhidepatr|~{0} diphetogo tše ''patrolled''
+rcshowhidemine|~{0} diphetogo tsa ka
+rclinks|Bontšha diphetogo tša bofelo tše ~{0} matšatšing a  ~{1}  a bofelo <br />~{2}
+diff|phapang
+hist|histori
+hide|Fihla
+show|Bontšha
+minoreditletter|m
+newpageletter|N
+boteditletter|b
+newsectionsummary|/* ~{0} */ sekgao se sempsha
+rc-enhanced-expand|Laetša ka bophara
+rc-enhanced-hide|Fihla bophara bja sedi
+recentchangeslinked|Diphetogo tša go tswalana
+recentchangeslinked-feed|Diphetogo tša go tswalana
+recentchangeslinked-toolbox|Diphetogo tša go tswalana
+recentchangeslinked-title|Diphetogo tša go tswalana le "~{0}"
+recentchangeslinked-summary|Letlakala le le laetša diphetogo tša bjale matlakaleng a go hlomaganya.\nMatlakala ago ba [[Special:Watchlist\u007Clenanong la gago la matlakala ditlhapetšo]]  a '''ngwadilwe ka bogolo'''.
+recentchangeslinked-page|Leina la letlakala:
+recentchangeslinked-to|Laetša diphetogo go matlakala ago hlomanya le letlakala leo
+upload|Lokela Faele
+uploadbtn|Lokela faele
+uploadlogpage|''log'' yago lokela
+filedesc|Kakaretšo
+fileuploadsummary|Kakaretšo:
+filesource|Mothopo:
+savefile|Boloka faele
+watchthisupload|Tlhapetša ''faele'' ye
+license|Laesense/Tumello:
+license-header|Laesense
+license-nopreview|(Ponopele ga e gona)
+upload_source_file|(faele yeo o kgethilego go khomphuthara ya gago)
+imgfile|faele
+listfiles|Lenano la difaele
+listfiles_date|Letšatšikgwedi
+listfiles_name|Leina
+listfiles_user|Mošumiši
+listfiles_size|Bogolo
+file-anchor-link|Faele
+filehist|Histori ya faele
+filehist-help|Pinyeletša go letšatšikgwedi/nako go bona faela ka tsela yeo ebego e le ka gona nakong yeo.
+filehist-deleteall|phumula ka moka
+filehist-deleteone|phumula
+filehist-revert|bušetša
+filehist-current|bjale
+filehist-datetime|LetšatšiKgwedi/Nako
+filehist-thumb|Nkgogorupo-Nala
+filehist-thumbtext|Nkgogorupo-Nala ya "version" go tloga ~{0}
+filehist-user|Mošomiši
+filehist-dimensions|Bogolo
+filehist-filesize|Bogolo ba faele
+filehist-comment|Comment
+imagelinks|Tirišo ya Faele
+linkstoimage|{{PLURAL:~{0}\u007CLetlakala le ke \u007C~{0} ya matlakala a}} latelago a hlomaganya go faele ye:
+nolinkstoimage|Gago matlakala a hlomaganyago faeleng ye.
+sharedupload|Faele ye e tšwa ~{0} e bile a kaba  e šumišwa ke ditirotherwa tše dingwe.
+sharedupload-desc-here|Letlakala le letšwa ~{0} ebile le ka ba ke šumišwa ke di  projeke tše dingwe.\n Tlhaloso ya [letlakala ~{1} tlhaloso ya faele] le laetšwa kago latela.
+uploadnewversion-linktext|Lokela peoletšo ye mphsa ya faele
+filerevert-comment|Lebaka:
+filerevert-defaultcomment|Boela go poeletšo ya go tloga go ~{1}, ~{0}
+filedelete|Phumula ~{0}
+filedelete-legend|Phumula faele
+filedelete-intro|O phumula <strong>[[Media:~{0}\u007C~{0}]]</strong> le histori ya yona.
+filedelete-comment|Lebaka:
+filedelete-submit|Phumula
+filedelete-success|'''~{0}''' e phumutšwe.
+filedelete-nofile|'''~{0}''' ga e gona.
+filedelete-otherreason|Mabaka a mangwe:
+filedelete-reason-otherlist|Lebaka le lengwe
+mimesearch|fetleka MIME
+listredirects|Lenano la di-''redirect''
+unusedtemplates|''templates'' tša go se šomišwe
+unusedtemplateswlh|dihlomaganyo tše dingwe
+randompage|Letlakala le lengwe le le lengwe
+randomredirect|''redirect'' engwe le engwe
+statistics-header-users|Dipalopalo tša mošomiši
+doubleredirects|Di''redirect'' goya go ''redirect''
+brokenredirects|''redirect'' tša go robega
+brokenredirects-edit|fetola
+brokenredirects-delete|phumula
+withoutinterwiki|Matlakala a senago dihlomaganyo tša dipolelo
+withoutinterwiki-submit|Bontšha
+fewestrevisions|Matlakala a goba le diphetogo tše nnyenyane
+nbytes|~{0} {{PLURAL:~{0}\u007Cbyte\u007Cbytes}}
+nlinks|~{0} {{PLURAL:~{0}\u007Chlomaganyo\u007Cdihlomaganyo}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cleloko\u007Cmaloko}}
+nrevisions|~{0} {{PLURAL:~{0}\u007Cpoeletšo\u007Cdipoeletšo}}
+lonelypages|Matlakala a ditšhuana
+uncategorizedpages|Matlakala ago sebe le magoro
+uncategorizedcategories|Dihlopha tšago sebe le magoro
+uncategorizedimages|Difaele tšago hloka magoro
+uncategorizedtemplates|''Templates'' tšago sebe le magoro
+unusedcategories|Dihlopha tša go se šomišwe
+unusedimages|Difaele tša go se šomišwe
+wantedcategories|Dihlopha tšago nyakega
+wantedpages|Matlakala ago nyakega
+mostlinked|Matlakala a go hlomaganya go feta a mangwe
+mostlinkedcategories|Dihlopha tša go hlomaganya go feta tše dingwe
+mostlinkedtemplates|Matlakala a go hlomaganya go feta a mangwe
+mostcategories|Matlakala a goba le dihlopha tše dintšhi
+mostimages|Faele tša go hlomaganya go feta tše dingwe
+mostrevisions|Matlakala a goba le diphetogo tše dintšhi
+prefixindex|Matlakala ka moka a goba le hlogo (''prefix'')
+shortpages|Matlakala a makopana
+longpages|Matlakala a matelele
+deadendpages|Matlakala a seye felo(''Dead-end'')
+protectedpages|Matlakala a go lotiwa
+listusers|Lanano la mošomiši
+usercreated|{{GENDER:~{2}\u007CHlodilwe}} ka ~{0} go ~{1}
+newpages|Matlakala a mampsha
+ancientpages|Matlakala a kgalekgale
+move|Huduša
+movethispage|Huduša letlakala le
+pager-newer-n|{{PLURAL:~{0}\u007C1 ye mpšha\u007C~{0} tše mpšha}}
+pager-older-n|{{PLURAL:~{0}\u007C1 ya kgale\u007C~{0} tša kgale}}
+booksources|Dipuku tša mothopo
+booksources-search-legend|Fetleka mothopo wa dipuku
+specialloguserlabel|Modiri:
+speciallogtitlelabel|Thaetlele (goba mošumiši):
+log|Di-''log''
+all-logs-page|Di-''log'' tša bohle ka moka
+allpagesfrom|Bontšha matlakala go thoma go :
+allpagesto|Bontšha matlakala go felela go :
+allarticles|Matlakala ka moka
+allpagessubmit|Eya
+allpagesprefix|Laetša matlakala agoba le hlogo (''prefix''):
+deletedcontributions|Diabe tša mošomiši tšeo di phumutšwego
+deletedcontributions-title|Diabe tša mošomiši tšeo di phumutšwego
+linksearch|Fehleka dihlomaganyo tša ntle
+linksearch-ok|Fetleka
+linksearch-line|~{0} e kgokaganywa gotšwa ~{1}
+listusers-submit|Bontšha
+listgrouprights-members|(Lenano la ditho)
+emailuser|Romela mošomiši yo molaetša
+emailpage|Romela email go mošomiši
+noemailtitle|Gago email atrese
+emailfrom|Go tšwa go:
+emailsubject|Sebolelwa:
+emailmessage|Molaetša:
+emailsend|Romela
+emailccme|Nromela kopi ya melaetša.
+emailccsubject|Kopi ya molaetša wa gago goya go ~{0}: ~{1}
+emailsent|E-mail e rometšwe
+emailsenttext|Molaetša wa gago wa email gawa romelwa.
+watchlist|Lenano la ditlhapetšo
+mywatchlist|Lenano la ditlhapetšo
+watchlistfor2|Ya ~{0} ~{1}
+addedwatchtext|Letlakala "[[:~{0}]]" le tsene go [[Special:Watchlist\u007Cwatchlist]] ya gago.\nGo tloga bjale, diphetogo letlakaleng le, le letlakaleng la dipoledišano la gona, di tla bontšhwa ka mongalo wa '''bold''' gare ga [[Special:RecentChanges\u007Clist of recent changes]] gore go be bonolo gore oa bone.\n\nGa eba o nyaka go hloša letlaka le go lenano la ditlhapetšo tša gago, šomiša "Tloša tlhapetšo" go sidebar.
+removedwatchtext|Letlakala "[[:~{0}]]" letlošitšwe go [[Special:Watchlist\u007Clenano la gago la ditlhapetšo]].
+watch|Tlhapetša
+watchthispage|Tlhapetša letlakala le
+unwatch|Tloša tlhapešo
+watchlist-details|{{PLURAL:~{0}\u007C~{0} ya letlakala\u007C~{0} ya matlakala}} a lenano la ditlhapetšo tša gago, re sa bale matlakala a dipoledišano (dipolelo).
+wlshowlast|Laetša  ~{0} diiri ~{1} matšatši  tša gofeta
+watchlist-options|Dikgatlego tša lenano la ditlhapetšo
+watching|Tlhapeditše...
+unwatching|Tlhapetšo eya tlošwa ...
+enotif_reset|Swaya matlakala kamoka awe oa etetšego
+enotif_impersonal_salutation|{{SITENAME}} mošumiši
+enotif_lastvisited|Lebelela  ~{0} go bona diphetogo ka moka gotloga ge go tsena la mafelelo.
+enotif_lastdiff|Bona ~{0} go nyakorela phetogo ye.
+created|tlhodilwe
+changed|fetotšwe
+deletepage|Phumula letlakala
+excontent|mateng ebe e le: '~{0}'
+delete-legend|Phumula
+historywarning|<strong>Temošo:</strong> Letlakala leo o lekago go lephumula le nale histori le {{PLURAL:~{0}\u007Cphetogo\u007Cdiphetogo tše ~{0}}}:
+confirmdeletetext|O phumula letlakala le histori ka moka ya lona.\nKa kgopela sitlediša gore ke se o nyakago  go sedira, le gore o kwešiša ditla morago tša se, le gore seo o se dirago se latela melawana le ditaelo go ya ka [[{{MediaWiki:Policy-url}}\u007Cpolisi]].
+actioncomplete|Kgopelo e phetilwe ka katlego
+actionfailed|Tiro e padile
+deletedtext|"~{0}" e phumutšwe.\nLebelela ~{1} go hweetša sedi ka diphulo tša bjale.
+dellogpage|''Log'' yago phumula
+deletecomment|Lebaka:
+deleteotherreason|Mabaka a mangwe:
+deletereasonotherlist|Mabaka a mangwe
+rollbacklink|bošetša morago
+editcomment|Ahlaahlo ya phetogo e bile : "''~{0}''".
+protectlogpage|''Log'' yago lota
+protectedarticle|lotilwe "[[~{0}]]"
+modifiedarticleprotection|fetotše  mokgwa wa go lota "[[~{0}]]"
+prot_1movedto2|[[~{0}]] e hudugile goya go [[~{1}]]
+protect-legend|Tiišetša go lota
+protectcomment|Lebaka:
+protectexpiry|Fetatšatši:
+protect_expiry_invalid|Fetatšatši, nako ye ga ya dumelwa.
+protect_expiry_old|Fetatšatši ke ya nako yeo e fetilego.
+protect-text|O ka lebelela lego fetola seemo sa go lota sa letlakala '''~{0}'''.
+protect-locked-access|Tšhupaleloko ya gago ga ena tumello ya go fetola seemo sago lota ga letlakala.\nSeemo sa go lota ga letlakala '''~{0}''':
+protect-cascadeon|Letlakala le lotegile ka ge le akeretšwa ke {{PLURAL:~{0}\u007Cletlakala, leo lenalego\u007Cmatlakala, analego}} golotega ga kakaretšo. O ka fetola go lotega ga letlakala le.
+protect-default|Dumella bašumiši ka moka
+protect-fallback|Go nyakega tumello ya "~{0}"
+protect-level-autoconfirmed|Thiba bašumiši  ba bafša le bao ba sakago ba engwadiša(''unregistered'')
+protect-level-sysop|Sysops feela
+protect-summary-cascade|cascading
+protect-expiring|fetatšatši ke ~{0} (UTC)
+protect-cascade|Lota matlakala, akaretša le letlakala le (go lota ka kakaretšo)
+protect-cantedit|Ga o kgone go fetola tekano ya bolotego letlakaleng le, ka ge o sena tumello yago bofetola.
+protect-expiry-options|iri:1 hour, letšatš1:1 day,beke:1 week,dibeke tše 2:2 weeks,kgwedi:1 month,dikgwedi tše 3:3 months,dikgwedi tše 6:6 months,ngwaga:1 year,gosefele (infinite):infinite
+restriction-type|Tumello:
+restriction-level|Seemo sago Lota:
+restriction-edit|Fetola
+restriction-move|Huduša
+restriction-create|Tlhola
+undelete|Nyakorela matlakala ago phumulwa
+viewdeletedpage|Nyakorela matlakala ago phumulwa
+undeletebtn|Hlaphola
+undeletelink|Nyakorela/hlaphola
+undeleteviewlink|ponagalo
+undeletecomment|Lebaka:
+undelete-search-prefix|Laetśa matlakala a go thoma ka:
+undelete-search-submit|Fetleka
+namespace|Namespace:
+invert|Fetola kgetho
+contributions|Diabe tša mošomiši
+contributions-title|Diabe tša mošumiši go ~{0}
+mycontris|Diabe tša ka
+contribsub2|Ya ~{0} (~{1})
+uctop|(godimo)
+month|Go tloga kgweding (le peleng):
+year|Go tloga ngwageng (le peleng):
+sp-contributions-newbies|Laetša diabe tša bašumiši ba bafsa fela
+sp-contributions-newbies-sub|Tša tšhupaleloko tše mphsa
+sp-contributions-blocklog|''Log'' yago thiba
+sp-contributions-deleted|diabe tša mošomiši tšeo di phumutšwego
+sp-contributions-uploads|di-"upload"
+sp-contributions-logs|Di-''log''
+sp-contributions-talk|Poledišano
+sp-contributions-search|Fetleka diabe
+sp-contributions-username|IP Atrese goba leina la mošomiši:
+sp-contributions-toponly|Laetša diphetogo tša dipušeletšo tša bjale
+sp-contributions-submit|Fetleka
+whatlinkshere|Ke eng yeo e hlomaganyago mo
+whatlinkshere-title|Matlakala a go hlomaganya go "~{0}"
+whatlinkshere-page|Letlakala:
+linkshere|Matlaka a latelago a hlomaganya le '''[[:~{0}]]''':
+nolinkshere|Ga go letlakala leo le hlomaganyago go '''[[:~{0}]]'''.
+isredirect|''redirect'' letlakala
+istemplate|tsentšho
+isimage|Hlomaganyo ya Faele
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cfetile\u007Cfetile ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Clatela\u007Clatela ~{0}}}
+whatlinkshere-links|← dihlomaganyago
+whatlinkshere-hideredirs|~{0} di "redirect"
+whatlinkshere-hidetrans|~{0} transclusions
+whatlinkshere-hidelinks|~{0} dihlomaganyago
+whatlinkshere-hideimages|~{0} seswantšho dihlomaganyo
+whatlinkshere-filters|Dihlotla
+blockip|Thibela mošomiši go tsena
+ipbexpiry|Fetatšatši:
+ipbreason|Lebaka:
+ipbsubmit|Thiba mošomiši yo
+ipbother|Nako yengwe:
+ipboptions|2 diiri:2 hours,1 letšatši:1 day,3 matšatši:3 days,1 beke:1 week,2 dibeke:2 weeks,1 kgwedi:1 month,3 digkwedi:3 months,6 dikgwedi:6 months,1 ngwaga:1 year,ga efele:infinite
+ipblocklist|Bašumiši bao bathibilwego(''blocked'')
+ipblocklist-submit|Fetleka
+emailblock|e-mail e thibilwe
+blocklink|thibela
+unblocklink|tloša thibelo
+change-blocklink|fetola go thiba
+contribslink|diabelo
+blocklogpage|''log'' yago Thiba
+blocklogentry|Thibela [[~{0}]] ka fetšatši ya ~{1} ~{2}
+unblocklogentry|Gago thibelo ~{0}
+block-log-flags-nocreate|Go hloma tšhupaleloko gago dumelege
+block-log-flags-noemail|e-mail e thibilwe
+move-page-legend|Huduša letlakala
+movepagetext|Ge o šomiša fomo ye mo tlase, letlakala le kgale le history ya lona di tla huduga go ya letlakaleng le lemphsa.\nLetlakala la kgale le ba ''redirect'' go ya letlakaleng le lemphsa.\nDihlomaganyo goya letlakaleng la kgale ga di fetolwe; gopola go sekaseka di [[Special:DoubleRedirects\u007C''double'']] goba [[Special:BrokenRedirects\u007C''broken redirects'']].\n\nKe boikarabela ba gago go kgonthišisa gore dihlomaganyo di tšhwela pele go šupa mowe di swanetšego goya.\n\nEla hloko gore letlakala le '''ka se''' hudušwe gaeba go ena letlakala la leina le lemphsa, ntle ga le sa selo goba ele ''redirect'' ebile le sa na histori.\nSe sera gore o ka huduša letlakala morago ge o direle phošo gape o ka se ngwale godimo (''overwrite'') ga letlakala leo le lego gona.\n\n'''TEMOŠO!'''\nSe sekapa le dipheto tšeo di sa letelwago go matlakala atumilego;\nKa kgopelo kgontišiša gore o kwešiša ditla morago tša se, pele o tšwelapele.
+movepagetalktext|Letlakala la dipoledišano lago hlobana le letlakala le le tla hudušwa '''ntle le ge''':\n\n*Ge letlakala la dipoledišano la leina le lemphsa lephela, goba\n*O sa kgetha go le huduša tlase ga letlakala le.\n\nGe go le bjalo,o tla swanela ke go huduša goba go kopanya matlakala ka bowena.
+movearticle|Huduša letlakala:
+newtitle|Goya go taetlile:
+move-watch|Tlhapetša letlakala le
+movepagebtn|Huduša letlakala
+pagemovedsub|Hudugile ka katlego
+movepage-moved|'''"~{0}" e hudušitšwe go "~{1}"'''
+articleexists|Letlakala la goba le leina le legona, goba\nleina leo o le kgethilego ga la dumelega.\nKa kgopelo, kgetha leina le lengwe.
+movetalk|Huduša letlakala la dipoledišano la go hlobana le letlakala le
+movelogpage|''log'' yago huduša
+movereason|Lebaka:
+revertmove|bušetša
+delete_and_move_confirm|E, phumula letlakala le
+export|Matlakala a diyantle
+allmessages|Melaetša ya tlhamego
+allmessagesname|Leina
+allmessagesdefault|Dihlaka tša molaetša tša "default"
+thumbnail_error|Phoso go tlhama ''thumbnail'': ~{0}
+import-comment|Ahlaahla:
+import-revision-count|~{0} {{PLURAL:~{0}\u007Cpoeletšo\u007Cdipoeletšo}}
+importlogpage|''Log'' yago lokela
+import-logentry-upload-detail|~{0} {{PLURAL:~{0}\u007Cpoeletšo\u007Cdipoeletšo}}
+import-logentry-interwiki-detail|~{0} {{PLURAL:~{0}\u007Cpoeletšo\u007Cdipoeletšo}} gotšwa go ~{1}
+tooltip-pt-userpage|Letlakala (la mošomiši) lago
+tooltip-pt-mytalk|Letlakala la gago la dipolelo
+tooltip-pt-preferences|Dikgetho (''preference'') tša ka
+tooltip-pt-watchlist|Lenano la matlakala ago tlhapetšwa diphetogo ke wena
+tooltip-pt-mycontris|Lenano la diabe tša gago
+tooltip-pt-login|O a kgothatšwa gore o tsene, e efela ga se kgapeletšo.
+tooltip-pt-logout|Etšwa fa/Tswalela/Log out
+tooltip-ca-talk|Poledišano mabapi le letlakala le
+tooltip-ca-edit|O ka fetola letlakala le. Kgopelo ke gore o šumiše konopo ya go Laetša sebopego sa letlakala pele o le boloka.
+tooltip-ca-addsection|Lokela sekgao se seswa
+tooltip-ca-viewsource|Letlakala le le lotilew. O ka lebelela mothopo fela.
+tooltip-ca-history|Lebelela thumeletšo ya go feta ya letlakala le
+tooltip-ca-protect|Lota letlakala le
+tooltip-ca-delete|Phumula letlakala le
+tooltip-ca-move|Huduša letlakala le
+tooltip-ca-watch|Lokela letlakala le go lenano la gago la tlhapetšo
+tooltip-ca-unwatch|Tloša letlakala le go lenano la gago la matlakala a go tlhapetšwa
+tooltip-search|Fetleka  {{SITENAME}}
+tooltip-search-go|Eya go letlakala la leina le, gaeba le le gona
+tooltip-search-fulltext|Fetleka matlakala go hwetša mongwalo wo
+tooltip-p-logo|Etela letlakala-tona
+tooltip-n-mainpage|Etela letlakala la pele
+tooltip-n-mainpage-description|Etela letlakala-tona
+tooltip-n-portal|Mabapi le tirotherwa, seo o ka se dirago, o ka humana dilo kae
+tooltip-n-currentevents|Humana sedi yengwe go ditiragalo tša bjale
+tooltip-n-recentchanges|Lenano la diphetogo tša bjale go wiki.
+tooltip-n-randompage|Laiša letlakala le lengwe le le lengwe
+tooltip-n-help|O tla humana thušo mo.
+tooltip-t-whatlinkshere|Lenano la matlakala ao a hlomaganyago (''link'') mo
+tooltip-t-recentchangeslinked|Diphetogo tša bjale go matlakala a go hlomaganya le letlakala le
+tooltip-feed-rss|RSS feed tša letlakala le
+tooltip-feed-atom|Atom "feed" tša letlakala le
+tooltip-t-contributions|Lebelela lenano la diabe tša mošomiši yo
+tooltip-t-emailuser|Romela molaetša go mošomiši yo
+tooltip-t-upload|Lokela senepe goba difaele
+tooltip-t-specialpages|Lenano la matlakala kamoka a kgethegilego
+tooltip-t-print|Seemo sa letlakala le seo se ka gatišwago
+tooltip-t-permalink|Hlomaganyo go poeletšo ye ya letlakala
+tooltip-ca-nstab-main|Nyakoretša boteng bja letlakala
+tooltip-ca-nstab-user|Lebelela letlakala la mošomiši
+tooltip-ca-nstab-special|Letlakala le le kgethegile, gago kgonege go le fetola
+tooltip-ca-nstab-project|Lebelela letlakala la tirotherwa
+tooltip-ca-nstab-image|Lebelela  letlakala
+tooltip-ca-nstab-template|Lebelela ''template''
+tooltip-ca-nstab-help|Lebelea matlakala a thušo
+tooltip-ca-nstab-category|Lebelela letlakala la sehlopha
+tooltip-minoredit|Swaya se bjalo ka phetogo ye nnyenyane
+tooltip-save|Boloka diphetogo tša gago
+tooltip-preview|E laetša gore diphetogo di tla lebega bjang, e šomiše pele ga ge o boloka letlakala!
+tooltip-diff|Laetša diphetogo tšeo o di dirilego go mongwalo.
+tooltip-compareselectedversions|Bontšha phapano magareng ga di dihlopha tše pedi tša diphetogo tšeo o di kgetilego letlakaleng le.
+tooltip-watch|Lokela letlakala le go lenano la gago la  matlakala ago tlhapetšwa
+tooltip-rollback|Bošetša diphetogo letlakaleng morago go mošumiši wa mafelo
+tooltip-undo|"Undo" e tloša dipheto tše, ya bula letlakala go nyakorela fela. E go dumela go ngawla lebaka go dikakaretšo.
+tooltip-summary|Lokela kakaretšo e kopana
+siteuser|{{SITENAME}} mošumiši ~{0}
+lastmodifiedatby|Letlakala le  fetotšwe la mafelelo ka ~{1}, ~{0} ke ~{2}.
+others|tše dingwe
+siteusers|{{SITENAME}} {{PLURAL:~{1}\u007Cmošumiši\u007Cbašumiši}} ~{0}
+filedeleteerror-short|Phošo go phumuleng faele: ~{0}
+filedeleteerror-long|Diphošo di hlagile ge go phumulwa faele:\n\n~{0}
+filedelete-missing|Faele "~{0}" ga e phumulege ka ge e segona.
+previousdiff|← Dophapano tšago feta
+nextdiff|Diphapano tše dimpšha →
+widthheightpage|~{0} × ~{1}, ~{2} {{PLURAL:~{2}\u007Cletlakala\u007Cmatlakala}}
+file-info-size|~{0} × ~{1} pixel, bogolo ba faele: ~{2}, Mohuta wa MIME: ~{3}
+file-nohires|Gago ''resolution'' ya go feta mo.
+svg-long-desc|SVG faele, nominally ~{0} × ~{1} pixels, bogolo ba faele: ~{2}
+show-big-image|''resolution'' ya gofella
+newimages|''Gallery'' ya difaele tše mpsha
+ilsubmit|Fetleka
+bydate|ka letšatšikgwedi
+bad_image_list|''Format'' e ka mokgwa wo o latelago:\n\nKe fela tšeo dilego lenano (methalo ya go thoma ka *) yeo e dumeletšwego.\nHlomaganyo ya mathomo mothalong e swanetše go hlomaganya le seswantšho sa go senyega.\nDihlomaganyo tše dilatelago mothalong o tee di tšewa bjalo ka maarogi, ka mantšwe a mangwe, matlakala a we seswantšsho se ka bago gona mothalong.
+metadata|Metadata
+metadata-help|Faele enale sedi yengwe, yeo ekabago e tšwa go khamera goba ''scanner'' tšeo di šumišitšwego go bopa faele ye. Sedi ye itsego ga ego goba gona go faele ye e fetolwago.
+metadata-expand|Bontšha sedi ya gotlala(extended)
+metadata-collapse|Fihla sedi ya gotlala(''extended'')
+metadata-fields| metadata ''fields'' tšao dilego go molaetša wo, di tla tsenywa go\nletlakala la seswantšho ge tafola ya metadata e bulwa. Tše dingwe tša di ''fields'' di tla fihliwa.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|Bophara
+exif-imagelength|Botelele
+exif-artist|Mongwadi
+exif-componentsconfiguration-0|Ga e gona
+exif-subjectdistance-value|~{0} metara
+exif-meteringmode-1|Palogare
+namespacesall|ka moka
+monthsall|ka moka
+imgmultipageprev|← letlakala la go feta
+imgmultipagenext|letlakala lago latela →
+table_pager_next|Letlakala la go latela
+table_pager_prev|Letlakala la gofeta
+table_pager_first|Letlakala la pele
+table_pager_last|Letlakala la mafelelo
+table_pager_empty|Ga gona sepheto
+autosumm-new|Tlhodile letlakala ka '~{0}'
+watchlistedit-normal-title|Felotal lenano la ditlhapetšo
+watchlistedit-normal-legend|Tloša dithaetlele go lenano la ditlhapetšo
+watchlistedit-normal-submit|Tloša thaetlele
+watchlisttools-view|Nyakoretša diphetogo tša gona
+watchlisttools-edit|Lebelela lego fetola lenano la ditlhapetšo
+watchlisttools-raw|Fetola lenano le letala (''raw'') la ditlhapetšo
+duplicate-defaultsort|'''Hlokomela:''' Default sort key "~{1}" e tla phumula ya pele default sort key "~{0}".
+version|''Version''
+fileduplicatesearch-submit|Fetleka
+specialpages|Matlakala a kgethegilego
+external_image_whitelist| #Tlogela letlakale ka mokgwa wo<pre>\n#Tsenya  "regular expression fragments" (parata ya magareng ga //) below\n#These will be matched with the URLs of external (hotlinked) images\n#Those that match will be displayed as images, otherwise only a link to the image will be shown\n#Lines beginning with # are treated as comments\n#This is case-insensitive\n\n#Put all regex fragments above this line. Leave this line exactly as it is</pre>
+tag-filter|[[Special:Tags\u007CTag]] "filter":
+expand_templates_output|Phetho
+contactpage-fromname|Leina la gago: *
+contactpage-fromaddress|Email aterese ya gago: **
+']:>
+).lang
+;

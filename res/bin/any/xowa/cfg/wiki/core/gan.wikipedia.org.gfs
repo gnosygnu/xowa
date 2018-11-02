@@ -1,0 +1,48 @@
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+-2|媒体文件
+-1|特殊
+1|谈詑
+2|用户
+3|用戶談詑
+3|用户谈詑
+5|Wikipedia_談詑
+5|Wikipedia談詑
+5|Wikipedia谈詑
+6|Image
+6|文件
+6|檔案
+7|Image_talk
+7|文件谈詑
+7|檔案談詑
+9|MediaWiki談詑
+9|MediaWiki谈詑
+11|模板談詑
+11|模板谈詑
+12|帮助
+13|帮助谈詑
+13|幫助談詑
+14|分类
+15|分类谈詑
+15|分類談詑
+828|模块
+829|模块讨论
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(8).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end

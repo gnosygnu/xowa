@@ -1,0 +1,10 @@
+this
+.messages
+  .load_text(
+<:['
+vector-action-move|Ejigliwsit
+vector-view-create|Etlitoq
+vector-view-view|Egiljet
+']:>
+).lang
+;

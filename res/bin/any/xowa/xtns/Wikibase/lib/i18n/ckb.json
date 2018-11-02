@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Calak"
+		]
+	},
+	"wikibase-entity-item": "بەند",
+	"wikibase-entity-property": "تایبەتمەندی",
+	"wikibase-diffview-reference": "سەرچاوە",
+	"wikibase-diffview-rank": "پلە",
+	"wikibase-error-unexpected": "ھەڵەیەکی چاوەڕوان‌نەکراو ڕووی دا.",
+	"wikibase-error-save-generic": "ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی پاشەکەوتکردندا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت.",
+	"wikibase-error-remove-generic": "ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی سڕینەوەدا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت.",
+	"wikibase-error-save-connection": "ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی پاشەکەوتکردندا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت. تکایە پەیوەندی ئینتەرنێتەکەت تاوتوێ بکە.",
+	"wikibase-error-remove-connection": "ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی سڕینەوەدا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت. تکایە پەیوەندی ئینتەرنێتەکەت تاوتوێ بکە.",
+	"wikibase-error-ui-no-external-page": "وتاری دەستنیشان‌کراو لە پێگەی ئاماژەکراودا نەدۆزرایەوە.",
+	"wikibase-replicationnote": "تکایە ئاگادار بن چەند خولەک دەگرێ ھەتا گۆڕانکارییەکان لە ھەموو ویکییەکاندا دەربکەوێ.",
+	"wikibase-sitelinks-wikipedia": "پەڕە بەسراوەکانی ویکیپیدیا بەم بەندەوە",
+	"wikibase-sitelinks-sitename-columnheading": "زمان",
+	"wikibase-sitelinks-sitename-columnheading-special": "پێگە",
+	"wikibase-sitelinks-siteid-columnheading": "کۆد",
+	"wikibase-sitelinks-link-columnheading": "پەڕەی بەستەردراو",
+	"wikibase-snakview-snaktypeselector-somevalue": "نرخی نەزانراو",
+	"wikibase-snakview-snaktypeselector-novalue": "بێ نرخ",
+	"wikibase-tooltip-error-details": "وردەکارییەکان",
+	"datatypes-type-wikibase-item": "بەند",
+	"wikibase-add-badges": "نیشانەکان زیاد بکە"
+}

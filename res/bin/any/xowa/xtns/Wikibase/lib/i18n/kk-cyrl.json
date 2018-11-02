@@ -1,0 +1,35 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arystanbek"
+		]
+	},
+	"wikibase-entity-item": "элемент",
+	"wikibase-entity-property": "Сипат",
+	"wikibase-entity-query": "сұрау",
+	"wikibase-deletedentity-item": "Жойылған элемент",
+	"wikibase-deletedentity-property": "Жойылған сипат",
+	"wikibase-deletedentity-query": "Жойылған сұрау",
+	"wikibase-diffview-reference": "дереккөз",
+	"wikibase-diffview-rank": "Рет",
+	"wikibase-diffview-qualifier": "көрсеткіш",
+	"wikibase-diffview-label": "деңгей",
+	"wikibase-diffview-alias": "лақаптар",
+	"wikibase-diffview-description": "сипаттамасы",
+	"wikibase-diffview-link": "сілтемелер",
+	"wikibase-error-unexpected": "Күтпеген қате шықты: $1",
+	"wikibase-error-ui-edit-conflict": "Осында өңдеу қақтығысы. Қайта жүктеңіз және қайтадан сақтаңыз.",
+	"wikibase-sitelinks-wikipedia": "Бұл элементке Уикипедия беттері сілтенген",
+	"wikibase-sitelinks-sitename-columnheading": "Тіл",
+	"wikibase-sitelinks-sitename-columnheading-special": "Сайт",
+	"wikibase-sitelinks-siteid-columnheading": "Код",
+	"wikibase-sitelinks-link-columnheading": "Сілтенген бет",
+	"wikibase-snakview-snaktypeselector-somevalue": "белгісіз мән",
+	"wikibase-snakview-snaktypeselector-novalue": "мән жоқ",
+	"wikibase-tooltip-error-details": "Бөлшектер",
+	"wikibase-validator-bad-entity-id": "Көріксіз ID: $1",
+	"wikibase-validator-no-such-entity": "$1 табылмады",
+	"datatypes-type-wikibase-item": "элемент",
+	"datatypes-type-commonsMedia": "Ортаққор медиа файлы",
+	"version-wikibase": "Уикиқор"
+}

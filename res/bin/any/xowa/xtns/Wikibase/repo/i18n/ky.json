@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Growingup",
+			"Викиней"
+		]
+	},
+	"wikibase-save": "сактоо",
+	"wikibase-cancel": "жокко чыгаруу",
+	"wikibase-add": "кошуу",
+	"wikibase-sitelink-site-edit-placeholder": "сайт",
+	"wikibase-remove": "өчүрүү",
+	"wikibase-itembytitle-lookup-site": "Сайт:",
+	"wikibase-itembytitle-lookup-page": "Барак:",
+	"wikibase-itembytitle-submit": "Табуу",
+	"wikibase-itemdisambiguation-lookup-language": "Тил:",
+	"wikibase-itemdisambiguation-submit": "Табуу",
+	"wikibase-newentity-description": "Баяндама:",
+	"wikibase-modifyterm-language": "Тили:",
+	"wikibase-entitieswithoutlabel-label-language": "Тил:",
+	"wikibase-entitieswithoutlabel-submit": "Издөө"
+}

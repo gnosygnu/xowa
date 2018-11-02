@@ -1,0 +1,922 @@
+this
+.fallback_load('de')
+.ns_names
+  .load_text(
+<:['
+1|Dischbedutt
+2|Yuuser
+3|Yuuser Dischbedutt
+5|$1 Dischbedutt
+6|Feil
+7|Feil Dischbedutt
+9|MediaWiki Dischbedutt
+10|Moddel
+11|Moddel Dischbedutt
+12|Hilf
+13|Hilf Dischbedutt
+14|Abdeeling
+15|Abdeeling Dischbedutt
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-2|Medium
+-1|Spezial
+1|Diskussion
+2|Benutzer
+3|Benutzer Diskussion
+5|$1 Diskussion
+6|Datei
+7|Datei Diskussion
+9|MediaWiki Diskussion
+10|Vorlage
+11|Vorlage Diskussion
+12|Hilfe
+13|Hilfe Diskussion
+14|Kategorie
+15|Kategorie Diskussion
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Listadmins|Verwalter~Administratoren
+Listbots|Waddefresser~Bots
+Search|Uffgucke~Suche
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Sunndaag
+monday|Mundaag
+tuesday|Dinschdaag
+wednesday|Mittwoch
+thursday|Dunnerschdaag
+friday|Freidaag
+saturday|Samschdaag
+sun|Su
+mon|Mo
+tue|Di
+wed|Mi
+thu|Du
+fri|Fr
+sat|Sa
+january|Yenner
+february|Hanning
+march|Matz
+april|Abril
+may_long|Moi
+june|Yuni
+july|Yuli
+august|Aagscht
+september|September
+october|Oktower
+november|Nowember
+december|Disember
+january-gen|Yenner
+february-gen|Hanning
+march-gen|Matz
+april-gen|Abril
+may-gen|Moi
+june-gen|Tschuun
+july-gen|Tschulei
+august-gen|Aagscht
+september-gen|September
+october-gen|Oktower
+november-gen|Nowember
+december-gen|Disember
+jan|Yen.
+feb|Han.
+mar|Matz
+apr|Abr.
+may|Moi
+jun|Yuni
+jul|Yuli
+aug|Aug.
+sep|Sep.
+oct|Okt.
+nov|Nov.
+dec|Dis.
+toc|Lischt vum Inhalt
+redirectedfrom|(Weiterleitung vun ~{0})
+allpages|Alle Bledder
+prevpage|Letscht Blatt (~{0})
+nextpage|Neegschtes Blatt (~{0})
+collapsible-collapse|Zuklappe
+collapsible-expand|Uffklappe
+categories|Abdeelinge
+lastmodifiedat|Des Blatt iss letscht gennert am ~{0} um ~{1} Uhr.
+thumbnail-more|greeser mache
+otherlanguages|Annere Schprooche
+blanknamespace|(Bledder)
+pagecategories|{{PLURAL:~{0}\u007CAbdeeling\u007CAbdeelinge}}
+category_header|Bledder in Abdeeling „~{0}“
+subcategories|Unnerabdeeling
+category-media-header|Media in Abdeeling „~{0}“
+category-empty|''Die Abdeeling hot zu daere Zeit kene Bledder oder Feils.''
+category-article-count-limited|{{PLURAL:~{0}\u007CSell Blatt iss\u007CSelle ~{0} Bledder sin}} in daer Abdeeling drin:
+category-file-count-limited|{{PLURAL:~{0}\u007CSell Feil iss\u007CSelle ~{0} Feils sin}} in daer Abdeeling drin:
+categorytree-member-counts|hot {{PLURAL:~{0}\u007C1 Unnerabdeeling\u007C~{0} Unnerabdeelinge}}, {{PLURAL:~{1}\u007C1 Blatt\u007C~{1} Bledder}} unn {{PLURAL:~{2}\u007C1 Feil\u007C~{2} Feils}}
+categorytree-num-categories|~{0} A
+categorytree-num-pages|~{0} B
+categorytree-num-files|~{0} F
+nextn|neegschte {{PLURAL:~{0}\u007C~{0}}}
+prevn|{{PLURAL:~{0}\u007Cletscht\u007Cletscht ~{0}}}
+listingcontinuesabbrev|(weider)
+bold_sample|Wadde fett gmarrickt
+bold_tip|Wadde fett gmarrickt
+link_sample|Gleecher-Titel
+link_tip|Gleecher
+headline_sample|Iwwerschrift
+headline_tip|Iwwerschrift Level 2
+ellipsis|…
+percent|~{0} %
+ago|vor ~{0}
+statistics|Nummere
+statistics-header-pages|Nummere vun Bledder
+statistics-pages|Bledder
+categorytree|Baam vun Abdeelinge
+categorytree-portlet|Abdeelinge
+categorytree-legend|Baam vun de Abdeeling zeige
+categorytree-category|Abdeeling:
+categorytree-go|Baam zeige
+categorytree-parents|Eldere
+categorytree-mode-categories|nur Abdeelinge
+categorytree-mode-pages|Bledder ohne Feils
+categorytree-mode-all|alle Bledder
+categorytree-collapse|zuklappe
+categorytree-expand|uffklappe
+categorytree-num-empty|leer
+categorytree-load|laade
+categorytree-loading|laade…
+categorytree-nothing-found|nix gfunne
+categorytree-no-subcategories|Ken Unnerabdeeling
+categorytree-no-parent-categories|Ken Owwerabdeeling
+categorytree-no-pages|Ken Bledder odder Unnerabdeelinge
+categorytree-not-found|Abdeeling „~{0}“ naett gfunne
+imagemap_description|Iwwer sell Pikder
+proofreadpage_image|Bild
+proofreadpage_nextpage|Neegschtes Blatt
+proofreadpage_prevpage|Letscht Blatt
+proofreadpage_index_listofpages|Lischt vun Bledder
+proofreadpage_pages|~{1} {{PLURAL:~{0}\u007CBlatt\u007CBledder}}
+proofreadpage-group-other|Anneres
+cite_page|Blatt:
+wikieditor-wikitext-tab|Wikitext
+wikieditor-loading|Laade
+wikieditor-preview-tab|Aagucke
+wikieditor-preview-changes-tab|Enneringe
+wikieditor-preview-loading|am laade…
+wikieditor-previewDialog-tab|Aasicht
+wikieditor-previewDialog-loading|am laade…
+wikieditor-publish-dialog-minor|Nur Gleenigkeete sinn gennert
+wikieditor-publish-dialog-watch|Des Blatt watsche
+wikieditor-publish-dialog-goback|Zerrick
+wikieditor-toolbar|Gscharr fer Enneringe
+wikieditor-toolbar-loading|Laade…
+wikieditor-toolbar-tool-bold|Fett
+wikieditor-toolbar-tool-bold-example|Wadde fett gmarrickt
+wikieditor-toolbar-tool-ilink|Gleecher
+wikieditor-toolbar-tool-ilink-example|Gleecher-Titel
+wikieditor-toolbar-tool-xlink|Gewebbgleecher (acht uff http://)
+wikieditor-toolbar-tool-xlink-example|http://www.example.com Gleecher-Text
+wikieditor-toolbar-tool-link|Gleecher
+wikieditor-toolbar-tool-link-ext-target|Gleecher-Adress:
+wikieditor-toolbar-tool-link-insert|Neier Gleecher
+wikieditor-toolbar-tool-link-int-target-status-invalid|Letzer Titel
+wikieditor-toolbar-tool-link-int-target-status-external|Gewebbgleecher
+wikieditor-toolbar-tool-link-int-invalid|Seller Naame vun dem Blatt iss letz.
+wikieditor-toolbar-tool-link-lookslikeinternal-ext|Gewebbgleecher
+wikieditor-toolbar-tool-file-example|Beeschpiel.jpg
+wikieditor-toolbar-tool-reference|Beweisung
+wikieditor-toolbar-tool-heading|Iwwerschrift
+wikieditor-toolbar-tool-heading-example|Iwwerschrift
+wikieditor-toolbar-group-format|Format
+wikieditor-toolbar-tool-redirect|Weiderleiding
+wikieditor-toolbar-tool-big|Gross
+wikieditor-toolbar-tool-small|Glee
+wikieditor-toolbar-tool-small-example|Glee Text
+wikieditor-toolbar-group-insert|Dezu duh
+wikieditor-toolbar-tool-table|Tabell
+wikieditor-toolbar-tool-table-example-header|Iwwerschrift
+wikieditor-toolbar-tool-table-dimensions-columns|Kallems
+wikieditor-toolbar-tool-table-example|Beischpiel
+wikieditor-toolbar-tool-table-preview|Aagucke
+wikieditor-toolbar-tool-replace-search|Uffgucke nooch:
+wikieditor-toolbar-tool-replace-button-findnext|Neegschte finne
+wikieditor-toolbar-tool-replace-close|Zumache
+wikieditor-toolbar-characters-page-ipa|IPA
+wikieditor-toolbar-section-help|Hilf
+wikieditor-toolbar-help-page-link|Gleecher
+wikieditor-toolbar-help-page-heading|Iwwerschrifte
+wikieditor-toolbar-help-page-list|Lischte
+wikieditor-toolbar-help-page-file|Feils
+wikieditor-toolbar-help-page-reference|Beweisunge
+wikieditor-toolbar-help-page-discussion|Dischbedutt
+wikieditor-toolbar-help-content-bold-description|Fett
+wikieditor-toolbar-help-content-ilink-description|Gleecher
+wikieditor-toolbar-help-content-xlink-description|Gewebbgleecher
+wikieditor-toolbar-help-content-heading2-syntax|== Iwwerschrift ==
+wikieditor-toolbar-help-content-heading2-result|<h2>Iwwerschrift</h2>
+wikieditor-toolbar-help-content-heading3-syntax|=== Iwwerschrift ===
+wikieditor-toolbar-help-content-heading3-result|<h3>Iwwerschrift</h3>
+wikieditor-toolbar-help-content-heading4-syntax|==== Iwwerschrift ====
+wikieditor-toolbar-help-content-heading4-result|<h4>Iwwerschrift</h4>
+wikieditor-toolbar-help-content-heading5-syntax|===== Iwwerschrift =====
+wikieditor-toolbar-help-content-heading5-result|<h5>Iwwerschrift</h5>
+wikieditor-toolbar-help-content-reference-description|Beweisung
+wikieditor-toolbar-help-content-signature-description|Unnerschrift
+wm-license-artwork-title|Titel
+wm-license-book-language|Schprooch
+wm-license-book-printer|Drucker
+wm-license-book-title|Titel
+wm-license-book-translator|Iwwersetzer
+wm-license-information-date|Datum
+wm-license-information-author|Schreiwer
+group-flood|Waddefresser
+group-flood-member|{{GENDER:~{0}\u007CYuuser vun em Waddefresser}}
+grouppage-flood|{{ns:project}}:Waddefresser
+group-founder|Grinder
+group-founder-member|{{GENDER:~{0}\u007CGrinder}}
+grouppage-founder|{{ns:project}}:Grinder
+group-Global_bot|Globale Bots
+group-Global_bot-member|{{GENDER:~{0}\u007CGlobaler Waddefresser}}
+group-steward|Stewards
+group-steward-member|{{GENDER:~{0}\u007CSteward}}
+group-sysadmin|System-Verwalter
+group-sysadmin-member|{{GENDER:~{0}\u007CSystem-Verwalter}}
+tog-underline|Gleecher unnerleine:
+tog-hideminor|Gleene Enneringe verschwinne losse
+tog-watchdefault|Vun mir gennerte Ardickele un Feils watsche
+tog-watchmoves|Vun mir gezogene Ardickele un Feils watsche
+tog-watchdeletion|Vun mir verwischte Ardickele un Feils watsche
+tog-watchlisthideown|Mei Ardickele vun mei Watsch-Lischt verschwinne losse
+tog-watchlisthidebots|Enneringe vun Bots vun mei Watsch-Lischt verschwinne losse
+tog-watchlisthideminor|Gleene Enneringe vun mei Watsch-Lischt verschwinne losse
+underline-always|allfart
+underline-never|nie naett
+january-date|~{0}. Yenner
+february-date|~{0}. Hanning
+march-date|~{0}. Matz
+april-date|~{0}. Abril
+may-date|~{0}. Moi
+june-date|~{0}. Tschuun
+july-date|~{0}. Tschulei
+august-date|~{0}. Aagscht
+october-date|~{0}. Oktower
+december-date|~{0}. Disember
+hidden-categories|{{PLURAL:~{0}\u007CVersteckelte Abdeeling\u007CVerstecktelte Abdeelinge}}
+about|Iwwer
+article|Blatt
+newwindow|(in em nei Fenschder)
+cancel|Zerick
+moredotdotdot|Mehner…
+mypage|Mei Blatt
+mytalk|Mei Dischbedutt
+anontalk|Gschwetz-Blatt fer die IP
+navigation|Faahre-Gnepp
+and| unn
+qbfind|Finne
+qbedit|Ennere
+qbpageoptions|Des Blatt
+qbmyoptions|Mei Bledder
+faq|FAQ
+faqpage|Project:FAQ
+namespaces|Blatznaame
+errorpagetitle|Mischteek
+returnto|Zerick zum Blatt ~{0}.
+tagline|Vun {{SITENAME}}
+help|Hilf
+search|Guck uff
+searchbutton|Guck uff
+go|Geh
+searcharticle|Blatt
+history|Gschicht
+history_short|Gschicht
+printableversion|Version zum Drucke
+permalink|Permanent Gleecher
+print|Drucke
+view|Aagucke
+edit|Ennere/Tscheensche
+create|Schtaerte
+editthispage|Des Blatt ennere
+create-this-page|Blatt schtaerte
+delete|Verwische
+deletethispage|Des Blatt verwische
+protect|Schitze
+protect_change|tscheensche
+protectthispage|Des Blatt schitze
+newpage|Neies Blatt
+talkpage|Sell Blatt dischbediere
+talkpagelinktext|Dischbedutt
+specialpage|Besunneres Blatt
+personaltools|Paerseenlich Gscharr
+articlepage|Inhalt vun dem Blatt aagucke
+talk|Dischbedutt
+views|Aasichte
+toolbox|Gscharr
+userpage|Yuuserblatt zeige
+projectpage|Projekt-Blatt aagucke
+imagepage|Feils zeige
+templatepage|Moddle zeige
+categorypage|Abeelingsblatt zeige
+viewtalkpage|Dischbedutt zeige
+redirectpagesub|Weiderleiding
+protectedpage|Blatt mit Schutz
+jumpto|Gang nooch:
+jumptonavigation|Faahre-Gnepp
+jumptosearch|guck uff
+aboutsite|Iwwer {{SITENAME}}
+aboutpage|Project:Iwwer_{{SITENAME}}
+copyright|Was do drin schdeht iss unner ~{0} verfiechbar
+copyrightpage|{{ns:project}}:Urhewerrechte
+disclaimers|Impressum
+disclaimerpage|Project:Impressum
+edithelp|Hilf zum Ennere
+mainpage|Haaptblatt
+mainpage-description|Haaptblatt
+portal|Gmeeschafts-Portal
+portal-url|Project:Gmeeschafts-Portal
+privacy|Daadeschutz
+privacypage|Project:Daadeschutz
+versionrequired|Muss Version ~{0} vun MediaWiki sei
+versionrequiredtext|Muss Version ~{0} vun MediaWiki sei, fer es Blatt zu yuuse.\nGuck aa [[Special:Version\u007CVersionsblatt]]
+ok|OK
+retrievedfrom|Vun „~{0}“
+youhavenewmessages|Du hast ~{0} uff deinem ~{1}.
+youhavenewmessagesmulti|Du hascht neie Comments: ~{0}
+editsection|Ennere
+editold|Ennere
+editlink|ennere
+editsectionhint|Abschnitt ennere: ~{0}
+showtoc|Zeige
+hidetoc|Verschwinne losse
+viewdeleted|~{0} zeige?
+feedlinks|Feed:
+site-rss-feed|RSS-Feed fer ~{0}
+site-atom-feed|Atom-Feed fer ~{0}
+page-rss-feed|RSS-Feed fer „~{0}“
+page-atom-feed|Atom-Feed fer „~{0}“
+red-link-title|~{0} (Blatt gebt es net)
+nstab-main|Blatt
+nstab-user|Yuuser-Blatt
+nstab-media|Media-Blatt
+nstab-special|Besunneres Blatt
+nstab-project|Project-Blatt
+nstab-image|Feil
+nstab-mediawiki|Melding vum System
+nstab-template|Moddel
+nstab-help|Hilf
+nstab-category|Abdeeling
+error|Mischteek
+databaseerror|Fehler in de Daadescheier
+missing-article|Sell Text fer „~{0}“ ~{1} iss in de Daadebank naett gfunne warre.\n\nDes Blatt iss verleicht glescht adder gezoge warre.\n\nWenns des net iss, hoscht verleicht en Fehler in de Daadebank gfunne. Bitte meld des an en [[Special:ListUsers/sysop\u007CVerwalter]] unn gebb die URL dezu aa.
+missingarticle-rev|(Version: ~{0})
+missingarticle-diff|(Unnerschidd zwische Versione: ~{0}, ~{1})
+internalerror|Interner Fehler
+internalerror_info|Interner Fehler: ~{0}
+badtitle|Tidl net gildich
+ns-specialprotected|Besunnere Bledder sinn net zum Ennere.
+virus-unknownscanner|Unbekannter Virus-Uffgucker:
+welcomeuser|Wilkum, ~{0}!
+yourname|Yuuser-Naame:
+userlogin-yourname|Yuusernaame
+yourpassword|Paesswatt:
+userlogin-yourpassword|Paesswatt
+yourpasswordagain|Paesswatt noch eemol:
+yourdomainname|Dei Domain:
+login|Kumm nei
+nav-login-createaccount|Kumm nei
+userlogin|Kumm nei
+userloginnocreate|Kumm nei
+logout|Geh naus
+userlogout|Geh naus
+gotaccountlink|Kumm nei
+createacct-emailrequired|E-Poschd
+createaccountmail|iwwer E-Mail
+createaccountreason|Grund:
+mailmypassword|Paesswatt zerricksetze
+noemail|Yuuser „~{0}“ hot ken E-Mail aagewwe.
+loginlanguagelabel|Schprooch: ~{0}
+pt-login|Nei kumme
+pt-login-button|Nei kumme
+pt-userlogout|Naus geh
+changepassword|Paesswatt ennere
+oldpassword|Aldes Paesswatt:
+newpassword|Neies Paesswatt:
+resetpass_forbidden|Paesswatt iss net zu ennere
+resetpass-submit-loggedin|Paesswatt ennere
+resetpass-submit-cancel|Ausduh
+passwordreset|Paesswatt zerricksetze
+passwordreset-legend|Paesswatt zerricksetze
+passwordreset-username|Yuuser-Naame:
+passwordreset-email|E-Poschd:
+passwordreset-emailelement|Yuusernaame: ~{0}\nPaesswatt fer nau: ~{1}
+changeemail-none|(ken)
+changeemail-submit|E-Poschd ennere
+extlink_sample|http://www.example.com Gleecher-Text
+extlink_tip|Gewebbgleecher (acht uff http://)
+image_sample|Beeschpiel.jpg
+media_sample|Beeschpiel.ogg
+media_tip|Gleecher fer Feil
+minoredit|Nur gleene Enneringe gemacht
+watchthis|Watsch des Blatt
+savearticle|Blatt beilege
+preview|Aagucke
+showdiff|Enneringe zeige
+blockedtitle|Yuuser iss aabunne
+blockednoreason|ken Grund gewwe
+loginreqlink|kumm nei
+newarticle|(Nei)
+note|'''Hieweis:'''
+editing|~{0} ennere
+editingsection|Ennere vun ~{0} (Abschnitt)
+editingcomment|Ennere vun ~{0} (Neier Abschnitt)
+editconflict|Druwwel beim Ennere: ~{0}
+yourdiff|Unnerschidde
+templatesused|{{PLURAL:~{0}\u007CSell Moddel iss\u007CSelle Moddle sinn}} gyuust vun dem Blatt:
+template-protected|(geschitzt)
+template-semiprotected|(geschitzt fer neie Yuuser)
+undo-summary|Enneringe ~{0} vun [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007CDischbedutt]]) losgmacht.
+revisionasof|Version vum ~{1}, ~{2} Uhr
+previousrevision|← letscht Version
+nextrevision|Neiere Version →
+next|Neegschte
+last|Letscht
+page_first|Aafang
+page_last|End
+histfirst|eldescht
+histlast|neieschd
+historysize|({{PLURAL:~{0}\u007C1 Beit\u007C~{0} Beit}})
+historyempty|(leer)
+rev-deleted-comment|(Aamaericking iss weg geduh warre)
+rev-deleted-user|(Yuuser-Naame gelöscht)
+rev-delundel|zeig/verschwinne losse
+rev-showdeleted|zeig
+revdelete-no-file|Sell Feil gebt es net.
+revdelete-show-file-submit|Ya
+revdelete-hide-text|Text vun de Version
+revdelete-radio-same|(net ennere)
+revdelete-radio-set|Verschteckt
+revdelete-radio-unset|Nee
+revdelete-log|Grund:
+pagehist|Gschicht
+revdelete-otherreason|Annere Grind dezu:
+revdelete-reasonotherlist|Annere Grind
+revdelete-edit-reasonlist|Grind fer's Lesche ennere
+revdelete-offender|Schreiwer fun daer Version:
+mergehistory-reason|Grund:
+lineno|Lein ~{0}:
+editundo|losmache
+searchresults|Results vum Uffgucke
+searchresults-title|Results vum Uffgucke fer „~{0}“
+viewprevnext|Zeige (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-new|'''Schtaert des Blatt „[[:~{0}\u007C~{0}]]“ uf dem Wiki.'''
+searchprofile-everything|Abaddiche
+searchprofile-articles-tooltip|Uffgucke in ~{0}
+searchprofile-images-tooltip|Nooch Feils uffgucke
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 Wadd\u007C~{1} Wadde}})
+search-redirect|(Weiderleiding vun „~{0}“)
+search-section|(Abschnitt ~{0})
+search-suggest|Iss „~{0}“ gemeent?
+search-interwiki-caption|Schweschder Projects
+search-interwiki-default|Results vun ~{0}:
+search-interwiki-more|(weidere)
+searchall|all
+powersearch-ns|Guck uff in Blatznaame:
+powersearch-toggleall|All
+powersearch-togglenone|Ken
+search-external|Guck im Gewebb
+preferences|Paerseenlich Profil
+mypreferences|Uffschtellinge
+skin-preview|Aagucke
+prefs-personal|Yuuser Profile
+prefs-watchlist|Watsch-Lischt
+prefs-watchlist-days|Daage in de Watsch-Lischt:
+prefs-resetpass|Paesswatt ennere
+saveprefs|Uffstellinge beilege
+prefs-editing|Ennere
+columns|Kallems:
+searchresultshead|Guck uff
+recentchangesdays-max|Max. ~{0} {{PLURAL:~{0}\u007CDaag\u007CDaag}}
+timezoneregion-africa|Afrikaa
+timezoneregion-america|Amerikaa
+timezoneregion-asia|Asie
+timezoneregion-australia|Australie
+timezoneregion-europe|Eiropaa
+prefs-namespaces|Blatznaame
+prefs-files|Feils
+prefs-custom-css|CSS vum Yuuser
+prefs-custom-js|JavaScript vum Yuuser
+youremail|E-Poschde:
+username|{{GENDER:~{0}\u007CYuuser-Naame}}:
+prefs-memberingroups|{{GENDER:~{1}\u007CMitglied}} vun de {{PLURAL:~{0}\u007CYuuser-Druppe\u007CYuuser-Druppe}}:
+yourlanguage|Schprooch:
+yourgender|Geschlecht:
+gender-female|Ich bin weiblich
+email|E-Poschde
+prefs-signature|Unnerschrift
+prefs-editor|Schreiwer
+prefs-preview|Aasicht
+prefs-diffs|Unnerschidd vun Versione
+userrights-editusergroup|Mitgliedschaft vun Yuuser ennere
+userrights-groupsmember|Mitglied vun:
+userrights-reason|Grund:
+group|Druppe:
+group-user|Yuuser
+group-bot|Waddefresser
+group-sysop|Verwalter
+group-all|(all)
+group-user-member|{{GENDER:~{0}\u007CYuuser}}
+group-bot-member|{{GENDER:~{0}\u007CWaddefresser}}
+group-sysop-member|{{GENDER:~{0}\u007CVerwalter}}
+grouppage-user|{{ns:project}}:Yuuser
+grouppage-bot|{{ns:project}}:Waddefresser
+grouppage-sysop|{{ns:project}}:Verwalter
+right-read|Bledder lese
+right-edit|Bledder ennere
+right-move|Bledder ziehe
+right-movefile|Feils ziehe
+right-upload|Feils nuffdraage
+right-writeapi|Yuus vun write API
+right-delete|Bledder lesche
+newuserlogpage|Logbuch vun neie Yuuser
+action-read|es Blatt zu lese
+action-edit|des Blatt zu ennere
+action-move|des Blatt zu ziehe
+action-movefile|Des Feil ziehe
+action-upload|Des Feil ufflaade
+action-delete|des Blatt zu verwische
+nchanges|~{0} {{PLURAL:~{0}\u007CEnnering\u007CEnneringe}}
+recentchanges|Was mer letscht geduh henn
+recentchanges-label-minor|Gleene Ennering
+recentchanges-label-bot|Ennering vun em Waddefresser
+recentchanges-legend-newpage|~{0} - neies Blatt
+rcshowhideminor|Gleene Enneringe ~{0}
+rcshowhidebots|Bots ~{0}
+rcshowhideanons|IP-Yuuser ~{0}
+rcshowhidemine|Mei Ardickele ~{0}
+rclinks|Zeig die letscht ~{0} Enneringe vun de letscht ~{1} Daag.<br />~{2}
+diff|Unnerschidd
+hist|Gschicht
+hide|verschwinne losse
+show|zeige
+minoreditletter|g
+newpageletter|N
+boteditletter|W
+rc_categories_any|All
+rc-change-size-new|~{0} {{PLURAL:~{0}\u007CBeit\u007CBeit}} nooch daer Ennering
+newsectionsummary|Neier Abschnitt /* ~{0} */
+recentchangeslinked|Was on verlinkde Bledder geduh warre iss
+recentchangeslinked-page|Blatt:
+upload|Nuffdraage
+uploadbtn|Feil nuffdraage
+uploadlogpage|Feil-Lochbuch
+filename|Feilnaame
+badfilename|Daer Feilnaame iss gennert warre nooch „~{0}“.
+savefile|Feil beilege
+uploaddisabled|Ufflaade verbodde
+uploaddisabledtext|Es Ufflaade vun Feils iss verbodde.
+watchthisupload|Watsch des Blatt
+upload-file-error|Interner Fehler
+upload-http-error|En HTTP-Fehler iss kumme: ~{0}
+backend-fail-backup|Des Feil ~{0} iss net zwettgmacht warre.
+img-auth-nofile|Feil „~{0}“ gebt es net.
+upload_source_file| (e Feil uff deim Waddefresser)
+imgfile|Feil
+listfiles|Lischt vun Feils
+listfiles_date|Datum
+listfiles_name|Naame
+listfiles_user|Yuuser
+listfiles_size|Grees
+listfiles_count|Versione
+file-anchor-link|Feil
+filehist|Versione vun Feils
+filehist-deleteall|All Versione lösche
+filehist-deleteone|Sell Version verwische
+filehist-revert|zerick
+filehist-datetime|Version vum
+filehist-thumb|Glee Pikder
+filehist-user|Yuuser
+filehist-dimensions|Grees
+filehist-filesize|Grees vum Feil
+filehist-comment|Aamaericking
+imagelinks|Yuus vun dem Feil
+shared-repo-from|vun ~{0}
+filerevert-comment|Grund:
+filerevert-submit|Zerick
+filedelete|Lösche „~{0}“
+filedelete-comment|Grund:
+filedelete-submit|Verwische
+filedelete-nofile|'''„~{0}“''' gebt es net.
+filedelete-otherreason|Annere Grind dezu:
+filedelete-reason-otherlist|Annerer Gund
+filedelete-edit-reasonlist|Grind fer's Lesche ennere
+download|Runnerlaade
+listredirects|Lischt vun Weiderleidinge
+randompage|Ennich Ardickel
+randomredirect|Random Weiderleiding
+statistics-header-edits|Nummere vun Enneringe
+statistics-header-users|Nummere vun Yuuser
+doubleredirects|Zweefache Weiderleidinge
+double-redirect-fixer|Xqbot
+brokenredirects|Kaputte Weiderleidinge
+brokenredirects-edit|ennere
+brokenredirects-delete|verwische
+withoutinterwiki-submit|Zeig
+nbytes|~{0} {{PLURAL:~{0}\u007CBeit\u007CBeit}}
+ncategories|~{0} {{PLURAL:~{0}\u007CAbdeeling\u007CAbdeelinge}}
+nlinks|{{PLURAL:~{0}\u007C1 Gleecher\u007C~{0} Gleecher}}
+nimagelinks|Gyuust uff ~{0} {{PLURAL:~{0}\u007CBlatt\u007CBledder}}
+ntransclusions|gyuust uff ~{0} {{PLURAL:~{0}\u007CBlatt\u007CBledder}}
+shortpages|Glee Bledder
+longpages|Grosse Bledder
+listusers|Lischt vun Yuuser
+usereditcount|~{0} {{PLURAL:~{0}\u007CEnnering\u007CEnneringe}}
+newpages|Neie Bledder
+newpages-username|Yuuser-Naame:
+ancientpages|Eldere Bledder
+move|Ziehe
+movethispage|Blatt ziehe
+pager-newer-n|{{PLURAL:~{0}\u007Cneegscht\u007Cneegscht ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Cletscht\u007Cletscht ~{0}}}
+specialloguserlabel|Yuuser:
+speciallogtitlelabel|Titel:
+log|Logbicher
+allarticles|Alle Bledder
+allinnamespace|Alle Bledder (Blatznaame: ~{0})
+allpagessubmit|Zeige
+allpages-bad-ns|{{SITENAME}} hot ken Blatznaame „~{0}“.
+linksearch|Gewebbgleecher uffgucke
+linksearch-ns|Blatznaame:
+linksearch-ok|Uffgucke
+listusers-submit|Zeig
+listusers-noresult|Ken Yuuser gfunne.
+activeusers-hidebots|Waddefresser verschwinne losse
+activeusers-hidesysops|Verwalter verschwinne losse
+listgrouprights|Rechte vun Yuuser-Druppe
+listgrouprights-group|Druppe
+listgrouprights-rights|Rechte
+listgrouprights-helppage|Help:Rechte vun Druppe
+listgrouprights-members|(Lischt vun Mitglieder)
+listgrouprights-addgroup|Yuuser zu {{PLURAL:~{1}\u007Cdaer Druppe\u007Cdenne Druppe}} dezu duh: ~{0}
+listgrouprights-addgroup-all|Yuuser zu alle Druppe dezu duh
+emailuser|E-Poschd fer den Yuuser
+defemailsubject|{{SITENAME}} - E-Poschde vun Yuuser „~{0}“
+emailusername|Yuuser-Naame:
+emailfrom|Vun:
+emailto|Fer:
+emailsend|Schicke
+emailsent|E-Poscht naus gschickt
+watchlist|Watsch-Lischt
+mywatchlist|Watsch-Lischt
+watchlistfor2|Vun ~{0} ~{1}
+watch|watsche
+watchthispage|watsch des Blatt
+unwatch|Nimmi watsche
+unwatchthispage|Nimmi watsche
+notanarticle|Ken Blatt
+watchlist-details|{{PLURAL:~{0}\u007C~{0} Blatt\u007C~{0} Bledder}} uff dei Watch-Lischt, ohne Gschwetz-Bledder
+wlshowlast|Zeig die Enneringe vun de letscht ~{0} Schtund, ~{1} Daag odder .
+watching|Watsche…
+unwatching|Nimmi watsche...
+enotif_impersonal_salutation|{{SITENAME}}-Yuuser
+changed|gennert
+deletepage|Blatt lesche
+delete-confirm|Lesche vun „~{0}“
+delete-legend|Verwische
+deletedtext|"~{0}" iss gelescht warre.\nGuck ~{1} fer e Lischt vun de letscht Leschunge.
+dellogpage|Lischt vun gelöschte Bledder
+deletecomment|Grund:
+deleteotherreason|Annre Grind:
+deletereasonotherlist|Annerer Grund
+delete-edit-reasonlist|Grind fer's Lesche ennere
+prot_1movedto2|hot „[[~{0}]]“ nooch „[[~{1}]]“ gezoge
+protectcomment|Grund:
+protect-default|All Yuuser
+protect-level-sysop|Nur Verwalter
+protect-expiring|bis ~{1}, ~{2} Uhr (UTC)
+protect-expiry-indefinite|fer immer
+protect-othertime|Annere Zeit:
+protect-othertime-op|annere Zeit
+protect-otherreason|Annerer Grund:
+protect-otherreason-op|Annerer Grund
+protect-expiry-options|1 Schtund:1 hour,1 Daag:1 day,1 Woch:1 week,2 Woche:2 weeks,1 Munet:1 month,3 Munede:3 months,6 Munede:6 months,1 Yaar:1 year,Fer immer:infinite
+minimum-size|Min. Grees
+maximum-size|Max. Grees:
+pagesize|(Beit)
+restriction-edit|Ennere/Tscheensche
+restriction-move|Ziehe
+restriction-create|Schtaerte
+restriction-upload|Ufflaade
+undeleteviewlink|aagucke
+undeletecomment|Grund:
+undelete-search-submit|Guck uff
+undelete-show-file-submit|Ya
+namespace|Blatznaame:
+contributions|Ardickele vum {{GENDER:~{0}\u007CYuuser}}
+contributions-title|Ardickele vun „~{0}“
+mycontris|Mei Ardickele
+contribsub2|Fer {{GENDER:~{2}\u007C~{0}}} (~{1})
+uctop|(ewwerscht)
+month|unn Munet:
+year|bis Yaahr:
+sp-contributions-talk|Dischbedutt
+sp-contributions-search|Guck fer Ardickel
+sp-contributions-username|IP-Adress odder Yuusernaame:
+sp-contributions-submit|Guck uff
+whatlinkshere|Was doher zeigt
+whatlinkshere-page|Blatt:
+isredirect|Weiderleidingsblatt
+isimage|Gleecher fer Feil
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cletscht\u007Cletscht ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cneegschter\u007Cneegschte ~{0}}}
+whatlinkshere-links|← Gleecher
+whatlinkshere-hideredirs|Weiderleidinge ~{0}
+whatlinkshere-hidelinks|Gleecher ~{0}
+whatlinkshere-hideimages|Feil Gleecher ~{0}
+block|Yuuser aabinne
+blockip|Yuuser aabinne
+blockip-legend|Yuuser aabinne
+ipaddressorusername|IP-Adress odder Yuusernaame:
+ipbreason|Grund:
+ipbsubmit|Daen Yuuser aabinne
+ipbother|Annere Zeit (englisch):
+ipboptions|2 Schtund:2 hours,1 Daag:1 day,3 Daag:3 days,1 Woch:1 week,2 Woche:2 weeks,1 Munet:1 month,3 Munede:3 months,6 Monate:6 months,1 Yaar:1 year,Fer immer:infinite
+blocklist-reason|Grund
+ipblocklist-submit|Guck uff
+infiniteblock|fer immer
+blocklink|Aabinne
+contribslink|Ardickele
+move-page|„~{0}“ ziehe
+move-page-legend|Blatt ziehe
+movearticle|Blatt ziehe:
+move-watch|watsch des Blatt
+movepagebtn|Blatt ziehe
+pagemovedsub|Blatt iss gezoge warre
+movepage-moved|'''Es Blatt „~{0}“ iss gezoge warre uff „~{1}“'''
+movereason|Grund:
+revertmove|zerick ziehe
+delete_and_move_confirm|Ya, es Blatt lösche
+export|Bledder exportiere
+export-addcat|Dezu duh
+export-addns|Dezu duh
+export-download|As XML-Feil annelege
+allmessagesname|Naame
+allmessages-filter-unmodified|Net gennert
+allmessages-filter-all|All
+allmessages-filter-modified|Gennert
+allmessages-language|Schprooch:
+allmessages-filter-submit|Los
+import-upload-filename|Feilnaame:
+import-comment|Aamaerricking:
+import-revision-count|– {{PLURAL:~{0}\u007C1 Version\u007C~{0} Versione}}
+import-logentry-upload-detail|~{0} {{PLURAL:~{0}\u007CVersion\u007CVersione}}
+import-logentry-interwiki-detail|~{0} {{PLURAL:~{0}\u007CVersion\u007CVersione}} vun ~{1}
+tooltip-pt-userpage|Dei Yuuser-Blatt
+tooltip-pt-mytalk|Dei Gschwetz-Blatt
+tooltip-pt-preferences|Mei Uffschtelling
+tooltip-pt-mycontris|Lischt vun deine Ardickel
+tooltip-pt-login|Du kannscht Dich aamelde, awwer du muschts net
+tooltip-pt-logout|Geh naus
+tooltip-ca-talk|Iwwer sell Blatt dischbediere
+tooltip-ca-edit|Du kannscht des Blatt ennere. Bitte brauch de Aaguck-Gnopp vor em Speichere.
+tooltip-ca-history|Ledschde Versione vun dem Blattt
+tooltip-ca-protect|Des Blatt schitze
+tooltip-ca-delete|Des Blatt verwische
+tooltip-ca-move|Des Blatt ziehe
+tooltip-search|Guck uff {{SITENAME}}
+tooltip-search-go|Geh zu dem Blatt mit genaa dem Naame, wenns es gebbt.
+tooltip-search-fulltext|Guck nooch Bledder mit denne Wadde
+tooltip-p-logo|Haaptblatt
+tooltip-n-mainpage|Zum Haaptblatt geh
+tooltip-n-mainpage-description|Haaptblatt bsuche
+tooltip-n-portal|Iwwers Projekt, was de duhn kannscht, wo de ebbes finnscht
+tooltip-n-recentchanges|D Lischt vun de letschte Enneringe in dem Wiki
+tooltip-n-randompage|Ennich Ardickel
+tooltip-n-help|Hilf-Blatt zeige
+tooltip-t-whatlinkshere|Lischt vun all die Bledder, wu do her zeige
+tooltip-t-recentchangeslinked|Letschte Enneringe in Bledder, wu vun do verlinkt sinn
+tooltip-feed-rss|RSS-Feed fer des Blatt
+tooltip-feed-atom|Atom-Feed fer des Blatt
+tooltip-t-contributions|Lischt von Ardickele vun dem Yuuser zeige
+tooltip-t-emailuser|Dem Yuuser e E-Poschd schicke
+tooltip-t-upload|Feils nuffdraage
+tooltip-t-specialpages|Lischt vun alle besunnere Bledder
+tooltip-t-print|Des Blatt fer zum Drucke
+tooltip-t-permalink|En permanent Gleecher zu derre Version vun dem Blatt
+tooltip-ca-nstab-main|Inhalt vun dem Blatt aagucke
+tooltip-ca-nstab-user|Yuuserblatt zeige
+tooltip-ca-nstab-special|Sell iss en besunneres Blatt. Du kannscht es Blatt net ennere.
+tooltip-ca-nstab-image|Feil zeige
+tooltip-ca-nstab-template|Moddel aagucke
+tooltip-save|Enneringe beilege
+siteuser|{{SITENAME}}-Yuuser ~{0}
+others|annere
+siteusers|{{SITENAME}}-{{PLURAL:~{1}\u007CYuuser\u007CYuuser}} ~{0}
+pageinfo-header-edits|Enneringe
+nextdiff|Zum neegschte Versionsunnerschidd →
+widthheightpage|~{0} × ~{1}, {{PLURAL:~{2}\u007C1 Blatt\u007C~{2} Bledder}}
+file-info-size|~{0} × ~{1} Pixel, Daadegrees: ~{2}, MIME-Typ: ~{3}
+noimages|Keene Feils gfunne.
+ilsubmit|Guck uff
+seconds|{{PLURAL:~{0}\u007C~{0} Sekund\u007C~{0} Sekunde}}
+minutes|{{PLURAL:~{0}\u007C~{0} Minudd\u007C~{0} Minudde}}
+hours|{{PLURAL:~{0}\u007Cee Schtund\u007C~{0} Schtunde}}
+days|{{PLURAL:~{0}\u007Ceen Daag\u007C~{0} Daag}}
+metadata|Metadaade
+exif-imagelength|Leng
+exif-software|Geyuust Software
+exif-usercomment|Anmaerrickinge vun Yuuser
+exif-gpsaltitude|Heech
+exif-writer|Schreiwer
+exif-languagecode|Schprooch
+exif-subjectdistance-value|~{0} Meter
+exif-meteringmode-255|Naett bekannt
+exif-gaincontrol-0|Ken
+exif-iimcategory-sci|Wisseschaft unn Waerkzeichheet‎
+namespacesall|all
+monthsall|all
+scarytranscludetoolong|[URL iss zu lang]
+confirm_purge_button|OK
+confirm-watch-button|OK
+confirm-unwatch-button|OK
+imgmultipageprev|← letscht Blatt
+imgmultipagenext|neegschtes Blatt →
+imgmultigo|OK
+imgmultigoto|Geh zu Blatt ~{0}
+ascending_abbrev|uff
+descending_abbrev|ab
+table_pager_next|Neegschtes Blatt
+table_pager_prev|Letscht Blatt
+table_pager_first|Erschtes Blatt
+table_pager_last|Letscht Blatt
+table_pager_limit_submit|Geh los
+autosumm-blank|Des Blatt iss leer gmacht worre.
+autosumm-new|Des Blatt is gschtaert warre: „~{0}“
+watchlistedit-normal-title|Watsch-Lischt ennere
+version|Version
+version-specialpages|Besunnere Bledder
+version-other|Anneres
+version-mediahandlers|Media-Haendlers
+version-version|(~{0})
+version-poweredby-others|annere
+version-software-version|Version
+fileduplicatesearch-filename|Feilnaame:
+fileduplicatesearch-submit|Uffgucke
+specialpages|Besunnere Bledder
+specialpages-group-other|Annere besunnere Bledder
+specialpages-group-login|Kumm nei
+specialpages-group-users|Yuuser unn Rechte
+specialpages-group-pages|Lischde vun Bledder
+specialpages-group-pagetools|Gscharr fer Bledder
+specialpages-group-redirects|Besunnere Bledder wu weiderleide
+specialpages-group-spam|Spam-Gscharr
+blankpage|Leeres Blatt
+tags-edit|ennere
+tags-hitcount|~{0} {{PLURAL:~{0}\u007CEnnering\u007CEnneringe}}
+compare-page1|Blatt 1
+compare-page2|Blatt 2
+htmlform-reset|Enneringe losmache
+htmlform-selectorother-other|Annere
+rightsnone|(ken)
+feedback-message|Melding:
+searchsuggest-search|Uffgucke
+expand_templates_output|Result
+expand_templates_ok|OK
+expand_templates_remove_comments|Anmaerrickinge lösche
+expand_templates_preview|Aagucke
+contactpage-subject-and-sender|~{0} (vun ~{1})
+contactpage-fromname|Dei Naame: *
+contactpage-fromaddress|Dei E-Poschd: **
+']:>
+).lang
+;

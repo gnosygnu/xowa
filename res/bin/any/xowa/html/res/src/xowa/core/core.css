@@ -1,0 +1,87 @@
+/* anchor colors (per Schnark) */
+/*#content a:link, NOTE:removing else TOC and other banner links are blue instead of white; PAGE:en.v:Stonehenge DATE:2016-01-29*/ 
+#content a:visited {color: #0645ad;}
+#content a.xowa-visited {color: #0b0080;}
+#content a.new {color: #ba0000;}
+
+/* suppress tooltips on German Wikipedia main page (per Schnark) */
+a.xowa_display_none,li.xowa_display_none span {display:none;}
+
+.xowa_anchor_button {
+  /* button shading */
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  padding: 1px 0px 1px 0px;
+
+  /* text */
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333 !important;
+  
+  /* rect */
+  display:inline-block;
+  width:100%;
+  text-align: center;
+}
+.xowa_media_play {
+  /* inherit:xowa_anchor_button */
+  /* button shading */
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  padding: 1px 0px 1px 0px;
+
+  /* text */
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333 !important;
+  
+  /* rect */
+  display:inline-block;
+  width:100%;
+  text-align: center;
+
+  /*image*/  
+  background-image: url(img/play.png);
+  background-position: center; 
+  background-repeat:no-repeat;  
+  margin:0 auto; /* centers img */
+  height: 22px;
+}
+.xowa_media_info {
+  background-image: url(img/info.png);
+  background-repeat:no-repeat;
+  margin:0 auto; /* centers img */
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+/* MediaWiki search box */
+div#simpleSearch input {
+  position: absolute;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+}
+div#simpleSearch #searchButton,
+div#simpleSearch #mw-searchButton {
+  width: 10%;
+  height: 100%;
+  cursor: pointer;
+  text-indent: 200%;
+  overflow: hidden;
+  background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMyI+Cgk8ZyBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZT0iIzZjNmM2YyIgZmlsbD0ibm9uZSI+CgkJPHBhdGggZD0ibTExLjI5IDExLjcxLTQtNCIvPgoJCTxjaXJjbGUgY3g9IjUiIGN5PSI1IiByPSI0Ii8+Cgk8L2c+Cjwvc3ZnPgo=");    
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Wikidata badges */
+.badge-goodarticle{list-style-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAANBAMAAACJLlk1AAAAAXNSR0IArs4c6QAAACFQTFRFAAAAbGxsbm5ucXFxc3Nzd3d3enp6e3t7fX19f39/iYmJftgPsQAAAAF0Uk5TAEDm2GYAAAAwSURBVAhbY2DACSaASQEQwSoKJFoEBVUaGJgFBYWBHEVBAyBpCCaFkoCKuAoYqhgAamoEibSxbiMAAAAASUVORK5CYII=);list-style-image:url("bits.wikimedia.org/static-1.25wmf1/extensions/Wikidata/extensions/WikimediaBadges/resources/skins/vector/../../images/badge-silver-star.png")!ie}
+.badge-featuredarticle{list-style-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAANBAMAAACJLlk1AAAAJFBMVEX8/vz8wjT8viT83pT8ylT88tz80mz8xkT82oT84pz8xjz81nwKqN0kAAAAAXRSTlMAQObYZgAAADFJREFUCNdjYMAJJoBJBRDBpgYkTJSURAwY2JWUtIAcIaUFQLIITCpuBCpibWBoZQAAfGEGEiyyYyMAAAAASUVORK5CYII=);list-style-image:url("bits.wikimedia.org/static-1.25wmf1/extensions/Wikidata/extensions/WikimediaBadges/resources/skins/vector/../../images/badge-golden-star.png")!ie}
+.badge-none{list-style:none;}

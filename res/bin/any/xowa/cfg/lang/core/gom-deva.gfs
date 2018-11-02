@@ -1,0 +1,14 @@
+this
+.messages
+  .load_text(
+<:['
+wikibase-edit|संस्करण
+wikibase-add|जोड
+wikibase-description-empty|आतां मेरेन खंयचेंच वर्णन दिवूंक ना
+wikibase-statements|विधानां
+wikibase-sitelinks-special|हेर वेबसायट
+wikibase-statementview-rank-normal|सामान्य क्रम
+wikibase-statementview-referencesheading-pendingcountersubject|{{PLURAL:~{0}\u007Cसंदर्भ\u007Cसंदर्भ}}
+']:>
+).lang
+;

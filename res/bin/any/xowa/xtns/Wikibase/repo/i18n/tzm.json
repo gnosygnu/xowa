@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tifinaghes"
+		]
+	},
+	"wikibase-save": "ⵣⵎⵎⴻⵎ",
+	"wikibase-cancel": "ⵓⴽⵓⵙ",
+	"wikibase-add": "ⵔⵏⵉ",
+	"wikibase-remove-inprogress": "ⵓⴽⵓⵙ...",
+	"wikibase-sitelink-site-edit-placeholder": "ⴰⵣⴷⴰⵢ",
+	"wikibase-sitelink-page-edit-placeholder": "ⴰⵎⴳⵔⴰⴷ",
+	"wikibase-entitieswithoutlabel-label-language": "ⵜⵓⵜⵍⴰⵢⵜ:",
+	"wikibase-entitieswithoutlabel-submit": "ⴰⴼ"
+}

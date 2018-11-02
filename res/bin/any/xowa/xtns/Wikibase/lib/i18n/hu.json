@@ -1,0 +1,35 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tgr",
+			"JulesWinnfield-hu",
+			"Tacsipacsi"
+		]
+	},
+	"wikibase-lib-desc": "A Wikibase és a Wikibase kliens kiterjesztések közös funkcióit tartalmazza",
+	"wikibase-entity-item": "tétel",
+	"wikibase-entity-property": "tulajdonság",
+	"wikibase-entity-query": "lekérdezés",
+	"wikibase-error-save-generic": "Hiba lépett fel a mentés közben, ezért a változtatásaidat nem sikerült átvezetni.",
+	"wikibase-error-remove-generic": "Hiba lépett fel a törlés közben, ezért a változtatásaidat nem sikerült befejezni.",
+	"wikibase-error-save-connection": "Kapcsolódási hiba lépett fel a mentés közben, ezért a változtatásaidat nem sikerült befejezni. Ellenőrizd az internetkapcsolatodat.",
+	"wikibase-error-remove-connection": "Kapcsolódási hiba lépett fel a törlés közben, ezért a változtatásaidat nem sikerült befejezni. Ellenőrizd az internetkapcsolatodat.",
+	"wikibase-error-save-timeout": "Műszaki problémáink vannak, ezért a mentést nem sikerült befejezni.",
+	"wikibase-error-remove-timeout": "Műszaki problémáink vannak, ezért a törlést nem sikerült befejezni.",
+	"wikibase-error-autocomplete-connection": "Nem sikerült lekérdezni a oldal-API-t. Kérlek, próbálkozz újra később.",
+	"wikibase-error-autocomplete-response": "A szerver válasza: $1",
+	"wikibase-error-ui-client-error": "Nem sikerült kapcsolódni a kliens laphoz. Kérlek, próbáld meg újra később.",
+	"wikibase-error-ui-no-external-page": "A megadott cikk nem található a megadott wikin.",
+	"wikibase-error-ui-cant-edit": "Nem hajthatod végre ezt a műveletet.",
+	"wikibase-error-ui-no-permissions": "Nem vagy jogosult a művelet végrehajtására.",
+	"wikibase-error-ui-link-exists": "Nem kapcsolhatod a fogalmat ehhez a laphoz, mert egy másik fogalom már hozzá van kapcsolva.",
+	"wikibase-error-ui-session-failure": "Lejárt a munkameneted. Kérlek, jelentkezz be újra.",
+	"wikibase-error-ui-edit-conflict": "Szerkesztési ütközés történt. Kérlek, töltsd újra a lapot, és mentsd el újra.",
+	"wikibase-sitelinks-wikipedia": "Kapcsolt Wikipédia-lapok",
+	"wikibase-sitelinks-sitename-columnheading": "Nyelv",
+	"wikibase-sitelinks-siteid-columnheading": "Kód",
+	"wikibase-sitelinks-link-columnheading": "Kapcsolt oldal",
+	"wikibase-tooltip-error-details": "Részletek",
+	"datatypes-type-wikibase-item": "Tétel",
+	"datatypes-type-commonsMedia": "Commons médiafájl"
+}

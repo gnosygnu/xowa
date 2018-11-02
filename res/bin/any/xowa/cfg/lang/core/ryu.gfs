@@ -1,0 +1,9 @@
+this
+.messages
+  .load_text(
+<:['
+vector-view-edit|直すん
+vector-view-view|読むん
+']:>
+).lang
+;

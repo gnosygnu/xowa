@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Menachem.Moreira"
+		]
+	},
+	"wikibase-sitelink-page-edit-placeholder": "pajina",
+	"wikibase-itembytitle-lookup-page": "Pajina:",
+	"wikibase-itembytitle-submit": "Bushkar",
+	"wikibase-itemdisambiguation-lookup-language": "Lengua:",
+	"wikibase-itemdisambiguation-submit": "Bushkar",
+	"wikibase-newentity-submit": "Krear",
+	"wikibase-modifyterm-language": "Lengua:",
+	"wikibase-entitieswithoutlabel-label-language": "Lengua:",
+	"wikibase-entitieswithoutlabel-label-alltypes": "todos",
+	"wikibase-listdatatypes-url-head": "URL"
+}

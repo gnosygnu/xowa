@@ -1,0 +1,59 @@
+<div id='xo_msg_box' style='width:100%; color:red'>
+</div>
+<!--
+<table class="metadata plainlinks ambox ambox-delete" style="">
+  <tr>
+    <td class="mbox-empty-cell">
+    </td>
+    <td class="mbox-text" style="">
+<span class="mbox-text-span">
+WARNING: THIS PAGE IS ONLY FOR DEVELOPER USE.<br/>
+</span>
+    </td>
+  </tr>
+</table>
+
+<div id='cur_help_div' class='xohelp_div'>
+  <div id='cur_help_msg' class='xohelp_msg'>
+    <b>Info</b>
+    <div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Domain</b>: Domain of the wiki. Also supports <code>[xowa.app]</code> and <code>[file]</code></span></div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Db</b>: Database. Currently, only <code>core</code> or <code>user</code>. Can use path if <code>[file]</code></span></div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>SQL</b>: SQL to run</span></div>
+      <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Results</b>: Results of SQL</div>
+    For more info, see <a href='/site/home/wiki/App/Personal_wikis/New_wiki'>the new wiki help page</a>
+    </div>    
+    <b>Buttons</b>
+    <div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_list_save'>&nbsp;</span><span class='xohelp_row_text'>Creates the wiki</span></div>
+    </div>
+  </div>
+</div>
+-->
+<div class='main_body' id='main_body'>
+  <div class='xotbl_head_row'>
+    <div class='xotbl_head_text cur_head_text'>
+      Run SQL
+    </div>
+    <a class='xoimg_btn_x24 xoimg_media_play' title='save changes' href='javascript:void(0)' accesskey='r'
+       onclick='xo.sql_exec.run_sql();'>&nbsp;</a>
+    <!-- <a class='xoimg_btn_x24 xoimg_help_tip' title='view help' href='javascript:void(0)' onclick='return xo.help.toggle("cur")'>&nbsp;</a> -->
+  </div>
+  <div class="xotbl_data_row cur_data_row">
+    <label>Domain</label>
+    <input id='domain_box' type='text' value='{{domain}}' class='cur_data_input' placeholder='Enter a domain (For example: wiki.me.org)'></input>
+  </div>
+  <div class="xotbl_data_row cur_data_row">
+    <label>DB</label>
+    <input id='db_box' type='text' value='{{db}}' class='cur_data_input' placeholder='Enter a db (For example: core)'></input>
+  </div>
+  <div class="xotbl_data_row cur_data_row" >
+    <label>SQL</label>
+    <textarea id='sql_box' class='cur_data_input' accesskey='d' placeholder='Enter SQL (For example: SELECT * FROM xowa_cfg).'>SELECT * FROM xowa_cfg;</textarea>
+  </div>
+  <div class="xotbl_data_row cur_data_row">
+    <label>Results</label>
+    <pre id='results_div' class='cur_data_input'>waiting
+    </pre>
+  </div>
+</div>

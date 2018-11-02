@@ -1,0 +1,32 @@
+.xo-popup-div { /* suppress attributes from mw-body; note that these attributes appear b/c xo-popup-div-id uses in order to preserve the same font */
+  border-top: none; /* remove top border else two blue lines */
+  padding: 0px; /* remove padding else extra space at bottom */
+}
+.xowa_popup {
+  position: fixed;
+  z-index: 1000;
+  padding: 5px;
+  border: 1px solid black;
+  background-color: #111 !important; /*should match background in C:\xowa\bin\any\xowa\html\css\nightmode\xowa_night.css*/
+  max-width: 500px;
+  overflow: auto;
+  box-shadow:10px 10px 5px #333;
+}
+.data_itm {
+  display: inline;
+  list-style-type: none;
+}
+.data_key {
+  font-size:small;
+  font-weight:bold;
+  width:50;
+  margin-right:2px;
+  font-variant:small-caps;
+}
+.data_val {
+  font-size:small;
+  margin-right:2px;
+}
+.next_sect {
+  color:gray
+}

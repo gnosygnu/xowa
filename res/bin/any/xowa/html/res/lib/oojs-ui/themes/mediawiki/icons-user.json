@@ -1,0 +1,39 @@
+{
+	"selectorWithoutVariant": ".oo-ui-icon-{name}",
+	"selectorWithVariant": ".oo-ui-image-{variant}.oo-ui-icon-{name}",
+	"intro": "@import '../../../../src/styles/common';",
+	"variants": {
+		"invert": {
+			"color": "#fff",
+			"global": true
+		},
+		"progressive": {
+			"color": "#36c",
+			"global": true
+		},
+		"constructive": {
+			"color": "#36c"
+		},
+		"destructive": {
+			"color": "#d33"
+		},
+		"warning": {
+			"color": "#ff5d00"
+		}
+	},
+	"images": {
+		"userActive": { "file": {
+			"ltr": "images/icons/userActive-ltr.svg",
+			"rtl": "images/icons/userActive-rtl.svg"
+		} },
+		"userAvatar": { "file": "images/icons/userAvatar.svg" },
+		"userInactive": { "file": {
+			"ltr": "images/icons/userInactive-ltr.svg",
+			"rtl": "images/icons/userInactive-rtl.svg"
+		} },
+		"userTalk": { "file": {
+			"ltr": "images/icons/userTalk-ltr.svg",
+			"rtl": "images/icons/userTalk-rtl.svg"
+		} }
+	}
+}

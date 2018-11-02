@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar",
+			"Dbc334"
+		]
+	},
+	"wikibase-entity-item": "predmet",
+	"wikibase-entity-property": "lastnost",
+	"wikibase-entity-query": "poizvedba",
+	"wikibase-deletedentity-item": "izbrisan predmet",
+	"wikibase-deletedentity-property": "izbrisana lastnost",
+	"wikibase-deletedentity-query": "izbrisana poizvedba",
+	"wikibase-diffview-reference": "sklic",
+	"wikibase-diffview-rank": "mesto",
+	"wikibase-diffview-qualifier": "označevalnik",
+	"wikibase-diffview-label": "oznaka",
+	"wikibase-diffview-alias": "druga imena",
+	"wikibase-diffview-description": "opis",
+	"wikibase-diffview-link": "povezave",
+	"wikibase-error-unexpected": "Napaka: $1.",
+	"wikibase-replicationnote": "Spremembe se bodo na vseh wikijih morda prikazale šele po več minutah.",
+	"wikibase-sitelinks-wikipedia": "Strani Wikipedije, povezane na ta predmet.",
+	"wikibase-sitelinks-sitename-columnheading": "Jezik",
+	"wikibase-sitelinks-sitename-columnheading-special": "Spletišče",
+	"wikibase-sitelinks-siteid-columnheading": "Koda",
+	"wikibase-sitelinks-link-columnheading": "Povezana stran",
+	"wikibase-snakview-snaktypeselector-somevalue": "neznana vrednost",
+	"wikibase-snakview-snaktypeselector-novalue": "brez vrednosti",
+	"wikibase-tooltip-error-details": "Podrobnosti",
+	"wikibase-undeserializable-value": "Vrednost je neveljavna in je ni mogoče prikazati.",
+	"wikibase-validator-bad-type": "$2 namesto $1",
+	"wikibase-validator-malformed-value": "Slabo oblikovan vnos: $1",
+	"wikibase-validator-bad-entity-id": "Slabo oblikovan ID: $1",
+	"wikibase-validator-no-such-entity": "$1 ni mogoče najti",
+	"wikibase-validator-no-such-property": "Lastnosti $1 ni mogoče najti",
+	"wikibase-validator-not-allowed": "Nedovoljena vrednost: $1",
+	"datatypes-type-wikibase-item": "Predmet",
+	"datatypes-type-commonsMedia": "Predstavnostna datoteka v Zbirki",
+	"version-wikibase": "Wikibaza"
+}

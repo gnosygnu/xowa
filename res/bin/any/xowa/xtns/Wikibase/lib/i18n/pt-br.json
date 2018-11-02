@@ -1,0 +1,42 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cainamarques",
+			"Jaideraf",
+			"Luckas",
+			"555"
+		]
+	},
+	"wikibase-lib-desc": "Mantém a funcionalidade comum para as extensões Wikibase e Wikibase Client",
+	"wikibase-entity-item": "item",
+	"wikibase-entity-property": "propriedade",
+	"wikibase-entity-query": "consulta",
+	"wikibase-diffview-reference": "referência",
+	"wikibase-diffview-rank": "rank",
+	"wikibase-diffview-qualifier": "qualificador",
+	"wikibase-diffview-description": "descrição",
+	"wikibase-diffview-link": "links",
+	"wikibase-error-unexpected": "Ocorreu um erro inesperado.",
+	"wikibase-error-save-generic": "Ocorreu um erro ao tentar salvar e, por isso, as alterações não puderam ser completadas.",
+	"wikibase-error-remove-generic": "Ocorreu um erro ao tentar remover e, por isso, as alterações não puderam ser completadas.",
+	"wikibase-error-save-connection": "Ocorreu um erro de conexão ao tentar salvar e, por isso, as alterações não puderam ser completadas. Por favor, verifique sua conexão com a Internet.",
+	"wikibase-error-remove-connection": "Ocorreu um erro de conexão ao tentar remover e, por isso, as alterações não puderam ser completadas. Por favor, verifique sua conexão com a Internet.",
+	"wikibase-error-save-timeout": "Nós estamos tendo dificuldades técnicas e, por isso, sua ação de \"salvar\" pode não ter sido completada.",
+	"wikibase-error-remove-timeout": "Nós estamos tendo dificuldades técnicas e, por isso, sua ação de \"remover\" pode não ter sido completada.",
+	"wikibase-error-autocomplete-connection": "Não foi possível consultar a API do site. Por favor, tente novamente mais tarde.",
+	"wikibase-error-autocomplete-response": "O servidor respondeu: $1",
+	"wikibase-error-ui-client-error": "Falha na conexão para a página do cliente. Por favor, tente novamente mais tarde.",
+	"wikibase-error-ui-no-external-page": "O artigo especificado não pôde ser encontrado no site correspondente.",
+	"wikibase-error-ui-cant-edit": "Você não está autorizado para executar esta ação.",
+	"wikibase-error-ui-no-permissions": "Você não tem privilégios suficientes para executar esta ação.",
+	"wikibase-error-ui-link-exists": "Você não pode vincular a esta página porque outro item já possui link para ele.",
+	"wikibase-error-ui-session-failure": "Sua sessão expirou. Por favor, efetue login novamente.",
+	"wikibase-error-ui-edit-conflict": "Há um conflito de edição. Por favor, recarregue a página e salve novamente.",
+	"wikibase-replicationnote": "Por favor, note que é possível que leve vários minutos até que as mudanças sejam visíveis em todos os wikis",
+	"wikibase-sitelinks-sitename-columnheading": "Idioma",
+	"wikibase-sitelinks-siteid-columnheading": "Código",
+	"wikibase-sitelinks-link-columnheading": "Página ligada",
+	"wikibase-tooltip-error-details": "Detalhes",
+	"datatypes-type-wikibase-item": "Item",
+	"datatypes-type-commonsMedia": "Arquivo de mídia do Commons"
+}

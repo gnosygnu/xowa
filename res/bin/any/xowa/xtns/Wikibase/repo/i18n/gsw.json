@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Als-Holder"
+		]
+	},
+	"wikibase-desc": "Repositorium vu strukturierte Date",
+	"wikibase-edit": "bearbeite",
+	"wikibase-save": "spyychere",
+	"wikibase-cancel": "abbräche",
+	"wikibase-add": "zuefiege",
+	"wikibase-label-edit-placeholder": "Bezeichnig yygee",
+	"wikibase-description-edit-placeholder": "Bschryybig yygee",
+	"wikibase-label-input-help-message": "Gib dr Name fir dää Datesatz in $1 aa.",
+	"wikibase-description-input-help-message": "Gib e churzi Bschryybig in $1 aa.",
+	"wikibase-sitelinks-add": "fieg e Verchnipfig zuen ere {{SITENAME}}-Syte zue",
+	"wikibase-sitelinks-empty": "Bishär sin kei {{SITENAME}}-Syte mit däm Datenelemänt verchnipft.",
+	"wikibase-remove": "uuseneh"
+}

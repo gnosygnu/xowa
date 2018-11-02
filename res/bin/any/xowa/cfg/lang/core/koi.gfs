@@ -1,0 +1,602 @@
+this
+.fallback_load('ru')
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Кресення
+monday|Вильлун
+tuesday|Торник
+wednesday|Шöрлун
+thursday|Четверг
+friday|Пекнича
+saturday|Субöта
+sun|Кс
+mon|Вл
+tue|Вт
+wed|Шл
+thu|Чт
+fri|Пк
+sat|Сб
+january|Январ
+february|Февраль
+march|Март
+april|Апрель
+may_long|Май
+june|Юнь
+july|Юль
+august|Август
+september|Сентяб
+october|Октяб
+november|Нояб
+december|Декаб
+january-gen|январ
+february-gen|февраль
+march-gen|март
+april-gen|апрель
+may-gen|май
+june-gen|юнь
+july-gen|юль
+august-gen|август
+september-gen|сентяб
+october-gen|октяб
+november-gen|нояб
+december-gen|декаб
+jan|янв
+feb|фев
+mar|мар
+apr|апр
+may|май
+jun|юнь
+jul|юль
+aug|авг
+sep|сен
+oct|окт
+nov|ноя
+dec|дек
+toc|Пышкöс
+redirectedfrom|(Вештöм татчö  ~{0} вылiсь)
+allpages|Быдöс листбоккез
+prevpage|Одзжыкся листбок (~{0})
+categories|Категорияэз
+lastmodifiedat|Листбокыс медбöрьяись вильмöтöм ~{0}, ~{1}.
+thumbnail-more|Ыждöтны
+otherlanguages|Мöдiк кыввез вылын
+blanknamespace|(Медколана)
+pagecategories|{{PLURAL:~{0}\u007C1=Категория\u007CКатегория}}
+category_header|"~{0}" категорияын листбоккез
+subcategories|Поснитжык категорияэз
+category-media-header|"~{0}" категорияись файллэз
+category-empty|Этiя категорияын öнi нем абу
+category-subcat-count|{{PLURAL:~{1}\u007CЭтiя категорияын дзир öтiк субкатегория.\u007C{{PLURAL:~{0}\u007CМыччалöма ~{0} субкатегория}}  ~{1}-ись.}}
+category-subcat-count-limited|Этiя категорияын {{PLURAL:~{0}\u007C~{0} субкатегория\u007C~{0} субкатегория\u007C~{0} субкатегория}}
+category-article-count|{{PLURAL:~{1}\u007CЭтiя категорияын дзир öтiк листбок.\u007C{{PLURAL:~{0}\u007CМыччалöма этiя категорияись ~{0} листбок}}  ~{1}-сис.}}
+category-file-count-limited|Этiя категорияын {{PLURAL:~{0}\u007C~{0} файл\u007C~{0} файл\u007C~{0} файл}}.
+nextn|{{PLURAL:~{0}\u007Cодзланься ~{0}}}
+prevn|{{PLURAL:~{0}\u007Cодзжыкся ~{0}}}
+listingcontinuesabbrev|(одзлань)
+bold_sample|Кызкодя гижан
+bold_tip|Кызкодь текст
+italic_sample|Курсивöн гижан
+italic_tip|Курсивöн гижан
+link_sample|Ыстöтлöн юрним
+link_tip|Вики пытшкся ыстöт
+headline_sample|Юрнимлöн текст
+headline_tip|Мöд тшупöта юрним
+hidden-category-category|Сайöвтöм категорияэз
+statistics|Статистика
+statistics-pages|Листбоккез
+wm-license-information-source|Öшмöс
+wm-license-information-date|Дата
+wm-license-information-author|Автор:
+wm-license-information-permission-see-below|Видзöт улöжык
+wm-license-information-other-versions|Мöдiк версияэз
+wm-license-own-work|Аслам удж
+underline-always|Пыр
+underline-never|Некöр
+hidden-categories|{{PLURAL:~{0}\u007C1=Сайöвтöм категория\u007CСайöвтöм категорияэз}}
+about|Сы йылiсь
+article|Гижöт
+newwindow|(виль öшынокын)
+cancel|Керсьыны бöр
+moredotdotdot|Унажык...
+mypage|Менам листбок
+mytalk|Сёрнитанiнö
+navigation|Уялöм
+and| да
+qbfind|Кошшан
+qbbrowse|Мыччавны
+qbedit|Мöдкодьсьöтны
+qbpageoptions|Этiя листбок
+qbmyoptions|Листбоккезö
+faq|Отир сё юасьö
+faqpage|Project:отир сё юасьö
+variants|Варианттэз
+errorpagetitle|Сорасьöм
+returnto|Бертны ~{0}-öдз.
+tagline|Босьтöм {{SITENAME}} вылiсь
+help|Отсöт
+search|Кошшан
+searchbutton|Адззыны
+go|Осьтны
+searcharticle|Осьтны
+history|Чулалöм
+history_short|Чулалöм
+printableversion|Печатайтан версия
+permalink|Пырся ыстöт
+edit|Веськöтны
+create|Лöсьöтны
+editthispage|Мöдкодьсьöтны этiйö листбоксö
+create-this-page|Аркмöтны этiйö листбоксö
+delete|Чышкыны
+deletethispage|Чышкыны этiйö листбоксö
+protect|Дорйыны
+protect_change|мöдкодьсьöтны
+newpage|Виль листбок
+talkpage|Сёрнитны этiя листбок йылiсь
+talkpagelinktext|Сёрнитан
+specialpage|Тодильнöй листбок
+personaltools|Аслат керöтаннэз
+talk|Сёрни
+views|Видзöтöммез
+toolbox|Керöтаннэз
+redirectpagesub|Мöдлаö иньдöтан листбок
+jumpto|Вешшыны татчö:
+jumptonavigation|уялöм
+jumptosearch|кошшан
+aboutsite|{{SITENAME}} йылiсь
+aboutpage|Project:сы йылiсь
+copyright|Быдöс этiйö позьö копируйтны ~{0} сьöртi.
+copyrightpage|{{ns:project}}:Копирайт
+currentevents|Чулалан лоöмторрез
+currentevents-url|Project:Чулалан лоöмторрез
+disclaimers|Мийö сöстöмöсь йöз одзын
+disclaimerpage|Project:Мийö сöстöмöсь йöз одзын
+edithelp|Уджкерись понда отсöт
+mainpage|Пондöтчан листбок
+mainpage-description|Пондöтчан листбок
+privacy|Астор дорьян йылiсь
+privacypage|Project:Астор дорьян йылiсь
+badaccess|Пырикö сорасьöм
+retrievedfrom|Öшмöс "~{0}"
+youhavenewmessages|Тэныт локтiс ~{0} (~{1}).
+youhavenewmessagesmulti|~{0} юкöтын тэ понда мыйкö эм
+editsection|мöдкодьсьöтны
+editold|мöдкодьсьöтны
+viewsourceold|Видзöтны öшмöс
+editlink|мöдкодьсьöтны
+viewsourcelink|видзöтны öшмöс
+editsectionhint|Веськöтны юкöт: ~{0}
+showtoc|мыччавны
+hidetoc|сайöвтны
+site-rss-feed|~{0} RSS-визыв
+site-atom-feed|~{0} Atom-визыв
+page-rss-feed|«~{0}» — RSS-визыв
+page-atom-feed|«~{0}» — Atom-визыв
+red-link-title|~{0} (листбокыс абу на)
+nstab-main|Листбок
+nstab-user|Уджкерисьлöн листбок
+nstab-special|Тодильнöй листбок
+nstab-project|Проект йылiсь
+nstab-image|Серпас
+nstab-template|Шаблон
+nstab-help|Отсасян
+nstab-category|Категория
+error|Сорасьöм
+missing-article|Мыччöт чукöрись эз шед сiя листбок, кöда сэтчин вöлi "~{0}" ~{1} ним увтын. Этадз аркмывлö унажыксö сэк, кöр вешшан бы важмöм ыстöт пыр сэтшöм листбок вылö, кöда вöлi вештöм.  Абу кö сiдз, наттьö программаын мыйкö нетырви керöм. Юöрт жö сы йылiсь миянлö татчö: [[Special:ListUsers/sysop\u007Cadministrator]],  сы дырни эн вунöт пасйыны URL.
+missingarticle-rev|(версия#: ~{0})
+internalerror|Пытшкас сорасьöм
+internalerror_info|Пытшкас сорасьöм: ~{0}
+badtitletext|Кошшана листбок нимыс абу веськыт, тыртöм, либо соралiн кыввезколасся нето интервики ним. А натьтö нимын эмöсь нелэдзан пассэз.
+viewsource|Öшмöс мыччалан
+virus-unknownscanner|тöдтöм антивирус:
+yourname|Уджкерисьлöн пыран ним:
+yourpassword|Пароль:
+yourpasswordagain|Мöдпöвсьöтны пароль
+remembermypassword|Видзны менчим пыран ним этiя компьютер тöдвылын (не дыржык {{PLURAL:~{0}\u007C1= лунся\u007Cлунся}})
+login|Пырны ним увтын
+nav-login-createaccount|Пыран / гижöтчан
+userlogin|Висьтасьны нето гижöтчыны
+userloginnocreate|Пырны ним увтын
+logout|Сайласьны
+userlogout|Петан
+nologinlink|Кер аслыт уджкерисьлiсь ним
+createaccount|Лöсьöт аслыт уджкерисьлiсь ним
+gotaccountlink|Пырны ним увтын
+createaccountmail|Электрон поштаöн
+createaccountreason|Мыля:
+loginerror|Пырöмыт эз аркмы
+loginsuccesstitle|Пырöмыт аркмис
+mailmypassword|Ыстыны виль пароль
+loginlanguagelabel|Кыв: ~{0}
+oldpassword|Важ пароль
+newpassword|Виль пароль
+retypenew|Мöдпöв гиж виль парольтö
+resetpass_forbidden|Парольтö оз позь мöдкодьсьöтны
+resetpass-submit-loggedin|Вежны пароль
+resetpass-submit-cancel|Керсьыны бöр
+extlink_sample|http://www.example.com ыстöтлöн ним
+extlink_tip|Вики сайö ыстöт (эн вунöт содтыны http:// )
+nowiki_sample|Пырт татчö форматируйттöм текст
+nowiki_tip|Игнорируйтны вики-форматируйтöм
+image_tip|Пыртöм файл
+media_tip|Медиа-файл дынö ыстöт
+sig_tip|Тэнат кырымпас да кад пас
+hr_tip|Водса визь (видз сiйö шочыника)
+summary|Мый вежöм:
+subject|Тема/юрним:
+minoredit|Татi невунка мöдкодьсьöтöм
+watchthis|Синмавны этiйö листбок
+savearticle|Вильмöтны листбок
+preview|Одзвыв нёджалан
+showpreview|Мыччавны мый аркмö
+showdiff|Неöткодьсö мыччалöм
+anoneditwarning|'''Тöд''': Сiйöн,  мыля эн висьтась нимтö, этiя листбок историяö гижасö IP-адрестö.
+summary-preview|Дженыта сы йылiсь, мый лоас:
+blockednoreason|абу висьталöм мыля
+loginreqtitle|Колö пырны ним увтын
+loginreqlink|Пырны ним увтын
+accmailtitle|Пароль иньдöтöм
+newarticle|(Виль)
+newarticletext|Ыстöт кузя тэ шедiн листбок вылö,  кöдa абу на. Мед аркмöтны сiйö,  гиж тексттö улiсь öшынöко (унажык  видзöт: [~{0} отсасян листбок]). Шедiн кö татчö сорасьöмöн,  нырышт браузерсит '''бöрлань''' личкöт.
+noarticletext|Öнi этiя листбок вылын текстыс абу. \nНо  [[Special:Search/{{PAGENAME}}\u007Cсы ним]] казьтывсьö мöдiк листбоккез вылын, <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{urlencode:{{FULLPAGENAME}}}}}} кошшыны лöсялана гижöттэз], нето [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} кутчисьны этiя листбок бердö]</span>.
+previewnote|'''Эта дзир одзвыв нёджалан, листбокыт абу на вильмöтöм!'''
+editing|Редактируйтöм ~{0}
+editingsection|~{0} (юкöт) редактируйтöм
+yourtext|Текстыт
+yourdiff|Неöткодьыс
+copyrightwarning|Тöд: текстас быдöс содтöттэз нето мöдкодьсьöтöммез  йöзöтсьöны лэдзöг ~{1} под вылын (видзöт ~{0}). Он ко мöд,  медбы тексттэтö унаöтлiсö нето мöдкодьсьöтлiсö йöзыс,  эн и пукты нiйö татчö.   <br /> Этася тэ кыв сетан миянлö,  ачым пö лоа авторöн пыртан содтöттэзлiсь, нето босьта пö нiйö öшмöсiсь, кöда оз öв пытшкöссö одзлань йöзöтöмись да мöдкодьсьöтöмись.  <br /> '''ЭН ПУКТЫ ЮАСЬТÖГ ТАТЧÖ  АВТОРЛÖ ПОЗЬÖМ СЬÖРТI ДОРЙÖМ МАТЕРИАЛЛЭЗ!'''
+templatesused|Этiя листбок вылiсь {{PLURAL:~{0}\u007C1=шаблон\u007Cшаблоннэз}}:
+templatesusedpreview|Одзвыв нёджалан листбок вылiсь {{PLURAL:~{0}\u007C1=шаблон\u007Cшаблоннэз}}:
+template-protected|(дорйöм)
+template-semiprotected|(мымдакö дорйöм)
+hiddencategories|Этiя листбок пырö ~{0} {{PLURAL:~{0}\u007Cсайöвтöм категория\u007Cсайöвтöм категорияэз\u007Cсайöвтöм категория}} коласö:
+permissionserrorstext-withaction|Тэныт оз позь керны ~{1} то {{PLURAL:~{0}\u007C1=мыля\u007Cмыля}}:
+viewpagelogs|Мыччавны журналлэз этiя листбок понда
+currentrev|Медбöрья версия
+currentrev-asof|Öння версия ~{0}-ись кодь
+revisionasof|Версия № ~{0}
+previousrevision|← Важжык
+nextrevision|Вильжык версия
+currentrevisionlink|Öння версия
+cur|öння
+last|одзза
+page_first|медодзза
+page_last|медбöрья
+histlegend|Вежöртöтаннэз:  '''({{int:cur}})''' – мый неöткодьыс öння версиякöт; '''({{int:last}})''' – мый неöткодьыс одзжыкся версиякöт,  '''({{int:minoreditletter}})''' – невунка вежыштöм.
+history-fieldset-title|Видзöтны история
+histfirst|Медважся
+histlast|Неважся
+historyempty|(прос)
+rev-delundel|мыччавны/сайöвтны
+rev-showdeleted|мыччавны
+revdel-restore|вежны тыдалöм
+mergehistory-reason|Мыля:
+revertmerge|Торйöтны
+history-title|~{0} вильмöтан история
+difference-multipage|Неöткодьыс листбоккез коласын
+lineno|Визёк ~{0}:
+compareselectedversions|Ордчаöтны бöрйöм версияэз
+editundo|керны важмоз
+searchresults|Адззöм то мый:
+searchresults-title|"~{0}" сьöртi адззöм то мый:
+notextmatches|Листбоккез тексттэзын абу öткодь торрез
+viewprevnext|Видзöтны (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchprofile-everything|Быдлаись
+searchprofile-articles-tooltip|Кошшан ~{0}ын
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1=1 кыв\u007C~{1} кыв}})
+search-redirect|(иньдöтöм ~{0} вылiсь)
+search-section|(юкöт № ~{0})
+search-suggest|Поди  колö ~{0}
+search-interwiki-caption|Вачкисян проекттэз
+search-interwiki-default|~{0} результат:
+search-interwiki-more|(унажык)
+searchall|быдöс
+powersearch-legend|Паськытжыка кошшан
+powersearch-ns|Ним чукöррезiсь кошшан:
+powersearch-toggleall|Быдöс
+powersearch-togglenone|Нем
+preferences|Лöсьöтаннэз
+mypreferences|Лöсьöтаннэзö
+timezoneregion-africa|Африка
+timezoneregion-america|Америка
+timezoneregion-antarctica|Антарктика
+timezoneregion-arctic|Арктика
+timezoneregion-asia|Азия
+timezoneregion-atlantic|Атлантика
+timezoneregion-australia|Австралия
+timezoneregion-europe|Европа
+timezoneregion-indian|Индика океан
+timezoneregion-pacific|Лöнь океан
+youremail|Электрон пошта:
+username|Уджкерисьлöн ним:
+yourrealname|Быльнöй нимыт:
+yourlanguage|Кыв:
+yournick|Виль кырымпас:
+badsiglength|Кырымпасыт кузьöв.\nСылö оз туй лоны ~{0} {{PLURAL:~{0}\u007C1=шыпасся\u007Cшыпасся}} кузьжык.
+gender-unknown|Мыччавтöм
+gender-male|Айка
+gender-female|Инька
+prefs-help-email-required|Колö сетны электрон адрестö.
+group-sysop|Веськöтлiссез
+group-all|(быдöс)
+grouppage-sysop|{{ns:project}}:Веськöтлiссез
+newuserlogpage|Уджкерисьö гижöтчан журнал
+rightslog|Уджкерисьлö позяннэз сьöртi журнал
+action-edit|мöдкодьсьöтны этiйö листбоксö
+nchanges|{{PLURAL:~{0}\u007Cвильмöтöм\u007Cвильмöтöм\u007Cвильмöтöм}}
+recentchanges|Медбöрья вильмöтöммез
+recentchanges-legend|Медбöрья вильмöтöммез понда лöсьöтаннэз
+recentchanges-feed-description|Синмавны медбöрья вильмöтöммез этiя вики визылын.
+rclistfrom|Мыччавны вильмöтöмсö  ~{2} ~{1}-сянь
+rcshowhideminor|~{0} невунка мöдкöдьсьöтыштöм
+rcshowhidebots|~{0} бот
+rcshowhideliu|Ас нимöн ~{0} уджкерись
+rcshowhideanons|~{0} нимтöг уджкерись
+rcshowhidemine|аслам ~{0} мöдкодьсьöтöм
+rclinks|Мыччавны  медбöрья ~{0} вильмöтöмсö ~{1} лун дырнаись<br />~{2}
+diff|неöтк.
+hist|чулалöм
+hide|Сайöвтны
+show|Мыччавны
+minoreditletter|невн.
+newpageletter|В
+boteditletter|б
+rc-enhanced-expand|Мыччавны поснитторрез (колö JavaScript)
+rc-enhanced-hide|Сайöвтны поснитторрез
+recentchangeslinked|Йитчана вежöммез
+recentchangeslinked-title|~{0}-кöт йитчан мöдкодьсьöтöммез
+recentchangeslinked-summary|Этiя нимлёдз мыччалö неважся вильмöтöмез листбоккезын, кöдна вылö ыстiсьöны висьталöм листбок (нето висьталöм категорияö пыран листбок) вылiсь. Листбоккез, кöдна  [[Special:Watchlist\u007Cсинмалан нимлёдзат]] '''кызöтöмöсь'''.
+recentchangeslinked-page|Листбоклöн ним:
+recentchangeslinked-to|Мыччавны мöдкодьсьöтöммез листбоккез вылын, кöдна асьныс ыстiсьöны этiя листбок вылö
+upload|Кышавны файл
+uploadlogpage|Тöбалöм сьöртi журнал
+filehist|Файллöн история
+filehist-help|Нырышт дата/кад, мед адззыны, кытшöмöн сэк вöлi файлыс.
+filehist-current|öння
+filehist-datetime|Дата/Кад
+filehist-thumb|Серпас
+filehist-thumbtext|Серпас  ~{0}’ версия понда
+filehist-user|Уджкерись
+filehist-dimensions|Ыжда
+filehist-comment|Пасйöт
+imagelinks|Файл дынö ыстöттэз
+linkstoimage|{{PLURAL:~{0}\u007C1=Сэтшöм листбок\u007C~{0} Сэтшöм листбоккез}} ыстiсьö(ны) этiя файл вылö:
+sharedupload|Этiя файл ~{0}-ись да вермас овны и мöдiк проекттэзын
+uploadnewversion-linktext|Кышавны этiя файллiсь виль версия
+randompage|Виччисьтöг шедöм листбок
+statistics-header-edits|Вильмöтöм йылiсь статистика
+brokenredirects-edit|мöдкодьсьöтны
+brokenredirects-delete|чышкыны
+nbytes|~{0} {{PLURAL:~{0}\u007C1=байт\u007Cбайт}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cобъект\u007Cобъект\u007Cобъект}}
+prefixindex|Листбок ниммезлiсь пондöтчаннэз мыччалан
+shortpages|Дженыт листбоккез
+longpages|Кузь листбоккез
+newpages|Виль листбоккез
+newpages-username|Уджкерись:
+ancientpages|Медваж листбоккез
+move|Вежны ним
+movethispage|Вежны листбокыслiсь ним
+pager-newer-n|{{PLURAL:~{0}\u007C1=вильжык 1\u007Cвильжык ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007C1=важжык 1\u007Cважжык ~{0}}}
+booksources|Небöггез-öшмöссэз
+booksources-search-legend|Небöг йылiсь юöррез кошшан
+log|Журналлэз
+allpagesfrom|Мыччавны листбоккез, кöдна пондöтчöны сiдз:
+allpagesto|Мыччавны листбоккез татшöмöдз:
+allarticles|Быдöс листбоккез
+allpagessubmit|Керны
+linksearch|Вики сайöдз ыстöттэз
+listgrouprights-members|(уджкериссезлöн нимлёдз)
+emailuser|Этiя ужкерисьлö гижöт
+emailfrom|Кинсянь:
+emailto|Кинлö:
+watchlist|Синмаланнэз
+mywatchlist|Синмаланнэзö
+addedwatchtext|«[[:~{0}]]» листбок вöлi содтöм [[Special:Watchlist\u007Cсинмалан нимлёдзат]].\nБыдöс, мый пондас вежсьыны листбок вылас да сыкöт йитчöм сёрнитанын, позяс адзыны этiя нимлёдзись; сiя лоас сiдзжо кызжыка тöдчöтöм [[Special:RecentChanges\u007Cвиль вежсьöммез сьöртi нимлёдзын]], медбы позис кокнитжыка казявны.
+removedwatchtext|Листбок «[[:~{0}]]» вöлi вештöм [[Special:Watchlist\u007Cсинмалан нимлёдзсит]].
+watch|Синмав
+watchthispage|Синмавны этiйö листбок
+unwatch|Оз ков синмавны
+unwatchthispage|Дугдыны синмавны
+watchlist-details|Синмалан нимлёдзат ~{0} {{PLURAL:~{0}\u007Cлистбок\u007Cлистбок\u007Cлистбок}}, сёрнитан листбоккесö лыдö босьттöг.
+wlshowlast|Мыччавны медбöрья ~{0} час ~{1} лун  понда
+watchlist-options|Синмалан нимлёз понда лöсьöтаннэз
+watching|Синмавны …
+unwatching|Дугдыны синмавны …
+deletepage|Чышкыны листбок
+delete-confirm|Чышкыны "~{0}"
+delete-legend|Чышкыны
+confirmdeletetext|Тэ мöдан быдсöн чышкыны листбок (нето серпас) да  сылiсь история. Былись я тэ мöдан сiйö керны,  вежöртан я бура, мыйö этö вермас вайöтны,  и керан я этiйö [[{{MediaWiki:Policy-url}}]] туйдöттэз сьöртi
+actioncomplete|Керсьöм
+deletedtext|«~{0}» чышкöм. Видзöт ~{1}-ись медбöрья чышкöммесö.
+dellogpage|Шупкан чукöр
+deletecomment|Мыля:
+deleteotherreason|Эшö мыля чышкöм:
+deletereasonotherlist|Эшö мыля
+rollbacklink|вежны бöр
+protectlogpage|Дорьян журнал
+protectedarticle|дорйöм "[[~{0}]]"
+modifiedarticleprotection|''[[~{0}]]'' листбоксö дорьян выныс мöдкодьсьöтöм
+protectcomment|Мыля:
+protectexpiry|Помасьö:
+protect_expiry_invalid|Памасян кадыс соралöм
+protect_expiry_old|Помасян кад — чулалöмын.
+protect-text|Татöн тэ верман видзöтны да вежны '''~{0}''' листбок понда дорьян тшупöт.
+protect-locked-access|Уджкерисьлöн нимыт оз тырмы, мед вежны листбокыслiсь дорьян тшупöт.\nÖння лöсьöтаннэз '''~{0}''' листбок понда:
+protect-cascadeon|Этiя листбокыс дорйöм, мыля сiя пыртöм улынжык висьталöм {{PLURAL:~{0}\u007C1=листбокö\u007Cлистбокö}}, кытчö лöсьöтöм каскад нёж дорьян.\nТэ верман вежны этiя листбоклiсь дорьян тшупöт, но каскад нёж дорьян сысянь оз вежсьы.
+protect-default|Дорйытöм
+protect-fallback|Колö мед лэдзис «~{0}»
+protect-level-autoconfirmed|Дорйыны виль да гижöтчытöм уджкериссез шогья
+protect-level-sysop|Дзир веськöтлiссез понда
+protect-summary-cascade|каскад нёж
+protect-expiring|чулалас ~{0} (UTC) кежö
+protect-cascade|Дорйыны листбоккез, кöдна пыртöмöсь этiя листбокö (каскад нёж дорьян)
+protect-cantedit|Тэ он вермы вежны этiя листбоклiсь дорьян тшупöт, мыля тэныт оз позь сiйö мöдкодьсьöтны.
+protect-othertime|Мöдiк кад:
+protect-othertime-op|мöдiк кад
+restriction-type|Позяннэз:
+restriction-level|Падмöтан тшупöт:
+minimum-size|Медпоснит ыжда
+maximum-size|Медгырись ыжда:
+undeletelink|видзöтны/керны важмоз
+undeletecomment|Мыля:
+namespace|Ниммез чукöр:
+invert|Мöдöртны бöрйöмсö
+contributions|Уджкерисьлöн пыртöм пай
+contributions-title|Уджкерись ~{0}-лöн пыртöм пай
+mycontris|Мый ме пыртi
+contribsub2|~{0} (~{1}) пыртöм пай
+uctop|(медбöрья)
+month|Тöлiсь сьöрна (и одзжык):
+year|Во сьöрна (и одзжык):
+sp-contributions-newbies|Мыччавны токö виль уджкериссезöн пыртöм пайез
+sp-contributions-blocklog|падмöтаннэз
+sp-contributions-search|Пыртöм пай кошшан
+sp-contributions-username|IP-адрес нето уджкерисьлöн ним:
+sp-contributions-submit|Кошшыны
+whatlinkshere|Ыстöттэз татчö
+whatlinkshere-title|"~{0}" вылö ыстiсян листбоккез
+whatlinkshere-page|Листбок:
+linkshere|''[[:~{0}]]''' вылö ыстiсьöны эттшöм листбоккез:
+isredirect|мöдлаö иньдöтан листбок
+istemplate|пыртöм
+isimage|серпас вылö ыстiсян
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cодзжыкся\u007Cодзжыкся\u007Cодзжыкся}} ~{0}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cодзланься\u007Cодзланься\u007Cодзланься}} ~{0}
+whatlinkshere-links|← ыстöттэз
+whatlinkshere-hideredirs|мöдлаö иньдöтöммез ~{0}-а
+whatlinkshere-hidetrans|"~{0}"  пыртöм
+whatlinkshere-hidelinks|~{0} ыстöттэз
+whatlinkshere-filters|Сысъяннэз
+blockip|Падмöтны
+ipboptions|2 час:2 hours,1 лун:1 day,3 лун:3 days,1 недель:1 week,2 недель:2 weeks,1 тöлiсь:1 month,3 тöлiсь:3 months,6 тöлiсь:6 months,1 во:1 year, пыр:infinite
+ipblocklist|Падмöтöм IP-адрессэз да уджкериссезлöн ниммез
+blocklink|падмöтны
+unblocklink|вештыны падмöт
+change-blocklink|мöдкодьсьöтны падмöт
+contribslink|пуктöм
+blocklogpage|Падмöтаннэз сьöртi журнал
+blocklogentry|падмöтiс  [[~{0}]]-сö   ~{2} ~{1} -öдз
+unblocklogentry|осьтiс падмöтсö ~{0} вылiсь
+block-log-flags-nocreate|виль уджкерисьöн лоны оз позь
+movepagetext|Кöр улiсь форма сьöртi вежан нимсö листбокыслiсь, öтдырйи вештан мöдлаö и вильмöтöм сьöртi журналсö. Важ ним лоас иньдöтанöн виль ним дынö. Тэ верман автоматическöя вильмöтны нiйо иньдöтаннэсö, кöдна ыстiсö важ ним дынö. Он кö кер сiдз, видзöт жö [[Special:DoubleRedirects\u007Cкыкпöвса]] да [[Special:BrokenRedirects\u007Cорöтöм иньдöтöммесö]]. Тэ ачыт видзан кыв сы понда, медбы ыстöттэз и одзлань вайöтiсö, сэтчö, кытчö колö. Тöд, листбокыслöн нимыс оз вежсьы, кöр виль нима листбокыс эм ни, и сыкоста оз ло мöдлаö иньдöтанöн нето тыртöмöн, и сэтчин абу мöдкодьсьöтöммес . Сiдзкö тэ верман сетны листбокыслö ним, кöда сылöн öнтай вöлi, сорасин кö ним вежико, но тэ он вермы казявтöг чышкыны тыр листбок.\n'''Тöд!'''\nНим вежöмыссянь вермасö лоны ыджыт и виччисьтöм мöдкодьсьöтöммез «йöзлы радейтана» листбоккез вылын.\nБура жö думайт сы вотодз, кыдз пондан мыйко керны, мый вермас этасянь аркмыны.
+movepagetalktext|Сы йылiсь сёрнитан сiдзжö керсяс виль нимаöн аспонадсис. Но кöр:\n* Сэтшöм жö нима пондöтöм листбокыс эм ни, нето\n* Абу сувтöтöмыт улiсьжык ыбкоддьöмо вожок, сэк ковсяс вештыны нето öтлаöтны листбоккесö  кипонiсь.
+movearticle|Вежны листбокыслiсь ним:
+newtitle|Виль ним:
+move-watch|Пыртны этiйö листбоксö синмалöм понда нимлёдзö
+movepagebtn|Вежны листбоклiсь ним
+pagemovedsub|Листбоклöн нимыс вежöм
+movepage-moved|'''Листбоклiсь «~{0}» ним вежöм «~{1}»''' вылö
+articleexists|Сэтшöм нимыс эм ни мöдiк листбоклöн, нето гижан бы непозян ним.\nБорйы кытшöмкö мöд ним.
+movetalk|Вежны ним и сёрнитан листбокыслiсь
+movelogpage|Юрниммез вежöм йылiсь
+movereason|Мыля:
+revertmove|керны важмоз
+export|Гижöттэсö петкöтöм
+allmessages-filter-all|Быдöс
+allmessages-language|Кыв:
+tooltip-pt-userpage|Аслат листбок
+tooltip-pt-mytalk|Сёрнитан листбокыт
+tooltip-pt-preferences|Тэнат лöсьöтаннэт
+tooltip-pt-watchlist|Синмалан листбоккезö ним сьöртi
+tooltip-pt-mycontris|Мый тэ мöдкодьсьöтiн, ним сьöртi
+tooltip-pt-login|Татчö верман нимтö пыртны, но туйö и сiдз уджавны
+tooltip-pt-logout|Петан
+tooltip-ca-talk|Этiя листбок йылiсь сёрни
+tooltip-ca-edit|Этiйö листбок позьö мöдкодьсьöтны. Сiйö вильмöттöдз нырышт «нёджöвт» личкöт вылö,  мед видзöтны, мый тэнат аркмö.
+tooltip-ca-addsection|Лöсьöтны виль юкöт
+tooltip-ca-viewsource|Этiйö листбок оз позь вильмöтны. Верман токö видзöтны да копируйтны сылiсь под текст
+tooltip-ca-history|Кыдз вильмöтлiсö этiйö листбоксö
+tooltip-ca-protect|Дорйыны этiйö листбоксö
+tooltip-ca-delete|Чышкыны этiйö листбоксö
+tooltip-ca-move|Вежны листбоклiсь ним
+tooltip-ca-watch|Содтыны листбок синмаланнэз коласö
+tooltip-ca-unwatch|Шупкыны этiйö листбок синмаланнэз коласiсь
+tooltip-search|Кошшыны {{SITENAME}}
+tooltip-search-go|Осьтны листбок, кöдалöн нимыс утлянно сэтшöм, эм кö сiя
+tooltip-search-fulltext|Адззыны листбоккез, кытöн эм сэтшöм текст
+tooltip-p-logo|Пондöтчан листбок вылö
+tooltip-n-mainpage|Вешшыны пондöтчан листбок вылö
+tooltip-n-mainpage-description|Вешшыны пондöтчан листбок вылö
+tooltip-n-portal|Проект йылiсь, мый тэ верман керны, кытiсь мый кошшыны
+tooltip-n-currentevents|Адззыны унажык юöррез чулалан лоöмторрез йылiсь
+tooltip-n-recentchanges|Медбöрья вежöммез
+tooltip-n-randompage|Кышавны виччисьтöг шедöм листбок
+tooltip-n-help|Отсöт проект понда:
+tooltip-t-whatlinkshere|Быдöс листбоккез, кöдна ыстiсьöны татчö
+tooltip-t-recentchangeslinked|Медбöрья вильмöтöммез листбоккезын,  кöдна вылö этiя листбокыс ыстiсьö
+tooltip-feed-rss|Этiя листбок понда RSS
+tooltip-feed-atom|Этiя листбок понда Atom-визыв
+tooltip-t-contributions|Видзöтны листбоккез, кöднö вильмöтлiс этiя уджкерись
+tooltip-t-emailuser|Иньдöтны гижöт этiя уджкерисьлö
+tooltip-t-upload|Кышавны медиа-файллэз
+tooltip-t-specialpages|Тодильнöй листбоккез ним сьöртi
+tooltip-t-print|Этiя листбоклöн печатайтан версия
+tooltip-t-permalink|Листбоклöн этiя версия дынö пырся ыстöт
+tooltip-ca-nstab-main|Видзöт листбоклiсь пытшкöс
+tooltip-ca-nstab-user|Видзöтны уджкерисьлiсь листбок
+tooltip-ca-nstab-media|Медиа файл
+tooltip-ca-nstab-special|Этiя листбокыс тодильнöй, сiйö оз позь мöдкодьсьöтны
+tooltip-ca-nstab-project|Проектлöн листбок
+tooltip-ca-nstab-image|Файллöн листбок
+tooltip-ca-nstab-template|Шаблон видзан листбок
+tooltip-ca-nstab-help|Отсасян листбок
+tooltip-ca-nstab-category|Категория листбок
+tooltip-minoredit|Пасйыны сiйö неыджыт мöдкодьсьöтöм туйö
+tooltip-save|Вильмöтны листбок
+tooltip-preview|Дзар кер,  листбоксö вильмöттöдззат,  мый тэнат аркмö!
+tooltip-diff|Мыччавны мый мöдкодьсьöтöма текстiсь.
+tooltip-compareselectedversions|Видзöтны, мый неöткодьыс этiя листбоклöн кык версия коласын
+tooltip-watch|Содтыны этiйö листбок синмаланнэз коласö
+tooltip-rollback|Öтпыр нырыштöмöн чышкыны быдöс, мый керис медбöрья редактор
+tooltip-undo|"Бöр вежны" чышкö öннясö да пыртö бöр одзжыкся редакция. Позьö висьтавны,  мыля сiйö вежин бöр.
+previousdiff|← Одзжыкся вильмöтöм
+nextdiff|Сыбöрся вильмöтöтöм →
+file-info-size|~{0} × ~{1} пиксел, файллöн ыжда: ~{2}, MIME-тип: ~{3}
+file-nohires|Буржыка тыдалан версия абу.
+svg-long-desc|SVG-файл, гижöм сьöртi ~{0} × ~{1} пиксел,  файллöн ыжда: ~{2}
+show-big-image|Буржыка тыдалан серпас
+bad_image_list|Формат лöсьöтiкö видз тöд вылын: Уджавны пондасö токö нимлёдзись визёккез (кöдналöн пондöтчанын эм *). Визёклöн медодзза ыстöт ась лоö йитöм неуджалан файлкöт.  Мöдiк ыстöттэз сiя жö визёкын огö пыртö сы лыдö,  м.ш. гижöттэз, кытчö медиа-файл позьö пыртны.
+metadata|Метадатаэз
+metadata-help|Файлö кышасьöмöсь содтöт юöррез, кöдна аркмывлöны лыдпаса камераын нето сканерын. Редактируйтiсö кö файлсö аркмöтöм бöрын,  мукöд параметрыс оз понды сё ни лöсявны öння серпаскöт.
+metadata-expand|Мыччавны содтöт юöррез
+metadata-collapse|Сайöвтны поснитжык деталлез
+metadata-fields|EXIF метадатаэза ыббез, кöдна шуöмöсь нимлёдзын, лоасö сё ни мыччалöмöсь серпаса листбок вылын, мöдiккез лоасö, он кö шу мöднёж, сайöвтöмöсь:\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|Пасьта
+exif-imagelength|Вылына
+namespacesall|быдöс
+monthsall|быдöс
+watchlisttools-view|Видзöт лöсялана вильмöтöммез
+watchlisttools-edit|Видзöтны/мöдкодьсьöтны нимлёдз
+watchlisttools-raw|Нимлёдз пöртны текстö
+specialpages|Тодильнöй листбоккез
+htmlform-selectorother-other|Мöдiк
+']:>
+).lang
+;

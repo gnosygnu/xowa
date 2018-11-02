@@ -1,0 +1,419 @@
+this
+.fallback_load('ro')
+.ns_names
+  .load_text(
+<:['
+-2|Mediya
+-1|Uzalutno
+1|Vakyarimata
+2|Jeno
+3|Jeno vakyarimata
+5|{{grammar:genitive-pl\u007C$1}} vakyarimata
+6|Chitro
+7|Chitro vakyarimata
+8|MediyaViki
+9|MediyaViki vakyarimata
+10|Sikavno
+11|Sikavno vakyarimata
+12|Zhutipen
+13|Zhutipen vakyarimata
+14|Shopni
+15|Shopni vakyarimata
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|purano kurko
+monday|lui
+tuesday|marci
+wednesday|tetradī
+thursday|zhoi
+friday|parashtui
+saturday|savato
+january|pervonai
+february|duitonai
+march|tritonai
+april|shtartonai
+may_long|panjtonai
+june|shovtonai
+july|eftatonai
+august|oxtotonai
+september|enyatonai
+october|deshtonai
+november|deshuekhtonai
+december|deshuduitonai
+jan|perv
+feb|dui
+mar|tri
+apr|shta
+may|panj
+jun|shov
+jul|efta
+aug|oxt
+sep|enya
+oct|desh
+nov|dekh
+dec|ddui
+toc|Ander
+allpages|Savore patrya
+nextpage|Anglutni patrin (~{0})
+lastmodifiedat|O palutno paruvipen ~{1}, ~{0}.
+otherlanguages|Avre ćhibande
+subcategories|Telekategoriye
+nextn|mai purane {{PLURAL:~{0}\u007C~{0}}}
+prevn|mai neve {{PLURAL:~{0}\u007C~{0}}}
+statistics|Beshimata
+cite_article_link|Prinjardo phandipen ko lekh
+cite|Kana trebul phandipen
+cite_submit|Ja
+wm-license-free-software-wiki-link|w:rmy:Mesto software
+sitesupport|Denimata
+group-steward|Stewardurya
+group-steward-member|Stewardo
+grouppage-steward|{{ns:project}}:Stewardurya
+underline-always|Savaxt
+underline-never|Ni ekhvar
+underline-default|Browseresko standardo
+about|Andar
+article|Lekh
+newwindow|(inklel aver filiyastra)
+cancel|Mekh la
+mypage|Miri patrin
+mytalk|Mire vakyarimata
+navigation|Phiripen
+and| thai
+qbedit|Editisar
+errorpagetitle|Dosh
+returnto|Ja palpale kai ~{0}.
+help|Zhutipen
+search|Rod
+searchbutton|Rod
+go|Ja
+searcharticle|Ja
+history|Puraneder versiye
+history_short|Puranipen
+printableversion|Printisaripnaski versiya
+permalink|Savaxtutno phandipen
+print|Printisaripen
+edit|Editisar i patrin
+editthispage|Editisar i patrin
+delete|Khosipen
+deletethispage|Khos i patrin
+undelete_short|Na mai khos le editisarimata ~{0}
+protect|Brakhipen
+unprotect|Na mai brakh
+newpage|Nevi patrin
+specialpage|Uzalutni patrin
+personaltools|Mire labne
+articlepage|Dikh o lekh
+talk|Vakyarimata
+toolbox|Labnengo moxton
+userpage|Dikh i jeneski patrin
+viewtalkpage|Dikh i diskucia
+viewcount|Kadaya patrin dikhlilyas {{PLURAL:~{0}\u007Cone time\u007C~{0}var}}.
+jumpto|Ja kai:
+jumptonavigation|phiripen
+jumptosearch|rodipen
+aboutsite|Andar {{SITENAME}}
+aboutpage|Project:Andar
+copyright|Ander dino tar o ~{0}.
+copyrightpage|{{ns:project}}:Autorenge xakaya (chachimata)
+currentevents|Nevimata
+currentevents-url|Project:Nevimata
+disclaimers|Termenurya
+disclaimerpage|Project:Termenurya
+edithelp|Editisaripnasko zhutipen
+mainpage|Sherutni patrin
+mainpage-description|Sherutni patrin
+portal|Maladipnasko than
+portal-url|Project:Maladipnasko than
+privacy|Pativyako forovipen
+retrievedfrom|Lino katar "~{0}"
+editsection|editisar
+editsectionhint|Editisar o kotor: ~{0}
+showtoc|dikh
+hidetoc|garav
+nstab-main|Lekh
+nstab-user|Jeneski patrin
+nstab-media|Mediya patrin
+nstab-special|Uzalutno
+nstab-project|Projekto
+nstab-image|Chitro
+nstab-mediawiki|Duma
+nstab-template|Sikavno
+nstab-help|Zhutipen
+nstab-category|Shopni
+nospecialpagetext|Manglyas ekh [[Special:SpecialPages\u007Cuzalutni patrin]] so na arakhel pes kai {{SITENAME}}.
+viewsource|Dikh i sursa
+logouttext|'''Akana san avryal i {{SITENAME}}.'''\n\nShai te labyares {{SITENAME}} sar ekh bijanglo jeno vai shai te prinjares tut palem sar o jeno le kadale navesa vai le aver navesa.
+yourname|Tiro anav
+yourpassword|O nakhavipnasko lav
+yourpasswordagain|O nakhavipnasko lav de nevo
+externaldberror|Sas ekh dosh kai datengi baza le avrutne prinjaripnyange vai nai tuke drom te akanutnisares o avrutno akonto.
+login|Prinjaripen
+userlogin|Prinjaripen / Ker ek akount
+logout|De avri
+userlogout|De avri
+nologinlink|Ker ek akount
+createaccount|Ker ek nevo akount
+gotaccount|Si tuke akana ekh akonto? '''~{0}'''.
+gotaccountlink|De andre
+createaccountmail|palal o e-mail
+badretype|Le nakhavipnaske lava so lekhavdyan nai myazutne.
+loginerror|Prinjaripnaski dosh
+nocookiesnew|O tiro akont sas kerdo, pale tu nai prinjardo/i. {{SITENAME}} labyarel ''cookies'' te astarel le manusha prinjarde. O tiro browser na astarel le cookies. Si mishto te das les drom te astarel le ''cookies'' thai, palal kodya, te zumaves vi ekh var, labyarindoi o nav thai o nakhavipnaso lav.
+nocookieslogin|{{SITENAME}} labyarel ''cookies'' te prinjaren le manusha so aven kathe. O tiro browser chi astarel len. Si mishto te das les drom te astarel le ''cookies'' thai, palal kodya, te zumaves vi ekh var.
+loginsuccesstitle|Prinjaripen kerdo
+loginsuccess|Akana san prijardo kai {{SITENAME}} sar "~{0}".
+wrongpassword|O nakhavipnasko lav so thovdyan si doshalo. Mangas tuke te zumaves vi ekvar.
+mailmypassword|Bichhal ma o nakhavipnasko lav e-mail-estar!
+passwordremindertitle|Astaripen le tire nakhavipnaske lavesko kai {{SITENAME}}
+passwordremindertext|Varekon (shai te aves tu, katar i adresa ~{0})\nmanglyas ek nevo nakahvipnasko lav katar {{SITENAME}}.\nO nakhavipnasko lav le jenesko "~{1}" akana si "~{2}".\nMishto si te jas kai {{SITENAME}} thai te paruves tiro lav sigo.
+noemail|Nai ni ekh adresa e-mail prinjarde le jeneske "~{0}".
+eauthentsent|Ekh prinjaripnasko e-mail bichhaldo kai tiri e-maileski adresa. Kashte avel tuke e-mailuya le avre jenendar trebul te prinjares tiri adresa (dikh buteder ando bichhaldo e-mail).
+mailerror|Dosh kana sas bichhaldo o e-mail: ~{0}
+acct_creation_throttle_hit|Fal ame nasul, akana si tut ~{0} akounturya. Nashti te keres aver.
+emailauthenticated|Tiro e-mail sas prinjardo kai ~{0}.
+emailnotauthenticated|Tiri e-maileski adresa <strong>nas prinjardi ji akana</strong>. Ni ekh e-mail nashti te avel tuke ji kana prinjares la.
+noemailprefs|Thov ekh adresa e-mail te keren buti le kadale labne.
+emailconfirmlink|Prinjar o e-mail
+invalidemailaddress|Le e-maileski adresa nas lino anda kodoya ke nas lake ekh lachhi forma. Si mishto te thos ekh e-mail le lachhe formasa vai te khoses so lekhvdyas pe kodo than.
+accountcreated|Akount kerdo
+accountcreatedtext|Kerdo o akonto le jenesko ko ~{0}.
+changepassword|Paruv o nakhavipnasko lav
+oldpassword|Purano nakahvipnasko lav
+newpassword|Nevo nakhavipnasko lav:
+image_sample|Misal.jpg
+summary|Xarno xalyaripen:
+minoredit|Kadava si ek tikno editisarimos
+watchthis|Dikh kadaya patrin
+savearticle|Uxtav i patrin
+showpreview|Dikh sar avelas i patrin
+showdiff|Dikh le paruvimata
+whitelistedittext|Trebul te [[Special:UserLogin\u007Cautentifikisares]] kashte editisares artikolurya.
+accmailtitle|O nakhavipnasko lav bićhaldo.
+accmailtext|O nakhavipnasko lav andar '~{0}' bićhaldo ko ~{1}.
+newarticle|(Nevo)
+newarticletext|Avilyan kai ek patrin so na si.\nTe keres la, shai te shirdes (astares) te lekhaves ando telutno moxton (dikh [~{0} zhutipnaski patrin] te janes buteder).\nKana avilyan kathe doshatar, ja palpale.
+noarticletext|Andi '''{{SITENAME}}''' nai ji akana ek lekh kadale anavesa.\n* Te shirdes (astares) te keres o lekh, ker klik  '''[{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} kathe]'''.
+editing|Editisaripen ~{0}
+yourtext|Tiro teksto
+storedversion|Akanutni versiya
+yourdiff|Ververimata
+previousrevision|← Purano paruvipen
+nextrevision|Nevi paruvipen →
+cur|akanutni
+last|purani
+histlegend|Xalyaripen: (akanutni) = ververimata mamui i akanutni versiya,\n(purani) = ververimata mamui i puraneder versiya, T = tikno editisaripen
+histfirst|O mai purano
+histlast|O mai nevo
+revdelete-submit|Ker kadya le alosarde paruvimatenge
+compareselectedversions|Dikh ververimata mashkar alosarde versiye
+viewprevnext|Dikh (~{0} {{int:pipe-separator}} ~{1}) (~{2}).
+showingresults|Tele si <b>~{0}</b> rezultaturya shirdindoi le ginestar <b>~{1}</b>.
+preferences|Kamimata
+prefs-skin|Dikhimos
+datedefault|Ni ekh kamipen
+prefs-rc|Neve paruvimata
+saveprefs|Uxtav le kamimata
+columns|Uche vortorina:
+localtime|Thanutno vaxt
+guesstimezone|Le les katar o browser
+allowemail|De drom te aven e-mailurya katar aver jene
+default|acharuno
+prefs-files|Failurya
+youremail|Emailesko adress (kana kames)*
+yourrealname|Tiro chacho anav*
+yourlanguage|Ćhib:
+yournick|I xarni versyunya, le semnaturenge
+badsig|Bilachhi semnatura; dikh le tagurya HTML.
+editinguser|Editisaripen '''[[User:~{0}\u007C~{0}]]''' ([[User talk:~{0}\u007C{{int:talkpagelinktext}}]] \u007C [[Special:Contributions/~{0}\u007C{{int:contribslink}}]])
+group|Grupo:
+group-bot|Boturya
+group-sysop|Administratorurya
+group-bureaucrat|Birokraturya:
+group-all|(sa)
+group-sysop-member|Administratoro
+group-bureaucrat-member|Birokrato
+grouppage-bot|{{ns:project}}:Boturya
+grouppage-sysop|{{ns:project}}:Administratorurya
+grouppage-bureaucrat|{{ns:project}}:Birokraturya
+recentchanges|Neve paruvimata
+recentchanges-summary|Andi kadaya patrin shai te dikhes le neve paruvimata andi romani {{SITENAME}}.
+rcnotefrom|Tele si le averutnimata katar '''~{1}''' (inklen '''~{0}''' averutnimata, shai te paruves o gin alosarindoi aver tele).
+rclistfrom|Dikh le paruvimata ji kai ~{2} ~{1}
+rcshowhideminor|~{0} tikne editisaripena
+rcshowhidebots|~{0} (ro)boturya
+rcshowhideliu|~{0} prinjarde jene
+rcshowhideanons|~{0} bijangle jene
+rcshowhidepatr|~{0} dikhle paruvimata
+rcshowhidemine|~{0} mire editisaripena
+rclinks|Dikh le palutne ~{0} paruvimata andar le palutne ~{1} divesa.<br />~{2}
+diff|ververipen
+hist|puranipen
+hide|garav
+show|dikh
+minoreditletter|t
+number_of_watching_users_pageview|[~{0} jeno/e kon len vurma e patrinyaki]
+rc_categories|Numa le shopnya (rigyarde katar "\u007C")
+rc_categories_any|Savegodi
+recentchangeslinked|Pashvipnaske paruvimata
+recentchangeslinked-feed|Pashvipnaske paruvimata
+recentchangeslinked-toolbox|Pashvipnaske paruvimata
+upload|Bichhal file
+uploadbtn|Bichhal file
+filedesc|Xarno xalyaripen
+badfilename|O chitrosko anav sas paruvdo; o nevo anav si "~{0}".
+savefile|Uxtav file
+listfiles|Patrinipen le chitrengo
+file-anchor-link|Chitro
+imagelinks|Chitroske phandimata
+unusedtemplates|Bilabyarde sikavne
+unusedtemplateswlh|aver phandimata
+randompage|Ekh patrin savigodi
+wantedpages|Kamle pajine
+shortpages|Xarne patrya
+deadendpages|Biphandimatenge patrya
+listusers|Jenengo patrinipen
+newpages|Neve patrya
+ancientpages|E puraneder lekha
+move|Ingerdipen
+allarticles|Sa le artikolurya
+allpagessubmit|Ja
+emailuser|Bichhal les/la e-mail
+emailfrom|Katar
+emailto|Karing
+emailsend|Bichhal
+watchlist|Dikhipnaske lekha
+mywatchlist|Dikhipnaske lekha
+addedwatchtext|I patrin "[[:~{0}]]" sas thovdi andi tiri lista [[Special:Watchlist\u007Cle artikolengi so dikhes len]].\nLe neve paruvimata andar kadale patrya thai andar lenge vakyarimatenge patrya thona kathe, vi dikhena pen le <b>thule semnurenca</b> andi patrin le [[Special:RecentChanges\u007Cneve paruvimatenge]].\n\nKana kamesa te khoses kadaya patrin andar tiri lista le patryange so arakhes len ker click kai "Na mai arakh" (opre, kana i patrin dikhel pes).
+removedwatchtext|I patrin "[[:~{0}]]" sas khosli katar o patrinipen le dikhipnaske lekhenca (artikolurya).
+watch|Dikh la
+unwatch|Na mai dikh
+unwatchthispage|Na mai dikh
+wlnote|Tele si le palutne ~{0} paruvimata ande palutne <b>~{1}</b> ore.
+enotif_reset|Thov semno kai patrya so dikhlem
+deletepage|Khos i patrin
+confirm|Ja
+excontent|o ander sas: '~{0}'
+excontentauthor|o ander sas: '~{0}' (thai o korkoro butyarno sas '~{1}')
+historywarning|Dikh! La patrya so kames to khoses la si la puranipen:
+actioncomplete|Agorisardi buti
+deletedtext|"~{0}" sas khosli.\nDikh ando ~{1} ek patrinipen le palutne butyange khosle.
+rollback_short|Palemavilipen
+rollbacklink|palemavilipen
+rollbackfailed|O palemavilipen nashtisardyas te kerel pes.
+prot_1movedto2|[[~{0}]] bichhaldo kai [[~{1}]]
+undelete|Dikh le khosle patrya
+undeletebtn|Le palpale
+namespace|Rig:
+invert|Bi rigyako:
+contributions|Jeneske butya
+mycontris|Mire butya
+contribsub2|Katar ~{0} (~{1})
+uctop|(opre)
+whatlinkshere|So phandel pes kathe
+nolinkshere|Ni ek patrin phandel pes (avel) kathe.
+blockip|De avri jenes/IP
+ipbsubmit|De avri kadava jenes
+ipusubmit|Na mai brakh i adresa
+contribslink|butya
+lockbtn|Brakh i database
+unlockbtn|Na mai brakh i database
+movearticle|Inger i patrin
+movepagebtn|Inger i patrin
+pagemovedsub|I patrin sas bićhaldi.
+delete_and_move|Khos thai inger
+export-submit|Bichhal avri
+allmessages|Sistemoske duma
+allmessagesname|Anav
+import-interwiki-submit|Le andre
+tooltip-pt-userpage|Miri labyarneski pajina
+tooltip-pt-anonuserpage|Miri labyarneski pajina ki akanutni IP adress
+tooltip-pt-mytalk|Miri diskuciyaki pajina
+tooltip-pt-anontalk|Diskucie le editisarimatenge ki akanutni IP adress
+tooltip-pt-preferences|Sar kamav te dikhel pes miri pajina
+tooltip-pt-watchlist|I lista le pajinenge so dikhav lendar (monitorizav).
+tooltip-pt-mycontris|Le mire editisarimata
+tooltip-pt-login|Mishto si te identifikares tut, pale na si musai.
+tooltip-pt-logout|Kathe aćhaves i sesiyunya
+tooltip-ca-talk|Diskuciya le artikoleske
+tooltip-ca-edit|Shai te editisares kadaya pajina. Mangas te paledikhes o teksto anglal te uxtaves les.
+tooltip-ca-addsection|Kathe shai te thos ek komentaryo ki kadaya diskuciya.
+tooltip-ca-viewsource|Kadaya pajina si brakhli. Shai numa te dikhes o source-code.
+tooltip-ca-history|Purane versiune le dokumenteske.
+tooltip-ca-protect|Brakh kadava dokumento.
+tooltip-ca-delete|Khos kadava dokumento.
+tooltip-ca-undelete|Palemthav le editisarimata kerdine le kadale dokumenteske sar sas anglal lesko khosipen.
+tooltip-ca-move|Trade kadava dokumento.
+tooltip-ca-watch|Thav kadava dokumento andi monitorizaripnaski lista.
+tooltip-ca-unwatch|Khos kadava dokumento andar i monitorizaripnaski lista.
+tooltip-search|Rod andi kadaya Wiki
+tooltip-p-logo|I sherutni pajina
+tooltip-n-mainpage|Dikh i sherutni pajina
+tooltip-n-portal|O proyekto, so shai te keres, kai arakhes solucie.
+tooltip-n-currentevents|Arakh janglimata le akanutne evenimenturenge
+tooltip-n-recentchanges|I lista le neve paruvimatenge kerdini andi kadaya wiki.
+tooltip-n-randompage|Ja ki ek aleatori pajina
+tooltip-n-help|O than kai arakhes zhutipen.
+tooltip-t-whatlinkshere|I lista sa le wiki pajinenge so aven (si phande) vi kathe
+tooltip-t-recentchangeslinked|Neve paruvimata andi kadaya pajina
+tooltip-feed-rss|Kathe te pravares o RSS flukso le kadale pajinyako
+tooltip-feed-atom|Kathe te pravares o Atom flukso le kadale pajinyako
+tooltip-t-contributions|Dikh i lista le editisarimatenge le kadale labyaresko
+tooltip-t-emailuser|Bićhal ek emailo le kadale labyareske
+tooltip-t-upload|Bićhal imajine vai media files
+tooltip-t-specialpages|I lista sa le spechiale pajinengi
+tooltip-ca-nstab-main|Dikh o artikolo
+tooltip-ca-nstab-user|Dikh i labyarengi pajina
+tooltip-ca-nstab-media|Dikh i pajina media
+tooltip-ca-nstab-special|Kadaya si ek spechiali pajina, nashti te editisares la.
+tooltip-ca-nstab-project|Dikh i pajina le proyekteski
+tooltip-ca-nstab-image|Dikh i imajinyaki pajina
+tooltip-ca-nstab-mediawiki|Dikh o mesajo le sistemesko
+tooltip-ca-nstab-template|Dikh o formato
+tooltip-ca-nstab-help|Dikh i zhutipnaski pajina
+tooltip-ca-nstab-category|Dikh i kategoriya
+anonymous|Bijangle labyarne kai {{SITENAME}}
+siteuser|Jeno kai {{SITENAME}} ~{0}
+lastmodifiedatby|Kadaya patrin sas paruvdi agoreste ~{1}, ~{0} katar ~{2}.
+others|aver
+siteusers|Jeno/e kai {{SITENAME}} ~{0}
+deletedrevision|Khoslo o purano paruvipen ~{0}
+previousdiff|← Purano ververipen
+nextdiff|Anglutno paruvipen →
+ilsubmit|Rod
+namespacesall|savore
+deletedwhileediting|Dikh: Kadaya patrin sas khosli de kana shirdyas (astardyas) te editisares la!
+confirm_purge_button|Va
+version|Versiya
+specialpages|Uzalutne patrya
+']:>
+).lang
+;

@@ -1,0 +1,15 @@
+this
+.messages
+  .load_text(
+<:['
+wikibase-sitelink-page-edit-placeholder|پەڕە
+wikibase-itembytitle-lookup-page|پەڕە:
+wikibase-itembytitle-submit|مینە
+wikibase-gotolinkedpage-submit|بچوو
+wikibase-itemdisambiguation-lookup-language|زوان:
+wikibase-itemdisambiguation-submit|مینە
+wikibase-modifyterm-language|زوان:
+wikibase-entitieswithoutlabel-label-alltypes|گشت
+']:>
+).lang
+;

@@ -1,0 +1,1405 @@
+this
+.fallback_load('id')
+.ns_names
+  .load_text(
+<:['
+-2|Alat
+-1|Kusuih
+1|Marit
+2|Ureuëng Ngui
+3|Marit Ureuëng Ngui
+5|Marit $1
+6|Beureukaih
+7|Marit Beureukaih
+8|MediaWiki
+9|Marit MediaWiki
+10|Seunaleuëk
+11|Marit Seunaleuëk
+12|Beunantu
+13|Marit Beunantu
+14|Kawan
+15|Marit Kawan
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-1|Istimewa
+1|Bicara
+1|Pembicaraan
+2|Pengguna
+3|Bicara Pengguna
+2|Ureuëng Nguy
+3|Marit Ureuëng Nguy
+3|Pembicaraan Pengguna
+5|Pembicaraan $1
+6|Berkas
+6|Gambar
+7|Pembicaraan Berkas
+7|Pembicaraan Gambar
+8|AlatWiki
+9|Marit AlatWiki
+9|Pembicaraan MediaWiki
+9|MediaWiki Pembicaraan
+10|Templat
+11|Pembicaraan Templat
+11|Templat Pembicaraan
+10|Pola
+11|Marit Pola
+12|Bantuan
+13|Bantuan Pembicaraan
+13|Pembicaraan Bantuan
+14|Kategori
+15|Kategori Pembicaraan
+15|Pembicaraan Kategori
+7|Gambar Pembicaraan
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Activeusers|UreuëngNguiUdép
+Allmessages|BanDumPeusan
+AllMyUploads|BanDumPeunasoëLôn~BanDumBeureukaihLôn
+Allpages|DapeutaLaman
+Ancientpages|TeunuléhAwai
+Badtitle|NanBrôk
+Blankpage|LamanSoh
+Block|TheunUreuëngNgui
+Booksources|NèKitab
+BrokenRedirects|PeuninahReuloh
+Categories|DapeutaKawan
+ChangePassword|GantoëLageuëmRahsia
+Confirmemail|PeunyoSurat-e
+Contributions|BeuneuriUreuëngNgui
+CreateAccount|PeugötNan
+Deadendpages|ÔnMaté
+DeletedContributions|BeuneuriNyangGeusampôh
+DoubleRedirects|PeuninahGanda
+Emailuser|Surat-eUreuëngNgui
+Export|Peuteubiët
+Fewestrevisions|NeuubahPaléngDit
+FileDuplicateSearch|MitaBeureukaihSaban
+Filepath|NeuduëkBeureukaih
+Import|Peutamöng
+Invalidateemail|PeubateuëPeusahSurat-e
+BlockList|DapeutaTeuneuheun
+LinkSearch|MitaPeunawôt
+Listadmins|DapeutaUreuëngUrôh
+Listbots|DapeutaBot
+Listfiles|DapeutaBeureukaih
+Listgrouprights|DapeutaHakKawan
+Listredirects|DapeutaPeuninah
+Listusers|DapeutaUreuëngNgui
+Lockdb|GunciBasisData
+Lonelypages|On_hana_soe_po
+Longpages|On_panyang
+MergeHistory|Riwayat_peusapat
+MIMEsearch|Mita_MIME
+Mostcategories|Kawan_paleng_le
+Mostimages|Beureukaih_nyang_paleng_le_geunguy
+Mostlinked|On_nyang_paleng_le_geunguy
+Mostlinkedcategories|Kawan_nyang_paleng_le_geunguy
+Mostlinkedtemplates|Templat_nyang_paleng_le_geunguy
+Mostrevisions|Neuubah_paleng_le
+Movepage|Peupinah_on
+Mycontributions|Atra_lon_peugot
+Mypage|On_lon
+Mytalk|Peugah_haba_lon
+Newimages|Beureukaih_baro
+Newpages|On_baro
+Popularpages|On_meuceuhu
+Preferences|Geunalak
+Prefixindex|Dapeuta_neuaway
+Protectedpages|On_nyang_geupeulindong
+Protectedtitles|Nan_nyang_geupeulindong
+Randompage|On_beurangkari
+Randomredirect|Peuninah_beurangkari
+Recentchanges|Neuubah_baro
+Recentchangeslinked|Neuubah_meuhubong
+Revisiondelete|Sampoh_peugot_ulang
+Search|Mita
+Shortpages|On_paneuek
+Specialpages|On_khusoih
+Statistics|Keunira
+Tags|Tag
+Uncategorizedcategories|Kawan_hana_roh_lam_kawan
+Uncategorizedimages|Beureukaih_hana_roh_lam_kawan
+Uncategorizedpages|On_hana_roh_lam_kawan
+Uncategorizedtemplates|Templat_hana_roh_lam_kawan
+Undelete|Peubateue_sampoh
+Unlockdb|Peuhah_gunci_basis_data
+Unusedcategories|Kawan_soh
+Unusedimages|Beureukaih_hana_teunguy
+Unusedtemplates|Templat_hana_soe_nguy
+Unwatchedpages|On_hana_soe_kalon
+Upload|Pasoe
+Userlogin|Tamong_log
+Userlogout|Teubiet_log
+Userrights|Khut_(hak)_ureueng_nguy
+Version|Seunalen
+Wantedcategories|Kawan_nyang_geuh\\'eut
+Wantedfiles|Beureukaih_nyang_geuh\\'eut
+Wantedpages|On_nyang_geuh\\'eut
+Wantedtemplates|Templat_nyang_geuh\\'eut
+Watchlist|Dapeuta_kalon
+Whatlinkshere|Hubong_gisa
+Withoutinterwiki|Hana_interwiki
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+redirect|0|#PUPINAH~#ALIH~#REDIRECT~
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Aleuhad
+monday|Seulanyan
+tuesday|Seulasa
+wednesday|Rabu
+thursday|Hamèh
+friday|Jeumeu'at
+saturday|Sabtu
+sun|Aleu
+mon|Seun
+tue|Seul
+wed|Rab
+thu|Ham
+fri|Jum
+sat|Sab
+january|Buleuën Sa
+february|Buleuën Duwa
+march|Buleuën Lhèë
+april|Buleuën Peuët
+may_long|Buleuën Limöng
+june|Buleuën Nam
+july|Buleuën Tujôh
+august|Buleuën Lapan
+september|Buleuën Sikureuëng
+october|Buleuën Siplôh
+november|Buleuën Siblaih
+december|Buleuën Duwa Blaih
+january-gen|Buleuën Sa
+february-gen|Buleuën Duwa
+march-gen|Buleuën Lhèë
+april-gen|Buleuën Peuët
+may-gen|Buleuën Limöng
+june-gen|Buleuën Nam
+july-gen|Buleuën Tujôh
+august-gen|Buleuën Lapan
+september-gen|Buleuën Sikureuëng
+october-gen|Buleuën Siplôh
+november-gen|Buleuën Siblaih
+december-gen|Buleuën Duwa Blaih
+jan|Sa
+feb|Duwa
+mar|Lhèë
+apr|Peuët
+may|Limöng
+jun|Nam
+jul|Tujôh
+aug|Lapan
+sep|Sikureuëng
+oct|Siplôh
+nov|Siblaih
+dec|Duwa Blaih
+toc|Asoë
+redirectedfrom|(Geupeupinah nibak ~{0})
+allpages|Ban dum laman
+prevpage|Laman sigohlomjih (~{0})
+nextpage|Laman lheuëh nyan (~{0})
+collapsible-collapse|Peuubeut
+collapsible-expand|Peuluwaih
+sort-descending|Peuurôt tren
+sort-ascending|Peuurôt ék
+categories|Dapeuta kawan
+lastmodifiedat|Laman nyoë seuneulheuëh geuubah bak ~{0} poh ~{1}.
+thumbnail-more|Peurayek
+otherlanguages|Bahsa la’én
+blanknamespace|(Keuë)
+pagecategories|{{PLURAL:~{0}\u007CKawan}}
+category_header|Teunuléh lam kawan "~{0}"
+subcategories|Aneuk kawan
+category-media-header|Peukakaih lam kawan "~{0}"
+category-empty|''Kawan nyoë jinoë hat hana halaman atawa media.''
+category-subcat-count|{{PLURAL:~{1}\u007CKawan nyoë  cit na saboh yupkawan nyoë.\u007CKawan nyoë na {{PLURAL:~{0}\u007Cyupkawan\u007C~{0} yupkawan}} nyoë, dari ban dum ~{1}.}}
+category-subcat-count-limited|Kawan nyoë na {{PLURAL:~{0}\u007Caneuk kawan\u007C~{0} aneuk kawan}} lagèë di yup.
+category-article-count|{{PLURAL:~{1}\u007CKawan nyoë cit na saboh ôn nyoë.\u007CKawan nyoë na  {{PLURAL:~{0}\u007Côn\u007C~{0} ôn }}, dari ban dum ~{1}.}}
+category-article-count-limited|Kawan nyoë na {{PLURAL:~{0}\u007Csaboh halaman\u007C~{0} halaman}} lagèë di yup.
+category-file-count|{{PLURAL:~{1}\u007CKawan nyoë cit na beureukaih nyoë sagay.\u007C{{PLURAL:~{0}\u007Cbeureukaih\u007C~{0} beureukaih}} nyoë na lam kawan nyoë, nibak ban dum ~{1}.}}
+category-file-count-limited|Kawan nyoe na {{PLURAL:~{0}\u007Cbeureukaih\u007C~{0} beureukaih}} lagèë di yup.
+nextn|{{PLURAL:~{0}\u007C~{0}}} lheuëh nyan
+prevn|{{PLURAL:~{0}\u007C~{0}}} sigohlomjih
+listingcontinuesabbrev|samb.
+bold_sample|Rakam teubai
+bold_tip|Haraih teubai
+italic_sample|Rakam singèt naseukah nyoë
+italic_tip|Rakam singèt
+link_sample|Nan peunawôt
+link_tip|Peunawôt dalam
+headline_sample|Naseukah nan
+headline_tip|Aneuk beunagi tingkat 1
+hidden-category-category|Kawan teusom
+statistics|Keunira
+proofreadpage_specialpage_label_key|Mita:
+cite_article_link|Cok ôn nyoë
+wikibase-itembytitle-submit|Mita
+wikibase-itemdisambiguation-submit|Mita
+sitesupport|Meuripè
+tooltip-n-sitesupport|Dukông kamoë
+wikimedia-copyrightwarning|Ngön neuteugön "{{int:savearticle}}", droëneuh akô ngön [https://wikimediafoundation.org/wiki/Terms_of_Use Terms of Use], ngön droëneuh akô keu neupeuteubiët teunuléhneuh di yup [https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License Lisensi CC BY-SA 3.0] ngön [https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_GNU_Free_Documentation_License GFDL].\nDroëneuh akô meunyö hyperlink atawa URL nakeuh atribusi nyang sép di yup lisensi Creative Commons.
+tog-underline|Bôh garéh yup peunawôt:
+tog-hideminor|Peusom neuandam bacut bak neuubah barô
+tog-hidepatrolled|Peusom neuandam teurunda bak neuubah barô
+tog-newpageshidepatrolled|Peusom laman teurunda nibak dapeuta ôn barô
+tog-extendwatchlist|Peuhah dapeuta keunalön keu peuleumah ban dum neuubah, kön nyang barô mantöng
+tog-usenewrc|Peusaho neuandam bak neuleumah neuubah barô ngön dapeuta keunalön meunurôt ôn
+tog-numberheadings|Bôh numbôi nan keudroë
+tog-showtoolbar|Peuleumah bateuëng alat andam
+tog-editondblclick|Andam laman ngön duwa gö teugön
+tog-editsectiononrightclick|Peujeuët andam bideueng ngön teugön blah uneun bak nan bideueng
+tog-watchcreations|Tamah laman nyang lôn peugöt u dapeuta keunalön
+tog-watchdefault|Tamah laman nyang lôn-andam u dapeuta keunalon
+tog-watchmoves|Tamah laman nyang lôn peupinah u dapeuta keunalon
+tog-watchdeletion|Tamah laman nyang lôn sampôh u dapeuta keunalon
+tog-minordefault|Bôh tanda mandum neuandam sibagoe neuandam bacut ngön baku
+tog-previewontop|Peuleumah hasé yôh goh plôk andam
+tog-previewonfirst|Peuleumah hasé bak neuandam phôn
+tog-enotifwatchlistpages|Peu'ék surat-e keu lôn meunyo saboh halaman nyang lôn kalon meuubah
+tog-enotifusertalkpages|Peu'ek keu lôn surat-e meunyo ôn marit lôn meuubah
+tog-enotifminoredits|Peu'ék cit surat-e keu lôn bak neuubah ubit
+tog-enotifrevealaddr|Peuleumah alamat surat-e lôn bak neubrithèë surat-e
+tog-shownumberswatching|Peuleumah jumeulah ureueng kalon
+tog-oldsig|Tanda jaroe jinoe:
+tog-fancysig|Peujeuet tanda jaroe sibagoe naseukah wiki (hana hubông keudroe)
+tog-uselivepreview|Ngui peuleumah hasé langsông (baci)
+tog-forceeditsummary|Peuingat lôn meunyo plôk neuringkaih neuandam mantöng soh
+tog-watchlisthideown|Peusöm nyang lôn andam nibak dapeuta keunalön
+tog-watchlisthidebots|Peusöm nyang teuandam nibak dapeuta keunalön
+tog-watchlisthideminor|Peusom Andam Bacut bak dapeuta keunalön
+tog-watchlisthideliu|Peusom andam ureuëng ngui nyang tamöng nibak dapeuta keunalön
+tog-watchlisthideanons|Peusöm andam ureuëng ngui hana taturi nibak dapeuta keunalön
+tog-watchlisthidepatrolled|Peusom neuandam teukawai bak dapeuta keunalön
+tog-ccmeonemails|Peu'ék keu lôn seunalén surat-e nyang lôn peu'ék keu ureueng la'én
+tog-diffonly|Bek peuleumah asoë laman di yup beunida neuandam
+tog-showhiddencats|Peuleumah kawan teusom
+tog-norollbackdiff|Bek peudeuh beunida 'oh lheueh geupeuriwang
+tog-useeditwarning|Neupeuingat lôn meunyö meukubah ôn andam ngön hana teukeubah
+tog-prefershttps|Sabé neungui seunambông teulindông meunyö neutamöng log
+underline-always|Sabé
+underline-never|H'an tom
+underline-default|Kulét atawa ngön peuhah wèb teupasang
+editfont-style|Gaya seunurat komputer bak plôk andam
+editfont-default|Bawaan penjelajah web
+editfont-monospace|Haraih Monospace
+editfont-sansserif|Haraih Sans-serif
+editfont-serif|Haraih Serif
+january-date|~{0} Buleuën Sa
+february-date|~{0} Buleuën Duwa
+march-date|~{0} Buleuën Lhèë
+april-date|~{0} Buleuën Peuët
+may-date|~{0} Buleuën Limong
+june-date|~{0} Buleuën Nam
+july-date|~{0} Buleuën Tujôh
+august-date|~{0} Buleuën Lapan
+september-date|~{0} Buleuën Sikureuëng
+october-date|~{0} Buleuën Siplôh
+november-date|~{0} Buleuën Siblaih
+december-date|~{0} Buleuën Duwa Blaih
+hidden-categories|{{PLURAL:~{0}\u007CKawan teusom\u007CKawan teusom}}
+index-category|Laman nyang geuindex
+noindex-category|Laman nyang hana geuindex
+broken-file-category|Laman ngön gamba reulöh
+about|Bhaih
+article|Teunuléh
+newwindow|(peuhah bak tingkap barô)
+cancel|Peubateuë
+moredotdotdot|Lom...
+morenotlisted|Dapeuta nyoe hana leungkap
+mypage|Laman
+mytalk|Marit
+anontalk|Peugah haba IP nyoë.
+navigation|Keumudoë
+and| ngön
+qbfind|Mita
+qbbrowse|Lop
+qbedit|Andam
+qbpageoptions|Laman nyoe
+qbmyoptions|Laman lôn
+faq|Teunanyöng Umom
+faqpage|Project:FAQ
+actions|Buët
+namespaces|Ruweuëng nan
+variants|Ragam
+navigation-heading|Menu navigasi
+errorpagetitle|Seunalah
+returnto|Gisa u ~{0}.
+tagline|Nibak {{SITENAME}}
+help|Beunantu
+search|Mita
+searchbutton|Mita
+go|Jak u
+searcharticle|Jak u
+history|Riwayat laman
+history_short|Riwayat
+updatedmarker|geuubah yôh seunaweue keuneulheueh lôn phôn kön
+printableversion|Seunalén rakam
+permalink|Peunawôt teutap
+print|Rakam
+view|Beuët
+view-foreign|Eu bak ~{0}
+edit|Andam
+edit-local|Andam deskripsi lokal
+create|Peugöt
+create-local|Tamah deskripsi lokal
+editthispage|Andam laman nyoë
+create-this-page|Peugöt laman nyoë
+delete|Sampôh
+deletethispage|Sampôh laman nyoë
+undeletethispage|Bèk neusampôh laman nyoë
+undelete_short|Bateuë sampôh {{PLURAL:~{0}\u007Cone edit\u007C~{0} edits}}
+viewdeleted_short|Eu {{PLURAL:~{0}\u007Csaboh neuandam\u007C~{0} neuandam}} nyang geusampôh
+protect|Peulindông
+protect_change|ubah
+protectthispage|Peulindông laman nyoë
+unprotect|Gantoë neulindông
+unprotectthispage|Gantoë neulindông laman nyoë
+newpage|Laman barô
+talkpage|Peugah haba bhah laman nyoë
+talkpagelinktext|Marit
+specialpage|Laman kusuih
+personaltools|Peukakaih droë
+articlepage|Eu asoë laman
+talk|Marit
+views|Seuneudeuih
+toolbox|Alat
+userpage|Eu laman ureuëng ngui
+projectpage|Eu laman buët
+imagepage|Eu laman beureukaih
+mediawikipage|Eu laman peusan sistem
+templatepage|Eu laman seunaleuëk
+viewhelppage|Eu laman beunantu
+categorypage|Eu laman kawan
+viewtalkpage|Eu laman marit
+redirectpagesub|Laman peuninah
+viewcount|Laman nyoë ka geusaweuë {{PLURAL:~{0}\u007Csigo\u007C$sigo}}.<br />
+protectedpage|Laman teupeulindông
+jumpto|Grôp u:
+jumptonavigation|keumudoë
+jumptosearch|mita
+view-pool-error|Meu'ah, server teungöh sibôk jinoe\nLe that ureueng nyang meuh'eut jak eu laman nyoe\nNeuprèh si'at yôh goh neubaci lom\n\n~{0}
+generic-pool-error|Meu'ah, server teungöh peunoh jinoë.\nRamè that ureuëng ngui nyang eu laman nyoë.\nNeuprèh sijamong sigoh neuci lom.
+pool-timeout|Liwat watèë prèh gunci
+pool-queuefull|Seunapat neuprèh peunoh
+pool-errorunknown|Salah hana meukön
+aboutsite|Bhaih {{SITENAME}}
+aboutpage|Project:Bhaih
+copyright|Asoë na meunurôt ~{0} keucuali meunyö na hay la'én nyang geupeugah
+copyrightpage|{{ns:project}}:Hak karang
+currentevents|Haba barô
+currentevents-url|Project:Haba barô
+disclaimers|Beunantah
+disclaimerpage|Project:Beunantah umom
+edithelp|Bantu andam
+mainpage|Ôn Keuë
+mainpage-description|Ôn Keuë
+policy-url|Project:Neuatô
+portal|Meusapat
+portal-url|Project:Meusapat
+privacy|Jaga rahsia
+privacypage|Project:Jaga rahsia
+badaccess|Salah khut/hak tamöng
+badaccess-group0|Droeneuh hana geupeuidin keu neupeulaku buët nyang neulakèë
+badaccess-groups|Buët nyang neulakèë geupeubatah keu ureuëng ngui lam {{PLURAL:~{1}\u007Ckawan\u007Csalah saboh nibak kawan}}: ~{0}.
+versionrequired|Peureulèë MediaWiki vèrsi ~{0}
+versionrequiredtext|MediaWiki versi ~{0} geupeureulèë keu neungui laman nyoë. Neu'eu [[Special:Version\u007Con versi]]
+ok|Ka göt
+retrievedfrom|Geurumpok nibak "~{0}"
+youhavenewmessages|Droëneuh na ~{0} (~{1}).
+youhavenewmessagesfromusers|Droeneuh na ~{0} nibak {{PLURAL:~{2}\u007Cureueng nguy la'en\u007C~{2} ureueng nguy}} (~{1}).
+youhavenewmessagesmanyusers|Droeneuh na ~{0} nibak ureueng nguy la'en (~{1})
+newmessageslinkplural|{{PLURAL:~{0}\u007Csaboh peusan barô\u007C999=peusan barô}}
+newmessagesdifflinkplural|{{PLURAL:~{0}\u007Cneuubah\u007C999=neuubah}} seuneulheuëh
+youhavenewmessagesmulti|Droëneuh na padum boh peusan barô bak ~{0}
+editsection|andam
+editold|andam
+viewsourceold|Eu nè
+editlink|andam
+viewsourcelink|eu nè
+editsectionhint|Andam bideuëng: ~{0}
+showtoc|peuleumah
+hidetoc|peusom
+thisisdeleted|Eu atawa peuriwang ~{0}?
+viewdeleted|Eu ~{0}?
+restorelink|~{0} {{PLURAL:~{0}\u007Cneuandam\u007Cneuandam}} nyang ka geusampoh
+feedlinks|Umpeuën:
+feed-invalid|Jeunèh neulakèë umpeuën hana paih
+feed-unavailable|Umpeuën sindikasi hana
+site-rss-feed|Umpeuën RSS ~{0}
+site-atom-feed|Umpeuën Atôm ~{0}
+page-rss-feed|Umpeuën RSS "~{0}"
+page-atom-feed|Umpeuën Atom "~{0}"
+red-link-title|~{0} (laman hana)
+nstab-main|Laman
+nstab-user|Ureuëng ngui
+nstab-media|Laman media
+nstab-special|Laman kusuih
+nstab-project|Laman buët
+nstab-image|Beureukaih
+nstab-mediawiki|Peusan
+nstab-template|Seunaleuëk
+nstab-help|Beunantu
+nstab-category|Kawan
+nosuchaction|Hana buët nyan
+nosuchactiontext|Buët nyang geulakèë lé URL nyan hana sah. Droeneuh kadang salah neukeutik URL, atawa neuseutöt saboh neuhubông nyang hana beutôi. Hai nyoë kadang jeuët keu lageuëm saboh bug bak alat leumiëk nyang geungui lé {{SITENAME}}.
+nosuchspecialpage|Hana laman kusuih lagèë nyan
+nospecialpagetext|<strong>Droeneuh ka neulakèë laman kusuih nyang hana sah.</strong>\nDapeuta laman kusuih nyang sah jeuet neu'eu bak [[Special:SpecialPages\u007C{{int:specialpages}}]].
+error|Seunalah
+databaseerror|Kesalahan basis data
+databaseerror-text|Saboh salah bak nè data ka teujadi. Nyoë meuhat na nyang han paih bak peukakaih droëneuh
+databaseerror-textcl|Teunanyöng basis data teungöh kacho
+databaseerror-query|Teunanyöng: ~{0}
+databaseerror-function|Guna: ~{0}
+databaseerror-error|Salah: ~{0}
+laggedslavemode|Peuneugah: Laman nyoë kadang hana neuubah barô
+readonly|Basis data geurôk
+enterlockreason|Pasoë dalèh neurôk ngön pajan jeuët geupeuhah
+readonlytext|Basis data hat nyoë geurôk keu teunamöng barô ngön geunantoë la'én, kadang keu peulara basis data rutin, lheuëh nyan barô lagèë biasa teuma.\n\nUreueng urôh nyang rôk nyoe geupeutaba jeuneulaih nyoe: ~{0}
+missing-article|Basis data hana jiteumèë naseukah nibak laman nyang sipatôtjih na, nyakni "~{0}" ~{1}.\n\nHai nyoë kayém jipeusabab lé peunawôt useuëng u laman nyang ka geusampôh.\n\nMeunyö kön nyoë sababjih, droëneuh kadang ka neuteumeung saboh ''bug'' lam peukakaih leumiëk.\nNeutulông bri thèë hai nyoë keu salah sidroë [[Special:ListUsers/sysop\u007Cureuëng urôih]], ngön neupeugah alamat URL-jih.
+missingarticle-rev|(revisi#: ~{0})
+missingarticle-diff|(Bida: ~{0}, ~{1})
+readonly_lag|Basis data ka geurôk otomatis silawét basis data sekunder teungöh geupeusinkron ngön basis data utama
+internalerror|Salah bak dalam
+internalerror_info|Salah bak dalam: ~{0}
+filecopyerror|H'an jeuet salén beureukaih "~{0}" u "~{1}".
+filerenameerror|H'an jeuët bôh nan beureukaih "~{0}" u "~{1}".
+filedeleteerror|H'an jeuët sampôh beureukaih "~{0}".
+directorycreateerror|H'an jeuet peugöt direktori "~{0}".
+filenotfound|Beureukaih "~{0}" hana meurumpök.
+unexpected|Yum hana geuharap: "~{0}"="~{1}".
+formerror|Reulöh: H'an jeuet peu'ék formulir.
+badarticleerror|Buet nyoe h'an jeuët geupeulaku bak laman nyoe.
+cannotdelete|Laman atawa beureukaih "~{0}" h'an jeuët geusampôh.\nKadang ka na soe sampôh.
+cannotdelete-title|H'an jeuet sampôh laman "~{0}"
+delete-hook-aborted|Seunampôh geupeubateuë lé kaw'ét parser.\nHana jeuneulaih.
+no-null-revision|H'an jeuet peugöt revisi null barô keu halaman "~{0}"
+badtitle|Nan hana beutôi
+badtitletext|Nan laman nyang neulakèë hana sah, soh, atawa nan antarabahsa atawa antarawiki nyang salah sambông.
+perfcached|Data di yup nyoe geupeusom ngön kadang kön data barô. {{PLURAL:~{0}\u007Csaboh hase\u007C~{0} hase}} maksimum na lam beujana.
+perfcachedts|Data di yup nyoe geupeusom, ngön geupeubarô seuneulheueh bak ~{0}. {{PLURAL:~{3}\u007Csaboh hase\u007C~{3} hase}} paléng le na lam beujana.
+querypage-no-updates|Beunarô keu laman nyoe hat nyoe teungöh h'an jeuët.\nData sinoe h'an geupasoe ulang.
+viewsource|Eu nè
+viewsource-title|Eu ne keu ~{0}
+actionthrottled|Buet geupeubataih
+actionthrottledtext|Sibagoe saboh seunipat lawan-spam, droeneuh geupeubataih nibak neupeulaku buet nyoe le that gö lam watèë paneuk, ngön droeneuh ka leubèh nibak bataih.\nNeuci lom lam padum minèt.
+protectedpagetext|Laman nyoe ka geupeulindông mangat bèk jeuet geuandam
+viewsourcetext|Droëneuh  jeuët neu’eu
+viewyourtext|Droëneuh meuidzin kalön ngön neucok nè andam droëneuh u laman nyoë
+protectedinterface|Halaman nyoe na tèks muka keu muka keu peukakaih leumiëk ngön geupeulindông mangat bek jeuet jipeureuloh.\nKeu neuk tamah atawa ubah teujeumah keu ban dum wiki, neungui [//translatewiki.net/ translatewiki.net], proyek lokalisasi MediaWiki.
+mycustomcssprotected|Droëneuh hana hak neuandam halaman CSS nyoe.
+mycustomjsprotected|Droëneuh hana idin neuandam halaman JavaScript nyoe.
+mypreferencesprotected|Droeneuh hana izin keu neuandam geunalak droeneuh.
+ns-specialprotected|Laman khusuih bèk neuandam
+titleprotected|Nan nyoe ka geupeulindông nibak neuandam lé [[User:~{0}\u007C~{0}]].\nDalèhjih nakeuh "''~{1}''".
+invalidtitle-knownnamespace|Nan nyang hana sah ngön ruweueng nan "~{1}" ngön "~{2}"
+exception-nologin|Hana tamöng lom
+exception-nologin-text|Droëneuh suwah [[Special:Userlogin\u007Cneutamöng]] mangat jeuët neupeuhah laman nyoë
+virus-unknownscanner|Antivirus hana meuturi:
+logouttext|'''Droeneuh ka neutubiet log.'''\n\nBeuneuteupue meunyoe na padum-padum laman nyang deuh lagèe na neutamöng log, sampoe ka lheuh neupeugléh ''cache''.
+welcomeuser|Seulamat trôk teuka, ~{0} !
+welcomecreation-msg|Nan droëneuh ka geupeugöt. \nBèk tuwo neuatô [[Special:Preferences\u007Cgeunalak {{SITENAME}}]] droëneuh.
+yourname|Ureuëng ngui:
+userlogin-yourname|Ureuëng ngui
+userlogin-yourname-ph|Peutamöng nan ureuëng ngui droëneuh
+createacct-another-username-ph|Pasoë nan ureuëng ngui droëneuh
+yourpassword|Lageuëm:
+userlogin-yourpassword|Lageuëm rahsia
+userlogin-yourpassword-ph|Pasoë lageuëm rahsia droëneuh
+createacct-yourpassword-ph|Pasoë lageuëm rahsia
+yourpasswordagain|Pasoë lom lageuëm rahsia:
+createacct-yourpasswordagain|Peunyo lageuëm rahsia
+createacct-yourpasswordagain-ph|Pasoë lom lageuëm rahsia
+remembermypassword|Ingat lôn tamöng bak peuramban nyoë (keu paléng trép ~{0} {{PLURAL:~{0}\u007Curoë\u007Cdays}})
+userlogin-remembermypassword|Peubiyeuë lôn tamöng
+userlogin-signwithsecure|Ngui server aman
+yourdomainname|Domain droeneuh:
+password-change-forbidden|Droëneuh h‘an jeuët neuubah lageuëm rahsia bak wiki nyoë.
+externaldberror|Na seunalah bak peusahèh basis data luwa atawa droëneuh hana geubri idin keu neupeubarô akun luwa droëneuh
+login|Tamöng
+nav-login-createaccount|Tamöng / dapeuta
+userlogin|Tamöng / dapeuta
+userloginnocreate|Tamöng
+logout|Teubiët
+userlogout|Teubiët
+notloggedin|Hana tamöng lom
+userlogin-noaccount|Goh lom neudapeuta?
+userlogin-joinproject|Neugabông ngön {{SITENAME}}
+nologin|Goh lom neudapeuta? ~{0}.
+nologinlink|Peudapeuta nan barô
+createaccount|Peudapeuta nan barô
+gotaccount|Ka lheuëh neudapeuta? ~{0}.
+gotaccountlink|Tamöng
+userlogin-resetlink|Tuwo rincian tamöng droëneuh?
+userlogin-resetpassword-link|Tuwö lageuëm rahsia?
+userlogin-helplink2|Beunantu tamöng log
+userlogin-loggedin|Droëneuh ka neutamöng seubagoë ~{0}. Neungui blangko di yup keu neutamöng seubagoë ureuëng ngui la’én
+userlogin-createanother|Peudapeuta nan barô
+createacct-emailrequired|Alamat surat-e
+createacct-emailoptional|Alamat surat-e (hana wajéb)
+createacct-email-ph|Neupasoë alamat surat-e droëneuh
+createacct-another-email-ph|Pasoë alamat surat-e
+createaccountmail|Neungui lageuëm rahsia beurangkapeuë keu si’at nyoë. Lheuëh nyan neupeu’et u surat-e nyang droëneuh meuh’eut
+createacct-realname|Nan aseuli (hana wajéb)
+createaccountreason|Choë:
+createacct-reason|Choë:
+createacct-reason-ph|Pakön droëneuh neupeugöt nan ureuëng ngui la’én
+createacct-captcha|Paréksa aman
+createacct-imgcaptcha-ph|Pasoë seunurat nyang neu'eu di ateuëh
+createacct-submit|Peudapeuta nan barô
+createacct-another-submit|Peugöt nan ureuëng ngui la’én
+createacct-benefit-heading|{{SITENAME}} geupeugöt lé ureuëng lagèë droëneuh.
+createacct-benefit-body1|{{PLURAL:~{0}\u007Candam}}
+createacct-benefit-body2|{{PLURAL:~{0}\u007C~{0} halaman}}
+createacct-benefit-body3|{{PLURAL:~{0}\u007Cureuëng tuléh}} seuneulheuëh
+badretype|Lageuëm rahsia nyang neupasoë salah.
+userexists|Nan ureuëng ngui nyang neupasoë ka na soë ngui.\nNeupiléh nan nyang la'én.
+loginerror|Salah bak tamöng
+createacct-error|Peudapeuta nan barô hana meuhasé
+createaccounterror|H‘an jeuët peudapeuta nan: ~{0}
+nocookiesnew|Nan ureueng ngui nyoe ka meupeugöt, tapi goh meutamöng.\n{{SITENAME}} jingui ''cookies'' keu peutamöng ureueng ngui.\n''Cookies'' droeneuh hana meupeuudép.\nNeupeuudép ''cookies'' dilèe, lheuh nyan neutamöng ngön nan ureueng ngui ngön lageuem rahsia droeneuh.
+noname|Nan ureuëng ngui nyang Droënueh peutamöng hana sah.
+loginsuccesstitle|Meuhasé tamöng
+loginsuccess|'''Droëneuh  jinoë ka neutamöng di {{SITENAME}} sibagoë "~{0}".'''
+nosuchuser|Hana ureuëng ngui ngön nan "~{0}".\nNan ureuëng ngui jipeubida haraih rayek.\nTulông neuparéksa keulayi neuija Droëneuh, atawa [[Special:UserLogin/signup\u007Cneudapeuta barô]].
+nosuchusershort|Hana ureuëng ngui ngön nan "~{0}".\nPréksa keulayi neu’ija Droëneuh.
+nouserspecified|Neupasoë nan Droëneuh.
+login-userblocked|Ureuëng ngui nyoë ka teublokir, hana idin/hanjeut tamöng.
+wrongpassword|Lageuëm nyang neupasoë salah. Neuci lom.
+wrongpasswordempty|Droëneuh hana neupasoë lageuëm. Neuci lom.
+passwordtooshort|Lageuëm paléng h'an harôh na {{PLURAL:~{0}\u007C1 karakter\u007C~{0} karakter}}.
+password-name-match|Lageuëm Droeuneuh beubida nibak nan Ureuëng ngui.
+password-login-forbidden|Ngui nan ureuëng ngui ngön lageuëm nyoë ka jitham.
+mailmypassword|Atô keulayi lageuëm rahsia
+passwordremindertitle|Lageuëm seumeuntara barô keu {{SITENAME}}
+passwordremindertext|Salah sidroë (kadang Droëneuh, ngön alamat IP ~{0}) geulakèë lageuëm barô keu {{SITENAME}} (~{3}). Lageuëm si'at keu ureuëng ngui "~{1}" ka geupeuna ngön ka geuatô jeuet keu "~{2}". Meunyö nyoe nakeuh meukeusud droeneuh, droeneuh peureulèë neutamöng ngön neupiléh lageuëm barô jinoe. Lageuem siat droeneuh meung abéh lam {{PLURAL:~{4}\u007Csiuroe\u007C~{4} uroe}}.\n\nMeunyö ureuëng la'én nyang peugöt neulakèë nyoe, atawa meunyö droeneuh ka neuingat lageuëm droeneuh, ngön droeneuh h'an ék neugantoë lé, droeneuh jeuet hana neupeureumeuën peusan nyoe ngön neulanjut neungui lageuem awaineuh.
+noemail|Hana alamat surat-e nyang teucatat keu ureuëng ngui "~{0}".
+noemailcreate|Droeneuh suwah neuseudia alamt surat-e nyang jeut ngui.
+passwordsent|Lageuëm barô ka geupeu'et u surat-e nyang geupeudapeuta keu "~{0}". Neutamöng teuma lheuëh neuteurimöng surat-e nyan.
+eauthentsent|Saboh surat-e keu peunyö ka geukirém u alamat surat-e Droëneuh. Droëneuh beuneuseutöt préntah lam surat nyan keu neupeunyö meunyö alamat nyan nakeuh beutôi atra Droëneuh. {{SITENAME}} h‘an geupeuudép surat Droëneuh meunyö langkah nyoë hana neupeubuet lom.
+cannotchangeemail|Alamat surat-e han jeut geugantoe bak wiki nyoe.
+emaildisabled|Situs nyoe han jeut geukirém surat-e.
+accountcreated|Ureuëng ngui ka teupeugöt
+accountcreatedtext|Ureuëng ngui keu [[{{ns:User}}:~{0}\u007C~{0}]]([[{{ns:User talk}}:~{0}\u007Ctalk]]) ka teupeugöt.
+createaccount-title|Peugöt ureuëng ngui keu {{SITENAME}}
+login-throttled|Droeneuh ka lé that neuujoe tamöng.\nNeuprèh ~{0} sigohlom neuujoe lom.
+login-abort-generic|Log tamöng droëneuh han meuhasé- Ngon ka geupeubateuë.
+loginlanguagelabel|Bahsa: ~{0}
+createacct-another-realname-tip|Nan aseuli hana meucéh neupasoe.\nMeunyö neupasoe, euntreuk nan droëneuh nyan geupeuleumah mangat jitupeue soe nyang tuléh.
+pt-login|Tamöng
+pt-login-button|Tamöng
+pt-createaccount|Peudapeuta nan barô
+pt-userlogout|Teubiët
+php-mail-error-unknown|Ralat hana geuteupeuë lam guna surat() PHP
+user-mail-no-addy|Ujoe kirém surat-e ngön hana alamat surat-e.
+user-mail-no-body|Droëneuh ka neucuba kirém e-surat soh ngon that paneuk
+changepassword|Gantoe lageuem rahsia
+resetpass_announce|Keu neutamöng log, droëneuh suwah neupeugöt lageuëm rahsia barô
+resetpass_header|Gantoë lageuëm rahsia nan ureuëng ngui
+oldpassword|Lageuëm rahsia awai:
+newpassword|Lageuëm rahsia barô:
+retypenew|Pasoë lom lageuëm barô:
+resetpass_submit|Atô lageuëm rahsia lheuëh nyan tamöng
+changepassword-success|Lageuëm rahsia droëneuh meuhasé geugantoë!
+resetpass_forbidden|Lageuëm rahsia h'an jeuët geugantoë
+resetpass-no-info|Droëneuh suwah neutamöng mangat jeuët neu'eu laman nyoë
+resetpass-submit-loggedin|Gantoë lageuëm rahsia
+resetpass-submit-cancel|Pubateuë
+resetpass-wrong-oldpass|Narit rahsia salah.\nDroëneuh kadang ka meuhasé neuubah narit rahsia atawa neulakè narit rahsia barô
+resetpass-temp-password|Lageuem rahsia keu siat:
+resetpass-abort-generic|Meuubah narit rahsia ka geupeubateuë lé ekstensi
+resetpass-validity-soft|Lageuëm rahsia hana sah: ~{0}
+passwordreset|Atô keulayi lageuëm rahsia
+passwordreset-text-one|Neupeuleungkap formulir nyoë keu meuatô keulayi narit rahsia
+passwordreset-text-many|{{PLURAL:~{0}\u007CNeupasoë saboh kutak dimeuyub nyoë keu neuteumèe narit rahsia siat rot e-surat}}
+passwordreset-legend|Atô keulayi lageuëm rahsia
+passwordreset-disabled|Meuatô narit rahsia keulayi ka geupeumaté lam wiki nyoë
+passwordreset-emaildisabled|Tanda e-surat ka geupeumaté lam wiki nyoë
+passwordreset-username|Ureueng ngui:
+passwordreset-domain|Domain
+passwordreset-capture|Eu hasé surat-e?
+passwordreset-capture-help|Meunyoë droëneuh neuceuë kutak nyoë, e-surat (ngon narit rahsia siat) ka geupeuleumah keudroëneuh ngon geukirém cit keu ureuëng ngui
+passwordreset-email|Alamat surat-e:
+passwordreset-emailtitle|Teuneurang nan ureueng ngui bak {{SITENAME}}
+passwordreset-emailelement|Nan ureuëng ngui: ~{0}\nLageuëm rahsia sijamong: ~{1}
+changeemail|Gantoe alamat surat-e
+changeemail-no-info|Droeneuh suwah neutamöng mangat jeuet neu'eu laman nyoe
+changeemail-oldemail|Alamat surat-e jinoe:
+changeemail-newemail|Alamat surat-e barô:
+changeemail-none|(hana)
+changeemail-password|Lageuem rahsia {{SITENAME}} droeneuh:
+changeemail-submit|Gantoe surat-e
+extlink_sample|http://www.example.com nan peunawôt
+extlink_tip|Peunawôt luwa (neubôh http:// bak awai)
+nowiki_sample|Bèk format naseukah nyoë
+nowiki_tip|Bèk seutot beuntuk wiki
+image_tip|Pasoë beureukaih
+media_tip|Peunawôt beureukaih
+sig_tip|Tanda jaroë Droëneuh ngön tanda watèë
+hr_tip|Garéh data
+summary|Éhtisa:
+subject|Bhah/nan:
+minoredit|Nyoë lôn andam bacut
+watchthis|Kalön laman nyoë
+savearticle|Keubah laman
+preview|Eu dilèë
+showpreview|Peuleumah hasé
+showdiff|Peuleumah neuubah
+anoneditwarning|Droëneuh   hana teudapeuta tamong. Alamat IP Droëneuh   teucatat lam tarèh (riwayat away) ôn nyoë.
+missingcommenttext|Neupasoë beunalah di yup.
+summary-preview|Eu dilèë neuringkaih:
+blockedtitle|Ureueng ngui geutheun
+blockedtext|'''Nan ureuëng nguy atawa alamat IP Droëneuh  ka geutheun.'''\n\nGeutheun lé ~{0}. Dalèh jih nakeuh ''~{1}''.\n\n* Geutheun yôh: ~{7}\n* Neutheun maté tanggay bak: ~{5}\n* Nyang geutheun: ~{6}\n\nDroëneuh   jeuët neutanyong bak ~{0} atawa [[{{MediaWiki:Grouppage-sysop}}\u007Cnyang urôh nyang la’én]] keu peugah haba bhah nyoë.\n\nDroëneuh   h’an jeuët neunguy alat 'Kirém surat-e ureuëng nguy nyoë' keucuali ka neupasoë alamat surat-e nyang sah di [[Special:Preferences\u007CGeunalak]] Droëneuh ngön Droëneuh ka geutheun keu nguy nyan.\n\nAlamat IP Droëneuh nakeuh ~{2}, ngön ID neutheun nakeuh ~{4}. Tulông peuseureuta salah saboh atawa ban duwa beurita nyoë bak tiëp teunanyöng nyang neupeugöt.
+autoblockedtext|'''Nan ureuëng nguy atawa alamat IP Droëneuh  ka geutheun.'''\n\nGeutheun lé ~{0}. Dalèh jih nakeuh ''~{1}''.\n\n* Geutheun yôh: ~{7}\n* Neutheun maté tanggay bak: ~{5}\n* Nyang geutheun: ~{6}\n\nDroëneuh   jeuët neutanyong bak ~{0} atawa [[{{MediaWiki:Grouppage-sysop}}\u007Cnyang urôh nyang la’én]] keu peugah haba bhah nyoë.\n\nDroëneuh   h’an jeuët neunguy alat 'Kirém surat-e ureuëng nguy nyoë' keucuali ka neupasoë alamat surat-e nyang sah di [[Special:Preferences\u007CGeunalak]] Droëneuh ngön Droëneuh ka geutheun keu nguy nyan.\n\nAlamat IP Droëneuh nakeuh ~{2}, ngön ID neutheun nakeuh ~{4}. Tulông peuseureuta salah saboh atawa ban duwa beurita nyoë bak tiëp teunanyöng nyang neupeugöt.
+blockednoreason|hana dalèh nyang geubri
+whitelistedittext|Droeneuh suwah ~{0} keu neuandam ôn.
+nosuchsectiontitle|Bideueng hana geutumèe
+loginreqtitle|Droeneuh payah neutamöng log.
+loginreqlink|tamöng
+loginreqpagetext|Droeneuh payah ~{0} keu neu'eu ôn-ôn la'én.
+accmailtitle|Lageuem rahsia ka meukirém
+newarticle|(Barô)
+newarticletext|Droëneuh ka neuseutöt peunawôt u laman nyang goh na.\nKeu neupeugöt laman nyan, neukeutik lam plôk di yup (eu [~{0} laman beunantu] keu haba leubèh le).\nMeunyö droëneuh trôk keunoë hana neusaja, neuteugön tèk '''back''' bak ''browser'''droëneuh.
+anontalkpagetext|----''Nyoe nakeuh ôn marit ureueng ngui nyang hana tamöng atawa hana geungui.''\nSaweub nyan, kamoe payah meukubah alamat IP-geuh keu meuparéksa. \nAlamat IP mungkén jingui lé padum-padum droe ureueng.\nMeunyoe droeneuh ureueng nyang hana tamöng nyan, tulông [[Special:UserLogin/signup\u007Cpeugöt nan ureueng ngui]] atawa [[Special:UserLogin\u007Ctamöng log]] mangat meuteugah nibak bhah nyang hana meuphôm bak uroe la'én.
+noarticletext|Hana naseukah jinoë lam laman nyoë.\nJi Droëneuh jeuët [[Special:Search/{{PAGENAME}}\u007Cneumita keu nan ôn nyoë]] bak ôn-ôn la’én, <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} log nyang na hubôngan], atawa [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} neu'andam ôn nyoë]</span>.
+noarticletext-nopermission|Hana asoë bak laman nyoë jinoë.\nDroëneuh jeuët [[Special:Search/{{PAGENAME}}\u007Cneumita keu nan ôn nyoë]] bak laman-laman la'én,\natawa <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} neumita log nyang na meuhubông]</span>, tapi Droëneuh hana idin keu neupeugöt laman nyoë
+userpage-userdoesnotexist-view|Ureueng ngui "~{0}" hana teudapeuta.
+updated|(Seubarô)
+note|'''Hareutoë:'''
+previewnote|'''Beu neuingat meunyo laman nyoë goh lom neukeubah!'''
+editing|Andam ~{0}
+creating|Teungöh meupeugöt ~{0}
+editingsection|Andam ~{0} (bideuëng)
+editingcomment|Andam ~{0} (bideuëng)
+editconflict|Konflik andam: ~{0}
+yourtext|Naseukah droëneuh
+storedversion|Geunantoë teukeubah
+yourdiff|Bida
+copyrightwarning|Beu neuingat bahwa ban mandum nyang Droëneuh   tuléh keu {{SITENAME}} geukira geupeuteubiët di yup ~{1} (ngiëng ~{0} keu leubèh jeulah). Meunyoë Droëneuh h‘an neutém teunuléh Droëneuh  ji’andam ngön jiba ho ho la’én, bèk neupasoë teunuléh Droëneuh  keunoë.<br />Droëneuh  neumeujanji chit meunyoë teunuléh nyoë nakeuh atra neutuléh keudroë, atawa neucok nibak nè nè atra umôm atawa nè bibeuëh la’én.\n'''BÈK NEUPASOË TEUNULÉH NYANG GEUPEULINDÔNG HAK KARANG NYANG HANA IDIN'''
+templatesused|{{PLURAL:~{0}\u007CTemplat\u007CTemplates}} nyang geungui bak laman nyoë:
+templatesusedpreview|{{PLURAL:~{0}\u007CTemplat\u007CTemplates}} nyang geungui bak eu dilèë nyoë:
+templatesusedsection|{{PLURAL:~{0}\u007CSeunaleuëk}} geungui bak bagian nyoë:
+template-protected|(geulindông)
+template-semiprotected|(siteungoh-lindông)
+hiddencategories|Laman nyoë nakeuh anggèëta nibak {{PLURAL:~{0}\u007C1 kawan teusom \u007C~{0} kawan teusom}}:
+nocreatetext|{{SITENAME}} ka jiköt bak peugöt laman barô. Ji Droëneuh   jeuët neuriwang teuma ngön neu’andam laman nyang ka na, atawa [[Special:UserLogin\u007Cneutamong atawa neudapeuta]].
+nocreate-loggedin|Droeneuh hana khut keu neupeugöt laman-laman barô.
+sectioneditnotsupported-title|Andam bideung hana meudukông
+sectioneditnotsupported-text|Andam bideung hana meudukông bak ôn nyoe.
+permissionserrors|Salah khut/hak tamöng
+permissionserrorstext|Droëneuh hana geupeuidin keu neupubuët nyoë, muroë {{PLURAL:~{0}\u007Cdalèh}} nyoë:
+permissionserrorstext-withaction|Droëneuh hana hak tamöng keu ~{1}, muroë {{PLURAL:~{0}\u007Cchoë\u007Cchoë}} nyoë:
+recreate-moveddeleted-warn|'''Ingat: Droëneuh neupeugöt ulang saboh laman nyang ka tom geusampôh. ''',\n\nNeutimang-timang dilèë peuë ék patôt neupeulanjut atra nyang teungöh neu’andam.\nNyoë pat nakeuh log seunampôh nibak laman nyoë:
+moveddeleted-notice|Laman nyoë ka geusampôh.\nLog seunampôh ngön log pinah laman nyoë geupeuseudia di yup nyoë keu keuneubah.
+log-fulllog|Eu ban dum ceunatat
+edit-hook-aborted|Seunampôh geupeubateuë lé kaw'ét parser.\nHana jeuneulaih.
+edit-gone-missing|Han jeut peubarô ôn.\nÔn nyoe mungkén ka geusampôh.
+edit-conflict|Konflik andam.
+postedit-confirmation-saved|Neuandam droeneuh ka meukubah.
+edit-already-exists|Han jeut peugöt ôn barô.\nÔn nyoe ka lheuh na.
+defaultmessagetext|Naseukah peusan pukok
+content-model-wikitext|naseukah wiki
+post-expand-template-inclusion-warning|'''Ingat:''' Seunipat seunaleuëk nyang neunguy rayek that.\nLadôm seunaleuëk hana geupeurôh
+post-expand-template-inclusion-category|Laman ngön seunipat seunaleuëk nyang leubèh bataih
+post-expand-template-argument-warning|'''Ingat:''' Laman nyoe na paléng h'an saboh alasan seunaleuëk nyang na sunipat èkspansi nyang raya that.\nAlasan-alasan nyan hana geupeureumeuën.
+post-expand-template-argument-category|Laman ngön dalèh seunaleuëk nyang hana geupeureumeuën
+cantcreateaccounttitle|Han jeut peugöt nan ureueng ngui
+cantcreateaccount-text|Peuneugöt nan ureueng ngui nibak alamat IP ('''~{0}''') ka geutheun lé [[User:~{2}\u007C~{2}]].\n\nDalèh ~{2} nyoe nakeuh ''~{1}''
+viewpagelogs|Eu log laman nyoë
+nohistory|Hana riwayat neuandam awai keu ôn nyoe.
+currentrev|Geunantoë jinoë
+currentrev-asof|Geunantoë barô bak ~{0}
+revisionasof|Geunantoë tiëp ~{0}
+revision-info|Geunantoë tiëp ~{0}; ~{1}
+previousrevision|← Geunantoë awai
+nextrevision|Geunantoë lheuëh nyan→
+currentrevisionlink|Geunantoë jinoë
+cur|jin
+next|u keu
+last|sigohlom
+page_first|phôn
+page_last|keuneulheuëh
+histlegend|Piléh duwa teuneugön radiô, lheuëh nyan teugön teuneugön ''peubandéng'' keu peubandéng seunalén. Teugön saboh tanggay keu eu seunalén ôn bak tanggay nyan.<br />(skr) = bida ngön seunalén jinoë, (akhé) = bida ngön seunalén sigohlomjih. '''u''' = andam ubeut, '''b''' = andam bot, → = andam bideuëng, ← = ehtisa keudroë
+history-fieldset-title|Eu riwayat awai
+history-show-deleted|Nyang geusampôh mantöng
+histfirst|paléng trép
+histlast|paléng barô
+historysize|({{PLURAL:~{0}\u007C1 bit}})
+historyempty|(soh)
+history-feed-title|Riwayat neupeupah
+history-feed-description|Riwayat neupeupah keu ôn nyoe bak wiki
+history-feed-item-nocomment|~{0} bak ~{1}
+rev-deleted-comment|(mohtasa neuandam geusampôh)
+rev-deleted-user|(nan ureueng ngui geusampôh)
+rev-deleted-user-contribs|[nan ureueng ngui atawa alamat IP geusampôh - neuandam geupeusom bak dapeuta beuneuri]
+rev-delundel|peuleumah/peusom
+rev-showdeleted|peudeuh
+revdelete-show-file-submit|Nyoe
+revdelete-hide-comment|Mohtasa neuandam
+revdelete-radio-same|(bèk neugantoe)
+revdelete-radio-set|Teusom
+revdelete-radio-unset|Deuih
+revdelete-log|Dalèh:
+revdel-restore|Gantoë seuneudeuih
+pagehist|Taréh laman
+deletedhist|Taréh nyang meusampôh
+mergehistory-from|Asai ôn:
+mergehistory-invalid-source|Asai ôn payah nan nyang beutôi.
+mergehistory-reason|Dalèh:
+mergelog|Peugabông log
+revertmerge|Hana jadèh peugabông
+history-title|Riwayat geunantoë nibak "~{0}"
+lineno|Baréh ~{0}:
+compareselectedversions|Peubandéng curak teupiléh
+editundo|pubateuë
+diff-empty|(Hana bida)
+searchresults|Hasé mita
+searchresults-title|Hasé mita keu "~{0}"
+notextmatches|Hana naseukah laman nyang pah
+prevn-title|~{0} {{PLURAL:~{0}\u007Chasé\u007Chasé}} sigohlomjih
+nextn-title|~{0} {{PLURAL:~{0}\u007Chasé}} lheuëh nyan
+shown-title|Peuleumah ~{0} {{PLURAL:~{0}\u007Chasé}} tiëp laman
+viewprevnext|Eu (~{0} {{int:pipe-separator}} ~{1})(~{2})
+searchmenu-exists|'''Na laman ngön nan "[[:~{0}]]" bak wiki nyoe.'''
+searchmenu-new|<strong>Peugöt laman "[[:~{0}]]" bak wiki nyoë!</strong> {{PLURAL:~{1}\u007C0=\u007CEu cit laman nyang geurumpok nibak meunita droëneuh.\u007CEu cit hasé mita nyang geurumpok.}}
+searchprofile-articles|Laman asoë
+searchprofile-images|Multimedia
+searchprofile-everything|Ban dum
+searchprofile-advanced|Tingkat lanjut
+searchprofile-articles-tooltip|Mita bak ~{0}
+searchprofile-images-tooltip|Mita beureukaih
+searchprofile-everything-tooltip|Mita ban dum laman asoë (rôh ôn marit)
+searchprofile-advanced-tooltip|Mita bak ruweuëng nan meupat-pat
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 narit\u007C~{1} narit}})
+search-result-category-size|{{PLURAL:~{0}\u007C1 anggeeta\u007C~{0} anggeeta}} ({{PLURAL:~{1}\u007C1 aneuk kawan\u007C~{1} aneuk kawan}}, {{PLURAL:~{2}\u007C1 beureukaih\u007C~{2} beureukaih}})
+search-redirect|(peuninah ~{0})
+search-section|(bideuëng ~{0})
+search-suggest|Kadang meukeusud Droëneuh nakeuh: ~{0}
+search-interwiki-caption|Buët la’én
+search-interwiki-default|Hasé nibak ~{0}:
+search-interwiki-more|(lom)
+searchrelated|meusambat
+searchall|ban dum
+search-nonefound|Hana hasé nyang paih lagèë neulakèë
+powersearch-legend|Mita lanjut
+powersearch-ns|Mita bak ruweuëng nan:
+powersearch-toggleall|Ban dum
+powersearch-togglenone|Hana
+preferences|Galak
+mypreferences|Atô
+prefs-edits|Jumeulah neuandam:
+prefs-skin|Kulét
+skin-preview|Eu dilèe
+datedefault|Hana geunalak
+prefs-user-pages|Laman ureueng ngui
+prefs-personal|Profil ureueng ngui
+prefs-rc|Ban meuubah
+prefs-watchlist|Dapeuta keunalön
+prefs-watchlist-days|Jumeulah uroe nyang meupeudeuh bak dapeuta keunalön:
+prefs-watchlist-days-max|{{PLURAL:~{0}\u007Curoë}}
+prefs-misc|La'én-la'én
+prefs-resetpass|Gantoe lageuem rahsia
+prefs-changeemail|Gantoe alamat surat-e
+prefs-setemail|Pasoe alamat surat-e
+prefs-email|Peuniléh surat-e
+prefs-rendering|Seuneudeuh
+saveprefs|Keubah
+prefs-editing|Neuandam
+rows|Baréh:
+searchresultshead|Mita
+stub-threshold-disabled|Geupeumaté
+timezoneuseoffset|La'én (peuteuntèe bidajih)
+timezoneregion-america|Amirika
+timezoneregion-antarctica|Antartika
+timezoneregion-atlantic|Laôt Atlantik
+timezoneregion-europe|Ierupa
+timezoneregion-indian|Laôt India
+timezoneregion-pacific|Laôt Pasifik
+allowemail|Peuudép surat-e nibak ureueng ngui la'én
+prefs-searchoptions|Mita
+prefs-namespaces|Ruweuëng nan
+default|meuneumat
+prefs-files|Beureukaih
+youremail|Surat-e:
+prefs-registration|Watèe neudapeuta:
+yourrealname|Nan aseuli:
+yourlanguage|Bahsa:
+yournick|Tanda jaroe barô:
+prefs-help-signature|Komèntar bak ôn marit suwah neubôh "<nowiki>~~~~</nowiki>", nyang eunteuk meugantoe keu tanda jaroe droeneuh ngön watèe jinoe.
+badsiglength|Tanda jaroë droëneuh panyang that.\nBèk leubèh nibak ~{0} {{PLURAL:~{0}\u007Ckarakter}}.
+gender-unknown|Hana geupeunyata
+gender-male|Ureueng agam
+gender-female|Ureueng inöng
+email|Surat-e
+prefs-help-realname|* Nan aseuli hana meucéh neupasoë.\nMeunyö neupasoë, euntreuk nan Droëneuh nyan geupeuleumah mangat jitupeuë soë nyang tuléh.
+prefs-help-email|Alamat surat-e hana meucéh na, tapi geupeureulèë keu seumeugöt ulang lageuem, meunyö droeneuh tuwö lageuëm.
+prefs-help-email-others|Droeneuh jeuet cit neupiléh neupubiyeuë ureuëng la'én geupeu'et surat keu droeneuh röt surat-e röt seunambat bak laman ureueng ngui atawa on mariët.\nSurat-e droeneuh h'an geupeugah keu ureuëng nyan.
+prefs-help-email-required|Peureulèe alamat surat-e.
+prefs-signature|Tanda jaroe
+prefs-dateformat|Format uroe/watèe
+prefs-timeoffset|Bida watèe
+prefs-advancedediting|Peuniléh umom
+prefs-editor|Ureueng andam
+prefs-preview|Eu dilèe
+prefs-diffs|Bida
+prefs-help-prefershttps|Geunalak nyoe geupeudeuh watèe neutamöng lom.
+email-address-validity-valid|Alamat surat-e sah
+email-address-validity-invalid|Pasoe alamat surat-e nyang sah
+userrights-user-editname|Pasoe nan ureueng ngui:
+editusergroup|Ubah kawan ureueng ngui
+editinguser|Gantoe khut ureueng ngui '''[[User:~{0}\u007C~{0}]]''' ~{1}
+userrights-editusergroup|Ubah kawan ureueng ngui
+saveusergroups|Ubah kawan ureueng ngui
+userrights-groupsmember|Anggèeta nibak:
+userrights-reason|Dalèh:
+userrights-no-interwiki|Droeneuh hana izin keu neuubah khut ureueng ngui bak wiki la'én.
+userrights-notallowed|Droeneuh hana izin keu neutamah atawa neupeugadöh khut ureueng ngui.
+userrights-changeable-col|Kawan nyang jeut neugantoe
+userrights-unchangeable-col|Kawan nyang han jeut neugantoe
+group|Kawan:
+group-user|Ureueng-ureueng ngui
+group-autoconfirmed|Ureueng ngui nyang meu-konfirmasi otomatis
+group-sysop|Ureuëng urôh
+group-bureaucrat|Birôkrat
+group-suppress|Ureueng kalön
+group-all|(ban dum)
+group-user-member|{{GENDER:~{0}\u007Cureueng ngui}}
+group-autoconfirmed-member|{{GENDER:~{0}\u007Cureueng ngui meu-konfirmasi otomatis}}
+group-bot-member|{{GENDER:~{0}\u007Cbot}}
+group-sysop-member|{{GENDER:~{0}\u007Cureueng urôh}}
+group-bureaucrat-member|{{GENDER:~{0}\u007Cbirôkrat}}
+group-suppress-member|{{GENDER:~{0}\u007Cureueng kalön}}
+grouppage-user|{{ns:project}}:Ureueng ngui
+grouppage-autoconfirmed|{{ns:project}}:Ureueng ngui meu-konfirmasi otomatis
+grouppage-bot|{{ns:project}}:Bots
+grouppage-sysop|{{ns:project}}:Ureuëng urôh
+grouppage-bureaucrat|{{ns:project}}:Birôkrat
+grouppage-suppress|{{ns:project}}:Ureueng kalön
+right-read|Beuet laman
+right-edit|Andam laman
+right-createpage|Peugöt laman barô (nyang kön laman marit)
+right-createtalk|Peugöt ôn marit
+right-createaccount|Peugöt nan ureueng ngui barô
+right-minoredit|Bôh tanda seubagoe andam ubeut
+right-move|Pinah laman
+right-move-subpages|Pinah laman ngön ban dum aneuk laman
+right-move-rootuserpages|Pinah laman ureueng ngui
+right-movefile|Pinah beureukaih
+right-upload|Peutamöng beureukaih
+right-upload_by_url|Peutamöng beureukaih nibak URL
+right-writeapi|Meungui API teumuléh
+right-delete|Sampôh laman
+right-bigdelete|Sampôh laman ngön ban dum riwayatjih
+right-browsearchive|Mita laman nyang geusampôh
+newuserlogpage|Ureuëng ngui barô
+rightslog|Log neuubah hak peuhah
+action-read|beuët laman nyoe
+action-edit|andam laman nyoë
+action-createpage|peugöt laman
+action-move|Peupinah laman nyoë
+nchanges|~{0} {{PLURAL:~{0}\u007Cneuubah}}
+enhancedrc-since-last-visit|~{0} {{PLURAL:~{0}\u007Cyôh seunaweuë seuneulheuëh kön}}
+enhancedrc-history|riwayat
+recentchanges|Neuubah barô
+recentchanges-legend|Peuniléh neuubah barô
+recentchanges-summary|Di yup nyoë nakeuh neuubah barô nyang na bak Wikipèdia nyoë.\nHareutoë: (bida) = neuubah, (riwayat) = riwayat teumuléh, '''B''' = laman barô, '''u''' = neuandam ubeut, '''b''' = neuandam bot, (± ''bit'') = jeumeulah asoë meutamah/meukureuëng, → = neuandam bideuëng, ← = mohtasa otomatis.\n----
+recentchanges-noresult|Hana neuubah lam lheuëng watèë nyoë nyang paih ngön syarat
+recentchanges-feed-description|Seutöt neuubah barô lam wiki bak umpeuën nyoë.
+recentchanges-label-newpage|Neuandam nyoë jipeugöt laman barô
+recentchanges-label-minor|Nyoe neuandam ubeut
+recentchanges-label-bot|Neuandam nyoe geupubuet le bot
+recentchanges-label-unpatrolled|Neuandam nyoe goh lom geukalon
+recentchanges-legend-heading|'''Hareutoë:'''
+recentchanges-legend-newpage|{{int:recentchanges-label-newpage}} (eu cit [[Special:NewPages\u007Cdapeuta laman barô]])
+rcnotefrom|Di yup nyoë nakeuh neuubah yôh <strong>~{1}</strong> (geupeudeuh trôh ‘an <strong>~{0}</strong> neuubah).
+rclistfrom|Peudeuih neuubah barô yôh ~{2} ~{1} kön
+rcshowhideminor|~{0} andam bacut
+rcshowhideminor-hide|Peusom
+rcshowhidebots|~{0} bot
+rcshowhidebots-show|Peuleumah
+rcshowhideliu|~{0} ureuëng ngui tamöng
+rcshowhideliu-hide|Peusom
+rcshowhideanons|~{0} ureuëng ngui hana nan
+rcshowhideanons-hide|Peusom
+rcshowhidepatr|~{0} andam teurunda
+rcshowhidemine|~{0} atra lôn andam
+rcshowhidemine-hide|Peusom
+rclinks|Peudeuih ~{0} neuubah barô lam ~{1} uroë nyoë<br />~{2}
+diff|bida
+hist|riwayat
+hide|Peusom
+show|Peuleumah
+minoreditletter|b
+newpageletter|B
+boteditletter|b
+number_of_watching_users_pageview|[~{0} kalön {{PLURAL:~{0}\u007Cureuëng ngui}}]
+rc_categories_any|Pue-pue mantöng
+rc-change-size-new|~{0} {{PLURAL:~{0}\u007Cbita}} lheuëh neuubah
+newsectionsummary|/* ~{0} */ bideung barô
+rc-enhanced-expand|Peuleumah rincian
+rc-enhanced-hide|Peusom rincian
+rc-old-title|sigohlom nyan geupeugöt "~{0}"
+recentchangeslinked|Neuubah meukaw'èt
+recentchangeslinked-feed|Neuubah meuhubông
+recentchangeslinked-toolbox|Neuubah teukaw'èt
+recentchangeslinked-title|Neuubah nyang meukaw'èt ngön ~{0}
+recentchangeslinked-summary|Nyoë nakeuh dapeuta neuubah nyang geupeugèt ban-ban nyoë keu on-on nyang meuhubông nibak ôn ka kusuih (atawa keu anggèëta kawan kusuih).\nÔn-ôn bak [[Special:Watchlist\u007Ckeunalon droeneuh]] geucitak '''teubay'''.
+recentchangeslinked-page|Nan laman:
+recentchangeslinked-to|Peuleumah neuubah nibak laman-laman nyang mupawôt ngön laman nyang geubri
+upload|Peutamöng beureukaih
+uploadbtn|Peutamong beureukaih
+reuploaddesc|Riwang u laman peutamöng
+uploadnologin|Hana lom meutamöng
+uploadnologintext|Droeneuh suwah ~{0} keu neupeutamöng beureukaih.
+uploadlogpage|Log peutamöng
+uploadlogpagetext|Nyoe nakeuh dapeuta peutamöng barô.\nEu [[Special:NewFiles\u007Cgaleri beureukaih barô]] keu seuneudeuh barô.
+filename|Nan beureukaih
+filedesc|Ehtisa
+fileuploadsummary|Éhtisa:
+filesource|Nè
+minlength1|Nan beureukaih beuna saboh haraih.
+illegalfilename|Nan beureukaih "~{0}" meuasoe seunurat nyang han jeut na bak nan. Tulông gantoe nan nyan sigohlom neupeutamöng lom.
+filename-toolong|Nan beureukaih han jeut leubèh nibak 240 bita.
+badfilename|Nan beureukaih ka meugantoe keu "~{0}".
+empty-file|Beureukaih nyang neupeutamöng soh.
+file-too-large|Beureukaih nyang neupeutamöng rayek that.
+filename-tooshort|Nan beureukaih paneuk that.
+filetype-banned|Jeunèh beureukaih nyoe geutheun.
+illegal-filename|Nan beureukaih han jeut lagèe nyoe.
+savefile|Kubah beureukaih
+upload-source|Asai beureukaih
+sourcefilename|Asai nan beureukaih:
+sourceurl|Asai URL:
+upload-maxfilesize|Paléng rayek beureukaih: ~{0}
+upload-description|Teuneurang beureukaih
+watchthisupload|Kalön beureukaih nyoe
+upload-success-subj|Ka meupeutamöng
+img-auth-nofile|Hana beureukaih "~{0}".
+license|Jeunèh lisensi:
+license-header|Jeunèh lisensi
+imgfile|beureukaih
+listfiles|Dapeuta beureukah
+listfiles_thumb|Beuntuk ubeut
+listfiles_date|Uroe
+listfiles_name|Nan
+listfiles_user|Ureueng ngui
+listfiles_size|Rayek
+listfiles_description|Teuneurang
+listfiles_count|Vèrsi
+listfiles-show-all|Peurôh vèrsi awai gamba
+listfiles-latestversion|Vèrsi jinoe
+listfiles-latestversion-yes|Nyoe
+listfiles-latestversion-no|Kön
+file-anchor-link|Beureukaih
+filehist|Riwayat beureukaih
+filehist-help|Neuteugon bak uroë buleuën/watèë keu neu'eu beureukaih nyoë ‘oh watèë nyan.
+filehist-deleteall|sampôh ban dum
+filehist-deleteone|sampôh
+filehist-revert|peuriwang
+filehist-current|jinoë hat
+filehist-datetime|Uroë buleuën/Watèë
+filehist-thumb|Beuntuk ubeut
+filehist-thumbtext|Beuntuk ubeut keu seunalén tiëp ~{0}
+filehist-nothumb|Hana beuntuk ubeut
+filehist-user|Ureuëng ngui
+filehist-dimensions|Dimènsi
+filehist-filesize|Rayek beureukah
+filehist-comment|Seuneu'ôt
+imagelinks|Seuneungui beureukaih
+linkstoimage|{{PLURAL:~{0}\u007Claman}} di yup nyoë mupawôt u beureukaih nyoë:
+nolinkstoimage|Hana laman nyang na meupawôt u beureukaih nyoë.
+sharedupload|Beureukah nyoë dari ~{0} ngön kadang geunguy lé buët-buët la’én.
+sharedupload-desc-here|Beureukaih nyoe nejih nibak ~{0} ngon kadang geunguy le proyek-proyek la'en.\nTeuneurang bak [~{1} on teuneurangjih] geupeuleumah di yup nyoe.
+uploadnewversion-linktext|Peulöt seunalén nyang leubèh barô nibak beureukah nyoë.
+upload-disallowed-here|Droëneuh h'an jeuët neutimpa beureukaih nyoë
+mimesearch|Mita MIME
+listredirects|Dapeuta peuninah
+unusedtemplates|Templat nyang hana geungui
+randompage|Laman baranggari
+randomredirect|Peuninah saban sakri
+doubleredirects|Peuninah ganda
+brokenredirects|Peuninah reulöh
+withoutinterwiki|Laman tan na hubông bahsa
+fewestrevisions|Teunuléh ngön neu’ubah paléng dit
+nbytes|~{0} {{PLURAL:~{0}\u007Cbit\u007Cbit}}
+nlinks|~{0} {{PLURAL:~{0}\u007Chubông\u007Chubông}}
+nmembers|~{0} {{PLURAL:~{0}\u007Casoë\u007Casoë}}
+lonelypages|Laman tan hubông balék
+uncategorizedpages|Laman hana kawan
+uncategorizedcategories|Kawan hana kawan
+uncategorizedimages|Beureukaih hana kawan
+uncategorizedtemplates|Seunaleuëk hana kawan
+unusedcategories|Kawan hana geungui
+unusedimages|Beureukaih hana geungui
+wantedcategories|Kawan geuh'eut
+wantedpages|Laman geuh‘eut
+wantedpages-badtitle|Nan hana sah lam kawan hasé: ~{0}
+wantedfiles|Beureukaih nyang geumeuh'eut
+mostlinked|Laman nyang paléng kayém geutuju
+mostlinkedcategories|Kawan nyang paléng kayém geutuju
+mostlinkedtemplates|Templat nyang paléng kayém geutuju
+mostcategories|Teunuléh ngön kawan paléng le
+mostimages|Beureukah nyang paléng kayém geunguy
+mostrevisions|Teunuléh ngön neu’ubah paléng le
+prefixindex|Ban dum laman ngön haraih awai
+shortpages|Laman paneuk
+longpages|Laman panyang
+deadendpages|Laman buntu
+protectedpages|Laman nyang geulindông
+listusers|Dapeuta ureuëng ngui
+usercreated|{{GENDER:~{2}\u007CGeupeugot}} bak ~{0} poh ~{1}
+newpages|Laman barô
+newpages-username|Ureuëng ngui:
+ancientpages|Laman paléng awai
+move|Pupinah
+movethispage|Pupinah laman nyoë
+pager-newer-n|{{PLURAL:~{0}\u007C1 leubèh barô \u007C~{0} leubèh barô}}
+pager-older-n|{{PLURAL:~{0}\u007C1 leubèh awai\u007C~{0} leubèh awai}}
+booksources|Nè kitab
+booksources-search-legend|Mita bak nè kitab
+specialloguserlabel|Ureuëng ngui:
+speciallogtitlelabel|Sasaran (nan atawa ureuëng ngui):
+log|Log
+all-logs-page|Ban dum log umom
+allpagesfrom|Peuleumah laman peuphôn nibak:
+allpagesto|Peuleumah laman geupeuakhé bak:
+allarticles|Dapeuta teunuléh
+allpagessubmit|Mita
+allpagesprefix|Peuleumah laman ngön harah phôn:
+allpages-hide-redirects|Peusom peuninah
+special-categories-sort-count|atôe meunurôt jumeulah
+special-categories-sort-abc|atôe meunurôt seunurat
+deletedcontributions|Beuneuri nyang geusampôh
+deletedcontributions-title|Beuneuri nyang geusampôh
+sp-deletedcontributions-contribs|beuneuri
+linksearch|Mita seuneumat luwa
+linksearch-pat|Pola mita:
+linksearch-ns|Ruweueng nan:
+linksearch-ok|Mita
+linksearch-line|~{0} meupawôt nibak ~{1}
+listusersfrom|Peuleumah ureueng ngui nyang neuawai ngön:
+listusers-submit|Peuleumah
+listusers-noresult|Hana ureueng ngui nyang meutumèe.
+listusers-blocked|(geutheun)
+activeusers|Dapeuta ureueng ngui udép
+activeusers-intro|Nyoë nakeuh dapeuta ureuëng ngui nyang na geuteumuléh lam ~{0} {{PLURAL:~{0}\u007Curoë}} nyoë.
+activeusers-count|~{0} {{PLURAL:~{0}\u007Cbuet}} lam {{PLURAL:~{2}\u007Curoë\u007C~{2} uroë}} nyoë
+activeusers-from|Peuleumah ureueng ngui nyang neuawai ngön:
+activeusers-hidebots|Peusom bot
+activeusers-hidesysops|Peusom ureueng urôh
+activeusers-noresult|Hana ureueng ngui nyang meutumèe.
+listgrouprights|Dapeuta khut ureueng ngui
+listgrouprights-key|Teuneurang:\n* <span class="listgrouprights-granted">Khut nyang geubri</span>\n* <span class="listgrouprights-revoked">Khut nyang hana geubri</span>
+listgrouprights-group|Kawan
+listgrouprights-rights|Khut
+listgrouprights-helppage|Help:Khut kawan
+listgrouprights-members|(dapeuta anggèëta)
+listgrouprights-addgroup|Tamah {{PLURAL:~{1}\u007Ckawan}}: ~{0}
+listgrouprights-removegroup|Sampôh {{PLURAL:~{1}\u007Ckawan}}: ~{0}
+listgrouprights-addgroup-all|Tamah ban dum kawan
+listgrouprights-removegroup-all|Sampôh ban dum kawan
+emailuser|Surat-e ureuëng ngui
+emailuser-title-target|Peu'ét surat-e keu {{GENDER:~{0}\u007Cureuëng ngui}} nyoë
+emailuser-title-notarget|Peu'ét surat-e
+emailpage|Peu'ét surat-e keu ureuëng ngui
+emailusername|Ureueng ngui:
+emailusernamesubmit|Kirém
+email-legend|Kirém surat-e keu ureueng ngui {{SITENAME}} la'én
+emailfrom|Ureueng kirém:
+emailto|Ureueng teurimöng:
+emailsubject|Bhah:
+emailmessage|Peusan:
+emailsend|Kirém
+emailccme|Kubah saboh seunalén surat-e lôn.
+emailccsubject|Salén peusan droeneuh keu ~{0}: ~{1}
+emailsent|Surat-e meukirém
+emailsenttext|Surat-e droeneuh ka meukirém.
+watchlist|Dapeuta keunalön
+mywatchlist|Keunalön
+watchlistfor2|Keu ~{0} ~{1}
+addedwatchtext|Laman "[[:~{0}]]" ka geupeutamah u [[Special:Watchlist\u007Cdapeuta kalön]] droëneuh. \nNeuubah u keuë bak laman nyoë ngön laman marit nyang na teukaw'èt, euntreuk geupeudeuih sinoë.
+removedwatchtext|Ôn "[[:~{0}]]" ka geusampôh nibak [[Special:Watchlist\u007Cdapeuta keunalön]] Droëneuh.
+watch|Kalön
+watchthispage|Kalön ôn nyoë
+unwatch|Bateuë kalön
+watchlist-details|{{PLURAL:~{0}\u007C~{0} ôn\u007C~{0} ôn}} geukalön, hana kira ôn peugah haba.
+wlshowlast|Peudeuh ~{0} jeum ~{1} uroë  seuneulheuëh
+watchlist-options|Peuniléh dapeuta kalön
+watching|Kalön...
+unwatching|Hana kalön...
+deletepage|Sampôh laman
+historywarning|'''Peuneugah:''' Laman nyang keumeung neusampôh na riwayat ngön kureuëng leubèh ~{0} {{PLURAL:~{0}\u007Cgeunantoë}}:
+confirmdeletetext|Droëneuh neuk neusampôh laman atawa beureukaih nyoë keu sabé. Meunan cit ban mandum riwayatjih nibak basis data. Neupeupaseuti meunyo Droëneuh cit keubiët meung neusampôh, neutupeuë ban mandum akébatjih, ngön peuë nyang neupeulaku nyoë nakeuh meunurôt [[{{MediaWiki:Policy-url}}\u007Ckebijakan{{SITENAME}}]].
+actioncomplete|Seuleusoë
+actionfailed|Hana meuhasé
+deletedtext|"~{0}" ka geusampôh. Eu ~{1} keu log paléng barô bak laman nyang ka geusampôh.
+dellogpage|Log seunampôh
+deletecomment|Choë:
+deleteotherreason|Nyang la’én/choë la’én:
+deletereasonotherlist|Choë la’én
+rollbacklink|pulang
+protectlogpage|Log lindông
+protectedarticle|peulindông "[[~{0}]]"
+modifiedarticleprotection|Ubah tingkat lindông "[[~{0}]]"
+prot_1movedto2|peupinah [[~{0}]] u [[~{1}]]
+protectcomment|Choë:
+protectexpiry|Maté tanggay:
+protect_expiry_invalid|Watèë maté tanggay hana sah.
+protect_expiry_old|Watèë maté tanggay nakeuh bak masa u likôt.
+protect-text|Droëneuh jeuët neu’eu atawa neugantoë tingkat lindông keu ôn '''~{0}''' nyoë pat.
+protect-locked-access|Nan dapeuta Droëneuh hana hak keu jak gantoë tingkat lindông ôn. Nyoë pat nakeuh konfigurasi atra jinoë keu ôn '''~{0}''':
+protect-cascadeon|Ôn nyoë teungöh geulindông kareuna geupeuseureuta lam {{PLURAL:~{0}\u007Côn\u007Côn-ôn}} nyoë nyang ka geulindông ngön peuniléh lindông meuturôt geupeuudép.\nDroëneuh jeuët neugantoë tingkat lindông keu ôn nyoë, tapi nyan hana peungarôh keu lindông meuturôt.
+protect-default|Peuidin ban dum ureuëng ngui
+protect-fallback|Peuidin ureuëng ngui ngön idin "~{0}" mantöng
+protect-level-autoconfirmed|Peuidin ureuëng ngui nyang teudapeuta keudroë mantöng
+protect-level-sysop|Peuidin ureuëng urôh mantöng
+protect-summary-cascade|riti
+protect-expiring|maté tanggay ~{0} (UTC)
+protect-expiring-local|maté tanggai ~{0}
+protect-expiry-indefinite|sabé
+protect-cascade|Peulindông ban mandum ôn nyang rôh lam ôn nyoë (lindông meuturôt).
+protect-cantedit|Droëneuh h‘an jeuët neu’ubah tingkat lindông ôn nyoë kareuna Droëneuh hana hak keu neupeulaku nyan.
+protect-expiry-options|1 jeum:1 hour,1 uroë:1 day,1 minggu:1 week,2 minggu:2 weeks,1 buleuën:1 month,3 buleuën:3 months,6 buleuën:6 months,1 thôn:1 year,sabé:infinite
+restriction-type|Lindông:
+restriction-level|Tingkat:
+undeletebtn|Peuriwang!
+undeletelink|eu/peuriwang
+undeleteviewlink|eu
+undelete-search-submit|Mita
+namespace|Ruweuëng nan:
+invert|Peubalék peuniléh
+namespace_association|Ruweuëng nan meuhubông
+contributions|Beuneuri {{GENDER:~{0}\u007Cureuëng ngui}}
+contributions-title|Beuneuri ureuëng ngui keu ~{0}
+mycontris|Beuneuri
+contribsub2|Keu {{GENDER:~{2}\u007C~{0}}} (~{1})
+uctop|(jinoë)
+month|Mula phôn buleuën (ngön sigohlomjih)
+year|Mula phôn thôn (ngön sigohlomjih)
+sp-contributions-newbies|Peudeuh beuneuri atra ureuëng ban dapeuta mantöng
+sp-contributions-newbies-sub|Keu ureuëng nguy barô
+sp-contributions-blocklog|Log peutheun
+sp-contributions-uploads|peunasoe
+sp-contributions-logs|log
+sp-contributions-talk|marit
+sp-contributions-search|Mita soë nyang tuléh
+sp-contributions-username|Alamat IP atawa nan ureuëng ngui:
+sp-contributions-toponly|Peuleumah geunantoe nyang baro mantong
+sp-contributions-submit|Mita
+whatlinkshere|Peunawôt balék
+whatlinkshere-title|Laman nyang mupawôt u ~{0}
+whatlinkshere-page|Laman:
+linkshere|Laman-laman nyoë meupawôt u '''[[:~{0}]]''':
+nolinkshere|Hana halaman nyang teukaw'et u '''[[:~{0}]]'''.
+isredirect|laman peuninah
+istemplate|ngön seunaleuëk
+isimage|peunawôt beureukaih
+whatlinkshere-prev|~{0} {{PLURAL:~{0}\u007Csigohlomjih\u007Csigohlomjih}}
+whatlinkshere-next|~{0} {{PLURAL:~{0}\u007Clheuëh nyan\u007Clheuëh nyan}}
+whatlinkshere-links|← peunawôt
+whatlinkshere-hideredirs|~{0} peuninah
+whatlinkshere-hidetrans|~{0} transklusi
+whatlinkshere-hidelinks|~{0} peunawôt
+whatlinkshere-hideimages|~{0} peunawôt beureukaih
+whatlinkshere-filters|Saréng
+blockip|Theun ureuëng ngui
+ipboptions|2 jeum:2 hours,1 uroë:1 day,3 uroë:3 days,1 minggu:1 week,2 minggu:2 weeks,1 buleuën:1 month,3 buleuën:3 months,6 buleuën:6 months,1 thôn:1 year,sabé:infinite
+ipblocklist|Ureuëng ngui teutheun
+ipblocklist-submit|Mita
+blocklink|theun
+unblocklink|peugadöh theun
+change-blocklink|gantoë theun
+contribslink|beuneuri
+blocklogpage|Log peutheun
+blocklogentry|theun [[~{0}]] ngön watèë maté tanggay ~{1} ~{2}
+unblocklogentry|peugadöh theun "~{0}"
+block-log-flags-nocreate|pumeugöt akun geupumaté
+movepagetext|Formulir di yup nyoë geunguy keu jak ubah nan saboh ôn ngön jak peupinah ban dum data riwayat u nan barô. Nan nyang trép euntreuk jeuët keu ôn peupinah u nan nyang barô. Hubông u nan trép hana meu’ubah. Neupeupaseuti keu neupréksa peuninah ôn nyang reulöh atawa meuganda lheuëh neupinah. Droëneuh nyang mat tanggông jaweuëb keu neupeupaseuti meunyo hubông laju teusambông u ôn nyang patôt.\n\nBeu neuingat that meunyo ôn '''h’an''' jan geupeupinah meunyo ka na ôn nyang geunguy nan barô, keucuali meunyo ôn nyan soh atawa nakeuh ôn peuninah ngön hana riwayat andam. Nyoë areutijih Droëneuh jeuët neu’ubah nan ôn keulayi lagèë söt meunyo Droëneuh neupeugöt seunalah, ngön Droëneuh h‘an jeuët neutimpa ôn nyang ka na.\n'''INGAT'''\nNyoë jeuët geupeuakébat neu’ubah nyang h’an neuduga ngön kreuëh ngön bacah keu ôn nyang meuceuhu. Neupeupaseuti Droëneuh meuphôm akébat nibak buët nyoë sigohlom neulanjut.
+movepagetalktext|Ôn peugah haba nyang na hubôngan euntreuk teupinah keudroë '''keucuali meunyo:'''\n\n*Saboh ôn peugah haba nyang hana soh ka na di yup nan barô, atawa\n*Droëneuh hana neubôh tanda cunténg bak kutak di yup nyoë\n\nLam masalah nyoë, meunyo neuhawa, Droëneuh jeuët neupeupinah atawa neupeugabông ôn keudroë.
+movearticle|Peupinah laman:
+newtitle|U nan barô:
+move-watch|Kalön laman nyoë
+movepagebtn|Peupinah laman
+pagemovedsub|Peupinah meuhasé
+movepage-moved|'''"~{0}" ka geupeupinah u "~{1}".'''
+articleexists|Ôn ngön nan nyan ka na atawa nan nyang neupiléh hana sah. Neupiléh nan la’én.
+movetalk|Peupinah ôn peugah haba nyang na hubôngan.
+movelogpage|Log pinah
+movereason|Choë:
+revertmove|peuriwang
+export|Peuteubiët laman
+allmessages|Peusan sistem
+allmessagesname|Nan
+allmessagesdefault|Naseukah pukok
+thumbnail_error|Salah bak peugöt gamba cut: ~{0}
+importlogpage|Log impor
+tooltip-pt-userpage|Laman ureuëng ngui droëneuh
+tooltip-pt-mytalk|Laman marit droëneuh
+tooltip-pt-preferences|Geunalak
+tooltip-pt-watchlist|Dapeuta laman nyang lônkalön
+tooltip-pt-mycontris|Dapeuta beuneuri Droëneuh
+tooltip-pt-login|Droëneuh geupadan keu tamong log, bah pih nyan hana geupeuwajéb.
+tooltip-pt-logout|Teubiët
+tooltip-pt-createaccount|Droëneuh geupadan keu neupeugöt saboh akun ngön neutamöng; bah pih nyan hana wajéb
+tooltip-ca-talk|Marit laman asoë
+tooltip-ca-edit|Droëneuh jeuët neuandam laman nyoë. Neungui tumbôi eu dilèë sigoh neukeubah.
+tooltip-ca-addsection|Puphôn beunagi barô
+tooltip-ca-viewsource|Laman nyoë geulindông.\nDroëneuh jeuët neu’eu nèjih mantöng.
+tooltip-ca-history|Geunantoë awai nibak laman nyoë
+tooltip-ca-protect|Peulindông laman nyoë
+tooltip-ca-delete|Sampôh laman nyoë
+tooltip-ca-move|Pupinah laman nyoë
+tooltip-ca-watch|Tamah laman nyoë u dapeuta kalön droëneuh
+tooltip-ca-unwatch|Sampôh laman nyoë nibak dapeuta kalön droëneuh
+tooltip-search|Mita {{SITENAME}}
+tooltip-search-go|Mita saboh laman ngon nan nyang peureuséh lagèë nyoë meunyo na
+tooltip-search-fulltext|Mita laman nyang na asoë lagèë nyoë
+tooltip-p-logo|Saweuë ôn keuë
+tooltip-n-mainpage|Saweuë ôn keuë
+tooltip-n-mainpage-description|Saweuë ôn keuë
+tooltip-n-portal|Bhaih buët, peuë nyang jeuët neupubuët, pat keu mita sipeuë hai
+tooltip-n-currentevents|Mita haba barô
+tooltip-n-recentchanges|Dapeuta neuubah barô lam wiki.
+tooltip-n-randompage|Peudeuih laman baranggari
+tooltip-n-help|Bak mita bantu.
+tooltip-t-whatlinkshere|Dapeuta ban dum laman wiki nyang mupawôt keunoë
+tooltip-t-recentchangeslinked|Neuubah barô lam laman nyang meupawôt nibak laman nyoë
+tooltip-feed-rss|Umpeuën RSS keu laman nyoë
+tooltip-feed-atom|Umpeuën Atom keu laman nyoë
+tooltip-t-contributions|Dapeuta beuneuri ureuëng ngui nyoë
+tooltip-t-emailuser|Peu'ét surat-e keu ureuëng ngui nyoë
+tooltip-t-upload|Peutamong beureukaih
+tooltip-t-specialpages|Dapeuta ban dum laman kusuih
+tooltip-t-print|Seunalén rakam laman nyoë
+tooltip-t-permalink|Peunawôt teutap keu geunantoë laman nyoë
+tooltip-ca-nstab-main|Eu laman asoë
+tooltip-ca-nstab-user|Eu laman ureuëng ngui
+tooltip-ca-nstab-special|Nyoë nakeuh laman kusuih nyang h’an jeuët geuandam.
+tooltip-ca-nstab-project|Eu laman buët
+tooltip-ca-nstab-image|Eu laman beureukaih
+tooltip-ca-nstab-template|Eu seunaleuëk
+tooltip-ca-nstab-help|Eu laman beunantu
+tooltip-ca-nstab-category|Eu laman kawan
+tooltip-minoredit|Bôh tanda keu nyoë sibagoë andam bacut
+tooltip-save|Keubah neuubah Droëneuh
+tooltip-preview|Peuleumah neuubah Droëneuh, neungui nyoë sigohlom neukeubah!
+tooltip-diff|Peuleumah neuubah nyang ka Droëneuh peugöt
+tooltip-compareselectedversions|Ngiëng bida nibak duwa geunantoë laman nyang teupiléh
+tooltip-watch|Tamah laman nyoë u dapeuta kalön droëneuh
+tooltip-rollback|Peuriwang neu’andam-neu’andam bak laman nyoë u nyang tuléh keuneulheuëh lam sigo teugön
+tooltip-undo|Peuriwang geunantoë nyoë ngön peuhah plôk neu’andam ngön cara eu dilèë. Choë jeuët geupeutamah bak plôk ehtisa.
+tooltip-summary|Pasoë éhtisa paneuk
+interlanguage-link-title|~{0} – ~{1}
+simpleantispam-label|Paréksa anti-spam.\n<strong>BÈK</strong> neupasoë!
+pageinfo-toolboxlink|Teuneurang laman
+previousdiff|← Bida awai
+nextdiff|Geunantoë lheuëh nyan →
+file-info-size|~{0} × ~{1} piksel, rayek beureukaih: ~{2}, MIME jeunèh: ~{3}
+file-nohires|Hana resolusi nyang leubèh manyang.
+svg-long-desc|Beureukah SVG, nominal ~{0} x ~{1} piksel, rayek beureukah: ~{2}
+show-big-image|Beureukaih aseuli
+show-big-image-preview|Seunipat seuneudeuh awai: ~{0}
+show-big-image-other|{{PLURAL:~{1}\u007CResolusi}} la'én: ~{0}.
+show-big-image-size|~{0} × ~{1} piksel
+newimages|Beureukah barô
+ilsubmit|Mita
+bad_image_list|Beuntukjih lagèë di miyub nyoë:\n\nCit buté dapeuta (baréh nyang geupeuphôn ngon tanda *) nyang geukira. Hubông phôn bak saboh baréh beukeuh hubông u beureukaih nyang brôk.\nHubông-hubông lheuëh nyan bak baréh nyang saban geukira sibagoë keucuali, nakeuh teunuléh nyang jeuët peuleumah beureukaih nyan.
+metadata|Metadata
+metadata-help|Beureukah nyoë na beurita tambahan nyang mungkén geutamah lé kamèra digital atawa peuminday nyang geunguy keu peugöt atawa peudigitalisasi beureukah. Meunyo beureukah nyoë ka geu’ubah, tapeusili nyang na mungkén hana seucara peunoh meurefleksikan beurita nibak gamba nyang ka geu’ubah nyoë.
+metadata-expand|Peuleumah tapeusili teunamah
+metadata-collapse|Peusom tapeusili teunamah
+metadata-fields|Bideuëng mètadata gamba nyang na lam peusan nyoë keuneuk geupasoë bak tampilan halaman gamba 'oh watèë tabel mètadata geutôp.\nData nyang la'én eunteuk teupeusom keudroë.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-orientation|Orientasi
+exif-xresolution|Resolusi linteuëng
+exif-yresolution|Rèsolusi buju
+exif-software|Software geungui
+exif-exifversion|Versi Exif
+exif-datetimedigitized|Uroë buleuën ngön watèë digital
+exif-orientation-1|Biasa
+namespacesall|ban dum
+monthsall|ban dum
+recreate|Peugöt ulang
+confirm_purge_button|Ka göt
+confirm-purge-top|Sampôh peuniyôh laman nyoë?
+confirm-watch-button|Ka göt
+confirm-watch-top|Tamah laman nyoë u dapeuta keunalön droëneuh?
+confirm-unwatch-button|Ka göt
+confirm-unwatch-top|Sampôh laman nyoë nibak dapeuta keunalön droëneuh?
+imgmultipageprev|← laman sigohlomjih
+autosumm-new|Geupeugöt laman ngön asoë '~{0}'
+watchlisttools-view|Peudeuh neuubah meukaw'èt
+watchlisttools-edit|Peudeuh ngön andam dapeuta keunalön
+watchlisttools-raw|Andam dapeuta keunalön meuntah
+duplicate-defaultsort|'''Ingat:''' Gunci meuurot pukok "~{1}" jipeuhiro gunci meuurot pukok "~{0}" sigohlomjih.
+version|Curak
+fileduplicatesearch-submit|Mita
+specialpages|Laman kusuih
+specialpages-note|* Laman kusuih biasa.\n* <span class="mw-specialpagerestricted">Laman kusuih geutheun.</span>
+specialpages-group-maintenance|Beuneuri thèë plara
+specialpages-group-other|La'én-la'én
+specialpages-group-login|Tamöng / dapeuta
+specialpages-group-changes|Neuubah barô ngön log
+specialpages-group-media|Beuneuri thèë ngön pumasoë beureukaih
+specialpages-group-users|Ureuëng ngui ngön khut ureuëng ngui
+specialpages-group-highuse|Laman kayém geusaweuë
+specialpages-group-pages|Dapeuta laman
+specialpages-group-pagetools|Alat laman
+specialpages-group-wiki|Data ngön alat
+specialpages-group-redirects|Mita ngön pupinah
+specialpages-group-spam|Alat spam
+blankpage|Laman soh
+intentionallyblankpage|Laman nyoë geusaja peusoh
+external_image_whitelist|#Neupubiyeue bareh nyoe lagee na<pre>\n#Neunguy bagian-bagian ekspresi regular (bak bagian antara // mantong) di yup nyoe\n#Bagian-bagian nyoe eunteuk geupupaih ngon URL nibak gamba-gamba luwa (nyang geupeuhubong lansong)\n#Fragmen nyang paih eunteuk geupeuleumah sibagoe gamba, seuhjih keu link mantong\n#Bareh nyang geupuphon ngon # eunteuk geupeujeuet keu bareh beunalah\n#Nyoe hana geupubida haraih rayek ngon ubeut\n#Neupeuduek ban dum beunagi ekspresi biasa di yup bareh nyoe. Neupubiyeue bareh nyoe lagee na</pre>
+tags|Tag neuubah nyang sah
+tag-filter|Saréng [[Special:Tags\u007Ctag]]:
+tag-filter-submit|Saréng
+logentry-newusers-create|~{0} {{GENDER:~{1}\u007Cgeupeugöt}} akun ureuëng ngui
+searchsuggest-search|Mita
+duration-seconds|{{PLURAL:~{0}\u007Cdeutik}}
+duration-minutes|{{PLURAL:~{0}\u007Cminèt}}
+duration-hours|{{PLURAL:~{0}\u007Cjeum}}
+duration-days|{{PLURAL:~{0}\u007Curoë}}
+duration-weeks|{{PLURAL:~{0}\u007Cjeumeu'at}}
+duration-years|{{PLURAL:~{0}\u007Cthôn}}
+duration-decades|{{PLURAL:~{0}\u007Cdekade}}
+duration-centuries|{{PLURAL:~{0}\u007Cabad}}
+duration-millennia|{{PLURAL:~{0}\u007Cmilenium}}
+wikibase-edit|andam
+wikibase-add|tamah
+wikibase-sitelinks-special|Situs la'én
+']:>
+).lang
+;

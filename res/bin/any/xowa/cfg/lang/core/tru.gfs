@@ -1,0 +1,628 @@
+this
+.messages
+  .load_text(
+<:['
+sunday|Yawme dḤuşabo
+monday|Yawme dTre
+tuesday|Yawme dTloṭo
+wednesday|Yawme dArb³o
+thursday|Yawme dḤamşo
+friday|Yawme d3rufto
+saturday|Yawme dŞabṭo
+sun|Yawme dḤuşabo
+mon|Yawme dTre
+tue|Yawme dTloṭo
+wed|Yawme dArb³o
+thu|Yawme dḤamşo
+fri|Yawme d3rufto
+sat|Yawme dŞabṭo
+january|Konun ḥroy
+february|Şboṫ
+march|Oḍor
+april|Nison
+may_long|İyor
+june|Ḥziron
+july|Tamuz
+august|Ob
+september|Eylül
+october|Teşrin qḍim
+november|Teşrin ḥroy
+december|Konun qḍim
+january-gen|Konun ḥroy
+february-gen|Şboṫ
+march-gen|Oḍor
+april-gen|Nison
+may-gen|İyor
+june-gen|Ḥziron
+july-gen|Tamuz
+august-gen|Ob
+september-gen|Eylül
+october-gen|Teşrin qḍim
+november-gen|Teşrin ḥroy
+december-gen|Konun qḍim
+jan|Konun II
+feb|Şboṫ
+mar|Oḍor
+apr|Nison
+may|İyor
+jun|Ḥziron
+jul|Tamuz
+aug|Ob
+sep|Eylül
+oct|Teşrin I
+nov|Teşrin II
+dec|Konun I
+toc|Ḥbişoṭo
+redirectedfrom|(Redirected from ~{0})
+allpages|aFaṭaṭe kulle
+collapsible-collapse|sxar
+collapsible-expand|ftaḥ
+categories|Sedre
+lastmodifiedat|uŞuḥlofo ḥaroyo diFaṭaṭe bu Zabnano wa:  ~{0} ~{1} .
+thumbnail-more|Rabtır
+otherlanguages|bLeşone ḥrene
+blanknamespace|(Rişoyto)
+pagecategories|{{PLURAL:~{0}\u007CSedro\u007CSedre}}
+category_header|Faṭoṭe bu Sedro "~{0}"
+subcategories|Sedre na³ime
+category-media-header|Mediya buSedro "~{0}"
+category-empty|U³do layto Faṭo aw Mediya buSedrano.
+category-subcat-count|{{PLURAL:~{1}\u007CThis category has only the following subcategory.\u007CThis category has the following {{PLURAL:~{0}\u007Csubcategory\u007C~{0} subcategories}}, out of ~{1} total.}}
+category-article-count|{{PLURAL:~{1}\u007CThis category contains only the following page.\u007CThe following {{PLURAL:~{0}\u007Cpage is\u007C~{0} pages are}} in this category, out of ~{1} total.}}
+category-file-count|{{PLURAL:~{1}\u007CThis category contains only the following file.\u007CThe following {{PLURAL:~{0}\u007Cfile is\u007C~{0} files are}} in this category, out of ~{1} total.}}
+categorytree-num-categories|~{0} S
+categorytree-num-pages|~{0} F
+categorytree-num-files|~{0} M
+nextn|{{PLURAL:~{0} ḥaṭtır\u007C ~{0} ḥaṭtır }}
+prevn|{{PLURAL:~{0}\u007C~{0}}} meqımtır
+listingcontinuesabbrev|mdawam
+bold_sample|Ḥarfe ḥlime
+bold_tip|Ḥarfe ḥlime
+italic_sample|Ḥarfe 3wije
+italic_tip|Ḥarfe 3wije
+link_sample|Link title
+link_tip|Internal link
+headline_sample|Headline text
+headline_tip|Level 2 headline
+ago|meqım ~{0}
+statistics|Mardonwoṭo
+categorytree|Dawmo daSedre
+categorytree-portlet|Sedre
+categorytree-legend|Maḥway li i Dawmo daSedre
+categorytree-category|Sedro:
+categorytree-go|Maḥway li iDawmo
+categorytree-mode-categories|bes aSedre
+categorytree-num-empty|xalyo
+categorytree-not-found|uSedro "~{0}" lo komaḥwe.
+cite_page|Faṭo:
+wm-license-book-language|Leşono
+tog-oldsig|Imḍa du3do:
+underline-always|Kulnaqa
+underline-never|Hiç
+hidden-categories|{{PLURAL:~{0}\u007CHidden category\u007CHidden categories}}
+noindex-category|Noindexed pages
+about|3al
+newwindow|(gmıftaḥ bKawṭo ḥaṭto)
+cancel|Mbaṫel
+moredotdotdot|Heşa...
+mypage|iFaṭayḍi
+mytalk|uMamlayḍi
+navigation|Navigasyon
+and| u
+qbfind|Ḥzay
+qbbrowse|Krax
+qbedit|Mşaḥlaf
+qbpageoptions|iFaṭaṭe
+qbmyoptions|aFaṭoṭayḍi
+faq|Şuwole
+faqpage|Project:FAQ
+actions|Dubore
+namespaces|Dukṭo luIşmo
+variants|Variants
+errorpagetitle|Fawdo
+returnto|D³ar l~{0}
+tagline|men {{SITENAME}}
+help|3udrono
+search|krax
+searchbutton|Krax
+go|Zux
+searcharticle|Zux
+history|Maktabzabno diFaṭo
+history_short|Maktabzabno
+updatedmarker|aŞuḥlofe datsimi miNaqa du3boroayḍi ḥaroyo
+printableversion|Printable version
+permalink|Asiruṭo aminoyto
+print|Ṫba³
+view|Qray
+edit|Mşaḥlaf
+create|Xlaq
+editthispage|Mşaḥlaf iFaṭaṭe
+create-this-page|Xlaq iFaṭaṭe
+delete|Slag
+deletethispage|Slag iFaṭaṭe
+protect|Mastar
+protect_change|mşaḥlaf
+protectthispage|Mastar iFaṭaṭe
+newpage|Faṭo ḥaṭto
+talkpage|Sım Droşo 3al iFaṭaṭe
+talkpagelinktext|Mamlo
+specialpage|Faṭo dilonoyto
+personaltools|aMonayḍi
+articlepage|Ḥur baḤbişoṭo
+talk|Droşo
+views|Ḥzayoṭo
+toolbox|Mone
+viewtalkpage|Ḥur buDroşo
+jumpto|Zux l
+jumptonavigation|Navigasyon
+jumptosearch|Kruxyo
+pool-errorunknown|Fawdo nuxroyo
+aboutsite|3al {{SITENAME}}
+aboutpage|Project: 3al
+copyrightpage|{{ns:project}}:Ḥaqat duKaṭowo
+currentevents|Gedşe ḥaṭe
+currentevents-url|Project:Gedşe du³do
+disclaimers|Disclaimers
+disclaimerpage|Project: Disclaimer gawonoyo
+edithelp|Editing help
+mainpage|Faṭo rişoyto
+mainpage-description|Faṭo rişoyto
+portal|Portal diJama³a
+portal-url|Project: Portal diJama³a
+privacy|Setoro daMawd³onwoṭo
+privacypage|Project: Setoro daMawd³onwoṭo
+badaccess-group0|Hat latlux uFsoso dkolozım dsaymat iḤarakaṭe.
+ok|Tamam
+retrievedfrom|men "~{0}"
+youhavenewmessages|Kıtlux ~{0} (~{1}) .
+youhavenewmessagesmulti|Kitlux Ṫebe ḥaṭe b~{0}
+editsection|mşaḥlaf
+editold|mşaḥlaf
+viewsourceold|Maḥway li uMabu³o.
+editlink|mşaḥlaf
+viewsourcelink|Maḥway li uMabu³o.
+editsectionhint|Mşaḥlaf uFusoqano: ~{0}
+showtoc|maḥway
+hidetoc|tlay
+feedlinks|Feed:
+site-rss-feed|~{0} RSS feed
+site-atom-feed|~{0} Atom feed
+page-rss-feed|"~{0}" RSS feed
+page-atom-feed|Atom feed l"~{0}"
+red-link-title|~{0} (layto iFaṭaṭe)
+nstab-main|Faṭo
+nstab-user|Faṭo duHadomo
+nstab-media|Faṭo diMediya
+nstab-special|Faṭo dilonoyto
+nstab-project|Faṭo diProja
+nstab-image|Fayl
+nstab-mediawiki|Ṫebo
+nstab-template|Template
+nstab-help|Faṭo d3udrono
+nstab-category|Sedro
+error|Fawdo
+missing-article|uSyomo d~{0} ~{1} lo komaḥwe biDatabase.\n\niFaṭaṭe belki sligo aw mtaxro merke.\n\nElo iḍa dlo howe hawxa belki ḥselux Fawdo biSoftware. Bo³o haw Ṫebo l[[Special:ListUsers/sysop\u007CAdministrator]] u kṭaw u"URL".
+missingarticle-rev|(Numara duVersyon: ~{0})
+badtitle|Bad title
+badtitletext|The requested page title was invalid, empty, or an incorrectly linked inter-language or inter-wiki title.\nIt may contain one or more characters which cannot be used in titles.
+viewsource|Maḥway li aMabu³e.
+namespaceprotected|Hat latlux Ḥaq dımşaḥılfat Faṭoṭe bi'''~{0}''' Dukṭo xliṭo.
+virus-unknownscanner|Antivirus nuxroyo:
+yourname|Işme duHadomo:
+yourpassword|Qliḍo:
+yourpasswordagain|Naqla ḥreto kṭaw uQliḍo:
+remembermypassword|Dxar uQliḍayḍi buBrowser (buSowudo ~{0} {{PLURAL:~{0}\u007CYawmo\u007CYawme}})
+login|3bar
+nav-login-createaccount|3bar / Hway Hadomo
+userlogin|3bar / Hway Hadomo
+userloginnocreate|3bar
+logout|Nfoqo
+userlogout|Nfoqo
+notloggedin|Heş lo3abirat.
+nologin|Heş lawit Hadomo? ~{0}
+nologinlink|Hway Hadomo
+createaccount|Hway Hadomo
+gotaccount|Ma hawit ste Hadomo? ~{0}
+gotaccountlink|3bar
+userlogin-resetlink|Ṫa³at uQliḍayḍox?
+createaccountmail|buEmail
+wrongpassword|uQliḍayḍux fawdo yo.\nMjarab Naqla ḥreto.
+wrongpasswordempty|Lo msta³melux uQliḍayḍux.\nMjarab Naqla ḥreto.
+password-name-match|Glozım towe Frişuṭo beyn uQliḍo u uIşmayḍux.
+mailmypassword|Mşadar li Qliḍo ḥaṭo
+loginlanguagelabel|Leşono: ~{0}
+oldpassword|Qliḍo 3atiqo:
+newpassword|Qliḍo ḥaṭo:
+retypenew|Qliḍo ḥaṭo (disa):
+resetpass-submit-loggedin|Mşaḥlaf uQliḍo
+passwordreset-username|Işme duHadomo:
+changeemail-newemail|Email-adres ḥaṭo:
+extlink_sample|http://www.example.com link title
+extlink_tip|External link (remember http:// prefix)
+nowiki_sample|Insert non-formatted text here
+nowiki_tip|uSyomano latyo buFormat
+image_tip|Embedded file
+media_tip|File link
+sig_tip|Mḍay herke u kṭaw iSa³aye muqa yo.
+hr_tip|Horizontal line (use sparingly)
+summary|Summary:
+minoredit|This is a minor edit
+watchthis|Watch this page
+savearticle|Mqayad iFaṭaṭe
+preview|Preview
+showpreview|Show preview
+showdiff|Maḥway aŞuḥlofe
+anoneditwarning|'''Diqad''' Heş lo 3abirat.\nuIP-Adresayḍux gmikṭaw buMaktabzabno diFaṭaṭe. Kul Noşo kibe ḥozele u lo komislag.
+loginreqtitle|Glozım 3obrat
+loginreqlink|3bar
+loginreqpagetext|Glozım ~{0} qanna dqudrat ḥozat Faṭoṭe ḥrene.
+newarticle|(Ḥaṭo)
+newarticletext|You have followed a link to a page that does not exist yet.\nTo create the page, start typing in the box below (see the [~{0} help page] for more info).\nIf you are here by mistake, click your browser's '''back''' button.
+noarticletext|There is currently no text in this page.\nYou can [[Special:Search/{{PAGENAME}}\u007Csearch for this page title]] in other pages,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} search the related logs],\nor [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} edit this page]</span>.
+noarticletext-nopermission|There is currently no text in this page.\nYou can [[Special:Search/{{PAGENAME}}\u007Csearch for this page title]] in other pages,\nor <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} search the related logs]</span>.
+previewnote|'''Remember that this is only a preview.'''\nYour changes have not yet been saved!
+editing|Şuḥlofo d~{0}
+editingsection|Mşaḥlaf ~{0} (Fusoqo)
+yourtext|uSyomayḍux
+yourdiff|Frişwoṭo
+templatesused|{{PLURAL:~{0}\u007CTemplate\u007CTemplates}} used on this page:
+template-protected|(protected)
+template-semiprotected|(semi-protected)
+hiddencategories|This page is a member of {{PLURAL:~{0}\u007C1 hidden category\u007C~{0} hidden categories}}:
+permissionserrorstext-withaction|You do not have permission to ~{1}, for the following {{PLURAL:~{0}\u007Creason\u007Creasons}}:
+recreate-moveddeleted-warn|'''Warning: You are recreating a page that was previously deleted.'''\n\nYou should consider whether it is appropriate to continue editing this page.\nThe deletion and move log for this page are provided here for convenience:
+moveddeleted-notice|iFaṭaṭe sligto yo.\nThe deletion and move log for the page are provided below for reference.
+post-expand-template-inclusion-warning|'''Warning:''' Template include size is too large.\nSome templates will not be included.
+post-expand-template-inclusion-category|Pages where template include size is exceeded
+post-expand-template-argument-warning|'''Warning:''' This page contains at least one template argument which has a too large expansion size.\nThese arguments have been omitted.
+post-expand-template-argument-category|Pages containing omitted template arguments
+viewpagelogs|View logs for this page
+currentrev-asof|Latest revision as of ~{0}
+revisionasof|Versyon 3atiqo diNaqa: ~{0}
+revision-info|Revision as of ~{0} by ~{1}
+previousrevision|←Versyon 3atiqtır
+nextrevision|Versyon ḥaṭtır
+currentrevisionlink|Latest revision
+cur|du³do
+next|Ḥreto
+last|dmeqım
+page_first|Badaye
+page_last|Ḥarayto
+histlegend|Diff selection: Mark the radio boxes of the revisions to compare and hit enter or the button at the bottom.<br />\nLegend: '''({{int:cur}})''' = difference with latest revision, '''({{int:last}})''' = difference with preceding revision, '''{{int:minoreditletter}}''' = minor edit.
+history-fieldset-title|Krax buMaktabzabno
+history-show-deleted|Bes aSlige
+histfirst|Meqım kulle
+histlast|Ḥaṭo
+historysize|({{PLURAL:~{0}\u007C1 byte\u007C~{0} bytes}})
+historyempty|(xalyo)
+history-feed-item-nocomment|~{0}  b~{1}
+rev-delundel|maḥway / tlay
+rev-showdeleted|maḥway
+revdelete-show-file-submit|Eh
+revdelete-radio-same|(lo mşaḥalfat)
+revdelete-radio-set|Eh
+revdelete-radio-unset|Lo
+revdel-restore|change visibility
+pagehist|Maktabzabno diFaṭo
+revertmerge|Unmerge
+history-title|Revision history of "~{0}"
+lineno|Serṫo ~{0}:
+compareselectedversions|Compare selected revisions
+editundo|slag
+searchresults|Nafqe duKruxyayḍux
+searchresults-title|Nafqe duKruxyo l"~{0}"
+prevn-title|{{PLURAL:~{0} Nafqo meqımtır\u007C~{0} Nafqe meqımtır}}
+nextn-title|{{PLURAL:~{0}\u007CNafqo ḥreno\u007C~{0} Nafqe ḥrene}}
+shown-title|maḥway ~{0} {{PLURAL:~{0}\u007CNafqo\u007CNafqe}} bḥḍo Faṭo
+viewprevnext|Maḥway (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|'''Kito Faṭo herke Işma "[[:~{0}]]"yo'''
+searchmenu-new|Kṭaw iFaṭaṭe "[[:~{0}]]" buWiki.
+searchprofile-articles|Faṭoṭe daḤbişoṭo
+searchprofile-images|Multimediya
+searchprofile-everything|Kulmede
+searchprofile-advanced|Advanced
+searchprofile-articles-tooltip|Krax b~{0}
+searchprofile-images-tooltip|Krax Ṥurtoṭe
+searchprofile-everything-tooltip|Krax baḤbişoṭo (baFaṭoṭe duDroşo ste)
+searchprofile-advanced-tooltip|Search in custom namespaces
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 Melṭo\u007C~{1} Mele}})
+search-result-category-size|{{PLURAL:~{0}\u007C1 Hadomo\u007C~{0} Hadome}} ({{PLURAL:~{1}\u007C1 Sedro taḥtoyo\u007C~{1} Sedre taḥtoye}}, {{PLURAL:~{2}\u007C1 file\u007C~{2} files}})
+search-redirect|(Asiruṭo men ~{0})
+search-section|(Fusoqo ~{0})
+search-suggest|Ub³atwa dkıṭwat: ~{0}?
+search-interwiki-more|(heşa)
+searchrelated|related
+searchall|kulle
+search-nonefound|Für deine Suchanfrage wurden keine Ergebnisse gefunden.
+powersearch-togglelabel|Sım Qontrol:
+powersearch-toggleall|Kulle
+preferences|3ayarat
+mypreferences|a3ayaratayḍi
+prefs-edits|Menyono daŞuḥlofe kulle:
+prefs-resetpass|Mşaḥlaf uQliḍo
+prefs-email|3ayarat duEmail
+saveprefs|Mqayad
+searchresultshead|Kruxyo
+timezoneregion-africa|Afriqa
+timezoneregion-america|Ameriqa
+timezoneregion-antarctica|Antarctica
+timezoneregion-arctic|Arctic
+timezoneregion-asia|Asia
+timezoneregion-atlantic|Yamo atlantikoyo
+timezoneregion-australia|Australia
+timezoneregion-europe|Awrifi
+timezoneregion-indian|Yamo hindoyo
+youremail|Adres duEmail
+username|Işme duHadomo:
+prefs-memberingroups|Hadomo d{{PLURAL:~{0}\u007CGudo\u007CGudoṭo}}:
+prefs-registration|Zabno duSugolo:
+yourrealname|Işmo şariro:
+yourlanguage|Leşono
+yournick|Imḍa ḥaṭto:
+yourgender|Ğenso:
+gender-male|Dekronoyo
+gender-female|Neqıbṭonoyo
+email|Email
+prefs-help-email|Latat majbur dkıṭwat uEmail-Adresayḍox, elo glozam inaqla ṫo³at uQliḍayḍox u hakka dlozam dmişadar lox Qliḍo ḥaṭo.
+prefs-help-email-others|Kibux mijğolat 3am Hadome ğer biFaṭo duMamlo u luglozam dumat Işmux.
+prefs-signature|Imḍa
+email-address-validity-valid|uEmail-Adresayḍux m³adlo yo.
+group-user|Hadome
+group-all|(kulle)
+newuserlogpage|User creation log
+action-edit|Mşaḥlaf iFaṭaṭe
+nchanges|~{0} {{PLURAL:~{0}\u007CŞuḥlofo\u007CŞuḥlofe}}
+recentchanges|Şuḥlofe ḥaroye
+recentchanges-legend|3ayar daŞuḥlofe
+recentchanges-summary|biFaṭaṭe kibox ḥozat aŞuḥlofe ḥaroye.
+recentchanges-feed-description|biFaṭaṭe kibox ḥozat aŞuḥlofe ḥaroye.
+recentchanges-label-newpage|Faṭo ḥaṭto
+recentchanges-label-minor|This is a minor edit
+recentchanges-label-bot|uŞuḥlofano sim muBot.
+recentchanges-label-unpatrolled|This edit has not yet been patrolled
+rcnotefrom|Herke komaḥwın aŞuḥlofe ḥaroye men ""~{1}"" (hul buSowudo ""~{0}"").
+rclistfrom|Maḥway li Şuḥlofe ḥaṭe men ~{2} ~{1}
+rcshowhideminor|~{0} minor edits
+rcshowhidebots|~{0} bots
+rcshowhideliu|~{0} Hadome d3abiri
+rcshowhideanons|~{0} Hadomo nuxroyo
+rcshowhidepatr|~{0} patrolled edits
+rcshowhidemine|aMaṫwoṭayḍi (~{0})
+rclinks|Maḥway li ~{0} aŞuḥlofe ḥaroye men meqım ~{1} Yawme hul u³do. <br />~{2}
+diff|Frişuṭo
+hist|Maktabzabno
+hide|Tlay
+show|Maḥway
+minoreditletter|m
+newpageletter|N
+boteditletter|b
+rc-enhanced-expand|Maḥway aŞelole
+rc-enhanced-hide|Tlay aŞelole
+recentchangeslinked|Şuḥlofe bFaṭoṭe masre
+recentchangeslinked-toolbox|Şuḥlofe bFaṭoṭe masre
+recentchangeslinked-title|Şuḥlofe bFaṭoṭe dkıtne masre b~{0}
+recentchangeslinked-summary|This is a list of changes made recently to pages linked from a specified page (or to members of a specified category).\nPages on [[Special:Watchlist\u007Cyour watchlist]] are '''bold'''.
+recentchangeslinked-page|Işmo diFaṭo
+recentchangeslinked-to|Maḥway li Şuḥlofe dFaṭoṭe dkitne masre lerke.
+upload|Mosaq Fayl
+uploadlogpage|Upload log
+filedesc|Sfiquṭo
+license|Fsoso
+license-header|Fsoso
+file-anchor-link|Fayl
+filehist|Maktabzabno duFayl
+filehist-help|Click on a date/time to view the file as it appeared at that time.
+filehist-revert|revert
+filehist-current|current
+filehist-datetime|Zabno
+filehist-thumb|Thumbnail
+filehist-thumbtext|Thumbnail for version as of ~{0}
+filehist-user|Hadomo
+filehist-dimensions|Dimensions
+filehist-comment|Comment
+imagelinks|File usage
+linkstoimage|The following {{PLURAL:~{0}\u007Cpage links\u007C~{0} pages link}} to this file:
+nolinkstoimage|There are no pages that link to this file.
+sharedupload-desc-here|This file is from ~{0} and may be used by other projects.\nThe description on its [~{1} file description page] there is shown below.
+randompage|Faṭo gedşonoyto
+brokenredirects-edit|mşaḥlaf
+brokenredirects-delete|slag
+nbytes|~{0} {{PLURAL:~{0}\u007Cbyte\u007Cbytes}}
+nmembers|~{0} {{PLURAL:~{0}\u007CHadomo\u007CHadome}}
+prefixindex|aFaṭoṭe kulle dkitte Prefiks
+usercreated|{{GENDER:~{2}\u007Ckṭule}}  ~{0} b~{1}
+newpages|Faṭoṭe ḥaṭe
+move|Mtaxar
+pager-newer-n|{{PLURAL:~{0}\u007C1 ḥreno \u007C~{0} ḥrene}}
+pager-older-n|{{PLURAL:~{0}\u007C3atiqo1\u007C3atiqe ~{0}}}
+booksources|Kruxyo baNumarat duISBN
+booksources-search-legend|Krax Mabu³e me Kṭowe
+log|Logs
+allarticles|aFaṭaṭe kulle
+allpagessubmit|Zux
+deletedcontributions|Maṫwoṭo slige
+deletedcontributions-title|Maṫwoṭo slige
+sp-deletedcontributions-contribs|Maṫwoṭo
+linksearch-ok|Krax
+linksearch-line|~{0} masro yo b~{1}
+listusers-submit|Maḥway
+listgrouprights-group|Gudo
+listgrouprights-rights|Ḥaqat
+listgrouprights-helppage|Help: Ḥaqat diGudo
+listgrouprights-members|(Lista daHadome)
+emailuser|Kṭaw Email luHadomano.
+emailusername|Işme duHadomo:
+emailfrom|Men:
+emailto|Lwoṭ:
+emailmessage|Ṫebo:
+watchlist|My watchlist
+mywatchlist|My watchlist
+watchlistfor2|L~{0} ~{1}
+watch|Watch
+unwatch|Unwatch
+watchlist-details|{{PLURAL:~{0}\u007C~{0} page\u007C~{0} pages}} on your watchlist, not counting talk pages.
+wlshowlast|Maḥway li aŞuḥlofe dıtsimi meqım ~{0} Sa³ayat ~{1} Yawme
+watchlist-options|Watchlist options
+actioncomplete|uDuboro kamıl
+actionfailed|Action failed
+dellogpage|Deletion log
+rollbacklink|rollback
+protectlogpage|Protection log
+protectedarticle|mastar "[[~{0}]]"
+undeletelink|view/restore
+undeleteviewlink|ḥur
+undelete-search-submit|Krax
+undelete-show-file-submit|Eh
+namespace|Dukṭo luIşmo
+invert|Invert selection
+contributions|Maṫwoṭo duHadomo:
+contributions-title|Maṫwoṭo d~{0}
+mycontris|aMaṫwoṭayḍi
+contribsub2|d~{0} (~{1})
+uctop|(ḥaroyo)
+month|muYarḥo
+year|hul iŞato:
+sp-contributions-newbies|Bes maḥway Maṫwoṭo dHadome ḥaṭe
+sp-contributions-blocklog|Block log
+sp-contributions-deleted|Maṫwoṭo slige
+sp-contributions-uploads|Fayl masalqo
+sp-contributions-logs|logs
+sp-contributions-talk|Mamlo
+sp-contributions-search|Krax Maṫwoṭo
+sp-contributions-username|IP-Adres aw Işme duHadmomo:
+sp-contributions-toponly|Only show edits that are latest revisions
+sp-contributions-submit|Krax
+whatlinkshere|Asirwoṭo biFaṭaṭe
+whatlinkshere-title|Faṭoṭe dkitte Asiruṭo 3am"~{0}"
+whatlinkshere-page|Faṭo
+linkshere|aFaṭoṭani masre ne 3am '''[[:~{0}]]''':
+nolinkshere|Layto Faṭoṭe dkitte Asiruṭo 3am '''[[:~{0}]]'''.
+isredirect|redirect page
+istemplate|transclusion
+isimage|Asiruṭo duFayl
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cmeqımtır\u007C~{0} meqımtır}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cḥreno\u007C~{0} ḥrene}}
+whatlinkshere-links|← Asirwoṭo
+whatlinkshere-hideredirs|~{0} redirects
+whatlinkshere-hidetrans|~{0} transclusions
+whatlinkshere-hidelinks|~{0} Asirwoṭo
+whatlinkshere-hideimages|~{0} Asiruṭo duFayl
+whatlinkshere-filters|Filtrat
+ipboptions|2 Sa³ayat:2 hours,1 Yawmo:1 day,3 Yawme:3 days,1 Şabṭo:1 week,2 Şabe:2 weeks,1 Yarḥo:1 month,3 Yarḥe:3 months,6 Yarḥe :6 months,1 Şato:1 year,indefinite:infinite
+ipblocklist|Blocked users
+ipblocklist-submit|Krax
+blocklink|Maḥram
+unblocklink|unblock
+change-blocklink|change block
+contribslink|Maṫwoṭo
+blocklogpage|Block log
+blocklogentry|blocked [[~{0}]] with an expiry time of ~{1} ~{2}
+block-log-flags-nocreate|account creation disabled
+movelogpage|Move log
+revertmove|revert
+export|Mofaq iFaṭaṭe
+allmessages|Ṫebo duSistem dMEdiaWiki
+allmessagesname|Işmo
+allmessagesdefault|Syomo standard
+allmessages-language|Leşono
+allmessages-filter-submit|Zux
+thumbnail_error|Error creating thumbnail: ~{0}
+tooltip-pt-userpage|iFaṭaṭyḍox
+tooltip-pt-mytalk|iFaṭayḍux duDroşo
+tooltip-pt-preferences|a3ayaratayḍux
+tooltip-pt-watchlist|Lista dFaṭoṭe dkib³at mşaḥılfat
+tooltip-pt-mycontris|Lista daMaṫwoṭayḍox
+tooltip-pt-login|İnaqa demqaydat ruḥox ṫawo yo, elo letat mejbur
+tooltip-pt-logout|Nfoqo
+tooltip-ca-talk|Droşo 3al iFaṭo daḤbişoṭo
+tooltip-ca-edit|Kibux mşaḥılfat iFaṭaṭe, elo bo³o msta³mal uZra³lo duQontrol meqım demqaydat iFaṭo
+tooltip-ca-addsection|Bday Fusoqo ḥaṭo
+tooltip-ca-viewsource|This page is protected.\nYou can view its source
+tooltip-ca-history|Past revisions of this page
+tooltip-ca-protect|Mastar iFaṭaṭe
+tooltip-ca-delete|Slag iFaṭaṭe
+tooltip-ca-move|Mataxar iFaṭaṭe
+tooltip-ca-watch|Add this page to your watchlist
+tooltip-ca-unwatch|Remove this page from your watchlist
+tooltip-search|Krax{{SITENAME}}
+tooltip-search-go|Zux liFaṭo dkitla tam uIşmano.
+tooltip-search-fulltext|Krax uSyomano baFaṭoṭe
+tooltip-p-logo|Z³ar iFaṭo rişoyto
+tooltip-n-mainpage|Z³ar iFaṭo rişoyto
+tooltip-n-mainpage-description|Z³ar iFaṭo rişoyto
+tooltip-n-portal|3al iProja; mın komisam u ayko u ayko ne a medone.
+tooltip-n-currentevents|Find background information on current events
+tooltip-n-recentchanges|Lista daŞuḥlofe ḥaroye kulle
+tooltip-n-randompage|Ftaḥ Faṭo gedşonoyto
+tooltip-n-help|Maḥway iFaṭo du3udrono
+tooltip-t-whatlinkshere|Lista daFaṭoṭe kulle dkitte Asiruṭo lerke
+tooltip-t-recentchangeslinked|Şuḥlofe ḥaroye bFaṭoṭe dkitte Asiruṭo lerke
+tooltip-feed-atom|Atom feed diFaṭaṭe
+tooltip-t-contributions|Lista daMaṫwoṭo duHadomano
+tooltip-t-emailuser|Mşadar Email luHadomano
+tooltip-t-upload|Mosaq aFayls
+tooltip-t-specialpages|Lista daFaṭoṭe dilonoye kulle.
+tooltip-t-print|Printable version of this page
+tooltip-t-permalink|Asiruṭo aminoyto liFaṭaṭe
+tooltip-ca-nstab-main|Maḥway iFaṭo daḤbişoṭo
+tooltip-ca-nstab-user|Maḥway iFaṭo duHadomo
+tooltip-ca-nstab-special|Haṭe Faṭo dilonoyto yo, laybux mşaḥalfatla
+tooltip-ca-nstab-project|Maḥway iFaṭo diProja
+tooltip-ca-nstab-image|Maḥway iFaṭo duFayl
+tooltip-ca-nstab-template|View the template
+tooltip-ca-nstab-category|Maḥway iFaṭo daSedre
+tooltip-minoredit|Mark this as a minor edit
+tooltip-save|Mqayad uŞuḥlofano
+tooltip-preview|Preview your changes, please use this before saving!
+tooltip-diff|Maḥway li aŞuḥlofe buSyomano
+tooltip-compareselectedversions|See the differences between the two selected revisions of this page
+tooltip-watch|Add this page to your watchlist
+tooltip-rollback|"Rollback" reverts edit(s) to this page of the last contributor in one click
+tooltip-undo|"Undo" reverts this edit and opens the edit form in preview mode. It allows adding a reason in the summary.
+tooltip-summary|Enter a short summary
+previousdiff|← Şuḥlofo 3atiqo
+nextdiff|Hiç lo mşaḥalfat →
+file-info-size|~{0} × ~{1} pixels, file size: ~{2}, MIME type: ~{3}
+file-nohires|No higher resolution available.
+svg-long-desc|SCG Fayl, Rabuṭo ~{0} × ~{1} pixel, Rabuṭo duFayl: ~{2}
+show-big-image|Tam faṥiḥ
+ilsubmit|Krax
+seconds|{{PLURAL:~{0}\u007C~{0} Ṥaniye\u007C~{0} Ṥaniyat}}
+bad_image_list|The format is as follows:\n\nOnly list items (lines starting with *) are considered.\nThe first link on a line must be a link to a bad file.\nAny subsequent links on the same line are considered to be exceptions, i.e. pages where the file may occur inline.
+metadata|Metadata
+metadata-help|This file contains additional information, probably added from the digital camera or scanner used to create or digitize it.\nIf the file has been modified from its original state, some details may not fully reflect the modified file.
+metadata-fields|Image metadata fields listed in this message will be included on image page display when the metadata table is collapsed.\nOthers will be hidden by default.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-writer|Kaṭowo
+exif-languagecode|Leşono
+exif-cameraownername|uMoro diQamera
+namespacesall|kulle
+monthsall|kulle
+watchlisttools-view|View relevant changes
+watchlisttools-edit|View and edit watchlist
+watchlisttools-raw|Edit raw watchlist
+duplicate-defaultsort|'''Warning:''' Default sort key "~{1}" overrides earlier default sort key "~{0}".
+fileduplicatesearch-submit|Krax
+specialpages|Faṭoṭe dilonoye
+blankpage|Faṭo xliṭo
+external_image_whitelist| #Leave this line exactly as it is<pre>\n#Put regular expression fragments (just the part that goes between the //) below\n#These will be matched with the URLs of external (hotlinked) images\n#Those that match will be displayed as images, otherwise only a link to the image will be shown\n#Lines beginning with # are treated as comments\n#This is case-insensitive\n\n#Put all regex fragments above this line. Leave this line exactly as it is</pre>
+tag-filter|[[Special:Tags\u007CTag]] filter:
+compare-page1|Faṭo 1
+compare-page2|Faṭo 2
+dberr-problems|Şubqono! iFaṭaṭe u3do kitla Qaṫre.
+htmlform-submit|Mqayad
+htmlform-selectorother-other|Ḥrene
+feedback-message|Ṫebo:
+feedback-cancel|Mbaṫel
+searchsuggest-search|Kruxyo
+api-error-unknownerror|Fawdo nuxroyo: ~{0}
+duration-seconds|~{0} {{PLURAL:~{0}\u007CṤaniye\u007CṤaniyat}}
+duration-minutes|~{0} {{PLURAL:~{0}\u007CQaṫınto\u007CQaṫınoṭo}}
+duration-hours|~{0} {{PLURAL:~{0}\u007CSa³aye\u007CSa³ayat}}
+duration-days|~{0} {{PLURAL:~{0}\u007CYawmo\u007CYawme}}
+duration-weeks|~{0} {{PLURAL:~{0}\u007CŞabṭo\u007CŞabe}}
+duration-years|~{0} {{PLURAL:~{0}\u007CŞato\u007CŞnaye}}
+duration-decades|~{0} {{PLURAL:~{0}\u007Cdecade\u007Cdecades}}
+duration-centuries|~{0} {{PLURAL:~{0}\u007CDoro\u007CDore}}
+']:>
+).lang
+;

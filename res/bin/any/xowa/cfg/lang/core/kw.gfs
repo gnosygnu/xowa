@@ -1,0 +1,1438 @@
+this
+.ns_names
+  .load_text(
+<:['
+-2|Media
+-1|Arbennek
+1|Keskows
+2|Devnydhyer
+3|Keskows Devnydhyer
+5|Keskows $1
+6|Restren
+7|Keskows Restren
+8|MediaWiki
+9|Keskows MediaWiki
+10|Skantlyn
+11|Keskows Skantlyn
+12|Gweres
+13|Keskows Gweres
+14|Klass
+15|Keskows Klass
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-1|Arbednek
+1|Cows
+1|Kescows
+3|Cows Devnydhyer
+3|Kescows Devnydhyer
+5|Cows $1
+5|Kescows $1
+7|Cows Restren
+7|Kescows Restren
+9|Cows MediaWiki
+9|Kescows MediaWiki
+11|Cows Scantlyn
+10|Scantlyn
+11|Kescows Skantlyn
+13|Cows Gweres
+13|Kescows Gweres
+15|Cows Class
+14|Class
+15|Kescows Class
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Activeusers|DevnydhyoryonVyw
+Allmessages|OllMessajys
+Allpages|OllFolennow
+Ancientpages|FolennowKoth
+Badtitle|TitelDrog
+Blankpage|FolenWag
+Block|Difenna
+Booksources|PennfentynyowLyver
+BrokenRedirects|DaskedyansowTerrys
+Categories|Klassys
+ChangeEmail|ChanjyaEbost
+ChangePassword|ChanjyaGerTremena
+ComparePages|KeheveliFolennow
+Confirmemail|AfydhyaEbost
+Contributions|Kevrohow
+CreateAccount|FormyaAkont
+Deadendpages|FolennowFordhDhall
+DeletedContributions|KevrohowDiles
+DoubleRedirects|DaswedyansowDewblek
+EditWatchlist|ChanjyaOwRolWolya
+Emailuser|EbostyaDevnydhyer
+ExpandTemplates|BrasheSkantlyns
+Export|Esperthi
+Fewestrevisions|AnLyhaAmendyansow
+Filepath|HynsAnFolen
+Import|Ymperthi
+Invalidateemail|DigomposaEbost
+JavaScriptTest|PrevyansJavaScript
+BlockList|RolDhifen
+LinkSearch|HwilasKevrennow
+Listadmins|RolyaMenystroryon
+Listbots|RolyaBottys
+Listfiles|RolyaRestrennow
+Listgrouprights|RolyaGwiryowBagas
+Listredirects|RolyaDaskedyansow
+Listusers|RolyaDevnydhyoryon
+Lockdb|AlhwedhaDB
+Log|Kovnoten~Kovnotennow
+Lonelypages|FolennowDigoweth
+Longpages|FolennowHir
+MergeHistory|IstoriKesunya
+MIMEsearch|HwilasMIME
+Mostcategories|AnMoyhaKlassys
+Mostimages|AnMoyhaRestrennowKevennys
+Mostinterwikis|AnMoyhaInterwikis
+Mostlinked|AnMoyhaFolennowKevrennys
+Mostlinkedcategories|AnMoyhaKlassysKevrennys
+Mostlinkedtemplates|AnMoyhaSkantlynsKevrennys
+Mostrevisions|AnMoyhaAmendyansow
+Movepage|GwayaFolen
+Mycontributions|OwHevrohow
+MyLanguage|OwYeth
+Mypage|OwFolen
+Mytalk|OwHeskows
+Myuploads|OwUghkargansow
+Newimages|RestrennowNowyth
+Newpages|FolennowNowyth
+PasswordReset|DassetyaGerTremena
+PermanentLink|KevrenFast
+Popularpages|FolennowGerysDa
+Preferences|Dewisyansow
+Prefixindex|MenegvaRagerow
+Protectedpages|FolennowDifresys
+Protectedtitles|TitlysDifres
+Randompage|FolenDreJons
+Randomredirect|DaskedyansDreJons
+Recentchanges|Chanjyow_a-dhiwedhes
+Recentchangeslinked|ChanjyowKelmys
+Revisiondelete|DileaAmendyans
+Search|Hwilas
+Shortpages|FolennowBerr
+Specialpages|FolennowArbennek
+Statistics|Statystygyon
+Unblock|DiswulDifennans
+Uncategorizedcategories|KlassysHebKlass
+Uncategorizedimages|RestrennowHebKlass
+Uncategorizedpages|FolennowHebKlass
+Uncategorizedtemplates|SkantlynsHebKlass
+Undelete|DiswulDilea
+Unlockdb|DialhwedhaDB
+Unusedcategories|KlassysHebDevnydh
+Unusedimages|RestrennowHebDevnydh
+Unusedtemplates|SkantlynsHebDevnydh
+Unwatchedpages|FolennowHebAgaHolya
+Upload|Ughkarga
+Userlogin|Omgelmi
+Userlogout|Digelmi
+Userrights|GwiryowDevnydhyer
+Version|Versyon
+Wantedcategories|KlassysHwansus
+Wantedfiles|RestrennowHwansus
+Wantedpages|FolennowHwansus
+Wantedtemplates|SkantlynsHwansus
+Watchlist|Rol_wolya
+Whatlinkshere|OwKevrennaOmma
+Withoutinterwiki|HebInterwiki
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+redirect|0|#DASKEDYANS~#REDIRECT~
+numberofpages|1|NIVERAFOLENNOW~NUMBEROFPAGES~
+numberofarticles|1|NIVERAERTHYGLOW~NUMBEROFARTICLES~
+numberoffiles|1|NIVERARESTRENNOW~NUMBEROFFILES~
+numberofusers|1|NIVERADHEVNYDHYORYON~NUMBEROFUSERS~
+numberofactiveusers|1|NIVERADHEVNYDHYORYONVYW~NUMBEROFACTIVEUSERS~
+numberofedits|1|NIVERAJANJYOW~NUMBEROFEDITS~
+pagename|1|HANOWANFOLEN~PAGENAME~
+fullpagename|1|HANOWLEUNANFOLEN~FULLPAGENAME~
+img_thumbnail|1|skeusennik~thumbnail~thumb~
+img_manualthumb|1|skeusennik=$1~thumbnail=$1~thumb=$1~
+img_framed|1|fremys~framed~enframed~frame~
+img_frameless|1|hebfram~frameless~
+img_page|1|folen=$1~folen_$1~page=$1~page $1~
+img_none|1|nagonan~none~
+img_right|1|dyhow~right~
+img_center|1|kresel~center~centre~
+img_left|1|kledh~left~
+img_top|1|gwartha~top~
+img_text_top|1|tekst-gwartha~text-top~
+img_middle|1|kres~middle~
+img_bottom|1|goles~bottom~
+img_text_bottom|1|tekst-goles~text-bottom~
+img_link|1|kevren=$1~link=$1~
+sitename|1|HANOWANWIASVA~SITENAME~
+server|0|SERVYER~SERVER~
+servername|0|HANOWANSERVYER~SERVERNAME~
+grammar|0|GRAMASEK~GRAMMAR~
+fullurl|0|URLLEUN~FULLURL~
+displaytitle|1|DISKWEDHESANTITEL~DISPLAYTITLE~
+language|0|#YETH~#LANGUAGE~
+numberofadmins|1|NIVERAVENYSTRORYON~NUMBEROFADMINS~
+special|0|#arbennek~#special~
+filepath|0|HYNSANFOLEN~FILEPATH~
+tag|0|#tag~
+hiddencat|1|__KLASSKUDHYS__~__HIDDENCAT__~
+pagesincategory|1|RESTRENNOWYNKLASS~PAGESINCATEGORY~PAGESINCAT~
+pagesize|1|MYNSANRESTREN~PAGESIZE~
+index|1|__MENEGVA__~__INDEX__~
+noindex|1|__HEBMENEGVA__~__NOINDEX__~
+numberingroup|1|NIVERYNBAGAS~NUMBERINGROUP~NUMINGROUP~
+formatdate|0|#formatdate~#dateformat~
+url_path|0|HYNS~PATH~
+expr|0|#expr~
+if|0|#mar~#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#termyn~#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+pageid|0|IDANFOLEN~PAGEID~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Dy'Sul
+monday|Dy'Lun
+tuesday|Dy'Meurth
+wednesday|Dy'Merher
+thursday|Dy'Yow
+friday|Dy'Gwener
+saturday|Dy'Sadorn
+sun|Sul
+mon|Lun
+tue|Meu
+wed|Mer
+thu|Yow
+fri|Gwe
+sat|Sad
+january|Genver
+february|Hwevrel
+march|Meurth
+april|Ebrel
+may_long|Me
+june|Metheven
+july|Gortheren
+august|Est
+september|Gwynngala
+october|Hedra
+november|Du
+december|Kevardhu
+january-gen|Genver
+february-gen|Hwevrel
+march-gen|Meurth
+april-gen|Ebrel
+may-gen|Me
+june-gen|Metheven
+july-gen|Gortheren
+august-gen|Est
+september-gen|Gwynngala
+october-gen|Hedra
+november-gen|Du
+december-gen|Kevardhu
+jan|Gen
+feb|Hwe
+mar|Meu
+apr|Ebr
+may|Me
+jun|Met
+jul|Gor
+aug|Est
+sep|Gwy
+oct|Hed
+nov|Du
+dec|Kev
+toc|Rol an folen
+redirectedfrom|(Daskedyes dhyworth ~{0})
+allpages|Keniver folen
+prevpage|Folen gyns (~{0})
+collapsible-expand|Efani
+categories|Klassys
+lastmodifiedat|Diwettha chanj an folen-ma o an ~{0}, dhe ~{1}.
+thumbnail-more|Brashe
+otherlanguages|Yn yethow erel
+blanknamespace|(Penn)
+pagecategories|{{PLURAL:~{0}\u007CKlass\u007CKlassys}}
+category_header|Folennow y'n klass "~{0}"
+subcategories|Isglassys
+category-media-header|Media y'n klass "~{0}"
+category-empty|''Nyns eus na folennow na media y'n class-ma.''
+category-subcat-count|{{PLURAL:~{1}\u007CNy'n jeves an klass-ma marnas an isglass a syw.\u007CAn klass-ma a'n jeves an {{PLURAL:~{0}\u007Cisglass\u007C~{0} isglass}} a syw, dhyworth somm a ~{1}.}}
+category-subcat-count-limited|An klass-ma a'n jeves an {{PLURAL:~{0}\u007Cisglass\u007C~{0} isglass}} a syw.
+category-article-count|{{PLURAL:~{1}\u007CNy'n jeves an klass-ma marnas an folen a syw.\u007CYma an {{PLURAL:~{0}\u007Cfolen\u007C~{0} folennow}} a syw y'n klass-ma, dhyworth somm a ~{1}.}}
+category-article-count-limited|Yma an {{PLURAL:~{0}\u007Cfolen\u007C~{0} folen}} a syw y'n klass-ma.
+category-file-count|{{PLURAL:~{1}\u007CNy'n jeves an klass-ma marnas an restren a syw.\u007CYma an {{PLURAL:~{0}\u007Crestren\u007C~{0} restren}} a syw y'n klass-ma, dhyworth somm a ~{1}.}}
+category-file-count-limited|Yma an {{PLURAL:~{0}\u007Cfolen\u007C~{0} folen}} a syw y'n klass-ma.
+nextn|nessa {{PLURAL:~{0}\u007C~{0}}}
+prevn|{{PLURAL:~{0}\u007C~{0}}} kyns
+listingcontinuesabbrev|pes.
+bold_sample|Tekst tew
+bold_tip|Tekst tew
+italic_sample|Tekst italek
+italic_tip|Tekst italek
+link_sample|Titel an gevren
+link_tip|Kevren bervedhel
+headline_sample|Tekst an bennlinen
+headline_tip|Pennlinen nivel 2
+wikieditor-toolbar-tool-ulist|Rol bulettys
+wikieditor-toolbar-tool-ulist-example|Elven a'n rol bulettys
+wikieditor-toolbar-tool-olist|Rol niverys
+wikieditor-toolbar-tool-olist-example|Elven a'n rol niverys
+hidden-category-category|Klassys kudhys
+statistics|Statystygyon
+statistics-pages|Folennow
+categorytree-portlet|Klassys
+categorytree-category|Klass:
+categorytree-mode-all|an oll folednow
+cite_error|Gwall devynna: ~{0}
+cite_error_refs_without_references|Yma tagys <code>&lt;ref&gt;</code>, mes ny gavas tag <code>&lt;references/&gt;</code>
+proofreadpage_namespace|Folen
+cite_article_link|Devynna an erthygel-ma
+tooltip-cite-article|Kedhlow war fatel dhevynnir an folen-ma
+cite|Devynna
+cite_page|Folen:
+cite_submit|Devynna
+wikieditor-wikitext-tab|Wikitekst
+wikieditor-loading|Ow karga...
+wikieditor-preview-tab|Ragweles
+wikieditor-preview-changes-tab|Chanjyow
+wikieditor-preview-loading|Ow karga...
+wikieditor-previewDialog-tab|Ragwel
+wikieditor-previewDialog-loading|Ow karga...
+wikieditor-publish-button-publish|Dyllo
+wikieditor-publish-button-cancel|Hedhi
+wikieditor-publish-dialog-title|Dyllo war {{SITENAME}}
+wikieditor-publish-dialog-minor|Chanj byhan
+wikieditor-publish-dialog-watch|Golya an folen-ma
+wikieditor-publish-dialog-publish|Dyllo
+wikieditor-template-editor-dialog-submit|Nowedhi
+wikieditor-template-editor-dialog-cancel|Hedhi
+wikieditor-toolbar|Toulvar chanjya
+wikieditor-toolbar-desc|Toulvar folen janjya gans devnydh gwellhes
+wikieditor-toolbar-preference|Galosegi an toulvar chanjya gwellhes
+wikieditor-toolbar-loading|Ow karga...
+wikieditor-toolbar-tool-bold|Tew
+wikieditor-toolbar-tool-bold-example|Tekst tew
+wikieditor-toolbar-tool-italic|Italek
+wikieditor-toolbar-tool-italic-example|Tekst italek
+wikieditor-toolbar-tool-ilink|Kevren bervedhel
+wikieditor-toolbar-tool-ilink-example|Titel an gevren
+wikieditor-toolbar-tool-xlink|Kevren a-ves (na ankevewgh an rager http://)
+wikieditor-toolbar-tool-xlink-example|http://www.example.com titel an gevren
+wikieditor-toolbar-tool-link|Kevren
+wikieditor-toolbar-tool-link-title|Keworra kevren
+wikieditor-toolbar-tool-link-int|War-tu ha folen wiki
+wikieditor-toolbar-tool-link-int-target|Folen po URL kosten:
+wikieditor-toolbar-tool-link-int-target-tooltip|Titel po URL an folen:
+wikieditor-toolbar-tool-link-int-text|An tekst rag diskwedhes:
+wikieditor-toolbar-tool-link-int-text-tooltip|An tekst rag diskwedhes
+wikieditor-toolbar-tool-link-ext|War-tu ha folen wias a-ves
+wikieditor-toolbar-tool-link-ext-target|URL an gevren:
+wikieditor-toolbar-tool-link-ext-text|Tekst an gevren:
+wikieditor-toolbar-tool-link-insert|Keworra kevren
+wikieditor-toolbar-tool-link-cancel|Hedhi
+wikieditor-toolbar-tool-link-int-target-status-invalid|Titel drog
+wikieditor-toolbar-tool-link-int-target-status-external|Kevren a-ves
+wikieditor-toolbar-tool-link-int-invalid|Drog yw an titel res genowgh.
+wikieditor-toolbar-tool-link-lookslikeinternal|Yth hevel bos an URL res genowgh ow kevrenna dhe folen wiki aral.\nEus hwans dhywgh y dreylya dhe gevren bervedhel?
+wikieditor-toolbar-tool-link-lookslikeinternal-int|Kevren bervedhel
+wikieditor-toolbar-tool-link-lookslikeinternal-ext|Kevren a-ves
+wikieditor-toolbar-tool-link-empty|Ny entersowgh tra vydh dhe gevrenna dhodho.
+wikieditor-toolbar-tool-file|Restren neythys
+wikieditor-toolbar-tool-file-example|Ensampel.jpg
+wikieditor-toolbar-tool-file-title|Keworra restren
+wikieditor-toolbar-file-target|Hanow an restren:
+wikieditor-toolbar-file-size|Myns:
+wikieditor-toolbar-tool-file-cancel|Hedhi
+wikieditor-toolbar-tool-reference|Devyn
+wikieditor-toolbar-tool-reference-example|Entrewgh tekst an drosnoten omma
+wikieditor-toolbar-tool-reference-cancel|Hedhi
+wikieditor-toolbar-tool-reference-title|Keworra devyn
+wikieditor-toolbar-tool-reference-insert|Keworra
+wikieditor-toolbar-tool-reference-text|Tekst an devyn
+wikieditor-toolbar-tool-signature|Sinans ha dedhyans
+wikieditor-toolbar-section-advanced|Avonsys
+wikieditor-toolbar-tool-heading|Titel
+wikieditor-toolbar-tool-heading-1|Nivel 1
+wikieditor-toolbar-tool-heading-2|Nivel 2
+wikieditor-toolbar-tool-heading-3|Nivel 3
+wikieditor-toolbar-tool-heading-4|Nivel 4
+wikieditor-toolbar-tool-heading-5|Nivel 5
+wikieditor-toolbar-tool-heading-example|Tekst an bennlinen
+wikieditor-toolbar-group-format|Furvyans
+wikieditor-toolbar-tool-indent|Krybans
+wikieditor-toolbar-tool-indent-example|Linen grybys
+wikieditor-toolbar-tool-nowiki|Heb furvyans wiki
+wikieditor-toolbar-tool-nowiki-example|Keworrewgh tekst heb furvyans omma
+wikieditor-toolbar-tool-redirect|Daskedyans
+wikieditor-toolbar-tool-redirect-example|Hanow an folen gosten
+wikieditor-toolbar-tool-big|Bras
+wikieditor-toolbar-tool-big-example|Tekst bras
+wikieditor-toolbar-tool-small|Byhan
+wikieditor-toolbar-tool-small-example|Tekst byhan
+wikieditor-toolbar-tool-superscript|Gorskrif
+wikieditor-toolbar-tool-superscript-example|Tekst gorskrif
+wikieditor-toolbar-tool-subscript|Isskrif
+wikieditor-toolbar-tool-subscript-example|Tekst isskrif
+wikieditor-toolbar-group-insert|Keworra
+wikieditor-toolbar-tool-gallery|Mirva imajys
+wikieditor-toolbar-tool-gallery-example|~{0}:Ensampel.jpg\u007CDeskrifans1\n~{0}:Ensampel.jpg\u007CDeskrifans2
+wikieditor-toolbar-tool-newline|Linen nowyth
+wikieditor-toolbar-tool-table|Tabel
+wikieditor-toolbar-tool-table-example-old|-\n! pennlinen 1\n! pennlinen 2\n! pennlinen 3\n\u007C-\n\u007C rew 1, kellik 1\n\u007C rew 1, kellik 2\n\u007C rew 1, kellik 3\n\u007C-\n\u007C rew 2, kellik 1\n\u007C rew 2, kellik 2\n\u007C rew 2, kellik 3
+wikieditor-toolbar-tool-table-example-cell-text|Tekst an kellik
+wikieditor-toolbar-tool-table-example-header|Text an bennlinen
+wikieditor-toolbar-tool-table-title|Keworra tabel
+wikieditor-toolbar-tool-table-dimensions-rows|Rewyow
+wikieditor-toolbar-tool-table-dimensions-columns|Kolovennow
+wikieditor-toolbar-tool-table-dimensions-header|Keworra rew pennlinen
+wikieditor-toolbar-tool-table-wikitable|Keworra emlow
+wikieditor-toolbar-tool-table-sortable|Gul sortyadow an tabel
+wikieditor-toolbar-tool-table-example|Ensampel
+wikieditor-toolbar-tool-table-preview|Ragwel
+wikieditor-toolbar-tool-table-insert|Keworra
+wikieditor-toolbar-tool-table-cancel|Hedhi
+wikieditor-toolbar-tool-table-invalidnumber|Ny entersowgh niver da a rewyow po kolovennow.
+wikieditor-toolbar-tool-table-zero|Ny yllowgh keworra tabel heb rew po koloven vyth.
+wikieditor-toolbar-tool-replace|Hwilas ha kemeres le
+wikieditor-toolbar-tool-replace-title|Hwilas ha kemeres le
+wikieditor-toolbar-tool-replace-search|Hwilas:
+wikieditor-toolbar-tool-replace-replace|Kemeres le gans:
+wikieditor-toolbar-tool-replace-button-findnext|Kavos an nessa
+wikieditor-toolbar-tool-replace-button-replaceall|Kemeres le pub tra
+wikieditor-toolbar-tool-replace-close|Degea
+wikieditor-toolbar-tool-replace-nomatch|Ny omdhesedhas agas hwilans orth tra vyth.
+wikieditor-toolbar-tool-replace-emptysearch|Ny entersowgh tra vyth dhe hwilas.
+wikieditor-toolbar-section-characters|Lytherennow arbennek
+wikieditor-toolbar-characters-page-latin|Latin
+wikieditor-toolbar-characters-page-latinextended|Latin ystynnys
+wikieditor-toolbar-characters-page-ipa|IPA
+wikieditor-toolbar-characters-page-symbols|Arwodhyow
+wikieditor-toolbar-characters-page-greek|Greka
+wikieditor-toolbar-characters-page-arabic|Arabek
+wikieditor-toolbar-characters-page-arabicextended|Arabek ystynnys
+wikieditor-toolbar-characters-page-persian|Persek
+wikieditor-toolbar-characters-page-hebrew|Ebrow
+wikieditor-toolbar-characters-page-bangla|Bengalek
+wikieditor-toolbar-characters-page-telugu|Telugu
+wikieditor-toolbar-characters-page-sinhala|Sinhala
+wikieditor-toolbar-characters-page-gujarati|Gujarati
+wikieditor-toolbar-characters-page-thai|Tay
+wikieditor-toolbar-characters-page-lao|Laosek
+wikieditor-toolbar-characters-page-khmer|Khmer
+wikieditor-toolbar-section-help|Gweres
+wikieditor-toolbar-help-heading-description|Deskrifans
+wikieditor-toolbar-help-heading-syntax|An pyth a skrifowgh
+wikieditor-toolbar-help-heading-result|An sewyans
+wikieditor-toolbar-help-page-format|Furvyans
+wikieditor-toolbar-help-page-link|Kevrennow
+wikieditor-toolbar-help-page-heading|Pennlinennow
+wikieditor-toolbar-help-page-list|Rolyow
+wikieditor-toolbar-help-page-file|Restrennow
+wikieditor-toolbar-help-page-reference|Devynnow
+wikieditor-toolbar-help-page-discussion|Keskows
+wikieditor-toolbar-help-content-italic-description|Italek
+wikieditor-toolbar-help-content-italic-syntax|''Tekst italek''
+wikieditor-toolbar-help-content-italic-result|<em>Tekst italek</em>
+wikieditor-toolbar-help-content-bold-description|Tew
+wikieditor-toolbar-help-content-bold-syntax|'''Tekst tew'''
+wikieditor-toolbar-help-content-bold-result|<strong>Tekst tew</strong>
+wikieditor-toolbar-help-content-bolditalic-description|Tew &amp; italek
+wikieditor-toolbar-help-content-bolditalic-syntax|'''''Tekst tew &amp; italek'''''
+wikieditor-toolbar-help-content-bolditalic-result|<strong><em>Tekst tew &amp; italek</em></strong>
+wikieditor-toolbar-help-content-ilink-description|Kevren bervedhel
+wikieditor-toolbar-help-content-ilink-syntax|[[Titel an folen\u007CTekst an gevren]]<br />[[Titel an folen]]
+wikieditor-toolbar-help-content-ilink-result|<a href='#'>Tekst an gevren</a><br /><a href='#'>Titel an folen</a>
+wikieditor-toolbar-help-content-xlink-description|Kevren bervedhel
+wikieditor-toolbar-help-content-xlink-syntax|[http://www.ensampel.org Tekst an gevren]<br />[http://www.ensampel.org]<br />http://www.ensampel.org
+wikieditor-toolbar-help-content-xlink-result|<a href='#' class='external'>Tekst an gevren</a><br /><a href='#' class='external autonumber'>[1]</a><br /><a href='#' class='external'>http://www.ensampel.org</a>
+wikieditor-toolbar-help-content-heading2-description|Pennlinen nivel 2
+wikieditor-toolbar-help-content-heading2-syntax|== Tekst an bennlinen ==
+wikieditor-toolbar-help-content-heading2-result|<h2>Tekst an bennlinen</h2>
+wikieditor-toolbar-help-content-heading3-description|Pennlinen nivel 3
+wikieditor-toolbar-help-content-heading3-syntax|=== Tekst an bennlinen ===
+wikieditor-toolbar-help-content-heading3-result|<h3>Tekst an bennlinen</h3>
+wikieditor-toolbar-help-content-heading4-description|Pennlinen nivel 4
+wikieditor-toolbar-help-content-heading4-syntax|==== Tekst an bennlinen ====
+wikieditor-toolbar-help-content-heading4-result|<h4>Tekst an bennlinen</h4>
+wikieditor-toolbar-help-content-heading5-description|Pennlinen nivel 5
+wikieditor-toolbar-help-content-heading5-syntax|===== Tekst an bennlinen =====
+wikieditor-toolbar-help-content-heading5-result|<h5>Tekst an bennlinen</h5>
+wikieditor-toolbar-help-content-ulist-description|Rol bulettys
+wikieditor-toolbar-help-content-ulist-syntax|* Elven a'n rol<br />* Elven a'n rol
+wikieditor-toolbar-help-content-ulist-result|<ul><li>Elven a'n rol</li><li>Elven a'n rol</li></ul>
+wikieditor-toolbar-help-content-olist-description|Rol niverys
+wikieditor-toolbar-help-content-olist-syntax|# Elven a'n rol<br /># Elven a'n rol
+wikieditor-toolbar-help-content-olist-result|<ol><li>Elven a'n rol</li><li>Elven a'n rol</li></ol>
+wikieditor-toolbar-help-content-file-description|Restren neythys
+wikieditor-toolbar-help-content-file-syntax|[[~{0}:Ensampel.png\u007Cthumb\u007CTekst an deskrifans]]
+wikieditor-toolbar-help-content-file-result|<div style='width:104px;' class='thumbinner'><a title='Tekst an deskrifans' class='image' href='#'><img height='50' width='100' border='0' class='thumbimage' src='~{1}/WikiEditor/modules/images/toolbar/example-image.png' alt=''/></a><div class='thumbcaption'><div class='magnify'><a title='Brashe' class='internal' href='#'><img height='11' width='15' alt='' src='~{0}/common/images/magnify-clip.png'/></a></div>Tekst an deskrifans</div></div>
+wikieditor-toolbar-help-content-reference-description|Devyn
+wikieditor-toolbar-help-content-reference-syntax|Tekst an folen.&lt;ref name="test"&gt;[http://www.ensampel.org Tekst an gevren], tekst keworansel.&lt;/ref&gt;
+wikieditor-toolbar-help-content-reference-result|Tekst an folen.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-rereference-description|Devnydh keworansel a'n keth devyn
+wikieditor-toolbar-help-content-rereference-result|Tekst an folen.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-showreferences-description|Diskwedhes devynnow
+wikieditor-toolbar-help-content-showreferences-result|<ol class='references'><li id='cite_note-test-0'><b><a title='' href='#'>^</a></b> <a rel='nofollow' title='http://www.ensampel.org' class='external text' href='#'>Tekst an gevren</a>, tekst keworansel.</li></ol>
+wikieditor-toolbar-help-content-signaturetimestamp-description|Sinans gans an dedhyans
+wikieditor-toolbar-help-content-signaturetimestamp-result|<a href='#' title='{{#special:mypage}}'>Hanow usyer</a> (<a href='#' title='{{#special:mytalk}}'>keskows</a>) 15:54, 10 Metheven 2009 (UTC)
+wikieditor-toolbar-help-content-signature-description|Sinans
+wikieditor-toolbar-help-content-signature-result|<a href='#' title='{{#special:mypage}}'>Hanow devnydhyer</a> (<a href='#' title='{{#special:mytalk}}'>keskows</a>)
+wikieditor-toolbar-help-content-indent-description|Kryba
+wikieditor-toolbar-help-content-indent-syntax|Tekst usadow<br />:Tekst krybys<br />::Tekst krybys
+wikieditor-toolbar-help-content-indent-result|Tekst usadow<dl><dd>Tekst krybys<dl><dd>Tekst krybys</dd></dl></dd></dl>
+wm-license-information-description|Deskrifans
+wm-license-information-source|Pennfenten
+wm-license-information-date|Dedhyans
+wm-license-information-author|Awtour
+wm-license-information-author-missing|Ny's teves an restren-ma kedhlow a'n '''awtour'''.
+wm-license-information-permission|Kummyas
+wm-license-information-permission-reusing-text|Dastevnydhya an restren-ma
+sitesupport|Riansow
+tooltip-n-sitesupport|Skoodhyewgh ni
+group-sysadmin|Menystroryon an system
+wikimedia-copyright|Kavadow yw an tekst yn-dann <a href="https://creativecommons.org/licenses/by-sa/3.0/">Leshyans Attribution/Share-Alike Creative Commons</a>; termynyow keworansel a alsa bos omvyskys. Gwelewgh an <a href="https://wikimediafoundation.org/wiki/Terms_of_Use">Termynyow Devnydh</a> rag manylyon.
+createacct-helpusername-url|{{ns:Project}}:Polici henwyn devnydhyer
+createacct-helpusername|[[{{MediaWiki:createacct-helpusername-url}}\u007C(gweres dhymm dewis)]]
+createacct-captcha-help-url|{{ns:Project}}:Govyn akont
+createacct-imgcaptcha-help|A ny welowgh an imach? [[{{MediaWiki:createacct-captcha-help-url}}\u007CGovynnewgh akont]]
+tog-underline|Islinenna kevrennow:
+tog-hideminor|Kudha chanjyow byhan yn chanjyow a-dhiwedhes
+tog-hidepatrolled|Kudha chanjyow patrolys yn chanjyow a-dhiwedhes
+tog-newpageshidepatrolled|Kudha folennow patrolys dhyworth rol an folennow nowyth
+tog-extendwatchlist|Efani an rol wolya dhe dhiskwedhes keniver chanj, a-dar an moyha a-dhiwedhes hepken
+tog-usenewrc|Bagasa chanjyow herwydh an folen yn chanjyow a-dhiwedhes hag y'n rol wolya (res yw JavaScript)
+tog-numberheadings|Awto-nivera pennlinennow
+tog-showtoolbar|Diskwedhes an toulvar chanjya (res yw JavaScript)
+tog-editondblclick|Chanjya folennow ow tobyl-glyckya (res yw JavaScript)
+tog-editsectiononrightclick|Galosegi chanjya trehow dre dhyhow-glyckya war ditlys an trehow (res yw JavaScript)
+tog-watchcreations|Keworra folennow gwruthys genev ha restrennow ughkergys genev dhe'm rol golyas
+tog-watchdefault|Keworra folennow ha restrennow chanjys genev dhe'm rol golyas
+tog-watchmoves|Keworra folennow ha restrennow gwayys genev dhe'm rol golyas
+tog-watchdeletion|Keworra folennow ha restrennow dileys genev dhe'm rol golyas
+tog-minordefault|Merkya pub chanj avel byhan dre dhefowt
+tog-enotifwatchlistpages|Danvon ebost dhymm pan vo chanjyes folen po restren eus war ow rol wolya
+tog-enotifusertalkpages|Danvon ebost dhymm pan vo chanjyes ow folen geskows
+tog-oldsig|Sinans a-lemmyn:
+tog-fancysig|Dyghtya an sinans avel wikitekst (heb kevren awtomatek)
+tog-watchlisthideown|Kudha ow chanjyow y'n rol wolya
+tog-watchlisthidebots|Kudha chanjyow gans bottow y'n rol wolya
+tog-watchlisthideminor|Kudha chanjyow byhan y'n rol wolya
+tog-watchlisthideliu|Kudha chanjyow gans devnydhyoryon omgelmys y'n rol wolya
+tog-watchlisthideanons|Kudha chanjyow gans devnydhyoryon heb hanow y'n rol wolya
+tog-ccmeonemails|Danvon dhymm dasskrif a ebostow a dhanvonav dhe dhevnydhyoryon erel
+tog-showhiddencats|Diskwedhes klassys kudhys
+tog-useeditwarning|Gul ow gwarnya pan gyssiv folen janjya gans chanjyow nag yw gwithys
+underline-always|Pub prys
+underline-never|Jammes
+underline-default|Defowt an beurel po an grohen
+editfont-default|Defowt an beurel
+editfont-monospace|Font unnspasys
+editfont-sansserif|Font sans-serif
+editfont-serif|Font serif
+january-date|~{0} Genver
+february-date|~{0} Hwevrel
+march-date|~{0} Meurth
+april-date|~{0} Ebrel
+may-date|~{0} Me
+june-date|~{0} Metheven
+july-date|~{0} Gortheren
+august-date|~{0} Est
+september-date|~{0} Gwynngala
+october-date|~{0} Hedra
+november-date|~{0} Du
+december-date|~{0} Kevardhu
+hidden-categories|{{PLURAL:~{0}\u007CKlass kudhys\u007CKlassys kudhys}}
+about|A-dro dhe
+article|Folen dhalgh
+newwindow|(ygeri yn fenester nowyth)
+cancel|Hedhi
+moredotdotdot|Moy...
+mypage|Folen
+mytalk|Keskows
+anontalk|Keskows rag an drigva IP-ma
+navigation|Kevrennow lewya
+and| ha(g)
+qbfind|Kavos
+qbbrowse|Peuri
+qbedit|Chanjya
+qbpageoptions|An folen-ma
+qbmyoptions|Ow folennow
+faq|FAQ
+actions|Gwriansow
+namespaces|Spasys hanow
+variants|Variennow
+navigation-heading|Rol lewya
+errorpagetitle|Gwall
+returnto|Dehweles dhe ~{0}.
+tagline|Dhyworth {{SITENAME}}
+help|Gweres
+search|Hwilas
+searchbutton|Hwilas
+go|Mos
+searcharticle|Mos
+history|Istori an folen
+history_short|Istori
+updatedmarker|nowedhys a-dhia ow vysytyans diwettha
+printableversion|Versyon pryntyadow
+permalink|Kevren fast
+print|Pryntya
+view|Gweles
+edit|Chanjya
+create|Gwruthyl
+editthispage|Chanjya an folen-ma
+create-this-page|Gwruthyl an folen-ma
+delete|Dilea
+deletethispage|Dilea an folen-ma
+undeletethispage|Diswul dilea an folen-ma
+undelete_short|Disdhilea {{PLURAL:~{0}\u007Cunn janj\u007C~{0} chanj}}
+viewdeleted_short|Gweles {{PLURAL:~{0}\u007Cunn janj diles\u007C~{0} chanj diles}}
+protect|Difres
+protect_change|chanjya
+protectthispage|Difres an folen-ma
+unprotect|Chanjya difresans
+unprotectthispage|Chanjya difresans an folen-ma
+newpage|Folen nowyth
+talkpage|Dadhlow a'n folen-ma
+talkpagelinktext|keskows
+specialpage|Folen arbennek
+personaltools|Toulys personel
+articlepage|Gweles an folen
+talk|Keskows
+views|Gwelyansow
+toolbox|Toulgist
+userpage|Gweles an folen dhevnydhyer
+projectpage|Gweles folen an ragdres
+imagepage|Gweles folen an restren
+mediawikipage|Gweles folen an messajys
+templatepage|Gweles folen an skantlyn
+viewhelppage|Gweles an folen weres
+categorypage|Gweles folen an klass
+viewtalkpage|Gweles an dadhlow
+redirectpagesub|Folen dhaskedya
+protectedpage|Folen dhifresys
+jumpto|Lamma dhe:
+jumptonavigation|kevrennow lewya
+jumptosearch|hwilas
+view-pool-error|Drog yw genen, gorgergys yw an servyers orth an termyn-ma.\nYma re a dhevnydhyoryon owth assaya gweles an folen-ma.\nGortewgh pols kyns hwi dhe assaya hedhas an folen-ma arta, mar pleg.\n\n~{0}
+pool-errorunknown|Gwall ankoth
+aboutsite|A-dro dhe {{SITENAME}}
+aboutpage|Project:Kedhlow
+copyright|Kavadow yw an dalgh yn-dann ~{0}.
+copyrightpage|{{ns:project}}:Gwirbryntyansow
+currentevents|Hwarvosow a-lemmyn
+currentevents-url|Project:Hwarvosow a-lemmyn
+disclaimers|Avisyansow
+disclaimerpage|Project:Avisyans ollgemmyn
+edithelp|Gweres gans chanjya
+mainpage|Dynnargh
+mainpage-description|Dynnargh
+policy-url|Project:Polici
+portal|Porth an gemeneth
+portal-url|Project:Porth an gemeneth
+privacy|Polici privetter
+privacypage|Project:Polici privetter
+badaccess|Gwall kummyes
+ok|Sur
+retrievedfrom|Daskevys dhyworth "~{0}"
+youhavenewmessages|~{0} a'gas beus (~{1}).
+youhavenewmessagesfromusers|Hwi a'gas beus ~{0} dhyworth {{PLURAL:~{2}\u007Cdevnydhyer aral\u007C~{2} devnydhyer}} (~{1}).
+youhavenewmessagesmanyusers|Hwi a'gas beus ~{0} dhyworth lies devnydhyer (~{1}).
+newmessageslinkplural|{{PLURAL:~{0}\u007Cmessach nowyth\u007Cmessajys nowyth}}
+newmessagesdifflinkplural|{{PLURAL:~{0}\u007Cchanj\u007Cchanjyow}} diwettha
+youhavenewmessagesmulti|Messajys nowyth a'gas beus war ~{0}
+editsection|chanjya
+editold|chanjya
+viewsourceold|gweles an bennfenten
+editlink|chanjya
+viewsourcelink|gweles an bennfenten
+editsectionhint|Chanjya an tregh: ~{0}
+showtoc|diskwedhes
+hidetoc|kudha
+thisisdeleted|Gweles po daskor ~{0}?
+viewdeleted|Gweles ~{0}?
+restorelink|{{PLURAL:~{0}\u007Cunn janj diles\u007C~{0} chanj diles}}
+feedlinks|Feed:
+site-rss-feed|Feed RSS ~{0}
+site-atom-feed|Feed Atom ~{0}
+page-rss-feed|Feed RSS "~{0}"
+page-atom-feed|Feed Atom "~{0}"
+red-link-title|~{0} (nyns eus folen henwys yndelma)
+nstab-main|Folen
+nstab-user|Folen dhevnydhyer
+nstab-media|Folen media
+nstab-special|Folen arbennek
+nstab-project|Folen ragdres
+nstab-image|Restren
+nstab-mediawiki|Messach
+nstab-template|Skantlyn
+nstab-help|Gweres
+nstab-category|Klass
+error|Gwall
+databaseerror|Gwall database
+readonly|Alhwedhys yw an database
+missingarticle-rev|(amendyans#: ~{0})
+missingarticle-diff|(Dyffrans: ~{0}, ~{1})
+internalerror|Gwall a-bervedh
+internalerror_info|Gwall a-bervedh: ~{0}
+filecopyerror|Ny allas kopia an restren "~{0}" dhe "~{1}".
+filerenameerror|Ny allas dashenwel an restren "~{0}" dhe "~{1}".
+filedeleteerror|Ny allas dilea an restren "~{0}".
+filenotfound|Ny allas kavos an restren "~{0}".
+cannotdelete-title|Ny yllir dilea an folen "~{0}"
+badtitle|Titel drog
+viewsource|Gweles an bennfenten
+viewsource-title|Gweles an bennfenten rag ~{0}
+protectedpagetext|Difresys re beu an folen-ma rag gwitha rag chanjya po gwriansow erel.
+viewsourcetext|Hwi a yll gweles ha kopia pennfenten an folen-ma:
+mycustomcssprotected|Ny'gas beus kummyes dhe janjya an folen CSS-ma.
+mycustomjsprotected|Ny'gas beus kummyes dhe janjya an folen JavaScript-ma.
+ns-specialprotected|Ny yllir chanjya folennow arbennek.
+exception-nologin|Nyns owgh omgelmys
+exception-nologin-text|An folen-ma po an gwrians-ma a wovyn mayth omgelmowgh war an wiki-ma.
+logouttext|'''Digelmys owgh lemmyn.'''\n\nHwi a yll pesya devnydhya {{SITENAME}} yn tihanow, po hwi a yll <span class='plainlinks'>[~{0} omgelmi arta]</span> avel an keth devnydhyer po avel devnydhyer aral.\nNotyewgh: Neb folennow a alsa bos diskwedhys kepar del owgh hwath omgelmys, erna glerhahowgh cache agas peurel.
+welcomeuser|Dynnargh, ~{0}!
+welcomecreation-msg|Gwruthys re beu agas akont.\nNa ankevewgh dhe janjya agas [[Special:Preferences\u007Cdewisyansow {{SITENAME}}]].
+yourname|Hanow devnydhyer:
+userlogin-yourname|Hanow devnydhyer
+userlogin-yourname-ph|Entrewgh agas hanow devnydhyer
+yourpassword|Ger tremena:
+userlogin-yourpassword|Ger tremena
+userlogin-yourpassword-ph|Entrewgh agas ger tremena
+createacct-yourpassword-ph|Entrewgh ger tremena
+yourpasswordagain|Jynnskrifewgh agas ger tremena arta:
+createacct-yourpasswordagain|Afydhyewgh an ger tremena
+createacct-yourpasswordagain-ph|Entrewgh an ger tremena arta
+remembermypassword|Perthi kov a'm omgelmi war an jynn amontya-ma (rag ~{0} {{PLURAL:~{0}\u007Cdydh}} dhe'n moyha)
+userlogin-remembermypassword|Perthi kov a'm omgelmi
+userlogin-signwithsecure|Devnydhya junyans diogel
+yourdomainname|Agas tiredh:
+password-change-forbidden|Ny yllir chanjya geryow tremena war an wiki-ma.
+login|Omgelmi
+nav-login-createaccount|Omgelmi / Gwruthyl akont nowyth
+userlogin|Omgelmi / gwruthyl akont nowyth
+userloginnocreate|Omgelmi
+logout|Digelmi
+userlogout|Digelmi
+notloggedin|Digelmys
+userlogin-noaccount|A ny'gas beus akont?
+userlogin-joinproject|Junya {{SITENAME}}
+nologin|A ny'gas beus akont? '''~{0}'''.
+nologinlink|Gwruthyl akont
+createaccount|Gwruthyl akont nowyth
+gotaccount|Eus akont dhywgh seulabrys? '''~{0}'''.
+gotaccountlink|Omgelmi
+userlogin-resetlink|A ankevsowgh hwi agas manylyon omgelmi?
+userlogin-resetpassword-link|Dassettya agas ger tremena
+createacct-emailrequired|Trigva ebost
+createacct-emailoptional|Trigva ebost (a-dhewis)
+createacct-email-ph|Entrewgh agas trigva ebost
+createaccountmail|Devnydhya ger tremena chonsus anbarthus hag y dhanvon dhe'n drigva ebost res a-woles
+createacct-realname|Hanow gwir (a-dhewis)
+createaccountreason|Acheson:
+createacct-reason|Acheson
+createacct-reason-ph|Prag yth esowgh ow kwruthyl akont aral
+createacct-captcha|Gwiryans sekerder
+createacct-imgcaptcha-ph|Entrewgh an tekst a welowgh a-ugh
+createacct-submit|Gwruthyl agas akont
+createacct-benefit-heading|Gwrys yw {{SITENAME}} gans tus kepar ha hwi.
+createacct-benefit-body1|{{PLURAL:~{0}\u007Cjanj\u007Cchanj}}
+createacct-benefit-body2|{{PLURAL:~{0}\u007Cfolen}}
+createacct-benefit-body3|{{PLURAL:~{0}\u007Cgevriyas\u007Ckevriyas}} a-dhiwedhes
+badretype|Ny omdhesedh an geryow tremena entrys genowgh.
+userexists|Y tevnydhir an hanow devnydhyer entrys genowgh seulabrys.\nDewisewgh ken hanow mar pleg.
+loginerror|Gwall omgelmi
+createacct-error|Gwall ow kwruthyl akont
+createaccounterror|Ny allas gwruthyl an akont: ~{0}
+nocookiesnew|Gwruthys veu an akont, mes nyns owgh omgelmys.\n{{SITENAME}} a dhevnydh cookies rag omgelmi devnydhyoryon.\nDialosegys yw cookies war agas jynn amontya.\nGalosegewgh i, hag omgelmewgh der agas hanow devnydhyer ha'gas ger tremena nowyth.
+nocookieslogin|{{SITENAME}} a dhevnydh cookies rag omgelmi devnydhyoryon.\nDialosegys yw cookies war agas jynn amontya.\nGalosegewgh i hag assayewgh arta.
+noname|Ny resowgh hanow devnydhyer da.
+loginsuccesstitle|Omgelmi a sewenis
+loginsuccess|'''Omgelmys owgh lemmyn orth {{SITENAME}} avel "~{0}".'''
+nouserspecified|Res yw dhywgh ri hanow devnydhyer.
+wrongpassword|Kamm o an ger tremena.\nAssayewgh arta mar pleg.
+wrongpasswordempty|Gwag o an ger tremena res.\nAssayewgh arta mar pleg.
+passwordtooshort|Res yw dhe eryow tremena bos {{PLURAL:~{0}\u007C1 lytheren\u007C~{0} lytheren}} dhe'n lyha.
+password-name-match|Ny yll agas ger tremena bos an keth ha'gas hanow devnydhyer.
+password-login-forbidden|Difennys yw devnydhya an hanow devnydhyer-ma hag an ger tremena-ma.
+mailmypassword|Ebostya ger tremena nowyth
+passwordremindertitle|Ger tremena nowyth rag {{SITENAME}}
+passwordremindertext|Nebonan (hwi martesen, dhyworth an drigva IP ~{0}) a wovynnis ger tremena nowyth rag {{SITENAME}} (~{3}). Ger tremena anbarthus rag an devnydhyer\n"~{1}" re beu gwruthys hag a veu settyes dhe "~{2}". Mars o henna agas bodh, y fydh res dhywgh omgelmi ha dewis ger tremena nowyth lemmyn.\nAgas ger tremena anbarthus a dhiwedh yn {{PLURAL:~{4}\u007Cunn jydh\u007C~{4} dydh}}.\n\nMar kovynnis nebonan aral hemma, po hwi a'gas beus kov a'gas ger tremena ha ny'm beus hwans dh'y janjya namoy, hwi a yll skonya aswon an messach-ma ha pesya devnydhya agas ger tremena koth.
+noemail|Nyns eus trigva ebost rekordys rag an devnydhyer "~{0}".
+noemailcreate|Res yw dhywgh ri trigva ebost da
+passwordsent|Ger tremena nowyth re beu danvenys dhe'n drigva ebost kovskrifys rag "~{0}".\nOmgelmewgh arta mar pleg wosa hwi dh'y receva.
+emailauthenticated|Afydhyes veu agas trigva ebost an ~{1} dhe ~{2}.
+emailconfirmlink|Afydhyewgh agas trigva ebost
+invalidemailaddress|Ny yllir alowa an drigva ebost drefen bos furvyans drog dhedhi.\nEntrewgh trigva da y furvyans po gwakhewgh an furvlen-na.
+accountcreated|Akont gwruthys
+accountcreatedtext|Gwruthys re beu an akont rag ~{0}.
+createaccount-title|Gwruthyl akont rag {{SITENAME}}
+createaccount-text|Nebonan a wrug akont rag agas trigva ebost war {{SITENAME}} (~{3}) henwys "~{1}", "~{2}" y er tremena.\nY talvia dhywgh omgelmi ha chanjya agas ger tremena lemmyn.\n\nHwi a yll skonya aswon an messach-ma mar peu an akont-ma gwruthys yn gwall.
+loginlanguagelabel|Yeth: ~{0}
+changepassword|Chanjya an ger-tremena
+resetpass_announce|Hwi a omgelmis dre goden ebostyes anbarthus.\nRag gorfenna omgelmi, res yw dhywgh settya ger tremena nowyth omma:
+resetpass_header|Chanjya ger tremena an akont
+oldpassword|Ger tremena koth:
+newpassword|Ger tremena nowyth:
+retypenew|Jynnscrifewgh an ger tremena nowyth arta:
+resetpass_submit|Settya an ger tremena hag omgelmi
+changepassword-success|Chanjyes re beu agas ger tremena yn sewen!\nOrth agas omgelmi lemmyn...
+resetpass_forbidden|Ny yllir chanjya geryow tremena
+resetpass-submit-loggedin|Chanjya an ger tremena
+resetpass-submit-cancel|Hedhi
+resetpass-temp-password|Ger tremena anbarthus:
+passwordreset|Dassettya an ger tremena
+passwordreset-text-one|Lenwewgh an furvlen-ma rag dassettya agas ger tremena.
+passwordreset-text-many|{{PLURAL:~{0}\u007CEntrewgh onan a'n tymmyn a dhata a-woles rag dassettya agas ger tremena.}}
+passwordreset-legend|Dassettya an ger tremena
+passwordreset-disabled|Dialosegys yw dassettya geryow tremena war an wiki-ma.
+passwordreset-username|Hanow devnydhyer:
+passwordreset-domain|Tiredh:
+passwordreset-email|Trigva ebost:
+passwordreset-emailtitle|Manylyon agas akont war {{SITENAME}}
+passwordreset-emailsent|Ebost dassettya ger tremena re beu danvenys.
+passwordreset-emailsent-capture|Ebost dassettya ger tremena re beu danvenys, hag y hyllir y weles a-woles.
+changeemail|Chanjya trigva ebost
+changeemail-text|Lenwewgh an furvlen-ma rag chanjya agas trigva ebost. Y fydh res dhywgh entra agas ger tremena rag afydhya an chanj-ma.
+changeemail-oldemail|Agas trigva ebost a-lemmyn:
+changeemail-newemail|Agas trigva ebost nowyth:
+changeemail-none|(nagonan)
+changeemail-password|Agas ger tremena war {{SITENAME}}:
+changeemail-submit|Chanjya an trigva ebost
+extlink_sample|http://www.example.com titel an gevren
+extlink_tip|Kevren a-ves (na ankevewgh an rager http://)
+nowiki_sample|Keworrewgh tekst heb furvyans omma
+nowiki_tip|Skonya aswon furvyans wiki
+image_tip|Restren neythys
+media_tip|Kevren restren
+sig_tip|Agas sinans gans stampa-termyn
+summary|Berrskrif:
+subject|Testen/Pennlinen:
+minoredit|Chanj byhan yw hemma
+watchthis|Golya an folen-ma
+savearticle|Gwitha an folen
+preview|Ragwel
+showpreview|Diskwedhes ragwel
+showdiff|Diskwedhes an chanjyow
+anoneditwarning|'''Gwarnyans:''' Nyns owgh omgelmys.\nRekordys vydh agas trigva IP yn istori an folen-ma.
+anonpreviewwarning|''Nyns owgh omgelmys. Dre witha, agas trigva IP a vydh rekordyes istori chanjya an folen-ma.''
+summary-preview|Ragwel a'n berrskrif:
+loginreqtitle|Res yw omgelmi
+loginreqlink|omgelmi
+accmailtitle|Ger-tremena danvenys.
+newarticle|(Nowyth)
+newarticletext|Hwi re holyas kevren dhe folen nag yw gwruthys hwath.\nRag gwruthyl an folen, dalethewgh jynnskrifa y'n gist a-woles (gwelewgh an [~{0} folen weres] rag moy kedhlow).\nMar teuthowgh omma yn kamm, klyckyewgh boton '''war-dhelergh''' agas peurel.
+noarticletext|Nyns eus tekst y'n folen-ma a-lemmyn.\nHwi a yll [[Special:Search/{{PAGENAME}}\u007Chwilas titel an folen-ma]] yn folennow erel,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} hwilas y'n kovnotennow kelmys],\npo [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} chanjya an folen-ma]</span>.
+noarticletext-nopermission|Nyns eus tekst y'n folen-ma a-lemmyn.\nHwi a yll [[Special:Search/{{PAGENAME}}\u007Chwilas titel an folen-ma]] yn folennow erel, po <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} hwilas y'n kovnotennow kelmys]</span>, mes ny'gas beus kummyes dhe wruthyl an folen-ma.
+userpage-userdoesnotexist|Nyns yw kovskrifys an akont devnydhyer "~{0}".\nCheckyewgh mar pleg mara'gas beus hwans dhe wruthyl/dhe janjya an folen-ma.
+userpage-userdoesnotexist-view|Nyns yw kovskrifys an akont devnydhyer "~{0}".
+updated|(Nowedhys)
+note|'''Noten:'''
+previewnote|Perthewgh kov, nyns yw hemma marnas ragwel.''' Nyns yw gwithys agas chanjyow hwath!
+continue-editing|Mos dhe'n tyller chanjya
+editing|Ow chanjya ~{0}
+creating|Ow kwruthyl ~{0}
+editingsection|Ow chanjya ~{0} (tregh)
+editingcomment|Ow chanjya ~{0} (tregh nowyth)
+yourtext|Agas tekst
+yourdiff|Dyffransow
+protectedpagewarning|'''Gwarnyans: An folen-ma re beu difresys rag ma nag allo marnas devnydhyoryon gans gwiryow menystrer hy chanjya.'''\nRes yw an diwettha kovnoten a-woles rag godhvos:
+templatesused|{{PLURAL:~{0}\u007CAn skantlyn\u007CSkantlyns}} devnydhys war an folen-ma:
+templatesusedpreview|{{PLURAL:~{0}\u007CAn skantlyn\u007CSkantlyns}} devnydhys y'n ragwel-ma:
+template-protected|(difresys)
+template-semiprotected|(hanter-difresys)
+hiddencategories|Esel a {{PLURAL:~{0}\u007C1 glass kudhys\u007C~{0} klass kudhys}} yw an folen-ma:
+permissionserrorstext-withaction|Ny'gas beus kummyes dhe ~{1}, rag an {{PLURAL:~{0}\u007Cacheson\u007Cachesonys}} a syw:
+moveddeleted-notice|An folen-ma re beu diles.\nYma kovnoten dhilea ha gwaya an folen res a-woles.
+log-fulllog|Gweles an govnoten dhien
+editwarning-warning|Mar kasowgh an folen-ma, y halser kelli chanjyow gwrys genowgh.\nMars owgh omgelmys, hwi a yll dialosegi an gwarnyans-ma yn tregh "Chanjya" agas dewisyansow.
+undo-success|Y hyllir diswul an chanj-ma.\nCheckyewgh mar pleg an kehevelyans a-woles rag gwirya bos hemma an pyth a vynnowgh, hag ena gwithewgh an chanjyow a-woles rag gorfenna diswul an chanj.
+undo-summary|Amendyans ~{0} gans [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007Ckeskows]]) diswrys
+cantcreateaccounttitle|Ny yllir gwruthyl an akont
+viewpagelogs|Gweles kovnotennow an folen-ma
+currentrev|Amendyans diwettha
+currentrev-asof|An amendyans diwettha a-dhia ~{0}
+revisionasof|Versyon an folen a-dhia ~{0}
+revision-info|Amendyans a-dhia ~{0} gans ~{1}
+previousrevision|← Amendyans kottha
+nextrevision|Amendyans nowyttha →
+currentrevisionlink|An amendyans diwettha
+cur|lemmyn
+next|nessa
+last|kyns
+page_first|kynsa
+page_last|diwettha
+histlegend|Dewis dyffransow: Merkyewgh kistennow radyo a'n amendyansow dhe geheveli, ha gweskewgh 'entra' po an boton orth goles an folen.<br />\nAlhwedh: '''({{int:cur}})''' = an dyffrans dhyworth an amendyans diwettha, '''({{int:last}})''' = an dyffrans dhyworth an amendyans kyns, '''{{int:minoreditletter}}''' = chanj byhan.
+history-fieldset-title|Peuri an istori
+history-show-deleted|Diles hepken
+histfirst|An moyha a-varr
+histlast|An diwettha
+historysize|({{PLURAL:~{0}\u007C1 bayt}})
+historyempty|(gwag)
+history-feed-title|Istori amendya
+history-feed-description|Istori amendya rag an folen-ma war an wiki
+history-feed-item-nocomment|~{0} dhe ~{1}
+rev-delundel|diskwedhes/kudha
+rev-showdeleted|diskwedhes
+revdel-restore|chanjya an hewelder
+pagehist|Istori an folen
+mergehistory-reason|Acheson:
+revertmerge|Diswul an kesunya
+history-title|Istori an folen "~{0}"
+difference-title|Dyffransow ynter amendyansow a "~{0}"
+difference-multipage|(Dyffrans ynter an folennow)
+lineno|Linen ~{0}:
+compareselectedversions|Keheveli an amendyansow dewisyes
+showhideselectedversions|Diskwedhes/kudha amendyansow dewisyes
+editundo|diswul
+searchresults|Sewyansow an hwilans
+searchresults-title|Sewyansow an hwilans rag "~{0}"
+notextmatches|Nyns eus tekst folen vyth owth omdhesedha
+prevn-title|~{0} {{PLURAL:~{0}\u007Csewyans}} kyns
+nextn-title|~{0} {{PLURAL:~{0}\u007Csewyans}} nessa
+shown-title|Diskwedhes ~{0} {{PLURAL:~{0}\u007Csewyans}} yn folen
+viewprevnext|Gweles (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|''Yma folen henwys "[[:~{0}]]" war an wiki-ma'''
+searchmenu-new|'''Gwruthyl an folen "[[:~{0}]]" war an wiki-ma!'''
+searchprofile-articles|Folennow dalgh
+searchprofile-images|Liesmedia
+searchprofile-everything|Puptra
+searchprofile-advanced|Avonsys
+searchprofile-articles-tooltip|Hwilas yn ~{0}
+searchprofile-images-tooltip|Hwilas restrennow
+searchprofile-everything-tooltip|Hwilas pub le (yn folennow keskows ynwedh)
+searchprofile-advanced-tooltip|Hwilas yn spasys hanow personelhes
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 ger\u007C~{1} ger}})
+search-result-category-size|{{PLURAL:~{0}\u007C1 esel\u007C~{0} esel}} ({{PLURAL:~{1}\u007C1 isglass\u007C~{1} isglass}}, {{PLURAL:~{2}\u007C1 restren\u007C~{2} restren}})
+search-redirect|(daskedyans ~{0})
+search-section|(tregh ~{0})
+search-suggest|A styrsowgh hwi: ~{0}
+search-interwiki-caption|Ragdresow hwor
+search-interwiki-default|~{0} sewyansow:
+search-interwiki-more|(moy)
+search-relatedarticle|Kelmys
+searchrelated|kelmys
+searchall|oll
+search-nonefound|Nyns esa sewyans vyth owth omdhesedha orth an govyn.
+powersearch-legend|Hwilans avonsys
+powersearch-ns|Hwilas yn spasys-hanow:
+powersearch-togglelabel|Dewis:
+powersearch-toggleall|Oll
+powersearch-togglenone|Nagonan
+search-external|Hwilans a-ves
+preferences|Dewisyansow
+mypreferences|Dewisyansow
+prefs-edits|Niver a janjyow:
+prefs-skin|Krohen
+skin-preview|Ragweles
+prefs-user-pages|Folennow devnydhyer
+prefs-personal|Profil devnydhyer
+prefs-rc|Chanjyow a-dhiwedhes
+prefs-watchlist|Rol wolya
+prefs-watchlist-days|Niver a dhedhyow dhe dhiskwedhes y'n rol wolya:
+prefs-resetpass|Chanjya an ger tremena
+prefs-changeemail|Chanjya an drigva ebost
+prefs-setemail|Settya trigva ebost
+prefs-email|Etholyow ebostya
+saveprefs|Gwitha
+restoreprefs|Restorya pub settyans defowt
+prefs-editing|Chanjya
+rows|Rewyow:
+columns|Kolovennow:
+searchresultshead|Hwilas
+savedprefs|Gwithys re beu agas dewisyansow.
+servertime|Eur an servyer:
+guesstimezone|Lenwel dhyworth an beurel
+timezoneregion-africa|Afrika
+timezoneregion-america|Amerika
+timezoneregion-antarctica|Antarktika
+timezoneregion-arctic|Arktek
+timezoneregion-asia|Asi
+timezoneregion-atlantic|Keynvor Atlantek
+timezoneregion-australia|Ostrali
+timezoneregion-europe|Europa
+timezoneregion-indian|Keynvor Eyndek
+timezoneregion-pacific|Keynvor Hebask
+allowemail|Galosegi ebost dhyworth devnydhyoryon erel
+prefs-searchoptions|Hwilas
+prefs-files|Restrennow
+prefs-emailconfirm-label|Afydhyans an ebost:
+youremail|Ebost:
+username|{{GENDER:~{0}\u007CHanow devnydhyer}}:
+prefs-memberingroups|{{GENDER:~{1}\u007CEsel}} a'n {{PLURAL:~{0}\u007Cbagas\u007Cbagasow}}:
+prefs-registration|Termyn kovskrifa:
+yourrealname|Hanow gwir:
+yourlanguage|Yeth:
+yournick|Sinans nowyth:
+prefs-help-signature|Y tal sina kampolansow war folennow keskows gans "<nowiki>~~~~</nowiki>", a dreylir dhe'gas sinans ha dhe stamp-termyn.
+yourgender|Reydh:
+gender-unknown|Heb hy disklosya
+gender-male|Gorow
+gender-female|Benow
+email|Ebost
+prefs-help-email|A-dhewis yw ri trigva ebost, mes res yw  rag dassettya agas ger tremena mar po ankevys.
+prefs-help-email-others|Hwi a yll dewis gasa dhe re erel kestava dhywgh der ebost dre glyckya kevren war agas folen dhevnydhyer po folen geskows.\nNy dhiskwedhir agas trigva ebost pan gestaffo devnydhyoryon erel dhywgh.
+prefs-help-email-required|Res yw trigva ebost.
+prefs-info|Kedhlow selvenel
+prefs-i18n|Keswlasegyans
+prefs-signature|Sinans
+prefs-advancedediting|Etholyow avonsys
+prefs-advancedrc|Etholyow avonsys
+prefs-advancedrendering|Etholyow avonsys
+prefs-advancedsearchoptions|Etholyow avonsys
+prefs-advancedwatchlist|Etholyow avonsys
+prefs-displayrc|Etholyow diskwedhes
+prefs-displaywatchlist|Etholyow diskwedhes
+userrights-user-editname|Entrewgh hanow devnydhyer:
+userrights-groupsmember|Esel a:
+userrights-reason|Acheson:
+group|Bagas:
+group-user|Devnydhyoryon
+group-autoconfirmed|Devnydhyoryon awto-afydhyes
+group-bot|Bottow
+group-sysop|Menystroryon
+group-all|(oll)
+group-user-member|{{GENDER:~{0}\u007CDevnydhyer}}
+group-bot-member|{{GENDER:~{0}\u007Cbott}}
+group-sysop-member|{{GENDER:~{0}\u007Cmenystrer}}
+grouppage-user|{{ns:project}}:Devnydhyoryon
+grouppage-bot|{{ns:project}}:Bottow
+grouppage-sysop|{{ns:project}}:Menystroryon
+right-read|Redya folennow
+right-edit|Chanjya folennow
+right-createtalk|Gwruthyl folennow keskows
+right-createaccount|Gwruthyl akontow devnydhyer nowyth
+right-move|Gwaya folennow
+right-movefile|Gwaya restrennow
+right-upload|Ughkarga restrennow
+right-delete|Dilea folennow
+newuserlogpage|Kovnoten gwruthyl akontow devnydhyer
+rightslog|Kovnoten wiryow an devnydhyer
+action-edit|chanjya an folen-ma
+action-move|gwaya an folen-ma
+action-movefile|gwaya an restren-ma
+action-upload|ughkarga an restren-ma
+action-delete|dilea an folen-ma
+nchanges|~{0} {{PLURAL:~{0}\u007Cchanj\u007Cchanj}}
+recentchanges|Chanjyow a-dhiwedhes
+recentchanges-legend|Etholyow an chanjyow a-dhiwedhes
+recentchanges-summary|Y hyllir helerhi an chanjyow diwettha gwrys dhe'n wiki war an folen-ma.
+recentchanges-noresult|Nyns eus chanj vyth dres an termyn res a omdhesedh orth an etholyow-ma.
+recentchanges-feed-description|Y hyllir helerhi an chanjyow diwettha gwrys dhe'n wiki y'n feed-ma.
+recentchanges-label-newpage|Y feu gwruthys folen nowyth gans an chanj-ma
+recentchanges-label-minor|Chanj byhan yw hemma
+recentchanges-label-bot|Gwrys veu an chanj-ma gans bott
+recentchanges-label-unpatrolled|Ny veu an chanj-ma patrolyes hwath
+recentchanges-legend-newpage|~{0} - folen nowyth
+rclistfrom|Diskwedhes chanjyow nowyth yn unn dhalleth dhyworth ~{2} ~{1}
+rcshowhideminor|~{0} chanjyow byhan
+rcshowhidebots|~{0} bottow
+rcshowhideliu|~{0} devnydhoryon omgelmys
+rcshowhideanons|~{0} devnydhyoryon dhihanow
+rcshowhidemine|~{0} ow chanjyow
+rclinks|Diskwedhes an ~{0} chanj diwettha gwrys y'n ~{1} dydh diwettha<br />~{2}
+diff|dyffrans
+hist|istori
+hide|Kudha
+show|Diskwedhes
+minoreditletter|B
+newpageletter|N
+boteditletter|bott
+newsectionsummary|/* ~{0} */ tregh nowyth
+rc-enhanced-expand|Diskwedhes an manylyon (res yw JavaScript)
+rc-enhanced-hide|Kudha an manylyon
+recentchangeslinked|Chanjyow kelmys
+recentchangeslinked-feed|Chanjyow kelmys
+recentchangeslinked-toolbox|Chanjyow kelmys
+recentchangeslinked-title|Chanjyow kelmys dhe "~{0}"
+recentchangeslinked-summary|Homm yw rol a janjyow gwrys a-dhiwedhes dhe folennow yw kevrennys dhyworth folen res (po dhe eseli a glass res).\n'''Tew''' yw folennow eus war agas [[Special:Watchlist\u007Crol wolya]].
+recentchangeslinked-page|Hanow an folen:
+recentchangeslinked-to|Diskwedhes chanjyow dhe folennow kevrennys dhe'n folen res yn le
+upload|Ughkarga restren
+uploadbtn|Ughkarga restren
+reuploaddesc|Hedhi ughkarga ha dehweles dhe'n furvlen ughkarga
+uploadnologin|Digelmys
+uploadnologintext|Res yw bos [[Special:UserLogin\u007Comgelmys]] rag ughkarga restrennow.
+uploaderror|Gwall ughkarga
+uploadlogpage|Kovnoten ughkarga
+filename|Hanow an restren
+filedesc|Berrskrif
+fileuploadsummary|Berrskrif:
+filesource|Pennfenten:
+savefile|Gwitha restren
+watchthisupload|Golya an folen-ma
+imgfile|restren
+listfiles_date|Dedhyans
+listfiles_name|Hanow
+listfiles_user|Devnydhyer
+listfiles_size|Myns
+listfiles_description|Deskrifans
+listfiles_count|Versyons
+file-anchor-link|Restren
+filehist|Istori an restren
+filehist-help|Klyckyewgh war dhedhyans/eur rag gweles an folen del omdhiskwedhas nena.
+filehist-deleteall|dilea oll
+filehist-deleteone|dilea
+filehist-revert|gorthtreylya
+filehist-current|a-lemmyn
+filehist-datetime|Dedhyans/Eur
+filehist-thumb|Skeusennik
+filehist-thumbtext|Skeusennik rag an versyon a-dhia ~{0}
+filehist-nothumb|Nyns eus skeusennik
+filehist-user|Devnydhyer
+filehist-dimensions|Mynsow
+filehist-filesize|Mens an restren
+filehist-comment|Kampol
+imagelinks|Devnydh an restren
+linkstoimage|Yma an {{PLURAL:~{0}\u007Cfolen\u007C~{0} folen}} a syw ow kevrenna dhe'n restren-ma:
+linkstoimage-more|Yma moy es ~{0} {{PLURAL:~{0}\u007Cfolen}} ow kevrenna dhe'n restren-ma.\nNy dhiskwa an rol a syw marnas an {{PLURAL:~{0}\u007Ckynsa kevren folen\u007Ckynsa ~{0} kevren folen}} dhe'n restren-ma.\nYma [[Special:WhatLinksHere/~{1}\u007Crol leun]] kavadow.
+nolinkstoimage|Nyns eus folen vyth ow kevrenna dhe'n restren-ma.
+morelinkstoimage|Gweles [[Special:WhatLinksHere/~{0}\u007Cmoy kevrennow]] dhe'n restren-ma.
+sharedupload|Yma an folen-ma ow tos dhyworth ~{0} ha hy a alsa bos yn-dann devnydh gans ragdresow erel.
+sharedupload-desc-here|Yma an restren-ma dhe ~{0} ha ragdresow erel a alsa bos orth hy devnydhya.\nDiskwedhys a-woles yw an deskrifans war hy [~{1} folen dheskrifans] ena.
+uploadnewversion-linktext|Ughkarga versyon nowyth a'n restren-ma
+filedelete|Dilea ~{0}
+filedelete-legend|Dilea an restren
+filedelete-submit|Dilea
+download|iskarga
+unwatchedpages|Folennow heb aga golya
+listredirects|Rol an daswedyansow
+unusedtemplates|Skantlyns heb devnydh
+unusedtemplateswlh|kevrennow erel
+randompage|Folen jonsus
+brokenredirects-edit|chanjya
+brokenredirects-delete|dilea
+withoutinterwiki|Folennow heb kevrennow yeth
+withoutinterwiki-submit|Diskwedhes
+nbytes|~{0} {{PLURAL:~{0}\u007Cbayt\u007Cbayt}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cesel\u007Cesel}}
+uncategorizedpages|Folennow heb klass
+uncategorizedcategories|Klassys heb klass
+uncategorizedimages|Restrennow heb klass
+uncategorizedtemplates|Skantlyns heb klass
+unusedcategories|Klassys heb devnydh
+unusedimages|Restrennow heb devnydh
+prefixindex|Keniver folen gans an rager
+shortpages|Folennow berr
+longpages|Folennow hir
+protectedpages|Folennow difresys
+protectedtitles|Titlys difresys
+usercreated|{{GENDER:~{2}\u007CGwruthys}} an ~{0} dhe ~{1}
+newpages|Folennow nowyth
+newpages-username|Hanow-usyer:
+ancientpages|An kottha folennow
+move|Gwaya
+movethispage|Gwaya an folen-ma
+pager-newer-n|{{PLURAL:~{0}\u007C1 nowyttha\u007C~{0} nowyttha}}
+pager-older-n|{{PLURAL:~{0}\u007C1 kottha\u007C~{0} kottha}}
+booksources|Pennfentynyow lyver
+booksources-search-legend|Hwilas pennfentynyow lyver
+specialloguserlabel|Awtour:
+speciallogtitlelabel|Kosten (titel po devnydhyer):
+log|Kovnotennow
+logempty|Nyns eus tra vyth owth omdhesedha y'n govnoten.
+allpagesfrom|Diskwedhes folennow yn unn dhalleth orth:
+allpagesto|Diskwedhes folennow yn unn dhiwedha orth:
+allarticles|Keniver folen
+allpagessubmit|Mos
+allpages-hide-redirects|Kudha daskedyansow
+sp-deletedcontributions-contribs|kevrohow
+linksearch|Hwilas kevrennow a-ves
+linksearch-ok|Hwilas
+linksearch-line|Y kevrennir ~{0} dhyworth ~{1}
+listusersfrom|Diskwedhes devnydhyoryon yn unn dhalleth orth:
+listusers-submit|Diskwedhes
+activeusers|Rol a dhevnydhyoryon vyw
+activeusers-intro|Hemm yw rol a dhevnydhyoryon re wrug gwrians war an wiki-ma y'n ~{0} {{PLURAL:~{0}\u007Cjydh\u007Cdydh}} diwettha.
+activeusers-count|~{0} {{PLURAL:~{0}\u007Cwrians\u007Cgwrians}} y'n {{PLURAL:~{2}\u007Cjydh\u007C~{2} dydh}} diwettha
+activeusers-hidebots|Kudha botow
+activeusers-hidesysops|Kudha menystroryon
+listgrouprights-members|(rol eseli)
+emailuser|Ebostya an devnydhyer-ma
+emailpage|Ebostya devnydhyer
+defemailsubject|Ebost danvenys dre {{SITENAME}} gans an devnydhyer "~{0}"
+emailfrom|Dhyworth:
+emailto|Dhe:
+emailmessage|Messach:
+emailsend|Danvon
+watchlist|Rol wolya
+mywatchlist|Rol wolya
+watchlistfor2|Rag ~{0} (~{1})
+watch|Golya
+watchthispage|Golya an folen-ma
+unwatch|Diswolya
+watchlist-details|Yma {{PLURAL:~{0}\u007C~{0} folen}} war agas rol wolya, marnas folennow keskows.
+wlheader-showupdated|Yn '''tew''' y tiskwedhir folennow re beu chanjyes a-dhia agas vysytyans diwettha.
+wlnote|A-woles yma an {{PLURAL:~{0}\u007Cchanj diwettha\u007C'''~{0}''' chanj diwettha}} y'n {{PLURAL:~{1}\u007Cour\u007C'''~{1}''' our}} diwettha, a-dhia ~{2}, ~{3}.
+wlshowlast|Diskwedhes an ~{0} our diwettha, an ~{1} dydh diwettha, po
+watchlist-options|Etholyow an rol wolya
+watching|Ow kolya...
+unwatching|Ow tisgolya...
+enotif_reset|Merkya pub folen avel vysytyes
+deletepage|Dilea an folen
+confirm|Afydhya
+excontent|yth esa ynni: "~{0}"
+delete-confirm|Dilea "~{0}"
+delete-legend|Dilea
+actioncomplete|Kowlwrys yw an gwrians
+actionfailed|An gwrians a fyllis
+deletedtext|"~{0}" re beu diles.\nGwelewgh ~{1} rag kovadh a dhileansow a-dhiwedhes.
+dellogpage|Kovnoten dhilea
+deletionlog|kovnoten dhilea
+deletecomment|Acheson:
+deleteotherreason|Acheson aral/keworansel:
+deletereasonotherlist|Acheson aral
+rollbacklink|revya war-dhelergh
+protectlogpage|Kovnoten dhifres
+protectedarticle|"[[~{0}]]" difresys
+prot_1movedto2|[[~{0}]] gwayys dhe [[~{1}]]
+protectcomment|Acheson:
+protectexpiry|Ow tiwedha:
+protect_expiry_invalid|Drog yw an termyn diwedha.
+protect_expiry_old|Yma an termyn diwedha y'n termyn eus passyes.
+protect-level-sysop|Alowa menystroryon hepken
+protect-summary-cascade|ow froslamma
+protect-expiring|diwedhans ~{0} (UTC)
+restriction-type|Kummyas:
+pagesize|(bayt)
+restriction-edit|Chanjya
+restriction-move|Gwaya
+restriction-create|Gwruthyl
+restriction-upload|Ughkarga
+undeletelink|gweles/gorthtreylya
+undeleteviewlink|gweles
+undelete-search-submit|Hwilas
+undelete-show-file-submit|Ya
+namespace|Spas hanow:
+invert|Trebuchya an dewisyans
+namespace_association|Spas hanow kelmys
+contributions|Kevrohow an {{GENDER:~{0}\u007Cdevnydhyer}}
+contributions-title|Kevrohow ~{0}
+mycontris|Kevrohow
+contribsub2|Rag ~{0} (~{1})
+uctop|(gwartha)
+month|Dhyworth an mis (ha moy a-varr):
+year|Dhyworth an vledhen (ha moy a-varr):
+sp-contributions-newbies|Diskwedhes yn unnik kevrohow akontow nowyth
+sp-contributions-blocklog|kovnoten lettya
+sp-contributions-uploads|ughkargansow
+sp-contributions-logs|kovnotennow
+sp-contributions-talk|keskows
+sp-contributions-search|Hwilas kevrohow
+sp-contributions-username|Trigva IP po hanow devnydhyer:
+sp-contributions-toponly|Diskwedhes yn unnik chanjyow yw amendyansow diwettha
+sp-contributions-submit|Hwilas
+whatlinkshere|Pyth a gevren dhe omma
+whatlinkshere-title|Folennow ow kevrenna dhe "~{0}"
+whatlinkshere-page|Folen:
+linkshere|Yma an folennow a syw ow kevrenna dhe '''[[:~{0}]]''':
+nolinkshere|Nyns eus folen vyth ow kevrenna dhe '''[[:~{0}]]'''.
+isredirect|folen daskedyans
+istemplate|treuskludyans
+isimage|kevren an restren
+whatlinkshere-prev|{{PLURAL:~{0}\u007Ckyns\u007C~{0} kyns}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cnessa\u007Cnessa ~{0}}}
+whatlinkshere-links|← kevrennow
+whatlinkshere-hideredirs|~{0} daskedyansow
+whatlinkshere-hidetrans|~{0} treuskludyans
+whatlinkshere-hidelinks|~{0} kevrennow
+whatlinkshere-hideimages|~{0} kevrennow restren
+whatlinkshere-filters|Sidhlow
+blockip|Lettya devnydhyer
+ipaddressorusername|Trigva IP po hanow-usyer:
+ipbreason|Acheson:
+ipboptions|2 our:2 hours,1 jydh:1 day,3 dydh:3 days,1 seythen:1 week,2 seythen:2 weeks,1 vis:1 month,3 mis:3 months,6 mis:6 months,1 vledhen:1 year,heb diwedh:infinite
+ipb-blocklist-contribs|Kevrohow rag ~{0}
+ipblocklist|Devnydhyoryon lettyes
+ipblocklist-submit|Hwilas
+blocklink|lettya
+unblocklink|dislettya
+change-blocklink|chanjya an lettyans
+contribslink|kevrohow
+blocklogpage|Kovnoten lettya
+blocklogentry|[[~{0}]] lettyes, bys dhe ~{1} ~{2}
+unblocklogentry|~{0} dislettyes
+block-log-flags-anononly|devnydhyoryon dhihanow hepken
+block-log-flags-nocreate|dialosegys yw gwruthyl akontow
+block-log-flags-hiddenname|hanow devnydhyer kudhys
+move-page|Gwaya ~{0}
+move-page-legend|Gwaya folen
+movepagetext|Devnydhya an furvlen a-woles a dhashenow folen, yn unn waya oll y istori dhe'n hanow nowyth.\nAn titel koth a vydh folen dhaskedyans dhe'n titel nowyth.\nHwi a yll nowedhi daskedyansow a boynt dhe'n titel derowel yn awtomatek.\nMar ny wrewgh, surhewgh hwi dhe jeckya rag [[Special:DoubleRedirects\u007Cdaskedyansow dobyl]] po [[Special:BrokenRedirects\u007Cterrys]].\nOmgemeryansek owgh rag surhe y pes kevrennow poyntya dhe'n tyller ewn.\n\nNotyewgh '''na wayir''' an folen mars eus folen orth an titel nowyth seulabrys, marnas bos an pyth kampollys diwettha daskedyans ha ny'n jeves istori chanjya kyns vyth.\nHemm a styr y hyllowgh diswul dashenwel folen mar kwrewgh kammwrians, ha ny yllowgh gorskrifa folen eus ena seulabrys.\n\n'''Gwarnyans!'''\nHemm a yll bos chanj tromm ha bras dres ehen rag folen gerys-da;\nSurhewgh mar pleg hwi dhe gonvedhes sewyansow an gwrians-ma kyns mos yn-rag.
+movearticle|Gwaya an folen:
+moveuserpage-warning|'''Gwarnyans''': Yth esowgh ow mos dhe waya folen dhevnydhyer. Notyewgh mar pleg ny vydh marnas an folen gwayys ha ''ny vydh'' an devnydhyer dashenwys.
+newtitle|Dhe ditel nowyth:
+move-watch|Golya an folen-ma
+movepagebtn|Gwaya an folen
+pagemovedsub|Gwaya a sewenis
+movepage-moved|'''Gwayys re beu "~{0}" dhe "~{1}"'''
+movelogpage|Kovnoten waya
+movenosubpage|Ny's teves an folen-ma isfolen vyth.
+movereason|Acheson:
+revertmove|gorthtreylya
+export|Esperthi folennow
+export-addcat|Keworra
+export-addns|Keworra
+allmessagesname|Hanow
+allmessagesdefault|Tekst messach defowt
+thumbnail_error|Gwall ow kwruthyl skeusennik: ~{0}
+import|Ymperthi folennow
+import-interwiki-submit|Ymperthi
+import-upload-filename|Hanow an restren:
+importstart|Owth ymperthi folennow...
+import-noarticle|Nyns eus folen vyth dhe ymperthi!
+tooltip-pt-userpage|Agas folen dhevnydhyer
+tooltip-pt-mytalk|Agas folen gows
+tooltip-pt-preferences|Agas dewisyansow
+tooltip-pt-watchlist|Rol a folennow esowgh ow kolya rag chanjyow
+tooltip-pt-mycontris|Rol a'gas kevrohow
+tooltip-pt-login|Ni a gomend mayth omgelmowgh, mes nyns yw besi
+tooltip-pt-logout|Digelmi
+tooltip-ca-talk|Dadhlow a-dro dhe'n folen
+tooltip-ca-edit|Hwi a yll chanjya an folen-ma. Devnydhyewgh an boton 'ragweles' kyns gwitha mar pleg.
+tooltip-ca-addsection|Dalleth tregh nowyth
+tooltip-ca-viewsource|Difresys yw an folen-ma.\nHwi a yll gweles hy fennfenten.
+tooltip-ca-history|Amendyansow koth a'n folen-ma
+tooltip-ca-protect|Difres an folen-ma
+tooltip-ca-delete|Dilea an folen-ma
+tooltip-ca-move|Gwaya an folen-ma
+tooltip-ca-watch|Keworra an folen-ma dhe'gas rol wolya
+tooltip-ca-unwatch|Dilea an folen-ma dhyworth agas rol wolya
+tooltip-search|Hwilas yn {{SITENAME}}
+tooltip-search-go|Mos dhe folen gans an keth hanow-ma, mars eus
+tooltip-search-fulltext|Hwilas an tekst-ma y'n folennow
+tooltip-p-logo|Mos dhe'n folen dynnargh
+tooltip-n-mainpage|Mos dhe'n folen dynnargh
+tooltip-n-mainpage-description|Mos dhe'n folen dynnargh
+tooltip-n-portal|A-dro dhe'n ragdres, an pyth a yllowgh gul, ple hyllir kavos taklow
+tooltip-n-currentevents|Kavos kedhlow a-dro dhe hwarvosow a-lemmyn
+tooltip-n-recentchanges|Rol a janjyow a-dhiwedhes y'n wiki
+tooltip-n-randompage|Karga folen jonsus
+tooltip-n-help|Gweres
+tooltip-t-whatlinkshere|Rol a bub folen wiki a gevren dhe omma
+tooltip-t-recentchangeslinked|Chanjyow a-dhiwedhes yn folennow a gevrennir dhyworth an folen-ma
+tooltip-feed-rss|Feed RSS rag an folen-ma
+tooltip-feed-atom|Feed Atom rag an folen-ma
+tooltip-t-contributions|Gweles rol a gevrohow an devnydhyer-ma
+tooltip-t-emailuser|Danvon ebost dhe'n devnydhyer-ma
+tooltip-t-upload|Ughkarga restrennow
+tooltip-t-specialpages|Rol a geniver folen arbennek
+tooltip-t-print|Versyon pryntyadow a'n folen-ma
+tooltip-t-permalink|Kevren fast dhe'n amendyans-ma a'n folen
+tooltip-ca-nstab-main|Gweles an folen
+tooltip-ca-nstab-user|Gweles an folen dhevnydhyer
+tooltip-ca-nstab-special|Folen arbennek yw homma; ny yllowgh chanjya an folen hy honen.
+tooltip-ca-nstab-project|Gweles folen an wiki
+tooltip-ca-nstab-image|Gweles folen an restren
+tooltip-ca-nstab-template|Gweles an skantlyn
+tooltip-ca-nstab-category|Gweles folen an klass
+tooltip-minoredit|Merkya hemma avel chanj byhan
+tooltip-save|Gwitha agas chanjyow
+tooltip-preview|Ragweles agas chanjyow; devnydhyewgh hemma kyns gwitha mar pleg!
+tooltip-diff|Diskwedhes an chanjyow a wrussowgh dhe'n tekst
+tooltip-compareselectedversions|Gweles an dyffransow ynter dew amendyansow dewisyes an folen-ma
+tooltip-watch|Keworra an folen-ma dhe'gas rol wolya
+tooltip-rollback|"Revya war-dhelergh" a worthtreyl chanjyow an diwettha devnydhyer yn unn glyck
+tooltip-undo|"Diswul" a worthtreyl an chanj-ma hag ygeri an furvlen janjya y'n modh ragweles. Y hyllir keworra acheson y'n berrskrif.
+tooltip-summary|Entrewgh berrskrif
+siteuser|devnydhyer {{SITENAME}} ~{0}
+lastmodifiedatby|Chanj diwettha an folen-ma o dhe ~{1}, ~{0} gans ~{2}.
+siteusers|{{PLURAL:~{1}\u007Cdevnydhyer\u007Cdevnydhyoryon}} {{SITENAME}} ~{0}
+pageinfo-toolboxlink|Kedhlow an folen
+previousdiff|← Chanj kottha
+nextdiff|Chanj nowyttha →
+file-info-size|~{0} × ~{1} piksel, myns an restren: ~{2}, ehen MIME: ~{3}
+file-nohires|Nyns eus klerder uhella kavadow.
+svg-long-desc|Restren SVG, ~{0} × ~{1} piksel yn hanow, myns an restren: ~{2}
+show-big-image|Klerder leun
+ilsubmit|Hwilas
+metadata|Metadata
+metadata-help|An restren-ma a's teves kedhlow keworansel, dres lycklod keworrys dhyworth an kamera bysyel po an skanyer devnydhys rag hy gwruthyl po hy bysya. Mars yw chanjys an restren dhyworth hy studh gwredhek, possybyl yw na veu nebes manylyon nowedhys.
+metadata-expand|Diskwedhes manylyon ystynnys
+metadata-collapse|Kudha manylyon ystynnys
+exif-imagewidth|Les
+exif-imagelength|Uhelder
+exif-artist|Awtour
+exif-meteringmode-255|Aral
+exif-contrast-0|Usadow
+exif-contrast-1|Medhel
+exif-contrast-2|Kales
+exif-saturation-0|Usadow
+exif-sharpness-0|Usadow
+exif-sharpness-1|Medhes
+exif-sharpness-2|Kales
+exif-subjectdistancerange-0|Ankoth
+namespacesall|oll
+monthsall|oll
+confirmemail|Afydhya an drigva ebost
+confirmemail_noemail|Nyns eus trigva ebost da settyes y'gas [[Special:Preferences\u007Cdewisyansow devnydhyer]].
+imgmultipageprev|← folen gyns
+imgmultipagenext|folen nessa →
+imgmultigo|Mos
+table_pager_limit_submit|Mos
+autosumm-blank|Gwakhes veu an folen
+autoredircomment|Folen daskedyes war-tu ha [[~{0}]]
+autosumm-new|Folen gwruthys gans: '~{0}'
+watchlistedit-normal-title|Chanjya an rol wolya
+watchlistedit-normal-legend|Dilea folennow dhyworth agas rol wolya
+watchlistedit-normal-explain|Yma diskwedhys a-woles folennow war agas rol wolya.\nRag dilea folen, checkyewgh an gisten rybdhi, ha klyckyewgh "{{int:Watchlistedit-normal-submit}}".\nHwi a yll [[Special:EditWatchlist/raw\u007Cchanjya restren an rol wolya]] ynwedh.
+watchlistedit-normal-submit|Dilea titlys
+watchlistedit-normal-done|Diles veu {{PLURAL:~{0}\u007C~{0} titel}} dhyworth agas rol golyas
+watchlistedit-raw-title|Chanjya restren an rol wolya
+watchlistedit-raw-legend|Chanjya restren an rol wolya
+watchlistedit-raw-explain|Yma diskwedhys a-woles folennow war agas rol wolya, may hyllir hy chanjya dre geworra dhedhi ha dilea dhyworti;\nunn ditel war unn linen.\nPan vowgh gorfennys, klyckyewgh "{{int:Watchlistedit-raw-submit}}".\nHwi a yll [[Special:EditWatchlist\u007Cdevnydhya an janjyel usadow]] ynwedh.
+watchlistedit-raw-titles|Titlys:
+watchlistedit-raw-submit|Nowedhi an rol wolya
+watchlistedit-raw-done|Nowedhys re beu agas rol wolya.
+watchlistedit-raw-added|Keworrys veu {{PLURAL:~{0}\u007C~{0} titel}}:
+watchlistedit-raw-removed|Diles veu {{PLURAL:~{0}\u007C~{0} titel}}:
+watchlisttools-view|Gweles chanjyow longus
+watchlisttools-edit|Gweles ha chanjya an rol wolya
+watchlisttools-raw|Chanjya restren an rol wolya
+signature|[[{{ns:user}}:~{0}\u007C~{1}]] ([[{{ns:user_talk}}:~{0}\u007Ckeskows]])
+version|Versyon
+version-other|Aral
+version-version|(~{0})
+fileduplicatesearch-filename|Hanow an restren:
+fileduplicatesearch-submit|Hwilas
+specialpages|Folennow arbennek
+specialpages-group-login|Omgelmi / gwruthyl akont
+blankpage|Folen wag
+tag-filter|Sidhel [[Special:Tags\u007Ctagyow]]:
+tags-edit|chanjya
+dberr-problems|Drog yw genen! An wiasva-ma a's teves kaletter teknogel.
+dberr-again|Assayewgh gortos pols ha daskarga.
+dberr-info|(Ny yllir kestava orth servyer an database: ~{0})
+dberr-usegoogle|Hwi a yll assaya hwilas dre Google.
+logentry-delete-delete|~{0} a {{GENDER:~{1}\u007Cdhileas}} an folen ~{2}
+logentry-move-move|~{0} {{GENDER:~{1}\u007Ca wayas}} an folen ~{2} dhe ~{3}
+logentry-move-move-noredirect|~{0} {{GENDER:~{1}\u007Ca wayas}} an folen ~{2} dhe ~{3} heb gasa daskedyans
+logentry-move-move_redir|~{0} {{GENDER:~{1}\u007Ca wayas}} an folen ~{2} dhe ~{3} dres daskedyans
+searchsuggest-search|Hwilas
+searchsuggest-containing|ynni...
+']:>
+).lang
+;

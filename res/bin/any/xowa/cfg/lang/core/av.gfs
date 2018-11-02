@@ -1,0 +1,442 @@
+this
+.fallback_load('ru')
+.specials
+  .clear
+  .load_text(
+<:['
+Activeusers|ХІаракатчилъи_бугел_гІахьалчагІи
+Allmessages|Системаялъулал_баян_кьеял
+AllMyUploads|Киналго_дир_файлал
+Allpages|Киналго_гьумерал
+Badtitle|БукІине_бегьулареб_цІар
+Blankpage|ЧІобогояб_гьумер
+Block|Блокалада_лъезе
+Booksources|ТІахьазул_иццал
+BrokenRedirects|Рек-рекарал_цоги_бакІалде_руссинариял
+Categories|Категориял
+ChangeEmail|e-mail_хисизе~Почта_хисизе
+ChangePassword|Балъгояб_рагІи_хисизе
+ComparePages|Гьумеразул_дандекквей
+Confirmemail|E-mail_битІухъ_гьаби~почта_битІухъ_гьаби
+Contributions|Хазина
+CreateAccount|Учёталъулаб_Хъвай-хъвагІай_гІуцІцІизе~ГІахьалчи_гІуцІцІизе~Регистрация_гьабизе
+Deadendpages|Нух_къарал_гьумерал
+DeletedContributions|Нахъе_гьабураб_хазина
+Diff|Хиса-басиял
+DoubleRedirects|КІицІулго_цоги_бакІалде_руссинариял
+EditWatchlist|Халкквеялъул_сияхІ_хисизабизе
+Emailuser|ГІахьалчиясухъе_кагъат~Кагъат_битІизе
+ExpandTemplates|Шаблонал_кколе-кколелъуре_ккезари
+Export|КъватІибе_битІи~ЧIехьей
+Fewestrevisions|КъанагІат_хиса-баси_гьарулел
+FileDuplicateSearch|Релъарал_файлал_хъирщи
+Filepath|Файлалде_нух
+Import|Импорт
+Invalidateemail|Адрес_битІухъ_гьаби_нахъ_чІвазе
+JavaScriptTest|JavaScript_хІалбихьи
+BlockList|Блокалда_лъеялъул_сияхІ~Блокалда_лъеял
+LinkSearch|Ссылкаби_хъирщи
+Listbots|Ботазул_сияхІ
+Listfiles|Файлазул_сияхІ~Суратазул_сияхІ
+Listgrouprights|ГІахьалчагІазул_группабазул_ихтиярал~Группабазул_ихтияразул_сияхІ
+Listredirects|Цоги_бакІалде_руссинабиязул_сияхІ
+ListDuplicatedFiles|Релъарал_файлазул_сияхІ
+Listusers|ГІахьалчагІазул_сияхІ
+Lockdb|ХІБ_блокалда_лъезе~ХІужжабазул_база_блокалда_лъезе
+Log|Журналал~Журнал
+Lonelypages|БатІатІурал_гьумерал
+Longpages|Халатал_гьумерал
+MergeHistory|Тарихал_цо_гьари
+MIMEsearch|MIME_ялдалъул_хъирщи
+Mostcategories|Бищунго_категориял_цІикІкІарал
+Mostimages|Бищунго_хІалтІизарулел_файлал
+Mostinterwikis|Интервики-ссылкабазул_бищун_цІикІкІараб_къадар
+Mostlinked|Бищунго_хІалтІизарулел_гьумерал
+Mostlinkedcategories|Бищунго_хІалтІизарулел_категориял
+Mostlinkedtemplates|Бищунго_хІалтІизарулел_шаблонал
+Mostrevisions|Сверелазул_бищун_цІикІкІараб_къадар
+Movepage|Гьумералда_цІар_хисизабизе~ЦІар_хисизаби~ЦІар_хисизе
+Mycontributions|Дир_хазина
+MyLanguage|Дир_мацІ
+Mypage|Дир_гьумер
+Mytalk|Дир_бахІс
+Myuploads|Дица_жанире_цІарал_жал
+Newimages|ЦІиял_файлал
+Newpages|ЦІиял_гьумерал
+PasswordReset|Сброс_пароля
+PermanentLink|Даимаб_ссылка
+Popularpages|Машгьурал_гьумерал
+Preferences|Рекъезабиял
+Prefixindex|ЦІаразул_бетІералде_бихьизаби
+Protectedpages|ЦІунарал_гьумерал
+Protectedtitles|ЦІунарал_цІарал
+Randompage|Цебе_ккараб_гьумер~Цебе_ккараб
+Randomredirect|Цебе_ккараб_цоги_бакІалде_руссинаби
+Recentchanges|ЦІиял_хиса-басиял
+Recentchangeslinked|Хурхинарурал_хиса-басиял
+Revisiondelete|Хиса-баси_нахъе_бацІцІи
+Search|Хъирщи
+Shortpages|Къокъал_гьумерал
+Specialpages|Хассал_гьумерал
+Statistics|Статистика
+Tags|ГІужал
+Unblock|Блокалдаса_бахъи
+Uncategorizedcategories|Категориял_гьечІел_категориял
+Uncategorizedimages|Категориял_гьечІел_файлал
+Uncategorizedpages|Категориял_гьечІел_гьумерал
+Uncategorizedtemplates|Категориял_гьечІе_шаблонал
+Undelete|ТІадбуссинабизе~ТІадбуссинаби
+Unlockdb|ХІБ_блокалдаса_бахъи
+Unusedcategories|ХІалтІизаруларел_категориял
+Unusedimages|ХІалтІизаруларел_файлал
+Unusedtemplates|ХІалтІизаруларел_шаблонал
+Upload|Загрузка
+UploadStash|Бахчараб_загрузка
+Userlogin|Жаниве_лъугьин
+Userlogout|Сеанс_лъугІи~КъватІиве_лъугьин
+Userrights|Ихтиярал_рилълъинари
+Version|Сверел~Версия
+Wantedcategories|ХІажатал_категориял
+Wantedfiles|ХІажатал_файлал
+Wantedpages|ХІажатал_гьумерал
+Wantedtemplates|ХІажатал_шаблонал
+Watchlist|Халкквеялъул_сияхІ
+Whatlinkshere|Ссылкаби_гьанире
+Withoutinterwiki|Интервики_гьечІого
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|ГьатӀан
+monday|Итни
+tuesday|Талат
+wednesday|АрбагӀ
+thursday|Хамиз
+friday|Рузман
+saturday|Шаммат
+sun|ГьатI
+mon|Итн
+tue|Тал
+wed|Арб
+thu|Хам
+fri|Руз
+sat|Шам
+january|Январ
+february|Феврал
+march|Март
+april|Апрел
+may_long|Май
+june|Июн
+july|Июл
+august|Август
+september|Сентябр
+october|Октябр
+november|Ноябр
+december|Декабр
+january-gen|Январ
+february-gen|Феврал
+march-gen|Март
+april-gen|Апрел
+may-gen|Май
+june-gen|Июн
+july-gen|Июл
+august-gen|Август
+september-gen|Сентябр
+october-gen|Октябр
+november-gen|Ноябр
+december-gen|Декабр
+jan|Янв
+feb|Фев
+mar|Мар
+apr|Апр
+may|Май
+jun|Июн
+jul|Июл
+aug|Авг
+sep|Сен
+oct|Окт
+nov|Ноя
+dec|Дек
+toc|Жаниб бугеб жо
+collapsible-collapse|Кьуризабизе
+collapsible-expand|Рагьизе
+lastmodifiedat|Ахирисеб нухалъ гьаб гьумералъул хиса-баси гьабуна:  ~{1}, ~{0}.
+otherlanguages|Цоги мацӀазда
+pagecategories|{{PLURAL:~{0}\u007C1=Категория\u007CКатегориял}}
+category_header|Категориялда «~{0}» гьумер
+subcategories|Подкатегориял
+category-media-header|Категориялда «~{0}» файл
+category-empty|"ГьабсагIаталъ гьаб категория чIобого буго."
+listingcontinuesabbrev|(жеги)
+hidden-category-category|Рахчарал категориял
+cite_article_link|Гьумер рехсезе
+sitesupport|Садакъа
+tog-underline|Линкал гъоркьмухъизе
+tog-hideminor|ЧIахIиял хиса-басиязул сияхIалда дагьа-макъал хиса-басиял рахчизе
+tog-showtoolbar|Хиса-басиял гьарулеб мехалда тIасияб алатазул панель бихьизабизе
+tog-editondblclick|КIиго щелчоказдалъун гьемералъул хиса-баси гьабизе
+tog-oldsig|Гьанжесеб гъулбас
+underline-always|Кидаго
+underline-never|Киданиги
+january-date|Январ ~{0}
+february-date|Феврал ~{0}
+march-date|Март ~{0}
+april-date|Апрел ~{0}
+may-date|Май ~{0}
+june-date|Июн ~{0}
+july-date|Июл ~{0}
+august-date|Август ~{0}
+september-date|Сентябр ~{0}
+october-date|Октябр ~{0}
+november-date|Ноябр ~{0}
+december-date|Декабр ~{0}
+hidden-categories|{{PLURAL:~{0}\u007C1=Бахчараб категория\u007CРахчарал категориял}}
+about|Программаялъул хIакъалъулъ
+cancel|НахъчIвазе
+moredotdotdot|Жеги...
+morenotlisted|Гьаб сияхI цIураб гьечIо
+mypage|Гьумер
+mytalk|Бахlс
+navigation|Навигация
+and| ва
+qbfind|ЦIехезе
+qbbrowse|Балагьизе
+qbedit|Хисизабизе
+qbpageoptions|Гьемералъул рекъезаби
+qbmyoptions|Дур рекъезаби
+faq|FAQ
+errorpagetitle|Гъалатl
+tagline|{{grammar:genitive\u007C{{SITENAME}}}} сайталдасан материал
+help|Кумек
+search|ЦIехезе
+searchbutton|ЦIехезе
+go|Ине
+searcharticle|Ине
+history|Хиса-басазул тарих
+history_short|Тарих
+printableversion|КутӀизе версия
+permalink|Кидагояб линк
+print|КIутIизе
+view|Балагьи
+view-foreign|~{0} сайталда балагьизе
+edit|Хисизабизе
+create|Гьабизе
+editthispage|Гьаб гьубер хисизабизе
+create-this-page|Гьаб гьаб гьумер гьабизе
+delete|БацIцIине
+deletethispage|Гьаб гьумер бацIине
+undeletethispage|Гьаб гьумер цӀигьабизе
+undelete_short|{{PLURAL:~{0}\u007C~{0} хиса-баси\u007C1=Хиса-баси}} цӀигьабизе
+viewdeleted_short|{{PLURAL:~{0}\u007C~{0} бацӀцӀараб хиса-баси\u007C~{0} рацӀцӀарал хиса-басиязда\u007CбацӀцӀараб хиса-баси}} балагьизе
+protect|Хиса-басияздасан цIунизе
+protect_change|хисизе
+unprotect|ЦӀуни хисизе
+unprotectthispage|Гьаб гьумералъул цӀуни хисизабизе
+newpage|ЦIияб гьумер
+talkpage|БахӀс
+talkpagelinktext|Бахlс
+specialpage|Хъулухъияб гьумер
+personaltools|Дур алатал
+articlepage|Балагьизе макъалаялда
+talk|Бахlс
+views|Балагьиял
+toolbox|Алатал
+userpage|ГӀахьалчиясул гьумер
+imagepage|Файлалъул гьумер балагьизе
+mediawikipage|Кагъаталъул гьумер балагьизе
+redirectpagesub|Цоги гьумералда сверизабураб гьумер
+protectedpage|ЦӀунараб гьумер
+jumpto|КӀанцӀизе:
+jumptonavigation|Навигация
+jumptosearch|цIехезе
+pool-errorunknown|Лъалареб гъалатӀ
+aboutsite|{{grammar:genitive\u007C{{SITENAME}}}} хӀакъалъулъ
+currentevents|Жакъасел лъугьа-бахъинал
+edithelp|Хисизабиялъе кумек
+mainpage|БетӀераб гьумер
+mainpage-description|БетӀераб гьумер
+policy-url|Project:КъагӀидаби
+portal|ЖамагIаталъул портал
+portal-url|Project:Майдан
+privacy|Конфиденциальносталъул сиясат
+privacypage|Project:Конфиденциальносталъул сиясат
+badaccess|Ихтияразул гъалатӀ
+ok|OK
+retrievedfrom|Босараб бакӀ — «~{0}»
+youhavenewmessages|Духъе ~{0} бачӀана (~{1}).
+youhavenewmessagesmanyusers|Духъе ~{0} бачӀана чамалиго гӀахьалчиясухъан (~{1}).
+newmessageslinkplural|{{PLURAL:~{0}\u007CцӀияб кагъат\u007C999=цӀиял кагътал}}
+newmessagesdifflinkplural|{{PLURAL:~{0}\u007Cахирисеб хиса-баси\u007C999=ахирисел хиса-басиял}}
+youhavenewmessagesmulti|Духъе цӀиял кагътал рачӀана ~{0}
+editsection|хисизабизе
+editold|хисизабизе
+viewsourceold|вики-текст балагьизе
+editlink|хисизабизе
+viewsourcelink|вики-текст балагьизе
+editsectionhint|~{0} бутӀа хисизабизе
+showtoc|бихьизабизе
+hidetoc|бахчизе
+confirmable-confirm|{{GENDER:~{0}\u007CМун}} унгойищ?
+confirmable-yes|У
+confirmable-no|Гуро
+viewdeleted|~{0} балагьизеищ?
+nstab-main|Гьумер
+nstab-user|ГIахьалчи
+nstab-media|Мультимедиа
+nstab-special|Хъулухъияб гьумер
+nstab-project|Проект хIакъалъулъ
+nstab-image|Файл
+nstab-mediawiki|Кагъат
+nstab-template|Шаблон
+nstab-help|Кумек
+nstab-category|Категория
+error|Гъалатl
+databaseerror-error|ГъалатI: ~{0}
+internalerror|Жанисеб гъалатl
+badtitle|Бегьулареб цIар
+viewsource|Вики-текст балагьизе
+viewsource-title|~{0} гьумералъул вики-текст балагьизе
+exception-nologin|Мун жаниве лъугьун гьечIо
+exception-nologin-text|Жаниве лъугьине ккола.
+yourname|ХӀалтӀизабулчиясул цӀар:
+userlogin-yourname|ХӀалтӀизабулчиясул цӀар
+userlogin-yourname-ph|Дур аккаунталъул цӀар хъвае
+createacct-another-username-ph|ГӀахьалчиясул цӀар хъвай
+yourpassword|Пароль:
+userlogin-yourpassword|Пароль
+userlogin-yourpassword-ph|Дур пароль хъвае
+createacct-yourpassword-ph|Дур пароль хъвае
+yourpasswordagain|Пароль такрар гьабе:
+userlogin-remembermypassword|Системалда чӀезе
+yourdomainname|Дур домен:
+login|Жаниве лъугьине
+nav-login-createaccount|Жаниве лъугьине / аккаунт гьабизе
+userlogin|Жаниве лъугьине / аккаунт гьабизе
+userloginnocreate|Жаниве лъугьине
+logout|Къватlиве вачIизе
+userlogout|Къватlиве лъугьине
+notloggedin|Мун жаниве лъугьун гьечIо
+userlogin-noaccount|Дур аккаунт гьечIебищ?
+nologin|Дур аккаунт гьечIебищ? ~{0}.
+nologinlink|Аккаунт гьабизе
+createaccount|Аккаунт гьабизе
+gotaccount|Дур аккаунт бугиш? ~{0}.
+gotaccountlink|Жаниве лъугьине
+loginsuccesstitle|Жаниве лъугьана
+resettokens-tokens|Токенал:
+media_tip|Файлалъе линк
+sig_tip|Дур гъулбас ва гьабсагӀаталъ заман
+summary|Хиса-басиязул куц:
+subject|Тема/бетӀер
+minoredit|Дагьа-макъаб хиса-баси
+watchthis|Гьаб гьумералда хадуб хал кквезе
+savearticle|Хъвай-хъвай цӀунизе
+preview|ЦIебесеб
+showpreview|Цин балагьизе
+showdiff|Хисараб жо балагьизе
+updated|(ЦӀигьабуна)
+note|<strong>ХӀужа:</strong>
+previewnote|<strong>КӀочоге, мун гьабсагӀаталъ балагьула вуго макъалаялъул букӀине бугеб куцалъухъ.</strong>\nДуца гьарурал хиса-басиял цӀунун гьечӀо!
+continue-editing|Жегиги хисизабизе
+editing|Хисизаби ~{0}
+creating|Гьабула буго цӀияб гьумер - ~{0}
+editingsection|~{0} (бутӀа) хисизаби
+editingcomment|~{0} (цӀияб бутӀа) хисизаби
+editconflict|Хисизабиялул дагӀба:
+yourdiff|БатӀалъи
+template-protected|(цӀунун буго)
+template-semiprotected|(цо-цо бакӀал цунун руго)
+next|хадуб
+last|цебе
+page_first|тӀоцебесеб
+page_last|ахирисеб
+histfirst|некӀсиял
+histlast|бищун цӀиял
+historysize|(~{0} {{PLURAL:~{0}\u007Cбайт\u007Cбайт\u007Cбайт}})
+historyempty|(чӀобого буго)
+history-feed-title|Хиса-басиязул тарих
+rev-showdeleted|бихьизабизе
+revdelete-show-file-submit|У
+revdelete-reasonotherlist|Цоги гӀила
+mergehistory-reason|ГӀила:
+editundo|нахъчIвазе
+diff-empty|(БатӀалъи гьечӀо)
+preferences|Рекъезаби
+mypreferences|Рекъезаби
+localtime|Бакlалъул заман
+userrights-user-editname|ГӀахьалчиясул цӀар хъвай:
+recentchanges|ЦӀиял хиса-басиял
+rcshowhideminor|~{0} гӀиси-микъинал хиса-басиял
+rcshowhideminor-show|Бихьизабизе
+rcshowhideminor-hide|Бахчизе
+rcshowhidebots|~{0} ботал
+rcshowhidebots-show|Бихьизабизе
+rcshowhidebots-hide|Бахчизе
+rcshowhideliu|~{0} цӀар рагьарал гӀахьалчагӀи
+rcshowhideliu-show|Бихьизабизе
+rcshowhideliu-hide|Бахчизе
+rcshowhideanons|~{0} цӀаргьечӀ
+rcshowhideanons-show|Бихьизабизе
+rcshowhideanons-hide|Бахчизе
+rcshowhidepatr-show|Бихьизабизе
+rcshowhidepatr-hide|Бахчизе
+rcshowhidemine|~{0} дир хиса-басиял
+rcshowhidemine-show|Бихьизабизе
+rcshowhidemine-hide|Бахчизе
+diff|батӀалъи
+hide|Бахчизе
+show|Бихьизабизе
+minoreditletter|гӀ.-м.
+newpageletter|ЦӀ
+recentchangeslinked|Рухьарал хиса-басиял
+recentchangeslinked-feed|Рухьарал хиса-басиял
+recentchangeslinked-toolbox|Рухьарал хиса-басиял
+upload|Файл цIазе
+uploadnologin|Дуца цӀар бицун гьечӀо
+randompage|Цебе ккараб гьумер
+shortpages|Къокъал макъалаби
+longpages|Кlудиял гьумерал
+listusers|Гlахьалчагlазул сияхl
+newpages|ЦIиял гьумерал
+specialloguserlabel|ГӀахьалчи:
+allarticles|Киналго макъалаби
+watchlist|Дур халгьабиялъул сияхl
+watch|Хал кквезе
+contributions|{{GENDER:~{0}\u007CГӀахьалчиясул}} хӀалтӀи
+mycontris|Дур гlахьаллъи
+whatlinkshere|Гьанире линкал
+move-page-legend|Гьумералъул цlар хисизе
+movearticle|Гьумералъул цӀар хисизе:
+movepagebtn|Гьумералъул цlар хисизе
+lastmodifiedatby|Ахирисеб нухалъ гьаб гьумералъул хиса-баси гьабуна:  ~{1}, ~{0}. Хисизабуна гьас: ~{2}.
+specialpages|Хассал гьумерал
+wikibase-gotolinkedpage-submit|Ине
+']:>
+).lang
+;

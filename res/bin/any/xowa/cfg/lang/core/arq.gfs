@@ -1,0 +1,767 @@
+numbers {
+  separators {
+    clear;
+    set('.', ',');
+    set(',', '.');
+  }
+}
+this
+.fallback_load('ar')
+.messages
+  .load_text(
+<:['
+sunday|الحد
+monday|لثنين
+tuesday|التلاته
+wednesday|لاربعه
+thursday|الخميس
+friday|الجمعه
+saturday|السبت
+sun|الحد
+mon|لثنين
+tue|الثلاثه
+wed|لاربعه
+thu|الخميس
+fri|الجمعه
+sat|السبت
+january|جانفي
+february|فيفري
+march|مارس
+april|أفريل
+may_long|ماي
+june|جوان
+july|جويليا
+august|أوت
+september|سبتمبر
+october|أوكتوبر
+november|نوفمبر
+december|ديسمبر
+january-gen|جانفي
+february-gen|فيفري
+march-gen|مارس
+april-gen|أفريل
+may-gen|ماي
+june-gen|جوان
+july-gen|جويليي
+august-gen|أوت
+september-gen|سبتمبر
+october-gen|أكتوبر
+november-gen|نوفمبر
+december-gen|ديسمبر
+jan|جانفي
+feb|فيفري
+mar|مارس
+apr|أفريل
+may|ماي
+jun|جوان
+jul|جويليا
+aug|أوت
+sep|سبتمبر
+oct|أوكتوبر
+nov|نوفمبر
+dec|ديسمبر
+toc|محتويات
+redirectedfrom|(محول من ~{0})
+allpages|قاع الباجات
+collapsible-collapse|خبّي
+collapsible-expand|ورّي
+sort-descending|رتّب بل نازولي
+sort-ascending|رتّب بل طالوعي
+categories|تصنيفات
+lastmodifiedat|هاد الباجه راهي تبدّلت نهار الـ ~{0}, على الـساعة ~{1}.
+thumbnail-more|كبر
+otherlanguages|بلوغات وحد اوخره
+blanknamespace|أساسي
+pagecategories|{{PLURAL:~{0}\u007Cفصيلة\u007Cفصيلات}}
+category_header|الباجه في التصنيف "~{0}"
+subcategories|تصنيفات تحتيه
+category-media-header|فيشيي ميلتيميديا فالكاتيكورى  "~{0}"
+category-empty|''هاذ التصنيف ما فيهش لا باجات و لا ميلتيميديا.''
+category-subcat-count|{{PLURAL:~{1}\u007Cهاذ التصنيف فيه التصنيف الفرعي التالي\u007Cهاذ التصنيف فيه{{PLURAL:~{0}\u007C\u007Cالتصنيف الفرعي\u007C~{0} تصنيفات فرعية}}، من إجمالي ~{1}.}}
+category-subcat-count-limited|هاد الـتصنيف يسيع {{PLURAL:~{0}\u007C\u007Cالتصنيف الفرعي التابع\u007Cالتصنيفات الفرعية ~{0}  التابعة}}.
+category-article-count|هاذ الكاتيكورى فيها {{PLURAL:~{1}\u007Cهاذ الفيشيي\u007C~{1} الفيشيي, اللي{{PLURAL:~{0}\u007Cهاذ\u007Cنتع~{0}}} من تحتا}}.
+category-article-count-limited|{{PLURAL:~{0}\u007C\u007Cالصفحة التابعة\u007Cالـ ~{0} ‘ن صفحة التابعة}} مصنّفة ب هاذ التصنيف.
+category-file-count|هاذ الكاتيكورى فيها {{PLURAL:~{1}\u007Cهاذ الفيشيي\u007C~{1} الفيشيي, اللي{{PLURAL:~{0}\u007Cهاذ\u007Cنتع~{0}}} من تحتا}}.
+category-file-count-limited|{{PLURAL:~{0}\u007Cالملف التابع مصنّف\u007Cالملفات الـ ~{0} التابعة مصنّفة}} ب هاذ التصنيف.
+nextn|{{PLURAL:~{0}\u007Csuivante\u007C~{0} التاليين}}
+prevn|{{PLURAL:~{0}\u007Cprécédente\u007C~{0} اللولانيين}}
+listingcontinuesabbrev|يُتبع
+bold_sample|كتيبة غليظه
+bold_tip|كتيبة غليظه
+italic_sample|كتبة مايلة
+italic_tip|نص مايل
+link_sample|عنوان وصيلة
+link_tip|وصيلة داخليه
+headline_sample|كتبة تاع علوان كبير
+headline_tip|عنوان من المستوى الثاني
+hidden-category-category|تصنيفات مخبّية
+statistics|إحصاويّات
+tog-underline|تسطار الوصيلات:
+tog-hideminor|خبي الكتيبات الصغيرة في التبديلات التوالا
+tog-hidepatrolled|خبي الكتيبات المعسوسه في التبديلات التوالا
+tog-newpageshidepatrolled|خبي الباجات المعسوسه اللي في ليستت الباجات الجدد
+tog-extendwatchlist|دلّي الليستة تاع التتباع باش تورّي كامل التبديلات، ماشي برك غير التوالا
+tog-usenewrc|جمّع الـتبدالات بل صفحة فل تبدالات الـجديدة و الـليستة تاع الـعسّة
+tog-numberheadings|رقّم العلاون تاع القسيمات
+tog-showtoolbar|بيّن البارّة تاع دوزان‘ الكتبة
+tog-editondblclick|آكتيفي التبدال تاع الباجات بل زوج ضركات تاع الفارة
+tog-editsectiononrightclick|آكتيفي التبدال تاع السكسيوّات بل ضريك بل ليمنة على العلاوين نتاعهم
+tog-watchcreations|زيد الـصفحات اللي نخلقها و الـفيشيّات فل قايمة تاع التتباع تاعي
+tog-watchdefault|زيد الـصفحات و الـفيشيّات اللي نبدّلها فل قايمة تاع الـتتباع تاعي
+tog-watchmoves|زيد الـصفحات و الـفيشيات اللي نحوّلها فل قايمة تاع الـتباع تاعي
+tog-watchdeletion|زيد الـصفحات اللي نفصيها فل قايمة تاع التتباع تاعي
+tog-watchrollback|بيّن فل ليستة تاع المتابعة تاعي، الصفحات الّي كنت أنا سترجعتها.
+tog-minordefault|ماركي كل التبديلات بلي راهي خفيفه
+tog-previewontop|ورّي نضرة قبليّة تاع واش يصرا، فوق الجيهة تاع التبدال
+tog-previewonfirst|بين شوفه-قبليه مع اول تبديله
+tog-enotifwatchlistpages|ابحت لي إيمال كي تتبدّل صفحة ولا فيشي من الـليستة تاع الـتتباع تاعي
+tog-enotifusertalkpages|ابعثلي بريّة كلّ ما تبدّلت باجتٰ التقرعيج ديالي
+tog-enotifminoredits|ابعت لي بريه حتا يلا كانت تبدالات صغيرة فلباجات و الـفيشيّات
+tog-enotifrevealaddr|بين لادريستي إلكترونيك في براوات الاعلام
+tog-shownumberswatching|بين شحال كاين من مستعمل يتبع الباجه
+tog-oldsig|خطّ‘لـيدّ اللي كاين
+tog-fancysig|اعتبر التوقيع كي كتيبه ويكي (بلا وصيله توماتيك)
+tog-uselivepreview|استعمل الشوفة الخفيفة
+tog-forceeditsummary|نبّهني كي تندخل كاش صفحة خاوية
+tog-watchlisthideown|خبّي الـتبدالات تاوعي فل ليستة تاع الـتتباع
+tog-watchlisthidebots|خبّي الـتبدالات تاع الـروبويات فل ليستة تاع التتباع تاعي
+tog-watchlisthideminor|خبّي الـتبدالات الـصغيرة من الـليستة تاعي تاع التتباع
+tog-watchlisthideliu|خبّي فل قايمة تاع التتباع تاعي الـتبدالات الـمديورة من عند الـمستعمليين الـمتماركيين
+tog-watchlisthideanons|خبّي فل قايمة تاع التتباع تاعي الـتبدالات الـمديورة من عند الـمستعمليين الـماشي متماركيين
+tog-watchlisthidepatrolled|خبّي الـتبدالات تاع الـمتبّعة فل ليستة تاع التتباع تاعي
+tog-ccmeonemails|ابعت لي نسخة تاع الـإيمالات الّي نبعتهم لل مستعمليين لخرين
+tog-diffonly|ما تورّيش الـمضمون تاع الـصفحات تحت الـفروقات
+tog-showhiddencats|ورّي الـفصلات الـمخبّيين
+tog-norollbackdiff|ما تورّيش الـفروق كي تدير رجوع
+tog-useeditwarning|نبّهني كي نخرج من صفحة كنت نكتب فيها بلا ما نعمّر الخدمة
+tog-prefershttps|نستعمل دايمن توصال مأمون كي ندخل
+underline-always|ديما
+underline-never|ابدا
+underline-default|الـقيمة الـعاديّة تاع الـواجهة و الـفلّاك
+editfont-style|بدّل الـستيل تاع الـكتبة فل قابسة تاع الـكتيبة
+editfont-default|نوع‘ الـكتبة الـعادية فل فلّاك
+editfont-monospace|الـعرض تاع الـحرف يكون تابت
+editfont-sansserif|حروف بلا زوايد
+editfont-serif|حروف بل زوايد
+january-date|جانفيي ~{0}
+february-date|فيفريي ~{0}
+march-date|مارس ~{0}
+april-date|آفريل ~{0}
+may-date|ماي ~{0}
+june-date|جوان ~{0}
+july-date|جويليي~{0}
+august-date|أوت ~{0}
+september-date|سبتامبر ~{0}
+october-date|اكتوبر ~{0}
+november-date|نوفامبر ~{0}
+december-date|ديسمبر ~{0}
+hidden-categories|{{PLURAL:~{0}\u007Cتصنيف مدسوس\u007Cتصنيفات مدسوسة}}
+index-category|صفحات مفهّرسة
+noindex-category|باجات مشي مفهرسه
+broken-file-category|صفحات فيها وصيلات تاع ملفّات خاسرة
+about|على هاذ الويكي
+article|صفحة تاع محتوى
+newwindow|(حل في تاقة جديدة)
+cancel|انيلي
+moredotdotdot|كتر...
+morenotlisted|هاد الليستة ما راهيش مكمولة
+mypage|باجه
+mytalk|تقرعيج
+anontalk|تناقش على الـ ip هادي
+navigation|تبحار
+and| و
+qbfind|فتش
+qbbrowse|اتجوّل فل مضمون
+qbedit|اكتب
+qbpageoptions|هاذ الباجه
+qbmyoptions|الباجات نتاوعى
+faq|المسقسية المتعاوده
+faqpage|Project:سؤالات متكرره
+actions|أفعال
+namespaces|بلاصه تع أسموات
+variants|تنويعات
+navigation-heading|القايمة تاع الـتبحار
+errorpagetitle|غلطه
+returnto|ولي إلى ~{0}.
+tagline|من{{SITENAME}}
+help|معاونة
+search|فتّش
+searchbutton|فتش
+go|شايع
+searcharticle|روح
+history|تاريخ الملف
+history_short|تاريخ
+updatedmarker|مبدّل منلي الزيارة تاعي الـتالية
+printableversion|نسخة تاع طبيع
+permalink|وصيل دايم
+print|امبريمي
+view|اقرا
+view-foreign|شوف على ~{0}
+edit|بدل
+edit-local|عدّل التوصاف المبلّد
+create|أصنع
+create-local|زيد توصاف مبلّد
+editthispage|بدّل هاد الـصفحة
+create-this-page|خلّق صفحة ب هاد الـعلوان
+delete|امحي
+deletethispage|امحي هاد الـصفحة
+undeletethispage|ردّ الصفحة الّي محيتها
+undelete_short|رجّع {{PLURAL:~{0}\u007C\u007Cتعديل واحد\u007C~{0} تعديل}}
+viewdeleted_short|شوف {{PLURAL:~{0}\u007C\u007Cتعديل واحد\u007C~{0} تعديل}}
+protect|حمايه
+protect_change|بدل
+protectthispage|بروتيجي هاد الباجة
+unprotect|بدّل الحضية
+unprotectthispage|بدّل الحضية تاع هاد الباجة
+newpage|باجه جديده
+talkpage|قرعَج على هاد الباجة
+talkpagelinktext|ناقش
+specialpage|باجة خوصوصيّة
+personaltools|دوزان شخصيه
+articlepage|شوف الباجة تاع المحتاوا
+talk|مناقشه
+views|استبيان
+toolbox|دوزان
+userpage|شوف الباجة تاع المستعملي
+projectpage|شوف الباجة تاع البروجي
+imagepage|شوف الباجة تاع الفيشي
+mediawikipage|شوف الباجة تاع الميساج
+templatepage|شوف الباجة تاع القالب
+viewhelppage|شوف الباجة تاع المعاونة
+categorypage|شوف الباجة تاع الصنيف
+viewtalkpage|شوف التقرعيج
+redirectpagesub|باجة تاع التحوال
+redirectto|حوّل لـ:
+viewcount|هاد الباجة نشافت {{PLURAL:~{0}\u007Cخطرة وحدة\u007C~{0} خطرة}}.
+protectedpage|باجة محضيّة
+jumpto|اقفز ل:
+jumptonavigation|تبحار
+jumptosearch|فتّش
+view-pool-error|اعدرونا، السربايات راهم مغبّنين ف هاد الوقيتة.\nبزّاف المستعمليّين راهم باغيين يشوفو هاد الباجة.\nاصبرو شي وقيتة قبل ما تحاولو تلحقو لها عاود.\n\n~{0}
+generic-pool-error|اعدرونا، السربايات راهم مغبّنين ف هاد الوقيتة.\nبزّاف المستعمليّين راهم باغيين يشوفو هاد الباجة.\nاصبرو شي وقيتة قبل ما تحاولو تلحقو لها عاود.
+pool-timeout|المهلة تاع المقارعة راهي فاتت
+pool-queuefull|السنسلة تاع المقارعة راهي عامرة
+pool-errorunknown|خلطة ماشي معروفة
+pool-servererror|السربيس تاع العدّان راه حابس ( ~{0} ).
+poolcounter-usage-error|غلطة تاع ستُعمال: ~{0}
+aboutsite|على{{SITENAME}}
+aboutpage|Project:على
+copyright|المحتاوا راه تحت النسخة ~{0} تاع الليسانس، غير يلا كان مكتوب حاجاخرة.
+copyrightpage|{{ns:project}}:حقوق النسخ
+currentevents|الخبورات
+currentevents-url|Project:خبورات
+disclaimers|تنبيهات
+disclaimerpage|Project:التحذيرات العامه
+edithelp|معونة
+helppage-top-gethelp|معاونة
+mainpage|الپاجة اللولانيّة
+mainpage-description|الپاجة اللولانيّة
+policy-url|Project:المقاون
+portal|بورطاي المجتمع
+portal-url|Project:بورطاي المجتمع
+privacy|السياسة تاع الخصوصيات (الدين الضيّق)
+privacypage|Project:خصوصيه
+badaccess|مشكل فل مسموحات
+badaccess-group0|ماشي مقبول ليك تدير الشي الّي راك تسيّي تديرهُ.
+badaccess-groups|الفعلة الّي راك سيّيت تديرها مسموحة برك لل مستعملّين {{PLURAL:~{1}\u007C\u007Cالّي هوما منل جماعة\u007Cالّي هوما من وحدة من هاد الجمايع}}: ~{0}.
+versionrequired|النسخة ~{0} تاع ميدياويكي ملزومة
+versionrequiredtext|النسخة ~{0} تاع ميدياويكي راهي ملزومة باش تنجم تستعمل هاد الباجة.\nشوف [[Special:Version\u007Cالباجة تاع النسخات باش تفهم كتَر على هاد الشي]]
+ok|قابل
+retrievedfrom|جايبينه من "~{0}"
+youhavenewmessages|عندك ~{0} (~{1}).
+youhavenewmessagesfromusers|{{PLURAL:~{3}\u007Cعندك}} ~{0} من عند {PLURAL:~{2}\u007Cمستعملي واحد\u007Cزوج تاع المستعمليّين\u007C~{2} مستعملي}} (~{1}).
+youhavenewmessagesmanyusers|عندك ~{0} من عند شحال من مستعملي (~{1}).
+newmessageslinkplural|{{PLURAL:~{0}\u007Cبريّة جديدة وحدة\u007C999=بريّة جديدة}}
+newmessagesdifflinkplural|{{PLURAL:~{0}التبديلة التالية\u007Cالتبديلات التاليين}}
+youhavenewmessagesmulti|عندك بريّة جديدة في ~{0}.
+editsection|بدل
+editold|بدل
+viewsourceold|شوف الاصل
+editlink|تبديل
+viewsourcelink|شوف العين
+editsectionhint|إيديتي الصنف:~{0}
+showtoc|ورّي
+hidetoc|خبّي
+confirmable-confirm|آش يلا راك مأكّد{{GENDER:~{0}\u007C\u007Cة}}؟
+confirmable-yes|إيه
+confirmable-no|لا
+thisisdeleted|راك باغي تشوف ولا ترجّع ~{0}؟
+viewdeleted|شوف ~{0}؟
+restorelink|{{PLURAL:~{0}\u007Cتبدال واحد مفاصي\u007C~{0} تبدالات مفاصيين\u007C~{0} تبدال مفاصي}}
+feedlinks|السيلان:
+feed-invalid|النوع تاع التلقيمة ماشي مصلاح.
+feed-unavailable|التلقيمات ما راهمش موجودين.
+site-rss-feed|تيار آر‌إس‌إس ~{0}
+site-atom-feed|~{0} تيار آتوم
+page-rss-feed|تلقيمة RSS تاع "~{0}"
+page-atom-feed|~{0} تيار آتوم
+red-link-title|~{0} (الباجه ما كاينش)
+nstab-main|الباجة
+nstab-user|باجة{{GENDER:{{BASEPAGENAME}}\u007Cالمستخدم\u007Cالمستخدمة}}
+nstab-media|باجة تاع ميديا
+nstab-special|باجه خوصوصيّة
+nstab-project|باجه مشروع
+nstab-image|ملف
+nstab-mediawiki|بريّة
+nstab-template|مودال
+nstab-help|باجة تاع معاونة
+nstab-category|تصنيف
+nosuchaction|الشي الّي طلبتهُ ما كاينش
+nosuchactiontext|الفعلة الّي مطلوبة فل URL ماشي مقبولة.\nبالاك ما دخّلتوش الـ URL كيما لازم ولا تاني تبّعتو كاش وصيل مغلوط.\nينجم تاني يكون كاين عُلّة فل لوجيسيال الّي مستعمل فـ {{SITENAME}}.
+nosuchspecialpage|هاد الباجة الخوصوصيّة ما كاينش منها
+nospecialpagetext|<strong>راك طلبت باجة خوصوصيّة ماشي صحيحة.</strong>\n\nتصيب الليستة تاع الباجات الخوصوصيّة في [[Special:SpecialPages\u007C{{int:specialpages}}]].
+error|غلطة
+databaseerror|غلطة فل دخيرة تاع الخبيرات (DB)
+databaseerror-text|صرات غلطة عند المسقسية تاع الدخيرة تاع الخبيرات. هاد الشي ينجم يكون جاي من غلطة فل برنامج.
+databaseerror-textcl|صرات غلطة عند المسقسية تاع الدخيرة تاع الخبيرات.
+databaseerror-query|مسقسية : ~{0}
+databaseerror-function|دالّة: ~{0}
+databaseerror-error|غلطة: ~{0}
+laggedslavemode|<strong>ردّ بالك:</strong> هاد الباجة تنجم تكون ما حاوياش التبدالات التاليين الّي ندارو.
+readonly|الدخيرة تاع الخبيرات راهي مغلوقة
+enterlockreason|حطّ السبّة تاع القفيل و المدّة تاعهُ بل ميز.
+readonlytext|الدخيرة تاع الخبيرات راهي مغلوقة على الدخلات الجديدة ولا التبدالات، بالاك علاجال كاش صيانة عاديّة، مور ماش غادي تعاود ترجع لل طبَع.\n\nالإيداري الّي دار هاد الشي راه يعطي التفسيرات هادي: ~{0}
+missing-article|الداتاباز ما صابتش باجه كان لازم تنصاب، الباجه هي "~{0}" ~{1}.\n\nنورمالمو يصرا هذا مين اتبع فرق بيريمي والا وصيل تأريخ باجة ممحيه.\n\nإذا ما كانش هذا هو الحال همالا راك طحت في علة تاع البرمجية.\nمن فضلك سينياليها لواحد من[[Special:ListUsers/sysop\u007Cالإداريين]]، و أعطه مسار هذه الباجه.
+missingarticle-rev|(رقم الفرسيون: ~{0})
+missingarticle-diff|(فرق بين: ~{0}، ~{1})
+readonly_lag|الدخيرة تاع الخبرات راهي مقفولة بيدما السربايات التوناويّة يلحقو التوخار الّي عندهم معا السرباي اللولاني
+internalerror|غلطة دخلانيّة
+internalerror_info|غلطة دخلانيّة: ~{0}
+internalerror-fatal-exception|غلطة واعرة من الطبَع "~{0}"
+filecopyerror|ما قدرش تنساخ الفيشي "~{0}" لل "~{1}"
+filerenameerror|ما قدرش تبدال السميّة تاع الفيشي "~{0}" لل "~{1}".
+filedeleteerror|ما قدرش تمحيتٰ الفيشي "~{0}".
+directorycreateerror|ما قدرش خلقان الدفتار "~{0}".
+directoryreadonlyerror|الزمّام «~{0}» راه لل قراية برك (ما ينجمش يكون مبدّل).
+directorynotreadableerror|الزمّام «~{0}» ما راهش واجد لل قراية.
+filenotfound|ما قدرش مصيبتٰ الفيشي "~{0}".
+unexpected|قيمة ما شي مستنية : "~{0}"="~{1}".
+formerror|غلطة: ما قدرش ترسال الستيمارة
+badarticleerror|هاد الفعلة ما تنجمش تندار ف هاد الباجة.
+cannotdelete|ما تنجّمش تمحيتٰ الباجة ولا الفيشي "~{0}".\nبالاك كان دار المحيان شي واحد من قبَل.
+cannotdelete-title|ما يمكنش محيان الباجة "~{0}".
+delete-hook-aborted|المحيان راه منحّي من عند كاش توسيعة.\nما عندنا حتا تفسار على هاد الشي.
+no-null-revision|ما يمكنش تخلاق مراجعة جديدة خاوية لل باجة "~{0}".
+badtitle|عنوان عيان
+badtitletext|عنوان الباجه المطلوب إما ماشي صحيح والا فارغ، وبالاك الوصيل بين اللغات والا بين البروجيات ماشي صحيح.\nبالاك فيه حروف ما تصلحش  باس يستعملوها فالعناوين.
+perfcached|الموطايات هادي راهي مخبّية و بالاك تاني يكون فات عليها الوقت. {{PLURAL:~{0}\u007C\u007Cناتج واحد\u007Cزوج نواتج\u007C~{0} نواتج\u007C~{0} ناتج}} على الكتَر {{PLURAL:~{0}\u007C\u007Cمخبّي\u007Cمخبّيين}}.
+perfcachedts|المعلومات هادو راهم مخبّيين، و تعاودو فل ~{0}. يلا كتّر {{PLURAL:~{3}\u007Cناتج واحد راه\u007C~{3} نواتج راهم}} واجدين فل خبّاي.
+querypage-no-updates|المعاودات تاع هاد الصفحة راهم معطّلين.\nالمعلومات هادي ما راهيش مرجّعة لل حاضر.
+viewsource|شوف الاصل
+viewsource-title|شوف المصدر تاع ~{0}
+actionthrottled|الفعل راه محبّس
+actionthrottledtext|باش نحرزو من السبام، ما يمكنش تدير هاد الفعل بزّاف المرات في مدّة تاع وقت قصير، و راك ضركا فتّ هذا الحد.\nمن فضلك عاود سيّي منّا على شي دقايق.
+protectedpagetext|هاد الصفحة راهي تنحضات باش ما تتبدّلش ولا شي حاجاخرة.
+viewsourcetext|تنجم تشوف ولا تنسّح المصدر تاع هاد الصفحة:
+viewyourtext|تنجم تشوف و تنسّخ المصدر تاع <strong>التبدالات تاعك</strong> ف هاد الصفحة:
+protectedinterface|هاد الباجة توفّر لك وريشة (interface) تاع كتابة مديورة لل صوفتوار الّي ف هاد الويكي، و راهي مأمّنة باش تنحضا من الضرارات.\nباش تزيد ولا تبدّل طرجمات ل كامل الويكيّات، من فضلك استعمل [//translatewiki.net/ translatewiki.net] المشروع ميدياويكي تاع التبلادات.
+editinginterface|<strong>ردّ بالك:</strong>راك تبدّل صفحة الّمديورة باش تصنع النصّ تاع الواجهة تاع اللوجيسيال. التبدالات على هاد الصفحة غادي يوتّرو على الشكَل تاع الواجهة حتا عند المستعمليين لخرين.
+translateinterface|باش تزيد ولا تبدّل الطرجمات ل كامل الويكيّات، استعمل [//translatewiki.net/ translatewiki.net]، المشروع تاع التبلاد تاع الميديويكي.
+exception-nologin|ماشي مسجّل الدخول
+yourname|اسم المستخدم:
+userlogin-yourname|سميّة تاع المستعملي
+userlogin-yourname-ph|دخّل السميّة تاع المستعملي تاعك
+yourpassword|كلمة السر:
+userlogin-yourpassword|كلمت` السرّ
+userlogin-yourpassword-ph|دخّل كلمت` السرّ تاعك
+createacct-yourpassword-ph|دخّل كلمت` سرّ
+yourpasswordagain|عاود كتبت كلمت السر:
+createacct-yourpasswordagain|أكّد كلمت` السرّ
+createacct-yourpasswordagain-ph|عاود دخّل كلمت` السرّ
+remembermypassword|اتفكر الدخول تاعي ب هاذ النافيكاتور (ب مدّة حدها{{PLURAL:~{0}\u007C\u007Cيوم واحد\u007Cيومين\u007C~{0} إيّام\u007C~{0} يوم}})
+userlogin-remembermypassword|خلّيني مسجّل داخل
+login|كونكسيون
+nav-login-createaccount|تسجل/ اصنع حساب
+userlogin|تسجل/ اصنع حساب
+userloginnocreate|مسجّل الدخول
+logout|مسجّل الخروج
+userlogout|سجل خروج
+userlogin-noaccount|ما عندك حساب؟
+userlogin-joinproject|انضم لـ {{SITENAME}}
+nologin|ما عندكش حساب مسجل؟ '''~{0}'''.
+nologinlink|اصنع حساب
+createaccount|اصنع حساب
+gotaccount|عندك حساب مسجل؟ '''~{0}'''.
+gotaccountlink|كونكسيون
+userlogin-resetlink|نسيت تفاصيل الدخول؟
+userlogin-resetpassword-link|راك ناسي كلمت` السرّ؟
+userlogin-helplink2|معاونة ف تسجال الدخول
+createacct-emailrequired|علوان تاع إيمال
+createacct-emailoptional|علوان ليمال (ماشي مسيّف)
+createacct-email-ph|دخّل علوان` ليمال تاعك
+createacct-another-email-ph|دخّل علوان تاع إيمال
+createaccountreason|سبّة:
+createacct-reason|سبّة
+createacct-captcha|تحقق أمني
+createacct-imgcaptcha-ph|دخّل النصّ الّي راك تشوفهُ لفوق
+createacct-submit|اصنع حسابك
+createacct-benefit-heading|{{SITENAME}} مخلوق من عند شي ناس غير كيفك.
+createacct-benefit-body1|{{PLURAL:~{0}\u007Cتحرير\u007Cتحريرات}}
+createacct-benefit-body2|~{0} {{PLURAL:~{0}\u007Cصفحة\u007Cصفحات}}
+createacct-benefit-body3|{{PLURAL:~{0}\u007Cمساهم\u007Cمساهمين}} توالا
+mailmypassword|أرسل لي كلمة سر جديده
+loginlanguagelabel|اللوغه: ~{0}
+pt-login|دخله
+pt-login-button|دخول
+pt-createaccount|اصنع حساب
+pt-userlogout|خروج
+passwordreset|صفّي كلمت` السرّ
+passwordreset-legend|استرجع كلمت` السرّ
+extlink_sample|http://www.example.com اسم الوصيلة
+extlink_tip|وصيلة برانية (ما تنساش البديةhttp://)
+nowiki_sample|دخل الكتبة مشي مستفة هنا
+nowiki_tip|اهمل طريقةالويكي
+image_tip|ملف داخل
+media_tip|وصيلة ملف
+sig_tip|سنياتورتك بالساعة و التاريخ
+hr_tip|خط أفقي (ما تستعملوش بزاف)
+summary|ملخص:
+minoredit|هذي تبديلة صغيرة
+watchthis|تبع الباجة
+savearticle|سجل الباجة
+preview|شوفه-قبلي
+showpreview|بين معاينة
+showdiff|عرض التبديلات
+anoneditwarning|'''توليهة:''' راك ما دخلتش بل حساب تاعك.\nيلا تدير شي تبدال، غادي تتسجّل لادريسة آيبي تاعك فل متراخ تاع هاد الصفحة و تكون باينة ل كلّ واحد. يلا [~{0} تتكونيكتا]</strong> ولا <strong>[~{1} تخلق حساب]</strong>، التبدالات تاعك غادي يبانو تحت السميّة تاع المستعملي تاعك، و كاين تاني مزيّات وحدخرين.
+loginreqlink|اتكونيكتا
+newarticle|(جديد)
+newarticletext|راك تبعت وصيلة لباجه لم ما تخدمتش بعد.\nباش تصنع هاذ الباجه ابدا الكتبه فالصندوق التحت (شوف في [~{0}  زياده باجه المساعده] لمعلومات).\nإذا كانت زيارتك لهاذ الباجه غلطه، ادرك على بوطون''ولى'' في نافيقاتور الإنترنت نتاعك.
+noarticletext|حتا لضركا، ما كاين حتا نصّ ف هاذ الپاجه.\nتقدرو [[Special:Search/{{PAGENAME}}ترميو تفتيشه على هاذ العلوان]] فل پاجات لخرين,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} فتش فل عمليات المربوطة]\n ولا[{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} اصنع هاذ الپاجه]</span>.
+noarticletext-nopermission|لحد الساعه ما كانش حتى نص في هاذ الباجه.\nتقدرو [[Special:Search/{{PAGENAME}}\u007Cترميو تفتيشه على هاذ العنوان]] فالباجات لخرين,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} فتش فالعمليات المربوطه]\nو إلا[{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} أصنع هاذ الباجه]</span>.
+previewnote|'''ما تنساش هذي معاينه قبليه.'''\nلدوك التبديلات دياولك ما تسجلوش!
+editing|تحرير ~{0}
+creating|خليق ~{0}
+editingsection|كتيبه ~{0} (قسم)
+templatesused|{{PLURAL:~{0}\u007C\u007Cالقالب المستعمل\u007Cالقوالب المستعمله}} في هذه الباجه:
+template-protected|(محميه)
+template-semiprotected|(نص حماية )
+hiddencategories|{{PLURAL:~{0}\u007Cهاد الصفحة ما كايناش فل تصانف المخبّييين\u007Cهاد الصفحة كاينة في تصنيف مخبّي واحد\u007Cهاد الصفحة كاينة في زوج تاع الـتصانف المخبّيين\u007Cهاد الصفحة كاينة في ~{0} تصنيف مخبّي\u007Cهاد الصفحة كاينة في ~{0} تصنيف مخفبّي\u007Cهذه الصفحة كاينة في ~{0} تصنيف مخبّي}}:
+permissionserrorstext-withaction|ما راكش اوتوريزى ل~{1}، لل{{PLURAL:~{0}\u007C\u007Cسبب هاذا\u007Cاسباب هاذي}}:
+recreate-moveddeleted-warn|'''توليه: راك تعاود تصنع باحه اتمحات من قبل.'''\n\nلازم تتأكد بلى الباجه الا نصنعت ماهوش مشكل الا كملت الكتبه فبها.\nريجيستر المحو و النقل معروض هنا باش تراقب :
+moveddeleted-notice|هاذ الباجه تمحات .\nريجيستر المحو والتنقال للباجه معروضين التحت كريفيرونس.
+post-expand-template-inclusion-warning|'''توليه:''' الباجة داخل فيها قوالب بزاف.\nشي قوالب ما غاديش تدخل.
+post-expand-template-inclusion-category|الباجات داخل فيها بزاف القوالب
+post-expand-template-argument-warning|'''توليه:''' هذه الباجه فيها عامل قالب واحد على الأقل عندو حجم تمدد كبير بزاف.\nهاذالعوامل اتمحات.
+post-expand-template-argument-category|باجات فيها مدخلات القالب الممحي
+viewpagelogs|بين العمليات على هاذ الباحه
+currentrev-asof|نسخة ضركانية بل تاريخ تاع ~{0}
+revisionasof|معاودة تاع الـ ~{0}
+revision-info|مراجعة تاع ~{0} من عند {{GENDER:~{5}\u007C~{1}}}~{6}
+previousrevision|← نسخة اللوله
+nextrevision|فرسيون جايه←
+currentrevisionlink|المراجعه الحاليه
+cur|الحالي
+last|السابق
+histlegend|تخيار الفرق: علم على صناديق النسخ للمقارنه و ادرك قارن بين النسخ المختارة والا القفلة التحت .<br />\nمفتاح: (الحالي) = الفرق مع النسخة تع دروك\n(الفايته) = الفرق مع النسخة اللي فاتت، ط = تبديل خفيف
+history-fieldset-title|نافيقي في التاريخ
+history-show-deleted|المماسكيه برك
+histfirst|اول باجه
+histlast|باجه تاليه
+history-feed-item-nocomment|~{0} إلى ~{1}
+rev-delundel|بين/خبي
+revdel-restore|غير كيف راهي تبان
+revertmerge|فرق
+history-title| «~{0}»: تاريخ المراجعات
+difference-title|فروقات بين التبدالات تاع "~{0}"
+lineno|سطر~{0}:
+compareselectedversions|كومباري بين نسختين مخيرين
+editundo|نحي
+diff-multi-sameuser|({{PLURAL:~{0}\u007Cتبديلة متوسّطة وحدة\u007C~{0} تبديلات متوسّطين}} ماشي {{PLURAL:~{0}\u007Cمورّية\u007C~{0} مورّيين}} من عند نفس المستعملي)
+searchresults|نتاج تاع التفتيشة
+searchresults-title|ريزيلته تاع التحواس "~{0}"
+prevn-title|~{0} {{PLURAL:~{0}\u007Cالنتيجة التالية\u007Cالنتايج التواله}}
+nextn-title|~{0} {{PLURAL:~{0}\u007Cالنتيجة الجاية\u007Cالنتايج الجايين}}
+shown-title|آفيشي ~{0} {{PLURAL:~{0}\u007Cنتيجة}} فل صفحة
+viewprevnext|شوف(~{0} {{int:pipe-separator}} ~{1}) (~{2}).
+searchmenu-exists|'''كاين باجه اسمها « [[:~{0}]] » في هاذ الويكي'''
+searchmenu-new|'''أصنع الباجة "[[:~{0}]]" في هذ الويكي !'''\n{{PLURAL:~{1}\u007C0=\u007Cشوف تاني الصفحة الّي صبتها ف`التفتاش..\u007Cشوف تاني النواتج تاع التفتاش.}}
+searchprofile-articles|باجه تع محتوى
+searchprofile-images|ميلتيميديا
+searchprofile-everything|كلش
+searchprofile-advanced|تفتاش متقدم
+searchprofile-articles-tooltip|فتش في ~{0}
+searchprofile-images-tooltip|فتش على ملفات ميلتيميديا
+searchprofile-everything-tooltip|فتش في قاع السيت (حتى في باجات المناقشه)
+searchprofile-advanced-tooltip|خير إسباسات الأسامي للتفتاش
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 كلمة\u007C~{1} كلمات}})
+search-result-category-size|~{0} عضو{{PLURAL:~{0}\u007C\u007Cs}} (~{1} كاتيكورى فرعيه{{PLURAL:~{1}\u007C\u007Cs}}, ~{2} فيشيي{{PLURAL:~{2}\u007C\u007Cيات}})
+search-redirect|(تحويل من ~{0})
+search-section|(قسمت‘ ~{0})
+search-suggest|كنت باغي تقول: ~{0}
+searchrelated|مرتابطه
+searchall|ألكل
+search-showingresults|{{PLURAL:~{3}\u007Cالنتيج <strong>~{0}</strong> تاع <strong>~{2}</strong>\u007Cالنتايج <strong>~{0} - ~{1}</strong> من أصل <strong>~{2}</strong>}}
+search-nonefound|ما كانش نتائج تطابق المسقسية.
+mypreferences|إختيارات
+youremail|البريه الالكترونيه:
+yourrealname|الاسم الحقاني:
+prefs-help-email|لادريس نتع البريه الإلكترونيه بالخاطر، ولكن هي لازمه في حال نسيت كلمت السر نتاعك.
+prefs-help-email-others|تقدر تاني تخلي لوخرين يتاصلو بيك في باجت نقاشك ولا في وصيله في باجت مستخدم نتاعك, اذا ارسلك واحد ما يبانش لادريس نتاعك , حتى اذ رديت عليه باش يبان لادريس نتاعك.
+right-writeapi|استعمل API للكتابه نتاع الويكي
+newuserlogpage|ريجيستر صنعة حسابات المستخدمين
+action-edit|عدل هاذ الباجه
+nchanges|~{0} تبديله{{PLURAL:~{0}\u007C\u007Cs}}
+enhancedrc-history|تاريخ
+recentchanges|تبديلات توالا
+recentchanges-legend|ابسيون التبديلات التواله
+recentchanges-summary|اجبر التبدالات اللواخر الّي صراو ف هاد الصفحة.
+recentchanges-feed-description|تبع التبديلات الجدد للويكي في هاذ التيار .
+recentchanges-label-newpage| هاذ التبديل صنع باجه جديده
+recentchanges-label-minor|هاذا تبديل صغير
+recentchanges-label-bot|هاذ التبديل ندار بروبو
+recentchanges-label-unpatrolled|ما تراجعتش هاذ التبديله للآن
+recentchanges-label-plusminus|الحجَم تاع الصفحة راه تبدّل ب هاد العدّة تاع البايتات
+recentchanges-legend-heading|'''تفسار:'''
+recentchanges-legend-newpage|{{int:recentchanges-label-newpage}} (شوف تاني [[Special:NewPages\u007Cليستة تاع صفحات جديدة]])
+rcnotefrom|هاهي التبديلات  من'''~{1}''' (ل'''~{0}''' معروضه).
+rclistfrom|بين التبديلات البديه من ~{2} ~{1}
+rcshowhideminor|~{0} التبديلات الصغير
+rcshowhideminor-show|ورّي
+rcshowhideminor-hide|خبّي
+rcshowhidebots|~{0} البوتات
+rcshowhidebots-show|ورّي
+rcshowhidebots-hide|خبّي
+rcshowhideliu|~{0} المستخدمين المسجلين
+rcshowhideliu-hide|خبّي
+rcshowhideanons|~{0} المستخدمين المجهولين
+rcshowhideanons-show|ورّي
+rcshowhideanons-hide|خبّي
+rcshowhidepatr|~{0} التبديلات المعسوسه
+rcshowhidemine|~{0} تبديلات نتاعي
+rcshowhidemine-show|ورّي
+rcshowhidemine-hide|خبّي
+rclinks|بين آخر ~{0} تبديل في آخر ~{1} يوم<br />~{2}
+diff|إختلاف
+hist|تاريخ
+hide|خبي
+show|بين
+minoreditletter|ط
+newpageletter|ج‌
+boteditletter|ب
+rc-change-size-new|~{0} {{PLURAL:~{0}\u007Coctet\u007Coctets}} مورا التبدال
+rc-enhanced-expand|بين التفاصيل (يلزمها جافاسكريبت)
+rc-enhanced-hide|خبي التفاصيل
+recentchangeslinked|تبديلات مربوطه
+recentchangeslinked-toolbox|تبديلات الباجات المرتبطه
+recentchangeslinked-title|التبديلات المرتبطة ب "~{0}"
+recentchangeslinked-summary|هاذي ليستة تع التبديلات اللي تمت هاذ الخطرة للباجات الموصولة من باجة معينة (ولا للأعضاء الداخلين في تصنيف معين).\nالصفحات في [[Special:Watchlist\u007Cليستت مراقبة نتاعك]] '''مغلظه'''
+recentchangeslinked-page|اسم الباجه:
+recentchangeslinked-to|بين التبديلات للباجات الموصولة للباجه المعطية عوضا العكس
+upload|طلع فيشي
+uploadlogpage|ريجيستر رفع الفيشيات
+filedesc|ملخص
+license|ترخيص:
+license-header|ترخيص:
+imgfile|فيشي
+file-anchor-link|ملف
+filehist|تاريخ الفيشيي
+filehist-help|ادرك على وقت و تاريخ/باش تشوف الملف كما بان  في هاذ الوقت.
+filehist-revert|رجع
+filehist-current|ذ الوقت
+filehist-datetime|تاريخ و الوقت
+filehist-thumb|تصويرة مصغرة
+filehist-thumbtext|فينيات نتع النسخه ~{0}
+filehist-user|مستعمل
+filehist-dimensions|القيس
+filehist-comment|تعليق
+imagelinks|إستعمال الملف
+linkstoimage|{{PLURAL:~{0}\u007Cالباجة توصل\u007Cال~{0} باجات يوصلو}} لهاذ الملف :
+nolinkstoimage|ما كانش باجات موصوله لهاذ الفيشي.
+sharedupload-desc-here|هاذ الملف جاي من ~{0}. يمكن يكون مستعمل من بروجيات وحد أخرين.\nالتوصيف نتاعو في [~{1} باجت الصفات] محطوطه هنا لتحت.
+upload-disallowed-here|ما تنحمش تعدّل هاد التصويرة
+randompage|باجة على الزهر
+nbytes|{{PLURAL:~{0}\u007Cبايت 1\u007C~{0} بايت}}
+nmembers|~{0} اعضاء{{PLURAL:~{0}\u007C\u007Cs}}
+prefixindex|كامل الباجات الباديه ب
+usercreated|{{GENDER:~{2}\u007Cصنعه\u007Cصنعته}} في ~{0} الساعة ~{1}
+newpages|باجه جديده
+move|عاود التسمية
+pager-newer-n|{{PLURAL:~{0}\u007Cجديد بزاف 1\u007Cجديد بزاف ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Cقديم بزاف 1\u007Cقديم بزاف ~{0}}}
+booksources|مصادر كتاب
+booksources-search-legend|حوس ما بين مصادر الكتب
+booksources-search|فتّش
+log|ريجيسترات العمليات
+allarticles|قاع الباجات
+allpagessubmit|روح
+linksearch-line|~{0} موصولة من ~{1}
+listgrouprights-members|(ليسته الأعضاء)
+emailuser|ابعث بريه لهاذ المستخدم
+watchlist|ليستة تاع المتابعة
+mywatchlist|ليستة تاع المتابعة
+watchlistfor2|ل~{0} (~{1})
+watch|تبع
+unwatch|ما تزيدش تعس
+watchlist-details|{{PLURAL:~{0}\u007C\u007Cباجه وحده\u007Cزوج باجات\u007C~{0} باجات\u007C~{0} باجه }} في ليستت مراقبتك، بلا ما تعد باجات النقاش.
+wlshowlast|بين آخر ~{0} سوايع ~{1} يامات
+watchlist-options|ابسيون ليستت المراقبه
+actioncomplete|العمليه اندارت
+actionfailed|العمليه فشلت
+dellogpage|ريجيستر محو الباجات
+rollbacklink|ولي
+rollbacklinkcount|رجّع {{PLURAL:~{0}\u007Cتعديل واحد\u007C~{0} تعديلات}}
+protectlogpage|ريجيستر الحمايه
+protectedarticle|راه حمى "[[~{0}]]"
+undeletelink|شوف/رجع
+undeleteviewlink|شوف
+namespace|بلاصه تع أسموات
+invert|اعكس التخيار
+tooltip-invert|علّم هاد المقّبسة باش تخبّي التبدالات تاع الصفحات الّي فيها وسَع` التسمية (و وسَع التسمية المربوط يلا كاين)
+namespace_association|وسَع التسمية المربوط
+tooltip-namespace_association|علّم على هاد المقيبسة باش تدخّل تاني المهادرة ولا وسَع التسمية تاع الموضوع المربوط معا وسَع التسمية المسيليكسيوني
+contributions|مساهمات {{GENDER:~{0}\u007Cالمستخدم\u007Cالمستخدمه}}
+contributions-title|مساهمات {{GENDER:~{0}\u007Cالمستخدم\u007Cالمستخدمه}} ~{0}
+mycontris|مساهماتي
+contribsub2|ل~{0} (~{1})
+uctop|ذ الوقت
+month|من شهر (وأقدم):
+year|من عام (وأقدم):
+sp-contributions-newbies|اعرض مشاركات الحسابات الجديده برك
+sp-contributions-blocklog|ريجيسترالمنع
+sp-contributions-uploads|مرفوعات
+sp-contributions-logs|ريجيسترات
+sp-contributions-talk|تقرعيج
+sp-contributions-search|تفتاش المشاركات
+sp-contributions-username|عنوان أيبي والال اسم مستخدم:
+sp-contributions-toponly|ما تورّي غير المشاركات التوالا تاع المقالات
+sp-contributions-submit|تفتاش
+whatlinkshere|واش واصل هنا
+whatlinkshere-title|الباجات اللي تقين في "~{0}"
+whatlinkshere-page|الباجه:
+linkshere|هاذ الباجات يوصلو إلى '''[[:~{0}]]''':
+nolinkshere|ما كانش  باجه فيها وصيله ل'''[[:~{0}]]'''.
+isredirect|باجت تحويل
+istemplate|تضمين
+isimage|وصيلة ملف
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cالتالي\u007Cال~{0} التاليه}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cالجايه\u007Cال~{0} الجايه}}
+whatlinkshere-links|← وصيلات
+whatlinkshere-hideredirs|~{0} التحويلات
+whatlinkshere-hidetrans|~{0} التضمينات
+whatlinkshere-hidelinks|~{0} الوصيلات
+whatlinkshere-hideimages|~{0} وصيلات الفيشيات
+whatlinkshere-filters|صفايات
+ipboptions|ساعتين:2 hours,نهار واحد:1 day,3 نهارات:3 days,سيمانة وحدة:1 week,سيمانتين:2 weeks,شهر واحد:1 month,3 أشهر:3 months,6 أشهر:6 months,عام واحد:1 year,دايم:infinite
+ipblocklist|المستخدمون الممنوعون
+blocklink|حبس
+unblocklink|ديبلوكي
+change-blocklink|بدل البلوكاج
+contribslink|المساهمات
+blocklogpage|ريجيسترالمنع
+blocklogentry|منع "[[~{0}]]" لفترة زمنية مدتها ~{1} ~{2}
+block-log-flags-nocreate|صنعت الحسابات ممنوعه
+movelogpage|روجيستر التنقال
+revertmove|رجع
+export|صدر الباجه
+allmessagesname|الاسم
+allmessagesdefault|الكتبه الافتراضيه
+thumbnail_error|غلطه في خدمت صورة مصغرةالمينياتير: ~{0}
+tooltip-pt-userpage|باجتك نتع مستعمل
+tooltip-pt-mytalk|باجه نتع نقاشاتك
+tooltip-pt-preferences|وش خيرت
+tooltip-pt-watchlist|ليستت الباجات الي راك أتبع تبديلاتهم
+tooltip-pt-mycontris|ليسته نتع مساهماتك
+tooltip-pt-login|مادابيك تسجل دخلتك ، لكن ماشي لازم
+tooltip-pt-logout|سجل خروج
+tooltip-pt-createaccount|ننصح باش تصنع حساب و تسجل دخلتك ; على كل حال ماهوش ضروري
+tooltip-ca-talk|مناقشه على هاد باجت المحتوا
+tooltip-ca-edit|تقدر تبدل هاذ الباجه ،ماذابيك تستعمل قفله المراجعه قبل ما تسجل
+tooltip-ca-addsection|ابدأ طرف جديد
+tooltip-ca-viewsource|هاذ الباجه محميه. و شنو تقدرو تشوفو الأصلي نتاعها
+tooltip-ca-history|المراجعات التوالا تاع الباجة (معا المساهمين تاوعها)
+tooltip-ca-protect|بروتيجي هاذالباجه
+tooltip-ca-delete|امحي هاذ الباجه
+tooltip-ca-move|بدل أسم هذ الباجه
+tooltip-ca-watch|زيد هذ الباجة لل ليستة تاعك تاع التتباع
+tooltip-ca-unwatch|اقلع هاد الباجة منل ليستة تاعك تاع التتباع
+tooltip-search| فتّش في {{SITENAME}}
+tooltip-search-go|روح لباجه عندها ذاك الآسم نفسو  إذا كانت
+tooltip-search-fulltext|فتّش على باجه بهاد الكتبة
+tooltip-p-logo|زور الپاجة اللولانيّة
+tooltip-n-mainpage|زور الپاجة اللولانيّة
+tooltip-n-mainpage-description|زور الپاجة اللولانيّة
+tooltip-n-portal|على الپروجي،واش تقدر تدير، وين تصيب واش تحتاج
+tooltip-n-currentevents|صيب خبارات مستّرين على الصوالح الّي راهم يصراو ضركا
+tooltip-n-recentchanges|الليستة تاع التبديلات الجديدة فل ويكي
+tooltip-n-randompage|طلّع باجه على الزهر
+tooltip-n-help|بلاصة المعونة
+tooltip-t-whatlinkshere|ليستة تاع كامل باجات المحتاوا الواصله هنا
+tooltip-t-recentchangeslinked|ليستة تاع التبديلات التوالا تاع الباجات الّي عندهم رباط معا هادي
+tooltip-feed-atom|سيلان آتوم تاع هاد الباجة
+tooltip-t-contributions|شوفان ليسته مساهمات هاذا المستخدم
+tooltip-t-emailuser|أرسل بريه لهاذ المستخدم
+tooltip-t-upload|أرسل تصويرة و إلا أي ملف ميديا للسرفر
+tooltip-t-specialpages|ليستة تاع كامل الباجات الخصوصيّة
+tooltip-t-print|نسخه لهاذ الباجه قابله للطبيع
+tooltip-t-permalink|وصيل دايم رايح ل هاد النسخة تاع الباجة
+tooltip-ca-nstab-main|شوف باجه المحتوى
+tooltip-ca-nstab-user|شوف باجت المستعمل
+tooltip-ca-nstab-special|هذه الباجه خصوصيه،ما تقدرش تبدل فيها
+tooltip-ca-nstab-project|شوف باجت البروجي
+tooltip-ca-nstab-image|شوف باجت الملف
+tooltip-ca-nstab-template|شوفان القالب
+tooltip-ca-nstab-category|شوفان باجة التصنيف
+tooltip-minoredit|ماركي هاذا تبديل صغير
+tooltip-save|سجل تبديلات نتاعك
+tooltip-preview|بين التغييرات نتاعك، من فضلك استخدم هذا قبل ما تنشر!
+tooltip-diff|ورّي التبدالات الّي راك درتهم فل نصّ.
+tooltip-compareselectedversions|شوف الفروق بين نسختين مخيرين من هاذ الباجه.
+tooltip-watch|زيد هاد الباجة لل ليستة تاعك تاع التتباع
+tooltip-rollback|"نحّي" : ب ضركة وحدة تآنيلي التبديلة ولا التبديلات تاع المساهم التالي
+tooltip-undo|"نحّي" فاصي هاد الـمعاودة و حلّ تاقة تاع تبدال بشوفه قبلانيّه. تخلّي باش ترجع لل معاوده التاليه و تزيد الـسبّة علاش فل قابسه تاع الـحويصله.
+tooltip-summary|دخل تلخيص صغير
+simpleantispam-label|مسيّة ضدّ السبام.\nما تعمّرش هادا!
+pageinfo-toolboxlink|معلومات على هاد الباجه
+previousdiff|→ التعديل الي قبل
+nextdiff|التبديل الجاي ←
+file-info-size|~{0} × ~{1} بكسل حجم الملف: ~{2}، نوع MIME: ~{3}
+file-nohires|ما كانش دقه اكثر من هاك
+svg-long-desc|فيشيي SVG، أبعاده ~{0} × ~{1} بكسل، تاي الفيشي : ~{2}
+show-big-image|الملف الأصلي
+show-big-image-preview|حجم هذه المعاينه: ~{0}.
+show-big-image-other|{{PLURAL:~{1}\u007C\u007Cالتدقاقة\u007Cالتدقاقات}}: ~{0}.
+show-big-image-size|~{0} × ~{1} بكسل
+bad_image_list|الفورمة راهي كيما واش يتبع:\nما كاين غير السطور الّي باديين بل *، الّي يكونو معدودين\nالـوصيل الـلوّل تاع سطر لازم كون تاع تصويرة ضايعة.\nكامل الوصيلات لخرين الّي فل سطر، يكونو معدودين كلّي تتنيّات، بل متال باجات وين الـتصويرة تنجم تبان.
+metadata|بايان ميتا
+metadata-help|هذا الملف راه فيه خبيرات زايدين، بالاك تكون انزادت من عند صواره نيميريك ولا سكانر مين صنع الملف.\nالأصلي، شي تفاصيل بالاك ما تعبرش على الملف المعدل.
+metadata-fields|الحقول تاع الميتا معطيّات تاع تصاور الّي يكونو ف هاد البريّة غادي ينحطّو فل باجة تاع التوصاف تاع التصويرة منين يكون الجدول تاع  الميتاالمعطيات مطوي.\nالحقول لخرة يكونو مخبيين بارديفو.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-orientation|توجاه
+exif-xresolution|التدقاق الأوفوقي
+exif-yresolution|التدقاق العامودي
+exif-datetime|تاريخ و وقت تاع تبدال الفيشي
+exif-make|الصانع تاع الجهاز
+exif-model|الطبّع تاع الجهاز
+exif-software|البريمجات الّي مستعملة
+exif-exifversion|نسخة Exif
+exif-colorspace|موساع تاع اللوان
+exif-datetimeoriginal|التاريخ و الوقت تاع تولاد المعلومات
+exif-datetimedigitized|التاريخ تاع التنمريل (numérisation)
+exif-orientation-1|عادي
+namespacesall|لكل
+monthsall|لكل
+watchlisttools-view|اعرض التبديلات المرتابطه
+watchlisttools-edit|اعرض قائمه المراقبه و عدلها
+watchlisttools-raw|موديفي ليستت التبيعه الخام
+signature|[[{{ns:user}}:~{0}\u007C~{1}]] ([[{{ns:user_talk}}:~{0}\u007Cتقرعيج]])
+duplicate-defaultsort|'''توليه:''' مفتاح التستيف الافتراضي "~{1}" ديباسا مفتاح التستيف الافتراضي التالي"~{0}".
+specialpages|الباجات الخصوصيه
+external_image_whitelist| #<pre>خلى هاذ السطر كيما راه\n#حط منثورات التعبيرات المنتظمة (برك الجزء الي يروح بين //) بالتحت\n#هاذ يكون مطابقتها مع مسارات التصاوير البرانيه (الموصولة بصفه مباشره)\n#هاذي الي تشبهغادي تنعرض  كتصاور، خلاف هذا برك وصيلة للتصويرة غادي تنعرض\n#السطور اللي تبدأا ب# تعتبر تعليقات\n#هذا لا يتأثر بحالة الحروف\n\n#حط كامل منثورات التعبيرات المنتظمة فوق هذا السطر. خلي هاذ السطر سواسوا كيما هو</pre>
+tag-filter|صفاية[[Special:Tags\u007Cالوشام]]:
+tag-list-wrapper|([[Special:Tags\u007C{{PLURAL:~{0}\u007C\u007Cوسم\u007Cوسمان\u007Cوسوم}}]]: ~{1})
+logentry-delete-delete|~{0} {{GENDER:~{1}\u007C راه محا\u007Cراهي محات}}الصفحة ~{2}
+logentry-move-move|{{GENDER:~{1}\u007Cنقّل\u007Cنقّلت}} ~{0} الصفحة ~{2} لـ ~{3}
+logentry-newusers-create|راه تفتح حساب {{GENDER:~{1}\u007Cالمستخدم\u007Cالمستخدمه}} ~{0}
+logentry-upload-upload| {{GENDER:~{1}\u007Cنزّل\u007Cنزّلت}} ~{0} ~{2}
+searchsuggest-search|تفتاش
+wikibase-edit|تبديله
+wikibase-add|زيد
+wikibase-label-empty|حتا وشيمة ما معرّفة حتا لضركا
+wikibase-description-empty|ما كاين حتا وصيفة مصوّبة حتا لضركا
+wikibase-statements|تصراحات
+wikibase-sitelinks-special|سيتات وحدخرين
+wikibase-aliases-empty|ماكانش آلياس مصوّب
+wikibase-statementview-rank-normal|ترتاب عادي
+wikibase-statementview-referencesheading-pendingcountersubject|{{PLURAL:~{0}\u007Cمرجع\u007Cمراجع}}
+']:>
+).lang
+;

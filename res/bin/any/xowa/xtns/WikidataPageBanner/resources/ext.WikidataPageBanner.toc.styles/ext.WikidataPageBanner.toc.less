@@ -1,0 +1,95 @@
+/**
+ * Stylesheet for Table Of Contents in Banners displayed by WikidataPageBanner extension.
+ * All style rules have been applied with a prefix of wrapping .banner-toc, so cloning the original
+ * toc and styling the clone will have no side-effects
+ */
+.wpb-topbanner-toc {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .wpb-topbanner-toc {
+    display: block;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0% 0%;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    font-size: .875em;
+  }
+  .wpb-banner-toc {
+    display: table;
+    color: white;
+    background: none;
+    border: medium none;
+    line-height: 1.6em;
+    padding: .2em 2em;
+    margin: 0;
+    width: auto;
+  }
+  .wpb-banner-toc .tocnumber {
+    display: none;
+  }
+  .wpb-banner-toc > div > ul {
+    list-style: none;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.6) none repeat scroll 0% 0%;
+    z-index: 4;
+  }
+  .wpb-banner-toc a,
+  .wpb-banner-toc a:visited,
+  .wpb-banner-toc a:active {
+    display: block;
+    color: white;
+    font-size: .8em;
+    font-weight: bold;
+  }
+  .wpb-banner-toc a:hover {
+    color: #BDDDFD;
+  }
+  .wpb-banner-toc li {
+    position: relative;
+    padding: 0 .4em;
+    margin: 0;
+  }
+  .wpb-banner-toc li > ul {
+    list-style: none;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.6) none repeat scroll 0% 0%;
+    z-index: 4;
+  }
+  .wpb-banner-toc li:hover {
+    background: rgba(0, 0, 0, 0.8) none repeat scroll 0% 0%;
+  }
+  .wpb-banner-toc li:hover > ul > li {
+    display: block;
+  }
+  .wpb-banner-toc .toclevel-2,
+  .wpb-banner-toc .toclevel-3,
+  .wpb-banner-toc .toclevel-4,
+  .wpb-banner-toc .toclevel-5,
+  .wpb-banner-toc .toclevel-6 {
+    display: none;
+    white-space: nowrap;
+  }
+  .wpb-banner-toc .toclevel-1 {
+    float: left;
+  }
+  .wpb-banner-toc .toclevel-1 > ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+  .wpb-banner-toc .toclevel-2 ul {
+    position: absolute;
+    left: 100%;
+    top: 0;
+  }
+  .wpb-banner-toc #toctitle {
+    display: none;
+  }
+  .toc,
+  #toc {
+    display: none;
+  }
+}

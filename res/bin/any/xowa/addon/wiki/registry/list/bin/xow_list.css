@@ -1,0 +1,29 @@
+/* head row */
+.cur_head_text {
+  width: calc(100% - 113px);
+}
+.cur_head_btns {
+  width: 112px;
+}
+
+/* wiki row */
+.cur_data_row {
+  height: 44px;
+  width: 100%;
+}
+.wiki_link_btn {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 36px);
+  height: 100%;
+}
+.wiki_domain {
+  display: inline-block;
+  width: calc(100% - 136px);
+}
+.wiki_date {
+  display: inline-block;
+  width: 100px;
+
+  text-align: center;
+}

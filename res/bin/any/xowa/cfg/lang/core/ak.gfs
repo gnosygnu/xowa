@@ -1,0 +1,109 @@
+this
+.ns_names
+  .load_text(
+<:['
+-2|Media
+-1|Soronko
+1|Nkɔmmɔ
+2|Odwumanyɛni
+3|Odwumanyɛni nkɔmmɔbea
+5|$1 nkɔmmɔ
+6|File
+7|File nkɔmmɔ
+8|MediaWiki
+9|MediaWiki nkɔmmɔ
+10|Nhwɛsode
+11|Nhwɛsode nkɔmmɔbea
+12|Boa
+13|Mmoa nkɔmmɔbea
+14|Nkyekyem
+15|Nkyekyem nkɔmmɔbea
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Kwasiada
+monday|Ɛdwoada
+tuesday|Ɛbenada
+wednesday|Wukuada
+thursday|Yawoada
+friday|Efiada
+saturday|Memeneda
+january|Ɔpɛpɔn
+february|Ɔgyefuo
+march|Ɔbenem
+april|Oforisuo
+may_long|Kɔtonimma
+june|Ayɛwohomumu
+july|Kutawonsa
+august|Ɔsannaa
+september|Ɛbɔ
+october|Ahinime
+november|Obubuo
+december|Ɔpenimma
+listingcontinuesabbrev|toa so
+tog-underline|Twa lenk nyina ase:
+tog-hideminor|Suma nsesae a wɔakɔ so a wɔnnkyɛree koraa
+tog-hidepatrolled|Suma nsesae a wɔapatrole wɔn ndansa yi ara
+tog-newpageshidepatrolled|Suma nkrataafa a wɔapatrole wɔn fi krataafa-foforo lest no so
+tog-extendwatchlist|San list-nhwɛso no mu ama wo ehu nsesae nyinara a wɔakɔ so
+tog-usenewrc|Fa ndansa nsesae a woetu mpon fa di dwuma (wo hia JavaScript)
+tog-numberheadings|Ma ti-nsɛm no ara ankasa mma wɔn ho nɔmba
+tog-showtoolbar|Kyerɛ tulbaa a wɔde yɛ nsesa (wo hia JavaScript)
+tog-editondblclick|Sesa nkrataafa sɛ womia klik mpɛn mienu a (wo hia JavaScript)
+search|Hwehwɛ
+searchbutton|Hwehwɛ
+go|Kɔ
+searcharticle|Kɔ
+history|Krataafa abakɔsɛm
+history_short|Abakɔsɛm
+talkpagelinktext|Kasa
+talk|Nkɔmbɔ
+jumptosearch|hwehwɛ
+aboutsite|Fa {{SITENAME}} ho
+mainpage|Krataafa Titiriw
+editsection|sesa
+editsectionhint|Sesa sɛkhyɛn: ~{0}
+red-link-title|~{0} (krataafa nni hɔ)
+nstab-main|kratafa
+login|Bra mu
+nav-login-createaccount|Bra mu / yɛ akawnt
+userlogin|Bra mu / yɛ akawnt
+logout|Pue
+userlogout|Pue
+notloggedin|Mmbaa mu
+nologin|Wo nni akawnt anaa? ~{0}.
+searchresultshead|Hwehwɛ
+hist|abakɔsɛm
+watch|Hwɛ
+sp-contributions-talk|Kasa
+contribslink|ntoboa
+']:>
+).lang
+;

@@ -1,0 +1,459 @@
+this
+.fallback_load('fr')
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Dewo
+monday|Aaɓnde
+tuesday|Mawbaare
+wednesday|Njeslaare
+thursday|Naasaande
+friday|Mawnde
+saturday|Hoore-Biir
+sun|Dew
+mon|Aaɓ
+tue|Maw
+wed|Nje
+thu|Naa
+fri|Mde
+sat|Hoo
+january|Siilo
+february|Colte
+march|MBooy
+april|Seeɗto
+may_long|Duujal
+june|Korse
+july|Morso
+august|Juko
+september|Siilto
+october|Yarkomaa
+november|Jolal
+december|Bowte
+january-gen|Siilo
+february-gen|Colte
+march-gen|Mbooy
+april-gen|Seeɗto
+may-gen|Duujal
+june-gen|Korse
+july-gen|Morso
+august-gen|Juko
+september-gen|Siilto
+october-gen|Yarkomaa
+november-gen|Jolal
+december-gen|Bowte
+jan|Sii
+feb|Col
+mar|Mbo
+apr|See
+may|Duu
+jun|Kor
+jul|Mor
+aug|Juk
+sep|Sto
+oct|Yar
+nov|Jol
+dec|Bow
+toc|Loowdi
+redirectedfrom|(Yiitannde iwde e ~{0})
+collapsible-collapse|Taggu
+collapsible-expand|Wertu
+sort-descending|Leemto telloo
+sort-ascending|Leemto faya dow
+lastmodifiedat|Ngoo hello waylaa ko ñalnde ~{0} sahnga ~{1}.
+thumbnail-more|Mawnin
+otherlanguages|ɗemɗe goɗe
+blanknamespace|(Dowrowo)
+pagecategories|{{PLURAL:~{0}\u007CFedde\u007CPelle}}
+category_header|Kelle e fedde "~{0}"
+subcategories|Taƴte pelle
+nextn|yeeso {{PLURAL:~{0}\u007C~{0}}}
+prevn|caggal {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|jokku
+bold_sample|Binndol ɓuutol
+italic_sample|Binndol italic
+italic_tip|Binndol italic
+headline_sample|Binndol tiitoonde
+sitesupport|Dokkal
+tog-underline|Diidtol jokke
+tog-hideminor|Duuɗ taƴtanɗe pamare e bayle cakkitiiɗe
+tog-hidepatrolled|Suuɗ taƴtanɗe deenaaɗe ɗee e bayle cakkitiiɗe
+tog-newpageshidepatrolled|Suuɗ kelle deenaaɗe e doggol kelle kese
+tog-extendwatchlist|Wertu doggol ndeenka ngam hollude bayle fof, wonaa tan cakkitiiɗe
+tog-usenewrc|Renndin bayle e hello e bayle cakkitiiɗe kañum e doggol ndeenka (ena naamnii Javascritp)
+tog-numberheadings|Ɓeydi limoore tiitooɗe e jaajol
+tog-showtoolbar|Hollu palal taƴtorde (ena naamnii JavaScript)
+tog-editondblclick|Taƴto kelle e dobtitannde (ena naamnii Javascritp)
+underline-default|Goowaaɗe wanngorde
+editfont-style|Pannol ponte boowal taƴtorgal
+editfont-default|Goowaaɗe wanngorde
+hidden-categories|{{PLURAL:~{0}\u007CFedde suuɗiinde\u007CPelle cuuɗiiɗe}}
+noindex-category|Kello njoopaaka
+newwindow|(udditata e henorde hesere)
+cancel|Haaytu
+mytalk|Yeewtere
+navigation|Peeragol
+faq|FAQ
+actions|Baɗe
+namespaces|Boowal inɗe
+variants|Lomtooɗe
+errorpagetitle|Juumre
+returnto|Rutto to ~{0}.
+tagline|Iwde to {{SITENAME}}
+help|Ballal
+search|Yiylo
+searchbutton|Yiylo
+searcharticle|Tar
+history_short|Tarik
+printableversion|Yamre winndittoonde
+permalink|Jokkol duumingol
+view|Yiyto
+edit|Wallifaade
+create|Sos
+editthispage|Taƴto ngoo hello
+create-this-page|Sos ngoo hello
+delete|Momtu
+deletethispage|Momtu ngoo hello
+protect|Hisnu
+protect_change|waylu
+protectthispage|Hisnu ngoo hello
+unprotect|Waylu kisnugol
+unprotectthispage|Waylu kisnugol e ngoo hello
+newpage|Hello heso
+talkpage|Yeewtu baɗte ngoo hello
+talkpagelinktext|Yeewtere
+specialpage|Hello heeriingo
+personaltools|Kuutorɗe maa keeriiɗe
+articlepage|Yiyto hello loowdi ngoo
+talk|Kaldigal
+views|Jiyte
+toolbox|Wakannde gollirɗe
+userpage|Yiyto hello kuutoro
+projectpage|Yiyto hello eɓɓoore
+imagepage|Yiyto hello fiilde
+mediawikipage|Yiyto hello ɓatakuure ndee
+templatepage|Yiyto hello tiimtorde
+viewhelppage|Yiyto hello ballal
+categorypage|Yiyto hello fedde
+viewtalkpage|Yiyto yeewtere
+redirectpagesub|Hello jiiltugol
+viewcount|Ngoo hello yillaama laabi ~{0}.
+protectedpage|Hello hisnaango
+jumpto|Diw fayde:
+jumptonavigation|peeragol
+jumptosearch|Ɗaɓɓitugol
+view-pool-error|Ɗaccu hakke, carworɗe ɗee ko keewraa oo sahaa.\nEtotooɓe yillaade ngoo hello keewii haa ɓurti.\nTiiɗno sabbo seeɗa hade maa etaade naatde e hello ngoo kadi.
+pool-timeout|Sahaa ɓennii fade geƴƴol
+pool-queuefull|Doggol golle ko keewngol
+pool-errorunknown|Juumre nde heftinaaka
+aboutsite|Baɗte {{SITENAME}}
+aboutpage|Project:Baɗte
+copyright|Loowdi ena heɓoo les ~{0}.
+copyrightpage|{{ns:project}}:Copyrights
+currentevents|Tawtoraɗi
+currentevents-url|Project:Tawtoraɗi
+disclaimers|Deentine
+disclaimerpage|Project:Deentine kuuɓtidinɗe
+edithelp|Ballal Taƴtagol
+mainpage|Hello jaɓɓorgo
+mainpage-description|Hello jaɓɓorgo
+policy-url|Eɓɓoore:Dawirgol
+portal|Jaɓɓogol renndo
+portal-url|Project:Damugal renndo
+privacy|Dawirgol suturo
+privacypage|Project:Dawirgol suturo
+badaccess|Juumre jamirooje
+badaccess-group0|A yamiraaka siynude gollal naamni-ɗaa ngal.
+ok|OK
+retrievedfrom|Ittaa ko to "~{0}"
+youhavenewmessages|A heɓii ~{0} (~{1}).
+youhavenewmessagesmulti|A heɓii ɓatakuuje kese e ~{0}
+editsection|taƴto
+editold|taƴto
+viewsourceold|yiyto ɗaɗol
+editlink|taƴto
+viewsourcelink|yiyto ɗaɗol
+editsectionhint|Taƴto rogere: ~{0}
+showtoc|hollu
+hidetoc|suuɗ
+thisisdeleted|Yiyto walla artir ~{0}?
+viewdeleted|Yiyto ~{0}?
+feedlinks|Balol
+feed-invalid|Lulnannde fannu balol moƴƴaani
+feed-unavailable|Bale lultinorde ɗee keɓotaako
+site-rss-feed|~{0} balol RSS
+site-atom-feed|Balol Atom ~{0}
+page-rss-feed|"~{0}" balol RSS
+page-atom-feed|"~{0}" balol Atom
+red-link-title|~{0} (hello ngoo woodaani)
+nstab-main|Winndannde
+nstab-user|Hello kuutoro
+nstab-media|Hello Mejaaje
+nstab-special|Hello heeriingo
+nstab-project|Hello eɓɓoore
+nstab-image|Fiilde
+nstab-mediawiki|Ɓatakuure
+nstab-template|Tiimtorde
+nstab-help|Hello ballal
+nstab-category|Fedde
+nosuchaction|Ngal baɗal anndaaka
+nosuchactiontext|Baɗal joopagnal e URL ngal moƴƴaani.\nMaa taw w juum e mbinndiin URL oo, walla ndew-ɗaa ko e jokkol taƴngol.\nƊuum kadi ena waawi wonde buggere e topirde huutoraande e {{SITENAME}}.
+nosuchspecialpage|Ngoo hello heeriingo woodaani
+nospecialpagetext|<strong>A naamniima hello heeriingo ngo woodaani.</strong>\nDoggol kelle ɗe moƴƴaani ena tawee to [[Special:SpecialPages\u007C{{int:specialpages}}]].
+error|Faljere
+databaseerror|Juumre ruttorde keɓe
+missing-article|Ruttorde keɓe ndee yiytaani loowdi hello ndi nde fotnoo yiytude, ena inniraa "~{0}" ~{1}.\n\nHeewi waɗde noon ko diff nayeejo walla jokkol aslol fayde e hello momtaango.\n\nSo wonaa ɗuum, maataw ko a kawruɗo e buggere e topirde ndee.\nTiiɗno jaŋto ɗum to [[Special:ListUsers/sysop\u007Cjiiloowo]] mbaasaa yejjitde URL jokkol ngol.
+badtitle|Tiitoonde moƴƴaani
+badtitletext|Tiitoonde ello ɗaɓɓitaango ngoo moƴƴaani, ko mehre, walla ko hakkude-ɗemɗe jokkoraade no feewaani walla tiitoonde hakkude-wiki
+viewsource|Yiyto ɗaɗol
+yourname|Innde Kuutoro
+yourpassword|Finnde:
+remembermypassword|Siiftor ceŋagol am e ndee wanngorde (so heewii ko {{PLURAL:~{0}\u007Cñalawma\u007Cbalɗe}}~{0})
+login|Seŋo
+nav-login-createaccount|Seŋo / uddit konte
+userlogin|Seŋo / uddit konte
+userlogout|Seŋto
+nologin|A alaa konte tawo? ~{0}.
+nologinlink|Uddit konte
+mailmypassword|Neldu finnde hesere e iimeel
+loginlanguagelabel|Ɗemngal: ~{0}
+extlink_sample|http://www.yeru.com tiitoonde jokkol
+extlink_tip|Jokkol boowbowal (siiftor puɗɗol http://)
+nowiki_sample|Naatnu binndol ngol mbaydinaaka
+nowiki_tip|Faalkiso mbaydingol wiki
+image_tip|Fiilde soomtoraande
+sig_tip|Ciifol maa kañum e ñalngu
+hr_tip|Diidol lelingol (huutoro seeɗa)
+minoredit|Ɗuum ko taƴtol pamarol
+watchthis|Rewindo ngoo hello
+savearticle|Danndu hello
+preview|Yiytindo
+showpreview|Hollu jiytol
+showdiff|Hollu bayle
+newarticle|(Kesi)
+newarticletext|A rewii e jokkol feewde e hello ngo woodaani tawo.\nNgam sosde hello ngoo, fuɗɗo tappude e gallol les ngol (Yah to [~{0} help page] ngam ɓeydude humpito).
+noarticletext|Ngoo hello alaa tawo hay binndol.\nAɗa waawi [[Special:Search/{{PAGENAME}}\u007Cweddo njiilaw e tiitoonde mayre]] e kello goɗɗe,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} yiylo logge toɗɗiiɗe ɗum],\nwalla [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} taƴto hello ngoo]</span>.
+editingsection|Taƴtagol ~{0} (taƴre)
+templatesused|{{PLURAL:~{0}\u007CTiimtorde\u007CTiimtorɗe}} kuutoraaɗe e ngoo hello:
+template-protected|ko-ko hisnaa
+template-semiprotected|(ena hisnaa feccere)
+hiddencategories|Ngoo hello jeyaa ko e {{PLURAL:~{0}\u007C1 fedde suuɗiinde\u007C~{0} pelle cuuɗiiɗe}}:
+post-expand-template-inclusion-warning|""Reentino"."" Ɓetol tuugnorde ɓurtii.
+post-expand-template-inclusion-category|Kelle baɗɗe tuugnorɗe ɓurtuɗe
+post-expand-template-argument-warning|'''Warning:''' Ngoo hello ena jogii daliilu tiimtorde jogiiɗo ɓetol layo mawngol haa ɓurti.\nƊiin dalillaaji nduulaama.
+post-expand-template-argument-category|Kelle jogiiɗe dalillaaji tiimtorde jejjitaaɗe
+viewpagelogs|Yiyto loge ngoo hello
+currentrev-asof|Yamre sakkitiinde nde ~{0}
+revisionasof|Waylitannde ~{0}
+previousrevision|← Baylital ɓennungal
+cur|gon
+last|ɓenn
+histlegend|Cifol : ({{int:cur}}) = ko seerti e yamre wonaande ndee, ({{int:last}}) = ko seerti e yamre ɓennunde ndee, <b>{{int:minoreditletter}}</b> = baylital pamaral
+history-fieldset-title|Feero e aslol
+history-show-deleted|Momtaaɗi tan
+histfirst|Hello adanngo
+revdel-restore|waylu jiyagol
+revertmerge|Ittu renndino
+history-title|Aslol baylitte "~{0}"
+lineno|Gorol ~{0}:
+compareselectedversions|Yerondir baylitte labaaɗe
+editundo|firtu
+searchresults|Yiylo e njaltudi
+searchresults-title|Yiylo "~{0}" e njaltudi
+prevn-title|Caggal ~{0} {{PLURAL:~{0}\u007Cnjaltudi\u007Cjaltuɗe}}
+nextn-title|Yeeso ~{0} {{PLURAL:~{0}\u007Cnjaltudi\u007Cjaltuɗe}}
+shown-title|Hollu ~{0} {{PLURAL:~{0}\u007Cnjaltudi\u007Cjaltuɗe}} e hello fof
+viewprevnext|Yiyto (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|'''Ena woodi hello ena wiyee "[[:~{0}]]" e oo wiki.'''
+searchmenu-new|'''Sos hello "[[:~{0}]]" e oo wiki!'''
+searchprofile-articles|Kello loowdi
+searchprofile-images|Sawmejaajo
+searchprofile-everything|Fofof
+searchprofile-advanced|Ceeɓtore
+searchprofile-articles-tooltip|Yiylo e ~{0}
+searchprofile-images-tooltip|Yiylo piille
+searchprofile-everything-tooltip|Yiylo loowdi fof (waɗoe heen kelle jeewte)
+searchprofile-advanced-tooltip|Yiylo e boowe inɗe peŋtore
+search-result-size|~{0} ({{PLURAL:~{1}\u007Chelmere 1\u007Ckelme$ 2}})
+search-redirect|(yiiltu ~{0})
+search-section|(taƴre ~{0})
+search-suggest|Maa taw njiɗ-ɗaa wiyde ko: ~{0}
+searchall|fof
+search-nonefound|Alaa njaltudi arti e ndee ɗaɓɓitannde.
+mypreferences|Cuɓoraade
+recentchanges|Wailitooji kesi
+recentchanges-legend|Cuɓe bayle cakkitiiɗe
+recentchanges-label-newpage|Ngoo taƴto sosii hello heso
+recentchanges-label-bot|Ngoo taƴto waɗi ɗum ko botol
+recentchanges-label-unpatrolled|Ngoo taƴto suwaa tawo ƴeewteede
+rclistfrom|Hollu bayle kese puɗɗiiɗe gila ~{2} ~{1}
+rclinks|Hollu bayle ~{0} cakkitiiɗe baɗaaɗe e balɗe ~{1} ɓannuɗe ɗee<br />~{2}
+diff|ceer
+hist|aslol
+hide|Suuɗ
+show|Hollu
+rc-enhanced-expand|Hollu cariiɗe (ena naamnii JavaScript)
+rc-enhanced-hide|Suuɗ cariiɗe
+recentchangeslinked|Bayle toɗɗiiɗe ɗum
+recentchangeslinked-toolbox|Bayle toɗɗiiɗe ɗee
+recentchangeslinked-title|Bayle toɗɗiiɗe "~{0}"
+recentchangeslinked-summary|Ɗuum ko doggol bayle baɗaaɗe sakket e kelle jokkiiɗe e hello heeriingo (walla e terɗe fedde heeriinde).\nKelle e [[Special:Watchlist\u007Cyour watchlist]] ko ngoni ko e ""ɓuutol"".
+recentchangeslinked-page|Innde hello:
+recentchangeslinked-to|Hollu bayle kelle jokkaaɗe e hello toɗɗaango ngoo kisa
+upload|Yollu fiilde
+uploaderror|Faljere
+filedesc|Tonngol
+file-anchor-link|Fiilde
+filehist|Aslol fiilde
+filehist-help|Dobo e ñalngu/waktu ngam yiyde fiilde ndee no nde yaltirta e oon waktu nih.
+filehist-current|gonaaɗo
+filehist-datetime|Ñalngu/Waktu
+filehist-thumb|Dooɓre
+filehist-thumbtext|Dooɓre yamre ~{0}
+filehist-user|Kuutoro
+filehist-dimensions|Ɓete
+filehist-comment|Yowre
+imagelinks|Kuutorgol fiilde
+linkstoimage|{{PLURAL:~{0}\u007Cpage links\u007C~{0} pages link}} dewɗe e ngoo hello:
+nolinkstoimage|Alaa kelle jokkiiɗe e ndee fiilde.
+sharedupload-desc-here|Ndee fiilde ummii ko e ~{0} tee ena waawi huutoreede e eɓɓooje koɗe.\nCifol gonngol e [~{1} file description page] makko ena holliraa les ɗoo.
+randompage|Ɗerewol kawral
+nbytes|~{0} {{PLURAL:~{0}\u007Cbitere\u007Cbite}}
+nmembers|~{0} {{PLURAL:~{0}\u007Ctergal\u007Cterɗe}}
+newpages|Kelle kese
+pager-newer-n|{{PLURAL:~{0}\u007Ckesol 1\u007Ckesi ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Cɓennungol 1\u007Cɓennuɗi ~{0}}}
+booksources|Sewnde defte
+log|Loge
+allarticles|Winndannde hesere
+allpagessubmit|Yah
+linksearch-line|~{0} ko-ko jokkaa e ~{1}
+watchlist|Doggol ndeenka am
+mywatchlist|Doggol rewindo
+watch|Rewindaande
+unwatch|Darin rewindo
+actioncomplete|Gollal timmii
+actionfailed|Gollal woorii
+dellogpage|Logagol momtaaɗe
+rollbacklink|riiwtu
+undeletelink|yiyto/artir
+undeleteviewlink|yiyto
+namespace|Boowal inɗe
+contributions|Ballitte kuutoro
+mycontris|Ballitte
+month|Tuggi nduu lewru (e ɓennuɗi):
+year|Tuggi ndee hitaande (e ɓennuɗe):
+sp-contributions-talk|Kaldigal
+whatlinkshere|Ko jokkii ɗoo
+whatlinkshere-title|Kello jokkiiɗe e "~{0}"
+whatlinkshere-page|Hello:
+linkshere|Kelle ɗee-ɗoo jokkii ko to '''[[:~{0}]]''':
+isredirect|hello yiiltorde
+istemplate|naattine
+isimage|jokkol fiilde
+whatlinkshere-prev|{{PLURAL:~{0}\u007Ccaggal\u007Ccaggal ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cyeeso\u007Cyeeso ~{0}}}
+whatlinkshere-links|← jokke
+whatlinkshere-hideredirs|~{0} jiiltanɗe
+whatlinkshere-hidetrans|~{0} naattine
+whatlinkshere-hidelinks|~{0} jokke
+whatlinkshere-filters|Ceɗe
+ipboptions|waktuuji 2:waktuuji 2,ñalawma 1:ñalawma 1,balɗe 3:balɗe 3,yontere 1:yontere 1,jonte 2:jonte 2,lewru 1:lewru 1,lebbi 3:lebbi 3,lebbi 6:lebbi 6,hitaande 1:hitaande 1,gasataa:haa badaa
+blocklink|daaƴ
+unblocklink|daaƴtu
+change-blocklink|wayli daaƴo
+contribslink|ballitte
+movelogpage|Dirtin loge
+revertmove|firlit
+export|Jiggito kello
+allmessagesname|Innde
+allmessagesdefault|Binndo ɓatakuru goowangol
+thumbnail_error|Juumre waɗii e cosgol dooɓre ~{0}
+tooltip-pt-userpage|Hello kuutoro maa
+tooltip-pt-mytalk|Hello jeewte maa
+tooltip-pt-preferences|Cuɓoraaɗe maa
+tooltip-pt-watchlist|Doggol kelle ɗe ngon-ɗaa e ƴeewtaade bayle mum'en
+tooltip-pt-mycontris|Doggol ballitte maa
+tooltip-pt-login|Aɗa wasiyaa yo a seŋo; kono waɗɗaaki
+tooltip-pt-logout|Seŋto
+tooltip-ca-talk|Yeewtere baɗte hello loowdi ngoo
+tooltip-ca-edit|Aɗa waawi taƴtaade ngoo hello. Tiiɗno huutoro butoŋ yiytindo oo hade maa danndude
+tooltip-ca-addsection|Fuɗɗo taƴre hesere
+tooltip-ca-viewsource|Ngoo hello ko hisnaango.\nAɗa waawi yiytaade ɗaɗol maggo.
+tooltip-ca-history|Baylitte ɓennuɗe e  ngoo hello
+tooltip-ca-protect|Hisnu ngoo hello
+tooltip-ca-delete|Momtu ngoo hello
+tooltip-ca-move|Dirtin ngoo hello
+tooltip-ca-watch|Ɓeydu ngoo hello e dewindaaɗe maa
+tooltip-ca-unwatch|Momtu ngoo hello e doggol ndeenka maa
+tooltip-search|Yiylo e {{SITENAME}}
+tooltip-search-fulltext|Yiylo ndii loowdi e kelle ɗee
+tooltip-p-logo|Yillo hello jaɓɓorgo ngoo
+tooltip-n-mainpage|Yillo hello jaɓɓorgo ngoo
+tooltip-n-mainpage-description|Yillo hello jaɓɓorgo ngoo
+tooltip-n-portal|Baɗte eɓɓoore ndee, hol ko mbaaw-ɗaa waɗde, hol to njiytataa geɗe
+tooltip-n-currentevents|Yiylo humpito yawtungo toɗɗiingo ɗee joljole
+tooltip-n-recentchanges|Doggol bayle cakkitiiɗe e Wiki hee
+tooltip-n-randompage|Loow hello hawraango
+tooltip-n-help|Ko ɗoo yiytetee
+tooltip-t-whatlinkshere|Doggol kelle Wiki jokkaaɗe ɗoo ɗee fof
+tooltip-t-recentchangeslinked|Bayle cakkitiiɗe e kelle jokkaaɗe e ngoo hello
+tooltip-feed-atom|Balal Atom ngoo hello
+tooltip-t-contributions|Doggol ballitte oo kuutoro
+tooltip-t-upload|Yollu piille
+tooltip-t-specialpages|Doggol kelle keeriiɗe fof
+tooltip-t-print|Jame binndittooɗe ngoo hello
+tooltip-t-permalink|Jokkol duumingol e baylital ngoo hello
+tooltip-ca-nstab-main|Yiyto hello loowdi ngoo
+tooltip-ca-nstab-user|Yiyto hello kuutoro
+tooltip-ca-nstab-project|Yiyto hello eɓɓoore ngoo
+tooltip-ca-nstab-image|Yiyto hello fiilde ngoo
+tooltip-ca-nstab-template|Yiyto tuugnorde ndee
+tooltip-ca-nstab-category|Yiyto hello fedde ndee
+tooltip-minoredit|Maanto ɗum ko taƴto famaro
+tooltip-save|Danndu bayle maa
+tooltip-preview|Yiytindo bayle maa, tiiɗno huutoro ɗuum hade maa danndude!
+tooltip-compareselectedversions|Ƴeew ko seerndi hakkunde baylitte ɗiɗi ngoo hello labaaɗe ɗee
+tooltip-watch|Ɓeydu ngoo hello e doggol ndeenka maa
+tooltip-rollback|"Riiwtude" firlittu taƴte  ngoo hello ruttoo to battindiiɗo waylude ngo e dobannde wootere
+tooltip-undo|"Firtu" artirtu ngol taƴtol tee uddita gallol taƴto ngol e mbaydi yiytindo. Nafata ko ɓeydude daliilu e tonngol ngol.
+tooltip-summary|Naatnu tonngol daɓɓol
+previousdiff|Taƴte ɓennungol
+file-info-size|~{0} × ~{1} piksele, ɓetol fiilde: ~{2}, mbaydi MIME: ~{3}
+file-nohires|Werngo ɓurngo ɗoo toowde alaa.
+svg-long-desc|Fiilde SVG, werngo mum ko ~{0} × ~{1} pikelle, ɓetol fiildee: ~{2}
+ilsubmit|Yiilaade
+bad_image_list|Mbayka kaa ko nih yahri:\n\nReggin teme tan (kelle puɗɗoriiɗe *) ena kiisaa.\nJokkol gadanol e gorol foti wonde ko jokkol fiilde nde moƴƴaani.\nKala jokkol dewngol e ngool gorol nanngiraa ko paltooje, wano kelle ɗo fiilde ndee waawi yaltude.
+metadata|Metaakeɓe
+metadata-help|Ngoo hello ena waɗi humpito woɗngo, tawata ko ummii ko e kameraa numerik walla niiwtorde huutoraande ngam sosde walla ngaanndinde nde.
+metadata-fields|Galli metaakeɓe natal gongal nde nduu ɓaakuru maa naatine e jaytinol hello natal tuma nde haatumeere metaakeɓe ndee taggitaa.\nGoɗɗe maa cuuɗe e sahaa kala.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+namespacesall|fof
+monthsall|fof
+specialpages|Kelle keeriiɗe
+']:>
+).lang
+;

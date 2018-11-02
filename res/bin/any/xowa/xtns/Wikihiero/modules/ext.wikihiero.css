@@ -1,0 +1,27 @@
+.mw-hiero-table {
+	border: 0;
+	border-spacing: 0;
+}
+
+.mw-hiero-outer {
+	display: inline;
+}
+
+.mw-hiero-table td {
+	padding: 0;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.mw-hiero-box {
+	background: black;
+}
+
+.mw-mirrored {
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+	filter: FlipH;
+	-ms-filter: "FlipH";
+}

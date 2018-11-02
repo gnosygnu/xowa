@@ -1,0 +1,47 @@
+{
+	"selectorWithoutVariant": ".oo-ui-icon-{name}",
+	"selectorWithVariant": ".oo-ui-image-{variant}.oo-ui-icon-{name}",
+	"intro": "@import '../../../../src/styles/common';",
+	"variants": {
+		"invert": {
+			"color": "#fff",
+			"global": true
+		},
+		"progressive": {
+			"color": "#36c",
+			"global": true
+		},
+		"constructive": {
+			"color": "#36c"
+		},
+		"destructive": {
+			"color": "#d33"
+		},
+		"warning": {
+			"color": "#ff5d00"
+		}
+	},
+	"images": {
+		"arrowNext": { "file": {
+			"ltr": "images/icons/arrow-ltr.svg",
+			"rtl": "images/icons/arrow-rtl.svg"
+		} },
+		"arrowLast": { "file": {
+			"ltr": "images/icons/arrow-rtl.svg",
+			"rtl": "images/icons/arrow-ltr.svg"
+		} },
+		"caretNext": { "file": {
+			"ltr": "images/icons/caret-rtl.svg",
+			"rtl": "images/icons/caret-ltr.svg"
+		} },
+		"caretLast": { "file": {
+			"ltr": "images/icons/caret-ltr.svg",
+			"rtl": "images/icons/caret-rtl.svg"
+		} },
+		"caretDown": { "file": "images/icons/caretDown.svg" },
+		"caretUp": { "file": "images/icons/caretUp.svg" },
+		"downTriangle": { "file": "images/icons/downTriangle.svg" },
+		"move": { "file": "images/icons/move.svg" },
+		"upTriangle": { "file": "images/icons/upTriangle.svg" }
+	}
+}

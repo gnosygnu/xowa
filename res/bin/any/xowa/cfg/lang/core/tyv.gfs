@@ -1,0 +1,1113 @@
+this
+.fallback_load('ru')
+.ns_names
+  .load_text(
+<:['
+-2|Медиа
+-1|Тускай
+1|Чугаа
+2|Aжыглакчы
+3|Aжыглакчы чугаа
+5|$1 чугаа
+6|Файл
+7|Файл чугаа
+8|МедиаВики
+9|МедиаВики чугаа
+10|Майык
+11|Майык чугаа
+12|Дуза
+13|Дуза чугаа
+14|Аңгылал
+15|Аңгылал чугаа
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+3|Aжыглакчы чугаазы
+5|$1 чугаазы
+7|Файл чугаазы
+9|МедиаВики чугаазы
+11|Майык чугаазы
+13|Дуза чугаазы
+14|Категория
+15|Категория чугаазы
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Activeusers|Идекпейжилер
+Allmessages|Шупту_медеглелдер
+AllMyUploads|Шупту_файлдарым
+Allpages|Шупту_арыннар
+Badtitle|Хоржок_ат-сып
+Blankpage|Куруг_арын
+Block|Дуглаар
+Booksources|Ном_үндезини
+BrokenRedirects|Үзүлген_көжүрүглер
+Categories|Аңгылалдар
+ChangeEmail|Э-шуудаң_солуур
+ChangePassword|Уруң_солуур
+ComparePages|Арыннар_деңнээр
+Confirmemail|Э-шуудаң_бадыткаар
+MyLanguage|Дылым
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+redirect|0|#көжүрүлге~#ШИГЛЕДИР~#перенаправление~#перенапр~#REDIRECT~
+notoc|0|__ЭГЕ_ЧОК__~__БЕЗ_ОГЛАВЛЕНИЯ__~__БЕЗ_ОГЛ__~__NOTOC__~
+nogallery|0|__ГАЛЕРЕЯ_ЧОК__~__БЕЗ_ГАЛЕРЕИ__~__NOGALLERY__~
+forcetoc|0|__АЛБАН_ЭГЕ__~__ОБЯЗАТЕЛЬНОЕ_ОГЛАВЛЕНИЕ__~__ОБЯЗ_ОГЛ__~__FORCETOC__~
+toc|0|__ДОПЧУ__~__ОГЛАВЛЕНИЕ__~__ОГЛ__~__TOC__~
+noeditsection|0|__ҮЛЕГ_ЭДИЛГЕЗИ_ЧОК__~__БЕЗ_РЕДАКТИРОВАНИЯ_РАЗДЕЛА__~__NOEDITSECTION__~
+currentmonth|1|__АМГЫ_АЙ~__АМГЫ_АЙ_2__~ТЕКУЩИЙ_МЕСЯЦ~ТЕКУЩИЙ_МЕСЯЦ_2~CURRENTMONTH~CURRENTMONTH2~
+currentmonth1|1|__АМГЫ_АЙ_1__~ТЕКУЩИЙ_МЕСЯЦ_1~CURRENTMONTH1~
+currentmonthname|1|АМГЫАЙНЫҢАДЫ~НАЗВАНИЕ_ТЕКУЩЕГО_МЕСЯЦА~CURRENTMONTHNAME~
+currentday|1|АМГЫХҮН~ТЕКУЩИЙ_ДЕНЬ~CURRENTDAY~
+currentday2|1|АМГЫХҮН2~ТЕКУЩИЙ_ДЕНЬ_2~CURRENTDAY2~
+currentdayname|1|АМГЫХҮННҮҢАДЫ~НАЗВАНИЕ_ТЕКУЩЕГО_ДНЯ~CURRENTDAYNAME~
+currentyear|1|АМГЫЧЫЛ~ТЕКУЩИЙ_ГОД~CURRENTYEAR~
+currenttime|1|АМГЫҮЕ~ТЕКУЩЕЕ_ВРЕМЯ~CURRENTTIME~
+currenthour|1|АМГЫШАК~ТЕКУЩИЙ_ЧАС~CURRENTHOUR~
+numberofpages|1|АРЫННАРНЫҢСАНЫ~КОЛИЧЕСТВО_СТРАНИЦ~NUMBEROFPAGES~
+numberofarticles|1|ЧҮҮЛДЕРНИҢСАНЫ~КОЛИЧЕСТВО_СТАТЕЙ~NUMBEROFARTICLES~
+numberoffiles|1|ФАЙЛДАРНЫҢСАНЫ~КОЛИЧЕСТВО_ФАЙЛОВ~NUMBEROFFILES~
+numberofusers|1|АЖЫГЛАКЧЫЛАРНЫҢСАНЫ~КОЛИЧЕСТВО_УЧАСТНИКОВ~NUMBEROFUSERS~
+numberofedits|1|ӨСКЕРЛИИШКИННЕРНИҢСАНЫ~КОЛИЧЕСТВО_ПРАВОК~NUMBEROFEDITS~
+pagename|1|АРЫННЫҢАДЫ~НАЗВАНИЕ_СТРАНИЦЫ~PAGENAME~
+namespace|1|АТТАРДЕЛГЕМИ~ПРОСТРАНСТВО_ИМЁН~NAMESPACE~
+namespacee|1|АТТАРДЕЛГЕМИ2~ПРОСТРАНСТВО_ИМЁН_2~NAMESPACEE~
+talkspace|1|ЧУГААДЕЛГЕМИ~ПРОСТРАНСТВО_ОБСУЖДЕНИЙ~TALKSPACE~
+talkspacee|1|ЧУГААДЕЛГЕМИ2~ПРОСТРАНСТВО_ОБСУЖДЕНИЙ_2~TALKSPACEE~
+img_right|1|оң~справа~right~
+img_center|1|төп~центр~center~centre~
+img_left|1|солагай~слева~left~
+sitename|1|САЙТТЫҢАДЫ~НАЗВАНИЕ_САЙТА~SITENAME~
+ns|0|АД~ПИ~NS~
+nse|0|АД2~ПИК~NSE~
+currentweek|1|АМГЫЧЕДИХОНУК~ТЕКУЩАЯ_НЕДЕЛЯ~CURRENTWEEK~
+currentdow|1|АМГЫЧЕДИХОНУКТУҢХҮНҮ~ТЕКУЩИЙ_ДЕНЬ_НЕДЕЛИ~CURRENTDOW~
+raw|0|ЧИГ~НЕОБРАБ~RAW~
+language|0|#ДЫЛ~#ЯЗЫК~#LANGUAGE~
+special|0|#тускай~#служебная~#special~
+tag|0|#демдек~#метка~#тег~#тэг~#tag~
+hiddencat|1|__ЧАЖЫТ_АҢГЫЛАЛ__~__СКРЫТАЯ_КАТЕГОРИЯ__~__HIDDENCAT__~
+pagesincategory|1|__АҢГЫЛАЛ_АРЫННАРЫ__~СТРАНИЦ_В_КАТЕГОРИИ~PAGESINCATEGORY~PAGESINCAT~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+namespacenumber|1|АТТАРДЕЛГЕМИНИҢСАНЫ~НОМЕР_ПРОСТРАНСТВА_ИМЁН~NAMESPACENUMBER~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Улуг хүн
+monday|Бир дугаар хүн
+tuesday|Ийи дугаар хүн
+wednesday|Үш дугаар хүн
+thursday|Дөрт дугаар хүн
+friday|Беш дугаар хүн
+saturday|Чартык улуг хүн
+sun|Улуг-хүн
+mon|Пн
+tue|Вт
+wed|Ср
+thu|Чт
+fri|Пт
+sat|Сб
+january|Бир ай
+february|ийи ай
+march|Үш ай
+april|Дөрт ай
+may_long|Беш ай
+june|Алды ай
+july|Чеди ай
+august|Сес ай
+september|Тос ай
+october|Он ай
+november|Он бир ай
+december|Он ийи ай
+january-gen|Бир айның
+february-gen|Ийи айның
+march-gen|Үш айның
+april-gen|Дөрт айның
+may-gen|Беш айның
+june-gen|Алды айның
+july-gen|Чеди айның
+august-gen|Сес айның
+september-gen|Тос айның
+october-gen|Он айның
+november-gen|Он бир айның
+december-gen|Он ийи айның
+jan|1 ай
+feb|2 ай
+mar|3 ай
+apr|4 ай
+may|5 ай
+jun|6 ай
+jul|7 ай
+aug|8 ай
+sep|9 ай
+oct|10 ай
+nov|11 ай
+dec|12 ай
+toc|Допчузу
+redirectedfrom|(~{0} шигленген)
+allpages|Шупту арыннар
+prevpage|Эрткен арын (~{0})
+nextpage|Дараазында арын (~{0})
+collapsible-collapse|Кызырар
+collapsible-expand|чазар
+categories|Аңгылалдар
+lastmodifiedat|Бо арын сөөлгү катап ~{0}, ~{1} өскерилген.
+thumbnail-more|Улгаттыр
+otherlanguages|Өске дылдарга
+blanknamespace|(Кол)
+pagecategories|{{PLURAL:~{0}\u007CАңгылал}}
+category_header|«~{0}» деп бөлүктүң арыннары
+subcategories|Адаккы бөлүктер
+category-media-header|«~{0}» деп бөлүкте файлдар
+category-empty|''Амгы бо бөлүкте медиа база арыннар чок.''
+category-subcat-count|{{PLURAL:~{1}\u007C1=Бо аңгылал чүгле дараазында аңгыламныг.\u007CБо аңгылалдың шупту ~{1} аңгыламнарның аразындан дараазында ~{0} аңгыламны көргүскен.}}
+category-subcat-count-limited|Бо аңгылал {{PLURAL:~{0}\u007C1=бир\u007C~{0}}} аңгыламныг.
+category-article-count|{{PLURAL:~{1}\u007C1=Бо аңгылал чүгле дараазында арыннарлыг.\u007CБо аңгылалдың шупту ~{1} арыннарының аразындан дараазында ~{0} арынын көргүскен.}}
+category-file-count|{{PLURAL:~{1}\u007C1=Бо бөлүк чүгле чаңгыс файлдыг.\u007CБо бөлүктүң ниити ~{1} файлының ~{0} файлын көргүскен.}}
+nextn|дараазында {{PLURAL:~{0}\u007C~{0}}}
+prevn|эрткен {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|(уланчы)
+bold_sample|Кара сөзүглел
+bold_tip|Кара сөзүглел
+italic_sample|Ийлендирер сөзүглел
+italic_tip|Курсив бижик
+link_sample|Холбааның ады
+link_tip|Иштики холбаа
+headline_sample|Кырыкы сөзүглели
+headline_tip|2-ги деңнелдиг кырыкы ады
+ago|~{0} бурунгаар
+hidden-category-category|Чажыт бөлүктер
+statistics|Статистика
+statistics-pages|Арыннар
+categorytree-portlet|Чергелер
+categorytree-category|Черге:
+categorytree-mode-all|шупту арыннар
+categorytree-collapse|кызырары
+categorytree-expand|чазар
+proofreadpage_image|Чурумал
+proofreadpage_index|Индекс
+proofreadpage_badpage|Меге формат
+proofreadpage_nextpage|Соонда арын
+proofreadpage_prevpage|Бурунгу арын
+proofreadpage_pages|~{1} {{PLURAL:~{0}\u007C1=арын\u007Cарын}}
+wm-license-information-description|Тодарадып бижээни
+wm-license-information-source|Эгези
+sitesupport|Белектер
+tog-underline|Холбааны шыяры:
+tog-hideminor|Сөөлгү өскерлиишкиннерниң биче эдиглерин чажырар
+tog-hidepatrolled|Чаа өскерлиишкиннер даңзызында хынаан өскерлиишкиннерни чажырар
+tog-newpageshidepatrolled|Чаа арыннарның даңзындан истээн арыннарны чажырары
+tog-usenewrc|Чаа өскерлиишкиннерниң өөделеттинген даңзызын ажыглаар (JavaScript херек)
+tog-numberheadings|Эгелерин авто-санаар
+tog-showtoolbar|Өскертир херекселдерни көргүзер (JavaScript)
+tog-editondblclick|Арынны өскертирде ийи катап базар (JavaScript)
+tog-watchcreations|Мээң чаяан арыннарымны хайгаарал даңзымче немээри.
+tog-watchdefault|Мээң өскерткен арыннарымны хайгаарал даңзымче немээри.
+tog-watchmoves|Мээң катап адаан арыннарымны хайгаарал даңзымче немээри.
+tog-watchdeletion|Мээң казаан арыннарымны хайгаарал даңзымче немээри.
+tog-oldsig|Амгы хол үжүү:
+tog-watchlisthideown|Хайгаарал даңзызындан эдиглеримни чажыр
+tog-watchlisthidebots|Хайгаарал даңзызындан роботтарның эдиглерин чажыр
+tog-watchlisthideminor|Хайгаарал даңзызындан бичии эдиглерни чажыр
+tog-watchlisthidepatrolled|Хайгаарал даңзындан истээн өскерлиишкиннерны чажырары
+tog-showhiddencats|Чажыт аңгылалдарны көргүзер
+underline-always|Кезээде
+underline-never|Кажан-даа
+underline-default|Кештиң азы веб-браузерниң ниити үнези
+editfont-default|Веб-браузерниң ниити үнези
+hidden-categories|{{PLURAL:~{0}\u007C1=Чажыт аңгылал\u007CЧажыт аңгылалдар}}
+noindex-category|Индекстелбес арынар
+broken-file-category|Ажылдавайн турар файл-шөлүлгелиг арыннар
+about|Дугайында
+article|Допчу арын
+newwindow|(чаа көзенээ ажыытынар)
+cancel|Соксаары
+moredotdotdot|Артык...
+mypage|Арын
+mytalk|Чугаа
+anontalk|Бо ИП-адрестиң чугаазы
+navigation|Навигация
+and| болгаш
+qbfind|Дилээри
+qbbrowse|Каралаары
+qbedit|Өскертири
+qbpageoptions|Бо арын
+qbmyoptions|Мээң арыннарым
+faq|Бо-ла салыр айтырыглар (БлСА)
+faqpage|Project:БлСА
+actions|Кылыглар
+namespaces|Аттар делгемнери
+variants|Бир янзы
+errorpagetitle|Алдаг
+returnto|«~{0}» деп арынже эглири.
+tagline|{{SITENAME}} деп веб-сайттан
+help|Дуза
+search|Диле
+searchbutton|Дилээр
+go|Баары
+searcharticle|Күүcедири
+history|Арынның төөгүзү
+history_short|Төөгү
+printableversion|Саазынга үндүрерин көөрү
+permalink|Турум холбаа
+print|Саазынга үндүрер
+view|Көөрү
+edit|Эдер
+create|Чогаадыры
+editthispage|Бо арынны өскертири
+create-this-page|Бо арынны чогаадыры
+delete|Ыраары
+deletethispage|Бо арынны ырадыры
+undelete_short|~{0} {{PLURAL:~{0}\u007C1=эдигни\u007Cэдиглерни}} катап үндүрери
+viewdeleted_short|{{PLURAL:~{0}\u007C1=Бир ыраткан өскерлиишкинни\u007C~{0} ыраткан өскерлиишкиннерни}} көөрү
+protect|Камгалаары
+protect_change|өскертири
+protectthispage|Бо арынны камгалаар
+unprotect|Камгалалды өскертири
+unprotectthispage|Бо арынның камгалалын өскертири
+newpage|Чаа арын
+talkpage|Бо арын дугайында чугаалажыры
+talkpagelinktext|Чугаа
+specialpage|Тускай арын
+personaltools|Хууда херекселдер
+articlepage|Допчу арынны көөрү
+talk|Чугаа
+views|Көрүүшкүннери
+toolbox|Херекселдер
+userpage|Ажыглакчының арынын көөрү
+projectpage|Төлевилелдиң арынын көөрү
+imagepage|Файлдың арынын көөрү
+mediawikipage|Чагаа арынын көөрү
+templatepage|Майык арынын көөрү
+viewhelppage|Дуза арынын көөрү
+categorypage|Бөлүктүң арынын көөрү
+viewtalkpage|Чугааны көөрү
+redirectpagesub|шигледир арын
+protectedpage|Камгалаган арын
+jumpto|Шилчиир:
+jumptonavigation|навигация
+jumptosearch|дилээри
+pool-errorunknown|Билбес алдаг
+aboutsite|{{SITENAME}} дугайында
+aboutpage|Project:Дугайында
+copyrightpage|{{ns:project}}:Чогаалчының эргелери
+currentevents|Амгы үеде болуушкуннар
+currentevents-url|Project:Амгы үеде болуушкуннар
+disclaimers|Ажыглаар харысаалгазын чөрчүүрү (ойталаары)
+disclaimerpage|Project:Ажыглаар харысаалгазын ойталаары
+edithelp|Эдеринге дуза
+mainpage|Кол Арын
+mainpage-description|Кол Арын
+policy-url|Project:Чурум
+portal|Ниитилелдиң хаалгазы
+portal-url|Project:Ниитилелдиң хаалгазы
+privacy|Актыг бүзүрел дугуржулгазы
+privacypage|Project:Актыг бүзүрел дугуржулгазы
+badaccess|Алдаг:Эргеңер чок.
+versionrequired|МедиаВикиниң ~{0} үндүреризи херек
+ok|Чөп
+retrievedfrom|«~{0}» деп адрестен парлаттынган
+youhavenewmessages|Силерде ~{0} (~{1}) бар.
+youhavenewmessagesmulti|«~{0}» деп арында силерге чаа чагаалар бар.
+editsection|эдер
+editold|эдер
+viewsourceold|дөзү кодун көөрү
+editlink|эдер
+viewsourcelink|дөзү кодун көөрү
+editsectionhint|«~{0}» деп салбырны эдер
+showtoc|көргүзери
+hidetoc|чажырары
+viewdeleted|{{grammar:accusative\u007C~{0}}} көөр?
+restorelink|{{PLURAL:~{0}\u007C~{0} балаттынган өскерилгелер}}
+feedlinks|Агым:
+feed-invalid|Бижидилгениң агым хевири багай-дыр.
+site-rss-feed|~{0} RSS Медээ Агымы
+site-atom-feed|~{0} Atom Медээ Агымы
+page-rss-feed|«~{0}» RSS Медээ Агымы
+page-atom-feed|«~{0}» Atom Медээ Агымы
+red-link-title|~{0} (арны чок)
+nstab-main|Арын
+nstab-user|Ажыглакчының арыны
+nstab-media|Медиа арыны
+nstab-special|Тускай арын
+nstab-project|Төлевилелдиң арыны
+nstab-image|Файл
+nstab-mediawiki|Чагаа
+nstab-template|Майык
+nstab-help|Дуза
+nstab-category|Аңгылал
+nosuchaction|Ындыг кылыг чок
+nosuchspecialpage|Ындыг тускай арын чок
+error|Алдаг
+databaseerror|Медээ шыгжамыры алдаг
+laggedslavemode|'''Оваарымчалыг:''' Бо арында чаартыышкыннар чок болуп болур.
+readonly|шоочалаарынга медээ шыгжамыры
+missing-article|Данныйлар базазында тывар ужурлуг «~{0}» ~{1} деп арынның негеттинип турар сөзүглели тывылбаан.\n\nНургулайында ындыг байдал эрги шөлүг-биле казыттынган арынның өскерилге төөгүзүнче дамчып оралдажырга тыптыр.\n\nА шынында ындыг эвес болза, Силер программа хандырылгазының алдаанга душканыңар хөңнү.\n\nОоң дугайында кайы-бир [[Special:ListUsers/sysop\u007Cудуртукчуларга]], мүн URL-ин айытпышаан, дамчыдыңарам.
+missingarticle-rev|(үндүрериниң саны: ~{0})
+missingarticle-diff|(Ылгал: ~{0}, ~{1})
+internalerror|Иштики алдаг
+internalerror_info|Иштики алдаг: ~{0}
+badtitle|Багай ат
+badtitletext|Негеттинип турар арын ады меге, куруг, чок болза өске дылда азы интервикиде ады шын эвес айыттынган.\n\nАттарга ажыглавас ужурлуг демдектер, үжүктер бары чадапчок.
+viewsource|Дөзүн көөрү
+actionthrottled|Шеглээн дүрген
+exception-nologin|Кирбес
+welcomeuser|Кирип моорлаңар, %s!
+yourname|Aжыглакчының ады
+yourpassword|Чажыт сөс
+yourpasswordagain|Чажыт сөзүңерни катап бижиңер:
+remembermypassword|Мени бо компьютерде сактып алыры (~{0} {{PLURAL:~{0}\u007C1=хүн\u007Cхүн}}ге чедир)
+login|Кирери
+nav-login-createaccount|Кирери / бүрүткел бижикти чогаадыры
+userlogin|Кирери / бүрүткел бижикти чогаадыры
+userloginnocreate|Кирери
+logout|Үнери
+userlogout|Үнери
+notloggedin|Кирбес
+nologin|Силерде бүрүткел бижик чок? ~{0}
+nologinlink|Бүрүткел бижикти бүдүрери
+createaccount|Бүрүткел бижикти бүдүрери
+gotaccount|Силер бүрүтекнип алдыңар де? '''~{0}'''.
+gotaccountlink|Кирер
+userlogin-resetlink|Кирер бижик-саныңар уттуп алдыңар бе?
+createaccountmail|Э-чагаадан
+createaccountreason|Чылдагаан:
+badretype|Силерниң парлаан чажыт сөзүңер таарышпас.
+userexists|Силерниң парлаан адыңар амгы үеде ажыглаттынып турар.\nӨске аттан шилип алыңар.
+loginerror|Багай кирери
+loginsuccesstitle|Чедимчелиг кирери
+login-userblocked|Бо ажыглакчы blocked.  Кирери хоржок.
+password-login-forbidden|Бо ажыглакчының ады болгаш чажыт сөс хоржок.
+mailmypassword|Меңээ чаа чажыт сөсту чорудаары
+accountcreated|Бүрүткел бижикти бүдүрген
+accountcreatedtext|«~{0}» деп ажыглакчының бүрүткел бижиини бүдүрген.
+login-abort-generic|Системаже таптыг эвес кирип тур силер
+loginlanguagelabel|Дыл: ~{0}
+pt-userlogout|Үнер
+php-mail-error-unknown|PHP-ниң mail() ажыл-чорудулгазында билбес алдаг бар.
+changepassword|Чажыт сөстү өскертири
+resetpass_text|<!-- Маңаа сөзүглелди немерелээри -->
+resetpass_header|Чажыт сөстү катап чогаадып кылыры
+oldpassword|Эгри чажыт сөзүңер:
+newpassword|Чаа чажыт сөзүңер:
+retypenew|Чажыт сөзүңерни катап бижиңер:
+resetpass_submit|Чажыт сөстү чоогадып кылыр база кирер.
+resetpass_forbidden|Чажыт сөстү өскертивейн болбас
+resetpass-submit-loggedin|Чажыт сөстү өскертири
+resetpass-submit-cancel|Соксаары
+resetpass-temp-password|Түр чажыт сөс:
+passwordreset|Чажыт сөстү дүжүрү
+passwordreset-legend|Чажыт атты дүжүр
+passwordreset-username|Aжыглакчының ады:
+passwordreset-domain|Домен:
+passwordreset-email|Э-чагааның адреси:
+passwordreset-emailelement|Ажыглакчы ады: ~{0}\nТүр чажыт сөс: ~{1}
+changeemail|Э-чагааның адресин өскертири
+changeemail-oldemail|Амгы э-чагааның адреси:
+changeemail-newemail|Чаа э-чагааның адреси:
+changeemail-none|(чок)
+changeemail-submit|Э-чагааны өскертири
+extlink_sample|http://www.example.com холбааның ады
+extlink_tip|Даштыкы холбаа ("http://" чүве сактып алыр)
+nowiki_sample|Форматтаваан сөзүглелини бээр салыры
+nowiki_tip|Вики форматтаарын херекке албас
+image_sample|Чижек.jpg
+image_tip|Киир туткан файл
+media_sample|Чижек.ogg
+media_tip|Файлдың холбаазы
+sig_tip|Шак-биле хол үжүңер
+hr_tip|Доора шугум (көвей ажыглаваңар)
+summary|Түңнел:
+subject|Кол сөс:
+minoredit|Бо эдилге бичии-дир
+watchthis|Бо арынны хайгаараары
+savearticle|Арынны шыгжаары
+preview|Чижеглей көөрү
+showpreview|Чижеглей көөрү
+showdiff|Өскерлиишкиннерни көргүзери
+anoneditwarning|'''Кичээңгейлиг!''' Силер сайтче авторжуттунмаан силер.\nБо арынның өскертилге төөгүзүнче Силерниң IP-адрезиңер бижитинип каар.
+missingcommenttext|Тайылбырни адаанда чогаадыңар.
+summary-preview|Түңнелдү чижеглей көөрү:
+subject-preview|Кол сөс чижеглей көөрү:
+blockednoreason|чылдагаан чок
+nosuchsectiontitle|Бо салбыр чок
+loginreqlink|кирери
+accmailtitle|Чажыт сөс чоргустунган.
+accmailtext|A randomly generated password for [[User talk:~{0}\u007C~{0}]] has been sent to ~{1}.\n\nThe password for this new account can be changed on the ''[[Special:ChangePassword\u007Cchange password]]'' page upon logging in.
+newarticle|(Чаа)
+newarticletext|Амдыызында чаяатынмаан арынче шөлүглеп шилчий бердиңер.\nОну чаяарда адакы көзенекке сөзүглелден таналап киириңер ([~{0} тайылбыр арынын] тода көрүңер).. \nМаңаа алдаг аайы-биле шилчий берген болзуңарза, браузериңерниң "дедир"  деп таназын базыптыңар.
+noarticletext|Амдыызында ук арында сөзүглел чок.\nОл дилеп турар [[Special:Search/{{PAGENAME}}\u007Cарыныңар дугайында өске чүүлдерге бижээнин тып аап]] болур силер,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} журналдар аразынга айытканын көрүп болур силер] азы '''[{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} шак ындыг аттыг арын чаяап болур силер]'''</span>.,
+noarticletext-nopermission|Амдыызында ук арында сөзүглел чок.\nОл дилеп турар [[Special:Search/{{PAGENAME}}\u007Cарыныңар дугайында өске чүүлдерге бижээнин тып аап]] болур силер, азы\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} журналдар аразынга айытканын көрүп болур силер]. Шак ындыг ук арын чаяар чөшпээрелиңер чок.
+userpage-userdoesnotexist|«<nowiki>~{0}</nowiki>» деп ажыглакчы is not registered.\nPlease check if you want to create/edit this page.
+userpage-userdoesnotexist-view|«~{0}» деп ажыглакчы not registered.
+note|'''Тайылбыр:'''
+previewnote|'''Бо чүгле шенеп көөрү-дүр.'''\nБижик ам-даа шыгжатынмаан!
+editing|«~{0}» деп арынны эдери
+editingsection|Эдилге: «~{0}» (үлеш)
+editingcomment|«~{0}» деп арынны өскертип турар (чаа салбыр)
+yourtext|Силерниң сөзүглелиңер
+yourdiff|Ылгалдар
+templatesused|Бо арында ажыглаан {{PLURAL:~{0}\u007C1=Майык\u007CМайыктар}}:
+template-protected|(камгалаан)
+template-semiprotected|(четпес камгалаан)
+hiddencategories|Бо арын {{PLURAL:~{0}\u007C~{0} чажыт бөлүкке}} хамааржыр:
+permissionserrorstext-withaction|Мында «'''~{1}'''» силерниң эргеңер чок, {{PLURAL:~{0}\u007C1=чылдагааны\u007Cчылдагааннары}}:
+recreate-moveddeleted-warn|'''Кичээңейлиг. Ооң мурнунда казыттынган арынны катап тургузар деп тур Силер.'''\n\nОл арынны катап тургузары шынап-ла чугула бе, боданыңар.\nБо адаанда ол арынның казыышкыннар болгаш өскээр адалгалар журналдарын көргүскен.
+moveddeleted-notice|Бо арын ап каавыткан.\nАдаанда ап каавыткан биле өскээр адаан бижиктер шынзылгазын көргүскен.
+post-expand-template-inclusion-warning|Сагындырыг: Кошкан майыктарның ниити хемчээли дендии улуг.\nЧамдык майыктар коштунмаан боор.
+post-expand-template-inclusion-category|Кожар майыктарга чөшпээрээн хемчээлин ашкан арыннар
+post-expand-template-argument-warning|'''Кичээнгейлиг:''' бо арында тоң дора дээрге (по крайней мере) чаңгыс майыктыг, а ооң аргументизи эмин эрттир улуг калбаяр хемчээлдиг.\nЫндыг чергелиг аргументилерни эрттирип каан.
+post-expand-template-argument-category|Аргументилери салдынмаан майыктарлыг '''арыннар'''
+viewpagelogs|Бо арынның журналын көргүзери
+nohistory|Бо арынның өскерлиишкин төөгүзү чок.
+currentrev|Амгы үе үндүрери
+currentrev-asof|Амгы ~{0} үениң бижээни
+revisionasof|~{0} версиязы
+revision-info|~{1} киржикчиниң ~{0} хүнүнде киирилдези
+previousrevision|←Артык эрги үндүрери
+nextrevision|Артык чаа үндүрери→
+currentrevisionlink|Амгы үе үндүрери
+cur|амгы
+next|дараазында
+last|эрткен
+page_first|бирги
+page_last|сөөлгү
+histlegend|Версиялар шилиири: деңнээр дээн арыныңар версияларын имнеңеш, бээр базыптыңар '''{{int:compare-submit}}'''.<br />\nТайылбыр: '''({{int:cur}})''' — амгы версиядан ылгавыр; '''({{int:last}})''' — эрткен версиядан ылгавыр;  '''{{int:minoreditletter}}''' — биче өскерилгелер.
+history-fieldset-title|Каралаары төөгүзү
+history-show-deleted|Чүгле казыттынган
+histfirst|Эң эрги
+histlast|Эң чаа
+historysize|({{PLURAL:~{0}\u007C~{0} байт}})
+historyempty|(куруг)
+history-feed-title|Үндүрериниң төөгүзү
+history-feed-item-nocomment|~{0} {{grammar:genitive\u007C~{1}}} иштинде
+rev-deleted-comment|(өскерлиишкинниң түңнелин ап каан)
+rev-deleted-user|(ажыглакчының адын ап каан)
+rev-deleted-event|(журналдың кылыын ап каан)
+rev-delundel|көргүзери/чажырары
+rev-showdeleted|көргүзери
+revisiondelete|Үндүрерилерни ырадыры/диргисири
+revdelete-show-file-submit|Ийе
+revdelete-hide-comment|Өскерлиишкинниң комментарийн чажырар
+revdelete-hide-user|Чогаалчының адын/ИП-адресин чажырар
+revdelete-radio-set|Ийе
+revdelete-radio-unset|Чок
+revdelete-log|Чылдагаан:
+revdel-restore|көскүзүн өскертири
+pagehist|Арынның төөгүзү
+revdelete-otherreason|Өске/немелде чылдагаан:
+revdelete-reasonotherlist|Өске чылдагаан
+mergehistory-reason|Чылдагаан:
+revertmerge|Чарары
+history-title|«~{0}» деп арынның эдилге төөгүзү
+lineno|Одуруг ~{0}:
+compareselectedversions|Шилип алган хевирлери деңнээри
+editundo|чөрчүүрү
+searchresults|Түңнелдер
+searchresults-title|«~{0}» деп диле
+prevn-title|Эрткен ~{0} {{PLURAL:~{0}\u007C1=бижик\u007Cбижик}}
+nextn-title|Дараазында ~{0} {{PLURAL:~{0}\u007C1=бижик\u007Cбижик}}
+shown-title|Арынга ~{0} {{PLURAL:~{0}\u007Cтүңнел}} көргүзер
+viewprevnext|(~{0} {{int:pipe-separator}} ~{1}) (~{2}) көөрү
+searchmenu-exists|'''Бо викиде "[[:~{0}]]" деп арын бар.'''
+searchmenu-new|'''Бо викиде «[[:~{0}]]» арынны чогаадыры'''
+searchprofile-articles|үндезин арыннар
+searchprofile-images|Мультимедиа
+searchprofile-everything|Бүгүде
+searchprofile-advanced|Калбайтыр
+searchprofile-articles-tooltip|~{0} иштинден дилээри
+searchprofile-images-tooltip|Файлдар дилээри
+searchprofile-everything-tooltip|Шупту арыннардан дилээри (сумележиишкиннерден база)
+searchprofile-advanced-tooltip|Айыткан аттар делгемнеринден дилээри
+search-result-size|~{0} ({{PLURAL:~{1}\u007C~{1} сөс}})
+search-result-category-size|{{PLURAL:~{0}\u007C1=1 кежигүүн\u007C~{0} кежигүүн}} ({{PLURAL:~{1}\u007C1=1 аңгылам\u007C~{1} аңгылам}}, {{PLURAL:~{2}\u007C1=1 файл\u007C~{2} файл}})
+search-redirect|(~{0}-н шиглелге)
+search-section|(«~{0}» деп салбыр)
+search-suggest|Силер «~{0}» деп бодадыңар чадавас
+search-interwiki-more|(артык)
+searchrelated|холбаалыг
+searchall|шупту
+search-nonefound|Айыткан негелдениң түңнели чок
+powersearch-ns|Аттар делгемнеринден дилээри:
+powersearch-toggleall|Шупту
+preferences|Шилилгелер
+mypreferences|Шилилгелер
+prefs-edits|Өскерлиишкиннериңерниң саны:
+prefs-skin|Кеш
+skin-preview|Чижеглей көөрү
+prefs-personal|Ажыглакчының медээлери
+prefs-rc|Дээм чаагы өскерлиишкиннер
+prefs-watchlist|Хайгаарал даңзы
+prefs-watchlist-edits|Өскерлиишкиннерниң эң улуг саны expanded хайгаарал даңзында көргүзери:
+prefs-watchlist-edits-max|Эң улуг сан: 1000
+prefs-resetpass|Чажыт сөстү өскертири
+prefs-email|Э-чагаа эдиглери
+prefs-rendering|Түрү
+saveprefs|Шыгжаары
+restoreprefs|Шупту баштайгы ниити шилилгелерни restore
+prefs-editing|Өскертир
+rows|Одуруглар:
+columns|Баганалар:
+searchresultshead|Дилээр
+timezoneuseserverdefault|Викиниң ниити шилилгезин ажыглаары (~{0})
+servertime|Серверниң шагы:
+timezoneregion-africa|Африка
+timezoneregion-america|Америка
+timezoneregion-antarctica|Антарктика
+timezoneregion-arctic|Арктика
+timezoneregion-asia|Азия
+timezoneregion-australia|Австралия
+timezoneregion-europe|Европа
+prefs-searchoptions|Дилээшкин
+prefs-namespaces|Аттар делгемнери
+default|ниити
+prefs-files|файлдар
+prefs-custom-css|Бодуңар CSS
+prefs-custom-js|Бодуңар JavaScript
+youremail|Э-чагааңар:
+username|Aжыглакчының ады:
+prefs-memberingroups|Силерниң {{PLURAL:~{0}\u007C1=бөлүү\u007Cбөлүктери}}:
+prefs-registration|Кажан даңзылатканыл:
+yourrealname|Шын адыңар:
+yourlanguage|Дылыңар:
+yournick|Шола ат:
+badsiglength|Хол үжүүңер эмин узун.\nIt must not be more than ~{0} {{PLURAL:~{0}\u007C1=character\u007Ccharacters}} long.
+yourgender|Эр-кызы:
+gender-male|Эр
+gender-female|Кыс
+email|Э-чагаа
+prefs-help-email|Э-шуудаң адрезин айтыры албан эвес, ынчалза-даа, уруңуңар (парольуңар) чиде бээрге, ол херек апаар.
+prefs-help-email-others|Ол харылзаа медээлели база өске киржикчилерге хуу азы чугаалажылга арныңарга э-шуудаңыңар (e-mail) таварыштыр Силерниң-биле харылзажырынга ажыктыг. Ооң кадында Силерниң э-шуудаң адрезиңер кымга-даа көзүлбес.
+prefs-info|Кол медээлер
+prefs-signature|Хол үжүү
+prefs-diffs|Ылгалдар
+editusergroup|Ажыглакчының бөлгүмнерни өскертири
+editinguser|Changing user rights of user '''[[User:~{0}\u007C~{0}]]''' ([[User talk:~{0}\u007C{{int:talkpagelinktext}}]]{{int:pipe-separator}}[[Special:Contributions/~{0}\u007C{{int:contribslink}}]])
+userrights-editusergroup|Ажыглакчының бөлгүмнерни өскертири
+saveusergroups|Ажыглакчының бөлгүмнерни шыгжаары
+userrights-reason|Чылдагаан:
+group|Бөлгүм:
+group-user|Ажыглакчылар
+group-bot|Роботтар
+group-sysop|Эргелекчилер
+group-bureaucrat|Бюрократтар
+group-suppress|Хынакчылар
+group-all|(шупту)
+group-user-member|ажыглакчы
+group-autoconfirmed-member|{{GENDER:~{0}\u007Cautomatic бадыткаттынар ажыглакчы}}
+group-bot-member|{{GENDER:~{0}\u007Cробот}}
+group-sysop-member|{{GENDER:~{0}\u007Cэргелекчи}}
+group-bureaucrat-member|{{GENDER:~{0}\u007Cбюрократ}}
+group-suppress-member|{{GENDER:~{0}\u007Cхынакчы}}
+grouppage-user|{{ns:project}}:Ажыглакчылар
+grouppage-autoconfirmed|{{ns:project}}:Автоматуг бадыткаттынар ажыглакчылар
+grouppage-bot|{{ns:project}}:Роботтар
+grouppage-sysop|{{ns:project}}:Эргелекчилер
+grouppage-bureaucrat|{{ns:project}}:Бюрократтар
+grouppage-suppress|{{ns:project}}:Хынакчы
+right-read|Арыннарны номчууры
+right-edit|Арыннарны өскертири
+right-createtalk|Чугаалажырга арыннарны чогаадыры
+right-createaccount|Чаа бүрүткел бижиктерин бүдүрери
+right-move|Арыннарны шимчээри
+right-movefile|Файлдарны шимчээри
+right-editusercssjs|Өске ажыглакчыларның CSS база Javascript файлдарын өскертири.
+right-editusercss|Өске ажыглакчыларның CSS файлдарын өскертири.
+right-edituserjs|Өске ажыглакчыларның JavaScript файлдарын өскертири.
+newuserlogpage|Чаа ажыглакчы кырында журнал
+action-read|бо арынны номчууру
+action-edit|бо арынның эдилгези
+action-createpage|арыннарны чогаадыры
+action-createtalk|чугаалажырга арыннарны чогаадыры
+action-createaccount|бо бүрүткел бижиктерин бүдүрери
+action-move|бо арынны шимчээри
+action-movefile|бо файлды шимчээри
+action-sendemail|э-чагаалар чорудары
+nchanges|~{0} {{PLURAL:~{0}\u007Cөскерлиишкин}}
+recentchanges|Амгы өскерлиишкиннер
+recentchanges-legend|Амгы өскерлиишкиннерниң эдиглери
+recentchanges-summary|Бо агымда викиниң сөөлгү өскерлиишкиннерин көөрү.
+recentchanges-feed-description|Бо агымда викиниң сөөлгү өскерлиишкиннерин көөрү.
+recentchanges-label-newpage|Бо өскерлиишкин чаа арынны чогааткан.
+recentchanges-label-minor|Бо өскерлиишкин бичии
+recentchanges-label-bot|Бо эдилгени робот күүсеткен.
+recentchanges-label-unpatrolled|Бо өскертилге истетинмээн (патрульдаттынмаан)
+recentchanges-label-plusminus|Арынның сөзүглели бердинген түң байт-биле өскерилген
+recentchanges-legend-newpage|~{0} — чаа арын
+rcnotefrom|<strong>~{1}</strong> үеде <strong>~{0}</strong> чедир өскертилгелерни санаан.
+rclistfrom|~{2} ~{1} тура чаа өскерилгелерни көргүзер
+rcshowhideminor|Бичии өскерлиишкиннерни ~{0}
+rcshowhideminor-show|көргүзер
+rcshowhideminor-hide|чажырар
+rcshowhidebots|Роботтарны ~{0}
+rcshowhideliu|Кирген киржикчилерни ~{0}
+rcshowhideliu-show|көргүзер
+rcshowhideliu-hide|чажырар
+rcshowhideanons|Адыжок киржикчилерни ~{0}
+rcshowhideanons-show|көргүзер
+rcshowhideanons-hide|чажырар
+rcshowhidepatr|истээн өскерлиишкиннерни ~{0}
+rcshowhidepatr-show|көргүзер
+rcshowhidepatr-hide|чажырар
+rcshowhidemine|Эдиглеримни ~{0}
+rcshowhidemine-show|көргүзер
+rcshowhidemine-hide|чажырар
+rclinks|Сөөлгү ~{1} хүн иштинде болган ~{0} өскерлиишкиннерни көргүзер<br />~{2}
+diff|ылгал
+hist|төөгү
+hide|Чажырар
+show|Көргүзер
+minoreditletter|б
+newpageletter|Ч
+boteditletter|р
+number_of_watching_users_pageview|[~{0} хайгаараар {{PLURAL:~{0}\u007Cажыглакчы}}]
+newsectionsummary|/* ~{0} */ чаа салбыр
+rc-enhanced-expand|Тодаларны көргүзери (JavaScript херек)
+rc-enhanced-hide|Тодаларны чажырары
+recentchangeslinked|Хамааржыр өскерлиишкиннер
+recentchangeslinked-toolbox|Хамааржыр өскерлиишкиннер
+recentchangeslinked-title|«~{0}» деп арынга хамаарыштырган өскерлиишкиннер
+recentchangeslinked-summary|Айыткан арынның (азы айыткан аңгылалга хамаарышкан) шөлүлүглериниң чедер арыннарнының чаа өскерилгер даңзызы.\n[[Special:Watchlist\u007CСилерниң хайгаарал даңзызынче]] кирип турар арыннарны '''ылгап каан'''.
+recentchangeslinked-page|Арынның ады:
+recentchangeslinked-to|Айыткан арынче шөлүп турар арыннарга өскерилгелерни көргүзер
+upload|Файл чүдүрер
+uploadbtn|Файлды салыры
+uploadnologin|Кирбес
+uploaderror|Кииреринге алдаг
+uploadlogpage|Кожулгалар сеткүүлү
+filename|файлдың ады:
+filedesc|Түңнел
+fileuploadsummary|Түңнел:
+filesource|Эгези:
+savefile|Файлды шыгжаары
+upload-maxfilesize|Файлдың эң улуг хемчээли: ~{0}
+watchthisupload|Бо арынны хайгаараары
+upload-file-error|Иштики алдаг
+upload-misc-error|Билбес кииреринге алдаг
+http-read-error|HTTP-биле номчуур алдаг.
+license|Хоойлужудары:
+license-header|Хоойлужудары
+imgfile|файл
+listfiles|Файл даңзызы
+listfiles_name|Ат
+listfiles_user|Ажыглакчы
+listfiles_size|Хемчээл
+listfiles_description|Тодарадып бижээни
+listfiles_count|Үндүрерилер
+file-anchor-link|Файл
+filehist|Файлдың төөгүзү
+filehist-help|Ол үеде файлдың көстүрүн көөрде, дата/үеже базыптыңар.
+filehist-deleteall|шуптуну ырадыры
+filehist-deleteone|ырадыры
+filehist-revert|эгидип тургузары
+filehist-current|амгы
+filehist-datetime|Ай, Хүн/Шак
+filehist-thumb|Бичии чурумал
+filehist-thumbtext|~{0} хамааржыр хевириниң биче чурумалы (миниатюразы)
+filehist-user|Ажыглакчы
+filehist-dimensions|Хемчээлдери
+filehist-filesize|Файл хемчээли
+filehist-comment|Тайылбыр
+imagelinks|Файлдың ажыглаашкыны
+linkstoimage|Бердинген файлче дараазында {{PLURAL:~{0}\u007C1=арын шөлүдүп тур\u007C~{0} арын шөлүдүп тур}}:
+nolinkstoimage|Бердинген файлче шөлүп турар арыннар чок.
+sharedupload-desc-here|Моон ~{0} алган файл өске төлевилелдерге ажыглаттынып болур.\nОоң [~{1} допчу тайылбыр арынындан] медеглели адаанда бердинген.
+filerevert|~{0} эгидип тургузары
+filerevert-legend|Файлды эгидип тургузары
+filerevert-comment|Чылдагаан:
+filerevert-submit|Эгидип тургузары
+filedelete|«~{0}» деп файлды ырадыры
+filedelete-legend|Файлды ырадыры
+filedelete-comment|Чылдагаан:
+filedelete-submit|Ырадыры
+filedelete-otherreason|Өске/немелде чылдагаан:
+filedelete-reason-otherlist|Өске чылдагаан
+mimetype|MIME хевири:
+download|алыры
+unwatchedpages|Хайгаарабас арыннар
+unusedtemplates|Ажыглаан эвес майыктар
+unusedtemplateswlh|өске холбаалар
+randompage|Душ арын
+brokenredirects-edit|өскертири
+brokenredirects-delete|ырадыры
+withoutinterwiki|Дыл холбаалар эвес арыннар
+withoutinterwiki-submit|Көргүзер
+fewestrevisions|Эң эвээш үндүрери арыннар
+nbytes|~{0} {{PLURAL:~{0}\u007Cбайт}}
+ncategories|~{0} {{PLURAL:~{0}\u007Cаңгылал}}
+nlinks|~{0} {{PLURAL:~{0}\u007Cхолбаа}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cкежигүн}}
+nrevisions|~{0} {{PLURAL:~{0}\u007Cүндүрери}}
+nviews|~{0} {{PLURAL:~{0}\u007Cкөрүш}}
+specialpage-empty|Бо илеткелдиң түңнели чок.
+lonelypages|Чааскаан арыннар
+uncategorizedpages|Бөлүк эвес арыннар
+uncategorizedcategories|Аңгылалдатынмаан аңгылалдар
+uncategorizedimages|Аңгылалдаваан файлдар
+uncategorizedtemplates|Аңгылалдаваан майыктар
+unusedcategories|Ажыглаваан бөлүктер
+unusedimages|Ажыглаваан файлдар
+wantedcategories|Күзээринге бөлүктер
+wantedpages|Күзээрүнге арыннар
+mostlinked|Эң холбаалар арыннар
+mostlinkedcategories|Эң холбаалар бөлүктер
+mostlinkedtemplates|Эң холбаалар майыктар
+mostcategories|Эңне бөлүктер арыннар
+mostimages|Эң холбаалар файлдар
+prefixindex|Арыннар аттарының эгези-биле айтыкчы
+shortpages|Чолдак арыннар
+longpages|Узун арыннар
+protectedpages|Камгалаган арыннар
+listusers|Ажыглакчылар даңзызы
+usereditcount|~{0} {{PLURAL:~{0}\u007Cэдилге}}
+usercreated|~{0} хүнде ~{1} {{GENDER:~{2}\u007Cбүрүткенип алган}}
+newpages|Чаа арыннар
+newpages-username|Ажыглакчының ады:
+ancientpages|Эң эрги арыннар
+move|Шимчээри
+movethispage|Бо арынны шимчээри
+pager-newer-n|{{PLURAL:~{0}\u007Cартык чаа}}
+pager-older-n|{{PLURAL:~{0}\u007Cартык эски}}
+booksources|Номнарның үнген дөзү
+booksources-search-legend|Номнуң медээлерин дилээри
+specialloguserlabel|Күүседикчи:
+speciallogtitlelabel|Target (aтка азы ажыглакчыга):
+log|Журналдар
+allarticles|Шупту арыннар
+allpagessubmit|Күүcедири
+sp-deletedcontributions-contribs|дадывыр
+linksearch|Даштыкы холбааларга дилээри
+linksearch-ns|Аттар делгеми:
+linksearch-ok|Дилээри
+linksearch-line|~{0}-же ~{1}-ден шөлүлге
+listusers-submit|Көргүзери
+activeusers-hidebots|Роботтарны чажырары
+activeusers-hidesysops|Эргелекчыларны чажырары
+listgrouprights-group|Бөлүк
+listgrouprights-members|(кежигүннүң даңзызы)
+emailuser|Бо ажыглакчыга э-чагааны чорудаары
+defemailsubject|{{grammar:ablative\u007C{{SITENAME}}}} э-чагаа
+emailusernamesubmit|Күүcедири
+emailfrom|Кымдан:
+emailto|Кымга:
+emailsubject|Кол сөс:
+emailmessage|Чагаа:
+emailsend|Чорудары
+watchlist|Хайгаарал даңзызы
+mywatchlist|Хайгаарал даңзы
+watchlistfor2|~{0}, силерге ~{1}
+nowatchlist|Силерниң хайгаарал даңзыңар куруг.
+watchnologin|Кирбес
+watch|Хайгаараары
+watchthispage|Бо арынны хайгаараары
+unwatch|Хайгааравас
+unwatchthispage|Бо арынны хайгаарабас
+watchlist-details|Чугаалажылга арыннарын санаваска, хайгаарал даңзыңарда {{PLURAL:~{0}\u007C~{0} арын}} бар.
+wlshowlast|Сөөлү ~{0} шак болгаш ~{1} хүн иштинде  көргүзери
+watchlist-options|Хайгаарал даңзының эдиглери
+watching|Хайгаарап турар...
+unwatching|Хайгааравайн турар...
+enotif_impersonal_salutation|{{grammar:genitive\u007C{{SITENAME}}}} ажыглакчызы
+enotif_anon_editor|ат чок киржикчи ~{0}
+changed|өскертти
+deletepage|Арынны ырадыры
+delete-confirm|«~{0}» деп арынны ырадыры
+delete-legend|Ырадыры
+actioncomplete|Ажыл доосту
+actionfailed|Кылыг болдунмаан
+dellogpage|казыышкыннар
+deletecomment|Чылдагаан:
+deleteotherreason|Өске/немелде чылдагаан:
+deletereasonotherlist|Өске чылдагаан
+rollbacklink|эглир
+protectlogpage|Камгалал кырында журнал
+protectedarticle|«[[~{0}]]» деп арынны камгалаан
+protectcomment|Чылдагаан:
+protect-default|Allow all users
+protect-level-sysop|Чүгле эргелекчылар
+protect-otherreason|Өске/немелде чылдагаан:
+protect-otherreason-op|Өске чылдагаан
+restriction-type|Чөпшээрел:
+minimum-size|Эң биче хемчээл
+pagesize|(байттар)
+restriction-edit|Өскертири
+restriction-move|Шимчээри
+undeletebtn|Диргисир
+undeletelink|көөрү/диргисири
+undeleteviewlink|көөрү
+undeletecomment|Чылдагаан:
+undelete-search-submit|Дилээр
+undelete-show-file-submit|Ийе
+namespace|Аттар делгеми:
+invert|Шилээнин аңдарар. (Обратить выбранное)
+contributions|{{GENDER:~{0}\u007CАжыглакчының}} салыышкыннары
+contributions-title|«~{0}» деп ажыглакчының салыышкыннары
+mycontris|Дадывыр
+contribsub2|~{0} (~{1})
+uctop|(амгы)
+month|Айдан:
+year|Чылдан:
+sp-contributions-newbies|Чүгле чаа кежигүннерниң салыышкыннарын көргүзери
+sp-contributions-blocklog|кызыгаарлаашкынның журналы
+sp-contributions-uploads|киирген чүүлдер
+sp-contributions-logs|журналдар
+sp-contributions-talk|чугаалажыры
+sp-contributions-search|Салыышкыннарын дилээри
+sp-contributions-username|ИП-адрес азы ажыглачының ады:
+sp-contributions-toponly|Чазалгаларның чүгле сөөлгү хевирлерин көргүзер
+sp-contributions-submit|Дилээри
+whatlinkshere|Шөлүлгелерни бээр
+whatlinkshere-title|«~{0}» деп арынга шөлүтген арыннар
+whatlinkshere-page|Арын:
+linkshere|Адаандагы арыннар бээр «'''[[:~{0}]]'''» шөлүдүп турарлар:
+nolinkshere|'''[[:~{0}]]''' деп арынче шөлүтткен арыннар чок.
+isredirect|шиглидер арын
+istemplate|киирткен арыннар
+isimage|файлдың холбаазы
+whatlinkshere-prev|{{PLURAL:~{0}\u007C1=эрткен\u007Cэрткен ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007C1=дараазында\u007Cдараазында ~{0}}}
+whatlinkshere-links|← холбаалар
+whatlinkshere-hideredirs|~{0}-че шиглиглер
+whatlinkshere-hidetrans|~{0} даңзылааннар
+whatlinkshere-hidelinks|холбааларны ~{0}
+whatlinkshere-hideimages|Файлдың холбааларын ~{0}
+whatlinkshere-filters|Шүүрлер
+block|Ажыглакчыны кызыгаарлаары
+blockip|Ажыглакчыны кызыгаарлаары
+blockip-legend|Ажыглакчыны кызыгаарлаары
+ipaddressorusername|ИП-адрес азы aжыглaкчының aды
+ipbreason|Чылдагаан:
+ipbsubmit|Бо ажыглакчыны кызыгаарлаары
+ipbother|Өске шак:
+ipboptions|2 шак:2 hours,1 хүн:1 day,3 хүн:3 days,1 чеди-хонук:1 week,2 чеди-хонук:2 weeks,1 ай:1 month,3 ай:3 months,6 ай:6 months,1 чыл:1 year,төнмес-батпас:infinite
+badipaddress|Багай ИП-адрес
+ipblocklist|Kызыгаарлаттынган ажыглакчылар
+blocklist-reason|Чылдагаан
+ipblocklist-submit|Дилээр
+infiniteblock|кезээ-мөңгеде
+blocklink|кызыгаарлаары
+unblocklink|ажыдып хостаар
+change-blocklink|кызыгаарлаашкынны өскертири
+contribslink|дадывыр
+blocklogpage|Кызыгаарлаашкынның журналы
+blocklogentry|, [[~{0}]] ~{1} дургузунда кызыгаарлаттынган: ~{2}
+block-log-flags-anononly|чүгле адыжок киржикчилер
+block-log-flags-nocreate|Кижилер бүрүткээри хоруглуг
+block-log-flags-hiddenname|ажыглакчының ады чажырган
+lockdb|Медээ шыгжамырын шоочалаар
+unlockdb|Медээ шыгжамырын ажыттынар
+lockbtn|Медээ шыгжамырын шоочалаар
+unlockbtn|Медээ шыгжамырын ажыттынар
+move-page|«~{0}» деп арынны шимчээри
+move-page-legend|Арынны шимчээр
+movearticle|Бо арынны шимчээри:
+newtitle|Чаа ат:
+move-watch|Бо арынны хайгаараары
+movepagebtn|Арынны шимчээри
+movelogpage|Шимчээринге журнал
+movereason|Чылдагаан:
+revertmove|эгидип тургузары
+delete_and_move|Ырадыры болгаш шимчээри
+export|Арынар үндүр дамчыдары
+allmessages|Системниң дыңнадыглары
+allmessagesname|Ат
+allmessagesdefault|Ниити сөзүглел
+allmessagescurrent|Амгы сөзүглел
+allmessages-filter-all|Шупту
+allmessages-language|Дыл:
+allmessages-filter-submit|Күүcедири
+thumbnail_error|Биче чурумал (миниатюра) чаяарының алдаа: ~{0}
+import-comment|Тайылбыр:
+import-logentry-upload-detail|~{0} {{PLURAL:~{0}\u007Cүндүрери}}
+tooltip-pt-userpage|Силерниң ажыглакчы арыныңнар
+tooltip-pt-mytalk|Силерниң чугаалажыр арыныңар
+tooltip-pt-preferences|Силерниң шилилгеңер
+tooltip-pt-watchlist|Карактап (хынап) турар өскертилгелерге хамааржыр арыннарның даңзызы
+tooltip-pt-mycontris|Силерниң салыышкыннарыңарның даңзызы
+tooltip-pt-login|Маңаа системаже киир бүрүткенип болур, ынчалза-даа ол албан эвес.
+tooltip-pt-logout|Үнери
+tooltip-ca-talk|Бо арын дугайында чыгаалажыры
+tooltip-ca-edit|Силер бо арынны эдип болур. Шыгжаар мурунда чижеглеп көрем.
+tooltip-ca-addsection|Чаа салбыр чаяар
+tooltip-ca-viewsource|Бо арын камгалаттырган.\nДөзү кодун көрүп болур силер.
+tooltip-ca-history|Арынның мурнуку өскерлиишкиннери
+tooltip-ca-protect|Бо арынны камгалаары
+tooltip-ca-delete|Бо арынны ырадыры
+tooltip-ca-move|Бо арынны шимчээри
+tooltip-ca-watch|Силерниң хайгаарал даңзызынга бо арынны немерелээри
+tooltip-ca-unwatch|Силерниң хайгаарал даңзызындан бо арынны ырадыры
+tooltip-search|{{grammar:locative\u007C{{SITENAME}}}} дилээри
+tooltip-search-go|Шак ындыг аттыг арынче щилчиир
+tooltip-search-fulltext|Бо бижике арыннардан дилээри
+tooltip-p-logo|Кол Арын
+tooltip-n-mainpage|Кол Арынче шилчиир
+tooltip-n-mainpage-description|Кол Арынче кирери
+tooltip-n-portal|Төлевилел дыгайында, чүнү кылып болур силер, кайда чүү чыдарыл
+tooltip-n-currentevents|Ам болуп турар таварылгалар даңзызы
+tooltip-n-recentchanges|Викиниң энир өскерлиишкиннери
+tooltip-n-randompage|Душ арынны көөрү
+tooltip-n-help|Төлевилелдиң тайылбыры «{{SITENAME}}»
+tooltip-t-whatlinkshere|Бүгү маңаа шөлүтген вики арыннарның даңзызы
+tooltip-t-recentchangeslinked|Бо арындан шөлүткен өске арыннарның сөөлгү өскерлиишкиннери
+tooltip-feed-rss|Бо арының РСС медээ агымы
+tooltip-feed-atom|Бо арының Атом медээ агымы
+tooltip-t-contributions|Бо ажыглакчының салыышкыннарының даңзазын көөрү.
+tooltip-t-emailuser|Бо ажыглакчыга э-чагааны чорудаары
+tooltip-t-upload|Файлдарны киирери
+tooltip-t-specialpages|Шупту тускай арыннар даңзызы
+tooltip-t-print|Бо арынның парлаттынар хевири
+tooltip-t-permalink|Арынның бо янзы-хевириниң турум шөлүлгези
+tooltip-ca-nstab-main|Допчы арынын көөрү
+tooltip-ca-nstab-user|Ажыглакчының арынын көөрү
+tooltip-ca-nstab-media|Медиа арынын көөрү
+tooltip-ca-nstab-special|Бо бөлгээт арын-дыр (служебная страница), ооң эдери болдунмас.
+tooltip-ca-nstab-project|Төлевилелдиң арынын көөрү
+tooltip-ca-nstab-image|Файлдың арынын көөрү
+tooltip-ca-nstab-template|Майыкты көөрү
+tooltip-ca-nstab-help|Дуза арынын көөрү
+tooltip-ca-nstab-category|Аңгылалдың арынын көөрү
+tooltip-minoredit|Бо өскертилгени "биче" деп демдеглээр
+tooltip-save|Силерниң өскерлиишкиннериңерни шыгжаары
+tooltip-preview|Шыгжаар мурнунда силерниң өскерлиишкиннерин чижеглеп көрем!
+tooltip-diff|Бо сөзүглелге хамаарыштыр кандыг өскертилгелерни кылган Силер - ону көргүзер.
+tooltip-compareselectedversions|Бо арынның шилиттинген ийи хевиринниң ылгалын көөр.
+tooltip-watch|Силерниң хайгаарал даңзызынга бо арынны немерелээри
+tooltip-rollback|Сөөлгү киржикчиниң өскерилгелерин чаңгыс баскаш, ойталаар
+tooltip-undo|Киирген эдигни казааш, ойталалдың чылдагаанын айтыр аргалыг мурнай көргүзүүн көргүзер.
+tooltip-summary|Кысказы-биле бижиңер
+anonymous|{{grammar:genitive\u007C{{SITENAME}}}} адыжок {{PLURAL:~{0}\u007Cкиржикчизи}}
+pageinfo-toolboxlink|Арын дугайында медээлел
+filedelete-missing|«~{0}» деп файл чок, ынчангаш ол ап калдынмас.
+previousdiff|← Артык эрги үндүрери
+nextdiff|Артык чаа үндүрери →
+thumbsize|Бичии чурумалдың хемчээли:
+widthheightpage|~{0}x~{1}, ~{2} {{PLURAL:~{2}\u007Cарын}}
+file-info|файлдың хемчээли: ~{0}, MIME хевири: ~{1}
+file-info-size|~{0} × ~{1} пиксел, Файл хемчээли: ~{2}, MIME хевири: ~{3}
+file-info-size-pages|~{0} × ~{1} пикcелдер, файл хемчээли: ~{2}, MIME хевири: ~{3}, ~{4} {{PLURAL:~{4}\u007C1=арын\u007Cарын}}
+file-nohires|Оон улуг хевири чок
+svg-long-desc|SVG файл, ~{0} x ~{1} пиксел, файл хемчээли: ~{2}
+show-big-image|Улуг чурумал
+show-big-image-size|~{0} × ~{1} пиксел
+newimages-legend|Шүүрү
+noimages|Nothing to see.
+ilsubmit|Дилээр
+seconds|{{PLURAL:~{0}\u007C~{0} секунда\u007C~{0} секунда}}
+minutes|{{PLURAL:~{0}\u007C~{0} минут\u007C~{0} минут}}
+hours|{{PLURAL:~{0}\u007C1=~{0} шак\u007C~{0} шак}}
+days|{{PLURAL:~{0}\u007C1=~{0} хүн\u007C~{0} хүн}}
+bad_image_list|Формады мындыг боор ужурлуг:\n\nЧүгле даңзының идегеттери (элементилери) санатынар боор (* деп демдектен эгелээн одуруглар).\nОдуругнуң бирги шөлүдүү салдынмас чурумалче шөлүдүг болуру албан.\nОл-ла одуругнуң арткан шөлүдүглери онзагай кылдыр азы чурумал капсырып болур чүүлдер кылдыр санаттынар.
+metadata|Чурумал дугайында медээлер
+metadata-help|Бо файл немелде данныйларлыг:санныг камералар азы сканнерлер дугайында медеглел. Файл чаяанының соонда эдидип турган болза, чамдык параметрлери амгы чурумалга меге кылдыр хамааржып болур.
+metadata-fields|Бо даңзыда айыткан чурумалдар метаданныйларның кезектери чурумалдың арынынга көстүп кээр, метаданныйлар таблицазын дүрүп каан болур. \nАрткан кезектер аайлаан ёзугаар чажыт көстүр.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|Калбаа
+exif-imagelength|Бедик
+exif-imagedescription|Чурумалдың ады
+exif-artist|Чогаадыкчы
+exif-usercomment|Ажыглакчының тайылбырлары
+exif-jpegfilecomment|JPEG фалй тайылбыры
+exif-headline|Баш ат
+exif-languagecode|Дыл
+exif-pngfilecomment|PNG фалй тайылбыры
+exif-giffilecomment|GIF фалй тайылбыры
+exif-subjectdistancerange-2|Чоок көрүш
+exif-subjectdistancerange-3|ырак көрүш
+exif-dc-type|Медиа хевири
+exif-iimcategory-sci|Эртем база техника
+exif-iimcategory-spo|Спорт
+exif-iimcategory-wea|Агаар
+namespacesall|шупту
+monthsall|шупту
+recreate|Катап чогаадыры
+confirm_purge_button|Чөп
+confirm-watch-button|Чөп
+confirm-unwatch-button|Чөп
+imgmultipageprev|← эрткен арын
+imgmultipagenext|дараазында арын →
+imgmultigo|Go!
+table_pager_next|Дараазында арын
+table_pager_prev|Эрткен арын
+table_pager_first|Бирги арын
+table_pager_last|Сөөлгү арын
+table_pager_limit_submit|Күүcедири
+table_pager_empty|Түңнеллер чок
+autosumm-new|Чаа арын чаяатынган: «~{0}»
+watchlistedit-normal-title|Хайгаарал даңзыны өскертири
+watchlistedit-normal-submit|Аттарны ырадыры
+watchlistedit-raw-title|Чиг хайгаарал даңзыны өскертири
+watchlistedit-raw-legend|Чиг хайгаарал даңзыны өскертири
+watchlistedit-raw-titles|Aттар:
+watchlisttools-view|Даңзы арыннарының өскерлиишкиннери
+watchlisttools-edit|Хайгаарал даңзыны көөрү/эдери
+watchlisttools-raw|Чиг хайгаарал даңзыны өскертири
+duplicate-defaultsort|Кичээнгейлиг! Үндезин сорттаашкын дүлгүүрү «~{1}» биеэги үндезин сорттаашкын дүлгүүрүн «~{0}» ажыр тодарадып турар.
+version|Үндүрери
+version-specialpages|Тускай арыннар
+version-other|Өске
+version-software-version|Үндүрери
+fileduplicatesearch-filename|Файлдың ады:
+fileduplicatesearch-submit|Дилээри
+fileduplicatesearch-info|~{0} × ~{1} пиксел<br />Файл хемчээли: ~{2}<br />MIME хевири: ~{3}
+specialpages|Тускай арыннар
+specialpages-group-other|Өске тускай арыннар
+specialpages-group-pages|Арыннарның даңзызы
+specialpages-group-pagetools|Арын херекселдери
+blankpage|Куруг арын
+external_image_whitelist| #Бо одуругну ол-ла хевээр арттырыңар<pre>\n#Турум илередиглер (регулярные выражения) фрагментилерин маңаа салыңар (// аразынга турар кезээн)\n#Даштыкы чурумалдар URL-биле олар холбаашкан болур.\n#Дужа бергеннери чурумалдар кылдыр көстүп келир, артканнары чурумалдарже шөлүг кылдыр көстүр.\n# "#" деп демдектен эгелээн одуругларны саналдар кылдыр билдинер.\n#Одуруглар регистрге кунук эвес (билинмес)\n\n#Турум илередиглер фрагментилерин бо одуругнуң кырынга салыңар. А бо одуругну олчаан хевээр арттырыңар</pre>
+tag-filter|[[Special:Tags\u007Cдемдек]] шүүрү:
+tag-filter-submit|Шүүрү
+tags-title|Демдеглелдер
+tags-edit|өскертири
+tags-hitcount|~{0} {{PLURAL:~{0}\u007Cөскерлиишкин}}
+comparepages|Арыннарны дөмейлеп көөрү
+compare-page1|Арын 1
+compare-page2|Арын 2
+compare-submit|Дөмейлээри
+htmlform-submit|Күүcедири
+htmlform-selectorother-other|Өске
+rightsnone|(чок)
+feedback-cancel|Соксаары
+feedback-message|Чагаа:
+feedback-subject|Кол сөс:
+searchsuggest-search|Дилээшкин
+duration-seconds|~{0} {{PLURAL:~{0}\u007Cсекунда\u007Cсекунда}}
+duration-minutes|~{0} {{PLURAL:~{0}\u007Cминут\u007Cминут}}
+duration-hours|~{0} {{PLURAL:~{0}\u007Cшак\u007Cшак}}
+duration-days|~{0} {{PLURAL:~{0}\u007C1=хүн\u007Cхүн}}
+duration-weeks|~{0} {{PLURAL:~{0}\u007Cчеди-хонук\u007Cчеди-хонук}}
+duration-years|~{0} {{PLURAL:~{0}\u007Cчыл\u007Cчыл}}
+duration-decades|~{0} {{PLURAL:~{0}\u007C1=он хонук\u007Cон хонук}}
+duration-centuries|~{0} {{PLURAL:~{0}\u007C1=чүс чыл\u007Cчүс чыл}}
+wikibase-entitieswithoutlabel-submit|Диле
+']:>
+).lang
+;

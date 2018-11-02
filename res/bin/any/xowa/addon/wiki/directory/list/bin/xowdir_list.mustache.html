@@ -1,0 +1,34 @@
+<div id='cur_help_div' class='xohelp_div'>
+  <div id='cur_help_msg' class='xohelp_msg'>
+    <b>Buttons</b>
+    <div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_list_add'>&nbsp;</span><span class='xohelp_row_text'>Create a new wiki</span></div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_doc_import'>&nbsp;</span><span class='xohelp_row_text'>Import an existing wiki</span></div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_doc_open'>&nbsp;</span><span class='xohelp_row_text'>Open the wiki</span></div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_app_configure'>&nbsp;</span><span class='xohelp_row_text'>Configure wiki settings</span></div>
+    </div>
+  </div>
+</div>
+<div class='main_body' id='main_body'>
+  <div class='list_tbl'>
+    <div class='xotbl_head_row'>
+      <div class='xotbl_head_text cur_head_text'>List</div>
+      <div class='xotbl_head_btns cur_head_btns'> 
+        <a class='xoimg_btn_x24 xoimg_list_add'         title='add a new wiki'          href='/site/home/wiki/Special:XowaWikiItem'>&nbsp;</a>
+        <a class='xoimg_btn_x24 xoimg_doc_import'       title='import an existing wiki' href='' onclick='return xo.wiki_directory.import_wiki()' accesskey='i'>&nbsp;</a>
+        <a class='xoimg_btn_x24 xoimg_help_tip'         title='view help'               href='javascript:void(0)' onclick='return xo.help.toggle("cur")'>&nbsp;</a>
+      </div>
+    </div>  
+    {{#itms}}
+    <div class="xotbl_data_row flex_div">
+      <a class='domain_name ' title='open' href='/site/{{domain}}/wiki/{{mainpage}}'>{{name}}</a>
+      <div>
+        <a class='xoimg_btn_x24 xoimg_doc_open'         title='open'               href='/site/{{domain}}/wiki/{{mainpage}}'>&nbsp;</a>
+      </div>  
+      <div>
+        <a class='xoimg_btn_x24 xoimg_app_configure'    title='configure'          href='/site/home/wiki/Special:XowaWikiItem?domain={{domain}}'>&nbsp;</a>
+      </div>
+    </div>
+    {{/itms}}
+  </div>
+</div>

@@ -1,0 +1,2123 @@
+numbers {
+  separators {
+    clear;
+    set('.', '٫');
+    set(',', '٬');
+  }
+  digits {
+    clear;
+    set('0', '۰');
+    set('1', '۱');
+    set('2', '۲');
+    set('3', '۳');
+    set('4', '۴');
+    set('5', '۵');
+    set('6', '۶');
+    set('7', '۷');
+    set('8', '۸');
+    set('9', '۹');
+  }
+}
+this
+.fallback_load('kk-cyrl')
+.dir_rtl_('y')
+.ns_names
+  .load_text(
+<:['
+-2|تاسپا
+-1|ارنايى
+1|تالقىلاۋ
+2|قاتىسۋشى
+3|قاتىسۋشى تالقىلاۋى
+5|$1 تالقىلاۋى
+6|سۋرەت
+7|سۋرەت تالقىلاۋى
+8|مەدىياۋىيكىي
+9|مەدىياۋىيكىي تالقىلاۋى
+10|ۇلگى
+11|ۇلگى تالقىلاۋى
+12|انىقتاما
+13|انىقتاما تالقىلاۋى
+14|سانات
+15|سانات تالقىلاۋى
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-2|Таспа
+-1|Арнайы
+1|Талқылау
+2|Қатысушы
+3|Қатысушы талқылауы
+5|$1 талқылауы
+6|Сурет
+7|Сурет талқылауы
+8|МедиаУики
+9|МедиаУики талқылауы
+10|Үлгі
+11|Үлгі талқылауы
+12|Анықтама
+13|Анықтама талқылауы
+14|Санат
+15|Санат талқылауы
+-2|Taspa
+-1|Arnaýı
+1|Talqılaw
+2|Qatıswşı
+3|Qatıswşı talqılawı
+5|$1 talqılawı
+6|Swret
+7|Swret talqılawı
+8|MedïaWïkï
+9|MedïaWïkï talqılawı
+10|Ülgi
+11|Ülgi talqılawı
+12|Anıqtama
+13|Anıqtama talqılawı
+14|Sanat
+15|Sanat talqılawı
+8|مەدياۋيكي
+9|مەدياۋيكي تالقىلاۋى
+10|ٷلگٸ
+11|ٷلگٸ تالقىلاۋى
+10|ٴۇلگٴى
+11|ٴۇلگٴى تالقىلاۋى
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Allmessages|بارلىق_حابارلار
+Allpages|بارلىق_بەتتەر
+Ancientpages|ەسكى_بەتتەر
+Block|جايدى_بۇعاتتاۋ~IP_بۇعاتتاۋ
+Booksources|كىتاپ_قاينارلارى
+BrokenRedirects|جارامسىز_ايداعىشتار~جارامسىز_ايداتۋلار
+Categories|ساناتتار
+ChangePassword|قۇپىيا_سوزدى_قايتارۋ
+Confirmemail|قۇپتاۋ_حات
+Contributions|ۇلەسى
+CreateAccount|جاڭا_تىركەلگى~تىركەلگى_جاراتۋ
+Deadendpages|تۇيىق_بەتتەر
+DoubleRedirects|شىنجىرلى_ايداعىشتار~شىنجىرلى_ايداتۋلار
+Emailuser|حات_جىبەرۋ
+Export|سىرتقا_بەرۋ
+Fewestrevisions|ەڭ_از_تۇزەتىلگەن
+Import|سىرتتان_الۋ
+Invalidateemail|قۇپتاماۋ_حاتى
+BlockList|بۇعاتتالعاندار
+Listadmins|اكىمشىلەر~اكىمشى_تىزىمى
+Listbots|بوتتار~ٴبوتتار_ٴتىزىمى
+Listfiles|سۋرەت_تىزىمى
+Listgrouprights|توپ_قۇقىقتارى_تىزىمى
+Listredirects|ٴايداتۋ_ٴتىزىمى
+Listusers|قاتىسۋشىلار~قاتىسۋشى_تىزىمى
+Lockdb|دەرەكقوردى_قۇلىپتاۋ
+Log|جۋرنال~جۋرنالدار
+Lonelypages|ساياق_بەتتەر
+Longpages|ۇزىن_بەتتەر~ۇلكەن_بەتتەر
+MergeHistory|تارىيح_بىرىكتىرۋ
+MIMEsearch|MIME_تۇرىمەن_ىزدەۋ
+Mostcategories|ەڭ_كوپ_ساناتتار_بارى
+Mostimages|ەڭ_كوپ_پايدالانىلعان_سۋرەتتەر~ەڭ_كوپ_سۋرەتتەر_بارى
+Mostlinked|ەڭ_كوپ_سىلتەنگەن_بەتتەر
+Mostlinkedcategories|ەڭ_كوپ_پايدالانىلعان_ساناتتار~ەڭ_كوپ_سىلتەنگەن_ساناتتار
+Mostlinkedtemplates|ەڭ_كوپ_پايدالانىلعان_ۇلگىلەر~ەڭ_كوپ_سىلتەنگەن_ۇلگىلەر
+Mostrevisions|ەڭ_كوپ_تۇزەتىلگەن~ەڭ_كوپ_نۇسقالار_بارى
+Movepage|بەتتى_جىلجىتۋ
+Mycontributions|ۇلەسىم
+Mypage|جەكە_بەتىم
+Mytalk|تالقىلاۋىم
+Newimages|جاڭا_سۋرەتتەر
+Newpages|جاڭا_بەتتەر
+Popularpages|ەڭ_كوپ_قارالعان_بەتتەر~ايگىلى_بەتتەر
+Preferences|باپتالىمدار~باپتاۋ
+Prefixindex|ٴباستاۋىش_ٴتىزىمى
+Protectedpages|قورعالعان_بەتتەر
+Protectedtitles|قورعالعان_تاقىرىپتار~قورعالعان_اتاۋلار
+Randompage|كەزدەيسوق~كەزدەيسوق_بەت
+Randomredirect|Кедейсоқ_айдағыш~Кедейсоқ_айдату
+Recentchanges|جۋىقتاعى_وزگەرىستەر
+Recentchangeslinked|سىلتەنگەندەردىڭ_وزگەرىستەرى
+Revisiondelete|تۇزەتۋ_جويۋ~نۇسقانى_جويۋ
+Search|ىزدەۋ
+Shortpages|قىسقا_بەتتەر
+Specialpages|ارنايى_بەتتەر
+Statistics|ساناق
+Uncategorizedcategories|ساناتسىز_ساناتتار
+Uncategorizedimages|ساناتسىز_سۋرەتتەر
+Uncategorizedpages|ساناتسىز_بەتتەر
+Uncategorizedtemplates|ساناتسىز_ۇلگىلەر
+Undelete|جويۋدى_بولدىرماۋ~جويىلعاندى_قايتارۋ
+Unlockdb|دەرەكقوردى_قۇلىپتاماۋ
+Unusedcategories|پايدالانىلماعان_ساناتتار
+Unusedimages|پايدالانىلماعان_سۋرەتتەر
+Unusedtemplates|پايدالانىلماعان_ۇلگىلەر
+Unwatchedpages|باقىلانىلماعان_بەتتەر
+Upload|قوتارىپ_بەرۋ~قوتارۋ
+Userlogin|قاتىسۋشى_كىرۋى
+Userlogout|قاتىسۋشى_شىعۋى
+Userrights|قاتىسۋشى_قۇقىقتارى
+Version|نۇسقاسى
+Wantedcategories|تولتىرىلماعان_ساناتتار
+Wantedpages|تولتىرىلماعان_بەتتەر~جارامسىز_سىلتەمەلەر
+Watchlist|باقىلاۋ_تىزىمى
+Whatlinkshere|مىندا_سىلتەگەندەر
+Withoutinterwiki|ۋىيكىي-ارالىقسىزدار
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+redirect|0|#ايداۋ~#АЙДАУ~#REDIRECT~
+notoc|0|__مازمۇنسىز__~__مسىز__~__МАЗМҰНСЫЗ__~__МСЫЗ__~__NOTOC__~
+nogallery|0|__قويماسىز__~__قسىز__~__ҚОЙМАСЫЗ__~__ҚСЫЗ__~__NOGALLERY__~
+forcetoc|0|__مازمۇنداتقىزۋ__~__مقىزۋ__~__МАЗМҰНДАТҚЫЗУ__~__МҚЫЗУ__~__FORCETOC__~
+toc|0|__مازمۇنى__~__مزمن__~__МАЗМҰНЫ__~__МЗМН__~__TOC__~
+noeditsection|0|__بولىدىموندەمەۋ__~__بولىموندەتكىزبەۋ__~__БӨЛІДІМӨНДЕМЕУ__~__БӨЛІМӨНДЕТКІЗБЕУ__~__NOEDITSECTION__~
+currentmonth|1|اعىمداعىاي~АҒЫМДАҒЫАЙ~CURRENTMONTH~CURRENTMONTH2~
+currentmonthname|1|اعىمداعىاياتاۋى~АҒЫМДАҒЫАЙАТАУЫ~CURRENTMONTHNAME~
+currentmonthnamegen|1|اعىمداعىايىلىكاتاۋى~АҒЫМДАҒЫАЙІЛІКАТАУЫ~CURRENTMONTHNAMEGEN~
+currentmonthabbrev|1|اعىمداعىايجىيىر~اعىمداعىايقىسقا~АҒЫМДАҒЫАЙЖИЫР~АҒЫМДАҒЫАЙҚЫСҚА~CURRENTMONTHABBREV~
+currentday|1|اعىمداعىكۇن~АҒЫМДАҒЫКҮН~CURRENTDAY~
+currentday2|1|اعىمداعىكۇن2~АҒЫМДАҒЫКҮН2~CURRENTDAY2~
+currentdayname|1|اعىمداعىكۇناتاۋى~АҒЫМДАҒЫКҮНАТАУЫ~CURRENTDAYNAME~
+currentyear|1|اعىمداعىجىل~АҒЫМДАҒЫЖЫЛ~CURRENTYEAR~
+currenttime|1|اعىمداعىۋاقىت~АҒЫМДАҒЫУАҚЫТ~CURRENTTIME~
+currenthour|1|اعىمداعىساعات~АҒЫМДАҒЫСАҒАТ~CURRENTHOUR~
+localmonth|1|جەرگىلىكتىاي~ЖЕРГІЛІКТІАЙ~LOCALMONTH~LOCALMONTH2~
+localmonthname|1|جەرگىلىكتىاياتاۋى~ЖЕРГІЛІКТІАЙАТАУЫ~LOCALMONTHNAME~
+localmonthnamegen|1|جەرگىلىكتىايىلىكاتاۋى~ЖЕРГІЛІКТІАЙІЛІКАТАУЫ~LOCALMONTHNAMEGEN~
+localmonthabbrev|1|جەرگىلىكتىايجىيىر~جەرگىلىكتىايقىسقاشا~جەرگىلىكتىايقىسقا~ЖЕРГІЛІКТІАЙЖИЫР~ЖЕРГІЛІКТІАЙҚЫСҚАША~ЖЕРГІЛІКТІАЙҚЫСҚА~LOCALMONTHABBREV~
+localday|1|جەرگىلىكتىكۇن~ЖЕРГІЛІКТІКҮН~LOCALDAY~
+localday2|1|جەرگىلىكتىكۇن2~ЖЕРГІЛІКТІКҮН2~LOCALDAY2~
+localdayname|1|جەرگىلىكتىكۇناتاۋى~ЖЕРГІЛІКТІКҮНАТАУЫ~LOCALDAYNAME~
+localyear|1|جەرگىلىكتىجىل~ЖЕРГІЛІКТІЖЫЛ~LOCALYEAR~
+localtime|1|جەرگىلىكتىۋاقىت~ЖЕРГІЛІКТІУАҚЫТ~LOCALTIME~
+localhour|1|جەرگىلىكتىساعات~ЖЕРГІЛІКТІСАҒАТ~LOCALHOUR~
+numberofpages|1|بەتسانى~БЕТСАНЫ~NUMBEROFPAGES~
+numberofarticles|1|ماقالاسانى~МАҚАЛАСАНЫ~NUMBEROFARTICLES~
+numberoffiles|1|فايلسانى~ФАЙЛСАНЫ~NUMBEROFFILES~
+numberofusers|1|قاتىسۋشىسانى~ҚАТЫСУШЫСАНЫ~NUMBEROFUSERS~
+numberofedits|1|وڭدەمەسانى~تۇزەتۋسانى~ӨҢДЕМЕСАНЫ~ТҮЗЕТУСАНЫ~NUMBEROFEDITS~
+pagename|1|بەتاتاۋى~БЕТАТАУЫ~PAGENAME~
+pagenamee|1|بەتاتاۋى2~БЕТАТАУЫ2~PAGENAMEE~
+namespace|1|ەسىماياسى~ЕСІМАЯСЫ~NAMESPACE~
+namespacee|1|ەسىماياسى2~ЕСІМАЯСЫ2~NAMESPACEE~
+talkspace|1|تالقىلاۋاياسى~ТАЛҚЫЛАУАЯСЫ~TALKSPACE~
+talkspacee|1|تالقىلاۋاياسى2~ТАЛҚЫЛАУАЯСЫ2~TALKSPACEE~
+subjectspace|1|تاقىرىپبەتى~ماقالابەتى~ТАҚЫРЫПБЕТІ~МАҚАЛАБЕТІ~SUBJECTSPACE~ARTICLESPACE~
+subjectspacee|1|تاقىرىپبەتى2~ماقالابەتى2~ТАҚЫРЫПБЕТІ2~МАҚАЛАБЕТІ2~SUBJECTSPACEE~ARTICLESPACEE~
+fullpagename|1|تولىقبەتاتاۋى~ТОЛЫҚБЕТАТАУЫ~FULLPAGENAME~
+fullpagenamee|1|تولىقبەتاتاۋى2~ТОЛЫҚБЕТАТАУЫ2~FULLPAGENAMEE~
+subpagename|1|بەتشەاتاۋى~استىڭعىبەتاتاۋى~БЕТШЕАТАУЫ~АСТЫҢҒЫБЕТАТАУЫ~SUBPAGENAME~
+subpagenamee|1|بەتشەاتاۋى2~استىڭعىبەتاتاۋى2~БЕТШЕАТАУЫ2~АСТЫҢҒЫБЕТАТАУЫ2~SUBPAGENAMEE~
+basepagename|1|نەگىزگىبەتاتاۋى~НЕГІЗГІБЕТАТАУЫ~BASEPAGENAME~
+basepagenamee|1|نەگىزگىبەتاتاۋى2~НЕГІЗГІБЕТАТАУЫ2~BASEPAGENAMEE~
+talkpagename|1|تالقىلاۋبەتاتاۋى~ТАЛҚЫЛАУБЕТАТАУЫ~TALKPAGENAME~
+talkpagenamee|1|تالقىلاۋبەتاتاۋى2~ТАЛҚЫЛАУБЕТАТАУЫ2~TALKPAGENAMEE~
+subjectpagename|1|تاقىرىپبەتاتاۋى~ماقالابەتاتاۋى~ТАҚЫРЫПБЕТАТАУЫ~МАҚАЛАБЕТАТАУЫ~SUBJECTPAGENAME~ARTICLEPAGENAME~
+subjectpagenamee|1|تاقىرىپبەتاتاۋى2~ماقالابەتاتاۋى2~ТАҚЫРЫПБЕТАТАУЫ2~МАҚАЛАБЕТАТАУЫ2~SUBJECTPAGENAMEE~ARTICLEPAGENAMEE~
+msg|0|حبر~ХБР~MSG~
+subst|0|بادەل:~БӘДЕЛ:~SUBST:~
+msgnw|0|ۋىيكىيسىزحبر~УИКИСІЗХБР~MSGNW~
+img_thumbnail|1|نوباي~нобай~thumbnail~thumb~
+img_manualthumb|1|نوباي=$1~нобай=$1~thumbnail=$1~thumb=$1~
+img_framed|1|سۇرمەلى~сүрмелі~framed~enframed~frame~
+img_frameless|1|سۇرمەسىز~сүрмесіз~frameless~
+img_upright|1|تىكتى~تىكتىك=$1~تىكتىك $1~тікті~тіктік=$1~тіктік $1~upright~upright=$1~upright $1~
+img_border|1|جىييەكتى~жиекті~border~
+img_width|1|$1 نۇكتە~$1 нүкте~$1px~
+img_page|1|بەت=$1~بەت $1~бет=$1~бет $1~page=$1~page $1~
+img_none|1|ەشقانداي~جوق~ешқандай~жоқ~none~
+img_right|1|وڭعا~وڭ~оңға~оң~right~
+img_center|1|ورتاعا~ورتا~ортаға~орта~center~centre~
+img_left|1|سولعا~سول~солға~сол~left~
+img_baseline|1|تىرەكجول~тірекжол~baseline~
+img_sub|1|استىلىعى~است~астылығы~аст~sub~
+img_super|1|ۇستىلىگى~ۇست~үстілігі~үст~super~sup~
+img_top|1|ۇستىنە~үстіне~top~
+img_text_top|1|ماتىن-ۇستىندە~мәтін-үстінде~text-top~
+img_middle|1|ارالىعىنا~аралығына~middle~
+img_bottom|1|استىنا~астына~bottom~
+img_text_bottom|1|ماتىن-استىندا~мәтін-астында~text-bottom~
+int|0|ىشكى~ІШКІ~INT~
+sitename|1|توراپاتاۋى~ТОРАПАТАУЫ~SITENAME~
+ns|0|ەا~ەسىمايا~ЕА~ЕСІМАЯ~NS~
+localurl|0|جەرگىلىكتىجاي~ЖЕРГІЛІКТІЖАЙ~LOCALURL~
+localurle|0|جەرگىلىكتىجاي2~ЖЕРГІЛІКТІЖАЙ2~LOCALURLE~
+server|0|سەرۆەر~СЕРВЕР~SERVER~
+servername|0|سەرۆەراتاۋى~СЕРВЕРАТАУЫ~SERVERNAME~
+scriptpath|0|امىرجولى~ӘМІРЖОЛЫ~SCRIPTPATH~
+grammar|0|سەپتىگى~سەپتىك~СЕПТІГІ~СЕПТІК~GRAMMAR~
+notitleconvert|0|__تاقىرىپاتىنتۇرلەندىرگىزبەۋ__~__تاتجوق__~__اتاۋالماستىرعىزباۋ__~__ااباۋ__~__ТАҚЫРЫПАТЫНТҮРЛЕНДІРГІЗБЕУ__~__ТАТЖОҚ__~__АТАУАЛМАСТЫРҒЫЗБАУ__~__ААБАУ__~__NOTITLECONVERT__~__NOTC__~
+nocontentconvert|0|__ماعلۇماتىنتۇرلەندىرگىزبەۋ__~__ماتجوق__~__ماعلۇماتالماستىرعىزباۋ__~__ماباۋ__~__МАҒЛҰМАТЫНТҮРЛЕНДІРГІЗБЕУ__~__МАТЖОҚ__~__МАҒЛҰМАТАЛМАСТЫРҒЫЗБАУ__~__МАБАУ__~__NOCONTENTCONVERT__~__NOCC__~
+currentweek|1|اعىمداعىاپتاسى~اعىمداعىاپتا~АҒЫМДАҒЫАПТАСЫ~АҒЫМДАҒЫАПТА~CURRENTWEEK~
+currentdow|1|اعىمداعىاپتاكۇنى~АҒЫМДАҒЫАПТАКҮНІ~CURRENTDOW~
+localweek|1|جەرگىلىكتىاپتاسى~جەرگىلىكتىاپتا~ЖЕРГІЛІКТІАПТАСЫ~ЖЕРГІЛІКТІАПТА~LOCALWEEK~
+localdow|1|جەرگىلىكتىاپتاكۇنى~ЖЕРГІЛІКТІАПТАКҮНІ~LOCALDOW~
+revisionid|1|تۇزەتۋنومىرٴى~نۇسقانومىرٴى~ТҮЗЕТУНӨМІРІ~НҰСҚАНӨМІРІ~REVISIONID~
+revisionday|1|تۇزەتۋكۇنى~نۇسقاكۇنى~ТҮЗЕТУКҮНІ~НҰСҚАКҮНІ~REVISIONDAY~
+revisionday2|1|تۇزەتۋكۇنى2~نۇسقاكۇنى2~ТҮЗЕТУКҮНІ2~НҰСҚАКҮНІ2~REVISIONDAY2~
+revisionmonth|1|تۇزەتۋايى~نۇسقاايى~ТҮЗЕТУАЙЫ~НҰСҚААЙЫ~REVISIONMONTH~
+revisionyear|1|تۇزەتۋجىلى~نۇسقاجىلى~ТҮЗЕТУЖЫЛЫ~НҰСҚАЖЫЛЫ~REVISIONYEAR~
+revisiontimestamp|1|تۇزەتۋۋاقىتىتاڭباسى~نۇسقاۋاقىتتۇيىندەمەسى~ТҮЗЕТУУАҚЫТЫТАҢБАСЫ~НҰСҚАУАҚЫТТҮЙІНДЕМЕСІ~REVISIONTIMESTAMP~
+plural|0|كوپشەتۇرى~كوپشە~КӨПШЕТҮРІ~КӨПШЕ~PLURAL~
+fullurl|0|تولىقجايى~تولىقجاي~ТОЛЫҚЖАЙЫ~ТОЛЫҚЖАЙ~FULLURL~
+fullurle|0|تولىقجايى2~تولىقجاي2~ТОЛЫҚЖАЙЫ2~ТОЛЫҚЖАЙ2~FULLURLE~
+lcfirst|0|كا1~كىشىارىپپەن1~КӘ1~КІШІӘРІППЕН1~LCFIRST~
+ucfirst|0|با1~باسارىپپەن1~БӘ1~БАСӘРІППЕН1~UCFIRST~
+lc|0|كا~كىشىارىپپەن~КӘ~КІШІӘРІППЕН~LC~
+uc|0|با~باسارىپپەن~БӘ~БАСӘРІППЕН~UC~
+raw|0|قام~ҚАМ~RAW~
+displaytitle|1|كورسەتىلەتىناتاۋ~КӨРІНЕТІНТАҚЫРЫАПАТЫ~КӨРСЕТІЛЕТІНАТАУ~DISPLAYTITLE~
+rawsuffix|1|ق~Қ~R~
+newsectionlink|1|__جاڭابولىمسىلتەمەسى__~__ЖАҢАБӨЛІМСІЛТЕМЕСІ__~__NEWSECTIONLINK__~
+currentversion|1|باعدارلامانۇسقاسى~БАҒДАРЛАМАНҰСҚАСЫ~CURRENTVERSION~
+urlencode|0|جايدىمۇقامداۋ~ЖАЙДЫМҰҚАМДАУ~URLENCODE~
+anchorencode|0|جاكىردىمۇقامداۋ~ЖӘКІРДІМҰҚАМДАУ~ANCHORENCODE~
+currenttimestamp|1|اعىمداعىۋاقىتتۇيىندەمەسى~اعىمداعىۋاقىتتۇيىن~АҒЫМДАҒЫУАҚЫТТҮЙІНДЕМЕСІ~АҒЫМДАҒЫУАҚЫТТҮЙІН~CURRENTTIMESTAMP~
+localtimestamp|1|جەرگىلىكتىۋاقىتتۇيىندەمەسى~جەرگىلىكتىۋاقىتتۇيىن~ЖЕРГІЛІКТІУАҚЫТТҮЙІНДЕМЕСІ~ЖЕРГІЛІКТІУАҚЫТТҮЙІН~LOCALTIMESTAMP~
+directionmark|1|باعىتبەلگىسى~БАҒЫТБЕЛГІСІ~DIRECTIONMARK~DIRMARK~
+language|0|#تىل~#ТІЛ~#LANGUAGE~
+contentlanguage|1|ماعلۇماتتىلى~МАҒЛҰМАТТІЛІ~CONTENTLANGUAGE~CONTENTLANG~
+pagesinnamespace|1|ەسىمايابەتسانى~ەابەتسانى~ايابەتسانى~ЕСІМАЯБЕТСАНЫ~ЕАБЕТСАНЫ~АЯБЕТСАНЫ~PAGESINNAMESPACE~PAGESINNS~
+numberofadmins|1|اكىمشىسانى~ӘКІМШІСАНЫ~NUMBEROFADMINS~
+formatnum|0|سانپىشىمى~САНПІШІМІ~FORMATNUM~
+padleft|0|سولعاىعىس~سولىعىس~СОЛҒАЫҒЫС~СОЛЫҒЫС~PADLEFT~
+padright|0|وڭعاىعىس~وڭىعىس~ОҢҒАЫҒЫС~ОҢЫҒЫС~PADRIGHT~
+special|0|#ارنايى~#арнайы~#special~
+defaultsort|1|ادەپكىسۇرىپتاۋ~ادەپكىساناتسۇرىپتاۋ~ادەپكىسۇرىپتاۋكىلتى~ادەپكىسۇرىپ~ӘДЕПКІСҰРЫПТАУ~ӘДЕПКІСАНАТСҰРЫПТАУ~ӘДЕПКІСҰРЫПТАУКІЛТІ~ӘДЕПКІСҰРЫП~DEFAULTSORT~DEFAULTSORTKEY~DEFAULTCATEGORYSORT~
+filepath|0|فايلمەكەنى~ФАЙЛМЕКЕНІ~FILEPATH~
+tag|0|#بەلگى~#белгі~#tag~
+hiddencat|1|__جاسىرىنسانات__~__ЖАСЫРЫНСАНАТ__~__HIDDENCAT__~
+pagesincategory|1|ساناتتاعىبەتتەر~САНАТТАҒЫБЕТТЕР~PAGESINCATEGORY~PAGESINCAT~
+pagesize|1|بەتمولشەرى~БЕТМӨЛШЕРІ~PAGESIZE~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|جەكسەنبى
+monday|دۇيسەنبى
+tuesday|سەيسەنبى
+wednesday|سارسەنبى
+thursday|بەيسەنبى
+friday|جۇما
+saturday|سەنبى
+sun|جەك
+mon|ٴدۇي
+tue|بەي
+wed|ٴسار
+thu|بەي
+fri|جۇم
+sat|سەن
+january|قاڭتار
+february|اقپان
+march|ناۋرىز
+april|cٴاۋىر
+may_long|مامىر
+june|ماۋسىم
+july|شىلدە
+august|تامىز
+september|قىركۇيەك
+october|قازان
+november|قاراشا
+december|جەلتوقسان
+january-gen|قاڭتاردىڭ
+february-gen|اقپاننىڭ
+march-gen|ناۋرىزدىڭ
+april-gen|ٴساۋىردىڭ
+may-gen|مامىردىڭ
+june-gen|ماۋسىمنىڭ
+july-gen|شىلدەنىڭ
+august-gen|تامىزدىڭ
+september-gen|قىركۇيەكتىڭ
+october-gen|قازاننىڭ
+november-gen|قاراشانىڭ
+december-gen|جەلتوقساننىڭ
+jan|قاڭ
+feb|اقپ
+mar|ناۋ
+apr|cٴاۋ
+may|مام
+jun|ماۋ
+jul|ٴشىل
+aug|تام
+sep|قىر
+oct|قاز
+nov|قار
+dec|جەل
+toc|مازمۇنى
+redirectedfrom|(~{0} بەتىنەن ايداتىلعان)
+allpages|بارلىق بەتتەر
+prevpage|الدىڭعى بەتكە (~{0})
+nextpage|كەلەسى بەتكە (~{0})
+categories|ساناتتار
+lastmodifiedat|بۇل بەتتىڭ وزگەرتىلگەن سوڭعى كەزى: ~{1}, ~{0}.
+thumbnail-more|ۇلكەيتۋ
+otherlanguages|باسقا تىلدەردە
+blanknamespace|(نەگىزگى)
+pagecategories|{{PLURAL:~{0}\u007Cسانات\u007Cساناتتار}}
+category_header|«~{0}» ساناتىنداعى بەتتەر
+subcategories|ساناتشالار
+category-media-header|«~{0}» ساناتىنداعى تاسپالار
+category-empty|''بۇل ساناتتا اعىمدا ەش بەت نە تاسپا جوق.''
+category-subcat-count|{{PLURAL:~{1}\u007Cبۇل ساناتتا تەك كەلەسى ساناتشا بار.\u007Cبۇل ساناتتا كەلەسى ~{0} ساناتشا بار (نە بارلىعى ~{1}).}}
+category-subcat-count-limited|بۇل ساناتتا كەلەسى ~{0} ساناتشا بار.
+category-article-count|{{PLURAL:~{1}\u007Cبۇل ساناتتا تەك كەلەسى بەت بار.\u007Cبۇل ساناتتا كەلەسى ~{0} بەت بار (نە بارلىعى ~{1}).}}
+category-article-count-limited|اعىمداعى ساناتتا كەلەسى ~{0} بەت بار.
+category-file-count|{{PLURAL:~{1}\u007Cبۇد ساناتتا تەك كەلەسى فايل بار.\u007Cبۇل ساناتتا كەلەسى ~{0} فايل بار (نە بارلىعى ~{1}).}}
+category-file-count-limited|اعىمداعى ساناتتا كەلەسى ~{0} فايل بار.
+nextn|كەلەسى {{PLURAL:~{0}\u007C~{0}}}
+prevn|الدىڭعى {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|(جالع.)
+bold_sample|جۋان ٴماتىن
+bold_tip|جۋان ٴماتىن
+italic_sample|قىيعاش ٴماتىن
+italic_tip|قىيعاش ٴماتىن
+link_sample|سىلتەمە تاقىرىبىن اتى
+link_tip|ىشكى سىلتەمە
+headline_sample|باس جول ٴماتىنى
+headline_tip|2-ٴشى دەڭگەيلى باس جول
+semicolon-separator|؛ 
+comma-separator|، 
+hidden-category-category|جاسىرىن ساناتتار
+statistics|ساناق
+categorytree|سانات بۇتاقتارى
+categorytree-header|سانات مازمۇنىڭ بۇتاقتار تۇردە كورۋ ٴۇشىن اتاۋىن ەنگىزىڭىز.\nاڭعارپتا: بۇل ىسكە JavaScript قۇرالىنىڭ AJAX دەگەن كەڭەيتىلگەن قابىلەتى قاجەت بولادى.\nەگەر شولعىشىڭىز وتە ەسكى, نەمەسە JavaScript وشىرىلگەن بولسا, بۇل ىسكە اسىرىلمايدى.
+categorytree-category|سانات:
+categorytree-go|بۇتاقتارىن كورسەت
+categorytree-parents|جوعارعىلار
+categorytree-mode-categories|تەك ساناتتار
+categorytree-mode-pages|بەتتەر (سۋرەتتەردى ساناماي)
+categorytree-mode-all|بارلىق بەت
+categorytree-collapse|تارىلتۋ
+categorytree-expand|كەڭەيتۋ
+categorytree-load|جۇكتەۋ
+categorytree-loading|جۇكتەۋدە
+categorytree-nothing-found|ەشتەڭە تابىلمادى
+categorytree-no-subcategories|ساناتشالارى جوق
+categorytree-no-pages|بەتتەرى نە ساناتشالارى جوق
+categorytree-not-found|<i>~{0}</i> دەگەن سانات تابىلمادى
+categorytree-error|دەرەكتەردى جۇكتەۋ كەزىندە شاتاق شىقتى.
+categorytree-retry|ٴبىر ٴسات كۇتە تۇرىپ قايتالاڭىز.
+cite_error|دٵيەكسٶز الۋ ~{0} قاتەسٸ
+cite_error_ref_numeric_key|جارامسىز <code>&lt;ref&gt;</code> بەلگٸشەسٸ; اتاۋ كٵدٸمگٸ بٷتٸن سان بولۋى مٷمكٸن ەمەس, سيپپاتاۋىش اتاۋ قولدانىڭىز
+cite_error_ref_no_key|جارامسىز <code>&lt;ref&gt;</code> بەلگٸشەسٸ; ماعلۇماتسىز تٷسٸنٸكتەمەلەردە اتاۋ بولۋى قاجەت
+cite_error_ref_too_many_keys|جارامسىز <code>&lt;ref&gt;</code> بەلگٸشە; جارامسىز اتاۋلار, مىسالى, تىم كٶپ
+cite_error_ref_no_input|جارامسىز <code>&lt;ref&gt;</code> بەلگٸشە; اتاۋسىز تٷسٸنٸكتەمەلەردە ماعلۇماتى بولۋى قاجەت
+cite_error_references_invalid_parameters|جارامسىز <code>&lt;references&gt;</code> بەلگٸشە; ەش باپتار رۇقسات ەتٸلمەيدٸ, بىلاي <code>&lt;references /&gt;</code> قولدانىڭىز
+cite_error_references_no_backlink_label|قوسىمشا بەلگٸلەردٸڭ سانى بٸتتٸ, ودان ٵرٸ كٶبٸرەك <nowiki>[[MediaWiki:Cite_references_link_many_format_backlink_labels]]</nowiki> جٷيە حابارىندا بەلگٸلەڭٸز
+imagemap_no_image|&lt;imagemap&gt;: بٸرٸنشٸ جولدا سۋرەتتٸ كٶرسەتۋ قاجەت
+imagemap_invalid_image|&lt;imagemap&gt;: سۋرەت جارامسىز نەمەسە جوق
+imagemap_no_link|&lt;imagemap&gt;: ~{0} جول اياعىندا جارامدى سٸلتەمە تابىلمادى
+imagemap_invalid_title|&lt;imagemap&gt;: ~{0} جول اياعىنداعى سٸلتەمەدە جارامسىز اتاۋ
+imagemap_missing_coord|&lt;imagemap&gt;: ~{0} جولداعى كەسكٸن ٷشٸن كوورديناتتار جەتٸكسٸز
+imagemap_unrecognised_shape|&lt;imagemap&gt;: ~{0} جولداعى كەسكٸن جارامسىز, ٵربٸر جول مىنانىڭ بٸرەۋٸنەن باستالۋ قاجەت:
+imagemap_invalid_coord|&lt;imagemap&gt;: ~{0} جولىندا جارامسىز كوورديناتا, سان بولۋى قاجەت
+imagemap_invalid_desc|&lt;imagemap&gt;: جارامسىز سيپاتتاما ماماندانىمى, مىنانىڭ بٸرەۋٸ بولۋى قاجەت: ~{0}
+imagemap_description|بۇل سۋرەت تۋرالى
+cite_article_link|بەتتەن دايەكسوز الۋ
+cite|دايەكسوز الۋ
+cite_page|بەت اتاۋى:
+cite_submit|دايەكسوز ال!
+cite_text|__NOTOC__\n<div class="mw-specialcite-bibliographic">\n\n== «{{FULLPAGENAME}}» اتاۋىلى بەتىنىڭ كىتاپنامالىق ەگجەي-تەگجەيلەرى ==\n\n* بەتتىڭ اتاۋى: {{FULLPAGENAME}}\n* اۋتورى: {{SITENAME}} ۇلەسكەرلەرى\n* باسپاگەرى: ''{{SITENAME}}, {{int:sitesubtitle}}''.\n* سوڭعى نۇسقاسىنىڭ كەزى: {{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}} {{CURRENTTIME}} UTC\n* الىنعان كەزى: <citation>{{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}} {{CURRENTTIME}} UTC</citation>\n* تۇراقتى سىلتەمەسى: {{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}\n* بەت نۇسقاسىنىڭ تەڭدەستىرۋ ٴنومىرى: {{REVISIONID}}\n\n</div>\n<div class="plainlinks mw-specialcite-styles">\n\n== «{{FULLPAGENAME}}» بەتىنىڭ دايەكسوز مانەرلەرى ==\n\n=== [[گوست مانەرى]] ===\n<!-- ([[گوست 7.1\u007Cگوست 7.1—2003]] جانە [[گوست 7.82\u007Cگوست 7.82—2001]]) -->\n{{SITENAME}}, {{int:sitesubtitle}} [ەلەكتروندى قاينار] : {{FULLPAGENAME}}, نۇسقاسىنىڭ ٴنومىرى {{REVISIONID}}, سوڭعى تۇزەتۋى {{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}}, {{CURRENTTIME}} UTC / ۋىيكىيپەدىييا اۋتورلارى. — ەلەكتروندى دەرەك. — فلورىيدا شتاتى. : ۋىيكىيمەدىييا قورى, {{CURRENTYEAR}}. — قاتىناۋ رەتى: {{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}\n\n=== [[APA مانەرى]] ===\n{{FULLPAGENAME}}. ({{CURRENTYEAR}}, {{CURRENTMONTHNAME}} {{CURRENTDAY}}). ''{{SITENAME}}, {{int:sitesubtitle}}'' ماعلۇماتى. {{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}} بەتىنەن <citation>{{CURRENTTIME}}, {{CURRENTMONTHNAME}} {{CURRENTDAY}}, {{CURRENTYEAR}}</citation> كەزىندە الىنعان.\n\n=== [[MLA مانەرى]] ===\n«{{FULLPAGENAME}}». ''{{SITENAME}}, {{int:sitesubtitle}}''. {{CURRENTDAY}} {{CURRENTMONTHABBREV}} {{CURRENTYEAR}}, {{CURRENTTIME}} UTC. <citation>{{CURRENTDAY}} {{CURRENTMONTHABBREV}} {{CURRENTYEAR}}, {{CURRENTTIME}}</citation> <{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}>.\n\n=== [[MHRA مانەرى]] ===\n{{SITENAME}} ۇلەسكەرلەرى, '{{FULLPAGENAME}}', ''{{SITENAME}}, {{int:sitesubtitle}},'' {{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}}, {{CURRENTTIME}} UTC, <{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}> [<citation>{{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}}</citation> كەزىندە قاتىنالدى]\n\n=== [[شىيكاگو مانەرى]] ===\n{{SITENAME}} ۇلەسكەرى, «{{FULLPAGENAME}}», ''{{SITENAME}}, {{int:sitesubtitle}},'' {{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}} (<citation>{{CURRENTMONTHNAME}} {{CURRENTDAY}}, {{CURRENTYEAR}}</citation> كەزىندە قاتىنالدى).\n\n=== [[CBE/CSE مانەرى]] ===\n{{SITENAME}} ۇلەسكەرلەرى. {{FULLPAGENAME}} [ىينتەرنەت]. {{SITENAME}}, {{int:sitesubtitle}}; {{CURRENTYEAR}} {{CURRENTMONTHABBREV}} {{CURRENTDAY}}, {{CURRENTTIME}} UTC [<citation>{{CURRENTYEAR}} {{CURRENTMONTHABBREV}} {{CURRENTDAY}}</citation> كەزىندە دايەكسوز الىندى]. قاتىناۋى:\n{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}.\n\n=== [[كوك كىتاپ\u007Cكوك كىتاپ مانەرى]] ===\n{{FULLPAGENAME}}, {{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}} (سوڭعى قارالعانى <citation>{{CURRENTMONTHNAME}} {{CURRENTDAY}}, {{CURRENTYEAR}}</citation> كەزىندە).\n\n=== [[BibTeX]] جازباسى ===\n\n  @misc{ wiki:xxx,\n    author = "{{SITENAME}}",\n    title = "{{FULLPAGENAME}} --- {{SITENAME}}{,} {{int:sitesubtitle}}",\n    year = "{{CURRENTYEAR}}",\n    url = "{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}",\n    note = "[جەلىدەن; <citation>{{CURRENTDAY}}-{CURRENTMONTHNAME}}-{CURRENTYEAR}}</citation> كەزىندە قاتىنالدى]"\n  }\n\n[[LaTeX]] بۋماسىنىڭ URL جايىن (<code>\\usepackage{url}</code> كىرىسپەنىڭ قايبىر ورنىندا) قولدانعاندا (ۆەب جايلارىن ونەرلەۋ پىشىمدەۋىن كەلتىرەدى) كەلەسىسىن قالاۋعا بولادى:\n\n  @misc{ wiki:xxx,\n    author = "{{SITENAME}}",\n    title = "{{FULLPAGENAME}} --- {{SITENAME}}{,} {{int:sitesubtitle}}",\n    year = "{{CURRENTYEAR}}",\n    url = "'''\\url{'''{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}'''}'''",\n    note = "[جەلىدەن; <citation>{{CURRENTDAY}}-{{CURRENTMONTHNAME}}-{{CURRENTYEAR}}</citation> كەزىندە قاتىنالدى]"\n  }\n\n\n</div> <!--closing div for "plainlinks"-->
+wm-license-information-description|سىيپاتتاماسى
+wm-license-information-source|قاينار كوزى
+sitesupport|دەمەۋشىلىك
+tog-underline|سىلتەمەنىڭ استىن سىز:
+tog-hideminor|جۋىقتاعى وزگەرىستەردەن شاعىن وڭدەمەلەردى جاسىر
+tog-extendwatchlist|باقىلاۋ ٴتىزىمدى ۇلعايت (بارلىق جارامدى وزگەرىستەردى كورسەت)
+tog-usenewrc|كەڭەيتىلگەن جۋىقتاعى وزگەرىستەر (JavaScript)
+tog-numberheadings|باس جولداردى وزدىكتىك نومىرلە
+tog-showtoolbar|وڭدەۋ قۋرالدار جولاعىن كورسەت (JavaScript)
+tog-editondblclick|قوس نۇقىمداپ وڭدەۋ (JavaScript)
+tog-editsectiononrightclick|ٴبولىم تاقىرىبىن وڭ نۇقۋمەن وڭدەۋىن قوس (JavaScript)
+tog-watchcreations|مەن باستاعان بەتتەردى باقىلاۋ تىزىمىمە ۇستە
+tog-watchdefault|مەن وڭدەگەن بەتتەردى باقىلاۋ تىزىمىمە ۇستە
+tog-watchmoves|مەن جىلجىتقان بەتتەردى باقىلاۋ تىزىمىمە ۇستە
+tog-watchdeletion|مەن جويعان بەتتەردى باقىلاۋ تىزىمىمە ۇستە
+tog-minordefault|ادەپكىدەن بارلىق وڭدەمەلەردى شاعىن دەپ بەلگىلە
+tog-previewontop|قاراپ شىعۋ اۋماعى كىرىستىرۋ ورنى الدىندا
+tog-previewonfirst|ٴبىرىنشى وڭدەگەندە قاراپ شىعۋ
+tog-enotifwatchlistpages|باقىلانعان بەت وزگەرگەندە ماعان حات جىبەر
+tog-enotifusertalkpages|تالقىلاۋىم وزگەرگەندە ماعان حات جىبەر
+tog-enotifminoredits|شاعىن وڭدەمە تۋرالى دا ماعان حات جىبەر
+tog-enotifrevealaddr|ە-پوشتامنىڭ مەكەنجايىن ەسكەرتۋ حاتتاردا اش
+tog-shownumberswatching|باقىلاپ تۇرعان قاتىسۋشىلاردىڭ سانىن كورسەت
+tog-fancysig|قام قولتاڭبا (وزدىكتىك سىلتەمەسىز)
+tog-uselivepreview|تۋرا قاراپ شىعۋدى قولدانۋ (JavaScript) (سىناقتاما)
+tog-forceeditsummary|وڭدەمەنىڭ قىسقاشا مازمۇنداماسى بوس قالعاندا ماعان ەسكەرت
+tog-watchlisthideown|وڭدەمەلەرىمدى باقىلاۋ تىزىمنەن جاسىر
+tog-watchlisthidebots|بوت وڭدەمەلەرىن باقىلاۋ تىزىمنەن جاسىر
+tog-watchlisthideminor|شاعىن وڭدەمەلەردى باقىلاۋ تىزىمىندە كورسەتپە
+tog-ccmeonemails|باسقا قاتىسۋشىعا جىبەرگەن حاتىمنىڭ كوشىرمەسىن ماعان دا جونەلت
+tog-diffonly|ايىرما استىندا بەت ماعلۇماتىن كورسەتپە
+tog-showhiddencats|جاسىرىن ساناتتاردى كورسەت
+underline-always|ارقاشان
+underline-never|ەشقاشان
+underline-default|شولعىش بويىنشا
+hidden-categories|{{PLURAL:~{0}\u007Cجاسىرىن سانات\u007Cجاسىرىن ساناتتار}}
+about|جوبا تۋرالى
+article|ماعلۇمات بەتى
+newwindow|(جاڭا تەرەزەدە)
+cancel|بولدىرماۋ
+moredotdotdot|كوبىرەك…
+mypage|جەكە بەتىم
+mytalk|تالقىلاۋىم
+anontalk|IP تالقىلاۋى
+navigation|شارلاۋ
+and| جانە
+qbfind|تابۋ
+qbbrowse|شولۋ
+qbedit|وڭدەۋ
+qbpageoptions|بۇل بەت
+qbmyoptions|بەتتەرىم
+faq|ٴجىيى قويىلعان ساۋالدار
+faqpage|Project:ٴجىيى قويىلعان ساۋالدار
+errorpagetitle|قاتەلىك
+returnto|~{0} دەگەنگە قايتا كەلۋ.
+tagline|{{GRAMMAR:ablative\u007C{{SITENAME}}}}
+help|انىقتاما
+search|ىزدەۋ
+searchbutton|ىزدە
+go|ٴوتۋ
+searcharticle|ٴوت!
+history|بەت تارىيحى
+history_short|تارىيحى
+updatedmarker|سوڭعى كەلىپ-كەتۋىمنەن بەرى جاڭالانعان
+printableversion|باسىپ شىعارۋ ٴۇشىن
+permalink|تۇراقتى سىلتەمە
+print|باسىپ شىعارۋ
+edit|وڭدەۋ
+create|باستاۋ
+editthispage|بەتتى وڭدەۋ
+create-this-page|جاڭا بەت باستاۋ
+delete|جويۋ
+deletethispage|بەتتى جويۋ
+undelete_short|~{0} وڭدەمە جويۋىن بولدىرماۋ
+protect|قورعاۋ
+protect_change|قورعاۋدى وزگەرتۋ
+protectthispage|بەتتى قورعاۋ
+unprotect|قورعاماۋ
+unprotectthispage|بەتتى قورعاماۋ
+newpage|جاڭا بەت
+talkpage|بەتتى تالقىلاۋ
+talkpagelinktext|تالقىلاۋى
+specialpage|ارنايى بەت
+personaltools|جەكە قۇرالدار
+articlepage|ماعلۇمات بەتىن قاراۋ
+talk|تالقىلاۋ
+views|كورىنىس
+toolbox|قۇرالدار
+userpage|قاتىسۋشى بەتىن قاراۋ
+projectpage|جوبا بەتىن قاراۋ
+imagepage|تاسپا بەتىن قاراۋ
+mediawikipage|حابار بەتىن قاراۋ
+templatepage|ۇلگى بەتىن قاراۋ
+viewhelppage|انىقتاما بەتىن قاراۋ
+categorypage|سانات بەتىن قاراۋ
+viewtalkpage|تالقىلاۋ بەتىن قاراۋ
+redirectpagesub|ايداتۋ بەتى
+viewcount|بۇل بەت ~{0} رەت قاتىنالعان.
+protectedpage|قورعالعان بەت
+jumpto|مىندا ٴوتۋ:
+jumptonavigation|باعىتتاۋ
+jumptosearch|ىزدەۋ
+aboutsite|{{SITENAME}} تۋرالى
+aboutpage|Project:جوبا تۋرالى
+copyright|ماعلۇمات ~{0} شارتىمەن جەتىمدى.
+copyrightpage|{{ns:project}}:اۋتورلىق قۇقىقتار
+currentevents|اعىمداعى وقىيعالار
+currentevents-url|Project:اعىمداعى وقىيعالار
+disclaimers|جاۋاپكەرشىلىكتەن باس تارتۋ
+disclaimerpage|Project:جاۋاپكەرشىلىكتەن باس تارتۋ
+edithelp|وندەۋ انىقتاماسى
+mainpage|باستى بەت
+mainpage-description|باستى بەت
+policy-url|Project:ەرەجەلەر
+portal|قاۋىم پورتالى
+portal-url|Project:قاۋىم پورتالى
+privacy|جەكە قۇپىيياسىن ساقتاۋ
+privacypage|Project:جەكە قۇپىيياسىن ساقتاۋ
+badaccess|رۇقسات قاتەسى
+badaccess-group0|سۇراتىلعان ارەكەتىڭىزدى جەگۋىڭىزگە رۇقسات ەتىلمەيدى.
+badaccess-groups|سۇراتىلعان ارەكەتىڭىز ~{0} توپتارى ٴبىرىنىڭ قاتۋسىشىلارىنا شەكتەلەدى.
+versionrequired|MediaWiki ~{0} نۇسقاسى كەرەك
+versionrequiredtext|بۇل بەتتى قولدانۋ ٴۇشىن MediaWiki ~{0} نۇسقاسى كەرەك. [[{{ns:special}}:Version\u007Cجۇيە نۇسقاسى بەتىن]] قاراڭىز.
+ok|جارايدى
+pagetitle|~{0} — {{SITENAME}}
+retrievedfrom|«~{0}» بەتىنەن الىنعان
+youhavenewmessages|سىزگە ~{0} بار (~{1}).
+youhavenewmessagesmulti|~{0} دەگەندە جاڭا حابارلار بار
+editsection|وڭدەۋ
+editold|وڭدەۋ
+viewsourceold|قاينار كوزىن قاراۋ
+editsectionhint|مىنا ٴبولىمدى وڭدەۋ: ~{0}
+showtoc|كورسەت
+hidetoc|جاسىر
+thisisdeleted|~{0} قارايسىز با, نە قالپىنا كەلتىرەسىز بە?
+viewdeleted|~{0} قارايسىز با?
+restorelink|جويىلعان ~{0} وڭدەمەنى
+feedlinks|ارنا:
+feed-invalid|جارامسىز جازىلىمدى ارنا ٴتۇرى.
+feed-unavailable|{{SITENAME}} جوباسىندا تاراتىلاتىن ارنالار جوق
+site-rss-feed|~{0} RSS ارناسى
+site-atom-feed|~{0} Atom ارناسى
+page-rss-feed|«~{0}» — RSS ارناسى
+page-atom-feed|«~{0}» — Atom ارناسى
+red-link-title|~{0} (ٴالى جازىلماعان)
+nstab-main|بەت
+nstab-user|جەكە بەت
+nstab-media|تاسپا بەتى
+nstab-special|ارنايى
+nstab-project|جوبا بەتى
+nstab-image|فايل بەتى
+nstab-mediawiki|حابار
+nstab-template|ۇلگى
+nstab-help|انىقتاما
+nstab-category|سانات
+nosuchaction|مىناداي ەش ارەكەت جوق
+nosuchactiontext|وسى URL جايىمەن ەنگىزىلگەن ارەكەتتى وسى ۋىيكىي جورامالداپ بىلمەدى.
+nosuchspecialpage|مىناداي ەش ارنايى بەت جوق
+nospecialpagetext|<strong>جارامسىز ارنايى بەتتى سۇرادىڭىز.</strong>\n\nجارامدى ارنايى بەت ٴتىزىمىن [[Special:SpecialPages\u007C{{int:specialpages}}]] دەگەننەن تابا الاسىز.
+error|قاتە
+databaseerror|دەرەكقور قاتەسى
+laggedslavemode|قۇلاقتاندىرۋ: بەتتە جۋىقتاعى جاڭالاۋلار بولماۋى مۇمكىن.
+readonly|دەرەكقورى قۇلىپتالعان
+enterlockreason|قۇلىپتاۋ سەبەبىن, قاي ۋاقىتقا دەيىن قۇلىپتالعانىن كىرىستىرىپ, ەنگىزىڭىز
+readonlytext|بۇل دەرەكقور جاڭادان جازۋ جانە باسقا وزگەرىستەر جاساۋدان اعىمدا قۇلىپتالىنعان, مۇمكىن كۇندە-كۇن دەرەكقوردى باپتاۋ ٴۇشىن, بۇنى بىتىرگەننەن سوڭ قالىپتى ىسكە قايتارىلادى.\n\nقۇلىپتاعان اكىمشى بۇنى بىلاي تۇسىندىرەدى: ~{0}
+missing-article|بار بولۋى ٴجون بىلاي اتالعان بەت ٴماتىنى دەرەكقوردا تابىلمادى: «~{0}» ~{1}.\n\nبۇل ەسكىرگەن ايىرما سىلتەمەسىنە نەمەسە جويىلعان بەت تارىيحى سىلتەمەسىنە ەرگەننەن بولا بەرەدى.\n\nەگەر بۇل ورىندى بولماسا, باعدارلامالىق جاساقتاماداعى قاتەگە تاپ بولۋىڭىز مۇمكىن.\nبۇل تۋرالى ناقتى URL جايىنا اڭعارتپا جاساپ, اكىمشىگە باياناتتاڭىز.
+missingarticle-rev|(تۇزەتۋ ن-ٴى: ~{0})
+missingarticle-diff|(ايرم.: ~{0}, ~{1})
+readonly_lag|جەتەك دەرەكقور سەرۆەرلەر باسقىسىمەن قاداملانعاندا وسى دەرەكقور وزدىكتىك قۇلىپتالىنعان
+internalerror|ىشكى قاتە
+internalerror_info|ىشكى قاتەسى: ~{0}
+filecopyerror|«~{0}» فايلى «~{1}» فايلىنا كوشىرىلمەدى.
+filerenameerror|«~{0}» فايل اتاۋى «~{1}» اتاۋىنا وزگەرتىلمەدى.
+filedeleteerror|«~{0}» فايلى جويىلمايدى.
+directorycreateerror|«~{0}» قالتاسى قۇرىلمادى.
+filenotfound|«~{0}» فايلى تابىلمادى.
+unexpected|كۇتىلمەگەن ماعىنا: «~{0}» = «~{1}».
+formerror|قاتەلىك: ٴپىشىن جونەلتىلمەيدى
+badarticleerror|وسىنداي ارەكەت مىنا بەتتە اتقارىلمايدى.
+cannotdelete|ايتىلمىش بەت نە سۋرەت جويىلمايدى.\nبۇنى باسقا بىرەۋ الداقاشان جويعان مۇمكىن.
+badtitle|جارامسىز تاقىرىپ اتى
+badtitletext|سۇرالعان بەت تاقىرىبىنىڭ اتى جارامسىز, بوس, تىلارالىق سىلتەمەسى نە ۋىيكىي-ارالىق تاقىرىپ اتى بۇرىس ەنگىزىلگەن.\nمىندا تاقىرىپ اتىندا قولدالمايتىن بىرقاتار تاڭبالار بولۋى مۇمكىن.
+perfcached|كەلەسى دەرەك بۇركەمەلەنگەن, سوندىقتان تولىقتاي جاڭالانماعان بولۋى مۇمكىن. A maximum of {{PLURAL:~{0}\u007Cone result is\u007C~{0} results are}} available in the cache.
+perfcachedts|كەلەسى دەرەك بۇركەمەلەنگەن, سوڭعى جاڭالانلعان كەزى: ~{0}. A maximum of {{PLURAL:~{3}\u007Cone result is\u007C~{3} results are}} available in the cache.
+querypage-no-updates|بۇل بەتتىڭ جاڭارتىلۋى اعىمدا وشىرىلگەن. دەرەكتەرى قازىر وزگەرتىلمەيدى.
+viewsource|قاينار كوزىن قاراۋ
+actionthrottled|ارەكەت باسەڭدەتىلدى
+actionthrottledtext|سپامعا قارسى كۇرەس ەسەبىندە, وسى ارەكەتتى قىسقا ۋاقىتتا تىم كوپ رەت ورىنداۋىڭىز شەكتەلىندى, جانە بۇل شەكتەۋ شاماسىنان اسىپ كەتكەنسىز.\nبىرنەشە ٴمىينوتتان قايتا بايقاپ كورىڭىز.
+protectedpagetext|وڭدەۋدى قاقپايلاۋ ٴۇشىن بۇل بەت قۇلىپتالىنعان.
+viewsourcetext|بۇل بەتتىڭ قاينار كوزىن قاراۋىڭىزعا جانە كوشىرىپ الۋڭىزعا بولادى:
+protectedinterface|بۇل بەت باعدارلامالىق جاساقتامانىڭ تىلدەسۋ ٴماتىنىن جەتىستىرەدى, سوندىقتان قىيياناتتى قاقپايلاۋ ٴۇشىن وزگەرتۋى قۇلىپتالعان.
+editinginterface|'''قۇلاقتاندىرۋ:''' باعدارلامالىق جاساقتامانىڭ تىلدەسۋ ٴماتىنىن جەتىستىرەتىن بەتىن وڭدەپ جاتىرسىز.\nبۇل بەتتىڭ وزگەرتۋى باسقا قاتىسۋشىلارعا پايدالانۋشىلىق تىلدەسۋى قالاي كورىنەتىنە اسەر ەتەدى.\nاۋدارمالار ٴۇشىن, MediaWiki باعدارلاماسىن جەرسىندىرۋ [//translatewiki.net/wiki/Main_Page?setlang=kk translatewiki.net جوباسى] ارقىلى قاراپ شەشىڭىز.
+cascadeprotected|بۇل بەت وڭدەۋدەن قورعالعان, سەبەبى بۇل كەلەسى «باۋلى قورعاۋى» قوسىلعان {{PLURAL:~{0}\u007Cبەتتىڭ\u007Cبەتتەردىڭ}} كىرىكبەتى:\n~{1}
+namespaceprotected|'''~{0}''' ەسىم اياسىنداعى بەتتەردى وڭدەۋ ٴۇشىن رۇقساتىڭىز جوق.
+ns-specialprotected|{{ns:special}} ەسىم اياسىنداعى بەتتەر وڭدەلىنبەيدى
+titleprotected|بۇل تاقىرىپ اتى باستاۋدان [[User:~{0}\u007C~{0}]] قورعادى.\nكەلتىرىلگەن سەبەبى: ''~{1}''.
+logouttext|'''ەندى جۇيەدەن شىقتىڭىز.'''\n\nجۇيەگە كىرمەستەن {{SITENAME}} جوباسىن پايدالانۋىن جالعاستىرا الاسىز, نەمەسە ٴدال سول نە وزگە قاتىسۋشى بوپ قايتا كرۋىڭىز مۇمكىن.\nاڭعارتپا: كەيبىر بەتتەر شولعىشىڭىزدىڭ بۇركەمەسىن تازارتقانشا دەيىن ٴالى دە كىرپ قالعانىڭىزداي كورىنۋى مۇمكىن.
+yourname|قاتىسۋشى اتىڭىز:
+yourpassword|قۇپىييا ٴسوزىڭىز:
+yourpasswordagain|قۇپىييا ٴسوزدى قايتالاڭىز:
+remembermypassword|مەنىڭ كىرگەنىمدى بۇل كومپيۋتەردە ۇمىتپا (for a maximum of ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}})
+yourdomainname|جەلى ۇيشىگىڭىز:
+externaldberror|وسى ارادا نە شەتتىك راستاۋ دەرەكقورىندا قاتە بولدى, نەمەسە شەتتىك تىركەلگىڭىزدى جاڭالاۋ رۇقساتى جوق.
+login|كىرۋ
+nav-login-createaccount|كىرۋ / تىركەلگى جاساۋ
+userlogin|كىرۋ / تىركەلگى جاساۋ
+logout|شىعۋ
+userlogout|شىعۋ
+notloggedin|كىرمەگەنسىز
+nologin|كىرمەگەنسىز بە? '''~{0}'''.
+nologinlink|تىركەلگى جاساڭىز
+createaccount|جاڭا تىركەلگى
+gotaccount|الداقاشان تىركەلگىىڭىز بار ما? '''~{0}'''.
+gotaccountlink|كىرىڭىز
+createaccountmail|ە-پوشتامەن
+badretype|ەنگىزگەن قۇپىييا سوزدەرىڭىز ٴبىر بىرىنە سايكەس ەمەس.
+userexists|ەنگىزگەن قاتىسۋشى اتىڭىز الداقاشان پايدالانۋدا.\nوزگە اتاۋدى تاڭداڭىز.
+loginerror|كىرۋ قاتەسى
+nocookiesnew|جاڭا قاتىسۋشى تىركەلگىسى جاسالدى, بىراق كىرمەگەنسىز.\nقاتىسۋشى كىرۋ ٴۇشىن {{SITENAME}} تورابىندا «cookie» فايلدارى قولدانىلادى.\nسىزدە «cookies» وشىرىلگەن.\nسونى قوسىڭىز دا جاڭا قاتىسۋشى اتىڭىزدى جانە قۇپىييا ٴسوزىڭىزدى ەنگىزىپ كىرىڭىز.
+nocookieslogin|قاتىسۋشى كىرۋ ٴۇشىن {{SITENAME}} تورابىندا «cookies» دەگەن قولدانىلادى.\nسىزدە «cookies» وشىرىلگەن.\nسونى قوسىڭىز دا كىرۋدى قايتا بايقاپ كورىڭىز.
+noname|جارامدى قاتىسۋشى اتىن ەنگىزبەدىڭىز.
+loginsuccesstitle|كىرۋىڭىز ٴساتتى ٴوتتى
+loginsuccess|'''ٴسىز ەندى {{SITENAME}} جوباسىنا «~{0}» رەتىندە كىرىپ وتىرسىز.'''
+nosuchuser|مىندا «~{0}» دەپ اتالعان قاتىسۋشى جوق.\nەملەڭىزدى تەكسەرىڭىز, نە جاڭا تىركەلگى جاساڭىز.
+nosuchusershort|مىندا «~{0}» دەپ اتالعان قاتىسۋشى جوق.\nەملەڭىزدى تەكسەرىڭىز.
+nouserspecified|قاتىسۋشى اتىن كەلتىرۋىڭىز ٴجون.
+wrongpassword|بۇرىس قۇپىييا ٴسوز ەنگىزىلگەن. قايتا بايقاپ كورىڭىز.
+wrongpasswordempty|قۇپىييا ٴسوز بوس بولعان. قايتا بايقاپ كورىڭىز.
+passwordtooshort|قۇپىييا ٴسوزىڭىز جارامسىز نە تىم قىسقا.\nبۇندا ەڭ كەمىندە ~{0} تاڭبا بولۋى جانە دە قاتىسۋشى اتىڭىزدان وزگە بولۋى ٴجون.
+mailmypassword|قۇپىييا ٴسوزىمدى حاتپەن جىبەر
+passwordremindertitle|{{SITENAME}} ٴۇشىن جاڭا ۋاقىتشا قۇپىييا ٴسوز
+passwordremindertext|كەيبىرەۋ (IP مەكەنجايى: ~{0}, بالكىم ٴوزىڭىز بولارسىز)\nسىزگە {{SITENAME}} ٴۇشىن جاڭا قۇپىييا ٴسوز جونەلەتۋىن بىزدەن سۇراعان (~{3}).\n«~{1}» قاتىسۋشىنىڭ قۇپىييا ٴسوزى «~{2}» بولدى ەندى.\nقازىر كىرۋىڭىز جانە قۇپىييا ٴسوزدى وزگەرتۋىڭىز كەرەك.\n\nەگەر بۇل سۇرانىمدى باسقا بىرەۋ ىستەسە, نە قۇپىييا ٴسوزدى ەسكە ٴتۇسىرسىپ ەندى وزگەرتكىڭىز كەلمەسە, ەسكى قۇپىييا ٴسوز قولدانۋىن جاعاستىرىپ وسى حاتقا اڭعارماۋىڭىزعا دا بولادى.
+noemail|وسى ارادا «~{0}» قاتىسۋشىنىڭ ە-پوشتا مەكەنجايى جوق.
+passwordsent|جاڭا قۇپىييا ٴسوز «~{0}» ٴۇشىن تىركەلگەن ە-پوشتا مەكەنجايىنا جونەلتىلدى.\nقابىلداعاننان كەيىن كىرگەندە سونى ەنگىزىڭىز.
+blocked-mailpassword|IP مەكەنجايىڭىزدان وڭدەۋ بۇعاتتالعان, سوندىقتان قىيياناتتى قاقپايلاۋ ٴۇشىن قۇپىييا ٴسوزدى قالپىنا كەلتىرۋ جەتەسىن قولدانۋىنا رۇقسات ەتىلمەيدى.
+eauthentsent|قۇپتاۋ حاتى ايتىلمىش ە-پوشتا مەكەنجايىنا جونەلتىلدى.\nباسقا ە-پوشتا حاتىن جونەلتۋ الدىنان, تىركەلگى شىنىنان سىزدىكى ەكەنىن قۇپتاۋ ٴۇشىن حاتتاعى نۇسقامالارعا ەرىۋڭىز ٴجون.
+throttled-mailpassword|سوڭعى {{PLURAL:~{0}\u007Cساعاتتا\u007C~{0} ساعاتتا}} قۇپىييا ٴسوز ەسكەرتۋ حاتى الداقاشان جونەلتىلدى.\nقىيياناتتى قاقپايلاۋ ٴۇشىن, {{PLURAL:~{0}\u007Cساعات\u007C~{0} ساعات}} سايىن تەك ٴبىر عانا قۇپىييا ٴسوز ەسكەرتۋ حاتى جونەلتىلەدى.
+mailerror|حات جونەلتۋ قاتەسى: ~{0}
+acct_creation_throttle_hit|عافۋ ەتىڭىز, ٴسىز الداقاشان ~{0} رەت تىركەلگى جاساپسىز.\nونان ارتىق ىستەي المايسىز.
+emailauthenticated|ە-پوشتا مەكەنجايىڭىز راستالعان كەزى: ~{0}.
+emailnotauthenticated|ە-پوشتا مەكەنجايىڭىز ٴالى راستالعان جوق.\nكەلەسى ٴاربىر مۇمكىندىكتەر ٴۇشىن ەش حات جونەلتىلمەيدى.
+noemailprefs|وسى مۇمكىندىكتەر ىستەۋى ٴۇشىن ە-پوشتا مەكەنجايىڭىزدى ەنگىزىڭىز.
+emailconfirmlink|ە-پوشتا مەكەنجايىڭىزدى قۇپتاڭىز
+invalidemailaddress|وسى ە-پوشتا مەكەنجايىندا جارامسىز ٴپىشىم بولعان, قابىل ەتىلمەيدى.\nدۇرىس پىشىمدەلگەن مەكەنجايدى ەنگىزىڭىز, نە اۋماقتى بوس قالدىرىڭىز.
+accountcreated|جاڭا تىركەلگى جاسالدى
+accountcreatedtext|~{0} ٴۇشىن جاڭا قاتىسۋشى تىركەلگىسى جاسالدى.
+createaccount-title|{{SITENAME}} ٴۇشىن تىركەلۋ
+createaccount-text|كەيبىرەۋ ە-پوشتا مەكەنجايىڭىزدى پايدالانىپ {{SITENAME}} جوباسىندا (~{3}) «~{1}» اتاۋىمەن, «~{2}» قۇپىييا سوزىمەن تىركەلگى جاساعان.\nجوباعا كىرىۋىڭىز جانە قۇپىييا ٴسوزىڭىزدى وزگەرتۋىڭىز ٴتىيىستى.\n\nەگەر بۇل تىركەلگى قاتەلىكپەن جاسالسا, وسى حابارعا ەلەمەۋىڭىز مۇمكىن.
+loginlanguagelabel|ٴتىل: ~{0}
+changepassword|قۇپىييا ٴسوزدى وزگەرتۋ
+resetpass_announce|حاتپەن جىبەرىلگەن ۋاقىتشا كودىمەن كىرگەنسىز.\nكىرۋىڭىزدى ٴبىتىرۋ ٴۇشىن, جاڭا قۇپىييا ٴسوزىڭىزدى مىندا ەنگىزۋىڭىز ٴجون:
+resetpass_header|قۇپىييا ٴسوزدى وزگەرتۋ
+oldpassword|اعىمدىق قۇپىييا ٴسوزىڭىز:
+newpassword|جاڭا قۇپىييا ٴسوزىڭىز:
+retypenew|جاڭا قۇپىييا ٴسوزىڭىزدى قايتالاڭىز:
+resetpass_submit|قۇپىييا ٴسوزدى قويىڭىز دا كىرىڭىز
+changepassword-success|قۇپىييا ٴسوزىڭىز ٴساتتى وزگەرتىلدى! ەندى كىرىڭىز…
+resetpass_forbidden|{{SITENAME}} جوباسىندا قۇپىييا سوزدەر وزگەرتىلمەيدى
+extlink_sample|http://www.example.com سىلتەمە تاقىرىبىن اتى
+extlink_tip|شەتتىك سىلتەمە (الدىنان http:// ەنگىزۋىن ۇمىتپاڭىز)
+nowiki_sample|پىشىمدەلىنبەگەن ٴماتىندى مىندا ەنگىزىڭىز
+nowiki_tip|ۋىيكىي ٴپىشىمىن ەلەمەۋ
+image_tip|ەندىرىلگەن فايل
+media_tip|فايل سىلتەمەسى
+sig_tip|قولتاڭباڭىز جانە ۋاقىت بەلگىسى
+hr_tip|دەرەلەي سىزىق (ۇنەمدى قولدانىڭىز)
+summary|قىسقاشا مازمۇنداماسى:
+subject|تاقىرىبى/باس جولى:
+minoredit|بۇل شاعىن وڭدەمە
+watchthis|بەتتى باقىلاۋ
+savearticle|بەتتى ساقتا!
+preview|قاراپ شىعۋ
+showpreview|قاراپ شىق
+showdiff|وزگەرىستەردى كورسەت
+anoneditwarning|'''قۇلاقتاندىرۋ:''' ٴسىز جۇيەگە كىرمەگەنسىز.\nIP مەكەنجايىڭىز بۇل بەتتىڭ تۇزەتۋ تارىيحىندا جازىلىپ الىنادى.
+missingsummary|'''ەسكەرتپە:''' وڭدەمەنىڭ قىسقاشا مازمۇنداماسىن ەنگىزبەپسىز.\n«ساقتاۋ» تۇيمەسىن تاعى باسساڭىز, وڭدەنمەڭىز ماندەمەسىز ساقتالادى.
+missingcommenttext|ماندەمەڭىزدى تومەندە ەنگىزىڭىز.
+missingcommentheader|'''ەسكەرتپە:''' بۇل ماندەمەگە تاقىرىپ/باسجول جەتىستىرمەپسىز.\nەگەر تاعى دا ساقتاۋ تۇيمەسىن نۇقىساڭىز, وڭدەمەڭىز سولسىز ساقتالادى.
+summary-preview|قىسقاشا مازمۇنداماسىن قاراپ شىعۋ:
+subject-preview|تاقىرىبىن/باس جولىن قاراپ شىعۋ:
+blockedtitle|قاتىسۋشى بۇعاتتالعان
+blockedtext|'''قاتىسۋشى اتىڭىز نە IP مەكەنجايىڭىز بۇعاتتالعان.'''\n\nوسى بۇعاتتاۋدى ~{0} ىستەگەن. كەلتىرىلگەن سەبەبى: ''~{1}''.\n\n* بۇعاتتاۋ باستالعانى: ~{7}\n* بۇعاتتاۋ بىتەتىنى: ~{5}\n* بۇعاتتاۋ ماقساتى: ~{6}\n\nوسى بۇعاتتاۋدى تالقىلاۋ ٴۇشىن ~{0} دەگەنمەن, نە وزگە [[{{{{ns:mediawiki}}:grouppage-sysop}}\u007Cاكىمشىمەن]] قاتىناسۋىڭىزعا بولادى.\n[[{{#special:Preferences}}\u007Cتىركەلگىڭىز باپتالىمدارىن]] قولدانىپ جارامدى ە-پوشتا مەكەنجايىن ەنگىزگەنشە دەيىن جانە بۇنى پايدالانۋى بۇعاتتالماعانشا دەيىن «قاتىسۋشىعا حات جازۋ» مۇمكىندىگىن قولدانا المايسىز.\nاعىمدىق IP مەكەنجايىڭىز: ~{2}, جانە بۇعاتاۋ ٴنومىرى: ~{4}. سونىڭ بىرەۋىن, نەمەسە ەكەۋىن دە ٴاربىر سۇرانىمىڭىزعا كىرىستىرىڭىز.
+autoblockedtext|~{0} دەگەن بۇرىن وزگە قاتىسۋشى پايدالانعان بولعاسىن وسى IP مەكەنجايىڭىز وزدىكتىك بۇعاتتالعان.\nكەلتىرىلگەن سەبەبى:\n\n:''~{1}''\n\n* بۇعاتتاۋ باستالعانى: ~{7}\n* بۇعاتتاۋ بىتەتىنى: ~{5}\n\nوسى بۇعاتتاۋدى تالقىلاۋ ٴۇشىن ~{0} دەگەنمەن, نە باسقا [[{{{{ns:mediawiki}}:grouppage-sysop}}\u007Cاكىمشىمەن]] قاتىناسۋىڭىزعا بولادى.\n\nاڭعارتپا: [[{{#special:Preferences}}\u007Cپايدالانۋشىلىق باپتالىمدارىڭىزدى]] قولدانىپ جارامدى ە-پوشتا مەكەنجايىن ەنگىزگەنشە دەيىن جانە بۇنى پايدالانۋى بۇعاتتالماعانشا دەيىن «قاتىسۋشىعا حات جازۋ» مۇمكىندىگىن قولدانا المايسىز.\n\nبۇعاتاۋ ٴنومىرىڭىز: ~{4}.\nبۇل ٴنومىردى ٴاربىر سۇرانىمىڭىزدارعا كىرىستىرىڭىز.
+blockednoreason|ەش سەبەبى كەلتىرىلمەگەن
+whitelistedittext|بەتتەردى وڭدەۋ ٴۇشىن ~{0} ٴجون.
+confirmedittext|بەتتەردى وڭدەۋ ٴۇشىن الدىن الا ە-پوشتا مەكەنجايىڭىزدى قۇپتاۋىڭىز ٴجون.\nە-پوشتا مەكەنجايىڭىزدى [[Special:Preferences\u007Cپايدالانۋشىلىق باپتالىمدارىڭىز]] ارقىلى قويىڭىز دا جارامدىلىعىن تەكسەرىپ شىعىڭىز.
+nosuchsectiontitle|وسىنداي ەش ٴبولىم جوق
+nosuchsectiontext|جوق ٴبولىمدى وڭدەۋدى تالاپ ەتىپسىز.
+loginreqtitle|كىرۋىڭىز كەرەك
+loginreqlink|كىرۋ
+loginreqpagetext|باسقا بەتتەردى كورۋ ٴۇشىن ٴسىز ~{0} بولۋىڭىز ٴجون.
+accmailtitle|قۇپىييا ٴسوز جونەلتىلدى.
+accmailtext|~{1} جايىنا «~{0}» قۇپىييا ٴسوزى جونەلتىلدى.
+newarticle|(جاڭا)
+newarticletext|سىلتەمەگە ەرىپ ٴالى باستالماعان بەتكە كەلىپسىز.\nبەتتى باستاۋ ٴۇشىن, تومەندەگى كىرىستىرۋ ورنىندا ٴماتىنىڭىزدى تەرىڭىز (كوبىرەك اقپارات ٴۇشىن [~{0} انىقتاما بەتىن] قاراڭىز).\nەگەر جاڭىلعاننان وسىندا كەلگەن بولساڭىز, شولعىشىڭىز «ارتقا» دەگەن باتىرماسىن نۇقىڭىز.
+anontalkpagetext|----''بۇل تىركەلگىسىز (نەمەسە تىركەلگىسىن قولدانباعان) قاتىسۋشى تالقىلاۋ بەتى. وسى قاتىسۋشىنى ٴبىز تەك ساندىق IP مەكەنجايىمەن تەڭدەستىرەمىز.\nوسىنداي IP مەكەنجاي بىرنەشە قاتىسۋشىعا ورتاقتاستىرىلعان بولۋى مۇمكىن.\nەگەر ٴسىز تىركەلگىسىز قاتىسۋشى بولساڭىز جانە سىزگە قاتىسسىز ماندەمەلەر جىبەرىلگەنىن سەزسەڭىز, باسقا تىركەلگىسىز قاتىسۋشىلارمەن ارالاستىرماۋى ٴۇشىن [[Special:UserLogin\u007Cتىركەلىڭىز نە كىرىڭىز]].''
+noarticletext|بۇل بەتتە اعىمدا ەش ٴماتىن جوق, باسقا بەتتەردەن وسى بەت اتاۋىن [[Special:Search/{{PAGENAME}}\u007Cىزدەپ كورۋىڭىزگە]] نەمەسە وسى بەتتى [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} تۇزەتۋىڭىزگە] بولادى.
+userpage-userdoesnotexist|«<nowiki>~{0}</nowiki>» قاتىسۋشى تىركەلگىسى جازىپ الىنباعان. بۇل بەتتى باستاۋ/وڭدەۋ تالابىڭىزدى تەكسەرىپ شىعىڭىز.
+clearyourcache|'''اڭعارتپا:''' ساقتاعاننان كەيىن, وزگەرىستەردى كورۋ ٴۇشىن شولعىش بۇركەمەسىن وراعىتۋ ىقتىيمال. '''Mozilla / Firefox / Safari:''' ''قايتا جۇكتەۋ'' باتىرماسىن نۇقىعاندا ''Shift'' تۇتىڭىز, نە ''Ctrl-Shift-R'' باسىڭىز (Apple Mac — ''Cmd-Shift-R''); '''IE:''' ''جاڭارتۋ'' باتىرماسىن نۇقىعاندا ''Ctrl'' تۇتىڭىز, نە ''Ctrl-F5'' باسىڭىز; '''Konqueror:''': ''جاڭارتۋ'' باتىرماسىن جاي نۇقىڭىز, نە ''F5'' باسىڭىز; '''Opera''' پايدانۋشىلارى ''قۇرالدار→باپتالىمدار'' دەگەنگە بارىپ بۇركەمەسىن تولىق تازارتۋ ٴجون.
+usercssyoucanpreview|'''اقىل-كەڭەس:''' جاڭا CSS فايلىن ساقتاۋ الدىندا «قاراپ شىعۋ» باتىرماسىن قولدانىپ سىناقتاڭىز.
+userjsyoucanpreview|'''اقىل-كەڭەس:''' جاڭا JS فايلىن ساقتاۋ الدىندا «قاراپ شىعۋ» باتىرماسىن قولدانىپ سىناقتاڭىز.
+usercsspreview|'''مىناۋ CSS ٴماتىنىن تەك قاراپ شىعۋ ەكەنىن ۇمىتپاڭىز, ول ٴالى ساقتالعان جوق!'''
+userjspreview|'''مىناۋ JavaScript قاتىسۋشى باعدارلاماسىن تەكسەرۋ/قاراپ شىعۋ ەكەنىن ۇمىتپاڭىز, ول ٴالى ساقتالعان جوق!'''
+userinvalidcssjstitle|'''قۇلاقتاندىرۋ:''' وسى ارادا «~{0}» دەگەن ەش مانەر جوق.\nقاتىسۋشىنىڭ .css جانە .js فايل اتاۋى كىشى ارىپپپەن جازىلۋ ٴتىيىستى ەكەنىن ۇمىتپاڭىز, مىسالعا {{ns:user}}:Foo/vector.css دەگەندى {{ns:user}}:Foo/Vector.css دەگەنمەن سالىستىرىپ قاراڭىز.
+updated|(جاڭارتىلعان)
+note|'''اڭعارتپا:'''
+previewnote|'''مىناۋ تەك قاراپ شىعۋ ەكەنىن ۇمىتپاڭىز;\nوزگەرىستەر ٴالى ساقتالعان جوق!'''
+previewconflict|بۇل قاراپ شىعۋ بەتى جوعارعى كىرىستىرۋ ورنىنداعى ٴماتىندى قامتىيدى دا جانە ساقتالعانداعى ٴوڭدى كورسەتپەك.
+session_fail_preview|'''عافۋ ەتىڭىز! سەسسىييا دەرەكتەرى جوعالۋى سالدارىنان وڭدەمەڭىزدى بىتىرە المايمىز.\nقايتا بايقاپ كورىڭىز. ەگەر بۇل ٴالى ىستەلمەسە, شىعۋدى جانە قايتا كىرۋدى بايقاپ كورىڭىز.'''
+session_fail_preview_html|'''عافۋ ەتىڭىز! سەسسىييا دەرەكتەرى جوعالۋى سالدارىنان وڭدەمەڭىزدى بىتىرە المايمىز.'''\n\n''{{SITENAME}} جوباسىندا قام HTML قوسىلعان, JavaScript شابۋىلداردان قورعانۋ ٴۇشىن الدىن الا قاراپ شىعۋ جاسىرىلعان.''\n\n'''ەگەر بۇل وڭدەمە ادال تالاپ بولسا, قايتا بايقاپ كورىڭىز. ەگەر بۇل ٴالى ىستەمەسە, شىعۋدى جانە قايتا كىرۋدى بايقاپ كورىڭىز.'''
+token_suffix_mismatch|'''وڭدەمەڭىز تايدىرىلدى, سەبەبى تۇتىنعىشىڭىز وڭدەمە دەرەكتەر بۋماسىنداعى تىنىس بەلگىلەرىن ٴبۇلدىرتتى.\nبەت ٴماتىنى بۇلىنبەۋ ٴۇشىن وڭدەمەڭىز تايدىرىلادى.\nبۇل كەي ۋاقىتتا قاتەسى تولعان ۆەب-نەگىزىندە تىركەلۋى جوق پروكسىي-سەرۆەردى پايدالانعان بولۋى مۇمكىن.'''
+editing|وڭدەلۋدە: ~{0}
+editingsection|وڭدەلۋدە: ~{0} (ٴبولىمى)
+editingcomment|وڭدەلۋدە: ~{0} (ماندەمەسى)
+editconflict|وڭدەمە قاقتىعىسى: ~{0}
+explainconflict|وسى بەتتى ٴسىز وڭدەي باستاعاندا باسقا بىرەۋ بەتتى وزگەرتكەن.\nجوعارعى كىرىستىرۋ ورنىندا بەتتىڭ اعىمدىق ٴماتىنى بار.\nتومەنگى كىرىستىرۋ ورنىندا ٴسىز وزگەرتكەن ٴماتىنى كورسەتىلەدى.\nوزگەرتۋىڭىزدى اعىمدىق ماتىنگە ۇستەۋىڭىز ٴجون.\n«بەتتى ساقتا! باتىرماسىن باسقاندا '''تەك''' جوعارعى كىرىستىرۋ ورنىنداعى ٴماتىن ساقتالادى.
+yourtext|ٴماتىنىڭىز
+storedversion|ساقتالعان نۇسقاسى
+nonunicodebrowser|'''قۇلاقتاندىرۋ: شولعىشىڭىز Unicode بەلگىلەۋىنە ۇيلەسىمدى ەمەس, سوندىقتان لاتىن ەمەس ارىپتەرى بار بەتتەردى وڭدەۋ ٴزىل بولۋ مۇمكىن.\nجۇمىس ىستەۋگە ىقتىيمالدىق بەرۋ ٴۇشىن, تومەندەگى كىرىستىرۋ ورنىندا ASCII ەمەس تاڭبالار ونالتىلىق كودىمەن كورسەتىلەدى'''.
+editingold|'''قۇلاقتاندىرۋ: وسى بەتتىڭ ەرتەرەك تۇزەتۋىن وڭدەپ جاتىرسىز.\nبۇنى ساقتاساڭىز, وسى تۇزەتۋدەن كەيىنگى بارلىق وزگەرىستەر جويىلادى.'''
+yourdiff|ايىرمالار
+copyrightwarning|اڭعارتپا: {{SITENAME}} جوباسىنا بەرىلگەن بارلىق ۇلەستەر ~{1} (كوبىرەك اقپارات ٴۇشىن: ~{0}) قۇجاتىنا ساي دەپ سانالادى.\nەگەر جازۋىڭىزدىڭ ەركىن وڭدەلۋىن جانە اقىسىز كوپشىلىككە تاراتۋىن قالاماساڭىز, مىندا جارىييالاماۋىڭىز ٴجون.<br />\nتاعى دا, بۇل ماعلۇمات ٴوزىڭىز جازعانىڭىزعا, نە قوعام قازىناسىنان نەمەسە سونداي اشىق قورلاردان كوشىرىلگەنىنە بىزگە ۋادە بەرەسىز.\n'''اۋتورلىق قۇقىقپەن قورعاۋلى ماعلۇماتتى رۇقساتسىز جارىييالاماڭىز!'''
+copyrightwarning2|اڭعارتپا: {{SITENAME}} جوباسىنا بەرىلگەن بارلىق ۇلەستەردى باسقا ۇلەسكەرلەر وڭدەۋگە, وزگەرتۋگە, نە الاستاۋعا مۇمكىن.\nەگەر جازۋىڭىزدىڭ ەركىن وڭدەلۋىن قالاماساڭىز, مىندا جارىييالاماۋىڭىز ٴجون.<br />\nتاعى دا, بۇل ماعلۇمات ٴوزىڭىز جازعانىڭىزعا, نە قوعام قازىناسىنان نەمەسە سونداي اشىق قورلاردان كوشىرىلگەنىنە بىزگە ۋادە بەرەسىز (كوبىرەك اقپارات ٴۇشىن ~{0} قۋجاتىن قاراڭىز).\n'''اۋتورلىق قۇقىقپەن قورعاۋلى ماعلۇماتتى رۇقساتسىز جارىييالاماڭىز!'''
+longpageerror|'''قاتەلىك: جونەلتپەك ٴماتىنىڭىزدىن مولشەرى — ~{0} KB, ەڭ كوبى ~{1} KB رۇقسات ەتىلگەن مولشەرىنەن اسقان.\nبۇل ساقتاي الىنبايدى.'''
+readonlywarning|'''قۇلاقتاندىرۋ: دەرەكقور باپتاۋ ٴۇشىن قۇلىپتالعان, سوندىقتان ٴدال قازىر وڭدەمەڭىزدى ساقتاي المايسىز.\nكەيىن قولدانۋ ٴۇشىن ٴماتاندى قيىپ الىپ جانە قويىپ, ٴماتىن فايلىنا ساقتاۋڭىزعا بولادى.'''
+protectedpagewarning|'''قۇلاقتاندىرۋ: بۇل بەت قورعالعان. تەك اكىمشى قۇقىقتارى بار قاتىسۋشىلار وڭدەي الادى.'''
+semiprotectedpagewarning|'''اڭعارتپا:''' بەت جارتىلاي قورعالعان, سوندىقتان وسىنى تەك تىركەلگەن قاتىسۋشىلار وڭدەي الادى.
+cascadeprotectedwarning|'''قۇلاقتاندىرۋ''': بۇل بەت قۇلىپتالعان, ەندى تەك اكىمشى قۇقىقتارى بار قاتىسۋشىلار بۇنى وڭدەي الادى.بۇنىڭ سەبەبى: بۇل بەت «باۋلى قورعاۋى» بار كەلەسى {{PLURAL:~{0}\u007Cبەتتىڭ\u007Cبەتتەردىڭ}} كىرىكبەتى:
+titleprotectedwarning|'''قۇلاقتاندىرۋ:  بۇل بەت قۇلىپتالعان, سوندىقتان تەك بىرقاتار قاتىسۋشىلار بۇنى باستاي الادى.'''
+templatesused|بۇل بەتتە قولدانىلعان ۇلگىلەر:
+templatesusedpreview|بۇنى قاراپ شىعۋعا قولدانىلعان ۇلگىلەر:
+templatesusedsection|بۇل بولىمدە قولدانىلعان ۇلگىلەر:
+template-protected|(قورعالعان)
+template-semiprotected|(جارتىلاي قورعالعان)
+hiddencategories|بۇل بەت ~{0} جاسىرىن ساناتتىڭ مۇشەسى:
+nocreatetext|{{SITENAME}} جوباسىندا جاڭا بەت باستاۋى شەكتەلگەن.\nكەرى قايتىپ بار بەتتى وڭدەۋىڭىزگە بولادى, نەمەسە [[Special:UserLogin\u007Cكىرۋىڭىزگە نە تىركەلۋىڭىزگە]] بولادى.
+nocreate-loggedin|{{SITENAME}} جوباسىندا جاڭا بەت باستاۋ رۇقساتىڭىز جوق.
+permissionserrors|رۇقساتتار قاتەلەرى
+permissionserrorstext|بۇنى ىستەۋگە رۇقساتىڭىز جوق, كەلەسى {{PLURAL:~{0}\u007Cسەبەپ\u007Cسەبەپتەر}} بويىنشا:
+permissionserrorstext-withaction|~{1} دەگەنگە رۇقساتىڭىز جوق, كەلەسى {{PLURAL:~{0}\u007Cسەبەپ\u007Cسەبەپتەر}} بويىنشا:
+recreate-moveddeleted-warn|'''قۇلاقتاندىرۋ: الدىندا جويىلعان بەتتى قايتا باستايىن دەپ تۇرسىز.'''\n\nمىنا بەت وڭدەۋىن جالعاستىرۋ ٴۇشىن جاراستىعىن تەكسەرىپ شىعۋىڭىز ٴجون.\nقولايلى بولۋى ٴۇشىن بۇل بەتتىڭ جويۋ جۋرنالى كەلتىرىلگەن:
+expensive-parserfunction-warning|قۇلاقتاندىرۋ: بۇل بەتتە تىم كوپ شىعىس الاتىن قۇرىلىم تالداتقىش جەتەلەرىنىڭ قوڭىراۋ شالۋلارى بار.\n\nبۇل ~{1} شاماسىنان كەم بولۋى ٴجون, قازىر وسى ارادا ~{0}.
+expensive-parserfunction-category|شىعىس الاتىن قۇرىلىم تالداتقىش جەتەلەرىنىڭ تىم كوپ شاقىرىمى بار بەتتەر
+post-expand-template-inclusion-warning|قۇلاقتاندىرۋ: ۇلگى كىرىستىرۋ مولشەرى تىم ۇلكەن.\nكەيبىر ۇلگىلەر كىرىستىرىلمەيدى.
+post-expand-template-inclusion-category|ۇلگى كىرىستىرىلگەن بەتتەر مولشەرى اسىپ كەتتى
+post-expand-template-argument-warning|قۇلاقتاندىرۋ: بۇل بەتتە تىم كوپ ۇلعايتىلعان مولشەرى بولعان ەڭ كەمىندە ٴبىر ۇلگى دالەلى بار.\nبۇنىڭ دالەلدەرىن قالدىرىپ كەتكەن.
+post-expand-template-argument-category|ۇلگى دالەلدەرىن قالدىرىپ كەتكەن بەتتەر
+undo-success|بۇل وڭدەمە جوققا شىعارىلۋى مۇمكىن. تالابىڭىزدى قۇپتاپ الدىن الا تومەندەگى سالىستىرۋدى تەكسەرىپ شىعىڭىز دا, وڭدەمەنى جوققا شىعارۋىن ٴبىتىرۋ ٴۇشىن تومەندەگى وزگەرىستەردى ساقتاڭىز.
+undo-failure|بۇل وڭدەمە جوققا شىعارىلمايدى, سەبەبى ارادا قاقتىعىستى وڭدەمەلەر بار.
+undo-norev|بۇل وڭدەمە جوققا شىعارىلمايدى, سەبەبى بۇل جوق نەمەسە جويىلعان.
+undo-summary|[[Special:Contributions/~{1}\u007C~{1}]] ([[User_talk:~{1}\u007Cتالقىلاۋى]]) ىستەگەن ٴنومىر ~{0} نۇسقاسىن جوققا شىعاردى
+cantcreateaccounttitle|جاڭا تىركەلگى جاسالمادى
+cantcreateaccount-text|بۇل IP جايدان ('''~{0}''') جاڭا تىركەلگى جاساۋىن [[User:~{2}\u007C~{2}]] بۇعاتتاعان.\n\n~{2} كەلتىرىلگەن سەبەبى: ''~{1}''
+viewpagelogs|بۇل بەت ٴۇشىن جۋرنال وقىيعالارىن قاراۋ
+nohistory|مىندا بۇل بەتتىنىڭ تۇزەتۋ تارىيحى جوق.
+currentrev|اعىمدىق تۇزەتۋ
+revisionasof|~{0} كەزىندەگى تۇزەتۋ
+revision-info|~{0} كەزىندەگى ~{1} ىستەگەن تۇزەتۋ
+previousrevision|← ەسكىلەۋ تۇزەتۋى
+nextrevision|جاڭالاۋ تۇزەتۋى →
+currentrevisionlink|اعىمدىق تۇزەتۋى
+cur|اعىم.
+next|كەل.
+last|سوڭ.
+page_first|العاشقىسىنا
+page_last|سوڭعىسىنا
+histlegend|ايىرماسىن بولەكتەۋ: سالىستىرماق نۇسقالارىنىڭ قوسۋ كوزدەرىن بەلگىلەپ <Enter> پەرنەسىن باسىڭىز, نەمەسە تومەندەگى باتىرمانى نۇقىڭىز.<br />\nشارتتى بەلگىلەر: (اعىم.) = اعىمدىق نۇسقامەن ايىرماسى,\n(سوڭ.) = الدىڭعى نۇسقامەن ايىرماسى, ش = شاعىن وڭدەمە
+histfirst|ەڭ العاشقىسىنا
+histlast|ەڭ سوڭعىسىنا
+historysize|(~{0} بايت)
+historyempty|(بوس)
+history-feed-title|تۇزەتۋ تارىيحى
+history-feed-description|مىنا ۋىيكىيدەگى بۇل بەتتىڭ تۇزەتۋ تارىيحى
+history-feed-item-nocomment|~{1} كەزىندەگى ~{0} دەگەن
+history-feed-empty|سۇراتىلعان بەت جوق بولدى.\nول مىنا ۋىيكىيدەن جويىلعان, نەمەسە اتاۋى اۋىستىرىلعان.\nوسىعان قاتىستى جاڭا بەتتەردى [[Special:Search\u007Cبۇل ۋىيكىيدەن ىزدەۋدى]] بايقاپ كورىڭىز.
+rev-deleted-comment|(ماندەمە الاستالدى)
+rev-deleted-user|(قاتىسۋشى اتى الاستالدى)
+rev-deleted-event|(جۋرنال جازباسى الاستالدى)
+rev-deleted-text-permission|بۇل بەتتىڭ تۇزەتۋى بارشا مۇراعاتتارىنان الاستالعان.\nمىندا [{{fullurl:{{#special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} جويۋ جۋرنالىندا] ەگجەي-تەگجەي مالىمەتتەرى بولۋى مۇمكىن.
+rev-deleted-text-view|وسى بەتتىڭ تۇزەتۋى بارشا مۇراعاتتارىنان الاستالعان.\n{{SITENAME}} اكىمشىسى بوپ سونى كورە الاسىز;\n[{{fullurl:{{#special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} جويۋ جۋرنالىندا] ەگجەي-تەگجەي مالمەتتەرى بولۋى مۇمكىن.
+rev-delundel|كورسەت/جاسىر
+revisiondelete|تۇزەتۋلەردى جويۋ/جويۋدى بولدىرماۋ
+revdelete-nooldid-title|نىسانا تۇزەتۋ جارامسىز
+revdelete-nooldid-text|بۇل جەتەنى ورىنداۋ ٴۇشىن نىسانا تۇزەتۋىن/تۇزەتۋلەرىن كەلتىرىلمەپسىز,\nكەلتىرىلگەن تۇزەتۋ جوق, نە اعىمدىق تۇزەتۋدى جاسىرۋ ٴۇشىن ارەكەتتەنىپ كوردىڭىز.
+logdelete-selected|بولەكتەنگەن {{PLURAL:~{0}\u007Cجۋرنال وقىيعاسى\u007Cجۋرنال وقىيعالارى}}:
+revdelete-legend|كورىنىس تىيىمدارىن قويۋ:
+revdelete-hide-text|تۇزەتۋ ٴماتىنىن جاسىر
+revdelete-hide-image|فايل ماعلۇماتىن جاسىر
+revdelete-hide-name|ارەكەت پەن نىساناسىن جاسىر
+revdelete-hide-comment|وڭدەمە ماندەمەسىن جاسىر
+revdelete-hide-user|وڭدەۋشى اتىن (IP مەكەنجايىن) جاسىر
+revdelete-hide-restricted|وسى تىيىمداردى اكىمشىلەرگە قولدانۋ جانە بۇل تىلدەسۋدى قۇلىپتاۋ
+revdelete-suppress|دەرەكتەردى بارشاعا ۇقساس اكىمشىلەردەن دە شەتتەتۋ
+revdelete-unsuppress|قالپىنا كەلتىرىلگەن تۇزەتۋلەردەن تىيىمداردى الاستاۋ
+revdelete-log|سەبەبى:
+revdelete-submit|بولەكتەنگەن تۇزەتۋگە قولدانۋ
+revdelete-success|'''تۇزەتۋ كورىنىسى ٴساتتى قويىلدى.'''
+logdelete-success|'''جۋرنال كورىنىسى ٴساتتى قويىلدى.'''
+revdel-restore|كورىنىسىن وزگەرتۋ
+pagehist|بەت تارىيحى
+deletedhist|جويىلعان تارىيحى
+revdelete-edit-reasonlist|جويۋ سەبەپتەرىن وڭدەۋ
+suppressionlog|شەتتەتۋ جۋرنالى
+suppressionlogtext|تومەندەگى تىزىمدە اكىمشىلەردەن جاسىرىلعان ماعلۇماتقا قاتىستى جويۋلار مەن بۇعاتتاۋلار بەرىلەدى.\nاعىمدا ارەكەتتەگى تىيىم مەن بۇعاتتاۋ ٴتىزىمى ٴۇشىن [[Special:IPBlockList\u007CIP بۇعاتتاۋ ٴتىزىمىن]] قاراڭىز.
+mergehistory|بەتتەر تارىيحىن بىرىكتىرۋ
+mergehistory-header|بۇل بەت تۇزەتۋلەر تارىيحىن قاينار بەتتىڭ بىرەۋىنەن الىپ جاڭا بەتكە بىرىكتىرگىزەدى.\nوسى وزگەرىس بەتتىڭ تارىيحىي جالعاستىرۋشىلىعىن قوشتايتىنىنا كوزىڭىز جەتسىن.
+mergehistory-box|ەكى بەتتىڭ تۇزەتۋلەرىن بىرىكتىرۋ:
+mergehistory-from|قاينار بەتى:
+mergehistory-into|نىسانا بەتى:
+mergehistory-list|بىرىكتىرلەتىن تۇزەتۋ تارىيحى
+mergehistory-merge|[[:~{0}]] دەگەننىڭ كەلەسى تۇزەتۋلەرى [[:~{1}]] دەگەنگە بىرىكتىرىلۋى مۇمكىن.\nبىرىكتىرۋگە تەك ەنگىزىلگەن ۋاقىتقا دەيىن جاسالعان تۇزەتۋلەردى ايىرىپ-قوسقىش باعاندى قولدانىڭىز.\nاڭعارتپا: باعىتتاۋ سىلتەمەلەرىن قولدانعاندا بۇل باعان قايتا قويىلادى.
+mergehistory-go|بىرىكتىرلەتىن تۇزەتۋلەردى كورسەت
+mergehistory-submit|تۇزەتۋلەردى بىرىكتىرۋ
+mergehistory-empty|ەش تۇزەتۋلەر بىرىكتىرىلمەيدى
+mergehistory-success|[[:~{0}]] دەگەننىڭ ~{2} تۇزەتۋى [[:~{1}]] دەگەنگە ٴساتتى بىرىكتىرىلدى.
+mergehistory-fail|تارىيح بىرىكتىرۋىن ورىنداۋ ىيكەمدى ەمەس, بەت پەن ۋاقىت باپتالىمدارىن قايتا تەكسەرىپ شىعىڭىز.
+mergehistory-no-source|~{0} دەگەن قاينار بەتى جوق.
+mergehistory-no-destination|~{0} دەگەن نىسانا بەتى جوق.
+mergehistory-invalid-source|قاينار بەتىندە جارامدى تاقىرىپ اتى بولۋى ٴجون.
+mergehistory-invalid-destination|نىسانا بەتىندە جارامدى تاقىرىپ اتى بولۋى ٴجون.
+mergehistory-autocomment|[[:~{0}]] دەگەن [[:~{1}]] دەگەنگە بىرىكتىرىلدى
+mergehistory-comment|[[:~{0}]] دەگەن [[:~{1}]] دەگەنگە بىرىكتىرىلدى: ~{2}
+mergelog|بىرىكتىرۋ جۋرنالى
+revertmerge|بىرىكتىرۋدى بولدىرماۋ
+mergelogpagetext|تومەندە ٴبىر بەتتىڭ تارىيحى وزگە بەتكە بىرىكتىرۋ ەڭ سوڭعى ٴتىزىمى كەلتىرىلەدى.
+history-title|«~{0}» — تۇزەتۋ تارىيحى
+lineno|جول ٴنومىرى ~{0}:
+compareselectedversions|بولەكتەنگەن نۇسقالاردى سالىستىرۋ
+editundo|جوققا شىعارۋ
+searchresults|ىزدەۋ ناتىيجەلەرى
+titlematches|بەت تاقىرىبىن اتى سايكەس كەلەدى
+textmatches|بەت ٴماتىنى سايكەس كەلەدى
+notextmatches|ەش بەت ٴماتىنى سايكەس ەمەس
+viewprevnext|كورسەتىلۋى: (~{0} {{int:pipe-separator}} ~{1}) (~{2}) جازبا
+search-result-size|~{0} (~{1} ٴسوز)
+search-redirect|(ايداعىش ~{0})
+search-section|(ٴبولىم ~{0})
+search-suggest|بۇنى ىزدەدىڭىز بە: ~{0}
+search-interwiki-caption|باۋىرلاس جوبالار
+search-interwiki-default|~{0} ناتىيجە:
+search-interwiki-more|(كوبىرەك)
+search-relatedarticle|قاتىستى
+searchrelated|قاتىستى
+searchall|بارلىق
+showingresults|تومەندە ٴنومىر '''~{1}''' ورنىنان باستاپ بارىنشا '''~{0}''' ناتىيجە كورسەتىلەدى.
+powersearch-legend|كەڭەيتىلگەن ىزدەۋ
+powersearch-ns|مىنا ەسىم ايالاردا ىزدەۋ:
+search-external|شەتتىك ىزدەگىش
+searchdisabled|{{SITENAME}} ىزدەۋ قىزمەتى وشىرىلگەن.\nازىرشە Google ارقىلى ىزدەۋگە بولادى.\nاڭعارتپا: {{SITENAME}} تورابىنىڭ ماعلۇمات تىزبەلەرى ەسكىرگەن بولۋى مۇمكىن.
+preferences|باپتالىمدار
+mypreferences|باپتالىمدارىم
+prefs-edits|وڭدەمە سانى:
+prefs-skin|مانەرلەر
+skin-preview|قاراپ شىعۋ
+datedefault|ەش قالاۋسىز
+prefs-personal|جەكە دەرەكتەرى
+prefs-rc|جۋىقتاعى وزگەرىستەر
+prefs-watchlist|باقىلاۋ
+prefs-watchlist-days|باقىلاۋ تىزىمىندەگى كۇندەردىڭ كورسەتپەك سانى:
+prefs-watchlist-edits|كەڭەيتىلگەن باقىلاۋلارداعى وزگەرىستەردىڭ بارىنشا كورسەتپەك سانى:
+prefs-misc|ارقىيلى
+saveprefs|ساقتا
+prefs-editing|وڭدەۋ
+rows|جولدار:
+columns|باعاندار:
+searchresultshead|ىزدەۋ
+stub-threshold|<a href="#" class="stub">بىتەمە سىلتەمەسىن</a> پىشىمدەۋ تابالدىرىعى (بايت):
+recentchangesdays|جۇىقتاعى وزگەرىستەرىندە كورسەتپەك كۇن سانى:
+recentchangescount|جۋىقتاعى وزگەرىستەردىندە, تارىيح جانە جۋرنال بەتتەرىندە كورسەتپەك وڭدەمە سانى:
+savedprefs|باپتالىمدارىڭىز ساقتالدى.
+timezonelegend|ۋاقىت بەلدەۋى
+localtime|جەرگىلىكتى ۋاقىت
+servertime|سەرۆەر ۋاقىتى
+guesstimezone|شولعىشتان الىپ تولتىرۋ
+allowemail|باسقادان حات قابىلداۋىن قوس
+prefs-searchoptions|ىزدەۋ باپتالىمدارى
+prefs-namespaces|ەسىم ايالارى
+default|ادەپكى
+prefs-files|فايلدار
+youremail|ە-پوشتاڭىز:
+username|قاتىسۋشى اتىڭىز:
+prefs-memberingroups|كىرگەن {{PLURAL:~{0}\u007Cتوبىڭىز\u007Cتوپتارىڭىز}}:
+yourrealname|ناقتى اتىڭىز:
+yourlanguage|ٴتىلىڭىز:
+yourvariant|ٴتىل/ٴجازبا نۇسقاڭىز:
+yournick|قولتاڭباڭىز:
+badsig|قام قولتاڭباڭىز جارامسىز; HTML بەلگىشەلەرىن تەكسەرىڭىز.
+badsiglength|لاقاپ اتىڭىز تىم ۇزىن;\nبۇل ~{0} تاڭبادان اسپاۋى ٴجون.
+email|ە-پوشتاڭىز
+prefs-help-realname|ناقتى اتىڭىز مىندەتتى ەمەس.\nەگەر بۇنى جەتىستىرۋدى تاڭداساڭىز, بۇل تۇزەتۋىڭىزدىڭ اۋتورلىعىن انىقتاۋ ٴۇشىن قولدانىلادى.
+prefs-help-email|ە-پوشتا مەكەنجايى مىندەتتى ەمەس, بىراق جەكە باسىڭىزدى اشپاي «قاتىسۋشى» نەمەسە «قاتىسۋشى_تالقىلاۋى» دەگەن بەتتەرىڭىز ارقىلى بارشا سىزبەن بايلانىسا الادى.
+prefs-help-email-required|ە-پوشتا مەكەنجايى كەرەك.
+userrights|قاتىسۋشى قۇقىقتارىن رەتتەۋ
+userrights-lookup-user|قاتىسۋشى توپتارىن رەتتەۋ
+userrights-user-editname|قاتىسۋشى اتىن ەنگىزىڭىز:
+editusergroup|قاتىسۋشى توپتارىن وڭدەۋ
+editinguser|قاتىسۋشى قۇقىقتارىن وزگەرتۋ: '''[[User:~{0}\u007C~{0}]]''' ([[User talk:~{0}\u007C{{int:talkpagelinktext}}]]{{int:pipe-separator}}[[Special:Contributions/~{0}\u007C{{int:contribslink}}]])
+userrights-editusergroup|قاتىسۋشى توپتارىن وڭدەۋ
+saveusergroups|قاتىسۋشى توپتارىن ساقتاۋ
+userrights-groupsmember|مۇشەلىگى:
+userrights-groups-help|بۇل قاتىسۋشى كىرەتىن توپتاردى رەتتەي الاسىز.\n* قۇسبەلگى قويىلعان كوزى قاتىسۋشى بۇل توپقا كىرگەنىن كورسەتەدى;\n* قۇسبەلگى الىپ تاستالعان كوز قاتىسۋشى بۇل توپقا كىرمەگەنىن كورسەتەدى;\n* كەلتىرىلگەن * توپتى ٴبىر ۇستەگەنىنەن كەيىن الاستاي المايتىندىعىن, نە قاراما-قارسىسىن كورسەتەدى.
+userrights-reason|سەبەبى:
+userrights-no-interwiki|باسقا ۋىيكىيلەردەگى پايدالانۋشى قۇقىقتارىن وڭدەۋگە رۇقساتىڭىز جوق.
+userrights-nodatabase|~{0} دەرەكقورى جوق نە جەرگىلىكتى ەمەس.
+userrights-nologin|قاتىسۋشى قۇقىقتارىن تاعايىنداۋ ٴۇشىن اكىمشى تىركەلگىسىمەن [[{{#special:Userlogin}}\u007Cكىرۋىڭىز]] ٴجون.
+userrights-notallowed|قاتىسۋشى قۇقىقتارىن تاعايىنداۋ ٴۇشىن تىركەلگىڭىزدە رۇقسات جوق.
+userrights-changeable-col|وزگەرتە الاتىن توپتار
+userrights-unchangeable-col|وزگەرتە المايتىن توپتار
+group|توپ:
+group-user|قاتىسۋشىلار
+group-autoconfirmed|وزقۇپتالعان قاتىسۋشىلار
+group-bot|بوتتار
+group-sysop|اكىمشىلەر
+group-bureaucrat|بىتىكشىلەر
+group-suppress|شەتتەتۋشىلەر
+group-all|(بارلىق)
+group-user-member|قاتىسۋشى
+group-autoconfirmed-member|وزقۇپتالعان قاتىسۋشى
+group-bot-member|بوت
+group-sysop-member|اكىمشى
+group-bureaucrat-member|بىتىكشى
+group-suppress-member|شەتتەتۋشى
+grouppage-user|{{ns:project}}:قاتىسۋشىلار
+grouppage-autoconfirmed|{{ns:project}}:وزقۇپتالعان قاتىسۋشىلار
+grouppage-bot|{{ns:project}}:بوتتار
+grouppage-sysop|{{ns:project}}:اكىمشىلەر
+grouppage-bureaucrat|{{ns:project}}:بىتىكشىلەر
+grouppage-suppress|{{ns:project}}:شەتتەتۋشىلەر
+right-read|بەتتەردى وقۋ
+right-edit|بەتتەردى وڭدەۋ
+right-createpage|تالقىلاۋ ەمەس بەتتەردى باستاۋ
+right-createtalk|تالقىلاۋ بەتتەردى باستاۋ
+right-createaccount|جاڭا قاتىسۋشى تىركەلگىسىن جاساۋ
+right-minoredit|وڭدەمەلەردى شاعىن دەپ بەلگىلەۋ
+right-move|بەتتەردى جىلجىتۋ
+right-move-subpages|بەتتەردى بۇلاردىڭ باعىنىشتى بەتتەرىمەن جىلجىتۋ
+right-suppressredirect|ٴتىيىستى اتاۋعا بەتتى جىلجىتقاندا ايداعىشتى جاساماۋ
+right-upload|فايلداردى قوتارىپ بەرۋ
+right-reupload|بار فايل ۇستىنە جازۋ
+right-reupload-own|ٴوزى قوتارىپ بەرگەن فايل ۇستىنە جازۋ
+right-reupload-shared|تاسپا ورتاق قويماسىنداعى فايلداردى جەرگىلىكتىلەرمەن اسىرۋ
+right-upload_by_url|فايلدى URL مەكەنجايىنان قوتارىپ بەرۋ
+right-purge|بەتتى توراپ بۇركەمەسىنەن قۇپتاۋسىز تازارتۋ
+right-autoconfirmed|جارتىلاي قورعالعان بەتتەردى وڭدەۋ
+right-bot|وزدىكتىك ۇدەرىس دەپ ەسەپتەلۋ
+right-nominornewtalk|تالقىلاۋ بەتتەردەگى شاعىن وڭدەمەلەردى جاڭا حابار دەپ ەسەپتەمەۋ
+right-apihighlimits|API سۇرانىمدارىنىڭ جوعارى شەكتەلىمدەرىن پايدالانۋ
+right-writeapi|API جازۋىن پايدالانۋ
+right-delete|بەتتەردى جويۋ
+right-bigdelete|ۇزاق تارىيحى بار بەتتەردى جويۋ
+right-deleterevision|بەتتەردىڭ وزىندىك تۇزەتۋلەرىن جويۋ نە جويۋىن بولدىرماۋ
+right-deletedhistory|جويىلعان تارىيح دانالارىن (بايلانىستى ٴماتىنسىز) كورۋ
+right-browsearchive|جويىلعان بەتتەردى ىزدەۋ
+right-undelete|بەتتىڭ جيۋىن بولدىرماۋ
+right-suppressrevision|اكىمشىلەردەن جاسىرىلعان تۇزەتۋلەردى شولىپ شىعۋ جانە قالپىنا كەلتىرۋ
+right-suppressionlog|جەكەلىك جۋرنالداردى كورۋ
+right-block|باسقا قاتىسۋشىلاردى وڭدەۋدەن بۇعاتتاۋ
+right-blockemail|قاتىسۋشىنىڭ حات جونەلتۋىن بۇعاتتاۋ
+right-hideuser|بارشادان جاسىرىپ, قاتىسۋشى اتىن بۇعاتتاۋ
+right-ipblock-exempt|IP بۇعاتتاۋلاردى, وزبۇعاتتاۋلاردى جانە اۋقىم بۇعاتتاۋلاردى وراعىتۋ
+right-proxyunbannable|پروكسىي سەرۆەرلەردىڭ وزبۇعاتتاۋلارىن وراعىتۋ
+right-protect|قورعاۋ دەڭگەيلەرىن وزگەرتۋ جانە قورعالعان بەتتەردى وڭدەۋ
+right-editprotected|قورعالعان بەتتەردى وڭدەۋ (باۋلى قورعاۋلارسىز)
+right-editinterface|پايدالانۋشىلىق تىلدەسىۋىن وڭدەۋ
+right-editusercssjs|باسقا قاتىسۋشىلاردىڭ CSS جانە JS فايلدارىن وڭدەۋ
+right-editusercss|باسقا قاتىسۋشىلاردىڭ CSS فايلدارىن وڭدەۋ
+right-edituserjs|باسقا قاتىسۋشىلاردىڭ JS فايلدارىن وڭدەۋ
+right-rollback|بەلگىلى بەتتى وڭدەگەن سوڭعى قاتىسۋشىنىڭ وڭدەمەلەرىنەن جىلدام شەگىندىرۋ
+right-markbotedits|شەگىندىرلگەن وڭدەمەلەردى بوتتاردىكى دەپ بەلگىلەۋ
+right-noratelimit|ەسەلىك شەكتەلىمدەرى ىقپال ەتپەيدى
+right-import|باسقا ۋىيكىيلەردەن بەتتەردى سىرتتان الۋ
+right-importupload|فايل قوتارىپ بەرۋىمەن بەتتەردى سىرتتان الۋ
+right-patrol|باسقاراردىڭ وڭدەمەلەرىن زەرتتەلدى دەپ بەلگىلەۋ
+right-autopatrol|ٴوز وڭدەمەلەرىن زەرتتەلدى دەپ وزدىكتىك بەلگىلەۋ
+right-patrolmarks|جۋىقتاعى وزگەرىستەردەگى زەرتتەۋ بەلگىلەرىن كورۋ
+right-unwatchedpages|باقىلانىلماعان بەت ٴتىزىمىن كورۋ
+right-mergehistory|بەتتەردىڭ تارىيحىن قوسىپ بەرۋ
+right-userrights|قاتىسۋشىلاردىڭ بارلىق قۇقىقتارىن وڭدەۋ
+right-userrights-interwiki|باسقا ۇىيكىيلەردەگى قاتىسۋشىلاردىڭ قۇقىقتارىن وڭدەۋ
+right-siteadmin|دەرەكقوردى قۇلىپتاۋ جانە قۇلىپتاۋىن ٴوشىرۋ
+newuserlogpage|تىركەلۋ جۋرنالى
+newuserlogpagetext|بۇل قاتىسۋشى تىركەلگى جاساۋ جۋرنالى
+rightslog|قاتىسۋشى قۇقىقتارى جۋرنالى
+rightslogtext|بۇل قاتىسۋشى قۇقىقتارىن وزگەرتۋ جۋرنالى.
+nchanges|~{0} وزگەرىس
+recentchanges|جۋىقتاعى وزگەرىستەر
+recentchanges-summary|بۇل بەتتە وسى ۋىيكىيدەگى بولعان جۋىقتاعى وزگەرىستەر بايقالادى.
+recentchanges-feed-description|بۇل ارنامەنەن ۋىيكىيدەگى ەڭ سوڭعى وزگەرىستەر قاداعالانادى.
+rcnotefrom|'''~{1}''' كەزىنەن بەرى — تومەندە '''~{0}''' جەتكەنشە دەيىن وزگەرىستەر كورسەتىلەدى.
+rclistfrom|~{2} ~{1} كەزىنەن بەرى — جاڭا وزگەرىستەردى كورسەت.
+rcshowhideminor|شاعىن وڭدەمەلەردى ~{0}
+rcshowhidebots|بوتتاردى ~{0}
+rcshowhideliu|كىرگەندەردى ~{0}
+rcshowhideanons|تىركەلگىسىزدەردى ~{0}
+rcshowhidepatr|زەرتتەلگەن وڭدەمەلەردى ~{0}
+rcshowhidemine|وڭدەمەلەرىمدى ~{0}
+rclinks|سوڭعى ~{1} كۇندە بولعان, سوڭعى ~{0} وزگەرىستى كورسەت<br />~{2}
+diff|ايىرم.
+hist|تار.
+hide|جاسىر
+show|كورسەت
+minoreditletter|ش
+newpageletter|ج
+boteditletter|ب
+number_of_watching_users_pageview|[باقىلاعان ~{0} قاتىسۋشى]
+rc_categories|ساناتتارعا شەكتەۋ ("\u007C" بەلگىسىمەن بولىكتەڭىز)
+rc_categories_any|قايسىبىر
+newsectionsummary|/* ~{0} */ جاڭا ٴبولىم
+recentchangeslinked|قاتىستى وزگەرىستەر
+recentchangeslinked-feed|قاتىستى وزگەرىستەر
+recentchangeslinked-toolbox|قاتىستى وزگەرىستەر
+recentchangeslinked-title|«~{0}» دەگەنگە قاتىستى وزگەرىستەر
+recentchangeslinked-summary|بۇل تىزىمدە وزىندىك بەتتەن سىلتەلگەن بەتتەردەگى (نە وزىندىك سانات مۇشەلەرىندەگى) ىستەلگەن جۋىقتاعى وزگەرىستەر بەرىلەدى.\n[[Special:Watchlist\u007Cباقىلاۋ تىزىمىڭىزدەگى]] بەتتەر '''جۋان''' بولىپ بەلگىلەنەدى.
+recentchangeslinked-page|بەت اتاۋى:
+recentchangeslinked-to|بۇنىڭ ورنىنا كەلتىرىلگەن بەتكە سىلتەلگەن بەتتەردەگى وزگەرىستەردى كورسەت
+upload|قوتارىپ بەرۋ
+uploadbtn|قوتارىپ بەر!
+reuploaddesc|قوتارىپ بەرۋدى بولدىرماۋ جانە قوتارۋ پىشىنىنە قايتا كەلۋ.
+uploadnologin|كىرمەگەنسىز
+uploadnologintext|فايل قوتارۋ ٴۇشىن [[Special:UserLogin\u007Cكىرۋىڭىز]] كەرەك.
+upload_directory_missing|قوتارىپ بەرمەك قالتاسى (~{0}) جەتىسپەيدى جانە ۆەب-سەرۆەر جاراتا المايدى.
+upload_directory_read_only|قوتارىپ بەرمەك قالتاسىنا (~{0}) ۆەب-سەرۆەر جازا المايدى.
+uploaderror|قوتارىپ بەرۋ قاتەسى
+uploadtext|تومەندەگى ٴپىشىندى فايلداردى قوتارىپ بەرۋ ٴۇشىن قولدانىڭىز.\nالدىندا قوتارىلىپ بەرىلگەن فايلداردى قاراۋ نە ىزدەۋ ٴۇشىن [[Special:FileList\u007Cقوتارىپ بەرىلگەن فايلدار تىزىمىنە]] بارىڭىز, تاعى دا قوتارىپ بەرۋى مەن جويۋى [[Special:Log/delete\u007Cقوتارىپ بەرۋ جۋرنالىنا]] جازىلىپ الىنادى.\n\nسۋرەتتى بەتكە كىرىستىرۋگە, فايلعا تۋرا سىلتەۋ ٴۇشىن مىنا پىشىندەگى سىلتەمەنى قولدانىڭىز:\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code>'''\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png\u007Cبالاما ٴماتىن]]</nowiki></code>''' نە\n* '''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code>'''.
+upload-permitted|رۇقسات ەتىلگەن فايل تۇرلەرى: ~{0}.
+upload-preferred|ۇنامدى فايل تۇرلەرى ~{0}.
+upload-prohibited|رۇقسات ەتىلمەگەن فايل تۇرلەرى: ~{0}.
+uploadlogpage|قوتارىپ بەرۋ جۋرنالى
+uploadlogpagetext|تومەندە ەڭ سوڭعى قوتارىپ بەرىلگەن فايل ٴتىزىمى.
+filename|فايل اتاۋى
+filedesc|قىسقاشا مازمۇنداماسى
+fileuploadsummary|قىسقاشا مازمۇنداماسى:
+filestatus|اۋتورلىق قۇقىقتار كۇيى:
+filesource|قاينار كوزى:
+ignorewarning|قۇلاقتاندىرۋعا ەلەمە دە فايلدى قالايدا ساقتا.
+ignorewarnings|كەز كەلگەن قۇلاقتاندىرۋلارعا ەلەمە
+minlength1|فايل اتاۋىندا ەڭ كەمىندە ٴبىر ٴارىپ بولۋى ٴجون.
+illegalfilename|«~{0}» فايل اتاۋىندا بەت تاقىرىبى اتىندا رۇقسات بەرىلمەگەن تاڭبالار بار.\nفايلدى قايتا اتاڭىز دا بۇنى قوتارىپ بەرۋدى قايتا بايقاپ كورىڭىز.
+badfilename|فايلدىڭ اتاۋى «~{0}» دەپ وزگەرتىلدى.
+filetype-badmime|«~{0}» دەگەن MIME ٴتۇرى بار فايلداردى قوتارىپ بەرۋگە رۇقسات ەتىلمەيدى.
+filetype-unwanted-type|'''«.~{0}»''' — كۇتىلمەگەن فايل ٴتۇرى. ۇنامدى فايل تۇرلەرى: ~{1}.
+filetype-banned-type|'''«.~{0}»''' — رۇقساتتالماعان فايل ٴتۇرى. رۇقساتتالعان فايل تۇرلەرى: ~{1}.
+filetype-missing|بۇل فايلدىڭ («.jpg» سىيياقتى) كەڭەيتىمى جوق.
+large-file|فايلدىڭ ~{0} مولشەرىنەن اسپاۋىنا كەپىلدەمە بەرىلەدى;\nبۇل فايل مولشەرى — ~{1}.
+largefileserver|وسى فايلدىڭ مولشەرى سەرۆەردىڭ قالاۋىنان اسىپ كەتكەن.
+emptyfile|قوتارىپ بەرىلگەن فايلىڭىز بوس سىيياقتى. فايل اتاۋى قاتە جازىلعان مۇمكىن.\nبۇل فايلدى قوتارىپ بەرۋى ناقتى تالابىڭىز ەكەنىن تەكسەرىپ شىعىڭىز.
+fileexists|بىلاي اتالعان فايل الداقاشان بار, ەگەر بۇنى وزگەرتۋگە باتىلىڭىز جوق بولسا <strong>[[:~{0}]]</strong> دەگەندى تەكسەرىپ شىعىڭىز.\n[[~{0}\u007Cthumb]]
+filepageexists|بۇل فايلدىڭ سىيپاتتاما بەتى الداقاشان <strong>[[:~{0}]]</strong> دەگەندە جاسالعان, بىراق اعىمدا بىلاي اتالعان ەش فايل جوق.\nەنگىزگەن قىسقاشا مازمۇنداماڭىز سىيپاتتاماسى بەتىندە كورسەتىلمەيدى.\nقىسقاشا مازمۇنداماڭىز وسى ارادا كورسەتىلۋ ٴۇشىن, بۇنى قولمەن وڭدەمەك بولىڭىز
+fileexists-extension|ۇقساس اتاۋى بار فايل تابىلدى: [[~{1}\u007Cthumb]]\n* قوتارىپ بەرىلەتىن فايل اتاۋى: <strong>[[:~{0}]]</strong>\n* بار بولعان فايل اتاۋى: <strong>[[:~{1}]]</strong>\nوزگە اتاۋدى تاڭداڭىز.
+fileexists-thumbnail-yes|وسى فايل — مولشەرى كىشىرىتىلگەن سۋرەت ''(نوباي)'' سىيياقتى. [[~{0}\u007Cthumb]]\nبۇل <strong>[[:~{0}]]</strong> دەگەن فايلدى سىناپ شىعىڭىز.\nەگەر سىنالعان فايل تۇپنۇسقالى مولشەرى بار دالمە-ٴدال سۋرەت بولسا, قوسىسمشا نوبايدى قوتارىپ بەرۋ كەرەگى جوق.
+file-thumbnail-no|فايل اتاۋى <strong>~{0}</strong> دەگەنمەن باستالادى.\nبۇل — مولشەرى كىشىرىتىلگەن سۋرەت ''(نوباي)'' سىيياقتى.\nەگەر بۇل سۋرەتتىڭ تولىق اجىراتىلىمدىعى بولسا, بۇنى قوتارىپ بەرىڭىز, ايتپەسە فايل اتاۋىن وزگەرتىڭىز.
+fileexists-forbidden|وسىلاي اتالعان فايل الداقاشان بار;\nكەرى قايتىڭىز دا, وسى فايلدى جاڭا اتىمەن قوتارىپ بەرىڭىز. [[File:~{0}\u007Cthumb\u007Ccenter\u007C~{0}]]
+fileexists-shared-forbidden|وسىلاي اتالعان فايل ورتاق قويمادا الداقاشان بار;\nكەرى قايتىڭىز دا, وسى فايلدى جاڭا اتىمەن قوتارىپ بەرىڭىز. [[File:~{0}\u007Cthumb\u007Ccenter\u007C~{0}]]
+file-exists-duplicate|بۇل فايل كەلەسى {{PLURAL:~{0}\u007Cفايلدىڭ\u007Cفايلدارىنىڭ}} تەلنۇسقاسى:
+uploadwarning|قوتارىپ بەرۋ جونىندە قۇلاقتاندىرۋ
+savefile|فايلدى ساقتاۋ
+uploaddisabled|قوتارىپ بەرۋ وشىرىلگەن
+uploaddisabledtext|{{SITENAME}} جوباسىندا فايل قوتارىپ بەرۋى وشىرىلگەن.
+uploadscripted|بۇل فايلدا ۆەب شولعىشتى قاتەلىكپەن تالداتقىزاتىن HTML نە ٴامىر كودى بار.
+uploadvirus|بۇل فايلدا ۆىيرۋس بار! ەگجەي-تەگجەيلەرى: ~{0}
+sourcefilename|قاينار فايل اتاۋى:
+destfilename|نىسانا فايل اتاۋى:
+upload-maxfilesize|فايلدىڭ ەڭ كوپ مۇمكىن مولشەرى: ~{0}
+watchthisupload|بۇل بەتتى باقىلاۋ
+filewasdeleted|بۇل اتاۋى بار فايل بۇرىن قوتارىپ بەرىلگەن دە بەرى كەلە جويىلعان.\nبۇنى قايتا قوتارىپ بەرۋ الدىنان ~{0} دەگەندى تەكسەرىپ شىعىڭىز.
+filename-bad-prefix|قوتارىپ بەرمەك فايلىڭىزدىڭ اتاۋى '''«~{0}» ''' دەپ باستالادى, مىناداي سىيپاتتاۋسىز اتاۋدى ادەتتە ساندىق كامەرالار وزدىكتىك بەرەدى.\nفايلىڭىزعا سىيپاتتىلاۋ اتاۋدى تاڭداڭىز.
+upload-success-subj|ٴساتتى قوتارىپ بەرىلدى
+upload-proto-error|بۇرىس حاتتاما
+upload-proto-error-text|شەتتەن قوتارىپ بەرۋ ٴۇشىن URL جايلارى <code>http://</code> نەمەسە <code>ftp://</code> دەگەندەردەن باستالۋ ٴجون.
+upload-file-error|ىشكى قاتە
+upload-file-error-text|سەرۆەردە ۋاقىتشا فايل قۇرىلۋى ىشكى قاتەسىنە ۇشىراستى.\nبۇل جۇيەنىڭ اكىمشىمەن قاتىناسىڭىز.
+upload-misc-error|قوتارىپ بەرۋ كەزىندەگى بەلگىسىز قاتە
+upload-misc-error-text|قوتارىپ بەرۋ كەزىندە بەلگىسىز قاتەگە ۇشىراستى.\nURL جارامدى جانە قاتىناۋلى ەكەنىن تەكسەرىپ شىعىڭىز دا قايتا بايقاپ كورىڭىز.\nەگەر بۇل ماسەلە الدە دە قالسا, جۇيە اكىمشىمەن قاتىناسىڭىز.
+upload-curl-error6|URL جەتىلمەدى
+upload-curl-error6-text|كەلتىرىلگەن URL جەتىلمەدى.\nURL دۇرىس ەكەندىگىن جانە توراپ ىستەپ تۇرعانىن قوس تەكسەرىڭىز.
+upload-curl-error28|قوتارىپ بەرۋ ۋاقىتى ٴبىتتى
+upload-curl-error28-text|توراپتىڭ جاۋاپ بەرۋى تىم ۇزاق ۋاقىتقا سوزىلدى.\nبۇل توراپ ىستە ەكەنىن تەكسەرىپ شىعىڭىز, ازعانا كىدىرە تۇرىڭىز دا قايتا بايقاپ كورىڭىز.\nتالابىڭىزدى قول تىيگەن كەزىندە قايتا بايقاپ كورۋىڭىز مۇمكىن.
+license|لىيتسەنزىييالاندىرۋى:
+license-header|لىيتسەنزىييالاندىرۋى:
+nolicense|ەشتەڭە بولەكتەنبەگەن
+license-nopreview|(قاراپ شىعۋ جەتىمدى ەمەس)
+upload_source_url| (جارامدى, بارشاعا قاتىناۋلى URL)
+upload_source_file| (كومپيۋتەرىڭىزدەگى فايل)
+listfiles-summary|بۇل ارنايى بەتتە بارلىق قوتارىپ بەرىلگەن فايلدار كورسەتىلەدى.\nسوڭعى قوتارىپ بەرىلگەن فايلدار تىزىمدە جوعارعى شەتىمەن ادەپكىدەن كورسەتىلەدى.\nباعاننىڭ باس جولىن نۇقىعاندا سۇرىپتاۋدىڭ رەتتەۋى وزگەرتىلەدى.
+listfiles_search_for|تاسپا اتاۋىن ىزدەۋ:
+imgfile|فايل
+listfiles|فايل ٴتىزىمى
+listfiles_date|كۇن-ايى
+listfiles_name|اتاۋى
+listfiles_user|قاتىسۋشى
+listfiles_size|مولشەرى
+listfiles_description|سىيپاتتاماسى
+file-anchor-link|فايل بەتى
+filehist|فايل تارىيحى
+filehist-help|فايلدىڭ قاي ۋاقىتتا قالاي كورىنەتىن ٴۇشىن كۇن-اي/ۋاقىت دەگەندى نۇقىڭىز.
+filehist-deleteall|بارلىعىن جوي
+filehist-deleteone|جوي
+filehist-revert|قايتار
+filehist-current|اعىمداعى
+filehist-datetime|كۇن-اي/ۋاقىت
+filehist-user|قاتىسۋشى
+filehist-dimensions|ولشەمدەرى
+filehist-filesize|فايل مولشەرى
+filehist-comment|ماندەمەسى
+imagelinks|سىلتەمەلەر
+linkstoimage|بۇل فايلعا كەلەسى {{PLURAL:~{0}\u007Cبەت\u007C~{0} بەت}} سىلتەيدى:
+nolinkstoimage|بۇل فايلعا ەش بەت سىلتەمەيدى.
+morelinkstoimage|بۇل فايلدىڭ [[Special:WhatLinksHere/~{0}\u007Cكوبىرەك سىلتەمەلەرىن]] قاراۋ.
+duplicatesoffile|كەلەسى {{PLURAL:~{0}\u007Cفايل بۇل فايلدىڭ تەلنۇسقاسى\u007C~{0} فايل بۇل فايلدىڭ تەلنۇسقالارى}}:
+sharedupload|بۇل فايل ورتاق قويماعا قوتارىپ بەرىلگەن سوندىقتان باسقا جوبالاردا قولدانۋى مۇمكىن.
+uploadnewversion-linktext|بۇل فايلدىڭ جاڭا نۇسقاسىن قوتارىپ بەرۋ
+filerevert|~{0} دەگەندى قايتارۋ
+filerevert-legend|فايلدى قايتارۋ
+filerevert-intro|'''[[Media:~{0}\u007C~{0}]]''' دەگەندى [~{3} ~{2}, ~{1} كەزىندەگى نۇسقاسىنا] قايتارۋداسىز.
+filerevert-comment|ماندەمەسى:
+filerevert-defaultcomment|~{1}, ~{0} كەزىندەگى نۇسقاسىنا قايتارىلدى
+filerevert-submit|قايتار
+filerevert-success|'''[[Media:~{0}\u007C~{0}]]''' دەگەن [~{3} ~{2}, ~{1} كەزىندەگى نۇسقاسىنا] قايتارىلدى.
+filerevert-badversion|كەلتىرىلگەن ۋاقىت بەلگىسىمەن بۇل فايلدىڭ الدىڭعى جەرگىلىكتى نۇسقاسى جوق.
+filedelete|~{0} دەگەندى جويۋ
+filedelete-legend|فايلدى جويۋ
+filedelete-intro|'''[[Media:~{0}\u007C~{0}]]''' دەگەندى جويۋداسىز.
+filedelete-intro-old|'''[[Media:~{0}\u007C~{0}]]''' — [~{3} ~{2}, ~{1} كەزىندەگى نۇسقاسىن] جويۋداسىز.
+filedelete-comment|سەبەبى:
+filedelete-submit|جوي
+filedelete-success|'''~{0}''' دەگەن جويىلدى.
+filedelete-success-old|'''[[Media:~{0}\u007C~{0}]]''' — ~{2}, ~{1} كەزىندەگى نۇسقاسى جويىلدى.
+filedelete-nofile|'''~{0}''' دەگەن {{SITENAME}} جوباسىندا جوق.
+filedelete-nofile-old|كەلتىرىلگەن انىقتاۋىشتارىمەن '''~{0}''' دەگەننىڭ مۇراعاتتالعان نۇسقاسى مىندا جوق.
+filedelete-otherreason|باسقا/قوسىمشا سەبەپ:
+filedelete-reason-otherlist|باسقا سەبەپ
+filedelete-reason-dropdown|* جويۋدىڭ جالپى سەبەپتەرى\n** اۋتورلىق قۇقىقتارىن بۇزۋ\n** فايل تەلنۇسقاسى
+filedelete-edit-reasonlist|جويۋ سەبەپتەرىن وڭدەۋ
+mimesearch|فايلدى MIME تۇرىمەن ىزدەۋ
+mimesearch-summary|بۇل بەتتە فايلداردى MIME تۇرىمەن سۇزگىلەۋى قوسىلعان.\nكىرىسى: ماعلۇمات_تۇرى/تۇر_تاراۋى, مىسالى <code>image/jpeg</code>.
+mimetype|MIME ٴتۇرى:
+download|قوتارىپ الۋ
+unwatchedpages|باقىلانىلماعان بەتتەر
+listredirects|ايداتۋ بەت ٴتىزىمى
+unusedtemplates|پايدالانىلماعان ۇلگىلەر
+unusedtemplatestext|بۇل بەت باسقا بەتكە كىرىcتىرىلمەگەن ۇلگى ەسىم اياىسىنداعى بارلىق بەتتەردى تىزىمدەيدى.\nۇلگىلەردى جويۋ الدىنان بۇنىڭ وزگە سىلتەمەلەرىن تەكسەرىپ شىعۋىن ۇمىتپاڭىز
+unusedtemplateswlh|باسقا سىلتەمەلەر
+randompage|كەزدەيسوق بەت
+randompage-nopages|بۇل ەسىم اياسىندا بەتتەر جوق.
+randomredirect|كەزدەيسوق ايداعىش
+randomredirect-nopages|بۇل ەسىم اياسىندا ەش ايداعىش جوق.
+statistics-header-users|قاتىسۋشى ساناعى
+doubleredirects|شىنجىرلى ايداعىشتار
+doubleredirectstext|بۇل بەتتە باسقا ايداتۋ بەتتەرگە سىلتەيتىن بەتتەر تىزىمدەلىنەدى. ٴاربىر جولاقتا ٴبىرىنشى جانە ەكىنشى ايداعىشقا سىلتەمەلەر بار, سونىمەن بىرگە ەكىنشى ايداعىش نىساناسى بار, ادەتتە بۇل ٴبىرىنشى ايداعىش باعىتتايتىن «ناقتى» نىسانا بەت اتاۋى بولۋى كەرەك.
+brokenredirects|ەش بەتكە كەلتىرمەيتىن ايداعىشتار
+brokenredirectstext|كەلەسى ايداعىشتار جوق بەتتەرگە سىلتەيدى:
+brokenredirects-edit|وڭدەۋ
+brokenredirects-delete|جويۋ
+withoutinterwiki|ەش تىلگە سىلتeمەگەن بەتتەر
+withoutinterwiki-summary|كەلەسى بەتتەر باسقا تىلدەرگە سىلتەمەيدى
+withoutinterwiki-legend|باستالۋى:
+withoutinterwiki-submit|كورسەت
+fewestrevisions|ەڭ از تۇزەتىلگەن بەتتەر
+nbytes|~{0} بايت
+ncategories|~{0} سانات
+nlinks|~{0} سىلتەمە
+nmembers|~{0} مۇشە
+nrevisions|~{0} تۇزەتۋ
+nviews|~{0} رەت قارالعان
+specialpage-empty|بۇل باياناتقا ەش ناتىيجە جوق.
+lonelypages|ەش بەتتەن سىلتەلمەگەن بەتتەر
+lonelypagestext|كەلەسى بەتتەرگە {{SITENAME}} جوباسىنداعى باسقا بەتتەر سىلتەمەيدى.
+uncategorizedpages|ساناتسىز بەتتەر
+uncategorizedcategories|ساناتسىز ساناتتار
+uncategorizedimages|ساناتسىز فايلدار
+uncategorizedtemplates|ساناتسىز ۇلگىلەر
+unusedcategories|پايدالانىلماعان ساناتتار
+unusedimages|پايدالانىلماعان فايلدار
+wantedcategories|باستالماعان ساناتتار
+wantedpages|باستالماعان بەتتەر
+mostlinked|ەڭ كوپ سىلتەلگەن بەتتەر
+mostlinkedcategories|ەڭ كوپ پايدالانىلعان ساناتتار
+mostlinkedtemplates|ەڭ كوپ پايدالانىلعان ۇلگىلەر
+mostcategories|ەڭ كوپ ساناتى بار بەتتەر
+mostimages|ەڭ كوپ پايدالانىلعان فايلدار
+mostrevisions|ەڭ كوپ تۇزەتىلگەن بەتتەر
+prefixindex|اتاۋ باستاۋىش ٴتىزىمى
+shortpages|ەڭ قىسقا بەتتەر
+longpages|ەڭ ۇزىن بەتتەر
+deadendpages|ەش بەتكە سىلتەمەيتىن بەتتەر
+deadendpagestext|كەلەسى بەتتەر {{SITENAME}} جوباسىنداعى باسقا بەتتەرگە سىلتەمەيدى.
+protectedpages|قورعالعان بەتتەر
+protectedpages-indef|تەك بەلگىسىز قورعاۋلار
+protectedpagesempty|اعىمدا مىناداي باپتالىمدارىمەن ەشبىر بەت قورعالماعان
+protectedtitles|قورعالعان تاقىرىپ اتتارى
+protectedtitlesempty|بۇل باپتالىمدارمەن اعىمدا ەش تاقىرىپ اتتارى قورعالماعان.
+listusers|قاتىسۋشى ٴتىزىمى
+newpages|ەڭ جاڭا بەتتەر
+newpages-username|قاتىسۋشى اتى:
+ancientpages|ەڭ ەسكى بەتتەر
+move|جىلجىتۋ
+movethispage|بەتتى جىلجىتۋ
+unusedimagestext|<p>اڭعارتپا: عالامتورداعى باسقا توراپتار فايلعا تۋرا URL ارقىلى سىلتەۋى مۇمكىن. سوندىقتان, بەلسەندى پايدالانۋىنا اڭعارماي, وسى تىزىمدە قالۋى مۇمكىن.</p>
+unusedcategoriestext|كەلەسى سانات بەتتەرى بار بوپ تۇر, بىراق وعان ەش بەت نە سانات كىرمەيدى.
+notargettitle|نىسانا جوق
+notargettext|وسى جەتە ورىندالاتىن نىسانا بەتتى, نە قاتىسۋشىنى ەنگىزبەپسىز.
+nopagetitle|مىناداي ەش نىسانا بەت جوق
+nopagetext|كەلتىرىلگەن نىسانا بەتىڭىز جوق.
+pager-newer-n|جاڭالاۋ ~{0}
+pager-older-n|ەسكىلەۋ ~{0}
+suppress|شەتتەتۋ
+booksources|كىتاپ قاينارلارى
+booksources-search-legend|كىتاپ قاينارلارىن ىزدەۋ
+booksources-text|تومەندە جاڭا جانە قولدانعان كىتاپتار ساتاتىن توراپتارىنىڭ سىلتەمەلەرى تىزىمدەلگەن. بۇل توراپتاردا ىزدەلگەن كىتاپتار تۋرالى بىلايعى اقپارات بولۋعا مۇمكىن.
+specialloguserlabel|قاتىسۋشى:
+speciallogtitlelabel|تاقىرىپ اتى:
+log|جۋرنالدار
+all-logs-page|بارلىق جۋرنالدار
+alllogstext|{{SITENAME}} جوباسىنىڭ بارلىق قاتىناۋلى جۋرنالدارىن بىرىكتىرىپ كورسەتۋى.\nجۋرنال ٴتۇرىن, قاتىسۋشى اتىن, نە ٴتىيىستى بەتىن بولەكتەپ, تارىلتىپ قاراي الاسىز.
+logempty|جۋرنالدا سايكەس دانالار جوق.
+log-title-wildcard|مىنا ماتىننەڭ باستالىتىن تاقىرىپ اتتارىن ىزدەۋ
+allpagesfrom|مىنا بەتتەن باستاپ كورسەتۋ:
+allarticles|بارلىق بەت ٴتىزىمى
+allinnamespace|بارلىق بەت (~{0} ەسىم اياسى)
+allpagessubmit|ٴوتۋ
+allpagesprefix|مىنادان باستالعان بەتتەردى كورسەتۋ:
+allpagesbadtitle|كەلتىرىلگەن بەت تاقىرىبىن اتى جارامسىز بولعان, نەمەسە ٴتىل-ارالىق نە ۋىيكىي-ارالىق باستاۋى بار بولدى.\nمىندا تاقىرىپ اتىندا قولدالمايتىن بىرقاتار تاڭبالار بولۋى مۇمكىن.
+allpages-bad-ns|{{SITENAME}} جوباسىندا «~{0}» ەسىم اياسى جوق.
+categoriespagetext|كەلەسى ساناتتار ىشىندە بەتتەر نە تاسپالار بار.\n[[Special:UnusedCategories\u007CUnused categories]] are not shown here.\nAlso see [[Special:WantedCategories\u007Cwanted categories]].
+categoriesfrom|ساناتتاردى مىنادان باستاپ كورسەتۋ:
+special-categories-sort-count|سانىمەن سۇرىپتاۋ
+special-categories-sort-abc|الىپبىيمەن سۇرىپتاۋ
+deletedcontributions|قاتىسۋشىنىڭ جويىلعان ۇلەسى
+deletedcontributions-title|قاتىسۋشىنىڭ جويىلعان ۇلەسى
+linksearch|سىرتقى سٸلتەمەلەردٸ ٸزدەۋ
+linksearch-pat|ٸزدەۋ شارتى:
+linksearch-ns|ەسٸم اياسى:
+linksearch-ok|ٸزدەۋ
+linksearch-text|«*.wikipedia.org» اتاۋىنا ۇقساستى بٵدەل نىشانداردى قولدانۋعا بولادى.
+linksearch-line|~{1} دەگەننەن ~{0} سٸلتەگەن
+linksearch-error|بٵدەل نىشاندار تەك سەرۆەر جايى اتاۋىنىڭ باستاۋىندا بولۋى مٷمكٸن.
+listusersfrom|مىنا قاتىسۋشىدان باستاپ كورسەتۋ:
+listusers-submit|كورسەت
+listusers-noresult|قاتىسۋشى تابىلعان جوق.
+listgrouprights|قاتىسۋشى توبى قۇقىقتارى
+listgrouprights-summary|كەلەسى تىزىمدە بۇل ۋىيكىيدە تاعايىندالعان قاتىسۋشى قۇقىقتارى (بايلانىستى قاتىناۋ قۇقىقتارىمەن بىرگە) كورسەتىلەدى.\nجەكە قۇقىقتار تۋرالى كوبىرەك اقپاراتتى [[{{MediaWiki:Listgrouprights-helppage}}\u007Cمىندا]] تابا الاسىز.
+listgrouprights-group|توپ
+listgrouprights-rights|قۇقىقتارى
+listgrouprights-helppage|{{ns:help}}:توپ قۇقىقتارى
+listgrouprights-members|(مۇشە ٴتىزىمى)
+mailnologin|ەش مەكەنجاي جونەلتىلگەن جوق
+mailnologintext|باسقا قاتىسۋشىعا حات جونەلتۋ ٴۇشىن [[Special:UserLogin\u007Cكىرۋىڭىز]] كەرەك, جانە [[Special:Preferences\u007Cباپتاۋىڭىزدا]] جارامدى ە-پوشتا جايى بولۋى ٴجون.
+emailuser|قاتىسۋشىعا حات جازۋ
+emailpage|قاتىسۋشىعا حات جازۋ
+emailpagetext|ەگەر بۇل قاتىسۋشى باپتاۋلارىندا جارامدى ە-پوشتا مەكەنجايىن ەنگىزسە, تومەندەگى ٴپىشىن ارقىلى بۇعان جالعىز ە-پوشتا حاتىن جونەلتۋگە بولادى.\nقاتىسۋشى باپتاۋىڭىزدا ەنگىزگەن ە-پوشتا مەكەنجايىڭىز «كىمنەن» دەگەن باس جولاعىندا كورىنەدى, سوندىقتان حات الۋشىسى تۋرا جاۋاپ بەرە الادى.
+defemailsubject|{{SITENAME}} ە-پوشتاسىنىڭ حاتى
+noemailtitle|ەش ە-پوشتا مەكەنجايى جوق
+noemailtext|بۇل قاتىسۋشى جارامدى ە-پوشتا مەكەنجايىن كەلتىرمەگەن, نە باسقالاردان حات قابىلداۋىن وشىرگەن.
+emailfrom|كىمنەن
+emailto|كىمگە
+emailsubject|تاقىرىبى
+emailmessage|حات
+emailsend|جونەلتۋ
+emailccme|حاتىمدىڭ كوشىرمەسىن ماعان دا جونەلت.
+emailccsubject|~{0} دەگەنگە حاتىڭىزدىڭ كوشىرمەسى: ~{1}
+emailsent|حات جونەلتىلدى
+emailsenttext|ە-پوشتا حاتىڭىز جونەلتىلدى.
+watchlist|باقىلاۋ ٴتىزىمى
+mywatchlist|باقىلاۋىم
+nowatchlist|باقىلاۋ تىزىمىڭىزدە ەش دانا جوق
+watchlistanontext|باقىلاۋ تىزىمىڭىزدەگى دانالاردى قاراۋ, نە وڭدەۋ ٴۇشىن ~{0} كەرەك.
+watchnologin|كىرمەگەنسىز
+addedwatchtext|«[[:~{0}]]» بەتى [[{{#special:Watchlist}}\u007Cباقىلاۋ تىزىمىڭىزگە]] ۇستەلدى.\nبۇل بەتتىڭ جانە بايلانىستى تالقىلاۋ بەتىنىڭ كەلەشەكتەگى وزگەرىستەرى مىندا تىزىمدەلىنەدى دە, جانە بەتتىڭ اتاۋى جەڭىل تابىلۋ ٴۇشىن [[{{#special:Recentchanges}}\u007Cجۋىقتاعى وزگەرىستەر تىزىمىندە]] '''جۋان ارپىمەن''' كورسەتىلەدى.
+removedwatchtext|«[[:~{0}]]» بەتى باقىلاۋ تىزىمىڭىزدەن الاستالدى.
+watch|باقىلاۋ
+watchthispage|بەتتى باقىلاۋ
+unwatch|باقىلاماۋ
+unwatchthispage|باقىلاۋدى توقتاتۋ
+notanarticle|ماعلۇمات بەتى ەمەس
+notvisiblerev|تۇزەتۋ جويىلدى
+watchlist-details|تالقىلاۋ بەتتەرىن ساناماعاندا ~{0} بەت باقلانىلادى.
+wlheader-enotif|ەسكەرتۋ حات جىبەرۋى قوسىلعان.
+wlheader-showupdated|سوڭعى كەلىپ-كەتۋىڭىزدەن بەرى وزگەرتىلگەن بەتتەردى '''جۋان''' قارىپىمەن كورسەت
+wlnote|تومەندە سوڭعى {{PLURAL:~{1}\u007Cساعاتتا\u007C'''~{1}''' ساعاتتا}} بولعان, {{PLURAL:~{0}\u007Cجۋىقتاعى وزگەرىس\u007Cجۋىقتاعى '''~{0}''' وزگەرىس}} كورسەتىلەدى.
+wlshowlast|سوڭعى ~{0} ساعاتتاعى, ~{1} كۇندەگى,  بولعان وزگەرىستى كورسەتۋ
+watching|باقىلاۋدا…
+unwatching|باقىلاماۋدا…
+enotif_reset|بارلىق بەت كەلىپ-كەتىلدى دەپ بەلگىلە
+enotif_impersonal_salutation|{{SITENAME}} قاتىسۋشىسى
+enotif_lastvisited|سوڭعى كەلىپ-كەتۋىڭىزدەن بەرى بولعان وزگەرىستەر ٴۇشىن ~{0} دەگەندى قاراڭىز.
+enotif_lastdiff|وسى وزگەرىس ٴۇشىن ~{0} دەگەندى قاراڭىز.
+enotif_anon_editor|تىركەلگىسىز قاتىسۋشى ~{0}
+enotif_body|قادىرلى $WATCHINGUSERNAME,\n\n\n{{SITENAME}} جوباسىنىڭ $PAGETITLE اتاۋلى بەتتى $PAGEEDITDATE كەزىندە $PAGEEDITOR دەگەن $CHANGEDORCREATED, اعىمدىق نۇسقاسى ٴۇشىن $PAGETITLE_URL قاراڭىز.\n\n$NEWPAGE\n\nوڭدەۋشى كەلتىرگەن قىسقاشا مازمۇنداماسى: $PAGESUMMARY $PAGEMINOREDIT\n\nوڭدەۋشىمەن قاتىناسۋ:\nە-پوشتا: $PAGEEDITOR_EMAIL\nۋىيكىي: $PAGEEDITOR_WIKI\n\nبىلايعى وزگەرىستەر بولعاندا دا وسى بەتكە كەلىپ-كەتۋىڭىزگەنشە دەيىن ەشقانداي باسقا ەسكەرتۋ حاتتار جىبەرىلمەيدى.\nسونىمەن قاتار باقىلاۋ تىزىمىڭىزدەگى بەت ەسكەرتپەلىك بەلگىسىن قايتا قويىڭىز.\n\n             ٴسىزدىڭ دوستىق {{SITENAME}} جوباسىنىڭ ەسكەرتۋ قىزمەتى\n\n----\nباقىلاۋ ٴتىزىمىڭىزدىڭ باپتاۋلىرىن وزگەرتۋ ٴۇشىن, مىندا كەلىپ-كەتىڭىز:\n{{canonicalurl:{{#special:EditWatchlist}}}}\n\nسىن-پىكىر بەرۋ جانە بىلايعى جاردەم الۋ ٴۇشىن:\n{{canonicalurl:{{{{ns:mediawiki}}:Helppage}}}}
+created|باستادى
+changed|وزگەرتتى
+deletepage|بەتتى جويۋ
+confirm|قۇپتاۋ
+excontent|بولعان ماعلۇماتى: '~{0}'
+excontentauthor|بولعان ماعلۇماتى (تەك '[[{{#special:Contributions}}/~{1}\u007C~{1}]]' ۇلەسى): '~{0}'
+exbeforeblank|تازارتۋ الدىنداعى بولعان ماعلۇماتى: '~{0}'
+delete-confirm|«~{0}» دەگەندى جويۋ
+delete-legend|جويۋ
+historywarning|قۇلاقتاندىرۋ: جويۋى كوزدەلگەن بەتتە تارىيحى بار:
+confirmdeletetext|بەتتى بۇكىل تارىيحىمەن بىرگە دەرەكقوردان جوييۋىن كوزدەدىڭىز.\nوسىنى ىستەۋ نىييەتىڭىزدى, سالدارىن بايىمداۋىڭىزدى جانە [[{{{{ns:mediawiki}}:Policy-url}}]] دەگەنگە لايىقتى دەپ ىستەمەكتەنگەڭىزدى قۇپتاڭىز.
+actioncomplete|ارەكەت ٴبىتتى
+deletedtext|«~{0}» جويىلدى.\nجۋىقتاعى جويۋلار تۋرالى جازبالارىن ~{1} دەگەننەن قاراڭىز.
+dellogpage|جويۋ_جۋرنالى
+dellogpagetext|تومەندە جۋىقتاعى جويۋلاردىڭ ٴتىزىمى بەرىلگەن.
+deletionlog|جويۋ جۋرنالى
+reverted|ەرتەرەك تۇزەتۋىنە قايتارىلعان
+deletecomment|سەبەبى:
+deleteotherreason|باسقا/قوسىمشا سەبەپ:
+deletereasonotherlist|باسقا سەبەپ
+deletereason-dropdown|* جويۋدىڭ جالپى سەبەپتەرى\n** اۋتوردىڭ سۇرانىمى بويىنشا\n** اۋتورلىق قۇقىقتارىن بۇزۋ\n** بۇزاقىلىق
+delete-edit-reasonlist|جويۋ سەبەپتەرىن وڭدەۋ
+delete-toobig|بۇل بەتتە بايتاق تۇزەتۋ تارىيحى بار, ~{0} تۇزەتۋدەن استام.\nبۇنداي بەتتەردىڭ جويۋى {{SITENAME}} تورابىن الدەقالاي ٴۇزىپ تاستاۋىنا بوگەت سالۋ ٴۇشىن تىيىمدالعان.
+delete-warning-toobig|بۇل بەتتە بايتاق تۇزەتۋ تارىيحى بار, ~{0} تۇزەتۋدەن استام.\nبۇنىڭ جويۋى {{SITENAME}} تورابىنداعى دەرەكقور ارەكەتتەردى ٴۇزىپ تاستاۋىن مۇمكىن;\nبۇنى ابايلاپ وتكىزىڭىز.
+rollback|وڭدەمەلەردى شەگىندىرۋ
+rollbacklink|شەگىندىرۋ
+rollbackfailed|شەگىندىرۋ ٴساتسىز ٴبىتتى
+cantrollback|وڭدەمە قايتارىلمادى;\nسوڭعى ۇلەسكەرى تەك وسى بەتتىڭ باستاۋشىسى بولدى.
+alreadyrolled|[[{{ns:user}}:~{1}\u007C~{1}]] ([[{{ns:user_talk}}:~{1}\u007Cتالقىلاۋى]]) ىستەگەن [[:~{0}]] سوڭعى وڭدەمەسى شەگىندىرىلمەدى;\nباسقا بىرەۋ بۇل بەتتى الداقاشان وڭدەگەن نە شەگىندىرگەن.\n\nسوڭعى وڭدەمەسىن [[{{ns:user}}:~{2}\u007C~{2}]] ([[{{ns:user_talk}}:~{2}\u007Cتالقىلاۋى]]) ىستەگەن.
+editcomment|بولعان وڭدەمە ماندەمەسى: «''~{0}''».
+revertpage|[[{{#special:Contributions}}/~{1}\u007C~{1}]] ([[{{ns:user_talk}}:~{1}\u007Cتالقىلاۋى]]) وڭدەمەلەرىنەن [[{{ns:user}}:~{0}\u007C~{0}]] سوڭعى نۇسقاسىنا قايتاردى
+rollback-success|~{0} وڭدەمەلەرىنەن قايتارعان;\n~{1} سوڭعى نۇسقاسىنا وزگەرتتى.
+sessionfailure|كىرۋ سەسسىيياسىندا شاتاق بولعان سىيياقتى;\nسەسسىيياعا شابۋىلداۋداردان قورعانۋ ٴۇشىن, وسى ارەكەت توقتاتىلدى.\n«ارتقا» دەگەندى باسىڭىز, جانە بەتتى قايتا جۇكتەڭىز دە, قايتا بايقاپ كورىڭىز.
+protectlogpage|قورعاۋ جۋرنالى
+protectlogtext|تومەندە بەتتەردىڭ قورعاۋ/قورعاماۋ ٴتىزىمى بەرىلگەن.\nاعىمداعى قورعاۋ ارەكتتەر بار بەتتەر ٴۇشىن [[{{#special:Protectedpages}}\u007Cقورعالعان بەت ٴتىزىمىن]] قاراڭىز.
+protectedarticle|«[[~{0}]]» قورعالدى
+modifiedarticleprotection|«[[~{0}]]» قورعالۋ دەڭگەيى وزگەردى
+unprotectedarticle|«[[~{0}]]» قورعالۋى ٴوشىرىلدى
+protect-title|«~{0}» قورعاۋ دەڭگەيىن وزگەرتۋ
+prot_1movedto2|[[~{0}]] دەگەندى [[~{1}]] دەگەنگە جىلجىتتى
+protect-legend|قورعاۋدى قۇپتاۋ
+protectcomment|سەبەبى:
+protectexpiry|مەرزىمى بىتپەك:
+protect_expiry_invalid|بىتەتىن ۋاقىتى جارامسىز.
+protect_expiry_old|بىتەتىن ۋاقىتى ٴوتىپ كەتكەن.
+protect-text|'''~{0}''' بەتىنىڭ قورعاۋ دەڭگەيىن قاراپ جانە وزگەرتىپ شىعا الاسىز.
+protect-locked-blocked|بۇعاتتاۋىڭىز وشىرىلگەنشە دەيىن قورعاۋ دەڭگەيىن وزگەرتە المايسىز.\nمىنا '''~{0}''' بەتتىڭ اعىمدىق باپتاۋلارى:
+protect-locked-dblock|دەرەكقوردىڭ قۇلىپتاۋى بەلسەندى بولعاندىقتان قورعاۋ دەڭگەيلەرى وزگەرتىلمەيدى.\nمىنا '''~{0}''' بەتتىڭ اعىمدىق باپتاۋلارى:
+protect-locked-access|تىركەلگىڭىزگە بەت قورعاۋ دەنگەيلەرىن وزگەرتۋىنە رۇقسات جوق.\nمىنا '''~{0}''' بەتتىڭ اعىمدىق باپتاۋلارى:
+protect-cascadeon|بۇل بەت اعىمدا قورعالعان, سەبەبى وسى بەت «باۋلى قورعاۋى» بار كەلەسى {{PLURAL:~{0}\u007Cبەتتىڭ\u007Cبەتتەردىڭ}} كىرىكبەتى.\nبۇل بەتتىڭ قورعاۋ دەڭگەيىن وزگەرتە الاسىز, بىراق بۇل باۋلى قورعاۋعا ىقپال ەتپەيدى.
+protect-default|(ادەپكى)
+protect-fallback|«~{0}» رۇقساتى كەرەك
+protect-level-autoconfirmed|تىركەلگىسىزدەرگە تىيىم
+protect-level-sysop|تەك اكىمشىلەر
+protect-summary-cascade|باۋلى
+protect-expiring|مەرزىمى بىتپەك: ~{0} (UTC)
+protect-cascade|بۇل بەتتىڭ كىرىكبەتتەرىن قورعاۋ (باۋلى قورعاۋ).
+protect-cantedit|بۇل بەتتىڭ قورعاۋ دەڭگەيىن وزگەرتە المايسىز, سەبەبى بۇنى وڭدەۋگە رۇقستاڭىز جوق.
+protect-expiry-options|2 ساعات:2 hours,1 كۇن:1 day,3 كۇن:3 days,1 اپتا:1 week,2 اپتا:2 weeks,1 اي:1 month,3 اي:3 months,6 اي:6 months,1 جىل:1 year,مانگى:infinite
+restriction-type|رۇقساتى:
+restriction-level|تىيىمدىق دەڭگەيى:
+minimum-size|ەڭ از مولشەرى
+maximum-size|ەڭ كوپ مولشەرى:
+pagesize|(بايت)
+restriction-edit|وڭدەۋگە
+restriction-move|جىلجىتۋعا
+restriction-create|باستاۋعا
+restriction-upload|قوتارىپ بەرۋگە
+restriction-level-sysop|تولىقتاي قورعالعان
+restriction-level-autoconfirmed|جارتىلاي قورعالعان
+restriction-level-all|ٴار دەڭگەيدە
+undelete|جويىلعان بەتتەردى قاراۋ
+undeletepage|جويىلعان بەتتەردى قاراۋ جانە قالپىنا كەلتىرۋ
+undeletepagetitle|'''كەلەسى ٴتىزىم [[:~{0}\u007C~{0}]] دەگەننىڭ جويىلعان تۇزەتۋلەرىنەن تۇرادى'''.
+viewdeletedpage|جويىلعان بەتتەردى قاراۋ
+undeletepagetext|كەلەسى بەتتەر جويىلدى دەپ بەلگىلەنگەن, بىراق ماعلۇماتى مۇراعاتتا بار\nجانە قالپىنا كەلتىرۋگە مۇمكىن. مۇراعات مەرزىم بويىنشا تازالانىپ تۇرۋى مۇمكىن.
+undeleteextrahelp|بۇكىل بەتتى قالپىنا كەلتىرۋ ٴۇشىن, بارلىق قۇسبەلگى كوزدەردى بوساتىپ '''''قالپىنا كەلتىر!''''' باتىرماسىن نۇقىڭىز.\nبولەكتەۋمەن قالپىنا كەلتىرۋ ورىنداۋ ٴۇشىن, كەلتىرەمىن دەگەن تۇزەتۋلەرىنە سايكەس كوزدەرگە قۇسبەلگى سالىڭىز دا, جانە '''''قالپىنا كەلتىر!''''' تۇيمەسىن نۇقىڭىز. '''''قايتا قوي''''' تۇيمەسىن نۇقىعاندا ماندەمە اۋماعى تازارتادى جانە بارلىق قۇسبەلگى كوزدەرىن بوساتادى.
+undeleterevisions|~{0} تۇزەتۋ مۇراعاتتالدى
+undeletehistory|ەگەر بەت ماعلۇماتىن قالپىنا كەلتىرسەڭىز, تارىيحىندا بارلىق تۇزەتۋلەر دا\nقايتارىلادى. ەگەر جويۋدان سوڭ ٴدال سولاي اتاۋىمەن جاڭا بەت باستالسا, قالپىنا كەلتىرىلگەن تۇزەتۋلەر\nتارىيحتىڭ الدىندا كورسەتىلەدى. تاعى دا فايل تۇزەتۋلەرىن قالپىنا كەلتىرگەندە تىيىمدارى جويىلاتىن ەسكەرىڭىز.
+undeleterevdel|ەگەر بۇل ۇستىڭگى بەتتە اياقتالسا, نە فايل تۇزەتۋى جارىم-جارتىلاي جويىلعان بولسا, جويۋ بولدىرماۋى ورىندالمايدى.\nوسىنداي جاعدايلاردا, ەڭ جاڭا جويىلعان تۇزەتۋىن الىپ تاستاۋىڭىز نە جاسىرۋىن بولدىرماۋىڭىز ٴجون.
+undeletehistorynoadmin|بۇل بەت جويىلعان.\nجويۋ سەبەبى الدىنداعى وڭدەگەن قاتىسۋشىلار ەگجەي-تەگجەيلەرىمەن بىرگە تومەندەگى قىسقاشا مازمۇنداماسىندا كورسەتىلگەن.\nمىنا جويىلعان تۇزەتۋلەرىن كوكەيكەستى ٴماتىنى تەك اكىمشىلەرگە جەتىمدى.
+undelete-revision|~{1} كەزىندەگى ~{2} جويعان ~{0} دەگەننىڭ جويىلعان تۇزەتۋى:
+undeleterevision-missing|جارامسىز نە جوعالعان تۇزەتۋ.\nسىلتەمەڭىز جارامسىز, نە تۇزەتۋ قالپىنا كەلتىرىلگەن, نەمەسە مۇراعاتتان الاستالعان بولۋى مۇمكىن.
+undelete-nodiff|ەش الدىڭعى تۇزەتۋ تابىلمادى.
+undeletebtn|قالپىنا كەلتىر!
+undeletelink|قالپىنا كەلتىرۋ
+undeletecomment|ماندەمەسى:
+undeletedrevisions|~{0} تۇزەتۋ قالپىنا كەلتىرىلدى
+undeletedrevisions-files|~{0} تۇزەتۋ جانە ~{1} فايل قالپىنا كەلتىرىلدى
+undeletedfiles|~{0} فايل قالپىنا كەلتىرىلدى
+cannotundelete|جويۋ بولدىرماۋى ٴساتسىز ٴبىتتى;\nباسقا بىرەۋ العاشىندا بەتتىڭ جويۋدىڭ بولدىرماۋى مۇمكىن.
+undeletedpage|'''~{0} قالپىنا كەلتىرىلدى'''\n\nجۋىقتاعى جويۋلار مەن قالپىنا كەلتىرۋلەر جونىندە [[{{#special:Log}}/delete\u007Cجويۋ جۋرنالىن]] قاراڭىز.
+undelete-header|جۋىقتاعى جويىلعان بەتتەر جونىندە [[{{#special:Log}}/delete\u007Cجويۋ جۋرنالىن]] قاراڭىز.
+undelete-search-box|جويىلعان بەتتەردى ىزدەۋ
+undelete-search-prefix|مىنادان باستالعان بەتتەردى كورسەت:
+undelete-search-submit|ىزدەۋ
+undelete-no-results|جويۋ مۇراعاتىندا ەشقانداي سايكەس بەتتەر تابىلمادى.
+undelete-filename-mismatch|~{0} كەزىندەگى فايل تۇزەتۋىنىڭ جويۋى بولدىرمادى: فايل اتاۋى سايكەسسىز
+undelete-bad-store-key|~{0} كەزىندەگى فايل تۇزەتۋىنىڭ جويۋى بولدىرمادى: جويۋدىڭ الدىنان فايل جوق بولعان.
+undelete-cleanup-error|«~{0}» پايدالانىلماعان مۇراعاتتالعان فايل جويۋ قاتەسى.
+undelete-missing-filearchive|مۇراعاتتالعان فايل (ٴنومىرى ~{0}) قالپىنا كەلتىرۋى ىيكەمدى ەمەس, سەبەبى ول دەرەكقوردا جوق.\nبۇنىڭ جويۋىن بولدىرماۋى الداقاشان بولعانى مۇمكىن.
+undelete-error-short|فايل جويۋىن بولدىرماۋ قاتەسى: ~{0}
+undelete-error-long|فايل جويۋىن بولدىرماۋ كەزىندە مىنا قاتەلەر كەزدەستى:\n\n~{0}
+namespace|ەسىم اياسى:
+invert|بولەكتەۋدى كەرىلەۋ
+contributions|قاتىسۋشى ۇلەسى
+mycontris|ۇلەسىم
+contribsub2|~{0} (~{1}) ۇلەسى
+nocontribs|وسى ىزدەۋ شارتىنا سايكەس وزگەرىستەر تابىلعان جوق.
+uctop| (ٴۇستى)
+month|مىنا ايدان (جانە ەرتەرەكتەن):
+year|مىنا جىلدان (جانە ەرتەرەكتەن):
+sp-contributions-newbies|تەك جاڭا تىركەلگىدەن جاساعان ۇلەستەردى كورسەت
+sp-contributions-newbies-sub|جاڭادان تىركەلگى جاساعاندار ٴۇشىن
+sp-contributions-blocklog|بۇعاتتاۋ جۋرنالى
+sp-contributions-deleted|قاتىسۋشىنىڭ جويىلعان ۇلەسى
+sp-contributions-talk|تالقىلاۋى
+sp-contributions-userrights|قاتىسۋشى قۇقىقتارىن رەتتەۋ
+sp-contributions-search|ۇلەس ٴۇشىن ىزدەۋ
+sp-contributions-username|IP مەكەنجايى نە قاتىسۋشى اتى:
+sp-contributions-submit|ىزدە
+whatlinkshere|سىلتەلگەن بەتتەر
+whatlinkshere-title|~{0} دەگەنگە سىلتەلگەن بەتتەر
+whatlinkshere-page|بەت:
+linkshere|'''[[:~{0}]]''' دەگەنگە مىنا بەتتەر سىلتەيدى:
+nolinkshere|'''[[:~{0}]]''' دەگەنگە ەش بەت سىلتەمەيدى.
+nolinkshere-ns|تاڭدالعان ەسىم اياسىندا '''[[:~{0}]]''' دەگەنگە ەشقانداي بەت سىلتەمەيدى.
+isredirect|ايداتۋ بەتى
+istemplate|كىرىكبەت
+isimage|سۋرەت سىلتەمەسى
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cالدىڭعى\u007Cالدىڭعى ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cكەلەسى\u007Cكەلەسى ~{0}}}
+whatlinkshere-links|← سىلتەمەلەر
+whatlinkshere-hideredirs|ايداعىشتاردى ~{0}
+whatlinkshere-hidetrans|كىرىكبەتتەردى ~{0}
+whatlinkshere-hidelinks|سىلتەمەلەردى ~{0}
+whatlinkshere-hideimages|سۋرەت سىلتەمەلەرىن ~{0}
+whatlinkshere-filters|سۇزگىلەر
+blockip|قاتىسۋشىنى بۇعاتتاۋ
+blockip-legend|قاتىسۋشىنى بۇعاتتاۋ
+blockiptext|تومەندەگى ٴپىشىن قاتىسۋشىنىڭ جازۋ رۇقساتىن بەلگىلى IP مەكەنجايىمەن نە اتىمەن بۇعاتتاۋ ٴۇشىن قولدانىلادى.\nبۇنى تەك بۇزاقىلىقتى قاقپايلاۋ ٴۇشىن جانە دە [[{{{{ns:mediawiki}}:Policy-url}}\u007Cەرەجەلەر]] بويىنشا اتقارۋىڭىز ٴجون.\nتومەندە ٴتىيىستى سەبەبىن تولتىرىپ كورسەتىڭىز (مىسالى, دايەككە بۇزاقىلىقپەن وزگەرتكەن بەتتەردى كەلتىرىپ).
+ipaddressorusername|IP مەكەنجايى نە قاتىسۋشى اتى:
+ipbexpiry|مەرزىمى بىتپەك:
+ipbreason|سەبەبى:
+ipbreason-dropdown|* بۇعاتتاۋدىڭ جالپى سەبەبتەرى\n** جالعان مالىمەت ەنگىزۋ\n** بەتتەردەگى ماعلۇماتتى الاستاۋ\n** شەتتىك توراپتار سىلتەمەلەرىن جاۋدىرۋ\n** بەتتەرگە ماعىناسىزدىق/بالدىرلاۋ كىرىستىرۋ\n** قوقانداۋ/قۋعىنداۋ مىنەزقۇلىق\n** بىرنەشە رەت تىركەلىپ قىيياناتتاۋ\n** ورەسكەل قاتىسۋشى اتى
+ipbcreateaccount|تىركەلۋدى قاقپايلاۋ
+ipbemailban|قاتىسۋشى ە-پوشتامەن حات جونەلتۋىن قاقپايلاۋ
+ipbenableautoblock|بۇل قاتىسۋشى سوڭعى قولدانعان IP مەكەنجايىن, جانە كەيىن وڭدەۋگە بايقاپ كورگەن ٴار IP مەكەنجايلارىن وزبۇعاتتاۋى
+ipbsubmit|قاتىسۋشىنى بۇعاتتا
+ipbother|باسقا مەرزىمى:
+ipboptions|2 ساعات:2 hours,1 كۇن:1 day,3 كۇن:3 days,1 اپتا:1 week,2 اپتا:2 weeks,1 اي:1 month,3 اي:3 months,6 اي:6 months,1 جىل:1 year,مانگى:infinite
+ipbhidename|قاتىسۋشى اتىن بۇعاتتاۋ جۋرنالىننان, بەلسەندى بۇعاتتاۋ تىزىمىنەن, قاتىسۋشى تىزىمىنەن جاسىرۋ
+ipbwatchuser|بۇل قاتىسۋشىنىڭ جەكە جانە تالقىلاۋ بەتتەرىن باقىلاۋ
+badipaddress|جارامسىز IP مەكەنجايى
+blockipsuccesssub|بۇعاتتاۋ ٴساتتى ٴوتتى
+blockipsuccesstext|[[{{#special:Contributions}}/~{0}\u007C~{0}]] دەگەن بۇعاتتالعان.<br />\nبۇعاتتاردى شولىپ شىعۋ ٴۇشىن [[{{#special:Ipblocklist}}\u007CIP بۇعاتتاۋ ٴتىزىمىن]] قاراڭىز.
+ipb-edit-dropdown|بۇعاتتاۋ سەبەپتەرىن وڭدەۋ
+ipb-unblock-addr|~{0} دەگەندى بۇعاتتاماۋ
+ipb-unblock|قاتىسۋشى اتىن نەمەسە IP مەكەنجايىن بۇعاتتاماۋ
+ipb-blocklist|بار بۇعاتتاۋلاردى قاراۋ
+unblockip|قاتىسۋشىنى بۇعاتتاماۋ
+unblockiptext|تومەندەگى ٴپىشىندى الدىنداعى IP مەكەنجايىمەن نە اتىمەن بۇعاتتالعان قاتىسۋشىعا جازۋ قاتىناۋىن قالپىنا كەلتىرىۋى ٴۇشىن قولدانىڭىز.
+ipusubmit|وسى مەكەنجايدى بۇعاتتاماۋ
+unblocked|[[User:~{0}\u007C~{0}]] بۇعاتتاۋى ٴوشىرىلدى
+unblocked-id|~{0} بۇعاتتاۋ الاستالدى
+ipblocklist|بۇعاتتالعان قاتىسۋشى / IP مەكەنجاي ٴتىزىمى
+ipblocklist-legend|بۇعاتتالعان قاتىسۋشىنى تابۋ
+ipblocklist-submit|ىزدە
+infiniteblock|مانگى
+expiringblock|مەرزىمى بىتپەك: ~{0} ~{1}
+anononlyblock|تەك تىركەلگىسىزدەردى
+noautoblockblock|وزبۇعاتتاۋ وشىرىلگەن
+createaccountblock|تىركەلۋ بۇعاتتالعان
+emailblock|ە-پوشتا بۇعاتتالعان
+ipblocklist-empty|بۇعاتتاۋ ٴتىزىمى بوس.
+ipblocklist-no-results|سۇراتىلعان IP مەكەنجاي نە قاتىسۋشى اتى بۇعاتتالعان ەمەس.
+blocklink|بۇعاتتاۋ
+unblocklink|بۇعاتتاماۋ
+contribslink|ۇلەسى
+autoblocker|IP مەكەنجايىڭىزدى جۋىقتا «[[{{ns:user}}:1\u007C~{0}]]» پايدالانعان, سوندىقتان وزبۇعاتتالعان.\n~{0} بۇعاتتاۋى ٴۇشىن كەلتىرىلگەن سەبەبى: «~{1}».
+blocklogpage|بۇعاتتاۋ_جۋرنالى
+blocklogentry|[[~{0}]] دەگەندى ~{1} مەرزىمگە بۇعاتتادى ~{2}
+blocklogtext|بۇل قاتىسۋشىلاردى بۇعاتتاۋ/بۇعاتتاماۋ ارەكەتتەرىنىڭ جۋرنالى.\nوزدىكتىك بۇعاتتالعان IP مەكەنجايلار وسىندا تىزىمدەلگەمەگەن.\nاعىمداعى بەلسەندى تىيىمدار مەن بۇعاتتاۋلاردى [[{{#special:Ipblocklist}}\u007CIP بۇعاتتاۋ تىزىمىنەن]] قاراڭىز.
+unblocklogentry|«~{0}» — بۇعاتتاۋىن ٴوشىردى
+block-log-flags-anononly|تەك تىركەلگىسىزدەر
+block-log-flags-nocreate|تىركەلۋ وشىرىلگەن
+block-log-flags-noautoblock|وزبۇعاتتاۋ وشىرىلگەن
+block-log-flags-noemail|ە-پوشتا بۇعاتتالعان
+range_block_disabled|اۋقىم بۇعاتتاۋلارىن جاساۋ اكىمشىلىك مۇمكىندىگى وشىرىلگەن.
+ipb_expiry_invalid|بىتەتىن ۋاقىتى جارامسىز.
+ipb_expiry_temp|جاسىرىلعان قاتىسۋشى اتىن بۇعاتتاۋى ماڭگى بولۋى ٴجون.
+ipb_already_blocked|«~{0}» الداقاشان بۇعاتتالعان
+ipb_cant_unblock|قاتەلىك: IP ~{0} بۇعاتتاۋى تابىلمادى. ونىڭ بۇعاتتاۋى الداقاشان وشىرلگەن مۇمكىن.
+ipb_blocked_as_range|قاتەلىك: IP ~{0} تىكەلەي بۇعاتتالماعان جانە بۇعاتتاۋى وشىرىلمەيدى.\nبىراق, بۇل بۇعاتتاۋى ٴوشىرىلۋى مۇمكىن ~{1} اۋقىمى بولىگى بوپ بۇعاتتالعان.
+ip_range_invalid|IP مەكەنجاي اۋقىمى جارامسىز.
+proxyblocker|پروكسىي سەرۆەرلەردى بۇعاتتاۋىش
+proxyblockreason|IP مەكەنجايىڭىز اشىق پروكسىي سەرۆەرگە جاتاتىندىقتان بۇعاتتالعان.\nىينتەرنەت قىزمەتىن جابدىقتاۋشىڭىزبەن, نە تەحنىيكالىق قولداۋ قىزمەتىمەن قاتىناسىڭىز, جانە ولارعا وسى وتە كۇردەلى قاۋىپسىزدىك شاتاق تۋرالى اقپارات بەرىڭىز.
+sorbsreason|IP مەكەنجايىڭىز {{SITENAME}} تورابىندا قولدانىلعان DNSBL قارا تىزىمىندەگى اشىق پروكسىي-سەرۆەر دەپ تابىلادى.
+sorbs_create_account_reason|IP مەكەنجايىڭىز {{SITENAME}} تورابىندا قولدانىلعان DNSBL قارا تىزىمىندەگى اشىق پروكسىي-سەرۆەر دەپ تابىلادى.\nجاڭا تىركەلگى جاساي المايسىز.
+lockdb|دەرەكقوردى قۇلىپتاۋ
+unlockdb|دەرەكقوردى قۇلىپتاماۋ
+lockdbtext|دەرەكقوردىن قۇلىپتالۋى بارلىق قاتىسۋشىلاردىڭ بەت وڭدەۋ, باپتاۋىن قالاۋ, باقىلاۋ ٴتىزىمىن, تاعى باسقا دەرەكقوردى وزگەرتەتىن مۇمكىندىكتەرىن توقتاتا تۇرادى.\nوسى ماقساتىڭىزدى, جانە باپتاۋ بىتكەندە دەرەكقوردى اشاتىڭىزدى قۇپتاڭىز.
+unlockdbtext|دەرەكقودىن اشىلۋى بارلىق قاتىسۋشىلاردىڭ بەت وڭدەۋ, باپتاۋىن قالاۋ, باقىلاۋ ٴتىزىمىن, تاعى باسقا دەرەكقوردى وزگەرتەتىن مۇمكىندىكتەرىن قالپىنا كەلتىرەدى.\nوسى ماقساتىڭىزدى قۇپتاڭىز.
+lockconfirm|ٴىيا, دەرەكقور قۇلىپتاۋىن ناقتى تىلەيمىن.
+unlockconfirm|ٴىيا, دەرەكقور قۇلىپتاماۋىن ناقتى تىلەيمىن.
+lockbtn|دەرەكقوردى قۇلىپتا
+unlockbtn|دەرەكقوردى قۇلىپتاما
+locknoconfirm|قۇپتاۋ كوزىنە قۇسبەلگى سالماعانسىز.
+lockdbsuccesssub|دەرەكقور قۇلىپتاۋى ٴساتتى ٴوتتى
+unlockdbsuccesssub|دەرەكقور قۇلىپتاۋى الاستالدى
+lockdbsuccesstext|دەرەكقور قۇلىپتالدى.<br />\nباپتاۋ تولىق وتكىزىلگەننەن كەيىن [[{{#special:Unlockdb}}\u007Cقۇلىپتاۋىن الاستاۋعا]] ۇمىتپاڭىز.
+unlockdbsuccesstext|قۇلىپتالعان دەرەكقور ٴساتتى اشىلدى.
+lockfilenotwritable|دەرەكقور قۇلىپتاۋ فايلى جازىلمايدى.\nدەرەكقوردى قۇلىپتاۋ نە اشۋ ٴۇشىن, ۆەب-سەرۆەر فايلعا جازۋ رۇقساتى بولۋ كەرەك.
+databasenotlocked|دەرەكقور قۇلىپتالعان جوق.
+move-page|~{0} دەگەندى جىلجىتۋ
+move-page-legend|بەتتى جىلجىتۋ
+movepagetext|تومەندەگى ٴپىشىندى قولدانىپ بەتتەردى قايتا اتايدى, بارلىق تارىيحىن جاڭا اتاۋعا جىلجىتادى.\nبۇرىنعى بەت تاقىرىبىن اتى جاڭا تاقىرىپ اتىنا ايدايتىن بەت بولادى.\nەسكى تاقىرىپ اتىنا سىلتەيتىن سىلتەمەلەر وزگەرتىلمەيدى;\nجىلجىتۋدان سوڭ شىنجىرلى نە جارامسىز ايداعىشتار بار-جوعىن تەكسەرىپ شىعىڭىز.\nسىلتەمەلەر بۇرىنعى جولداۋىمەن بىلايعى ٴوتۋىن تەكسەرۋىنە ٴوزىڭىز مىندەتتى بولاسىز.\n\nاڭعارتپا: ەگەر وسى ارادا الداقاشان جاڭا تاقىرىپ اتى بار بەت بولسا, بۇل بوس نە ايداعىش بولعانشا دەيىن, جانە سوڭىندا تۇزەتۋ تارىيحى جوق بولسا, بەت '''جىلجىتىلمايدى'''. وسىنىڭ ماعىناسى: ەگەر بەتتى قاتەلىكپەن قايتا اتاساڭىز, بۇرىنعى اتاۋىنا قايتا اتاۋعا بولادى, جانە بار بەتتىڭ ۇستىنە جازۋىڭىزعا بولمايدى.\n\n'''قۇلاقتاندىرۋ!'''\nبۇل كوپ قارالاتىن بەتكە قاتاڭ جانە كەنەت وزگەرىس جاساۋعا مۇمكىن;\nوسىنىڭ سالدارىن بايىمداۋىڭىزدى ارەكەتتىڭ الدىنان باتىل بولىڭىز.
+movepagetalktext|كەلەسى سەبەپتەر '''بولعانشا''' دەيىن, تالقىلاۋ بەتى بۇنىمەن بىرگە وزدىكتىك جىلجىتىلادى:\n* بوس ەمەس تالقىلاۋ بەتى جاڭا اتاۋدا الداقاشان بولعاندا, نە\n* تومەندەگى كوزگە قۇسبەلگى الىپ تاستالعاندا.\n\nوسى ورايدا, قالاۋىڭىز بولسا, بەتتى قولدان جىلجىتا نە قوسا الاسىز.
+movearticle|جىلجىتپاق بەت:
+movenologintext|بەتتى جىلجىتۋ ٴۇشىن تىركەلگەن بولۋىڭىز جانە [[{{#special:UserLogin}}\u007Cكىرۋىڭىز]] ٴجون.
+movenotallowed|{{SITENAME}} جوباسىندا بەتتەردى جىلجىتۋ رۋقساتىڭىز جوق.
+newtitle|جاڭا تاقىرىپ اتىنا:
+move-watch|بۇل بەتتى باقىلاۋ
+movepagebtn|بەتتى جىلجىت
+pagemovedsub|جىلجىتۋ ٴساتتى اياقتالدى
+articleexists|وسىلاي اتالعان بەت الداقاشان بار, نە تاڭداعان اتاۋىڭىز جارامدى ەمەس.\nوزگە اتاۋدى تاڭداڭىز
+cantmove-titleprotected|بەتتى وسى ورىنعا جىلجىتا المايسىز, سەبەبى جاڭا تاقىرىپ اتى باستاۋدان قورعالعان
+movetalk|قاۋىمداستى تالقىلاۋ بەتىن جىلجىتۋ
+move-subpages|بارلىق بەتشەلەرىن جىلجىتۋ, ەگەر قولدانبالى بولسا
+move-talk-subpages|تالقىلاۋ بەتىنىڭ بارلىق بەتشەلەرىن جىلجىتۋ, ەگەر قولدانبالى بولسا
+movepage-page-exists|~{0} دەگەن بەت الداقاشان بار جانە ۇستىنە وزدىكتىك جازىلمايدى.
+movepage-page-moved|~{0} دەگەن بەت ~{1} دەگەنگە جىلجىتىلدى.
+movepage-page-unmoved|~{0} دەگەن بەت ~{1} دەگەنگە جىلجىتىلمايدى.
+movepage-max-pages|بارىنشا ~{0} بەت جىلجىتىلدى دا مىننان كوبى وزدىكتىك جىلجىلتىلمايدى.
+movelogpage|جىلجىتۋ جۋرنالى
+movelogpagetext|تومەندە جىلجىتىلعان بەتتەردىڭ ٴتىزىمى بەرىلىپ تۇر.
+movereason|سەبەبى:
+revertmove|قايتارۋ
+delete_and_move|جويۋ جانە جىلجىتۋ
+delete_and_move_text|==جويۋ كەرەك==\n«[[:~{0}]]» دەگەن نىسانا بەت الداقاشان بار.\nجىلجىتۋعا جول بەرۋ ٴۇشىن بۇنى جوياسىز با?
+delete_and_move_confirm|ٴىيا, بۇل بەتتى جوي
+delete_and_move_reason|جىلجىتۋعا جول بەرۋ ٴۇشىن جويىلعان
+selfmove|قاينار جانە نىسانا تاقىرىپ اتتارى بىردەي;\nبەت ٴوزىنىڭ ۇستىنە جىلجىتىلمايدى.
+imagenocrossnamespace|فايل ەمەس ەسىم اياسىنا فايل جىلجىتىلمايدى
+imagetypemismatch|فايلدىڭ جاڭا كەڭەيتىمى بۇنىڭ تۇرىنە سايكەس ەمەس
+export|بەتتەردى سىرتقا بەرۋ
+exporttext|XML پىشىمىنە قاپتالعان بولەك بەت نە بەتتەر بۋماسى ٴماتىنىڭ جانە وڭدەۋ تارىيحىن سىرتقا بەرە الاسىز.\nMediaWiki جۇيەسىنىڭ [[{{#special:Import}}\u007Cسىرتتان الۋ بەتىن]] پايدالانىپ, بۇنى وزگە ۋىيكىيگە الۋعا بولادى.\n\nبەتتەردى سىرتقا بەرۋ ٴۇشىن, تاقىرىپ اتتارىن تومەندەگى ٴماتىن جولاعىنا ەنگىزىڭىز (جول سايىن ٴبىر تاقىرىپ اتى), جانە دە بولەكتەڭىز: نە اعىمدىق نۇسقاسىن, بارلىق ەسكى نۇسقالارى مەن جانە تارىيحى جولدارى مەن بىرگە, نەمەسە ٴدال اعىمدىق نۇسقاسىن, سوڭعى وڭدەمەۋ تۋرالى اقپاراتى مەن بىرگە.\n\nسوڭعى جاعدايدا سىلتەمەنى دە, مىسالى «{{{{ns:mediawiki}}:Mainpage}}» بەتى ٴۇشىن [[{{#special:Export}}/{{MediaWiki:Mainpage}}]] قولدانۋعا بولادى.
+exportcuronly|تولىق تارىيحىن ەمەس, تەك اعىمدىق تۇزەتۋىن كىرىستىرىڭىز
+exportnohistory|----\n'''اڭعارتپا:''' ونىمدىلىك اسەرى سەبەپتەرىنەن, بەتتەردىڭ تولىق تارىيحىن بۇل پىشىنمەن سىرتقا بەرۋى وشىرىلگەن.
+export-submit|سىرتقا بەر
+export-addcattext|مىنا ساناتتاعى بەتتەردى ۇستەۋ:
+export-addcat|ۇستە
+export-download|فايل تۇرىندە ساقتاۋ
+export-templates|ۇلگىلەردى قوسا الىپ
+allmessages|جۇيە حابارلارى
+allmessagesname|اتاۋى
+allmessagesdefault|ادەپكى ٴماتىنى
+allmessagescurrent|اعىمدىق ٴماتىنى
+allmessagestext|مىندا {{ns:mediawiki}} ەسىم اياسىندا جەتىمدى جۇيە حابار ٴتىزىمى بەرىلەدى.\nەگەر امبەباپ MediaWiki جەرسىندىرۋگە ۇلەس قوسقىڭىز كەلسە [https://www.mediawiki.org/wiki/Special:MyLanguage/Localisation MediaWiki جەرسىندىرۋ بەتىنە] جانە [//translatewiki.net translatewiki.net جوباسىنا] بارىپ شىعىڭىز.
+allmessagesnotsupportedDB|'''$wgUseDatabaseMessages''' وشىرىلگەن سەبەبىنەن '''{{ns:special}}:AllMessages''' بەتى قولدانىلمايدى.
+filemissing|جوعالعان فايل
+thumbnail_error|نوباي قۇرۋ قاتەسى: ~{0}
+djvu_page_error|DjVu بەتى اۋماق سىرتىنددا
+djvu_no_xml|DjVu فايلى ٴۇشىن XML كەلتىرۋى ىيكەمدى ەمەس
+thumbnail_invalid_params|نوبايدىڭ باپتالىمدارى جارامسىز
+thumbnail_dest_directory|نىسانا قالتاسى قۇرۋى ىيكەمدى ەمەس
+import|بەتتەردى سىرتتان الۋ
+importinterwiki|ۋىيكىي-اپارۋ ٴۇشىن سىرتتان الۋ
+import-interwiki-text|سىرتتان الىناتىن ۋىيكىيدى جانە بەتتىڭ تاقىرىپ اتىن بولەكتەڭىز.\nتۇزەتۋ كۇن-ايى جانە وڭدەۋشى ەسىمدەرى ساقتالادى.\nۋىيكىي-اپارۋ ٴۇشىن سىرتتان الۋ بارلىق ارەكەتتەر [[{{#special:Log}}/import\u007Cسىرتتان الۋ جۋرنالىنا]] جازىلىپ الىنادى.
+import-interwiki-history|بۇل بەتتىڭ بارلىق تارىيحىي نۇسقالارىن كوشىرۋ
+import-interwiki-submit|سىرتتان الۋ
+import-interwiki-namespace|بەتتەردى مىنا ەسىم اياسىنا اپارۋ:
+import-comment|ماندەمەسى:
+importtext|قاينار ۋىيكىيدەن «{{#special:Export}}» قۋرالىن قولدانىپ فايلدى سىرتقا بەرىڭىز, دىيسكىڭىزگە ساقتاڭىز دا مىندا قوتارىپ بەرىڭىز.
+importstart|بەتتەردى سىرتتان الۋدا…
+import-revision-count|~{0} تۇزەتۋ
+importnopages|سىرتتان الىناتىن بەتتەر جوق.
+importfailed|سىرتتان الۋ ٴساتسىز ٴبىتتى: ~{0}
+importunknownsource|Cىرتتان الىناتىن قاينار ٴتۇرى بەلگىسىز
+importcantopen|سىرتتان الىناتىن فايل اشىلمايدى
+importbadinterwiki|جارامسىز ۋىيكىي-ارالىق سىلتەمە
+importsuccess|سىرتتان الۋ اياقتالدى!
+importnosources|ۋىيكىي-اپارۋ ٴۇشىن سىرتتان الىناتىن ەش قاينار كوزى انىقتالماعان, جانە تارىيحىن تىكەلەي قوتارىپ بەرۋى وشىرىلگەن.
+importnofile|سىرتتان الىنعان فايل قوتارىپ بەرىلگەن جوق.
+importuploaderrorsize|سىرتتان الىنعان فايلدىڭ قوتارىپ بەرىلۋى ٴساتسىز ٴوتتى. فايل مولشەرى قوتارىپ بەرىلۋگە رۋقسات ەتىلگەننەن اسادى.
+importuploaderrorpartial|سىرتتان الىنعان فايلدىڭ قوتارىپ بەرىلۋى ٴساتسىز ٴوتتى. وسى فايلدىڭ تەك بولىكتەرى قوتارىلىپ بەرىلدى.
+importuploaderrortemp|سىرتتان الىنعان فايلدىڭ قوتارىپ بەرىلۋى ٴساتسىز ٴوتتى. ۋاقىتشا قالتا تابىلمادى.
+import-parse-failure|سىرتتان الىنعان XML فايل قۇرىلىمىن تالداتقاندا ساتسىزدىك بولدى
+import-noarticle|سىرتتان الىناتىن ەش بەت جوق!
+import-nonewrevisions|بارلىق تۇزەتۋلەرى الدىندا سىرتتان الىنعان.
+xml-error-string|~{0} ٴنومىر ~{1} جولدا, باعان ~{2} (بايت ~{3}): ~{4}
+import-upload|XML دەرەكتەرىن قوتارىپ بەرۋ
+importlogpage|سىرتتان الۋ جۋرنالى
+importlogpagetext|بەتتەردى تۇزەتۋ تارىيحىمەن بىرگە سىرتقى ۋىيكىيلەردەن اكىمشى رەتىندە الۋ.
+import-logentry-upload|«[[~{0}]]» دەگەندى فايل قوتارىپ بەرۋ ارقىلى سىرتتان الدى
+import-logentry-upload-detail|~{0} تۇزەتۋ
+import-logentry-interwiki|ۋىيكىي-اپارىلعان ~{0}
+import-logentry-interwiki-detail|~{1} دەگەننەن ~{0} تۇزەتۋ
+tooltip-pt-userpage|جەكە بەتىم
+tooltip-pt-anonuserpage|بۇل IP مەكەنجايدىڭ جەكە بەتى
+tooltip-pt-mytalk|تالقىلاۋ بەتىم
+tooltip-pt-anontalk|بۇل IP مەكەنجاي وڭدەمەلەرىن تالقىلاۋ
+tooltip-pt-preferences|باپتالىمدارىم
+tooltip-pt-watchlist|وزگەرىستەرىن باقىلاپ تۇرعان بەتتەر ٴتىزىمىم.
+tooltip-pt-mycontris|ۇلەستەرىمدىڭ ٴتىزىمى
+tooltip-pt-login|كىرۋىڭىزدى ۇسىنامىز, ول مىندەتتى ەمەس.
+tooltip-pt-logout|شىعۋ
+tooltip-ca-talk|ماعلۇمات بەتتى تالقىلاۋ
+tooltip-ca-edit|بۇل بەتتى وڭدەي الاسىز. ساقتاۋدىڭ الدىندا «قاراپ شىعۋ» باتىرماسىن نۇقىڭىز.
+tooltip-ca-addsection|بۇل تالقىلاۋ بەتىندە جاڭا تاراۋ باستاۋ.
+tooltip-ca-viewsource|بۇل بەت قورعالعان. قاينار كوزىن قاراي الاسىز.
+tooltip-ca-history|بۇل بەتتىن جۋىقتاعى نۇسقالارى.
+tooltip-ca-protect|بۇل بەتتى قورعاۋ
+tooltip-ca-delete|بۇل بەتتى جويۋ
+tooltip-ca-undelete|بۇل بەتتىڭ جويۋدىڭ الدىنداعى بولعان وڭدەمەلەرىن قالپىنا كەلتىرۋ
+tooltip-ca-move|بۇل بەتتى جىلجىتۋ
+tooltip-ca-watch|بۇل بەتتى باقىلاۋ تىزىمىڭىزگە ۇستەۋ
+tooltip-ca-unwatch|بۇل بەتتى باقىلاۋ تىزىمىڭىزدەن الاستاۋ
+tooltip-search|{{SITENAME}} جوباسىندا ىزدەۋ
+tooltip-search-go|ەگەر ٴدال وسى اتاۋىمەن بولسا بەتكە ٴوتىپ كەتۋ
+tooltip-search-fulltext|وسى ٴماتىنى بار بەتتى ىزدەۋ
+tooltip-p-logo|باستى بەتكە
+tooltip-n-mainpage|باستى بەتكە كەلىپ-كەتىڭىز
+tooltip-n-portal|جوبا تۋرالى, نە ىستەۋىڭىزگە بولاتىن, قايدان تابۋعا بولاتىن تۋرالى
+tooltip-n-currentevents|اعىمداعى وقىيعالارعا قاتىستى ٴوڭ اقپاراتىن تابۋ
+tooltip-n-recentchanges|وسى ۋىيكىيدەگى جۋىقتاعى وزگەرىستەر ٴتىزىمى.
+tooltip-n-randompage|كەزدەيسوق بەتتى جۇكتەۋ
+tooltip-n-help|انىقتاما تابۋ ورنى.
+tooltip-t-whatlinkshere|مىندا سىلتەگەن بارلىق بەتتەردىڭ ٴتىزىمى
+tooltip-t-recentchangeslinked|مىننان سىلتەنگەن بەتتەردىڭ جۋىقتاعى وزگەرىستەرى
+tooltip-feed-rss|بۇل بەتتىڭ RSS ارناسى
+tooltip-feed-atom|بۇل بەتتىڭ Atom ارناسى
+tooltip-t-contributions|وسى قاتىسۋشىنىڭ ۇلەس ٴتىزىمىن قاراۋ
+tooltip-t-emailuser|وسى قاتىسۋشىعا حات جونەلتۋ
+tooltip-t-upload|فايلداردى قوتارىپ بەرۋ
+tooltip-t-specialpages|بارلىق ارنايى بەتتەر ٴتىزىمى
+tooltip-t-print|بۇل بەتتىڭ باسىپ شىعارىشقا ارنالعان نۇسقاسى
+tooltip-t-permalink|مىنا بەتتىڭ وسى نۇسقاسىنىڭ تۇراقتى سىلتەمەسى
+tooltip-ca-nstab-main|ماعلۇمات بەتىن قاراۋ
+tooltip-ca-nstab-user|قاتىسۋشى بەتىن قاراۋ
+tooltip-ca-nstab-media|تاسپا بەتىن قاراۋ
+tooltip-ca-nstab-special|بۇل ارنايى بەت, بەتتىڭ ٴوزى وڭدەلىنبەيدى.
+tooltip-ca-nstab-project|جوبا بەتىن قاراۋ
+tooltip-ca-nstab-image|فايل بەتىن قاراۋ
+tooltip-ca-nstab-mediawiki|جۇيە حابارىن قاراۋ
+tooltip-ca-nstab-template|ۇلگىنى قاراۋ
+tooltip-ca-nstab-help|انىقتىما بەتىن قاراۋ
+tooltip-ca-nstab-category|سانات بەتىن قاراۋ
+tooltip-minoredit|بۇنى شاعىن وڭدەمە دەپ بەلگىلەۋ
+tooltip-save|جاساعان وزگەرىستەرىڭىزدى ساقتاۋ
+tooltip-preview|ساقتاۋدىڭ الدىنان جاساعان وزگەرىستەرىڭىزدى قاراپ شىعىڭىز!
+tooltip-diff|ماتىنگە قانداي وزگەرىستەردى جاساعانىڭىزدى قاراۋ.
+tooltip-compareselectedversions|بەتتىڭ ەكى بولەكتەنگەن نۇسقاسى ايىرماسىن قاراۋ.
+tooltip-watch|بۇل بەتتى باقىلاۋ تىزىمىڭىزگە ۇستەۋ
+tooltip-recreate|بەت جويىلعانىنا قاراماستان قايتا باستاۋ
+tooltip-upload|قوتارىپ بەرۋدى باستاۋ
+common.css|/* مىندا ورنالاستىرىلعان CSS بارلىق مانەرلەردە قولدانىلادى */
+common.js|/* مىنداعى ٴارتۇرلى JavaScript كەز كەلگەن بەت قوتارىلعاندا بارلىق پايدالانۋشىلار ٴۇشىن جەگىلەدى. */
+anonymous|{{SITENAME}} تىركەلگىسىز قاتىسۋشى(لارى)
+siteuser|{{SITENAME}} قاتىسۋشى ~{0}
+lastmodifiedatby|بۇل بەتتى ~{2} قاتىسۋشى سوڭعى وزگەرتكەن كەزى: ~{1}, ~{0}.
+othercontribs|شىعارما نەگىزىن ~{0} جازعان.
+others|باسقالار
+siteusers|{{SITENAME}} قاتىسۋشى(لار) ~{0}
+creditspage|بەتتى جازعاندار
+nocredits|بۇل بەتتى جازعاندار تۋرالى اقپارات جوق.
+spamprotectiontitle|«سپام»-نان قورعايتىن سۇزگى
+spamprotectiontext|بۇل بەتتىڭ ساقتاۋىن «سپام» سۇزگىسى بۇعاتتادى.\nبۇنىڭ سەبەبى شەتتىك توراپ سىلتەمەسىنەن بولۋى مۇمكىن.
+spamprotectionmatch|كەلەسى «سپام» ٴماتىنى سۇزگىلەنگەن: ~{0}
+spambot_username|MediaWiki spam cleanup
+spam_reverting|~{0} دەگەنگە سىلتەمەلەرى جوق سوڭعى نۇسقاسىنا قايتارىلدى
+spam_blanking|~{0} دەگەنگە سىلتەمەلەرى بار بارلىق تۇزەتۋلەر تازارتىلدى
+markaspatrolleddiff|زەرتتەلدى دەپ بەلگىلەۋ
+markaspatrolledtext|بۇل بەتتى زەرتتەلدى دەپ بەلگىلە
+markedaspatrolled|زەرتتەلدى دەپ بەلگىلەندى
+markedaspatrolledtext|بولەكتەنگەن تۇزەتۋ زەرتتەلدى دەپ بەلگىلەندى.
+rcpatroldisabled|جۋىقتاعى وزگەرىستەردى زەرتتەۋى وشىرىلگەن
+rcpatroldisabledtext|جۋىقتاعى وزگەرىستەردى زەرتتەۋ مۇمكىندىگى اعىمدا وشىرىلگەن.
+markedaspatrollederror|زەرتتەلدى دەپ بەلگىلەنبەيدى
+markedaspatrollederrortext|زەرتتەلدى دەپ بەلگىلەۋ ٴۇشىن تۇزەتۋدى كەلتىرىڭىز.
+markedaspatrollederror-noautopatrol|ٴوز جاساعان وزگەرىستەرىڭىزدى زەرتتەلدى دەپ بەلگىلەي المايسىز.
+patrol-log-page|زەرتتەۋ جۋرنالى
+deletedrevision|ەسكى تۇزەتۋىن جويدى: ~{0}
+filedeleteerror-short|فايل جويۋ قاتەسى: ~{0}
+filedeleteerror-long|فايلدى جويعاندا قاتەلەر كەزدەستى:\n\n~{0}
+filedelete-missing|«~{0}» فايلى جويىلمايدى, سەبەبى ول جوق.
+filedelete-old-unregistered|«~{0}» فايلدىڭ كەلتىرىلگەن تۇزەتۋى دەرەكقوردا جوق.
+filedelete-current-unregistered|«~{0}» فايلدىڭ كەلتىرىلگەن اتاۋى دەرەكقوردا جوق.
+filedelete-archive-read-only|«~{0}» مۇراعات قالتاسىنا ۆەب-سەرۆەر جازا المايدى.
+previousdiff|← الدىڭعى ايىرم.
+nextdiff|كەلەسى ايىرم. →
+mediawarning|'''قۇلاقتاندىرۋ''': بۇل فايل تۇرىندە قاسكۇنەمدى كودى بار بولۋى ىقتىيمال; بۇنى جەگىپ جۇيەڭىزگە زىييان كەلتىرۋىڭىز مۇمكىن.
+imagemaxsize|سىيپاتتاماسى بەتىندەگى سۋرەتتىڭ مولشەرىن شەكتەۋى:
+thumbsize|نوباي مولشەرى:
+widthheight|~{0} × ~{1}
+widthheightpage|~{0} × ~{1}, ~{2} بەت
+file-info|فايل مولشەرى: ~{0}, MIME ٴتۇرى: ~{1}
+file-info-size|~{0} × ~{1} نۇكتە, فايل مولشەرى: ~{2}, MIME ٴتۇرى: ~{3}
+file-nohires|جوعارى اجىراتىلىمدىعى جەتىمسىز.
+svg-long-desc|SVG فايلى, كەسىمدى ~{0} × ~{1} نۇكتە, فايل مولشەرى: ~{2}
+show-big-image|جوعارى اجىراتىلىمدى
+newimages|جاڭا فايلدار كورمەسى
+imagelisttext|تومەندە ~{1} سۇرىپتالعان '''~{0}''' فايل ٴتىزىمى.
+newimages-summary|بۇل ارنايى بەتىندە سوڭعى قوتارىپ بەرىلگەن فايلدار كورسەتىلەدى
+noimages|كورەتىن ەشتەڭە جوق.
+ilsubmit|ىزدە
+bydate|كۇن-ايىمەن
+sp-newimages-showfrom|~{1}, ~{0} كەزىنەن بەرى — جاڭا سۋرەتتەردى كورسەت
+video-dims|~{0}, ~{1} × ~{2}
+seconds-abbrev|~{0}س
+minutes-abbrev|~{0}مىين
+hours-abbrev|~{0}ساع
+bad_image_list|ٴپىشىمى تومەندەگىدەي:\n\nتەك ٴتىزىم دانالارى (* نىشانىمەن باستالىتىن جولدار) ەسەپتەلەدى.\nجولدىڭ ٴبىرىنشى سىلتەمەسى جارامسىز سۋرەتكە سىلتەۋ ٴجون.\nسول جولداعى كەيىنگى ٴاربىر سىلتەمەلەر ەرەن بولىپ ەسەپتەلەدى, مىسالى جول ىشىندەگى كەزدەسەتىن سۋرەتى بار بەتتەر.
+metadata|قوسىمشا مالىمەتتەر
+metadata-help|وسى فايلدا قوسىمشا مالىمەتتەر بار. بالكىم, وسى مالىمەتتەر فايلدى جاساپ شىعارۋ, نە ساندىلاۋ ٴۇشىن پايدالانعان ساندىق كامەرا, نە ماتىنالعىردان الىنعان.\nەگەر وسى فايل نەگىزگى كۇيىنەن وزگەرتىلگەن بولسا, كەيبىر ەجەلەلەرى وزگەرتىلگەن فوتوسۋرەتكە لايىق بولماس.
+metadata-expand|ەگجەي-تەگجەيىن كورسەت
+metadata-collapse|ەگجەي-تەگجەيىن جاسىر
+metadata-fields|وسى حاباردا تىزىمدەلگەن EXIF قوسىمشا مالىمەتتەر اۋماقتارى, سۋرەت بەتى كورسەتۋ كەزىندە قوسىمشا مالىمەتتەر كەستە جاسىرىلىعاندا كىرىستىرلەدى.\nباسقالارى ادەپكىدەن جاسىرىلادى.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|ەنى
+exif-imagelength|بىيىكتىگى
+exif-bitspersample|قۇراش سايىن بىيت سانى
+exif-compression|قىسىم سۇلباسى
+exif-photometricinterpretation|نۇكتە قىيىسۋى
+exif-orientation|مەگزەۋى
+exif-samplesperpixel|قۇراش سانى
+exif-planarconfiguration|دەرەك رەتتەۋى
+exif-ycbcrsubsampling|Y قۇراشىنىڭ C قۇراشىنا جارناقتاۋى
+exif-ycbcrpositioning|Y قۇراشى جانە C قۇراشى مەكەندەۋى
+exif-xresolution|دەرەلەي اجىراتىلىمدىعى
+exif-yresolution|تىرەلەي اجىراتىلىمدىعى
+exif-stripoffsets|سۋرەت دەرەرەكتەرىنىڭ جايعاسۋى
+exif-rowsperstrip|بەلدىك سايىن جول سانى
+exif-stripbytecounts|قىسىمدالعان بەلدىك سايىن بايت سانى
+exif-jpeginterchangeformat|JPEG SOI دەگەنگە ىعىسۋى
+exif-jpeginterchangeformatlength|JPEG دەرەكتەرىنىڭ بايت سانى
+exif-whitepoint|اق نۇكتە تۇستىلىگى
+exif-primarychromaticities|العى شەپتەگى تۇستىلىكتەرى
+exif-ycbcrcoefficients|ٴتۇس اياسىن تاسىمالداۋ ماترىيتسالىق ەسەلىكتەرى
+exif-referenceblackwhite|قارا جانە اق انىقتاۋىش قوس كولەمدەرى
+exif-datetime|فايلدىڭ وزگەرتىلگەن كۇن-ايى
+exif-imagedescription|سۋرەت تاقىرىبىن اتى
+exif-make|كامەرا ٴوندىرۋشىسى
+exif-model|كامەرا ۇلگىسى
+exif-software|قولدانىلعان باعدارلامالىق جاساقتاما
+exif-artist|تۋىندىگەرى
+exif-copyright|اۋتورلىق قۇقىقتار ىييەسى
+exif-exifversion|Exif نۇسقاسى
+exif-flashpixversion|قولدانعان Flashpix نۇسقاسى
+exif-colorspace|ٴتۇس اياسى
+exif-componentsconfiguration|ارقايسى قۇراش ٴمانى
+exif-compressedbitsperpixel|سۋرەت قىسىمداۋ ٴتارتىبى
+exif-pixelydimension|سۋرەتتىڭ جارامدى ەنى
+exif-pixelxdimension|سۋرەتتىڭ جارامدى بىيىكتىگى
+exif-usercomment|قاتىسۋشىنىڭ ماندەمەلەرى
+exif-relatedsoundfile|قاتىستى دىبىس فايلى
+exif-datetimeoriginal|جاسالعان كەزى
+exif-datetimedigitized|ساندىقتاۋ كەزى
+exif-subsectime|جاسالعان كەزىنىڭ سەكۋند بولشەكتەرى
+exif-subsectimeoriginal|تۇپنۇسقا كەزىنىڭ سەكۋند بولشەكتەرى
+exif-subsectimedigitized|ساندىقتاۋ كەزىنىڭ سەكۋند بولشەكتەرى
+exif-exposuretime|ۇستالىم ۋاقىتى
+exif-exposuretime-format|~{0} س (~{1})
+exif-fnumber|ساڭىلاۋ مولشەرى
+exif-exposureprogram|ۇستالىم باعدارلاماسى
+exif-spectralsensitivity|سپەكتر بويىنشا سەزگىشتىگى
+exif-isospeedratings|ISO جىلدامدىق جارناقتاۋى (جارىق سەزگىشتىگى)
+exif-shutterspeedvalue|جاپقىش جىلدامدىلىعى
+exif-aperturevalue|ساڭىلاۋلىق
+exif-brightnessvalue|جارىقتىلىق
+exif-exposurebiasvalue|ۇستالىم وتەمى
+exif-maxaperturevalue|بارىنشا ساڭىلاۋ اشۋى
+exif-subjectdistance|نىسانا قاشىقتىعى
+exif-meteringmode|ولشەۋ ٴادىسى
+exif-lightsource|جارىق كوزى
+exif-flash|جارقىلداعىش
+exif-focallength|شوعىرلاۋ الشاقتىعى
+exif-subjectarea|نىسانا اۋقىمى
+exif-flashenergy|جارقىلداعىش قارقىنى
+exif-focalplanexresolution|ح بويىنشا شوعىرلاۋ جايپاقتىقتىڭ اجىراتىلىمدىعى
+exif-focalplaneyresolution|Y بويىنشا شوعىرلاۋ جايپاقتىقتىڭ اجىراتىلىمدىعى
+exif-focalplaneresolutionunit|شوعىرلاۋ جايپاقتىقتىڭ اجىراتىلىمدىق ولشەمى
+exif-subjectlocation|نىسانا ورنالاسۋى
+exif-exposureindex|ۇستالىم ايقىنداۋى
+exif-sensingmethod|سەنسوردىڭ ولشەۋ ٴادىسى
+exif-filesource|فايل قاينارى
+exif-scenetype|ساحنا ٴتۇرى
+exif-customrendered|قوسىمشا سۋرەت وڭدەتۋى
+exif-exposuremode|ۇستالىم ٴتارتىبى
+exif-whitebalance|اق ٴتۇسىنىڭ تەندەستىگى
+exif-digitalzoomratio|ساندىق اۋقىمداۋ جارناقتاۋى
+exif-focallengthin35mmfilm|35 mm تاسپاسىنىڭ شوعىرلاۋ الشاقتىعى
+exif-scenecapturetype|تۇسىرگەن ساحنا ٴتۇرى
+exif-gaincontrol|ساحنانى رەتتەۋ
+exif-contrast|اشىقتىق
+exif-saturation|قانىقتىق
+exif-sharpness|ايقىندىق
+exif-devicesettingdescription|جابدىق باپتاۋ سىيپاتتاماسى
+exif-subjectdistancerange|ساحنا قاشىقتىعىنىڭ كولەمى
+exif-imageuniqueid|سۋرەتتىڭ بىرەگەي ٴنومىرى (ID)
+exif-gpsversionid|GPS بەلگىشەسىنىڭ نۇسقاسى
+exif-gpslatituderef|سولتۇستىك نەمەسە وڭتۇستىك بويلىعى
+exif-gpslatitude|بويلىعى
+exif-gpslongituderef|شىعىس نەمەسە باتىس ەندىگى
+exif-gpslongitude|ەندىگى
+exif-gpsaltituderef|بىيىكتىك كورسەتۋى
+exif-gpsaltitude|بىيىكتىك
+exif-gpstimestamp|GPS ۋاقىتى (اتوم ساعاتى)
+exif-gpssatellites|ولشەۋگە پيدالانىلعان جەر سەرىكتەرى
+exif-gpsstatus|قابىلداعىش كۇيى
+exif-gpsmeasuremode|ولشەۋ ٴتارتىبى
+exif-gpsdop|ولشەۋ دالدىگى
+exif-gpsspeedref|جىلدامدىلىق ولشەمى
+exif-gpsspeed|GPS قابىلداعىشتىڭ جىلدامدىلىعى
+exif-gpstrackref|قوزعالىس باعىتىن كورسەتۋى
+exif-gpstrack|قوزعالىس باعىتى
+exif-gpsimgdirectionref|سۋرەت باعىتىن كورسەتۋى
+exif-gpsimgdirection|سۋرەت باعىتى
+exif-gpsmapdatum|پايدالانىلعان گەودەزىييالىق تۇسىرمە دەرەكتەرى
+exif-gpsdestlatituderef|نىسانا بويلىعىن كورسەتۋى
+exif-gpsdestlatitude|نىسانا بويلىعى
+exif-gpsdestlongituderef|نىسانا ەندىگىن كورسەتۋى
+exif-gpsdestlongitude|نىسانا ەندىگى
+exif-gpsdestbearingref|نىسانا ازىيمۋتىن كورسەتۋى
+exif-gpsdestbearing|نىسانا ازىيمۋتى
+exif-gpsdestdistanceref|نىسانا قاشىقتىعىن كورسەتۋى
+exif-gpsdestdistance|نىسانا قاشىقتىعى
+exif-gpsprocessingmethod|GPS وڭدەتۋ ٴادىسىنىڭ اتاۋى
+exif-gpsareainformation|GPS اۋماعىنىڭ اتاۋى
+exif-gpsdatestamp|GPS كۇن-ايى
+exif-gpsdifferential|GPS سارالانعان دۇرىستاۋ
+exif-compression-1|ۇلعايتىلعان
+exif-unknowndate|بەلگىسىز كۇن-ايى
+exif-orientation-1|قالىپتى
+exif-orientation-2|دەرەلەي شاعىلىسقان
+exif-orientation-3|180° بۇرىشقا اينالعان
+exif-orientation-4|تىرەلەي شاعىلىسقان
+exif-orientation-5|ساعات تىلشەسىنە قارسى 90° بۇرىشقا اينالعان جانە تىرەلەي شاعىلىسقان
+exif-orientation-6|ساعات تىلشە بويىنشا 90° بۇرىشقا اينالعان
+exif-orientation-7|ساعات تىلشە بويىنشا 90° بۇرىشقا اينالعان جانە تىرەلەي شاعىلىسقان
+exif-orientation-8|ساعات تىلشەسىنە قارسى 90° بۇرىشقا اينالعان
+exif-planarconfiguration-1|تالپاق ٴپىشىم
+exif-planarconfiguration-2|تايپاق ٴپىشىم
+exif-componentsconfiguration-0|بار بولمادى
+exif-exposureprogram-0|انىقتالماعان
+exif-exposureprogram-1|قولمەن
+exif-exposureprogram-2|باعدارلامالى ٴادىس (قالىپتى)
+exif-exposureprogram-3|ساڭىلاۋ باسىڭقىلىعى
+exif-exposureprogram-4|ىسىرما باسىڭقىلىعى
+exif-exposureprogram-5|ونەر باعدارلاماسى (انىقتىق تەرەندىگىنە ساناسقان)
+exif-exposureprogram-6|قىيمىل باعدارلاماسى (جاپقىش شاپشاندىلىعىنا ساناسقان)
+exif-exposureprogram-7|تىرەلەي ٴادىسى (ارتى شوعىرلاۋسىز تاياۋ تۇسىرمەلەر)
+exif-exposureprogram-8|دەرەلەي ٴادىسى (ارتى شوعىرلانعان دەرەلەي تۇسىرمەلەر)
+exif-subjectdistance-value|~{0} m
+exif-meteringmode-0|بەلگىسىز
+exif-meteringmode-1|بىركەلكى
+exif-meteringmode-2|بۇلدىر داق
+exif-meteringmode-3|بىرداقتى
+exif-meteringmode-4|كوپداقتى
+exif-meteringmode-5|ورنەكتى
+exif-meteringmode-6|جىرتىندى
+exif-meteringmode-255|باسقا
+exif-lightsource-0|بەلگىسىز
+exif-lightsource-1|كۇن جارىعى
+exif-lightsource-2|كۇنجارىقتى شام
+exif-lightsource-3|قىزدىرعىشتى شام
+exif-lightsource-4|جارقىلداعىش
+exif-lightsource-9|اشىق كۇن
+exif-lightsource-10|بۇلىنعىر كۇن
+exif-lightsource-11|كولەنكەلى
+exif-lightsource-12|كۇنجارىقتى شام (D 5700–7100 K)
+exif-lightsource-13|كۇنجارىقتى شام (N 4600–5400 K)
+exif-lightsource-14|كۇنجارىقتى شام (W 3900–4500 K)
+exif-lightsource-15|كۇنجارىقتى شام (WW 3200–3700 K)
+exif-lightsource-17|قالىپتى جارىق قاينارى A
+exif-lightsource-18|قالىپتى جارىق قاينارى B
+exif-lightsource-19|قالىپتى جارىق قاينارى C
+exif-lightsource-24|ستۋدىييالىق ISO كۇنجارىقتى شام
+exif-lightsource-255|باسقا جارىق كوزى
+exif-focalplaneresolutionunit-2|ٴدۇيم
+exif-sensingmethod-1|انىقتالماعان
+exif-sensingmethod-2|1-ٴتشىيپتى اۋماقتى تۇسسەزگىش
+exif-sensingmethod-3|2-ٴتشىيپتى اۋماقتى تۇسسەزگىش
+exif-sensingmethod-4|3-ٴتشىيپتى اۋماقتى تۇسسەزگىش
+exif-sensingmethod-5|كەزەكتى اۋماقتى تۇسسەزگىش
+exif-sensingmethod-7|3-سىزىقتى تۇسسەزگىش
+exif-sensingmethod-8|كەزەكتى سىزىقتى تۇسسەزگىش
+exif-scenetype-1|تىكەلەي تۇسىرىلگەن فوتوسۋرەت
+exif-customrendered-0|قالىپتى وڭدەتۋ
+exif-customrendered-1|قوسىمشا وڭدەتۋ
+exif-exposuremode-0|وزدىكتىك ۇستالىمداۋ
+exif-exposuremode-1|قولمەن ۇستالىمداۋ
+exif-exposuremode-2|وزدىكتىك جارقىلداۋ
+exif-whitebalance-0|اق ٴتۇسى وزدىكتىك تەندەستىرىلگەن
+exif-whitebalance-1|اق ٴتۇسى قولمەن تەندەستىرىلگەن
+exif-scenecapturetype-0|قالىپتالعان
+exif-scenecapturetype-1|دەرەلەي
+exif-scenecapturetype-2|تىرەلەي
+exif-scenecapturetype-3|تۇنگى ساحنا
+exif-gaincontrol-0|جوق
+exif-gaincontrol-1|تومەن زورايۋ
+exif-gaincontrol-2|جوعارى زورايۋ
+exif-gaincontrol-3|تومەن باياۋلاۋ
+exif-gaincontrol-4|جوعارى باياۋلاۋ
+exif-contrast-0|قالىپتى
+exif-contrast-1|ۇيان
+exif-contrast-2|تۇرپايى
+exif-saturation-0|قالىپتى
+exif-saturation-1|تومەن قانىقتى
+exif-saturation-2|جوعارى قانىقتى
+exif-sharpness-0|قالىپتى
+exif-sharpness-1|ۇيان
+exif-sharpness-2|تۇرپايى
+exif-subjectdistancerange-0|بەلگىسىز
+exif-subjectdistancerange-1|تاياۋ تۇسىرىلگەن
+exif-subjectdistancerange-2|جاقىن تۇسىرىلگەن
+exif-subjectdistancerange-3|الىس تۇسىرىلگەن
+exif-gpslatitude-n|سولتۇستىك بويلىعى
+exif-gpslatitude-s|وڭتۇستىك بويلىعى
+exif-gpslongitude-e|شىعىس ەندىگى
+exif-gpslongitude-w|باتىس ەندىگى
+exif-gpsstatus-a|ولشەۋ ۇلاسۋدا
+exif-gpsstatus-v|ولشەۋ ٴوزارا ارەكەتتە
+exif-gpsmeasuremode-2|2-باعىتتىق ولشەم
+exif-gpsmeasuremode-3|3-باعىتتىق ولشەم
+exif-gpsspeed-k|km/h
+exif-gpsspeed-m|mil/h
+exif-gpsspeed-n|knot
+exif-gpsdirection-t|شىن باعىت
+exif-gpsdirection-m|ماگنىيتتى باعىت
+namespacesall|بارلىعى
+monthsall|بارلىعى
+confirmemail|ە-پوشتا مەكەنجايىن قۇپتاۋ
+confirmemail_noemail|[[{{#special:Preferences}}\u007Cپايدالانۋشىلىق باپتالىمدارىڭىزدا]] جارامدى ە-پوشتا مەكەنجايىن قويماپسىز.
+confirmemail_text|{{SITENAME}} ە-پوشتا مۇمكىندىكتەرىن پايدالانۋ ٴۇشىن الدىنان ە-پوشتا مەكەنجايىڭىزدىڭ جارامدىلىعىن تەكسەرىپ شىعۋىڭىز كەرەك.\nٴوزىڭىزدىڭ مەكەنجايىڭىزعا قۇپتاۋ حاتىن جونەلتۋ ٴۇشىن تومەندەگى باتىرمانى نۇقىڭىز.\nحاتتىڭ ىشىندە كودى بار سىلتەمە كىرىستىرمەك;\nە-پوشتا جايىڭىزدىڭ جارامدىلىعىن قۇپتاۋ ٴۇشىن سىلتەمەنى شولعىشتىڭ مەكەنجاي جولاعىنا ەنگىزىپ اشىڭىز.
+confirmemail_pending|قۇپتاۋ كودى الداقاشان حاتپەن جىبەرىلىگەن;\nەگەر جۋىقتا تىركەلسەڭىز, جاڭا كودىن سۇراتۋ الدىنان حات كەلۋىن ٴبىرشاما ٴمىينوت كۇتە تۇرىڭىز.
+confirmemail_send|قۇپتاۋ كودىن جونەلتۋ
+confirmemail_sent|قۇپتاۋ حاتى جونەلتىلدى.
+confirmemail_oncreate|قۇپتاۋ كودى ە-پوشتا مەكەنجايىڭىزعا جونەلتىلدى.\nبۇل بەلگىلەمە كىرۋ ۇدىرىسىنە كەرەگى جوق, بىراق ە-پوشتا نەگىزىندەگى ۋىيكىي مۇمكىندىكتەردى قوسۋ ٴۇشىن بۇنى جەتىستىرۋىڭىز كەرەك.
+confirmemail_sendfailed|قۇپتاۋ حاتى جونەلتىلمەدى.\nجارامسىز تاڭبالار ٴۇشىن مەكەنجايدى تەكسەرىپ شىعىڭىز.\n\nپوشتا جىبەرگىشتىڭ قايتارعان مالىمەتى: ~{0}
+confirmemail_invalid|قۇپتاۋ كودى جارامسىز.\nكود مەرزىمى بىتكەن شىعار.
+confirmemail_needlogin|ە-پوشتا مەكەنجايىڭىزدى قۇپتاۋ ٴۇشىن ~{0} كەرەك.
+confirmemail_success|ە-پوشتا مەكەنجايىڭىز قۇپتالدى.\nەندى ۋىيكىيگە كىرىپ جۇمىسقا كىرىسۋگە بولادى
+confirmemail_loggedin|ە-پوشتا مەكەنجايىڭىز ەندى قۇپتالدى.
+confirmemail_subject|{{SITENAME}} تورابىنان ە-پوشتا مەكەنجايىڭىزدى قۇپتاۋ حاتى
+confirmemail_body|كەيبىرەۋ, ~{0} دەگەن IP مەكەنجايىنان, ٴوزىڭىز بولۋى مۇمكىن,\n{{SITENAME}} جوباسىندا بۇل ە-پوشتا مەكەنجايىن قولدانىپ «~{1}» دەگەن تىركەلگى جاساپتى.\n\nبۇل تىركەلگى ناقتى سىزگە ٴتان ەكەنىن قۇپتاۋ ٴۇشىن, جانە {{SITENAME}} جوباسىنىڭ\nە-پوشتا مۇمكىندىكتەرىن بەلسەندىرۋ ٴۇشىن, مىنا سىلتەمەنى شولعىشىڭىزبەن اشىڭىز:\n\n~{2}\n\nەگەر بۇل تىركەلگىنى جاساعان ٴوزىڭىز *ەمەس* بولسا, مىنا سىلتەمەگە ەرىپ\nە-پوشتا مەكەنجايى قۇپتاۋىن بولدىرماڭىز:\n\n~{4}\n\nقۇپتاۋ كودى مەرزىمى بىتەتىن كەزى: ~{3}.
+confirmemail_invalidated|ە-پوشتا مەكەنجايىن قۇپتاۋى بولدىرىلمادى
+invalidateemail|ە-پوشتا مەكەنجايىن قۇپتاۋى بولدىرماۋ
+scarytranscludedisabled|[ۋىيكىي-ارالىق كىرىكبەتتەر وشىرىلگەن]
+scarytranscludefailed|[~{0} ٴۇشىن ۇلگى كەلتىرۋى ٴساتسىز ٴبىتتى; عافۋ ەتىڭىز]
+scarytranscludetoolong|[URL تىم ۇزىن; عافۋ ەتىڭىز]
+deletedwhileediting|قۇلاقتاندىرۋ: بۇل بەتتى وڭدەۋىڭىزدى باستاعاندا, وسى بەت جويىلدى!
+confirmrecreate|بۇل بەتتى وڭدەۋىڭىزدى باستاعاندا [[{{ns:user}}:~{0}\u007C~{0}]] ([[{{ns:user_talk}}:~{0}\u007Cتالقىلاۋى]]) وسى بەتتى جويدى, كەلتىرگەن سەبەبى:\n: ''~{1}''\nوسى بەتتى قايتا باستاۋىن ناقتى تىلەگەنىڭىزدى قۇپتاڭىز.
+recreate|قايتا باستاۋ
+unit-pixel| نۇكتە
+confirm_purge_button|جارايدى
+confirm-purge-top|بۇل بەتتىن بۇركەمەسىن تازارتاسىز با?
+imgmultipageprev|← الدىڭعى بەتكە
+imgmultipagenext|كەلەسى بەتكە →
+imgmultigo|ٴوت!
+imgmultigoto|~{0} بەتىنە ٴوتۋ
+ascending_abbrev|ٴوسۋ
+descending_abbrev|كەمۋ
+table_pager_next|كەلەسى بەتكە
+table_pager_prev|الدىڭعى بەتكە
+table_pager_first|العاشقى بەتكە
+table_pager_last|سوڭعى بەتكە
+table_pager_limit|بەت سايىن ~{0} دانا كورسەت
+table_pager_limit_submit|ٴوتۋ
+table_pager_empty|ەش ناتىيجە جوق
+autosumm-blank|بەتتىڭ بارلىق ماعلۇماتىن الاستادى
+autosumm-replace|بەتتى '~{0}' دەگەنمەن الماستىردى
+autoredircomment|[[~{0}]] دەگەنگە ايدادى
+autosumm-new|جاڭا بەتتە: ~{0}
+size-bytes|~{0} بايت
+lag-warn-normal|~{0} سەكۋندتان جاڭالاۋ وزگەرىستەر بۇل تىزىمدە كورسەتىلمەۋى مۇمكىن.
+lag-warn-high|دەرەكقور سەرۆەرى زور كەشىگۋى سەبەبىنەن, ~{0} سەكۋندتان جاڭالاۋ وزگەرىستەر بۇل تىزىمدە كورسەتىلمەۋى مۇمكىن.
+watchlistedit-normal-title|باقىلاۋ ٴتىزىمدى وڭدەۋ
+watchlistedit-normal-legend|باقىلاۋ تىزىمىنەن تاقىرىپ اتتارىن الاستاۋ
+watchlistedit-normal-explain|باقىلاۋ تىزىمىڭىزدەگى تاقىرىپ اتتار تومەندە كورسەتىلەدى.\nتاقىرىپ اتىن الاستاۋ ٴۇشىن, ٴبۇيىر كوزگە قۇسبەلگى سالىڭىز, جانە «تاقىرىپ اتتارىن الاستا» دەگەندى نۇقىڭىز.\nتاعى دا [[Special:EditWatchlist/raw\u007Cقام ٴتىزىمدى وڭدەي]] الاسىز.
+watchlistedit-normal-submit|تاقىرىپ اتتارىن الاستا
+watchlistedit-normal-done|باقىلاۋ تىزىمىڭىزدەن ~{0} تاقىرىپ اتى الاستالدى:
+watchlistedit-raw-title|قام باقىلاۋ ٴتىزىمدى وڭدەۋ
+watchlistedit-raw-legend|قام باقىلاۋ ٴتىزىمدى وڭدەۋ
+watchlistedit-raw-explain|باقىلاۋ تىزىمىڭىزدەگى تاقىرىپ اتتارى تومەندە كورسەتىلەدى, جانە دە تىزمگە ۇستەپ جانە تىزمدەن الاستاپ وڭدەلۋى مۇمكىن;\nجول سايىن ٴبىر تاقىرىپ اتى بولۋ ٴجون.\nبىتىرگەننەن سوڭ «باقىلاۋ ٴتىزىمدى جاڭارتۋ» دەگەندى نۇقىڭىز.\nتاعى دا [[Special:EditWatchlist\u007Cقالىپالعان وڭدەۋىشتى پايدالانا]] الاسىز.
+watchlistedit-raw-titles|تاقىرىپ اتتارى:
+watchlistedit-raw-submit|باقىلاۋ ٴتىزىمدى جاڭارتۋ
+watchlistedit-raw-done|باقىلاۋ ٴتىزىمىڭىز جاڭارتىلدى.
+watchlistedit-raw-added|~{0} تاقىرىپ اتى ۇستەلدى:
+watchlistedit-raw-removed|~{0} تاقىرىپ اتى الاستالدى:
+watchlisttools-view|قاتىستى وزگەرىستەردى قاراۋ
+watchlisttools-edit|باقىلاۋ ٴتىزىمدى قاراۋ جانە وڭدەۋ
+watchlisttools-raw|قام باقىلاۋ ٴتىزىمدى وڭدەۋ
+iranian-calendar-m1|پىرۋاردىين
+iranian-calendar-m2|اردىيبەشت
+iranian-calendar-m3|حىرداد
+iranian-calendar-m4|تىير
+iranian-calendar-m5|مىرداد
+iranian-calendar-m6|شەرىييار
+iranian-calendar-m7|مەر
+iranian-calendar-m8|ابان
+iranian-calendar-m9|ازار
+iranian-calendar-m10|دىي
+iranian-calendar-m11|بەمىن
+iranian-calendar-m12|اسپاند
+hebrew-calendar-m1|ٴتىشرىي
+hebrew-calendar-m2|xىشۋان
+hebrew-calendar-m3|كىسلۋ
+hebrew-calendar-m4|توت
+hebrew-calendar-m5|شىبات
+hebrew-calendar-m6|ادار
+hebrew-calendar-m6a|ادار
+hebrew-calendar-m6b|ۋادار
+hebrew-calendar-m7|نىيسان
+hebrew-calendar-m8|ايار
+hebrew-calendar-m9|سىيۋان
+hebrew-calendar-m10|تىموز
+hebrew-calendar-m11|اب
+hebrew-calendar-m12|ايلول
+hebrew-calendar-m1-gen|ٴتىشرىيدىڭ
+hebrew-calendar-m2-gen|حىشۋاندىڭ
+hebrew-calendar-m3-gen|كىسلۋدىڭ
+hebrew-calendar-m4-gen|توتتىڭ
+hebrew-calendar-m5-gen|شىباتتىڭ
+hebrew-calendar-m6-gen|اداردىڭ
+hebrew-calendar-m6a-gen|اداردىڭ
+hebrew-calendar-m6b-gen|ۋاداردىڭ
+hebrew-calendar-m7-gen|نىيساننىڭ
+hebrew-calendar-m8-gen|اياردىڭ
+hebrew-calendar-m9-gen|سىيۋاننىڭ
+hebrew-calendar-m10-gen|تىموزدىڭ
+hebrew-calendar-m11-gen|ابتىڭ
+hebrew-calendar-m12-gen|ايلولدىڭ
+version|جۇيە نۇسقاسى
+version-extensions|ورناتىلعان كەڭەيتىمدەر
+version-specialpages|ارنايى بەتتەر
+version-parserhooks|قۇرىلىمدىق تالداتقىشتىڭ تۇزاقتارى
+version-variables|اينىمالىلار
+version-other|تاعى باسقالار
+version-mediahandlers|تاسپا وڭدەتكىشتەرى
+version-hooks|جەتە تۇزاقتارى
+version-parser-extensiontags|قۇرىلىمدىق تالداتقىش كەڭەيتىمدەرىنىڭ بەلگىلەمەرى
+version-parser-function-hooks|قۇرىلىمدىق تالداتقىش جەتەلەرىنىڭ تۇزاقتارى
+version-hook-name|تۇزاق اتاۋى
+version-hook-subscribedby|تۇزاق تارتقىشتارى
+version-version|(~{0})
+version-license|لىيتسەنزىيياسى
+version-software|ورناتىلعان باعدارلامالىق جاساقتاما
+version-software-product|ٴونىم
+version-software-version|نۇسقاسى
+fileduplicatesearch|فايل تەلنۇسقالارىن ىزدەۋ
+fileduplicatesearch-summary|فايل حەشى ماعىناسى نەگىزىندە تەلنۇسقالارىن ىزدەۋ.
+fileduplicatesearch-legend|تەلنۇسقانى ىزدەۋ
+fileduplicatesearch-filename|فايل اتاۋى:
+fileduplicatesearch-submit|ىزدە
+fileduplicatesearch-info|~{0} × ~{1} پىيكسەل<br />فايل مولشەرى: ~{2}<br />MIME ٴتۇرى: ~{3}
+fileduplicatesearch-result-1|«~{0}» فايلىنا تەڭ تەلنۇسقاسى جوق.
+fileduplicatesearch-result-n|«~{0}» فايلىنا تەڭ ~{1} تەلنۇسقاسى بار.
+specialpages|ارنايى بەتتەر
+specialpages-note|* كادىمگى ارنايى بەتتەر.\n* <strong class="mw-specialpagerestricted">شەكتەلگەن ارنايى بەتتەر.</strong>
+specialpages-group-maintenance|باپتاۋ باياناتتارى
+specialpages-group-other|تاعى باسقا ارنايى بەتتەر
+specialpages-group-login|كىرۋ / تىركەلۋ
+specialpages-group-changes|جۋىقتاعى وزگەرىستەر مەن جۋرنالدار
+specialpages-group-media|تاسپا باياناتتارى جانە قوتارىپ بەرىلگەندەر
+specialpages-group-users|قاتىسۋشىلار جانە ولاردىڭ قۇقىقتارى
+specialpages-group-highuse|وتە كوپ قولدانىلعان بەتتەر
+specialpages-group-pages|بەتتەر ٴتىزىمى
+specialpages-group-pagetools|كومەكشى بەتتەر
+specialpages-group-wiki|ۋىيكىي دەرەكتەرى جانە قۇرالدارى
+specialpages-group-redirects|ايدايتىن ارنايى بەتتەر
+specialpages-group-spam|سپام قۇرالدارى
+revdelete-restricted|اكىمشىلەرگە تىيىمدار قولدادى
+revdelete-unrestricted|اكىمشىلەردەن تىيىمداردى الاستادى
+rightsnone|(ەشقانداي)
+revdelete-summary|وڭدەمەنىڭ قىسقاشا مازمۇنداماسى
+expandtemplates|ۇلگىلەردى ۇلعايتۋ
+expand_templates_intro|وسى قۇرال ارنايى بەتى الدەبىر ٴماتىندى الادى دا,\nبۇنىڭ ىشىندەگى بارلىق كىرىكتەلگەن ۇلگىلەردى مەيلىنشە ۇلعايتادى.\nمىنا <nowiki>{{#language:...}} سىيياقتى جوڭدەتۋ فۋنكتسىييالارىن دا, جانە {{CURRENTDAY}}\nسىيياقتى اينامالىلارىن دا ۇلعايتادى (ناقتى ايتقاندا, قوس قابات ساداق جاقشالار اراسىنداعى بارلىعىن).\nبۇنى ٴوز MediaWiki باعدارلاماسىنان قاتىستى جوڭدەتۋ ساتىن شاقىرىپ ىستەلىنەدى.
+expand_templates_title|ٴماتىن ارالىق اتاۋى ({{FULLPAGENAME}} ت.ب. بەتتەر ٴۇشىن):
+expand_templates_input|كىرىس ٴماتىنى:
+expand_templates_output|ناتىيجەسى
+expand_templates_xml_output|XML شىعارۋى
+expand_templates_ok|جارايدى
+expand_templates_remove_comments|ماندەمەلەرىن الاستاتىپ?
+expand_templates_generate_xml|XML وڭدەتۋ بۇتاقتارىن كورسەت
+expand_templates_preview|قاراپ شىعۋ
+contactpage-usermailererror|Mail نىسانى قاتە قايتاردى:
+']:>
+).lang
+;

@@ -1,0 +1,53 @@
+.cur_head_text {
+  display: flex; align-items: center;
+  width: calc(100% - 180px);
+  font-size: 1.1em;
+  height: 100%;
+  margin-left: 10px;  /* match img_btn padding */
+}
+.cur_head_btns {
+  width: 180px;
+}
+.log_div {
+  width: 100%;
+  padding: 10px;
+  margin: 0px; border: 0px; /* turn off default pre styles*/
+
+  overflow: auto;
+  background-color: #f9f9f9;
+}
+
+.date_combo_div {
+  display: inline-block;
+}
+.date_combo_btn {
+  display: flex; align-items: center;
+  width: 100%;
+  padding: 4px 0px 4px 4px;
+  border: solid 1px #ddd;
+  
+  background-color: white;  
+  cursor: pointer;
+}
+.date_combo_btn:hover, .dropbtn:focus {
+  background-color: #f9f9f9;
+}
+.date_combo_content {
+  display: none;
+  padding: 4px 4px 4px 4px;
+  position: absolute;
+  
+  background-color: #f9f9f9;
+  text-align: left;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.date_combo_content a {
+  display: block;
+  color: black;
+}
+.date_combo_content a:hover {
+  background-color: #f1f1f1
+}
+.date_combo_content_show {
+  display:block;
+}

@@ -1,0 +1,37 @@
+this
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+wm-license-gfdl-1.2-and-later|Sälli Datei isch under de '''[[{{int:wm-license-gfdl-wiki-link}}\u007CGNU-Lizenz für freii Dokumentation]]''' veröffentligt worre. Mer darf d'Datei under de GNU-Lizänz für freii Dokumentation ihre Bedingige, Version 1.2 oder spöter, veröffentligt vo de ''[[{{int:wm-license-fsf-wiki-link}}\u007CFree Software Foundation]]'' kopiere, verbreite und/oder verändere. Es hät keini unveränderlige Abschnitt, kei vordere Umschlagtekscht und kei hindere Umschlagtekscht.
+wm-license-gfdl-wiki-link|w:als:GNU-Lizenz für freie Dokumentation
+wm-license-licensing-update-text|Die Lizänzmarkierig isch uffgrund vo de GFDL-[[{{int:wm-license-licensing-update-wiki-link}}\u007CLizänzaktualisierig]] züegfiegt worre.
+wm-license-own-work|Eigeni Arbet vo dem wo d Datei uffeladet
+wm-license-pd-wiki-link|w:als:Gemeinfreiheit
+']:>
+).lang
+;

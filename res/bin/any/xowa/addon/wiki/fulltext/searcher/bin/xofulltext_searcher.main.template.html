@@ -1,0 +1,236 @@
+<!-- help div -->
+{{#disabled}}
+<div>
+<p>Full-text search is not available</p>
+
+<p>Please download a full-text search index for your wiki from Download Central</p>
+
+<p>For more info, see <a href='http://xowa.org/home/wiki/App/Full-text_search/Lucene/Search_indexes/Getting'>http://xowa.org/home/wiki/App/Full-text_search/Lucene/Search_indexes/Getting</a></p>
+</div>
+{{/disabled}}
+{{^disabled}}
+<div class='xo_flex_div'>
+  <div id='cur_help_div' class='xohelp_div'>
+    <div id='cur_help_msg' class='xohelp_msg'>
+      <b>Buttons</b>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_ellipsis'   >&nbsp;</span><span class='xohelp_row_text'>Show all snips</b></span></div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_misc_cancel'>&nbsp;</span><span class='xohelp_row_text'>Cancel search</b></span></div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_toggle_show'>&nbsp;</span><span class='xohelp_row_text'>Expand section</b></span></div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_toggle_hide'>&nbsp;</span><span class='xohelp_row_text'>Collapse section</b></span></div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_paging_bwd' >&nbsp;</span><span class='xohelp_row_text'>Retrieve next page of results</b></span></div>
+      <div class='xohelp_row'><span class='xoimg_help_x24 xoimg_paging_fwd' >&nbsp;</span><span class='xohelp_row_text'>Retrieve previous page of results</b></span></div>      
+      <b>Options</b>
+      <div>
+        <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Wikis</b>: List wikis to search using a pipe (|) character; EX: <code>en.wikipedia.org|simple.wikipedia.org</code></span></div>
+        <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Namespaces</b>: List namespaces to search using a comma character; EX: <code>0,4</code> </span></div>
+        <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Results per page</b>: List number of results per page; EX: <code>50</code> </span></div>
+        <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Expand pages</b>: Expand pages sections when retrieving results. If 'n', pages will be collapsed; if 'y', pages will be expanded </span></div>
+        <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Expand snips</b>: Expand snips sections when retrieving results. If 'n', snips will be collapsed; if 'y', snips will be expanded </span></div>
+        <div class='xohelp_row'><span class='xohelp_bullet'>&nbsp;</span><span class='xohelp_row_text'><b>Show all snips</b>: Show all snips when retrieving results. If 'n', only the first snip will show; if 'y', all snips will show</span></div>
+      </div>
+      <b>Advanced notes</b>
+      <div style='margin-left:15px'>
+        For multiple wikis, options can be specified per wiki using the pipe character.<br/>
+        For example:<br/>
+        * If <code>Wikis</code> is <code>en.wikipedia.org|simple.wikipedia.org</code><br/>
+        * And <code>Results per page</code> is <code>20|10</code><br/>
+        * Then <code>en.wikipedia.org</code> will retrieve <code>20</code> results per page and <code>simple.wikipedia.org</code> will retrieve <code>10</code> results per page
+      </div>
+      {{^app_is_drd}}
+      For more info, see <a href='/site/home/wiki/App/Full-text_search'>App/Full-text_search</a>
+      {{/app_is_drd}}
+    </div>
+  </div>
+</div>
+
+<!-- DIV:main -->
+<div id='search_cxl_msg' style='display:none'> 
+Canceling. Please wait...
+</div>
+<div id='main_div'> 
+  <div class="xo_flex_div oo-ui-fieldLayout-field">
+  
+    <!-- DIV:search_text -->
+    <div 
+      id="searchText"
+      class="xo_flex_div oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-iconElement oo-ui-textInputWidget oo-ui-textInputWidget-type-text oo-ui-indicatorElement mw-widget-titleWidget oo-ui-lookupElement mw-widget-titleInputWidget mw-widget-searchInputWidget oo-ui-textInputWidget-type-search" 
+      data-ooui="" aria-disabled="false" 
+    >
+      <input
+        id="search_txt"
+        placeholder="Enter search words (For example: earth)"
+        accesskey="m"
+        onkeydown="xo.fulltext_searcher.search_keydown(event)"
+        value="{{qarg_search}}"
+        class="oo-ui-inputWidget-input xo_search_box"
+        autocapitalize="off"
+        
+        name="search"
+        type="search"
+        aria-disabled="false"
+        tabindex="0" 
+      /> 
+      <span class="oo-ui-iconElement-icon oo-ui-icon-search xoimg_search">&nbsp;</span> 
+      <span class="oo-ui-indicatorElement-indicator oo-ui-indicator-clear">&nbsp;</span> 
+    </div>
+    
+    <!-- DIV:search_btn -->
+    <div
+      class="xo_flex_div oo-ui-widget oo-ui-widget-enabled oo-ui-flaggedElement-progressive oo-ui-flaggedElement-primary oo-ui-inputWidget oo-ui-buttonElement oo-ui-buttonElement-framed oo-ui-labelElement oo-ui-buttonInputWidget"
+      aria-disabled="false"
+    >
+      <button
+        id="search_btn"
+        onclick="return xo.fulltext_searcher.search_redirect()"
+        class="oo-ui-inputWidget-input oo-ui-buttonElement-button"
+        value="" aria-disabled="false" tabindex="0" type="submit"
+      >
+        <span class="oo-ui-iconElement-icon oo-ui-image-invert">&nbsp;</span>
+        <span class="oo-ui-labelElement-label">Search</span>
+        <span class="oo-ui-indicatorElement-indicator oo-ui-image-invert">&nbsp;</span>
+      </button>
+    </div>
+    
+    <!-- DIV:search_cxl_btn -->
+    <div class='xo_flex_div'>
+      <div id="search_cxl_btn" style="opacity: 0.25;" class="xo_imgbtn_x24 xoimg_misc_cancel" title="cancel" onclick="xo.fulltext_searcher.search_cxl()"></div>
+    </div>
+
+    <!-- DIV:help_btn -->
+    <div class='xo_flex_div xo_help_div'>
+      <span onclick='return xo.help.toggle("cur")' title="view help" class="xo_imgbtn_x20 xoimg_help_tip">&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- DIV:options_btn -->
+  <div class="xo_options_div mw-search-profile-tabs">  
+  
+    <!-- DIV:options header -->
+    <div class='xo_flex_div'>
+      <div 
+        class='xo_options_toggle_div'
+        onclick='xo.fulltext_searcher.toggle_div("xo_options_list_container", "xo_options_img"); xo.fulltext_searcher.options_save();'
+      >
+        <span 
+          id='xo_options_img'
+          class='xo_imgbtn_x20 {{#expand_options}}xoimg_toggle_hide{{/expand_options}}{{^expand_options}}xoimg_toggle_show{{/expand_options}}' 
+        >&nbsp;</span>
+      </div>
+      <div class='xo_flex_text'>Options</div>
+      
+      <div class='xo_flex_text'>
+      
+        <a href='/wiki/Special:XowaCfg?grp=xowa.addon.fulltext_search' title='go to options page'>
+        <span 
+          id='xo_options_cog'
+          class='xo_imgbtn_x20 xoimg_cog' 
+          style='margin-left:10px'
+        >&nbsp;</span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- DIV:options list -->
+    <div id='xo_options_list_container' class='xo_options_list_container' style='display:{{#expand_options}}block{{/expand_options}}{{^expand_options}}none{{/expand_options}}'>
+      <div class='xo_options_divider'></div>
+      <ul class='xo_options_ul'>
+        <li>
+          <div class='xo_flex_div'>
+            <label>Wikis</label>
+            <input
+              type="text"
+              onkeydown="xo.fulltext_searcher.search_keydown(event)"
+              id="qarg_wikis"
+              value="{{qarg_wikis}}"
+              placeholder="Enter wikis separated by a pipe (For example: home|wiki.me.org)"
+              autocapitalize="off"
+            />
+          </div>
+        </li>
+        <li>
+          <div class='xo_flex_div'>
+            <label>Namespaces</label>
+            <input
+              type="text"
+              onkeydown="xo.fulltext_searcher.search_keydown(event)"
+              id="qarg_ns_ids"
+              value="{{qarg_ns_ids}}"
+              placeholder="Enter namespaces separated by a pipe (For example: 0|4)"
+            />
+          </div>
+        </li>
+        <li>
+          <div class='xo_flex_div'>
+            <label>Results per page</label>
+            <input
+              type="text"
+              onkeydown="xo.fulltext_searcher.search_keydown(event)"
+              id="qarg_limits"
+              value="{{qarg_limits}}"
+              placeholder="Enter number of pages to show per search (For example: 100)"
+            />
+          </div>
+        </li>
+        <li>
+          <div class='xo_flex_div'>
+            <label>Expand pages</label>
+            <input
+              type="text"
+              onkeydown="xo.fulltext_searcher.search_keydown(event)"
+              id="qarg_expand_pages"
+              value="{{qarg_expand_pages}}"
+              placeholder="Enter y to expand; n to collapse"
+              autocapitalize="off"
+            />
+          </div>
+        </li>
+        <li>
+          <div class='xo_flex_div'>
+            <label>Expand snips</label>
+            <input
+              type="text"
+              onkeydown="xo.fulltext_searcher.search_keydown(event)"
+              id="qarg_expand_snips"
+              value="{{qarg_expand_snips}}"
+              placeholder="Enter y to expand; n to collapse"
+              autocapitalize="off"
+            />
+          </div>
+        </li>
+        <li>
+          <div class='xo_flex_div'>
+            <label>Show all snips</label>
+            <input
+              type="text"
+              onkeydown="xo.fulltext_searcher.search_keydown(event)"
+              id="qarg_show_all_snips"
+              value="{{qarg_show_all_snips}}"
+              placeholder="Enter y to show all snips; n to show first only"
+              autocapitalize="off"
+            />
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- DIV:wikis_list -->
+  <div id='results_wikis'></div>
+</div>
+
+<!-- DIV:hidden inputs -->
+<div>
+  <input type='hidden' id='page_guid'             value='{{page_guid}}'></input>
+  <input type='hidden' id='qarg_search'           value='{{qarg_search}}'></input>
+  <input type='hidden' id='qarg_offsets'          value='{{qarg_offsets}}'></input>
+  <input type='hidden' id='cur_wiki'              value='{{cur_wiki}}'></input>
+  <input type='hidden' id='dflt_wikis'            value='{{dflt_wikis}}'></input>
+  <input type='hidden' id='dflt_ns_ids'           value='{{dflt_ns_ids}}'></input>
+  <input type='hidden' id='dflt_limits'           value='{{dflt_limits}}'></input>
+  <input type='hidden' id='dflt_offsets'          value='{{dflt_offsets}}'></input>
+  <input type='hidden' id='dflt_expand_pages'     value='{{dflt_expand_pages}}'></input>
+  <input type='hidden' id='dflt_expand_snips'     value='{{dflt_expand_snips}}'></input>
+  <input type='hidden' id='dflt_show_all_snips'   value='{{dflt_show_all_snips}}'></input>
+</div>
+{{/disabled}}

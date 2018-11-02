@@ -1,0 +1,38 @@
+// wiki.ns_mgr.aliases.bgn
+ns_mgr.add_alias_bulk("
+-2|មីឌា
+1|ពិភាក្សា
+3|អ្នកប្រើប្រាស់-ពិភាក្សា
+5|Wiktionary_ពិភាក្ស
+6|Image
+6|រូបភាព
+7|Image_talk
+7|ការពិភាក្សាអំពីរូបភាព
+7|រូបភាព-ពិភាក្សា
+8|មីឌាវិគី
+9|មីឌាវិគី-ពិភាក្សា
+11|ទំព័រគំរូ-ពិភាក្សា
+13|ជំនួយ-ពិភាក្សា
+14|ចំណាត់ក្រុម
+14|ចំនាត់ថ្នាក់ក្រុម
+15|ការពិភាក្សាអំពីចំនាត់ថ្នាក់ក្រុម
+15|ចំណាត់ក្រុម-ពិភាក្សា
+");
+// wiki.ns_mgr.aliases.end
+// wiki.ns_mgr.subpages.bgn
+ns_mgr.get_by_id_or_new(1).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(2).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(3).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(4).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(5).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(7).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(8).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(9).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(10).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(11).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(12).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(13).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(15).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(828).subpages_enabled_('y');
+ns_mgr.get_by_id_or_new(829).subpages_enabled_('y');
+// wiki.ns_mgr.subpages.end

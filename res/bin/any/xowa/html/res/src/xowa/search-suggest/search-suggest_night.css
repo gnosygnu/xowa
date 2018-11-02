@@ -1,0 +1,50 @@
+#xowa-search-suggestions {
+	position: absolute;
+	left: -1px;
+	top: 1.5em;
+	width: 100%;
+	list-style: none;
+	background: transparent; /*2013-08-20:else blue vertical bar will be visible directly underneath right-edge of search box*/
+}
+
+#xowa-search-suggestions li {
+	display: block;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	border: 1px #aaa;
+	border-style: none solid;
+	background-color: #111 !important; /*should match background in C:\xowa\bin\any\xowa\html\css\nightmode\xowa_night.css*/
+	color: black;
+}
+
+#xowa-search-suggestions span {
+	background-image: none; /*2016-03-12: else blue vertical bar will be visible after each span*/
+}
+
+#xowa-search-suggestions li:last-child {
+	border-bottom-style: solid;
+}
+
+#xowa-search-suggestions li.current {
+	background: blue;
+	color: white;
+}
+
+#xowa-search-suggestions li:hover {
+	background: #37f;
+	color: white;
+}
+
+#xowa-search-suggestions a:link,
+#xowa-search-suggestions a:visited,
+#xowa-search-suggestions a:hover,
+#xowa-search-suggestions a:active {
+	text-decoration: none;
+	color: inherit;
+	display: block;
+	padding: 0.5em;
+	line-height: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

@@ -1,0 +1,36 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kaganer",
+			"Noor2020",
+			"පසිඳු කාවින්ද"
+		]
+	},
+	"wikibase-edit": "ترمیم کریں",
+	"wikibase-save": "محفوظ کریں",
+	"wikibase-cancel": "منسوخ",
+	"wikibase-add": "شامل کریں",
+	"wikibase-save-inprogress": "بچت...",
+	"wikibase-remove-inprogress": "اتارنے...",
+	"wikibase-label-edit-placeholder": "لیبل درج کریں",
+	"wikibase-description-edit-placeholder": "تفصیل درج کریں",
+	"wikibase-sitelink-site-edit-placeholder": "ویب سائٹ",
+	"wikibase-sitelink-page-edit-placeholder": "مضمون",
+	"wikibase-terms": "دیگر زبانوں میں",
+	"wikibase-remove": "حذف کریں",
+	"wikibase-blockeduser-tooltip-message": "آپ کو تدوین کی اجازت نہیں ہے کیونکہ آپ کا صارف نام یا IP پتا معطل ہے  ۔",
+	"wikibase-itembytitle-lookup-site": "ویب سائٹ:",
+	"wikibase-itembytitle-lookup-page": "صفحہ:",
+	"wikibase-itembytitle-submit": "تلاش",
+	"wikibase-itemdisambiguation-lookup-language": "زبان:",
+	"wikibase-itemdisambiguation-lookup-label": "لیبل:",
+	"wikibase-itemdisambiguation-submit": "تلاش",
+	"wikibase-restoreold": "بحال",
+	"wikibase-item-summary-wbcreate-new": "نئی شے کو تخلیق کیا",
+	"wikibase-item-summary-wbsetclaim-update": "تبدیل کر دیا گیا  {{PLURAL:$3| دعوی|دعوے}}",
+	"wikibase-item-summary-wbsetclaim-create": "تخلیق کر دیا گیا  {{PLURAL:$3| دعوی|دعوے}}",
+	"wikibase-item-summary-wbsetclaim-update-qualifiers": "تبدیل کر دیا گیا  {{PLURAL:$4|تصفیہ کار کا| $4  تصفیہ کاران کے}}  {{PLURAL:$3| دعوی|دعوے}}",
+	"wikibase-item-summary-wbsetclaim-update-references": "تبدیل کر دیا گیا  {{PLURAL:$4| ایک حوالہ کا| $4  حوالہ جات کے}}  {{PLURAL:$3| دعوی|دعوے}}",
+	"wikibase-item-summary-wbsetclaim-update-rank": "درجہ تبدیل کر دیا گیا  {{PLURAL:$3| دعوی کا|دعوے کے }}",
+	"wikibase-property-summary-wbcreate-new": "ایک نئی خاصیت پیدا کیا"
+}

@@ -1,0 +1,85 @@
+/**
+ * Stylesheet for page-wide Banner in WikidataPageBanner extension.
+ */
+.ext-wpb-pagebanner {
+  position: relative;
+  width: 100%;
+  margin: 1em 0;
+}
+.wpb-topbanner {
+  position: relative;
+  max-width: 1800px;
+  height: auto;
+  overflow: hidden;
+  max-height: 300px;
+}
+.ext-wpb-pagebanner .wpb-topbanner .wpb-name {
+  position: absolute;
+  z-index: 1;
+  margin: 0.6em 0 0 0.4em;
+  padding: 8px 7px;
+  font-size: 1em;
+  font-weight: bold;
+  background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  color: white;
+  white-space: nowrap;
+  line-height: 0.9em;
+  overflow: hidden;
+  -webkit-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  max-width: 95%;
+}
+.wpb-topbanner .wpb-banner-image {
+  width: 100%;
+  height: auto;
+}
+.wpb-iconbox {
+  top: 0;
+  position: absolute;
+  right: 0px;
+  padding: 3px;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.7) none repeat scroll 0% 0%;
+  border-bottom-left-radius: 5px;
+}
+.wpb-iconbox p {
+  float: left;
+}
+@media screen and (min-width: 768px) {
+  .ext-wpb-pagebanner .wpb-topbanner .wpb-name {
+    font-size: 2.2em;
+    white-space: normal;
+    overflow: auto;
+  }
+}
+@media screen and (max-width: 400px) {
+  .wpb-topbanner {
+    /**
+		 * The rules below define custom positioning for banner in case the cropped banner needs to be
+		 * shifted to allow focus to a different area
+		 */
+  }
+  .wpb-topbanner .wpb-banner-image {
+    max-width: none !important;
+    width: auto;
+    min-height: 180px;
+    margin-left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+  .wpb-topbanner .wpb-left {
+    -webkit-transform: translateX(-25%);
+    -moz-transform: translateX(-25%);
+    -o-transform: translateX(-25%);
+    transform: translateX(-25%);
+  }
+  .wpb-topbanner .wpb-right {
+    -webkit-transform: translateX(-75%);
+    -moz-transform: translateX(-75%);
+    -o-transform: translateX(-75%);
+    transform: translateX(-75%);
+  }
+}

@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Casual",
+			"CoderSI"
+		]
+	},
+	"wikibase-edit": "tahrirlash",
+	"wikibase-save": "saqlash",
+	"wikibase-cancel": "voz kechish",
+	"wikibase-sitelink-page-edit-placeholder": "maqola",
+	"wikibase-remove": "oʻchirish",
+	"wikibase-itembytitle-lookup-page": "Sahifa:",
+	"wikibase-itembytitle-submit": "Qidiruv",
+	"wikibase-itemdisambiguation-lookup-language": "Til:",
+	"wikibase-itemdisambiguation-submit": "Qidiruv",
+	"wikibase-newentity-submit": "Yaratish",
+	"wikibase-modifyterm-language": "Til"
+}

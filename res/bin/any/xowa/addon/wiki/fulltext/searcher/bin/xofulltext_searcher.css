@@ -1,0 +1,191 @@
+/*---------------------------------------------------------------------------*/
+/* HELP */
+/*---------------------------------------------------------------------------*/
+.xo_help_div {
+  margin-left:6px
+}
+
+/*---------------------------------------------------------------------------*/
+/* SEARCH */
+/*---------------------------------------------------------------------------*/
+.xo_search_box {
+  padding-right: 10px !important; /* DRD:else indicator will not be to far right */
+}
+
+/*---------------------------------------------------------------------------*/
+/* OPTIONS */
+/*---------------------------------------------------------------------------*/
+.xo_options_div {
+  background-color:#f8f9fa; /* gray background */
+  border:1px solid #c8ccd1; /* border */
+
+  /* margin / padding */
+  margin-top:10px;
+  margin-bottom:-8px;
+  padding:4px;
+}
+.xo_options_divider {
+  /* taken from mediawiki stylesheet via inspect element */
+  clear: both;
+  border-bottom: 1px solid #eaecf0;
+  padding-top: 0.5em;
+  margin-bottom: 0.5em;  
+}
+.xo_options_ul {
+  /* remove bullet and margins */
+  padding: 0;
+  margin: 0 !important;
+  list-style: none !important; /* DRD: !important to overide default element css */
+}
+.xo_options_ul > li > div > label {
+  margin-left: 10px;
+  width:120px;
+}
+.xo_options_ul .xo_options_ipt {
+  width:calc(100% - 140px);
+}
+.xo_options_ul input {
+  /* DRD:needed else will be gray */
+  background-color:white;
+  border:1px solid #ddd;
+  padding:2px;
+}
+.xo_options_toggle_div {
+  margin: 0px 4px 0px 4px;
+}
+
+/*---------------------------------------------------------------------------*/
+/* RESULTS:WIKI */
+/*---------------------------------------------------------------------------*/
+.xo_results_wiki_div {
+  background-color:rgb(187,187,255); 
+  padding:2px
+}
+.xo_results_wiki_toggle {
+  margin:0 6px 0 6px;
+}
+.xo_results_wiki_paging_div {
+  margin-left: 10px;
+}
+.xo_results_wiki_paging_btn {
+  margin:0px 10px 0px 10px
+}
+
+/*---------------------------------------------------------------------------*/
+/* RESULTS:PAGE */
+/*---------------------------------------------------------------------------*/
+.xo_results_page_div {
+  background-color:#d5ffd5;
+}
+.xo_results_page_toggle {
+  margin:0 6px 0 8px;
+}
+.xo_results_page_ellipsis {
+          align-self: flex-end;
+  -webkit-align-self: flex-end;
+    
+  display: inline-block;
+  width: 16px; height: 13px; min-width: 16px; min-height: 13px; background-size: 16px 13px;
+  background-repeat: no-repeat; background-position: center bottom; 
+
+  cursor: pointer;
+}
+
+/*---------------------------------------------------------------------------*/
+/* RESULTS:SNIP */
+/*---------------------------------------------------------------------------*/
+/* add border between snips */
+.xo_results_snip_div:first-child {
+  border-top: 1px solid #ddd;
+}
+.xo_results_snip_div {
+  border-bottom: 1px solid #ddd;
+}
+.xo_results_line_num {
+          align-self: flex-start; /* vertically align at top */
+  -webkit-align-self: flex-start;
+  margin:1px 7px 1px 11px; /* top/bottom to give some space around border; */
+
+  /* standardize code across platforms (from Chrome / inspect) */
+  color: #000;
+  background-color: #f8f9fa;
+  border: 1px solid #eaecf0;
+  border-radius: 2px;
+  padding: 1px 4px;
+}
+.snip_highlight {
+  font-weight: bold; /* emulate Special:Search */
+}
+
+/*---------------------------------------------------------------------------*/
+/* PULSE */
+/*---------------------------------------------------------------------------*/
+.search_cxl_pulse {
+	        animation: search_cxl_pulse 2s linear infinite;
+	    -ms-animation: search_cxl_pulse 2s linear infinite;
+	   -moz-animation: search_cxl_pulse 2s linear infinite;
+	-webkit-animation: search_cxl_pulse 2s linear infinite;
+
+  /* make circle */
+  border-radius: 50%;
+}
+
+@keyframes "search_cxl_pulse" {
+  0% {
+    opacity: 1;
+    background-color:rgba(0,255,0,1.0);
+  }
+  50% {
+    opacity: .1;
+    background-color:rgba(255,255,255,1.0);
+  }
+  100% {
+    opacity: 1;
+    background-color:rgba(0,255,0,1.0);
+  }
+}
+
+@-moz-keyframes search_cxl_pulse {
+  0% {
+    opacity: 1;
+    background-color:rgba(0,255,0,1.0);
+  }
+  50% {
+    opacity: .1;
+    background-color:rgba(255,255,255,1.0);
+  }
+  100% {
+    opacity: 1;
+    background-color:rgba(0,255,0,1.0);
+  }
+}
+
+@-webkit-keyframes "search_cxl_pulse" {
+  0% {
+    opacity: 1;
+    background-color:rgba(0,255,0,1.0);
+  }
+  50% {
+    opacity: .1;
+    background-color:rgba(255,255,255,1.0);
+  }
+  100% {
+    opacity: 1;
+    background-color:rgba(0,255,0,1.0);
+  }
+}
+
+@-ms-keyframes "search_cxl_pulse" {
+  0% {
+    opacity: 1;
+    background-color:rgba(0,255,0,1.0);
+  }
+  50% {
+    opacity: .1;
+    background-color:rgba(255,255,255,1.0);
+  }
+  100% {
+    opacity: 1;
+    background-color:rgba(0,255,0,1.0);
+  }
+}

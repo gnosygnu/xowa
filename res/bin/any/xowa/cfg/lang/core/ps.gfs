@@ -1,0 +1,2783 @@
+this
+.dir_rtl_('y')
+.ns_names
+  .load_text(
+<:['
+-2|رسنۍ
+-1|ځانګړی
+1|خبرې اترې
+2|کارن
+3|د کارن خبرې اترې
+5|د $1 خبرې اترې
+6|دوتنه
+7|د دوتنې خبرې اترې
+8|ميډياويکي
+9|د ميډياويکي خبرې اترې
+10|کينډۍ
+11|د کينډۍ خبرې اترې
+12|لارښود
+13|د لارښود خبرې اترې
+14|وېشنيزه
+15|د وېشنيزې خبرې اترې
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+2|کارونکی
+3|د کارونکي خبرې اترې
+6|انځور
+7|د انځور خبرې اترې
+']:>
+).lang
+.specials
+  .clear
+  .load_text(
+<:['
+Allmessages|ټول-پيغامونه
+Allpages|ټول_مخونه
+Ancientpages|لرغوني_مخونه
+Blankpage|تش_مخ
+Block|بنديز،_د_آی_پي_بنديز،_بنديز_لګېدلی_کارن_Block
+Booksources|د_کتاب_سرچينې
+Categories|وېشنيزې
+ChangePassword|پټنوم_بدلول،_پټنوم_بيا_پر_ځای_کول،_د_بيا_پر_ځای_کولو_پاسپورټ
+Contributions|ونډې
+CreateAccount|کارن-حساب_جوړول
+DeletedContributions|ړنګې_شوي_ونډې
+Export|صادرول
+BlockList|د_بنديزلړليک
+LinkSearch|د_تړنې_پلټنه
+Listfiles|د_انځورونو_لړليک
+Listusers|د_کارنانو_لړليک
+Log|يادښتونه،_يادښت
+Lonelypages|يتيم_مخونه
+Longpages|اوږده_مخونه
+Mycontributions|زماونډې
+Mypage|زما_پاڼه
+Mytalk|زما_خبرې_اترې
+Newimages|نوي_انځورونه
+Newpages|نوي_مخونه
+Popularpages|نامتومخونه
+Preferences|غوره_توبونه
+Prefixindex|د_مختاړيو_ليکلړ
+Protectedpages|ژغورلي_مخونه
+Protectedtitles|ژغورلي_سرليکونه
+Randompage|ناټاکلی،_ناټاکلی_مخ
+Recentchanges|اوسني_بدلونونه
+Search|پلټنه
+Shortpages|لنډ_مخونه
+Specialpages|ځانګړي_مخونه
+Statistics|شمار
+Unblock|بنديز_لرې_کول
+Uncategorizedcategories|ناوېشلې_وېشنيزې
+Uncategorizedimages|ناوېشلي_انځورونه،_ناوېشلې_دوتنې
+Uncategorizedpages|ناوېشلي_مخونه
+Uncategorizedtemplates|ناوېشلې_کينډۍ
+Undelete|ناړنګول
+Unusedcategories|ناکارېدلي_وېشنيزې
+Unusedimages|ناکارېدلې_دوتنې
+Unusedtemplates|ناکارېدلې_کينډۍ
+Unwatchedpages|ناکتلي_مخونه
+Upload|پورته_کول
+Userlogin|ننوتل
+Userlogout|وتل
+Version|بڼه
+Wantedcategories|غوښتلې_وېشنيزې
+Wantedfiles|غوښتلې_دوتنې
+Wantedtemplates|غوښتلې_کينډۍ
+Watchlist|کتنلړ
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+notoc|0|__بی‌نيولک__~__NOTOC__~
+nogallery|0|__بی‌نندارتونه__~__NOGALLERY__~
+forcetoc|0|__نيوليکداره__~__FORCETOC__~
+toc|0|__نيوليک__~__TOC__~
+noeditsection|0|__بی‌برخې__~__NOEDITSECTION__~
+currentmonth|1|روانه_مياشت~CURRENTMONTH~CURRENTMONTH2~
+currentmonthname|1|دروانې_مياشت_نوم~CURRENTMONTHNAME~
+currentmonthabbrev|1|دروانې_مياشت_لنډون~CURRENTMONTHABBREV~
+currentday|1|نن~CURRENTDAY~
+currentday2|1|نن۲~CURRENTDAY2~
+currentdayname|1|دننۍورځې_نوم~CURRENTDAYNAME~
+currentyear|1|سږکال~CURRENTYEAR~
+currenttime|1|داوخت~CURRENTTIME~
+currenthour|1|دم_ګړۍ~CURRENTHOUR~
+localmonth|1|سيمه_يزه_مياشت~LOCALMONTH~LOCALMONTH2~
+localmonthname|1|دسيمه_يزې_مياشت_نوم~LOCALMONTHNAME~
+localmonthabbrev|1|دسيمه_يزې_مياشت_لنډون~LOCALMONTHABBREV~
+localday|1|سيمه_يزه_ورځ~LOCALDAY~
+localday2|1|سيمه_يزه_ورځ۲~LOCALDAY2~
+localdayname|1|دسيمه_يزې_ورځ_نوم~LOCALDAYNAME~
+localyear|1|سيمه_يزکال~LOCALYEAR~
+localtime|1|سيمه_يزوخت~LOCALTIME~
+localhour|1|سيمه_يزه_ګړۍ~LOCALHOUR~
+numberofpages|1|دمخونوشمېر~NUMBEROFPAGES~
+numberofarticles|1|دليکنوشمېر~NUMBEROFARTICLES~
+numberoffiles|1|ددوتنوشمېر~NUMBEROFFILES~
+numberofusers|1|دکارونکوشمېر~NUMBEROFUSERS~
+pagename|1|دمخ_نوم~PAGENAME~
+pagenamee|1|دمخ_نښه~PAGENAMEE~
+namespace|1|نوم_تشيال~NAMESPACE~
+namespacee|1|د_نوم_تشيال_نښه~NAMESPACEE~
+talkspace|1|دخبرواترو_تشيال~TALKSPACE~
+talkspacee|1|دخبرواترو_تشيال_نښه~TALKSPACEE~
+subjectspace|1|دسکالوتشيال~دليکنې_تشيال~SUBJECTSPACE~ARTICLESPACE~
+subjectspacee|1|دسکالوتشيال_نښه~دليکنې_تشيال_نښه~SUBJECTSPACEE~ARTICLESPACEE~
+fullpagename|1|دمخ_بشپړنوم~FULLPAGENAME~
+fullpagenamee|1|دمخ_بشپړنوم_نښه~FULLPAGENAMEE~
+msg|0|پیغام~پ~MSG~
+img_thumbnail|1|بټنوک~thumbnail~thumb~
+img_none|1|هېڅ~none~
+img_right|1|ښي~right~
+img_center|1|مېنځ،_center~center~centre~
+img_left|1|کيڼ~left~
+sitename|1|دوېبځي_نوم~SITENAME~
+server|0|پالنګر~SERVER~
+servername|0|دپالنګر_نوم~SERVERNAME~
+grammar|0|ګرامر~GRAMMAR~
+currentweek|1|روانه_اوونۍ~CURRENTWEEK~
+currentdow|1|داوونۍورځ~CURRENTDOW~
+localweek|1|سيمه_يزه_اوونۍ~LOCALWEEK~
+plural|0|جمع~PLURAL~
+language|0|#ژبه~#LANGUAGE~
+special|0|#ځانګړی~#special~
+tag|0|#tag~
+hiddencat|1|__پټه_وېشنيزه__~__HIDDENCAT__~
+pagesize|1|مخکچه~PAGESIZE~
+index|1|__ليکلړ__~__INDEX__~
+noindex|1|__بې_ليکلړ__~__NOINDEX__~
+protectionlevel|1|ژغورکچه~PROTECTIONLEVEL~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#که~#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#وخت~#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+count|0|#شمېرل~#count~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|يونۍ
+monday|دونۍ
+tuesday|درې نۍ
+wednesday|څلرنۍ
+thursday|پينځنۍ
+friday|جمعه
+saturday|اونۍ
+sun|يونۍ
+mon|دونۍ
+tue|درې نۍ
+wed|څلرنۍ
+thu|پينځه نۍ
+fri|جمعه
+sat|اونۍ
+january|جنوري
+february|فبروري
+march|مارچ
+april|اپرېل
+may_long|می
+june|جون
+july|جولای
+august|اگسټ
+september|سېپتمبر
+october|اکتوبر
+november|نومبر
+december|ډيسمبر
+january-gen|جنوري
+february-gen|فبروري
+march-gen|مارچ
+april-gen|اپرېل
+may-gen|می
+june-gen|جون
+july-gen|جولای
+august-gen|اگسټ
+september-gen|سېپتمبر
+october-gen|اکتوبر
+november-gen|نومبر
+december-gen|ډيسمبر
+jan|جنوري
+feb|فبروري
+mar|مارچ
+apr|اپرېل
+may|می
+jun|جون
+jul|جولای
+aug|اگسټ
+sep|سېپتمبر
+oct|اکتوبر
+nov|نومبر
+dec|ډيسمبر
+toc|نيوليک
+redirectedfrom|(له ~{0} نه مخ گرځېدلی)
+allpages|ټول مخونه
+prevpage|تېر مخ (~{0})
+nextpage|بل مخ (~{0})
+collapsible-collapse|پرځول
+collapsible-expand|غځول
+sort-descending|مخښکته اوډل
+sort-ascending|مخپورته اوډل
+categories|وېشنيزې
+lastmodifiedat|دا مخ وروستی ځل په ~{1}، ~{0} بدلون موندلی.
+thumbnail-more|لويول
+otherlanguages|په نورو ژبو کې
+blanknamespace|(آرنی)
+pagecategories|{{PLURAL:~{0}\u007Cوېشنيزه\u007Cوېشنيزې}}
+category_header|د "~{0}" په وېشنيزه کې شته مخونه
+subcategories|څېرمه وېشنيزې
+category-media-header|د "~{0}" په وېشنيزه کې شته رسنۍ
+category-empty|''دا وېشنيزه تر اوسه پورې کوم مخ يا رسنيزه دوتنه نلري.''
+category-subcat-count|{{PLURAL:~{1}\u007Cپه دې وېشنيزه کې دا لاندې وړه وېشنيزه ده.\u007Cپه دې وېشنيزه کې له ټولټال ~{1} نه {{PLURAL:~{0}\u007Cوړه وېشنيزه ده\u007C~{0} وړې وېشنيزې دي}}.}}
+category-subcat-count-limited|دا وېشنيزه دا لاندې {{PLURAL:~{0}\u007Cيوه څېرمه وېشنيزه\u007C~{0} څېرمه وېشنيزې}} لري.
+category-article-count|{{PLURAL:~{1}\u007Cپه همدې وېشنيزه کې يواځې دغه لاندينی مخ شته.\u007Cدا {{PLURAL:~{0}\u007Cلاندينی مخ\u007C~{0} لانديني مخونه}}، له ټولټال ~{1} مخونو نه په دې وېشنيزه کې شته.}}
+category-article-count-limited|په دې وېشنيزه کې {{PLURAL:~{0}\u007Cيوه دوتنه ده\u007C~{0} دوتنې دي}}.
+category-file-count|{{PLURAL:~{1}\u007Cپه همدې وېشنيزه کې يواځې دغه لاندينی مخ شته.\u007Cدا {{PLURAL:~{0}\u007Cلاندينی مخ\u007C~{0} لانديني مخونه}}، له ټولټال ~{1} مخونو نه په دې وېشنيزه کې شته.}}
+category-file-count-limited|په اوسنۍ وېشنيزه کې {{PLURAL:~{0}\u007Cيوه دوتنه ده\u007C~{0} دوتنې دي}}.
+categorytree-member-counts|{{PLURAL:~{0}\u007C1 څېرمه وېشنيزه\u007C~{0} څېرمه وېشنيزې}}، {{PLURAL:~{1}\u007C1 مخ\u007C~{1} مخونه}} او {{PLURAL:~{2}\u007C1 دوتنه\u007C~{2} دوتنې}} لري
+categorytree-num-categories|~{0} و
+categorytree-num-pages|~{0} م
+categorytree-num-files|~{0} د
+nextn|راتلونکي {{PLURAL:~{0}\u007C~{0}}}
+prevn|تېر {{PLURAL:~{0}\u007C~{0}}}
+listingcontinuesabbrev|پرله پسې
+bold_sample|زغرد متن
+bold_tip|زغرد متن
+italic_sample|رېوند متن
+italic_tip|رېوند متن
+link_sample|د تړن سرليک
+link_tip|کورنۍ تړنه
+headline_sample|د سرليک متن
+headline_tip|د ۲ کچې سرليک
+wikieditor-toolbar-tool-ulist|گولۍ داره لړليک
+wikieditor-toolbar-tool-ulist-example|د گولۍ داره لړليک توکی
+wikieditor-toolbar-tool-olist|شمېرن لړليک
+percent|~{0}%
+parentheses|(~{0})
+ago|~{0} دمخه
+hidden-category-category|پټې وېشنيزې
+statistics|شمار
+statistics-header-pages|د مخونو شمار
+statistics-articles|مېنځپانگيز مخونه
+statistics-pages|مخونه
+statistics-pages-desc|د ويکي ټول مخونه، د خبرو اترو، مخ گرځېدنو، او لا نورو مخونو په گډون.
+categorytree|د وېشنيزو ونه
+categorytree-portlet|وېشنيزې
+categorytree-legend|د وېشنيزې ونه ښکاره کول
+categorytree-category|:وېشنيزه
+categorytree-go|ونه ښکاره کول
+categorytree-mode-categories|يوازې وېشنيزې
+categorytree-mode-pages|مخونه پرته د دوتنو نه
+categorytree-mode-all|ټول مخونه
+categorytree-collapse|پرځول
+categorytree-expand|غځول
+categorytree-num-empty|تش
+categorytree-load|برسېرول
+categorytree-loading|برسېرېدنې کې دی...
+categorytree-nothing-found|هېڅ هم و نه موندل شو
+categorytree-no-subcategories|هېڅ وړې-وېشنيزې نشته
+categorytree-no-pages|هېڅ مخ يا وړه-وېشنيزه نشته
+categorytree-not-found|د <i>~{0}</i> وېشنيزه و نه موندل شوه
+categorytree-error|د مالوماتو د برسېرېدلو ستونزه.
+categorytree-retry|مهرباني وکړی لږ څه تم شی او بيا يې وآزمايۍ
+cite_error|د درک ستونزه: ~{0}
+imagemap_description|ددې انځور په اړه
+poem-desc|د شعر بڼه ورکولو کړنې لپاره د <tt>&lt;شعر&gt;</tt> وييکه ورگډوي
+indexpages|د ليکلړ مخونو لړليک
+proofreadpage_image|انځور
+proofreadpage_index|ليکلړ
+proofreadpage_badpage|ناسمه بڼه
+proofreadpage_notallowed|د بدلون پرېښه نشته
+proofreadpage_nextpage|بل مخ
+proofreadpage_prevpage|تېر مخ
+proofreadpage_quality0_category|بې متنه
+proofreadpage_specialpage_label_key|پلټل:
+proofreadpage_index_listofpages|د مخونو لړليک
+proofreadpage_image_message|د ليکلړ مخ ته تړنه
+proofreadpage_page_status|د مخ دريځ
+proofreadpage_js_attributes|ليکوال سرليک کال خپرونکی
+proofreadpage_index_attributes|ليکوال\nسرليک\nکال\u007Cد خپرېدو کال\nخپرونکی\nسرچينه\nانځور\u007Cد پښتۍ انځور\nمخونه\u007C\u007C20\nتبصرې\u007C\u007C10
+proofreadpage_pages|~{1} {{PLURAL:~{0}\u007Cمخ\u007Cمخونه}}
+proofreadpage_specialpage_legend|ليکلړ مخونه پلټل
+proofreadpage_source|سرچينه
+proofreadpage-group-other|بل
+proofreadpage-button-reset-zoom-label|آر کچه
+cite_article_link|د دې مخ درک
+tooltip-cite-article|د دې مخ د درک لګولو مالومات
+cite|درک
+cite_page|مخ:
+cite_submit|درک لگول
+cite_text|__NOTOC__\n<div class="mw-specialcite-bibliographic">\n\n== Bibliographic details for {{FULLPAGENAME}} ==\n\n* مخ نوم: {{FULLPAGENAME}}\n* ليکوال: {{SITENAME}} ونډه وال\n* خپرندوی: ''{{SITENAME}}, {{int:sitesubtitle}}''.\n* د وروستۍ مخکتنې نېټه: {{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}} {{CURRENTTIME}} UTC\n* Date retrieved: <citation>{{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}} {{CURRENTTIME}} UTC</citation>\n* تلپاتې تړنه URL: {{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}\n* د مخ بڼې پېژند: {{REVISIONID}}\n\n</div>\n<div class="plainlinks mw-specialcite-styles">\n\n== Citation styles for {{FULLPAGENAME}} ==\n\n=== [[APA style]] ===\n{{FULLPAGENAME}}. ({{CURRENTYEAR}}, {{CURRENTMONTHNAME}} {{CURRENTDAY}}). ''{{SITENAME}}, {{int:sitesubtitle}}''. Retrieved <citation>{{CURRENTTIME}}, {{CURRENTMONTHNAME}} {{CURRENTDAY}}, {{CURRENTYEAR}}</citation> from {{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}.\n\n=== [[The MLA style manual\u007CMLA style]] ===\n"{{FULLPAGENAME}}." ''{{SITENAME}}, {{int:sitesubtitle}}''. {{CURRENTDAY}} {{CURRENTMONTHABBREV}} {{CURRENTYEAR}}, {{CURRENTTIME}} UTC. <citation>{{CURRENTDAY}} {{CURRENTMONTHABBREV}} {{CURRENTYEAR}}, {{CURRENTTIME}}</citation> &lt;{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}&gt;.\n\n=== [[MHRA Style Guide\u007CMHRA style]] ===\n{{SITENAME}} contributors, '{{FULLPAGENAME}}', ''{{SITENAME}}, {{int:sitesubtitle}},'' {{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}}, {{CURRENTTIME}} UTC, &lt;{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}&gt; [accessed <citation>{{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}}</citation>]\n\n=== [[The Chicago Manual of Style\u007CChicago style]] ===\n{{SITENAME}} contributors, "{{FULLPAGENAME}}," ''{{SITENAME}}, {{int:sitesubtitle}},'' {{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}} (accessed <citation>{{CURRENTMONTHNAME}} {{CURRENTDAY}}, {{CURRENTYEAR}}</citation>).\n\n=== [[Council of Science Editors\u007CCBE/CSE style]] ===\n{{SITENAME}} contributors. {{FULLPAGENAME}} [Internet]. {{SITENAME}}, {{int:sitesubtitle}}; {{CURRENTYEAR}} {{CURRENTMONTHABBREV}} {{CURRENTDAY}}, {{CURRENTTIME}} UTC [cited <citation>{{CURRENTYEAR}} {{CURRENTMONTHABBREV}} {{CURRENTDAY}}</citation>]. Available from:\n{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}.\n\n=== [[Bluebook\u007CBluebook style]] ===\n{{FULLPAGENAME}}, {{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}} (last visited <citation>{{CURRENTMONTHNAME}} {{CURRENTDAY}}, {{CURRENTYEAR}}</citation>).\n\n=== [[BibTeX]] entry ===\n\n  @misc{ wiki:xxx,\n    author = "{{SITENAME}}",\n    title = "{{FULLPAGENAME}} --- {{SITENAME}}{,} {{int:sitesubtitle}}",\n    year = "{{CURRENTYEAR}}",\n    url = "{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}",\n    note = "[Online; accessed <citation>{{CURRENTDAY}}-{{CURRENTMONTHNAME}}-{{CURRENTYEAR}}</citation>]"\n  }\n\nWhen using the [[LaTeX]] package url (<code>\\usepackage{url}</code> somewhere in the preamble) which tends to give much more nicely formatted web addresses, the following may be preferred:\n\n  @misc{ wiki:xxx,\n    author = "{{SITENAME}}",\n    title = "{{FULLPAGENAME}} --- {{SITENAME}}{,} {{int:sitesubtitle}}",\n    year = "{{CURRENTYEAR}}",\n    url = "'''\\url{'''{{canonicalurl:{{FULLPAGENAME}}\u007Coldid={{REVISIONID}}}}'''}'''",\n    note = "[Online; accessed <citation>{{CURRENTDAY}}-{{CURRENTMONTHNAME}}-{{CURRENTYEAR}}</citation>]"\n  }\n\n\n</div> <!--closing div for "plainlinks"-->
+wikieditor|د پرمختللی ويکي متن د سمون ليدنمخ
+wikieditor-wikitext-tab|ويکي متن
+wikieditor-loading|برسېرېدنې کې دی...
+wikieditor-preview-preference|څنگ په څنگ مخليدنه چارنول
+wikieditor-preview-tab|مخليدنه
+wikieditor-preview-changes-tab|بدلونونه
+wikieditor-preview-loading|برسېرېدنې کې دی...
+wikieditor-previewDialog-tab|مخليدنه
+wikieditor-previewDialog-loading|برسېرېدنې کې دی...
+wikieditor-publish-preference|ګام په ګام خپرېدنه چارنده کول
+wikieditor-publish-button-publish|خپرول
+wikieditor-publish-button-cancel|ناگارل
+wikieditor-publish-dialog-title|{{SITENAME}} کې خپرول
+wikieditor-publish-dialog-summary|د سمون لنډيز (په لنډه توگه د خپلو بدلونونو څرگندونه وکړۍ):
+wikieditor-publish-dialog-minor|وړوکی سمون
+wikieditor-publish-dialog-watch|همدا مخ کتل
+wikieditor-publish-dialog-publish|خپرول
+wikieditor-publish-dialog-goback|پر شا تلل
+wikieditor-template-editor-dialog-title|کينډۍ سمول
+wikieditor-template-editor-dialog-submit|اوسمهالول
+wikieditor-template-editor-dialog-cancel|ناگارل
+wikieditor-templates-preference|کينډۍ غځول چارنده کول
+wikieditor-toc-show|مېنځپانگه ښکاره کول
+wikieditor-toc-hide|مېنځپانگه پټول
+wikieditor-toolbar|د سمون توکپټه
+wikieditor-toolbar-loading|برسېرېدنې کې دی...
+wikieditor-toolbar-tool-bold|زغرد
+wikieditor-toolbar-tool-bold-example|زغرد متن
+wikieditor-toolbar-tool-italic|رېوند
+wikieditor-toolbar-tool-italic-example|د رېوندليک متن
+wikieditor-toolbar-tool-ilink|کورنۍ تړنه
+wikieditor-toolbar-tool-ilink-example|د تړنې سرليک
+wikieditor-toolbar-tool-xlink|باندنۍ تړنه (د http:// مختاړی مه هېروی)
+wikieditor-toolbar-tool-xlink-example|http://www.example.com د تړنې سرليک
+wikieditor-toolbar-tool-link|تړنه
+wikieditor-toolbar-tool-link-title|تړنه ورټومبل
+wikieditor-toolbar-tool-link-int|د ويکي يو مخ ته
+wikieditor-toolbar-tool-link-int-target|د موخې مخ يا انټرنټي پته:
+wikieditor-toolbar-tool-link-int-target-tooltip|د مخ سرليک يا URL
+wikieditor-toolbar-tool-link-int-text|د ښکارېدلو متن:
+wikieditor-toolbar-tool-link-int-text-tooltip|د ښکارېدلو متن
+wikieditor-toolbar-tool-link-ext|د جال يوه باندني مخ ته
+wikieditor-toolbar-tool-link-ext-target|د تړنې URL:
+wikieditor-toolbar-tool-link-ext-text|د تړنې متن:
+wikieditor-toolbar-tool-link-insert|تړنه ورټومبل
+wikieditor-toolbar-tool-link-cancel|ناگارل
+wikieditor-toolbar-tool-link-int-target-status-exists|پدې نوم مخ شته
+wikieditor-toolbar-tool-link-int-target-status-notexists|پدې نوم مخ نشته
+wikieditor-toolbar-tool-link-int-target-status-invalid|ناسم سرليک
+wikieditor-toolbar-tool-link-int-target-status-external|باندنۍ تړنه
+wikieditor-toolbar-tool-link-int-target-status-loading|د مخ د شتون څارنه...
+wikieditor-toolbar-tool-link-int-invalid|ستاسې ځانگړی شوی سرليک سم نه وو.
+wikieditor-toolbar-tool-link-lookslikeinternal-int|کورنۍ تړنه
+wikieditor-toolbar-tool-link-lookslikeinternal-ext|باندنۍ تړنه
+wikieditor-toolbar-tool-file|خښه شوې دوتنه
+wikieditor-toolbar-file-target|د دوتنې نوم:
+wikieditor-toolbar-file-size|کچه:
+wikieditor-toolbar-file-default|(تلواليز)
+wikieditor-toolbar-file-format|بڼه:
+wikieditor-toolbar-tool-file-insert|ورټومبل
+wikieditor-toolbar-tool-file-cancel|ناگارل
+wikieditor-toolbar-tool-reference|سرچينه
+wikieditor-toolbar-tool-reference-example|د پايڅوړ متن دلته وليکۍ
+wikieditor-toolbar-tool-reference-cancel|ناگارل
+wikieditor-toolbar-tool-reference-title|سرچينه ورگډول
+wikieditor-toolbar-tool-reference-insert|ورټومبل
+wikieditor-toolbar-tool-reference-text|د سرچينې متن
+wikieditor-toolbar-tool-signature|لاسليک او د وخت ټاپه
+wikieditor-toolbar-section-advanced|پرمختللی
+wikieditor-toolbar-tool-heading|سرليک
+wikieditor-toolbar-tool-heading-1|۱ کچه
+wikieditor-toolbar-tool-heading-2|۲ کچه
+wikieditor-toolbar-tool-heading-3|۳ کچه
+wikieditor-toolbar-tool-heading-4|۴ کچه
+wikieditor-toolbar-tool-heading-5|۵ کچه
+wikieditor-toolbar-tool-heading-example|د سرليک متن
+wikieditor-toolbar-group-format|بڼه
+wikieditor-toolbar-tool-redirect-example|د هدفي مخ نوم
+wikieditor-toolbar-tool-big|لوی
+wikieditor-toolbar-tool-big-example|لوی متن
+wikieditor-toolbar-tool-small|وړوکی
+wikieditor-toolbar-tool-small-example|وړوکی متن
+wikieditor-toolbar-tool-superscript|جګليک
+wikieditor-toolbar-tool-superscript-example|د جګليک متن
+wikieditor-toolbar-tool-subscript|ټيټليک
+wikieditor-toolbar-tool-subscript-example|د ټيټليک متن
+wikieditor-toolbar-group-insert|ورټومبل
+wikieditor-toolbar-tool-gallery|د انځورونو انځورتون
+wikieditor-toolbar-tool-newline|نوې کرښه
+wikieditor-toolbar-tool-table|لښتيال
+wikieditor-toolbar-tool-table-example-old|-\n! سرليک 1\n! سرليک 2\n! سرليک 3\n\u007C-\n\u007C صف 1، کوټه 1\n\u007C صف 1، کوټه 2\n\u007C صف 1، کوټه 3\n\u007C-\n\u007C صف 2، کوټه 1\n\u007C صف 2، کوټه 2\n\u007C صف 2، کوټه 3
+wikieditor-toolbar-tool-table-example-header|د سرليک متن
+wikieditor-toolbar-tool-table-title|لښتيال ورټومبل
+wikieditor-toolbar-tool-table-dimensions-rows|ليکې
+wikieditor-toolbar-tool-table-dimensions-columns|ستنې
+wikieditor-toolbar-tool-table-wikitable|ډول او پولې
+wikieditor-toolbar-tool-table-sortable|لښتيال اوډون وړ گرځول
+wikieditor-toolbar-tool-table-example|بېلگه
+wikieditor-toolbar-tool-table-preview|مخليدنه
+wikieditor-toolbar-tool-table-insert|ورټومبل
+wikieditor-toolbar-tool-table-cancel|ناگارل
+wikieditor-toolbar-tool-replace|پلټل او ځايناستول
+wikieditor-toolbar-tool-replace-title|پلټل او ځايناستول
+wikieditor-toolbar-tool-replace-search|پلټنه د:
+wikieditor-toolbar-tool-replace-replace|ځايناستول سره د:
+wikieditor-toolbar-tool-replace-case|د کټ مټ ورته تورو مطابقت
+wikieditor-toolbar-tool-replace-button-findnext|بل موندل
+wikieditor-toolbar-tool-replace-button-replace|ځايناستول
+wikieditor-toolbar-tool-replace-button-replaceall|ټول ځايناستول
+wikieditor-toolbar-tool-replace-close|تړل
+wikieditor-toolbar-tool-replace-nomatch|ستاسې پلټنه د هېڅ کوم شي سره اړونده نه وه.
+wikieditor-toolbar-section-characters|ځانگړي توري
+wikieditor-toolbar-characters-page-latin|لاتين
+wikieditor-toolbar-characters-page-latinextended|غځېدلی لاتين
+wikieditor-toolbar-characters-page-ipa|ن.غ.ا
+wikieditor-toolbar-characters-page-symbols|سمبولونه
+wikieditor-toolbar-characters-page-greek|يوناني
+wikieditor-toolbar-characters-page-cyrillic|سرېليک
+wikieditor-toolbar-characters-page-arabic|عربي
+wikieditor-toolbar-characters-page-arabicextended|غځېدلې عربي
+wikieditor-toolbar-characters-page-persian|پارسي
+wikieditor-toolbar-characters-page-hebrew|عبراني
+wikieditor-toolbar-characters-page-bangla|بنګالي
+wikieditor-toolbar-characters-page-tamil|تاميلي
+wikieditor-toolbar-characters-page-telugu|تېلوګو
+wikieditor-toolbar-characters-page-sinhala|سېنهالي
+wikieditor-toolbar-characters-page-gujarati|ګجراتي
+wikieditor-toolbar-characters-page-devanagari|دېوانګري
+wikieditor-toolbar-characters-page-thai|تايلنډي
+wikieditor-toolbar-characters-page-lao|لاوي
+wikieditor-toolbar-characters-page-khmer|خمري
+wikieditor-toolbar-section-help|لارښود
+wikieditor-toolbar-help-heading-description|څرگندونه
+wikieditor-toolbar-help-heading-syntax|هغه څه چې ليکۍ
+wikieditor-toolbar-help-heading-result|هغه څه چې لاس ته راوړۍ
+wikieditor-toolbar-help-page-link|تړنې
+wikieditor-toolbar-help-page-heading|سرليکونه
+wikieditor-toolbar-help-page-list|لړليکونه
+wikieditor-toolbar-help-page-file|دوتنې
+wikieditor-toolbar-help-page-reference|سرچينې
+wikieditor-toolbar-help-page-discussion|خبرې اترې
+wikieditor-toolbar-help-content-italic-description|رېوند
+wikieditor-toolbar-help-content-italic-syntax|د رېوندليک متن
+wikieditor-toolbar-help-content-italic-result|<em>رېوند متن</em>
+wikieditor-toolbar-help-content-bold-description|زغرد
+wikieditor-toolbar-help-content-bold-syntax|'''زغرد متن'''
+wikieditor-toolbar-help-content-bold-result|<strong>زغرد متن</strong>
+wikieditor-toolbar-help-content-bolditalic-description|زغرد او رېوندليک
+wikieditor-toolbar-help-content-bolditalic-syntax|'''''زغرد او رېوند متن'''''
+wikieditor-toolbar-help-content-bolditalic-result|<strong><em>زغرد او رېوند متن</em></strong>
+wikieditor-toolbar-help-content-ilink-description|کورنۍ تړنه
+wikieditor-toolbar-help-content-ilink-syntax|[[د مخ سرليک\u007Cد تړنې نوم]]<br />[[د مخ سرليک]]
+wikieditor-toolbar-help-content-xlink-description|باندنۍ تړنه
+wikieditor-toolbar-help-content-heading2-description|د دويمې کچې سرليک
+wikieditor-toolbar-help-content-heading2-syntax|== د سرليک متن ==
+wikieditor-toolbar-help-content-heading2-result|<h2>د سرليک متن</h2>
+wikieditor-toolbar-help-content-heading3-description|د دريمې کچې سرليک
+wikieditor-toolbar-help-content-heading3-syntax|=== د سرليک متن ===
+wikieditor-toolbar-help-content-heading3-result|<h3>د سرليک متن</h3>
+wikieditor-toolbar-help-content-heading4-description|د څلورمې کچې سرليک
+wikieditor-toolbar-help-content-heading4-syntax|==== د سرليک متن ====
+wikieditor-toolbar-help-content-heading4-result|<h4>د سرليک متن</h4>
+wikieditor-toolbar-help-content-heading5-description|د پينځمې کچې سرليک
+wikieditor-toolbar-help-content-heading5-syntax|===== د سرليک متن =====
+wikieditor-toolbar-help-content-heading5-result|<h5>د سرليک متن</h5>
+wikieditor-toolbar-help-content-ulist-description|گولۍ داره لړليک
+wikieditor-toolbar-help-content-ulist-syntax|* د لړليک توکی<br />* د لړليک توکی
+wikieditor-toolbar-help-content-ulist-result|<ul><li>د لړليک توکی</li><li>د لړليک توکی</li></ul>
+wikieditor-toolbar-help-content-olist-description|شمېرن لړليک
+wikieditor-toolbar-help-content-olist-syntax|# د لړليک توکی<br /># د لړليک توکی
+wikieditor-toolbar-help-content-olist-result|<ol><li>د لړليک توکی</li><li>د لړليک توکی</li></ol>
+wikieditor-toolbar-help-content-file-description|خښه شوې دوتنه
+wikieditor-toolbar-help-content-file-syntax|[[~{0}:Example.png\u007Cthumb\u007Cد څرګندولو متن]]
+wikieditor-toolbar-help-content-reference-description|سرچينه
+wikieditor-toolbar-help-content-reference-syntax|د مخ متن.&lt;ref name="test"&gt;[http://www.example.org د تړنې متن], اضافي متن.&lt;/ref&gt;
+wikieditor-toolbar-help-content-reference-result|د مخ متن.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-rereference-description|د سرچينو اضافي کارېدنه
+wikieditor-toolbar-help-content-rereference-result|د مخ متن.<sup><a href='#'>[1]</a></sup>
+wikieditor-toolbar-help-content-showreferences-description|سرچينې ښکاره کول
+wikieditor-toolbar-help-content-showreferences-result|<ol class='references'><li id='cite_note-test-0'><b><a title='' href='#'>^</a></b> <a rel='nofollow' title='http://www.example.org' class='external text' href='#'>د تړنې متن</a>, اضافي متن.</li></ol>
+wikieditor-toolbar-help-content-signaturetimestamp-description|لاسليک د وخت د ټاپې سره
+wikieditor-toolbar-help-content-signaturetimestamp-result|<a href='#' title='{{#special:mypage}}'>کارن نوم</a> (<a href='#' title='{{#special:mytalk}}'>خبرې اترې</a>) 15:54, 10 June 2009 (UTC)
+wikieditor-toolbar-help-content-signature-description|لاسليک
+wikieditor-toolbar-help-content-signature-result|<a href='#' title='{{#special:mypage}}'>کارن نوم</a> (<a href='#' title='{{#special:mytalk}}'>خبرې اترې</a>)
+wikieditor-toolbar-help-content-indent-description|سرتشه
+wikieditor-toolbar-help-content-indent-syntax|عادي متن<br />:سرتشېدلی متن<br />::سرتشېدلی متن
+wikieditor-toolbar-help-content-indent-result|عادي  متن<dl><dd>سرتشېدلی متن<dl><dd>سرتشېدلی متن</dd></dl></dd></dl>
+wikibase-edit|سمول
+wikibase-save|خوندي کول
+wikibase-cancel|ناگارل
+wikibase-add|ورگډول
+wikibase-save-inprogress|خوندي کېدنې کې دی...
+wikibase-sitelink-site-edit-placeholder|وېبځی
+wikibase-sitelink-page-edit-placeholder|ليکنه
+wikibase-itembytitle-lookup-site|وېبځی:
+wikibase-itembytitle-lookup-page|مخ:
+wikibase-itembytitle-submit|پلټل
+wikibase-itemdisambiguation-lookup-language|د ژبې کوډ:
+wikibase-itemdisambiguation-submit|پلټل
+wikibase-newentity-description|څرگندونه:
+wikibase-newentity-submit|جوړول
+wikibase-modifyentity-id|پېژند:
+wikibase-modifyterm-language|د ژبې کوډ:
+wikibase-entitieswithoutlabel-label-language|د ژبې کوډ:
+wikibase-entitieswithoutlabel-submit|موندل
+wikibase-restoreold|بيازېرمل
+wm-license-cc-wiki-link|w:ps:کريېټيو کامانز
+wm-license-cc-attribution|اړوندېدنه
+wm-license-cc-by-1.0-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېتيف کامنز]] [//creativecommons.org/licenses/by/1.0/ Attribution 1.0 Generic] منښتليک له مخې ستاسې لاسرسي لپاره پرته ده.
+wm-license-cc-by-1.0-fi-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېتيف کامنز]] [//creativecommons.org/licenses/by/1.0/ Attribution 1.0 فېنلاند] منښتليک له مخې ستاسې لاسرسي لپاره پرته ده.
+wm-license-cc-by-1.0-il-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېتيف کامنز]] [//creativecommons.org/licenses/by/1.0/ Attribution 1.0 اسراييل] منښتليک له مخې ستاسې لاسرسي لپاره پرته ده.
+wm-license-cc-by-1.0-nl-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېتيف کامنز]] [//creativecommons.org/licenses/by/1.0/ Attribution 1.0 نېدرلاند] منښتليک له مخې ستاسې لاسرسي لپاره پرته ده.
+wm-license-cc-by-2.0-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېتيف کامنز]] [//creativecommons.org/licenses/by/2.0/ Attribution 2.0 Generic] په منښتليک سمبال ده.
+wm-license-cc-by-2.0-at-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېتيف کامنز]] [//creativecommons.org/licenses/by/2.0/at/ Attribution 2.0 Austria] په منښتليک سمبال ده.
+wm-license-cc-by-2.0-au-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېتيف کامنز]] [//creativecommons.org/licenses/by/2.0/au/ Attribution 2.0 Australia] په منښتليک سمبال ده.
+wm-license-cc-by-2.0-be-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېتيف کامنز]] [//creativecommons.org/licenses/by/2.0/be/ Attribution 2.0 Belgium] په منښتليک سمبال ده.
+wm-license-cc-by-2.0-br-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېتيف کامنز]] [//creativecommons.org/licenses/by/2.0/br/ Attribution 2.0 Brazil] په منښتليک سمبال ده.
+wm-license-cc-by-2.0-ca-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېټيف کامنز]] [//creativecommons.org/licenses/by/2.0/ca/ Attribution 2.0 کاناډا] په منښتليک سمبال ده.
+wm-license-cc-by-2.0-cl-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېټيف کامنز]] [//creativecommons.org/licenses/by/2.0/ca/ Attribution 2.0 چېلي] په منښتليک سمبال ده.
+wm-license-cc-by-2.0-de-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېټيف کامنز]] [//creativecommons.org/licenses/by/2.0/be/ Attribution 2.0 جرمني] په منښتليک سمبال ده.
+wm-license-cc-by-2.0-es-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېټيف کامنز]] [//creativecommons.org/licenses/by/2.0/ca/ Attribution 2.0 سپانيا] په منښتليک سمبال ده.
+wm-license-cc-by-2.0-fr-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېټيف کامنز]] [//creativecommons.org/licenses/by/2.0/be/ Attribution 2.0 فرانسې] په منښتليک سمبال ده.
+wm-license-cc-by-2.0-hr-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېټيف کامنز]] [//creativecommons.org/licenses/by/2.0/ca/ Attribution 2.0 کرواسيا] په منښتليک سمبال ده.
+wm-license-cc-by-2.0-it-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکريېټيف کامنز]] په منښتليک سمباله ده او [//creativecommons.org/licenses/by/2.0/it/ د 2.0 اټاليايي] منښتليک اړونده خپرېږي.
+wm-license-cc-by-2.0-jp-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکريېټيف کامنز]] په منښتليک سمباله ده او [//creativecommons.org/licenses/by/2.0/it/ د 2.0 جاپاني] منښتليک اړونده خپرېږي.
+wm-license-cc-by-2.0-kr-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکريېټيف کامنز]] په منښتليک سمباله ده او [//creativecommons.org/licenses/by/2.0/it/ د 2.0 کوريايي] منښتليک اړونده خپرېږي.
+wm-license-cc-by-2.0-nl-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکريېټيف کامنز]] په منښتليک سمباله ده او [//creativecommons.org/licenses/by/2.0/it/ د 2.0 نېدرلنډي] منښتليک اړونده خپرېږي.
+wm-license-cc-by-2.0-pl-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکريېټيف کامنز]] په منښتليک سمباله ده او [//creativecommons.org/licenses/by/2.0/it/ د 2.0 پولنډي] منښتليک اړونده خپرېږي.
+wm-license-cc-by-2.0-tw-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکريېټيف کامنز]] په منښتليک سمباله ده او [//creativecommons.org/licenses/by/2.0/it/ د 2.0 تايواني] منښتليک اړونده خپرېږي.
+wm-license-cc-by-2.0-uk-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکريېټيف کامنز]] په منښتليک سمباله ده او [//creativecommons.org/licenses/by/2.0/it/ د 2.0 برتانيوي، انګلستاني او وېلزي] منښتليک اړونده خپرېږي.
+wm-license-cc-by-2.0-za-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکريېټيف کامنز]] په منښتليک سمباله ده او [//creativecommons.org/licenses/by/2.0/it/ د 2.0 سوېل افريقايي] منښتليک اړونده خپرېږي.
+wm-license-cc-by-2.1-au-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېتيف کامنز]] [//creativecommons.org/licenses/by/2.0/au/ Attribution 2.1 Australia] په منښتليک سمبال ده.
+wm-license-cc-by-2.5-au-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېتيف کامنز]] [//creativecommons.org/licenses/by/2.5/au/ Attribution 2.5 Australia] په منښتليک سمبال ده.
+wm-license-cc-by-sa-3.0-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکريټيف کامنز]] [//creativecommons.org/licenses/by-sa/3.0/deed.en Attribution-Share Alike 3.0 Unported] په منښتليک سمبال ده.
+wm-license-cc-sa-2.0-jp-text|دا دوتنه د [[{{int:wm-license-cc-wiki-link}}\u007Cکرېټيف کامنز]] [//creativecommons.org/licenses/sa/2.0/jp/deed.en Share Alike 2.0 جاپان] په منښتليک سمبال ده.
+wm-license-cc-free|تاسې اجازه لرۍ چې:
+wm-license-cc-free-to-share-header|د شريکولو لپاره
+wm-license-cc-free-to-share-text|د اثر د لمېسلو، وېشلو او خپرولو
+wm-license-cc-free-to-remix-header|بيا ادلون بدلون کول
+wm-license-cc-free-to-remix-text|د اثر د خپلولو
+wm-license-cc-conditions|د لاندې شرطونو له مخې:
+wm-license-cc-conditions-attribution-header|اړوندېدنه
+wikimedialicensetexts-desc|د ويکيرسنۍ د منښتليک پيغامونه
+wm-license-artwork-artist|هنرمند
+wm-license-artwork-title|لقب
+wm-license-artwork-medium|منځوی
+wm-license-artwork-current-location|اوسنی ځای
+wm-license-artwork-references|سرچينې
+wm-license-artwork-notes|يادښتونه
+wm-license-artwork-source|سرچينه/انځورګر
+wm-license-book-editor|سمونگر
+wm-license-book-language|ژبه
+wm-license-book-page-overview|د مخ مخليدنه
+wm-license-book-place-of-publication|د خپرېدو ځای
+wm-license-book-printer|چاپگر
+wm-license-book-publisher|خپرونکی
+wm-license-book-start-this-book|دا کتاب پيلول
+wm-license-book-title|سرليک
+wm-license-book-translator|ژباړن
+wm-license-book-volume|ټوک
+wm-license-book-year-of-publication|د خپرېدو کال
+wm-license-creator-alternative-names|نور نومونه
+wm-license-creator-description|څرگندونه
+wm-license-creator-date-of-birth|زېږون نېټه
+wm-license-creator-date-of-birth-and-death|زېږون نېټه/مړينه
+wm-license-creator-location-of-birth|زېږونځای
+wm-license-creator-location-of-birth-and-death|زېږونځای/مړينه
+wm-license-creator-work-period|د کار موده
+wm-license-creator-work-location|د کار ځای
+wm-license-gfdl-1.2-only-header|يوازې ۱٫۲
+wm-license-information-description|څرگندونه
+wm-license-information-source|سرچينه
+wm-license-information-source-missing|دا دوتنه د '''سرچينې''' له مالوماتو نه بې برخې ده.
+wm-license-information-date|نېټه
+wm-license-information-author|ليکوال
+wm-license-information-author-missing|دا دوتنه د '''ليکوال''' له مالوماتو نه بې برخې ده.
+wm-license-information-permission|اجازه
+wm-license-information-permission-reusing-text|دا دوتنه بيا کارول
+wm-license-information-permission-see-below|لاندې وگورۍ.
+wm-license-information-other-versions|نورې بڼې
+wm-license-own-work|شخصي اثر
+wm-license-self-one-license|زه، د دې اثر د خپرولو او لمېسلو خاوند، دا دوتنه د لاندې منښتليک پر بنسټ دلته خپروم:
+wikimediamessages-desc|د ويکيمېډيا ځانگړي پيغامونه
+sitesupport|بسپنې
+tooltip-n-sitesupport|زموږ ملاتړ وکړی
+specialpages-group-contribution|ونډه/بسپنه ټولونکی
+nstab-creator|جوړونکی
+nstab-sequence|لړۍ
+group-Ex_Administrator|پخوانی پازوال
+group-Ex_Administrator-member|{{GENDER:~{0}\u007Cپخوانی پازوال}}
+grouppage-Ex_Administrator|{{ns:project}}:پخواني پازوالان
+group-Image-reviewer|د انځور مخکتونکي
+group-OTRS-member|د OTRS غړي
+group-OTRS-member-member|{{GENDER:~{0}\u007Cد OTRS غړی}}
+grouppage-OTRS-member|{{ns:project}}:د OTRS غړي
+group-accountcreator|گڼون جوړونکي
+group-accountcreator-member|{{GENDER:~{0}\u007Cگڼون جوړونکی}}
+grouppage-accountcreator|{{ns:project}}:گڼون جوړونکي
+group-confirmed|تاييد شوي کارنان
+group-confirmed-member|{{GENDER:~{0}\u007Cتاييد شوی کارن}}
+grouppage-confirmed|{{ns:project}}:تاييد شوي کارنان
+group-filemover|دوتنې لېږدونکي
+group-filemover-member|{{GENDER:~{0}\u007Cدوتنه لېږدونکی}}
+grouppage-filemover|{{ns:project}}:دوتنه لېږدونکي
+group-flood|د روباټ کارنان
+group-flood-member|{{GENDER:~{0}\u007Cروباټ کارن}}
+grouppage-flood|{{ns:project}}:د روباټ کارنان
+group-founder|بنسټگران
+group-founder-member|{{GENDER:~{0}\u007Cبنسټگر}}
+grouppage-founder|{{ns:project}}:بنسټگر
+group-interface_editor|د کتنمل سمونگران
+group-interface_editor-member|{{GENDER:~{0}\u007Cد کتنمل بنسټگر}}
+grouppage-interface_editor|{{ns:project}}:د کتنمل سمونگران
+group-ipblock-exempt|له آی پي بنديزه بخښلی
+group-ipblock-exempt-member|{{GENDER:~{0}\u007Cله آی پي بنديزه بخښلی}}
+group-researcher|څېړونکي
+group-researcher-member|{{GENDER:~{0}\u007Cڅېړونکی}}
+grouppage-researcher|{{ns:project}}:څېړونکي
+group-trusted|باوري کارنان
+group-trusted-member|{{GENDER:~{0}\u007Cباوري کارن}}
+group-Global_bot|نړيوال روباټ
+group-Global_bot-member|{{GENDER:~{0}\u007Cنړېوال روباټ}}
+group-Global_sysops|نړېوال پازوالان
+group-Global_sysops-member|{{GENDER:~{0}\u007Cنړېوال پازوال}}
+group-Staff|امله
+group-Staff-member|د املې غړی
+group-editinterface|د کتنمل سمونگران
+group-editinterface-member|{{GENDER:~{0}\u007Cد ليدنمخ سمونگر}}
+group-steward|کوربانه
+group-sysadmin|د غونډال پازوالان
+group-sysadmin-member|{{GENDER:~{0}\u007Cد غونډال پازوال}}
+group-translationadmin|د ژباړې پازوالان
+group-translationadmin-member|{{GENDER:~{0}\u007Cد ژباړې پازوال}}
+grouppage-translationadmin|{{ns:project}}:د ژباړې پازوالان
+group-coder|کوډګران
+group-coder-member|{{GENDER:~{0}\u007Cکوډگر}}
+group-inactive|ناچارنده کارنان
+group-inactive-member|{{GENDER:~{0}\u007Cناچارنده کارن}}
+grouppage-inactive|{{ns:project}}:غېرفعاله کارنان
+createacct-helpusername|[[{{MediaWiki:createacct-helpusername-url}}\u007C(په ټاکلو کې يې مرسته غواړم)]]
+createacct-imgcaptcha-help|انځور د کتلو وړ نه دی؟ [[{{MediaWiki:createacct-captcha-help-url}}\u007Cد يو گڼون غوښتنه کول]]
+tog-underline|کرښنې تړنې:
+tog-hideminor|په وروستيو بدلونو کې واړه سمونونه پټول
+tog-hidepatrolled|په وروستيو بدلونونو کې څارل شوې سمونونه پټول
+tog-newpageshidepatrolled|د نوؤ مخونو په لړليک کې کتل شوي مخونه پټول
+tog-extendwatchlist|يوازې د وروستني بدلونونو د ښکاره کولو لپاره نه بلکه د ټولو بدلونونو د ښکاره کولو لپاره کتنلړ غځول
+tog-usenewrc|په کتنلړ او وروستي بدلونو مخ باندې ډله ايز بدلونونه
+tog-numberheadings|د سرليکونو خپلکاره شمېرايښودنه
+tog-showtoolbar|د سمون اوزارپټه ښکاره کول
+tog-editondblclick|په دوه کلېک سره د مخونو سمون
+tog-editsectiononrightclick|د ليکنې د يوې برخې په سرليک ښي کلېک کول د هغې برخې سمون چارنوي
+tog-watchcreations|زما کتنلړ کې دې هغه مخونه چې زه يې جوړوم او هغه دوتنې چې زه يې پورته کوم ورگډې شي
+tog-watchdefault|زما کتنلړ کې دې هغه مخونه او دوتنې ورگډې شي چې زه يې سموم
+tog-watchmoves|زما کتنلړ کې دې هغه مخونه او دوتنې ورگډې شي چې زه يې لېږدوم
+tog-watchdeletion|زما کتنلړ کې دې هغه مخونه او دوتنې ورگډې شي چې زه يې ړنگوم
+tog-minordefault|په تلواليزه توگه ټول سمونونه واړه په نخښه کول
+tog-previewontop|د سمون بکس نه دمخه مخکتنه ښکاره کول
+tog-previewonfirst|په لومړي سمون کې مخکتنه ښکاره کول
+tog-enotifwatchlistpages|کله چې زما د کتنلړ په يوې دوتنې يا يو مخ کې بدلون راځي نو ما ته دې د بدلون په اړه برېښليک راشي
+tog-enotifusertalkpages|کله چې زما د خبرو اترو په مخ کې بدلون پېښېږي نو ما ته دې يو برېښليک ولېږلی شي.
+tog-enotifminoredits|کله چې په مخونو او دوتنو کې وړې سمونې کېږي نو ماته دې د بدلون په اړه برېښليک راشي
+tog-enotifrevealaddr|په يادښت برېښليک کې زما برېښليک پته ښکاره کول
+tog-shownumberswatching|د کتونکو کارنانو شمېر ښکاره کول
+tog-oldsig|اوسنی لاسليک:
+tog-fancysig|لاسليک د ويکي متن په توگه په پام کې نيول (د خپلکاره تړن د تړلو پرته)
+tog-uselivepreview|ژوندۍ مخليدنه کارول
+tog-forceeditsummary|د يوه تش سمون لنډيز په ورکولو سره دې خبر راکړل شي
+tog-watchlisthideown|په کتنلړ کې زما سمونې پټول
+tog-watchlisthidebots|په کتنلړ کې د روباټ سمونې پټول
+tog-watchlisthideminor|په کتنلړ کې وړې سمونې پټول
+tog-watchlisthideliu|په کتنلړ کې د ثبت شويو کارنانو سمونې پټول
+tog-watchlisthideanons|په کتنلړ کې د ورکنومو کارنانو سمونې پټول
+tog-watchlisthidepatrolled|په کتنلړ کې څارل شوې سمونې پټول
+tog-ccmeonemails|هغه برېښليکونه چې زه يې نورو ته لېږم، د هغو يوه کاپي دې ماته هم راشي
+tog-diffonly|د توپيرونو نه لاندې د مخ مېنځپانگه پټول
+tog-showhiddencats|پټې وېشنيزې ښکاره کول
+tog-norollbackdiff|پرشاتمبولو وروسته توپيرونه نه ښودل
+tog-useeditwarning|کله چې يو سمون مخ څخه د بدلونونو د خوندي کولو پرته وځم خبر دې شم
+tog-prefershttps|د ننوتلو پر مهال تل يوه خوندي اړيکتيا کارول
+underline-always|تل
+underline-never|هېڅکله
+underline-default|د کتنمل تلواليزې چارې
+editfont-style|د سيمه ايزې ليکبڼې سمول:
+editfont-default|د کتنمل تلواليزې چارې
+editfont-monospace|يو واټنيزه ليکبڼه
+editfont-sansserif|سان سېرېف ليکبڼه
+editfont-serif|سېرېف ليکبڼه
+january-date|جنوري ~{0}
+february-date|فېبروري ~{0}
+march-date|مارچ ~{0}
+april-date|اپريل ~{0}
+may-date|مۍ ~{0}
+june-date|جون ~{0}
+july-date|جولای ~{0}
+august-date|اگست ~{0}
+september-date|سېپتمبر ~{0}
+october-date|اکتوبر ~{0}
+november-date|نومبر ~{0}
+december-date|دېسمبر ~{0}
+hidden-categories|{{PLURAL:~{0}\u007Cپټه وېشنيزه\u007Cپټې وېشنيزې}}
+index-category|ليکلړلرونکي مخونه
+noindex-category|بې ليکلړه مخونه
+broken-file-category|د دوتنو د ماتو تړنو مخونه
+about|په اړه
+article|مېنځپانگيز مخ
+newwindow|(په نوې کړکۍ کې پرانيستل کېږي)
+cancel|ناگارل
+moredotdotdot|نور ...
+morenotlisted|دا لړليک بشپړ نه دی
+mypage|زما مخ
+mytalk|خبرې اترې
+anontalk|ددې IP خبرې اترې
+navigation|گرځښت
+and| او
+qbfind|موندل
+qbbrowse|سپړل
+qbedit|سمول
+qbpageoptions|همدا مخ
+qbmyoptions|زما پاڼې
+faq|ډ-ځ-پ
+faqpage|Project:ډ-ځ-پ
+actions|کړنې
+namespaces|نوم-تشيالونه
+variants|ډولونه
+navigation-heading|گرځښت غورنۍ
+errorpagetitle|تېروتنه
+returnto|بېرته ~{0} ته وگرځه.
+tagline|د {{SITENAME}} لخوا
+help|لارښود
+search|پلټنه
+searchbutton|پلټل
+go|ورځه
+searcharticle|ورځه
+history|د مخ پېښليک
+history_short|پېښليک
+updatedmarker|زما د وروستي راتگ نه راپدېخوا اوسمهاله شوی
+printableversion|چاپي بڼه
+permalink|تلپاتې تړنه
+print|چاپ
+view|کتل
+view-foreign|په ~{0} باندې کتل
+edit|سمول
+edit-local|سيمه ايزې څرگندونې سمول
+create|جوړول
+create-local|سيمه ايزې څرگندونې ورگډول
+editthispage|همدا مخ سمول
+create-this-page|همدا مخ ليکل
+delete|ړنگول
+deletethispage|دا مخ ړنگول
+undeletethispage|دا مخ ناړنگول
+undelete_short|{{PLURAL:~{0}\u007Cيو سمون\u007C~{0} سمونې}} ناړنگول
+viewdeleted_short|{{PLURAL:~{0}\u007Cيو ړنگ شوی سمون\u007C~{0} ړنگ شوي سمونونه}} کتل
+protect|ژغورل
+protect_change|بدلون
+protectthispage|همدا مخ ژغورل
+unprotect|ژغورنه بدلول
+unprotectthispage|د دې مخ ژغورنه بدلول
+newpage|نوی مخ
+talkpage|د دې مخ په اړه خبرې اترې کول
+talkpagelinktext|خبرې اترې
+specialpage|ځانگړې پاڼه
+personaltools|شخصي اوزار
+articlepage|د مخ مېنځپانگه ښکاره کول
+talk|خبرې اترې
+views|کتنې
+toolbox|اوزارونه
+userpage|د کارن پاڼه کتل
+projectpage|د پروژې مخ کتل
+imagepage|د دوتنې مخ کتل
+mediawikipage|پيغام مخ کتل
+templatepage|د کينډۍ مخ کتل
+viewhelppage|د لارښود مخ کتل
+categorypage|د وېشنيزې مخ کتل
+viewtalkpage|خبرې اترې کتل
+redirectpagesub|د مخ گرځونې مخ
+redirectto|نوې مخ گرځېدنه:
+viewcount|همدا مخ {{PLURAL:~{0}\u007Cيو وار\u007C~{0} واره}} کتل شوی.
+protectedpage|ژغورلی مخ
+jumpto|ورټوپ کړه:
+jumptonavigation|گرځښت
+jumptosearch|پلټل
+view-pool-error|اوبخښۍ، دم گړۍ پالنگران د ډېر بارېدو ستونزې سره مخامخ شوي.\nډېر زيات کارنان د همدې مخ د کتلو په هڅه کې دي.\nلطفاً د دې مخ د کتلو د بيا هڅې نه دمخه يو څو شېبې صبر وکړۍ.\n\n~{0}
+pool-queuefull|د بهير صف ډک دی
+pool-errorunknown|ناجوته ستونزه
+poolcounter-usage-error|د کارېدلو تېروتنه: ~{0}
+aboutsite|د {{SITENAME}} په اړه
+aboutpage|Project:په اړه
+copyright|دا مېنځپانگه د ~{0} له مخې ستاسې لاسرسي ته پرته ده، خو هغه څه چې په خلاف يې وييل شوي.
+copyrightpage|{{ns:project}}:رښتې
+currentevents|اوسنۍ پېښې
+currentevents-url|Project:تازه پېښې
+disclaimers|ردادعاليکونه
+disclaimerpage|Project:ټولگړی ردادعاليک
+edithelp|د لارښود سمون
+helppage-top-gethelp|لارښود
+mainpage|لومړی مخ
+mainpage-description|لومړی مخ
+policy-url|Project:تگلاره
+portal|د ټولنې تانبه
+portal-url|Project:د ټولنې تانبه
+privacy|د پټنتيا تگلاره
+privacypage|Project:د پټنتيا تگلاره
+badaccess|د لاسرسۍ تېروتنه
+badaccess-group0|تاسې د غوښتل شوې کړنې د ترسره کولو اجازه نه لرۍ.
+badaccess-groups|د کومې کړنې غوښتنه چې تاسې کړې د هغو کارنانو پورې محدوده ده چې {{PLURAL:~{1}\u007Cپه ډله د\u007Cپه ډلو د}}: ~{0} کې دي.
+versionrequired|د ميډياويکي ~{0} بڼې ته اړتيا ده
+versionrequiredtext|د دې مخ په ليدلو کې د مېډياويکي ~{0} بڼې ته اړتيا ده. \n[[Special:Version\u007Cد بڼې مخ وگورۍ]].
+ok|ښه
+retrievedfrom|"~{0}" نه اخيستل شوی
+youhavenewmessages|تاسې ~{0} لری  (~{1}).
+youhavenewmessagesfromusers|تاسې د {{PLURAL:~{2}\u007Cيو بل کارن\u007C~{2} کارنانو}} لخوا ~{0} لرۍ (~{1}).
+youhavenewmessagesmanyusers|تاسې د يو شمېر کارنانو لخوا ~{0} لرۍ (~{1}).
+newmessageslinkplural|{{PLURAL:~{0}\u007Cيو نوی پيغام\u007C999=نوي پيغامونه}}
+newmessagesdifflinkplural|تېر {{PLURAL:~{0}\u007Cبدلون\u007C999=بدلونونه}}
+youhavenewmessagesmulti|تاسې په ~{0} کې نوي پېغامونه لرۍ
+editsection|سمول
+editold|سمول
+viewsourceold|سرچينې کتل
+editlink|سمول
+viewsourcelink|سرچينه کتل
+editsectionhint|د سمولو برخه: ~{0}
+showtoc|ښکاره کول
+hidetoc|پټول
+confirmable-yes|هو
+confirmable-no|نه
+thisisdeleted|~{0} کتل او يا بيازېرمل؟
+viewdeleted|~{0} کتل؟
+restorelink|{{PLURAL:~{0}\u007Cيو ړنگ شوی سمون\u007C~{0} ړنگ شوي سمونونه}}
+feedlinks|کتنه:
+site-rss-feed|~{0} د آر اس اس کتنه
+site-atom-feed|~{0} د اټوم کتنه
+page-rss-feed|"~{0}" د آر اس اس کتنه
+page-atom-feed|د "~{0}" د اټوم کتنې
+feed-atom|اټوم
+feed-rss|آر اس اس
+red-link-title|~{0} (تر اوسه پورې نه شته)
+nstab-main|مخ
+nstab-user|کارن مخ
+nstab-media|د رسنۍ مخ
+nstab-special|ځانگړی مخ
+nstab-project|د پروژې مخ
+nstab-image|دوتنه
+nstab-mediawiki|پيغام
+nstab-template|کينډۍ
+nstab-help|لارښود مخ
+nstab-category|وېشنيزه
+nosuchaction|هېڅ داسې کومه کړنه نشته
+nosuchactiontext|کومه کړنه چې د URL لخوا ځانگړې شوې سمه نه ده.\nکېدای شي چې URL مو سم نه وي ټايپ کړی، او يا مو يوه ناسمه تړنه څارلې وي.\nدا د دې هم ښکارندويي کوي چې کېدای شي چې د {{SITENAME}} لخوا کارېدونکې ساوترې کې يوه تېروتنه وي.
+nosuchspecialpage|داسې هېڅ کوم ځانگړی مخ نشته
+nospecialpagetext|<strong>تاسې د يو ناسم ځانگړي مخ غوښتنه کړې.</strong>\n\nتاسې کولای شی چې د سمو ځانگړو مخونو لړليک په [[Special:SpecialPages\u007C{{int:specialpages}}]] کې ومومۍ.
+error|تېروتنه
+databaseerror|د ډاټابېز تېروتنه
+databaseerror-query|تپوس: ~{0}
+databaseerror-function|کړنه: ~{0}
+databaseerror-error|تېروتنه: ~{0}
+laggedslavemode|'''گواښنه:''' په دې مخ کې کېدای شي تازه اوسمهالېدنې نه وي.
+readonly|توکبنسټ تړل شوی
+enterlockreason|د بنديز يو سبب وليکۍ، او همداراز د بنديز د ليرې کېدلو يوه اټکليزه نېټه هم څرگنده کړۍ
+missing-article|توکبنسټ د "~{0}" ~{1} په نامه د ورکړ شوي مخ متن چې بايد موندلی يې وای، و نه موند.\n\nدا ستونزه اکثراً د يوه ړنگ شوي مخ د پېښليک يا توپير د تړنو په څارلو کې رامېنځ ته کېږي.\n\nکه چېرته داسې نه وي، نو بيا کېدای شي چې په ساوترې کې کومه تېروتنه رابرسېره شوې وي.\nلطفاً د دې چارې راپور د URL په نښه کولو سره يوه [[Special:ListUsers/sysop\u007Cپازوال]] ته ورکړۍ.
+missingarticle-rev|(مخليدنه#: ~{0})
+missingarticle-diff|(توپير: ~{0}، ~{1})
+internalerror|کورنۍ تېروتنه
+internalerror_info|کورنۍ تېروتنه: ~{0}
+filecopyerror|د "~{0}" په نامه دوتنه مو "~{1}" ته و نه لمېسلای شوه.
+filerenameerror|د "~{0}" په نامه د دوتنې نوم "~{1}" ته بدل نه شو.
+filedeleteerror|د "~{0}" دوتنه ړنگه نه شوه.
+directorycreateerror|د "~{0}" په نامه ليکلړ جوړ نه شو.
+filenotfound|د "~{0}" دوتنه مو و نه موندله.
+unexpected|نا اټکله شمېره: "~{0}"="~{1}".
+formerror|ستونزه: فورمه مو و نه سپارل شوه
+badarticleerror|په دې مخ دا کړنه نه شي ترسره کېدلای.
+cannotdelete|د "~{0}" مخ يا دوتنې ړنگېدنه ترسره نه شوه.\nکېدای شي چې وار دمخې دا کوم بل چا ړنگه کړې وي.
+cannotdelete-title|د "~{0}" مخ نشي ړنگېدای
+badtitle|ناسم سرليک
+badtitletext|ستاسې د غوښتل شوي مخ سرليک سم نه وو، يا مو د سرليک ځای تش وو او يا هم د ژبو خپلمنځي تړنې څخه يا د ويکي گانو خپلمنځي سرليکونو څخه يو ناسم توری مو پکې کارولی وي.\nکېدای شي چې ستاسې په ورکړ شوي سرليک کې يو يا څو داسې توري وي چې د سرليک په توگه بايد و نه کارېږي.
+querypage-no-updates|د دې مخ اوسمهالېدنې ناچارن شوي.\nپه ښکاره توگه د دې ځای اومتوک به نه وي تازه شوي.
+viewsource|سرچينه کتل
+viewsource-title|د ~{0} سرچينه کتل
+actionthrottled|د دې کړنې مخنيوی وشو
+protectedpagetext|دا مخ د سمون او نورو کړنو د ترسره کولو په تکل ژغورل شوی.
+viewsourcetext|تاسې د دې مخ سرچينه کتلی او لمېسلی شی:
+viewyourtext|تاسې په دې مخ کې د '''خپلو سمونونو''' سرچينه کتلی او لمېسلی شی:
+protectedinterface|دا مخ د دې ويکي د ساوترې د ليدنمخ متن لري، او د ورانکارۍ په خاطر ژغورل شوی.\nپه ټولو ويکي گانو کې د ژباړې د ورگډولو او يا هم د ژباړې د سمون او بدلون لپاره د مېډياويکي د ځايتابه پروژه [//translatewiki.net/ translatewiki.net] وکاروۍ.
+editinginterface|<strong>گواښنه:</strong> تاسې چې په دې مخ کې بدلون راولۍ همدا مخ د يوې ساوترې د ليدنمخ متن په توگه کارېږي.\nد دې مخ بدلون به د ټولو کارنانو لپاره د ليدنمخ بڼه اغېزمنه کړي.
+namespaceprotected|تاسې د '''~{0}''' په نوم-تشيال کې د مخونو د سمولو اجازه نه لرۍ.
+customcssprotected|تاسې د دې CSS مخ د سمولو اجازه نه لرۍ، دا ځکه چې دا مخ د بل کارن شخصي امستنې لري.
+customjsprotected|تاسې د دې جاواسکرېپټ مخ د سمولو اجازه نه لرۍ، دا ځکه چې دا مخ د بل کارن شخصي امستنې لري.
+mycustomcssprotected|تاسې د دې CSS مخ د سمولو اجازه نلرۍ.
+mycustomjsprotected|تاسې د دې جاوا سكريپټ مخ د سمولو اجازه نلرۍ.
+myprivateinfoprotected|تاسې د دې شخصي مالوماتو د سمولو اجازه نلرۍ.
+mypreferencesprotected|تاسې د خپلو غوره توبونو د سمولو اجازه نلرۍ.
+ns-specialprotected|ځانگړي مخونو کې سمون او بدلون نه شی راوستلای.
+titleprotected|د [[User:~{0}\u007C~{0}]] لخوا د دې سرليک د جوړېدلو مخنيوی شوی.\nاو د دې کړنې سبب "''~{1}''" ورکړ شوی.
+exception-nologin|غونډال کې نه ياست ننوتي
+virus-badscanner|بده سازېدنه: د ويروس ناڅرگنده ځيرڅار: ''~{0}''
+virus-scanfailed|ځيرڅارنه بريالۍ نه شوه (کوډ ~{0})
+virus-unknownscanner|ناڅرگند ضدويروس:
+logouttext|'''اوس تاسې د غونډال څخه ووتلئ.'''\n\nدا په پام کې وساتۍ چې تر څو تاسې د خپل کتنمل حافظه نه وي سپينه کړې، نو ځينې مخونو کې به لا تر اوسه پورې په غونډال کې ننوتي ښکارۍ.
+welcomeuser|~{0}، ښه راغلې!
+welcomecreation-msg|گڼون مو جوړ شو.\nد [[Special:Preferences\u007C{{SITENAME}} غوره توبونه]] بدلول مو مه هېروۍ.
+yourname|کارن-نوم:
+userlogin-yourname|کارن-نوم
+userlogin-yourname-ph|کارن-نوم مو وليکۍ
+createacct-another-username-ph|كارن نوم مو وركړۍ
+yourpassword|پټنوم:
+userlogin-yourpassword|پټنوم
+userlogin-yourpassword-ph|پټنوم مو وليکۍ
+createacct-yourpassword-ph|پټنوم مو وټاپۍ
+yourpasswordagain|پټنوم بيا وليکه
+createacct-yourpasswordagain|پټنوم مو تاييد کړۍ
+createacct-yourpasswordagain-ph|پټنوم مو بيا وټاپۍ
+remembermypassword|زما پټنوم په دې کمپيوټر (تر ~{0} {{PLURAL:~{0}\u007Cورځې\u007Cورځو}}) په ياد وساته!
+userlogin-remembermypassword|غونډال کې مې ننوتلی وساته
+userlogin-signwithsecure|خوندي اړيکتيا کارول
+yourdomainname|ستاسې شپول:
+password-change-forbidden|تاسې په دې ويکي باندې خپل پټنوم نه شی بدلولی.
+login|ننوتل
+nav-login-createaccount|ننوتل / گڼون جوړول
+userlogin|ننوتل / گڼون جوړول
+userloginnocreate|ننوتل
+logout|وتل
+userlogout|وتل
+notloggedin|غونډال کې نه ياست ننوتي
+userlogin-noaccount|گڼون نه لرې؟
+userlogin-joinproject|د {{SITENAME}} سره يوځای شه
+nologin|کارن-نوم نه لرې؟ ~{0}.
+nologinlink|يو گڼون جوړول
+createaccount|گڼون جوړول
+gotaccount|آيا وار دمخې يو گڼون لری؟ ~{0}.
+gotaccountlink|ننوتل
+userlogin-resetlink|د ننوتلو مالومات مو هېر شوي؟
+userlogin-resetpassword-link|پټنوم مو هېر شوی؟
+userlogin-helplink2|په ننوتلو کې مرسته
+userlogin-createanother|بل گڼون جوړول
+createacct-emailrequired|برېښليک پته
+createacct-emailoptional|برېښليک پته (اختياري)
+createacct-email-ph|برېښليک پته مو وټاپۍ
+createacct-another-email-ph|برېښليک پته مو ورکړۍ
+createaccountmail|يو لنډمهاله ناټاکلی پټنوم کارول او ځانگړې شوې برېښليک پتې ته ورلېږل
+createacct-realname|آر نوم (اختياري)
+createaccountreason|سبب:
+createacct-reason|سبب
+createacct-reason-ph|ولې تاسې بل گڼون جوړول غوااړۍ
+createacct-captcha|امنيتي تدبير
+createacct-imgcaptcha-ph|پورته تاسې ته ښکاره شوی متن وټاپۍ
+createacct-submit|گڼون مو جوړ کړئ
+createacct-another-submit|بل گڼون جوړول
+createacct-benefit-heading|{{SITENAME}} ستاسې په شان خلکو لخوا جوړ شوی.
+createacct-benefit-body1|{{PLURAL:~{0}\u007Cسمون\u007Cسمونونه}}
+createacct-benefit-body2|{{PLURAL:~{0}\u007Cمخ\u007Cمخونه}}
+createacct-benefit-body3|{{PLURAL:~{0}\u007Cوروستنی ونډه وال\u007Cوروستني ونډه وال}}
+badretype|دا پټنوم چې تاسې ليکلی د مخکني پټنوم سره ورته نه دی.
+userexists|کوم کارن نوم چې تاسې ورکړی هغه بل چا کارولی.\nلطفاً يو بل نوم وټاکۍ.
+loginerror|د ننوتلو ستونزه
+createacct-error|د گڼون جوړېدنې ستونزه
+createaccounterror|گڼون مو جوړ نه شو: ~{0}
+nocookiesnew|ستاسې گڼون جوړ شو، خو تاسې لا غونډال ته نه ياست ورننوتلي.\n{{SITENAME}} کې د ننوتلو لپاره کوکيز کارېږي.\nاو ستاسې د کتنمل کوکيز ناچارن دي.\nلطفاً خپل د کتنمل کوکيز چارن کړۍ او بيا د خپل کارن-نوم او پټنوم په کارولو سره غونډال ته ورننوځی.
+nocookieslogin|{{SITENAME}} کې د ننوتلو لپاره کوکيز کارېږي.\nاو ستاسې د کتنمل کوکيز ناچارن دي.\nلطفاً خپل د کتنمل کوکيز چارن کړۍ او بيا د خپل کارن-نوم او پټنوم په کارولو سره غونډال ته ورننوځی.
+noname|تاسې تر اوسه پورې کوم کره کارن نوم نه دی ځانگړی کړی.
+loginsuccesstitle|غونډال کې بريالی ورننوتلۍ
+loginsuccess|'''تاسې اوس {{SITENAME}} کې د "~{0}" په نوم ننوتي ياست.'''
+nosuchuser|د "~{0}" په نوم هېڅ کارن نشته.\nد کارنانو نومونه د غټو او واړو تورو سره حساس دي.\nخپل حجا وڅارۍ، او يا هم [[Special:UserLogin/signup\u007Cيو نوی گڼون جوړ کړی]].
+nosuchusershort|د "~{0}" په نوم هېڅ کوم گڼون نشته. لطفاً خپل د نوم ليکلې بڼې ته ځير شی چې پکې تېروتنه نه وي.
+nouserspecified|تاسې ځان ته کوم کارن نوم نه دی ځانگړی کړی.
+login-userblocked|په دې کارن بنديز لگېدلی. غونډال کې ننوتلو ته پرې نه ښودلی شو.
+wrongpassword|ناسم پټنوم مو ليکلی. لطفاً يو ځل بيا يې وليکۍ.
+wrongpasswordempty|تاسې پټنوم نه دی ليکلی. لطفاً سر له نوي يې وليکۍ.
+passwordtooshort|بايد چې پټنوم مو لږ تر لږه {{PLURAL:~{0}\u007C1 توری\u007C~{0} توري}} وي.
+password-name-match|ستاسې پټنوم بايد ستاسې د کارن-نوم سره توپير ولري.
+password-login-forbidden|د دې کارن-نوم او پټنوم په کارېدنې بنديز دی.
+mailmypassword|پټنوم بياپرځايول
+passwordremindertitle|د {{SITENAME}} لپاره نوی لنډمهاله پټنوم
+passwordremindertext|يو چا (کېدای شي چې تاسې پخپله، د ~{0} IP پتې نه)\nد {{SITENAME}} (~{3}) وېبځي لپاره د يوه نوي پټنوم د ورلېږلو غوښتنه کړې.\nدم مهال د "~{1}" کارن لپاره يو نوی لنډمهاله پټنوم "~{2}" دی.\nکه چېرته همدا غوښتنه ستاسې لخوا شوي وي، نو تاسې غونډال ته په همدې پټنوم ورننوځی او بيا خپل نوی پټنوم په خپله خوښه وټاکۍ.\nستاسې لنډمهاله پټنوم په {{PLURAL:~{4}\u007Cيوه ورځ\u007C~{4} ورځو}} کې بې اعتباره کېدونکی دی.\n\nکه چېرته تاسې نه پرته کوم بل چا دغه غوښتنه کړې وي او يا هم تاسې ته خپل پټنوم در پزړه شوی وي او تاسې خپل اصلي پټنوم بدلول نه غواړۍ، نو تاسې همدا پيغام بابېزه وګڼۍ او د پخوا په څېر خپل اصلي پټنوم وکاروی.
+noemail|د "~{0}" کارن لپاره هېڅ کومه برېښليک پته نه ده ثبته شوې.
+noemailcreate|تاسې ته پکار ده چې يوه سمه برېښليک پته وليکۍ
+passwordsent|د "~{0}" لپاره يو نوی پټنوم د اړونده کارن برېښليک پتې ته ولېږل شو.\nلطفاً کله چې پټنوم مو ترلاسه کړ نو بيا غونډال ته ننوځۍ.
+blocked-mailpassword|ستاسې په IP پتې بنديز لگېدلی او تاسې نه شی کولای چې ليکنې وکړی، په همدې توگه تاسې نه شی کولای چې د پټنوم د پرځای کولو کړنې وکاروی دا ددې لپاره چې د وراني مخنيوی وشي.
+eauthentsent|ستاسې برېښليک پتې ته مو يو تاييدي برېښليک درولېږه.\nتر دې دمخه چې ستاسې گڼون ته کوم بل برېښليک درولېږو، بايد تاسې په برېښليک کې درلېږل شوې لارښوونې پلي کړی او د دې پخلی وکړی چې همدا گڼون په رښتيا ستاسې خپل دی.
+mailerror|د برېښليک د لېږلو ستونزه: ~{0}
+acct_creation_throttle_hit|د همدې ويکي کارنانو په وروستيو ورځو کې ستاسې د IP پتې په کارولو سره {{PLURAL:~{0}\u007C1 گڼون\u007C~{0} گڼونونه}} جوړ کړي، چې دا په همدې مودې کې د گڼونونو د جوړولو تر ټولو ډېر شمېر دی چې اجازه يې ورکړ شوې.\nنو په همدې خاطر د اوس لپاره د همدې IP پتې کارنان نه شي کولای چې نور گڼونونه جوړ کړي.
+emailauthenticated|ستاسې برېښليک پته په ~{1} په ~{2} بجو د منلو وړ وگرځېده.
+emailnotauthenticated|لا تر اوسه ستاسې برېښليک پته د منلو وړ نه ده گرځېدلې. د لاندې ځانگړتياو لپاره به تاسې ته هېڅ کوم برېښليک و نه لېږل شي.
+noemailprefs|ددې لپاره چې دا کړنې کار وکړي نو تاسو يو برېښليک وټاکۍ.
+emailconfirmlink|د خپل د برېښليک پتې پخلی وکړی
+invalidemailaddress|دا برېښليک پته نه منل کېږي، دا ځکه چې دا پته يوه ناکره بڼه لري.\nلطفاً د يوې کره بڼې پته وليکۍ او يا هم دا ځای تش پرېږدۍ.
+cannotchangeemail|پدې ويکي کې د گڼون برېښليک پتې نشي بدلېدلی.
+emaildisabled|دا وېبځی د برېښليک لېږلو چارو څخه برخمن نه دی.
+accountcreated|گڼون مو جوړ شو.
+accountcreatedtext|د [[{{ns:User}}:~{0}\u007C~{0}]] ([[{{ns:User talk}}:~{0}\u007Cخبرې اترې]]) لپاره يو گڼون جوړ شو.
+createaccount-title|د {{SITENAME}} د گڼون جوړېدنه
+createaccount-text|يو چا د {{SITENAME}} په وېبځي (~{3}) کې ستاسې د برېښليک پتې لپاره د "~{1}" په نامه يو گڼون جوړ کړی چې پټنوم يې "~{2}" دی.\nتاسې بايد غونډال ته ورننوځۍ او همدا اوس خپل پټنوم بدل کړی.\n\nکه چېرته دا کړنه په تېروتنه کې شوی وي نو تاسې کولای شی چې دا پيغام بابېزه وگڼۍ.
+login-throttled|تاسې څو واره هڅه کړې چې غونډال ته ورننوځۍ.\nلطفاً د بيا هڅې نه مخکې ~{0} شېبې تم شۍ.
+login-abort-generic|غونډال کې مو ننوتل نابريالی شو - ناڅاپي بند شو
+loginlanguagelabel|ژبه: ~{0}
+pt-login|ننوتل
+pt-login-button|ننوتل
+pt-createaccount|گڼون جوړول
+pt-userlogout|وتل
+user-mail-no-addy|د يوې برېښليک پتې پرته د برېښليک لېږلو هڅه شوې.
+changepassword|پټنوم بدلول
+resetpass_header|د گڼون پټنوم بدلول
+oldpassword|زوړ پټنوم:
+newpassword|نوی پټنوم:
+retypenew|نوی پټنوم بيا وليکه:
+resetpass_submit|پټنوم مو وټاکۍ او بيا غونډال ته ورننوځۍ
+changepassword-success|ستاسې پټنوم په برياليتوب سره بدل شو!
+resetpass_forbidden|پټنومونه مو نه شي بدلېدلای
+resetpass-no-info|دې مخ ته د لاسرسي لپاره بايد غونډال کې ورننوځۍ.
+resetpass-submit-loggedin|پټنوم بدلول
+resetpass-submit-cancel|ناگارل
+resetpass-wrong-oldpass|لنډمهال او يا هم اوسنی پټنوم مو ناسم دی
+resetpass-temp-password|لنډمهالی پټنوم:
+passwordreset|پټنوم بياپرځايول
+passwordreset-text-many|{{PLURAL:~{0}\u007Cد برېښليک له لارې د يو لنډمهاله پټنوم د ترلاسه کولو لپاره له لاندينيو ډگرونو څخه يو يې ډک کړۍ.}}
+passwordreset-legend|پټنوم بياپرځايول
+passwordreset-disabled|په دې ويکي پټنوم بياپرځای کولو کړنه ناچارنه شوې.
+passwordreset-username|کارن-نوم:
+passwordreset-domain|شپول:
+passwordreset-capture|د پايلې برېښليک کتل غواړې؟
+passwordreset-email|برېښليک پته:
+passwordreset-emailtitle|د {{SITENAME}} د گڼون څرگندنې
+passwordreset-emailelement|کارن-نوم: ~{0}\nلنډمهاله پټنوم: ~{1}
+passwordreset-emailsent|د پټنوم بيا پرځای کېدنې لپاره برېښليک درولېږل شو.
+passwordreset-emailsent-capture|د پټنوم بياپرځای کېدنې لپار مو يو برېښليک درولېږه، برېښليک په لاندې توگه ښودل شوی.
+changeemail|برېښليک پته بدلول
+changeemail-text|د برېښليک پتې بدلولو لپاره مو همدا فورمه ډکه کړۍ. د دې بدلون د تاييد لپاره بايد پټنوم مو ورکړۍ.
+changeemail-no-info|دې مخ ته د لاسرسي لپاره بايد غونډال کې ورننوځۍ.
+changeemail-oldemail|اوسنۍ برېښليک پته:
+changeemail-newemail|نوې برېښليک پته:
+changeemail-none|(هېڅ)
+changeemail-password|ستاسې د{{SITENAME}} پټنوم:
+changeemail-submit|برېښليک بدلول
+changeemail-throttled|تاسې څو واره هڅه کړې چې غونډال ته ورننوځۍ.\nلطفاً د بيا هڅې نه مخکې ~{0} شېبې تم شۍ.
+extlink_sample|http://www.example.com د تړنې سرليک
+extlink_tip|باندنۍ تړنې (د http:// مختاړی مه هېروی)
+nowiki_sample|دلته دې بې بڼې متن ځای پر ځای شي
+nowiki_tip|د ويکي بڼه نيونه بابېزه گڼل
+image_tip|خښه شوې دوتنه
+media_tip|د دوتنې تړنه
+sig_tip|ستاسې لاسليک د وخت د ټاپې سره
+hr_tip|څنډيزه ليکه (ددې په کارولو کې سپما وکړۍ)
+summary|لنډيز:
+subject|سکالو/سرليک:
+minoredit|دا يو وړوکی سمون دی
+watchthis|همدا مخ کتل
+savearticle|مخ خوندي کول
+preview|مخليدنه
+showpreview|مخليدنه
+showdiff|بدلونونه ښکاره کول
+anoneditwarning|<strong>گواښنه:</strong>  تاسې غونډال کې نه ياست ننوتي. که تاسې کوم سمونونه ترسره کوۍ نو ستاسې IP پته به ټولو ته د دې مخ د سمونونو په پېښليک کې ښکاري. که تاسې په خپل نوم <strong>[~{0} کې ننوځئ]</strong> يا <strong>[~{1} يو گڼون جوړ کړئ]</strong>، نو ستاسې سمونونه به ستاسې کارن-نوم اړونده ثبت شي چې ډېرې نورې گټې هم لري.
+anonpreviewwarning|''تاسې غونډال ته نه ياست ننوتي. خوندي کولو سره به ستاسې IP پته به د دې مخ د سمونونو په پېښليک کې ثبت شي.''
+missingcommenttext|لطفاً تبصره لاندې وليکۍ.
+summary-preview|د لنډيز مخليدنه:
+subject-preview|سکالو/سرليک مخکتنه:
+blockedtitle|پر کارن بنديز لگېدلی
+blockedtext|'''ستاسې د کارن-نوم يا آی پي پتې مخنيوی شوی.'''\n\nهمدا بنديز د ~{0} له خوا پر تاسې لږېدلی. او د همدې کړنې سبب ''~{1}'' دی.\n\n* د بنديز د پېل نېټه: ~{7}\n* د بنديز د پای نېټه: ~{5}\n* بنديزونه دي پر: ~{6}\n\nتاسې کولای شی چې د ~{0} او يا هم د يو بل [[{{MediaWiki:Grouppage-sysop}}\u007Cپازوال]] سره اړيکې ټينگې کړی او د بنديز ستونزې مو هوارې کړی.\nتاسې نه شی کولای چې د 'کارن ته برېښلک لېږل' کړنې نه گټه پورته کړی تر څو چې تاسې د خپل گڼون په [[Special:Preferences\u007Cغوره توبونو]] کې يوه کره برېښليک پته نه وي ځانگړې کړې او تر دې بريده چې پر تاسې د هغې د کارولو بنديز نه وي لگېدلی.\nستاسې د دم مهال آی پي پته ~{2} ده، او ستاسې د بنديز پېژند #~{4} دی. مهرباني وکړۍ د خپلې يادونې پر مهال د دغو دوو څخه د يوه او يا هم د دواړو ورکول مه هېروۍ.
+autoblockedtext|په خپلکاريزه توگه ستاسې پر IP پتې بنديز لگېدلی، دا د دې په خاطر چې ستاسې پته د بل چا له خوا چې ~{0} پرې بنديز لگولی، کارېدلې.\nاو د بنديز سبب يې دا دی:\n\n:''~{1}''\n\n* د بنديز د پيل نېټه: ~{7}\n* د بنديز د پای نېټه: ~{5}\n* د بنديز د موخې سړی: ~{6}\n\nتاسې کولای شی چې د ~{0} سره او يا هم د [[{{MediaWiki:Grouppage-sysop}}\u007Cپازوالانو]]  له ډلې نه يو چا سره اړيکې ټينگې کړی او د بنديز په اړه مو ورسره خبرې وکړۍ.\n\nدا مه هېروۍ چې تاسې د "کارن ته برېښليک لېږل" له اسانتياوؤ نه ګټه نه شی اخيستلای تر څو چې ستاسې د نومليکنې په وخت کې يا [[Special:Preferences\u007Cستاسې د غوره توبونو په امستنو]] کې يوه کره برېښليک پته نه وي ځانگړې شوې، او يا هم د برېښليک لېږلو د چارو په کارولو مو بنديز نه وي لگېدلی.\n\nستاسې IP پته ~{2} ده او ستاسې د بنديز پېژند #~{4} دی.\nد بنديز اړونده د اړيکو نيولو په وخت کې لطفاً د پورتني مالوماتو يادونه وکړۍ.
+blockednoreason|هېڅ سبب نه دی ورکړ شوی
+whitelistedittext|د مخونو د سمون لپاره بايد ~{0} کېښکاږۍ.
+nosuchsectiontitle|برخه و نه موندل شوه
+nosuchsectiontext|تاسې د يوې داسې برخې د سمون هڅه کړې چې تر اوسه پورې نشته.\nکېدای هغه مهال چې تاسې د دې مخ نه کتنه کوله، همدا برخه کوم بل ځای ته لېږدل شوې او يا هم ړنګه شوې وي.
+loginreqtitle|لومړی غونډال ته ورننوځۍ
+loginreqlink|ننوتل
+loginreqpagetext|د نورو مخونو د کتلو لپاره تاسو بايد ~{0} وکړۍ.
+accmailtitle|پټنوم ولېږل شو.
+newarticle|(نوی)
+newarticletext|تاسې د يوې داسې تړنې څارنه کړې چې لا تر اوسه پورې نه شته.\nکه همدا مخ ليکل غواړۍ، نو په لانديني چوکاټ کې خپل متن وټاپئ (د لا نورو مالوماتو لپاره د [~{0} لارښود مخ] وگورئ).\nکه چېرته تاسې دلته په تېروتنه راغلي ياست، نو يواځې د خپل د کتنمل '''مخ پر شا''' تڼۍ مو وټوکئ.
+anontalkpagetext|----''دا د يوه ورکنومي کارن چې کارن-نوم نه لري او يا خپل کارن-نوم نه کاروي، د سکالو يوه پاڼه ده. نو د يوه کس د پېژندلو پخاطر موږ د هماغه کارن د انټرنېټ شمېره يا IP پته دلته ثبتوؤ. داسې يوه IP پته د ډېرو کارنانو لخوا هم کارېدلی شي. که تاسې يو ورکنومی کارن ياست او تاسې ته دا څرگندېږي چې تاسې ته نااړونده پېغامونه او تبصرې اشاره شوي، نو د نورو بې نومو کارنانو او ستاسې ترمېنځ د ټکنتوب د مخ نيونې لپاره لطفاً [[Special:UserLogin/signup\u007Cيو گڼون جوړ کړۍ]] او يا هم [[Special:UserLogin\u007Cغونډال ته ورننوځۍ]].''
+noarticletext|دم مهال په دې مخ کې څه نشته.\nتاسې کولای شی چې په نورو مخونو کې [[Special:Search/{{PAGENAME}}\u007Cد دې مخ د سرليک پلټنه]] يا\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} د اړوندو يادښتونو پلټنه] وکړی.\nاو يا [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} همدا مخ سم کړی]</span>.
+noarticletext-nopermission|دم مهال په دې مخ کې متن نشته.\nتاسې کولای شی چې [[Special:Search/{{PAGENAME}}\u007Cهمدا سرليک په نورو مخونو کې وپلټۍ]], يا هم <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} اړونده يادښتونه وپلټۍ]</span>، خو تاسې د دې مخ د جوړولو اجازه نه لرۍ.
+userpage-userdoesnotexist|د "<nowiki>~{0}</nowiki>" گڼون نه دی ثبت شوی.\nلطفاً ځان ډاډه کړۍ چې آيا تاسې په رښتيا همدا مخ جوړول که سمول غواړۍ.
+userpage-userdoesnotexist-view|د "~{0}" گڼون نه دی ثبت شوی.
+blocked-notice-logextract|دم مهال په دې کارن بنديز لگېدلی.\nد بنديز يادښت تازه مالومات په لاندې توگه دي:
+clearyourcache|'''يادښت:''' د غوره توبونو د خوندي کولو وروسته، خپل د کتنمل (بروزر) ساتل شوې حافظه تازه کړی.\n* '''فايرفاکس/ سفري:''' په دې کتنمل کې د ''Reload'' د ټکوهلو په وخت د ''Shift'' تڼۍ نيولې وساتی، او يا هم ''Ctrl-F5'' يا ''Ctrl-R''تڼۍ کېښکاږۍ (په Apple Mac کمپيوټر باندې ''⌘-R'' کېښکاږۍ)\n* '''گووگل کروم:''' په دې کتنمل کې د ''Ctrl-Shift-R'' تڼۍ کېښکاږۍ (د مک لپاره ''⌘-Shift-R'')\n* '''انټرنټ اېکسپلورر:''' په دې کتنمل کې د ''Refresh'' د ټکوهلو په وخت کې د ''Ctrl'' تڼۍ کېښکاږلې ونيسۍ، او يا هم د ''Ctrl-F5'' تڼۍ کېښکاږۍ\n* '''اوپرا''': په دې کتنمل کې د خپل براوزر ساتل شوې حافظه پدې توگه سپينولی شی ''Tools→Preferences''
+usercsspreview|'''هېر مو نشي چې دا يوازې ستاسې د کارن CSS مخليدنه ده.'''\n'''تر اوسه پورې لا ستاسې بدلونونه نه دي خوندي شوي!'''
+userjspreview|'''هېر مو نشي چې دا يوازې ستاسې د کارن د جاوا سکرېپټ آزمېيل/مخليدنه ده.'''\n'''تر اوسه پورې لا ستاسې بدلونونه نه دي خوندي شوي!'''
+sitecsspreview|'''په پام کې دې وي چې دا يوازې ستاسې د CSS مخليدنه ده.'''\n'''تر اوسه پورې لا ستاسې بدلونونه نه دي خوندي شوي!'''
+sitejspreview|'''په پام کې مو اوسه چې تاسې يوازې د دغه جاواسکرېپټ کوډ مخليدنه کوۍ.'''\n'''تر اوسه پورې دا نه دی خوندي شوی!'''
+updated|(تازه)
+note|'''يادونه:'''
+previewnote|'''هېر مو نه شي چې دا يواځې يوه مخليدنه ده.'''\nستاسې لخوا ترسره شوي بدلونونه لا تر اوسه پورې نه دي خوندي شوي!!
+continue-editing|د سمولو سيمې ته ورتلل
+editing|د ~{0} سمونه
+creating|~{0} جوړېدنې کې دی
+editingsection|~{0} (برخه) په سمېدنې کې دی
+editingcomment|د ~{0} سمون (نوې برخه)
+editconflict|په سمولو کې خنډ: ~{0}
+yourtext|ستاسې متن
+storedversion|زېرمه شوې مخکتنه
+yourdiff|توپيرونه
+copyrightwarning|لطفاً په پام کې وساتۍ چې ټولې هغه ونډې چې تاسې يې {{SITENAME}} کې ترسره کوی هغه د ~{1} له مخې د خپرولو لپاره گڼل کېږي (د لانورو تفصيلاتو لپاره ~{0} وگورۍ). که تاسې نه غواړۍ چې په ليکنو کې مو په بې رحمۍ سره لاسوهنې (سمونې) وشي او د نورو په غوښتنه پسې لانورې وغځېږي او يا هم خپرې شي، نو دلته يې مه ځای پر ځای کوی..<br />\nتاسې زموږ سره دا ژمنه هم کوئ چې تاسې پخپله دا ليکنه کښلې، او يا مو د ټولگړو پاڼو او يا ورته وړيا سرچينو څخه لمېسلې ده '''لطفاً د ليکوال د اجازې څخه پرته د خوندي رښتو ليکنې مه خپروی!'''
+longpageerror|'''تېروتنه: کوم متن چې مو ليکلی {{PLURAL:~{0}\u007Cيو کيلوبايټه\u007C~{0} کيلوبايټه}} اوږد دی، چې دا پخپله د حد اکثر نه {{PLURAL:~{1}\u007Cيو کيلوبايټه\u007C~{1} کيلوبايټه}} اوږد دی.'''\nستاسې متن نه شي خوندي کېدلای.
+protectedpagewarning|'''گواښنه: همدا مخ تړل شوی او يوازې هغه کارنان په دې مخ کې بدلونونه راوستلای شي چې د پازوالۍ د آسانتياوو نه برخمن دي.'''\nستاسې د مالوماتو لپاره د وروستني يادښت متن دلته په دې توگه راوړل شوی:
+semiprotectedpagewarning|'''پاملرنه:''' دا مخ تړل شوی او يواځې ثبت شوي کارنان کولای شي چې په دې مخ کې بدلونونه راولي.\nستاسې د مالوماتو لپاره د وروستني يادښت متن دلته په دې توگه راوړل شوی:
+cascadeprotectedwarning|'''گواښنه:''' همدا مخ تړل شوی دی او يوازې هغه کارنان په دې مخ کې بدلونونه راوستلای شي چې د پازوالۍ د آسانتياوو نه برخمن دي، دا په دې خاطر چې همدا مخ د {{PLURAL:~{0}\u007Cلانديني مخ\u007Cلاندينيو مخونو}} په ځوړاوبيزې ژغورنې کې ورگډ دی:
+titleprotectedwarning|'''گواښنه: همدا مخ تړل شوی دی او د دې د جوړولو لپاره تاسې ته د [[Special:ListGroupRights\u007Cځانگړو رښتو]] د ترلاسه کولو اړتيا ده.'''\nستاسې د مالوماتو لپاره د وروستني يادښت متن دلته په دې توگه راوړل شوی:
+templatesused|په دې مخ کارېدلې {{PLURAL:~{0}\u007Cکينډۍ\u007Cکينډۍ}}:
+templatesusedpreview|يه دې مخليدنه کارېدلې {{PLURAL:~{0}\u007Cکينډۍ\u007Cکينډۍ}}:
+templatesusedsection|په دې برخه کې کارېدلي {{PLURAL:~{0}\u007Cکينډۍ\u007Cکينډۍ}}:
+template-protected|(ژغورلی)
+template-semiprotected|(نيم-ژغورلی)
+hiddencategories|دا مخ د {{PLURAL:~{0}\u007C1 پټې وېشنيزې\u007C~{0} پټو وېشنيزو}} يو غړی دی:
+nocreatetext|{{SITENAME}} د نوو مخونو د جوړولو وړتيا محدوده کړې.\nتاسو بېرته پر شا تللای شی او په شته مخونو کې سمونې ترسره کولای شی، او يا هم [[Special:UserLogin\u007Cغونډال ته ننوتلای او يو گڼون جوړولای شی]].
+nocreate-loggedin|تاسې د نوو مخونو د جوړولو پرېښله نلرۍ.
+sectioneditnotsupported-title|د برخې د سمون ملاتړ نه کېږي
+sectioneditnotsupported-text|په دې مخ د برخې د سمون ملاتړ نه کېږي.
+permissionserrors|د پرېښې تېروتنه
+permissionserrorstext|تاسې د لاندې {{PLURAL:~{0}\u007Cسبب\u007Cسببونو}} پخاطر د دې کړنې اجازه نه لرۍ:
+permissionserrorstext-withaction|تاسې د ~{1} اجازه نه لری، دا د {{PLURAL:~{0}\u007Cدغه سبب\u007Cدغو سببونو}} پخاطر:
+recreate-moveddeleted-warn|'''گواښنه: تاسې د يوه داسې مخ بياجوړونه کوۍ کوم چې يو ځل پخوا ړنگ شوی وو.'''\n\nپکار ده چې تاسې په دې ځان پوه کړۍ چې ايا دا تاسې ته وړ ده چې د همدې مخ جوړول په پرله پسې توگه وکړۍ.\nستاسې د اسانتياوو لپاره د همدې مخ د ړنگېدلو يادښت هم ورکړ شوی:
+moveddeleted-notice|دا مخ ړنگ شوی.\nدلته لاندې د دې مخ د ړنگېدنې او لېږدېدنې يادښت د سرچينې په توگه ورکړ شوی.
+log-fulllog|بشپړ يادښت کتل
+edit-gone-missing|د دې مخ اوسمهالول و نه کړای شول.\nداسې ښکاري چې دا مخ ړنگ شوی.
+edit-conflict|د سمولو خنډ
+edit-no-change|ستاسې سمون بابېزه وګڼل شو، دا ځکه چې تاسې په متن کې کوم بدلون نه دی راوستلی.
+postedit-confirmation-created|مخ جوړ شوی.
+postedit-confirmation-restored|مخ بيازېرمل شوی.
+postedit-confirmation-saved|ستاسې سمون خوندي شو.
+edit-already-exists|په دې نوم يو نوی مخ جوړ نه شو.\nپدې نوم د پخوا نه يو مخ شته.
+defaultmessagetext|تلواليزه پيغام متن
+content-model-wikitext|ويکي متن
+content-model-text|ساده متن
+content-model-javascript|جاواسکرېپټ
+content-model-css|CSS
+post-expand-template-inclusion-warning|'''گواښنه:''' دا کينډۍ د خپل ټاکلي بريد نه ډېره لويه ده.\nځينې کينډۍ به په کې گډې نه شي.
+post-expand-template-inclusion-category|هغه مخونه چې په کې د کارېدلو کينډيو شمېر له ټاکلې کچې ډېر دی
+post-expand-template-argument-warning|'''گواښنه:''' دا مخ لږ تر لږه د يوې کينډۍ عاملين لري چې بې حده لوی دی.\nدا عاملين ړنگ شول.
+post-expand-template-argument-category|هغه مخونه چې د کينډۍ ړنگ شوي عاملين لري.
+undo-norev|دا سمون ناکړل کېدای نه شي دا ځکه چې دا سمون نشته او يا هم ړنگ شوی.
+cantcreateaccounttitle|گڼون نه شي جوړېدای
+viewpagelogs|د دې مخ يادښتونه کتل
+nohistory|ددې مخ د سمون کوم پېښليک نه شته.
+currentrev|اوسنۍ بڼه
+currentrev-asof|د ~{0} پورې تازه بڼه
+revisionasof|د ~{0} بڼه
+revision-info|تر ~{0} پورې شته مخليدنه، د {{GENDER:~{5}\u007C~{1}}}~{6} لخوا ترسره شوې
+previousrevision|← زړه بڼه
+nextrevision|← نوې بڼه
+currentrevisionlink|اوسنۍ بڼه
+cur|اوسنی
+next|راتلونکي
+last|وروستنی
+page_first|لومړنی
+page_last|وروستنی
+histlegend|د توپير ټاکنه: د هرې هغې بڼې پرتلنه چې تاسې غواړۍ نو د هماغې بڼې چوکاټک په نښه کړی او بيا په لاندينۍ تڼۍ وټوکۍ.<br />\nلنډيز: (اوس) = د اوسنۍ بڼې سره توپير،\n(وروست) = د وروستۍ بڼې سره توپير، و = وړه سمونه.
+history-fieldset-title|پېښليک سپړل
+history-show-deleted|يواځې ړنگ شوي
+histfirst|تر ټولو زاړه
+histlast|تر ټولو نوي
+historysize|({{PLURAL:~{0}\u007C1 بايټ\u007C~{0} بايټونه}})
+historyempty|(تش)
+history-feed-title|د مخکتنو پېښليک
+history-feed-item-nocomment|~{0} په ~{1}
+history-feed-empty|ستاسې غوښتلی مخ نه شته.\nکېدای شي چې دا له ويکي نه ړنگ شوی وي، او يا هم په بل نوم بدل شوی وي.\nتاسې په دې ويکي د اړوندو نوؤ مخونو لپاره [[Special:Search\u007Cد پلټنې هڅه وکړۍ]].
+rev-deleted-comment|(د سمون لنډيز لرې شو)
+rev-deleted-user|(کارن-نوم ليري شوی)
+rev-delundel|ښکارېدنه بدلول
+rev-showdeleted|ښکاره کول
+revisiondelete|د ړنگولو/ناړنگولو مخکتنې
+revdelete-no-file|ځانگړې شوې دوتنه نشته.
+revdelete-show-file-submit|هو
+revdelete-legend|د ښکارېدنې محدوديتونه ټاکل
+revdelete-hide-text|د مخکتنې متن
+revdelete-hide-image|د دوتنې مېنځپانگه پټول
+revdelete-hide-name|کړنې او موخې پټول
+revdelete-hide-comment|د سمون لنډيز
+revdelete-hide-user|د سمونگر کارن-نوم/آی پي پته
+revdelete-radio-same|(مه بدلوه)
+revdelete-radio-set|پټ
+revdelete-radio-unset|ښکاره
+revdelete-log|سبب:
+revdel-restore|ښکارېدنه بدلول
+pagehist|د مخ پېښليک
+deletedhist|ړنگېدلی پېښليک
+revdelete-reason-dropdown|*د ړنگولو ټولگړي سببونه\n** د خپرېدو د رښتو سرغړونه\n** ناسم شخصي مالومات\n** پارونکي او بلواگر مالومات
+revdelete-otherreason|بل/اضافي سبب:
+revdelete-reasonotherlist|بل سبب
+revdelete-edit-reasonlist|د ړنگولو سببونه سمول
+revdelete-offender|د مخکتنې ليکوال:
+mergehistory|د مخ پېښليکونه سره يوځای کول
+mergehistory-from|د سرچينې مخ:
+mergehistory-into|د موخې مخ:
+mergehistory-submit|بڼې سره يوځای کول
+mergehistory-no-source|د سرچينې مخ ~{0} نشته.
+mergehistory-no-destination|د ~{0} موخنيز مخ نشته.
+mergehistory-invalid-source|د سرچينې مخ بايد يو سم سرليک وي.
+mergehistory-invalid-destination|د موخې مخ بايد يو سم سرليک وي.
+mergehistory-reason|سبب:
+mergelog|د اخږلو يادښت
+revertmerge|بېلول
+history-title|د "~{0}" د مخليدنې پېښليک
+difference-title|د "~{0}" د بڼو تر مېنځ توپير
+difference-title-multipage|د "~{0}" او "~{1}" مخونو تر مېنځ توپير
+difference-multipage|(د مخونو تر مېنځ توپير)
+lineno|~{0} کرښه:
+compareselectedversions|ټاکلې بڼې سره پرتلل
+showhideselectedversions|ټاکلې بڼې ښکاره کول/پټول
+editundo|ناکړ
+diff-empty|(بې توپيره)
+diff-multi-sameuser|(د همدغه کارن لخوا {{PLURAL:~{0}\u007Cيوه منځوۍ بڼه نه ده ښکاره شوې\u007C~{0} منځوۍ بڼې نه دي ښکاره شوي}})
+searchresults|د پلټنې پايلې
+searchresults-title|د "~{0}" د پلټنې پايلې
+titlematches|د مخ سرليک ورسره ورته دی
+textmatches|د مخ متن ورسره ورته دی
+notextmatches|د هېڅ کوم مخ متن ورسره سمون نه خوري
+prev-page|تېر مخ
+next-page|بل مخ
+prevn-title|تېر ~{0} {{PLURAL:~{0}\u007Cپايله\u007Cپايلې}}
+nextn-title|راتلونکې ~{0} {{PLURAL:~{0}\u007Cپايله\u007Cپايلې}}
+shown-title|په هر مخ ~{0} {{PLURAL:~{0}\u007Cپايله\u007Cپايلې}} ښکاره کول
+viewprevnext|(~{0} {{int:pipe-separator}} ~{1}) (~{2}) کتل
+searchmenu-exists|'''په دې ويکي يو مخ د "[[:~{0}]]" په نامه دی'''
+searchmenu-new|<strong>په دې ويکي د "[[:~{0}]]" مخ جوړول!</strong> {{PLURAL:~{1}\u007C0=\u007CSee also the page found with your search.\u007Cد پلټنو موندل شوې پايلې هم وگورئ.}}
+searchprofile-articles|مېنځپانگيز مخونه
+searchprofile-images|گڼرسنۍ
+searchprofile-everything|هرڅه
+searchprofile-advanced|پرمختللی
+searchprofile-articles-tooltip|په ~{0} کې پلټل
+searchprofile-images-tooltip|د دوتنو پلټنه
+searchprofile-everything-tooltip|د ټولې مېنځپانگې پلټنه (د خبرو اترو مخونو سره)
+searchprofile-advanced-tooltip|د خپل خوښې په نوم-تشيالونو کې پلټل
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 ويی\u007C~{1} وييونه}})
+search-result-category-size|{{PLURAL:~{0}\u007C1 غړی\u007C~{0} غړي}} ({{PLURAL:~{1}\u007C1 څېرمه وېشنيزه\u007C~{1} څېرمه وېشنيزې}}، {{PLURAL:~{2}\u007C1 دوتنه\u007C~{2} دوتنې}})
+search-redirect|(د ~{0} مخ گرځېدنه)
+search-section|(برخه ~{0})
+search-category|(وېشنيزه ~{0})
+search-file-match|(د دوتنو مېنځپانگې سره ورته دي)
+search-suggest|آيا همدا مو موخه وه: ~{0}
+search-interwiki-caption|خورلڼې پروژې
+search-interwiki-default|پايلې له ~{0} څخه:
+search-interwiki-more|(نور)
+search-relatedarticle|اړونده
+searchrelated|اړونده
+searchall|ټول
+showingresults|دلته لاندې تر {{PLURAL:~{0}\u007C'''1''' پايله\u007C'''~{0}''' پايلې}} ښکاره شوي پيل له #'''~{1}''' شوی.
+showingresultsinrange|دلته لاندې د #<strong>~{1}</strong> تر #<strong>~{2}</strong> حدونو پورې {{PLURAL:~{0}\u007C<strong>1</strong> پايله\u007C<strong>~{0}</strong> پايلې}} ښکارېږي.
+search-showingresults|{{PLURAL:~{3}\u007C<strong>~{0}</strong> پايله، ټولټال <strong>~{2}</strong>\u007C<strong>~{0} - ~{1}</strong> پايلې، ټولټال <strong>~{2}</strong>}}
+search-nonefound|ستاسې دغوښتنې اړونده پايلې و نه موندل شوې.
+powersearch-legend|ژوره پلټنه
+powersearch-ns|په نوم-تشيالونو کې پلټنه:
+powersearch-togglelabel|نښه کول:
+powersearch-toggleall|ټول
+powersearch-togglenone|هېڅ
+powersearch-remember|د راتلونکو پلټنو لپاره همدا ټاکنې په ياد ساتل
+search-external|باندنۍ پلټنه
+preferences|غوره توبونه
+mypreferences|غوره توبونه
+prefs-edits|د سمونو شمېر:
+prefsnologintext2|د غوره توبونو بدلولو لپاره مو غونډال ته ننوځئ.
+prefs-skin|پوښۍ
+skin-preview|مخکتنه
+datedefault|هېڅ نه ټاکل
+prefs-labs|د آزمېښتون ځانگړنې
+prefs-user-pages|کارن مخونه
+prefs-personal|د کارن پېژنليک
+prefs-rc|وروستي بدلونونه
+prefs-watchlist|کتنلړ
+prefs-editwatchlist|کتنلړ سمول
+prefs-watchlist-days|د ورځو شمېر چې په کتنلړ کې به ښکاري:
+prefs-watchlist-days-max|حد اکثر ~{0} {{PLURAL:~{0}\u007Cورځ\u007Cورځې}}
+prefs-watchlist-edits-max|د شمېر اکثر بريد: 1000
+prefs-misc|بېلابېل
+prefs-resetpass|پټنوم بدلول
+prefs-changeemail|برېښليک بدلول
+prefs-setemail|يوه برېښليک پته ورکړۍ
+prefs-email|د برېښليک خوښنې
+prefs-rendering|ښکارېدنه
+saveprefs|خوندي کول
+restoreprefs|ټولې تلواليزې امستنې پرځای کول (په ټولو برخو کې)
+prefs-editing|سمېدنې کې دی
+rows|ليکې:
+columns|ستنې:
+searchresultshead|پلټل
+stub-threshold-disabled|ناچارن
+recentchangesdays|د هغو ورځو شمېر وټاکی چې په وروستي بدلونو کې يې ليدل غواړی:
+recentchangesdays-max|حد اکثر ~{0} {{PLURAL:~{0}\u007Cورځ\u007Cورځې}}
+recentchangescount|د هغو سمونو شمېر چې په تلواليزه بڼه ښکاره بايد شي:
+prefs-help-recentchangescount|پدې کې د وروستني بدلونونو، د مخونو د پېښليکونو او يادښتونه شامل دي.
+savedprefs|غوره توبونه مو خوندي شول.
+timezonelegend|د وخت سيمه:
+localtime|سيمه ايز وخت:
+timezoneuseserverdefault|د ويکي تلواليزه بڼه کارول (~{0})
+timezoneuseoffset|بل (توپير ځانگړی کړی)
+servertime|د پالنگر وخت:
+guesstimezone|له کتنمل نه ډکول
+timezoneregion-africa|افريقا
+timezoneregion-america|امريکا
+timezoneregion-antarctica|انټارکټيکا
+timezoneregion-arctic|آرکټيک
+timezoneregion-asia|آسيا
+timezoneregion-atlantic|اطلس سمندر
+timezoneregion-australia|آسټراليا
+timezoneregion-europe|اروپا
+timezoneregion-indian|هندی سمندر
+timezoneregion-pacific|غلی سمندر
+allowemail|د نورو کارنانو لخوا د برېښليک رالېږل چارن کړه
+prefs-searchoptions|پلټنه
+prefs-namespaces|نوم-تشيالونه
+default|تلواليز
+prefs-files|دوتنې
+prefs-custom-css|ځاني CSS
+prefs-custom-js|ځاني جاواسکرېپټ
+prefs-common-css-js|د ټولو پوښونو لپاره د CSS/جاواسکرېپټ دوتنه:
+prefs-emailconfirm-label|د برېښليک باورتيا:
+youremail|برېښليک *
+username|{{GENDER:~{0}\u007Cکارن نوم}}:
+prefs-memberingroups|د {{PLURAL:~{0}\u007Cډله\u007Cډلې}} {{GENDER:~{1}\u007Cغړی}}:
+prefs-registration|د نومليکنې وخت:
+yourrealname|اصلي نوم:
+yourlanguage|ژبه:
+yournick|نوی لاسليک:
+badsiglength|ستاسو لاسليک ډېر اوږد دی.\nبايد چې لاسليک مو له ~{0} {{PLURAL:~{0}\u007Cتوري\u007Cتورو}} نه لږ وي.
+yourgender|څنگه غواړۍ ځان څرگند کړۍ؟
+gender-unknown|ناڅرگنده
+gender-male|نارينه
+gender-female|ښځينه
+email|برېښليک
+prefs-help-realname|آر نوم ورکول ستاسې د خوښې کار دی.\nکه تاسې خپل آر نوم ورکړۍ، نو ستاسې ټولې کړنې به ستاسې په نوم اړوندې شي.
+prefs-help-email|د برېښليک ورکړه ستاسې په خوښه ده، خو په ورکړې سره به يې د يوه نوي پټنوم د لېږلو چار آسانه کړي هغه هم کله چې تاسې نه خپل پټنوم هېر شوی وي.
+prefs-help-email-others|تاسې دا هم ټاکلی شی چې نور کارنان ستاسې د خبرو اترو او يا د کارن مخ يوې تړنې له لارې له تاسې سره برېښليکي اړيکه ونيسي.\nد اړيکو ټينگولو په وخت کې به ستاسې برېښليک پته نورو کارنانو ته نه ښکاري.
+prefs-help-email-required|ستاسو د برېښليک پته پکار ده.
+prefs-info|بنسټيز مالومات
+prefs-i18n|نړېوالتوب
+prefs-signature|لاسليک
+prefs-dateformat|د نېټې بڼه
+prefs-timeoffset|د وخت واټن
+prefs-advancedediting|ټولگړی
+prefs-editor|سمونگر
+prefs-preview|مخليدنه
+prefs-advancedrc|پرمختللې خوښنې
+prefs-advancedrendering|پرمختللې خوښنې
+prefs-advancedsearchoptions|پرمختللې خوښنې
+prefs-advancedwatchlist|پرمختللې خوښنې
+prefs-displayrc|د ښکارېدو خوښنې
+prefs-displaywatchlist|د ښکارېدنې خوښنې
+prefs-diffs|توپيرونه
+email-address-validity-valid|برېښليک پته سمه ښکاري
+email-address-validity-invalid|يوه سمه برېښليک پته وليکۍ
+userrights|د کارن رښتو سمبالښت
+userrights-lookup-user|کارن ډلې سمبالول
+userrights-user-editname|يو کارن نوم ورکړئ:
+editusergroup|کارن ډلې سمول
+editinguser|د <strong>[[User:~{0}\u007C~{0}]]</strong> کارن رښتې بدلول ~{1}
+userrights-editusergroup|کارن ډلې سمول
+saveusergroups|کارن ډلې خوندي کول
+userrights-groupsmember|غړی د:
+userrights-groupsmember-auto|ضمني غړی د:
+userrights-groups-help|تاسې هغه ډلې چې همدا کارن يې غړی دی بدلولی شی:\n* يو په نښه شوی بکس د دې مانا لري چې کارن د هغې ډلې غړيتوب لري.\n* يو نانښه شوی بکس د دې مانا لري چې کارن د هغې ډلې غړيتوب نلري.\n* د * يوه نښه په دې مانا ده چې هر کله تاسې څوک په همدې ډلې کې غړی کړی بيا يې ترې نشی وېستلی او د دې برعکس هم.
+userrights-reason|سبب:
+userrights-no-interwiki|په همدې ويکي باندې تاسې د کارن رښتو د سمولو اجازه نه لرۍ.
+userrights-changeable-col|هغه ډلې چې تاسې يې بدلولی شی
+userrights-unchangeable-col|هغه ډلې چې تاسې يې نه شی بدلولی
+group|ډله:
+group-user|کارنان
+group-autoconfirmed|تاييد شوي کارنان
+group-bot|روباټونه
+group-sysop|پازوالان
+group-bureaucrat|بيوروکراټان
+group-suppress|څارونکي
+group-all|(ټول)
+group-user-member|{{GENDER:~{0}\u007Cکارن}}
+group-autoconfirmed-member|{{GENDER:~{0}\u007Cتاييد شوی کارن}}
+group-bot-member|{{GENDER:~{0}\u007Cروباټ}}
+group-sysop-member|{{GENDER:~{0}\u007Cپازوال}}
+group-bureaucrat-member|{{GENDER:~{0}\u007Cبيوروکراټ}}
+group-suppress-member|{{GENDER:~{0}\u007Cڅارن}}
+grouppage-user|{{ns:project}}:کارنان
+grouppage-autoconfirmed|{{ns:project}}:تاييد شوي کارنان
+grouppage-bot|{{ns:project}}:روباټان
+grouppage-sysop|{{ns:project}}:پازوالان
+grouppage-bureaucrat|{{ns:project}}:بيوروکراټان
+grouppage-suppress|{{ns:project}}:څارن
+right-read|مخونه لوستل
+right-edit|مخونه سمول
+right-createpage|مخونه جوړول (هغه چې د خبرو اترو مخونه نه دي)
+right-createtalk|د خبرو اترو مخونه جوړول
+right-createaccount|نوي گڼونونه جوړول
+right-minoredit|سمونونه واړه په نخښه کول
+right-move|مخونه لېږدول
+right-move-subpages|مخونه د خپلو څېرمه مخونو سره لېږدول
+right-move-categorypages|د وېشنيزې مخونه لېږدول
+right-movefile|دوتنې لېږدول
+right-upload|دوتنې پورته کول
+right-upload_by_url|د يو URL نه دوتنې پورته کول
+right-writeapi|د API کښنې کارېدنه
+right-delete|مخونه ړنگول
+right-bigdelete|د اوږدو پېښليکونو مخونه ړنگول
+right-browsearchive|ړنگ شوي مخونه پلټل
+right-undelete|يو مخ ناړنگول
+right-suppressionlog|شخصي يادښتونه کتل
+right-block|پر نورو کارنانو د سمون د آسانتياوؤ بنديز لگول
+right-blockemail|پر يوه کارن د برېښليک لېږلو بنديز لگول
+right-hideuser|پر يوه کارن-نوم بنديز لگول او له خلکو نه يې پټول
+right-protect|د ژغورنې کچه بدلول او ځوړاوبېزه ژغورلي مخونه سمول
+right-editinterface|د کارن ليدنمخ سمول
+right-editusercssjs|د نورو کارنانو د CSS او JS (جاوا سکرېپټ) دوتنې سمول
+right-editusercss|د نورو کارنانو د CSS دوتنې سمول
+right-edituserjs|د نورو کارنانو د JS (جاوا سکرېپټ) دوتنې سمول
+right-viewmywatchlist|خپل کتنلړ کتل
+right-editmyprivateinfo|خپل شخصي مالومات سمول (بېلگه. برېښليک پته، آرنوم)
+right-editmyoptions|خپل غوره توبونه سمول
+right-unwatchedpages|د ناکتلو مخونو يو لړليک کتل
+right-userrights|د کارن ټولې رښتې سمول
+right-userrights-interwiki|په نورو ويکي گانو د نورو کارنانو  کارن-رښتې سمول
+right-sendemail|نورو کارنانو ته برېښليک لېږل
+newuserlogpage|د کارن-نوم د جوړېدو يادښت
+newuserlogpagetext|دا د کارن-نوم د جوړېدو يادښت دی
+rightslog|د کارن رښتو يادښت
+rightslogtext|دا د کارن رښتو د بدلونونو يو يادښت دی.
+action-read|همدا مخ لوستل
+action-edit|دا مخ سمول
+action-createpage|مخونه جوړول
+action-createtalk|د خبرو اترو مخونه جوړول
+action-createaccount|دا گڼون جوړول
+action-minoredit|دا سمون وړوکی په نخښه کول
+action-move|همدا مخ لېږدول
+action-move-categorypages|د وېشنيزې مخونه لېږدول
+action-movefile|همدا دوتنه لېږدول
+action-upload|همدا دوتنه پورته کول
+action-upload_by_url|دا دوتنه له يوه URL نه پورته کول
+action-writeapi|د API کښنه کارول
+action-delete|همدا مخ ړنگول
+action-deleterevision|دا مخکتنه ړنگول
+action-deletedhistory|د دې مخ ړنگ شوی پېښليک کتل
+action-browsearchive|ړنگ مخونه پلټل
+action-undelete|همدا مخ ناړنگول
+action-suppressionlog|دا شخصي يادښت کتل
+action-block|پر دې کارن د سمون د آسانتياوؤ بنديز لگول
+action-protect|د دې مخ د ژغورنې کچه بدلول
+action-unwatchedpages|د ناکتلو مخونو لړليک کتل
+action-mergehistory|د دې مخ پېښليک سره اخږل
+action-userrights|د کارن ټولې رښتې سمول
+action-userrights-interwiki|په نورو ويکي گانو د کارنانو رښتې سمول
+action-siteadmin|توکبنسټ کولپول يا نه کولپول
+action-sendemail|برېښليکونه لېږل
+action-editmywatchlist|خپل کتنلړ سمول
+action-viewmywatchlist|خپل کتنلړ کتل
+action-viewmyprivateinfo|خپل شخصي مالومات کتل
+action-editmyprivateinfo|خپل شخصي مالومات سمول
+nchanges|~{0} {{PLURAL:~{0}\u007Cبدلون\u007Cبدلونونه}}
+enhancedrc-since-last-visit|~{0} {{PLURAL:~{0}\u007Cله وروستنۍ کتنې راپدېخوا}}
+enhancedrc-history|پېښليک
+recentchanges|وروستي بدلونونه
+recentchanges-legend|د ورستي بدلونو خوښنې
+recentchanges-summary|په دې مخ د ويکي ترټولو تازه وروستي بدلونونه وڅارۍ.
+recentchanges-noresult|د ټاکلې مودې بدلونونه کې يو يې هم د دغو معيارونو سره همغاړي نه دي.
+recentchanges-feed-description|همدلته د ويکي ترټولو تازه وروستي بدلونونه وڅارۍ او وگورۍ چې څه پېښ شوي.
+recentchanges-label-newpage|دغه سمون يو نوی مخ جوړ کړی
+recentchanges-label-minor|دا يو وړکی سمون دی
+recentchanges-label-bot|دا سمون يو روباټ ترسره کړی
+recentchanges-label-unpatrolled|دغه سمون تر اوسه پورې نه دی څارل شوی
+recentchanges-label-plusminus|د بايټونو د شمېر له مخې د مخ د بدلون کچه
+recentchanges-legend-heading|'''لنډونونه:'''
+recentchanges-legend-newpage|{{int:recentchanges-label-newpage}} ([[Special:NewPages\u007Cد نويو مخونو لړليک]] هم وگورئ)
+rcnotefrom|دلته لاندې د <strong>~{1}</strong> څخه راپدېخوا پېښ شوي بدلونونه راغلي (تر <strong>~{0}</strong> پورې ښکاري).
+rclistfrom|نوي بدلونونه چې له ~{2}، ~{1} څخه پيلېږي ښکاره کول
+rcshowhideminor|وړې سمونې ~{0}
+rcshowhideminor-show|ښکاره کول
+rcshowhideminor-hide|پټول
+rcshowhidebots|روباټ ~{0}
+rcshowhidebots-show|ښکاره کول
+rcshowhidebots-hide|پټول
+rcshowhideliu|ثبت شوي کارنان ~{0}
+rcshowhideliu-show|ښکاره کول
+rcshowhideliu-hide|پټول
+rcshowhideanons|بې نومه کارنان ~{0}
+rcshowhideanons-show|ښکاره کول
+rcshowhideanons-hide|پټول
+rcshowhidepatr|~{0} څارلې سمونې
+rcshowhidepatr-show|ښکاره کول
+rcshowhidepatr-hide|پټول
+rcshowhidemine|زما سمونې ~{0}
+rcshowhidemine-show|ښکاره کول
+rcshowhidemine-hide|پټول
+rclinks|هغه وروستي ~{0} بدلونونه ښکاره کړی چې په ~{1} ورځو کې پېښ شوي<br />~{2}
+diff|توپير
+hist|پېښليک
+hide|پټول
+show|ښکاره کول
+minoreditletter|و
+newpageletter|ن
+boteditletter|ر
+number_of_watching_users_pageview|[~{0}  {{PLURAL:~{0}\u007Cکتونکی کارن\u007Cکتونکي کارنان}}]
+rc_categories|د وېشنيزو بريدونه (په "\u007C" بېلول)
+rc_categories_any|هر يو
+rc-change-size-new|~{0} {{PLURAL:~{0}\u007Cبايټ\u007Cبايټونه}} د بدلون وروسته
+newsectionsummary|/* ~{0} */ نوې برخه
+rc-enhanced-expand|تفصيل ښکاره کول
+rc-enhanced-hide|تفصيل پټول
+rc-old-title|اصلاً د "~{0}" په توگه جوړ شو
+recentchangeslinked|اړونده بدلونونه
+recentchangeslinked-feed|اړونده بدلونونه
+recentchangeslinked-toolbox|اړونده بدلونونه
+recentchangeslinked-title|"~{0}" ته اړونده بدلونونه
+recentchangeslinked-summary|دا د هغه بدلونونو لړليک دی چې وروستۍ ځل په تړن لرونکيو مخونو کې د يوه ځانگړي مخ (او يا هم د يوې ځانگړې وېشنيزې غړو) نه رامېنځ ته شوي.\n[[Special:Watchlist\u007Cستاسې د کتنلړ]] مخونه په '''زغرد ليک''' کې ښکاري.
+recentchangeslinked-page|د مخ نوم:
+recentchangeslinked-to|د ورکړل شوي مخ پر ځای د اړونده تړلي مخونو بدلونونه ښکاره کول
+upload|دوتنه پورته کول
+uploadbtn|دوتنه پورته کول
+reuploaddesc|پورته کېدنه ناگارل او بېرته د پورته کېدنې فورمې ته ورگرځېدل
+upload-tryagain|د بدلون موندلې دوتنې څرگندونې سپارل
+uploadnologin|غونډال کې نه ياست ننوتي
+uploadnologintext|د دوتنې پورته کولو لپاره بايد ~{0}
+uploaderror|د پورته کولو ستونزه
+uploadtext|د دوتنې د پورته کېدو لپاره لاندينی چوکاټ وکاروۍ.\nکه چېرته د پخونيو پورته شويو دوتنو کتل او پلټل غواړۍ نو [[Special:FileList\u007Cد پورته شويو دوتنو لړليک]] ته ورشۍ، [[Special:Log/upload\u007Cد (بيا) پورته شويو دوتنو يادښتونه]] او [[Special:Log/delete\u007Cد ړنگېدو يادښتونه]] هم کتلای شی.\n\nددې لپاره چې يوه مخ ته انځور ورواچوی، نو بيا پدې ډول تړنې (لېنک) وکاروی\n* د يوې دوتنې د بشپړې بڼې د کارولو په موخه د '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code>''' کوډ وکاروۍ.\n* د '۲۰۰ پېکسل' په کچه د 'بټنوک' په توگه د يوې دوتنې کارول چې د مخ کيڼې څنډې کې او ترلاندې 'د انځور څرگندونې' ولري، نو د دې موخې لپاره د '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png\u007C200px\u007Cبټنوک\u007Cکيڼ\u007Cد انځور څرگندونې]]</nowiki></code>''' کوډ وکاروۍ.\n* د انځور د ښودلو نه پرته، د دوتنې سره د سيخې تړنې لپاره د '''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code>''' کوډ وکاروۍ.
+upload-permitted|د پرېښلې {{PLURAL:~{1}\u007Cدوتنې ډول\u007Cدوتنو ډولونه}}: ~{0}.
+upload-preferred|د غوره {{PLURAL:~{1}\u007Cدوتنې ډول\u007Cدوتنو ډول}}: ~{0}.
+upload-prohibited|د ناپرېښلې {{PLURAL:~{1}\u007Cدوتنې ډول\u007Cدوتنو ډولونه}}: ~{0}.
+uploadlogpage|د پورته شويو دوتنو يادښت
+uploadlogpagetext|دا لاندې د نوو پورته شوو دوتنو لړليک دی.
+filename|د دوتنې نوم
+filedesc|لنډيز
+fileuploadsummary|لنډيز:
+filereuploadsummary|د دوتنې بدلونونه:
+filestatus|د رښتو دريځ:
+filesource|سرچينه:
+ignorewarning|گواښنه بې پامه گڼل او دوتنه خوندي کول
+ignorewarnings|هر ډول گواښونه له پامه غورځول
+minlength1|پکار ده چې د دوتنو نومونه لږ تر لږه يو حرف ولري.
+illegalfilename|د دوتنې نوم "~{0}" په داسې تورو ليکلی دی چې د یو مخ د سرليک په توگه يې پرېښه نه ده شوې.\nمهرباني وکړۍ د دوتنې نوم مو بدل کړۍ او بيا مو د دوتنې د پورته کولو هڅه وکړۍ.
+badfilename|ددغې دوتنې نوم "~{0}" ته واوړېده.
+filetype-badmime|د MIME بڼې "~{0}" د دوتنو د پورته کولو اجازه نشته.
+empty-file|کومه دوتنه چې تاسې دلته سپارلې هغه تشه ده.
+file-too-large|کومه دوتنه چې تاسې دلته سپارلې ډېره لويه ده.
+filename-tooshort|د دوتنې نوم ډېر لنډ دی
+filetype-banned|په دې ډول دوتنې بنديز دی.
+illegal-filename|د دوتنې نوم نه دی پرېښل شوی.
+unknown-error|يوه ناڅرګنده تېروتنه رامېنځته شوه.
+tmp-create-error|لنډمهاله دوتنه جوړېدای نه شي
+fileexists|د پخوا څخه پدې نوم يوه دوتنه شته، که {{GENDER:\u007Cتاسې}} پرې ډاډمن نه ياست چې بدلون پکې راولۍ، نو لطفاً <strong>[[:~{0}]]</strong> وگورئ.\n[[~{0}\u007Cبټنوک]]
+fileexists-extension|په دې نوم يوه بله دوتنه د پخوا څخه شته: [[~{1}\u007Cبټنوک]]\n* د پورته کېدونکې دوتنې نوم: <strong>[[:~{0}]]</strong>\n* د پخوانۍ موجودې دوتنې نوم: <strong>[[:~{1}]]</strong>\nآيا تاسې غواړۍ چې يو داسې بېل نوم ټاکۍ چې د پخوانۍ دوتنې سره توپير ولري؟
+fileexists-forbidden|د پخوا نه پدې نوم يوه دوتنه شته، او په دې نوم بله دوتنه نه پورته کېږي.\nکه تاسې بيا هم د خپلې دوتنې پورته کول غواړۍ، نو لطفاً بېرته وګرځۍ او همدغه دوتنه بيا په يوه نوي نوم پورته کړی.\n[[File:~{0}\u007Cthumb\u007Ccenter\u007C~{0}]]
+file-exists-duplicate|همدا دوتنه د {{PLURAL:~{0}\u007Cلاندينۍ دوتنې\u007Cلاندينيو دوتنو}} غبرگه لمېسه ده:
+uploadwarning|د پورته کولو گواښ
+savefile|دوتنه خوندي کړه
+uploaddisabled|پورته کول ناچارن شوي
+uploaddisabledtext|د دوتنې پورته کولو آسانتياوې ناچارن شوي.
+uploadvirus|دا دوتنه ويروس لري! تفصيل: ~{0}
+upload-source|سرچينيزه دوتنه
+sourcefilename|د سرچينيزې دوتنې نوم:
+sourceurl|د URL سرچينه:
+destfilename|د موخيزې دوتنې نوم:
+upload-maxfilesize|د دوتنې تر ټولو لويه کچه: ~{0}
+upload-description|د دوتنې څرگندونې
+upload-options|د پورته کولو خوښنې
+watchthisupload|همدا دوتنه کتل
+upload-success-subj|دوتنه پورته کېدل په برياليتوب سره ترسره شو
+upload-failure-subj|د پورته کېدو ستونزه
+upload-warning-subj|د پورته کولو گواښ
+upload-proto-error|ناسم پروتوکول
+upload-file-error|کورنۍ ستونزه
+upload-misc-error|د پورته کېدنې نامالومه تېروتنه
+upload-http-error|د HTTP يوه ستونزه رامېنځ ته شوې: ~{0}
+backend-fail-notexists|د ~{0} په نوم دوتنه نشته.
+backend-fail-delete|د "~{0}" دوتنه ړنګه نه شوه.
+backend-fail-alreadyexists|د ~{0} دوتنه له پخوا نه شته.
+backend-fail-move|د "~{0}" دوتنه "~{1}" ته و نه ليږدېده.
+backend-fail-opentemp|لنډمهاله دوتنه و نه پرانيستل شوه.
+backend-fail-read|د "~{0}" دوتنه نه شي لوستل کېدای.
+backend-fail-create|د "~{0}" په دوتنه کې نور څه و نه ليکل شول.
+zip-wrong-format|ځانگړې شوې دوتنه يوه ZIP دوتنه نه وه.
+uploadstash-refresh|د دوتنو لړليک بياتازه کول
+img-auth-accessdenied|لاسرسی رد شو
+img-auth-nofile|د ~{0} په نوم کومه دوتنه نشته.
+http-invalid-url|ناسم URL: ~{0}
+http-read-error|د HTTP د لوستلو ستونزه.
+http-curl-error|د URL د راوستلو تېروتنه: ~{0}
+upload-curl-error6|URL ته لاسرسی و نه شو
+upload-curl-error28|د پورته کېدلو د مودې پای
+license|منښتليک:
+license-header|منښتليک:
+nolicense|هېڅ نه دي ټاکل شوي
+license-nopreview|(مخليدنه نشته)
+upload_source_file|(ستاسې کمپيوټر کې ستاسې ټاکلې دوتنه)
+listfiles-delete|ړنگول
+listfiles-summary|همدا ځانگړی مخ ټولې پورته شوې دوتنې ښکاره کوي.
+listfiles_search_for|د رسنۍ نوم پلټنه:
+listfiles-userdoesnotexist|د "~{0}" گڼون نه دی ثبت شوی.
+imgfile|دوتنه
+listfiles|د دوتنو لړليک
+listfiles_thumb|بټنوک
+listfiles_date|نېټه
+listfiles_name|نوم
+listfiles_user|کارن
+listfiles_size|کچه (بايټونه)
+listfiles_description|څرگندونه
+listfiles_count|بڼې
+listfiles-show-all|د انځورونو زړې بڼې شاملول
+listfiles-latestversion|اوسنۍ بڼه
+listfiles-latestversion-yes|هو
+listfiles-latestversion-no|نه
+file-anchor-link|دوتنه
+filehist|د دوتنې پېښليک
+filehist-help|په يوې نېټې/يوه وخت وټوکۍ چې د هماغه وخت او نېټې دوتنه چې څنگه ښکارېده هماغسې درښکاره شي.
+filehist-deleteall|ټول ړنگول
+filehist-deleteone|ړنگول
+filehist-revert|په څټ گرځول
+filehist-current|اوسنی
+filehist-datetime|نېټه/وخت
+filehist-thumb|بټنوک
+filehist-thumbtext|د ~{0} پورې د بټنوک بڼه
+filehist-nothumb|بې بټنوکه
+filehist-user|کارن
+filehist-dimensions|ډډې
+filehist-filesize|د دوتنې کچه
+filehist-comment|تبصره
+imagelinks|د دوتنې کارېدنه
+linkstoimage|دا {{PLURAL:~{0}\u007Cلاندينی مخ\u007C~{0} لانديني مخونه}} د همدې دوتنې سره تړنې لري:
+nolinkstoimage|داسې هېڅ کوم مخ نه شته چې د دغې دوتنې سره تړنې ولري.
+duplicatesoffile|دا لاندينۍ {{PLURAL:~{0}\u007C دوتنه د همدې دوتنې غبرګونې لمېسه ده\u007C~{0} دوتنې د همدې دوتنې غبرګونې لمېسې دي}} ([[Special:FileDuplicateSearch/~{1}\u007Cنور تفصيل]]):
+sharedupload|دا دوتنه د ~{0} لخوا نه ده او کېدای شي چې نورې پروژې به يې هم کاروي.
+sharedupload-desc-here|دا دوتنه د ~{0} لخوا خپرېږې او کېدای شي چې دا په نورو پروژو هم کارېدلې وي.\nد دوتنې د کارېدنې لا نور مالومات د [~{1} دوتنې د څرگندنو په مخ] کې لاندې ښودل شوی.
+filepage-nofile|په دې نوم کومه دوتنه نشته.
+filepage-nofile-link|په دې نوم کومه دوتنه نشته، خو تاسې يې [~{0} پورته کولی شی].
+uploadnewversion-linktext|د همدغې دوتنې نوې بڼه پورته کول
+shared-repo-from|د ~{0} لخوا
+shared-repo-name-wikimediacommons|ويکيمېډيا کامنز
+upload-disallowed-here|تاسې د دې دوتنې دپاسه نشی ليکلی.
+filerevert|~{0} بيااړول
+filerevert-legend|دوتنه بيااړول
+filerevert-comment|سبب:
+filerevert-submit|په څټ گرځول
+filedelete|~{0} ړنگول
+filedelete-legend|دوتنه ړنگول
+filedelete-intro|تاسې د '''[[Media:~{0}\u007C~{0}]]''' دوتنې او د ورسره ټول پېښليک د ړنگولو په حال کې ياست.
+filedelete-comment|سبب:
+filedelete-submit|ړنگول
+filedelete-success|'''~{0}''' ړنگ شو.
+filedelete-nofile|'''~{0}''' نشته.
+filedelete-otherreason|بل/اضافه سبب:
+filedelete-reason-otherlist|بل سبب
+filedelete-reason-dropdown|*د ړنگولو ټولگړی سبب\n** د رښتو نه غاړه غړونه\n** کټ مټ دوه گونې دوتنه
+filedelete-edit-reasonlist|د ړنگولو سببونه سمول
+filedelete-maintenance-title|دوتنه نه شي ړنګېدی
+mimesearch|MIME پلټنه
+mimetype|MIME بڼه:
+download|ښکته کول
+unwatchedpages|ناکتلي مخونه
+listredirects|د ورگرځېدنو لړليک
+listduplicatedfiles|د دوه گونو دوتنو لړليک
+unusedtemplates|ناکارېدلې کينډۍ
+unusedtemplateswlh|نور تړنونه
+randompage|ناټاکلی مخ
+randompage-nopages|په لانديني {{PLURAL:~{1}\u007Cنوم-تشيال\u007Cنوم-تشيالونو}} کې هېڅ کوم مخ نشته: ~{0}.
+randomincategory|په وېشنيزه کې ناټاکلی مخ
+randomincategory-category|وېشنيزه:
+randomincategory-legend|په وېشنيزه کې ناټاکلی مخ
+randomredirect|ناټاکلی ورگرځېدنه
+statistics-header-edits|د سمونو شمار
+statistics-header-users|د کارنانو شمار
+statistics-header-hooks|بل شمار
+statistics-files|پورته شوې دوتنې
+statistics-edits|د {{SITENAME}} د جوړېدو راهيسې د مخونو سمون
+statistics-edits-average|پر يوه مخ د سمون منځوۍ کچه
+statistics-users|ثبت شوي [[Special:ListUsers\u007Cکارنان]]
+statistics-users-active|فعاله کارنان
+statistics-users-active-desc|هغه کارنان چې په {{PLURAL:~{0}\u007Cوروستۍ ورځ\u007Cوروستيو ~{0} ورځو}} کې فعاله ونډه لرلې
+pageswithprop|د مخ ځانتياو څخه برخمن مخونه
+pageswithprop-legend|د مخ ځانتياو څخه برخمن مخونه
+pageswithprop-prop|د ځانتيا نوم:
+pageswithprop-submit|ورځه
+doubleredirects|دوه ځلي ورگرځېدنې
+brokenredirects|ماتې ورگرځېدنې
+brokenredirects-edit|سمول
+brokenredirects-delete|ړنگول
+withoutinterwiki|د ژبې د تړنو بې برخې مخونه
+withoutinterwiki-summary|لانديني مخونه د نورو ژبو بڼو سره تړنې نه لري.
+withoutinterwiki-legend|مختاړی
+withoutinterwiki-submit|ښکاره کول
+fewestrevisions|لږ مخليدل شوي مخونه
+nbytes|~{0} {{PLURAL:~{0}\u007Cبايټ\u007Cبايټونه}}
+ncategories|~{0} {{PLURAL:~{0}\u007Cوېشنيزه\u007Cوېشنيزې}}
+nlinks|~{0} {{PLURAL:~{0}\u007Cتړنه\u007Cتړنې}}
+nmembers|~{0} {{PLURAL:~{0}\u007Cغړی\u007Cغړي}}
+nrevisions|~{0} {{PLURAL:~{0}\u007Cبڼه\u007Cبڼې}}
+nviews|~{0} {{PLURAL:~{0}\u007Cکتنه\u007Cکتنې}}
+nimagelinks|په ~{0} {{PLURAL:~{0}\u007Cکارېدلی مخ\u007Cکارېدلي مخونه}}
+ntransclusions|په ~{0} {{PLURAL:~{0}\u007Cمخ\u007Cمخونو}} کارېدلی
+specialpage-empty|د دې راپور لپاره کومې پايلې نشته.
+lonelypages|يتيم مخونه
+uncategorizedpages|ناوېشلي مخونه
+uncategorizedcategories|ناوېشلې وېشنيزې
+uncategorizedimages|ناوېشلي انځورنه
+uncategorizedtemplates|ناوېشلې کينډۍ
+unusedcategories|ناکارېدلې وېشنيزې
+unusedimages|ناکارېدلې دوتنې
+wantedcategories|غوښتلې وېشنيزې
+wantedpages|غوښتلي مخونه
+wantedfiles|غوښتلې دوتنې
+wantedtemplates|غوښتلې کينډۍ
+mostlinked|د ډېرو تړنو مخونه
+mostlinkedcategories|د گڼو تړنو وېشنيزې
+mostlinkedtemplates|د ډېرو تړنو کينډۍ
+mostcategories|د گڼو وېشنيزو مخونه
+mostimages|د ډېرو تړنو انځورونه
+mostinterwikis|د ډېرو خپلمنځي تړنو مخونه
+mostrevisions|ډېر کتلي مخونه
+prefixindex|د مختاړيو ټول مخونه
+prefixindex-namespace|د مختاړي ټول مخونه (~{0} نومتشيال)
+shortpages|لنډ مخونه
+longpages|اوږده مخونه
+deadendpages|بې پايه مخونه
+deadendpagestext|همدا لانديني مخونه په دغه ويکي کې د نورو مخونو سره تړنې نه لري.
+protectedpages|ژغورلي مخونه
+protectedpages-indef|يوازې بې پايه ژغورنې
+protectedpages-summary|په دې مخ کې هغه مخونه د لړليک په توگه راغلي چې دم مهال ژغورل شوي. د جوړولو څخه ژغورل شويو سرليکونو د يو لړليک لپاره [[{{#special:ProtectedTitles}}\u007C{{int:protectedtitles}}]] وگورئ.
+protectedpages-cascade|يوازې ځوړاوبيزې ژغورنې
+protectedpages-timestamp|وخت ټاپه
+protectedpages-page|مخ
+protectedpages-expiry|پای نېټه
+protectedpages-reason|سبب
+protectedpages-unknown-timestamp|ناجوت
+protectedpages-unknown-performer|ناڅرگنده کارن
+protectedtitles|ژغورلي سرليکونه
+protectedtitles-summary|په دې مخ کې هغه سرليکونه د لړليک په توگه راغلي چې دم مهال د جوړېدلو څخه ژغورل شوي. د ژغورلو مخونو د يو لړليک لپاره [[{{#special:ProtectedPages}}\u007C{{int:protectedpages}}]] وگورئ.
+listusers|کارن لړليک
+listusers-editsonly|يوازې هغه کارنان چې سمونونه يې کړي ښکاره کول
+listusers-creationsort|د جوړېدو د نېټې له مخې اوډل
+listusers-desc|مخښکته اوډل
+usereditcount|{{PLURAL:~{0}\u007Cسمون\u007Cسمونونه}}
+usercreated|په ~{0} نېټه په ~{1} بجو {{GENDER:~{2}\u007Cجوړ شو}}
+newpages|نوي مخونه
+newpages-username|کارن-نوم:
+ancientpages|تر ټولو زاړه مخونه
+move|لېږدول
+movethispage|دا مخ لېږدول
+unusedimagestext|دا لاندينۍ دوتنې په هېڅ کوم مخ کې نه دي ټومبېدلي. لطفاً په پام کې وساتۍ چې نور وېبځايونه به د دغو دوتنو له يو دوتنې سره يو راسن يو آر ال (URL) ولري او لا تر اوسه به دوتنه د فعالې کارېدنې سره سره دلته پرته وي.
+notargettitle|بې موخې
+nopagetitle|داسې کوم مخ نشته
+nopagetext|کوم مخ مو چې وښوده هغه نشته.
+pager-newer-n|{{PLURAL:~{0}\u007Cنوی 1\u007Cنوي ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Cزوړ 1\u007Cزاړه ~{0}}}
+suppress|څارن
+booksources|د کتاب سرچينې
+booksources-search-legend|د کتابي سرچينو پلټنه
+booksources-search|پلټل
+booksources-text|دا لاندې د هغه وېبځايونو د تړنو لړليک دی چېرته چې نوي او زاړه کتابونه پلورل کېږي، او يا هم کېدای شي چې د هغه کتاب په هکله مالومات ولري کوم چې تاسو ورپسې لټېږۍ:
+specialloguserlabel|ترسره کوونکی:
+speciallogtitlelabel|موخه (سرليک يا کارن):
+log|يادښتونه
+all-logs-page|ټول عام يادښتونه
+logempty|په يادښت کې ورته څه نشته.
+log-title-wildcard|هغه سرليکونه پلټل چې په دې متن پيلېږي
+showhideselectedlogentries|د ټاکلو يادښتونو ښکارېدنه بدلول
+allpagesfrom|هغه مخونه کتل چې پېلېږي په:
+allpagesto|هغه مخونه کتل چې پای يې وي:
+allarticles|ټول مخونه
+allinnamespace|ټول مخونه (~{0} نوم-تشيال)
+allpagessubmit|ورځه
+allpagesprefix|هغه مخونه ښکاره کړه چې مختاړی يې وي:
+allpagesbadtitle|ورکړ شوی سرليک سم نه دی او يا هم د ژبو او يا د بېلابېلو ويکي گانو مختاړی لري. ستاسو په سرليک کې يو يا څو داسې ابېڅې دي کوم چې په سرليک کې نه شي کارېدلی.
+allpages-bad-ns|{{SITENAME}} د "~{0}" په نامه هېڅ کوم نوم-تشيال نه لري.
+allpages-hide-redirects|مخ گرځونې پټول
+cachedspecial-refresh-now|تر ټولو تازه کتل.
+categoriespagetext|دا لاندينۍ {{PLURAL:~{0}\u007Cوېشنيزه\u007Cوېشنيزې}} مخونه يا رسنيزې دوتنې لري.\nدلته [[Special:UnusedCategories\u007Cناکارېدلې وېشنيزې]] نه دي ښکاره شوي.\n[[Special:WantedCategories\u007Cغوښتلې وېشنيزې]] هم وگورۍ.
+categoriesfrom|هغه وېشنيزې کتل چې پېلېږي په:
+special-categories-sort-count|د شمېر له مخې اوډل
+special-categories-sort-abc|د ابېڅو له مخې اوډل
+deletedcontributions|ړنگېدلې کارن ونډې
+deletedcontributions-title|ړنگېدلې کارن ونډې
+sp-deletedcontributions-contribs|ونډې
+linksearch|د باندنيو تړنو پلټنه
+linksearch-pat|د پلټنې مخبېلگه:
+linksearch-ns|نوم-تشيال:
+linksearch-ok|پلټل
+linksearch-line|~{0} د ~{1} سره تړل شوی
+listusersfrom|هغه کارنان کتل چې نومونه يې پېلېږي په:
+listusers-submit|ښکاره کول
+listusers-noresult|هېڅ کوم کارن و نه موندل شو.
+listusers-blocked|(بنديز لگېدلی)
+activeusers|د فعالو کارنانو لړليک
+activeusers-intro|دا د هغو کارنانو لړليک دی چې په {{PLURAL:~{0}\u007Cتېرې\u007Cتېرو}} ~{0} {{PLURAL:~{0}\u007Cورځ\u007Cورځو}} کې يې ونډې ترسره کړي.
+activeusers-count|په {{PLURAL:~{2}\u007Cتېرې ورځ\u007Cتېرو ~{2} ورځو}} کې ~{0} {{PLURAL:~{0}\u007Cسمون\u007Cسمونونه}}
+activeusers-from|هغه کارنان کتل چې نومونه يې پېلېږي په:
+activeusers-hidebots|روباټونه پټول
+activeusers-hidesysops|پازوالان پټول
+activeusers-noresult|کارن و نه موندل شو.
+listgrouprights|د کارن ډلو رښتې
+listgrouprights-group|ډله
+listgrouprights-rights|رښتې
+listgrouprights-helppage|Help:د ډلې رښتې
+listgrouprights-members|(د غړو لړليک)
+listgrouprights-addgroup|{{PLURAL:~{1}\u007Cډله\u007Cډلې}} ورگډول: ~{0}
+listgrouprights-removegroup|{{PLURAL:~{1}\u007Cډله\u007Cډلې}} ليري کول: ~{0}
+listgrouprights-addgroup-all|ټولې ډلې ورگډول
+listgrouprights-removegroup-all|ټولې ډلې ليري کول
+listgrouprights-addgroup-self|خپل گڼون کې د {{PLURAL:~{1}\u007Cډله\u007Cډلې}} ورگډول: ~{0}
+listgrouprights-removegroup-self|خپل گڼون نه د {{PLURAL:~{1}\u007Cډله\u007Cډلې}} ليري کول: ~{0}
+listgrouprights-addgroup-self-all|خپل گڼون کې ټولې ډلې ورگډول
+listgrouprights-removegroup-self-all|خپل گڼون نه ټولې ډلې ليري کول
+listgrouprights-namespaceprotection-namespace|نوم-تشيال
+trackingcategories|موندونکې وېشنيزې
+trackingcategories-name|پيغام نوم
+mailnologin|د لېږلو پته نشته
+emailuser|کارن ته برېښليک لېږل
+emailuser-title-target|دې {{GENDER:~{0}\u007Cکارن}} ته برېښليک لېږل
+emailuser-title-notarget|کارن ته برېښليک لېږل
+emailpage|کارن ته برېښليک لېږل
+defemailsubject|د "~{0}" کارن لخوا د {{SITENAME}} برېښليک
+usermaildisabled|د کارن برېښليک ناچارند دی
+usermaildisabledtext|په دې ويکي تاسې نورو کارنانو ته برېښليک نه شی ورلېږلی
+noemailtitle|هېڅ کومه برېښليک پته نشته.
+nowikiemailtext|دې کارن د نورو کارنانو لخوا د برېښليک د نه ترلاسه کولو چاره خوښه کړې.
+emailtarget|د ترلاسه کوونکي کارن-نوم وټاپۍ
+emailusername|کارن-نوم:
+emailusernamesubmit|سپارل
+email-legend|د {{SITENAME}} يو بل کارن ته يو برېښليک ورلېږل
+emailfrom|لېږونکی
+emailto|اخيستونکی
+emailsubject|سکالو:
+emailmessage|پيغام:
+emailsend|لېږل
+emailccme|زما د پيغام يوه بېلگه دې ماته هم برېښليک شي.
+emailccsubject|~{0} ته ستاسې د پيغام لمېسه: ~{1}
+emailsent|برېښليک مو ولېږل شو
+emailsenttext|ستاسې برېښليکي پيغام ولېږل شو.
+emailuserfooter|دا برېښليک د ~{0} لخوا ~{1} ته د {{SITENAME}} په وېبځي کې د "کارن ته برېښليک لېږل" د کړنې په مرسته لېږل شوی.
+usermessage-summary|د غونډال پيغام پرېښودل.
+usermessage-editor|د غونډال پيغام رسونکی
+watchlist|کتنلړ
+mywatchlist|کتنلړ
+watchlistfor2|د ~{0} لپاره ~{1}
+nowatchlist|ستاسې کتنلړ کې څه نه شته.
+watchlistanontext|د خپل کتنلړ د توکو د سمولو او کتلو لپاره ~{0} ترسره کړۍ.
+watchnologin|غونډال کې نه ياست ننوتي.
+addwatch|کتنلړ کې ورگډول
+addedwatchtext|د "[[:~{0}]]" په نوم يو مخ ستاسې [[Special:Watchlist\u007Cکتنلړ]] کې ورگډ شو.\nپه راتلونکې کې چې په دغه مخ او د دې د خبرواترو مخ کې کوم بدلونونه راځي نو هغه به ستاسې کتنلړ کې ښکاري.
+removewatch|له کتنلړ نه غورځول
+removedwatchtext|د "[[:~{0}]]" مخ [[Special:Watchlist\u007Cستاسې کتنلړ]] نه لرې شو.
+watch|کتل
+watchthispage|همدا مخ کتل
+unwatch|نه کتل
+unwatchthispage|څارنې په ټپه درول
+notanarticle|يو منځپانګيز مخ نه دی
+watchlist-details|ستاسې کتنلړ کې {{PLURAL:~{0}\u007C~{0} مخ دی\u007C~{0} مخونه دي}}، د خبرو اترو مخونه مو بېل نه دي شمېرلي.
+wlheader-enotif|برېښليک خبرونه چارنه شوې.
+wlheader-showupdated|هغه مخونه چې ستاسې د کتلو نه وروسته بدلون موندلی په '''روڼ''' ليک په نښه شوي.
+wlnote|دلته لاندې {{PLURAL:~{0}\u007Cوروستی بدلون دی\u007Cوروستي '''~{0}''' بدلونونه دي}} چې په {{PLURAL:~{1}\u007Cتېر ساعت\u007Cتېرو '''~{1}''' ساعتونو}} کې تر ~{2} نېټې او ~{3} بجو پېښ شوي.
+wlshowlast|وروستي ~{0} ساعتونه ~{1} ورځې ښکاره کول
+watchlist-options|د کتنلړ خوښنې
+watching|د کتلو په حال کې...
+unwatching|د نه کتلو په حال کې...
+enotif_reset|ټول مخونه کتل شوي نخښه کول
+enotif_impersonal_salutation|{{SITENAME}} کارن
+enotif_subject_deleted|د {{SITENAME}} مخ ~{0} د {{gender:~{1}\u007C~{1}}} لخوا ړنگ شوی
+enotif_subject_created|د {{SITENAME}} مخ ~{0} د {{gender:~{1}\u007C~{1}}} لخوا جوړ شوی
+enotif_subject_moved|د {{SITENAME}} مخ ~{0} د {{gender:~{1}\u007C~{1}}} لخوا لېږدول شوی
+enotif_subject_restored|د {{SITENAME}} مخ ~{0} د {{gender:~{1}\u007C~{1}}} لخوا بيازېرمل شوی
+enotif_subject_changed|د {{SITENAME}} مخ ~{0} د {{gender:~{1}\u007C~{1}}} لخوا بدل شوی
+enotif_body_intro_deleted|د {{SITENAME}} مخ ~{0} په $ د {{gender:~{1}\u007C~{1}}} لخوا ړنگ شوی، ~{2} وگورۍ.
+enotif_body_intro_created|د {{SITENAME}} مخ ~{0} په $PAGEEDITDATE د {{gender:~{1}\u007C~{1}}} لخوا جوړ شوی، د اوسنۍ بڼې کتلو لپاره ~{2} وگورۍ.
+enotif_body_intro_moved|د {{SITENAME}} مخ ~{0} په $PAGEEDITDATE د {{gender:~{1}\u007C~{1}}} لخوا لېږدول شوی، د اوسنۍ بڼې کتلو لپاره ~{2} وگورۍ.
+enotif_body_intro_restored|د {{SITENAME}} مخ ~{0} په $PAGEEDITDATE د {{gender:~{1}\u007C~{1}}} لخوا بيازېرمل شوی، د اوسنۍ بڼې کتلو لپاره ~{2} وگورۍ.
+enotif_body_intro_changed|د {{SITENAME}} مخ ~{0} په $PAGEEDITDATE د {{gender:~{1}\u007C~{1}}} لخوا بدل شوی، د اوسنۍ بڼې کتلو لپاره ~{2} وگورۍ.
+enotif_lastvisited|د ټولو هغو بدلونونو د کتلو لپاره چې ستاسې د وروستي ځل راتگ نه وروسته پېښې شوي، ~{0} وگورۍ.
+enotif_lastdiff|د همدغه بدلون د کتلو لپاره ~{0} وگورۍ.
+enotif_anon_editor|ورکنومی کارن ~{0}
+enotif_body|قدرمن/قدرمنې $WATCHINGUSERNAME,\n\n\nپه $PAGEEDITDATE نېټه، د  $PAGEEDITOR لخوا د {{SITENAME}} مخ $PAGETITLE ته $CHANGEDORCREATED، د اوسنۍ بڼې لپاره $PAGETITLE_URL وگورۍ.\n\n$NEWPAGE\n\nد سمونگر لنډيز: $PAGESUMMARY $PAGEMINOREDIT\n\nContact the editor:\nبرېښليک: $PAGEEDITOR_EMAIL\nويکي: $PAGEEDITOR_WIKI\n\nد لا نورو بدلونونو په پېښېدو سره به تاسې ته د خبراوي بل برېښليک نه درلېږل کېږي، تر څو چې تاسې د همدې مخ نه کتنه و نه کړۍ.\nتاسې دا هم کولای شی چې په خپل کتنلړ کې د ټولو کتل شويو مخونو د خبراوي بيرغونه بيا له سره پرځای کړۍ.\n\n             ستاسې ملگری\n\nد {{SITENAME}} د خبرولو غونډال\n\n--\nد خپل کتنلړ د امستنو د بدلون لپاره،\n{{canonicalurl:{{#special:EditWatchlist}}}} نه ليدنه وکړۍ\n\nد خپل کتنلړ د مخونو د ړنگولو لپاره،\n$UNWATCHURL  نه ليدنه وکړۍ\n\nانگېرنې او نورې مرستې:\n$HELPPAGE
+created|جوړ شو
+changed|بدلېدلی
+deletepage|مخ ړنگول
+confirm|تاييد
+excontent|د مخ مېنځپانگه دا وه: "~{0}"
+excontentauthor|د مخ مېنځپانگه دا وه: "~{0}" (او يواځينی ونډه وال "[[Special:Contributions/~{1}\u007C~{1}]]" وه)
+delete-confirm|"~{0}" ړنگول
+delete-legend|ړنگول
+historywarning|گواښنه:''' دا مخ چې تاسې يې د ړنگېدو تکل لرئ نژدې ~{0} {{PLURAL:~{0}\u007Cبڼه\u007Cبڼې}} پېښليک لري:
+confirmdeletetext|تاسې د تل لپار يو مخ يا انځور د هغه ټول پېښليک سره د دغه توکبنسټ نه ړنگوئ. که چېرته تاسې ددې کړنې په پايله پوه ياست او يا ستاسې همدا کړنه د دې پاڼې د [[{{MediaWiki:Policy-url}}\u007Cتگلارې]] سره سمون خوري نو لطفاً د دې تاييد وکړی.
+actioncomplete|بشپړه کړنه
+actionfailed|کړنه نابريالۍ شوه
+deletedtext|"~{0}" ړنگ شوی.\nد نوو ړنگ شوو سوانحو لپاره ~{1} وگورۍ.
+dellogpage|د ړنگولو يادښت
+dellogpagetext|دا لاندې د نوو ړنگ شوو کړنو لړليک دی.
+deletionlog|د ړنگولو يادښت
+deletecomment|سبب:
+deleteotherreason|بل/اضافه سبب:
+deletereasonotherlist|بل سبب
+deletereason-dropdown|*د ړنگولو ټولگړی سبب\n** چټيات\n** د پوهې سره دښمني\n** د رښتو تېری\n** د ليکوال غوښتنه\n** ناسمه مخ گرځېدنه
+delete-edit-reasonlist|د ړنگولو سببونه سمول
+rollbacklink|په شابېول
+rollbacklinkcount|~{0} {{PLURAL:~{0}\u007Cسمون\u007Cسمونونه}} پرشابېول
+protectlogpage|د ژغورنې يادښت
+protectlogtext|دلته لاندې د ژغورل شويو مخونو د بدلونونو لړليک راغلی.\nد دم گړۍ فعالو مخ ژغورنو لړليک لپاره د [[Special:ProtectedPages\u007Cژغورل شويو مخونو لړليک]] وگورئ.
+protectedarticle|"[[~{0}]]" وژغورل شو
+modifiedarticleprotection|د "[[~{0}]]" لپاره د ژغورنې کچه بدله شوه
+movedarticleprotection|د ژغورنې امستنې له "[[~{1}]]" څخه "[[~{0}]]" ته ولېږدېدې
+protect-title|د "~{0}" لپاره د ژغورنې کچه بدلول
+prot_1movedto2|[[~{0}]]، [[~{1}]] ته ولېږدېده
+protect-legend|ژغورنه تاييدول
+protectcomment|سبب:
+protectexpiry|د پای نېټه:
+protect_expiry_invalid|د پای وخت ناسم دی.
+protect_expiry_old|د پای وخت په تېرمهال کې دی.
+protect-unchain-permissions|د لا ژغورلو خوښنې پرانيستل
+protect-text|تاسې کولای شی چې د '''~{0}''' مخ لپاره د ژغورلو کچه همدلته وگورۍ او بدلون پکې راولی.
+protect-locked-access|ستاسې گڼون دا اجازه نه لري چې د پاڼو د ژغورنې په کچه کې بدلون راولي.\nدلته د '''~{0}''' مخ لپاره اوسني شته امستنې دي:
+protect-cascadeon|د اوسمهال لپاره همدا مخ ژغورل شوی دا ځکه چې همدا مخ په {{PLURAL:~{0}\u007Cلانديني مخ\u007Cلانديني مخونو}} کې ورگډ دی چې {{PLURAL:~{0}\u007Cځوړاوبيزه ژغورنه يې چارنه ده\u007Cځوړاوبيزې ژغورنې يې چارنې دي}}.\nتاسې د همدې مخ د ژغورنې په کچه کې بدلون راوستلای شی، خو دا به ځوړاوبيزه ژغورنه اغېزمنه نه کړي.
+protect-default|ټول کارنان پرېښودل
+protect-fallback|يوازې د "~{0}" اجازې لرونکي کارنان پرېښودل
+protect-level-autoconfirmed|يوازې تاييد شوي کارنان
+protect-level-sysop|يواځې پازوالان پرېښودل
+protect-summary-cascade|ځوړاوبيز
+protect-expiring|په ~{0} (UTC) پای ته رسېږي
+protect-expiring-local|پای نېټه ~{0}
+protect-expiry-indefinite|نامحدوده
+protect-cascade|په همدې مخ کې د ټولو گډو مخونو څخه ژغورنه کېږي (ځوړاوبيزه ژغورنه)
+protect-cantedit|تاسې نه شی کولای چې د دې مخ د ژغورنې په کچه کې بدلون راولی، دا ځکه چې تاسې د دې مخ د سمولو اجازه نه لری.
+protect-othertime|بل وخت:
+protect-othertime-op|بل وخت
+protect-otherreason|بل/اضافي سبب:
+protect-otherreason-op|بل سبب
+protect-dropdown|*د ژغورلو عام سببونه\n** ډېره زياته ورانکاري\n** ډېره زياته سپام خپرونه\n** بې گټې سمونې او خپرونې\n** ډېر لوستونکی مخ
+protect-edit-reasonlist|د ژغورنې سببونه سمول
+protect-expiry-options|1 ساعت:1 hour,1 ورځ:1 day,1 اوونۍ:1 week,2 اوونۍ:2 weeks,1 مياشت:1 month,3 مياشتې:3 months,6 مياشتې:6 months,1 کال:1 year,نامحدوده:infinite
+restriction-type|اجازه:
+restriction-level|د بنديز کچه:
+minimum-size|وړه کچه
+maximum-size|د حد اکثر کچه:
+pagesize|(بايټونه)
+restriction-edit|سمول
+restriction-move|لېږدول
+restriction-create|جوړول
+restriction-upload|پورته کول
+restriction-level-sysop|بشپړ ژغورلی
+restriction-level-autoconfirmed|نيم ژغورلی
+restriction-level-all|هر يو پوړ
+undelete|ړنگ شوي مخونه کتل
+undeletepage|ړنگ شوي مخونه کتل او بيا پرځای کول
+undeletepagetitle|'''د [[:~{0}\u007C~{0}]] ړنگې شوې بڼې په لاندې توگه دي'''.
+viewdeletedpage|ړنگ شوي مخونه کتل
+undeletehistory|که تاسې همدا مخ بيازېرمه کوۍ، نو ټولې بڼې به يې پېښليک کې زېرمه شي.\nکه چېرته د ړنگېدو وروسته په همدې نوم يو بل نوی مخ جوړ شوی وي، نو زېرمه شوې بڼې به يې په پخواني پېښليک کې ښکاره شي.
+undeletebtn|بيازېرمل
+undeletelink|کتل/بيازېرمل
+undeleteviewlink|کتل
+undeleteinvert|ټاکنې سرچپه کول
+undeletecomment|سبب:
+undeletedfiles|{{PLURAL:~{0}\u007C1 دوتنه بيازېرمه شوه\u007C~{0} دوتنې بيازېرمه شوې}}
+undelete-header|د وروستيو ړنگو شوو مخونو لپاره [[Special:Log/delete\u007Cد ړنگولو يادښت]] وگورۍ.
+undelete-search-box|ړنگ شوي مخونه لټول
+undelete-search-prefix|هغه مخونه چې پيلېږي په:
+undelete-search-submit|پلټل
+undelete-show-file-submit|هو
+namespace|نوم-تشيال:
+invert|ټاکنې سرچپه کول
+tooltip-invert|په ټاکلو نومتشيالونو کې (او اړونده نومتشيال کې که په نښه شوی وي) د مخونو بدلونونو د پټولو لپاره دا بکس په نښه کړئ
+namespace_association|مل نومتشيال
+tooltip-namespace_association|د ټاکلي نومتشيال سره د سکالو نومتشيال اړوندولو او يا هم د خبرو اترو مخ شاملولو لپاره دا چوکاټ په نښه کړئ
+contributions|{{GENDER:~{0}\u007Cکارن}} ونډې
+contributions-title|د ~{0} کارن ونډې
+mycontris|ونډې
+contribsub2|د {{GENDER:~{2}\u007C~{0}}} لپاره (~{1})
+nocontribs|دې شرطونو سره سم بدلونونه و نه موندل شول.
+uctop|(اوسنی)
+month|له مياشتې د (او پخواني):
+year|له کال د (او پخواني):
+sp-contributions-newbies|د نوو گڼونونو ونډې ښکاره کول
+sp-contributions-newbies-sub|د نوو گڼونونو لپاره
+sp-contributions-newbies-title|د نويو گڼونونو لپاره د کارن ونډې
+sp-contributions-blocklog|د بنديز يادښت
+sp-contributions-deleted|ړنگېدلې کارن ونډې
+sp-contributions-uploads|پورته کېدنې
+sp-contributions-logs|يادښتونه
+sp-contributions-talk|خبرې اترې
+sp-contributions-userrights|د کارن رښتو سمبالښت
+sp-contributions-blocked-notice|دم مهال په دې کارن بنديز لگېدلی.\nد بنديز يادښت تازه مالومات په لاندې توگه دي:
+sp-contributions-search|د ونډو پلټنه
+sp-contributions-username|IP پته يا کارن-نوم:
+sp-contributions-toponly|يوازې هغه سمونونه چې تر ټولو تازه بڼې لري ښکاره کول
+sp-contributions-submit|پلټل
+whatlinkshere|د دې مخ تړنې
+whatlinkshere-title|هغه مخونه چې د "~{0}" سره تړنې لري
+whatlinkshere-page|مخ:
+linkshere|دغه لانديني مخونه د '''[[:~{0}]]''' سره تړنې لري:
+nolinkshere|د '''[[:~{0}]]''' سره هېڅ يو مخ هم تړنې نه لري .
+isredirect|د مخ گرځونې مخ
+istemplate|ورگډېدنه
+isimage|د دوتنې تړنه
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cپخوانی\u007Cپخواني ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cراتلونکی\u007Cراتلونکي ~{0}}}
+whatlinkshere-links|← تړنې
+whatlinkshere-hideredirs|مخ گرځونې ~{0}
+whatlinkshere-hidetrans|پايلې ~{0}
+whatlinkshere-hidelinks|تړنې ~{0}
+whatlinkshere-hideimages|د دوتنې تړنې ~{0}
+whatlinkshere-filters|چاڼگرونه
+block|په کارن بنديز لگول
+unblock|کارن له بنديزه وېستل
+blockip|په {{GENDER:~{0}\u007Cکارن}} بنديز لگول
+blockip-legend|په کارن بنديز لگول
+blockiptext|د لاندينۍ فورمې په کارولو سره تاسې يو کارن او يا هم يوې ځانگړې IP پتې باندې د ليکلو بنديزونه لگولی شی.  \nدا بايد د پوهې سره دښمنۍ او ورانکارۍ د مخنيولو په تکل او د پښتو ويکيپېډيا د [[{{MediaWiki:Policy-url}}\u007Cتگلارې]] سره سم پلي شي.\nد بنديز لپاره مو يو ځانگړی دليل لاندې روښانه کړئ (د ساري په توگه، هغه مخونو ښکاره کول چې ورانکاري په کې ترسره شوې).
+ipaddressorusername|IP پته يا کارن نوم
+ipbexpiry|د پای نېټه:
+ipbreason|سبب:
+ipbreason-dropdown|*د بنديز ټولگړي سببونه\n** د ناسمو مالوماتو خپرول\n** د مخونو د مېنځپانگې ړنگول\n** په مخونو کې د باندنيو وېبځايونو بېکاره سپام تړنې ځايول\n** په مخونو کې بې مانا/چټياټ ځايول\n** په مخونو کې ناندرۍ راپارېدنې/د تاوتريخوالي خپرېدو ته هڅول\n** د گڼ شمېر گڼونونو نه ناوړه گټه اخيستل\n** نه مننونکی کارن-نوم کارول
+ipb-hardblock|د همدغې IP پتې کارونکو کارنانو مخنيوی کول
+ipbcreateaccount|د گڼون جوړولو مخنيول
+ipbemailban|د کارن لخوا په برېښليک رالېږلو بنديز
+ipbenableautoblock|په اتوماتيکه توگه د کارن په وروستنۍ IP پتې چې کارن کارولې، او هر هغو IP پتو باندې چې کارن د سمون هڅه ورباندې کړې بنديز لگول
+ipbsubmit|په دې کارن بنديز لگول
+ipbother|بل وخت:
+ipboptions|2 ساعتونه:2 hours,1 ورځ:1 day,3 ورځې:3 days,1 اوونۍ:1 week,2 اوونۍ:2 weeks,1 مياشت:1 month,3 مياشتې:3 months,6 مياشتې:6 months,1 کال:1 year,نامحدوده:infinite
+ipbhidename|کارن-نوم له سمون او لړليکونو پټول
+ipbwatchuser|د دې کارن د خبرو اترو مخ او کارن مخ کتل
+ipb-disableusertalk|د بنديز لگېدو سره دې د کارن د خبرو اترو مخ د سمولو مخنيوی هم پلي شي
+ipb-confirm|د بنديز تاييد
+badipaddress|ناسمه IP پته
+blockipsuccesssub|بنديز په برياليتوب سره ولگېده
+blockipsuccesstext|په [[Special:Contributions/~{0}\u007C~{0}]] بنديز لگېدلی.<br />\nد بنديزونو د څارلو لپاره [[Special:BlockList\u007Cبنديز لړليک]] وگورۍ.
+ipb-edit-dropdown|د بنديز سببونه سمول
+ipb-unblock-addr|له ~{0} بنديز ليرې کول
+ipb-unblock|له يوه کارن-نوم يا IP پتې بنديز ليري کول
+ipb-blocklist|شته بنديزونه کتل
+ipb-blocklist-contribs|د {{GENDER:~{0}\u007C~{0}}} ونډې
+unblockip|کارن له بنديزه وېستل
+unblockiptext|د لاندې فورمې په کارولو سره يو بنديز شوي کارن يا آی پي پتې ته د ليکلو لاسرسی ورکولی شی.
+ipusubmit|دا بنديز ليرې کول
+unblocked|له [[User:~{0}\u007C~{0}]] بنديز ليري شو
+unblocked-range|له ~{0} بنديز ليرې شو
+blocklist|بنديز لگېدلي کارنان
+ipblocklist|بنديز لگېدلي کارنان
+ipblocklist-legend|يو بنديز شوی کارن موندل
+blocklist-userblocks|گڼون بنديزونه پټول
+blocklist-tempblocks|لنډمهاله بنديزونه پټول
+blocklist-addressblocks|يواځې آی پي بنديزونه پټول
+blocklist-timestamp|وخت ټاپه
+blocklist-target|موخه
+blocklist-expiry|پای نېټه
+blocklist-by|بنديز لگونکی پازوال
+blocklist-reason|سبب
+ipblocklist-submit|پلټل
+ipblocklist-localblock|سيمه ايز بنديز
+ipblocklist-otherblocks|{{PLURAL:~{0}\u007Cبل بنديز\u007Cنور بنديزونه}}
+infiniteblock|نامحدوده
+expiringblock|په ~{0} نېټه، ~{1} بجو پای ته رسېږي
+anononlyblock|يواځې ورکنومی
+createaccountblock|په گڼون جوړولو بنديز لگېدلی
+emailblock|پر برېښليک بنديز ولګېد
+blocklist-nousertalk|د خبرواترو خپل مخ نه شی سمولای
+ipblocklist-empty|د بنديز لړليک تش دی
+blocklink|بنديز لگول
+unblocklink|بنديز لرې کول
+change-blocklink|د بنديز بدلون
+contribslink|ونډې
+emaillink|برېښليک لېږل
+autoblocker|په اتوماتيک ډول ستاسو مخنيوی شوی دا ځکه چې ستاسو IP پته وروستی ځل د "[[User:~{0}\u007C~{0}]]" له خوا کارېدلې. او د ~{0} د مخنيوي سبب دا دی: "~{1}"
+blocklogpage|د بنديز يادښت
+blocklog-showlog|په همدې کارن له پخوا څخه بنديز لگېدلی.\nد بنديز يادښت همدلته لاندې د سرچينې په توگه راغلی:
+blocklog-showsuppresslog|په همدې کارن له پخوا څخه بنديز لگېدلی او پټ شوی.\nد بنديز ځپل شوی يادښت همدلته لاندې د سرچينې په توگه راغلی:
+blocklogentry|په [[~{0}]] بنديز لگېدلی چې د بنديز د پای وخت يې ~{1} ~{2} دی
+unblocklogentry|بنديز ليرې شو ~{0}
+block-log-flags-anononly|يواځې ورکنومي کارنان
+block-log-flags-nocreate|د گڼون جوړول ناچارن شوی
+block-log-flags-noemail|ددې برېښليک مخه نيول شوی
+block-log-flags-nousertalk|خپل د خبرو اترو مخ نه شي سمولای
+block-log-flags-hiddenname|پټ کارن-نوم
+ipb_already_blocked|پر "~{0}" د پخوا نه بنديز دی
+ipb-needreblock|پر ~{0} د پخوا نه بنديز لگېدلی.\nآيا تاسې د امستنو بدلول غواړۍ؟
+ipb-otherblocks-header|{{PLURAL:~{0}\u007Cبل بنديز\u007Cنور بنديزونه}}
+lockdb|توکبنسټ تړل
+unlockdb|توکبنسټ پرانيستل
+lockconfirm|هو، زه د توکبنسټ تړل غواړم.
+unlockconfirm|هو، زه د توکبنسټ پرانيستل غواړم.
+lockbtn|توکبنسټ تړل
+unlockbtn|توکبنسټ پرانيستل
+databasenotlocked|توکبنسټ نه دی تړل شوی.
+move-page|~{0} لېږدول
+move-page-legend|مخ لېږدول
+movepagetext|د لاندينۍ فورمې په کارولو سره تاسې د يوه مخ نوم بدلولی شی، چې په همدې توگه به د يوه مخ ټول پېښليک د هغه د نوي نوم سرليک ته ولېږدېږي.\nد يوه مخ، پخوانی نوم به د نوي نوم ورگرځونکی مخ وگرځي او نوي سرليک ته به وگرځولی شي.\nهغه تړنې چې په زاړه مخ کې دي په هغو کې به هېڅ کوم بدلون را نه شي;\n[[Special:BrokenRedirects\u007Cد ماتو مخ گرځونو]] يا [[Special:DoubleRedirects\u007Cدوه ځلي مخ گرځونو]] د ستونزو د پېښېدو په خاطر ځان ډاډه کړی چې ستاسې مخ گرځونې ماتې يا دوه ځله نه وي.\nدا ستاسې پازه ده چې ځان په دې هم ډاډمن کړی چې آيا هغه تړنې کوم چې د يو مخ سره پکار دي چې وي، همداسې په پرله پسې توگه پېيلي او خپل موخن ځايونو سره اړونده دي.\n\nپه ياد مو اوسه چې يو مخ به '''هېڅکله''' و نه لېږدېږي که چېرته د پخوا نه په هماغه نوم يو مخ شتون ولري، خو که چېرته يو مخ تش وه او يا هم يوه مخ گرځونه چې پېښليک کې يې بدلون نه وي راغلی. نو دا په دې مانا ده چې تاسې کولای شی چې د يو مخ نوم بېرته هماغه پخواني نوم ته بدل کړی چې د پخوا نه يې درلوده، که چېرته تاسې تېرووځۍ نو په داسې حال کې تاسې نه شی کولای چې د يوه مخ پر سر يو څه وليکۍ.\n\n'''گواښنه!'''\nيوه نوي نوم ته د مخونو د نوم بدلون کېدای شي چې په نامتو مخونو کې بنسټيزه او نه اټکل کېدونکی بدلونونه رامېنځ ته کړي;\nمخکې له دې نه چې پرمخ ولاړ شی، لطفاُ لومړی خپل ځان په دې ډاډه کړی چې تاسې ددغې کړنې په پايلو ښه پوهېږۍ.
+movepagetext-noredirectfixer|د لاندينۍ فورمې په کارولو سره تاسې د يوه مخ نوم بدلولی شی، چې په همدې توگه به د يوه مخ ټول پېښليک د هغه د نوي نوم سرليک ته ولېږدېږي.\nد يوه مخ، پخوانی نوم به د نوي نوم ورگرځونکی مخ وگرځي او نوي سرليک ته به وگرځولی شي.\n\n[[Special:BrokenRedirects\u007Cد ماتو مخ گرځونو]] يا [[Special:DoubleRedirects\u007Cدوه ځلي مخ گرځونو]] د ستونزو د پېښېدو په خاطر ځان ډاډه کړی چې ستاسې مخ گرځونې ماتې يا دوه ځله نه وي.\nدا ستاسې پازه ده چې ځان په دې هم ډاډمن کړی چې آيا هغه تړنې کوم چې د يو مخ سره پکار دي چې وي، همداسې په پرله پسې توگه پېيلي او خپل د موخې ځايونو سره اړونده دي که نه.\n\nپه ياد مو اوسه چې يو مخ به '''هېڅکله''' و نه لېږدېږي که چېرته د پخوا نه په هماغه نوم يو بل مخ شتون ولري، خو که چېرته يو مخ تش وه او يا هم يوه مخ گرځونه چې پېښليک کې يې بدلون نه وي راغلی. نو دا په دې مانا ده چې تاسې کولای شی چې د يو مخ نوم بېرته هماغه پخواني نوم ته بدل کړی چې د پخوا نه يې درلوده، که چېرته تاسې تېرووځۍ نو په داسې حال کې تاسې نه شی کولای چې د يوه مخ پر سر يو څه وليکۍ.\n\n'''گواښنه!'''\nيوه نوي نوم ته د مخونو د نوم بدلون کېدای شي چې په نامتو مخونو کې بنسټيزه او نه اټکل کېدونکي بدلونونه رامېنځ ته کړي; مخکې له دې نه چې پرمخ ولاړ شی، لطفاُ لومړی خپل ځان په دې ډاډه کړی چې تاسې ددغې کړنې په پايلو ښه پوهېږۍ.
+movepagetalktext|همدې مخ ته اړونده د خبرواترو مخ هم په اتوماتيک ډول لېږدول کېږي '''خو که چېرته:'''\n*په نوي نوم د پخوا نه د خبرواترو يو مخ شتون ولري، او يا هم\n*تاسې ته لاندې ورکړ شوی څلورڅنډی په نښه شوی وي.\n\nنو په هغه وخت کې پکار ده چې د خبرواترو د مخ لېږدونه او د نوي مخ سره د يوځای کولو کړنه په لاسي توگه ترسره کړی.
+movearticle|مخ لېږدول
+moveuserpage-warning|'''گواښنه:''' تاسې د يو کارن مخ د لېږدولو په حال کې ياست. لطفاً دا مه هېروۍ چې يوازې همدا مخ به ولېږدول شي او د کارن نوم به ''نه'' بدلېږي.
+movenologintext|ددې لپاره چې يو مخ ولېږدوی، نو تاسې بايد يو ثبت شوی کارن او غونډال کې [[Special:UserLogin\u007Cننوتي]] اوسۍ.
+movenotallowed|تاسې د مخونو د لېږدولو پرېښله نلرۍ.
+movenotallowedfile|تاسې د دوتنو د لېږدولو پرېښله نلرۍ.
+cant-move-user-page|تاسې د کارن مخونو د لېږدولو پرېښله نلرۍ (د څېرمه مخونو نه پرته).
+cant-move-to-user-page|تاسې د يو کارن مخ ته د يوه بل مخ د لېږدولو پرېښله نلرۍ (د يو کارن د څېرمه مخ نه پرته).
+newtitle|نوي سرليک ته:
+move-watch|همدا مخ کتل
+movepagebtn|مخ لېږدول
+pagemovedsub|لېږدول په برياليتوب سره ترسره شوه
+movepage-moved|'''د "~{0}" په نامه دوتنه، "~{1}" ته ولېږدېده'''
+movepage-moved-redirect|يو مخ گرځونی جوړ شو.
+movepage-moved-noredirect|د يو مخ ورگرځېدنې جوړېدنه وځپل شوه.
+articleexists|په همدې نوم يوه بله پاڼه د پخوا نه شته او يا خو دا نوم چې تاسې ټاکلی سم نه دی. لطفاً يو بل نوم وټاکۍ.
+movetalk|د خبرو اترو اړونده مخ ورسره لېږدول
+movepage-page-moved|د ~{0} مخ ~{1} ته ولېږدل شو.
+movepage-page-unmoved|د ~{0} مخ ~{1} ته و نه لېږدل شو.
+movelogpage|د لېږدولو يادښت
+movelogpagetext|دا لاندې د لېږدول شوو مخونو لړليک دی.
+movesubpage|{{PLURAL:~{0}\u007Cڅېرمه مخ\u007Cڅېرمه مخونه}}
+movesubpagetext|همدا مخ ~{0} {{PLURAL:~{0}\u007Cڅېرمه مخ لري چې لاندې ښودل شوی\u007Cڅېرمه مخونه لري چې لاندې ښودل شوي}}.
+movenosubpage|دا مخ کوم څېرمه مخونه نه لري.
+movereason|سبب:
+revertmove|په څټ گرځول
+delete_and_move|ړنگول او لېږدول
+delete_and_move_text|== د ړنگولو اړتيا ==\nد "[[:~{0}]]" په نوم مخ له پخوا څخه شته.\nآيا د دې په ړنگولو سره لېږدولو ته لاره هوارول غواړۍ؟
+delete_and_move_confirm|هو, دا مخ ړنگ کړه
+immobile-source-page|دا مخ نه لېږدېدنونکی دی
+imageinvalidfilename|د موخنې دوتنې نوم سم نه دی
+move-leave-redirect|يو ورگرځونکی مخ پر ځای پرېښودل
+move-over-sharedrepo|== دوتنه شته ==\nد [[:~{0}]] دوتنه په يو گډ زېرمتون کې شته. دې نوم ته د يوې دوتنې لېږدون به د گډې دوتنې د باطلېدلو سبب شي.
+export|مخونه صادرول
+exportall|ټول مخونه صادرول
+export-submit|صادرول
+export-addcattext|مخونو د ورگډولو وېشنيزه:
+export-addcat|ورگډول
+export-addnstext|د نوم-تشيال نه مخونه ورگډول:
+export-addns|ورگډول
+export-download|د دوتنې په بڼه خوندي کول
+export-templates|کينډۍ نغاړل
+allmessages|د غونډال پيغامونه
+allmessagesname|نوم
+allmessagesdefault|تلواليزه پيغام متن
+allmessagescurrent|اوسنی پيغام متن
+allmessagestext|دا د مېډياويکي په نوم-تشيال کې د غونډال د پيغامونو لړليک دی.\nکه چېرته تاسې د ميډياويکي په ځايتابه کې ونډې ترسره کول غواړۍ نو لطفاً [https://www.mediawiki.org/wiki/Special:MyLanguage/Localisation د ميډياويکي ځايتابه] او [//translatewiki.net translatewiki.net] څخه ليدنه وکړۍ.
+allmessagesnotsupportedDB|'''Special:Allmessages''' ترېنه کار نه اخيستل کېږي ځکه چې '''$wgUseDatabaseMessages''' مړ دی.
+allmessages-filter-legend|چاڼگر
+allmessages-filter-unmodified|نابدلېدلي
+allmessages-filter-all|ټول
+allmessages-filter-modified|بدلېدلي
+allmessages-prefix|د مختاړي پر بنسټ اړونده چاڼگر:
+allmessages-language|ژبه:
+allmessages-filter-submit|ورځه
+allmessages-filter-translate|ژباړل
+filemissing|دوتنه ورکه ده
+thumbnail_error|د  بټنوک د جوړېدنې ستونزه: ~{0}
+import-interwiki-sourcewiki|د ويکي سرچينه:
+import-interwiki-sourcepage|د سرچينې مخ:
+import-interwiki-history|د دې مخ د پېښليک ټولې بڼې لمېسل
+import-interwiki-templates|ټولې کينډۍ نغاړل
+import-interwiki-submit|رالېږدول
+import-interwiki-namespace|د موخې نوم-تشيال:
+import-upload-filename|د دوتنې نوم:
+import-comment|تبصره:
+import-revision-count|~{0} {{PLURAL:~{0}\u007Cبڼه\u007Cبڼې}}
+importnopages|د رالېږدولو لپاره مخونه نشته.
+importlogpage|د واردولو يادښت
+import-logentry-upload-detail|~{0} {{PLURAL:~{0}\u007Cبڼه\u007Cبڼې}} راولېږدېدې
+javascripttest|د جاوا سکرېپټ آزمېښت
+tooltip-pt-userpage|ستاسې کارن مخ
+tooltip-pt-mytalk|ستاسې د خبرواترو مخ
+tooltip-pt-preferences|زما غوره توبونه
+tooltip-pt-watchlist|د هغه مخونو لړليک چې تاسې يې د بدلون لپاره څاری
+tooltip-pt-mycontris|ستاسې د ونډو لړليک
+tooltip-pt-login|تاسې ته په غونډال کې د ننوتلو سپارښتنه کوو، که څه هم چې دا يو اړين کار نه دی.
+tooltip-pt-logout|وتل
+tooltip-pt-createaccount|تاسې ته د يو گڼون د جوړولو او بيا غونډال کې ورننوتلو سپارښتنه کېږي؛ که څه هم چې دا يو اړين کار نه دی
+tooltip-ca-talk|د مخ د مېنځپانگې په اړه خبرې اترې
+tooltip-ca-edit|تاسې همدا مخ سمولای شی. لطفاً د ليکنې د خوندي کولو دمخه، د همدې ليکنې مخليدنه وگورۍ.
+tooltip-ca-addsection|يوه نوې برخه پيلول
+tooltip-ca-viewsource|دا مخ ژغورل شوی. تاسې کولای شی چې د دې مخ سرجينه وگورۍ.
+tooltip-ca-history|د دې مخ پخوانۍ بڼې
+tooltip-ca-protect|دا مخ ژغورل
+tooltip-ca-unprotect|د دې مخ ژغورنه بدلول
+tooltip-ca-delete|دا مخ ړنگول
+tooltip-ca-move|همدا مخ لېږدول
+tooltip-ca-watch|دا مخ په خپل کتنلړکې گډول
+tooltip-ca-unwatch|همدا مخ خپل کتنلړ نه لرې کول
+tooltip-search|{{SITENAME}} پلټل
+tooltip-search-go|په دې نوم د کټ مټ ورته مخ شتون په صورت کې، هماغه مخ ته ورځه
+tooltip-search-fulltext|په مخونو کې دا متن وپلټه
+tooltip-p-logo|لومړي مخ ته ورتلل
+tooltip-n-mainpage|لومړي مخ ته ورتلل
+tooltip-n-mainpage-description|آرنی مخ کتل
+tooltip-n-portal|د پروژې په اړه، تاسې څه شيان او چېرته کولای شی چې وې مومۍ
+tooltip-n-currentevents|د اوسنيو پېښو اړونده د هغوی د شاليد مالومات موندل
+tooltip-n-recentchanges|په ويکي کې د وروستي بدلونو لړليک.
+tooltip-n-randompage|يو ناټاکلی مخ ښکاره کوي
+tooltip-n-help|د موندلو ځای
+tooltip-t-whatlinkshere|د ويکي د ټولو هغو مخونو لړليک چې همدې مخ سره تړنې لري
+tooltip-t-recentchangeslinked|له دې مخ سره د تړل شويو مخونو وروستي بدلونونه
+tooltip-feed-rss|د همدې مخ د آر اس اس کتنه
+tooltip-feed-atom|د دې مخ د اټوم کتنې
+tooltip-t-contributions|د دې کارن د ونډو لړليک کتل
+tooltip-t-emailuser|دې کارن ته يو برېښليک لېږل
+tooltip-t-upload|دوتنې پورته کول
+tooltip-t-specialpages|د ټولو ځانگړو پاڼو لړليک
+tooltip-t-print|د دې مخ چاپي بڼه
+tooltip-t-permalink|د دې مخ د همدې بڼې تلپاتې تړنه
+tooltip-ca-nstab-main|د مخ مېنځپانگه کتل
+tooltip-ca-nstab-user|د کارن پاڼه کتل
+tooltip-ca-nstab-media|د رسنۍ مخ کتل
+tooltip-ca-nstab-special|دا يو ځانگړی مخ دی، تاسې په دې مخ کې سمون نه شی کولای.
+tooltip-ca-nstab-project|د پروژې مخ کتل
+tooltip-ca-nstab-image|د دوتنې مخ کتل
+tooltip-ca-nstab-mediawiki|د غونډال پيغامونه کتل
+tooltip-ca-nstab-template|کينډۍ کتل
+tooltip-ca-nstab-help|لارښود مخ کتل
+tooltip-ca-nstab-category|د وېشنيزې مخ ښکاره کول
+tooltip-minoredit|دا لکه يوه وړه سمونه په نښه کوي[alt-i]
+tooltip-save|ستاسې بدلونونه خوندي کوي
+tooltip-preview|ستاسې بدلونونه ښکاره کوي, لطفاً دا کړنه د خوندي کولو دمخه وکاروۍ! [alt-p]
+tooltip-diff|دا هغه بدلونونه چې تاسې په متن کې ترسره کړي، ښکاره کوي. [alt-v]
+tooltip-compareselectedversions|د همدې مخ د دوو ټاکل شويو بڼو تر مېنځ توپيرونه وگورۍ.
+tooltip-watch|دا مخ ستاسې کتنلړ کې ورگډوي [alt-w]
+tooltip-watchlistedit-normal-submit|سرليکونه غورځول
+tooltip-watchlistedit-raw-submit|کتنلړ اوسمهالول
+tooltip-upload|د پورته کولو پيل
+tooltip-rollback|په همدې مخ کې "په شابېول" د وروستني ونډوال سمون (سمونونه) په يوه کلېک په څټ ورگرځوي.
+tooltip-undo|"ناکړ" همدا سمون پر شا گرځوي او د سمون کړکۍ د مخکتنې په بڼه پرانيزي.\nدا کړنه د لنډيز په برخه کې د سمونونو د سببونو د ورگډولو آسانتيا برابروي.
+tooltip-preferences-save|غوره توبونه خوندي کول
+tooltip-summary|يو لنډ لنډيز کښل
+anonymous|د {{SITENAME}} {{PLURAL:~{0}\u007Cورکنومی کارن\u007Cورکنومي کارنان}}
+siteuser|د {{SITENAME}} کارن ~{0}
+anonuser|د {{SITENAME}} ورکنومی کارن ~{0}
+lastmodifiedatby|دا مخ وروستی ځل د ~{2} لخوا په ~{1}، ~{0} بدلون موندلی.
+others|نور
+siteusers|د {{SITENAME}} {{PLURAL:~{1}\u007Cکارن\u007Cکارنان}} ~{0}
+anonusers|د {{SITENAME}} {{PLURAL:~{1}\u007Cورکنومی کارن\u007Cورکنومي کارنان}} ~{0}
+creditspage|د دې مخ کرېډټونه
+simpleantispam-label|سپام-ضد څارنه.\nدا برخه <strong>مه </strong> ډکوئ!
+pageinfo-title|د "~{0}" مالومات
+pageinfo-header-basic|بنسټيز مالومات
+pageinfo-header-edits|د سمون پېښليک
+pageinfo-header-restrictions|مخ ژغورنه
+pageinfo-header-properties|د مخ ځانتياوې
+pageinfo-display-title|ښکارېدونکی سرليک
+pageinfo-default-sort|تلواليزه اوډن کونجۍ
+pageinfo-length|مخ اوږدوالی (په بايټونو)
+pageinfo-article-id|د مخ پېژند
+pageinfo-language|د مخ د مېنځپانگې ژبه
+pageinfo-content-model|د مخ مېنځپانگې جوړښت
+pageinfo-robot-policy|ليکلړ اوډنه د روباټونو لخوا
+pageinfo-robot-index|پرېښل
+pageinfo-robot-noindex|ناپرېښل
+pageinfo-watchers|د مخ د کتونکو شمېر
+pageinfo-few-watchers|له ~{0} څخه لږ {{PLURAL:~{0}\u007Cکتونکی\u007Cکتونکي}}
+pageinfo-redirects-name|دې مخ ته د ورگرځونو شمېر
+pageinfo-subpages-name|دې مخ ته څېرمه مخونه
+pageinfo-firstuser|مخ جوړونکی
+pageinfo-firsttime|د مخ جوړېدنې نېټه
+pageinfo-lastuser|وروستنی سمونگر
+pageinfo-lasttime|د سمون وروستنۍ نېټه
+pageinfo-edits|د ټولو سمونونو شمېر
+pageinfo-authors|د بېلابېلو ليکوالو ټولټال شمېر
+pageinfo-recent-edits|د وروستني سمونونو شمېر (په تېرو ~{0} کې)
+pageinfo-recent-authors|د بېلابېلو ليکوالو وروستنی شمېر
+pageinfo-toolboxlink|د مخ مالومات
+pageinfo-redirectsto-info|مالومات
+pageinfo-contentpage|مېنځپانگيز مخ کې شمېرل شوی
+pageinfo-contentpage-yes|هو
+pageinfo-protect-cascading-yes|هو
+pageinfo-category-info|د وېشنيزې مالومات
+pageinfo-category-pages|د مخونو شمېر
+pageinfo-category-subcats|د څېرمه وېشنيزو شمېر
+pageinfo-category-files|د دوتنو شمېر
+markaspatrolleddiff|دا مخ څارل شوی په نخښه کول
+markaspatrolledtext|دا مخ څارل شوی په نخښه کول
+markedaspatrolled|دا مخ څارل شوی په نخښه کول
+filedeleteerror-short|د دوتنې د ړنگولو ستونزه: ~{0}
+filedeleteerror-long|د دوتنې په ړنگولو کې تېروتنې پېښې شوې:\n\n~{0}
+previousdiff|تېر توپير ←
+nextdiff|بل توپير →
+thumbsize|د بټنوک کچه:
+widthheightpage|~{0} × ~{1}, ~{2} {{PLURAL:~{2}\u007Cمخ\u007Cمخونه}}
+file-info|د دوتنې کچه: ~{0}, MIME ډول: ~{1}
+file-info-size|~{0} × ~{1} پېکسل, د دوتنې کچه: ~{2}, MIME بڼه: ~{3}
+file-nohires|تر دې کچې لوړې بېلن نښې نشته.
+svg-long-desc|SVG دوتنه، نومېنلي ~{0} × ~{1} پېکسل، د دوتنې کچه: ~{2}
+show-big-image|اصلي دوتنه
+show-big-image-preview|د همدې ليدنې کچه: ~{0}.
+show-big-image-other|{{PLURAL:~{1}\u007Cبل ژورليد\u007Cنورې ژورليدنې}}: ~{0}.
+show-big-image-size|~{0} × ~{1} پېکسل
+file-info-gif-frames|~{0} {{PLURAL:~{0}\u007Cچوکاټ\u007Cچوکاټونه}}
+file-info-png-repeat|~{0} {{PLURAL:~{0}\u007Cځل\u007Cځله}} وغږېده
+file-info-png-frames|~{0} {{PLURAL:~{0}\u007Cچوکاټ\u007Cچوکاټونه}}
+newimages|د نوو دوتنو انځورتون
+imagelisttext|دلته لاندې د '''~{0}''' {{PLURAL:~{0}\u007Cدوتنه\u007Cدوتنې}} يو لړليک دی چې اوډل شوي ~{1}.
+newimages-summary|همدا ځانگړی مخ، وروستنۍ پورته شوې دوتنې ښکاره کوي.
+newimages-legend|چاڼگر
+newimages-label|د دوتنې نوم (يا د دې برخه):
+noimages|د کتلو لپاره څه نشته.
+ilsubmit|پلټل
+bydate|د نېټې له مخې
+sp-newimages-showfrom|هغه نوې دوتنې چې په ~{0} په ~{1} بجو پيلېږي ښکاره کول
+hours-abbrev|~{0} گ
+seconds|{{PLURAL:~{0}\u007C~{0} ثانيه\u007C~{0} ثانيې}}
+minutes|{{PLURAL:~{0}\u007C~{0} دقيقه\u007C~{0} دقيقې}}
+hours|{{PLURAL:~{0}\u007C~{0} ساعت\u007C~{0} ساعتونه}}
+days|{{PLURAL:~{0}\u007C~{0} ورځ\u007C~{0} ورځې}}
+weeks|{{PLURAL:~{0}\u007C~{0} اونۍ\u007C~{0} اونۍ}}
+months|{{PLURAL:~{0}\u007C~{0} مياشت\u007C~{0} مياشتې}}
+years|{{PLURAL:~{0}\u007C~{0} کال\u007C~{0} کالونه}}
+just-now|همدا اوس
+hours-ago|~{0} {{PLURAL:~{0}\u007Cگړۍ\u007Cگړۍ}} دمخه
+minutes-ago|~{0} {{PLURAL:~{0}\u007Cدقيقه\u007Cدقيقې}} دمخه
+seconds-ago|~{0} {{PLURAL:~{0}\u007Cثانيه\u007Cثانيې}} دمخه
+monday-at|Monday at ~{0}
+yesterday-at|پرون په ~{0}
+bad_image_list|بڼه يې په لاندې توگه ده:\n\nيواځې د لړليک توکي (هغه کرښې چې پېلېږي پر *) په پام کې نيول شوي.\nبايد چې په يوه کرښه کې لومړنۍ تړنه د يوې خرابې دوتنې سره وي.\nپه يوې کرښې باندې هر ډول وروستۍ تړنې به د استثنا په توگه وگڼلای شي، د ساري په توگه هغه مخونو کې چې يوه دوتنه پر کرښه پرته وي.
+metadata|مېټاډاټا
+metadata-help|همدا دوتنه نور اضافه مالومات هم لري، چې کېدای شي ستاسې د گڼياليزې کامرې او يا هم د ځيرڅار په کارولو سره د گڼيالېدنې په وخت کې ورسره مل شوي.\nکه همدا دوتنه د خپل آرني دريځ څخه بدله شوې وي نو ځينې تفصيلونه به په بدل شوي دوتنه کې په بشپړه توگه نه وي.
+metadata-expand|غځېدلی تفصيل ښکاره کړی
+metadata-collapse|غځېدلی تفصيل پټ کړی
+metadata-fields|د انځور مېټاډاټا ډگرونه چې لړليک يې په همدې پيغام کې په لاندې توگه راغلی د انځور مخ په ښکارېدنه کې به هغه وخت ورگډ شي کله چې د مېټاډاټا لښتيال غځېږي.\nنور څه به په تلواليزه توگه پټ پاتې وي.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|سوروالی
+exif-imagelength|لوړوالی
+exif-orientation|لورموندنه
+exif-xresolution|څنډيز ژورليد
+exif-yresolution|ولاړيز ژورليد
+exif-stripoffsets|د انځور مالوماتځی
+exif-datetime|د دوتنې د بدلون وخت او نېټه
+exif-imagedescription|انځور سرليک
+exif-make|د کامرې جوړونکی
+exif-model|د کامرې ماډل
+exif-software|کارېدلې ساوترۍ
+exif-artist|ليکوال
+exif-copyright|د رښتو خاوند
+exif-exifversion|Exif بڼه
+exif-colorspace|رنگ تشيال
+exif-pixelydimension|د انځور سور
+exif-pixelxdimension|د انځور جگوالی
+exif-usercomment|د کارن تبصرې
+exif-relatedsoundfile|اړونده غږيزه دوتنه
+exif-datetimeoriginal|د اومتوک د جوړېدنې وخت او نېټه
+exif-datetimedigitized|د گڼياليز کېدنې وخت او نېټه
+exif-fnumber|F شمېره
+exif-lightsource|د رڼا سرچينه
+exif-flash|فلش
+exif-focallength|د عدسيې کانوني واټن
+exif-flashenergy|د فلش انرژي
+exif-filesource|د دوتنې سرچينه
+exif-whitebalance|د سپين رنگ توازن
+exif-gpsaltituderef|د لوړوالي سرچينه
+exif-gpsaltitude|لوړوالی
+exif-gpsspeedref|د سرعت يوون
+exif-gpsimgdirection|د انځور لوری
+exif-gpsareainformation|د جي پي اس د سيمې نوم
+exif-gpsdatestamp|د جي پي اس نېټه
+exif-jpegfilecomment|د JPEG دوتنې تبصرې
+exif-keywords|آروييونه
+exif-worldregiondest|د نړۍ ښکاره شوې سيمه
+exif-countrydest|ښکاره شوی هېواد
+exif-countrycodedest|هېوادنی کوډ ښوول شوی
+exif-provinceorstatedest|ولايت يا ايالت ښوول شوی
+exif-citydest|ښکاره شوی ښار
+exif-objectname|لنډ سرليک
+exif-headline|سرليک
+exif-source|سرچينه
+exif-contact|د اړيکو مالومات
+exif-writer|ليکوال
+exif-languagecode|ژبه
+exif-iimcategory|وېشنيزه
+exif-datetimeexpires|مه يې کاروۍ وروسته له
+exif-datetimereleased|خپرېدلی په
+exif-identifier|پېژندنه
+exif-lens|کارېدلې لېنز
+exif-serialnumber|د کامرې پرله پسې شمېره
+exif-cameraownername|د کامرې خاوند
+exif-label|نښکه
+exif-copyrighted|د رښتو دريځ
+exif-copyrightowner|د رښتو خاوند
+exif-usageterms|د کارولو شرايط
+exif-pngfilecomment|د PNG دوتنې تبصره
+exif-disclaimer|ردادعاليک
+exif-giffilecomment|د GIF دوتنې تبصره
+exif-copyrighted-true|په رښتو سمبال
+exif-copyrighted-false|د خپراوي د رښتو دريځ نه دی ټاکل شوی
+exif-unknowndate|ناڅرگنده نېټه
+exif-orientation-1|نورمال
+exif-componentsconfiguration-0|نشته دی
+exif-exposureprogram-2|نورماله پروګرام
+exif-subjectdistance-value|~{0} متره
+exif-meteringmode-0|ناجوت
+exif-meteringmode-1|منځالی
+exif-meteringmode-5|مخبېلگه
+exif-meteringmode-255|نور
+exif-lightsource-0|ناجوت
+exif-lightsource-1|د ورځې رڼا
+exif-lightsource-4|فلش
+exif-lightsource-9|ښه هوا
+exif-lightsource-10|ورېځ پوښلې هوا
+exif-lightsource-11|سيوری
+exif-lightsource-255|د رڼا بله سرچينه
+exif-flash-fired-0|فلش و نه ځلېده
+exif-focalplaneresolutionunit-2|انچه
+exif-sensingmethod-1|ناڅرګنده
+exif-customrendered-0|نورماله بهير
+exif-scenecapturetype-0|معيار
+exif-gaincontrol-0|هېڅ
+exif-contrast-0|نورمال
+exif-contrast-1|پوست
+exif-saturation-0|نورمال
+exif-sharpness-0|نورمال
+exif-sharpness-1|پوست
+exif-subjectdistancerange-0|ناجوت
+exif-subjectdistancerange-1|ماکرو
+exif-subjectdistancerange-2|نژدې ليدون
+exif-subjectdistancerange-3|لرې ليدون
+exif-gpsspeed-k|کيلومتره په يوه ساعت کې
+exif-gpsspeed-m|مايل په ساعت کې
+exif-gpsspeed-n|غوټې
+exif-gpsdestdistance-k|کيلومتر
+exif-gpsdestdistance-m|مايلونه
+exif-gpsdestdistance-n|سمندري مايلونه
+exif-gpsdop-good|ښه (~{0})
+exif-gpsdop-moderate|منځوی (~{0})
+exif-gpsdop-fair|نه ښه نه بد (~{0})
+exif-gpsdop-poor|خراب (~{0})
+exif-objectcycle-a|يوازې ګهيځ
+exif-objectcycle-p|يوازې ماښام
+exif-gpsdirection-t|سم لوری
+exif-gpsdirection-m|مقناطيسي لوری
+exif-ycbcrpositioning-1|منځنی
+exif-dc-contributor|ونډه وال
+exif-dc-date|نېټه (نېټې)
+exif-dc-publisher|خپرونکی
+exif-dc-relation|اړونده رسنۍ
+exif-dc-rights|رښتې
+exif-dc-source|د سرچينې رسنۍ
+exif-dc-type|د رسنۍ ډول
+exif-rating-rejected|رد شوی
+exif-isospeedratings-overflow|له 65535 لوی
+exif-iimcategory-ace|هنر، فرهنګ او تفريح
+exif-iimcategory-clj|جنايت او قانون
+exif-iimcategory-dis|غميزې او پېښې
+exif-iimcategory-fin|وټپوهنه او سوداګري
+exif-iimcategory-edu|زده کړې
+exif-iimcategory-evn|چاپېريال
+exif-iimcategory-hth|روغتيا
+exif-iimcategory-hum|بشري لېوالتيا
+exif-iimcategory-lab|کار
+exif-iimcategory-lif|ژوندتوګه او فارغ وختونه
+exif-iimcategory-pol|سياست
+exif-iimcategory-rel|دين او ګروهه
+exif-iimcategory-sci|ساينس او تخنيک
+exif-iimcategory-soi|ټولنيزې چارې
+exif-iimcategory-spo|سپورت
+exif-iimcategory-war|جگړه، تاوتريخوالی، او نارامي
+exif-iimcategory-wea|هوا
+exif-urgency-normal|نورمال (~{0})
+exif-urgency-low|لږ (~{0})
+exif-urgency-high|ډېر (~{0})
+namespacesall|ټول
+monthsall|ټول
+confirmemail|برېښليک پته تاييدول
+confirmemail_noemail|تاسې يوه سمه برېښليک پته نه ده ثبته کړې مهرباني وکړی [[Special:Preferences\u007Cد کارن غوره توبونه]] مو بدل کړۍ.
+confirmemail_send|يو تاييدي کوډ لېږل
+confirmemail_sent|تاييدي برېښليک ولېږل شو.
+confirmemail_oncreate|ستاسې برېښليک پتې ته يو تاييدي کوډ درولېږل شو.\nکه تاسې غونډال ته ورننوځی نو تاسې دې کوډ ته اړتيا نه لرۍ، خو تاسې هغه وخت همدې درلېږل شوي کوډ ته اړتيا لرۍ، کله چې په ويکي کې د برېښليک پر بنسټ نورې کړنې چارنول غواړی.
+confirmemail_needlogin|ددې لپاره چې ستاسې د برېښليک پتې پخلی وشي، تاسې ته پکار ده چې ~{0}.
+confirmemail_loggedin|اوس ستاسې د برېښليک پتې پخلی وشو.
+confirmemail_subject|د {{SITENAME}} د برېښليک پتې تاييد
+confirmemail_body|يو چا او يا هم کيدای شي چې تاسې پخپله، د ~{0} IP پتې نه،\nد "~{1}" په نامه يو گڼون په همدې بريښليک پتې د {{SITENAME}} په وېبځي کې ثبت کړی.\n\nدا چې موږ د دې پخلی وکړو چې آيا همدا گڼون په رښتيا ستاسې دی او د دې لپاره چې د همدې برېښليک لپاره په {{SITENAME}} وېبځي کې کړنې فعاله کړو، نو پخپل کتنمل کې لاندينۍ تړنه پرانيزۍ:\n\n~{2}\n\nکه چېرته تاسې همدا گڼون *نه وي ثبت کړی*، نو د برېښليک پتې د پخلي د ناگارلو لپاره همدا لاندې تړنه وڅارۍ:\n\n~{4}\n\nهمدا تاييدي شفر به په ~{3} پای ته ورسېږي او تر همدې مودې وروسته به نور و نه چلېږي.
+scarytranscludetoolong|[URL مو ډېر اوږد دی]
+recreate|بياجوړول
+confirm_purge_button|ښه
+confirm-purge-top|آيا د همدې مخ حافظه سپينول غواړۍ؟
+confirm-watch-button|ښه
+confirm-unwatch-button|ښه
+brackets|[~{0}]
+imgmultipageprev|→ تېر مخ
+imgmultipagenext|راتلونکی مخ →
+imgmultigo|ورځه!
+imgmultigoto|د ~{0} مخ ته ورځه
+img-lang-default|(تلواليزه ژبه)
+img-lang-go|ورځه
+ascending_abbrev|ختند
+descending_abbrev|مخښکته
+table_pager_next|بل مخ
+table_pager_prev|تېر مخ
+table_pager_first|لومړی مخ
+table_pager_last|وروستی مخ
+table_pager_limit|په يوه مخ ~{0} توکي ښکاره کړی
+table_pager_limit_label|په هر مخ د توکو شمېر:
+table_pager_limit_submit|ورځه
+table_pager_empty|بې پايلو
+autosumm-blank|مخ تش شو
+autosumm-replace|دا مخ د '~{0}' پرځای راوستل
+autoredircomment|[[~{0}]] ته وروگرځېده
+autosumm-new|د "~{0}" تورو مخ جوړ شو
+size-bytes|~{0} بايټ
+size-kilobytes|~{0} کيلوبايټ
+size-megabytes|~{0} مېگابايټ
+size-gigabytes|~{0} ګېګابايټ
+size-terabytes|~{0} ټېرابايټ
+size-petabytes|~{0} پېبي بايټ
+size-exabytes|~{0} اېکسبي بايټ
+size-zetabytes|~{0} زېبي بايټ
+size-yottabytes|~{0} يوبي بايټ
+watchlistedit-normal-title|کتنلړ سمول
+watchlistedit-normal-legend|د کتنلړ نه سرليکونه لرې کول
+watchlistedit-normal-submit|سرليکونه لرې کول
+watchlistedit-normal-done|{{PLURAL:~{0}\u007C1 سرليک ستاسې له کتنلړ نه ليري شو\u007C~{0} سرليکونه ستاسې له کتنلړ نه ليري شوه}}:
+watchlistedit-raw-title|خام کتنلړ سمول
+watchlistedit-raw-legend|خام کتنلړ سمول
+watchlistedit-raw-titles|سرليکونه:
+watchlistedit-raw-submit|کتنلړ اوسمهاله کول
+watchlistedit-raw-done|ستاسې کتنلړ اوسمهاله شو.
+watchlistedit-raw-added|{{PLURAL:~{0}\u007C1 سرليک ورگډ شو\u007C~{0} سرليکونه ورگډ شوه}}:
+watchlistedit-raw-removed|{{PLURAL:~{0}\u007C1 سرليک ليرې شو\u007C~{0} سرليکونه ليري شوه}}:
+watchlisttools-view|اړونده بدلونونه کتل
+watchlisttools-edit|کتنلړ ليدل او سمول
+watchlisttools-raw|خام کتنلړ سمول
+iranian-calendar-m1|وری
+iranian-calendar-m2|غويی
+iranian-calendar-m3|غبرګولی
+iranian-calendar-m4|چنګاښ
+iranian-calendar-m5|زمری
+iranian-calendar-m6|وږی
+iranian-calendar-m7|تله
+iranian-calendar-m8|لړم
+iranian-calendar-m9|ليندۍ
+iranian-calendar-m10|مرغومی
+iranian-calendar-m11|سلواغه
+iranian-calendar-m12|کب
+hijri-calendar-m1|محرم
+hijri-calendar-m2|صفر
+hijri-calendar-m3|ربيع الاول
+hijri-calendar-m4|ربيع الثاني
+hijri-calendar-m5|جمادى الاولى
+hijri-calendar-m6|جمادى الثانية
+hijri-calendar-m7|رجب
+hijri-calendar-m8|شعبان
+hijri-calendar-m9|رمضان
+hijri-calendar-m10|شوال
+hijri-calendar-m11|ذو القعدة
+hijri-calendar-m12|ذو الحجة
+hebrew-calendar-m1|تيشري
+hebrew-calendar-m2|حشوان
+hebrew-calendar-m3|كيسليف
+hebrew-calendar-m4|تيفيت
+hebrew-calendar-m5|شيفات
+hebrew-calendar-m6|آدار
+signature|[[{{ns:user}}:~{0}\u007C~{1}]] ([[{{ns:user_talk}}:~{0}\u007Cخبرې اترې]])
+duplicate-defaultsort|'''گواښنه:'''د "~{1}" تلواليزه اوډون تڼۍ تر دې پخوا ټاکلې تلواليزه اوډون تڼۍ "~{0}" پر ځای چارنه کېږي.
+version|بڼه
+version-extensions|لگېدلي شاتاړي
+version-skins|نصب شوې پوښۍ
+version-specialpages|ځانگړي مخونه
+version-other|بل
+version-hooks|کونډۍ
+version-hook-name|کونډۍ نوم
+version-version|(~{0})
+version-license|مېډياويکي منښتليک
+version-ext-license|منښتليک
+version-skin-colheader-name|پوښۍ
+version-ext-colheader-version|بڼه
+version-ext-colheader-license|منښتليک
+version-ext-colheader-description|څرگندونه
+version-ext-colheader-credits|ليکوالان
+version-license-title|د ~{0} منښتليک
+version-poweredby-credits|دا ويکي د '''[https://www.mediawiki.org/ مېډياويکي]''' په سېک چلېږي، ټولې رښتې خوندي دي © 2001-~{0} ~{1}.
+version-poweredby-others|نور
+version-poweredby-translators|د translatewiki.net ژباړنان
+version-license-info|مېډياويکي يو وړيا ساوتری دی؛ تاسې يې په ډاډه زړه د GNU د ټولگړو کارېدنو د منښتليک چې د وړيا ساوتريو د بنسټ له مخې خپور شوی، خپرولی او/يا بدلولی شی؛ د منښتليک ۲ بڼه او يا (ستاسې د خوښې) هر يوه وروستۍ بڼه.\n\nمېډياويکي د ښه کارېدنې په نيت خپور شوی، خو د ضمني سوداگريز او يا د کوم ځانگړي کار د ضمانت نه پرته. د نورو مالوماتو لپاره د GNU د ټولگړو کارېدنو منښتليک وگورۍ.\n\nتاسې بايد د دې پروگرام سره يو [{{SERVER}}{{SCRIPTPATH}}/COPYING a copy of the GNU General Public License] ترلاسه کړی وي؛ که داسې نه وي، نو د وړيا ساوتريو بنسټ، Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA ته يو ليک وليکۍ، او يا يې [//www.gnu.org/licenses/old-licenses/gpl-2.0.html پرليکه ولولۍ].
+version-software|نصب شوی ساوتری
+version-software-product|اېبره
+version-software-version|بڼه
+version-entrypoints-header-url|يو آر اېل
+version-libraries-library|کتابتون
+version-libraries-version|بڼه
+redirect|د دوتنې، کارن، مخ يا بڼې پېژند له مخې ورگرځېدنې
+redirect-submit|ورځه
+redirect-value|ارزښت:
+redirect-user|کارن پېژند
+redirect-page|د مخ پېژند
+redirect-file|د دوتنې نوم
+redirect-not-exists|ارزښت و نه موندل شو
+fileduplicatesearch|د دوه گونو دوتنو پلټنه
+fileduplicatesearch-legend|د دوه گونو دوتنو پلټنه
+fileduplicatesearch-filename|د دوتنې نوم:
+fileduplicatesearch-submit|پلټل
+fileduplicatesearch-info|<span dir="ltr">~{0} × ~{1}</span> پېکسل<br />د دوتنې کچه: ~{2}<br />ډول MIME: ~{3}
+fileduplicatesearch-result-1|"~{0}" بله کټ مټ ورته غبرګونې دوتنه نلري.
+fileduplicatesearch-noresults|د "~{0}" په نوم دوتنه و نه موندل شوه.
+specialpages|ځانگړي مخونه
+specialpages-note|* نورماله ځانگړي مخونه.\n* <strong class="mw-specialpagerestricted">محدوده ځانگړي مخونه.</strong>
+specialpages-group-maintenance|د څارنې راپورونه
+specialpages-group-other|نور ځانگړي مخونه
+specialpages-group-login|ننوتل / گڼون جوړول
+specialpages-group-changes|وروستي بدلونونه او يادښتونه
+specialpages-group-media|د رسنۍ راپورونه او پورته کېدنې
+specialpages-group-users|کارنان او رښتې
+specialpages-group-highuse|ډېر کارېدونکي مخونه
+specialpages-group-pages|د مخونو لړليک
+specialpages-group-pagetools|د مخ اوزارونه
+specialpages-group-wiki|توکي او اوزارونه
+blankpage|تش مخ
+intentionallyblankpage|همدا مخ په لوی لاس تش پرېښودل شوی دی
+external_image_whitelist| #دا کرښه چې څنگه ده، همداسې پرېږدۍ<pre>\n#لاندې د منظمو اصطلاحگانو ټوټې (يوازې هغه برخه چې د // په مېنځ کې ليکلې) ځای پر ځای کړی\n#دا به د باندنيو انځورونو د يو آر اېل (hotlinked) سره مطابقه شي \n#هغه څه چې مطابقت لري هغه به د انځورونو په توگه ښکاره شي، کوم چې مطابقت نلري نو يوازې د انځور تړنه به ښکاره کېږي\n#هغه کرښې چې په # پيل کېږي د تبصرو په توگه په نظر کې نيول کېږي\n#دا کرښې د غټو تورو او وړو تورو سره حساسې نه دي\n\n#ټولې regex ټوټې د دغې کرښې نه پورته ځای پر ځای کړی. دا کرښه چې څنگه ده، همداسې يې پرېږدۍ</pre>
+tag-filter|[[Special:Tags\u007Cنښلن]] چاڼگر:
+tag-filter-submit|چاڼگر
+tag-list-wrapper|([[Special:Tags\u007C{{PLURAL:~{0}\u007Cنښلن\u007Cنښلنونه}}]]: ~{1})
+tags-display-header|د بدلون په لړليکونو کې ښکارېدنه
+tags-description-header|د مانا بشپړه څرگندونه
+tags-source-header|سرچينه
+tags-active-header|فعال؟
+tags-actions-header|کړنې
+tags-active-yes|هو
+tags-active-no|نه
+tags-source-none|نور نه کارېږي
+tags-edit|سمول
+tags-delete|ړنگول
+tags-activate|فعالول
+tags-deactivate|نافعالول
+tags-hitcount|~{0} {{PLURAL:~{0}\u007Cبدلون\u007Cبدلونونه}}
+tags-create-reason|سبب:
+tags-create-submit|جوړول
+tags-delete-reason|سبب:
+tags-activate-reason|سبب:
+tags-activate-submit|فعالول
+tags-deactivate-reason|سبب:
+tags-deactivate-submit|نافعالول
+tags-edit-existing-tags-none|''هېڅ''
+tags-edit-reason|سبب:
+comparepages|مخونه پرتلل
+compare-page1|۱ مخ
+compare-page2|۲ مخ
+compare-rev1|۱ بڼه
+compare-rev2|۲ بڼه
+compare-submit|پرتلل
+dberr-problems|اوبخښۍ! دم مهال دا وېبپاڼه د تخنيکي ستونزو سره مخامخ شوې.
+dberr-usegoogle|تاسې کولای شی چې هم مهاله د گووگل له لخوا هم د پلټنې هڅه وکړۍ.
+htmlform-invalid-input|ستاسې ځينې ورکړېينې ستونزې لري
+htmlform-select-badoption|څه چې تاسې ځانگړي کړل هغه د منلو وړ خوښنه نه ده.
+htmlform-int-invalid|کوم څه چې تاسو ځانگړي کړي هغه يوه سمه شمېره نه ده.
+htmlform-float-invalid|کوم څه چې تاسو ځانگړي کړي هغه يوه شمېره نه ده.
+htmlform-int-toolow|کوم ارزښت چې تاسې ځانگړی کړی هغه تر ~{0} لږ دی
+htmlform-int-toohigh|کوم ارزښت چې تاسې ځانگړی کړی هغه تر ~{0} ډېر  دی
+htmlform-required|دې ارزښت ته اړتيا ده
+htmlform-submit|سپارل
+htmlform-reset|بدلونونه ناکړل
+htmlform-selectorother-other|بل
+htmlform-no|نه
+htmlform-yes|هو
+htmlform-cloner-create|نور ورگډول
+htmlform-cloner-delete|غورځول
+logentry-delete-delete|~{0} د ~{2} مخ {{GENDER:~{1}\u007Cړنگ کړ}}
+revdelete-content-hid|مېنځپانگه پټېدلې
+revdelete-uname-hid|کارن نوم پټ شوی
+revdelete-content-unhid|مېنځپانگه ښکاره شوی
+revdelete-uname-unhid|ښکاره کارن-نوم
+logentry-move-move|~{0} د ~{2} مخ ~{3} ته {{GENDER:~{1}\u007Cولېږداوه}}
+logentry-move-move-noredirect|~{0} پرته له دې چې يو مخ گرځونی پرېږدي له ~{2} څخه ~{3} ته مخ {{GENDER:~{1}\u007Cولېږداوه}}
+logentry-move-move_redir|~{0} د ~{2} مخ ~{3} ته د مخ گرځونې له لارې {{GENDER:~{1}\u007Cولېږداوه}}.
+logentry-move-move_redir-noredirect|~{0} پرته له دې چې يو مخ گرځونی پرېږدي له ~{2} څخه ~{3} ته مخ {{GENDER:~{1}\u007Cولېږداوه}}
+logentry-newusers-newusers|د ~{0} کارن گڼون {{GENDER:~{1}\u007Cجوړ شو}}
+logentry-newusers-create|د ~{0} کارن گڼون {{GENDER:~{1}\u007Cجوړ شو}}
+logentry-newusers-autocreate|د ~{0} گڼون په اتوماتيک ډول {{GENDER:~{1}\u007Cجوړ شو}}
+logentry-rights-rights|~{0} د ~{2} لپاره د غړيتوب ډله له ~{3} څخه ~{4} ته {{GENDER:~{1}\u007Cبدله کړه}}
+logentry-rights-rights-legacy|~{0} د ~{2} لپاره د غړيتوب ډله {{GENDER:~{1}\u007Cبدله کړه}}
+logentry-upload-upload|~{0} ~{2} {{GENDER:~{1}\u007Cورپورته يې کړ}}
+rightsnone|(هېڅ)
+revdelete-summary|لنډيز سمول
+feedback-cancel|ناگارل
+feedback-close|ترسره شو
+feedback-error-title|تېروتنه
+feedback-message|پيغام:
+feedback-subject|سکالو:
+feedback-submit|سپارل
+feedback-thanks-title|مننه!
+searchsuggest-search|پلټل
+api-error-duplicate-popup-title|غبرګونې {{PLURAL:~{0}\u007Cدوتنه\u007Cدوتنې}}.
+api-error-empty-file|کومه دوتنه چې تاسې دلته سپارلې هغه تشه ده.
+api-error-file-too-large|کومه دوتنه چې تاسې دلته سپارلې ډېره لويه ده.
+api-error-filename-tooshort|د دوتنې نوم ډېر لنډ دی.
+api-error-filetype-banned|په دې ډول دوتنې بنديز دی.
+api-error-illegal-filename|د دوتنې نوم نه دی پرېښل شوی.
+api-error-mustbeloggedin|د دوتنو د پورته کولو لپاره بايد تاسې غونډال کې ننوتلی اوسۍ.
+api-error-unclassified|يوه ناڅرګنده تېروتنه رامېنځته شوه.
+api-error-unknown-code|ناڅرګنده تېروتنه: "~{0}"
+api-error-unknown-warning|ناڅرگنده گواښنه: "~{0}".
+api-error-unknownerror|ناڅرګنده تېروتنه: "~{0}".
+duration-seconds|~{0} {{PLURAL:~{0}\u007Cثانيه\u007Cثانيې}}
+duration-minutes|~{0} {{PLURAL:~{0}\u007Cدقيقه\u007Cدقيقې}}
+duration-hours|~{0} {{PLURAL:~{0}\u007Cساعت\u007Cساعتونه}}
+duration-days|~{0} {{PLURAL:~{0}\u007Cورځ\u007Cورځې}}
+duration-weeks|~{0} {{PLURAL:~{0}\u007Cاونۍ\u007Cاونۍ}}
+duration-years|~{0} {{PLURAL:~{0}\u007Cکال\u007Cکالونه}}
+duration-decades|~{0} {{PLURAL:~{0}\u007Cلسيزه\u007Cلسيزې}}
+duration-centuries|~{0} {{PLURAL:~{0}\u007Cپېړۍ\u007Cپېړۍ}}
+duration-millennia|~{0} {{PLURAL:~{0}\u007Cزرمه\u007Cزرمې}}
+limitreport-cputime|سي پي يو وخت کارېدنه
+limitreport-cputime-value|~{0} {{PLURAL:~{0}\u007Cثانيه\u007Cثانيې}}
+limitreport-walltime|اصلي وخت کارېدنه
+limitreport-walltime-value|~{0} {{PLURAL:~{0}\u007Cثانيه\u007Cثانيې}}
+limitreport-postexpandincludesize-value|~{0}/~{1} {{PLURAL:~{1}\u007Cبايټ\u007Cبايټونه}}
+limitreport-templateargumentsize-value|~{0}/~{1} {{PLURAL:~{1}\u007Cبايټ\u007Cبايټونه}}
+expandtemplates|کينډۍ غځول
+expand_templates_input|ځايونکی متن:
+expand_templates_output|پايله
+expand_templates_ok|ښه
+expand_templates_remove_comments|تبصرې غورځول
+expand_templates_remove_nowiki|په پايلو کې د <nowiki> نښلنونه ځپل
+expand_templates_generate_rawhtml|خام HTML ښکاره کول
+expand_templates_preview|مخکتنه
+pagelanguage|د مخ ژبټاکونکی
+pagelang-name|مخ
+pagelang-language|ژبه
+pagelang-use-default|تلواليزه ژبه کارول
+pagelang-select-lang|ژبه ټاکل
+right-pagelang|د مخ ژبه بدلول
+action-pagelang|د مخ ژبه بدلول
+log-name-pagelang|ژبيادښت بدلول
+default-skin-not-found-row-enabled|* <code>~{0}</code> / ~{1} (چارن)
+default-skin-not-found-row-disabled|* <code>~{0}</code> / ~{1} ('''ناچارن''')
+mediastatistics|د رسنيو شمار
+mediastatistics-nbytes|{{PLURAL:~{0}\u007C~{0} بايټ\u007C~{0} بايټونه}} (~{1}; ~{2}%)
+mediastatistics-table-mimetype|MIME بڼه
+mediastatistics-table-count|د دوتنو شمېر
+mediastatistics-header-unknown|ناجوت
+mediastatistics-header-bitmap|بېټ مپ انځورونه
+mediastatistics-header-drawing|رسمونه (وېکټور انځورونه)
+mediastatistics-header-audio|غږ
+mediastatistics-header-video|ويډيوگانې
+mediastatistics-header-multimedia|بډايه رسنۍ
+mediastatistics-header-office|دفتر
+mediastatistics-header-text|متني
+special-characters-group-latin|لاتين
+special-characters-group-latinextended|غځېدلی لاتين
+special-characters-group-ipa|ن.غ.ا
+special-characters-group-symbols|سمبولونه
+special-characters-group-greek|يوناني
+special-characters-group-cyrillic|سرېليک
+special-characters-group-arabic|عربي
+special-characters-group-arabicextended|غځېدلې عربي
+special-characters-group-persian|پارسي
+special-characters-group-hebrew|عبراني
+special-characters-group-bangla|بنګالي
+special-characters-group-tamil|تاميلي
+special-characters-group-telugu|تېلوګو
+special-characters-group-sinhala|سېنهالي
+special-characters-group-gujarati|ګجراتي
+special-characters-group-devanagari|دېوانګري
+special-characters-group-thai|تايلنډي
+special-characters-group-lao|لاوي
+special-characters-group-khmer|خمري
+contactpage|د اړيکو مخ
+contactpage-desc|[[Special:Contact\u007Cد کتونکو لپاره د اړيکو فورمه]]
+contactpage-title|اړيکه ټينګول
+contactpage-pagetext|له موږ سره د اړيکو ټينگولو لپاره، لاندينۍ فورمه وکاروۍ.
+contactpage-legend|برېښليک لېږل
+contactpage-defsubject|د اړيکې پيغام
+contactpage-subject-and-sender|~{0} (د ~{1} لخوا )
+contactpage-fromname|ستاسې نوم:
+contactpage-fromaddress|ستاسې برېښليک پته:
+contactpage-formfootnotes|(ورته اړتيا ده که يو ځواب غواړۍ)
+wikibase-entity-item|توکی
+wikibase-entitytermsview-entitytermsforlanguagelistview-toggler|په نورو ژبو کې
+wikibase-entitytermsforlanguagelistview-description|څرگندونه
+wikibase-entitytermsforlanguagelistview-language|ژبه
+wikibase-label-empty|کوم لېبل نه دی څرگند شوی
+wikibase-description-empty|کوم تعريف نه دی څرگند شوی
+wikibase-statements|څرگندونې
+wikibase-sitelinks-special|نور وېبځايونه
+wikibase-aliases-empty|کوم مستعار نوم نه دی څرگند شوی.
+wikibase-statementview-rank-normal|عادي پوړ
+wikibase-statementview-referencesheading-pendingcountersubject|{{PLURAL:~{0}\u007Cسرچينه\u007Cسرچينې}}
+wikibase-entityselector-more|نور
+wikibase-setlabeldescriptionaliases-description-label|څرگندونه:
+wikibase-listdatatypes-wikibase-item-head|توکی
+']:>
+).lang
+;

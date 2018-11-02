@@ -1,0 +1,409 @@
+this
+.fallback_load('es')
+.ns_names
+  .load_text(
+<:['
+-1|Mba\\'echĩchĩ
+1|Myangekõi
+2|Puruhára
+3|Puruhára myangekõi
+5|$1 myangekõi
+6|Ta\\'ãnga
+7|Ta\\'ãnga myangekõi
+8|MediaWiki
+9|MediaWiki myangekõi
+10|Tembiecharã
+11|Tembiecharã myangekõi
+12|Pytyvõ
+13|Pytyvõ myangekõi
+14|Ñemohenda
+15|Ñemohenda myangekõi
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|arateĩ
+monday|arakői
+tuesday|araapy
+wednesday|ararundy
+thursday|arapo
+friday|arapoteĩ
+saturday|arapokői
+sun|arateĩ
+mon|arakõi
+tue|araapy
+wed|ararundy
+thu|arapo
+fri|arapoteĩ
+january|jasyteĩ
+february|jasykői
+march|jasyapy
+april|jasyrundy
+may_long|jasypo
+june|jasypoteĩ
+july|jasypokői
+august|jasypoapy
+september|jasyporundy
+october|jasypa
+november|jasypateĩ
+december|jasypakői
+january-gen|jasyteĩ
+february-gen|jasykõi
+march-gen|jasyapy
+april-gen|jasyrundy
+may-gen|jasypo
+june-gen|jasypoteĩ
+july-gen|jasypokõi
+august-gen|jasypoapy
+september-gen|jasyporundy
+october-gen|jasypa
+november-gen|jasypateĩ
+december-gen|jasypakõi
+jan|jasyteĩ
+feb|jasykõi
+mar|jasyapy
+apr|jasyrundy
+may|jasypo
+jun|jasypoteĩ
+jul|jasypokõi
+aug|jasypoapy
+sep|jasyporundy
+oct|jasypa
+nov|jasypateĩ
+dec|jasypakõi
+toc|Tembikuaa'aty rechaukaha
+redirectedfrom|(Oñembohapejeýva ~{0})
+allpages|Opaite kuatiarogue
+prevpage|Kuatia rogue mboyvegua (~{0})
+nextpage|Kuatia rogue upeigua(~{0})
+categories|Ñemohendakuéra
+lastmodifiedat|Ko kuatiarogue oñemoambuejeýkuri: ~{1}, ~{0}.
+otherlanguages|Ambue ñe'ẽ
+blanknamespace|(Tenondeguáva)
+pagecategories|{{PLURAL:~{0}\u007CÑemohenda\u007CÑemohendakuéra}}
+prevn|{{PLURAL:~{0}\u007C~{0}}} mboyvegua
+bold_sample|Haipyre oñemohũvéva
+bold_tip|Haipyre oñemohũvéva
+italic_sample|Haipyre ikarẽva
+italic_tip|Haipyre ikarẽva
+link_tip|Joaju hyepyguávandi
+headline_tip|Teraete mokõiha
+statistics|Papyrekokuaa
+sitesupport|Me'ẽ rei
+tog-underline|Haiguy joajuha
+tog-hideminor|Eñomi ñemyatyrõ michĩva «ñemoambue pyahúpe»
+tog-extendwatchlist|Eipyso tembiapo rapykueho rysýi opaite ñemoambue ikatúvape
+tog-usenewrc|Ñemoambue ojejapo ramóva (ndoikói opaite 'navegador'-pe)
+tog-numberheadings|Mbopapapy ijehegui myakãha
+tog-showtoolbar|Ehechauka ñemyatyrõ renda
+underline-always|Akói
+underline-never|Araka'eve
+about|Rehegua
+article|Kuatiahai
+newwindow|(Ojepe'a peteĩ ovetã pyahu)
+cancel|Mbotove
+mypage|Che kuatiarogue
+mytalk|Che myangekõi
+navigation|Kundaharã
+qbfind|Heka
+qbedit|Jehaijey
+tagline|{{SITENAME}}megua
+help|Pytyvõhára
+search|Heka
+searchbutton|Heka
+go|Ha
+searcharticle|Ha
+history|Tembiasakue
+history_short|Tembiasakue
+printableversion|Osẽma haguãicha
+edit|Jehaijey
+delete|Mboje'o
+undelete_short|Restaurar ~{0} ediciones
+newpage|Pyahu kuatia
+talkpagelinktext|ñe'ẽ
+specialpage|Kuatiarogue mba'echĩchĩ
+personaltools|Tapicha rembipuru
+talk|Myangekõi
+views|Techakuéra
+toolbox|Tembiporu
+mediawikipage|Hecha kuatiarogue marandu
+viewtalkpage|Hecha myangekõi
+viewcount|Esta página ha sido visitada ~{0} veces.
+jumpto|Kundaharãme jeho
+jumptonavigation|kundaharã
+jumptosearch|Jeheka
+aboutsite|Ári {{SITENAME}}
+aboutpage|Project:Rehegua
+copyright|Tembikuaa'aty ikatu ojepuru <i>~{0}</i> rekópe
+currentevents|Ag̃agua
+disclaimers|Marandu leiguigua
+edithelp|Jehairã ñepytyvõ
+mainpage|Ape
+mainpage-description|Ape
+portal|Tekohapegua
+privacy|Polítika marandu ñeñangareko rehegua
+privacypage|Project:Polítika marandu ñeñangareko rehegua
+youhavenewmessagesmulti|Reguereko marandu pyahu ~{0}
+editsection|jehaijey
+editold|jehaijey
+editsectionhint|Jehaijey vore: ~{0}
+showtoc|hechauka
+hidetoc|toñemi
+restorelink|~{0} ediciones borradas
+red-link-title|~{0} (ndaipóri ko togue)
+nstab-main|Kuatiahai
+nstab-user|Puruhára
+nstab-media|Media rogue
+nstab-special|Mba'echĩchĩ
+nstab-project|Mba'e apopyrã rogue
+nstab-image|Ñongatupy
+nstab-mediawiki|Marandu
+nstab-template|Tembiecharã
+nstab-help|Pytyvõ
+nstab-category|Ñemohenda
+nosuchaction|Upe tembiapo ndaipóri
+ns-specialprotected|Las páginas en el espacio de nombres Especial no se pueden editar.
+yourname|Hero
+yourpassword|Ne remiñemi
+yourpasswordagain|Repita ne remiñemi
+remembermypassword|Aipota chemomandu'ajepi amba'apo jave (for a maximum of ~{0} {{PLURAL:~{0}\u007Cday\u007Cdays}})
+login|Terañemboguapy/Ke
+nav-login-createaccount|Terañemboguapy/Ke
+userlogin|Terañemboguapy/Ke
+logout|Sẽ
+userlogout|Sẽ
+nologin|¿Ne'ĩrãpa remohenda nde réra? '''~{0}'''.
+nologinlink|Téra ñemohenda
+loginsuccesstitle|Remoñepyrũ hekopete ne rembiapo
+nosuchusershort|No hay un usuario con el nombre "~{0}". Compruebe que lo ha escrito correctamente.
+mailmypassword|Embou chéve ñe'ẽveve rupive peteĩ temiñemĩ pyahu
+loginlanguagelabel|Ñe'ẽ: ~{0}
+extlink_tip|Joaju okapeguávandi (recuerde añadir el prefijo http://)
+nowiki_tip|Viki jehaireko ñembo'yke
+image_tip|Ta'ãnga moĩngepyréva
+media_tip|Joaju jehai'aty multimediaguándi
+sig_tip|Teraguapy, arange, aravo
+hr_tip|Haipuku oñenóva (eipurúke tekotevẽ javénte)
+summary|Jehaimombyky:
+subject|Mba'ekuaarã/teraete:
+minoredit|Kóva ha'e peteĩ jehai mbyky
+watchthis|Toñeñangareko ko tembiapóre
+savearticle|Hai
+showpreview|Tojechauka jehai ñemboguapy mboyve
+showdiff|Tojechauka ñemoambue
+missingsummary|'''Atención:''' No has escrito un resumen de edición. Si haces clic nuevamente en «Hai» tu edición se grabará sin él.
+subject-preview|Previsualización del mba'ekuaarã/teraete:
+newarticletext|Rehapykuehókuri peteĩ joaju peteĩ kuatiarogue ndaipórivape.\nNde remoheñoisérõ ko kuatiarogue, eñepyrũkatu ehai.\nReikotevẽvérõ marandu, emoñe'ẽ kuatiarogue ñepytyvõ rehegua. Oiméramo reikereínte térã rejavyhaguére, upéicharõ terehojey [~{0} kuatiarogue mboyveguápe].
+userinvalidcssjstitle|'''Aviso:''' No existe la piel "~{0}". Recuerda que las páginas personalizadas .css y .js tienen un título en minúsculas, p.e. Usuario:Foo/vector.css en vez de  Usuario:Foo/Vector.css.
+editing|Ojehaihína ~{0}
+editingsection|Ojehaihína ~{0} (vore)
+editingcomment|Ojehaihína ~{0} (comentario)
+yourtext|Mba'ehaipyre
+cur|ko'ag̃agua
+last|ipaha
+historysize|(~{0} bytes)
+rev-delundel|hechauka/toñemi
+logdelete-selected|Seleccionados ~{0} eventos de registro:
+lineno|Jehai ~{0}:
+editundo|embyai
+searchresults|Ojejuhúva jeheka
+viewprevnext|Hecha (~{0} {{int:pipe-separator}} ~{1}) (~{2}).
+showingresults|Abajo se muestran hasta '''~{0}''' resultados empezando por el nº '''~{1}'''.
+preferences|Mbohoryha
+mypreferences|Che mbohoryha
+prefs-rc|Oñemoambue pyahúva
+searchresultshead|Jeheka
+youremail|Ñe'ẽveve
+yourlanguage|Ñe'ẽ:
+gender-male|Ha'e ohaijey wiki kuatiarogue kuéra
+gender-female|Ha'e ohaijey wiki kuatiarogue kuéra
+email|Pareha eleytróniko
+userrights-lookup-user|Configurar grupos de usuarios
+userrights-user-editname|Ehaimi peteĩ téra puruháragua:
+editusergroup|Modificar grupos de usuarios
+editinguser|Ojehaihína '''[[User:~{0}\u007C~{0}]]''' ([[User talk:~{0}\u007C{{int:talkpagelinktext}}]] \u007C [[Special:Contributions/~{0}\u007C{{int:contribslink}}]])
+userrights-editusergroup|Modificar grupos de usuarios
+saveusergroups|Guardar grupos de usuarios
+userrights-groupsmember|Pehengue:
+userrights-reason|Motivo para el cambio:
+group-all|(opaite)
+nchanges|~{0} ñemoambue
+recentchanges|Oñemoambue pyahúva
+rclistfrom|Tojehechauka oñemoambue pyahúva ~{2} ~{1} guive
+rcshowhideminor|~{0} jehaijey michĩva
+rcshowhideliu|~{0} puruhára ohejáva teraguapy
+rcshowhideanons|~{0} puruhára ojekuaa'ỹva
+rcshowhidemine|~{0} che jehaijey
+rclinks|Ápe ojehechakuaa umi ~{0} oñemoambue pyahúva ~{1} ára ohasava'ekuépe.<br />~{2}
+hide|toñemi
+show|hechauka
+newsectionsummary|Pyahuvore: /* ~{0} */
+recentchangeslinked-title|Ñemoambue ~{0} rehegua
+recentchangeslinked-summary|Ko kuatiarogue hekochĩchĩvape oñembohysýi umi ñemoambue ipyahúva ko'ã kuatiarogue ojoajúvape. Kuatiarogue oĩva tapykueho rysýipe oĩ '''haipyre oñemohũvape'''.
+upload|Tojehupi jehai'aty
+uploadtext|Eipuru pe tembipuru oĩva iguýpe ehupi hag̃ua jehai'aty, rehecha térã reheka hag̃ua ta'ãnga ojehupipyrémava eike jehai'aty jehupipyre rysýipe, umi ihupipyréva ha oñemboguémava avei oñemboguapy [[Special:Log/upload\u007Cjehai'aty jehupipyrépe]].\nReomĩsérõ ta'ãnga peteĩ kuatiaroguépe, eipuru peteĩ joaju:\n'''<nowiki>[[</nowiki>Imagen<nowiki>:Archivo.jpg]]</nowiki>''', '''<nowiki>[[</nowiki>Imagen<nowiki>:Archivo.png\u007Ctexto alternativo]]</nowiki>''' o\n'''<nowiki>[[</nowiki>Media<nowiki>:Archivo.ogg]]</nowiki>''' ojoaju hag̃ua hekopete pe jehai'atýre.
+filename|Téra jehai'aty
+listfiles|Ta'ãnga rysýi
+listfiles_user|Puruhára
+file-anchor-link|Ñongatupy
+filehist-revert|embojevy
+filehist-current|ko'ag̃agua
+filehist-datetime|Ára/Aravo
+filehist-user|Puruhára
+filehist-comment|Jehaimombyky
+imagelinks|Joajukuéra
+filerevert|Embojevy ~{0}
+filedelete-legend|Mboje'o jehai'aty
+filedelete-success|'''~{0}''' oñembogue'akue
+mimesearch|Jeheka MIME
+listredirects|Ñembohapejey rysýi
+unusedtemplates|Tembiecharã ndojepurúiva
+randompage|Kuatiarogue oñembosako'íva
+randomredirect|Oimerãe ñembohapejeýpe jeho
+doubleredirects|Ñembohapejey jo'apyre
+brokenredirects|Ñembohapejey hekopegua'ỹva
+brokenredirects-edit|jehaijey
+brokenredirects-delete|mboje'o
+withoutinterwiki|Kuatiarogue ndorekóiva interwiki
+fewestrevisions|Kuatiahai sa'ive ijehaijeýva
+nbytes|~{0} bytes
+ncategories|~{0} ñemohendakuéra
+nlinks|~{0} joaju
+nmembers|~{0} kuatiahai
+nrevisions|~{0} revisiones
+nviews|~{0} vistas
+lonelypages|Kuatiarogue ityre'ỹva
+uncategorizedpages|Kuatiarogue oñemohenda'ỹva
+uncategorizedcategories|Ñemohenda noñemohendáiva
+uncategorizedimages|Ta'ãnga ne'ĩrã oñemohendáva
+uncategorizedtemplates|Tembiecharã noñemohendáiva
+unusedcategories|Ñemohenda ojepuru'ỹva
+unusedimages|Ta'ãnga ndojepurúiva
+wantedcategories|Ñemohenda oñekotevẽva
+wantedpages|Kuatiarogue oñekotevẽva
+mostlinked|Kuatiahai ojoaju hetavéva
+mostlinkedcategories|Ñemohenda ojoaju hetavéva
+mostlinkedtemplates|Tembiecharã ojoaju hetavéva
+mostcategories|Kuatiarogue iñemohenda hetavéva
+mostimages|Ta'ãnga ojepuruvéva
+mostrevisions|Kuatiahai hetave ijehaijeýva
+prefixindex|Kuatiarogue henondepyguáva
+shortpages|Kuatiarogue mbykýva
+longpages|Kuatiarogue ipukúva
+deadendpages|Kuatiarogue ñesẽ'ỹva
+protectedpages|Kuatiarogue oñeñangarekóva
+listusers|Puruhára rysýi
+newpages|Kuatiarogue ipyahúva
+newpages-username|Hero
+ancientpages|Kuatiahai hi'arevéva
+move|Guerova
+movethispage|Guerova kuatiarogue
+booksources|Heñóiva kuatiañe'ẽme
+log|Ñemboguapypyre
+allpagesfrom|Ehechauka kuatia rogue oñepyrũva:   -pe
+allpagesto|Ehechauka kuatia rogue opáva:  -pe
+allarticles|Opa kuatia rogue
+allinnamespace|Opa kuatia rogue (pa'ũ ~{0})
+allpagessubmit|Hechauka
+listusers-submit|Hechauka
+emailuser|Tojeguerahauka ñe'ẽveve ko puruhárape
+emailpage|Pareha eleytrónico
+emailmessage|Marandu
+watchlist|Tapykueho rysýi
+mywatchlist|Tapykueho rysýi
+watch|Ñangareko
+dellogpage|Ñemboguepyre ñonagatupy
+deletionlog|ñemboguepyre ñonagatupy
+rollback_short|Embojevy
+rollbacklink|Embojevy
+prot_1movedto2|[[~{0}]] oñembohasa [[~{1}]]-pe
+protect-text|Puedes ver y modificar el nivel de protección de la página '''~{0}'''.
+undeletedrevisions|~{0} ediciones restauradas
+undeletedrevisions-files|~{0} ediciones y ~{1} archivos restaurados
+undeletedfiles|~{0} archivos restaurados
+undelete-search-submit|Heka
+namespace|Téra rendagua:
+invert|Toñembo'ovývo mba'eporavopyre
+contributions|Puruhára mba'emoĩmbyre
+mycontris|Che mba'emoĩmbyre
+sp-contributions-search|Heka mba'emoĩmbyre
+sp-contributions-submit|Heka
+whatlinkshere|Oñembojoajukuaáva ko'ápe
+whatlinkshere-title|Kuatiarogue ojoajúva "~{0}" rehe
+whatlinkshere-page|Kuatiarogue:
+linkshere|Ko'ã kuatiarogue ojoaju '''[[:~{0}]]''' rehe:
+whatlinkshere-prev|mboyvegua ~{0}
+whatlinkshere-next|upeigua ~{0}
+whatlinkshere-links|← joajukuéra
+blockip|Ejoko puruhára
+ipblocklist|IP mbohape rysýi imbotypyréva
+ipblocklist-submit|Heka
+blocklink|ejoko
+contribslink|mba'emoĩmbyre
+blocklogtext|Esto es un registro de bloqueos y desbloqueos de usuarios. Las direcciones bloqueadas automáticamente no aparecen aquí. Consulte la [[Special:BlockList\u007CIP mbohape rysýi imbotypyréva]] para ver la lista de prohibiciones y bloqueos actualmente vigente.
+movearticle|Guerova kuatiarogue
+move-watch|Toñeñangareko ko tembiapóre
+movepagebtn|Guerova kuatiarogue
+revertmove|embojevy
+delete_and_move|Mboje'o ha guerova
+export|Kuatiarogue ñemondo
+allmessages|Opaite marandu MediaWikigua
+import-revision-count|~{0} revisiones
+import-logentry-upload-detail|~{0} revisiones
+import-logentry-interwiki-detail|~{0} revisiones desde ~{1}
+tooltip-pt-userpage|Che puruhárakuatia
+tooltip-pt-mytalk|Che kuatiarogue myangekõi
+tooltip-pt-preferences|Che mbohoryha
+tooltip-pt-mycontris|Tysỹi che mba'emoĩmbyre
+tooltip-ca-move|Guerova kuatiarogue
+tooltip-p-logo|Ape
+tooltip-n-mainpage|Eho ijapépe
+spamprotectiontitle|Filtro de protección contra spam
+spamprotectiontext|La página que intentas guardar ha sido bloqueada por el filtro de spam. Esto se debe probablemente a alguno de los un enlaces externos incluidos en ella.
+spamprotectionmatch|El siguiente texto es el que activó nuestro filtro ''anti-spam'' (contra la publicidad no solicitada): ~{0}
+spambot_username|Limpieza de spam de MediaWiki
+spam_reverting|Revirtiendo a la última versión que no contenga enlaces a ~{0}
+spam_blanking|Todas las revisiones contienen enlaces a ~{0}, blanqueando
+file-info|tamaño de jehai'aty: ~{0}; tipo MIME: ~{1}
+newimages|Ta'ãnga pyahu renda
+ilsubmit|Jeheka
+namespacesall|opaite
+monthsall|opaite
+autosumm-new|Kuatiarogue ipyahúva: ~{0}
+watchlistedit-normal-title|Moambue tapykueho rysýi
+watchlistedit-normal-submit|Mboje'o kuatiarogue
+watchlistedit-normal-done|~{0} páginas han sido borradas de tu lista de seguimiento:
+watchlistedit-raw-titles|Kuatiarogue:
+watchlistedit-raw-added|Se han añadido ~{0} páginas:
+watchlistedit-raw-removed|~{0} páginas han sido borradas:
+version|Mba'ereko
+specialpages|Kuatiarogue hekochĩchĩva
+']:>
+).lang
+;

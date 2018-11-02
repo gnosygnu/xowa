@@ -1,0 +1,1350 @@
+this
+.fallback_load('de')
+.ns_names
+  .load_text(
+<:['
+-2|Media
+-1|Spezial
+1|Dischkrian
+2|Nutza
+3|Nutza Dischkrian
+5|$1 Dischkrian
+6|Datei
+7|Datei Dischkrian
+8|MediaWiki
+9|MediaWiki Dischkrian
+10|Vorlog
+11|Vorlog Dischkrian
+12|Huif
+13|Huif Dischkrian
+14|Kategorie
+15|Kategorie Dischkrian
+']:>
+).lang
+.ns_aliases
+  .load_text(
+<:['
+-2|Medium
+1|Diskussion
+2|Benutzer
+3|Benutzer Diskussion
+5|$1 Diskussion
+7|Datei Diskussion
+9|MediaWiki Diskussion
+10|Vorlage
+11|Vorlage Diskussion
+12|Hilfe
+13|Hilfe Diskussion
+15|Kategorie Diskussion
+']:>
+).lang
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|Sunda
+monday|Mondog
+tuesday|Deansdog
+wednesday|Midwoch
+thursday|Dunasdog
+friday|Freidog
+saturday|Samsdog
+sun|Su
+mon|Mo
+tue|De
+wed|Mi
+thu|Du
+fri|Fr
+sat|Sa
+january|Jenna
+february|Feba
+march|Meaz
+april|Aprui
+may_long|Mai
+june|Juni
+july|Juli
+august|August
+september|Septemba
+october|Oktoba
+november|Novemba
+december|Dezemba
+january-gen|Jenna
+february-gen|Feba
+march-gen|Meaz
+april-gen|Aprui
+may-gen|Mai
+june-gen|Juni
+july-gen|Juli
+august-gen|August
+september-gen|Septemba
+october-gen|Oktoba
+november-gen|Novemba
+december-gen|Dezemba
+jan|Jen.
+feb|Feb.
+mar|Mea.
+apr|Apr.
+may|Mai
+jun|Jun.
+jul|Jul.
+aug|Aug.
+sep|Sep.
+oct|Okt.
+nov|Nov.
+dec|Dez.
+toc|Inhoidsvazeichnis
+redirectedfrom|(Weidagloadt vo ~{0})
+allpages|Olle Seitn
+prevpage|Vurherige Seiten (~{0})
+nextpage|Naxde Seiten (~{0})
+collapsible-collapse|Eihkloppm
+collapsible-expand|Auskloppm
+sort-descending|Obsteigend sortiern
+sort-ascending|Aufsteigend sortiern
+categories|Kategorina
+lastmodifiedat|De Seitn is zletzt am ~{0} um ~{1} gendad worn.
+thumbnail-more|vagressan
+otherlanguages|Andane Sprochn
+blanknamespace|(Seitn)
+pagecategories|{{PLURAL:~{0}\u007CKategorie\u007CKategorina}}
+category_header|Seitn in da Kategorie „~{0}“
+subcategories|Untakategorina
+category-media-header|Medien in da Kategorie „~{0}“
+category-empty|''De Kategorie enthoit im Moment koane Seitn und koane Medien ned.''
+category-subcat-count|{{PLURAL:~{1}\u007CDe Kategorie enthoit nua de foigande Untakategorie:\u007C{{PLURAL:~{0}\u007CDe foigande Untakategorie is oane vo insgsamt ~{1} Untakategorina in dea Kategorie:\u007CVo insgsamt ~{1} Untakategorina in dea Kategoriewean ~{0} zoagt:}}}}
+category-subcat-count-limited|In de Kategorie {{PLURAL:~{0}\u007Cis de foigande Unterkategorie\u007Csan de foiganden Unterkategorien}} eihsortird:
+category-article-count|{{PLURAL:~{1}\u007CDe Kategorie enthoit foigande Seitn:\u007C{{PLURAL:~{0}\u007CFoigande Seitn is oane vo insgsamt ~{1} Seitn in dear Kategorie:\u007CEs wern ~{0} voh insgsamt ~{1} Seitn in dea Kategorie zoagt:}}}}
+category-article-count-limited|De {{PLURAL:~{0}\u007Cfoigande Seiten is\u007Cfoiganden ~{0} Seiten san}} in derer Kategorie enthoiden:
+category-file-count|{{PLURAL:~{1}\u007CDe Kategorie enthoid foigende Datei:\u007C{{PLURAL:~{0}\u007CFoigende Datei is oane vo insgsamt ~{1} Datein in dera Kategorie:\u007CEs wean ~{0} von insgsamt ~{1} Datein in dera Kategorie ozoagt:}}}}
+category-file-count-limited|{{PLURAL:~{0}\u007CD' foingde Datei is\u007CDe foingden ~{0} Datein san}} in de Kategorie eisortird:
+categorytree-member-counts|enthoit {{PLURAL:~{0}\u007C1 Unterkategorie\u007C~{0} Unterkategorien}}, {{PLURAL:~{1}\u007C1 Seite\u007C~{1} Seiten}} und {{PLURAL:~{2}\u007C1 Datei\u007C~{2} Datein}}
+categorytree-num-categories|~{0} K
+categorytree-num-pages|~{0} S
+categorytree-num-files|~{0} D
+nextn|{{PLURAL:~{0}\u007Cnaxta\u007Cnaxte ~{0}}}
+prevn|{{PLURAL:~{0}\u007Cvorheriga\u007Cvorherige ~{0}}}
+listingcontinuesabbrev|(Fortsetzung)
+bold_sample|Fetta Text
+bold_tip|Fetta Text
+italic_sample|Kursiva Text
+italic_tip|Kursiva Text
+link_sample|Link-Text
+link_tip|Interna Link
+headline_sample|Ibaschrift Text
+headline_tip|Ebane-2-Ibaschrift
+hidden-category-category|Vasteckte Kategorie
+statistics|Statistik
+statistics-articles|Inhoidsseiten
+statistics-pages|Seiten
+statistics-pages-desc|Olle Seiten in dém Wiki, inklusiav da Dischkrirseiten, Weiderloatungen usw.
+categorytree|Kategorienbaam
+categorytree-portlet|Kategorien
+categorytree-legend|an Kategorienbaam åzoang
+categorytree-desc|Dameeglicht a dynaamische Navigazion fyr d' Speziaalseiten [[Special:CategoryTree\u007CKategorienbaam]]
+categorytree-header|Zoagt fyr d' ågeewane Kategorie d' Unterkategorie in ner Baamstruktur.\nDe Seiten braucht bstimmte JavaScript-Funkzionen (Ajax) und funkzionird meeglicherweis ned, wånn JavaScript ausgschoiden is oder a uroider Browser vawendt werd.
+categorytree-category|Kategorie:
+categorytree-go|Loner
+categorytree-parents|Owerkategorien
+categorytree-mode-categories|netter Kategorien
+categorytree-mode-pages|Seiten ausser d' Daatein
+categorytree-mode-all|olle Seiten
+categorytree-collapse|eihkloppm
+categorytree-expand|auskloppm
+categorytree-num-empty|laar
+categorytree-load|loon
+categorytree-loading|lood ...
+categorytree-nothing-found|Nix gfunden
+categorytree-no-subcategories|Koah Unterkategorie
+categorytree-no-parent-categories|Koane Owerkategorien
+categorytree-no-pages|Koane Seiten oder Unterkategorien
+categorytree-not-found|Kategorie „~{0}“ ned gfunden
+categorytree-error|Probleem beim Loon voh de Daaten.
+categorytree-retry|Bittschee wort a Momenterl und vasuachs dånn nuamoi.
+poem-desc|Fügt s'<code>&lt;poem&gt;</code>-Tag zum Formatian vu Gedichtln dazua
+cite_article_desc|Ergänzd d' [[Special:Cite\u007CZitirhüf]]-Speziaalseiten und an Link im Werkzeigkosten
+cite_article_link|d' Seiten zitirn
+tooltip-cite-article|Hihweis, wia dé Seiten zitird wern kå
+cite|Zitirhüf
+cite_page|Seiten:
+cite_submit|åzoang
+wikieditor-template-editor-preference|Formularbasirnds Beorweiten voh Wiki-Vurlong aktivirn
+wikieditor-template-editor-dialog-title|Vurlog beorweiten
+wikieditor-template-editor-dialog-submit|Aktualisirn
+wikieditor-template-editor-dialog-cancel|Obbrechen
+wikieditor-templates-preference|Aktiviarung vom Eih- und Ausblenden voh Vurlong
+wm-license-fsf-wiki-link|w:bar:Free Software Foundation
+wm-license-information-table-summary|A standaardisierde Tabejn mid vóiständige Informazióner zua derer Daatei, a Bschreiwung, woss zoagt und wia und voh wéms erstejd worn is, Urhéwerrechtsinformazióner und Quejn.
+wm-license-information-description|Bschreiwung
+wm-license-information-description-missing|Dés Bijdel vafiagt ywer koa '''Bschreiwung''' néd, óder es fejn wichtige Informazióner.
+wm-license-information-description-missing-request|Bijder sóin a Zaummfossung bsitzen, dé'n Betrochter ywern Inhoid, Quejn und wenn méglé Daatum informiern.\nWaunn du wos dodavoh woasst óder an Zuagaung zua sóicherne Informazióner host, fiag dé bittscheh da Bijdelbschreiwungsseiten dazua.
+wm-license-information-source|Quejn
+wm-license-information-source-missing|Dé Daatei hod koane '''Quejn'''.
+wm-license-information-date|Daatum
+wm-license-information-author|Urhéwer
+wm-license-information-author-missing|Derer Daatei fejn d' Auhgoom zum '''Autor'''.
+wm-license-information-permission|Gnémigung
+wm-license-information-permission-reusing-text|Weidernutzung voh derer Daatei
+wm-license-information-permission-see-below|Schaugst unten
+wm-license-information-other-versions|Aundre Versióner
+wm-license-pd-wiki-link|w:bar:Gmoafreiheit
+wikimedia-copyright|Da Text is unter da Lizenz <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.de">„Creative Commons Attribution/Share-Alike“</a> vafiagbor; zuasätzliche Bedingungen kennan åwendbor sai.\nOazlhaiten san in de <a href="https://wikimediafoundation.org/wiki/Nutzungsbedingungen">Nutzungsbedingungen</a> beschrim.
+tog-underline|Links unterstreichen:
+tog-hideminor|Kloane Änderrungen ausblenden
+tog-hidepatrolled|Kontroilirde Änderrungen in dé „Létzten Änderrungen“ ausblenden
+tog-newpageshidepatrolled|Kóntróilirde Seiten auf da Listen „Neiche Seiten“ vaberng
+tog-extendwatchlist|Daweiterde Beówochtungslisten
+tog-usenewrc|Endarunga vo "Lezde Endarunga" und vo "Mei Beobochtd" noch Seitn gruppian
+tog-numberheadings|Ywerschriften autómaatisch nummerrirn
+tog-showtoolbar|Zoag de Edit Toolbar (JavaScript nedig)
+tog-editondblclick|Seiten mid am Dóppedrucker beorweiden (JavaScript werd braucht)
+tog-editsectiononrightclick|Oahzelne Obschnitt mid am Rechtsdrucker beorweiten (JavaScript werd braucht)
+tog-watchcreations|Voh mir söwer eihgstöde Seiten autómaatisch beówochten
+tog-watchdefault|Voh mir söwer gänderde Seiten autómaatisch beówochten
+tog-watchmoves|Voh mir söwer vaschówerne Seiten autómaatisch beówochten
+tog-watchdeletion|Voh mir söwer gléschde Seiten autómaatisch beówochten
+tog-minordefault|D' eigernen Änderrungen standardmässig gringfiagig markirn
+tog-previewontop|Vurschau ówerhoib vom Beorweitungsfenster åzoang
+tog-previewonfirst|Ban ersten Beorweiten oiwei d' Vurschau åzoang
+tog-enotifwatchlistpages|Bei Änderrungen voh beówochterde Seiten a E-Mail schicken
+tog-enotifusertalkpages|Bei Änderrungen voh meiner Benutzerseiten a E-Mail schicken
+tog-enotifminoredits|Aa ba kloane Änderrungen voh beówochterde Seiten a E-Mail schicker
+tog-enotifrevealaddr|Deih E-Mail-Adress in Benoochrichtigungs-E-Mails åzoang
+tog-shownumberswatching|D' Åzoi voh dé beówochterden Benutzer åzoang
+tog-oldsig|Existente Unterschrift
+tog-fancysig|Unterschrift ois Wikitext bhåndln (óne autómaatische Valinkung)
+tog-uselivepreview|Live-Vurschau nutzen (dodafyr braucht ma JavaScript) (experimentoy)
+tog-forceeditsummary|Warnen, wånn ban Speichern dé Zåmmerfossung fööd
+tog-watchlisthideown|Eigerne Beorweitungen in da Beówochtungslisten ausblenden
+tog-watchlisthidebots|Beorweitungen durch Bots in da Bówochtungslisten ausblenden
+tog-watchlisthideminor|Kloane Beorweitunger in da Bówochtungslisten ausblenden
+tog-watchlisthideliu|Beorweitunger vo ågmödte Bnutzer in da Beówochtungslisten ausblenden
+tog-watchlisthideanons|Ned ogmoidte Nutzer in da Beówochtungslisten ausblenden
+tog-watchlisthidepatrolled|Kontroilirde Änderrungen in da Beowochtungslisten ausblenden
+tog-ccmeonemails|Schick ma Kopien voh dé E-Mails, dé i åndre Benutzer send
+tog-diffonly|Zoag beim Versiónsvagleich netter dé Unterschiad und néd d' voiständige Seiten
+tog-showhiddencats|Vasteckte Kategorien åzoang
+tog-norollbackdiff|Unterschiad noch'm Zrucksetzen unterdrucker
+tog-useeditwarning| A Warung geem, sofern a zur da Beorweitung geffnate Seiten valossen werd, de ned gspeicherde Änderrungen enthoit.
+underline-always|oiwei
+underline-never|nia
+underline-default|obhängig voh da Browsereistöung
+editfont-style|Schriftoart fyrn Text im Beorweitungsfenster
+editfont-default|Browserstandard
+editfont-monospace|Schrift mid ner festen Zeichenbreaden
+editfont-sansserif|Serifenlose Groteskschrift
+editfont-serif|Schrift mid Serifen
+hidden-categories|{{PLURAL:~{0}\u007CVasteckte Kategorie\u007CVasteckte Kategorina}}
+index-category|Indizirde Seiten
+noindex-category|Ned-indiziade Seitn
+broken-file-category|Seiten mid kaputte Daateilinks
+about|Iba
+article|Artike
+newwindow|(wean in an neichn Fensta afgmocht)
+cancel|Obbrecha
+moredotdotdot|Merer
+mypage|Eigerne Seiten
+mytalk|Mei Dischkurs
+anontalk|Dischkrirseiten voh derer IP-Adress
+navigation|Navigation
+and| und
+qbfind|Finden
+qbbrowse|Blaadeln
+qbedit|werkeln
+qbpageoptions|Seitenopzionen
+qbmyoptions|Meine Seiten
+faq|Oft gstejte Frong
+faqpage|Project:FAQ
+actions|Aktiona
+namespaces|Namasramm
+variants|Variantn
+errorpagetitle|Fehla
+returnto|Zruck za da Seitn ~{0}.
+tagline|Aus {{SITENAME}}
+help|Huif
+search|Suach
+searchbutton|Suacha
+go|Ausfyrn
+searcharticle|Artikl
+history|Versiona
+history_short|Gschicht oschaugn
+updatedmarker|(gänderd)
+printableversion|Druckversion
+permalink|Permanenta Link
+print|Drucken
+view|Leesen
+edit|Werkln
+create|Aufbaun
+editthispage|Seiten beorweiten
+create-this-page|Seiten erstön
+delete|Leschn
+deletethispage|De Seiten leschen
+undelete_short|{{PLURAL:~{0}\u007C1 Version\u007C~{0} Versiona}} wiedaheastäin
+viewdeleted_short|{{PLURAL:~{0}\u007COah geléschde Versión\u007C~{0} geléschde Versiónen}} åschauh
+protect|Schitzn
+protect_change|endan
+protectthispage|Seiten schytzen
+unprotect|freigeem
+unprotectthispage|Seitenschutz ändern
+newpage|Neiche Seitn
+talkpage|De Seiten bsprecher
+talkpagelinktext|Dischkrian
+specialpage|Speziaalseiten
+personaltools|Mei Weakzeig
+articlepage|Seiteninhoid åzoang
+talk|Dischkrian
+views|Osichtn
+toolbox|Werkzeigkisten
+userpage|Benutzerseiten
+projectpage|Projektseiten åzoang
+imagepage|Daateiseiten åzoang
+mediawikipage|Inhoitsseiten åzoang
+templatepage|Vurlongseiten åzoang
+viewhelppage|Hüfeseiten åzoang
+categorypage|Kategorieseiten åzoang
+viewtalkpage|Diskussion
+redirectpagesub|Weiderloatung
+viewcount|Dé Seiten do is bis iatz {{PLURAL:~{0}\u007Coahmoi\u007C~{0}-moi}} obgruaffm worn.
+protectedpage|Gschytzde Seiten
+jumpto|Wexln za:
+jumptonavigation|Navigation
+jumptosearch|Suach
+view-pool-error|Tschuidige, dé Server san im Moment ywerlostt.\nZvü Leid vasuachen, dé Seiten do z' bsuachen.\nBittscheh wort a por Minuten, bevur du 's nohamoi vasuachst.\n\n~{0}
+pool-timeout|Zeidoblaaff beim Worten auf d' Sperrung
+pool-queuefull|Poolworteschlång is vói
+pool-errorunknown|Unbekånnter Feeler
+aboutsite|Iba {{SITENAME}}
+aboutpage|Project:Iba
+copyright|Da Inhoid is unter da ~{0} vafiagbor.
+copyrightpage|{{ns:project}}:Urhebarecht
+currentevents|Aktuelle Ereigniss
+currentevents-url|Project:Aktuelle Ereigniss
+disclaimers|Impressum
+disclaimerpage|Project:Impressum
+edithelp|Huif fias Werkln
+mainpage|Hoamseitn
+mainpage-description|Hoamseitn
+policy-url|Project:Richtlinien
+portal|Autornportal
+portal-url|Project:AutornPortal
+privacy|Datnschutz
+privacypage|Project:Datnschutz
+badaccess|Koane ausreichenden Rechtt
+badaccess-group0|Du host néd d' daforderliche Berechtigung fyr dé Akzión do.
+badaccess-groups|Dé Akzión is bschränkt auf Benutzer, dé {{PLURAL:~{1}\u007Cda Gruppm\u007Coahne voh dé Gruppm}} „~{0}“ åghern.
+versionrequired|Versión ~{0} voh MediaWiki werd braucht.
+versionrequiredtext|Versión ~{0} voh MediaWiki werd braucht, um dé Seiten nützen z' kenner.\nSchaug auf [[Special:Version\u007CVersiónsseiten]]
+ok|Passt
+retrievedfrom|Vh „~{0}“
+youhavenewmessages|Du host ~{0} (~{1}).
+youhavenewmessagesmulti|Du host neiche Nochrichtn: ~{0}
+editsection|Werkln
+editold|Werkln
+viewsourceold|Quejtext ozoagn
+editlink|werkln
+viewsourcelink|In Quejtext ozoagn
+editsectionhint|Obschnitt beorbatn: ~{0}
+showtoc|Åzoang
+hidetoc|vastecken
+thisisdeleted|~{0} åschauh óder wiederherstön?
+viewdeleted|~{0} åzoang?
+restorelink|~{0} gléschde {{PLURAL:~{0}\u007CVersión\u007CVersiónen}}
+feedlinks|Feed:
+feed-invalid|Néd gütiger Feed-Abonnement-Typ.
+feed-unavailable|Es steengern koane Feeds zur Vafiagung.
+site-rss-feed|RSS-Feed fyr ~{0}
+site-atom-feed|Atom-Feed fia ~{0}
+page-rss-feed|RSS-Feed fyr „~{0}“
+page-atom-feed|Atom-Feed fia „~{0}“
+red-link-title|~{0} (de Seitn gibts ned)
+nstab-main|Seitn
+nstab-user|Nutzaseitn
+nstab-media|Meedienseiten
+nstab-special|Spezialseitn
+nstab-project|Projektseitn
+nstab-image|Datei
+nstab-mediawiki|Systémnoochricht
+nstab-template|Vorlog
+nstab-help|Hüfeseiten
+nstab-category|Kategorie
+nosuchaction|De Akzion gibts ned
+nosuchactiontext|Dé in da URL ågeewerne Akzión werd voh MediaWiki néd unterstytzd.\nEs kå a Schreibfeeler in da URL vurlieng óder es is a feelerhofter Link åklickt worn.\nEs kå sé aa um an Prógrammierfeeler in da Software, dé auf {{SITENAME}} bnutzd werd, håndeln.
+nosuchspecialpage|De Speziaalsaiten gibts ned
+nospecialpagetext|<strong>Dé aufgruafferne Speziaalseiten is néd vurhånden.</strong>\n\nOlle vafiagborn Speziaalseiten san in da [[Special:SpecialPages\u007CListen voh dé Speziaalseiten]] z' finden.
+error|Feeler
+databaseerror|Feeler in da Daatenbånk
+laggedslavemode|'''Ochtung:''' De åzoagte Seiten kunnterd unter Umständ ned d' letzden Beorweitungen enthoiden.
+readonly|Daatenbånk gsperrd
+enterlockreason|Bittscheh gib an Grund å, warum de Daatenbånk gsperrd wern soi und a Obschätzung ywer de Dauer voh da Sperrung
+readonlytext|De Daatenbånk is vurywergeehend fyr Neieihtreeg und Änderrungen gsperrd. Bittschee vasuchs spaader nuamoi.\n\nGrund voh da Sperrung: ~{0}
+missing-article|Da Text vo „~{0}“ ~{1} is in da Daatenbank ned gfundn worn.\n\nDe Seitn is meglicherwei gleschd oda vaschobm worn.\n\nFois des ned zuatrifft, hosd eventuell an Fehla im Programm gfundn. Bittschee informia an [[Special:ListUsers/sysop\u007CAdministrator]] und nenn eam de URL.
+missingarticle-rev|(Versionsnumma: ~{0})
+missingarticle-diff|(Unterschiad zwischen Versionen: ~{0}, ~{1})
+readonly_lag|De Daatenbånk is automaatisch fyr Schraibzuagriff gsperrt, damid se d' vatailten Daatenbånkserver (slaves) mim Hauptdaatenbånkserver (master) obglaichen kennan.
+internalerror|Interner Feeler
+internalerror_info|Interner Feeler: ~{0}
+filecopyerror|De Datai „~{0}“ hod ned noch „~{1}“ kopird wern kenna.
+filerenameerror|Dé Daatei „~{0}“ hod néd noch „~{1}“ umbenånnt wern kenner.
+filedeleteerror|De Daatei „~{0}“ hod néd gléschd wern kenner.
+directorycreateerror|As Vazeichnis „~{0}“ hod néd åglégt wern kenner.
+filenotfound|Dé Daatei „~{0}“ is néd gfunden worn.
+unexpected|Unerworteder Wert: „~{0}“=„~{1}“.
+formerror|Feeler: Dé Eihgom håm néd vaorweitt wern kenner.
+badarticleerror|Dé Akzión kå néd auf dé Seiten ågwendt wern.
+cannotdelete|Dé Seiten óder Daatei "~{0}" kå néd gléschd wern.\nMéglicherweis iss schoh vohram åndern gléschd worn.
+cannotdelete-title|Seiten „~{0}“ kå néd gléschd wern
+badtitle|koa gitiga Titl
+badtitletext|Da Titl voh da ogfordatn Seitn is ned gitig, laar oda a ungitiga Sprochlink vonam andan Wiki.
+perfcached|De foigandn Datn stamma ausm Cache und san meglichaweis neama aktuäi. Maximoi {{PLURAL:~{0}\u007Coa Eagebnis is\u007C~{0} Ergebniss san}} im Cache vafigboar.
+perfcachedts|De Datn stamma ausm Cache. Da Zeidpunkt vo da lezzdn Aktualisiarung: ~{1}, ~{2} Uah. Maximoi {{PLURAL:~{3}\u007Coa Ergebnis is\u007C~{3} Ergebniss san}} im Cache vafigboar.
+querypage-no-updates|'''Dé Aktualisiarungsfunkzión voh derer Seiten is derzeid deaktivird. Dé Daaten wern bis auf Weiders néd daneiert.'''
+viewsource|Quejtext ozoagn
+viewsource-title|Quöntext voh da Seiten ~{0} auhschauh
+actionthrottled|Aktionsfrequenz drossld
+actionthrottledtext|A Anti-Spam-Skript begrenzd de Ozoi vo de Vaendarunga pro Minutn. Vasuachs in a boar Minutn wieda.
+protectedpagetext|Dé Seiten is gschytzd worn, um Beorweitungen z' vahindern.
+viewsourcetext|Du kåst ower 'n Quötext åschaung und kópirn:
+viewyourtext|Du kåst 'n Quejtext vah '''deiner Beorwatung''' derer Seiten betrochten und kópiern:
+protectedinterface|Dé Seiten do enthoit Text fyr d' Benutzerówerflächen voh da Software und is gschytzd, um an Missbrauch vurzbeing.
+editinginterface|'''Ówocht:''' Dé Seiten do enthoit voh da MediaWiki-Software gnutzden Text. \nÄnderrungen auf derer Seiten wirken sé auf d' Benutzerówerflächen aus.\nZiag bittscheh im Foi voh Ywersétzungen in Betrocht, dé bei [//translatewiki.net/wiki/Main_Page?setlang=de translatewiki.net], da Lókaalisiarungsblottform fyr MediaWiki, durchzfyrn.
+cascadeprotected|Dé Seiten is zua da Beorweitung gsperrd worn. Sie is in d' {{PLURAL:~{0}\u007Cfóigande Seiten\u007Cfóiganden Seiten}} eihbunden, dé mid da Kaskaadensperrópzión gschytzd {{PLURAL:~{0}\u007Cis\u007Csan}}:\n~{1}
+namespaceprotected|Du host néd d' daforderliche Berechtigung, Seiten im Náumensraum '''~{0}''' b'orweiden z' kenner.
+customcssprotected|Du host néd d' Berechtigung dé CSS enthoitende Seiten z' b'orweiden, weis d' persénlichen Eihstöungen vohram aundern Benutzer enthoitt.
+customjsprotected|Du host néd d' Berechtigung dé JavaScript enthoitende Seiten z' b'orweiden, weis d' persénlichen Eihstöungen vohram aundern Benutzer enthoitt.
+ns-specialprotected|Speziaalseiten kennern néd b'orweidt wern.
+titleprotected|A Seiten mid dém Nåm kå néd åglégd wern. Dé Sperrn is durch [[User:~{0}\u007C~{0}]] mid da Begryndung ''„~{1}“'' eihgerichtt worn.
+virus-badscanner|Feelerhofte Kónfigurazión: unbekaunnter Virnscanner: ''~{0}''
+virus-scanfailed|Scan is föögschlong (code ~{0})
+virus-unknownscanner|Néd bekaunnter Virnscanner:
+logouttext|'''Iatzerd bist obgmödt.'''\n\nDu kåst {{SITENAME}} iatzerd anónym weiderdoah, óder di danaid unterm söwing óder am åndern Benutzernåm <span class='plainlinks'>[~{0} åmöden]</span>.\nBeochtt ower, daas oanige Seiten noh åzoang kennern, daas du ågmödt bist, sólång du néd deih Browsercache glaard host.
+yourname|Nutzanama:
+yourpassword|Passwort:
+yourpasswordagain|Es Passwort no amoi eigebm
+remembermypassword|Mitm Brausa dauahoft ogmejd bleibm (maximoi ~{0} {{PLURAL:~{0}\u007CDog\u007CDog}})
+yourdomainname|Dei Domain:
+externaldberror|Entweder es ligt a Feeler bai da externen Authentifiziarung vur oder du derfst dai externs Benytzerkonto ned aktualisirn.
+login|Eilogga
+nav-login-createaccount|Eilogga / Konto olegn
+userlogin|Eilogga / Konto olegn
+userloginnocreate|Åmöden
+logout|Obmöden
+userlogout|Auslogga
+notloggedin|Ned ågmödt
+nologin|Du host koa Nutzakonto? ~{0}.
+nologinlink|A neichs Nutzakonto olegn
+createaccount|Nutzakonto olegn
+gotaccount|Hosd scho a Nutzakonto? '''~{0}'''.
+gotaccountlink|Eilogga
+userlogin-resetlink|Hosd de Datn zan Eilogga vagessn?
+createaccountmail|per E-Mail
+createaccountreason|Grund
+badretype|De zwoa Posswerter stimmer ned ywereih.
+userexists|Der Benutzernaum do is schoh vageem. Bittscheh nimm an aundern her.
+loginerror|Feeler bei da Åmödung
+createaccounterror|Des Benutzerkonto hod ned erstöd wern kenner: ~{0}
+nocookiesnew|Da Benytzerzuagång is erstöid worn, du bist ower ned ågmöidt. {{SITENAME}} benedigt fyr de Funkzion Cookies, bittschee aktiviar de und möidt de danoch mid daim naichn Benytzernåm und 'm dazuaghering Posswort å.
+nocookieslogin|{{SITENAME}} nimmt Cookies zum Ailoggen vo de Benytzer her. Du host Cookies deaktivird, bittschee aktivir de und vasuchs nuamoi.
+nocookiesfornew|Dés Benutzerkóntó is néd erstöd worn, wei d' Daatenherkumft néd damittelt wern hod kenner.\nEs muass sichergstöd seih, daas Cookies aktivierd san. Danoch bittscheh d' Seiten daneit loon und wieder vasuacher.
+noname|Du muasst an gyting Benutzernåm ågeem.
+loginsuccesstitle|D' Åmöidung is erfoigraich gween
+loginsuccess|Du bist jetzad ois „~{0}“ bai {{SITENAME}} ågmöidt.
+wrongpassword|Des Posswort is foisch! Bitschee prowirs nuamoi.
+wrongpasswordempty|Es is koa Posswort ned aigeem worn. Bittschee prowirs nuamoi.
+mailmypassword|Neichs Passwort zuaschicka
+passwordremindertitle|A neichs Kennwoat fiar a {{SITENAME}}-Nutzakonto
+acct_creation_throttle_hit|Du host scho ~{0} {{PLURAL:~{0}\u007CBenytzerkonto\u007CBenytzerkonten}} und kååst jetzad koane mer åleeng.
+emailconfirmlink|E-Póst-Adressen bstäting (Authentifiziarung)
+accountcreated|Benytzerkonto is erstöid worn
+accountcreatedtext|'s Benytzerkonto ~{0} is aigrichtt worn.
+loginlanguagelabel|Sproch: ~{0}
+changepassword|Posswort ändern
+oldpassword|Oids Posswort:
+newpassword|Neichs Posswort:
+retypenew|Neichs Posswort (nuamoi):
+resetpass_submit|Posswort ywermitteln und auhmöden
+resetpass-submit-loggedin|Posswort ändern
+resetpass-submit-cancel|Obbrechen
+passwordreset|Passwoat zrucksetzn
+passwordreset-username|Nutzanama:
+extlink_sample|http://www.example.com Link-Text
+extlink_tip|Externa Link (http:// beochtn)
+nowiki_sample|Nedformatiadn Text do eibaun
+nowiki_tip|Wiki-Format ignorian
+image_tip|Dateilink
+media_tip|Datei-Link
+sig_tip|Dei Untaschrift mit Zeitstempe
+hr_tip|Wogrechte Linie (sporsam vawendn)
+summary|Zammfossung:
+subject|Bedreff
+minoredit|Nua Kloanigkeidn san vaendat worn
+watchthis|De Seitn beobochtn
+savearticle|Seitn speichan
+preview|Vorschau
+showpreview|Vorschau zoagn
+showdiff|Endarunga zoagn
+anoneditwarning|Obocht: Du bist ned eigloggt.\nDei IP-Adress wead in da Versionsgschicht afzoachnet.
+missingsummary|'''Hiwais:''' du host koa Zåmmfossung ågeem. Wånn du ernait auf „{{int:savearticle}}“ druckst, werd dai Enderung one a Zåmmfossung ywernumma.
+missingcommenttext|Bittschee gib a Zåmmfossung ai.
+summary-preview|Voaschau vo da Zammfossung:
+subject-preview|Vurschau vom Bedreff:
+blockedtitle|Da Benytzer is gsperrt
+whitelistedittext|Du muasst de ~{0}, um Saiten beorwaiten z' kenna.
+loginreqtitle|'s braucht a Åmöidung
+loginreqlink|åmöden
+loginreqpagetext|Du muasst dé ~{0}, daas d' Seiten leesen kauhst.
+accmailtitle|Kennwoat vaschickt
+accmailtext|E zuafällig genariards Posswort fyr [[User talk:~{0}\u007C~{0}]] is an ~{1} gschickt worn.\n\nDes Posswort fyr des naiche Benutzerkonto kå auf da Speziaalseiten  „[[Special:ChangePassword\u007CPosswort ändern]]“ gändert wern.
+newarticle|(Neich)
+newarticletext|Du bist am Link gfoigt, wos no koa Seitn gibt.\nUm de Seitn ozlegn, trog dein Text im untan Kostn ei (schaug af da [~{0} Huifeseitn] fia mea Infos).\nWens a Irrtum is, dassd do bist, nach druck in Zruck-Knopf vom Brausa.
+anontalkpagetext|---- ''De Seiten werd dodazua hergnumma, am ned-ågmöiderten Benutzer Nochrichten z' hinterlossen.\nWånnst mid de Kommentare auf derer Seiten nix åfanga kåst, is vamuatlich da friarerne Inhower vo derer IP-Adress gmoat und du kåstas ignorirn.\nWånnst a anonymer Benutzer bist und denkst, das irrelevante Kommentare ån di grichtt worn san, [[Special:UserLogin\u007Cmöid de bittschee å]], um zuakynfteg Vawirrung z' vamein.''
+noarticletext|De Seitn enthoid momentan koan Text ned.\nDu konst [[Special:Search/{{PAGENAME}}\u007Cnochm Titl]] in andan Seitn suacha,\n<span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} de Logbiacha duachsuacha],\noda [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} de Seitn beorbatn]</span>.
+noarticletext-nopermission|Af dea Seitn gibts zua Zeit koan Text.\nDu konst [[Special:Search/{{PAGENAME}}\u007Cin Seitntitl]] in andan Seitn suacha, oda <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} dia de Logbiachln dazua oschaugn]</span>, oba du hosd koa Berechtigung de Seitn ozlegn.
+userpage-userdoesnotexist|Des Benutzerkonto „<nowiki>~{0}</nowiki>“ is ned vurhånden. Bittschee priaf, ob du de Seiten wirkle erstöin/beorweiten wüist.
+userpage-userdoesnotexist-view|Benutzerkonto „~{0}“ existiard ned.
+blocked-notice-logextract|{{GENDER:~{0}\u007CDer Benutzer\u007CDe Benutzarin\u007CDer Benutzer do}} is zurzeid gesperrd.\nZua da Informazion foigt a aktueller Auszug aus 'm Benutzersperr-Logbiache:
+updated|(Gänderd)
+note|'''Hihweis:'''
+previewnote|'''Des is nua a Vorschau, de Seitn is no ned gspeichad worn!'''
+previewconflict|Dé Vurschau gibt 'n Inhoid vom ówern Textföd wieder. Só werd d' Seiten ausschaung, wånnst iatz speichern duast.
+session_fail_preview|'''Daine Beorwaitungen håm ned gspaichert wern kenna, wail Sitzungsdaaten valurn gånga san.'''\nBittschee vasuachs nuamoi, indem du unter da foiganden Textvurschau noamoi auf „Saiten spaichern“ druckst.\nSoidad des Probleem bestee blaim, [[Special:UserLogout\u007Cmöid de ob]] und danoch wider å.
+editing|Beorbatn vo ~{0}
+editingsection|Werkln ba ~{0} (Obschnitt)
+editingcomment|Werkeln voh ~{0} (Neicher Obschnit)
+editconflict|Konflikt baim Beorwaiten: ~{0}
+explainconflict|Eppern ånderer hod de Saitn gendert, nochdem du ågfånga host de zum beorwaiten.\nDes owere Textföidl enthoit 'n aktuöin Stånd.\nDes untare Textföidl enthoit daine Enderungen.\nBittschee fiag daine Enderungen ins owere Textföidl ai.\n'''Netter''' da Inhoit vom owern Textföidl werd gspaichert, wånn du auf  „{{int:savearticle}}“ druckst!
+yourtext|Deih Text
+storedversion|Gespeicherde Versión
+editingold|'''Ochtung: Du beorwaitst a oide Version vo derer Saiten. Wånn du spaichertst, wern olle naichen Versionen ywerschriim!'''
+copyrightwarning|'''Bittschee kopiar koane Websaiten, dé néd daine oaganen san, benytz koane urhéwerrechtléch gschytzten Werke óne aner Dalaabnis vom Urhéwer!'''<br />\n\nDu gibst uns dodamid dai Zuasog, dass du dén Text '''söiwer vafosst''' host, das da Text a Oigmoaguat '''(public domain)''' is, óder das da '''Urhéwer''' sai '''Zuastimmung''' geem hod. Fois der Text beraits irngdwó ånderst vaéffmtlécht worn is, moch bittschee an Hiwais in da Diskussiónssaitn.\n<i>Bittschee beochtt, das olle {{SITENAME}}-Baitrég autómaatésch unter da „~{1}“ steengan (schau unter ~{0} fyr Details). Fois du néd mechst, das dai Orwait do vo ånderne vaéndert und vabroatt werd, dånn druck néd auf „Saiten spaichern“.</i>
+copyrightwarning2|Bittscheh beocht, daas olle Beiträg zua {{SITENAME}} voh ånderne Midwirkende beorweitt, gänderd óder gléscht wern kennern.\nReich do koane Textt eih, fois du néd wüst, daas dé óne Eihschränkung gänderd wern kennern.\n\nDu bstätigst dodamid aa, daas du dé Textt söwer gschriem host óder dé voh ner gmoahfrein Quön kópird host\n(schaug ~{0} fyr weiderne Details). '''YWERTROG ÓNE A DALAABNIS KOANE URHÉWERRECHTLICH GSCHYTZDE INHOITE!'''
+semiprotectedpagewarning|'''Hoibsperrung:''' De Saiten is aso gsperrt worn, das netter registriarde Benytzer de endern kenna.
+titleprotectedwarning|'''Ochtung: De Saitenerstöiung is aso gschytzt worn, das netter Benytzer mid [[Special:ListGroupRights\u007Cspeziöie Rechte]] de Saiten erstöin kennan.'''\nZur Informazion foigt da aktuöie Logbuachaitrog:
+templatesused|{{PLURAL:~{0}\u007CDe foigande Vorlog wead\u007CDe foigandn Vorlogn wean}} af dera Seitn vawendt:
+templatesusedpreview|{{PLURAL:~{0}\u007CDe foigande Vurlog werd\u007CD' foiganden Vurlong wern}} in derer Saiten-Vurschau vawendt:
+templatesusedsection|{{PLURAL:~{0}\u007CDé fóigende Vurlog werd\u007CFóigende Vurlong wern}} voh dém Obschnit vawendt:
+template-protected|(schreibgschitzt)
+template-semiprotected|(schreibgschitzt fia ned-ogmejdte Nutza)
+hiddencategories|De Seitn is in {{PLURAL:~{0}\u007Ca vasteckde Kategorie\u007C~{0} vasteckde Kategorina}} eisortiad:
+nocreate-loggedin|Du host koah Berechtigung, neiche Seiten z' erstön.
+permissionserrors|Berechtigungsfeeler
+permissionserrorstext|Du hosd koa Recht, des z doa. {{PLURAL:~{0}\u007CGrund\u007CGrind}}:
+permissionserrorstext-withaction|Du hosd aus {{PLURAL:~{0}\u007Cfoigendm Grund\u007Cfoigendn Grind}} koa Recht ned, ~{1}:
+recreate-moveddeleted-warn|'''Obocht: Du legst a Seitn o, wo scho friaa glescht worn is.'''\n\nBittschee ibaleg da genau, obs sinnvoi is de Seitn ozlegn.\nDes Lesch- und Vaschiab-Logbuach dazua findsd do:
+moveddeleted-notice|De Seitn do is glescht worn. Es foigt a Auszug ausm Lesch- und Vaschiabungs-Logbuch vo dea Seitn.
+edit-conflict|Konflikt ban Beorwaten.
+editwarning-warning|'s Valossen vo derer Seiten kå dodazua fyrn, daas d' Änderrungen valurn geengan.\nOis ågmödter Benutzer kå's Åzoang vo derer Warnung im "Beorweiten"-Bereich vo de Eistellungen obgschoiden wern.
+post-expand-template-inclusion-warning|Obocht: De Gress vo eibundne Vorlong is z gross.\nA poar Vorlogn wean ned eibundn.
+post-expand-template-inclusion-category|Seitn, wo d Gress vo de eibundnan Vorlogn ibaschrittn is
+post-expand-template-argument-warning|'''Obocht:''' De Seitn enthoit mindastns oa Argument in da Vorlog, wo expandiat z grouss is. \nDe Parameta wean ignoriad.
+post-expand-template-argument-category|Seitn mid ignoriadn Voalognparametan
+undo-summary|Änderrung ~{0} voh [[Special:Contributions/~{1}\u007C~{1}]] ([[User talk:~{1}\u007CDiskussión]]) ryckgängig gmocht.
+cantcreateaccounttitle|Benutzerkonto kå ned erstöd wern
+viewpagelogs|Logbiacha fia de Datei ozoagn
+currentrev|Aktuelle Versión
+currentrev-asof|Letzte Version vo ~{0}
+revisionasof|Version vom ~{0}
+revision-info|Version vom ~{0} vo ~{1}.
+previousrevision|← Nextejtane Version
+nextrevision|Neiare Version →
+currentrevisionlink|Aktuelle Version
+cur|Aktuell
+next|Naxte
+last|Friaare
+page_first|Auhfaung
+page_last|End
+histlegend|Zua Ozoag vo de Endarunga oafoch de z vagleichandn Versiona und Schoitflechn „{{int:compareselectedversions}}“ druckn.<br />\n* ({{int:cur}}) = Unterschied zua aktuelln Version, ({{int:last}}) = Unterschied zua vorherign Version\n* Uhrzeid/Datum = Version za dera Zeid, Nutzanama/IP-Adress vom Beorbata, {{int:minoreditletter}} = Kloane Endarung
+history-fieldset-title|Suach in da Versionsgschicht
+history-show-deleted|Nua gleschte Versiona
+histfirst|Ejtaste
+histlast|Neiaste
+historyempty|(laar)
+history-feed-title|Versiónsgschicht
+history-feed-item-nocomment|~{0} am ~{1}
+history-feed-empty|Die angeforderte Seitn gibt's net.\nVielleicht is sie gelöscht oda verschom worn.\n[[Special:Search\u007CDurchsuachan]] S' {{SITENAME}} für passende neie Seitn.
+rev-deleted-text-permission|<div class="mw-warning plainlinks"> De Version is glöscht worn und is nimma öffentlich zum einseng.\nNähere Angaben zum Löschvorgang sowia a Begründung findn si im [{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{PAGENAMEE}}}} Lösch-Logbuch].</div>
+rev-deleted-text-view|Dé Versión dodan is '''gléscht''' worn.\nDu kauhstas auhschauh, waunn du wüst. Nahernte Auhgoom steengern im [{{fullurl:{{#special:Log}}/delete\u007Cpage={{FULLPAGENAMEE}}}} Lésch-Logbiaché].
+rev-deleted-no-diff|<div class="mw-warning plainlinks">Du kannst diesen Unterschied nicht betrachten, da eine der Versionen aus den öffentlichen Archiven entfernt wurde.\nDetails stehen im [{{fullurl:{{#Special:Log}}/suppress\u007Cpage={{FULLPAGENAMEE}}}} Lösch-Logbuch].</div>
+rev-delundel|zoagn / vastecka
+revdelete-nooldid-title|Koa Version ogem
+revdel-restore|Siachtborkeit endan
+pagehist|Versiónsgschicht
+deletedhist|Gléschde Versiónen
+revertmerge|Vaoanigung zruckdoa
+mergelogpagetext|Des is s'Logbuach vu de vareinigtn Versionsgschichtn.
+history-title|Gschicht vo „~{0}“ oschaugn
+lineno|Zein ~{0}:
+compareselectedversions|Ausgwejde Versiona vagleicha
+editundo|zruck doa
+searchresults|Suachergebniss
+searchresults-title|Suacheagebniss fia „~{0}“
+notextmatches|Ka Üwareinstimmung mid dem Inhåit gfundn
+prevn-title|{{PLURAL:~{0}\u007CVorherigs Ergebnis\u007CVorherige ~{0} Ergebniss}}
+nextn-title|{{PLURAL:~{0}\u007CFoilgends Ergebnis\u007CFoigende ~{0} Ergebniss}}
+shown-title|Zoag ~{0} {{PLURAL:~{0}\u007CErgebnis\u007CErgebniss}} pro Seitn
+viewprevnext|Zoag (~{0} {{int:pipe-separator}} ~{1}) (~{2})
+searchmenu-exists|'''Es gibt a Seiten, wo „[[:~{0}]]“ hoasst.'''
+searchmenu-new|'''De Seitn „[[:~{0}]]“ in em Wiki eastejn.'''
+searchprofile-articles|Inhoidsseitn
+searchprofile-images|Muitimedia
+searchprofile-everything|Ollas
+searchprofile-advanced|Daweitad
+searchprofile-articles-tooltip|Suacha in ~{0}
+searchprofile-images-tooltip|Noch Datein suacha
+searchprofile-everything-tooltip|In gsamtn Inhoid duachsuacha (inkl. Dischkriaseitn)
+searchprofile-advanced-tooltip|Suach in weidna Namasramm
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 Wort\u007C~{1} Weata}})
+search-result-category-size|{{PLURAL:~{0}\u007C1 Seitn\u007C~{0} Seitn}} ({{PLURAL:~{1}\u007C1 Untakategorie\u007C~{1} Untakategorina}}, {{PLURAL:~{2}\u007C1 Datei\u007C~{2} Datein}})
+search-redirect|(Weidaloatung vo „~{0}“)
+search-section|(Obschnitt ~{0})
+search-suggest|Hädast „~{0}“ gmoand?
+search-interwiki-caption|Schwesterprojekte
+search-interwiki-default|~{0} Eagebnisse:
+search-interwiki-more|(mea)
+searchrelated|vawandt
+searchall|olle
+search-nonefound|Fia dei Suachofrog gibts koa Ergebnis
+powersearch-legend|Daweiterde Suach
+powersearch-ns|Suach in Nåmensraim:
+search-external|Externe Suach
+preferences|Eihstellungen
+mypreferences|Mei Preferenz
+prefs-editing|Beorweiten
+rows|Zeiln:
+columns|Spoiten
+searchresultshead|Suachen
+savedprefs|Deine Eihstellungen san gspeicherd worn.
+timezonelegend|Zaidzone:
+localtime|Ortszaid:
+timezoneuseserverdefault|Standardzeid vom Wiki nutzen (~{0})
+guesstimezone|Vom Browser ywernemmer
+allowemail|E-Mail-Empfång voh anderne Benutzer méglé mochen.
+prefs-searchoptions|Suachopziónen
+prefs-namespaces|Nåmensraim
+youremail|E-Mail-Adress:
+username|Benutzernåm:
+yourrealname|Biagalicha Nama:
+yourlanguage|Sprooch vo da Benutzerowerflächen
+prefs-help-realname|Opzionoi. Dodamid kå dai byrgerlicher Nåm daine Baiträg zuagordnet wern.
+prefs-help-email|De Mail-Adress is optional; es is oba sinnvoi, wensd es Passwort amoi vagessn hosd.
+prefs-help-email-others|Andane Nutza kenan so aa mit dia Kontakt afnehma, duach an E-Mail-Link auf da Navi vo da Nutzaseitn.\nDei Mail-Adress wead dabei ned ozoagt.
+prefs-help-email-required|Es werd a güitige E-Mäil-Adress braucht.
+prefs-info|Baasisinformazionen
+userrights-groupsmember|Midgliad vo:
+userrights-no-interwiki|Du hast koa Berechtigung, Benutzerrechte in anderne Wikis zum ändern.
+group-sysop|Administratorn
+group-bureaucrat|Byrókraaten
+group-suppress|Oversighter
+group-all|(olle)
+group-user-member|{{GENDER:~{0}\u007CBenutzer\u007CBenutzerrin}}
+group-autoconfirmed-member|{{GENDER:~{0}\u007CAutómaatisch bstätigter Benutzer\u007CAutómaatisch bstätigter Benutzerrin}}
+group-bot-member|Bot
+group-sysop-member|{{GENDER:~{0}\u007CAdministraator\u007CAdministraatorin}}
+group-bureaucrat-member|{{GENDER:~{0}\u007CByrókraat\u007CByrókraatin}}
+group-suppress-member|{{GENDER:~{0}\u007COversighter\u007COversighterrin}}
+grouppage-user|{{ns:project}}:Benutzer
+grouppage-autoconfirmed|{{ns:project}}:Autómaatisch bstätigte Benutzer
+grouppage-bot|{{ns:project}}:Bots
+grouppage-sysop|{{ns:project}}:Administraatorn
+grouppage-bureaucrat|{{ns:project}}:Byrókraaten
+grouppage-suppress|{{ns:project}}:Oversighter
+right-read|Seiten leesen
+right-edit|Seiten beorweiten
+right-block|Benutzer sperrn (Schreiwrecht)
+newuserlogpage|Neiomejdungs-Logbuach
+rightslog|Rechte-Logbiache
+action-edit|beorbadd de Seitn
+action-createpage|Seiten z' dastön
+action-autopatrol|eigerne Beorweitungen ois kontroilird markirn
+nchanges|~{0} {{PLURAL:~{0}\u007CEndarung\u007CEndarunga}}
+recentchanges|Letzte Endarunga
+recentchanges-legend|Ozoagoptiona
+recentchanges-summary|Auf derer Seiten kåst d' létzden Änderrungen auf '''{{SITENAME}}''' nochévavóing.
+recentchanges-feed-description|Vafoig mid em Feed de letztn Endarunga in {{SITENAME}}.
+recentchanges-label-newpage|Neiche Seitn
+recentchanges-label-minor|Kloane Endarunga
+recentchanges-label-bot|Endarung duach an Bot
+recentchanges-label-unpatrolled|De Endarung is no ned kontrolliad worn
+rcnotefrom|Untn san de Endarunga seit  '''~{1}''' (bis za '''~{0}''' Ozoagn).
+rclistfrom|Nua Endarunga seit ~{2} ~{1} zoagn
+rcshowhideminor|Kloane Endarunga ~{0}
+rcshowhideminor-hide|Ausblendn
+rcshowhidebots|Bots ~{0}
+rcshowhideliu|Eigloggte Nutza ~{0}
+rcshowhideliu-hide|Ausblendn
+rcshowhideanons|Anonyme Nutza ~{0}
+rcshowhideanons-hide|Ausblendn
+rcshowhidepatr|Kontrolliade Endarunga ~{0}
+rcshowhidemine|Meine Beidreg ~{0}
+rcshowhidemine-hide|Ausblendn
+rclinks|De letztn Endarunga vo de letztn ~{1} Dog zoagn<br />~{2}
+diff|Untaschied
+hist|Versiona
+hide|Ausblendn
+show|Zoag
+minoreditletter|K
+newpageletter|N
+boteditletter|B
+number_of_watching_users_pageview|[~{0} {{PLURAL:~{0}\u007Cbeówochtender\u007Cbeówochtende}} Benutzer]
+rc_categories|Netter Seiten aus d' Kategorien (trennd mid "l"):
+rc_categories_any|Olle
+newsectionsummary|Neicher Obschnit /* ~{0} */
+rc-enhanced-expand|Details zoagn (braucht JavaScript)
+rc-enhanced-hide|Details vastecka
+recentchangeslinked|Endarunga an Valinkunga
+recentchangeslinked-feed|Valinkts priaffm
+recentchangeslinked-toolbox|Endarunga af valinktn Seitn
+recentchangeslinked-title|Endarunga wo vo „~{0}“ valinkt san
+recentchangeslinked-summary|Des is a Listn vo de letztn Endarunga af Seitn, de wo vo ana bstimmtn Seitn valinkt san (bzw. za ana bstimmtn Kategorie ghean).\nSeitn af [[Special:Watchlist\u007Cdeina Beobochtungslistn]] san '''fett'''.
+recentchangeslinked-page|Seitn:
+recentchangeslinked-to|Zoagt Änderrungen auf Seiten, dé do her valinken
+upload|Affelodn
+uploadbtn|Daatei aufféloon
+uploadnologin|Néd ågmödt
+uploadnologintext|Du muasst [[Special:UserLogin\u007Cågmödt]] seih, wånn Du Daatein auffeloon wüst.
+uploadlogpage|Logbuach fias Affelodn
+uploadlogpagetext|Des is des Logbuach voh de auffegloodanen Daatein, schaug aa unter [[Special:NewFiles\u007Cneiche Daatein]].
+filename|Daateinåm
+filedesc|Bschreiwung
+fileuploadsummary|Bschreiwung/Quön
+filereuploadsummary|Daateiänderrungen:
+filestatus|Copyright-Staatus:
+filesource|Quön:
+ignorewarning|D' Warnung ignoriern und d' Daatei speichern
+ignorewarnings|Warnung ignoriern
+minlength1|Dé Daateinaumen miassen minderstens aan Buachstom laung seih.
+badfilename|Da Daateinåm is auf „~{0}“ gänderd worn.
+large-file|De Daateigreess soidad noch Meeglichkeid ~{0} ned ywerschreiten. De Daatei is ~{1} grooss.
+largefileserver|Dé Daatei is greesser ois dé vom Server eihgstöde Maximaalgreessen.
+emptyfile|Dé aufféglooderne Daatei is laar. Da Grund kauh a Tippfeeler im Daateinaum seih. Bittscheh kóntróllier, ób du dé Daatei wirklé aufféloon wüst.
+uploadwarning|Ówocht
+savefile|Daatei speichern
+uploaddisabled|'s aufféloon is deaktivierd
+uploadscripted|Dé Datei enthoit HTML- óder Scriptcode, der wos irrtymlicherweis voram Webbrowser ausgfyrd wern kunnterd.
+uploadvirus|Dé Daatei do enthoitt a Virus! Details: ~{0}
+upload-source|Quödaatei
+sourcefilename|Quödaatei:
+sourceurl|Quön-URL:
+destfilename|Zünaum:
+upload-maxfilesize|Maximaale Daateigréss: ~{0}
+upload-description|Daateibschreiwung
+upload-options|Ópziónen fyrs Aufféloon
+watchthisupload|Dé Seiten beówochten
+filewasdeleted|A Daatei mid dém Naum is schoh oamoi auffégloon und zwischenzeidlé wieder gléschd worn. Bittscheh schaug erscht 'n Eihtrog im ~{0} auh, bevur du dé Daatei wirklé speicherdst.
+upload-success-subj|Erfóigreich auffégloon
+upload-failure-subj|A Feeler beim Aufféloon
+upload-warning-subj|Auffélood-Warnung
+upload-file-error|Interner Feeler
+img-auth-accessdenied|Zuagrieff vaweigerd
+upload-curl-error6|D' URL is néd dareichbor
+license|Lizenz:
+license-header|Lizenz
+nolicense|koah Vurauswoi
+license-nopreview|(es gibt koah Vurschau)
+upload_source_file| (a Daatei auf deim Computer)
+listfiles_search_for|Suach noch da Daatei:
+imgfile|Daatei
+listfiles|Daateilisten
+listfiles_thumb|Vurschaubüdel
+listfiles_date|Daatum
+listfiles_name|Nåm
+listfiles_user|Benutzer
+listfiles_size|Greess
+listfiles_description|Bschreiwung
+listfiles_count|Versiónen
+file-anchor-link|Datei
+filehist|Dateiversiona
+filehist-help|Klick auf an Zeitpunkt, um de Version ozschaugn.
+filehist-revert|zrucksetzn
+filehist-current|aktuell
+filehist-datetime|Version vom
+filehist-thumb|Vorschaubuidl
+filehist-thumbtext|Vorschaubuidl fia d Version vo ~{0}
+filehist-user|Nutza
+filehist-dimensions|Dimensiona
+filehist-filesize|Dateigreess
+filehist-comment|Kommentar
+imagelinks|Dateivawendung
+linkstoimage|{{PLURAL:~{0}\u007CDe foigende Seitn vawendt\u007CDe foigendn ~{0} Seitn vawendn}} de Datei:
+linkstoimage-more|Es {{PLURAL:~{0}\u007Cvalinkt\u007Cvalinkn}} mea wia {{PLURAL:~{0}\u007Coa Seitn \u007C~{0} Seitn}} auf de Datei.\nDe foignde Listn zaagt netta {{PLURAL:~{0}\u007Cin easten Link\u007Cde easten ~{0} Links}} auf de Datei.\nA [[Special:WhatLinksHere/~{1}\u007Cvoiständige Listn]] gibt's aa.
+nolinkstoimage|De Datei wead vo koana Seitn gnutzt.
+morelinkstoimage|[[Special:WhatLinksHere/~{0}\u007CWeidare Links]] fia de Datei.
+linkstoimage-redirect|~{0} (Dateiweidaloatung) ~{1}
+duplicatesoffile|{{PLURAL:~{0}\u007CD'foignde Datei is a Duplikat\u007CDe foigndn ~{0} Datein han Duplikate}} vu dea Datei ([[Special:FileDuplicateSearch/~{1}\u007Cweidare Deteus]]):
+sharedupload|De Datei stãmmt aus ~{0} und deaf bei ãndare Projekte vawendt wean.
+sharedupload-desc-there|De Datei stãmmt aus ~{0} und deaf bei ãndera Projekte vawendt wean. Schau auf'd [~{1} Dateibeschreibungsseitn] fia weidare Infoamazionen.
+sharedupload-desc-here|De Datei stammt aus ~{0} und deaf vo andan Projektn vawendt wean. De Bschreibung vo da [~{1} Dateibschreibungsseitn] wead unen ozoagt.
+uploadnewversion-linktext|A neiche Versión voh derer Daatei aufféloon
+filerevert-defaultcomment|zruckgsétzd auf dé Versión vom ~{0}, ~{1}
+filerevert-submit|Zrucksetzen
+filedelete-legend|Lésch dé Daatei
+filedelete-intro|Du léschst dé Daatei '''„[[Media:~{0}\u007C~{0}]]“'''.
+mimesearch-summary|Auf dieser Spezialseite können die Dateien nach dem MIME-Typ gefiltert werden. Die Eingabe muss immer den Medien- und Subtyp beinhalten: <code>image/jpeg</code> (siehe Bildbeschreibungsseite).
+download|Owerlooden
+listredirects|Weidaloatunga
+unusedtemplates|Net benutzte Vorlagen
+unusedtemplateswlh|Aundre Links
+randompage|Zuafoisseitn
+randomredirect|Zuafällige Weidaloatung
+statistics-files|Aufféglooderne Daatein
+statistics-edits|Seitenbeorweitungen
+statistics-edits-average|Beorweitungen pró Seiten im Durchschnit
+doubleredirects|Doppede Weidaloatunga
+doubleredirectstext|Af dea Seitn stengan Weidaloatunga, de wo af Weidaloatunga zoang.\n\nA <del>duachgstrichane</del> Eidrog is scho repariad worn.
+double-redirect-fixed-maintenance|Doppede Weidaloatunga vo [[~{0}]] af [[~{1}]] mid oana Aktion reparian.
+brokenredirectstext|Af dera Spezialseitn stengan Weidaloatunga af Artiken, de wo s ned gibt.
+brokenredirects-edit|werkeln
+brokenredirects-delete|léschen
+withoutinterwiki|Seitn ohne Sprochlinks
+withoutinterwiki-summary|D' foiganden Seiten valinken néd auf a åndre Sproochversion
+withoutinterwiki-legend|Prefix
+withoutinterwiki-submit|Zoag
+fewestrevisions|Seiten mid d' weenigsten Versiónen
+nbytes|~{0} {{PLURAL:~{0}\u007CByte\u007CBytes}}
+ncategories|~{0} {{PLURAL:~{0}\u007CKategorie\u007CKategorien}}
+nlinks|{{PLURAL:~{0}\u007Ca Link\u007C~{0} Links}}
+nmembers|{{PLURAL:~{0}\u007C1 Eindrog\u007C~{0} Eindreg}}
+nrevisions|{{PLURAL:~{0}\u007Coah Beorwatung\u007C~{0} Beorwatungen}}
+nviews|{{PLURAL:~{0}\u007C1 Åbfråg\u007C~{0} Åbfrång}}
+uncategorizedpages|Néd kategorisirde Seiten
+uncategorizedcategories|Néd kategorisirde Kategorien
+uncategorizedimages|Néd kategorisirde Daatein
+uncategorizedtemplates|Néd kategorisirde Vurlong
+unusedcategories|Néd bnutzde Kategorien
+unusedimages|Néd bnutzde Daatein
+wantedcategories|Bnutzde, ower néd åglégte Kategorien
+wantedpages|Gwynschde Seiten
+wantedpages-badtitle|Ungütiger Titel im Ergeewnis: ~{0}
+wantedfiles|Datein, wo ma braucha
+wantedtemplates|Voalong, wo ma braucha
+mostlinked|Haiffig valinkte Seiten
+mostlinkedcategories|Haiffig brauchde Kategorien
+mostlinkedtemplates|Haiffig brauchde Vurlong
+mostcategories|Seiten mid dé haiffigsten Kategorien
+mostimages|Haiffig brauchde Daatein
+mostrevisions|Seiten mid d' haiffigsten Versiónen
+prefixindex|Olle Seitn (mit Prefix)
+shortpages|Kurze Seiten
+longpages|Långe Seiten
+deadendpages|Néd valinkende Seiten
+deadendpagestext|Dé fóigénden Seiten vaweisen néd auf aundre Seiten voh {{SITENAME}}.
+protectedpages|Gschytzde Seiten
+protectedpages-indef|Netter néd bschränkde gschytzde Seiten zoang
+protectedpages-cascade|Netter Seiten mid Kaskadenschutz
+protectedtitles|Gschytzde Seitennaumen
+usercreated|{{GENDER:~{2}\u007COglegt}} am ~{0} um ~{1}
+newpages|Neiche Seitn
+newpages-username|Benutzernåm:
+ancientpages|Schoh länger nimmer beorweitade Seiten
+move|Vaschiabm
+movethispage|de Seiten vaschiam
+notargettitle|Koa Seiten ågeem
+pager-newer-n|{{PLURAL:~{0}\u007Cnaxta\u007Cnaxte ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Cvorheriga\u007Cvorherign ~{0}}}
+booksources|ISBN-Suach
+booksources-search-legend|Suach noch Bezugsquejn fia Biacha
+log|Logbiacha
+all-logs-page|Olle effmtlichen Logbiacher
+alllogstext|Des is de kombinierte Anzeige vo alle in {{SITENAME}} gführten Logbiacha. Die Ausgabe ko durch de Auswahl vom Logbuchtyp, vom Benutzer oder vom Seitntitel eigschränkt wern.
+logempty|Koane passenden Einträg.
+log-title-wildcard|Da Titel faungt auh mid ....
+allpagesfrom|Seiten auhzoang ob:
+allpagesto|Seiten auhzoang bis:
+allarticles|Olle Seitn
+allinnamespace|Olle Seiten (Naumensraum: ~{0})
+allpagessubmit|Owendn
+allpagesprefix|Seiten zoang mid Präfix:
+allpagesbadtitle|Da eihgeewerne Seitennaum is néd gütig: Er hod éntwéder a vurauhgstöds Sprooch-, a Interwiki-Kyrzel óder enthoitt oah óder mererne Zeichen, dé in d' Seitennaumen néd vawendt wern derffm.
+allpages-bad-ns|Dén Naumensraum „~{0}“ gibts in {{SITENAME}} néd.
+allpages-hide-redirects|Weidaloatunga ausblendn
+special-categories-sort-count|Sortiarung noch da Auhzoi
+special-categories-sort-abc|Sortiarung noch 'm Alfabet
+deletedcontributions|Gléschde Beitrég
+linksearch|Weblinks suacher
+linksearch-pat|Suachmuster:
+linksearch-ns|Nåmensraum:
+linksearch-ok|Suacher
+linksearch-text|Dé Speziaalseiten do daméglicht d' Suach noch Seiten, in dénen bstimmte Weblinks enthoiden san. Dodabei kennern Blootzhoiter wia beispüsweis  <code>*.beispü.at</code> hergnummer wern. Es muass mindastens a Top-Level-Domain, z. Bsp. „*.org“. auhgeem wern. <br />Unterstytzde Protokói: <code>~{0}</code> (Dé bittscheh bei da Suachauhgob auhgeem.)
+linksearch-line|~{0} is valinkt vo ~{1}
+listusers-submit|Zoag
+listusers-noresult|Koane Benutzer gfunden.
+listgrouprights|Benutzergruppmrechtt
+listgrouprights-summary|Dés do is a Listen voh dé in dém Wiki definierden Benutzergruppm und da dodamid vabundernen Rechtt.\nZuasätzlige Informaziónen ywer dé oahzelnen Rechtt kennan [[{{MediaWiki:Listgrouprights-helppage}}\u007Cdo]] gfunden wern.
+listgrouprights-key|* <span class="listgrouprights-granted">Gwärds Recht</span>\n* <span class="listgrouprights-revoked">Entzóngs Recht</span>
+listgrouprights-group|Gruppm
+listgrouprights-rights|Rechte
+listgrouprights-helppage|Help:Gruppmrechte
+listgrouprights-members|(Mitgliedalistn)
+listgrouprights-addgroup|Benutzer zua {{PLURAL:~{1}\u007Cderer Gruppm\u007Cdé Gruppm}} dazuadoah: ~{0}
+listgrouprights-removegroup|Benutzer aus {{PLURAL:~{1}\u007Cderer Gruppm\u007Cdé Gruppm}} entferner: ~{0}
+listgrouprights-addgroup-all|Benutzer zua olle Gruppm dazuadoah
+listgrouprights-removegroup-all|Benutzer aus olle Gruppm éntferner
+listgrouprights-addgroup-self|'s oagerne Benutzerkóntó zua {{PLURAL:~{1}\u007Cderer Gruppm\u007Cdé Gruppm}} dazuadoah: ~{0}
+listgrouprights-removegroup-self|'s oagerne Benutzerkóntó aus {{PLURAL:~{1}\u007Cderer Gruppm\u007Cdé Gruppm}} entferner: ~{0}
+listgrouprights-addgroup-self-all|Kauh olle Gruppm zum oagern Kóntó dazuadoah
+mailnologin|Du bist néd auhgmödt
+emailuser|Mail an den Nutza
+emailpage|E-Mail an Nutza
+noemailtitle|Koa Mail-Adress
+emailfrom|Voh:
+emailto|Aun:
+emailsubject|Bedreff:
+emailmessage|Noochricht:
+emailsend|Senden
+emailccme|Schick a Kópie voh da E-Mail aun mi söwer
+emailccsubject|a Kópie voh deiner Noochricht an ~{0}: ~{1}
+emailsent|E-Mail is vaschickt worn
+emailsenttext|Deih E-Mail is vaschickt worn.
+emailuserfooter|Dé E-Mail is voh {{SITENAME}}-Benutzer „~{0}“ an „~{1}“ gsendt worn.
+usermessage-summary|Systémnoochricht gspeicherd.
+usermessage-editor|Systém-Messenger
+watchlist|Beobochtungslistn
+mywatchlist|Mei Beobochta
+watchlistfor2|Vo ~{0} ~{1}
+nowatchlist|Es gibt koane Eihträg auf deiner Beówochtungslisten.
+watchlistanontext|Du muasst dé ~{0}, um deih Beówchtungslisten z' seeng óder Eihträg borweiten z' kenner.
+watchnologin|Du bist néd auhgmödt
+addwatch|Zua Beówochtungslisten dazuadoah
+addedwatchtext|Dé Seiten „[[:~{0}]]“ is zua deiner [[Special:Watchlist\u007CBeówochtungslisten]] dazuadauh worn.\nÄnderrungen an derer Seiten und voh da Dischkrierseiten wern do glistt und in da Ywersicht voh dé [[Special:RecentChanges\u007Clétzden Änderrungen]] auf Fettschrieft auhzoagt.\n\nWaunnst dé Seiten wieder voh deiner Beówochtungslisten weggerddoah mechst, druck oafoch auf da jeeweiling Seiten auf „nimmer beówochten“.
+removewatch|Voh da Beówochtungslisten wegdoah
+removedwatchtext|D' Seiten „[[:~{0}]]“ is voh deiner [[Special:Watchlist\u007CBeówochtungslisten]] wegdauh worn.
+watch|Beobochtn
+watchthispage|D' Seiten beówochten
+unwatch|nimma beobochtn
+unwatchthispage|Nimmer beówochten
+notanarticle|Koah Seiten
+notvisiblerev|Versión is gléschd worn
+watchlist-details|Du beoochst {{PLURAL:~{0}\u007C~{0} Seitn}}, Dischkriaseitn ned mitgrechnad
+wlheader-enotif|Da E-Mail-Benoochrichtigungsdeanst is aktivierd.
+wlheader-showupdated|Seiten mid noh néd gseengne Änderrungen wern '''fett''' dorgstöd.
+wlnote|Es {{PLURAL:~{0}\u007Cfóigt d' létzde Änderrung\u007Cfóing d' létzden '''~{0}''' Änderrungen}} voh da/dé {{PLURAL:~{1}\u007CStund\u007C '''~{1}''' Stunden}}. Staund: ~{2}, ~{3} Uar.
+wlshowlast|Zoag dé Änderrungen voh dé létzden ~{0} Stunden, ~{1} Dog óder  (in dé létzden 30 Dog).
+watchlist-options|Mei Beobochta: Optiona
+watching|Beówochten ...
+unwatching|Néd Beówochten
+watcherrortext|Ban Ändern voh da Beówochtungslisten fyr „~{0}“ is a Feeler auftreeden.
+enotif_reset|Olle Seiten ois bsuacht markiern
+enotif_impersonal_salutation|{{SITENAME}}-Benutzer
+enotif_lastvisited|Olle Änderrungen auf oan Blick: ~{0}
+enotif_lastdiff|Schaug auf ~{0} noch derer Änderrung.
+enotif_anon_editor|Anonymer Benutzer ~{0}
+enotif_body|Servas $WATCHINGUSERNAME,\n\ndé {{SITENAME}}-Seiten „$PAGETITLE“ is voh $PAGEEDITOR am $PAGEEDITDATE um $PAGEEDITTIME Uar $CHANGEDORCREATED.\n\nAktuöe Versión: $PAGETITLE_URL\n\n$NEWPAGE\n\nZåmmfossung vom Beorweiter: $PAGESUMMARY $PAGEMINOREDIT\n\nKontakt zum Beorweiter:\nE-Mail: $PAGEEDITOR_EMAIL\nWiki: $PAGEEDITOR_WIKI\n\nEs wern da sólång koane weidern Benoochrichtigungsmails gsendt, bis du dé Seiten wieder bsuachst. Auf deiner Beówochtungslisten kåst olle Benoochrichtigunsmarkiarungen zåmm zrucksétzen.\n             Deih freindlichs {{SITENAME}}-Benoochrichtigungssystém\n\n--\nUm d' Eihstöungen voh da E-Mail-Benoochrichtigung åzpassen, bsuachst {{canonicalurl:{{#special:Preferences}}}}\n\nUm d' Eihstöungen voh deine Beówochtungslisten åzpassen, bsuachst {{canonicalurl:{{#special:EditWatchlist}}}}\n\nUm d' Seiten voh deiner Beówochtungslisten ower z' doah, bsuachst $UNWATCHURL\n\nRyckmödungen und a weidre Hüf: $HELPPAGE
+created|erstöd
+changed|gänderd
+deletepage|Seiten léschen
+confirm|Bstäting
+excontent|Oider Inhoid: '~{0}'
+excontentauthor|Da Inhoid is gwésen: „~{0}“ (oahziger Beorweiter: [[Special:Contributions/~{1}\u007C~{1}]])
+exbeforeblank|Da Inhoid vurm Laarn voh da Seiten: „~{0}“
+delete-confirm|Léschen voh „~{0}“
+delete-legend|Léschen
+historywarning|'''Ochtung:''' Dé Seiten, dé du léschen mecherst, hod a Versiónsgschicht mid epper ~{0} {{PLURAL:~{0}\u007CVersión\u007CVersiónen}}:
+confirmdeletetext|Du bist dabei, a Seiten mid olle zuaghering ödern Versiónen z' léschen. Bittscheh bstätig dodazua, daas da d' Kónsequenzen bewusst san und daas du in Ywereihstimmung mid d' [[{{MediaWiki:Policy-url}}\u007CRichtlinien]] haundelst.
+actioncomplete|Aktion fiate
+actionfailed|Aktion faigschlogn
+deletedtext|„~{0}“ is glöscht worn. Im ~{1} findn Sie a Listn vo de letzten Löschungen.
+dellogpage|Lesch-Logbuach
+deletionlog|Lösch-Logbuach
+reverted|Auf a oide Version zruckgesetzt
+deletecomment|Grund:
+deleteotherreason|Ånderner/ergänzender Grund:
+deletereasonotherlist|Åndrer Grund:
+deletereason-dropdown|* Oigmoane Léschgrynd\n** Wunsch vom Autór\n** Urhéwerrechtsvalétzung\n** Vandalismus
+delete-edit-reasonlist|Léschgrynd beorwaten
+rollbacklink|Zrucksetzn
+rollbackfailed|Zruckésétzen gscheiterd
+cantrollback|D' Änderrung kauh néd zruckégsétzd wern, weis koane friarern Autorn gibt.
+protectlogpage|Seitnschutz-Logbuach
+protectedarticle|hod „[[~{0}]]“ gschitzt
+modifiedarticleprotection|hod an Schutz voh „[[~{0}]]“ gänderd
+unprotectedarticle|Schutz voh „[[~{0}]]“ aufghóm
+prot_1movedto2|hod [[~{0}]] noch [[~{1}]] vaschóm
+protect-legend|Seitenschutzstaatus ändern
+protectcomment|Grund:
+protectexpiry|Sperrdauer:
+protect_expiry_invalid|D' eihgéwerne Dauer is ungütig
+protect_expiry_old|D' Sperrzeid liegt in da Vagångenheit.
+protect-text|Då kãnnst nåchschau und ändan, wia d'Seitn „~{0}“ gschützt is.
+protect-locked-access|Dai Benytzerkonto vafiagt ned ywer de notwending Rechtt zur Endarung vom Saitenschutz. Do san de aktuöin Saitenschutzaistöiungen vo da Saiten '''„~{0}“:'''
+protect-cascadeon|De Saiten is geengwärtig a Tail vo ner Kaskadenperrn. Sii is in de {{PLURAL:~{0}\u007Cfolgende Seite\u007Cfoiganden Saiten}} aibunden, de durch de Kaskadensperropzion geschytzt {{PLURAL:~{0}\u007Cist\u007Csan}}. Der Saitenschutzstaatus vo derer Saiten kå gändert wern, des hod ower koan Aifluss auf de Kaskadensperrn:
+protect-default|Olle Benutzer
+protect-fallback|D'„~{0}“-Berechtigung is notwendig.
+protect-level-autoconfirmed|Sperrung fyr néd registrirde Benutzer
+protect-level-sysop|Netter Administraatorn
+protect-summary-cascade|kaskadiarnd
+protect-expiring|bis zum ~{1} um ~{2} Uhr (UTC)
+protect-cascade|Kaskadiarade Sperr – ålle Voalång, de in dea Seitn eibundn han, wean emfåis gspead.
+protect-cantedit|Du kãnnst de Spea vu dea Seitn ned ändan, weu'st dafia ned de passnde Berechtigung håst.
+protect-expiry-options|1 Stund:1 hour,1 Dog:1 day,1 Wóch:1 week,2 Wócher:2 weeks,1 Mónad:1 month,3 Mónadt:3 months,6 Mónadt:6 months,1 Jor:1 year, Unbschränkt:infinite
+restriction-type|Schutzstaatus:
+restriction-level|Schutzheechen:
+minimum-size|Mindestgreess
+restriction-edit|Werkeln
+restriction-move|vaschiam
+undelete|Gléschde Seiten weiderherstön
+undeletehistorynoadmin|Dé Seiten is gléscht worn. Da Léschgrund is in da Zaummfossung auhgeem, \ngenauasó wia Details zum létzden Benutzer, der dé Seiten vur da Léschung borweidt hod.\nDa aktuöje Text voh da gléschden Seiten is netter fyr Administraatorn zuagänglich.
+undelete-revision|Geléschde Versión voh ~{0} (vom ~{3} um ~{4} Uar), ~{2}:
+undeletebtn|Wiederherstön
+undeletelink|oschaugn / wiadaheastejn
+undeleteviewlink|oschaugn
+undeletedfiles|~{0} {{PLURAL:~{0}\u007CDatei\u007CDateien}} san wieda hergstellt worn
+undelete-search-box|Suach noch gléschde Seiten
+undelete-search-submit|Suach
+undelete-show-file-submit|Jo
+namespace|Namasramm:
+invert|Auswoi umdraan
+namespace_association|Zuagordnéter Nåmensraum
+contributions|{{GENDER:~{0}\u007CNutza}}beidreg
+contributions-title|Nutzabeidräg vo „~{0}“
+mycontris|Meine Beidreg
+contribsub2|Vo ~{0} (~{1})
+uctop|(aktuell)
+month|und Monad:
+year|Bis zan Joar:
+sp-contributions-newbies|Nua Beidräg vo de neichn Nutza ozoagn
+sp-contributions-newbies-sub|Fyr Neiling
+sp-contributions-blocklog|Sperrlogbuach
+sp-contributions-deleted|Gléschde Beitrég
+sp-contributions-uploads|Affeglodane Datein
+sp-contributions-logs|Logbiacha
+sp-contributions-talk|Dischkrian
+sp-contributions-search|Suach noch Nutzabeidräg
+sp-contributions-username|IP-Adress oda Nutzanama:
+sp-contributions-toponly|Nua aktuelle Versiona ozoagn
+sp-contributions-submit|Suachn
+whatlinkshere|Links af de Seitn
+whatlinkshere-title|Seitn, wo af „~{0}“ valinka
+whatlinkshere-page|Seitn:
+linkshere|De foigandn Seitn valinka af '''„[[:~{0}]]“''':
+nolinkshere|Koa Seitn valinkt af '''„[[:~{0}]]“'''.
+isredirect|Weidaloatungsseitn
+istemplate|Vorlogneinbindung
+isimage|Dateilink
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cvorige\u007Cvorign ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cnaxde\u007Cnaxdn ~{0}}}
+whatlinkshere-links|← Vaweise
+whatlinkshere-hideredirs|Weidaloatunga ~{0}
+whatlinkshere-hidetrans|Vorlognehbindung ~{0}
+whatlinkshere-hidelinks|Links ~{0}
+whatlinkshere-hideimages|~{0} Dateilinks
+whatlinkshere-filters|Fuita
+autoblockid|Autómaatische Sperrung #~{0}
+block|Benutzer sperrn
+unblock|Benutzer freigeem
+blockip|IP-Adress/Benytzer sperrn
+blockip-legend|IP-Adresse/Benutzer sperrn
+blockiptext|Mid dem Formular sperrst a IP-Adress oder an Benytzernåmen, das vo durten aus koane Endarungen mer vurgnumma wern kennan.\nDes soid nur dafoing, um an Vandalismus z' vahindern und in Yweraistimmung mid d' [[{{MediaWiki:Policy-url}}\u007CRichtlinien]].\nGib bittschee an Grund fyr d' Sperrn å.
+ipaddressorusername|IP-Adress oder Benytzernåm:
+ipbexpiry|Sperrdauer:
+ipbreason|Grund:
+ipbreason-dropdown|* Oigmoahne Sperrgrynd\n** Eihfyng voh voische Informaziónen\n** Laarn voh Seiten\n** Massenweiss Eihfyng voh externe Links\n** Eihstön voh unsinnige Inhoite auf Seiten\n** néd åbrochts Vahoiden\n** Missbrauch mid mererne Benutzerkontós\n** néd geigneter Benutzernåm
+ipb-hardblock|Auhgmödte Benutzer dodrauh hindern, daas Beorweitungen unter derer IP-Adress vurgnummer wern
+ipbcreateaccount|D' Erstöung voh Benutzerkóntós vahindern
+ipbemailban|E-Mail-Vasand spean
+ipbenableautoblock|Sperr dé aktuö voh dém Benutzer gnutzde IP-Adress sówia autómaatisch olle fóiganden, voh dénen aus er Beorweitungen óder 's Auhléng voh Benutzerkóntós vasuacht.
+ipbsubmit|IP-Adress/Benutzer sperrn
+ipbother|Åndre Dauer (auf englisch):
+ipboptions|2 Stund:2 hours,1 Dog:1 day,3 Dog:3 days,1 Woch:1 week,2 Wocha:2 weeks,1 Monat:1 month,3 Monat:3 months,6 Monat:6 months,1 Joar:1 year, Infinit:infinite
+ipbhidename|An Benytzernåmen in Beorwaitungen und Linsten vastecken
+ipbwatchuser|De Benytzer(diskussions)saiten beowochten
+ipb-change-block|D' Sperrn mid de Sperrparameter danaiern
+badipaddress|De IP-Adress hod a foischs Format.
+blockipsuccesssub|De Sperrn is erfoigraich gween
+blockipsuccesstext|Da Benytzer/de IP-Adress [[Special:Contributions/~{0}\u007C~{0}]] is gsperrt worn.<br />\nZur da Aufheewung vo da Sperrn schau unter da [[Special:BlockList\u007CListen vo olle aktivm Sperrn]].
+ipb-edit-dropdown|Sperrgrynd beorwaiten
+ipb-unblock-addr|„~{0}“ fraigeem
+ipb-unblock|IP-Adress/Benytzer fraigeem
+ipb-blocklist|Olle aktuöin Sperrn åzaang
+ipb-blocklist-contribs|Benytzerbaiträg vo „~{0}“
+unblockip|IP-Adress fraigeem
+unblockiptext|Mid dem Formular do kååst du a IP-Adress oder an Benytzer fraigeem.
+ipusubmit|Freigem
+unblocked|[[User:~{0}\u007C~{0}]] is freigem worn
+unblocked-id|Sperr-ID ~{0} is fraigeem worn
+blocklist|Gspeade Nutza
+ipblocklist|Gsperrte Nutza
+ipblocklist-legend|Suach noch am gsperrden Benytzer
+createaccountblock|'s erstön voh Benutzerkóntós is gsperrd
+emailblock|E-Póst vaschicker is gsperrd
+blocklink|Sperrn
+unblocklink|Freigebm
+change-blocklink|Sperr endan
+contribslink|Beidreg
+emaillink|E-Mail vaschicka
+autoblocker|Autómaatische Sperr, wei du a gmoahsaume IP-Adress mim [[User:~{0}\u007C~{0}]] bnutzd. Grund voh da Benutzersperrn: „~{1}“.
+blocklogpage|Sperrlogbuach
+blocklog-showlog|{{GENDER:~{0}\u007CDer Benutzer\u007CDé Benutzerrin\u007CDer Benutzer}} do is schoh friarer gsperrd worn. Es fóigt a Eihtrog aus'm Benutzersperrlogbiaché:
+blocklog-showsuppresslog|{{GENDER:~{0}\u007CDer Benutzer\u007CDé Benutzerrin\u007CDer Benutzer}} do is schoh friarer gsperrd und vastéckt worn. Es fóigt a Eihtrog aus'm Benutzersperrlogbiaché:
+blocklogentry|hod „[[~{0}]]“ gsperrt bis: ~{1}; ~{2}
+reblock-logentry|hod d' Sperrn voh „[[~{0}]]“ fyrn Zeidraum: ~{1} ~{2} gänderd.
+unblocklogentry|hod d' Sperr voh „~{0}“ aufghóm
+block-log-flags-anononly|netter Anónyme
+block-log-flags-nocreate|Es Olegn vo Nutzakontn is gsperrt
+block-log-flags-noautoblock|Autóblóck deaktivierd
+block-log-flags-noemail|Mail vaschicka gspead
+unlockdb|Daatenbaunk freigeem
+unlockconfirm|Ja, i mecht de Datenbank freigem.
+unlockbtn|Datenbank freigem
+locknoconfirm|Sie ham des Bestätigungsfeld net markiert.
+lockfilenotwritable|Die Datenbank-Sperrdatei ist net beschreibbar. Zum Sperrn oda Freigem vo da Datenbank muaß de für'n Webserver beschreibbar sei.
+databasenotlocked|De Datenbank is net gsperrt.
+move-page-legend|Seiten vaschiam
+movepagetext|Mid dém Formular kauhst a Seiten umbenénner, waunnstas mid olle Versiónen auf an neichen Titel vaschiabst.\nDa oide Titel werd danoch zum neichen weiderloaten.\nDu kauhst Weiderloatungen, dé auf dén Originoititel valinken, autómaatisch koarigiern lossen.\nStö sicher, daas du im Auhschlus olle [[Special:DoubleRedirects\u007Cdóppéden]] óder [[Special:BrokenRedirects\u007Cdé hienigen Weiderloatungen]] ywerpriaffst.\nDu bist dodafyr vaauntwortlich, daas Links weiderhih aufs richtige Zü vaweisen.\n\nDé Seiten werd '''néd''' vaschóm, waunns bereits a Seiten mim vurgseegernen Titel gibt, ausser dé is laar óder a Weiderloatung óne a Versiónsgschicht. \nDés bdeitt, daas du d' Umbenénnung ryckgängig mochen kauhst, waunn du an Feeler gmocht host.  Du kauhst hihgéng koah Seiten ywerschreim.\n\n'''Ówocht!'''\nD' Vaschiawung kauh weidreichende und néd daworterde Fóing fyr haiffig bsuachde Seiten haum.\nDu sóiderst désswéng d' Kónsequenzen vastaunden haum, bevur du iatz weider duast.
+movepagetalktext|De dazuaghearade Dischgria-Seitn wiad, fåis's ane gibt, midvaschom, '''außa'''\n*unta'm neichn Nãm gibt's schãu an Eintråg oda\n*du tuast s'Hakal bei da unting Opzion außa.\n\nIn de zwoa Fälle miaßadst, fåis des gwünscht is, de Seitn händisch vaschiam oda zsãmmfüng.\n\nBittschee gib außadem druntn in '''neichn''' Nãm vu da Seitn ei und schreib kuaz '''wieso'''<nowiki>'st</nowiki> de Seitn vaschiam mechst.
+movearticle|Seitn vaschiam:
+movenologintext|Zum Vaschiam muaßt a registriada und [[Special:UserLogin\u007Cãngmöideta Benutza]] sei.
+movenotallowed|Du håst ka Berechtigung zum Vaschiam vu Seitn.
+movenotallowedfile|Du håst ka Berechtigung zum Vaschiam vu Datein.
+cant-move-user-page|Du håst ka Berechtigung zum Vaschiam vu Benutzahauptseitn.
+cant-move-to-user-page|Du håst ka Berechtigung zum Vaschiam vu Seitn auf a Benutzaseitn (Ausnãhmen han Benutza-Untaseitn).
+newtitle|Züi:
+move-watch|D' Seiten beówochten
+movepagebtn|Seitn vaschiam
+pagemovedsub|s'Vaschiam håd highaud
+movepage-moved|'''D'Seitn „~{0}“ is nåch „~{1}“ vaschom woan.'''
+movepage-moved-redirect|A Weidaloatung eigricht worn.
+movepage-moved-noredirect|De Eirichtung vo oana Weidaloatung is vahindat worn.
+articleexists|Unter dém Naum existierd schoh a Seiten. Bittscheh nimm an aundern Naumen her.
+movetalk|Waunns geet, d' Dischkrierseiten aa midvaschiam
+movelogpage|Vaschiabungs-Logbuach
+movereason|Grund:
+revertmove|zruck vaschiabm
+delete_and_move|Löschn und vaschiam
+delete_and_move_reason|glöscht, um Plåtz fia Vaschiam zum macha
+selfmove|Ursprungs- und Zielname sand gleich; a Seitn kann net auf sich selber verschom wern.
+export|Seitn exportian
+allmessagesname|Nama:
+allmessagesdefault|Standardtext
+allmessagescurrent|Aktuella Text
+allmessagestext|Des is a Listen vo de MediaWiki-Systemtextt.\nBsuach bittschee de Saiten [https://www.mediawiki.org/wiki/Special:MyLanguage/Localisation MediaWiki-Lokalisiarung] und [//translatewiki.net translatewiki.net], wånn du de ån da Lokalisiarung vo MediaWiki betailing mechadst.
+allmessagesnotsupportedDB|'''Special:Allmessages''' is im Moment net möglich, wei de Datenbank offline is.
+thumbnail_error|Fehla ban Estejn vom Vorschaubuidl: ~{0}
+importlogpage|Import-Logbuach
+tooltip-pt-userpage|Dei Nutzaseitn
+tooltip-pt-mytalk|Dei Dischkriaseitn
+tooltip-pt-preferences|Deine Preferenzn
+tooltip-pt-watchlist|A Listn vo Seitn, wos du beobochtest
+tooltip-pt-mycontris|A Listn vo de oagna Beidreg
+tooltip-pt-login|Warad schee, wensd di omejdn dadast, es is oba ned zwingend nedig.
+tooltip-pt-logout|Auslogga
+tooltip-ca-talk|Dischkrian iban Seitninhoid
+tooltip-ca-edit|Du konsd de Seitn beorbatn. Bittschee vawendt in Vorschau-Knopf bevorsd speichasd.
+tooltip-ca-addsection|Neichn Obschnitt ofanga
+tooltip-ca-viewsource|De Seitn is gschitzd. In Quejtext konsda oschaugn.
+tooltip-ca-history|Friaare Versiona vo dera Seitn
+tooltip-ca-protect|Seitn schitzn
+tooltip-ca-unprotect|Seitenschutz ändern
+tooltip-ca-delete|De Seitn leschn
+tooltip-ca-undelete|Eihträg wiederherstön, bevur dé Seiten gléscht worn is.
+tooltip-ca-move|De Seitn vaschiabm
+tooltip-ca-watch|De Seitn zua Beobochtungslistn dazua doa
+tooltip-ca-unwatch|De Seitn vom "Beobochta" wegga doa
+tooltip-search|{{SITENAME}} duachsuacha
+tooltip-search-go|Geh direkt zua Seitn mit exakt im Nama, wens de gibt.
+tooltip-search-fulltext|Suach noch Seitn, wo den Text enthoiden
+tooltip-p-logo|Schau da de Hoamseitn o
+tooltip-n-mainpage|Schau da de Hoamseitn o
+tooltip-n-mainpage-description|De Hoamseitn bsuacha
+tooltip-n-portal|Ibas Projekt, wos d mocha konst, wo wos z findn is
+tooltip-n-currentevents|Hintergrundinformaziónen ywer akutelle Ereigniss\n\nHintagrundinfo za Neiigkeidn
+tooltip-n-recentchanges|A Listn vo de letztn Endarunga in da {{SITENAME}}
+tooltip-n-randompage|A Zuafoisseitn afruafa
+tooltip-n-help|Huifseitn ozoagn
+tooltip-t-whatlinkshere|A Listn vo oin Seitn, wo do hea zoagn
+tooltip-t-recentchangeslinked|De letztn Endarunga af Seitn, de wo do hea valinka
+tooltip-feed-rss|RSS-Feed vo derer Saiten
+tooltip-feed-atom|Atom-Feed vo dera Seitn
+tooltip-t-contributions|A Listn vo de Nutzabeidreg
+tooltip-t-emailuser|Em Nutza a Mail schicka
+tooltip-t-upload|Datein affelodn
+tooltip-t-specialpages|A Listn vo olle Spezialseitn
+tooltip-t-print|Druckosicht za dea Seitn
+tooltip-t-permalink|Dauerhofta Link za dea Seitnversion
+tooltip-ca-nstab-main|Seitninhoid ozoagn
+tooltip-ca-nstab-user|Nutzaseitn oschaugn
+tooltip-ca-nstab-media|Meediendaateiseiten åzoang
+tooltip-ca-nstab-special|Des is a Spezialseitn, wosd ned beorbatn konst.
+tooltip-ca-nstab-project|Projektseitn ozoagn
+tooltip-ca-nstab-image|Dateiseiten ozoagn
+tooltip-ca-nstab-mediawiki|MediaWiki-Systémtext åzoang
+tooltip-ca-nstab-template|Vorlog ozoagn
+tooltip-ca-nstab-help|Huifseitn oozoang
+tooltip-ca-nstab-category|Kategorieseitn ozoagn
+tooltip-minoredit|Ois kloane Endarung markian.
+tooltip-save|Endarunga speichan
+tooltip-preview|A Vorschau vo de Endarunga an dea Seitn. Vorm Speichan bittschee nutzn!
+tooltip-diff|Endarunga am Text zoagn
+tooltip-compareselectedversions|De Untaschied zwischn zwoa Versiona oschaugn.
+tooltip-watch|De Seitn zua Beobochtungslistn gebm
+tooltip-recreate|Seitn nei erstelln, obwoi sie glöscht worn is.
+tooltip-upload|Start as Aufféloon
+tooltip-rollback|Setzt olle Endarunga zruck, de wo vom gleichn Nutza gmocht worn san.
+tooltip-undo|Nimmt nua de oane Endarung zruck und eameglicht an Grund ozgebm (Zammfossungszein).
+tooltip-summary|Gib a kuaze Zammfossung ein
+lastmodifiedatby|Dé Seiten is zletzt am ~{0} um ~{1} voh ~{2} gänderd worn.
+othercontribs|Basiard auf da Orweid voh ~{0}
+creditspage|Seiteninformaziónen
+pageinfo-redirects-name|Ozoi vo de Weidaloatunga zua dea Seitn
+pageinfo-subpages-value|~{0} (~{1} {{PLURAL:~{1}\u007CWeidaloatung\u007CWeidaloatunga}}; ~{2} {{PLURAL:~{2}\u007CUntaseitn\u007CUntaseitn}})
+pageinfo-redirectsto|Weidaloatunga af
+markedaspatrollederrortext|Du muasst a Seitenänderrung auswön
+deletedrevision|Oide Version ~{0} glöscht.
+filedelete-missing|De Datei „~{0}“ ko net glöscht wern, weils es net gibt.
+previousdiff|← Zan vorign Versionsuntaschied
+nextdiff|Zan naxtn Versionsuntaschied →
+file-info-size|~{0} × ~{1} Pixel, Dateigress: ~{2}, MIME-Typ: ~{3}
+file-nohires|Es gibt koa hehare Aflesung.
+svg-long-desc|SVG-Datei, Basisgress: ~{0} × ~{1} Pixl, Dateigress: ~{2}
+show-big-image|Volle Aflesung
+newimages|Neiche Daatein
+newimages-summary|Dé Speziaalseiten zoagt d' zlétzd aufféglooderne Daatei auh.
+noimages|Koane Daatein gfunden.
+ilsubmit|Suach
+bad_image_list|Format wia foigt:\n\nNua Zein, de wo mit am * ofanga, wean ausgweatet. \nDa easchte Link in da Zein, muass a Link af a schlechte Datei sei.\nIrgendwejche foigandn Links in da sejm Zein definian Ausnahma, z. B. Seitn wo de Datei trotzdem vawendt wean deaf.
+metadata|Metadatn
+metadata-help|De Datei enthoit weidane Infos, wo woarscheinli vo da vawendadn Digitalkamera oda Scanna kema.\nWen de Datei vaendat worn is, kena a poar Detail andasta sei.
+metadata-expand|Erweitate Deteus eiblendn
+metadata-collapse|D' erweiterden Details eihblenden
+metadata-fields|De foigandn Fejda vo de EXIF-Metadaten, wo im MediaWiki-Systemtext ogebm san, wean auf Buidbschriebseitn mid eikloppta Metadatentabejn ozoagt.\nWeidane wean standardmassi ned ozoagt.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-gpsspeed|Gschwindigkeid vom GPS-Empfänger
+exif-componentsconfiguration-0|Gibts néd
+namespacesall|olle
+monthsall|olle
+confirmemail|E-Post-Adressn bestäting (Authentifiziarung)
+confirmemail_noemail|Du håst ka güitige E-Post-Adressn in deine [[Special:Preferences\u007Cpersönlichn Eistellungen]] eitrång.
+confirmemail_send|Bstätigungscode zuaschicker
+confirmemail_needlogin|Du muasst dé ~{0} um d' E-Mail-Adress zum bstäting.
+imgmultipageprev|← vurige Seiten
+imgmultipagenext|naxde Seiten →
+imgmultigo|OK
+imgmultigoto|Gee zua Seiten ~{0}
+ascending_abbrev|auf
+descending_abbrev|ob
+table_pager_next|Naxde Seiten
+table_pager_prev|Vurherige Seiten
+table_pager_first|Erste Seiten
+table_pager_last|Letzde Seiten
+table_pager_limit|Zoag ~{0} Eihträg pró Seiten
+table_pager_limit_label|Pósiziónen pró Seiten:
+table_pager_limit_submit|Lós
+table_pager_empty|Koane Ergeebniss
+autosumm-blank|Dé Seiten is glaard worn.
+autosumm-replace|Da Seiteninhoid is durch an åndern Text ersétzt worn: '~{0}'
+autoredircomment|Weiderloatung noch [[~{0}]] is erstöd worn
+autosumm-new|Dé Seiten is neich åglégt worn: ~{0}
+size-bytes|~{0} Bytes
+watchlistedit-normal-title|Beobachtungslistn bearbatn
+watchlistedit-normal-legend|Eiträge vo da Beobachtungslistn wegnehma
+watchlistedit-normal-explain|Des san de Eiträg vo deiner Beowochtungslisten. Um de Eiträg z' entferna, markir de Kastln neem de Eiträg und druck am End vo da Seiten auf „{{int:Watchlistedit-normal-submit}}“. Du kåst dei Beowochtungslisten aa im  [[Special:EditWatchlist/raw\u007CListenformat beorweiten]].
+watchlistedit-normal-submit|Eiträge wegnehma
+watchlistedit-raw-title|Beówochtungslisten im Listenformaat beorweiten
+watchlistedit-raw-legend|Beówochtungslisten im Listenformaat beorweiten
+watchlistedit-raw-titles|Eihträg:
+watchlistedit-raw-submit|Beówochtungslisten aktualisirn
+watchlisttools-view|Mei Beobochta: Endarunga
+watchlisttools-edit|normal beorbatn
+watchlisttools-raw|Im Roh-Listnformat beorbatn
+signature|[[{{ns:user}}:~{0}\u007C~{1}]] ([[{{ns:user_talk}}:~{0}\u007CDiskussión]])
+duplicate-defaultsort|Obocht: Da Sortiasschlossl "~{1}" ibaschreibt in friaan Schlissl "~{0}".
+version|Versión
+version-extensions|Installierde Daweiterrungen
+version-skins|Benutzerówerflächen
+version-specialpages|Speziaalseiten
+version-parserhooks|Parser-Hooks
+version-variables|Variaablen
+version-antispam|Spamschutz
+version-other|Ånders
+version-mediahandlers|Meediennutzung
+version-hooks|Schnidstön ''(Hooks)''
+version-parser-extensiontags|Parserdaweiterrungen ''(tags)''
+version-parser-function-hooks|Parserfunkziónen
+version-hook-name|Schnidstönnaum
+version-hook-subscribedby|Aufruaff voh
+version-version|(~{0})
+version-license|Lizenz
+version-poweredby-credits|Dé Nétzseiten braucht '''[https://www.mediawiki.org/wiki/MediaWiki/de MediaWiki]''', Copyright © 2001–~{0} ~{1}.
+version-poweredby-others|åndre
+fileduplicatesearch|Dóppéde Daatein suachen
+fileduplicatesearch-summary|Suach noch dóppéde Daatein auf da Baasis vo eanerm Hash-Wert.
+fileduplicatesearch-legend|Suach noch Duplikaate
+fileduplicatesearch-filename|Daateinåm:
+fileduplicatesearch-submit|Suachen
+fileduplicatesearch-info|~{0} × ~{1} Pixel<br />Daateigress: ~{2}<br />MIME-Typ: ~{3}
+fileduplicatesearch-result-1|Dé Daatei „~{0}“ hod koane identischen Duplikaate.
+specialpages|Spezialseitn
+specialpages-note|* Reguläre Speziaalseiten\n* <span class="mw-specialpagerestricted">Zuagrifsbschränkde Speziaalseiten</span>\n* <span class="mw-specialpagecached">Cachegenerrirde Speziaalseiten (Da Inhoid is méglicherweis vaoiterd)</span>
+specialpages-group-maintenance|Wartungslisten
+specialpages-group-other|Åndre Speziaalseiten
+specialpages-group-login|Åmöden
+specialpages-group-changes|Létzde Änderrungen und Logbiacher
+specialpages-group-media|Meedien
+specialpages-group-users|Benutzer und Rechtt
+specialpages-group-highuse|Haiffig brauchde Seiten
+specialpages-group-pages|Listen voh Seiten
+specialpages-group-pagetools|Seitenwerkzeig
+specialpages-group-wiki|Systémdaaten und Werzeig
+specialpages-group-redirects|Weiderloattende Speziaalseiten
+specialpages-group-spam|Spam-Werkzeig
+blankpage|Laare Seiten
+intentionallyblankpage|Dé Seiten is obsichtlich óne an Inhoid. Sie werd fyr Benchmarks vawendt
+external_image_whitelist|#De Zein ned vaendan<pre>\n#Untahoib kennan Fragment vo reguleare Ausdrick (da Tei zwischn de //) eigebm wean.\n#De wean mid de URL vo externa Buidl vaglicha (Hotlinks)\n#A positiva Vagleich fiat zua Buidozoag, sonst wead nua a Link zan Buid ozoagt\n#Zein, wo mit # ofanga, wean ois Kommentar bhandlt\n#Grouss-/Kloaschreibung is irrelevant\n\n#Fragment vo reguleare Ausdrick noch dera Zein eitrong. De Zein ned vaendan</pre>
+tags|Gütige Änderrungsmarkiarunen
+tag-filter|[[Special:Tags\u007CMarkiarungs]]-Fuita:
+tag-filter-submit|Füter
+tags-title|Markiarungen
+tags-intro|Dé Seiten zoagt olle Markiarungen, dé fyr Beorweidungen vawendt wern, sówia dé Bedeitung voh dé.
+tags-tag|Markiarungsnåm
+tags-display-header|Bnénnung auf d' Änderrungslisten
+tags-description-header|Vóiständige Bschreiwung
+tags-hitcount-header|Markirde Änderrungen
+tags-edit|werkeln
+tags-hitcount|~{0} {{PLURAL:~{0}\u007CÄnderrung\u007CÄnderrungen}}
+comparepages|Seiten vagleichen
+compare-page1|Seiten 1
+compare-page2|Seiten 2
+compare-rev1|Versión 1
+compare-rev2|Versión 2
+compare-submit|Vagleichen
+compare-invalid-title|Da ågeewerne Seitennåm is néd gütig
+compare-title-not-exists|Da ågeewerne Seitennåm is néd vurhånden
+compare-revision-not-exists|Dé ågeewerne Versión is néd vurhånden
+dberr-problems|Tschuidigung. Dé Seiten hod im Moment technische Próbléme.
+dberr-again|Wort a por Minuten und vasuachs dånn neich z' loon.
+dberr-info|(Kå koah Vabindung zum Daatenbånkserver herstön: ~{0})
+dberr-usegoogle|Du kunntersd dawei mid Google suachen.
+dberr-outofdate|Beochtt, daas da Suachindex voh inserne Inhoitt bei Google vaoiterd seih kunnt.
+htmlform-required|Der Wert do werd braucht.
+htmlform-submit|Speichern
+htmlform-reset|Änderrungen ryckgängég mochen
+htmlform-selectorother-other|Åndre
+logentry-move-move_redir|~{0} hod de Seitn ~{2} af ~{3} {{GENDER:~{1}\u007Cverschom}} und hod dabei a Weidaloatung ibaschriem
+logentry-move-move_redir-noredirect|~{0} hod de Seitn ~{2} af ~{3} {{GENDER:~{1}\u007Cverschom}} und dabei a Weidaloatung ibaschriem, ohne a neiche ozlegn
+revdelete-summary|Zåmmfossungskommentar
+searchsuggest-search|Suach
+searchsuggest-containing|Voitextsuach noch ...
+contactpage|Kontaktseitn
+']:>
+).lang
+;

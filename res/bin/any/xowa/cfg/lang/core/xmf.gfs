@@ -1,0 +1,661 @@
+this
+.fallback_load('ka')
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|ჟაშხა
+monday|თუთაშხა
+tuesday|თახაშხა
+wednesday|ჯუმაშხა
+thursday|ცაშხა
+friday|ობიშხა
+saturday|შურიშხა
+sun|ჟაშ.
+mon|თუთ.
+tue|თახ.
+wed|ჯუმ.
+thu|ცაშ.
+fri|ობი.
+sat|შურ.
+january|ღურთუთა
+february|ფურთუთა
+march|მელახი
+april|პირელი
+may_long|მესი
+june|მანგი
+july|კვირკვე
+august|მარაშინათუთა
+september|ეკენია
+october|გჷმათუთა
+november|გერგობათუთა
+december|ქირსეთუთა
+january-gen|ღურთუთაშ
+february-gen|ფურთუთაშ
+march-gen|მელახიშ
+april-gen|პირელიშ
+may-gen|მესიშ
+june-gen|მანგიშ
+july-gen|კვირკვეშ
+august-gen|მარაშინათუთაშ
+september-gen|ეკენიაშ
+october-gen|გჷმათუთაშ
+november-gen|გერგობათუთაშ
+december-gen|ქირსეთუთაშ
+jan|ღურ.
+feb|ფურ.
+mar|მელ.
+apr|პირ.
+may|მეს.
+jun|მან.
+jul|კვრ.
+aug|მარ.
+sep|ეკნ.
+oct|გჷმ.
+nov|გერ.
+dec|ქირ.
+toc|დინორე
+redirectedfrom|(გინოწურაფილი რე ~{0}-შე)
+allpages|არძა ხასილა
+prevpage|წოხლენ ხასილა (~{0})
+nextpage|უკულ ხასილა (~{0})
+categories|კატეგორიეფი
+lastmodifiedat|თე ხასილაქ ეკონიას გეახალუ ~{1}-ს, ~{0}-ის.
+thumbnail-more|მორდი
+otherlanguages|შხვა ნინეფს
+blanknamespace|(დუდ)
+pagecategories|{{PLURAL:~{0}\u007Cკატეგორია\u007Cკატეგორიეფი}}
+category_header|სტატიეფი "~{0}"  კატეგორიას
+subcategories|გიმენკატეგორიეფი
+category-media-header|მედია კატეგორიას "~{0}"
+category-empty|''თე კატეგორიას ასე ვაკათ ხასჷლეფი ვარდა მედია''
+category-subcat-count|{{PLURAL:~{1}\u007Cთე კატეგორიას ოკათჷ ხვალე ათე გიმენკატეგორია.\u007Cთე კატეგორიას მოჩამილი რე ~{0} გიმენკატეგორია ~{1}-შე.}}
+category-article-count|{{PLURAL:~{1}\u007Cათე კატეგორია იკათუანს ხვალე გეჸვენჯ ხასილას.\u007Cგეჸვენჯ {{PLURAL:~{0}\u007Cხასილა რე\u007C~{0} ხასილეფ რე}} თე კატეგორიას, გვალო ~{1}–შე.}}
+category-file-count|{{PLURAL:~{1}\u007Cთე კატეგორიას ხვალე ათე გეჸვენჯი ფაილი რე.\u007Cთე კატეგორიას რე გეჸვენჯი ~{0}, ართოიანო ~{1}-შე.}}
+nextn|უკულიან {{PLURAL:~{0}\u007C~{0}}}
+prevn|წოხლენ ~{0}
+listingcontinuesabbrev|გინძარ.
+bold_sample|რუმე ტექსტი
+bold_tip|რუმე ტექსტ
+italic_sample|ელართელი ტექსტი
+italic_tip|ელართელი ტექსტი
+link_sample|რცხუშ ჯოხო
+link_tip|დინახალენი რცხუ
+headline_sample|დუდლანდარიშ ტექსტი
+headline_tip|მაჟირა დონეშ დუდლანდარი
+hidden-category-category|ფულირი კატეგორიეფი
+statistics|სტატისტიკა
+wikieditor-toolbar-characters-page-ipa|IPA
+wm-license-cc-wiki-link|w:en:Creative Commons
+sitesupport-url|https://donate.wikimedia.org/?utm_source=donate&utm_medium=sidebar&utm_campaign=spontaneous&uselang=xmf
+sitesupport|აზარა
+tooltip-n-sitesupport|ხუჯ დომკინით
+tog-underline|რცხუეფიშ ათოღაზუა:
+tog-hideminor|დოფული ციქა რედაქტირაფა ეკონია თირაფეფს
+tog-hidepatrolled|დოფულით პატრულირებულ რედაქტირაფეფი ასერდეიან თირაფეფს
+tog-newpageshidepatrolled|დოფულით პატრულირებულ ხასჷლეფი ახალ ხასჷლეფიშ ერკებულშე
+tog-extendwatchlist|გოფაჩი ოთოჸუჯე ერკებული არძო თირაფეფიშ ოძირაფალო, ამარდეიან თირაფეფიშ მეკოროცხილო
+tog-usenewrc|გეგმირინე ეკონია თირაფეფიშ უჯგუში ერკებული (ითხინს JavaScript-ის)
+tog-numberheadings|ავტომატურო დონომერე დუდჯოხოეფი
+tog-showtoolbar|რედაქტირაფაშ ხეჭკუდეფიშ ძირაფა (ითხინს JavaScript-ის)
+tog-editondblclick|ხასჷლეფიშ რედაქტირაფა ჟირმანგი გეწკანტაფათ (ითხინს JavaScript-ის)
+tog-editsectiononrightclick|ჩართი სექციაშ რედაქტირაფა სექციაშ ჯოხოშა მარძგვან გეწკანტაფათ (ითხინს JavaScript-ის)"
+tog-showhiddencats|ქაძირი ფულირი კატეგორიეფი
+underline-always|ირო
+underline-never|შურო
+editfont-sansserif|შრიფტი სანს-სერიფი
+editfont-serif|შრიფტი სერიფი
+hidden-categories|{{PLURAL:~{0}\u007Cფულირი კატეგორია\u007Cფულირი კატეგორიეფი}}
+noindex-category|ხასჷლეფი ინდექსირაფაშ უმუშო
+about|-შენი
+article|სტატია
+newwindow|ინწყუმუ ახალი ოჭკორიეს
+cancel|გოუქვაფა
+moredotdotdot|სრულო...
+mypage|ჩქიმი ხასჷლა
+mytalk|ჩქიმი სხუნუა
+navigation|ნავიგაცია
+and| დო
+qbfind|დოგორი
+qbedit|რედაქტირება
+qbpageoptions|თე ხასჷლა
+qbmyoptions|ჩქიმი ხასჷლეფი
+faq|ბხშირი კითხვეფი
+actions|მოქმედალეფი
+namespaces|ჯოხოეფიშ ოფირჩა
+variants|ვარიანტეფი
+errorpagetitle|ჩილათა
+returnto|დირთი ~{0}-შა
+tagline|{{SITENAME}} ხასჷლაშე
+help|მოხვარა
+search|გორუა
+searchbutton|გორუა
+go|სტატია
+searcharticle|გინულა
+history|ხასილაშ ისტორია
+history_short|ისტორია
+printableversion|ობეშტალი ვერსია
+permalink|პერმანენტული რცხუ
+print|დობეშტი
+edit|რედაქტირაფა
+create|დორსხუაფა
+editthispage|ხასჷლაშ რედაქტირაფა
+delete|ლასუა
+deletethispage|დოლასი თე ხასჷლა
+protect|დოთხილე
+protect_change|თირუა
+newpage|ახალი ხასჷლა
+talkpage|მოჩამილი ხასჷლაშ სხუნუა
+talkpagelinktext|სხუნუა
+specialpage|გჷშაკერძაფილი ხასჷლა
+personaltools|პერსონალური ხეჭკუდეფი
+talk|სხუნუა
+views|ძირაფეფი
+toolbox|ინსტრუმენტეფი
+redirectpagesub|ხასჷლაშა გინოწურაფა
+jumpto|გეგნორთი:
+jumptonavigation|ნავიგაცია
+jumptosearch|გორუა
+aboutsite|{{SITENAME}}-შენი
+aboutpage|Project:შენი
+copyright|დინორე მიწორინაფილი რე ~{0}–იშ ჯოხოთ.
+copyrightpage|{{ns:project}}:ოავტორე ალობეფი
+currentevents|მიმალი მოლინეფი
+currentevents-url|Project:მიმალი მოლინეფი
+disclaimers|გამამინჯალაშ ვარება
+disclaimerpage|Project:გამამინჯალაშ ვარება
+edithelp|მოხვარა რედაქტირაფას
+mainpage|დუდხასჷლა
+mainpage-description|დუდხასჷლა
+portal|ჯარალუაშ ხასჷლეფი
+portal-url|Project:ჯარალუაშ ხასჷლეფი
+privacy|ანონიმურობაშ პოლიტიკა
+privacypage|Project:ანონიმურობაშ პოლიტიკა
+badaccess|ალობაშ ჩილათა
+ok|ჯგირი
+retrievedfrom|გორილ რე "~{0}"-იშე
+youhavenewmessages|თქვა გიღუნა ~{0} (~{1}).
+editsection|რედაქტირაფა
+editold|რედაქტირაფა
+viewsourceold|წყუშ ძირაფა
+editlink|რედაქტირაფა
+viewsourcelink|ქოძირი წყუ
+editsectionhint|სექციაშ რედაქტირაფა: ~{0}
+showtoc|ძირაფა
+hidetoc|ტყობინაფა
+site-rss-feed|~{0}-იშ RSS არხი
+site-atom-feed|~{0}-იშ RSS არხი
+page-rss-feed|~{0}-იშ  არხი  RSS
+page-atom-feed|"~{0}"–იშ არხი ატომი
+red-link-title|~{0} (ხასჷლა ვა რე)
+nstab-main|ხასჷლა
+nstab-user|მახვარებუშ ხასჷლა
+nstab-media|მედიაშ ხასილა
+nstab-special|გჷშაკერძაფილი ხასჷლა
+nstab-project|პროექტიშ ხასჷლა
+nstab-image|ფაილი
+nstab-template|თანგი
+nstab-category|კატეგორია
+nosuchspecialpage|თეჯგუა გჷშაკერძაფილი ხასჷლეფი ვარსებენს
+missing-article|სისტემას ვაძირუ მოგორაფილი ხასჷლაშ ტექსტიქ მუნაჩმეფიშ ბაზას, ჯოხოთ «~{0}» ~{1}. \n\nთენა, მუჭოთ წესინი, მოხვადუ თი ბორჯის, მუჟამს მახვარებუ გიაჸუნუუ თი ხასჷლაშ ისტორიაშ რცხუს, ნამუთ ლასირი რე. \nთენა თაშ ვა რე-და, შილებე თქვა ძირით ჩილათა სისტემაშ კოდის. \nქორთხიინთ, ქატყვინუათ თენა [[Special:ListUsers/sysop\u007Cadministrator]]–ს, URL–შ მეწურაფათ.
+missingarticle-rev|(რედაქტირაფა#: ~{0})
+badtitle|ცაგანა სათაური
+badtitletext|მოთხილ ხასილაშ ჯოხო ჩილათირ რდუ, ვარა ჩოლიერ, ვარა ხოლო გოხოლუდეს ჩილათირო გინორცხუაფილ ინტერ–ნინა ვარა ინტერ–წიკი ჯოხო. \nთენა შილებე იკათუანდას ართ ვარა უმოს თიშნერ ნიშანს ნამუშ გუმორინაფა ჯოხოს ვა შილებე.
+viewsource|ქოძირი წყუ
+viewsourcetext|თქვა შეილებუნა ქოძირათ თე ხასჷლაშ დაჭყაფური ფაილი დო ქუდარსხუათ თიშ მანგი:
+yourname|მახვარებუშ ჯოხო:
+yourpassword|პაროლი
+yourpasswordagain|კჷნე გეკორობით პაროლი:
+remembermypassword|ქჷგიშინი ჩქიმი მიშულა თე ბრაუზერს (მაქსიმუმ ~{0} დღას)
+yourdomainname|თქვან დომენ
+login|მიშულა
+nav-login-createaccount|მიშულა/ანგარიშიშ გონწყუმა
+userlogin|მიშულა/ანგარიშიშ გონწყუმა
+logout|გიშულა
+userlogout|გიშულა
+nologin|დიორდე ვარეთო რეგისტრირებული? ~{0}.
+nologinlink|გონწყით ანგარიში
+createaccount|ანგარიშიშ გონწყუმა
+gotaccount|უკვე რეგისტრირებული რეთო? '''~{0}'''
+gotaccountlink|მინულა
+userlogin-resetlink|გუგოჭყორდესო მიშაულარო საჭირო ინფორმაციაქ?
+loginsuccess|'''ასე მიშულირ რეთ {{SITENAME}}-ს მუჭოთ "~{0}".'''
+nouserspecified|საჭირო რე მახვარებუშ ჯოხოშ მიშაჭარუა.
+mailmypassword|ახალ პაროლიშ მოჯღონა
+noemail|"~{0}" მახვარებუშ ელ-ფოშტა წურაფილი ვარე.
+loginlanguagelabel|ნინა: ~{0}
+extlink_sample|http://www.example.com რცხუშ ჯოხო
+extlink_tip|გალენი რცხუ (ქორშუდანი http:// პრეფიქსი)
+nowiki_sample|ქინახუნეთ უგუფორმატაფუ ტექსტი თაქ
+nowiki_tip|ვიკიშ ფორმატირაფაშ იგნორირაფა
+image_tip|დინოხუნაფილი ფაილი
+media_tip|ფაილიშ რცხუ
+sig_tip|თქვან ხეშმოჭარა დო ბორჯი
+hr_tip|ჰორიზონტალური ღოზი (ვაგიმირინუათ ბხშირას)
+summary|რეზიუმე:
+subject|თემა/დუდლანდარი:
+minoredit|თენა რე ჭიჭე რედაქტირაფა
+watchthis|თე ხასჷლაშ კონტროლი
+savearticle|დოჩვი ხასილა
+preview|გიწოთოლორაფა
+showpreview|ქაძირე გიწოთოლორაფა
+showdiff|თირაფეფიშ ძირაფა
+anoneditwarning|'''გური გუჩით:''' თქვა ვარეთ რეგისტრირებული. თქვან IP ოწურაფუ ინოჭარილი იჸი თე ხასჷლაშ რედაქტირაფაშ ისტორიას.
+summary-preview|რეზიუმეშ გიწოთოლორაფა
+blockedtext|'''თქვან მახვარებუშ ჯოხო ვარა IP მიოწურაფუქ ბლოკირქ იჸუ. '''\n\nბლოკირაფა ღოლუ $-ქ.\nსამანჯელო წუმორინაფილქ იჸუ გეჸვენჯიქ: ''~{1}''.\n\n* ბლოკუაშ დაჭყაფური: ~{7}\n* ბლოკიშ ვადაშ გულა ბორჯი: ~{5}\n* ბლოკირქ იჸუ: ~{6}\n\nშეილებუნა დეკავშირათ ~{0}-ს ვარა ნამთინე შხვა [[{{MediaWiki:Grouppage-sysop}}\u007Cადმინისტრატორს]] ბლოკუაშ კილასხუნალო.\nგეთოლწონით, ნამდა თქვა ვაგუმგარინენა ფუნქცია: ''მახვარებუშა ელ-ფოშტაშ ჯღონუა'', ვაგაფუნა მეღანკილი მოქმენდი ელ-ფოშტაშ მიოწურაფუ თქვანი [[Special:Preferences\u007Cანგარიშიშ კონფიგურაციას]], ვარა დობლოკუაშ გეშა თე ფუნქციაშ გუმორინაფაშ ნება მიდაღალირ გაფუნა და.\nთქვან ასეიან IP მიოწურაფუ რე ~{2}, დო ბლოკიშ იდენტიფიკატორი #~{4}.\nრთხიინთ ქიმიოღანკათ თე მუნაჩემეფშე ნამდგაიჸინი (ვარა ჟირხოლო) თქვან კორესპონდენციას.
+newarticle|(ახალ)
+newarticletext|თქვა გეყ’უნელ რეთ ხასილაშ რცხის, ნამუთ დიო ვა რე დორცხუაფილ.\nხასილაშ დარცხუაფალო გემიშეყ’ონით ტექსტ თუდონ ოჭკორიეშა. (ქოძირით[~{0} მოხვარაშ ხასილა] უმოს ინფორმაციაშო).\nთე ხასილას ჩილათირო მოხვადით–და, ქიგუნჭირით თქვან ბრაუზერიშ კონჭის '''უკახალე'''."
+noarticletext|ასე თე ხასილას ტექსტ ვა რე. \nთქვა შეილებუნა [[Special:Search/{{PAGENAME}}\u007Cგორათ ათე ხასილაშ ჯოხო]] შხვა ხასილეფს,\n<span class=\\"plainlinks\\">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} დოგორათ მეხუჯაფილ ჟურნალეფ],\nვარა [{{fullurl:{{FULLPAGENAME}}\u007Caction=edit}} დიჭყათ ათე ხასილაშ რედაქტირაფა]</span>.
+noarticletext-nopermission|ათე ხასჷლას ასე ტექსტი ვა რე. თქვა შეილებუნა [[Special:Search/{{PAGENAME}}\u007Cდოგორათ თე ხასჷლაშ დუდჯოხო]] შხვა ხასჷლეფს,\nვარდა <span class="plainlinks">[{{fullurl:{{#Special:Log}}\u007Cpage={{FULLPAGENAMEE}}}} დოგორათ გინორცხილ ჟურნალეფი]</span>.
+previewnote|'''რშუდანი თენა რე ხვალე გიწოთოლორაფა'''\nთქვანი თირაფეფი დიო ვარე ჩუალირი!
+editing|რედაქტირაფა ~{0}
+editingsection|~{0}–იშ (სექციაშ) რედაქტირაფა
+yourtext|თქვან ტექსტი
+copyrightwarning|გეთოლწონით, ნამდა {{SITENAME}} ხასილაშა თქვან ხეშე მიშაღალირ არძონერ თია იფორუ ~{1}-ით (დეტალეფშო ქოძირით ~{0}). \nვა გოკონა თქვან ნახანდაქ დუდშულო   რედაქტირებულქ დო გიონოჯღონელქ იყ’უას–და, ვა მიშეყ’ონათ თინა თაქ.<br />\nთქვა ხოლო პიჯალას დუთმოდვანთ, ნამდა თე ტექსტი თქვან ნაჭარა რე, ვარა გინოღალირ რე ოირკოჩე დომენშე დო ვარა თიშ მანგურ დუდიშულ წყუშე. \n'''ვა მიშეღათ ოავტორე ნებეფით თხილერ ნახანდი ავტორიშ ქოყ’იაშ უმშო!'''"
+templatesused|თე ხასჷლას გიმორინაფილი {{PLURAL:~{0}\u007Cთანგი\u007Cთანგეფი}}:
+templatesusedpreview|{{PLURAL:~{0}\u007Cთანგი\u007Cთანგეფი}} ნამუთ თე გჷწოთოლორაფას რე გიმორინაფილი
+template-protected|(თხილერი)
+template-semiprotected|(გვერდო თხილერი)
+hiddencategories|თე ხასილა ოკათუ {{PLURAL:~{0}\u007C1 ტყობინაფილ კატეგორიას\u007C~{0} ტყობინაფილ კატეგორიეფს}}:
+nocreatetext|თე ხასილას ვა შილებე ახალ ხასილაშ გექიმინუა დორცხუაფილ ვარიაშ გეშა. თქვა შეგილებუნა კინორთა დო გექიმინელ ხასილაშ რედაქტირაფა, ვარა [[სპეციალურ:Userlogin\u007Cმიშულა დო ანგარიშიშ დორცხუაფა]]
+permissionserrorstext-withaction|თქვა ვა გიღუნა ~{1}–იშ ღოლამაშ ალობა თე გეჸვენჯი {{PLURAL:~{0}\u007Cსამანჯელით\u007Cსამანჯელეფით}}:
+recreate-moveddeleted-warn|'''გართხილება: თქვა კინე ახალშო ორსხუანთ ხასჷლას, ნამუქჷთ ლასირქ იჸუ ოწოხოლე'''\n\nრთხიინთ, დეფირქათ, ქორე თუ ვარ მისაღეფ თე ხასჷლაშ რედაქტირაფაშ გაგინძორება.\nთქვან ოხუჯურო, ათე ხასილაშ ლასუაშ დო გინოღალაშ ჟურნალი მოჩამილ რე თუდო:
+moveddeleted-notice|თე ხასჷლაქ ლასირქ იჸუ. ლასუაშ დო გინოღალაშ ჟურნალი მოჩამილ რე თუდო გიმაწურაფალო
+post-expand-template-inclusion-warning|"გური ქუჩით:" ინოხუნაფილ თანგეფიშ ზომა ნაბტანი დიდი რე. კანკალე თანგეფი ვენიკათინე.
+post-expand-template-inclusion-category|ხასჷლეფი ნამუსუთ ინოხუნაფილი თანგეფიშ ზომა გინომეტებული რე.
+post-expand-template-argument-warning|"'''გური ქუჩით:''' თე ხასჷლას ოკათ არძოშ უკლაშ ართ თიცალ თანგიშ არგუმენტი, ნამუსუთ უღუ გოძინელოფაშ ნაბტან დიდ ზომა.\nთე არგუმენტეფქ გჷშატებულქ იჸუ."
+post-expand-template-argument-category|უარგუმენტო თანგამი ხასჷლეფი
+viewpagelogs|თე ხასილაშო ორეგისტრაციე ჟურნალეფიშ ძირაფა
+currentrev|მიმალ გიშანწყუალა
+currentrev-asof|~{0}–შო მიმალ რედაქცია
+revisionasof|~{0} თარიღიშო დო საათიშო რსებულ ვერსია
+revision-info|~{0}-იშ ვერსია, ~{1}-იშ მიშაღალირ
+previousrevision|←უმოს ჯვეშ ვერსია
+nextrevision|უახალაშ ვერსია→
+currentrevisionlink|მიმალ ვერსია
+cur|მიმალ
+last|ეკონია
+page_first|პირველი
+page_last|ეკონია
+histlegend|მეღანკილ: ართიანიშ მიოზიმაფალო კორნებულ ვერსიეფიშ რადიოშ ოჭკორიეფ ქიმიოღანკეთ დო გეუნჭირით მიშულაშ კონჭის, ვარა ქვინჯის რენ თი კონჭის.\nლეგენდა: '''კუნტარაფეფ: ({{მიმ.}})''' = შხვაობა მიმალ ვერსიაწკუმა, '''({{ეკონია}}) = შხვაობა ოწოხოლენ ვერსიაწკუმა, ჭ = ჭიჭე რედაქტირაფეფ.
+history-fieldset-title|ისტორიაშ გინოჯინა
+history-show-deleted|ხვალე ლასირეფი
+histfirst|პირველი
+histlast|ეკონია
+historysize|(~{0} ბაიტი)
+historyempty|(ჩოლიერი)
+history-feed-title|რედაქტირებიშ ისტორია
+history-feed-description|თენა გვერდიშ რედაქტირებეფიშ ისტორია ვიკის
+history-feed-item-nocomment|~{0}  ~{1}-ს
+rev-delundel|ძირაფა/ტყობინაფა
+revdel-restore|ორწყენჯობაშ თირუა
+revertmerge|ეკორტყუალაშ მოლასუა
+history-title|"~{0}"–იშ თირაფეფიშ ისტორია
+lineno|ღოზი ~{0}:
+compareselectedversions|გიშაგორილ ვერსიეფიშ მეზიმაფა
+editundo|გოუქვაფა
+searchresults|გორუაშ მოღალირობეფ
+searchresults-title|"~{0}"–იშ გორუაშ მოღალირობეფ
+notextmatches|ნამთინ ხასილაშ ტექსტი ვა უხუჯანს
+prevn-title|წოხოლენი ~{0} მოღალუ
+nextn-title|გეჸვენჯი ~{0} მოღალუ
+shown-title|ქაძირი ~{0} მოღალუ ირ ხასჷლას
+viewprevnext|ქოძირ  (~{0} {{int:pipe-separator}} ~{1}) (~{2}).
+searchmenu-exists|თე ვიკის "[[:~{0}]]" ჯოხოთ ხასჷლა რე
+searchmenu-new|''ქჷდარსხი "[[:~{0}]]" ხასჷლა თე ვიკის'''
+searchprofile-articles|სტატიეფი
+searchprofile-images|მულტიმედია
+searchprofile-everything|ირფელი
+searchprofile-advanced|გაუჯგუშებული
+searchprofile-articles-tooltip|დოგორი ~{0}-ს
+searchprofile-images-tooltip|დოგორი ფაილეფი
+searchprofile-everything-tooltip|გორუა არძო ხასილას (ოჩიებელი ხასჷლეფიშ მეკოროცხილო)
+searchprofile-advanced-tooltip|გორუა მახვარებუშ გენჭყილ ჯოხოეფიშ ოფირჩას
+search-result-size|~{0} ({{PLURAL:~{1}\u007C1 ზიტყვა\u007C~{1} ზიტყვეფ}})
+search-result-category-size|{{PLURAL:~{0}\u007C1 მაკათური\u007C~{0} მაკათური}} ({{PLURAL:~{1}\u007C1 გიმენკატეგორია\u007C~{1} გიმენკატეგორია}}, {{PLURAL:~{2}\u007C1 ფაილი\u007C~{2} ფაილეფი}})
+search-redirect|(გინოწურაფა ~{0})
+search-section|(სექცია ~{0})
+search-suggest|ათენას ხო ვა გორუნდით: ~{0}
+search-interwiki-caption|ჯიმაია პროექტეფ
+search-interwiki-default|მოღალირეფი ~{0}-შე:
+search-interwiki-more|(უმოს)
+searchrelated|მათანგეფ
+searchall|არძო
+search-nonefound|თქვანი მოგორაფილიშ მუთუნნერ მანგი მოღალუქ ვეძირჷ.
+powersearch-legend|გოძინელ გორუა
+powersearch-ns|დოგორ ჯოხოეფიშ ოფირჩას:
+preferences|კონფიგურაცია
+mypreferences|ჩქიმ კონფიგურაციეფი
+youremail|ელ-ფოშტა:
+yourrealname|ნანდულ სახელ *
+yourlanguage|ნინა:
+prefs-help-email|ელ-ფოშტაშ მიოწურაფუ ვა რე უციო, მარა ოხვილაფუ რე პაროლიშ ეიორსხებელო პაროლი გიჭყოლიდეთუ̂-და.
+prefs-help-email-others|თქვა შეილებუნა ალობა მეჩათ შხვეფს დჷგეკონტაქტან ელ-ფოშტათ თქვან ანგარიშის ვარა ოჩიებელ ხასჷლაშ ლინკიშ გეჸუნათ. თქვანი ელ-ფოშტაშ მიოწურაფუ ვანკორჩქინდჷ მუჟამს შხვა მახვარებუეფი დჷგეკავშირებუნანი.
+group-user|მახვარებუეფი
+group-sysop|ადმინისტრატორეფი
+grouppage-user|{{ns:project}}:მახვარებუეფ
+grouppage-sysop|{{ns:project}}:ხემანჯღვერეფი
+newuserlogpage|მახვარებუშ რეგისტრაციაშ ჟურნალ
+rightslog|მახვარებუშ ნებეფიშ ჟურნალ
+action-edit|თე ხასილაშ რედაქტირაფა
+nchanges|~{0} {{PLURAL:~{0}\u007Cთირაფა\u007Cთირაფეფ}}
+recentchanges|ასეიანი თირაფეფი
+recentchanges-legend|ასერდენ თირაფეფიშ ოფციეფ
+recentchanges-summary|თე ხასჷლას ქაძირი ვიკიშა მიშაღალირ არძოშ უახალაშ თირაფეფი.
+recentchanges-feed-description|ვიკიშ უახალაშ თირაფეფიშა თოლყ'უჯიშ მეყ'უნაფა თე არხის
+recentchanges-label-newpage|ათე რედაქტირაფას მაჸუნ ახალ ხასჷლაშ დორსხუაფაქ.
+recentchanges-label-minor|თენა რე ციქა რედაქტირაფა
+recentchanges-label-bot|თე რედაქტირაფა ბოტიშ ნაღოლემი რე
+recentchanges-label-unpatrolled|თე რედაქტირაფა დიო ხოლო ვა რე პატრულირაფირი
+rcnotefrom|თუდო მოჸუნაფილიე თირაფეფ, ”’~{1}””-შე (ძირაფილიე ”’~{0}”’)
+rclistfrom|ახალ თირაფეფიშ ძირაფა დოჭყაფილ ~{2} ~{1}-შე
+rcshowhideminor|~{0} ჭიჭე რედაქტირაფეფ
+rcshowhidebots|ბოტეფიშ  ~{0}
+rcshowhideliu|~{0} მიშულირ მახვარებუეფ
+rcshowhideanons|~{0} ანონიმურ მახვარებუეფ
+rcshowhidepatr|გოკონტროლაფირ თირაფეფიშ ~{0}
+rcshowhidemine|ჩქიმ რედაქტირაფეფიშ ~{0}
+rclinks|ეკონია ~{1} დღას ღოლამირ ეკონია ~{0} თირაფეფიშ ძირაფა <br />~{2}
+diff|შხვანერობა
+hist|ისტ.
+hide|ტყობინაფა
+show|ძირაფა
+minoreditletter|ჭ.რ.
+newpageletter|ახ.
+boteditletter|ბ
+rc-enhanced-expand|დეტალეფიშ ძირაფა (ითხინს ჯავასქრიფთის)
+rc-enhanced-hide|დეტალეფიშ ტყობინაფა
+recentchangeslinked|აკოხვალამირ თირაფეფ
+recentchangeslinked-feed|აკოხვალამირ თირაფეფ
+recentchangeslinked-toolbox|აკოხვალამირ თირაფეფ
+recentchangeslinked-title|"~{0}"-შა მებუნაფილ თირაფეფი
+recentchangeslinked-summary|თენა რე მეწურაფილი ხასილაწკუმა (ვარა მეწურაფილი კატეგორიაშ მაკათურეფწკუმა) გინორცხუაფილი ხასილეფს ეკონია ბორჯის ღოლამირი თირაფეფიშ ერკებულ. ხასილეფი [[Special:Watchlist\u007Cyour watchlist]] გიმორთილი რე '''ფსქელას'''."
+recentchangeslinked-page|ხასილაშ ჯოხო:
+recentchangeslinked-to|მანგიერო ქაძირე ათე ხასილაშა მერცხილ ხასილეფშა მიშაღალირ თირაფეფ
+upload|ფაილიშ ეხარგუა
+uploadbtn|ფაილიშ გეთება
+uploadlogpage|ეხარგუაშ ორეგისტრირებელ ჟურნალ
+filedesc|რეზიუმე
+license|ლიცენზირაფა:
+license-header|ლიცენზირაფა
+listfiles|სურათეფიშ ერკებულ
+listfiles_name|სახელ
+file-anchor-link|ფაილი
+filehist|ფაილიშ ისტორია
+filehist-help|ქიგუნჭირით რიცხვის/ბორჯის თიშო, ნამდა ქოძირათ ფაილი თი რედაქციათ, მუ რედაქციას თი რიცხვის/ბორჯის რდუნ.
+filehist-revert|დართინე
+filehist-current|მიმალ
+filehist-datetime|რიცხვი/ბორჯი
+filehist-thumb|ჭკუდი
+filehist-thumbtext|ჭკუდი ~{0}-შო რსებულ ვერსიაშო
+filehist-user|მახვარებუ
+filehist-dimensions|განზომილებეფ
+filehist-filesize|ფაილიშ ზომა
+filehist-comment|კომენტარ
+imagelinks|ფაილი გჷმორინაფილი რე
+linkstoimage|გეყ’ვენჯი {{PLURAL:~{0}\u007Cხასილა\u007Cხასილეფ}} მერცხილ რე თე ფაილშა
+nolinkstoimage|ვა რე თე ფაილწკუმა მერსხილ ხასილეფ.
+sharedupload|თე ფაილ რე ~{0}-შე დო შილებე თენა შხვა პროექტეფც ხოლო გიმირინაუფუდასინ
+sharedupload-desc-here|თე ფაილი რე ~{0}-შე დო შილებე გჷმორნაფილქ იჸუას შხვა პროექტეფს. თეშ ეჭარუა [~{1} ფაილიშ ეჭარუაშ ხასჷლა] თუდოლე რე მოჩამილი.
+uploadnewversion-linktext|გეშახარგე ათე ფაილიშ ახალ ვერსია
+mimesearch|MIME გორუა
+randompage|ნამდგარენ ხასილა
+withoutinterwiki|ხასილეფ ნინაშ რსხილეფიშ გარეშე
+nbytes|~{0} ბაიტი
+nlinks|~{0} რსხილ
+nmembers|~{0} {{PLURAL:~{0}\u007Cმაკათურ\u007Cმაკათურეფ}}
+uncategorizedpages|უკატეგორიე ხასილეფ
+uncategorizedcategories|კატეგორიეფ კატეგორიეფიშ გარეშე
+uncategorizedimages|სურათეფ კატეგორიაშ უმიშო
+mostlinked|ხასილეფ, ნამუდგა არძას ბრალ ბუნილეფ უღუნა
+mostlinkedcategories|კატეგორიეფ, ნამუდგა არძას ბრალ რსხილეფ უღუნა
+mostcategories|სტატიეფ, ნამუდგა არძას ბრალ კატეგორიეფ უღუნა
+prefixindex|არძო ხასილა პრეფიქსით
+shortpages|ჭიჭე ხასილეფ
+longpages|გინძე ხასილეფ
+usercreated|{{GENDER:~{2}\u007Cდირსხუ}} ~{1}-ის ~{0}-ს
+newpages|ახალ ხასილეფ
+ancientpages|ჯვეშ ხასილეფ
+move|გინოღალა
+movethispage|თე გვერდიშ გინოღალა
+pager-newer-n|{{PLURAL:~{0}\u007Cუახალაშ 1\u007Cუახალაშ ~{0}}}
+pager-older-n|{{PLURAL:~{0}\u007Cუმოს ჯვეში 1\u007Cუმოს ჯვეში ~{0}}}
+booksources|წინგიშ წყუეფ
+booksources-search-legend|წიგნიშ წყუშ გორუა
+specialloguserlabel|მახვარებუ:
+speciallogtitlelabel|სათაურ:
+log|ჟურნალეფ
+all-logs-page|ირ ჟურნალ
+allpagesfrom|გეგმარჩქინ ხასილეფ დოჭყაფილ:
+allpagesto|გეგმარჩქინ ხასილეფ, ნამუთ ითებუ:
+allarticles|არძა სტატია
+allpagessubmit|გინულა
+linksearch|გალენ რცხიეფ
+linksearch-line|~{0} მერცხიილი რე ~{1}-შე
+listgrouprights-members|(მაკათურეფიშ ერკებული)
+emailuser|მიდუჯღონით ელ.ფოშტა ათე მახვარებუს
+watchlist|ჩქიმ ოკონტროლებულეფიშ ერკებულ
+mywatchlist|ჩქიმ კონტროლიშ ერკებულ
+watchlistfor2|~{0} ~{1}-ს
+addedwatchtext|"[[:~{0}]]" ხასილაქ გეძინელქ იყ’უ თქვან [[Special:Watchlist\u007Cwatchlist]]–შა.\nთე ხასილაშა დო თეწკუმა ასოცირებულ სხუნუაშ ხასილაშა მუმაულარ თირაფეფ მოჩამილ იყ’ი თექ დო თქვა გეგეადვილან თიშ გიშაგორუაქინ, ხასილა გუმორჩქინდუ '''რუმეთ'''  [[Special:RecentChanges\u007Clist of recent changes]]–ს."
+removedwatchtext|ათე ხასილაქ "[[:~{0}]]" ლასირქ იყ’უ  [[Special:Watchlist\u007Cთქვნ კონტროლიშ ერკებულშე]].
+watch|გაკონტროლი
+watchthispage|თე ხასილაშ კონტროლ
+unwatch|კონტროლიშ გოუქვაფა
+watchlist-details|{{PLURAL:~{0}\u007C~{0} ხასილა\u007C~{0} ხასილეფ}} რე თქვან კონტროლიშ ერკებულს, სხუნუაშ ხასილეფიშ მეუკოროცხუო.
+wlshowlast|ეკონია ~{0} საათიშ ~{1} დღაშ  ძირაფა
+watchlist-options|კონტროლიშ ერკებულიშ ოფციეფ
+watching|კონტროლირებად...
+unwatching|კონტროლ მონწყუმილ რე ...-შა
+deletepage|ხასილაშ ლასუა
+confirmdeletetext|თქვა თე ხასილაშ, თელ მუშ ისტორიათ, ლასუაშ პიჯის რეთ.\nდადასტურით, ნამდა თქვა ნანდულო გოკონა თეშ ღოლამა დო ნამუდა თქვა გარჩქილენა თე ქიმინჯალაშ მოღალუეფ დო მუჭოთ თქვა თეს ორთუთ [[{{MediaWiki:Policy-url}}\u007Cწესეფიშ]] მეხუჯაფილო.
+actioncomplete|მოქმედალა რსულებულ რე
+actionfailed|მოქმედალაქ დემარცხჷ
+deletedtext|"~{0}\\" ლასირქ იყ’უ.\nასერდე ლასირ ხასილეფიშ ერკებულ ქოძირით ~{1}–ს.
+dellogpage|ლასირეფიშ ერკებულ
+deletecomment|სამანჯელ:
+deleteotherreason|შხვა/გეძინელ სამანჯელ:
+deletereasonotherlist|შხვა სამანჯელ
+rollbacklink|დორთა
+protectlogpage|თხილუაშ ისტორია
+protectedarticle|თხილერი რე "[[~{0}]]"
+modifiedarticleprotection|დოთირეთ თხილუაშ დონე \\"[[~{0}]]\\-შო
+prot_1movedto2|[[~{0}]] გინოღალირიე ხასილაშა [[~{1}]]
+protectcomment|სამანჯელი:
+protectexpiry|ვადა გიშალე
+protect_expiry_invalid|ვადაშ გიშულაშ თარიღ რე ჩილათირ
+protect_expiry_old|ვადაშ გიშულაშ თარიღ რე ულირ ბორჯის
+protect-text|'''~{0}''' ხასილაშო თხილუაშ დონეშ ძირაფა დო თირაფა შეგილებუნა თაქ.
+protect-locked-access|თქვა ვა გიღუნა ხასილაშ თხილუაშ დონეშ თირუაშ ალობა. \nათაქ რე '''~{0}''' ხასილაშ ასეიან გენწყილობეფ.
+protect-cascadeon|ათე ხასილა ასე თხილერ რე, თიშენ ნამდა თენა მიშულირ რე {{PLURAL:~{0}\u007Cხასილაშა, ნამდგასით\u007Cხასილეფშა, ნამდგეფსით}} ჩართულ აფუ კასკადურ თხილუა.\nთქვა შეგილეუნა დოთირუათ ათე ხასილაშ თხილუაშ დონე, მარა თეს გავლენა ვაღვენუ კასკადურ თხილუაშა.
+protect-default|ალობა ქიმეჩ არძა მახვარეს
+protect-fallback|"~{0}" ალობა რე საჭირო
+protect-level-autoconfirmed|ახალ დო ვარეგისტრირაფილ მახვარებუეფიშ ბლოკუა
+protect-level-sysop|ხვალე ადმინისტრატორეფ
+protect-summary-cascade|კასკადურ
+protect-expiring|ვადა გიშალე ~{0} (UTC)
+protect-cascade|დოთხილე ხასილეფ, ნამუთ მიშულირ რე ათე ხასილაშა (კასკადურ თხილუა)
+protect-cantedit|თქვა ვა გათირენა ათე ხასილაშ თხილუაშ დონე, თიშენ ნამდა თქვა ვა გიღუნა ალობა თეშ რედაქტირაფაშო
+protect-expiry-options|2 საათი:2 hours,1 დღა:1 დღა,1 მარა:1 week,2 მარა:2 weeks,1 თუთა:1 month,3 თუთა:3 months,6 თუთა:6 months,1 წანა:1 year,განუსაზღვრელი ვადით:infinite
+restriction-type|ალობა:
+restriction-level|შეზღუდვაშ დონე
+undeletebtn|ახალშო ეკონწყუალა
+undeletelink|ძირაფა/ეკონწყუალა
+undeleteviewlink|ძირაფა
+undelete-search-submit|გორუა
+namespace|ჯოხოეფიშ ოფირჩა:
+invert|არძა, მეღანკილიშ გუმორკებულო
+contributions|მახვარებუშ მიშაღალირ თია
+contributions-title|~{0}-შა მახვარებუშ მიშაღალირ თია
+mycontris|ჩქიმ მიშნაღელ თია
+contribsub2|~{0} (~{1}) შენი
+uctop|(დუდ)
+month|ათე თუთაშე (დო უადრაშე):
+year|ათე წანაშე (დო უადრაშე):
+sp-contributions-newbies|ქოძირით ხვალე ახალ მახვარებუეფიშ მიშაღალირ თიეფ
+sp-contributions-newbies-sub|ახალეფშოთ
+sp-contributions-blocklog|ბლოკირაფაშ ისტორია
+sp-contributions-uploads|ეხარგუეფ
+sp-contributions-logs|ჟურნალეფი
+sp-contributions-talk|ოჩიებელი
+sp-contributions-search|მიშაღალირ თიაშ გორუა
+sp-contributions-username|IP მიოწურაფუ ვარა მახვარებუშ ჯოხო:
+sp-contributions-toponly|ქაძირი ხვალე ეკონია რევიზიეფი რენ ფერი რედაქტირაფეფი
+sp-contributions-submit|გორუა
+whatlinkshere|სოვრეშე რე თე ხასილა წურაფილ
+whatlinkshere-title|ხასილეფ, ნამუთ გინორცხილ რე ~{0}-შა
+whatlinkshere-page|ხასჷლა:
+linkshere|გეყ’ვენჯ ხასილეფ გინარცხუაფუ '''[[:~{0}]]'''-ეფს
+nolinkshere|ნამთინ ხასილა ვა რე გინორცხილ '''[[:~{0}]]'''-შა.
+isredirect|გინოწურაფაშ ხასილა
+istemplate|ტრანსკლუზია
+isimage|ფაილიშ რცხი
+whatlinkshere-prev|{{PLURAL:~{0}\u007Cწოხოლენ\u007Cწოხოლენ ~{0}}}
+whatlinkshere-next|{{PLURAL:~{0}\u007Cუკულიან\u007Cუკულიან ~{0}}}
+whatlinkshere-links|← რცხიეფ
+whatlinkshere-hideredirs|გინოწურაფა ~{0}
+whatlinkshere-hidetrans|~{0} ტრანსკლუზიეფ
+whatlinkshere-hidelinks|~{0} რცხუეფ
+whatlinkshere-hideimages|~{0} სურათიშ რცხუეფი
+whatlinkshere-filters|ტკიბირეფი
+blockip|მახვარებუშ ბლოკირაფა
+ipboptions|2 საათი:2 hours,1 დღა:1 day,3 დღა:3 days,1 მარა:1 week,2 მარა:2 weeks,1 თუთა:1 month,3 თუთა:3 months,6 თუთა:6 months,1 წანა:1 year,უხურგე ვადათ:infinite
+ipblocklist|ბლოკირელ მახვარებუეფჷ
+ipblocklist-submit|გორუა
+blocklink|ბლოკირაფა
+unblocklink|ბლოკიშ მონწყუმა
+change-blocklink|ბლოკიშ თირუა
+contribslink|ნახანდ
+blocklogpage|ბლოკირეფიშ ერკებულ
+blocklogentry|ბლოკირ რე [[~{0}]] ბლოკირაფაშ ვადაშ ათე გულა ბორჯით: ~{1} ~{2}.
+unblocklogentry|~{0}-შა ბლოკიშ მონწყუმა
+block-log-flags-nocreate|ანგარიშიშ გონწყუმა მეჭყვადილ რე
+move-page-legend|გვერდიშ გინოღალა
+movepagetext|გიმენ ფორმაშ გუმორინაფა ხასილას დუთირანს ჯოხოს დო თელ თეშ ისტორიას გეგნიღანს ახალ ჯოხოშა. \nჯვეშ ჯოხო გინირთუ ახალ ჯოხოშა გინმაწურაფალ ხასილათ. \nთქვა შეილებუნა ავტომატურო გაახალათ თი გინოწურაფეფ, ნამუთ ჯვეშ ჯოხოშა ირძენა წურაფასინ. \nთქვა ქისხუნუანთ, ნამდა თენა ვა ღოლათინ, აუცილებერო შეამოწმით [[Special:DoubleRedirects\u007Cdouble]], ვარა [[Special:BrokenRedirects\u007Cbroken redirects]].\nთქვა რეთ თიშ გამამინჯე, ნამუდა რცხუეფ იწურუაფუდან თი ხასილეფშა, სოდგა თინეფ წესით ოკო იწურუანინ.\n\n\nგეთოლისწორით, ნამუდა ხასილა '''ვა''' გინურს უკვე ქო არსებენს ხასილა ახალ ჯოხოთი-და დო თე ხასილა ვა რე ჩოლიერ-და, ვარა გინმაწურაფალ-და დო ვა უღუ რედაქტირეფეფიშ ისტორია-და. \n\nთენა თის ნიშნენს, ნამუდა ჩილათაქ მოირთეს–და, თქვა შეილებუნა ხასილას დურთინუათუ ჯვეში ჯოხო, მარა ვა შეილებუნა რსებულ ხასილას გინაჭარათინ. \n\n'''გათხილება!'''\nთენაქ შილება იყ’უას პოპულარულ ხასილაშა მიშაღალირ მოულოდნელ დო არსებით თირაფაქ; ქორთხინთ, ათე ქიმინჯიშ მოღალუეფ გეთოლისწორათ სოიშახ მიაყ’უნუდათ თეშ ღოლამასინ.
+movepagetalktext|ასოცირებულ სხუნუაშ ხასილა ავტომატურო იყ'ი გინოღალირ თეწკუმა ართო, '''გეყ'ვენჯ შემთხვევეფიშ გიშარკებულო:''' \n*ჩოლიერ ვარენ ეფერ სხუნუაშ ხასილა უკვე რსებენს ახალ ჯოხოთ, ვარდა\n*თქვა თუდო მოჩამილ ოჭკორიეს მონწყუნთ მიკიწონებაშ ღანკის–და.\n\nათე შემთხვევეფს, თენა მიკორინეთ–და, თქვა გაყ’ინა ხასილეფ მანუალურო გინაღალარ, ვარდა აკორტყუალარ.
+movearticle|ხასილაშ გინოღალა
+newtitle|ახალ ჯოხო
+move-watch|წყუ ხასილაშ დო სამიზნე ხასილაშ კონტროლ
+movepagebtn|ხასილაშ გინოღალა
+pagemovedsub|გინოღალა თებულ რე
+movepage-moved|'''\\"~{0}\\" გინოღალირ რე ათაქ: \\"~{1}\\"'''
+articleexists|ხასილა თე ჯოხოთ უკვე რსებენს, ვარდა თქვან გიშაგორილ ჯოხო ვა რე თინ. \nქორთხინთ, შხვა ჯოხო გეგშეგორათინ
+movetalk|ასოცირებულ სხუნუაშ ხასილაშ გინოღალა
+movelogpage|ორეგისტრაციე ჟურნალიშ გინოღალა
+movereason|სამანჯელი:
+revertmove|გოუქვაფა
+export|ხასილეფიშ ექსპორტ
+allmessages|ირ სისტემურ შეტყვინაფა
+allmessagesname|ჯოხო
+allmessagesdefault|შატყვინაფაშ სტანდარტულ ტექსტი
+thumbnail_error|ესკიზიშ ქიმინუაშ ჩილათა: ~{0}
+importlogpage|იმპორტიშ ჟურნალ
+tooltip-pt-userpage|თქვანი მახვარებუშ ხასილა
+tooltip-pt-mytalk|თქვანი სხუნუაშ ხასილა
+tooltip-pt-preferences|ჩქიმ კონფიგურაციეფ
+tooltip-pt-watchlist|ხასილეფიშ ერკებულ, ნამუთუშ მონიტორინგის ორთუთ თირაფაშ მიზანით
+tooltip-pt-mycontris|თქვანი მიშნაღელ თიეფიშ ერკებულ
+tooltip-pt-login|ჯგირ იჸი გემშურთუ–და, მარა თენა ვა რე სავალდებულო
+tooltip-pt-logout|გიშულა
+tooltip-ca-talk|დინორეშ ხასილაშ სხუნუა
+tooltip-ca-edit|თქვა შეილებნა თე ხასილაშ რედაქტირაფა. რთხინთ, გეუნჭირით გიწოთოლორაფაშ კონჭის სოიშახ ხასილას ჩუანდათინ
+tooltip-ca-addsection|ქიდიჭყით ახალ სექცია
+tooltip-ca-viewsource|ხასილა თხილერ რე. \nშეგილებუნა ძირათ თეშ წყუ.
+tooltip-ca-history|თე ხასილაშა მიშაღალირ თირაფეფ
+tooltip-ca-protect|ხასილაშ თხილუა
+tooltip-ca-delete|თე ხასილაშ ლასუა
+tooltip-ca-move|გეგნიღი თე ხასილა
+tooltip-ca-watch|თე ხასილაშ გეძინა თქვან კონტროლირებულ ხასილეფიშ ერკებულშა
+tooltip-ca-unwatch|მონწყით თე ხასილა თქვან კონტროლებულ ხასილეფიშ ერკებულშე
+tooltip-search|გორუა {{SITENAME}}
+tooltip-search-go|გეგნორთი წორას ათე ჯოხოშ ხასილაშა შურო ქო რენ-და
+tooltip-search-fulltext|დოგორი ხასილეფი, ნამუთ თე ტექსტის იკათუანან
+tooltip-p-logo|დუდხასჷლაშ ძირაფა
+tooltip-n-mainpage|დუდ ხასილაშ ძირაფა
+tooltip-n-mainpage-description|დუდ ხასილაშა გინოზოჯუა
+tooltip-n-portal|პროექტიშენი, მუშ ქიმინუა შეილებუნა, სოდე შილებე გორათინ
+tooltip-n-currentevents|დოგორით რსული ინფორმაცია ასეიან მოლინეფიშენ
+tooltip-n-recentchanges|ვიკიშა ეკონია ბორჯის მიშაღალირ თირაფეფიშ ერკებულ
+tooltip-n-randompage|ქუმოძირ ნამუდგარდასინ ხასილა
+tooltip-n-help|"ხასილა, სოდეთ გარკვიენთინ
+tooltip-t-whatlinkshere|არძო ვიკი ხასილაშ ერკებულ, ნამუდგა თაქ იწურუანსინ
+tooltip-t-recentchangeslinked|თე ხასილაწკუმა გინორცხილი ხასილეფშა ასერდე მიშაღალირ თირაფეფი
+tooltip-feed-rss|მოჩამილი ხასილაშ RSS არხიშ ტრანსლაცია
+tooltip-feed-atom|ათე ხასილაშ ატომ არხიშ ტრანსლაცია
+tooltip-t-contributions|თე მახვარებუშ მიშაღალირ თიაშ ერკებულიშ ძირაფა
+tooltip-t-emailuser|მიდუჯღონით ელ.ფოშტა ათე მახვარებუს
+tooltip-t-upload|გეხარგე ფაილი
+tooltip-t-specialpages|არძო სპეციალურ ხასილაშ ერკებულ
+tooltip-t-print|თე ხასილაშ ობეშტალი ვერსია
+tooltip-t-permalink|პერმანენტულ რცხი ხასილაშ თე ვერსიაშა
+tooltip-ca-nstab-main|დინორეშ ხასილაშ ძირაფა
+tooltip-ca-nstab-user|მახვარებუშ ხასილაშ ძირაფა
+tooltip-ca-nstab-special|თქვა ასე რეთ სპეციალურ ხასილას, თქვა ვა შეილებუნა ათე ხასილაშ რედაქტირაფა
+tooltip-ca-nstab-project|პროექტიშ ხასილაშ ძირაფა
+tooltip-ca-nstab-image|ფაილიშ ხასილაშ ძირაფა
+tooltip-ca-nstab-template|თანგიშ ძირაფა
+tooltip-ca-nstab-help|ქოძირეთ დახვარებაშ გვერდ
+tooltip-ca-nstab-category|ხასილაშ კატეგორიაშ ძირაფა
+tooltip-minoredit|ქიმიოღანკი, მუჭოთ ჭიჭე რედაქტირაფა [alt-i]
+tooltip-save|თირაფეფიშ ჩუალა
+tooltip-preview|გეგნაჯინით თირაფეფს დო რთხინთ, თაშ ქოღოლათ სოიშახ თირაფეფს ჩუანდათინ! [alt-p]
+tooltip-diff|ტექსტიშა თქვან მიშაღალირ თირაფეფიშ ძირაფა [alt-v]
+tooltip-compareselectedversions|ქოძირით თე ხასილაშ ჟირ გიშაგორილ ვერსიაშ შხვანერობა
+tooltip-watch|თე ხასილაშ გეძინა თქვან ოკონტროლე ერკებულშა [alt-w]
+tooltip-rollback|"დორთინა" ათე ხასილაშა ეკონია გინმახანდეშ ნაღოლემ თირაფას(ეფს) გოუქვენს ართ გენჭირათ
+tooltip-undo|"გოუქვაფა" მიშაღალირ თირაფეფს გოუქვენს დო გუთმონწყუნს რედაქტირაფაშ ფორმას გიწოთოლორაფაშ რეჟიმს. თენა შესაძლებლობას ირძენს რეზიუმეს სამანჯელქ იყ’უას დაკონკრეტებულქინ.
+tooltip-summary|კუნტა რეზიუმეშ მიშაჸონაფა
+previousdiff|← წოხოლენი თირაფეფ
+nextdiff|უახალაშ თირაფა →
+file-info-size|~{0} × ~{1} პიქსელ, ფაილიშ ზომა: ~{2}, MIME ტიპ: ~{3}
+file-nohires| უმოს მაღალ გიშაგორანჯალა ვა რე შელებუან.
+svg-long-desc|SVG ფაილ, ნომინალურო ~{0} × ~{1} პიქსელ, ფაილიშ ზიმა: ~{2}
+show-big-image|რსული გიშაგორანჯალა
+newimages|ახალ სურათეფ
+ilsubmit|გორუა
+bad_image_list|ფორმატ რე უკულიანიშნერო:\\n\\n ხვალე ერკებულშე გიშნაგორეფ (ლაწკარეფ, ნამუთ იჭყაფუ *-ით) ისხუნუ.\nლაწკარიშ პირველ რცხი ოკო რდას რცხი გლახა ფაილშა.\nკინ თი ლაწკარს რინელ ნამდგაინ უკულიან რცხი კილესხუნუ მუჭოთ გიმნარკეში, ნამუთ ნიშნენს  ხასილეფს, სოდგა ფაილეფ შილებე რდას ღოზეფს შკას დინოხუნაფილ.
+metadata|მეტამოჩამილოფეფ
+metadata-help|თე ფაილს ოხოლუ გეძინელ ინფორმაცია, ნამუთ ოეგებიეთ თი ციფრულ კამერაშე ვარა სკანერშე რე გეძინელ, ნამუთ რდუ გუმორინაფილ თე ფაილიშ ოქიმინჯალო ვარა დაციფრებელო. ფაილიშ ორიგინალ თირელ ქორენ-და, შილებე კანკალე დეტალ ვა გიშაძირუანდას ფაილშა მიშაღალირ თირაფეფს.
+metadata-expand|დეტალეფიშ გოძინელ ძირაფა
+metadata-collapse|გოძინელ დეტალეფიშ ტყობინაფა
+metadata-fields|ათე მესიჯის შინაფილ მეტა მოჩამილოფეფიშ ოფირჩეფ ეკოროცხილ იჸი ნახანტიშ ხასილაშ დისფლეის მუჟამსით მეტა მოჩამილოფეფიშ ერკებულ იჸი გითოფაჩილინ \nშხვეფ, მუჭოთ წესინ, ტყობინაფილ იყ’ი.\n* make\n* model\n* datetimeoriginal\n* exposuretime\n* fnumber\n* isospeedratings\n* focallength\n* artist\n* copyright\n* imagedescription\n* gpslatitude\n* gpslongitude\n* gpsaltitude
+exif-imagewidth|სიგანე
+exif-imagelength|სიმაღალე
+namespacesall|არძა
+monthsall|არძა
+watchlisttools-view|მერცხილ თირაფეფიშ ძირაფა
+watchlisttools-edit|ოკონტროლებელ ხასილეფიშ ძირაფა დო რედაქტირაფა
+watchlisttools-raw|კონტროლიშ ერკებულიშ რედაქტირაფა ტექსტიშ ფორმატის
+duplicate-defaultsort|''გური ქუჩით:''' სტანდარტული დანწყუალაშ კილა "~{1}"-შო გინარჯგინანს ორდონი დონწყუალაშ კილა "~{0}"-ს.
+version|ვერსია
+specialpages|გჷშაკერძაფილი ხასჷლეფი
+external_image_whitelist|"#ქჷდიტე თე ღოზი კოკობო მუჭო რენ თეში<pre>\n#ქინახუნე რეგულარული გამოსახულებაშ ფრაგმენტეფი (თი ნაწილი ნამუთ თეშ // შქას ინოდოხოდ) თუდოლე\n#თენეფი მეზჷმაფილ იჸე გალენ (hotlinked) სურათეფიშ URL-ეფშა.\n#ნამუთ მიორენ თინა სურათეფო გაგშარჩქინდჷ, ვარ-და ხვალე სურათიშ რცხუ ირწყებედასიი.\n#ღოზეფი #-თ დოჭყაფილი კომენტარო რე მერჩქინელი.\n#თენა გჷნაფულენს ასოეფიშ რეგისტრის.\n\n#ქინახუნე არძო regex ფრაგმენტეფი თე ღოზიშ ჟი. ქჷდიტე თე ღოზი კოკობო მუჭო რენ თეში</pre>"
+tag-filter|[[Special:Tags\u007Cხინტკეფიშ]] ტკიბირი:
+searchsuggest-search|გორუა
+']:>
+).lang
+;

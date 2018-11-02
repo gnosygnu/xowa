@@ -1,0 +1,76 @@
+this
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sun|Kwasiada
+mon|Dwoada
+tue|Benada
+wed|Wukuada
+thu|Yawoada
+fri|\tFida
+sat|Memeneda
+april|Oforisuo
+january-gen|OpƐpon
+february-gen|ogyefuo
+march-gen|ɔbɛnem
+april-gen|oforisuo
+may-gen|kɔtɔnimma
+june-gen|ayɛwohomumɔ
+july-gen|kutawonsa
+august-gen|ɔsannaa
+september-gen|ɛbɔ
+october-gen|ahinime
+november-gen|obubuo
+december-gen|ɔpɛnimma
+toc|Biribiara
+otherlanguages|Wo kasa ahodour mu
+faq|Nsemisa  amanfour tae bisa
+searchbutton|Hwewhe'
+create|Bo
+protect_change|Sesa
+talkpagelinktext|Kasa
+viewsource|Hwe bebia efiri
+template-protected|(Wei yabo eho ban)
+searchprofile-everything|Biribiara
+searchprofile-articles-tooltip|Hwehwe wo dola baako mu
+searchall|Biribiara
+diff|nsonsoe
+hide|Fa sie
+watch|Hwe
+undeleteviewlink|Hwe
+namespace|Bea wodin wo
+tooltip-pt-mytalk|Wokasa bea
+tooltip-pt-preferences|Nea wope
+tooltip-pt-watchlist|Bebree kabea
+tooltip-pt-mycontris|Wonom a woboayen
+tooltip-pt-logout|Pue
+tooltip-ca-watch|Fa wei ka nnema wo hwe so
+tooltip-summary|Bo no tofa
+']:>
+).lang
+;

@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Geopoet"
+		]
+	},
+	"wikibase-snakformatter-valuetype-mismatch": "An tipo nin kahalagahan na \"$1\" dae makaka-ampad sa tipo nin rugaring na \"$2\".",
+	"wikibase-snakformatter-property-not-found": "Rugaring $1 dae nanagboan, dae makapagdeterminar kan datos na gagamiton."
+}

@@ -1,0 +1,230 @@
+this
+.keywords
+  .load_text(
+<:['
+tag|0|#tag~
+formatdate|0|#formatdate~#dateformat~
+expr|0|#expr~
+if|0|#if~
+ifeq|0|#ifeq~
+ifexpr|0|#ifexpr~
+iferror|0|#iferror~
+switch|0|#switch~
+default|0|#default~
+ifexist|0|#ifexist~
+time|0|#time~
+timel|0|#timel~
+rel2abs|0|#rel2abs~
+titleparts|0|#titleparts~
+lst|0|#section~#lst~
+lstx|0|#section-x~#lstx~
+invoke|0|#invoke~
+property|0|#property~
+noexternallanglinks|0|noexternallanglinks~
+disambiguation|0|__DISAMBIG__~
+']:>
+).lang
+.messages
+  .load_text(
+<:['
+sunday|LiSontfo
+monday|Msombuluko
+tuesday|Lesibili
+wednesday|Lesitsatfu
+thursday|Lesine
+friday|Lesihlanu
+saturday|Mgcibelo
+sun|LiSontfo
+mon|Msombuluko
+tue|Lesibili
+wed|Lesitsatfu
+thu|Lesine
+fri|Lesihlanu
+sat|Mgcibelo
+january|Bhimbidvwane
+february|iNdlovana
+march|iNdlovu
+april|Mabasa
+may_long|iNkhwekhweti
+june|iNhlaba
+july|Kholwane
+august|iNgci
+september|iNyoni
+october|iMphala
+november|Lweti
+december|iNgongoni
+january-gen|Bhimbidvwane
+february-gen|iNdlovana
+march-gen|iNdlovu
+april-gen|Mabasa
+may-gen|iNkhwekhweti
+june-gen|iNhlaba
+july-gen|Kholwane
+august-gen|iNgci
+september-gen|iNyoni
+october-gen|iMphala
+november-gen|Lweti
+december-gen|iNgongoni
+jan|Bhi
+feb|iNdlova
+mar|iNdlovu
+apr|Mab
+may|iNkhwe
+jun|iNhla
+jul|Kho
+aug|iNgci
+sep|iNyo
+oct|iMpha
+nov|Lwe
+dec|iNgo
+toc|Lokucuketfwe
+redirectedfrom|(Utfunyelelwe likhasi ~{0})
+lastmodifiedat|Lelikhasi ligcine kushintjwa ngetingu ~{0}, ngo ~{1}.
+otherlanguages|Ngaletinye tilwimi
+category_header|Makhasi lakulomkhakha "~{0}"
+subcategories|Mikhakha lengaphansi
+category-media-header|i-Media lekulomkhakha "~{0}"
+category-empty|''Lomkhakha ute makhasi nobe i-media lewuphetse.''
+listingcontinuesabbrev|chubeka.
+hidden-category-category|Mikhakha lefihliwe
+index-category|Makhasi lacokelelwe
+noindex-category|Makhasi lasabalele
+about|Kabanti
+article|Likhasi lentfo
+newwindow|(kuvulekela tukweli-window lelisha)
+cancel|Yekela
+moredotdotdot|Lokunyenti...
+mypage|Likhasi lami
+mytalk|Tingcoco tami
+anontalk|Tingcogco letentwe ngulelikheli lale-IP
+qbfind|Tfola
+qbbrowse|Browse
+qbedit|Hlela
+qbpageoptions|Lelikhasi
+qbmyoptions|Makhasi ami
+actions|Tento
+returnto|Buyela ku ~{0}.
+help|Sita
+search|Sesha
+searchbutton|Sesha
+go|Hamba
+searcharticle|Hamba
+history|Umlandvo walelikhasi
+history_short|Umlandvo
+print|Print
+edit|Hlela
+create|Yakha
+editthispage|Hlela lelikhasi
+create-this-page|Yakha lelikhasi
+delete|Sula
+deletethispage|Sula lelikhasi
+protect|Vikela
+protect_change|gucula
+protectthispage|Vikela lelikhasi
+unprotect|Yekelela
+unprotectthispage|Yekelela lelikhasi
+newpage|Likhasi lelisha
+talkpage|Coca ngalelikhasi
+talkpagelinktext|Ingcoco
+specialpage|Likhasi lelibalulekile
+personaltools|Mathulusi emuntfu
+articlepage|Bona likhasi lelicuketse
+talk|Ingcoco
+views|Kubukeka
+toolbox|Libhokisi Lemathulusi
+userpage|Buna likhasi lemuntfu
+projectpage|Bona likhasi leprojekthi
+imagepage|Bona lelifayela likhasi
+mediawikipage|Bona likhasi lemiyaleto
+viewhelppage|Bona likhasi lelusito
+categorypage|Bona likhasi lemikhakha
+viewtalkpage|Bona ingcoco
+redirectpagesub|Likhasi lekutfumela
+viewcount|Lelikhasi selibonwe {{PLURAL:~{0}\u007Ckanye\u007Ckayi ~{0}}}.
+protectedpage|Likhasi lelivikelekile
+jumpto|Zuba ku:
+jumptosearch|sesha
+view-pool-error|Siyacolisa, maseva etfu agwele kakhulu ngalesikhatsi.\nKunebantfu labanyenti labatama kubona lelikhasi.\nSicela ume kancane ngaphambi lwekuphindze ubone lelikhasi.\n\n~{0}
+aboutsite|Kabanti nge {{SITENAME}}
+aboutpage|Project:Kabanti
+copyright|Lokucuketfwe kungaphansi kwe ~{0}.
+copyrightpage|{{ns:project}}:Malungelo ekukhicita
+currentevents|Tentakalo tanyalo
+currentevents-url|Project:Tentakalo tanyalo
+edithelp|Lusito ngekuhlela
+mainpage|Likhasi Lelikhulu
+mainpage-description|Likhasi lelikhulu
+policy-url|Project:Umtsetfo
+portal|Likhefi le-inthanethi
+portal-url|Project:Likhefi le-inthanethi
+badaccess|Liphutsa lemalungelo
+badaccess-group0|Awukavunyelwa kwenta lesento lobowutama kusenta.
+badaccess-groups|Lesento losicelile sincishiselwe bantfu labakule {{PLURAL:~{1}\u007Cncumbi\u007Clabakunobe nguyiphi incumbi}}: ~{0}.
+ok|Kulungile
+retrievedfrom|Kutsatfwe ku "~{0}"
+youhavenewmessages|Una ~{0} (~{1}).
+youhavenewmessagesmulti|Unemilayeto lemisha nge ~{0}
+editsection|hlela
+editold|hlela
+viewsourceold|Bona kwakheka
+editlink|hlela
+viewsourcelink|Bona kwakheka
+editsectionhint|Hlela sihloko: ~{0}
+showtoc|khomba
+hidetoc|fihla
+thisisdeleted|Bona nobe buyisela esimweni ~{0}?
+viewdeleted|Bona ~{0}?
+nstab-main|Likhasi
+nstab-user|Umuntfu
+nstab-help|Likhasi lelusito
+loginlanguagelabel|Lulwimi: ~{0}
+pt-login-button|Ngena
+revdelete-text-file|emaveshini lacishiwe atosolo avela emlandvweni, kodvwa letinye tincenywe talendzaba ngete yabakhona emphakatsini.
+revdelete-text-others|Labanye bahleli {{LIGAMALELISAYITHI}} batokhona kutfola mibiko lecishiwe baphindze bakhone kuyibuyisa kutsi ibekhona besebentisa tinhlelo letifanako te interface, loku kungenteka kuphela uma kunemigomo letsite nemibandzela.
+search-relatedarticle|Lokuhlobene
+searchrelated|lokuhlobene
+searchall|konke
+showingresults|Ngaphasi kukhonjiswa kuya ku {{PLURAL:~{0}\u007C'''1''' umphumela\u007C'''~{0}''' miphumela}} kucalwa nga #'''~{1}'''.
+search-nonefound|Kute umphume lotfolwe/lofanele lesicelo sakho.
+powersearch-legend|Sesha ngalokuphakeme
+powersearch-ns|Sesha ku namespaces:
+powersearch-togglelabel|Buka:
+powersearch-toggleall|Konke
+powersearch-togglenone|Kute
+search-external|Sesha ngelithulusi langaphandle
+searchdisabled|{{SITENAME}} kusesha kuvinjiwe.\nUngasesha nge Google.\nNaka kutsi makhasi abo e {{SITENAME}} angaba sekadlulelwe sikhatsi.
+searchresultshead|Sesha
+yourlanguage|Lulwimi:
+listfiles_date|Lusuku
+listfiles_name|Ligama
+listfiles_user|Umuntfu
+filehist-datetime|Lusuku/Sikhatsi
+filehist-user|Umuntfu
+brokenredirects-edit|hlela
+withoutinterwiki-submit|Khomba
+move|Khweshisa
+specialloguserlabel|Umuntfu:
+allpagessubmit|Hamba
+linksearch-ok|Sesha
+listusers-submit|Khomba
+watch|Gadza
+unwatch|Yekela kugadza
+restriction-edit|Hlela
+restriction-move|Khweshisa
+restriction-create|Create
+undelete-search-submit|Sesha
+sp-contributions-talk|ingcoco
+sp-contributions-submit|Sesha
+ipblocklist-submit|Sesha
+movelogpage|Khweshisa i-log
+allmessagesname|Ligama
+tooltip-search|Sesha i-{{SITENAME}}
+tooltip-p-logo|Vakashela likhasi lelikhulu
+ilsubmit|Sesha
+imgmultigo|Hamba!
+table_pager_limit_submit|Hamba
+version-specialpages|Emakhasi labalulekile
+specialpages|Emakhasi labalulekile
+']:>
+).lang
+;
