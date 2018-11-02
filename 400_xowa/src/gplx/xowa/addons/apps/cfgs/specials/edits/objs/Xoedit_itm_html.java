@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
-import gplx.xowa.addons.apps.cfgs.enums.*;
-import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
+import gplx.langs.htmls.*;
 import gplx.xowa.guis.bnds.*;
+import gplx.xowa.addons.apps.cfgs.enums.*; import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
 public class Xoedit_itm_html {
 	public static void Build_html(Bry_bfr bfr, Xocfg_type_mgr type_mgr, String key, String name, String type, String html_atrs, String html_cls, byte[] val) {
 		// prepend space for html insertion; EX: "type='checkbox'{1}>" with "a=b" -> "type='checkbox' a='b'" x> "type='checkbox'a='b'"
@@ -45,7 +45,7 @@ public class Xoedit_itm_html {
 				if (String_.Len_eq_0(html_atrs)) html_atrs = " rows=\"4\"";
 				bfr.Add_str_u8_fmt
 				( "<textarea id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" accesskey=\"d\" class=\"xocfg_data__memo{2}\"{1}>{4}</textarea>"
-				, type, html_atrs, html_cls, key, val);
+				, type, html_atrs, html_cls, key, Gfh_utl.Escape_html_as_bry(val));
 				break;
 			case Xoitm_type_enum.Tid__list:
 				// get list of kvs by type
