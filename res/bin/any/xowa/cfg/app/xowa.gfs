@@ -164,10 +164,9 @@ app.wikis.get('~{wiki_key}').html.portal {
     <div id="p-views" class="vectorTabs">
       <h3>~{<>msgs.get('views');<>}</h3>
       <ul>
-        <li id="ca-view"    class="~{portal_view_read_cls}"><span><a href="xowa-cmd:app.gui.main_win.page_view_read;">~{<>msgs.get('vector-view-view');<>}</a></span></li>
-        <li id="ca-edit"    class="~{portal_view_edit_cls}"><span><a href="xowa-cmd:app.gui.main_win.page_view_edit;"~{<>msgs.get_html_accesskey_and_title('ca-edit');<>}>~{<>msgs.get('vector-view-edit');<>}</a></span></li>
-        <li id="ca-history" class="~{portal_view_html_cls}"><span><a href="xowa-cmd:app.gui.main_win.page_view_html;"~{<>msgs.get_html_accesskey_and_title('xowa-portal-view_html');<>}>~{<>msgs.get('xowa-portal-view_html');<>}</a></span>
-        </li>
+        <li id="ca-view"    class="~{portal_view_read_cls}"><span><a href="~{portal_view_read_href}" class="xowa-hover-off">~{<>msgs.get('vector-view-view');<>}</a></span></li>
+        <li id="ca-edit"    class="~{portal_view_edit_cls}"><span><a href="~{portal_view_edit_href}" class="xowa-hover-off"~{<>msgs.get_html_accesskey_and_title('ca-edit');<>}>~{<>msgs.get('vector-view-edit');<>}</a></span></li>
+        <li id="ca-history" class="~{portal_view_html_cls}"><span><a href="~{portal_view_html_href}" class="xowa-hover-off"~{<>msgs.get_html_accesskey_and_title('xowa-portal-view_html');<>}>~{<>msgs.get('xowa-portal-view_html');<>}</a></span></li>
         <li id="p-search" role="search">
           <form id="searchform" action="/wiki/~{<>app.gui.win_opts.search_url;<>}">
             <div id="simpleSearch">

@@ -20,11 +20,10 @@ public class Http_request_parser {
 	private int type, content_length;
 	private byte[] url, protocol, host, user_agent, accept, accept_language, 
 				accept_encoding, x_requested_with, cookie, referer, content_type, 
-				content_type_boundary, connection, pragma, cache_control, origin, 
-				upgrade_request, x_host, x_real_ip;
+				content_type_boundary, connection, pragma, cache_control, origin;
 	private Http_post_data_hash post_data_hash;
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255); private final Btrie_rv trv = new Btrie_rv();
-	private final Http_server_wtr server_wtr; private final boolean log;
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255); private final    Btrie_rv trv = new Btrie_rv();
+	private final    Http_server_wtr server_wtr; private final    boolean log;
 	public Http_request_parser(Http_server_wtr server_wtr, boolean log) {this.server_wtr = server_wtr; this.log = log;}
 	public void Clear() {
 		this.dnt = false;
@@ -33,7 +32,6 @@ public class Http_request_parser {
 				= this.accept_language = this.accept_encoding = this.x_requested_with = this.cookie
 				= this.referer = this.content_type = this.content_type_boundary 
 				= this.connection = this.pragma = this.cache_control = this.origin 
-				= this.upgrade_request = this.x_host = this.x_real_ip 
 				= null;
 		this.post_data_hash = null;
 	}
@@ -89,9 +87,9 @@ public class Http_request_parser {
 					case Tid_pragma:					this.pragma = Bry_.Mid(line, val_bgn, line_len); break;
 					case Tid_cache_control:				this.cache_control = Bry_.Mid(line, val_bgn, line_len); break;
 					case Tid_origin:					this.origin = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_upgrade_request:			this.upgrade_request = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_x_host:					this.x_host = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_x_real_ip:     			this.x_real_ip = Bry_.Mid(line, val_bgn, line_len); break;
+					case Tid_upgrade_request:			break;
+					case Tid_x_host:					break;
+					case Tid_x_real_ip:     			break;
 					case Tid_accept_charset:			break;
 					default:							throw Err_.new_unhandled(tid);
 				}
@@ -157,7 +155,7 @@ public class Http_request_parser {
 	private static final int Tid_get = 1, Tid_post = 2, Tid_host = 3, Tid_user_agent = 4, Tid_accept = 5, Tid_accept_language = 6, Tid_accept_encoding = 7, Tid_dnt = 8
 	, Tid_x_requested_with = 9, Tid_cookie = 10, Tid_referer = 11, Tid_content_length = 12, Tid_content_type = 13, Tid_connection = 14, Tid_pragma = 15, Tid_cache_control = 16
 	, Tid_origin = 17, Tid_accept_charset = 188, Tid_upgrade_request = 19, Tid_x_host = 20, Tid_x_real_ip = 21;
-	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()
+	private static final    Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()
 	.Add_str_int("GET"                                    , Tid_get)
 	.Add_str_int("POST"                                   , Tid_post)
 	.Add_str_int("Host:"                                  , Tid_host)
@@ -180,7 +178,7 @@ public class Http_request_parser {
 	.Add_str_int("X-Host:"                                , Tid_x_host)
 	.Add_str_int("X-Real-IP:"                             , Tid_x_real_ip)
 	;
-	private static final byte[] Tkn_boundary = Bry_.new_a7("boundary="), Tkn_content_type_boundary_end = Bry_.new_a7("--")
+	private static final    byte[] Tkn_boundary = Bry_.new_a7("boundary="), Tkn_content_type_boundary_end = Bry_.new_a7("--")
 	, Tkn_content_disposition = Bry_.new_a7("Content-Disposition:"), Tkn_form_data = Bry_.new_a7("form-data;")
 	, Tkn_name = Bry_.new_a7("name=")
 	;

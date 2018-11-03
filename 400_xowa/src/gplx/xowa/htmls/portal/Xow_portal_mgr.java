@@ -129,7 +129,7 @@ public class Xow_portal_mgr implements Gfo_invk {
 		Xow_ns ns = ns_mgr.Ids_get_or_null(ns_id);
 		return ns == null || ns.Exists() ? Bry_.Empty : missing_ns_cls;			
 	}
-	public byte[] Div_view_bry(Bry_bfr_mkr bfr_mkr, byte output_tid, byte[] search_text) {
+	public byte[] Div_view_bry(Bry_bfr_mkr bfr_mkr, byte output_tid, byte[] search_text, Xoa_ttl ttl) {
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		byte[] read_cls = Bry_.Empty, edit_cls = Bry_.Empty, html_cls = Bry_.Empty;
 		switch (output_tid) {
@@ -137,7 +137,14 @@ public class Xow_portal_mgr implements Gfo_invk {
 			case Xopg_page_.Tid_edit: edit_cls = Cls_selected_y; break;
 			case Xopg_page_.Tid_html: html_cls = Cls_selected_y; break;
 		}
-		div_view_fmtr.Bld_bfr_many(tmp_bfr, read_cls, edit_cls, html_cls, search_text);
+
+		// build url_fragment with action query argument; EX: "/wiki/Page_name?action="
+		byte[] url_frag_w_action_qarg = Bry_.Add(Xoh_href_.Bry__wiki, ttl.Page_db(), Byte_ascii.Question_bry, Xoa_url_.Qarg__action, Byte_ascii.Eq_bry);
+		div_view_fmtr.Bld_bfr_many(tmp_bfr, read_cls, edit_cls, html_cls, search_text
+			, ttl.Page_db()
+			, Bry_.Add(url_frag_w_action_qarg, Xoa_url_.Qarg__action__edit)
+			, Bry_.Add(url_frag_w_action_qarg, Xoa_url_.Qarg__action__html));
+
 		return tmp_bfr.To_bry_and_rls();
 	}	public static final    byte[] Cls_selected_y = Bry_.new_a7("selected"), Cls_new = Bry_.new_a7("new"), Cls_display_none = Bry_.new_a7("xowa_display_none");
 	public byte[] Div_logo_bry(boolean nightmode) {return nightmode ? div_logo_night : div_logo_day;} private byte[] div_logo_day = Bry_.Empty, div_logo_night = Bry_.Empty;
@@ -161,7 +168,7 @@ public class Xow_portal_mgr implements Gfo_invk {
 	private final    Bry_fmtr 
 	  div_personal_fmtr = Bry_fmtr.new_("~{portal_personal_subj_href};~{portal_personal_subj_text};~{portal_personal_talk_cls};~{portal_personal_talk_href};~{portal_personal_talk_cls};", "portal_personal_subj_href", "portal_personal_subj_text", "portal_personal_subj_cls", "portal_personal_talk_href", "portal_personal_talk_cls")
 	, div_ns_fmtr = Bry_fmtr.new_("~{portal_ns_subj_href};~{portal_ns_subj_cls};~{portal_ns_talk_href};~{portal_ns_talk_cls};~{portal_div_vnts}", "portal_ns_subj_href", "portal_ns_subj_cls", "portal_ns_talk_href", "portal_ns_talk_cls", "portal_div_vnts")
-	, div_view_fmtr = Bry_fmtr.new_("", "portal_view_read_cls", "portal_view_edit_cls", "portal_view_html_cls", "search_text")
+	, div_view_fmtr = Bry_fmtr.new_("", "portal_view_read_cls", "portal_view_edit_cls", "portal_view_html_cls", "search_text", "portal_view_read_href", "portal_view_edit_href", "portal_view_html_href")
 	, div_logo_fmtr = Bry_fmtr.new_("", "portal_nav_main_href", "portal_logo_url")
 	, div_sync_fmtr = Bry_fmtr.new_("", "page_url")
 	, div_wikis_fmtr = Bry_fmtr.new_("", "toggle_btn", "toggle_hdr")

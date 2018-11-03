@@ -28,7 +28,9 @@ public class Xoa_url_ {
 	  Qarg__redirect            = Bry_.new_a7("redirect")
 	, Qarg__redirect__no        = Bry_.new_a7("no")
 	, Qarg__action              = Bry_.new_a7("action")
+	, Qarg__action__read        = Bry_.new_a7("read")
 	, Qarg__action__edit        = Bry_.new_a7("edit")
+	, Qarg__action__html        = Bry_.new_a7("html")
 	, Qarg__curid               = Bry_.new_a7("curid")
 	;
 }

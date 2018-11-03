@@ -23,8 +23,17 @@ public class Xog_tab_itm_read_mgr {
 	public static void Show_page(Xog_tab_itm tab, Xoae_page new_page, boolean reset_to_read, boolean new_page_is_same, boolean show_is_err, byte history_nav_type) {
 		if (reset_to_read)
 			tab.View_mode_(Xopg_page_.Tid_read);
-		if (new_page.Url().Qargs_mgr().Match(Xoa_url_.Qarg__action, Xoa_url_.Qarg__action__edit)) 
-			tab.View_mode_(Xopg_page_.Tid_edit);
+
+		// set View_mode based on "action="; DATE:2018-11-03
+		byte[] action_val = new_page.Url().Qargs_mgr().Get_val_bry_or(Xoa_url_.Qarg__action, Xoa_url_.Qarg__action__read);
+		byte view_mode = Xopg_page_.Tid_read;
+		if      (Bry_.Eq(action_val, Xoa_url_.Qarg__action__read))
+			view_mode = Xopg_page_.Tid_read;
+		else if (Bry_.Eq(action_val, Xoa_url_.Qarg__action__edit))
+			view_mode = Xopg_page_.Tid_edit;
+		else if (Bry_.Eq(action_val, Xoa_url_.Qarg__action__html))
+			view_mode = Xopg_page_.Tid_html;
+		tab.View_mode_(view_mode);
 
 		Xoae_page cur_page = tab.Page(); Xog_html_itm html_itm = tab.Html_itm(); Gfui_html html_box = html_itm.Html_box();
 		Xog_win_itm win = tab.Tab_mgr().Win();

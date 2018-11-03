@@ -18,6 +18,7 @@ import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.core.primitives.*; import gplx.core.net.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.apps.*;
 import gplx.xowa.htmls.js.*;
+import gplx.xowa.wikis.pages.*;
 class Http_server_wkr implements Gfo_invk {
 	private final    int uid;
 	private final    Http_server_mgr server_mgr;
@@ -98,20 +99,15 @@ class Http_server_wkr implements Gfo_invk {
 		app.Http_server().Run_xowa_cmd(app, String_.new_u8(cmd));
 	}
 	private void Write_wiki(byte[] req) {
-		String wiki_domain = ""; String page_name = "";
-		String[] req_split = String_.Split(String_.new_u8(req), "/");
-		if(req_split.length >= 1){
-			wiki_domain = req_split[1];
+		Http_url_parser url_parser = new Http_url_parser(url_encoder);
+		String page_html = "";
+		if (!url_parser.Parse(req)) {
+			page_html = url_parser.Err_msg();
 		}
-		if(req_split.length >= 4){
-			page_name = req_split[3];
-			for(int i = 4; i <= req_split.length-1; i++){
-				page_name += "/" + req_split[i];
-			}
-			page_name = url_encoder.Decode_str(page_name);
+		else {
+			page_html = app.Http_server().Parse_page_to_html(data__client, url_parser.Wiki(), url_parser.Page(), url_parser.Action());
+			page_html = Convert_page(page_html, root_dir_http, String_.new_u8(url_parser.Wiki()));
 		}
-		String page_html = app.Http_server().Parse_page_to_html(data__client, Bry_.new_u8(wiki_domain), Bry_.new_u8(page_name));
-		page_html = Convert_page(page_html, root_dir_http, wiki_domain);
 		Xosrv_http_wkr_.Write_response_as_html(client_wtr, Bool_.N, page_html);
 	}
 	private void Process_post(Http_request_itm request) {
