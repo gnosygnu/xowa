@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.net; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Http_request_parser_tst {
-	@Before public void init() {fxt.Clear();} private final    Http_request_parser_fxt fxt = new Http_request_parser_fxt();
+	@Before public void init() {fxt.Clear();} private final Http_request_parser_fxt fxt = new Http_request_parser_fxt();
 	@Test   public void Type_post()	{
 		fxt.Test_type_post("POST /url HTTP/1.1", Http_request_itm.Type_post, "/url", "HTTP/1.1");
 	}
@@ -48,11 +48,14 @@ public class Http_request_parser_tst {
 	@Test   public void Type_accept_charset()	{
 		fxt.Test_ignore("Accept-Charset: ISO-8859-1,utf-8;q=0.7");
 	}
+	@Test   public void Nginx() {// PURPOSE: support http headers from nginx; ISSUE#:255
+		fxt.Test_ignore("Upgrade-Insecure-Requests: test1; X-Host: test2; X-Real-IP: test3;");
+	}
 }
 class Http_request_parser_fxt {
-	private final    Http_request_parser parser;
-	private final    Http_client_rdr client_rdr = Http_client_rdr_.new_mem();
-	private final    Http_server_wtr__mock server_wtr = new Http_server_wtr__mock();
+	private final Http_request_parser parser;
+	private final Http_client_rdr client_rdr = Http_client_rdr_.new_mem();
+	private final Http_server_wtr__mock server_wtr = new Http_server_wtr__mock();
 	public Http_request_parser_fxt() {
 		this.parser = new Http_request_parser(server_wtr, false);
 	}
