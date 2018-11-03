@@ -151,7 +151,7 @@ app.wikis.get('~{wiki_key}').html.portal {
     <div id="p-namespaces" class="vectorTabs">
       <h3>~{<>msgs.get('namespaces');<>}</h3>
       <ul>
-        <li  id="ca-nstab-main" class="~{portal_ns_subj_cls}"><span><a id="ca-nstab-main-href" href="~{portal_ns_subj_href}" class="xowa-hover-off"~{<>msgs.get_html_accesskey_and_title('ca-nstab-main');<>}>~{<>msgs.get('nstab-main');<>}</a></span></li>
+        <li  id="ca-nstab-main" class="~{portal_ns_subj_cls}"><span><a href="~{portal_ns_subj_href}" id="ca-nstab-main-href" class="xowa-hover-off"~{<>msgs.get_html_accesskey_and_title('ca-nstab-main');<>}>~{<>msgs.get('nstab-main');<>}</a></span></li>
         <li  id="ca-talk"       class="~{portal_ns_talk_cls}"><span><a href="~{portal_ns_talk_href}" class="xowa-hover-off"~{<>msgs.get_html_accesskey_and_title('ca-talk');<>}>~{<>msgs.get('talk');<>}</a></span></li>
       </ul>
     </div>~{portal_div_vnts}
