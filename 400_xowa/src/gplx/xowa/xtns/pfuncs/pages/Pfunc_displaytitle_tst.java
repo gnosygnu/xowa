@@ -31,14 +31,20 @@ public class Pfunc_displaytitle_tst {
 		fxt.Test("{{DISPLAYTITLE:<span style='visibility:n;'>A b</span>}}"	, expd_fail);
 		fxt.Test("{{DISPLAYTITLE:<span style=''>display:none</span>}}"		, null);
 	}
+	@Test  public void Ns() {// PURPOSE:fix restrict not working for non-main NS; PAGE:en.w:Template:Infobox_opera; ISSUE#:277 DATE:2018-11-14;
+		fxt .Init_restrict(Bool_.Y)
+			.Init_page_ttl_("Template:A_b")
+			.Test("{{DISPLAYTITLE:Template:<i>A_b</i>}}", "Template:<i>A_b</i>");
+	}
 }
 class Pfunc_displaytitle_fxt {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	public void Reset() {
 		fxt.Reset();
 		fxt.Page_ttl_("A b");
 	}
 	public Pfunc_displaytitle_fxt Init_restrict(boolean v) {fxt.Wiki().Cfg_parser().Display_title_restrict_(v); return this;}
+	public Pfunc_displaytitle_fxt Init_page_ttl_(String v) {fxt.Page_ttl_(v); return this;}
 	public void Test(String raw, String expd) {
 		fxt.Page().Html_data().Display_ttl_(null);	// TEST: always reset; needed for Strip_display which calls multiple times
 		fxt.Test_parse_tmpl_str_test(raw, "{{test}}", "");

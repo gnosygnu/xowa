@@ -36,7 +36,7 @@ public class Pfunc_displaytitle extends Pf_func_base {
 			byte[] val_html_lc = tmp_bfr.To_bry_and_clear();
 			Xol_case_mgr case_mgr = wiki.Lang().Case_mgr();
 			val_html_lc = Standardize_displaytitle_text(case_mgr, val_html_lc);
-			byte[] page_ttl_lc = Standardize_displaytitle_text(case_mgr, page.Ttl().Page_db());
+			byte[] page_ttl_lc = Standardize_displaytitle_text(case_mgr, page.Ttl().Full_db()); // NOTE: must be .Full_db() to handle non-main ns; PAGE:en.w:Template:Infobox_opera; ISSUE#:277 DATE:2018-11-14;
 			if (!Bry_.Eq(val_html_lc, page_ttl_lc))
 				val_html = null;
 		}
