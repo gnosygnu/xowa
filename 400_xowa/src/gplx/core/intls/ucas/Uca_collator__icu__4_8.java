@@ -24,8 +24,8 @@ class Uca_collator__icu__4_8 implements Uca_collator {
 		try {
 			this.collator = Collator.getInstance(Locale.forLanguageTag(locale));
 			if (numeric_ordering) {
-				RuleBasedCollator rbc = (RuleBasedCollator)collator;
-				rbc.setNumericCollation(true);
+				// NOTE: delaying cast to RuleBasedCollator b/c Collator.getInstance may return a non-RuleBasedCollator and don't want cast to fail if numeric_ordering is false 
+				((RuleBasedCollator)collator).setNumericCollation(true);
 			}
 		} catch (Exception e) {throw Err_.new_wo_type("collator init failed", "err", Err_.Message_lang(e));}		
 	}
