@@ -22,7 +22,7 @@ interface Pxd_itm {
 	int Eval_idx();
 	int Data_idx(); void Data_idx_(int v);
 	boolean Eval(Pxd_parser state);
-	boolean Time_ini(DateAdpBldr bldr);
+	boolean Time_ini(Pxd_date_bldr bldr);
 }
 class Pxd_itm_ {
 	public static final int
@@ -46,7 +46,16 @@ class Pxd_itm_ {
 	, Tid_colon 			= Byte_ascii.Colon
 	, Tid_ws				= 98
 	, Tid_sym				= 99
-	;	
+	;
+
+	public static Pxd_itm Find_fwd__non_ws(Pxd_itm[] tkns, int bgn) {
+		int len = tkns.length;
+		for (int i = bgn; i < len; i++) {
+			Pxd_itm itm = tkns[i];
+			if (itm.Tkn_tid() != Tid_ws) return itm;
+		}
+		return null;
+	}
 	public static Pxd_itm Find_bwd__non_ws(Pxd_itm[] tkns, int bgn) {
 		for (int i = bgn - 1; i > -1; --i) {
 			Pxd_itm itm = tkns[i];
@@ -73,37 +82,12 @@ abstract class Pxd_itm_base implements Pxd_itm {
 	public int Data_idx() {return data_idx;} public void Data_idx_(int v) {data_idx = v;} private int data_idx;
 	public abstract int Eval_idx();
 	@gplx.Virtual public boolean Eval(Pxd_parser state) {return true;}
-	@gplx.Virtual public boolean Time_ini(DateAdpBldr bldr) {return true;}
+	@gplx.Virtual public boolean Time_ini(Pxd_date_bldr bldr) {return true;}
 	public void Ctor(int ary_idx) {this.ary_idx = ary_idx;}
 	public static final int Seg_idx_null = -1, Seg_idx_skip = -2;
 }
 interface Pxd_itm_prototype {
 	Pxd_itm MakeNew(int ary_idx);
-}
-class DateAdpBldr {
-	public DateAdp Date() {
-		if (dirty) {	
-			if (date == null) date = DateAdp_.seg_(seg_ary);	// date not set and seg_ary is dirty; make date = seg_ary;
-			return date;
-		}
-		else
-			return Datetime_now.Get();	// not dirtied; default to now;
-	}
-	public DateAdpBldr Date_(DateAdp v) {date = v; return this;} DateAdp date = null;
-	public void Seg_set(int idx, int val) {
-		if (date == null) seg_ary[idx] = val;
-		else {
-			seg_ary = date.XtoSegAry();
-			seg_ary[idx] = val;
-			date = DateAdp_.seg_(seg_ary);
-		}
-		dirty = true;
-	}
-	public DateAdp Bld() {
-		return date == null ? DateAdp_.seg_(seg_ary) : date;
-	}
-	public DateAdpBldr(int... seg_ary) {this.seg_ary = seg_ary;}
-	int[] seg_ary = new int[DateAdp_.SegIdx__max]; boolean dirty = false;
 }
 class Pft_func_time_log {
 	private static final    Gfo_msg_grp owner = Gfo_msg_grp_.new_(Xoa_app_.Nde, "time_parser");

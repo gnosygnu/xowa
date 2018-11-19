@@ -79,7 +79,7 @@ class Pxd_itm_slash extends Pxd_itm_base {
 class Pxd_itm_sym extends Pxd_itm_base {
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_sym;} 
 	@Override public int Eval_idx() {return 99;}
-	@Override public boolean Time_ini(DateAdpBldr bldr) {return true;}
+	@Override public boolean Time_ini(Pxd_date_bldr bldr) {return true;}
 	public byte Sym_byte() {return sym_byte;} private byte sym_byte;
 	public Pxd_itm_sym(int ary_idx, byte val) {this.Ctor(ary_idx); this.sym_byte = val;}
 }
@@ -88,7 +88,7 @@ class Pxd_itm_int_dmy_14 extends Pxd_itm_base implements Pxd_itm_int_interface {
 	public int Xto_int_or(int or) {return Bry_.To_int_or(src, or);}
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_int_dmy_14;}
 	@Override public int Eval_idx() {return eval_idx;} private int eval_idx = 20;
-	@Override public boolean Time_ini(DateAdpBldr bldr) {
+	@Override public boolean Time_ini(Pxd_date_bldr bldr) {
 		if (this.Seg_idx() != Pxd_itm_base.Seg_idx_null) return true;					// has seg_idx; already eval'd by something else
 		bldr.Seg_set(DateAdp_.SegIdx_year	, Bry_.To_int_or(src,  0,  4, 0));
 		bldr.Seg_set(DateAdp_.SegIdx_month	, Bry_.To_int_or(src,  4,  6, 0));
@@ -111,7 +111,7 @@ class Pxd_itm_int_mhs_6 extends Pxd_itm_base implements Pxd_itm_int_interface {
 	public int Xto_int_or(int or) {return Bry_.To_int_or(src, or);}
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_int_hms_6;}
 	@Override public int Eval_idx() {return eval_idx;} private int eval_idx = 20;
-	@Override public boolean Time_ini(DateAdpBldr bldr) {
+	@Override public boolean Time_ini(Pxd_date_bldr bldr) {
 		if (this.Seg_idx() != Pxd_itm_base.Seg_idx_null) return true;					// has seg_idx; already eval'd by something else
 		bldr.Seg_set(DateAdp_.SegIdx_hour	, Bry_.To_int_or(src, 0,  2, 0));
 		bldr.Seg_set(DateAdp_.SegIdx_minute	, Bry_.To_int_or(src, 2,  4, 0));

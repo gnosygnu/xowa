@@ -66,10 +66,20 @@ public class Pft_func_time__basic__tst {
 	@Test   public void Unit_rel_year_next()	{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|next year}}"						, "2013-01-02");}	// DATE:2014-05-02
 	@Test   public void Unit_rel_year_last()	{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|last year}}"						, "2011-01-02");}
 	@Test   public void Unit_rel_year_previous(){fxt.Test_parse_tmpl_str("{{#time:Y-m-d|previous year}}"					, "2011-01-02");}
+	@Test   public void Unit_rel_month_next()	{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|next month}}"						, "2012-02-02");}
+	@Test   public void Unit_rel_month_prev()   {fxt.Test_parse_tmpl_str("{{#time:Y-m-d|previous month}}"					, "2011-12-02");}
 	@Test   public void Unit_rel_year_this()	{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|this year}}"						, "2012-01-02");}
 	@Test   public void Time_rel_now()			{fxt.Test_parse_tmpl_str("{{#time:Y-m-d h:i:s A|now}}"						, "2012-01-02 03:05:05 AM");}	// NOTE: minute is 5, not 4, b/c each call to Datetime_now.Get() automatically increments by 1 minute; DATE:2014-04-13
 	@Test   public void Empty_is_today()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|}}"									, "2012-01-02");}	// tested on MW
-	@Test   public void Day_name_today()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|Monday}}"							, "2012-01-02");}	// 2012-01-02 is Monday, so return Monday; DATE:2014-05-02
+	@Test   public void Day_monday_none()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|Monday}}"							, "2012-01-02");}	// 2012-01-02 is Monday, so return Monday; DATE:2014-05-02
+	@Test   public void Day_monday_this()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|this Monday}}"						, "2012-01-02");}	// "this Monday" is same as "Monday"
+	@Test   public void Day_monday_next()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|next Monday}}"						, "2012-01-09");}
+	@Test   public void Day_monday_prev()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|previous Monday}}"					, "2011-12-26");}
+	@Test   public void Day_sunday_none()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|Sunday}}"							, "2012-01-08");}
+	@Test   public void Day_sunday_this()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|this Sunday}}"						, "2012-01-08");}
+	@Test   public void Day_sunday_next()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|next Sunday}}"						, "2012-01-15");}
+	@Test   public void Day_sunday_prev()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|previous Sunday}}"					, "2012-01-01");}
+	@Test   public void Day_relative_smoke()	{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|6 april next sunday}}"				, "2012-04-15");}
 	@Test   public void Day_name_future_1()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|Saturday}}"							, "2012-01-07");}	// return next Sunday; DATE:2014-05-02
 	@Test   public void Day_name_future_2()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|Sunday}}"							, "2012-01-08");}	// return next Saturday; DATE:2014-05-02
 	@Test   public void Day_name_dow()			{fxt.Test_parse_tmpl_str("{{#time:w|Monday}}"								, "1");}

@@ -143,8 +143,10 @@ class Pxd_parser {
 				return DateAdp_.MinValue;			
 			}
 		}
+
+		// build date
 		DateAdp now = Datetime_now.Get();
-		DateAdpBldr bldr = new DateAdpBldr(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0);
+		Pxd_date_bldr bldr = new Pxd_date_bldr(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0);
 		for (int i = 0; i < tkns_len; i++) {
 			Pxd_itm itm = (Pxd_itm)tkns[i];
 			if (!itm.Time_ini(bldr)) {
@@ -152,7 +154,7 @@ class Pxd_parser {
 				return null;
 			}
 		}
-		return bldr.Bld();
+		return bldr.To_date();
 	}
 	private void MakeDataAry() {
 		data_ary = new Pxd_itm[tkns_len]; data_ary_len = 0;

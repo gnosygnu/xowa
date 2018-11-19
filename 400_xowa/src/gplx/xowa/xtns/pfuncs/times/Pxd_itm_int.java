@@ -41,27 +41,28 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 	public boolean Val_is_adj() {return val_is_adj;} public void Val_is_adj_(boolean v) {val_is_adj = v;} private boolean val_is_adj;
 	public int Xto_int_or(int or) {return val;}
 	public int Digits() {return digits;} private int digits;
-	@Override public boolean Time_ini(DateAdpBldr bldr) {
+	@Override public boolean Time_ini(Pxd_date_bldr bldr) {
 		int seg_idx = this.Seg_idx();
 		if (seg_idx == Pxd_itm_base.Seg_idx_skip) return true;
 		if (val_is_adj) {
 			if (val == 0) return true;	// no adjustment to make
-			DateAdp date = bldr.Date();
+			DateAdp date = bldr.To_date();
 			switch (seg_idx) {
 				case DateAdp_.SegIdx_hour:			date = date.Add_hour(val); break;
 				case DateAdp_.SegIdx_minute:		date = date.Add_minute(val); break;
 				default:							return true;
 			}
-			bldr.Date_(date);
+			bldr.By_date(date);
 		}
 		else {
 			if (val == 0) {	// 0 means subtract 1; EX:w:Mariyinsky_Palace; DATE:2014-03-25
-				DateAdp date = bldr.Date();
+				DateAdp date = bldr.To_date();
 				switch (seg_idx) {
-					case DateAdp_.SegIdx_month:			date = DateAdp_.seg_(new int[] {date.Year(), 1, date.Day(), date.Hour(), date.Minute(), date.Second(), date.Frac()}).Add_month(-1); bldr.Date_(date); break;
-					case DateAdp_.SegIdx_day:			date = DateAdp_.seg_(new int[] {date.Year(), date.Month(), 1, date.Hour(), date.Minute(), date.Second(), date.Frac()}).Add_day(-1); bldr.Date_(date); break;
+					case DateAdp_.SegIdx_month:			date = DateAdp_.seg_(new int[] {date.Year(), 1, date.Day(), date.Hour(), date.Minute(), date.Second(), date.Frac()}).Add_month(-1); break;
+					case DateAdp_.SegIdx_day:			date = DateAdp_.seg_(new int[] {date.Year(), date.Month(), 1, date.Hour(), date.Minute(), date.Second(), date.Frac()}).Add_day(-1); break;
 					default:							return true;
 				}
+				bldr.By_date(date);
 			}
 			else {
 				if (seg_idx == -1) return false; // PAGE:New_York_City EX: March 14, 2,013; DATE:2016-07-06
