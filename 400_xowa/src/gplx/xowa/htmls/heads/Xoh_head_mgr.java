@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.core.bits.*;
+import gplx.xowa.wikis.pages.*;
 public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; 
 	private Xoh_head_itm__base[] itms; private int itms_len;
@@ -59,7 +60,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 		this.app = app; this.wiki = wiki; this.page = page;
 		return this;
 	}
-	public Xoh_head_mgr Init_dflts() {
+	public Xoh_head_mgr Init_dflts(byte html_gen_tid) {
 		if (page.Wtxt().Toc().Enabled())									itm__toc.Enabled_y_();
 		if (wiki.Html_mgr().Head_mgr().Itm__top_icon().Enabled_y())			itm__top_icon.Enabled_y_();
 		if (wiki.Html_mgr().Head_mgr().Itm__title_rewrite().Enabled_y())	itm__title_rewrite.Enabled_y_();
@@ -70,9 +71,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 		itm__xo_elem.Enabled_y_();
 		itm__collapsible.Enabled_y_();
 		itm__navframe.Enabled_y_();
-		boolean popups_enabled 
-			=	!app.Mode().Tid_is_http()		// do not enable if http_server, else js errors when calling xowa_exec; DATE:2016-06-22
-			&&	wiki.Html_mgr().Head_mgr().Popup_mgr().Enabled();	// check user_cfg
+		boolean popups_enabled = html_gen_tid != Xopg_page_.Tid_edit && wiki.Html_mgr().Head_mgr().Popup_mgr().Enabled();	
 		itm__popups.Enabled_(popups_enabled);
 		return this;
 	}
@@ -123,6 +122,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 			Xoh_head_itm__base itm = list__js_include.Get_at(i);
 			itm.Write_js_include(app, wiki, page, wtr);
 		}
+
 		int tail_script_len = list__js_tail_script.Len();
 		int window_onload_len = list__js_window_onload.Len();
 		if (tail_script_len + window_onload_len > 0) {

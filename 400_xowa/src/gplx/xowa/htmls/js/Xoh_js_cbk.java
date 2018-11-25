@@ -19,6 +19,7 @@ import gplx.langs.jsons.*;
 import gplx.xowa.htmls.js.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.parsers.*;
+import gplx.xowa.htmls.modules.popups.*;
 public class Xoh_js_cbk implements Gfo_invk {
 	private Xoae_app app;
 	private Xog_html_itm html_itm;
@@ -67,19 +68,22 @@ public class Xoh_js_cbk implements Gfo_invk {
 			return String_.new_u8(page.Db().Text().Text_bry());
 		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
-	private String Popups_get_async_bgn(GfoMsg m) {
-		try {
-			byte[] js_cbk	= m.Args_getAt(0).Val_to_bry();
-			byte[] href_bry = m.Args_getAt(1).Val_to_bry();
-			return html_itm.Owner_tab().Wiki().Html_mgr().Head_mgr().Popup_mgr().Get_async_bgn(js_cbk, href_bry);
-		} catch (Exception e) {Err_.Noop(e); return null;}
-	}
 	private String Popups_get_html(GfoMsg m) {
 		try {
-			int	   popups_id	= Int_.By_double(Double_.cast(m.Args_getAt(0).Val()));
-			byte[] href_bry		= m.Args_getAt(1).Val_to_bry();
-			byte[] tooltip_bry	= m.Args_getAt(2).Val_to_bry();
-			return html_itm.Owner_tab().Wiki().Html_mgr().Head_mgr().Popup_mgr().Show_init(popups_id, href_bry, tooltip_bry);
+			String mode			= m.Args_getAt(0).Val_to_str_or_empty();
+			String popups_id	= m.Args_getAt(1).Val_to_str_or_empty();
+
+			Xow_popup_mgr popup_mgr = html_itm.Owner_tab().Wiki().Html_mgr().Head_mgr().Popup_mgr();
+			if      (String_.Eq(mode, "init")) {
+				byte[] href_bry		= m.Args_getAt(2).Val_to_bry();
+				byte[] tooltip_bry	= m.Args_getAt(3).Val_to_bry();
+				return popup_mgr.Show_init(popups_id, href_bry, tooltip_bry);
+			}
+			else if (String_.Eq(mode, "more")) 
+				return popup_mgr.Show_more(popups_id);
+			else if (String_.Eq(mode, "all")) 
+				popup_mgr.Show_all(popups_id);
+			return "";
 		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
 	private String[] Get_title_meta(Xowe_wiki wiki, byte[] ttl_bry) {
@@ -175,7 +179,6 @@ public class Xoh_js_cbk implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_get_page))							return Get_page(m);
 		else if	(ctx.MatchIn(k, Invk_cmd, Invk_scripts_exec))			return Scripts_exec(m);
 		else if	(ctx.Match(k, Invk_scripts_exec))						return Scripts_exec(m);
-		else if	(ctx.Match(k, Invk_popups_get_async_bgn))				return Popups_get_async_bgn(m);
 		else if	(ctx.Match(k, Invk_popups_get_html))					return Popups_get_html(m);
 		else if	(ctx.Match(k, Invk_get_search_suggestions))				return Get_search_suggestions(m);
 		else if	(ctx.Match(k, Invk_get_titles_meta))					return Get_titles_meta(m);
@@ -190,7 +193,6 @@ public class Xoh_js_cbk implements Gfo_invk {
 	public static final    String Invk_parse_to_html = "parse_to_html", Invk_wikidata_get_label = "wikidata_get_label", Invk_get_page = "get_page", Invk_cmd = "cmd", Invk_scripts_exec = "scripts_exec"
 	, Invk_get_search_suggestions = "get_search_suggestions", Invk_get_titles_meta = "get_titles_meta", Invk_get_titles_exists = "get_titles_exists", Invk_get_current_url = "get_current_url"
 	, Invk_xowa_exec_test = "xowa_exec_test", Invk_xowa_exec_test_as_array = "xowa_exec_test_as_array"
-	, Invk_popups_get_async_bgn = "popups_get_async_bgn"
 	, Invk_popups_get_html = "popups_get_html"
 	, Invk_exec_json = "exec_json"
 	, Invk_bldr_exec = "bldr_exec"

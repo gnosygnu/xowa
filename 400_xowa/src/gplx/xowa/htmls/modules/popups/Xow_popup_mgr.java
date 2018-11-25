@@ -26,7 +26,7 @@ public class Xow_popup_mgr implements Gfo_invk, Gfo_evt_itm {
 	private Xoae_app app; private Xowe_wiki wiki; private Js_wtr js_wtr = new Js_wtr();
 	private int show_init_word_count, show_more_word_count;
 	private Xoa_url tmp_url = Xoa_url.blank();
-	private static final    Object thread_lock = new Object(); private Xow_popup_itm async_itm; private Gfo_invk async_cmd_show; private int async_id_next = 1;
+	private static final    Object thread_lock = new Object();
 	public Xow_popup_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki; this.app = wiki.Appe();
 		ev_mgr = new Gfo_evt_mgr(this);
@@ -44,35 +44,27 @@ public class Xow_popup_mgr implements Gfo_invk, Gfo_evt_itm {
 		, Cfg__ns_allowed, Cfg__xnde_ignore_ids, Cfg__scan_len, Cfg__scan_max
 		);
 	}
-	public String Show_init(int id, byte[] href, byte[] tooltip) {
+	public String Show_init(String popup_id, byte[] href, byte[] tooltip) {
 		Xoae_page cur_page = Cur_page();
 		Xog_tab_itm tab = cur_page.Tab_data().Tab();
 		if (tab != null && tab.Tab_is_loading()) return "";	// NOTE: tab is null when previewing
-		Xow_popup_itm itm = new Xow_popup_itm(id, href, tooltip, show_init_word_count);
+		Xow_popup_itm itm = new Xow_popup_itm(popup_id, href, tooltip, show_init_word_count);
 		String rv = String_.new_u8(Get_popup_html(Cur_wiki(), cur_page, itm));
 		return tab != null && tab.Tab_is_loading() ? "" : rv;
 	}
-	public void Show_more(String popup_id) {
+	public String Show_more(String popup_id) {
 		Xoae_page cur_page = Cur_page();
 		Xow_popup_itm popup_itm = Itms_get_or_null(cur_page, popup_id).Mode_more_(show_more_word_count);
-		popup_itm.Popup_html_(Get_popup_html(Cur_wiki(), cur_page, popup_itm));
-		Show_popup_html(Cbk_xowa_popups_show_update, Mode_show_more, popup_itm);
+		byte[] html = Get_popup_html(Cur_wiki(), cur_page, popup_itm);
+		popup_itm.Popup_html_(html);
+		Show_popup_html(popup_itm, Cbk_update_popup_html, Mode_show_more);
+		return String_.new_u8(html);
 	}
 	public void Show_all(String popup_id) {
 		Xoae_page cur_page = Cur_page();
 		Xow_popup_itm popup_itm = Itms_get_or_null(cur_page, popup_id).Mode_all_();
 		popup_itm.Popup_html_(Get_popup_html(Cur_wiki(), cur_page, popup_itm));
-		Show_popup_html(Cbk_xowa_popups_show_update, Mode_show_all, popup_itm);
-	}
-	public String Get_async_bgn(byte[] js_cbk, byte[] href) {
-		if (Bry_.Has_at_bgn(href, gplx.xowa.parsers.lnkes.Xop_lnke_wkr.Bry_xowa_protocol)) return null; // ignore xowa-cmd
-		synchronized (thread_lock) {
-			if (async_itm != null) async_itm.Cancel();
-			async_itm = new Xow_popup_itm(++async_id_next, href, Bry_.Empty, show_init_word_count);
-			String id_str = async_itm.Popup_id();
-			Thread_adp_.Start_by_key(id_str, this, Invk_show_popup_async);
-			return id_str;
-		}
+		Show_popup_html(popup_itm, Cbk_update_popup_html, Mode_show_all);
 	}
 	public static boolean Running() {
 		boolean rv = false;
@@ -139,27 +131,18 @@ public class Xow_popup_mgr implements Gfo_invk, Gfo_evt_itm {
 			href = Bry_.Add(tooltip);
 		Xog_win_itm__prog_href_mgr.Hover(app, app.Gui_mgr().Browser_win().Cfg().Status__show_short_url(), cur_wiki, cur_page, String_.new_u8(href)); // set page ttl again in prog bar; DATE:2014-06-28
 	}
-	public void Show_popup_html(String cbk, byte[] mode, Xow_popup_itm popup_itm) {
+	private void Show_popup_html(Xow_popup_itm popup_itm, String cbk, byte[] mode) {
+		// build js cmd
+		js_wtr.Func_init(cbk);
+		js_wtr.Prm_str(popup_itm.Popup_id());
+		js_wtr.Prm_bry(mode);
+		js_wtr.Prm_bry(popup_itm.Popup_html());
+		js_wtr.Func_term();
+		String js_cmd = js_wtr.To_str_and_clear();
+
+		// send it
 		Xog_tab_itm cur_tab = app.Gui_mgr().Browser_win().Active_tab();
-		cur_tab.Html_box().Html_js_eval_script(Xow_popup_mgr_.Bld_js_cmd(js_wtr, cbk, mode, popup_itm.Page_href(), popup_itm.Popup_html()));
-	}
-	private void Show_popup_async() {
-		try {
-			synchronized (thread_lock) {
-				Xoae_page cur_page = app.Gui_mgr().Browser_win().Active_page();
-				async_itm.Popup_html_(Get_popup_html(app.Gui_mgr().Browser_win().Active_wiki(), cur_page, async_itm));
-			}
-			if (async_cmd_show == null)
-				async_cmd_show = app.Gui_mgr().Kit().New_cmd_sync(this);
-			Gfo_invk_.Invk_by_key(async_cmd_show, Invk_show_popup);
-		}
-		catch(Exception e) {
-			app.Usr_dlg().Warn_many("", "", "failed to get popup: href=~{0} err=~{1}", async_itm.Page_href(), Err_.Message_gplx_full(e));
-		}
-	}
-	private void Show_popup() {
-		if (async_itm.Canceled()) return;
-		Show_popup_html(Cbk_xowa_popups_show_create, Bry_.Empty, async_itm);
+		cur_tab.Html_box().Html_js_eval_script(js_cmd);
 	}
 	public void Ns_allowed_(byte[] raw) {
 		ns_allowed_regy.Clear();
@@ -195,10 +178,7 @@ public class Xow_popup_mgr implements Gfo_invk, Gfo_evt_itm {
 	private Xowe_wiki Cur_wiki() {return app.Gui_mgr().Browser_win().Active_tab().Wiki();}
 	private Xow_popup_itm Itms_get_or_null(Xoae_page page, String popup_id) {return (Xow_popup_itm)page.Popup_mgr().Itms().Get_by(popup_id);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_show_popup_async))								Show_popup_async();
-		else if	(ctx.Match(k, Invk_show_popup))										Show_popup();
-
-		else if (ctx.Match(k, Cfg__enabled))										enabled = m.ReadYn("v");
+		if      (ctx.Match(k, Cfg__enabled))										enabled = m.ReadYn("v");
 		else if (ctx.Match(k, Cfg__show_init_word_count))							show_init_word_count = m.ReadInt("v");
 		else if (ctx.Match(k, Cfg__show_more_word_count))							show_more_word_count = m.ReadInt("v");
 		else if (ctx.Match(k, Cfg__show_all_if_less_than))							parser.Cfg().Show_all_if_less_than_(m.ReadInt("v"));
@@ -214,10 +194,8 @@ public class Xow_popup_mgr implements Gfo_invk, Gfo_evt_itm {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	public static final String Invk_show_popup_async = "show_popup_async", Invk_show_popup = "show_popup";
 	private static final    String 
-	  Cbk_xowa_popups_show_update = "xowa_popups_show_update"
-	, Cbk_xowa_popups_show_create = "xowa_popups_show_create"
+	  Cbk_update_popup_html = "window.xowa.popups.UpdatePopupHtml"
 	;
 	private static final    byte[]
 	  Mode_show_more	= Bry_.new_a7("more")

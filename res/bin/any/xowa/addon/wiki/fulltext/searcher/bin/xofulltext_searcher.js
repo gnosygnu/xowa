@@ -24,13 +24,14 @@
       // onload fires multiple times on drd; only run once
       if (this.loaded) return;
       this.loaded = true;
-      
+
       // init notify anchor; focus search_btn
       xo.notify.elem_anchor = '#main_div';
       xo.elem.get('search_txt').focus();
 
       // run search      
       var query = xo.elem.get_val_or_null('search_txt');
+
       if (query && query.length > 0) {
         this.search_run();
       }
@@ -61,7 +62,6 @@
         // get search_text
         var search_text = xo.elem.get_val_or_null('search_txt');
         search_text = search_text.replace(/ /g, "_");    // replace " " with "_"; this replacement is done automatically in drd.WebView, but is done manually here with swt.swtbrowser for consistency
-        
         // get data specified by user
         var msg = 
         { search:                 xo.elem.get_val_or_null('search_txt')
@@ -100,6 +100,7 @@
       try {
         // get search_text
         var search_text = xo.elem.get_val_or_null('search_txt');
+        search_text = encodeURI(search_text);
 
         // if search_text has changed, reset offsets; EX: on 21-40 of 'earth'; changing search to 'moon' should start from 1, not 21
         if (search_text !== xo.elem.get_val_or_null('qarg_search')) {
@@ -127,7 +128,6 @@
       // get qarg / dflt values
       var qarg_val = xo.elem.get_val_or_null('qarg_' + key);
       var dflt_val = xo.elem.get_val_or_null('dflt_' + key);
-      
       // if qarg === dflt, return url
       if (qarg_val === dflt_val) {
         return url;
@@ -308,7 +308,7 @@
         // publish elem_add event for popups
         var page_elem_key = 'results_wiki_' + wiki + '_page_' + msg.page_id;
         var page_elem = xo.elem.get(page_elem_key);        
-        xo.elem.elem_add__pub(page_elem);        
+        xowa.js.doc.evtElemAdd.pub(page_elem);
       } catch (err) {
         this.handle_err(err + " proc=results__page__add; msg=" + JSON.stringify(msg));
       }

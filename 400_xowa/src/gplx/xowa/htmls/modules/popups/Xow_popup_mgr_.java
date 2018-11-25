@@ -16,16 +16,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*;
 import gplx.core.threads.*; import gplx.core.primitives.*; import gplx.core.js.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.specials.*;
-class Xow_popup_mgr_ {
-	public static String Bld_js_cmd(Js_wtr js_wtr, String cbk, byte[] mode, byte[] href, byte[] html) {
-		js_wtr.Func_init(cbk);
-		js_wtr.Prm_bry(mode);
-		js_wtr.Prm_bry(href);
-		js_wtr.Prm_bry(html);
-		js_wtr.Func_term();
-		return js_wtr.To_str_and_clear();
-	}
-}
 class Load_popup_wkr implements Gfo_thread_wkr {
 	private Xow_popup_itm itm; private Xoae_page cur_page; private Xoa_url tmp_url;
 	private Hash_adp ns_allowed_regy; 

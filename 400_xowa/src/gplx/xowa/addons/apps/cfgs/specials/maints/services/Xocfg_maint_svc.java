@@ -33,13 +33,30 @@ public class Xocfg_maint_svc {
 		// exec
 		Xocfg_db_app db_app = Xocfg_db_app.New(app);
 		db_app.Conn().Txn_bgn("xo__cfg_maint__upsert");
-		byte[] anch_find_bry = Bry_.new_a7("<a "), anch_repl_bry = Bry_.new_a7("<a tabindex=\"-1\" ");
+		byte[] anch_find_bry = Bry_.new_a7("<a "), anch_repl_bry = Bry_.new_a7(" tabindex=\"-1\"");
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		for (Xocfg_maint_nde nde : ndes) {
 			// parse help to html
 			parser_mgr.Main().Parse_text_to_html(tmp_bfr, parser_mgr.Ctx(), parser_mgr.Ctx().Page(), true, Bry_.new_u8(nde.Help()));
 			byte[] help = tmp_bfr.To_bry_and_clear();
-			help = Bry_.Replace(help, anch_find_bry, anch_repl_bry);	// replace "<a " with "<a tabindex=-1 " else tabbing will go to hidden anchors in help text
+
+			// add "tabindex=-1" to "<a>" tages else tabbing will go to hidden anchors in help text
+			int help_pos = 0;
+			while (true) {
+				int a_bgn = Bry_find_.Find_fwd(help, anch_find_bry, help_pos, help.length);
+				if (a_bgn == Bry_find_.Not_found) break;
+				int a_end = Bry_find_.Find_fwd(help, Byte_ascii.Angle_end, a_bgn, help.length);
+				if (a_end == Bry_find_.Not_found) {
+					Gfo_usr_dlg_.Instance.Warn_many("", "", "could not find closing > after <a", "src", help);
+					break;
+				}
+
+				tmp_bfr.Add_mid(help, 0, a_end);
+				tmp_bfr.Add(anch_repl_bry);
+				tmp_bfr.Add_mid(help, a_end, help.length);
+				help = tmp_bfr.To_bry_and_clear();
+				help_pos = a_end;
+			}
 
 			// do insert
 			if (nde.Type_is_grp()) {

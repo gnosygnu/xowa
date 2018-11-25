@@ -38,20 +38,24 @@ public class Http_url_parser_tst {
 		// action=html
 		fxt.Test__parse("/en.wikipedia.org/wiki/Page_1?action=html", fxt.Make().Wiki_("en.wikipedia.org").Page_("Page_1").Action_(Xopg_page_.Tid_html));
 
+		// action=popup
+		fxt.Test__parse("/en.wikipedia.org/wiki/Page_1?action=popup", fxt.Make().Wiki_("en.wikipedia.org").Page_("Page_1").Popup_(true));
+
 		// action=N/A
-		fxt.Test__parse("/en.wikipedia.org/wiki/Page_1?action=a", fxt.Make().Wiki_("en.wikipedia.org").Page_("Page_1?action=a"));
+		fxt.Test__parse("/en.wikipedia.org/wiki/Page_1?action=a", fxt.Make().Wiki_("en.wikipedia.org").Page_("Page_1"));
 
 		// fail: null
-		fxt.Test__parse(null, fxt.Make().Err_msg_("invalid url; url is null; url="));
+		fxt.Test__parse(null, fxt.Make().Err_msg_("invalid url; url is null"));
 
 		// fail: empty
-		fxt.Test__parse("", fxt.Make().Err_msg_("invalid url; url is empty; url="));
+		fxt.Test__parse("", fxt.Make().Err_msg_("invalid url; url is empty"));
 
 		// fail: missing '/' at start
 		fxt.Test__parse("en.wikipedia.org", fxt.Make().Err_msg_("invalid url; must start with '/'; url=en.wikipedia.org"));
-
+/*
 		// fail: missing '/wiki/'
 		fxt.Test__parse("/en.wikipedia.org/Page_1", fxt.Make().Err_msg_("invalid url; must have '/wiki/' after wiki_domain; url=/en.wikipedia.org/Page_1"));
+*/
 	}
 }
 class Http_url_parser_fxt {

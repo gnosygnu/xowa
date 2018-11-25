@@ -243,11 +243,9 @@
         
         // bind update and popups
         xo.cfg_edit.cfg_val__bind_all();
-        try {
-          xowa_popups_bind_to_owner(document);
-        } catch (err) {}
+        xowa.js.doc.evtElemAdd.pub(document);
         return true;
-      } catch (err) {alert(err);}
+      } catch (err) {alert('xo.cfg_edit:' + err);}
     }    
     //}
 

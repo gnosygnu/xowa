@@ -2,11 +2,6 @@
     "use strict";
     xo.mode_is_debug = false;
     
-    // NOTE: xo.elem is now init'd by default on all pages
-    // it will then be init'd a 2nd time for special pages
-    // ignore 2nd init else elem_add_subs will be cleared
-    if (xo.elem) return;
-    
     // standard creation
     xo.elem = new function () {
       this.get = function (elem_id) {
@@ -60,20 +55,10 @@
       
       this.insert_html_above = function(elem_id, html) {
         var elem = document.getElementById(elem_id);
-        elem.insertAdjacentHTML('beforebegin', html);          
-        xo.elem.elem_add__pub(elem.parentNode);
+        elem.insertAdjacentHTML('beforebegin', html);
+        xowa.js.doc.evtElemAdd.pub(elem);
       };
-      this.elem_add__subs = [];
-      this.elem_add__pub = function(elem) {
-        if (elem == null) elem = document;
-        var len = xo.elem.elem_add__subs.length;
-        for (var i = 0; i < len; i++) {
-          xo.elem.elem_add__subs[i](elem);
-        }
-      }
-      this.elem_add__sub = function(func) {
-        xo.elem.elem_add__subs.push(func);
-      }
+      
       this.selectbox__selected_set = function(sel_id) {
         try {
           var sel = document.getElementById(sel_id);

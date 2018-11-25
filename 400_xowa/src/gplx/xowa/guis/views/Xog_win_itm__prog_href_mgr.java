@@ -31,6 +31,7 @@ public class Xog_win_itm__prog_href_mgr {
 		}
 		Xoa_url url = Xoa_url.blank();
 		app.Html__href_parser().Parse_as_url(url, Bry_.new_u8(href), wiki, page.Ttl().Page_txt());
-		usr_dlg.Prog_direct(String_.new_u8(url.To_bry(!show_status_url, Bool_.Y)));
+		if (!app.Mode().Tid_is_http()) // if http_server, do not write to progress bar, else will show up in console output (b/c gui_wkr for http_server is console); DATE:2018-11-11
+			usr_dlg.Prog_direct(String_.new_u8(url.To_bry(!show_status_url, Bool_.Y)));
 	}
 }

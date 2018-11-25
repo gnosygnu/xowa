@@ -113,6 +113,9 @@ public class Gfo_url_parser_tst {
 	@Test  public void Protocol_less__qargs() {
 		tstr.Exec__parse("Special:Search/Earth?fulltext=yes").Test__segs("Special:Search", "Earth").Test__page("Earth").Test__qargs("fulltext", "yes");
 	}
+	@Test  public void Http_server() {
+		tstr.Exec__parse("/wiki/Page?A=B").Test__segs("wiki", "Page").Test__page("Page").Test__qargs("A", "B");
+	}
 	@Test  public void Parse_site_fast() {
 		tstr.Test_Parse_site_fast("http://a.org/B"		, "a.org");
 		tstr.Test_Parse_site_fast("http://a.org"		, "a.org");

@@ -506,7 +506,7 @@ class Xop_popup_parser_fxt {
 	public void Test_parse(String raw, String ttl, String expd)	{
 		Xoae_page page = Xoae_page.New_edit(wiki, Xoa_ttl.Parse(wiki, Bry_.new_a7(ttl)));
 		page.Db().Text().Text_bry_(Bry_.new_u8(raw));
-		Xow_popup_itm itm = new Xow_popup_itm(1, Bry_.new_u8(raw), Bry_.Empty, word_min);
+		Xow_popup_itm itm = new Xow_popup_itm("popup_1", Bry_.new_u8(raw), Bry_.Empty, word_min);
 		itm.Init(wiki.Domain_bry(), page.Ttl());
 		byte[] actl = parser.Parse(wiki, page, null, itm);
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));

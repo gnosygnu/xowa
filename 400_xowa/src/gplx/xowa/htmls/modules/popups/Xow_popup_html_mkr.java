@@ -26,6 +26,9 @@ public class Xow_popup_html_mkr {
 	public void Output_tidy_(boolean v) {output_tidy = v;} private boolean output_tidy = true;
 	public void Ctor(Xoae_app app, Xowe_wiki wiki) {
 		this.wiki = wiki; this.app = app;
+		this.fmtr_popup = app.Mode().Tid_is_http() ?
+				Bry_fmtr.new_(Web_html_fmtr_popup, Dflt_html_fmtr_popup_keys) :
+				Bry_fmtr.new_(Dflt_html_fmtr_popup, Dflt_html_fmtr_popup_keys);
 		wiki.Eval_mgr().Eval_mgr_(fmtr_popup, fmtr_viewed, fmtr_wiki, fmtr_next_sect);
 	}
 	public byte[] Bld(Xowe_wiki cur_wiki, Xoae_page page, Xow_popup_itm popup_itm, Bry_bfr wrdx_bfr) {
@@ -79,6 +82,24 @@ public class Xow_popup_html_mkr {
 	, Dflt_html_fmtr_viewed			= Bry_.new_a7("\n    <span class='data_key'>~{<>msgs.get('api-xowa.html.modules.popups.msgs.view_time-name');<>}</span><span class='data_val'>~{viewed_val}</span>")
 	, Dflt_html_fmtr_wiki			= Bry_.new_a7("\n    <span class='data_key'>~{<>msgs.get('api-xowa.html.modules.popups.msgs.wiki-name');<>}</span><span class='data_val'>~{wiki_val}</span>")
 	, Dflt_html_fmtr_next_sect		= Bry_.new_a7("\n\n<span class='next_sect'>~{<>msgs.get('api-xowa.html.modules.popups.msgs.next_sect-name');<>}~{next_sect_val}</span>")
+	, Web_html_fmtr_popup = Bry_.new_a7(String_.Concat_lines_nl_skip_last
+	( "<div dir=~{page_lang_ltr}>"
+	, "  <div>~{content}"
+	, "  </div>"
+	, "  <hr/>"
+	, "  <div>"
+	, "    <span class='data_val'><b>~{page_title}</b></span>~{wiki_item}"
+	, "    <span class='data_key'>~{<>msgs.get('api-xowa.html.modules.popups.msgs.size-name');<>}</span><span class='data_val'>~{page_size}</span>"
+	, "    <span class='data_key'>~{<>msgs.get('api-xowa.html.modules.popups.msgs.edited-name');<>}</span><span class='data_val'>~{edit_time}</span>~{view_time_item}"
+	, "  </div>"
+	, "  <hr/>"
+	, "  <div style='float:bottom;'>"
+	, "    <span><a href='/~{page_url}' title='~{<>msgs.get('api-xowa.gui.browser.url.exec-name');<>}' class='xowa-hover-off'><img src='~{xowa_root_dir}bin/any/xowa/file/app.menu/page/open.png'></a></span>"
+	, "    <span><a href='/~{page_url}' title='~{<>msgs.get('api-xowa.gui.browser.tabs.new_link__at_dflt__focus_y-name');<>}' class='xowa-hover-off' target='_blank'><img src='~{xowa_root_dir}bin/any/xowa/file/app.menu/tabs/new.png'></a></span>"
+//		, "    <span><a href='javascript:xowa.popups.FetchMore(\"~{popup_id}\");' title='~{<>msgs.get('api-xowa.html.modules.popups.show_more-tip');<>}'><img src='~{xowa_root_dir}bin/any/xowa/html/res/src/xowa/popups/imgs/show_more.png'></a></span>"
+	, "  </div>"
+	, "</div>"
+	))
 	;
 	private static final    String[]
 	  Dflt_html_fmtr_popup_keys			= String_.Ary("content", "page_lang_ltr", "page_url", "page_title", "popup_id", "wiki_item", "page_size", "edit_time", "view_time_item", "xowa_root_dir")

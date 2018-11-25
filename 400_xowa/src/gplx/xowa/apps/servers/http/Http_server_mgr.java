@@ -91,7 +91,7 @@ public class Http_server_mgr implements Gfo_invk {
 		String cmd = url_converter.Decode_str(url_encoded_str);
 		app.Gfs_mgr().Run_str(cmd);
 	}
-	public String Parse_page_to_html(Http_data__client data__client, byte[] wiki_domain, byte[] ttl_bry, byte mode) {
+	public String Parse_page_to_html(Http_data__client data__client, byte[] wiki_domain, byte[] ttl_bry, byte mode, boolean popup_enabled, String popup_mode, String popup_id) {
 		synchronized (thread_lock) {
 			// create a shim gui to automatically handle default XOWA gui JS calls
 			if (init_gui_needed) {
@@ -102,7 +102,7 @@ public class Http_server_mgr implements Gfo_invk {
 			// get the wiki
 			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(wiki_domain);			// assert init for Main_Page; EX:click zh.w on wiki sidebar; DATE:2015-07-19
 			if (Runtime_.Memory_total() > Io_mgr.Len_gb)	Xowe_wiki_.Rls_mem(wiki, true);			// release memory at 1 GB; DATE:2015-09-11
-			
+
 			// get the url / ttl
 			if (Bry_.Len_eq_0(ttl_bry)) ttl_bry = wiki.Props().Main_page();
 			Xoa_url url = wiki.Utl__url_parser().Parse(ttl_bry);
@@ -119,22 +119,31 @@ public class Http_server_mgr implements Gfo_invk {
 			page.Html_data().Head_mgr().Itm__server().Init_by_http(data__client).Enabled_y_();
 
 			// generate html
-			String rv = String_.new_u8(wiki.Html_mgr().Page_wtr_mgr().Gen(page, mode)); // NOTE: must generate HTML now in order for "wait" and "async_server" to work with text_dbs; DATE:2016-07-10
-			boolean rebuild_html = false;
-			switch (retrieve_mode) {
-				case File_retrieve_mode.Mode_skip:	// noop
-					break;
-				case File_retrieve_mode.Mode_async_server:	
-					rebuild_html = true;
-					app.Gui_mgr().Browser_win().Page__async__bgn(tab);
-					break;
-				case File_retrieve_mode.Mode_wait:						
-					rebuild_html = true;
-					gplx.xowa.guis.views.Xog_async_wkr.Async(page, tab.Html_itm());
-					page = wiki.Page_mgr().Load_page(url, ttl, tab);	// HACK: fetch page again so that HTML will now include img data
-					break;
+			String rv = null;
+			if (popup_enabled) {
+				if (String_.Eq(popup_mode, "more"))
+					rv = wiki.Html_mgr().Head_mgr().Popup_mgr().Show_more(popup_id);
+				else
+					rv = wiki.Html_mgr().Head_mgr().Popup_mgr().Show_init(popup_id, ttl_bry, ttl_bry);
 			}
-			if (rebuild_html) rv = String_.new_u8(wiki.Html_mgr().Page_wtr_mgr().Gen(page, mode));
+			else {
+				rv = String_.new_u8(wiki.Html_mgr().Page_wtr_mgr().Gen(page, mode)); // NOTE: must generate HTML now in order for "wait" and "async_server" to work with text_dbs; DATE:2016-07-10
+				boolean rebuild_html = false;
+				switch (retrieve_mode) {
+					case File_retrieve_mode.Mode_skip:	// noop
+						break;
+					case File_retrieve_mode.Mode_async_server:	
+						rebuild_html = true;
+						app.Gui_mgr().Browser_win().Page__async__bgn(tab);
+						break;
+					case File_retrieve_mode.Mode_wait:						
+						rebuild_html = true;
+						gplx.xowa.guis.views.Xog_async_wkr.Async(page, tab.Html_itm());
+						page = wiki.Page_mgr().Load_page(url, ttl, tab);	// HACK: fetch page again so that HTML will now include img data
+						break;
+				}
+				if (rebuild_html) rv = String_.new_u8(wiki.Html_mgr().Page_wtr_mgr().Gen(page, mode));
+			}
 			return rv;
 		}
 	}

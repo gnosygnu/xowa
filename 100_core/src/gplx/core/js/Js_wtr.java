@@ -31,9 +31,10 @@ public class Js_wtr {
 		bfr.Add_byte(Byte_ascii.Paren_end).Add_byte_semic();
 		return this;
 	}
-	public Js_wtr Prm_bry(byte[] bry) {
+	public Js_wtr Prm_str(String v) {return Prm_bry(Bry_.new_u8(v));}
+	public Js_wtr Prm_bry(byte[] v) {
 		Prm_spr();
-		Write_val(bry);
+		Write_val(v);
 		return this;
 	}
 	public Js_wtr Prm_obj_ary(Object[] ary) {

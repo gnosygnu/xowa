@@ -1,3 +1,25 @@
+// Add Event Manager for simple pub/sub pattern; DATE:2018-11-11
+var XoEvtMgr = (function(){
+  var funcs = [];
+  function XoEvtMgr() {
+  }
+  
+  XoEvtMgr.prototype.sub = function(func) {
+    funcs.push(func);
+  }
+  
+  XoEvtMgr.prototype.pub = function() {
+    var funcsIdx = 0;
+    var funcsLen = funcs.length;
+    for (funcsIdx = 0; funcsIdx < funcsLen; funcsIdx++) {
+      var func = funcs[funcsIdx];
+      func(arguments);
+    }
+  }
+  
+  return XoEvtMgr;
+}());
+
 if (!window.xowa) {
   window.xowa = {
     root_dir : xowa_root_dir,
@@ -409,6 +431,8 @@ if (!window.xowa) {
     return or_val;
   };
 
+  xowa.js.doc.evtElemAdd = new XoEvtMgr();
+  
   // PURPOSE: used when clicking on file to get xowa_title
   xowa.js.doc.root_html_get = function() {
     return document.getElementsByTagName("html")[0].innerHTML;
@@ -435,11 +459,12 @@ if (!window.xowa) {
     
     xowa.js.doc.process_new_elem(elem.parentNode);  // NOTE: elem is placeholder item; html is inserted after it; need to call process_new_elem on parentNode; DATE:2015-08-03
   };
-
+/*
+  xowa.js.doc.ElemAdd.publish()
+*/
   // PURPOSE: process new element such as adding bindings; DATE:2015-07-09
   xowa.js.doc.process_new_elem = function(elem) {
-    if (elem == null) elem = document;
-    xowa_popups_bind_to_owner($(elem));
+     xowa.js.doc.EvtElemAdd.pub(elem);
   }
   
   // PURPOSE: async search; gallery; imap

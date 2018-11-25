@@ -142,8 +142,11 @@ public class Xog_tab_itm implements Gfo_invk {
 		}
 		Tab_name_(new_tab_name);
 		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_u8(ttl.Raw()));
-		if (wiki.Html_mgr().Head_mgr().Popup_mgr().Enabled())
-			this.Html_box().Html_js_eval_script("if (window.xowa_popups_hide_all != null) window.xowa_popups_hide_all();");	// should be more configurable; DATE:2014-07-09
+
+		// DELETE: no longer seems needed; popups always disappear when navigating to new page; DATE:2018-11-11
+		// if (wiki.Html_mgr().Head_mgr().Popup_mgr().Enabled())
+		//	this.Html_box().Html_js_eval_script("if (window.xowa_popups_hide_all != null) window.xowa_popups_hide_all();");	// should be more configurable; DATE:2014-07-09
+
 		app.Thread_mgr_old().Page_load_mgr().Add_at_end(new Load_page_wkr(this, wiki, url, ttl)).Run();
 	}
 	private void Show_url_loaded(Load_page_wkr wkr) {

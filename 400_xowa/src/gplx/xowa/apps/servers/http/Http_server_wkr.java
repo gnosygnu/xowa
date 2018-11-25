@@ -33,6 +33,7 @@ class Http_server_wkr implements Gfo_invk {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(64);
 	private Socket_adp socket;
 	private Http_data__client data__client;
+	private final    Gfo_url_parser url_parser = new Gfo_url_parser();
 	public Http_server_wkr(Http_server_mgr server_mgr, int uid){
 		this.server_mgr = server_mgr; this.uid = uid;
 		this.app = server_mgr.App(); this.server_wtr = server_mgr.Server_wtr(); this.url_encoder = server_mgr.Encoder();
@@ -105,7 +106,7 @@ class Http_server_wkr implements Gfo_invk {
 			page_html = url_parser.Err_msg();
 		}
 		else {
-			page_html = app.Http_server().Parse_page_to_html(data__client, url_parser.Wiki(), url_parser.Page(), url_parser.Action());
+			page_html = app.Http_server().Parse_page_to_html(data__client, url_parser.Wiki(), url_parser.Page(), url_parser.Action(), url_parser.Popup(), url_parser.Popup_mode(), url_parser.Popup_id());
 			page_html = Convert_page(page_html, root_dir_http, String_.new_u8(url_parser.Wiki()));
 		}
 		Xosrv_http_wkr_.Write_response_as_html(client_wtr, Bool_.N, page_html);

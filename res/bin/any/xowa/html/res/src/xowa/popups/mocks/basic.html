@@ -1,0 +1,614 @@
+<!-- 
+  PURPOSE: standalone file to test basic popup functionality without running XOWA 
+  * Install XOWA to root; WNT: "C:\xowa"; LNX: "/xowa/"
+  * Launch chrome with arguments "--disable-web-security --user-data-dir"
+  * Navigate to: file:///C:/xowa/bin/any/xowa/html/res/src/xowa/popups/mocks/basic.html
+  * Hover over "blog" which will read file from "pages/Blog.init.html"
+  
+  NOTES:
+  * To change base dir, do find-and-replace for href="/xowa/"
+  * <base> tag not useful due to anchors: https://stackoverflow.com/questions/1889076/what-are-the-recommendations-for-html-base-tag
+-->
+<html>
+<head>
+  <!-- CSS: wikipedia look-and-feel; needed for popups css -->
+  <link type="text/css" href="/xowa/user/anonymous/wiki/home/html/xowa_common.css" rel="stylesheet" />
+  <link type="text/css" href="/xowa/user/anonymous/wiki/home/html/xowa_wiki.css" rel="stylesheet" />
+  <link type="text/css" href="/xowa/bin/any/xowa/html/res/src/xowa/popups/popups.css" rel="stylesheet" />
+
+  <!-- JS: xo.core -->
+  <script>
+    window.xowa_root_dir = 'must specifiy, else core.js will fail';
+  </script>
+  <script type="text/javascript" src="/xowa/bin/any/xowa/html/res/src/xowa/core/core.js"></script>
+  <script>
+    window.xowa.app.mode = 'mock';
+    window.xowa.cfg.get = function(key) {
+      switch (key) {
+        case 'popups-win-show_delay': return 200;
+        case 'popups-win-hide_delay': return 500;
+        case 'popups-win-max_w': return 800;
+        case 'popups-win-max_h': return 600;
+        case 'popups-win-show_all_max_w': return 1200;
+        case 'popups-win-bind_focus_blur': return true;
+        case 'popups-win-bind_hover_area': return true;
+      }
+    }
+  </script>
+
+  <!-- JS:util -->
+  <script>
+  function readFile(file, func) {
+      var req = new XMLHttpRequest();
+      req.open("GET", file);
+      req.onreadystatechange = function() {
+        if(req.readyState === 4 && (req.status === 200 || req.status == 0)) {
+            func(req.responseText);
+        }
+      }
+      req.send(null);
+  }
+  </script>
+
+  <!-- JS:xo.popups -->
+  <script type="text/javascript" src="/xowa/bin/any/xowa/html/res/lib/jquery/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="/xowa/bin/any/xowa/html/res/src/xowa/popups/xo.popup.js"></script>
+  <script>
+  $(document).ready(function() {
+    xowa.popups.Mock_popups_get_html = function(mgr, showMode, popupItm, href)
+    {
+      readFile
+      ( href
+      , function(s) 
+        {
+          mgr.UpdatePopupHtml(popupItm.Id, showMode, s);
+        }
+      );
+    }
+  });
+  </script>
+
+</head>
+<body spellcheck="false" class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Main_Page skin-vector action-submit vector-animateLayout">
+<div class="noprint" id="mw-page-base"></div>
+<div class="noprint" id="mw-head-base"></div>
+<div class="mw-body" id="content">
+  <div style="display:none; color:red; white-space:pre; display:block; unicode-bidi:embed;" class="xowa_err" id="xowa_err_div"></div><h1 class="firstHeading" id="firstHeading">Main Page</h1>  
+  <div class="mw-body-content" id="bodyContent">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div class="visible" id="contentSub"></div>
+    <div class="mw-jump" id="jump-to-nav">Jump to:<a href="#mw-navigation">navigation</a>, <a href="#p-search">search</a></div>
+    <div lang="en" class="mw-content-ltr" dir="ltr" id="mw-content-text">
+    <div class="toc" id="toc">
+      <div class="toctitle" id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      <span class="toctoggle"> [<a id="togglelink" class="internal" href="#">hide</a>] </span></div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Disclaimer"><span class="tocnumber">1</span> <span class="toctext">Disclaimer</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Release_notes"><span class="tocnumber">2</span> <span class="toctext">Release notes</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#New_users"><span class="tocnumber">3</span> <span class="toctext">New users</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#Build_a_wiki_while_online"><span class="tocnumber">3.1</span> <span class="toctext">Build a wiki while online</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#Build_a_wiki_while_offline"><span class="tocnumber">3.2</span> <span class="toctext">Build a wiki while offline</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#Download_pre-built_wikis_within_XOWA"><span class="tocnumber">3.3</span> <span class="toctext">Download pre-built wikis within XOWA</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#Download_pre-built_wikis_within_a_browser"><span class="tocnumber">3.4</span> <span class="toctext">Download pre-built wikis within a browser</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-8">
+              <a href="#Creating_a_personal_wiki"><span class="tocnumber">3.5</span> <span class="toctext">Creating a personal wiki</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-9">
+          <a href="#Upgrade_users"><span class="tocnumber">4</span> <span class="toctext">Upgrade users</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-10">
+          <a href="#Tips"><span class="tocnumber">5</span> <span class="toctext">Tips</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-11">
+          <a href="#Notes"><span class="tocnumber">6</span> <span class="toctext">Notes</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-12">
+          <a href="#Links"><span class="tocnumber">7</span> <span class="toctext">Links</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span id="Disclaimer" class="mw-headline">Disclaimer</span>
+    </h2>
+    <p>
+    Please note that this program is beta software. Although it is my best hope that you find this program functional and useful, I make no assurances regarding stability or fitness of purpose. For more details, see <a class="xowa-visited" title="Help/License/Code" id="xolnki_2" href="/wiki/Help/License/Code">Help/License/Code</a>.
+    </p>
+    <h2>
+      <span id="Release_notes" class="mw-headline">Release notes</span>
+    </h2>
+    <p>
+      v4.5.21.1808 features the following:
+    </p>
+    <ul>
+      <li>
+        (Wiki) Publish 2018-07 English Wikipedia
+      </li>
+      <li>
+        (PC) Fix multiple script errors due to Wikibase and Scribunto.
+      </li>
+    </ul>
+    <p>
+      For more details about this release, please see the <a title="" id="xolnki_3" href="pages/Blog.init.html">blog</a> and the <a class="xowa-visited" title="Change log" id="xolnki_4" href="/wiki/Change_log">change log</a>.
+    </p>
+    <p>
+      For more details about the release schedule, please see <a class="xowa-visited" title="Help/Release schedule" id="xolnki_5" href="/wiki/Help/Release_schedule">the release schedule</a>.
+    </p>
+    <h2>
+      <span id="New_users" class="mw-headline">New users</span>
+    </h2>
+    <p>
+      If this is the first time you've run XOWA, then please choose from the following:
+    </p>
+    <ul>
+      <li>
+        Build a wiki while online
+      </li>
+      <li>
+        Build a wiki while offline
+      </li>
+      <li>
+        Download pre-built wikis within XOWA
+      </li>
+      <li>
+        Download pre-built wikis within a browser
+      </li>
+    </ul>
+    <p>
+      In addition, XOWA now supports creation of your own personal wiki.
+    </p>
+    <h5>
+      <span id="Build_a_wiki_while_online" class="mw-headline">Build a wiki while online</span>
+    </h5>
+    <hr />
+    <ul>
+      <li>
+        <b>Import Simple Wikipedia</b>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Simple Wikipedia is a small wiki that fits in about 200 MB and sets up in about 3 minutes.
+      </dd>
+      <dd>
+        When you are ready to start, click this link: 
+        <dl>
+          <dd>
+            <a href="xowa-cmd:%0Aapp.setup.cmds%0A.dump_add_many%28%27simple.wikipedia.org%27%2C%20%27latest%27%2C%20%27pages-articles%27%2C%20%27wiki.custom%27%29.owner%0A.run;%0A">Set up Simple Wikipedia<img src="file:///C:/xowa/bin/any/xowa/file/app.general/xowa_exec.png" /></a>
+          </dd>
+        </dl>
+      </dd>
+      <dd>
+        Feel free to look around during the import process. You can start at <a class="xowa-visited" title="Help/Contents" id="xolnki_6" href="/wiki/Help/Contents">Help/Contents</a>. When the process completes, it will open Simple Wikipedia.
+      </dd>
+    </dl>
+    <dl>
+      <dd>
+        After the setup completes, you can visit these pages: 
+        <dl>
+          <dd>
+            <a title="Gothic architecture" id="xolnki_7" href="/site/simple.wikipedia.org/wiki/Gothic_architecture">Gothic architecture</a>
+          </dd>
+          <dd>
+            <a title="Saturn (planet)" id="xolnki_8" href="/site/simple.wikipedia.org/wiki/Saturn_%28planet%29">Saturn (planet)</a>
+          </dd>
+          <dd>
+            <a title="Chess" id="xolnki_9" href="/site/simple.wikipedia.org/wiki/Chess">Chess</a>
+          </dd>
+          <dd>
+            <a title="World History" id="xolnki_10" href="/site/simple.wikipedia.org/wiki/World_History">World History</a>
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        <b>Import other wikis</b>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        After exploring Simple Wikipedia, you may want to import another wiki such as English Wikipedia, French Wiktionary, German Wikisource, Wikidata, Commons, etc.
+      </dd>
+      <dd>
+        To import another wiki, please visit <a class="xowa-visited" title="Dashboard/Import/Online" id="xolnki_11" href="/wiki/Dashboard/Import/Online">import online</a>.
+      </dd>
+    </dl>
+    <h5>
+      <span id="Build_a_wiki_while_offline" class="mw-headline">Build a wiki while offline</span>
+    </h5>
+    <ul>
+      <li>
+        <b>Import from a dump file</b>: See <a class="xowa-visited" title="Dashboard/Import/Offline" id="xolnki_12" href="/wiki/Dashboard/Import/Offline">import offline</a>.
+      </li>
+    </ul>
+    <h5>
+      <span id="Download_pre-built_wikis_within_XOWA" class="mw-headline">Download pre-built wikis within XOWA</span>
+    </h5>
+    <ul>
+      <li>
+        Go to <a class="xowa-visited" title="Special:XowaDownloadCentral" id="xolnki_13" href="/wiki/Special:XowaDownloadCentral">Special:XowaDownloadCentral</a>
+      </li>
+      <li>
+        Add your wikis to the Queue
+      </li>
+      <li>
+        Press Run
+      </li>
+      <li>
+        For more instructions, see <a title="App/Import/Download Central" id="xolnki_14" href="/wiki/App/Import/Download_Central">App/Import/Download_Central</a>
+      </li>
+    </ul>
+    <h5>
+      <span id="Download_pre-built_wikis_within_a_browser" class="mw-headline">Download pre-built wikis within a browser</span>
+    </h5>
+    <ul>
+      <li>
+        Go to <a title="Wiki setup/Listing" id="xolnki_15" href="/wiki/Wiki_setup/Listing">Wiki_setup/Listing</a>
+      </li>
+      <li>
+        Navigate to your wiki page from the list
+      </li>
+      <li>
+        Download the listed urls
+      </li>
+    </ul>
+    <h5>
+      <span id="Creating_a_personal_wiki" class="mw-headline">Creating a personal wiki</span>
+    </h5>
+    <ul>
+      <li>
+        From the main menu, choose <code>Personal wikis</code> -&gt; <code>New personal wiki</code>
+      </li>
+      <li>
+        Fill in domain, name, and folder
+      </li>
+      <li>
+        Press the <code>Save icon</code>
+      </li>
+    </ul>
+    <h2>
+      <span id="Upgrade_users" class="mw-headline">Upgrade users</span>
+    </h2>
+    <ul>
+      <li>
+        v4.5.0 features full-text search for all wikis. See <a class="xowa-visited" title="App/Full-text search" id="xolnki_16" href="/wiki/App/Full-text_search">App/Full-text_search</a>
+      </li>
+      <li>
+        v4.4.0 features night-mode. See <a title="App/UI/Night mode" id="xolnki_17" href="/wiki/App/UI/Night_mode">App/UI/Night_mode</a>
+      </li>
+      <li>
+        v4.2.0 features personal wiki support. See <a title="App/Personal wikis" id="xolnki_18" href="/wiki/App/Personal_wikis">App/Personal_wikis</a>
+      </li>
+      <li>
+        v4.1.0 features a new in app update system. See <a title="App/Setup/Update/In-app" id="xolnki_19" href="/wiki/App/Setup/Update/In-app">App/Setup/Update/In-app</a>
+      </li>
+      <li>
+        v4.0.0 features a new Options system. See <a title="Options" id="xolnki_20" href="/wiki/Options">Options</a>
+      </li>
+      <li>
+        v3.9.2 features a new Category system. See <a title="App/Category" id="xolnki_21" href="/wiki/App/Category">Category Overview</a>
+      </li>
+      <li>
+        v3.6.3 features a Download page. See <a class="xowa-visited" title="Special:XowaDownloadCentral" id="xolnki_22" href="/wiki/Special:XowaDownloadCentral">Download Central</a>
+      </li>
+      <li>
+        v3.3.4 features an auto-complete address bar. It also has a faster Search system. See <a title="App/Search" id="xolnki_23" href="/wiki/App/Search">App/Search</a>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        v3.3.4 uses sqlite 3.8.2
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        v3.1.3 features the XOWA Android application
+      </li>
+      <li>
+        v2.8.1 has a language converter dropdown for the Chinese wikis.
+      </li>
+      <li>
+        v2.7.3 introduces a new Bookmarks page. See <a title="Special:XowaBookmarks" id="xolnki_24" href="/wiki/Special:XowaBookmarks">Special:XowaBookmarks</a>
+      </li>
+      <li>
+        v2.6.5 uses SWT v4.5 and XULRunner v24. See <a title="Dev/SWT" id="xolnki_25" href="/wiki/Dev/SWT">Dev/SWT</a> and <a title="App/UI/HTML Browser" id="xolnki_26" href="/wiki/App/UI/HTML_Browser">HTML Browser</a>
+      </li>
+      <li>
+        v2.6.3 uses WebKit for MacOSX. For more info, see <a title="Blog" id="xolnki_27" href="/wiki/Blog">Blog</a><br />
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        v2.6.3 also fully supports multiple-word-highlight when using find. Press Ctrl+F and try it out.
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        v2.5.4 has changed online file downloads. Among other things, ImageMagick and Inkscape are no longer required. For more info, see <a title="App/Basics/Files" id="xolnki_28" href="/wiki/App/Basics/Files">Files</a>
+      </li>
+      <li>
+        v2.4.2 has improved Search performance and v2.4.4 has added multi-wiki Search. For more info, see <a title="App/Search" id="xolnki_29" href="/wiki/App/Search">App/Search</a>
+      </li>
+      <li>
+        v2.4.1 has introduced major database layout changes. For more info, see <a title="Dev/Design/Database" id="xolnki_30" href="/wiki/Dev/Design/Database">Database</a>
+      </li>
+    </ul>
+    <h2>
+      <span id="Tips" class="mw-headline">Tips</span>
+    </h2>
+    <ul>
+      <li>
+        <b>Autocomplete address bar</b>: The address bar supports autocomplete. Type something like "search" and see the results.
+      </li>
+      <li>
+        <b>Navigation buttons</b>: The arrow icons in the upper left-hand corner represent the back and forward button. Click on them just like you would in a web browser. You can also use Alt+Left and Alt+Right.
+      </li>
+      <li>
+        <b>Font size</b>: 
+        <ul>
+          <li>
+            If the font size is too small, right-click and choose Font Increase
+          </li>
+          <li>
+            If you need more control over the font, customize it on the <a title="Special:XowaCfg?grp=xowa.gui.general" id="xolnki_31" href="/wiki/Special:XowaCfg%3Fgrp%3Dxowa.gui.general">Options: Gui - Window</a> and <a title="Special:XowaCfg?grp=xowa.html.css" id="xolnki_32" href="/wiki/Special:XowaCfg%3Fgrp%3Dxowa.html.css">Options: HTML - CSS</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b>Find box</b>: Press Ctrl+F on your keyboard. This will show the Find box (in the lower left-hand corner). Type "tips". Notice that the word "Tips" is highlighted above. Note that Alt+P (Previous) and Alt+N (Next) will change search direction. See <a title="App/UI/Find box" id="xolnki_33" href="/wiki/App/UI/Find_box">Find Box</a> for more info.
+      </li>
+      <li>
+        <b>Address bar</b>: Press Alt+D or Ctrl+L on your keyboard. This will take you to the Address bar at the top of the screen. Type "s.w:Earth" (no quotes) and press Enter. This will open the Simple Wikipedia page for Earth. See <a title="App/UI/Address bar/Shortcuts" id="xolnki_34" href="/wiki/App/UI/Address_bar/Shortcuts#Default_shortcuts">Address bar/Shortcuts</a> for more shortcuts.
+      </li>
+      <li>
+        <b>Middle-click in address bar</b>: Copy and paste urls directly into the address bar with the middle mouse button to open the page. For example: 
+        <ul>
+          <li>
+            Right-click the following url: <code><a href="/site/simple.wikipedia.org/wiki/World_history">http://simple.wikipedia.org/wiki/World_history</a></code>
+          </li>
+          <li>
+            Select "Copy"
+          </li>
+          <li>
+            Click the middle mouse button in the address bar above. The "World history" page in "Simple Wikipedia" will open.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            Now you can copy and paste any Wikipedia url directly into XOWA and its page will open (and all its images will download.) See <a title="App/UI/Address bar/URLs" id="xolnki_35" href="/wiki/App/UI/Address_bar/URLs">Address_bar/URLs</a> for more info
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        <b>Middle-click on link</b>: Open a tab in a new link by middle-clicking on it. Try middle-clicking the following: <a title="Options" id="xolnki_36" href="/wiki/Options">Options</a>
+      </li>
+      <li>
+        <b>Right-click</b>: Right click on an image and click save as file
+      </li>
+    </ul>
+    <h2>
+      <span id="Notes" class="mw-headline">Notes</span>
+    </h2>
+    <ul>
+      <li>
+        <b>Wikidata</b>: If you're seeing {{#property}} in your wikis you should also set up Wikidata. See <a title="App/Wiki types/Wikidata" id="xolnki_37" href="/wiki/App/Wiki_types/Wikidata">App/Wiki_types/Wikidata</a>
+      </li>
+    </ul>
+    <h2>
+      <span id="Links" class="mw-headline">Links</span>
+    </h2>
+    <table class="wikitable">
+      <tbody><tr>
+        <td>
+          <a class="xowa-visited" title="Special:XowaDownloadCentral" id="xolnki_38" href="/wiki/Special:XowaDownloadCentral">Download Central</a>
+        </td>
+        <td>
+          Download an Android-ready wiki with images from archive.org
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xowa-visited" title="Dashboard/Import/Online" id="xolnki_39" href="/wiki/Dashboard/Import/Online">Import Online</a>
+        </td>
+        <td>
+          Import a wiki from a list of 829 known Wikimedia Foundation wikis
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xowa-visited" title="Dashboard/Import/Offline" id="xolnki_40" href="/wiki/Dashboard/Import/Offline">Import Offline</a>
+        </td>
+        <td>
+          Import a wiki through a dump; import also through script; also upgrade category to version 2
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a title="Dashboard/Image databases" id="xolnki_41" href="/wiki/Dashboard/Image_databases">Image databases</a>
+        </td>
+        <td>
+          Download image databases for your wiki
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a title="Dashboard/Wiki maintenance" id="xolnki_42" href="/wiki/Dashboard/Wiki_maintenance">Wiki Maintenance</a>
+        </td>
+        <td>
+          Update your wikis if they are outdated
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a title="Help/FAQs" id="xolnki_43" href="/wiki/Help/FAQs">FAQs</a>
+        </td>
+        <td>
+          View questions asked by other users
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xowa-visited" title="Help/Contents" id="xolnki_44" href="/wiki/Help/Contents">Contents</a>
+        </td>
+        <td>
+          View all help topics
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a title="Options" id="xolnki_45" href="/wiki/Options">Options</a>
+        </td>
+        <td>
+          Configure XOWA options
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xowa-visited" title="Change log" id="xolnki_46" href="/wiki/Change_log">Change log</a>
+        </td>
+        <td>
+          View changes for each XOWA release
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xowa-visited" title="Diagnostics" id="xolnki_47" href="/wiki/Diagnostics">Diagnostics</a>
+        </td>
+        <td>
+          Run test pages to make sure that XOWA works on your system.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a class="external text" rel="nofollow" href="https://github.com/gnosygnu/xowa/issues">Report issues</a>
+        </td>
+        <td>
+          Report bugs / issues on Github
+        </td>
+      </tr>
+    </tbody></table>
+  
+      <div class="visualClear">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div role="contentinfo" id="footer">
+  <ul id="footer-info">
+    <li id="footer-info-lastmod"> This page was last modified on 2018-08-05, at 21:08.</li>
+    <li id="footer-info-copyright">Text is available under the <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike License</a>;
+additional terms may apply.
+See <a href="https://wikimediafoundation.org/wiki/Terms_of_Use">Terms of Use</a> for details.
+  </li></ul>  
+  <ul id="footer-places">
+    <li id="footer-places-privacy"><a title="Privacy policy" class="extiw" href="/wiki/Project:Privacy%20policy">Privacy policy</a></li>
+    <li id="footer-places-about"><a title="Wikipedia:About" href="/wiki/">About home</a></li>
+    <li id="footer-places-disclaimer"><a title="Disclaimers" href="/wiki/Project:General%20disclaimer">Disclaimers</a></li>    
+    <li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Developers</a></li>
+    <li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">Cookie statement</a></li>
+  </ul>
+  <ul style="height:10px" class="noprint" id="footer-icons">
+    <li id="footer-copyrightico">
+      <a href="https://wikimediafoundation.org/"><img width="88" height="31" alt="Wikimedia Foundation" src="file:///C:/xowa//bin/any/xowa/html/css/footer/wikimedia-button.png" /></a>
+    </li>
+    <li id="footer-poweredbyico">
+      <a href="//www.mediawiki.org/"><img width="88" height="31" alt="Powered by MediaWiki" src="file:///C:/xowa//bin/any/xowa/html/css/footer/poweredby_mediawiki_88x31.png" /></a>
+    </li>
+  </ul>  
+  <ul style="clear:both; float:left;">
+    <li>Generated by <a href="/wiki/home/Help/About">XOWA</a>: v4.5.26.1810 (2018-11-14 02:19:20)</li>
+  </ul>
+  <div style="clear:both"></div>
+</div>
+
+<div class="noprint" id="mw-head">
+  <div class="" id="p-personal">
+    <h3>Personal tools</h3>
+  </div>
+  <div id="left-navigation">
+    <div class="vectorTabs" id="p-namespaces">
+      <h3>Namespaces</h3>
+      <ul>
+        <li class="selected" id="ca-nstab-main"><span><a title="View the content page [c]" accesskey="c" class="xowa-hover-off" id="ca-nstab-main-href" href="/wiki/Main_Page">Page</a></span></li>
+        <li class="xowa_display_none" id="ca-talk"><span><a title="Discussion about the content page [t]" accesskey="t" class="xowa-hover-off" href="/wiki/Talk:Main_Page">Discussion</a></span></li>
+      </ul>
+    </div>
+  </div>
+  <div id="right-navigation">
+    <div class="vectorTabs" id="p-views">
+      <h3>Views</h3>
+      <ul>
+        <li class="selected" id="ca-view"><span><a class="xowa-hover-off" href="/wiki/Main_Page">Read</a></span></li>
+        <li class="" id="ca-edit"><span><a title="You can edit this page. Please use the preview button before saving [e]" accesskey="e" class="xowa-hover-off" href="/wiki/Main_Page?action=edit">Edit</a></span></li>
+        <li class="" id="ca-history"><span><a title="View HTML source for this page [h]" accesskey="h" class="xowa-hover-off" href="/wiki/Main_Page?action=html">View HTML</a></span></li>
+        <li role="search" id="p-search">
+          <form action="/wiki/Special:XowaSearch" id="searchform">
+            <div id="simpleSearch">
+              <input type="search" autocomplete="off" value="" title="Search home [f]" accesskey="f" id="searchInput" placeholder="Search" name="search" />
+              <input type="hidden" value="y" name="fulltext" />
+              <input type="submit" class="searchButton mw-fallbackSearchButton" id="mw-searchButton" title="Search home [f]" accesskey="f" />
+              <input type="submit" class="searchButton" id="searchButton" title="Go to a page with this exact name if exists" value="Go" name="go" />	
+            <ul id="xowa-search-suggestions" style="display: none;"></ul></div>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="noprint" id="mw-panel">
+  <div id="p-logo">
+    <a title="Visit the main page" class="xowa-hover-off" href="/site/home/wiki/" style="background-image: url(file:///C:/xowa/user/anonymous/wiki/home/html/logo.png);"></a>
+  </div>
+  <div class="portal"><h3></h3></div><!-- empty heading else wikipedia css will hide next <h3> after <div id='p-logo'>; DATE:2016-04-12-->
+
+
+
+
+  <div class="portal" id="xowa-portal-wikis">    
+    <h3><a style="text-decoration: none !important;" href='javascript:xowa_toggle_visible("offline-wikis");'>Wikis<img title="" src="file:///C:/xowa/bin/any/xowa/file/app.general/twisty_down.png" id="offline-wikis-toggle-icon" /></a></h3>
+    <div class="body">
+      <ul style="display:;" id="offline-wikis-toggle-elem">
+        <li><a class="xowa-hover-off" href="/site/commons.wikimedia.org/">commons.wikimedia.org</a></li>
+        <li><a class="xowa-hover-off" href="/site/en.wikipedia.org/">en.wikipedia.org</a></li>
+        <li><a class="xowa-hover-off" href="/site/simple.wikipedia.org/">simple.wikipedia.org</a></li>
+        <li><a class="xowa-hover-off" href="/site/www.wikidata.org/">www.wikidata.org</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div style="border:0px !important" class="mw-body xo-popup-div" id="xo-popup-div-id"></div>
+<!-- xo-popup-div-id
+* must be placed as peer to <div id="content">, not as sub-child, else will have overlap problems with search bar
+* must use mw-body class to have same text-styling
+* border:0px to suppress blue border b/c of mw-body
+-->
+</body>
+</html>
