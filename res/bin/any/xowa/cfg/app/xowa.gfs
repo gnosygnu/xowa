@@ -311,7 +311,7 @@ app.wikis.get('~{wiki_key}').html.article {
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>~{page_name} - XOWA</title>
-  <link rel="shortcut icon" href="~{app_root_dir}user/anonymous/app/img/window/chrome/xowa.png" />
+  <link rel="shortcut icon" href="~{app_root_dir}bin/any/xowa/file/app.window/app_icon.png" />
   <link rel="stylesheet" href="~{html_css_common_path}" type="text/css">
   <link rel="stylesheet" href="~{html_css_wiki_path}" type="text/css">
   ~{html_css_night_tag}<!--XOWA.SCRIPT.HEAD.TOP-->~{xowa_head}<!--XOWA.SCRIPT.HEAD.BOT-->
@@ -398,7 +398,7 @@ app.wikis.get('~{wiki_key}').html.article {
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>~{page_name} - XOWA</title>
-  <link rel="shortcut icon" href="~{app_root_dir}user/anonymous/app/img/window/chrome/xowa.png" />
+  <link rel="shortcut icon" href="~{app_root_dir}bin/any/xowa/file/app.window/app_icon.png" />
   <link rel="stylesheet" href="~{html_css_common_path}" type="text/css">
   <link rel="stylesheet" href="~{html_css_wiki_path}" type="text/css">
   ~{html_css_night_tag}<!--XOWA.SCRIPT.HEAD.TOP-->~{xowa_head}<!--XOWA.SCRIPT.HEAD.BOT-->
