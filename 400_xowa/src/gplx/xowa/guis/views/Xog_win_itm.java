@@ -109,7 +109,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	, Invk_link_click = "link_click", Invk_link_print = "link_print"
 	, Invk_window_font_changed = "winow_font_changed"
 	, Invk_search = "search"
-	, Invk_page_view_edit = "page_view_edit", Invk_page_view_read = "page_view_read", Invk_page_view_html = "page_view_html"
+	, Invk_page_view_edit = "page_view_edit", Invk_page_view_read = "page_view_read", Invk_page_view_html = "page_view_html" // DEPRECATED: now uses action=edit
 	, Invk_history_fwd = "history_fwd", Invk_history_bwd = "history_bwd"
 	, Invk_page_refresh = "page_refresh"
 	, Invk_page_edit_focus_box = "page_edit_focus_box", Invk_page_edit_focus_first = "page_edit_focus_first"

@@ -139,9 +139,9 @@ public class Xow_portal_mgr implements Gfo_invk {
 		}
 
 		// build url_fragment with action query argument; EX: "/wiki/Page_name?action="
-		byte[] url_frag_w_action_qarg = Bry_.Add(Xoh_href_.Bry__wiki, ttl.Page_db(), Byte_ascii.Question_bry, Xoa_url_.Qarg__action, Byte_ascii.Eq_bry);
+		byte[] url_frag_w_action_qarg = Bry_.Add(Xoh_href_.Bry__wiki, ttl.Full_db(), Byte_ascii.Question_bry, Xoa_url_.Qarg__action, Byte_ascii.Eq_bry);
 		div_view_fmtr.Bld_bfr_many(tmp_bfr, read_cls, edit_cls, html_cls, search_text
-			, ttl.Page_db()
+			, Bry_.Add(Xoh_href_.Bry__wiki, ttl.Full_db())
 			, Bry_.Add(url_frag_w_action_qarg, Xoa_url_.Qarg__action__edit)
 			, Bry_.Add(url_frag_w_action_qarg, Xoa_url_.Qarg__action__html));
 

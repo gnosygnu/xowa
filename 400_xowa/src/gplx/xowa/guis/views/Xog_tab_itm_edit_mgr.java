@@ -81,6 +81,7 @@ public class Xog_tab_itm_edit_mgr {
 
 		byte[] new_text = Get_new_text(tab, null);
 		Xoae_page new_page = Xoae_page.New(wiki, page.Ttl());
+		new_page.Url_(page.Url()); // NOTE: must set Url explicitly, else new_page will not have same url_args as old_page; broken when going to action=edit; DATE:2018-11-25
 		new_page.Db().Page().Id_(page.Db().Page().Id());	// NOTE: page_id needed for sqlite (was not needed for xdat)
 		new_page.Db().Text().Text_bry_(new_text);
 		wiki.Parser_mgr().Parse(new_page, true);			// refresh html
