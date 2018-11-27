@@ -42,6 +42,11 @@ public class Srch_rslt_cbk__suggest_box implements Srch_rslt_cbk, Gfo_invk {
 		js_wtr.Ary_term();
 		js_wtr.Func_term();
 		Gfo_invk_.Invk_by_key(app.Gui_mgr().Kit().New_cmd_sync(this), Srch_rslt_cbk__suggest_box.Invk__notify);
+		if (!app.Mode().Tid_is_http())
+				Gfo_invk_.Invk_by_key(app.Gui_mgr().Kit().New_cmd_sync(this), Srch_rslt_cbk__suggest_box.Invk__notify);
+	}
+	public String Get_js_str() {
+		return js_wtr.To_str_and_clear();
 	}
 	private void Notify() {
 		app.Gui_mgr().Browser_win().Active_html_box().Html_js_eval_script(js_wtr.To_str_and_clear());

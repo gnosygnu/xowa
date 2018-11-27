@@ -112,7 +112,7 @@ public class Xoh_page_wtr_wkr {
 		, modified_on_msg
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry()
 		, mgr.Css_night_bry(nightmode_enabled)
-		, page.Html_data().Head_mgr().Init(app, wiki, page).Init_dflts()
+		, page.Html_data().Head_mgr().Init(app, wiki, page).Init_dflts(html_gen_tid)
 		, page.Lang().Dir_ltr_bry(), page.Html_data().Indicators(), page_content_sub, wiki.Html_mgr().Portal_mgr().Div_jump_to(), wiki.Xtn_mgr().Xtn_pgbnr().Write_html(page, ctx, hctx), page_body_class, html_content_editable
 		, page_data, wdata_lang_wtr
 		, portal_mgr.Div_footer(modified_on_msg, Xoa_app_.Version, Xoa_app_.Build_date)
@@ -120,7 +120,7 @@ public class Xoh_page_wtr_wkr {
 		// sidebar divs
 		, portal_mgr.Div_personal_bry()
 		, portal_mgr.Div_ns_bry(wiki.Utl__bfr_mkr(), page_ttl, wiki.Ns_mgr())
-		, portal_mgr.Div_view_bry(wiki.Utl__bfr_mkr(), html_gen_tid, page.Html_data().Xtn_search_text())
+		, portal_mgr.Div_view_bry(wiki.Utl__bfr_mkr(), html_gen_tid, page.Html_data().Xtn_search_text(), page_ttl)
 		, portal_mgr.Div_logo_bry(nightmode_enabled), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar)
 		, portal_mgr.Div_sync_bry(tmp_bfr, wiki.Page_mgr().Sync_mgr().Manual_enabled(), wiki, page)
 		, portal_mgr.Div_wikis_bry(wiki.Utl__bfr_mkr())
@@ -201,7 +201,8 @@ public class Xoh_page_wtr_wkr {
 		// if (ns_id == Xow_ns_.Tid__category) wiki.Ctg__catpage_mgr().Write_catpage(tidy_bfr, page, hctx);
 
 		// tidy html
-		wiki.Html_mgr().Tidy_mgr().Exec_tidy(tidy_bfr, !hctx.Mode_is_hdump(), page.Url_bry_safe());
+		if (ns_id != Xow_ns_.Tid__special) // skip Special b/c
+			wiki.Html_mgr().Tidy_mgr().Exec_tidy(tidy_bfr, !hctx.Mode_is_hdump(), page.Url_bry_safe());
 		
 		// add back to main bfr
 		bfr.Add_bfr_and_clear(tidy_bfr);
