@@ -20,15 +20,15 @@ public class Xof_ext_ {
 	, Id_png = 1, Id_jpg = 2, Id_jpeg = 3, Id_gif = 4, Id_tif = 5, Id_tiff = 6
 	, Id_svg = 7, Id_djvu = 8, Id_pdf = 9
 	, Id_mid = 10, Id_ogg = 11, Id_oga = 12, Id_ogv = 13, Id_webm = 14
-	, Id_flac = 15, Id_bmp = 16, Id_xcf = 17, Id_wav = 18;
-	public static final int Id__max = 19;
+	, Id_flac = 15, Id_bmp = 16, Id_xcf = 17, Id_wav = 18, Id_opus = 19;
+	public static final int Id__max = 20;
 	public static final    byte[] 
 	  Bry_png = Bry_.new_a7("png"), Bry_jpg = Bry_.new_a7("jpg"), Bry_jpeg = Bry_.new_a7("jpeg")
 	, Bry_gif = Bry_.new_a7("gif"), Bry_tif = Bry_.new_a7("tif"), Bry_tiff = Bry_.new_a7("tiff")
 	, Bry_svg = Bry_.new_a7("svg"), Bry_djvu = Bry_.new_a7("djvu"), Bry_pdf = Bry_.new_a7("pdf")
 	, Bry_mid = Bry_.new_a7("mid"), Bry_ogg = Bry_.new_a7("ogg"), Bry_oga = Bry_.new_a7("oga")
 	, Bry_ogv = Bry_.new_a7("ogv"), Bry_webm = Bry_.new_a7("webm"), Bry_flac = Bry_.new_a7("flac")
-	, Bry_bmp = Bry_.new_a7("bmp"), Bry_xcf = Bry_.new_a7("xcf"), Bry_wav = Bry_.new_a7("wav")
+	, Bry_bmp = Bry_.new_a7("bmp"), Bry_xcf = Bry_.new_a7("xcf"), Bry_wav = Bry_.new_a7("wav"), Bry_opus = Bry_.new_a7("opus")
 	;
 	public static final    byte[][] Bry__ary = new byte[][]
 	{ Bry_.Empty, Bry_png, Bry_jpg, Bry_jpeg
@@ -36,7 +36,7 @@ public class Xof_ext_ {
 	, Bry_svg, Bry_djvu, Bry_pdf
 	, Bry_mid, Bry_ogg, Bry_oga
 	, Bry_ogv, Bry_webm, Bry_flac
-	, Bry_bmp, Bry_xcf, Bry_wav
+	, Bry_bmp, Bry_xcf, Bry_wav, Bry_opus
 	};
 	public static final    byte[][] Mime_type__ary = new byte[][] 
 	{ Bry_.new_a7("application/octet-stream"), Bry_.new_a7("image/png"), Bry_.new_a7("image/jpg"), Bry_.new_a7("image/jpeg")
@@ -44,7 +44,7 @@ public class Xof_ext_ {
 	, Bry_.new_a7("image/svg+xml"), Bry_.new_a7("image/x.djvu"), Bry_.new_a7("application/pdf")
 	, Bry_.new_a7("application/x-midi"), Bry_.new_a7("video/ogg"), Bry_.new_a7("audio/oga")
 	, Bry_.new_a7("video/ogg"), Bry_.new_a7("video/webm"), Bry_.new_a7("audio/flac")
-	, Bry_.new_a7("image/bmp"), Bry_.new_a7("image/xcf"), Bry_.new_a7("audio/x-wav")
+	, Bry_.new_a7("image/bmp"), Bry_.new_a7("image/xcf"), Bry_.new_a7("audio/x-wav"), Bry_.new_a7("audio/opus")
 	};
 	private static final    Hash_adp id_hash = id_hash_new_();
 	private static Hash_adp id_hash_new_() {
@@ -55,6 +55,7 @@ public class Xof_ext_ {
 		id_hash_new_(rv, Bry_mid, Id_mid);		id_hash_new_(rv, Bry_ogg, Id_ogg);		id_hash_new_(rv, Bry_oga, Id_oga);
 		id_hash_new_(rv, Bry_ogv, Id_ogv);		id_hash_new_(rv, Bry_webm, Id_webm);	id_hash_new_(rv, Bry_flac, Id_flac);
 		id_hash_new_(rv, Bry_bmp, Id_bmp);		id_hash_new_(rv, Bry_xcf, Id_xcf);		id_hash_new_(rv, Bry_wav, Id_wav);
+		id_hash_new_(rv, Bry_opus, Id_opus);
 		return rv;
 	}
 	private static void id_hash_new_(Hash_adp hash, byte[] key, int val) {hash.Add(key, new Int_obj_val(val));}
@@ -66,6 +67,7 @@ public class Xof_ext_ {
 	.Add_bry_bry(Bry_mid).Add_bry_bry(Bry_ogg).Add_bry_bry(Bry_oga)
 	.Add_bry_bry(Bry_ogv).Add_bry_bry(Bry_webm).Add_bry_bry(Bry_flac)
 	.Add_bry_bry(Bry_bmp).Add_bry_bry(Bry_xcf).Add_bry_bry(Bry_wav)
+	.Add_bry_bry(Bry_opus)
 	;
 	private static final    Xof_ext[] Ary = new Xof_ext[Id__max];
 
@@ -160,16 +162,29 @@ public class Xof_ext_ {
 	}
 	public static boolean Id_is_audio(int id) {
 		switch (id) {
-			case Xof_ext_.Id_mid: case Xof_ext_.Id_oga: case Xof_ext_.Id_flac: case Xof_ext_.Id_ogg: case Xof_ext_.Id_wav: return true;
-			default: return false;
+			case Xof_ext_.Id_mid:
+			case Xof_ext_.Id_oga:
+			case Xof_ext_.Id_flac:
+			case Xof_ext_.Id_ogg:
+			case Xof_ext_.Id_wav:
+			case Xof_ext_.Id_opus:
+				return true;
+			default:
+				return false;
 		}
 	}
 	public static boolean Id_is_video(int id) {return id == Xof_ext_.Id_ogv || id == Xof_ext_.Id_ogg || id == Xof_ext_.Id_webm;}	// NOTE: ogg can be vid; PAGE:en.w:Comet; Encke_tail_rip_off.ogg
 	public static boolean Id_is_video_strict(int id) {return id == Xof_ext_.Id_ogv || id == Xof_ext_.Id_webm;}	// NOTE: ogg can be aud / vid; PAGE:en.w:Comet; Encke_tail_rip_off.ogg
 	public static boolean Id_is_audio_strict(int id) {	// same as above, but deliberately exclude ambiguous ogg
 		switch (id) {
-			case Xof_ext_.Id_mid: case Xof_ext_.Id_oga: case Xof_ext_.Id_flac: case Xof_ext_.Id_wav: return true;
-			default: return false;
+			case Xof_ext_.Id_mid:
+			case Xof_ext_.Id_oga:
+			case Xof_ext_.Id_flac:
+			case Xof_ext_.Id_wav:
+			case Xof_ext_.Id_opus: 
+				return true;
+			default:
+				return false;
 		}
 	}
 	public static boolean Id_is_media(int id) {return Id_is_audio(id) || Id_is_video(id);}

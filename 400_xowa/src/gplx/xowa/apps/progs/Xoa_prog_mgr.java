@@ -76,7 +76,7 @@ public class Xoa_prog_mgr implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_convert_dvi_to_png))			return app_convert_dvi_to_png;
 
 		else if (String_.Eq(k, Cfg__web))						{Init_cmd(m.ReadStr("v"), app_web);}
-		else if (String_.Eq(k, Cfg__media))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_ogv, Xof_ext_.Id_webm, Xof_ext_.Id_flac, Xof_ext_.Id_ogg, Xof_ext_.Id_oga, Xof_ext_.Id_mid, Xof_ext_.Id_wav);}
+		else if (String_.Eq(k, Cfg__media))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_ogv, Xof_ext_.Id_webm, Xof_ext_.Id_flac, Xof_ext_.Id_ogg, Xof_ext_.Id_oga, Xof_ext_.Id_mid, Xof_ext_.Id_wav, Xof_ext_.Id_opus);}
 		else if (String_.Eq(k, Cfg__image))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_png, Xof_ext_.Id_jpg, Xof_ext_.Id_jpeg, Xof_ext_.Id_gif, Xof_ext_.Id_tif, Xof_ext_.Id_tiff, Xof_ext_.Id_bmp);}
 		else if (String_.Eq(k, Cfg__svg))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_svg);}
 		else if (String_.Eq(k, Cfg__pdf))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_pdf);}

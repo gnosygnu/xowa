@@ -47,6 +47,7 @@ public class Xof_mime_minor_ {
 		mime_hash_itm_(rv, Mime_bmp_2			, Xof_ext_.Id_bmp);
 		mime_hash_itm_(rv, Mime_xcf				, Xof_ext_.Id_xcf);
 		mime_hash_itm_(rv, Xof_ext_.Bry_wav		, Xof_ext_.Id_wav);
+		mime_hash_itm_(rv, Xof_ext_.Bry_opus	, Xof_ext_.Id_opus);
 		return rv;
 	}
 	private static void mime_hash_itm_(Hash_adp hash, byte[] key, int val) {hash.Add(key, new Int_obj_val(val));}
