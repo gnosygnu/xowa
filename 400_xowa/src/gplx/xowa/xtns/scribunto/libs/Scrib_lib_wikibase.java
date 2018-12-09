@@ -188,9 +188,10 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 
 		Wbase_prop_mgr prop_mgr = core.Wiki().Appe().Wiki_mgr().Wdata_mgr().Prop_mgr();
 		Wbase_claim_base[] statements = this.entity_accessor.getEntityStatements(prefixedEntityId, propertyId, rank);
-		if (statements == null)
-			return rslt.Init_null();
-		return rslt.Init_obj(Scrib_lib_wikibase_srl.Srl_claims_prop_ary(prop_mgr, String_.new_u8(propertyId), statements, 1));
+		if (statements == null) return rslt.Init_null();
+
+		String propertyIdAsString = String_.new_u8(propertyId);
+		return rslt.Init_obj(Keyval_.new_(propertyIdAsString, Scrib_lib_wikibase_srl.Srl_claims_prop_ary(prop_mgr, propertyIdAsString, statements, 1)));
 	}
 	public boolean RenderSnak(Scrib_proc_args args, Scrib_proc_rslt rslt)	{
 		Xowe_wiki wiki = core.Wiki();

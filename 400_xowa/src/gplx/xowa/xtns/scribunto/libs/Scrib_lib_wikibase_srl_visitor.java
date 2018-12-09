@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
-class Scrib_lib_wikibase_srl_visitor implements Wbase_claim_visitor {
+public class Scrib_lib_wikibase_srl_visitor implements Wbase_claim_visitor {
 	public Keyval[] Rv() {return rv;} Keyval[] rv;
 	public void Visit_str(Wbase_claim_string itm) {
 		rv = new Keyval[2];

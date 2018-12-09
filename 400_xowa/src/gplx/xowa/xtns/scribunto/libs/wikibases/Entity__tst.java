@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.libs.wikibases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*;
 import org.junit.*;
 import gplx.xowa.xtns.wbases.*;
-public class Scrib_lib_wikibase_entity_tst {
+public class Entity__tst {
 	@Before public void init() {
 		fxt.Clear_for_lib();
 		lib = fxt.Core().Lib_wikibase_entity().Init();

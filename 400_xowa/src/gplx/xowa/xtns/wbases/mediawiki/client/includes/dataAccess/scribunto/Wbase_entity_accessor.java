@@ -55,19 +55,31 @@ public class Wbase_entity_accessor {
 		Wbase_claim_grp statements = entity.Claim_list_get(propertyId);
 		if (statements == null)
 			return null;
+
 		int statements_len = statements.Len();
 		for (int i = 0; i < statements_len; i++) {
-			Wbase_claim_base statement = statements.Get_at(0);
+			Wbase_claim_base statement = statements.Get_at(i);
 			if (	selected_rank == ID_ALL 
 				||	(selected_rank == ID_BEST && statement.Rank_tid() == Wbase_claim_rank_.Tid__preferred)
 				) {
 				rv.Add(statement);
 			}
 		}
+
+		// no preferred exists; add normal
+		if (rv.Len() == 0 && selected_rank == ID_BEST) {
+			for (int i = 0; i < statements_len; i++) {
+				Wbase_claim_base statement = statements.Get_at(i);
+				if (statement.Rank_tid() == Wbase_claim_rank_.Tid__normal) {
+					rv.Add(statement);
+				}
+			}
+		}
+
 //			$serialization = $this->newClientStatementListSerializer()->serialize( $statements );
 //			$this->renumber( $serialization );
 //			return $serialization;
-		return (Wbase_claim_base[])rv.To_ary(Wbase_claim_base.class);
+		return rv.Len() == 0 ? null : (Wbase_claim_base[])rv.To_ary(Wbase_claim_base.class);
 	}
 
 	private static final int ID_NULL = 0, ID_BEST = 1, ID_ALL = 2;

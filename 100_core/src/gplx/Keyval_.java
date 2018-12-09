@@ -67,48 +67,55 @@ public class Keyval_ {
 	}
 	public static String Ary__to_str__nest(Keyval... ary) {
 		Bry_bfr bfr = Bry_bfr_.New();
-		Ary__to_str__nest__obj(bfr, 0, true, ary);
+		Ary__to_str__nest__ary(bfr, 0, true, ary);
 		return bfr.To_str_and_clear();
 	}
-	private static void Ary__to_str__nest__obj(Bry_bfr bfr, int indent, boolean is_kv, Object[] ary) {
+	private static void Ary__to_str__nest__ary(Bry_bfr bfr, int indent, boolean is_kv, Object[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
-			Object val = ary[i];
-			if (indent > 0)
-				bfr.Add_byte_repeat(Byte_ascii.Space, indent * 2);					// add indent; EX: "  "
-			String key = null;
-			if (is_kv) {
-				Keyval kv = (Keyval)val;
-				key = Object_.Xto_str_strict_or_empty(kv.Key());
-				val = kv.Val();
-			}
-			else {
-				key = Int_.To_str(i + 1);
-			}
-			bfr.Add_str_u8(key).Add_byte_eq();										// add key + eq : "key="
-			if (val == null)
-				bfr.Add_str_a7(String_.Null_mark);
-			else {
-				Class<?> val_type = Type_.Type_by_obj(val);
-				if		(Type_.Eq(val_type, Keyval[].class)) {					// val is Keyval[]; recurse
-					bfr.Add_byte_nl();												// add nl		: "\n"
-					Ary__to_str__nest__obj(bfr, indent + 1, true, (Keyval[])val);
-					continue;														// don't add \n below
-				}
-				else if (Type_.Eq(val_type, Object[].class)) {					// val is Object[]
-					bfr.Add_byte_nl();
-					Ary__to_str__nest__obj(bfr, indent + 1, false, (Object[])val);
-					continue;														// don't add \n below
-				}
-				else if (Type_.Eq(val_type, Bool_.Cls_ref_type)) {					// val is boolean
-					boolean val_as_bool = Bool_.Cast(val);
-					bfr.Add(val_as_bool ? Bool_.True_bry : Bool_.False_bry);		// add "true" or "false"; don't call toString
-				}
-				else
-					bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(val));		// call toString()
-			}
-			bfr.Add_byte_nl();
+			Ary__to_str__nest__val(bfr, indent, is_kv, i, ary[i]);
 		}
+	}
+	private static void Ary__to_str__nest__val(Bry_bfr bfr, int indent, boolean is_kv, int idx, Object val) {
+		if (indent > 0)
+			bfr.Add_byte_repeat(Byte_ascii.Space, indent * 2);                  // add indent; EX: "  "
+		String key = null;
+		if (is_kv) {
+			Keyval kv = (Keyval)val;
+			key = Object_.Xto_str_strict_or_empty(kv.Key());
+			val = kv.Val();
+		}
+		else {
+			key = Int_.To_str(idx + 1);
+		}
+		bfr.Add_str_u8(key).Add_byte_eq();                                      // add key + eq : "key="
+		if (val == null)
+			bfr.Add_str_a7(String_.Null_mark);
+		else {
+			Class<?> val_type = Type_.Type_by_obj(val);
+			if		(Type_.Eq(val_type, Keyval[].class)) {                    // val is Keyval[]; recurse
+				bfr.Add_byte_nl();                                              // add nl: "\n"
+				Ary__to_str__nest__ary(bfr, indent + 1, true, (Keyval[])val);
+				return;                                                         // don't add \n below
+			}
+			else if (Type_.Eq(val_type, Keyval.class)) {                      // val is Keyval; recurse
+				bfr.Add_byte_nl();                                              // add nl: "\n"
+				Ary__to_str__nest__val(bfr, indent + 1, true, 1, (Keyval)val);
+				return;                                                         // don't add \n below
+			}
+			else if (Type_.Eq(val_type, Object[].class)) {                    // val is Object[]
+				bfr.Add_byte_nl();
+				Ary__to_str__nest__ary(bfr, indent + 1, false, (Object[])val);
+				return;                                                         // don't add \n below
+			}
+			else if (Type_.Eq(val_type, Bool_.Cls_ref_type)) {                  // val is boolean
+				boolean val_as_bool = Bool_.Cast(val);
+				bfr.Add(val_as_bool ? Bool_.True_bry : Bool_.False_bry);        // add "true" or "false"; don't call toString
+			}
+			else
+				bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(val));       // call toString()
+		}
+		bfr.Add_byte_nl();
 	}
 	public static Keyval as_(Object obj) {return obj instanceof Keyval ? (Keyval)obj : null;}
 	public static Keyval new_(String key)				{return new Keyval(Type_ids_.Id__str, key, key);}

@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.libs.wikibases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*;
 import org.junit.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 import gplx.xowa.xtns.wbases.claims.enums.*;
-public class Scrib_lib_wikibase_tst {
+public class Basic__tst {
 	private final    Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	private final    Wdata_wiki_mgr_fxt wdata_fxt = new Wdata_wiki_mgr_fxt();
 	@Before public void init() {
@@ -163,27 +163,6 @@ public class Scrib_lib_wikibase_tst {
 	@Test  public void RenderSnak__monolingual() {
 		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, wdata_fxt.Make_claim_monolingual(3, "en", "abc_en"));
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "abc_en");
-	}
-	@Test  public void GetEntityStatements__best() {
-		// wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("Q2").Add_claims(wdata_fxt.Make_claim_string(3, "P3_val")).Xto_wdoc());
-		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2")
-			.Add_claims
-			( wdata_fxt.Make_claim_string(3, "P3_val").Rank_tid_(Wbase_claim_rank_.Tid__preferred)
-			).Xto_wdoc());
-		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntityStatements, Object_.Ary("q2", "P3", "best"), String_.Concat_lines_nl_skip_last
-		( "1="
-		, "  1="
-		, "    id=P3"
-		, "    mainsnak="
-		, "      datavalue="
-		, "        type=string"
-		, "        value=P3_val"
-		, "      property=P3"
-		, "      snaktype=value"
-		, "      datatype=string"
-		, "    rank=preferred"
-		, "    type=statement"
-		));
 	}
 	@Test  public void GetEntityUrl() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityUrl, Object_.Ary("Q2"							), "https://www.wikidata.org/wiki/Special:EntityPage/Q2");
