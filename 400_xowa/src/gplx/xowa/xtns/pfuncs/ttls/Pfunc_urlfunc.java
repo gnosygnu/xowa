@@ -16,8 +16,16 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.htmls.hrefs.*;
+import gplx.xowa.wikis.domains.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
-public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
+/*  
+NOTE.1: This is a liberal translation of /includes/parser/CoreParserFunctions.php
+* CoreParserFunctions calls Title functions directly whereas this embeds a lot of logic here
+
+NOTE.2: Both fullurle: and localurle: performed additional character escaping on the resulting link, but no example is known where that still has any additional effect.
+REF: http://meta.wikimedia.org/wiki/Help:Parser_function
+*/
+public class Pfunc_urlfunc extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] argx = Eval_argx(ctx, src, caller, self); if (argx.length == 0) return;
@@ -32,12 +40,15 @@ public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 		Xow_xwiki_itm xwiki = ttl.Wik_itm();
 		if (xwiki != null) {	// xwiki exists; add as //commons.wikimedia.org/wiki/A#b?c=d
 			if (tid == Tid_canonical)
-				trg.Add(Xoh_href_.Bry__https);									//	"https://"
+				trg.Add(Xoh_href_.Bry__https);                                  // "https://"
 			else
-				trg.Add(gplx.core.net.Gfo_protocol_itm.Bry_relative);			//	"//"
-			trg.Add(xwiki.Domain_bry())											//  "commons.wikimedia.org"
-				.Add(Xoh_href_.Bry__wiki)										//	"/wiki/"
-				.Add_mid(ttl_ary, xwiki.Key_bry().length + 1, ttl_ary.length);	//	"A#b?c=d"; +1 for colon after "commons:"; NOTE: ugly way of getting rest of url, but ttl currently does not have Full_wo_wiki
+				trg.Add(gplx.core.net.Gfo_protocol_itm.Bry_relative);           // "//"
+			trg.Add(xwiki.Domain_bry());                                        // "commons.wikimedia.org"
+			if (xwiki.Domain_tid() == Xow_domain_tid_.Tid__other)               // if other, only add /; ISSUE#:277 PAGE:en.w:Scafell_Pike DATE:2018-12-09
+				trg.Add_byte(Byte_ascii.Slash);
+			else
+				trg.Add(Xoh_href_.Bry__wiki);                                   // "/wiki/"
+			trg.Add_mid(ttl_ary, xwiki.Key_bry().length + 1, ttl_ary.length);   // "A#b?c=d"; +1 for colon after "commons:"; NOTE: ugly way of getting rest of url, but ttl currently does not have Full_wo_wiki
 		}
 		else {
 			Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
@@ -60,7 +71,3 @@ public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 	public static final byte Tid_local = 0, Tid_full = 1, Tid_canonical = 2;
 	public static final    byte[] Bry_relative_url = Bry_.new_a7("//");
 }	
-/*
-NOTE: Both fullurle: and localurle: performed additional character escaping on the resulting link, but no example is known where that still has any additional effect.
-http://meta.wikimedia.org/wiki/Help:Parser_function
-*/

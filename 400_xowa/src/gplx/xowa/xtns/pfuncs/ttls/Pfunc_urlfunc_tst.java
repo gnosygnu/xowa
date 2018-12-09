@@ -37,4 +37,8 @@ public class Pfunc_urlfunc_tst {
 		fxt.Wiki().Xwiki_mgr().Add_by_atrs("commons", "commons.wikimedia.org");
 		fxt.Reset().Test_parse_tmpl_str_test("{{fullurl:commons:A|key=val}}"	, "{{test}}", "//commons.wikimedia.org/wiki/A?key=val");
 	}
+	@Test   public void Xwiki_other()	{ // links to non-WMF sites should not add '/wiki/' ISSUE#:277 PAGE:en.w:Scafell_Pike DATE:2018-12-09
+		fxt.Wiki().Xwiki_mgr().Add_by_atrs("toollabs", "tools.wmflabs.org");
+		fxt.Reset().Test_parse_tmpl_str_test("{{fullurl:toollabs:A|pagename=B}}", "{{test}}", "//tools.wmflabs.org/A?pagename=B");
+	}
 }
