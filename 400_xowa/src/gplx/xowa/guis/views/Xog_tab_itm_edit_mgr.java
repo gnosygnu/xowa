@@ -132,6 +132,7 @@ public class Xog_tab_itm_edit_mgr {
 		ctx.Defn_trace_(Xot_defn_trace_dbg.Instance);
 		Xoa_ttl ttl = page.Ttl();
 		Xoae_page new_page = Xoae_page.New(wiki, ttl);
+		new_page.Url_(page.Url()); // NOTE: must set Url explicitly, else new_page will not have same url_args as old_page; broken when going to action=edit; DATE:2018-12-09
 		byte[] data = tab.Html_itm().Get_elem_value_for_edit_box_as_bry();
 		new_page.Db().Text().Text_bry_(data);
 		wiki.Parser_mgr().Parse(new_page, true);
