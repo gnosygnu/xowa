@@ -131,8 +131,9 @@ public class Scrib_lib_language implements Scrib_lib {
 	}
 	public boolean FetchLanguageName(Scrib_proc_args args, Scrib_proc_rslt rslt) {	
 		String lang_code = args.Pull_str(0);
-		byte[] inLanguage = args.Pull_bry(1);
-		String rv = core.App().Lang_mgr().Name_mgr().fetchLanguageName(lang_code, inLanguage, null);
+		String inLanguage = args.Cast_str_or_null(1);
+		String include = args.Cast_str_or(2, "mw");
+		String rv = core.App().Lang_mgr().Name_mgr().fetchLanguageName(lang_code, inLanguage, include);
 		return rslt.Init_obj(rv);
 		/*
 		byte[] lang_code = args.Pull_bry(0);

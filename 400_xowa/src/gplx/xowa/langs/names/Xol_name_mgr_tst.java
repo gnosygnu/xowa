@@ -79,7 +79,7 @@ class Xol_name_mgr_fxt {
 		, Ordered_hash lang_names
 		, Ordered_hash lang_files
 		, Ordered_hash expd_langs) {
-		Ordered_hash actl_langs = Xol_name_mgr.fetchLanguageNamesUncached(Bry_.new_u8(inLanguage), include, cldr_names, lang_names, lang_files);
+		Ordered_hash actl_langs = Xol_name_mgr.fetchLanguageNamesUncached(inLanguage, include, cldr_names, lang_names, lang_files);
 		Gftest.Eq__ary(To_str_ary(expd_langs), To_str_ary(actl_langs));
 	}
 	private static String[] Add_suffix(String[] ary, String val_suffix) {

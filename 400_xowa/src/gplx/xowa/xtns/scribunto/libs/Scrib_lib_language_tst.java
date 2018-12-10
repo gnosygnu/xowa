@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
+import gplx.langs.jsons.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.numbers.*;
 public class Scrib_lib_language_tst {
 	@Before public void init() {
@@ -42,6 +43,21 @@ public class Scrib_lib_language_tst {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_language.Invk_isValidBuiltInCode, Object_.Ary("e n"), false);
 	}
 	@Test  public void FetchLanguageName() {
+		Io_mgr.Instance.SaveFilStr("mem/xowa/bin/any/xowa/cfg/lang/data/names.json", Json_doc.Make_str_by_apos
+		( "["
+		, "  {"
+		, "    'code':'en'"
+		, "  , 'name':'English'"
+		, "  , 'note':'en_note'"
+		, "  }"
+		, ", {"
+		, "    'code':'fr'"
+		, "  , 'name':'Français'"
+		, "  , 'note':'fr_note'"
+		, "  }"
+		, "]" 
+
+		));		
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_fetchLanguageName, Object_.Ary("en"), "English");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_fetchLanguageName, Object_.Ary("fr"), "Français");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_fetchLanguageName, Object_.Ary("qz"), "");

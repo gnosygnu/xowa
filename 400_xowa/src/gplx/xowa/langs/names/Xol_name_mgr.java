@@ -36,10 +36,10 @@ public class Xol_name_mgr {
 	* @return String Language name or empty
 	* @since 1.20
 	*/
-	public String fetchLanguageName(String code, byte[] inLanguage, byte[] include_bry) {
+	public String fetchLanguageName(String code, String inLanguage, String include) {
 		code = String_.Lower(code);
-		if (include_bry == null) include_bry = fetchLanguageNamesUncached__all__key;
-		Ordered_hash array = fetchLanguageNames(inLanguage, include_bry);
+		if (include == null) include = "all";
+		Ordered_hash array = fetchLanguageNames(inLanguage, include);
 		Keyval rv = (Keyval)array.Get_by(code);
 		return rv == null ? "" : rv.Val_to_str_or_null();
 	}
@@ -59,23 +59,17 @@ public class Xol_name_mgr {
 	private Ordered_hash lang_names_cached;
 	private Ordered_hash lang_files_cached;
 
-	private static final    byte[] Null_bry = Bry_.new_a7("null");
-	public Ordered_hash fetchLanguageNames(byte[] inLanguage, byte[] include_bry) {
-		byte[] cacheKey =  inLanguage == null ? Null_bry : inLanguage;
-		cacheKey = Bry_.Add(cacheKey, Byte_ascii.Colon_bry, include_bry);
+	public Ordered_hash fetchLanguageNames(String inLanguage, String include_str) {
+		if (inLanguage == null) inLanguage = "null";
+		String cacheKey = inLanguage + ":" + include_str;
 		if (languageNameCache == null)
-			languageNameCache = Ordered_hash_.New_bry();
+			languageNameCache = Ordered_hash_.New();
 		Ordered_hash ret = (Ordered_hash)languageNameCache.Get_by(cacheKey);
 		if (ret == null) {
-			Byte_obj_val include_byte = (Byte_obj_val)fetchLanguageNamesUncachedEnum.Get_by(include_bry);
+			Byte_obj_val include_byte = (Byte_obj_val)fetchLanguageNamesUncachedEnum.Get_by(include_str);
 			byte include = include_byte == null ? fetchLanguageNamesUncached__all : include_byte.Val();
 
-			Cldr_name_file cldr_file = cldr_loader.Load_or_null(String_.new_u8(inLanguage));
-			if (cldr_file == null) {
-				ret = Ordered_hash_.New();
-				languageNameCache.Add(cacheKey, ret);
-				return ret;
-			}
+			Cldr_name_file cldr_file = cldr_loader.Load_or_empty(inLanguage);
 
 			if (lang_names_cached == null)
 				lang_names_cached = name_loader.Load_as_hash();
@@ -154,14 +148,13 @@ public class Xol_name_mgr {
 		, fetchLanguageNamesUncached__all     = 1 // cldr + Names.php
 		, fetchLanguageNamesUncached__mwFile  = 2 // *.json|*.php
 		;
-	private static final    byte[] fetchLanguageNamesUncached__all__key = Bry_.new_a7("all");
-	private static final    Hash_adp_bry fetchLanguageNamesUncachedEnum = Hash_adp_bry.cs()
-		.Add_str_byte("mw", fetchLanguageNamesUncached__mw)
-		.Add_str_byte("all", fetchLanguageNamesUncached__all)
-		.Add_str_byte("mwFile", fetchLanguageNamesUncached__mwFile)
+	private static final    Hash_adp fetchLanguageNamesUncachedEnum = Hash_adp_.New()
+		.Add_and_more("mw"    , Byte_obj_val.new_(fetchLanguageNamesUncached__mw))
+		.Add_and_more("all"   , Byte_obj_val.new_(fetchLanguageNamesUncached__all))
+		.Add_and_more("mwFile", Byte_obj_val.new_(fetchLanguageNamesUncached__mwFile))
 		;
 	public static Ordered_hash fetchLanguageNamesUncached
-		( byte[] inLanguage, byte include
+		( String inLanguage, byte include
 		, Ordered_hash cldr_names
 		, Ordered_hash lang_names
 		, Ordered_hash lang_files
@@ -190,13 +183,12 @@ public class Xol_name_mgr {
 		// $mwNames = $wgExtraLanguageNames + MediaWiki\Languages\Data\Names::$names;
 		Ordered_hash mwNames = lang_names;
 		int mwNames_len = mwNames.Len();
-		String inLanguageStr = String_.new_u8(inLanguage);
 		for (int i = 0; i < mwNames_len; i++) {
 			Keyval mw_name = (Keyval)mwNames.Get_at(i);
 			// # - Prefer own MediaWiki native name when not using the hook
 			// # - For other mwNames just add if not added through the hook
 			String code = mw_name.Key();
-			if (String_.Eq(code, inLanguageStr) || !names.Has(code)) {
+			if (String_.Eq(code, inLanguage) || !names.Has(code)) {
 				names.Add_if_dupe_use_nth(code, Keyval_.new_(code, mw_name.Val_to_str_or_empty()));
 			}
 		}
