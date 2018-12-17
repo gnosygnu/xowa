@@ -100,6 +100,16 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 					if (end > bgn && Bry_.Eq(src, bgn, end, Xop_lnki_arg_parser.Bry_target))
 						arg_tid = Xop_lnki_arg_parser.Tid_target;
 				}
+
+				// if just "class" or "alt", treat as caption; EX:[[A|alt]] -> caption=alt x> caption=A ISSUE#:303 DATE:2018-12-16
+				switch (arg_tid) {
+					case Xop_lnki_arg_parser.Tid_class:
+					case Xop_lnki_arg_parser.Tid_alt:
+						if (!arg.KeyTkn_exists()){
+							arg_tid = Xop_lnki_arg_parser.Tid_caption;
+						}
+						break;
+				}
 				switch (arg_tid) {
 					case Xop_lnki_arg_parser.Tid_none:			lnki.Align_h_(Xop_lnki_type.Id_none); break;
 					case Xop_lnki_arg_parser.Tid_border:		lnki.Border_(Bool_.Y_byte); break;

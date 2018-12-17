@@ -312,4 +312,9 @@ public class Xop_lnki_wkr__basic_tst {
 		fxt.Test_parse_page_all_str("[[Src]]"		, "<a href=\"/wiki/Src\" class=\"xowa-visited\">Src</a>");	// show [[Src]] as visited since it exists in history
 		fxt.Test_parse_page_all_str("[[Other]]"		, "<a href=\"/wiki/Other\">Other</a>");						// show other pages as not visited
 	}
+	@Test   public void Caption__outlier() {
+		fxt.Test_parse_page_all_str("[[A|class]]", "<a href=\"/wiki/A\">class</a>");
+		fxt.Test_parse_page_all_str("[[A|alt]]", "<a href=\"/wiki/A\">alt</a>");
+		fxt.Test_parse_page_all_str("[[A|alt|a|b]]", "<a href=\"/wiki/A\">alt|a|b</a>");
+	}
 }
