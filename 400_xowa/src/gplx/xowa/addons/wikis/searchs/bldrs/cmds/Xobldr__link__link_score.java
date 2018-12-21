@@ -176,7 +176,6 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__page_rank_enabled_))		page_rank_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk__delete_plink_db_))			delete_plink_db = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk__delete_plink_db_))			delete_plink_db = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk__score_adjustment_mgr))		return score_adjustment_mgr;
 		else													return Gfo_invk_.Rv_unhandled;
 		return this;
