@@ -16,1074 +16,1108 @@
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
-    
     <div id='xocfg_body'>
-      <!-- TEXT:err_msg -->
-      <div id='xocfg_err'>
-      </div>
-      <div>
-        <!-- BTN:info -->
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
-         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
-          <option value='xowa.app.security'>
-            App - Security
-          </option>
-          <option value='xowa.app.startup'>
-            App - Startup
-          </option>
-          <option value='xowa.app.update'>
-            App - Update
-          </option>
-          <option value='xowa.gui.general'>
-            Gui - General
-          </option>
-          <option value='xowa.gui.tabs'>
-            Gui - Tabs
-          </option>
-          <option value='xowa.gui.url_bar'>
-            Gui - Address bar
-          </option>
-          <option value='xowa.gui.menus'>
-            Gui - Menus
-          </option>
-          <option value='xowa.gui.shortcuts'>
-            Gui - Shortcuts
-          </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Nightmode
-          </option>
-          <option value='xowa.wiki.hdumps'>
-            Wiki - HTML Databases
-          </option>
-          <option value='xowa.wiki.edit'>
-            Wiki - Editing
-          </option>
-          <option value='xowa.bldr.general'>
-            Import - General
-          </option>
-          <option value='xowa.bldr.db'>
-            Import - Database
-          </option>
-          <option value='xowa.bldr.page_sync'>
-            Import - Page sync
-          </option>
-          <option value='xowa.bldr.dansguardian'>
-            Import - Dansguardian
-          </option>
-          <option value='xowa.html.css'>
-            HTML - CSS
-          </option>
-          <option value='xowa.html.page'>
-            HTML - Page
-          </option>
-          <option value='xowa.html.tidy'>
-            HTML - Tidy
-          </option>
-          <option value='xowa.html.scripting'>
-            HTML - Scripting
-          </option>
-          <option value='xowa.files.general'>
-            Files - General
-          </option>
-          <option value='xowa.files.apps'>
-            Files - Apps
-          </option>
-          <option value='xowa.addon.search'>
-            Addon - Search
-          </option>
-          <option value='xowa.addon.fulltext_search'>
-            Addon - Full-text search
-          </option>
-          <option value='xowa.addon.category'>
-            Addon - Category
-          </option>
-          <option value='xowa.addon.http_server'>
-            Addon - HTTP Server
-          </option>
-          <option value='xowa.addon.scribunto'>
-            Addon - Scribunto
-          </option>
-          <option value='xowa.addon.math'>
-            Addon - Math
-          </option>
-          <option value='xowa.addon.score'>
-            Addon - Score
-          </option>
-          <option value='xowa.addon.popups' selected='selected'>
-            Addon - Popups
-          </option>
-          <option value='xowa.addon.wikibase'>
-            Addon - Wikidata
-          </option>
-          <option value='xowa.dev.general'>
-            Dev - General
-          </option>
-        </select> <!-- LINK:cfg_link -->
-         
-        <div style='float:right;margin:2px 7px;'>
-          <a id='options_lnk'>options link</a>
-        </div>
-      </div>
-      <div id='cfg_grps'>
-        <!-- TEXT:page_help -->
-        <div>
-          <p id='page_help_para'>
-          </p>
-          <p>
-            This page provides options for Popups.
-          </p>
-          <ul>
-            <li>
-              You can test your changes by reloading this page and hovering over this link: <a tabindex="-1" href="/wiki/Main_Page" id="xolnki_37" title="Main Page" class="xowa-visited">XOWA Main Page</a>.
-            </li>
-            <li>
-              For more infomation, visit the <a tabindex="-1" href="/wiki/App/Xtn/Html/Popups" id="xolnki_38" title="App/Xtn/Html/Popups">Popups help page</a>
-            </li>
-            <li>
-              Note that changes will apply automatically to <b>new</b> tabs and <b>new</b> pages. However, any <b>currently loaded</b> pages must be reloaded to pick up the new changes.
-            </li>
-          </ul>
-        </div>
-        <h2>
-          General
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.enabled")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.enabled__name' class='xocfg_itm_name'>
-            Enabled
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.enabled" data-xocfg-key="xowa.addon.popups.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.enabled__key_box' value='xowa.addon.popups.enabled'> <input type='hidden' id='xowa.addon.popups.enabled__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.enabled_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.enabled_help_msg' class='xohelp_msg'>
-            <p>
-              Controls popup functionality
-            </p>
+  <!-- TEXT:err_msg -->
+  <div id='xocfg_err'></div>
+  
+  <div>
+    <!-- BTN:info -->
+    <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span>
+    
+    <!-- COMBO:cfg_grps -->
+    <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+      
+      <option value='xowa.app.security' >App - Security</option>
+      
+      <option value='xowa.app.startup' >App - Startup</option>
+      
+      <option value='xowa.app.update' >App - Update</option>
+      
+      <option value='xowa.gui.general' >Gui - General</option>
+      
+      <option value='xowa.gui.tabs' >Gui - Tabs</option>
+      
+      <option value='xowa.gui.url_bar' >Gui - Address bar</option>
+      
+      <option value='xowa.gui.menus' >Gui - Menus</option>
+      
+      <option value='xowa.gui.shortcuts' >Gui - Shortcuts</option>
+      
+      <option value='xowa.gui.nightmode' >Gui - Nightmode</option>
+      
+      <option value='xowa.wiki.hdumps' >Wiki - HTML Databases</option>
+      
+      <option value='xowa.wiki.edit' >Wiki - Editing</option>
+      
+      <option value='xowa.bldr.general' >Import - General</option>
+      
+      <option value='xowa.bldr.db' >Import - Database</option>
+      
+      <option value='xowa.bldr.page_sync' >Import - Page sync</option>
+      
+      <option value='xowa.bldr.dansguardian' >Import - Dansguardian</option>
+      
+      <option value='xowa.html.css' >HTML - CSS</option>
+      
+      <option value='xowa.html.page' >HTML - Page</option>
+      
+      <option value='xowa.html.tidy' >HTML - Tidy</option>
+      
+      <option value='xowa.html.scripting' >HTML - Scripting</option>
+      
+      <option value='xowa.files.general' >Files - General</option>
+      
+      <option value='xowa.files.apps' >Files - Apps</option>
+      
+      <option value='xowa.addon.search' >Addon - Search</option>
+      
+      <option value='xowa.addon.fulltext_search' >Addon - Full-text search</option>
+      
+      <option value='xowa.addon.category' >Addon - Category</option>
+      
+      <option value='xowa.addon.http_server' >Addon - HTTP Server</option>
+      
+      <option value='xowa.addon.scribunto' >Addon - Scribunto</option>
+      
+      <option value='xowa.addon.math' >Addon - Math</option>
+      
+      <option value='xowa.addon.score' >Addon - Score</option>
+      
+      <option value='xowa.addon.popups'  selected='selected'>Addon - Popups</option>
+      
+      <option value='xowa.addon.wikibase' >Addon - Wikidata</option>
+      
+      <option value='xowa.dev.general' >Dev - General</option>
+      
+    </select>
+    
+    <!-- LINK:cfg_link -->
+    
+    <div style='float:right;margin:2px 7px;'>
+      <a id='options_lnk'>options link</a>
+    </div>
+    
+  </div>
+  
+
+<div id='cfg_grps'>
+  <!-- TEXT:page_help -->
+  <div>
+    <p id='page_help_para'><p>This page provides options for Popups.
+</p>
+
+<ul>
+  <li> You can test your changes by reloading this page and hovering over this link: <a href="/wiki/Main_Page" id="xolnki_37" title="Main Page" class="xowa-visited" tabindex="-1">XOWA Main Page</a>.
+  </li>
+  <li> For more infomation, visit the <a href="/wiki/App/Xtn/Html/Popups" id="xolnki_38" title="App/Xtn/Html/Popups" tabindex="-1">Popups help page</a>
+  </li>
+  <li> Note that changes will apply automatically to <b>new</b> tabs and <b>new</b> pages. However, any <b>currently loaded</b> pages must be reloaded to pick up the new changes.
+  </li>
+</ul>
+</p>
+  </div>
+
+  <h2>General</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.enabled")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.enabled__name' class='xocfg_itm_name'>Enabled</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.enabled" data-xocfg-key="xowa.addon.popups.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.enabled__key_box' value='xowa.addon.popups.enabled'></input>
+    <input type='hidden' id='xowa.addon.popups.enabled__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.enabled_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.enabled_help_msg' class='xohelp_msg'><p>Controls popup functionality
+</p>
+
+<ul>
+  <li> <b>checked</b> to show popups when hovering over links
+  </li>
+  <li> <b>unchecked</b> to not show popups when hovering over links
+  </li>
+</ul>
+</div>
+  </div>
+  
+
+  <h2>Content (basic)</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.show_init_word_count")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.content.show_init_word_count__name' class='xocfg_itm_name'>Number of words to show at start</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.content.show_init_word_count__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.show_init_word_count")' title="reset to &quot;128&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.content.show_init_word_count" data-xocfg-key="xowa.addon.popups.content.show_init_word_count" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="128"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.content.show_init_word_count__key_box' value='xowa.addon.popups.content.show_init_word_count'></input>
+    <input type='hidden' id='xowa.addon.popups.content.show_init_word_count__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.content.show_init_word_count_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.content.show_init_word_count_help_msg' class='xohelp_msg'><p>Number of words to show in popup<br/>
+</p>
+
+<ul>
+  <li> For slower machines, decrease the number of words to 32. Note that the number must be greater than 0.
+  </li>
+  <li> For faster machines, increase the number of words as per your liking.
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.show_more_word_count")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.content.show_more_word_count__name' class='xocfg_itm_name'>Number of words to show for "more"</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.content.show_more_word_count__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.show_more_word_count")' title="reset to &quot;192&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.content.show_more_word_count" data-xocfg-key="xowa.addon.popups.content.show_more_word_count" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="192"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.content.show_more_word_count__key_box' value='xowa.addon.popups.content.show_more_word_count'></input>
+    <input type='hidden' id='xowa.addon.popups.content.show_more_word_count__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.content.show_more_word_count_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.content.show_more_word_count_help_msg' class='xohelp_msg'><p>Number of additional words to show when &quot;show more&quot; is clicked<br/>
+</p>
+
+<ul>
+  <li> For slower machines, decrease the number of words to 32. Note that the number must be greater than 0.
+  </li>
+  <li> For faster machines, increase the number of words as per your liking.
+  </li>
+</ul>
+</div>
+  </div>
+  
+
+  <h2>Content (advanced)</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.show_all_if_less_than")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.content.show_all_if_less_than__name' class='xocfg_itm_name'>Automatically show "all" if page is less than</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.content.show_all_if_less_than__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.show_all_if_less_than")' title="reset to &quot;-1&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.content.show_all_if_less_than" data-xocfg-key="xowa.addon.popups.content.show_all_if_less_than" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="-1"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.content.show_all_if_less_than__key_box' value='xowa.addon.popups.content.show_all_if_less_than'></input>
+    <input type='hidden' id='xowa.addon.popups.content.show_all_if_less_than__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.content.show_all_if_less_than_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.content.show_all_if_less_than_help_msg' class='xohelp_msg'><p>Automatically show the entire article if article is less than these number of bytes<br/>
+This feature is intended for small articles whose entire text...
+</p>
+
+<ul>
+  <li> Will always be parsed quickly
+  </li>
+  <li> Will generally show in one window without a horizontal scroll bar.
+  </li>
+</ul>
+
+<p>It allows a complete preview of small articles without having to click &quot;more&quot; or &quot;all&quot; <br/>
+To deactivate this feature, set the number to -1
+</p>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.read_til_stop_fwd")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.content.read_til_stop_fwd__name' class='xocfg_itm_name'>Read forward til header</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.content.read_til_stop_fwd__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.read_til_stop_fwd")' title="reset to &quot;32&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.content.read_til_stop_fwd" data-xocfg-key="xowa.addon.popups.content.read_til_stop_fwd" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="32"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.content.read_til_stop_fwd__key_box' value='xowa.addon.popups.content.read_til_stop_fwd'></input>
+    <input type='hidden' id='xowa.addon.popups.content.read_til_stop_fwd__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.content.read_til_stop_fwd_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.content.read_til_stop_fwd_help_msg' class='xohelp_msg'><p>Number of extra words to read forward to look for a header<br/>
+This option tries to stop the popup text right before a header.
+</p>
+
+<ul>
+  <li> the advantage is that the popup will not stop a few words short of the header
+  </li>
+  <li> the disadvantage is that the size of the popup is irregular. i.e.: sometimes it returns 128 words, sometimes 140, sometimes 150, etc<br/>
+  </li>
+</ul>
+
+<p>To deactivate this option, set it to -1.<br/>
+Technical details follow.
+</p>
+<hr/>
+
+<p>The approach works in the following manner:
+</p>
+
+<ul>
+  <li> Reads forward an additional # of words
+  </li>
+  <li> If a header is found within the # of words, it extends the popup text to the last word before the header
+  </li>
+  <li> If a header is not found, it returns the original # of words
+  </li>
+</ul>
+
+<p>For example:
+</p>
+
+<ul>
+  <li> An article contains <code>01 02 03 04 05 06 07 ==08== 09</code>
+  </li>
+  <li> Show-init is set to 5
+  </li>
+  <li> Read-fwd is set to 4
+  </li>
+  <li> The initial number of words is read and collects 5 words: <code>01 02 03 04 05</code>
+  </li>
+  <li> The parser then reads forward 4 more words: <code>06 07 ==08== 09</code>
+  </li>
+  <li> It finds a header at <code>==08==</code>
+  </li>
+  <li> It then extends the selction to the word just before the header: <code>01 02 03 04 05 06 07</code>
+  </li>
+  <li> Note that if <code>==08==</code> was just <code>08</code>, then it would just have returned the original: <code>01 02 03 04 05</code>
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.read_til_stop_bwd")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.content.read_til_stop_bwd__name' class='xocfg_itm_name'>Read backward til header</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.content.read_til_stop_bwd__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.read_til_stop_bwd")' title="reset to &quot;16&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.content.read_til_stop_bwd" data-xocfg-key="xowa.addon.popups.content.read_til_stop_bwd" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="16"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.content.read_til_stop_bwd__key_box' value='xowa.addon.popups.content.read_til_stop_bwd'></input>
+    <input type='hidden' id='xowa.addon.popups.content.read_til_stop_bwd__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.content.read_til_stop_bwd_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.content.read_til_stop_bwd_help_msg' class='xohelp_msg'><p>Number of words to read backward to remove header at end<br/>
+This option tries to stop a header from appearing at the end of the popup text.
+</p>
+
+<ul>
+  <li> the advantage is that a popup will not end at a header with just a few words after it.
+  </li>
+  <li> the disadvantage is that sometimes the number of words returned will be less originally requested. i.e.: 128 was requested, but only 112 is returned
+  </li>
+</ul>
+
+<p>To deactivate this option, set it to -1<br/>
+Technical details follow.
+</p>
+<hr/>
+
+<p>The approach works in the following manner:
+</p>
+
+<ul>
+  <li> Reads backwards a # of words from the end of the popup
+  </li>
+  <li> If a header is found within the # of words, it truncates the output to the text before the header
+  </li>
+  <li> If a header is not found, it returns the original # of words
+  </li>
+</ul>
+
+<p>For example:
+</p>
+
+<ul>
+  <li> An article contains <code>01 02 03 04 05 06 07 ==08== 09</code>
+  </li>
+  <li> Show-init is set to 9
+  </li>
+  <li> Read-bwd is set to 4
+  </li>
+  <li> The initial number of words is read and collects 9 words: <code>01 02 03 04 05 06 07 ==08== 09</code>
+  </li>
+  <li> The parser then reads backwards 4 words: <code>06 07 ==08== 09</code>
+  </li>
+  <li> It finds a header at <code>==08==</code>
+  </li>
+  <li> It then truncates the popup to the word just before the header: <code>01 02 03 04 05 06 07</code>
+  </li>
+  <li> Note that if <code>==08==</code> was just <code>08</code>, then it would just have returned the original: <code>01 02 03 04 05 06 07 08 09</code>
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.stop_if_hdr_after")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.content.stop_if_hdr_after__name' class='xocfg_itm_name'>Stop if header is found after</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.content.stop_if_hdr_after__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.stop_if_hdr_after")' title="reset to &quot;96&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.content.stop_if_hdr_after" data-xocfg-key="xowa.addon.popups.content.stop_if_hdr_after" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="96"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.content.stop_if_hdr_after__key_box' value='xowa.addon.popups.content.stop_if_hdr_after'></input>
+    <input type='hidden' id='xowa.addon.popups.content.stop_if_hdr_after__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.content.stop_if_hdr_after_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.content.stop_if_hdr_after_help_msg' class='xohelp_msg'><p>Stops reading if a header is found after # of words<br/>
+This option will stop reading if a header is found after the # of words. It is useful for increasing the probability that a popup will end at a header.
+</p>
+
+<ul>
+  <li> the advantage is that a popup can be made to stop at a header. If you never want the popup to show a header, set the value to 1.
+  </li>
+  <li> the disadvantage is that sometimes the number of words returned will be less originally requested. i.e.: 128 was requested, but only 96 is returned
+  </li>
+</ul>
+
+<p>To deactivate this option, set it to -1. This will always show as much content as possible<br/>
+Technical details follow.
+</p>
+<hr/>
+
+<p>The following is a simplified example:
+</p>
+
+<ul>
+  <li> An article contains <code>01 02 03 04 05 ==06== 07 08 09 ==10== 11 12 13 14 15 16</code>
+  </li>
+  <li> Show-init is set to 16
+  </li>
+  <li> Stop-hdr is set to 8
+  </li>
+  <li> The parser starts reading words
+  </li>
+  <li> Once it finds a header, it checks if it is greater than stop-hdr
+
+    <ul>
+      <li> <code>==06==</code> is found, but it is less than 8. The parser continues.
+      </li>
+      <li> <code>==10==</code> is found, and it is greater than 8. The parser stops there and returns <code>01 02 03 04 05 ==06== 07 08 09</code>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Note the following variations:
+</p>
+
+<ul>
+  <li> If stop-hdr was set to 1, then it would have stopped at <code>==06==</code> and returned <code>01 02 03 04 05</code>
+  </li>
+  <li> If stop-hdr was set to 14, then it would have returned the entire text: <code>01 02 03 04 05 ==06== 07 08 09 ==10== 11 12 13 14 15 16</code>
+  </li>
+</ul>
+
+<p>Note that the the read-bwd setting is still applied after the stop-hdr setting.
+</p>
+</div>
+  </div>
+  
+
+  <h2>Window</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.show_delay")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.window.show_delay__name' class='xocfg_itm_name'>Number of milliseconds before showing popup</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.window.show_delay__undo' data-xocfg-type='int' class='xocfg_itm_delete'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.show_delay")' title="reset to &quot;600&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.window.show_delay" data-xocfg-key="xowa.addon.popups.window.show_delay" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="1000"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.window.show_delay__key_box' value='xowa.addon.popups.window.show_delay'></input>
+    <input type='hidden' id='xowa.addon.popups.window.show_delay__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.window.show_delay_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.window.show_delay_help_msg' class='xohelp_msg'><p>Number of milliseconds to wait before showing popup<br/>
+</p>
+
+<ul>
+  <li> A higher number prevents accidental hovers over links while moving the mouse / scrolling the page
+  </li>
+  <li> A lower number allows faster popup display
+  </li>
+</ul>
+
+<p>Note that popup data will only be retrieved after the popup starts showing. For example:
+</p>
+
+<ul>
+  <li> If the show delay is set to 2 seconds
+  </li>
+  <li> and a popup takes 1 second to retrieve the html
+  </li>
+  <li> then the total time till the popup is visible is 3 seconds, not 2 (2 seconds to wait before showing + 1 second to retrieve data)
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.hide_delay")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.window.hide_delay__name' class='xocfg_itm_name'>Number of milliseconds before hiding popup</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.window.hide_delay__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.hide_delay")' title="reset to &quot;400&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.window.hide_delay" data-xocfg-key="xowa.addon.popups.window.hide_delay" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="400"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.window.hide_delay__key_box' value='xowa.addon.popups.window.hide_delay'></input>
+    <input type='hidden' id='xowa.addon.popups.window.hide_delay__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.window.hide_delay_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.window.hide_delay_help_msg' class='xohelp_msg'><p>Number of milliseconds to wait before hiding popup<br/>
+</p>
+
+<ul>
+  <li> A higher number allows the popup to linger longer on the screen before disappearing.
+  </li>
+  <li> A lower number hides the popup faster
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.max_w")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.window.max_w__name' class='xocfg_itm_name'>Maximum width of window</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.window.max_w__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.max_w")' title="reset to &quot;-1&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.window.max_w" data-xocfg-key="xowa.addon.popups.window.max_w" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="-1"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.window.max_w__key_box' value='xowa.addon.popups.window.max_w'></input>
+    <input type='hidden' id='xowa.addon.popups.window.max_w__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.window.max_w_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.window.max_w_help_msg' class='xohelp_msg'><p>Maximum width of popup in pixels<br/>
+</p>
+
+<ul>
+  <li> -1 indicates no maximum width
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.max_h")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.window.max_h__name' class='xocfg_itm_name'>Maximum height of window</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.window.max_h__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.max_h")' title="reset to &quot;-1&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.window.max_h" data-xocfg-key="xowa.addon.popups.window.max_h" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="-1"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.window.max_h__key_box' value='xowa.addon.popups.window.max_h'></input>
+    <input type='hidden' id='xowa.addon.popups.window.max_h__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.window.max_h_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.window.max_h_help_msg' class='xohelp_msg'><p>Maximum height of popup in pixels<br/>
+</p>
+
+<ul>
+  <li> -1 indicates no maximum height
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.show_all_max_w")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.window.show_all_max_w__name' class='xocfg_itm_name'>Maximum width of window when "show all"</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.window.show_all_max_w__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.show_all_max_w")' title="reset to &quot;800&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.window.show_all_max_w" data-xocfg-key="xowa.addon.popups.window.show_all_max_w" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="800"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.window.show_all_max_w__key_box' value='xowa.addon.popups.window.show_all_max_w'></input>
+    <input type='hidden' id='xowa.addon.popups.window.show_all_max_w__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.window.show_all_max_w_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.window.show_all_max_w_help_msg' class='xohelp_msg'><p>Maximum width of popup in pixels when show all is clicked<br/>
+This option was added because:
+</p>
+
+<ul>
+  <li> The normal popup window is generally smaller (500 pixels)
+  </li>
+  <li> Show all often returns a lot of article text which looks constrained within a 500 pixel window
+  </li>
+  <li> A &quot;Show all&quot; maxiumum width allows for automatic switching to a wider window for the larger article content
+  </li>
+</ul>
+
+<p>Note that -1 indicates no maximum width, which defaults to about 500 pixels
+</p>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.bind_focus_blur")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.window.bind_focus_blur__name' class='xocfg_itm_name'>Show popup when link is focused</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.window.bind_focus_blur__undo' data-xocfg-type='bool' class='xocfg_itm_delete'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.bind_focus_blur")' title="reset to &quot;n&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.window.bind_focus_blur" data-xocfg-key="xowa.addon.popups.window.bind_focus_blur" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.window.bind_focus_blur__key_box' value='xowa.addon.popups.window.bind_focus_blur'></input>
+    <input type='hidden' id='xowa.addon.popups.window.bind_focus_blur__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.window.bind_focus_blur_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.window.bind_focus_blur_help_msg' class='xohelp_msg'><p>Shows popup when link receives focus (tabbed into)<br/>
+This option allows keyboard users to use popups whenever a link is focused. Specifically:
+</p>
+
+<ul>
+  <li> A link can be focused by pressing tab on the keyboard until a dotted focus box surrounds the desired link. 
+  </li>
+  <li> A link can be focused by finding and then selecting:
+
+    <ul>
+      <li> Find a word on the page. For example, press Ctrl + F and type &quot;r i b&quot;. This will highlight the Scribunto link
+      </li>
+      <li> Press Ctrl + G and then Ctrl + G again. This will focus the Scribunto link and show the popup for it.
+      </li>
+    </ul>
+  </li>
+</ul>
+</div>
+  </div>
+  
+
+  <h2>Performance</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.wtxt.tmpl_tkn_max")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.wtxt.tmpl_tkn_max__name' class='xocfg_itm_name'>Template token max</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.wtxt.tmpl_tkn_max__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.wtxt.tmpl_tkn_max")' title="reset to &quot;8192&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.wtxt.tmpl_tkn_max" data-xocfg-key="xowa.addon.popups.wtxt.tmpl_tkn_max" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="8192"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_tkn_max__key_box' value='xowa.addon.popups.wtxt.tmpl_tkn_max'></input>
+    <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_tkn_max__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.wtxt.tmpl_tkn_max_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.wtxt.tmpl_tkn_max_help_msg' class='xohelp_msg'><p>Maximum length of template token (in bytes) to evaluate<br/>
+This option allows faster popups, but at the cost of accuracy:
+</p>
+
+<ul>
+  <li> <b>Fast but sometimes inaccurate</b>: For slow machines or wikis that use templates heavily, decrease the number. Note that setting the number to 0 means &quot;never evaluate templates&quot;. If popups are slow, try setting the number to 0, and see if the results are satisfactory.
+  </li>
+  <li> <b>Slow but always accurate</b>: For fast machines or wikis that do not use templates heavily, increase the number. Note that setting the number to 2,147,483,647 means &quot;always evaluate templates&quot;. You can also use &quot;-1&quot; as a shortcut for &quot;2,147,483,647&quot;. If popups have garbled text or are missing words, try setting the number to -1.
+  </li>
+</ul>
+
+<p><hr/>
+A more detailed explanation follows:<br/>
+<hr/>
+</p>
+<p>Templates are wikitext of the form <code>&#123;&#123;Name|Arg_1|Arg_2|...}}</code>. They are used throughout a wiki to perform functions ranging from unit conversion (like converting kilometers to miles), or generating large pieces of HTML (like rendering entire InfoBoxes). However, these templates are the &quot;slowest&quot; pieces of wikitext to parse, particularly if they call other templates or Scribunto</p>
+<p>Ideally, popups should skip templates that produce structural html (like infoboxes), while still trying to render templates that do smaller functions (like converting units). This option attempts a heuristic that says &quot;if the template is long, assume it's an infobox and should be skipped&quot;. It counts the total number of bytes in a template, and skips it if it's greater than the max. For example, <code>&#123;&#123;Name|Arg_1}}</code> has a length of 10, and will be skipped if the max length is set to 8. If the max length is set to 16, then the template won't be skipped.</p>
+<p>This option is imperfect, but should work well enough on most cases. Note that Navigation Popups does something similar by skipping template text, but without any configuration. (always set to 0).</p>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.wtxt.tmpl_keeplist")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.wtxt.tmpl_keeplist__name' class='xocfg_itm_name'>Template keeplist</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.wtxt.tmpl_keeplist__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.wtxt.tmpl_keeplist")' title="reset to &quot;en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<textarea id="xowa.addon.popups.wtxt.tmpl_keeplist" data-xocfg-key="xowa.addon.popups.wtxt.tmpl_keeplist" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|</textarea></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_keeplist__key_box' value='xowa.addon.popups.wtxt.tmpl_keeplist'></input>
+    <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_keeplist__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.wtxt.tmpl_keeplist_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.wtxt.tmpl_keeplist_help_msg' class='xohelp_msg'><p>Specifies templates to be shown in popup<br/>
+This is a performance optimization for English Wikipedia. It only evaluates listed templates.<br/>
+The format is as follows
+</p>
+
+<ul>
+  <li> Each rule is in a separate line
+  </li>
+  <li> Each rule has three parts
+
+    <ul>
+      <li> Wiki domain: Wiki which will be affected by rule
+      </li>
+      <li> Keep-names: Names of templates which will be shown in popup. Note that these names:
+
+        <ul>
+          <li> Are semi-colon separated (<code>;</code>)
+          </li>
+          <li> Match any case of the title. For example, &quot;NAme&quot;, matches &quot;NAME&quot;, &quot;name&quot;, &quot;naME&quot;, etc.
+          </li>
+          <li> Match space or underscore. For example, &quot;two_words&quot; matches &quot;two_words&quot; and &quot;two words&quot;
+          </li>
+          <li> Have one of the following three match patterns
+
             <ul>
-              <li>
-                <b>checked</b> to show popups when hovering over links
+              <li> Exact name: For example, &quot;name&quot; matches only &quot;name&quot;, and all lowercase/uppercase variants
               </li>
-              <li>
-                <b>unchecked</b> to not show popups when hovering over links
+              <li> Name at start: For example, &quot;name*&quot; will match anything starting with &quot;name&quot; such as &quot;Names&quot;
+              </li>
+              <li> Name at end: For example, &quot;*name&quot; will match anything ending with &quot;name&quot; such as &quot;Fullname&quot;
               </li>
             </ul>
-          </div>
-        </div>
-        <h2>
-          Content (basic)
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.show_init_word_count")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.content.show_init_word_count__name' class='xocfg_itm_name'>
-            Number of words to show at start
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.content.show_init_word_count__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.show_init_word_count")' title="reset to &quot;128&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.content.show_init_word_count" data-xocfg-key="xowa.addon.popups.content.show_init_word_count" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="128">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.content.show_init_word_count__key_box' value='xowa.addon.popups.content.show_init_word_count'> <input type='hidden' id='xowa.addon.popups.content.show_init_word_count__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.content.show_init_word_count_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.content.show_init_word_count_help_msg' class='xohelp_msg'>
-            <p>
-              Number of words to show in popup<br>
-            </p>
-            <ul>
-              <li>
-                For slower machines, decrease the number of words to 32. Note that the number must be greater than 0.
-              </li>
-              <li>
-                For faster machines, increase the number of words as per your liking.
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.show_more_word_count")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.content.show_more_word_count__name' class='xocfg_itm_name'>
-            Number of words to show for "more"
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.content.show_more_word_count__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.show_more_word_count")' title="reset to &quot;192&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.content.show_more_word_count" data-xocfg-key="xowa.addon.popups.content.show_more_word_count" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="192">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.content.show_more_word_count__key_box' value='xowa.addon.popups.content.show_more_word_count'> <input type='hidden' id='xowa.addon.popups.content.show_more_word_count__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.content.show_more_word_count_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.content.show_more_word_count_help_msg' class='xohelp_msg'>
-            <p>
-              Number of additional words to show when "show more" is clicked<br>
-            </p>
-            <ul>
-              <li>
-                For slower machines, decrease the number of words to 32. Note that the number must be greater than 0.
-              </li>
-              <li>
-                For faster machines, increase the number of words as per your liking.
-              </li>
-            </ul>
-          </div>
-        </div>
-        <h2>
-          Content (advanced)
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.show_all_if_less_than")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.content.show_all_if_less_than__name' class='xocfg_itm_name'>
-            Automatically show "all" if page is less than
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.content.show_all_if_less_than__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.show_all_if_less_than")' title="reset to &quot;-1&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.content.show_all_if_less_than" data-xocfg-key="xowa.addon.popups.content.show_all_if_less_than" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="-1">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.content.show_all_if_less_than__key_box' value='xowa.addon.popups.content.show_all_if_less_than'> <input type='hidden' id='xowa.addon.popups.content.show_all_if_less_than__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.content.show_all_if_less_than_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.content.show_all_if_less_than_help_msg' class='xohelp_msg'>
-            <p>
-              Automatically show the entire article if article is less than these number of bytes<br>
-              This feature is intended for small articles whose entire text...
-            </p>
-            <ul>
-              <li>
-                Will always be parsed quickly
-              </li>
-              <li>
-                Will generally show in one window without a horizontal scroll bar.
-              </li>
-            </ul>
-            <p>
-              It allows a complete preview of small articles without having to click "more" or "all"<br>
-              To deactivate this feature, set the number to -1
-            </p>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.read_til_stop_fwd")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.content.read_til_stop_fwd__name' class='xocfg_itm_name'>
-            Read forward til header
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.content.read_til_stop_fwd__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.read_til_stop_fwd")' title="reset to &quot;32&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.content.read_til_stop_fwd" data-xocfg-key="xowa.addon.popups.content.read_til_stop_fwd" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="32">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.content.read_til_stop_fwd__key_box' value='xowa.addon.popups.content.read_til_stop_fwd'> <input type='hidden' id='xowa.addon.popups.content.read_til_stop_fwd__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.content.read_til_stop_fwd_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.content.read_til_stop_fwd_help_msg' class='xohelp_msg'>
-            <p>
-              Number of extra words to read forward to look for a header<br>
-              This option tries to stop the popup text right before a header.
-            </p>
-            <ul>
-              <li>
-                the advantage is that the popup will not stop a few words short of the header
-              </li>
-              <li>
-                the disadvantage is that the size of the popup is irregular. i.e.: sometimes it returns 128 words, sometimes 140, sometimes 150, etc<br>
-              </li>
-            </ul>
-            <p>
-              To deactivate this option, set it to -1.<br>
-              Technical details follow.
-            </p>
-            <hr>
-            <p>
-              The approach works in the following manner:
-            </p>
-            <ul>
-              <li>
-                Reads forward an additional # of words
-              </li>
-              <li>
-                If a header is found within the # of words, it extends the popup text to the last word before the header
-              </li>
-              <li>
-                If a header is not found, it returns the original # of words
-              </li>
-            </ul>
-            <p>
-              For example:
-            </p>
-            <ul>
-              <li>
-                An article contains <code>01 02 03 04 05 06 07 ==08== 09</code>
-              </li>
-              <li>
-                Show-init is set to 5
-              </li>
-              <li>
-                Read-fwd is set to 4
-              </li>
-              <li>
-                The initial number of words is read and collects 5 words: <code>01 02 03 04 05</code>
-              </li>
-              <li>
-                The parser then reads forward 4 more words: <code>06 07 ==08== 09</code>
-              </li>
-              <li>
-                It finds a header at <code>==08==</code>
-              </li>
-              <li>
-                It then extends the selction to the word just before the header: <code>01 02 03 04 05 06 07</code>
-              </li>
-              <li>
-                Note that if <code>==08==</code> was just <code>08</code>, then it would just have returned the original: <code>01 02 03 04 05</code>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.read_til_stop_bwd")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.content.read_til_stop_bwd__name' class='xocfg_itm_name'>
-            Read backward til header
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.content.read_til_stop_bwd__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.read_til_stop_bwd")' title="reset to &quot;16&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.content.read_til_stop_bwd" data-xocfg-key="xowa.addon.popups.content.read_til_stop_bwd" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="16">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.content.read_til_stop_bwd__key_box' value='xowa.addon.popups.content.read_til_stop_bwd'> <input type='hidden' id='xowa.addon.popups.content.read_til_stop_bwd__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.content.read_til_stop_bwd_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.content.read_til_stop_bwd_help_msg' class='xohelp_msg'>
-            <p>
-              Number of words to read backward to remove header at end<br>
-              This option tries to stop a header from appearing at the end of the popup text.
-            </p>
-            <ul>
-              <li>
-                the advantage is that a popup will not end at a header with just a few words after it.
-              </li>
-              <li>
-                the disadvantage is that sometimes the number of words returned will be less originally requested. i.e.: 128 was requested, but only 112 is returned
-              </li>
-            </ul>
-            <p>
-              To deactivate this option, set it to -1<br>
-              Technical details follow.
-            </p>
-            <hr>
-            <p>
-              The approach works in the following manner:
-            </p>
-            <ul>
-              <li>
-                Reads backwards a # of words from the end of the popup
-              </li>
-              <li>
-                If a header is found within the # of words, it truncates the output to the text before the header
-              </li>
-              <li>
-                If a header is not found, it returns the original # of words
-              </li>
-            </ul>
-            <p>
-              For example:
-            </p>
-            <ul>
-              <li>
-                An article contains <code>01 02 03 04 05 06 07 ==08== 09</code>
-              </li>
-              <li>
-                Show-init is set to 9
-              </li>
-              <li>
-                Read-bwd is set to 4
-              </li>
-              <li>
-                The initial number of words is read and collects 9 words: <code>01 02 03 04 05 06 07 ==08== 09</code>
-              </li>
-              <li>
-                The parser then reads backwards 4 words: <code>06 07 ==08== 09</code>
-              </li>
-              <li>
-                It finds a header at <code>==08==</code>
-              </li>
-              <li>
-                It then truncates the popup to the word just before the header: <code>01 02 03 04 05 06 07</code>
-              </li>
-              <li>
-                Note that if <code>==08==</code> was just <code>08</code>, then it would just have returned the original: <code>01 02 03 04 05 06 07 08 09</code>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.stop_if_hdr_after")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.content.stop_if_hdr_after__name' class='xocfg_itm_name'>
-            Stop if header is found after
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.content.stop_if_hdr_after__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.stop_if_hdr_after")' title="reset to &quot;96&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.content.stop_if_hdr_after" data-xocfg-key="xowa.addon.popups.content.stop_if_hdr_after" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="96">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.content.stop_if_hdr_after__key_box' value='xowa.addon.popups.content.stop_if_hdr_after'> <input type='hidden' id='xowa.addon.popups.content.stop_if_hdr_after__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.content.stop_if_hdr_after_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.content.stop_if_hdr_after_help_msg' class='xohelp_msg'>
-            <p>
-              Stops reading if a header is found after # of words<br>
-              This option will stop reading if a header is found after the # of words. It is useful for increasing the probability that a popup will end at a header.
-            </p>
-            <ul>
-              <li>
-                the advantage is that a popup can be made to stop at a header. If you never want the popup to show a header, set the value to 1.
-              </li>
-              <li>
-                the disadvantage is that sometimes the number of words returned will be less originally requested. i.e.: 128 was requested, but only 96 is returned
-              </li>
-            </ul>
-            <p>
-              To deactivate this option, set it to -1. This will always show as much content as possible<br>
-              Technical details follow.
-            </p>
-            <hr>
-            <p>
-              The following is a simplified example:
-            </p>
-            <ul>
-              <li>
-                An article contains <code>01 02 03 04 05 ==06== 07 08 09 ==10== 11 12 13 14 15 16</code>
-              </li>
-              <li>
-                Show-init is set to 16
-              </li>
-              <li>
-                Stop-hdr is set to 8
-              </li>
-              <li>
-                The parser starts reading words
-              </li>
-              <li>
-                Once it finds a header, it checks if it is greater than stop-hdr 
-                <ul>
-                  <li>
-                    <code>==06==</code> is found, but it is less than 8. The parser continues.
-                  </li>
-                  <li>
-                    <code>==10==</code> is found, and it is greater than 8. The parser stops there and returns <code>01 02 03 04 05 ==06== 07 08 09</code>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <p>
-              Note the following variations:
-            </p>
-            <ul>
-              <li>
-                If stop-hdr was set to 1, then it would have stopped at <code>==06==</code> and returned <code>01 02 03 04 05</code>
-              </li>
-              <li>
-                If stop-hdr was set to 14, then it would have returned the entire text: <code>01 02 03 04 05 ==06== 07 08 09 ==10== 11 12 13 14 15 16</code>
-              </li>
-            </ul>
-            <p>
-              Note that the the read-bwd setting is still applied after the stop-hdr setting.
-            </p>
-          </div>
-        </div>
-        <h2>
-          Window
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.show_delay")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.window.show_delay__name' class='xocfg_itm_name'>
-            Number of milliseconds before showing popup
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.window.show_delay__undo' data-xocfg-type='int' class='xocfg_itm_delete'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.show_delay")' title="reset to &quot;600&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.window.show_delay" data-xocfg-key="xowa.addon.popups.window.show_delay" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="1000">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.window.show_delay__key_box' value='xowa.addon.popups.window.show_delay'> <input type='hidden' id='xowa.addon.popups.window.show_delay__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.window.show_delay_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.window.show_delay_help_msg' class='xohelp_msg'>
-            <p>
-              Number of milliseconds to wait before showing popup<br>
-            </p>
-            <ul>
-              <li>
-                A higher number prevents accidental hovers over links while moving the mouse / scrolling the page
-              </li>
-              <li>
-                A lower number allows faster popup display
-              </li>
-            </ul>
-            <p>
-              Note that popup data will only be retrieved after the popup starts showing. For example:
-            </p>
-            <ul>
-              <li>
-                If the show delay is set to 2 seconds
-              </li>
-              <li>
-                and a popup takes 1 second to retrieve the html
-              </li>
-              <li>
-                then the total time till the popup is visible is 3 seconds, not 2 (2 seconds to wait before showing + 1 second to retrieve data)
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.hide_delay")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.window.hide_delay__name' class='xocfg_itm_name'>
-            Number of milliseconds before hiding popup
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.window.hide_delay__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.hide_delay")' title="reset to &quot;400&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.window.hide_delay" data-xocfg-key="xowa.addon.popups.window.hide_delay" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="400">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.window.hide_delay__key_box' value='xowa.addon.popups.window.hide_delay'> <input type='hidden' id='xowa.addon.popups.window.hide_delay__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.window.hide_delay_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.window.hide_delay_help_msg' class='xohelp_msg'>
-            <p>
-              Number of milliseconds to wait before hiding popup<br>
-            </p>
-            <ul>
-              <li>
-                A higher number allows the popup to linger longer on the screen before disappearing.
-              </li>
-              <li>
-                A lower number hides the popup faster
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.max_w")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.window.max_w__name' class='xocfg_itm_name'>
-            Maximum width of window
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.window.max_w__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.max_w")' title="reset to &quot;-1&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.window.max_w" data-xocfg-key="xowa.addon.popups.window.max_w" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="-1">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.window.max_w__key_box' value='xowa.addon.popups.window.max_w'> <input type='hidden' id='xowa.addon.popups.window.max_w__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.window.max_w_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.window.max_w_help_msg' class='xohelp_msg'>
-            <p>
-              Maximum width of popup in pixels<br>
-            </p>
-            <ul>
-              <li>
-                -1 indicates no maximum width
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.max_h")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.window.max_h__name' class='xocfg_itm_name'>
-            Maximum height of window
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.window.max_h__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.max_h")' title="reset to &quot;-1&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.window.max_h" data-xocfg-key="xowa.addon.popups.window.max_h" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="-1">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.window.max_h__key_box' value='xowa.addon.popups.window.max_h'> <input type='hidden' id='xowa.addon.popups.window.max_h__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.window.max_h_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.window.max_h_help_msg' class='xohelp_msg'>
-            <p>
-              Maximum height of popup in pixels<br>
-            </p>
-            <ul>
-              <li>
-                -1 indicates no maximum height
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.show_all_max_w")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.window.show_all_max_w__name' class='xocfg_itm_name'>
-            Maximum width of window when "show all"
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.window.show_all_max_w__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.show_all_max_w")' title="reset to &quot;800&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.window.show_all_max_w" data-xocfg-key="xowa.addon.popups.window.show_all_max_w" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="800">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.window.show_all_max_w__key_box' value='xowa.addon.popups.window.show_all_max_w'> <input type='hidden' id='xowa.addon.popups.window.show_all_max_w__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.window.show_all_max_w_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.window.show_all_max_w_help_msg' class='xohelp_msg'>
-            <p>
-              Maximum width of popup in pixels when show all is clicked<br>
-              This option was added because:
-            </p>
-            <ul>
-              <li>
-                The normal popup window is generally smaller (500 pixels)
-              </li>
-              <li>
-                Show all often returns a lot of article text which looks constrained within a 500 pixel window
-              </li>
-              <li>
-                A "Show all" maxiumum width allows for automatic switching to a wider window for the larger article content
-              </li>
-            </ul>
-            <p>
-              Note that -1 indicates no maximum width, which defaults to about 500 pixels
-            </p>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.window.bind_focus_blur")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.window.bind_focus_blur__name' class='xocfg_itm_name'>
-            Show popup when link is focused
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.window.bind_focus_blur__undo' data-xocfg-type='bool' class='xocfg_itm_delete'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.window.bind_focus_blur")' title="reset to &quot;n&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.window.bind_focus_blur" data-xocfg-key="xowa.addon.popups.window.bind_focus_blur" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.window.bind_focus_blur__key_box' value='xowa.addon.popups.window.bind_focus_blur'> <input type='hidden' id='xowa.addon.popups.window.bind_focus_blur__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.window.bind_focus_blur_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.window.bind_focus_blur_help_msg' class='xohelp_msg'>
-            <p>
-              Shows popup when link receives focus (tabbed into)<br>
-              This option allows keyboard users to use popups whenever a link is focused. Specifically:
-            </p>
-            <ul>
-              <li>
-                A link can be focused by pressing tab on the keyboard until a dotted focus box surrounds the desired link.
-              </li>
-              <li>
-                A link can be focused by finding and then selecting: 
-                <ul>
-                  <li>
-                    Find a word on the page. For example, press Ctrl + F and type "r i b". This will highlight the Scribunto link
-                  </li>
-                  <li>
-                    Press Ctrl + G and then Ctrl + G again. This will focus the Scribunto link and show the popup for it.
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <h2>
-          Performance
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.wtxt.tmpl_tkn_max")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.wtxt.tmpl_tkn_max__name' class='xocfg_itm_name'>
-            Template token max
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.wtxt.tmpl_tkn_max__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.wtxt.tmpl_tkn_max")' title="reset to &quot;8192&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.wtxt.tmpl_tkn_max" data-xocfg-key="xowa.addon.popups.wtxt.tmpl_tkn_max" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="8192">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_tkn_max__key_box' value='xowa.addon.popups.wtxt.tmpl_tkn_max'> <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_tkn_max__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.wtxt.tmpl_tkn_max_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.wtxt.tmpl_tkn_max_help_msg' class='xohelp_msg'>
-            <p>
-              Maximum length of template token (in bytes) to evaluate<br>
-              This option allows faster popups, but at the cost of accuracy:
-            </p>
-            <ul>
-              <li>
-                <b>Fast but sometimes inaccurate</b>: For slow machines or wikis that use templates heavily, decrease the number. Note that setting the number to 0 means "never evaluate templates". If popups are slow, try setting the number to 0, and see if the results are satisfactory.
-              </li>
-              <li>
-                <b>Slow but always accurate</b>: For fast machines or wikis that do not use templates heavily, increase the number. Note that setting the number to 2,147,483,647 means "always evaluate templates". You can also use "-1" as a shortcut for "2,147,483,647". If popups have garbled text or are missing words, try setting the number to -1.
-              </li>
-            </ul>
-            <hr>
-            A more detailed explanation follows:<br>
-            <hr>
-            <p>
-              Templates are wikitext of the form <code>{{Name|Arg_1|Arg_2|...}}</code>. They are used throughout a wiki to perform functions ranging from unit conversion (like converting kilometers to miles), or generating large pieces of HTML (like rendering entire InfoBoxes). However, these templates are the "slowest" pieces of wikitext to parse, particularly if they call other templates or Scribunto
-            </p>
-            <p>
-              Ideally, popups should skip templates that produce structural html (like infoboxes), while still trying to render templates that do smaller functions (like converting units). This option attempts a heuristic that says "if the template is long, assume it's an infobox and should be skipped". It counts the total number of bytes in a template, and skips it if it's greater than the max. For example, <code>{{Name|Arg_1}}</code> has a length of 10, and will be skipped if the max length is set to 8. If the max length is set to 16, then the template won't be skipped.
-            </p>
-            <p>
-              This option is imperfect, but should work well enough on most cases. Note that Navigation Popups does something similar by skipping template text, but without any configuration. (always set to 0).
-            </p>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.wtxt.tmpl_keeplist")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.wtxt.tmpl_keeplist__name' class='xocfg_itm_name'>
-            Template keeplist
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.wtxt.tmpl_keeplist__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.wtxt.tmpl_keeplist")' title="reset to &quot;en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-<textarea id="xowa.addon.popups.wtxt.tmpl_keeplist" data-xocfg-key="xowa.addon.popups.wtxt.tmpl_keeplist" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
-en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|
-</textarea>
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_keeplist__key_box' value='xowa.addon.popups.wtxt.tmpl_keeplist'> <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_keeplist__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.wtxt.tmpl_keeplist_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.wtxt.tmpl_keeplist_help_msg' class='xohelp_msg'>
-            <p>
-              Specifies templates to be shown in popup<br>
-              This is a performance optimization for English Wikipedia. It only evaluates listed templates.<br>
-              The format is as follows
-            </p>
-            <ul>
-              <li>
-                Each rule is in a separate line
-              </li>
-              <li>
-                Each rule has three parts 
-                <ul>
-                  <li>
-                    Wiki domain: Wiki which will be affected by rule
-                  </li>
-                  <li>
-                    Keep-names: Names of templates which will be shown in popup. Note that these names: 
-                    <ul>
-                      <li>
-                        Are semi-colon separated (<code>;</code>)
-                      </li>
-                      <li>
-                        Match any case of the title. For example, "NAme", matches "NAME", "name", "naME", etc.
-                      </li>
-                      <li>
-                        Match space or underscore. For example, "two_words" matches "two_words" and "two words"
-                      </li>
-                      <li>
-                        Have one of the following three match patterns 
-                        <ul>
-                          <li>
-                            Exact name: For example, "name" matches only "name", and all lowercase/uppercase variants
-                          </li>
-                          <li>
-                            Name at start: For example, "name*" will match anything starting with "name" such as "Names"
-                          </li>
-                          <li>
-                            Name at end: For example, "*name" will match anything ending with "name" such as "Fullname"
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    Unless-names: Names of templates which should not be included, even if the keep-name is matched. For example, <code>en.wikipedia.org|name*|name_to_always_skip</code> will match any template that starts with "name" unless the template is named "name_to_always_skip". Note that unless-names have the same rules as keep-names (semi-colon separator; wildcards)<br>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <p>
-              To disable this option, replaces the keep-names with a *. For example: <code>en.wikipedia.org|*|</code>
-            </p>
-            <hr>
-            <p>
-              <b>Default option</b>
-            </p>
+          </li>
+        </ul>
+      </li>
+      <li> Unless-names: Names of templates which should not be included, even if the keep-name is matched. For example, <code>en.wikipedia.org|name*|name_to_always_skip</code> will match any template that starts with &quot;name&quot; unless the template is named &quot;name_to_always_skip&quot;. Note that unless-names have the same rules as keep-names (semi-colon separator; wildcards)<br/>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>To disable this option, replaces the keep-names with a *. For example: <code>en.wikipedia.org|*|</code>
+</p>
+<hr/>
+
+<p><b>Default option</b>
+</p>
 <pre style='overflow:auto'>
 en.wikipedia.org|formatnum;age_in_days;as_of;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;vgy;iso_639_name;transl;translate;linktext;zh;nihongo;japanese_name;ko-hhrm;|
 </pre>
-          </div>
-        </div>
-        <h2>
-          Advanced
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.ns_allowed")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.ns_allowed__name' class='xocfg_itm_name'>
-            Allowed namespaces
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.ns_allowed__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.ns_allowed")' title="reset to &quot;&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.ns_allowed" data-xocfg-key="xowa.addon.popups.ns_allowed" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.ns_allowed__key_box' value='xowa.addon.popups.ns_allowed'> <input type='hidden' id='xowa.addon.popups.ns_allowed__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.ns_allowed_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.ns_allowed_help_msg' class='xohelp_msg'>
-            <p>
-              Restrict popups to certain namespaces<br>
-              This option allows popups to be suppressed for namespaces that would ordinarily generate no content. For example, Portal pages are often contained in a table / div, whereas Module pages are code.<br>
-              Note the following:
-            </p>
-            <ul>
-              <li>
-                Only namespace names are valid. See the table below for examples of valid names
-              </li>
-              <li>
-                Multiple names must be separated with the pipe character (<code>|</code>). For example, <code>(Main)|Help</code>
-              </li>
-              <li>
-                Namespaces names are the canonical English names of the namespace, except for "(Main)"
-              </li>
-              <li>
-                Non-English names will work, but are not supported. For example, <code>Aide</code> would only allow the Help namespace in French wikis, wheras <code>Help</code> will allow the Help namespace across all wikis.
-              </li>
-              <li>
-                Invalid names are ignored
-              </li>
-              <li>
-                Deactivate this feature by blanking the field
-              </li>
-            </ul>
-            <table class='wikitable'>
-              <tr>
-                <th>
-                  Title
-                </th>
-              </tr>
-              <tr>
-                <td>
-                  (Main)
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  User
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Project
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  File
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  MediaWiki
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Template
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Help
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Category
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Special
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.xnde_ignore_ids")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.content.xnde_ignore_ids__name' class='xocfg_itm_name'>
-            Ignore HTML elements with the following ids
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.content.xnde_ignore_ids__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.xnde_ignore_ids")' title="reset to &quot;coordinates&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.content.xnde_ignore_ids" data-xocfg-key="xowa.addon.popups.content.xnde_ignore_ids" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="coordinates">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.content.xnde_ignore_ids__key_box' value='xowa.addon.popups.content.xnde_ignore_ids'> <input type='hidden' id='xowa.addon.popups.content.xnde_ignore_ids__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.content.xnde_ignore_ids_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.content.xnde_ignore_ids_help_msg' class='xohelp_msg'>
-            <p>
-              Ignore html elements that have the following ids<br>
-              This feature is intended for English Wikipedia which has a <code>{{Coordinates}}</code> tag at the top of most geographical articles (for example, <a tabindex="-1" href="/site/en.wikipedia.org/wiki/North_Pole">North Pole</a>)<br>
-              Without this option, a Coordinates span would be visible in the top right of the popup, which....
-            </p>
-            <ul>
-              <li>
-                Counts against the popup's number of words
-              </li>
-              <li>
-                Does not provide significant summary information for the article
-              </li>
-            </ul>
-            <p>
-              Usage notes:
-            </p>
-            <ul>
-              <li>
-                Any HTML element with a listed id will not be shown in the popup. For example, <code>&lt;span id='coordinates'&gt;0 N 90 E&lt;/span&gt;</code> will not show b/c the html element (<code>span</code>) has a listed id (<code>coordinates</code>)
-              </li>
-              <li>
-                To add multiple ids, separate ids with the <code>|</code> character. For example, <code>coordinates|some_other_id</code>.
-              </li>
-              <li>
-                Listed ids are case-insensitive if ASCII, but case-sensitive otherwise. There is no difference between <code>coordinates</code> and <code>Coordinates</code>. There is a difference between <code>é</code> and <code>É</code>
-              </li>
-              <li>
-                To deactivate this feature, set the value to <code>&nbsp;</code> (empty)<br>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.scanner.scan_len")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.scanner.scan_len__name' class='xocfg_itm_name'>
-            Number of bytes to read each pass
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.scanner.scan_len__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.scanner.scan_len")' title="reset to &quot;1024&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.scanner.scan_len" data-xocfg-key="xowa.addon.popups.scanner.scan_len" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="1024">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.scanner.scan_len__key_box' value='xowa.addon.popups.scanner.scan_len'> <input type='hidden' id='xowa.addon.popups.scanner.scan_len__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.scanner.scan_len_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.scanner.scan_len_help_msg' class='xohelp_msg'>
-            <p>
-              Number of bytes to read for each pass<br>
-              This number represents the number of bytes the popup parser reads at a time. For example, it will read the first 1024 bytes of the article, and if it doesn't find 64 words, it continues to read sections of 1024 bytes until it does.<br>
-            </p>
-            <ul>
-              <li>
-                Lower numbers may be better for slower machines. Note that the number must be greater than 0.
-              </li>
-              <li>
-                Higher numbers may be better for faster machines. Experiment as necessary.
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.scanner.scan_max")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.popups.scanner.scan_max__name' class='xocfg_itm_name'>
-            Maximum number of bytes to read
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.popups.scanner.scan_max__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.scanner.scan_max")' title="reset to &quot;32768&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.popups.scanner.scan_max" data-xocfg-key="xowa.addon.popups.scanner.scan_max" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="32768">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.popups.scanner.scan_max__key_box' value='xowa.addon.popups.scanner.scan_max'> <input type='hidden' id='xowa.addon.popups.scanner.scan_max__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.popups.scanner.scan_max_help_div' class='xohelp_div'>
-          <div id='xowa.addon.popups.scanner.scan_max_help_msg' class='xohelp_msg'>
-            <p>
-              Maximum number of bytes to read<br>
-            </p>
-            <p>
-              This number represents the maximum number of bytes the popup parser reads before it gives up. Note that if the parser gives up, then no text will be returned for the preview.
-            </p>
-            <p>
-              This setting should only apply to badly formatted articles. For example consider a page that has a comment with 100,000 5 letter words (<code>&lt;!-- 100,000 5 letter words --&gt;</code>). This page will be considered to have 0 words, even though it has a page length of 500,000. Rather than read the entire 500,000 bytes, the popup parser will stop after 32,768.
-            </p>
-            <ul>
-              <li>
-                Lower numbers may be better for slower machines, but it would have a higher chance of returning empty popups. Note that the number must be greater than 0.
-              </li>
-              <li>
-                Higher numbers may be better for faster machines. To force the popup parser to read the entire page until it finds the minimum number of words, set the value to a high number like 2,147,483,647
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+</div>
+  </div>
   
+
+  <h2>Advanced</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.ns_allowed")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.ns_allowed__name' class='xocfg_itm_name'>Allowed namespaces</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.ns_allowed__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.ns_allowed")' title="reset to &quot;&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.ns_allowed" data-xocfg-key="xowa.addon.popups.ns_allowed" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value=""></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.ns_allowed__key_box' value='xowa.addon.popups.ns_allowed'></input>
+    <input type='hidden' id='xowa.addon.popups.ns_allowed__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.ns_allowed_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.ns_allowed_help_msg' class='xohelp_msg'><p>Restrict popups to certain namespaces<br/>
+This option allows popups to be suppressed for namespaces that would ordinarily generate no content. For example, Portal pages are often contained in a table / div, whereas Module pages are code.<br/>
+Note the following:
+</p>
+
+<ul>
+  <li> Only namespace names are valid. See the table below for examples of valid names
+  </li>
+  <li> Multiple names must be separated with the pipe character (<code>|</code>). For example, <code>(Main)|Help</code>
+  </li>
+  <li> Namespaces names are the canonical English names of the namespace, except for &quot;(Main)&quot;
+  </li>
+  <li> Non-English names will work, but are not supported. For example, <code>Aide</code> would only allow the Help namespace in French wikis, wheras <code>Help</code> will allow the Help namespace across all wikis.
+  </li>
+  <li> Invalid names are ignored
+  </li>
+  <li> Deactivate this feature by blanking the field
+  </li>
+</ul>
+<table class='wikitable'>
+  <tr>
+    <th> Title
+    </th>
+  </tr>
+  <tr>
+    <td> (Main)
+    </td>
+  </tr>
+  <tr>
+    <td> User
+    </td>
+  </tr>
+  <tr>
+    <td> Project
+    </td>
+  </tr>
+  <tr>
+    <td> File
+    </td>
+  </tr>
+  <tr>
+    <td> MediaWiki
+    </td>
+  </tr>
+  <tr>
+    <td> Template
+    </td>
+  </tr>
+  <tr>
+    <td> Help
+    </td>
+  </tr>
+  <tr>
+    <td> Category
+    </td>
+  </tr>
+  <tr>
+    <td> Special
+    </td>
+  </tr>
+</table>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.content.xnde_ignore_ids")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.content.xnde_ignore_ids__name' class='xocfg_itm_name'>Ignore HTML elements with the following ids</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.content.xnde_ignore_ids__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.content.xnde_ignore_ids")' title="reset to &quot;coordinates&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.content.xnde_ignore_ids" data-xocfg-key="xowa.addon.popups.content.xnde_ignore_ids" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="coordinates"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.content.xnde_ignore_ids__key_box' value='xowa.addon.popups.content.xnde_ignore_ids'></input>
+    <input type='hidden' id='xowa.addon.popups.content.xnde_ignore_ids__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.content.xnde_ignore_ids_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.content.xnde_ignore_ids_help_msg' class='xohelp_msg'><p>Ignore html elements that have the following ids<br/>
+This feature is intended for English Wikipedia which has a <code>&#123;&#123;Coordinates}}</code> tag at the top of most geographical articles (for example, <a href="/site/en.wikipedia.org/wiki/North_Pole" tabindex="-1">North Pole</a>)<br/>
+Without this option, a Coordinates span would be visible in the top right of the popup, which....
+</p>
+
+<ul>
+  <li> Counts against the popup's number of words
+  </li>
+  <li> Does not provide significant summary information for the article
+  </li>
+</ul>
+
+<p>Usage notes:
+</p>
+
+<ul>
+  <li> Any HTML element with a listed id will not be shown in the popup. For example, <code>&lt;span id='coordinates'&gt;0 N 90 E&lt;/span&gt;</code> will not show b/c the html element (<code>span</code>) has a listed id (<code>coordinates</code>)
+  </li>
+  <li> To add multiple ids, separate ids with the <code>|</code> character. For example, <code>coordinates|some_other_id</code>.
+  </li>
+  <li> Listed ids are case-insensitive if ASCII, but case-sensitive otherwise. There is no difference between <code>coordinates</code> and <code>Coordinates</code>. There is a difference between <code>é</code> and <code>É</code>
+  </li>
+  <li> To deactivate this feature, set the value to <code>&#160;</code> (empty)<br/>
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.scanner.scan_len")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.scanner.scan_len__name' class='xocfg_itm_name'>Number of bytes to read each pass</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.scanner.scan_len__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.scanner.scan_len")' title="reset to &quot;1024&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.scanner.scan_len" data-xocfg-key="xowa.addon.popups.scanner.scan_len" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="1024"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.scanner.scan_len__key_box' value='xowa.addon.popups.scanner.scan_len'></input>
+    <input type='hidden' id='xowa.addon.popups.scanner.scan_len__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.scanner.scan_len_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.scanner.scan_len_help_msg' class='xohelp_msg'><p>Number of bytes to read for each pass<br/>
+This number represents the number of bytes the popup parser reads at a time. For example, it will read the first 1024 bytes of the article, and if it doesn't find 64 words, it continues to read sections of 1024 bytes until it does.<br/>
+</p>
+
+<ul>
+  <li> Lower numbers may be better for slower machines. Note that the number must be greater than 0.
+  </li>
+  <li> Higher numbers may be better for faster machines. Experiment as necessary.
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.popups.scanner.scan_max")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.popups.scanner.scan_max__name' class='xocfg_itm_name'>Maximum number of bytes to read</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.popups.scanner.scan_max__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.scanner.scan_max")' title="reset to &quot;32768&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.popups.scanner.scan_max" data-xocfg-key="xowa.addon.popups.scanner.scan_max" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="32768"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.popups.scanner.scan_max__key_box' value='xowa.addon.popups.scanner.scan_max'></input>
+    <input type='hidden' id='xowa.addon.popups.scanner.scan_max__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.popups.scanner.scan_max_help_div' class='xohelp_div'>
+    <div id='xowa.addon.popups.scanner.scan_max_help_msg' class='xohelp_msg'><p>Maximum number of bytes to read<br/>
+</p>
+<p>This number represents the maximum number of bytes the popup parser reads before it gives up. Note that if the parser gives up, then no text will be returned for the preview.</p>
+<p>This setting should only apply to badly formatted articles. For example consider a page that has a comment with 100,000 5 letter words  (<code>&lt;!-- 100,000 5 letter words --&gt;</code>). This page will be considered to have 0 words, even though it has a page length of 500,000. Rather than read the entire 500,000 bytes, the popup parser will stop after 32,768.</p>
+
+<ul>
+  <li> Lower numbers may be better for slower machines, but it would have a higher chance of returning empty popups. Note that the number must be greater than 0.
+  </li>
+  <li> Higher numbers may be better for faster machines. To force the popup parser to read the entire page until it finds the minimum number of words, set the value to a high number like 2,147,483,647
+  </li>
+</ul>
+</div>
+  </div>
+  
+
+</div>
+
+</div>
+
     </div>
   </div>
 </div>

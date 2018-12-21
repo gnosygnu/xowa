@@ -16,235 +16,241 @@
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
-    
     <div id='xocfg_body'>
-      <!-- TEXT:err_msg -->
-      <div id='xocfg_err'>
-      </div>
-      <div>
-        <!-- BTN:info -->
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
-         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
-          <option value='xowa.app.security'>
-            App - Security
-          </option>
-          <option value='xowa.app.startup'>
-            App - Startup
-          </option>
-          <option value='xowa.app.update'>
-            App - Update
-          </option>
-          <option value='xowa.gui.general'>
-            Gui - General
-          </option>
-          <option value='xowa.gui.tabs'>
-            Gui - Tabs
-          </option>
-          <option value='xowa.gui.url_bar'>
-            Gui - Address bar
-          </option>
-          <option value='xowa.gui.menus'>
-            Gui - Menus
-          </option>
-          <option value='xowa.gui.shortcuts'>
-            Gui - Shortcuts
-          </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Nightmode
-          </option>
-          <option value='xowa.wiki.hdumps'>
-            Wiki - HTML Databases
-          </option>
-          <option value='xowa.wiki.edit'>
-            Wiki - Editing
-          </option>
-          <option value='xowa.bldr.general'>
-            Import - General
-          </option>
-          <option value='xowa.bldr.db'>
-            Import - Database
-          </option>
-          <option value='xowa.bldr.page_sync'>
-            Import - Page sync
-          </option>
-          <option value='xowa.bldr.dansguardian'>
-            Import - Dansguardian
-          </option>
-          <option value='xowa.html.css'>
-            HTML - CSS
-          </option>
-          <option value='xowa.html.page'>
-            HTML - Page
-          </option>
-          <option value='xowa.html.tidy'>
-            HTML - Tidy
-          </option>
-          <option value='xowa.html.scripting'>
-            HTML - Scripting
-          </option>
-          <option value='xowa.files.general'>
-            Files - General
-          </option>
-          <option value='xowa.files.apps'>
-            Files - Apps
-          </option>
-          <option value='xowa.addon.search'>
-            Addon - Search
-          </option>
-          <option value='xowa.addon.fulltext_search'>
-            Addon - Full-text search
-          </option>
-          <option value='xowa.addon.category'>
-            Addon - Category
-          </option>
-          <option value='xowa.addon.http_server'>
-            Addon - HTTP Server
-          </option>
-          <option value='xowa.addon.scribunto'>
-            Addon - Scribunto
-          </option>
-          <option value='xowa.addon.math'>
-            Addon - Math
-          </option>
-          <option value='xowa.addon.score'>
-            Addon - Score
-          </option>
-          <option value='xowa.addon.popups'>
-            Addon - Popups
-          </option>
-          <option value='xowa.addon.wikibase' selected='selected'>
-            Addon - Wikidata
-          </option>
-          <option value='xowa.dev.general'>
-            Dev - General
-          </option>
-        </select> <!-- LINK:cfg_link -->
-         
-        <div style='float:right;margin:2px 7px;'>
-          <a id='options_lnk'>options link</a>
-        </div>
-      </div>
-      <div id='cfg_grps'>
-        <!-- TEXT:page_help -->
-        <div>
-          <p id='page_help_para'>
-          </p>
-        </div>
-        <h2>
-          Wikidata wiki
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.langs.core_langs")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.wikibase.langs.core_langs__name' class='xocfg_itm_name'>
-            Text languages
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.wikibase.langs.core_langs__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.langs.core_langs")' title="reset to &quot;en&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.wikibase.langs.core_langs" data-xocfg-key="xowa.addon.wikibase.langs.core_langs" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="en">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.wikibase.langs.core_langs__key_box' value='xowa.addon.wikibase.langs.core_langs'> <input type='hidden' id='xowa.addon.wikibase.langs.core_langs__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.wikibase.langs.core_langs_help_div' class='xohelp_div'>
-          <div id='xowa.addon.wikibase.langs.core_langs_help_msg' class='xohelp_msg'>
-            <p>
-              Enter multiple language codes separated by a semi-colon. See <a tabindex="-1" href="/wiki/Options/Language" id="xolnki_39" title="Options/Language">Options/Language</a> for a full list of valid language codes.<br>
-              The text languages are used for the following:
-            </p>
-            <ul>
-              <li>
-                The overview for the article's label, description and alias. For example, a value of "en" on <a tabindex="-1" href="/site/www.wikidata.org/wiki/Q2">Earth's Wikidata page</a> will generate an article title of "Earth" and corresponding English text for everything before the Table of Contents.
-              </li>
-              <li>
-                The entity name for claims and properties. For example, a language of "en" will generate "astronomical body" and "Sun" for claim P397
-              </li>
-            </ul>
-            <p>
-              Note that multiple languages allow searching for a preferred language first. For example, a value of "de;en" will search for the German text first. If one is not found, it will then use the English text.
-            </p>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.langs.sort_langs")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.wikibase.langs.sort_langs__name' class='xocfg_itm_name'>
-            Sort languages
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.wikibase.langs.sort_langs__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.langs.sort_langs")' title="reset to &quot;en;de;es;fr;it;nl;pl;ru;sv&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.wikibase.langs.sort_langs" data-xocfg-key="xowa.addon.wikibase.langs.sort_langs" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="en;de;es;fr;it;nl;pl;ru;sv">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.wikibase.langs.sort_langs__key_box' value='xowa.addon.wikibase.langs.sort_langs'> <input type='hidden' id='xowa.addon.wikibase.langs.sort_langs__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.wikibase.langs.sort_langs_help_div' class='xohelp_div'>
-          <div id='xowa.addon.wikibase.langs.sort_langs_help_msg' class='xohelp_msg'>
-            <p>
-              Enter multiple language codes separated by a semi-colon.<br>
-              The sort languages are used to sort the Link, Label, Description and Alias list. For example, sort languages of "en;de;fr" will place the English, German and French entries at the top of the list, and then sort everything else afterwards alphabetically.
-            </p>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.xwikis.link_wikis")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.wikibase.xwikis.link_wikis__name' class='xocfg_itm_name'>
-            Link wiki
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.wikibase.xwikis.link_wikis__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.xwikis.link_wikis")' title="reset to &quot;enwiki&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.wikibase.xwikis.link_wikis" data-xocfg-key="xowa.addon.wikibase.xwikis.link_wikis" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="enwiki">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.wikibase.xwikis.link_wikis__key_box' value='xowa.addon.wikibase.xwikis.link_wikis'> <input type='hidden' id='xowa.addon.wikibase.xwikis.link_wikis__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.wikibase.xwikis.link_wikis_help_div' class='xohelp_div'>
-          <div id='xowa.addon.wikibase.xwikis.link_wikis_help_msg' class='xohelp_msg'>
-            <p>
-              Enter a wiki code.<br>
-              The wiki code is used to create a hyperlink for the article title. For example, a wiki code of "enwiki" on <a tabindex="-1" href="/site/www.wikidata.org/wiki/Q2">Earth's Wikidata page</a> creates a hyperlink to English Wikipedia's Earth article.
-            </p>
-          </div>
-        </div>
-        <h2>
-          Special:Item by title
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.item_by_title.site_default")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.wikibase.item_by_title.site_default__name' class='xocfg_itm_name'>
-            Site default
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.wikibase.item_by_title.site_default__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.item_by_title.site_default")' title="reset to &quot;enwiki&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.wikibase.item_by_title.site_default" data-xocfg-key="xowa.addon.wikibase.item_by_title.site_default" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="enwiki">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.wikibase.item_by_title.site_default__key_box' value='xowa.addon.wikibase.item_by_title.site_default'> <input type='hidden' id='xowa.addon.wikibase.item_by_title.site_default__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.wikibase.item_by_title.site_default_help_div' class='xohelp_div'>
-          <div id='xowa.addon.wikibase.item_by_title.site_default_help_msg' class='xohelp_msg'>
-            <p>
-              The name of the default site when using <a tabindex="-1" href="/site/www.wikidata.org/wiki/Special:ItemByTitle" id="xolnki_40" title="Special:ItemByTitle">www.wikidata.org:Special:ItemByTitle</a>.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- TEXT:err_msg -->
+  <div id='xocfg_err'></div>
   
+  <div>
+    <!-- BTN:info -->
+    <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span>
+    
+    <!-- COMBO:cfg_grps -->
+    <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+      
+      <option value='xowa.app.security' >App - Security</option>
+      
+      <option value='xowa.app.startup' >App - Startup</option>
+      
+      <option value='xowa.app.update' >App - Update</option>
+      
+      <option value='xowa.gui.general' >Gui - General</option>
+      
+      <option value='xowa.gui.tabs' >Gui - Tabs</option>
+      
+      <option value='xowa.gui.url_bar' >Gui - Address bar</option>
+      
+      <option value='xowa.gui.menus' >Gui - Menus</option>
+      
+      <option value='xowa.gui.shortcuts' >Gui - Shortcuts</option>
+      
+      <option value='xowa.gui.nightmode' >Gui - Nightmode</option>
+      
+      <option value='xowa.wiki.hdumps' >Wiki - HTML Databases</option>
+      
+      <option value='xowa.wiki.edit' >Wiki - Editing</option>
+      
+      <option value='xowa.bldr.general' >Import - General</option>
+      
+      <option value='xowa.bldr.db' >Import - Database</option>
+      
+      <option value='xowa.bldr.page_sync' >Import - Page sync</option>
+      
+      <option value='xowa.bldr.dansguardian' >Import - Dansguardian</option>
+      
+      <option value='xowa.html.css' >HTML - CSS</option>
+      
+      <option value='xowa.html.page' >HTML - Page</option>
+      
+      <option value='xowa.html.tidy' >HTML - Tidy</option>
+      
+      <option value='xowa.html.scripting' >HTML - Scripting</option>
+      
+      <option value='xowa.files.general' >Files - General</option>
+      
+      <option value='xowa.files.apps' >Files - Apps</option>
+      
+      <option value='xowa.addon.search' >Addon - Search</option>
+      
+      <option value='xowa.addon.fulltext_search' >Addon - Full-text search</option>
+      
+      <option value='xowa.addon.category' >Addon - Category</option>
+      
+      <option value='xowa.addon.http_server' >Addon - HTTP Server</option>
+      
+      <option value='xowa.addon.scribunto' >Addon - Scribunto</option>
+      
+      <option value='xowa.addon.math' >Addon - Math</option>
+      
+      <option value='xowa.addon.score' >Addon - Score</option>
+      
+      <option value='xowa.addon.popups' >Addon - Popups</option>
+      
+      <option value='xowa.addon.wikibase'  selected='selected'>Addon - Wikidata</option>
+      
+      <option value='xowa.dev.general' >Dev - General</option>
+      
+    </select>
+    
+    <!-- LINK:cfg_link -->
+    
+    <div style='float:right;margin:2px 7px;'>
+      <a id='options_lnk'>options link</a>
+    </div>
+    
+  </div>
+  
+
+<div id='cfg_grps'>
+  <!-- TEXT:page_help -->
+  <div>
+    <p id='page_help_para'></p>
+  </div>
+
+  <h2>Wikidata wiki</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.langs.core_langs")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.wikibase.langs.core_langs__name' class='xocfg_itm_name'>Text languages</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.wikibase.langs.core_langs__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.langs.core_langs")' title="reset to &quot;en&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.wikibase.langs.core_langs" data-xocfg-key="xowa.addon.wikibase.langs.core_langs" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="en"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.wikibase.langs.core_langs__key_box' value='xowa.addon.wikibase.langs.core_langs'></input>
+    <input type='hidden' id='xowa.addon.wikibase.langs.core_langs__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.wikibase.langs.core_langs_help_div' class='xohelp_div'>
+    <div id='xowa.addon.wikibase.langs.core_langs_help_msg' class='xohelp_msg'><p>Enter multiple language codes separated by a semi-colon. See <a href="/wiki/Options/Language" id="xolnki_39" title="Options/Language" tabindex="-1">Options/Language</a> for a full list of valid language codes.<br/>
+The text languages are used for the following:
+</p>
+
+<ul>
+  <li> The overview for the article's label, description and alias. For example, a value of &quot;en&quot; on <a href="/site/www.wikidata.org/wiki/Q2" tabindex="-1">Earth's Wikidata page</a> will generate an article title of &quot;Earth&quot; and corresponding English text for everything before the Table of Contents.
+  </li>
+  <li> The entity name for claims and properties. For example, a language of &quot;en&quot; will generate &quot;astronomical body&quot; and &quot;Sun&quot; for claim P397
+  </li>
+</ul>
+
+<p>Note that multiple languages allow searching for a preferred language first. For example, a value of &quot;de;en&quot; will search for the German text first. If one is not found, it will then use the English text.
+</p>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.langs.sort_langs")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.wikibase.langs.sort_langs__name' class='xocfg_itm_name'>Sort languages</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.wikibase.langs.sort_langs__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.langs.sort_langs")' title="reset to &quot;en;de;es;fr;it;nl;pl;ru;sv&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.wikibase.langs.sort_langs" data-xocfg-key="xowa.addon.wikibase.langs.sort_langs" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="en;de;es;fr;it;nl;pl;ru;sv"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.wikibase.langs.sort_langs__key_box' value='xowa.addon.wikibase.langs.sort_langs'></input>
+    <input type='hidden' id='xowa.addon.wikibase.langs.sort_langs__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.wikibase.langs.sort_langs_help_div' class='xohelp_div'>
+    <div id='xowa.addon.wikibase.langs.sort_langs_help_msg' class='xohelp_msg'><p>Enter multiple language codes separated by a semi-colon.<br/>
+The sort languages are used to sort the Link, Label, Description and Alias list. For example, sort languages of &quot;en;de;fr&quot; will place the English, German and French entries at the top of the list, and then sort everything else afterwards alphabetically.
+</p>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.xwikis.link_wikis")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.wikibase.xwikis.link_wikis__name' class='xocfg_itm_name'>Link wiki</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.wikibase.xwikis.link_wikis__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.xwikis.link_wikis")' title="reset to &quot;enwiki&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.wikibase.xwikis.link_wikis" data-xocfg-key="xowa.addon.wikibase.xwikis.link_wikis" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="enwiki"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.wikibase.xwikis.link_wikis__key_box' value='xowa.addon.wikibase.xwikis.link_wikis'></input>
+    <input type='hidden' id='xowa.addon.wikibase.xwikis.link_wikis__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.wikibase.xwikis.link_wikis_help_div' class='xohelp_div'>
+    <div id='xowa.addon.wikibase.xwikis.link_wikis_help_msg' class='xohelp_msg'><p>Enter a wiki code.<br/>
+The wiki code is used to create a hyperlink for the article title. For example, a wiki code of &quot;enwiki&quot; on <a href="/site/www.wikidata.org/wiki/Q2" tabindex="-1">Earth's Wikidata page</a> creates a hyperlink to English Wikipedia's Earth article.
+</p>
+</div>
+  </div>
+  
+
+  <h2>Special:Item by title</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.wikibase.item_by_title.site_default")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.wikibase.item_by_title.site_default__name' class='xocfg_itm_name'>Site default</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.wikibase.item_by_title.site_default__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.wikibase.item_by_title.site_default")' title="reset to &quot;enwiki&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.wikibase.item_by_title.site_default" data-xocfg-key="xowa.addon.wikibase.item_by_title.site_default" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="enwiki"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.wikibase.item_by_title.site_default__key_box' value='xowa.addon.wikibase.item_by_title.site_default'></input>
+    <input type='hidden' id='xowa.addon.wikibase.item_by_title.site_default__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.wikibase.item_by_title.site_default_help_div' class='xohelp_div'>
+    <div id='xowa.addon.wikibase.item_by_title.site_default_help_msg' class='xohelp_msg'><p>The name of the default site when using <a href="/site/www.wikidata.org/wiki/Special:ItemByTitle" id="xolnki_40" title="Special:ItemByTitle" tabindex="-1">www.wikidata.org:Special:ItemByTitle</a>.
+</p>
+</div>
+  </div>
+  
+
+</div>
+
+</div>
+
     </div>
   </div>
 </div>

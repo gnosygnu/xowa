@@ -740,6 +740,40 @@
           <span style='color: green;'>pass</span>
         </td>
       </tr>
+      <tr>
+        <td>
+          utf-8 char fails
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|var|â|}}
+        </td>
+        <td>
+          â
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          gsub fails with bracketed utf-8
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_gsub_w_multibyte_pattern}}
+        </td>
+        <td>
+          a-z
+        </td>
+        <td>
+          <span style='color: red;'>fail:<br>
+          'a-z</span>
+<pre>
+<span style='color: red;'>'<br>
+'a-146z
+ '</span>
+</pre>
+        </td>
+      </tr>
     </table>
   
     </div>

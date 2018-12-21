@@ -16,387 +16,402 @@
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
-    
     <div id='xocfg_body'>
-      <!-- TEXT:err_msg -->
-      <div id='xocfg_err'>
-      </div>
-      <div>
-        <!-- BTN:info -->
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
-         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
-          <option value='xowa.app.security'>
-            App - Security
-          </option>
-          <option value='xowa.app.startup'>
-            App - Startup
-          </option>
-          <option value='xowa.app.update'>
-            App - Update
-          </option>
-          <option value='xowa.gui.general'>
-            Gui - General
-          </option>
-          <option value='xowa.gui.tabs'>
-            Gui - Tabs
-          </option>
-          <option value='xowa.gui.url_bar' selected='selected'>
-            Gui - Address bar
-          </option>
-          <option value='xowa.gui.menus'>
-            Gui - Menus
-          </option>
-          <option value='xowa.gui.shortcuts'>
-            Gui - Shortcuts
-          </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Nightmode
-          </option>
-          <option value='xowa.wiki.hdumps'>
-            Wiki - HTML Databases
-          </option>
-          <option value='xowa.wiki.edit'>
-            Wiki - Editing
-          </option>
-          <option value='xowa.bldr.general'>
-            Import - General
-          </option>
-          <option value='xowa.bldr.db'>
-            Import - Database
-          </option>
-          <option value='xowa.bldr.page_sync'>
-            Import - Page sync
-          </option>
-          <option value='xowa.bldr.dansguardian'>
-            Import - Dansguardian
-          </option>
-          <option value='xowa.html.css'>
-            HTML - CSS
-          </option>
-          <option value='xowa.html.page'>
-            HTML - Page
-          </option>
-          <option value='xowa.html.tidy'>
-            HTML - Tidy
-          </option>
-          <option value='xowa.html.scripting'>
-            HTML - Scripting
-          </option>
-          <option value='xowa.files.general'>
-            Files - General
-          </option>
-          <option value='xowa.files.apps'>
-            Files - Apps
-          </option>
-          <option value='xowa.addon.search'>
-            Addon - Search
-          </option>
-          <option value='xowa.addon.fulltext_search'>
-            Addon - Full-text search
-          </option>
-          <option value='xowa.addon.category'>
-            Addon - Category
-          </option>
-          <option value='xowa.addon.http_server'>
-            Addon - HTTP Server
-          </option>
-          <option value='xowa.addon.scribunto'>
-            Addon - Scribunto
-          </option>
-          <option value='xowa.addon.math'>
-            Addon - Math
-          </option>
-          <option value='xowa.addon.score'>
-            Addon - Score
-          </option>
-          <option value='xowa.addon.popups'>
-            Addon - Popups
-          </option>
-          <option value='xowa.addon.wikibase'>
-            Addon - Wikidata
-          </option>
-          <option value='xowa.dev.general'>
-            Dev - General
-          </option>
-        </select> <!-- LINK:cfg_link -->
-         
-        <div style='float:right;margin:2px 7px;'>
-          <a id='options_lnk'>options link</a>
-        </div>
-      </div>
-      <div id='cfg_grps'>
-        <!-- TEXT:page_help -->
-        <div>
-          <p id='page_help_para'>
-          </p>
-        </div>
-        <h2>
-          Search
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.url_bar.search.enabled")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.gui.url_bar.search.enabled__name' class='xocfg_itm_name'>
-            Enabled
-          </div><!-- BTN:undo -->
-          <div id='xowa.gui.url_bar.search.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.url_bar.search.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.gui.url_bar.search.enabled" data-xocfg-key="xowa.gui.url_bar.search.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.gui.url_bar.search.enabled__key_box' value='xowa.gui.url_bar.search.enabled'> <input type='hidden' id='xowa.gui.url_bar.search.enabled__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.gui.url_bar.search.enabled_help_div' class='xohelp_div'>
-          <div id='xowa.gui.url_bar.search.enabled_help_msg' class='xohelp_msg'>
-            <p>
-              Choose one of the following:<br>
-            </p>
-            <ul>
-              <li>
-                <b>checked</b>: Enables search suggestions in address bar; typing in the address bar will show suggestions in a drop-down list.
-              </li>
-              <li>
-                <b>unchecked</b>: Disables search suggestions in address bar; typing in the address bar will not show suggestions.
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.url_bar.search.max_results")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.gui.url_bar.search.max_results__name' class='xocfg_itm_name'>
-            Max results
-          </div><!-- BTN:undo -->
-          <div id='xowa.gui.url_bar.search.max_results__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.url_bar.search.max_results")' title="reset to &quot;10&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.gui.url_bar.search.max_results" data-xocfg-key="xowa.gui.url_bar.search.max_results" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="10">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.gui.url_bar.search.max_results__key_box' value='xowa.gui.url_bar.search.max_results'> <input type='hidden' id='xowa.gui.url_bar.search.max_results__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.gui.url_bar.search.max_results_help_div' class='xohelp_div'>
-          <div id='xowa.gui.url_bar.search.max_results_help_msg' class='xohelp_msg'>
-            <p>
-              Maximum number of results to retrieve:<br>
-              This option limits the maximum number of results. For example, a setting of 10 with a search term of "earth" will retrieve the top 10 pages with the word "earth" in the title.
-            </p>
-            <ul>
-              <li>
-                For slower machines, decrease the number of words to 1. Note that the number must be greater than 0.
-              </li>
-              <li>
-                For faster machines, increase the number of words as per your liking.
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.url_bar.search.auto_wildcard")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.gui.url_bar.search.auto_wildcard__name' class='xocfg_itm_name'>
-            Auto-wildcard
-          </div><!-- BTN:undo -->
-          <div id='xowa.gui.url_bar.search.auto_wildcard__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.url_bar.search.auto_wildcard")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.gui.url_bar.search.auto_wildcard" data-xocfg-key="xowa.gui.url_bar.search.auto_wildcard" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.gui.url_bar.search.auto_wildcard__key_box' value='xowa.gui.url_bar.search.auto_wildcard'> <input type='hidden' id='xowa.gui.url_bar.search.auto_wildcard__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.gui.url_bar.search.auto_wildcard_help_div' class='xohelp_div'>
-          <div id='xowa.gui.url_bar.search.auto_wildcard_help_msg' class='xohelp_msg'>
-            <p>
-              Choose one of the following:<br>
-            </p>
-            <ul>
-              <li>
-                <b>checked</b>: Automatically adds a wildcard to every search suggestion. For example, "earth" will becomes "earth*" and match "Earth", "History of Earth", and "Earthquake". Note that the wildcard can be disabled by adding a space. For example, "earth " will match "Earth" and "History of Earth" but not "Earthquake".
-              </li>
-              <li>
-                <b>unchecked</b>: Does not add a wildcard to every search suggestion. "earth" will only "Earth" and "History of Earth"
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.url_bar.search.ns_ids")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.gui.url_bar.search.ns_ids__name' class='xocfg_itm_name'>
-            Namespace ids
-          </div><!-- BTN:undo -->
-          <div id='xowa.gui.url_bar.search.ns_ids__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.url_bar.search.ns_ids")' title="reset to &quot;0&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.gui.url_bar.search.ns_ids" data-xocfg-key="xowa.gui.url_bar.search.ns_ids" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="0">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.gui.url_bar.search.ns_ids__key_box' value='xowa.gui.url_bar.search.ns_ids'> <input type='hidden' id='xowa.gui.url_bar.search.ns_ids__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.gui.url_bar.search.ns_ids_help_div' class='xohelp_div'>
-          <div id='xowa.gui.url_bar.search.ns_ids_help_msg' class='xohelp_msg'>
-            <p>
-              Enter list of namespaces to search:<br>
-              This option specifies which namespaces to search. For more information, see <a tabindex="-1" href="/site/en.wikipedia.org/wiki/Help:Namespaces">https://en.wikipedia.org/wiki/Help:Namespaces</a>
-            </p>
-            <ul>
-              <li>
-                For the main namespace, enter in "0"
-              </li>
-              <li>
-                For all namespaces, enter in "*".
-              </li>
-              <li>
-                For specific namespaces, enter in the ids separated by a comma. For example, to search the Main, Wikipedia, Category, and Portal namespaces enter in "0,4,14,100"
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.url_bar.search.visible_rows")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.gui.url_bar.search.visible_rows__name' class='xocfg_itm_name'>
-            Visible rows
-          </div><!-- BTN:undo -->
-          <div id='xowa.gui.url_bar.search.visible_rows__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.url_bar.search.visible_rows")' title="reset to &quot;10&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.gui.url_bar.search.visible_rows" data-xocfg-key="xowa.gui.url_bar.search.visible_rows" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="10">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.gui.url_bar.search.visible_rows__key_box' value='xowa.gui.url_bar.search.visible_rows'> <input type='hidden' id='xowa.gui.url_bar.search.visible_rows__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.gui.url_bar.search.visible_rows_help_div' class='xohelp_div'>
-          <div id='xowa.gui.url_bar.search.visible_rows_help_msg' class='xohelp_msg'>
-            <p>
-              Maximum number of results to show in visible area:<br>
-              This option limits the maximum number of results shown on screen. This visible-rows number can be made less than max-results. For example:
-            </p>
-            <ul>
-              <li>
-                A max-results of 100 and a visible-rows of 25 will show results #1-25 in the drop-down list, while results #26-100 can be seen using the drop-down list's scroll bar.
-              </li>
-              <li>
-                A max-results of 25 and a visible-rows of 25 will always show all results on screen. The drop-down list will not have a scroll bar
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.url_bar.search.jump_len")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.gui.url_bar.search.jump_len__name' class='xocfg_itm_name'>
-            Page up / Page down increment
-          </div><!-- BTN:undo -->
-          <div id='xowa.gui.url_bar.search.jump_len__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.url_bar.search.jump_len")' title="reset to &quot;5&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.gui.url_bar.search.jump_len" data-xocfg-key="xowa.gui.url_bar.search.jump_len" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="5">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.gui.url_bar.search.jump_len__key_box' value='xowa.gui.url_bar.search.jump_len'> <input type='hidden' id='xowa.gui.url_bar.search.jump_len__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.gui.url_bar.search.jump_len_help_div' class='xohelp_div'>
-          <div id='xowa.gui.url_bar.search.jump_len_help_msg' class='xohelp_msg'>
-            <p>
-              Number of rows to move when pressing page-up or page-down
-            </p>
-          </div>
-        </div>
-        <h2>
-          Miscellaneous
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.url_bar.url_format")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.gui.url_bar.url_format__name' class='xocfg_itm_name'>
-            Url format
-          </div><!-- BTN:undo -->
-          <div id='xowa.gui.url_bar.url_format__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.url_bar.url_format")' title="reset to &quot;&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-<textarea id="xowa.gui.url_bar.url_format" data-xocfg-key="xowa.gui.url_bar.url_format" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">
-</textarea>
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.gui.url_bar.url_format__key_box' value='xowa.gui.url_bar.url_format'> <input type='hidden' id='xowa.gui.url_bar.url_format__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.gui.url_bar.url_format_help_div' class='xohelp_div'>
-          <div id='xowa.gui.url_bar.url_format_help_msg' class='xohelp_msg'>
-            <p>
-              Enter text to show in url bar for a given page
-            </p>
-            <p>
-              For example:
-            </p>
+  <!-- TEXT:err_msg -->
+  <div id='xocfg_err'></div>
+  
+  <div>
+    <!-- BTN:info -->
+    <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span>
+    
+    <!-- COMBO:cfg_grps -->
+    <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+      
+      <option value='xowa.app.security' >App - Security</option>
+      
+      <option value='xowa.app.startup' >App - Startup</option>
+      
+      <option value='xowa.app.update' >App - Update</option>
+      
+      <option value='xowa.gui.general' >Gui - General</option>
+      
+      <option value='xowa.gui.tabs' >Gui - Tabs</option>
+      
+      <option value='xowa.gui.url_bar'  selected='selected'>Gui - Address bar</option>
+      
+      <option value='xowa.gui.menus' >Gui - Menus</option>
+      
+      <option value='xowa.gui.shortcuts' >Gui - Shortcuts</option>
+      
+      <option value='xowa.gui.nightmode' >Gui - Nightmode</option>
+      
+      <option value='xowa.wiki.hdumps' >Wiki - HTML Databases</option>
+      
+      <option value='xowa.wiki.edit' >Wiki - Editing</option>
+      
+      <option value='xowa.bldr.general' >Import - General</option>
+      
+      <option value='xowa.bldr.db' >Import - Database</option>
+      
+      <option value='xowa.bldr.page_sync' >Import - Page sync</option>
+      
+      <option value='xowa.bldr.dansguardian' >Import - Dansguardian</option>
+      
+      <option value='xowa.html.css' >HTML - CSS</option>
+      
+      <option value='xowa.html.page' >HTML - Page</option>
+      
+      <option value='xowa.html.tidy' >HTML - Tidy</option>
+      
+      <option value='xowa.html.scripting' >HTML - Scripting</option>
+      
+      <option value='xowa.files.general' >Files - General</option>
+      
+      <option value='xowa.files.apps' >Files - Apps</option>
+      
+      <option value='xowa.addon.search' >Addon - Search</option>
+      
+      <option value='xowa.addon.fulltext_search' >Addon - Full-text search</option>
+      
+      <option value='xowa.addon.category' >Addon - Category</option>
+      
+      <option value='xowa.addon.http_server' >Addon - HTTP Server</option>
+      
+      <option value='xowa.addon.scribunto' >Addon - Scribunto</option>
+      
+      <option value='xowa.addon.math' >Addon - Math</option>
+      
+      <option value='xowa.addon.score' >Addon - Score</option>
+      
+      <option value='xowa.addon.popups' >Addon - Popups</option>
+      
+      <option value='xowa.addon.wikibase' >Addon - Wikidata</option>
+      
+      <option value='xowa.dev.general' >Dev - General</option>
+      
+    </select>
+    
+    <!-- LINK:cfg_link -->
+    
+    <div style='float:right;margin:2px 7px;'>
+      <a id='options_lnk'>options link</a>
+    </div>
+    
+  </div>
+  
+
+<div id='cfg_grps'>
+  <!-- TEXT:page_help -->
+  <div>
+    <p id='page_help_para'></p>
+  </div>
+
+  <h2>Search</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.url_bar.search.enabled")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.gui.url_bar.search.enabled__name' class='xocfg_itm_name'>Enabled</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.gui.url_bar.search.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.url_bar.search.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.gui.url_bar.search.enabled" data-xocfg-key="xowa.gui.url_bar.search.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.gui.url_bar.search.enabled__key_box' value='xowa.gui.url_bar.search.enabled'></input>
+    <input type='hidden' id='xowa.gui.url_bar.search.enabled__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.gui.url_bar.search.enabled_help_div' class='xohelp_div'>
+    <div id='xowa.gui.url_bar.search.enabled_help_msg' class='xohelp_msg'><p>Choose one of the following:<br/>
+</p>
+
+<ul>
+  <li> <b>checked</b>: Enables search suggestions in address bar; typing in the address bar will show suggestions in a drop-down list.
+  </li>
+  <li> <b>unchecked</b>: Disables search suggestions in address bar; typing in the address bar will not show suggestions.
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.url_bar.search.max_results")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.gui.url_bar.search.max_results__name' class='xocfg_itm_name'>Max results</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.gui.url_bar.search.max_results__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.url_bar.search.max_results")' title="reset to &quot;10&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.gui.url_bar.search.max_results" data-xocfg-key="xowa.gui.url_bar.search.max_results" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="10"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.gui.url_bar.search.max_results__key_box' value='xowa.gui.url_bar.search.max_results'></input>
+    <input type='hidden' id='xowa.gui.url_bar.search.max_results__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.gui.url_bar.search.max_results_help_div' class='xohelp_div'>
+    <div id='xowa.gui.url_bar.search.max_results_help_msg' class='xohelp_msg'><p>Maximum number of results to retrieve:<br/>
+This option limits the maximum number of results. For example, a setting of 10 with a search term of &quot;earth&quot; will retrieve the top 10 pages with the word &quot;earth&quot; in the title.
+</p>
+
+<ul>
+  <li> For slower machines, decrease the number of words to 1. Note that the number must be greater than 0.
+  </li>
+  <li> For faster machines, increase the number of words as per your liking.
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.url_bar.search.auto_wildcard")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.gui.url_bar.search.auto_wildcard__name' class='xocfg_itm_name'>Auto-wildcard</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.gui.url_bar.search.auto_wildcard__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.url_bar.search.auto_wildcard")' title="reset to &quot;y&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.gui.url_bar.search.auto_wildcard" data-xocfg-key="xowa.gui.url_bar.search.auto_wildcard" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.gui.url_bar.search.auto_wildcard__key_box' value='xowa.gui.url_bar.search.auto_wildcard'></input>
+    <input type='hidden' id='xowa.gui.url_bar.search.auto_wildcard__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.gui.url_bar.search.auto_wildcard_help_div' class='xohelp_div'>
+    <div id='xowa.gui.url_bar.search.auto_wildcard_help_msg' class='xohelp_msg'><p>Choose one of the following:<br/>
+</p>
+
+<ul>
+  <li> <b>checked</b>: Automatically adds a wildcard to every search suggestion. For example, &quot;earth&quot; will becomes &quot;earth*&quot; and match &quot;Earth&quot;, &quot;History of Earth&quot;, and &quot;Earthquake&quot;. Note that the wildcard can be disabled by adding a space. For example, &quot;earth &quot; will match &quot;Earth&quot; and &quot;History of Earth&quot; but not &quot;Earthquake&quot;.
+  </li>
+  <li> <b>unchecked</b>: Does not add a wildcard to every search suggestion. &quot;earth&quot; will only &quot;Earth&quot; and &quot;History of Earth&quot;
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.url_bar.search.ns_ids")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.gui.url_bar.search.ns_ids__name' class='xocfg_itm_name'>Namespace ids</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.gui.url_bar.search.ns_ids__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.url_bar.search.ns_ids")' title="reset to &quot;0&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.gui.url_bar.search.ns_ids" data-xocfg-key="xowa.gui.url_bar.search.ns_ids" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="0"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.gui.url_bar.search.ns_ids__key_box' value='xowa.gui.url_bar.search.ns_ids'></input>
+    <input type='hidden' id='xowa.gui.url_bar.search.ns_ids__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.gui.url_bar.search.ns_ids_help_div' class='xohelp_div'>
+    <div id='xowa.gui.url_bar.search.ns_ids_help_msg' class='xohelp_msg'><p>Enter list of namespaces to search:<br/>
+This option specifies which namespaces to search. For more information, see <a href="/site/en.wikipedia.org/wiki/Help:Namespaces" tabindex="-1">https://en.wikipedia.org/wiki/Help:Namespaces</a>
+</p>
+
+<ul>
+  <li> For the main namespace, enter in &quot;0&quot;
+  </li>
+  <li> For all namespaces, enter in &quot;*&quot;.
+  </li>
+  <li> For specific namespaces, enter in the ids separated by a comma. For example, to search the Main, Wikipedia, Category, and Portal namespaces enter in &quot;0,4,14,100&quot;
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.url_bar.search.visible_rows")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.gui.url_bar.search.visible_rows__name' class='xocfg_itm_name'>Visible rows</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.gui.url_bar.search.visible_rows__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.url_bar.search.visible_rows")' title="reset to &quot;10&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.gui.url_bar.search.visible_rows" data-xocfg-key="xowa.gui.url_bar.search.visible_rows" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="10"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.gui.url_bar.search.visible_rows__key_box' value='xowa.gui.url_bar.search.visible_rows'></input>
+    <input type='hidden' id='xowa.gui.url_bar.search.visible_rows__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.gui.url_bar.search.visible_rows_help_div' class='xohelp_div'>
+    <div id='xowa.gui.url_bar.search.visible_rows_help_msg' class='xohelp_msg'><p>Maximum number of results to show in visible area:<br/>
+This option limits the maximum number of results shown on screen. This visible-rows number can be made less than max-results. For example:
+</p>
+
+<ul>
+  <li> A max-results of 100 and a visible-rows of 25 will show results #1-25 in the drop-down list, while results #26-100 can be seen using the drop-down list's scroll bar.
+  </li>
+  <li> A max-results of 25 and a visible-rows of 25 will always show all results on screen. The drop-down list will not have a scroll bar
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.url_bar.search.jump_len")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.gui.url_bar.search.jump_len__name' class='xocfg_itm_name'>Page up / Page down increment</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.gui.url_bar.search.jump_len__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.url_bar.search.jump_len")' title="reset to &quot;5&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.gui.url_bar.search.jump_len" data-xocfg-key="xowa.gui.url_bar.search.jump_len" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="5"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.gui.url_bar.search.jump_len__key_box' value='xowa.gui.url_bar.search.jump_len'></input>
+    <input type='hidden' id='xowa.gui.url_bar.search.jump_len__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.gui.url_bar.search.jump_len_help_div' class='xohelp_div'>
+    <div id='xowa.gui.url_bar.search.jump_len_help_msg' class='xohelp_msg'><p>Number of rows to move when pressing page-up or page-down
+</p>
+</div>
+  </div>
+  
+
+  <h2>Miscellaneous</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.url_bar.url_format")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.gui.url_bar.url_format__name' class='xocfg_itm_name'>Url format</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.gui.url_bar.url_format__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.url_bar.url_format")' title="reset to &quot;&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<textarea id="xowa.gui.url_bar.url_format" data-xocfg-key="xowa.gui.url_bar.url_format" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4"></textarea></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.gui.url_bar.url_format__key_box' value='xowa.gui.url_bar.url_format'></input>
+    <input type='hidden' id='xowa.gui.url_bar.url_format__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.gui.url_bar.url_format_help_div' class='xohelp_div'>
+    <div id='xowa.gui.url_bar.url_format_help_msg' class='xohelp_msg'><p>Enter text to show in url bar for a given page
+</p>
+
+<p>For example:
+</p>
 <pre>
 en.wikipedia.org|English Wikipedia/~{page_title}
 de.wikipedia.org|German Wikipedia/~{page_title}
 *|~{wiki_domain}/~{page_title}
 </pre>
-            <p>
-              Here are some usage cases:
-            </p>
-            <ul>
-              <li>
-                Wiki is <code>en.wikipedia.org</code> and page is <code>Earth</code>: <code>English Wikipedia/Earth</code> will show
-              </li>
-              <li>
-                Wiki is <code>de.wikipedia.org</code> and page is <code>Erde</code> : <code>German Wikipedia/Erde</code> will show
-              </li>
-              <li>
-                Wiki is <code>fr.wikipedia.org</code> and page is <code>Terre</code>: <code>fr.wikipedia.org/Terre</code> will show
-              </li>
-            </ul>
-            <p>
-              This option has the following format:
-            </p>
-            <ul>
-              <li>
-                <b>Line-based</b>: Each line represents a separate rule. A url will be compared against the rule, and if it matches, only that rule will apply. If it doesn't match, it goes on to the next line.
-              </li>
-              <li>
-                <b>Match</b>: The wiki domain part is the text before the first pipe (<code>|</code>). Think of this as "when in this wiki...". This can be a wiki domain (en.wikipedia.org).
-              </li>
-              <li>
-                <b>Include</b>: Think of this as "...show this text in the url bar". This can be text, or a token which will be replaced automatically. Note that tokens are flanked with <code>~{</code> and <code>}</code>. For example: <code>~{wiki_domain}</code>
-              </li>
-            </ul>
-            <p>
-              Tokens:
-            </p>
-            <ul>
-              <li>
-                <code>wiki_domain</code>: The domain of the current wiki. For example, <code>en.wikipedia.org</code>
-              </li>
-              <li>
-                <code>page_title</code>: The page title of the current page. For example, <code>History_of_Earth</code>.
-              </li>
-              <li>
-                <code>page_title_spaces</code>: The page title of the current page but spaces are used instead of underscores. For example, <code>History of Earth</code>.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+
+<p>Here are some usage cases:
+</p>
+
+<ul>
+  <li> Wiki is <code>en.wikipedia.org</code> and page is <code>Earth</code>: <code>English Wikipedia/Earth</code> will show
+  </li>
+  <li> Wiki is <code>de.wikipedia.org</code> and page is <code>Erde</code> : <code>German Wikipedia/Erde</code> will show
+  </li>
+  <li> Wiki is <code>fr.wikipedia.org</code> and page is <code>Terre</code>: <code>fr.wikipedia.org/Terre</code> will show
+  </li>
+</ul>
+
+<p>This option has the following format:
+</p>
+
+<ul>
+  <li> <b>Line-based</b>: Each line represents a separate rule. A url will be compared against the rule, and if it matches, only that rule will apply. If it doesn't match, it goes on to the next line.
+  </li>
+  <li> <b>Match</b>: The wiki domain part is the text before the first pipe (<code>|</code>). Think of this as &quot;when in this wiki...&quot;. This can be a wiki domain (en.wikipedia.org).
+  </li>
+  <li> <b>Include</b>: Think of this as &quot;...show this text in the url bar&quot;. This can be text, or a token which will be replaced automatically. Note that tokens are flanked with <code>~{</code> and <code>}</code>. For example: <code>~{wiki_domain}</code>
+  </li>
+</ul>
+
+<p>Tokens:
+</p>
+
+<ul>
+  <li> <code>wiki_domain</code>: The domain of the current wiki. For example, <code>en.wikipedia.org</code>
+  </li>
+  <li> <code>page_title</code>: The page title of the current page. For example, <code>History_of_Earth</code>.
+  </li>
+  <li> <code>page_title_spaces</code>: The page title of the current page but spaces are used instead of underscores. For example, <code>History of Earth</code>.
+  </li>
+</ul>
+</div>
+  </div>
   
+
+</div>
+
+</div>
+
     </div>
   </div>
 </div>

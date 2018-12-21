@@ -16,1709 +16,818 @@
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
-    
     <div id='xocfg_body'>
-      <!-- TEXT:err_msg -->
-      <div id='xocfg_err'>
-      </div>
-      <div>
-        <!-- BTN:info -->
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
-         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
-          <option value='xowa.app.security'>
-            App - Security
-          </option>
-          <option value='xowa.app.startup'>
-            App - Startup
-          </option>
-          <option value='xowa.app.update'>
-            App - Update
-          </option>
-          <option value='xowa.gui.general' selected='selected'>
-            Gui - General
-          </option>
-          <option value='xowa.gui.tabs'>
-            Gui - Tabs
-          </option>
-          <option value='xowa.gui.url_bar'>
-            Gui - Address bar
-          </option>
-          <option value='xowa.gui.menus'>
-            Gui - Menus
-          </option>
-          <option value='xowa.gui.shortcuts'>
-            Gui - Shortcuts
-          </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Nightmode
-          </option>
-          <option value='xowa.wiki.hdumps'>
-            Wiki - HTML Databases
-          </option>
-          <option value='xowa.wiki.edit'>
-            Wiki - Editing
-          </option>
-          <option value='xowa.bldr.general'>
-            Import - General
-          </option>
-          <option value='xowa.bldr.db'>
-            Import - Database
-          </option>
-          <option value='xowa.bldr.page_sync'>
-            Import - Page sync
-          </option>
-          <option value='xowa.bldr.dansguardian'>
-            Import - Dansguardian
-          </option>
-          <option value='xowa.html.css'>
-            HTML - CSS
-          </option>
-          <option value='xowa.html.page'>
-            HTML - Page
-          </option>
-          <option value='xowa.html.tidy'>
-            HTML - Tidy
-          </option>
-          <option value='xowa.html.scripting'>
-            HTML - Scripting
-          </option>
-          <option value='xowa.files.general'>
-            Files - General
-          </option>
-          <option value='xowa.files.apps'>
-            Files - Apps
-          </option>
-          <option value='xowa.addon.search'>
-            Addon - Search
-          </option>
-          <option value='xowa.addon.fulltext_search'>
-            Addon - Full-text search
-          </option>
-          <option value='xowa.addon.category'>
-            Addon - Category
-          </option>
-          <option value='xowa.addon.http_server'>
-            Addon - HTTP Server
-          </option>
-          <option value='xowa.addon.scribunto'>
-            Addon - Scribunto
-          </option>
-          <option value='xowa.addon.math'>
-            Addon - Math
-          </option>
-          <option value='xowa.addon.score'>
-            Addon - Score
-          </option>
-          <option value='xowa.addon.popups'>
-            Addon - Popups
-          </option>
-          <option value='xowa.addon.wikibase'>
-            Addon - Wikidata
-          </option>
-          <option value='xowa.dev.general'>
-            Dev - General
-          </option>
-        </select> <!-- LINK:cfg_link -->
-         
-        <div style='float:right;margin:2px 7px;'>
-          <a id='options_lnk'>options link</a>
-        </div>
-      </div>
-      <div id='cfg_grps'>
-        <!-- TEXT:page_help -->
-        <div>
-          <p id='page_help_para'>
-          </p>
-        </div>
-        <h2>
-          App
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.app.lang")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.gui.app.lang__name' class='xocfg_itm_name'>
-            Language
-          </div><!-- BTN:undo -->
-          <div id='xowa.gui.app.lang__undo' data-xocfg-type='list:xowa.gui.app.lang' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.app.lang")' title="reset to &quot;en&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <select id="xowa.gui.app.lang" data-xocfg-key="xowa.gui.app.lang" data-xocfg-type="list:xowa.gui.app.lang" accesskey="d" class="xocfg_data__list" size="5">
-              <option value="en" selected="selected">
-                English [en]
-              </option>
-              <option value="de">
-                Deutsch [de]
-              </option>
-              <option value="pl">
-                Polski [pl]
-              </option>
-              <option value="zh-hans">
-                ‪中文(简体)‬ [zh-hans]
-              </option>
-              <option value="zh-hant">
-                ‪中文(繁體)‬ [zh-hant]
-              </option>
-              <option value="aa">
-                Qafár af [aa]
-              </option>
-              <option value="ab">
-                Аҧсуа [ab]
-              </option>
-              <option value="ace">
-                Acèh [ace]
-              </option>
-              <option value="ady">
-                Adyghe [ady]
-              </option>
-              <option value="ady-cyrl">
-                West Circassian (Cyrillic) [ady-cyrl]
-              </option>
-              <option value="aeb">
-                زَوُن [aeb]
-              </option>
-              <option value="aeb-arab">
-                زَوُن [aeb-arab]
-              </option>
-              <option value="aeb-latn">
-                زَوُن [aeb-latn]
-              </option>
-              <option value="af">
-                Afrikaans [af]
-              </option>
-              <option value="ak">
-                Akan [ak]
-              </option>
-              <option value="akz">
-                Alibamu [akz]
-              </option>
-              <option value="aln">
-                Gegë [aln]
-              </option>
-              <option value="als">
-                Alemannisch [als]
-              </option>
-              <option value="am">
-                አማርኛ [am]
-              </option>
-              <option value="an">
-                Aragonés [an]
-              </option>
-              <option value="ang">
-                Ænglisc [ang]
-              </option>
-              <option value="anp">
-                अङ्गिका [anp]
-              </option>
-              <option value="ar">
-                العربية [ar]
-              </option>
-              <option value="arc">
-                ܐܪܡܝܐ [arc]
-              </option>
-              <option value="arn">
-                Mapudungun [arn]
-              </option>
-              <option value="aro">
-                Araona [aro]
-              </option>
-              <option value="arq">
-                Algerian Arabic [arq]
-              </option>
-              <option value="ary">
-                Maġribi [ary]
-              </option>
-              <option value="arz">
-                مصرى [arz]
-              </option>
-              <option value="as">
-                অসমীয়া [as]
-              </option>
-              <option value="ase">
-                American Sign Language [ase]
-              </option>
-              <option value="ast">
-                Asturianu [ast]
-              </option>
-              <option value="atj">
-                Atikamekw [atj]
-              </option>
-              <option value="av">
-                Авар [av]
-              </option>
-              <option value="avk">
-                Kotava [avk]
-              </option>
-              <option value="awa">
-                Awadhi [awa]
-              </option>
-              <option value="ay">
-                Aymar aru [ay]
-              </option>
-              <option value="az">
-                Azərbaycanca [az]
-              </option>
-              <option value="azb">
-                South Azerbaijani [azb]
-              </option>
-              <option value="ba">
-                Башҡортса [ba]
-              </option>
-              <option value="ban">
-                ᬩᬲᬩᬮᬶ [ban]
-              </option>
-              <option value="bar">
-                Boarisch [bar]
-              </option>
-              <option value="bat-smg">
-                Žemaitėška [bat-smg]
-              </option>
-              <option value="bbc">
-                Batak Toba [bbc]
-              </option>
-              <option value="bbc-latn">
-                Batak Toba (Latin) [bbc-latn]
-              </option>
-              <option value="bcc">
-                بلوچی مکرانی [bcc]
-              </option>
-              <option value="bcl">
-                Bikol Central [bcl]
-              </option>
-              <option value="be">
-                Беларуская [be]
-              </option>
-              <option value="be-tarask">
-                ‪Беларуская (тарашкевіца)‬ [be-tarask]
-              </option>
-              <option value="be-x-old">
-                ‪Беларуская (тарашкевіца)‬ [be-x-old]
-              </option>
-              <option value="bew">
-                Betawi [bew]
-              </option>
-              <option value="bg">
-                Български [bg]
-              </option>
-              <option value="bgn">
-                Balochi [bgn]
-              </option>
-              <option value="bh">
-                भोजपुरी [bh]
-              </option>
-              <option value="bho">
-                भोजपुरी [bho]
-              </option>
-              <option value="bi">
-                Bislama [bi]
-              </option>
-              <option value="bjn">
-                Bahasa Banjar [bjn]
-              </option>
-              <option value="bm">
-                Bamanankan [bm]
-              </option>
-              <option value="bn">
-                বাংলা [bn]
-              </option>
-              <option value="bo">
-                བོད་ཡིག [bo]
-              </option>
-              <option value="bpy">
-                ইমার ঠার/বিষ্ণুপ্রিয়া মণিপুরী [bpy]
-              </option>
-              <option value="bqi">
-                بختياري [bqi]
-              </option>
-              <option value="br">
-                Brezhoneg [br]
-              </option>
-              <option value="brh">
-                Bráhuí [brh]
-              </option>
-              <option value="bs">
-                Bosanski [bs]
-              </option>
-              <option value="bto">
-                Rinconada Bikol [bto]
-              </option>
-              <option value="bug">
-                ᨅᨔ ᨕᨘᨁᨗ [bug]
-              </option>
-              <option value="bxr">
-                Буряад [bxr]
-              </option>
-              <option value="ca">
-                Català [ca]
-              </option>
-              <option value="cbk-zam">
-                Chavacano de Zamboanga [cbk-zam]
-              </option>
-              <option value="cdo">
-                Mìng-dĕ̤ng-ngṳ̄ [cdo]
-              </option>
-              <option value="ce">
-                Нохчийн [ce]
-              </option>
-              <option value="ceb">
-                Cebuano [ceb]
-              </option>
-              <option value="ch">
-                Chamoru [ch]
-              </option>
-              <option value="chm">
-                Mari [chm]
-              </option>
-              <option value="cho">
-                Choctaw [cho]
-              </option>
-              <option value="chr">
-                ᏣᎳᎩ [chr]
-              </option>
-              <option value="chy">
-                Tsetsêhestâhese [chy]
-              </option>
-              <option value="ckb">
-                کوردی [ckb]
-              </option>
-              <option value="co">
-                Corsu [co]
-              </option>
-              <option value="cps">
-                Capiceño [cps]
-              </option>
-              <option value="cr">
-                Nēhiyawēwin / ᓀᐦᐃᔭᐍᐏᐣ [cr]
-              </option>
-              <option value="crh">
-                Qırımtatarca [crh]
-              </option>
-              <option value="crh-cyrl">
-                ‪Къырымтатарджа (Кирилл)‬ [crh-cyrl]
-              </option>
-              <option value="crh-latn">
-                ‪Qırımtatarca (Latin)‬ [crh-latn]
-              </option>
-              <option value="cs">
-                Česky [cs]
-              </option>
-              <option value="csb">
-                Kaszëbsczi [csb]
-              </option>
-              <option value="cu">
-                Словѣ́ньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ [cu]
-              </option>
-              <option value="cv">
-                Чӑвашла [cv]
-              </option>
-              <option value="cy">
-                Cymraeg [cy]
-              </option>
-              <option value="da">
-                Dansk [da]
-              </option>
-              <option value="de-at">
-                Österreichisches Deutsch [de-at]
-              </option>
-              <option value="de-ch">
-                Schweizer Hochdeutsch [de-ch]
-              </option>
-              <option value="de-formal">
-                ‪Deutsch (Sie-Form)‬ [de-formal]
-              </option>
-              <option value="diq">
-                Zazaki [diq]
-              </option>
-              <option value="dsb">
-                Dolnoserbski [dsb]
-              </option>
-              <option value="dtp">
-                Dusun Bundu-liwan [dtp]
-              </option>
-              <option value="dty">
-                Dotyali [dty]
-              </option>
-              <option value="dv">
-                ދިވެހިބަސް [dv]
-              </option>
-              <option value="dz">
-                ཇོང་ཁ [dz]
-              </option>
-              <option value="ee">
-                Eʋegbe [ee]
-              </option>
-              <option value="egl">
-                Emiliàn [egl]
-              </option>
-              <option value="el">
-                Ελληνικά [el]
-              </option>
-              <option value="eml">
-                Emiliàn e rumagnòl [eml]
-              </option>
-              <option value="en-ca">
-                Canadian English [en-ca]
-              </option>
-              <option value="en-gb">
-                British English [en-gb]
-              </option>
-              <option value="en-rtl">
-                English rtl [en-rtl]
-              </option>
-              <option value="enrtl">
-                English (right to left) [enrtl]
-              </option>
-              <option value="eo">
-                Esperanto [eo]
-              </option>
-              <option value="es">
-                Español [es]
-              </option>
-              <option value="es-formal">
-                Spanish (formal) [es-formal]
-              </option>
-              <option value="esu">
-                Yuk'ip [esu]
-              </option>
-              <option value="et">
-                Eesti [et]
-              </option>
-              <option value="eu">
-                Euskara [eu]
-              </option>
-              <option value="ext">
-                Estremeñu [ext]
-              </option>
-              <option value="fa">
-                فارسی [fa]
-              </option>
-              <option value="ff">
-                Fulfulde [ff]
-              </option>
-              <option value="fi">
-                Suomi [fi]
-              </option>
-              <option value="fit">
-                meänkieli [fit]
-              </option>
-              <option value="fiu-vro">
-                Võro [fiu-vro]
-              </option>
-              <option value="fj">
-                Na Vosa Vakaviti [fj]
-              </option>
-              <option value="fo">
-                Føroyskt [fo]
-              </option>
-              <option value="fr">
-                Français [fr]
-              </option>
-              <option value="frc">
-                Français cadien [frc]
-              </option>
-              <option value="frp">
-                Arpetan [frp]
-              </option>
-              <option value="frr">
-                Nordfriisk [frr]
-              </option>
-              <option value="fur">
-                Furlan [fur]
-              </option>
-              <option value="fy">
-                Frysk [fy]
-              </option>
-              <option value="ga">
-                Gaeilge [ga]
-              </option>
-              <option value="gag">
-                Gagauz [gag]
-              </option>
-              <option value="gan">
-                贛語 [gan]
-              </option>
-              <option value="gan-hans">
-                ‪赣语(简体)‬ [gan-hans]
-              </option>
-              <option value="gan-hant">
-                ‪贛語(繁體)‬ [gan-hant]
-              </option>
-              <option value="gd">
-                Gàidhlig [gd]
-              </option>
-              <option value="gl">
-                Galego [gl]
-              </option>
-              <option value="glk">
-                گیلکی [glk]
-              </option>
-              <option value="gn">
-                Avañe'ẽ [gn]
-              </option>
-              <option value="gom">
-                कोंकणी [gom]
-              </option>
-              <option value="gom-deva">
-                Konkani [gom-deva]
-              </option>
-              <option value="gom-latn">
-                कोंकणी (Latin) [gom-latn]
-              </option>
-              <option value="gor">
-                Gor [gor]
-              </option>
-              <option value="got">
-                𐌲𐌿𐍄𐌹𐍃𐌺 [got]
-              </option>
-              <option value="grc">
-                Ἀρχαία ἑλληνικὴ [grc]
-              </option>
-              <option value="gsw">
-                Alemannisch [gsw]
-              </option>
-              <option value="gu">
-                ગુજરાતી [gu]
-              </option>
-              <option value="guc">
-                Wayuu [guc]
-              </option>
-              <option value="gv">
-                Gaelg [gv]
-              </option>
-              <option value="ha">
-                هَوُسَ [ha]
-              </option>
-              <option value="hak">
-                Hak-kâ-fa [hak]
-              </option>
-              <option value="haw">
-                Hawai`i [haw]
-              </option>
-              <option value="he">
-                עברית [he]
-              </option>
-              <option value="hi">
-                हिन्दी [hi]
-              </option>
-              <option value="hif">
-                Fiji Hindi [hif]
-              </option>
-              <option value="hif-latn">
-                Fiji Hindi [hif-latn]
-              </option>
-              <option value="hil">
-                Ilonggo [hil]
-              </option>
-              <option value="ho">
-                Hiri Motu [ho]
-              </option>
-              <option value="hr">
-                Hrvatski [hr]
-              </option>
-              <option value="hrx">
-                Hunsriker [hrx]
-              </option>
-              <option value="hsb">
-                Hornjoserbsce [hsb]
-              </option>
-              <option value="hsn">
-                Xiang [hsn]
-              </option>
-              <option value="ht">
-                Kreyòl ayisyen [ht]
-              </option>
-              <option value="hu">
-                Magyar [hu]
-              </option>
-              <option value="hu-formal">
-                Magyar (formal) [hu-formal]
-              </option>
-              <option value="hy">
-                Հայերեն [hy]
-              </option>
-              <option value="hz">
-                Otsiherero [hz]
-              </option>
-              <option value="ia">
-                Interlingua [ia]
-              </option>
-              <option value="id">
-                Bahasa Indonesia [id]
-              </option>
-              <option value="ie">
-                Interlingue [ie]
-              </option>
-              <option value="ig">
-                Igbo [ig]
-              </option>
-              <option value="ii">
-                ꆇꉙ [ii]
-              </option>
-              <option value="ik">
-                Iñupiak [ik]
-              </option>
-              <option value="ike-cans">
-                ᐃᓄᒃᑎᑐᑦ [ike-cans]
-              </option>
-              <option value="ike-latn">
-                inuktitut [ike-latn]
-              </option>
-              <option value="ilo">
-                Ilokano [ilo]
-              </option>
-              <option value="inh">
-                ГІалгІай Ğalğaj [inh]
-              </option>
-              <option value="io">
-                Ido [io]
-              </option>
-              <option value="is">
-                Íslenska [is]
-              </option>
-              <option value="it">
-                Italiano [it]
-              </option>
-              <option value="iu">
-                ᐃᓄᒃᑎᑐᑦ/inuktitut [iu]
-              </option>
-              <option value="izh">
-                Ingrian [izh]
-              </option>
-              <option value="ja">
-                日本語 [ja]
-              </option>
-              <option value="jam">
-                Patois [jam]
-              </option>
-              <option value="jbo">
-                Lojban [jbo]
-              </option>
-              <option value="jut">
-                Jysk [jut]
-              </option>
-              <option value="jv">
-                Basa Jawa [jv]
-              </option>
-              <option value="ka">
-                ქართული [ka]
-              </option>
-              <option value="kaa">
-                Qaraqalpaqsha [kaa]
-              </option>
-              <option value="kab">
-                Taqbaylit [kab]
-              </option>
-              <option value="kbd">
-                Къэбэрдеибзэ / Qabardjajəbza [kbd]
-              </option>
-              <option value="kbd-cyrl">
-                къэбэрдеибзэ [kbd-cyrl]
-              </option>
-              <option value="kbp">
-                Kabiye [kbp]
-              </option>
-              <option value="kg">
-                Kongo [kg]
-              </option>
-              <option value="khw">
-                کھوار [khw]
-              </option>
-              <option value="ki">
-                Gĩkũyũ [ki]
-              </option>
-              <option value="kiu">
-                Kırmancki [kiu]
-              </option>
-              <option value="kj">
-                Kwanyama [kj]
-              </option>
-              <option value="kk">
-                Қазақша [kk]
-              </option>
-              <option value="kk-arab">
-                ‫قازاقشا (تٴوتە)‬ [kk-arab]
-              </option>
-              <option value="kk-cn">
-                ‫قازاقشا (جۇنگو)‬ [kk-cn]
-              </option>
-              <option value="kk-cyrl">
-                ‪Қазақша (кирил)‬ [kk-cyrl]
-              </option>
-              <option value="kk-kz">
-                ‪Қазақша (Қазақстан)‬ [kk-kz]
-              </option>
-              <option value="kk-latn">
-                ‪Qazaqşa (latın)‬ [kk-latn]
-              </option>
-              <option value="kk-tr">
-                ‪Qazaqşa (Türkïya)‬ [kk-tr]
-              </option>
-              <option value="kl">
-                Kalaallisut [kl]
-              </option>
-              <option value="km">
-                ភាសាខ្មែរ [km]
-              </option>
-              <option value="kn">
-                ಕನ್ನಡ [kn]
-              </option>
-              <option value="ko">
-                한국어 [ko]
-              </option>
-              <option value="ko-kp">
-                한국어 (조선) [ko-kp]
-              </option>
-              <option value="koi">
-                Перем Коми [koi]
-              </option>
-              <option value="kok">
-                [kok]
-              </option>
-              <option value="kr">
-                Kanuri [kr]
-              </option>
-              <option value="krc">
-                Къарачай-Малкъар [krc]
-              </option>
-              <option value="kri">
-                Krio [kri]
-              </option>
-              <option value="krj">
-                Kinaray-a [krj]
-              </option>
-              <option value="krl">
-                Karelian [krl]
-              </option>
-              <option value="ks">
-                कश्मीरी - (كشميري) [ks]
-              </option>
-              <option value="ks-arab">
-                کٲشُر [ks-arab]
-              </option>
-              <option value="ks-deva">
-                कॉशुर [ks-deva]
-              </option>
-              <option value="ksh">
-                Ripoarisch [ksh]
-              </option>
-              <option value="ku">
-                Kurdî [ku]
-              </option>
-              <option value="ku-arab">
-                ‫كوردي (عەرەبی)‬ [ku-arab]
-              </option>
-              <option value="ku-latn">
-                ‪Kurdî (latînî)‬ [ku-latn]
-              </option>
-              <option value="kv">
-                Коми [kv]
-              </option>
-              <option value="kw">
-                Kernowek [kw]
-              </option>
-              <option value="ky">
-                Кыргызча [ky]
-              </option>
-              <option value="la">
-                Latina [la]
-              </option>
-              <option value="lad">
-                Ladino [lad]
-              </option>
-              <option value="lb">
-                Lëtzebuergesch [lb]
-              </option>
-              <option value="lbe">
-                Лакку [lbe]
-              </option>
-              <option value="lez">
-                Лезги [lez]
-              </option>
-              <option value="lfn">
-                Lingua Franca Nova [lfn]
-              </option>
-              <option value="lg">
-                Luganda [lg]
-              </option>
-              <option value="li">
-                Limburgs [li]
-              </option>
-              <option value="lij">
-                Líguru [lij]
-              </option>
-              <option value="liv">
-                Līvõ kēļ [liv]
-              </option>
-              <option value="lki">
-                Laki [lki]
-              </option>
-              <option value="lmo">
-                Lumbaart [lmo]
-              </option>
-              <option value="ln">
-                Lingála [ln]
-              </option>
-              <option value="lo">
-                ລາວ [lo]
-              </option>
-              <option value="loz">
-                Silozi [loz]
-              </option>
-              <option value="lrc">
-                لوری [lrc]
-              </option>
-              <option value="lt">
-                Lietuvių [lt]
-              </option>
-              <option value="ltg">
-                Latgaļu [ltg]
-              </option>
-              <option value="lus">
-                Mizo ţawng [lus]
-              </option>
-              <option value="luz">
-                Luri [luz]
-              </option>
-              <option value="lv">
-                Latviešu [lv]
-              </option>
-              <option value="lzh">
-                文言 [lzh]
-              </option>
-              <option value="lzz">
-                Lazuri [lzz]
-              </option>
-              <option value="mai">
-                मैथिली [mai]
-              </option>
-              <option value="map-bms">
-                Basa Banyumasan [map-bms]
-              </option>
-              <option value="mdf">
-                Мокшень [mdf]
-              </option>
-              <option value="mg">
-                Malagasy [mg]
-              </option>
-              <option value="mh">
-                Ebon [mh]
-              </option>
-              <option value="mhr">
-                Олык Марий [mhr]
-              </option>
-              <option value="mi">
-                Māori [mi]
-              </option>
-              <option value="mic">
-                Mi'kmaq [mic]
-              </option>
-              <option value="min">
-                Baso Minangkabau [min]
-              </option>
-              <option value="mk">
-                Македонски [mk]
-              </option>
-              <option value="ml">
-                മലയാളം [ml]
-              </option>
-              <option value="mn">
-                Монгол [mn]
-              </option>
-              <option value="mnc">
-                Manchu [mnc]
-              </option>
-              <option value="mo">
-                Молдовеняскэ [mo]
-              </option>
-              <option value="mr">
-                मराठी [mr]
-              </option>
-              <option value="mrj">
-                Кырык мары [mrj]
-              </option>
-              <option value="ms">
-                Bahasa Melayu [ms]
-              </option>
-              <option value="mt">
-                Malti [mt]
-              </option>
-              <option value="mui">
-                Musi [mui]
-              </option>
-              <option value="mus">
-                Mvskoke [mus]
-              </option>
-              <option value="mwl">
-                Mirandés [mwl]
-              </option>
-              <option value="mwv">
-                Behase Mentawei [mwv]
-              </option>
-              <option value="my">
-                Burmese [my]
-              </option>
-              <option value="myv">
-                Эрзянь [myv]
-              </option>
-              <option value="mzn">
-                مازِرونی [mzn]
-              </option>
-              <option value="na">
-                Dorerin Naoero [na]
-              </option>
-              <option value="nah">
-                Nāhuatl [nah]
-              </option>
-              <option value="nan">
-                Bân-lâm-gú [nan]
-              </option>
-              <option value="nap">
-                Nnapulitano [nap]
-              </option>
-              <option value="nb">
-                ‪Norsk (bokmål)‬ [nb]
-              </option>
-              <option value="nds">
-                Plattdüütsch [nds]
-              </option>
-              <option value="nds-nl">
-                Nedersaksisch [nds-nl]
-              </option>
-              <option value="ne">
-                नेपाली [ne]
-              </option>
-              <option value="new">
-                नेपाल भाषा [new]
-              </option>
-              <option value="ng">
-                Oshiwambo [ng]
-              </option>
-              <option value="niu">
-                Niuē [niu]
-              </option>
-              <option value="nl">
-                Nederlands [nl]
-              </option>
-              <option value="nl-informal">
-                ‪Nederlands (informeel)‬ [nl-informal]
-              </option>
-              <option value="nn">
-                ‪Norsk (nynorsk)‬ [nn]
-              </option>
-              <option value="no">
-                ‪Norsk (bokmål)‬ [no]
-              </option>
-              <option value="nov">
-                Novial [nov]
-              </option>
-              <option value="nrm">
-                Nouormand [nrm]
-              </option>
-              <option value="nso">
-                Sesotho sa Leboa [nso]
-              </option>
-              <option value="nv">
-                Diné bizaad [nv]
-              </option>
-              <option value="ny">
-                Chi-Chewa [ny]
-              </option>
-              <option value="oc">
-                Occitan [oc]
-              </option>
-              <option value="olo">
-                Olo [olo]
-              </option>
-              <option value="om">
-                Oromoo [om]
-              </option>
-              <option value="or">
-                ଓଡ଼ିଆ [or]
-              </option>
-              <option value="os">
-                Иронау [os]
-              </option>
-              <option value="pa">
-                ਪੰਜਾਬੀ [pa]
-              </option>
-              <option value="pag">
-                Pangasinan [pag]
-              </option>
-              <option value="pam">
-                Kapampangan [pam]
-              </option>
-              <option value="pap">
-                Papiamentu [pap]
-              </option>
-              <option value="pbb">
-                Páez [pbb]
-              </option>
-              <option value="pcd">
-                Picard [pcd]
-              </option>
-              <option value="pdc">
-                Deitsch [pdc]
-              </option>
-              <option value="pdt">
-                Plautdietsch [pdt]
-              </option>
-              <option value="pfl">
-                Pälzisch [pfl]
-              </option>
-              <option value="pi">
-                पािऴ [pi]
-              </option>
-              <option value="pih">
-                Norfuk / Pitkern [pih]
-              </option>
-              <option value="pms">
-                Piemontèis [pms]
-              </option>
-              <option value="pnb">
-                پنجابی [pnb]
-              </option>
-              <option value="pnt">
-                Ποντιακά [pnt]
-              </option>
-              <option value="ppl">
-                Pipil [ppl]
-              </option>
-              <option value="prg">
-                Prūsiskan [prg]
-              </option>
-              <option value="ps">
-                پښتو [ps]
-              </option>
-              <option value="pt">
-                Português [pt]
-              </option>
-              <option value="pt-br">
-                Português do Brasil [pt-br]
-              </option>
-              <option value="qqq">
-                MediaWiki sample [qqq]
-              </option>
-              <option value="qu">
-                Runa Simi [qu]
-              </option>
-              <option value="qug">
-                Runa shimi [qug]
-              </option>
-              <option value="rap">
-                Rapa Nui [rap]
-              </option>
-              <option value="rgn">
-                Rumagnôl [rgn]
-              </option>
-              <option value="rif">
-                Tarifit [rif]
-              </option>
-              <option value="rm">
-                Rumantsch [rm]
-              </option>
-              <option value="rmf">
-                Finnish Kalo [rmf]
-              </option>
-              <option value="rmy">
-                Romani [rmy]
-              </option>
-              <option value="rn">
-                Kirundi [rn]
-              </option>
-              <option value="ro">
-                Română [ro]
-              </option>
-              <option value="roa-rup">
-                Armãneashce [roa-rup]
-              </option>
-              <option value="roa-tara">
-                Tarandíne [roa-tara]
-              </option>
-              <option value="ru">
-                Русский [ru]
-              </option>
-              <option value="rue">
-                Русиньскый [rue]
-              </option>
-              <option value="rup">
-                Armãneașce [rup]
-              </option>
-              <option value="ruq">
-                Vlăheşte [ruq]
-              </option>
-              <option value="ruq-cyrl">
-                Влахесте [ruq-cyrl]
-              </option>
-              <option value="ruq-latn">
-                Vlăheşte [ruq-latn]
-              </option>
-              <option value="rw">
-                Kinyarwanda [rw]
-              </option>
-              <option value="ryu">
-                Okinawan [ryu]
-              </option>
-              <option value="sa">
-                संस्कृत [sa]
-              </option>
-              <option value="sah">
-                Саха тыла [sah]
-              </option>
-              <option value="sat">
-                Santali [sat]
-              </option>
-              <option value="saz">
-                Saurashtra [saz]
-              </option>
-              <option value="sc">
-                Sardu [sc]
-              </option>
-              <option value="scn">
-                Sicilianu [scn]
-              </option>
-              <option value="sco">
-                Scots [sco]
-              </option>
-              <option value="sd">
-                سنڌي [sd]
-              </option>
-              <option value="sdc">
-                Sassaresu [sdc]
-              </option>
-              <option value="sdh">
-                Southern Kurdish [sdh]
-              </option>
-              <option value="se">
-                Sámegiella [se]
-              </option>
-              <option value="sei">
-                Cmique Itom [sei]
-              </option>
-              <option value="ses">
-                Songhay [ses]
-              </option>
-              <option value="sg">
-                Sängö [sg]
-              </option>
-              <option value="sgs">
-                Žemaitėška [sgs]
-              </option>
-              <option value="sh">
-                Srpskohrvatski / Српскохрватски [sh]
-              </option>
-              <option value="shi">
-                Tašlḥiyt [shi]
-              </option>
-              <option value="shn">
-                Shan [shn]
-              </option>
-              <option value="si">
-                Sinhalese [si]
-              </option>
-              <option value="simple">
-                Simple English [simple]
-              </option>
-              <option value="sk">
-                Slovenčina [sk]
-              </option>
-              <option value="sl">
-                Slovenščina [sl]
-              </option>
-              <option value="sli">
-                Schläsch [sli]
-              </option>
-              <option value="sly">
-                Selayar [sly]
-              </option>
-              <option value="sm">
-                Gagana Samoa [sm]
-              </option>
-              <option value="sma">
-                Åarjelsaemien [sma]
-              </option>
-              <option value="sn">
-                chiShona [sn]
-              </option>
-              <option value="so">
-                Soomaaliga [so]
-              </option>
-              <option value="sq">
-                Shqip [sq]
-              </option>
-              <option value="sr">
-                Српски / Srpski [sr]
-              </option>
-              <option value="sr-ec">
-                ‪Српски (ћирилица)‬ [sr-ec]
-              </option>
-              <option value="sr-el">
-                ‪Srpski (latinica)‬ [sr-el]
-              </option>
-              <option value="srn">
-                Sranantongo [srn]
-              </option>
-              <option value="ss">
-                SiSwati [ss]
-              </option>
-              <option value="st">
-                Sesotho [st]
-              </option>
-              <option value="stq">
-                Seeltersk [stq]
-              </option>
-              <option value="su">
-                Basa Sunda [su]
-              </option>
-              <option value="sv">
-                Svenska [sv]
-              </option>
-              <option value="sw">
-                Kiswahili [sw]
-              </option>
-              <option value="sxu">
-                Saxon, Upper [sxu]
-              </option>
-              <option value="szl">
-                Ślůnski [szl]
-              </option>
-              <option value="ta">
-                தமிழ் [ta]
-              </option>
-              <option value="tcy">
-                ತುಳು [tcy]
-              </option>
-              <option value="te">
-                తెలుగు [te]
-              </option>
-              <option value="test">
-                MediaWiki test [test]
-              </option>
-              <option value="tet">
-                Tetun [tet]
-              </option>
-              <option value="tg">
-                Тоҷикӣ [tg]
-              </option>
-              <option value="tg-cyrl">
-                Тоҷикӣ [tg-cyrl]
-              </option>
-              <option value="tg-latn">
-                tojikī [tg-latn]
-              </option>
-              <option value="th">
-                ไทย [th]
-              </option>
-              <option value="ti">
-                ትግርኛ [ti]
-              </option>
-              <option value="tk">
-                Türkmençe [tk]
-              </option>
-              <option value="tl">
-                Tagalog [tl]
-              </option>
-              <option value="tly">
-                толышә зывон [tly]
-              </option>
-              <option value="tn">
-                Setswana [tn]
-              </option>
-              <option value="to">
-                lea faka-Tonga [to]
-              </option>
-              <option value="tokipona">
-                Toki Pona [tokipona]
-              </option>
-              <option value="tp">
-                Toki Pona (deprecated:tokipona) [tp]
-              </option>
-              <option value="tpi">
-                Tok Pisin [tpi]
-              </option>
-              <option value="tr">
-                Türkçe [tr]
-              </option>
-              <option value="tru">
-                Ṫuroyo [tru]
-              </option>
-              <option value="ts">
-                Xitsonga [ts]
-              </option>
-              <option value="tt">
-                Татарча/Tatarça [tt]
-              </option>
-              <option value="tt-cyrl">
-                Татарча [tt-cyrl]
-              </option>
-              <option value="tt-latn">
-                Tatarça [tt-latn]
-              </option>
-              <option value="ttt">
-                Tat, Muslim [ttt]
-              </option>
-              <option value="tum">
-                chiTumbuka [tum]
-              </option>
-              <option value="tw">
-                Twi [tw]
-              </option>
-              <option value="ty">
-                Reo Mā`ohi [ty]
-              </option>
-              <option value="tyv">
-                Тыва дыл [tyv]
-              </option>
-              <option value="tzm">
-                ⵜⴰⵎⴰⵣⵉⵖⵜ [tzm]
-              </option>
-              <option value="ua">
-                Ukrainian [ua]
-              </option>
-              <option value="udm">
-                Удмурт [udm]
-              </option>
-              <option value="ug">
-                ئۇيغۇرچە / Uyghurche‎ [ug]
-              </option>
-              <option value="ug-arab">
-                ئۇيغۇرچە [ug-arab]
-              </option>
-              <option value="ug-latn">
-                Uyghurche‎ [ug-latn]
-              </option>
-              <option value="uk">
-                Українська [uk]
-              </option>
-              <option value="ur">
-                اردو [ur]
-              </option>
-              <option value="uz">
-                O'zbek [uz]
-              </option>
-              <option value="ve">
-                Tshivenda [ve]
-              </option>
-              <option value="vec">
-                Vèneto [vec]
-              </option>
-              <option value="vep">
-                Vepsan kel' [vep]
-              </option>
-              <option value="vi">
-                Tiếng Việt [vi]
-              </option>
-              <option value="vls">
-                West-Vlams [vls]
-              </option>
-              <option value="vmf">
-                Mainfränkisch [vmf]
-              </option>
-              <option value="vo">
-                Volapük [vo]
-              </option>
-              <option value="vot">
-                Vaďďa [vot]
-              </option>
-              <option value="vro">
-                Võro [vro]
-              </option>
-              <option value="wa">
-                Walon [wa]
-              </option>
-              <option value="war">
-                Winaray [war]
-              </option>
-              <option value="wo">
-                Wolof [wo]
-              </option>
-              <option value="wuu">
-                吴语 [wuu]
-              </option>
-              <option value="xal">
-                Хальмг [xal]
-              </option>
-              <option value="xh">
-                isiXhosa [xh]
-              </option>
-              <option value="xmf">
-                მარგალური [xmf]
-              </option>
-              <option value="yi">
-                ייִדיש [yi]
-              </option>
-              <option value="yo">
-                Yorùbá [yo]
-              </option>
-              <option value="yue">
-                粵語 [yue]
-              </option>
-              <option value="za">
-                Vahcuengh [za]
-              </option>
-              <option value="zea">
-                Zeêuws [zea]
-              </option>
-              <option value="zh">
-                中文 [zh]
-              </option>
-              <option value="zh-classical">
-                文言 [zh-classical]
-              </option>
-              <option value="zh-cn">
-                ‪中文(中国大陆)‬ [zh-cn]
-              </option>
-              <option value="zh-hk">
-                ‪中文(香港)‬ [zh-hk]
-              </option>
-              <option value="zh-min-nan">
-                Bân-lâm-gú [zh-min-nan]
-              </option>
-              <option value="zh-mo">
-                ‪中文(澳門)‬ [zh-mo]
-              </option>
-              <option value="zh-my">
-                ‪中文(马来西亚)‬ [zh-my]
-              </option>
-              <option value="zh-sg">
-                ‪中文(新加坡)‬ [zh-sg]
-              </option>
-              <option value="zh-tw">
-                ‪中文(台灣)‬ [zh-tw]
-              </option>
-              <option value="zh-yue">
-                粵語 [zh-yue]
-              </option>
-              <option value="zu">
-                isiZulu [zu]
-              </option>
-            </select>
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.gui.app.lang__key_box' value='xowa.gui.app.lang'> <input type='hidden' id='xowa.gui.app.lang__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.gui.app.lang_help_div' class='xohelp_div'>
-          <div id='xowa.gui.app.lang_help_msg' class='xohelp_msg'>
-            <p>
-              Translations were generously provided by the following users:
-            </p>
-            <ul>
-              <li>
-                Deutsch: Schnark
-              </li>
-              <li>
-                Polski: piotrex
-              </li>
-              <li>
-                ‪中文(简体)‬: zjzengdongyang
-              </li>
-              <li>
-                ‪中文(繁體): zjzengdongyang
-              </li>
-            </ul>
-            <p>
-              Choose a UI langague:
-            </p>
-            <ul>
-              <li>
-                Affects the following: 
-                <ul>
-                  <li>
-                    Menu text; EX: File, Edit, View, History, Bookmarks, Tool, Help, etc..
-                  </li>
-                  <li>
-                    Tooltip captions; EX: Go back one page, Go foward one page, Go to the address in the location bar, etc..
-                  </li>
-                  <li>
-                    XOWA sidebar; EX: Main page, About, etc..
-                  </li>
-                  <li>
-                    XOWA messages: "version" and "build time"
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Note that HTML tab text (Page, Read, Edit, View HTML, Search) uses the language of the underlying wiki.
-              </li>
-              <li>
-                Translations are only available for English, German, Polish and Chinese. If you can provide translations in your language, please contact me via <a tabindex="-1" href="/wiki/Help/Feedback" id="xolnki_8" title="Help/Feedback">Help/Feedback</a>
-              </li>
-              <li>
-                The home wiki documentation is still changing, so translations will not be available for some time
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.app.font.name")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.gui.app.font.name__name' class='xocfg_itm_name'>
-            Font name
-          </div><!-- BTN:undo -->
-          <div id='xowa.gui.app.font.name__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.app.font.name")' title="reset to &quot;Arial&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.gui.app.font.name" data-xocfg-key="xowa.gui.app.font.name" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="Arial">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.gui.app.font.name__key_box' value='xowa.gui.app.font.name'> <input type='hidden' id='xowa.gui.app.font.name__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.gui.app.font.name_help_div' class='xohelp_div'>
-          <div id='xowa.gui.app.font.name_help_msg' class='xohelp_msg'>
-            <p>
-              Enter a font name:
-            </p>
-            <ul>
-              <li>
-                The font name must be installed on your machine, such as "Arial", "Courier New", "Liberation Sans"
-              </li>
-              <li>
-                The font name applies to the Address Bar, Tab Buttons, Search Bar, Find Box, and Progress Text messages
-              </li>
-              <li>
-                To change the fonts for the menu, you will need to do it through your Operating System. SWT does not support customizable fonts for menus: <a tabindex="-1" href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=29899" rel="nofollow" class="external free">https://bugs.eclipse.org/bugs/show_bug.cgi?id=29899</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.app.font.size")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.gui.app.font.size__name' class='xocfg_itm_name'>
-            Font size
-          </div><!-- BTN:undo -->
-          <div id='xowa.gui.app.font.size__undo' data-xocfg-type='string' class='xocfg_itm_delete'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.app.font.size")' title="reset to &quot;8.0&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.gui.app.font.size" data-xocfg-key="xowa.gui.app.font.size" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="8">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.gui.app.font.size__key_box' value='xowa.gui.app.font.size'> <input type='hidden' id='xowa.gui.app.font.size__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.gui.app.font.size_help_div' class='xohelp_div'>
-          <div id='xowa.gui.app.font.size_help_msg' class='xohelp_msg'>
-            <p>
-              Enter a font size in points:
-            </p>
-            <ul>
-              <li>
-                The font size must be a numeric value (typically between 6 and 30)
-              </li>
-              <li>
-                The font size applies to the Address Bar, Tab Buttons, Search Bar, Find Box, and Progress Text messages
-              </li>
-              <li>
-                To change the fonts for the menu, you will need to do it through your Operating System. SWT does not support customizable fonts for menus: <a tabindex="-1" href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=29899" rel="nofollow" class="external free">https://bugs.eclipse.org/bugs/show_bug.cgi?id=29899</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <h2>
-          Toolbar
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.toolbar.show_search")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.gui.toolbar.show_search__name' class='xocfg_itm_name'>
-            Show search
-          </div><!-- BTN:undo -->
-          <div id='xowa.gui.toolbar.show_search__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.toolbar.show_search")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.gui.toolbar.show_search" data-xocfg-key="xowa.gui.toolbar.show_search" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.gui.toolbar.show_search__key_box' value='xowa.gui.toolbar.show_search'> <input type='hidden' id='xowa.gui.toolbar.show_search__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.gui.toolbar.show_search_help_div' class='xohelp_div'>
-          <div id='xowa.gui.toolbar.show_search_help_msg' class='xohelp_msg'>
-            <p>
-              Choose one of the following
-            </p>
-            <ul>
-              <li>
-                <b>checked</b>: Show search box and button
-              </li>
-              <li>
-                <b>unchecked</b>: Do not show search box and button
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.toolbar.show_allpages")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.gui.toolbar.show_allpages__name' class='xocfg_itm_name'>
-            Show all pages
-          </div><!-- BTN:undo -->
-          <div id='xowa.gui.toolbar.show_allpages__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.toolbar.show_allpages")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.gui.toolbar.show_allpages" data-xocfg-key="xowa.gui.toolbar.show_allpages" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.gui.toolbar.show_allpages__key_box' value='xowa.gui.toolbar.show_allpages'> <input type='hidden' id='xowa.gui.toolbar.show_allpages__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.gui.toolbar.show_allpages_help_div' class='xohelp_div'>
-          <div id='xowa.gui.toolbar.show_allpages_help_msg' class='xohelp_msg'>
-            <p>
-              Choose one of the following
-            </p>
-            <ul>
-              <li>
-                <b>checked</b>: Show all pages box and button
-              </li>
-              <li>
-                <b>unchecked</b>: Do not show all pages box and button
-              </li>
-            </ul>
-          </div>
-        </div>
-        <h2>
-          Status box
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.prog_box.show_short_url")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.gui.prog_box.show_short_url__name' class='xocfg_itm_name'>
-            Show short urls
-          </div><!-- BTN:undo -->
-          <div id='xowa.gui.prog_box.show_short_url__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.prog_box.show_short_url")' title="reset to &quot;n&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.gui.prog_box.show_short_url" data-xocfg-key="xowa.gui.prog_box.show_short_url" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.gui.prog_box.show_short_url__key_box' value='xowa.gui.prog_box.show_short_url'> <input type='hidden' id='xowa.gui.prog_box.show_short_url__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.gui.prog_box.show_short_url_help_div' class='xohelp_div'>
-          <div id='xowa.gui.prog_box.show_short_url_help_msg' class='xohelp_msg'>
-            <p>
-              Choose one of the following:
-            </p>
-            <ul>
-              <li>
-                <b>checked</b>: Show link at the bottom as page_name. EX: <code>Main_Page</code>
-              </li>
-              <li>
-                <b>unchecked</b>: Show link at the bottom as wiki_name/wiki/page_name. EX: <code>simple.wikipedia.org/wiki/Main_Page</code>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- TEXT:err_msg -->
+  <div id='xocfg_err'></div>
   
+  <div>
+    <!-- BTN:info -->
+    <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span>
+    
+    <!-- COMBO:cfg_grps -->
+    <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+      
+      <option value='xowa.app.security' >App - Security</option>
+      
+      <option value='xowa.app.startup' >App - Startup</option>
+      
+      <option value='xowa.app.update' >App - Update</option>
+      
+      <option value='xowa.gui.general'  selected='selected'>Gui - General</option>
+      
+      <option value='xowa.gui.tabs' >Gui - Tabs</option>
+      
+      <option value='xowa.gui.url_bar' >Gui - Address bar</option>
+      
+      <option value='xowa.gui.menus' >Gui - Menus</option>
+      
+      <option value='xowa.gui.shortcuts' >Gui - Shortcuts</option>
+      
+      <option value='xowa.gui.nightmode' >Gui - Nightmode</option>
+      
+      <option value='xowa.wiki.hdumps' >Wiki - HTML Databases</option>
+      
+      <option value='xowa.wiki.edit' >Wiki - Editing</option>
+      
+      <option value='xowa.bldr.general' >Import - General</option>
+      
+      <option value='xowa.bldr.db' >Import - Database</option>
+      
+      <option value='xowa.bldr.page_sync' >Import - Page sync</option>
+      
+      <option value='xowa.bldr.dansguardian' >Import - Dansguardian</option>
+      
+      <option value='xowa.html.css' >HTML - CSS</option>
+      
+      <option value='xowa.html.page' >HTML - Page</option>
+      
+      <option value='xowa.html.tidy' >HTML - Tidy</option>
+      
+      <option value='xowa.html.scripting' >HTML - Scripting</option>
+      
+      <option value='xowa.files.general' >Files - General</option>
+      
+      <option value='xowa.files.apps' >Files - Apps</option>
+      
+      <option value='xowa.addon.search' >Addon - Search</option>
+      
+      <option value='xowa.addon.fulltext_search' >Addon - Full-text search</option>
+      
+      <option value='xowa.addon.category' >Addon - Category</option>
+      
+      <option value='xowa.addon.http_server' >Addon - HTTP Server</option>
+      
+      <option value='xowa.addon.scribunto' >Addon - Scribunto</option>
+      
+      <option value='xowa.addon.math' >Addon - Math</option>
+      
+      <option value='xowa.addon.score' >Addon - Score</option>
+      
+      <option value='xowa.addon.popups' >Addon - Popups</option>
+      
+      <option value='xowa.addon.wikibase' >Addon - Wikidata</option>
+      
+      <option value='xowa.dev.general' >Dev - General</option>
+      
+    </select>
+    
+    <!-- LINK:cfg_link -->
+    
+    <div style='float:right;margin:2px 7px;'>
+      <a id='options_lnk'>options link</a>
+    </div>
+    
+  </div>
+  
+
+<div id='cfg_grps'>
+  <!-- TEXT:page_help -->
+  <div>
+    <p id='page_help_para'></p>
+  </div>
+
+  <h2>App</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.app.lang")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.gui.app.lang__name' class='xocfg_itm_name'>Language</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.gui.app.lang__undo' data-xocfg-type='list:xowa.gui.app.lang' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.app.lang")' title="reset to &quot;en&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<select id="xowa.gui.app.lang" data-xocfg-key="xowa.gui.app.lang" data-xocfg-type="list:xowa.gui.app.lang" accesskey="d" class="xocfg_data__list"  size="5">
+<option value="en" selected="selected">English [en]</option>
+<option value="de">Deutsch [de]</option>
+<option value="pl">Polski [pl]</option>
+<option value="zh-hans">‪中文(简体)‬ [zh-hans]</option>
+<option value="zh-hant">‪中文(繁體)‬ [zh-hant]</option>
+<option value="aa">Qafár af [aa]</option>
+<option value="ab">Аҧсуа [ab]</option>
+<option value="ace">Acèh [ace]</option>
+<option value="ady">Adyghe [ady]</option>
+<option value="ady-cyrl">West Circassian (Cyrillic) [ady-cyrl]</option>
+<option value="aeb">زَوُن [aeb]</option>
+<option value="aeb-arab">زَوُن [aeb-arab]</option>
+<option value="aeb-latn">زَوُن [aeb-latn]</option>
+<option value="af">Afrikaans [af]</option>
+<option value="ak">Akan [ak]</option>
+<option value="akz">Alibamu [akz]</option>
+<option value="aln">Gegë [aln]</option>
+<option value="als">Alemannisch [als]</option>
+<option value="am">አማርኛ [am]</option>
+<option value="an">Aragonés [an]</option>
+<option value="ang">Ænglisc [ang]</option>
+<option value="anp">अङ्गिका [anp]</option>
+<option value="ar">العربية [ar]</option>
+<option value="arc">ܐܪܡܝܐ [arc]</option>
+<option value="arn">Mapudungun [arn]</option>
+<option value="aro">Araona [aro]</option>
+<option value="arq">Algerian Arabic [arq]</option>
+<option value="ary">Maġribi [ary]</option>
+<option value="arz">مصرى [arz]</option>
+<option value="as">অসমীয়া [as]</option>
+<option value="ase">American Sign Language [ase]</option>
+<option value="ast">Asturianu [ast]</option>
+<option value="atj">Atikamekw [atj]</option>
+<option value="av">Авар [av]</option>
+<option value="avk">Kotava [avk]</option>
+<option value="awa">Awadhi [awa]</option>
+<option value="ay">Aymar aru [ay]</option>
+<option value="az">Azərbaycanca [az]</option>
+<option value="azb">South Azerbaijani [azb]</option>
+<option value="ba">Башҡортса [ba]</option>
+<option value="ban">ᬩᬲᬩᬮᬶ [ban]</option>
+<option value="bar">Boarisch [bar]</option>
+<option value="bat-smg">Žemaitėška [bat-smg]</option>
+<option value="bbc">Batak Toba [bbc]</option>
+<option value="bbc-latn">Batak Toba (Latin) [bbc-latn]</option>
+<option value="bcc">بلوچی مکرانی [bcc]</option>
+<option value="bcl">Bikol Central [bcl]</option>
+<option value="be">Беларуская [be]</option>
+<option value="be-tarask">‪Беларуская (тарашкевіца)‬ [be-tarask]</option>
+<option value="be-x-old">‪Беларуская (тарашкевіца)‬ [be-x-old]</option>
+<option value="bew">Betawi [bew]</option>
+<option value="bg">Български [bg]</option>
+<option value="bgn">Balochi [bgn]</option>
+<option value="bh">भोजपुरी [bh]</option>
+<option value="bho">भोजपुरी [bho]</option>
+<option value="bi">Bislama [bi]</option>
+<option value="bjn">Bahasa Banjar [bjn]</option>
+<option value="bm">Bamanankan [bm]</option>
+<option value="bn">বাংলা [bn]</option>
+<option value="bo">བོད་ཡིག [bo]</option>
+<option value="bpy">ইমার ঠার/বিষ্ণুপ্রিয়া মণিপুরী [bpy]</option>
+<option value="bqi">بختياري [bqi]</option>
+<option value="br">Brezhoneg [br]</option>
+<option value="brh">Bráhuí [brh]</option>
+<option value="bs">Bosanski [bs]</option>
+<option value="bto">Rinconada Bikol [bto]</option>
+<option value="bug">ᨅᨔ ᨕᨘᨁᨗ [bug]</option>
+<option value="bxr">Буряад [bxr]</option>
+<option value="ca">Català [ca]</option>
+<option value="cbk-zam">Chavacano de Zamboanga [cbk-zam]</option>
+<option value="cdo">Mìng-dĕ̤ng-ngṳ̄ [cdo]</option>
+<option value="ce">Нохчийн [ce]</option>
+<option value="ceb">Cebuano [ceb]</option>
+<option value="ch">Chamoru [ch]</option>
+<option value="chm">Mari [chm]</option>
+<option value="cho">Choctaw [cho]</option>
+<option value="chr">ᏣᎳᎩ [chr]</option>
+<option value="chy">Tsetsêhestâhese [chy]</option>
+<option value="ckb">کوردی [ckb]</option>
+<option value="co">Corsu [co]</option>
+<option value="cps">Capiceño [cps]</option>
+<option value="cr">Nēhiyawēwin / ᓀᐦᐃᔭᐍᐏᐣ [cr]</option>
+<option value="crh">Qırımtatarca [crh]</option>
+<option value="crh-cyrl">‪Къырымтатарджа (Кирилл)‬ [crh-cyrl]</option>
+<option value="crh-latn">‪Qırımtatarca (Latin)‬ [crh-latn]</option>
+<option value="cs">Česky [cs]</option>
+<option value="csb">Kaszëbsczi [csb]</option>
+<option value="cu">Словѣ́ньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ [cu]</option>
+<option value="cv">Чӑвашла [cv]</option>
+<option value="cy">Cymraeg [cy]</option>
+<option value="da">Dansk [da]</option>
+<option value="de-at">Österreichisches Deutsch [de-at]</option>
+<option value="de-ch">Schweizer Hochdeutsch [de-ch]</option>
+<option value="de-formal">‪Deutsch (Sie-Form)‬ [de-formal]</option>
+<option value="diq">Zazaki [diq]</option>
+<option value="dsb">Dolnoserbski [dsb]</option>
+<option value="dtp">Dusun Bundu-liwan [dtp]</option>
+<option value="dty">Dotyali [dty]</option>
+<option value="dv">ދިވެހިބަސް [dv]</option>
+<option value="dz">ཇོང་ཁ [dz]</option>
+<option value="ee">Eʋegbe [ee]</option>
+<option value="egl">Emiliàn [egl]</option>
+<option value="el">Ελληνικά [el]</option>
+<option value="eml">Emiliàn e rumagnòl [eml]</option>
+<option value="en-ca">Canadian English [en-ca]</option>
+<option value="en-gb">British English [en-gb]</option>
+<option value="en-rtl">English rtl [en-rtl]</option>
+<option value="enrtl">English (right to left) [enrtl]</option>
+<option value="eo">Esperanto [eo]</option>
+<option value="es">Español [es]</option>
+<option value="es-formal">Spanish (formal) [es-formal]</option>
+<option value="esu">Yuk'ip [esu]</option>
+<option value="et">Eesti [et]</option>
+<option value="eu">Euskara [eu]</option>
+<option value="ext">Estremeñu [ext]</option>
+<option value="fa">فارسی [fa]</option>
+<option value="ff">Fulfulde [ff]</option>
+<option value="fi">Suomi [fi]</option>
+<option value="fit">meänkieli [fit]</option>
+<option value="fiu-vro">Võro [fiu-vro]</option>
+<option value="fj">Na Vosa Vakaviti [fj]</option>
+<option value="fo">Føroyskt [fo]</option>
+<option value="fr">Français [fr]</option>
+<option value="frc">Français cadien [frc]</option>
+<option value="frp">Arpetan [frp]</option>
+<option value="frr">Nordfriisk [frr]</option>
+<option value="fur">Furlan [fur]</option>
+<option value="fy">Frysk [fy]</option>
+<option value="ga">Gaeilge [ga]</option>
+<option value="gag">Gagauz [gag]</option>
+<option value="gan">贛語 [gan]</option>
+<option value="gan-hans">‪赣语(简体)‬ [gan-hans]</option>
+<option value="gan-hant">‪贛語(繁體)‬ [gan-hant]</option>
+<option value="gd">Gàidhlig [gd]</option>
+<option value="gl">Galego [gl]</option>
+<option value="glk">گیلکی [glk]</option>
+<option value="gn">Avañe'ẽ [gn]</option>
+<option value="gom">कोंकणी [gom]</option>
+<option value="gom-deva">Konkani [gom-deva]</option>
+<option value="gom-latn">कोंकणी (Latin) [gom-latn]</option>
+<option value="gor">Gor [gor]</option>
+<option value="got">𐌲𐌿𐍄𐌹𐍃𐌺 [got]</option>
+<option value="grc">Ἀρχαία ἑλληνικὴ [grc]</option>
+<option value="gsw">Alemannisch [gsw]</option>
+<option value="gu">ગુજરાતી [gu]</option>
+<option value="guc">Wayuu [guc]</option>
+<option value="gv">Gaelg [gv]</option>
+<option value="ha">هَوُسَ [ha]</option>
+<option value="hak">Hak-kâ-fa [hak]</option>
+<option value="haw">Hawai`i [haw]</option>
+<option value="he">עברית [he]</option>
+<option value="hi">हिन्दी [hi]</option>
+<option value="hif">Fiji Hindi [hif]</option>
+<option value="hif-latn">Fiji Hindi [hif-latn]</option>
+<option value="hil">Ilonggo [hil]</option>
+<option value="ho">Hiri Motu [ho]</option>
+<option value="hr">Hrvatski [hr]</option>
+<option value="hrx">Hunsriker [hrx]</option>
+<option value="hsb">Hornjoserbsce [hsb]</option>
+<option value="hsn">Xiang [hsn]</option>
+<option value="ht">Kreyòl ayisyen [ht]</option>
+<option value="hu">Magyar [hu]</option>
+<option value="hu-formal">Magyar (formal) [hu-formal]</option>
+<option value="hy">Հայերեն [hy]</option>
+<option value="hz">Otsiherero [hz]</option>
+<option value="ia">Interlingua [ia]</option>
+<option value="id">Bahasa Indonesia [id]</option>
+<option value="ie">Interlingue [ie]</option>
+<option value="ig">Igbo [ig]</option>
+<option value="ii">ꆇꉙ [ii]</option>
+<option value="ik">Iñupiak [ik]</option>
+<option value="ike-cans">ᐃᓄᒃᑎᑐᑦ [ike-cans]</option>
+<option value="ike-latn">inuktitut [ike-latn]</option>
+<option value="ilo">Ilokano [ilo]</option>
+<option value="inh">ГІалгІай Ğalğaj [inh]</option>
+<option value="io">Ido [io]</option>
+<option value="is">Íslenska [is]</option>
+<option value="it">Italiano [it]</option>
+<option value="iu">ᐃᓄᒃᑎᑐᑦ/inuktitut [iu]</option>
+<option value="izh">Ingrian [izh]</option>
+<option value="ja">日本語 [ja]</option>
+<option value="jam">Patois [jam]</option>
+<option value="jbo">Lojban [jbo]</option>
+<option value="jut">Jysk [jut]</option>
+<option value="jv">Basa Jawa [jv]</option>
+<option value="ka">ქართული [ka]</option>
+<option value="kaa">Qaraqalpaqsha [kaa]</option>
+<option value="kab">Taqbaylit [kab]</option>
+<option value="kbd">Къэбэрдеибзэ / Qabardjajəbza [kbd]</option>
+<option value="kbd-cyrl">къэбэрдеибзэ [kbd-cyrl]</option>
+<option value="kbp">Kabiye [kbp]</option>
+<option value="kg">Kongo [kg]</option>
+<option value="khw">کھوار [khw]</option>
+<option value="ki">Gĩkũyũ [ki]</option>
+<option value="kiu">Kırmancki [kiu]</option>
+<option value="kj">Kwanyama [kj]</option>
+<option value="kk">Қазақша [kk]</option>
+<option value="kk-arab">‫قازاقشا (تٴوتە)‬ [kk-arab]</option>
+<option value="kk-cn">‫قازاقشا (جۇنگو)‬ [kk-cn]</option>
+<option value="kk-cyrl">‪Қазақша (кирил)‬ [kk-cyrl]</option>
+<option value="kk-kz">‪Қазақша (Қазақстан)‬ [kk-kz]</option>
+<option value="kk-latn">‪Qazaqşa (latın)‬ [kk-latn]</option>
+<option value="kk-tr">‪Qazaqşa (Türkïya)‬ [kk-tr]</option>
+<option value="kl">Kalaallisut [kl]</option>
+<option value="km">ភាសាខ្មែរ [km]</option>
+<option value="kn">ಕನ್ನಡ [kn]</option>
+<option value="ko">한국어 [ko]</option>
+<option value="ko-kp">한국어 (조선) [ko-kp]</option>
+<option value="koi">Перем Коми [koi]</option>
+<option value="kok"> [kok]</option>
+<option value="kr">Kanuri [kr]</option>
+<option value="krc">Къарачай-Малкъар [krc]</option>
+<option value="kri">Krio [kri]</option>
+<option value="krj">Kinaray-a [krj]</option>
+<option value="krl">Karelian [krl]</option>
+<option value="ks">कश्मीरी - (كشميري) [ks]</option>
+<option value="ks-arab">کٲشُر [ks-arab]</option>
+<option value="ks-deva">कॉशुर [ks-deva]</option>
+<option value="ksh">Ripoarisch [ksh]</option>
+<option value="ku">Kurdî [ku]</option>
+<option value="ku-arab">‫كوردي (عەرەبی)‬ [ku-arab]</option>
+<option value="ku-latn">‪Kurdî (latînî)‬ [ku-latn]</option>
+<option value="kv">Коми [kv]</option>
+<option value="kw">Kernowek [kw]</option>
+<option value="ky">Кыргызча [ky]</option>
+<option value="la">Latina [la]</option>
+<option value="lad">Ladino [lad]</option>
+<option value="lb">Lëtzebuergesch [lb]</option>
+<option value="lbe">Лакку [lbe]</option>
+<option value="lez">Лезги [lez]</option>
+<option value="lfn">Lingua Franca Nova [lfn]</option>
+<option value="lg">Luganda [lg]</option>
+<option value="li">Limburgs [li]</option>
+<option value="lij">Líguru [lij]</option>
+<option value="liv">Līvõ kēļ [liv]</option>
+<option value="lki">Laki [lki]</option>
+<option value="lmo">Lumbaart [lmo]</option>
+<option value="ln">Lingála [ln]</option>
+<option value="lo">ລາວ [lo]</option>
+<option value="loz">Silozi [loz]</option>
+<option value="lrc">لوری [lrc]</option>
+<option value="lt">Lietuvių [lt]</option>
+<option value="ltg">Latgaļu [ltg]</option>
+<option value="lus">Mizo ţawng [lus]</option>
+<option value="luz">Luri [luz]</option>
+<option value="lv">Latviešu [lv]</option>
+<option value="lzh">文言 [lzh]</option>
+<option value="lzz">Lazuri [lzz]</option>
+<option value="mai">मैथिली [mai]</option>
+<option value="map-bms">Basa Banyumasan [map-bms]</option>
+<option value="mdf">Мокшень [mdf]</option>
+<option value="mg">Malagasy [mg]</option>
+<option value="mh">Ebon [mh]</option>
+<option value="mhr">Олык Марий [mhr]</option>
+<option value="mi">Māori [mi]</option>
+<option value="mic">Mi'kmaq [mic]</option>
+<option value="min">Baso Minangkabau [min]</option>
+<option value="mk">Македонски [mk]</option>
+<option value="ml">മലയാളം [ml]</option>
+<option value="mn">Монгол [mn]</option>
+<option value="mnc">Manchu [mnc]</option>
+<option value="mo">Молдовеняскэ [mo]</option>
+<option value="mr">मराठी [mr]</option>
+<option value="mrj">Кырык мары [mrj]</option>
+<option value="ms">Bahasa Melayu [ms]</option>
+<option value="mt">Malti [mt]</option>
+<option value="mui">Musi [mui]</option>
+<option value="mus">Mvskoke [mus]</option>
+<option value="mwl">Mirandés [mwl]</option>
+<option value="mwv">Behase Mentawei [mwv]</option>
+<option value="my">Burmese [my]</option>
+<option value="myv">Эрзянь [myv]</option>
+<option value="mzn">مازِرونی [mzn]</option>
+<option value="na">Dorerin Naoero [na]</option>
+<option value="nah">Nāhuatl [nah]</option>
+<option value="nan">Bân-lâm-gú [nan]</option>
+<option value="nap">Nnapulitano [nap]</option>
+<option value="nb">‪Norsk (bokmål)‬ [nb]</option>
+<option value="nds">Plattdüütsch [nds]</option>
+<option value="nds-nl">Nedersaksisch [nds-nl]</option>
+<option value="ne">नेपाली [ne]</option>
+<option value="new">नेपाल भाषा [new]</option>
+<option value="ng">Oshiwambo [ng]</option>
+<option value="niu">Niuē [niu]</option>
+<option value="nl">Nederlands [nl]</option>
+<option value="nl-informal">‪Nederlands (informeel)‬ [nl-informal]</option>
+<option value="nn">‪Norsk (nynorsk)‬ [nn]</option>
+<option value="no">‪Norsk (bokmål)‬ [no]</option>
+<option value="nov">Novial [nov]</option>
+<option value="nrm">Nouormand [nrm]</option>
+<option value="nso">Sesotho sa Leboa [nso]</option>
+<option value="nv">Diné bizaad [nv]</option>
+<option value="ny">Chi-Chewa [ny]</option>
+<option value="oc">Occitan [oc]</option>
+<option value="olo">Olo [olo]</option>
+<option value="om">Oromoo [om]</option>
+<option value="or">ଓଡ଼ିଆ [or]</option>
+<option value="os">Иронау [os]</option>
+<option value="pa">ਪੰਜਾਬੀ [pa]</option>
+<option value="pag">Pangasinan [pag]</option>
+<option value="pam">Kapampangan [pam]</option>
+<option value="pap">Papiamentu [pap]</option>
+<option value="pbb">Páez [pbb]</option>
+<option value="pcd">Picard [pcd]</option>
+<option value="pdc">Deitsch [pdc]</option>
+<option value="pdt">Plautdietsch [pdt]</option>
+<option value="pfl">Pälzisch [pfl]</option>
+<option value="pi">पािऴ [pi]</option>
+<option value="pih">Norfuk / Pitkern [pih]</option>
+<option value="pms">Piemontèis [pms]</option>
+<option value="pnb">پنجابی [pnb]</option>
+<option value="pnt">Ποντιακά [pnt]</option>
+<option value="ppl">Pipil [ppl]</option>
+<option value="prg">Prūsiskan [prg]</option>
+<option value="ps">پښتو [ps]</option>
+<option value="pt">Português [pt]</option>
+<option value="pt-br">Português do Brasil [pt-br]</option>
+<option value="qqq">MediaWiki sample [qqq]</option>
+<option value="qu">Runa Simi [qu]</option>
+<option value="qug">Runa shimi [qug]</option>
+<option value="rap">Rapa Nui [rap]</option>
+<option value="rgn">Rumagnôl [rgn]</option>
+<option value="rif">Tarifit [rif]</option>
+<option value="rm">Rumantsch [rm]</option>
+<option value="rmf">Finnish Kalo [rmf]</option>
+<option value="rmy">Romani [rmy]</option>
+<option value="rn">Kirundi [rn]</option>
+<option value="ro">Română [ro]</option>
+<option value="roa-rup">Armãneashce [roa-rup]</option>
+<option value="roa-tara">Tarandíne [roa-tara]</option>
+<option value="ru">Русский [ru]</option>
+<option value="rue">Русиньскый [rue]</option>
+<option value="rup">Armãneașce [rup]</option>
+<option value="ruq">Vlăheşte [ruq]</option>
+<option value="ruq-cyrl">Влахесте [ruq-cyrl]</option>
+<option value="ruq-latn">Vlăheşte [ruq-latn]</option>
+<option value="rw">Kinyarwanda [rw]</option>
+<option value="ryu">Okinawan [ryu]</option>
+<option value="sa">संस्कृत [sa]</option>
+<option value="sah">Саха тыла [sah]</option>
+<option value="sat">Santali [sat]</option>
+<option value="saz">Saurashtra [saz]</option>
+<option value="sc">Sardu [sc]</option>
+<option value="scn">Sicilianu [scn]</option>
+<option value="sco">Scots [sco]</option>
+<option value="sd">سنڌي [sd]</option>
+<option value="sdc">Sassaresu [sdc]</option>
+<option value="sdh">Southern Kurdish [sdh]</option>
+<option value="se">Sámegiella [se]</option>
+<option value="sei">Cmique Itom [sei]</option>
+<option value="ses">Songhay [ses]</option>
+<option value="sg">Sängö [sg]</option>
+<option value="sgs">Žemaitėška [sgs]</option>
+<option value="sh">Srpskohrvatski / Српскохрватски [sh]</option>
+<option value="shi">Tašlḥiyt [shi]</option>
+<option value="shn">Shan [shn]</option>
+<option value="si">Sinhalese [si]</option>
+<option value="simple">Simple English [simple]</option>
+<option value="sk">Slovenčina [sk]</option>
+<option value="sl">Slovenščina [sl]</option>
+<option value="sli">Schläsch [sli]</option>
+<option value="sly">Selayar [sly]</option>
+<option value="sm">Gagana Samoa [sm]</option>
+<option value="sma">Åarjelsaemien [sma]</option>
+<option value="sn">chiShona [sn]</option>
+<option value="so">Soomaaliga [so]</option>
+<option value="sq">Shqip [sq]</option>
+<option value="sr">Српски / Srpski [sr]</option>
+<option value="sr-ec">‪Српски (ћирилица)‬ [sr-ec]</option>
+<option value="sr-el">‪Srpski (latinica)‬ [sr-el]</option>
+<option value="srn">Sranantongo [srn]</option>
+<option value="ss">SiSwati [ss]</option>
+<option value="st">Sesotho [st]</option>
+<option value="stq">Seeltersk [stq]</option>
+<option value="su">Basa Sunda [su]</option>
+<option value="sv">Svenska [sv]</option>
+<option value="sw">Kiswahili [sw]</option>
+<option value="sxu">Saxon, Upper [sxu]</option>
+<option value="szl">Ślůnski [szl]</option>
+<option value="ta">தமிழ் [ta]</option>
+<option value="tcy">ತುಳು [tcy]</option>
+<option value="te">తెలుగు [te]</option>
+<option value="test">MediaWiki test [test]</option>
+<option value="tet">Tetun [tet]</option>
+<option value="tg">Тоҷикӣ [tg]</option>
+<option value="tg-cyrl">Тоҷикӣ [tg-cyrl]</option>
+<option value="tg-latn">tojikī [tg-latn]</option>
+<option value="th">ไทย [th]</option>
+<option value="ti">ትግርኛ [ti]</option>
+<option value="tk">Türkmençe [tk]</option>
+<option value="tl">Tagalog [tl]</option>
+<option value="tly">толышә зывон [tly]</option>
+<option value="tn">Setswana [tn]</option>
+<option value="to">lea faka-Tonga [to]</option>
+<option value="tokipona">Toki Pona [tokipona]</option>
+<option value="tp">Toki Pona (deprecated:tokipona) [tp]</option>
+<option value="tpi">Tok Pisin [tpi]</option>
+<option value="tr">Türkçe [tr]</option>
+<option value="tru">Ṫuroyo [tru]</option>
+<option value="ts">Xitsonga [ts]</option>
+<option value="tt">Татарча/Tatarça [tt]</option>
+<option value="tt-cyrl">Татарча [tt-cyrl]</option>
+<option value="tt-latn">Tatarça [tt-latn]</option>
+<option value="ttt">Tat, Muslim [ttt]</option>
+<option value="tum">chiTumbuka [tum]</option>
+<option value="tw">Twi [tw]</option>
+<option value="ty">Reo Mā`ohi [ty]</option>
+<option value="tyv">Тыва дыл [tyv]</option>
+<option value="tzm">ⵜⴰⵎⴰⵣⵉⵖⵜ [tzm]</option>
+<option value="ua">Ukrainian [ua]</option>
+<option value="udm">Удмурт [udm]</option>
+<option value="ug">ئۇيغۇرچە / Uyghurche‎ [ug]</option>
+<option value="ug-arab">ئۇيغۇرچە [ug-arab]</option>
+<option value="ug-latn">Uyghurche‎ [ug-latn]</option>
+<option value="uk">Українська [uk]</option>
+<option value="ur">اردو [ur]</option>
+<option value="uz">O'zbek [uz]</option>
+<option value="ve">Tshivenda [ve]</option>
+<option value="vec">Vèneto [vec]</option>
+<option value="vep">Vepsan kel' [vep]</option>
+<option value="vi">Tiếng Việt [vi]</option>
+<option value="vls">West-Vlams [vls]</option>
+<option value="vmf">Mainfränkisch [vmf]</option>
+<option value="vo">Volapük [vo]</option>
+<option value="vot">Vaďďa [vot]</option>
+<option value="vro">Võro [vro]</option>
+<option value="wa">Walon [wa]</option>
+<option value="war">Winaray [war]</option>
+<option value="wo">Wolof [wo]</option>
+<option value="wuu">吴语 [wuu]</option>
+<option value="xal">Хальмг [xal]</option>
+<option value="xh">isiXhosa [xh]</option>
+<option value="xmf">მარგალური [xmf]</option>
+<option value="yi">ייִדיש [yi]</option>
+<option value="yo">Yorùbá [yo]</option>
+<option value="yue">粵語 [yue]</option>
+<option value="za">Vahcuengh [za]</option>
+<option value="zea">Zeêuws [zea]</option>
+<option value="zh">中文 [zh]</option>
+<option value="zh-classical">文言 [zh-classical]</option>
+<option value="zh-cn">‪中文(中国大陆)‬ [zh-cn]</option>
+<option value="zh-hk">‪中文(香港)‬ [zh-hk]</option>
+<option value="zh-min-nan">Bân-lâm-gú [zh-min-nan]</option>
+<option value="zh-mo">‪中文(澳門)‬ [zh-mo]</option>
+<option value="zh-my">‪中文(马来西亚)‬ [zh-my]</option>
+<option value="zh-sg">‪中文(新加坡)‬ [zh-sg]</option>
+<option value="zh-tw">‪中文(台灣)‬ [zh-tw]</option>
+<option value="zh-yue">粵語 [zh-yue]</option>
+<option value="zu">isiZulu [zu]</option>
+</select>
+</div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.gui.app.lang__key_box' value='xowa.gui.app.lang'></input>
+    <input type='hidden' id='xowa.gui.app.lang__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.gui.app.lang_help_div' class='xohelp_div'>
+    <div id='xowa.gui.app.lang_help_msg' class='xohelp_msg'><p>Translations were generously provided by the following users:
+</p>
+
+<ul>
+  <li> Deutsch: Schnark 
+  </li>
+  <li> Polski: piotrex
+  </li>
+  <li> ‪中文(简体)‬: zjzengdongyang
+  </li>
+  <li> ‪中文(繁體): zjzengdongyang
+  </li>
+</ul>
+
+<p>Choose a UI langague:
+</p>
+
+<ul>
+  <li> Affects the following:
+
+    <ul>
+      <li> Menu text; EX: File, Edit, View, History, Bookmarks, Tool, Help, etc..
+      </li>
+      <li> Tooltip captions; EX: Go back one page, Go foward one page, Go to the address in the location bar, etc..
+      </li>
+      <li> XOWA sidebar; EX: Main page, About, etc..
+      </li>
+      <li> XOWA messages: &quot;version&quot; and &quot;build time&quot;
+      </li>
+    </ul>
+  </li>
+  <li> Note that HTML tab text (Page, Read, Edit, View HTML, Search) uses the language of the underlying wiki.
+  </li>
+  <li> Translations are only available for English, German, Polish and Chinese. If you can provide translations in your language, please contact me via <a href="/wiki/Help/Feedback" id="xolnki_8" title="Help/Feedback" tabindex="-1">Help/Feedback</a>
+  </li>
+  <li> The home wiki documentation is still changing, so translations will not be available for some time
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.app.font.name")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.gui.app.font.name__name' class='xocfg_itm_name'>Font name</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.gui.app.font.name__undo' data-xocfg-type='string' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.app.font.name")' title="reset to &quot;Arial&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.gui.app.font.name" data-xocfg-key="xowa.gui.app.font.name" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="Arial"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.gui.app.font.name__key_box' value='xowa.gui.app.font.name'></input>
+    <input type='hidden' id='xowa.gui.app.font.name__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.gui.app.font.name_help_div' class='xohelp_div'>
+    <div id='xowa.gui.app.font.name_help_msg' class='xohelp_msg'><p>Enter a font name:
+</p>
+
+<ul>
+  <li> The font name must be installed on your machine, such as &quot;Arial&quot;, &quot;Courier New&quot;, &quot;Liberation Sans&quot;
+  </li>
+  <li> The font name applies to the Address Bar, Tab Buttons, Search Bar, Find Box, and Progress Text messages
+  </li>
+  <li> To change the fonts for the menu, you will need to do it through your Operating System. SWT does not support customizable fonts for menus: <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=29899" rel="nofollow" class="external free" tabindex="-1">https://bugs.eclipse.org/bugs/show_bug.cgi?id=29899</a>  
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.app.font.size")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.gui.app.font.size__name' class='xocfg_itm_name'>Font size</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.gui.app.font.size__undo' data-xocfg-type='string' class='xocfg_itm_delete'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.app.font.size")' title="reset to &quot;8.0&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.gui.app.font.size" data-xocfg-key="xowa.gui.app.font.size" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="8"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.gui.app.font.size__key_box' value='xowa.gui.app.font.size'></input>
+    <input type='hidden' id='xowa.gui.app.font.size__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.gui.app.font.size_help_div' class='xohelp_div'>
+    <div id='xowa.gui.app.font.size_help_msg' class='xohelp_msg'><p>Enter a font size in points:
+</p>
+
+<ul>
+  <li> The font size must be a numeric value (typically between 6 and 30)
+  </li>
+  <li> The font size applies to the Address Bar, Tab Buttons, Search Bar, Find Box, and Progress Text messages
+  </li>
+  <li> To change the fonts for the menu, you will need to do it through your Operating System. SWT does not support customizable fonts for menus: <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=29899" rel="nofollow" class="external free" tabindex="-1">https://bugs.eclipse.org/bugs/show_bug.cgi?id=29899</a>  
+  </li>
+</ul>
+</div>
+  </div>
+  
+
+  <h2>Toolbar</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.browser.toolbar.show_search")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.gui.browser.toolbar.show_search__name' class='xocfg_itm_name'>Show search</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.gui.browser.toolbar.show_search__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.browser.toolbar.show_search")' title="reset to &quot;y&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.gui.browser.toolbar.show_search" data-xocfg-key="xowa.gui.browser.toolbar.show_search" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.gui.browser.toolbar.show_search__key_box' value='xowa.gui.browser.toolbar.show_search'></input>
+    <input type='hidden' id='xowa.gui.browser.toolbar.show_search__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.gui.browser.toolbar.show_search_help_div' class='xohelp_div'>
+    <div id='xowa.gui.browser.toolbar.show_search_help_msg' class='xohelp_msg'><p>Choose one of the following
+</p>
+
+<ul>
+  <li> <b>checked</b>: Show search box and button
+  </li>
+  <li> <b>unchecked</b>: Do not show search box and button
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.browser.toolbar.show_allpages")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.gui.browser.toolbar.show_allpages__name' class='xocfg_itm_name'>Show all pages</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.gui.browser.toolbar.show_allpages__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.browser.toolbar.show_allpages")' title="reset to &quot;y&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.gui.browser.toolbar.show_allpages" data-xocfg-key="xowa.gui.browser.toolbar.show_allpages" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.gui.browser.toolbar.show_allpages__key_box' value='xowa.gui.browser.toolbar.show_allpages'></input>
+    <input type='hidden' id='xowa.gui.browser.toolbar.show_allpages__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.gui.browser.toolbar.show_allpages_help_div' class='xohelp_div'>
+    <div id='xowa.gui.browser.toolbar.show_allpages_help_msg' class='xohelp_msg'><p>Choose one of the following
+</p>
+
+<ul>
+  <li> <b>checked</b>: Show all pages box and button
+  </li>
+  <li> <b>unchecked</b>: Do not show all pages box and button
+  </li>
+</ul>
+</div>
+  </div>
+  
+
+  <h2>Status box</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.gui.prog_box.show_short_url")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.gui.prog_box.show_short_url__name' class='xocfg_itm_name'>Show short urls</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.gui.prog_box.show_short_url__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.gui.prog_box.show_short_url")' title="reset to &quot;n&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.gui.prog_box.show_short_url" data-xocfg-key="xowa.gui.prog_box.show_short_url" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.gui.prog_box.show_short_url__key_box' value='xowa.gui.prog_box.show_short_url'></input>
+    <input type='hidden' id='xowa.gui.prog_box.show_short_url__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.gui.prog_box.show_short_url_help_div' class='xohelp_div'>
+    <div id='xowa.gui.prog_box.show_short_url_help_msg' class='xohelp_msg'><p>Choose one of the following:
+</p>
+
+<ul>
+  <li> <b>checked</b>: Show link at the bottom as page_name. EX: <code>Main_Page</code>
+  </li>
+  <li> <b>unchecked</b>: Show link at the bottom as wiki_name/wiki/page_name. EX: <code>simple.wikipedia.org/wiki/Main_Page</code>
+  </li>
+</ul>
+</div>
+  </div>
+  
+
+</div>
+
+</div>
+
     </div>
   </div>
 </div>

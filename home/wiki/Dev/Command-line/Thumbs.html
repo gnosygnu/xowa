@@ -324,7 +324,6 @@ app.bldr.cmds {
   add     ('commons.wikimedia.org' , 'text.css');
   add     ('commons.wikimedia.org' , 'wiki.page_props');
   add     ('commons.wikimedia.org' , 'wiki.categorylinks');
-  add     ('commons.wikimedia.org' , 'text.cat.hidden');
   add     ('commons.wikimedia.org' , 'wiki.image');
   add     ('commons.wikimedia.org' , 'file.page_regy')        {build_commons = 'y'}
   add     ('commons.wikimedia.org' , 'wiki.page_dump.make');
@@ -393,7 +392,7 @@ app.bldr.cmds {
   add     ('simple.wikipedia.org' , 'search.link__link_score') {page_rank_enabled = 'y';}
 
   // update word count statistics for the search_word table
-  add     ('simple.wikipedia.org' , 'search.word__link_count')
+  add     ('simple.wikipedia.org' , 'search.word__link_count');
 
   // cleanup all downloaded files as well as temporary files
   add     ('simple.wikipedia.org' , 'util.cleanup')          {delete_tmp = 'y'; delete_by_match('*.xml|*.sql|*.bz2|*.gz');}
@@ -568,7 +567,7 @@ app.bldr.cmds {
       }
     }
   }
-  add     ('en.wikipedia.org' , 'search.word__link_count')
+  add     ('en.wikipedia.org' , 'search.word__link_count');
   add     ('en.wikipedia.org' , 'wiki.page_props');
   add     ('en.wikipedia.org' , 'wiki.categorylinks');
 */

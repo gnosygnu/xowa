@@ -16,315 +16,283 @@
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
-    
     <div id='xocfg_body'>
-      <!-- TEXT:err_msg -->
-      <div id='xocfg_err'>
-      </div>
-      <div>
-        <!-- BTN:info -->
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
-         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
-          <option value='xowa.app.security'>
-            App - Security
-          </option>
-          <option value='xowa.app.startup'>
-            App - Startup
-          </option>
-          <option value='xowa.app.update'>
-            App - Update
-          </option>
-          <option value='xowa.gui.general'>
-            Gui - General
-          </option>
-          <option value='xowa.gui.tabs'>
-            Gui - Tabs
-          </option>
-          <option value='xowa.gui.url_bar'>
-            Gui - Address bar
-          </option>
-          <option value='xowa.gui.menus'>
-            Gui - Menus
-          </option>
-          <option value='xowa.gui.shortcuts'>
-            Gui - Shortcuts
-          </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Nightmode
-          </option>
-          <option value='xowa.wiki.hdumps'>
-            Wiki - HTML Databases
-          </option>
-          <option value='xowa.wiki.edit'>
-            Wiki - Editing
-          </option>
-          <option value='xowa.bldr.general'>
-            Import - General
-          </option>
-          <option value='xowa.bldr.db'>
-            Import - Database
-          </option>
-          <option value='xowa.bldr.page_sync'>
-            Import - Page sync
-          </option>
-          <option value='xowa.bldr.dansguardian'>
-            Import - Dansguardian
-          </option>
-          <option value='xowa.html.css'>
-            HTML - CSS
-          </option>
-          <option value='xowa.html.page'>
-            HTML - Page
-          </option>
-          <option value='xowa.html.tidy' selected='selected'>
-            HTML - Tidy
-          </option>
-          <option value='xowa.html.scripting'>
-            HTML - Scripting
-          </option>
-          <option value='xowa.files.general'>
-            Files - General
-          </option>
-          <option value='xowa.files.apps'>
-            Files - Apps
-          </option>
-          <option value='xowa.addon.search'>
-            Addon - Search
-          </option>
-          <option value='xowa.addon.fulltext_search'>
-            Addon - Full-text search
-          </option>
-          <option value='xowa.addon.category'>
-            Addon - Category
-          </option>
-          <option value='xowa.addon.http_server'>
-            Addon - HTTP Server
-          </option>
-          <option value='xowa.addon.scribunto'>
-            Addon - Scribunto
-          </option>
-          <option value='xowa.addon.math'>
-            Addon - Math
-          </option>
-          <option value='xowa.addon.score'>
-            Addon - Score
-          </option>
-          <option value='xowa.addon.popups'>
-            Addon - Popups
-          </option>
-          <option value='xowa.addon.wikibase'>
-            Addon - Wikidata
-          </option>
-          <option value='xowa.dev.general'>
-            Dev - General
-          </option>
-        </select> <!-- LINK:cfg_link -->
-         
-        <div style='float:right;margin:2px 7px;'>
-          <a id='options_lnk'>options link</a>
-        </div>
-      </div>
-      <div id='cfg_grps'>
-        <!-- TEXT:page_help -->
-        <div>
-          <p id='page_help_para'>
-          </p>
-          <p>
-            HTML Tidy is a software library whose purpose is to fix invalid HTML. It is enabled on all Wikimedia wikis. Without HTML Tidy, a small percentage of pages will render incorrectly (broken tables; extended bold; horizontal scroll bar; misplaced images), etc. See <a tabindex="-1" href="/wiki/Diagnostics/HTML_Tidy" id="xolnki_24" title="Diagnostics/HTML Tidy">Diagnostics/HTML_Tidy</a> for examples.
-          </p>
-          <p>
-            For more info about XOWA's customized JTidy jar, see <a tabindex="-1" href="/wiki/App/Xtn/Mediawiki/Tidy/JTidy" id="xolnki_25" title="App/Xtn/Mediawiki/Tidy/JTidy">App/Xtn/Mediawiki/Tidy/JTidy</a>
-          </p>
-        </div>
-        <h2>
-          General
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.tidy.enabled")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.html.tidy.enabled__name' class='xocfg_itm_name'>
-            Enabled
-          </div><!-- BTN:undo -->
-          <div id='xowa.html.tidy.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.tidy.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.html.tidy.enabled" data-xocfg-key="xowa.html.tidy.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.html.tidy.enabled__key_box' value='xowa.html.tidy.enabled'> <input type='hidden' id='xowa.html.tidy.enabled__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.html.tidy.enabled_help_div' class='xohelp_div'>
-          <div id='xowa.html.tidy.enabled_help_msg' class='xohelp_msg'>
-            <p>
-              Choose if HTML tidy is enabled
-            </p>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.tidy.engine")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.html.tidy.engine__name' class='xocfg_itm_name'>
-            Tidy engine
-          </div><!-- BTN:undo -->
-          <div id='xowa.html.tidy.engine__undo' data-xocfg-type='list:xowa.html.tidy.engine' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.tidy.engine")' title="reset to &quot;jtidy&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <select id="xowa.html.tidy.engine" data-xocfg-key="xowa.html.tidy.engine" data-xocfg-type="list:xowa.html.tidy.engine" accesskey="d" class="xocfg_data__list" size="2">
-              <option value="tidy">
-                tidy
-              </option>
-              <option value="jtidy" selected="selected">
-                jtidy
-              </option>
-            </select>
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.html.tidy.engine__key_box' value='xowa.html.tidy.engine'> <input type='hidden' id='xowa.html.tidy.engine__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.html.tidy.engine_help_div' class='xohelp_div'>
-          <div id='xowa.html.tidy.engine_help_msg' class='xohelp_msg'>
-            <p>
-              Choose an HTML tidy engine:
-            </p>
-            <ul>
-              <li>
-                <b><a tabindex="-1" href="http://tidy.sourceforge.net/" rel="nofollow" class="external text">tidy</a></b>: The same library that is used by WMF wikis. Choose <code>tidy</code> if you want to run the official tidy library that WM uses. Note that you must download the binary if you are on Linux / Mac OS X.
-              </li>
-              <li>
-                <b><a tabindex="-1" href="http://jtidy.sourceforge.net/" rel="nofollow" class="external text">jtidy</a></b>: A Java implementation of the tidy library. Choose <code>jtidy</code> if you don't want to install a platform specific binary. Note that JTidy is not a 100% implementation of tidy, though it appears to be quite close (at about 95%).
-              </li>
-            </ul>
-          </div>
-        </div>
-        <h2>
-          Tidy binary
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.tidy.cmd")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.html.tidy.cmd__name' class='xocfg_itm_name'>
-            Process
-          </div><!-- BTN:undo -->
-          <div id='xowa.html.tidy.cmd__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.tidy.cmd")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}tidy\tidy|-utf8 --force-output y --quiet y --tidy-mark n --doctype '' --wrap 0 --indent y --quote-nbsp y --literal-attributes y --wrap-attributes n --fix-uri n --fix-backslash n --enclose-block-text y -o &quot;~{target}&quot; &quot;~{source}&quot;&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.html.tidy.cmd-exe" data-xocfg-key="xowa.html.tidy.cmd" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}tidy\tidy"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.html.tidy.cmd-exe", "Please select a file.");'>&nbsp;</span><br>
-            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.html.tidy.cmd-arg" data-xocfg-key="xowa.html.tidy.cmd" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="-utf8 --force-output y --quiet y --tidy-mark n --doctype '' --wrap 0 --indent y --quote-nbsp y --literal-attributes y --wrap-attributes n --fix-uri n --fix-backslash n --enclose-block-text y -o &quot;~{target}&quot; &quot;~{source}&quot;">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.html.tidy.cmd__key_box' value='xowa.html.tidy.cmd'> <input type='hidden' id='xowa.html.tidy.cmd__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.html.tidy.cmd_help_div' class='xohelp_div'>
-          <div id='xowa.html.tidy.cmd_help_msg' class='xohelp_msg'>
-            <p>
-              XOWA defaults to the following tidy arguments:
-            </p>
-<pre style='overflow:auto;'>
--utf8 --force-output y --quiet y --tidy-mark n --doctype '''' --wrap 0 --indent y --quote-nbsp y --literal-attributes y --wrap-attributes n --fix-url n --fix-backslash n --enclose-block-text y -o "~{target}" "~{source}"
-</pre>
-            <dl>
-              <dt>
-                -utf8
-              </dt>
-              <dd>
-                default is ascii
-              </dd>
-              <dt>
-                --force-output y
-              </dt>
-              <dd>
-                always generate output; do not fail on error
-              </dd>
-              <dt>
-                --quiet y
-              </dt>
-              <dd>
-                suppress command-line header
-              </dd>
-              <dt>
-                --tidy-mark n
-              </dt>
-              <dd>
-                do not add tidy watermark
-              </dd>
-              <dt>
-                --doctype ''''
-              </dt>
-              <dd>
-                default is auto (TRANSITIONAL); causes weird quirks with short text lines on some wikis (tr.wikibooks.org)
-              </dd>
-              <dt>
-                --wrap 0
-              </dt>
-              <dd>
-                default is 80; do not limit lines to 80 chars
-              </dd>
-              <dt>
-                --indent y
-              </dt>
-              <dd>
-                indent block levels
-              </dd>
-              <dt>
-                --quote-nbsp y
-              </dt>
-              <dd>
-                preserve nbsp as entities; do not convert to Unicode character 160
-              </dd>
-              <dt>
-                --literal-attributes y
-              </dt>
-              <dd>
-                do not alter whitespace chars in attributes
-              </dd>
-              <dt>
-                --wrap-attributes n
-              </dt>
-              <dd>
-                do not line-wrap attribute values
-              </dd>
-              <dt>
-                --fix-url n
-              </dt>
-              <dd>
-                do not escape invalid chars in uris
-              </dd>
-              <dt>
-                --fix-backslash n
-              </dt>
-              <dd>
-                do not change \ to / in URLs
-              </dd>
-              <dt>
-                --enclose-block-text y
-              </dt>
-              <dd>
-                always enclose text in element with &lt;p&gt;
-              </dd>
-              <dt>
-                -o ~{target}
-              </dt>
-              <dd>
-                target file
-              </dd>
-              <dt>
-                ~{source}
-              </dt>
-              <dd>
-                source file
-              </dd>
-            </dl>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- TEXT:err_msg -->
+  <div id='xocfg_err'></div>
   
+  <div>
+    <!-- BTN:info -->
+    <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span>
+    
+    <!-- COMBO:cfg_grps -->
+    <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+      
+      <option value='xowa.app.security' >App - Security</option>
+      
+      <option value='xowa.app.startup' >App - Startup</option>
+      
+      <option value='xowa.app.update' >App - Update</option>
+      
+      <option value='xowa.gui.general' >Gui - General</option>
+      
+      <option value='xowa.gui.tabs' >Gui - Tabs</option>
+      
+      <option value='xowa.gui.url_bar' >Gui - Address bar</option>
+      
+      <option value='xowa.gui.menus' >Gui - Menus</option>
+      
+      <option value='xowa.gui.shortcuts' >Gui - Shortcuts</option>
+      
+      <option value='xowa.gui.nightmode' >Gui - Nightmode</option>
+      
+      <option value='xowa.wiki.hdumps' >Wiki - HTML Databases</option>
+      
+      <option value='xowa.wiki.edit' >Wiki - Editing</option>
+      
+      <option value='xowa.bldr.general' >Import - General</option>
+      
+      <option value='xowa.bldr.db' >Import - Database</option>
+      
+      <option value='xowa.bldr.page_sync' >Import - Page sync</option>
+      
+      <option value='xowa.bldr.dansguardian' >Import - Dansguardian</option>
+      
+      <option value='xowa.html.css' >HTML - CSS</option>
+      
+      <option value='xowa.html.page' >HTML - Page</option>
+      
+      <option value='xowa.html.tidy'  selected='selected'>HTML - Tidy</option>
+      
+      <option value='xowa.html.scripting' >HTML - Scripting</option>
+      
+      <option value='xowa.files.general' >Files - General</option>
+      
+      <option value='xowa.files.apps' >Files - Apps</option>
+      
+      <option value='xowa.addon.search' >Addon - Search</option>
+      
+      <option value='xowa.addon.fulltext_search' >Addon - Full-text search</option>
+      
+      <option value='xowa.addon.category' >Addon - Category</option>
+      
+      <option value='xowa.addon.http_server' >Addon - HTTP Server</option>
+      
+      <option value='xowa.addon.scribunto' >Addon - Scribunto</option>
+      
+      <option value='xowa.addon.math' >Addon - Math</option>
+      
+      <option value='xowa.addon.score' >Addon - Score</option>
+      
+      <option value='xowa.addon.popups' >Addon - Popups</option>
+      
+      <option value='xowa.addon.wikibase' >Addon - Wikidata</option>
+      
+      <option value='xowa.dev.general' >Dev - General</option>
+      
+    </select>
+    
+    <!-- LINK:cfg_link -->
+    
+    <div style='float:right;margin:2px 7px;'>
+      <a id='options_lnk'>options link</a>
+    </div>
+    
+  </div>
+  
+
+<div id='cfg_grps'>
+  <!-- TEXT:page_help -->
+  <div>
+    <p id='page_help_para'><p>HTML Tidy is a software library whose purpose is to fix invalid HTML. It is enabled on all Wikimedia wikis. Without HTML Tidy, a small percentage of pages will render incorrectly (broken tables; extended bold; horizontal scroll bar; misplaced images), etc. See <a href="/wiki/Diagnostics/HTML_Tidy" id="xolnki_24" title="Diagnostics/HTML Tidy" tabindex="-1">Diagnostics/HTML_Tidy</a> for examples.
+</p>
+
+<p>For more info about XOWA's customized JTidy jar, see <a href="/wiki/App/Xtn/Mediawiki/Tidy/JTidy" id="xolnki_25" title="App/Xtn/Mediawiki/Tidy/JTidy" tabindex="-1">App/Xtn/Mediawiki/Tidy/JTidy</a>
+</p>
+</p>
+  </div>
+
+  <h2>General</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.tidy.enabled")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.html.tidy.enabled__name' class='xocfg_itm_name'>Enabled</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.html.tidy.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.tidy.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.html.tidy.enabled" data-xocfg-key="xowa.html.tidy.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.html.tidy.enabled__key_box' value='xowa.html.tidy.enabled'></input>
+    <input type='hidden' id='xowa.html.tidy.enabled__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.html.tidy.enabled_help_div' class='xohelp_div'>
+    <div id='xowa.html.tidy.enabled_help_msg' class='xohelp_msg'><p>Choose if HTML tidy is enabled
+</p>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.tidy.engine")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.html.tidy.engine__name' class='xocfg_itm_name'>Tidy engine</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.html.tidy.engine__undo' data-xocfg-type='list:xowa.html.tidy.engine' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.tidy.engine")' title="reset to &quot;jtidy&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<select id="xowa.html.tidy.engine" data-xocfg-key="xowa.html.tidy.engine" data-xocfg-type="list:xowa.html.tidy.engine" accesskey="d" class="xocfg_data__list" size="2">
+<option value="tidy">tidy</option>
+<option value="jtidy" selected="selected">jtidy</option>
+</select>
+</div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.html.tidy.engine__key_box' value='xowa.html.tidy.engine'></input>
+    <input type='hidden' id='xowa.html.tidy.engine__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.html.tidy.engine_help_div' class='xohelp_div'>
+    <div id='xowa.html.tidy.engine_help_msg' class='xohelp_msg'><p>Choose an HTML tidy engine:
+</p>
+
+<ul>
+  <li> <b><a href="http://tidy.sourceforge.net/" rel="nofollow" class="external text" tabindex="-1">tidy</a></b>: The same library that is used by WMF wikis. Choose <code>tidy</code> if you want to run the official tidy library that WM uses. Note that you must download the binary if you are on Linux / Mac OS X.
+  </li>
+  <li> <b><a href="http://jtidy.sourceforge.net/" rel="nofollow" class="external text" tabindex="-1">jtidy</a></b>: A Java implementation of the tidy library. Choose <code>jtidy</code> if you don't want to install a platform specific binary. Note that JTidy is not a 100% implementation of tidy, though it appears to be quite close (at about 95%).
+  </li>
+</ul>
+</div>
+  </div>
+  
+
+  <h2>Tidy binary</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.html.tidy.cmd")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.html.tidy.cmd__name' class='xocfg_itm_name'>Process</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.html.tidy.cmd__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.html.tidy.cmd")' title="reset to &quot;~{<>bin_plat_dir<>}tidy\tidy|-utf8 --force-output y --quiet y --tidy-mark n --doctype '' --wrap 0 --indent y --quote-nbsp y --literal-attributes y --wrap-attributes n --fix-uri n --fix-backslash n --enclose-block-text y -o &quot;~{target}&quot; &quot;~{source}&quot;&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input  class="xocfg_data__io_cmd__exe__txt" id="xowa.html.tidy.cmd-exe" data-xocfg-key="xowa.html.tidy.cmd" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{<>bin_plat_dir<>}tidy\tidy"></input>
+<span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.html.tidy.cmd-exe", "Please select a file.");'>&nbsp;</span><br/>
+<input  class="xocfg_data__io_cmd__arg__txt" id="xowa.html.tidy.cmd-arg" data-xocfg-key="xowa.html.tidy.cmd" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="-utf8 --force-output y --quiet y --tidy-mark n --doctype '' --wrap 0 --indent y --quote-nbsp y --literal-attributes y --wrap-attributes n --fix-uri n --fix-backslash n --enclose-block-text y -o &quot;~{target}&quot; &quot;~{source}&quot;">
+</div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.html.tidy.cmd__key_box' value='xowa.html.tidy.cmd'></input>
+    <input type='hidden' id='xowa.html.tidy.cmd__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.html.tidy.cmd_help_div' class='xohelp_div'>
+    <div id='xowa.html.tidy.cmd_help_msg' class='xohelp_msg'><p>XOWA defaults to the following tidy arguments:
+</p>
+<pre style='overflow:auto;'>
+-utf8 --force-output y --quiet y --tidy-mark n --doctype '''' --wrap 0 --indent y --quote-nbsp y --literal-attributes y --wrap-attributes n --fix-url n --fix-backslash n --enclose-block-text y -o &quot;~{target}&quot; &quot;~{source}&quot;
+</pre>
+
+<dl>
+  <dt> -utf8
+  </dt>
+  <dd> default is ascii
+  </dd>
+  <dt> --force-output y
+  </dt>
+  <dd> always generate output; do not fail on error
+  </dd>
+  <dt> --quiet y
+  </dt>
+  <dd> suppress command-line header
+  </dd>
+  <dt> --tidy-mark n
+  </dt>
+  <dd> do not add tidy watermark
+  </dd>
+  <dt> --doctype &#39;&#39;&#39;&#39;
+  </dt>
+  <dd> default is auto (TRANSITIONAL); causes weird quirks with short text lines on some wikis (tr.wikibooks.org)
+  </dd>
+  <dt> --wrap 0
+  </dt>
+  <dd> default is 80; do not limit lines to 80 chars
+  </dd>
+  <dt> --indent y
+  </dt>
+  <dd> indent block levels
+  </dd>
+  <dt> --quote-nbsp y
+  </dt>
+  <dd> preserve nbsp as entities; do not convert to Unicode character 160
+  </dd>
+  <dt> --literal-attributes y
+  </dt>
+  <dd> do not alter whitespace chars in attributes
+  </dd>
+  <dt> --wrap-attributes n
+  </dt>
+  <dd> do not line-wrap attribute values
+  </dd>
+  <dt> --fix-url n
+  </dt>
+  <dd> do not escape invalid chars in uris
+  </dd>
+  <dt> --fix-backslash n
+  </dt>
+  <dd> do not change \ to / in URLs
+  </dd>
+  <dt> --enclose-block-text y
+  </dt>
+  <dd> always enclose text in element with &lt;p&gt;
+  </dd>
+  <dt> -o ~{target}
+  </dt>
+  <dd> target file
+  </dd>
+  <dt> ~{source}
+  </dt>
+  <dd> source file
+  </dd>
+</dl>
+</div>
+  </div>
+  
+
+</div>
+
+</div>
+
     </div>
   </div>
 </div>

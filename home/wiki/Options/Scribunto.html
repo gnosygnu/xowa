@@ -16,350 +16,358 @@
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
-    
     <div id='xocfg_body'>
-      <!-- TEXT:err_msg -->
-      <div id='xocfg_err'>
-      </div>
-      <div>
-        <!-- BTN:info -->
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
-         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
-          <option value='xowa.app.security'>
-            App - Security
-          </option>
-          <option value='xowa.app.startup'>
-            App - Startup
-          </option>
-          <option value='xowa.app.update'>
-            App - Update
-          </option>
-          <option value='xowa.gui.general'>
-            Gui - General
-          </option>
-          <option value='xowa.gui.tabs'>
-            Gui - Tabs
-          </option>
-          <option value='xowa.gui.url_bar'>
-            Gui - Address bar
-          </option>
-          <option value='xowa.gui.menus'>
-            Gui - Menus
-          </option>
-          <option value='xowa.gui.shortcuts'>
-            Gui - Shortcuts
-          </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Nightmode
-          </option>
-          <option value='xowa.wiki.hdumps'>
-            Wiki - HTML Databases
-          </option>
-          <option value='xowa.wiki.edit'>
-            Wiki - Editing
-          </option>
-          <option value='xowa.bldr.general'>
-            Import - General
-          </option>
-          <option value='xowa.bldr.db'>
-            Import - Database
-          </option>
-          <option value='xowa.bldr.page_sync'>
-            Import - Page sync
-          </option>
-          <option value='xowa.bldr.dansguardian'>
-            Import - Dansguardian
-          </option>
-          <option value='xowa.html.css'>
-            HTML - CSS
-          </option>
-          <option value='xowa.html.page'>
-            HTML - Page
-          </option>
-          <option value='xowa.html.tidy'>
-            HTML - Tidy
-          </option>
-          <option value='xowa.html.scripting'>
-            HTML - Scripting
-          </option>
-          <option value='xowa.files.general'>
-            Files - General
-          </option>
-          <option value='xowa.files.apps'>
-            Files - Apps
-          </option>
-          <option value='xowa.addon.search'>
-            Addon - Search
-          </option>
-          <option value='xowa.addon.fulltext_search'>
-            Addon - Full-text search
-          </option>
-          <option value='xowa.addon.category'>
-            Addon - Category
-          </option>
-          <option value='xowa.addon.http_server'>
-            Addon - HTTP Server
-          </option>
-          <option value='xowa.addon.scribunto' selected='selected'>
-            Addon - Scribunto
-          </option>
-          <option value='xowa.addon.math'>
-            Addon - Math
-          </option>
-          <option value='xowa.addon.score'>
-            Addon - Score
-          </option>
-          <option value='xowa.addon.popups'>
-            Addon - Popups
-          </option>
-          <option value='xowa.addon.wikibase'>
-            Addon - Wikidata
-          </option>
-          <option value='xowa.dev.general'>
-            Dev - General
-          </option>
-        </select> <!-- LINK:cfg_link -->
-         
-        <div style='float:right;margin:2px 7px;'>
-          <a id='options_lnk'>options link</a>
-        </div>
-      </div>
-      <div id='cfg_grps'>
-        <!-- TEXT:page_help -->
-        <div>
-          <p id='page_help_para'>
-          </p>
-        </div>
-        <h2>
-          General
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.enabled")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.scribunto.enabled__name' class='xocfg_itm_name'>
-            Enabled
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.scribunto.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.scribunto.enabled" data-xocfg-key="xowa.addon.scribunto.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.scribunto.enabled__key_box' value='xowa.addon.scribunto.enabled'> <input type='hidden' id='xowa.addon.scribunto.enabled__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.scribunto.enabled_help_div' class='xohelp_div'>
-          <div id='xowa.addon.scribunto.enabled_help_msg' class='xohelp_msg'>
-            <p>
-              Handles {{#invoke:Module:Module_name|Function_name|Arguments}}
-            </p>
-            <ul>
-              <li>
-                <b>checked</b> to process #invoke statements
-              </li>
-              <li>
-                <b>unchecked</b> to render #invoke as text only
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.engine")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.scribunto.engine__name' class='xocfg_itm_name'>
-            Lua engine
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.scribunto.engine__undo' data-xocfg-type='list:xowa.addon.scribunto.engine' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.engine")' title="reset to &quot;luaj&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <select id="xowa.addon.scribunto.engine" data-xocfg-key="xowa.addon.scribunto.engine" data-xocfg-type="list:xowa.addon.scribunto.engine" accesskey="d" class="xocfg_data__list" size="2">
-              <option value="luaj" selected="selected">
-                luaj
-              </option>
-              <option value="lua">
-                lua
-              </option>
-            </select>
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.scribunto.engine__key_box' value='xowa.addon.scribunto.engine'> <input type='hidden' id='xowa.addon.scribunto.engine__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.scribunto.engine_help_div' class='xohelp_div'>
-          <div id='xowa.addon.scribunto.engine_help_msg' class='xohelp_msg'>
-            <p>
-              Select lua engine. See <a tabindex="-1" href="/wiki/App/Xtn/Mediawiki/Scribunto#Engines" id="xolnki_29" title="App/Xtn/Mediawiki/Scribunto">App/Xtn/Mediawiki/Scribunto#Engines</a>
-            </p>
-            <ul>
-              <li>
-                <b>luaj</b>: lua code will be processed through the <a tabindex="-1" href="http://luaj.org/luaj/README.html" rel="nofollow" class="external text">luaj</a> jar at /bin/any/java/luaj/.
-              </li>
-              <li>
-                <b>lua</b> : lua code will be processed through the <a tabindex="-1" href="http://lua.org/about" rel="nofollow" class="external text">lua</a> binary at /bin/os_name/lua/.
-              </li>
-            </ul>
-            <p>
-              <b>Note for Lua engine users:</b>
-            </p>
-            <ul>
-              <li>
-                <b>executable permissions</b>: Linux / Mac OS X users may need to grant execute permission to the Lua binary. To ensure proper setup, please do the following: 
-                <ul>
-                  <li>
-                    Open <a tabindex="-1" href="/wiki/Diagnostics/Scribunto/All" id="xolnki_30" title="Diagnostics/Scribunto/All" class="xowa-visited">Diagnostics/Scribunto/All</a>
-                  </li>
-                  <li>
-                    If the page fails, then see <a tabindex="-1" href="/wiki/App/Xtn/Mediawiki/Scribunto#Permissions" id="xolnki_31" title="App/Xtn/Mediawiki/Scribunto">App/Xtn/Mediawiki/Scribunto#Permissions</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <b>NTFS partitions</b>: Linux users with NTFS partitions will need to run a command like the following:
-              </li>
-            </ul>
-            <dl>
-              <dd>
-                <code>sudo mount -t ntfs -o rw,auto,user,fmask=0022,dmask=0000 /dev/whatever /mnt/whatever</code>
-              </dd>
-              <dd>
-                See <a tabindex="-1" href="http://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition" rel="nofollow" class="external free">http://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition</a> (Thanks to Anselm)
-              </dd>
-            </dl>
-          </div>
-        </div>
-        <h2>
-          Lua options
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.cmd")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.scribunto.lua.cmd__name' class='xocfg_itm_name'>
-            Lua path
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.scribunto.lua.cmd__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.cmd")' title="reset to &quot;~{&lt;&gt;bin_plat_dir&lt;&gt;}lua\lua5.1.exe|&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.scribunto.lua.cmd-exe" data-xocfg-key="xowa.addon.scribunto.lua.cmd" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{&lt;&gt;bin_plat_dir&lt;&gt;}lua\lua5.1.exe"> <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.scribunto.lua.cmd-exe", "Please select a file.");'>&nbsp;</span><br>
-            <input class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.scribunto.lua.cmd-arg" data-xocfg-key="xowa.addon.scribunto.lua.cmd" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.scribunto.lua.cmd__key_box' value='xowa.addon.scribunto.lua.cmd'> <input type='hidden' id='xowa.addon.scribunto.lua.cmd__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.scribunto.lua.cmd_help_div' class='xohelp_div'>
-          <div id='xowa.addon.scribunto.lua.cmd_help_msg' class='xohelp_msg'>
-            <p>
-              Path to Lua binary. Only applies to the <code>lua</code>engine.
-            </p>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.timeout")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.scribunto.lua.timeout__name' class='xocfg_itm_name'>
-            Lua timeout
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.scribunto.lua.timeout__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.timeout")' title="reset to &quot;4000&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.scribunto.lua.timeout" data-xocfg-key="xowa.addon.scribunto.lua.timeout" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="4000">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.scribunto.lua.timeout__key_box' value='xowa.addon.scribunto.lua.timeout'> <input type='hidden' id='xowa.addon.scribunto.lua.timeout__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.scribunto.lua.timeout_help_div' class='xohelp_div'>
-          <div id='xowa.addon.scribunto.lua.timeout_help_msg' class='xohelp_msg'>
-            <p>
-              # of milliseconds before canceling Lua call
-            </p>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.timeout_polling")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.scribunto.lua.timeout_polling__name' class='xocfg_itm_name'>
-            Lua timeout polling
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.scribunto.lua.timeout_polling__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.timeout_polling")' title="reset to &quot;1&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.scribunto.lua.timeout_polling" data-xocfg-key="xowa.addon.scribunto.lua.timeout_polling" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="1">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.scribunto.lua.timeout_polling__key_box' value='xowa.addon.scribunto.lua.timeout_polling'> <input type='hidden' id='xowa.addon.scribunto.lua.timeout_polling__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.scribunto.lua.timeout_polling_help_div' class='xohelp_div'>
-          <div id='xowa.addon.scribunto.lua.timeout_polling_help_msg' class='xohelp_msg'>
-            <p>
-              # of milliseconds before checking for timeout. For example, with a timeout of 4000:
-            </p>
-            <dl>
-              <dd>
-                A timeout polling of 1 will check roughly 4000 times before timing out.
-              </dd>
-              <dd>
-                A timeout polling of 1000 will check roughly 4 times before timing out.
-              </dd>
-            </dl>
-            <p>
-              This setting should be left at 1. It is meant to "tweak" certain outlier situations should they arise.
-            </p>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.timeout_busy_wait")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.addon.scribunto.lua.timeout_busy_wait__name' class='xocfg_itm_name'>
-            Lua timeout busy wait
-          </div><!-- BTN:undo -->
-          <div id='xowa.addon.scribunto.lua.timeout_busy_wait__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.timeout_busy_wait")' title="reset to &quot;250&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.addon.scribunto.lua.timeout_busy_wait" data-xocfg-key="xowa.addon.scribunto.lua.timeout_busy_wait" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="250">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.addon.scribunto.lua.timeout_busy_wait__key_box' value='xowa.addon.scribunto.lua.timeout_busy_wait'> <input type='hidden' id='xowa.addon.scribunto.lua.timeout_busy_wait__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.addon.scribunto.lua.timeout_busy_wait_help_div' class='xohelp_div'>
-          <div id='xowa.addon.scribunto.lua.timeout_busy_wait_help_msg' class='xohelp_msg'>
-            <p>
-              # of milliseconds before entering timeout poll This setting should be left at 250 (or higher). It is also meant to "tweak" certain outlier situations.<br>
-              Background:
-            </p>
-            <ul>
-              <li>
-                On Windows, a sleep call can take 15 ms. This could potentially cause each Lua call to take 15 ms.
-              </li>
-              <li>
-                Some pages / templates will call Lua hundreds of times. (For example: the Weather Box on <a tabindex="-1" href="/site/en.wikipedia.org/wiki/Aruba">http://en.wikipedia.org/wiki/Aruba</a> or the Citations on <a tabindex="-1" href="/site/en.wikipedia.org/wiki/Earth">http://en.wikipedia.org/wiki/Earth</a> )
-              </li>
-              <li>
-                The busy wait is a primitive way to limit a wait to 1 ms (or less) before entering a more expensive sleep
-              </li>
-              <li>
-                A higher timeout busy wait value is more performant, but the disadvantage is that the UI will be locked up for longer
-              </li>
-            </ul>
-            <dl>
-              <dd>
-                For example, a busy wait of 250 means that the code will loop for 250 milliseconds before entering a sleep.
-              </dd>
-              <dd>
-                For sub-second values, this freezing will be unnoticeable
-              </dd>
-            </dl>
-            <p>
-              For reference, here is the corresponding code
-            </p>
+  <!-- TEXT:err_msg -->
+  <div id='xocfg_err'></div>
+  
+  <div>
+    <!-- BTN:info -->
+    <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span>
+    
+    <!-- COMBO:cfg_grps -->
+    <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+      
+      <option value='xowa.app.security' >App - Security</option>
+      
+      <option value='xowa.app.startup' >App - Startup</option>
+      
+      <option value='xowa.app.update' >App - Update</option>
+      
+      <option value='xowa.gui.general' >Gui - General</option>
+      
+      <option value='xowa.gui.tabs' >Gui - Tabs</option>
+      
+      <option value='xowa.gui.url_bar' >Gui - Address bar</option>
+      
+      <option value='xowa.gui.menus' >Gui - Menus</option>
+      
+      <option value='xowa.gui.shortcuts' >Gui - Shortcuts</option>
+      
+      <option value='xowa.gui.nightmode' >Gui - Nightmode</option>
+      
+      <option value='xowa.wiki.hdumps' >Wiki - HTML Databases</option>
+      
+      <option value='xowa.wiki.edit' >Wiki - Editing</option>
+      
+      <option value='xowa.bldr.general' >Import - General</option>
+      
+      <option value='xowa.bldr.db' >Import - Database</option>
+      
+      <option value='xowa.bldr.page_sync' >Import - Page sync</option>
+      
+      <option value='xowa.bldr.dansguardian' >Import - Dansguardian</option>
+      
+      <option value='xowa.html.css' >HTML - CSS</option>
+      
+      <option value='xowa.html.page' >HTML - Page</option>
+      
+      <option value='xowa.html.tidy' >HTML - Tidy</option>
+      
+      <option value='xowa.html.scripting' >HTML - Scripting</option>
+      
+      <option value='xowa.files.general' >Files - General</option>
+      
+      <option value='xowa.files.apps' >Files - Apps</option>
+      
+      <option value='xowa.addon.search' >Addon - Search</option>
+      
+      <option value='xowa.addon.fulltext_search' >Addon - Full-text search</option>
+      
+      <option value='xowa.addon.category' >Addon - Category</option>
+      
+      <option value='xowa.addon.http_server' >Addon - HTTP Server</option>
+      
+      <option value='xowa.addon.scribunto'  selected='selected'>Addon - Scribunto</option>
+      
+      <option value='xowa.addon.math' >Addon - Math</option>
+      
+      <option value='xowa.addon.score' >Addon - Score</option>
+      
+      <option value='xowa.addon.popups' >Addon - Popups</option>
+      
+      <option value='xowa.addon.wikibase' >Addon - Wikidata</option>
+      
+      <option value='xowa.dev.general' >Dev - General</option>
+      
+    </select>
+    
+    <!-- LINK:cfg_link -->
+    
+    <div style='float:right;margin:2px 7px;'>
+      <a id='options_lnk'>options link</a>
+    </div>
+    
+  </div>
+  
+
+<div id='cfg_grps'>
+  <!-- TEXT:page_help -->
+  <div>
+    <p id='page_help_para'></p>
+  </div>
+
+  <h2>General</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.enabled")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.scribunto.enabled__name' class='xocfg_itm_name'>Enabled</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.scribunto.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.scribunto.enabled" data-xocfg-key="xowa.addon.scribunto.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.scribunto.enabled__key_box' value='xowa.addon.scribunto.enabled'></input>
+    <input type='hidden' id='xowa.addon.scribunto.enabled__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.scribunto.enabled_help_div' class='xohelp_div'>
+    <div id='xowa.addon.scribunto.enabled_help_msg' class='xohelp_msg'><p>Handles &#123;&#123;#invoke:Module:Module_name|Function_name|Arguments}}
+</p>
+
+<ul>
+  <li> <b>checked</b> to process #invoke statements
+  </li>
+  <li> <b>unchecked</b> to render #invoke as text only
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.engine")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.scribunto.engine__name' class='xocfg_itm_name'>Lua engine</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.scribunto.engine__undo' data-xocfg-type='list:xowa.addon.scribunto.engine' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.engine")' title="reset to &quot;luaj&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<select id="xowa.addon.scribunto.engine" data-xocfg-key="xowa.addon.scribunto.engine" data-xocfg-type="list:xowa.addon.scribunto.engine" accesskey="d" class="xocfg_data__list" size="2">
+<option value="luaj" selected="selected">luaj</option>
+<option value="lua">lua</option>
+</select>
+</div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.scribunto.engine__key_box' value='xowa.addon.scribunto.engine'></input>
+    <input type='hidden' id='xowa.addon.scribunto.engine__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.scribunto.engine_help_div' class='xohelp_div'>
+    <div id='xowa.addon.scribunto.engine_help_msg' class='xohelp_msg'><p>Select lua engine. See <a href="/wiki/App/Xtn/Mediawiki/Scribunto#Engines" id="xolnki_29" title="App/Xtn/Mediawiki/Scribunto" tabindex="-1">App/Xtn/Mediawiki/Scribunto#Engines</a>
+</p>
+
+<ul>
+  <li> <b>luaj</b>: lua code will be processed through the <a href="http://luaj.org/luaj/README.html" rel="nofollow" class="external text" tabindex="-1">luaj</a> jar at /bin/any/java/luaj/.
+  </li>
+  <li> <b>lua</b> : lua code will be processed through the <a href="http://lua.org/about" rel="nofollow" class="external text" tabindex="-1">lua</a> binary at /bin/os_name/lua/.
+  </li>
+</ul>
+
+<p><b>Note for Lua engine users:</b>
+</p>
+
+<ul>
+  <li> <b>executable permissions</b>: Linux / Mac OS X users may need to grant execute permission to the Lua binary. To ensure proper setup, please do the following:
+
+    <ul>
+      <li> Open <a href="/wiki/Diagnostics/Scribunto/All" id="xolnki_30" title="Diagnostics/Scribunto/All" class="xowa-visited" tabindex="-1">Diagnostics/Scribunto/All</a>
+      </li>
+      <li> If the page fails, then see <a href="/wiki/App/Xtn/Mediawiki/Scribunto#Permissions" id="xolnki_31" title="App/Xtn/Mediawiki/Scribunto" tabindex="-1">App/Xtn/Mediawiki/Scribunto#Permissions</a>
+      </li>
+    </ul>
+  </li>
+  <li> <b>NTFS partitions</b>: Linux users with NTFS partitions will need to run a command like the following:
+  </li>
+</ul>
+<dl>
+  <dd> <code>sudo mount -t ntfs -o rw,auto,user,fmask=0022,dmask=0000 /dev/whatever /mnt/whatever</code>
+  </dd>
+  <dd> See <a href="http://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition" rel="nofollow" class="external free" tabindex="-1">http://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition</a> (Thanks to Anselm)
+  </dd>
+</dl>
+</div>
+  </div>
+  
+
+  <h2>Lua options</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.cmd")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.scribunto.lua.cmd__name' class='xocfg_itm_name'>Lua path</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.scribunto.lua.cmd__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.cmd")' title="reset to &quot;~{<>bin_plat_dir<>}lua\lua5.1.exe|&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input  class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.scribunto.lua.cmd-exe" data-xocfg-key="xowa.addon.scribunto.lua.cmd" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{<>bin_plat_dir<>}lua\lua5.1.exe"></input>
+<span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.scribunto.lua.cmd-exe", "Please select a file.");'>&nbsp;</span><br/>
+<input  class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.scribunto.lua.cmd-arg" data-xocfg-key="xowa.addon.scribunto.lua.cmd" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="">
+</div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.scribunto.lua.cmd__key_box' value='xowa.addon.scribunto.lua.cmd'></input>
+    <input type='hidden' id='xowa.addon.scribunto.lua.cmd__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.scribunto.lua.cmd_help_div' class='xohelp_div'>
+    <div id='xowa.addon.scribunto.lua.cmd_help_msg' class='xohelp_msg'><p>Path to Lua binary. Only applies to the <code>lua</code>engine.
+</p>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.timeout")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.scribunto.lua.timeout__name' class='xocfg_itm_name'>Lua timeout</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.scribunto.lua.timeout__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.timeout")' title="reset to &quot;4000&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.scribunto.lua.timeout" data-xocfg-key="xowa.addon.scribunto.lua.timeout" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="4000"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.scribunto.lua.timeout__key_box' value='xowa.addon.scribunto.lua.timeout'></input>
+    <input type='hidden' id='xowa.addon.scribunto.lua.timeout__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.scribunto.lua.timeout_help_div' class='xohelp_div'>
+    <div id='xowa.addon.scribunto.lua.timeout_help_msg' class='xohelp_msg'><p>&#35; of milliseconds before canceling Lua call
+</p>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.timeout_polling")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.scribunto.lua.timeout_polling__name' class='xocfg_itm_name'>Lua timeout polling</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.scribunto.lua.timeout_polling__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.timeout_polling")' title="reset to &quot;1&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.scribunto.lua.timeout_polling" data-xocfg-key="xowa.addon.scribunto.lua.timeout_polling" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="1"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.scribunto.lua.timeout_polling__key_box' value='xowa.addon.scribunto.lua.timeout_polling'></input>
+    <input type='hidden' id='xowa.addon.scribunto.lua.timeout_polling__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.scribunto.lua.timeout_polling_help_div' class='xohelp_div'>
+    <div id='xowa.addon.scribunto.lua.timeout_polling_help_msg' class='xohelp_msg'><p>&#35; of milliseconds before checking for timeout.
+For example, with a timeout of 4000:
+</p>
+
+<dl>
+  <dd> A timeout polling of 1 will check roughly 4000 times before timing out.
+  </dd>
+  <dd> A timeout polling of 1000 will check roughly 4 times before timing out.
+  </dd>
+</dl>
+
+<p>This setting should be left at 1. It is meant to &quot;tweak&quot; certain outlier situations should they arise.
+</p>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.addon.scribunto.lua.timeout_busy_wait")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.addon.scribunto.lua.timeout_busy_wait__name' class='xocfg_itm_name'>Lua timeout busy wait</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.addon.scribunto.lua.timeout_busy_wait__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.scribunto.lua.timeout_busy_wait")' title="reset to &quot;250&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.addon.scribunto.lua.timeout_busy_wait" data-xocfg-key="xowa.addon.scribunto.lua.timeout_busy_wait" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="250"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.addon.scribunto.lua.timeout_busy_wait__key_box' value='xowa.addon.scribunto.lua.timeout_busy_wait'></input>
+    <input type='hidden' id='xowa.addon.scribunto.lua.timeout_busy_wait__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.addon.scribunto.lua.timeout_busy_wait_help_div' class='xohelp_div'>
+    <div id='xowa.addon.scribunto.lua.timeout_busy_wait_help_msg' class='xohelp_msg'><p>&#35; of milliseconds before entering timeout poll
+This setting should be left at 250 (or higher). It is also meant to &quot;tweak&quot; certain outlier situations.
+<br/>
+Background:
+</p>
+
+<ul>
+  <li> On Windows, a sleep call can take 15 ms. This could potentially cause each Lua call to take 15 ms.
+  </li>
+  <li> Some pages / templates will call Lua hundreds of times. (For example: the Weather Box on <a href="/site/en.wikipedia.org/wiki/Aruba" tabindex="-1">http://en.wikipedia.org/wiki/Aruba</a> or the Citations on <a href="/site/en.wikipedia.org/wiki/Earth" tabindex="-1">http://en.wikipedia.org/wiki/Earth</a> )
+  </li>
+  <li> The busy wait is a primitive way to limit a wait to 1 ms (or less) before entering a more expensive sleep
+  </li>
+  <li> A higher timeout busy wait value is more performant, but the disadvantage is that the UI will be locked up for longer
+  </li>
+</ul>
+<dl>
+  <dd> For example, a busy wait of 250 means that the code will loop for 250 milliseconds before entering a sleep.
+  </dd>
+  <dd> For sub-second values, this freezing will be unnoticeable
+  </dd>
+</dl>
+
+<p>For reference, here is the corresponding code
+</p>
 <pre style="overflow:auto;">
 long time_bgn = System.currentTimeMillis();
 long time_woke = time_bgn;
@@ -368,17 +376,20 @@ while (true) {
   if (rv != null) return rv;
   long time_now = System.currentTimeMillis();
   if (time_now &gt; time_woke + server_timeout_busy_wait) {
-    if (time_now &gt; time_bgn + server_timeout) throw Xoa_xtn_scribunto.err_("lua_timeout: timeout={0} cmd={1}", server_timeout, String_.new_utf8_(cmd_last));
+    if (time_now &gt; time_bgn + server_timeout) throw Xoa_xtn_scribunto.err_(&quot;lua_timeout: timeout={0} cmd={1}&quot;, server_timeout, String_.new_utf8_(cmd_last));
     ThreadAdp_.Sleep(server_timeout_polling);
     time_woke = System.currentTimeMillis();
   }
 }
 </pre>
-          </div>
-        </div>
-      </div>
-    </div>
+</div>
+  </div>
   
+
+</div>
+
+</div>
+
     </div>
   </div>
 </div>

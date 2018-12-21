@@ -16,207 +16,188 @@
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
-    
     <div id='xocfg_body'>
-      <!-- TEXT:err_msg -->
-      <div id='xocfg_err'>
-      </div>
-      <div>
-        <!-- BTN:info -->
-        <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span> <!-- COMBO:cfg_grps -->
-         <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
-          <option value='xowa.app.security'>
-            App - Security
-          </option>
-          <option value='xowa.app.startup'>
-            App - Startup
-          </option>
-          <option value='xowa.app.update'>
-            App - Update
-          </option>
-          <option value='xowa.gui.general'>
-            Gui - General
-          </option>
-          <option value='xowa.gui.tabs'>
-            Gui - Tabs
-          </option>
-          <option value='xowa.gui.url_bar'>
-            Gui - Address bar
-          </option>
-          <option value='xowa.gui.menus'>
-            Gui - Menus
-          </option>
-          <option value='xowa.gui.shortcuts'>
-            Gui - Shortcuts
-          </option>
-          <option value='xowa.gui.nightmode'>
-            Gui - Nightmode
-          </option>
-          <option value='xowa.wiki.hdumps' selected='selected'>
-            Wiki - HTML Databases
-          </option>
-          <option value='xowa.wiki.edit'>
-            Wiki - Editing
-          </option>
-          <option value='xowa.bldr.general'>
-            Import - General
-          </option>
-          <option value='xowa.bldr.db'>
-            Import - Database
-          </option>
-          <option value='xowa.bldr.page_sync'>
-            Import - Page sync
-          </option>
-          <option value='xowa.bldr.dansguardian'>
-            Import - Dansguardian
-          </option>
-          <option value='xowa.html.css'>
-            HTML - CSS
-          </option>
-          <option value='xowa.html.page'>
-            HTML - Page
-          </option>
-          <option value='xowa.html.tidy'>
-            HTML - Tidy
-          </option>
-          <option value='xowa.html.scripting'>
-            HTML - Scripting
-          </option>
-          <option value='xowa.files.general'>
-            Files - General
-          </option>
-          <option value='xowa.files.apps'>
-            Files - Apps
-          </option>
-          <option value='xowa.addon.search'>
-            Addon - Search
-          </option>
-          <option value='xowa.addon.fulltext_search'>
-            Addon - Full-text search
-          </option>
-          <option value='xowa.addon.category'>
-            Addon - Category
-          </option>
-          <option value='xowa.addon.http_server'>
-            Addon - HTTP Server
-          </option>
-          <option value='xowa.addon.scribunto'>
-            Addon - Scribunto
-          </option>
-          <option value='xowa.addon.math'>
-            Addon - Math
-          </option>
-          <option value='xowa.addon.score'>
-            Addon - Score
-          </option>
-          <option value='xowa.addon.popups'>
-            Addon - Popups
-          </option>
-          <option value='xowa.addon.wikibase'>
-            Addon - Wikidata
-          </option>
-          <option value='xowa.dev.general'>
-            Dev - General
-          </option>
-        </select> <!-- LINK:cfg_link -->
-         
-        <div style='float:right;margin:2px 7px;'>
-          <a id='options_lnk'>options link</a>
-        </div>
-      </div>
-      <div id='cfg_grps'>
-        <!-- TEXT:page_help -->
-        <div>
-          <p id='page_help_para'>
-          </p>
-        </div>
-        <h2>
-          General
-        </h2>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.wiki.hdumps.read_preferred")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.wiki.hdumps.read_preferred__name' class='xocfg_itm_name'>
-            Prefer HTML Databases for Read tab
-          </div><!-- BTN:undo -->
-          <div id='xowa.wiki.hdumps.read_preferred__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.hdumps.read_preferred")' title="reset to &quot;y&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <input id="xowa.wiki.hdumps.read_preferred" data-xocfg-key="xowa.wiki.hdumps.read_preferred" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked">
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.wiki.hdumps.read_preferred__key_box' value='xowa.wiki.hdumps.read_preferred'> <input type='hidden' id='xowa.wiki.hdumps.read_preferred__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.wiki.hdumps.read_preferred_help_div' class='xohelp_div'>
-          <div id='xowa.wiki.hdumps.read_preferred_help_msg' class='xohelp_msg'>
-            <p>
-              Choose one of the following:
-            </p>
-            <ul>
-              <li>
-                <b>checked</b>: Read tab uses HTML databases. Note that this will be faster, but there may be some inaccuracies. (These inaccuracies are being worked on)
-              </li>
-              <li>
-                <b>unchecked</b>: Read tab uses Wikitext. Note that this will be slower, but more accurate.
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xocfg_row flex_div">
-          <!-- BTN:help_item -->
-          <div class='xocfg_itm_help'>
-            <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.wiki.hdumps.html_mode")' title='view more info'>&nbsp;</span>
-          </div><!-- TEXT:key -->
-          <div id='xowa.wiki.hdumps.html_mode__name' class='xocfg_itm_name'>
-            HTML tab mode
-          </div><!-- BTN:undo -->
-          <div id='xowa.wiki.hdumps.html_mode__undo' data-xocfg-type='list:xowa.wiki.hdumps.html_mode' class='xocfg_itm_delete'>
-            <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.hdumps.html_mode")' title="reset to &quot;shown&quot;">&nbsp;</span>
-          </div><!-- TEXT:val -->
-          <div class='xocfg_itm_data'>
-            <select id="xowa.wiki.hdumps.html_mode" data-xocfg-key="xowa.wiki.hdumps.html_mode" data-xocfg-type="list:xowa.wiki.hdumps.html_mode" accesskey="d" class="xocfg_data__list" size="4">
-              <option value="shown">
-                Shown
-              </option>
-              <option value="swt_browser" selected="selected">
-                SWT Browser
-              </option>
-              <option value="hdump_save">
-                Saved for HTML DB
-              </option>
-              <option value="hdump_load">
-                Loaded by HTML DB
-              </option>
-            </select>
-          </div><!-- HIDDEN:key,ctx -->
-          <input type='hidden' id='xowa.wiki.hdumps.html_mode__key_box' value='xowa.wiki.hdumps.html_mode'> <input type='hidden' id='xowa.wiki.hdumps.html_mode__ctx_box' value='app'>
-        </div><!-- DIV:help -->
-        <div id='xowa.wiki.hdumps.html_mode_help_div' class='xohelp_div'>
-          <div id='xowa.wiki.hdumps.html_mode_help_msg' class='xohelp_msg'>
-            <p>
-              Choose one of the following to show in HTML tab:
-            </p>
-            <ul>
-              <li>
-                <b>Shown</b>: HTML as generated by XOWA
-              </li>
-              <li>
-                <b>SWT browser</b>: HTML as currently shown in SWT browser (useful for Special pages and javascript calls)
-              </li>
-              <li>
-                <b>Saved for HTML DB</b>: HTML as saved in the HTML database. Note that this is for developer purposes only.
-              </li>
-              <li>
-                <b>Loaded for HTML DB</b>: HTML as saved in the HTML database but post-processed with image urls. Note that this is for developer purposes only.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- TEXT:err_msg -->
+  <div id='xocfg_err'></div>
   
+  <div>
+    <!-- BTN:info -->
+    <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.cfg_edit.help__toggle_all()' title='toggle all help'>&nbsp;</span>
+    
+    <!-- COMBO:cfg_grps -->
+    <select id='xocfg_nav_select' onchange='xo.cfg_edit.select__send(this);' onkeyup='xo.cfg_edit.select__by_keypress(event, this);' accesskey='l'>
+      
+      <option value='xowa.app.security' >App - Security</option>
+      
+      <option value='xowa.app.startup' >App - Startup</option>
+      
+      <option value='xowa.app.update' >App - Update</option>
+      
+      <option value='xowa.gui.general' >Gui - General</option>
+      
+      <option value='xowa.gui.tabs' >Gui - Tabs</option>
+      
+      <option value='xowa.gui.url_bar' >Gui - Address bar</option>
+      
+      <option value='xowa.gui.menus' >Gui - Menus</option>
+      
+      <option value='xowa.gui.shortcuts' >Gui - Shortcuts</option>
+      
+      <option value='xowa.gui.nightmode' >Gui - Nightmode</option>
+      
+      <option value='xowa.wiki.hdumps'  selected='selected'>Wiki - HTML Databases</option>
+      
+      <option value='xowa.wiki.edit' >Wiki - Editing</option>
+      
+      <option value='xowa.bldr.general' >Import - General</option>
+      
+      <option value='xowa.bldr.db' >Import - Database</option>
+      
+      <option value='xowa.bldr.page_sync' >Import - Page sync</option>
+      
+      <option value='xowa.bldr.dansguardian' >Import - Dansguardian</option>
+      
+      <option value='xowa.html.css' >HTML - CSS</option>
+      
+      <option value='xowa.html.page' >HTML - Page</option>
+      
+      <option value='xowa.html.tidy' >HTML - Tidy</option>
+      
+      <option value='xowa.html.scripting' >HTML - Scripting</option>
+      
+      <option value='xowa.files.general' >Files - General</option>
+      
+      <option value='xowa.files.apps' >Files - Apps</option>
+      
+      <option value='xowa.addon.search' >Addon - Search</option>
+      
+      <option value='xowa.addon.fulltext_search' >Addon - Full-text search</option>
+      
+      <option value='xowa.addon.category' >Addon - Category</option>
+      
+      <option value='xowa.addon.http_server' >Addon - HTTP Server</option>
+      
+      <option value='xowa.addon.scribunto' >Addon - Scribunto</option>
+      
+      <option value='xowa.addon.math' >Addon - Math</option>
+      
+      <option value='xowa.addon.score' >Addon - Score</option>
+      
+      <option value='xowa.addon.popups' >Addon - Popups</option>
+      
+      <option value='xowa.addon.wikibase' >Addon - Wikidata</option>
+      
+      <option value='xowa.dev.general' >Dev - General</option>
+      
+    </select>
+    
+    <!-- LINK:cfg_link -->
+    
+    <div style='float:right;margin:2px 7px;'>
+      <a id='options_lnk'>options link</a>
+    </div>
+    
+  </div>
+  
+
+<div id='cfg_grps'>
+  <!-- TEXT:page_help -->
+  <div>
+    <p id='page_help_para'></p>
+  </div>
+
+  <h2>General</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.wiki.hdumps.read_preferred")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.wiki.hdumps.read_preferred__name' class='xocfg_itm_name'>Prefer HTML Databases for Read tab</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.wiki.hdumps.read_preferred__undo' data-xocfg-type='bool' class='xocfg_itm_delete'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.hdumps.read_preferred")' title="reset to &quot;y&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.wiki.hdumps.read_preferred" data-xocfg-key="xowa.wiki.hdumps.read_preferred" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.wiki.hdumps.read_preferred__key_box' value='xowa.wiki.hdumps.read_preferred'></input>
+    <input type='hidden' id='xowa.wiki.hdumps.read_preferred__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.wiki.hdumps.read_preferred_help_div' class='xohelp_div'>
+    <div id='xowa.wiki.hdumps.read_preferred_help_msg' class='xohelp_msg'><p>Choose one of the following:
+</p>
+
+<ul>
+  <li> <b>checked</b>: Read tab uses HTML databases. Note that this will be faster, but there may be some inaccuracies. (These inaccuracies are being worked on)
+  </li>
+  <li> <b>unchecked</b>:  Read tab uses Wikitext. Note that this will be slower, but more accurate.
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.wiki.hdumps.html_mode")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.wiki.hdumps.html_mode__name' class='xocfg_itm_name'>HTML tab mode</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.wiki.hdumps.html_mode__undo' data-xocfg-type='list:xowa.wiki.hdumps.html_mode' class='xocfg_itm_delete'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.hdumps.html_mode")' title="reset to &quot;shown&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<select id="xowa.wiki.hdumps.html_mode" data-xocfg-key="xowa.wiki.hdumps.html_mode" data-xocfg-type="list:xowa.wiki.hdumps.html_mode" accesskey="d" class="xocfg_data__list" size="4">
+<option value="shown">Shown</option>
+<option value="swt_browser" selected="selected">SWT Browser</option>
+<option value="hdump_save">Saved for HTML DB</option>
+<option value="hdump_load">Loaded by HTML DB</option>
+</select>
+</div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.wiki.hdumps.html_mode__key_box' value='xowa.wiki.hdumps.html_mode'></input>
+    <input type='hidden' id='xowa.wiki.hdumps.html_mode__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.wiki.hdumps.html_mode_help_div' class='xohelp_div'>
+    <div id='xowa.wiki.hdumps.html_mode_help_msg' class='xohelp_msg'><p>Choose one of the following to show in HTML tab:
+</p>
+
+<ul>
+  <li> <b>Shown</b>: HTML as generated by XOWA
+  </li>
+  <li> <b>SWT browser</b>: HTML as currently shown in SWT browser (useful for Special pages and javascript calls)
+  </li>
+  <li> <b>Saved for HTML DB</b>:  HTML as saved in the HTML database. Note that this is for developer purposes only.
+  </li>
+  <li> <b>Loaded for HTML DB</b>:  HTML as saved in the HTML database but post-processed with image urls. Note that this is for developer purposes only.
+  </li>
+</ul>
+</div>
+  </div>
+  
+
+</div>
+
+</div>
+
     </div>
   </div>
 </div>
