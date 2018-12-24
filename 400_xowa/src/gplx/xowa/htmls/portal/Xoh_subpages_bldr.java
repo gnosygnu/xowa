@@ -47,7 +47,10 @@ public class Xoh_subpages_bldr implements gplx.core.brys.Bfr_arg {
 			byte[] seg_ttl = ttl_bfr.To_bry();															
 			byte[] seg_ttl_enc = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Encode(ttl_bfr.To_bry());
 			byte[] href = Bry_.Add(Xoh_href_.Bry__wiki, seg_ttl_enc);		// EX: /wiki/Help:A
-			fmtr_itm.Bld_bfr(bfr, dlm, href, seg_ttl, seg);
+			fmtr_itm.Bld_bfr(bfr, dlm, href
+				// NOTE: convert underscore to space; ISSUE#:308 PAGE:en.v:Computer-aided_design/Software DATE:2018-12-23
+				, Xoa_ttl.Replace_unders(seg_ttl)
+				, Xoa_ttl.Replace_unders(seg));
 		}
 		ttl_bfr.Clear();
 	}

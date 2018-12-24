@@ -25,6 +25,14 @@ public class Xoh_subpages_bldr_tst {
 		, "</span>"
 		));
 	}
+	@Test  public void Underscore_space() {// PURPOSE: convert underscore to space; ISSUE#:308 PAGE:en.v:Computer-aided_design/Software DATE:2018-12-23
+		fxt.Test_bld("Help:A_1/B_1/C_1", String_.Concat_lines_nl_skip_last
+		( "<span class=\"subpages\">"
+		, "  &lt; <a href=\"/wiki/Help:A_1\" title=\"Help:A 1\">Help:A 1</a>"
+		, "  &lrm; | <a href=\"/wiki/Help:A_1/B_1\" title=\"Help:A 1/B 1\">B 1</a>"
+		, "</span>"
+		));
+	}
 	@Test  public void Skip_page() {
 		fxt.Wiki().Ns_mgr().Add_new(104, "Page");
 		fxt.Wiki().Ns_mgr().Ns_page_id_(104);
