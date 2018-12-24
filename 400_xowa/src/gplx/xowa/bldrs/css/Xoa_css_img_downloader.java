@@ -60,7 +60,12 @@ public class Xoa_css_img_downloader {
 					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.end_missing", "could not find end_sequence for 'url(': bgn='~{0}' end='~{1}'", prv_pos, String_.new_u8__by_len(src, prv_pos, prv_pos + 25));
 					bfr.Add_mid(src, prv_pos, src_len);
 					break;
-				}	
+				}
+
+				// trim whitespace; EX: "background: url( //upload.wikimedia.org/wikipedia/commons/thumb/2/24/Gtk-media-forward-ltr.svg/24px-Gtk-media-forward-ltr.svg.png )" ISSUE#:307 PAGE:en.v:MediaWiki:Common.css/Slideshows.css DATE:2018-12-23
+				bgn_pos = Bry_find_.Find_fwd_while_space_or_tab(src, bgn_pos, end_pos);
+				end_pos = Bry_find_.Find_bwd__skip_ws(src, end_pos, bgn_pos);
+
 				if (end_pos - bgn_pos == 0) {		// empty; "url()"; ignore
 					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.empty", "'url(' is empty: bgn='~{0}' end='~{1}'", prv_pos, String_.new_u8__by_len(src, prv_pos, prv_pos + 25));
 					bfr.Add_mid(src, prv_pos, bgn_pos);

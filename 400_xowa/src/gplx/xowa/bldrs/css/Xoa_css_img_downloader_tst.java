@@ -32,6 +32,13 @@ public class Xoa_css_img_downloader_tst {
 		,	"site/a.jpg"
 		);
 	}
+	@Test  public void Unquoted_w_ws() { // trim whitespace; EX: "background: url( //upload.wikimedia.org/wikipedia/commons/thumb/2/24/Gtk-media-forward-ltr.svg/24px-Gtk-media-forward-ltr.svg.png )" ISSUE#:307 PAGE:en.v:MediaWiki:Common.css/Slideshows.css DATE:2018-12-23
+		fxt.Test_css_convert
+		(	"x {url( //site/a.jpg )}"
+		, 	"x {url( \"site/a.jpg\" )}"
+		,	"site/a.jpg"
+		);
+	}
 	@Test  public void Http() {
 		fxt.Test_css_convert
 		(	"x {url(http://site/a.jpg)}"
