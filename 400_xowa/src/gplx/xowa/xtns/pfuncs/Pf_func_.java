@@ -16,12 +16,23 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
-import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.numbers.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.pfuncs.langs.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.xowa.xtns.pfuncs.stringutils.*; import gplx.xowa.xtns.pfuncs.pages.*; import gplx.xowa.xtns.pfuncs.wikis.*;
+import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.numbers.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.pfuncs.langs.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.xowa.xtns.pfuncs.tags.*; import gplx.xowa.xtns.pfuncs.stringutils.*; import gplx.xowa.xtns.pfuncs.pages.*; import gplx.xowa.xtns.pfuncs.wikis.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.wikis.domains.*;
 public class Pf_func_ {
-	public static byte[] Eval_arg_or_empty(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i) {return Eval_arg_or(ctx, src, caller, self, self_args_len, i, Bry_.Empty);}
 	public static final byte Name_dlm = Byte_ascii.Colon;
+	public static boolean Eval_arg_to_kvp(byte[][] rslt, Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, Bry_bfr tmp_bfr, int i) {
+		if (i >= self_args_len) return false;
+		// NOTE: must call Tmpl_evaluate; don't try to parse key / val by hand; EX:{{#tag:pre|a|{{#switch:a|a=id}}=c}}
+		Arg_nde_tkn nde = self.Args_get_by_idx(i);
+		nde.Key_tkn().Tmpl_evaluate(ctx, src, caller, tmp_bfr);
+		rslt[0] = tmp_bfr.To_bry_and_clear_and_trim();
+
+		nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, tmp_bfr);
+		rslt[1] = tmp_bfr.To_bry_and_clear_and_trim();
+		return true;
+	}
+	public static byte[] Eval_arg_or_empty(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i) {return Eval_arg_or(ctx, src, caller, self, self_args_len, i, Bry_.Empty);}
 	public static byte[] Eval_arg_or(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i, byte[] or) {
 		if (i >= self_args_len) return or;
 		Arg_nde_tkn nde = self.Args_get_by_idx(i);

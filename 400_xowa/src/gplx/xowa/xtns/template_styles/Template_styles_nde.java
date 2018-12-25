@@ -30,7 +30,6 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_bgn);
 		Xox_xnde_.Parse_xatrs(wiki, this, xatrs_hash, src, xnde);
-
 		// get css_ttl
 		css_ttl = wiki.Ttl_parse(css_ttl_bry);
 		if (css_ttl == null) {

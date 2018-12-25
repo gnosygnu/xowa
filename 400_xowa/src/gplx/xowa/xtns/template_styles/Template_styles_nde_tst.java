@@ -43,6 +43,13 @@ public class Template_styles_nde_tst {
 		, Style_red
 		);
 	}
+	@Test  public void Tag() { // PURPOSE: {{#tag}}
+		fxt.Init__page("Module:A/Test.css", Css_red);
+		fxt.Test__parse
+		( "{{#tag:templatestyles||src='Module:A/Test.css'}}"
+		, Style_red
+		);
+	}
 	@Test  public void Error__invalid_title() {
 		fxt.Test__parse
 		( "<templatestyles src='A|b.css'/>"

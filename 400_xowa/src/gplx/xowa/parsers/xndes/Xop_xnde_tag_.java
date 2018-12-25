@@ -274,10 +274,10 @@ public class Xop_xnde_tag_ {
 , Tag__tabber = New(Tid__tabber, "tabber").Xtn_mw_()
 , Tag__tabview = New(Tid__tabview, "tabview").Xtn_mw_()
 , Tag__xowa_wiki_setup = New(Tid__xowa_wiki_setup, "xowa_Wiki_setup").Xtn_()
-, Tag__mapframe = New(Tid__mapframe, "mapframe").Xtn_mw_()
-, Tag__maplink = New(Tid__maplink, "maplink").Xtn_mw_()
+, Tag__mapframe = New(Tid__mapframe, "mapframe").Xtn_mw_().Html_mkr_(Tag_html_mkr_.Noop)
+, Tag__maplink = New(Tid__maplink, "maplink").Xtn_mw_().Html_mkr_(Tag_html_mkr_.Noop)
 , Tag__meta = New(Tid__meta, "meta")
 , Tag__link = New(Tid__link, "link")
-, Tag__template_styles = New(Tid__template_styles, "templatestyles").Xtn_()
+, Tag__template_styles = New(Tid__template_styles, "templatestyles").Xtn_().Html_mkr_(Tag_html_mkr_.Basic(false))
 	;
 }

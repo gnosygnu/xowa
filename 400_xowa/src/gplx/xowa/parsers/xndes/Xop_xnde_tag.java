@@ -57,6 +57,7 @@ public class Xop_xnde_tag {
 	public Xop_xnde_tag Block_close_bgn_() {block_close = Block_bgn; return this;} public Xop_xnde_tag Block_close_end_() {block_close = Block_end; return this;}
 	public boolean Xtn_auto_close() {return xtn_auto_close;} public Xop_xnde_tag Xtn_auto_close_() {xtn_auto_close = true; return this;} private boolean xtn_auto_close;
 	public boolean Ignore_empty() {return ignore_empty;} public Xop_xnde_tag Ignore_empty_() {ignore_empty = true; return this;} private boolean ignore_empty;
+	public Tag_html_mkr Html_mkr() {return html_mkr;} public Xop_xnde_tag Html_mkr_(Tag_html_mkr v) {this.html_mkr = v; return this;} private Tag_html_mkr html_mkr;
 	public boolean Xtn_skips_template_args() {return xtn_skips_template_args;} public Xop_xnde_tag Xtn_skips_template_args_() {xtn_skips_template_args = true; return this;} private boolean xtn_skips_template_args;
 	public Ordered_hash Langs() {return langs;} private Ordered_hash langs; private Int_obj_ref langs_key;
 	public Xop_xnde_tag Langs_(int lang_code, String name) {
