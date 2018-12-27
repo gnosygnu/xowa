@@ -61,7 +61,7 @@ public class Xoh_subpages_bldr implements gplx.core.brys.Bfr_arg {
 	, "</span>"
 	), "itms")
 	, fmtr_itm = Bry_fmtr.new_
-	( "\n  ~{dlm}<a href=\"~{href}\" title=\"~{title}\">~{caption}</a>"
+	( "~{dlm}<a href=\"~{href}\" title=\"~{title}\">~{caption}</a>"
 	, "dlm", "href", "title", "caption")
 	;
 }

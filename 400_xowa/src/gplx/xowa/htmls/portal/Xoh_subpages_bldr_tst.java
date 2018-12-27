@@ -19,17 +19,13 @@ public class Xoh_subpages_bldr_tst {
 	@Before public void init() {fxt.Init();} private Xoh_subpages_bldr_fxt fxt = new Xoh_subpages_bldr_fxt();
 	@Test  public void Basic() {
 		fxt.Test_bld("Help:A/B/C", String_.Concat_lines_nl_skip_last
-		( "<span class=\"subpages\">"
-		, "  &lt; <a href=\"/wiki/Help:A\" title=\"Help:A\">Help:A</a>"
-		, "  &lrm; | <a href=\"/wiki/Help:A/B\" title=\"Help:A/B\">B</a>"
+		( "<span class=\"subpages\">&lt; <a href=\"/wiki/Help:A\" title=\"Help:A\">Help:A</a>&lrm; | <a href=\"/wiki/Help:A/B\" title=\"Help:A/B\">B</a>"
 		, "</span>"
 		));
 	}
 	@Test  public void Underscore_space() {// PURPOSE: convert underscore to space; ISSUE#:308 PAGE:en.v:Computer-aided_design/Software DATE:2018-12-23
 		fxt.Test_bld("Help:A_1/B_1/C_1", String_.Concat_lines_nl_skip_last
-		( "<span class=\"subpages\">"
-		, "  &lt; <a href=\"/wiki/Help:A_1\" title=\"Help:A 1\">Help:A 1</a>"
-		, "  &lrm; | <a href=\"/wiki/Help:A_1/B_1\" title=\"Help:A 1/B 1\">B 1</a>"
+		( "<span class=\"subpages\">&lt; <a href=\"/wiki/Help:A_1\" title=\"Help:A 1\">Help:A 1</a>&lrm; | <a href=\"/wiki/Help:A_1/B_1\" title=\"Help:A 1/B 1\">B 1</a>"
 		, "</span>"
 		));
 	}
