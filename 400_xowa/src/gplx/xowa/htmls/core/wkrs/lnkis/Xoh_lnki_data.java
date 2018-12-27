@@ -56,20 +56,21 @@ public class Xoh_lnki_data {
 		this.src_bgn = anch_head.Src_bgn();
 		rdr.Init_by_wkr(tag_rdr.Err_wkr(), "lnki", src_bgn, src.length);
 		Gfh_atr title_atr = anch_head.Atrs__get_by_or_empty(Gfh_atr_.Bry__title);
-		Parse_href(hctx, anch_head);
+		if (!Parse_href(hctx, anch_head)) return false;
 		Parse_cls(anch_head);
 		Parse_capt(tag_rdr, anch_head);
 		Parse_title(title_atr);
 		hdoc_wkr.On_lnki(this);
 		return true;
 	}
-	private void Parse_href(Xoh_hdoc_ctx hctx, Gfh_tag anch_head) {
+	private boolean Parse_href(Xoh_hdoc_ctx hctx, Gfh_tag anch_head) {
 		href_itm.Parse(rdr.Err_wkr(), hctx, src, anch_head);
 		this.href_bgn = href_itm.Ttl_bgn(); this.href_end = href_itm.Ttl_end();
 		switch (href_itm.Tid()) {
 			case Xoh_anch_href_data.Tid__wiki: case Xoh_anch_href_data.Tid__site:
 				this.href_ns_id = href_itm.Ttl_ns_id();
 				this.href_src = href_itm.Ttl_full_txt();
+				if (this.href_src == null) return false; // NOTE: handle invalid href such as embedded quotes; ISSUE#:311; PAGE:en.v:Research_in_programming_Wikidata/Banks DATE:2018-12-27
 				this.href_bgn = 0;
 				this.href_end = href_src.length;
 				if (href_ns_id != Xow_ns_.Tid__main) {										// not main; try to remove template name;				
@@ -79,6 +80,7 @@ public class Xoh_lnki_data {
 				}
 				break;
 		}
+		return true;
 	}
 	private void Parse_cls(Gfh_tag anch_head) {
 		byte[] cls_bry = anch_head.Atrs__get_as_bry(Gfh_atr_.Bry__class); if (Bry_.Len_eq_0(cls_bry)) return;

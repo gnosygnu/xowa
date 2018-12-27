@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*;
 public class Xoh_lnki_hzip__anch__tst {
-	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
+	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 	@Test   public void Basic() {			// EX: [[#a]]
 		fxt.Test__bicode("~$Ba~#a~", "<a href='#a'>#a</a>");
 	}
@@ -25,6 +25,9 @@ public class Xoh_lnki_hzip__anch__tst {
 	}
 	@Test   public void Capt_similar() {	// EX: [[#a|a]]
 		fxt.Test__bicode("~$Ba~a~", "<a href='#a'>a</a>");
+	}
+	@Test   public void Quote() {			// PURPOSE: handle invalid href such as embedded quotes; ISSUE#:311; PAGE:en.v:Research_in_programming_Wikidata/Banks DATE:2018-12-27
+		fxt.Test__encode("<a href=\"#a\"b\"c\"></a>", "<a href=\"#a\"b\"c\"></a>");
 	}
 	@Test   public void Error() {			// EX: [[#a|b]]; make sure bad title character does not cause error
 		fxt.Test__bicode("~$Ba|b~#a|b~", "<a href='#a|b'>#a|b</a>");	// NOTE: the "|" should be url-encoded
