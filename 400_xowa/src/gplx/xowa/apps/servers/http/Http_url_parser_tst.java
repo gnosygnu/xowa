@@ -59,10 +59,9 @@ public class Http_url_parser_tst {
 	}
 }
 class Http_url_parser_fxt {
-	private final    Gfo_url_encoder url_encoder = Gfo_url_encoder_.New__http_url().Make();
-	public Http_url_parser Make() {return new Http_url_parser(url_encoder);}
+	public Http_url_parser Make() {return new Http_url_parser();}
 	public void Test__parse(String url, Http_url_parser expd) {
-		Http_url_parser actl = new Http_url_parser(url_encoder);
+		Http_url_parser actl = new Http_url_parser();
 		actl.Parse(url == null ? null : Bry_.new_u8(url));
 		Gftest.Eq__ary__lines(expd.To_str(), actl.To_str());
 	}

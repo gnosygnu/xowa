@@ -90,7 +90,7 @@ public class Random_selection_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		if (!Bry_.Eq(atr_before, Bry_.Empty)) option_bry = Bry_.Add(atr_before, option_bry);
 		if (!Bry_.Eq(atr_after , Bry_.Empty)) option_bry = Bry_.Add(option_bry, atr_after);
 
-		this.val = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), ctx.Page().Ttl(), option_bry, false);
+		this.val = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), option_bry, false);
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {

@@ -123,7 +123,7 @@ class Tabview_tab_itm {
 					gplx.xowa.wikis.caches.Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm(page_ttl);
 					if (page_itm == null) return null;
 					page_body = page_itm.Wtxt__redirect_or_direct();
-					page_body = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), ctx.Page().Ttl(), page_body, false);
+					page_body = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), page_body, false);
 					break;
 				case 1:
 					tab_name = args_itm;

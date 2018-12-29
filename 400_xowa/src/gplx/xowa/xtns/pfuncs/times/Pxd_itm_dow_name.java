@@ -33,7 +33,6 @@ class Pxd_itm_dow_name extends Pxd_itm_base implements Pxd_itm_prototype {
 	@Override public boolean Eval(Pxd_parser state) {return true;}
 	@Override public boolean Time_ini(Pxd_date_bldr bldr) {
 		DateAdp cur = bldr.To_date();
-		int cur_dow = cur.DayOfWeek();
 
 		// adj = requested_dow - cur_dow; EX: requesting Friday, and today is Wednesday; adj = 2 (4 - 2); DATE:2014-05-02
 		int adj = dow_idx - cur.DayOfWeek();

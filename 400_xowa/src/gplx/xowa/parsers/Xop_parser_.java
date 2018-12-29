@@ -18,7 +18,7 @@ import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.langs.vnts.*;
 public class Xop_parser_ {
 	public static final int Doc_bgn_bos = -1, Doc_bgn_char_0 = 0;
-	public static byte[] Parse_text_to_html(Xowe_wiki wiki, Xop_ctx owner_ctx, Xoae_page page, Xoa_ttl ttl, byte[] src, boolean para_enabled) {	// NOTE: must pass in same page instance; do not do Xoa_page_.new_(), else img_idx will get reset to 0; DATE:2015-02-08
+	public static byte[] Parse_text_to_html(Xowe_wiki wiki, Xop_ctx owner_ctx, Xoae_page page, byte[] src, boolean para_enabled) {	// NOTE: must pass in same page instance; do not do Xoa_page_.new_(), else img_idx will get reset to 0; DATE:2015-02-08
 		// init
 		Xop_ctx ctx = Xop_ctx.New__sub(wiki, owner_ctx, page);
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();

@@ -44,7 +44,6 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 		byte[] rv = Parse_recurse(Bool_.Y, tmp_bfr, bfr.To_bry_and_clear());
 		bfr.Add(rv);
 	}
-	public byte[] Parse(boolean template_parsing, byte[] src) {return Parse_recurse(template_parsing, tmp_bfr, src);}
 	public byte[] Parse(byte[] src) {return Parse_recurse(Bool_.Y, tmp_bfr, src);}
 	private byte[] Parse_recurse(boolean template_parsing, Bry_bfr bfr, byte[] src) {
 		int src_len = src.length;

@@ -19,10 +19,6 @@ import gplx.langs.htmls.encoders.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.pages.*;
 class Http_url_parser {
-	private final    Gfo_url_encoder url_encoder;
-	public Http_url_parser(Gfo_url_encoder url_encoder) {
-		this.url_encoder = url_encoder;
-	}
 	public byte[] Wiki() {return wiki;} public Http_url_parser Wiki_(String v) {this.wiki = Bry_.new_u8(v); return this;} private byte[] wiki;
 	public byte[] Page() {return page;} public Http_url_parser Page_(String v) {this.page = Bry_.new_u8(v); return this;} private byte[] page;
 	public byte Action() {return action;} public Http_url_parser Action_(byte v) {this.action = v; return this;} private byte action;
@@ -81,47 +77,6 @@ class Http_url_parser {
 				this.popup_id = qarg_mgr.Read_str_or_null(Bry_.new_a7("popup_id"));
 				this.popup_mode = qarg_mgr.Read_str_or_null(Bry_.new_a7("popup_mode"));
 			}
-
-			/*
-
-			// get wiki
-			int wiki_bgn = 1; // skip initial "/"
-			int wiki_end = Bry_find_.Find_fwd_or(url, Byte_ascii.Slash, wiki_bgn, url_len, url_len);
-			this.wiki = Bry_.Mid(url, wiki_bgn, wiki_end);
-			if (wiki_end == url_len) {// no slash found; url is wiki-only; EX: "/en.wikipedia.org"
-				return true;
-			}
-
-			// get page after "/wiki/"
-			byte[] wiki_separator = Xoh_href_.Bry__wiki;
-			int page_bgn = wiki_end + wiki_separator.length;
-			if (!Bry_.Eq(url, wiki_end, wiki_end + wiki_separator.length, Xoh_href_.Bry__wiki)) 
-				return Fail(url, "invalid url; must have '/wiki/' after wiki_domain");
-			int page_end = url_len;
-
-			// search for action arg
-			this.action = Xopg_page_.Tid_read;
-			int action_key_bgn = Bry_find_.Find_bwd(url, Qarg__action__frag, url_len);
-			if (action_key_bgn != Bry_find_.Not_found) {
-				int action_val_bgn = action_key_bgn + Qarg__action__frag.length;
-				int action_val_end = url_len;
-				boolean trim_page = true;
-				if      (Bry_.Eq(url, action_val_bgn, action_val_end, Xoa_url_.Qarg__action__read))
-					this.action = Xopg_page_.Tid_read;
-				else if (Bry_.Eq(url, action_val_bgn, action_val_end, Xoa_url_.Qarg__action__edit))
-					this.action = Xopg_page_.Tid_edit;
-				else if (Bry_.Eq(url, action_val_bgn, action_val_end, Xoa_url_.Qarg__action__html))
-					this.action = Xopg_page_.Tid_html;
-				else if (Bry_.Eq(url, action_val_bgn, action_val_end, Qarg__action__popup))
-					this.popup = true;
-				else // no "?action=" found; ignore "?"; EX: "A?action=unknown"
-					trim_page = false;
-				if (trim_page)
-					page_end = action_key_bgn;
-			}
-
-			this.page = url_encoder.Decode(Bry_.Mid(url, page_bgn, page_end));
-			*/
 			return true;
 		}
 		catch (Exception e) {
@@ -138,7 +93,6 @@ class Http_url_parser {
 		return false;
 	}
 	private static final    byte[]
-	  Qarg__action__frag = Bry_.Add(Byte_ascii.Question_bry, Xoa_url_.Qarg__action, Byte_ascii.Eq_bry) // "?action="
-	, Qarg__action__popup = Bry_.new_a7("popup")
+	  Qarg__action__popup = Bry_.new_a7("popup")
 	;
 }

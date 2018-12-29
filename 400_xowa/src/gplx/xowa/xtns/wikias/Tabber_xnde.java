@@ -44,7 +44,7 @@ public class Tabber_xnde implements Xox_xnde {
 			else {
 				tab_head = Bry_.Mid(tab_itm, 0, eq_pos);
 				tab_body = Bry_.Mid(tab_itm, eq_pos + 1, tab_itm_len);
-				tab_body = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), ctx.Page().Ttl(), tab_body, false);
+				tab_body = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), tab_body, false);
 			}
 			tab_itms_list.Add(new Tabber_tab_itm(Bool_.N, tab_head, tab_body));
 		}

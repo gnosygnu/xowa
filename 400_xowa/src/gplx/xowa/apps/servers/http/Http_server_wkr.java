@@ -33,7 +33,6 @@ class Http_server_wkr implements Gfo_invk {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(64);
 	private Socket_adp socket;
 	private Http_data__client data__client;
-	private final    Gfo_url_parser url_parser = new Gfo_url_parser();
 	public Http_server_wkr(Http_server_mgr server_mgr, int uid){
 		this.server_mgr = server_mgr; this.uid = uid;
 		this.app = server_mgr.App(); this.server_wtr = server_mgr.Server_wtr(); this.url_encoder = server_mgr.Encoder();
@@ -100,7 +99,7 @@ class Http_server_wkr implements Gfo_invk {
 		app.Http_server().Run_xowa_cmd(app, String_.new_u8(cmd));
 	}
 	private void Write_wiki(byte[] req) {
-		Http_url_parser url_parser = new Http_url_parser(url_encoder);
+		Http_url_parser url_parser = new Http_url_parser();
 		String page_html = "";
 		if (!url_parser.Parse(req)) {
 			page_html = url_parser.Err_msg();

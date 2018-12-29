@@ -51,4 +51,6 @@ public class Pfunc_tag_tst {
 		, "</ol>"
 		));
 	}
+	// TODO: handle; $inner = $frame->expand( array_shift( $args ) );
+	// @Test   public void Nowiki()            {fxt.Test_html_full_str("{{#tag:pre|<nowiki>a<i>b</i>c</nowiki>}}"  , "<pre>a&lt;i&gt;b&lt;/i&gt;c</pre>");}// PURPOSE: body should get evaluated; DATE:2018-12-28
 }

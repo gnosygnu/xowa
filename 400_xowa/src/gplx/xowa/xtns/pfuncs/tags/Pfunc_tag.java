@@ -45,10 +45,13 @@ public class Pfunc_tag extends Pf_func_base {// REF:/includes/parser/CoreParserF
 			Eval_attrs(ctx, wiki, caller, self, src, args_len, html_wkr);
 
 			// process body
-			byte[] body = args_len == 0
-				? Bry_.Empty
-				: Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 0);
-				html_wkr.Tag__process_body(body);
+			byte[] body = Bry_.Empty;
+			if (args_len > 0) {
+				body = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 0);
+				// REF.MW: $inner = $frame->expand( array_shift( $args ) );
+				// body = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), body, false);
+			}
+			html_wkr.Tag__process_body(body);
 
 			// add to UNIQ hash; DATE:2017-03-31
 			byte[] val = html_wkr.Tag__build(ctx.Wiki(), ctx);

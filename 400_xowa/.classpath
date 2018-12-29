@@ -10,6 +10,5 @@
 	<classpathentry exported="true" kind="lib" path="lib/icu4j-4_8.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/gplx.gflucene"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/luaj-vm"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
