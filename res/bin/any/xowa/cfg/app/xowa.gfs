@@ -170,7 +170,7 @@ app.wikis.get('~{wiki_key}').html.portal {
         <li id="p-search" role="search">
           <form id="searchform" action="/wiki/~{<>app.gui.win_opts.search_url;<>}">
             <div id="simpleSearch">
-              <input type="search" name="search" placeholder="~{<>msgs.get('searchbutton');<>}" id="searchInput"~{<>msgs.get_html_accesskey_and_title('search');<>} value="~{search_text}" autocomplete="off">
+              <input type="search" name="search" placeholder="~{<>msgs.get('searchbutton');<>} ~{sitename}" id="searchInput"~{<>msgs.get_html_accesskey_and_title('search');<>} value="~{search_text}" autocomplete="off">
               <input type="hidden" name="fulltext" value="y">
               <input type="submit"~{<>msgs.get_html_accesskey_and_title('search');<>} id="mw-searchButton" class="searchButton mw-fallbackSearchButton" />
               <input type="submit" name="go" value="~{<>msgs.get('go');<>}" title="~{<>msgs.get('tooltip-search-go');<>}" id="searchButton" class="searchButton" />	
