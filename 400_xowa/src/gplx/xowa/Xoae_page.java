@@ -17,6 +17,7 @@ package gplx.xowa; import gplx.*;
 import gplx.xowa.langs.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
 import gplx.xowa.files.*; import gplx.xowa.files.xfers.*;
+import gplx.xowa.apps.kvs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.pfuncs.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.addons.htmls.tocs.*; import gplx.xowa.htmls.modules.popups.*;
 import gplx.xowa.wikis.pages.wtxts.*; import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.wikis.pages.redirects.*; import gplx.xowa.wikis.pages.hdumps.*; import gplx.xowa.wikis.pages.htmls.*;
@@ -47,6 +48,7 @@ public class Xoae_page implements Xoa_page {
 	public void						Xtn_gallery_packed_exists_y_() {html.Xtn_gallery_packed_exists_y_();}
 	public boolean						Xtn__timeline_exists() {return false;}	// drd always sets timeline
 	public boolean					Xtn__gallery_exists() {return false;}	// drd does not need to set gallery.style.css
+	public Xoa_kv_hash              Kv_data() {return kv_data;} private final    Xoa_kv_hash kv_data = new Xoa_kv_hash();
 	private Guid_adp page_guid;
 	public Guid_adp Page_guid() {
 		if (page_guid == null) {
@@ -80,6 +82,7 @@ public class Xoae_page implements Xoa_page {
 		html.Clear();
 		hdump.Clear();
 		wtxt.Clear();
+		kv_data.Clear();
 
 		lnki_list.Clear();
 		file_math.Clear();

@@ -38,5 +38,6 @@ public class Xoh_head_itm_ {
 	, Key__tabber			= Bry_.new_a7("tabber")
 	, Key__xo_elem			= Bry_.new_a7("xo.elem")
 	, Key__page_cfg			= Bry_.new_a7("page_cfg")
+	, Key__css_dynamic      = Bry_.new_a7("css_dynamic")
 	;
 }

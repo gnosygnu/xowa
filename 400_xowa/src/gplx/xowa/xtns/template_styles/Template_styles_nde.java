@@ -14,13 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.template_styles; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.core.primitives.*;
 import gplx.xowa.wikis.caches.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.parsers.htmls.*;
+import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.htmls.heads.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 import gplx.xowa.wikis.nss.*;
 public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	private byte[] css_ttl_bry;
 	private byte[] css_src;
+	private boolean css_ignore;
+	private Int_obj_val css_page_id;
 	private Xoa_ttl css_ttl;
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, byte xatr_id) {
 		switch (xatr_id) {
@@ -45,31 +48,60 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 
 		// get page
 		Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm_2(css_ttl);
-		css_src = page_itm == null ? null : page_itm.Wtxt__direct();
+		if (page_itm != null) {
+			css_src = page_itm.Wtxt__direct();
+			css_page_id = new Int_obj_val(page_itm.Page_id());
+
+			// update css_page_ids
+			Hash_adp css_page_ids = (Hash_adp)ctx.Page().Kv_data().Get_or_make(Template_styles_kv_itm.Instance);
+			if (css_page_ids.Has(css_page_id)) {
+				css_ignore = true;
+			}
+			else {
+				css_page_ids.Add_as_key_and_val(css_page_id);
+			}
+
+		}
 		if (css_src == null) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "Template_styles_nde.page_not_found: wiki=~{0} page=~{1} css_ttl=~{2}", wiki.Domain_bry(), ctx.Page().Url_bry_safe(), css_ttl_bry);
-		}			
+		}
+
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (css_ttl == null) {
 			bfr.Add_str_a7(formatTagError("Invalid title for TemplateStyles src attribute."));
+			return;
 		}
-		else if (css_src == null) {
+		if (css_src == null) {
 			bfr.Add_str_a7(formatTagError("Page " + String_.new_u8(css_ttl_bry) + " has no content."));
+			return;
 		}
-		else {
-			bfr.Add_str_a7("<style>");
-			bfr.Add(css_src);
-			bfr.Add_str_a7("</style>");
+
+		if (!css_ignore) {
+			Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
+			try {
+				html_head.Bld_many(tmp_bfr, css_page_id.Val(), css_src);
+				Xoh_head_itm__css_dynamic css_dynamic = ctx.Page().Html_data().Head_mgr().Itm__css_dynamic();
+				css_dynamic.Enabled_y_();
+				css_dynamic.Add(tmp_bfr.To_bry_and_clear());
+			} finally {tmp_bfr.Mkr_rls();}
 		}
 	}
 	private static String formatTagError(String msg) {
 		// $parser->addTrackingCategory( 'templatestyles-page-error-category' );
-		return "<strong class=\"error\">" 
-			// + call_user_func_array( 'wfMessage', $msg )->inContentLanguage()->parse()
-			+ msg
-			+ "</strong>";
+		// + call_user_func_array( 'wfMessage', $msg )->inContentLanguage()->parse()
+		return html_error.Bld_many_to_str_auto_bfr(msg);
 	}
+
 	public static final byte Xatr__src = 0;
 	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7().Add_str_byte("src", Xatr__src);
+	private static final    Bry_fmt
+	  html_head  = Bry_fmt.Auto("\n/*TemplateStyles:r~{id}*/\n~{css}")
+	, html_error = Bry_fmt.Auto("<strong class=\"error\">~{msg}</strong>")
+	;
+}
+class Template_styles_kv_itm implements gplx.xowa.apps.kvs.Xoa_kv_itm {
+	public String Kv__key() {return "TemplateStyles";}
+	public Object Kv__val_make() {return Hash_adp_.New();}
+        public static final    Template_styles_kv_itm Instance = new Template_styles_kv_itm(); Template_styles_kv_itm() {}
 }

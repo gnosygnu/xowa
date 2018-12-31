@@ -48,19 +48,11 @@ public class Xoh_page_wtr_wkr {
 				}
 				Bry_bfr page_bfr = wiki.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page rv to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
 				Xoh_wtr_ctx hctx = null;
-				if (page_mode == Xopg_page_.Tid_html && wiki.Html__hdump_mgr().Load_mgr().Html_mode().Tid_is_custom()) {
-					byte[] html_bry = null;
-
-					// get html from html dump
-					if (wiki.Html__hdump_mgr().Load_mgr().Html_mode().Tid() == Xow_hdump_mode.Hdump_save.Tid()) {
-						hctx = Xoh_wtr_ctx.Hdump;
-						Write_body(page_bfr, ctx, hctx, page);
-						html_bry = page_bfr.To_bry_and_clear();
-					}
-					// get from swt browser
-					else {
-						html_bry = page_html_source.Get_page_html();
-					}
+				if (page_mode == Xopg_page_.Tid_html 
+					&& wiki.Html__hdump_mgr().Load_mgr().Html_mode().Tid() == Xow_hdump_mode.Hdump_save.Tid()) {
+					hctx = Xoh_wtr_ctx.Hdump;
+					Write_body(page_bfr, ctx, hctx, page);
+					byte[] html_bry = page_bfr.To_bry_and_clear();
 					Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(html_bry));
 				}
 				else {

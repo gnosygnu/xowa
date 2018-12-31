@@ -56,6 +56,7 @@ public class Xow_page_cache {
 		boolean page_exists = false;
 		byte[] page_text = null;
 		byte[] page_redirect_from = null;
+		int page_id = -1;
 		// gplx.core.consoles.Console_adp__sys.Instance.Write_str("page_cache:" + String_.new_u8(ttl_full_db));
 		if (load_wkr != null) {
 			page_text = load_wkr.Get_page_or_null(ttl_full_db);
@@ -67,9 +68,10 @@ public class Xow_page_cache {
 			page_text = page.Db().Text().Text_bry();
 			page_exists = page.Db().Page().Exists();
 			page_redirect_from = page.Redirect_trail().Itms__get_wtxt_at_0th_or_null();
+			page_id = page.Db().Page().Id();
 		}
 		if (page_exists) {
-			rv = new Xow_page_cache_itm(false, page_ttl, page_text, page_redirect_from);
+			rv = new Xow_page_cache_itm(false, page_id, page_ttl, page_text, page_redirect_from);
 			Add_safe(ttl_full_db, rv);
 		}
 		else {
@@ -86,7 +88,7 @@ public class Xow_page_cache {
 			Xoae_page page = wiki.Data_mgr().Load_page_by_ttl(ttl);	// NOTE: do not call Db_mgr.Load_page; need to handle redirects
 			if (	page.Db().Page().Exists()				// page exists
 				||	page.Redirect_trail().Itms__len() > 0 ) {		// page redirects to missing page; note that page.Missing == true and page.Redirected_src() != null; PAGE: en.w:Shah_Rukh_Khan; DATE:2016-05-02
-				rv = new Xow_page_cache_itm(false, page.Ttl(), page.Db().Text().Text_bry(), page.Redirect_trail().Itms__get_wtxt_at_0th_or_null());
+				rv = new Xow_page_cache_itm(false, page.Db().Page().Id(), page.Ttl(), page.Db().Text().Text_bry(), page.Redirect_trail().Itms__get_wtxt_at_0th_or_null());
 				Add_safe(ttl_full_db, rv);
 			}
 			else {

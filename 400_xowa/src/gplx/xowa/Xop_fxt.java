@@ -65,6 +65,7 @@ public class Xop_fxt {
 		ctx.Page().Clear_all();
 		wiki.File_mgr().Clear_for_tests();
 		wiki.Db_mgr().Load_mgr().Clear();
+		wiki.Db_mgr().Save_mgr().Clear();
 		app.Wiki_mgr().Clear();
 		Io_mgr.Instance.InitEngine_mem();	// clear created pages
 		wiki.Cfg_parser().Display_title_restrict_(false);	// default to false, as a small number of tests assume restrict = false;

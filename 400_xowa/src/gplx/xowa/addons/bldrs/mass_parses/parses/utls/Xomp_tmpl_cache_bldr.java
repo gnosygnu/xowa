@@ -48,8 +48,8 @@ public class Xomp_tmpl_cache_bldr {
 				// add to text_db_loader
 				int page_id = rdr.Read_int("page_id"); 
 				int page_redirect_id = rdr.Read_int("page_redirect_id");
-				Xow_page_cache_itm itm = new Xow_page_cache_itm(true, page_ttl, null, null);	// NOTE: "null, null;" b/c GetContent in Scrib_title checks specifically for null, not empty String; DATE:2016-10-19
-				itm.Set_page_ids(page_id, page_redirect_id);
+				Xow_page_cache_itm itm = new Xow_page_cache_itm(true, page_id, page_ttl, null, null);	// NOTE: "null, null;" b/c GetContent in Scrib_title checks specifically for null, not empty String; DATE:2016-10-19
+				itm.Redirect_id_(page_redirect_id);
 				text_db_loader.Add(rdr.Read_int("page_text_db_id"), itm);
 				
 				// ignore duplicate page_titles in cache; EX:ru.n:Модуль:Weather/data DATE:2017-03-16

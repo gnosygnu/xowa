@@ -59,7 +59,7 @@ public class Xow_tidy_mgr implements Gfo_invk, Xow_tidy_mgr_interface {
 		find = Bry_find_.Find_bwd(bfr_bry, Gfh_tag_.Body_rhs, bfr.Len()); if (find == Bry_find_.Not_found) return false;
 		bfr.Delete_rng_to_end(find);
 		return true;
-	}
+	}		
 	private static final    byte[]	// MW:includes/parser/Tidy.php|getWrapped
 	  Wrap_bgn = Bry_.new_a7
 	( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"

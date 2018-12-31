@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
 import org.junit.*;
-public class Xoh_tidy_mgr_tst {
-	@Before public void init() {fxt.Clear();} private Xoh_tidy_mgr_fxt fxt = new Xoh_tidy_mgr_fxt();
+public class Xow_tidy_mgr_tst {
+	@Before public void init() {fxt.Clear();} private final    Xoh_tidy_mgr_fxt fxt = new Xoh_tidy_mgr_fxt();
 	@Test   public void Wrap() {
-		fxt.Test_wrap("<b>a</b>"
+		fxt.Test__wrap("<b>a</b>"
 		, "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 		+ "<html>"
 		+   "<head>"
@@ -30,7 +30,7 @@ public class Xoh_tidy_mgr_tst {
 		);
 	}
 	@Test   public void Unwrap_pass() {
-		fxt.Test_unwrap
+		fxt.Test__unwrap
 		( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 		+ "<html>"
 		+   "<head>"
@@ -43,7 +43,7 @@ public class Xoh_tidy_mgr_tst {
 		);
 	}
 	@Test   public void Unwrap_fail_bgn() {
-		fxt.Test_unwrap
+		fxt.Test__unwrap
 		( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 		+ "<html>"
 		+   "<head>"
@@ -56,7 +56,7 @@ public class Xoh_tidy_mgr_tst {
 		);
 	}
 	@Test   public void Unwrap_fail_end() {
-		fxt.Test_unwrap
+		fxt.Test__unwrap
 		( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 		+ "<html>"
 		+   "<head>"
@@ -70,16 +70,16 @@ public class Xoh_tidy_mgr_tst {
 	}
 }
 class Xoh_tidy_mgr_fxt {
-	private Bry_bfr bfr = Bry_bfr_.Reset(255);
+	private final    Bry_bfr bfr = Bry_bfr_.Reset(255);
 	public void Clear() {
 		bfr.Clear();
 	}
-	public void Test_wrap(String val, String expd) {
+	public void Test__wrap(String val, String expd) {
 		bfr.Add_str_u8(val);
 		Xow_tidy_mgr.Tidy_wrap(bfr);
 		Tfds.Eq(expd, bfr.To_str_and_clear());
 	}
-	public void Test_unwrap(String val, boolean expd_pass, String expd) {
+	public void Test__unwrap(String val, boolean expd_pass, String expd) {
 		bfr.Add_str_u8(val);
 		boolean actl_pass = Xow_tidy_mgr.Tidy_unwrap(bfr);
 		if (actl_pass != expd_pass) Tfds.Fail("expd={0} actl={1}", expd_pass, actl_pass);
