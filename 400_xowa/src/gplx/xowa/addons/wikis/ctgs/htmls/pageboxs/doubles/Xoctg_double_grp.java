@@ -19,24 +19,32 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.users.history.*;
 public class Xoctg_double_grp implements Bfr_arg {
-	private byte[] lbl_ctg_help, lbl_ctg_text, lbl_hidden;
+	private Xow_wiki wiki;
+	private byte[] lbl_ctg_help;
 	public boolean Type_is_normal() {return type_is_normal;} private boolean type_is_normal;
 	public Xoctg_double_itm Itms() {return itms;} private final    Xoctg_double_itm itms = new Xoctg_double_itm();
 	public void Init_by_wiki(Xow_wiki wiki, Xou_history_mgr history_mgr, boolean type_is_normal) {
 		this.type_is_normal = type_is_normal;
-		lbl_ctg_text	= wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_ctg_tbl_hdr);
-		lbl_ctg_help	= Xol_msg_mgr_.Get_msg_val(wiki, wiki.Lang(), Key_pagecategorieslink, Bry_.Ary_empty);
-		lbl_hidden		= wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_ctg_tbl_hidden);
+		this.wiki = wiki;
+		this.lbl_ctg_help = Xol_msg_mgr_.Get_msg_val(wiki, wiki.Lang(), Key_pagecategorieslink, Bry_.Ary_empty);
 		itms.Init_by_wiki(wiki, history_mgr);
 	}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		if (type_is_normal)
+		int count =  itms.Itms__count();
+		if (type_is_normal) {
+			byte[] lbl_ctg_text = wiki.Msg_mgr().Val_by_key_args(Key_pagecategories, count);
 			Fmt__normal.Bld_many(bfr, lbl_ctg_help, lbl_ctg_text, itms);
-		else
+		}
+		else {
+			byte[] lbl_hidden = wiki.Msg_mgr().Val_by_id_args(Xol_msg_itm_.Id_ctg_tbl_hidden, count);
 			Fmt__hidden.Bld_many(bfr, lbl_hidden, itms);
+		}
 	}
 
-	private static final    byte[] Key_pagecategorieslink = Bry_.new_a7("pagecategorieslink");
+	private static final    byte[]
+	  Key_pagecategorieslink = Bry_.new_a7("pagecategorieslink")
+	, Key_pagecategories     = Bry_.new_a7("pagecategories")
+	;
 	private static final    Bry_fmt 
 	  Fmt__normal = Bry_fmt.Auto_nl_skip_last
 	( "" 
