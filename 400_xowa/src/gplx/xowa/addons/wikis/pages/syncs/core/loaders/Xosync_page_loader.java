@@ -53,7 +53,7 @@ public class Xosync_page_loader {
 			byte[] img_src_val = img_src_atr.Val();
 			byte path_tid = Xosync_img_src_parser.Src_xo_trie.Match_byte_or(trv, img_src_val, Xosync_img_src_parser.Path__unknown);
 			switch (path_tid) {
-				case Xosync_img_src_parser.Path__file:
+				case Xosync_img_src_parser.Path__file_wm:
 					Add_img(wiki, hpg, img_tag, img_src_atr, img_src_val, path_tid, Xosync_img_src_parser.Bry__xowa_file, wiki.App().Fsys_mgr().File_dir().To_http_file_bry());
 					break;
 				case Xosync_img_src_parser.Path__math:
@@ -74,7 +74,7 @@ public class Xosync_page_loader {
 		img_src_val = Bry_.Replace(img_src_val, src_find, src_repl);
 
 		// parse src
-		img_src_parser.Parse(err_wkr, hctx, wiki.Domain_bry(), img_src_atr.Val_bgn(), img_src_atr.Val_end());
+		img_src_parser.Parse(err_wkr, hctx, wiki.Domain_bry(), img_src_atr.Src(), img_src_atr.Val_bgn(), img_src_atr.Val_end());
 		if (img_src_parser.File_ttl_bry() == null) return null; // skip images that don't follow format of "commons.wikimedia.org/thumb/7/70/A.png"; for example, enlarge buttons
 
 		// create img

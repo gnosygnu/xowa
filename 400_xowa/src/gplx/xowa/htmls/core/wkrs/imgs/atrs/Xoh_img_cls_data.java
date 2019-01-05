@@ -45,6 +45,7 @@ public class Xoh_img_cls_data implements Bfr_arg_clearable {
 		if (pos < src_end && src[pos] == Byte_ascii.Space)
 			++pos;
 		if (cls_tid == Xoh_img_cls_.Tid__manual || pos < src_end) {
+			this.src = atr.Src(); // set src, else NPE when trying to write to bfr; DATE:2019-01-04
 			this.other_bgn = pos;
 			this.other_end = src_end;
 		}

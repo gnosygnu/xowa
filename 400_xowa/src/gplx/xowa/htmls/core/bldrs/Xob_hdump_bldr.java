@@ -40,6 +40,7 @@ public class Xob_hdump_bldr implements Gfo_invk {
 		this.toc_label = wiki.Msg_mgr().Val_by_id(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc);
 		
 		if (zip_tid == Byte_.Max_value_127) zip_tid = Xobldr_cfg.Zip_mode__html(wiki.App());
+		hdump_mgr.Init_by_app(wiki.Appe());
 		hdump_mgr.Init_by_db(zip_tid, hzip_enabled, hzip_b256);
 		return true;
 	}
@@ -63,7 +64,7 @@ public class Xob_hdump_bldr implements Gfo_invk {
 
 		// save to db
 		Xowd_html_tbl html_tbl = html_tbl_retriever.Get_html_tbl(wpg.Ttl().Ns(), prv_row_len);	// get html_tbl
-		this.prv_row_len = hdump_mgr.Save_mgr().Save(tmp_hpg.Ctor_by_hdiff(tmp_bfr, wpg, toc_label), html_tbl, true, is_wikitext);	// save to db
+		this.prv_row_len = hdump_mgr.Save_mgr().Save(wpg, tmp_hpg.Ctor_by_hdiff(tmp_bfr, wpg, toc_label), html_tbl, true, is_wikitext);	// save to db
 		stat_tbl.Insert(tmp_hpg, stat_itm, wpg.Root().Root_src().length, tmp_hpg.Db().Html().Html_bry().length, prv_row_len); // save stats
 
 		// run hzip diff if enabled

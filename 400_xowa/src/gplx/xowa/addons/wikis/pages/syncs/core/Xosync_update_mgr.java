@@ -35,10 +35,6 @@ public class Xosync_update_mgr {
 	public void Init_by_app(Xoa_app app) {
 		hctx.Init_by_app(app);
 	}
-	public void Init_by_page(Xow_wiki wiki, Xoa_page page) {
-		hctx.Init_by_page(wiki, page);
-		page.Hdump_mgr().Clear();
-	}
 	public Xowm_parse_data Update(Xof_download_wkr download_wkr, Xow_wiki wiki, Xoa_ttl page_ttl) {
 		Xoh_page hpg = (Xoh_page)hctx.Page();
 
@@ -97,6 +93,7 @@ public class Xosync_update_mgr {
 
 		// init_by_page for bldr, parser, hdoc
 		hctx.Init_by_page(wiki, hpg);
+		hpg.Hdump_mgr().Clear();
 		hdoc_bldr.Init_by_page(bfr, hpg, hctx, src, 0, src_len);
 		hdoc_parser_wkr.Init_by_page(hctx, src, 0, src_len);
 

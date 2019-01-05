@@ -17,7 +17,9 @@ package gplx.xowa.addons.wikis.pages.syncs.core.parsers; import gplx.*; import g
 import org.junit.*;
 import gplx.langs.htmls.*;
 public class Xosync_hdoc_parser__file__tst {
-	@Before public void init() {fxt.Clear();} private final    Xosync_hdoc_parser__fxt fxt = new Xosync_hdoc_parser__fxt();
+	private final    Xosync_hdoc_parser__fxt fxt = new Xosync_hdoc_parser__fxt();
+	@Before public void init() {fxt.Init(true);}
+	@After public void term() {fxt.Term();}
 	@Test   public void Commons__thumb() {
 		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//upload.wikimedia.org/wikipedia/commons/thumb/7/70/A.png/320px-A.png'>"))
 			.Test__html(Gfh_utl.Replace_apos("<img src='xowa:/file/commons.wikimedia.org/thumb/7/0/1/c/A.png/320px.png'>"))
@@ -52,5 +54,10 @@ public class Xosync_hdoc_parser__file__tst {
 		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//upload.wikimedia.org/wikipedia/commons/thumb/7/76/A.djvu/page1-320px-A.djvu.jpg'>"))
 			.Test__html(Gfh_utl.Replace_apos("<img src='xowa:/file/commons.wikimedia.org/thumb/7/6/9/a/A.djvu/320px-1.jpg'>"))
 			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.N, "A.djvu", 320, -1, 1));
+	}
+	@Test   public void Xo() {
+		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/1/c/A.png/320px.png'>"))
+			.Test__html(Gfh_utl.Replace_apos("<img src='xowa:/file/commons.wikimedia.org/thumb/7/0/1/c/A.png/320px.png'>"))
+			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.N, "A.png", 320, -1, -1));
 	}
 }

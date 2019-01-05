@@ -17,7 +17,9 @@ package gplx.xowa.addons.wikis.pages.syncs.core.parsers; import gplx.*; import g
 import org.junit.*;
 import gplx.langs.htmls.*;
 public class Xosync_hdoc_parser__misc__tst {
-	@Before public void init() {fxt.Clear();} private final    Xosync_hdoc_parser__fxt fxt = new Xosync_hdoc_parser__fxt();
+	private final    Xosync_hdoc_parser__fxt fxt = new Xosync_hdoc_parser__fxt();
+	@Before public void init() {fxt.Init(true);}
+	@After public void term() {fxt.Term();}
 	@Test   public void Math() {
 		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='https://wikimedia.org/api/rest_v1/media/math/render/svg/596f8baf206a81478afd4194b44138715dc1a05c' class='mwe-math-fallback-image-inline' aria-hidden='true' style='vertical-align: -2.005ex; width:16.822ex; height:6.176ex;' alt='R_{H}=a\\left({\\frac {m}{3M}}\\right)^{\\frac {1}{3}}'>"))
 			.Test__html(Gfh_utl.Replace_apos("<img src='xowa:/math/596f8baf206a81478afd4194b44138715dc1a05c.svg' class='mwe-math-fallback-image-inline' aria-hidden='true' style='vertical-align: -2.005ex; width:16.822ex; height:6.176ex;' alt='R_{H}=a\\left({\\frac {m}{3M}}\\right)^{\\frac {1}{3}}'>"))

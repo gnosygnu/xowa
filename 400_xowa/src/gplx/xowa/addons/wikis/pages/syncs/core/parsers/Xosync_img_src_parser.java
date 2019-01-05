@@ -16,19 +16,21 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.pages.syncs.core.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.pages.*; import gplx.xowa.addons.wikis.pages.syncs.*; import gplx.xowa.addons.wikis.pages.syncs.core.*;
 import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
-import gplx.langs.htmls.*;	 import gplx.xowa.htmls.core.wkrs.*;
+import gplx.langs.htmls.*;	 import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xosync_img_src_parser {
 	private final    Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
 	private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private final    byte[] wiki_abrv_commons;
+	private final    Xoh_img_src_data img_src_parser = new Xoh_img_src_data();
 
 	private Xoh_hdoc_ctx hctx;
 	private byte path_tid;
 	private byte[] img_src_bgn_local, img_src_bgn_remote;
 	private byte[] page_url, repo_local;
 	private byte[] raw;
+	private int raw_len;
 
 	public boolean				Repo_is_commons()	{return repo_is_commons;}	private boolean repo_is_commons;
 	public byte[]			File_ttl_bry()		{return file_ttl_bry;}		private byte[] file_ttl_bry;
@@ -58,40 +60,66 @@ public class Xosync_img_src_parser {
 
 		// set raw, raw_len; exit if empty
 		this.raw = raw;
-		int raw_len = raw.length;
+		this.raw_len = raw.length;
 		if (raw_len == 0) return Fail("empty img_src");
 		rdr.Init_by_src(raw);
 
-		// check "//upload.wikimedia.org/" at bgn
+		// identify type based on beginning; EX: "//upload.wikimedia.org/" -> WM_FILE
 		this.path_tid = rdr.Chk_or(path_trie, Path__unknown);
 		switch (path_tid) {
-			case Path__file:	return Parse_file(raw_len);
-			case Path__math:	return Parse_math(raw_len);
-			default:			return Fail("img src does not start with known sequence");
+			// "//upload.wikimedia.org/"
+			case Path__file_wm:
+				return Parse_file_wm();
+			// "https://wikimedia.org/api/rest_v1/media/math/render/svg/"
+			case Path__math:
+				return Parse_math();
+			// "file:///"
+			case Path__file_xo:
+				return Parse_file_xo();
+			default:
+				return Fail("img src does not start with known sequence");
 		}
 	}
-	private boolean Parse_file(int raw_len) {
-		// get repo: either "wikipedia/commons/" or "wiki_type/wiki_lang/"; EX:"wiktionary/fr"
+	private boolean Parse_file_xo() {
+		img_src_parser.Clear();
+		boolean rv = img_src_parser.Parse(rdr.Err_wkr(), hctx, hctx.Wiki__domain_bry(), raw, 0, raw_len);
+		if (rv) {
+			this.repo_is_commons = img_src_parser.Repo_is_commons();
+			this.file_is_orig = img_src_parser.File_is_orig();
+			this.file_ttl_bry = img_src_parser.File_ttl_bry();
+			this.file_ext = Xof_ext_.new_by_ttl_(file_ttl_bry);
+			if (!file_is_orig) {
+				this.file_w = img_src_parser.File_w();
+				if (img_src_parser.File_page_exists())
+					this.file_page = img_src_parser.File_page();
+				if (img_src_parser.File_time_exists())
+					this.file_time = img_src_parser.File_time();
+			}
+			Add_img(hctx.Wiki__domain_itm().Abrv_xo());
+		}
+		return rv;
+	}
+	private boolean Parse_file_wm() {
+		// set repo: either "wikipedia/commons/" or "wiki_type/wiki_lang/"; EX:"wiktionary/fr"
 		if (rdr.Is(Bry__repo_remote))
 			this.repo_is_commons = true;
 		else {
 			if (!rdr.Is(repo_local)) return Fail("unknown repo");
 		}
 
-		// get file_is_orig; note omitting "else" b/c default is file_is_orig == false
+		// set file_is_orig; note omitting "else" b/c default is file_is_orig == false
 		if (!rdr.Is(Bry__thumb)) file_is_orig = true; // no "/thumb";
 
-		// check md5
+		// check md5 and skip
 		if (!Check_md5()) return Fail("invalid md5");
 		
-		// get file_ttl
+		// set file_ttl
 		int file_ttl_bgn = rdr.Pos();
 		int file_ttl_end = rdr.Find_fwd_lr_or(Byte_ascii.Slash, raw_len);
 		file_ttl_bry = Bry_.Mid(raw, file_ttl_bgn, file_ttl_end);
 		file_ttl_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode(file_ttl_bry);	// NOTE: @src is always url-encoded; file_ttl_bry is un-encoded (for MD5, database lookups, etc.)
 		this.file_ext = Xof_ext_.new_by_ttl_(file_ttl_bry); 
 		if (file_ext.Id_is_ogg()) file_ext = Xof_ext_.new_by_id_(Xof_ext_.Id_ogv);
-
 
 		// if thumb, get file_w, file_time, file_page
 		if (!file_is_orig) {
@@ -110,7 +138,7 @@ public class Xosync_img_src_parser {
 			if (file_w == -1) return Fail("invalid file_w");
 
 			// get time via "-seek%3D"; EX: "320px-seek%3D67-"
-			int seek_end = rdr.Find_fwd_rr(Bry__seek);
+			int seek_end = rdr.Find_fwd_rr_or(Bry__seek, Bry_find_.Not_found);
 			if (seek_end != Bry_find_.Not_found) {
 				int file_time_bgn = rdr.Pos();
 				int file_time_end = rdr.Find_fwd_lr(Byte_ascii.Dash);
@@ -118,11 +146,11 @@ public class Xosync_img_src_parser {
 			}
 		}
 
-		// make image
+		// register image
 		Add_img(hctx.Wiki__domain_itm().Abrv_xo());
 		return true;
 	}
-	private boolean Parse_math(int raw_len) {
+	private boolean Parse_math() {
 		// set file_ttl_bry to rest of src + ".svg"; EX: "https://wikimedia.org/api/rest_v1/media/math/render/svg/596f8baf206a81478afd4194b44138715dc1a05c" -> "596f8baf206a81478afd4194b44138715dc1a05c.svg"
 		this.file_ttl_bry = Bry_.Add(Bry_.Mid(raw, rdr.Pos(), raw_len), Byte_ascii.Dot_bry, Xof_ext_.Bry_svg);
 		this.repo_is_commons = true;
@@ -139,8 +167,13 @@ public class Xosync_img_src_parser {
 	}
 	public byte[] To_bry() {
 		switch (path_tid) {
-			case Path__file: To_bfr_file(tmp_bfr); break;
-			case Path__math: To_bfr_math(tmp_bfr); break;
+			case Path__file_wm:
+			case Path__file_xo:
+				To_bfr_file(tmp_bfr);
+				break;
+			case Path__math:
+				To_bfr_math(tmp_bfr);
+				break;
 		}
 		return tmp_bfr.To_bry_and_clear();
 	}
@@ -169,7 +202,7 @@ public class Xosync_img_src_parser {
 	}
 	private boolean Fail(String fmt) {
 		this.err_msg = "wm.parse:" + fmt;
-		String msg = String_.Format("", err_msg + "; page={0} raw={1}", page_url, raw);
+		String msg = String_.Format(err_msg + "; page={0} raw={1}", page_url, raw);
 		Gfo_usr_dlg_.Instance.Warn_many("", "", msg);
 		return false;
 	}
@@ -183,23 +216,25 @@ public class Xosync_img_src_parser {
 		return true;
 	}
 
+	public static final byte Path__unknown = 0, Path__file_wm = 1, Path__math = 2, Path__file_xo = 3;
+	private final    Btrie_slim_mgr path_trie = Btrie_slim_mgr.cs()
+	.Add_str_byte("//upload.wikimedia.org/", Path__file_wm)
+	.Add_str_byte("https://wikimedia.org/api/rest_v1/media/math/render/svg/", Path__math)
+	.Add_str_byte("file:///", Path__file_xo)
+	;
+
+	public static final    byte[] Bry__xowa_file = Bry_.new_a7("xowa:/file/"), Bry__xowa_math = Bry_.new_a7("xowa:/math/");
+	public static Btrie_slim_mgr Src_xo_trie = Btrie_slim_mgr.cs()
+	.Add_bry_byte(Bry__xowa_file, Path__file_wm)
+	.Add_bry_byte(Bry__xowa_math, Path__math)
+	;
+
 	private static final    byte[] 
 	  Bry__repo_remote = Bry_.new_a7("wikipedia/commons/")
 	, Bry__thumb = Bry_.new_a7("thumb/")
 	, Bry__px = Bry_.new_a7("px")
 	, Bry__seek = Bry_.new_a7("-seek%3D")
 	, Bry__page = Bry_.new_a7("page")
-	;
-	public static final byte Path__unknown = 0, Path__file = 1, Path__math = 2;
-	private final    Btrie_slim_mgr path_trie = Btrie_slim_mgr.cs()
-	.Add_str_byte("//upload.wikimedia.org/", Path__file)
-	.Add_str_byte("https://wikimedia.org/api/rest_v1/media/math/render/svg/", Path__math)
-	;
-
-	public static final    byte[] Bry__xowa_file = Bry_.new_a7("xowa:/file/"), Bry__xowa_math = Bry_.new_a7("xowa:/math/");
-	public static Btrie_slim_mgr Src_xo_trie = Btrie_slim_mgr.cs()
-	.Add_bry_byte(Bry__xowa_file, Path__file)
-	.Add_bry_byte(Bry__xowa_math, Path__math)
 	;
 
 	private static byte[] To_wmf_repo_or_null(Bry_bfr bfr, Xow_domain_itm domain_itm) {

@@ -41,7 +41,7 @@ public abstract class Xoh_itm_parser_fxt {
 		Xoh_page hpg = new Xoh_page(); // NOTE: no need to pass url and ttl now
 		hctx.Init_by_page(wiki, hpg);
 		err_wkr.Init_by_page(Xoa_page_.Main_page_str, src);
-		Exec_parse_hook(err_wkr, hctx, 0, src_len);
+		Exec_parse_hook(err_wkr, hctx, src, 0, src_len);
 	}
-	public abstract void Exec_parse_hook(Bry_err_wkr err_wkr, Xoh_hdoc_ctx hctx, int src_bgn, int src_end);
+	public abstract void Exec_parse_hook(Bry_err_wkr err_wkr, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end);
 }

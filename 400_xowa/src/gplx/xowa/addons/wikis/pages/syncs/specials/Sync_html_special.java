@@ -30,8 +30,6 @@ public class Sync_html_special implements Xow_special_page {
 		// update
 		Xosync_update_mgr updater = new Xosync_update_mgr();
 		updater.Init_by_app(wiki.App());
-		Xoh_page hpg = new Xoh_page();
-		updater.Init_by_page(wiki, hpg);
 		updater.Update(wiki.App().Wmf_mgr().Download_wkr(), wiki, redirect_ttl);
 		((Xowe_wiki)wiki).Data_mgr().Redirect((Xoae_page)page, redirect_bry);	// HACK: should call page.Redirect_trail() below, but need to handle Display_ttl
 		// page.Redirect_trail().Itms__add__article(redirect_url, redirect_ttl, null);

@@ -56,9 +56,10 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 	}
 	public Xoh_img_wtr Anch_cls_(byte[] v)	{anch_cls.Set_by_bry(v); return this;}
 	public Xoh_img_wtr Img_id_(int uid)		{img_id.Set(uid); return this;}
-	public void Init_by_parse(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, Xoh_img_data data) {
-		Init_by_decode(hpg, hctx, src, data);
+	public boolean Init_by_parse(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, Xoh_img_data data) {
+		if (!Init_by_decode(hpg, hctx, src, data)) return false;
 		this.Bfr_arg__add(bfr);
+		return true;
 	}
 	public void Init_html(int html_w, int html_h, byte[] src_bry) {
 		img_w.Set_by_int(html_w);
@@ -98,12 +99,13 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 		else if (data.Img_w() != -1) {	// orig exists or some hard-coded image (hiero)
 			Xoh_img_src_data img_src_data = data.Img_src();
 			
-			this.Init_html(data.Img_w(), data.Img_h(), img_src_data.Src_bry());
+			byte[] img_src_bry = img_src_data.Src_mid();
+			this.Init_html(data.Img_w(), data.Img_h(), img_src_bry);
 			int file_w = data.Img_src().File_w();
 			// NOTE: init lnki with "64|file_w|-1|-1|-1|-1"; DATE:2016-08-10
 			fsdb_itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, hctx.Cache__wiki_abrv(img_src_data.Repo_is_commons()), lnki_ttl, Xop_lnki_type.Tid_orig_known, Xop_lnki_tkn.Upright_null, file_w, Xof_img_size.Null, data.Img_src().File_time(), data.Img_src().File_page(), Xof_patch_upright_tid_.Tid_all);
 			fsdb_itm.Init_at_gallery_bgn(data.Img_w(), data.Img_h(), file_w);
-			fsdb_itm.Html_view_url_(Io_url_.New__http_or_fail(img_src_data.Src_bry()));
+			fsdb_itm.Html_view_url_(Io_url_.New__http_or_fail(img_src_bry));
 			fsdb_itm.File_is_orig_(data.Img_src().File_is_orig());
 
 			// ASSUME: if file_w != img_w, then page has packed gallery; PAGE:en.w:Mexico; DATE:2016-08-14

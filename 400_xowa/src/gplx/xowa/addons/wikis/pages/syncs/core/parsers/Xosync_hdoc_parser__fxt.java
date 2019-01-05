@@ -22,12 +22,16 @@ public class Xosync_hdoc_parser__fxt {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private final    Xoh_page hpg = new Xoh_page();
 	private Xowe_wiki wiki;
-	public void Clear() {
+	public void Init(boolean print_errors) {
+		if (print_errors)
+			Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		Xoa_app_fxt.repo2_(app, wiki);
 		mgr.Init_by_app(app);
-		mgr.Init_by_page(wiki, hpg);
+	}
+	public void Term() {
+		Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;
 	}
 	public Xosync_hdoc_parser__fxt Exec__parse(String raw) {
 		mgr.Parse(hpg, wiki, Bry_.Empty, Bry_.new_u8(raw));

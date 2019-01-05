@@ -17,7 +17,9 @@ package gplx.xowa.addons.wikis.pages.syncs.core.parsers; import gplx.*; import g
 import org.junit.*;
 import gplx.langs.htmls.*;
 public class Xosync_hdoc_parser__tst {
-	@Before public void init() {fxt.Clear();} private final    Xosync_hdoc_parser__fxt fxt = new Xosync_hdoc_parser__fxt();
+	private final    Xosync_hdoc_parser__fxt fxt = new Xosync_hdoc_parser__fxt();
+	@Before public void init() {fxt.Init(true);}
+	@After public void term() {fxt.Term();}
 	@Test   public void Remove_edit() {
 		fxt.Exec__parse(Gfh_utl.Replace_apos_concat_lines
 		( "<h2><span class='mw-headline' id='Section_1'>Section_1</span>"

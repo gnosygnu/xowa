@@ -20,9 +20,10 @@ import gplx.xowa.htmls.sections.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_hdr_wtr implements gplx.core.brys.Bfr_arg, Xoh_wtr_itm {
 	private int hdr_num; private byte[] hdr_id, hdr_content, hdr_capt_rhs;
 	private Xoh_page hpg;
-	public void Init_by_parse(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, Xoh_hdr_data data) {
-		Init_by_decode(hpg, hctx, src, data);
+	public boolean Init_by_parse(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, Xoh_hdr_data data) {
+		if (!Init_by_decode(hpg, hctx, src, data)) return false;
 		this.Bfr_arg__add(bfr);
+		return true;
 	}
 	public boolean Init_by_decode(Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, Xoh_data_itm data_itm) {
 		this.hpg = hpg;

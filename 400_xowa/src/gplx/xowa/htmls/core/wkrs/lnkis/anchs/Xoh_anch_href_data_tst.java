@@ -54,7 +54,7 @@ class Xoh_anch_href_data_fxt extends Xoh_itm_parser_fxt { 	private final    Xoh_
 		Tfds.Eq_str(expd_site, parser.Site_bgn() == -1 ? "" : String_.new_u8(src, parser.Site_bgn(), parser.Site_end()));
 		Tfds.Eq_str(expd_page, String_.new_u8(src, parser.Ttl_bgn(), parser.Ttl_end()));
 	}
-	@Override public void Exec_parse_hook(Bry_err_wkr err_wkr, Xoh_hdoc_ctx hctx, int src_bgn, int src_end) {
-		parser.Parse(err_wkr, hctx, err_wkr.Src(), src_bgn, src_end);
+	@Override public void Exec_parse_hook(Bry_err_wkr err_wkr, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
+		parser.Parse(err_wkr, hctx, src, src_bgn, src_end);
 	}
 }

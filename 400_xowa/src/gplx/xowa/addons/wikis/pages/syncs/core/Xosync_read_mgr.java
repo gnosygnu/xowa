@@ -91,9 +91,7 @@ public class Xosync_read_mgr implements Gfo_invk {
 			
 			// auto-sync page
 			Xoa_app app = wiki.App();
-			Xoh_page hpg = new Xoh_page();
 			update_mgr.Init_by_app(app);
-			update_mgr.Init_by_page(wiki, hpg);
 			Xowm_parse_data parse_data = update_mgr.Update(app.Wmf_mgr().Download_wkr(), wiki, page_ttl);
 			if (parse_data == null)
 				return rv;

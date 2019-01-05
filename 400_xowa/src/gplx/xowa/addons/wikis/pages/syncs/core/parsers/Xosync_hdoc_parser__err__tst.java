@@ -17,7 +17,9 @@ package gplx.xowa.addons.wikis.pages.syncs.core.parsers; import gplx.*; import g
 import org.junit.*;
 import gplx.langs.htmls.*;
 public class Xosync_hdoc_parser__err__tst {
-	@Before public void init() {fxt.Clear();} private final    Xosync_hdoc_parser__fxt fxt = new Xosync_hdoc_parser__fxt();
+	private final    Xosync_hdoc_parser__fxt fxt = new Xosync_hdoc_parser__fxt();
+	@Before public void init() {fxt.Init(false);}
+	@After public void term() {fxt.Term();}
 	@Test   public void Url_does_not_start_with_upload_wikimedia_org() {
 		fxt.Exec__parse(Gfh_utl.Replace_apos("<img src='//fail/wikipedia/commons/thumb/7/70/A.png/220px-A.png'>"))
 			.Test__html(Gfh_utl.Replace_apos("<!--wm.parse:img src does not start with known sequence--><img src='//fail/wikipedia/commons/thumb/7/70/A.png/220px-A.png'>"));

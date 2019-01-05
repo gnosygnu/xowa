@@ -21,9 +21,10 @@ import gplx.xowa.wikis.domains.*;
 public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 	private final    Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
 	private boolean fail_throws_err;
-	public byte[] Src_bry() {return src_bry;} private byte[] src_bry;
+	private byte[] src_bry;
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;
+	public byte[] Src_mid() {return src_mid;} private byte[] src_mid;
 	public int Repo_bgn() {return repo_bgn;} private int repo_bgn;
 	public int Repo_end() {return repo_end;} private int repo_end;
 	public boolean Repo_is_commons() {return repo_is_commons;} private boolean repo_is_commons;
@@ -49,13 +50,14 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 	public boolean Parse(Bry_err_wkr err_wkr, Xoh_hdoc_ctx hctx, byte[] domain_bry, Gfh_tag tag) {
 		this.Clear();
 		Gfh_atr atr = tag.Atrs__get_by_or_empty(Gfh_atr_.Bry__src);
-		return Parse(err_wkr, hctx, domain_bry, atr.Val_bgn(), atr.Val_end());
+		return Parse(err_wkr, hctx, domain_bry, atr.Src(), atr.Val_bgn(), atr.Val_end());
 	}
-	public boolean Parse(Bry_err_wkr err_wkr, Xoh_hdoc_ctx hctx, byte[] domain_bry, int src_bgn, int src_end) { // EX: src="file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/1/2/A.png/220px.png"
+	public boolean Parse(Bry_err_wkr err_wkr, Xoh_hdoc_ctx hctx, byte[] domain_bry, byte[] src_bry, int src_bgn, int src_end) { // EX: src="file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/1/2/A.png/220px.png"
 		this.Clear();
-		this.src_bry = err_wkr.Src();
+		this.src_bry = src_bry;
 		this.src_bgn = src_bgn; this.src_end = src_end;
 		if (src_end == src_bgn) return true;						// empty src; just return true;
+		this.src_mid = Bry_.Mid(src_bry, src_bgn, src_end);
 
 		// get repo_bgn; note that some <img> may be hiero / enlarge / magnify and should exit
 		rdr.Init_by_wkr(err_wkr, "img.src.xowa", src_bgn, src_end).Fail_throws_err_(fail_throws_err);
