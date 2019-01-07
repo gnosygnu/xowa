@@ -14,23 +14,47 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.pages.syncs.core.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.pages.*; import gplx.xowa.addons.wikis.pages.syncs.*; import gplx.xowa.addons.wikis.pages.syncs.core.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.core.wkrs.*;
-public class Xosync_hdoc_parser implements Gfh_doc_wkr {
-	private final    Xosync_hdoc_wtr hdoc_wtr;
-	private final    Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final    Xosync_img_src_parser img_src_parser = new Xosync_img_src_parser();
+import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.*;
+import gplx.xowa.wikis.domains.*;
+public class Xosync_hdoc_parser {
+	public byte[] Parse_hdoc(Xow_domain_itm wiki_domain, byte[] page_url, List_adp imgs, byte[] src) {
+		// init
+		Bry_bfr bfr = Bry_bfr_.New();
+		Xosync_img_src_parser img_src_parser = new Xosync_img_src_parser().Init_by_page(wiki_domain, page_url, imgs);
+		int cur = 0, src_len = src.length;
+		Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html().Init(page_url, src, cur, src_len);
 
-	public Xosync_hdoc_parser(Xosync_hdoc_wtr hdoc_wtr) {this.hdoc_wtr = hdoc_wtr;}
-	public byte[] Hook() {return Byte_ascii.Angle_bgn_bry;}
-	public void Init_by_page(Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
-		tag_rdr.Init(hctx.Page__url(), src, src_bgn, src_end);
-		img_src_parser.Init_by_page(hctx);
+		// loop src
+		while (true) {
+			// look for "<"
+			int find = Bry_find_.Find_fwd(src, Byte_ascii.Angle_bgn, cur, src_len);
+
+			// "<" not found; add rest of src and stop
+			if (find == Bry_find_.Not_found) {
+				bfr.Add_mid(src, cur, src_len);
+				break;
+			}
+
+			// "<" found; add everything between cur and "<"
+			bfr.Add_mid(src, cur, find);
+
+			// parse "<"
+			cur = Parse_tag(bfr, tag_rdr, img_src_parser, src, src_len, find);
+		}
+
+		return bfr.To_bry_and_clear();
 	}
-	public int Parse(byte[] src, int src_bgn, int src_end, int pos) {
+	private int Parse_tag(Bry_bfr bfr, Gfh_tag_rdr tag_rdr, Xosync_img_src_parser img_src_parser, byte[] src, int src_len, int pos) {
 		// note that entry point is at "<"
 		tag_rdr.Pos_(pos);
-		int nxt_pos = tag_rdr.Pos() + 1; if (nxt_pos == src_end) return src_end;
+		int nxt_pos = tag_rdr.Pos() + 1;
+
+		// "<" is at EOS
+		if (nxt_pos == src_len) {
+			bfr.Add_byte(Byte_ascii.Angle_bgn);
+			return src_len;
+		}
 
 		// check if head or tail; EX: "<a>" vs "</a>"
 		byte nxt_byte = src[nxt_pos];
@@ -39,7 +63,7 @@ public class Xosync_hdoc_parser implements Gfh_doc_wkr {
 			int end_comm = Bry_find_.Move_fwd(src, Gfh_tag_.Comm_end, nxt_pos);
 			if (end_comm == Bry_find_.Not_found) {
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "end comment not found; src=~{0}", String_.new_u8(src));
-				end_comm = src_end;
+				end_comm = src_len;
 			}
 			return end_comm;
 		}
@@ -55,15 +79,15 @@ public class Xosync_hdoc_parser implements Gfh_doc_wkr {
 					}
 					break;
 				case Gfh_tag_.Id__img: // rewrite src for XOWA; especially necessary for relative protocol; EX: "//upload.wikimedia.org"; note do not use <super> tag b/c of issues with anchors like "href=#section"
-					return Parse_img_src(cur);
+					return Parse_img_src(bfr, img_src_parser, cur);
 				default:
 					break;
 			}
 		}
-		hdoc_wtr.On_txt(cur.Src_bgn(), cur.Src_end());
+		bfr.Add_mid(src, cur.Src_bgn(), cur.Src_end());
 		return cur.Src_end();
 	}
-	private int Parse_img_src(Gfh_tag img_tag) {
+	private int Parse_img_src(Bry_bfr bfr, Xosync_img_src_parser img_src_parser, Gfh_tag img_tag) {
 		// get @src and parse it
 		Gfh_atr src_atr = img_tag.Atrs__get_by_or_empty(Gfh_atr_.Bry__src);
 		img_src_parser.Parse(src_atr.Val());
@@ -71,21 +95,20 @@ public class Xosync_hdoc_parser implements Gfh_doc_wkr {
 		// if error, write comment; EX: <!--error--><img ...>
 		String err_msg = img_src_parser.Err_msg();
 		if (err_msg != null) {
-			hdoc_wtr.Add_bry(Gfh_tag_.Comm_bgn);
-			hdoc_wtr.Add_str(img_src_parser.Err_msg());
-			hdoc_wtr.Add_bry(Gfh_tag_.Comm_end);
+			bfr.Add(Gfh_tag_.Comm_bgn);
+			bfr.Add_str_u8(img_src_parser.Err_msg());
+			bfr.Add(Gfh_tag_.Comm_end);
 		}
 
 		// get img_src; use img_src_parser if no error, else use original value
 		byte[] img_src_val = err_msg == null ? img_src_parser.To_bry() : src_atr.Val();
 
 		// write html
-		Write_img_tag(tmp_bfr, img_tag, img_src_val, -1);
-		hdoc_wtr.Add_bfr(tmp_bfr);
+		Write_img_tag(bfr, img_tag, -1, img_src_val);
 
 		return img_tag.Src_end();
 	}
-	public static void Write_img_tag(Bry_bfr bfr, Gfh_tag img_tag, byte[] img_src_val, int uid) {
+	public static void Write_img_tag(Bry_bfr bfr, Gfh_tag img_tag, int uid, byte[] img_src_val) {
 		// rewrite <img> tag with custom img_src_val
 		int atrs_len = img_tag.Atrs__len();
 		bfr.Add(Byte_ascii.Angle_bgn_bry);

@@ -18,7 +18,6 @@ import gplx.core.tests.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
 public class Xosync_hdoc_parser__fxt {
-	private final    Xosync_update_mgr mgr = new Xosync_update_mgr();		
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private final    Xoh_page hpg = new Xoh_page();
 	private Xowe_wiki wiki;
@@ -28,13 +27,14 @@ public class Xosync_hdoc_parser__fxt {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		Xoa_app_fxt.repo2_(app, wiki);
-		mgr.Init_by_app(app);
 	}
 	public void Term() {
 		Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;
 	}
 	public Xosync_hdoc_parser__fxt Exec__parse(String raw) {
-		mgr.Parse(hpg, wiki, Bry_.Empty, Bry_.new_u8(raw));
+		Xosync_hdoc_parser parser = new Xosync_hdoc_parser();		
+		byte[] result = parser.Parse_hdoc(wiki.Domain_itm(), Bry_.Empty, hpg.Hdump_mgr().Imgs(), Bry_.new_u8(raw));
+		hpg.Db().Html().Html_bry_(result);
 		return this;
 	}
 	public Xosync_hdoc_parser__fxt Test__html(String expd) {

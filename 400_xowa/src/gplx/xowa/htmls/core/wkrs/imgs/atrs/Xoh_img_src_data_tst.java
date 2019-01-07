@@ -61,6 +61,6 @@ class Xoh_img_src_data_fxt extends Xoh_itm_parser_fxt { 	private final    Xoh_im
 	}
 	@Override public void Exec_parse_hook(Bry_err_wkr err_wkr, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
 		parser.Fail_throws_err_(true);
-		parser.Parse(err_wkr, new Xoh_hdoc_ctx(), Xow_domain_itm_.Bry__enwiki, src, src_bgn, src_end);
+		parser.Parse(err_wkr, Xow_domain_itm_.Bry__enwiki, src, src_bgn, src_end);
 	}
 }

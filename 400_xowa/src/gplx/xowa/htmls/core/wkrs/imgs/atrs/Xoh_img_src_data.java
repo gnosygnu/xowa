@@ -47,12 +47,12 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 		repo_tid = Xof_repo_tid_.Tid__null;
 		file_ttl_bry = null;
 	}
-	public boolean Parse(Bry_err_wkr err_wkr, Xoh_hdoc_ctx hctx, byte[] domain_bry, Gfh_tag tag) {
+	public boolean Parse(Bry_err_wkr err_wkr, byte[] domain_bry, Gfh_tag tag) {
 		this.Clear();
 		Gfh_atr atr = tag.Atrs__get_by_or_empty(Gfh_atr_.Bry__src);
-		return Parse(err_wkr, hctx, domain_bry, atr.Src(), atr.Val_bgn(), atr.Val_end());
+		return Parse(err_wkr, domain_bry, atr.Src(), atr.Val_bgn(), atr.Val_end());
 	}
-	public boolean Parse(Bry_err_wkr err_wkr, Xoh_hdoc_ctx hctx, byte[] domain_bry, byte[] src_bry, int src_bgn, int src_end) { // EX: src="file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/1/2/A.png/220px.png"
+	public boolean Parse(Bry_err_wkr err_wkr, byte[] domain_bry, byte[] src_bry, int src_bgn, int src_end) { // EX: src="file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/1/2/A.png/220px.png"
 		this.Clear();
 		this.src_bry = src_bry;
 		this.src_bgn = src_bgn; this.src_end = src_end;

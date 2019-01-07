@@ -15,28 +15,15 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.pages.syncs.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.pages.*; import gplx.xowa.addons.wikis.pages.syncs.*;
 import gplx.xowa.files.downloads.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.domains.*;
 import gplx.xowa.htmls.*; import gplx.langs.htmls.docs.*;
 import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.txts.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.htmls.core.dbs.*;
 import gplx.xowa.addons.wikis.pages.syncs.wmapis.*;
 import gplx.xowa.addons.wikis.pages.syncs.core.parsers.*;
 public class Xosync_update_mgr {
-	private final    Xoh_hzip_bfr bfr = new Xoh_hzip_bfr(Io_mgr.Len_kb, Bool_.N, Byte_.Max_value_127);
-	private final    Gfh_doc_parser hdoc_parser_mgr;
-	private final    Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
-	private final    Xosync_hdoc_wtr hdoc_bldr = new Xosync_hdoc_wtr();
-	private final    Xosync_hdoc_parser hdoc_parser_wkr;
-	private final    Xowd_html_tbl_mgr html_tbl_mgr = new Xowd_html_tbl_mgr();
-	public Xosync_update_mgr() {
-		hdoc_parser_wkr = new Xosync_hdoc_parser(hdoc_bldr);
-		hdoc_parser_mgr = new Gfh_doc_parser(new Xoh_txt_parser(hdoc_bldr), hdoc_parser_wkr);
-	}
-	public void Init_by_app(Xoa_app app) {
-		hctx.Init_by_app(app);
-	}
-	public Xowm_parse_data Update(Xof_download_wkr download_wkr, Xow_wiki wiki, Xoa_ttl page_ttl) {
-		Xoh_page hpg = (Xoh_page)hctx.Page();
+	public Xowm_parse_data Update(Xof_download_wkr download_wkr, Xow_wiki wiki, byte[] page_url, Xoa_ttl page_ttl) {
+		Xoh_page hpg = new Xoh_page();
 
 		// call wmf api
 		Xowm_parse_wmf parse_wkr = new Xowm_parse_wmf();
@@ -45,10 +32,11 @@ public class Xosync_update_mgr {
 
 		// parse html to fix images
 		Gfo_usr_dlg_.Instance.Log_many("", "", "page_sync: parsing page; page=~{0}", page_ttl.Full_db());
-		Parse(hpg, wiki, hctx.Page__url(), data.Revn_html());
+		Xosync_hdoc_parser hdoc_parser_wkr = new Xosync_hdoc_parser();
+		byte[] html_bry = hdoc_parser_wkr.Parse_hdoc(wiki.Domain_itm(), page_url, hpg.Hdump_mgr().Imgs(), data.Revn_html());
 
 		// init some vars
-		byte[] html_bry = hpg.Db().Html().Html_bry();
+		Xowd_html_tbl_mgr html_tbl_mgr = new Xowd_html_tbl_mgr();
 		Xow_db_file html_db = html_tbl_mgr.Get_html_db(wiki);
 		Xow_db_file core_db = wiki.Data__core_mgr().Db__core();
 		Xowd_page_tbl page_tbl = core_db.Tbl__page();
@@ -87,18 +75,5 @@ public class Xosync_update_mgr {
 		thread_pool.Run();
 
 		return data;
-	}
-	public void Parse(Xoh_page hpg, Xow_wiki wiki, byte[] page_url, byte[] src) {
-		int src_len = src.length;
-
-		// init_by_page for bldr, parser, hdoc
-		hctx.Init_by_page(wiki, hpg);
-		hpg.Hdump_mgr().Clear();
-		hdoc_bldr.Init_by_page(bfr, hpg, hctx, src, 0, src_len);
-		hdoc_parser_wkr.Init_by_page(hctx, src, 0, src_len);
-
-		// parse
-		hdoc_parser_mgr.Parse(page_url, src, 0, src_len);
-		hpg.Db().Html().Html_bry_(bfr.To_bry_and_clear());
 	}
 }

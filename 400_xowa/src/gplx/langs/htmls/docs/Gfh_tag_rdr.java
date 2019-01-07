@@ -26,10 +26,11 @@ public class Gfh_tag_rdr {
 	public int Src_end() {return src_end;} private int src_end;
 	public Bry_err_wkr Err_wkr() {return err_wkr;} private final    Bry_err_wkr err_wkr = new Bry_err_wkr();
 	public Gfh_tag_rdr Reg(String tag_name, int tag_id) {name_hash.Add_str_int(tag_name, tag_id); return this;}
-	public void Init(byte[] ctx_name, byte[] src, int src_bgn, int src_end) {
+	public Gfh_tag_rdr Init(byte[] ctx_name, byte[] src, int src_bgn, int src_end) {
 		this.src = src; this.pos = src_bgn; this.src_end = src_end;
 		tag__eos.Init(this, src, Bool_.N, Bool_.N, src_end, src_end, src_end, src_end, Gfh_tag_.Id__eos, Bry_.Empty);
 		err_wkr.Init_by_page(String_.new_u8(ctx_name), src);
+		return this;
 	}
 	public void Src_rng_(int src_bgn, int src_end) {
 		this.pos = src_bgn; this.src_end = src_end;

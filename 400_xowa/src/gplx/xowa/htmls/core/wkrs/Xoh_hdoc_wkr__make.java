@@ -37,6 +37,7 @@ public class Xoh_hdoc_wkr__make implements Xoh_hdoc_wkr {
 	}
 	public void On_gly		(gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_grp_data data) {
 		bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
+		hpg.Xtn__gallery_exists_y_();
 	}
 	public boolean Process_parse(Xoh_data_itm data) {
 		switch (data.Tid()) {

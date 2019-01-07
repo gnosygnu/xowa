@@ -25,7 +25,8 @@ public class Xosync_img_src_parser {
 	private final    byte[] wiki_abrv_commons;
 	private final    Xoh_img_src_data img_src_parser = new Xoh_img_src_data();
 
-	private Xoh_hdoc_ctx hctx;
+	private Xow_domain_itm wiki_domain;
+	private List_adp imgs;
 	private byte path_tid;
 	private byte[] img_src_bgn_local, img_src_bgn_remote;
 	private byte[] page_url, repo_local;
@@ -46,13 +47,16 @@ public class Xosync_img_src_parser {
 		img_src_bgn_remote = tmp_bfr.Add(Bry__xowa_file).Add(Xow_domain_itm_.Bry__commons).Add_byte_slash().To_bry_and_clear();
 		wiki_abrv_commons = Xow_abrv_xo_.To_bry(Xow_domain_itm_.Bry__commons);
 	}
-	public void Init_by_page(Xoh_hdoc_ctx hctx) {
-		this.hctx = hctx;
-		this.page_url = hctx.Page__url();
+	public Xosync_img_src_parser Init_by_page(Xow_domain_itm wiki_domain, byte[] page_url, List_adp imgs) {
+		this.wiki_domain = wiki_domain;
+		this.page_url = page_url;
+		this.imgs = imgs;
+		this.imgs.Clear();
 		this.path_tid = Path__unknown;
-		this.repo_local = To_wmf_repo_or_null(tmp_bfr, hctx.Wiki__domain_itm());
-		if (repo_local == null) Gfo_usr_dlg_.Instance.Warn_many("", "", "unsupported wmf repo; domain=~{0}", hctx.Wiki__domain_itm().Domain_bry());
-		img_src_bgn_local = tmp_bfr.Add(Bry__xowa_file).Add(hctx.Wiki__domain_bry()).Add_byte_slash().To_bry_and_clear();	// EX: "xowa:/file/en.wikipedia.org/"
+		this.repo_local = To_wmf_repo_or_null(tmp_bfr, wiki_domain);
+		if (repo_local == null) Gfo_usr_dlg_.Instance.Warn_many("", "", "unsupported wmf repo; domain=~{0}", wiki_domain.Domain_bry());
+		img_src_bgn_local = tmp_bfr.Add(Bry__xowa_file).Add(wiki_domain.Domain_bry()).Add_byte_slash().To_bry_and_clear();	// EX: "xowa:/file/en.wikipedia.org/"
+		return this;
 	}
 	public boolean Parse(byte[] raw) {
 		// init
@@ -82,7 +86,7 @@ public class Xosync_img_src_parser {
 	}
 	private boolean Parse_file_xo() {
 		img_src_parser.Clear();
-		boolean rv = img_src_parser.Parse(rdr.Err_wkr(), hctx, hctx.Wiki__domain_bry(), raw, 0, raw_len);
+		boolean rv = img_src_parser.Parse(rdr.Err_wkr(), wiki_domain.Domain_bry(), raw, 0, raw_len);
 		if (rv) {
 			this.repo_is_commons = img_src_parser.Repo_is_commons();
 			this.file_is_orig = img_src_parser.File_is_orig();
@@ -95,7 +99,7 @@ public class Xosync_img_src_parser {
 				if (img_src_parser.File_time_exists())
 					this.file_time = img_src_parser.File_time();
 			}
-			Add_img(hctx.Wiki__domain_itm().Abrv_xo());
+			Add_img(wiki_domain.Abrv_xo());
 		}
 		return rv;
 	}
@@ -147,7 +151,7 @@ public class Xosync_img_src_parser {
 		}
 
 		// register image
-		Add_img(hctx.Wiki__domain_itm().Abrv_xo());
+		Add_img(wiki_domain.Abrv_xo());
 		return true;
 	}
 	private boolean Parse_math() {
@@ -162,7 +166,7 @@ public class Xosync_img_src_parser {
 	}
 	private void Add_img(byte[] wiki_abrv) {
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();
-		hctx.Page().Hdump_mgr().Imgs().Add(itm);
+		imgs.Add(itm);
 		itm.Init_by_wm_parse(wiki_abrv, repo_is_commons, file_is_orig, file_ttl_bry, file_ext, file_w, file_time, file_page);
 	}
 	public byte[] To_bry() {

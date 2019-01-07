@@ -27,9 +27,6 @@ public class Xow_hdump_mgr {
 	public Xow_hdump_mgr__save Save_mgr() {return save_mgr;} private Xow_hdump_mgr__save save_mgr;
 	public Xow_hdump_mgr__load Load_mgr() {return load_mgr;} private Xow_hdump_mgr__load load_mgr;
 	public Xoh_hzip_mgr Hzip_mgr() {return hzip_mgr;} private final    Xoh_hzip_mgr hzip_mgr = new Xoh_hzip_mgr();
-	public void Init_by_app(Xoae_app app) {
-		save_mgr.Init_by_app(app);
-	}
 	public void Init_by_db(Xow_wiki wiki) {
 		byte dflt_zip_tid = gplx.core.ios.streams.Io_stream_tid_.Tid__raw;
 		boolean dflt_hzip_enable = false;

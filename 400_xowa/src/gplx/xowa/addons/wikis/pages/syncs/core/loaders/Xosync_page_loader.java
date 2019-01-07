@@ -74,7 +74,7 @@ public class Xosync_page_loader {
 		img_src_val = Bry_.Replace(img_src_val, src_find, src_repl);
 
 		// parse src
-		img_src_parser.Parse(err_wkr, hctx, wiki.Domain_bry(), img_src_atr.Src(), img_src_atr.Val_bgn(), img_src_atr.Val_end());
+		img_src_parser.Parse(err_wkr, wiki.Domain_bry(), img_src_atr.Src(), img_src_atr.Val_bgn(), img_src_atr.Val_end());
 		if (img_src_parser.File_ttl_bry() == null) return null; // skip images that don't follow format of "commons.wikimedia.org/thumb/7/70/A.png"; for example, enlarge buttons
 
 		// create img
@@ -103,7 +103,7 @@ public class Xosync_page_loader {
 		// if (path_tid == Xosync_img_src_parser.Path__file)
 		img.Init_at_gallery_end(img_tag.Atrs__get_as_int_or(Gfh_atr_.Bry__width,0), img_tag.Atrs__get_as_int_or(Gfh_atr_.Bry__height, 0), html_view_url, html_view_url);
 
-		Xosync_hdoc_parser.Write_img_tag(tmp_bfr, img_tag, img_src_val, img.Html_uid());
+		Xosync_hdoc_parser.Write_img_tag(tmp_bfr, img_tag, img.Html_uid(), img_src_val);
 		return img;
 	}
 }

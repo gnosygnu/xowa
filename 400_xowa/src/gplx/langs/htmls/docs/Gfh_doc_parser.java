@@ -16,7 +16,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.htmls.docs; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
 import gplx.core.btries.*;
 public class Gfh_doc_parser {
-	private final    Btrie_rv trv = new Btrie_rv();
 	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	private final    Gfh_txt_wkr txt_wkr;
 	public Gfh_doc_parser(Gfh_txt_wkr txt_wkr, Gfh_doc_wkr... wkr_ary) {
@@ -27,6 +26,7 @@ public class Gfh_doc_parser {
 	public void Parse(byte[] page_url, byte[] src, int src_bgn, int src_end) {
 		int txt_bgn = -1;
 		int pos = src_bgn;
+		Btrie_rv trv = new Btrie_rv();
 		while (pos < src_end) {
 			Object o = trie.Match_at(trv, src, pos, src_end);
 			if (o == null) {									// not a known hook; add to txt

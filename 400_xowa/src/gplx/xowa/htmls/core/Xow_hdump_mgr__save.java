@@ -16,17 +16,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.dbs.*;
 import gplx.core.ios.*; import gplx.core.primitives.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.pages.*;
-import gplx.xowa.addons.wikis.pages.syncs.core.*;
+import gplx.xowa.addons.wikis.pages.syncs.core.parsers.*;
 public class Xow_hdump_mgr__save {
 	private final    Xow_wiki wiki; private final    Xoh_hzip_mgr hzip_mgr; private final    Io_stream_zip_mgr zip_mgr;
-	private final    Xosync_update_mgr update_mgr = new Xosync_update_mgr();
+	private final    Xosync_hdoc_parser plain_parser = new Xosync_hdoc_parser();
 	private final    Xoh_page tmp_hpg; private final    Xoh_hzip_bfr tmp_bfr = Xoh_hzip_bfr.New_txt(32); private Bool_obj_ref html_db_is_new = Bool_obj_ref.n_();		
 	private int dflt_zip_tid, dflt_hzip_tid;
 	public Xow_hdump_mgr__save(Xow_wiki wiki, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, Xoh_page tmp_hpg) {
 		this.wiki = wiki; this.hzip_mgr = hzip_mgr; this.zip_mgr = zip_mgr; this.tmp_hpg = tmp_hpg;
-	}
-	public void Init_by_app(Xoae_app app) {
-		update_mgr.Init_by_app(app);
 	}
 	public void Init_by_db(int dflt_zip_tid, int dflt_hzip_tid, boolean mode_is_b256) {
 		this.dflt_zip_tid = dflt_zip_tid; this.dflt_hzip_tid = dflt_hzip_tid; tmp_bfr.Mode_is_b256_(mode_is_b256);
@@ -55,8 +52,7 @@ public class Xow_hdump_mgr__save {
 	private byte[] Write(Xoh_hzip_bfr bfr, Xow_wiki wiki, Xoae_page page, Xoh_page hpg, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, int zip_tid, int hzip_tid, byte[] src) {
 		switch (hzip_tid) {
 			case Xoh_hzip_dict_.Hzip__none:
-				update_mgr.Parse(hpg, wiki, page.Url_bry_safe(), src);
-				src = hpg.Db().Html().Html_bry();
+				src = plain_parser.Parse_hdoc(wiki.Domain_itm(), page.Url_bry_safe(), hpg.Hdump_mgr().Imgs(), src);
 				break;
 			case Xoh_hzip_dict_.Hzip__v1:
 				src = hzip_mgr.Encode_as_bry((Xoh_hzip_bfr)bfr.Clear(), wiki, hpg, src);

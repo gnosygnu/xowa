@@ -85,7 +85,7 @@ public class Xoh_img_data implements Xoh_data_itm {
 		img_alt_bgn = img_alt.Val_bgn(); img_alt_end = img_alt.Val_end();
 		img_cls.Init_by_parse(err_wkr, src, img_tag);													// class='thumbborder'
 		img_alt__diff_anch_title = !Bry_.Match(src, img_alt_bgn, img_alt_end, src, anch_title_bgn, anch_title_end);
-		if (!img_src.Parse(err_wkr, hctx, hctx.Wiki__domain_bry(), img_tag)) return false;				// src='...'
+		if (!img_src.Parse(err_wkr, hctx.Wiki__domain_bry(), img_tag)) return false;				// src='...'
 		if (anch_xo_ttl.Val_is_empty()) {
 			anch_xo_ttl.Val_(img_src.File_ttl_bry());
 			if (anch_xo_ttl.Val_is_empty())

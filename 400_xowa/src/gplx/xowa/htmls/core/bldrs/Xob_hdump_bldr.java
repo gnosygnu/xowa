@@ -40,7 +40,6 @@ public class Xob_hdump_bldr implements Gfo_invk {
 		this.toc_label = wiki.Msg_mgr().Val_by_id(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc);
 		
 		if (zip_tid == Byte_.Max_value_127) zip_tid = Xobldr_cfg.Zip_mode__html(wiki.App());
-		hdump_mgr.Init_by_app(wiki.Appe());
 		hdump_mgr.Init_by_db(zip_tid, hzip_enabled, hzip_b256);
 		return true;
 	}
