@@ -94,8 +94,8 @@ public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd,
 				case Xof_ext_.Id_tif: case Xof_ext_.Id_tiff:
 					if (Int_.In(mime_ext_id, Xof_ext_.Id_tif, Xof_ext_.Id_tiff)) notify = false;	// skip: both tif
 					break;
-				case Xof_ext_.Id_ogg: case Xof_ext_.Id_oga: case Xof_ext_.Id_ogv:
-					if (Int_.In(mime_ext_id, Xof_ext_.Id_ogg, Xof_ext_.Id_oga, Xof_ext_.Id_ogv)) notify = false;	// skip: both tif
+				case Xof_ext_.Id_ogg: case Xof_ext_.Id_oga: case Xof_ext_.Id_ogv: case Xof_ext_.Id_opus:
+					if (Int_.In(mime_ext_id, Xof_ext_.Id_ogg, Xof_ext_.Id_oga, Xof_ext_.Id_ogv, Xof_ext_.Id_opus)) notify = false;	// skip: all media
 					break;
 				case Xof_ext_.Id_png:
 					if (Int_.In(mime_ext_id, Xof_ext_.Id_jpg, Xof_ext_.Id_jpeg))
