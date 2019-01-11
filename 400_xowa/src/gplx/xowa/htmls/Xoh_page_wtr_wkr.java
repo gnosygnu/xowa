@@ -22,6 +22,7 @@ import gplx.xowa.xtns.pagebanners.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.htmls.portal.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 import gplx.xowa.htmls.core.*;
+import gplx.xowa.xtns.pfuncs.times.*;
 public class Xoh_page_wtr_wkr {
 	private final    Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); 
@@ -78,8 +79,15 @@ public class Xoh_page_wtr_wkr {
 		if (root_dir_bry == null) this.root_dir_bry = app.Fsys_mgr().Root_dir().To_http_file_bry();
 		Xoa_ttl page_ttl = page.Ttl(); int page_ns_id = page_ttl.Ns().Id();
 		byte page_tid = Xow_page_tid.Identify(wiki.Domain_tid(), page_ns_id, page_ttl.Page_db());
+
+		// write modified_on; handle invalid dates
 		DateAdp modified_on = page.Db().Page().Modified_on();
-		byte[] modified_on_msg = wiki.Msg_mgr().Val_by_id_args(Xol_msg_itm_.Id_portal_lastmodified, modified_on.XtoStr_fmt_yyyy_MM_dd(), modified_on.XtoStr_fmt_HHmm());
+		byte[] modified_on_msg = Bry_.Empty;
+		if (modified_on != DateAdp_.MinValue) {
+			wiki.Parser_mgr().Date_fmt_bldr().Format(tmp_bfr, wiki, wiki.Lang(), modified_on, Pft_func_formatdate.Fmt_dmy);
+			modified_on_msg = wiki.Msg_mgr().Val_by_key_args(Key_lastmodifiedat, tmp_bfr.To_bry_and_clear(), modified_on.XtoStr_fmt_HHmm());
+		}
+
 		byte[] page_body_class = Xoh_page_body_cls.Calc(tmp_bfr, page_ttl, page_tid);
 		// byte[] html_content_editable = wiki.Gui_mgr().Cfg_browser().Content_editable() ? Content_editable_bry : Bry_.Empty;
 		byte[] html_content_editable = Bry_.Empty;
@@ -243,5 +251,6 @@ public class Xoh_page_wtr_wkr {
 		if (data_raw_len > 0)		// do not add nl if empty String
 			bfr.Add_byte_nl();		// per MW:EditPage.php: "Ensure there's a newline at the end, otherwise adding lines is awkward."
 	}
-	// private static final    byte[] Content_editable_bry = Bry_.new_a7(" contenteditable=\"true\"");
+	private static final    byte[] Key_lastmodifiedat = Bry_.new_a7("lastmodifiedat");
+	
 }

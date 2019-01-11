@@ -41,8 +41,9 @@ public class Pft_func_formatdate extends Pf_func_base {
 		ctx.Wiki().Parser_mgr().Date_fmt_bldr().Format(bfr, ctx.Wiki(), ctx.Lang(), date, (Pft_fmt_itm[])o);
 	}
 	private static final    Pft_fmt_itm[] Fmt_itms_default = new Pft_fmt_itm[0];
+	public static final     Pft_fmt_itm[] Fmt_dmy = new Pft_fmt_itm[] {Pft_fmt_itm_.Day_int, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Month_name, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Year_len4};
 	private static final    Btrie_fast_mgr trie = Btrie_fast_mgr.cs()
-		.Add("dmy"			, new Pft_fmt_itm[] {Pft_fmt_itm_.Day_int, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Month_name, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Year_len4})
+		.Add("dmy"			, Fmt_dmy)
 		.Add("mdy"			, new Pft_fmt_itm[] {Pft_fmt_itm_.Month_name, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Day_int, Pft_fmt_itm_.Byte_comma, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Year_len4})
 		.Add("ymd"			, new Pft_fmt_itm[] {Pft_fmt_itm_.Year_len4, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Month_name, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Day_int})
 		.Add("ISO 8601"		, new Pft_fmt_itm[] {Pft_fmt_itm_.Year_len4, Pft_fmt_itm_.Byte_dash, Pft_fmt_itm_.Month_int_len2, Pft_fmt_itm_.Byte_dash, Pft_fmt_itm_.Day_int_len2})
