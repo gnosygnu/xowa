@@ -19,7 +19,6 @@ import gplx.core.ios.*; import gplx.core.primitives.*; import gplx.xowa.wikis.da
 import gplx.xowa.addons.wikis.pages.syncs.core.parsers.*;
 public class Xow_hdump_mgr__save {
 	private final    Xow_wiki wiki; private final    Xoh_hzip_mgr hzip_mgr; private final    Io_stream_zip_mgr zip_mgr;
-	private final    Xosync_hdoc_parser plain_parser = new Xosync_hdoc_parser();
 	private final    Xoh_page tmp_hpg; private final    Xoh_hzip_bfr tmp_bfr = Xoh_hzip_bfr.New_txt(32); private Bool_obj_ref html_db_is_new = Bool_obj_ref.n_();		
 	private int dflt_zip_tid, dflt_hzip_tid;
 	public Xow_hdump_mgr__save(Xow_wiki wiki, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, Xoh_page tmp_hpg) {
@@ -52,11 +51,14 @@ public class Xow_hdump_mgr__save {
 	private byte[] Write(Xoh_hzip_bfr bfr, Xow_wiki wiki, Xoae_page page, Xoh_page hpg, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, int zip_tid, int hzip_tid, byte[] src) {
 		switch (hzip_tid) {
 			case Xoh_hzip_dict_.Hzip__none:
-				src = plain_parser.Parse_hdoc(wiki.Domain_itm(), page.Url_bry_safe(), hpg.Hdump_mgr().Imgs(), src);
 				break;
 			case Xoh_hzip_dict_.Hzip__v1:
 				src = hzip_mgr.Encode_as_bry((Xoh_hzip_bfr)bfr.Clear(), wiki, hpg, src);
 				break;
+			// TOMBSTONE: not used; Xosync_update_mgr calls save directly; unsure if this should be restored for parallelism
+			// case Xoh_hzip_dict_.Hzip__plain:
+			//	src = plain_parser.Parse_hdoc(wiki.Domain_itm(), page.Url_bry_safe(), hpg.Hdump_mgr().Imgs(), src);
+			//	break;
 		}
 		src_as_hzip = src;
 		if (zip_tid > gplx.core.ios.streams.Io_stream_tid_.Tid__raw)

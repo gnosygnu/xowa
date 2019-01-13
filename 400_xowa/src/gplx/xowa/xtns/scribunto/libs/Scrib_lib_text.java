@@ -66,6 +66,24 @@ public class Scrib_lib_text implements Scrib_lib {
 	public boolean JsonEncode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Object itm = args.Pull_obj(0);
 
+		// check if json is primitive, and return that; see NOTE below; PAGE:en.w:Template:Format_TemplateData ISSUE#:301; DATE:2019-01-13
+		int itm_type_id = Type_ids_.To_id_by_obj(itm);
+		switch (itm_type_id) {
+			case Type_ids_.Id__bool:
+			case Type_ids_.Id__byte:
+			case Type_ids_.Id__short:
+			case Type_ids_.Id__int:
+			case Type_ids_.Id__long:
+			case Type_ids_.Id__float:
+			case Type_ids_.Id__double:
+			case Type_ids_.Id__char:
+			case Type_ids_.Id__str:
+			case Type_ids_.Id__bry:
+			case Type_ids_.Id__date:
+			case Type_ids_.Id__decimal:
+				return rslt.Init_obj(itm);
+		}
+
 		// try to determine if node or array; EX: {a:1, b:2} vs [a:1, b:2]
 		Keyval[] itm_as_nde = null;
 		Object itm_as_ary = null;	
@@ -113,6 +131,45 @@ public class Scrib_lib_text implements Scrib_lib {
 	public boolean JsonDecode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		// init
 		byte[] json = args.Pull_bry(0);
+
+		// check if json is primitive, and return that; see NOTE below; PAGE:en.w:Template:Format_TemplateData ISSUE#:301; DATE:2019-01-13
+		int json_len = json.length;
+		boolean is_json_like = false;
+		boolean is_numeric = true;
+		for (int i = 0; i < json_len; i++) {
+			byte json_byte = json[i];
+			switch (json_byte) {
+				case Byte_ascii.Brack_bgn:
+				case Byte_ascii.Brack_end:
+				case Byte_ascii.Curly_bgn:
+				case Byte_ascii.Curly_end:
+					is_json_like = true;
+					is_numeric = false;
+					i = json_len;
+					break;
+				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
+				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+					break;
+				default:
+					is_numeric = false;
+					break;
+			}
+		}
+		if (!is_json_like) {
+			if (is_numeric) {
+				return rslt.Init_obj(Bry_.To_int(json));
+			}
+			else {
+				if (Bry_.Eq(json, Bool_.True_bry))
+					return rslt.Init_obj(true);
+				else if (Bry_.Eq(json, Bool_.False_bry))
+					return rslt.Init_obj(false);
+				else {
+					return rslt.Init_obj(json);
+				}
+			}
+		}			
+
 		int flags = args.Cast_int_or(1, 0);
 		int opts = Scrib_lib_text__json_util.Opt__force_assoc;
 		if (Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__try_fixing))
@@ -156,3 +213,16 @@ public class Scrib_lib_text implements Scrib_lib {
 		return String_.new_u8(msg_mgr.Val_by_key_obj(Bry_.new_u8(msg_key)));
 	}
 }
+/*
+jsonDecode
+
+NOTE: this code is adhoc; MW calls PHP's jsonDecode
+jsonDecode has very liberal rules for decoding which seems to include
+* auto-converting bools and ints from strings
+* throwing syntax errors if text looks like JSON but is not
+
+This code emulates some of the above rules
+
+REF: http://php.net/manual/en/function.json-decode.php
+REF: https://doc.wikimedia.org/mediawiki-core/master/php/FormatJson_8php_source.html
+*/

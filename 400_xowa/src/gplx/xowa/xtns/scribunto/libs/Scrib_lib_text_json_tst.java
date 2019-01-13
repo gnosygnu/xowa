@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import org.junit.*; import gplx.langs.jsons.*;
+import org.junit.*; import gplx.core.tests.*;
+import gplx.langs.jsons.*;	
 public class Scrib_lib_text_json_tst {
 	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib_text lib;
 	private Scrib_lib_json_fxt json_fxt = new Scrib_lib_json_fxt();
@@ -296,12 +297,24 @@ public class Scrib_lib_text_json_tst {
 		Tfds.Eq(kv_ary[0].Key_as_obj(), 1);
 		Tfds.Eq(((Keyval[])kv_ary[0].Val())[0].Key_as_obj(), 11);
 	}
+	@Test  public void Primitives() {	// NOTE: based on MW; ISSUE#:329; DATE:2019-01-13
+		json_fxt.Test_json_roundtrip_primitive(fxt, lib, "abc", "abc");
+		json_fxt.Test_json_roundtrip_primitive(fxt, lib, true, "true");
+		json_fxt.Test_json_roundtrip_primitive(fxt, lib, false, "false");
+		json_fxt.Test_json_roundtrip_primitive(fxt, lib, 123, "123");
+	}
 }
 class Scrib_lib_json_fxt {
 	private final    Json_wtr wtr = new Json_wtr();
 	public void Test_json_roundtrip(Scrib_invoke_func_fxt fxt, Scrib_lib_text lib, String json, Object obj) {
 		Test_json_decode(fxt, lib, Scrib_lib_text__json_util.Flag__none, json, obj);
 		Test_json_encode(fxt, lib, Scrib_lib_text__json_util.Flag__none, obj, json);
+	}
+	public void Test_json_roundtrip_primitive(Scrib_invoke_func_fxt fxt, Scrib_lib_text lib, Object obj, String expd_encoded) {
+		Object actl_encoded = fxt.Test_scrib_proc_rv_as_obj(lib, Scrib_lib_text.Invk_jsonEncode, Object_.Ary(obj, Scrib_lib_text__json_util.Flag__none));
+		Gftest.Eq__str(Object_.Xto_str_loose_or(actl_encoded, "failed"), expd_encoded);
+		Object actl_decoded = fxt.Test_scrib_proc_rv_as_obj(lib, Scrib_lib_text.Invk_jsonDecode, Object_.Ary(expd_encoded, Scrib_lib_text__json_util.Flag__none));
+		Gftest.Eq__str(Object_.Xto_str_loose_or(obj, "failed"), Object_.Xto_str_loose_or(actl_decoded, "failed"));
 	}
 	public Object Test_json_decode(Scrib_invoke_func_fxt fxt, Scrib_lib_text lib, int flag, String raw, Object expd) {
 		Object actl = fxt.Test_scrib_proc_rv_as_obj(lib, Scrib_lib_text.Invk_jsonDecode, Object_.Ary(raw, flag));
@@ -314,8 +327,11 @@ class Scrib_lib_json_fxt {
 	private String To_str(Object o) {
 		if	(o == null) return "<< NULL >>";
 		Class<?> type = o.getClass();
-		if		(Type_.Eq(type, Keyval[].class))		return Kv_ary_utl.Ary_to_str(wtr, (Keyval[])o);
-		else if	(Type_.Is_array(type))					return Array_.To_str_nested_obj(o);
-		else												return Object_.Xto_str_strict_or_null(o);
+		if		(Type_.Eq(type, Keyval[].class))
+			return Kv_ary_utl.Ary_to_str(wtr, (Keyval[])o);
+		else if	(Type_.Is_array(type))
+			return Array_.To_str_nested_obj(o);
+		else
+			return Object_.Xto_str_strict_or_null(o);
 	}
 }
