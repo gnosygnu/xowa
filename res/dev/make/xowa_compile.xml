@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="compile_xowa" name="create runnable jar for XOWA">
+    <target name="compile_core">
+        <delete dir="${src_dir}/100_core/bin"/>
+        <mkdir  dir="${src_dir}/100_core/bin"/>
+        <javac includeantruntime="false" target="${jdk}" source="${jdk}" sourcepath="" 
+		  srcdir   ="${src_dir}/100_core"
+		  destdir  ="${src_dir}/100_core/bin"
+		  classpath="${src_dir}/lib/junit.jar:${src_dir}/app/bin/any/java/apache/commons-compress-1.5.jar:${src_dir}/app/bin/any/java/xz/xz-1.5.jar">
+          <include name="**/*.java"/>
+        </javac>
+    </target>
+    <target name="compile_gfml">
+        <delete dir="${src_dir}/110_gfml/bin"/>
+        <mkdir  dir="${src_dir}/110_gfml/bin"/>
+        <javac includeantruntime="false" target="${jdk}" source="${jdk}" sourcepath=""
+		  srcdir   ="${src_dir}/110_gfml"
+		  destdir  ="${src_dir}/110_gfml/bin"
+		  classpath="${src_dir}/lib/junit.jar:${src_dir}/100_core/bin">
+          <include name="**/*.java"/>
+        </javac>
+    </target>
+    <target name="compile_dbs">
+        <delete dir="${src_dir}/140_dbs/bin"/>
+        <mkdir  dir="${src_dir}/140_dbs/bin"/>
+        <javac includeantruntime="false" target="${jdk}" source="${jdk}" sourcepath=""
+		  srcdir   ="${src_dir}/140_dbs"
+		  destdir  ="${src_dir}/140_dbs/bin"
+		  classpath="${src_dir}/lib/junit.jar:${src_dir}/100_core/bin:${src_dir}/app/bin/any/java/jdbc/sqlite/sqlite-jdbc-3.18.0.jar">
+          <include name="**/*.java"/>
+        </javac>
+    </target>
+    <target name="compile_gfui">
+        <delete dir="${src_dir}/150_gfui/bin"/>
+        <mkdir  dir="${src_dir}/150_gfui/bin"/>
+        <javac includeantruntime="false" target="${jdk}" source="${jdk}" sourcepath=""
+		  srcdir   ="${src_dir}/150_gfui"
+		  destdir  ="${src_dir}/150_gfui/bin"
+		  classpath="${src_dir}/lib/junit.jar:${src_dir}/150_gfui/lib/swt.jar:${src_dir}/100_core/bin:${src_dir}/110_gfml/bin">
+          <include name="**/*.java"/>
+        </javac>
+    </target>
+    <target name="compile_gflucene">
+        <delete dir="${src_dir}/gplx.gflucene/bin"/>
+        <mkdir  dir="${src_dir}/gplx.gflucene/bin"/>
+        <javac includeantruntime="false" target="${jdk}" source="${jdk}" sourcepath=""
+		  srcdir   ="${src_dir}/gplx.gflucene"
+		  destdir  ="${src_dir}/gplx.gflucene/bin"
+		  classpath="${src_dir}/lib/junit.jar:${src_dir}/app/bin/any/java/lucene/5.3.0.drd/lucene-core-5.3.0-mobile-2.jar:${src_dir}/app/bin/any/java/lucene/5.3.0.drd/lucene-highlighter-5.3.0-mobile-2.jar:${src_dir}/app/bin/any/java/lucene/5.3.0.drd/lucene-memory-5.3.0-mobile-2.jar:${src_dir}/app/bin/any/java/lucene/5.3.0.drd/lucene-queryparser-5.3.0-mobile-2.jar:${src_dir}/app/bin/any/java/lucene/5.3.0.drd/lucene-analyzers-common-5.3.0-mobile-2.jar:${src_dir}/app/bin/any/java/lucene/5.3.0.drd/lucene-queries-5.3.0-mobile-2.jar:${src_dir}/100_core/bin">
+          <include name="**/*.java"/>
+        </javac>
+    </target>
+    <target name="compile_xowa" depends="compile_core,compile_gfml,compile_dbs,compile_gfui,compile_gflucene">
+        <delete dir="${src_dir}/400_xowa/bin"/>
+        <mkdir  dir="${src_dir}/400_xowa/bin"/>
+        <javac includeantruntime="false" target="${jdk}" source="${jdk}" sourcepath=""
+		  srcdir   ="${src_dir}/400_xowa"
+		  destdir  ="${src_dir}/400_xowa/bin"
+		  classpath="${src_dir}/lib/junit.jar:${src_dir}/100_core/bin:${src_dir}/110_gfml/bin:${src_dir}/140_dbs/bin:${src_dir}/150_gfui/bin:${src_dir}/gplx.gflucene/bin:${src_dir}/app/bin/any/java/luaj/luaj_xowa.jar:${src_dir}/app/bin/any/java/jtidy/jtidy_xowa.jar:${src_dir}/app/bin/any/java/icu4j/icu4j-4_8.jar">
+          <compilerarg line="-encoding utf-8"/>
+          <include name="**/*.java"/>
+        </javac>
+    </target>
+</project>

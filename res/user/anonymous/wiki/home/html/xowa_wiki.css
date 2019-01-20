@@ -1,0 +1,1497 @@
+/*XOWA:MediaWiki:Common.css*/
+/* Reset italic styling set by user agent */
+cite, dfn {
+    font-style: inherit;
+}
+
+/* Straight quote marks for <q> */
+q {
+    quotes: '"' '"' "'" "'";
+}
+
+/* Avoid collision of blockquote with floating elements by swapping margin and padding */
+blockquote {
+    overflow: hidden;
+    margin: 1em 0;
+    padding: 0 40px;
+}
+
+/* Prevent the 'double bold' bug in Firefox when using DirectWrite */
+strong.selflink {
+    font-weight: 700;
+}
+
+/* Consistent size for <sub> and <sup> */
+.mw-body sub,
+.mw-body sup,
+span.reference /* for Parsoid */ {
+    font-size: 80%;
+}
+
+/* Main page fixes */
+#interwiki-completelist {
+    font-weight: bold;
+}
+body.page-Main_Page #ca-delete {
+    display: none !important;
+}
+body.page-Main_Page #mp-topbanner {
+    clear: both;
+}
+
+/* Unhorrify 'Changed since last visit' colors */
+.updatedmarker {
+    background-color: transparent;
+    color: #006400;
+}
+
+/* Edit window toolbar */
+#toolbar {
+    height: 22px;
+    margin-bottom: 6px;
+}
+
+/* Hide charinsert base for those not using the gadget */
+#editpage-specialchars {
+    display: none;
+}
+
+/* Highlight linked elements (such as clicked references) in blue */
+body.action-info :target,
+.citation:target {
+    background-color: #DEF;  /* Fallback */
+    background-color: rgba(0, 127, 255, 0.133);
+}
+
+/* Styling for citations. Breaks long urls, etc., rather than overflowing box */
+.citation {
+    word-wrap: break-word;
+}
+
+/* For linked citation numbers and document IDs, where the number need not be shown
+   on a screen or a handheld, but should be included in the printed version */
+@media screen, handheld {
+    .citation .printonly {
+        display: none;
+    }
+}
+
+/* Make the list of references smaller */
+ol.references,
+div.reflist,
+div.refbegin {
+    font-size: 90%;            /* Default font-size */
+    margin-bottom: 0.5em;
+}
+div.refbegin-100 {
+    font-size: 100%;           /* Option for normal fontsize in {{refbegin}} */
+}
+div.reflist ol.references {
+    font-size: 100%;           /* Reset font-size when nested in div.reflist */
+    list-style-type: inherit;  /* Enable custom list style types */
+}
+
+/* Ensure refs in table headers and the like aren't bold or italic */
+sup.reference {
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Allow hidden ref errors to be shown by user CSS */
+span.brokenref {
+    display: none;
+}
+
+/* Reset top margin for lists embedded in columns */
+div.columns {
+    margin-top: 0.3em;
+}
+div.columns dl,
+div.columns ol,
+div.columns ul {
+    margin-top: 0;
+}
+
+/* Avoid elements from breaking between columns */
+.nocolbreak,
+div.columns li,
+div.columns dd dd {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid-column;
+}
+
+/* Style for [[Template:Flowlist]] that Lets lists flow around floating objecs */
+.flowlist ul {
+    overflow-x: hidden;
+    margin-left: 0;
+    padding-left: 1.6em;
+}
+.flowlist ol {
+    overflow-x: hidden;
+    margin-left: 0;
+    padding-left: 3.2em;
+}
+.flowlist dl {
+    overflow-x: hidden;
+}
+
+/* Style for horizontal lists (separator following item).
+   @source mediawiki.org/wiki/Snippets/Horizontal_lists
+   @revision 7 (2015-11-12)
+   @author [[User:Edokter]]
+ */
+.hlist dl,
+.hlist ol,
+.hlist ul {
+    margin: 0;
+    padding: 0;
+}
+/* Display list items inline */
+.hlist dd,
+.hlist dt,
+.hlist li {
+    margin: 0;
+    display: inline;
+}
+/* Display nested lists inline */
+.hlist.inline,
+.hlist.inline dl,
+.hlist.inline ol,
+.hlist.inline ul,
+.hlist dl dl, .hlist dl ol, .hlist dl ul,
+.hlist ol dl, .hlist ol ol, .hlist ol ul,
+.hlist ul dl, .hlist ul ol, .hlist ul ul {
+    display: inline;
+}
+/* Hide empty list itmes */
+.hlist .mw-empty-li {
+    display: none;
+}
+/* Generate interpuncts */
+.hlist dt:after {
+    content: ": ";
+}
+.hlist dd:after,
+.hlist li:after {
+    content: " · ";
+    font-weight: bold;
+}
+.hlist dd:last-child:after,
+.hlist dt:last-child:after,
+.hlist li:last-child:after {
+    content: none;
+}
+/* Add parentheses around nested lists */
+.hlist dd dd:first-child:before, .hlist dd dt:first-child:before, .hlist dd li:first-child:before,
+.hlist dt dd:first-child:before, .hlist dt dt:first-child:before, .hlist dt li:first-child:before,
+.hlist li dd:first-child:before, .hlist li dt:first-child:before, .hlist li li:first-child:before {
+    content: " (";
+    font-weight: normal;
+}
+.hlist dd dd:last-child:after, .hlist dd dt:last-child:after, .hlist dd li:last-child:after,
+.hlist dt dd:last-child:after, .hlist dt dt:last-child:after, .hlist dt li:last-child:after,
+.hlist li dd:last-child:after, .hlist li dt:last-child:after, .hlist li li:last-child:after {
+    content: ") ";
+    font-weight: normal;
+}
+/* Put ordinals in front of ordered list items */
+.hlist ol {
+    counter-reset: listitem;
+}
+.hlist ol > li {
+    counter-increment: listitem;
+}
+.hlist ol > li:before {
+    content: " " counter(listitem) " ";
+    white-space: nowrap;
+}
+.hlist dd ol > li:first-child:before,
+.hlist dt ol > li:first-child:before,
+.hlist li ol > li:first-child:before {
+    content: " (" counter(listitem) " ";
+}
+
+/* Unbulleted lists */
+.plainlist ol,
+.plainlist ul {
+    line-height: inherit;
+    list-style: none none;
+    margin: 0;
+}
+.plainlist ol li,
+.plainlist ul li {
+    margin-bottom: 0;
+}
+
+/* Default style for navigation boxes */
+.navbox {                     /* Navbox container style */
+    border: 1px solid #aaa;
+    width: 100%;
+    margin: auto;
+    clear: both;
+    font-size: 88%;
+    text-align: center;
+    padding: 1px;
+}
+.navbox-inner,
+.navbox-subgroup {
+    width: 100%;
+}
+.navbox-group,
+.navbox-title,
+.navbox-abovebelow {
+    padding: 0.25em 1em;      /* Title, group and above/below styles */
+    line-height: 1.5em;
+    text-align: center;
+}
+th.navbox-group {             /* Group style */
+    white-space: nowrap;
+    /* @noflip */
+    text-align: right;
+}
+.navbox,
+.navbox-subgroup {
+    background: #fdfdfd;      /* Background color */
+}
+.navbox-list {
+    line-height: 1.5em;
+    border-color: #fdfdfd;    /* Must match background color */
+}
+.navbox th,
+.navbox-title {
+    background: #ccccff;      /* Level 1 color */
+}
+.navbox-abovebelow,
+th.navbox-group,
+.navbox-subgroup .navbox-title {
+    background: #ddddff;      /* Level 2 color */
+}
+.navbox-subgroup .navbox-group,
+.navbox-subgroup .navbox-abovebelow {
+    background: #e6e6ff;      /* Level 3 color */
+}
+.navbox-even {
+    background: #f7f7f7;      /* Even row striping */
+}
+.navbox-odd {
+    background: transparent;  /* Odd row striping */
+}
+table.navbox {
+    margin-top: 1em;          /* Prevent preceding content from clinging to navboxes */
+}
+table.navbox table.navbox {
+    margin-top: 0;            /* No top margin for nested navboxes */
+}
+table.navbox + table.navbox {
+    margin-top: -1px;         /* Single pixel border between adjacent navboxes */
+}
+.navbox .hlist td dl,
+.navbox .hlist td ol,
+.navbox .hlist td ul,
+.navbox td.hlist dl,
+.navbox td.hlist ol,
+.navbox td.hlist ul {
+    padding: 0.125em 0;       /* Adjust hlist padding in navboxes */
+}
+
+/* Default styling for Navbar template */
+.navbar {
+    display: inline;
+    font-size: 88%;
+    font-weight: normal;
+}
+.navbar ul {
+    display: inline;
+    white-space: nowrap;
+}
+.mw-body-content .navbar ul {
+    line-height: inherit;
+}
+.navbar li {
+    word-spacing: -0.125em;
+}
+.navbar.mini li abbr[title] {
+  font-variant: small-caps;
+  border-bottom: none;
+  text-decoration: none;
+  cursor: inherit;
+}
+/* Navbar styling when nested in infobox and navbox */
+.infobox .navbar {
+    font-size: 100%;
+}
+.navbox .navbar {
+    display: block;
+    font-size: 100%;
+}
+.navbox-title .navbar {
+    /* @noflip */
+    float: left;
+    /* @noflip */
+    text-align: left;
+    /* @noflip */
+    margin-right: 0.5em;
+    width: 6em;
+}
+
+/* 'show'/'hide' buttons created dynamically by the CollapsibleTables javascript
+   in [[MediaWiki:Common.js]] are styled here so they can be customised. */
+.collapseButton {
+    /* @noflip */
+    float: right;
+    font-weight: normal;
+    /* @noflip */
+    margin-left: 0.5em;
+    /* @noflip */
+    text-align: right;
+    width: auto;
+}
+/* In navboxes, the show/hide button balances the v·d·e links
+   from [[Template:Navbar]], so they need to be the same width. */
+.navbox .collapseButton {
+    width: 6em;
+}
+
+/* Styling for JQuery makeCollapsible, matching that of collapseButton */
+.mw-collapsible-toggle {
+    font-weight: normal;
+    /* @noflip */
+    text-align: right;
+}
+.navbox .mw-collapsible-toggle {
+    width: 6em;
+}
+
+/* Infobox template style */
+.infobox {
+    border: 1px solid #aaa;
+    border-spacing: 3px;
+    background-color: #f9f9f9;
+    color: black;
+    /* @noflip */
+    margin: 0.5em 0 0.5em 1em;
+    padding: 0.2em;
+    /* @noflip */
+    float: right;
+    /* @noflip */
+    clear: right;
+    font-size: 88%;
+    line-height: 1.5em;
+}
+.infobox caption {
+    font-size: 125%;
+    font-weight: bold;
+    padding: 0.2em;
+}
+.infobox td,
+.infobox th {
+    vertical-align: top;
+    /* @noflip */
+    text-align: left;
+}
+.infobox.bordered {
+    border-collapse: collapse;
+}
+.infobox.bordered td,
+.infobox.bordered th {
+    border: 1px solid #aaa;
+}
+.infobox.bordered .borderless td,
+.infobox.bordered .borderless th {
+    border: 0;
+}
+
+.infobox.sisterproject {
+    width: 20em;
+    font-size: 90%;
+}
+
+.infobox.standard-talk {
+    border: 1px solid #c0c090;
+    background-color: #f8eaba;
+}
+.infobox.standard-talk.bordered td,
+.infobox.standard-talk.bordered th {
+    border: 1px solid #c0c090;
+}
+
+/* styles for bordered infobox with merged rows */
+.infobox.bordered .mergedtoprow td,
+.infobox.bordered .mergedtoprow th {
+    border: 0;
+    border-top: 1px solid #aaa;
+    /* @noflip */
+    border-right: 1px solid #aaa;
+}
+
+.infobox.bordered .mergedrow td,
+.infobox.bordered .mergedrow th {
+    border: 0;
+    /* @noflip */
+    border-right: 1px solid #aaa;
+}
+
+/* Styles for geography infoboxes, eg countries,
+   country subdivisions, cities, etc.            */
+.infobox.geography {
+    border-collapse: collapse;
+    line-height: 1.2em;
+    font-size: 90%;
+}
+
+.infobox.geography  td,
+.infobox.geography  th {
+    border-top: 1px solid #aaa;
+    padding: 0.4em 0.6em 0.4em 0.6em;
+}
+.infobox.geography .mergedtoprow td,
+.infobox.geography .mergedtoprow th {
+    border-top: 1px solid #aaa;
+    padding: 0.4em 0.6em 0.2em 0.6em;
+}
+
+.infobox.geography .mergedrow td,
+.infobox.geography .mergedrow th {
+    border: 0;
+    padding: 0 0.6em 0.2em 0.6em;
+}
+
+.infobox.geography .mergedbottomrow td,
+.infobox.geography .mergedbottomrow th {
+    border-top: 0;
+    border-bottom: 1px solid #aaa;
+    padding: 0 0.6em 0.4em 0.6em;
+}
+
+.infobox.geography .maptable td,
+.infobox.geography .maptable th {
+    border: 0;
+    padding: 0;
+}
+
+/* Normal font styling for table row headers with scope="row" tag */
+.wikitable.plainrowheaders th[scope=row] {
+    font-weight: normal;
+    /* @noflip */
+    text-align: left;
+}
+
+/* Lists in data cells are always left-aligned */
+.wikitable td ul,
+.wikitable td ol,
+.wikitable td dl {
+    /* @noflip */
+    text-align: left;
+}
+/* ...unless they also use the hlist class */
+.toc.hlist ul,
+#toc.hlist ul,
+.wikitable.hlist td ul,
+.wikitable.hlist td ol,
+.wikitable.hlist td dl {
+    text-align: inherit;
+}
+
+/* Icons for medialist templates [[Template:Listen]],
+   [[Template:Multi-listen_start]], [[Template:Video]],
+   [[Template:Multi-video_start]] */
+div.listenlist {
+    background: url("upload.wikimedia.org/wikipedia/commons/4/47/Sound-icon.svg") no-repeat scroll 0 0 transparent;
+    background-size: 30px;
+    padding-left: 40px;
+}
+
+/* Fix for hieroglyphs specificality issue in infoboxes ([[Phabricator:43869]]) */
+table.mw-hiero-table td {
+    vertical-align: middle;
+}
+
+/* Style rules for media list templates */
+div.medialist {
+    min-height: 50px;
+    margin: 1em;
+    /* @noflip */
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+div.medialist ul {
+    list-style-type: none;
+    list-style-image: none;
+    margin: 0;
+}
+div.medialist ul li {
+    padding-bottom: 0.5em;
+}
+div.medialist ul li li {
+    font-size: 91%;
+    padding-bottom: 0;
+}
+
+/* Change the external link icon to an Adobe icon for all PDF files
+   in browsers that support these CSS selectors, like Mozilla and Opera */
+div#content a[href$=".pdf"].external,
+div#content a[href*=".pdf?"].external,
+div#content a[href*=".pdf#"].external,
+div#content a[href$=".PDF"].external,
+div#content a[href*=".PDF?"].external,
+div#content a[href*=".PDF#"].external,
+div#mw_content a[href$=".pdf"].external,
+div#mw_content a[href*=".pdf?"].external,
+div#mw_content a[href*=".pdf#"].external,
+div#mw_content a[href$=".PDF"].external,
+div#mw_content a[href*=".PDF?"].external,
+div#mw_content a[href*=".PDF#"].external {
+    background: url("upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif") no-repeat right;
+    /* @noflip */
+    padding-right: 18px;
+}
+
+/* Change the external link icon to an Adobe icon anywhere the PDFlink class
+   is used (notably Template:PDFlink). This works in IE, unlike the above. */
+div#content span.PDFlink a,
+div#mw_content span.PDFlink a {
+    background: url("upload.wikimedia.org/wikipedia/commons/2/23/Icons-mini-file_acrobat.gif") no-repeat right;
+    /* @noflip */
+    padding-right: 18px;
+}
+
+/* Content in columns with CSS instead of tables ([[Template:Columns]]) */
+div.columns-2 div.column {
+    /* @noflip */
+    float: left;
+    width: 50%;
+    min-width: 300px;
+}
+div.columns-3 div.column {
+    /* @noflip */
+    float: left;
+    width: 33.3%;
+    min-width: 200px;
+}
+div.columns-4 div.column {
+    /* @noflip */
+    float: left;
+    width: 25%;
+    min-width: 150px;
+}
+div.columns-5 div.column {
+    /* @noflip */
+    float: left;
+    width: 20%;
+    min-width: 120px;
+}
+
+/* Messagebox templates */
+.messagebox {
+    border: 1px solid #aaa;
+    background-color: #f9f9f9;
+    width: 80%;
+    margin: 0 auto 1em auto;
+    padding: .2em;
+}
+.messagebox.merge {
+    border: 1px solid #c0b8cc;
+    background-color: #f0e5ff;
+    text-align: center;
+}
+.messagebox.cleanup {
+    border: 1px solid #9f9fff;
+    background-color: #efefff;
+    text-align: center;
+}
+.messagebox.standard-talk {
+    border: 1px solid #c0c090;
+    background-color: #f8eaba;
+    margin: 4px auto;
+}
+/* For old WikiProject banners inside banner shells. */
+.mbox-inside .standard-talk,
+.messagebox.nested-talk {
+    border: 1px solid #c0c090;
+    background-color: #f8eaba;
+    width: 100%;
+    margin: 2px 0;
+    padding: 2px;
+}
+.messagebox.small {
+    width: 238px;
+    font-size: 85%;
+    /* @noflip */
+    float: right;
+    clear: both;
+    /* @noflip */
+    margin: 0 0 1em 1em;
+    line-height: 1.25em;
+}
+.messagebox.small-talk {
+    width: 238px;
+    font-size: 85%;
+    /* @noflip */
+    float: right;
+    clear: both;
+    /* @noflip */
+    margin: 0 0 1em 1em;
+    line-height: 1.25em;
+    background: #F8EABA;
+}
+
+/* Cell sizes for ambox/tmbox/imbox/cmbox/ombox/fmbox/dmbox message boxes */
+th.mbox-text, td.mbox-text {   /* The message body cell(s) */
+    border: none;
+    /* @noflip */
+    padding: 0.25em 0.9em;     /* 0.9em left/right */
+    width: 100%;               /* Make all mboxes the same width regardless of text length */
+}
+td.mbox-image {                /* The left image cell */
+    border: none;
+    /* @noflip */
+    padding: 2px 0 2px 0.9em;  /* 0.9em left, 0px right */
+    text-align: center;
+}
+td.mbox-imageright {           /* The right image cell */
+    border: none;
+    /* @noflip */
+    padding: 2px 0.9em 2px 0;  /* 0px left, 0.9em right */
+    text-align: center;
+}
+td.mbox-empty-cell {           /* An empty narrow cell */
+    border: none;
+    padding: 0;
+    width: 1px;
+}
+
+/* Article message box styles */
+table.ambox {
+    margin: 0 10%;                  /* 10% = Will not overlap with other elements */
+    border: 1px solid #aaa;
+    /* @noflip */
+    border-left: 10px solid #1e90ff;  /* Default "notice" blue */
+    background: #fbfbfb;
+}
+table.ambox + table.ambox {      /* Single border between stacked boxes. */
+    margin-top: -1px;
+}
+.ambox th.mbox-text,
+.ambox td.mbox-text {            /* The message body cell(s) */
+    padding: 0.25em 0.5em;       /* 0.5em left/right */
+}
+.ambox td.mbox-image {           /* The left image cell */
+    /* @noflip */
+    padding: 2px 0 2px 0.5em;    /* 0.5em left, 0px right */
+}
+.ambox td.mbox-imageright {      /* The right image cell */
+    /* @noflip */
+    padding: 2px 0.5em 2px 0;    /* 0px left, 0.5em right */
+}
+
+table.ambox-notice {
+    /* @noflip */
+    border-left: 10px solid #1e90ff;    /* Blue */
+}
+table.ambox-speedy {
+    /* @noflip */
+    border-left: 10px solid #b22222;    /* Red */
+    background: #fee;                   /* Pink */
+}
+table.ambox-delete {
+    /* @noflip */
+    border-left: 10px solid #b22222;    /* Red */
+}
+table.ambox-content {
+    /* @noflip */
+    border-left: 10px solid #f28500;    /* Orange */
+}
+table.ambox-style {
+    /* @noflip */
+    border-left: 10px solid #f4c430;    /* Yellow */
+}
+table.ambox-move {
+    /* @noflip */
+    border-left: 10px solid #9932cc;    /* Purple */
+}
+table.ambox-protection {
+    /* @noflip */
+    border-left: 10px solid #bba;       /* Gray-gold */
+}
+
+/* Image message box styles */
+table.imbox {
+    margin: 4px 10%;
+    border-collapse: collapse;
+    border: 3px solid #1e90ff;    /* Default "notice" blue */
+    background: #fbfbfb;
+}
+.imbox .mbox-text .imbox {  /* For imboxes inside imbox-text cells. */
+    margin: 0 -0.5em;       /* 0.9 - 0.5 = 0.4em left/right.        */
+    display: block;         /* Fix for webkit to force 100% width.  */
+}
+.mbox-inside .imbox {       /* For imboxes inside other templates.  */
+    margin: 4px;
+}
+
+table.imbox-notice {
+    border: 3px solid #1e90ff;    /* Blue */
+}
+table.imbox-speedy {
+    border: 3px solid #b22222;    /* Red */
+    background: #fee;             /* Pink */
+}
+table.imbox-delete {
+    border: 3px solid #b22222;    /* Red */
+}
+table.imbox-content {
+    border: 3px solid #f28500;    /* Orange */
+}
+table.imbox-style {
+    border: 3px solid #f4c430;    /* Yellow */
+}
+table.imbox-move {
+    border: 3px solid #9932cc;    /* Purple */
+}
+table.imbox-protection {
+    border: 3px solid #bba;       /* Gray-gold */
+}
+table.imbox-license {
+    border: 3px solid #88a;       /* Dark gray */
+    background: #f7f8ff;          /* Light gray */
+}
+table.imbox-featured {
+    border: 3px solid #cba135;    /* Brown-gold */
+}
+
+/* Category message box styles */
+table.cmbox {
+    margin: 3px 10%;
+    border-collapse: collapse;
+    border: 1px solid #aaa;
+    background: #DFE8FF;    /* Default "notice" blue */
+}
+
+table.cmbox-notice {
+    background: #D8E8FF;    /* Blue */
+}
+table.cmbox-speedy {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border: 4px solid #b22222;    /* Red */
+    background: #FFDBDB;          /* Pink */
+}
+table.cmbox-delete {
+    background: #FFDBDB;    /* Red */
+}
+table.cmbox-content {
+    background: #FFE7CE;    /* Orange */
+}
+table.cmbox-style {
+    background: #FFF9DB;    /* Yellow */
+}
+table.cmbox-move {
+    background: #E4D8FF;    /* Purple */
+}
+table.cmbox-protection {
+    background: #EFEFE1;    /* Gray-gold */
+}
+
+/* Other pages message box styles */
+table.ombox {
+    margin: 4px 10%;
+    border-collapse: collapse;
+    border: 1px solid #aaa;       /* Default "notice" gray */
+    background: #f9f9f9;
+}
+
+table.ombox-notice {
+    border: 1px solid #aaa;       /* Gray */
+}
+table.ombox-speedy {
+    border: 2px solid #b22222;    /* Red */
+    background: #fee;             /* Pink */
+}
+table.ombox-delete {
+    border: 2px solid #b22222;    /* Red */
+}
+table.ombox-content {
+    border: 1px solid #f28500;    /* Orange */
+}
+table.ombox-style {
+    border: 1px solid #f4c430;    /* Yellow */
+}
+table.ombox-move {
+    border: 1px solid #9932cc;    /* Purple */
+}
+table.ombox-protection {
+    border: 2px solid #bba;       /* Gray-gold */
+}
+
+/* Talk page message box styles */
+table.tmbox {
+    margin: 4px 10%;
+    border-collapse: collapse;
+    border: 1px solid #c0c090;    /* Default "notice" gray-brown */
+    background: #f8eaba;
+}
+.mediawiki .mbox-inside .tmbox { /* For tmboxes inside other templates. The "mediawiki" class ensures that */
+    margin: 2px 0;               /* this declaration overrides other styles (including mbox-small above)   */
+    width: 100%;                 /* For Safari and Opera */
+}
+.mbox-inside .tmbox.mbox-small { /* "small" tmboxes should not be small when  */
+    line-height: 1.5em;          /* also "nested", so reset styles that are   */
+    font-size: 100%;             /* set in "mbox-small" above.                */
+}
+
+table.tmbox-speedy {
+    border: 2px solid #b22222;    /* Red */
+    background: #fee;             /* Pink */
+}
+table.tmbox-delete {
+    border: 2px solid #b22222;    /* Red */
+}
+table.tmbox-content {
+    border: 2px solid #f28500;    /* Orange */
+}
+table.tmbox-style {
+    border: 2px solid #f4c430;    /* Yellow */
+}
+table.tmbox-move {
+    border: 2px solid #9932cc;    /* Purple */
+}
+table.tmbox-protection,
+table.tmbox-notice {
+    border: 1px solid #c0c090;    /* Gray-brown */
+}
+
+/* Disambig and set index box styles */
+table.dmbox {
+    clear: both;
+    margin: 0.9em 1em;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
+}
+
+/* Footer and header message box styles */
+table.fmbox {
+    clear: both;
+    margin: 0.2em 0;
+    width: 100%;
+    border: 1px solid #aaa;
+    background: #f9f9f9;     /* Default "system" gray */
+}
+table.fmbox-system {
+    background: #f9f9f9;
+}
+table.fmbox-warning {
+    border: 1px solid #bb7070;  /* Dark pink */
+    background: #ffdbdb;        /* Pink */
+}
+table.fmbox-editnotice {
+    background: transparent;
+}
+/* Div based "warning" style fmbox messages. */
+div.mw-warning-with-logexcerpt,
+div.mw-lag-warn-high,
+div.mw-cascadeprotectedwarning,
+div#mw-protect-cascadeon,
+div.titleblacklist-warning,
+div.locked-warning {
+    clear: both;
+    margin: 0.2em 0;
+    border: 1px solid #bb7070;
+    background: #ffdbdb;
+    padding: 0.25em 0.9em;
+}
+/* Div based "system" style fmbox messages.
+   Used in [[MediaWiki:Readonly lag]]. */
+div.mw-lag-warn-normal,
+div.fmbox-system {
+    clear: both;
+    margin: 0.2em 0;
+    border: 1px solid #aaa;
+    background: #f9f9f9;
+    padding: 0.25em 0.9em;
+}
+
+/* These mbox-small classes must be placed after all other
+   ambox/tmbox/ombox etc classes. "body.mediawiki" is so
+   they override "table.ambox + table.ambox" above. */
+body.mediawiki table.mbox-small {   /* For the "small=yes" option. */
+    /* @noflip */
+    clear: right;
+    /* @noflip */
+    float: right;
+    /* @noflip */
+    margin: 4px 0 4px 1em;
+    width: 238px;
+    font-size: 88%;
+    line-height: 1.25em;
+}
+body.mediawiki table.mbox-small-left {   /* For the "small=left" option. */
+    /* @noflip */
+    margin: 4px 1em 4px 0;
+    width: 238px;
+    border-collapse: collapse;
+    font-size: 88%;
+    line-height: 1.25em;
+}
+
+/* Style for compact ambox */
+/* Hide the images */
+.compact-ambox table .mbox-image,
+.compact-ambox table .mbox-imageright,
+.compact-ambox table .mbox-empty-cell {
+    display: none;
+}
+/* Remove borders, backgrounds, padding, etc. */
+.compact-ambox table.ambox {
+    border: none;
+    border-collapse: collapse;
+    background: transparent;
+    margin: 0 0 0 1.6em !important;
+    padding: 0 !important;
+    width: auto;
+    display: block;
+}
+body.mediawiki .compact-ambox table.mbox-small-left {
+    font-size: 100%;
+    width: auto;
+    margin: 0;
+}
+/* Style the text cell as a list item and remove its padding */
+.compact-ambox table .mbox-text {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.compact-ambox table .mbox-text-span {
+    display: list-item;
+    line-height: 1.5em;
+    list-style-type: square;
+    list-style-image: url("en.wikipedia.org/w/skins/MonoBook/bullet.gif");
+}
+.skin-vector .compact-ambox table .mbox-text-span {
+    list-style-type: disc;
+    list-style-image: url("en.wikipedia.org/w/skins/Vector/images/bullet-icon.svg");
+    list-style-image: url("en.wikipedia.org/w/skins/Vector/images/bullet-icon.png")\9;
+}
+/* Allow for hiding text in compact form */
+.compact-ambox .hide-when-compact {
+    display: none;
+}
+
+/* Remove default styles for [[MediaWiki:Noarticletext]]. */
+div.noarticletext {
+    border: none;
+    background: transparent;
+    padding: 0;
+}
+
+/* Hide (formatting) elements from screen, but not from screenreaders */
+.visualhide {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* Bold save button */
+#wpSave {
+    font-weight: bold;
+}
+
+/* class hiddenStructure is defunct. See [[Wikipedia:hiddenStructure]] */
+.hiddenStructure {
+    display: inline !important;
+    color: #f00;
+    background-color: #0f0;
+}
+
+/* suppress missing interwiki image links where #ifexist cannot
+   be used due to high number of requests see .hidden-redlink on
+   [[m:MediaWiki:Common.css]] */
+.check-icon a.new {
+    display: none;
+    speak: none;
+}
+
+/* Removes underlines from certain links */
+.nounderlines a,
+.IPA a:link, .IPA a:visited {
+    text-decoration: none !important;
+}
+
+/* Standard Navigationsleisten, aka box hiding thingy
+   from .de.  Documentation at [[Wikipedia:NavFrame]]. */
+div.NavFrame {
+    margin: 0;
+    padding: 4px;
+    border: 1px solid #aaa;
+    text-align: center;
+    border-collapse: collapse;
+    font-size: 95%;
+}
+div.NavFrame + div.NavFrame {
+    border-top-style: none;
+    border-top-style: hidden;
+}
+div.NavPic {
+    background-color: #fff;
+    margin: 0;
+    padding: 2px;
+    /* @noflip */
+    float: left;
+}
+div.NavFrame div.NavHead {
+    line-height: 1.6em;
+    font-weight: bold;
+    background-color: #ccf;
+    position: relative;
+}
+div.NavFrame p,
+div.NavFrame div.NavContent,
+div.NavFrame div.NavContent p {
+    font-size: 100%;
+}
+div.NavEnd {
+    margin: 0;
+    padding: 0;
+    line-height: 1px;
+    clear: both;
+}
+a.NavToggle {
+    position: absolute;
+    top: 0;
+    /* @noflip */
+    right: 3px;
+    font-weight: normal;
+    font-size: 90%;
+}
+
+/* Hatnotes and disambiguation notices */
+.hatnote {
+    font-style: italic;
+}
+.hatnote i {
+    font-style: normal;
+}
+div.hatnote {
+    /* @noflip */
+    padding-left: 1.6em;
+    margin-bottom: 0.5em;
+}
+div.hatnote + div.hatnote {
+    margin-top: -0.5em;
+}
+
+/* Allow transcluded pages to display in lists rather than a table.
+   Compatible in Firefox; incompatible in IE6. */
+.listify td    { display: list-item; }
+.listify tr    { display: block; }
+.listify table { display: block; }
+
+/* Geographical coordinates defaults. See [[Template:Coord/link]]
+   for how these are used. The classes "geo", "longitude", and
+   "latitude" are used by the [[Geo microformat]]. */
+.geo-default, .geo-dms, .geo-dec  { display: inline; }
+.geo-nondefault, .geo-multi-punct { display: none; }
+.longitude, .latitude             { white-space: nowrap; }
+
+/* Temporary(!) fix for horizontal TOC in Blink (Chrone/Opera) */
+.hlist .tocnumber,
+.hlist .toctext {
+    display: inline;
+}
+/* When <div class="nonumtoc"> is used on the table of contents,
+   the ToC will display without numbers */
+.nonumtoc .tocnumber {
+    display: none;
+}
+.nonumtoc #toc ul,
+.nonumtoc .toc ul {
+    line-height: 1.5em;
+    list-style: none none;
+    margin: .3em 0 0;
+    padding: 0;
+}
+.hlist.nonumtoc #toc ul ul,
+.hlist.nonumtoc .toc ul ul {
+    /* @noflip */
+    margin: 0;
+}
+
+/* Allow limiting of which header levels are shown in a TOC;
+   <div class="toclimit-3">, for instance, will limit to
+   showing ==headings== and ===headings=== but no further
+   (as long as there are no =headings= on the page, which
+   there shouldn't be according to the MoS). */
+.toclimit-2 .toclevel-1 ul,
+.toclimit-3 .toclevel-2 ul,
+.toclimit-4 .toclevel-3 ul,
+.toclimit-5 .toclevel-4 ul,
+.toclimit-6 .toclevel-5 ul,
+.toclimit-7 .toclevel-6 ul {
+    display: none;
+}
+
+/* Styling for Template:Quote */
+blockquote.templatequote div.templatequotecite {
+    line-height: 1.5em;
+    /* @noflip */
+    text-align: left;
+    /* @noflip */
+    padding-left: 1.6em;
+    margin-top: 0;
+}
+
+/* User block messages */
+div.user-block {
+    padding: 5px;
+    margin-bottom: 0.5em;
+    border: 1px solid #A9A9A9;
+    background-color: #FFEFD5;
+}
+
+/* Prevent line breaks in silly places:
+   1) Where desired
+   2) Links when we don't want them to
+   3) Bold "links" to the page itself
+   4) Ref tags with group names <ref group="Note"> --> "[Note 1]" */
+.nowrap,
+.nowraplinks a,
+.nowraplinks .selflink,
+sup.reference a {
+    white-space: nowrap;
+}
+.nowrap pre {
+    white-space: pre;
+}
+/* But allow wrapping where desired: */
+.wrap,
+.wraplinks a {
+    white-space: normal;
+}
+
+/* For template documentation */
+.template-documentation {
+    clear: both;
+    margin: 1em 0 0 0;
+    border: 1px solid #aaa;
+    background-color: #ecfcf4;
+    padding: 1em;
+}
+
+/* Inline divs in ImageMaps (code borrowed from de.wiki) */
+.imagemap-inline div {
+    display: inline;
+}
+
+/* Increase the height of the image upload box */
+#wpUploadDescription {
+    height: 13em;
+}
+
+/* Minimum thumb width */
+.thumbinner {
+    min-width: 100px;
+}
+
+/* Makes the background of a framed image white instead of gray.
+   Only visible with transparent images. */
+div.thumb .thumbimage {
+    background-color: #fff;
+}
+
+/* The backgrounds for galleries. */
+div#content .gallerybox div.thumb {
+    /* Light gray padding */
+    background-color: #F9F9F9;
+}
+/* Put a chequered background behind images, only visible if they have transparency.
+   '.filehistory a img' and '#file img:hover' are handled by MediaWiki core (as of 1.19) */
+.gallerybox .thumb img {
+    background: #fff url("upload.wikimedia.org/wikipedia/commons/5/5d/Checker-16x16.png") repeat;
+}
+/* But not on articles, user pages, portals or with opt-out. */
+.ns-0 .gallerybox .thumb img,
+.ns-2 .gallerybox .thumb img,
+.ns-100 .gallerybox .thumb img,
+.nochecker .gallerybox .thumb img {
+    background: #fff;
+}
+
+/* Prevent floating boxes from overlapping any category listings,
+   file histories, edit previews, and edit [Show changes] views. */
+#mw-subcategories, #mw-pages, #mw-category-media,
+#filehistory, #wikiPreview, #wikiDiff {
+    clear: both;
+}
+
+body.rtl #mw-articlefeedbackv5, body.rtl #mw-articlefeedback {
+    display: block;   /* Override inline block mode */
+    margin-bottom: 1em;
+    /* @noflip */
+    clear: right;     /* Clear any info boxes that stick out */
+    /* @noflip */
+    float: right;     /* Prevents margin collapsing */
+}
+
+/* Selectively hide headers in WikiProject banners */
+.wpb .wpb-header             { display: none; }
+.wpbs-inner .wpb .wpb-header { display: block; }     /* for IE */
+.wpbs-inner .wpb .wpb-header { display: table-row; } /* for real browsers */
+.wpbs-inner .wpb-outside     { display: none; }      /* hide things that should only display outside shells */
+
+/* Styling for Abuse Filter tags */
+.mw-tag-markers {
+    font-style:italic;
+    font-size:90%;
+}
+
+/* Hide stuff meant for accounts with special permissions. Made visible again in
+   [[MediaWiki:Group-sysop.css]], [[MediaWiki:Group-accountcreator.css]],
+   [[MediaWiki:Group-templateeditor.css]] and [[Mediawiki:Group-autoconfirmed.css]]. */
+.sysop-show,
+.accountcreator-show,
+.templateeditor-show,
+.autoconfirmed-show {
+    display: none;
+}
+
+/**
+ * Hide the redlink generated by {{Editnotice}},
+ * this overrides the ".sysop-show { display: none; }" above that applies
+ * to the same link as well.
+ *
+ * See [[Phabricator:45013]].
+ */
+.ve-ui-mwNoticesPopupTool-item .editnotice-redlink, .mw-ve-editNotice .editnotice-redlink {
+    display: none !important;
+}
+
+/* Remove bullets when there are multiple edit page warnings */
+ul.permissions-errors > li {
+    list-style: none none;
+}
+ul.permissions-errors {
+    margin: 0;
+}
+
+/* No linewrap on the labels of the login/signup page */
+body.page-Special_UserLogin .mw-label label,
+body.page-Special_UserLogin_signup .mw-label label {
+    white-space: nowrap;
+}
+
+/* Pie chart test: Transparent borders */
+.transborder {
+    border: solid transparent;
+}
+* html .transborder {  /* IE6 */
+    border: solid #000001;
+    filter: chroma(color=#000001);
+}
+
+/* Generic class for Times-based serif, texhtml class for inline math */
+.times-serif,
+span.texhtml {
+    font-family: "Nimbus Roman No9 L", "Times New Roman", Times, serif;
+    font-size: 118%;
+    line-height: 1;
+}
+span.texhtml {
+    white-space: nowrap;
+}
+span.texhtml span.texhtml {
+    font-size: 100%;
+}
+span.mwe-math-mathml-inline {
+    font-size: 118%;
+}
+
+/* Force tabular and lining display for digits and texhtml */
+.digits,
+.texhtml {
+    -moz-font-feature-settings: "lnum", "tnum", "kern" 0;
+    -webkit-font-feature-settings: "lnum", "tnum", "kern" 0;
+    font-feature-settings: "lnum", "tnum", "kern" 0;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-kerning: none;
+}
+
+/* Make <math display="block"> be left aligned with one space indent for compatibility with style conventions */
+.mwe-math-fallback-image-display,
+.mwe-math-mathml-display {
+    margin-left: 1.6em !important;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+}
+.mwe-math-mathml-display math {
+    display: inline;
+}
+
+/* Fix styling of transcluded prefindex tables */
+table#mw-prefixindex-list-table,
+table#mw-prefixindex-nav-table {
+    width: 98%;
+}
+
+/* For portals, added 2011-12-07 -bv
+   On wide screens, show these as two columns
+   On narrow and mobile screens, let them collapse into a single column */
+.portal-column-left {
+    float: left;
+    width: 50%;
+}
+.portal-column-right {
+    float: right;
+    width: 49%;
+}
+.portal-column-left-wide {
+    float: left;
+    width: 60%;
+}
+.portal-column-right-narrow {
+    float: right;
+    width: 39%;
+}
+.portal-column-left-extra-wide {
+    float: left;
+    width: 70%;
+}
+.portal-column-right-extra-narrow {
+    float: right;
+    width: 29%;
+}
+@media only screen and (max-width: 800px) {
+    /* Decouple the columns on narrow screens */
+    .portal-column-left,
+    .portal-column-right,
+    .portal-column-left-wide,
+    .portal-column-right-narrow,
+    .portal-column-left-extra-wide,
+    .portal-column-right-extra-narrow {
+        float: inherit;
+        width: inherit;
+    }
+}
+
+/* Formerly for announcements, now used intermittently */
+#bodyContent .letterhead {
+    background-image:url('upload.wikimedia.org/wikipedia/commons/e/e0/Tan-page-corner.png');
+    background-repeat:no-repeat;
+    padding: 2em;
+    background-color: #faf9f2;
+}
+
+/* Tree style lists */
+.treeview ul {
+    padding: 0;
+    margin: 0;
+}
+.treeview li {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    list-style-image: none;
+    zoom: 1; /* BE KIND TO IE6 */;
+}
+.treeview li li {
+    background: url("upload.wikimedia.org/wikipedia/commons/f/f2/Treeview-grey-line.png") no-repeat 0 -2981px;
+    /* @noflip */
+    padding-left: 20px;
+    text-indent: 0.3em;
+}
+.treeview li li.lastline {
+    background-position: 0 -5971px
+}
+.treeview li.emptyline > ul {
+    /* @noflip */
+    margin-left: -1px;
+}
+.treeview li.emptyline > ul > li:first-child {
+    background-position: 0 9px
+}
+
+/* hidden sortkey for tablesorter */
+td .sortkey,
+th .sortkey {
+    display: none;
+    speak: none;
+}
+
+/* Make it possible to hide checkboxes in <inputbox> */
+.inputbox-hidecheckboxes form .inputbox-element {
+    display: none !important;
+}
+
+/* Work-around for [[Phabricator:25965]] (Kaltura advertisement) */
+.k-player .k-attribution {
+    visibility: hidden;
+}
+
+/* Move 'play' button of video player to bottom left corner */
+.PopUpMediaTransform a .play-btn-large {
+    margin: 0;
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0;
+}
+
+/* Workaround to keep editnotices readable in VE view.
+   Long term, editnotices should become a core feature so that they can be designed responsive. */
+.mw-ve-editNotice .mbox-image {
+    display: none;
+}
+
+/*XOWA:MediaWiki:Vector.css*/
+/* Don't display some stuff on the main page */
+.page-Main_Page #deleteconfirm,
+.page-Main_Page #t-cite,
+.page-Main_Page #footer-info-lastmod,
+.action-view.page-Main_Page #siteSub,
+.action-view.page-Main_Page #contentSub,
+.action-view.page-Main_Page .firstHeading {
+    display: none !important;
+}
+
+/* Position coordinates */
+#coordinates {
+    position: absolute;
+    top: 0;
+    right: 0;
+    float: right;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5em;
+    text-align: right;
+    text-indent: 0;
+    font-size: 85%;
+    text-transform: none;
+    white-space: nowrap;
+}
+
+/* FR topicon position */
+div.flaggedrevs_short {
+    position: absolute;
+    top: -3em;
+    right: 100px;
+    z-index: 1;
+}
+
+/* Menu over FR box */
+div.vectorMenu div {
+    z-index: 2;
+}
+
+/* Display "From Wikipedia, the free encyclopedia" */
+#siteSub {
+    display: block;
+    font-size: 92%;
+}
+
+/* Move page status indicators down slightly */
+.mw-body .mw-indicators {
+    padding-top: 0.4em;
+}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="212.64893"
+   height="212.21236"
+   id="svg5027"
+   sodipodi:version="0.32"
+   inkscape:version="0.48.3.1 r9886"
+   version="1.0"
+   sodipodi:docname="Maailmanperintökohde_772b_tunnusosa.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <defs
+     id="defs5029">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective5035" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.940625"
+     inkscape:cx="313.66577"
+     inkscape:cy="307.37542"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="851"
+     inkscape:window-height="883"
+     inkscape:window-x="821"
+     inkscape:window-y="22"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5032">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-278.51807,-151.71076)">
+    <g
+       id="g3256"
+       style="fill:#ffffff">
+      <path
+         id="path4532"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         d="M 379.37435,336.88446 L 379.37435,292.38904 L 345.0653,257.74978 L 385.59252,217.13301 L 425.33056,257.84493 L 390.82563,292.68008 L 390.93197,336.67737 C 391.4077,339.68851 391.9618,341.50191 394.01026,343.38246 C 396.58485,345.10072 399.1986,346.31525 403.16121,345.74436 C 407.15181,344.70894 406.03243,345.05595 409.84392,343.83581 C 450.27598,331.75769 474.64492,294.34236 474.79044,257.29083 C 472.71399,213.83644 444.69027,171.17121 385.02723,168.2944 C 333.57485,171.04808 299.93184,203.5941 295.20805,255.91958 C 295.28081,298.85906 325.11233,337.69601 368.02942,345.85071 C 373.21776,346.00182 376.15613,343.95894 377.48259,342.21831 C 378.78668,340.0747 379.35197,338.84898 379.37435,336.88446 z M 362.44931,327.28016 C 355.46436,324.66081 349.34694,321.45938 343.23512,317.67587 C 325.54889,303.64442 312.89427,285.95819 312.1331,257.74978 C 313.72822,220.07699 339.80981,185.61682 385.77722,184.65975 C 424.60296,185.60003 457.73106,215.51551 457.88218,258.20873 C 457.93815,291.9189 435.20911,317.89415 407.73389,326.98912 L 407.82344,326.82121 L 407.73389,326.40145 L 407.73389,299.37398 L 448.77602,257.74978 L 385.31827,194.1689 L 321.27845,257.74978 L 362.44931,298.91503 L 362.634,327.55441 L 362.44931,327.28016" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+<svg style="shape-rendering:auto" xmlns="http://www.w3.org/2000/svg" height="96" width="128" version="1.1" viewBox="0 0 128 96">
+ <desc>Loudspeaker</desc>
+<!-- Authors: Graphic design: Jeff Bonham (silsor) / SVG Code: Gennaro Prota
+      License: See http://en.wikipedia.org/wiki/Image:Sound-icon.svg -->
+ <defs>
+  <style type="text/css"><![CDATA[
+    .basket      {fill:#191919;fill-opacity:0.9}
+    .wave_outer  {fill:#7f7f7f;fill-opacity:0.4}
+    .wave_middle {fill:#4c4c4c;fill-opacity:0.6}
+    .wave_inner  {fill:#191919;fill-opacity:0.7}
+    .magnet      {fill:url(#id0)}
+    .diaphragm   {fill:url(#id1)}
+    .surround    {fill:url(#id2)}
+    .in          {fill:url(#id3)}
+    .out         {fill:url(#id4)}
+   ]]></style>
+  <linearGradient id="id0" y2="22" gradientUnits="userSpaceOnUse" x2="21.784" y1="74.003" x1="21.784">
+   <stop stop-color="#fff" offset="0"/>
+   <stop stop-color="#aaa9a9" offset="1"/>
+  </linearGradient>
+  <linearGradient id="id1" y2="48" gradientUnits="userSpaceOnUse" x2="14" y1="48" x1="60">
+   <stop stop-color="#6b6b6b" offset="0"/>
+   <stop stop-color="#909090" offset=".4"/>
+   <stop stop-color="#fff" offset="1"/>
+  </linearGradient>
+  <linearGradient id="id2" y2="48" gradientUnits="userSpaceOnUse" x2="12" y1="48" x1="62">
+   <stop stop-color="#dededd" offset="0"/>
+   <stop stop-color="#c4c4c3" offset=".32157"/>
+   <stop stop-color="#7a7a7a" offset="1"/>
+  </linearGradient>
+  <linearGradient id="id3" y2="46.715" gradientUnits="userSpaceOnUse" x2="32.774" y1="46.715" x1="45.367">
+   <stop stop-color="#fff" offset="0"/>
+   <stop stop-color="#d4d4d4" offset=".32157"/>
+   <stop stop-color="#c2c1c1" offset="1"/>
+  </linearGradient>
+  <linearGradient id="id4" y2="48.001" gradientUnits="userSpaceOnUse" x2="24.023" y1="48.001" x1="47.978">
+   <stop stop-color="#c3c3c3" offset="0"/>
+   <stop stop-color="#555" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g id="speaker_icon">
+  <path id="bottom_plate" d="m21.345 20c-11.769 0-21.345 12.561-21.345 27.999 0 15.44 9.5758 28.001 21.345 28.001 11.764 0 21.336-12.56 21.336-28.001 0-15.437-9.5716-27.999-21.336-27.999z" class="basket"/>
+  <path id="magnet" d="m21.785 74.003c-10.928 0-19.785-11.639-19.785-26.003 0-14.362 8.8562-26 19.785-26 10.924 0 19.782 11.638 19.782 26s-8.858 26.003-19.782 26.003z" class="magnet"/>
+  <path id="basket" d="m37 0c-14.887 0-26.998 21.088-26.998 47.007 0 25.922 12.112 48.993 26.998 48.993 14.888 0.0011338 27-23.07 27-48.993 0-25.919-12.111-47.007-27-47.007z" class="basket"/>
+  <path id="surround" d="m37 91.999c-13.808 0-25.001-19.702-25.001-44.001 0-24.298 11.193-43.998 25.001-43.998 13.807 0 25 19.701 25 43.998 0 24.299-11.192 44.001-25 44.001z" class="surround"/>
+  <path id="diaphragm" d="m37 90c-12.701 0-23-18.804-23-42 0-23.197 10.299-41.999 23-41.999 12.703 0 23 18.804 23 41.999 0 23.197-10.297 42-23 42z" class="diaphragm"/>
+  <g id="dust_cup">
+   <ellipse id="in" rx="6.2966" ry="10.554" class="in" cy="46.715" cx="39.07"/>
+   <path id="out" d="m36 68.063c-6.6153 0-11.978-8.9828-11.978-20.063 0-11.079 5.362-20.06 11.978-20.06 6.6142 0 11.978 8.9813 11.978 20.06 0 11.08-5.3639 20.063-11.978 20.063z" class="out"/>
+  </g>
+  <path id="wave_inner" d="m77.044 16.433c14.542 15.731 14.675 43.886 0 62.715-3.8048 1.9642-10.434 0.21959-8.7855-2.0999 11.962-16.541 11.821-44.668 0-58.27-1.6301-2.3913 6.3632-3.4397 8.7855-2.3459z" class="wave_inner"/>
+  <path id="wave_middle" d="m97.044 8.5417c14.542 19.666 14.675 54.865 0 78.405-3.8041 2.4556-10.433 0.27515-8.7851-2.6249 11.962-20.679 11.821-55.843 0-72.847-1.6309-2.9892 6.3628-4.3007 8.7851-2.9329v-0.00037795z" class="wave_middle"/>
+  <path id="wave_outer" d="m117.04 0.66066c14.542 23.594 14.675 65.822 0 94.062-3.8048 2.9465-10.434 0.32995-8.7855-3.1495 11.962-24.808 11.821-66.994 0-87.393-1.6301-3.5864 6.3632-5.1594 8.7855-3.5191z" class="wave_outer"/>
+ </g>
+</svg>
