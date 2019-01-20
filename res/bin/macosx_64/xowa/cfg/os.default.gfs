@@ -1,0 +1,55 @@
+/*
+Note the following:
+* XOWA does not run /xowa/bin/[OS_NAME]/xowa/cfg/os.default.gfs
+* XOWA does run     /xowa/user/anonymous/app/cfg/os.gfs
+
+When XOWA starts, it will check for an os.gfs file
+* If os.gfs doesn't exist, it will copy os.default.gfs to os.gfs
+* If os.gfs does exist, it won't do anything. In other words, it'll leave the existing os.gfs in place.
+
+After the check, XOWA will then run os.gfs.
+
+The current contents of os.gfs are entirely path-related. If the paths are different on you system, feel free to change them.
+*/
+app.scripts.fail_if_unhandled = 'n';
+
+app.gui {
+  browser_type    = 'webkit';                           // 'mozilla' or 'webkit'
+  xul_runner_path = '~{<>bin_plat_dir<>}xulrunner/v31'; // path should be set to xulrunner location; '~{<>bin_plat_dir<>}xulrunner/' defaults to '/xowa/bin/platform_name/xulrunner/' (EX: on Windows 'C:\xowa\bin\windows_64\xulrunner\')
+}
+app.cfg {
+  // import apps
+  set_dflt('xowa.bldr.import.apps.bz2_stdout.cmd'      , <:{'bzip2|-dkc "~{src}"'}:>);    // c=stdout
+  set_dflt('xowa.bldr.import.apps.bz2'                 , <:{'bzip2|-dk "~{src}"'}:>);     // d=decompress k=keep file (don't delete)
+  set_dflt('xowa.bldr.import.apps.gz'                  , <:{'/usr/bin/gunzip|"~{src}"'}:>);
+  
+  // file viewer apps
+  set_dflt('xowa.files.apps.view.web'                  , <:{'/usr/bin/firefox|"~{url}"'}:>);
+  set_dflt('xowa.files.apps.view.media'                , <:{'/usr/bin/vlc|"~{file}"'}:>);
+  set_dflt('xowa.files.apps.view.image'                , <:{'/usr/bin/gimp|"~{file}"'}:>);
+  set_dflt('xowa.files.apps.view.svg'                  , <:{'/usr/bin/gimp|"~{file}"'}:>);
+  set_dflt('xowa.files.apps.view.pdf'                  , <:{'/usr/bin/evince|"~{file}"'}:>);
+  set_dflt('xowa.files.apps.view.djvu'                 , <:{'|"~{file}"'}:>);
+
+  // file maker apps
+  set_dflt('xowa.files.apps.make.img_size_get'         , <:{'/usr/bin/identify|-ping -format "<{%w,%h}>" "~{file}"'}:>);                          // <{ and }> is hard-coded; do not change without changing source
+  set_dflt('xowa.files.apps.make.img_size_set'         , <:{'/usr/bin/convert|"~{source}" -coalesce -resize ~{width}x~{height} "~{target}"'}:>);  // coalesce needed for some gifs; EX:w.Chess:[[File:ChessCastlingMovie.gif|thumb|250px|Examples of castling]]
+  set_dflt('xowa.files.apps.make.svg_to_png'           , <:{'/usr/bin/inkscape|-z -w ~{width} -f "~{source}" -e "~{target}"'}:>);
+  set_dflt('xowa.files.apps.make.djvu_to_tiff'         , <:{'/usr/bin/ddjvu|-format=tiff -page=1 "~{source}" "~{target}"'}:>);
+  
+  // html utility app
+  set_dflt('xowa.html.tidy.cmd'                        , <:{'~{<>bin_plat_dir<>}tidy/tidy|-utf8 --force-output y --quiet y --tidy-mark n --doctype '' --wrap 0 --indent y --quote-nbsp y --literal-attributes y --wrap-attributes n --fix-url n --fix-backslash n --enclose-block-text y -o "~{target}" "~{source}"'}:>);
+
+  // Scribunto extension
+  set_dflt('xowa.addon.scribunto.lua.cmd'              , <:{'~{<>bin_plat_dir<>}lua/lua5.1.exe|'}:>);
+
+  // Math extension
+  set_dflt('xowa.addon.math.apps.tex_to_dvi'           , <:{'/usr/bin/latex|-quiet -output-directory="/tmp/" -job-name=xowa_math_temp "~{tex_file}"'}:>);
+  set_dflt('xowa.addon.math.apps.dvi_to_png'           , <:{'/usr/bin/dvipng|"/tmp/xowa_math_temp.dvi" -o "~{png_file}" -q* -T tight -bg Transparent'}:>);
+
+  // Score extension
+  set_dflt('xowa.addon.score.apps.lilypond'            , <:{'/usr/bin/lilypond|"-dsafe=#t" -dbackend=ps --png --header=texidoc -dmidi-extension=midi "~{file}"'}:>);
+  set_dflt('xowa.addon.score.apps.abc2ly'              , <:{'/usr/bin/python|abc2ly -s "--output=~{target}" "~{source}"'}:>);
+  set_dflt('xowa.addon.score.apps.trim_img'            , <:{'/usr/bin/convert|-trim "~{source}" "~{target}"'}:>);
+  set_dflt('xowa.addon.score.apps.midi_to_ogg'         , <:{'~{<>bin_plat_dir<>}timidity/timidity|-Ov "--output-file=~{target}" "~{source}"'}:>);
+}

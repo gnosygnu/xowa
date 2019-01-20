@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="create_jar" name="create runnable jar">
     <target name="create_jar">
-        <jar destfile="${xowa_jar_name}">
+        <jar destfile="${xowa_jar_path}">
             <manifest>
                 <attribute name="Main-Class" value="gplx.xowa.Xowa_main"/>
                 <attribute name="Class-Path" value=". bin/${plat_name}/swt/swt.jar bin/any/java/apache/commons-compress-1.5.jar bin/any/java/jdbc/sqlite/sqlite-jdbc-3.18.0.jar bin/any/java/luaj/luaj_xowa.jar bin/any/java/jtidy/jtidy_xowa.jar bin/any/java/xz/xz-1.5.jar bin/any/java/icu4j/icu4j-4_8.jar bin/any/java/lucene/5.3.0.drd/lucene-core-5.3.0-mobile-2.jar bin/any/java/lucene/5.3.0.drd/lucene-highlighter-5.3.0-mobile-2.jar bin/any/java/lucene/5.3.0.drd/lucene-memory-5.3.0-mobile-2.jar bin/any/java/lucene/5.3.0.drd/lucene-queryparser-5.3.0-mobile-2.jar bin/any/java/lucene/5.3.0.drd/lucene-analyzers-common-5.3.0-mobile-2.jar bin/any/java/lucene/5.3.0.drd/lucene-queries-5.3.0-mobile-2.jar"/>
             </manifest>
-            <fileset dir="${src_dir}/100_core/bin"/>
-            <fileset dir="${src_dir}/110_gfml/bin"/>
-            <fileset dir="${src_dir}/140_dbs/bin"/>
-            <fileset dir="${src_dir}/150_gfui/bin"/>
-            <fileset dir="${src_dir}/400_xowa/bin"/>
-            <fileset dir="${src_dir}/gplx.gflucene/bin"/>
+            <fileset dir="${root_dir}/src/100_core/bin"/>
+            <fileset dir="${root_dir}/src/110_gfml/bin"/>
+            <fileset dir="${root_dir}/src/140_dbs/bin"/>
+            <fileset dir="${root_dir}/src/150_gfui/bin"/>
+            <fileset dir="${root_dir}/src/400_xowa/bin"/>
+            <fileset dir="${root_dir}/src/gplx.gflucene/bin"/>
         </jar>
     </target>
 </project>
