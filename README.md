@@ -35,16 +35,23 @@ XOWA is written in Java and requires 1.7 or above.
    * On '''OS X''', open a terminal and run <code>sh /Users/your_user_name/xowa/xowa_macosx_64.sh</code>
 
 ## Development Info
-### Dependencies
-XOWA has seven dependencies:
+### Compilation instructions (Command-line)
+#### REQUIREMENTS
+* Java JDK 1.7 (or higher): https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+* Apache Ant 1.9.13 (or higher): https://ant.apache.org/bindownload.cgi
+* A ROOT_DIR directory on your file-system
+* (Windows) cygwin: https://www.cygwin.com/
+* (Mac OS X) wget via homebrew (or just download the file manually): https://stackoverflow.com/questions/33886917/how-to-install-wget-in-macos
 
-* JUnit 4.8.2 (default version with Eclipse)
-* [SWT 4.5.1](http://download.eclipse.org/eclipse/downloads/drops4/R-4.5-201506032000/)
-* [LuaJ](https://github.com/gnosygnu/luaj_xowa)
-* [JTidy](https://github.com/gnosygnu/jtidy_xowa jtidy_xowa.jar)
-* [SQLite JDBC](https://bitbucket.org/xerial/sqlite-jdbc/downloads)
-* [MySQL JDBC](https://dev.mysql.com/downloads/connector/j/)
-* [Postgres JDBC](https://jdbc.postgresql.org/download.html)
+#### PROCESS
+* Copy-paste https://github.com/gnosygnu/xowa/blob/master/xowa_get_and_make.sh to a plain-text file; EX: /cygdrive/c/xowa_dev/xowa_get_and_make.sh
+* Adjust these environment variables to your system: PLAT_NAME, ROOT_DIR, ANT_BINARY, JAVA_JDK_DIR
+* cd to your ROOT_DIR
+* Run the file using "sh xowa_get_and_make.sh"
+* Run the xowa_dev.jar
+  * (Windows)  java -jar xowa_dev.jar
+  * (Linux)    SWT_GTK3=0 && java -jar xowa_dev.jar
+  * (Mac OS X) java -Xmx256m -d64 -XstartOnFirstThread -jar xowa_dev.jar
 
 ### Compilation instructions (ANT command-line)
 #### Setup the XOWA app
