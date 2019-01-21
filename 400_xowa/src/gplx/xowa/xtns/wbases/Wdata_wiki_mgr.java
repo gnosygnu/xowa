@@ -122,12 +122,14 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	}
 	public byte[] Popup_text(Xoae_page page) {
 		Hwtr_mgr_assert();
-		Wdata_doc wdoc = Doc_mgr.Get_by_exact_id_or_null(page.Ttl().Full_db());			 
+		Wdata_doc wdoc = Doc_mgr.Get_by_exact_id_or_null(page.Ttl().Full_db());
+		if (wdoc == null) return Bry_.Empty;
 		return hwtr_mgr.Popup(wdoc);
 	}
 	public void Write_json_as_html(Bry_bfr bfr, Xoa_ttl page_ttl, byte[] data_raw) {
 		Hwtr_mgr_assert();
 		Wdata_doc wdoc = Doc_mgr.Get_by_exact_id_or_null(page_ttl.Full_db());
+		if (wdoc == null) return;
 		hwtr_mgr.Init_by_wdoc(wdoc);
 		bfr.Add(hwtr_mgr.Write(wdoc));
 	}
