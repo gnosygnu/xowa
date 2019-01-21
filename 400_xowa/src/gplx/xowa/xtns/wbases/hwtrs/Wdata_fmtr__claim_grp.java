@@ -280,7 +280,7 @@ class Wdata_fmtr__ref_row implements gplx.core.brys.Bfr_arg {
 	, "                            <div class='wikibase-snakview'>"
 	, "                              <div class='wikibase-snakview-property-container'>"
 	, "                                <div class='wikibase-snakview-property' dir='auto'>"
-	, "                                  <a href='/wiki/Property:~{pid}' title='Property:~{pid}'>~{pid_lbl}</a>"
+	, "                                  <a href='/wiki/Property:~{pid}' title='Property:P~{pid}'>~{pid_lbl}</a>"
 	, "                                </div>"
 	, "                              </div>"
 	, "                              <div class='wikibase-snakview-value-container' dir='auto'>"
