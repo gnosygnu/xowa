@@ -4,11 +4,10 @@
 # ** Apache Ant 1.9.13 (or higher): https://ant.apache.org/bindownload.cgi
 # ** A ROOT_DIR directory on your file-system
 # ** (Windows) cygwin: https://www.cygwin.com/
-# ** (Mac OS X) wget via homebrew (or just download the file manually): https://stackoverflow.com/questions/33886917/how-to-install-wget-in-macos
 #
 # * PROCESS
 # ** Copy-paste this file to a plain-text file; EX: /cygdrive/c/xowa_dev/xowa_get_and_make.sh
-# ** Adjust these environment variables to your system: PLAT_NAME, ROOT_DIR, ANT_BINARY, JAVA_JDK_DIR
+# ** Adjust these environment variables to your system: PLAT_NAME, ROOT_DIR, ANT_BINARY, JAVA_HOME
 # ** cd to your ROOT_DIR
 # ** Run the file using "sh xowa_get_and_make.sh"
 # ** Run the xowa_dev.jar
@@ -24,11 +23,11 @@ PLAT_NAME=windows_64
 ROOT_DIR=c:/xowa_dev
 # these directories MUST be changed to wherever they exist on your system
 ANT_BINARY=/cygdrive/c/dev/apache_ant/bin/ant
-JAVA_JDK_DIR=/cygdrive/c/dev/java/jdk_1_7_x64
+JAVA_HOME=/cygdrive/c/dev/java/jdk_1_7_x64
 
 # == DOWNLOAD XOWA SOURCE ==
 # get src and unzip
-wget https://api.github.com/repos/gnosygnu/xowa/tarball/master
+curl -LO https://api.github.com/repos/gnosygnu/xowa/tarball/master
 mkdir src
 # unzip; note that "strip 1" removes container folder EX: gnosygnu-123456
 tar -zxf master -C ./src --strip 1
