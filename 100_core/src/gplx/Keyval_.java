@@ -70,6 +70,14 @@ public class Keyval_ {
 		Ary__to_str__nest__ary(bfr, 0, true, ary);
 		return bfr.To_str_and_clear();
 	}
+	public static Object[] Ary__to_objary__val(Keyval[] ary) {
+		int ary_len = ary.length;
+		Object[] rv = new Object[ary_len];
+		for (int i = 0; i < ary_len; i++) {
+			rv[i] = ary[i].Val();
+		}
+		return rv;
+	}
 	private static void Ary__to_str__nest__ary(Bry_bfr bfr, int indent, boolean is_kv, Object[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {

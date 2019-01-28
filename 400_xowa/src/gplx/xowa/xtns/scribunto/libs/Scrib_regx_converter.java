@@ -37,6 +37,8 @@ public class Scrib_regx_converter {
 		int len = pat.length;
 		int grps_len = 0;
 		int bct = 0;
+
+		// REF.MW: https://github.com/wikimedia/mediawiki-extensions-Scribunto/blob/master/includes/engines/LuaCommon/UstringLibrary.php#L415
 		for (int i = 0; i < len; i++) {
 			int i_end = i + 1;
 			q_flag = false; // must be reset; REF.MW:UstringLibrary.php|patternToRegex; DATE:2014-02-08
@@ -44,24 +46,28 @@ public class Scrib_regx_converter {
 			switch (cur) {
 				case Byte_ascii.Pow:
 					q_flag = i != 0;
-					bfr.Add((anchor == Anchor_null || q_flag) ? Bry_pow_escaped : anchor);	// NOTE: must add anchor \G when using offsets; EX:cs.n:Category:1._zárí_2008; DATE:2014-05-07
+					bfr.Add((anchor == Anchor_null || q_flag) ? Bry_pow_escaped : anchor); // NOTE: must add anchor \G when using offsets; EX:cs.n:Category:1._zárí_2008; DATE:2014-05-07
 					break;
 				case Byte_ascii.Dollar:
 					q_flag = i < len - 1;
 					bfr.Add(q_flag ? Bry_dollar_escaped : Bry_dollar_literal);
 					break;
 				case Byte_ascii.Paren_bgn: {
+					// fail if "(EOS"
 					if (i + 1 >= len)
 						throw Err_.new_wo_type("Unmatched open-paren at pattern character " + Int_.To_str(i_end));
 					int grp_idx = grp_mgr.Capt__len() + 1;
-					boolean is_empty_capture = pat[i + 1] == Byte_ascii.Paren_end;	// current is "()"
+
+					// check for "()"; enables anypos flag
+					boolean is_empty_capture = pat[i + 1] == Byte_ascii.Paren_end;
 					if (is_empty_capture)
 						any_pos = true;
-					bfr.Add_byte(Byte_ascii.Paren_bgn); // $re .= "(?<m$n>";
 					grp_mgr.Capt__add__real(grp_idx, is_empty_capture);
+					bfr.Add_byte(Byte_ascii.Paren_bgn); // $re .= "(?<m$n>";
 					break;
 				}
 				case Byte_ascii.Paren_end:
+					// fail if ")" without preceding "("
 					if (grp_mgr.Open__len() <= 0)
 						throw Err_.new_wo_type("Unmatched close-paren at pattern character " + Int_.To_str(i_end));
 					grp_mgr.Open__pop();

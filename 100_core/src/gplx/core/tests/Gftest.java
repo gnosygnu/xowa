@@ -17,6 +17,7 @@ package gplx.core.tests; import gplx.*; import gplx.core.*;
 import gplx.core.brys.*;
 public class Gftest {
 	private static final    Bry_bfr bfr = Bry_bfr_.New();
+	public static void Eq__ary(Object[] expd, Object[] actl, String msg_fmt, Object... msg_args)      {Eq__array(Type_ids_.Id__obj, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary(boolean[] expd, boolean[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__bool, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary(int[] expd, int[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__int, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary(long[] expd, long[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__long, expd, actl, msg_fmt, msg_args);}
@@ -151,12 +152,14 @@ public class Gftest {
 	}
 	private static void Write__itm(Bry_bfr bfr, int type_id, Object ary, int len, int idx) {
 		if (idx < len) {
+			Object val = Array_.Get_at(ary, idx);
 			switch (type_id) {
-				case Type_ids_.Id__bool:	bfr.Add_yn(Bool_.Cast(Array_.Get_at(ary, idx))); break;
-				case Type_ids_.Id__bry:		bfr.Add_safe((byte[])Array_.Get_at(ary, idx)); break;
-				case Type_ids_.Id__long:	bfr.Add_long_variable(Long_.cast(Array_.Get_at(ary, idx))); break;
-				case Type_ids_.Id__int:		bfr.Add_int_variable(Int_.Cast(Array_.Get_at(ary, idx))); break;
-				case Type_ids_.Id__byte:	bfr.Add_int_variable((int)(Byte_.Cast(Array_.Get_at(ary, idx)))); break;
+				case Type_ids_.Id__bool:	bfr.Add_yn(Bool_.Cast(val)); break;
+				case Type_ids_.Id__bry:		bfr.Add_safe((byte[])val); break;
+				case Type_ids_.Id__long:	bfr.Add_long_variable(Long_.cast(val)); break;
+				case Type_ids_.Id__int:		bfr.Add_int_variable(Int_.Cast(val)); break;
+				case Type_ids_.Id__byte:	bfr.Add_int_variable((int)(Byte_.Cast(val))); break;
+				case Type_ids_.Id__obj:     bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(val)); break;
 				default:					throw Err_.new_unhandled_default(type_id);
 			}
 		}
@@ -182,6 +185,7 @@ public class Gftest {
 					case Type_ids_.Id__long:		eq = Long_.cast(expd_obj) == Long_.cast(actl_obj); break;
 					case Type_ids_.Id__int:			eq = Int_.Cast(expd_obj) == Int_.Cast(actl_obj); break;
 					case Type_ids_.Id__byte:		eq = Byte_.Cast(expd_obj) == Byte_.Cast(actl_obj); break;
+					case Type_ids_.Id__obj:         eq = Object_.Eq(expd_obj, actl_obj); break;
 				}
 			}
 			if (!eq) {

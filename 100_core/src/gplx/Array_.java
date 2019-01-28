@@ -54,6 +54,15 @@ public class Array_ {
 		Copy_to(src, 0, trg, 0, copy_len);
 		return trg;
 	}
+	public static Object Extract_by_pos(Object src, int src_bgn) { 
+		return Extract_by_pos(src, src_bgn, Array.getLength(src)); 
+	}
+	public static Object Extract_by_pos(Object src, int src_bgn, int src_end) { 
+		int trg_len = src_end - src_bgn;
+		Object trg = Create(Component_type(src), trg_len);       
+		Copy_to(src, src_bgn, trg, 0, src_end - src_bgn);
+		return trg;
+	}
 	public static List_adp To_list(Object ary) {	
 		int aryLen = Array_.Len(ary);
 		List_adp rv = List_adp_.New();

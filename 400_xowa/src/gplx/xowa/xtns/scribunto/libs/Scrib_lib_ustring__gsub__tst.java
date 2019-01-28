@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import org.junit.*; import gplx.langs.regxs.*; import gplx.xowa.xtns.scribunto.engines.mocks.*;
+import org.junit.*; import gplx.core.tests.*;
+import gplx.langs.regxs.*; import gplx.xowa.xtns.scribunto.engines.mocks.*;	
 public class Scrib_lib_ustring__gsub__tst {
 	private final    Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
 	@Before public void init() {
@@ -29,6 +30,9 @@ public class Scrib_lib_ustring__gsub__tst {
 		Exec_gsub("àbc", "^%s*(.-)%s*$"	, 1, "%1"		, "àbc;1");		// utf8; regx is for trim line
 		// TOMBSTONE: tested with local MW and {{#invoke:Test|test16|a|[^]|b}} -> Lua error: Missing close-bracket for character set beginning at pattern character 1.; DATE:2018-07-02
 		// Exec_gsub("a"	, "[^]"			, 1, "b"		, "a;0");		// invalid regx should not fail; should return self; DATE:2013-10-20
+	}
+	@Test  public void Find__int() {// PURPOSE: gsub with integer arg should not fail; DATE:2013-11-06
+		fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_gsub, Scrib_kv_utl_.base1_many_(1, "[1]", "2", 1), "2;1"); // NOTE: text is integer (lua / php are type-less)
 	}
 	@Test  public void Replace__none() {// PURPOSE: gsub with no replace argument should not fail; EX:d:'orse; DATE:2013-10-14
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_ustring.Invk_gsub, Object_.Ary("text", "regx")						, "text");	// NOTE: repl, limit deliberately omitted
@@ -99,6 +103,20 @@ public class Scrib_lib_ustring__gsub__tst {
 		Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\x]"));	// \0 matched by any_char
 		Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\X]"));	// \0 matched by !any_char
 	}
+	@Test   public void Luacbk__basic() {
+		String text = "ad2f1e3z";
+		String regx = "([1d])([2e])([3f])";
+		Mock_proc__verify_args proc = new Mock_proc__verify_args(0, new Object[]{"B", "d", "2", "f"}, new Object[]{"Y", "1", "e", "3"});
+		fxt.Init__cbk(proc);
+		Exec_gsub(text, regx, -1, proc.To_scrib_lua_proc(), "aBYz;2");
+	}
+	@Test   public void Luacbk__anypos() {
+		String text = "ad2f1e3z";
+		String regx = "()([1d])([2e])([3f])"; // "()" is anypos, which inserts find_pos to results
+		Mock_proc__verify_args proc = new Mock_proc__verify_args(0, new Object[]{"B", 1, "d", "2", "f"}, new Object[]{"Y", 4, "1", "e", "3"});
+		fxt.Init__cbk(proc);
+		Exec_gsub(text, regx, -1, proc.To_scrib_lua_proc(), "aBYz;2");
+	}
 	private void Exec_gsub(String text, Object regx, int limit, Object repl, String expd) {
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_gsub, Scrib_kv_utl_.base1_many_(text, regx, repl, limit), expd);
 	}
@@ -131,5 +149,19 @@ class Mock_proc__empty extends Mock_proc_fxt {	private final    String find, rep
 	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
 		String text = args[0].Val_to_str_or_empty();
 		return String_.Eq(text, find) ? Keyval_.Ary(Keyval_.new_("0", repl)) : Keyval_.Ary_empty;
+	}
+}
+class Mock_proc__verify_args extends Mock_proc_fxt {	private final    Object[][] expd_ary;
+	private int expd_idx = -1;
+	public Mock_proc__verify_args(int id, Object[]... expd_ary) {super(id, "number");
+		this.expd_ary = expd_ary;
+	}
+	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
+		Object[] expd_args = expd_ary[++expd_idx];
+		Object rv = expd_args[0];
+		expd_args = (Object[])Array_.Extract_by_pos(expd_args, 1);
+		Object[] actl_args = Keyval_.Ary__to_objary__val(args);
+		Gftest.Eq__ary(expd_args, actl_args, "failed lua_cbk");
+		return Keyval_.Ary(Keyval_.int_(0, rv));
 	}
 }
