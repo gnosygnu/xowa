@@ -148,13 +148,8 @@ public class Scrib_lib_language implements Scrib_lib {
 	public boolean FetchLanguageNames(Scrib_proc_args args, Scrib_proc_rslt rslt) {	
 		String lang_code = args.Cast_str_or_null(0);
 		String include = args.Cast_str_or(1, "mw");
-		Ordered_hash rv = core.App().Lang_mgr().Name_mgr().fetchLanguageNames(lang_code, include);			
-		return rslt.Init_obj(Scrib_kv_utl_.base1_list_(rv));
-		/*
-		// byte[] lang_code = args.Cast_bry_or_null(0);
-		// byte[] include = args.Form_bry_or(1, FetchLanguageNames_mw);
-		return rslt.Init_obj(core.Wiki().Cache_mgr().Scrib_lang_names()); // NOTE: return current language only; MW iterates over langs in wiki; XO is more complicated as technically all langs are available; need to map subset of langs per wiki, which is not trivial
-		*/
+		Ordered_hash hash = core.App().Lang_mgr().Name_mgr().fetchLanguageNames(lang_code, include);
+		return rslt.Init_obj((Keyval[])hash.To_ary(Keyval.class));
 	}
 	public boolean GetFallbacksFor(Scrib_proc_args args, Scrib_proc_rslt rslt) {	
 		byte[] lang_code = args.Pull_bry(0);

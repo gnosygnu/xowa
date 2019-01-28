@@ -35,15 +35,6 @@ public class Scrib_kv_utl_ {
 		Keyval[] rv = new Keyval[len];
 		for (int i = 0; i < len; i++)
 			rv[i] = Keyval_.int_(i + Scrib_core.Base_1, list.Get_at(i));
-		list.Clear();
-		return rv;
-	}
-	public static Keyval[] base1_list_(Ordered_hash list) {
-		int len = list.Count();
-		Keyval[] rv = new Keyval[len];
-		for (int i = 0; i < len; i++)
-			rv[i] = Keyval_.int_(i + Scrib_core.Base_1, list.Get_at(i));
-		list.Clear();
 		return rv;
 	}
 	public static Keyval[] flat_many_(Object... vals) {
