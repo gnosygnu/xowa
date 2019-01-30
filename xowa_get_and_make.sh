@@ -23,7 +23,17 @@ PLAT_NAME=windows_64
 ROOT_DIR=c:/xowa_dev
 # these directories MUST be changed to wherever they exist on your system
 ANT_BINARY=/cygdrive/c/dev/apache_ant/bin/ant
-JAVA_HOME=/cygdrive/c/dev/java/jdk_1_7_x64
+export JAVA_HOME=/cygdrive/c/dev/java/jdk_1_7_x64
+
+# == REMOVE PREVIOUS ARTIFACTS ==
+rm -rf ./master
+rm -rf ./src
+rm -rf ./dev
+rm -rf ./bin
+rm -rf ./file
+rm -rf ./user
+rm -rf ./wiki
+rm -rf ./xowa_dev.jar
 
 # == DOWNLOAD XOWA SOURCE ==
 # get src and unzip
