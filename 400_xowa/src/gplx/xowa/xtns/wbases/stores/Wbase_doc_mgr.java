@@ -73,12 +73,12 @@ public class Wbase_doc_mgr {
 		Wdata_doc rv = null;
 		synchronized (thread_lock) {
 			rv = doc_cache.Get_or_null(ttl_bry);
-		}
-		if (rv == null) {
-			// load from db
-			rv = Load_wdoc_or_null(ttl_bry); 
-			if (rv == null) return null;	// page not found
-			Add(ttl_bry, rv);// NOTE: use ttl_bry, not rv.Qid; allows subsequent lookups to skip this redirect cycle
+			if (rv == null) {
+				// load from db
+				rv = Load_wdoc_or_null(ttl_bry); 
+				if (rv == null) return null;	// page not found
+				Add(ttl_bry, rv);// NOTE: use ttl_bry, not rv.Qid; allows subsequent lookups to skip this redirect cycle
+			}
 		}
 		return rv;
 	}
