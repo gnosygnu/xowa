@@ -41,8 +41,8 @@ public class Cldr_name_loader {
 		// get file
 		Io_url url = (Io_url)urls_hash.Get_by(lang_key);
 		if (url == null) {
-			files_hash.Add(lang_key, Cldr_name_file.Empty);
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "no cldrName file exists for lang; lang=~{lang}", lang_key);
+			urls_hash.Add(lang_key, Cldr_name_file.Empty);
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "no cldrName file exists for lang; lang=~{0}", lang_key);
 			return Cldr_name_file.Empty;
 		}
 
