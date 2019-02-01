@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.btries.*; import gplx.core.brys.fmtrs.*; import gplx.xowa.parsers.tmpls.*;
+// NOTE: some ids (Id_xowa_wikidata*) are needed for unit-tests; ISSUE#:348
 public class Xol_msg_itm_ {
 public static final int
   Id_dte_dow_name_sunday = 0
