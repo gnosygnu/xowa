@@ -44,8 +44,9 @@ public class Xow_hdump_mgr__save {
 		return db_body.length;
 	}
 	public void Bld_hdump(Xoae_page page) {
-		page.File_queue().Clear();																	// need to reset uid to 0, else xowa_file_# will keep incrementing upwards
-		wiki.Html__wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_body(tmp_bfr, page.Wikie().Parser_mgr().Ctx(), Xoh_wtr_ctx.Hdump, page); // save as hdump_fmt
+		page.File_queue().Clear(); // need to reset uid to 0, else xowa_file_# will keep incrementing upwards
+		Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Hdump_by_hzip_tid(dflt_hzip_tid);
+		wiki.Html__wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_body(tmp_bfr, page.Wikie().Parser_mgr().Ctx(), hctx, page); // save as hdump_fmt
 		page.Db().Html().Html_bry_(tmp_bfr.To_bry_and_clear());
 	}
 	private byte[] Write(Xoh_hzip_bfr bfr, Xow_wiki wiki, Xoae_page page, Xoh_page hpg, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, int zip_tid, int hzip_tid, byte[] src) {

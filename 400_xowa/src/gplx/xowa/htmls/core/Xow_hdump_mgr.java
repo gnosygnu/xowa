@@ -41,7 +41,7 @@ public class Xow_hdump_mgr {
 		load_mgr.Init_by_wiki(wiki);
 	}
 	public void Init_by_db(byte dflt_zip_tid, boolean dflt_hzip_enable, boolean mode_is_b256) {
-		int dflt_hzip_tid = dflt_hzip_enable ? Xoh_hzip_dict_.Hzip__v1 : Xoh_hzip_dict_.Hzip__plain;
+		int dflt_hzip_tid = dflt_hzip_enable ? Xoh_hzip_dict_.Hzip__v1 : Xoh_hzip_dict_.Hzip__none;
 		save_mgr.Init_by_db(dflt_zip_tid, dflt_hzip_tid, Bool_.N);
 	}
 }

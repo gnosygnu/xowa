@@ -27,8 +27,8 @@ public class Xoh_file_fmtr__hdump extends Xoh_file_fmtr__basic {		private final 
 		byte[] data_xowa_title = Gfh_atr_.Make(tmp_bfr, Xoh_img_xoimg_data.Bry__data_xowa_title, a_xowa_title);
 		byte[] data_xowa_image = Bld_xowa_image_data(tmp_bfr, xfer_itm.Lnki_type(), xfer_itm.Lnki_w(), xfer_itm.Lnki_h(), xfer_itm.Lnki_upright(), xfer_itm.Lnki_time(), xfer_itm.Lnki_page());
 
-		// only write src="..." width="..." height="..." if orig is present
-		if (!xfer_itm.Orig_exists()) {
+		// only write src="..." width="..." height="..." if orig is present or if Hzip__none (Hzip__none should always write title and image)
+		if (!xfer_itm.Orig_exists() || hctx.Hzip_tid() == gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_.Hzip__none) {
 			img_w = img_h = 0;
 			img_src = Bry_.Empty;
 		}

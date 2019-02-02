@@ -81,13 +81,12 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 			src = zip_mgr.Unzip((byte)zip_tid, src);
 		switch (hzip_tid) {
 			case Xoh_hzip_dict_.Hzip__none:
-			case Xoh_hzip_dict_.Hzip__plain:
 				src = make_mgr.Parse(src, hpg, hpg.Wiki());
 				break;
-//				case Xoh_hzip_dict_.Hzip__plain:
-//					gplx.xowa.addons.wikis.pages.syncs.core.loaders.Xosync_page_loader page_loader = new gplx.xowa.addons.wikis.pages.syncs.core.loaders.Xosync_page_loader();
-//					src = page_loader.Parse(wiki, hpg, src);
-//					break;
+			case Xoh_hzip_dict_.Hzip__plain:
+				gplx.xowa.addons.wikis.pages.syncs.core.loaders.Xosync_page_loader page_loader = new gplx.xowa.addons.wikis.pages.syncs.core.loaders.Xosync_page_loader();
+				src = page_loader.Parse(wiki, hpg, src);
+				break;
 			case Xoh_hzip_dict_.Hzip__v1:
 				if (override_mgr__html != null)	// null when Parse is called directly
 					src = override_mgr__html.Get_or_same(hpg.Ttl().Page_db(), src);
