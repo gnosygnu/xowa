@@ -75,7 +75,10 @@ public class Scrib_lib_language_tst {
 		));
 	}
 	@Test  public void GetFallbacksFor_unknown() {
-		fxt.Test_scrib_proc_empty(lib, Scrib_lib_language.Invk_getFallbacksFor, Object_.Ary("unknown"));
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_language.Invk_getFallbacksFor, Object_.Ary("unknown"), String_.Concat_lines_nl
+		( "1="
+		, "  1=en" // use "en" if unknown; REF:/languages/Language.php|getFallbacksFor; ISSUE#:340; DATE:2019-02-01
+		));
 	}
 	@Test  public void FormatNum() {
 		Xol_lang_itm other_lang = fxt.Core().App().Lang_mgr().Get_by_or_new(Bry_.new_a7("de")).Init_by_load_assert();	// NOTE: must call Init_by_load_assert, else load will be called by scrib and sprs below will get overwritten during load;
