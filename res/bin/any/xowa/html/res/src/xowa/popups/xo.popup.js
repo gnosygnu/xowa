@@ -80,9 +80,10 @@ var XoPopupMgr = (function(){
       elems.focus(function(ev) {XoPopupMgr.prototype.ShowFocus($(this), ev);});
       elems.blur (function(ev) {XoPopupMgr.prototype.Hide($(this), ev);});
     }
-  }  
+  }
+  
   // NOTE: ".*/wiki/File:" is for HTTP: ("/en.wikipedia.org/wiki/File:...") and SWT ("/wiki/File:...")
-  XoPopupMgr.ProtocolPattern = /^(((http|https|ftp):\/\/)|(javascript:|xowa-cmd:|.*\/wiki\/File:|.*\/wiki\/Image:)|#cite_)/;
+  XoPopupMgr.ProtocolPattern = /^(((http|https|ftp|mailto):)|(javascript:|xowa-cmd:|.*\/wiki\/(File|Image|Category|Talk|User|Special):)|#cite_|\/fsys)/;
   XoPopupMgr.prototype.BindHoverToFilter = function(elems) {
     var array = [];
     var len = elems.length;
