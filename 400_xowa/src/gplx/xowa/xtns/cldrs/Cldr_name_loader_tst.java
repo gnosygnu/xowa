@@ -19,8 +19,13 @@ public class Cldr_name_loader_tst {
 	private final    Cldr_name_loader_fxt fxt = new Cldr_name_loader_fxt();
 	@Test   public void Load_file_is_null() {
 		fxt.Init__file("CldrNamesEn.json", "{}");
-		fxt.Test__load_file_is_null(Bool_.N, "En");
-		fxt.Test__load_file_is_null(Bool_.N, "en"); // NOTE: scrib will pass "en", but earlier implementation was trying to read CldrNamesen.json which failed on LNX; DATE:2018-10-14
+		fxt.Test__load_file_is_empty(Bool_.N, "En");
+		fxt.Test__load_file_is_empty(Bool_.N, "en"); // NOTE: scrib will pass "en", but earlier implementation was trying to read CldrNamesen.json which failed on LNX; DATE:2018-10-14
+	}
+	@Test   public void Hyphen() {
+		fxt.Init__file("CldrNamesEn_gb.json", "{}");
+		fxt.Test__load_file_is_empty(Bool_.N, "en-gb");
+		fxt.Test__load_file_is_empty(Bool_.Y, "en_gb");
 	}
 }
 class Cldr_name_loader_fxt {
@@ -30,8 +35,8 @@ class Cldr_name_loader_fxt {
 	public void Init__file(String fil_name, String txt) {
 		Io_mgr.Instance.SaveFilStr(Io_url_.new_fil_(Dir_name + fil_name), txt);
 	}
-	public void Test__load_file_is_null(boolean expd, String lang_key) {
+	public void Test__load_file_is_empty(boolean expd, String lang_key) {
 		Cldr_name_file name_file = name_loader.Load_or_empty(lang_key);
-		Gftest.Eq__bool(expd, name_file == null);
+		Gftest.Eq__bool(expd, name_file == Cldr_name_file.Empty);
 	}
 }

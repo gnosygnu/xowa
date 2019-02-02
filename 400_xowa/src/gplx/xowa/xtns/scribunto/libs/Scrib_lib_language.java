@@ -133,7 +133,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		String lang_code = args.Pull_str(0);
 		String inLanguage = args.Cast_str_or_null(1);
 		String include = args.Cast_str_or(2, null);
-		String rv = core.App().Lang_mgr().Name_mgr().fetchLanguageName(lang_code, inLanguage, include);
+		String rv = core.App().Lang_mgr().Name_mgr().fetchLanguageName(lang_code, inLanguage, include, core.Page().Url_bry_safe());
 		return rslt.Init_obj(rv);
 		/*
 		byte[] lang_code = args.Pull_bry(0);
@@ -148,7 +148,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	public boolean FetchLanguageNames(Scrib_proc_args args, Scrib_proc_rslt rslt) {	
 		String lang_code = args.Cast_str_or_null(0);
 		String include = args.Cast_str_or(1, "mw");
-		Ordered_hash hash = core.App().Lang_mgr().Name_mgr().fetchLanguageNames(lang_code, include);
+		Ordered_hash hash = core.App().Lang_mgr().Name_mgr().fetchLanguageNames(lang_code, include, core.Page().Url_bry_safe());
 		return rslt.Init_obj((Keyval[])hash.To_ary(Keyval.class));
 	}
 	public boolean GetFallbacksFor(Scrib_proc_args args, Scrib_proc_rslt rslt) {	

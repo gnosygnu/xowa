@@ -36,10 +36,10 @@ public class Xol_name_mgr {
 	* @return String Language name or empty
 	* @since 1.20
 	*/
-	public String fetchLanguageName(String code, String inLanguage, String include) {
+	public String fetchLanguageName(String code, String inLanguage, String include, byte[] page_url) {
 		code = String_.Lower(code);
 		if (include == null) include = "all";
-		Ordered_hash array = fetchLanguageNames(inLanguage, include);
+		Ordered_hash array = fetchLanguageNames(inLanguage, include, page_url);
 		Keyval rv = (Keyval)array.Get_by(code);
 		return rv == null ? "" : rv.Val_to_str_or_null();
 	}
@@ -59,7 +59,7 @@ public class Xol_name_mgr {
 	private Ordered_hash lang_names_cached;
 	private Ordered_hash lang_files_cached;
 
-	public Ordered_hash fetchLanguageNames(String inLanguage, String include_str) {
+	public Ordered_hash fetchLanguageNames(String inLanguage, String include_str, byte[] page_url) {
 		if (inLanguage == null) inLanguage = "null";
 		String cacheKey = inLanguage + ":" + include_str;
 		if (languageNameCache == null)
@@ -70,6 +70,9 @@ public class Xol_name_mgr {
 			byte include = include_byte == null ? fetchLanguageNamesUncached__all : include_byte.Val();
 
 			Cldr_name_file cldr_file = cldr_loader.Load_or_empty(inLanguage);
+			if (cldr_file == Cldr_name_file.Empty) {
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "lang does not have a cldrName file; lang=~{0} page=~{1}", inLanguage, page_url);
+			}
 
 			if (lang_names_cached == null)
 				lang_names_cached = name_loader.Load_as_hash();

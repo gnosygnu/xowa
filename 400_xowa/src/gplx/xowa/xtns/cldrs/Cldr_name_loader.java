@@ -109,6 +109,7 @@ public class Cldr_name_loader {
 				continue;
 			}
 			name = String_.Lower(name);
+			name = String_.Replace(name, "_", "-"); // CldrNamesEn_gb.json should have a key of "en-gb", not en_gb; ISSUE#:349; DATE:2019-02-01
 			rv.Add_if_dupe_use_1st(name, url);
 		}
 		return rv;
