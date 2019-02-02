@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*;
-import org.junit.*; import gplx.core.primitives.*;
+import org.junit.*; import gplx.core.tests.*; import gplx.core.primitives.*;
 import gplx.xowa.apps.apis.xowa.html.modules.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.guis.views.*;
@@ -453,6 +453,10 @@ public class Xow_popup_parser_tst {
 		));
 		fxt.Expd_tmpl_loop_count(2);
 	}
+	@Test   public void Scrib_core_ttl() {
+		fxt.Test_parse("abc", "Page1", "PopupPage1", "<p>abc\n</p>");
+		fxt.Test_scrib_core_ttl("PopupPage1");
+	}
 }
 class Xop_popup_parser_fxt {
 	private Xow_popup_parser parser; private Xowe_wiki wiki;
@@ -475,6 +479,7 @@ class Xop_popup_parser_fxt {
 		parser.Html_mkr().Output_tidy_(false);
 		parser.Html_mkr().Fmtr_next_sect().Fmt_(" (~{next_sect_val})");
 		parser.Wrdx_mkr().Xnde_ignore_ids_(Bry_.new_a7("coordinates"));
+		wiki.Parser_mgr().Scrib().Core_init(parser.Wtxt_ctx());
 		word_min = 2;
 	}
 	public Xop_popup_parser_fxt Init_notoc_(String v) {parser.Cfg().Notoc_(Bry_.new_u8(v)); return this;}
@@ -495,6 +500,9 @@ class Xop_popup_parser_fxt {
 		Tfds.Eq_ary(expd, To_int_ary(ids));
 		return this;
 	}
+	public void Test_scrib_core_ttl(String expd) {
+		Gftest.Eq__str(expd, String_.new_u8(wiki.Parser_mgr().Scrib().Core().Page().Ttl().Full_db()));
+	}
 	private static int[] To_int_ary(Int_obj_ref[] ary) {
 		int len = ary.length;
 		int[] rv = new int[len];
@@ -503,11 +511,12 @@ class Xop_popup_parser_fxt {
 		return rv;
 	}
 	public void Test_parse(String raw, String expd)				{Test_parse(raw, "Test_1", expd);}
-	public void Test_parse(String raw, String ttl, String expd)	{
+	public void Test_parse(String raw, String ttl, String expd)	{Test_parse(raw, ttl, ttl, expd);}
+	public void Test_parse(String raw, String ttl, String popup_ttl, String expd)	{
 		Xoae_page page = Xoae_page.New_edit(wiki, Xoa_ttl.Parse(wiki, Bry_.new_a7(ttl)));
 		page.Db().Text().Text_bry_(Bry_.new_u8(raw));
 		Xow_popup_itm itm = new Xow_popup_itm("popup_1", Bry_.new_u8(raw), Bry_.Empty, word_min);
-		itm.Init(wiki.Domain_bry(), page.Ttl());
+		itm.Init(wiki.Domain_bry(), wiki.Ttl_parse(Bry_.new_u8(popup_ttl)));
 		byte[] actl = parser.Parse(wiki, page, null, itm);
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}

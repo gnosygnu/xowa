@@ -80,6 +80,9 @@ public class Xow_popup_parser {
 			wrdx_mkr.Init();
 			data.Init(cfg, popup_itm, tmpl_len);
 			Init_ctxs(tmpl_src, page.Ttl());
+			// update Scrib_core with popup_title; EX:en.d:dada and hover over Category:Mauritian_Creole_nouns; ISSUE#:338; DATE:2019-02-01
+			// NOTE: must occur after Init_ctxs, b/c ctx.Clear() will eventually call Scrib_lib_title.When_page_changed()
+			wiki.Parser_mgr().Scrib().When_page_changed(Xoae_page.New(wiki, popup_itm.Page_ttl()));
 			while (data.Words_needed_chk()) {
 				if (Canceled(popup_itm, cur_tab)) return null;
 				tmpl_root.Clear();
@@ -207,7 +210,7 @@ public class Xow_popup_parser {
 		}
 	}
 	private void Wtxt_ctx_init(boolean incremental, byte[] bry) {
-		wtxt_ctx.Clear_all();
+		wtxt_ctx.Clear(incremental); // NOTE: clear_scrib if full; do not clear if incremental, else When_page_changed event fires; DATE:2019-02-01
 		wtxt_ctx.Page().Html_data().Html_restricted_(data.Html_restricted());
 		wtxt_ctx.Para().Enabled_(!incremental);		// NOTE: if incremental, disable para; easier to work with \n rather than <p>; also, must be enabled before Page_bgn; DATE:2014-06-18DATE:2014-06-18
 		wtxt_ctx.Lnke().Dangling_goes_on_stack_(incremental);
