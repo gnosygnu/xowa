@@ -35,8 +35,8 @@ class Xoh_file_wtr__hdump__fxt {
 	public Xoh_file_wtr__hdump__fxt() {
 		fxt.Reset();
 
-		// default to hzip
-		fxt.Hctx_(Xoh_wtr_ctx.Hdump_by_hzip_tid(Xoh_hzip_dict_.Hzip__v1));
+		// default to none
+		fxt.Hctx_(Xoh_wtr_ctx.Hdump_by_hzip_tid(Xoh_hzip_dict_.Hzip__none));
 
 		// create file_fx
 		this.file_fxt = Xof_file_fxt.new_all(fxt.Wiki());

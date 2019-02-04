@@ -124,14 +124,7 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 				href_bry = tmp_bfr.To_bry_and_clear();
 
 				// generate stub for redlink
-				if (	!hctx.Mode_is_diff()) {	// PERF: don't do redlinks during hzip_diff
-					try {
-						Xoa_ttl ttl = hpg.Wiki().Ttl_parse(Gfo_url_encoder_.Href.Decode(href_bry));
-						Xopg_lnki_itm__hdump lnki_itm = new Xopg_lnki_itm__hdump(ttl);
-						hpg.Html_data().Redlink_list().Add(lnki_itm);
-						html_uid = lnki_itm.Html_uid();
-					}	catch (Exception e) {Gfo_log_.Instance.Warn("failed to add lnki to redlinks", "page", hpg.Url_bry_safe(), "href_bry", href_bry, "e", Err_.Message_gplx_log(e));}
-				}
+				html_uid = Xoh_hdoc_wkr__make.Lnki_redlink_reg(hpg, hctx, href_bry, html_uid);
 				break;
 		}
 		byte[] capt_bry = Xoh_lnki_hzip_.Bld_capt(tmp_bfr, href_type, text_type, capt_has_ns, capt_cs0_tid, ns_bry, src, text_0_bgn, text_0_end, src, text_1_bgn, text_1_end);

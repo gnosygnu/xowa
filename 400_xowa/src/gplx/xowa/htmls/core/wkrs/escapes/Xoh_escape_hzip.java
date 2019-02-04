@@ -22,6 +22,7 @@ public class Xoh_escape_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public byte[] Hook() {return hook;} private byte[] hook;
 	public String Key() {return Xoh_hzip_dict_.Key__escape;}
 	public Gfo_poolable_itm Encode1(Xoh_hzip_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, byte[] src, Object data_obj) {
+		// escapes an escape byte; should not happen, since (byte)27 doesn't exist in an html document, but just to be sure
 		Xoh_escape_data data = (Xoh_escape_data)data_obj;
 		bfr.Add(hook);			// EX: 1,0
 		bfr.Add(data.Hook());	// EX: 2
