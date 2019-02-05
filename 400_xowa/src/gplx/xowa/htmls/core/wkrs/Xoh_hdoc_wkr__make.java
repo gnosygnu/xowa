@@ -62,24 +62,41 @@ public class Xoh_hdoc_wkr__make implements Xoh_hdoc_wkr {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "anchor hook should start with <a; url=~{0}", hpg.Url_bry_safe());
 		}
 	}
-	public void On_thm		(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_data data) {
+	public void On_thm(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_data data) {
 		Xoh_img_data img_data = (gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_data)data.Img_data();
-		bfr.Add_mid(src, data.Src_bgn(), img_data.Src_bgn());		
+		// add thm html before img
+		bfr.Add_mid(src, data.Src_bgn(), img_data.Src_bgn());
+		// add img
 		wkr__img.Init_by_parse(bfr, hpg, hctx, src, img_data);
+		// add thm html after img
 		bfr.Add_mid(src, img_data.Src_end(), data.Src_end());
 	}
 	public void On_gly		(gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_grp_data data) {
+		// <gallery> section; add entire src, and enable gallery flage
 		bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
 		hpg.Xtn__gallery_exists_y_();
 	}
 	public boolean Process_parse(Xoh_data_itm data) {
 		switch (data.Tid()) {
-			case Xoh_hzip_dict_.Tid__img:	return wkr__img.Init_by_parse(bfr, hpg, hctx, src, (gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_data)data);
-			case Xoh_hzip_dict_.Tid__hdr:	return wkr__hdr.Init_by_parse(bfr, hpg, hctx, src, (gplx.xowa.htmls.core.wkrs.hdrs.Xoh_hdr_data)data);
+			case Xoh_hzip_dict_.Tid__hdr:
+				return wkr__hdr.Init_by_parse(bfr, hpg, hctx, src, (Xoh_hdr_data)data);
+			case Xoh_hzip_dict_.Tid__img:
+				return wkr__img.Init_by_parse(bfr, hpg, hctx, src, (Xoh_img_data)data);
+			// TODO: see toc_mode; change make_mgr to stitch together html before and after toc for pgbnr; see Xoh_page_bfr
+			case Xoh_hzip_dict_.Tid__toc:
+				bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
+				// this.toc_mode = toc_lhs.Atrs__has(Xoh_toc_wtr.Atr__data__toc__mode) ? Toc_mode__pgbnr : Toc_mode__basic;
+				break;
+			// hzip_lnke just reconstructs html
 			case Xoh_hzip_dict_.Tid__lnke:
+			// hzip_img_bare just reconstructs html; note that img_bare is for icons (expand image)
+			case Xoh_hzip_dict_.Tid__img_bare:
 			default:
 				bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
 				break;
+			case Xoh_hzip_dict_.Tid__media:	
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "htxt_wkr does not support media; url=~{0}", hpg.Url_bry_safe());
+				return false;
 		}
 		return true;
 	}
