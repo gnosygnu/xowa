@@ -45,9 +45,19 @@ public class Scrib_fsys_mgr {
 			Io_url fil = fils[i];
 			if (!String_.Eq(fil.Ext(), ".lua")) continue;	// ignore readme.txt, readme
 			gplx.core.ios.Io_fil fil_itm = new gplx.core.ios.Io_fil(fil, null);
-			rv.Add_if_dupe_use_1st(fil.NameOnly(), fil_itm);
-			rv.Add_if_dupe_use_1st(String_.Replace(String_.DelEndIf(fil.GenRelUrl_orEmpty(script_dir), ".lua"), "\\", "/"), fil_itm);
+			// Scribunto allows multiple ways of lookup; for example, "a/b/c.lua"
+			// * "c"
+			// * "a/b/c" 
+			// * "a.b.c"
+			String rel_path = fil.GenRelUrl_orEmpty(script_dir); // get rel path; EX: "C:\xowa\a\b.lua" -> "a\b.lua"
+			if (gplx.core.envs.Op_sys.Cur().Tid_is_wnt()) // if windows, replace "\"
+				rel_path = String_.Replace(rel_path, fil.Info().DirSpr(), "/");
+			rel_path = String_.DelEndIf(rel_path, ".lua"); // remove ".lua"	
+			rv.Add_if_dupe_use_1st(fil.NameOnly(), fil_itm); // add filename only (no extension); EX: "c"
+			rv.Add_if_dupe_use_1st(rel_path, fil_itm); // add relpath; EX: "a/b/c"
+			rv.Add_if_dupe_use_1st(String_.Replace(rel_path, "/", "."), fil_itm); // add relpath in dotted form; EX: "a.b.c"
 		}
+		
 		return rv;
 	}
 	public void Shrink() {

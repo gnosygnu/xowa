@@ -25,7 +25,9 @@ public class Scrib_fsys_mgr_tst {
 		, "ustring/normalization-data.lua"
 		, "ustring/README"
 		);
-		fxt.Test_exists_y("mw", "mw.ustring", "ustring", "ustring/normalization-data");
+		fxt.Test_exists_y("mw", "mw.ustring", "ustring", "normalization-data");
+		fxt.Test_exists_y("ustring/ustring", "ustring/normalization-data");
+		fxt.Test_exists_y("ustring.ustring", "ustring.normalization-data");
 		fxt.Test_exists_n("README");
 	}
 }
