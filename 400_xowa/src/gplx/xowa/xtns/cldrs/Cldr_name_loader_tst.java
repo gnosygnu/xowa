@@ -17,6 +17,7 @@ package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*; import gplx.core.tests.*;
 public class Cldr_name_loader_tst {
 	private final    Cldr_name_loader_fxt fxt = new Cldr_name_loader_fxt();
+	@Before public void init() {fxt.Clear();}
 	@Test   public void Load_file_is_null() {
 		fxt.Init__file("CldrNamesEn.json", "{}");
 		fxt.Test__load_file_is_empty(Bool_.N, "En");
@@ -32,6 +33,7 @@ class Cldr_name_loader_fxt {
 	private static final    String Dir_name = "mem/CldrNames/";
 	private final    Cldr_name_loader name_loader = new Cldr_name_loader(Io_url_.mem_dir_(Dir_name));
 
+	public void Clear() {name_loader.Clear();}
 	public void Init__file(String fil_name, String txt) {
 		Io_mgr.Instance.SaveFilStr(Io_url_.new_fil_(Dir_name + fil_name), txt);
 	}

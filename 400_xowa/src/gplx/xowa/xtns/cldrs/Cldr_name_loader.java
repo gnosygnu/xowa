@@ -25,7 +25,10 @@ public class Cldr_name_loader {
 	public Cldr_name_loader(Io_url cldr_dir) {
 		this.cldr_dir = cldr_dir;
 	}
-
+	public void Clear() {
+		files_hash.Clear();
+		urls_hash = null;
+	}
 	public Cldr_name_file Load_or_empty(String lang_key) {
 		// normalize to lc; scrib will pass lower_case, but underlying files are Title_case
 		lang_key = String_.Lower(lang_key);
@@ -41,7 +44,6 @@ public class Cldr_name_loader {
 		// get file
 		Io_url url = (Io_url)urls_hash.Get_by(lang_key);
 		if (url == null) {
-			urls_hash.Add(lang_key, Cldr_name_file.Empty);
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "no cldrName file exists for lang; lang=~{0}", lang_key);
 			return Cldr_name_file.Empty;
 		}
