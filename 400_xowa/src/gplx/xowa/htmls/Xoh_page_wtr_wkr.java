@@ -48,6 +48,7 @@ public class Xoh_page_wtr_wkr {
 						break;
 				}
 				Bry_bfr page_bfr = wiki.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page rv to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
+				try {
 				Xoh_wtr_ctx hctx = null;
 				if (page_mode == Xopg_page_.Tid_html 
 					&& wiki.Html__hdump_mgr().Load_mgr().Html_mode().Tid() == Xow_hdump_mode.Hdump_save.Tid()) {
@@ -65,6 +66,7 @@ public class Xoh_page_wtr_wkr {
 						Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(rv.To_bry_and_clear()));
 					wdata_lang_wtr.Page_(null);
 				}
+				} finally {page_bfr.Mkr_rls();}
 			}
 			else
 				Write_body(rv, ctx, Xoh_wtr_ctx.Basic, page);
@@ -183,6 +185,7 @@ public class Xoh_page_wtr_wkr {
 		// get separate bfr; note that bfr already has <html> and <head> written to it, so this can't be passed to tidy; DATE:2014-06-11
 		Bry_bfr tidy_bfr = wiki.Utl__bfr_mkr().Get_m001();
 
+		try {
 		// write wikitext
 		if (page.Html_data().Skip_parse()) {
 			tidy_bfr.Add(page.Html_data().Custom_body());
@@ -206,7 +209,9 @@ public class Xoh_page_wtr_wkr {
 		
 		// add back to main bfr
 		bfr.Add_bfr_and_clear(tidy_bfr);
-		tidy_bfr.Mkr_rls();
+		} finally {
+			tidy_bfr.Mkr_rls();
+		}
 
 		// handle Categories at bottom of page; note that html is XOWA-generated so does not need to be tidied
 		int ctgs_len = page.Wtxt().Ctgs__len();

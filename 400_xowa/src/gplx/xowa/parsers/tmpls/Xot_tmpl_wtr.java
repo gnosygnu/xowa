@@ -19,9 +19,11 @@ import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.miscs.*;
 public class Xot_tmpl_wtr {
 	public static byte[] Write_all(Xop_ctx ctx, Xot_invk frame, Xop_root_tkn root, byte[] src) {
 		Bry_bfr bfr = ctx.Wiki().Utl__bfr_mkr().Get_m001().Reset_if_gt(Io_mgr.Len_mb);
-		Write_tkn(bfr, ctx, frame, src, src.length, root);
-		byte[] rv = bfr.To_bry_and_rls();
-		return ctx.Wiki().Parser_mgr().Uniq_mgr().Parse(rv); // NOTE: noops if no UNIQs; // UNIQ; DATE:2017-03-31
+		try {
+			Write_tkn(bfr, ctx, frame, src, src.length, root);
+			byte[] rv = bfr.To_bry_and_clear();
+			return ctx.Wiki().Parser_mgr().Uniq_mgr().Parse(rv); // NOTE: noops if no UNIQs; // UNIQ; DATE:2017-03-31
+		} finally {bfr.Mkr_rls();}
 	}
 	private static void Write_tkn(Bry_bfr rslt_bfr, Xop_ctx ctx, Xot_invk frame, byte[] src, int src_len, Xop_tkn_itm tkn) {
 		switch (tkn.Tkn_tid()) {

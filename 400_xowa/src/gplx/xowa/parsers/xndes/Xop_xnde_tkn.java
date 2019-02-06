@@ -112,6 +112,7 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 						cur_bfr = ctx.Wiki().Utl__bfr_mkr().Get_m001().Reset_if_gt(Io_mgr.Len_mb);
 					}
 
+					try {
 					// write tag_bgn; EX: <poem>
 					cur_bfr.Add_mid(src, tag_open_bgn, tag_open_end);
 
@@ -134,6 +135,11 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 						byte[] val = cur_bfr.To_bry_and_clear();
 						byte[] key = ctx.Wiki().Parser_mgr().Uniq_mgr().Add(Bool_.Y, tag.Name_bry(), val);
 						bfr.Add(key);
+					}
+					} finally {
+						if (is_tmpl_mode) {
+							cur_bfr.Mkr_rls();
+						}
 					}
 				}
 				break;

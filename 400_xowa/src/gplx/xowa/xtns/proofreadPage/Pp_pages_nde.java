@@ -324,6 +324,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		Xoa_ttl end_page_ttl = end_page_bry == null ? null : ary[ary_len - 1];
 		
 		Bry_bfr page_bfr = wiki.Utl__bfr_mkr().Get_m001();
+		try {
 		for (int i = 0; i < ary_len; i++) {
 			Xoa_ttl ttl = ary[i];
 			byte[] ttl_page_db = ttl.Page_db();
@@ -351,7 +352,10 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			full_bfr.Add_bfr_and_clear(page_bfr);
 			full_bfr.Add(gplx.langs.htmls.entitys.Gfh_entity_.Space_bry);	// $out.= "&#32;"; REF.MW:ProofreadPageRenderer.pn
 		}			
-		page_bfr.Mkr_rls();
+		}
+		finally {
+			page_bfr.Mkr_rls();
+		}
 		return full_bfr.To_bry_and_clear();
 	}
 	private Xop_root_tkn Bld_root_nde(Bry_bfr page_bfr, Hash_adp_bry lst_page_regy, byte[] wikitext) {

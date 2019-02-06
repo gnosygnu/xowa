@@ -44,8 +44,12 @@ public class Lst_pfunc_itm {
 
 			// eval tmpl
 			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
-			tmpl.Tmpl_evaluate(sub_ctx, Xot_invk_temp.Page_is_caller, tmp_bfr);
-			sub_src = tmp_bfr.To_bry_and_rls();
+			try {
+				tmpl.Tmpl_evaluate(sub_ctx, Xot_invk_temp.Page_is_caller, tmp_bfr);
+				sub_src = tmp_bfr.To_bry_and_clear();
+			} finally {
+				tmp_bfr.Mkr_rls();
+			}
 
 			// parse again
 			if (!wiki.Parser_mgr().Tmpl_stack_add(ttl.Full_db())) return null;	// put template back on stack; 

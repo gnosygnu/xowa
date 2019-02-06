@@ -131,8 +131,11 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
 		}	
 		else {
 			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
-			ly_text = code_is_raw ? code : score_xtn.Lilypond_fmtr().Bld_bry_many(tmp_bfr, Score_xtn_mgr.Lilypond_version, code);
-			tmp_bfr.Mkr_rls();
+			try {
+				ly_text = code_is_raw ? code : score_xtn.Lilypond_fmtr().Bld_bry_many(tmp_bfr, Score_xtn_mgr.Lilypond_version, code);
+			} finally {
+				tmp_bfr.Mkr_rls();
+			}
 			Io_mgr.Instance.SaveFilBry(ly_file, ly_text);
 		}
 		ly_process.Working_dir_(ly_file.OwnerDir());	// NOTE: must change working_dir, else file will be dumped into same dir as lilypond.exe
