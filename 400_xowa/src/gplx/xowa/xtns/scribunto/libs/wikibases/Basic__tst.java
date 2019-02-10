@@ -182,7 +182,7 @@ class Wbase_snak_utl_ {
 		return Keyval_.Ary(Keyval_.int_(1, snak_props));
 	}
 	private static Keyval[] Get_snaks(Wdata_wiki_mgr_fxt wdata_fxt, Wdata_doc wdoc) {
-		Keyval[] wdoc_root = Scrib_lib_wikibase_srl.Srl(wdata_fxt.Wdata_mgr().Prop_mgr(), wdoc, false, false);
+		Keyval[] wdoc_root = Scrib_lib_wikibase_srl.Srl(wdata_fxt.Wdata_mgr().Prop_mgr(), wdoc, false, false, Bry_.new_u8("Test_page"));
 		Keyval[] snaks = Get_subs_by_path(wdoc_root, 0, 0);
 		int snaks_len = snaks.length;
 		Keyval[] rv = new Keyval[snaks_len];

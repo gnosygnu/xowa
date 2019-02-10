@@ -174,7 +174,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		}
 
 		Wbase_prop_mgr prop_mgr = core.Wiki().Appe().Wiki_mgr().Wdata_mgr().Prop_mgr();
-		return rslt.Init_obj(Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc, true, false));	// "false": wbase now always uses v2; PAGE:ja.w:東京競馬場; DATE:2015-07-28
+		return rslt.Init_obj(Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc, true, false, core.Page().Url_bry_safe()));	// "false": wbase now always uses v2; PAGE:ja.w:東京競馬場; DATE:2015-07-28
 	}
 	public boolean GetEntityUrl(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] entityId = args.Pull_bry(0);
@@ -191,7 +191,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		if (statements == null) return rslt.Init_null();
 
 		String propertyIdAsString = String_.new_u8(propertyId);
-		return rslt.Init_obj(Keyval_.new_(propertyIdAsString, Scrib_lib_wikibase_srl.Srl_claims_prop_ary(prop_mgr, propertyIdAsString, statements, 1)));
+		return rslt.Init_obj(Keyval_.new_(propertyIdAsString, Scrib_lib_wikibase_srl.Srl_claims_prop_ary(prop_mgr, propertyIdAsString, statements, 1, core.Page().Url_bry_safe())));
 	}
 	public boolean RenderSnak(Scrib_proc_args args, Scrib_proc_rslt rslt)	{
 		Xowe_wiki wiki = core.Wiki();

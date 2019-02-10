@@ -26,13 +26,13 @@ public class Wbase_prop_mgr {	// lang-agnostic registry of props; EX: "p15" -> c
 		loader = v;
 		init_needed = true;
 	}
-	public String Get_or_null(String pid) {
+	public String Get_or_null(String pid, byte[] page_url) {
 		if (init_needed) Init();
 		if (cache == null) return null;
 		pid = Wbase_pid.Ucase_pid_as_str(pid);
 		String rv = (String)cache.Get_by(pid);
 		if (rv == null) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "wbase:could not find datatype for pid; pid=~{0}", pid);
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "wbase:could not find datatype for pid; pid=~{0} url=~{1}", pid, page_url);
 		}
 		return rv;
 	}

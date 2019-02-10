@@ -47,13 +47,13 @@ public class Srl__fxt {
 	public Srl__fxt Init_prop(Wbase_claim_base prop) {wdoc_bldr.Add_claims(prop); return this;}
 	public Srl__fxt Test(String... expd) {return Test(false, expd);}
 	public Srl__fxt Test(boolean base0, String... expd) {
-		Keyval[] actl = Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc_bldr.Xto_wdoc(), header_enabled, base0);
+		Keyval[] actl = Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc_bldr.Xto_wdoc(), header_enabled, base0, Bry_.new_u8("Test_page"));
 		Tfds.Eq_ary_str(expd, String_.SplitLines_nl(Xto_str(actl)));
 		return this;
 	}
 	public Srl__fxt Test(Wdata_doc wdoc, String... expd) {return Test(false, wdoc, expd);}
 	public Srl__fxt Test(boolean base0, Wdata_doc wdoc, String... expd) {
-		Keyval[] actl = Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc, header_enabled, base0);
+		Keyval[] actl = Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc, header_enabled, base0, Bry_.new_u8("Test_page"));
 		Tfds.Eq_ary_str(expd, String_.SplitLines_nl(Xto_str(actl)));
 		return this;
 	}
